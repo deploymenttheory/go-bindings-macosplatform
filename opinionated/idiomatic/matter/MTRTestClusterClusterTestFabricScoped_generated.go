@@ -25,3 +25,10 @@ func NewMTRTestClusterClusterTestFabricScoped() *MTRTestClusterClusterTestFabric
 
 func (x *MTRTestClusterClusterTestFabricScoped) asMTRUnitTestingClusterTestFabricScoped() *raw.MTRUnitTestingClusterTestFabricScoped { return &x.inner.MTRUnitTestingClusterTestFabricScoped }
 
+// MTRTestClusterClusterTestFabricScopedable is the interface implemented by [MTRTestClusterClusterTestFabricScoped], for mocking and DI.
+type MTRTestClusterClusterTestFabricScopedable interface {
+	Unwrap() *raw.MTRTestClusterClusterTestFabricScoped
+}
+
+var _ MTRTestClusterClusterTestFabricScopedable = (*MTRTestClusterClusterTestFabricScoped)(nil)
+

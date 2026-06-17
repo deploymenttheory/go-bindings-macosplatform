@@ -36,3 +36,36 @@ func (x *MTRThermostatClusterClearWeeklyScheduleParams) WithServerSideProcessing
 	return x
 }
 
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRThermostatClusterClearWeeklyScheduleParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRThermostatClusterClearWeeklyScheduleParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRThermostatClusterClearWeeklyScheduleParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRThermostatClusterClearWeeklyScheduleParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRThermostatClusterClearWeeklyScheduleParamsable is the interface implemented by [MTRThermostatClusterClearWeeklyScheduleParams], for mocking and DI.
+type MTRThermostatClusterClearWeeklyScheduleParamsable interface {
+	Unwrap() *raw.MTRThermostatClusterClearWeeklyScheduleParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRThermostatClusterClearWeeklyScheduleParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRThermostatClusterClearWeeklyScheduleParams
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRThermostatClusterClearWeeklyScheduleParamsable = (*MTRThermostatClusterClearWeeklyScheduleParams)(nil)
+

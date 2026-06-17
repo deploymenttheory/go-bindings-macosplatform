@@ -6,6 +6,8 @@ package corebluetooth
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corebluetooth"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,20 +25,60 @@ func NewCharacteristic() *Characteristic {
 	return &Characteristic{inner: raw.CBCharacteristicFromID(_id)}
 }
 
+// Service calls the underlying Service.
+func (x *Characteristic) Service() *Service {
+	_r := x.inner.Service()
+	if _r == nil {
+		return nil
+	}
+	return &Service{inner: _r}
+}
+
+// Properties calls the underlying Properties.
+func (x *Characteristic) Properties() raw.CBCharacteristicProperties {
+	return x.inner.Properties()
+}
+
+// Value calls the underlying Value.
+func (x *Characteristic) Value() *foundation.NSData {
+	return x.inner.Value()
+}
+
 // Descriptors returns the collection as a Go slice.
 func (x *Characteristic) Descriptors() []*raw.CBDescriptor {
 	arr := x.inner.Descriptors()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.CBDescriptor, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CBDescriptor {
+		return raw.CBDescriptorFromID(purego.Retain(_id))
+	})
+}
+
+// IsBroadcasted calls the underlying IsBroadcasted.
+func (x *Characteristic) IsBroadcasted() bool {
+	return x.inner.IsBroadcasted()
+}
+
+// IsNotifying calls the underlying IsNotifying.
+func (x *Characteristic) IsNotifying() bool {
+	return x.inner.IsNotifying()
 }
 
 func (x *Characteristic) asCharacteristic() *raw.CBCharacteristic { return x.inner }
 
 func (x *Characteristic) asAttribute() *raw.CBAttribute { return &x.inner.CBAttribute }
+
+// Characteristicable is the interface implemented by [Characteristic], for mocking and DI.
+type Characteristicable interface {
+	Unwrap() *raw.CBCharacteristic
+	Service() *Service
+	Properties() raw.CBCharacteristicProperties
+	Value() *foundation.NSData
+	Descriptors() []*raw.CBDescriptor
+	IsBroadcasted() bool
+	IsNotifying() bool
+}
+
+var _ Characteristicable = (*Characteristic)(nil)
 

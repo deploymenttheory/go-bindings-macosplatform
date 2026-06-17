@@ -49,3 +49,53 @@ func (x *MTRMediaPlaybackClusterPlaybackResponseParams) WithTimedInvokeTimeoutMs
 	return x
 }
 
+// Status calls the underlying Status.
+func (x *MTRMediaPlaybackClusterPlaybackResponseParams) Status() *foundation.NSNumber {
+	return x.inner.Status()
+}
+
+// SetStatus calls the underlying SetStatus.
+func (x *MTRMediaPlaybackClusterPlaybackResponseParams) SetStatus(status *foundation.NSNumber) {
+	x.inner.SetStatus(status)
+}
+
+// Data calls the underlying Data.
+func (x *MTRMediaPlaybackClusterPlaybackResponseParams) Data() string {
+	_r := x.inner.Data()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetData calls the underlying SetData.
+func (x *MTRMediaPlaybackClusterPlaybackResponseParams) SetData(data string) {
+	x.inner.SetData(foundation.NSStringStringWithUTF8String(data))
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRMediaPlaybackClusterPlaybackResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRMediaPlaybackClusterPlaybackResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// MTRMediaPlaybackClusterPlaybackResponseParamsable is the interface implemented by [MTRMediaPlaybackClusterPlaybackResponseParams], for mocking and DI.
+type MTRMediaPlaybackClusterPlaybackResponseParamsable interface {
+	Unwrap() *raw.MTRMediaPlaybackClusterPlaybackResponseParams
+	WithStatus(status *foundation.NSNumber) *MTRMediaPlaybackClusterPlaybackResponseParams
+	WithData(data string) *MTRMediaPlaybackClusterPlaybackResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRMediaPlaybackClusterPlaybackResponseParams
+	Status() *foundation.NSNumber
+	SetStatus(status *foundation.NSNumber)
+	Data() string
+	SetData(data string)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+}
+
+var _ MTRMediaPlaybackClusterPlaybackResponseParamsable = (*MTRMediaPlaybackClusterPlaybackResponseParams)(nil)
+

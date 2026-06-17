@@ -25,3 +25,10 @@ func NewMTRContentLauncherClusterContentSearch() *MTRContentLauncherClusterConte
 
 func (x *MTRContentLauncherClusterContentSearch) asMTRContentLauncherClusterContentSearchStruct() *raw.MTRContentLauncherClusterContentSearchStruct { return &x.inner.MTRContentLauncherClusterContentSearchStruct }
 
+// MTRContentLauncherClusterContentSearchable is the interface implemented by [MTRContentLauncherClusterContentSearch], for mocking and DI.
+type MTRContentLauncherClusterContentSearchable interface {
+	Unwrap() *raw.MTRContentLauncherClusterContentSearch
+}
+
+var _ MTRContentLauncherClusterContentSearchable = (*MTRContentLauncherClusterContentSearch)(nil)
+

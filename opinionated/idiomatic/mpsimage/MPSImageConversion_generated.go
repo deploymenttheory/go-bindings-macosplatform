@@ -26,5 +26,24 @@ func NewImageConversionWithDeviceSrcAlphaDestAlphaBackgroundColorConversionInfo(
 	return &ImageConversion{inner: raw.MPSImageConversionFromID(_id)}
 }
 
+// SourceAlpha calls the underlying SourceAlpha.
+func (x *ImageConversion) SourceAlpha() raw.MPSAlphaType {
+	return x.inner.SourceAlpha()
+}
+
+// DestinationAlpha calls the underlying DestinationAlpha.
+func (x *ImageConversion) DestinationAlpha() raw.MPSAlphaType {
+	return x.inner.DestinationAlpha()
+}
+
 func (x *ImageConversion) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.inner.MPSUnaryImageKernel }
+
+// ImageConversionable is the interface implemented by [ImageConversion], for mocking and DI.
+type ImageConversionable interface {
+	Unwrap() *raw.MPSImageConversion
+	SourceAlpha() raw.MPSAlphaType
+	DestinationAlpha() raw.MPSAlphaType
+}
+
+var _ ImageConversionable = (*ImageConversion)(nil)
 

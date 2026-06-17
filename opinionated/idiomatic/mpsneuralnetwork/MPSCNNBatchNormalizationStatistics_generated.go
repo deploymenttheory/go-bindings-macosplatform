@@ -9,6 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // CNNBatchNormalizationStatistics wraps [raw.MPSCNNBatchNormalizationStatistics] with a fluent Go API.
@@ -33,5 +34,18 @@ func NewCNNBatchNormalizationStatisticsWithCoderDevice(aDecoder *foundation.NSCo
 	return &CNNBatchNormalizationStatistics{inner: raw.MPSCNNBatchNormalizationStatisticsFromID(_id)}
 }
 
+// EncodeBatchToCommandBufferSourceImagesBatchNormalizationState calls the underlying EncodeBatchToCommandBufferSourceImagesBatchNormalizationState.
+func (x *CNNBatchNormalizationStatistics) EncodeBatchToCommandBufferSourceImagesBatchNormalizationState(commandBuffer metal.MTLCommandBuffer, sourceImages unsafe.Pointer, batchNormalizationState *raw.MPSCNNBatchNormalizationState) {
+	x.inner.EncodeBatchToCommandBufferSourceImagesBatchNormalizationState(commandBuffer, sourceImages, batchNormalizationState)
+}
+
 func (x *CNNBatchNormalizationStatistics) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSCNNKernel }
+
+// CNNBatchNormalizationStatisticsable is the interface implemented by [CNNBatchNormalizationStatistics], for mocking and DI.
+type CNNBatchNormalizationStatisticsable interface {
+	Unwrap() *raw.MPSCNNBatchNormalizationStatistics
+	EncodeBatchToCommandBufferSourceImagesBatchNormalizationState(commandBuffer metal.MTLCommandBuffer, sourceImages unsafe.Pointer, batchNormalizationState *raw.MPSCNNBatchNormalizationState)
+}
+
+var _ CNNBatchNormalizationStatisticsable = (*CNNBatchNormalizationStatistics)(nil)
 

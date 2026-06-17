@@ -60,7 +60,96 @@ func (x *EffectNode) WithShader(shader *raw.SKShader) *EffectNode {
 	return x
 }
 
+// Filter calls the underlying Filter.
+func (x *EffectNode) Filter() *coreimage.CIFilter {
+	return x.inner.Filter()
+}
+
+// SetFilter calls the underlying SetFilter.
+func (x *EffectNode) SetFilter(filter *coreimage.CIFilter) {
+	x.inner.SetFilter(filter)
+}
+
+// ShouldCenterFilter calls the underlying ShouldCenterFilter.
+func (x *EffectNode) ShouldCenterFilter() bool {
+	return x.inner.ShouldCenterFilter()
+}
+
+// SetShouldCenterFilter calls the underlying SetShouldCenterFilter.
+func (x *EffectNode) SetShouldCenterFilter(shouldCenterFilter bool) {
+	x.inner.SetShouldCenterFilter(shouldCenterFilter)
+}
+
+// ShouldEnableEffects calls the underlying ShouldEnableEffects.
+func (x *EffectNode) ShouldEnableEffects() bool {
+	return x.inner.ShouldEnableEffects()
+}
+
+// SetShouldEnableEffects calls the underlying SetShouldEnableEffects.
+func (x *EffectNode) SetShouldEnableEffects(shouldEnableEffects bool) {
+	x.inner.SetShouldEnableEffects(shouldEnableEffects)
+}
+
+// ShouldRasterize calls the underlying ShouldRasterize.
+func (x *EffectNode) ShouldRasterize() bool {
+	return x.inner.ShouldRasterize()
+}
+
+// SetShouldRasterize calls the underlying SetShouldRasterize.
+func (x *EffectNode) SetShouldRasterize(shouldRasterize bool) {
+	x.inner.SetShouldRasterize(shouldRasterize)
+}
+
+// BlendMode calls the underlying BlendMode.
+func (x *EffectNode) BlendMode() raw.SKBlendMode {
+	return x.inner.BlendMode()
+}
+
+// SetBlendMode calls the underlying SetBlendMode.
+func (x *EffectNode) SetBlendMode(blendMode raw.SKBlendMode) {
+	x.inner.SetBlendMode(blendMode)
+}
+
+// Shader calls the underlying Shader.
+func (x *EffectNode) Shader() *Shader {
+	_r := x.inner.Shader()
+	if _r == nil {
+		return nil
+	}
+	return &Shader{inner: _r}
+}
+
+// SetShader calls the underlying SetShader.
+func (x *EffectNode) SetShader(shader *raw.SKShader) {
+	x.inner.SetShader(shader)
+}
+
 func (x *EffectNode) asEffectNode() *raw.SKEffectNode { return x.inner }
 
 func (x *EffectNode) asNode() *raw.SKNode { return &x.inner.SKNode }
+
+// EffectNodeable is the interface implemented by [EffectNode], for mocking and DI.
+type EffectNodeable interface {
+	Unwrap() *raw.SKEffectNode
+	WithFilter(filter *coreimage.CIFilter) *EffectNode
+	WithShouldCenterFilter(shouldCenterFilter bool) *EffectNode
+	WithShouldEnableEffects(shouldEnableEffects bool) *EffectNode
+	WithShouldRasterize(shouldRasterize bool) *EffectNode
+	WithBlendMode(blendMode raw.SKBlendMode) *EffectNode
+	WithShader(shader *raw.SKShader) *EffectNode
+	Filter() *coreimage.CIFilter
+	SetFilter(filter *coreimage.CIFilter)
+	ShouldCenterFilter() bool
+	SetShouldCenterFilter(shouldCenterFilter bool)
+	ShouldEnableEffects() bool
+	SetShouldEnableEffects(shouldEnableEffects bool)
+	ShouldRasterize() bool
+	SetShouldRasterize(shouldRasterize bool)
+	BlendMode() raw.SKBlendMode
+	SetBlendMode(blendMode raw.SKBlendMode)
+	Shader() *Shader
+	SetShader(shader *raw.SKShader)
+}
+
+var _ EffectNodeable = (*EffectNode)(nil)
 

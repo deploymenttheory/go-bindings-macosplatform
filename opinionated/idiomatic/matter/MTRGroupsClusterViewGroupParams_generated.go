@@ -48,3 +48,62 @@ func (x *MTRGroupsClusterViewGroupParams) WithGroupId(groupId *foundation.NSNumb
 	return x
 }
 
+// GroupID calls the underlying GroupID.
+func (x *MTRGroupsClusterViewGroupParams) GroupID() *foundation.NSNumber {
+	return x.inner.GroupID()
+}
+
+// SetGroupID calls the underlying SetGroupID.
+func (x *MTRGroupsClusterViewGroupParams) SetGroupID(groupID *foundation.NSNumber) {
+	x.inner.SetGroupID(groupID)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRGroupsClusterViewGroupParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRGroupsClusterViewGroupParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRGroupsClusterViewGroupParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRGroupsClusterViewGroupParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// GroupId calls the underlying GroupId.
+func (x *MTRGroupsClusterViewGroupParams) GroupId() *foundation.NSNumber {
+	return x.inner.GroupId()
+}
+
+// SetGroupId calls the underlying SetGroupId.
+func (x *MTRGroupsClusterViewGroupParams) SetGroupId(groupId *foundation.NSNumber) {
+	x.inner.SetGroupId(groupId)
+}
+
+// MTRGroupsClusterViewGroupParamsable is the interface implemented by [MTRGroupsClusterViewGroupParams], for mocking and DI.
+type MTRGroupsClusterViewGroupParamsable interface {
+	Unwrap() *raw.MTRGroupsClusterViewGroupParams
+	WithGroupID(groupID *foundation.NSNumber) *MTRGroupsClusterViewGroupParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRGroupsClusterViewGroupParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRGroupsClusterViewGroupParams
+	WithGroupId(groupId *foundation.NSNumber) *MTRGroupsClusterViewGroupParams
+	GroupID() *foundation.NSNumber
+	SetGroupID(groupID *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+	GroupId() *foundation.NSNumber
+	SetGroupId(groupId *foundation.NSNumber)
+}
+
+var _ MTRGroupsClusterViewGroupParamsable = (*MTRGroupsClusterViewGroupParams)(nil)
+

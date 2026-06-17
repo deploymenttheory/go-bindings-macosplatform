@@ -23,3 +23,34 @@ func NewAssetVariantAudioRenditionSpecificAttributes() *AssetVariantAudioRenditi
 	return &AssetVariantAudioRenditionSpecificAttributes{inner: raw.AVAssetVariantAudioRenditionSpecificAttributesFromID(_id)}
 }
 
+// ChannelCount calls the underlying ChannelCount.
+func (x *AssetVariantAudioRenditionSpecificAttributes) ChannelCount() int {
+	return x.inner.ChannelCount()
+}
+
+// IsBinaural calls the underlying IsBinaural.
+func (x *AssetVariantAudioRenditionSpecificAttributes) IsBinaural() bool {
+	return x.inner.IsBinaural()
+}
+
+// IsImmersive calls the underlying IsImmersive.
+func (x *AssetVariantAudioRenditionSpecificAttributes) IsImmersive() bool {
+	return x.inner.IsImmersive()
+}
+
+// IsDownmix calls the underlying IsDownmix.
+func (x *AssetVariantAudioRenditionSpecificAttributes) IsDownmix() bool {
+	return x.inner.IsDownmix()
+}
+
+// AssetVariantAudioRenditionSpecificAttributesable is the interface implemented by [AssetVariantAudioRenditionSpecificAttributes], for mocking and DI.
+type AssetVariantAudioRenditionSpecificAttributesable interface {
+	Unwrap() *raw.AVAssetVariantAudioRenditionSpecificAttributes
+	ChannelCount() int
+	IsBinaural() bool
+	IsImmersive() bool
+	IsDownmix() bool
+}
+
+var _ AssetVariantAudioRenditionSpecificAttributesable = (*AssetVariantAudioRenditionSpecificAttributes)(nil)
+

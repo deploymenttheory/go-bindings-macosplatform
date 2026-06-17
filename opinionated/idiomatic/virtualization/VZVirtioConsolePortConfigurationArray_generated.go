@@ -29,3 +29,39 @@ func (x *VirtioConsolePortConfigurationArray) WithMaximumPortCount(maximumPortCo
 	return x
 }
 
+// ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
+func (x *VirtioConsolePortConfigurationArray) ObjectAtIndexedSubscript(portIndex uint) *VirtioConsolePortConfiguration {
+	_r := x.inner.ObjectAtIndexedSubscript(portIndex)
+	if _r == nil {
+		return nil
+	}
+	return &VirtioConsolePortConfiguration{inner: _r}
+}
+
+// SetObjectAtIndexedSubscript calls the underlying SetObjectAtIndexedSubscript.
+func (x *VirtioConsolePortConfigurationArray) SetObjectAtIndexedSubscript(configuration *raw.VZVirtioConsolePortConfiguration, portIndex uint) {
+	x.inner.SetObjectAtIndexedSubscript(configuration, portIndex)
+}
+
+// MaximumPortCount calls the underlying MaximumPortCount.
+func (x *VirtioConsolePortConfigurationArray) MaximumPortCount() uint32 {
+	return x.inner.MaximumPortCount()
+}
+
+// SetMaximumPortCount calls the underlying SetMaximumPortCount.
+func (x *VirtioConsolePortConfigurationArray) SetMaximumPortCount(maximumPortCount uint32) {
+	x.inner.SetMaximumPortCount(maximumPortCount)
+}
+
+// VirtioConsolePortConfigurationArrayable is the interface implemented by [VirtioConsolePortConfigurationArray], for mocking and DI.
+type VirtioConsolePortConfigurationArrayable interface {
+	Unwrap() *raw.VZVirtioConsolePortConfigurationArray
+	WithMaximumPortCount(maximumPortCount uint32) *VirtioConsolePortConfigurationArray
+	ObjectAtIndexedSubscript(portIndex uint) *VirtioConsolePortConfiguration
+	SetObjectAtIndexedSubscript(configuration *raw.VZVirtioConsolePortConfiguration, portIndex uint)
+	MaximumPortCount() uint32
+	SetMaximumPortCount(maximumPortCount uint32)
+}
+
+var _ VirtioConsolePortConfigurationArrayable = (*VirtioConsolePortConfigurationArray)(nil)
+

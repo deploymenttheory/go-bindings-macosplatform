@@ -6,6 +6,7 @@ package virtualization
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -29,5 +30,39 @@ func (x *VirtioFileSystemDevice) WithShare(share DirectoryShareProvider) *Virtio
 	return x
 }
 
+// Tag calls the underlying Tag.
+func (x *VirtioFileSystemDevice) Tag() string {
+	_r := x.inner.Tag()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Share calls the underlying Share.
+func (x *VirtioFileSystemDevice) Share() *DirectoryShare {
+	_r := x.inner.Share()
+	if _r == nil {
+		return nil
+	}
+	return &DirectoryShare{inner: _r}
+}
+
+// SetShare calls the underlying SetShare.
+func (x *VirtioFileSystemDevice) SetShare(share *raw.VZDirectoryShare) {
+	x.inner.SetShare(share)
+}
+
 func (x *VirtioFileSystemDevice) asDirectorySharingDevice() *raw.VZDirectorySharingDevice { return &x.inner.VZDirectorySharingDevice }
+
+// VirtioFileSystemDeviceable is the interface implemented by [VirtioFileSystemDevice], for mocking and DI.
+type VirtioFileSystemDeviceable interface {
+	Unwrap() *raw.VZVirtioFileSystemDevice
+	WithShare(share DirectoryShareProvider) *VirtioFileSystemDevice
+	Tag() string
+	Share() *DirectoryShare
+	SetShare(share *raw.VZDirectoryShare)
+}
+
+var _ VirtioFileSystemDeviceable = (*VirtioFileSystemDevice)(nil)
 

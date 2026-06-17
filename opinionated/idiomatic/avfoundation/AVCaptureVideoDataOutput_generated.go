@@ -7,6 +7,7 @@ package avfoundation
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -42,17 +43,70 @@ func (x *CaptureVideoDataOutput) WithPreservesDynamicHDRMetadata(preservesDynami
 	return x
 }
 
+// SetSampleBufferDelegateQueue calls the underlying SetSampleBufferDelegateQueue.
+func (x *CaptureVideoDataOutput) SetSampleBufferDelegateQueue(sampleBufferDelegate raw.AVCaptureVideoDataOutputSampleBufferDelegate, sampleBufferCallbackQueue *foundation.NSObject) {
+	x.inner.SetSampleBufferDelegateQueue(sampleBufferDelegate, sampleBufferCallbackQueue)
+}
+
+// RecommendedVideoSettingsForAssetWriterWithOutputFileType calls the underlying RecommendedVideoSettingsForAssetWriterWithOutputFileType.
+func (x *CaptureVideoDataOutput) RecommendedVideoSettingsForAssetWriterWithOutputFileType(outputFileType *foundation.NSString) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.RecommendedVideoSettingsForAssetWriterWithOutputFileType(outputFileType)
+}
+
+// AvailableVideoCodecTypesForAssetWriterWithOutputFileType calls the underlying AvailableVideoCodecTypesForAssetWriterWithOutputFileType.
+func (x *CaptureVideoDataOutput) AvailableVideoCodecTypesForAssetWriterWithOutputFileType(outputFileType *foundation.NSString) *foundation.NSArray[*foundation.NSString] {
+	return x.inner.AvailableVideoCodecTypesForAssetWriterWithOutputFileType(outputFileType)
+}
+
+// RecommendedVideoSettingsForVideoCodecTypeAssetWriterOutputFileType calls the underlying RecommendedVideoSettingsForVideoCodecTypeAssetWriterOutputFileType.
+func (x *CaptureVideoDataOutput) RecommendedVideoSettingsForVideoCodecTypeAssetWriterOutputFileType(videoCodecType *foundation.NSString, outputFileType *foundation.NSString) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.RecommendedVideoSettingsForVideoCodecTypeAssetWriterOutputFileType(videoCodecType, outputFileType)
+}
+
+// RecommendedVideoSettingsForVideoCodecTypeAssetWriterOutputFileTypeOutputFileURL calls the underlying RecommendedVideoSettingsForVideoCodecTypeAssetWriterOutputFileTypeOutputFileURL.
+func (x *CaptureVideoDataOutput) RecommendedVideoSettingsForVideoCodecTypeAssetWriterOutputFileTypeOutputFileURL(videoCodecType *foundation.NSString, outputFileType *foundation.NSString, outputFileURL string) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.RecommendedVideoSettingsForVideoCodecTypeAssetWriterOutputFileTypeOutputFileURL(videoCodecType, outputFileType, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(outputFileURL)))
+}
+
+// RecommendedMovieMetadataForVideoCodecTypeAssetWriterOutputFileType calls the underlying RecommendedMovieMetadataForVideoCodecTypeAssetWriterOutputFileType.
+func (x *CaptureVideoDataOutput) RecommendedMovieMetadataForVideoCodecTypeAssetWriterOutputFileType(videoCodecType *foundation.NSString, outputFileType *foundation.NSString) *foundation.NSArray[*raw.AVMetadataItem] {
+	return x.inner.RecommendedMovieMetadataForVideoCodecTypeAssetWriterOutputFileType(videoCodecType, outputFileType)
+}
+
+// SampleBufferDelegate calls the underlying SampleBufferDelegate.
+func (x *CaptureVideoDataOutput) SampleBufferDelegate() raw.AVCaptureVideoDataOutputSampleBufferDelegate {
+	return x.inner.SampleBufferDelegate()
+}
+
+// SampleBufferCallbackQueue calls the underlying SampleBufferCallbackQueue.
+func (x *CaptureVideoDataOutput) SampleBufferCallbackQueue() *foundation.NSObject {
+	return x.inner.SampleBufferCallbackQueue()
+}
+
+// VideoSettings calls the underlying VideoSettings.
+func (x *CaptureVideoDataOutput) VideoSettings() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.VideoSettings()
+}
+
+// SetVideoSettings calls the underlying SetVideoSettings.
+func (x *CaptureVideoDataOutput) SetVideoSettings(videoSettings *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
+	x.inner.SetVideoSettings(videoSettings)
+}
+
+// RecommendedMediaTimeScaleForAssetWriter calls the underlying RecommendedMediaTimeScaleForAssetWriter.
+func (x *CaptureVideoDataOutput) RecommendedMediaTimeScaleForAssetWriter() int32 {
+	return x.inner.RecommendedMediaTimeScaleForAssetWriter()
+}
+
 // AvailableVideoCVPixelFormatTypes returns the collection as a Go slice.
 func (x *CaptureVideoDataOutput) AvailableVideoCVPixelFormatTypes() []*foundation.NSNumber {
 	arr := x.inner.AvailableVideoCVPixelFormatTypes()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
 }
 
 // AvailableVideoCodecTypes returns the collection as a Go slice.
@@ -61,12 +115,57 @@ func (x *CaptureVideoDataOutput) AvailableVideoCodecTypes() []*foundation.NSStri
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	})
+}
+
+// AlwaysDiscardsLateVideoFrames calls the underlying AlwaysDiscardsLateVideoFrames.
+func (x *CaptureVideoDataOutput) AlwaysDiscardsLateVideoFrames() bool {
+	return x.inner.AlwaysDiscardsLateVideoFrames()
+}
+
+// SetAlwaysDiscardsLateVideoFrames calls the underlying SetAlwaysDiscardsLateVideoFrames.
+func (x *CaptureVideoDataOutput) SetAlwaysDiscardsLateVideoFrames(alwaysDiscardsLateVideoFrames bool) {
+	x.inner.SetAlwaysDiscardsLateVideoFrames(alwaysDiscardsLateVideoFrames)
+}
+
+// PreservesDynamicHDRMetadata calls the underlying PreservesDynamicHDRMetadata.
+func (x *CaptureVideoDataOutput) PreservesDynamicHDRMetadata() bool {
+	return x.inner.PreservesDynamicHDRMetadata()
+}
+
+// SetPreservesDynamicHDRMetadata calls the underlying SetPreservesDynamicHDRMetadata.
+func (x *CaptureVideoDataOutput) SetPreservesDynamicHDRMetadata(preservesDynamicHDRMetadata bool) {
+	x.inner.SetPreservesDynamicHDRMetadata(preservesDynamicHDRMetadata)
 }
 
 func (x *CaptureVideoDataOutput) asCaptureOutput() *raw.AVCaptureOutput { return &x.inner.AVCaptureOutput }
+
+// CaptureVideoDataOutputable is the interface implemented by [CaptureVideoDataOutput], for mocking and DI.
+type CaptureVideoDataOutputable interface {
+	Unwrap() *raw.AVCaptureVideoDataOutput
+	WithVideoSettings(videoSettings *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CaptureVideoDataOutput
+	WithAlwaysDiscardsLateVideoFrames(alwaysDiscardsLateVideoFrames bool) *CaptureVideoDataOutput
+	WithPreservesDynamicHDRMetadata(preservesDynamicHDRMetadata bool) *CaptureVideoDataOutput
+	SetSampleBufferDelegateQueue(sampleBufferDelegate raw.AVCaptureVideoDataOutputSampleBufferDelegate, sampleBufferCallbackQueue *foundation.NSObject)
+	RecommendedVideoSettingsForAssetWriterWithOutputFileType(outputFileType *foundation.NSString) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	AvailableVideoCodecTypesForAssetWriterWithOutputFileType(outputFileType *foundation.NSString) *foundation.NSArray[*foundation.NSString]
+	RecommendedVideoSettingsForVideoCodecTypeAssetWriterOutputFileType(videoCodecType *foundation.NSString, outputFileType *foundation.NSString) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	RecommendedVideoSettingsForVideoCodecTypeAssetWriterOutputFileTypeOutputFileURL(videoCodecType *foundation.NSString, outputFileType *foundation.NSString, outputFileURL string) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	RecommendedMovieMetadataForVideoCodecTypeAssetWriterOutputFileType(videoCodecType *foundation.NSString, outputFileType *foundation.NSString) *foundation.NSArray[*raw.AVMetadataItem]
+	SampleBufferDelegate() raw.AVCaptureVideoDataOutputSampleBufferDelegate
+	SampleBufferCallbackQueue() *foundation.NSObject
+	VideoSettings() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	SetVideoSettings(videoSettings *foundation.NSDictionary[*foundation.NSString, objc.ID])
+	RecommendedMediaTimeScaleForAssetWriter() int32
+	AvailableVideoCVPixelFormatTypes() []*foundation.NSNumber
+	AvailableVideoCodecTypes() []*foundation.NSString
+	AlwaysDiscardsLateVideoFrames() bool
+	SetAlwaysDiscardsLateVideoFrames(alwaysDiscardsLateVideoFrames bool)
+	PreservesDynamicHDRMetadata() bool
+	SetPreservesDynamicHDRMetadata(preservesDynamicHDRMetadata bool)
+}
+
+var _ CaptureVideoDataOutputable = (*CaptureVideoDataOutput)(nil)
 

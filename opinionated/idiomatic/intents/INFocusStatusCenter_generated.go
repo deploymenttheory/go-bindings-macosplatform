@@ -23,3 +23,32 @@ func NewFocusStatusCenter() *FocusStatusCenter {
 	return &FocusStatusCenter{inner: raw.INFocusStatusCenterFromID(_id)}
 }
 
+// RequestAuthorizationWithCompletionHandler calls the underlying RequestAuthorizationWithCompletionHandler.
+func (x *FocusStatusCenter) RequestAuthorizationWithCompletionHandler(completionHandler func(raw.INFocusStatusAuthorizationStatus)) {
+	x.inner.RequestAuthorizationWithCompletionHandler(completionHandler)
+}
+
+// FocusStatus calls the underlying FocusStatus.
+func (x *FocusStatusCenter) FocusStatus() *FocusStatus {
+	_r := x.inner.FocusStatus()
+	if _r == nil {
+		return nil
+	}
+	return &FocusStatus{inner: _r}
+}
+
+// AuthorizationStatus calls the underlying AuthorizationStatus.
+func (x *FocusStatusCenter) AuthorizationStatus() raw.INFocusStatusAuthorizationStatus {
+	return x.inner.AuthorizationStatus()
+}
+
+// FocusStatusCenterable is the interface implemented by [FocusStatusCenter], for mocking and DI.
+type FocusStatusCenterable interface {
+	Unwrap() *raw.INFocusStatusCenter
+	RequestAuthorizationWithCompletionHandler(completionHandler func(raw.INFocusStatusAuthorizationStatus))
+	FocusStatus() *FocusStatus
+	AuthorizationStatus() raw.INFocusStatusAuthorizationStatus
+}
+
+var _ FocusStatusCenterable = (*FocusStatusCenter)(nil)
+

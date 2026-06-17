@@ -32,9 +32,36 @@ func NewMappedMetaParameterDefinitionWithInputMetaParameterDefinitionEnvelope(in
 	return &MappedMetaParameterDefinition{inner: raw.PHASEMappedMetaParameterDefinitionFromID(_id)}
 }
 
+// Envelope calls the underlying Envelope.
+func (x *MappedMetaParameterDefinition) Envelope() *Envelope {
+	_r := x.inner.Envelope()
+	if _r == nil {
+		return nil
+	}
+	return &Envelope{inner: _r}
+}
+
+// InputMetaParameterDefinition calls the underlying InputMetaParameterDefinition.
+func (x *MappedMetaParameterDefinition) InputMetaParameterDefinition() *NumberMetaParameterDefinition {
+	_r := x.inner.InputMetaParameterDefinition()
+	if _r == nil {
+		return nil
+	}
+	return &NumberMetaParameterDefinition{inner: _r}
+}
+
 func (x *MappedMetaParameterDefinition) asNumberMetaParameterDefinition() *raw.PHASENumberMetaParameterDefinition { return &x.inner.PHASENumberMetaParameterDefinition }
 
 func (x *MappedMetaParameterDefinition) asMetaParameterDefinition() *raw.PHASEMetaParameterDefinition { return &x.inner.PHASENumberMetaParameterDefinition.PHASEMetaParameterDefinition }
 
 func (x *MappedMetaParameterDefinition) asDefinition() *raw.PHASEDefinition { return &x.inner.PHASENumberMetaParameterDefinition.PHASEMetaParameterDefinition.PHASEDefinition }
+
+// MappedMetaParameterDefinitionable is the interface implemented by [MappedMetaParameterDefinition], for mocking and DI.
+type MappedMetaParameterDefinitionable interface {
+	Unwrap() *raw.PHASEMappedMetaParameterDefinition
+	Envelope() *Envelope
+	InputMetaParameterDefinition() *NumberMetaParameterDefinition
+}
+
+var _ MappedMetaParameterDefinitionable = (*MappedMetaParameterDefinition)(nil)
 

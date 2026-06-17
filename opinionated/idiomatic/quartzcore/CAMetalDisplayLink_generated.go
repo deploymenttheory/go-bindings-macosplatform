@@ -5,6 +5,7 @@
 package quartzcore
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	"github.com/ebitengine/purego/objc"
 )
@@ -47,4 +48,81 @@ func (x *MetalDisplayLink) WithPaused(paused bool) *MetalDisplayLink {
 	x.inner.SetPaused(paused)
 	return x
 }
+
+// AddToRunLoopForMode calls the underlying AddToRunLoopForMode.
+func (x *MetalDisplayLink) AddToRunLoopForMode(runloop *foundation.NSRunLoop, mode *foundation.NSString) {
+	x.inner.AddToRunLoopForMode(runloop, mode)
+}
+
+// RemoveFromRunLoopForMode calls the underlying RemoveFromRunLoopForMode.
+func (x *MetalDisplayLink) RemoveFromRunLoopForMode(runloop *foundation.NSRunLoop, mode *foundation.NSString) {
+	x.inner.RemoveFromRunLoopForMode(runloop, mode)
+}
+
+// Invalidate calls the underlying Invalidate.
+func (x *MetalDisplayLink) Invalidate() {
+	x.inner.Invalidate()
+}
+
+// Delegate calls the underlying Delegate.
+func (x *MetalDisplayLink) Delegate() raw.CAMetalDisplayLinkDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *MetalDisplayLink) SetDelegate(delegate raw.CAMetalDisplayLinkDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// PreferredFrameLatency calls the underlying PreferredFrameLatency.
+func (x *MetalDisplayLink) PreferredFrameLatency() float32 {
+	return x.inner.PreferredFrameLatency()
+}
+
+// SetPreferredFrameLatency calls the underlying SetPreferredFrameLatency.
+func (x *MetalDisplayLink) SetPreferredFrameLatency(preferredFrameLatency float32) {
+	x.inner.SetPreferredFrameLatency(preferredFrameLatency)
+}
+
+// PreferredFrameRateRange calls the underlying PreferredFrameRateRange.
+func (x *MetalDisplayLink) PreferredFrameRateRange() raw.CAFrameRateRange {
+	return x.inner.PreferredFrameRateRange()
+}
+
+// SetPreferredFrameRateRange calls the underlying SetPreferredFrameRateRange.
+func (x *MetalDisplayLink) SetPreferredFrameRateRange(preferredFrameRateRange raw.CAFrameRateRange) {
+	x.inner.SetPreferredFrameRateRange(preferredFrameRateRange)
+}
+
+// IsPaused calls the underlying IsPaused.
+func (x *MetalDisplayLink) IsPaused() bool {
+	return x.inner.IsPaused()
+}
+
+// SetPaused calls the underlying SetPaused.
+func (x *MetalDisplayLink) SetPaused(paused bool) {
+	x.inner.SetPaused(paused)
+}
+
+// MetalDisplayLinkable is the interface implemented by [MetalDisplayLink], for mocking and DI.
+type MetalDisplayLinkable interface {
+	Unwrap() *raw.CAMetalDisplayLink
+	WithDelegate(delegate raw.CAMetalDisplayLinkDelegate) *MetalDisplayLink
+	WithPreferredFrameLatency(preferredFrameLatency float32) *MetalDisplayLink
+	WithPreferredFrameRateRange(preferredFrameRateRange raw.CAFrameRateRange) *MetalDisplayLink
+	WithPaused(paused bool) *MetalDisplayLink
+	AddToRunLoopForMode(runloop *foundation.NSRunLoop, mode *foundation.NSString)
+	RemoveFromRunLoopForMode(runloop *foundation.NSRunLoop, mode *foundation.NSString)
+	Invalidate()
+	Delegate() raw.CAMetalDisplayLinkDelegate
+	SetDelegate(delegate raw.CAMetalDisplayLinkDelegate)
+	PreferredFrameLatency() float32
+	SetPreferredFrameLatency(preferredFrameLatency float32)
+	PreferredFrameRateRange() raw.CAFrameRateRange
+	SetPreferredFrameRateRange(preferredFrameRateRange raw.CAFrameRateRange)
+	IsPaused() bool
+	SetPaused(paused bool)
+}
+
+var _ MetalDisplayLinkable = (*MetalDisplayLink)(nil)
 

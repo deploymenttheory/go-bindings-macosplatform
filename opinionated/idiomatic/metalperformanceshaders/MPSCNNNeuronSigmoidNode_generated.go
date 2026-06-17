@@ -29,3 +29,10 @@ func (x *CNNNeuronSigmoidNode) asCNNNeuronNode() *mpsneuralnetwork.MPSCNNNeuronN
 
 func (x *CNNNeuronSigmoidNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSCNNNeuronNode.MPSNNFilterNode }
 
+// CNNNeuronSigmoidNodeable is the interface implemented by [CNNNeuronSigmoidNode], for mocking and DI.
+type CNNNeuronSigmoidNodeable interface {
+	Unwrap() *raw.MPSCNNNeuronSigmoidNode
+}
+
+var _ CNNNeuronSigmoidNodeable = (*CNNNeuronSigmoidNode)(nil)
+

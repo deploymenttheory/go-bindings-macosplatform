@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -42,5 +43,55 @@ func (x *MTRAudioOutputClusterOutputInfoStruct) WithName(name string) *MTRAudioO
 	return x
 }
 
+// Index calls the underlying Index.
+func (x *MTRAudioOutputClusterOutputInfoStruct) Index() *foundation.NSNumber {
+	return x.inner.Index()
+}
+
+// SetIndex calls the underlying SetIndex.
+func (x *MTRAudioOutputClusterOutputInfoStruct) SetIndex(index *foundation.NSNumber) {
+	x.inner.SetIndex(index)
+}
+
+// OutputType calls the underlying OutputType.
+func (x *MTRAudioOutputClusterOutputInfoStruct) OutputType() *foundation.NSNumber {
+	return x.inner.OutputType()
+}
+
+// SetOutputType calls the underlying SetOutputType.
+func (x *MTRAudioOutputClusterOutputInfoStruct) SetOutputType(outputType *foundation.NSNumber) {
+	x.inner.SetOutputType(outputType)
+}
+
+// Name calls the underlying Name.
+func (x *MTRAudioOutputClusterOutputInfoStruct) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetName calls the underlying SetName.
+func (x *MTRAudioOutputClusterOutputInfoStruct) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
 func (x *MTRAudioOutputClusterOutputInfoStruct) asMTRAudioOutputClusterOutputInfoStruct() *raw.MTRAudioOutputClusterOutputInfoStruct { return x.inner }
+
+// MTRAudioOutputClusterOutputInfoStructable is the interface implemented by [MTRAudioOutputClusterOutputInfoStruct], for mocking and DI.
+type MTRAudioOutputClusterOutputInfoStructable interface {
+	Unwrap() *raw.MTRAudioOutputClusterOutputInfoStruct
+	WithIndex(index *foundation.NSNumber) *MTRAudioOutputClusterOutputInfoStruct
+	WithOutputType(outputType *foundation.NSNumber) *MTRAudioOutputClusterOutputInfoStruct
+	WithName(name string) *MTRAudioOutputClusterOutputInfoStruct
+	Index() *foundation.NSNumber
+	SetIndex(index *foundation.NSNumber)
+	OutputType() *foundation.NSNumber
+	SetOutputType(outputType *foundation.NSNumber)
+	Name() string
+	SetName(name string)
+}
+
+var _ MTRAudioOutputClusterOutputInfoStructable = (*MTRAudioOutputClusterOutputInfoStruct)(nil)
 

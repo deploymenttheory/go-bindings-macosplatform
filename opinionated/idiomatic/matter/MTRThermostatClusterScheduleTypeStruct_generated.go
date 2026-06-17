@@ -42,3 +42,49 @@ func (x *MTRThermostatClusterScheduleTypeStruct) WithScheduleTypeFeatures(schedu
 	return x
 }
 
+// SystemMode calls the underlying SystemMode.
+func (x *MTRThermostatClusterScheduleTypeStruct) SystemMode() *foundation.NSNumber {
+	return x.inner.SystemMode()
+}
+
+// SetSystemMode calls the underlying SetSystemMode.
+func (x *MTRThermostatClusterScheduleTypeStruct) SetSystemMode(systemMode *foundation.NSNumber) {
+	x.inner.SetSystemMode(systemMode)
+}
+
+// NumberOfSchedules calls the underlying NumberOfSchedules.
+func (x *MTRThermostatClusterScheduleTypeStruct) NumberOfSchedules() *foundation.NSNumber {
+	return x.inner.NumberOfSchedules()
+}
+
+// SetNumberOfSchedules calls the underlying SetNumberOfSchedules.
+func (x *MTRThermostatClusterScheduleTypeStruct) SetNumberOfSchedules(numberOfSchedules *foundation.NSNumber) {
+	x.inner.SetNumberOfSchedules(numberOfSchedules)
+}
+
+// ScheduleTypeFeatures calls the underlying ScheduleTypeFeatures.
+func (x *MTRThermostatClusterScheduleTypeStruct) ScheduleTypeFeatures() *foundation.NSNumber {
+	return x.inner.ScheduleTypeFeatures()
+}
+
+// SetScheduleTypeFeatures calls the underlying SetScheduleTypeFeatures.
+func (x *MTRThermostatClusterScheduleTypeStruct) SetScheduleTypeFeatures(scheduleTypeFeatures *foundation.NSNumber) {
+	x.inner.SetScheduleTypeFeatures(scheduleTypeFeatures)
+}
+
+// MTRThermostatClusterScheduleTypeStructable is the interface implemented by [MTRThermostatClusterScheduleTypeStruct], for mocking and DI.
+type MTRThermostatClusterScheduleTypeStructable interface {
+	Unwrap() *raw.MTRThermostatClusterScheduleTypeStruct
+	WithSystemMode(systemMode *foundation.NSNumber) *MTRThermostatClusterScheduleTypeStruct
+	WithNumberOfSchedules(numberOfSchedules *foundation.NSNumber) *MTRThermostatClusterScheduleTypeStruct
+	WithScheduleTypeFeatures(scheduleTypeFeatures *foundation.NSNumber) *MTRThermostatClusterScheduleTypeStruct
+	SystemMode() *foundation.NSNumber
+	SetSystemMode(systemMode *foundation.NSNumber)
+	NumberOfSchedules() *foundation.NSNumber
+	SetNumberOfSchedules(numberOfSchedules *foundation.NSNumber)
+	ScheduleTypeFeatures() *foundation.NSNumber
+	SetScheduleTypeFeatures(scheduleTypeFeatures *foundation.NSNumber)
+}
+
+var _ MTRThermostatClusterScheduleTypeStructable = (*MTRThermostatClusterScheduleTypeStruct)(nil)
+

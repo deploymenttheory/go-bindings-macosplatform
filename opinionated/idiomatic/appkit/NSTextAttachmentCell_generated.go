@@ -25,3 +25,10 @@ func NewTextAttachmentCell() *TextAttachmentCell {
 
 func (x *TextAttachmentCell) asCell() *raw.NSCell { return &x.inner.NSCell }
 
+// TextAttachmentCellable is the interface implemented by [TextAttachmentCell], for mocking and DI.
+type TextAttachmentCellable interface {
+	Unwrap() *raw.NSTextAttachmentCell
+}
+
+var _ TextAttachmentCellable = (*TextAttachmentCell)(nil)
+

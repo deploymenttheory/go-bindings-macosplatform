@@ -23,3 +23,10 @@ func NewMTRPumpConfigurationAndControlClusterGeneralFaultEvent() *MTRPumpConfigu
 	return &MTRPumpConfigurationAndControlClusterGeneralFaultEvent{inner: raw.MTRPumpConfigurationAndControlClusterGeneralFaultEventFromID(_id)}
 }
 
+// MTRPumpConfigurationAndControlClusterGeneralFaultEventable is the interface implemented by [MTRPumpConfigurationAndControlClusterGeneralFaultEvent], for mocking and DI.
+type MTRPumpConfigurationAndControlClusterGeneralFaultEventable interface {
+	Unwrap() *raw.MTRPumpConfigurationAndControlClusterGeneralFaultEvent
+}
+
+var _ MTRPumpConfigurationAndControlClusterGeneralFaultEventable = (*MTRPumpConfigurationAndControlClusterGeneralFaultEvent)(nil)
+

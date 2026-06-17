@@ -6,6 +6,7 @@ package usernotifications
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/usernotifications"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +24,22 @@ func NewTextInputNotificationResponse() *TextInputNotificationResponse {
 	return &TextInputNotificationResponse{inner: raw.UNTextInputNotificationResponseFromID(_id)}
 }
 
+// UserText calls the underlying UserText.
+func (x *TextInputNotificationResponse) UserText() string {
+	_r := x.inner.UserText()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 func (x *TextInputNotificationResponse) asNotificationResponse() *raw.UNNotificationResponse { return &x.inner.UNNotificationResponse }
+
+// TextInputNotificationResponseable is the interface implemented by [TextInputNotificationResponse], for mocking and DI.
+type TextInputNotificationResponseable interface {
+	Unwrap() *raw.UNTextInputNotificationResponse
+	UserText() string
+}
+
+var _ TextInputNotificationResponseable = (*TextInputNotificationResponse)(nil)
 

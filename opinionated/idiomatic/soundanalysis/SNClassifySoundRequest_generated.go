@@ -56,16 +56,58 @@ func (x *ClassifySoundRequest) WithWindowDuration(windowDuration coremedia.CMTim
 	return x
 }
 
+// OverlapFactor calls the underlying OverlapFactor.
+func (x *ClassifySoundRequest) OverlapFactor() float64 {
+	return x.inner.OverlapFactor()
+}
+
+// SetOverlapFactor calls the underlying SetOverlapFactor.
+func (x *ClassifySoundRequest) SetOverlapFactor(overlapFactor float64) {
+	x.inner.SetOverlapFactor(overlapFactor)
+}
+
+// WindowDuration calls the underlying WindowDuration.
+func (x *ClassifySoundRequest) WindowDuration() coremedia.CMTime {
+	return x.inner.WindowDuration()
+}
+
+// SetWindowDuration calls the underlying SetWindowDuration.
+func (x *ClassifySoundRequest) SetWindowDuration(windowDuration coremedia.CMTime) {
+	x.inner.SetWindowDuration(windowDuration)
+}
+
+// WindowDurationConstraint calls the underlying WindowDurationConstraint.
+func (x *ClassifySoundRequest) WindowDurationConstraint() *TimeDurationConstraint {
+	_r := x.inner.WindowDurationConstraint()
+	if _r == nil {
+		return nil
+	}
+	return &TimeDurationConstraint{inner: _r}
+}
+
 // KnownClassifications returns the collection as a Go slice.
-func (x *ClassifySoundRequest) KnownClassifications() []*foundation.NSString {
+func (x *ClassifySoundRequest) KnownClassifications() []string {
 	arr := x.inner.KnownClassifications()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
+
+// ClassifySoundRequestable is the interface implemented by [ClassifySoundRequest], for mocking and DI.
+type ClassifySoundRequestable interface {
+	Unwrap() *raw.SNClassifySoundRequest
+	WithOverlapFactor(overlapFactor float64) *ClassifySoundRequest
+	WithWindowDuration(windowDuration coremedia.CMTime) *ClassifySoundRequest
+	OverlapFactor() float64
+	SetOverlapFactor(overlapFactor float64)
+	WindowDuration() coremedia.CMTime
+	SetWindowDuration(windowDuration coremedia.CMTime)
+	WindowDurationConstraint() *TimeDurationConstraint
+	KnownClassifications() []string
+}
+
+var _ ClassifySoundRequestable = (*ClassifySoundRequest)(nil)
 

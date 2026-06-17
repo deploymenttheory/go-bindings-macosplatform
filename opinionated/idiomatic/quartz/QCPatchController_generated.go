@@ -23,3 +23,10 @@ func NewQCPatchController() *QCPatchController {
 	return &QCPatchController{inner: raw.QCPatchControllerFromID(_id)}
 }
 
+// QCPatchControllerable is the interface implemented by [QCPatchController], for mocking and DI.
+type QCPatchControllerable interface {
+	Unwrap() *raw.QCPatchController
+}
+
+var _ QCPatchControllerable = (*QCPatchController)(nil)
+

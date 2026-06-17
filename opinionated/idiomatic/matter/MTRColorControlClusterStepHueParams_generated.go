@@ -66,3 +66,101 @@ func (x *MTRColorControlClusterStepHueParams) WithServerSideProcessingTimeout(se
 	return x
 }
 
+// StepMode calls the underlying StepMode.
+func (x *MTRColorControlClusterStepHueParams) StepMode() *foundation.NSNumber {
+	return x.inner.StepMode()
+}
+
+// SetStepMode calls the underlying SetStepMode.
+func (x *MTRColorControlClusterStepHueParams) SetStepMode(stepMode *foundation.NSNumber) {
+	x.inner.SetStepMode(stepMode)
+}
+
+// StepSize calls the underlying StepSize.
+func (x *MTRColorControlClusterStepHueParams) StepSize() *foundation.NSNumber {
+	return x.inner.StepSize()
+}
+
+// SetStepSize calls the underlying SetStepSize.
+func (x *MTRColorControlClusterStepHueParams) SetStepSize(stepSize *foundation.NSNumber) {
+	x.inner.SetStepSize(stepSize)
+}
+
+// TransitionTime calls the underlying TransitionTime.
+func (x *MTRColorControlClusterStepHueParams) TransitionTime() *foundation.NSNumber {
+	return x.inner.TransitionTime()
+}
+
+// SetTransitionTime calls the underlying SetTransitionTime.
+func (x *MTRColorControlClusterStepHueParams) SetTransitionTime(transitionTime *foundation.NSNumber) {
+	x.inner.SetTransitionTime(transitionTime)
+}
+
+// OptionsMask calls the underlying OptionsMask.
+func (x *MTRColorControlClusterStepHueParams) OptionsMask() *foundation.NSNumber {
+	return x.inner.OptionsMask()
+}
+
+// SetOptionsMask calls the underlying SetOptionsMask.
+func (x *MTRColorControlClusterStepHueParams) SetOptionsMask(optionsMask *foundation.NSNumber) {
+	x.inner.SetOptionsMask(optionsMask)
+}
+
+// OptionsOverride calls the underlying OptionsOverride.
+func (x *MTRColorControlClusterStepHueParams) OptionsOverride() *foundation.NSNumber {
+	return x.inner.OptionsOverride()
+}
+
+// SetOptionsOverride calls the underlying SetOptionsOverride.
+func (x *MTRColorControlClusterStepHueParams) SetOptionsOverride(optionsOverride *foundation.NSNumber) {
+	x.inner.SetOptionsOverride(optionsOverride)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRColorControlClusterStepHueParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRColorControlClusterStepHueParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRColorControlClusterStepHueParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRColorControlClusterStepHueParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRColorControlClusterStepHueParamsable is the interface implemented by [MTRColorControlClusterStepHueParams], for mocking and DI.
+type MTRColorControlClusterStepHueParamsable interface {
+	Unwrap() *raw.MTRColorControlClusterStepHueParams
+	WithStepMode(stepMode *foundation.NSNumber) *MTRColorControlClusterStepHueParams
+	WithStepSize(stepSize *foundation.NSNumber) *MTRColorControlClusterStepHueParams
+	WithTransitionTime(transitionTime *foundation.NSNumber) *MTRColorControlClusterStepHueParams
+	WithOptionsMask(optionsMask *foundation.NSNumber) *MTRColorControlClusterStepHueParams
+	WithOptionsOverride(optionsOverride *foundation.NSNumber) *MTRColorControlClusterStepHueParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRColorControlClusterStepHueParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRColorControlClusterStepHueParams
+	StepMode() *foundation.NSNumber
+	SetStepMode(stepMode *foundation.NSNumber)
+	StepSize() *foundation.NSNumber
+	SetStepSize(stepSize *foundation.NSNumber)
+	TransitionTime() *foundation.NSNumber
+	SetTransitionTime(transitionTime *foundation.NSNumber)
+	OptionsMask() *foundation.NSNumber
+	SetOptionsMask(optionsMask *foundation.NSNumber)
+	OptionsOverride() *foundation.NSNumber
+	SetOptionsOverride(optionsOverride *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRColorControlClusterStepHueParamsable = (*MTRColorControlClusterStepHueParams)(nil)
+

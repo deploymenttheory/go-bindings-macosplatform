@@ -37,3 +37,27 @@ func (x *MTRRVCOperationalStateClusterOperationalCommandResponseParams) WithComm
 	return x
 }
 
+// CommandResponseState calls the underlying CommandResponseState.
+func (x *MTRRVCOperationalStateClusterOperationalCommandResponseParams) CommandResponseState() *MTRRVCOperationalStateClusterErrorStateStruct {
+	_r := x.inner.CommandResponseState()
+	if _r == nil {
+		return nil
+	}
+	return &MTRRVCOperationalStateClusterErrorStateStruct{inner: _r}
+}
+
+// SetCommandResponseState calls the underlying SetCommandResponseState.
+func (x *MTRRVCOperationalStateClusterOperationalCommandResponseParams) SetCommandResponseState(commandResponseState *raw.MTRRVCOperationalStateClusterErrorStateStruct) {
+	x.inner.SetCommandResponseState(commandResponseState)
+}
+
+// MTRRVCOperationalStateClusterOperationalCommandResponseParamsable is the interface implemented by [MTRRVCOperationalStateClusterOperationalCommandResponseParams], for mocking and DI.
+type MTRRVCOperationalStateClusterOperationalCommandResponseParamsable interface {
+	Unwrap() *raw.MTRRVCOperationalStateClusterOperationalCommandResponseParams
+	WithCommandResponseState(commandResponseState *raw.MTRRVCOperationalStateClusterErrorStateStruct) *MTRRVCOperationalStateClusterOperationalCommandResponseParams
+	CommandResponseState() *MTRRVCOperationalStateClusterErrorStateStruct
+	SetCommandResponseState(commandResponseState *raw.MTRRVCOperationalStateClusterErrorStateStruct)
+}
+
+var _ MTRRVCOperationalStateClusterOperationalCommandResponseParamsable = (*MTRRVCOperationalStateClusterOperationalCommandResponseParams)(nil)
+

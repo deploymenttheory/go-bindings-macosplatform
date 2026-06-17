@@ -48,3 +48,62 @@ func (x *MTREnergyEVSEClusterFaultEvent) WithFaultStateCurrentState(faultStateCu
 	return x
 }
 
+// SessionID calls the underlying SessionID.
+func (x *MTREnergyEVSEClusterFaultEvent) SessionID() *foundation.NSNumber {
+	return x.inner.SessionID()
+}
+
+// SetSessionID calls the underlying SetSessionID.
+func (x *MTREnergyEVSEClusterFaultEvent) SetSessionID(sessionID *foundation.NSNumber) {
+	x.inner.SetSessionID(sessionID)
+}
+
+// State calls the underlying State.
+func (x *MTREnergyEVSEClusterFaultEvent) State() *foundation.NSNumber {
+	return x.inner.State()
+}
+
+// SetState calls the underlying SetState.
+func (x *MTREnergyEVSEClusterFaultEvent) SetState(state *foundation.NSNumber) {
+	x.inner.SetState(state)
+}
+
+// FaultStatePreviousState calls the underlying FaultStatePreviousState.
+func (x *MTREnergyEVSEClusterFaultEvent) FaultStatePreviousState() *foundation.NSNumber {
+	return x.inner.FaultStatePreviousState()
+}
+
+// SetFaultStatePreviousState calls the underlying SetFaultStatePreviousState.
+func (x *MTREnergyEVSEClusterFaultEvent) SetFaultStatePreviousState(faultStatePreviousState *foundation.NSNumber) {
+	x.inner.SetFaultStatePreviousState(faultStatePreviousState)
+}
+
+// FaultStateCurrentState calls the underlying FaultStateCurrentState.
+func (x *MTREnergyEVSEClusterFaultEvent) FaultStateCurrentState() *foundation.NSNumber {
+	return x.inner.FaultStateCurrentState()
+}
+
+// SetFaultStateCurrentState calls the underlying SetFaultStateCurrentState.
+func (x *MTREnergyEVSEClusterFaultEvent) SetFaultStateCurrentState(faultStateCurrentState *foundation.NSNumber) {
+	x.inner.SetFaultStateCurrentState(faultStateCurrentState)
+}
+
+// MTREnergyEVSEClusterFaultEventable is the interface implemented by [MTREnergyEVSEClusterFaultEvent], for mocking and DI.
+type MTREnergyEVSEClusterFaultEventable interface {
+	Unwrap() *raw.MTREnergyEVSEClusterFaultEvent
+	WithSessionID(sessionID *foundation.NSNumber) *MTREnergyEVSEClusterFaultEvent
+	WithState(state *foundation.NSNumber) *MTREnergyEVSEClusterFaultEvent
+	WithFaultStatePreviousState(faultStatePreviousState *foundation.NSNumber) *MTREnergyEVSEClusterFaultEvent
+	WithFaultStateCurrentState(faultStateCurrentState *foundation.NSNumber) *MTREnergyEVSEClusterFaultEvent
+	SessionID() *foundation.NSNumber
+	SetSessionID(sessionID *foundation.NSNumber)
+	State() *foundation.NSNumber
+	SetState(state *foundation.NSNumber)
+	FaultStatePreviousState() *foundation.NSNumber
+	SetFaultStatePreviousState(faultStatePreviousState *foundation.NSNumber)
+	FaultStateCurrentState() *foundation.NSNumber
+	SetFaultStateCurrentState(faultStateCurrentState *foundation.NSNumber)
+}
+
+var _ MTREnergyEVSEClusterFaultEventable = (*MTREnergyEVSEClusterFaultEvent)(nil)
+

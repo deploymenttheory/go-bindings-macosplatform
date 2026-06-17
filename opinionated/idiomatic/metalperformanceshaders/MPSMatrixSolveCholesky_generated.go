@@ -27,7 +27,20 @@ func NewMatrixSolveCholeskyWithDeviceUpperOrderNumberOfRightHandSides(device met
 	return &MatrixSolveCholesky{inner: raw.MPSMatrixSolveCholeskyFromID(_id)}
 }
 
+// EncodeToCommandBufferSourceMatrixRightHandSideMatrixSolutionMatrix calls the underlying EncodeToCommandBufferSourceMatrixRightHandSideMatrixSolutionMatrix.
+func (x *MatrixSolveCholesky) EncodeToCommandBufferSourceMatrixRightHandSideMatrixSolutionMatrix(commandBuffer metal.MTLCommandBuffer, sourceMatrix *mpscore.MPSMatrix, rightHandSideMatrix *mpscore.MPSMatrix, solutionMatrix *mpscore.MPSMatrix) {
+	x.inner.EncodeToCommandBufferSourceMatrixRightHandSideMatrixSolutionMatrix(commandBuffer, sourceMatrix, rightHandSideMatrix, solutionMatrix)
+}
+
 func (x *MatrixSolveCholesky) asMatrixBinaryKernel() *mpsmatrix.MPSMatrixBinaryKernel { return &x.inner.MPSMatrixBinaryKernel }
 
 func (x *MatrixSolveCholesky) asKernel() *mpscore.MPSKernel { return &x.inner.MPSMatrixBinaryKernel.MPSKernel }
+
+// MatrixSolveCholeskyable is the interface implemented by [MatrixSolveCholesky], for mocking and DI.
+type MatrixSolveCholeskyable interface {
+	Unwrap() *raw.MPSMatrixSolveCholesky
+	EncodeToCommandBufferSourceMatrixRightHandSideMatrixSolutionMatrix(commandBuffer metal.MTLCommandBuffer, sourceMatrix *mpscore.MPSMatrix, rightHandSideMatrix *mpscore.MPSMatrix, solutionMatrix *mpscore.MPSMatrix)
+}
+
+var _ MatrixSolveCholeskyable = (*MatrixSolveCholesky)(nil)
 

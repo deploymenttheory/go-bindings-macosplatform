@@ -32,11 +32,11 @@ func NewSuperResolutionScalerConfigurationWithFrameWidthFrameHeightScaleFactorIn
 func (x *SuperResolutionScalerConfiguration) DownloadConfigurationModel(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.DownloadConfigurationModelWithCompletionHandler(func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -46,16 +46,89 @@ func (x *SuperResolutionScalerConfiguration) DownloadConfigurationModel(ctx cont
 	}
 }
 
+// FrameWidth calls the underlying FrameWidth.
+func (x *SuperResolutionScalerConfiguration) FrameWidth() int {
+	return x.inner.FrameWidth()
+}
+
+// FrameHeight calls the underlying FrameHeight.
+func (x *SuperResolutionScalerConfiguration) FrameHeight() int {
+	return x.inner.FrameHeight()
+}
+
+// InputType calls the underlying InputType.
+func (x *SuperResolutionScalerConfiguration) InputType() raw.VTSuperResolutionScalerConfigurationInputType {
+	return x.inner.InputType()
+}
+
+// UsesPrecomputedFlow calls the underlying UsesPrecomputedFlow.
+func (x *SuperResolutionScalerConfiguration) UsesPrecomputedFlow() bool {
+	return x.inner.UsesPrecomputedFlow()
+}
+
+// ScaleFactor calls the underlying ScaleFactor.
+func (x *SuperResolutionScalerConfiguration) ScaleFactor() int {
+	return x.inner.ScaleFactor()
+}
+
+// QualityPrioritization calls the underlying QualityPrioritization.
+func (x *SuperResolutionScalerConfiguration) QualityPrioritization() raw.VTSuperResolutionScalerConfigurationQualityPrioritization {
+	return x.inner.QualityPrioritization()
+}
+
+// Revision calls the underlying Revision.
+func (x *SuperResolutionScalerConfiguration) Revision() raw.VTSuperResolutionScalerConfigurationRevision {
+	return x.inner.Revision()
+}
+
 // FrameSupportedPixelFormats returns the collection as a Go slice.
 func (x *SuperResolutionScalerConfiguration) FrameSupportedPixelFormats() []*foundation.NSNumber {
 	arr := x.inner.FrameSupportedPixelFormats()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
 }
+
+// SourcePixelBufferAttributes calls the underlying SourcePixelBufferAttributes.
+func (x *SuperResolutionScalerConfiguration) SourcePixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.SourcePixelBufferAttributes()
+}
+
+// DestinationPixelBufferAttributes calls the underlying DestinationPixelBufferAttributes.
+func (x *SuperResolutionScalerConfiguration) DestinationPixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.DestinationPixelBufferAttributes()
+}
+
+// ConfigurationModelStatus calls the underlying ConfigurationModelStatus.
+func (x *SuperResolutionScalerConfiguration) ConfigurationModelStatus() raw.VTSuperResolutionScalerConfigurationModelStatus {
+	return x.inner.ConfigurationModelStatus()
+}
+
+// ConfigurationModelPercentageAvailable calls the underlying ConfigurationModelPercentageAvailable.
+func (x *SuperResolutionScalerConfiguration) ConfigurationModelPercentageAvailable() float32 {
+	return x.inner.ConfigurationModelPercentageAvailable()
+}
+
+// SuperResolutionScalerConfigurationable is the interface implemented by [SuperResolutionScalerConfiguration], for mocking and DI.
+type SuperResolutionScalerConfigurationable interface {
+	Unwrap() *raw.VTSuperResolutionScalerConfiguration
+	DownloadConfigurationModel(ctx context.Context) error
+	FrameWidth() int
+	FrameHeight() int
+	InputType() raw.VTSuperResolutionScalerConfigurationInputType
+	UsesPrecomputedFlow() bool
+	ScaleFactor() int
+	QualityPrioritization() raw.VTSuperResolutionScalerConfigurationQualityPrioritization
+	Revision() raw.VTSuperResolutionScalerConfigurationRevision
+	FrameSupportedPixelFormats() []*foundation.NSNumber
+	SourcePixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	DestinationPixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ConfigurationModelStatus() raw.VTSuperResolutionScalerConfigurationModelStatus
+	ConfigurationModelPercentageAvailable() float32
+}
+
+var _ SuperResolutionScalerConfigurationable = (*SuperResolutionScalerConfiguration)(nil)
 

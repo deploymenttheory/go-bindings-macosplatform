@@ -47,7 +47,94 @@ func (x *MeasurementFormatter) WithNumberFormatter(numberFormatter *raw.NSNumber
 	return x
 }
 
+// StringFromMeasurement calls the underlying StringFromMeasurement.
+func (x *MeasurementFormatter) StringFromMeasurement(measurement *raw.NSMeasurement[objc.ID]) *String {
+	_r := x.inner.StringFromMeasurement(measurement)
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// StringFromUnit calls the underlying StringFromUnit.
+func (x *MeasurementFormatter) StringFromUnit(unit *raw.NSUnit) *String {
+	_r := x.inner.StringFromUnit(unit)
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// UnitOptions calls the underlying UnitOptions.
+func (x *MeasurementFormatter) UnitOptions() raw.NSMeasurementFormatterUnitOptions {
+	return x.inner.UnitOptions()
+}
+
+// SetUnitOptions calls the underlying SetUnitOptions.
+func (x *MeasurementFormatter) SetUnitOptions(unitOptions raw.NSMeasurementFormatterUnitOptions) {
+	x.inner.SetUnitOptions(unitOptions)
+}
+
+// UnitStyle calls the underlying UnitStyle.
+func (x *MeasurementFormatter) UnitStyle() raw.NSFormattingUnitStyle {
+	return x.inner.UnitStyle()
+}
+
+// SetUnitStyle calls the underlying SetUnitStyle.
+func (x *MeasurementFormatter) SetUnitStyle(unitStyle raw.NSFormattingUnitStyle) {
+	x.inner.SetUnitStyle(unitStyle)
+}
+
+// Locale calls the underlying Locale.
+func (x *MeasurementFormatter) Locale() *Locale {
+	_r := x.inner.Locale()
+	if _r == nil {
+		return nil
+	}
+	return &Locale{inner: _r}
+}
+
+// SetLocale calls the underlying SetLocale.
+func (x *MeasurementFormatter) SetLocale(locale *raw.NSLocale) {
+	x.inner.SetLocale(locale)
+}
+
+// NumberFormatter calls the underlying NumberFormatter.
+func (x *MeasurementFormatter) NumberFormatter() *NumberFormatter {
+	_r := x.inner.NumberFormatter()
+	if _r == nil {
+		return nil
+	}
+	return &NumberFormatter{inner: _r}
+}
+
+// SetNumberFormatter calls the underlying SetNumberFormatter.
+func (x *MeasurementFormatter) SetNumberFormatter(numberFormatter *raw.NSNumberFormatter) {
+	x.inner.SetNumberFormatter(numberFormatter)
+}
+
 func (x *MeasurementFormatter) asFormatter() *raw.NSFormatter { return &x.inner.NSFormatter }
 
 func (x *MeasurementFormatter) asObject() *raw.NSObject { return &x.inner.NSFormatter.NSObject }
+
+// MeasurementFormatterable is the interface implemented by [MeasurementFormatter], for mocking and DI.
+type MeasurementFormatterable interface {
+	Unwrap() *raw.NSMeasurementFormatter
+	WithUnitOptions(unitOptions raw.NSMeasurementFormatterUnitOptions) *MeasurementFormatter
+	WithUnitStyle(unitStyle raw.NSFormattingUnitStyle) *MeasurementFormatter
+	WithLocale(locale *raw.NSLocale) *MeasurementFormatter
+	WithNumberFormatter(numberFormatter *raw.NSNumberFormatter) *MeasurementFormatter
+	StringFromMeasurement(measurement *raw.NSMeasurement[objc.ID]) *String
+	StringFromUnit(unit *raw.NSUnit) *String
+	UnitOptions() raw.NSMeasurementFormatterUnitOptions
+	SetUnitOptions(unitOptions raw.NSMeasurementFormatterUnitOptions)
+	UnitStyle() raw.NSFormattingUnitStyle
+	SetUnitStyle(unitStyle raw.NSFormattingUnitStyle)
+	Locale() *Locale
+	SetLocale(locale *raw.NSLocale)
+	NumberFormatter() *NumberFormatter
+	SetNumberFormatter(numberFormatter *raw.NSNumberFormatter)
+}
+
+var _ MeasurementFormatterable = (*MeasurementFormatter)(nil)
 

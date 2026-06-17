@@ -6,6 +6,7 @@ package coreml
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +24,32 @@ func NewKey() *Key {
 	return &Key{inner: raw.MLKeyFromID(_id)}
 }
 
+// Name calls the underlying Name.
+func (x *Key) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Scope calls the underlying Scope.
+func (x *Key) Scope() string {
+	_r := x.inner.Scope()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 func (x *Key) asKey() *raw.MLKey { return x.inner }
+
+// Keyable is the interface implemented by [Key], for mocking and DI.
+type Keyable interface {
+	Unwrap() *raw.MLKey
+	Name() string
+	Scope() string
+}
+
+var _ Keyable = (*Key)(nil)
 

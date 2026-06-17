@@ -23,3 +23,10 @@ func NewMessageActionDecision() *MessageActionDecision {
 	return &MessageActionDecision{inner: raw.MEMessageActionDecisionFromID(_id)}
 }
 
+// MessageActionDecisionable is the interface implemented by [MessageActionDecision], for mocking and DI.
+type MessageActionDecisionable interface {
+	Unwrap() *raw.MEMessageActionDecision
+}
+
+var _ MessageActionDecisionable = (*MessageActionDecision)(nil)
+

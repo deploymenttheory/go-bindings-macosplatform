@@ -7,6 +7,7 @@ package avfoundation
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -30,10 +31,16 @@ func (x *AssetWriterInputPassDescription) SourceTimeRanges() []*foundation.NSVal
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSValue, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSValue {
+		return foundation.NSValueFromID(purego.Retain(_id))
+	})
 }
+
+// AssetWriterInputPassDescriptionable is the interface implemented by [AssetWriterInputPassDescription], for mocking and DI.
+type AssetWriterInputPassDescriptionable interface {
+	Unwrap() *raw.AVAssetWriterInputPassDescription
+	SourceTimeRanges() []*foundation.NSValue
+}
+
+var _ AssetWriterInputPassDescriptionable = (*AssetWriterInputPassDescription)(nil)
 

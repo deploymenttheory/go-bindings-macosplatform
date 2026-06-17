@@ -6,6 +6,7 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -35,5 +36,56 @@ func (x *PanGestureRecognizer) WithNumberOfTouchesRequired(numberOfTouchesRequir
 	return x
 }
 
+// TranslationInView calls the underlying TranslationInView.
+func (x *PanGestureRecognizer) TranslationInView(view *raw.NSView) corefoundation.CGPoint {
+	return x.inner.TranslationInView(view)
+}
+
+// SetTranslationInView calls the underlying SetTranslationInView.
+func (x *PanGestureRecognizer) SetTranslationInView(translation corefoundation.CGPoint, view *raw.NSView) {
+	x.inner.SetTranslationInView(translation, view)
+}
+
+// VelocityInView calls the underlying VelocityInView.
+func (x *PanGestureRecognizer) VelocityInView(view *raw.NSView) corefoundation.CGPoint {
+	return x.inner.VelocityInView(view)
+}
+
+// ButtonMask calls the underlying ButtonMask.
+func (x *PanGestureRecognizer) ButtonMask() uint {
+	return x.inner.ButtonMask()
+}
+
+// SetButtonMask calls the underlying SetButtonMask.
+func (x *PanGestureRecognizer) SetButtonMask(buttonMask uint) {
+	x.inner.SetButtonMask(buttonMask)
+}
+
+// NumberOfTouchesRequired calls the underlying NumberOfTouchesRequired.
+func (x *PanGestureRecognizer) NumberOfTouchesRequired() int {
+	return x.inner.NumberOfTouchesRequired()
+}
+
+// SetNumberOfTouchesRequired calls the underlying SetNumberOfTouchesRequired.
+func (x *PanGestureRecognizer) SetNumberOfTouchesRequired(numberOfTouchesRequired int) {
+	x.inner.SetNumberOfTouchesRequired(numberOfTouchesRequired)
+}
+
 func (x *PanGestureRecognizer) asGestureRecognizer() *raw.NSGestureRecognizer { return &x.inner.NSGestureRecognizer }
+
+// PanGestureRecognizerable is the interface implemented by [PanGestureRecognizer], for mocking and DI.
+type PanGestureRecognizerable interface {
+	Unwrap() *raw.NSPanGestureRecognizer
+	WithButtonMask(buttonMask uint) *PanGestureRecognizer
+	WithNumberOfTouchesRequired(numberOfTouchesRequired int) *PanGestureRecognizer
+	TranslationInView(view *raw.NSView) corefoundation.CGPoint
+	SetTranslationInView(translation corefoundation.CGPoint, view *raw.NSView)
+	VelocityInView(view *raw.NSView) corefoundation.CGPoint
+	ButtonMask() uint
+	SetButtonMask(buttonMask uint)
+	NumberOfTouchesRequired() int
+	SetNumberOfTouchesRequired(numberOfTouchesRequired int)
+}
+
+var _ PanGestureRecognizerable = (*PanGestureRecognizer)(nil)
 

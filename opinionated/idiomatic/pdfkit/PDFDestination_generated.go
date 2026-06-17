@@ -6,6 +6,7 @@ package pdfkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/pdfkit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -30,4 +31,46 @@ func (x *Destination) WithZoom(zoom float64) *Destination {
 	x.inner.SetZoom(zoom)
 	return x
 }
+
+// Compare calls the underlying Compare.
+func (x *Destination) Compare(destination *raw.PDFDestination) foundation.NSComparisonResult {
+	return x.inner.Compare(destination)
+}
+
+// Page calls the underlying Page.
+func (x *Destination) Page() *Page {
+	_r := x.inner.Page()
+	if _r == nil {
+		return nil
+	}
+	return &Page{inner: _r}
+}
+
+// Point calls the underlying Point.
+func (x *Destination) Point() corefoundation.CGPoint {
+	return x.inner.Point()
+}
+
+// Zoom calls the underlying Zoom.
+func (x *Destination) Zoom() float64 {
+	return x.inner.Zoom()
+}
+
+// SetZoom calls the underlying SetZoom.
+func (x *Destination) SetZoom(zoom float64) {
+	x.inner.SetZoom(zoom)
+}
+
+// Destinationable is the interface implemented by [Destination], for mocking and DI.
+type Destinationable interface {
+	Unwrap() *raw.PDFDestination
+	WithZoom(zoom float64) *Destination
+	Compare(destination *raw.PDFDestination) foundation.NSComparisonResult
+	Page() *Page
+	Point() corefoundation.CGPoint
+	Zoom() float64
+	SetZoom(zoom float64)
+}
+
+var _ Destinationable = (*Destination)(nil)
 

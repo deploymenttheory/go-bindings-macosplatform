@@ -27,3 +27,10 @@ func (x *StateOfMindType) asSampleType() *raw.HKSampleType { return &x.inner.HKS
 
 func (x *StateOfMindType) asObjectType() *raw.HKObjectType { return &x.inner.HKSampleType.HKObjectType }
 
+// StateOfMindTypeable is the interface implemented by [StateOfMindType], for mocking and DI.
+type StateOfMindTypeable interface {
+	Unwrap() *raw.HKStateOfMindType
+}
+
+var _ StateOfMindTypeable = (*StateOfMindType)(nil)
+

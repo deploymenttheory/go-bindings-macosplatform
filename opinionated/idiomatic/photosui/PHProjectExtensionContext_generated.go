@@ -5,6 +5,8 @@
 package photosui
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photosui"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +24,35 @@ func NewProjectExtensionContext() *ProjectExtensionContext {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHProjectExtensionContext")), objc.RegisterName("new"))
 	return &ProjectExtensionContext{inner: raw.PHProjectExtensionContextFromID(_id)}
 }
+
+// ShowEditorForAsset calls the underlying ShowEditorForAsset.
+func (x *ProjectExtensionContext) ShowEditorForAsset(asset *photos.PHAsset) {
+	x.inner.ShowEditorForAsset(asset)
+}
+
+// UpdatedProjectInfoFromProjectInfoCompletion calls the underlying UpdatedProjectInfoFromProjectInfoCompletion.
+func (x *ProjectExtensionContext) UpdatedProjectInfoFromProjectInfoCompletion(existingProjectInfo *raw.PHProjectInfo, completion func(*raw.PHProjectInfo)) *foundation.NSProgress {
+	return x.inner.UpdatedProjectInfoFromProjectInfoCompletion(existingProjectInfo, completion)
+}
+
+// PhotoLibrary calls the underlying PhotoLibrary.
+func (x *ProjectExtensionContext) PhotoLibrary() *photos.PHPhotoLibrary {
+	return x.inner.PhotoLibrary()
+}
+
+// Project calls the underlying Project.
+func (x *ProjectExtensionContext) Project() *photos.PHProject {
+	return x.inner.Project()
+}
+
+// ProjectExtensionContextable is the interface implemented by [ProjectExtensionContext], for mocking and DI.
+type ProjectExtensionContextable interface {
+	Unwrap() *raw.PHProjectExtensionContext
+	ShowEditorForAsset(asset *photos.PHAsset)
+	UpdatedProjectInfoFromProjectInfoCompletion(existingProjectInfo *raw.PHProjectInfo, completion func(*raw.PHProjectInfo)) *foundation.NSProgress
+	PhotoLibrary() *photos.PHPhotoLibrary
+	Project() *photos.PHProject
+}
+
+var _ ProjectExtensionContextable = (*ProjectExtensionContext)(nil)
 

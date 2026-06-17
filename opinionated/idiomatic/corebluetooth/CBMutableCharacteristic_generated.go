@@ -7,6 +7,7 @@ package corebluetooth
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corebluetooth"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -60,20 +61,60 @@ func (x *MutableCharacteristic) WithDescriptors(items ...DescriptorProvider) *Mu
 	return x
 }
 
+// Permissions calls the underlying Permissions.
+func (x *MutableCharacteristic) Permissions() raw.CBAttributePermissions {
+	return x.inner.Permissions()
+}
+
+// SetPermissions calls the underlying SetPermissions.
+func (x *MutableCharacteristic) SetPermissions(permissions raw.CBAttributePermissions) {
+	x.inner.SetPermissions(permissions)
+}
+
 // SubscribedCentrals returns the collection as a Go slice.
 func (x *MutableCharacteristic) SubscribedCentrals() []*raw.CBCentral {
 	arr := x.inner.SubscribedCentrals()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.CBCentral, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CBCentral {
+		return raw.CBCentralFromID(purego.Retain(_id))
+	})
+}
+
+// SetProperties calls the underlying SetProperties.
+func (x *MutableCharacteristic) SetProperties(properties raw.CBCharacteristicProperties) {
+	x.inner.SetProperties(properties)
+}
+
+// SetValue calls the underlying SetValue.
+func (x *MutableCharacteristic) SetValue(value *foundation.NSData) {
+	x.inner.SetValue(value)
+}
+
+// SetDescriptors calls the underlying SetDescriptors.
+func (x *MutableCharacteristic) SetDescriptors(descriptors *foundation.NSArray[*raw.CBDescriptor]) {
+	x.inner.SetDescriptors(descriptors)
 }
 
 func (x *MutableCharacteristic) asCharacteristic() *raw.CBCharacteristic { return &x.inner.CBCharacteristic }
 
 func (x *MutableCharacteristic) asAttribute() *raw.CBAttribute { return &x.inner.CBCharacteristic.CBAttribute }
+
+// MutableCharacteristicable is the interface implemented by [MutableCharacteristic], for mocking and DI.
+type MutableCharacteristicable interface {
+	Unwrap() *raw.CBMutableCharacteristic
+	WithPermissions(permissions raw.CBAttributePermissions) *MutableCharacteristic
+	WithProperties(properties raw.CBCharacteristicProperties) *MutableCharacteristic
+	WithValue(value *foundation.NSData) *MutableCharacteristic
+	WithDescriptors(items ...DescriptorProvider) *MutableCharacteristic
+	Permissions() raw.CBAttributePermissions
+	SetPermissions(permissions raw.CBAttributePermissions)
+	SubscribedCentrals() []*raw.CBCentral
+	SetProperties(properties raw.CBCharacteristicProperties)
+	SetValue(value *foundation.NSData)
+	SetDescriptors(descriptors *foundation.NSArray[*raw.CBDescriptor])
+}
+
+var _ MutableCharacteristicable = (*MutableCharacteristic)(nil)
 

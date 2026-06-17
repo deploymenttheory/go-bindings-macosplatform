@@ -44,5 +44,72 @@ func NewDateIntervalWithStartDateEndDate(startDate *raw.NSDate, endDate *raw.NSD
 	return &DateInterval{inner: raw.NSDateIntervalFromID(_id)}
 }
 
+// Compare calls the underlying Compare.
+func (x *DateInterval) Compare(dateInterval *raw.NSDateInterval) raw.NSComparisonResult {
+	return x.inner.Compare(dateInterval)
+}
+
+// IsEqualToDateInterval calls the underlying IsEqualToDateInterval.
+func (x *DateInterval) IsEqualToDateInterval(dateInterval *raw.NSDateInterval) bool {
+	return x.inner.IsEqualToDateInterval(dateInterval)
+}
+
+// IntersectsDateInterval calls the underlying IntersectsDateInterval.
+func (x *DateInterval) IntersectsDateInterval(dateInterval *raw.NSDateInterval) bool {
+	return x.inner.IntersectsDateInterval(dateInterval)
+}
+
+// IntersectionWithDateInterval calls the underlying IntersectionWithDateInterval.
+func (x *DateInterval) IntersectionWithDateInterval(dateInterval *raw.NSDateInterval) *DateInterval {
+	_r := x.inner.IntersectionWithDateInterval(dateInterval)
+	if _r == nil {
+		return nil
+	}
+	return &DateInterval{inner: _r}
+}
+
+// ContainsDate calls the underlying ContainsDate.
+func (x *DateInterval) ContainsDate(date *raw.NSDate) bool {
+	return x.inner.ContainsDate(date)
+}
+
+// StartDate calls the underlying StartDate.
+func (x *DateInterval) StartDate() *Date {
+	_r := x.inner.StartDate()
+	if _r == nil {
+		return nil
+	}
+	return &Date{inner: _r}
+}
+
+// EndDate calls the underlying EndDate.
+func (x *DateInterval) EndDate() *Date {
+	_r := x.inner.EndDate()
+	if _r == nil {
+		return nil
+	}
+	return &Date{inner: _r}
+}
+
+// Duration calls the underlying Duration.
+func (x *DateInterval) Duration() float64 {
+	return x.inner.Duration()
+}
+
 func (x *DateInterval) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// DateIntervalable is the interface implemented by [DateInterval], for mocking and DI.
+type DateIntervalable interface {
+	Unwrap() *raw.NSDateInterval
+	Compare(dateInterval *raw.NSDateInterval) raw.NSComparisonResult
+	IsEqualToDateInterval(dateInterval *raw.NSDateInterval) bool
+	IntersectsDateInterval(dateInterval *raw.NSDateInterval) bool
+	IntersectionWithDateInterval(dateInterval *raw.NSDateInterval) *DateInterval
+	ContainsDate(date *raw.NSDate) bool
+	StartDate() *Date
+	EndDate() *Date
+	Duration() float64
+}
+
+var _ DateIntervalable = (*DateInterval)(nil)
 

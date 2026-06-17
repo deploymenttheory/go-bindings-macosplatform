@@ -25,3 +25,10 @@ func NewDirectivityModelParameters() *DirectivityModelParameters {
 
 func (x *DirectivityModelParameters) asDirectivityModelParameters() *raw.PHASEDirectivityModelParameters { return x.inner }
 
+// DirectivityModelParametersable is the interface implemented by [DirectivityModelParameters], for mocking and DI.
+type DirectivityModelParametersable interface {
+	Unwrap() *raw.PHASEDirectivityModelParameters
+}
+
+var _ DirectivityModelParametersable = (*DirectivityModelParameters)(nil)
+

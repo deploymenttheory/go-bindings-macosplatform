@@ -36,3 +36,48 @@ func (x *MTRServiceAreaClusterSelectAreasParams) WithServerSideProcessingTimeout
 	return x
 }
 
+// GetNewAreas calls the underlying GetNewAreas.
+func (x *MTRServiceAreaClusterSelectAreasParams) GetNewAreas() *foundation.NSArray[objc.ID] {
+	return x.inner.GetNewAreas()
+}
+
+// SetNewAreas calls the underlying SetNewAreas.
+func (x *MTRServiceAreaClusterSelectAreasParams) SetNewAreas(newAreas *foundation.NSArray[objc.ID]) {
+	x.inner.SetNewAreas(newAreas)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRServiceAreaClusterSelectAreasParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRServiceAreaClusterSelectAreasParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRServiceAreaClusterSelectAreasParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRServiceAreaClusterSelectAreasParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRServiceAreaClusterSelectAreasParamsable is the interface implemented by [MTRServiceAreaClusterSelectAreasParams], for mocking and DI.
+type MTRServiceAreaClusterSelectAreasParamsable interface {
+	Unwrap() *raw.MTRServiceAreaClusterSelectAreasParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRServiceAreaClusterSelectAreasParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRServiceAreaClusterSelectAreasParams
+	GetNewAreas() *foundation.NSArray[objc.ID]
+	SetNewAreas(newAreas *foundation.NSArray[objc.ID])
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRServiceAreaClusterSelectAreasParamsable = (*MTRServiceAreaClusterSelectAreasParams)(nil)
+

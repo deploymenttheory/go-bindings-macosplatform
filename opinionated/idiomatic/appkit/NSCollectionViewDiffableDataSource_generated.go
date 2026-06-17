@@ -6,6 +6,7 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -29,4 +30,48 @@ func (x *CollectionViewDiffableDataSource) WithSupplementaryViewProvider(supplem
 	x.inner.SetSupplementaryViewProvider(supplementaryViewProvider)
 	return x
 }
+
+// Snapshot calls the underlying Snapshot.
+func (x *CollectionViewDiffableDataSource) Snapshot() *raw.NSDiffableDataSourceSnapshot[objc.ID, objc.ID] {
+	return x.inner.Snapshot()
+}
+
+// ApplySnapshotAnimatingDifferences calls the underlying ApplySnapshotAnimatingDifferences.
+func (x *CollectionViewDiffableDataSource) ApplySnapshotAnimatingDifferences(snapshot *raw.NSDiffableDataSourceSnapshot[objc.ID, objc.ID], animatingDifferences bool) {
+	x.inner.ApplySnapshotAnimatingDifferences(snapshot, animatingDifferences)
+}
+
+// ItemIdentifierForIndexPath calls the underlying ItemIdentifierForIndexPath.
+func (x *CollectionViewDiffableDataSource) ItemIdentifierForIndexPath(indexPath *foundation.NSIndexPath) objc.ID {
+	return x.inner.ItemIdentifierForIndexPath(indexPath)
+}
+
+// IndexPathForItemIdentifier calls the underlying IndexPathForItemIdentifier.
+func (x *CollectionViewDiffableDataSource) IndexPathForItemIdentifier(identifier objc.ID) *foundation.NSIndexPath {
+	return x.inner.IndexPathForItemIdentifier(identifier)
+}
+
+// SupplementaryViewProvider calls the underlying SupplementaryViewProvider.
+func (x *CollectionViewDiffableDataSource) SupplementaryViewProvider() objc.Block {
+	return x.inner.SupplementaryViewProvider()
+}
+
+// SetSupplementaryViewProvider calls the underlying SetSupplementaryViewProvider.
+func (x *CollectionViewDiffableDataSource) SetSupplementaryViewProvider(supplementaryViewProvider objc.Block) {
+	x.inner.SetSupplementaryViewProvider(supplementaryViewProvider)
+}
+
+// CollectionViewDiffableDataSourceable is the interface implemented by [CollectionViewDiffableDataSource], for mocking and DI.
+type CollectionViewDiffableDataSourceable interface {
+	Unwrap() *raw.NSCollectionViewDiffableDataSource[objc.ID, objc.ID]
+	WithSupplementaryViewProvider(supplementaryViewProvider objc.Block) *CollectionViewDiffableDataSource
+	Snapshot() *raw.NSDiffableDataSourceSnapshot[objc.ID, objc.ID]
+	ApplySnapshotAnimatingDifferences(snapshot *raw.NSDiffableDataSourceSnapshot[objc.ID, objc.ID], animatingDifferences bool)
+	ItemIdentifierForIndexPath(indexPath *foundation.NSIndexPath) objc.ID
+	IndexPathForItemIdentifier(identifier objc.ID) *foundation.NSIndexPath
+	SupplementaryViewProvider() objc.Block
+	SetSupplementaryViewProvider(supplementaryViewProvider objc.Block)
+}
+
+var _ CollectionViewDiffableDataSourceable = (*CollectionViewDiffableDataSource)(nil)
 

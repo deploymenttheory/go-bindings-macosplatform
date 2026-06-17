@@ -33,3 +33,10 @@ func (x *CNNMultiply) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel {
 
 func (x *CNNMultiply) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.MPSKernel }
 
+// CNNMultiplyable is the interface implemented by [CNNMultiply], for mocking and DI.
+type CNNMultiplyable interface {
+	Unwrap() *raw.MPSCNNMultiply
+}
+
+var _ CNNMultiplyable = (*CNNMultiply)(nil)
+

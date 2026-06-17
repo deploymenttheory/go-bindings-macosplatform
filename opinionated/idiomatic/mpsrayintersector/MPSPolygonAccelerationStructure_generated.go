@@ -9,6 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsrayintersector"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -103,20 +104,163 @@ func (x *PolygonAccelerationStructure) WithPolygonBuffers(items ...*raw.MPSPolyg
 	return x
 }
 
+// PolygonType calls the underlying PolygonType.
+func (x *PolygonAccelerationStructure) PolygonType() raw.MPSPolygonType {
+	return x.inner.PolygonType()
+}
+
+// SetPolygonType calls the underlying SetPolygonType.
+func (x *PolygonAccelerationStructure) SetPolygonType(polygonType raw.MPSPolygonType) {
+	x.inner.SetPolygonType(polygonType)
+}
+
+// VertexStride calls the underlying VertexStride.
+func (x *PolygonAccelerationStructure) VertexStride() uint {
+	return x.inner.VertexStride()
+}
+
+// SetVertexStride calls the underlying SetVertexStride.
+func (x *PolygonAccelerationStructure) SetVertexStride(vertexStride uint) {
+	x.inner.SetVertexStride(vertexStride)
+}
+
+// IndexType calls the underlying IndexType.
+func (x *PolygonAccelerationStructure) IndexType() mpscore.MPSDataType {
+	return x.inner.IndexType()
+}
+
+// SetIndexType calls the underlying SetIndexType.
+func (x *PolygonAccelerationStructure) SetIndexType(indexType mpscore.MPSDataType) {
+	x.inner.SetIndexType(indexType)
+}
+
+// VertexBuffer calls the underlying VertexBuffer.
+func (x *PolygonAccelerationStructure) VertexBuffer() metal.MTLBuffer {
+	return x.inner.VertexBuffer()
+}
+
+// SetVertexBuffer calls the underlying SetVertexBuffer.
+func (x *PolygonAccelerationStructure) SetVertexBuffer(vertexBuffer metal.MTLBuffer) {
+	x.inner.SetVertexBuffer(vertexBuffer)
+}
+
+// VertexBufferOffset calls the underlying VertexBufferOffset.
+func (x *PolygonAccelerationStructure) VertexBufferOffset() uint {
+	return x.inner.VertexBufferOffset()
+}
+
+// SetVertexBufferOffset calls the underlying SetVertexBufferOffset.
+func (x *PolygonAccelerationStructure) SetVertexBufferOffset(vertexBufferOffset uint) {
+	x.inner.SetVertexBufferOffset(vertexBufferOffset)
+}
+
+// IndexBuffer calls the underlying IndexBuffer.
+func (x *PolygonAccelerationStructure) IndexBuffer() metal.MTLBuffer {
+	return x.inner.IndexBuffer()
+}
+
+// SetIndexBuffer calls the underlying SetIndexBuffer.
+func (x *PolygonAccelerationStructure) SetIndexBuffer(indexBuffer metal.MTLBuffer) {
+	x.inner.SetIndexBuffer(indexBuffer)
+}
+
+// IndexBufferOffset calls the underlying IndexBufferOffset.
+func (x *PolygonAccelerationStructure) IndexBufferOffset() uint {
+	return x.inner.IndexBufferOffset()
+}
+
+// SetIndexBufferOffset calls the underlying SetIndexBufferOffset.
+func (x *PolygonAccelerationStructure) SetIndexBufferOffset(indexBufferOffset uint) {
+	x.inner.SetIndexBufferOffset(indexBufferOffset)
+}
+
+// MaskBuffer calls the underlying MaskBuffer.
+func (x *PolygonAccelerationStructure) MaskBuffer() metal.MTLBuffer {
+	return x.inner.MaskBuffer()
+}
+
+// SetMaskBuffer calls the underlying SetMaskBuffer.
+func (x *PolygonAccelerationStructure) SetMaskBuffer(maskBuffer metal.MTLBuffer) {
+	x.inner.SetMaskBuffer(maskBuffer)
+}
+
+// MaskBufferOffset calls the underlying MaskBufferOffset.
+func (x *PolygonAccelerationStructure) MaskBufferOffset() uint {
+	return x.inner.MaskBufferOffset()
+}
+
+// SetMaskBufferOffset calls the underlying SetMaskBufferOffset.
+func (x *PolygonAccelerationStructure) SetMaskBufferOffset(maskBufferOffset uint) {
+	x.inner.SetMaskBufferOffset(maskBufferOffset)
+}
+
+// PolygonCount calls the underlying PolygonCount.
+func (x *PolygonAccelerationStructure) PolygonCount() uint {
+	return x.inner.PolygonCount()
+}
+
+// SetPolygonCount calls the underlying SetPolygonCount.
+func (x *PolygonAccelerationStructure) SetPolygonCount(polygonCount uint) {
+	x.inner.SetPolygonCount(polygonCount)
+}
+
 // PolygonBuffers returns the collection as a Go slice.
 func (x *PolygonAccelerationStructure) PolygonBuffers() []*raw.MPSPolygonBuffer {
 	arr := x.inner.PolygonBuffers()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MPSPolygonBuffer, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MPSPolygonBuffer {
+		return raw.MPSPolygonBufferFromID(purego.Retain(_id))
+	})
+}
+
+// SetPolygonBuffers calls the underlying SetPolygonBuffers.
+func (x *PolygonAccelerationStructure) SetPolygonBuffers(polygonBuffers *foundation.NSArray[*raw.MPSPolygonBuffer]) {
+	x.inner.SetPolygonBuffers(polygonBuffers)
 }
 
 func (x *PolygonAccelerationStructure) asPolygonAccelerationStructure() *raw.MPSPolygonAccelerationStructure { return x.inner }
 
 func (x *PolygonAccelerationStructure) asAccelerationStructure() *raw.MPSAccelerationStructure { return &x.inner.MPSAccelerationStructure }
+
+// PolygonAccelerationStructureable is the interface implemented by [PolygonAccelerationStructure], for mocking and DI.
+type PolygonAccelerationStructureable interface {
+	Unwrap() *raw.MPSPolygonAccelerationStructure
+	WithPolygonType(polygonType raw.MPSPolygonType) *PolygonAccelerationStructure
+	WithVertexStride(vertexStride uint) *PolygonAccelerationStructure
+	WithIndexType(indexType mpscore.MPSDataType) *PolygonAccelerationStructure
+	WithVertexBuffer(vertexBuffer metal.MTLBuffer) *PolygonAccelerationStructure
+	WithVertexBufferOffset(vertexBufferOffset uint) *PolygonAccelerationStructure
+	WithIndexBuffer(indexBuffer metal.MTLBuffer) *PolygonAccelerationStructure
+	WithIndexBufferOffset(indexBufferOffset uint) *PolygonAccelerationStructure
+	WithMaskBuffer(maskBuffer metal.MTLBuffer) *PolygonAccelerationStructure
+	WithMaskBufferOffset(maskBufferOffset uint) *PolygonAccelerationStructure
+	WithPolygonCount(polygonCount uint) *PolygonAccelerationStructure
+	WithPolygonBuffers(items ...*raw.MPSPolygonBuffer) *PolygonAccelerationStructure
+	PolygonType() raw.MPSPolygonType
+	SetPolygonType(polygonType raw.MPSPolygonType)
+	VertexStride() uint
+	SetVertexStride(vertexStride uint)
+	IndexType() mpscore.MPSDataType
+	SetIndexType(indexType mpscore.MPSDataType)
+	VertexBuffer() metal.MTLBuffer
+	SetVertexBuffer(vertexBuffer metal.MTLBuffer)
+	VertexBufferOffset() uint
+	SetVertexBufferOffset(vertexBufferOffset uint)
+	IndexBuffer() metal.MTLBuffer
+	SetIndexBuffer(indexBuffer metal.MTLBuffer)
+	IndexBufferOffset() uint
+	SetIndexBufferOffset(indexBufferOffset uint)
+	MaskBuffer() metal.MTLBuffer
+	SetMaskBuffer(maskBuffer metal.MTLBuffer)
+	MaskBufferOffset() uint
+	SetMaskBufferOffset(maskBufferOffset uint)
+	PolygonCount() uint
+	SetPolygonCount(polygonCount uint)
+	PolygonBuffers() []*raw.MPSPolygonBuffer
+	SetPolygonBuffers(polygonBuffers *foundation.NSArray[*raw.MPSPolygonBuffer])
+}
+
+var _ PolygonAccelerationStructureable = (*PolygonAccelerationStructure)(nil)
 

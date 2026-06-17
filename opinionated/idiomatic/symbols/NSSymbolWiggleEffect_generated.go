@@ -23,5 +23,32 @@ func NewSymbolWiggleEffect() *SymbolWiggleEffect {
 	return &SymbolWiggleEffect{inner: raw.NSSymbolWiggleEffectFromID(_id)}
 }
 
+// EffectWithByLayer calls the underlying EffectWithByLayer.
+func (x *SymbolWiggleEffect) EffectWithByLayer() *SymbolWiggleEffect {
+	_r := x.inner.EffectWithByLayer()
+	if _r == nil {
+		return nil
+	}
+	return &SymbolWiggleEffect{inner: _r}
+}
+
+// EffectWithWholeSymbol calls the underlying EffectWithWholeSymbol.
+func (x *SymbolWiggleEffect) EffectWithWholeSymbol() *SymbolWiggleEffect {
+	_r := x.inner.EffectWithWholeSymbol()
+	if _r == nil {
+		return nil
+	}
+	return &SymbolWiggleEffect{inner: _r}
+}
+
 func (x *SymbolWiggleEffect) asSymbolEffect() *raw.NSSymbolEffect { return &x.inner.NSSymbolEffect }
+
+// SymbolWiggleEffectable is the interface implemented by [SymbolWiggleEffect], for mocking and DI.
+type SymbolWiggleEffectable interface {
+	Unwrap() *raw.NSSymbolWiggleEffect
+	EffectWithByLayer() *SymbolWiggleEffect
+	EffectWithWholeSymbol() *SymbolWiggleEffect
+}
+
+var _ SymbolWiggleEffectable = (*SymbolWiggleEffect)(nil)
 

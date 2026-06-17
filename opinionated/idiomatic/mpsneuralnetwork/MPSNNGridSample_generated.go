@@ -39,5 +39,25 @@ func (x *NNGridSample) WithUseGridValueAsInputCoordinate(useGridValueAsInputCoor
 	return x
 }
 
+// UseGridValueAsInputCoordinate calls the underlying UseGridValueAsInputCoordinate.
+func (x *NNGridSample) UseGridValueAsInputCoordinate() bool {
+	return x.inner.UseGridValueAsInputCoordinate()
+}
+
+// SetUseGridValueAsInputCoordinate calls the underlying SetUseGridValueAsInputCoordinate.
+func (x *NNGridSample) SetUseGridValueAsInputCoordinate(useGridValueAsInputCoordinate bool) {
+	x.inner.SetUseGridValueAsInputCoordinate(useGridValueAsInputCoordinate)
+}
+
 func (x *NNGridSample) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel { return &x.inner.MPSCNNBinaryKernel }
+
+// NNGridSampleable is the interface implemented by [NNGridSample], for mocking and DI.
+type NNGridSampleable interface {
+	Unwrap() *raw.MPSNNGridSample
+	WithUseGridValueAsInputCoordinate(useGridValueAsInputCoordinate bool) *NNGridSample
+	UseGridValueAsInputCoordinate() bool
+	SetUseGridValueAsInputCoordinate(useGridValueAsInputCoordinate bool)
+}
+
+var _ NNGridSampleable = (*NNGridSample)(nil)
 

@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"context"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,7 +24,38 @@ func NewURLSessionDownloadTask() *URLSessionDownloadTask {
 	return &URLSessionDownloadTask{inner: raw.NSURLSessionDownloadTaskFromID(_id)}
 }
 
+// CancelByProducingResumeData blocks until the operation completes or ctx is cancelled.
+func (x *URLSessionDownloadTask) CancelByProducingResumeData(ctx context.Context) (*Data, error) {
+	type _result struct {
+		val *Data
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.CancelByProducingResumeData(func(_p0 *raw.NSData) {
+		var _o _result
+		if _p0 != nil {
+			_o.val = &Data{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *Data
+		return _zero, ctx.Err()
+	}
+}
+
 func (x *URLSessionDownloadTask) asURLSessionTask() *raw.NSURLSessionTask { return &x.inner.NSURLSessionTask }
 
 func (x *URLSessionDownloadTask) asObject() *raw.NSObject { return &x.inner.NSURLSessionTask.NSObject }
+
+// URLSessionDownloadTaskable is the interface implemented by [URLSessionDownloadTask], for mocking and DI.
+type URLSessionDownloadTaskable interface {
+	Unwrap() *raw.NSURLSessionDownloadTask
+	CancelByProducingResumeData(ctx context.Context) (*Data, error)
+}
+
+var _ URLSessionDownloadTaskable = (*URLSessionDownloadTask)(nil)
 

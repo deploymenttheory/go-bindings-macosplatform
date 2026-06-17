@@ -25,3 +25,10 @@ func NewCloudPlayer() *CloudPlayer {
 
 func (x *CloudPlayer) asBasePlayer() *raw.GKBasePlayer { return &x.inner.GKBasePlayer }
 
+// CloudPlayerable is the interface implemented by [CloudPlayer], for mocking and DI.
+type CloudPlayerable interface {
+	Unwrap() *raw.GKCloudPlayer
+}
+
+var _ CloudPlayerable = (*CloudPlayer)(nil)
+

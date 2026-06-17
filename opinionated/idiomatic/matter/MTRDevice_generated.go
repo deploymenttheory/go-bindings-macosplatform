@@ -5,8 +5,12 @@
 package matter
 
 import (
+	"context"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // MTRDevice wraps [raw.MTRDevice] with a fluent Go API.
@@ -22,4 +26,188 @@ func NewMTRDevice() *MTRDevice {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRDevice")), objc.RegisterName("new"))
 	return &MTRDevice{inner: raw.MTRDeviceFromID(_id)}
 }
+
+// SetDelegateQueue calls the underlying SetDelegateQueue.
+func (x *MTRDevice) SetDelegateQueue(delegate raw.MTRDeviceDelegate, queue *foundation.NSObject) {
+	x.inner.SetDelegateQueue(delegate, queue)
+}
+
+// AddDelegateQueue calls the underlying AddDelegateQueue.
+func (x *MTRDevice) AddDelegateQueue(delegate raw.MTRDeviceDelegate, queue *foundation.NSObject) {
+	x.inner.AddDelegateQueue(delegate, queue)
+}
+
+// AddDelegateQueueInterestedPathsForAttributesInterestedPathsForEvents calls the underlying AddDelegateQueueInterestedPathsForAttributesInterestedPathsForEvents.
+func (x *MTRDevice) AddDelegateQueueInterestedPathsForAttributesInterestedPathsForEvents(delegate raw.MTRDeviceDelegate, queue *foundation.NSObject, interestedPathsForAttributes *foundation.NSArray[objc.ID], interestedPathsForEvents *foundation.NSArray[objc.ID]) {
+	x.inner.AddDelegateQueueInterestedPathsForAttributesInterestedPathsForEvents(delegate, queue, interestedPathsForAttributes, interestedPathsForEvents)
+}
+
+// RemoveDelegate calls the underlying RemoveDelegate.
+func (x *MTRDevice) RemoveDelegate(delegate raw.MTRDeviceDelegate) {
+	x.inner.RemoveDelegate(delegate)
+}
+
+// ReadAttributeWithEndpointIDClusterIDAttributeIDParams calls the underlying ReadAttributeWithEndpointIDClusterIDAttributeIDParams.
+func (x *MTRDevice) ReadAttributeWithEndpointIDClusterIDAttributeIDParams(endpointID *foundation.NSNumber, clusterID *foundation.NSNumber, attributeID *foundation.NSNumber, params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeWithEndpointIDClusterIDAttributeIDParams(endpointID, clusterID, attributeID, params)
+}
+
+// WriteAttributeWithEndpointIDClusterIDAttributeIDValueExpectedValueIntervalTimedWriteTimeout calls the underlying WriteAttributeWithEndpointIDClusterIDAttributeIDValueExpectedValueIntervalTimedWriteTimeout.
+func (x *MTRDevice) WriteAttributeWithEndpointIDClusterIDAttributeIDValueExpectedValueIntervalTimedWriteTimeout(endpointID *foundation.NSNumber, clusterID *foundation.NSNumber, attributeID *foundation.NSNumber, value objc.ID, expectedValueInterval *foundation.NSNumber, timeout *foundation.NSNumber) {
+	x.inner.WriteAttributeWithEndpointIDClusterIDAttributeIDValueExpectedValueIntervalTimedWriteTimeout(endpointID, clusterID, attributeID, value, expectedValueInterval, timeout)
+}
+
+// ReadAttributePaths calls the underlying ReadAttributePaths.
+func (x *MTRDevice) ReadAttributePaths(attributePaths *foundation.NSArray[*raw.MTRAttributeRequestPath]) *foundation.NSArray[objc.ID] {
+	return x.inner.ReadAttributePaths(attributePaths)
+}
+
+// DescriptorClusters calls the underlying DescriptorClusters.
+func (x *MTRDevice) DescriptorClusters() *foundation.NSDictionary[*raw.MTRAttributePath, objc.ID] {
+	return x.inner.DescriptorClusters()
+}
+
+// InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalQueueCompletion calls the underlying InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalQueueCompletion.
+func (x *MTRDevice) InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalQueueCompletion(endpointID *foundation.NSNumber, clusterID *foundation.NSNumber, commandID *foundation.NSNumber, commandFields *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValues *foundation.NSArray[objc.ID], expectedValueInterval *foundation.NSNumber, queue *foundation.NSObject, completion objc.Block) {
+	x.inner.InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalQueueCompletion(endpointID, clusterID, commandID, commandFields, expectedValues, expectedValueInterval, queue, completion)
+}
+
+// InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalTimedInvokeTimeoutQueueCompletion calls the underlying InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalTimedInvokeTimeoutQueueCompletion.
+func (x *MTRDevice) InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalTimedInvokeTimeoutQueueCompletion(endpointID *foundation.NSNumber, clusterID *foundation.NSNumber, commandID *foundation.NSNumber, commandFields objc.ID, expectedValues *foundation.NSArray[objc.ID], expectedValueInterval *foundation.NSNumber, timeout *foundation.NSNumber, queue *foundation.NSObject, completion objc.Block) {
+	x.inner.InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalTimedInvokeTimeoutQueueCompletion(endpointID, clusterID, commandID, commandFields, expectedValues, expectedValueInterval, timeout, queue, completion)
+}
+
+// InvokeCommandsQueueCompletion calls the underlying InvokeCommandsQueueCompletion.
+func (x *MTRDevice) InvokeCommandsQueueCompletion(commands *foundation.NSArray[objc.ID], queue *foundation.NSObject, completion objc.Block) {
+	x.inner.InvokeCommandsQueueCompletion(commands, queue, completion)
+}
+
+// OpenCommissioningWindowWithSetupPasscodeDiscriminatorDurationQueueCompletion calls the underlying OpenCommissioningWindowWithSetupPasscodeDiscriminatorDurationQueueCompletion.
+func (x *MTRDevice) OpenCommissioningWindowWithSetupPasscodeDiscriminatorDurationQueueCompletion(setupPasscode *foundation.NSNumber, discriminator *foundation.NSNumber, duration *foundation.NSNumber, queue *foundation.NSObject, completion func(*raw.MTRSetupPayload, unsafe.Pointer)) {
+	x.inner.OpenCommissioningWindowWithSetupPasscodeDiscriminatorDurationQueueCompletion(setupPasscode, discriminator, duration, queue, completion)
+}
+
+// OpenCommissioningWindowWithDiscriminatorDurationQueueCompletion calls the underlying OpenCommissioningWindowWithDiscriminatorDurationQueueCompletion.
+func (x *MTRDevice) OpenCommissioningWindowWithDiscriminatorDurationQueueCompletion(discriminator *foundation.NSNumber, duration *foundation.NSNumber, queue *foundation.NSObject, completion func(*raw.MTRSetupPayload, unsafe.Pointer)) {
+	x.inner.OpenCommissioningWindowWithDiscriminatorDurationQueueCompletion(discriminator, duration, queue, completion)
+}
+
+// DownloadLogOfTypeTimeoutQueueCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRDevice) DownloadLogOfTypeTimeoutQueueCompletion(ctx context.Context, type_ raw.MTRDiagnosticLogType, timeout float64, queue *foundation.NSObject) (*foundation.NSURL, error) {
+	type _result struct {
+		val *foundation.NSURL
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.DownloadLogOfTypeTimeoutQueueCompletion(type_, timeout, queue, func(_p0 *foundation.NSURL, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSURL
+		return _zero, ctx.Err()
+	}
+}
+
+// WaitForAttributeValuesTimeoutQueueCompletion calls the underlying WaitForAttributeValuesTimeoutQueueCompletion.
+func (x *MTRDevice) WaitForAttributeValuesTimeoutQueueCompletion(values *foundation.NSDictionary[*raw.MTRAttributePath, objc.ID], timeout float64, queue *foundation.NSObject, completion func(unsafe.Pointer)) *MTRAttributeValueWaiter {
+	_r := x.inner.WaitForAttributeValuesTimeoutQueueCompletion(values, timeout, queue, completion)
+	if _r == nil {
+		return nil
+	}
+	return &MTRAttributeValueWaiter{inner: _r}
+}
+
+// State calls the underlying State.
+func (x *MTRDevice) State() raw.MTRDeviceState {
+	return x.inner.State()
+}
+
+// DeviceCachePrimed calls the underlying DeviceCachePrimed.
+func (x *MTRDevice) DeviceCachePrimed() bool {
+	return x.inner.DeviceCachePrimed()
+}
+
+// EstimatedStartTime calls the underlying EstimatedStartTime.
+func (x *MTRDevice) EstimatedStartTime() *foundation.NSDate {
+	return x.inner.EstimatedStartTime()
+}
+
+// DeviceController calls the underlying DeviceController.
+func (x *MTRDevice) DeviceController() *MTRDeviceController {
+	_r := x.inner.DeviceController()
+	if _r == nil {
+		return nil
+	}
+	return &MTRDeviceController{inner: _r}
+}
+
+// NodeID calls the underlying NodeID.
+func (x *MTRDevice) NodeID() *foundation.NSNumber {
+	return x.inner.NodeID()
+}
+
+// EstimatedSubscriptionLatency calls the underlying EstimatedSubscriptionLatency.
+func (x *MTRDevice) EstimatedSubscriptionLatency() *foundation.NSNumber {
+	return x.inner.EstimatedSubscriptionLatency()
+}
+
+// VendorID calls the underlying VendorID.
+func (x *MTRDevice) VendorID() *foundation.NSNumber {
+	return x.inner.VendorID()
+}
+
+// ProductID calls the underlying ProductID.
+func (x *MTRDevice) ProductID() *foundation.NSNumber {
+	return x.inner.ProductID()
+}
+
+// NetworkCommissioningFeatures calls the underlying NetworkCommissioningFeatures.
+func (x *MTRDevice) NetworkCommissioningFeatures() raw.MTRNetworkCommissioningFeature {
+	return x.inner.NetworkCommissioningFeatures()
+}
+
+// InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalTimedInvokeTimeoutClientQueueCompletion calls the underlying InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalTimedInvokeTimeoutClientQueueCompletion.
+func (x *MTRDevice) InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalTimedInvokeTimeoutClientQueueCompletion(endpointID *foundation.NSNumber, clusterID *foundation.NSNumber, commandID *foundation.NSNumber, commandFields objc.ID, expectedValues *foundation.NSArray[objc.ID], expectedValueInterval *foundation.NSNumber, timeout *foundation.NSNumber, queue *foundation.NSObject, completion objc.Block) {
+	x.inner.InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalTimedInvokeTimeoutClientQueueCompletion(endpointID, clusterID, commandID, commandFields, expectedValues, expectedValueInterval, timeout, queue, completion)
+}
+
+// MTRDeviceable is the interface implemented by [MTRDevice], for mocking and DI.
+type MTRDeviceable interface {
+	Unwrap() *raw.MTRDevice
+	SetDelegateQueue(delegate raw.MTRDeviceDelegate, queue *foundation.NSObject)
+	AddDelegateQueue(delegate raw.MTRDeviceDelegate, queue *foundation.NSObject)
+	AddDelegateQueueInterestedPathsForAttributesInterestedPathsForEvents(delegate raw.MTRDeviceDelegate, queue *foundation.NSObject, interestedPathsForAttributes *foundation.NSArray[objc.ID], interestedPathsForEvents *foundation.NSArray[objc.ID])
+	RemoveDelegate(delegate raw.MTRDeviceDelegate)
+	ReadAttributeWithEndpointIDClusterIDAttributeIDParams(endpointID *foundation.NSNumber, clusterID *foundation.NSNumber, attributeID *foundation.NSNumber, params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	WriteAttributeWithEndpointIDClusterIDAttributeIDValueExpectedValueIntervalTimedWriteTimeout(endpointID *foundation.NSNumber, clusterID *foundation.NSNumber, attributeID *foundation.NSNumber, value objc.ID, expectedValueInterval *foundation.NSNumber, timeout *foundation.NSNumber)
+	ReadAttributePaths(attributePaths *foundation.NSArray[*raw.MTRAttributeRequestPath]) *foundation.NSArray[objc.ID]
+	DescriptorClusters() *foundation.NSDictionary[*raw.MTRAttributePath, objc.ID]
+	InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalQueueCompletion(endpointID *foundation.NSNumber, clusterID *foundation.NSNumber, commandID *foundation.NSNumber, commandFields *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValues *foundation.NSArray[objc.ID], expectedValueInterval *foundation.NSNumber, queue *foundation.NSObject, completion objc.Block)
+	InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalTimedInvokeTimeoutQueueCompletion(endpointID *foundation.NSNumber, clusterID *foundation.NSNumber, commandID *foundation.NSNumber, commandFields objc.ID, expectedValues *foundation.NSArray[objc.ID], expectedValueInterval *foundation.NSNumber, timeout *foundation.NSNumber, queue *foundation.NSObject, completion objc.Block)
+	InvokeCommandsQueueCompletion(commands *foundation.NSArray[objc.ID], queue *foundation.NSObject, completion objc.Block)
+	OpenCommissioningWindowWithSetupPasscodeDiscriminatorDurationQueueCompletion(setupPasscode *foundation.NSNumber, discriminator *foundation.NSNumber, duration *foundation.NSNumber, queue *foundation.NSObject, completion func(*raw.MTRSetupPayload, unsafe.Pointer))
+	OpenCommissioningWindowWithDiscriminatorDurationQueueCompletion(discriminator *foundation.NSNumber, duration *foundation.NSNumber, queue *foundation.NSObject, completion func(*raw.MTRSetupPayload, unsafe.Pointer))
+	DownloadLogOfTypeTimeoutQueueCompletion(ctx context.Context, type_ raw.MTRDiagnosticLogType, timeout float64, queue *foundation.NSObject) (*foundation.NSURL, error)
+	WaitForAttributeValuesTimeoutQueueCompletion(values *foundation.NSDictionary[*raw.MTRAttributePath, objc.ID], timeout float64, queue *foundation.NSObject, completion func(unsafe.Pointer)) *MTRAttributeValueWaiter
+	State() raw.MTRDeviceState
+	DeviceCachePrimed() bool
+	EstimatedStartTime() *foundation.NSDate
+	DeviceController() *MTRDeviceController
+	NodeID() *foundation.NSNumber
+	EstimatedSubscriptionLatency() *foundation.NSNumber
+	VendorID() *foundation.NSNumber
+	ProductID() *foundation.NSNumber
+	NetworkCommissioningFeatures() raw.MTRNetworkCommissioningFeature
+	InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalTimedInvokeTimeoutClientQueueCompletion(endpointID *foundation.NSNumber, clusterID *foundation.NSNumber, commandID *foundation.NSNumber, commandFields objc.ID, expectedValues *foundation.NSArray[objc.ID], expectedValueInterval *foundation.NSNumber, timeout *foundation.NSNumber, queue *foundation.NSObject, completion objc.Block)
+}
+
+var _ MTRDeviceable = (*MTRDevice)(nil)
 

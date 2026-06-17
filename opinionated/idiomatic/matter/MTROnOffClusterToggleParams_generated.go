@@ -36,3 +36,36 @@ func (x *MTROnOffClusterToggleParams) WithServerSideProcessingTimeout(serverSide
 	return x
 }
 
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTROnOffClusterToggleParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTROnOffClusterToggleParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTROnOffClusterToggleParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTROnOffClusterToggleParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTROnOffClusterToggleParamsable is the interface implemented by [MTROnOffClusterToggleParams], for mocking and DI.
+type MTROnOffClusterToggleParamsable interface {
+	Unwrap() *raw.MTROnOffClusterToggleParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTROnOffClusterToggleParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTROnOffClusterToggleParams
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTROnOffClusterToggleParamsable = (*MTROnOffClusterToggleParams)(nil)
+

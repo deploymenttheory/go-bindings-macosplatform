@@ -24,5 +24,24 @@ func NewCNNUpsamplingNearestNodeWithSourceIntegerScaleFactorXIntegerScaleFactorY
 	return &CNNUpsamplingNearestNode{inner: raw.MPSCNNUpsamplingNearestNodeFromID(_id)}
 }
 
+// ScaleFactorX calls the underlying ScaleFactorX.
+func (x *CNNUpsamplingNearestNode) ScaleFactorX() float64 {
+	return x.inner.ScaleFactorX()
+}
+
+// ScaleFactorY calls the underlying ScaleFactorY.
+func (x *CNNUpsamplingNearestNode) ScaleFactorY() float64 {
+	return x.inner.ScaleFactorY()
+}
+
 func (x *CNNUpsamplingNearestNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNFilterNode }
+
+// CNNUpsamplingNearestNodeable is the interface implemented by [CNNUpsamplingNearestNode], for mocking and DI.
+type CNNUpsamplingNearestNodeable interface {
+	Unwrap() *raw.MPSCNNUpsamplingNearestNode
+	ScaleFactorX() float64
+	ScaleFactorY() float64
+}
+
+var _ CNNUpsamplingNearestNodeable = (*CNNUpsamplingNearestNode)(nil)
 

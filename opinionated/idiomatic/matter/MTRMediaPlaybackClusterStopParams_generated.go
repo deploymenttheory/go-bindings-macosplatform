@@ -36,5 +36,38 @@ func (x *MTRMediaPlaybackClusterStopParams) WithServerSideProcessingTimeout(serv
 	return x
 }
 
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRMediaPlaybackClusterStopParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRMediaPlaybackClusterStopParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRMediaPlaybackClusterStopParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRMediaPlaybackClusterStopParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
 func (x *MTRMediaPlaybackClusterStopParams) asMTRMediaPlaybackClusterStopParams() *raw.MTRMediaPlaybackClusterStopParams { return x.inner }
+
+// MTRMediaPlaybackClusterStopParamsable is the interface implemented by [MTRMediaPlaybackClusterStopParams], for mocking and DI.
+type MTRMediaPlaybackClusterStopParamsable interface {
+	Unwrap() *raw.MTRMediaPlaybackClusterStopParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRMediaPlaybackClusterStopParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRMediaPlaybackClusterStopParams
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRMediaPlaybackClusterStopParamsable = (*MTRMediaPlaybackClusterStopParams)(nil)
 

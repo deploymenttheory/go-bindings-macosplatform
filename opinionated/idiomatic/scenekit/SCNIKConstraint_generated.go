@@ -30,5 +30,47 @@ func (x *IKConstraint) WithTargetPosition(targetPosition raw.SCNVector3) *IKCons
 	return x
 }
 
+// SetMaxAllowedRotationAngleForJoint calls the underlying SetMaxAllowedRotationAngleForJoint.
+func (x *IKConstraint) SetMaxAllowedRotationAngleForJoint(angle float64, node *raw.SCNNode) {
+	x.inner.SetMaxAllowedRotationAngleForJoint(angle, node)
+}
+
+// MaxAllowedRotationAngleForJoint calls the underlying MaxAllowedRotationAngleForJoint.
+func (x *IKConstraint) MaxAllowedRotationAngleForJoint(node *raw.SCNNode) float64 {
+	return x.inner.MaxAllowedRotationAngleForJoint(node)
+}
+
+// ChainRootNode calls the underlying ChainRootNode.
+func (x *IKConstraint) ChainRootNode() *Node {
+	_r := x.inner.ChainRootNode()
+	if _r == nil {
+		return nil
+	}
+	return &Node{inner: _r}
+}
+
+// TargetPosition calls the underlying TargetPosition.
+func (x *IKConstraint) TargetPosition() raw.SCNVector3 {
+	return x.inner.TargetPosition()
+}
+
+// SetTargetPosition calls the underlying SetTargetPosition.
+func (x *IKConstraint) SetTargetPosition(targetPosition raw.SCNVector3) {
+	x.inner.SetTargetPosition(targetPosition)
+}
+
 func (x *IKConstraint) asConstraint() *raw.SCNConstraint { return &x.inner.SCNConstraint }
+
+// IKConstraintable is the interface implemented by [IKConstraint], for mocking and DI.
+type IKConstraintable interface {
+	Unwrap() *raw.SCNIKConstraint
+	WithTargetPosition(targetPosition raw.SCNVector3) *IKConstraint
+	SetMaxAllowedRotationAngleForJoint(angle float64, node *raw.SCNNode)
+	MaxAllowedRotationAngleForJoint(node *raw.SCNNode) float64
+	ChainRootNode() *Node
+	TargetPosition() raw.SCNVector3
+	SetTargetPosition(targetPosition raw.SCNVector3)
+}
+
+var _ IKConstraintable = (*IKConstraint)(nil)
 

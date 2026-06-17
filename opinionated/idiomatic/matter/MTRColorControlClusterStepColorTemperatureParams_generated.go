@@ -78,3 +78,127 @@ func (x *MTRColorControlClusterStepColorTemperatureParams) WithServerSideProcess
 	return x
 }
 
+// StepMode calls the underlying StepMode.
+func (x *MTRColorControlClusterStepColorTemperatureParams) StepMode() *foundation.NSNumber {
+	return x.inner.StepMode()
+}
+
+// SetStepMode calls the underlying SetStepMode.
+func (x *MTRColorControlClusterStepColorTemperatureParams) SetStepMode(stepMode *foundation.NSNumber) {
+	x.inner.SetStepMode(stepMode)
+}
+
+// StepSize calls the underlying StepSize.
+func (x *MTRColorControlClusterStepColorTemperatureParams) StepSize() *foundation.NSNumber {
+	return x.inner.StepSize()
+}
+
+// SetStepSize calls the underlying SetStepSize.
+func (x *MTRColorControlClusterStepColorTemperatureParams) SetStepSize(stepSize *foundation.NSNumber) {
+	x.inner.SetStepSize(stepSize)
+}
+
+// TransitionTime calls the underlying TransitionTime.
+func (x *MTRColorControlClusterStepColorTemperatureParams) TransitionTime() *foundation.NSNumber {
+	return x.inner.TransitionTime()
+}
+
+// SetTransitionTime calls the underlying SetTransitionTime.
+func (x *MTRColorControlClusterStepColorTemperatureParams) SetTransitionTime(transitionTime *foundation.NSNumber) {
+	x.inner.SetTransitionTime(transitionTime)
+}
+
+// ColorTemperatureMinimumMireds calls the underlying ColorTemperatureMinimumMireds.
+func (x *MTRColorControlClusterStepColorTemperatureParams) ColorTemperatureMinimumMireds() *foundation.NSNumber {
+	return x.inner.ColorTemperatureMinimumMireds()
+}
+
+// SetColorTemperatureMinimumMireds calls the underlying SetColorTemperatureMinimumMireds.
+func (x *MTRColorControlClusterStepColorTemperatureParams) SetColorTemperatureMinimumMireds(colorTemperatureMinimumMireds *foundation.NSNumber) {
+	x.inner.SetColorTemperatureMinimumMireds(colorTemperatureMinimumMireds)
+}
+
+// ColorTemperatureMaximumMireds calls the underlying ColorTemperatureMaximumMireds.
+func (x *MTRColorControlClusterStepColorTemperatureParams) ColorTemperatureMaximumMireds() *foundation.NSNumber {
+	return x.inner.ColorTemperatureMaximumMireds()
+}
+
+// SetColorTemperatureMaximumMireds calls the underlying SetColorTemperatureMaximumMireds.
+func (x *MTRColorControlClusterStepColorTemperatureParams) SetColorTemperatureMaximumMireds(colorTemperatureMaximumMireds *foundation.NSNumber) {
+	x.inner.SetColorTemperatureMaximumMireds(colorTemperatureMaximumMireds)
+}
+
+// OptionsMask calls the underlying OptionsMask.
+func (x *MTRColorControlClusterStepColorTemperatureParams) OptionsMask() *foundation.NSNumber {
+	return x.inner.OptionsMask()
+}
+
+// SetOptionsMask calls the underlying SetOptionsMask.
+func (x *MTRColorControlClusterStepColorTemperatureParams) SetOptionsMask(optionsMask *foundation.NSNumber) {
+	x.inner.SetOptionsMask(optionsMask)
+}
+
+// OptionsOverride calls the underlying OptionsOverride.
+func (x *MTRColorControlClusterStepColorTemperatureParams) OptionsOverride() *foundation.NSNumber {
+	return x.inner.OptionsOverride()
+}
+
+// SetOptionsOverride calls the underlying SetOptionsOverride.
+func (x *MTRColorControlClusterStepColorTemperatureParams) SetOptionsOverride(optionsOverride *foundation.NSNumber) {
+	x.inner.SetOptionsOverride(optionsOverride)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRColorControlClusterStepColorTemperatureParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRColorControlClusterStepColorTemperatureParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRColorControlClusterStepColorTemperatureParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRColorControlClusterStepColorTemperatureParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRColorControlClusterStepColorTemperatureParamsable is the interface implemented by [MTRColorControlClusterStepColorTemperatureParams], for mocking and DI.
+type MTRColorControlClusterStepColorTemperatureParamsable interface {
+	Unwrap() *raw.MTRColorControlClusterStepColorTemperatureParams
+	WithStepMode(stepMode *foundation.NSNumber) *MTRColorControlClusterStepColorTemperatureParams
+	WithStepSize(stepSize *foundation.NSNumber) *MTRColorControlClusterStepColorTemperatureParams
+	WithTransitionTime(transitionTime *foundation.NSNumber) *MTRColorControlClusterStepColorTemperatureParams
+	WithColorTemperatureMinimumMireds(colorTemperatureMinimumMireds *foundation.NSNumber) *MTRColorControlClusterStepColorTemperatureParams
+	WithColorTemperatureMaximumMireds(colorTemperatureMaximumMireds *foundation.NSNumber) *MTRColorControlClusterStepColorTemperatureParams
+	WithOptionsMask(optionsMask *foundation.NSNumber) *MTRColorControlClusterStepColorTemperatureParams
+	WithOptionsOverride(optionsOverride *foundation.NSNumber) *MTRColorControlClusterStepColorTemperatureParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRColorControlClusterStepColorTemperatureParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRColorControlClusterStepColorTemperatureParams
+	StepMode() *foundation.NSNumber
+	SetStepMode(stepMode *foundation.NSNumber)
+	StepSize() *foundation.NSNumber
+	SetStepSize(stepSize *foundation.NSNumber)
+	TransitionTime() *foundation.NSNumber
+	SetTransitionTime(transitionTime *foundation.NSNumber)
+	ColorTemperatureMinimumMireds() *foundation.NSNumber
+	SetColorTemperatureMinimumMireds(colorTemperatureMinimumMireds *foundation.NSNumber)
+	ColorTemperatureMaximumMireds() *foundation.NSNumber
+	SetColorTemperatureMaximumMireds(colorTemperatureMaximumMireds *foundation.NSNumber)
+	OptionsMask() *foundation.NSNumber
+	SetOptionsMask(optionsMask *foundation.NSNumber)
+	OptionsOverride() *foundation.NSNumber
+	SetOptionsOverride(optionsOverride *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRColorControlClusterStepColorTemperatureParamsable = (*MTRColorControlClusterStepColorTemperatureParams)(nil)
+

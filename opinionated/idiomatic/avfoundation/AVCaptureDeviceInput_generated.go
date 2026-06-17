@@ -67,5 +67,164 @@ func (x *CaptureDeviceInput) WithSimulatedAperture(simulatedAperture float32) *C
 	return x
 }
 
+// FollowExternalSyncDeviceVideoFrameDurationDelegate calls the underlying FollowExternalSyncDeviceVideoFrameDurationDelegate.
+func (x *CaptureDeviceInput) FollowExternalSyncDeviceVideoFrameDurationDelegate(externalSyncDevice *raw.AVExternalSyncDevice, frameDuration coremedia.CMTime, delegate raw.AVExternalSyncDeviceDelegate) {
+	x.inner.FollowExternalSyncDeviceVideoFrameDurationDelegate(externalSyncDevice, frameDuration, delegate)
+}
+
+// UnfollowExternalSyncDevice calls the underlying UnfollowExternalSyncDevice.
+func (x *CaptureDeviceInput) UnfollowExternalSyncDevice() {
+	x.inner.UnfollowExternalSyncDevice()
+}
+
+// IsMultichannelAudioModeSupported calls the underlying IsMultichannelAudioModeSupported.
+func (x *CaptureDeviceInput) IsMultichannelAudioModeSupported(multichannelAudioMode raw.AVCaptureMultichannelAudioMode) bool {
+	return x.inner.IsMultichannelAudioModeSupported(multichannelAudioMode)
+}
+
+// Device calls the underlying Device.
+func (x *CaptureDeviceInput) Device() *CaptureDevice {
+	_r := x.inner.Device()
+	if _r == nil {
+		return nil
+	}
+	return &CaptureDevice{inner: _r}
+}
+
+// IsLockedVideoFrameDurationSupported calls the underlying IsLockedVideoFrameDurationSupported.
+func (x *CaptureDeviceInput) IsLockedVideoFrameDurationSupported() bool {
+	return x.inner.IsLockedVideoFrameDurationSupported()
+}
+
+// ActiveLockedVideoFrameDuration calls the underlying ActiveLockedVideoFrameDuration.
+func (x *CaptureDeviceInput) ActiveLockedVideoFrameDuration() coremedia.CMTime {
+	return x.inner.ActiveLockedVideoFrameDuration()
+}
+
+// SetActiveLockedVideoFrameDuration calls the underlying SetActiveLockedVideoFrameDuration.
+func (x *CaptureDeviceInput) SetActiveLockedVideoFrameDuration(activeLockedVideoFrameDuration coremedia.CMTime) {
+	x.inner.SetActiveLockedVideoFrameDuration(activeLockedVideoFrameDuration)
+}
+
+// IsExternalSyncSupported calls the underlying IsExternalSyncSupported.
+func (x *CaptureDeviceInput) IsExternalSyncSupported() bool {
+	return x.inner.IsExternalSyncSupported()
+}
+
+// ActiveExternalSyncVideoFrameDuration calls the underlying ActiveExternalSyncVideoFrameDuration.
+func (x *CaptureDeviceInput) ActiveExternalSyncVideoFrameDuration() coremedia.CMTime {
+	return x.inner.ActiveExternalSyncVideoFrameDuration()
+}
+
+// ExternalSyncDevice calls the underlying ExternalSyncDevice.
+func (x *CaptureDeviceInput) ExternalSyncDevice() *ExternalSyncDevice {
+	_r := x.inner.ExternalSyncDevice()
+	if _r == nil {
+		return nil
+	}
+	return &ExternalSyncDevice{inner: _r}
+}
+
+// MultichannelAudioMode calls the underlying MultichannelAudioMode.
+func (x *CaptureDeviceInput) MultichannelAudioMode() raw.AVCaptureMultichannelAudioMode {
+	return x.inner.MultichannelAudioMode()
+}
+
+// SetMultichannelAudioMode calls the underlying SetMultichannelAudioMode.
+func (x *CaptureDeviceInput) SetMultichannelAudioMode(multichannelAudioMode raw.AVCaptureMultichannelAudioMode) {
+	x.inner.SetMultichannelAudioMode(multichannelAudioMode)
+}
+
+// IsWindNoiseRemovalSupported calls the underlying IsWindNoiseRemovalSupported.
+func (x *CaptureDeviceInput) IsWindNoiseRemovalSupported() bool {
+	return x.inner.IsWindNoiseRemovalSupported()
+}
+
+// IsWindNoiseRemovalEnabled calls the underlying IsWindNoiseRemovalEnabled.
+func (x *CaptureDeviceInput) IsWindNoiseRemovalEnabled() bool {
+	return x.inner.IsWindNoiseRemovalEnabled()
+}
+
+// SetWindNoiseRemovalEnabled calls the underlying SetWindNoiseRemovalEnabled.
+func (x *CaptureDeviceInput) SetWindNoiseRemovalEnabled(windNoiseRemovalEnabled bool) {
+	x.inner.SetWindNoiseRemovalEnabled(windNoiseRemovalEnabled)
+}
+
+// IsAudioZoomSupported calls the underlying IsAudioZoomSupported.
+func (x *CaptureDeviceInput) IsAudioZoomSupported() bool {
+	return x.inner.IsAudioZoomSupported()
+}
+
+// IsAudioZoomEnabled calls the underlying IsAudioZoomEnabled.
+func (x *CaptureDeviceInput) IsAudioZoomEnabled() bool {
+	return x.inner.IsAudioZoomEnabled()
+}
+
+// SetAudioZoomEnabled calls the underlying SetAudioZoomEnabled.
+func (x *CaptureDeviceInput) SetAudioZoomEnabled(audioZoomEnabled bool) {
+	x.inner.SetAudioZoomEnabled(audioZoomEnabled)
+}
+
+// IsCinematicVideoCaptureSupported calls the underlying IsCinematicVideoCaptureSupported.
+func (x *CaptureDeviceInput) IsCinematicVideoCaptureSupported() bool {
+	return x.inner.IsCinematicVideoCaptureSupported()
+}
+
+// IsCinematicVideoCaptureEnabled calls the underlying IsCinematicVideoCaptureEnabled.
+func (x *CaptureDeviceInput) IsCinematicVideoCaptureEnabled() bool {
+	return x.inner.IsCinematicVideoCaptureEnabled()
+}
+
+// SetCinematicVideoCaptureEnabled calls the underlying SetCinematicVideoCaptureEnabled.
+func (x *CaptureDeviceInput) SetCinematicVideoCaptureEnabled(cinematicVideoCaptureEnabled bool) {
+	x.inner.SetCinematicVideoCaptureEnabled(cinematicVideoCaptureEnabled)
+}
+
+// SimulatedAperture calls the underlying SimulatedAperture.
+func (x *CaptureDeviceInput) SimulatedAperture() float32 {
+	return x.inner.SimulatedAperture()
+}
+
+// SetSimulatedAperture calls the underlying SetSimulatedAperture.
+func (x *CaptureDeviceInput) SetSimulatedAperture(simulatedAperture float32) {
+	x.inner.SetSimulatedAperture(simulatedAperture)
+}
+
 func (x *CaptureDeviceInput) asCaptureInput() *raw.AVCaptureInput { return &x.inner.AVCaptureInput }
+
+// CaptureDeviceInputable is the interface implemented by [CaptureDeviceInput], for mocking and DI.
+type CaptureDeviceInputable interface {
+	Unwrap() *raw.AVCaptureDeviceInput
+	WithActiveLockedVideoFrameDuration(activeLockedVideoFrameDuration coremedia.CMTime) *CaptureDeviceInput
+	WithMultichannelAudioMode(multichannelAudioMode raw.AVCaptureMultichannelAudioMode) *CaptureDeviceInput
+	WithWindNoiseRemovalEnabled(windNoiseRemovalEnabled bool) *CaptureDeviceInput
+	WithAudioZoomEnabled(audioZoomEnabled bool) *CaptureDeviceInput
+	WithCinematicVideoCaptureEnabled(cinematicVideoCaptureEnabled bool) *CaptureDeviceInput
+	WithSimulatedAperture(simulatedAperture float32) *CaptureDeviceInput
+	FollowExternalSyncDeviceVideoFrameDurationDelegate(externalSyncDevice *raw.AVExternalSyncDevice, frameDuration coremedia.CMTime, delegate raw.AVExternalSyncDeviceDelegate)
+	UnfollowExternalSyncDevice()
+	IsMultichannelAudioModeSupported(multichannelAudioMode raw.AVCaptureMultichannelAudioMode) bool
+	Device() *CaptureDevice
+	IsLockedVideoFrameDurationSupported() bool
+	ActiveLockedVideoFrameDuration() coremedia.CMTime
+	SetActiveLockedVideoFrameDuration(activeLockedVideoFrameDuration coremedia.CMTime)
+	IsExternalSyncSupported() bool
+	ActiveExternalSyncVideoFrameDuration() coremedia.CMTime
+	ExternalSyncDevice() *ExternalSyncDevice
+	MultichannelAudioMode() raw.AVCaptureMultichannelAudioMode
+	SetMultichannelAudioMode(multichannelAudioMode raw.AVCaptureMultichannelAudioMode)
+	IsWindNoiseRemovalSupported() bool
+	IsWindNoiseRemovalEnabled() bool
+	SetWindNoiseRemovalEnabled(windNoiseRemovalEnabled bool)
+	IsAudioZoomSupported() bool
+	IsAudioZoomEnabled() bool
+	SetAudioZoomEnabled(audioZoomEnabled bool)
+	IsCinematicVideoCaptureSupported() bool
+	IsCinematicVideoCaptureEnabled() bool
+	SetCinematicVideoCaptureEnabled(cinematicVideoCaptureEnabled bool)
+	SimulatedAperture() float32
+	SetSimulatedAperture(simulatedAperture float32)
+}
+
+var _ CaptureDeviceInputable = (*CaptureDeviceInput)(nil)
 

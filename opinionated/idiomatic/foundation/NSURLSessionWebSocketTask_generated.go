@@ -36,17 +36,43 @@ func (x *URLSessionWebSocketTask) WithMaximumMessageSize(maximumMessageSize int)
 func (x *URLSessionWebSocketTask) SendMessage(ctx context.Context, message *raw.NSURLSessionWebSocketMessage) error {
 	_ch := make(chan error, 1)
 	x.inner.SendMessageCompletionHandler(message, func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
 		return err
 	case <-ctx.Done():
 		return ctx.Err()
+	}
+}
+
+// ReceiveMessage blocks until the operation completes or ctx is cancelled.
+func (x *URLSessionWebSocketTask) ReceiveMessage(ctx context.Context) (*URLSessionWebSocketMessage, error) {
+	type _result struct {
+		val *URLSessionWebSocketMessage
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReceiveMessageWithCompletionHandler(func(_p0 *raw.NSURLSessionWebSocketMessage, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &URLSessionWebSocketMessage{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *URLSessionWebSocketMessage
+		return _zero, ctx.Err()
 	}
 }
 
@@ -54,11 +80,11 @@ func (x *URLSessionWebSocketTask) SendMessage(ctx context.Context, message *raw.
 func (x *URLSessionWebSocketTask) SendPingWithPongReceiveHandler(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.SendPingWithPongReceiveHandler(func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -68,7 +94,52 @@ func (x *URLSessionWebSocketTask) SendPingWithPongReceiveHandler(ctx context.Con
 	}
 }
 
+// CancelWithCloseCodeReason calls the underlying CancelWithCloseCodeReason.
+func (x *URLSessionWebSocketTask) CancelWithCloseCodeReason(closeCode raw.NSURLSessionWebSocketCloseCode, reason *raw.NSData) {
+	x.inner.CancelWithCloseCodeReason(closeCode, reason)
+}
+
+// MaximumMessageSize calls the underlying MaximumMessageSize.
+func (x *URLSessionWebSocketTask) MaximumMessageSize() int {
+	return x.inner.MaximumMessageSize()
+}
+
+// SetMaximumMessageSize calls the underlying SetMaximumMessageSize.
+func (x *URLSessionWebSocketTask) SetMaximumMessageSize(maximumMessageSize int) {
+	x.inner.SetMaximumMessageSize(maximumMessageSize)
+}
+
+// CloseCode calls the underlying CloseCode.
+func (x *URLSessionWebSocketTask) CloseCode() raw.NSURLSessionWebSocketCloseCode {
+	return x.inner.CloseCode()
+}
+
+// CloseReason calls the underlying CloseReason.
+func (x *URLSessionWebSocketTask) CloseReason() *Data {
+	_r := x.inner.CloseReason()
+	if _r == nil {
+		return nil
+	}
+	return &Data{inner: _r}
+}
+
 func (x *URLSessionWebSocketTask) asURLSessionTask() *raw.NSURLSessionTask { return &x.inner.NSURLSessionTask }
 
 func (x *URLSessionWebSocketTask) asObject() *raw.NSObject { return &x.inner.NSURLSessionTask.NSObject }
+
+// URLSessionWebSocketTaskable is the interface implemented by [URLSessionWebSocketTask], for mocking and DI.
+type URLSessionWebSocketTaskable interface {
+	Unwrap() *raw.NSURLSessionWebSocketTask
+	WithMaximumMessageSize(maximumMessageSize int) *URLSessionWebSocketTask
+	SendMessage(ctx context.Context, message *raw.NSURLSessionWebSocketMessage) error
+	ReceiveMessage(ctx context.Context) (*URLSessionWebSocketMessage, error)
+	SendPingWithPongReceiveHandler(ctx context.Context) error
+	CancelWithCloseCodeReason(closeCode raw.NSURLSessionWebSocketCloseCode, reason *raw.NSData)
+	MaximumMessageSize() int
+	SetMaximumMessageSize(maximumMessageSize int)
+	CloseCode() raw.NSURLSessionWebSocketCloseCode
+	CloseReason() *Data
+}
+
+var _ URLSessionWebSocketTaskable = (*URLSessionWebSocketTask)(nil)
 

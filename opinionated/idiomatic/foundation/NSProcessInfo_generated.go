@@ -8,6 +8,7 @@ import (
 	"context"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -37,17 +38,150 @@ func (x *ProcessInfo) WithAutomaticTerminationSupportEnabled(automaticTerminatio
 	return x
 }
 
+// OperatingSystem calls the underlying OperatingSystem.
+func (x *ProcessInfo) OperatingSystem() uint {
+	return x.inner.OperatingSystem()
+}
+
+// OperatingSystemName calls the underlying OperatingSystemName.
+func (x *ProcessInfo) OperatingSystemName() *String {
+	_r := x.inner.OperatingSystemName()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// IsOperatingSystemAtLeastVersion calls the underlying IsOperatingSystemAtLeastVersion.
+func (x *ProcessInfo) IsOperatingSystemAtLeastVersion(version raw.NSOperatingSystemVersion) bool {
+	return x.inner.IsOperatingSystemAtLeastVersion(version)
+}
+
+// DisableSuddenTermination calls the underlying DisableSuddenTermination.
+func (x *ProcessInfo) DisableSuddenTermination() {
+	x.inner.DisableSuddenTermination()
+}
+
+// EnableSuddenTermination calls the underlying EnableSuddenTermination.
+func (x *ProcessInfo) EnableSuddenTermination() {
+	x.inner.EnableSuddenTermination()
+}
+
+// DisableAutomaticTermination calls the underlying DisableAutomaticTermination.
+func (x *ProcessInfo) DisableAutomaticTermination(reason string) {
+	x.inner.DisableAutomaticTermination(foundation.NSStringStringWithUTF8String(reason))
+}
+
+// EnableAutomaticTermination calls the underlying EnableAutomaticTermination.
+func (x *ProcessInfo) EnableAutomaticTermination(reason string) {
+	x.inner.EnableAutomaticTermination(foundation.NSStringStringWithUTF8String(reason))
+}
+
+// Environment calls the underlying Environment.
+func (x *ProcessInfo) Environment() *raw.NSDictionary[*raw.NSString, *raw.NSString] {
+	return x.inner.Environment()
+}
+
 // Arguments returns the collection as a Go slice.
-func (x *ProcessInfo) Arguments() []*raw.NSString {
+func (x *ProcessInfo) Arguments() []string {
 	arr := x.inner.Arguments()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// HostName calls the underlying HostName.
+func (x *ProcessInfo) HostName() *String {
+	_r := x.inner.HostName()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &String{inner: _r}
+}
+
+// ProcessName calls the underlying ProcessName.
+func (x *ProcessInfo) ProcessName() *String {
+	_r := x.inner.ProcessName()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SetProcessName calls the underlying SetProcessName.
+func (x *ProcessInfo) SetProcessName(processName string) {
+	x.inner.SetProcessName(foundation.NSStringStringWithUTF8String(processName))
+}
+
+// ProcessIdentifier calls the underlying ProcessIdentifier.
+func (x *ProcessInfo) ProcessIdentifier() int {
+	return x.inner.ProcessIdentifier()
+}
+
+// GloballyUniqueString calls the underlying GloballyUniqueString.
+func (x *ProcessInfo) GloballyUniqueString() *String {
+	_r := x.inner.GloballyUniqueString()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// OperatingSystemVersionString calls the underlying OperatingSystemVersionString.
+func (x *ProcessInfo) OperatingSystemVersionString() *String {
+	_r := x.inner.OperatingSystemVersionString()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// OperatingSystemVersion calls the underlying OperatingSystemVersion.
+func (x *ProcessInfo) OperatingSystemVersion() raw.NSOperatingSystemVersion {
+	return x.inner.OperatingSystemVersion()
+}
+
+// ProcessorCount calls the underlying ProcessorCount.
+func (x *ProcessInfo) ProcessorCount() uint {
+	return x.inner.ProcessorCount()
+}
+
+// ActiveProcessorCount calls the underlying ActiveProcessorCount.
+func (x *ProcessInfo) ActiveProcessorCount() uint {
+	return x.inner.ActiveProcessorCount()
+}
+
+// PhysicalMemory calls the underlying PhysicalMemory.
+func (x *ProcessInfo) PhysicalMemory() uint64 {
+	return x.inner.PhysicalMemory()
+}
+
+// SystemUptime calls the underlying SystemUptime.
+func (x *ProcessInfo) SystemUptime() float64 {
+	return x.inner.SystemUptime()
+}
+
+// AutomaticTerminationSupportEnabled calls the underlying AutomaticTerminationSupportEnabled.
+func (x *ProcessInfo) AutomaticTerminationSupportEnabled() bool {
+	return x.inner.AutomaticTerminationSupportEnabled()
+}
+
+// SetAutomaticTerminationSupportEnabled calls the underlying SetAutomaticTerminationSupportEnabled.
+func (x *ProcessInfo) SetAutomaticTerminationSupportEnabled(automaticTerminationSupportEnabled bool) {
+	x.inner.SetAutomaticTerminationSupportEnabled(automaticTerminationSupportEnabled)
+}
+
+// BeginActivityWithOptionsReason calls the underlying BeginActivityWithOptionsReason.
+func (x *ProcessInfo) BeginActivityWithOptionsReason(options raw.NSActivityOptions, reason string) raw.NSObjectProtocol {
+	return x.inner.BeginActivityWithOptionsReason(options, foundation.NSStringStringWithUTF8String(reason))
+}
+
+// EndActivity calls the underlying EndActivity.
+func (x *ProcessInfo) EndActivity(activity raw.NSObjectProtocol) {
+	x.inner.EndActivity(activity)
 }
 
 // PerformActivityWithOptionsReasonUsing blocks until the operation completes or ctx is cancelled.
@@ -64,5 +198,89 @@ func (x *ProcessInfo) PerformActivityWithOptionsReasonUsing(ctx context.Context,
 	}
 }
 
+// UserName calls the underlying UserName.
+func (x *ProcessInfo) UserName() *String {
+	_r := x.inner.UserName()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// FullUserName calls the underlying FullUserName.
+func (x *ProcessInfo) FullUserName() *String {
+	_r := x.inner.FullUserName()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// ThermalState calls the underlying ThermalState.
+func (x *ProcessInfo) ThermalState() raw.NSProcessInfoThermalState {
+	return x.inner.ThermalState()
+}
+
+// IsLowPowerModeEnabled calls the underlying IsLowPowerModeEnabled.
+func (x *ProcessInfo) IsLowPowerModeEnabled() bool {
+	return x.inner.IsLowPowerModeEnabled()
+}
+
+// IsMacCatalystApp calls the underlying IsMacCatalystApp.
+func (x *ProcessInfo) IsMacCatalystApp() bool {
+	return x.inner.IsMacCatalystApp()
+}
+
+// IsiOSAppOnMac calls the underlying IsiOSAppOnMac.
+func (x *ProcessInfo) IsiOSAppOnMac() bool {
+	return x.inner.IsiOSAppOnMac()
+}
+
+// IsiOSAppOnVision calls the underlying IsiOSAppOnVision.
+func (x *ProcessInfo) IsiOSAppOnVision() bool {
+	return x.inner.IsiOSAppOnVision()
+}
+
 func (x *ProcessInfo) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// ProcessInfoable is the interface implemented by [ProcessInfo], for mocking and DI.
+type ProcessInfoable interface {
+	Unwrap() *raw.NSProcessInfo
+	WithProcessName(processName string) *ProcessInfo
+	WithAutomaticTerminationSupportEnabled(automaticTerminationSupportEnabled bool) *ProcessInfo
+	OperatingSystem() uint
+	OperatingSystemName() *String
+	IsOperatingSystemAtLeastVersion(version raw.NSOperatingSystemVersion) bool
+	DisableSuddenTermination()
+	EnableSuddenTermination()
+	DisableAutomaticTermination(reason string)
+	EnableAutomaticTermination(reason string)
+	Environment() *raw.NSDictionary[*raw.NSString, *raw.NSString]
+	Arguments() []string
+	HostName() *String
+	ProcessName() *String
+	SetProcessName(processName string)
+	ProcessIdentifier() int
+	GloballyUniqueString() *String
+	OperatingSystemVersionString() *String
+	OperatingSystemVersion() raw.NSOperatingSystemVersion
+	ProcessorCount() uint
+	ActiveProcessorCount() uint
+	PhysicalMemory() uint64
+	SystemUptime() float64
+	AutomaticTerminationSupportEnabled() bool
+	SetAutomaticTerminationSupportEnabled(automaticTerminationSupportEnabled bool)
+	BeginActivityWithOptionsReason(options raw.NSActivityOptions, reason string) raw.NSObjectProtocol
+	EndActivity(activity raw.NSObjectProtocol)
+	PerformActivityWithOptionsReasonUsing(ctx context.Context, options raw.NSActivityOptions, reason string) error
+	UserName() *String
+	FullUserName() *String
+	ThermalState() raw.NSProcessInfoThermalState
+	IsLowPowerModeEnabled() bool
+	IsMacCatalystApp() bool
+	IsiOSAppOnMac() bool
+	IsiOSAppOnVision() bool
+}
+
+var _ ProcessInfoable = (*ProcessInfo)(nil)
 

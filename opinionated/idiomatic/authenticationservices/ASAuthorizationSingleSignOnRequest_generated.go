@@ -7,6 +7,7 @@ package authenticationservices
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -53,14 +54,40 @@ func (x *AuthorizationSingleSignOnRequest) AuthorizationOptions() []*foundation.
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSURLQueryItem, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSURLQueryItem {
+		return foundation.NSURLQueryItemFromID(purego.Retain(_id))
+	})
+}
+
+// SetAuthorizationOptions calls the underlying SetAuthorizationOptions.
+func (x *AuthorizationSingleSignOnRequest) SetAuthorizationOptions(authorizationOptions *foundation.NSArray[*foundation.NSURLQueryItem]) {
+	x.inner.SetAuthorizationOptions(authorizationOptions)
+}
+
+// IsUserInterfaceEnabled calls the underlying IsUserInterfaceEnabled.
+func (x *AuthorizationSingleSignOnRequest) IsUserInterfaceEnabled() bool {
+	return x.inner.IsUserInterfaceEnabled()
+}
+
+// SetUserInterfaceEnabled calls the underlying SetUserInterfaceEnabled.
+func (x *AuthorizationSingleSignOnRequest) SetUserInterfaceEnabled(userInterfaceEnabled bool) {
+	x.inner.SetUserInterfaceEnabled(userInterfaceEnabled)
 }
 
 func (x *AuthorizationSingleSignOnRequest) asAuthorizationOpenIDRequest() *raw.ASAuthorizationOpenIDRequest { return &x.inner.ASAuthorizationOpenIDRequest }
 
 func (x *AuthorizationSingleSignOnRequest) asAuthorizationRequest() *raw.ASAuthorizationRequest { return &x.inner.ASAuthorizationOpenIDRequest.ASAuthorizationRequest }
+
+// AuthorizationSingleSignOnRequestable is the interface implemented by [AuthorizationSingleSignOnRequest], for mocking and DI.
+type AuthorizationSingleSignOnRequestable interface {
+	Unwrap() *raw.ASAuthorizationSingleSignOnRequest
+	WithAuthorizationOptions(items ...*foundation.NSURLQueryItem) *AuthorizationSingleSignOnRequest
+	WithUserInterfaceEnabled(userInterfaceEnabled bool) *AuthorizationSingleSignOnRequest
+	AuthorizationOptions() []*foundation.NSURLQueryItem
+	SetAuthorizationOptions(authorizationOptions *foundation.NSArray[*foundation.NSURLQueryItem])
+	IsUserInterfaceEnabled() bool
+	SetUserInterfaceEnabled(userInterfaceEnabled bool)
+}
+
+var _ AuthorizationSingleSignOnRequestable = (*AuthorizationSingleSignOnRequest)(nil)
 

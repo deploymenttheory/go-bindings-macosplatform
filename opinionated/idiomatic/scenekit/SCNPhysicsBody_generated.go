@@ -167,3 +167,368 @@ func (x *PhysicsBody) WithAngularRestingThreshold(angularRestingThreshold float6
 	return x
 }
 
+// ApplyForceImpulse calls the underlying ApplyForceImpulse.
+func (x *PhysicsBody) ApplyForceImpulse(direction raw.SCNVector3, impulse bool) {
+	x.inner.ApplyForceImpulse(direction, impulse)
+}
+
+// ApplyForceAtPositionImpulse calls the underlying ApplyForceAtPositionImpulse.
+func (x *PhysicsBody) ApplyForceAtPositionImpulse(direction raw.SCNVector3, position raw.SCNVector3, impulse bool) {
+	x.inner.ApplyForceAtPositionImpulse(direction, position, impulse)
+}
+
+// ApplyTorqueImpulse calls the underlying ApplyTorqueImpulse.
+func (x *PhysicsBody) ApplyTorqueImpulse(torque raw.SCNVector4, impulse bool) {
+	x.inner.ApplyTorqueImpulse(torque, impulse)
+}
+
+// ClearAllForces calls the underlying ClearAllForces.
+func (x *PhysicsBody) ClearAllForces() {
+	x.inner.ClearAllForces()
+}
+
+// ResetTransform calls the underlying ResetTransform.
+func (x *PhysicsBody) ResetTransform() {
+	x.inner.ResetTransform()
+}
+
+// SetResting calls the underlying SetResting.
+func (x *PhysicsBody) SetResting(resting bool) {
+	x.inner.SetResting(resting)
+}
+
+// Type calls the underlying Type.
+func (x *PhysicsBody) Type() raw.SCNPhysicsBodyType {
+	return x.inner.Type()
+}
+
+// SetType calls the underlying SetType.
+func (x *PhysicsBody) SetType(type_ raw.SCNPhysicsBodyType) {
+	x.inner.SetType(type_)
+}
+
+// Mass calls the underlying Mass.
+func (x *PhysicsBody) Mass() float64 {
+	return x.inner.Mass()
+}
+
+// SetMass calls the underlying SetMass.
+func (x *PhysicsBody) SetMass(mass float64) {
+	x.inner.SetMass(mass)
+}
+
+// MomentOfInertia calls the underlying MomentOfInertia.
+func (x *PhysicsBody) MomentOfInertia() raw.SCNVector3 {
+	return x.inner.MomentOfInertia()
+}
+
+// SetMomentOfInertia calls the underlying SetMomentOfInertia.
+func (x *PhysicsBody) SetMomentOfInertia(momentOfInertia raw.SCNVector3) {
+	x.inner.SetMomentOfInertia(momentOfInertia)
+}
+
+// UsesDefaultMomentOfInertia calls the underlying UsesDefaultMomentOfInertia.
+func (x *PhysicsBody) UsesDefaultMomentOfInertia() bool {
+	return x.inner.UsesDefaultMomentOfInertia()
+}
+
+// SetUsesDefaultMomentOfInertia calls the underlying SetUsesDefaultMomentOfInertia.
+func (x *PhysicsBody) SetUsesDefaultMomentOfInertia(usesDefaultMomentOfInertia bool) {
+	x.inner.SetUsesDefaultMomentOfInertia(usesDefaultMomentOfInertia)
+}
+
+// Charge calls the underlying Charge.
+func (x *PhysicsBody) Charge() float64 {
+	return x.inner.Charge()
+}
+
+// SetCharge calls the underlying SetCharge.
+func (x *PhysicsBody) SetCharge(charge float64) {
+	x.inner.SetCharge(charge)
+}
+
+// Friction calls the underlying Friction.
+func (x *PhysicsBody) Friction() float64 {
+	return x.inner.Friction()
+}
+
+// SetFriction calls the underlying SetFriction.
+func (x *PhysicsBody) SetFriction(friction float64) {
+	x.inner.SetFriction(friction)
+}
+
+// Restitution calls the underlying Restitution.
+func (x *PhysicsBody) Restitution() float64 {
+	return x.inner.Restitution()
+}
+
+// SetRestitution calls the underlying SetRestitution.
+func (x *PhysicsBody) SetRestitution(restitution float64) {
+	x.inner.SetRestitution(restitution)
+}
+
+// RollingFriction calls the underlying RollingFriction.
+func (x *PhysicsBody) RollingFriction() float64 {
+	return x.inner.RollingFriction()
+}
+
+// SetRollingFriction calls the underlying SetRollingFriction.
+func (x *PhysicsBody) SetRollingFriction(rollingFriction float64) {
+	x.inner.SetRollingFriction(rollingFriction)
+}
+
+// PhysicsShape calls the underlying PhysicsShape.
+func (x *PhysicsBody) PhysicsShape() *PhysicsShape {
+	_r := x.inner.PhysicsShape()
+	if _r == nil {
+		return nil
+	}
+	return &PhysicsShape{inner: _r}
+}
+
+// SetPhysicsShape calls the underlying SetPhysicsShape.
+func (x *PhysicsBody) SetPhysicsShape(physicsShape *raw.SCNPhysicsShape) {
+	x.inner.SetPhysicsShape(physicsShape)
+}
+
+// IsResting calls the underlying IsResting.
+func (x *PhysicsBody) IsResting() bool {
+	return x.inner.IsResting()
+}
+
+// AllowsResting calls the underlying AllowsResting.
+func (x *PhysicsBody) AllowsResting() bool {
+	return x.inner.AllowsResting()
+}
+
+// SetAllowsResting calls the underlying SetAllowsResting.
+func (x *PhysicsBody) SetAllowsResting(allowsResting bool) {
+	x.inner.SetAllowsResting(allowsResting)
+}
+
+// Velocity calls the underlying Velocity.
+func (x *PhysicsBody) Velocity() raw.SCNVector3 {
+	return x.inner.Velocity()
+}
+
+// SetVelocity calls the underlying SetVelocity.
+func (x *PhysicsBody) SetVelocity(velocity raw.SCNVector3) {
+	x.inner.SetVelocity(velocity)
+}
+
+// AngularVelocity calls the underlying AngularVelocity.
+func (x *PhysicsBody) AngularVelocity() raw.SCNVector4 {
+	return x.inner.AngularVelocity()
+}
+
+// SetAngularVelocity calls the underlying SetAngularVelocity.
+func (x *PhysicsBody) SetAngularVelocity(angularVelocity raw.SCNVector4) {
+	x.inner.SetAngularVelocity(angularVelocity)
+}
+
+// Damping calls the underlying Damping.
+func (x *PhysicsBody) Damping() float64 {
+	return x.inner.Damping()
+}
+
+// SetDamping calls the underlying SetDamping.
+func (x *PhysicsBody) SetDamping(damping float64) {
+	x.inner.SetDamping(damping)
+}
+
+// AngularDamping calls the underlying AngularDamping.
+func (x *PhysicsBody) AngularDamping() float64 {
+	return x.inner.AngularDamping()
+}
+
+// SetAngularDamping calls the underlying SetAngularDamping.
+func (x *PhysicsBody) SetAngularDamping(angularDamping float64) {
+	x.inner.SetAngularDamping(angularDamping)
+}
+
+// VelocityFactor calls the underlying VelocityFactor.
+func (x *PhysicsBody) VelocityFactor() raw.SCNVector3 {
+	return x.inner.VelocityFactor()
+}
+
+// SetVelocityFactor calls the underlying SetVelocityFactor.
+func (x *PhysicsBody) SetVelocityFactor(velocityFactor raw.SCNVector3) {
+	x.inner.SetVelocityFactor(velocityFactor)
+}
+
+// AngularVelocityFactor calls the underlying AngularVelocityFactor.
+func (x *PhysicsBody) AngularVelocityFactor() raw.SCNVector3 {
+	return x.inner.AngularVelocityFactor()
+}
+
+// SetAngularVelocityFactor calls the underlying SetAngularVelocityFactor.
+func (x *PhysicsBody) SetAngularVelocityFactor(angularVelocityFactor raw.SCNVector3) {
+	x.inner.SetAngularVelocityFactor(angularVelocityFactor)
+}
+
+// CategoryBitMask calls the underlying CategoryBitMask.
+func (x *PhysicsBody) CategoryBitMask() uint {
+	return x.inner.CategoryBitMask()
+}
+
+// SetCategoryBitMask calls the underlying SetCategoryBitMask.
+func (x *PhysicsBody) SetCategoryBitMask(categoryBitMask uint) {
+	x.inner.SetCategoryBitMask(categoryBitMask)
+}
+
+// CollisionBitMask calls the underlying CollisionBitMask.
+func (x *PhysicsBody) CollisionBitMask() uint {
+	return x.inner.CollisionBitMask()
+}
+
+// SetCollisionBitMask calls the underlying SetCollisionBitMask.
+func (x *PhysicsBody) SetCollisionBitMask(collisionBitMask uint) {
+	x.inner.SetCollisionBitMask(collisionBitMask)
+}
+
+// ContactTestBitMask calls the underlying ContactTestBitMask.
+func (x *PhysicsBody) ContactTestBitMask() uint {
+	return x.inner.ContactTestBitMask()
+}
+
+// SetContactTestBitMask calls the underlying SetContactTestBitMask.
+func (x *PhysicsBody) SetContactTestBitMask(contactTestBitMask uint) {
+	x.inner.SetContactTestBitMask(contactTestBitMask)
+}
+
+// IsAffectedByGravity calls the underlying IsAffectedByGravity.
+func (x *PhysicsBody) IsAffectedByGravity() bool {
+	return x.inner.IsAffectedByGravity()
+}
+
+// SetAffectedByGravity calls the underlying SetAffectedByGravity.
+func (x *PhysicsBody) SetAffectedByGravity(affectedByGravity bool) {
+	x.inner.SetAffectedByGravity(affectedByGravity)
+}
+
+// ContinuousCollisionDetectionThreshold calls the underlying ContinuousCollisionDetectionThreshold.
+func (x *PhysicsBody) ContinuousCollisionDetectionThreshold() float64 {
+	return x.inner.ContinuousCollisionDetectionThreshold()
+}
+
+// SetContinuousCollisionDetectionThreshold calls the underlying SetContinuousCollisionDetectionThreshold.
+func (x *PhysicsBody) SetContinuousCollisionDetectionThreshold(continuousCollisionDetectionThreshold float64) {
+	x.inner.SetContinuousCollisionDetectionThreshold(continuousCollisionDetectionThreshold)
+}
+
+// CenterOfMassOffset calls the underlying CenterOfMassOffset.
+func (x *PhysicsBody) CenterOfMassOffset() raw.SCNVector3 {
+	return x.inner.CenterOfMassOffset()
+}
+
+// SetCenterOfMassOffset calls the underlying SetCenterOfMassOffset.
+func (x *PhysicsBody) SetCenterOfMassOffset(centerOfMassOffset raw.SCNVector3) {
+	x.inner.SetCenterOfMassOffset(centerOfMassOffset)
+}
+
+// LinearRestingThreshold calls the underlying LinearRestingThreshold.
+func (x *PhysicsBody) LinearRestingThreshold() float64 {
+	return x.inner.LinearRestingThreshold()
+}
+
+// SetLinearRestingThreshold calls the underlying SetLinearRestingThreshold.
+func (x *PhysicsBody) SetLinearRestingThreshold(linearRestingThreshold float64) {
+	x.inner.SetLinearRestingThreshold(linearRestingThreshold)
+}
+
+// AngularRestingThreshold calls the underlying AngularRestingThreshold.
+func (x *PhysicsBody) AngularRestingThreshold() float64 {
+	return x.inner.AngularRestingThreshold()
+}
+
+// SetAngularRestingThreshold calls the underlying SetAngularRestingThreshold.
+func (x *PhysicsBody) SetAngularRestingThreshold(angularRestingThreshold float64) {
+	x.inner.SetAngularRestingThreshold(angularRestingThreshold)
+}
+
+// PhysicsBodyable is the interface implemented by [PhysicsBody], for mocking and DI.
+type PhysicsBodyable interface {
+	Unwrap() *raw.SCNPhysicsBody
+	WithType(type_ raw.SCNPhysicsBodyType) *PhysicsBody
+	WithMass(mass float64) *PhysicsBody
+	WithMomentOfInertia(momentOfInertia raw.SCNVector3) *PhysicsBody
+	WithUsesDefaultMomentOfInertia(usesDefaultMomentOfInertia bool) *PhysicsBody
+	WithCharge(charge float64) *PhysicsBody
+	WithFriction(friction float64) *PhysicsBody
+	WithRestitution(restitution float64) *PhysicsBody
+	WithRollingFriction(rollingFriction float64) *PhysicsBody
+	WithPhysicsShape(physicsShape *raw.SCNPhysicsShape) *PhysicsBody
+	WithAllowsResting(allowsResting bool) *PhysicsBody
+	WithVelocity(velocity raw.SCNVector3) *PhysicsBody
+	WithAngularVelocity(angularVelocity raw.SCNVector4) *PhysicsBody
+	WithDamping(damping float64) *PhysicsBody
+	WithAngularDamping(angularDamping float64) *PhysicsBody
+	WithVelocityFactor(velocityFactor raw.SCNVector3) *PhysicsBody
+	WithAngularVelocityFactor(angularVelocityFactor raw.SCNVector3) *PhysicsBody
+	WithCategoryBitMask(categoryBitMask uint) *PhysicsBody
+	WithCollisionBitMask(collisionBitMask uint) *PhysicsBody
+	WithContactTestBitMask(contactTestBitMask uint) *PhysicsBody
+	WithAffectedByGravity(affectedByGravity bool) *PhysicsBody
+	WithContinuousCollisionDetectionThreshold(continuousCollisionDetectionThreshold float64) *PhysicsBody
+	WithCenterOfMassOffset(centerOfMassOffset raw.SCNVector3) *PhysicsBody
+	WithLinearRestingThreshold(linearRestingThreshold float64) *PhysicsBody
+	WithAngularRestingThreshold(angularRestingThreshold float64) *PhysicsBody
+	ApplyForceImpulse(direction raw.SCNVector3, impulse bool)
+	ApplyForceAtPositionImpulse(direction raw.SCNVector3, position raw.SCNVector3, impulse bool)
+	ApplyTorqueImpulse(torque raw.SCNVector4, impulse bool)
+	ClearAllForces()
+	ResetTransform()
+	SetResting(resting bool)
+	Type() raw.SCNPhysicsBodyType
+	SetType(type_ raw.SCNPhysicsBodyType)
+	Mass() float64
+	SetMass(mass float64)
+	MomentOfInertia() raw.SCNVector3
+	SetMomentOfInertia(momentOfInertia raw.SCNVector3)
+	UsesDefaultMomentOfInertia() bool
+	SetUsesDefaultMomentOfInertia(usesDefaultMomentOfInertia bool)
+	Charge() float64
+	SetCharge(charge float64)
+	Friction() float64
+	SetFriction(friction float64)
+	Restitution() float64
+	SetRestitution(restitution float64)
+	RollingFriction() float64
+	SetRollingFriction(rollingFriction float64)
+	PhysicsShape() *PhysicsShape
+	SetPhysicsShape(physicsShape *raw.SCNPhysicsShape)
+	IsResting() bool
+	AllowsResting() bool
+	SetAllowsResting(allowsResting bool)
+	Velocity() raw.SCNVector3
+	SetVelocity(velocity raw.SCNVector3)
+	AngularVelocity() raw.SCNVector4
+	SetAngularVelocity(angularVelocity raw.SCNVector4)
+	Damping() float64
+	SetDamping(damping float64)
+	AngularDamping() float64
+	SetAngularDamping(angularDamping float64)
+	VelocityFactor() raw.SCNVector3
+	SetVelocityFactor(velocityFactor raw.SCNVector3)
+	AngularVelocityFactor() raw.SCNVector3
+	SetAngularVelocityFactor(angularVelocityFactor raw.SCNVector3)
+	CategoryBitMask() uint
+	SetCategoryBitMask(categoryBitMask uint)
+	CollisionBitMask() uint
+	SetCollisionBitMask(collisionBitMask uint)
+	ContactTestBitMask() uint
+	SetContactTestBitMask(contactTestBitMask uint)
+	IsAffectedByGravity() bool
+	SetAffectedByGravity(affectedByGravity bool)
+	ContinuousCollisionDetectionThreshold() float64
+	SetContinuousCollisionDetectionThreshold(continuousCollisionDetectionThreshold float64)
+	CenterOfMassOffset() raw.SCNVector3
+	SetCenterOfMassOffset(centerOfMassOffset raw.SCNVector3)
+	LinearRestingThreshold() float64
+	SetLinearRestingThreshold(linearRestingThreshold float64)
+	AngularRestingThreshold() float64
+	SetAngularRestingThreshold(angularRestingThreshold float64)
+}
+
+var _ PhysicsBodyable = (*PhysicsBody)(nil)
+

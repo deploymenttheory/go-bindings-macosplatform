@@ -29,3 +29,10 @@ func (x *UnitPressure) asUnit() *raw.NSUnit { return &x.inner.NSDimension.NSUnit
 
 func (x *UnitPressure) asObject() *raw.NSObject { return &x.inner.NSDimension.NSUnit.NSObject }
 
+// UnitPressureable is the interface implemented by [UnitPressure], for mocking and DI.
+type UnitPressureable interface {
+	Unwrap() *raw.NSUnitPressure
+}
+
+var _ UnitPressureable = (*UnitPressure)(nil)
+

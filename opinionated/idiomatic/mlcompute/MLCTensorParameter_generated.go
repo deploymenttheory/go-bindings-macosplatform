@@ -29,3 +29,33 @@ func (x *TensorParameter) WithIsUpdatable(isUpdatable bool) *TensorParameter {
 	return x
 }
 
+// Tensor calls the underlying Tensor.
+func (x *TensorParameter) Tensor() *Tensor {
+	_r := x.inner.Tensor()
+	if _r == nil {
+		return nil
+	}
+	return &Tensor{inner: _r}
+}
+
+// IsUpdatable calls the underlying IsUpdatable.
+func (x *TensorParameter) IsUpdatable() bool {
+	return x.inner.IsUpdatable()
+}
+
+// SetIsUpdatable calls the underlying SetIsUpdatable.
+func (x *TensorParameter) SetIsUpdatable(isUpdatable bool) {
+	x.inner.SetIsUpdatable(isUpdatable)
+}
+
+// TensorParameterable is the interface implemented by [TensorParameter], for mocking and DI.
+type TensorParameterable interface {
+	Unwrap() *raw.MLCTensorParameter
+	WithIsUpdatable(isUpdatable bool) *TensorParameter
+	Tensor() *Tensor
+	IsUpdatable() bool
+	SetIsUpdatable(isUpdatable bool)
+}
+
+var _ TensorParameterable = (*TensorParameter)(nil)
+

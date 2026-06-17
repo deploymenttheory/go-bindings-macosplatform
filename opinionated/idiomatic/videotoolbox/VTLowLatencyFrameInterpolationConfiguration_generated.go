@@ -7,6 +7,7 @@ package videotoolbox
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/videotoolbox"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -32,16 +33,58 @@ func NewLowLatencyFrameInterpolationConfigurationWithFrameWidthFrameHeightSpatia
 	return &LowLatencyFrameInterpolationConfiguration{inner: raw.VTLowLatencyFrameInterpolationConfigurationFromID(_id)}
 }
 
+// FrameWidth calls the underlying FrameWidth.
+func (x *LowLatencyFrameInterpolationConfiguration) FrameWidth() int {
+	return x.inner.FrameWidth()
+}
+
+// FrameHeight calls the underlying FrameHeight.
+func (x *LowLatencyFrameInterpolationConfiguration) FrameHeight() int {
+	return x.inner.FrameHeight()
+}
+
+// SpatialScaleFactor calls the underlying SpatialScaleFactor.
+func (x *LowLatencyFrameInterpolationConfiguration) SpatialScaleFactor() int {
+	return x.inner.SpatialScaleFactor()
+}
+
+// NumberOfInterpolatedFrames calls the underlying NumberOfInterpolatedFrames.
+func (x *LowLatencyFrameInterpolationConfiguration) NumberOfInterpolatedFrames() int {
+	return x.inner.NumberOfInterpolatedFrames()
+}
+
 // FrameSupportedPixelFormats returns the collection as a Go slice.
 func (x *LowLatencyFrameInterpolationConfiguration) FrameSupportedPixelFormats() []*foundation.NSNumber {
 	arr := x.inner.FrameSupportedPixelFormats()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
 }
+
+// SourcePixelBufferAttributes calls the underlying SourcePixelBufferAttributes.
+func (x *LowLatencyFrameInterpolationConfiguration) SourcePixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.SourcePixelBufferAttributes()
+}
+
+// DestinationPixelBufferAttributes calls the underlying DestinationPixelBufferAttributes.
+func (x *LowLatencyFrameInterpolationConfiguration) DestinationPixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.DestinationPixelBufferAttributes()
+}
+
+// LowLatencyFrameInterpolationConfigurationable is the interface implemented by [LowLatencyFrameInterpolationConfiguration], for mocking and DI.
+type LowLatencyFrameInterpolationConfigurationable interface {
+	Unwrap() *raw.VTLowLatencyFrameInterpolationConfiguration
+	FrameWidth() int
+	FrameHeight() int
+	SpatialScaleFactor() int
+	NumberOfInterpolatedFrames() int
+	FrameSupportedPixelFormats() []*foundation.NSNumber
+	SourcePixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	DestinationPixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+}
+
+var _ LowLatencyFrameInterpolationConfigurationable = (*LowLatencyFrameInterpolationConfiguration)(nil)
 

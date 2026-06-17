@@ -54,3 +54,75 @@ func (x *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) WithEndSy
 	return x
 }
 
+// Energy calls the underlying Energy.
+func (x *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) Energy() *foundation.NSNumber {
+	return x.inner.Energy()
+}
+
+// SetEnergy calls the underlying SetEnergy.
+func (x *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) SetEnergy(energy *foundation.NSNumber) {
+	x.inner.SetEnergy(energy)
+}
+
+// StartTimestamp calls the underlying StartTimestamp.
+func (x *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) StartTimestamp() *foundation.NSNumber {
+	return x.inner.StartTimestamp()
+}
+
+// SetStartTimestamp calls the underlying SetStartTimestamp.
+func (x *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) SetStartTimestamp(startTimestamp *foundation.NSNumber) {
+	x.inner.SetStartTimestamp(startTimestamp)
+}
+
+// EndTimestamp calls the underlying EndTimestamp.
+func (x *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) EndTimestamp() *foundation.NSNumber {
+	return x.inner.EndTimestamp()
+}
+
+// SetEndTimestamp calls the underlying SetEndTimestamp.
+func (x *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) SetEndTimestamp(endTimestamp *foundation.NSNumber) {
+	x.inner.SetEndTimestamp(endTimestamp)
+}
+
+// StartSystime calls the underlying StartSystime.
+func (x *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) StartSystime() *foundation.NSNumber {
+	return x.inner.StartSystime()
+}
+
+// SetStartSystime calls the underlying SetStartSystime.
+func (x *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) SetStartSystime(startSystime *foundation.NSNumber) {
+	x.inner.SetStartSystime(startSystime)
+}
+
+// EndSystime calls the underlying EndSystime.
+func (x *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) EndSystime() *foundation.NSNumber {
+	return x.inner.EndSystime()
+}
+
+// SetEndSystime calls the underlying SetEndSystime.
+func (x *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) SetEndSystime(endSystime *foundation.NSNumber) {
+	x.inner.SetEndSystime(endSystime)
+}
+
+// MTRElectricalEnergyMeasurementClusterEnergyMeasurementStructable is the interface implemented by [MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct], for mocking and DI.
+type MTRElectricalEnergyMeasurementClusterEnergyMeasurementStructable interface {
+	Unwrap() *raw.MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct
+	WithEnergy(energy *foundation.NSNumber) *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct
+	WithStartTimestamp(startTimestamp *foundation.NSNumber) *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct
+	WithEndTimestamp(endTimestamp *foundation.NSNumber) *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct
+	WithStartSystime(startSystime *foundation.NSNumber) *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct
+	WithEndSystime(endSystime *foundation.NSNumber) *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct
+	Energy() *foundation.NSNumber
+	SetEnergy(energy *foundation.NSNumber)
+	StartTimestamp() *foundation.NSNumber
+	SetStartTimestamp(startTimestamp *foundation.NSNumber)
+	EndTimestamp() *foundation.NSNumber
+	SetEndTimestamp(endTimestamp *foundation.NSNumber)
+	StartSystime() *foundation.NSNumber
+	SetStartSystime(startSystime *foundation.NSNumber)
+	EndSystime() *foundation.NSNumber
+	SetEndSystime(endSystime *foundation.NSNumber)
+}
+
+var _ MTRElectricalEnergyMeasurementClusterEnergyMeasurementStructable = (*MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct)(nil)
+

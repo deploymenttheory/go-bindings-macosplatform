@@ -23,3 +23,36 @@ func NewShareAccessRequester() *ShareAccessRequester {
 	return &ShareAccessRequester{inner: raw.CKShareAccessRequesterFromID(_id)}
 }
 
+// UserIdentity calls the underlying UserIdentity.
+func (x *ShareAccessRequester) UserIdentity() *UserIdentity {
+	_r := x.inner.UserIdentity()
+	if _r == nil {
+		return nil
+	}
+	return &UserIdentity{inner: _r}
+}
+
+// ParticipantLookupInfo calls the underlying ParticipantLookupInfo.
+func (x *ShareAccessRequester) ParticipantLookupInfo() *UserIdentityLookupInfo {
+	_r := x.inner.ParticipantLookupInfo()
+	if _r == nil {
+		return nil
+	}
+	return &UserIdentityLookupInfo{inner: _r}
+}
+
+// Contact calls the underlying Contact.
+func (x *ShareAccessRequester) Contact() objc.ID {
+	return x.inner.Contact()
+}
+
+// ShareAccessRequesterable is the interface implemented by [ShareAccessRequester], for mocking and DI.
+type ShareAccessRequesterable interface {
+	Unwrap() *raw.CKShareAccessRequester
+	UserIdentity() *UserIdentity
+	ParticipantLookupInfo() *UserIdentityLookupInfo
+	Contact() objc.ID
+}
+
+var _ ShareAccessRequesterable = (*ShareAccessRequester)(nil)
+

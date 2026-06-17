@@ -61,5 +61,77 @@ func (x *ExtendedNoteOnEvent) WithDuration(duration float64) *ExtendedNoteOnEven
 	return x
 }
 
+// MidiNote calls the underlying MidiNote.
+func (x *ExtendedNoteOnEvent) MidiNote() float32 {
+	return x.inner.MidiNote()
+}
+
+// SetMidiNote calls the underlying SetMidiNote.
+func (x *ExtendedNoteOnEvent) SetMidiNote(midiNote float32) {
+	x.inner.SetMidiNote(midiNote)
+}
+
+// Velocity calls the underlying Velocity.
+func (x *ExtendedNoteOnEvent) Velocity() float32 {
+	return x.inner.Velocity()
+}
+
+// SetVelocity calls the underlying SetVelocity.
+func (x *ExtendedNoteOnEvent) SetVelocity(velocity float32) {
+	x.inner.SetVelocity(velocity)
+}
+
+// InstrumentID calls the underlying InstrumentID.
+func (x *ExtendedNoteOnEvent) InstrumentID() uint {
+	return x.inner.InstrumentID()
+}
+
+// SetInstrumentID calls the underlying SetInstrumentID.
+func (x *ExtendedNoteOnEvent) SetInstrumentID(instrumentID uint) {
+	x.inner.SetInstrumentID(instrumentID)
+}
+
+// GroupID calls the underlying GroupID.
+func (x *ExtendedNoteOnEvent) GroupID() uint {
+	return x.inner.GroupID()
+}
+
+// SetGroupID calls the underlying SetGroupID.
+func (x *ExtendedNoteOnEvent) SetGroupID(groupID uint) {
+	x.inner.SetGroupID(groupID)
+}
+
+// Duration calls the underlying Duration.
+func (x *ExtendedNoteOnEvent) Duration() float64 {
+	return x.inner.Duration()
+}
+
+// SetDuration calls the underlying SetDuration.
+func (x *ExtendedNoteOnEvent) SetDuration(duration float64) {
+	x.inner.SetDuration(duration)
+}
+
 func (x *ExtendedNoteOnEvent) asMusicEvent() *raw.AVMusicEvent { return &x.inner.AVMusicEvent }
+
+// ExtendedNoteOnEventable is the interface implemented by [ExtendedNoteOnEvent], for mocking and DI.
+type ExtendedNoteOnEventable interface {
+	Unwrap() *raw.AVExtendedNoteOnEvent
+	WithMidiNote(midiNote float32) *ExtendedNoteOnEvent
+	WithVelocity(velocity float32) *ExtendedNoteOnEvent
+	WithInstrumentID(instrumentID uint) *ExtendedNoteOnEvent
+	WithGroupID(groupID uint) *ExtendedNoteOnEvent
+	WithDuration(duration float64) *ExtendedNoteOnEvent
+	MidiNote() float32
+	SetMidiNote(midiNote float32)
+	Velocity() float32
+	SetVelocity(velocity float32)
+	InstrumentID() uint
+	SetInstrumentID(instrumentID uint)
+	GroupID() uint
+	SetGroupID(groupID uint)
+	Duration() float64
+	SetDuration(duration float64)
+}
+
+var _ ExtendedNoteOnEventable = (*ExtendedNoteOnEvent)(nil)
 

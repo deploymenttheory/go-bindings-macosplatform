@@ -7,6 +7,7 @@ package metal
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -47,18 +48,48 @@ func (x *MTL4StitchedFunctionDescriptor) WithFunctionDescriptors(items ...MTL4Fu
 	return x
 }
 
+// FunctionGraph calls the underlying FunctionGraph.
+func (x *MTL4StitchedFunctionDescriptor) FunctionGraph() *FunctionStitchingGraph {
+	_r := x.inner.FunctionGraph()
+	if _r == nil {
+		return nil
+	}
+	return &FunctionStitchingGraph{inner: _r}
+}
+
+// SetFunctionGraph calls the underlying SetFunctionGraph.
+func (x *MTL4StitchedFunctionDescriptor) SetFunctionGraph(functionGraph *raw.MTLFunctionStitchingGraph) {
+	x.inner.SetFunctionGraph(functionGraph)
+}
+
 // FunctionDescriptors returns the collection as a Go slice.
 func (x *MTL4StitchedFunctionDescriptor) FunctionDescriptors() []*raw.MTL4FunctionDescriptor {
 	arr := x.inner.FunctionDescriptors()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MTL4FunctionDescriptor, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MTL4FunctionDescriptor {
+		return raw.MTL4FunctionDescriptorFromID(purego.Retain(_id))
+	})
+}
+
+// SetFunctionDescriptors calls the underlying SetFunctionDescriptors.
+func (x *MTL4StitchedFunctionDescriptor) SetFunctionDescriptors(functionDescriptors *foundation.NSArray[*raw.MTL4FunctionDescriptor]) {
+	x.inner.SetFunctionDescriptors(functionDescriptors)
 }
 
 func (x *MTL4StitchedFunctionDescriptor) asMTL4FunctionDescriptor() *raw.MTL4FunctionDescriptor { return &x.inner.MTL4FunctionDescriptor }
+
+// MTL4StitchedFunctionDescriptorable is the interface implemented by [MTL4StitchedFunctionDescriptor], for mocking and DI.
+type MTL4StitchedFunctionDescriptorable interface {
+	Unwrap() *raw.MTL4StitchedFunctionDescriptor
+	WithFunctionGraph(functionGraph *raw.MTLFunctionStitchingGraph) *MTL4StitchedFunctionDescriptor
+	WithFunctionDescriptors(items ...MTL4FunctionDescriptorProvider) *MTL4StitchedFunctionDescriptor
+	FunctionGraph() *FunctionStitchingGraph
+	SetFunctionGraph(functionGraph *raw.MTLFunctionStitchingGraph)
+	FunctionDescriptors() []*raw.MTL4FunctionDescriptor
+	SetFunctionDescriptors(functionDescriptors *foundation.NSArray[*raw.MTL4FunctionDescriptor])
+}
+
+var _ MTL4StitchedFunctionDescriptorable = (*MTL4StitchedFunctionDescriptor)(nil)
 

@@ -7,6 +7,7 @@ package networkextension
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -36,5 +37,42 @@ func (x *NEDNSOverTLSSettings) WithIdentityReference(identityReference *foundati
 	return x
 }
 
+// ServerName calls the underlying ServerName.
+func (x *NEDNSOverTLSSettings) ServerName() string {
+	_r := x.inner.ServerName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetServerName calls the underlying SetServerName.
+func (x *NEDNSOverTLSSettings) SetServerName(serverName string) {
+	x.inner.SetServerName(foundation.NSStringStringWithUTF8String(serverName))
+}
+
+// IdentityReference calls the underlying IdentityReference.
+func (x *NEDNSOverTLSSettings) IdentityReference() *foundation.NSData {
+	return x.inner.IdentityReference()
+}
+
+// SetIdentityReference calls the underlying SetIdentityReference.
+func (x *NEDNSOverTLSSettings) SetIdentityReference(identityReference *foundation.NSData) {
+	x.inner.SetIdentityReference(identityReference)
+}
+
 func (x *NEDNSOverTLSSettings) asNEDNSSettings() *raw.NEDNSSettings { return &x.inner.NEDNSSettings }
+
+// NEDNSOverTLSSettingsable is the interface implemented by [NEDNSOverTLSSettings], for mocking and DI.
+type NEDNSOverTLSSettingsable interface {
+	Unwrap() *raw.NEDNSOverTLSSettings
+	WithServerName(serverName string) *NEDNSOverTLSSettings
+	WithIdentityReference(identityReference *foundation.NSData) *NEDNSOverTLSSettings
+	ServerName() string
+	SetServerName(serverName string)
+	IdentityReference() *foundation.NSData
+	SetIdentityReference(identityReference *foundation.NSData)
+}
+
+var _ NEDNSOverTLSSettingsable = (*NEDNSOverTLSSettings)(nil)
 

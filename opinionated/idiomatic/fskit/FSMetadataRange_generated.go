@@ -24,3 +24,28 @@ func NewMetadataRangeWithOffsetSegmentLengthSegmentCount(startOffset int64, segm
 	return &MetadataRange{inner: raw.FSMetadataRangeFromID(_id)}
 }
 
+// StartOffset calls the underlying StartOffset.
+func (x *MetadataRange) StartOffset() int64 {
+	return x.inner.StartOffset()
+}
+
+// SegmentLength calls the underlying SegmentLength.
+func (x *MetadataRange) SegmentLength() uint64 {
+	return x.inner.SegmentLength()
+}
+
+// SegmentCount calls the underlying SegmentCount.
+func (x *MetadataRange) SegmentCount() uint64 {
+	return x.inner.SegmentCount()
+}
+
+// MetadataRangeable is the interface implemented by [MetadataRange], for mocking and DI.
+type MetadataRangeable interface {
+	Unwrap() *raw.FSMetadataRange
+	StartOffset() int64
+	SegmentLength() uint64
+	SegmentCount() uint64
+}
+
+var _ MetadataRangeable = (*MetadataRange)(nil)
+

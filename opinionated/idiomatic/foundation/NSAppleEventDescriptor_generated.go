@@ -53,5 +53,241 @@ func NewAppleEventDescriptorWithEventClassEventIDTargetDescriptorReturnIDTransac
 	return &AppleEventDescriptor{inner: raw.NSAppleEventDescriptorFromID(_id)}
 }
 
+// SetParamDescriptorForKeyword calls the underlying SetParamDescriptorForKeyword.
+func (x *AppleEventDescriptor) SetParamDescriptorForKeyword(descriptor *raw.NSAppleEventDescriptor, keyword uint) {
+	x.inner.SetParamDescriptorForKeyword(descriptor, keyword)
+}
+
+// ParamDescriptorForKeyword calls the underlying ParamDescriptorForKeyword.
+func (x *AppleEventDescriptor) ParamDescriptorForKeyword(keyword uint) *AppleEventDescriptor {
+	_r := x.inner.ParamDescriptorForKeyword(keyword)
+	if _r == nil {
+		return nil
+	}
+	return &AppleEventDescriptor{inner: _r}
+}
+
+// RemoveParamDescriptorWithKeyword calls the underlying RemoveParamDescriptorWithKeyword.
+func (x *AppleEventDescriptor) RemoveParamDescriptorWithKeyword(keyword uint) {
+	x.inner.RemoveParamDescriptorWithKeyword(keyword)
+}
+
+// SetAttributeDescriptorForKeyword calls the underlying SetAttributeDescriptorForKeyword.
+func (x *AppleEventDescriptor) SetAttributeDescriptorForKeyword(descriptor *raw.NSAppleEventDescriptor, keyword uint) {
+	x.inner.SetAttributeDescriptorForKeyword(descriptor, keyword)
+}
+
+// AttributeDescriptorForKeyword calls the underlying AttributeDescriptorForKeyword.
+func (x *AppleEventDescriptor) AttributeDescriptorForKeyword(keyword uint) *AppleEventDescriptor {
+	_r := x.inner.AttributeDescriptorForKeyword(keyword)
+	if _r == nil {
+		return nil
+	}
+	return &AppleEventDescriptor{inner: _r}
+}
+
+// SendEventWithOptionsTimeoutError calls the underlying SendEventWithOptionsTimeoutError.
+func (x *AppleEventDescriptor) SendEventWithOptionsTimeoutError(sendOptions raw.NSAppleEventSendOptions, timeoutInSeconds float64) (*AppleEventDescriptor, error) {
+	_r, _err := x.inner.SendEventWithOptionsTimeoutError(sendOptions, timeoutInSeconds)
+	if _err != nil {
+		return nil, _err
+	}
+	if _r == nil {
+		return nil, nil
+	}
+	return &AppleEventDescriptor{inner: _r}, nil
+}
+
+// InsertDescriptorAtIndex calls the underlying InsertDescriptorAtIndex.
+func (x *AppleEventDescriptor) InsertDescriptorAtIndex(descriptor *raw.NSAppleEventDescriptor, index int) {
+	x.inner.InsertDescriptorAtIndex(descriptor, index)
+}
+
+// DescriptorAtIndex calls the underlying DescriptorAtIndex.
+func (x *AppleEventDescriptor) DescriptorAtIndex(index int) *AppleEventDescriptor {
+	_r := x.inner.DescriptorAtIndex(index)
+	if _r == nil {
+		return nil
+	}
+	return &AppleEventDescriptor{inner: _r}
+}
+
+// RemoveDescriptorAtIndex calls the underlying RemoveDescriptorAtIndex.
+func (x *AppleEventDescriptor) RemoveDescriptorAtIndex(index int) {
+	x.inner.RemoveDescriptorAtIndex(index)
+}
+
+// SetDescriptorForKeyword calls the underlying SetDescriptorForKeyword.
+func (x *AppleEventDescriptor) SetDescriptorForKeyword(descriptor *raw.NSAppleEventDescriptor, keyword uint) {
+	x.inner.SetDescriptorForKeyword(descriptor, keyword)
+}
+
+// DescriptorForKeyword calls the underlying DescriptorForKeyword.
+func (x *AppleEventDescriptor) DescriptorForKeyword(keyword uint) *AppleEventDescriptor {
+	_r := x.inner.DescriptorForKeyword(keyword)
+	if _r == nil {
+		return nil
+	}
+	return &AppleEventDescriptor{inner: _r}
+}
+
+// RemoveDescriptorWithKeyword calls the underlying RemoveDescriptorWithKeyword.
+func (x *AppleEventDescriptor) RemoveDescriptorWithKeyword(keyword uint) {
+	x.inner.RemoveDescriptorWithKeyword(keyword)
+}
+
+// KeywordForDescriptorAtIndex calls the underlying KeywordForDescriptorAtIndex.
+func (x *AppleEventDescriptor) KeywordForDescriptorAtIndex(index int) uint {
+	return x.inner.KeywordForDescriptorAtIndex(index)
+}
+
+// CoerceToDescriptorType calls the underlying CoerceToDescriptorType.
+func (x *AppleEventDescriptor) CoerceToDescriptorType(descriptorType uint) *AppleEventDescriptor {
+	_r := x.inner.CoerceToDescriptorType(descriptorType)
+	if _r == nil {
+		return nil
+	}
+	return &AppleEventDescriptor{inner: _r}
+}
+
+// AeDesc calls the underlying AeDesc.
+func (x *AppleEventDescriptor) AeDesc() unsafe.Pointer {
+	return x.inner.AeDesc()
+}
+
+// DescriptorType calls the underlying DescriptorType.
+func (x *AppleEventDescriptor) DescriptorType() uint {
+	return x.inner.DescriptorType()
+}
+
+// Data calls the underlying Data.
+func (x *AppleEventDescriptor) Data() *Data {
+	_r := x.inner.Data()
+	if _r == nil {
+		return nil
+	}
+	return &Data{inner: _r}
+}
+
+// BooleanValue calls the underlying BooleanValue.
+func (x *AppleEventDescriptor) BooleanValue() uint8 {
+	return x.inner.BooleanValue()
+}
+
+// EnumCodeValue calls the underlying EnumCodeValue.
+func (x *AppleEventDescriptor) EnumCodeValue() uint {
+	return x.inner.EnumCodeValue()
+}
+
+// Int32Value calls the underlying Int32Value.
+func (x *AppleEventDescriptor) Int32Value() int {
+	return x.inner.Int32Value()
+}
+
+// DoubleValue calls the underlying DoubleValue.
+func (x *AppleEventDescriptor) DoubleValue() float64 {
+	return x.inner.DoubleValue()
+}
+
+// TypeCodeValue calls the underlying TypeCodeValue.
+func (x *AppleEventDescriptor) TypeCodeValue() uint {
+	return x.inner.TypeCodeValue()
+}
+
+// StringValue calls the underlying StringValue.
+func (x *AppleEventDescriptor) StringValue() *String {
+	_r := x.inner.StringValue()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// DateValue calls the underlying DateValue.
+func (x *AppleEventDescriptor) DateValue() *Date {
+	_r := x.inner.DateValue()
+	if _r == nil {
+		return nil
+	}
+	return &Date{inner: _r}
+}
+
+// FileURLValue calls the underlying FileURLValue.
+func (x *AppleEventDescriptor) FileURLValue() *URL {
+	_r := x.inner.FileURLValue()
+	if _r == nil {
+		return nil
+	}
+	return &URL{inner: _r}
+}
+
+// EventClass calls the underlying EventClass.
+func (x *AppleEventDescriptor) EventClass() uint {
+	return x.inner.EventClass()
+}
+
+// EventID calls the underlying EventID.
+func (x *AppleEventDescriptor) EventID() uint {
+	return x.inner.EventID()
+}
+
+// ReturnID calls the underlying ReturnID.
+func (x *AppleEventDescriptor) ReturnID() int16 {
+	return x.inner.ReturnID()
+}
+
+// TransactionID calls the underlying TransactionID.
+func (x *AppleEventDescriptor) TransactionID() int {
+	return x.inner.TransactionID()
+}
+
+// IsRecordDescriptor calls the underlying IsRecordDescriptor.
+func (x *AppleEventDescriptor) IsRecordDescriptor() bool {
+	return x.inner.IsRecordDescriptor()
+}
+
+// NumberOfItems calls the underlying NumberOfItems.
+func (x *AppleEventDescriptor) NumberOfItems() int {
+	return x.inner.NumberOfItems()
+}
+
 func (x *AppleEventDescriptor) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// AppleEventDescriptorable is the interface implemented by [AppleEventDescriptor], for mocking and DI.
+type AppleEventDescriptorable interface {
+	Unwrap() *raw.NSAppleEventDescriptor
+	SetParamDescriptorForKeyword(descriptor *raw.NSAppleEventDescriptor, keyword uint)
+	ParamDescriptorForKeyword(keyword uint) *AppleEventDescriptor
+	RemoveParamDescriptorWithKeyword(keyword uint)
+	SetAttributeDescriptorForKeyword(descriptor *raw.NSAppleEventDescriptor, keyword uint)
+	AttributeDescriptorForKeyword(keyword uint) *AppleEventDescriptor
+	SendEventWithOptionsTimeoutError(sendOptions raw.NSAppleEventSendOptions, timeoutInSeconds float64) (*AppleEventDescriptor, error)
+	InsertDescriptorAtIndex(descriptor *raw.NSAppleEventDescriptor, index int)
+	DescriptorAtIndex(index int) *AppleEventDescriptor
+	RemoveDescriptorAtIndex(index int)
+	SetDescriptorForKeyword(descriptor *raw.NSAppleEventDescriptor, keyword uint)
+	DescriptorForKeyword(keyword uint) *AppleEventDescriptor
+	RemoveDescriptorWithKeyword(keyword uint)
+	KeywordForDescriptorAtIndex(index int) uint
+	CoerceToDescriptorType(descriptorType uint) *AppleEventDescriptor
+	AeDesc() unsafe.Pointer
+	DescriptorType() uint
+	Data() *Data
+	BooleanValue() uint8
+	EnumCodeValue() uint
+	Int32Value() int
+	DoubleValue() float64
+	TypeCodeValue() uint
+	StringValue() *String
+	DateValue() *Date
+	FileURLValue() *URL
+	EventClass() uint
+	EventID() uint
+	ReturnID() int16
+	TransactionID() int
+	IsRecordDescriptor() bool
+	NumberOfItems() int
+}
+
+var _ AppleEventDescriptorable = (*AppleEventDescriptor)(nil)
 

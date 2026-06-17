@@ -7,6 +7,7 @@ package authenticationservices
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,4 +25,31 @@ func NewPasswordCredentialWithUserPassword(user string, password string) *Passwo
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUser:password:"), foundation.NSStringStringWithUTF8String(user).Ptr(), foundation.NSStringStringWithUTF8String(password).Ptr())
 	return &PasswordCredential{inner: raw.ASPasswordCredentialFromID(_id)}
 }
+
+// User calls the underlying User.
+func (x *PasswordCredential) User() string {
+	_r := x.inner.User()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Password calls the underlying Password.
+func (x *PasswordCredential) Password() string {
+	_r := x.inner.Password()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// PasswordCredentialable is the interface implemented by [PasswordCredential], for mocking and DI.
+type PasswordCredentialable interface {
+	Unwrap() *raw.ASPasswordCredential
+	User() string
+	Password() string
+}
+
+var _ PasswordCredentialable = (*PasswordCredential)(nil)
 

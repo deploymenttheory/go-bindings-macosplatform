@@ -5,6 +5,7 @@
 package metrickit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metrickit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,5 +24,34 @@ func NewCPUExceptionDiagnostic() *CPUExceptionDiagnostic {
 	return &CPUExceptionDiagnostic{inner: raw.MXCPUExceptionDiagnosticFromID(_id)}
 }
 
+// CallStackTree calls the underlying CallStackTree.
+func (x *CPUExceptionDiagnostic) CallStackTree() *CallStackTree {
+	_r := x.inner.CallStackTree()
+	if _r == nil {
+		return nil
+	}
+	return &CallStackTree{inner: _r}
+}
+
+// TotalCPUTime calls the underlying TotalCPUTime.
+func (x *CPUExceptionDiagnostic) TotalCPUTime() *foundation.NSMeasurement[*foundation.NSUnitDuration] {
+	return x.inner.TotalCPUTime()
+}
+
+// TotalSampledTime calls the underlying TotalSampledTime.
+func (x *CPUExceptionDiagnostic) TotalSampledTime() *foundation.NSMeasurement[*foundation.NSUnitDuration] {
+	return x.inner.TotalSampledTime()
+}
+
 func (x *CPUExceptionDiagnostic) asDiagnostic() *raw.MXDiagnostic { return &x.inner.MXDiagnostic }
+
+// CPUExceptionDiagnosticable is the interface implemented by [CPUExceptionDiagnostic], for mocking and DI.
+type CPUExceptionDiagnosticable interface {
+	Unwrap() *raw.MXCPUExceptionDiagnostic
+	CallStackTree() *CallStackTree
+	TotalCPUTime() *foundation.NSMeasurement[*foundation.NSUnitDuration]
+	TotalSampledTime() *foundation.NSMeasurement[*foundation.NSUnitDuration]
+}
+
+var _ CPUExceptionDiagnosticable = (*CPUExceptionDiagnostic)(nil)
 

@@ -29,3 +29,10 @@ func (x *ImageMultiply) asImageArithmetic() *raw.MPSImageArithmetic { return &x.
 
 func (x *ImageMultiply) asBinaryImageKernel() *raw.MPSBinaryImageKernel { return &x.inner.MPSImageArithmetic.MPSBinaryImageKernel }
 
+// ImageMultiplyable is the interface implemented by [ImageMultiply], for mocking and DI.
+type ImageMultiplyable interface {
+	Unwrap() *raw.MPSImageMultiply
+}
+
+var _ ImageMultiplyable = (*ImageMultiply)(nil)
+

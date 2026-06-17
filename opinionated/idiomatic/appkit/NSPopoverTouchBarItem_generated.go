@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -66,5 +67,139 @@ func (x *PopoverTouchBarItem) WithShowsCloseButton(showsCloseButton bool) *Popov
 	return x
 }
 
+// ShowPopover calls the underlying ShowPopover.
+func (x *PopoverTouchBarItem) ShowPopover(sender objc.ID) {
+	x.inner.ShowPopover(sender)
+}
+
+// DismissPopover calls the underlying DismissPopover.
+func (x *PopoverTouchBarItem) DismissPopover(sender objc.ID) {
+	x.inner.DismissPopover(sender)
+}
+
+// MakeStandardActivatePopoverGestureRecognizer calls the underlying MakeStandardActivatePopoverGestureRecognizer.
+func (x *PopoverTouchBarItem) MakeStandardActivatePopoverGestureRecognizer() *GestureRecognizer {
+	_r := x.inner.MakeStandardActivatePopoverGestureRecognizer()
+	if _r == nil {
+		return nil
+	}
+	return &GestureRecognizer{inner: _r}
+}
+
+// PopoverTouchBar calls the underlying PopoverTouchBar.
+func (x *PopoverTouchBarItem) PopoverTouchBar() *TouchBar {
+	_r := x.inner.PopoverTouchBar()
+	if _r == nil {
+		return nil
+	}
+	return &TouchBar{inner: _r}
+}
+
+// SetPopoverTouchBar calls the underlying SetPopoverTouchBar.
+func (x *PopoverTouchBarItem) SetPopoverTouchBar(popoverTouchBar *raw.NSTouchBar) {
+	x.inner.SetPopoverTouchBar(popoverTouchBar)
+}
+
+// SetCustomizationLabel calls the underlying SetCustomizationLabel.
+func (x *PopoverTouchBarItem) SetCustomizationLabel(customizationLabel string) {
+	x.inner.SetCustomizationLabel(foundation.NSStringStringWithUTF8String(customizationLabel))
+}
+
+// CollapsedRepresentation calls the underlying CollapsedRepresentation.
+func (x *PopoverTouchBarItem) CollapsedRepresentation() *View {
+	_r := x.inner.CollapsedRepresentation()
+	if _r == nil {
+		return nil
+	}
+	return &View{inner: _r}
+}
+
+// SetCollapsedRepresentation calls the underlying SetCollapsedRepresentation.
+func (x *PopoverTouchBarItem) SetCollapsedRepresentation(collapsedRepresentation *raw.NSView) {
+	x.inner.SetCollapsedRepresentation(collapsedRepresentation)
+}
+
+// CollapsedRepresentationImage calls the underlying CollapsedRepresentationImage.
+func (x *PopoverTouchBarItem) CollapsedRepresentationImage() *Image {
+	_r := x.inner.CollapsedRepresentationImage()
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// SetCollapsedRepresentationImage calls the underlying SetCollapsedRepresentationImage.
+func (x *PopoverTouchBarItem) SetCollapsedRepresentationImage(collapsedRepresentationImage *raw.NSImage) {
+	x.inner.SetCollapsedRepresentationImage(collapsedRepresentationImage)
+}
+
+// CollapsedRepresentationLabel calls the underlying CollapsedRepresentationLabel.
+func (x *PopoverTouchBarItem) CollapsedRepresentationLabel() string {
+	_r := x.inner.CollapsedRepresentationLabel()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetCollapsedRepresentationLabel calls the underlying SetCollapsedRepresentationLabel.
+func (x *PopoverTouchBarItem) SetCollapsedRepresentationLabel(collapsedRepresentationLabel string) {
+	x.inner.SetCollapsedRepresentationLabel(foundation.NSStringStringWithUTF8String(collapsedRepresentationLabel))
+}
+
+// PressAndHoldTouchBar calls the underlying PressAndHoldTouchBar.
+func (x *PopoverTouchBarItem) PressAndHoldTouchBar() *TouchBar {
+	_r := x.inner.PressAndHoldTouchBar()
+	if _r == nil {
+		return nil
+	}
+	return &TouchBar{inner: _r}
+}
+
+// SetPressAndHoldTouchBar calls the underlying SetPressAndHoldTouchBar.
+func (x *PopoverTouchBarItem) SetPressAndHoldTouchBar(pressAndHoldTouchBar *raw.NSTouchBar) {
+	x.inner.SetPressAndHoldTouchBar(pressAndHoldTouchBar)
+}
+
+// ShowsCloseButton calls the underlying ShowsCloseButton.
+func (x *PopoverTouchBarItem) ShowsCloseButton() bool {
+	return x.inner.ShowsCloseButton()
+}
+
+// SetShowsCloseButton calls the underlying SetShowsCloseButton.
+func (x *PopoverTouchBarItem) SetShowsCloseButton(showsCloseButton bool) {
+	x.inner.SetShowsCloseButton(showsCloseButton)
+}
+
 func (x *PopoverTouchBarItem) asTouchBarItem() *raw.NSTouchBarItem { return &x.inner.NSTouchBarItem }
+
+// PopoverTouchBarItemable is the interface implemented by [PopoverTouchBarItem], for mocking and DI.
+type PopoverTouchBarItemable interface {
+	Unwrap() *raw.NSPopoverTouchBarItem
+	WithPopoverTouchBar(popoverTouchBar *raw.NSTouchBar) *PopoverTouchBarItem
+	WithCustomizationLabel(customizationLabel string) *PopoverTouchBarItem
+	WithCollapsedRepresentation(collapsedRepresentation ViewProvider) *PopoverTouchBarItem
+	WithCollapsedRepresentationImage(collapsedRepresentationImage *raw.NSImage) *PopoverTouchBarItem
+	WithCollapsedRepresentationLabel(collapsedRepresentationLabel string) *PopoverTouchBarItem
+	WithPressAndHoldTouchBar(pressAndHoldTouchBar *raw.NSTouchBar) *PopoverTouchBarItem
+	WithShowsCloseButton(showsCloseButton bool) *PopoverTouchBarItem
+	ShowPopover(sender objc.ID)
+	DismissPopover(sender objc.ID)
+	MakeStandardActivatePopoverGestureRecognizer() *GestureRecognizer
+	PopoverTouchBar() *TouchBar
+	SetPopoverTouchBar(popoverTouchBar *raw.NSTouchBar)
+	SetCustomizationLabel(customizationLabel string)
+	CollapsedRepresentation() *View
+	SetCollapsedRepresentation(collapsedRepresentation *raw.NSView)
+	CollapsedRepresentationImage() *Image
+	SetCollapsedRepresentationImage(collapsedRepresentationImage *raw.NSImage)
+	CollapsedRepresentationLabel() string
+	SetCollapsedRepresentationLabel(collapsedRepresentationLabel string)
+	PressAndHoldTouchBar() *TouchBar
+	SetPressAndHoldTouchBar(pressAndHoldTouchBar *raw.NSTouchBar)
+	ShowsCloseButton() bool
+	SetShowsCloseButton(showsCloseButton bool)
+}
+
+var _ PopoverTouchBarItemable = (*PopoverTouchBarItem)(nil)
 

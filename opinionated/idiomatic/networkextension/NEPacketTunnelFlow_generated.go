@@ -5,6 +5,8 @@
 package networkextension
 
 import (
+	"context"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +24,51 @@ func NewNEPacketTunnelFlow() *NEPacketTunnelFlow {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NEPacketTunnelFlow")), objc.RegisterName("new"))
 	return &NEPacketTunnelFlow{inner: raw.NEPacketTunnelFlowFromID(_id)}
 }
+
+// ReadPacketsWithCompletionHandler calls the underlying ReadPacketsWithCompletionHandler.
+func (x *NEPacketTunnelFlow) ReadPacketsWithCompletionHandler(completionHandler objc.Block) {
+	x.inner.ReadPacketsWithCompletionHandler(completionHandler)
+}
+
+// WritePacketsWithProtocols calls the underlying WritePacketsWithProtocols.
+func (x *NEPacketTunnelFlow) WritePacketsWithProtocols(packets *foundation.NSArray[*foundation.NSData], protocols *foundation.NSArray[*foundation.NSNumber]) bool {
+	return x.inner.WritePacketsWithProtocols(packets, protocols)
+}
+
+// ReadPacketObjects blocks until the operation completes or ctx is cancelled.
+func (x *NEPacketTunnelFlow) ReadPacketObjects(ctx context.Context) (*foundation.NSArray[*raw.NEPacket], error) {
+	type _result struct {
+		val *foundation.NSArray[*raw.NEPacket]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadPacketObjectsWithCompletionHandler(func(_p0 *foundation.NSArray[*raw.NEPacket]) {
+		var _o _result
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[*raw.NEPacket]
+		return _zero, ctx.Err()
+	}
+}
+
+// WritePacketObjects calls the underlying WritePacketObjects.
+func (x *NEPacketTunnelFlow) WritePacketObjects(packets *foundation.NSArray[*raw.NEPacket]) bool {
+	return x.inner.WritePacketObjects(packets)
+}
+
+// NEPacketTunnelFlowable is the interface implemented by [NEPacketTunnelFlow], for mocking and DI.
+type NEPacketTunnelFlowable interface {
+	Unwrap() *raw.NEPacketTunnelFlow
+	ReadPacketsWithCompletionHandler(completionHandler objc.Block)
+	WritePacketsWithProtocols(packets *foundation.NSArray[*foundation.NSData], protocols *foundation.NSArray[*foundation.NSNumber]) bool
+	ReadPacketObjects(ctx context.Context) (*foundation.NSArray[*raw.NEPacket], error)
+	WritePacketObjects(packets *foundation.NSArray[*raw.NEPacket]) bool
+}
+
+var _ NEPacketTunnelFlowable = (*NEPacketTunnelFlow)(nil)
 

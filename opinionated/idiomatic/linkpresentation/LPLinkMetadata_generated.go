@@ -7,6 +7,7 @@ package linkpresentation
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/linkpresentation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -65,4 +66,106 @@ func (x *LinkMetadata) WithRemoteVideoURL(remoteVideoURL string) *LinkMetadata {
 	x.inner.SetRemoteVideoURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(remoteVideoURL)))
 	return x
 }
+
+// OriginalURL calls the underlying OriginalURL.
+func (x *LinkMetadata) OriginalURL() *foundation.NSURL {
+	return x.inner.OriginalURL()
+}
+
+// SetOriginalURL calls the underlying SetOriginalURL.
+func (x *LinkMetadata) SetOriginalURL(originalURL string) {
+	x.inner.SetOriginalURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(originalURL)))
+}
+
+// URL calls the underlying URL.
+func (x *LinkMetadata) URL() *foundation.NSURL {
+	return x.inner.URL()
+}
+
+// SetURL calls the underlying SetURL.
+func (x *LinkMetadata) SetURL(uRL string) {
+	x.inner.SetURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
+}
+
+// Title calls the underlying Title.
+func (x *LinkMetadata) Title() string {
+	_r := x.inner.Title()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetTitle calls the underlying SetTitle.
+func (x *LinkMetadata) SetTitle(title string) {
+	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+}
+
+// IconProvider calls the underlying IconProvider.
+func (x *LinkMetadata) IconProvider() *foundation.NSItemProvider {
+	return x.inner.IconProvider()
+}
+
+// SetIconProvider calls the underlying SetIconProvider.
+func (x *LinkMetadata) SetIconProvider(iconProvider *foundation.NSItemProvider) {
+	x.inner.SetIconProvider(iconProvider)
+}
+
+// ImageProvider calls the underlying ImageProvider.
+func (x *LinkMetadata) ImageProvider() *foundation.NSItemProvider {
+	return x.inner.ImageProvider()
+}
+
+// SetImageProvider calls the underlying SetImageProvider.
+func (x *LinkMetadata) SetImageProvider(imageProvider *foundation.NSItemProvider) {
+	x.inner.SetImageProvider(imageProvider)
+}
+
+// VideoProvider calls the underlying VideoProvider.
+func (x *LinkMetadata) VideoProvider() *foundation.NSItemProvider {
+	return x.inner.VideoProvider()
+}
+
+// SetVideoProvider calls the underlying SetVideoProvider.
+func (x *LinkMetadata) SetVideoProvider(videoProvider *foundation.NSItemProvider) {
+	x.inner.SetVideoProvider(videoProvider)
+}
+
+// RemoteVideoURL calls the underlying RemoteVideoURL.
+func (x *LinkMetadata) RemoteVideoURL() *foundation.NSURL {
+	return x.inner.RemoteVideoURL()
+}
+
+// SetRemoteVideoURL calls the underlying SetRemoteVideoURL.
+func (x *LinkMetadata) SetRemoteVideoURL(remoteVideoURL string) {
+	x.inner.SetRemoteVideoURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(remoteVideoURL)))
+}
+
+// LinkMetadataable is the interface implemented by [LinkMetadata], for mocking and DI.
+type LinkMetadataable interface {
+	Unwrap() *raw.LPLinkMetadata
+	WithOriginalURL(originalURL string) *LinkMetadata
+	WithURL(uRL string) *LinkMetadata
+	WithTitle(title string) *LinkMetadata
+	WithIconProvider(iconProvider *foundation.NSItemProvider) *LinkMetadata
+	WithImageProvider(imageProvider *foundation.NSItemProvider) *LinkMetadata
+	WithVideoProvider(videoProvider *foundation.NSItemProvider) *LinkMetadata
+	WithRemoteVideoURL(remoteVideoURL string) *LinkMetadata
+	OriginalURL() *foundation.NSURL
+	SetOriginalURL(originalURL string)
+	URL() *foundation.NSURL
+	SetURL(uRL string)
+	Title() string
+	SetTitle(title string)
+	IconProvider() *foundation.NSItemProvider
+	SetIconProvider(iconProvider *foundation.NSItemProvider)
+	ImageProvider() *foundation.NSItemProvider
+	SetImageProvider(imageProvider *foundation.NSItemProvider)
+	VideoProvider() *foundation.NSItemProvider
+	SetVideoProvider(videoProvider *foundation.NSItemProvider)
+	RemoteVideoURL() *foundation.NSURL
+	SetRemoteVideoURL(remoteVideoURL string)
+}
+
+var _ LinkMetadataable = (*LinkMetadata)(nil)
 

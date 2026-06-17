@@ -5,7 +5,9 @@
 package screencapturekit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/screencapturekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +24,61 @@ func NewWindow() *Window {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SCWindow")), objc.RegisterName("new"))
 	return &Window{inner: raw.SCWindowFromID(_id)}
 }
+
+// WindowID calls the underlying WindowID.
+func (x *Window) WindowID() uint32 {
+	return x.inner.WindowID()
+}
+
+// Frame calls the underlying Frame.
+func (x *Window) Frame() corefoundation.CGRect {
+	return x.inner.Frame()
+}
+
+// Title calls the underlying Title.
+func (x *Window) Title() string {
+	_r := x.inner.Title()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// WindowLayer calls the underlying WindowLayer.
+func (x *Window) WindowLayer() int {
+	return x.inner.WindowLayer()
+}
+
+// OwningApplication calls the underlying OwningApplication.
+func (x *Window) OwningApplication() *RunningApplication {
+	_r := x.inner.OwningApplication()
+	if _r == nil {
+		return nil
+	}
+	return &RunningApplication{inner: _r}
+}
+
+// IsOnScreen calls the underlying IsOnScreen.
+func (x *Window) IsOnScreen() bool {
+	return x.inner.IsOnScreen()
+}
+
+// IsActive calls the underlying IsActive.
+func (x *Window) IsActive() bool {
+	return x.inner.IsActive()
+}
+
+// Windowable is the interface implemented by [Window], for mocking and DI.
+type Windowable interface {
+	Unwrap() *raw.SCWindow
+	WindowID() uint32
+	Frame() corefoundation.CGRect
+	Title() string
+	WindowLayer() int
+	OwningApplication() *RunningApplication
+	IsOnScreen() bool
+	IsActive() bool
+}
+
+var _ Windowable = (*Window)(nil)
 

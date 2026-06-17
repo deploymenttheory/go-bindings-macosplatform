@@ -6,6 +6,7 @@ package executionpolicy
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/executionpolicy"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,17 @@ func NewExecutionPolicy() *ExecutionPolicy {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("EPExecutionPolicy")), objc.RegisterName("new"))
 	return &ExecutionPolicy{inner: raw.EPExecutionPolicyFromID(_id)}
 }
+
+// AddPolicyExceptionForURLError calls the underlying AddPolicyExceptionForURLError.
+func (x *ExecutionPolicy) AddPolicyExceptionForURLError(url string) (bool, error) {
+	return x.inner.AddPolicyExceptionForURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
+}
+
+// ExecutionPolicyable is the interface implemented by [ExecutionPolicy], for mocking and DI.
+type ExecutionPolicyable interface {
+	Unwrap() *raw.EPExecutionPolicy
+	AddPolicyExceptionForURLError(url string) (bool, error)
+}
+
+var _ ExecutionPolicyable = (*ExecutionPolicy)(nil)
 

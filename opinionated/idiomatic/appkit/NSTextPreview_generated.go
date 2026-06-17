@@ -8,6 +8,7 @@ import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -34,16 +35,34 @@ func NewTextPreviewWithSnapshotImagePresentationFrame(snapshotImage unsafe.Point
 	return &TextPreview{inner: raw.NSTextPreviewFromID(_id)}
 }
 
+// PreviewImage calls the underlying PreviewImage.
+func (x *TextPreview) PreviewImage() unsafe.Pointer {
+	return x.inner.PreviewImage()
+}
+
+// PresentationFrame calls the underlying PresentationFrame.
+func (x *TextPreview) PresentationFrame() corefoundation.CGRect {
+	return x.inner.PresentationFrame()
+}
+
 // CandidateRects returns the collection as a Go slice.
 func (x *TextPreview) CandidateRects() []*foundation.NSValue {
 	arr := x.inner.CandidateRects()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSValue, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSValue {
+		return foundation.NSValueFromID(purego.Retain(_id))
+	})
 }
+
+// TextPreviewable is the interface implemented by [TextPreview], for mocking and DI.
+type TextPreviewable interface {
+	Unwrap() *raw.NSTextPreview
+	PreviewImage() unsafe.Pointer
+	PresentationFrame() corefoundation.CGRect
+	CandidateRects() []*foundation.NSValue
+}
+
+var _ TextPreviewable = (*TextPreview)(nil)
 

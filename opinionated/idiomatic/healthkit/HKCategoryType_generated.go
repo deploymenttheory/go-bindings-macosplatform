@@ -27,3 +27,10 @@ func (x *CategoryType) asSampleType() *raw.HKSampleType { return &x.inner.HKSamp
 
 func (x *CategoryType) asObjectType() *raw.HKObjectType { return &x.inner.HKSampleType.HKObjectType }
 
+// CategoryTypeable is the interface implemented by [CategoryType], for mocking and DI.
+type CategoryTypeable interface {
+	Unwrap() *raw.HKCategoryType
+}
+
+var _ CategoryTypeable = (*CategoryType)(nil)
+

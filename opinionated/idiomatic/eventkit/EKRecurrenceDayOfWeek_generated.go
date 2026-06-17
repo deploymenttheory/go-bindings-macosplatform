@@ -24,3 +24,22 @@ func NewRecurrenceDayOfWeekWithDayOfTheWeekWeekNumber(dayOfTheWeek raw.EKWeekday
 	return &RecurrenceDayOfWeek{inner: raw.EKRecurrenceDayOfWeekFromID(_id)}
 }
 
+// DayOfTheWeek calls the underlying DayOfTheWeek.
+func (x *RecurrenceDayOfWeek) DayOfTheWeek() raw.EKWeekday {
+	return x.inner.DayOfTheWeek()
+}
+
+// WeekNumber calls the underlying WeekNumber.
+func (x *RecurrenceDayOfWeek) WeekNumber() int {
+	return x.inner.WeekNumber()
+}
+
+// RecurrenceDayOfWeekable is the interface implemented by [RecurrenceDayOfWeek], for mocking and DI.
+type RecurrenceDayOfWeekable interface {
+	Unwrap() *raw.EKRecurrenceDayOfWeek
+	DayOfTheWeek() raw.EKWeekday
+	WeekNumber() int
+}
+
+var _ RecurrenceDayOfWeekable = (*RecurrenceDayOfWeek)(nil)
+

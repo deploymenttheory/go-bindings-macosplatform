@@ -23,3 +23,16 @@ func NewRemoteLayerServer() *RemoteLayerServer {
 	return &RemoteLayerServer{inner: raw.CARemoteLayerServerFromID(_id)}
 }
 
+// ServerPort calls the underlying ServerPort.
+func (x *RemoteLayerServer) ServerPort() uint {
+	return x.inner.ServerPort()
+}
+
+// RemoteLayerServerable is the interface implemented by [RemoteLayerServer], for mocking and DI.
+type RemoteLayerServerable interface {
+	Unwrap() *raw.CARemoteLayerServer
+	ServerPort() uint
+}
+
+var _ RemoteLayerServerable = (*RemoteLayerServer)(nil)
+

@@ -30,3 +30,23 @@ func (x *MTROccupancySensingClusterOccupancyChangedEvent) WithOccupancy(occupanc
 	return x
 }
 
+// Occupancy calls the underlying Occupancy.
+func (x *MTROccupancySensingClusterOccupancyChangedEvent) Occupancy() *foundation.NSNumber {
+	return x.inner.Occupancy()
+}
+
+// SetOccupancy calls the underlying SetOccupancy.
+func (x *MTROccupancySensingClusterOccupancyChangedEvent) SetOccupancy(occupancy *foundation.NSNumber) {
+	x.inner.SetOccupancy(occupancy)
+}
+
+// MTROccupancySensingClusterOccupancyChangedEventable is the interface implemented by [MTROccupancySensingClusterOccupancyChangedEvent], for mocking and DI.
+type MTROccupancySensingClusterOccupancyChangedEventable interface {
+	Unwrap() *raw.MTROccupancySensingClusterOccupancyChangedEvent
+	WithOccupancy(occupancy *foundation.NSNumber) *MTROccupancySensingClusterOccupancyChangedEvent
+	Occupancy() *foundation.NSNumber
+	SetOccupancy(occupancy *foundation.NSNumber)
+}
+
+var _ MTROccupancySensingClusterOccupancyChangedEventable = (*MTROccupancySensingClusterOccupancyChangedEvent)(nil)
+

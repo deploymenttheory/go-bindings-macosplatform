@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,18 +24,58 @@ func NewMetricDownloadSummaryEvent() *MetricDownloadSummaryEvent {
 	return &MetricDownloadSummaryEvent{inner: raw.AVMetricDownloadSummaryEventFromID(_id)}
 }
 
+// ErrorEvent calls the underlying ErrorEvent.
+func (x *MetricDownloadSummaryEvent) ErrorEvent() *MetricErrorEvent {
+	_r := x.inner.ErrorEvent()
+	if _r == nil {
+		return nil
+	}
+	return &MetricErrorEvent{inner: _r}
+}
+
+// RecoverableErrorCount calls the underlying RecoverableErrorCount.
+func (x *MetricDownloadSummaryEvent) RecoverableErrorCount() int {
+	return x.inner.RecoverableErrorCount()
+}
+
+// MediaResourceRequestCount calls the underlying MediaResourceRequestCount.
+func (x *MetricDownloadSummaryEvent) MediaResourceRequestCount() int {
+	return x.inner.MediaResourceRequestCount()
+}
+
+// BytesDownloadedCount calls the underlying BytesDownloadedCount.
+func (x *MetricDownloadSummaryEvent) BytesDownloadedCount() int {
+	return x.inner.BytesDownloadedCount()
+}
+
+// DownloadDuration calls the underlying DownloadDuration.
+func (x *MetricDownloadSummaryEvent) DownloadDuration() float64 {
+	return x.inner.DownloadDuration()
+}
+
 // Variants returns the collection as a Go slice.
 func (x *MetricDownloadSummaryEvent) Variants() []*raw.AVAssetVariant {
 	arr := x.inner.Variants()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AVAssetVariant, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVAssetVariant {
+		return raw.AVAssetVariantFromID(purego.Retain(_id))
+	})
 }
 
 func (x *MetricDownloadSummaryEvent) asMetricEvent() *raw.AVMetricEvent { return &x.inner.AVMetricEvent }
+
+// MetricDownloadSummaryEventable is the interface implemented by [MetricDownloadSummaryEvent], for mocking and DI.
+type MetricDownloadSummaryEventable interface {
+	Unwrap() *raw.AVMetricDownloadSummaryEvent
+	ErrorEvent() *MetricErrorEvent
+	RecoverableErrorCount() int
+	MediaResourceRequestCount() int
+	BytesDownloadedCount() int
+	DownloadDuration() float64
+	Variants() []*raw.AVAssetVariant
+}
+
+var _ MetricDownloadSummaryEventable = (*MetricDownloadSummaryEvent)(nil)
 

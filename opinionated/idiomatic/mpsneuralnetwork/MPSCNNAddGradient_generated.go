@@ -31,3 +31,10 @@ func (x *CNNAddGradient) asCNNGradientKernel() *raw.MPSCNNGradientKernel { retur
 
 func (x *CNNAddGradient) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel { return &x.inner.MPSCNNArithmeticGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel }
 
+// CNNAddGradientable is the interface implemented by [CNNAddGradient], for mocking and DI.
+type CNNAddGradientable interface {
+	Unwrap() *raw.MPSCNNAddGradient
+}
+
+var _ CNNAddGradientable = (*CNNAddGradient)(nil)
+

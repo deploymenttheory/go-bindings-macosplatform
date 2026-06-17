@@ -9,6 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsmatrix"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -33,4 +34,17 @@ func NewMatrixCopyDescriptorWithSourceMatricesDestinationMatricesOffsetVectorOff
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceMatrices:destinationMatrices:offsetVector:offset:"), sourceMatrices.Ptr(), destinationMatrices.Ptr(), offsets.Ptr(), byteOffset)
 	return &MatrixCopyDescriptor{inner: raw.MPSMatrixCopyDescriptorFromID(_id)}
 }
+
+// SetCopyOperationAtIndexSourceMatrixDestinationMatrixOffsets calls the underlying SetCopyOperationAtIndexSourceMatrixDestinationMatrixOffsets.
+func (x *MatrixCopyDescriptor) SetCopyOperationAtIndexSourceMatrixDestinationMatrixOffsets(index uint, sourceMatrix *mpscore.MPSMatrix, destinationMatrix *mpscore.MPSMatrix, offsets mpsmatrix.MPSMatrixCopyOffsets) {
+	x.inner.SetCopyOperationAtIndexSourceMatrixDestinationMatrixOffsets(index, sourceMatrix, destinationMatrix, offsets)
+}
+
+// MatrixCopyDescriptorable is the interface implemented by [MatrixCopyDescriptor], for mocking and DI.
+type MatrixCopyDescriptorable interface {
+	Unwrap() *raw.MPSMatrixCopyDescriptor
+	SetCopyOperationAtIndexSourceMatrixDestinationMatrixOffsets(index uint, sourceMatrix *mpscore.MPSMatrix, destinationMatrix *mpscore.MPSMatrix, offsets mpsmatrix.MPSMatrixCopyOffsets)
+}
+
+var _ MatrixCopyDescriptorable = (*MatrixCopyDescriptor)(nil)
 

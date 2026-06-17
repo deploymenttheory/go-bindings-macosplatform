@@ -7,6 +7,7 @@ package avfoundation
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
@@ -78,7 +79,117 @@ func (x *MutableCompositionTrack) WithSegments(items ...*raw.AVCompositionTrackS
 	return x
 }
 
+// InsertTimeRangeOfTrackAtTimeError calls the underlying InsertTimeRangeOfTrackAtTimeError.
+func (x *MutableCompositionTrack) InsertTimeRangeOfTrackAtTimeError(timeRange coremedia.CMTimeRange, track *raw.AVAssetTrack, startTime coremedia.CMTime) (bool, error) {
+	return x.inner.InsertTimeRangeOfTrackAtTimeError(timeRange, track, startTime)
+}
+
+// InsertTimeRangesOfTracksAtTimeError calls the underlying InsertTimeRangesOfTracksAtTimeError.
+func (x *MutableCompositionTrack) InsertTimeRangesOfTracksAtTimeError(timeRanges *foundation.NSArray[*foundation.NSValue], tracks *foundation.NSArray[*raw.AVAssetTrack], startTime coremedia.CMTime) (bool, error) {
+	return x.inner.InsertTimeRangesOfTracksAtTimeError(timeRanges, tracks, startTime)
+}
+
+// InsertEmptyTimeRange calls the underlying InsertEmptyTimeRange.
+func (x *MutableCompositionTrack) InsertEmptyTimeRange(timeRange coremedia.CMTimeRange) {
+	x.inner.InsertEmptyTimeRange(timeRange)
+}
+
+// RemoveTimeRange calls the underlying RemoveTimeRange.
+func (x *MutableCompositionTrack) RemoveTimeRange(timeRange coremedia.CMTimeRange) {
+	x.inner.RemoveTimeRange(timeRange)
+}
+
+// ScaleTimeRangeToDuration calls the underlying ScaleTimeRangeToDuration.
+func (x *MutableCompositionTrack) ScaleTimeRangeToDuration(timeRange coremedia.CMTimeRange, duration coremedia.CMTime) {
+	x.inner.ScaleTimeRangeToDuration(timeRange, duration)
+}
+
+// ValidateTrackSegmentsError calls the underlying ValidateTrackSegmentsError.
+func (x *MutableCompositionTrack) ValidateTrackSegmentsError(trackSegments *foundation.NSArray[*raw.AVCompositionTrackSegment]) (bool, error) {
+	return x.inner.ValidateTrackSegmentsError(trackSegments)
+}
+
+// AddTrackAssociationToTrackType calls the underlying AddTrackAssociationToTrackType.
+func (x *MutableCompositionTrack) AddTrackAssociationToTrackType(compositionTrack *raw.AVCompositionTrack, trackAssociationType *foundation.NSString) {
+	x.inner.AddTrackAssociationToTrackType(compositionTrack, trackAssociationType)
+}
+
+// RemoveTrackAssociationToTrackType calls the underlying RemoveTrackAssociationToTrackType.
+func (x *MutableCompositionTrack) RemoveTrackAssociationToTrackType(compositionTrack *raw.AVCompositionTrack, trackAssociationType *foundation.NSString) {
+	x.inner.RemoveTrackAssociationToTrackType(compositionTrack, trackAssociationType)
+}
+
+// SetEnabled calls the underlying SetEnabled.
+func (x *MutableCompositionTrack) SetEnabled(enabled bool) {
+	x.inner.SetEnabled(enabled)
+}
+
+// SetNaturalTimeScale calls the underlying SetNaturalTimeScale.
+func (x *MutableCompositionTrack) SetNaturalTimeScale(naturalTimeScale int32) {
+	x.inner.SetNaturalTimeScale(naturalTimeScale)
+}
+
+// SetLanguageCode calls the underlying SetLanguageCode.
+func (x *MutableCompositionTrack) SetLanguageCode(languageCode string) {
+	x.inner.SetLanguageCode(foundation.NSStringStringWithUTF8String(languageCode))
+}
+
+// SetExtendedLanguageTag calls the underlying SetExtendedLanguageTag.
+func (x *MutableCompositionTrack) SetExtendedLanguageTag(extendedLanguageTag string) {
+	x.inner.SetExtendedLanguageTag(foundation.NSStringStringWithUTF8String(extendedLanguageTag))
+}
+
+// SetPreferredTransform calls the underlying SetPreferredTransform.
+func (x *MutableCompositionTrack) SetPreferredTransform(preferredTransform corefoundation.CGAffineTransform) {
+	x.inner.SetPreferredTransform(preferredTransform)
+}
+
+// SetPreferredVolume calls the underlying SetPreferredVolume.
+func (x *MutableCompositionTrack) SetPreferredVolume(preferredVolume float32) {
+	x.inner.SetPreferredVolume(preferredVolume)
+}
+
+// SetSegments calls the underlying SetSegments.
+func (x *MutableCompositionTrack) SetSegments(segments *foundation.NSArray[*raw.AVCompositionTrackSegment]) {
+	x.inner.SetSegments(segments)
+}
+
+// ReplaceFormatDescriptionWithFormatDescription calls the underlying ReplaceFormatDescriptionWithFormatDescription.
+func (x *MutableCompositionTrack) ReplaceFormatDescriptionWithFormatDescription(originalFormatDescription unsafe.Pointer, replacementFormatDescription unsafe.Pointer) {
+	x.inner.ReplaceFormatDescriptionWithFormatDescription(originalFormatDescription, replacementFormatDescription)
+}
+
 func (x *MutableCompositionTrack) asCompositionTrack() *raw.AVCompositionTrack { return &x.inner.AVCompositionTrack }
 
 func (x *MutableCompositionTrack) asAssetTrack() *raw.AVAssetTrack { return &x.inner.AVCompositionTrack.AVAssetTrack }
+
+// MutableCompositionTrackable is the interface implemented by [MutableCompositionTrack], for mocking and DI.
+type MutableCompositionTrackable interface {
+	Unwrap() *raw.AVMutableCompositionTrack
+	WithEnabled(enabled bool) *MutableCompositionTrack
+	WithNaturalTimeScale(naturalTimeScale int32) *MutableCompositionTrack
+	WithLanguageCode(languageCode string) *MutableCompositionTrack
+	WithExtendedLanguageTag(extendedLanguageTag string) *MutableCompositionTrack
+	WithPreferredTransform(preferredTransform corefoundation.CGAffineTransform) *MutableCompositionTrack
+	WithPreferredVolume(preferredVolume float32) *MutableCompositionTrack
+	WithSegments(items ...*raw.AVCompositionTrackSegment) *MutableCompositionTrack
+	InsertTimeRangeOfTrackAtTimeError(timeRange coremedia.CMTimeRange, track *raw.AVAssetTrack, startTime coremedia.CMTime) (bool, error)
+	InsertTimeRangesOfTracksAtTimeError(timeRanges *foundation.NSArray[*foundation.NSValue], tracks *foundation.NSArray[*raw.AVAssetTrack], startTime coremedia.CMTime) (bool, error)
+	InsertEmptyTimeRange(timeRange coremedia.CMTimeRange)
+	RemoveTimeRange(timeRange coremedia.CMTimeRange)
+	ScaleTimeRangeToDuration(timeRange coremedia.CMTimeRange, duration coremedia.CMTime)
+	ValidateTrackSegmentsError(trackSegments *foundation.NSArray[*raw.AVCompositionTrackSegment]) (bool, error)
+	AddTrackAssociationToTrackType(compositionTrack *raw.AVCompositionTrack, trackAssociationType *foundation.NSString)
+	RemoveTrackAssociationToTrackType(compositionTrack *raw.AVCompositionTrack, trackAssociationType *foundation.NSString)
+	SetEnabled(enabled bool)
+	SetNaturalTimeScale(naturalTimeScale int32)
+	SetLanguageCode(languageCode string)
+	SetExtendedLanguageTag(extendedLanguageTag string)
+	SetPreferredTransform(preferredTransform corefoundation.CGAffineTransform)
+	SetPreferredVolume(preferredVolume float32)
+	SetSegments(segments *foundation.NSArray[*raw.AVCompositionTrackSegment])
+	ReplaceFormatDescriptionWithFormatDescription(originalFormatDescription unsafe.Pointer, replacementFormatDescription unsafe.Pointer)
+}
+
+var _ MutableCompositionTrackable = (*MutableCompositionTrack)(nil)
 

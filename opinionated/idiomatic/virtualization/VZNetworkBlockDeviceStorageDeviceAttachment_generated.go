@@ -48,5 +48,49 @@ func (x *NetworkBlockDeviceStorageDeviceAttachment) WithDelegate(delegate raw.VZ
 	return x
 }
 
+// URL calls the underlying URL.
+func (x *NetworkBlockDeviceStorageDeviceAttachment) URL() *foundation.NSURL {
+	return x.inner.URL()
+}
+
+// Timeout calls the underlying Timeout.
+func (x *NetworkBlockDeviceStorageDeviceAttachment) Timeout() float64 {
+	return x.inner.Timeout()
+}
+
+// IsForcedReadOnly calls the underlying IsForcedReadOnly.
+func (x *NetworkBlockDeviceStorageDeviceAttachment) IsForcedReadOnly() bool {
+	return x.inner.IsForcedReadOnly()
+}
+
+// SynchronizationMode calls the underlying SynchronizationMode.
+func (x *NetworkBlockDeviceStorageDeviceAttachment) SynchronizationMode() raw.VZDiskSynchronizationMode {
+	return x.inner.SynchronizationMode()
+}
+
+// Delegate calls the underlying Delegate.
+func (x *NetworkBlockDeviceStorageDeviceAttachment) Delegate() raw.VZNetworkBlockDeviceStorageDeviceAttachmentDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *NetworkBlockDeviceStorageDeviceAttachment) SetDelegate(delegate raw.VZNetworkBlockDeviceStorageDeviceAttachmentDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
 func (x *NetworkBlockDeviceStorageDeviceAttachment) asStorageDeviceAttachment() *raw.VZStorageDeviceAttachment { return &x.inner.VZStorageDeviceAttachment }
+
+// NetworkBlockDeviceStorageDeviceAttachmentable is the interface implemented by [NetworkBlockDeviceStorageDeviceAttachment], for mocking and DI.
+type NetworkBlockDeviceStorageDeviceAttachmentable interface {
+	Unwrap() *raw.VZNetworkBlockDeviceStorageDeviceAttachment
+	WithDelegate(delegate raw.VZNetworkBlockDeviceStorageDeviceAttachmentDelegate) *NetworkBlockDeviceStorageDeviceAttachment
+	URL() *foundation.NSURL
+	Timeout() float64
+	IsForcedReadOnly() bool
+	SynchronizationMode() raw.VZDiskSynchronizationMode
+	Delegate() raw.VZNetworkBlockDeviceStorageDeviceAttachmentDelegate
+	SetDelegate(delegate raw.VZNetworkBlockDeviceStorageDeviceAttachmentDelegate)
+}
+
+var _ NetworkBlockDeviceStorageDeviceAttachmentable = (*NetworkBlockDeviceStorageDeviceAttachment)(nil)
 

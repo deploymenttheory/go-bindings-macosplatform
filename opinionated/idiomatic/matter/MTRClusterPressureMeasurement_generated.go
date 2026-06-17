@@ -32,7 +32,98 @@ func NewMTRClusterPressureMeasurementWithDeviceEndpointQueue(device *raw.MTRDevi
 	return &MTRClusterPressureMeasurement{inner: raw.MTRClusterPressureMeasurementFromID(_id)}
 }
 
+// ReadAttributeMeasuredValueWithParams calls the underlying ReadAttributeMeasuredValueWithParams.
+func (x *MTRClusterPressureMeasurement) ReadAttributeMeasuredValueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeMeasuredValueWithParams(params)
+}
+
+// ReadAttributeMinMeasuredValueWithParams calls the underlying ReadAttributeMinMeasuredValueWithParams.
+func (x *MTRClusterPressureMeasurement) ReadAttributeMinMeasuredValueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeMinMeasuredValueWithParams(params)
+}
+
+// ReadAttributeMaxMeasuredValueWithParams calls the underlying ReadAttributeMaxMeasuredValueWithParams.
+func (x *MTRClusterPressureMeasurement) ReadAttributeMaxMeasuredValueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeMaxMeasuredValueWithParams(params)
+}
+
+// ReadAttributeToleranceWithParams calls the underlying ReadAttributeToleranceWithParams.
+func (x *MTRClusterPressureMeasurement) ReadAttributeToleranceWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeToleranceWithParams(params)
+}
+
+// ReadAttributeScaledValueWithParams calls the underlying ReadAttributeScaledValueWithParams.
+func (x *MTRClusterPressureMeasurement) ReadAttributeScaledValueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeScaledValueWithParams(params)
+}
+
+// ReadAttributeMinScaledValueWithParams calls the underlying ReadAttributeMinScaledValueWithParams.
+func (x *MTRClusterPressureMeasurement) ReadAttributeMinScaledValueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeMinScaledValueWithParams(params)
+}
+
+// ReadAttributeMaxScaledValueWithParams calls the underlying ReadAttributeMaxScaledValueWithParams.
+func (x *MTRClusterPressureMeasurement) ReadAttributeMaxScaledValueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeMaxScaledValueWithParams(params)
+}
+
+// ReadAttributeScaledToleranceWithParams calls the underlying ReadAttributeScaledToleranceWithParams.
+func (x *MTRClusterPressureMeasurement) ReadAttributeScaledToleranceWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeScaledToleranceWithParams(params)
+}
+
+// ReadAttributeScaleWithParams calls the underlying ReadAttributeScaleWithParams.
+func (x *MTRClusterPressureMeasurement) ReadAttributeScaleWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeScaleWithParams(params)
+}
+
+// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
+func (x *MTRClusterPressureMeasurement) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+}
+
+// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
+func (x *MTRClusterPressureMeasurement) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
+}
+
+// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
+func (x *MTRClusterPressureMeasurement) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeAttributeListWithParams(params)
+}
+
+// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
+func (x *MTRClusterPressureMeasurement) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeFeatureMapWithParams(params)
+}
+
+// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
+func (x *MTRClusterPressureMeasurement) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeClusterRevisionWithParams(params)
+}
+
 func (x *MTRClusterPressureMeasurement) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
 
 func (x *MTRClusterPressureMeasurement) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+
+// MTRClusterPressureMeasurementable is the interface implemented by [MTRClusterPressureMeasurement], for mocking and DI.
+type MTRClusterPressureMeasurementable interface {
+	Unwrap() *raw.MTRClusterPressureMeasurement
+	ReadAttributeMeasuredValueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeMinMeasuredValueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeMaxMeasuredValueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeToleranceWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeScaledValueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeMinScaledValueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeMaxScaledValueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeScaledToleranceWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeScaleWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+}
+
+var _ MTRClusterPressureMeasurementable = (*MTRClusterPressureMeasurement)(nil)
 

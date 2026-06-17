@@ -7,6 +7,7 @@ package metal
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -59,4 +60,87 @@ func (x *MTL4ArgumentTableDescriptor) WithLabel(label string) *MTL4ArgumentTable
 	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
+
+// MaxBufferBindCount calls the underlying MaxBufferBindCount.
+func (x *MTL4ArgumentTableDescriptor) MaxBufferBindCount() uint {
+	return x.inner.MaxBufferBindCount()
+}
+
+// SetMaxBufferBindCount calls the underlying SetMaxBufferBindCount.
+func (x *MTL4ArgumentTableDescriptor) SetMaxBufferBindCount(maxBufferBindCount uint) {
+	x.inner.SetMaxBufferBindCount(maxBufferBindCount)
+}
+
+// MaxTextureBindCount calls the underlying MaxTextureBindCount.
+func (x *MTL4ArgumentTableDescriptor) MaxTextureBindCount() uint {
+	return x.inner.MaxTextureBindCount()
+}
+
+// SetMaxTextureBindCount calls the underlying SetMaxTextureBindCount.
+func (x *MTL4ArgumentTableDescriptor) SetMaxTextureBindCount(maxTextureBindCount uint) {
+	x.inner.SetMaxTextureBindCount(maxTextureBindCount)
+}
+
+// MaxSamplerStateBindCount calls the underlying MaxSamplerStateBindCount.
+func (x *MTL4ArgumentTableDescriptor) MaxSamplerStateBindCount() uint {
+	return x.inner.MaxSamplerStateBindCount()
+}
+
+// SetMaxSamplerStateBindCount calls the underlying SetMaxSamplerStateBindCount.
+func (x *MTL4ArgumentTableDescriptor) SetMaxSamplerStateBindCount(maxSamplerStateBindCount uint) {
+	x.inner.SetMaxSamplerStateBindCount(maxSamplerStateBindCount)
+}
+
+// SetInitializeBindings calls the underlying SetInitializeBindings.
+func (x *MTL4ArgumentTableDescriptor) SetInitializeBindings(initializeBindings bool) {
+	x.inner.SetInitializeBindings(initializeBindings)
+}
+
+// SupportAttributeStrides calls the underlying SupportAttributeStrides.
+func (x *MTL4ArgumentTableDescriptor) SupportAttributeStrides() bool {
+	return x.inner.SupportAttributeStrides()
+}
+
+// SetSupportAttributeStrides calls the underlying SetSupportAttributeStrides.
+func (x *MTL4ArgumentTableDescriptor) SetSupportAttributeStrides(supportAttributeStrides bool) {
+	x.inner.SetSupportAttributeStrides(supportAttributeStrides)
+}
+
+// Label calls the underlying Label.
+func (x *MTL4ArgumentTableDescriptor) Label() string {
+	_r := x.inner.Label()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLabel calls the underlying SetLabel.
+func (x *MTL4ArgumentTableDescriptor) SetLabel(label string) {
+	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+}
+
+// MTL4ArgumentTableDescriptorable is the interface implemented by [MTL4ArgumentTableDescriptor], for mocking and DI.
+type MTL4ArgumentTableDescriptorable interface {
+	Unwrap() *raw.MTL4ArgumentTableDescriptor
+	WithMaxBufferBindCount(maxBufferBindCount uint) *MTL4ArgumentTableDescriptor
+	WithMaxTextureBindCount(maxTextureBindCount uint) *MTL4ArgumentTableDescriptor
+	WithMaxSamplerStateBindCount(maxSamplerStateBindCount uint) *MTL4ArgumentTableDescriptor
+	WithInitializeBindings(initializeBindings bool) *MTL4ArgumentTableDescriptor
+	WithSupportAttributeStrides(supportAttributeStrides bool) *MTL4ArgumentTableDescriptor
+	WithLabel(label string) *MTL4ArgumentTableDescriptor
+	MaxBufferBindCount() uint
+	SetMaxBufferBindCount(maxBufferBindCount uint)
+	MaxTextureBindCount() uint
+	SetMaxTextureBindCount(maxTextureBindCount uint)
+	MaxSamplerStateBindCount() uint
+	SetMaxSamplerStateBindCount(maxSamplerStateBindCount uint)
+	SetInitializeBindings(initializeBindings bool)
+	SupportAttributeStrides() bool
+	SetSupportAttributeStrides(supportAttributeStrides bool)
+	Label() string
+	SetLabel(label string)
+}
+
+var _ MTL4ArgumentTableDescriptorable = (*MTL4ArgumentTableDescriptor)(nil)
 

@@ -6,6 +6,7 @@ package systemextensions
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/systemextensions"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -28,4 +29,34 @@ func (x *SystemExtensionRequest) WithDelegate(delegate raw.OSSystemExtensionRequ
 	x.inner.SetDelegate(delegate)
 	return x
 }
+
+// Delegate calls the underlying Delegate.
+func (x *SystemExtensionRequest) Delegate() raw.OSSystemExtensionRequestDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *SystemExtensionRequest) SetDelegate(delegate raw.OSSystemExtensionRequestDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// Identifier calls the underlying Identifier.
+func (x *SystemExtensionRequest) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SystemExtensionRequestable is the interface implemented by [SystemExtensionRequest], for mocking and DI.
+type SystemExtensionRequestable interface {
+	Unwrap() *raw.OSSystemExtensionRequest
+	WithDelegate(delegate raw.OSSystemExtensionRequestDelegate) *SystemExtensionRequest
+	Delegate() raw.OSSystemExtensionRequestDelegate
+	SetDelegate(delegate raw.OSSystemExtensionRequestDelegate)
+	Identifier() string
+}
+
+var _ SystemExtensionRequestable = (*SystemExtensionRequest)(nil)
 

@@ -8,6 +8,7 @@ import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/accessibility"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -106,16 +107,144 @@ func (x *ChartDescriptor) WithYAxis(yAxis *raw.AXNumericDataAxisDescriptor) *Cha
 	return x
 }
 
+// Title calls the underlying Title.
+func (x *ChartDescriptor) Title() string {
+	_r := x.inner.Title()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetTitle calls the underlying SetTitle.
+func (x *ChartDescriptor) SetTitle(title string) {
+	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+}
+
+// AttributedTitle calls the underlying AttributedTitle.
+func (x *ChartDescriptor) AttributedTitle() *foundation.NSAttributedString {
+	return x.inner.AttributedTitle()
+}
+
+// SetAttributedTitle calls the underlying SetAttributedTitle.
+func (x *ChartDescriptor) SetAttributedTitle(attributedTitle *foundation.NSAttributedString) {
+	x.inner.SetAttributedTitle(attributedTitle)
+}
+
+// Summary calls the underlying Summary.
+func (x *ChartDescriptor) Summary() string {
+	_r := x.inner.Summary()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetSummary calls the underlying SetSummary.
+func (x *ChartDescriptor) SetSummary(summary string) {
+	x.inner.SetSummary(foundation.NSStringStringWithUTF8String(summary))
+}
+
+// ContentDirection calls the underlying ContentDirection.
+func (x *ChartDescriptor) ContentDirection() raw.AXChartDescriptorContentDirection {
+	return x.inner.ContentDirection()
+}
+
+// SetContentDirection calls the underlying SetContentDirection.
+func (x *ChartDescriptor) SetContentDirection(contentDirection raw.AXChartDescriptorContentDirection) {
+	x.inner.SetContentDirection(contentDirection)
+}
+
+// ContentFrame calls the underlying ContentFrame.
+func (x *ChartDescriptor) ContentFrame() corefoundation.CGRect {
+	return x.inner.ContentFrame()
+}
+
+// SetContentFrame calls the underlying SetContentFrame.
+func (x *ChartDescriptor) SetContentFrame(contentFrame corefoundation.CGRect) {
+	x.inner.SetContentFrame(contentFrame)
+}
+
 // Series returns the collection as a Go slice.
 func (x *ChartDescriptor) Series() []*raw.AXDataSeriesDescriptor {
 	arr := x.inner.Series()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AXDataSeriesDescriptor, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AXDataSeriesDescriptor {
+		return raw.AXDataSeriesDescriptorFromID(purego.Retain(_id))
+	})
 }
+
+// SetSeries calls the underlying SetSeries.
+func (x *ChartDescriptor) SetSeries(series *foundation.NSArray[*raw.AXDataSeriesDescriptor]) {
+	x.inner.SetSeries(series)
+}
+
+// XAxis calls the underlying XAxis.
+func (x *ChartDescriptor) XAxis() raw.AXDataAxisDescriptor {
+	return x.inner.XAxis()
+}
+
+// SetXAxis calls the underlying SetXAxis.
+func (x *ChartDescriptor) SetXAxis(xAxis raw.AXDataAxisDescriptor) {
+	x.inner.SetXAxis(xAxis)
+}
+
+// YAxis calls the underlying YAxis.
+func (x *ChartDescriptor) YAxis() *NumericDataAxisDescriptor {
+	_r := x.inner.YAxis()
+	if _r == nil {
+		return nil
+	}
+	return &NumericDataAxisDescriptor{inner: _r}
+}
+
+// SetYAxis calls the underlying SetYAxis.
+func (x *ChartDescriptor) SetYAxis(yAxis *raw.AXNumericDataAxisDescriptor) {
+	x.inner.SetYAxis(yAxis)
+}
+
+// AdditionalAxes calls the underlying AdditionalAxes.
+func (x *ChartDescriptor) AdditionalAxes() *foundation.NSArray[raw.AXDataAxisDescriptor] {
+	return x.inner.AdditionalAxes()
+}
+
+// SetAdditionalAxes calls the underlying SetAdditionalAxes.
+func (x *ChartDescriptor) SetAdditionalAxes(additionalAxes *foundation.NSArray[raw.AXDataAxisDescriptor]) {
+	x.inner.SetAdditionalAxes(additionalAxes)
+}
+
+// ChartDescriptorable is the interface implemented by [ChartDescriptor], for mocking and DI.
+type ChartDescriptorable interface {
+	Unwrap() *raw.AXChartDescriptor
+	WithTitle(title string) *ChartDescriptor
+	WithAttributedTitle(attributedTitle *foundation.NSAttributedString) *ChartDescriptor
+	WithSummary(summary string) *ChartDescriptor
+	WithContentDirection(contentDirection raw.AXChartDescriptorContentDirection) *ChartDescriptor
+	WithContentFrame(contentFrame corefoundation.CGRect) *ChartDescriptor
+	WithSeries(items ...*raw.AXDataSeriesDescriptor) *ChartDescriptor
+	WithXAxis(xAxis raw.AXDataAxisDescriptor) *ChartDescriptor
+	WithYAxis(yAxis *raw.AXNumericDataAxisDescriptor) *ChartDescriptor
+	Title() string
+	SetTitle(title string)
+	AttributedTitle() *foundation.NSAttributedString
+	SetAttributedTitle(attributedTitle *foundation.NSAttributedString)
+	Summary() string
+	SetSummary(summary string)
+	ContentDirection() raw.AXChartDescriptorContentDirection
+	SetContentDirection(contentDirection raw.AXChartDescriptorContentDirection)
+	ContentFrame() corefoundation.CGRect
+	SetContentFrame(contentFrame corefoundation.CGRect)
+	Series() []*raw.AXDataSeriesDescriptor
+	SetSeries(series *foundation.NSArray[*raw.AXDataSeriesDescriptor])
+	XAxis() raw.AXDataAxisDescriptor
+	SetXAxis(xAxis raw.AXDataAxisDescriptor)
+	YAxis() *NumericDataAxisDescriptor
+	SetYAxis(yAxis *raw.AXNumericDataAxisDescriptor)
+	AdditionalAxes() *foundation.NSArray[raw.AXDataAxisDescriptor]
+	SetAdditionalAxes(additionalAxes *foundation.NSArray[raw.AXDataAxisDescriptor])
+}
+
+var _ ChartDescriptorable = (*ChartDescriptor)(nil)
 

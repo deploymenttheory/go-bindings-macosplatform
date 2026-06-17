@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,4 +54,84 @@ func (x *MTRAccountLoginClusterLoginParams) WithServerSideProcessingTimeout(serv
 	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
 	return x
 }
+
+// TempAccountIdentifier calls the underlying TempAccountIdentifier.
+func (x *MTRAccountLoginClusterLoginParams) TempAccountIdentifier() string {
+	_r := x.inner.TempAccountIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetTempAccountIdentifier calls the underlying SetTempAccountIdentifier.
+func (x *MTRAccountLoginClusterLoginParams) SetTempAccountIdentifier(tempAccountIdentifier string) {
+	x.inner.SetTempAccountIdentifier(foundation.NSStringStringWithUTF8String(tempAccountIdentifier))
+}
+
+// SetupPIN calls the underlying SetupPIN.
+func (x *MTRAccountLoginClusterLoginParams) SetupPIN() string {
+	_r := x.inner.SetupPIN()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetSetupPIN calls the underlying SetSetupPIN.
+func (x *MTRAccountLoginClusterLoginParams) SetSetupPIN(setupPIN string) {
+	x.inner.SetSetupPIN(foundation.NSStringStringWithUTF8String(setupPIN))
+}
+
+// Node calls the underlying Node.
+func (x *MTRAccountLoginClusterLoginParams) Node() *foundation.NSNumber {
+	return x.inner.Node()
+}
+
+// SetNode calls the underlying SetNode.
+func (x *MTRAccountLoginClusterLoginParams) SetNode(node *foundation.NSNumber) {
+	x.inner.SetNode(node)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRAccountLoginClusterLoginParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRAccountLoginClusterLoginParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRAccountLoginClusterLoginParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRAccountLoginClusterLoginParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRAccountLoginClusterLoginParamsable is the interface implemented by [MTRAccountLoginClusterLoginParams], for mocking and DI.
+type MTRAccountLoginClusterLoginParamsable interface {
+	Unwrap() *raw.MTRAccountLoginClusterLoginParams
+	WithTempAccountIdentifier(tempAccountIdentifier string) *MTRAccountLoginClusterLoginParams
+	WithSetupPIN(setupPIN string) *MTRAccountLoginClusterLoginParams
+	WithNode(node *foundation.NSNumber) *MTRAccountLoginClusterLoginParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRAccountLoginClusterLoginParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRAccountLoginClusterLoginParams
+	TempAccountIdentifier() string
+	SetTempAccountIdentifier(tempAccountIdentifier string)
+	SetupPIN() string
+	SetSetupPIN(setupPIN string)
+	Node() *foundation.NSNumber
+	SetNode(node *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRAccountLoginClusterLoginParamsable = (*MTRAccountLoginClusterLoginParams)(nil)
 

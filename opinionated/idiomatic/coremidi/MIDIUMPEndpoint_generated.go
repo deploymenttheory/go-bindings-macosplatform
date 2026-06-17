@@ -7,6 +7,7 @@ package coremidi
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremidi"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -41,18 +42,109 @@ func (x *UMPEndpoint) WithFunctionBlocks(items ...UMPFunctionBlockProvider) *UMP
 	return x
 }
 
+// Name calls the underlying Name.
+func (x *UMPEndpoint) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// MIDIProtocol calls the underlying MIDIProtocol.
+func (x *UMPEndpoint) MIDIProtocol() raw.MIDIProtocolID {
+	return x.inner.MIDIProtocol()
+}
+
+// SupportedMIDIProtocols calls the underlying SupportedMIDIProtocols.
+func (x *UMPEndpoint) SupportedMIDIProtocols() raw.MIDIUMPProtocolOptions {
+	return x.inner.SupportedMIDIProtocols()
+}
+
+// MIDIDestination calls the underlying MIDIDestination.
+func (x *UMPEndpoint) MIDIDestination() uint {
+	return x.inner.MIDIDestination()
+}
+
+// MIDISource calls the underlying MIDISource.
+func (x *UMPEndpoint) MIDISource() uint {
+	return x.inner.MIDISource()
+}
+
+// DeviceInfo calls the underlying DeviceInfo.
+func (x *UMPEndpoint) DeviceInfo() *MIDI2DeviceInfo {
+	_r := x.inner.DeviceInfo()
+	if _r == nil {
+		return nil
+	}
+	return &MIDI2DeviceInfo{inner: _r}
+}
+
+// ProductInstanceID calls the underlying ProductInstanceID.
+func (x *UMPEndpoint) ProductInstanceID() string {
+	_r := x.inner.ProductInstanceID()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// HasStaticFunctionBlocks calls the underlying HasStaticFunctionBlocks.
+func (x *UMPEndpoint) HasStaticFunctionBlocks() bool {
+	return x.inner.HasStaticFunctionBlocks()
+}
+
+// HasJRTSReceiveCapability calls the underlying HasJRTSReceiveCapability.
+func (x *UMPEndpoint) HasJRTSReceiveCapability() bool {
+	return x.inner.HasJRTSReceiveCapability()
+}
+
+// HasJRTSTransmitCapability calls the underlying HasJRTSTransmitCapability.
+func (x *UMPEndpoint) HasJRTSTransmitCapability() bool {
+	return x.inner.HasJRTSTransmitCapability()
+}
+
+// EndpointType calls the underlying EndpointType.
+func (x *UMPEndpoint) EndpointType() raw.MIDIUMPCIObjectBackingType {
+	return x.inner.EndpointType()
+}
+
 // FunctionBlocks returns the collection as a Go slice.
 func (x *UMPEndpoint) FunctionBlocks() []*raw.MIDIUMPFunctionBlock {
 	arr := x.inner.FunctionBlocks()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MIDIUMPFunctionBlock, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MIDIUMPFunctionBlock {
+		return raw.MIDIUMPFunctionBlockFromID(purego.Retain(_id))
+	})
+}
+
+// SetFunctionBlocks calls the underlying SetFunctionBlocks.
+func (x *UMPEndpoint) SetFunctionBlocks(functionBlocks *foundation.NSArray[*raw.MIDIUMPFunctionBlock]) {
+	x.inner.SetFunctionBlocks(functionBlocks)
 }
 
 func (x *UMPEndpoint) asUMPEndpoint() *raw.MIDIUMPEndpoint { return x.inner }
+
+// UMPEndpointable is the interface implemented by [UMPEndpoint], for mocking and DI.
+type UMPEndpointable interface {
+	Unwrap() *raw.MIDIUMPEndpoint
+	WithFunctionBlocks(items ...UMPFunctionBlockProvider) *UMPEndpoint
+	Name() string
+	MIDIProtocol() raw.MIDIProtocolID
+	SupportedMIDIProtocols() raw.MIDIUMPProtocolOptions
+	MIDIDestination() uint
+	MIDISource() uint
+	DeviceInfo() *MIDI2DeviceInfo
+	ProductInstanceID() string
+	HasStaticFunctionBlocks() bool
+	HasJRTSReceiveCapability() bool
+	HasJRTSTransmitCapability() bool
+	EndpointType() raw.MIDIUMPCIObjectBackingType
+	FunctionBlocks() []*raw.MIDIUMPFunctionBlock
+	SetFunctionBlocks(functionBlocks *foundation.NSArray[*raw.MIDIUMPFunctionBlock])
+}
+
+var _ UMPEndpointable = (*UMPEndpoint)(nil)
 

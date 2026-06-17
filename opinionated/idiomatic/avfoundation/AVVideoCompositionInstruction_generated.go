@@ -7,7 +7,9 @@ package avfoundation
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // VideoCompositionInstruction wraps [raw.AVVideoCompositionInstruction] with a fluent Go API.
@@ -24,17 +26,25 @@ func NewVideoCompositionInstruction() *VideoCompositionInstruction {
 	return &VideoCompositionInstruction{inner: raw.AVVideoCompositionInstructionFromID(_id)}
 }
 
+// BackgroundColor calls the underlying BackgroundColor.
+func (x *VideoCompositionInstruction) BackgroundColor() unsafe.Pointer {
+	return x.inner.BackgroundColor()
+}
+
 // LayerInstructions returns the collection as a Go slice.
 func (x *VideoCompositionInstruction) LayerInstructions() []*raw.AVVideoCompositionLayerInstruction {
 	arr := x.inner.LayerInstructions()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AVVideoCompositionLayerInstruction, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVVideoCompositionLayerInstruction {
+		return raw.AVVideoCompositionLayerInstructionFromID(purego.Retain(_id))
+	})
+}
+
+// EnablePostProcessing calls the underlying EnablePostProcessing.
+func (x *VideoCompositionInstruction) EnablePostProcessing() bool {
+	return x.inner.EnablePostProcessing()
 }
 
 // RequiredSourceTrackIDs returns the collection as a Go slice.
@@ -43,11 +53,14 @@ func (x *VideoCompositionInstruction) RequiredSourceTrackIDs() []*foundation.NSV
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSValue, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSValue {
+		return foundation.NSValueFromID(purego.Retain(_id))
+	})
+}
+
+// PassthroughTrackID calls the underlying PassthroughTrackID.
+func (x *VideoCompositionInstruction) PassthroughTrackID() int32 {
+	return x.inner.PassthroughTrackID()
 }
 
 // RequiredSourceSampleDataTrackIDs returns the collection as a Go slice.
@@ -56,12 +69,23 @@ func (x *VideoCompositionInstruction) RequiredSourceSampleDataTrackIDs() []*foun
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
 }
 
 func (x *VideoCompositionInstruction) asVideoCompositionInstruction() *raw.AVVideoCompositionInstruction { return x.inner }
+
+// VideoCompositionInstructionable is the interface implemented by [VideoCompositionInstruction], for mocking and DI.
+type VideoCompositionInstructionable interface {
+	Unwrap() *raw.AVVideoCompositionInstruction
+	BackgroundColor() unsafe.Pointer
+	LayerInstructions() []*raw.AVVideoCompositionLayerInstruction
+	EnablePostProcessing() bool
+	RequiredSourceTrackIDs() []*foundation.NSValue
+	PassthroughTrackID() int32
+	RequiredSourceSampleDataTrackIDs() []*foundation.NSNumber
+}
+
+var _ VideoCompositionInstructionable = (*VideoCompositionInstruction)(nil)
 

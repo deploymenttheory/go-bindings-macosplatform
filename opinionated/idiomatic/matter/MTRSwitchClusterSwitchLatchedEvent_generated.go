@@ -30,3 +30,23 @@ func (x *MTRSwitchClusterSwitchLatchedEvent) WithNewPosition(newPosition *founda
 	return x
 }
 
+// GetNewPosition calls the underlying GetNewPosition.
+func (x *MTRSwitchClusterSwitchLatchedEvent) GetNewPosition() *foundation.NSNumber {
+	return x.inner.GetNewPosition()
+}
+
+// SetNewPosition calls the underlying SetNewPosition.
+func (x *MTRSwitchClusterSwitchLatchedEvent) SetNewPosition(newPosition *foundation.NSNumber) {
+	x.inner.SetNewPosition(newPosition)
+}
+
+// MTRSwitchClusterSwitchLatchedEventable is the interface implemented by [MTRSwitchClusterSwitchLatchedEvent], for mocking and DI.
+type MTRSwitchClusterSwitchLatchedEventable interface {
+	Unwrap() *raw.MTRSwitchClusterSwitchLatchedEvent
+	WithNewPosition(newPosition *foundation.NSNumber) *MTRSwitchClusterSwitchLatchedEvent
+	GetNewPosition() *foundation.NSNumber
+	SetNewPosition(newPosition *foundation.NSNumber)
+}
+
+var _ MTRSwitchClusterSwitchLatchedEventable = (*MTRSwitchClusterSwitchLatchedEvent)(nil)
+

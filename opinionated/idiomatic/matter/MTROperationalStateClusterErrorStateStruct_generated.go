@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -41,4 +42,58 @@ func (x *MTROperationalStateClusterErrorStateStruct) WithErrorStateDetails(error
 	x.inner.SetErrorStateDetails(foundation.NSStringStringWithUTF8String(errorStateDetails))
 	return x
 }
+
+// ErrorStateID calls the underlying ErrorStateID.
+func (x *MTROperationalStateClusterErrorStateStruct) ErrorStateID() *foundation.NSNumber {
+	return x.inner.ErrorStateID()
+}
+
+// SetErrorStateID calls the underlying SetErrorStateID.
+func (x *MTROperationalStateClusterErrorStateStruct) SetErrorStateID(errorStateID *foundation.NSNumber) {
+	x.inner.SetErrorStateID(errorStateID)
+}
+
+// ErrorStateLabel calls the underlying ErrorStateLabel.
+func (x *MTROperationalStateClusterErrorStateStruct) ErrorStateLabel() string {
+	_r := x.inner.ErrorStateLabel()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetErrorStateLabel calls the underlying SetErrorStateLabel.
+func (x *MTROperationalStateClusterErrorStateStruct) SetErrorStateLabel(errorStateLabel string) {
+	x.inner.SetErrorStateLabel(foundation.NSStringStringWithUTF8String(errorStateLabel))
+}
+
+// ErrorStateDetails calls the underlying ErrorStateDetails.
+func (x *MTROperationalStateClusterErrorStateStruct) ErrorStateDetails() string {
+	_r := x.inner.ErrorStateDetails()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetErrorStateDetails calls the underlying SetErrorStateDetails.
+func (x *MTROperationalStateClusterErrorStateStruct) SetErrorStateDetails(errorStateDetails string) {
+	x.inner.SetErrorStateDetails(foundation.NSStringStringWithUTF8String(errorStateDetails))
+}
+
+// MTROperationalStateClusterErrorStateStructable is the interface implemented by [MTROperationalStateClusterErrorStateStruct], for mocking and DI.
+type MTROperationalStateClusterErrorStateStructable interface {
+	Unwrap() *raw.MTROperationalStateClusterErrorStateStruct
+	WithErrorStateID(errorStateID *foundation.NSNumber) *MTROperationalStateClusterErrorStateStruct
+	WithErrorStateLabel(errorStateLabel string) *MTROperationalStateClusterErrorStateStruct
+	WithErrorStateDetails(errorStateDetails string) *MTROperationalStateClusterErrorStateStruct
+	ErrorStateID() *foundation.NSNumber
+	SetErrorStateID(errorStateID *foundation.NSNumber)
+	ErrorStateLabel() string
+	SetErrorStateLabel(errorStateLabel string)
+	ErrorStateDetails() string
+	SetErrorStateDetails(errorStateDetails string)
+}
+
+var _ MTROperationalStateClusterErrorStateStructable = (*MTROperationalStateClusterErrorStateStruct)(nil)
 

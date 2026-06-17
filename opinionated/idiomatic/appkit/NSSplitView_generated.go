@@ -6,7 +6,9 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,20 +56,189 @@ func (x *SplitView) WithArrangesAllSubviews(arrangesAllSubviews bool) *SplitView
 	return x
 }
 
+// DrawDividerInRect calls the underlying DrawDividerInRect.
+func (x *SplitView) DrawDividerInRect(rect corefoundation.CGRect) {
+	x.inner.DrawDividerInRect(rect)
+}
+
+// AdjustSubviews calls the underlying AdjustSubviews.
+func (x *SplitView) AdjustSubviews() {
+	x.inner.AdjustSubviews()
+}
+
+// IsSubviewCollapsed calls the underlying IsSubviewCollapsed.
+func (x *SplitView) IsSubviewCollapsed(subview *raw.NSView) bool {
+	return x.inner.IsSubviewCollapsed(subview)
+}
+
+// MinPossiblePositionOfDividerAtIndex calls the underlying MinPossiblePositionOfDividerAtIndex.
+func (x *SplitView) MinPossiblePositionOfDividerAtIndex(dividerIndex int) float64 {
+	return x.inner.MinPossiblePositionOfDividerAtIndex(dividerIndex)
+}
+
+// MaxPossiblePositionOfDividerAtIndex calls the underlying MaxPossiblePositionOfDividerAtIndex.
+func (x *SplitView) MaxPossiblePositionOfDividerAtIndex(dividerIndex int) float64 {
+	return x.inner.MaxPossiblePositionOfDividerAtIndex(dividerIndex)
+}
+
+// SetPositionOfDividerAtIndex calls the underlying SetPositionOfDividerAtIndex.
+func (x *SplitView) SetPositionOfDividerAtIndex(position float64, dividerIndex int) {
+	x.inner.SetPositionOfDividerAtIndex(position, dividerIndex)
+}
+
+// HoldingPriorityForSubviewAtIndex calls the underlying HoldingPriorityForSubviewAtIndex.
+func (x *SplitView) HoldingPriorityForSubviewAtIndex(subviewIndex int) float32 {
+	return x.inner.HoldingPriorityForSubviewAtIndex(subviewIndex)
+}
+
+// SetHoldingPriorityForSubviewAtIndex calls the underlying SetHoldingPriorityForSubviewAtIndex.
+func (x *SplitView) SetHoldingPriorityForSubviewAtIndex(priority float32, subviewIndex int) {
+	x.inner.SetHoldingPriorityForSubviewAtIndex(priority, subviewIndex)
+}
+
+// IsVertical calls the underlying IsVertical.
+func (x *SplitView) IsVertical() bool {
+	return x.inner.IsVertical()
+}
+
+// SetVertical calls the underlying SetVertical.
+func (x *SplitView) SetVertical(vertical bool) {
+	x.inner.SetVertical(vertical)
+}
+
+// DividerStyle calls the underlying DividerStyle.
+func (x *SplitView) DividerStyle() raw.NSSplitViewDividerStyle {
+	return x.inner.DividerStyle()
+}
+
+// SetDividerStyle calls the underlying SetDividerStyle.
+func (x *SplitView) SetDividerStyle(dividerStyle raw.NSSplitViewDividerStyle) {
+	x.inner.SetDividerStyle(dividerStyle)
+}
+
+// AutosaveName calls the underlying AutosaveName.
+func (x *SplitView) AutosaveName() string {
+	_r := x.inner.AutosaveName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetAutosaveName calls the underlying SetAutosaveName.
+func (x *SplitView) SetAutosaveName(autosaveName *foundation.NSString) {
+	x.inner.SetAutosaveName(autosaveName)
+}
+
+// Delegate calls the underlying Delegate.
+func (x *SplitView) Delegate() raw.NSSplitViewDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *SplitView) SetDelegate(delegate raw.NSSplitViewDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// DividerColor calls the underlying DividerColor.
+func (x *SplitView) DividerColor() *Color {
+	_r := x.inner.DividerColor()
+	if _r == nil {
+		return nil
+	}
+	return &Color{inner: _r}
+}
+
+// DividerThickness calls the underlying DividerThickness.
+func (x *SplitView) DividerThickness() float64 {
+	return x.inner.DividerThickness()
+}
+
+// AddArrangedSubview calls the underlying AddArrangedSubview.
+func (x *SplitView) AddArrangedSubview(view *raw.NSView) {
+	x.inner.AddArrangedSubview(view)
+}
+
+// InsertArrangedSubviewAtIndex calls the underlying InsertArrangedSubviewAtIndex.
+func (x *SplitView) InsertArrangedSubviewAtIndex(view *raw.NSView, index int) {
+	x.inner.InsertArrangedSubviewAtIndex(view, index)
+}
+
+// RemoveArrangedSubview calls the underlying RemoveArrangedSubview.
+func (x *SplitView) RemoveArrangedSubview(view *raw.NSView) {
+	x.inner.RemoveArrangedSubview(view)
+}
+
+// ArrangesAllSubviews calls the underlying ArrangesAllSubviews.
+func (x *SplitView) ArrangesAllSubviews() bool {
+	return x.inner.ArrangesAllSubviews()
+}
+
+// SetArrangesAllSubviews calls the underlying SetArrangesAllSubviews.
+func (x *SplitView) SetArrangesAllSubviews(arrangesAllSubviews bool) {
+	x.inner.SetArrangesAllSubviews(arrangesAllSubviews)
+}
+
 // ArrangedSubviews returns the collection as a Go slice.
 func (x *SplitView) ArrangedSubviews() []*raw.NSView {
 	arr := x.inner.ArrangedSubviews()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSView, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSView {
+		return raw.NSViewFromID(purego.Retain(_id))
+	})
+}
+
+// SetIsPaneSplitter calls the underlying SetIsPaneSplitter.
+func (x *SplitView) SetIsPaneSplitter(flag bool) {
+	x.inner.SetIsPaneSplitter(flag)
+}
+
+// IsPaneSplitter calls the underlying IsPaneSplitter.
+func (x *SplitView) IsPaneSplitter() bool {
+	return x.inner.IsPaneSplitter()
 }
 
 func (x *SplitView) asView() *raw.NSView { return &x.inner.NSView }
 
 func (x *SplitView) asResponder() *raw.NSResponder { return &x.inner.NSView.NSResponder }
+
+// SplitViewable is the interface implemented by [SplitView], for mocking and DI.
+type SplitViewable interface {
+	Unwrap() *raw.NSSplitView
+	WithVertical(vertical bool) *SplitView
+	WithDividerStyle(dividerStyle raw.NSSplitViewDividerStyle) *SplitView
+	WithAutosaveName(autosaveName *foundation.NSString) *SplitView
+	WithDelegate(delegate raw.NSSplitViewDelegate) *SplitView
+	WithArrangesAllSubviews(arrangesAllSubviews bool) *SplitView
+	DrawDividerInRect(rect corefoundation.CGRect)
+	AdjustSubviews()
+	IsSubviewCollapsed(subview *raw.NSView) bool
+	MinPossiblePositionOfDividerAtIndex(dividerIndex int) float64
+	MaxPossiblePositionOfDividerAtIndex(dividerIndex int) float64
+	SetPositionOfDividerAtIndex(position float64, dividerIndex int)
+	HoldingPriorityForSubviewAtIndex(subviewIndex int) float32
+	SetHoldingPriorityForSubviewAtIndex(priority float32, subviewIndex int)
+	IsVertical() bool
+	SetVertical(vertical bool)
+	DividerStyle() raw.NSSplitViewDividerStyle
+	SetDividerStyle(dividerStyle raw.NSSplitViewDividerStyle)
+	AutosaveName() string
+	SetAutosaveName(autosaveName *foundation.NSString)
+	Delegate() raw.NSSplitViewDelegate
+	SetDelegate(delegate raw.NSSplitViewDelegate)
+	DividerColor() *Color
+	DividerThickness() float64
+	AddArrangedSubview(view *raw.NSView)
+	InsertArrangedSubviewAtIndex(view *raw.NSView, index int)
+	RemoveArrangedSubview(view *raw.NSView)
+	ArrangesAllSubviews() bool
+	SetArrangesAllSubviews(arrangesAllSubviews bool)
+	ArrangedSubviews() []*raw.NSView
+	SetIsPaneSplitter(flag bool)
+	IsPaneSplitter() bool
+}
+
+var _ SplitViewable = (*SplitView)(nil)
 

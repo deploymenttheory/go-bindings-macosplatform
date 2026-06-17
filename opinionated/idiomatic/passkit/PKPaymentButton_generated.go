@@ -30,3 +30,23 @@ func (x *PaymentButton) WithCornerRadius(cornerRadius float64) *PaymentButton {
 	return x
 }
 
+// CornerRadius calls the underlying CornerRadius.
+func (x *PaymentButton) CornerRadius() float64 {
+	return x.inner.CornerRadius()
+}
+
+// SetCornerRadius calls the underlying SetCornerRadius.
+func (x *PaymentButton) SetCornerRadius(cornerRadius float64) {
+	x.inner.SetCornerRadius(cornerRadius)
+}
+
+// PaymentButtonable is the interface implemented by [PaymentButton], for mocking and DI.
+type PaymentButtonable interface {
+	Unwrap() *raw.PKPaymentButton
+	WithCornerRadius(cornerRadius float64) *PaymentButton
+	CornerRadius() float64
+	SetCornerRadius(cornerRadius float64)
+}
+
+var _ PaymentButtonable = (*PaymentButton)(nil)
+

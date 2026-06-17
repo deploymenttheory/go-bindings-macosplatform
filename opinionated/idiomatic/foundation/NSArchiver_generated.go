@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
@@ -24,7 +25,46 @@ func NewArchiverForWritingWithMutableData(mdata *raw.NSMutableData) *Archiver {
 	return &Archiver{inner: raw.NSArchiverFromID(_id)}
 }
 
+// EncodeClassNameIntoClassName calls the underlying EncodeClassNameIntoClassName.
+func (x *Archiver) EncodeClassNameIntoClassName(trueName string, inArchiveName string) {
+	x.inner.EncodeClassNameIntoClassName(foundation.NSStringStringWithUTF8String(trueName), foundation.NSStringStringWithUTF8String(inArchiveName))
+}
+
+// ClassNameEncodedForTrueClassName calls the underlying ClassNameEncodedForTrueClassName.
+func (x *Archiver) ClassNameEncodedForTrueClassName(trueName string) *String {
+	_r := x.inner.ClassNameEncodedForTrueClassName(foundation.NSStringStringWithUTF8String(trueName))
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// ReplaceObjectWithObject calls the underlying ReplaceObjectWithObject.
+func (x *Archiver) ReplaceObjectWithObject(object objc.ID, newObject objc.ID) {
+	x.inner.ReplaceObjectWithObject(object, newObject)
+}
+
+// ArchiverData calls the underlying ArchiverData.
+func (x *Archiver) ArchiverData() *MutableData {
+	_r := x.inner.ArchiverData()
+	if _r == nil {
+		return nil
+	}
+	return &MutableData{inner: _r}
+}
+
 func (x *Archiver) asCoder() *raw.NSCoder { return &x.inner.NSCoder }
 
 func (x *Archiver) asObject() *raw.NSObject { return &x.inner.NSCoder.NSObject }
+
+// Archiverable is the interface implemented by [Archiver], for mocking and DI.
+type Archiverable interface {
+	Unwrap() *raw.NSArchiver
+	EncodeClassNameIntoClassName(trueName string, inArchiveName string)
+	ClassNameEncodedForTrueClassName(trueName string) *String
+	ReplaceObjectWithObject(object objc.ID, newObject objc.ID)
+	ArchiverData() *MutableData
+}
+
+var _ Archiverable = (*Archiver)(nil)
 

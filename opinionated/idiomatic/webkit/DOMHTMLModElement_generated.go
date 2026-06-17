@@ -7,6 +7,7 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -36,6 +37,34 @@ func (x *DOMHTMLModElement) WithDateTime(dateTime string) *DOMHTMLModElement {
 	return x
 }
 
+// Cite calls the underlying Cite.
+func (x *DOMHTMLModElement) Cite() string {
+	_r := x.inner.Cite()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetCite calls the underlying SetCite.
+func (x *DOMHTMLModElement) SetCite(cite string) {
+	x.inner.SetCite(foundation.NSStringStringWithUTF8String(cite))
+}
+
+// DateTime calls the underlying DateTime.
+func (x *DOMHTMLModElement) DateTime() string {
+	_r := x.inner.DateTime()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetDateTime calls the underlying SetDateTime.
+func (x *DOMHTMLModElement) SetDateTime(dateTime string) {
+	x.inner.SetDateTime(foundation.NSStringStringWithUTF8String(dateTime))
+}
+
 func (x *DOMHTMLModElement) asDOMHTMLElement() *raw.DOMHTMLElement { return &x.inner.DOMHTMLElement }
 
 func (x *DOMHTMLModElement) asDOMElement() *raw.DOMElement { return &x.inner.DOMHTMLElement.DOMElement }
@@ -45,4 +74,17 @@ func (x *DOMHTMLModElement) asDOMNode() *raw.DOMNode { return &x.inner.DOMHTMLEl
 func (x *DOMHTMLModElement) asDOMObject() *raw.DOMObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject }
 
 func (x *DOMHTMLModElement) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject }
+
+// DOMHTMLModElementable is the interface implemented by [DOMHTMLModElement], for mocking and DI.
+type DOMHTMLModElementable interface {
+	Unwrap() *raw.DOMHTMLModElement
+	WithCite(cite string) *DOMHTMLModElement
+	WithDateTime(dateTime string) *DOMHTMLModElement
+	Cite() string
+	SetCite(cite string)
+	DateTime() string
+	SetDateTime(dateTime string)
+}
+
+var _ DOMHTMLModElementable = (*DOMHTMLModElement)(nil)
 

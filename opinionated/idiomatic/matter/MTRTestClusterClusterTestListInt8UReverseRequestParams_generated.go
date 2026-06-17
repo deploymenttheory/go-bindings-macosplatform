@@ -25,3 +25,10 @@ func NewMTRTestClusterClusterTestListInt8UReverseRequestParams() *MTRTestCluster
 
 func (x *MTRTestClusterClusterTestListInt8UReverseRequestParams) asMTRUnitTestingClusterTestListInt8UReverseRequestParams() *raw.MTRUnitTestingClusterTestListInt8UReverseRequestParams { return &x.inner.MTRUnitTestingClusterTestListInt8UReverseRequestParams }
 
+// MTRTestClusterClusterTestListInt8UReverseRequestParamsable is the interface implemented by [MTRTestClusterClusterTestListInt8UReverseRequestParams], for mocking and DI.
+type MTRTestClusterClusterTestListInt8UReverseRequestParamsable interface {
+	Unwrap() *raw.MTRTestClusterClusterTestListInt8UReverseRequestParams
+}
+
+var _ MTRTestClusterClusterTestListInt8UReverseRequestParamsable = (*MTRTestClusterClusterTestListInt8UReverseRequestParams)(nil)
+

@@ -37,11 +37,11 @@ func (x *NEAppProxyFlow) WithNetworkInterface(networkInterface *foundation.NSObj
 func (x *NEAppProxyFlow) OpenWithLocalFlowEndpoint(ctx context.Context, localEndpoint *foundation.NSObject) error {
 	_ch := make(chan error, 1)
 	x.inner.OpenWithLocalFlowEndpointCompletionHandler(localEndpoint, func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -55,11 +55,11 @@ func (x *NEAppProxyFlow) OpenWithLocalFlowEndpoint(ctx context.Context, localEnd
 func (x *NEAppProxyFlow) OpenWithLocalEndpoint(ctx context.Context, localEndpoint *raw.NWHostEndpoint) error {
 	_ch := make(chan error, 1)
 	x.inner.OpenWithLocalEndpointCompletionHandler(localEndpoint, func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -69,5 +69,71 @@ func (x *NEAppProxyFlow) OpenWithLocalEndpoint(ctx context.Context, localEndpoin
 	}
 }
 
+// CloseReadWithError calls the underlying CloseReadWithError.
+func (x *NEAppProxyFlow) CloseReadWithError(error_ unsafe.Pointer) {
+	x.inner.CloseReadWithError(error_)
+}
+
+// CloseWriteWithError calls the underlying CloseWriteWithError.
+func (x *NEAppProxyFlow) CloseWriteWithError(error_ unsafe.Pointer) {
+	x.inner.CloseWriteWithError(error_)
+}
+
+// SetMetadata calls the underlying SetMetadata.
+func (x *NEAppProxyFlow) SetMetadata(parameters *foundation.NSObject) {
+	x.inner.SetMetadata(parameters)
+}
+
+// MetaData calls the underlying MetaData.
+func (x *NEAppProxyFlow) MetaData() *NEFlowMetaData {
+	_r := x.inner.MetaData()
+	if _r == nil {
+		return nil
+	}
+	return &NEFlowMetaData{inner: _r}
+}
+
+// NetworkInterface calls the underlying NetworkInterface.
+func (x *NEAppProxyFlow) NetworkInterface() *foundation.NSObject {
+	return x.inner.NetworkInterface()
+}
+
+// SetNetworkInterface calls the underlying SetNetworkInterface.
+func (x *NEAppProxyFlow) SetNetworkInterface(networkInterface *foundation.NSObject) {
+	x.inner.SetNetworkInterface(networkInterface)
+}
+
+// RemoteHostname calls the underlying RemoteHostname.
+func (x *NEAppProxyFlow) RemoteHostname() string {
+	_r := x.inner.RemoteHostname()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// IsBound calls the underlying IsBound.
+func (x *NEAppProxyFlow) IsBound() bool {
+	return x.inner.IsBound()
+}
+
 func (x *NEAppProxyFlow) asNEAppProxyFlow() *raw.NEAppProxyFlow { return x.inner }
+
+// NEAppProxyFlowable is the interface implemented by [NEAppProxyFlow], for mocking and DI.
+type NEAppProxyFlowable interface {
+	Unwrap() *raw.NEAppProxyFlow
+	WithNetworkInterface(networkInterface *foundation.NSObject) *NEAppProxyFlow
+	OpenWithLocalFlowEndpoint(ctx context.Context, localEndpoint *foundation.NSObject) error
+	OpenWithLocalEndpoint(ctx context.Context, localEndpoint *raw.NWHostEndpoint) error
+	CloseReadWithError(error_ unsafe.Pointer)
+	CloseWriteWithError(error_ unsafe.Pointer)
+	SetMetadata(parameters *foundation.NSObject)
+	MetaData() *NEFlowMetaData
+	NetworkInterface() *foundation.NSObject
+	SetNetworkInterface(networkInterface *foundation.NSObject)
+	RemoteHostname() string
+	IsBound() bool
+}
+
+var _ NEAppProxyFlowable = (*NEAppProxyFlow)(nil)
 

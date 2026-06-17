@@ -42,3 +42,49 @@ func (x *MTROperationalCredentialsClusterAttestationRequestParams) WithServerSid
 	return x
 }
 
+// AttestationNonce calls the underlying AttestationNonce.
+func (x *MTROperationalCredentialsClusterAttestationRequestParams) AttestationNonce() *foundation.NSData {
+	return x.inner.AttestationNonce()
+}
+
+// SetAttestationNonce calls the underlying SetAttestationNonce.
+func (x *MTROperationalCredentialsClusterAttestationRequestParams) SetAttestationNonce(attestationNonce *foundation.NSData) {
+	x.inner.SetAttestationNonce(attestationNonce)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTROperationalCredentialsClusterAttestationRequestParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTROperationalCredentialsClusterAttestationRequestParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTROperationalCredentialsClusterAttestationRequestParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTROperationalCredentialsClusterAttestationRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTROperationalCredentialsClusterAttestationRequestParamsable is the interface implemented by [MTROperationalCredentialsClusterAttestationRequestParams], for mocking and DI.
+type MTROperationalCredentialsClusterAttestationRequestParamsable interface {
+	Unwrap() *raw.MTROperationalCredentialsClusterAttestationRequestParams
+	WithAttestationNonce(attestationNonce *foundation.NSData) *MTROperationalCredentialsClusterAttestationRequestParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTROperationalCredentialsClusterAttestationRequestParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTROperationalCredentialsClusterAttestationRequestParams
+	AttestationNonce() *foundation.NSData
+	SetAttestationNonce(attestationNonce *foundation.NSData)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTROperationalCredentialsClusterAttestationRequestParamsable = (*MTROperationalCredentialsClusterAttestationRequestParams)(nil)
+

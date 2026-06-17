@@ -7,6 +7,7 @@ package networkextension
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -85,44 +86,101 @@ func (x *NEOnDemandRule) WithProbeURL(probeURL string) *NEOnDemandRule {
 	return x
 }
 
+// Action calls the underlying Action.
+func (x *NEOnDemandRule) Action() raw.NEOnDemandRuleAction {
+	return x.inner.Action()
+}
+
 // DNSSearchDomainMatch returns the collection as a Go slice.
-func (x *NEOnDemandRule) DNSSearchDomainMatch() []*foundation.NSString {
+func (x *NEOnDemandRule) DNSSearchDomainMatch() []string {
 	arr := x.inner.DNSSearchDomainMatch()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// SetDNSSearchDomainMatch calls the underlying SetDNSSearchDomainMatch.
+func (x *NEOnDemandRule) SetDNSSearchDomainMatch(dNSSearchDomainMatch *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetDNSSearchDomainMatch(dNSSearchDomainMatch)
 }
 
 // DNSServerAddressMatch returns the collection as a Go slice.
-func (x *NEOnDemandRule) DNSServerAddressMatch() []*foundation.NSString {
+func (x *NEOnDemandRule) DNSServerAddressMatch() []string {
 	arr := x.inner.DNSServerAddressMatch()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// SetDNSServerAddressMatch calls the underlying SetDNSServerAddressMatch.
+func (x *NEOnDemandRule) SetDNSServerAddressMatch(dNSServerAddressMatch *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetDNSServerAddressMatch(dNSServerAddressMatch)
+}
+
+// InterfaceTypeMatch calls the underlying InterfaceTypeMatch.
+func (x *NEOnDemandRule) InterfaceTypeMatch() raw.NEOnDemandRuleInterfaceType {
+	return x.inner.InterfaceTypeMatch()
+}
+
+// SetInterfaceTypeMatch calls the underlying SetInterfaceTypeMatch.
+func (x *NEOnDemandRule) SetInterfaceTypeMatch(interfaceTypeMatch raw.NEOnDemandRuleInterfaceType) {
+	x.inner.SetInterfaceTypeMatch(interfaceTypeMatch)
 }
 
 // SSIDMatch returns the collection as a Go slice.
-func (x *NEOnDemandRule) SSIDMatch() []*foundation.NSString {
+func (x *NEOnDemandRule) SSIDMatch() []string {
 	arr := x.inner.SSIDMatch()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// SetSSIDMatch calls the underlying SetSSIDMatch.
+func (x *NEOnDemandRule) SetSSIDMatch(sSIDMatch *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetSSIDMatch(sSIDMatch)
+}
+
+// ProbeURL calls the underlying ProbeURL.
+func (x *NEOnDemandRule) ProbeURL() *foundation.NSURL {
+	return x.inner.ProbeURL()
+}
+
+// SetProbeURL calls the underlying SetProbeURL.
+func (x *NEOnDemandRule) SetProbeURL(probeURL string) {
+	x.inner.SetProbeURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(probeURL)))
 }
 
 func (x *NEOnDemandRule) asNEOnDemandRule() *raw.NEOnDemandRule { return x.inner }
+
+// NEOnDemandRuleable is the interface implemented by [NEOnDemandRule], for mocking and DI.
+type NEOnDemandRuleable interface {
+	Unwrap() *raw.NEOnDemandRule
+	WithDNSSearchDomainMatch(items ...*foundation.NSString) *NEOnDemandRule
+	WithDNSServerAddressMatch(items ...*foundation.NSString) *NEOnDemandRule
+	WithInterfaceTypeMatch(interfaceTypeMatch raw.NEOnDemandRuleInterfaceType) *NEOnDemandRule
+	WithSSIDMatch(items ...*foundation.NSString) *NEOnDemandRule
+	WithProbeURL(probeURL string) *NEOnDemandRule
+	Action() raw.NEOnDemandRuleAction
+	DNSSearchDomainMatch() []string
+	SetDNSSearchDomainMatch(dNSSearchDomainMatch *foundation.NSArray[*foundation.NSString])
+	DNSServerAddressMatch() []string
+	SetDNSServerAddressMatch(dNSServerAddressMatch *foundation.NSArray[*foundation.NSString])
+	InterfaceTypeMatch() raw.NEOnDemandRuleInterfaceType
+	SetInterfaceTypeMatch(interfaceTypeMatch raw.NEOnDemandRuleInterfaceType)
+	SSIDMatch() []string
+	SetSSIDMatch(sSIDMatch *foundation.NSArray[*foundation.NSString])
+	ProbeURL() *foundation.NSURL
+	SetProbeURL(probeURL string)
+}
+
+var _ NEOnDemandRuleable = (*NEOnDemandRule)(nil)
 

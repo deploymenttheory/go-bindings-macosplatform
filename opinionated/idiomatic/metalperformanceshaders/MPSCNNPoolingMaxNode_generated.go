@@ -28,3 +28,10 @@ func (x *CNNPoolingMaxNode) asCNNPoolingNode() *mpsneuralnetwork.MPSCNNPoolingNo
 
 func (x *CNNPoolingMaxNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSCNNPoolingNode.MPSNNFilterNode }
 
+// CNNPoolingMaxNodeable is the interface implemented by [CNNPoolingMaxNode], for mocking and DI.
+type CNNPoolingMaxNodeable interface {
+	Unwrap() *raw.MPSCNNPoolingMaxNode
+}
+
+var _ CNNPoolingMaxNodeable = (*CNNPoolingMaxNode)(nil)
+

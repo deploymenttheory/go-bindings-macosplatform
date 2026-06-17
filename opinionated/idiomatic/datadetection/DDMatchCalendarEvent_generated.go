@@ -6,6 +6,7 @@ package datadetection
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/datadetection"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +24,42 @@ func NewMatchCalendarEvent() *MatchCalendarEvent {
 	return &MatchCalendarEvent{inner: raw.DDMatchCalendarEventFromID(_id)}
 }
 
+// IsAllDay calls the underlying IsAllDay.
+func (x *MatchCalendarEvent) IsAllDay() bool {
+	return x.inner.IsAllDay()
+}
+
+// StartDate calls the underlying StartDate.
+func (x *MatchCalendarEvent) StartDate() *foundation.NSDate {
+	return x.inner.StartDate()
+}
+
+// StartTimeZone calls the underlying StartTimeZone.
+func (x *MatchCalendarEvent) StartTimeZone() *foundation.NSTimeZone {
+	return x.inner.StartTimeZone()
+}
+
+// EndDate calls the underlying EndDate.
+func (x *MatchCalendarEvent) EndDate() *foundation.NSDate {
+	return x.inner.EndDate()
+}
+
+// EndTimeZone calls the underlying EndTimeZone.
+func (x *MatchCalendarEvent) EndTimeZone() *foundation.NSTimeZone {
+	return x.inner.EndTimeZone()
+}
+
 func (x *MatchCalendarEvent) asMatch() *raw.DDMatch { return &x.inner.DDMatch }
+
+// MatchCalendarEventable is the interface implemented by [MatchCalendarEvent], for mocking and DI.
+type MatchCalendarEventable interface {
+	Unwrap() *raw.DDMatchCalendarEvent
+	IsAllDay() bool
+	StartDate() *foundation.NSDate
+	StartTimeZone() *foundation.NSTimeZone
+	EndDate() *foundation.NSDate
+	EndTimeZone() *foundation.NSTimeZone
+}
+
+var _ MatchCalendarEventable = (*MatchCalendarEvent)(nil)
 

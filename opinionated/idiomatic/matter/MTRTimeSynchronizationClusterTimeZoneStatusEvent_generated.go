@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -35,4 +36,41 @@ func (x *MTRTimeSynchronizationClusterTimeZoneStatusEvent) WithName(name string)
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
+
+// Offset calls the underlying Offset.
+func (x *MTRTimeSynchronizationClusterTimeZoneStatusEvent) Offset() *foundation.NSNumber {
+	return x.inner.Offset()
+}
+
+// SetOffset calls the underlying SetOffset.
+func (x *MTRTimeSynchronizationClusterTimeZoneStatusEvent) SetOffset(offset *foundation.NSNumber) {
+	x.inner.SetOffset(offset)
+}
+
+// Name calls the underlying Name.
+func (x *MTRTimeSynchronizationClusterTimeZoneStatusEvent) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetName calls the underlying SetName.
+func (x *MTRTimeSynchronizationClusterTimeZoneStatusEvent) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
+// MTRTimeSynchronizationClusterTimeZoneStatusEventable is the interface implemented by [MTRTimeSynchronizationClusterTimeZoneStatusEvent], for mocking and DI.
+type MTRTimeSynchronizationClusterTimeZoneStatusEventable interface {
+	Unwrap() *raw.MTRTimeSynchronizationClusterTimeZoneStatusEvent
+	WithOffset(offset *foundation.NSNumber) *MTRTimeSynchronizationClusterTimeZoneStatusEvent
+	WithName(name string) *MTRTimeSynchronizationClusterTimeZoneStatusEvent
+	Offset() *foundation.NSNumber
+	SetOffset(offset *foundation.NSNumber)
+	Name() string
+	SetName(name string)
+}
+
+var _ MTRTimeSynchronizationClusterTimeZoneStatusEventable = (*MTRTimeSynchronizationClusterTimeZoneStatusEvent)(nil)
 

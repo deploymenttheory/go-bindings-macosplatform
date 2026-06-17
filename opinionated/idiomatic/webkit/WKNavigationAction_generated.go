@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +24,67 @@ func NewWKNavigationAction() *WKNavigationAction {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("WKNavigationAction")), objc.RegisterName("new"))
 	return &WKNavigationAction{inner: raw.WKNavigationActionFromID(_id)}
 }
+
+// SourceFrame calls the underlying SourceFrame.
+func (x *WKNavigationAction) SourceFrame() *WKFrameInfo {
+	_r := x.inner.SourceFrame()
+	if _r == nil {
+		return nil
+	}
+	return &WKFrameInfo{inner: _r}
+}
+
+// TargetFrame calls the underlying TargetFrame.
+func (x *WKNavigationAction) TargetFrame() *WKFrameInfo {
+	_r := x.inner.TargetFrame()
+	if _r == nil {
+		return nil
+	}
+	return &WKFrameInfo{inner: _r}
+}
+
+// NavigationType calls the underlying NavigationType.
+func (x *WKNavigationAction) NavigationType() raw.WKNavigationType {
+	return x.inner.NavigationType()
+}
+
+// Request calls the underlying Request.
+func (x *WKNavigationAction) Request() *foundation.NSURLRequest {
+	return x.inner.Request()
+}
+
+// ShouldPerformDownload calls the underlying ShouldPerformDownload.
+func (x *WKNavigationAction) ShouldPerformDownload() bool {
+	return x.inner.ShouldPerformDownload()
+}
+
+// IsContentRuleListRedirect calls the underlying IsContentRuleListRedirect.
+func (x *WKNavigationAction) IsContentRuleListRedirect() bool {
+	return x.inner.IsContentRuleListRedirect()
+}
+
+// ModifierFlags calls the underlying ModifierFlags.
+func (x *WKNavigationAction) ModifierFlags() appkit.NSEventModifierFlags {
+	return x.inner.ModifierFlags()
+}
+
+// ButtonNumber calls the underlying ButtonNumber.
+func (x *WKNavigationAction) ButtonNumber() int {
+	return x.inner.ButtonNumber()
+}
+
+// WKNavigationActionable is the interface implemented by [WKNavigationAction], for mocking and DI.
+type WKNavigationActionable interface {
+	Unwrap() *raw.WKNavigationAction
+	SourceFrame() *WKFrameInfo
+	TargetFrame() *WKFrameInfo
+	NavigationType() raw.WKNavigationType
+	Request() *foundation.NSURLRequest
+	ShouldPerformDownload() bool
+	IsContentRuleListRedirect() bool
+	ModifierFlags() appkit.NSEventModifierFlags
+	ButtonNumber() int
+}
+
+var _ WKNavigationActionable = (*WKNavigationAction)(nil)
 

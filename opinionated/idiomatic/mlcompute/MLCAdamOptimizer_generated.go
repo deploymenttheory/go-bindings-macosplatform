@@ -23,5 +23,42 @@ func NewAdamOptimizer() *AdamOptimizer {
 	return &AdamOptimizer{inner: raw.MLCAdamOptimizerFromID(_id)}
 }
 
+// Beta1 calls the underlying Beta1.
+func (x *AdamOptimizer) Beta1() float32 {
+	return x.inner.Beta1()
+}
+
+// Beta2 calls the underlying Beta2.
+func (x *AdamOptimizer) Beta2() float32 {
+	return x.inner.Beta2()
+}
+
+// Epsilon calls the underlying Epsilon.
+func (x *AdamOptimizer) Epsilon() float32 {
+	return x.inner.Epsilon()
+}
+
+// UsesAMSGrad calls the underlying UsesAMSGrad.
+func (x *AdamOptimizer) UsesAMSGrad() bool {
+	return x.inner.UsesAMSGrad()
+}
+
+// TimeStep calls the underlying TimeStep.
+func (x *AdamOptimizer) TimeStep() uint {
+	return x.inner.TimeStep()
+}
+
 func (x *AdamOptimizer) asOptimizer() *raw.MLCOptimizer { return &x.inner.MLCOptimizer }
+
+// AdamOptimizerable is the interface implemented by [AdamOptimizer], for mocking and DI.
+type AdamOptimizerable interface {
+	Unwrap() *raw.MLCAdamOptimizer
+	Beta1() float32
+	Beta2() float32
+	Epsilon() float32
+	UsesAMSGrad() bool
+	TimeStep() uint
+}
+
+var _ AdamOptimizerable = (*AdamOptimizer)(nil)
 

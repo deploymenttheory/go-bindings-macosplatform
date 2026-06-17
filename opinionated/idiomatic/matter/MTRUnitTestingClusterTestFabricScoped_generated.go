@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -66,5 +67,123 @@ func (x *MTRUnitTestingClusterTestFabricScoped) WithFabricIndex(fabricIndex *fou
 	return x
 }
 
+// FabricSensitiveInt8u calls the underlying FabricSensitiveInt8u.
+func (x *MTRUnitTestingClusterTestFabricScoped) FabricSensitiveInt8u() *foundation.NSNumber {
+	return x.inner.FabricSensitiveInt8u()
+}
+
+// SetFabricSensitiveInt8u calls the underlying SetFabricSensitiveInt8u.
+func (x *MTRUnitTestingClusterTestFabricScoped) SetFabricSensitiveInt8u(fabricSensitiveInt8u *foundation.NSNumber) {
+	x.inner.SetFabricSensitiveInt8u(fabricSensitiveInt8u)
+}
+
+// OptionalFabricSensitiveInt8u calls the underlying OptionalFabricSensitiveInt8u.
+func (x *MTRUnitTestingClusterTestFabricScoped) OptionalFabricSensitiveInt8u() *foundation.NSNumber {
+	return x.inner.OptionalFabricSensitiveInt8u()
+}
+
+// SetOptionalFabricSensitiveInt8u calls the underlying SetOptionalFabricSensitiveInt8u.
+func (x *MTRUnitTestingClusterTestFabricScoped) SetOptionalFabricSensitiveInt8u(optionalFabricSensitiveInt8u *foundation.NSNumber) {
+	x.inner.SetOptionalFabricSensitiveInt8u(optionalFabricSensitiveInt8u)
+}
+
+// NullableFabricSensitiveInt8u calls the underlying NullableFabricSensitiveInt8u.
+func (x *MTRUnitTestingClusterTestFabricScoped) NullableFabricSensitiveInt8u() *foundation.NSNumber {
+	return x.inner.NullableFabricSensitiveInt8u()
+}
+
+// SetNullableFabricSensitiveInt8u calls the underlying SetNullableFabricSensitiveInt8u.
+func (x *MTRUnitTestingClusterTestFabricScoped) SetNullableFabricSensitiveInt8u(nullableFabricSensitiveInt8u *foundation.NSNumber) {
+	x.inner.SetNullableFabricSensitiveInt8u(nullableFabricSensitiveInt8u)
+}
+
+// NullableOptionalFabricSensitiveInt8u calls the underlying NullableOptionalFabricSensitiveInt8u.
+func (x *MTRUnitTestingClusterTestFabricScoped) NullableOptionalFabricSensitiveInt8u() *foundation.NSNumber {
+	return x.inner.NullableOptionalFabricSensitiveInt8u()
+}
+
+// SetNullableOptionalFabricSensitiveInt8u calls the underlying SetNullableOptionalFabricSensitiveInt8u.
+func (x *MTRUnitTestingClusterTestFabricScoped) SetNullableOptionalFabricSensitiveInt8u(nullableOptionalFabricSensitiveInt8u *foundation.NSNumber) {
+	x.inner.SetNullableOptionalFabricSensitiveInt8u(nullableOptionalFabricSensitiveInt8u)
+}
+
+// FabricSensitiveCharString calls the underlying FabricSensitiveCharString.
+func (x *MTRUnitTestingClusterTestFabricScoped) FabricSensitiveCharString() string {
+	_r := x.inner.FabricSensitiveCharString()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetFabricSensitiveCharString calls the underlying SetFabricSensitiveCharString.
+func (x *MTRUnitTestingClusterTestFabricScoped) SetFabricSensitiveCharString(fabricSensitiveCharString string) {
+	x.inner.SetFabricSensitiveCharString(foundation.NSStringStringWithUTF8String(fabricSensitiveCharString))
+}
+
+// FabricSensitiveStruct calls the underlying FabricSensitiveStruct.
+func (x *MTRUnitTestingClusterTestFabricScoped) FabricSensitiveStruct() *MTRUnitTestingClusterSimpleStruct {
+	_r := x.inner.FabricSensitiveStruct()
+	if _r == nil {
+		return nil
+	}
+	return &MTRUnitTestingClusterSimpleStruct{inner: _r}
+}
+
+// SetFabricSensitiveStruct calls the underlying SetFabricSensitiveStruct.
+func (x *MTRUnitTestingClusterTestFabricScoped) SetFabricSensitiveStruct(fabricSensitiveStruct *raw.MTRUnitTestingClusterSimpleStruct) {
+	x.inner.SetFabricSensitiveStruct(fabricSensitiveStruct)
+}
+
+// FabricSensitiveInt8uList calls the underlying FabricSensitiveInt8uList.
+func (x *MTRUnitTestingClusterTestFabricScoped) FabricSensitiveInt8uList() *foundation.NSArray[objc.ID] {
+	return x.inner.FabricSensitiveInt8uList()
+}
+
+// SetFabricSensitiveInt8uList calls the underlying SetFabricSensitiveInt8uList.
+func (x *MTRUnitTestingClusterTestFabricScoped) SetFabricSensitiveInt8uList(fabricSensitiveInt8uList *foundation.NSArray[objc.ID]) {
+	x.inner.SetFabricSensitiveInt8uList(fabricSensitiveInt8uList)
+}
+
+// FabricIndex calls the underlying FabricIndex.
+func (x *MTRUnitTestingClusterTestFabricScoped) FabricIndex() *foundation.NSNumber {
+	return x.inner.FabricIndex()
+}
+
+// SetFabricIndex calls the underlying SetFabricIndex.
+func (x *MTRUnitTestingClusterTestFabricScoped) SetFabricIndex(fabricIndex *foundation.NSNumber) {
+	x.inner.SetFabricIndex(fabricIndex)
+}
+
 func (x *MTRUnitTestingClusterTestFabricScoped) asMTRUnitTestingClusterTestFabricScoped() *raw.MTRUnitTestingClusterTestFabricScoped { return x.inner }
+
+// MTRUnitTestingClusterTestFabricScopedable is the interface implemented by [MTRUnitTestingClusterTestFabricScoped], for mocking and DI.
+type MTRUnitTestingClusterTestFabricScopedable interface {
+	Unwrap() *raw.MTRUnitTestingClusterTestFabricScoped
+	WithFabricSensitiveInt8u(fabricSensitiveInt8u *foundation.NSNumber) *MTRUnitTestingClusterTestFabricScoped
+	WithOptionalFabricSensitiveInt8u(optionalFabricSensitiveInt8u *foundation.NSNumber) *MTRUnitTestingClusterTestFabricScoped
+	WithNullableFabricSensitiveInt8u(nullableFabricSensitiveInt8u *foundation.NSNumber) *MTRUnitTestingClusterTestFabricScoped
+	WithNullableOptionalFabricSensitiveInt8u(nullableOptionalFabricSensitiveInt8u *foundation.NSNumber) *MTRUnitTestingClusterTestFabricScoped
+	WithFabricSensitiveCharString(fabricSensitiveCharString string) *MTRUnitTestingClusterTestFabricScoped
+	WithFabricSensitiveStruct(fabricSensitiveStruct MTRUnitTestingClusterSimpleStructProvider) *MTRUnitTestingClusterTestFabricScoped
+	WithFabricIndex(fabricIndex *foundation.NSNumber) *MTRUnitTestingClusterTestFabricScoped
+	FabricSensitiveInt8u() *foundation.NSNumber
+	SetFabricSensitiveInt8u(fabricSensitiveInt8u *foundation.NSNumber)
+	OptionalFabricSensitiveInt8u() *foundation.NSNumber
+	SetOptionalFabricSensitiveInt8u(optionalFabricSensitiveInt8u *foundation.NSNumber)
+	NullableFabricSensitiveInt8u() *foundation.NSNumber
+	SetNullableFabricSensitiveInt8u(nullableFabricSensitiveInt8u *foundation.NSNumber)
+	NullableOptionalFabricSensitiveInt8u() *foundation.NSNumber
+	SetNullableOptionalFabricSensitiveInt8u(nullableOptionalFabricSensitiveInt8u *foundation.NSNumber)
+	FabricSensitiveCharString() string
+	SetFabricSensitiveCharString(fabricSensitiveCharString string)
+	FabricSensitiveStruct() *MTRUnitTestingClusterSimpleStruct
+	SetFabricSensitiveStruct(fabricSensitiveStruct *raw.MTRUnitTestingClusterSimpleStruct)
+	FabricSensitiveInt8uList() *foundation.NSArray[objc.ID]
+	SetFabricSensitiveInt8uList(fabricSensitiveInt8uList *foundation.NSArray[objc.ID])
+	FabricIndex() *foundation.NSNumber
+	SetFabricIndex(fabricIndex *foundation.NSNumber)
+}
+
+var _ MTRUnitTestingClusterTestFabricScopedable = (*MTRUnitTestingClusterTestFabricScoped)(nil)
 

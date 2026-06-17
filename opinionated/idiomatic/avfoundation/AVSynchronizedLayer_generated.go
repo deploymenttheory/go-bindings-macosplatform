@@ -29,3 +29,27 @@ func (x *SynchronizedLayer) WithPlayerItem(playerItem *raw.AVPlayerItem) *Synchr
 	return x
 }
 
+// PlayerItem calls the underlying PlayerItem.
+func (x *SynchronizedLayer) PlayerItem() *PlayerItem {
+	_r := x.inner.PlayerItem()
+	if _r == nil {
+		return nil
+	}
+	return &PlayerItem{inner: _r}
+}
+
+// SetPlayerItem calls the underlying SetPlayerItem.
+func (x *SynchronizedLayer) SetPlayerItem(playerItem *raw.AVPlayerItem) {
+	x.inner.SetPlayerItem(playerItem)
+}
+
+// SynchronizedLayerable is the interface implemented by [SynchronizedLayer], for mocking and DI.
+type SynchronizedLayerable interface {
+	Unwrap() *raw.AVSynchronizedLayer
+	WithPlayerItem(playerItem *raw.AVPlayerItem) *SynchronizedLayer
+	PlayerItem() *PlayerItem
+	SetPlayerItem(playerItem *raw.AVPlayerItem)
+}
+
+var _ SynchronizedLayerable = (*SynchronizedLayer)(nil)
+

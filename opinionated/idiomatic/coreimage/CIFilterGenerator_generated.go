@@ -31,3 +31,81 @@ func (x *FilterGenerator) WithClassAttributes(classAttributes *foundation.NSDict
 	return x
 }
 
+// ConnectObjectWithKeyToObjectWithKey calls the underlying ConnectObjectWithKeyToObjectWithKey.
+func (x *FilterGenerator) ConnectObjectWithKeyToObjectWithKey(sourceObject objc.ID, sourceKey string, targetObject objc.ID, targetKey string) {
+	x.inner.ConnectObjectWithKeyToObjectWithKey(sourceObject, foundation.NSStringStringWithUTF8String(sourceKey), targetObject, foundation.NSStringStringWithUTF8String(targetKey))
+}
+
+// DisconnectObjectWithKeyToObjectWithKey calls the underlying DisconnectObjectWithKeyToObjectWithKey.
+func (x *FilterGenerator) DisconnectObjectWithKeyToObjectWithKey(sourceObject objc.ID, sourceKey string, targetObject objc.ID, targetKey string) {
+	x.inner.DisconnectObjectWithKeyToObjectWithKey(sourceObject, foundation.NSStringStringWithUTF8String(sourceKey), targetObject, foundation.NSStringStringWithUTF8String(targetKey))
+}
+
+// ExportKeyFromObjectWithName calls the underlying ExportKeyFromObjectWithName.
+func (x *FilterGenerator) ExportKeyFromObjectWithName(key string, targetObject objc.ID, exportedKeyName string) {
+	x.inner.ExportKeyFromObjectWithName(foundation.NSStringStringWithUTF8String(key), targetObject, foundation.NSStringStringWithUTF8String(exportedKeyName))
+}
+
+// RemoveExportedKey calls the underlying RemoveExportedKey.
+func (x *FilterGenerator) RemoveExportedKey(exportedKeyName string) {
+	x.inner.RemoveExportedKey(foundation.NSStringStringWithUTF8String(exportedKeyName))
+}
+
+// SetAttributesForExportedKey calls the underlying SetAttributesForExportedKey.
+func (x *FilterGenerator) SetAttributesForExportedKey(attributes *foundation.NSDictionary[objc.ID, objc.ID], key string) {
+	x.inner.SetAttributesForExportedKey(attributes, foundation.NSStringStringWithUTF8String(key))
+}
+
+// Filter calls the underlying Filter.
+func (x *FilterGenerator) Filter() *Filter {
+	_r := x.inner.Filter()
+	if _r == nil {
+		return nil
+	}
+	return &Filter{inner: _r}
+}
+
+// RegisterFilterName calls the underlying RegisterFilterName.
+func (x *FilterGenerator) RegisterFilterName(name string) {
+	x.inner.RegisterFilterName(foundation.NSStringStringWithUTF8String(name))
+}
+
+// WriteToURLAtomically calls the underlying WriteToURLAtomically.
+func (x *FilterGenerator) WriteToURLAtomically(aURL string, flag bool) bool {
+	return x.inner.WriteToURLAtomically(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(aURL)), flag)
+}
+
+// ExportedKeys calls the underlying ExportedKeys.
+func (x *FilterGenerator) ExportedKeys() *foundation.NSDictionary[objc.ID, objc.ID] {
+	return x.inner.ExportedKeys()
+}
+
+// ClassAttributes calls the underlying ClassAttributes.
+func (x *FilterGenerator) ClassAttributes() *foundation.NSDictionary[objc.ID, objc.ID] {
+	return x.inner.ClassAttributes()
+}
+
+// SetClassAttributes calls the underlying SetClassAttributes.
+func (x *FilterGenerator) SetClassAttributes(classAttributes *foundation.NSDictionary[objc.ID, objc.ID]) {
+	x.inner.SetClassAttributes(classAttributes)
+}
+
+// FilterGeneratorable is the interface implemented by [FilterGenerator], for mocking and DI.
+type FilterGeneratorable interface {
+	Unwrap() *raw.CIFilterGenerator
+	WithClassAttributes(classAttributes *foundation.NSDictionary[objc.ID, objc.ID]) *FilterGenerator
+	ConnectObjectWithKeyToObjectWithKey(sourceObject objc.ID, sourceKey string, targetObject objc.ID, targetKey string)
+	DisconnectObjectWithKeyToObjectWithKey(sourceObject objc.ID, sourceKey string, targetObject objc.ID, targetKey string)
+	ExportKeyFromObjectWithName(key string, targetObject objc.ID, exportedKeyName string)
+	RemoveExportedKey(exportedKeyName string)
+	SetAttributesForExportedKey(attributes *foundation.NSDictionary[objc.ID, objc.ID], key string)
+	Filter() *Filter
+	RegisterFilterName(name string)
+	WriteToURLAtomically(aURL string, flag bool) bool
+	ExportedKeys() *foundation.NSDictionary[objc.ID, objc.ID]
+	ClassAttributes() *foundation.NSDictionary[objc.ID, objc.ID]
+	SetClassAttributes(classAttributes *foundation.NSDictionary[objc.ID, objc.ID])
+}
+
+var _ FilterGeneratorable = (*FilterGenerator)(nil)
+

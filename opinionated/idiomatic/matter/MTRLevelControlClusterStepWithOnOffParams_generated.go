@@ -66,3 +66,101 @@ func (x *MTRLevelControlClusterStepWithOnOffParams) WithServerSideProcessingTime
 	return x
 }
 
+// StepMode calls the underlying StepMode.
+func (x *MTRLevelControlClusterStepWithOnOffParams) StepMode() *foundation.NSNumber {
+	return x.inner.StepMode()
+}
+
+// SetStepMode calls the underlying SetStepMode.
+func (x *MTRLevelControlClusterStepWithOnOffParams) SetStepMode(stepMode *foundation.NSNumber) {
+	x.inner.SetStepMode(stepMode)
+}
+
+// StepSize calls the underlying StepSize.
+func (x *MTRLevelControlClusterStepWithOnOffParams) StepSize() *foundation.NSNumber {
+	return x.inner.StepSize()
+}
+
+// SetStepSize calls the underlying SetStepSize.
+func (x *MTRLevelControlClusterStepWithOnOffParams) SetStepSize(stepSize *foundation.NSNumber) {
+	x.inner.SetStepSize(stepSize)
+}
+
+// TransitionTime calls the underlying TransitionTime.
+func (x *MTRLevelControlClusterStepWithOnOffParams) TransitionTime() *foundation.NSNumber {
+	return x.inner.TransitionTime()
+}
+
+// SetTransitionTime calls the underlying SetTransitionTime.
+func (x *MTRLevelControlClusterStepWithOnOffParams) SetTransitionTime(transitionTime *foundation.NSNumber) {
+	x.inner.SetTransitionTime(transitionTime)
+}
+
+// OptionsMask calls the underlying OptionsMask.
+func (x *MTRLevelControlClusterStepWithOnOffParams) OptionsMask() *foundation.NSNumber {
+	return x.inner.OptionsMask()
+}
+
+// SetOptionsMask calls the underlying SetOptionsMask.
+func (x *MTRLevelControlClusterStepWithOnOffParams) SetOptionsMask(optionsMask *foundation.NSNumber) {
+	x.inner.SetOptionsMask(optionsMask)
+}
+
+// OptionsOverride calls the underlying OptionsOverride.
+func (x *MTRLevelControlClusterStepWithOnOffParams) OptionsOverride() *foundation.NSNumber {
+	return x.inner.OptionsOverride()
+}
+
+// SetOptionsOverride calls the underlying SetOptionsOverride.
+func (x *MTRLevelControlClusterStepWithOnOffParams) SetOptionsOverride(optionsOverride *foundation.NSNumber) {
+	x.inner.SetOptionsOverride(optionsOverride)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRLevelControlClusterStepWithOnOffParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRLevelControlClusterStepWithOnOffParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRLevelControlClusterStepWithOnOffParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRLevelControlClusterStepWithOnOffParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRLevelControlClusterStepWithOnOffParamsable is the interface implemented by [MTRLevelControlClusterStepWithOnOffParams], for mocking and DI.
+type MTRLevelControlClusterStepWithOnOffParamsable interface {
+	Unwrap() *raw.MTRLevelControlClusterStepWithOnOffParams
+	WithStepMode(stepMode *foundation.NSNumber) *MTRLevelControlClusterStepWithOnOffParams
+	WithStepSize(stepSize *foundation.NSNumber) *MTRLevelControlClusterStepWithOnOffParams
+	WithTransitionTime(transitionTime *foundation.NSNumber) *MTRLevelControlClusterStepWithOnOffParams
+	WithOptionsMask(optionsMask *foundation.NSNumber) *MTRLevelControlClusterStepWithOnOffParams
+	WithOptionsOverride(optionsOverride *foundation.NSNumber) *MTRLevelControlClusterStepWithOnOffParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRLevelControlClusterStepWithOnOffParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRLevelControlClusterStepWithOnOffParams
+	StepMode() *foundation.NSNumber
+	SetStepMode(stepMode *foundation.NSNumber)
+	StepSize() *foundation.NSNumber
+	SetStepSize(stepSize *foundation.NSNumber)
+	TransitionTime() *foundation.NSNumber
+	SetTransitionTime(transitionTime *foundation.NSNumber)
+	OptionsMask() *foundation.NSNumber
+	SetOptionsMask(optionsMask *foundation.NSNumber)
+	OptionsOverride() *foundation.NSNumber
+	SetOptionsOverride(optionsOverride *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRLevelControlClusterStepWithOnOffParamsable = (*MTRLevelControlClusterStepWithOnOffParams)(nil)
+

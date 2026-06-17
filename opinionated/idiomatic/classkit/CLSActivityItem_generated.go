@@ -7,6 +7,7 @@ package classkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/classkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -30,7 +31,41 @@ func (x *ActivityItem) WithTitle(title string) *ActivityItem {
 	return x
 }
 
+// Title calls the underlying Title.
+func (x *ActivityItem) Title() string {
+	_r := x.inner.Title()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetTitle calls the underlying SetTitle.
+func (x *ActivityItem) SetTitle(title string) {
+	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+}
+
+// Identifier calls the underlying Identifier.
+func (x *ActivityItem) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 func (x *ActivityItem) asActivityItem() *raw.CLSActivityItem { return x.inner }
 
 func (x *ActivityItem) asObject() *raw.CLSObject { return &x.inner.CLSObject }
+
+// ActivityItemable is the interface implemented by [ActivityItem], for mocking and DI.
+type ActivityItemable interface {
+	Unwrap() *raw.CLSActivityItem
+	WithTitle(title string) *ActivityItem
+	Title() string
+	SetTitle(title string)
+	Identifier() string
+}
+
+var _ ActivityItemable = (*ActivityItem)(nil)
 

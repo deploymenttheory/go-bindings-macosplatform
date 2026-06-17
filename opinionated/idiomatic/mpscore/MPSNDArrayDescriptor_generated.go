@@ -7,7 +7,9 @@ package mpscore
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // NDArrayDescriptor wraps [raw.MPSNDArrayDescriptor] with a fluent Go API.
@@ -42,16 +44,109 @@ func (x *NDArrayDescriptor) WithPreferPackedRows(preferPackedRows bool) *NDArray
 	return x
 }
 
+// LengthOfDimension calls the underlying LengthOfDimension.
+func (x *NDArrayDescriptor) LengthOfDimension(dimensionIndex uint) uint {
+	return x.inner.LengthOfDimension(dimensionIndex)
+}
+
+// SliceRangeForDimension calls the underlying SliceRangeForDimension.
+func (x *NDArrayDescriptor) SliceRangeForDimension(dimensionIndex uint) raw.MPSDimensionSlice {
+	return x.inner.SliceRangeForDimension(dimensionIndex)
+}
+
+// SliceDimensionWithSubrange calls the underlying SliceDimensionWithSubrange.
+func (x *NDArrayDescriptor) SliceDimensionWithSubrange(dimensionIndex uint, subRange raw.MPSDimensionSlice) {
+	x.inner.SliceDimensionWithSubrange(dimensionIndex, subRange)
+}
+
+// TransposeDimensionWithDimension calls the underlying TransposeDimensionWithDimension.
+func (x *NDArrayDescriptor) TransposeDimensionWithDimension(dimensionIndex uint, dimensionIndex2 uint) {
+	x.inner.TransposeDimensionWithDimension(dimensionIndex, dimensionIndex2)
+}
+
+// PermuteWithDimensionOrder calls the underlying PermuteWithDimensionOrder.
+func (x *NDArrayDescriptor) PermuteWithDimensionOrder(dimensionOrder *uint) {
+	x.inner.PermuteWithDimensionOrder(dimensionOrder)
+}
+
+// DimensionOrder calls the underlying DimensionOrder.
+func (x *NDArrayDescriptor) DimensionOrder() unsafe.Pointer {
+	return x.inner.DimensionOrder()
+}
+
 // GetShape returns the collection as a Go slice.
 func (x *NDArrayDescriptor) GetShape() []*foundation.NSNumber {
 	arr := x.inner.GetShape()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
 }
+
+// ReshapeWithDimensionCountDimensionSizes calls the underlying ReshapeWithDimensionCountDimensionSizes.
+func (x *NDArrayDescriptor) ReshapeWithDimensionCountDimensionSizes(numberOfDimensions uint, dimensionSizes *uint) {
+	x.inner.ReshapeWithDimensionCountDimensionSizes(numberOfDimensions, dimensionSizes)
+}
+
+// ReshapeWithShape calls the underlying ReshapeWithShape.
+func (x *NDArrayDescriptor) ReshapeWithShape(shape *foundation.NSArray[*foundation.NSNumber]) {
+	x.inner.ReshapeWithShape(shape)
+}
+
+// DataType calls the underlying DataType.
+func (x *NDArrayDescriptor) DataType() raw.MPSDataType {
+	return x.inner.DataType()
+}
+
+// SetDataType calls the underlying SetDataType.
+func (x *NDArrayDescriptor) SetDataType(dataType raw.MPSDataType) {
+	x.inner.SetDataType(dataType)
+}
+
+// NumberOfDimensions calls the underlying NumberOfDimensions.
+func (x *NDArrayDescriptor) NumberOfDimensions() uint {
+	return x.inner.NumberOfDimensions()
+}
+
+// SetNumberOfDimensions calls the underlying SetNumberOfDimensions.
+func (x *NDArrayDescriptor) SetNumberOfDimensions(numberOfDimensions uint) {
+	x.inner.SetNumberOfDimensions(numberOfDimensions)
+}
+
+// PreferPackedRows calls the underlying PreferPackedRows.
+func (x *NDArrayDescriptor) PreferPackedRows() bool {
+	return x.inner.PreferPackedRows()
+}
+
+// SetPreferPackedRows calls the underlying SetPreferPackedRows.
+func (x *NDArrayDescriptor) SetPreferPackedRows(preferPackedRows bool) {
+	x.inner.SetPreferPackedRows(preferPackedRows)
+}
+
+// NDArrayDescriptorable is the interface implemented by [NDArrayDescriptor], for mocking and DI.
+type NDArrayDescriptorable interface {
+	Unwrap() *raw.MPSNDArrayDescriptor
+	WithDataType(dataType raw.MPSDataType) *NDArrayDescriptor
+	WithNumberOfDimensions(numberOfDimensions uint) *NDArrayDescriptor
+	WithPreferPackedRows(preferPackedRows bool) *NDArrayDescriptor
+	LengthOfDimension(dimensionIndex uint) uint
+	SliceRangeForDimension(dimensionIndex uint) raw.MPSDimensionSlice
+	SliceDimensionWithSubrange(dimensionIndex uint, subRange raw.MPSDimensionSlice)
+	TransposeDimensionWithDimension(dimensionIndex uint, dimensionIndex2 uint)
+	PermuteWithDimensionOrder(dimensionOrder *uint)
+	DimensionOrder() unsafe.Pointer
+	GetShape() []*foundation.NSNumber
+	ReshapeWithDimensionCountDimensionSizes(numberOfDimensions uint, dimensionSizes *uint)
+	ReshapeWithShape(shape *foundation.NSArray[*foundation.NSNumber])
+	DataType() raw.MPSDataType
+	SetDataType(dataType raw.MPSDataType)
+	NumberOfDimensions() uint
+	SetNumberOfDimensions(numberOfDimensions uint)
+	PreferPackedRows() bool
+	SetPreferPackedRows(preferPackedRows bool)
+}
+
+var _ NDArrayDescriptorable = (*NDArrayDescriptor)(nil)
 

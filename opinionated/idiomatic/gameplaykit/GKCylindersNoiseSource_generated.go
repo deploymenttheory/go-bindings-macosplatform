@@ -30,5 +30,25 @@ func (x *CylindersNoiseSource) WithFrequency(frequency float64) *CylindersNoiseS
 	return x
 }
 
+// Frequency calls the underlying Frequency.
+func (x *CylindersNoiseSource) Frequency() float64 {
+	return x.inner.Frequency()
+}
+
+// SetFrequency calls the underlying SetFrequency.
+func (x *CylindersNoiseSource) SetFrequency(frequency float64) {
+	x.inner.SetFrequency(frequency)
+}
+
 func (x *CylindersNoiseSource) asNoiseSource() *raw.GKNoiseSource { return &x.inner.GKNoiseSource }
+
+// CylindersNoiseSourceable is the interface implemented by [CylindersNoiseSource], for mocking and DI.
+type CylindersNoiseSourceable interface {
+	Unwrap() *raw.GKCylindersNoiseSource
+	WithFrequency(frequency float64) *CylindersNoiseSource
+	Frequency() float64
+	SetFrequency(frequency float64)
+}
+
+var _ CylindersNoiseSourceable = (*CylindersNoiseSource)(nil)
 

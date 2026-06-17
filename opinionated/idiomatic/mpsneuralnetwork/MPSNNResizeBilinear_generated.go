@@ -33,5 +33,30 @@ func NewNNResizeBilinearWithCoderDevice(aDecoder *foundation.NSCoder, device met
 	return &NNResizeBilinear{inner: raw.MPSNNResizeBilinearFromID(_id)}
 }
 
+// ResizeWidth calls the underlying ResizeWidth.
+func (x *NNResizeBilinear) ResizeWidth() uint {
+	return x.inner.ResizeWidth()
+}
+
+// ResizeHeight calls the underlying ResizeHeight.
+func (x *NNResizeBilinear) ResizeHeight() uint {
+	return x.inner.ResizeHeight()
+}
+
+// AlignCorners calls the underlying AlignCorners.
+func (x *NNResizeBilinear) AlignCorners() bool {
+	return x.inner.AlignCorners()
+}
+
 func (x *NNResizeBilinear) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSCNNKernel }
+
+// NNResizeBilinearable is the interface implemented by [NNResizeBilinear], for mocking and DI.
+type NNResizeBilinearable interface {
+	Unwrap() *raw.MPSNNResizeBilinear
+	ResizeWidth() uint
+	ResizeHeight() uint
+	AlignCorners() bool
+}
+
+var _ NNResizeBilinearable = (*NNResizeBilinear)(nil)
 

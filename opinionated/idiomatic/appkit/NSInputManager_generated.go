@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,4 +25,87 @@ func NewInputManagerWithNameHost(inputServerName string, hostName string) *Input
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:host:"), foundation.NSStringStringWithUTF8String(inputServerName).Ptr(), foundation.NSStringStringWithUTF8String(hostName).Ptr())
 	return &InputManager{inner: raw.NSInputManagerFromID(_id)}
 }
+
+// LocalizedInputManagerName calls the underlying LocalizedInputManagerName.
+func (x *InputManager) LocalizedInputManagerName() string {
+	_r := x.inner.LocalizedInputManagerName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// MarkedTextAbandoned calls the underlying MarkedTextAbandoned.
+func (x *InputManager) MarkedTextAbandoned(cli objc.ID) {
+	x.inner.MarkedTextAbandoned(cli)
+}
+
+// MarkedTextSelectionChangedClient calls the underlying MarkedTextSelectionChangedClient.
+func (x *InputManager) MarkedTextSelectionChangedClient(newSel foundation.NSRange, cli objc.ID) {
+	x.inner.MarkedTextSelectionChangedClient(newSel, cli)
+}
+
+// WantsToInterpretAllKeystrokes calls the underlying WantsToInterpretAllKeystrokes.
+func (x *InputManager) WantsToInterpretAllKeystrokes() bool {
+	return x.inner.WantsToInterpretAllKeystrokes()
+}
+
+// Language calls the underlying Language.
+func (x *InputManager) Language() string {
+	_r := x.inner.Language()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Image calls the underlying Image.
+func (x *InputManager) Image() *Image {
+	_r := x.inner.Image()
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// Server calls the underlying Server.
+func (x *InputManager) Server() *InputServer {
+	_r := x.inner.Server()
+	if _r == nil {
+		return nil
+	}
+	return &InputServer{inner: _r}
+}
+
+// WantsToHandleMouseEvents calls the underlying WantsToHandleMouseEvents.
+func (x *InputManager) WantsToHandleMouseEvents() bool {
+	return x.inner.WantsToHandleMouseEvents()
+}
+
+// HandleMouseEvent calls the underlying HandleMouseEvent.
+func (x *InputManager) HandleMouseEvent(mouseEvent *raw.NSEvent) bool {
+	return x.inner.HandleMouseEvent(mouseEvent)
+}
+
+// WantsToDelayTextChangeNotifications calls the underlying WantsToDelayTextChangeNotifications.
+func (x *InputManager) WantsToDelayTextChangeNotifications() bool {
+	return x.inner.WantsToDelayTextChangeNotifications()
+}
+
+// InputManagerable is the interface implemented by [InputManager], for mocking and DI.
+type InputManagerable interface {
+	Unwrap() *raw.NSInputManager
+	LocalizedInputManagerName() string
+	MarkedTextAbandoned(cli objc.ID)
+	MarkedTextSelectionChangedClient(newSel foundation.NSRange, cli objc.ID)
+	WantsToInterpretAllKeystrokes() bool
+	Language() string
+	Image() *Image
+	Server() *InputServer
+	WantsToHandleMouseEvents() bool
+	HandleMouseEvent(mouseEvent *raw.NSEvent) bool
+	WantsToDelayTextChangeNotifications() bool
+}
+
+var _ InputManagerable = (*InputManager)(nil)
 

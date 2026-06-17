@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -41,4 +42,54 @@ func (x *MTRDataTypeLocationDescriptorStruct) WithAreaType(areaType *foundation.
 	x.inner.SetAreaType(areaType)
 	return x
 }
+
+// LocationName calls the underlying LocationName.
+func (x *MTRDataTypeLocationDescriptorStruct) LocationName() string {
+	_r := x.inner.LocationName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLocationName calls the underlying SetLocationName.
+func (x *MTRDataTypeLocationDescriptorStruct) SetLocationName(locationName string) {
+	x.inner.SetLocationName(foundation.NSStringStringWithUTF8String(locationName))
+}
+
+// FloorNumber calls the underlying FloorNumber.
+func (x *MTRDataTypeLocationDescriptorStruct) FloorNumber() *foundation.NSNumber {
+	return x.inner.FloorNumber()
+}
+
+// SetFloorNumber calls the underlying SetFloorNumber.
+func (x *MTRDataTypeLocationDescriptorStruct) SetFloorNumber(floorNumber *foundation.NSNumber) {
+	x.inner.SetFloorNumber(floorNumber)
+}
+
+// AreaType calls the underlying AreaType.
+func (x *MTRDataTypeLocationDescriptorStruct) AreaType() *foundation.NSNumber {
+	return x.inner.AreaType()
+}
+
+// SetAreaType calls the underlying SetAreaType.
+func (x *MTRDataTypeLocationDescriptorStruct) SetAreaType(areaType *foundation.NSNumber) {
+	x.inner.SetAreaType(areaType)
+}
+
+// MTRDataTypeLocationDescriptorStructable is the interface implemented by [MTRDataTypeLocationDescriptorStruct], for mocking and DI.
+type MTRDataTypeLocationDescriptorStructable interface {
+	Unwrap() *raw.MTRDataTypeLocationDescriptorStruct
+	WithLocationName(locationName string) *MTRDataTypeLocationDescriptorStruct
+	WithFloorNumber(floorNumber *foundation.NSNumber) *MTRDataTypeLocationDescriptorStruct
+	WithAreaType(areaType *foundation.NSNumber) *MTRDataTypeLocationDescriptorStruct
+	LocationName() string
+	SetLocationName(locationName string)
+	FloorNumber() *foundation.NSNumber
+	SetFloorNumber(floorNumber *foundation.NSNumber)
+	AreaType() *foundation.NSNumber
+	SetAreaType(areaType *foundation.NSNumber)
+}
+
+var _ MTRDataTypeLocationDescriptorStructable = (*MTRDataTypeLocationDescriptorStruct)(nil)
 

@@ -23,3 +23,10 @@ func NewMTRWaterHeaterManagementClusterBoostEndedEvent() *MTRWaterHeaterManageme
 	return &MTRWaterHeaterManagementClusterBoostEndedEvent{inner: raw.MTRWaterHeaterManagementClusterBoostEndedEventFromID(_id)}
 }
 
+// MTRWaterHeaterManagementClusterBoostEndedEventable is the interface implemented by [MTRWaterHeaterManagementClusterBoostEndedEvent], for mocking and DI.
+type MTRWaterHeaterManagementClusterBoostEndedEventable interface {
+	Unwrap() *raw.MTRWaterHeaterManagementClusterBoostEndedEvent
+}
+
+var _ MTRWaterHeaterManagementClusterBoostEndedEventable = (*MTRWaterHeaterManagementClusterBoostEndedEvent)(nil)
+

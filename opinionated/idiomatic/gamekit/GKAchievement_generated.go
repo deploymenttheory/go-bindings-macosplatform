@@ -6,6 +6,7 @@ package gamekit
 
 import (
 	"context"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -60,15 +61,68 @@ func (x *Achievement) WithShowsCompletionBanner(showsCompletionBanner bool) *Ach
 	return x
 }
 
+// Identifier calls the underlying Identifier.
+func (x *Achievement) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetIdentifier calls the underlying SetIdentifier.
+func (x *Achievement) SetIdentifier(identifier string) {
+	x.inner.SetIdentifier(foundation.NSStringStringWithUTF8String(identifier))
+}
+
+// PercentComplete calls the underlying PercentComplete.
+func (x *Achievement) PercentComplete() float64 {
+	return x.inner.PercentComplete()
+}
+
+// SetPercentComplete calls the underlying SetPercentComplete.
+func (x *Achievement) SetPercentComplete(percentComplete float64) {
+	x.inner.SetPercentComplete(percentComplete)
+}
+
+// IsCompleted calls the underlying IsCompleted.
+func (x *Achievement) IsCompleted() bool {
+	return x.inner.IsCompleted()
+}
+
+// LastReportedDate calls the underlying LastReportedDate.
+func (x *Achievement) LastReportedDate() *foundation.NSDate {
+	return x.inner.LastReportedDate()
+}
+
+// ShowsCompletionBanner calls the underlying ShowsCompletionBanner.
+func (x *Achievement) ShowsCompletionBanner() bool {
+	return x.inner.ShowsCompletionBanner()
+}
+
+// SetShowsCompletionBanner calls the underlying SetShowsCompletionBanner.
+func (x *Achievement) SetShowsCompletionBanner(showsCompletionBanner bool) {
+	x.inner.SetShowsCompletionBanner(showsCompletionBanner)
+}
+
+// Player calls the underlying Player.
+func (x *Achievement) Player() *Player {
+	_r := x.inner.Player()
+	if _r == nil {
+		return nil
+	}
+	return &Player{inner: _r}
+}
+
 // ReportAchievement blocks until the operation completes or ctx is cancelled.
 func (x *Achievement) ReportAchievement(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.ReportAchievementWithCompletionHandler(func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -77,4 +131,89 @@ func (x *Achievement) ReportAchievement(ctx context.Context) error {
 		return ctx.Err()
 	}
 }
+
+// IsHidden calls the underlying IsHidden.
+func (x *Achievement) IsHidden() bool {
+	return x.inner.IsHidden()
+}
+
+// PlayerID calls the underlying PlayerID.
+func (x *Achievement) PlayerID() string {
+	_r := x.inner.PlayerID()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SelectChallengeablePlayers blocks until the operation completes or ctx is cancelled.
+func (x *Achievement) SelectChallengeablePlayers(ctx context.Context, players *foundation.NSArray[*raw.GKPlayer]) (*foundation.NSArray[*raw.GKPlayer], error) {
+	type _result struct {
+		val *foundation.NSArray[*raw.GKPlayer]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SelectChallengeablePlayersWithCompletionHandler(players, func(_p0 *foundation.NSArray[*raw.GKPlayer], _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[*raw.GKPlayer]
+		return _zero, ctx.Err()
+	}
+}
+
+// IssueChallengeToPlayersMessage calls the underlying IssueChallengeToPlayersMessage.
+func (x *Achievement) IssueChallengeToPlayersMessage(playerIDs *foundation.NSArray[*foundation.NSString], message string) {
+	x.inner.IssueChallengeToPlayersMessage(playerIDs, foundation.NSStringStringWithUTF8String(message))
+}
+
+// SelectChallengeablePlayerIDsWithCompletionHandler calls the underlying SelectChallengeablePlayerIDsWithCompletionHandler.
+func (x *Achievement) SelectChallengeablePlayerIDsWithCompletionHandler(playerIDs *foundation.NSArray[*foundation.NSString], completionHandler objc.Block) {
+	x.inner.SelectChallengeablePlayerIDsWithCompletionHandler(playerIDs, completionHandler)
+}
+
+// ChallengeComposeControllerWithMessagePlayersCompletionHandler calls the underlying ChallengeComposeControllerWithMessagePlayersCompletionHandler.
+func (x *Achievement) ChallengeComposeControllerWithMessagePlayersCompletionHandler(message string, players *foundation.NSArray[*raw.GKPlayer], completionHandler objc.Block) *appkit.NSViewController {
+	return x.inner.ChallengeComposeControllerWithMessagePlayersCompletionHandler(foundation.NSStringStringWithUTF8String(message), players, completionHandler)
+}
+
+// ChallengeComposeControllerWithMessagePlayersCompletion calls the underlying ChallengeComposeControllerWithMessagePlayersCompletion.
+func (x *Achievement) ChallengeComposeControllerWithMessagePlayersCompletion(message string, players *foundation.NSArray[*raw.GKPlayer], completionHandler func(*appkit.NSViewController, bool, *foundation.NSArray[*raw.GKPlayer])) *appkit.NSViewController {
+	return x.inner.ChallengeComposeControllerWithMessagePlayersCompletion(foundation.NSStringStringWithUTF8String(message), players, completionHandler)
+}
+
+// Achievementable is the interface implemented by [Achievement], for mocking and DI.
+type Achievementable interface {
+	Unwrap() *raw.GKAchievement
+	WithIdentifier(identifier string) *Achievement
+	WithPercentComplete(percentComplete float64) *Achievement
+	WithShowsCompletionBanner(showsCompletionBanner bool) *Achievement
+	Identifier() string
+	SetIdentifier(identifier string)
+	PercentComplete() float64
+	SetPercentComplete(percentComplete float64)
+	IsCompleted() bool
+	LastReportedDate() *foundation.NSDate
+	ShowsCompletionBanner() bool
+	SetShowsCompletionBanner(showsCompletionBanner bool)
+	Player() *Player
+	ReportAchievement(ctx context.Context) error
+	IsHidden() bool
+	PlayerID() string
+	SelectChallengeablePlayers(ctx context.Context, players *foundation.NSArray[*raw.GKPlayer]) (*foundation.NSArray[*raw.GKPlayer], error)
+	IssueChallengeToPlayersMessage(playerIDs *foundation.NSArray[*foundation.NSString], message string)
+	SelectChallengeablePlayerIDsWithCompletionHandler(playerIDs *foundation.NSArray[*foundation.NSString], completionHandler objc.Block)
+	ChallengeComposeControllerWithMessagePlayersCompletionHandler(message string, players *foundation.NSArray[*raw.GKPlayer], completionHandler objc.Block) *appkit.NSViewController
+	ChallengeComposeControllerWithMessagePlayersCompletion(message string, players *foundation.NSArray[*raw.GKPlayer], completionHandler func(*appkit.NSViewController, bool, *foundation.NSArray[*raw.GKPlayer])) *appkit.NSViewController
+}
+
+var _ Achievementable = (*Achievement)(nil)
 

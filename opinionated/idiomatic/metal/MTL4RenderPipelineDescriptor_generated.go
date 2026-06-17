@@ -113,5 +113,243 @@ func (x *MTL4RenderPipelineDescriptor) WithSupportIndirectCommandBuffers(support
 	return x
 }
 
+// Reset calls the underlying Reset.
+func (x *MTL4RenderPipelineDescriptor) Reset() {
+	x.inner.Reset()
+}
+
+// VertexFunctionDescriptor calls the underlying VertexFunctionDescriptor.
+func (x *MTL4RenderPipelineDescriptor) VertexFunctionDescriptor() *MTL4FunctionDescriptor {
+	_r := x.inner.VertexFunctionDescriptor()
+	if _r == nil {
+		return nil
+	}
+	return &MTL4FunctionDescriptor{inner: _r}
+}
+
+// SetVertexFunctionDescriptor calls the underlying SetVertexFunctionDescriptor.
+func (x *MTL4RenderPipelineDescriptor) SetVertexFunctionDescriptor(vertexFunctionDescriptor *raw.MTL4FunctionDescriptor) {
+	x.inner.SetVertexFunctionDescriptor(vertexFunctionDescriptor)
+}
+
+// FragmentFunctionDescriptor calls the underlying FragmentFunctionDescriptor.
+func (x *MTL4RenderPipelineDescriptor) FragmentFunctionDescriptor() *MTL4FunctionDescriptor {
+	_r := x.inner.FragmentFunctionDescriptor()
+	if _r == nil {
+		return nil
+	}
+	return &MTL4FunctionDescriptor{inner: _r}
+}
+
+// SetFragmentFunctionDescriptor calls the underlying SetFragmentFunctionDescriptor.
+func (x *MTL4RenderPipelineDescriptor) SetFragmentFunctionDescriptor(fragmentFunctionDescriptor *raw.MTL4FunctionDescriptor) {
+	x.inner.SetFragmentFunctionDescriptor(fragmentFunctionDescriptor)
+}
+
+// VertexDescriptor calls the underlying VertexDescriptor.
+func (x *MTL4RenderPipelineDescriptor) VertexDescriptor() *VertexDescriptor {
+	_r := x.inner.VertexDescriptor()
+	if _r == nil {
+		return nil
+	}
+	return &VertexDescriptor{inner: _r}
+}
+
+// SetVertexDescriptor calls the underlying SetVertexDescriptor.
+func (x *MTL4RenderPipelineDescriptor) SetVertexDescriptor(vertexDescriptor *raw.MTLVertexDescriptor) {
+	x.inner.SetVertexDescriptor(vertexDescriptor)
+}
+
+// RasterSampleCount calls the underlying RasterSampleCount.
+func (x *MTL4RenderPipelineDescriptor) RasterSampleCount() uint {
+	return x.inner.RasterSampleCount()
+}
+
+// SetRasterSampleCount calls the underlying SetRasterSampleCount.
+func (x *MTL4RenderPipelineDescriptor) SetRasterSampleCount(rasterSampleCount uint) {
+	x.inner.SetRasterSampleCount(rasterSampleCount)
+}
+
+// AlphaToCoverageState calls the underlying AlphaToCoverageState.
+func (x *MTL4RenderPipelineDescriptor) AlphaToCoverageState() raw.MTL4AlphaToCoverageState {
+	return x.inner.AlphaToCoverageState()
+}
+
+// SetAlphaToCoverageState calls the underlying SetAlphaToCoverageState.
+func (x *MTL4RenderPipelineDescriptor) SetAlphaToCoverageState(alphaToCoverageState raw.MTL4AlphaToCoverageState) {
+	x.inner.SetAlphaToCoverageState(alphaToCoverageState)
+}
+
+// AlphaToOneState calls the underlying AlphaToOneState.
+func (x *MTL4RenderPipelineDescriptor) AlphaToOneState() raw.MTL4AlphaToOneState {
+	return x.inner.AlphaToOneState()
+}
+
+// SetAlphaToOneState calls the underlying SetAlphaToOneState.
+func (x *MTL4RenderPipelineDescriptor) SetAlphaToOneState(alphaToOneState raw.MTL4AlphaToOneState) {
+	x.inner.SetAlphaToOneState(alphaToOneState)
+}
+
+// IsRasterizationEnabled calls the underlying IsRasterizationEnabled.
+func (x *MTL4RenderPipelineDescriptor) IsRasterizationEnabled() bool {
+	return x.inner.IsRasterizationEnabled()
+}
+
+// SetRasterizationEnabled calls the underlying SetRasterizationEnabled.
+func (x *MTL4RenderPipelineDescriptor) SetRasterizationEnabled(rasterizationEnabled bool) {
+	x.inner.SetRasterizationEnabled(rasterizationEnabled)
+}
+
+// MaxVertexAmplificationCount calls the underlying MaxVertexAmplificationCount.
+func (x *MTL4RenderPipelineDescriptor) MaxVertexAmplificationCount() uint {
+	return x.inner.MaxVertexAmplificationCount()
+}
+
+// SetMaxVertexAmplificationCount calls the underlying SetMaxVertexAmplificationCount.
+func (x *MTL4RenderPipelineDescriptor) SetMaxVertexAmplificationCount(maxVertexAmplificationCount uint) {
+	x.inner.SetMaxVertexAmplificationCount(maxVertexAmplificationCount)
+}
+
+// ColorAttachments calls the underlying ColorAttachments.
+func (x *MTL4RenderPipelineDescriptor) ColorAttachments() *MTL4RenderPipelineColorAttachmentDescriptorArray {
+	_r := x.inner.ColorAttachments()
+	if _r == nil {
+		return nil
+	}
+	return &MTL4RenderPipelineColorAttachmentDescriptorArray{inner: _r}
+}
+
+// InputPrimitiveTopology calls the underlying InputPrimitiveTopology.
+func (x *MTL4RenderPipelineDescriptor) InputPrimitiveTopology() raw.MTLPrimitiveTopologyClass {
+	return x.inner.InputPrimitiveTopology()
+}
+
+// SetInputPrimitiveTopology calls the underlying SetInputPrimitiveTopology.
+func (x *MTL4RenderPipelineDescriptor) SetInputPrimitiveTopology(inputPrimitiveTopology raw.MTLPrimitiveTopologyClass) {
+	x.inner.SetInputPrimitiveTopology(inputPrimitiveTopology)
+}
+
+// VertexStaticLinkingDescriptor calls the underlying VertexStaticLinkingDescriptor.
+func (x *MTL4RenderPipelineDescriptor) VertexStaticLinkingDescriptor() *MTL4StaticLinkingDescriptor {
+	_r := x.inner.VertexStaticLinkingDescriptor()
+	if _r == nil {
+		return nil
+	}
+	return &MTL4StaticLinkingDescriptor{inner: _r}
+}
+
+// SetVertexStaticLinkingDescriptor calls the underlying SetVertexStaticLinkingDescriptor.
+func (x *MTL4RenderPipelineDescriptor) SetVertexStaticLinkingDescriptor(vertexStaticLinkingDescriptor *raw.MTL4StaticLinkingDescriptor) {
+	x.inner.SetVertexStaticLinkingDescriptor(vertexStaticLinkingDescriptor)
+}
+
+// FragmentStaticLinkingDescriptor calls the underlying FragmentStaticLinkingDescriptor.
+func (x *MTL4RenderPipelineDescriptor) FragmentStaticLinkingDescriptor() *MTL4StaticLinkingDescriptor {
+	_r := x.inner.FragmentStaticLinkingDescriptor()
+	if _r == nil {
+		return nil
+	}
+	return &MTL4StaticLinkingDescriptor{inner: _r}
+}
+
+// SetFragmentStaticLinkingDescriptor calls the underlying SetFragmentStaticLinkingDescriptor.
+func (x *MTL4RenderPipelineDescriptor) SetFragmentStaticLinkingDescriptor(fragmentStaticLinkingDescriptor *raw.MTL4StaticLinkingDescriptor) {
+	x.inner.SetFragmentStaticLinkingDescriptor(fragmentStaticLinkingDescriptor)
+}
+
+// SupportVertexBinaryLinking calls the underlying SupportVertexBinaryLinking.
+func (x *MTL4RenderPipelineDescriptor) SupportVertexBinaryLinking() bool {
+	return x.inner.SupportVertexBinaryLinking()
+}
+
+// SetSupportVertexBinaryLinking calls the underlying SetSupportVertexBinaryLinking.
+func (x *MTL4RenderPipelineDescriptor) SetSupportVertexBinaryLinking(supportVertexBinaryLinking bool) {
+	x.inner.SetSupportVertexBinaryLinking(supportVertexBinaryLinking)
+}
+
+// SupportFragmentBinaryLinking calls the underlying SupportFragmentBinaryLinking.
+func (x *MTL4RenderPipelineDescriptor) SupportFragmentBinaryLinking() bool {
+	return x.inner.SupportFragmentBinaryLinking()
+}
+
+// SetSupportFragmentBinaryLinking calls the underlying SetSupportFragmentBinaryLinking.
+func (x *MTL4RenderPipelineDescriptor) SetSupportFragmentBinaryLinking(supportFragmentBinaryLinking bool) {
+	x.inner.SetSupportFragmentBinaryLinking(supportFragmentBinaryLinking)
+}
+
+// ColorAttachmentMappingState calls the underlying ColorAttachmentMappingState.
+func (x *MTL4RenderPipelineDescriptor) ColorAttachmentMappingState() raw.MTL4LogicalToPhysicalColorAttachmentMappingState {
+	return x.inner.ColorAttachmentMappingState()
+}
+
+// SetColorAttachmentMappingState calls the underlying SetColorAttachmentMappingState.
+func (x *MTL4RenderPipelineDescriptor) SetColorAttachmentMappingState(colorAttachmentMappingState raw.MTL4LogicalToPhysicalColorAttachmentMappingState) {
+	x.inner.SetColorAttachmentMappingState(colorAttachmentMappingState)
+}
+
+// SupportIndirectCommandBuffers calls the underlying SupportIndirectCommandBuffers.
+func (x *MTL4RenderPipelineDescriptor) SupportIndirectCommandBuffers() raw.MTL4IndirectCommandBufferSupportState {
+	return x.inner.SupportIndirectCommandBuffers()
+}
+
+// SetSupportIndirectCommandBuffers calls the underlying SetSupportIndirectCommandBuffers.
+func (x *MTL4RenderPipelineDescriptor) SetSupportIndirectCommandBuffers(supportIndirectCommandBuffers raw.MTL4IndirectCommandBufferSupportState) {
+	x.inner.SetSupportIndirectCommandBuffers(supportIndirectCommandBuffers)
+}
+
 func (x *MTL4RenderPipelineDescriptor) asMTL4PipelineDescriptor() *raw.MTL4PipelineDescriptor { return &x.inner.MTL4PipelineDescriptor }
+
+// MTL4RenderPipelineDescriptorable is the interface implemented by [MTL4RenderPipelineDescriptor], for mocking and DI.
+type MTL4RenderPipelineDescriptorable interface {
+	Unwrap() *raw.MTL4RenderPipelineDescriptor
+	WithVertexFunctionDescriptor(vertexFunctionDescriptor MTL4FunctionDescriptorProvider) *MTL4RenderPipelineDescriptor
+	WithFragmentFunctionDescriptor(fragmentFunctionDescriptor MTL4FunctionDescriptorProvider) *MTL4RenderPipelineDescriptor
+	WithVertexDescriptor(vertexDescriptor *raw.MTLVertexDescriptor) *MTL4RenderPipelineDescriptor
+	WithRasterSampleCount(rasterSampleCount uint) *MTL4RenderPipelineDescriptor
+	WithAlphaToCoverageState(alphaToCoverageState raw.MTL4AlphaToCoverageState) *MTL4RenderPipelineDescriptor
+	WithAlphaToOneState(alphaToOneState raw.MTL4AlphaToOneState) *MTL4RenderPipelineDescriptor
+	WithRasterizationEnabled(rasterizationEnabled bool) *MTL4RenderPipelineDescriptor
+	WithMaxVertexAmplificationCount(maxVertexAmplificationCount uint) *MTL4RenderPipelineDescriptor
+	WithInputPrimitiveTopology(inputPrimitiveTopology raw.MTLPrimitiveTopologyClass) *MTL4RenderPipelineDescriptor
+	WithVertexStaticLinkingDescriptor(vertexStaticLinkingDescriptor *raw.MTL4StaticLinkingDescriptor) *MTL4RenderPipelineDescriptor
+	WithFragmentStaticLinkingDescriptor(fragmentStaticLinkingDescriptor *raw.MTL4StaticLinkingDescriptor) *MTL4RenderPipelineDescriptor
+	WithSupportVertexBinaryLinking(supportVertexBinaryLinking bool) *MTL4RenderPipelineDescriptor
+	WithSupportFragmentBinaryLinking(supportFragmentBinaryLinking bool) *MTL4RenderPipelineDescriptor
+	WithColorAttachmentMappingState(colorAttachmentMappingState raw.MTL4LogicalToPhysicalColorAttachmentMappingState) *MTL4RenderPipelineDescriptor
+	WithSupportIndirectCommandBuffers(supportIndirectCommandBuffers raw.MTL4IndirectCommandBufferSupportState) *MTL4RenderPipelineDescriptor
+	Reset()
+	VertexFunctionDescriptor() *MTL4FunctionDescriptor
+	SetVertexFunctionDescriptor(vertexFunctionDescriptor *raw.MTL4FunctionDescriptor)
+	FragmentFunctionDescriptor() *MTL4FunctionDescriptor
+	SetFragmentFunctionDescriptor(fragmentFunctionDescriptor *raw.MTL4FunctionDescriptor)
+	VertexDescriptor() *VertexDescriptor
+	SetVertexDescriptor(vertexDescriptor *raw.MTLVertexDescriptor)
+	RasterSampleCount() uint
+	SetRasterSampleCount(rasterSampleCount uint)
+	AlphaToCoverageState() raw.MTL4AlphaToCoverageState
+	SetAlphaToCoverageState(alphaToCoverageState raw.MTL4AlphaToCoverageState)
+	AlphaToOneState() raw.MTL4AlphaToOneState
+	SetAlphaToOneState(alphaToOneState raw.MTL4AlphaToOneState)
+	IsRasterizationEnabled() bool
+	SetRasterizationEnabled(rasterizationEnabled bool)
+	MaxVertexAmplificationCount() uint
+	SetMaxVertexAmplificationCount(maxVertexAmplificationCount uint)
+	ColorAttachments() *MTL4RenderPipelineColorAttachmentDescriptorArray
+	InputPrimitiveTopology() raw.MTLPrimitiveTopologyClass
+	SetInputPrimitiveTopology(inputPrimitiveTopology raw.MTLPrimitiveTopologyClass)
+	VertexStaticLinkingDescriptor() *MTL4StaticLinkingDescriptor
+	SetVertexStaticLinkingDescriptor(vertexStaticLinkingDescriptor *raw.MTL4StaticLinkingDescriptor)
+	FragmentStaticLinkingDescriptor() *MTL4StaticLinkingDescriptor
+	SetFragmentStaticLinkingDescriptor(fragmentStaticLinkingDescriptor *raw.MTL4StaticLinkingDescriptor)
+	SupportVertexBinaryLinking() bool
+	SetSupportVertexBinaryLinking(supportVertexBinaryLinking bool)
+	SupportFragmentBinaryLinking() bool
+	SetSupportFragmentBinaryLinking(supportFragmentBinaryLinking bool)
+	ColorAttachmentMappingState() raw.MTL4LogicalToPhysicalColorAttachmentMappingState
+	SetColorAttachmentMappingState(colorAttachmentMappingState raw.MTL4LogicalToPhysicalColorAttachmentMappingState)
+	SupportIndirectCommandBuffers() raw.MTL4IndirectCommandBufferSupportState
+	SetSupportIndirectCommandBuffers(supportIndirectCommandBuffers raw.MTL4IndirectCommandBufferSupportState)
+}
+
+var _ MTL4RenderPipelineDescriptorable = (*MTL4RenderPipelineDescriptor)(nil)
 

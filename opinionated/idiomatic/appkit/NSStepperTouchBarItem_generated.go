@@ -66,5 +66,97 @@ func (x *StepperTouchBarItem) WithCustomizationLabel(customizationLabel string) 
 	return x
 }
 
+// MaxValue calls the underlying MaxValue.
+func (x *StepperTouchBarItem) MaxValue() float64 {
+	return x.inner.MaxValue()
+}
+
+// SetMaxValue calls the underlying SetMaxValue.
+func (x *StepperTouchBarItem) SetMaxValue(maxValue float64) {
+	x.inner.SetMaxValue(maxValue)
+}
+
+// MinValue calls the underlying MinValue.
+func (x *StepperTouchBarItem) MinValue() float64 {
+	return x.inner.MinValue()
+}
+
+// SetMinValue calls the underlying SetMinValue.
+func (x *StepperTouchBarItem) SetMinValue(minValue float64) {
+	x.inner.SetMinValue(minValue)
+}
+
+// Increment calls the underlying Increment.
+func (x *StepperTouchBarItem) Increment() float64 {
+	return x.inner.Increment()
+}
+
+// SetIncrement calls the underlying SetIncrement.
+func (x *StepperTouchBarItem) SetIncrement(increment float64) {
+	x.inner.SetIncrement(increment)
+}
+
+// Value calls the underlying Value.
+func (x *StepperTouchBarItem) Value() float64 {
+	return x.inner.Value()
+}
+
+// SetValue calls the underlying SetValue.
+func (x *StepperTouchBarItem) SetValue(value float64) {
+	x.inner.SetValue(value)
+}
+
+// Target calls the underlying Target.
+func (x *StepperTouchBarItem) Target() objc.ID {
+	return x.inner.Target()
+}
+
+// SetTarget calls the underlying SetTarget.
+func (x *StepperTouchBarItem) SetTarget(target objc.ID) {
+	x.inner.SetTarget(target)
+}
+
+// Action calls the underlying Action.
+func (x *StepperTouchBarItem) Action() objc.SEL {
+	return x.inner.Action()
+}
+
+// SetAction calls the underlying SetAction.
+func (x *StepperTouchBarItem) SetAction(action objc.SEL) {
+	x.inner.SetAction(action)
+}
+
+// SetCustomizationLabel calls the underlying SetCustomizationLabel.
+func (x *StepperTouchBarItem) SetCustomizationLabel(customizationLabel string) {
+	x.inner.SetCustomizationLabel(foundation.NSStringStringWithUTF8String(customizationLabel))
+}
+
 func (x *StepperTouchBarItem) asTouchBarItem() *raw.NSTouchBarItem { return &x.inner.NSTouchBarItem }
+
+// StepperTouchBarItemable is the interface implemented by [StepperTouchBarItem], for mocking and DI.
+type StepperTouchBarItemable interface {
+	Unwrap() *raw.NSStepperTouchBarItem
+	WithMaxValue(maxValue float64) *StepperTouchBarItem
+	WithMinValue(minValue float64) *StepperTouchBarItem
+	WithIncrement(increment float64) *StepperTouchBarItem
+	WithValue(value float64) *StepperTouchBarItem
+	WithTarget(target objc.ID) *StepperTouchBarItem
+	WithAction(action objc.SEL) *StepperTouchBarItem
+	WithCustomizationLabel(customizationLabel string) *StepperTouchBarItem
+	MaxValue() float64
+	SetMaxValue(maxValue float64)
+	MinValue() float64
+	SetMinValue(minValue float64)
+	Increment() float64
+	SetIncrement(increment float64)
+	Value() float64
+	SetValue(value float64)
+	Target() objc.ID
+	SetTarget(target objc.ID)
+	Action() objc.SEL
+	SetAction(action objc.SEL)
+	SetCustomizationLabel(customizationLabel string)
+}
+
+var _ StepperTouchBarItemable = (*StepperTouchBarItem)(nil)
 

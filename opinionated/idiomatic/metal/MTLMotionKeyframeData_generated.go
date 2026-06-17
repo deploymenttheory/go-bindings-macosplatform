@@ -35,3 +35,36 @@ func (x *MotionKeyframeData) WithOffset(offset uint) *MotionKeyframeData {
 	return x
 }
 
+// Buffer calls the underlying Buffer.
+func (x *MotionKeyframeData) Buffer() raw.MTLBuffer {
+	return x.inner.Buffer()
+}
+
+// SetBuffer calls the underlying SetBuffer.
+func (x *MotionKeyframeData) SetBuffer(buffer raw.MTLBuffer) {
+	x.inner.SetBuffer(buffer)
+}
+
+// Offset calls the underlying Offset.
+func (x *MotionKeyframeData) Offset() uint {
+	return x.inner.Offset()
+}
+
+// SetOffset calls the underlying SetOffset.
+func (x *MotionKeyframeData) SetOffset(offset uint) {
+	x.inner.SetOffset(offset)
+}
+
+// MotionKeyframeDataable is the interface implemented by [MotionKeyframeData], for mocking and DI.
+type MotionKeyframeDataable interface {
+	Unwrap() *raw.MTLMotionKeyframeData
+	WithBuffer(buffer raw.MTLBuffer) *MotionKeyframeData
+	WithOffset(offset uint) *MotionKeyframeData
+	Buffer() raw.MTLBuffer
+	SetBuffer(buffer raw.MTLBuffer)
+	Offset() uint
+	SetOffset(offset uint)
+}
+
+var _ MotionKeyframeDataable = (*MotionKeyframeData)(nil)
+

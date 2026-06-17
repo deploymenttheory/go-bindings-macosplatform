@@ -25,3 +25,10 @@ func NewLassoTool() *LassoTool {
 
 func (x *LassoTool) asTool() *raw.PKTool { return &x.inner.PKTool }
 
+// LassoToolable is the interface implemented by [LassoTool], for mocking and DI.
+type LassoToolable interface {
+	Unwrap() *raw.PKLassoTool
+}
+
+var _ LassoToolable = (*LassoTool)(nil)
+

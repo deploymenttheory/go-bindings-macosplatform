@@ -5,7 +5,9 @@
 package fskit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/fskit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +24,33 @@ func NewModuleIdentity() *ModuleIdentity {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("FSModuleIdentity")), objc.RegisterName("new"))
 	return &ModuleIdentity{inner: raw.FSModuleIdentityFromID(_id)}
 }
+
+// BundleIdentifier calls the underlying BundleIdentifier.
+func (x *ModuleIdentity) BundleIdentifier() string {
+	_r := x.inner.BundleIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Url calls the underlying Url.
+func (x *ModuleIdentity) Url() *foundation.NSURL {
+	return x.inner.Url()
+}
+
+// IsEnabled calls the underlying IsEnabled.
+func (x *ModuleIdentity) IsEnabled() bool {
+	return x.inner.IsEnabled()
+}
+
+// ModuleIdentityable is the interface implemented by [ModuleIdentity], for mocking and DI.
+type ModuleIdentityable interface {
+	Unwrap() *raw.FSModuleIdentity
+	BundleIdentifier() string
+	Url() *foundation.NSURL
+	IsEnabled() bool
+}
+
+var _ ModuleIdentityable = (*ModuleIdentity)(nil)
 

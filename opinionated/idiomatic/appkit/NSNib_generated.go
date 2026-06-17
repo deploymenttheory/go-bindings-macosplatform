@@ -39,3 +39,28 @@ func NewNibWithContentsOfURL(nibFileURL string) *Nib {
 	return &Nib{inner: raw.NSNibFromID(_id)}
 }
 
+// InstantiateWithOwnerTopLevelObjects calls the underlying InstantiateWithOwnerTopLevelObjects.
+func (x *Nib) InstantiateWithOwnerTopLevelObjects(owner objc.ID, topLevelObjects *foundation.NSArray[objc.ID]) bool {
+	return x.inner.InstantiateWithOwnerTopLevelObjects(owner, topLevelObjects)
+}
+
+// InstantiateNibWithExternalNameTable calls the underlying InstantiateNibWithExternalNameTable.
+func (x *Nib) InstantiateNibWithExternalNameTable(externalNameTable *foundation.NSDictionary[objc.ID, objc.ID]) bool {
+	return x.inner.InstantiateNibWithExternalNameTable(externalNameTable)
+}
+
+// InstantiateNibWithOwnerTopLevelObjects calls the underlying InstantiateNibWithOwnerTopLevelObjects.
+func (x *Nib) InstantiateNibWithOwnerTopLevelObjects(owner objc.ID, topLevelObjects *foundation.NSArray[objc.ID]) bool {
+	return x.inner.InstantiateNibWithOwnerTopLevelObjects(owner, topLevelObjects)
+}
+
+// Nibable is the interface implemented by [Nib], for mocking and DI.
+type Nibable interface {
+	Unwrap() *raw.NSNib
+	InstantiateWithOwnerTopLevelObjects(owner objc.ID, topLevelObjects *foundation.NSArray[objc.ID]) bool
+	InstantiateNibWithExternalNameTable(externalNameTable *foundation.NSDictionary[objc.ID, objc.ID]) bool
+	InstantiateNibWithOwnerTopLevelObjects(owner objc.ID, topLevelObjects *foundation.NSArray[objc.ID]) bool
+}
+
+var _ Nibable = (*Nib)(nil)
+

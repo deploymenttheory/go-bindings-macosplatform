@@ -42,3 +42,49 @@ func (x *ScrubberLayoutAttributes) WithAlpha(alpha float64) *ScrubberLayoutAttri
 	return x
 }
 
+// ItemIndex calls the underlying ItemIndex.
+func (x *ScrubberLayoutAttributes) ItemIndex() int {
+	return x.inner.ItemIndex()
+}
+
+// SetItemIndex calls the underlying SetItemIndex.
+func (x *ScrubberLayoutAttributes) SetItemIndex(itemIndex int) {
+	x.inner.SetItemIndex(itemIndex)
+}
+
+// Frame calls the underlying Frame.
+func (x *ScrubberLayoutAttributes) Frame() corefoundation.CGRect {
+	return x.inner.Frame()
+}
+
+// SetFrame calls the underlying SetFrame.
+func (x *ScrubberLayoutAttributes) SetFrame(frame corefoundation.CGRect) {
+	x.inner.SetFrame(frame)
+}
+
+// Alpha calls the underlying Alpha.
+func (x *ScrubberLayoutAttributes) Alpha() float64 {
+	return x.inner.Alpha()
+}
+
+// SetAlpha calls the underlying SetAlpha.
+func (x *ScrubberLayoutAttributes) SetAlpha(alpha float64) {
+	x.inner.SetAlpha(alpha)
+}
+
+// ScrubberLayoutAttributesable is the interface implemented by [ScrubberLayoutAttributes], for mocking and DI.
+type ScrubberLayoutAttributesable interface {
+	Unwrap() *raw.NSScrubberLayoutAttributes
+	WithItemIndex(itemIndex int) *ScrubberLayoutAttributes
+	WithFrame(frame corefoundation.CGRect) *ScrubberLayoutAttributes
+	WithAlpha(alpha float64) *ScrubberLayoutAttributes
+	ItemIndex() int
+	SetItemIndex(itemIndex int)
+	Frame() corefoundation.CGRect
+	SetFrame(frame corefoundation.CGRect)
+	Alpha() float64
+	SetAlpha(alpha float64)
+}
+
+var _ ScrubberLayoutAttributesable = (*ScrubberLayoutAttributes)(nil)
+

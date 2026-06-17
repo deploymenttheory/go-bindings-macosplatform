@@ -45,11 +45,11 @@ func (x *VirtualMachine) WithDelegate(delegate raw.VZVirtualMachineDelegate) *Vi
 func (x *VirtualMachine) Start(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.StartWithCompletionHandler(func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -63,11 +63,11 @@ func (x *VirtualMachine) Start(ctx context.Context) error {
 func (x *VirtualMachine) StartWithOptions(ctx context.Context, options *raw.VZVirtualMachineStartOptions) error {
 	_ch := make(chan error, 1)
 	x.inner.StartWithOptionsCompletionHandler(options, func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -81,11 +81,11 @@ func (x *VirtualMachine) StartWithOptions(ctx context.Context, options *raw.VZVi
 func (x *VirtualMachine) Stop(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.StopWithCompletionHandler(func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -99,11 +99,11 @@ func (x *VirtualMachine) Stop(ctx context.Context) error {
 func (x *VirtualMachine) Pause(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.PauseWithCompletionHandler(func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -117,11 +117,11 @@ func (x *VirtualMachine) Pause(ctx context.Context) error {
 func (x *VirtualMachine) Resume(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.ResumeWithCompletionHandler(func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -135,11 +135,11 @@ func (x *VirtualMachine) Resume(ctx context.Context) error {
 func (x *VirtualMachine) RestoreMachineStateFromURL(ctx context.Context, saveFileURL string) error {
 	_ch := make(chan error, 1)
 	x.inner.RestoreMachineStateFromURLCompletionHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(saveFileURL)), func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -153,11 +153,11 @@ func (x *VirtualMachine) RestoreMachineStateFromURL(ctx context.Context, saveFil
 func (x *VirtualMachine) SaveMachineStateToURL(ctx context.Context, saveFileURL string) error {
 	_ch := make(chan error, 1)
 	x.inner.SaveMachineStateToURLCompletionHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(saveFileURL)), func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -173,17 +173,30 @@ func (x *VirtualMachine) RequestStop() error {
 	return err
 }
 
+// Queue calls the underlying Queue.
+func (x *VirtualMachine) Queue() *foundation.NSObject {
+	return x.inner.Queue()
+}
+
+// Delegate calls the underlying Delegate.
+func (x *VirtualMachine) Delegate() raw.VZVirtualMachineDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *VirtualMachine) SetDelegate(delegate raw.VZVirtualMachineDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
 // ConsoleDevices returns the collection as a Go slice.
 func (x *VirtualMachine) ConsoleDevices() []*raw.VZConsoleDevice {
 	arr := x.inner.ConsoleDevices()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.VZConsoleDevice, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.VZConsoleDevice {
+		return raw.VZConsoleDeviceFromID(purego.Retain(_id))
+	})
 }
 
 // DirectorySharingDevices returns the collection as a Go slice.
@@ -192,11 +205,9 @@ func (x *VirtualMachine) DirectorySharingDevices() []*raw.VZDirectorySharingDevi
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.VZDirectorySharingDevice, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.VZDirectorySharingDevice {
+		return raw.VZDirectorySharingDeviceFromID(purego.Retain(_id))
+	})
 }
 
 // GraphicsDevices returns the collection as a Go slice.
@@ -205,11 +216,9 @@ func (x *VirtualMachine) GraphicsDevices() []*raw.VZGraphicsDevice {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.VZGraphicsDevice, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.VZGraphicsDevice {
+		return raw.VZGraphicsDeviceFromID(purego.Retain(_id))
+	})
 }
 
 // MemoryBalloonDevices returns the collection as a Go slice.
@@ -218,11 +227,9 @@ func (x *VirtualMachine) MemoryBalloonDevices() []*raw.VZMemoryBalloonDevice {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.VZMemoryBalloonDevice, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.VZMemoryBalloonDevice {
+		return raw.VZMemoryBalloonDeviceFromID(purego.Retain(_id))
+	})
 }
 
 // NetworkDevices returns the collection as a Go slice.
@@ -231,11 +238,9 @@ func (x *VirtualMachine) NetworkDevices() []*raw.VZNetworkDevice {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.VZNetworkDevice, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.VZNetworkDevice {
+		return raw.VZNetworkDeviceFromID(purego.Retain(_id))
+	})
 }
 
 // SocketDevices returns the collection as a Go slice.
@@ -244,11 +249,9 @@ func (x *VirtualMachine) SocketDevices() []*raw.VZSocketDevice {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.VZSocketDevice, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.VZSocketDevice {
+		return raw.VZSocketDeviceFromID(purego.Retain(_id))
+	})
 }
 
 // UsbControllers returns the collection as a Go slice.
@@ -257,10 +260,34 @@ func (x *VirtualMachine) UsbControllers() []*raw.VZUSBController {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.VZUSBController, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.VZUSBController {
+		return raw.VZUSBControllerFromID(purego.Retain(_id))
+	})
 }
+
+// VirtualMachineable is the interface implemented by [VirtualMachine], for mocking and DI.
+type VirtualMachineable interface {
+	Unwrap() *raw.VZVirtualMachine
+	WithDelegate(delegate raw.VZVirtualMachineDelegate) *VirtualMachine
+	Start(ctx context.Context) error
+	StartWithOptions(ctx context.Context, options *raw.VZVirtualMachineStartOptions) error
+	Stop(ctx context.Context) error
+	Pause(ctx context.Context) error
+	Resume(ctx context.Context) error
+	RestoreMachineStateFromURL(ctx context.Context, saveFileURL string) error
+	SaveMachineStateToURL(ctx context.Context, saveFileURL string) error
+	RequestStop() error
+	Queue() *foundation.NSObject
+	Delegate() raw.VZVirtualMachineDelegate
+	SetDelegate(delegate raw.VZVirtualMachineDelegate)
+	ConsoleDevices() []*raw.VZConsoleDevice
+	DirectorySharingDevices() []*raw.VZDirectorySharingDevice
+	GraphicsDevices() []*raw.VZGraphicsDevice
+	MemoryBalloonDevices() []*raw.VZMemoryBalloonDevice
+	NetworkDevices() []*raw.VZNetworkDevice
+	SocketDevices() []*raw.VZSocketDevice
+	UsbControllers() []*raw.VZUSBController
+}
+
+var _ VirtualMachineable = (*VirtualMachine)(nil)
 

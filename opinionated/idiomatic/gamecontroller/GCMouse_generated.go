@@ -23,3 +23,20 @@ func NewMouse() *Mouse {
 	return &Mouse{inner: raw.GCMouseFromID(_id)}
 }
 
+// MouseInput calls the underlying MouseInput.
+func (x *Mouse) MouseInput() *MouseInput {
+	_r := x.inner.MouseInput()
+	if _r == nil {
+		return nil
+	}
+	return &MouseInput{inner: _r}
+}
+
+// Mouseable is the interface implemented by [Mouse], for mocking and DI.
+type Mouseable interface {
+	Unwrap() *raw.GCMouse
+	MouseInput() *MouseInput
+}
+
+var _ Mouseable = (*Mouse)(nil)
+

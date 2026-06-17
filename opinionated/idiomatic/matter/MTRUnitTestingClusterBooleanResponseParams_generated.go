@@ -43,5 +43,38 @@ func (x *MTRUnitTestingClusterBooleanResponseParams) WithTimedInvokeTimeoutMs(ti
 	return x
 }
 
+// Value calls the underlying Value.
+func (x *MTRUnitTestingClusterBooleanResponseParams) Value() *foundation.NSNumber {
+	return x.inner.Value()
+}
+
+// SetValue calls the underlying SetValue.
+func (x *MTRUnitTestingClusterBooleanResponseParams) SetValue(value *foundation.NSNumber) {
+	x.inner.SetValue(value)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRUnitTestingClusterBooleanResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRUnitTestingClusterBooleanResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
 func (x *MTRUnitTestingClusterBooleanResponseParams) asMTRUnitTestingClusterBooleanResponseParams() *raw.MTRUnitTestingClusterBooleanResponseParams { return x.inner }
+
+// MTRUnitTestingClusterBooleanResponseParamsable is the interface implemented by [MTRUnitTestingClusterBooleanResponseParams], for mocking and DI.
+type MTRUnitTestingClusterBooleanResponseParamsable interface {
+	Unwrap() *raw.MTRUnitTestingClusterBooleanResponseParams
+	WithValue(value *foundation.NSNumber) *MTRUnitTestingClusterBooleanResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRUnitTestingClusterBooleanResponseParams
+	Value() *foundation.NSNumber
+	SetValue(value *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+}
+
+var _ MTRUnitTestingClusterBooleanResponseParamsable = (*MTRUnitTestingClusterBooleanResponseParams)(nil)
 

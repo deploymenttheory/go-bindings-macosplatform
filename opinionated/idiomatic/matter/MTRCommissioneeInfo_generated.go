@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +23,43 @@ func NewMTRCommissioneeInfo() *MTRCommissioneeInfo {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRCommissioneeInfo")), objc.RegisterName("new"))
 	return &MTRCommissioneeInfo{inner: raw.MTRCommissioneeInfoFromID(_id)}
 }
+
+// ProductIdentity calls the underlying ProductIdentity.
+func (x *MTRCommissioneeInfo) ProductIdentity() *MTRProductIdentity {
+	_r := x.inner.ProductIdentity()
+	if _r == nil {
+		return nil
+	}
+	return &MTRProductIdentity{inner: _r}
+}
+
+// EndpointsById calls the underlying EndpointsById.
+func (x *MTRCommissioneeInfo) EndpointsById() *foundation.NSDictionary[*foundation.NSNumber, *raw.MTREndpointInfo] {
+	return x.inner.EndpointsById()
+}
+
+// RootEndpoint calls the underlying RootEndpoint.
+func (x *MTRCommissioneeInfo) RootEndpoint() *MTREndpointInfo {
+	_r := x.inner.RootEndpoint()
+	if _r == nil {
+		return nil
+	}
+	return &MTREndpointInfo{inner: _r}
+}
+
+// Attributes calls the underlying Attributes.
+func (x *MTRCommissioneeInfo) Attributes() *foundation.NSDictionary[*raw.MTRAttributePath, objc.ID] {
+	return x.inner.Attributes()
+}
+
+// MTRCommissioneeInfoable is the interface implemented by [MTRCommissioneeInfo], for mocking and DI.
+type MTRCommissioneeInfoable interface {
+	Unwrap() *raw.MTRCommissioneeInfo
+	ProductIdentity() *MTRProductIdentity
+	EndpointsById() *foundation.NSDictionary[*foundation.NSNumber, *raw.MTREndpointInfo]
+	RootEndpoint() *MTREndpointInfo
+	Attributes() *foundation.NSDictionary[*raw.MTRAttributePath, objc.ID]
+}
+
+var _ MTRCommissioneeInfoable = (*MTRCommissioneeInfo)(nil)
 

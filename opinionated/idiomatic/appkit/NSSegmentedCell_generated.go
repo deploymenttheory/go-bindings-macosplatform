@@ -6,6 +6,9 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -47,7 +50,220 @@ func (x *SegmentedCell) WithSegmentStyle(segmentStyle raw.NSSegmentStyle) *Segme
 	return x
 }
 
+// SelectSegmentWithTag calls the underlying SelectSegmentWithTag.
+func (x *SegmentedCell) SelectSegmentWithTag(tag int) bool {
+	return x.inner.SelectSegmentWithTag(tag)
+}
+
+// MakeNextSegmentKey calls the underlying MakeNextSegmentKey.
+func (x *SegmentedCell) MakeNextSegmentKey() {
+	x.inner.MakeNextSegmentKey()
+}
+
+// MakePreviousSegmentKey calls the underlying MakePreviousSegmentKey.
+func (x *SegmentedCell) MakePreviousSegmentKey() {
+	x.inner.MakePreviousSegmentKey()
+}
+
+// SetWidthForSegment calls the underlying SetWidthForSegment.
+func (x *SegmentedCell) SetWidthForSegment(width float64, segment int) {
+	x.inner.SetWidthForSegment(width, segment)
+}
+
+// WidthForSegment calls the underlying WidthForSegment.
+func (x *SegmentedCell) WidthForSegment(segment int) float64 {
+	return x.inner.WidthForSegment(segment)
+}
+
+// SetImageForSegment calls the underlying SetImageForSegment.
+func (x *SegmentedCell) SetImageForSegment(image *raw.NSImage, segment int) {
+	x.inner.SetImageForSegment(image, segment)
+}
+
+// ImageForSegment calls the underlying ImageForSegment.
+func (x *SegmentedCell) ImageForSegment(segment int) *Image {
+	_r := x.inner.ImageForSegment(segment)
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// SetImageScalingForSegment calls the underlying SetImageScalingForSegment.
+func (x *SegmentedCell) SetImageScalingForSegment(scaling raw.NSImageScaling, segment int) {
+	x.inner.SetImageScalingForSegment(scaling, segment)
+}
+
+// ImageScalingForSegment calls the underlying ImageScalingForSegment.
+func (x *SegmentedCell) ImageScalingForSegment(segment int) raw.NSImageScaling {
+	return x.inner.ImageScalingForSegment(segment)
+}
+
+// SetLabelForSegment calls the underlying SetLabelForSegment.
+func (x *SegmentedCell) SetLabelForSegment(label string, segment int) {
+	x.inner.SetLabelForSegment(foundation.NSStringStringWithUTF8String(label), segment)
+}
+
+// LabelForSegment calls the underlying LabelForSegment.
+func (x *SegmentedCell) LabelForSegment(segment int) string {
+	_r := x.inner.LabelForSegment(segment)
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetSelectedForSegment calls the underlying SetSelectedForSegment.
+func (x *SegmentedCell) SetSelectedForSegment(selected bool, segment int) {
+	x.inner.SetSelectedForSegment(selected, segment)
+}
+
+// IsSelectedForSegment calls the underlying IsSelectedForSegment.
+func (x *SegmentedCell) IsSelectedForSegment(segment int) bool {
+	return x.inner.IsSelectedForSegment(segment)
+}
+
+// SetEnabledForSegment calls the underlying SetEnabledForSegment.
+func (x *SegmentedCell) SetEnabledForSegment(enabled bool, segment int) {
+	x.inner.SetEnabledForSegment(enabled, segment)
+}
+
+// IsEnabledForSegment calls the underlying IsEnabledForSegment.
+func (x *SegmentedCell) IsEnabledForSegment(segment int) bool {
+	return x.inner.IsEnabledForSegment(segment)
+}
+
+// SetMenuForSegment calls the underlying SetMenuForSegment.
+func (x *SegmentedCell) SetMenuForSegment(menu *raw.NSMenu, segment int) {
+	x.inner.SetMenuForSegment(menu, segment)
+}
+
+// MenuForSegment calls the underlying MenuForSegment.
+func (x *SegmentedCell) MenuForSegment(segment int) *Menu {
+	_r := x.inner.MenuForSegment(segment)
+	if _r == nil {
+		return nil
+	}
+	return &Menu{inner: _r}
+}
+
+// SetToolTipForSegment calls the underlying SetToolTipForSegment.
+func (x *SegmentedCell) SetToolTipForSegment(toolTip string, segment int) {
+	x.inner.SetToolTipForSegment(foundation.NSStringStringWithUTF8String(toolTip), segment)
+}
+
+// ToolTipForSegment calls the underlying ToolTipForSegment.
+func (x *SegmentedCell) ToolTipForSegment(segment int) string {
+	_r := x.inner.ToolTipForSegment(segment)
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetTagForSegment calls the underlying SetTagForSegment.
+func (x *SegmentedCell) SetTagForSegment(tag int, segment int) {
+	x.inner.SetTagForSegment(tag, segment)
+}
+
+// TagForSegment calls the underlying TagForSegment.
+func (x *SegmentedCell) TagForSegment(segment int) int {
+	return x.inner.TagForSegment(segment)
+}
+
+// DrawSegmentInFrameWithView calls the underlying DrawSegmentInFrameWithView.
+func (x *SegmentedCell) DrawSegmentInFrameWithView(segment int, frame corefoundation.CGRect, controlView *raw.NSView) {
+	x.inner.DrawSegmentInFrameWithView(segment, frame, controlView)
+}
+
+// SegmentCount calls the underlying SegmentCount.
+func (x *SegmentedCell) SegmentCount() int {
+	return x.inner.SegmentCount()
+}
+
+// SetSegmentCount calls the underlying SetSegmentCount.
+func (x *SegmentedCell) SetSegmentCount(segmentCount int) {
+	x.inner.SetSegmentCount(segmentCount)
+}
+
+// SelectedSegment calls the underlying SelectedSegment.
+func (x *SegmentedCell) SelectedSegment() int {
+	return x.inner.SelectedSegment()
+}
+
+// SetSelectedSegment calls the underlying SetSelectedSegment.
+func (x *SegmentedCell) SetSelectedSegment(selectedSegment int) {
+	x.inner.SetSelectedSegment(selectedSegment)
+}
+
+// TrackingMode calls the underlying TrackingMode.
+func (x *SegmentedCell) TrackingMode() raw.NSSegmentSwitchTracking {
+	return x.inner.TrackingMode()
+}
+
+// SetTrackingMode calls the underlying SetTrackingMode.
+func (x *SegmentedCell) SetTrackingMode(trackingMode raw.NSSegmentSwitchTracking) {
+	x.inner.SetTrackingMode(trackingMode)
+}
+
+// SegmentStyle calls the underlying SegmentStyle.
+func (x *SegmentedCell) SegmentStyle() raw.NSSegmentStyle {
+	return x.inner.SegmentStyle()
+}
+
+// SetSegmentStyle calls the underlying SetSegmentStyle.
+func (x *SegmentedCell) SetSegmentStyle(segmentStyle raw.NSSegmentStyle) {
+	x.inner.SetSegmentStyle(segmentStyle)
+}
+
+// InteriorBackgroundStyleForSegment calls the underlying InteriorBackgroundStyleForSegment.
+func (x *SegmentedCell) InteriorBackgroundStyleForSegment(segment int) raw.NSBackgroundStyle {
+	return x.inner.InteriorBackgroundStyleForSegment(segment)
+}
+
 func (x *SegmentedCell) asActionCell() *raw.NSActionCell { return &x.inner.NSActionCell }
 
 func (x *SegmentedCell) asCell() *raw.NSCell { return &x.inner.NSActionCell.NSCell }
+
+// SegmentedCellable is the interface implemented by [SegmentedCell], for mocking and DI.
+type SegmentedCellable interface {
+	Unwrap() *raw.NSSegmentedCell
+	WithSegmentCount(segmentCount int) *SegmentedCell
+	WithSelectedSegment(selectedSegment int) *SegmentedCell
+	WithTrackingMode(trackingMode raw.NSSegmentSwitchTracking) *SegmentedCell
+	WithSegmentStyle(segmentStyle raw.NSSegmentStyle) *SegmentedCell
+	SelectSegmentWithTag(tag int) bool
+	MakeNextSegmentKey()
+	MakePreviousSegmentKey()
+	SetWidthForSegment(width float64, segment int)
+	WidthForSegment(segment int) float64
+	SetImageForSegment(image *raw.NSImage, segment int)
+	ImageForSegment(segment int) *Image
+	SetImageScalingForSegment(scaling raw.NSImageScaling, segment int)
+	ImageScalingForSegment(segment int) raw.NSImageScaling
+	SetLabelForSegment(label string, segment int)
+	LabelForSegment(segment int) string
+	SetSelectedForSegment(selected bool, segment int)
+	IsSelectedForSegment(segment int) bool
+	SetEnabledForSegment(enabled bool, segment int)
+	IsEnabledForSegment(segment int) bool
+	SetMenuForSegment(menu *raw.NSMenu, segment int)
+	MenuForSegment(segment int) *Menu
+	SetToolTipForSegment(toolTip string, segment int)
+	ToolTipForSegment(segment int) string
+	SetTagForSegment(tag int, segment int)
+	TagForSegment(segment int) int
+	DrawSegmentInFrameWithView(segment int, frame corefoundation.CGRect, controlView *raw.NSView)
+	SegmentCount() int
+	SetSegmentCount(segmentCount int)
+	SelectedSegment() int
+	SetSelectedSegment(selectedSegment int)
+	TrackingMode() raw.NSSegmentSwitchTracking
+	SetTrackingMode(trackingMode raw.NSSegmentSwitchTracking)
+	SegmentStyle() raw.NSSegmentStyle
+	SetSegmentStyle(segmentStyle raw.NSSegmentStyle)
+	InteriorBackgroundStyleForSegment(segment int) raw.NSBackgroundStyle
+}
+
+var _ SegmentedCellable = (*SegmentedCell)(nil)
 

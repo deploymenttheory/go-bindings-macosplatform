@@ -5,8 +5,10 @@
 package webkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,16 +26,58 @@ func NewWKWebExtensionWindowConfiguration() *WKWebExtensionWindowConfiguration {
 	return &WKWebExtensionWindowConfiguration{inner: raw.WKWebExtensionWindowConfigurationFromID(_id)}
 }
 
+// WindowType calls the underlying WindowType.
+func (x *WKWebExtensionWindowConfiguration) WindowType() raw.WKWebExtensionWindowType {
+	return x.inner.WindowType()
+}
+
+// WindowState calls the underlying WindowState.
+func (x *WKWebExtensionWindowConfiguration) WindowState() raw.WKWebExtensionWindowState {
+	return x.inner.WindowState()
+}
+
+// Frame calls the underlying Frame.
+func (x *WKWebExtensionWindowConfiguration) Frame() corefoundation.CGRect {
+	return x.inner.Frame()
+}
+
 // TabURLs returns the collection as a Go slice.
 func (x *WKWebExtensionWindowConfiguration) TabURLs() []*foundation.NSURL {
 	arr := x.inner.TabURLs()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSURL, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSURL {
+		return foundation.NSURLFromID(purego.Retain(_id))
+	})
 }
+
+// Tabs calls the underlying Tabs.
+func (x *WKWebExtensionWindowConfiguration) Tabs() *foundation.NSArray[raw.WKWebExtensionTab] {
+	return x.inner.Tabs()
+}
+
+// ShouldBeFocused calls the underlying ShouldBeFocused.
+func (x *WKWebExtensionWindowConfiguration) ShouldBeFocused() bool {
+	return x.inner.ShouldBeFocused()
+}
+
+// ShouldBePrivate calls the underlying ShouldBePrivate.
+func (x *WKWebExtensionWindowConfiguration) ShouldBePrivate() bool {
+	return x.inner.ShouldBePrivate()
+}
+
+// WKWebExtensionWindowConfigurationable is the interface implemented by [WKWebExtensionWindowConfiguration], for mocking and DI.
+type WKWebExtensionWindowConfigurationable interface {
+	Unwrap() *raw.WKWebExtensionWindowConfiguration
+	WindowType() raw.WKWebExtensionWindowType
+	WindowState() raw.WKWebExtensionWindowState
+	Frame() corefoundation.CGRect
+	TabURLs() []*foundation.NSURL
+	Tabs() *foundation.NSArray[raw.WKWebExtensionTab]
+	ShouldBeFocused() bool
+	ShouldBePrivate() bool
+}
+
+var _ WKWebExtensionWindowConfigurationable = (*WKWebExtensionWindowConfiguration)(nil)
 

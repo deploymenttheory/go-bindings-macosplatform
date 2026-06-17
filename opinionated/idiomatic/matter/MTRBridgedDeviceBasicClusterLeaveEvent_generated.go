@@ -25,3 +25,10 @@ func NewMTRBridgedDeviceBasicClusterLeaveEvent() *MTRBridgedDeviceBasicClusterLe
 
 func (x *MTRBridgedDeviceBasicClusterLeaveEvent) asMTRBridgedDeviceBasicInformationClusterLeaveEvent() *raw.MTRBridgedDeviceBasicInformationClusterLeaveEvent { return &x.inner.MTRBridgedDeviceBasicInformationClusterLeaveEvent }
 
+// MTRBridgedDeviceBasicClusterLeaveEventable is the interface implemented by [MTRBridgedDeviceBasicClusterLeaveEvent], for mocking and DI.
+type MTRBridgedDeviceBasicClusterLeaveEventable interface {
+	Unwrap() *raw.MTRBridgedDeviceBasicClusterLeaveEvent
+}
+
+var _ MTRBridgedDeviceBasicClusterLeaveEventable = (*MTRBridgedDeviceBasicClusterLeaveEvent)(nil)
+

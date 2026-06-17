@@ -36,5 +36,38 @@ func (x *MTRUnitTestingClusterTestUnknownCommandParams) WithServerSideProcessing
 	return x
 }
 
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRUnitTestingClusterTestUnknownCommandParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRUnitTestingClusterTestUnknownCommandParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRUnitTestingClusterTestUnknownCommandParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRUnitTestingClusterTestUnknownCommandParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
 func (x *MTRUnitTestingClusterTestUnknownCommandParams) asMTRUnitTestingClusterTestUnknownCommandParams() *raw.MTRUnitTestingClusterTestUnknownCommandParams { return x.inner }
+
+// MTRUnitTestingClusterTestUnknownCommandParamsable is the interface implemented by [MTRUnitTestingClusterTestUnknownCommandParams], for mocking and DI.
+type MTRUnitTestingClusterTestUnknownCommandParamsable interface {
+	Unwrap() *raw.MTRUnitTestingClusterTestUnknownCommandParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRUnitTestingClusterTestUnknownCommandParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRUnitTestingClusterTestUnknownCommandParams
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRUnitTestingClusterTestUnknownCommandParamsable = (*MTRUnitTestingClusterTestUnknownCommandParams)(nil)
 

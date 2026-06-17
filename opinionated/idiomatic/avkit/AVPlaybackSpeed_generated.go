@@ -7,6 +7,7 @@ package avkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,4 +25,37 @@ func NewPlaybackSpeedWithRateLocalizedName(rate float32, localizedName string) *
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRate:localizedName:"), rate, foundation.NSStringStringWithUTF8String(localizedName).Ptr())
 	return &PlaybackSpeed{inner: raw.AVPlaybackSpeedFromID(_id)}
 }
+
+// Rate calls the underlying Rate.
+func (x *PlaybackSpeed) Rate() float32 {
+	return x.inner.Rate()
+}
+
+// LocalizedName calls the underlying LocalizedName.
+func (x *PlaybackSpeed) LocalizedName() string {
+	_r := x.inner.LocalizedName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// LocalizedNumericName calls the underlying LocalizedNumericName.
+func (x *PlaybackSpeed) LocalizedNumericName() string {
+	_r := x.inner.LocalizedNumericName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// PlaybackSpeedable is the interface implemented by [PlaybackSpeed], for mocking and DI.
+type PlaybackSpeedable interface {
+	Unwrap() *raw.AVPlaybackSpeed
+	Rate() float32
+	LocalizedName() string
+	LocalizedNumericName() string
+}
+
+var _ PlaybackSpeedable = (*PlaybackSpeed)(nil)
 

@@ -36,3 +36,36 @@ func (x *MTREnergyEVSEClusterStartDiagnosticsParams) WithServerSideProcessingTim
 	return x
 }
 
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTREnergyEVSEClusterStartDiagnosticsParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTREnergyEVSEClusterStartDiagnosticsParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTREnergyEVSEClusterStartDiagnosticsParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTREnergyEVSEClusterStartDiagnosticsParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTREnergyEVSEClusterStartDiagnosticsParamsable is the interface implemented by [MTREnergyEVSEClusterStartDiagnosticsParams], for mocking and DI.
+type MTREnergyEVSEClusterStartDiagnosticsParamsable interface {
+	Unwrap() *raw.MTREnergyEVSEClusterStartDiagnosticsParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTREnergyEVSEClusterStartDiagnosticsParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTREnergyEVSEClusterStartDiagnosticsParams
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTREnergyEVSEClusterStartDiagnosticsParamsable = (*MTREnergyEVSEClusterStartDiagnosticsParams)(nil)
+

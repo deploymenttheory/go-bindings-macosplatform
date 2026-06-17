@@ -48,3 +48,62 @@ func (x *MTROperationalCredentialsClusterCSRRequestParams) WithServerSideProcess
 	return x
 }
 
+// CsrNonce calls the underlying CsrNonce.
+func (x *MTROperationalCredentialsClusterCSRRequestParams) CsrNonce() *foundation.NSData {
+	return x.inner.CsrNonce()
+}
+
+// SetCsrNonce calls the underlying SetCsrNonce.
+func (x *MTROperationalCredentialsClusterCSRRequestParams) SetCsrNonce(csrNonce *foundation.NSData) {
+	x.inner.SetCsrNonce(csrNonce)
+}
+
+// IsForUpdateNOC calls the underlying IsForUpdateNOC.
+func (x *MTROperationalCredentialsClusterCSRRequestParams) IsForUpdateNOC() *foundation.NSNumber {
+	return x.inner.IsForUpdateNOC()
+}
+
+// SetIsForUpdateNOC calls the underlying SetIsForUpdateNOC.
+func (x *MTROperationalCredentialsClusterCSRRequestParams) SetIsForUpdateNOC(isForUpdateNOC *foundation.NSNumber) {
+	x.inner.SetIsForUpdateNOC(isForUpdateNOC)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTROperationalCredentialsClusterCSRRequestParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTROperationalCredentialsClusterCSRRequestParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTROperationalCredentialsClusterCSRRequestParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTROperationalCredentialsClusterCSRRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTROperationalCredentialsClusterCSRRequestParamsable is the interface implemented by [MTROperationalCredentialsClusterCSRRequestParams], for mocking and DI.
+type MTROperationalCredentialsClusterCSRRequestParamsable interface {
+	Unwrap() *raw.MTROperationalCredentialsClusterCSRRequestParams
+	WithCsrNonce(csrNonce *foundation.NSData) *MTROperationalCredentialsClusterCSRRequestParams
+	WithIsForUpdateNOC(isForUpdateNOC *foundation.NSNumber) *MTROperationalCredentialsClusterCSRRequestParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTROperationalCredentialsClusterCSRRequestParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTROperationalCredentialsClusterCSRRequestParams
+	CsrNonce() *foundation.NSData
+	SetCsrNonce(csrNonce *foundation.NSData)
+	IsForUpdateNOC() *foundation.NSNumber
+	SetIsForUpdateNOC(isForUpdateNOC *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTROperationalCredentialsClusterCSRRequestParamsable = (*MTROperationalCredentialsClusterCSRRequestParams)(nil)
+

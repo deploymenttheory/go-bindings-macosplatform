@@ -29,3 +29,10 @@ func (x *UnitFrequency) asUnit() *raw.NSUnit { return &x.inner.NSDimension.NSUni
 
 func (x *UnitFrequency) asObject() *raw.NSObject { return &x.inner.NSDimension.NSUnit.NSObject }
 
+// UnitFrequencyable is the interface implemented by [UnitFrequency], for mocking and DI.
+type UnitFrequencyable interface {
+	Unwrap() *raw.NSUnitFrequency
+}
+
+var _ UnitFrequencyable = (*UnitFrequency)(nil)
+

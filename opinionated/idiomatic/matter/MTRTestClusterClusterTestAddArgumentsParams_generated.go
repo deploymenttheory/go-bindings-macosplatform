@@ -25,3 +25,10 @@ func NewMTRTestClusterClusterTestAddArgumentsParams() *MTRTestClusterClusterTest
 
 func (x *MTRTestClusterClusterTestAddArgumentsParams) asMTRUnitTestingClusterTestAddArgumentsParams() *raw.MTRUnitTestingClusterTestAddArgumentsParams { return &x.inner.MTRUnitTestingClusterTestAddArgumentsParams }
 
+// MTRTestClusterClusterTestAddArgumentsParamsable is the interface implemented by [MTRTestClusterClusterTestAddArgumentsParams], for mocking and DI.
+type MTRTestClusterClusterTestAddArgumentsParamsable interface {
+	Unwrap() *raw.MTRTestClusterClusterTestAddArgumentsParams
+}
+
+var _ MTRTestClusterClusterTestAddArgumentsParamsable = (*MTRTestClusterClusterTestAddArgumentsParams)(nil)
+

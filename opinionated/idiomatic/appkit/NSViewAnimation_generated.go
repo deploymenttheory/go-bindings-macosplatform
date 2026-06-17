@@ -42,18 +42,25 @@ func (x *ViewAnimation) WithViewAnimations(items ...*foundation.NSDictionary[*fo
 	return x
 }
 
-// ViewAnimations returns the collection as a Go slice.
-func (x *ViewAnimation) ViewAnimations() []*foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	arr := x.inner.ViewAnimations()
-	if arr == nil {
-		return nil
-	}
-	out := make([]*foundation.NSDictionary[*foundation.NSString, objc.ID], arr.Count())
-	for i := range out {
-		out[i] = foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](arr.ObjectAtIndex(uint(i)))
-	}
-	return out
+// ViewAnimations calls the underlying ViewAnimations.
+func (x *ViewAnimation) ViewAnimations() *foundation.NSArray[objc.ID] {
+	return x.inner.ViewAnimations()
+}
+
+// SetViewAnimations calls the underlying SetViewAnimations.
+func (x *ViewAnimation) SetViewAnimations(viewAnimations *foundation.NSArray[objc.ID]) {
+	x.inner.SetViewAnimations(viewAnimations)
 }
 
 func (x *ViewAnimation) asAnimation() *raw.NSAnimation { return &x.inner.NSAnimation }
+
+// ViewAnimationable is the interface implemented by [ViewAnimation], for mocking and DI.
+type ViewAnimationable interface {
+	Unwrap() *raw.NSViewAnimation
+	WithViewAnimations(items ...*foundation.NSDictionary[*foundation.NSString, objc.ID]) *ViewAnimation
+	ViewAnimations() *foundation.NSArray[objc.ID]
+	SetViewAnimations(viewAnimations *foundation.NSArray[objc.ID])
+}
+
+var _ ViewAnimationable = (*ViewAnimation)(nil)
 

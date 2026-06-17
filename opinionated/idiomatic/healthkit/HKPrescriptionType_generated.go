@@ -27,3 +27,10 @@ func (x *PrescriptionType) asSampleType() *raw.HKSampleType { return &x.inner.HK
 
 func (x *PrescriptionType) asObjectType() *raw.HKObjectType { return &x.inner.HKSampleType.HKObjectType }
 
+// PrescriptionTypeable is the interface implemented by [PrescriptionType], for mocking and DI.
+type PrescriptionTypeable interface {
+	Unwrap() *raw.HKPrescriptionType
+}
+
+var _ PrescriptionTypeable = (*PrescriptionType)(nil)
+

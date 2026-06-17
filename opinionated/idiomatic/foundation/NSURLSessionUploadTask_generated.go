@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"context"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,9 +24,40 @@ func NewURLSessionUploadTask() *URLSessionUploadTask {
 	return &URLSessionUploadTask{inner: raw.NSURLSessionUploadTaskFromID(_id)}
 }
 
+// CancelByProducingResumeData blocks until the operation completes or ctx is cancelled.
+func (x *URLSessionUploadTask) CancelByProducingResumeData(ctx context.Context) (*Data, error) {
+	type _result struct {
+		val *Data
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.CancelByProducingResumeData(func(_p0 *raw.NSData) {
+		var _o _result
+		if _p0 != nil {
+			_o.val = &Data{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *Data
+		return _zero, ctx.Err()
+	}
+}
+
 func (x *URLSessionUploadTask) asURLSessionDataTask() *raw.NSURLSessionDataTask { return &x.inner.NSURLSessionDataTask }
 
 func (x *URLSessionUploadTask) asURLSessionTask() *raw.NSURLSessionTask { return &x.inner.NSURLSessionDataTask.NSURLSessionTask }
 
 func (x *URLSessionUploadTask) asObject() *raw.NSObject { return &x.inner.NSURLSessionDataTask.NSURLSessionTask.NSObject }
+
+// URLSessionUploadTaskable is the interface implemented by [URLSessionUploadTask], for mocking and DI.
+type URLSessionUploadTaskable interface {
+	Unwrap() *raw.NSURLSessionUploadTask
+	CancelByProducingResumeData(ctx context.Context) (*Data, error)
+}
+
+var _ URLSessionUploadTaskable = (*URLSessionUploadTask)(nil)
 

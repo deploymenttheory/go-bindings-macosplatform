@@ -41,3 +41,10 @@ func (x *NNReshapeGradient) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKe
 
 func (x *NNReshapeGradient) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel }
 
+// NNReshapeGradientable is the interface implemented by [NNReshapeGradient], for mocking and DI.
+type NNReshapeGradientable interface {
+	Unwrap() *raw.MPSNNReshapeGradient
+}
+
+var _ NNReshapeGradientable = (*NNReshapeGradient)(nil)
+

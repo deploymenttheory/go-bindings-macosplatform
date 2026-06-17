@@ -7,6 +7,7 @@ package scenekit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -99,17 +100,86 @@ func (x *Geometry) WithEdgeCreasesSource(edgeCreasesSource *raw.SCNGeometrySourc
 	return x
 }
 
+// InsertMaterialAtIndex calls the underlying InsertMaterialAtIndex.
+func (x *Geometry) InsertMaterialAtIndex(material *raw.SCNMaterial, index uint) {
+	x.inner.InsertMaterialAtIndex(material, index)
+}
+
+// RemoveMaterialAtIndex calls the underlying RemoveMaterialAtIndex.
+func (x *Geometry) RemoveMaterialAtIndex(index uint) {
+	x.inner.RemoveMaterialAtIndex(index)
+}
+
+// ReplaceMaterialAtIndexWithMaterial calls the underlying ReplaceMaterialAtIndexWithMaterial.
+func (x *Geometry) ReplaceMaterialAtIndexWithMaterial(index uint, material *raw.SCNMaterial) {
+	x.inner.ReplaceMaterialAtIndexWithMaterial(index, material)
+}
+
+// MaterialWithName calls the underlying MaterialWithName.
+func (x *Geometry) MaterialWithName(name string) *Material {
+	_r := x.inner.MaterialWithName(foundation.NSStringStringWithUTF8String(name))
+	if _r == nil {
+		return nil
+	}
+	return &Material{inner: _r}
+}
+
+// GeometrySourcesForSemantic calls the underlying GeometrySourcesForSemantic.
+func (x *Geometry) GeometrySourcesForSemantic(semantic *foundation.NSString) *foundation.NSArray[*raw.SCNGeometrySource] {
+	return x.inner.GeometrySourcesForSemantic(semantic)
+}
+
+// GeometryElementAtIndex calls the underlying GeometryElementAtIndex.
+func (x *Geometry) GeometryElementAtIndex(elementIndex int) *GeometryElement {
+	_r := x.inner.GeometryElementAtIndex(elementIndex)
+	if _r == nil {
+		return nil
+	}
+	return &GeometryElement{inner: _r}
+}
+
+// Name calls the underlying Name.
+func (x *Geometry) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetName calls the underlying SetName.
+func (x *Geometry) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
 // Materials returns the collection as a Go slice.
 func (x *Geometry) Materials() []*raw.SCNMaterial {
 	arr := x.inner.Materials()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.SCNMaterial, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SCNMaterial {
+		return raw.SCNMaterialFromID(purego.Retain(_id))
+	})
+}
+
+// SetMaterials calls the underlying SetMaterials.
+func (x *Geometry) SetMaterials(materials *foundation.NSArray[*raw.SCNMaterial]) {
+	x.inner.SetMaterials(materials)
+}
+
+// FirstMaterial calls the underlying FirstMaterial.
+func (x *Geometry) FirstMaterial() *Material {
+	_r := x.inner.FirstMaterial()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &Material{inner: _r}
+}
+
+// SetFirstMaterial calls the underlying SetFirstMaterial.
+func (x *Geometry) SetFirstMaterial(firstMaterial *raw.SCNMaterial) {
+	x.inner.SetFirstMaterial(firstMaterial)
 }
 
 // GeometrySources returns the collection as a Go slice.
@@ -118,11 +188,9 @@ func (x *Geometry) GeometrySources() []*raw.SCNGeometrySource {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.SCNGeometrySource, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SCNGeometrySource {
+		return raw.SCNGeometrySourceFromID(purego.Retain(_id))
+	})
 }
 
 // GeometryElements returns the collection as a Go slice.
@@ -131,11 +199,14 @@ func (x *Geometry) GeometryElements() []*raw.SCNGeometryElement {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.SCNGeometryElement, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SCNGeometryElement {
+		return raw.SCNGeometryElementFromID(purego.Retain(_id))
+	})
+}
+
+// GeometryElementCount calls the underlying GeometryElementCount.
+func (x *Geometry) GeometryElementCount() int {
+	return x.inner.GeometryElementCount()
 }
 
 // GeometrySourceChannels returns the collection as a Go slice.
@@ -144,11 +215,9 @@ func (x *Geometry) GeometrySourceChannels() []*foundation.NSNumber {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
 }
 
 // LevelsOfDetail returns the collection as a Go slice.
@@ -157,12 +226,121 @@ func (x *Geometry) LevelsOfDetail() []*raw.SCNLevelOfDetail {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.SCNLevelOfDetail, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SCNLevelOfDetail {
+		return raw.SCNLevelOfDetailFromID(purego.Retain(_id))
+	})
+}
+
+// SetLevelsOfDetail calls the underlying SetLevelsOfDetail.
+func (x *Geometry) SetLevelsOfDetail(levelsOfDetail *foundation.NSArray[*raw.SCNLevelOfDetail]) {
+	x.inner.SetLevelsOfDetail(levelsOfDetail)
+}
+
+// Tessellator calls the underlying Tessellator.
+func (x *Geometry) Tessellator() *GeometryTessellator {
+	_r := x.inner.Tessellator()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &GeometryTessellator{inner: _r}
+}
+
+// SetTessellator calls the underlying SetTessellator.
+func (x *Geometry) SetTessellator(tessellator *raw.SCNGeometryTessellator) {
+	x.inner.SetTessellator(tessellator)
+}
+
+// SubdivisionLevel calls the underlying SubdivisionLevel.
+func (x *Geometry) SubdivisionLevel() uint {
+	return x.inner.SubdivisionLevel()
+}
+
+// SetSubdivisionLevel calls the underlying SetSubdivisionLevel.
+func (x *Geometry) SetSubdivisionLevel(subdivisionLevel uint) {
+	x.inner.SetSubdivisionLevel(subdivisionLevel)
+}
+
+// WantsAdaptiveSubdivision calls the underlying WantsAdaptiveSubdivision.
+func (x *Geometry) WantsAdaptiveSubdivision() bool {
+	return x.inner.WantsAdaptiveSubdivision()
+}
+
+// SetWantsAdaptiveSubdivision calls the underlying SetWantsAdaptiveSubdivision.
+func (x *Geometry) SetWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) {
+	x.inner.SetWantsAdaptiveSubdivision(wantsAdaptiveSubdivision)
+}
+
+// EdgeCreasesElement calls the underlying EdgeCreasesElement.
+func (x *Geometry) EdgeCreasesElement() *GeometryElement {
+	_r := x.inner.EdgeCreasesElement()
+	if _r == nil {
+		return nil
+	}
+	return &GeometryElement{inner: _r}
+}
+
+// SetEdgeCreasesElement calls the underlying SetEdgeCreasesElement.
+func (x *Geometry) SetEdgeCreasesElement(edgeCreasesElement *raw.SCNGeometryElement) {
+	x.inner.SetEdgeCreasesElement(edgeCreasesElement)
+}
+
+// EdgeCreasesSource calls the underlying EdgeCreasesSource.
+func (x *Geometry) EdgeCreasesSource() *GeometrySource {
+	_r := x.inner.EdgeCreasesSource()
+	if _r == nil {
+		return nil
+	}
+	return &GeometrySource{inner: _r}
+}
+
+// SetEdgeCreasesSource calls the underlying SetEdgeCreasesSource.
+func (x *Geometry) SetEdgeCreasesSource(edgeCreasesSource *raw.SCNGeometrySource) {
+	x.inner.SetEdgeCreasesSource(edgeCreasesSource)
 }
 
 func (x *Geometry) asGeometry() *raw.SCNGeometry { return x.inner }
+
+// Geometryable is the interface implemented by [Geometry], for mocking and DI.
+type Geometryable interface {
+	Unwrap() *raw.SCNGeometry
+	WithName(name string) *Geometry
+	WithMaterials(items ...*raw.SCNMaterial) *Geometry
+	WithFirstMaterial(firstMaterial *raw.SCNMaterial) *Geometry
+	WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Geometry
+	WithTessellator(tessellator *raw.SCNGeometryTessellator) *Geometry
+	WithSubdivisionLevel(subdivisionLevel uint) *Geometry
+	WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Geometry
+	WithEdgeCreasesElement(edgeCreasesElement *raw.SCNGeometryElement) *Geometry
+	WithEdgeCreasesSource(edgeCreasesSource *raw.SCNGeometrySource) *Geometry
+	InsertMaterialAtIndex(material *raw.SCNMaterial, index uint)
+	RemoveMaterialAtIndex(index uint)
+	ReplaceMaterialAtIndexWithMaterial(index uint, material *raw.SCNMaterial)
+	MaterialWithName(name string) *Material
+	GeometrySourcesForSemantic(semantic *foundation.NSString) *foundation.NSArray[*raw.SCNGeometrySource]
+	GeometryElementAtIndex(elementIndex int) *GeometryElement
+	Name() string
+	SetName(name string)
+	Materials() []*raw.SCNMaterial
+	SetMaterials(materials *foundation.NSArray[*raw.SCNMaterial])
+	FirstMaterial() *Material
+	SetFirstMaterial(firstMaterial *raw.SCNMaterial)
+	GeometrySources() []*raw.SCNGeometrySource
+	GeometryElements() []*raw.SCNGeometryElement
+	GeometryElementCount() int
+	GeometrySourceChannels() []*foundation.NSNumber
+	LevelsOfDetail() []*raw.SCNLevelOfDetail
+	SetLevelsOfDetail(levelsOfDetail *foundation.NSArray[*raw.SCNLevelOfDetail])
+	Tessellator() *GeometryTessellator
+	SetTessellator(tessellator *raw.SCNGeometryTessellator)
+	SubdivisionLevel() uint
+	SetSubdivisionLevel(subdivisionLevel uint)
+	WantsAdaptiveSubdivision() bool
+	SetWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool)
+	EdgeCreasesElement() *GeometryElement
+	SetEdgeCreasesElement(edgeCreasesElement *raw.SCNGeometryElement)
+	EdgeCreasesSource() *GeometrySource
+	SetEdgeCreasesSource(edgeCreasesSource *raw.SCNGeometrySource)
+}
+
+var _ Geometryable = (*Geometry)(nil)
 

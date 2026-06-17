@@ -7,6 +7,7 @@ package avfaudio
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -60,18 +61,128 @@ func (x *AudioEnvironmentNode) WithListenerHeadTrackingEnabled(listenerHeadTrack
 	return x
 }
 
+// OutputType calls the underlying OutputType.
+func (x *AudioEnvironmentNode) OutputType() raw.AVAudioEnvironmentOutputType {
+	return x.inner.OutputType()
+}
+
+// SetOutputType calls the underlying SetOutputType.
+func (x *AudioEnvironmentNode) SetOutputType(outputType raw.AVAudioEnvironmentOutputType) {
+	x.inner.SetOutputType(outputType)
+}
+
+// OutputVolume calls the underlying OutputVolume.
+func (x *AudioEnvironmentNode) OutputVolume() float32 {
+	return x.inner.OutputVolume()
+}
+
+// SetOutputVolume calls the underlying SetOutputVolume.
+func (x *AudioEnvironmentNode) SetOutputVolume(outputVolume float32) {
+	x.inner.SetOutputVolume(outputVolume)
+}
+
+// NextAvailableInputBus calls the underlying NextAvailableInputBus.
+func (x *AudioEnvironmentNode) NextAvailableInputBus() uint {
+	return x.inner.NextAvailableInputBus()
+}
+
+// ListenerPosition calls the underlying ListenerPosition.
+func (x *AudioEnvironmentNode) ListenerPosition() raw.AVAudio3DPoint {
+	return x.inner.ListenerPosition()
+}
+
+// SetListenerPosition calls the underlying SetListenerPosition.
+func (x *AudioEnvironmentNode) SetListenerPosition(listenerPosition raw.AVAudio3DPoint) {
+	x.inner.SetListenerPosition(listenerPosition)
+}
+
+// ListenerVectorOrientation calls the underlying ListenerVectorOrientation.
+func (x *AudioEnvironmentNode) ListenerVectorOrientation() raw.AVAudio3DVectorOrientation {
+	return x.inner.ListenerVectorOrientation()
+}
+
+// SetListenerVectorOrientation calls the underlying SetListenerVectorOrientation.
+func (x *AudioEnvironmentNode) SetListenerVectorOrientation(listenerVectorOrientation raw.AVAudio3DVectorOrientation) {
+	x.inner.SetListenerVectorOrientation(listenerVectorOrientation)
+}
+
+// ListenerAngularOrientation calls the underlying ListenerAngularOrientation.
+func (x *AudioEnvironmentNode) ListenerAngularOrientation() raw.AVAudio3DAngularOrientation {
+	return x.inner.ListenerAngularOrientation()
+}
+
+// SetListenerAngularOrientation calls the underlying SetListenerAngularOrientation.
+func (x *AudioEnvironmentNode) SetListenerAngularOrientation(listenerAngularOrientation raw.AVAudio3DAngularOrientation) {
+	x.inner.SetListenerAngularOrientation(listenerAngularOrientation)
+}
+
+// DistanceAttenuationParameters calls the underlying DistanceAttenuationParameters.
+func (x *AudioEnvironmentNode) DistanceAttenuationParameters() *AudioEnvironmentDistanceAttenuationParameters {
+	_r := x.inner.DistanceAttenuationParameters()
+	if _r == nil {
+		return nil
+	}
+	return &AudioEnvironmentDistanceAttenuationParameters{inner: _r}
+}
+
+// ReverbParameters calls the underlying ReverbParameters.
+func (x *AudioEnvironmentNode) ReverbParameters() *AudioEnvironmentReverbParameters {
+	_r := x.inner.ReverbParameters()
+	if _r == nil {
+		return nil
+	}
+	return &AudioEnvironmentReverbParameters{inner: _r}
+}
+
 // ApplicableRenderingAlgorithms returns the collection as a Go slice.
 func (x *AudioEnvironmentNode) ApplicableRenderingAlgorithms() []*foundation.NSNumber {
 	arr := x.inner.ApplicableRenderingAlgorithms()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
+}
+
+// IsListenerHeadTrackingEnabled calls the underlying IsListenerHeadTrackingEnabled.
+func (x *AudioEnvironmentNode) IsListenerHeadTrackingEnabled() bool {
+	return x.inner.IsListenerHeadTrackingEnabled()
+}
+
+// SetListenerHeadTrackingEnabled calls the underlying SetListenerHeadTrackingEnabled.
+func (x *AudioEnvironmentNode) SetListenerHeadTrackingEnabled(listenerHeadTrackingEnabled bool) {
+	x.inner.SetListenerHeadTrackingEnabled(listenerHeadTrackingEnabled)
 }
 
 func (x *AudioEnvironmentNode) asAudioNode() *raw.AVAudioNode { return &x.inner.AVAudioNode }
+
+// AudioEnvironmentNodeable is the interface implemented by [AudioEnvironmentNode], for mocking and DI.
+type AudioEnvironmentNodeable interface {
+	Unwrap() *raw.AVAudioEnvironmentNode
+	WithOutputType(outputType raw.AVAudioEnvironmentOutputType) *AudioEnvironmentNode
+	WithOutputVolume(outputVolume float32) *AudioEnvironmentNode
+	WithListenerPosition(listenerPosition raw.AVAudio3DPoint) *AudioEnvironmentNode
+	WithListenerVectorOrientation(listenerVectorOrientation raw.AVAudio3DVectorOrientation) *AudioEnvironmentNode
+	WithListenerAngularOrientation(listenerAngularOrientation raw.AVAudio3DAngularOrientation) *AudioEnvironmentNode
+	WithListenerHeadTrackingEnabled(listenerHeadTrackingEnabled bool) *AudioEnvironmentNode
+	OutputType() raw.AVAudioEnvironmentOutputType
+	SetOutputType(outputType raw.AVAudioEnvironmentOutputType)
+	OutputVolume() float32
+	SetOutputVolume(outputVolume float32)
+	NextAvailableInputBus() uint
+	ListenerPosition() raw.AVAudio3DPoint
+	SetListenerPosition(listenerPosition raw.AVAudio3DPoint)
+	ListenerVectorOrientation() raw.AVAudio3DVectorOrientation
+	SetListenerVectorOrientation(listenerVectorOrientation raw.AVAudio3DVectorOrientation)
+	ListenerAngularOrientation() raw.AVAudio3DAngularOrientation
+	SetListenerAngularOrientation(listenerAngularOrientation raw.AVAudio3DAngularOrientation)
+	DistanceAttenuationParameters() *AudioEnvironmentDistanceAttenuationParameters
+	ReverbParameters() *AudioEnvironmentReverbParameters
+	ApplicableRenderingAlgorithms() []*foundation.NSNumber
+	IsListenerHeadTrackingEnabled() bool
+	SetListenerHeadTrackingEnabled(listenerHeadTrackingEnabled bool)
+}
+
+var _ AudioEnvironmentNodeable = (*AudioEnvironmentNode)(nil)
 

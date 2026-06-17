@@ -27,3 +27,10 @@ func (x *SeriesType) asSampleType() *raw.HKSampleType { return &x.inner.HKSample
 
 func (x *SeriesType) asObjectType() *raw.HKObjectType { return &x.inner.HKSampleType.HKObjectType }
 
+// SeriesTypeable is the interface implemented by [SeriesType], for mocking and DI.
+type SeriesTypeable interface {
+	Unwrap() *raw.HKSeriesType
+}
+
+var _ SeriesTypeable = (*SeriesType)(nil)
+

@@ -66,3 +66,101 @@ func (x *ImageRequestOptions) WithAllowSecondaryDegradedImage(allowSecondaryDegr
 	return x
 }
 
+// DeliveryMode calls the underlying DeliveryMode.
+func (x *ImageRequestOptions) DeliveryMode() raw.PHImageRequestOptionsDeliveryMode {
+	return x.inner.DeliveryMode()
+}
+
+// SetDeliveryMode calls the underlying SetDeliveryMode.
+func (x *ImageRequestOptions) SetDeliveryMode(deliveryMode raw.PHImageRequestOptionsDeliveryMode) {
+	x.inner.SetDeliveryMode(deliveryMode)
+}
+
+// ResizeMode calls the underlying ResizeMode.
+func (x *ImageRequestOptions) ResizeMode() raw.PHImageRequestOptionsResizeMode {
+	return x.inner.ResizeMode()
+}
+
+// SetResizeMode calls the underlying SetResizeMode.
+func (x *ImageRequestOptions) SetResizeMode(resizeMode raw.PHImageRequestOptionsResizeMode) {
+	x.inner.SetResizeMode(resizeMode)
+}
+
+// NormalizedCropRect calls the underlying NormalizedCropRect.
+func (x *ImageRequestOptions) NormalizedCropRect() corefoundation.CGRect {
+	return x.inner.NormalizedCropRect()
+}
+
+// SetNormalizedCropRect calls the underlying SetNormalizedCropRect.
+func (x *ImageRequestOptions) SetNormalizedCropRect(normalizedCropRect corefoundation.CGRect) {
+	x.inner.SetNormalizedCropRect(normalizedCropRect)
+}
+
+// IsNetworkAccessAllowed calls the underlying IsNetworkAccessAllowed.
+func (x *ImageRequestOptions) IsNetworkAccessAllowed() bool {
+	return x.inner.IsNetworkAccessAllowed()
+}
+
+// SetNetworkAccessAllowed calls the underlying SetNetworkAccessAllowed.
+func (x *ImageRequestOptions) SetNetworkAccessAllowed(networkAccessAllowed bool) {
+	x.inner.SetNetworkAccessAllowed(networkAccessAllowed)
+}
+
+// IsSynchronous calls the underlying IsSynchronous.
+func (x *ImageRequestOptions) IsSynchronous() bool {
+	return x.inner.IsSynchronous()
+}
+
+// SetSynchronous calls the underlying SetSynchronous.
+func (x *ImageRequestOptions) SetSynchronous(synchronous bool) {
+	x.inner.SetSynchronous(synchronous)
+}
+
+// ProgressHandler calls the underlying ProgressHandler.
+func (x *ImageRequestOptions) ProgressHandler() objc.Block {
+	return x.inner.ProgressHandler()
+}
+
+// SetProgressHandler calls the underlying SetProgressHandler.
+func (x *ImageRequestOptions) SetProgressHandler(progressHandler objc.Block) {
+	x.inner.SetProgressHandler(progressHandler)
+}
+
+// AllowSecondaryDegradedImage calls the underlying AllowSecondaryDegradedImage.
+func (x *ImageRequestOptions) AllowSecondaryDegradedImage() bool {
+	return x.inner.AllowSecondaryDegradedImage()
+}
+
+// SetAllowSecondaryDegradedImage calls the underlying SetAllowSecondaryDegradedImage.
+func (x *ImageRequestOptions) SetAllowSecondaryDegradedImage(allowSecondaryDegradedImage bool) {
+	x.inner.SetAllowSecondaryDegradedImage(allowSecondaryDegradedImage)
+}
+
+// ImageRequestOptionsable is the interface implemented by [ImageRequestOptions], for mocking and DI.
+type ImageRequestOptionsable interface {
+	Unwrap() *raw.PHImageRequestOptions
+	WithDeliveryMode(deliveryMode raw.PHImageRequestOptionsDeliveryMode) *ImageRequestOptions
+	WithResizeMode(resizeMode raw.PHImageRequestOptionsResizeMode) *ImageRequestOptions
+	WithNormalizedCropRect(normalizedCropRect corefoundation.CGRect) *ImageRequestOptions
+	WithNetworkAccessAllowed(networkAccessAllowed bool) *ImageRequestOptions
+	WithSynchronous(synchronous bool) *ImageRequestOptions
+	WithProgressHandler(progressHandler objc.Block) *ImageRequestOptions
+	WithAllowSecondaryDegradedImage(allowSecondaryDegradedImage bool) *ImageRequestOptions
+	DeliveryMode() raw.PHImageRequestOptionsDeliveryMode
+	SetDeliveryMode(deliveryMode raw.PHImageRequestOptionsDeliveryMode)
+	ResizeMode() raw.PHImageRequestOptionsResizeMode
+	SetResizeMode(resizeMode raw.PHImageRequestOptionsResizeMode)
+	NormalizedCropRect() corefoundation.CGRect
+	SetNormalizedCropRect(normalizedCropRect corefoundation.CGRect)
+	IsNetworkAccessAllowed() bool
+	SetNetworkAccessAllowed(networkAccessAllowed bool)
+	IsSynchronous() bool
+	SetSynchronous(synchronous bool)
+	ProgressHandler() objc.Block
+	SetProgressHandler(progressHandler objc.Block)
+	AllowSecondaryDegradedImage() bool
+	SetAllowSecondaryDegradedImage(allowSecondaryDegradedImage bool)
+}
+
+var _ ImageRequestOptionsable = (*ImageRequestOptions)(nil)
+

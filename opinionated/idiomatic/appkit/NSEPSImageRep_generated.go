@@ -6,6 +6,7 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
@@ -25,5 +26,30 @@ func NewEPSImageRepWithData(epsData *foundation.NSData) *EPSImageRep {
 	return &EPSImageRep{inner: raw.NSEPSImageRepFromID(_id)}
 }
 
+// PrepareGState calls the underlying PrepareGState.
+func (x *EPSImageRep) PrepareGState() {
+	x.inner.PrepareGState()
+}
+
+// BoundingBox calls the underlying BoundingBox.
+func (x *EPSImageRep) BoundingBox() corefoundation.CGRect {
+	return x.inner.BoundingBox()
+}
+
+// EPSRepresentation calls the underlying EPSRepresentation.
+func (x *EPSImageRep) EPSRepresentation() *foundation.NSData {
+	return x.inner.EPSRepresentation()
+}
+
 func (x *EPSImageRep) asImageRep() *raw.NSImageRep { return &x.inner.NSImageRep }
+
+// EPSImageRepable is the interface implemented by [EPSImageRep], for mocking and DI.
+type EPSImageRepable interface {
+	Unwrap() *raw.NSEPSImageRep
+	PrepareGState()
+	BoundingBox() corefoundation.CGRect
+	EPSRepresentation() *foundation.NSData
+}
+
+var _ EPSImageRepable = (*EPSImageRep)(nil)
 

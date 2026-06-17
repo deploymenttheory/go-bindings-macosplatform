@@ -6,7 +6,9 @@ package coremotion
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremotion"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // HeadphoneActivityManager wraps [raw.CMHeadphoneActivityManager] with a fluent Go API.
@@ -22,4 +24,59 @@ func NewHeadphoneActivityManager() *HeadphoneActivityManager {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CMHeadphoneActivityManager")), objc.RegisterName("new"))
 	return &HeadphoneActivityManager{inner: raw.CMHeadphoneActivityManagerFromID(_id)}
 }
+
+// StartActivityUpdatesToQueueWithHandler calls the underlying StartActivityUpdatesToQueueWithHandler.
+func (x *HeadphoneActivityManager) StartActivityUpdatesToQueueWithHandler(queue *foundation.NSOperationQueue, handler func(*raw.CMMotionActivity, unsafe.Pointer)) {
+	x.inner.StartActivityUpdatesToQueueWithHandler(queue, handler)
+}
+
+// StopActivityUpdates calls the underlying StopActivityUpdates.
+func (x *HeadphoneActivityManager) StopActivityUpdates() {
+	x.inner.StopActivityUpdates()
+}
+
+// StartStatusUpdatesToQueueWithHandler calls the underlying StartStatusUpdatesToQueueWithHandler.
+func (x *HeadphoneActivityManager) StartStatusUpdatesToQueueWithHandler(queue *foundation.NSOperationQueue, handler func(raw.CMHeadphoneActivityStatus, unsafe.Pointer)) {
+	x.inner.StartStatusUpdatesToQueueWithHandler(queue, handler)
+}
+
+// StopStatusUpdates calls the underlying StopStatusUpdates.
+func (x *HeadphoneActivityManager) StopStatusUpdates() {
+	x.inner.StopStatusUpdates()
+}
+
+// IsActivityAvailable calls the underlying IsActivityAvailable.
+func (x *HeadphoneActivityManager) IsActivityAvailable() bool {
+	return x.inner.IsActivityAvailable()
+}
+
+// IsActivityActive calls the underlying IsActivityActive.
+func (x *HeadphoneActivityManager) IsActivityActive() bool {
+	return x.inner.IsActivityActive()
+}
+
+// IsStatusAvailable calls the underlying IsStatusAvailable.
+func (x *HeadphoneActivityManager) IsStatusAvailable() bool {
+	return x.inner.IsStatusAvailable()
+}
+
+// IsStatusActive calls the underlying IsStatusActive.
+func (x *HeadphoneActivityManager) IsStatusActive() bool {
+	return x.inner.IsStatusActive()
+}
+
+// HeadphoneActivityManagerable is the interface implemented by [HeadphoneActivityManager], for mocking and DI.
+type HeadphoneActivityManagerable interface {
+	Unwrap() *raw.CMHeadphoneActivityManager
+	StartActivityUpdatesToQueueWithHandler(queue *foundation.NSOperationQueue, handler func(*raw.CMMotionActivity, unsafe.Pointer))
+	StopActivityUpdates()
+	StartStatusUpdatesToQueueWithHandler(queue *foundation.NSOperationQueue, handler func(raw.CMHeadphoneActivityStatus, unsafe.Pointer))
+	StopStatusUpdates()
+	IsActivityAvailable() bool
+	IsActivityActive() bool
+	IsStatusAvailable() bool
+	IsStatusActive() bool
+}
+
+var _ HeadphoneActivityManagerable = (*HeadphoneActivityManager)(nil)
 

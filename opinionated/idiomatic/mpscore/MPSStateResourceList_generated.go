@@ -5,6 +5,7 @@
 package mpscore
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +23,23 @@ func NewStateResourceList() *StateResourceList {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSStateResourceList")), objc.RegisterName("new"))
 	return &StateResourceList{inner: raw.MPSStateResourceListFromID(_id)}
 }
+
+// AppendTexture calls the underlying AppendTexture.
+func (x *StateResourceList) AppendTexture(descriptor *metal.MTLTextureDescriptor) {
+	x.inner.AppendTexture(descriptor)
+}
+
+// AppendBuffer calls the underlying AppendBuffer.
+func (x *StateResourceList) AppendBuffer(size uint) {
+	x.inner.AppendBuffer(size)
+}
+
+// StateResourceListable is the interface implemented by [StateResourceList], for mocking and DI.
+type StateResourceListable interface {
+	Unwrap() *raw.MPSStateResourceList
+	AppendTexture(descriptor *metal.MTLTextureDescriptor)
+	AppendBuffer(size uint)
+}
+
+var _ StateResourceListable = (*StateResourceList)(nil)
 

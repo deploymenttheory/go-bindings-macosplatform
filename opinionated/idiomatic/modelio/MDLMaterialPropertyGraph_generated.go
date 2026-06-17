@@ -7,6 +7,7 @@ package modelio
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -25,17 +26,20 @@ func NewMaterialPropertyGraphWithNodesConnections(nodes *foundation.NSArray[*raw
 	return &MaterialPropertyGraph{inner: raw.MDLMaterialPropertyGraphFromID(_id)}
 }
 
+// Evaluate calls the underlying Evaluate.
+func (x *MaterialPropertyGraph) Evaluate() {
+	x.inner.Evaluate()
+}
+
 // Nodes returns the collection as a Go slice.
 func (x *MaterialPropertyGraph) Nodes() []*raw.MDLMaterialPropertyNode {
 	arr := x.inner.Nodes()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MDLMaterialPropertyNode, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MDLMaterialPropertyNode {
+		return raw.MDLMaterialPropertyNodeFromID(purego.Retain(_id))
+	})
 }
 
 // Connections returns the collection as a Go slice.
@@ -44,12 +48,20 @@ func (x *MaterialPropertyGraph) Connections() []*raw.MDLMaterialPropertyConnecti
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MDLMaterialPropertyConnection, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MDLMaterialPropertyConnection {
+		return raw.MDLMaterialPropertyConnectionFromID(purego.Retain(_id))
+	})
 }
 
 func (x *MaterialPropertyGraph) asMaterialPropertyNode() *raw.MDLMaterialPropertyNode { return &x.inner.MDLMaterialPropertyNode }
+
+// MaterialPropertyGraphable is the interface implemented by [MaterialPropertyGraph], for mocking and DI.
+type MaterialPropertyGraphable interface {
+	Unwrap() *raw.MDLMaterialPropertyGraph
+	Evaluate()
+	Nodes() []*raw.MDLMaterialPropertyNode
+	Connections() []*raw.MDLMaterialPropertyConnection
+}
+
+var _ MaterialPropertyGraphable = (*MaterialPropertyGraph)(nil)
 

@@ -25,7 +25,80 @@ func NewMTRClusterElectricalEnergyMeasurementWithDeviceEndpointIDQueue(device *r
 	return &MTRClusterElectricalEnergyMeasurement{inner: raw.MTRClusterElectricalEnergyMeasurementFromID(_id)}
 }
 
+// ReadAttributeAccuracyWithParams calls the underlying ReadAttributeAccuracyWithParams.
+func (x *MTRClusterElectricalEnergyMeasurement) ReadAttributeAccuracyWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeAccuracyWithParams(params)
+}
+
+// ReadAttributeCumulativeEnergyImportedWithParams calls the underlying ReadAttributeCumulativeEnergyImportedWithParams.
+func (x *MTRClusterElectricalEnergyMeasurement) ReadAttributeCumulativeEnergyImportedWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeCumulativeEnergyImportedWithParams(params)
+}
+
+// ReadAttributeCumulativeEnergyExportedWithParams calls the underlying ReadAttributeCumulativeEnergyExportedWithParams.
+func (x *MTRClusterElectricalEnergyMeasurement) ReadAttributeCumulativeEnergyExportedWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeCumulativeEnergyExportedWithParams(params)
+}
+
+// ReadAttributePeriodicEnergyImportedWithParams calls the underlying ReadAttributePeriodicEnergyImportedWithParams.
+func (x *MTRClusterElectricalEnergyMeasurement) ReadAttributePeriodicEnergyImportedWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributePeriodicEnergyImportedWithParams(params)
+}
+
+// ReadAttributePeriodicEnergyExportedWithParams calls the underlying ReadAttributePeriodicEnergyExportedWithParams.
+func (x *MTRClusterElectricalEnergyMeasurement) ReadAttributePeriodicEnergyExportedWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributePeriodicEnergyExportedWithParams(params)
+}
+
+// ReadAttributeCumulativeEnergyResetWithParams calls the underlying ReadAttributeCumulativeEnergyResetWithParams.
+func (x *MTRClusterElectricalEnergyMeasurement) ReadAttributeCumulativeEnergyResetWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeCumulativeEnergyResetWithParams(params)
+}
+
+// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
+func (x *MTRClusterElectricalEnergyMeasurement) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+}
+
+// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
+func (x *MTRClusterElectricalEnergyMeasurement) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
+}
+
+// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
+func (x *MTRClusterElectricalEnergyMeasurement) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeAttributeListWithParams(params)
+}
+
+// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
+func (x *MTRClusterElectricalEnergyMeasurement) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeFeatureMapWithParams(params)
+}
+
+// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
+func (x *MTRClusterElectricalEnergyMeasurement) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeClusterRevisionWithParams(params)
+}
+
 func (x *MTRClusterElectricalEnergyMeasurement) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
 
 func (x *MTRClusterElectricalEnergyMeasurement) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+
+// MTRClusterElectricalEnergyMeasurementable is the interface implemented by [MTRClusterElectricalEnergyMeasurement], for mocking and DI.
+type MTRClusterElectricalEnergyMeasurementable interface {
+	Unwrap() *raw.MTRClusterElectricalEnergyMeasurement
+	ReadAttributeAccuracyWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeCumulativeEnergyImportedWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeCumulativeEnergyExportedWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributePeriodicEnergyImportedWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributePeriodicEnergyExportedWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeCumulativeEnergyResetWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+}
+
+var _ MTRClusterElectricalEnergyMeasurementable = (*MTRClusterElectricalEnergyMeasurement)(nil)
 

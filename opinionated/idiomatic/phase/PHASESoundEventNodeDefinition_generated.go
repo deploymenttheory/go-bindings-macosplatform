@@ -6,6 +6,7 @@ package phase
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -29,14 +30,20 @@ func (x *SoundEventNodeDefinition) Children() []*raw.PHASESoundEventNodeDefiniti
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.PHASESoundEventNodeDefinition, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PHASESoundEventNodeDefinition {
+		return raw.PHASESoundEventNodeDefinitionFromID(purego.Retain(_id))
+	})
 }
 
 func (x *SoundEventNodeDefinition) asSoundEventNodeDefinition() *raw.PHASESoundEventNodeDefinition { return x.inner }
 
 func (x *SoundEventNodeDefinition) asDefinition() *raw.PHASEDefinition { return &x.inner.PHASEDefinition }
+
+// SoundEventNodeDefinitionable is the interface implemented by [SoundEventNodeDefinition], for mocking and DI.
+type SoundEventNodeDefinitionable interface {
+	Unwrap() *raw.PHASESoundEventNodeDefinition
+	Children() []*raw.PHASESoundEventNodeDefinition
+}
+
+var _ SoundEventNodeDefinitionable = (*SoundEventNodeDefinition)(nil)
 

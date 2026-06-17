@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -90,5 +91,165 @@ func (x *SliderTouchBarItem) WithCustomizationLabel(customizationLabel string) *
 	return x
 }
 
+// Slider calls the underlying Slider.
+func (x *SliderTouchBarItem) Slider() *Slider {
+	_r := x.inner.Slider()
+	if _r == nil {
+		return nil
+	}
+	return &Slider{inner: _r}
+}
+
+// SetSlider calls the underlying SetSlider.
+func (x *SliderTouchBarItem) SetSlider(slider *raw.NSSlider) {
+	x.inner.SetSlider(slider)
+}
+
+// DoubleValue calls the underlying DoubleValue.
+func (x *SliderTouchBarItem) DoubleValue() float64 {
+	return x.inner.DoubleValue()
+}
+
+// SetDoubleValue calls the underlying SetDoubleValue.
+func (x *SliderTouchBarItem) SetDoubleValue(doubleValue float64) {
+	x.inner.SetDoubleValue(doubleValue)
+}
+
+// MinimumSliderWidth calls the underlying MinimumSliderWidth.
+func (x *SliderTouchBarItem) MinimumSliderWidth() float64 {
+	return x.inner.MinimumSliderWidth()
+}
+
+// SetMinimumSliderWidth calls the underlying SetMinimumSliderWidth.
+func (x *SliderTouchBarItem) SetMinimumSliderWidth(minimumSliderWidth float64) {
+	x.inner.SetMinimumSliderWidth(minimumSliderWidth)
+}
+
+// MaximumSliderWidth calls the underlying MaximumSliderWidth.
+func (x *SliderTouchBarItem) MaximumSliderWidth() float64 {
+	return x.inner.MaximumSliderWidth()
+}
+
+// SetMaximumSliderWidth calls the underlying SetMaximumSliderWidth.
+func (x *SliderTouchBarItem) SetMaximumSliderWidth(maximumSliderWidth float64) {
+	x.inner.SetMaximumSliderWidth(maximumSliderWidth)
+}
+
+// Label calls the underlying Label.
+func (x *SliderTouchBarItem) Label() string {
+	_r := x.inner.Label()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLabel calls the underlying SetLabel.
+func (x *SliderTouchBarItem) SetLabel(label string) {
+	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+}
+
+// MinimumValueAccessory calls the underlying MinimumValueAccessory.
+func (x *SliderTouchBarItem) MinimumValueAccessory() *SliderAccessory {
+	_r := x.inner.MinimumValueAccessory()
+	if _r == nil {
+		return nil
+	}
+	return &SliderAccessory{inner: _r}
+}
+
+// SetMinimumValueAccessory calls the underlying SetMinimumValueAccessory.
+func (x *SliderTouchBarItem) SetMinimumValueAccessory(minimumValueAccessory *raw.NSSliderAccessory) {
+	x.inner.SetMinimumValueAccessory(minimumValueAccessory)
+}
+
+// MaximumValueAccessory calls the underlying MaximumValueAccessory.
+func (x *SliderTouchBarItem) MaximumValueAccessory() *SliderAccessory {
+	_r := x.inner.MaximumValueAccessory()
+	if _r == nil {
+		return nil
+	}
+	return &SliderAccessory{inner: _r}
+}
+
+// SetMaximumValueAccessory calls the underlying SetMaximumValueAccessory.
+func (x *SliderTouchBarItem) SetMaximumValueAccessory(maximumValueAccessory *raw.NSSliderAccessory) {
+	x.inner.SetMaximumValueAccessory(maximumValueAccessory)
+}
+
+// ValueAccessoryWidth calls the underlying ValueAccessoryWidth.
+func (x *SliderTouchBarItem) ValueAccessoryWidth() float64 {
+	return x.inner.ValueAccessoryWidth()
+}
+
+// SetValueAccessoryWidth calls the underlying SetValueAccessoryWidth.
+func (x *SliderTouchBarItem) SetValueAccessoryWidth(valueAccessoryWidth float64) {
+	x.inner.SetValueAccessoryWidth(valueAccessoryWidth)
+}
+
+// Target calls the underlying Target.
+func (x *SliderTouchBarItem) Target() objc.ID {
+	return x.inner.Target()
+}
+
+// SetTarget calls the underlying SetTarget.
+func (x *SliderTouchBarItem) SetTarget(target objc.ID) {
+	x.inner.SetTarget(target)
+}
+
+// Action calls the underlying Action.
+func (x *SliderTouchBarItem) Action() objc.SEL {
+	return x.inner.Action()
+}
+
+// SetAction calls the underlying SetAction.
+func (x *SliderTouchBarItem) SetAction(action objc.SEL) {
+	x.inner.SetAction(action)
+}
+
+// SetCustomizationLabel calls the underlying SetCustomizationLabel.
+func (x *SliderTouchBarItem) SetCustomizationLabel(customizationLabel string) {
+	x.inner.SetCustomizationLabel(foundation.NSStringStringWithUTF8String(customizationLabel))
+}
+
 func (x *SliderTouchBarItem) asTouchBarItem() *raw.NSTouchBarItem { return &x.inner.NSTouchBarItem }
+
+// SliderTouchBarItemable is the interface implemented by [SliderTouchBarItem], for mocking and DI.
+type SliderTouchBarItemable interface {
+	Unwrap() *raw.NSSliderTouchBarItem
+	WithSlider(slider *raw.NSSlider) *SliderTouchBarItem
+	WithDoubleValue(doubleValue float64) *SliderTouchBarItem
+	WithMinimumSliderWidth(minimumSliderWidth float64) *SliderTouchBarItem
+	WithMaximumSliderWidth(maximumSliderWidth float64) *SliderTouchBarItem
+	WithLabel(label string) *SliderTouchBarItem
+	WithMinimumValueAccessory(minimumValueAccessory *raw.NSSliderAccessory) *SliderTouchBarItem
+	WithMaximumValueAccessory(maximumValueAccessory *raw.NSSliderAccessory) *SliderTouchBarItem
+	WithValueAccessoryWidth(valueAccessoryWidth float64) *SliderTouchBarItem
+	WithTarget(target objc.ID) *SliderTouchBarItem
+	WithAction(action objc.SEL) *SliderTouchBarItem
+	WithCustomizationLabel(customizationLabel string) *SliderTouchBarItem
+	Slider() *Slider
+	SetSlider(slider *raw.NSSlider)
+	DoubleValue() float64
+	SetDoubleValue(doubleValue float64)
+	MinimumSliderWidth() float64
+	SetMinimumSliderWidth(minimumSliderWidth float64)
+	MaximumSliderWidth() float64
+	SetMaximumSliderWidth(maximumSliderWidth float64)
+	Label() string
+	SetLabel(label string)
+	MinimumValueAccessory() *SliderAccessory
+	SetMinimumValueAccessory(minimumValueAccessory *raw.NSSliderAccessory)
+	MaximumValueAccessory() *SliderAccessory
+	SetMaximumValueAccessory(maximumValueAccessory *raw.NSSliderAccessory)
+	ValueAccessoryWidth() float64
+	SetValueAccessoryWidth(valueAccessoryWidth float64)
+	Target() objc.ID
+	SetTarget(target objc.ID)
+	Action() objc.SEL
+	SetAction(action objc.SEL)
+	SetCustomizationLabel(customizationLabel string)
+}
+
+var _ SliderTouchBarItemable = (*SliderTouchBarItem)(nil)
 

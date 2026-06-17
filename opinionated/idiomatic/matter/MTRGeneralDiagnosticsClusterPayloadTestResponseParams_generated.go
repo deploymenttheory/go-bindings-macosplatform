@@ -37,3 +37,23 @@ func (x *MTRGeneralDiagnosticsClusterPayloadTestResponseParams) WithPayload(payl
 	return x
 }
 
+// Payload calls the underlying Payload.
+func (x *MTRGeneralDiagnosticsClusterPayloadTestResponseParams) Payload() *foundation.NSData {
+	return x.inner.Payload()
+}
+
+// SetPayload calls the underlying SetPayload.
+func (x *MTRGeneralDiagnosticsClusterPayloadTestResponseParams) SetPayload(payload *foundation.NSData) {
+	x.inner.SetPayload(payload)
+}
+
+// MTRGeneralDiagnosticsClusterPayloadTestResponseParamsable is the interface implemented by [MTRGeneralDiagnosticsClusterPayloadTestResponseParams], for mocking and DI.
+type MTRGeneralDiagnosticsClusterPayloadTestResponseParamsable interface {
+	Unwrap() *raw.MTRGeneralDiagnosticsClusterPayloadTestResponseParams
+	WithPayload(payload *foundation.NSData) *MTRGeneralDiagnosticsClusterPayloadTestResponseParams
+	Payload() *foundation.NSData
+	SetPayload(payload *foundation.NSData)
+}
+
+var _ MTRGeneralDiagnosticsClusterPayloadTestResponseParamsable = (*MTRGeneralDiagnosticsClusterPayloadTestResponseParams)(nil)
+

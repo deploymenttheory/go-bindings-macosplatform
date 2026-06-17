@@ -30,3 +30,49 @@ func (x *ATTRequest) WithValue(value *foundation.NSData) *ATTRequest {
 	return x
 }
 
+// Central calls the underlying Central.
+func (x *ATTRequest) Central() *Central {
+	_r := x.inner.Central()
+	if _r == nil {
+		return nil
+	}
+	return &Central{inner: _r}
+}
+
+// Characteristic calls the underlying Characteristic.
+func (x *ATTRequest) Characteristic() *Characteristic {
+	_r := x.inner.Characteristic()
+	if _r == nil {
+		return nil
+	}
+	return &Characteristic{inner: _r}
+}
+
+// Offset calls the underlying Offset.
+func (x *ATTRequest) Offset() uint {
+	return x.inner.Offset()
+}
+
+// Value calls the underlying Value.
+func (x *ATTRequest) Value() *foundation.NSData {
+	return x.inner.Value()
+}
+
+// SetValue calls the underlying SetValue.
+func (x *ATTRequest) SetValue(value *foundation.NSData) {
+	x.inner.SetValue(value)
+}
+
+// ATTRequestable is the interface implemented by [ATTRequest], for mocking and DI.
+type ATTRequestable interface {
+	Unwrap() *raw.CBATTRequest
+	WithValue(value *foundation.NSData) *ATTRequest
+	Central() *Central
+	Characteristic() *Characteristic
+	Offset() uint
+	Value() *foundation.NSData
+	SetValue(value *foundation.NSData)
+}
+
+var _ ATTRequestable = (*ATTRequest)(nil)
+

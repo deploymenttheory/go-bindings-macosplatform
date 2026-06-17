@@ -27,7 +27,20 @@ func NewMatrixDecompositionLUWithDeviceRowsColumns(device metal.MTLDevice, rows 
 	return &MatrixDecompositionLU{inner: raw.MPSMatrixDecompositionLUFromID(_id)}
 }
 
+// EncodeToCommandBufferSourceMatrixResultMatrixPivotIndicesStatus calls the underlying EncodeToCommandBufferSourceMatrixResultMatrixPivotIndicesStatus.
+func (x *MatrixDecompositionLU) EncodeToCommandBufferSourceMatrixResultMatrixPivotIndicesStatus(commandBuffer metal.MTLCommandBuffer, sourceMatrix *mpscore.MPSMatrix, resultMatrix *mpscore.MPSMatrix, pivotIndices *mpscore.MPSMatrix, status metal.MTLBuffer) {
+	x.inner.EncodeToCommandBufferSourceMatrixResultMatrixPivotIndicesStatus(commandBuffer, sourceMatrix, resultMatrix, pivotIndices, status)
+}
+
 func (x *MatrixDecompositionLU) asMatrixUnaryKernel() *mpsmatrix.MPSMatrixUnaryKernel { return &x.inner.MPSMatrixUnaryKernel }
 
 func (x *MatrixDecompositionLU) asKernel() *mpscore.MPSKernel { return &x.inner.MPSMatrixUnaryKernel.MPSKernel }
+
+// MatrixDecompositionLUable is the interface implemented by [MatrixDecompositionLU], for mocking and DI.
+type MatrixDecompositionLUable interface {
+	Unwrap() *raw.MPSMatrixDecompositionLU
+	EncodeToCommandBufferSourceMatrixResultMatrixPivotIndicesStatus(commandBuffer metal.MTLCommandBuffer, sourceMatrix *mpscore.MPSMatrix, resultMatrix *mpscore.MPSMatrix, pivotIndices *mpscore.MPSMatrix, status metal.MTLBuffer)
+}
+
+var _ MatrixDecompositionLUable = (*MatrixDecompositionLU)(nil)
 

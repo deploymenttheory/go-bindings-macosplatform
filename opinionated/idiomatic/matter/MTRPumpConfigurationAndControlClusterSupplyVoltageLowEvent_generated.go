@@ -23,3 +23,10 @@ func NewMTRPumpConfigurationAndControlClusterSupplyVoltageLowEvent() *MTRPumpCon
 	return &MTRPumpConfigurationAndControlClusterSupplyVoltageLowEvent{inner: raw.MTRPumpConfigurationAndControlClusterSupplyVoltageLowEventFromID(_id)}
 }
 
+// MTRPumpConfigurationAndControlClusterSupplyVoltageLowEventable is the interface implemented by [MTRPumpConfigurationAndControlClusterSupplyVoltageLowEvent], for mocking and DI.
+type MTRPumpConfigurationAndControlClusterSupplyVoltageLowEventable interface {
+	Unwrap() *raw.MTRPumpConfigurationAndControlClusterSupplyVoltageLowEvent
+}
+
+var _ MTRPumpConfigurationAndControlClusterSupplyVoltageLowEventable = (*MTRPumpConfigurationAndControlClusterSupplyVoltageLowEvent)(nil)
+

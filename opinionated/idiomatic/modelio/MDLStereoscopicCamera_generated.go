@@ -7,6 +7,7 @@ package modelio
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // StereoscopicCamera wraps [raw.MDLStereoscopicCamera] with a fluent Go API.
@@ -47,7 +48,90 @@ func (x *StereoscopicCamera) WithOverlap(overlap float32) *StereoscopicCamera {
 	return x
 }
 
+// InterPupillaryDistance calls the underlying InterPupillaryDistance.
+func (x *StereoscopicCamera) InterPupillaryDistance() float32 {
+	return x.inner.InterPupillaryDistance()
+}
+
+// SetInterPupillaryDistance calls the underlying SetInterPupillaryDistance.
+func (x *StereoscopicCamera) SetInterPupillaryDistance(interPupillaryDistance float32) {
+	x.inner.SetInterPupillaryDistance(interPupillaryDistance)
+}
+
+// LeftVergence calls the underlying LeftVergence.
+func (x *StereoscopicCamera) LeftVergence() float32 {
+	return x.inner.LeftVergence()
+}
+
+// SetLeftVergence calls the underlying SetLeftVergence.
+func (x *StereoscopicCamera) SetLeftVergence(leftVergence float32) {
+	x.inner.SetLeftVergence(leftVergence)
+}
+
+// RightVergence calls the underlying RightVergence.
+func (x *StereoscopicCamera) RightVergence() float32 {
+	return x.inner.RightVergence()
+}
+
+// SetRightVergence calls the underlying SetRightVergence.
+func (x *StereoscopicCamera) SetRightVergence(rightVergence float32) {
+	x.inner.SetRightVergence(rightVergence)
+}
+
+// Overlap calls the underlying Overlap.
+func (x *StereoscopicCamera) Overlap() float32 {
+	return x.inner.Overlap()
+}
+
+// SetOverlap calls the underlying SetOverlap.
+func (x *StereoscopicCamera) SetOverlap(overlap float32) {
+	x.inner.SetOverlap(overlap)
+}
+
+// LeftViewMatrix calls the underlying LeftViewMatrix.
+func (x *StereoscopicCamera) LeftViewMatrix() unsafe.Pointer {
+	return x.inner.LeftViewMatrix()
+}
+
+// RightViewMatrix calls the underlying RightViewMatrix.
+func (x *StereoscopicCamera) RightViewMatrix() unsafe.Pointer {
+	return x.inner.RightViewMatrix()
+}
+
+// LeftProjectionMatrix calls the underlying LeftProjectionMatrix.
+func (x *StereoscopicCamera) LeftProjectionMatrix() unsafe.Pointer {
+	return x.inner.LeftProjectionMatrix()
+}
+
+// RightProjectionMatrix calls the underlying RightProjectionMatrix.
+func (x *StereoscopicCamera) RightProjectionMatrix() unsafe.Pointer {
+	return x.inner.RightProjectionMatrix()
+}
+
 func (x *StereoscopicCamera) asCamera() *raw.MDLCamera { return &x.inner.MDLCamera }
 
 func (x *StereoscopicCamera) asObject() *raw.MDLObject { return &x.inner.MDLCamera.MDLObject }
+
+// StereoscopicCameraable is the interface implemented by [StereoscopicCamera], for mocking and DI.
+type StereoscopicCameraable interface {
+	Unwrap() *raw.MDLStereoscopicCamera
+	WithInterPupillaryDistance(interPupillaryDistance float32) *StereoscopicCamera
+	WithLeftVergence(leftVergence float32) *StereoscopicCamera
+	WithRightVergence(rightVergence float32) *StereoscopicCamera
+	WithOverlap(overlap float32) *StereoscopicCamera
+	InterPupillaryDistance() float32
+	SetInterPupillaryDistance(interPupillaryDistance float32)
+	LeftVergence() float32
+	SetLeftVergence(leftVergence float32)
+	RightVergence() float32
+	SetRightVergence(rightVergence float32)
+	Overlap() float32
+	SetOverlap(overlap float32)
+	LeftViewMatrix() unsafe.Pointer
+	RightViewMatrix() unsafe.Pointer
+	LeftProjectionMatrix() unsafe.Pointer
+	RightProjectionMatrix() unsafe.Pointer
+}
+
+var _ StereoscopicCameraable = (*StereoscopicCamera)(nil)
 

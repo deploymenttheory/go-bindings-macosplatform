@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -73,5 +74,120 @@ func (x *MarkerAnnotationView) WithAnimatesWhenAdded(animatesWhenAdded bool) *Ma
 	return x
 }
 
+// TitleVisibility calls the underlying TitleVisibility.
+func (x *MarkerAnnotationView) TitleVisibility() raw.MKFeatureVisibility {
+	return x.inner.TitleVisibility()
+}
+
+// SetTitleVisibility calls the underlying SetTitleVisibility.
+func (x *MarkerAnnotationView) SetTitleVisibility(titleVisibility raw.MKFeatureVisibility) {
+	x.inner.SetTitleVisibility(titleVisibility)
+}
+
+// SubtitleVisibility calls the underlying SubtitleVisibility.
+func (x *MarkerAnnotationView) SubtitleVisibility() raw.MKFeatureVisibility {
+	return x.inner.SubtitleVisibility()
+}
+
+// SetSubtitleVisibility calls the underlying SetSubtitleVisibility.
+func (x *MarkerAnnotationView) SetSubtitleVisibility(subtitleVisibility raw.MKFeatureVisibility) {
+	x.inner.SetSubtitleVisibility(subtitleVisibility)
+}
+
+// MarkerTintColor calls the underlying MarkerTintColor.
+func (x *MarkerAnnotationView) MarkerTintColor() *appkit.NSColor {
+	return x.inner.MarkerTintColor()
+}
+
+// SetMarkerTintColor calls the underlying SetMarkerTintColor.
+func (x *MarkerAnnotationView) SetMarkerTintColor(markerTintColor *appkit.NSColor) {
+	x.inner.SetMarkerTintColor(markerTintColor)
+}
+
+// GlyphTintColor calls the underlying GlyphTintColor.
+func (x *MarkerAnnotationView) GlyphTintColor() *appkit.NSColor {
+	return x.inner.GlyphTintColor()
+}
+
+// SetGlyphTintColor calls the underlying SetGlyphTintColor.
+func (x *MarkerAnnotationView) SetGlyphTintColor(glyphTintColor *appkit.NSColor) {
+	x.inner.SetGlyphTintColor(glyphTintColor)
+}
+
+// GlyphText calls the underlying GlyphText.
+func (x *MarkerAnnotationView) GlyphText() string {
+	_r := x.inner.GlyphText()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetGlyphText calls the underlying SetGlyphText.
+func (x *MarkerAnnotationView) SetGlyphText(glyphText string) {
+	x.inner.SetGlyphText(foundation.NSStringStringWithUTF8String(glyphText))
+}
+
+// GlyphImage calls the underlying GlyphImage.
+func (x *MarkerAnnotationView) GlyphImage() *appkit.NSImage {
+	return x.inner.GlyphImage()
+}
+
+// SetGlyphImage calls the underlying SetGlyphImage.
+func (x *MarkerAnnotationView) SetGlyphImage(glyphImage *appkit.NSImage) {
+	x.inner.SetGlyphImage(glyphImage)
+}
+
+// SelectedGlyphImage calls the underlying SelectedGlyphImage.
+func (x *MarkerAnnotationView) SelectedGlyphImage() *appkit.NSImage {
+	return x.inner.SelectedGlyphImage()
+}
+
+// SetSelectedGlyphImage calls the underlying SetSelectedGlyphImage.
+func (x *MarkerAnnotationView) SetSelectedGlyphImage(selectedGlyphImage *appkit.NSImage) {
+	x.inner.SetSelectedGlyphImage(selectedGlyphImage)
+}
+
+// AnimatesWhenAdded calls the underlying AnimatesWhenAdded.
+func (x *MarkerAnnotationView) AnimatesWhenAdded() bool {
+	return x.inner.AnimatesWhenAdded()
+}
+
+// SetAnimatesWhenAdded calls the underlying SetAnimatesWhenAdded.
+func (x *MarkerAnnotationView) SetAnimatesWhenAdded(animatesWhenAdded bool) {
+	x.inner.SetAnimatesWhenAdded(animatesWhenAdded)
+}
+
 func (x *MarkerAnnotationView) asAnnotationView() *raw.MKAnnotationView { return &x.inner.MKAnnotationView }
+
+// MarkerAnnotationViewable is the interface implemented by [MarkerAnnotationView], for mocking and DI.
+type MarkerAnnotationViewable interface {
+	Unwrap() *raw.MKMarkerAnnotationView
+	WithTitleVisibility(titleVisibility raw.MKFeatureVisibility) *MarkerAnnotationView
+	WithSubtitleVisibility(subtitleVisibility raw.MKFeatureVisibility) *MarkerAnnotationView
+	WithMarkerTintColor(markerTintColor *appkit.NSColor) *MarkerAnnotationView
+	WithGlyphTintColor(glyphTintColor *appkit.NSColor) *MarkerAnnotationView
+	WithGlyphText(glyphText string) *MarkerAnnotationView
+	WithGlyphImage(glyphImage *appkit.NSImage) *MarkerAnnotationView
+	WithSelectedGlyphImage(selectedGlyphImage *appkit.NSImage) *MarkerAnnotationView
+	WithAnimatesWhenAdded(animatesWhenAdded bool) *MarkerAnnotationView
+	TitleVisibility() raw.MKFeatureVisibility
+	SetTitleVisibility(titleVisibility raw.MKFeatureVisibility)
+	SubtitleVisibility() raw.MKFeatureVisibility
+	SetSubtitleVisibility(subtitleVisibility raw.MKFeatureVisibility)
+	MarkerTintColor() *appkit.NSColor
+	SetMarkerTintColor(markerTintColor *appkit.NSColor)
+	GlyphTintColor() *appkit.NSColor
+	SetGlyphTintColor(glyphTintColor *appkit.NSColor)
+	GlyphText() string
+	SetGlyphText(glyphText string)
+	GlyphImage() *appkit.NSImage
+	SetGlyphImage(glyphImage *appkit.NSImage)
+	SelectedGlyphImage() *appkit.NSImage
+	SetSelectedGlyphImage(selectedGlyphImage *appkit.NSImage)
+	AnimatesWhenAdded() bool
+	SetAnimatesWhenAdded(animatesWhenAdded bool)
+}
+
+var _ MarkerAnnotationViewable = (*MarkerAnnotationView)(nil)
 

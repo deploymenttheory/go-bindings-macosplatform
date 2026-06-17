@@ -48,3 +48,62 @@ func (x *MTRGeneralCommissioningClusterArmFailSafeParams) WithServerSideProcessi
 	return x
 }
 
+// ExpiryLengthSeconds calls the underlying ExpiryLengthSeconds.
+func (x *MTRGeneralCommissioningClusterArmFailSafeParams) ExpiryLengthSeconds() *foundation.NSNumber {
+	return x.inner.ExpiryLengthSeconds()
+}
+
+// SetExpiryLengthSeconds calls the underlying SetExpiryLengthSeconds.
+func (x *MTRGeneralCommissioningClusterArmFailSafeParams) SetExpiryLengthSeconds(expiryLengthSeconds *foundation.NSNumber) {
+	x.inner.SetExpiryLengthSeconds(expiryLengthSeconds)
+}
+
+// Breadcrumb calls the underlying Breadcrumb.
+func (x *MTRGeneralCommissioningClusterArmFailSafeParams) Breadcrumb() *foundation.NSNumber {
+	return x.inner.Breadcrumb()
+}
+
+// SetBreadcrumb calls the underlying SetBreadcrumb.
+func (x *MTRGeneralCommissioningClusterArmFailSafeParams) SetBreadcrumb(breadcrumb *foundation.NSNumber) {
+	x.inner.SetBreadcrumb(breadcrumb)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRGeneralCommissioningClusterArmFailSafeParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRGeneralCommissioningClusterArmFailSafeParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRGeneralCommissioningClusterArmFailSafeParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRGeneralCommissioningClusterArmFailSafeParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRGeneralCommissioningClusterArmFailSafeParamsable is the interface implemented by [MTRGeneralCommissioningClusterArmFailSafeParams], for mocking and DI.
+type MTRGeneralCommissioningClusterArmFailSafeParamsable interface {
+	Unwrap() *raw.MTRGeneralCommissioningClusterArmFailSafeParams
+	WithExpiryLengthSeconds(expiryLengthSeconds *foundation.NSNumber) *MTRGeneralCommissioningClusterArmFailSafeParams
+	WithBreadcrumb(breadcrumb *foundation.NSNumber) *MTRGeneralCommissioningClusterArmFailSafeParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRGeneralCommissioningClusterArmFailSafeParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRGeneralCommissioningClusterArmFailSafeParams
+	ExpiryLengthSeconds() *foundation.NSNumber
+	SetExpiryLengthSeconds(expiryLengthSeconds *foundation.NSNumber)
+	Breadcrumb() *foundation.NSNumber
+	SetBreadcrumb(breadcrumb *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRGeneralCommissioningClusterArmFailSafeParamsable = (*MTRGeneralCommissioningClusterArmFailSafeParams)(nil)
+

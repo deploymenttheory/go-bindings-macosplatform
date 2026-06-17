@@ -5,6 +5,7 @@
 package usernotifications
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/usernotifications"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,5 +24,24 @@ func NewTimeIntervalNotificationTrigger() *TimeIntervalNotificationTrigger {
 	return &TimeIntervalNotificationTrigger{inner: raw.UNTimeIntervalNotificationTriggerFromID(_id)}
 }
 
+// NextTriggerDate calls the underlying NextTriggerDate.
+func (x *TimeIntervalNotificationTrigger) NextTriggerDate() *foundation.NSDate {
+	return x.inner.NextTriggerDate()
+}
+
+// TimeInterval calls the underlying TimeInterval.
+func (x *TimeIntervalNotificationTrigger) TimeInterval() float64 {
+	return x.inner.TimeInterval()
+}
+
 func (x *TimeIntervalNotificationTrigger) asNotificationTrigger() *raw.UNNotificationTrigger { return &x.inner.UNNotificationTrigger }
+
+// TimeIntervalNotificationTriggerable is the interface implemented by [TimeIntervalNotificationTrigger], for mocking and DI.
+type TimeIntervalNotificationTriggerable interface {
+	Unwrap() *raw.UNTimeIntervalNotificationTrigger
+	NextTriggerDate() *foundation.NSDate
+	TimeInterval() float64
+}
+
+var _ TimeIntervalNotificationTriggerable = (*TimeIntervalNotificationTrigger)(nil)
 

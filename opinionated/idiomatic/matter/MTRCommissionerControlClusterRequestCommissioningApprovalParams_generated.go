@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -59,4 +60,93 @@ func (x *MTRCommissionerControlClusterRequestCommissioningApprovalParams) WithSe
 	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
 	return x
 }
+
+// RequestID calls the underlying RequestID.
+func (x *MTRCommissionerControlClusterRequestCommissioningApprovalParams) RequestID() *foundation.NSNumber {
+	return x.inner.RequestID()
+}
+
+// SetRequestID calls the underlying SetRequestID.
+func (x *MTRCommissionerControlClusterRequestCommissioningApprovalParams) SetRequestID(requestID *foundation.NSNumber) {
+	x.inner.SetRequestID(requestID)
+}
+
+// VendorID calls the underlying VendorID.
+func (x *MTRCommissionerControlClusterRequestCommissioningApprovalParams) VendorID() *foundation.NSNumber {
+	return x.inner.VendorID()
+}
+
+// SetVendorID calls the underlying SetVendorID.
+func (x *MTRCommissionerControlClusterRequestCommissioningApprovalParams) SetVendorID(vendorID *foundation.NSNumber) {
+	x.inner.SetVendorID(vendorID)
+}
+
+// ProductID calls the underlying ProductID.
+func (x *MTRCommissionerControlClusterRequestCommissioningApprovalParams) ProductID() *foundation.NSNumber {
+	return x.inner.ProductID()
+}
+
+// SetProductID calls the underlying SetProductID.
+func (x *MTRCommissionerControlClusterRequestCommissioningApprovalParams) SetProductID(productID *foundation.NSNumber) {
+	x.inner.SetProductID(productID)
+}
+
+// Label calls the underlying Label.
+func (x *MTRCommissionerControlClusterRequestCommissioningApprovalParams) Label() string {
+	_r := x.inner.Label()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLabel calls the underlying SetLabel.
+func (x *MTRCommissionerControlClusterRequestCommissioningApprovalParams) SetLabel(label string) {
+	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRCommissionerControlClusterRequestCommissioningApprovalParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRCommissionerControlClusterRequestCommissioningApprovalParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRCommissionerControlClusterRequestCommissioningApprovalParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRCommissionerControlClusterRequestCommissioningApprovalParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRCommissionerControlClusterRequestCommissioningApprovalParamsable is the interface implemented by [MTRCommissionerControlClusterRequestCommissioningApprovalParams], for mocking and DI.
+type MTRCommissionerControlClusterRequestCommissioningApprovalParamsable interface {
+	Unwrap() *raw.MTRCommissionerControlClusterRequestCommissioningApprovalParams
+	WithRequestID(requestID *foundation.NSNumber) *MTRCommissionerControlClusterRequestCommissioningApprovalParams
+	WithVendorID(vendorID *foundation.NSNumber) *MTRCommissionerControlClusterRequestCommissioningApprovalParams
+	WithProductID(productID *foundation.NSNumber) *MTRCommissionerControlClusterRequestCommissioningApprovalParams
+	WithLabel(label string) *MTRCommissionerControlClusterRequestCommissioningApprovalParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRCommissionerControlClusterRequestCommissioningApprovalParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRCommissionerControlClusterRequestCommissioningApprovalParams
+	RequestID() *foundation.NSNumber
+	SetRequestID(requestID *foundation.NSNumber)
+	VendorID() *foundation.NSNumber
+	SetVendorID(vendorID *foundation.NSNumber)
+	ProductID() *foundation.NSNumber
+	SetProductID(productID *foundation.NSNumber)
+	Label() string
+	SetLabel(label string)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRCommissionerControlClusterRequestCommissioningApprovalParamsable = (*MTRCommissionerControlClusterRequestCommissioningApprovalParams)(nil)
 

@@ -25,3 +25,16 @@ func NewMeshBufferAllocatorWithDevice(device metal.MTLDevice) *MeshBufferAllocat
 	return &MeshBufferAllocator{inner: raw.MTKMeshBufferAllocatorFromID(_id)}
 }
 
+// Device calls the underlying Device.
+func (x *MeshBufferAllocator) Device() metal.MTLDevice {
+	return x.inner.Device()
+}
+
+// MeshBufferAllocatorable is the interface implemented by [MeshBufferAllocator], for mocking and DI.
+type MeshBufferAllocatorable interface {
+	Unwrap() *raw.MTKMeshBufferAllocator
+	Device() metal.MTLDevice
+}
+
+var _ MeshBufferAllocatorable = (*MeshBufferAllocator)(nil)
+

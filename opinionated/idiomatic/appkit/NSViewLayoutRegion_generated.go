@@ -23,3 +23,10 @@ func NewViewLayoutRegion() *ViewLayoutRegion {
 	return &ViewLayoutRegion{inner: raw.NSViewLayoutRegionFromID(_id)}
 }
 
+// ViewLayoutRegionable is the interface implemented by [ViewLayoutRegion], for mocking and DI.
+type ViewLayoutRegionable interface {
+	Unwrap() *raw.NSViewLayoutRegion
+}
+
+var _ ViewLayoutRegionable = (*ViewLayoutRegion)(nil)
+

@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/contacts"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,4 +55,84 @@ func (x *Contact) WithSupplementarySubLocality(supplementarySubLocality string) 
 	x.inner.SetSupplementarySubLocality(foundation.NSStringStringWithUTF8String(supplementarySubLocality))
 	return x
 }
+
+// Name calls the underlying Name.
+func (x *Contact) Name() *foundation.NSPersonNameComponents {
+	return x.inner.Name()
+}
+
+// SetName calls the underlying SetName.
+func (x *Contact) SetName(name *foundation.NSPersonNameComponents) {
+	x.inner.SetName(name)
+}
+
+// PostalAddress calls the underlying PostalAddress.
+func (x *Contact) PostalAddress() *contacts.CNPostalAddress {
+	return x.inner.PostalAddress()
+}
+
+// SetPostalAddress calls the underlying SetPostalAddress.
+func (x *Contact) SetPostalAddress(postalAddress *contacts.CNPostalAddress) {
+	x.inner.SetPostalAddress(postalAddress)
+}
+
+// PhoneNumber calls the underlying PhoneNumber.
+func (x *Contact) PhoneNumber() *contacts.CNPhoneNumber {
+	return x.inner.PhoneNumber()
+}
+
+// SetPhoneNumber calls the underlying SetPhoneNumber.
+func (x *Contact) SetPhoneNumber(phoneNumber *contacts.CNPhoneNumber) {
+	x.inner.SetPhoneNumber(phoneNumber)
+}
+
+// EmailAddress calls the underlying EmailAddress.
+func (x *Contact) EmailAddress() string {
+	_r := x.inner.EmailAddress()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetEmailAddress calls the underlying SetEmailAddress.
+func (x *Contact) SetEmailAddress(emailAddress string) {
+	x.inner.SetEmailAddress(foundation.NSStringStringWithUTF8String(emailAddress))
+}
+
+// SupplementarySubLocality calls the underlying SupplementarySubLocality.
+func (x *Contact) SupplementarySubLocality() string {
+	_r := x.inner.SupplementarySubLocality()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetSupplementarySubLocality calls the underlying SetSupplementarySubLocality.
+func (x *Contact) SetSupplementarySubLocality(supplementarySubLocality string) {
+	x.inner.SetSupplementarySubLocality(foundation.NSStringStringWithUTF8String(supplementarySubLocality))
+}
+
+// Contactable is the interface implemented by [Contact], for mocking and DI.
+type Contactable interface {
+	Unwrap() *raw.PKContact
+	WithName(name *foundation.NSPersonNameComponents) *Contact
+	WithPostalAddress(postalAddress *contacts.CNPostalAddress) *Contact
+	WithPhoneNumber(phoneNumber *contacts.CNPhoneNumber) *Contact
+	WithEmailAddress(emailAddress string) *Contact
+	WithSupplementarySubLocality(supplementarySubLocality string) *Contact
+	Name() *foundation.NSPersonNameComponents
+	SetName(name *foundation.NSPersonNameComponents)
+	PostalAddress() *contacts.CNPostalAddress
+	SetPostalAddress(postalAddress *contacts.CNPostalAddress)
+	PhoneNumber() *contacts.CNPhoneNumber
+	SetPhoneNumber(phoneNumber *contacts.CNPhoneNumber)
+	EmailAddress() string
+	SetEmailAddress(emailAddress string)
+	SupplementarySubLocality() string
+	SetSupplementarySubLocality(supplementarySubLocality string)
+}
+
+var _ Contactable = (*Contact)(nil)
 

@@ -6,7 +6,9 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -91,17 +93,131 @@ func (x *SearchFieldCell) WithSendsSearchStringImmediately(sendsSearchStringImme
 	return x
 }
 
+// ResetSearchButtonCell calls the underlying ResetSearchButtonCell.
+func (x *SearchFieldCell) ResetSearchButtonCell() {
+	x.inner.ResetSearchButtonCell()
+}
+
+// ResetCancelButtonCell calls the underlying ResetCancelButtonCell.
+func (x *SearchFieldCell) ResetCancelButtonCell() {
+	x.inner.ResetCancelButtonCell()
+}
+
+// SearchTextRectForBounds calls the underlying SearchTextRectForBounds.
+func (x *SearchFieldCell) SearchTextRectForBounds(rect corefoundation.CGRect) corefoundation.CGRect {
+	return x.inner.SearchTextRectForBounds(rect)
+}
+
+// SearchButtonRectForBounds calls the underlying SearchButtonRectForBounds.
+func (x *SearchFieldCell) SearchButtonRectForBounds(rect corefoundation.CGRect) corefoundation.CGRect {
+	return x.inner.SearchButtonRectForBounds(rect)
+}
+
+// CancelButtonRectForBounds calls the underlying CancelButtonRectForBounds.
+func (x *SearchFieldCell) CancelButtonRectForBounds(rect corefoundation.CGRect) corefoundation.CGRect {
+	return x.inner.CancelButtonRectForBounds(rect)
+}
+
+// SearchButtonCell calls the underlying SearchButtonCell.
+func (x *SearchFieldCell) SearchButtonCell() *ButtonCell {
+	_r := x.inner.SearchButtonCell()
+	if _r == nil {
+		return nil
+	}
+	return &ButtonCell{inner: _r}
+}
+
+// SetSearchButtonCell calls the underlying SetSearchButtonCell.
+func (x *SearchFieldCell) SetSearchButtonCell(searchButtonCell *raw.NSButtonCell) {
+	x.inner.SetSearchButtonCell(searchButtonCell)
+}
+
+// CancelButtonCell calls the underlying CancelButtonCell.
+func (x *SearchFieldCell) CancelButtonCell() *ButtonCell {
+	_r := x.inner.CancelButtonCell()
+	if _r == nil {
+		return nil
+	}
+	return &ButtonCell{inner: _r}
+}
+
+// SetCancelButtonCell calls the underlying SetCancelButtonCell.
+func (x *SearchFieldCell) SetCancelButtonCell(cancelButtonCell *raw.NSButtonCell) {
+	x.inner.SetCancelButtonCell(cancelButtonCell)
+}
+
+// SearchMenuTemplate calls the underlying SearchMenuTemplate.
+func (x *SearchFieldCell) SearchMenuTemplate() *Menu {
+	_r := x.inner.SearchMenuTemplate()
+	if _r == nil {
+		return nil
+	}
+	return &Menu{inner: _r}
+}
+
+// SetSearchMenuTemplate calls the underlying SetSearchMenuTemplate.
+func (x *SearchFieldCell) SetSearchMenuTemplate(searchMenuTemplate *raw.NSMenu) {
+	x.inner.SetSearchMenuTemplate(searchMenuTemplate)
+}
+
+// SendsWholeSearchString calls the underlying SendsWholeSearchString.
+func (x *SearchFieldCell) SendsWholeSearchString() bool {
+	return x.inner.SendsWholeSearchString()
+}
+
+// SetSendsWholeSearchString calls the underlying SetSendsWholeSearchString.
+func (x *SearchFieldCell) SetSendsWholeSearchString(sendsWholeSearchString bool) {
+	x.inner.SetSendsWholeSearchString(sendsWholeSearchString)
+}
+
+// MaximumRecents calls the underlying MaximumRecents.
+func (x *SearchFieldCell) MaximumRecents() int {
+	return x.inner.MaximumRecents()
+}
+
+// SetMaximumRecents calls the underlying SetMaximumRecents.
+func (x *SearchFieldCell) SetMaximumRecents(maximumRecents int) {
+	x.inner.SetMaximumRecents(maximumRecents)
+}
+
 // RecentSearches returns the collection as a Go slice.
-func (x *SearchFieldCell) RecentSearches() []*foundation.NSString {
+func (x *SearchFieldCell) RecentSearches() []string {
 	arr := x.inner.RecentSearches()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// SetRecentSearches calls the underlying SetRecentSearches.
+func (x *SearchFieldCell) SetRecentSearches(recentSearches *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetRecentSearches(recentSearches)
+}
+
+// RecentsAutosaveName calls the underlying RecentsAutosaveName.
+func (x *SearchFieldCell) RecentsAutosaveName() string {
+	_r := x.inner.RecentsAutosaveName()
+	if _r == nil {
+		return ""
 	}
-	return out
+	return purego.GoString(_r.Ptr())
+}
+
+// SetRecentsAutosaveName calls the underlying SetRecentsAutosaveName.
+func (x *SearchFieldCell) SetRecentsAutosaveName(recentsAutosaveName *foundation.NSString) {
+	x.inner.SetRecentsAutosaveName(recentsAutosaveName)
+}
+
+// SendsSearchStringImmediately calls the underlying SendsSearchStringImmediately.
+func (x *SearchFieldCell) SendsSearchStringImmediately() bool {
+	return x.inner.SendsSearchStringImmediately()
+}
+
+// SetSendsSearchStringImmediately calls the underlying SetSendsSearchStringImmediately.
+func (x *SearchFieldCell) SetSendsSearchStringImmediately(sendsSearchStringImmediately bool) {
+	x.inner.SetSendsSearchStringImmediately(sendsSearchStringImmediately)
 }
 
 func (x *SearchFieldCell) asTextFieldCell() *raw.NSTextFieldCell { return &x.inner.NSTextFieldCell }
@@ -109,4 +225,40 @@ func (x *SearchFieldCell) asTextFieldCell() *raw.NSTextFieldCell { return &x.inn
 func (x *SearchFieldCell) asActionCell() *raw.NSActionCell { return &x.inner.NSTextFieldCell.NSActionCell }
 
 func (x *SearchFieldCell) asCell() *raw.NSCell { return &x.inner.NSTextFieldCell.NSActionCell.NSCell }
+
+// SearchFieldCellable is the interface implemented by [SearchFieldCell], for mocking and DI.
+type SearchFieldCellable interface {
+	Unwrap() *raw.NSSearchFieldCell
+	WithSearchButtonCell(searchButtonCell ButtonCellProvider) *SearchFieldCell
+	WithCancelButtonCell(cancelButtonCell ButtonCellProvider) *SearchFieldCell
+	WithSearchMenuTemplate(searchMenuTemplate *raw.NSMenu) *SearchFieldCell
+	WithSendsWholeSearchString(sendsWholeSearchString bool) *SearchFieldCell
+	WithMaximumRecents(maximumRecents int) *SearchFieldCell
+	WithRecentSearches(items ...*foundation.NSString) *SearchFieldCell
+	WithRecentsAutosaveName(recentsAutosaveName *foundation.NSString) *SearchFieldCell
+	WithSendsSearchStringImmediately(sendsSearchStringImmediately bool) *SearchFieldCell
+	ResetSearchButtonCell()
+	ResetCancelButtonCell()
+	SearchTextRectForBounds(rect corefoundation.CGRect) corefoundation.CGRect
+	SearchButtonRectForBounds(rect corefoundation.CGRect) corefoundation.CGRect
+	CancelButtonRectForBounds(rect corefoundation.CGRect) corefoundation.CGRect
+	SearchButtonCell() *ButtonCell
+	SetSearchButtonCell(searchButtonCell *raw.NSButtonCell)
+	CancelButtonCell() *ButtonCell
+	SetCancelButtonCell(cancelButtonCell *raw.NSButtonCell)
+	SearchMenuTemplate() *Menu
+	SetSearchMenuTemplate(searchMenuTemplate *raw.NSMenu)
+	SendsWholeSearchString() bool
+	SetSendsWholeSearchString(sendsWholeSearchString bool)
+	MaximumRecents() int
+	SetMaximumRecents(maximumRecents int)
+	RecentSearches() []string
+	SetRecentSearches(recentSearches *foundation.NSArray[*foundation.NSString])
+	RecentsAutosaveName() string
+	SetRecentsAutosaveName(recentsAutosaveName *foundation.NSString)
+	SendsSearchStringImmediately() bool
+	SetSendsSearchStringImmediately(sendsSearchStringImmediately bool)
+}
+
+var _ SearchFieldCellable = (*SearchFieldCell)(nil)
 

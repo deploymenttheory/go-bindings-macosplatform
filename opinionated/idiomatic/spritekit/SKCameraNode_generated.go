@@ -5,6 +5,7 @@
 package spritekit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,5 +24,24 @@ func NewCameraNode() *CameraNode {
 	return &CameraNode{inner: raw.SKCameraNodeFromID(_id)}
 }
 
+// ContainsNode calls the underlying ContainsNode.
+func (x *CameraNode) ContainsNode(node *raw.SKNode) bool {
+	return x.inner.ContainsNode(node)
+}
+
+// ContainedNodeSet calls the underlying ContainedNodeSet.
+func (x *CameraNode) ContainedNodeSet() *foundation.NSSet[*raw.SKNode] {
+	return x.inner.ContainedNodeSet()
+}
+
 func (x *CameraNode) asNode() *raw.SKNode { return &x.inner.SKNode }
+
+// CameraNodeable is the interface implemented by [CameraNode], for mocking and DI.
+type CameraNodeable interface {
+	Unwrap() *raw.SKCameraNode
+	ContainsNode(node *raw.SKNode) bool
+	ContainedNodeSet() *foundation.NSSet[*raw.SKNode]
+}
+
+var _ CameraNodeable = (*CameraNode)(nil)
 

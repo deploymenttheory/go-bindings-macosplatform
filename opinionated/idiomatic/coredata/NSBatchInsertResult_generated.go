@@ -23,5 +23,24 @@ func NewBatchInsertResult() *BatchInsertResult {
 	return &BatchInsertResult{inner: raw.NSBatchInsertResultFromID(_id)}
 }
 
+// Result calls the underlying Result.
+func (x *BatchInsertResult) Result() objc.ID {
+	return x.inner.Result()
+}
+
+// ResultType calls the underlying ResultType.
+func (x *BatchInsertResult) ResultType() raw.NSBatchInsertRequestResultType {
+	return x.inner.ResultType()
+}
+
 func (x *BatchInsertResult) asPersistentStoreResult() *raw.NSPersistentStoreResult { return &x.inner.NSPersistentStoreResult }
+
+// BatchInsertResultable is the interface implemented by [BatchInsertResult], for mocking and DI.
+type BatchInsertResultable interface {
+	Unwrap() *raw.NSBatchInsertResult
+	Result() objc.ID
+	ResultType() raw.NSBatchInsertRequestResultType
+}
+
+var _ BatchInsertResultable = (*BatchInsertResult)(nil)
 

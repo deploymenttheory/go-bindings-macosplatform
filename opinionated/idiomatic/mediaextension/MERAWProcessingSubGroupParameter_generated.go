@@ -7,6 +7,7 @@ package mediaextension
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mediaextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -31,12 +32,18 @@ func (x *RAWProcessingSubGroupParameter) SubGroupParameters() []*raw.MERAWProces
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MERAWProcessingParameter, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MERAWProcessingParameter {
+		return raw.MERAWProcessingParameterFromID(purego.Retain(_id))
+	})
 }
 
 func (x *RAWProcessingSubGroupParameter) asRAWProcessingParameter() *raw.MERAWProcessingParameter { return &x.inner.MERAWProcessingParameter }
+
+// RAWProcessingSubGroupParameterable is the interface implemented by [RAWProcessingSubGroupParameter], for mocking and DI.
+type RAWProcessingSubGroupParameterable interface {
+	Unwrap() *raw.MERAWProcessingSubGroupParameter
+	SubGroupParameters() []*raw.MERAWProcessingParameter
+}
+
+var _ RAWProcessingSubGroupParameterable = (*RAWProcessingSubGroupParameter)(nil)
 

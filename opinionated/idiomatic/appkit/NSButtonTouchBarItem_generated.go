@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -66,5 +67,109 @@ func (x *ButtonTouchBarItem) WithCustomizationLabel(customizationLabel string) *
 	return x
 }
 
+// Title calls the underlying Title.
+func (x *ButtonTouchBarItem) Title() string {
+	_r := x.inner.Title()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetTitle calls the underlying SetTitle.
+func (x *ButtonTouchBarItem) SetTitle(title string) {
+	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+}
+
+// Image calls the underlying Image.
+func (x *ButtonTouchBarItem) Image() *Image {
+	_r := x.inner.Image()
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// SetImage calls the underlying SetImage.
+func (x *ButtonTouchBarItem) SetImage(image *raw.NSImage) {
+	x.inner.SetImage(image)
+}
+
+// BezelColor calls the underlying BezelColor.
+func (x *ButtonTouchBarItem) BezelColor() *Color {
+	_r := x.inner.BezelColor()
+	if _r == nil {
+		return nil
+	}
+	return &Color{inner: _r}
+}
+
+// SetBezelColor calls the underlying SetBezelColor.
+func (x *ButtonTouchBarItem) SetBezelColor(bezelColor *raw.NSColor) {
+	x.inner.SetBezelColor(bezelColor)
+}
+
+// Target calls the underlying Target.
+func (x *ButtonTouchBarItem) Target() objc.ID {
+	return x.inner.Target()
+}
+
+// SetTarget calls the underlying SetTarget.
+func (x *ButtonTouchBarItem) SetTarget(target objc.ID) {
+	x.inner.SetTarget(target)
+}
+
+// Action calls the underlying Action.
+func (x *ButtonTouchBarItem) Action() objc.SEL {
+	return x.inner.Action()
+}
+
+// SetAction calls the underlying SetAction.
+func (x *ButtonTouchBarItem) SetAction(action objc.SEL) {
+	x.inner.SetAction(action)
+}
+
+// IsEnabled calls the underlying IsEnabled.
+func (x *ButtonTouchBarItem) IsEnabled() bool {
+	return x.inner.IsEnabled()
+}
+
+// SetEnabled calls the underlying SetEnabled.
+func (x *ButtonTouchBarItem) SetEnabled(enabled bool) {
+	x.inner.SetEnabled(enabled)
+}
+
+// SetCustomizationLabel calls the underlying SetCustomizationLabel.
+func (x *ButtonTouchBarItem) SetCustomizationLabel(customizationLabel string) {
+	x.inner.SetCustomizationLabel(foundation.NSStringStringWithUTF8String(customizationLabel))
+}
+
 func (x *ButtonTouchBarItem) asTouchBarItem() *raw.NSTouchBarItem { return &x.inner.NSTouchBarItem }
+
+// ButtonTouchBarItemable is the interface implemented by [ButtonTouchBarItem], for mocking and DI.
+type ButtonTouchBarItemable interface {
+	Unwrap() *raw.NSButtonTouchBarItem
+	WithTitle(title string) *ButtonTouchBarItem
+	WithImage(image *raw.NSImage) *ButtonTouchBarItem
+	WithBezelColor(bezelColor *raw.NSColor) *ButtonTouchBarItem
+	WithTarget(target objc.ID) *ButtonTouchBarItem
+	WithAction(action objc.SEL) *ButtonTouchBarItem
+	WithEnabled(enabled bool) *ButtonTouchBarItem
+	WithCustomizationLabel(customizationLabel string) *ButtonTouchBarItem
+	Title() string
+	SetTitle(title string)
+	Image() *Image
+	SetImage(image *raw.NSImage)
+	BezelColor() *Color
+	SetBezelColor(bezelColor *raw.NSColor)
+	Target() objc.ID
+	SetTarget(target objc.ID)
+	Action() objc.SEL
+	SetAction(action objc.SEL)
+	IsEnabled() bool
+	SetEnabled(enabled bool)
+	SetCustomizationLabel(customizationLabel string)
+}
+
+var _ ButtonTouchBarItemable = (*ButtonTouchBarItem)(nil)
 

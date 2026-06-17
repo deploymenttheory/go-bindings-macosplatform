@@ -30,7 +30,27 @@ func (x *MIDIProgramChangeEvent) WithProgramNumber(programNumber uint) *MIDIProg
 	return x
 }
 
+// ProgramNumber calls the underlying ProgramNumber.
+func (x *MIDIProgramChangeEvent) ProgramNumber() uint {
+	return x.inner.ProgramNumber()
+}
+
+// SetProgramNumber calls the underlying SetProgramNumber.
+func (x *MIDIProgramChangeEvent) SetProgramNumber(programNumber uint) {
+	x.inner.SetProgramNumber(programNumber)
+}
+
 func (x *MIDIProgramChangeEvent) asMIDIChannelEvent() *raw.AVMIDIChannelEvent { return &x.inner.AVMIDIChannelEvent }
 
 func (x *MIDIProgramChangeEvent) asMusicEvent() *raw.AVMusicEvent { return &x.inner.AVMIDIChannelEvent.AVMusicEvent }
+
+// MIDIProgramChangeEventable is the interface implemented by [MIDIProgramChangeEvent], for mocking and DI.
+type MIDIProgramChangeEventable interface {
+	Unwrap() *raw.AVMIDIProgramChangeEvent
+	WithProgramNumber(programNumber uint) *MIDIProgramChangeEvent
+	ProgramNumber() uint
+	SetProgramNumber(programNumber uint)
+}
+
+var _ MIDIProgramChangeEventable = (*MIDIProgramChangeEvent)(nil)
 

@@ -23,3 +23,10 @@ func NewBindingSelectionMarker() *BindingSelectionMarker {
 	return &BindingSelectionMarker{inner: raw.NSBindingSelectionMarkerFromID(_id)}
 }
 
+// BindingSelectionMarkerable is the interface implemented by [BindingSelectionMarker], for mocking and DI.
+type BindingSelectionMarkerable interface {
+	Unwrap() *raw.NSBindingSelectionMarker
+}
+
+var _ BindingSelectionMarkerable = (*BindingSelectionMarker)(nil)
+

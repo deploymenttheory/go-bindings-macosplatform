@@ -23,3 +23,34 @@ func NewVirtioSocketConnection() *VirtioSocketConnection {
 	return &VirtioSocketConnection{inner: raw.VZVirtioSocketConnectionFromID(_id)}
 }
 
+// Close calls the underlying Close.
+func (x *VirtioSocketConnection) Close() {
+	x.inner.Close()
+}
+
+// DestinationPort calls the underlying DestinationPort.
+func (x *VirtioSocketConnection) DestinationPort() uint32 {
+	return x.inner.DestinationPort()
+}
+
+// SourcePort calls the underlying SourcePort.
+func (x *VirtioSocketConnection) SourcePort() uint32 {
+	return x.inner.SourcePort()
+}
+
+// FileDescriptor calls the underlying FileDescriptor.
+func (x *VirtioSocketConnection) FileDescriptor() int {
+	return x.inner.FileDescriptor()
+}
+
+// VirtioSocketConnectionable is the interface implemented by [VirtioSocketConnection], for mocking and DI.
+type VirtioSocketConnectionable interface {
+	Unwrap() *raw.VZVirtioSocketConnection
+	Close()
+	DestinationPort() uint32
+	SourcePort() uint32
+	FileDescriptor() int
+}
+
+var _ VirtioSocketConnectionable = (*VirtioSocketConnection)(nil)
+

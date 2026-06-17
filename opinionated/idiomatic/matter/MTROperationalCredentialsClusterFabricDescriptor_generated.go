@@ -25,3 +25,10 @@ func NewMTROperationalCredentialsClusterFabricDescriptor() *MTROperationalCreden
 
 func (x *MTROperationalCredentialsClusterFabricDescriptor) asMTROperationalCredentialsClusterFabricDescriptorStruct() *raw.MTROperationalCredentialsClusterFabricDescriptorStruct { return &x.inner.MTROperationalCredentialsClusterFabricDescriptorStruct }
 
+// MTROperationalCredentialsClusterFabricDescriptorable is the interface implemented by [MTROperationalCredentialsClusterFabricDescriptor], for mocking and DI.
+type MTROperationalCredentialsClusterFabricDescriptorable interface {
+	Unwrap() *raw.MTROperationalCredentialsClusterFabricDescriptor
+}
+
+var _ MTROperationalCredentialsClusterFabricDescriptorable = (*MTROperationalCredentialsClusterFabricDescriptor)(nil)
+

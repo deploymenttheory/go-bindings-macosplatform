@@ -5,6 +5,7 @@
 package healthkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,5 +24,38 @@ func NewQuery() *Query {
 	return &Query{inner: raw.HKQueryFromID(_id)}
 }
 
+// ObjectType calls the underlying ObjectType.
+func (x *Query) ObjectType() *ObjectType {
+	_r := x.inner.ObjectType()
+	if _r == nil {
+		return nil
+	}
+	return &ObjectType{inner: _r}
+}
+
+// SampleType calls the underlying SampleType.
+func (x *Query) SampleType() *SampleType {
+	_r := x.inner.SampleType()
+	if _r == nil {
+		return nil
+	}
+	return &SampleType{inner: _r}
+}
+
+// Predicate calls the underlying Predicate.
+func (x *Query) Predicate() *foundation.NSPredicate {
+	return x.inner.Predicate()
+}
+
 func (x *Query) asQuery() *raw.HKQuery { return x.inner }
+
+// Queryable is the interface implemented by [Query], for mocking and DI.
+type Queryable interface {
+	Unwrap() *raw.HKQuery
+	ObjectType() *ObjectType
+	SampleType() *SampleType
+	Predicate() *foundation.NSPredicate
+}
+
+var _ Queryable = (*Query)(nil)
 

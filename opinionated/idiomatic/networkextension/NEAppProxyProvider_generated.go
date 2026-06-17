@@ -31,11 +31,11 @@ func NewNEAppProxyProvider() *NEAppProxyProvider {
 func (x *NEAppProxyProvider) StartProxyWithOptions(ctx context.Context, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) error {
 	_ch := make(chan error, 1)
 	x.inner.StartProxyWithOptionsCompletionHandler(options, func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -59,9 +59,42 @@ func (x *NEAppProxyProvider) StopProxyWithReason(ctx context.Context, reason raw
 	}
 }
 
+// CancelProxyWithError calls the underlying CancelProxyWithError.
+func (x *NEAppProxyProvider) CancelProxyWithError(error_ unsafe.Pointer) {
+	x.inner.CancelProxyWithError(error_)
+}
+
+// HandleNewFlow calls the underlying HandleNewFlow.
+func (x *NEAppProxyProvider) HandleNewFlow(flow *raw.NEAppProxyFlow) bool {
+	return x.inner.HandleNewFlow(flow)
+}
+
+// HandleNewUDPFlowInitialRemoteFlowEndpoint calls the underlying HandleNewUDPFlowInitialRemoteFlowEndpoint.
+func (x *NEAppProxyProvider) HandleNewUDPFlowInitialRemoteFlowEndpoint(flow *raw.NEAppProxyUDPFlow, remoteEndpoint *foundation.NSObject) bool {
+	return x.inner.HandleNewUDPFlowInitialRemoteFlowEndpoint(flow, remoteEndpoint)
+}
+
+// HandleNewUDPFlowInitialRemoteEndpoint calls the underlying HandleNewUDPFlowInitialRemoteEndpoint.
+func (x *NEAppProxyProvider) HandleNewUDPFlowInitialRemoteEndpoint(flow *raw.NEAppProxyUDPFlow, remoteEndpoint unsafe.Pointer) bool {
+	return x.inner.HandleNewUDPFlowInitialRemoteEndpoint(flow, remoteEndpoint)
+}
+
 func (x *NEAppProxyProvider) asNEAppProxyProvider() *raw.NEAppProxyProvider { return x.inner }
 
 func (x *NEAppProxyProvider) asNETunnelProvider() *raw.NETunnelProvider { return &x.inner.NETunnelProvider }
 
 func (x *NEAppProxyProvider) asNEProvider() *raw.NEProvider { return &x.inner.NETunnelProvider.NEProvider }
+
+// NEAppProxyProviderable is the interface implemented by [NEAppProxyProvider], for mocking and DI.
+type NEAppProxyProviderable interface {
+	Unwrap() *raw.NEAppProxyProvider
+	StartProxyWithOptions(ctx context.Context, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) error
+	StopProxyWithReason(ctx context.Context, reason raw.NEProviderStopReason) error
+	CancelProxyWithError(error_ unsafe.Pointer)
+	HandleNewFlow(flow *raw.NEAppProxyFlow) bool
+	HandleNewUDPFlowInitialRemoteFlowEndpoint(flow *raw.NEAppProxyUDPFlow, remoteEndpoint *foundation.NSObject) bool
+	HandleNewUDPFlowInitialRemoteEndpoint(flow *raw.NEAppProxyUDPFlow, remoteEndpoint unsafe.Pointer) bool
+}
+
+var _ NEAppProxyProviderable = (*NEAppProxyProvider)(nil)
 

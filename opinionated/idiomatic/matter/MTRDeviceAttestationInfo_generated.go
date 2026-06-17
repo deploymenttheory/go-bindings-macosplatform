@@ -25,3 +25,58 @@ func NewMTRDeviceAttestationInfoWithDeviceAttestationChallengeNonceElementsTLVEl
 	return &MTRDeviceAttestationInfo{inner: raw.MTRDeviceAttestationInfoFromID(_id)}
 }
 
+// Challenge calls the underlying Challenge.
+func (x *MTRDeviceAttestationInfo) Challenge() *foundation.NSData {
+	return x.inner.Challenge()
+}
+
+// Nonce calls the underlying Nonce.
+func (x *MTRDeviceAttestationInfo) Nonce() *foundation.NSData {
+	return x.inner.Nonce()
+}
+
+// ElementsTLV calls the underlying ElementsTLV.
+func (x *MTRDeviceAttestationInfo) ElementsTLV() *foundation.NSData {
+	return x.inner.ElementsTLV()
+}
+
+// ElementsSignature calls the underlying ElementsSignature.
+func (x *MTRDeviceAttestationInfo) ElementsSignature() *foundation.NSData {
+	return x.inner.ElementsSignature()
+}
+
+// DeviceAttestationCertificate calls the underlying DeviceAttestationCertificate.
+func (x *MTRDeviceAttestationInfo) DeviceAttestationCertificate() *foundation.NSData {
+	return x.inner.DeviceAttestationCertificate()
+}
+
+// ProductAttestationIntermediateCertificate calls the underlying ProductAttestationIntermediateCertificate.
+func (x *MTRDeviceAttestationInfo) ProductAttestationIntermediateCertificate() *foundation.NSData {
+	return x.inner.ProductAttestationIntermediateCertificate()
+}
+
+// CertificationDeclaration calls the underlying CertificationDeclaration.
+func (x *MTRDeviceAttestationInfo) CertificationDeclaration() *foundation.NSData {
+	return x.inner.CertificationDeclaration()
+}
+
+// FirmwareInfo calls the underlying FirmwareInfo.
+func (x *MTRDeviceAttestationInfo) FirmwareInfo() *foundation.NSData {
+	return x.inner.FirmwareInfo()
+}
+
+// MTRDeviceAttestationInfoable is the interface implemented by [MTRDeviceAttestationInfo], for mocking and DI.
+type MTRDeviceAttestationInfoable interface {
+	Unwrap() *raw.MTRDeviceAttestationInfo
+	Challenge() *foundation.NSData
+	Nonce() *foundation.NSData
+	ElementsTLV() *foundation.NSData
+	ElementsSignature() *foundation.NSData
+	DeviceAttestationCertificate() *foundation.NSData
+	ProductAttestationIntermediateCertificate() *foundation.NSData
+	CertificationDeclaration() *foundation.NSData
+	FirmwareInfo() *foundation.NSData
+}
+
+var _ MTRDeviceAttestationInfoable = (*MTRDeviceAttestationInfo)(nil)
+

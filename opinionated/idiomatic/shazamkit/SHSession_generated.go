@@ -5,6 +5,7 @@
 package shazamkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/shazamkit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,4 +36,46 @@ func (x *Session) WithDelegate(delegate raw.SHSessionDelegate) *Session {
 	x.inner.SetDelegate(delegate)
 	return x
 }
+
+// MatchStreamingBufferAtTime calls the underlying MatchStreamingBufferAtTime.
+func (x *Session) MatchStreamingBufferAtTime(buffer *avfaudio.AVAudioPCMBuffer, time_ *avfaudio.AVAudioTime) {
+	x.inner.MatchStreamingBufferAtTime(buffer, time_)
+}
+
+// MatchSignature calls the underlying MatchSignature.
+func (x *Session) MatchSignature(signature *raw.SHSignature) {
+	x.inner.MatchSignature(signature)
+}
+
+// Catalog calls the underlying Catalog.
+func (x *Session) Catalog() *Catalog {
+	_r := x.inner.Catalog()
+	if _r == nil {
+		return nil
+	}
+	return &Catalog{inner: _r}
+}
+
+// Delegate calls the underlying Delegate.
+func (x *Session) Delegate() raw.SHSessionDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *Session) SetDelegate(delegate raw.SHSessionDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// Sessionable is the interface implemented by [Session], for mocking and DI.
+type Sessionable interface {
+	Unwrap() *raw.SHSession
+	WithDelegate(delegate raw.SHSessionDelegate) *Session
+	MatchStreamingBufferAtTime(buffer *avfaudio.AVAudioPCMBuffer, time_ *avfaudio.AVAudioTime)
+	MatchSignature(signature *raw.SHSignature)
+	Catalog() *Catalog
+	Delegate() raw.SHSessionDelegate
+	SetDelegate(delegate raw.SHSessionDelegate)
+}
+
+var _ Sessionable = (*Session)(nil)
 

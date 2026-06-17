@@ -43,3 +43,40 @@ func (x *MTREnergyEVSEModeClusterChangeToModeResponseParams) WithStatusText(stat
 	return x
 }
 
+// Status calls the underlying Status.
+func (x *MTREnergyEVSEModeClusterChangeToModeResponseParams) Status() *foundation.NSNumber {
+	return x.inner.Status()
+}
+
+// SetStatus calls the underlying SetStatus.
+func (x *MTREnergyEVSEModeClusterChangeToModeResponseParams) SetStatus(status *foundation.NSNumber) {
+	x.inner.SetStatus(status)
+}
+
+// StatusText calls the underlying StatusText.
+func (x *MTREnergyEVSEModeClusterChangeToModeResponseParams) StatusText() string {
+	_r := x.inner.StatusText()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetStatusText calls the underlying SetStatusText.
+func (x *MTREnergyEVSEModeClusterChangeToModeResponseParams) SetStatusText(statusText string) {
+	x.inner.SetStatusText(foundation.NSStringStringWithUTF8String(statusText))
+}
+
+// MTREnergyEVSEModeClusterChangeToModeResponseParamsable is the interface implemented by [MTREnergyEVSEModeClusterChangeToModeResponseParams], for mocking and DI.
+type MTREnergyEVSEModeClusterChangeToModeResponseParamsable interface {
+	Unwrap() *raw.MTREnergyEVSEModeClusterChangeToModeResponseParams
+	WithStatus(status *foundation.NSNumber) *MTREnergyEVSEModeClusterChangeToModeResponseParams
+	WithStatusText(statusText string) *MTREnergyEVSEModeClusterChangeToModeResponseParams
+	Status() *foundation.NSNumber
+	SetStatus(status *foundation.NSNumber)
+	StatusText() string
+	SetStatusText(statusText string)
+}
+
+var _ MTREnergyEVSEModeClusterChangeToModeResponseParamsable = (*MTREnergyEVSEModeClusterChangeToModeResponseParams)(nil)
+

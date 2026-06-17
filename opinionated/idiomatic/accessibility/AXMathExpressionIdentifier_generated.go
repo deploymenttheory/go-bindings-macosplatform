@@ -7,6 +7,7 @@ package accessibility
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/accessibility"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -25,5 +26,22 @@ func NewMathExpressionIdentifierWithContent(content string) *MathExpressionIdent
 	return &MathExpressionIdentifier{inner: raw.AXMathExpressionIdentifierFromID(_id)}
 }
 
+// Content calls the underlying Content.
+func (x *MathExpressionIdentifier) Content() string {
+	_r := x.inner.Content()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 func (x *MathExpressionIdentifier) asMathExpression() *raw.AXMathExpression { return &x.inner.AXMathExpression }
+
+// MathExpressionIdentifierable is the interface implemented by [MathExpressionIdentifier], for mocking and DI.
+type MathExpressionIdentifierable interface {
+	Unwrap() *raw.AXMathExpressionIdentifier
+	Content() string
+}
+
+var _ MathExpressionIdentifierable = (*MathExpressionIdentifier)(nil)
 

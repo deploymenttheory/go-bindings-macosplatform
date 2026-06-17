@@ -7,6 +7,7 @@ package gameplaykit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // CircleObstacle wraps [raw.GKCircleObstacle] with a fluent Go API.
@@ -30,5 +31,37 @@ func (x *CircleObstacle) WithRadius(radius float32) *CircleObstacle {
 	return x
 }
 
+// Radius calls the underlying Radius.
+func (x *CircleObstacle) Radius() float32 {
+	return x.inner.Radius()
+}
+
+// SetRadius calls the underlying SetRadius.
+func (x *CircleObstacle) SetRadius(radius float32) {
+	x.inner.SetRadius(radius)
+}
+
+// Position calls the underlying Position.
+func (x *CircleObstacle) Position() unsafe.Pointer {
+	return x.inner.Position()
+}
+
+// SetPosition calls the underlying SetPosition.
+func (x *CircleObstacle) SetPosition(position unsafe.Pointer) {
+	x.inner.SetPosition(position)
+}
+
 func (x *CircleObstacle) asObstacle() *raw.GKObstacle { return &x.inner.GKObstacle }
+
+// CircleObstacleable is the interface implemented by [CircleObstacle], for mocking and DI.
+type CircleObstacleable interface {
+	Unwrap() *raw.GKCircleObstacle
+	WithRadius(radius float32) *CircleObstacle
+	Radius() float32
+	SetRadius(radius float32)
+	Position() unsafe.Pointer
+	SetPosition(position unsafe.Pointer)
+}
+
+var _ CircleObstacleable = (*CircleObstacle)(nil)
 

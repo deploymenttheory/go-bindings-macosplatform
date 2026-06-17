@@ -23,3 +23,10 @@ func NewMTRPumpConfigurationAndControlClusterSystemPressureLowEvent() *MTRPumpCo
 	return &MTRPumpConfigurationAndControlClusterSystemPressureLowEvent{inner: raw.MTRPumpConfigurationAndControlClusterSystemPressureLowEventFromID(_id)}
 }
 
+// MTRPumpConfigurationAndControlClusterSystemPressureLowEventable is the interface implemented by [MTRPumpConfigurationAndControlClusterSystemPressureLowEvent], for mocking and DI.
+type MTRPumpConfigurationAndControlClusterSystemPressureLowEventable interface {
+	Unwrap() *raw.MTRPumpConfigurationAndControlClusterSystemPressureLowEvent
+}
+
+var _ MTRPumpConfigurationAndControlClusterSystemPressureLowEventable = (*MTRPumpConfigurationAndControlClusterSystemPressureLowEvent)(nil)
+

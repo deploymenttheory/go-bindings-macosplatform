@@ -7,6 +7,7 @@ package eventkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/eventkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -38,17 +39,53 @@ func (x *RecurrenceRule) WithRecurrenceEnd(recurrenceEnd *raw.EKRecurrenceEnd) *
 	return x
 }
 
+// CalendarIdentifier calls the underlying CalendarIdentifier.
+func (x *RecurrenceRule) CalendarIdentifier() string {
+	_r := x.inner.CalendarIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// RecurrenceEnd calls the underlying RecurrenceEnd.
+func (x *RecurrenceRule) RecurrenceEnd() *RecurrenceEnd {
+	_r := x.inner.RecurrenceEnd()
+	if _r == nil {
+		return nil
+	}
+	return &RecurrenceEnd{inner: _r}
+}
+
+// SetRecurrenceEnd calls the underlying SetRecurrenceEnd.
+func (x *RecurrenceRule) SetRecurrenceEnd(recurrenceEnd *raw.EKRecurrenceEnd) {
+	x.inner.SetRecurrenceEnd(recurrenceEnd)
+}
+
+// Frequency calls the underlying Frequency.
+func (x *RecurrenceRule) Frequency() raw.EKRecurrenceFrequency {
+	return x.inner.Frequency()
+}
+
+// Interval calls the underlying Interval.
+func (x *RecurrenceRule) Interval() int {
+	return x.inner.Interval()
+}
+
+// FirstDayOfTheWeek calls the underlying FirstDayOfTheWeek.
+func (x *RecurrenceRule) FirstDayOfTheWeek() int {
+	return x.inner.FirstDayOfTheWeek()
+}
+
 // DaysOfTheWeek returns the collection as a Go slice.
 func (x *RecurrenceRule) DaysOfTheWeek() []*raw.EKRecurrenceDayOfWeek {
 	arr := x.inner.DaysOfTheWeek()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.EKRecurrenceDayOfWeek, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.EKRecurrenceDayOfWeek {
+		return raw.EKRecurrenceDayOfWeekFromID(purego.Retain(_id))
+	})
 }
 
 // DaysOfTheMonth returns the collection as a Go slice.
@@ -57,11 +94,9 @@ func (x *RecurrenceRule) DaysOfTheMonth() []*foundation.NSNumber {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
 }
 
 // DaysOfTheYear returns the collection as a Go slice.
@@ -70,11 +105,9 @@ func (x *RecurrenceRule) DaysOfTheYear() []*foundation.NSNumber {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
 }
 
 // WeeksOfTheYear returns the collection as a Go slice.
@@ -83,11 +116,9 @@ func (x *RecurrenceRule) WeeksOfTheYear() []*foundation.NSNumber {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
 }
 
 // MonthsOfTheYear returns the collection as a Go slice.
@@ -96,11 +127,9 @@ func (x *RecurrenceRule) MonthsOfTheYear() []*foundation.NSNumber {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
 }
 
 // SetPositions returns the collection as a Go slice.
@@ -109,12 +138,30 @@ func (x *RecurrenceRule) SetPositions() []*foundation.NSNumber {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
 }
 
 func (x *RecurrenceRule) asObject() *raw.EKObject { return &x.inner.EKObject }
+
+// RecurrenceRuleable is the interface implemented by [RecurrenceRule], for mocking and DI.
+type RecurrenceRuleable interface {
+	Unwrap() *raw.EKRecurrenceRule
+	WithRecurrenceEnd(recurrenceEnd *raw.EKRecurrenceEnd) *RecurrenceRule
+	CalendarIdentifier() string
+	RecurrenceEnd() *RecurrenceEnd
+	SetRecurrenceEnd(recurrenceEnd *raw.EKRecurrenceEnd)
+	Frequency() raw.EKRecurrenceFrequency
+	Interval() int
+	FirstDayOfTheWeek() int
+	DaysOfTheWeek() []*raw.EKRecurrenceDayOfWeek
+	DaysOfTheMonth() []*foundation.NSNumber
+	DaysOfTheYear() []*foundation.NSNumber
+	WeeksOfTheYear() []*foundation.NSNumber
+	MonthsOfTheYear() []*foundation.NSNumber
+	SetPositions() []*foundation.NSNumber
+}
+
+var _ RecurrenceRuleable = (*RecurrenceRule)(nil)
 

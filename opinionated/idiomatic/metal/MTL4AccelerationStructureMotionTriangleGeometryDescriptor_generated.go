@@ -71,5 +71,116 @@ func (x *MTL4AccelerationStructureMotionTriangleGeometryDescriptor) WithTransfor
 	return x
 }
 
+// VertexBuffers calls the underlying VertexBuffers.
+func (x *MTL4AccelerationStructureMotionTriangleGeometryDescriptor) VertexBuffers() raw.MTL4BufferRange {
+	return x.inner.VertexBuffers()
+}
+
+// SetVertexBuffers calls the underlying SetVertexBuffers.
+func (x *MTL4AccelerationStructureMotionTriangleGeometryDescriptor) SetVertexBuffers(vertexBuffers raw.MTL4BufferRange) {
+	x.inner.SetVertexBuffers(vertexBuffers)
+}
+
+// VertexFormat calls the underlying VertexFormat.
+func (x *MTL4AccelerationStructureMotionTriangleGeometryDescriptor) VertexFormat() raw.MTLAttributeFormat {
+	return x.inner.VertexFormat()
+}
+
+// SetVertexFormat calls the underlying SetVertexFormat.
+func (x *MTL4AccelerationStructureMotionTriangleGeometryDescriptor) SetVertexFormat(vertexFormat raw.MTLAttributeFormat) {
+	x.inner.SetVertexFormat(vertexFormat)
+}
+
+// VertexStride calls the underlying VertexStride.
+func (x *MTL4AccelerationStructureMotionTriangleGeometryDescriptor) VertexStride() uint {
+	return x.inner.VertexStride()
+}
+
+// SetVertexStride calls the underlying SetVertexStride.
+func (x *MTL4AccelerationStructureMotionTriangleGeometryDescriptor) SetVertexStride(vertexStride uint) {
+	x.inner.SetVertexStride(vertexStride)
+}
+
+// IndexBuffer calls the underlying IndexBuffer.
+func (x *MTL4AccelerationStructureMotionTriangleGeometryDescriptor) IndexBuffer() raw.MTL4BufferRange {
+	return x.inner.IndexBuffer()
+}
+
+// SetIndexBuffer calls the underlying SetIndexBuffer.
+func (x *MTL4AccelerationStructureMotionTriangleGeometryDescriptor) SetIndexBuffer(indexBuffer raw.MTL4BufferRange) {
+	x.inner.SetIndexBuffer(indexBuffer)
+}
+
+// IndexType calls the underlying IndexType.
+func (x *MTL4AccelerationStructureMotionTriangleGeometryDescriptor) IndexType() raw.MTLIndexType {
+	return x.inner.IndexType()
+}
+
+// SetIndexType calls the underlying SetIndexType.
+func (x *MTL4AccelerationStructureMotionTriangleGeometryDescriptor) SetIndexType(indexType raw.MTLIndexType) {
+	x.inner.SetIndexType(indexType)
+}
+
+// TriangleCount calls the underlying TriangleCount.
+func (x *MTL4AccelerationStructureMotionTriangleGeometryDescriptor) TriangleCount() uint {
+	return x.inner.TriangleCount()
+}
+
+// SetTriangleCount calls the underlying SetTriangleCount.
+func (x *MTL4AccelerationStructureMotionTriangleGeometryDescriptor) SetTriangleCount(triangleCount uint) {
+	x.inner.SetTriangleCount(triangleCount)
+}
+
+// TransformationMatrixBuffer calls the underlying TransformationMatrixBuffer.
+func (x *MTL4AccelerationStructureMotionTriangleGeometryDescriptor) TransformationMatrixBuffer() raw.MTL4BufferRange {
+	return x.inner.TransformationMatrixBuffer()
+}
+
+// SetTransformationMatrixBuffer calls the underlying SetTransformationMatrixBuffer.
+func (x *MTL4AccelerationStructureMotionTriangleGeometryDescriptor) SetTransformationMatrixBuffer(transformationMatrixBuffer raw.MTL4BufferRange) {
+	x.inner.SetTransformationMatrixBuffer(transformationMatrixBuffer)
+}
+
+// TransformationMatrixLayout calls the underlying TransformationMatrixLayout.
+func (x *MTL4AccelerationStructureMotionTriangleGeometryDescriptor) TransformationMatrixLayout() raw.MTLMatrixLayout {
+	return x.inner.TransformationMatrixLayout()
+}
+
+// SetTransformationMatrixLayout calls the underlying SetTransformationMatrixLayout.
+func (x *MTL4AccelerationStructureMotionTriangleGeometryDescriptor) SetTransformationMatrixLayout(transformationMatrixLayout raw.MTLMatrixLayout) {
+	x.inner.SetTransformationMatrixLayout(transformationMatrixLayout)
+}
+
 func (x *MTL4AccelerationStructureMotionTriangleGeometryDescriptor) asMTL4AccelerationStructureGeometryDescriptor() *raw.MTL4AccelerationStructureGeometryDescriptor { return &x.inner.MTL4AccelerationStructureGeometryDescriptor }
+
+// MTL4AccelerationStructureMotionTriangleGeometryDescriptorable is the interface implemented by [MTL4AccelerationStructureMotionTriangleGeometryDescriptor], for mocking and DI.
+type MTL4AccelerationStructureMotionTriangleGeometryDescriptorable interface {
+	Unwrap() *raw.MTL4AccelerationStructureMotionTriangleGeometryDescriptor
+	WithVertexBuffers(vertexBuffers raw.MTL4BufferRange) *MTL4AccelerationStructureMotionTriangleGeometryDescriptor
+	WithVertexFormat(vertexFormat raw.MTLAttributeFormat) *MTL4AccelerationStructureMotionTriangleGeometryDescriptor
+	WithVertexStride(vertexStride uint) *MTL4AccelerationStructureMotionTriangleGeometryDescriptor
+	WithIndexBuffer(indexBuffer raw.MTL4BufferRange) *MTL4AccelerationStructureMotionTriangleGeometryDescriptor
+	WithIndexType(indexType raw.MTLIndexType) *MTL4AccelerationStructureMotionTriangleGeometryDescriptor
+	WithTriangleCount(triangleCount uint) *MTL4AccelerationStructureMotionTriangleGeometryDescriptor
+	WithTransformationMatrixBuffer(transformationMatrixBuffer raw.MTL4BufferRange) *MTL4AccelerationStructureMotionTriangleGeometryDescriptor
+	WithTransformationMatrixLayout(transformationMatrixLayout raw.MTLMatrixLayout) *MTL4AccelerationStructureMotionTriangleGeometryDescriptor
+	VertexBuffers() raw.MTL4BufferRange
+	SetVertexBuffers(vertexBuffers raw.MTL4BufferRange)
+	VertexFormat() raw.MTLAttributeFormat
+	SetVertexFormat(vertexFormat raw.MTLAttributeFormat)
+	VertexStride() uint
+	SetVertexStride(vertexStride uint)
+	IndexBuffer() raw.MTL4BufferRange
+	SetIndexBuffer(indexBuffer raw.MTL4BufferRange)
+	IndexType() raw.MTLIndexType
+	SetIndexType(indexType raw.MTLIndexType)
+	TriangleCount() uint
+	SetTriangleCount(triangleCount uint)
+	TransformationMatrixBuffer() raw.MTL4BufferRange
+	SetTransformationMatrixBuffer(transformationMatrixBuffer raw.MTL4BufferRange)
+	TransformationMatrixLayout() raw.MTLMatrixLayout
+	SetTransformationMatrixLayout(transformationMatrixLayout raw.MTLMatrixLayout)
+}
+
+var _ MTL4AccelerationStructureMotionTriangleGeometryDescriptorable = (*MTL4AccelerationStructureMotionTriangleGeometryDescriptor)(nil)
 

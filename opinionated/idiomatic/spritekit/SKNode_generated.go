@@ -9,6 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -194,6 +195,89 @@ func (x *Node) WithAccessibilityEnabled(accessibilityEnabled bool) *Node {
 	return x
 }
 
+// CalculateAccumulatedFrame calls the underlying CalculateAccumulatedFrame.
+func (x *Node) CalculateAccumulatedFrame() corefoundation.CGRect {
+	return x.inner.CalculateAccumulatedFrame()
+}
+
+// ValueForAttributeNamed calls the underlying ValueForAttributeNamed.
+func (x *Node) ValueForAttributeNamed(key string) *AttributeValue {
+	_r := x.inner.ValueForAttributeNamed(foundation.NSStringStringWithUTF8String(key))
+	if _r == nil {
+		return nil
+	}
+	return &AttributeValue{inner: _r}
+}
+
+// SetValueForAttributeNamed calls the underlying SetValueForAttributeNamed.
+func (x *Node) SetValueForAttributeNamed(value *raw.SKAttributeValue, key string) {
+	x.inner.SetValueForAttributeNamed(value, foundation.NSStringStringWithUTF8String(key))
+}
+
+// SetScale calls the underlying SetScale.
+func (x *Node) SetScale(scale float64) {
+	x.inner.SetScale(scale)
+}
+
+// AddChild calls the underlying AddChild.
+func (x *Node) AddChild(node *raw.SKNode) {
+	x.inner.AddChild(node)
+}
+
+// InsertChildAtIndex calls the underlying InsertChildAtIndex.
+func (x *Node) InsertChildAtIndex(node *raw.SKNode, index int) {
+	x.inner.InsertChildAtIndex(node, index)
+}
+
+// RemoveChildrenInArray calls the underlying RemoveChildrenInArray.
+func (x *Node) RemoveChildrenInArray(nodes *foundation.NSArray[*raw.SKNode]) {
+	x.inner.RemoveChildrenInArray(nodes)
+}
+
+// RemoveAllChildren calls the underlying RemoveAllChildren.
+func (x *Node) RemoveAllChildren() {
+	x.inner.RemoveAllChildren()
+}
+
+// RemoveFromParent calls the underlying RemoveFromParent.
+func (x *Node) RemoveFromParent() {
+	x.inner.RemoveFromParent()
+}
+
+// MoveToParent calls the underlying MoveToParent.
+func (x *Node) MoveToParent(parent *raw.SKNode) {
+	x.inner.MoveToParent(parent)
+}
+
+// ChildNodeWithName calls the underlying ChildNodeWithName.
+func (x *Node) ChildNodeWithName(name string) *Node {
+	_r := x.inner.ChildNodeWithName(foundation.NSStringStringWithUTF8String(name))
+	if _r == nil {
+		return nil
+	}
+	return &Node{inner: _r}
+}
+
+// EnumerateChildNodesWithNameUsing calls the underlying EnumerateChildNodesWithNameUsing.
+func (x *Node) EnumerateChildNodesWithNameUsing(name string, block func(*raw.SKNode, *bool)) {
+	x.inner.EnumerateChildNodesWithNameUsing(foundation.NSStringStringWithUTF8String(name), block)
+}
+
+// ObjectForKeyedSubscript calls the underlying ObjectForKeyedSubscript.
+func (x *Node) ObjectForKeyedSubscript(name string) *foundation.NSArray[*raw.SKNode] {
+	return x.inner.ObjectForKeyedSubscript(foundation.NSStringStringWithUTF8String(name))
+}
+
+// InParentHierarchy calls the underlying InParentHierarchy.
+func (x *Node) InParentHierarchy(parent *raw.SKNode) bool {
+	return x.inner.InParentHierarchy(parent)
+}
+
+// RunAction calls the underlying RunAction.
+func (x *Node) RunAction(action *raw.SKAction) {
+	x.inner.RunAction(action)
+}
+
 // RunActionCompletion blocks until the operation completes or ctx is cancelled.
 func (x *Node) RunActionCompletion(ctx context.Context, action *raw.SKAction) error {
 	_ch := make(chan error, 1)
@@ -208,17 +292,258 @@ func (x *Node) RunActionCompletion(ctx context.Context, action *raw.SKAction) er
 	}
 }
 
+// RunActionWithKey calls the underlying RunActionWithKey.
+func (x *Node) RunActionWithKey(action *raw.SKAction, key string) {
+	x.inner.RunActionWithKey(action, foundation.NSStringStringWithUTF8String(key))
+}
+
+// HasActions calls the underlying HasActions.
+func (x *Node) HasActions() bool {
+	return x.inner.HasActions()
+}
+
+// ActionForKey calls the underlying ActionForKey.
+func (x *Node) ActionForKey(key string) *Action {
+	_r := x.inner.ActionForKey(foundation.NSStringStringWithUTF8String(key))
+	if _r == nil {
+		return nil
+	}
+	return &Action{inner: _r}
+}
+
+// RemoveActionForKey calls the underlying RemoveActionForKey.
+func (x *Node) RemoveActionForKey(key string) {
+	x.inner.RemoveActionForKey(foundation.NSStringStringWithUTF8String(key))
+}
+
+// RemoveAllActions calls the underlying RemoveAllActions.
+func (x *Node) RemoveAllActions() {
+	x.inner.RemoveAllActions()
+}
+
+// ContainsPoint calls the underlying ContainsPoint.
+func (x *Node) ContainsPoint(p corefoundation.CGPoint) bool {
+	return x.inner.ContainsPoint(p)
+}
+
+// NodeAtPoint calls the underlying NodeAtPoint.
+func (x *Node) NodeAtPoint(p corefoundation.CGPoint) *Node {
+	_r := x.inner.NodeAtPoint(p)
+	if _r == nil {
+		return nil
+	}
+	return &Node{inner: _r}
+}
+
+// NodesAtPoint calls the underlying NodesAtPoint.
+func (x *Node) NodesAtPoint(p corefoundation.CGPoint) *foundation.NSArray[*raw.SKNode] {
+	return x.inner.NodesAtPoint(p)
+}
+
+// ConvertPointFromNode calls the underlying ConvertPointFromNode.
+func (x *Node) ConvertPointFromNode(point corefoundation.CGPoint, node *raw.SKNode) corefoundation.CGPoint {
+	return x.inner.ConvertPointFromNode(point, node)
+}
+
+// ConvertPointToNode calls the underlying ConvertPointToNode.
+func (x *Node) ConvertPointToNode(point corefoundation.CGPoint, node *raw.SKNode) corefoundation.CGPoint {
+	return x.inner.ConvertPointToNode(point, node)
+}
+
+// IntersectsNode calls the underlying IntersectsNode.
+func (x *Node) IntersectsNode(node *raw.SKNode) bool {
+	return x.inner.IntersectsNode(node)
+}
+
+// IsEqualToNode calls the underlying IsEqualToNode.
+func (x *Node) IsEqualToNode(node *raw.SKNode) bool {
+	return x.inner.IsEqualToNode(node)
+}
+
+// Frame calls the underlying Frame.
+func (x *Node) Frame() corefoundation.CGRect {
+	return x.inner.Frame()
+}
+
+// Position calls the underlying Position.
+func (x *Node) Position() corefoundation.CGPoint {
+	return x.inner.Position()
+}
+
+// SetPosition calls the underlying SetPosition.
+func (x *Node) SetPosition(position corefoundation.CGPoint) {
+	x.inner.SetPosition(position)
+}
+
+// ZPosition calls the underlying ZPosition.
+func (x *Node) ZPosition() float64 {
+	return x.inner.ZPosition()
+}
+
+// SetZPosition calls the underlying SetZPosition.
+func (x *Node) SetZPosition(zPosition float64) {
+	x.inner.SetZPosition(zPosition)
+}
+
+// ZRotation calls the underlying ZRotation.
+func (x *Node) ZRotation() float64 {
+	return x.inner.ZRotation()
+}
+
+// SetZRotation calls the underlying SetZRotation.
+func (x *Node) SetZRotation(zRotation float64) {
+	x.inner.SetZRotation(zRotation)
+}
+
+// XScale calls the underlying XScale.
+func (x *Node) XScale() float64 {
+	return x.inner.XScale()
+}
+
+// SetXScale calls the underlying SetXScale.
+func (x *Node) SetXScale(xScale float64) {
+	x.inner.SetXScale(xScale)
+}
+
+// YScale calls the underlying YScale.
+func (x *Node) YScale() float64 {
+	return x.inner.YScale()
+}
+
+// SetYScale calls the underlying SetYScale.
+func (x *Node) SetYScale(yScale float64) {
+	x.inner.SetYScale(yScale)
+}
+
+// Speed calls the underlying Speed.
+func (x *Node) Speed() float64 {
+	return x.inner.Speed()
+}
+
+// SetSpeed calls the underlying SetSpeed.
+func (x *Node) SetSpeed(speed float64) {
+	x.inner.SetSpeed(speed)
+}
+
+// Alpha calls the underlying Alpha.
+func (x *Node) Alpha() float64 {
+	return x.inner.Alpha()
+}
+
+// SetAlpha calls the underlying SetAlpha.
+func (x *Node) SetAlpha(alpha float64) {
+	x.inner.SetAlpha(alpha)
+}
+
+// IsPaused calls the underlying IsPaused.
+func (x *Node) IsPaused() bool {
+	return x.inner.IsPaused()
+}
+
+// SetPaused calls the underlying SetPaused.
+func (x *Node) SetPaused(paused bool) {
+	x.inner.SetPaused(paused)
+}
+
+// IsHidden calls the underlying IsHidden.
+func (x *Node) IsHidden() bool {
+	return x.inner.IsHidden()
+}
+
+// SetHidden calls the underlying SetHidden.
+func (x *Node) SetHidden(hidden bool) {
+	x.inner.SetHidden(hidden)
+}
+
+// IsUserInteractionEnabled calls the underlying IsUserInteractionEnabled.
+func (x *Node) IsUserInteractionEnabled() bool {
+	return x.inner.IsUserInteractionEnabled()
+}
+
+// SetUserInteractionEnabled calls the underlying SetUserInteractionEnabled.
+func (x *Node) SetUserInteractionEnabled(userInteractionEnabled bool) {
+	x.inner.SetUserInteractionEnabled(userInteractionEnabled)
+}
+
+// Parent calls the underlying Parent.
+func (x *Node) Parent() *Node {
+	_r := x.inner.Parent()
+	if _r == nil {
+		return nil
+	}
+	return &Node{inner: _r}
+}
+
 // Children returns the collection as a Go slice.
 func (x *Node) Children() []*raw.SKNode {
 	arr := x.inner.Children()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.SKNode, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SKNode {
+		return raw.SKNodeFromID(purego.Retain(_id))
+	})
+}
+
+// Name calls the underlying Name.
+func (x *Node) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
 	}
-	return out
+	return purego.GoString(_r.Ptr())
+}
+
+// SetName calls the underlying SetName.
+func (x *Node) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
+// Scene calls the underlying Scene.
+func (x *Node) Scene() *Scene {
+	_r := x.inner.Scene()
+	if _r == nil {
+		return nil
+	}
+	return &Scene{inner: _r}
+}
+
+// PhysicsBody calls the underlying PhysicsBody.
+func (x *Node) PhysicsBody() *PhysicsBody {
+	_r := x.inner.PhysicsBody()
+	if _r == nil {
+		return nil
+	}
+	return &PhysicsBody{inner: _r}
+}
+
+// SetPhysicsBody calls the underlying SetPhysicsBody.
+func (x *Node) SetPhysicsBody(physicsBody *raw.SKPhysicsBody) {
+	x.inner.SetPhysicsBody(physicsBody)
+}
+
+// UserData calls the underlying UserData.
+func (x *Node) UserData() *foundation.NSMutableDictionary[objc.ID, objc.ID] {
+	return x.inner.UserData()
+}
+
+// SetUserData calls the underlying SetUserData.
+func (x *Node) SetUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) {
+	x.inner.SetUserData(userData)
+}
+
+// ReachConstraints calls the underlying ReachConstraints.
+func (x *Node) ReachConstraints() *ReachConstraints {
+	_r := x.inner.ReachConstraints()
+	if _r == nil {
+		return nil
+	}
+	return &ReachConstraints{inner: _r}
+}
+
+// SetReachConstraints calls the underlying SetReachConstraints.
+func (x *Node) SetReachConstraints(reachConstraints *raw.SKReachConstraints) {
+	x.inner.SetReachConstraints(reachConstraints)
 }
 
 // Constraints returns the collection as a Go slice.
@@ -227,12 +552,267 @@ func (x *Node) Constraints() []*raw.SKConstraint {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.SKConstraint, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SKConstraint {
+		return raw.SKConstraintFromID(purego.Retain(_id))
+	})
+}
+
+// SetConstraints calls the underlying SetConstraints.
+func (x *Node) SetConstraints(constraints *foundation.NSArray[*raw.SKConstraint]) {
+	x.inner.SetConstraints(constraints)
+}
+
+// AttributeValues calls the underlying AttributeValues.
+func (x *Node) AttributeValues() *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue] {
+	return x.inner.AttributeValues()
+}
+
+// SetAttributeValues calls the underlying SetAttributeValues.
+func (x *Node) SetAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) {
+	x.inner.SetAttributeValues(attributeValues)
+}
+
+// AccessibilityHitTest calls the underlying AccessibilityHitTest.
+func (x *Node) AccessibilityHitTest(point corefoundation.CGPoint) objc.ID {
+	return x.inner.AccessibilityHitTest(point)
+}
+
+// IsAccessibilityElement calls the underlying IsAccessibilityElement.
+func (x *Node) IsAccessibilityElement() bool {
+	return x.inner.IsAccessibilityElement()
+}
+
+// SetAccessibilityElement calls the underlying SetAccessibilityElement.
+func (x *Node) SetAccessibilityElement(accessibilityElement bool) {
+	x.inner.SetAccessibilityElement(accessibilityElement)
+}
+
+// AccessibilityRole calls the underlying AccessibilityRole.
+func (x *Node) AccessibilityRole() string {
+	_r := x.inner.AccessibilityRole()
+	if _r == nil {
+		return ""
 	}
-	return out
+	return purego.GoString(_r.Ptr())
+}
+
+// SetAccessibilityRole calls the underlying SetAccessibilityRole.
+func (x *Node) SetAccessibilityRole(accessibilityRole string) {
+	x.inner.SetAccessibilityRole(foundation.NSStringStringWithUTF8String(accessibilityRole))
+}
+
+// AccessibilityRoleDescription calls the underlying AccessibilityRoleDescription.
+func (x *Node) AccessibilityRoleDescription() string {
+	_r := x.inner.AccessibilityRoleDescription()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetAccessibilityRoleDescription calls the underlying SetAccessibilityRoleDescription.
+func (x *Node) SetAccessibilityRoleDescription(accessibilityRoleDescription string) {
+	x.inner.SetAccessibilityRoleDescription(foundation.NSStringStringWithUTF8String(accessibilityRoleDescription))
+}
+
+// AccessibilitySubrole calls the underlying AccessibilitySubrole.
+func (x *Node) AccessibilitySubrole() string {
+	_r := x.inner.AccessibilitySubrole()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetAccessibilitySubrole calls the underlying SetAccessibilitySubrole.
+func (x *Node) SetAccessibilitySubrole(accessibilitySubrole string) {
+	x.inner.SetAccessibilitySubrole(foundation.NSStringStringWithUTF8String(accessibilitySubrole))
+}
+
+// AccessibilityFrame calls the underlying AccessibilityFrame.
+func (x *Node) AccessibilityFrame() corefoundation.CGRect {
+	return x.inner.AccessibilityFrame()
+}
+
+// SetAccessibilityFrame calls the underlying SetAccessibilityFrame.
+func (x *Node) SetAccessibilityFrame(accessibilityFrame corefoundation.CGRect) {
+	x.inner.SetAccessibilityFrame(accessibilityFrame)
+}
+
+// AccessibilityParent calls the underlying AccessibilityParent.
+func (x *Node) AccessibilityParent() objc.ID {
+	return x.inner.AccessibilityParent()
+}
+
+// SetAccessibilityParent calls the underlying SetAccessibilityParent.
+func (x *Node) SetAccessibilityParent(accessibilityParent objc.ID) {
+	x.inner.SetAccessibilityParent(accessibilityParent)
+}
+
+// AccessibilityChildren calls the underlying AccessibilityChildren.
+func (x *Node) AccessibilityChildren() *foundation.NSArray[objc.ID] {
+	return x.inner.AccessibilityChildren()
+}
+
+// SetAccessibilityChildren calls the underlying SetAccessibilityChildren.
+func (x *Node) SetAccessibilityChildren(accessibilityChildren *foundation.NSArray[objc.ID]) {
+	x.inner.SetAccessibilityChildren(accessibilityChildren)
+}
+
+// AccessibilityHelp calls the underlying AccessibilityHelp.
+func (x *Node) AccessibilityHelp() string {
+	_r := x.inner.AccessibilityHelp()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetAccessibilityHelp calls the underlying SetAccessibilityHelp.
+func (x *Node) SetAccessibilityHelp(accessibilityHelp string) {
+	x.inner.SetAccessibilityHelp(foundation.NSStringStringWithUTF8String(accessibilityHelp))
+}
+
+// AccessibilityLabel calls the underlying AccessibilityLabel.
+func (x *Node) AccessibilityLabel() string {
+	_r := x.inner.AccessibilityLabel()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetAccessibilityLabel calls the underlying SetAccessibilityLabel.
+func (x *Node) SetAccessibilityLabel(accessibilityLabel string) {
+	x.inner.SetAccessibilityLabel(foundation.NSStringStringWithUTF8String(accessibilityLabel))
+}
+
+// IsAccessibilityEnabled calls the underlying IsAccessibilityEnabled.
+func (x *Node) IsAccessibilityEnabled() bool {
+	return x.inner.IsAccessibilityEnabled()
+}
+
+// SetAccessibilityEnabled calls the underlying SetAccessibilityEnabled.
+func (x *Node) SetAccessibilityEnabled(accessibilityEnabled bool) {
+	x.inner.SetAccessibilityEnabled(accessibilityEnabled)
 }
 
 func (x *Node) asNode() *raw.SKNode { return x.inner }
+
+// Nodeable is the interface implemented by [Node], for mocking and DI.
+type Nodeable interface {
+	Unwrap() *raw.SKNode
+	WithPosition(position corefoundation.CGPoint) *Node
+	WithZPosition(zPosition float64) *Node
+	WithZRotation(zRotation float64) *Node
+	WithXScale(xScale float64) *Node
+	WithYScale(yScale float64) *Node
+	WithSpeed(speed float64) *Node
+	WithAlpha(alpha float64) *Node
+	WithPaused(paused bool) *Node
+	WithHidden(hidden bool) *Node
+	WithUserInteractionEnabled(userInteractionEnabled bool) *Node
+	WithName(name string) *Node
+	WithPhysicsBody(physicsBody *raw.SKPhysicsBody) *Node
+	WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *Node
+	WithReachConstraints(reachConstraints *raw.SKReachConstraints) *Node
+	WithConstraints(items ...*raw.SKConstraint) *Node
+	WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *Node
+	WithAccessibilityElement(accessibilityElement bool) *Node
+	WithAccessibilityRole(accessibilityRole string) *Node
+	WithAccessibilityRoleDescription(accessibilityRoleDescription string) *Node
+	WithAccessibilitySubrole(accessibilitySubrole string) *Node
+	WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *Node
+	WithAccessibilityParent(accessibilityParent objc.ID) *Node
+	WithAccessibilityHelp(accessibilityHelp string) *Node
+	WithAccessibilityLabel(accessibilityLabel string) *Node
+	WithAccessibilityEnabled(accessibilityEnabled bool) *Node
+	CalculateAccumulatedFrame() corefoundation.CGRect
+	ValueForAttributeNamed(key string) *AttributeValue
+	SetValueForAttributeNamed(value *raw.SKAttributeValue, key string)
+	SetScale(scale float64)
+	AddChild(node *raw.SKNode)
+	InsertChildAtIndex(node *raw.SKNode, index int)
+	RemoveChildrenInArray(nodes *foundation.NSArray[*raw.SKNode])
+	RemoveAllChildren()
+	RemoveFromParent()
+	MoveToParent(parent *raw.SKNode)
+	ChildNodeWithName(name string) *Node
+	EnumerateChildNodesWithNameUsing(name string, block func(*raw.SKNode, *bool))
+	ObjectForKeyedSubscript(name string) *foundation.NSArray[*raw.SKNode]
+	InParentHierarchy(parent *raw.SKNode) bool
+	RunAction(action *raw.SKAction)
+	RunActionCompletion(ctx context.Context, action *raw.SKAction) error
+	RunActionWithKey(action *raw.SKAction, key string)
+	HasActions() bool
+	ActionForKey(key string) *Action
+	RemoveActionForKey(key string)
+	RemoveAllActions()
+	ContainsPoint(p corefoundation.CGPoint) bool
+	NodeAtPoint(p corefoundation.CGPoint) *Node
+	NodesAtPoint(p corefoundation.CGPoint) *foundation.NSArray[*raw.SKNode]
+	ConvertPointFromNode(point corefoundation.CGPoint, node *raw.SKNode) corefoundation.CGPoint
+	ConvertPointToNode(point corefoundation.CGPoint, node *raw.SKNode) corefoundation.CGPoint
+	IntersectsNode(node *raw.SKNode) bool
+	IsEqualToNode(node *raw.SKNode) bool
+	Frame() corefoundation.CGRect
+	Position() corefoundation.CGPoint
+	SetPosition(position corefoundation.CGPoint)
+	ZPosition() float64
+	SetZPosition(zPosition float64)
+	ZRotation() float64
+	SetZRotation(zRotation float64)
+	XScale() float64
+	SetXScale(xScale float64)
+	YScale() float64
+	SetYScale(yScale float64)
+	Speed() float64
+	SetSpeed(speed float64)
+	Alpha() float64
+	SetAlpha(alpha float64)
+	IsPaused() bool
+	SetPaused(paused bool)
+	IsHidden() bool
+	SetHidden(hidden bool)
+	IsUserInteractionEnabled() bool
+	SetUserInteractionEnabled(userInteractionEnabled bool)
+	Parent() *Node
+	Children() []*raw.SKNode
+	Name() string
+	SetName(name string)
+	Scene() *Scene
+	PhysicsBody() *PhysicsBody
+	SetPhysicsBody(physicsBody *raw.SKPhysicsBody)
+	UserData() *foundation.NSMutableDictionary[objc.ID, objc.ID]
+	SetUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID])
+	ReachConstraints() *ReachConstraints
+	SetReachConstraints(reachConstraints *raw.SKReachConstraints)
+	Constraints() []*raw.SKConstraint
+	SetConstraints(constraints *foundation.NSArray[*raw.SKConstraint])
+	AttributeValues() *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]
+	SetAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue])
+	AccessibilityHitTest(point corefoundation.CGPoint) objc.ID
+	IsAccessibilityElement() bool
+	SetAccessibilityElement(accessibilityElement bool)
+	AccessibilityRole() string
+	SetAccessibilityRole(accessibilityRole string)
+	AccessibilityRoleDescription() string
+	SetAccessibilityRoleDescription(accessibilityRoleDescription string)
+	AccessibilitySubrole() string
+	SetAccessibilitySubrole(accessibilitySubrole string)
+	AccessibilityFrame() corefoundation.CGRect
+	SetAccessibilityFrame(accessibilityFrame corefoundation.CGRect)
+	AccessibilityParent() objc.ID
+	SetAccessibilityParent(accessibilityParent objc.ID)
+	AccessibilityChildren() *foundation.NSArray[objc.ID]
+	SetAccessibilityChildren(accessibilityChildren *foundation.NSArray[objc.ID])
+	AccessibilityHelp() string
+	SetAccessibilityHelp(accessibilityHelp string)
+	AccessibilityLabel() string
+	SetAccessibilityLabel(accessibilityLabel string)
+	IsAccessibilityEnabled() bool
+	SetAccessibilityEnabled(accessibilityEnabled bool)
+}
+
+var _ Nodeable = (*Node)(nil)
 

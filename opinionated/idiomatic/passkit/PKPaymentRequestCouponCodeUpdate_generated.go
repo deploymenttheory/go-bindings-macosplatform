@@ -25,5 +25,24 @@ func NewPaymentRequestCouponCodeUpdateWithErrorsPaymentSummaryItemsShippingMetho
 	return &PaymentRequestCouponCodeUpdate{inner: raw.PKPaymentRequestCouponCodeUpdateFromID(_id)}
 }
 
+// Errors calls the underlying Errors.
+func (x *PaymentRequestCouponCodeUpdate) Errors() *foundation.NSArray[objc.ID] {
+	return x.inner.Errors()
+}
+
+// SetErrors calls the underlying SetErrors.
+func (x *PaymentRequestCouponCodeUpdate) SetErrors() error {
+	return x.inner.SetErrors()
+}
+
 func (x *PaymentRequestCouponCodeUpdate) asPaymentRequestUpdate() *raw.PKPaymentRequestUpdate { return &x.inner.PKPaymentRequestUpdate }
+
+// PaymentRequestCouponCodeUpdateable is the interface implemented by [PaymentRequestCouponCodeUpdate], for mocking and DI.
+type PaymentRequestCouponCodeUpdateable interface {
+	Unwrap() *raw.PKPaymentRequestCouponCodeUpdate
+	Errors() *foundation.NSArray[objc.ID]
+	SetErrors() error
+}
+
+var _ PaymentRequestCouponCodeUpdateable = (*PaymentRequestCouponCodeUpdate)(nil)
 

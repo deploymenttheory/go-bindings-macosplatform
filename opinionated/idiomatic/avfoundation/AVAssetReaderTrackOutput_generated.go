@@ -7,6 +7,7 @@ package avfoundation
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -31,5 +32,45 @@ func (x *AssetReaderTrackOutput) WithAudioTimePitchAlgorithm(audioTimePitchAlgor
 	return x
 }
 
+// Track calls the underlying Track.
+func (x *AssetReaderTrackOutput) Track() *AssetTrack {
+	_r := x.inner.Track()
+	if _r == nil {
+		return nil
+	}
+	return &AssetTrack{inner: _r}
+}
+
+// OutputSettings calls the underlying OutputSettings.
+func (x *AssetReaderTrackOutput) OutputSettings() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.OutputSettings()
+}
+
+// AudioTimePitchAlgorithm calls the underlying AudioTimePitchAlgorithm.
+func (x *AssetReaderTrackOutput) AudioTimePitchAlgorithm() string {
+	_r := x.inner.AudioTimePitchAlgorithm()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetAudioTimePitchAlgorithm calls the underlying SetAudioTimePitchAlgorithm.
+func (x *AssetReaderTrackOutput) SetAudioTimePitchAlgorithm(audioTimePitchAlgorithm *foundation.NSString) {
+	x.inner.SetAudioTimePitchAlgorithm(audioTimePitchAlgorithm)
+}
+
 func (x *AssetReaderTrackOutput) asAssetReaderOutput() *raw.AVAssetReaderOutput { return &x.inner.AVAssetReaderOutput }
+
+// AssetReaderTrackOutputable is the interface implemented by [AssetReaderTrackOutput], for mocking and DI.
+type AssetReaderTrackOutputable interface {
+	Unwrap() *raw.AVAssetReaderTrackOutput
+	WithAudioTimePitchAlgorithm(audioTimePitchAlgorithm *foundation.NSString) *AssetReaderTrackOutput
+	Track() *AssetTrack
+	OutputSettings() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	AudioTimePitchAlgorithm() string
+	SetAudioTimePitchAlgorithm(audioTimePitchAlgorithm *foundation.NSString)
+}
+
+var _ AssetReaderTrackOutputable = (*AssetReaderTrackOutput)(nil)
 

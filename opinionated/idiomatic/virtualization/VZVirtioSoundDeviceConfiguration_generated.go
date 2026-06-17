@@ -7,6 +7,7 @@ package virtualization
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -47,12 +48,25 @@ func (x *VirtioSoundDeviceConfiguration) Streams() []*raw.VZVirtioSoundDeviceStr
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.VZVirtioSoundDeviceStreamConfiguration, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.VZVirtioSoundDeviceStreamConfiguration {
+		return raw.VZVirtioSoundDeviceStreamConfigurationFromID(purego.Retain(_id))
+	})
+}
+
+// SetStreams calls the underlying SetStreams.
+func (x *VirtioSoundDeviceConfiguration) SetStreams(streams *foundation.NSArray[*raw.VZVirtioSoundDeviceStreamConfiguration]) {
+	x.inner.SetStreams(streams)
 }
 
 func (x *VirtioSoundDeviceConfiguration) asAudioDeviceConfiguration() *raw.VZAudioDeviceConfiguration { return &x.inner.VZAudioDeviceConfiguration }
+
+// VirtioSoundDeviceConfigurationable is the interface implemented by [VirtioSoundDeviceConfiguration], for mocking and DI.
+type VirtioSoundDeviceConfigurationable interface {
+	Unwrap() *raw.VZVirtioSoundDeviceConfiguration
+	WithStreams(items ...VirtioSoundDeviceStreamConfigurationProvider) *VirtioSoundDeviceConfiguration
+	Streams() []*raw.VZVirtioSoundDeviceStreamConfiguration
+	SetStreams(streams *foundation.NSArray[*raw.VZVirtioSoundDeviceStreamConfiguration])
+}
+
+var _ VirtioSoundDeviceConfigurationable = (*VirtioSoundDeviceConfiguration)(nil)
 

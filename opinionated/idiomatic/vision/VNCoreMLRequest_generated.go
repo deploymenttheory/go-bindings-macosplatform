@@ -38,7 +38,37 @@ func (x *CoreMLRequest) WithImageCropAndScaleOption(imageCropAndScaleOption raw.
 	return x
 }
 
+// Model calls the underlying Model.
+func (x *CoreMLRequest) Model() *CoreMLModel {
+	_r := x.inner.Model()
+	if _r == nil {
+		return nil
+	}
+	return &CoreMLModel{inner: _r}
+}
+
+// ImageCropAndScaleOption calls the underlying ImageCropAndScaleOption.
+func (x *CoreMLRequest) ImageCropAndScaleOption() raw.VNImageCropAndScaleOption {
+	return x.inner.ImageCropAndScaleOption()
+}
+
+// SetImageCropAndScaleOption calls the underlying SetImageCropAndScaleOption.
+func (x *CoreMLRequest) SetImageCropAndScaleOption(imageCropAndScaleOption raw.VNImageCropAndScaleOption) {
+	x.inner.SetImageCropAndScaleOption(imageCropAndScaleOption)
+}
+
 func (x *CoreMLRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNImageBasedRequest }
 
 func (x *CoreMLRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageBasedRequest.VNRequest }
+
+// CoreMLRequestable is the interface implemented by [CoreMLRequest], for mocking and DI.
+type CoreMLRequestable interface {
+	Unwrap() *raw.VNCoreMLRequest
+	WithImageCropAndScaleOption(imageCropAndScaleOption raw.VNImageCropAndScaleOption) *CoreMLRequest
+	Model() *CoreMLModel
+	ImageCropAndScaleOption() raw.VNImageCropAndScaleOption
+	SetImageCropAndScaleOption(imageCropAndScaleOption raw.VNImageCropAndScaleOption)
+}
+
+var _ CoreMLRequestable = (*CoreMLRequest)(nil)
 

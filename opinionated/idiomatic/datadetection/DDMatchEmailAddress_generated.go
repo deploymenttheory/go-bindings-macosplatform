@@ -6,6 +6,7 @@ package datadetection
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/datadetection"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +24,32 @@ func NewMatchEmailAddress() *MatchEmailAddress {
 	return &MatchEmailAddress{inner: raw.DDMatchEmailAddressFromID(_id)}
 }
 
+// EmailAddress calls the underlying EmailAddress.
+func (x *MatchEmailAddress) EmailAddress() string {
+	_r := x.inner.EmailAddress()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Label calls the underlying Label.
+func (x *MatchEmailAddress) Label() string {
+	_r := x.inner.Label()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 func (x *MatchEmailAddress) asMatch() *raw.DDMatch { return &x.inner.DDMatch }
+
+// MatchEmailAddressable is the interface implemented by [MatchEmailAddress], for mocking and DI.
+type MatchEmailAddressable interface {
+	Unwrap() *raw.DDMatchEmailAddress
+	EmailAddress() string
+	Label() string
+}
+
+var _ MatchEmailAddressable = (*MatchEmailAddress)(nil)
 

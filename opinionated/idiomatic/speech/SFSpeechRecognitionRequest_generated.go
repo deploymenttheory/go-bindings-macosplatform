@@ -7,6 +7,7 @@ package speech
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/speech"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -77,18 +78,117 @@ func (x *SpeechRecognitionRequest) WithCustomizedLanguageModel(customizedLanguag
 	return x
 }
 
+// TaskHint calls the underlying TaskHint.
+func (x *SpeechRecognitionRequest) TaskHint() raw.SFSpeechRecognitionTaskHint {
+	return x.inner.TaskHint()
+}
+
+// SetTaskHint calls the underlying SetTaskHint.
+func (x *SpeechRecognitionRequest) SetTaskHint(taskHint raw.SFSpeechRecognitionTaskHint) {
+	x.inner.SetTaskHint(taskHint)
+}
+
+// ShouldReportPartialResults calls the underlying ShouldReportPartialResults.
+func (x *SpeechRecognitionRequest) ShouldReportPartialResults() bool {
+	return x.inner.ShouldReportPartialResults()
+}
+
+// SetShouldReportPartialResults calls the underlying SetShouldReportPartialResults.
+func (x *SpeechRecognitionRequest) SetShouldReportPartialResults(shouldReportPartialResults bool) {
+	x.inner.SetShouldReportPartialResults(shouldReportPartialResults)
+}
+
 // ContextualStrings returns the collection as a Go slice.
-func (x *SpeechRecognitionRequest) ContextualStrings() []*foundation.NSString {
+func (x *SpeechRecognitionRequest) ContextualStrings() []string {
 	arr := x.inner.ContextualStrings()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// SetContextualStrings calls the underlying SetContextualStrings.
+func (x *SpeechRecognitionRequest) SetContextualStrings(contextualStrings *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetContextualStrings(contextualStrings)
+}
+
+// InteractionIdentifier calls the underlying InteractionIdentifier.
+func (x *SpeechRecognitionRequest) InteractionIdentifier() string {
+	_r := x.inner.InteractionIdentifier()
+	if _r == nil {
+		return ""
 	}
-	return out
+	return purego.GoString(_r.Ptr())
+}
+
+// SetInteractionIdentifier calls the underlying SetInteractionIdentifier.
+func (x *SpeechRecognitionRequest) SetInteractionIdentifier(interactionIdentifier string) {
+	x.inner.SetInteractionIdentifier(foundation.NSStringStringWithUTF8String(interactionIdentifier))
+}
+
+// RequiresOnDeviceRecognition calls the underlying RequiresOnDeviceRecognition.
+func (x *SpeechRecognitionRequest) RequiresOnDeviceRecognition() bool {
+	return x.inner.RequiresOnDeviceRecognition()
+}
+
+// SetRequiresOnDeviceRecognition calls the underlying SetRequiresOnDeviceRecognition.
+func (x *SpeechRecognitionRequest) SetRequiresOnDeviceRecognition(requiresOnDeviceRecognition bool) {
+	x.inner.SetRequiresOnDeviceRecognition(requiresOnDeviceRecognition)
+}
+
+// AddsPunctuation calls the underlying AddsPunctuation.
+func (x *SpeechRecognitionRequest) AddsPunctuation() bool {
+	return x.inner.AddsPunctuation()
+}
+
+// SetAddsPunctuation calls the underlying SetAddsPunctuation.
+func (x *SpeechRecognitionRequest) SetAddsPunctuation(addsPunctuation bool) {
+	x.inner.SetAddsPunctuation(addsPunctuation)
+}
+
+// CustomizedLanguageModel calls the underlying CustomizedLanguageModel.
+func (x *SpeechRecognitionRequest) CustomizedLanguageModel() *SpeechLanguageModelConfiguration {
+	_r := x.inner.CustomizedLanguageModel()
+	if _r == nil {
+		return nil
+	}
+	return &SpeechLanguageModelConfiguration{inner: _r}
+}
+
+// SetCustomizedLanguageModel calls the underlying SetCustomizedLanguageModel.
+func (x *SpeechRecognitionRequest) SetCustomizedLanguageModel(customizedLanguageModel *raw.SFSpeechLanguageModelConfiguration) {
+	x.inner.SetCustomizedLanguageModel(customizedLanguageModel)
 }
 
 func (x *SpeechRecognitionRequest) asSpeechRecognitionRequest() *raw.SFSpeechRecognitionRequest { return x.inner }
+
+// SpeechRecognitionRequestable is the interface implemented by [SpeechRecognitionRequest], for mocking and DI.
+type SpeechRecognitionRequestable interface {
+	Unwrap() *raw.SFSpeechRecognitionRequest
+	WithTaskHint(taskHint raw.SFSpeechRecognitionTaskHint) *SpeechRecognitionRequest
+	WithShouldReportPartialResults(shouldReportPartialResults bool) *SpeechRecognitionRequest
+	WithContextualStrings(items ...*foundation.NSString) *SpeechRecognitionRequest
+	WithInteractionIdentifier(interactionIdentifier string) *SpeechRecognitionRequest
+	WithRequiresOnDeviceRecognition(requiresOnDeviceRecognition bool) *SpeechRecognitionRequest
+	WithAddsPunctuation(addsPunctuation bool) *SpeechRecognitionRequest
+	WithCustomizedLanguageModel(customizedLanguageModel *raw.SFSpeechLanguageModelConfiguration) *SpeechRecognitionRequest
+	TaskHint() raw.SFSpeechRecognitionTaskHint
+	SetTaskHint(taskHint raw.SFSpeechRecognitionTaskHint)
+	ShouldReportPartialResults() bool
+	SetShouldReportPartialResults(shouldReportPartialResults bool)
+	ContextualStrings() []string
+	SetContextualStrings(contextualStrings *foundation.NSArray[*foundation.NSString])
+	InteractionIdentifier() string
+	SetInteractionIdentifier(interactionIdentifier string)
+	RequiresOnDeviceRecognition() bool
+	SetRequiresOnDeviceRecognition(requiresOnDeviceRecognition bool)
+	AddsPunctuation() bool
+	SetAddsPunctuation(addsPunctuation bool)
+	CustomizedLanguageModel() *SpeechLanguageModelConfiguration
+	SetCustomizedLanguageModel(customizedLanguageModel *raw.SFSpeechLanguageModelConfiguration)
+}
+
+var _ SpeechRecognitionRequestable = (*SpeechRecognitionRequest)(nil)
 

@@ -29,3 +29,10 @@ func (x *URLSessionDataTask) asURLSessionTask() *raw.NSURLSessionTask { return &
 
 func (x *URLSessionDataTask) asObject() *raw.NSObject { return &x.inner.NSURLSessionTask.NSObject }
 
+// URLSessionDataTaskable is the interface implemented by [URLSessionDataTask], for mocking and DI.
+type URLSessionDataTaskable interface {
+	Unwrap() *raw.NSURLSessionDataTask
+}
+
+var _ URLSessionDataTaskable = (*URLSessionDataTask)(nil)
+

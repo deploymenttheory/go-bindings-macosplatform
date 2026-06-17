@@ -24,7 +24,24 @@ func NewInflectionRuleExplicitWithMorphology(morphology *raw.NSMorphology) *Infl
 	return &InflectionRuleExplicit{inner: raw.NSInflectionRuleExplicitFromID(_id)}
 }
 
+// Morphology calls the underlying Morphology.
+func (x *InflectionRuleExplicit) Morphology() *Morphology {
+	_r := x.inner.Morphology()
+	if _r == nil {
+		return nil
+	}
+	return &Morphology{inner: _r}
+}
+
 func (x *InflectionRuleExplicit) asInflectionRule() *raw.NSInflectionRule { return &x.inner.NSInflectionRule }
 
 func (x *InflectionRuleExplicit) asObject() *raw.NSObject { return &x.inner.NSInflectionRule.NSObject }
+
+// InflectionRuleExplicitable is the interface implemented by [InflectionRuleExplicit], for mocking and DI.
+type InflectionRuleExplicitable interface {
+	Unwrap() *raw.NSInflectionRuleExplicit
+	Morphology() *Morphology
+}
+
+var _ InflectionRuleExplicitable = (*InflectionRuleExplicit)(nil)
 

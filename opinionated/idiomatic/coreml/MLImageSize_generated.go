@@ -23,3 +23,22 @@ func NewImageSize() *ImageSize {
 	return &ImageSize{inner: raw.MLImageSizeFromID(_id)}
 }
 
+// PixelsWide calls the underlying PixelsWide.
+func (x *ImageSize) PixelsWide() int {
+	return x.inner.PixelsWide()
+}
+
+// PixelsHigh calls the underlying PixelsHigh.
+func (x *ImageSize) PixelsHigh() int {
+	return x.inner.PixelsHigh()
+}
+
+// ImageSizeable is the interface implemented by [ImageSize], for mocking and DI.
+type ImageSizeable interface {
+	Unwrap() *raw.MLImageSize
+	PixelsWide() int
+	PixelsHigh() int
+}
+
+var _ ImageSizeable = (*ImageSize)(nil)
+

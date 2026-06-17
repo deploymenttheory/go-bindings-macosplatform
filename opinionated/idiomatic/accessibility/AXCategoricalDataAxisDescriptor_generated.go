@@ -7,6 +7,7 @@ package accessibility
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/accessibility"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -50,15 +51,28 @@ func (x *CategoricalDataAxisDescriptor) WithCategoryOrder(items ...*foundation.N
 }
 
 // CategoryOrder returns the collection as a Go slice.
-func (x *CategoricalDataAxisDescriptor) CategoryOrder() []*foundation.NSString {
+func (x *CategoricalDataAxisDescriptor) CategoryOrder() []string {
 	arr := x.inner.CategoryOrder()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
+
+// SetCategoryOrder calls the underlying SetCategoryOrder.
+func (x *CategoricalDataAxisDescriptor) SetCategoryOrder(categoryOrder *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetCategoryOrder(categoryOrder)
+}
+
+// CategoricalDataAxisDescriptorable is the interface implemented by [CategoricalDataAxisDescriptor], for mocking and DI.
+type CategoricalDataAxisDescriptorable interface {
+	Unwrap() *raw.AXCategoricalDataAxisDescriptor
+	WithCategoryOrder(items ...*foundation.NSString) *CategoricalDataAxisDescriptor
+	CategoryOrder() []string
+	SetCategoryOrder(categoryOrder *foundation.NSArray[*foundation.NSString])
+}
+
+var _ CategoricalDataAxisDescriptorable = (*CategoricalDataAxisDescriptor)(nil)
 

@@ -7,6 +7,7 @@ package cloudkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -45,30 +46,46 @@ func (x *Record) WithParent(parent *raw.CKReference) *Record {
 	return x
 }
 
+// ObjectForKey calls the underlying ObjectForKey.
+func (x *Record) ObjectForKey(key *foundation.NSString) raw.CKRecordValue {
+	return x.inner.ObjectForKey(key)
+}
+
+// SetObjectForKey calls the underlying SetObjectForKey.
+func (x *Record) SetObjectForKey(object raw.CKRecordValue, key *foundation.NSString) {
+	x.inner.SetObjectForKey(object, key)
+}
+
 // AllKeys returns the collection as a Go slice.
 func (x *Record) AllKeys() []*foundation.NSString {
 	arr := x.inner.AllKeys()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	})
 }
 
 // AllTokens returns the collection as a Go slice.
-func (x *Record) AllTokens() []*foundation.NSString {
+func (x *Record) AllTokens() []string {
 	arr := x.inner.AllTokens()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// ObjectForKeyedSubscript calls the underlying ObjectForKeyedSubscript.
+func (x *Record) ObjectForKeyedSubscript(key *foundation.NSString) raw.CKRecordValue {
+	return x.inner.ObjectForKeyedSubscript(key)
+}
+
+// SetObjectForKeyedSubscript calls the underlying SetObjectForKeyedSubscript.
+func (x *Record) SetObjectForKeyedSubscript(object raw.CKRecordValue, key *foundation.NSString) {
+	x.inner.SetObjectForKeyedSubscript(object, key)
 }
 
 // ChangedKeys returns the collection as a Go slice.
@@ -77,12 +94,137 @@ func (x *Record) ChangedKeys() []*foundation.NSString {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	})
+}
+
+// EncodeSystemFieldsWithCoder calls the underlying EncodeSystemFieldsWithCoder.
+func (x *Record) EncodeSystemFieldsWithCoder(coder *foundation.NSCoder) {
+	x.inner.EncodeSystemFieldsWithCoder(coder)
+}
+
+// SetParentReferenceFromRecord calls the underlying SetParentReferenceFromRecord.
+func (x *Record) SetParentReferenceFromRecord(parentRecord *raw.CKRecord) {
+	x.inner.SetParentReferenceFromRecord(parentRecord)
+}
+
+// SetParentReferenceFromRecordID calls the underlying SetParentReferenceFromRecordID.
+func (x *Record) SetParentReferenceFromRecordID(parentRecordID *raw.CKRecordID) {
+	x.inner.SetParentReferenceFromRecordID(parentRecordID)
+}
+
+// RecordType calls the underlying RecordType.
+func (x *Record) RecordType() string {
+	_r := x.inner.RecordType()
+	if _r == nil {
+		return ""
 	}
-	return out
+	return purego.GoString(_r.Ptr())
+}
+
+// RecordID calls the underlying RecordID.
+func (x *Record) RecordID() *RecordID {
+	_r := x.inner.RecordID()
+	if _r == nil {
+		return nil
+	}
+	return &RecordID{inner: _r}
+}
+
+// RecordChangeTag calls the underlying RecordChangeTag.
+func (x *Record) RecordChangeTag() string {
+	_r := x.inner.RecordChangeTag()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// CreatorUserRecordID calls the underlying CreatorUserRecordID.
+func (x *Record) CreatorUserRecordID() *RecordID {
+	_r := x.inner.CreatorUserRecordID()
+	if _r == nil {
+		return nil
+	}
+	return &RecordID{inner: _r}
+}
+
+// CreationDate calls the underlying CreationDate.
+func (x *Record) CreationDate() *foundation.NSDate {
+	return x.inner.CreationDate()
+}
+
+// LastModifiedUserRecordID calls the underlying LastModifiedUserRecordID.
+func (x *Record) LastModifiedUserRecordID() *RecordID {
+	_r := x.inner.LastModifiedUserRecordID()
+	if _r == nil {
+		return nil
+	}
+	return &RecordID{inner: _r}
+}
+
+// ModificationDate calls the underlying ModificationDate.
+func (x *Record) ModificationDate() *foundation.NSDate {
+	return x.inner.ModificationDate()
+}
+
+// Share calls the underlying Share.
+func (x *Record) Share() *Reference {
+	_r := x.inner.Share()
+	if _r == nil {
+		return nil
+	}
+	return &Reference{inner: _r}
+}
+
+// Parent calls the underlying Parent.
+func (x *Record) Parent() *Reference {
+	_r := x.inner.Parent()
+	if _r == nil {
+		return nil
+	}
+	return &Reference{inner: _r}
+}
+
+// SetParent calls the underlying SetParent.
+func (x *Record) SetParent(parent *raw.CKReference) {
+	x.inner.SetParent(parent)
+}
+
+// EncryptedValues calls the underlying EncryptedValues.
+func (x *Record) EncryptedValues() raw.CKRecordKeyValueSetting {
+	return x.inner.EncryptedValues()
 }
 
 func (x *Record) asRecord() *raw.CKRecord { return x.inner }
+
+// Recordable is the interface implemented by [Record], for mocking and DI.
+type Recordable interface {
+	Unwrap() *raw.CKRecord
+	WithParent(parent *raw.CKReference) *Record
+	ObjectForKey(key *foundation.NSString) raw.CKRecordValue
+	SetObjectForKey(object raw.CKRecordValue, key *foundation.NSString)
+	AllKeys() []*foundation.NSString
+	AllTokens() []string
+	ObjectForKeyedSubscript(key *foundation.NSString) raw.CKRecordValue
+	SetObjectForKeyedSubscript(object raw.CKRecordValue, key *foundation.NSString)
+	ChangedKeys() []*foundation.NSString
+	EncodeSystemFieldsWithCoder(coder *foundation.NSCoder)
+	SetParentReferenceFromRecord(parentRecord *raw.CKRecord)
+	SetParentReferenceFromRecordID(parentRecordID *raw.CKRecordID)
+	RecordType() string
+	RecordID() *RecordID
+	RecordChangeTag() string
+	CreatorUserRecordID() *RecordID
+	CreationDate() *foundation.NSDate
+	LastModifiedUserRecordID() *RecordID
+	ModificationDate() *foundation.NSDate
+	Share() *Reference
+	Parent() *Reference
+	SetParent(parent *raw.CKReference)
+	EncryptedValues() raw.CKRecordKeyValueSetting
+}
+
+var _ Recordable = (*Record)(nil)
 

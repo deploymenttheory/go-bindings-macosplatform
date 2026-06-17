@@ -5,6 +5,7 @@
 package discrecordingui
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/discrecording"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/discrecordingui"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,5 +24,24 @@ func NewEraseSetupPanel() *EraseSetupPanel {
 	return &EraseSetupPanel{inner: raw.DREraseSetupPanelFromID(_id)}
 }
 
+// EraseObject calls the underlying EraseObject.
+func (x *EraseSetupPanel) EraseObject() *discrecording.DRErase {
+	return x.inner.EraseObject()
+}
+
+// EraseType calls the underlying EraseType.
+func (x *EraseSetupPanel) EraseType(sender objc.ID) {
+	x.inner.EraseType(sender)
+}
+
 func (x *EraseSetupPanel) asSetupPanel() *raw.DRSetupPanel { return &x.inner.DRSetupPanel }
+
+// EraseSetupPanelable is the interface implemented by [EraseSetupPanel], for mocking and DI.
+type EraseSetupPanelable interface {
+	Unwrap() *raw.DREraseSetupPanel
+	EraseObject() *discrecording.DRErase
+	EraseType(sender objc.ID)
+}
+
+var _ EraseSetupPanelable = (*EraseSetupPanel)(nil)
 

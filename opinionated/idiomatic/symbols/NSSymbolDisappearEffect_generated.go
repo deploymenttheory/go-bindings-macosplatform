@@ -23,5 +23,32 @@ func NewSymbolDisappearEffect() *SymbolDisappearEffect {
 	return &SymbolDisappearEffect{inner: raw.NSSymbolDisappearEffectFromID(_id)}
 }
 
+// EffectWithByLayer calls the underlying EffectWithByLayer.
+func (x *SymbolDisappearEffect) EffectWithByLayer() *SymbolDisappearEffect {
+	_r := x.inner.EffectWithByLayer()
+	if _r == nil {
+		return nil
+	}
+	return &SymbolDisappearEffect{inner: _r}
+}
+
+// EffectWithWholeSymbol calls the underlying EffectWithWholeSymbol.
+func (x *SymbolDisappearEffect) EffectWithWholeSymbol() *SymbolDisappearEffect {
+	_r := x.inner.EffectWithWholeSymbol()
+	if _r == nil {
+		return nil
+	}
+	return &SymbolDisappearEffect{inner: _r}
+}
+
 func (x *SymbolDisappearEffect) asSymbolEffect() *raw.NSSymbolEffect { return &x.inner.NSSymbolEffect }
+
+// SymbolDisappearEffectable is the interface implemented by [SymbolDisappearEffect], for mocking and DI.
+type SymbolDisappearEffectable interface {
+	Unwrap() *raw.NSSymbolDisappearEffect
+	EffectWithByLayer() *SymbolDisappearEffect
+	EffectWithWholeSymbol() *SymbolDisappearEffect
+}
+
+var _ SymbolDisappearEffectable = (*SymbolDisappearEffect)(nil)
 

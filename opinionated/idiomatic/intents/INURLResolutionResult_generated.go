@@ -25,3 +25,10 @@ func NewURLResolutionResult() *URLResolutionResult {
 
 func (x *URLResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult { return &x.inner.INIntentResolutionResult }
 
+// URLResolutionResultable is the interface implemented by [URLResolutionResult], for mocking and DI.
+type URLResolutionResultable interface {
+	Unwrap() *raw.INURLResolutionResult
+}
+
+var _ URLResolutionResultable = (*URLResolutionResult)(nil)
+

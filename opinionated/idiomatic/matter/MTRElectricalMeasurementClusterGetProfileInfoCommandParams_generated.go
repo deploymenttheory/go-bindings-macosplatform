@@ -36,3 +36,36 @@ func (x *MTRElectricalMeasurementClusterGetProfileInfoCommandParams) WithServerS
 	return x
 }
 
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRElectricalMeasurementClusterGetProfileInfoCommandParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRElectricalMeasurementClusterGetProfileInfoCommandParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRElectricalMeasurementClusterGetProfileInfoCommandParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRElectricalMeasurementClusterGetProfileInfoCommandParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRElectricalMeasurementClusterGetProfileInfoCommandParamsable is the interface implemented by [MTRElectricalMeasurementClusterGetProfileInfoCommandParams], for mocking and DI.
+type MTRElectricalMeasurementClusterGetProfileInfoCommandParamsable interface {
+	Unwrap() *raw.MTRElectricalMeasurementClusterGetProfileInfoCommandParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRElectricalMeasurementClusterGetProfileInfoCommandParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRElectricalMeasurementClusterGetProfileInfoCommandParams
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRElectricalMeasurementClusterGetProfileInfoCommandParamsable = (*MTRElectricalMeasurementClusterGetProfileInfoCommandParams)(nil)
+

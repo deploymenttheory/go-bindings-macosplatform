@@ -7,6 +7,7 @@ package avfoundation
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -30,10 +31,28 @@ func (x *CoordinatedPlaybackParticipant) SuspensionReasons() []*foundation.NSStr
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	})
 }
+
+// IsReadyToPlay calls the underlying IsReadyToPlay.
+func (x *CoordinatedPlaybackParticipant) IsReadyToPlay() bool {
+	return x.inner.IsReadyToPlay()
+}
+
+// Identifier calls the underlying Identifier.
+func (x *CoordinatedPlaybackParticipant) Identifier() *foundation.NSUUID {
+	return x.inner.Identifier()
+}
+
+// CoordinatedPlaybackParticipantable is the interface implemented by [CoordinatedPlaybackParticipant], for mocking and DI.
+type CoordinatedPlaybackParticipantable interface {
+	Unwrap() *raw.AVCoordinatedPlaybackParticipant
+	SuspensionReasons() []*foundation.NSString
+	IsReadyToPlay() bool
+	Identifier() *foundation.NSUUID
+}
+
+var _ CoordinatedPlaybackParticipantable = (*CoordinatedPlaybackParticipant)(nil)
 

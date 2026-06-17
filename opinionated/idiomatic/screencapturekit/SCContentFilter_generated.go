@@ -5,8 +5,10 @@
 package screencapturekit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/screencapturekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -59,17 +61,45 @@ func (x *ContentFilter) WithIncludeMenuBar(includeMenuBar bool) *ContentFilter {
 	return x
 }
 
+// StreamType calls the underlying StreamType.
+func (x *ContentFilter) StreamType() raw.SCStreamType {
+	return x.inner.StreamType()
+}
+
+// Style calls the underlying Style.
+func (x *ContentFilter) Style() raw.SCShareableContentStyle {
+	return x.inner.Style()
+}
+
+// PointPixelScale calls the underlying PointPixelScale.
+func (x *ContentFilter) PointPixelScale() float32 {
+	return x.inner.PointPixelScale()
+}
+
+// ContentRect calls the underlying ContentRect.
+func (x *ContentFilter) ContentRect() corefoundation.CGRect {
+	return x.inner.ContentRect()
+}
+
+// IncludeMenuBar calls the underlying IncludeMenuBar.
+func (x *ContentFilter) IncludeMenuBar() bool {
+	return x.inner.IncludeMenuBar()
+}
+
+// SetIncludeMenuBar calls the underlying SetIncludeMenuBar.
+func (x *ContentFilter) SetIncludeMenuBar(includeMenuBar bool) {
+	x.inner.SetIncludeMenuBar(includeMenuBar)
+}
+
 // IncludedDisplays returns the collection as a Go slice.
 func (x *ContentFilter) IncludedDisplays() []*raw.SCDisplay {
 	arr := x.inner.IncludedDisplays()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.SCDisplay, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SCDisplay {
+		return raw.SCDisplayFromID(purego.Retain(_id))
+	})
 }
 
 // IncludedApplications returns the collection as a Go slice.
@@ -78,11 +108,9 @@ func (x *ContentFilter) IncludedApplications() []*raw.SCRunningApplication {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.SCRunningApplication, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SCRunningApplication {
+		return raw.SCRunningApplicationFromID(purego.Retain(_id))
+	})
 }
 
 // IncludedWindows returns the collection as a Go slice.
@@ -91,10 +119,25 @@ func (x *ContentFilter) IncludedWindows() []*raw.SCWindow {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.SCWindow, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SCWindow {
+		return raw.SCWindowFromID(purego.Retain(_id))
+	})
 }
+
+// ContentFilterable is the interface implemented by [ContentFilter], for mocking and DI.
+type ContentFilterable interface {
+	Unwrap() *raw.SCContentFilter
+	WithIncludeMenuBar(includeMenuBar bool) *ContentFilter
+	StreamType() raw.SCStreamType
+	Style() raw.SCShareableContentStyle
+	PointPixelScale() float32
+	ContentRect() corefoundation.CGRect
+	IncludeMenuBar() bool
+	SetIncludeMenuBar(includeMenuBar bool)
+	IncludedDisplays() []*raw.SCDisplay
+	IncludedApplications() []*raw.SCRunningApplication
+	IncludedWindows() []*raw.SCWindow
+}
+
+var _ ContentFilterable = (*ContentFilter)(nil)
 

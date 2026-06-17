@@ -35,3 +35,48 @@ func (x *VectorDescriptor) WithDataType(dataType raw.MPSDataType) *VectorDescrip
 	return x
 }
 
+// Length calls the underlying Length.
+func (x *VectorDescriptor) Length() uint {
+	return x.inner.Length()
+}
+
+// SetLength calls the underlying SetLength.
+func (x *VectorDescriptor) SetLength(length uint) {
+	x.inner.SetLength(length)
+}
+
+// Vectors calls the underlying Vectors.
+func (x *VectorDescriptor) Vectors() uint {
+	return x.inner.Vectors()
+}
+
+// DataType calls the underlying DataType.
+func (x *VectorDescriptor) DataType() raw.MPSDataType {
+	return x.inner.DataType()
+}
+
+// SetDataType calls the underlying SetDataType.
+func (x *VectorDescriptor) SetDataType(dataType raw.MPSDataType) {
+	x.inner.SetDataType(dataType)
+}
+
+// VectorBytes calls the underlying VectorBytes.
+func (x *VectorDescriptor) VectorBytes() uint {
+	return x.inner.VectorBytes()
+}
+
+// VectorDescriptorable is the interface implemented by [VectorDescriptor], for mocking and DI.
+type VectorDescriptorable interface {
+	Unwrap() *raw.MPSVectorDescriptor
+	WithLength(length uint) *VectorDescriptor
+	WithDataType(dataType raw.MPSDataType) *VectorDescriptor
+	Length() uint
+	SetLength(length uint)
+	Vectors() uint
+	DataType() raw.MPSDataType
+	SetDataType(dataType raw.MPSDataType)
+	VectorBytes() uint
+}
+
+var _ VectorDescriptorable = (*VectorDescriptor)(nil)
+

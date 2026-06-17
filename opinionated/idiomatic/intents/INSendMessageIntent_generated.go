@@ -7,6 +7,7 @@ package intents
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,11 +53,59 @@ func (x *SendMessageIntent) Recipients() []*raw.INPerson {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.INPerson, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.INPerson {
+		return raw.INPersonFromID(purego.Retain(_id))
+	})
+}
+
+// OutgoingMessageType calls the underlying OutgoingMessageType.
+func (x *SendMessageIntent) OutgoingMessageType() raw.INOutgoingMessageType {
+	return x.inner.OutgoingMessageType()
+}
+
+// Content calls the underlying Content.
+func (x *SendMessageIntent) Content() string {
+	_r := x.inner.Content()
+	if _r == nil {
+		return ""
 	}
-	return out
+	return purego.GoString(_r.Ptr())
+}
+
+// SpeakableGroupName calls the underlying SpeakableGroupName.
+func (x *SendMessageIntent) SpeakableGroupName() *SpeakableString {
+	_r := x.inner.SpeakableGroupName()
+	if _r == nil {
+		return nil
+	}
+	return &SpeakableString{inner: _r}
+}
+
+// ConversationIdentifier calls the underlying ConversationIdentifier.
+func (x *SendMessageIntent) ConversationIdentifier() string {
+	_r := x.inner.ConversationIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ServiceName calls the underlying ServiceName.
+func (x *SendMessageIntent) ServiceName() string {
+	_r := x.inner.ServiceName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Sender calls the underlying Sender.
+func (x *SendMessageIntent) Sender() *Person {
+	_r := x.inner.Sender()
+	if _r == nil {
+		return nil
+	}
+	return &Person{inner: _r}
 }
 
 // Attachments returns the collection as a Go slice.
@@ -65,12 +114,35 @@ func (x *SendMessageIntent) Attachments() []*raw.INSendMessageAttachment {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.INSendMessageAttachment, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.INSendMessageAttachment {
+		return raw.INSendMessageAttachmentFromID(purego.Retain(_id))
+	})
+}
+
+// GroupName calls the underlying GroupName.
+func (x *SendMessageIntent) GroupName() string {
+	_r := x.inner.GroupName()
+	if _r == nil {
+		return ""
 	}
-	return out
+	return purego.GoString(_r.Ptr())
 }
 
 func (x *SendMessageIntent) asIntent() *raw.INIntent { return &x.inner.INIntent }
+
+// SendMessageIntentable is the interface implemented by [SendMessageIntent], for mocking and DI.
+type SendMessageIntentable interface {
+	Unwrap() *raw.INSendMessageIntent
+	Recipients() []*raw.INPerson
+	OutgoingMessageType() raw.INOutgoingMessageType
+	Content() string
+	SpeakableGroupName() *SpeakableString
+	ConversationIdentifier() string
+	ServiceName() string
+	Sender() *Person
+	Attachments() []*raw.INSendMessageAttachment
+	GroupName() string
+}
+
+var _ SendMessageIntentable = (*SendMessageIntent)(nil)
 

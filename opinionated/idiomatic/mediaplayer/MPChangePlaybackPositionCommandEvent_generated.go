@@ -23,5 +23,18 @@ func NewChangePlaybackPositionCommandEvent() *ChangePlaybackPositionCommandEvent
 	return &ChangePlaybackPositionCommandEvent{inner: raw.MPChangePlaybackPositionCommandEventFromID(_id)}
 }
 
+// PositionTime calls the underlying PositionTime.
+func (x *ChangePlaybackPositionCommandEvent) PositionTime() float64 {
+	return x.inner.PositionTime()
+}
+
 func (x *ChangePlaybackPositionCommandEvent) asRemoteCommandEvent() *raw.MPRemoteCommandEvent { return &x.inner.MPRemoteCommandEvent }
+
+// ChangePlaybackPositionCommandEventable is the interface implemented by [ChangePlaybackPositionCommandEvent], for mocking and DI.
+type ChangePlaybackPositionCommandEventable interface {
+	Unwrap() *raw.MPChangePlaybackPositionCommandEvent
+	PositionTime() float64
+}
+
+var _ ChangePlaybackPositionCommandEventable = (*ChangePlaybackPositionCommandEvent)(nil)
 

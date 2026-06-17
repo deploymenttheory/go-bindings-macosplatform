@@ -35,7 +35,26 @@ func NewImageAreaMaxWithCoderDevice(aDecoder *foundation.NSCoder, device metal.M
 	return &ImageAreaMax{inner: raw.MPSImageAreaMaxFromID(_id)}
 }
 
+// KernelHeight calls the underlying KernelHeight.
+func (x *ImageAreaMax) KernelHeight() uint {
+	return x.inner.KernelHeight()
+}
+
+// KernelWidth calls the underlying KernelWidth.
+func (x *ImageAreaMax) KernelWidth() uint {
+	return x.inner.KernelWidth()
+}
+
 func (x *ImageAreaMax) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel { return &x.inner.MPSUnaryImageKernel }
 
 func (x *ImageAreaMax) asKernel() *mpscore.MPSKernel { return &x.inner.MPSUnaryImageKernel.MPSKernel }
+
+// ImageAreaMaxable is the interface implemented by [ImageAreaMax], for mocking and DI.
+type ImageAreaMaxable interface {
+	Unwrap() *raw.MPSImageAreaMax
+	KernelHeight() uint
+	KernelWidth() uint
+}
+
+var _ ImageAreaMaxable = (*ImageAreaMax)(nil)
 

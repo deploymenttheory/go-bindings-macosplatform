@@ -5,6 +5,7 @@
 package healthkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,7 +24,36 @@ func NewCorrelation() *Correlation {
 	return &Correlation{inner: raw.HKCorrelationFromID(_id)}
 }
 
+// ObjectsForType calls the underlying ObjectsForType.
+func (x *Correlation) ObjectsForType(objectType *raw.HKObjectType) *foundation.NSSet[*raw.HKSample] {
+	return x.inner.ObjectsForType(objectType)
+}
+
+// CorrelationType calls the underlying CorrelationType.
+func (x *Correlation) CorrelationType() *CorrelationType {
+	_r := x.inner.CorrelationType()
+	if _r == nil {
+		return nil
+	}
+	return &CorrelationType{inner: _r}
+}
+
+// Objects calls the underlying Objects.
+func (x *Correlation) Objects() *foundation.NSSet[*raw.HKSample] {
+	return x.inner.Objects()
+}
+
 func (x *Correlation) asSample() *raw.HKSample { return &x.inner.HKSample }
 
 func (x *Correlation) asObject() *raw.HKObject { return &x.inner.HKSample.HKObject }
+
+// Correlationable is the interface implemented by [Correlation], for mocking and DI.
+type Correlationable interface {
+	Unwrap() *raw.HKCorrelation
+	ObjectsForType(objectType *raw.HKObjectType) *foundation.NSSet[*raw.HKSample]
+	CorrelationType() *CorrelationType
+	Objects() *foundation.NSSet[*raw.HKSample]
+}
+
+var _ Correlationable = (*Correlation)(nil)
 

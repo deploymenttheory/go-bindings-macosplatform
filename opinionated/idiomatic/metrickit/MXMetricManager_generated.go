@@ -6,6 +6,7 @@ package metrickit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metrickit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,17 +24,25 @@ func NewMetricManager() *MetricManager {
 	return &MetricManager{inner: raw.MXMetricManagerFromID(_id)}
 }
 
+// AddSubscriber calls the underlying AddSubscriber.
+func (x *MetricManager) AddSubscriber(subscriber raw.MXMetricManagerSubscriber) {
+	x.inner.AddSubscriber(subscriber)
+}
+
+// RemoveSubscriber calls the underlying RemoveSubscriber.
+func (x *MetricManager) RemoveSubscriber(subscriber raw.MXMetricManagerSubscriber) {
+	x.inner.RemoveSubscriber(subscriber)
+}
+
 // PastPayloads returns the collection as a Go slice.
 func (x *MetricManager) PastPayloads() []*raw.MXMetricPayload {
 	arr := x.inner.PastPayloads()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MXMetricPayload, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MXMetricPayload {
+		return raw.MXMetricPayloadFromID(purego.Retain(_id))
+	})
 }
 
 // PastDiagnosticPayloads returns the collection as a Go slice.
@@ -42,10 +51,19 @@ func (x *MetricManager) PastDiagnosticPayloads() []*raw.MXDiagnosticPayload {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MXDiagnosticPayload, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MXDiagnosticPayload {
+		return raw.MXDiagnosticPayloadFromID(purego.Retain(_id))
+	})
 }
+
+// MetricManagerable is the interface implemented by [MetricManager], for mocking and DI.
+type MetricManagerable interface {
+	Unwrap() *raw.MXMetricManager
+	AddSubscriber(subscriber raw.MXMetricManagerSubscriber)
+	RemoveSubscriber(subscriber raw.MXMetricManagerSubscriber)
+	PastPayloads() []*raw.MXMetricPayload
+	PastDiagnosticPayloads() []*raw.MXDiagnosticPayload
+}
+
+var _ MetricManagerable = (*MetricManager)(nil)
 

@@ -23,7 +23,24 @@ func NewDOMObject() *DOMObject {
 	return &DOMObject{inner: raw.DOMObjectFromID(_id)}
 }
 
+// Sheet calls the underlying Sheet.
+func (x *DOMObject) Sheet() *DOMStyleSheet {
+	_r := x.inner.Sheet()
+	if _r == nil {
+		return nil
+	}
+	return &DOMStyleSheet{inner: _r}
+}
+
 func (x *DOMObject) asDOMObject() *raw.DOMObject { return x.inner }
 
 func (x *DOMObject) asWebScriptObject() *raw.WebScriptObject { return &x.inner.WebScriptObject }
+
+// DOMObjectable is the interface implemented by [DOMObject], for mocking and DI.
+type DOMObjectable interface {
+	Unwrap() *raw.DOMObject
+	Sheet() *DOMStyleSheet
+}
+
+var _ DOMObjectable = (*DOMObject)(nil)
 

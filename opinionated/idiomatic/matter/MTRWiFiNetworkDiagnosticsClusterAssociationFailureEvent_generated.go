@@ -42,3 +42,49 @@ func (x *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) WithStatus(sta
 	return x
 }
 
+// AssociationFailureCause calls the underlying AssociationFailureCause.
+func (x *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) AssociationFailureCause() *foundation.NSNumber {
+	return x.inner.AssociationFailureCause()
+}
+
+// SetAssociationFailureCause calls the underlying SetAssociationFailureCause.
+func (x *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) SetAssociationFailureCause(associationFailureCause *foundation.NSNumber) {
+	x.inner.SetAssociationFailureCause(associationFailureCause)
+}
+
+// AssociationFailure calls the underlying AssociationFailure.
+func (x *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) AssociationFailure() *foundation.NSNumber {
+	return x.inner.AssociationFailure()
+}
+
+// SetAssociationFailure calls the underlying SetAssociationFailure.
+func (x *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) SetAssociationFailure(associationFailure *foundation.NSNumber) {
+	x.inner.SetAssociationFailure(associationFailure)
+}
+
+// Status calls the underlying Status.
+func (x *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) Status() *foundation.NSNumber {
+	return x.inner.Status()
+}
+
+// SetStatus calls the underlying SetStatus.
+func (x *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) SetStatus(status *foundation.NSNumber) {
+	x.inner.SetStatus(status)
+}
+
+// MTRWiFiNetworkDiagnosticsClusterAssociationFailureEventable is the interface implemented by [MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent], for mocking and DI.
+type MTRWiFiNetworkDiagnosticsClusterAssociationFailureEventable interface {
+	Unwrap() *raw.MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent
+	WithAssociationFailureCause(associationFailureCause *foundation.NSNumber) *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent
+	WithAssociationFailure(associationFailure *foundation.NSNumber) *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent
+	WithStatus(status *foundation.NSNumber) *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent
+	AssociationFailureCause() *foundation.NSNumber
+	SetAssociationFailureCause(associationFailureCause *foundation.NSNumber)
+	AssociationFailure() *foundation.NSNumber
+	SetAssociationFailure(associationFailure *foundation.NSNumber)
+	Status() *foundation.NSNumber
+	SetStatus(status *foundation.NSNumber)
+}
+
+var _ MTRWiFiNetworkDiagnosticsClusterAssociationFailureEventable = (*MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent)(nil)
+

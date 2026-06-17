@@ -23,3 +23,10 @@ func NewCAInterDeviceAudioViewController() *CAInterDeviceAudioViewController {
 	return &CAInterDeviceAudioViewController{inner: raw.CAInterDeviceAudioViewControllerFromID(_id)}
 }
 
+// CAInterDeviceAudioViewControllerable is the interface implemented by [CAInterDeviceAudioViewController], for mocking and DI.
+type CAInterDeviceAudioViewControllerable interface {
+	Unwrap() *raw.CAInterDeviceAudioViewController
+}
+
+var _ CAInterDeviceAudioViewControllerable = (*CAInterDeviceAudioViewController)(nil)
+

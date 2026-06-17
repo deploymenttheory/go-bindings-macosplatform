@@ -5,6 +5,7 @@
 package scenekit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
 	"github.com/ebitengine/purego/objc"
@@ -29,4 +30,48 @@ func (x *Technique) WithLibrary(library metal.MTLLibrary) *Technique {
 	x.inner.SetLibrary(library)
 	return x
 }
+
+// HandleBindingOfSymbolUsing calls the underlying HandleBindingOfSymbolUsing.
+func (x *Technique) HandleBindingOfSymbolUsing(symbol string, block func(uint, uint, *raw.SCNNode, *raw.SCNRenderer)) {
+	x.inner.HandleBindingOfSymbolUsing(foundation.NSStringStringWithUTF8String(symbol), block)
+}
+
+// ObjectForKeyedSubscript calls the underlying ObjectForKeyedSubscript.
+func (x *Technique) ObjectForKeyedSubscript(key objc.ID) objc.ID {
+	return x.inner.ObjectForKeyedSubscript(key)
+}
+
+// SetObjectForKeyedSubscript calls the underlying SetObjectForKeyedSubscript.
+func (x *Technique) SetObjectForKeyedSubscript(obj objc.ID, key foundation.NSCopying) {
+	x.inner.SetObjectForKeyedSubscript(obj, key)
+}
+
+// DictionaryRepresentation calls the underlying DictionaryRepresentation.
+func (x *Technique) DictionaryRepresentation() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.DictionaryRepresentation()
+}
+
+// Library calls the underlying Library.
+func (x *Technique) Library() metal.MTLLibrary {
+	return x.inner.Library()
+}
+
+// SetLibrary calls the underlying SetLibrary.
+func (x *Technique) SetLibrary(library metal.MTLLibrary) {
+	x.inner.SetLibrary(library)
+}
+
+// Techniqueable is the interface implemented by [Technique], for mocking and DI.
+type Techniqueable interface {
+	Unwrap() *raw.SCNTechnique
+	WithLibrary(library metal.MTLLibrary) *Technique
+	HandleBindingOfSymbolUsing(symbol string, block func(uint, uint, *raw.SCNNode, *raw.SCNRenderer))
+	ObjectForKeyedSubscript(key objc.ID) objc.ID
+	SetObjectForKeyedSubscript(obj objc.ID, key foundation.NSCopying)
+	DictionaryRepresentation() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	Library() metal.MTLLibrary
+	SetLibrary(library metal.MTLLibrary)
+}
+
+var _ Techniqueable = (*Technique)(nil)
 

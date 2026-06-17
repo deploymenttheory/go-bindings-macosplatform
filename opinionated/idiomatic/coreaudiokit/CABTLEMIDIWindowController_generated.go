@@ -23,3 +23,10 @@ func NewCABTLEMIDIWindowController() *CABTLEMIDIWindowController {
 	return &CABTLEMIDIWindowController{inner: raw.CABTLEMIDIWindowControllerFromID(_id)}
 }
 
+// CABTLEMIDIWindowControllerable is the interface implemented by [CABTLEMIDIWindowController], for mocking and DI.
+type CABTLEMIDIWindowControllerable interface {
+	Unwrap() *raw.CABTLEMIDIWindowController
+}
+
+var _ CABTLEMIDIWindowControllerable = (*CABTLEMIDIWindowController)(nil)
+

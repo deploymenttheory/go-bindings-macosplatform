@@ -7,6 +7,7 @@ package networkextension
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -25,7 +26,24 @@ func NewNEEthernetTunnelNetworkSettingsWithTunnelRemoteAddressEthernetAddressMtu
 	return &NEEthernetTunnelNetworkSettings{inner: raw.NEEthernetTunnelNetworkSettingsFromID(_id)}
 }
 
+// EthernetAddress calls the underlying EthernetAddress.
+func (x *NEEthernetTunnelNetworkSettings) EthernetAddress() string {
+	_r := x.inner.EthernetAddress()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 func (x *NEEthernetTunnelNetworkSettings) asNEPacketTunnelNetworkSettings() *raw.NEPacketTunnelNetworkSettings { return &x.inner.NEPacketTunnelNetworkSettings }
 
 func (x *NEEthernetTunnelNetworkSettings) asNETunnelNetworkSettings() *raw.NETunnelNetworkSettings { return &x.inner.NEPacketTunnelNetworkSettings.NETunnelNetworkSettings }
+
+// NEEthernetTunnelNetworkSettingsable is the interface implemented by [NEEthernetTunnelNetworkSettings], for mocking and DI.
+type NEEthernetTunnelNetworkSettingsable interface {
+	Unwrap() *raw.NEEthernetTunnelNetworkSettings
+	EthernetAddress() string
+}
+
+var _ NEEthernetTunnelNetworkSettingsable = (*NEEthernetTunnelNetworkSettings)(nil)
 

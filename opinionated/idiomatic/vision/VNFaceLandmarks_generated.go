@@ -23,5 +23,18 @@ func NewFaceLandmarks() *FaceLandmarks {
 	return &FaceLandmarks{inner: raw.VNFaceLandmarksFromID(_id)}
 }
 
+// Confidence calls the underlying Confidence.
+func (x *FaceLandmarks) Confidence() float32 {
+	return x.inner.Confidence()
+}
+
 func (x *FaceLandmarks) asFaceLandmarks() *raw.VNFaceLandmarks { return x.inner }
+
+// FaceLandmarksable is the interface implemented by [FaceLandmarks], for mocking and DI.
+type FaceLandmarksable interface {
+	Unwrap() *raw.VNFaceLandmarks
+	Confidence() float32
+}
+
+var _ FaceLandmarksable = (*FaceLandmarks)(nil)
 

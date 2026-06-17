@@ -7,6 +7,7 @@ package metal
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -36,5 +37,46 @@ func (x *MTL4PipelineDescriptor) WithOptions(options *raw.MTL4PipelineOptions) *
 	return x
 }
 
+// Label calls the underlying Label.
+func (x *MTL4PipelineDescriptor) Label() string {
+	_r := x.inner.Label()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLabel calls the underlying SetLabel.
+func (x *MTL4PipelineDescriptor) SetLabel(label string) {
+	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+}
+
+// Options calls the underlying Options.
+func (x *MTL4PipelineDescriptor) Options() *MTL4PipelineOptions {
+	_r := x.inner.Options()
+	if _r == nil {
+		return nil
+	}
+	return &MTL4PipelineOptions{inner: _r}
+}
+
+// SetOptions calls the underlying SetOptions.
+func (x *MTL4PipelineDescriptor) SetOptions(options *raw.MTL4PipelineOptions) {
+	x.inner.SetOptions(options)
+}
+
 func (x *MTL4PipelineDescriptor) asMTL4PipelineDescriptor() *raw.MTL4PipelineDescriptor { return x.inner }
+
+// MTL4PipelineDescriptorable is the interface implemented by [MTL4PipelineDescriptor], for mocking and DI.
+type MTL4PipelineDescriptorable interface {
+	Unwrap() *raw.MTL4PipelineDescriptor
+	WithLabel(label string) *MTL4PipelineDescriptor
+	WithOptions(options *raw.MTL4PipelineOptions) *MTL4PipelineDescriptor
+	Label() string
+	SetLabel(label string)
+	Options() *MTL4PipelineOptions
+	SetOptions(options *raw.MTL4PipelineOptions)
+}
+
+var _ MTL4PipelineDescriptorable = (*MTL4PipelineDescriptor)(nil)
 

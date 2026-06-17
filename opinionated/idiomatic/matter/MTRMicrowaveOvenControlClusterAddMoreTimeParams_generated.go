@@ -42,3 +42,49 @@ func (x *MTRMicrowaveOvenControlClusterAddMoreTimeParams) WithServerSideProcessi
 	return x
 }
 
+// TimeToAdd calls the underlying TimeToAdd.
+func (x *MTRMicrowaveOvenControlClusterAddMoreTimeParams) TimeToAdd() *foundation.NSNumber {
+	return x.inner.TimeToAdd()
+}
+
+// SetTimeToAdd calls the underlying SetTimeToAdd.
+func (x *MTRMicrowaveOvenControlClusterAddMoreTimeParams) SetTimeToAdd(timeToAdd *foundation.NSNumber) {
+	x.inner.SetTimeToAdd(timeToAdd)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRMicrowaveOvenControlClusterAddMoreTimeParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRMicrowaveOvenControlClusterAddMoreTimeParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRMicrowaveOvenControlClusterAddMoreTimeParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRMicrowaveOvenControlClusterAddMoreTimeParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRMicrowaveOvenControlClusterAddMoreTimeParamsable is the interface implemented by [MTRMicrowaveOvenControlClusterAddMoreTimeParams], for mocking and DI.
+type MTRMicrowaveOvenControlClusterAddMoreTimeParamsable interface {
+	Unwrap() *raw.MTRMicrowaveOvenControlClusterAddMoreTimeParams
+	WithTimeToAdd(timeToAdd *foundation.NSNumber) *MTRMicrowaveOvenControlClusterAddMoreTimeParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRMicrowaveOvenControlClusterAddMoreTimeParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRMicrowaveOvenControlClusterAddMoreTimeParams
+	TimeToAdd() *foundation.NSNumber
+	SetTimeToAdd(timeToAdd *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRMicrowaveOvenControlClusterAddMoreTimeParamsable = (*MTRMicrowaveOvenControlClusterAddMoreTimeParams)(nil)
+

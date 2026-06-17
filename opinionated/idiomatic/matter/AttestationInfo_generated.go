@@ -73,3 +73,114 @@ func (x *AttestationInfo) WithFirmwareInfo(firmwareInfo *foundation.NSData) *Att
 	return x
 }
 
+// Challenge calls the underlying Challenge.
+func (x *AttestationInfo) Challenge() *foundation.NSData {
+	return x.inner.Challenge()
+}
+
+// SetChallenge calls the underlying SetChallenge.
+func (x *AttestationInfo) SetChallenge(challenge *foundation.NSData) {
+	x.inner.SetChallenge(challenge)
+}
+
+// Nonce calls the underlying Nonce.
+func (x *AttestationInfo) Nonce() *foundation.NSData {
+	return x.inner.Nonce()
+}
+
+// SetNonce calls the underlying SetNonce.
+func (x *AttestationInfo) SetNonce(nonce *foundation.NSData) {
+	x.inner.SetNonce(nonce)
+}
+
+// Elements calls the underlying Elements.
+func (x *AttestationInfo) Elements() *foundation.NSData {
+	return x.inner.Elements()
+}
+
+// SetElements calls the underlying SetElements.
+func (x *AttestationInfo) SetElements(elements *foundation.NSData) {
+	x.inner.SetElements(elements)
+}
+
+// ElementsSignature calls the underlying ElementsSignature.
+func (x *AttestationInfo) ElementsSignature() *foundation.NSData {
+	return x.inner.ElementsSignature()
+}
+
+// SetElementsSignature calls the underlying SetElementsSignature.
+func (x *AttestationInfo) SetElementsSignature(elementsSignature *foundation.NSData) {
+	x.inner.SetElementsSignature(elementsSignature)
+}
+
+// Dac calls the underlying Dac.
+func (x *AttestationInfo) Dac() *foundation.NSData {
+	return x.inner.Dac()
+}
+
+// SetDac calls the underlying SetDac.
+func (x *AttestationInfo) SetDac(dac *foundation.NSData) {
+	x.inner.SetDac(dac)
+}
+
+// Pai calls the underlying Pai.
+func (x *AttestationInfo) Pai() *foundation.NSData {
+	return x.inner.Pai()
+}
+
+// SetPai calls the underlying SetPai.
+func (x *AttestationInfo) SetPai(pai *foundation.NSData) {
+	x.inner.SetPai(pai)
+}
+
+// CertificationDeclaration calls the underlying CertificationDeclaration.
+func (x *AttestationInfo) CertificationDeclaration() *foundation.NSData {
+	return x.inner.CertificationDeclaration()
+}
+
+// SetCertificationDeclaration calls the underlying SetCertificationDeclaration.
+func (x *AttestationInfo) SetCertificationDeclaration(certificationDeclaration *foundation.NSData) {
+	x.inner.SetCertificationDeclaration(certificationDeclaration)
+}
+
+// FirmwareInfo calls the underlying FirmwareInfo.
+func (x *AttestationInfo) FirmwareInfo() *foundation.NSData {
+	return x.inner.FirmwareInfo()
+}
+
+// SetFirmwareInfo calls the underlying SetFirmwareInfo.
+func (x *AttestationInfo) SetFirmwareInfo(firmwareInfo *foundation.NSData) {
+	x.inner.SetFirmwareInfo(firmwareInfo)
+}
+
+// AttestationInfoable is the interface implemented by [AttestationInfo], for mocking and DI.
+type AttestationInfoable interface {
+	Unwrap() *raw.AttestationInfo
+	WithChallenge(challenge *foundation.NSData) *AttestationInfo
+	WithNonce(nonce *foundation.NSData) *AttestationInfo
+	WithElements(elements *foundation.NSData) *AttestationInfo
+	WithElementsSignature(elementsSignature *foundation.NSData) *AttestationInfo
+	WithDac(dac *foundation.NSData) *AttestationInfo
+	WithPai(pai *foundation.NSData) *AttestationInfo
+	WithCertificationDeclaration(certificationDeclaration *foundation.NSData) *AttestationInfo
+	WithFirmwareInfo(firmwareInfo *foundation.NSData) *AttestationInfo
+	Challenge() *foundation.NSData
+	SetChallenge(challenge *foundation.NSData)
+	Nonce() *foundation.NSData
+	SetNonce(nonce *foundation.NSData)
+	Elements() *foundation.NSData
+	SetElements(elements *foundation.NSData)
+	ElementsSignature() *foundation.NSData
+	SetElementsSignature(elementsSignature *foundation.NSData)
+	Dac() *foundation.NSData
+	SetDac(dac *foundation.NSData)
+	Pai() *foundation.NSData
+	SetPai(pai *foundation.NSData)
+	CertificationDeclaration() *foundation.NSData
+	SetCertificationDeclaration(certificationDeclaration *foundation.NSData)
+	FirmwareInfo() *foundation.NSData
+	SetFirmwareInfo(firmwareInfo *foundation.NSData)
+}
+
+var _ AttestationInfoable = (*AttestationInfo)(nil)
+

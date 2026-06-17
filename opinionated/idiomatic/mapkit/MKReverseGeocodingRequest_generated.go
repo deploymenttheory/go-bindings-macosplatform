@@ -5,8 +5,10 @@
 package mapkit
 
 import (
+	"context"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -31,4 +33,73 @@ func (x *ReverseGeocodingRequest) WithPreferredLocale(preferredLocale *foundatio
 	x.inner.SetPreferredLocale(preferredLocale)
 	return x
 }
+
+// GetMapItems blocks until the operation completes or ctx is cancelled.
+func (x *ReverseGeocodingRequest) GetMapItems(ctx context.Context) (*foundation.NSArray[*raw.MKMapItem], error) {
+	type _result struct {
+		val *foundation.NSArray[*raw.MKMapItem]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.GetMapItemsWithCompletionHandler(func(_p0 *foundation.NSArray[*raw.MKMapItem], _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[*raw.MKMapItem]
+		return _zero, ctx.Err()
+	}
+}
+
+// Cancel calls the underlying Cancel.
+func (x *ReverseGeocodingRequest) Cancel() {
+	x.inner.Cancel()
+}
+
+// IsCancelled calls the underlying IsCancelled.
+func (x *ReverseGeocodingRequest) IsCancelled() bool {
+	return x.inner.IsCancelled()
+}
+
+// IsLoading calls the underlying IsLoading.
+func (x *ReverseGeocodingRequest) IsLoading() bool {
+	return x.inner.IsLoading()
+}
+
+// Location calls the underlying Location.
+func (x *ReverseGeocodingRequest) Location() unsafe.Pointer {
+	return x.inner.Location()
+}
+
+// PreferredLocale calls the underlying PreferredLocale.
+func (x *ReverseGeocodingRequest) PreferredLocale() *foundation.NSLocale {
+	return x.inner.PreferredLocale()
+}
+
+// SetPreferredLocale calls the underlying SetPreferredLocale.
+func (x *ReverseGeocodingRequest) SetPreferredLocale(preferredLocale *foundation.NSLocale) {
+	x.inner.SetPreferredLocale(preferredLocale)
+}
+
+// ReverseGeocodingRequestable is the interface implemented by [ReverseGeocodingRequest], for mocking and DI.
+type ReverseGeocodingRequestable interface {
+	Unwrap() *raw.MKReverseGeocodingRequest
+	WithPreferredLocale(preferredLocale *foundation.NSLocale) *ReverseGeocodingRequest
+	GetMapItems(ctx context.Context) (*foundation.NSArray[*raw.MKMapItem], error)
+	Cancel()
+	IsCancelled() bool
+	IsLoading() bool
+	Location() unsafe.Pointer
+	PreferredLocale() *foundation.NSLocale
+	SetPreferredLocale(preferredLocale *foundation.NSLocale)
+}
+
+var _ ReverseGeocodingRequestable = (*ReverseGeocodingRequest)(nil)
 

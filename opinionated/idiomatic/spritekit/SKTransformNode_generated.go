@@ -7,6 +7,7 @@ package spritekit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // TransformNode wraps [raw.SKTransformNode] with a fluent Go API.
@@ -35,5 +36,74 @@ func (x *TransformNode) WithYRotation(yRotation float64) *TransformNode {
 	return x
 }
 
+// SetEulerAngles calls the underlying SetEulerAngles.
+func (x *TransformNode) SetEulerAngles(euler unsafe.Pointer) {
+	x.inner.SetEulerAngles(euler)
+}
+
+// EulerAngles calls the underlying EulerAngles.
+func (x *TransformNode) EulerAngles() unsafe.Pointer {
+	return x.inner.EulerAngles()
+}
+
+// SetRotationMatrix calls the underlying SetRotationMatrix.
+func (x *TransformNode) SetRotationMatrix(rotationMatrix unsafe.Pointer) {
+	x.inner.SetRotationMatrix(rotationMatrix)
+}
+
+// RotationMatrix calls the underlying RotationMatrix.
+func (x *TransformNode) RotationMatrix() unsafe.Pointer {
+	return x.inner.RotationMatrix()
+}
+
+// SetQuaternion calls the underlying SetQuaternion.
+func (x *TransformNode) SetQuaternion(quaternion unsafe.Pointer) {
+	x.inner.SetQuaternion(quaternion)
+}
+
+// Quaternion calls the underlying Quaternion.
+func (x *TransformNode) Quaternion() unsafe.Pointer {
+	return x.inner.Quaternion()
+}
+
+// XRotation calls the underlying XRotation.
+func (x *TransformNode) XRotation() float64 {
+	return x.inner.XRotation()
+}
+
+// SetXRotation calls the underlying SetXRotation.
+func (x *TransformNode) SetXRotation(xRotation float64) {
+	x.inner.SetXRotation(xRotation)
+}
+
+// YRotation calls the underlying YRotation.
+func (x *TransformNode) YRotation() float64 {
+	return x.inner.YRotation()
+}
+
+// SetYRotation calls the underlying SetYRotation.
+func (x *TransformNode) SetYRotation(yRotation float64) {
+	x.inner.SetYRotation(yRotation)
+}
+
 func (x *TransformNode) asNode() *raw.SKNode { return &x.inner.SKNode }
+
+// TransformNodeable is the interface implemented by [TransformNode], for mocking and DI.
+type TransformNodeable interface {
+	Unwrap() *raw.SKTransformNode
+	WithXRotation(xRotation float64) *TransformNode
+	WithYRotation(yRotation float64) *TransformNode
+	SetEulerAngles(euler unsafe.Pointer)
+	EulerAngles() unsafe.Pointer
+	SetRotationMatrix(rotationMatrix unsafe.Pointer)
+	RotationMatrix() unsafe.Pointer
+	SetQuaternion(quaternion unsafe.Pointer)
+	Quaternion() unsafe.Pointer
+	XRotation() float64
+	SetXRotation(xRotation float64)
+	YRotation() float64
+	SetYRotation(yRotation float64)
+}
+
+var _ TransformNodeable = (*TransformNode)(nil)
 

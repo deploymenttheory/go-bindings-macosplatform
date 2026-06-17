@@ -32,3 +32,20 @@ func NewQCCompositionLayerWithComposition(composition *raw.QCComposition) *QCCom
 	return &QCCompositionLayer{inner: raw.QCCompositionLayerFromID(_id)}
 }
 
+// Composition calls the underlying Composition.
+func (x *QCCompositionLayer) Composition() *QCComposition {
+	_r := x.inner.Composition()
+	if _r == nil {
+		return nil
+	}
+	return &QCComposition{inner: _r}
+}
+
+// QCCompositionLayerable is the interface implemented by [QCCompositionLayer], for mocking and DI.
+type QCCompositionLayerable interface {
+	Unwrap() *raw.QCCompositionLayer
+	Composition() *QCComposition
+}
+
+var _ QCCompositionLayerable = (*QCCompositionLayer)(nil)
+

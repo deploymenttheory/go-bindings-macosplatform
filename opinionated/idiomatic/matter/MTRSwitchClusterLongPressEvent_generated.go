@@ -30,3 +30,23 @@ func (x *MTRSwitchClusterLongPressEvent) WithNewPosition(newPosition *foundation
 	return x
 }
 
+// GetNewPosition calls the underlying GetNewPosition.
+func (x *MTRSwitchClusterLongPressEvent) GetNewPosition() *foundation.NSNumber {
+	return x.inner.GetNewPosition()
+}
+
+// SetNewPosition calls the underlying SetNewPosition.
+func (x *MTRSwitchClusterLongPressEvent) SetNewPosition(newPosition *foundation.NSNumber) {
+	x.inner.SetNewPosition(newPosition)
+}
+
+// MTRSwitchClusterLongPressEventable is the interface implemented by [MTRSwitchClusterLongPressEvent], for mocking and DI.
+type MTRSwitchClusterLongPressEventable interface {
+	Unwrap() *raw.MTRSwitchClusterLongPressEvent
+	WithNewPosition(newPosition *foundation.NSNumber) *MTRSwitchClusterLongPressEvent
+	GetNewPosition() *foundation.NSNumber
+	SetNewPosition(newPosition *foundation.NSNumber)
+}
+
+var _ MTRSwitchClusterLongPressEventable = (*MTRSwitchClusterLongPressEvent)(nil)
+

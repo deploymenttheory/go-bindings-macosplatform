@@ -7,6 +7,7 @@ package cryptotokenkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cryptotokenkit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // TokenKeyAlgorithm wraps [raw.TKTokenKeyAlgorithm] with a fluent Go API.
@@ -22,4 +23,23 @@ func NewTokenKeyAlgorithm() *TokenKeyAlgorithm {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("TKTokenKeyAlgorithm")), objc.RegisterName("new"))
 	return &TokenKeyAlgorithm{inner: raw.TKTokenKeyAlgorithmFromID(_id)}
 }
+
+// IsAlgorithm calls the underlying IsAlgorithm.
+func (x *TokenKeyAlgorithm) IsAlgorithm(algorithm unsafe.Pointer) bool {
+	return x.inner.IsAlgorithm(algorithm)
+}
+
+// SupportsAlgorithm calls the underlying SupportsAlgorithm.
+func (x *TokenKeyAlgorithm) SupportsAlgorithm(algorithm unsafe.Pointer) bool {
+	return x.inner.SupportsAlgorithm(algorithm)
+}
+
+// TokenKeyAlgorithmable is the interface implemented by [TokenKeyAlgorithm], for mocking and DI.
+type TokenKeyAlgorithmable interface {
+	Unwrap() *raw.TKTokenKeyAlgorithm
+	IsAlgorithm(algorithm unsafe.Pointer) bool
+	SupportsAlgorithm(algorithm unsafe.Pointer) bool
+}
+
+var _ TokenKeyAlgorithmable = (*TokenKeyAlgorithm)(nil)
 

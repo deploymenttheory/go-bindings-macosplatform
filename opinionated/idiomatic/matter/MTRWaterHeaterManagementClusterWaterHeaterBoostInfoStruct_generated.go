@@ -60,3 +60,88 @@ func (x *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) WithTargetRe
 	return x
 }
 
+// Duration calls the underlying Duration.
+func (x *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) Duration() *foundation.NSNumber {
+	return x.inner.Duration()
+}
+
+// SetDuration calls the underlying SetDuration.
+func (x *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) SetDuration(duration *foundation.NSNumber) {
+	x.inner.SetDuration(duration)
+}
+
+// OneShot calls the underlying OneShot.
+func (x *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) OneShot() *foundation.NSNumber {
+	return x.inner.OneShot()
+}
+
+// SetOneShot calls the underlying SetOneShot.
+func (x *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) SetOneShot(oneShot *foundation.NSNumber) {
+	x.inner.SetOneShot(oneShot)
+}
+
+// EmergencyBoost calls the underlying EmergencyBoost.
+func (x *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) EmergencyBoost() *foundation.NSNumber {
+	return x.inner.EmergencyBoost()
+}
+
+// SetEmergencyBoost calls the underlying SetEmergencyBoost.
+func (x *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) SetEmergencyBoost(emergencyBoost *foundation.NSNumber) {
+	x.inner.SetEmergencyBoost(emergencyBoost)
+}
+
+// TemporarySetpoint calls the underlying TemporarySetpoint.
+func (x *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) TemporarySetpoint() *foundation.NSNumber {
+	return x.inner.TemporarySetpoint()
+}
+
+// SetTemporarySetpoint calls the underlying SetTemporarySetpoint.
+func (x *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) SetTemporarySetpoint(temporarySetpoint *foundation.NSNumber) {
+	x.inner.SetTemporarySetpoint(temporarySetpoint)
+}
+
+// TargetPercentage calls the underlying TargetPercentage.
+func (x *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) TargetPercentage() *foundation.NSNumber {
+	return x.inner.TargetPercentage()
+}
+
+// SetTargetPercentage calls the underlying SetTargetPercentage.
+func (x *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) SetTargetPercentage(targetPercentage *foundation.NSNumber) {
+	x.inner.SetTargetPercentage(targetPercentage)
+}
+
+// TargetReheat calls the underlying TargetReheat.
+func (x *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) TargetReheat() *foundation.NSNumber {
+	return x.inner.TargetReheat()
+}
+
+// SetTargetReheat calls the underlying SetTargetReheat.
+func (x *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) SetTargetReheat(targetReheat *foundation.NSNumber) {
+	x.inner.SetTargetReheat(targetReheat)
+}
+
+// MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStructable is the interface implemented by [MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct], for mocking and DI.
+type MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStructable interface {
+	Unwrap() *raw.MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct
+	WithDuration(duration *foundation.NSNumber) *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct
+	WithOneShot(oneShot *foundation.NSNumber) *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct
+	WithEmergencyBoost(emergencyBoost *foundation.NSNumber) *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct
+	WithTemporarySetpoint(temporarySetpoint *foundation.NSNumber) *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct
+	WithTargetPercentage(targetPercentage *foundation.NSNumber) *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct
+	WithTargetReheat(targetReheat *foundation.NSNumber) *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct
+	Duration() *foundation.NSNumber
+	SetDuration(duration *foundation.NSNumber)
+	OneShot() *foundation.NSNumber
+	SetOneShot(oneShot *foundation.NSNumber)
+	EmergencyBoost() *foundation.NSNumber
+	SetEmergencyBoost(emergencyBoost *foundation.NSNumber)
+	TemporarySetpoint() *foundation.NSNumber
+	SetTemporarySetpoint(temporarySetpoint *foundation.NSNumber)
+	TargetPercentage() *foundation.NSNumber
+	SetTargetPercentage(targetPercentage *foundation.NSNumber)
+	TargetReheat() *foundation.NSNumber
+	SetTargetReheat(targetReheat *foundation.NSNumber)
+}
+
+var _ MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStructable = (*MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct)(nil)
+

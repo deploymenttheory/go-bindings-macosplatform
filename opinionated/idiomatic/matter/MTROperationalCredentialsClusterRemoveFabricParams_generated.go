@@ -42,3 +42,49 @@ func (x *MTROperationalCredentialsClusterRemoveFabricParams) WithServerSideProce
 	return x
 }
 
+// FabricIndex calls the underlying FabricIndex.
+func (x *MTROperationalCredentialsClusterRemoveFabricParams) FabricIndex() *foundation.NSNumber {
+	return x.inner.FabricIndex()
+}
+
+// SetFabricIndex calls the underlying SetFabricIndex.
+func (x *MTROperationalCredentialsClusterRemoveFabricParams) SetFabricIndex(fabricIndex *foundation.NSNumber) {
+	x.inner.SetFabricIndex(fabricIndex)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTROperationalCredentialsClusterRemoveFabricParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTROperationalCredentialsClusterRemoveFabricParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTROperationalCredentialsClusterRemoveFabricParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTROperationalCredentialsClusterRemoveFabricParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTROperationalCredentialsClusterRemoveFabricParamsable is the interface implemented by [MTROperationalCredentialsClusterRemoveFabricParams], for mocking and DI.
+type MTROperationalCredentialsClusterRemoveFabricParamsable interface {
+	Unwrap() *raw.MTROperationalCredentialsClusterRemoveFabricParams
+	WithFabricIndex(fabricIndex *foundation.NSNumber) *MTROperationalCredentialsClusterRemoveFabricParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTROperationalCredentialsClusterRemoveFabricParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTROperationalCredentialsClusterRemoveFabricParams
+	FabricIndex() *foundation.NSNumber
+	SetFabricIndex(fabricIndex *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTROperationalCredentialsClusterRemoveFabricParamsable = (*MTROperationalCredentialsClusterRemoveFabricParams)(nil)
+

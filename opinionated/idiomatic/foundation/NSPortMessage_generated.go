@@ -30,5 +30,57 @@ func (x *PortMessage) WithMsgid(msgid uint32) *PortMessage {
 	return x
 }
 
+// SendBeforeDate calls the underlying SendBeforeDate.
+func (x *PortMessage) SendBeforeDate(date *raw.NSDate) bool {
+	return x.inner.SendBeforeDate(date)
+}
+
+// Components calls the underlying Components.
+func (x *PortMessage) Components() *raw.NSArray[objc.ID] {
+	return x.inner.Components()
+}
+
+// ReceivePort calls the underlying ReceivePort.
+func (x *PortMessage) ReceivePort() *Port {
+	_r := x.inner.ReceivePort()
+	if _r == nil {
+		return nil
+	}
+	return &Port{inner: _r}
+}
+
+// SendPort calls the underlying SendPort.
+func (x *PortMessage) SendPort() *Port {
+	_r := x.inner.SendPort()
+	if _r == nil {
+		return nil
+	}
+	return &Port{inner: _r}
+}
+
+// Msgid calls the underlying Msgid.
+func (x *PortMessage) Msgid() uint32 {
+	return x.inner.Msgid()
+}
+
+// SetMsgid calls the underlying SetMsgid.
+func (x *PortMessage) SetMsgid(msgid uint32) {
+	x.inner.SetMsgid(msgid)
+}
+
 func (x *PortMessage) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// PortMessageable is the interface implemented by [PortMessage], for mocking and DI.
+type PortMessageable interface {
+	Unwrap() *raw.NSPortMessage
+	WithMsgid(msgid uint32) *PortMessage
+	SendBeforeDate(date *raw.NSDate) bool
+	Components() *raw.NSArray[objc.ID]
+	ReceivePort() *Port
+	SendPort() *Port
+	Msgid() uint32
+	SetMsgid(msgid uint32)
+}
+
+var _ PortMessageable = (*PortMessage)(nil)
 

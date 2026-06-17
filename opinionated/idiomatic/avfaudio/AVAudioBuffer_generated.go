@@ -6,6 +6,7 @@ package avfaudio
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreaudiotypes"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +24,34 @@ func NewAudioBuffer() *AudioBuffer {
 	return &AudioBuffer{inner: raw.AVAudioBufferFromID(_id)}
 }
 
+// Format calls the underlying Format.
+func (x *AudioBuffer) Format() *AudioFormat {
+	_r := x.inner.Format()
+	if _r == nil {
+		return nil
+	}
+	return &AudioFormat{inner: _r}
+}
+
+// AudioBufferList calls the underlying AudioBufferList.
+func (x *AudioBuffer) AudioBufferList() *coreaudiotypes.AudioBufferList {
+	return x.inner.AudioBufferList()
+}
+
+// MutableAudioBufferList calls the underlying MutableAudioBufferList.
+func (x *AudioBuffer) MutableAudioBufferList() *coreaudiotypes.AudioBufferList {
+	return x.inner.MutableAudioBufferList()
+}
+
 func (x *AudioBuffer) asAudioBuffer() *raw.AVAudioBuffer { return x.inner }
+
+// AudioBufferable is the interface implemented by [AudioBuffer], for mocking and DI.
+type AudioBufferable interface {
+	Unwrap() *raw.AVAudioBuffer
+	Format() *AudioFormat
+	AudioBufferList() *coreaudiotypes.AudioBufferList
+	MutableAudioBufferList() *coreaudiotypes.AudioBufferList
+}
+
+var _ AudioBufferable = (*AudioBuffer)(nil)
 

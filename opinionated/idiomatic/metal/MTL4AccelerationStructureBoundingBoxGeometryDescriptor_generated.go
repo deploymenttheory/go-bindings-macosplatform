@@ -41,5 +41,51 @@ func (x *MTL4AccelerationStructureBoundingBoxGeometryDescriptor) WithBoundingBox
 	return x
 }
 
+// BoundingBoxBuffer calls the underlying BoundingBoxBuffer.
+func (x *MTL4AccelerationStructureBoundingBoxGeometryDescriptor) BoundingBoxBuffer() raw.MTL4BufferRange {
+	return x.inner.BoundingBoxBuffer()
+}
+
+// SetBoundingBoxBuffer calls the underlying SetBoundingBoxBuffer.
+func (x *MTL4AccelerationStructureBoundingBoxGeometryDescriptor) SetBoundingBoxBuffer(boundingBoxBuffer raw.MTL4BufferRange) {
+	x.inner.SetBoundingBoxBuffer(boundingBoxBuffer)
+}
+
+// BoundingBoxStride calls the underlying BoundingBoxStride.
+func (x *MTL4AccelerationStructureBoundingBoxGeometryDescriptor) BoundingBoxStride() uint {
+	return x.inner.BoundingBoxStride()
+}
+
+// SetBoundingBoxStride calls the underlying SetBoundingBoxStride.
+func (x *MTL4AccelerationStructureBoundingBoxGeometryDescriptor) SetBoundingBoxStride(boundingBoxStride uint) {
+	x.inner.SetBoundingBoxStride(boundingBoxStride)
+}
+
+// BoundingBoxCount calls the underlying BoundingBoxCount.
+func (x *MTL4AccelerationStructureBoundingBoxGeometryDescriptor) BoundingBoxCount() uint {
+	return x.inner.BoundingBoxCount()
+}
+
+// SetBoundingBoxCount calls the underlying SetBoundingBoxCount.
+func (x *MTL4AccelerationStructureBoundingBoxGeometryDescriptor) SetBoundingBoxCount(boundingBoxCount uint) {
+	x.inner.SetBoundingBoxCount(boundingBoxCount)
+}
+
 func (x *MTL4AccelerationStructureBoundingBoxGeometryDescriptor) asMTL4AccelerationStructureGeometryDescriptor() *raw.MTL4AccelerationStructureGeometryDescriptor { return &x.inner.MTL4AccelerationStructureGeometryDescriptor }
+
+// MTL4AccelerationStructureBoundingBoxGeometryDescriptorable is the interface implemented by [MTL4AccelerationStructureBoundingBoxGeometryDescriptor], for mocking and DI.
+type MTL4AccelerationStructureBoundingBoxGeometryDescriptorable interface {
+	Unwrap() *raw.MTL4AccelerationStructureBoundingBoxGeometryDescriptor
+	WithBoundingBoxBuffer(boundingBoxBuffer raw.MTL4BufferRange) *MTL4AccelerationStructureBoundingBoxGeometryDescriptor
+	WithBoundingBoxStride(boundingBoxStride uint) *MTL4AccelerationStructureBoundingBoxGeometryDescriptor
+	WithBoundingBoxCount(boundingBoxCount uint) *MTL4AccelerationStructureBoundingBoxGeometryDescriptor
+	BoundingBoxBuffer() raw.MTL4BufferRange
+	SetBoundingBoxBuffer(boundingBoxBuffer raw.MTL4BufferRange)
+	BoundingBoxStride() uint
+	SetBoundingBoxStride(boundingBoxStride uint)
+	BoundingBoxCount() uint
+	SetBoundingBoxCount(boundingBoxCount uint)
+}
+
+var _ MTL4AccelerationStructureBoundingBoxGeometryDescriptorable = (*MTL4AccelerationStructureBoundingBoxGeometryDescriptor)(nil)
 

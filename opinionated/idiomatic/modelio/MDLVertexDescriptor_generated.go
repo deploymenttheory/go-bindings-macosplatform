@@ -7,6 +7,7 @@ package modelio
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -58,17 +59,54 @@ func (x *VertexDescriptor) WithLayouts(items ...*raw.MDLVertexBufferLayout) *Ver
 	return x
 }
 
+// AttributeNamed calls the underlying AttributeNamed.
+func (x *VertexDescriptor) AttributeNamed(name string) *VertexAttribute {
+	_r := x.inner.AttributeNamed(foundation.NSStringStringWithUTF8String(name))
+	if _r == nil {
+		return nil
+	}
+	return &VertexAttribute{inner: _r}
+}
+
+// AddOrReplaceAttribute calls the underlying AddOrReplaceAttribute.
+func (x *VertexDescriptor) AddOrReplaceAttribute(attribute *raw.MDLVertexAttribute) {
+	x.inner.AddOrReplaceAttribute(attribute)
+}
+
+// RemoveAttributeNamed calls the underlying RemoveAttributeNamed.
+func (x *VertexDescriptor) RemoveAttributeNamed(name string) {
+	x.inner.RemoveAttributeNamed(foundation.NSStringStringWithUTF8String(name))
+}
+
+// Reset calls the underlying Reset.
+func (x *VertexDescriptor) Reset() {
+	x.inner.Reset()
+}
+
+// SetPackedStrides calls the underlying SetPackedStrides.
+func (x *VertexDescriptor) SetPackedStrides() {
+	x.inner.SetPackedStrides()
+}
+
+// SetPackedOffsets calls the underlying SetPackedOffsets.
+func (x *VertexDescriptor) SetPackedOffsets() {
+	x.inner.SetPackedOffsets()
+}
+
 // Attributes returns the collection as a Go slice.
 func (x *VertexDescriptor) Attributes() []*raw.MDLVertexAttribute {
 	arr := x.inner.Attributes()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MDLVertexAttribute, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MDLVertexAttribute {
+		return raw.MDLVertexAttributeFromID(purego.Retain(_id))
+	})
+}
+
+// SetAttributes calls the underlying SetAttributes.
+func (x *VertexDescriptor) SetAttributes(attributes *foundation.NSMutableArray[*raw.MDLVertexAttribute]) {
+	x.inner.SetAttributes(attributes)
 }
 
 // Layouts returns the collection as a Go slice.
@@ -77,10 +115,32 @@ func (x *VertexDescriptor) Layouts() []*raw.MDLVertexBufferLayout {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MDLVertexBufferLayout, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MDLVertexBufferLayout {
+		return raw.MDLVertexBufferLayoutFromID(purego.Retain(_id))
+	})
 }
+
+// SetLayouts calls the underlying SetLayouts.
+func (x *VertexDescriptor) SetLayouts(layouts *foundation.NSMutableArray[*raw.MDLVertexBufferLayout]) {
+	x.inner.SetLayouts(layouts)
+}
+
+// VertexDescriptorable is the interface implemented by [VertexDescriptor], for mocking and DI.
+type VertexDescriptorable interface {
+	Unwrap() *raw.MDLVertexDescriptor
+	WithAttributes(items ...*raw.MDLVertexAttribute) *VertexDescriptor
+	WithLayouts(items ...*raw.MDLVertexBufferLayout) *VertexDescriptor
+	AttributeNamed(name string) *VertexAttribute
+	AddOrReplaceAttribute(attribute *raw.MDLVertexAttribute)
+	RemoveAttributeNamed(name string)
+	Reset()
+	SetPackedStrides()
+	SetPackedOffsets()
+	Attributes() []*raw.MDLVertexAttribute
+	SetAttributes(attributes *foundation.NSMutableArray[*raw.MDLVertexAttribute])
+	Layouts() []*raw.MDLVertexBufferLayout
+	SetLayouts(layouts *foundation.NSMutableArray[*raw.MDLVertexBufferLayout])
+}
+
+var _ VertexDescriptorable = (*VertexDescriptor)(nil)
 

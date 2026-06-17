@@ -23,3 +23,16 @@ func NewSteeringWheelElement() *SteeringWheelElement {
 	return &SteeringWheelElement{inner: raw.GCSteeringWheelElementFromID(_id)}
 }
 
+// MaximumDegreesOfRotation calls the underlying MaximumDegreesOfRotation.
+func (x *SteeringWheelElement) MaximumDegreesOfRotation() float32 {
+	return x.inner.MaximumDegreesOfRotation()
+}
+
+// SteeringWheelElementable is the interface implemented by [SteeringWheelElement], for mocking and DI.
+type SteeringWheelElementable interface {
+	Unwrap() *raw.GCSteeringWheelElement
+	MaximumDegreesOfRotation() float32
+}
+
+var _ SteeringWheelElementable = (*SteeringWheelElement)(nil)
+

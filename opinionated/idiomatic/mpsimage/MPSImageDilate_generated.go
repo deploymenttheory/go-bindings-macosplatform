@@ -33,7 +33,26 @@ func NewImageDilateWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MT
 	return &ImageDilate{inner: raw.MPSImageDilateFromID(_id)}
 }
 
+// KernelHeight calls the underlying KernelHeight.
+func (x *ImageDilate) KernelHeight() uint {
+	return x.inner.KernelHeight()
+}
+
+// KernelWidth calls the underlying KernelWidth.
+func (x *ImageDilate) KernelWidth() uint {
+	return x.inner.KernelWidth()
+}
+
 func (x *ImageDilate) asImageDilate() *raw.MPSImageDilate { return x.inner }
 
 func (x *ImageDilate) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.inner.MPSUnaryImageKernel }
+
+// ImageDilateable is the interface implemented by [ImageDilate], for mocking and DI.
+type ImageDilateable interface {
+	Unwrap() *raw.MPSImageDilate
+	KernelHeight() uint
+	KernelWidth() uint
+}
+
+var _ ImageDilateable = (*ImageDilate)(nil)
 

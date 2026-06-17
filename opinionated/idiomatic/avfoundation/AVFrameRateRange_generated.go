@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,35 @@ func NewFrameRateRange() *FrameRateRange {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVFrameRateRange")), objc.RegisterName("new"))
 	return &FrameRateRange{inner: raw.AVFrameRateRangeFromID(_id)}
 }
+
+// MinFrameRate calls the underlying MinFrameRate.
+func (x *FrameRateRange) MinFrameRate() float64 {
+	return x.inner.MinFrameRate()
+}
+
+// MaxFrameRate calls the underlying MaxFrameRate.
+func (x *FrameRateRange) MaxFrameRate() float64 {
+	return x.inner.MaxFrameRate()
+}
+
+// MaxFrameDuration calls the underlying MaxFrameDuration.
+func (x *FrameRateRange) MaxFrameDuration() coremedia.CMTime {
+	return x.inner.MaxFrameDuration()
+}
+
+// MinFrameDuration calls the underlying MinFrameDuration.
+func (x *FrameRateRange) MinFrameDuration() coremedia.CMTime {
+	return x.inner.MinFrameDuration()
+}
+
+// FrameRateRangeable is the interface implemented by [FrameRateRange], for mocking and DI.
+type FrameRateRangeable interface {
+	Unwrap() *raw.AVFrameRateRange
+	MinFrameRate() float64
+	MaxFrameRate() float64
+	MaxFrameDuration() coremedia.CMTime
+	MinFrameDuration() coremedia.CMTime
+}
+
+var _ FrameRateRangeable = (*FrameRateRange)(nil)
 

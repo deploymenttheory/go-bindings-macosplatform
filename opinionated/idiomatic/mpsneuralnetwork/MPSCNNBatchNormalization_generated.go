@@ -7,8 +7,10 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // CNNBatchNormalization wraps [raw.MPSCNNBatchNormalization] with a fluent Go API.
@@ -46,5 +48,79 @@ func (x *CNNBatchNormalization) WithEpsilon(epsilon float32) *CNNBatchNormalizat
 	return x
 }
 
+// EncodeToCommandBufferSourceImageBatchNormalizationStateDestinationImage calls the underlying EncodeToCommandBufferSourceImageBatchNormalizationStateDestinationImage.
+func (x *CNNBatchNormalization) EncodeToCommandBufferSourceImageBatchNormalizationStateDestinationImage(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, batchNormalizationState *raw.MPSCNNBatchNormalizationState, destinationImage *mpscore.MPSImage) {
+	x.inner.EncodeToCommandBufferSourceImageBatchNormalizationStateDestinationImage(commandBuffer, sourceImage, batchNormalizationState, destinationImage)
+}
+
+// EncodeBatchToCommandBufferSourceImagesBatchNormalizationStateDestinationImages calls the underlying EncodeBatchToCommandBufferSourceImagesBatchNormalizationStateDestinationImages.
+func (x *CNNBatchNormalization) EncodeBatchToCommandBufferSourceImagesBatchNormalizationStateDestinationImages(commandBuffer metal.MTLCommandBuffer, sourceImages unsafe.Pointer, batchNormalizationState *raw.MPSCNNBatchNormalizationState, destinationImages unsafe.Pointer) {
+	x.inner.EncodeBatchToCommandBufferSourceImagesBatchNormalizationStateDestinationImages(commandBuffer, sourceImages, batchNormalizationState, destinationImages)
+}
+
+// ReloadDataSource calls the underlying ReloadDataSource.
+func (x *CNNBatchNormalization) ReloadDataSource(dataSource raw.MPSCNNBatchNormalizationDataSource) {
+	x.inner.ReloadDataSource(dataSource)
+}
+
+// ReloadGammaAndBetaFromDataSource calls the underlying ReloadGammaAndBetaFromDataSource.
+func (x *CNNBatchNormalization) ReloadGammaAndBetaFromDataSource() {
+	x.inner.ReloadGammaAndBetaFromDataSource()
+}
+
+// ReloadMeanAndVarianceFromDataSource calls the underlying ReloadMeanAndVarianceFromDataSource.
+func (x *CNNBatchNormalization) ReloadMeanAndVarianceFromDataSource() {
+	x.inner.ReloadMeanAndVarianceFromDataSource()
+}
+
+// ReloadGammaAndBetaWithCommandBufferGammaAndBetaState calls the underlying ReloadGammaAndBetaWithCommandBufferGammaAndBetaState.
+func (x *CNNBatchNormalization) ReloadGammaAndBetaWithCommandBufferGammaAndBetaState(commandBuffer metal.MTLCommandBuffer, gammaAndBetaState *raw.MPSCNNNormalizationGammaAndBetaState) {
+	x.inner.ReloadGammaAndBetaWithCommandBufferGammaAndBetaState(commandBuffer, gammaAndBetaState)
+}
+
+// ReloadMeanAndVarianceWithCommandBufferMeanAndVarianceState calls the underlying ReloadMeanAndVarianceWithCommandBufferMeanAndVarianceState.
+func (x *CNNBatchNormalization) ReloadMeanAndVarianceWithCommandBufferMeanAndVarianceState(commandBuffer metal.MTLCommandBuffer, meanAndVarianceState *raw.MPSCNNNormalizationMeanAndVarianceState) {
+	x.inner.ReloadMeanAndVarianceWithCommandBufferMeanAndVarianceState(commandBuffer, meanAndVarianceState)
+}
+
+// NumberOfFeatureChannels calls the underlying NumberOfFeatureChannels.
+func (x *CNNBatchNormalization) NumberOfFeatureChannels() uint {
+	return x.inner.NumberOfFeatureChannels()
+}
+
+// Epsilon calls the underlying Epsilon.
+func (x *CNNBatchNormalization) Epsilon() float32 {
+	return x.inner.Epsilon()
+}
+
+// SetEpsilon calls the underlying SetEpsilon.
+func (x *CNNBatchNormalization) SetEpsilon(epsilon float32) {
+	x.inner.SetEpsilon(epsilon)
+}
+
+// DataSource calls the underlying DataSource.
+func (x *CNNBatchNormalization) DataSource() raw.MPSCNNBatchNormalizationDataSource {
+	return x.inner.DataSource()
+}
+
 func (x *CNNBatchNormalization) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSCNNKernel }
+
+// CNNBatchNormalizationable is the interface implemented by [CNNBatchNormalization], for mocking and DI.
+type CNNBatchNormalizationable interface {
+	Unwrap() *raw.MPSCNNBatchNormalization
+	WithEpsilon(epsilon float32) *CNNBatchNormalization
+	EncodeToCommandBufferSourceImageBatchNormalizationStateDestinationImage(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, batchNormalizationState *raw.MPSCNNBatchNormalizationState, destinationImage *mpscore.MPSImage)
+	EncodeBatchToCommandBufferSourceImagesBatchNormalizationStateDestinationImages(commandBuffer metal.MTLCommandBuffer, sourceImages unsafe.Pointer, batchNormalizationState *raw.MPSCNNBatchNormalizationState, destinationImages unsafe.Pointer)
+	ReloadDataSource(dataSource raw.MPSCNNBatchNormalizationDataSource)
+	ReloadGammaAndBetaFromDataSource()
+	ReloadMeanAndVarianceFromDataSource()
+	ReloadGammaAndBetaWithCommandBufferGammaAndBetaState(commandBuffer metal.MTLCommandBuffer, gammaAndBetaState *raw.MPSCNNNormalizationGammaAndBetaState)
+	ReloadMeanAndVarianceWithCommandBufferMeanAndVarianceState(commandBuffer metal.MTLCommandBuffer, meanAndVarianceState *raw.MPSCNNNormalizationMeanAndVarianceState)
+	NumberOfFeatureChannels() uint
+	Epsilon() float32
+	SetEpsilon(epsilon float32)
+	DataSource() raw.MPSCNNBatchNormalizationDataSource
+}
+
+var _ CNNBatchNormalizationable = (*CNNBatchNormalization)(nil)
 

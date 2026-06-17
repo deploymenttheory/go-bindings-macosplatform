@@ -8,6 +8,7 @@ import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -40,17 +41,35 @@ func NewPredicateEditorRowTemplateWithCompoundTypes(compoundTypes *foundation.NS
 	return &PredicateEditorRowTemplate{inner: raw.NSPredicateEditorRowTemplateFromID(_id)}
 }
 
+// MatchForPredicate calls the underlying MatchForPredicate.
+func (x *PredicateEditorRowTemplate) MatchForPredicate(predicate *foundation.NSPredicate) float64 {
+	return x.inner.MatchForPredicate(predicate)
+}
+
+// SetPredicate calls the underlying SetPredicate.
+func (x *PredicateEditorRowTemplate) SetPredicate(predicate *foundation.NSPredicate) {
+	x.inner.SetPredicate(predicate)
+}
+
+// PredicateWithSubpredicates calls the underlying PredicateWithSubpredicates.
+func (x *PredicateEditorRowTemplate) PredicateWithSubpredicates(subpredicates *foundation.NSArray[*foundation.NSPredicate]) *foundation.NSPredicate {
+	return x.inner.PredicateWithSubpredicates(subpredicates)
+}
+
+// DisplayableSubpredicatesOfPredicate calls the underlying DisplayableSubpredicatesOfPredicate.
+func (x *PredicateEditorRowTemplate) DisplayableSubpredicatesOfPredicate(predicate *foundation.NSPredicate) *foundation.NSArray[*foundation.NSPredicate] {
+	return x.inner.DisplayableSubpredicatesOfPredicate(predicate)
+}
+
 // TemplateViews returns the collection as a Go slice.
 func (x *PredicateEditorRowTemplate) TemplateViews() []*raw.NSView {
 	arr := x.inner.TemplateViews()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSView, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSView {
+		return raw.NSViewFromID(purego.Retain(_id))
+	})
 }
 
 // LeftExpressions returns the collection as a Go slice.
@@ -59,11 +78,9 @@ func (x *PredicateEditorRowTemplate) LeftExpressions() []*foundation.NSExpressio
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSExpression, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSExpression {
+		return foundation.NSExpressionFromID(purego.Retain(_id))
+	})
 }
 
 // RightExpressions returns the collection as a Go slice.
@@ -72,11 +89,19 @@ func (x *PredicateEditorRowTemplate) RightExpressions() []*foundation.NSExpressi
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSExpression, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSExpression {
+		return foundation.NSExpressionFromID(purego.Retain(_id))
+	})
+}
+
+// RightExpressionAttributeType calls the underlying RightExpressionAttributeType.
+func (x *PredicateEditorRowTemplate) RightExpressionAttributeType() coredata.NSAttributeType {
+	return x.inner.RightExpressionAttributeType()
+}
+
+// Modifier calls the underlying Modifier.
+func (x *PredicateEditorRowTemplate) Modifier() foundation.NSComparisonPredicateModifier {
+	return x.inner.Modifier()
 }
 
 // Operators returns the collection as a Go slice.
@@ -85,11 +110,14 @@ func (x *PredicateEditorRowTemplate) Operators() []*foundation.NSNumber {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
+}
+
+// Options calls the underlying Options.
+func (x *PredicateEditorRowTemplate) Options() uint {
+	return x.inner.Options()
 }
 
 // CompoundTypes returns the collection as a Go slice.
@@ -98,10 +126,27 @@ func (x *PredicateEditorRowTemplate) CompoundTypes() []*foundation.NSNumber {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
 }
+
+// PredicateEditorRowTemplateable is the interface implemented by [PredicateEditorRowTemplate], for mocking and DI.
+type PredicateEditorRowTemplateable interface {
+	Unwrap() *raw.NSPredicateEditorRowTemplate
+	MatchForPredicate(predicate *foundation.NSPredicate) float64
+	SetPredicate(predicate *foundation.NSPredicate)
+	PredicateWithSubpredicates(subpredicates *foundation.NSArray[*foundation.NSPredicate]) *foundation.NSPredicate
+	DisplayableSubpredicatesOfPredicate(predicate *foundation.NSPredicate) *foundation.NSArray[*foundation.NSPredicate]
+	TemplateViews() []*raw.NSView
+	LeftExpressions() []*foundation.NSExpression
+	RightExpressions() []*foundation.NSExpression
+	RightExpressionAttributeType() coredata.NSAttributeType
+	Modifier() foundation.NSComparisonPredicateModifier
+	Operators() []*foundation.NSNumber
+	Options() uint
+	CompoundTypes() []*foundation.NSNumber
+}
+
+var _ PredicateEditorRowTemplateable = (*PredicateEditorRowTemplate)(nil)
 

@@ -42,3 +42,49 @@ func (x *MTRICDManagementClusterStayActiveRequestParams) WithServerSideProcessin
 	return x
 }
 
+// StayActiveDuration calls the underlying StayActiveDuration.
+func (x *MTRICDManagementClusterStayActiveRequestParams) StayActiveDuration() *foundation.NSNumber {
+	return x.inner.StayActiveDuration()
+}
+
+// SetStayActiveDuration calls the underlying SetStayActiveDuration.
+func (x *MTRICDManagementClusterStayActiveRequestParams) SetStayActiveDuration(stayActiveDuration *foundation.NSNumber) {
+	x.inner.SetStayActiveDuration(stayActiveDuration)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRICDManagementClusterStayActiveRequestParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRICDManagementClusterStayActiveRequestParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRICDManagementClusterStayActiveRequestParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRICDManagementClusterStayActiveRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRICDManagementClusterStayActiveRequestParamsable is the interface implemented by [MTRICDManagementClusterStayActiveRequestParams], for mocking and DI.
+type MTRICDManagementClusterStayActiveRequestParamsable interface {
+	Unwrap() *raw.MTRICDManagementClusterStayActiveRequestParams
+	WithStayActiveDuration(stayActiveDuration *foundation.NSNumber) *MTRICDManagementClusterStayActiveRequestParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRICDManagementClusterStayActiveRequestParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRICDManagementClusterStayActiveRequestParams
+	StayActiveDuration() *foundation.NSNumber
+	SetStayActiveDuration(stayActiveDuration *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRICDManagementClusterStayActiveRequestParamsable = (*MTRICDManagementClusterStayActiveRequestParams)(nil)
+

@@ -25,3 +25,10 @@ func NewTransformLayer() *TransformLayer {
 
 func (x *TransformLayer) asLayer() *raw.CALayer { return &x.inner.CALayer }
 
+// TransformLayerable is the interface implemented by [TransformLayer], for mocking and DI.
+type TransformLayerable interface {
+	Unwrap() *raw.CATransformLayer
+}
+
+var _ TransformLayerable = (*TransformLayer)(nil)
+

@@ -7,6 +7,7 @@ package modelio
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // VertexAttributeData wraps [raw.MDLVertexAttributeData] with a fluent Go API.
@@ -46,4 +47,79 @@ func (x *VertexAttributeData) WithBufferSize(bufferSize uint) *VertexAttributeDa
 	x.inner.SetBufferSize(bufferSize)
 	return x
 }
+
+// Map calls the underlying Map.
+func (x *VertexAttributeData) Map() *MeshBufferMap {
+	_r := x.inner.Map()
+	if _r == nil {
+		return nil
+	}
+	return &MeshBufferMap{inner: _r}
+}
+
+// SetMap calls the underlying SetMap.
+func (x *VertexAttributeData) SetMap(map_ *raw.MDLMeshBufferMap) {
+	x.inner.SetMap(map_)
+}
+
+// DataStart calls the underlying DataStart.
+func (x *VertexAttributeData) DataStart() unsafe.Pointer {
+	return x.inner.DataStart()
+}
+
+// SetDataStart calls the underlying SetDataStart.
+func (x *VertexAttributeData) SetDataStart(dataStart unsafe.Pointer) {
+	x.inner.SetDataStart(dataStart)
+}
+
+// Stride calls the underlying Stride.
+func (x *VertexAttributeData) Stride() uint {
+	return x.inner.Stride()
+}
+
+// SetStride calls the underlying SetStride.
+func (x *VertexAttributeData) SetStride(stride uint) {
+	x.inner.SetStride(stride)
+}
+
+// Format calls the underlying Format.
+func (x *VertexAttributeData) Format() raw.MDLVertexFormat {
+	return x.inner.Format()
+}
+
+// SetFormat calls the underlying SetFormat.
+func (x *VertexAttributeData) SetFormat(format raw.MDLVertexFormat) {
+	x.inner.SetFormat(format)
+}
+
+// BufferSize calls the underlying BufferSize.
+func (x *VertexAttributeData) BufferSize() uint {
+	return x.inner.BufferSize()
+}
+
+// SetBufferSize calls the underlying SetBufferSize.
+func (x *VertexAttributeData) SetBufferSize(bufferSize uint) {
+	x.inner.SetBufferSize(bufferSize)
+}
+
+// VertexAttributeDataable is the interface implemented by [VertexAttributeData], for mocking and DI.
+type VertexAttributeDataable interface {
+	Unwrap() *raw.MDLVertexAttributeData
+	WithMap(map_ *raw.MDLMeshBufferMap) *VertexAttributeData
+	WithStride(stride uint) *VertexAttributeData
+	WithFormat(format raw.MDLVertexFormat) *VertexAttributeData
+	WithBufferSize(bufferSize uint) *VertexAttributeData
+	Map() *MeshBufferMap
+	SetMap(map_ *raw.MDLMeshBufferMap)
+	DataStart() unsafe.Pointer
+	SetDataStart(dataStart unsafe.Pointer)
+	Stride() uint
+	SetStride(stride uint)
+	Format() raw.MDLVertexFormat
+	SetFormat(format raw.MDLVertexFormat)
+	BufferSize() uint
+	SetBufferSize(bufferSize uint)
+}
+
+var _ VertexAttributeDataable = (*VertexAttributeData)(nil)
 

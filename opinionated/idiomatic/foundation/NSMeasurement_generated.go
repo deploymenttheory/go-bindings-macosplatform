@@ -24,5 +24,48 @@ func NewMeasurementWithDoubleValueUnit(doubleValue float64, unit objc.ID) *Measu
 	return &Measurement{inner: raw.NSMeasurementFromID[objc.ID](_id)}
 }
 
+// CanBeConvertedToUnit calls the underlying CanBeConvertedToUnit.
+func (x *Measurement) CanBeConvertedToUnit(unit *raw.NSUnit) bool {
+	return x.inner.CanBeConvertedToUnit(unit)
+}
+
+// MeasurementByConvertingToUnit calls the underlying MeasurementByConvertingToUnit.
+func (x *Measurement) MeasurementByConvertingToUnit(unit *raw.NSUnit) *raw.NSMeasurement[objc.ID] {
+	return x.inner.MeasurementByConvertingToUnit(unit)
+}
+
+// MeasurementByAddingMeasurement calls the underlying MeasurementByAddingMeasurement.
+func (x *Measurement) MeasurementByAddingMeasurement(measurement *raw.NSMeasurement[objc.ID]) *raw.NSMeasurement[objc.ID] {
+	return x.inner.MeasurementByAddingMeasurement(measurement)
+}
+
+// MeasurementBySubtractingMeasurement calls the underlying MeasurementBySubtractingMeasurement.
+func (x *Measurement) MeasurementBySubtractingMeasurement(measurement *raw.NSMeasurement[objc.ID]) *raw.NSMeasurement[objc.ID] {
+	return x.inner.MeasurementBySubtractingMeasurement(measurement)
+}
+
+// Unit calls the underlying Unit.
+func (x *Measurement) Unit() objc.ID {
+	return x.inner.Unit()
+}
+
+// DoubleValue calls the underlying DoubleValue.
+func (x *Measurement) DoubleValue() float64 {
+	return x.inner.DoubleValue()
+}
+
 func (x *Measurement) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// Measurementable is the interface implemented by [Measurement], for mocking and DI.
+type Measurementable interface {
+	Unwrap() *raw.NSMeasurement[objc.ID]
+	CanBeConvertedToUnit(unit *raw.NSUnit) bool
+	MeasurementByConvertingToUnit(unit *raw.NSUnit) *raw.NSMeasurement[objc.ID]
+	MeasurementByAddingMeasurement(measurement *raw.NSMeasurement[objc.ID]) *raw.NSMeasurement[objc.ID]
+	MeasurementBySubtractingMeasurement(measurement *raw.NSMeasurement[objc.ID]) *raw.NSMeasurement[objc.ID]
+	Unit() objc.ID
+	DoubleValue() float64
+}
+
+var _ Measurementable = (*Measurement)(nil)
 

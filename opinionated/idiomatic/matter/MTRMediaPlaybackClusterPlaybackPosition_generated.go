@@ -25,3 +25,10 @@ func NewMTRMediaPlaybackClusterPlaybackPosition() *MTRMediaPlaybackClusterPlayba
 
 func (x *MTRMediaPlaybackClusterPlaybackPosition) asMTRMediaPlaybackClusterPlaybackPositionStruct() *raw.MTRMediaPlaybackClusterPlaybackPositionStruct { return &x.inner.MTRMediaPlaybackClusterPlaybackPositionStruct }
 
+// MTRMediaPlaybackClusterPlaybackPositionable is the interface implemented by [MTRMediaPlaybackClusterPlaybackPosition], for mocking and DI.
+type MTRMediaPlaybackClusterPlaybackPositionable interface {
+	Unwrap() *raw.MTRMediaPlaybackClusterPlaybackPosition
+}
+
+var _ MTRMediaPlaybackClusterPlaybackPositionable = (*MTRMediaPlaybackClusterPlaybackPosition)(nil)
+

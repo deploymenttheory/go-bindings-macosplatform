@@ -6,7 +6,9 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -54,5 +56,61 @@ func (x *PlayerInterstitialEventController) WithLocalizedStringsTableName(locali
 	return x
 }
 
+// CancelCurrentEventWithResumptionOffset calls the underlying CancelCurrentEventWithResumptionOffset.
+func (x *PlayerInterstitialEventController) CancelCurrentEventWithResumptionOffset(resumptionOffset coremedia.CMTime) {
+	x.inner.CancelCurrentEventWithResumptionOffset(resumptionOffset)
+}
+
+// SkipCurrentEvent calls the underlying SkipCurrentEvent.
+func (x *PlayerInterstitialEventController) SkipCurrentEvent() {
+	x.inner.SkipCurrentEvent()
+}
+
+// SetEvents calls the underlying SetEvents.
+func (x *PlayerInterstitialEventController) SetEvents(events *foundation.NSArray[*raw.AVPlayerInterstitialEvent]) {
+	x.inner.SetEvents(events)
+}
+
+// LocalizedStringsBundle calls the underlying LocalizedStringsBundle.
+func (x *PlayerInterstitialEventController) LocalizedStringsBundle() *foundation.NSBundle {
+	return x.inner.LocalizedStringsBundle()
+}
+
+// SetLocalizedStringsBundle calls the underlying SetLocalizedStringsBundle.
+func (x *PlayerInterstitialEventController) SetLocalizedStringsBundle(localizedStringsBundle *foundation.NSBundle) {
+	x.inner.SetLocalizedStringsBundle(localizedStringsBundle)
+}
+
+// LocalizedStringsTableName calls the underlying LocalizedStringsTableName.
+func (x *PlayerInterstitialEventController) LocalizedStringsTableName() string {
+	_r := x.inner.LocalizedStringsTableName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLocalizedStringsTableName calls the underlying SetLocalizedStringsTableName.
+func (x *PlayerInterstitialEventController) SetLocalizedStringsTableName(localizedStringsTableName string) {
+	x.inner.SetLocalizedStringsTableName(foundation.NSStringStringWithUTF8String(localizedStringsTableName))
+}
+
 func (x *PlayerInterstitialEventController) asPlayerInterstitialEventMonitor() *raw.AVPlayerInterstitialEventMonitor { return &x.inner.AVPlayerInterstitialEventMonitor }
+
+// PlayerInterstitialEventControllerable is the interface implemented by [PlayerInterstitialEventController], for mocking and DI.
+type PlayerInterstitialEventControllerable interface {
+	Unwrap() *raw.AVPlayerInterstitialEventController
+	WithEvents(items ...*raw.AVPlayerInterstitialEvent) *PlayerInterstitialEventController
+	WithLocalizedStringsBundle(localizedStringsBundle *foundation.NSBundle) *PlayerInterstitialEventController
+	WithLocalizedStringsTableName(localizedStringsTableName string) *PlayerInterstitialEventController
+	CancelCurrentEventWithResumptionOffset(resumptionOffset coremedia.CMTime)
+	SkipCurrentEvent()
+	SetEvents(events *foundation.NSArray[*raw.AVPlayerInterstitialEvent])
+	LocalizedStringsBundle() *foundation.NSBundle
+	SetLocalizedStringsBundle(localizedStringsBundle *foundation.NSBundle)
+	LocalizedStringsTableName() string
+	SetLocalizedStringsTableName(localizedStringsTableName string)
+}
+
+var _ PlayerInterstitialEventControllerable = (*PlayerInterstitialEventController)(nil)
 

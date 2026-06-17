@@ -31,5 +31,18 @@ func NewRandomSourceWithCoder(aDecoder *foundation.NSCoder) *RandomSource {
 	return &RandomSource{inner: raw.GKRandomSourceFromID(_id)}
 }
 
+// ArrayByShufflingObjectsInArray calls the underlying ArrayByShufflingObjectsInArray.
+func (x *RandomSource) ArrayByShufflingObjectsInArray(array *foundation.NSArray[objc.ID]) *foundation.NSArray[objc.ID] {
+	return x.inner.ArrayByShufflingObjectsInArray(array)
+}
+
 func (x *RandomSource) asRandomSource() *raw.GKRandomSource { return x.inner }
+
+// RandomSourceable is the interface implemented by [RandomSource], for mocking and DI.
+type RandomSourceable interface {
+	Unwrap() *raw.GKRandomSource
+	ArrayByShufflingObjectsInArray(array *foundation.NSArray[objc.ID]) *foundation.NSArray[objc.ID]
+}
+
+var _ RandomSourceable = (*RandomSource)(nil)
 

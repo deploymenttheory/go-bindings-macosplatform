@@ -7,6 +7,7 @@ package cloudkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -66,14 +67,53 @@ func (x *FetchRecordZonesOperation) RecordZoneIDs() []*raw.CKRecordZoneID {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.CKRecordZoneID, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CKRecordZoneID {
+		return raw.CKRecordZoneIDFromID(purego.Retain(_id))
+	})
+}
+
+// SetRecordZoneIDs calls the underlying SetRecordZoneIDs.
+func (x *FetchRecordZonesOperation) SetRecordZoneIDs(recordZoneIDs *foundation.NSArray[*raw.CKRecordZoneID]) {
+	x.inner.SetRecordZoneIDs(recordZoneIDs)
+}
+
+// PerRecordZoneCompletionBlock calls the underlying PerRecordZoneCompletionBlock.
+func (x *FetchRecordZonesOperation) PerRecordZoneCompletionBlock() objc.Block {
+	return x.inner.PerRecordZoneCompletionBlock()
+}
+
+// SetPerRecordZoneCompletionBlock calls the underlying SetPerRecordZoneCompletionBlock.
+func (x *FetchRecordZonesOperation) SetPerRecordZoneCompletionBlock(perRecordZoneCompletionBlock func(*raw.CKRecordZoneID, *raw.CKRecordZone, unsafe.Pointer)) {
+	x.inner.SetPerRecordZoneCompletionBlock(perRecordZoneCompletionBlock)
+}
+
+// FetchRecordZonesCompletionBlock calls the underlying FetchRecordZonesCompletionBlock.
+func (x *FetchRecordZonesOperation) FetchRecordZonesCompletionBlock() objc.Block {
+	return x.inner.FetchRecordZonesCompletionBlock()
+}
+
+// SetFetchRecordZonesCompletionBlock calls the underlying SetFetchRecordZonesCompletionBlock.
+func (x *FetchRecordZonesOperation) SetFetchRecordZonesCompletionBlock(fetchRecordZonesCompletionBlock func(*foundation.NSDictionary[*raw.CKRecordZoneID, *raw.CKRecordZone], unsafe.Pointer)) {
+	x.inner.SetFetchRecordZonesCompletionBlock(fetchRecordZonesCompletionBlock)
 }
 
 func (x *FetchRecordZonesOperation) asDatabaseOperation() *raw.CKDatabaseOperation { return &x.inner.CKDatabaseOperation }
 
 func (x *FetchRecordZonesOperation) asOperation() *raw.CKOperation { return &x.inner.CKDatabaseOperation.CKOperation }
+
+// FetchRecordZonesOperationable is the interface implemented by [FetchRecordZonesOperation], for mocking and DI.
+type FetchRecordZonesOperationable interface {
+	Unwrap() *raw.CKFetchRecordZonesOperation
+	WithRecordZoneIDs(items ...*raw.CKRecordZoneID) *FetchRecordZonesOperation
+	WithPerRecordZoneCompletionBlock(perRecordZoneCompletionBlock func(*raw.CKRecordZoneID, *raw.CKRecordZone, unsafe.Pointer)) *FetchRecordZonesOperation
+	WithFetchRecordZonesCompletionBlock(fetchRecordZonesCompletionBlock func(*foundation.NSDictionary[*raw.CKRecordZoneID, *raw.CKRecordZone], unsafe.Pointer)) *FetchRecordZonesOperation
+	RecordZoneIDs() []*raw.CKRecordZoneID
+	SetRecordZoneIDs(recordZoneIDs *foundation.NSArray[*raw.CKRecordZoneID])
+	PerRecordZoneCompletionBlock() objc.Block
+	SetPerRecordZoneCompletionBlock(perRecordZoneCompletionBlock func(*raw.CKRecordZoneID, *raw.CKRecordZone, unsafe.Pointer))
+	FetchRecordZonesCompletionBlock() objc.Block
+	SetFetchRecordZonesCompletionBlock(fetchRecordZonesCompletionBlock func(*foundation.NSDictionary[*raw.CKRecordZoneID, *raw.CKRecordZone], unsafe.Pointer))
+}
+
+var _ FetchRecordZonesOperationable = (*FetchRecordZonesOperation)(nil)
 

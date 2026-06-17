@@ -6,6 +6,7 @@ package datadetection
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/datadetection"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +24,22 @@ func NewMatch() *Match {
 	return &Match{inner: raw.DDMatchFromID(_id)}
 }
 
+// MatchedString calls the underlying MatchedString.
+func (x *Match) MatchedString() string {
+	_r := x.inner.MatchedString()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 func (x *Match) asMatch() *raw.DDMatch { return x.inner }
+
+// Matchable is the interface implemented by [Match], for mocking and DI.
+type Matchable interface {
+	Unwrap() *raw.DDMatch
+	MatchedString() string
+}
+
+var _ Matchable = (*Match)(nil)
 

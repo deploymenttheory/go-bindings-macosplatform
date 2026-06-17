@@ -23,3 +23,10 @@ func NewExtensionManager() *ExtensionManager {
 	return &ExtensionManager{inner: raw.MEExtensionManagerFromID(_id)}
 }
 
+// ExtensionManagerable is the interface implemented by [ExtensionManager], for mocking and DI.
+type ExtensionManagerable interface {
+	Unwrap() *raw.MEExtensionManager
+}
+
+var _ ExtensionManagerable = (*ExtensionManager)(nil)
+

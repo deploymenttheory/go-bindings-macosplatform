@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,7 +24,46 @@ func NewPortNameServer() *PortNameServer {
 	return &PortNameServer{inner: raw.NSPortNameServerFromID(_id)}
 }
 
+// PortForName calls the underlying PortForName.
+func (x *PortNameServer) PortForName(name string) *Port {
+	_r := x.inner.PortForName(foundation.NSStringStringWithUTF8String(name))
+	if _r == nil {
+		return nil
+	}
+	return &Port{inner: _r}
+}
+
+// PortForNameHost calls the underlying PortForNameHost.
+func (x *PortNameServer) PortForNameHost(name string, host string) *Port {
+	_r := x.inner.PortForNameHost(foundation.NSStringStringWithUTF8String(name), foundation.NSStringStringWithUTF8String(host))
+	if _r == nil {
+		return nil
+	}
+	return &Port{inner: _r}
+}
+
+// RegisterPortName calls the underlying RegisterPortName.
+func (x *PortNameServer) RegisterPortName(port *raw.NSPort, name string) bool {
+	return x.inner.RegisterPortName(port, foundation.NSStringStringWithUTF8String(name))
+}
+
+// RemovePortForName calls the underlying RemovePortForName.
+func (x *PortNameServer) RemovePortForName(name string) bool {
+	return x.inner.RemovePortForName(foundation.NSStringStringWithUTF8String(name))
+}
+
 func (x *PortNameServer) asPortNameServer() *raw.NSPortNameServer { return x.inner }
 
 func (x *PortNameServer) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// PortNameServerable is the interface implemented by [PortNameServer], for mocking and DI.
+type PortNameServerable interface {
+	Unwrap() *raw.NSPortNameServer
+	PortForName(name string) *Port
+	PortForNameHost(name string, host string) *Port
+	RegisterPortName(port *raw.NSPort, name string) bool
+	RemovePortForName(name string) bool
+}
+
+var _ PortNameServerable = (*PortNameServer)(nil)
 

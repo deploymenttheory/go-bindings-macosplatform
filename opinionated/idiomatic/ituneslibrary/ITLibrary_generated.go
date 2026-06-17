@@ -42,17 +42,73 @@ func NewLibraryWithAPIVersionOptionsError(requestedAPIVersion string, options ra
 	return &Library{inner: raw.ITLibraryFromID(_id)}, nil
 }
 
+// ArtworkForMediaFile calls the underlying ArtworkForMediaFile.
+func (x *Library) ArtworkForMediaFile(mediaFileURL string) *LibArtwork {
+	_r := x.inner.ArtworkForMediaFile(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(mediaFileURL)))
+	if _r == nil {
+		return nil
+	}
+	return &LibArtwork{inner: _r}
+}
+
+// ReloadData calls the underlying ReloadData.
+func (x *Library) ReloadData() bool {
+	return x.inner.ReloadData()
+}
+
+// UnloadData calls the underlying UnloadData.
+func (x *Library) UnloadData() {
+	x.inner.UnloadData()
+}
+
+// ApplicationVersion calls the underlying ApplicationVersion.
+func (x *Library) ApplicationVersion() string {
+	_r := x.inner.ApplicationVersion()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Features calls the underlying Features.
+func (x *Library) Features() raw.ITLibExportFeature {
+	return x.inner.Features()
+}
+
+// ApiMajorVersion calls the underlying ApiMajorVersion.
+func (x *Library) ApiMajorVersion() uint {
+	return x.inner.ApiMajorVersion()
+}
+
+// ApiMinorVersion calls the underlying ApiMinorVersion.
+func (x *Library) ApiMinorVersion() uint {
+	return x.inner.ApiMinorVersion()
+}
+
+// MediaFolderLocation calls the underlying MediaFolderLocation.
+func (x *Library) MediaFolderLocation() unsafe.Pointer {
+	return x.inner.MediaFolderLocation()
+}
+
+// MusicFolderLocation calls the underlying MusicFolderLocation.
+func (x *Library) MusicFolderLocation() *foundation.NSURL {
+	return x.inner.MusicFolderLocation()
+}
+
+// ShouldShowContentRating calls the underlying ShouldShowContentRating.
+func (x *Library) ShouldShowContentRating() bool {
+	return x.inner.ShouldShowContentRating()
+}
+
 // AllMediaItems returns the collection as a Go slice.
 func (x *Library) AllMediaItems() []*raw.ITLibMediaItem {
 	arr := x.inner.AllMediaItems()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.ITLibMediaItem, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.ITLibMediaItem {
+		return raw.ITLibMediaItemFromID(purego.Retain(_id))
+	})
 }
 
 // AllPlaylists returns the collection as a Go slice.
@@ -61,10 +117,27 @@ func (x *Library) AllPlaylists() []*raw.ITLibPlaylist {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.ITLibPlaylist, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.ITLibPlaylist {
+		return raw.ITLibPlaylistFromID(purego.Retain(_id))
+	})
 }
+
+// Libraryable is the interface implemented by [Library], for mocking and DI.
+type Libraryable interface {
+	Unwrap() *raw.ITLibrary
+	ArtworkForMediaFile(mediaFileURL string) *LibArtwork
+	ReloadData() bool
+	UnloadData()
+	ApplicationVersion() string
+	Features() raw.ITLibExportFeature
+	ApiMajorVersion() uint
+	ApiMinorVersion() uint
+	MediaFolderLocation() unsafe.Pointer
+	MusicFolderLocation() *foundation.NSURL
+	ShouldShowContentRating() bool
+	AllMediaItems() []*raw.ITLibMediaItem
+	AllPlaylists() []*raw.ITLibPlaylist
+}
+
+var _ Libraryable = (*Library)(nil)
 

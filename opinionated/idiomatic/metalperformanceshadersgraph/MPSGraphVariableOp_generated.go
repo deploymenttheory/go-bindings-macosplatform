@@ -6,7 +6,9 @@ package metalperformanceshadersgraph
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshadersgraph"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // GraphVariableOp wraps [raw.MPSGraphVariableOp] with a fluent Go API.
@@ -23,7 +25,26 @@ func NewGraphVariableOp() *GraphVariableOp {
 	return &GraphVariableOp{inner: raw.MPSGraphVariableOpFromID(_id)}
 }
 
+// Shape calls the underlying Shape.
+func (x *GraphVariableOp) Shape() unsafe.Pointer {
+	return x.inner.Shape()
+}
+
+// DataType calls the underlying DataType.
+func (x *GraphVariableOp) DataType() mpscore.MPSDataType {
+	return x.inner.DataType()
+}
+
 func (x *GraphVariableOp) asGraphOperation() *raw.MPSGraphOperation { return &x.inner.MPSGraphOperation }
 
 func (x *GraphVariableOp) asGraphObject() *raw.MPSGraphObject { return &x.inner.MPSGraphOperation.MPSGraphObject }
+
+// GraphVariableOpable is the interface implemented by [GraphVariableOp], for mocking and DI.
+type GraphVariableOpable interface {
+	Unwrap() *raw.MPSGraphVariableOp
+	Shape() unsafe.Pointer
+	DataType() mpscore.MPSDataType
+}
+
+var _ GraphVariableOpable = (*GraphVariableOp)(nil)
 

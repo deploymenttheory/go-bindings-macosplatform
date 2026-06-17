@@ -44,7 +44,44 @@ func (x *RelativeSpecifier) WithBaseSpecifier(baseSpecifier ScriptObjectSpecifie
 	return x
 }
 
+// RelativePosition calls the underlying RelativePosition.
+func (x *RelativeSpecifier) RelativePosition() raw.NSRelativePosition {
+	return x.inner.RelativePosition()
+}
+
+// SetRelativePosition calls the underlying SetRelativePosition.
+func (x *RelativeSpecifier) SetRelativePosition(relativePosition raw.NSRelativePosition) {
+	x.inner.SetRelativePosition(relativePosition)
+}
+
+// BaseSpecifier calls the underlying BaseSpecifier.
+func (x *RelativeSpecifier) BaseSpecifier() *ScriptObjectSpecifier {
+	_r := x.inner.BaseSpecifier()
+	if _r == nil {
+		return nil
+	}
+	return &ScriptObjectSpecifier{inner: _r}
+}
+
+// SetBaseSpecifier calls the underlying SetBaseSpecifier.
+func (x *RelativeSpecifier) SetBaseSpecifier(baseSpecifier *raw.NSScriptObjectSpecifier) {
+	x.inner.SetBaseSpecifier(baseSpecifier)
+}
+
 func (x *RelativeSpecifier) asScriptObjectSpecifier() *raw.NSScriptObjectSpecifier { return &x.inner.NSScriptObjectSpecifier }
 
 func (x *RelativeSpecifier) asObject() *raw.NSObject { return &x.inner.NSScriptObjectSpecifier.NSObject }
+
+// RelativeSpecifierable is the interface implemented by [RelativeSpecifier], for mocking and DI.
+type RelativeSpecifierable interface {
+	Unwrap() *raw.NSRelativeSpecifier
+	WithRelativePosition(relativePosition raw.NSRelativePosition) *RelativeSpecifier
+	WithBaseSpecifier(baseSpecifier ScriptObjectSpecifierProvider) *RelativeSpecifier
+	RelativePosition() raw.NSRelativePosition
+	SetRelativePosition(relativePosition raw.NSRelativePosition)
+	BaseSpecifier() *ScriptObjectSpecifier
+	SetBaseSpecifier(baseSpecifier *raw.NSScriptObjectSpecifier)
+}
+
+var _ RelativeSpecifierable = (*RelativeSpecifier)(nil)
 

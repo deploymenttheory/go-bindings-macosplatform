@@ -5,8 +5,11 @@
 package gamekit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // MatchedPlayers wraps [raw.GKMatchedPlayers] with a fluent Go API.
@@ -23,16 +26,34 @@ func NewMatchedPlayers() *MatchedPlayers {
 	return &MatchedPlayers{inner: raw.GKMatchedPlayersFromID(_id)}
 }
 
+// Properties calls the underlying Properties.
+func (x *MatchedPlayers) Properties() unsafe.Pointer {
+	return x.inner.Properties()
+}
+
 // Players returns the collection as a Go slice.
 func (x *MatchedPlayers) Players() []*raw.GKPlayer {
 	arr := x.inner.Players()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.GKPlayer, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.GKPlayer {
+		return raw.GKPlayerFromID(purego.Retain(_id))
+	})
 }
+
+// PlayerProperties calls the underlying PlayerProperties.
+func (x *MatchedPlayers) PlayerProperties() *foundation.NSDictionary[*raw.GKPlayer, objc.ID] {
+	return x.inner.PlayerProperties()
+}
+
+// MatchedPlayersable is the interface implemented by [MatchedPlayers], for mocking and DI.
+type MatchedPlayersable interface {
+	Unwrap() *raw.GKMatchedPlayers
+	Properties() unsafe.Pointer
+	Players() []*raw.GKPlayer
+	PlayerProperties() *foundation.NSDictionary[*raw.GKPlayer, objc.ID]
+}
+
+var _ MatchedPlayersable = (*MatchedPlayers)(nil)
 

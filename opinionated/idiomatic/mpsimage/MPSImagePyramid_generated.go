@@ -47,7 +47,26 @@ func NewImagePyramidWithCoderDevice(aDecoder *foundation.NSCoder, device metal.M
 	return &ImagePyramid{inner: raw.MPSImagePyramidFromID(_id)}
 }
 
+// KernelHeight calls the underlying KernelHeight.
+func (x *ImagePyramid) KernelHeight() uint {
+	return x.inner.KernelHeight()
+}
+
+// KernelWidth calls the underlying KernelWidth.
+func (x *ImagePyramid) KernelWidth() uint {
+	return x.inner.KernelWidth()
+}
+
 func (x *ImagePyramid) asImagePyramid() *raw.MPSImagePyramid { return x.inner }
 
 func (x *ImagePyramid) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.inner.MPSUnaryImageKernel }
+
+// ImagePyramidable is the interface implemented by [ImagePyramid], for mocking and DI.
+type ImagePyramidable interface {
+	Unwrap() *raw.MPSImagePyramid
+	KernelHeight() uint
+	KernelWidth() uint
+}
+
+var _ ImagePyramidable = (*ImagePyramid)(nil)
 

@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,4 +54,80 @@ func (x *MTRChannelClusterCancelRecordProgramParams) WithServerSideProcessingTim
 	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
 	return x
 }
+
+// ProgramIdentifier calls the underlying ProgramIdentifier.
+func (x *MTRChannelClusterCancelRecordProgramParams) ProgramIdentifier() string {
+	_r := x.inner.ProgramIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetProgramIdentifier calls the underlying SetProgramIdentifier.
+func (x *MTRChannelClusterCancelRecordProgramParams) SetProgramIdentifier(programIdentifier string) {
+	x.inner.SetProgramIdentifier(foundation.NSStringStringWithUTF8String(programIdentifier))
+}
+
+// ShouldRecordSeries calls the underlying ShouldRecordSeries.
+func (x *MTRChannelClusterCancelRecordProgramParams) ShouldRecordSeries() *foundation.NSNumber {
+	return x.inner.ShouldRecordSeries()
+}
+
+// SetShouldRecordSeries calls the underlying SetShouldRecordSeries.
+func (x *MTRChannelClusterCancelRecordProgramParams) SetShouldRecordSeries(shouldRecordSeries *foundation.NSNumber) {
+	x.inner.SetShouldRecordSeries(shouldRecordSeries)
+}
+
+// Data calls the underlying Data.
+func (x *MTRChannelClusterCancelRecordProgramParams) Data() *foundation.NSData {
+	return x.inner.Data()
+}
+
+// SetData calls the underlying SetData.
+func (x *MTRChannelClusterCancelRecordProgramParams) SetData(data *foundation.NSData) {
+	x.inner.SetData(data)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRChannelClusterCancelRecordProgramParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRChannelClusterCancelRecordProgramParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRChannelClusterCancelRecordProgramParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRChannelClusterCancelRecordProgramParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRChannelClusterCancelRecordProgramParamsable is the interface implemented by [MTRChannelClusterCancelRecordProgramParams], for mocking and DI.
+type MTRChannelClusterCancelRecordProgramParamsable interface {
+	Unwrap() *raw.MTRChannelClusterCancelRecordProgramParams
+	WithProgramIdentifier(programIdentifier string) *MTRChannelClusterCancelRecordProgramParams
+	WithShouldRecordSeries(shouldRecordSeries *foundation.NSNumber) *MTRChannelClusterCancelRecordProgramParams
+	WithData(data *foundation.NSData) *MTRChannelClusterCancelRecordProgramParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRChannelClusterCancelRecordProgramParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRChannelClusterCancelRecordProgramParams
+	ProgramIdentifier() string
+	SetProgramIdentifier(programIdentifier string)
+	ShouldRecordSeries() *foundation.NSNumber
+	SetShouldRecordSeries(shouldRecordSeries *foundation.NSNumber)
+	Data() *foundation.NSData
+	SetData(data *foundation.NSData)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRChannelClusterCancelRecordProgramParamsable = (*MTRChannelClusterCancelRecordProgramParams)(nil)
 

@@ -27,3 +27,10 @@ func (x *ImageAlignmentObservation) asImageAlignmentObservation() *raw.VNImageAl
 
 func (x *ImageAlignmentObservation) asObservation() *raw.VNObservation { return &x.inner.VNObservation }
 
+// ImageAlignmentObservationable is the interface implemented by [ImageAlignmentObservation], for mocking and DI.
+type ImageAlignmentObservationable interface {
+	Unwrap() *raw.VNImageAlignmentObservation
+}
+
+var _ ImageAlignmentObservationable = (*ImageAlignmentObservation)(nil)
+

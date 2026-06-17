@@ -42,7 +42,53 @@ func (x *CNNNormalizationNode) WithDelta(delta float32) *CNNNormalizationNode {
 	return x
 }
 
+// Alpha calls the underlying Alpha.
+func (x *CNNNormalizationNode) Alpha() float32 {
+	return x.inner.Alpha()
+}
+
+// SetAlpha calls the underlying SetAlpha.
+func (x *CNNNormalizationNode) SetAlpha(alpha float32) {
+	x.inner.SetAlpha(alpha)
+}
+
+// Beta calls the underlying Beta.
+func (x *CNNNormalizationNode) Beta() float32 {
+	return x.inner.Beta()
+}
+
+// SetBeta calls the underlying SetBeta.
+func (x *CNNNormalizationNode) SetBeta(beta float32) {
+	x.inner.SetBeta(beta)
+}
+
+// Delta calls the underlying Delta.
+func (x *CNNNormalizationNode) Delta() float32 {
+	return x.inner.Delta()
+}
+
+// SetDelta calls the underlying SetDelta.
+func (x *CNNNormalizationNode) SetDelta(delta float32) {
+	x.inner.SetDelta(delta)
+}
+
 func (x *CNNNormalizationNode) asCNNNormalizationNode() *raw.MPSCNNNormalizationNode { return x.inner }
 
 func (x *CNNNormalizationNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNFilterNode }
+
+// CNNNormalizationNodeable is the interface implemented by [CNNNormalizationNode], for mocking and DI.
+type CNNNormalizationNodeable interface {
+	Unwrap() *raw.MPSCNNNormalizationNode
+	WithAlpha(alpha float32) *CNNNormalizationNode
+	WithBeta(beta float32) *CNNNormalizationNode
+	WithDelta(delta float32) *CNNNormalizationNode
+	Alpha() float32
+	SetAlpha(alpha float32)
+	Beta() float32
+	SetBeta(beta float32)
+	Delta() float32
+	SetDelta(delta float32)
+}
+
+var _ CNNNormalizationNodeable = (*CNNNormalizationNode)(nil)
 

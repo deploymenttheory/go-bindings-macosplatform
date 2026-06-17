@@ -6,6 +6,7 @@ package datadetection
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/datadetection"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +24,32 @@ func NewMatchFlightNumber() *MatchFlightNumber {
 	return &MatchFlightNumber{inner: raw.DDMatchFlightNumberFromID(_id)}
 }
 
+// Airline calls the underlying Airline.
+func (x *MatchFlightNumber) Airline() string {
+	_r := x.inner.Airline()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// FlightNumber calls the underlying FlightNumber.
+func (x *MatchFlightNumber) FlightNumber() string {
+	_r := x.inner.FlightNumber()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 func (x *MatchFlightNumber) asMatch() *raw.DDMatch { return &x.inner.DDMatch }
+
+// MatchFlightNumberable is the interface implemented by [MatchFlightNumber], for mocking and DI.
+type MatchFlightNumberable interface {
+	Unwrap() *raw.DDMatchFlightNumber
+	Airline() string
+	FlightNumber() string
+}
+
+var _ MatchFlightNumberable = (*MatchFlightNumber)(nil)
 

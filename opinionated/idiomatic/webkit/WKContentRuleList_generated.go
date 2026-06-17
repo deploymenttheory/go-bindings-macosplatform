@@ -6,6 +6,7 @@ package webkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,21 @@ func NewWKContentRuleList() *WKContentRuleList {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("WKContentRuleList")), objc.RegisterName("new"))
 	return &WKContentRuleList{inner: raw.WKContentRuleListFromID(_id)}
 }
+
+// Identifier calls the underlying Identifier.
+func (x *WKContentRuleList) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// WKContentRuleListable is the interface implemented by [WKContentRuleList], for mocking and DI.
+type WKContentRuleListable interface {
+	Unwrap() *raw.WKContentRuleList
+	Identifier() string
+}
+
+var _ WKContentRuleListable = (*WKContentRuleList)(nil)
 

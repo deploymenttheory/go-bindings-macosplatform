@@ -54,5 +54,81 @@ func (x *AttributedStringMarkdownParsingOptions) WithAppliesSourcePositionAttrib
 	return x
 }
 
+// AllowsExtendedAttributes calls the underlying AllowsExtendedAttributes.
+func (x *AttributedStringMarkdownParsingOptions) AllowsExtendedAttributes() bool {
+	return x.inner.AllowsExtendedAttributes()
+}
+
+// SetAllowsExtendedAttributes calls the underlying SetAllowsExtendedAttributes.
+func (x *AttributedStringMarkdownParsingOptions) SetAllowsExtendedAttributes(allowsExtendedAttributes bool) {
+	x.inner.SetAllowsExtendedAttributes(allowsExtendedAttributes)
+}
+
+// InterpretedSyntax calls the underlying InterpretedSyntax.
+func (x *AttributedStringMarkdownParsingOptions) InterpretedSyntax() raw.NSAttributedStringMarkdownInterpretedSyntax {
+	return x.inner.InterpretedSyntax()
+}
+
+// SetInterpretedSyntax calls the underlying SetInterpretedSyntax.
+func (x *AttributedStringMarkdownParsingOptions) SetInterpretedSyntax(interpretedSyntax raw.NSAttributedStringMarkdownInterpretedSyntax) {
+	x.inner.SetInterpretedSyntax(interpretedSyntax)
+}
+
+// FailurePolicy calls the underlying FailurePolicy.
+func (x *AttributedStringMarkdownParsingOptions) FailurePolicy() raw.NSAttributedStringMarkdownParsingFailurePolicy {
+	return x.inner.FailurePolicy()
+}
+
+// SetFailurePolicy calls the underlying SetFailurePolicy.
+func (x *AttributedStringMarkdownParsingOptions) SetFailurePolicy(failurePolicy raw.NSAttributedStringMarkdownParsingFailurePolicy) {
+	x.inner.SetFailurePolicy(failurePolicy)
+}
+
+// LanguageCode calls the underlying LanguageCode.
+func (x *AttributedStringMarkdownParsingOptions) LanguageCode() *String {
+	_r := x.inner.LanguageCode()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SetLanguageCode calls the underlying SetLanguageCode.
+func (x *AttributedStringMarkdownParsingOptions) SetLanguageCode(languageCode string) {
+	x.inner.SetLanguageCode(foundation.NSStringStringWithUTF8String(languageCode))
+}
+
+// AppliesSourcePositionAttributes calls the underlying AppliesSourcePositionAttributes.
+func (x *AttributedStringMarkdownParsingOptions) AppliesSourcePositionAttributes() bool {
+	return x.inner.AppliesSourcePositionAttributes()
+}
+
+// SetAppliesSourcePositionAttributes calls the underlying SetAppliesSourcePositionAttributes.
+func (x *AttributedStringMarkdownParsingOptions) SetAppliesSourcePositionAttributes(appliesSourcePositionAttributes bool) {
+	x.inner.SetAppliesSourcePositionAttributes(appliesSourcePositionAttributes)
+}
+
 func (x *AttributedStringMarkdownParsingOptions) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// AttributedStringMarkdownParsingOptionsable is the interface implemented by [AttributedStringMarkdownParsingOptions], for mocking and DI.
+type AttributedStringMarkdownParsingOptionsable interface {
+	Unwrap() *raw.NSAttributedStringMarkdownParsingOptions
+	WithAllowsExtendedAttributes(allowsExtendedAttributes bool) *AttributedStringMarkdownParsingOptions
+	WithInterpretedSyntax(interpretedSyntax raw.NSAttributedStringMarkdownInterpretedSyntax) *AttributedStringMarkdownParsingOptions
+	WithFailurePolicy(failurePolicy raw.NSAttributedStringMarkdownParsingFailurePolicy) *AttributedStringMarkdownParsingOptions
+	WithLanguageCode(languageCode string) *AttributedStringMarkdownParsingOptions
+	WithAppliesSourcePositionAttributes(appliesSourcePositionAttributes bool) *AttributedStringMarkdownParsingOptions
+	AllowsExtendedAttributes() bool
+	SetAllowsExtendedAttributes(allowsExtendedAttributes bool)
+	InterpretedSyntax() raw.NSAttributedStringMarkdownInterpretedSyntax
+	SetInterpretedSyntax(interpretedSyntax raw.NSAttributedStringMarkdownInterpretedSyntax)
+	FailurePolicy() raw.NSAttributedStringMarkdownParsingFailurePolicy
+	SetFailurePolicy(failurePolicy raw.NSAttributedStringMarkdownParsingFailurePolicy)
+	LanguageCode() *String
+	SetLanguageCode(languageCode string)
+	AppliesSourcePositionAttributes() bool
+	SetAppliesSourcePositionAttributes(appliesSourcePositionAttributes bool)
+}
+
+var _ AttributedStringMarkdownParsingOptionsable = (*AttributedStringMarkdownParsingOptions)(nil)
 

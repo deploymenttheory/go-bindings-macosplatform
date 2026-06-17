@@ -6,7 +6,9 @@ package audiotoolbox
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/audiotoolbox"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // ParameterNode wraps [raw.AUParameterNode] with a fluent Go API.
@@ -53,5 +55,141 @@ func (x *ParameterNode) WithImplementorDisplayNameWithLengthCallback(implementor
 	return x
 }
 
+// DisplayNameWithLength calls the underlying DisplayNameWithLength.
+func (x *ParameterNode) DisplayNameWithLength(maximumLength int) string {
+	_r := x.inner.DisplayNameWithLength(maximumLength)
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// TokenByAddingParameterObserver calls the underlying TokenByAddingParameterObserver.
+func (x *ParameterNode) TokenByAddingParameterObserver(observer func(uint64, float32)) unsafe.Pointer {
+	return x.inner.TokenByAddingParameterObserver(observer)
+}
+
+// TokenByAddingParameterRecordingObserver calls the underlying TokenByAddingParameterRecordingObserver.
+func (x *ParameterNode) TokenByAddingParameterRecordingObserver(observer func(int, *raw.AURecordedParameterEvent)) unsafe.Pointer {
+	return x.inner.TokenByAddingParameterRecordingObserver(observer)
+}
+
+// TokenByAddingParameterAutomationObserver calls the underlying TokenByAddingParameterAutomationObserver.
+func (x *ParameterNode) TokenByAddingParameterAutomationObserver(observer func(int, *raw.AUParameterAutomationEvent)) unsafe.Pointer {
+	return x.inner.TokenByAddingParameterAutomationObserver(observer)
+}
+
+// RemoveParameterObserver calls the underlying RemoveParameterObserver.
+func (x *ParameterNode) RemoveParameterObserver(token unsafe.Pointer) {
+	x.inner.RemoveParameterObserver(token)
+}
+
+// Identifier calls the underlying Identifier.
+func (x *ParameterNode) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// KeyPath calls the underlying KeyPath.
+func (x *ParameterNode) KeyPath() string {
+	_r := x.inner.KeyPath()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// DisplayName calls the underlying DisplayName.
+func (x *ParameterNode) DisplayName() string {
+	_r := x.inner.DisplayName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ImplementorValueObserver calls the underlying ImplementorValueObserver.
+func (x *ParameterNode) ImplementorValueObserver() objc.Block {
+	return x.inner.ImplementorValueObserver()
+}
+
+// SetImplementorValueObserver calls the underlying SetImplementorValueObserver.
+func (x *ParameterNode) SetImplementorValueObserver(implementorValueObserver func(*raw.AUParameter, float32)) {
+	x.inner.SetImplementorValueObserver(implementorValueObserver)
+}
+
+// ImplementorValueProvider calls the underlying ImplementorValueProvider.
+func (x *ParameterNode) ImplementorValueProvider() objc.Block {
+	return x.inner.ImplementorValueProvider()
+}
+
+// SetImplementorValueProvider calls the underlying SetImplementorValueProvider.
+func (x *ParameterNode) SetImplementorValueProvider(implementorValueProvider objc.Block) {
+	x.inner.SetImplementorValueProvider(implementorValueProvider)
+}
+
+// ImplementorStringFromValueCallback calls the underlying ImplementorStringFromValueCallback.
+func (x *ParameterNode) ImplementorStringFromValueCallback() objc.Block {
+	return x.inner.ImplementorStringFromValueCallback()
+}
+
+// SetImplementorStringFromValueCallback calls the underlying SetImplementorStringFromValueCallback.
+func (x *ParameterNode) SetImplementorStringFromValueCallback(implementorStringFromValueCallback objc.Block) {
+	x.inner.SetImplementorStringFromValueCallback(implementorStringFromValueCallback)
+}
+
+// ImplementorValueFromStringCallback calls the underlying ImplementorValueFromStringCallback.
+func (x *ParameterNode) ImplementorValueFromStringCallback() objc.Block {
+	return x.inner.ImplementorValueFromStringCallback()
+}
+
+// SetImplementorValueFromStringCallback calls the underlying SetImplementorValueFromStringCallback.
+func (x *ParameterNode) SetImplementorValueFromStringCallback(implementorValueFromStringCallback objc.Block) {
+	x.inner.SetImplementorValueFromStringCallback(implementorValueFromStringCallback)
+}
+
+// ImplementorDisplayNameWithLengthCallback calls the underlying ImplementorDisplayNameWithLengthCallback.
+func (x *ParameterNode) ImplementorDisplayNameWithLengthCallback() objc.Block {
+	return x.inner.ImplementorDisplayNameWithLengthCallback()
+}
+
+// SetImplementorDisplayNameWithLengthCallback calls the underlying SetImplementorDisplayNameWithLengthCallback.
+func (x *ParameterNode) SetImplementorDisplayNameWithLengthCallback(implementorDisplayNameWithLengthCallback objc.Block) {
+	x.inner.SetImplementorDisplayNameWithLengthCallback(implementorDisplayNameWithLengthCallback)
+}
+
 func (x *ParameterNode) asParameterNode() *raw.AUParameterNode { return x.inner }
+
+// ParameterNodeable is the interface implemented by [ParameterNode], for mocking and DI.
+type ParameterNodeable interface {
+	Unwrap() *raw.AUParameterNode
+	WithImplementorValueObserver(implementorValueObserver func(*raw.AUParameter, float32)) *ParameterNode
+	WithImplementorValueProvider(implementorValueProvider objc.Block) *ParameterNode
+	WithImplementorStringFromValueCallback(implementorStringFromValueCallback objc.Block) *ParameterNode
+	WithImplementorValueFromStringCallback(implementorValueFromStringCallback objc.Block) *ParameterNode
+	WithImplementorDisplayNameWithLengthCallback(implementorDisplayNameWithLengthCallback objc.Block) *ParameterNode
+	DisplayNameWithLength(maximumLength int) string
+	TokenByAddingParameterObserver(observer func(uint64, float32)) unsafe.Pointer
+	TokenByAddingParameterRecordingObserver(observer func(int, *raw.AURecordedParameterEvent)) unsafe.Pointer
+	TokenByAddingParameterAutomationObserver(observer func(int, *raw.AUParameterAutomationEvent)) unsafe.Pointer
+	RemoveParameterObserver(token unsafe.Pointer)
+	Identifier() string
+	KeyPath() string
+	DisplayName() string
+	ImplementorValueObserver() objc.Block
+	SetImplementorValueObserver(implementorValueObserver func(*raw.AUParameter, float32))
+	ImplementorValueProvider() objc.Block
+	SetImplementorValueProvider(implementorValueProvider objc.Block)
+	ImplementorStringFromValueCallback() objc.Block
+	SetImplementorStringFromValueCallback(implementorStringFromValueCallback objc.Block)
+	ImplementorValueFromStringCallback() objc.Block
+	SetImplementorValueFromStringCallback(implementorValueFromStringCallback objc.Block)
+	ImplementorDisplayNameWithLengthCallback() objc.Block
+	SetImplementorDisplayNameWithLengthCallback(implementorDisplayNameWithLengthCallback objc.Block)
+}
+
+var _ ParameterNodeable = (*ParameterNode)(nil)
 

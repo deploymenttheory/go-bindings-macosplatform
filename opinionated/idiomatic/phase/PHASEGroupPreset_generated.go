@@ -25,3 +25,52 @@ func NewGroupPresetWithEngineSettingsTimeToTargetTimeToReset(engine *raw.PHASEEn
 	return &GroupPreset{inner: raw.PHASEGroupPresetFromID(_id)}
 }
 
+// Activate calls the underlying Activate.
+func (x *GroupPreset) Activate() {
+	x.inner.Activate()
+}
+
+// ActivateWithTimeToTargetOverride calls the underlying ActivateWithTimeToTargetOverride.
+func (x *GroupPreset) ActivateWithTimeToTargetOverride(timeToTargetOverride float64) {
+	x.inner.ActivateWithTimeToTargetOverride(timeToTargetOverride)
+}
+
+// Deactivate calls the underlying Deactivate.
+func (x *GroupPreset) Deactivate() {
+	x.inner.Deactivate()
+}
+
+// DeactivateWithTimeToResetOverride calls the underlying DeactivateWithTimeToResetOverride.
+func (x *GroupPreset) DeactivateWithTimeToResetOverride(timeToResetOverride float64) {
+	x.inner.DeactivateWithTimeToResetOverride(timeToResetOverride)
+}
+
+// Settings calls the underlying Settings.
+func (x *GroupPreset) Settings() *foundation.NSDictionary[*foundation.NSString, *raw.PHASEGroupPresetSetting] {
+	return x.inner.Settings()
+}
+
+// TimeToTarget calls the underlying TimeToTarget.
+func (x *GroupPreset) TimeToTarget() float64 {
+	return x.inner.TimeToTarget()
+}
+
+// TimeToReset calls the underlying TimeToReset.
+func (x *GroupPreset) TimeToReset() float64 {
+	return x.inner.TimeToReset()
+}
+
+// GroupPresetable is the interface implemented by [GroupPreset], for mocking and DI.
+type GroupPresetable interface {
+	Unwrap() *raw.PHASEGroupPreset
+	Activate()
+	ActivateWithTimeToTargetOverride(timeToTargetOverride float64)
+	Deactivate()
+	DeactivateWithTimeToResetOverride(timeToResetOverride float64)
+	Settings() *foundation.NSDictionary[*foundation.NSString, *raw.PHASEGroupPresetSetting]
+	TimeToTarget() float64
+	TimeToReset() float64
+}
+
+var _ GroupPresetable = (*GroupPreset)(nil)
+

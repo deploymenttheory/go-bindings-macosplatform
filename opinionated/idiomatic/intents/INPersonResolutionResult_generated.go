@@ -27,3 +27,10 @@ func (x *PersonResolutionResult) asPersonResolutionResult() *raw.INPersonResolut
 
 func (x *PersonResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult { return &x.inner.INIntentResolutionResult }
 
+// PersonResolutionResultable is the interface implemented by [PersonResolutionResult], for mocking and DI.
+type PersonResolutionResultable interface {
+	Unwrap() *raw.INPersonResolutionResult
+}
+
+var _ PersonResolutionResultable = (*PersonResolutionResult)(nil)
+

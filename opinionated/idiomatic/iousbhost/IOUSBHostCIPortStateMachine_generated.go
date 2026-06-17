@@ -48,3 +48,107 @@ func (x *HostCIPortStateMachine) WithOvercurrent(overcurrent bool) *HostCIPortSt
 	return x
 }
 
+// InspectCommandError calls the underlying InspectCommandError.
+func (x *HostCIPortStateMachine) InspectCommandError(command *raw.IOUSBHostCIMessage) (bool, error) {
+	return x.inner.InspectCommandError(command)
+}
+
+// RespondToCommandStatusError calls the underlying RespondToCommandStatusError.
+func (x *HostCIPortStateMachine) RespondToCommandStatusError(command *raw.IOUSBHostCIMessage, status raw.IOUSBHostCIMessageStatus) (bool, error) {
+	return x.inner.RespondToCommandStatusError(command, status)
+}
+
+// UpdateLinkStateSpeedInhibitLinkStateChangeError calls the underlying UpdateLinkStateSpeedInhibitLinkStateChangeError.
+func (x *HostCIPortStateMachine) UpdateLinkStateSpeedInhibitLinkStateChangeError(linkState raw.IOUSBHostCILinkState, speed raw.IOUSBHostCIDeviceSpeed, inhibitLinkStateChange bool) (bool, error) {
+	return x.inner.UpdateLinkStateSpeedInhibitLinkStateChangeError(linkState, speed, inhibitLinkStateChange)
+}
+
+// PortNumber calls the underlying PortNumber.
+func (x *HostCIPortStateMachine) PortNumber() uint {
+	return x.inner.PortNumber()
+}
+
+// PortState calls the underlying PortState.
+func (x *HostCIPortStateMachine) PortState() raw.IOUSBHostCIPortState {
+	return x.inner.PortState()
+}
+
+// PortStatus calls the underlying PortStatus.
+func (x *HostCIPortStateMachine) PortStatus() uint32 {
+	return x.inner.PortStatus()
+}
+
+// ControllerInterface calls the underlying ControllerInterface.
+func (x *HostCIPortStateMachine) ControllerInterface() *HostControllerInterface {
+	_r := x.inner.ControllerInterface()
+	if _r == nil {
+		return nil
+	}
+	return &HostControllerInterface{inner: _r}
+}
+
+// Powered calls the underlying Powered.
+func (x *HostCIPortStateMachine) Powered() bool {
+	return x.inner.Powered()
+}
+
+// SetPowered calls the underlying SetPowered.
+func (x *HostCIPortStateMachine) SetPowered(powered bool) {
+	x.inner.SetPowered(powered)
+}
+
+// Connected calls the underlying Connected.
+func (x *HostCIPortStateMachine) Connected() bool {
+	return x.inner.Connected()
+}
+
+// SetConnected calls the underlying SetConnected.
+func (x *HostCIPortStateMachine) SetConnected(connected bool) {
+	x.inner.SetConnected(connected)
+}
+
+// Overcurrent calls the underlying Overcurrent.
+func (x *HostCIPortStateMachine) Overcurrent() bool {
+	return x.inner.Overcurrent()
+}
+
+// SetOvercurrent calls the underlying SetOvercurrent.
+func (x *HostCIPortStateMachine) SetOvercurrent(overcurrent bool) {
+	x.inner.SetOvercurrent(overcurrent)
+}
+
+// LinkState calls the underlying LinkState.
+func (x *HostCIPortStateMachine) LinkState() raw.IOUSBHostCILinkState {
+	return x.inner.LinkState()
+}
+
+// Speed calls the underlying Speed.
+func (x *HostCIPortStateMachine) Speed() raw.IOUSBHostCIDeviceSpeed {
+	return x.inner.Speed()
+}
+
+// HostCIPortStateMachineable is the interface implemented by [HostCIPortStateMachine], for mocking and DI.
+type HostCIPortStateMachineable interface {
+	Unwrap() *raw.IOUSBHostCIPortStateMachine
+	WithPowered(powered bool) *HostCIPortStateMachine
+	WithConnected(connected bool) *HostCIPortStateMachine
+	WithOvercurrent(overcurrent bool) *HostCIPortStateMachine
+	InspectCommandError(command *raw.IOUSBHostCIMessage) (bool, error)
+	RespondToCommandStatusError(command *raw.IOUSBHostCIMessage, status raw.IOUSBHostCIMessageStatus) (bool, error)
+	UpdateLinkStateSpeedInhibitLinkStateChangeError(linkState raw.IOUSBHostCILinkState, speed raw.IOUSBHostCIDeviceSpeed, inhibitLinkStateChange bool) (bool, error)
+	PortNumber() uint
+	PortState() raw.IOUSBHostCIPortState
+	PortStatus() uint32
+	ControllerInterface() *HostControllerInterface
+	Powered() bool
+	SetPowered(powered bool)
+	Connected() bool
+	SetConnected(connected bool)
+	Overcurrent() bool
+	SetOvercurrent(overcurrent bool)
+	LinkState() raw.IOUSBHostCILinkState
+	Speed() raw.IOUSBHostCIDeviceSpeed
+}
+
+var _ HostCIPortStateMachineable = (*HostCIPortStateMachine)(nil)
+

@@ -23,5 +23,30 @@ func NewNumberMetaParameter() *NumberMetaParameter {
 	return &NumberMetaParameter{inner: raw.PHASENumberMetaParameterFromID(_id)}
 }
 
+// FadeToValueDuration calls the underlying FadeToValueDuration.
+func (x *NumberMetaParameter) FadeToValueDuration(value float64, duration float64) {
+	x.inner.FadeToValueDuration(value, duration)
+}
+
+// Minimum calls the underlying Minimum.
+func (x *NumberMetaParameter) Minimum() float64 {
+	return x.inner.Minimum()
+}
+
+// Maximum calls the underlying Maximum.
+func (x *NumberMetaParameter) Maximum() float64 {
+	return x.inner.Maximum()
+}
+
 func (x *NumberMetaParameter) asMetaParameter() *raw.PHASEMetaParameter { return &x.inner.PHASEMetaParameter }
+
+// NumberMetaParameterable is the interface implemented by [NumberMetaParameter], for mocking and DI.
+type NumberMetaParameterable interface {
+	Unwrap() *raw.PHASENumberMetaParameter
+	FadeToValueDuration(value float64, duration float64)
+	Minimum() float64
+	Maximum() float64
+}
+
+var _ NumberMetaParameterable = (*NumberMetaParameter)(nil)
 

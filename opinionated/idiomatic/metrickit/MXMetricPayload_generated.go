@@ -5,7 +5,9 @@
 package metrickit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metrickit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,16 +25,212 @@ func NewMetricPayload() *MetricPayload {
 	return &MetricPayload{inner: raw.MXMetricPayloadFromID(_id)}
 }
 
+// JSONRepresentation calls the underlying JSONRepresentation.
+func (x *MetricPayload) JSONRepresentation() *foundation.NSData {
+	return x.inner.JSONRepresentation()
+}
+
+// DictionaryRepresentation calls the underlying DictionaryRepresentation.
+func (x *MetricPayload) DictionaryRepresentation() *foundation.NSDictionary[objc.ID, objc.ID] {
+	return x.inner.DictionaryRepresentation()
+}
+
+// LatestApplicationVersion calls the underlying LatestApplicationVersion.
+func (x *MetricPayload) LatestApplicationVersion() string {
+	_r := x.inner.LatestApplicationVersion()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// IncludesMultipleApplicationVersions calls the underlying IncludesMultipleApplicationVersions.
+func (x *MetricPayload) IncludesMultipleApplicationVersions() bool {
+	return x.inner.IncludesMultipleApplicationVersions()
+}
+
+// TimeStampBegin calls the underlying TimeStampBegin.
+func (x *MetricPayload) TimeStampBegin() *foundation.NSDate {
+	return x.inner.TimeStampBegin()
+}
+
+// TimeStampEnd calls the underlying TimeStampEnd.
+func (x *MetricPayload) TimeStampEnd() *foundation.NSDate {
+	return x.inner.TimeStampEnd()
+}
+
+// CpuMetrics calls the underlying CpuMetrics.
+func (x *MetricPayload) CpuMetrics() *CPUMetric {
+	_r := x.inner.CpuMetrics()
+	if _r == nil {
+		return nil
+	}
+	return &CPUMetric{inner: _r}
+}
+
+// GpuMetrics calls the underlying GpuMetrics.
+func (x *MetricPayload) GpuMetrics() *GPUMetric {
+	_r := x.inner.GpuMetrics()
+	if _r == nil {
+		return nil
+	}
+	return &GPUMetric{inner: _r}
+}
+
+// CellularConditionMetrics calls the underlying CellularConditionMetrics.
+func (x *MetricPayload) CellularConditionMetrics() *CellularConditionMetric {
+	_r := x.inner.CellularConditionMetrics()
+	if _r == nil {
+		return nil
+	}
+	return &CellularConditionMetric{inner: _r}
+}
+
+// ApplicationTimeMetrics calls the underlying ApplicationTimeMetrics.
+func (x *MetricPayload) ApplicationTimeMetrics() *AppRunTimeMetric {
+	_r := x.inner.ApplicationTimeMetrics()
+	if _r == nil {
+		return nil
+	}
+	return &AppRunTimeMetric{inner: _r}
+}
+
+// LocationActivityMetrics calls the underlying LocationActivityMetrics.
+func (x *MetricPayload) LocationActivityMetrics() *LocationActivityMetric {
+	_r := x.inner.LocationActivityMetrics()
+	if _r == nil {
+		return nil
+	}
+	return &LocationActivityMetric{inner: _r}
+}
+
+// NetworkTransferMetrics calls the underlying NetworkTransferMetrics.
+func (x *MetricPayload) NetworkTransferMetrics() *NetworkTransferMetric {
+	_r := x.inner.NetworkTransferMetrics()
+	if _r == nil {
+		return nil
+	}
+	return &NetworkTransferMetric{inner: _r}
+}
+
+// ApplicationLaunchMetrics calls the underlying ApplicationLaunchMetrics.
+func (x *MetricPayload) ApplicationLaunchMetrics() *AppLaunchMetric {
+	_r := x.inner.ApplicationLaunchMetrics()
+	if _r == nil {
+		return nil
+	}
+	return &AppLaunchMetric{inner: _r}
+}
+
+// ApplicationResponsivenessMetrics calls the underlying ApplicationResponsivenessMetrics.
+func (x *MetricPayload) ApplicationResponsivenessMetrics() *AppResponsivenessMetric {
+	_r := x.inner.ApplicationResponsivenessMetrics()
+	if _r == nil {
+		return nil
+	}
+	return &AppResponsivenessMetric{inner: _r}
+}
+
+// DiskIOMetrics calls the underlying DiskIOMetrics.
+func (x *MetricPayload) DiskIOMetrics() *DiskIOMetric {
+	_r := x.inner.DiskIOMetrics()
+	if _r == nil {
+		return nil
+	}
+	return &DiskIOMetric{inner: _r}
+}
+
+// MemoryMetrics calls the underlying MemoryMetrics.
+func (x *MetricPayload) MemoryMetrics() *MemoryMetric {
+	_r := x.inner.MemoryMetrics()
+	if _r == nil {
+		return nil
+	}
+	return &MemoryMetric{inner: _r}
+}
+
+// DisplayMetrics calls the underlying DisplayMetrics.
+func (x *MetricPayload) DisplayMetrics() *DisplayMetric {
+	_r := x.inner.DisplayMetrics()
+	if _r == nil {
+		return nil
+	}
+	return &DisplayMetric{inner: _r}
+}
+
+// AnimationMetrics calls the underlying AnimationMetrics.
+func (x *MetricPayload) AnimationMetrics() *AnimationMetric {
+	_r := x.inner.AnimationMetrics()
+	if _r == nil {
+		return nil
+	}
+	return &AnimationMetric{inner: _r}
+}
+
+// ApplicationExitMetrics calls the underlying ApplicationExitMetrics.
+func (x *MetricPayload) ApplicationExitMetrics() *AppExitMetric {
+	_r := x.inner.ApplicationExitMetrics()
+	if _r == nil {
+		return nil
+	}
+	return &AppExitMetric{inner: _r}
+}
+
+// DiskSpaceUsageMetrics calls the underlying DiskSpaceUsageMetrics.
+func (x *MetricPayload) DiskSpaceUsageMetrics() *DiskSpaceUsageMetric {
+	_r := x.inner.DiskSpaceUsageMetrics()
+	if _r == nil {
+		return nil
+	}
+	return &DiskSpaceUsageMetric{inner: _r}
+}
+
 // SignpostMetrics returns the collection as a Go slice.
 func (x *MetricPayload) SignpostMetrics() []*raw.MXSignpostMetric {
 	arr := x.inner.SignpostMetrics()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MXSignpostMetric, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MXSignpostMetric {
+		return raw.MXSignpostMetricFromID(purego.Retain(_id))
+	})
 }
+
+// MetaData calls the underlying MetaData.
+func (x *MetricPayload) MetaData() *MetaData {
+	_r := x.inner.MetaData()
+	if _r == nil {
+		return nil
+	}
+	return &MetaData{inner: _r}
+}
+
+// MetricPayloadable is the interface implemented by [MetricPayload], for mocking and DI.
+type MetricPayloadable interface {
+	Unwrap() *raw.MXMetricPayload
+	JSONRepresentation() *foundation.NSData
+	DictionaryRepresentation() *foundation.NSDictionary[objc.ID, objc.ID]
+	LatestApplicationVersion() string
+	IncludesMultipleApplicationVersions() bool
+	TimeStampBegin() *foundation.NSDate
+	TimeStampEnd() *foundation.NSDate
+	CpuMetrics() *CPUMetric
+	GpuMetrics() *GPUMetric
+	CellularConditionMetrics() *CellularConditionMetric
+	ApplicationTimeMetrics() *AppRunTimeMetric
+	LocationActivityMetrics() *LocationActivityMetric
+	NetworkTransferMetrics() *NetworkTransferMetric
+	ApplicationLaunchMetrics() *AppLaunchMetric
+	ApplicationResponsivenessMetrics() *AppResponsivenessMetric
+	DiskIOMetrics() *DiskIOMetric
+	MemoryMetrics() *MemoryMetric
+	DisplayMetrics() *DisplayMetric
+	AnimationMetrics() *AnimationMetric
+	ApplicationExitMetrics() *AppExitMetric
+	DiskSpaceUsageMetrics() *DiskSpaceUsageMetric
+	SignpostMetrics() []*raw.MXSignpostMetric
+	MetaData() *MetaData
+}
+
+var _ MetricPayloadable = (*MetricPayload)(nil)
 

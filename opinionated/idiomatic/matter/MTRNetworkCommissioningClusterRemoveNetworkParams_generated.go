@@ -48,3 +48,62 @@ func (x *MTRNetworkCommissioningClusterRemoveNetworkParams) WithServerSideProces
 	return x
 }
 
+// NetworkID calls the underlying NetworkID.
+func (x *MTRNetworkCommissioningClusterRemoveNetworkParams) NetworkID() *foundation.NSData {
+	return x.inner.NetworkID()
+}
+
+// SetNetworkID calls the underlying SetNetworkID.
+func (x *MTRNetworkCommissioningClusterRemoveNetworkParams) SetNetworkID(networkID *foundation.NSData) {
+	x.inner.SetNetworkID(networkID)
+}
+
+// Breadcrumb calls the underlying Breadcrumb.
+func (x *MTRNetworkCommissioningClusterRemoveNetworkParams) Breadcrumb() *foundation.NSNumber {
+	return x.inner.Breadcrumb()
+}
+
+// SetBreadcrumb calls the underlying SetBreadcrumb.
+func (x *MTRNetworkCommissioningClusterRemoveNetworkParams) SetBreadcrumb(breadcrumb *foundation.NSNumber) {
+	x.inner.SetBreadcrumb(breadcrumb)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRNetworkCommissioningClusterRemoveNetworkParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRNetworkCommissioningClusterRemoveNetworkParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRNetworkCommissioningClusterRemoveNetworkParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRNetworkCommissioningClusterRemoveNetworkParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRNetworkCommissioningClusterRemoveNetworkParamsable is the interface implemented by [MTRNetworkCommissioningClusterRemoveNetworkParams], for mocking and DI.
+type MTRNetworkCommissioningClusterRemoveNetworkParamsable interface {
+	Unwrap() *raw.MTRNetworkCommissioningClusterRemoveNetworkParams
+	WithNetworkID(networkID *foundation.NSData) *MTRNetworkCommissioningClusterRemoveNetworkParams
+	WithBreadcrumb(breadcrumb *foundation.NSNumber) *MTRNetworkCommissioningClusterRemoveNetworkParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRNetworkCommissioningClusterRemoveNetworkParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRNetworkCommissioningClusterRemoveNetworkParams
+	NetworkID() *foundation.NSData
+	SetNetworkID(networkID *foundation.NSData)
+	Breadcrumb() *foundation.NSNumber
+	SetBreadcrumb(breadcrumb *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRNetworkCommissioningClusterRemoveNetworkParamsable = (*MTRNetworkCommissioningClusterRemoveNetworkParams)(nil)
+

@@ -6,6 +6,8 @@ package corebluetooth
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corebluetooth"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +24,27 @@ func NewUUID() *UUID {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CBUUID")), objc.RegisterName("new"))
 	return &UUID{inner: raw.CBUUIDFromID(_id)}
 }
+
+// Data calls the underlying Data.
+func (x *UUID) Data() *foundation.NSData {
+	return x.inner.Data()
+}
+
+// UUIDString calls the underlying UUIDString.
+func (x *UUID) UUIDString() string {
+	_r := x.inner.UUIDString()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// UUIDable is the interface implemented by [UUID], for mocking and DI.
+type UUIDable interface {
+	Unwrap() *raw.CBUUID
+	Data() *foundation.NSData
+	UUIDString() string
+}
+
+var _ UUIDable = (*UUID)(nil)
 

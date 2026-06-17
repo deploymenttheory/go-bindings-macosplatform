@@ -49,5 +49,174 @@ func (x *Scanner) WithLocale(locale objc.ID) *Scanner {
 	return x
 }
 
+// String calls the underlying String.
+func (x *Scanner) String() *String {
+	_r := x.inner.String()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// ScanLocation calls the underlying ScanLocation.
+func (x *Scanner) ScanLocation() uint {
+	return x.inner.ScanLocation()
+}
+
+// SetScanLocation calls the underlying SetScanLocation.
+func (x *Scanner) SetScanLocation(scanLocation uint) {
+	x.inner.SetScanLocation(scanLocation)
+}
+
+// CharactersToBeSkipped calls the underlying CharactersToBeSkipped.
+func (x *Scanner) CharactersToBeSkipped() *CharacterSet {
+	_r := x.inner.CharactersToBeSkipped()
+	if _r == nil {
+		return nil
+	}
+	return &CharacterSet{inner: _r}
+}
+
+// SetCharactersToBeSkipped calls the underlying SetCharactersToBeSkipped.
+func (x *Scanner) SetCharactersToBeSkipped(charactersToBeSkipped *raw.NSCharacterSet) {
+	x.inner.SetCharactersToBeSkipped(charactersToBeSkipped)
+}
+
+// CaseSensitive calls the underlying CaseSensitive.
+func (x *Scanner) CaseSensitive() bool {
+	return x.inner.CaseSensitive()
+}
+
+// SetCaseSensitive calls the underlying SetCaseSensitive.
+func (x *Scanner) SetCaseSensitive(caseSensitive bool) {
+	x.inner.SetCaseSensitive(caseSensitive)
+}
+
+// Locale calls the underlying Locale.
+func (x *Scanner) Locale() objc.ID {
+	return x.inner.Locale()
+}
+
+// SetLocale calls the underlying SetLocale.
+func (x *Scanner) SetLocale(locale objc.ID) {
+	x.inner.SetLocale(locale)
+}
+
+// ScanInt calls the underlying ScanInt.
+func (x *Scanner) ScanInt(result *int32) bool {
+	return x.inner.ScanInt(result)
+}
+
+// ScanInteger calls the underlying ScanInteger.
+func (x *Scanner) ScanInteger(result *int64) bool {
+	return x.inner.ScanInteger(result)
+}
+
+// ScanLongLong calls the underlying ScanLongLong.
+func (x *Scanner) ScanLongLong(result *int64) bool {
+	return x.inner.ScanLongLong(result)
+}
+
+// ScanUnsignedLongLong calls the underlying ScanUnsignedLongLong.
+func (x *Scanner) ScanUnsignedLongLong(result *uint64) bool {
+	return x.inner.ScanUnsignedLongLong(result)
+}
+
+// ScanFloat calls the underlying ScanFloat.
+func (x *Scanner) ScanFloat(result *float32) bool {
+	return x.inner.ScanFloat(result)
+}
+
+// ScanDouble calls the underlying ScanDouble.
+func (x *Scanner) ScanDouble(result *float64) bool {
+	return x.inner.ScanDouble(result)
+}
+
+// ScanHexInt calls the underlying ScanHexInt.
+func (x *Scanner) ScanHexInt(result *uint32) bool {
+	return x.inner.ScanHexInt(result)
+}
+
+// ScanHexLongLong calls the underlying ScanHexLongLong.
+func (x *Scanner) ScanHexLongLong(result *uint64) bool {
+	return x.inner.ScanHexLongLong(result)
+}
+
+// ScanHexFloat calls the underlying ScanHexFloat.
+func (x *Scanner) ScanHexFloat(result *float32) bool {
+	return x.inner.ScanHexFloat(result)
+}
+
+// ScanHexDouble calls the underlying ScanHexDouble.
+func (x *Scanner) ScanHexDouble(result *float64) bool {
+	return x.inner.ScanHexDouble(result)
+}
+
+// ScanStringIntoString calls the underlying ScanStringIntoString.
+func (x *Scanner) ScanStringIntoString(string_ string, result string) bool {
+	return x.inner.ScanStringIntoString(foundation.NSStringStringWithUTF8String(string_), foundation.NSStringStringWithUTF8String(result))
+}
+
+// ScanCharactersFromSetIntoString calls the underlying ScanCharactersFromSetIntoString.
+func (x *Scanner) ScanCharactersFromSetIntoString(set *raw.NSCharacterSet, result string) bool {
+	return x.inner.ScanCharactersFromSetIntoString(set, foundation.NSStringStringWithUTF8String(result))
+}
+
+// ScanUpToStringIntoString calls the underlying ScanUpToStringIntoString.
+func (x *Scanner) ScanUpToStringIntoString(string_ string, result string) bool {
+	return x.inner.ScanUpToStringIntoString(foundation.NSStringStringWithUTF8String(string_), foundation.NSStringStringWithUTF8String(result))
+}
+
+// ScanUpToCharactersFromSetIntoString calls the underlying ScanUpToCharactersFromSetIntoString.
+func (x *Scanner) ScanUpToCharactersFromSetIntoString(set *raw.NSCharacterSet, result string) bool {
+	return x.inner.ScanUpToCharactersFromSetIntoString(set, foundation.NSStringStringWithUTF8String(result))
+}
+
+// IsAtEnd calls the underlying IsAtEnd.
+func (x *Scanner) IsAtEnd() bool {
+	return x.inner.IsAtEnd()
+}
+
+// ScanDecimal calls the underlying ScanDecimal.
+func (x *Scanner) ScanDecimal(dcm *raw.NSDecimal) bool {
+	return x.inner.ScanDecimal(dcm)
+}
+
 func (x *Scanner) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// Scannerable is the interface implemented by [Scanner], for mocking and DI.
+type Scannerable interface {
+	Unwrap() *raw.NSScanner
+	WithScanLocation(scanLocation uint) *Scanner
+	WithCharactersToBeSkipped(charactersToBeSkipped CharacterSetProvider) *Scanner
+	WithCaseSensitive(caseSensitive bool) *Scanner
+	WithLocale(locale objc.ID) *Scanner
+	String() *String
+	ScanLocation() uint
+	SetScanLocation(scanLocation uint)
+	CharactersToBeSkipped() *CharacterSet
+	SetCharactersToBeSkipped(charactersToBeSkipped *raw.NSCharacterSet)
+	CaseSensitive() bool
+	SetCaseSensitive(caseSensitive bool)
+	Locale() objc.ID
+	SetLocale(locale objc.ID)
+	ScanInt(result *int32) bool
+	ScanInteger(result *int64) bool
+	ScanLongLong(result *int64) bool
+	ScanUnsignedLongLong(result *uint64) bool
+	ScanFloat(result *float32) bool
+	ScanDouble(result *float64) bool
+	ScanHexInt(result *uint32) bool
+	ScanHexLongLong(result *uint64) bool
+	ScanHexFloat(result *float32) bool
+	ScanHexDouble(result *float64) bool
+	ScanStringIntoString(string_ string, result string) bool
+	ScanCharactersFromSetIntoString(set *raw.NSCharacterSet, result string) bool
+	ScanUpToStringIntoString(string_ string, result string) bool
+	ScanUpToCharactersFromSetIntoString(set *raw.NSCharacterSet, result string) bool
+	IsAtEnd() bool
+	ScanDecimal(dcm *raw.NSDecimal) bool
+}
+
+var _ Scannerable = (*Scanner)(nil)
 

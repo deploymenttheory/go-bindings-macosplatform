@@ -25,3 +25,23 @@ func NewMTRQRCodeSetupPayloadParserWithBase38Representation(base38Representation
 	return &MTRQRCodeSetupPayloadParser{inner: raw.MTRQRCodeSetupPayloadParserFromID(_id)}
 }
 
+// PopulatePayload calls the underlying PopulatePayload.
+func (x *MTRQRCodeSetupPayloadParser) PopulatePayload() (*MTRSetupPayload, error) {
+	_r, _err := x.inner.PopulatePayload()
+	if _err != nil {
+		return nil, _err
+	}
+	if _r == nil {
+		return nil, nil
+	}
+	return &MTRSetupPayload{inner: _r}, nil
+}
+
+// MTRQRCodeSetupPayloadParserable is the interface implemented by [MTRQRCodeSetupPayloadParser], for mocking and DI.
+type MTRQRCodeSetupPayloadParserable interface {
+	Unwrap() *raw.MTRQRCodeSetupPayloadParser
+	PopulatePayload() (*MTRSetupPayload, error)
+}
+
+var _ MTRQRCodeSetupPayloadParserable = (*MTRQRCodeSetupPayloadParser)(nil)
+

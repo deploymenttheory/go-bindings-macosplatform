@@ -35,3 +35,44 @@ func (x *MTRChannelClusterChannelPagingStruct) WithNextToken(nextToken *raw.MTRC
 	return x
 }
 
+// PreviousToken calls the underlying PreviousToken.
+func (x *MTRChannelClusterChannelPagingStruct) PreviousToken() *MTRChannelClusterPageTokenStruct {
+	_r := x.inner.PreviousToken()
+	if _r == nil {
+		return nil
+	}
+	return &MTRChannelClusterPageTokenStruct{inner: _r}
+}
+
+// SetPreviousToken calls the underlying SetPreviousToken.
+func (x *MTRChannelClusterChannelPagingStruct) SetPreviousToken(previousToken *raw.MTRChannelClusterPageTokenStruct) {
+	x.inner.SetPreviousToken(previousToken)
+}
+
+// NextToken calls the underlying NextToken.
+func (x *MTRChannelClusterChannelPagingStruct) NextToken() *MTRChannelClusterPageTokenStruct {
+	_r := x.inner.NextToken()
+	if _r == nil {
+		return nil
+	}
+	return &MTRChannelClusterPageTokenStruct{inner: _r}
+}
+
+// SetNextToken calls the underlying SetNextToken.
+func (x *MTRChannelClusterChannelPagingStruct) SetNextToken(nextToken *raw.MTRChannelClusterPageTokenStruct) {
+	x.inner.SetNextToken(nextToken)
+}
+
+// MTRChannelClusterChannelPagingStructable is the interface implemented by [MTRChannelClusterChannelPagingStruct], for mocking and DI.
+type MTRChannelClusterChannelPagingStructable interface {
+	Unwrap() *raw.MTRChannelClusterChannelPagingStruct
+	WithPreviousToken(previousToken *raw.MTRChannelClusterPageTokenStruct) *MTRChannelClusterChannelPagingStruct
+	WithNextToken(nextToken *raw.MTRChannelClusterPageTokenStruct) *MTRChannelClusterChannelPagingStruct
+	PreviousToken() *MTRChannelClusterPageTokenStruct
+	SetPreviousToken(previousToken *raw.MTRChannelClusterPageTokenStruct)
+	NextToken() *MTRChannelClusterPageTokenStruct
+	SetNextToken(nextToken *raw.MTRChannelClusterPageTokenStruct)
+}
+
+var _ MTRChannelClusterChannelPagingStructable = (*MTRChannelClusterChannelPagingStruct)(nil)
+

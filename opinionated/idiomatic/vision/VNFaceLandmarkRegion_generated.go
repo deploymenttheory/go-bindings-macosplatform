@@ -23,5 +23,18 @@ func NewFaceLandmarkRegion() *FaceLandmarkRegion {
 	return &FaceLandmarkRegion{inner: raw.VNFaceLandmarkRegionFromID(_id)}
 }
 
+// PointCount calls the underlying PointCount.
+func (x *FaceLandmarkRegion) PointCount() uint {
+	return x.inner.PointCount()
+}
+
 func (x *FaceLandmarkRegion) asFaceLandmarkRegion() *raw.VNFaceLandmarkRegion { return x.inner }
+
+// FaceLandmarkRegionable is the interface implemented by [FaceLandmarkRegion], for mocking and DI.
+type FaceLandmarkRegionable interface {
+	Unwrap() *raw.VNFaceLandmarkRegion
+	PointCount() uint
+}
+
+var _ FaceLandmarkRegionable = (*FaceLandmarkRegion)(nil)
 

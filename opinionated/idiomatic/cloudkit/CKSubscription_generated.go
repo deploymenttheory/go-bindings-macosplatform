@@ -6,6 +6,7 @@ package cloudkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -29,5 +30,45 @@ func (x *Subscription) WithNotificationInfo(notificationInfo *raw.CKNotification
 	return x
 }
 
+// SubscriptionID calls the underlying SubscriptionID.
+func (x *Subscription) SubscriptionID() string {
+	_r := x.inner.SubscriptionID()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SubscriptionType calls the underlying SubscriptionType.
+func (x *Subscription) SubscriptionType() raw.CKSubscriptionType {
+	return x.inner.SubscriptionType()
+}
+
+// NotificationInfo calls the underlying NotificationInfo.
+func (x *Subscription) NotificationInfo() *NotificationInfo {
+	_r := x.inner.NotificationInfo()
+	if _r == nil {
+		return nil
+	}
+	return &NotificationInfo{inner: _r}
+}
+
+// SetNotificationInfo calls the underlying SetNotificationInfo.
+func (x *Subscription) SetNotificationInfo(notificationInfo *raw.CKNotificationInfo) {
+	x.inner.SetNotificationInfo(notificationInfo)
+}
+
 func (x *Subscription) asSubscription() *raw.CKSubscription { return x.inner }
+
+// Subscriptionable is the interface implemented by [Subscription], for mocking and DI.
+type Subscriptionable interface {
+	Unwrap() *raw.CKSubscription
+	WithNotificationInfo(notificationInfo *raw.CKNotificationInfo) *Subscription
+	SubscriptionID() string
+	SubscriptionType() raw.CKSubscriptionType
+	NotificationInfo() *NotificationInfo
+	SetNotificationInfo(notificationInfo *raw.CKNotificationInfo)
+}
+
+var _ Subscriptionable = (*Subscription)(nil)
 

@@ -30,3 +30,23 @@ func (x *BinaryArchiveDescriptor) WithUrl(url string) *BinaryArchiveDescriptor {
 	return x
 }
 
+// Url calls the underlying Url.
+func (x *BinaryArchiveDescriptor) Url() *foundation.NSURL {
+	return x.inner.Url()
+}
+
+// SetUrl calls the underlying SetUrl.
+func (x *BinaryArchiveDescriptor) SetUrl(url string) {
+	x.inner.SetUrl(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
+}
+
+// BinaryArchiveDescriptorable is the interface implemented by [BinaryArchiveDescriptor], for mocking and DI.
+type BinaryArchiveDescriptorable interface {
+	Unwrap() *raw.MTLBinaryArchiveDescriptor
+	WithUrl(url string) *BinaryArchiveDescriptor
+	Url() *foundation.NSURL
+	SetUrl(url string)
+}
+
+var _ BinaryArchiveDescriptorable = (*BinaryArchiveDescriptor)(nil)
+

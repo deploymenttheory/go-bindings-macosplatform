@@ -8,6 +8,7 @@ import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/uniformtypeidentifiers"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -170,43 +171,328 @@ func (x *SavePanel) WithAllowedFileTypes(items ...*foundation.NSString) *SavePan
 	return x
 }
 
+// ValidateVisibleColumns calls the underlying ValidateVisibleColumns.
+func (x *SavePanel) ValidateVisibleColumns() {
+	x.inner.ValidateVisibleColumns()
+}
+
+// Ok calls the underlying Ok.
+func (x *SavePanel) Ok(sender objc.ID) {
+	x.inner.Ok(sender)
+}
+
+// Cancel calls the underlying Cancel.
+func (x *SavePanel) Cancel(sender objc.ID) {
+	x.inner.Cancel(sender)
+}
+
+// BeginSheetModalForWindowCompletionHandler calls the underlying BeginSheetModalForWindowCompletionHandler.
+func (x *SavePanel) BeginSheetModalForWindowCompletionHandler(window *raw.NSWindow, handler func(int)) {
+	x.inner.BeginSheetModalForWindowCompletionHandler(window, handler)
+}
+
+// BeginWithCompletionHandler calls the underlying BeginWithCompletionHandler.
+func (x *SavePanel) BeginWithCompletionHandler(handler func(int)) {
+	x.inner.BeginWithCompletionHandler(handler)
+}
+
+// RunModal calls the underlying RunModal.
+func (x *SavePanel) RunModal() int {
+	return x.inner.RunModal()
+}
+
+// URL calls the underlying URL.
+func (x *SavePanel) URL() *foundation.NSURL {
+	return x.inner.URL()
+}
+
+// Identifier calls the underlying Identifier.
+func (x *SavePanel) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetIdentifier calls the underlying SetIdentifier.
+func (x *SavePanel) SetIdentifier(identifier *foundation.NSString) {
+	x.inner.SetIdentifier(identifier)
+}
+
+// DirectoryURL calls the underlying DirectoryURL.
+func (x *SavePanel) DirectoryURL() *foundation.NSURL {
+	return x.inner.DirectoryURL()
+}
+
+// SetDirectoryURL calls the underlying SetDirectoryURL.
+func (x *SavePanel) SetDirectoryURL(directoryURL string) {
+	x.inner.SetDirectoryURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(directoryURL)))
+}
+
 // AllowedContentTypes returns the collection as a Go slice.
 func (x *SavePanel) AllowedContentTypes() []*uniformtypeidentifiers.UTType {
 	arr := x.inner.AllowedContentTypes()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*uniformtypeidentifiers.UTType, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *uniformtypeidentifiers.UTType {
+		return uniformtypeidentifiers.UTTypeFromID(purego.Retain(_id))
+	})
+}
+
+// SetAllowedContentTypes calls the underlying SetAllowedContentTypes.
+func (x *SavePanel) SetAllowedContentTypes(allowedContentTypes *foundation.NSArray[*uniformtypeidentifiers.UTType]) {
+	x.inner.SetAllowedContentTypes(allowedContentTypes)
+}
+
+// AllowsOtherFileTypes calls the underlying AllowsOtherFileTypes.
+func (x *SavePanel) AllowsOtherFileTypes() bool {
+	return x.inner.AllowsOtherFileTypes()
+}
+
+// SetAllowsOtherFileTypes calls the underlying SetAllowsOtherFileTypes.
+func (x *SavePanel) SetAllowsOtherFileTypes(allowsOtherFileTypes bool) {
+	x.inner.SetAllowsOtherFileTypes(allowsOtherFileTypes)
+}
+
+// CurrentContentType calls the underlying CurrentContentType.
+func (x *SavePanel) CurrentContentType() *uniformtypeidentifiers.UTType {
+	return x.inner.CurrentContentType()
+}
+
+// SetCurrentContentType calls the underlying SetCurrentContentType.
+func (x *SavePanel) SetCurrentContentType(currentContentType *uniformtypeidentifiers.UTType) {
+	x.inner.SetCurrentContentType(currentContentType)
+}
+
+// AccessoryView calls the underlying AccessoryView.
+func (x *SavePanel) AccessoryView() *View {
+	_r := x.inner.AccessoryView()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &View{inner: _r}
+}
+
+// SetAccessoryView calls the underlying SetAccessoryView.
+func (x *SavePanel) SetAccessoryView(accessoryView *raw.NSView) {
+	x.inner.SetAccessoryView(accessoryView)
+}
+
+// IsExpanded calls the underlying IsExpanded.
+func (x *SavePanel) IsExpanded() bool {
+	return x.inner.IsExpanded()
+}
+
+// CanCreateDirectories calls the underlying CanCreateDirectories.
+func (x *SavePanel) CanCreateDirectories() bool {
+	return x.inner.CanCreateDirectories()
+}
+
+// SetCanCreateDirectories calls the underlying SetCanCreateDirectories.
+func (x *SavePanel) SetCanCreateDirectories(canCreateDirectories bool) {
+	x.inner.SetCanCreateDirectories(canCreateDirectories)
+}
+
+// CanSelectHiddenExtension calls the underlying CanSelectHiddenExtension.
+func (x *SavePanel) CanSelectHiddenExtension() bool {
+	return x.inner.CanSelectHiddenExtension()
+}
+
+// SetCanSelectHiddenExtension calls the underlying SetCanSelectHiddenExtension.
+func (x *SavePanel) SetCanSelectHiddenExtension(canSelectHiddenExtension bool) {
+	x.inner.SetCanSelectHiddenExtension(canSelectHiddenExtension)
+}
+
+// IsExtensionHidden calls the underlying IsExtensionHidden.
+func (x *SavePanel) IsExtensionHidden() bool {
+	return x.inner.IsExtensionHidden()
+}
+
+// SetExtensionHidden calls the underlying SetExtensionHidden.
+func (x *SavePanel) SetExtensionHidden(extensionHidden bool) {
+	x.inner.SetExtensionHidden(extensionHidden)
+}
+
+// TreatsFilePackagesAsDirectories calls the underlying TreatsFilePackagesAsDirectories.
+func (x *SavePanel) TreatsFilePackagesAsDirectories() bool {
+	return x.inner.TreatsFilePackagesAsDirectories()
+}
+
+// SetTreatsFilePackagesAsDirectories calls the underlying SetTreatsFilePackagesAsDirectories.
+func (x *SavePanel) SetTreatsFilePackagesAsDirectories(treatsFilePackagesAsDirectories bool) {
+	x.inner.SetTreatsFilePackagesAsDirectories(treatsFilePackagesAsDirectories)
+}
+
+// Prompt calls the underlying Prompt.
+func (x *SavePanel) Prompt() string {
+	_r := x.inner.Prompt()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetPrompt calls the underlying SetPrompt.
+func (x *SavePanel) SetPrompt(prompt string) {
+	x.inner.SetPrompt(foundation.NSStringStringWithUTF8String(prompt))
+}
+
+// NameFieldLabel calls the underlying NameFieldLabel.
+func (x *SavePanel) NameFieldLabel() string {
+	_r := x.inner.NameFieldLabel()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetNameFieldLabel calls the underlying SetNameFieldLabel.
+func (x *SavePanel) SetNameFieldLabel(nameFieldLabel string) {
+	x.inner.SetNameFieldLabel(foundation.NSStringStringWithUTF8String(nameFieldLabel))
+}
+
+// NameFieldStringValue calls the underlying NameFieldStringValue.
+func (x *SavePanel) NameFieldStringValue() string {
+	_r := x.inner.NameFieldStringValue()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetNameFieldStringValue calls the underlying SetNameFieldStringValue.
+func (x *SavePanel) SetNameFieldStringValue(nameFieldStringValue string) {
+	x.inner.SetNameFieldStringValue(foundation.NSStringStringWithUTF8String(nameFieldStringValue))
+}
+
+// Message calls the underlying Message.
+func (x *SavePanel) Message() string {
+	_r := x.inner.Message()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetMessage calls the underlying SetMessage.
+func (x *SavePanel) SetMessage(message string) {
+	x.inner.SetMessage(foundation.NSStringStringWithUTF8String(message))
+}
+
+// ShowsHiddenFiles calls the underlying ShowsHiddenFiles.
+func (x *SavePanel) ShowsHiddenFiles() bool {
+	return x.inner.ShowsHiddenFiles()
+}
+
+// SetShowsHiddenFiles calls the underlying SetShowsHiddenFiles.
+func (x *SavePanel) SetShowsHiddenFiles(showsHiddenFiles bool) {
+	x.inner.SetShowsHiddenFiles(showsHiddenFiles)
+}
+
+// ShowsTagField calls the underlying ShowsTagField.
+func (x *SavePanel) ShowsTagField() bool {
+	return x.inner.ShowsTagField()
+}
+
+// SetShowsTagField calls the underlying SetShowsTagField.
+func (x *SavePanel) SetShowsTagField(showsTagField bool) {
+	x.inner.SetShowsTagField(showsTagField)
 }
 
 // TagNames returns the collection as a Go slice.
-func (x *SavePanel) TagNames() []*foundation.NSString {
+func (x *SavePanel) TagNames() []string {
 	arr := x.inner.TagNames()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// SetTagNames calls the underlying SetTagNames.
+func (x *SavePanel) SetTagNames(tagNames *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetTagNames(tagNames)
+}
+
+// ShowsContentTypes calls the underlying ShowsContentTypes.
+func (x *SavePanel) ShowsContentTypes() bool {
+	return x.inner.ShowsContentTypes()
+}
+
+// SetShowsContentTypes calls the underlying SetShowsContentTypes.
+func (x *SavePanel) SetShowsContentTypes(showsContentTypes bool) {
+	x.inner.SetShowsContentTypes(showsContentTypes)
+}
+
+// Filename calls the underlying Filename.
+func (x *SavePanel) Filename() string {
+	_r := x.inner.Filename()
+	if _r == nil {
+		return ""
 	}
-	return out
+	return purego.GoString(_r.Ptr())
+}
+
+// Directory calls the underlying Directory.
+func (x *SavePanel) Directory() string {
+	_r := x.inner.Directory()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetDirectory calls the underlying SetDirectory.
+func (x *SavePanel) SetDirectory(path string) {
+	x.inner.SetDirectory(foundation.NSStringStringWithUTF8String(path))
+}
+
+// RequiredFileType calls the underlying RequiredFileType.
+func (x *SavePanel) RequiredFileType() string {
+	_r := x.inner.RequiredFileType()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetRequiredFileType calls the underlying SetRequiredFileType.
+func (x *SavePanel) SetRequiredFileType(type_ string) {
+	x.inner.SetRequiredFileType(foundation.NSStringStringWithUTF8String(type_))
+}
+
+// BeginSheetForDirectoryFileModalForWindowModalDelegateDidEndSelectorContextInfo calls the underlying BeginSheetForDirectoryFileModalForWindowModalDelegateDidEndSelectorContextInfo.
+func (x *SavePanel) BeginSheetForDirectoryFileModalForWindowModalDelegateDidEndSelectorContextInfo(path string, name string, docWindow *raw.NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer) {
+	x.inner.BeginSheetForDirectoryFileModalForWindowModalDelegateDidEndSelectorContextInfo(foundation.NSStringStringWithUTF8String(path), foundation.NSStringStringWithUTF8String(name), docWindow, delegate, didEndSelector, contextInfo)
+}
+
+// RunModalForDirectoryFile calls the underlying RunModalForDirectoryFile.
+func (x *SavePanel) RunModalForDirectoryFile(path string, name string) int {
+	return x.inner.RunModalForDirectoryFile(foundation.NSStringStringWithUTF8String(path), foundation.NSStringStringWithUTF8String(name))
+}
+
+// SelectText calls the underlying SelectText.
+func (x *SavePanel) SelectText(sender objc.ID) {
+	x.inner.SelectText(sender)
 }
 
 // AllowedFileTypes returns the collection as a Go slice.
-func (x *SavePanel) AllowedFileTypes() []*foundation.NSString {
+func (x *SavePanel) AllowedFileTypes() []string {
 	arr := x.inner.AllowedFileTypes()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// SetAllowedFileTypes calls the underlying SetAllowedFileTypes.
+func (x *SavePanel) SetAllowedFileTypes(allowedFileTypes *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetAllowedFileTypes(allowedFileTypes)
 }
 
 func (x *SavePanel) asSavePanel() *raw.NSSavePanel { return x.inner }
@@ -216,4 +502,84 @@ func (x *SavePanel) asPanel() *raw.NSPanel { return &x.inner.NSPanel }
 func (x *SavePanel) asWindow() *raw.NSWindow { return &x.inner.NSPanel.NSWindow }
 
 func (x *SavePanel) asResponder() *raw.NSResponder { return &x.inner.NSPanel.NSWindow.NSResponder }
+
+// SavePanelable is the interface implemented by [SavePanel], for mocking and DI.
+type SavePanelable interface {
+	Unwrap() *raw.NSSavePanel
+	WithIdentifier(identifier *foundation.NSString) *SavePanel
+	WithDirectoryURL(directoryURL string) *SavePanel
+	WithAllowedContentTypes(items ...*uniformtypeidentifiers.UTType) *SavePanel
+	WithAllowsOtherFileTypes(allowsOtherFileTypes bool) *SavePanel
+	WithCurrentContentType(currentContentType *uniformtypeidentifiers.UTType) *SavePanel
+	WithAccessoryView(accessoryView ViewProvider) *SavePanel
+	WithCanCreateDirectories(canCreateDirectories bool) *SavePanel
+	WithCanSelectHiddenExtension(canSelectHiddenExtension bool) *SavePanel
+	WithExtensionHidden(extensionHidden bool) *SavePanel
+	WithTreatsFilePackagesAsDirectories(treatsFilePackagesAsDirectories bool) *SavePanel
+	WithPrompt(prompt string) *SavePanel
+	WithNameFieldLabel(nameFieldLabel string) *SavePanel
+	WithNameFieldStringValue(nameFieldStringValue string) *SavePanel
+	WithMessage(message string) *SavePanel
+	WithShowsHiddenFiles(showsHiddenFiles bool) *SavePanel
+	WithShowsTagField(showsTagField bool) *SavePanel
+	WithTagNames(items ...*foundation.NSString) *SavePanel
+	WithShowsContentTypes(showsContentTypes bool) *SavePanel
+	WithAllowedFileTypes(items ...*foundation.NSString) *SavePanel
+	ValidateVisibleColumns()
+	Ok(sender objc.ID)
+	Cancel(sender objc.ID)
+	BeginSheetModalForWindowCompletionHandler(window *raw.NSWindow, handler func(int))
+	BeginWithCompletionHandler(handler func(int))
+	RunModal() int
+	URL() *foundation.NSURL
+	Identifier() string
+	SetIdentifier(identifier *foundation.NSString)
+	DirectoryURL() *foundation.NSURL
+	SetDirectoryURL(directoryURL string)
+	AllowedContentTypes() []*uniformtypeidentifiers.UTType
+	SetAllowedContentTypes(allowedContentTypes *foundation.NSArray[*uniformtypeidentifiers.UTType])
+	AllowsOtherFileTypes() bool
+	SetAllowsOtherFileTypes(allowsOtherFileTypes bool)
+	CurrentContentType() *uniformtypeidentifiers.UTType
+	SetCurrentContentType(currentContentType *uniformtypeidentifiers.UTType)
+	AccessoryView() *View
+	SetAccessoryView(accessoryView *raw.NSView)
+	IsExpanded() bool
+	CanCreateDirectories() bool
+	SetCanCreateDirectories(canCreateDirectories bool)
+	CanSelectHiddenExtension() bool
+	SetCanSelectHiddenExtension(canSelectHiddenExtension bool)
+	IsExtensionHidden() bool
+	SetExtensionHidden(extensionHidden bool)
+	TreatsFilePackagesAsDirectories() bool
+	SetTreatsFilePackagesAsDirectories(treatsFilePackagesAsDirectories bool)
+	Prompt() string
+	SetPrompt(prompt string)
+	NameFieldLabel() string
+	SetNameFieldLabel(nameFieldLabel string)
+	NameFieldStringValue() string
+	SetNameFieldStringValue(nameFieldStringValue string)
+	Message() string
+	SetMessage(message string)
+	ShowsHiddenFiles() bool
+	SetShowsHiddenFiles(showsHiddenFiles bool)
+	ShowsTagField() bool
+	SetShowsTagField(showsTagField bool)
+	TagNames() []string
+	SetTagNames(tagNames *foundation.NSArray[*foundation.NSString])
+	ShowsContentTypes() bool
+	SetShowsContentTypes(showsContentTypes bool)
+	Filename() string
+	Directory() string
+	SetDirectory(path string)
+	RequiredFileType() string
+	SetRequiredFileType(type_ string)
+	BeginSheetForDirectoryFileModalForWindowModalDelegateDidEndSelectorContextInfo(path string, name string, docWindow *raw.NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer)
+	RunModalForDirectoryFile(path string, name string) int
+	SelectText(sender objc.ID)
+	AllowedFileTypes() []string
+	SetAllowedFileTypes(allowedFileTypes *foundation.NSArray[*foundation.NSString])
+}
+
+var _ SavePanelable = (*SavePanel)(nil)
 

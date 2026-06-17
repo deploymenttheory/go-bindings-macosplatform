@@ -30,5 +30,25 @@ func (x *SpheresNoiseSource) WithFrequency(frequency float64) *SpheresNoiseSourc
 	return x
 }
 
+// Frequency calls the underlying Frequency.
+func (x *SpheresNoiseSource) Frequency() float64 {
+	return x.inner.Frequency()
+}
+
+// SetFrequency calls the underlying SetFrequency.
+func (x *SpheresNoiseSource) SetFrequency(frequency float64) {
+	x.inner.SetFrequency(frequency)
+}
+
 func (x *SpheresNoiseSource) asNoiseSource() *raw.GKNoiseSource { return &x.inner.GKNoiseSource }
+
+// SpheresNoiseSourceable is the interface implemented by [SpheresNoiseSource], for mocking and DI.
+type SpheresNoiseSourceable interface {
+	Unwrap() *raw.GKSpheresNoiseSource
+	WithFrequency(frequency float64) *SpheresNoiseSource
+	Frequency() float64
+	SetFrequency(frequency float64)
+}
+
+var _ SpheresNoiseSourceable = (*SpheresNoiseSource)(nil)
 

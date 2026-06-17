@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -47,4 +48,67 @@ func (x *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) WithActiveTimestam
 	x.inner.SetActiveTimestamp(activeTimestamp)
 	return x
 }
+
+// ExtendedPanID calls the underlying ExtendedPanID.
+func (x *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) ExtendedPanID() *foundation.NSData {
+	return x.inner.ExtendedPanID()
+}
+
+// SetExtendedPanID calls the underlying SetExtendedPanID.
+func (x *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) SetExtendedPanID(extendedPanID *foundation.NSData) {
+	x.inner.SetExtendedPanID(extendedPanID)
+}
+
+// NetworkName calls the underlying NetworkName.
+func (x *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) NetworkName() string {
+	_r := x.inner.NetworkName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetNetworkName calls the underlying SetNetworkName.
+func (x *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) SetNetworkName(networkName string) {
+	x.inner.SetNetworkName(foundation.NSStringStringWithUTF8String(networkName))
+}
+
+// Channel calls the underlying Channel.
+func (x *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) Channel() *foundation.NSNumber {
+	return x.inner.Channel()
+}
+
+// SetChannel calls the underlying SetChannel.
+func (x *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) SetChannel(channel *foundation.NSNumber) {
+	x.inner.SetChannel(channel)
+}
+
+// ActiveTimestamp calls the underlying ActiveTimestamp.
+func (x *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) ActiveTimestamp() *foundation.NSNumber {
+	return x.inner.ActiveTimestamp()
+}
+
+// SetActiveTimestamp calls the underlying SetActiveTimestamp.
+func (x *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) SetActiveTimestamp(activeTimestamp *foundation.NSNumber) {
+	x.inner.SetActiveTimestamp(activeTimestamp)
+}
+
+// MTRThreadNetworkDirectoryClusterThreadNetworkStructable is the interface implemented by [MTRThreadNetworkDirectoryClusterThreadNetworkStruct], for mocking and DI.
+type MTRThreadNetworkDirectoryClusterThreadNetworkStructable interface {
+	Unwrap() *raw.MTRThreadNetworkDirectoryClusterThreadNetworkStruct
+	WithExtendedPanID(extendedPanID *foundation.NSData) *MTRThreadNetworkDirectoryClusterThreadNetworkStruct
+	WithNetworkName(networkName string) *MTRThreadNetworkDirectoryClusterThreadNetworkStruct
+	WithChannel(channel *foundation.NSNumber) *MTRThreadNetworkDirectoryClusterThreadNetworkStruct
+	WithActiveTimestamp(activeTimestamp *foundation.NSNumber) *MTRThreadNetworkDirectoryClusterThreadNetworkStruct
+	ExtendedPanID() *foundation.NSData
+	SetExtendedPanID(extendedPanID *foundation.NSData)
+	NetworkName() string
+	SetNetworkName(networkName string)
+	Channel() *foundation.NSNumber
+	SetChannel(channel *foundation.NSNumber)
+	ActiveTimestamp() *foundation.NSNumber
+	SetActiveTimestamp(activeTimestamp *foundation.NSNumber)
+}
+
+var _ MTRThreadNetworkDirectoryClusterThreadNetworkStructable = (*MTRThreadNetworkDirectoryClusterThreadNetworkStruct)(nil)
 

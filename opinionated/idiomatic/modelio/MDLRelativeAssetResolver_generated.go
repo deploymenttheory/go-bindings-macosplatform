@@ -30,3 +30,27 @@ func (x *RelativeAssetResolver) WithAsset(asset *raw.MDLAsset) *RelativeAssetRes
 	return x
 }
 
+// Asset calls the underlying Asset.
+func (x *RelativeAssetResolver) Asset() *Asset {
+	_r := x.inner.Asset()
+	if _r == nil {
+		return nil
+	}
+	return &Asset{inner: _r}
+}
+
+// SetAsset calls the underlying SetAsset.
+func (x *RelativeAssetResolver) SetAsset(asset *raw.MDLAsset) {
+	x.inner.SetAsset(asset)
+}
+
+// RelativeAssetResolverable is the interface implemented by [RelativeAssetResolver], for mocking and DI.
+type RelativeAssetResolverable interface {
+	Unwrap() *raw.MDLRelativeAssetResolver
+	WithAsset(asset *raw.MDLAsset) *RelativeAssetResolver
+	Asset() *Asset
+	SetAsset(asset *raw.MDLAsset)
+}
+
+var _ RelativeAssetResolverable = (*RelativeAssetResolver)(nil)
+

@@ -23,3 +23,10 @@ func NewPaymentInformationEventExtension() *PaymentInformationEventExtension {
 	return &PaymentInformationEventExtension{inner: raw.PKPaymentInformationEventExtensionFromID(_id)}
 }
 
+// PaymentInformationEventExtensionable is the interface implemented by [PaymentInformationEventExtension], for mocking and DI.
+type PaymentInformationEventExtensionable interface {
+	Unwrap() *raw.PKPaymentInformationEventExtension
+}
+
+var _ PaymentInformationEventExtensionable = (*PaymentInformationEventExtension)(nil)
+

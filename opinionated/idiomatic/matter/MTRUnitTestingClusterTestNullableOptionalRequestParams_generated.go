@@ -42,5 +42,51 @@ func (x *MTRUnitTestingClusterTestNullableOptionalRequestParams) WithServerSideP
 	return x
 }
 
+// Arg1 calls the underlying Arg1.
+func (x *MTRUnitTestingClusterTestNullableOptionalRequestParams) Arg1() *foundation.NSNumber {
+	return x.inner.Arg1()
+}
+
+// SetArg1 calls the underlying SetArg1.
+func (x *MTRUnitTestingClusterTestNullableOptionalRequestParams) SetArg1(arg1 *foundation.NSNumber) {
+	x.inner.SetArg1(arg1)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRUnitTestingClusterTestNullableOptionalRequestParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRUnitTestingClusterTestNullableOptionalRequestParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRUnitTestingClusterTestNullableOptionalRequestParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRUnitTestingClusterTestNullableOptionalRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
 func (x *MTRUnitTestingClusterTestNullableOptionalRequestParams) asMTRUnitTestingClusterTestNullableOptionalRequestParams() *raw.MTRUnitTestingClusterTestNullableOptionalRequestParams { return x.inner }
+
+// MTRUnitTestingClusterTestNullableOptionalRequestParamsable is the interface implemented by [MTRUnitTestingClusterTestNullableOptionalRequestParams], for mocking and DI.
+type MTRUnitTestingClusterTestNullableOptionalRequestParamsable interface {
+	Unwrap() *raw.MTRUnitTestingClusterTestNullableOptionalRequestParams
+	WithArg1(arg1 *foundation.NSNumber) *MTRUnitTestingClusterTestNullableOptionalRequestParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRUnitTestingClusterTestNullableOptionalRequestParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRUnitTestingClusterTestNullableOptionalRequestParams
+	Arg1() *foundation.NSNumber
+	SetArg1(arg1 *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRUnitTestingClusterTestNullableOptionalRequestParamsable = (*MTRUnitTestingClusterTestNullableOptionalRequestParams)(nil)
 

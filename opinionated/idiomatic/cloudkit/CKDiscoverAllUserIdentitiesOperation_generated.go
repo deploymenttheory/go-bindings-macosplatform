@@ -38,15 +38,48 @@ func (x *DiscoverAllUserIdentitiesOperation) WithDiscoverAllUserIdentitiesComple
 	return x
 }
 
+// UserIdentityDiscoveredBlock calls the underlying UserIdentityDiscoveredBlock.
+func (x *DiscoverAllUserIdentitiesOperation) UserIdentityDiscoveredBlock() objc.Block {
+	return x.inner.UserIdentityDiscoveredBlock()
+}
+
+// SetUserIdentityDiscoveredBlock blocks until the operation completes or ctx is cancelled.
+func (x *DiscoverAllUserIdentitiesOperation) SetUserIdentityDiscoveredBlock(ctx context.Context) (*UserIdentity, error) {
+	type _result struct {
+		val *UserIdentity
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SetUserIdentityDiscoveredBlock(func(_p0 *raw.CKUserIdentity) {
+		var _o _result
+		if _p0 != nil {
+			_o.val = &UserIdentity{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *UserIdentity
+		return _zero, ctx.Err()
+	}
+}
+
+// DiscoverAllUserIdentitiesCompletionBlock calls the underlying DiscoverAllUserIdentitiesCompletionBlock.
+func (x *DiscoverAllUserIdentitiesOperation) DiscoverAllUserIdentitiesCompletionBlock() objc.Block {
+	return x.inner.DiscoverAllUserIdentitiesCompletionBlock()
+}
+
 // SetDiscoverAllUserIdentitiesCompletionBlock blocks until the operation completes or ctx is cancelled.
 func (x *DiscoverAllUserIdentitiesOperation) SetDiscoverAllUserIdentitiesCompletionBlock(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.SetDiscoverAllUserIdentitiesCompletionBlock(func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -57,4 +90,17 @@ func (x *DiscoverAllUserIdentitiesOperation) SetDiscoverAllUserIdentitiesComplet
 }
 
 func (x *DiscoverAllUserIdentitiesOperation) asOperation() *raw.CKOperation { return &x.inner.CKOperation }
+
+// DiscoverAllUserIdentitiesOperationable is the interface implemented by [DiscoverAllUserIdentitiesOperation], for mocking and DI.
+type DiscoverAllUserIdentitiesOperationable interface {
+	Unwrap() *raw.CKDiscoverAllUserIdentitiesOperation
+	WithUserIdentityDiscoveredBlock(userIdentityDiscoveredBlock func(*raw.CKUserIdentity)) *DiscoverAllUserIdentitiesOperation
+	WithDiscoverAllUserIdentitiesCompletionBlock(discoverAllUserIdentitiesCompletionBlock func(unsafe.Pointer)) *DiscoverAllUserIdentitiesOperation
+	UserIdentityDiscoveredBlock() objc.Block
+	SetUserIdentityDiscoveredBlock(ctx context.Context) (*UserIdentity, error)
+	DiscoverAllUserIdentitiesCompletionBlock() objc.Block
+	SetDiscoverAllUserIdentitiesCompletionBlock(ctx context.Context) error
+}
+
+var _ DiscoverAllUserIdentitiesOperationable = (*DiscoverAllUserIdentitiesOperation)(nil)
 

@@ -7,6 +7,7 @@ package passkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,4 +25,31 @@ func NewLabeledValueWithLabelValue(label string, value string) *LabeledValue {
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLabel:value:"), foundation.NSStringStringWithUTF8String(label).Ptr(), foundation.NSStringStringWithUTF8String(value).Ptr())
 	return &LabeledValue{inner: raw.PKLabeledValueFromID(_id)}
 }
+
+// Label calls the underlying Label.
+func (x *LabeledValue) Label() string {
+	_r := x.inner.Label()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Value calls the underlying Value.
+func (x *LabeledValue) Value() string {
+	_r := x.inner.Value()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// LabeledValueable is the interface implemented by [LabeledValue], for mocking and DI.
+type LabeledValueable interface {
+	Unwrap() *raw.PKLabeledValue
+	Label() string
+	Value() string
+}
+
+var _ LabeledValueable = (*LabeledValue)(nil)
 

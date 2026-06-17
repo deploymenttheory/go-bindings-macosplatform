@@ -5,8 +5,10 @@
 package webkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -30,4 +32,70 @@ func (x *WebHistoryItem) WithAlternateTitle(alternateTitle string) *WebHistoryIt
 	x.inner.SetAlternateTitle(foundation.NSStringStringWithUTF8String(alternateTitle))
 	return x
 }
+
+// OriginalURLString calls the underlying OriginalURLString.
+func (x *WebHistoryItem) OriginalURLString() string {
+	_r := x.inner.OriginalURLString()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// URLString calls the underlying URLString.
+func (x *WebHistoryItem) URLString() string {
+	_r := x.inner.URLString()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Title calls the underlying Title.
+func (x *WebHistoryItem) Title() string {
+	_r := x.inner.Title()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// LastVisitedTimeInterval calls the underlying LastVisitedTimeInterval.
+func (x *WebHistoryItem) LastVisitedTimeInterval() float64 {
+	return x.inner.LastVisitedTimeInterval()
+}
+
+// AlternateTitle calls the underlying AlternateTitle.
+func (x *WebHistoryItem) AlternateTitle() string {
+	_r := x.inner.AlternateTitle()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetAlternateTitle calls the underlying SetAlternateTitle.
+func (x *WebHistoryItem) SetAlternateTitle(alternateTitle string) {
+	x.inner.SetAlternateTitle(foundation.NSStringStringWithUTF8String(alternateTitle))
+}
+
+// Icon calls the underlying Icon.
+func (x *WebHistoryItem) Icon() *appkit.NSImage {
+	return x.inner.Icon()
+}
+
+// WebHistoryItemable is the interface implemented by [WebHistoryItem], for mocking and DI.
+type WebHistoryItemable interface {
+	Unwrap() *raw.WebHistoryItem
+	WithAlternateTitle(alternateTitle string) *WebHistoryItem
+	OriginalURLString() string
+	URLString() string
+	Title() string
+	LastVisitedTimeInterval() float64
+	AlternateTitle() string
+	SetAlternateTitle(alternateTitle string)
+	Icon() *appkit.NSImage
+}
+
+var _ WebHistoryItemable = (*WebHistoryItem)(nil)
 

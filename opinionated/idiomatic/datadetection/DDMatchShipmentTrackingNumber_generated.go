@@ -6,6 +6,7 @@ package datadetection
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/datadetection"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +24,32 @@ func NewMatchShipmentTrackingNumber() *MatchShipmentTrackingNumber {
 	return &MatchShipmentTrackingNumber{inner: raw.DDMatchShipmentTrackingNumberFromID(_id)}
 }
 
+// Carrier calls the underlying Carrier.
+func (x *MatchShipmentTrackingNumber) Carrier() string {
+	_r := x.inner.Carrier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// TrackingNumber calls the underlying TrackingNumber.
+func (x *MatchShipmentTrackingNumber) TrackingNumber() string {
+	_r := x.inner.TrackingNumber()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 func (x *MatchShipmentTrackingNumber) asMatch() *raw.DDMatch { return &x.inner.DDMatch }
+
+// MatchShipmentTrackingNumberable is the interface implemented by [MatchShipmentTrackingNumber], for mocking and DI.
+type MatchShipmentTrackingNumberable interface {
+	Unwrap() *raw.DDMatchShipmentTrackingNumber
+	Carrier() string
+	TrackingNumber() string
+}
+
+var _ MatchShipmentTrackingNumberable = (*MatchShipmentTrackingNumber)(nil)
 

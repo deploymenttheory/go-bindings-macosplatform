@@ -7,6 +7,7 @@ package contacts
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/contacts"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -35,4 +36,101 @@ func (x *SaveRequest) WithShouldRefetchContacts(shouldRefetchContacts bool) *Sav
 	x.inner.SetShouldRefetchContacts(shouldRefetchContacts)
 	return x
 }
+
+// AddContactToContainerWithIdentifier calls the underlying AddContactToContainerWithIdentifier.
+func (x *SaveRequest) AddContactToContainerWithIdentifier(contact *raw.CNMutableContact, identifier string) {
+	x.inner.AddContactToContainerWithIdentifier(contact, foundation.NSStringStringWithUTF8String(identifier))
+}
+
+// UpdateContact calls the underlying UpdateContact.
+func (x *SaveRequest) UpdateContact(contact *raw.CNMutableContact) {
+	x.inner.UpdateContact(contact)
+}
+
+// DeleteContact calls the underlying DeleteContact.
+func (x *SaveRequest) DeleteContact(contact *raw.CNMutableContact) {
+	x.inner.DeleteContact(contact)
+}
+
+// AddGroupToContainerWithIdentifier calls the underlying AddGroupToContainerWithIdentifier.
+func (x *SaveRequest) AddGroupToContainerWithIdentifier(group *raw.CNMutableGroup, identifier string) {
+	x.inner.AddGroupToContainerWithIdentifier(group, foundation.NSStringStringWithUTF8String(identifier))
+}
+
+// UpdateGroup calls the underlying UpdateGroup.
+func (x *SaveRequest) UpdateGroup(group *raw.CNMutableGroup) {
+	x.inner.UpdateGroup(group)
+}
+
+// DeleteGroup calls the underlying DeleteGroup.
+func (x *SaveRequest) DeleteGroup(group *raw.CNMutableGroup) {
+	x.inner.DeleteGroup(group)
+}
+
+// AddSubgroupToGroup calls the underlying AddSubgroupToGroup.
+func (x *SaveRequest) AddSubgroupToGroup(subgroup *raw.CNGroup, group *raw.CNGroup) {
+	x.inner.AddSubgroupToGroup(subgroup, group)
+}
+
+// RemoveSubgroupFromGroup calls the underlying RemoveSubgroupFromGroup.
+func (x *SaveRequest) RemoveSubgroupFromGroup(subgroup *raw.CNGroup, group *raw.CNGroup) {
+	x.inner.RemoveSubgroupFromGroup(subgroup, group)
+}
+
+// AddMemberToGroup calls the underlying AddMemberToGroup.
+func (x *SaveRequest) AddMemberToGroup(contact *raw.CNContact, group *raw.CNGroup) {
+	x.inner.AddMemberToGroup(contact, group)
+}
+
+// RemoveMemberFromGroup calls the underlying RemoveMemberFromGroup.
+func (x *SaveRequest) RemoveMemberFromGroup(contact *raw.CNContact, group *raw.CNGroup) {
+	x.inner.RemoveMemberFromGroup(contact, group)
+}
+
+// TransactionAuthor calls the underlying TransactionAuthor.
+func (x *SaveRequest) TransactionAuthor() string {
+	_r := x.inner.TransactionAuthor()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetTransactionAuthor calls the underlying SetTransactionAuthor.
+func (x *SaveRequest) SetTransactionAuthor(transactionAuthor string) {
+	x.inner.SetTransactionAuthor(foundation.NSStringStringWithUTF8String(transactionAuthor))
+}
+
+// ShouldRefetchContacts calls the underlying ShouldRefetchContacts.
+func (x *SaveRequest) ShouldRefetchContacts() bool {
+	return x.inner.ShouldRefetchContacts()
+}
+
+// SetShouldRefetchContacts calls the underlying SetShouldRefetchContacts.
+func (x *SaveRequest) SetShouldRefetchContacts(shouldRefetchContacts bool) {
+	x.inner.SetShouldRefetchContacts(shouldRefetchContacts)
+}
+
+// SaveRequestable is the interface implemented by [SaveRequest], for mocking and DI.
+type SaveRequestable interface {
+	Unwrap() *raw.CNSaveRequest
+	WithTransactionAuthor(transactionAuthor string) *SaveRequest
+	WithShouldRefetchContacts(shouldRefetchContacts bool) *SaveRequest
+	AddContactToContainerWithIdentifier(contact *raw.CNMutableContact, identifier string)
+	UpdateContact(contact *raw.CNMutableContact)
+	DeleteContact(contact *raw.CNMutableContact)
+	AddGroupToContainerWithIdentifier(group *raw.CNMutableGroup, identifier string)
+	UpdateGroup(group *raw.CNMutableGroup)
+	DeleteGroup(group *raw.CNMutableGroup)
+	AddSubgroupToGroup(subgroup *raw.CNGroup, group *raw.CNGroup)
+	RemoveSubgroupFromGroup(subgroup *raw.CNGroup, group *raw.CNGroup)
+	AddMemberToGroup(contact *raw.CNContact, group *raw.CNGroup)
+	RemoveMemberFromGroup(contact *raw.CNContact, group *raw.CNGroup)
+	TransactionAuthor() string
+	SetTransactionAuthor(transactionAuthor string)
+	ShouldRefetchContacts() bool
+	SetShouldRefetchContacts(shouldRefetchContacts bool)
+}
+
+var _ SaveRequestable = (*SaveRequest)(nil)
 

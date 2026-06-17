@@ -41,7 +41,27 @@ func (x *ImageEuclideanDistanceTransform) WithSearchLimitRadius(searchLimitRadiu
 	return x
 }
 
+// SearchLimitRadius calls the underlying SearchLimitRadius.
+func (x *ImageEuclideanDistanceTransform) SearchLimitRadius() float32 {
+	return x.inner.SearchLimitRadius()
+}
+
+// SetSearchLimitRadius calls the underlying SetSearchLimitRadius.
+func (x *ImageEuclideanDistanceTransform) SetSearchLimitRadius(searchLimitRadius float32) {
+	x.inner.SetSearchLimitRadius(searchLimitRadius)
+}
+
 func (x *ImageEuclideanDistanceTransform) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel { return &x.inner.MPSUnaryImageKernel }
 
 func (x *ImageEuclideanDistanceTransform) asKernel() *mpscore.MPSKernel { return &x.inner.MPSUnaryImageKernel.MPSKernel }
+
+// ImageEuclideanDistanceTransformable is the interface implemented by [ImageEuclideanDistanceTransform], for mocking and DI.
+type ImageEuclideanDistanceTransformable interface {
+	Unwrap() *raw.MPSImageEuclideanDistanceTransform
+	WithSearchLimitRadius(searchLimitRadius float32) *ImageEuclideanDistanceTransform
+	SearchLimitRadius() float32
+	SetSearchLimitRadius(searchLimitRadius float32)
+}
+
+var _ ImageEuclideanDistanceTransformable = (*ImageEuclideanDistanceTransform)(nil)
 

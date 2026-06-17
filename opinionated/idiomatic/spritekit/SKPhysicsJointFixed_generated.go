@@ -25,3 +25,10 @@ func NewPhysicsJointFixed() *PhysicsJointFixed {
 
 func (x *PhysicsJointFixed) asPhysicsJoint() *raw.SKPhysicsJoint { return &x.inner.SKPhysicsJoint }
 
+// PhysicsJointFixedable is the interface implemented by [PhysicsJointFixed], for mocking and DI.
+type PhysicsJointFixedable interface {
+	Unwrap() *raw.SKPhysicsJointFixed
+}
+
+var _ PhysicsJointFixedable = (*PhysicsJointFixed)(nil)
+

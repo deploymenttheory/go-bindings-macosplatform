@@ -5,9 +5,12 @@
 package matter
 
 import (
+	"context"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // MTRClusterWiFiNetworkManagement wraps [raw.MTRClusterWiFiNetworkManagement] with a fluent Go API.
@@ -25,7 +28,110 @@ func NewMTRClusterWiFiNetworkManagementWithDeviceEndpointIDQueue(device *raw.MTR
 	return &MTRClusterWiFiNetworkManagement{inner: raw.MTRClusterWiFiNetworkManagementFromID(_id)}
 }
 
+// NetworkPassphraseRequestWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRClusterWiFiNetworkManagement) NetworkPassphraseRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRWiFiNetworkManagementClusterNetworkPassphraseRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams, error) {
+	type _result struct {
+		val *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.NetworkPassphraseRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
+// NetworkPassphraseRequestWithExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRClusterWiFiNetworkManagement) NetworkPassphraseRequestWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams, error) {
+	type _result struct {
+		val *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.NetworkPassphraseRequestWithExpectedValuesExpectedValueIntervalCompletion(expectedValues, expectedValueIntervalMs, func(_p0 *raw.MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeSSIDWithParams calls the underlying ReadAttributeSSIDWithParams.
+func (x *MTRClusterWiFiNetworkManagement) ReadAttributeSSIDWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeSSIDWithParams(params)
+}
+
+// ReadAttributePassphraseSurrogateWithParams calls the underlying ReadAttributePassphraseSurrogateWithParams.
+func (x *MTRClusterWiFiNetworkManagement) ReadAttributePassphraseSurrogateWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributePassphraseSurrogateWithParams(params)
+}
+
+// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
+func (x *MTRClusterWiFiNetworkManagement) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+}
+
+// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
+func (x *MTRClusterWiFiNetworkManagement) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
+}
+
+// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
+func (x *MTRClusterWiFiNetworkManagement) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeAttributeListWithParams(params)
+}
+
+// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
+func (x *MTRClusterWiFiNetworkManagement) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeFeatureMapWithParams(params)
+}
+
+// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
+func (x *MTRClusterWiFiNetworkManagement) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeClusterRevisionWithParams(params)
+}
+
 func (x *MTRClusterWiFiNetworkManagement) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
 
 func (x *MTRClusterWiFiNetworkManagement) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+
+// MTRClusterWiFiNetworkManagementable is the interface implemented by [MTRClusterWiFiNetworkManagement], for mocking and DI.
+type MTRClusterWiFiNetworkManagementable interface {
+	Unwrap() *raw.MTRClusterWiFiNetworkManagement
+	NetworkPassphraseRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRWiFiNetworkManagementClusterNetworkPassphraseRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams, error)
+	NetworkPassphraseRequestWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams, error)
+	ReadAttributeSSIDWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributePassphraseSurrogateWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+}
+
+var _ MTRClusterWiFiNetworkManagementable = (*MTRClusterWiFiNetworkManagement)(nil)
 

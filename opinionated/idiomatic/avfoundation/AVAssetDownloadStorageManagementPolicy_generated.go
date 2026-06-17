@@ -6,6 +6,8 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +25,28 @@ func NewAssetDownloadStorageManagementPolicy() *AssetDownloadStorageManagementPo
 	return &AssetDownloadStorageManagementPolicy{inner: raw.AVAssetDownloadStorageManagementPolicyFromID(_id)}
 }
 
+// Priority calls the underlying Priority.
+func (x *AssetDownloadStorageManagementPolicy) Priority() string {
+	_r := x.inner.Priority()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ExpirationDate calls the underlying ExpirationDate.
+func (x *AssetDownloadStorageManagementPolicy) ExpirationDate() *foundation.NSDate {
+	return x.inner.ExpirationDate()
+}
+
 func (x *AssetDownloadStorageManagementPolicy) asAssetDownloadStorageManagementPolicy() *raw.AVAssetDownloadStorageManagementPolicy { return x.inner }
+
+// AssetDownloadStorageManagementPolicyable is the interface implemented by [AssetDownloadStorageManagementPolicy], for mocking and DI.
+type AssetDownloadStorageManagementPolicyable interface {
+	Unwrap() *raw.AVAssetDownloadStorageManagementPolicy
+	Priority() string
+	ExpirationDate() *foundation.NSDate
+}
+
+var _ AssetDownloadStorageManagementPolicyable = (*AssetDownloadStorageManagementPolicy)(nil)
 

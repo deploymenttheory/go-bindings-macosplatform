@@ -5,6 +5,7 @@
 package mlcompute
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +23,47 @@ func NewEmbeddingDescriptor() *EmbeddingDescriptor {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLCEmbeddingDescriptor")), objc.RegisterName("new"))
 	return &EmbeddingDescriptor{inner: raw.MLCEmbeddingDescriptorFromID(_id)}
 }
+
+// EmbeddingCount calls the underlying EmbeddingCount.
+func (x *EmbeddingDescriptor) EmbeddingCount() *foundation.NSNumber {
+	return x.inner.EmbeddingCount()
+}
+
+// EmbeddingDimension calls the underlying EmbeddingDimension.
+func (x *EmbeddingDescriptor) EmbeddingDimension() *foundation.NSNumber {
+	return x.inner.EmbeddingDimension()
+}
+
+// PaddingIndex calls the underlying PaddingIndex.
+func (x *EmbeddingDescriptor) PaddingIndex() *foundation.NSNumber {
+	return x.inner.PaddingIndex()
+}
+
+// MaximumNorm calls the underlying MaximumNorm.
+func (x *EmbeddingDescriptor) MaximumNorm() *foundation.NSNumber {
+	return x.inner.MaximumNorm()
+}
+
+// PNorm calls the underlying PNorm.
+func (x *EmbeddingDescriptor) PNorm() *foundation.NSNumber {
+	return x.inner.PNorm()
+}
+
+// ScalesGradientByFrequency calls the underlying ScalesGradientByFrequency.
+func (x *EmbeddingDescriptor) ScalesGradientByFrequency() bool {
+	return x.inner.ScalesGradientByFrequency()
+}
+
+// EmbeddingDescriptorable is the interface implemented by [EmbeddingDescriptor], for mocking and DI.
+type EmbeddingDescriptorable interface {
+	Unwrap() *raw.MLCEmbeddingDescriptor
+	EmbeddingCount() *foundation.NSNumber
+	EmbeddingDimension() *foundation.NSNumber
+	PaddingIndex() *foundation.NSNumber
+	MaximumNorm() *foundation.NSNumber
+	PNorm() *foundation.NSNumber
+	ScalesGradientByFrequency() bool
+}
+
+var _ EmbeddingDescriptorable = (*EmbeddingDescriptor)(nil)
 

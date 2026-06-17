@@ -36,3 +36,36 @@ func (x *MTRWindowCoveringClusterDownOrCloseParams) WithServerSideProcessingTime
 	return x
 }
 
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRWindowCoveringClusterDownOrCloseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRWindowCoveringClusterDownOrCloseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRWindowCoveringClusterDownOrCloseParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRWindowCoveringClusterDownOrCloseParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRWindowCoveringClusterDownOrCloseParamsable is the interface implemented by [MTRWindowCoveringClusterDownOrCloseParams], for mocking and DI.
+type MTRWindowCoveringClusterDownOrCloseParamsable interface {
+	Unwrap() *raw.MTRWindowCoveringClusterDownOrCloseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRWindowCoveringClusterDownOrCloseParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRWindowCoveringClusterDownOrCloseParams
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRWindowCoveringClusterDownOrCloseParamsable = (*MTRWindowCoveringClusterDownOrCloseParams)(nil)
+

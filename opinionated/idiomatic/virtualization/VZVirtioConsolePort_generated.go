@@ -6,6 +6,7 @@ package virtualization
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -28,4 +29,38 @@ func (x *VirtioConsolePort) WithAttachment(attachment SerialPortAttachmentProvid
 	x.inner.SetAttachment(attachment.asSerialPortAttachment())
 	return x
 }
+
+// Name calls the underlying Name.
+func (x *VirtioConsolePort) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Attachment calls the underlying Attachment.
+func (x *VirtioConsolePort) Attachment() *SerialPortAttachment {
+	_r := x.inner.Attachment()
+	if _r == nil {
+		return nil
+	}
+	return &SerialPortAttachment{inner: _r}
+}
+
+// SetAttachment calls the underlying SetAttachment.
+func (x *VirtioConsolePort) SetAttachment(attachment *raw.VZSerialPortAttachment) {
+	x.inner.SetAttachment(attachment)
+}
+
+// VirtioConsolePortable is the interface implemented by [VirtioConsolePort], for mocking and DI.
+type VirtioConsolePortable interface {
+	Unwrap() *raw.VZVirtioConsolePort
+	WithAttachment(attachment SerialPortAttachmentProvider) *VirtioConsolePort
+	Name() string
+	Attachment() *SerialPortAttachment
+	SetAttachment(attachment *raw.VZSerialPortAttachment)
+}
+
+var _ VirtioConsolePortable = (*VirtioConsolePort)(nil)
 

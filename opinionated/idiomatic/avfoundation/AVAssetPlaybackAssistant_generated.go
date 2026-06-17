@@ -23,3 +23,16 @@ func NewAssetPlaybackAssistant() *AssetPlaybackAssistant {
 	return &AssetPlaybackAssistant{inner: raw.AVAssetPlaybackAssistantFromID(_id)}
 }
 
+// LoadPlaybackConfigurationOptionsWithCompletionHandler calls the underlying LoadPlaybackConfigurationOptionsWithCompletionHandler.
+func (x *AssetPlaybackAssistant) LoadPlaybackConfigurationOptionsWithCompletionHandler(completionHandler objc.Block) {
+	x.inner.LoadPlaybackConfigurationOptionsWithCompletionHandler(completionHandler)
+}
+
+// AssetPlaybackAssistantable is the interface implemented by [AssetPlaybackAssistant], for mocking and DI.
+type AssetPlaybackAssistantable interface {
+	Unwrap() *raw.AVAssetPlaybackAssistant
+	LoadPlaybackConfigurationOptionsWithCompletionHandler(completionHandler objc.Block)
+}
+
+var _ AssetPlaybackAssistantable = (*AssetPlaybackAssistant)(nil)
+

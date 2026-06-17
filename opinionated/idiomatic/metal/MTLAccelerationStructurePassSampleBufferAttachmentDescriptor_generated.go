@@ -41,3 +41,49 @@ func (x *AccelerationStructurePassSampleBufferAttachmentDescriptor) WithEndOfEnc
 	return x
 }
 
+// SampleBuffer calls the underlying SampleBuffer.
+func (x *AccelerationStructurePassSampleBufferAttachmentDescriptor) SampleBuffer() raw.MTLCounterSampleBuffer {
+	return x.inner.SampleBuffer()
+}
+
+// SetSampleBuffer calls the underlying SetSampleBuffer.
+func (x *AccelerationStructurePassSampleBufferAttachmentDescriptor) SetSampleBuffer(sampleBuffer raw.MTLCounterSampleBuffer) {
+	x.inner.SetSampleBuffer(sampleBuffer)
+}
+
+// StartOfEncoderSampleIndex calls the underlying StartOfEncoderSampleIndex.
+func (x *AccelerationStructurePassSampleBufferAttachmentDescriptor) StartOfEncoderSampleIndex() uint {
+	return x.inner.StartOfEncoderSampleIndex()
+}
+
+// SetStartOfEncoderSampleIndex calls the underlying SetStartOfEncoderSampleIndex.
+func (x *AccelerationStructurePassSampleBufferAttachmentDescriptor) SetStartOfEncoderSampleIndex(startOfEncoderSampleIndex uint) {
+	x.inner.SetStartOfEncoderSampleIndex(startOfEncoderSampleIndex)
+}
+
+// EndOfEncoderSampleIndex calls the underlying EndOfEncoderSampleIndex.
+func (x *AccelerationStructurePassSampleBufferAttachmentDescriptor) EndOfEncoderSampleIndex() uint {
+	return x.inner.EndOfEncoderSampleIndex()
+}
+
+// SetEndOfEncoderSampleIndex calls the underlying SetEndOfEncoderSampleIndex.
+func (x *AccelerationStructurePassSampleBufferAttachmentDescriptor) SetEndOfEncoderSampleIndex(endOfEncoderSampleIndex uint) {
+	x.inner.SetEndOfEncoderSampleIndex(endOfEncoderSampleIndex)
+}
+
+// AccelerationStructurePassSampleBufferAttachmentDescriptorable is the interface implemented by [AccelerationStructurePassSampleBufferAttachmentDescriptor], for mocking and DI.
+type AccelerationStructurePassSampleBufferAttachmentDescriptorable interface {
+	Unwrap() *raw.MTLAccelerationStructurePassSampleBufferAttachmentDescriptor
+	WithSampleBuffer(sampleBuffer raw.MTLCounterSampleBuffer) *AccelerationStructurePassSampleBufferAttachmentDescriptor
+	WithStartOfEncoderSampleIndex(startOfEncoderSampleIndex uint) *AccelerationStructurePassSampleBufferAttachmentDescriptor
+	WithEndOfEncoderSampleIndex(endOfEncoderSampleIndex uint) *AccelerationStructurePassSampleBufferAttachmentDescriptor
+	SampleBuffer() raw.MTLCounterSampleBuffer
+	SetSampleBuffer(sampleBuffer raw.MTLCounterSampleBuffer)
+	StartOfEncoderSampleIndex() uint
+	SetStartOfEncoderSampleIndex(startOfEncoderSampleIndex uint)
+	EndOfEncoderSampleIndex() uint
+	SetEndOfEncoderSampleIndex(endOfEncoderSampleIndex uint)
+}
+
+var _ AccelerationStructurePassSampleBufferAttachmentDescriptorable = (*AccelerationStructurePassSampleBufferAttachmentDescriptor)(nil)
+

@@ -42,3 +42,49 @@ func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModePa
 	return x
 }
 
+// GetNewMode calls the underlying GetNewMode.
+func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams) GetNewMode() *foundation.NSNumber {
+	return x.inner.GetNewMode()
+}
+
+// SetNewMode calls the underlying SetNewMode.
+func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams) SetNewMode(newMode *foundation.NSNumber) {
+	x.inner.SetNewMode(newMode)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParamsable is the interface implemented by [MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams], for mocking and DI.
+type MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParamsable interface {
+	Unwrap() *raw.MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams
+	WithNewMode(newMode *foundation.NSNumber) *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams
+	GetNewMode() *foundation.NSNumber
+	SetNewMode(newMode *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParamsable = (*MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams)(nil)
+

@@ -6,7 +6,7 @@ package coreml
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -30,24 +30,20 @@ func (x *ModelStructureProgramBlock) Inputs() []*raw.MLModelStructureProgramName
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MLModelStructureProgramNamedValueType, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MLModelStructureProgramNamedValueType {
+		return raw.MLModelStructureProgramNamedValueTypeFromID(purego.Retain(_id))
+	})
 }
 
 // OutputNames returns the collection as a Go slice.
-func (x *ModelStructureProgramBlock) OutputNames() []*foundation.NSString {
+func (x *ModelStructureProgramBlock) OutputNames() []string {
 	arr := x.inner.OutputNames()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
 
 // Operations returns the collection as a Go slice.
@@ -56,10 +52,18 @@ func (x *ModelStructureProgramBlock) Operations() []*raw.MLModelStructureProgram
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MLModelStructureProgramOperation, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MLModelStructureProgramOperation {
+		return raw.MLModelStructureProgramOperationFromID(purego.Retain(_id))
+	})
 }
+
+// ModelStructureProgramBlockable is the interface implemented by [ModelStructureProgramBlock], for mocking and DI.
+type ModelStructureProgramBlockable interface {
+	Unwrap() *raw.MLModelStructureProgramBlock
+	Inputs() []*raw.MLModelStructureProgramNamedValueType
+	OutputNames() []string
+	Operations() []*raw.MLModelStructureProgramOperation
+}
+
+var _ ModelStructureProgramBlockable = (*ModelStructureProgramBlock)(nil)
 

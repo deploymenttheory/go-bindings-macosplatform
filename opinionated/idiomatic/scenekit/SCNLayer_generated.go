@@ -29,3 +29,27 @@ func (x *Layer) WithScene(scene *raw.SCNScene) *Layer {
 	return x
 }
 
+// Scene calls the underlying Scene.
+func (x *Layer) Scene() *Scene {
+	_r := x.inner.Scene()
+	if _r == nil {
+		return nil
+	}
+	return &Scene{inner: _r}
+}
+
+// SetScene calls the underlying SetScene.
+func (x *Layer) SetScene(scene *raw.SCNScene) {
+	x.inner.SetScene(scene)
+}
+
+// Layerable is the interface implemented by [Layer], for mocking and DI.
+type Layerable interface {
+	Unwrap() *raw.SCNLayer
+	WithScene(scene *raw.SCNScene) *Layer
+	Scene() *Scene
+	SetScene(scene *raw.SCNScene)
+}
+
+var _ Layerable = (*Layer)(nil)
+

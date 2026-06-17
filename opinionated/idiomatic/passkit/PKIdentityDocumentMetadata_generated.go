@@ -7,6 +7,7 @@ package passkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -30,5 +31,85 @@ func (x *IdentityDocumentMetadata) WithServerEnvironmentIdentifier(serverEnviron
 	return x
 }
 
+// CredentialIdentifier calls the underlying CredentialIdentifier.
+func (x *IdentityDocumentMetadata) CredentialIdentifier() string {
+	_r := x.inner.CredentialIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SharingInstanceIdentifier calls the underlying SharingInstanceIdentifier.
+func (x *IdentityDocumentMetadata) SharingInstanceIdentifier() string {
+	_r := x.inner.SharingInstanceIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// CardTemplateIdentifier calls the underlying CardTemplateIdentifier.
+func (x *IdentityDocumentMetadata) CardTemplateIdentifier() string {
+	_r := x.inner.CardTemplateIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// CardConfigurationIdentifier calls the underlying CardConfigurationIdentifier.
+func (x *IdentityDocumentMetadata) CardConfigurationIdentifier() string {
+	_r := x.inner.CardConfigurationIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ServerEnvironmentIdentifier calls the underlying ServerEnvironmentIdentifier.
+func (x *IdentityDocumentMetadata) ServerEnvironmentIdentifier() string {
+	_r := x.inner.ServerEnvironmentIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetServerEnvironmentIdentifier calls the underlying SetServerEnvironmentIdentifier.
+func (x *IdentityDocumentMetadata) SetServerEnvironmentIdentifier(serverEnvironmentIdentifier string) {
+	x.inner.SetServerEnvironmentIdentifier(foundation.NSStringStringWithUTF8String(serverEnvironmentIdentifier))
+}
+
+// IssuingCountryCode calls the underlying IssuingCountryCode.
+func (x *IdentityDocumentMetadata) IssuingCountryCode() string {
+	_r := x.inner.IssuingCountryCode()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// DocumentType calls the underlying DocumentType.
+func (x *IdentityDocumentMetadata) DocumentType() raw.PKAddIdentityDocumentType {
+	return x.inner.DocumentType()
+}
+
 func (x *IdentityDocumentMetadata) asIdentityDocumentMetadata() *raw.PKIdentityDocumentMetadata { return x.inner }
+
+// IdentityDocumentMetadataable is the interface implemented by [IdentityDocumentMetadata], for mocking and DI.
+type IdentityDocumentMetadataable interface {
+	Unwrap() *raw.PKIdentityDocumentMetadata
+	WithServerEnvironmentIdentifier(serverEnvironmentIdentifier string) *IdentityDocumentMetadata
+	CredentialIdentifier() string
+	SharingInstanceIdentifier() string
+	CardTemplateIdentifier() string
+	CardConfigurationIdentifier() string
+	ServerEnvironmentIdentifier() string
+	SetServerEnvironmentIdentifier(serverEnvironmentIdentifier string)
+	IssuingCountryCode() string
+	DocumentType() raw.PKAddIdentityDocumentType
+}
+
+var _ IdentityDocumentMetadataable = (*IdentityDocumentMetadata)(nil)
 

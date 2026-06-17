@@ -25,5 +25,18 @@ func NewNSPredicateRuleWithPredicate(predicate *foundation.NSPredicate) *NSPredi
 	return &NSPredicateRule{inner: raw.GKNSPredicateRuleFromID(_id)}
 }
 
+// Predicate calls the underlying Predicate.
+func (x *NSPredicateRule) Predicate() *foundation.NSPredicate {
+	return x.inner.Predicate()
+}
+
 func (x *NSPredicateRule) asRule() *raw.GKRule { return &x.inner.GKRule }
+
+// NSPredicateRuleable is the interface implemented by [NSPredicateRule], for mocking and DI.
+type NSPredicateRuleable interface {
+	Unwrap() *raw.GKNSPredicateRule
+	Predicate() *foundation.NSPredicate
+}
+
+var _ NSPredicateRuleable = (*NSPredicateRule)(nil)
 

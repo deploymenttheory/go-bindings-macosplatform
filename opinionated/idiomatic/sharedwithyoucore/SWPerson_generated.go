@@ -25,3 +25,10 @@ func NewPersonWithHandleIdentityDisplayNameThumbnailImageData(handle string, ide
 	return &Person{inner: raw.SWPersonFromID(_id)}
 }
 
+// Personable is the interface implemented by [Person], for mocking and DI.
+type Personable interface {
+	Unwrap() *raw.SWPerson
+}
+
+var _ Personable = (*Person)(nil)
+

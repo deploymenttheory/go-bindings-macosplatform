@@ -7,6 +7,7 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -30,9 +31,69 @@ func (x *DOMAttr) WithValue(value string) *DOMAttr {
 	return x
 }
 
+// Name calls the underlying Name.
+func (x *DOMAttr) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Specified calls the underlying Specified.
+func (x *DOMAttr) Specified() bool {
+	return x.inner.Specified()
+}
+
+// Value calls the underlying Value.
+func (x *DOMAttr) Value() string {
+	_r := x.inner.Value()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetValue calls the underlying SetValue.
+func (x *DOMAttr) SetValue(value string) {
+	x.inner.SetValue(foundation.NSStringStringWithUTF8String(value))
+}
+
+// OwnerElement calls the underlying OwnerElement.
+func (x *DOMAttr) OwnerElement() *DOMElement {
+	_r := x.inner.OwnerElement()
+	if _r == nil {
+		return nil
+	}
+	return &DOMElement{inner: _r}
+}
+
+// Style calls the underlying Style.
+func (x *DOMAttr) Style() *DOMCSSStyleDeclaration {
+	_r := x.inner.Style()
+	if _r == nil {
+		return nil
+	}
+	return &DOMCSSStyleDeclaration{inner: _r}
+}
+
 func (x *DOMAttr) asDOMNode() *raw.DOMNode { return &x.inner.DOMNode }
 
 func (x *DOMAttr) asDOMObject() *raw.DOMObject { return &x.inner.DOMNode.DOMObject }
 
 func (x *DOMAttr) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMNode.DOMObject.WebScriptObject }
+
+// DOMAttrable is the interface implemented by [DOMAttr], for mocking and DI.
+type DOMAttrable interface {
+	Unwrap() *raw.DOMAttr
+	WithValue(value string) *DOMAttr
+	Name() string
+	Specified() bool
+	Value() string
+	SetValue(value string)
+	OwnerElement() *DOMElement
+	Style() *DOMCSSStyleDeclaration
+}
+
+var _ DOMAttrable = (*DOMAttr)(nil)
 

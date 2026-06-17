@@ -7,6 +7,7 @@ package foundation
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Invocation wraps [raw.NSInvocation] with a fluent Go API.
@@ -35,5 +36,102 @@ func (x *Invocation) WithSelector(selector objc.SEL) *Invocation {
 	return x
 }
 
+// RetainArguments calls the underlying RetainArguments.
+func (x *Invocation) RetainArguments() {
+	x.inner.RetainArguments()
+}
+
+// GetReturnValue calls the underlying GetReturnValue.
+func (x *Invocation) GetReturnValue(retLoc unsafe.Pointer) {
+	x.inner.GetReturnValue(retLoc)
+}
+
+// SetReturnValue calls the underlying SetReturnValue.
+func (x *Invocation) SetReturnValue(retLoc unsafe.Pointer) {
+	x.inner.SetReturnValue(retLoc)
+}
+
+// GetArgumentAtIndex calls the underlying GetArgumentAtIndex.
+func (x *Invocation) GetArgumentAtIndex(argumentLocation unsafe.Pointer, idx int) {
+	x.inner.GetArgumentAtIndex(argumentLocation, idx)
+}
+
+// SetArgumentAtIndex calls the underlying SetArgumentAtIndex.
+func (x *Invocation) SetArgumentAtIndex(argumentLocation unsafe.Pointer, idx int) {
+	x.inner.SetArgumentAtIndex(argumentLocation, idx)
+}
+
+// Invoke calls the underlying Invoke.
+func (x *Invocation) Invoke() {
+	x.inner.Invoke()
+}
+
+// InvokeWithTarget calls the underlying InvokeWithTarget.
+func (x *Invocation) InvokeWithTarget(target objc.ID) {
+	x.inner.InvokeWithTarget(target)
+}
+
+// InvokeUsingIMP calls the underlying InvokeUsingIMP.
+func (x *Invocation) InvokeUsingIMP(imp unsafe.Pointer) {
+	x.inner.InvokeUsingIMP(imp)
+}
+
+// MethodSignature calls the underlying MethodSignature.
+func (x *Invocation) MethodSignature() *MethodSignature {
+	_r := x.inner.MethodSignature()
+	if _r == nil {
+		return nil
+	}
+	return &MethodSignature{inner: _r}
+}
+
+// ArgumentsRetained calls the underlying ArgumentsRetained.
+func (x *Invocation) ArgumentsRetained() bool {
+	return x.inner.ArgumentsRetained()
+}
+
+// Target calls the underlying Target.
+func (x *Invocation) Target() objc.ID {
+	return x.inner.Target()
+}
+
+// SetTarget calls the underlying SetTarget.
+func (x *Invocation) SetTarget(target objc.ID) {
+	x.inner.SetTarget(target)
+}
+
+// Selector calls the underlying Selector.
+func (x *Invocation) Selector() objc.SEL {
+	return x.inner.Selector()
+}
+
+// SetSelector calls the underlying SetSelector.
+func (x *Invocation) SetSelector(selector objc.SEL) {
+	x.inner.SetSelector(selector)
+}
+
 func (x *Invocation) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// Invocationable is the interface implemented by [Invocation], for mocking and DI.
+type Invocationable interface {
+	Unwrap() *raw.NSInvocation
+	WithTarget(target objc.ID) *Invocation
+	WithSelector(selector objc.SEL) *Invocation
+	RetainArguments()
+	GetReturnValue(retLoc unsafe.Pointer)
+	SetReturnValue(retLoc unsafe.Pointer)
+	GetArgumentAtIndex(argumentLocation unsafe.Pointer, idx int)
+	SetArgumentAtIndex(argumentLocation unsafe.Pointer, idx int)
+	Invoke()
+	InvokeWithTarget(target objc.ID)
+	InvokeUsingIMP(imp unsafe.Pointer)
+	MethodSignature() *MethodSignature
+	ArgumentsRetained() bool
+	Target() objc.ID
+	SetTarget(target objc.ID)
+	Selector() objc.SEL
+	SetSelector(selector objc.SEL)
+}
+
+var _ Invocationable = (*Invocation)(nil)
 

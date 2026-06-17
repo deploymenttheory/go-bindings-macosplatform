@@ -37,3 +37,10 @@ func (x *TrackHomographicImageRegistrationRequest) asImageBasedRequest() *raw.VN
 
 func (x *TrackHomographicImageRegistrationRequest) asRequest() *raw.VNRequest { return &x.inner.VNStatefulRequest.VNImageBasedRequest.VNRequest }
 
+// TrackHomographicImageRegistrationRequestable is the interface implemented by [TrackHomographicImageRegistrationRequest], for mocking and DI.
+type TrackHomographicImageRegistrationRequestable interface {
+	Unwrap() *raw.VNTrackHomographicImageRegistrationRequest
+}
+
+var _ TrackHomographicImageRegistrationRequestable = (*TrackHomographicImageRegistrationRequest)(nil)
+

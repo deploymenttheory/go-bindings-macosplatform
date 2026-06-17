@@ -7,6 +7,7 @@ package intents
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -31,4 +32,37 @@ func NewPersonHandleWithValueType(value string, type_ raw.INPersonHandleType) *P
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithValue:type:"), foundation.NSStringStringWithUTF8String(value).Ptr(), type_)
 	return &PersonHandle{inner: raw.INPersonHandleFromID(_id)}
 }
+
+// Value calls the underlying Value.
+func (x *PersonHandle) Value() string {
+	_r := x.inner.Value()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Type calls the underlying Type.
+func (x *PersonHandle) Type() raw.INPersonHandleType {
+	return x.inner.Type()
+}
+
+// Label calls the underlying Label.
+func (x *PersonHandle) Label() string {
+	_r := x.inner.Label()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// PersonHandleable is the interface implemented by [PersonHandle], for mocking and DI.
+type PersonHandleable interface {
+	Unwrap() *raw.INPersonHandle
+	Value() string
+	Type() raw.INPersonHandleType
+	Label() string
+}
+
+var _ PersonHandleable = (*PersonHandle)(nil)
 

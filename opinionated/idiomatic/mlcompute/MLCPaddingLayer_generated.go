@@ -23,5 +23,48 @@ func NewPaddingLayer() *PaddingLayer {
 	return &PaddingLayer{inner: raw.MLCPaddingLayerFromID(_id)}
 }
 
+// PaddingType calls the underlying PaddingType.
+func (x *PaddingLayer) PaddingType() raw.MLCPaddingType {
+	return x.inner.PaddingType()
+}
+
+// PaddingLeft calls the underlying PaddingLeft.
+func (x *PaddingLayer) PaddingLeft() uint {
+	return x.inner.PaddingLeft()
+}
+
+// PaddingRight calls the underlying PaddingRight.
+func (x *PaddingLayer) PaddingRight() uint {
+	return x.inner.PaddingRight()
+}
+
+// PaddingTop calls the underlying PaddingTop.
+func (x *PaddingLayer) PaddingTop() uint {
+	return x.inner.PaddingTop()
+}
+
+// PaddingBottom calls the underlying PaddingBottom.
+func (x *PaddingLayer) PaddingBottom() uint {
+	return x.inner.PaddingBottom()
+}
+
+// ConstantValue calls the underlying ConstantValue.
+func (x *PaddingLayer) ConstantValue() float32 {
+	return x.inner.ConstantValue()
+}
+
 func (x *PaddingLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
+
+// PaddingLayerable is the interface implemented by [PaddingLayer], for mocking and DI.
+type PaddingLayerable interface {
+	Unwrap() *raw.MLCPaddingLayer
+	PaddingType() raw.MLCPaddingType
+	PaddingLeft() uint
+	PaddingRight() uint
+	PaddingTop() uint
+	PaddingBottom() uint
+	ConstantValue() float32
+}
+
+var _ PaddingLayerable = (*PaddingLayer)(nil)
 

@@ -8,6 +8,7 @@ import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -97,7 +98,226 @@ func (x *Box) WithBorderType(borderType raw.NSBorderType) *Box {
 	return x
 }
 
+// SizeToFit calls the underlying SizeToFit.
+func (x *Box) SizeToFit() {
+	x.inner.SizeToFit()
+}
+
+// SetFrameFromContentFrame calls the underlying SetFrameFromContentFrame.
+func (x *Box) SetFrameFromContentFrame(contentFrame corefoundation.CGRect) {
+	x.inner.SetFrameFromContentFrame(contentFrame)
+}
+
+// BoxType calls the underlying BoxType.
+func (x *Box) BoxType() raw.NSBoxType {
+	return x.inner.BoxType()
+}
+
+// SetBoxType calls the underlying SetBoxType.
+func (x *Box) SetBoxType(boxType raw.NSBoxType) {
+	x.inner.SetBoxType(boxType)
+}
+
+// TitlePosition calls the underlying TitlePosition.
+func (x *Box) TitlePosition() raw.NSTitlePosition {
+	return x.inner.TitlePosition()
+}
+
+// SetTitlePosition calls the underlying SetTitlePosition.
+func (x *Box) SetTitlePosition(titlePosition raw.NSTitlePosition) {
+	x.inner.SetTitlePosition(titlePosition)
+}
+
+// Title calls the underlying Title.
+func (x *Box) Title() string {
+	_r := x.inner.Title()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetTitle calls the underlying SetTitle.
+func (x *Box) SetTitle(title string) {
+	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+}
+
+// TitleFont calls the underlying TitleFont.
+func (x *Box) TitleFont() *Font {
+	_r := x.inner.TitleFont()
+	if _r == nil {
+		return nil
+	}
+	return &Font{inner: _r}
+}
+
+// SetTitleFont calls the underlying SetTitleFont.
+func (x *Box) SetTitleFont(titleFont *raw.NSFont) {
+	x.inner.SetTitleFont(titleFont)
+}
+
+// BorderRect calls the underlying BorderRect.
+func (x *Box) BorderRect() corefoundation.CGRect {
+	return x.inner.BorderRect()
+}
+
+// TitleRect calls the underlying TitleRect.
+func (x *Box) TitleRect() corefoundation.CGRect {
+	return x.inner.TitleRect()
+}
+
+// TitleCell calls the underlying TitleCell.
+func (x *Box) TitleCell() objc.ID {
+	return x.inner.TitleCell()
+}
+
+// ContentViewMargins calls the underlying ContentViewMargins.
+func (x *Box) ContentViewMargins() corefoundation.CGSize {
+	return x.inner.ContentViewMargins()
+}
+
+// SetContentViewMargins calls the underlying SetContentViewMargins.
+func (x *Box) SetContentViewMargins(contentViewMargins corefoundation.CGSize) {
+	x.inner.SetContentViewMargins(contentViewMargins)
+}
+
+// ContentView calls the underlying ContentView.
+func (x *Box) ContentView() *View {
+	_r := x.inner.ContentView()
+	if _r == nil {
+		return nil
+	}
+	return &View{inner: _r}
+}
+
+// SetContentView calls the underlying SetContentView.
+func (x *Box) SetContentView(contentView *raw.NSView) {
+	x.inner.SetContentView(contentView)
+}
+
+// IsTransparent calls the underlying IsTransparent.
+func (x *Box) IsTransparent() bool {
+	return x.inner.IsTransparent()
+}
+
+// SetTransparent calls the underlying SetTransparent.
+func (x *Box) SetTransparent(transparent bool) {
+	x.inner.SetTransparent(transparent)
+}
+
+// BorderWidth calls the underlying BorderWidth.
+func (x *Box) BorderWidth() float64 {
+	return x.inner.BorderWidth()
+}
+
+// SetBorderWidth calls the underlying SetBorderWidth.
+func (x *Box) SetBorderWidth(borderWidth float64) {
+	x.inner.SetBorderWidth(borderWidth)
+}
+
+// CornerRadius calls the underlying CornerRadius.
+func (x *Box) CornerRadius() float64 {
+	return x.inner.CornerRadius()
+}
+
+// SetCornerRadius calls the underlying SetCornerRadius.
+func (x *Box) SetCornerRadius(cornerRadius float64) {
+	x.inner.SetCornerRadius(cornerRadius)
+}
+
+// BorderColor calls the underlying BorderColor.
+func (x *Box) BorderColor() *Color {
+	_r := x.inner.BorderColor()
+	if _r == nil {
+		return nil
+	}
+	return &Color{inner: _r}
+}
+
+// SetBorderColor calls the underlying SetBorderColor.
+func (x *Box) SetBorderColor(borderColor *raw.NSColor) {
+	x.inner.SetBorderColor(borderColor)
+}
+
+// FillColor calls the underlying FillColor.
+func (x *Box) FillColor() *Color {
+	_r := x.inner.FillColor()
+	if _r == nil {
+		return nil
+	}
+	return &Color{inner: _r}
+}
+
+// SetFillColor calls the underlying SetFillColor.
+func (x *Box) SetFillColor(fillColor *raw.NSColor) {
+	x.inner.SetFillColor(fillColor)
+}
+
+// SetTitleWithMnemonic calls the underlying SetTitleWithMnemonic.
+func (x *Box) SetTitleWithMnemonic(stringWithAmpersand string) {
+	x.inner.SetTitleWithMnemonic(foundation.NSStringStringWithUTF8String(stringWithAmpersand))
+}
+
+// BorderType calls the underlying BorderType.
+func (x *Box) BorderType() raw.NSBorderType {
+	return x.inner.BorderType()
+}
+
+// SetBorderType calls the underlying SetBorderType.
+func (x *Box) SetBorderType(borderType raw.NSBorderType) {
+	x.inner.SetBorderType(borderType)
+}
+
 func (x *Box) asView() *raw.NSView { return &x.inner.NSView }
 
 func (x *Box) asResponder() *raw.NSResponder { return &x.inner.NSView.NSResponder }
+
+// Boxable is the interface implemented by [Box], for mocking and DI.
+type Boxable interface {
+	Unwrap() *raw.NSBox
+	WithBoxType(boxType raw.NSBoxType) *Box
+	WithTitlePosition(titlePosition raw.NSTitlePosition) *Box
+	WithTitle(title string) *Box
+	WithTitleFont(titleFont *raw.NSFont) *Box
+	WithContentViewMargins(contentViewMargins corefoundation.CGSize) *Box
+	WithContentView(contentView ViewProvider) *Box
+	WithTransparent(transparent bool) *Box
+	WithBorderWidth(borderWidth float64) *Box
+	WithCornerRadius(cornerRadius float64) *Box
+	WithBorderColor(borderColor *raw.NSColor) *Box
+	WithFillColor(fillColor *raw.NSColor) *Box
+	WithBorderType(borderType raw.NSBorderType) *Box
+	SizeToFit()
+	SetFrameFromContentFrame(contentFrame corefoundation.CGRect)
+	BoxType() raw.NSBoxType
+	SetBoxType(boxType raw.NSBoxType)
+	TitlePosition() raw.NSTitlePosition
+	SetTitlePosition(titlePosition raw.NSTitlePosition)
+	Title() string
+	SetTitle(title string)
+	TitleFont() *Font
+	SetTitleFont(titleFont *raw.NSFont)
+	BorderRect() corefoundation.CGRect
+	TitleRect() corefoundation.CGRect
+	TitleCell() objc.ID
+	ContentViewMargins() corefoundation.CGSize
+	SetContentViewMargins(contentViewMargins corefoundation.CGSize)
+	ContentView() *View
+	SetContentView(contentView *raw.NSView)
+	IsTransparent() bool
+	SetTransparent(transparent bool)
+	BorderWidth() float64
+	SetBorderWidth(borderWidth float64)
+	CornerRadius() float64
+	SetCornerRadius(cornerRadius float64)
+	BorderColor() *Color
+	SetBorderColor(borderColor *raw.NSColor)
+	FillColor() *Color
+	SetFillColor(fillColor *raw.NSColor)
+	SetTitleWithMnemonic(stringWithAmpersand string)
+	BorderType() raw.NSBorderType
+	SetBorderType(borderType raw.NSBorderType)
+}
+
+var _ Boxable = (*Box)(nil)
 

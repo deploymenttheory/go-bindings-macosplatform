@@ -5,8 +5,10 @@
 package avkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -41,4 +43,72 @@ func (x *CaptureView) WithVideoGravity(videoGravity *foundation.NSString) *Captu
 	x.inner.SetVideoGravity(videoGravity)
 	return x
 }
+
+// SetSessionShowVideoPreviewShowAudioPreview calls the underlying SetSessionShowVideoPreviewShowAudioPreview.
+func (x *CaptureView) SetSessionShowVideoPreviewShowAudioPreview(session *avfoundation.AVCaptureSession, showVideoPreview bool, showAudioPreview bool) {
+	x.inner.SetSessionShowVideoPreviewShowAudioPreview(session, showVideoPreview, showAudioPreview)
+}
+
+// Session calls the underlying Session.
+func (x *CaptureView) Session() *avfoundation.AVCaptureSession {
+	return x.inner.Session()
+}
+
+// FileOutput calls the underlying FileOutput.
+func (x *CaptureView) FileOutput() *avfoundation.AVCaptureFileOutput {
+	return x.inner.FileOutput()
+}
+
+// Delegate calls the underlying Delegate.
+func (x *CaptureView) Delegate() raw.AVCaptureViewDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *CaptureView) SetDelegate(delegate raw.AVCaptureViewDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// ControlsStyle calls the underlying ControlsStyle.
+func (x *CaptureView) ControlsStyle() raw.AVCaptureViewControlsStyle {
+	return x.inner.ControlsStyle()
+}
+
+// SetControlsStyle calls the underlying SetControlsStyle.
+func (x *CaptureView) SetControlsStyle(controlsStyle raw.AVCaptureViewControlsStyle) {
+	x.inner.SetControlsStyle(controlsStyle)
+}
+
+// VideoGravity calls the underlying VideoGravity.
+func (x *CaptureView) VideoGravity() string {
+	_r := x.inner.VideoGravity()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetVideoGravity calls the underlying SetVideoGravity.
+func (x *CaptureView) SetVideoGravity(videoGravity *foundation.NSString) {
+	x.inner.SetVideoGravity(videoGravity)
+}
+
+// CaptureViewable is the interface implemented by [CaptureView], for mocking and DI.
+type CaptureViewable interface {
+	Unwrap() *raw.AVCaptureView
+	WithDelegate(delegate raw.AVCaptureViewDelegate) *CaptureView
+	WithControlsStyle(controlsStyle raw.AVCaptureViewControlsStyle) *CaptureView
+	WithVideoGravity(videoGravity *foundation.NSString) *CaptureView
+	SetSessionShowVideoPreviewShowAudioPreview(session *avfoundation.AVCaptureSession, showVideoPreview bool, showAudioPreview bool)
+	Session() *avfoundation.AVCaptureSession
+	FileOutput() *avfoundation.AVCaptureFileOutput
+	Delegate() raw.AVCaptureViewDelegate
+	SetDelegate(delegate raw.AVCaptureViewDelegate)
+	ControlsStyle() raw.AVCaptureViewControlsStyle
+	SetControlsStyle(controlsStyle raw.AVCaptureViewControlsStyle)
+	VideoGravity() string
+	SetVideoGravity(videoGravity *foundation.NSString)
+}
+
+var _ CaptureViewable = (*CaptureView)(nil)
 

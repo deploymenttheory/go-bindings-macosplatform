@@ -6,6 +6,7 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,35 @@ func NewStoryboard() *Storyboard {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSStoryboard")), objc.RegisterName("new"))
 	return &Storyboard{inner: raw.NSStoryboardFromID(_id)}
 }
+
+// InstantiateInitialController calls the underlying InstantiateInitialController.
+func (x *Storyboard) InstantiateInitialController() objc.ID {
+	return x.inner.InstantiateInitialController()
+}
+
+// InstantiateInitialControllerWithCreator calls the underlying InstantiateInitialControllerWithCreator.
+func (x *Storyboard) InstantiateInitialControllerWithCreator(block func(*foundation.NSCoder) objc.ID) objc.ID {
+	return x.inner.InstantiateInitialControllerWithCreator(block)
+}
+
+// InstantiateControllerWithIdentifier calls the underlying InstantiateControllerWithIdentifier.
+func (x *Storyboard) InstantiateControllerWithIdentifier(identifier *foundation.NSString) objc.ID {
+	return x.inner.InstantiateControllerWithIdentifier(identifier)
+}
+
+// InstantiateControllerWithIdentifierCreator calls the underlying InstantiateControllerWithIdentifierCreator.
+func (x *Storyboard) InstantiateControllerWithIdentifierCreator(identifier *foundation.NSString, block func(*foundation.NSCoder) objc.ID) objc.ID {
+	return x.inner.InstantiateControllerWithIdentifierCreator(identifier, block)
+}
+
+// Storyboardable is the interface implemented by [Storyboard], for mocking and DI.
+type Storyboardable interface {
+	Unwrap() *raw.NSStoryboard
+	InstantiateInitialController() objc.ID
+	InstantiateInitialControllerWithCreator(block func(*foundation.NSCoder) objc.ID) objc.ID
+	InstantiateControllerWithIdentifier(identifier *foundation.NSString) objc.ID
+	InstantiateControllerWithIdentifierCreator(identifier *foundation.NSString, block func(*foundation.NSCoder) objc.ID) objc.ID
+}
+
+var _ Storyboardable = (*Storyboard)(nil)
 

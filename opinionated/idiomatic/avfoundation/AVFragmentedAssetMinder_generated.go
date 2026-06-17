@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -30,18 +31,49 @@ func (x *FragmentedAssetMinder) WithMindingInterval(mindingInterval float64) *Fr
 	return x
 }
 
+// AddFragmentedAsset calls the underlying AddFragmentedAsset.
+func (x *FragmentedAssetMinder) AddFragmentedAsset(asset *raw.AVAsset) {
+	x.inner.AddFragmentedAsset(asset)
+}
+
+// RemoveFragmentedAsset calls the underlying RemoveFragmentedAsset.
+func (x *FragmentedAssetMinder) RemoveFragmentedAsset(asset *raw.AVAsset) {
+	x.inner.RemoveFragmentedAsset(asset)
+}
+
+// MindingInterval calls the underlying MindingInterval.
+func (x *FragmentedAssetMinder) MindingInterval() float64 {
+	return x.inner.MindingInterval()
+}
+
+// SetMindingInterval calls the underlying SetMindingInterval.
+func (x *FragmentedAssetMinder) SetMindingInterval(mindingInterval float64) {
+	x.inner.SetMindingInterval(mindingInterval)
+}
+
 // Assets returns the collection as a Go slice.
 func (x *FragmentedAssetMinder) Assets() []*raw.AVAsset {
 	arr := x.inner.Assets()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AVAsset, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVAsset {
+		return raw.AVAssetFromID(purego.Retain(_id))
+	})
 }
 
 func (x *FragmentedAssetMinder) asFragmentedAssetMinder() *raw.AVFragmentedAssetMinder { return x.inner }
+
+// FragmentedAssetMinderable is the interface implemented by [FragmentedAssetMinder], for mocking and DI.
+type FragmentedAssetMinderable interface {
+	Unwrap() *raw.AVFragmentedAssetMinder
+	WithMindingInterval(mindingInterval float64) *FragmentedAssetMinder
+	AddFragmentedAsset(asset *raw.AVAsset)
+	RemoveFragmentedAsset(asset *raw.AVAsset)
+	MindingInterval() float64
+	SetMindingInterval(mindingInterval float64)
+	Assets() []*raw.AVAsset
+}
+
+var _ FragmentedAssetMinderable = (*FragmentedAssetMinder)(nil)
 

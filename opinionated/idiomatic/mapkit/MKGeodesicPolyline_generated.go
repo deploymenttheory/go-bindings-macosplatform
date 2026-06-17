@@ -29,3 +29,10 @@ func (x *GeodesicPolyline) asMultiPoint() *raw.MKMultiPoint { return &x.inner.MK
 
 func (x *GeodesicPolyline) asShape() *raw.MKShape { return &x.inner.MKPolyline.MKMultiPoint.MKShape }
 
+// GeodesicPolylineable is the interface implemented by [GeodesicPolyline], for mocking and DI.
+type GeodesicPolylineable interface {
+	Unwrap() *raw.MKGeodesicPolyline
+}
+
+var _ GeodesicPolylineable = (*GeodesicPolyline)(nil)
+

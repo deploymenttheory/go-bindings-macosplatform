@@ -5,7 +5,9 @@
 package metalkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +24,51 @@ func NewMeshBuffer() *MeshBuffer {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTKMeshBuffer")), objc.RegisterName("new"))
 	return &MeshBuffer{inner: raw.MTKMeshBufferFromID(_id)}
 }
+
+// Length calls the underlying Length.
+func (x *MeshBuffer) Length() uint {
+	return x.inner.Length()
+}
+
+// Allocator calls the underlying Allocator.
+func (x *MeshBuffer) Allocator() *MeshBufferAllocator {
+	_r := x.inner.Allocator()
+	if _r == nil {
+		return nil
+	}
+	return &MeshBufferAllocator{inner: _r}
+}
+
+// Zone calls the underlying Zone.
+func (x *MeshBuffer) Zone() modelio.MDLMeshBufferZone {
+	return x.inner.Zone()
+}
+
+// Buffer calls the underlying Buffer.
+func (x *MeshBuffer) Buffer() metal.MTLBuffer {
+	return x.inner.Buffer()
+}
+
+// Offset calls the underlying Offset.
+func (x *MeshBuffer) Offset() uint {
+	return x.inner.Offset()
+}
+
+// Type calls the underlying Type.
+func (x *MeshBuffer) Type() modelio.MDLMeshBufferType {
+	return x.inner.Type()
+}
+
+// MeshBufferable is the interface implemented by [MeshBuffer], for mocking and DI.
+type MeshBufferable interface {
+	Unwrap() *raw.MTKMeshBuffer
+	Length() uint
+	Allocator() *MeshBufferAllocator
+	Zone() modelio.MDLMeshBufferZone
+	Buffer() metal.MTLBuffer
+	Offset() uint
+	Type() modelio.MDLMeshBufferType
+}
+
+var _ MeshBufferable = (*MeshBuffer)(nil)
 

@@ -7,6 +7,7 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -60,6 +61,86 @@ func (x *DOMHTMLTableColElement) WithWidth(width string) *DOMHTMLTableColElement
 	return x
 }
 
+// Align calls the underlying Align.
+func (x *DOMHTMLTableColElement) Align() string {
+	_r := x.inner.Align()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetAlign calls the underlying SetAlign.
+func (x *DOMHTMLTableColElement) SetAlign(align string) {
+	x.inner.SetAlign(foundation.NSStringStringWithUTF8String(align))
+}
+
+// Ch calls the underlying Ch.
+func (x *DOMHTMLTableColElement) Ch() string {
+	_r := x.inner.Ch()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetCh calls the underlying SetCh.
+func (x *DOMHTMLTableColElement) SetCh(ch string) {
+	x.inner.SetCh(foundation.NSStringStringWithUTF8String(ch))
+}
+
+// ChOff calls the underlying ChOff.
+func (x *DOMHTMLTableColElement) ChOff() string {
+	_r := x.inner.ChOff()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetChOff calls the underlying SetChOff.
+func (x *DOMHTMLTableColElement) SetChOff(chOff string) {
+	x.inner.SetChOff(foundation.NSStringStringWithUTF8String(chOff))
+}
+
+// Span calls the underlying Span.
+func (x *DOMHTMLTableColElement) Span() int {
+	return x.inner.Span()
+}
+
+// SetSpan calls the underlying SetSpan.
+func (x *DOMHTMLTableColElement) SetSpan(span int) {
+	x.inner.SetSpan(span)
+}
+
+// VAlign calls the underlying VAlign.
+func (x *DOMHTMLTableColElement) VAlign() string {
+	_r := x.inner.VAlign()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetVAlign calls the underlying SetVAlign.
+func (x *DOMHTMLTableColElement) SetVAlign(vAlign string) {
+	x.inner.SetVAlign(foundation.NSStringStringWithUTF8String(vAlign))
+}
+
+// Width calls the underlying Width.
+func (x *DOMHTMLTableColElement) Width() string {
+	_r := x.inner.Width()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetWidth calls the underlying SetWidth.
+func (x *DOMHTMLTableColElement) SetWidth(width string) {
+	x.inner.SetWidth(foundation.NSStringStringWithUTF8String(width))
+}
+
 func (x *DOMHTMLTableColElement) asDOMHTMLElement() *raw.DOMHTMLElement { return &x.inner.DOMHTMLElement }
 
 func (x *DOMHTMLTableColElement) asDOMElement() *raw.DOMElement { return &x.inner.DOMHTMLElement.DOMElement }
@@ -69,4 +150,29 @@ func (x *DOMHTMLTableColElement) asDOMNode() *raw.DOMNode { return &x.inner.DOMH
 func (x *DOMHTMLTableColElement) asDOMObject() *raw.DOMObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject }
 
 func (x *DOMHTMLTableColElement) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject }
+
+// DOMHTMLTableColElementable is the interface implemented by [DOMHTMLTableColElement], for mocking and DI.
+type DOMHTMLTableColElementable interface {
+	Unwrap() *raw.DOMHTMLTableColElement
+	WithAlign(align string) *DOMHTMLTableColElement
+	WithCh(ch string) *DOMHTMLTableColElement
+	WithChOff(chOff string) *DOMHTMLTableColElement
+	WithSpan(span int) *DOMHTMLTableColElement
+	WithVAlign(vAlign string) *DOMHTMLTableColElement
+	WithWidth(width string) *DOMHTMLTableColElement
+	Align() string
+	SetAlign(align string)
+	Ch() string
+	SetCh(ch string)
+	ChOff() string
+	SetChOff(chOff string)
+	Span() int
+	SetSpan(span int)
+	VAlign() string
+	SetVAlign(vAlign string)
+	Width() string
+	SetWidth(width string)
+}
+
+var _ DOMHTMLTableColElementable = (*DOMHTMLTableColElement)(nil)
 

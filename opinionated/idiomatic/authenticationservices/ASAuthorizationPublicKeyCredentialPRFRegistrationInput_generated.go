@@ -24,3 +24,26 @@ func NewAuthorizationPublicKeyCredentialPRFRegistrationInputWithInputValues(inpu
 	return &AuthorizationPublicKeyCredentialPRFRegistrationInput{inner: raw.ASAuthorizationPublicKeyCredentialPRFRegistrationInputFromID(_id)}
 }
 
+// ShouldCheckForSupport calls the underlying ShouldCheckForSupport.
+func (x *AuthorizationPublicKeyCredentialPRFRegistrationInput) ShouldCheckForSupport() bool {
+	return x.inner.ShouldCheckForSupport()
+}
+
+// InputValues calls the underlying InputValues.
+func (x *AuthorizationPublicKeyCredentialPRFRegistrationInput) InputValues() *AuthorizationPublicKeyCredentialPRFAssertionInputValues {
+	_r := x.inner.InputValues()
+	if _r == nil {
+		return nil
+	}
+	return &AuthorizationPublicKeyCredentialPRFAssertionInputValues{inner: _r}
+}
+
+// AuthorizationPublicKeyCredentialPRFRegistrationInputable is the interface implemented by [AuthorizationPublicKeyCredentialPRFRegistrationInput], for mocking and DI.
+type AuthorizationPublicKeyCredentialPRFRegistrationInputable interface {
+	Unwrap() *raw.ASAuthorizationPublicKeyCredentialPRFRegistrationInput
+	ShouldCheckForSupport() bool
+	InputValues() *AuthorizationPublicKeyCredentialPRFAssertionInputValues
+}
+
+var _ AuthorizationPublicKeyCredentialPRFRegistrationInputable = (*AuthorizationPublicKeyCredentialPRFRegistrationInput)(nil)
+

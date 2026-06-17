@@ -42,3 +42,49 @@ func (x *CaptureDescriptor) WithOutputURL(outputURL string) *CaptureDescriptor {
 	return x
 }
 
+// CaptureObject calls the underlying CaptureObject.
+func (x *CaptureDescriptor) CaptureObject() objc.ID {
+	return x.inner.CaptureObject()
+}
+
+// SetCaptureObject calls the underlying SetCaptureObject.
+func (x *CaptureDescriptor) SetCaptureObject(captureObject objc.ID) {
+	x.inner.SetCaptureObject(captureObject)
+}
+
+// Destination calls the underlying Destination.
+func (x *CaptureDescriptor) Destination() raw.MTLCaptureDestination {
+	return x.inner.Destination()
+}
+
+// SetDestination calls the underlying SetDestination.
+func (x *CaptureDescriptor) SetDestination(destination raw.MTLCaptureDestination) {
+	x.inner.SetDestination(destination)
+}
+
+// OutputURL calls the underlying OutputURL.
+func (x *CaptureDescriptor) OutputURL() *foundation.NSURL {
+	return x.inner.OutputURL()
+}
+
+// SetOutputURL calls the underlying SetOutputURL.
+func (x *CaptureDescriptor) SetOutputURL(outputURL string) {
+	x.inner.SetOutputURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(outputURL)))
+}
+
+// CaptureDescriptorable is the interface implemented by [CaptureDescriptor], for mocking and DI.
+type CaptureDescriptorable interface {
+	Unwrap() *raw.MTLCaptureDescriptor
+	WithCaptureObject(captureObject objc.ID) *CaptureDescriptor
+	WithDestination(destination raw.MTLCaptureDestination) *CaptureDescriptor
+	WithOutputURL(outputURL string) *CaptureDescriptor
+	CaptureObject() objc.ID
+	SetCaptureObject(captureObject objc.ID)
+	Destination() raw.MTLCaptureDestination
+	SetDestination(destination raw.MTLCaptureDestination)
+	OutputURL() *foundation.NSURL
+	SetOutputURL(outputURL string)
+}
+
+var _ CaptureDescriptorable = (*CaptureDescriptor)(nil)
+

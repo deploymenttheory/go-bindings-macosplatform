@@ -23,3 +23,10 @@ func NewLookAroundScene() *LookAroundScene {
 	return &LookAroundScene{inner: raw.MKLookAroundSceneFromID(_id)}
 }
 
+// LookAroundSceneable is the interface implemented by [LookAroundScene], for mocking and DI.
+type LookAroundSceneable interface {
+	Unwrap() *raw.MKLookAroundScene
+}
+
+var _ LookAroundSceneable = (*LookAroundScene)(nil)
+

@@ -7,6 +7,7 @@ package eventkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/eventkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -93,17 +94,159 @@ func (x *CalendarItem) WithRecurrenceRules(items ...*raw.EKRecurrenceRule) *Cale
 	return x
 }
 
+// AddAlarm calls the underlying AddAlarm.
+func (x *CalendarItem) AddAlarm(alarm *raw.EKAlarm) {
+	x.inner.AddAlarm(alarm)
+}
+
+// RemoveAlarm calls the underlying RemoveAlarm.
+func (x *CalendarItem) RemoveAlarm(alarm *raw.EKAlarm) {
+	x.inner.RemoveAlarm(alarm)
+}
+
+// AddRecurrenceRule calls the underlying AddRecurrenceRule.
+func (x *CalendarItem) AddRecurrenceRule(rule *raw.EKRecurrenceRule) {
+	x.inner.AddRecurrenceRule(rule)
+}
+
+// RemoveRecurrenceRule calls the underlying RemoveRecurrenceRule.
+func (x *CalendarItem) RemoveRecurrenceRule(rule *raw.EKRecurrenceRule) {
+	x.inner.RemoveRecurrenceRule(rule)
+}
+
+// Calendar calls the underlying Calendar.
+func (x *CalendarItem) Calendar() *Calendar {
+	_r := x.inner.Calendar()
+	if _r == nil {
+		return nil
+	}
+	return &Calendar{inner: _r}
+}
+
+// SetCalendar calls the underlying SetCalendar.
+func (x *CalendarItem) SetCalendar(calendar *raw.EKCalendar) {
+	x.inner.SetCalendar(calendar)
+}
+
+// CalendarItemIdentifier calls the underlying CalendarItemIdentifier.
+func (x *CalendarItem) CalendarItemIdentifier() string {
+	_r := x.inner.CalendarItemIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// CalendarItemExternalIdentifier calls the underlying CalendarItemExternalIdentifier.
+func (x *CalendarItem) CalendarItemExternalIdentifier() string {
+	_r := x.inner.CalendarItemExternalIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Title calls the underlying Title.
+func (x *CalendarItem) Title() string {
+	_r := x.inner.Title()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetTitle calls the underlying SetTitle.
+func (x *CalendarItem) SetTitle(title string) {
+	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+}
+
+// Location calls the underlying Location.
+func (x *CalendarItem) Location() string {
+	_r := x.inner.Location()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLocation calls the underlying SetLocation.
+func (x *CalendarItem) SetLocation(location string) {
+	x.inner.SetLocation(foundation.NSStringStringWithUTF8String(location))
+}
+
+// Notes calls the underlying Notes.
+func (x *CalendarItem) Notes() string {
+	_r := x.inner.Notes()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetNotes calls the underlying SetNotes.
+func (x *CalendarItem) SetNotes(notes string) {
+	x.inner.SetNotes(foundation.NSStringStringWithUTF8String(notes))
+}
+
+// URL calls the underlying URL.
+func (x *CalendarItem) URL() *foundation.NSURL {
+	return x.inner.URL()
+}
+
+// SetURL calls the underlying SetURL.
+func (x *CalendarItem) SetURL(uRL string) {
+	x.inner.SetURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
+}
+
+// LastModifiedDate calls the underlying LastModifiedDate.
+func (x *CalendarItem) LastModifiedDate() *foundation.NSDate {
+	return x.inner.LastModifiedDate()
+}
+
+// CreationDate calls the underlying CreationDate.
+func (x *CalendarItem) CreationDate() *foundation.NSDate {
+	return x.inner.CreationDate()
+}
+
+// TimeZone calls the underlying TimeZone.
+func (x *CalendarItem) TimeZone() *foundation.NSTimeZone {
+	return x.inner.TimeZone()
+}
+
+// SetTimeZone calls the underlying SetTimeZone.
+func (x *CalendarItem) SetTimeZone(timeZone *foundation.NSTimeZone) {
+	x.inner.SetTimeZone(timeZone)
+}
+
+// HasAlarms calls the underlying HasAlarms.
+func (x *CalendarItem) HasAlarms() bool {
+	return x.inner.HasAlarms()
+}
+
+// HasRecurrenceRules calls the underlying HasRecurrenceRules.
+func (x *CalendarItem) HasRecurrenceRules() bool {
+	return x.inner.HasRecurrenceRules()
+}
+
+// HasAttendees calls the underlying HasAttendees.
+func (x *CalendarItem) HasAttendees() bool {
+	return x.inner.HasAttendees()
+}
+
+// HasNotes calls the underlying HasNotes.
+func (x *CalendarItem) HasNotes() bool {
+	return x.inner.HasNotes()
+}
+
 // Attendees returns the collection as a Go slice.
 func (x *CalendarItem) Attendees() []*raw.EKParticipant {
 	arr := x.inner.Attendees()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.EKParticipant, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.EKParticipant {
+		return raw.EKParticipantFromID(purego.Retain(_id))
+	})
 }
 
 // Alarms returns the collection as a Go slice.
@@ -112,11 +255,14 @@ func (x *CalendarItem) Alarms() []*raw.EKAlarm {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.EKAlarm, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.EKAlarm {
+		return raw.EKAlarmFromID(purego.Retain(_id))
+	})
+}
+
+// SetAlarms calls the underlying SetAlarms.
+func (x *CalendarItem) SetAlarms(alarms *foundation.NSArray[*raw.EKAlarm]) {
+	x.inner.SetAlarms(alarms)
 }
 
 // RecurrenceRules returns the collection as a Go slice.
@@ -125,14 +271,61 @@ func (x *CalendarItem) RecurrenceRules() []*raw.EKRecurrenceRule {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.EKRecurrenceRule, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.EKRecurrenceRule {
+		return raw.EKRecurrenceRuleFromID(purego.Retain(_id))
+	})
+}
+
+// SetRecurrenceRules calls the underlying SetRecurrenceRules.
+func (x *CalendarItem) SetRecurrenceRules(recurrenceRules *foundation.NSArray[*raw.EKRecurrenceRule]) {
+	x.inner.SetRecurrenceRules(recurrenceRules)
 }
 
 func (x *CalendarItem) asCalendarItem() *raw.EKCalendarItem { return x.inner }
 
 func (x *CalendarItem) asObject() *raw.EKObject { return &x.inner.EKObject }
+
+// CalendarItemable is the interface implemented by [CalendarItem], for mocking and DI.
+type CalendarItemable interface {
+	Unwrap() *raw.EKCalendarItem
+	WithCalendar(calendar *raw.EKCalendar) *CalendarItem
+	WithTitle(title string) *CalendarItem
+	WithLocation(location string) *CalendarItem
+	WithNotes(notes string) *CalendarItem
+	WithURL(uRL string) *CalendarItem
+	WithTimeZone(timeZone *foundation.NSTimeZone) *CalendarItem
+	WithAlarms(items ...*raw.EKAlarm) *CalendarItem
+	WithRecurrenceRules(items ...*raw.EKRecurrenceRule) *CalendarItem
+	AddAlarm(alarm *raw.EKAlarm)
+	RemoveAlarm(alarm *raw.EKAlarm)
+	AddRecurrenceRule(rule *raw.EKRecurrenceRule)
+	RemoveRecurrenceRule(rule *raw.EKRecurrenceRule)
+	Calendar() *Calendar
+	SetCalendar(calendar *raw.EKCalendar)
+	CalendarItemIdentifier() string
+	CalendarItemExternalIdentifier() string
+	Title() string
+	SetTitle(title string)
+	Location() string
+	SetLocation(location string)
+	Notes() string
+	SetNotes(notes string)
+	URL() *foundation.NSURL
+	SetURL(uRL string)
+	LastModifiedDate() *foundation.NSDate
+	CreationDate() *foundation.NSDate
+	TimeZone() *foundation.NSTimeZone
+	SetTimeZone(timeZone *foundation.NSTimeZone)
+	HasAlarms() bool
+	HasRecurrenceRules() bool
+	HasAttendees() bool
+	HasNotes() bool
+	Attendees() []*raw.EKParticipant
+	Alarms() []*raw.EKAlarm
+	SetAlarms(alarms *foundation.NSArray[*raw.EKAlarm])
+	RecurrenceRules() []*raw.EKRecurrenceRule
+	SetRecurrenceRules(recurrenceRules *foundation.NSArray[*raw.EKRecurrenceRule])
+}
+
+var _ CalendarItemable = (*CalendarItem)(nil)
 

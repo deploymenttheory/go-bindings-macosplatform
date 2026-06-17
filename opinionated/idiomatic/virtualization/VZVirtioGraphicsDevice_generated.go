@@ -25,3 +25,10 @@ func NewVirtioGraphicsDevice() *VirtioGraphicsDevice {
 
 func (x *VirtioGraphicsDevice) asGraphicsDevice() *raw.VZGraphicsDevice { return &x.inner.VZGraphicsDevice }
 
+// VirtioGraphicsDeviceable is the interface implemented by [VirtioGraphicsDevice], for mocking and DI.
+type VirtioGraphicsDeviceable interface {
+	Unwrap() *raw.VZVirtioGraphicsDevice
+}
+
+var _ VirtioGraphicsDeviceable = (*VirtioGraphicsDevice)(nil)
+

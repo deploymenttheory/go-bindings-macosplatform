@@ -6,6 +6,7 @@ package metalperformanceshadersgraph
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshadersgraph"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
@@ -43,5 +44,63 @@ func (x *GraphExecutableExecutionDescriptor) WithWaitUntilCompleted(waitUntilCom
 	return x
 }
 
+// WaitForEventValue calls the underlying WaitForEventValue.
+func (x *GraphExecutableExecutionDescriptor) WaitForEventValue(event metal.MTLSharedEvent, value uint64) {
+	x.inner.WaitForEventValue(event, value)
+}
+
+// SignalEventAtExecutionEventValue calls the underlying SignalEventAtExecutionEventValue.
+func (x *GraphExecutableExecutionDescriptor) SignalEventAtExecutionEventValue(event metal.MTLSharedEvent, executionStage raw.MPSGraphExecutionStage, value uint64) {
+	x.inner.SignalEventAtExecutionEventValue(event, executionStage, value)
+}
+
+// ScheduledHandler calls the underlying ScheduledHandler.
+func (x *GraphExecutableExecutionDescriptor) ScheduledHandler() objc.Block {
+	return x.inner.ScheduledHandler()
+}
+
+// SetScheduledHandler calls the underlying SetScheduledHandler.
+func (x *GraphExecutableExecutionDescriptor) SetScheduledHandler(scheduledHandler func(*foundation.NSArray[*raw.MPSGraphTensorData], unsafe.Pointer)) {
+	x.inner.SetScheduledHandler(scheduledHandler)
+}
+
+// CompletionHandler calls the underlying CompletionHandler.
+func (x *GraphExecutableExecutionDescriptor) CompletionHandler() objc.Block {
+	return x.inner.CompletionHandler()
+}
+
+// SetCompletionHandler calls the underlying SetCompletionHandler.
+func (x *GraphExecutableExecutionDescriptor) SetCompletionHandler(completionHandler func(*foundation.NSArray[*raw.MPSGraphTensorData], unsafe.Pointer)) {
+	x.inner.SetCompletionHandler(completionHandler)
+}
+
+// WaitUntilCompleted calls the underlying WaitUntilCompleted.
+func (x *GraphExecutableExecutionDescriptor) WaitUntilCompleted() bool {
+	return x.inner.WaitUntilCompleted()
+}
+
+// SetWaitUntilCompleted calls the underlying SetWaitUntilCompleted.
+func (x *GraphExecutableExecutionDescriptor) SetWaitUntilCompleted(waitUntilCompleted bool) {
+	x.inner.SetWaitUntilCompleted(waitUntilCompleted)
+}
+
 func (x *GraphExecutableExecutionDescriptor) asGraphObject() *raw.MPSGraphObject { return &x.inner.MPSGraphObject }
+
+// GraphExecutableExecutionDescriptorable is the interface implemented by [GraphExecutableExecutionDescriptor], for mocking and DI.
+type GraphExecutableExecutionDescriptorable interface {
+	Unwrap() *raw.MPSGraphExecutableExecutionDescriptor
+	WithScheduledHandler(scheduledHandler func(*foundation.NSArray[*raw.MPSGraphTensorData], unsafe.Pointer)) *GraphExecutableExecutionDescriptor
+	WithCompletionHandler(completionHandler func(*foundation.NSArray[*raw.MPSGraphTensorData], unsafe.Pointer)) *GraphExecutableExecutionDescriptor
+	WithWaitUntilCompleted(waitUntilCompleted bool) *GraphExecutableExecutionDescriptor
+	WaitForEventValue(event metal.MTLSharedEvent, value uint64)
+	SignalEventAtExecutionEventValue(event metal.MTLSharedEvent, executionStage raw.MPSGraphExecutionStage, value uint64)
+	ScheduledHandler() objc.Block
+	SetScheduledHandler(scheduledHandler func(*foundation.NSArray[*raw.MPSGraphTensorData], unsafe.Pointer))
+	CompletionHandler() objc.Block
+	SetCompletionHandler(completionHandler func(*foundation.NSArray[*raw.MPSGraphTensorData], unsafe.Pointer))
+	WaitUntilCompleted() bool
+	SetWaitUntilCompleted(waitUntilCompleted bool)
+}
+
+var _ GraphExecutableExecutionDescriptorable = (*GraphExecutableExecutionDescriptor)(nil)
 

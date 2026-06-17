@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -72,5 +73,120 @@ func (x *MTRUnitTestingClusterSimpleStruct) WithH(h *foundation.NSNumber) *MTRUn
 	return x
 }
 
+// A calls the underlying A.
+func (x *MTRUnitTestingClusterSimpleStruct) A() *foundation.NSNumber {
+	return x.inner.A()
+}
+
+// SetA calls the underlying SetA.
+func (x *MTRUnitTestingClusterSimpleStruct) SetA(a *foundation.NSNumber) {
+	x.inner.SetA(a)
+}
+
+// B calls the underlying B.
+func (x *MTRUnitTestingClusterSimpleStruct) B() *foundation.NSNumber {
+	return x.inner.B()
+}
+
+// SetB calls the underlying SetB.
+func (x *MTRUnitTestingClusterSimpleStruct) SetB(b *foundation.NSNumber) {
+	x.inner.SetB(b)
+}
+
+// C calls the underlying C.
+func (x *MTRUnitTestingClusterSimpleStruct) C() *foundation.NSNumber {
+	return x.inner.C()
+}
+
+// SetC calls the underlying SetC.
+func (x *MTRUnitTestingClusterSimpleStruct) SetC(c *foundation.NSNumber) {
+	x.inner.SetC(c)
+}
+
+// D calls the underlying D.
+func (x *MTRUnitTestingClusterSimpleStruct) D() *foundation.NSData {
+	return x.inner.D()
+}
+
+// SetD calls the underlying SetD.
+func (x *MTRUnitTestingClusterSimpleStruct) SetD(d *foundation.NSData) {
+	x.inner.SetD(d)
+}
+
+// E calls the underlying E.
+func (x *MTRUnitTestingClusterSimpleStruct) E() string {
+	_r := x.inner.E()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetE calls the underlying SetE.
+func (x *MTRUnitTestingClusterSimpleStruct) SetE(e string) {
+	x.inner.SetE(foundation.NSStringStringWithUTF8String(e))
+}
+
+// F calls the underlying F.
+func (x *MTRUnitTestingClusterSimpleStruct) F() *foundation.NSNumber {
+	return x.inner.F()
+}
+
+// SetF calls the underlying SetF.
+func (x *MTRUnitTestingClusterSimpleStruct) SetF(f *foundation.NSNumber) {
+	x.inner.SetF(f)
+}
+
+// G calls the underlying G.
+func (x *MTRUnitTestingClusterSimpleStruct) G() *foundation.NSNumber {
+	return x.inner.G()
+}
+
+// SetG calls the underlying SetG.
+func (x *MTRUnitTestingClusterSimpleStruct) SetG(g *foundation.NSNumber) {
+	x.inner.SetG(g)
+}
+
+// H calls the underlying H.
+func (x *MTRUnitTestingClusterSimpleStruct) H() *foundation.NSNumber {
+	return x.inner.H()
+}
+
+// SetH calls the underlying SetH.
+func (x *MTRUnitTestingClusterSimpleStruct) SetH(h *foundation.NSNumber) {
+	x.inner.SetH(h)
+}
+
 func (x *MTRUnitTestingClusterSimpleStruct) asMTRUnitTestingClusterSimpleStruct() *raw.MTRUnitTestingClusterSimpleStruct { return x.inner }
+
+// MTRUnitTestingClusterSimpleStructable is the interface implemented by [MTRUnitTestingClusterSimpleStruct], for mocking and DI.
+type MTRUnitTestingClusterSimpleStructable interface {
+	Unwrap() *raw.MTRUnitTestingClusterSimpleStruct
+	WithA(a *foundation.NSNumber) *MTRUnitTestingClusterSimpleStruct
+	WithB(b *foundation.NSNumber) *MTRUnitTestingClusterSimpleStruct
+	WithC(c *foundation.NSNumber) *MTRUnitTestingClusterSimpleStruct
+	WithD(d *foundation.NSData) *MTRUnitTestingClusterSimpleStruct
+	WithE(e string) *MTRUnitTestingClusterSimpleStruct
+	WithF(f *foundation.NSNumber) *MTRUnitTestingClusterSimpleStruct
+	WithG(g *foundation.NSNumber) *MTRUnitTestingClusterSimpleStruct
+	WithH(h *foundation.NSNumber) *MTRUnitTestingClusterSimpleStruct
+	A() *foundation.NSNumber
+	SetA(a *foundation.NSNumber)
+	B() *foundation.NSNumber
+	SetB(b *foundation.NSNumber)
+	C() *foundation.NSNumber
+	SetC(c *foundation.NSNumber)
+	D() *foundation.NSData
+	SetD(d *foundation.NSData)
+	E() string
+	SetE(e string)
+	F() *foundation.NSNumber
+	SetF(f *foundation.NSNumber)
+	G() *foundation.NSNumber
+	SetG(g *foundation.NSNumber)
+	H() *foundation.NSNumber
+	SetH(h *foundation.NSNumber)
+}
+
+var _ MTRUnitTestingClusterSimpleStructable = (*MTRUnitTestingClusterSimpleStruct)(nil)
 

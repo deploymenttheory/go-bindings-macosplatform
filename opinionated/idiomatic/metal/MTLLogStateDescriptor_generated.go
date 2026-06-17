@@ -35,3 +35,36 @@ func (x *LogStateDescriptor) WithBufferSize(bufferSize int) *LogStateDescriptor 
 	return x
 }
 
+// Level calls the underlying Level.
+func (x *LogStateDescriptor) Level() raw.MTLLogLevel {
+	return x.inner.Level()
+}
+
+// SetLevel calls the underlying SetLevel.
+func (x *LogStateDescriptor) SetLevel(level raw.MTLLogLevel) {
+	x.inner.SetLevel(level)
+}
+
+// BufferSize calls the underlying BufferSize.
+func (x *LogStateDescriptor) BufferSize() int {
+	return x.inner.BufferSize()
+}
+
+// SetBufferSize calls the underlying SetBufferSize.
+func (x *LogStateDescriptor) SetBufferSize(bufferSize int) {
+	x.inner.SetBufferSize(bufferSize)
+}
+
+// LogStateDescriptorable is the interface implemented by [LogStateDescriptor], for mocking and DI.
+type LogStateDescriptorable interface {
+	Unwrap() *raw.MTLLogStateDescriptor
+	WithLevel(level raw.MTLLogLevel) *LogStateDescriptor
+	WithBufferSize(bufferSize int) *LogStateDescriptor
+	Level() raw.MTLLogLevel
+	SetLevel(level raw.MTLLogLevel)
+	BufferSize() int
+	SetBufferSize(bufferSize int)
+}
+
+var _ LogStateDescriptorable = (*LogStateDescriptor)(nil)
+

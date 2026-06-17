@@ -34,7 +34,26 @@ func NewTimedMetadataGroupWithSampleBuffer(sampleBuffer unsafe.Pointer) *TimedMe
 	return &TimedMetadataGroup{inner: raw.AVTimedMetadataGroupFromID(_id)}
 }
 
+// TimeRange calls the underlying TimeRange.
+func (x *TimedMetadataGroup) TimeRange() coremedia.CMTimeRange {
+	return x.inner.TimeRange()
+}
+
+// CopyFormatDescription calls the underlying CopyFormatDescription.
+func (x *TimedMetadataGroup) CopyFormatDescription() unsafe.Pointer {
+	return x.inner.CopyFormatDescription()
+}
+
 func (x *TimedMetadataGroup) asTimedMetadataGroup() *raw.AVTimedMetadataGroup { return x.inner }
 
 func (x *TimedMetadataGroup) asMetadataGroup() *raw.AVMetadataGroup { return &x.inner.AVMetadataGroup }
+
+// TimedMetadataGroupable is the interface implemented by [TimedMetadataGroup], for mocking and DI.
+type TimedMetadataGroupable interface {
+	Unwrap() *raw.AVTimedMetadataGroup
+	TimeRange() coremedia.CMTimeRange
+	CopyFormatDescription() unsafe.Pointer
+}
+
+var _ TimedMetadataGroupable = (*TimedMetadataGroup)(nil)
 

@@ -6,6 +6,7 @@ package metal
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,27 @@ func NewSharedTextureHandle() *SharedTextureHandle {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLSharedTextureHandle")), objc.RegisterName("new"))
 	return &SharedTextureHandle{inner: raw.MTLSharedTextureHandleFromID(_id)}
 }
+
+// Device calls the underlying Device.
+func (x *SharedTextureHandle) Device() raw.MTLDevice {
+	return x.inner.Device()
+}
+
+// Label calls the underlying Label.
+func (x *SharedTextureHandle) Label() string {
+	_r := x.inner.Label()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SharedTextureHandleable is the interface implemented by [SharedTextureHandle], for mocking and DI.
+type SharedTextureHandleable interface {
+	Unwrap() *raw.MTLSharedTextureHandle
+	Device() raw.MTLDevice
+	Label() string
+}
+
+var _ SharedTextureHandleable = (*SharedTextureHandle)(nil)
 

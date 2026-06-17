@@ -29,3 +29,10 @@ func (x *UnitInformationStorage) asUnit() *raw.NSUnit { return &x.inner.NSDimens
 
 func (x *UnitInformationStorage) asObject() *raw.NSObject { return &x.inner.NSDimension.NSUnit.NSObject }
 
+// UnitInformationStorageable is the interface implemented by [UnitInformationStorage], for mocking and DI.
+type UnitInformationStorageable interface {
+	Unwrap() *raw.NSUnitInformationStorage
+}
+
+var _ UnitInformationStorageable = (*UnitInformationStorage)(nil)
+

@@ -5,7 +5,9 @@
 package webkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +24,27 @@ func NewWKBackForwardListItem() *WKBackForwardListItem {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("WKBackForwardListItem")), objc.RegisterName("new"))
 	return &WKBackForwardListItem{inner: raw.WKBackForwardListItemFromID(_id)}
 }
+
+// URL calls the underlying URL.
+func (x *WKBackForwardListItem) URL() *foundation.NSURL {
+	return x.inner.URL()
+}
+
+// Title calls the underlying Title.
+func (x *WKBackForwardListItem) Title() string {
+	_r := x.inner.Title()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// WKBackForwardListItemable is the interface implemented by [WKBackForwardListItem], for mocking and DI.
+type WKBackForwardListItemable interface {
+	Unwrap() *raw.WKBackForwardListItem
+	URL() *foundation.NSURL
+	Title() string
+}
+
+var _ WKBackForwardListItemable = (*WKBackForwardListItem)(nil)
 

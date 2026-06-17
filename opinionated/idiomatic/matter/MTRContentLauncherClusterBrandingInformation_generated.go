@@ -25,3 +25,10 @@ func NewMTRContentLauncherClusterBrandingInformation() *MTRContentLauncherCluste
 
 func (x *MTRContentLauncherClusterBrandingInformation) asMTRContentLauncherClusterBrandingInformationStruct() *raw.MTRContentLauncherClusterBrandingInformationStruct { return &x.inner.MTRContentLauncherClusterBrandingInformationStruct }
 
+// MTRContentLauncherClusterBrandingInformationable is the interface implemented by [MTRContentLauncherClusterBrandingInformation], for mocking and DI.
+type MTRContentLauncherClusterBrandingInformationable interface {
+	Unwrap() *raw.MTRContentLauncherClusterBrandingInformation
+}
+
+var _ MTRContentLauncherClusterBrandingInformationable = (*MTRContentLauncherClusterBrandingInformation)(nil)
+

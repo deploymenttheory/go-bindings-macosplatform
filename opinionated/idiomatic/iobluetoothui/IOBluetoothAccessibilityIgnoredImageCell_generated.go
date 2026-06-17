@@ -23,3 +23,10 @@ func NewBluetoothAccessibilityIgnoredImageCell() *BluetoothAccessibilityIgnoredI
 	return &BluetoothAccessibilityIgnoredImageCell{inner: raw.IOBluetoothAccessibilityIgnoredImageCellFromID(_id)}
 }
 
+// BluetoothAccessibilityIgnoredImageCellable is the interface implemented by [BluetoothAccessibilityIgnoredImageCell], for mocking and DI.
+type BluetoothAccessibilityIgnoredImageCellable interface {
+	Unwrap() *raw.IOBluetoothAccessibilityIgnoredImageCell
+}
+
+var _ BluetoothAccessibilityIgnoredImageCellable = (*BluetoothAccessibilityIgnoredImageCell)(nil)
+

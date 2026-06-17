@@ -32,6 +32,55 @@ func NewDOMUIEventUIEvent(type_ string, canBubble bool, cancelable bool, view *r
 	return &DOMUIEvent{inner: raw.DOMUIEventFromID(_id)}
 }
 
+// View calls the underlying View.
+func (x *DOMUIEvent) View() *DOMAbstractView {
+	_r := x.inner.View()
+	if _r == nil {
+		return nil
+	}
+	return &DOMAbstractView{inner: _r}
+}
+
+// Detail calls the underlying Detail.
+func (x *DOMUIEvent) Detail() int {
+	return x.inner.Detail()
+}
+
+// KeyCode calls the underlying KeyCode.
+func (x *DOMUIEvent) KeyCode() int {
+	return x.inner.KeyCode()
+}
+
+// CharCode calls the underlying CharCode.
+func (x *DOMUIEvent) CharCode() int {
+	return x.inner.CharCode()
+}
+
+// LayerX calls the underlying LayerX.
+func (x *DOMUIEvent) LayerX() int {
+	return x.inner.LayerX()
+}
+
+// LayerY calls the underlying LayerY.
+func (x *DOMUIEvent) LayerY() int {
+	return x.inner.LayerY()
+}
+
+// PageX calls the underlying PageX.
+func (x *DOMUIEvent) PageX() int {
+	return x.inner.PageX()
+}
+
+// PageY calls the underlying PageY.
+func (x *DOMUIEvent) PageY() int {
+	return x.inner.PageY()
+}
+
+// Which calls the underlying Which.
+func (x *DOMUIEvent) Which() int {
+	return x.inner.Which()
+}
+
 func (x *DOMUIEvent) asDOMUIEvent() *raw.DOMUIEvent { return x.inner }
 
 func (x *DOMUIEvent) asDOMEvent() *raw.DOMEvent { return &x.inner.DOMEvent }
@@ -39,4 +88,20 @@ func (x *DOMUIEvent) asDOMEvent() *raw.DOMEvent { return &x.inner.DOMEvent }
 func (x *DOMUIEvent) asDOMObject() *raw.DOMObject { return &x.inner.DOMEvent.DOMObject }
 
 func (x *DOMUIEvent) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMEvent.DOMObject.WebScriptObject }
+
+// DOMUIEventable is the interface implemented by [DOMUIEvent], for mocking and DI.
+type DOMUIEventable interface {
+	Unwrap() *raw.DOMUIEvent
+	View() *DOMAbstractView
+	Detail() int
+	KeyCode() int
+	CharCode() int
+	LayerX() int
+	LayerY() int
+	PageX() int
+	PageY() int
+	Which() int
+}
+
+var _ DOMUIEventable = (*DOMUIEvent)(nil)
 

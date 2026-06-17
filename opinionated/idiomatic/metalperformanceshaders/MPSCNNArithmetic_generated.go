@@ -5,10 +5,12 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // CNNArithmetic wraps [raw.MPSCNNArithmetic] with a fluent Go API.
@@ -67,7 +69,117 @@ func (x *CNNArithmetic) WithMaximumValue(maximumValue float32) *CNNArithmetic {
 	return x
 }
 
+// EncodeToCommandBufferPrimaryImageSecondaryImageDestinationStateDestinationImage calls the underlying EncodeToCommandBufferPrimaryImageSecondaryImageDestinationStateDestinationImage.
+func (x *CNNArithmetic) EncodeToCommandBufferPrimaryImageSecondaryImageDestinationStateDestinationImage(commandBuffer metal.MTLCommandBuffer, primaryImage *mpscore.MPSImage, secondaryImage *mpscore.MPSImage, destinationState *mpsneuralnetwork.MPSCNNArithmeticGradientState, destinationImage *mpscore.MPSImage) {
+	x.inner.EncodeToCommandBufferPrimaryImageSecondaryImageDestinationStateDestinationImage(commandBuffer, primaryImage, secondaryImage, destinationState, destinationImage)
+}
+
+// EncodeBatchToCommandBufferPrimaryImagesSecondaryImagesDestinationStatesDestinationImages calls the underlying EncodeBatchToCommandBufferPrimaryImagesSecondaryImagesDestinationStatesDestinationImages.
+func (x *CNNArithmetic) EncodeBatchToCommandBufferPrimaryImagesSecondaryImagesDestinationStatesDestinationImages(commandBuffer metal.MTLCommandBuffer, primaryImages unsafe.Pointer, secondaryImages unsafe.Pointer, destinationStates unsafe.Pointer, destinationImages unsafe.Pointer) {
+	x.inner.EncodeBatchToCommandBufferPrimaryImagesSecondaryImagesDestinationStatesDestinationImages(commandBuffer, primaryImages, secondaryImages, destinationStates, destinationImages)
+}
+
+// PrimaryScale calls the underlying PrimaryScale.
+func (x *CNNArithmetic) PrimaryScale() float32 {
+	return x.inner.PrimaryScale()
+}
+
+// SetPrimaryScale calls the underlying SetPrimaryScale.
+func (x *CNNArithmetic) SetPrimaryScale(primaryScale float32) {
+	x.inner.SetPrimaryScale(primaryScale)
+}
+
+// SecondaryScale calls the underlying SecondaryScale.
+func (x *CNNArithmetic) SecondaryScale() float32 {
+	return x.inner.SecondaryScale()
+}
+
+// SetSecondaryScale calls the underlying SetSecondaryScale.
+func (x *CNNArithmetic) SetSecondaryScale(secondaryScale float32) {
+	x.inner.SetSecondaryScale(secondaryScale)
+}
+
+// Bias calls the underlying Bias.
+func (x *CNNArithmetic) Bias() float32 {
+	return x.inner.Bias()
+}
+
+// SetBias calls the underlying SetBias.
+func (x *CNNArithmetic) SetBias(bias float32) {
+	x.inner.SetBias(bias)
+}
+
+// PrimaryStrideInFeatureChannels calls the underlying PrimaryStrideInFeatureChannels.
+func (x *CNNArithmetic) PrimaryStrideInFeatureChannels() uint {
+	return x.inner.PrimaryStrideInFeatureChannels()
+}
+
+// SetPrimaryStrideInFeatureChannels calls the underlying SetPrimaryStrideInFeatureChannels.
+func (x *CNNArithmetic) SetPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels uint) {
+	x.inner.SetPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels)
+}
+
+// SecondaryStrideInFeatureChannels calls the underlying SecondaryStrideInFeatureChannels.
+func (x *CNNArithmetic) SecondaryStrideInFeatureChannels() uint {
+	return x.inner.SecondaryStrideInFeatureChannels()
+}
+
+// SetSecondaryStrideInFeatureChannels calls the underlying SetSecondaryStrideInFeatureChannels.
+func (x *CNNArithmetic) SetSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels uint) {
+	x.inner.SetSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels)
+}
+
+// MinimumValue calls the underlying MinimumValue.
+func (x *CNNArithmetic) MinimumValue() float32 {
+	return x.inner.MinimumValue()
+}
+
+// SetMinimumValue calls the underlying SetMinimumValue.
+func (x *CNNArithmetic) SetMinimumValue(minimumValue float32) {
+	x.inner.SetMinimumValue(minimumValue)
+}
+
+// MaximumValue calls the underlying MaximumValue.
+func (x *CNNArithmetic) MaximumValue() float32 {
+	return x.inner.MaximumValue()
+}
+
+// SetMaximumValue calls the underlying SetMaximumValue.
+func (x *CNNArithmetic) SetMaximumValue(maximumValue float32) {
+	x.inner.SetMaximumValue(maximumValue)
+}
+
 func (x *CNNArithmetic) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel { return &x.inner.MPSCNNBinaryKernel }
 
 func (x *CNNArithmetic) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNBinaryKernel.MPSKernel }
+
+// CNNArithmeticable is the interface implemented by [CNNArithmetic], for mocking and DI.
+type CNNArithmeticable interface {
+	Unwrap() *raw.MPSCNNArithmetic
+	WithPrimaryScale(primaryScale float32) *CNNArithmetic
+	WithSecondaryScale(secondaryScale float32) *CNNArithmetic
+	WithBias(bias float32) *CNNArithmetic
+	WithPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels uint) *CNNArithmetic
+	WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels uint) *CNNArithmetic
+	WithMinimumValue(minimumValue float32) *CNNArithmetic
+	WithMaximumValue(maximumValue float32) *CNNArithmetic
+	EncodeToCommandBufferPrimaryImageSecondaryImageDestinationStateDestinationImage(commandBuffer metal.MTLCommandBuffer, primaryImage *mpscore.MPSImage, secondaryImage *mpscore.MPSImage, destinationState *mpsneuralnetwork.MPSCNNArithmeticGradientState, destinationImage *mpscore.MPSImage)
+	EncodeBatchToCommandBufferPrimaryImagesSecondaryImagesDestinationStatesDestinationImages(commandBuffer metal.MTLCommandBuffer, primaryImages unsafe.Pointer, secondaryImages unsafe.Pointer, destinationStates unsafe.Pointer, destinationImages unsafe.Pointer)
+	PrimaryScale() float32
+	SetPrimaryScale(primaryScale float32)
+	SecondaryScale() float32
+	SetSecondaryScale(secondaryScale float32)
+	Bias() float32
+	SetBias(bias float32)
+	PrimaryStrideInFeatureChannels() uint
+	SetPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels uint)
+	SecondaryStrideInFeatureChannels() uint
+	SetSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels uint)
+	MinimumValue() float32
+	SetMinimumValue(minimumValue float32)
+	MaximumValue() float32
+	SetMaximumValue(maximumValue float32)
+}
+
+var _ CNNArithmeticable = (*CNNArithmetic)(nil)
 

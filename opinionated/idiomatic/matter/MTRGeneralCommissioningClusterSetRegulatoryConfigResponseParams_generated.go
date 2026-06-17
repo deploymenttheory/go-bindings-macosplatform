@@ -49,3 +49,53 @@ func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams) WithTi
 	return x
 }
 
+// ErrorCode calls the underlying ErrorCode.
+func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams) ErrorCode() *foundation.NSNumber {
+	return x.inner.ErrorCode()
+}
+
+// SetErrorCode calls the underlying SetErrorCode.
+func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams) SetErrorCode(errorCode *foundation.NSNumber) {
+	x.inner.SetErrorCode(errorCode)
+}
+
+// DebugText calls the underlying DebugText.
+func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams) DebugText() string {
+	_r := x.inner.DebugText()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetDebugText calls the underlying SetDebugText.
+func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams) SetDebugText(debugText string) {
+	x.inner.SetDebugText(foundation.NSStringStringWithUTF8String(debugText))
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParamsable is the interface implemented by [MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams], for mocking and DI.
+type MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParamsable interface {
+	Unwrap() *raw.MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams
+	WithErrorCode(errorCode *foundation.NSNumber) *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams
+	WithDebugText(debugText string) *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams
+	ErrorCode() *foundation.NSNumber
+	SetErrorCode(errorCode *foundation.NSNumber)
+	DebugText() string
+	SetDebugText(debugText string)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+}
+
+var _ MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParamsable = (*MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams)(nil)
+

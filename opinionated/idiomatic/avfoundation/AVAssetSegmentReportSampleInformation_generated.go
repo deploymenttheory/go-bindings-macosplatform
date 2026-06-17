@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,35 @@ func NewAssetSegmentReportSampleInformation() *AssetSegmentReportSampleInformati
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAssetSegmentReportSampleInformation")), objc.RegisterName("new"))
 	return &AssetSegmentReportSampleInformation{inner: raw.AVAssetSegmentReportSampleInformationFromID(_id)}
 }
+
+// PresentationTimeStamp calls the underlying PresentationTimeStamp.
+func (x *AssetSegmentReportSampleInformation) PresentationTimeStamp() coremedia.CMTime {
+	return x.inner.PresentationTimeStamp()
+}
+
+// Offset calls the underlying Offset.
+func (x *AssetSegmentReportSampleInformation) Offset() int {
+	return x.inner.Offset()
+}
+
+// Length calls the underlying Length.
+func (x *AssetSegmentReportSampleInformation) Length() int {
+	return x.inner.Length()
+}
+
+// IsSyncSample calls the underlying IsSyncSample.
+func (x *AssetSegmentReportSampleInformation) IsSyncSample() bool {
+	return x.inner.IsSyncSample()
+}
+
+// AssetSegmentReportSampleInformationable is the interface implemented by [AssetSegmentReportSampleInformation], for mocking and DI.
+type AssetSegmentReportSampleInformationable interface {
+	Unwrap() *raw.AVAssetSegmentReportSampleInformation
+	PresentationTimeStamp() coremedia.CMTime
+	Offset() int
+	Length() int
+	IsSyncSample() bool
+}
+
+var _ AssetSegmentReportSampleInformationable = (*AssetSegmentReportSampleInformation)(nil)
 

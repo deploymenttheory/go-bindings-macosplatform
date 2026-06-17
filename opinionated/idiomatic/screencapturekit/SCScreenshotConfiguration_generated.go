@@ -98,3 +98,166 @@ func (x *ScreenshotConfiguration) WithFileURL(fileURL string) *ScreenshotConfigu
 	return x
 }
 
+// Width calls the underlying Width.
+func (x *ScreenshotConfiguration) Width() int {
+	return x.inner.Width()
+}
+
+// SetWidth calls the underlying SetWidth.
+func (x *ScreenshotConfiguration) SetWidth(width int) {
+	x.inner.SetWidth(width)
+}
+
+// Height calls the underlying Height.
+func (x *ScreenshotConfiguration) Height() int {
+	return x.inner.Height()
+}
+
+// SetHeight calls the underlying SetHeight.
+func (x *ScreenshotConfiguration) SetHeight(height int) {
+	x.inner.SetHeight(height)
+}
+
+// ShowsCursor calls the underlying ShowsCursor.
+func (x *ScreenshotConfiguration) ShowsCursor() bool {
+	return x.inner.ShowsCursor()
+}
+
+// SetShowsCursor calls the underlying SetShowsCursor.
+func (x *ScreenshotConfiguration) SetShowsCursor(showsCursor bool) {
+	x.inner.SetShowsCursor(showsCursor)
+}
+
+// SourceRect calls the underlying SourceRect.
+func (x *ScreenshotConfiguration) SourceRect() corefoundation.CGRect {
+	return x.inner.SourceRect()
+}
+
+// SetSourceRect calls the underlying SetSourceRect.
+func (x *ScreenshotConfiguration) SetSourceRect(sourceRect corefoundation.CGRect) {
+	x.inner.SetSourceRect(sourceRect)
+}
+
+// DestinationRect calls the underlying DestinationRect.
+func (x *ScreenshotConfiguration) DestinationRect() corefoundation.CGRect {
+	return x.inner.DestinationRect()
+}
+
+// SetDestinationRect calls the underlying SetDestinationRect.
+func (x *ScreenshotConfiguration) SetDestinationRect(destinationRect corefoundation.CGRect) {
+	x.inner.SetDestinationRect(destinationRect)
+}
+
+// IgnoreShadows calls the underlying IgnoreShadows.
+func (x *ScreenshotConfiguration) IgnoreShadows() bool {
+	return x.inner.IgnoreShadows()
+}
+
+// SetIgnoreShadows calls the underlying SetIgnoreShadows.
+func (x *ScreenshotConfiguration) SetIgnoreShadows(ignoreShadows bool) {
+	x.inner.SetIgnoreShadows(ignoreShadows)
+}
+
+// IgnoreClipping calls the underlying IgnoreClipping.
+func (x *ScreenshotConfiguration) IgnoreClipping() bool {
+	return x.inner.IgnoreClipping()
+}
+
+// SetIgnoreClipping calls the underlying SetIgnoreClipping.
+func (x *ScreenshotConfiguration) SetIgnoreClipping(ignoreClipping bool) {
+	x.inner.SetIgnoreClipping(ignoreClipping)
+}
+
+// IncludeChildWindows calls the underlying IncludeChildWindows.
+func (x *ScreenshotConfiguration) IncludeChildWindows() bool {
+	return x.inner.IncludeChildWindows()
+}
+
+// SetIncludeChildWindows calls the underlying SetIncludeChildWindows.
+func (x *ScreenshotConfiguration) SetIncludeChildWindows(includeChildWindows bool) {
+	x.inner.SetIncludeChildWindows(includeChildWindows)
+}
+
+// DisplayIntent calls the underlying DisplayIntent.
+func (x *ScreenshotConfiguration) DisplayIntent() raw.SCScreenshotDisplayIntent {
+	return x.inner.DisplayIntent()
+}
+
+// SetDisplayIntent calls the underlying SetDisplayIntent.
+func (x *ScreenshotConfiguration) SetDisplayIntent(displayIntent raw.SCScreenshotDisplayIntent) {
+	x.inner.SetDisplayIntent(displayIntent)
+}
+
+// DynamicRange calls the underlying DynamicRange.
+func (x *ScreenshotConfiguration) DynamicRange() raw.SCScreenshotDynamicRange {
+	return x.inner.DynamicRange()
+}
+
+// SetDynamicRange calls the underlying SetDynamicRange.
+func (x *ScreenshotConfiguration) SetDynamicRange(dynamicRange raw.SCScreenshotDynamicRange) {
+	x.inner.SetDynamicRange(dynamicRange)
+}
+
+// ContentType calls the underlying ContentType.
+func (x *ScreenshotConfiguration) ContentType() *uniformtypeidentifiers.UTType {
+	return x.inner.ContentType()
+}
+
+// SetContentType calls the underlying SetContentType.
+func (x *ScreenshotConfiguration) SetContentType(contentType *uniformtypeidentifiers.UTType) {
+	x.inner.SetContentType(contentType)
+}
+
+// FileURL calls the underlying FileURL.
+func (x *ScreenshotConfiguration) FileURL() *foundation.NSURL {
+	return x.inner.FileURL()
+}
+
+// SetFileURL calls the underlying SetFileURL.
+func (x *ScreenshotConfiguration) SetFileURL(fileURL string) {
+	x.inner.SetFileURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)))
+}
+
+// ScreenshotConfigurationable is the interface implemented by [ScreenshotConfiguration], for mocking and DI.
+type ScreenshotConfigurationable interface {
+	Unwrap() *raw.SCScreenshotConfiguration
+	WithWidth(width int) *ScreenshotConfiguration
+	WithHeight(height int) *ScreenshotConfiguration
+	WithShowsCursor(showsCursor bool) *ScreenshotConfiguration
+	WithSourceRect(sourceRect corefoundation.CGRect) *ScreenshotConfiguration
+	WithDestinationRect(destinationRect corefoundation.CGRect) *ScreenshotConfiguration
+	WithIgnoreShadows(ignoreShadows bool) *ScreenshotConfiguration
+	WithIgnoreClipping(ignoreClipping bool) *ScreenshotConfiguration
+	WithIncludeChildWindows(includeChildWindows bool) *ScreenshotConfiguration
+	WithDisplayIntent(displayIntent raw.SCScreenshotDisplayIntent) *ScreenshotConfiguration
+	WithDynamicRange(dynamicRange raw.SCScreenshotDynamicRange) *ScreenshotConfiguration
+	WithContentType(contentType *uniformtypeidentifiers.UTType) *ScreenshotConfiguration
+	WithFileURL(fileURL string) *ScreenshotConfiguration
+	Width() int
+	SetWidth(width int)
+	Height() int
+	SetHeight(height int)
+	ShowsCursor() bool
+	SetShowsCursor(showsCursor bool)
+	SourceRect() corefoundation.CGRect
+	SetSourceRect(sourceRect corefoundation.CGRect)
+	DestinationRect() corefoundation.CGRect
+	SetDestinationRect(destinationRect corefoundation.CGRect)
+	IgnoreShadows() bool
+	SetIgnoreShadows(ignoreShadows bool)
+	IgnoreClipping() bool
+	SetIgnoreClipping(ignoreClipping bool)
+	IncludeChildWindows() bool
+	SetIncludeChildWindows(includeChildWindows bool)
+	DisplayIntent() raw.SCScreenshotDisplayIntent
+	SetDisplayIntent(displayIntent raw.SCScreenshotDisplayIntent)
+	DynamicRange() raw.SCScreenshotDynamicRange
+	SetDynamicRange(dynamicRange raw.SCScreenshotDynamicRange)
+	ContentType() *uniformtypeidentifiers.UTType
+	SetContentType(contentType *uniformtypeidentifiers.UTType)
+	FileURL() *foundation.NSURL
+	SetFileURL(fileURL string)
+}
+
+var _ ScreenshotConfigurationable = (*ScreenshotConfiguration)(nil)
+

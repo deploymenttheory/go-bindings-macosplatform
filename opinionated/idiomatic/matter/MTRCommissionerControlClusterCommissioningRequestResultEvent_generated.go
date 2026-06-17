@@ -48,3 +48,62 @@ func (x *MTRCommissionerControlClusterCommissioningRequestResultEvent) WithFabri
 	return x
 }
 
+// RequestID calls the underlying RequestID.
+func (x *MTRCommissionerControlClusterCommissioningRequestResultEvent) RequestID() *foundation.NSNumber {
+	return x.inner.RequestID()
+}
+
+// SetRequestID calls the underlying SetRequestID.
+func (x *MTRCommissionerControlClusterCommissioningRequestResultEvent) SetRequestID(requestID *foundation.NSNumber) {
+	x.inner.SetRequestID(requestID)
+}
+
+// ClientNodeID calls the underlying ClientNodeID.
+func (x *MTRCommissionerControlClusterCommissioningRequestResultEvent) ClientNodeID() *foundation.NSNumber {
+	return x.inner.ClientNodeID()
+}
+
+// SetClientNodeID calls the underlying SetClientNodeID.
+func (x *MTRCommissionerControlClusterCommissioningRequestResultEvent) SetClientNodeID(clientNodeID *foundation.NSNumber) {
+	x.inner.SetClientNodeID(clientNodeID)
+}
+
+// StatusCode calls the underlying StatusCode.
+func (x *MTRCommissionerControlClusterCommissioningRequestResultEvent) StatusCode() *foundation.NSNumber {
+	return x.inner.StatusCode()
+}
+
+// SetStatusCode calls the underlying SetStatusCode.
+func (x *MTRCommissionerControlClusterCommissioningRequestResultEvent) SetStatusCode(statusCode *foundation.NSNumber) {
+	x.inner.SetStatusCode(statusCode)
+}
+
+// FabricIndex calls the underlying FabricIndex.
+func (x *MTRCommissionerControlClusterCommissioningRequestResultEvent) FabricIndex() *foundation.NSNumber {
+	return x.inner.FabricIndex()
+}
+
+// SetFabricIndex calls the underlying SetFabricIndex.
+func (x *MTRCommissionerControlClusterCommissioningRequestResultEvent) SetFabricIndex(fabricIndex *foundation.NSNumber) {
+	x.inner.SetFabricIndex(fabricIndex)
+}
+
+// MTRCommissionerControlClusterCommissioningRequestResultEventable is the interface implemented by [MTRCommissionerControlClusterCommissioningRequestResultEvent], for mocking and DI.
+type MTRCommissionerControlClusterCommissioningRequestResultEventable interface {
+	Unwrap() *raw.MTRCommissionerControlClusterCommissioningRequestResultEvent
+	WithRequestID(requestID *foundation.NSNumber) *MTRCommissionerControlClusterCommissioningRequestResultEvent
+	WithClientNodeID(clientNodeID *foundation.NSNumber) *MTRCommissionerControlClusterCommissioningRequestResultEvent
+	WithStatusCode(statusCode *foundation.NSNumber) *MTRCommissionerControlClusterCommissioningRequestResultEvent
+	WithFabricIndex(fabricIndex *foundation.NSNumber) *MTRCommissionerControlClusterCommissioningRequestResultEvent
+	RequestID() *foundation.NSNumber
+	SetRequestID(requestID *foundation.NSNumber)
+	ClientNodeID() *foundation.NSNumber
+	SetClientNodeID(clientNodeID *foundation.NSNumber)
+	StatusCode() *foundation.NSNumber
+	SetStatusCode(statusCode *foundation.NSNumber)
+	FabricIndex() *foundation.NSNumber
+	SetFabricIndex(fabricIndex *foundation.NSNumber)
+}
+
+var _ MTRCommissionerControlClusterCommissioningRequestResultEventable = (*MTRCommissionerControlClusterCommissioningRequestResultEvent)(nil)
+

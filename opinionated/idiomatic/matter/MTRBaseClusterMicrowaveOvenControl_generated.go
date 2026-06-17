@@ -5,9 +5,12 @@
 package matter
 
 import (
+	"context"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // MTRBaseClusterMicrowaveOvenControl wraps [raw.MTRBaseClusterMicrowaveOvenControl] with a fluent Go API.
@@ -25,7 +28,518 @@ func NewMTRBaseClusterMicrowaveOvenControlWithDeviceEndpointIDQueue(device *raw.
 	return &MTRBaseClusterMicrowaveOvenControl{inner: raw.MTRBaseClusterMicrowaveOvenControlFromID(_id)}
 }
 
+// SetCookingParametersWithParamsCompletion calls the underlying SetCookingParametersWithParamsCompletion.
+func (x *MTRBaseClusterMicrowaveOvenControl) SetCookingParametersWithParamsCompletion(params *raw.MTRMicrowaveOvenControlClusterSetCookingParametersParams, completion func(unsafe.Pointer)) {
+	x.inner.SetCookingParametersWithParamsCompletion(params, completion)
+}
+
+// SetCookingParametersWithCompletion calls the underlying SetCookingParametersWithCompletion.
+func (x *MTRBaseClusterMicrowaveOvenControl) SetCookingParametersWithCompletion(completion func(unsafe.Pointer)) {
+	x.inner.SetCookingParametersWithCompletion(completion)
+}
+
+// AddMoreTimeWithParamsCompletion calls the underlying AddMoreTimeWithParamsCompletion.
+func (x *MTRBaseClusterMicrowaveOvenControl) AddMoreTimeWithParamsCompletion(params *raw.MTRMicrowaveOvenControlClusterAddMoreTimeParams, completion func(unsafe.Pointer)) {
+	x.inner.AddMoreTimeWithParamsCompletion(params, completion)
+}
+
+// ReadAttributeCookTimeWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterMicrowaveOvenControl) ReadAttributeCookTimeWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeCookTimeWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// SubscribeAttributeCookTimeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterMicrowaveOvenControl) SubscribeAttributeCookTimeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeCookTimeWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeMaxCookTimeWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterMicrowaveOvenControl) ReadAttributeMaxCookTimeWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeMaxCookTimeWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// SubscribeAttributeMaxCookTimeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterMicrowaveOvenControl) SubscribeAttributeMaxCookTimeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeMaxCookTimeWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributePowerSettingWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterMicrowaveOvenControl) ReadAttributePowerSettingWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributePowerSettingWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// SubscribeAttributePowerSettingWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterMicrowaveOvenControl) SubscribeAttributePowerSettingWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributePowerSettingWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeMinPowerWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterMicrowaveOvenControl) ReadAttributeMinPowerWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeMinPowerWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// SubscribeAttributeMinPowerWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterMicrowaveOvenControl) SubscribeAttributeMinPowerWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeMinPowerWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeMaxPowerWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterMicrowaveOvenControl) ReadAttributeMaxPowerWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeMaxPowerWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// SubscribeAttributeMaxPowerWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterMicrowaveOvenControl) SubscribeAttributeMaxPowerWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeMaxPowerWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributePowerStepWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterMicrowaveOvenControl) ReadAttributePowerStepWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributePowerStepWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// SubscribeAttributePowerStepWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterMicrowaveOvenControl) SubscribeAttributePowerStepWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributePowerStepWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeWattRatingWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterMicrowaveOvenControl) ReadAttributeWattRatingWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeWattRatingWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// SubscribeAttributeWattRatingWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterMicrowaveOvenControl) SubscribeAttributeWattRatingWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeWattRatingWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeGeneratedCommandListWithCompletion calls the underlying ReadAttributeGeneratedCommandListWithCompletion.
+func (x *MTRBaseClusterMicrowaveOvenControl) ReadAttributeGeneratedCommandListWithCompletion(completion objc.Block) {
+	x.inner.ReadAttributeGeneratedCommandListWithCompletion(completion)
+}
+
+// SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler calls the underlying SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler.
+func (x *MTRBaseClusterMicrowaveOvenControl) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block) {
+	x.inner.SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, reportHandler)
+}
+
+// ReadAttributeAcceptedCommandListWithCompletion calls the underlying ReadAttributeAcceptedCommandListWithCompletion.
+func (x *MTRBaseClusterMicrowaveOvenControl) ReadAttributeAcceptedCommandListWithCompletion(completion objc.Block) {
+	x.inner.ReadAttributeAcceptedCommandListWithCompletion(completion)
+}
+
+// SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler calls the underlying SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler.
+func (x *MTRBaseClusterMicrowaveOvenControl) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block) {
+	x.inner.SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, reportHandler)
+}
+
+// ReadAttributeAttributeListWithCompletion calls the underlying ReadAttributeAttributeListWithCompletion.
+func (x *MTRBaseClusterMicrowaveOvenControl) ReadAttributeAttributeListWithCompletion(completion objc.Block) {
+	x.inner.ReadAttributeAttributeListWithCompletion(completion)
+}
+
+// SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler calls the underlying SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler.
+func (x *MTRBaseClusterMicrowaveOvenControl) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block) {
+	x.inner.SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, reportHandler)
+}
+
+// ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterMicrowaveOvenControl) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeFeatureMapWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterMicrowaveOvenControl) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterMicrowaveOvenControl) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeClusterRevisionWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterMicrowaveOvenControl) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
 func (x *MTRBaseClusterMicrowaveOvenControl) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
 
 func (x *MTRBaseClusterMicrowaveOvenControl) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+
+// MTRBaseClusterMicrowaveOvenControlable is the interface implemented by [MTRBaseClusterMicrowaveOvenControl], for mocking and DI.
+type MTRBaseClusterMicrowaveOvenControlable interface {
+	Unwrap() *raw.MTRBaseClusterMicrowaveOvenControl
+	SetCookingParametersWithParamsCompletion(params *raw.MTRMicrowaveOvenControlClusterSetCookingParametersParams, completion func(unsafe.Pointer))
+	SetCookingParametersWithCompletion(completion func(unsafe.Pointer))
+	AddMoreTimeWithParamsCompletion(params *raw.MTRMicrowaveOvenControlClusterAddMoreTimeParams, completion func(unsafe.Pointer))
+	ReadAttributeCookTimeWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	SubscribeAttributeCookTimeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeMaxCookTimeWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	SubscribeAttributeMaxCookTimeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributePowerSettingWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	SubscribeAttributePowerSettingWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeMinPowerWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	SubscribeAttributeMinPowerWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeMaxPowerWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	SubscribeAttributeMaxPowerWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributePowerStepWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	SubscribeAttributePowerStepWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeWattRatingWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	SubscribeAttributeWattRatingWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeGeneratedCommandListWithCompletion(completion objc.Block)
+	SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block)
+	ReadAttributeAcceptedCommandListWithCompletion(completion objc.Block)
+	SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block)
+	ReadAttributeAttributeListWithCompletion(completion objc.Block)
+	SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block)
+	ReadAttributeFeatureMapWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+}
+
+var _ MTRBaseClusterMicrowaveOvenControlable = (*MTRBaseClusterMicrowaveOvenControl)(nil)
 

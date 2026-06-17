@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,5 +36,74 @@ func (x *NetServiceBrowser) WithIncludesPeerToPeer(includesPeerToPeer bool) *Net
 	return x
 }
 
+// ScheduleInRunLoopForMode calls the underlying ScheduleInRunLoopForMode.
+func (x *NetServiceBrowser) ScheduleInRunLoopForMode(aRunLoop *raw.NSRunLoop, mode *raw.NSString) {
+	x.inner.ScheduleInRunLoopForMode(aRunLoop, mode)
+}
+
+// RemoveFromRunLoopForMode calls the underlying RemoveFromRunLoopForMode.
+func (x *NetServiceBrowser) RemoveFromRunLoopForMode(aRunLoop *raw.NSRunLoop, mode *raw.NSString) {
+	x.inner.RemoveFromRunLoopForMode(aRunLoop, mode)
+}
+
+// SearchForBrowsableDomains calls the underlying SearchForBrowsableDomains.
+func (x *NetServiceBrowser) SearchForBrowsableDomains() {
+	x.inner.SearchForBrowsableDomains()
+}
+
+// SearchForRegistrationDomains calls the underlying SearchForRegistrationDomains.
+func (x *NetServiceBrowser) SearchForRegistrationDomains() {
+	x.inner.SearchForRegistrationDomains()
+}
+
+// SearchForServicesOfTypeInDomain calls the underlying SearchForServicesOfTypeInDomain.
+func (x *NetServiceBrowser) SearchForServicesOfTypeInDomain(type_ string, domainString string) {
+	x.inner.SearchForServicesOfTypeInDomain(foundation.NSStringStringWithUTF8String(type_), foundation.NSStringStringWithUTF8String(domainString))
+}
+
+// Stop calls the underlying Stop.
+func (x *NetServiceBrowser) Stop() {
+	x.inner.Stop()
+}
+
+// Delegate calls the underlying Delegate.
+func (x *NetServiceBrowser) Delegate() raw.NSNetServiceBrowserDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *NetServiceBrowser) SetDelegate(delegate raw.NSNetServiceBrowserDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// IncludesPeerToPeer calls the underlying IncludesPeerToPeer.
+func (x *NetServiceBrowser) IncludesPeerToPeer() bool {
+	return x.inner.IncludesPeerToPeer()
+}
+
+// SetIncludesPeerToPeer calls the underlying SetIncludesPeerToPeer.
+func (x *NetServiceBrowser) SetIncludesPeerToPeer(includesPeerToPeer bool) {
+	x.inner.SetIncludesPeerToPeer(includesPeerToPeer)
+}
+
 func (x *NetServiceBrowser) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// NetServiceBrowserable is the interface implemented by [NetServiceBrowser], for mocking and DI.
+type NetServiceBrowserable interface {
+	Unwrap() *raw.NSNetServiceBrowser
+	WithDelegate(delegate raw.NSNetServiceBrowserDelegate) *NetServiceBrowser
+	WithIncludesPeerToPeer(includesPeerToPeer bool) *NetServiceBrowser
+	ScheduleInRunLoopForMode(aRunLoop *raw.NSRunLoop, mode *raw.NSString)
+	RemoveFromRunLoopForMode(aRunLoop *raw.NSRunLoop, mode *raw.NSString)
+	SearchForBrowsableDomains()
+	SearchForRegistrationDomains()
+	SearchForServicesOfTypeInDomain(type_ string, domainString string)
+	Stop()
+	Delegate() raw.NSNetServiceBrowserDelegate
+	SetDelegate(delegate raw.NSNetServiceBrowserDelegate)
+	IncludesPeerToPeer() bool
+	SetIncludesPeerToPeer(includesPeerToPeer bool)
+}
+
+var _ NetServiceBrowserable = (*NetServiceBrowser)(nil)
 

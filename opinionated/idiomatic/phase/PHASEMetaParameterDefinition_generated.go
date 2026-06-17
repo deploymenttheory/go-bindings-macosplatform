@@ -23,7 +23,20 @@ func NewMetaParameterDefinition() *MetaParameterDefinition {
 	return &MetaParameterDefinition{inner: raw.PHASEMetaParameterDefinitionFromID(_id)}
 }
 
+// Value calls the underlying Value.
+func (x *MetaParameterDefinition) Value() objc.ID {
+	return x.inner.Value()
+}
+
 func (x *MetaParameterDefinition) asMetaParameterDefinition() *raw.PHASEMetaParameterDefinition { return x.inner }
 
 func (x *MetaParameterDefinition) asDefinition() *raw.PHASEDefinition { return &x.inner.PHASEDefinition }
+
+// MetaParameterDefinitionable is the interface implemented by [MetaParameterDefinition], for mocking and DI.
+type MetaParameterDefinitionable interface {
+	Unwrap() *raw.PHASEMetaParameterDefinition
+	Value() objc.ID
+}
+
+var _ MetaParameterDefinitionable = (*MetaParameterDefinition)(nil)
 

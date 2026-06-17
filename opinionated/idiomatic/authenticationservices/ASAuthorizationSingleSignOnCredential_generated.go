@@ -7,6 +7,7 @@ package authenticationservices
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,16 +25,56 @@ func NewAuthorizationSingleSignOnCredential() *AuthorizationSingleSignOnCredenti
 	return &AuthorizationSingleSignOnCredential{inner: raw.ASAuthorizationSingleSignOnCredentialFromID(_id)}
 }
 
+// State calls the underlying State.
+func (x *AuthorizationSingleSignOnCredential) State() string {
+	_r := x.inner.State()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// AccessToken calls the underlying AccessToken.
+func (x *AuthorizationSingleSignOnCredential) AccessToken() *foundation.NSData {
+	return x.inner.AccessToken()
+}
+
+// IdentityToken calls the underlying IdentityToken.
+func (x *AuthorizationSingleSignOnCredential) IdentityToken() *foundation.NSData {
+	return x.inner.IdentityToken()
+}
+
 // AuthorizedScopes returns the collection as a Go slice.
 func (x *AuthorizationSingleSignOnCredential) AuthorizedScopes() []*foundation.NSString {
 	arr := x.inner.AuthorizedScopes()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	})
 }
+
+// AuthenticatedResponse calls the underlying AuthenticatedResponse.
+func (x *AuthorizationSingleSignOnCredential) AuthenticatedResponse() *foundation.NSHTTPURLResponse {
+	return x.inner.AuthenticatedResponse()
+}
+
+// PrivateKeys calls the underlying PrivateKeys.
+func (x *AuthorizationSingleSignOnCredential) PrivateKeys() *foundation.NSArray[objc.ID] {
+	return x.inner.PrivateKeys()
+}
+
+// AuthorizationSingleSignOnCredentialable is the interface implemented by [AuthorizationSingleSignOnCredential], for mocking and DI.
+type AuthorizationSingleSignOnCredentialable interface {
+	Unwrap() *raw.ASAuthorizationSingleSignOnCredential
+	State() string
+	AccessToken() *foundation.NSData
+	IdentityToken() *foundation.NSData
+	AuthorizedScopes() []*foundation.NSString
+	AuthenticatedResponse() *foundation.NSHTTPURLResponse
+	PrivateKeys() *foundation.NSArray[objc.ID]
+}
+
+var _ AuthorizationSingleSignOnCredentialable = (*AuthorizationSingleSignOnCredential)(nil)
 

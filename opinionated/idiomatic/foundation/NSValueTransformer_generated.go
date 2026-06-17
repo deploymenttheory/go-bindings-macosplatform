@@ -23,7 +23,26 @@ func NewValueTransformer() *ValueTransformer {
 	return &ValueTransformer{inner: raw.NSValueTransformerFromID(_id)}
 }
 
+// TransformedValue calls the underlying TransformedValue.
+func (x *ValueTransformer) TransformedValue(value objc.ID) objc.ID {
+	return x.inner.TransformedValue(value)
+}
+
+// ReverseTransformedValue calls the underlying ReverseTransformedValue.
+func (x *ValueTransformer) ReverseTransformedValue(value objc.ID) objc.ID {
+	return x.inner.ReverseTransformedValue(value)
+}
+
 func (x *ValueTransformer) asValueTransformer() *raw.NSValueTransformer { return x.inner }
 
 func (x *ValueTransformer) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// ValueTransformerable is the interface implemented by [ValueTransformer], for mocking and DI.
+type ValueTransformerable interface {
+	Unwrap() *raw.NSValueTransformer
+	TransformedValue(value objc.ID) objc.ID
+	ReverseTransformedValue(value objc.ID) objc.ID
+}
+
+var _ ValueTransformerable = (*ValueTransformer)(nil)
 

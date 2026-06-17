@@ -42,5 +42,51 @@ func (x *MTRDescriptorClusterDeviceTypeStruct) WithRevision(revision *foundation
 	return x
 }
 
+// DeviceType calls the underlying DeviceType.
+func (x *MTRDescriptorClusterDeviceTypeStruct) DeviceType() *foundation.NSNumber {
+	return x.inner.DeviceType()
+}
+
+// SetDeviceType calls the underlying SetDeviceType.
+func (x *MTRDescriptorClusterDeviceTypeStruct) SetDeviceType(deviceType *foundation.NSNumber) {
+	x.inner.SetDeviceType(deviceType)
+}
+
+// Type calls the underlying Type.
+func (x *MTRDescriptorClusterDeviceTypeStruct) Type() *foundation.NSNumber {
+	return x.inner.Type()
+}
+
+// SetType calls the underlying SetType.
+func (x *MTRDescriptorClusterDeviceTypeStruct) SetType(type_ *foundation.NSNumber) {
+	x.inner.SetType(type_)
+}
+
+// Revision calls the underlying Revision.
+func (x *MTRDescriptorClusterDeviceTypeStruct) Revision() *foundation.NSNumber {
+	return x.inner.Revision()
+}
+
+// SetRevision calls the underlying SetRevision.
+func (x *MTRDescriptorClusterDeviceTypeStruct) SetRevision(revision *foundation.NSNumber) {
+	x.inner.SetRevision(revision)
+}
+
 func (x *MTRDescriptorClusterDeviceTypeStruct) asMTRDescriptorClusterDeviceTypeStruct() *raw.MTRDescriptorClusterDeviceTypeStruct { return x.inner }
+
+// MTRDescriptorClusterDeviceTypeStructable is the interface implemented by [MTRDescriptorClusterDeviceTypeStruct], for mocking and DI.
+type MTRDescriptorClusterDeviceTypeStructable interface {
+	Unwrap() *raw.MTRDescriptorClusterDeviceTypeStruct
+	WithDeviceType(deviceType *foundation.NSNumber) *MTRDescriptorClusterDeviceTypeStruct
+	WithType(type_ *foundation.NSNumber) *MTRDescriptorClusterDeviceTypeStruct
+	WithRevision(revision *foundation.NSNumber) *MTRDescriptorClusterDeviceTypeStruct
+	DeviceType() *foundation.NSNumber
+	SetDeviceType(deviceType *foundation.NSNumber)
+	Type() *foundation.NSNumber
+	SetType(type_ *foundation.NSNumber)
+	Revision() *foundation.NSNumber
+	SetRevision(revision *foundation.NSNumber)
+}
+
+var _ MTRDescriptorClusterDeviceTypeStructable = (*MTRDescriptorClusterDeviceTypeStruct)(nil)
 

@@ -5,10 +5,13 @@
 package mapkit
 
 import (
+	"context"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // TileOverlay wraps [raw.MKTileOverlay] with a fluent Go API.
@@ -55,4 +58,117 @@ func (x *TileOverlay) WithCanReplaceMapContent(canReplaceMapContent bool) *TileO
 	x.inner.SetCanReplaceMapContent(canReplaceMapContent)
 	return x
 }
+
+// TileSize calls the underlying TileSize.
+func (x *TileOverlay) TileSize() corefoundation.CGSize {
+	return x.inner.TileSize()
+}
+
+// SetTileSize calls the underlying SetTileSize.
+func (x *TileOverlay) SetTileSize(tileSize corefoundation.CGSize) {
+	x.inner.SetTileSize(tileSize)
+}
+
+// IsGeometryFlipped calls the underlying IsGeometryFlipped.
+func (x *TileOverlay) IsGeometryFlipped() bool {
+	return x.inner.IsGeometryFlipped()
+}
+
+// SetGeometryFlipped calls the underlying SetGeometryFlipped.
+func (x *TileOverlay) SetGeometryFlipped(geometryFlipped bool) {
+	x.inner.SetGeometryFlipped(geometryFlipped)
+}
+
+// MinimumZ calls the underlying MinimumZ.
+func (x *TileOverlay) MinimumZ() int {
+	return x.inner.MinimumZ()
+}
+
+// SetMinimumZ calls the underlying SetMinimumZ.
+func (x *TileOverlay) SetMinimumZ(minimumZ int) {
+	x.inner.SetMinimumZ(minimumZ)
+}
+
+// MaximumZ calls the underlying MaximumZ.
+func (x *TileOverlay) MaximumZ() int {
+	return x.inner.MaximumZ()
+}
+
+// SetMaximumZ calls the underlying SetMaximumZ.
+func (x *TileOverlay) SetMaximumZ(maximumZ int) {
+	x.inner.SetMaximumZ(maximumZ)
+}
+
+// URLTemplate calls the underlying URLTemplate.
+func (x *TileOverlay) URLTemplate() string {
+	_r := x.inner.URLTemplate()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// CanReplaceMapContent calls the underlying CanReplaceMapContent.
+func (x *TileOverlay) CanReplaceMapContent() bool {
+	return x.inner.CanReplaceMapContent()
+}
+
+// SetCanReplaceMapContent calls the underlying SetCanReplaceMapContent.
+func (x *TileOverlay) SetCanReplaceMapContent(canReplaceMapContent bool) {
+	x.inner.SetCanReplaceMapContent(canReplaceMapContent)
+}
+
+// URLForTilePath calls the underlying URLForTilePath.
+func (x *TileOverlay) URLForTilePath(path raw.MKTileOverlayPath) *foundation.NSURL {
+	return x.inner.URLForTilePath(path)
+}
+
+// LoadTileAtPathResult blocks until the operation completes or ctx is cancelled.
+func (x *TileOverlay) LoadTileAtPathResult(ctx context.Context, path raw.MKTileOverlayPath) (*foundation.NSData, error) {
+	type _result struct {
+		val *foundation.NSData
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.LoadTileAtPathResult(path, func(_p0 *foundation.NSData, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSData
+		return _zero, ctx.Err()
+	}
+}
+
+// TileOverlayable is the interface implemented by [TileOverlay], for mocking and DI.
+type TileOverlayable interface {
+	Unwrap() *raw.MKTileOverlay
+	WithTileSize(tileSize corefoundation.CGSize) *TileOverlay
+	WithGeometryFlipped(geometryFlipped bool) *TileOverlay
+	WithMinimumZ(minimumZ int) *TileOverlay
+	WithMaximumZ(maximumZ int) *TileOverlay
+	WithCanReplaceMapContent(canReplaceMapContent bool) *TileOverlay
+	TileSize() corefoundation.CGSize
+	SetTileSize(tileSize corefoundation.CGSize)
+	IsGeometryFlipped() bool
+	SetGeometryFlipped(geometryFlipped bool)
+	MinimumZ() int
+	SetMinimumZ(minimumZ int)
+	MaximumZ() int
+	SetMaximumZ(maximumZ int)
+	URLTemplate() string
+	CanReplaceMapContent() bool
+	SetCanReplaceMapContent(canReplaceMapContent bool)
+	URLForTilePath(path raw.MKTileOverlayPath) *foundation.NSURL
+	LoadTileAtPathResult(ctx context.Context, path raw.MKTileOverlayPath) (*foundation.NSData, error)
+}
+
+var _ TileOverlayable = (*TileOverlay)(nil)
 

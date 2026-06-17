@@ -48,5 +48,64 @@ func (x *VoronoiNoiseSource) WithSeed(seed int32) *VoronoiNoiseSource {
 	return x
 }
 
+// Frequency calls the underlying Frequency.
+func (x *VoronoiNoiseSource) Frequency() float64 {
+	return x.inner.Frequency()
+}
+
+// SetFrequency calls the underlying SetFrequency.
+func (x *VoronoiNoiseSource) SetFrequency(frequency float64) {
+	x.inner.SetFrequency(frequency)
+}
+
+// Displacement calls the underlying Displacement.
+func (x *VoronoiNoiseSource) Displacement() float64 {
+	return x.inner.Displacement()
+}
+
+// SetDisplacement calls the underlying SetDisplacement.
+func (x *VoronoiNoiseSource) SetDisplacement(displacement float64) {
+	x.inner.SetDisplacement(displacement)
+}
+
+// IsDistanceEnabled calls the underlying IsDistanceEnabled.
+func (x *VoronoiNoiseSource) IsDistanceEnabled() bool {
+	return x.inner.IsDistanceEnabled()
+}
+
+// SetDistanceEnabled calls the underlying SetDistanceEnabled.
+func (x *VoronoiNoiseSource) SetDistanceEnabled(distanceEnabled bool) {
+	x.inner.SetDistanceEnabled(distanceEnabled)
+}
+
+// Seed calls the underlying Seed.
+func (x *VoronoiNoiseSource) Seed() int32 {
+	return x.inner.Seed()
+}
+
+// SetSeed calls the underlying SetSeed.
+func (x *VoronoiNoiseSource) SetSeed(seed int32) {
+	x.inner.SetSeed(seed)
+}
+
 func (x *VoronoiNoiseSource) asNoiseSource() *raw.GKNoiseSource { return &x.inner.GKNoiseSource }
+
+// VoronoiNoiseSourceable is the interface implemented by [VoronoiNoiseSource], for mocking and DI.
+type VoronoiNoiseSourceable interface {
+	Unwrap() *raw.GKVoronoiNoiseSource
+	WithFrequency(frequency float64) *VoronoiNoiseSource
+	WithDisplacement(displacement float64) *VoronoiNoiseSource
+	WithDistanceEnabled(distanceEnabled bool) *VoronoiNoiseSource
+	WithSeed(seed int32) *VoronoiNoiseSource
+	Frequency() float64
+	SetFrequency(frequency float64)
+	Displacement() float64
+	SetDisplacement(displacement float64)
+	IsDistanceEnabled() bool
+	SetDistanceEnabled(distanceEnabled bool)
+	Seed() int32
+	SetSeed(seed int32)
+}
+
+var _ VoronoiNoiseSourceable = (*VoronoiNoiseSource)(nil)
 

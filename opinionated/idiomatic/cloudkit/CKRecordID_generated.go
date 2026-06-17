@@ -7,6 +7,7 @@ package cloudkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -31,4 +32,31 @@ func NewRecordIDWithRecordNameZoneID(recordName string, zoneID *raw.CKRecordZone
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecordName:zoneID:"), foundation.NSStringStringWithUTF8String(recordName).Ptr(), zoneID.Ptr())
 	return &RecordID{inner: raw.CKRecordIDFromID(_id)}
 }
+
+// RecordName calls the underlying RecordName.
+func (x *RecordID) RecordName() string {
+	_r := x.inner.RecordName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ZoneID calls the underlying ZoneID.
+func (x *RecordID) ZoneID() *RecordZoneID {
+	_r := x.inner.ZoneID()
+	if _r == nil {
+		return nil
+	}
+	return &RecordZoneID{inner: _r}
+}
+
+// RecordIDable is the interface implemented by [RecordID], for mocking and DI.
+type RecordIDable interface {
+	Unwrap() *raw.CKRecordID
+	RecordName() string
+	ZoneID() *RecordZoneID
+}
+
+var _ RecordIDable = (*RecordID)(nil)
 

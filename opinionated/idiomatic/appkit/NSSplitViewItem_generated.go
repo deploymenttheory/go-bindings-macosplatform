@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -141,17 +142,199 @@ func (x *SplitViewItem) WithBottomAlignedAccessoryViewControllers(items ...*raw.
 	return x
 }
 
+// AddTopAlignedAccessoryViewController calls the underlying AddTopAlignedAccessoryViewController.
+func (x *SplitViewItem) AddTopAlignedAccessoryViewController(childViewController *raw.NSSplitViewItemAccessoryViewController) {
+	x.inner.AddTopAlignedAccessoryViewController(childViewController)
+}
+
+// InsertTopAlignedAccessoryViewControllerAtIndex calls the underlying InsertTopAlignedAccessoryViewControllerAtIndex.
+func (x *SplitViewItem) InsertTopAlignedAccessoryViewControllerAtIndex(childViewController *raw.NSSplitViewItemAccessoryViewController, index int) {
+	x.inner.InsertTopAlignedAccessoryViewControllerAtIndex(childViewController, index)
+}
+
+// RemoveTopAlignedAccessoryViewControllerAtIndex calls the underlying RemoveTopAlignedAccessoryViewControllerAtIndex.
+func (x *SplitViewItem) RemoveTopAlignedAccessoryViewControllerAtIndex(index int) {
+	x.inner.RemoveTopAlignedAccessoryViewControllerAtIndex(index)
+}
+
+// AddBottomAlignedAccessoryViewController calls the underlying AddBottomAlignedAccessoryViewController.
+func (x *SplitViewItem) AddBottomAlignedAccessoryViewController(childViewController *raw.NSSplitViewItemAccessoryViewController) {
+	x.inner.AddBottomAlignedAccessoryViewController(childViewController)
+}
+
+// InsertBottomAlignedAccessoryViewControllerAtIndex calls the underlying InsertBottomAlignedAccessoryViewControllerAtIndex.
+func (x *SplitViewItem) InsertBottomAlignedAccessoryViewControllerAtIndex(childViewController *raw.NSSplitViewItemAccessoryViewController, index int) {
+	x.inner.InsertBottomAlignedAccessoryViewControllerAtIndex(childViewController, index)
+}
+
+// RemoveBottomAlignedAccessoryViewControllerAtIndex calls the underlying RemoveBottomAlignedAccessoryViewControllerAtIndex.
+func (x *SplitViewItem) RemoveBottomAlignedAccessoryViewControllerAtIndex(index int) {
+	x.inner.RemoveBottomAlignedAccessoryViewControllerAtIndex(index)
+}
+
+// Behavior calls the underlying Behavior.
+func (x *SplitViewItem) Behavior() raw.NSSplitViewItemBehavior {
+	return x.inner.Behavior()
+}
+
+// ViewController calls the underlying ViewController.
+func (x *SplitViewItem) ViewController() *ViewController {
+	_r := x.inner.ViewController()
+	if _r == nil {
+		return nil
+	}
+	return &ViewController{inner: _r}
+}
+
+// SetViewController calls the underlying SetViewController.
+func (x *SplitViewItem) SetViewController(viewController *raw.NSViewController) {
+	x.inner.SetViewController(viewController)
+}
+
+// IsCollapsed calls the underlying IsCollapsed.
+func (x *SplitViewItem) IsCollapsed() bool {
+	return x.inner.IsCollapsed()
+}
+
+// SetCollapsed calls the underlying SetCollapsed.
+func (x *SplitViewItem) SetCollapsed(collapsed bool) {
+	x.inner.SetCollapsed(collapsed)
+}
+
+// CanCollapse calls the underlying CanCollapse.
+func (x *SplitViewItem) CanCollapse() bool {
+	return x.inner.CanCollapse()
+}
+
+// SetCanCollapse calls the underlying SetCanCollapse.
+func (x *SplitViewItem) SetCanCollapse(canCollapse bool) {
+	x.inner.SetCanCollapse(canCollapse)
+}
+
+// CollapseBehavior calls the underlying CollapseBehavior.
+func (x *SplitViewItem) CollapseBehavior() raw.NSSplitViewItemCollapseBehavior {
+	return x.inner.CollapseBehavior()
+}
+
+// SetCollapseBehavior calls the underlying SetCollapseBehavior.
+func (x *SplitViewItem) SetCollapseBehavior(collapseBehavior raw.NSSplitViewItemCollapseBehavior) {
+	x.inner.SetCollapseBehavior(collapseBehavior)
+}
+
+// MinimumThickness calls the underlying MinimumThickness.
+func (x *SplitViewItem) MinimumThickness() float64 {
+	return x.inner.MinimumThickness()
+}
+
+// SetMinimumThickness calls the underlying SetMinimumThickness.
+func (x *SplitViewItem) SetMinimumThickness(minimumThickness float64) {
+	x.inner.SetMinimumThickness(minimumThickness)
+}
+
+// MaximumThickness calls the underlying MaximumThickness.
+func (x *SplitViewItem) MaximumThickness() float64 {
+	return x.inner.MaximumThickness()
+}
+
+// SetMaximumThickness calls the underlying SetMaximumThickness.
+func (x *SplitViewItem) SetMaximumThickness(maximumThickness float64) {
+	x.inner.SetMaximumThickness(maximumThickness)
+}
+
+// PreferredThicknessFraction calls the underlying PreferredThicknessFraction.
+func (x *SplitViewItem) PreferredThicknessFraction() float64 {
+	return x.inner.PreferredThicknessFraction()
+}
+
+// SetPreferredThicknessFraction calls the underlying SetPreferredThicknessFraction.
+func (x *SplitViewItem) SetPreferredThicknessFraction(preferredThicknessFraction float64) {
+	x.inner.SetPreferredThicknessFraction(preferredThicknessFraction)
+}
+
+// HoldingPriority calls the underlying HoldingPriority.
+func (x *SplitViewItem) HoldingPriority() float32 {
+	return x.inner.HoldingPriority()
+}
+
+// SetHoldingPriority calls the underlying SetHoldingPriority.
+func (x *SplitViewItem) SetHoldingPriority(holdingPriority float32) {
+	x.inner.SetHoldingPriority(holdingPriority)
+}
+
+// AutomaticMaximumThickness calls the underlying AutomaticMaximumThickness.
+func (x *SplitViewItem) AutomaticMaximumThickness() float64 {
+	return x.inner.AutomaticMaximumThickness()
+}
+
+// SetAutomaticMaximumThickness calls the underlying SetAutomaticMaximumThickness.
+func (x *SplitViewItem) SetAutomaticMaximumThickness(automaticMaximumThickness float64) {
+	x.inner.SetAutomaticMaximumThickness(automaticMaximumThickness)
+}
+
+// IsSpringLoaded calls the underlying IsSpringLoaded.
+func (x *SplitViewItem) IsSpringLoaded() bool {
+	return x.inner.IsSpringLoaded()
+}
+
+// SetSpringLoaded calls the underlying SetSpringLoaded.
+func (x *SplitViewItem) SetSpringLoaded(springLoaded bool) {
+	x.inner.SetSpringLoaded(springLoaded)
+}
+
+// CanCollapseFromWindowResize calls the underlying CanCollapseFromWindowResize.
+func (x *SplitViewItem) CanCollapseFromWindowResize() bool {
+	return x.inner.CanCollapseFromWindowResize()
+}
+
+// SetCanCollapseFromWindowResize calls the underlying SetCanCollapseFromWindowResize.
+func (x *SplitViewItem) SetCanCollapseFromWindowResize(canCollapseFromWindowResize bool) {
+	x.inner.SetCanCollapseFromWindowResize(canCollapseFromWindowResize)
+}
+
+// AllowsFullHeightLayout calls the underlying AllowsFullHeightLayout.
+func (x *SplitViewItem) AllowsFullHeightLayout() bool {
+	return x.inner.AllowsFullHeightLayout()
+}
+
+// SetAllowsFullHeightLayout calls the underlying SetAllowsFullHeightLayout.
+func (x *SplitViewItem) SetAllowsFullHeightLayout(allowsFullHeightLayout bool) {
+	x.inner.SetAllowsFullHeightLayout(allowsFullHeightLayout)
+}
+
+// TitlebarSeparatorStyle calls the underlying TitlebarSeparatorStyle.
+func (x *SplitViewItem) TitlebarSeparatorStyle() raw.NSTitlebarSeparatorStyle {
+	return x.inner.TitlebarSeparatorStyle()
+}
+
+// SetTitlebarSeparatorStyle calls the underlying SetTitlebarSeparatorStyle.
+func (x *SplitViewItem) SetTitlebarSeparatorStyle(titlebarSeparatorStyle raw.NSTitlebarSeparatorStyle) {
+	x.inner.SetTitlebarSeparatorStyle(titlebarSeparatorStyle)
+}
+
+// AutomaticallyAdjustsSafeAreaInsets calls the underlying AutomaticallyAdjustsSafeAreaInsets.
+func (x *SplitViewItem) AutomaticallyAdjustsSafeAreaInsets() bool {
+	return x.inner.AutomaticallyAdjustsSafeAreaInsets()
+}
+
+// SetAutomaticallyAdjustsSafeAreaInsets calls the underlying SetAutomaticallyAdjustsSafeAreaInsets.
+func (x *SplitViewItem) SetAutomaticallyAdjustsSafeAreaInsets(automaticallyAdjustsSafeAreaInsets bool) {
+	x.inner.SetAutomaticallyAdjustsSafeAreaInsets(automaticallyAdjustsSafeAreaInsets)
+}
+
 // TopAlignedAccessoryViewControllers returns the collection as a Go slice.
 func (x *SplitViewItem) TopAlignedAccessoryViewControllers() []*raw.NSSplitViewItemAccessoryViewController {
 	arr := x.inner.TopAlignedAccessoryViewControllers()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSSplitViewItemAccessoryViewController, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSSplitViewItemAccessoryViewController {
+		return raw.NSSplitViewItemAccessoryViewControllerFromID(purego.Retain(_id))
+	})
+}
+
+// SetTopAlignedAccessoryViewControllers calls the underlying SetTopAlignedAccessoryViewControllers.
+func (x *SplitViewItem) SetTopAlignedAccessoryViewControllers(topAlignedAccessoryViewControllers *foundation.NSArray[*raw.NSSplitViewItemAccessoryViewController]) {
+	x.inner.SetTopAlignedAccessoryViewControllers(topAlignedAccessoryViewControllers)
 }
 
 // BottomAlignedAccessoryViewControllers returns the collection as a Go slice.
@@ -160,10 +343,75 @@ func (x *SplitViewItem) BottomAlignedAccessoryViewControllers() []*raw.NSSplitVi
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSSplitViewItemAccessoryViewController, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSSplitViewItemAccessoryViewController {
+		return raw.NSSplitViewItemAccessoryViewControllerFromID(purego.Retain(_id))
+	})
 }
+
+// SetBottomAlignedAccessoryViewControllers calls the underlying SetBottomAlignedAccessoryViewControllers.
+func (x *SplitViewItem) SetBottomAlignedAccessoryViewControllers(bottomAlignedAccessoryViewControllers *foundation.NSArray[*raw.NSSplitViewItemAccessoryViewController]) {
+	x.inner.SetBottomAlignedAccessoryViewControllers(bottomAlignedAccessoryViewControllers)
+}
+
+// SplitViewItemable is the interface implemented by [SplitViewItem], for mocking and DI.
+type SplitViewItemable interface {
+	Unwrap() *raw.NSSplitViewItem
+	WithViewController(viewController ViewControllerProvider) *SplitViewItem
+	WithCollapsed(collapsed bool) *SplitViewItem
+	WithCanCollapse(canCollapse bool) *SplitViewItem
+	WithCollapseBehavior(collapseBehavior raw.NSSplitViewItemCollapseBehavior) *SplitViewItem
+	WithMinimumThickness(minimumThickness float64) *SplitViewItem
+	WithMaximumThickness(maximumThickness float64) *SplitViewItem
+	WithPreferredThicknessFraction(preferredThicknessFraction float64) *SplitViewItem
+	WithHoldingPriority(holdingPriority float32) *SplitViewItem
+	WithAutomaticMaximumThickness(automaticMaximumThickness float64) *SplitViewItem
+	WithSpringLoaded(springLoaded bool) *SplitViewItem
+	WithCanCollapseFromWindowResize(canCollapseFromWindowResize bool) *SplitViewItem
+	WithAllowsFullHeightLayout(allowsFullHeightLayout bool) *SplitViewItem
+	WithTitlebarSeparatorStyle(titlebarSeparatorStyle raw.NSTitlebarSeparatorStyle) *SplitViewItem
+	WithAutomaticallyAdjustsSafeAreaInsets(automaticallyAdjustsSafeAreaInsets bool) *SplitViewItem
+	WithTopAlignedAccessoryViewControllers(items ...*raw.NSSplitViewItemAccessoryViewController) *SplitViewItem
+	WithBottomAlignedAccessoryViewControllers(items ...*raw.NSSplitViewItemAccessoryViewController) *SplitViewItem
+	AddTopAlignedAccessoryViewController(childViewController *raw.NSSplitViewItemAccessoryViewController)
+	InsertTopAlignedAccessoryViewControllerAtIndex(childViewController *raw.NSSplitViewItemAccessoryViewController, index int)
+	RemoveTopAlignedAccessoryViewControllerAtIndex(index int)
+	AddBottomAlignedAccessoryViewController(childViewController *raw.NSSplitViewItemAccessoryViewController)
+	InsertBottomAlignedAccessoryViewControllerAtIndex(childViewController *raw.NSSplitViewItemAccessoryViewController, index int)
+	RemoveBottomAlignedAccessoryViewControllerAtIndex(index int)
+	Behavior() raw.NSSplitViewItemBehavior
+	ViewController() *ViewController
+	SetViewController(viewController *raw.NSViewController)
+	IsCollapsed() bool
+	SetCollapsed(collapsed bool)
+	CanCollapse() bool
+	SetCanCollapse(canCollapse bool)
+	CollapseBehavior() raw.NSSplitViewItemCollapseBehavior
+	SetCollapseBehavior(collapseBehavior raw.NSSplitViewItemCollapseBehavior)
+	MinimumThickness() float64
+	SetMinimumThickness(minimumThickness float64)
+	MaximumThickness() float64
+	SetMaximumThickness(maximumThickness float64)
+	PreferredThicknessFraction() float64
+	SetPreferredThicknessFraction(preferredThicknessFraction float64)
+	HoldingPriority() float32
+	SetHoldingPriority(holdingPriority float32)
+	AutomaticMaximumThickness() float64
+	SetAutomaticMaximumThickness(automaticMaximumThickness float64)
+	IsSpringLoaded() bool
+	SetSpringLoaded(springLoaded bool)
+	CanCollapseFromWindowResize() bool
+	SetCanCollapseFromWindowResize(canCollapseFromWindowResize bool)
+	AllowsFullHeightLayout() bool
+	SetAllowsFullHeightLayout(allowsFullHeightLayout bool)
+	TitlebarSeparatorStyle() raw.NSTitlebarSeparatorStyle
+	SetTitlebarSeparatorStyle(titlebarSeparatorStyle raw.NSTitlebarSeparatorStyle)
+	AutomaticallyAdjustsSafeAreaInsets() bool
+	SetAutomaticallyAdjustsSafeAreaInsets(automaticallyAdjustsSafeAreaInsets bool)
+	TopAlignedAccessoryViewControllers() []*raw.NSSplitViewItemAccessoryViewController
+	SetTopAlignedAccessoryViewControllers(topAlignedAccessoryViewControllers *foundation.NSArray[*raw.NSSplitViewItemAccessoryViewController])
+	BottomAlignedAccessoryViewControllers() []*raw.NSSplitViewItemAccessoryViewController
+	SetBottomAlignedAccessoryViewControllers(bottomAlignedAccessoryViewControllers *foundation.NSArray[*raw.NSSplitViewItemAccessoryViewController])
+}
+
+var _ SplitViewItemable = (*SplitViewItem)(nil)
 

@@ -25,3 +25,10 @@ func NewCurrencyAmountResolutionResult() *CurrencyAmountResolutionResult {
 
 func (x *CurrencyAmountResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult { return &x.inner.INIntentResolutionResult }
 
+// CurrencyAmountResolutionResultable is the interface implemented by [CurrencyAmountResolutionResult], for mocking and DI.
+type CurrencyAmountResolutionResultable interface {
+	Unwrap() *raw.INCurrencyAmountResolutionResult
+}
+
+var _ CurrencyAmountResolutionResultable = (*CurrencyAmountResolutionResult)(nil)
+

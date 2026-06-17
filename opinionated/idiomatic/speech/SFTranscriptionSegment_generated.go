@@ -7,6 +7,7 @@ package speech
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/speech"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,16 +25,66 @@ func NewTranscriptionSegment() *TranscriptionSegment {
 	return &TranscriptionSegment{inner: raw.SFTranscriptionSegmentFromID(_id)}
 }
 
+// Substring calls the underlying Substring.
+func (x *TranscriptionSegment) Substring() string {
+	_r := x.inner.Substring()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SubstringRange calls the underlying SubstringRange.
+func (x *TranscriptionSegment) SubstringRange() foundation.NSRange {
+	return x.inner.SubstringRange()
+}
+
+// Timestamp calls the underlying Timestamp.
+func (x *TranscriptionSegment) Timestamp() float64 {
+	return x.inner.Timestamp()
+}
+
+// Duration calls the underlying Duration.
+func (x *TranscriptionSegment) Duration() float64 {
+	return x.inner.Duration()
+}
+
+// Confidence calls the underlying Confidence.
+func (x *TranscriptionSegment) Confidence() float32 {
+	return x.inner.Confidence()
+}
+
 // AlternativeSubstrings returns the collection as a Go slice.
-func (x *TranscriptionSegment) AlternativeSubstrings() []*foundation.NSString {
+func (x *TranscriptionSegment) AlternativeSubstrings() []string {
 	arr := x.inner.AlternativeSubstrings()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
+
+// VoiceAnalytics calls the underlying VoiceAnalytics.
+func (x *TranscriptionSegment) VoiceAnalytics() *VoiceAnalytics {
+	_r := x.inner.VoiceAnalytics()
+	if _r == nil {
+		return nil
+	}
+	return &VoiceAnalytics{inner: _r}
+}
+
+// TranscriptionSegmentable is the interface implemented by [TranscriptionSegment], for mocking and DI.
+type TranscriptionSegmentable interface {
+	Unwrap() *raw.SFTranscriptionSegment
+	Substring() string
+	SubstringRange() foundation.NSRange
+	Timestamp() float64
+	Duration() float64
+	Confidence() float32
+	AlternativeSubstrings() []string
+	VoiceAnalytics() *VoiceAnalytics
+}
+
+var _ TranscriptionSegmentable = (*TranscriptionSegment)(nil)
 

@@ -23,3 +23,26 @@ func NewRenderPassSampleBufferAttachmentDescriptorArray() *RenderPassSampleBuffe
 	return &RenderPassSampleBufferAttachmentDescriptorArray{inner: raw.MTLRenderPassSampleBufferAttachmentDescriptorArrayFromID(_id)}
 }
 
+// ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
+func (x *RenderPassSampleBufferAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex uint) *RenderPassSampleBufferAttachmentDescriptor {
+	_r := x.inner.ObjectAtIndexedSubscript(attachmentIndex)
+	if _r == nil {
+		return nil
+	}
+	return &RenderPassSampleBufferAttachmentDescriptor{inner: _r}
+}
+
+// SetObjectAtIndexedSubscript calls the underlying SetObjectAtIndexedSubscript.
+func (x *RenderPassSampleBufferAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *raw.MTLRenderPassSampleBufferAttachmentDescriptor, attachmentIndex uint) {
+	x.inner.SetObjectAtIndexedSubscript(attachment, attachmentIndex)
+}
+
+// RenderPassSampleBufferAttachmentDescriptorArrayable is the interface implemented by [RenderPassSampleBufferAttachmentDescriptorArray], for mocking and DI.
+type RenderPassSampleBufferAttachmentDescriptorArrayable interface {
+	Unwrap() *raw.MTLRenderPassSampleBufferAttachmentDescriptorArray
+	ObjectAtIndexedSubscript(attachmentIndex uint) *RenderPassSampleBufferAttachmentDescriptor
+	SetObjectAtIndexedSubscript(attachment *raw.MTLRenderPassSampleBufferAttachmentDescriptor, attachmentIndex uint)
+}
+
+var _ RenderPassSampleBufferAttachmentDescriptorArrayable = (*RenderPassSampleBufferAttachmentDescriptorArray)(nil)
+

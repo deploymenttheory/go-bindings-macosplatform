@@ -24,5 +24,22 @@ func NewAssetReaderSampleReferenceOutputWithTrack(track *raw.AVAssetTrack) *Asse
 	return &AssetReaderSampleReferenceOutput{inner: raw.AVAssetReaderSampleReferenceOutputFromID(_id)}
 }
 
+// Track calls the underlying Track.
+func (x *AssetReaderSampleReferenceOutput) Track() *AssetTrack {
+	_r := x.inner.Track()
+	if _r == nil {
+		return nil
+	}
+	return &AssetTrack{inner: _r}
+}
+
 func (x *AssetReaderSampleReferenceOutput) asAssetReaderOutput() *raw.AVAssetReaderOutput { return &x.inner.AVAssetReaderOutput }
+
+// AssetReaderSampleReferenceOutputable is the interface implemented by [AssetReaderSampleReferenceOutput], for mocking and DI.
+type AssetReaderSampleReferenceOutputable interface {
+	Unwrap() *raw.AVAssetReaderSampleReferenceOutput
+	Track() *AssetTrack
+}
+
+var _ AssetReaderSampleReferenceOutputable = (*AssetReaderSampleReferenceOutput)(nil)
 

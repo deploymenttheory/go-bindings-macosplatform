@@ -7,6 +7,7 @@ package fileprovider
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/fileprovider"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -67,4 +68,145 @@ func (x *FileProviderDomain) WithSupportsStringSearchRequest(supportsStringSearc
 	x.inner.SetSupportsStringSearchRequest(supportsStringSearchRequest)
 	return x
 }
+
+// Identifier calls the underlying Identifier.
+func (x *FileProviderDomain) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// DisplayName calls the underlying DisplayName.
+func (x *FileProviderDomain) DisplayName() string {
+	_r := x.inner.DisplayName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// IsDisconnected calls the underlying IsDisconnected.
+func (x *FileProviderDomain) IsDisconnected() bool {
+	return x.inner.IsDisconnected()
+}
+
+// UserEnabled calls the underlying UserEnabled.
+func (x *FileProviderDomain) UserEnabled() bool {
+	return x.inner.UserEnabled()
+}
+
+// IsHidden calls the underlying IsHidden.
+func (x *FileProviderDomain) IsHidden() bool {
+	return x.inner.IsHidden()
+}
+
+// SetHidden calls the underlying SetHidden.
+func (x *FileProviderDomain) SetHidden(hidden bool) {
+	x.inner.SetHidden(hidden)
+}
+
+// IsReplicated calls the underlying IsReplicated.
+func (x *FileProviderDomain) IsReplicated() bool {
+	return x.inner.IsReplicated()
+}
+
+// TestingModes calls the underlying TestingModes.
+func (x *FileProviderDomain) TestingModes() raw.NSFileProviderDomainTestingModes {
+	return x.inner.TestingModes()
+}
+
+// SetTestingModes calls the underlying SetTestingModes.
+func (x *FileProviderDomain) SetTestingModes(testingModes raw.NSFileProviderDomainTestingModes) {
+	x.inner.SetTestingModes(testingModes)
+}
+
+// BackingStoreIdentity calls the underlying BackingStoreIdentity.
+func (x *FileProviderDomain) BackingStoreIdentity() *foundation.NSData {
+	return x.inner.BackingStoreIdentity()
+}
+
+// SupportsSyncingTrash calls the underlying SupportsSyncingTrash.
+func (x *FileProviderDomain) SupportsSyncingTrash() bool {
+	return x.inner.SupportsSyncingTrash()
+}
+
+// SetSupportsSyncingTrash calls the underlying SetSupportsSyncingTrash.
+func (x *FileProviderDomain) SetSupportsSyncingTrash(supportsSyncingTrash bool) {
+	x.inner.SetSupportsSyncingTrash(supportsSyncingTrash)
+}
+
+// VolumeUUID calls the underlying VolumeUUID.
+func (x *FileProviderDomain) VolumeUUID() *foundation.NSUUID {
+	return x.inner.VolumeUUID()
+}
+
+// UserInfo calls the underlying UserInfo.
+func (x *FileProviderDomain) UserInfo() *foundation.NSDictionary[objc.ID, objc.ID] {
+	return x.inner.UserInfo()
+}
+
+// SetUserInfo calls the underlying SetUserInfo.
+func (x *FileProviderDomain) SetUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID]) {
+	x.inner.SetUserInfo(userInfo)
+}
+
+// ReplicatedKnownFolders calls the underlying ReplicatedKnownFolders.
+func (x *FileProviderDomain) ReplicatedKnownFolders() raw.NSFileProviderKnownFolders {
+	return x.inner.ReplicatedKnownFolders()
+}
+
+// SupportedKnownFolders calls the underlying SupportedKnownFolders.
+func (x *FileProviderDomain) SupportedKnownFolders() raw.NSFileProviderKnownFolders {
+	return x.inner.SupportedKnownFolders()
+}
+
+// SetSupportedKnownFolders calls the underlying SetSupportedKnownFolders.
+func (x *FileProviderDomain) SetSupportedKnownFolders(supportedKnownFolders raw.NSFileProviderKnownFolders) {
+	x.inner.SetSupportedKnownFolders(supportedKnownFolders)
+}
+
+// SupportsStringSearchRequest calls the underlying SupportsStringSearchRequest.
+func (x *FileProviderDomain) SupportsStringSearchRequest() bool {
+	return x.inner.SupportsStringSearchRequest()
+}
+
+// SetSupportsStringSearchRequest calls the underlying SetSupportsStringSearchRequest.
+func (x *FileProviderDomain) SetSupportsStringSearchRequest(supportsStringSearchRequest bool) {
+	x.inner.SetSupportsStringSearchRequest(supportsStringSearchRequest)
+}
+
+// FileProviderDomainable is the interface implemented by [FileProviderDomain], for mocking and DI.
+type FileProviderDomainable interface {
+	Unwrap() *raw.NSFileProviderDomain
+	WithHidden(hidden bool) *FileProviderDomain
+	WithTestingModes(testingModes raw.NSFileProviderDomainTestingModes) *FileProviderDomain
+	WithSupportsSyncingTrash(supportsSyncingTrash bool) *FileProviderDomain
+	WithUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID]) *FileProviderDomain
+	WithSupportedKnownFolders(supportedKnownFolders raw.NSFileProviderKnownFolders) *FileProviderDomain
+	WithSupportsStringSearchRequest(supportsStringSearchRequest bool) *FileProviderDomain
+	Identifier() string
+	DisplayName() string
+	IsDisconnected() bool
+	UserEnabled() bool
+	IsHidden() bool
+	SetHidden(hidden bool)
+	IsReplicated() bool
+	TestingModes() raw.NSFileProviderDomainTestingModes
+	SetTestingModes(testingModes raw.NSFileProviderDomainTestingModes)
+	BackingStoreIdentity() *foundation.NSData
+	SupportsSyncingTrash() bool
+	SetSupportsSyncingTrash(supportsSyncingTrash bool)
+	VolumeUUID() *foundation.NSUUID
+	UserInfo() *foundation.NSDictionary[objc.ID, objc.ID]
+	SetUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID])
+	ReplicatedKnownFolders() raw.NSFileProviderKnownFolders
+	SupportedKnownFolders() raw.NSFileProviderKnownFolders
+	SetSupportedKnownFolders(supportedKnownFolders raw.NSFileProviderKnownFolders)
+	SupportsStringSearchRequest() bool
+	SetSupportsStringSearchRequest(supportsStringSearchRequest bool)
+}
+
+var _ FileProviderDomainable = (*FileProviderDomain)(nil)
 

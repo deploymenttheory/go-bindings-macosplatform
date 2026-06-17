@@ -50,7 +50,75 @@ func (x *SpatialMixerDefinition) WithSourceDirectivityModelParameters(sourceDire
 	return x
 }
 
+// SpatialPipeline calls the underlying SpatialPipeline.
+func (x *SpatialMixerDefinition) SpatialPipeline() *SpatialPipeline {
+	_r := x.inner.SpatialPipeline()
+	if _r == nil {
+		return nil
+	}
+	return &SpatialPipeline{inner: _r}
+}
+
+// DistanceModelParameters calls the underlying DistanceModelParameters.
+func (x *SpatialMixerDefinition) DistanceModelParameters() *DistanceModelParameters {
+	_r := x.inner.DistanceModelParameters()
+	if _r == nil {
+		return nil
+	}
+	return &DistanceModelParameters{inner: _r}
+}
+
+// SetDistanceModelParameters calls the underlying SetDistanceModelParameters.
+func (x *SpatialMixerDefinition) SetDistanceModelParameters(distanceModelParameters *raw.PHASEDistanceModelParameters) {
+	x.inner.SetDistanceModelParameters(distanceModelParameters)
+}
+
+// ListenerDirectivityModelParameters calls the underlying ListenerDirectivityModelParameters.
+func (x *SpatialMixerDefinition) ListenerDirectivityModelParameters() *DirectivityModelParameters {
+	_r := x.inner.ListenerDirectivityModelParameters()
+	if _r == nil {
+		return nil
+	}
+	return &DirectivityModelParameters{inner: _r}
+}
+
+// SetListenerDirectivityModelParameters calls the underlying SetListenerDirectivityModelParameters.
+func (x *SpatialMixerDefinition) SetListenerDirectivityModelParameters(listenerDirectivityModelParameters *raw.PHASEDirectivityModelParameters) {
+	x.inner.SetListenerDirectivityModelParameters(listenerDirectivityModelParameters)
+}
+
+// SourceDirectivityModelParameters calls the underlying SourceDirectivityModelParameters.
+func (x *SpatialMixerDefinition) SourceDirectivityModelParameters() *DirectivityModelParameters {
+	_r := x.inner.SourceDirectivityModelParameters()
+	if _r == nil {
+		return nil
+	}
+	return &DirectivityModelParameters{inner: _r}
+}
+
+// SetSourceDirectivityModelParameters calls the underlying SetSourceDirectivityModelParameters.
+func (x *SpatialMixerDefinition) SetSourceDirectivityModelParameters(sourceDirectivityModelParameters *raw.PHASEDirectivityModelParameters) {
+	x.inner.SetSourceDirectivityModelParameters(sourceDirectivityModelParameters)
+}
+
 func (x *SpatialMixerDefinition) asMixerDefinition() *raw.PHASEMixerDefinition { return &x.inner.PHASEMixerDefinition }
 
 func (x *SpatialMixerDefinition) asDefinition() *raw.PHASEDefinition { return &x.inner.PHASEMixerDefinition.PHASEDefinition }
+
+// SpatialMixerDefinitionable is the interface implemented by [SpatialMixerDefinition], for mocking and DI.
+type SpatialMixerDefinitionable interface {
+	Unwrap() *raw.PHASESpatialMixerDefinition
+	WithDistanceModelParameters(distanceModelParameters DistanceModelParametersProvider) *SpatialMixerDefinition
+	WithListenerDirectivityModelParameters(listenerDirectivityModelParameters DirectivityModelParametersProvider) *SpatialMixerDefinition
+	WithSourceDirectivityModelParameters(sourceDirectivityModelParameters DirectivityModelParametersProvider) *SpatialMixerDefinition
+	SpatialPipeline() *SpatialPipeline
+	DistanceModelParameters() *DistanceModelParameters
+	SetDistanceModelParameters(distanceModelParameters *raw.PHASEDistanceModelParameters)
+	ListenerDirectivityModelParameters() *DirectivityModelParameters
+	SetListenerDirectivityModelParameters(listenerDirectivityModelParameters *raw.PHASEDirectivityModelParameters)
+	SourceDirectivityModelParameters() *DirectivityModelParameters
+	SetSourceDirectivityModelParameters(sourceDirectivityModelParameters *raw.PHASEDirectivityModelParameters)
+}
+
+var _ SpatialMixerDefinitionable = (*SpatialMixerDefinition)(nil)
 

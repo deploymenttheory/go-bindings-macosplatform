@@ -10,7 +10,9 @@ import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsmatrix"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // MatrixNeuron wraps [raw.MPSMatrixNeuron] with a fluent Go API.
@@ -53,7 +55,105 @@ func (x *MatrixNeuron) WithAlpha(alpha float64) *MatrixNeuron {
 	return x
 }
 
+// SetNeuronTypeParameterAParameterBParameterC calls the underlying SetNeuronTypeParameterAParameterBParameterC.
+func (x *MatrixNeuron) SetNeuronTypeParameterAParameterBParameterC(neuronType mpsneuralnetwork.MPSCNNNeuronType, parameterA float32, parameterB float32, parameterC float32) {
+	x.inner.SetNeuronTypeParameterAParameterBParameterC(neuronType, parameterA, parameterB, parameterC)
+}
+
+// NeuronType calls the underlying NeuronType.
+func (x *MatrixNeuron) NeuronType() mpsneuralnetwork.MPSCNNNeuronType {
+	return x.inner.NeuronType()
+}
+
+// NeuronParameterA calls the underlying NeuronParameterA.
+func (x *MatrixNeuron) NeuronParameterA() float32 {
+	return x.inner.NeuronParameterA()
+}
+
+// NeuronParameterB calls the underlying NeuronParameterB.
+func (x *MatrixNeuron) NeuronParameterB() float32 {
+	return x.inner.NeuronParameterB()
+}
+
+// NeuronParameterC calls the underlying NeuronParameterC.
+func (x *MatrixNeuron) NeuronParameterC() float32 {
+	return x.inner.NeuronParameterC()
+}
+
+// SetNeuronToPReLUWithParametersA calls the underlying SetNeuronToPReLUWithParametersA.
+func (x *MatrixNeuron) SetNeuronToPReLUWithParametersA(a *foundation.NSData) {
+	x.inner.SetNeuronToPReLUWithParametersA(a)
+}
+
+// EncodeToCommandBufferInputMatrixBiasVectorResultMatrix calls the underlying EncodeToCommandBufferInputMatrixBiasVectorResultMatrix.
+func (x *MatrixNeuron) EncodeToCommandBufferInputMatrixBiasVectorResultMatrix(commandBuffer metal.MTLCommandBuffer, inputMatrix *mpscore.MPSMatrix, biasVector *mpscore.MPSVector, resultMatrix *mpscore.MPSMatrix) {
+	x.inner.EncodeToCommandBufferInputMatrixBiasVectorResultMatrix(commandBuffer, inputMatrix, biasVector, resultMatrix)
+}
+
+// CopyWithZoneDevice calls the underlying CopyWithZoneDevice.
+func (x *MatrixNeuron) CopyWithZoneDevice(zone unsafe.Pointer, device metal.MTLDevice) *MatrixNeuron {
+	_r := x.inner.CopyWithZoneDevice(zone, device)
+	if _r == nil {
+		return nil
+	}
+	return &MatrixNeuron{inner: _r}
+}
+
+// SourceNumberOfFeatureVectors calls the underlying SourceNumberOfFeatureVectors.
+func (x *MatrixNeuron) SourceNumberOfFeatureVectors() uint {
+	return x.inner.SourceNumberOfFeatureVectors()
+}
+
+// SetSourceNumberOfFeatureVectors calls the underlying SetSourceNumberOfFeatureVectors.
+func (x *MatrixNeuron) SetSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors uint) {
+	x.inner.SetSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors)
+}
+
+// SourceInputFeatureChannels calls the underlying SourceInputFeatureChannels.
+func (x *MatrixNeuron) SourceInputFeatureChannels() uint {
+	return x.inner.SourceInputFeatureChannels()
+}
+
+// SetSourceInputFeatureChannels calls the underlying SetSourceInputFeatureChannels.
+func (x *MatrixNeuron) SetSourceInputFeatureChannels(sourceInputFeatureChannels uint) {
+	x.inner.SetSourceInputFeatureChannels(sourceInputFeatureChannels)
+}
+
+// Alpha calls the underlying Alpha.
+func (x *MatrixNeuron) Alpha() float64 {
+	return x.inner.Alpha()
+}
+
+// SetAlpha calls the underlying SetAlpha.
+func (x *MatrixNeuron) SetAlpha(alpha float64) {
+	x.inner.SetAlpha(alpha)
+}
+
 func (x *MatrixNeuron) asMatrixUnaryKernel() *mpsmatrix.MPSMatrixUnaryKernel { return &x.inner.MPSMatrixUnaryKernel }
 
 func (x *MatrixNeuron) asKernel() *mpscore.MPSKernel { return &x.inner.MPSMatrixUnaryKernel.MPSKernel }
+
+// MatrixNeuronable is the interface implemented by [MatrixNeuron], for mocking and DI.
+type MatrixNeuronable interface {
+	Unwrap() *raw.MPSMatrixNeuron
+	WithSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors uint) *MatrixNeuron
+	WithSourceInputFeatureChannels(sourceInputFeatureChannels uint) *MatrixNeuron
+	WithAlpha(alpha float64) *MatrixNeuron
+	SetNeuronTypeParameterAParameterBParameterC(neuronType mpsneuralnetwork.MPSCNNNeuronType, parameterA float32, parameterB float32, parameterC float32)
+	NeuronType() mpsneuralnetwork.MPSCNNNeuronType
+	NeuronParameterA() float32
+	NeuronParameterB() float32
+	NeuronParameterC() float32
+	SetNeuronToPReLUWithParametersA(a *foundation.NSData)
+	EncodeToCommandBufferInputMatrixBiasVectorResultMatrix(commandBuffer metal.MTLCommandBuffer, inputMatrix *mpscore.MPSMatrix, biasVector *mpscore.MPSVector, resultMatrix *mpscore.MPSMatrix)
+	CopyWithZoneDevice(zone unsafe.Pointer, device metal.MTLDevice) *MatrixNeuron
+	SourceNumberOfFeatureVectors() uint
+	SetSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors uint)
+	SourceInputFeatureChannels() uint
+	SetSourceInputFeatureChannels(sourceInputFeatureChannels uint)
+	Alpha() float64
+	SetAlpha(alpha float64)
+}
+
+var _ MatrixNeuronable = (*MatrixNeuron)(nil)
 

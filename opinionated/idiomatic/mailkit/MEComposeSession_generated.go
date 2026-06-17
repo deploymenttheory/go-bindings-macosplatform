@@ -5,6 +5,7 @@
 package mailkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mailkit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +23,43 @@ func NewComposeSession() *ComposeSession {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MEComposeSession")), objc.RegisterName("new"))
 	return &ComposeSession{inner: raw.MEComposeSessionFromID(_id)}
 }
+
+// ReloadSession calls the underlying ReloadSession.
+func (x *ComposeSession) ReloadSession() {
+	x.inner.ReloadSession()
+}
+
+// SessionID calls the underlying SessionID.
+func (x *ComposeSession) SessionID() *foundation.NSUUID {
+	return x.inner.SessionID()
+}
+
+// MailMessage calls the underlying MailMessage.
+func (x *ComposeSession) MailMessage() *Message {
+	_r := x.inner.MailMessage()
+	if _r == nil {
+		return nil
+	}
+	return &Message{inner: _r}
+}
+
+// ComposeContext calls the underlying ComposeContext.
+func (x *ComposeSession) ComposeContext() *ComposeContext {
+	_r := x.inner.ComposeContext()
+	if _r == nil {
+		return nil
+	}
+	return &ComposeContext{inner: _r}
+}
+
+// ComposeSessionable is the interface implemented by [ComposeSession], for mocking and DI.
+type ComposeSessionable interface {
+	Unwrap() *raw.MEComposeSession
+	ReloadSession()
+	SessionID() *foundation.NSUUID
+	MailMessage() *Message
+	ComposeContext() *ComposeContext
+}
+
+var _ ComposeSessionable = (*ComposeSession)(nil)
 

@@ -23,5 +23,18 @@ func NewMutableMediaSelection() *MutableMediaSelection {
 	return &MutableMediaSelection{inner: raw.AVMutableMediaSelectionFromID(_id)}
 }
 
+// SelectMediaOptionInMediaSelectionGroup calls the underlying SelectMediaOptionInMediaSelectionGroup.
+func (x *MutableMediaSelection) SelectMediaOptionInMediaSelectionGroup(mediaSelectionOption *raw.AVMediaSelectionOption, mediaSelectionGroup *raw.AVMediaSelectionGroup) {
+	x.inner.SelectMediaOptionInMediaSelectionGroup(mediaSelectionOption, mediaSelectionGroup)
+}
+
 func (x *MutableMediaSelection) asMediaSelection() *raw.AVMediaSelection { return &x.inner.AVMediaSelection }
+
+// MutableMediaSelectionable is the interface implemented by [MutableMediaSelection], for mocking and DI.
+type MutableMediaSelectionable interface {
+	Unwrap() *raw.AVMutableMediaSelection
+	SelectMediaOptionInMediaSelectionGroup(mediaSelectionOption *raw.AVMediaSelectionOption, mediaSelectionGroup *raw.AVMediaSelectionGroup)
+}
+
+var _ MutableMediaSelectionable = (*MutableMediaSelection)(nil)
 

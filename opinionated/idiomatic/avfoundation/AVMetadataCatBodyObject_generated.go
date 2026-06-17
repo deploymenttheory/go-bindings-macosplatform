@@ -27,3 +27,10 @@ func (x *MetadataCatBodyObject) asMetadataBodyObject() *raw.AVMetadataBodyObject
 
 func (x *MetadataCatBodyObject) asMetadataObject() *raw.AVMetadataObject { return &x.inner.AVMetadataBodyObject.AVMetadataObject }
 
+// MetadataCatBodyObjectable is the interface implemented by [MetadataCatBodyObject], for mocking and DI.
+type MetadataCatBodyObjectable interface {
+	Unwrap() *raw.AVMetadataCatBodyObject
+}
+
+var _ MetadataCatBodyObjectable = (*MetadataCatBodyObject)(nil)
+

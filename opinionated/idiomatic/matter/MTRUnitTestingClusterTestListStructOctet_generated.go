@@ -36,5 +36,38 @@ func (x *MTRUnitTestingClusterTestListStructOctet) WithMember2(member2 *foundati
 	return x
 }
 
+// Member1 calls the underlying Member1.
+func (x *MTRUnitTestingClusterTestListStructOctet) Member1() *foundation.NSNumber {
+	return x.inner.Member1()
+}
+
+// SetMember1 calls the underlying SetMember1.
+func (x *MTRUnitTestingClusterTestListStructOctet) SetMember1(member1 *foundation.NSNumber) {
+	x.inner.SetMember1(member1)
+}
+
+// Member2 calls the underlying Member2.
+func (x *MTRUnitTestingClusterTestListStructOctet) Member2() *foundation.NSData {
+	return x.inner.Member2()
+}
+
+// SetMember2 calls the underlying SetMember2.
+func (x *MTRUnitTestingClusterTestListStructOctet) SetMember2(member2 *foundation.NSData) {
+	x.inner.SetMember2(member2)
+}
+
 func (x *MTRUnitTestingClusterTestListStructOctet) asMTRUnitTestingClusterTestListStructOctet() *raw.MTRUnitTestingClusterTestListStructOctet { return x.inner }
+
+// MTRUnitTestingClusterTestListStructOctetable is the interface implemented by [MTRUnitTestingClusterTestListStructOctet], for mocking and DI.
+type MTRUnitTestingClusterTestListStructOctetable interface {
+	Unwrap() *raw.MTRUnitTestingClusterTestListStructOctet
+	WithMember1(member1 *foundation.NSNumber) *MTRUnitTestingClusterTestListStructOctet
+	WithMember2(member2 *foundation.NSData) *MTRUnitTestingClusterTestListStructOctet
+	Member1() *foundation.NSNumber
+	SetMember1(member1 *foundation.NSNumber)
+	Member2() *foundation.NSData
+	SetMember2(member2 *foundation.NSData)
+}
+
+var _ MTRUnitTestingClusterTestListStructOctetable = (*MTRUnitTestingClusterTestListStructOctet)(nil)
 

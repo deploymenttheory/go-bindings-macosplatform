@@ -33,7 +33,20 @@ func NewChannelMixerDefinitionWithChannelLayout(layout *avfaudio.AVAudioChannelL
 	return &ChannelMixerDefinition{inner: raw.PHASEChannelMixerDefinitionFromID(_id)}
 }
 
+// InputChannelLayout calls the underlying InputChannelLayout.
+func (x *ChannelMixerDefinition) InputChannelLayout() *avfaudio.AVAudioChannelLayout {
+	return x.inner.InputChannelLayout()
+}
+
 func (x *ChannelMixerDefinition) asMixerDefinition() *raw.PHASEMixerDefinition { return &x.inner.PHASEMixerDefinition }
 
 func (x *ChannelMixerDefinition) asDefinition() *raw.PHASEDefinition { return &x.inner.PHASEMixerDefinition.PHASEDefinition }
+
+// ChannelMixerDefinitionable is the interface implemented by [ChannelMixerDefinition], for mocking and DI.
+type ChannelMixerDefinitionable interface {
+	Unwrap() *raw.PHASEChannelMixerDefinition
+	InputChannelLayout() *avfaudio.AVAudioChannelLayout
+}
+
+var _ ChannelMixerDefinitionable = (*ChannelMixerDefinition)(nil)
 

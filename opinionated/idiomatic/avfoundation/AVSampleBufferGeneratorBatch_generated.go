@@ -30,11 +30,11 @@ func NewSampleBufferGeneratorBatch() *SampleBufferGeneratorBatch {
 func (x *SampleBufferGeneratorBatch) MakeDataReady(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.MakeDataReadyWithCompletionHandler(func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -43,4 +43,18 @@ func (x *SampleBufferGeneratorBatch) MakeDataReady(ctx context.Context) error {
 		return ctx.Err()
 	}
 }
+
+// Cancel calls the underlying Cancel.
+func (x *SampleBufferGeneratorBatch) Cancel() {
+	x.inner.Cancel()
+}
+
+// SampleBufferGeneratorBatchable is the interface implemented by [SampleBufferGeneratorBatch], for mocking and DI.
+type SampleBufferGeneratorBatchable interface {
+	Unwrap() *raw.AVSampleBufferGeneratorBatch
+	MakeDataReady(ctx context.Context) error
+	Cancel()
+}
+
+var _ SampleBufferGeneratorBatchable = (*SampleBufferGeneratorBatch)(nil)
 

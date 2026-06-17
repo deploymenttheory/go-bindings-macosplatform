@@ -25,3 +25,23 @@ func NewMTRManualSetupPayloadParserWithDecimalStringRepresentation(decimalString
 	return &MTRManualSetupPayloadParser{inner: raw.MTRManualSetupPayloadParserFromID(_id)}
 }
 
+// PopulatePayload calls the underlying PopulatePayload.
+func (x *MTRManualSetupPayloadParser) PopulatePayload() (*MTRSetupPayload, error) {
+	_r, _err := x.inner.PopulatePayload()
+	if _err != nil {
+		return nil, _err
+	}
+	if _r == nil {
+		return nil, nil
+	}
+	return &MTRSetupPayload{inner: _r}, nil
+}
+
+// MTRManualSetupPayloadParserable is the interface implemented by [MTRManualSetupPayloadParser], for mocking and DI.
+type MTRManualSetupPayloadParserable interface {
+	Unwrap() *raw.MTRManualSetupPayloadParser
+	PopulatePayload() (*MTRSetupPayload, error)
+}
+
+var _ MTRManualSetupPayloadParserable = (*MTRManualSetupPayloadParser)(nil)
+

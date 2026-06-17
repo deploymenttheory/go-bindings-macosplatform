@@ -7,6 +7,7 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -30,6 +31,20 @@ func (x *DOMHTMLDivElement) WithAlign(align string) *DOMHTMLDivElement {
 	return x
 }
 
+// Align calls the underlying Align.
+func (x *DOMHTMLDivElement) Align() string {
+	_r := x.inner.Align()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetAlign calls the underlying SetAlign.
+func (x *DOMHTMLDivElement) SetAlign(align string) {
+	x.inner.SetAlign(foundation.NSStringStringWithUTF8String(align))
+}
+
 func (x *DOMHTMLDivElement) asDOMHTMLElement() *raw.DOMHTMLElement { return &x.inner.DOMHTMLElement }
 
 func (x *DOMHTMLDivElement) asDOMElement() *raw.DOMElement { return &x.inner.DOMHTMLElement.DOMElement }
@@ -39,4 +54,14 @@ func (x *DOMHTMLDivElement) asDOMNode() *raw.DOMNode { return &x.inner.DOMHTMLEl
 func (x *DOMHTMLDivElement) asDOMObject() *raw.DOMObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject }
 
 func (x *DOMHTMLDivElement) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject }
+
+// DOMHTMLDivElementable is the interface implemented by [DOMHTMLDivElement], for mocking and DI.
+type DOMHTMLDivElementable interface {
+	Unwrap() *raw.DOMHTMLDivElement
+	WithAlign(align string) *DOMHTMLDivElement
+	Align() string
+	SetAlign(align string)
+}
+
+var _ DOMHTMLDivElementable = (*DOMHTMLDivElement)(nil)
 

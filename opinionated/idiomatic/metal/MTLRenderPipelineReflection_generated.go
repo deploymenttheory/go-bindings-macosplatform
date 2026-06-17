@@ -5,7 +5,9 @@
 package metal
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,17 +25,40 @@ func NewRenderPipelineReflection() *RenderPipelineReflection {
 	return &RenderPipelineReflection{inner: raw.MTLRenderPipelineReflectionFromID(_id)}
 }
 
+// VertexBindings calls the underlying VertexBindings.
+func (x *RenderPipelineReflection) VertexBindings() *foundation.NSArray[raw.MTLBinding] {
+	return x.inner.VertexBindings()
+}
+
+// FragmentBindings calls the underlying FragmentBindings.
+func (x *RenderPipelineReflection) FragmentBindings() *foundation.NSArray[raw.MTLBinding] {
+	return x.inner.FragmentBindings()
+}
+
+// TileBindings calls the underlying TileBindings.
+func (x *RenderPipelineReflection) TileBindings() *foundation.NSArray[raw.MTLBinding] {
+	return x.inner.TileBindings()
+}
+
+// ObjectBindings calls the underlying ObjectBindings.
+func (x *RenderPipelineReflection) ObjectBindings() *foundation.NSArray[raw.MTLBinding] {
+	return x.inner.ObjectBindings()
+}
+
+// MeshBindings calls the underlying MeshBindings.
+func (x *RenderPipelineReflection) MeshBindings() *foundation.NSArray[raw.MTLBinding] {
+	return x.inner.MeshBindings()
+}
+
 // VertexArguments returns the collection as a Go slice.
 func (x *RenderPipelineReflection) VertexArguments() []*raw.MTLArgument {
 	arr := x.inner.VertexArguments()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MTLArgument, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MTLArgument {
+		return raw.MTLArgumentFromID(purego.Retain(_id))
+	})
 }
 
 // FragmentArguments returns the collection as a Go slice.
@@ -42,11 +67,9 @@ func (x *RenderPipelineReflection) FragmentArguments() []*raw.MTLArgument {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MTLArgument, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MTLArgument {
+		return raw.MTLArgumentFromID(purego.Retain(_id))
+	})
 }
 
 // TileArguments returns the collection as a Go slice.
@@ -55,10 +78,23 @@ func (x *RenderPipelineReflection) TileArguments() []*raw.MTLArgument {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MTLArgument, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MTLArgument {
+		return raw.MTLArgumentFromID(purego.Retain(_id))
+	})
 }
+
+// RenderPipelineReflectionable is the interface implemented by [RenderPipelineReflection], for mocking and DI.
+type RenderPipelineReflectionable interface {
+	Unwrap() *raw.MTLRenderPipelineReflection
+	VertexBindings() *foundation.NSArray[raw.MTLBinding]
+	FragmentBindings() *foundation.NSArray[raw.MTLBinding]
+	TileBindings() *foundation.NSArray[raw.MTLBinding]
+	ObjectBindings() *foundation.NSArray[raw.MTLBinding]
+	MeshBindings() *foundation.NSArray[raw.MTLBinding]
+	VertexArguments() []*raw.MTLArgument
+	FragmentArguments() []*raw.MTLArgument
+	TileArguments() []*raw.MTLArgument
+}
+
+var _ RenderPipelineReflectionable = (*RenderPipelineReflection)(nil)
 

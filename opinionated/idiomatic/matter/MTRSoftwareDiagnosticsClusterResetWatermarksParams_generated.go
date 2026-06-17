@@ -36,3 +36,36 @@ func (x *MTRSoftwareDiagnosticsClusterResetWatermarksParams) WithServerSideProce
 	return x
 }
 
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRSoftwareDiagnosticsClusterResetWatermarksParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRSoftwareDiagnosticsClusterResetWatermarksParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRSoftwareDiagnosticsClusterResetWatermarksParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRSoftwareDiagnosticsClusterResetWatermarksParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRSoftwareDiagnosticsClusterResetWatermarksParamsable is the interface implemented by [MTRSoftwareDiagnosticsClusterResetWatermarksParams], for mocking and DI.
+type MTRSoftwareDiagnosticsClusterResetWatermarksParamsable interface {
+	Unwrap() *raw.MTRSoftwareDiagnosticsClusterResetWatermarksParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRSoftwareDiagnosticsClusterResetWatermarksParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRSoftwareDiagnosticsClusterResetWatermarksParams
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRSoftwareDiagnosticsClusterResetWatermarksParamsable = (*MTRSoftwareDiagnosticsClusterResetWatermarksParams)(nil)
+

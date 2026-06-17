@@ -38,7 +38,40 @@ func (x *NNReduceUnary) WithOffset(offset mpscore.MPSOffset) *NNReduceUnary {
 	return x
 }
 
+// ClipRectSource calls the underlying ClipRectSource.
+func (x *NNReduceUnary) ClipRectSource() metal.MTLRegion {
+	return x.inner.ClipRectSource()
+}
+
+// SetClipRectSource calls the underlying SetClipRectSource.
+func (x *NNReduceUnary) SetClipRectSource(clipRectSource metal.MTLRegion) {
+	x.inner.SetClipRectSource(clipRectSource)
+}
+
+// Offset calls the underlying Offset.
+func (x *NNReduceUnary) Offset() mpscore.MPSOffset {
+	return x.inner.Offset()
+}
+
+// SetOffset calls the underlying SetOffset.
+func (x *NNReduceUnary) SetOffset(offset mpscore.MPSOffset) {
+	x.inner.SetOffset(offset)
+}
+
 func (x *NNReduceUnary) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSCNNKernel }
 
 func (x *NNReduceUnary) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNKernel.MPSKernel }
+
+// NNReduceUnaryable is the interface implemented by [NNReduceUnary], for mocking and DI.
+type NNReduceUnaryable interface {
+	Unwrap() *raw.MPSNNReduceUnary
+	WithClipRectSource(clipRectSource metal.MTLRegion) *NNReduceUnary
+	WithOffset(offset mpscore.MPSOffset) *NNReduceUnary
+	ClipRectSource() metal.MTLRegion
+	SetClipRectSource(clipRectSource metal.MTLRegion)
+	Offset() mpscore.MPSOffset
+	SetOffset(offset mpscore.MPSOffset)
+}
+
+var _ NNReduceUnaryable = (*NNReduceUnary)(nil)
 

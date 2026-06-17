@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
@@ -32,7 +33,80 @@ func NewValueWithCoder(coder *raw.NSCoder) *Value {
 	return &Value{inner: raw.NSValueFromID(_id)}
 }
 
+// GetValueSize calls the underlying GetValueSize.
+func (x *Value) GetValueSize(value unsafe.Pointer, size uint) {
+	x.inner.GetValueSize(value, size)
+}
+
+// ObjCType calls the underlying ObjCType.
+func (x *Value) ObjCType() unsafe.Pointer {
+	return x.inner.ObjCType()
+}
+
+// IsEqualToValue calls the underlying IsEqualToValue.
+func (x *Value) IsEqualToValue(value *raw.NSValue) bool {
+	return x.inner.IsEqualToValue(value)
+}
+
+// NonretainedObjectValue calls the underlying NonretainedObjectValue.
+func (x *Value) NonretainedObjectValue() objc.ID {
+	return x.inner.NonretainedObjectValue()
+}
+
+// PointerValue calls the underlying PointerValue.
+func (x *Value) PointerValue() unsafe.Pointer {
+	return x.inner.PointerValue()
+}
+
+// GetValue calls the underlying GetValue.
+func (x *Value) GetValue(value unsafe.Pointer) {
+	x.inner.GetValue(value)
+}
+
+// RangeValue calls the underlying RangeValue.
+func (x *Value) RangeValue() raw.NSRange {
+	return x.inner.RangeValue()
+}
+
+// PointValue calls the underlying PointValue.
+func (x *Value) PointValue() corefoundation.CGPoint {
+	return x.inner.PointValue()
+}
+
+// SizeValue calls the underlying SizeValue.
+func (x *Value) SizeValue() corefoundation.CGSize {
+	return x.inner.SizeValue()
+}
+
+// RectValue calls the underlying RectValue.
+func (x *Value) RectValue() corefoundation.CGRect {
+	return x.inner.RectValue()
+}
+
+// EdgeInsetsValue calls the underlying EdgeInsetsValue.
+func (x *Value) EdgeInsetsValue() raw.NSEdgeInsets {
+	return x.inner.EdgeInsetsValue()
+}
+
 func (x *Value) asValue() *raw.NSValue { return x.inner }
 
 func (x *Value) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// Valueable is the interface implemented by [Value], for mocking and DI.
+type Valueable interface {
+	Unwrap() *raw.NSValue
+	GetValueSize(value unsafe.Pointer, size uint)
+	ObjCType() unsafe.Pointer
+	IsEqualToValue(value *raw.NSValue) bool
+	NonretainedObjectValue() objc.ID
+	PointerValue() unsafe.Pointer
+	GetValue(value unsafe.Pointer)
+	RangeValue() raw.NSRange
+	PointValue() corefoundation.CGPoint
+	SizeValue() corefoundation.CGSize
+	RectValue() corefoundation.CGRect
+	EdgeInsetsValue() raw.NSEdgeInsets
+}
+
+var _ Valueable = (*Value)(nil)
 

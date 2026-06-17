@@ -5,6 +5,7 @@
 package webkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -28,4 +29,64 @@ func (x *WebFrameView) WithAllowsScrolling(allowsScrolling bool) *WebFrameView {
 	x.inner.SetAllowsScrolling(allowsScrolling)
 	return x
 }
+
+// PrintOperationWithPrintInfo calls the underlying PrintOperationWithPrintInfo.
+func (x *WebFrameView) PrintOperationWithPrintInfo(printInfo *appkit.NSPrintInfo) *appkit.NSPrintOperation {
+	return x.inner.PrintOperationWithPrintInfo(printInfo)
+}
+
+// PrintDocumentView calls the underlying PrintDocumentView.
+func (x *WebFrameView) PrintDocumentView() {
+	x.inner.PrintDocumentView()
+}
+
+// WebFrame calls the underlying WebFrame.
+func (x *WebFrameView) WebFrame() *WebFrame {
+	_r := x.inner.WebFrame()
+	if _r == nil {
+		return nil
+	}
+	return &WebFrame{inner: _r}
+}
+
+// DocumentView calls the underlying DocumentView.
+func (x *WebFrameView) DocumentView() *appkit.NSView {
+	return x.inner.DocumentView()
+}
+
+// AllowsScrolling calls the underlying AllowsScrolling.
+func (x *WebFrameView) AllowsScrolling() bool {
+	return x.inner.AllowsScrolling()
+}
+
+// SetAllowsScrolling calls the underlying SetAllowsScrolling.
+func (x *WebFrameView) SetAllowsScrolling(allowsScrolling bool) {
+	x.inner.SetAllowsScrolling(allowsScrolling)
+}
+
+// CanPrintHeadersAndFooters calls the underlying CanPrintHeadersAndFooters.
+func (x *WebFrameView) CanPrintHeadersAndFooters() bool {
+	return x.inner.CanPrintHeadersAndFooters()
+}
+
+// DocumentViewShouldHandlePrint calls the underlying DocumentViewShouldHandlePrint.
+func (x *WebFrameView) DocumentViewShouldHandlePrint() bool {
+	return x.inner.DocumentViewShouldHandlePrint()
+}
+
+// WebFrameViewable is the interface implemented by [WebFrameView], for mocking and DI.
+type WebFrameViewable interface {
+	Unwrap() *raw.WebFrameView
+	WithAllowsScrolling(allowsScrolling bool) *WebFrameView
+	PrintOperationWithPrintInfo(printInfo *appkit.NSPrintInfo) *appkit.NSPrintOperation
+	PrintDocumentView()
+	WebFrame() *WebFrame
+	DocumentView() *appkit.NSView
+	AllowsScrolling() bool
+	SetAllowsScrolling(allowsScrolling bool)
+	CanPrintHeadersAndFooters() bool
+	DocumentViewShouldHandlePrint() bool
+}
+
+var _ WebFrameViewable = (*WebFrameView)(nil)
 

@@ -23,3 +23,10 @@ func NewLiveAudioGraph() *LiveAudioGraph {
 	return &LiveAudioGraph{inner: raw.AXLiveAudioGraphFromID(_id)}
 }
 
+// LiveAudioGraphable is the interface implemented by [LiveAudioGraph], for mocking and DI.
+type LiveAudioGraphable interface {
+	Unwrap() *raw.AXLiveAudioGraph
+}
+
+var _ LiveAudioGraphable = (*LiveAudioGraph)(nil)
+

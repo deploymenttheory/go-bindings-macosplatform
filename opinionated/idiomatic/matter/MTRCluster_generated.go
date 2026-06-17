@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,5 +24,18 @@ func NewMTRCluster() *MTRCluster {
 	return &MTRCluster{inner: raw.MTRClusterFromID(_id)}
 }
 
+// EndpointID calls the underlying EndpointID.
+func (x *MTRCluster) EndpointID() *foundation.NSNumber {
+	return x.inner.EndpointID()
+}
+
 func (x *MTRCluster) asMTRCluster() *raw.MTRCluster { return x.inner }
+
+// MTRClusterable is the interface implemented by [MTRCluster], for mocking and DI.
+type MTRClusterable interface {
+	Unwrap() *raw.MTRCluster
+	EndpointID() *foundation.NSNumber
+}
+
+var _ MTRClusterable = (*MTRCluster)(nil)
 

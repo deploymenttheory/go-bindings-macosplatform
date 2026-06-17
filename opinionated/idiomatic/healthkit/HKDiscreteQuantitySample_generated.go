@@ -5,6 +5,7 @@
 package healthkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,9 +24,62 @@ func NewDiscreteQuantitySample() *DiscreteQuantitySample {
 	return &DiscreteQuantitySample{inner: raw.HKDiscreteQuantitySampleFromID(_id)}
 }
 
+// MinimumQuantity calls the underlying MinimumQuantity.
+func (x *DiscreteQuantitySample) MinimumQuantity() *Quantity {
+	_r := x.inner.MinimumQuantity()
+	if _r == nil {
+		return nil
+	}
+	return &Quantity{inner: _r}
+}
+
+// AverageQuantity calls the underlying AverageQuantity.
+func (x *DiscreteQuantitySample) AverageQuantity() *Quantity {
+	_r := x.inner.AverageQuantity()
+	if _r == nil {
+		return nil
+	}
+	return &Quantity{inner: _r}
+}
+
+// MaximumQuantity calls the underlying MaximumQuantity.
+func (x *DiscreteQuantitySample) MaximumQuantity() *Quantity {
+	_r := x.inner.MaximumQuantity()
+	if _r == nil {
+		return nil
+	}
+	return &Quantity{inner: _r}
+}
+
+// MostRecentQuantity calls the underlying MostRecentQuantity.
+func (x *DiscreteQuantitySample) MostRecentQuantity() *Quantity {
+	_r := x.inner.MostRecentQuantity()
+	if _r == nil {
+		return nil
+	}
+	return &Quantity{inner: _r}
+}
+
+// MostRecentQuantityDateInterval calls the underlying MostRecentQuantityDateInterval.
+func (x *DiscreteQuantitySample) MostRecentQuantityDateInterval() *foundation.NSDateInterval {
+	return x.inner.MostRecentQuantityDateInterval()
+}
+
 func (x *DiscreteQuantitySample) asQuantitySample() *raw.HKQuantitySample { return &x.inner.HKQuantitySample }
 
 func (x *DiscreteQuantitySample) asSample() *raw.HKSample { return &x.inner.HKQuantitySample.HKSample }
 
 func (x *DiscreteQuantitySample) asObject() *raw.HKObject { return &x.inner.HKQuantitySample.HKSample.HKObject }
+
+// DiscreteQuantitySampleable is the interface implemented by [DiscreteQuantitySample], for mocking and DI.
+type DiscreteQuantitySampleable interface {
+	Unwrap() *raw.HKDiscreteQuantitySample
+	MinimumQuantity() *Quantity
+	AverageQuantity() *Quantity
+	MaximumQuantity() *Quantity
+	MostRecentQuantity() *Quantity
+	MostRecentQuantityDateInterval() *foundation.NSDateInterval
+}
+
+var _ DiscreteQuantitySampleable = (*DiscreteQuantitySample)(nil)
 

@@ -5,7 +5,9 @@
 package cloudkit
 
 import (
+	"context"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -36,4 +38,58 @@ func (x *SystemSharingUIObserver) WithSystemSharingUIDidStopSharingBlock(systemS
 	x.inner.SetSystemSharingUIDidStopSharingBlock(systemSharingUIDidStopSharingBlock)
 	return x
 }
+
+// SystemSharingUIDidSaveShareBlock calls the underlying SystemSharingUIDidSaveShareBlock.
+func (x *SystemSharingUIObserver) SystemSharingUIDidSaveShareBlock() objc.Block {
+	return x.inner.SystemSharingUIDidSaveShareBlock()
+}
+
+// SetSystemSharingUIDidSaveShareBlock calls the underlying SetSystemSharingUIDidSaveShareBlock.
+func (x *SystemSharingUIObserver) SetSystemSharingUIDidSaveShareBlock(systemSharingUIDidSaveShareBlock func(*raw.CKRecordID, *raw.CKShare, unsafe.Pointer)) {
+	x.inner.SetSystemSharingUIDidSaveShareBlock(systemSharingUIDidSaveShareBlock)
+}
+
+// SystemSharingUIDidStopSharingBlock calls the underlying SystemSharingUIDidStopSharingBlock.
+func (x *SystemSharingUIObserver) SystemSharingUIDidStopSharingBlock() objc.Block {
+	return x.inner.SystemSharingUIDidStopSharingBlock()
+}
+
+// SetSystemSharingUIDidStopSharingBlock blocks until the operation completes or ctx is cancelled.
+func (x *SystemSharingUIObserver) SetSystemSharingUIDidStopSharingBlock(ctx context.Context) (*RecordID, error) {
+	type _result struct {
+		val *RecordID
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SetSystemSharingUIDidStopSharingBlock(func(_p0 *raw.CKRecordID, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &RecordID{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *RecordID
+		return _zero, ctx.Err()
+	}
+}
+
+// SystemSharingUIObserverable is the interface implemented by [SystemSharingUIObserver], for mocking and DI.
+type SystemSharingUIObserverable interface {
+	Unwrap() *raw.CKSystemSharingUIObserver
+	WithSystemSharingUIDidSaveShareBlock(systemSharingUIDidSaveShareBlock func(*raw.CKRecordID, *raw.CKShare, unsafe.Pointer)) *SystemSharingUIObserver
+	WithSystemSharingUIDidStopSharingBlock(systemSharingUIDidStopSharingBlock func(*raw.CKRecordID, unsafe.Pointer)) *SystemSharingUIObserver
+	SystemSharingUIDidSaveShareBlock() objc.Block
+	SetSystemSharingUIDidSaveShareBlock(systemSharingUIDidSaveShareBlock func(*raw.CKRecordID, *raw.CKShare, unsafe.Pointer))
+	SystemSharingUIDidStopSharingBlock() objc.Block
+	SetSystemSharingUIDidStopSharingBlock(ctx context.Context) (*RecordID, error)
+}
+
+var _ SystemSharingUIObserverable = (*SystemSharingUIObserver)(nil)
 

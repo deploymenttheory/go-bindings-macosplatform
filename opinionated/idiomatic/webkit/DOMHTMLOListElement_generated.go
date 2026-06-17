@@ -7,6 +7,7 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -42,6 +43,40 @@ func (x *DOMHTMLOListElement) WithType(type_ string) *DOMHTMLOListElement {
 	return x
 }
 
+// Compact calls the underlying Compact.
+func (x *DOMHTMLOListElement) Compact() bool {
+	return x.inner.Compact()
+}
+
+// SetCompact calls the underlying SetCompact.
+func (x *DOMHTMLOListElement) SetCompact(compact bool) {
+	x.inner.SetCompact(compact)
+}
+
+// Start calls the underlying Start.
+func (x *DOMHTMLOListElement) Start() int {
+	return x.inner.Start()
+}
+
+// SetStart calls the underlying SetStart.
+func (x *DOMHTMLOListElement) SetStart(start int) {
+	x.inner.SetStart(start)
+}
+
+// Type calls the underlying Type.
+func (x *DOMHTMLOListElement) Type() string {
+	_r := x.inner.Type()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetType calls the underlying SetType.
+func (x *DOMHTMLOListElement) SetType(type_ string) {
+	x.inner.SetType(foundation.NSStringStringWithUTF8String(type_))
+}
+
 func (x *DOMHTMLOListElement) asDOMHTMLElement() *raw.DOMHTMLElement { return &x.inner.DOMHTMLElement }
 
 func (x *DOMHTMLOListElement) asDOMElement() *raw.DOMElement { return &x.inner.DOMHTMLElement.DOMElement }
@@ -51,4 +86,20 @@ func (x *DOMHTMLOListElement) asDOMNode() *raw.DOMNode { return &x.inner.DOMHTML
 func (x *DOMHTMLOListElement) asDOMObject() *raw.DOMObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject }
 
 func (x *DOMHTMLOListElement) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject }
+
+// DOMHTMLOListElementable is the interface implemented by [DOMHTMLOListElement], for mocking and DI.
+type DOMHTMLOListElementable interface {
+	Unwrap() *raw.DOMHTMLOListElement
+	WithCompact(compact bool) *DOMHTMLOListElement
+	WithStart(start int) *DOMHTMLOListElement
+	WithType(type_ string) *DOMHTMLOListElement
+	Compact() bool
+	SetCompact(compact bool)
+	Start() int
+	SetStart(start int)
+	Type() string
+	SetType(type_ string)
+}
+
+var _ DOMHTMLOListElementable = (*DOMHTMLOListElement)(nil)
 

@@ -30,3 +30,23 @@ func (x *MTRSwitchClusterInitialPressEvent) WithNewPosition(newPosition *foundat
 	return x
 }
 
+// GetNewPosition calls the underlying GetNewPosition.
+func (x *MTRSwitchClusterInitialPressEvent) GetNewPosition() *foundation.NSNumber {
+	return x.inner.GetNewPosition()
+}
+
+// SetNewPosition calls the underlying SetNewPosition.
+func (x *MTRSwitchClusterInitialPressEvent) SetNewPosition(newPosition *foundation.NSNumber) {
+	x.inner.SetNewPosition(newPosition)
+}
+
+// MTRSwitchClusterInitialPressEventable is the interface implemented by [MTRSwitchClusterInitialPressEvent], for mocking and DI.
+type MTRSwitchClusterInitialPressEventable interface {
+	Unwrap() *raw.MTRSwitchClusterInitialPressEvent
+	WithNewPosition(newPosition *foundation.NSNumber) *MTRSwitchClusterInitialPressEvent
+	GetNewPosition() *foundation.NSNumber
+	SetNewPosition(newPosition *foundation.NSNumber)
+}
+
+var _ MTRSwitchClusterInitialPressEventable = (*MTRSwitchClusterInitialPressEvent)(nil)
+

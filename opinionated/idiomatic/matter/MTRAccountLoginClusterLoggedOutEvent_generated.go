@@ -30,3 +30,23 @@ func (x *MTRAccountLoginClusterLoggedOutEvent) WithNode(node *foundation.NSNumbe
 	return x
 }
 
+// Node calls the underlying Node.
+func (x *MTRAccountLoginClusterLoggedOutEvent) Node() *foundation.NSNumber {
+	return x.inner.Node()
+}
+
+// SetNode calls the underlying SetNode.
+func (x *MTRAccountLoginClusterLoggedOutEvent) SetNode(node *foundation.NSNumber) {
+	x.inner.SetNode(node)
+}
+
+// MTRAccountLoginClusterLoggedOutEventable is the interface implemented by [MTRAccountLoginClusterLoggedOutEvent], for mocking and DI.
+type MTRAccountLoginClusterLoggedOutEventable interface {
+	Unwrap() *raw.MTRAccountLoginClusterLoggedOutEvent
+	WithNode(node *foundation.NSNumber) *MTRAccountLoginClusterLoggedOutEvent
+	Node() *foundation.NSNumber
+	SetNode(node *foundation.NSNumber)
+}
+
+var _ MTRAccountLoginClusterLoggedOutEventable = (*MTRAccountLoginClusterLoggedOutEvent)(nil)
+

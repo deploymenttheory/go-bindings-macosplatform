@@ -25,5 +25,18 @@ func NewPoint3DWithPosition(position unsafe.Pointer) *Point3D {
 	return &Point3D{inner: raw.VNPoint3DFromID(_id)}
 }
 
+// Position calls the underlying Position.
+func (x *Point3D) Position() unsafe.Pointer {
+	return x.inner.Position()
+}
+
 func (x *Point3D) asPoint3D() *raw.VNPoint3D { return x.inner }
+
+// Point3Dable is the interface implemented by [Point3D], for mocking and DI.
+type Point3Dable interface {
+	Unwrap() *raw.VNPoint3D
+	Position() unsafe.Pointer
+}
+
+var _ Point3Dable = (*Point3D)(nil)
 

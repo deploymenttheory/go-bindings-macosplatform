@@ -5,9 +5,12 @@
 package classkit
 
 import (
+	"context"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/classkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Context wraps [raw.CLSContext] with a fluent Go API.
@@ -85,17 +88,235 @@ func (x *Context) WithSummary(summary string) *Context {
 	return x
 }
 
+// BecomeActive calls the underlying BecomeActive.
+func (x *Context) BecomeActive() {
+	x.inner.BecomeActive()
+}
+
+// ResignActive calls the underlying ResignActive.
+func (x *Context) ResignActive() {
+	x.inner.ResignActive()
+}
+
+// SetType calls the underlying SetType.
+func (x *Context) SetType(type_ raw.CLSContextType) {
+	x.inner.SetType(type_)
+}
+
+// AddProgressReportingCapabilities calls the underlying AddProgressReportingCapabilities.
+func (x *Context) AddProgressReportingCapabilities(capabilities *foundation.NSSet[*raw.CLSProgressReportingCapability]) {
+	x.inner.AddProgressReportingCapabilities(capabilities)
+}
+
+// ResetProgressReportingCapabilities calls the underlying ResetProgressReportingCapabilities.
+func (x *Context) ResetProgressReportingCapabilities() {
+	x.inner.ResetProgressReportingCapabilities()
+}
+
 // IdentifierPath returns the collection as a Go slice.
-func (x *Context) IdentifierPath() []*foundation.NSString {
+func (x *Context) IdentifierPath() []string {
 	arr := x.inner.IdentifierPath()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// Identifier calls the underlying Identifier.
+func (x *Context) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
 	}
-	return out
+	return purego.GoString(_r.Ptr())
+}
+
+// UniversalLinkURL calls the underlying UniversalLinkURL.
+func (x *Context) UniversalLinkURL() *foundation.NSURL {
+	return x.inner.UniversalLinkURL()
+}
+
+// SetUniversalLinkURL calls the underlying SetUniversalLinkURL.
+func (x *Context) SetUniversalLinkURL(universalLinkURL string) {
+	x.inner.SetUniversalLinkURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(universalLinkURL)))
+}
+
+// Type calls the underlying Type.
+func (x *Context) Type() raw.CLSContextType {
+	return x.inner.Type()
+}
+
+// CustomTypeName calls the underlying CustomTypeName.
+func (x *Context) CustomTypeName() string {
+	_r := x.inner.CustomTypeName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetCustomTypeName calls the underlying SetCustomTypeName.
+func (x *Context) SetCustomTypeName(customTypeName string) {
+	x.inner.SetCustomTypeName(foundation.NSStringStringWithUTF8String(customTypeName))
+}
+
+// Title calls the underlying Title.
+func (x *Context) Title() string {
+	_r := x.inner.Title()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetTitle calls the underlying SetTitle.
+func (x *Context) SetTitle(title string) {
+	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+}
+
+// DisplayOrder calls the underlying DisplayOrder.
+func (x *Context) DisplayOrder() int {
+	return x.inner.DisplayOrder()
+}
+
+// SetDisplayOrder calls the underlying SetDisplayOrder.
+func (x *Context) SetDisplayOrder(displayOrder int) {
+	x.inner.SetDisplayOrder(displayOrder)
+}
+
+// Topic calls the underlying Topic.
+func (x *Context) Topic() string {
+	_r := x.inner.Topic()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetTopic calls the underlying SetTopic.
+func (x *Context) SetTopic(topic *foundation.NSString) {
+	x.inner.SetTopic(topic)
+}
+
+// IsAssignable calls the underlying IsAssignable.
+func (x *Context) IsAssignable() bool {
+	return x.inner.IsAssignable()
+}
+
+// SetAssignable calls the underlying SetAssignable.
+func (x *Context) SetAssignable(assignable bool) {
+	x.inner.SetAssignable(assignable)
+}
+
+// SuggestedAge calls the underlying SuggestedAge.
+func (x *Context) SuggestedAge() foundation.NSRange {
+	return x.inner.SuggestedAge()
+}
+
+// SetSuggestedAge calls the underlying SetSuggestedAge.
+func (x *Context) SetSuggestedAge(suggestedAge foundation.NSRange) {
+	x.inner.SetSuggestedAge(suggestedAge)
+}
+
+// SuggestedCompletionTime calls the underlying SuggestedCompletionTime.
+func (x *Context) SuggestedCompletionTime() foundation.NSRange {
+	return x.inner.SuggestedCompletionTime()
+}
+
+// SetSuggestedCompletionTime calls the underlying SetSuggestedCompletionTime.
+func (x *Context) SetSuggestedCompletionTime(suggestedCompletionTime foundation.NSRange) {
+	x.inner.SetSuggestedCompletionTime(suggestedCompletionTime)
+}
+
+// ProgressReportingCapabilities calls the underlying ProgressReportingCapabilities.
+func (x *Context) ProgressReportingCapabilities() *foundation.NSSet[*raw.CLSProgressReportingCapability] {
+	return x.inner.ProgressReportingCapabilities()
+}
+
+// Summary calls the underlying Summary.
+func (x *Context) Summary() string {
+	_r := x.inner.Summary()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetSummary calls the underlying SetSummary.
+func (x *Context) SetSummary(summary string) {
+	x.inner.SetSummary(foundation.NSStringStringWithUTF8String(summary))
+}
+
+// Thumbnail calls the underlying Thumbnail.
+func (x *Context) Thumbnail() unsafe.Pointer {
+	return x.inner.Thumbnail()
+}
+
+// SetThumbnail calls the underlying SetThumbnail.
+func (x *Context) SetThumbnail(thumbnail unsafe.Pointer) {
+	x.inner.SetThumbnail(thumbnail)
+}
+
+// IsActive calls the underlying IsActive.
+func (x *Context) IsActive() bool {
+	return x.inner.IsActive()
+}
+
+// RemoveFromParent calls the underlying RemoveFromParent.
+func (x *Context) RemoveFromParent() {
+	x.inner.RemoveFromParent()
+}
+
+// AddChildContext calls the underlying AddChildContext.
+func (x *Context) AddChildContext(child *raw.CLSContext) {
+	x.inner.AddChildContext(child)
+}
+
+// DescendantMatchingIdentifierPathCompletion blocks until the operation completes or ctx is cancelled.
+func (x *Context) DescendantMatchingIdentifierPathCompletion(ctx context.Context, identifierPath *foundation.NSArray[*foundation.NSString]) (*Context, error) {
+	type _result struct {
+		val *Context
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.DescendantMatchingIdentifierPathCompletion(identifierPath, func(_p0 *raw.CLSContext, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &Context{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *Context
+		return _zero, ctx.Err()
+	}
+}
+
+// AddNavigationChildContext calls the underlying AddNavigationChildContext.
+func (x *Context) AddNavigationChildContext(child *raw.CLSContext) {
+	x.inner.AddNavigationChildContext(child)
+}
+
+// RemoveNavigationChildContext calls the underlying RemoveNavigationChildContext.
+func (x *Context) RemoveNavigationChildContext(child *raw.CLSContext) {
+	x.inner.RemoveNavigationChildContext(child)
+}
+
+// Parent calls the underlying Parent.
+func (x *Context) Parent() *Context {
+	_r := x.inner.Parent()
+	if _r == nil {
+		return nil
+	}
+	return &Context{inner: _r}
 }
 
 // NavigationChildContexts returns the collection as a Go slice.
@@ -104,12 +325,84 @@ func (x *Context) NavigationChildContexts() []*raw.CLSContext {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.CLSContext, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CLSContext {
+		return raw.CLSContextFromID(purego.Retain(_id))
+	})
+}
+
+// CreateNewActivity calls the underlying CreateNewActivity.
+func (x *Context) CreateNewActivity() *Activity {
+	_r := x.inner.CreateNewActivity()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &Activity{inner: _r}
+}
+
+// CurrentActivity calls the underlying CurrentActivity.
+func (x *Context) CurrentActivity() *Activity {
+	_r := x.inner.CurrentActivity()
+	if _r == nil {
+		return nil
+	}
+	return &Activity{inner: _r}
 }
 
 func (x *Context) asObject() *raw.CLSObject { return &x.inner.CLSObject }
+
+// Contextable is the interface implemented by [Context], for mocking and DI.
+type Contextable interface {
+	Unwrap() *raw.CLSContext
+	WithUniversalLinkURL(universalLinkURL string) *Context
+	WithType(type_ raw.CLSContextType) *Context
+	WithCustomTypeName(customTypeName string) *Context
+	WithTitle(title string) *Context
+	WithDisplayOrder(displayOrder int) *Context
+	WithTopic(topic *foundation.NSString) *Context
+	WithAssignable(assignable bool) *Context
+	WithSuggestedAge(suggestedAge foundation.NSRange) *Context
+	WithSuggestedCompletionTime(suggestedCompletionTime foundation.NSRange) *Context
+	WithSummary(summary string) *Context
+	BecomeActive()
+	ResignActive()
+	SetType(type_ raw.CLSContextType)
+	AddProgressReportingCapabilities(capabilities *foundation.NSSet[*raw.CLSProgressReportingCapability])
+	ResetProgressReportingCapabilities()
+	IdentifierPath() []string
+	Identifier() string
+	UniversalLinkURL() *foundation.NSURL
+	SetUniversalLinkURL(universalLinkURL string)
+	Type() raw.CLSContextType
+	CustomTypeName() string
+	SetCustomTypeName(customTypeName string)
+	Title() string
+	SetTitle(title string)
+	DisplayOrder() int
+	SetDisplayOrder(displayOrder int)
+	Topic() string
+	SetTopic(topic *foundation.NSString)
+	IsAssignable() bool
+	SetAssignable(assignable bool)
+	SuggestedAge() foundation.NSRange
+	SetSuggestedAge(suggestedAge foundation.NSRange)
+	SuggestedCompletionTime() foundation.NSRange
+	SetSuggestedCompletionTime(suggestedCompletionTime foundation.NSRange)
+	ProgressReportingCapabilities() *foundation.NSSet[*raw.CLSProgressReportingCapability]
+	Summary() string
+	SetSummary(summary string)
+	Thumbnail() unsafe.Pointer
+	SetThumbnail(thumbnail unsafe.Pointer)
+	IsActive() bool
+	RemoveFromParent()
+	AddChildContext(child *raw.CLSContext)
+	DescendantMatchingIdentifierPathCompletion(ctx context.Context, identifierPath *foundation.NSArray[*foundation.NSString]) (*Context, error)
+	AddNavigationChildContext(child *raw.CLSContext)
+	RemoveNavigationChildContext(child *raw.CLSContext)
+	Parent() *Context
+	NavigationChildContexts() []*raw.CLSContext
+	CreateNewActivity() *Activity
+	CurrentActivity() *Activity
+}
+
+var _ Contextable = (*Context)(nil)
 

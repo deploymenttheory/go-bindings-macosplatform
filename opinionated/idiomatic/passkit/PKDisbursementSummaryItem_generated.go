@@ -25,3 +25,10 @@ func NewDisbursementSummaryItem() *DisbursementSummaryItem {
 
 func (x *DisbursementSummaryItem) asPaymentSummaryItem() *raw.PKPaymentSummaryItem { return &x.inner.PKPaymentSummaryItem }
 
+// DisbursementSummaryItemable is the interface implemented by [DisbursementSummaryItem], for mocking and DI.
+type DisbursementSummaryItemable interface {
+	Unwrap() *raw.PKDisbursementSummaryItem
+}
+
+var _ DisbursementSummaryItemable = (*DisbursementSummaryItem)(nil)
+

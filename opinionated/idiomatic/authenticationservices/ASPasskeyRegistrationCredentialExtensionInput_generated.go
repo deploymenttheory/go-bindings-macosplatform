@@ -23,3 +23,20 @@ func NewPasskeyRegistrationCredentialExtensionInput() *PasskeyRegistrationCreden
 	return &PasskeyRegistrationCredentialExtensionInput{inner: raw.ASPasskeyRegistrationCredentialExtensionInputFromID(_id)}
 }
 
+// LargeBlob calls the underlying LargeBlob.
+func (x *PasskeyRegistrationCredentialExtensionInput) LargeBlob() *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput {
+	_r := x.inner.LargeBlob()
+	if _r == nil {
+		return nil
+	}
+	return &AuthorizationPublicKeyCredentialLargeBlobRegistrationInput{inner: _r}
+}
+
+// PasskeyRegistrationCredentialExtensionInputable is the interface implemented by [PasskeyRegistrationCredentialExtensionInput], for mocking and DI.
+type PasskeyRegistrationCredentialExtensionInputable interface {
+	Unwrap() *raw.ASPasskeyRegistrationCredentialExtensionInput
+	LargeBlob() *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput
+}
+
+var _ PasskeyRegistrationCredentialExtensionInputable = (*PasskeyRegistrationCredentialExtensionInput)(nil)
+

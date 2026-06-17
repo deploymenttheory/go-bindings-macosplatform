@@ -43,5 +43,38 @@ func (x *MTRUnitTestingClusterTestEmitTestEventResponseParams) WithTimedInvokeTi
 	return x
 }
 
+// Value calls the underlying Value.
+func (x *MTRUnitTestingClusterTestEmitTestEventResponseParams) Value() *foundation.NSNumber {
+	return x.inner.Value()
+}
+
+// SetValue calls the underlying SetValue.
+func (x *MTRUnitTestingClusterTestEmitTestEventResponseParams) SetValue(value *foundation.NSNumber) {
+	x.inner.SetValue(value)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRUnitTestingClusterTestEmitTestEventResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRUnitTestingClusterTestEmitTestEventResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
 func (x *MTRUnitTestingClusterTestEmitTestEventResponseParams) asMTRUnitTestingClusterTestEmitTestEventResponseParams() *raw.MTRUnitTestingClusterTestEmitTestEventResponseParams { return x.inner }
+
+// MTRUnitTestingClusterTestEmitTestEventResponseParamsable is the interface implemented by [MTRUnitTestingClusterTestEmitTestEventResponseParams], for mocking and DI.
+type MTRUnitTestingClusterTestEmitTestEventResponseParamsable interface {
+	Unwrap() *raw.MTRUnitTestingClusterTestEmitTestEventResponseParams
+	WithValue(value *foundation.NSNumber) *MTRUnitTestingClusterTestEmitTestEventResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRUnitTestingClusterTestEmitTestEventResponseParams
+	Value() *foundation.NSNumber
+	SetValue(value *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+}
+
+var _ MTRUnitTestingClusterTestEmitTestEventResponseParamsable = (*MTRUnitTestingClusterTestEmitTestEventResponseParams)(nil)
 

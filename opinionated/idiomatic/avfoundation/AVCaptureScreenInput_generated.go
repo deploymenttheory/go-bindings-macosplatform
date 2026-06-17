@@ -68,5 +68,90 @@ func (x *CaptureScreenInput) WithRemovesDuplicateFrames(removesDuplicateFrames b
 	return x
 }
 
+// MinFrameDuration calls the underlying MinFrameDuration.
+func (x *CaptureScreenInput) MinFrameDuration() coremedia.CMTime {
+	return x.inner.MinFrameDuration()
+}
+
+// SetMinFrameDuration calls the underlying SetMinFrameDuration.
+func (x *CaptureScreenInput) SetMinFrameDuration(minFrameDuration coremedia.CMTime) {
+	x.inner.SetMinFrameDuration(minFrameDuration)
+}
+
+// CropRect calls the underlying CropRect.
+func (x *CaptureScreenInput) CropRect() corefoundation.CGRect {
+	return x.inner.CropRect()
+}
+
+// SetCropRect calls the underlying SetCropRect.
+func (x *CaptureScreenInput) SetCropRect(cropRect corefoundation.CGRect) {
+	x.inner.SetCropRect(cropRect)
+}
+
+// ScaleFactor calls the underlying ScaleFactor.
+func (x *CaptureScreenInput) ScaleFactor() float64 {
+	return x.inner.ScaleFactor()
+}
+
+// SetScaleFactor calls the underlying SetScaleFactor.
+func (x *CaptureScreenInput) SetScaleFactor(scaleFactor float64) {
+	x.inner.SetScaleFactor(scaleFactor)
+}
+
+// CapturesMouseClicks calls the underlying CapturesMouseClicks.
+func (x *CaptureScreenInput) CapturesMouseClicks() bool {
+	return x.inner.CapturesMouseClicks()
+}
+
+// SetCapturesMouseClicks calls the underlying SetCapturesMouseClicks.
+func (x *CaptureScreenInput) SetCapturesMouseClicks(capturesMouseClicks bool) {
+	x.inner.SetCapturesMouseClicks(capturesMouseClicks)
+}
+
+// CapturesCursor calls the underlying CapturesCursor.
+func (x *CaptureScreenInput) CapturesCursor() bool {
+	return x.inner.CapturesCursor()
+}
+
+// SetCapturesCursor calls the underlying SetCapturesCursor.
+func (x *CaptureScreenInput) SetCapturesCursor(capturesCursor bool) {
+	x.inner.SetCapturesCursor(capturesCursor)
+}
+
+// RemovesDuplicateFrames calls the underlying RemovesDuplicateFrames.
+func (x *CaptureScreenInput) RemovesDuplicateFrames() bool {
+	return x.inner.RemovesDuplicateFrames()
+}
+
+// SetRemovesDuplicateFrames calls the underlying SetRemovesDuplicateFrames.
+func (x *CaptureScreenInput) SetRemovesDuplicateFrames(removesDuplicateFrames bool) {
+	x.inner.SetRemovesDuplicateFrames(removesDuplicateFrames)
+}
+
 func (x *CaptureScreenInput) asCaptureInput() *raw.AVCaptureInput { return &x.inner.AVCaptureInput }
+
+// CaptureScreenInputable is the interface implemented by [CaptureScreenInput], for mocking and DI.
+type CaptureScreenInputable interface {
+	Unwrap() *raw.AVCaptureScreenInput
+	WithMinFrameDuration(minFrameDuration coremedia.CMTime) *CaptureScreenInput
+	WithCropRect(cropRect corefoundation.CGRect) *CaptureScreenInput
+	WithScaleFactor(scaleFactor float64) *CaptureScreenInput
+	WithCapturesMouseClicks(capturesMouseClicks bool) *CaptureScreenInput
+	WithCapturesCursor(capturesCursor bool) *CaptureScreenInput
+	WithRemovesDuplicateFrames(removesDuplicateFrames bool) *CaptureScreenInput
+	MinFrameDuration() coremedia.CMTime
+	SetMinFrameDuration(minFrameDuration coremedia.CMTime)
+	CropRect() corefoundation.CGRect
+	SetCropRect(cropRect corefoundation.CGRect)
+	ScaleFactor() float64
+	SetScaleFactor(scaleFactor float64)
+	CapturesMouseClicks() bool
+	SetCapturesMouseClicks(capturesMouseClicks bool)
+	CapturesCursor() bool
+	SetCapturesCursor(capturesCursor bool)
+	RemovesDuplicateFrames() bool
+	SetRemovesDuplicateFrames(removesDuplicateFrames bool)
+}
+
+var _ CaptureScreenInputable = (*CaptureScreenInput)(nil)
 

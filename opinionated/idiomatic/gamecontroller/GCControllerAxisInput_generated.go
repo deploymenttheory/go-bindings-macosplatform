@@ -35,5 +35,38 @@ func (x *ControllerAxisInput) WithValue(value float32) *ControllerAxisInput {
 	return x
 }
 
+// SetValue calls the underlying SetValue.
+func (x *ControllerAxisInput) SetValue(value float32) {
+	x.inner.SetValue(value)
+}
+
+// ValueChangedHandler calls the underlying ValueChangedHandler.
+func (x *ControllerAxisInput) ValueChangedHandler() objc.Block {
+	return x.inner.ValueChangedHandler()
+}
+
+// SetValueChangedHandler calls the underlying SetValueChangedHandler.
+func (x *ControllerAxisInput) SetValueChangedHandler(valueChangedHandler func(*raw.GCControllerAxisInput, float32)) {
+	x.inner.SetValueChangedHandler(valueChangedHandler)
+}
+
+// Value calls the underlying Value.
+func (x *ControllerAxisInput) Value() float32 {
+	return x.inner.Value()
+}
+
 func (x *ControllerAxisInput) asControllerElement() *raw.GCControllerElement { return &x.inner.GCControllerElement }
+
+// ControllerAxisInputable is the interface implemented by [ControllerAxisInput], for mocking and DI.
+type ControllerAxisInputable interface {
+	Unwrap() *raw.GCControllerAxisInput
+	WithValueChangedHandler(valueChangedHandler func(*raw.GCControllerAxisInput, float32)) *ControllerAxisInput
+	WithValue(value float32) *ControllerAxisInput
+	SetValue(value float32)
+	ValueChangedHandler() objc.Block
+	SetValueChangedHandler(valueChangedHandler func(*raw.GCControllerAxisInput, float32))
+	Value() float32
+}
+
+var _ ControllerAxisInputable = (*ControllerAxisInput)(nil)
 

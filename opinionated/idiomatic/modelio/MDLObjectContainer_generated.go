@@ -23,3 +23,10 @@ func NewObjectContainer() *ObjectContainer {
 	return &ObjectContainer{inner: raw.MDLObjectContainerFromID(_id)}
 }
 
+// ObjectContainerable is the interface implemented by [ObjectContainer], for mocking and DI.
+type ObjectContainerable interface {
+	Unwrap() *raw.MDLObjectContainer
+}
+
+var _ ObjectContainerable = (*ObjectContainer)(nil)
+

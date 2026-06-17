@@ -46,3 +46,56 @@ func NewAudioTimeWithHostTimeSampleTimeAtRate(hostTime uint64, sampleTime int64,
 	return &AudioTime{inner: raw.AVAudioTimeFromID(_id)}
 }
 
+// ExtrapolateTimeFromAnchor calls the underlying ExtrapolateTimeFromAnchor.
+func (x *AudioTime) ExtrapolateTimeFromAnchor(anchorTime *raw.AVAudioTime) *AudioTime {
+	_r := x.inner.ExtrapolateTimeFromAnchor(anchorTime)
+	if _r == nil {
+		return nil
+	}
+	return &AudioTime{inner: _r}
+}
+
+// IsHostTimeValid calls the underlying IsHostTimeValid.
+func (x *AudioTime) IsHostTimeValid() bool {
+	return x.inner.IsHostTimeValid()
+}
+
+// HostTime calls the underlying HostTime.
+func (x *AudioTime) HostTime() uint64 {
+	return x.inner.HostTime()
+}
+
+// IsSampleTimeValid calls the underlying IsSampleTimeValid.
+func (x *AudioTime) IsSampleTimeValid() bool {
+	return x.inner.IsSampleTimeValid()
+}
+
+// SampleTime calls the underlying SampleTime.
+func (x *AudioTime) SampleTime() int64 {
+	return x.inner.SampleTime()
+}
+
+// SampleRate calls the underlying SampleRate.
+func (x *AudioTime) SampleRate() float64 {
+	return x.inner.SampleRate()
+}
+
+// AudioTimeStamp calls the underlying AudioTimeStamp.
+func (x *AudioTime) AudioTimeStamp() coreaudiotypes.AudioTimeStamp {
+	return x.inner.AudioTimeStamp()
+}
+
+// AudioTimeable is the interface implemented by [AudioTime], for mocking and DI.
+type AudioTimeable interface {
+	Unwrap() *raw.AVAudioTime
+	ExtrapolateTimeFromAnchor(anchorTime *raw.AVAudioTime) *AudioTime
+	IsHostTimeValid() bool
+	HostTime() uint64
+	IsSampleTimeValid() bool
+	SampleTime() int64
+	SampleRate() float64
+	AudioTimeStamp() coreaudiotypes.AudioTimeStamp
+}
+
+var _ AudioTimeable = (*AudioTime)(nil)
+

@@ -23,3 +23,16 @@ func NewPersistentChangeFetchResult() *PersistentChangeFetchResult {
 	return &PersistentChangeFetchResult{inner: raw.PHPersistentChangeFetchResultFromID(_id)}
 }
 
+// EnumerateChangesWith calls the underlying EnumerateChangesWith.
+func (x *PersistentChangeFetchResult) EnumerateChangesWith(block func(*raw.PHPersistentChange, *bool)) {
+	x.inner.EnumerateChangesWith(block)
+}
+
+// PersistentChangeFetchResultable is the interface implemented by [PersistentChangeFetchResult], for mocking and DI.
+type PersistentChangeFetchResultable interface {
+	Unwrap() *raw.PHPersistentChangeFetchResult
+	EnumerateChangesWith(block func(*raw.PHPersistentChange, *bool))
+}
+
+var _ PersistentChangeFetchResultable = (*PersistentChangeFetchResult)(nil)
+

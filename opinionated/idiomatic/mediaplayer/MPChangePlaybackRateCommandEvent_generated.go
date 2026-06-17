@@ -23,5 +23,18 @@ func NewChangePlaybackRateCommandEvent() *ChangePlaybackRateCommandEvent {
 	return &ChangePlaybackRateCommandEvent{inner: raw.MPChangePlaybackRateCommandEventFromID(_id)}
 }
 
+// PlaybackRate calls the underlying PlaybackRate.
+func (x *ChangePlaybackRateCommandEvent) PlaybackRate() float32 {
+	return x.inner.PlaybackRate()
+}
+
 func (x *ChangePlaybackRateCommandEvent) asRemoteCommandEvent() *raw.MPRemoteCommandEvent { return &x.inner.MPRemoteCommandEvent }
+
+// ChangePlaybackRateCommandEventable is the interface implemented by [ChangePlaybackRateCommandEvent], for mocking and DI.
+type ChangePlaybackRateCommandEventable interface {
+	Unwrap() *raw.MPChangePlaybackRateCommandEvent
+	PlaybackRate() float32
+}
+
+var _ ChangePlaybackRateCommandEventable = (*ChangePlaybackRateCommandEvent)(nil)
 

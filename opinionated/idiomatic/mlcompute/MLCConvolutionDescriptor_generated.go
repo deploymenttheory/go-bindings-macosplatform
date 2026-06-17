@@ -23,3 +23,100 @@ func NewConvolutionDescriptor() *ConvolutionDescriptor {
 	return &ConvolutionDescriptor{inner: raw.MLCConvolutionDescriptorFromID(_id)}
 }
 
+// ConvolutionType calls the underlying ConvolutionType.
+func (x *ConvolutionDescriptor) ConvolutionType() raw.MLCConvolutionType {
+	return x.inner.ConvolutionType()
+}
+
+// KernelWidth calls the underlying KernelWidth.
+func (x *ConvolutionDescriptor) KernelWidth() uint {
+	return x.inner.KernelWidth()
+}
+
+// KernelHeight calls the underlying KernelHeight.
+func (x *ConvolutionDescriptor) KernelHeight() uint {
+	return x.inner.KernelHeight()
+}
+
+// InputFeatureChannelCount calls the underlying InputFeatureChannelCount.
+func (x *ConvolutionDescriptor) InputFeatureChannelCount() uint {
+	return x.inner.InputFeatureChannelCount()
+}
+
+// OutputFeatureChannelCount calls the underlying OutputFeatureChannelCount.
+func (x *ConvolutionDescriptor) OutputFeatureChannelCount() uint {
+	return x.inner.OutputFeatureChannelCount()
+}
+
+// StrideInX calls the underlying StrideInX.
+func (x *ConvolutionDescriptor) StrideInX() uint {
+	return x.inner.StrideInX()
+}
+
+// StrideInY calls the underlying StrideInY.
+func (x *ConvolutionDescriptor) StrideInY() uint {
+	return x.inner.StrideInY()
+}
+
+// DilationRateInX calls the underlying DilationRateInX.
+func (x *ConvolutionDescriptor) DilationRateInX() uint {
+	return x.inner.DilationRateInX()
+}
+
+// DilationRateInY calls the underlying DilationRateInY.
+func (x *ConvolutionDescriptor) DilationRateInY() uint {
+	return x.inner.DilationRateInY()
+}
+
+// GroupCount calls the underlying GroupCount.
+func (x *ConvolutionDescriptor) GroupCount() uint {
+	return x.inner.GroupCount()
+}
+
+// PaddingPolicy calls the underlying PaddingPolicy.
+func (x *ConvolutionDescriptor) PaddingPolicy() raw.MLCPaddingPolicy {
+	return x.inner.PaddingPolicy()
+}
+
+// PaddingSizeInX calls the underlying PaddingSizeInX.
+func (x *ConvolutionDescriptor) PaddingSizeInX() uint {
+	return x.inner.PaddingSizeInX()
+}
+
+// PaddingSizeInY calls the underlying PaddingSizeInY.
+func (x *ConvolutionDescriptor) PaddingSizeInY() uint {
+	return x.inner.PaddingSizeInY()
+}
+
+// IsConvolutionTranspose calls the underlying IsConvolutionTranspose.
+func (x *ConvolutionDescriptor) IsConvolutionTranspose() bool {
+	return x.inner.IsConvolutionTranspose()
+}
+
+// UsesDepthwiseConvolution calls the underlying UsesDepthwiseConvolution.
+func (x *ConvolutionDescriptor) UsesDepthwiseConvolution() bool {
+	return x.inner.UsesDepthwiseConvolution()
+}
+
+// ConvolutionDescriptorable is the interface implemented by [ConvolutionDescriptor], for mocking and DI.
+type ConvolutionDescriptorable interface {
+	Unwrap() *raw.MLCConvolutionDescriptor
+	ConvolutionType() raw.MLCConvolutionType
+	KernelWidth() uint
+	KernelHeight() uint
+	InputFeatureChannelCount() uint
+	OutputFeatureChannelCount() uint
+	StrideInX() uint
+	StrideInY() uint
+	DilationRateInX() uint
+	DilationRateInY() uint
+	GroupCount() uint
+	PaddingPolicy() raw.MLCPaddingPolicy
+	PaddingSizeInX() uint
+	PaddingSizeInY() uint
+	IsConvolutionTranspose() bool
+	UsesDepthwiseConvolution() bool
+}
+
+var _ ConvolutionDescriptorable = (*ConvolutionDescriptor)(nil)
+

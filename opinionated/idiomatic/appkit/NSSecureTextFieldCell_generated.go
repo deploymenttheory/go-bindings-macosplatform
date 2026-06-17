@@ -29,9 +29,29 @@ func (x *SecureTextFieldCell) WithEchosBullets(echosBullets bool) *SecureTextFie
 	return x
 }
 
+// EchosBullets calls the underlying EchosBullets.
+func (x *SecureTextFieldCell) EchosBullets() bool {
+	return x.inner.EchosBullets()
+}
+
+// SetEchosBullets calls the underlying SetEchosBullets.
+func (x *SecureTextFieldCell) SetEchosBullets(echosBullets bool) {
+	x.inner.SetEchosBullets(echosBullets)
+}
+
 func (x *SecureTextFieldCell) asTextFieldCell() *raw.NSTextFieldCell { return &x.inner.NSTextFieldCell }
 
 func (x *SecureTextFieldCell) asActionCell() *raw.NSActionCell { return &x.inner.NSTextFieldCell.NSActionCell }
 
 func (x *SecureTextFieldCell) asCell() *raw.NSCell { return &x.inner.NSTextFieldCell.NSActionCell.NSCell }
+
+// SecureTextFieldCellable is the interface implemented by [SecureTextFieldCell], for mocking and DI.
+type SecureTextFieldCellable interface {
+	Unwrap() *raw.NSSecureTextFieldCell
+	WithEchosBullets(echosBullets bool) *SecureTextFieldCell
+	EchosBullets() bool
+	SetEchosBullets(echosBullets bool)
+}
+
+var _ SecureTextFieldCellable = (*SecureTextFieldCell)(nil)
 

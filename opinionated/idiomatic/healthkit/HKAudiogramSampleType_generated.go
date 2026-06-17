@@ -27,3 +27,10 @@ func (x *AudiogramSampleType) asSampleType() *raw.HKSampleType { return &x.inner
 
 func (x *AudiogramSampleType) asObjectType() *raw.HKObjectType { return &x.inner.HKSampleType.HKObjectType }
 
+// AudiogramSampleTypeable is the interface implemented by [AudiogramSampleType], for mocking and DI.
+type AudiogramSampleTypeable interface {
+	Unwrap() *raw.HKAudiogramSampleType
+}
+
+var _ AudiogramSampleTypeable = (*AudiogramSampleType)(nil)
+

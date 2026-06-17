@@ -6,6 +6,7 @@ package coremidi
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremidi"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +24,90 @@ func NewUMPFunctionBlock() *UMPFunctionBlock {
 	return &UMPFunctionBlock{inner: raw.MIDIUMPFunctionBlockFromID(_id)}
 }
 
+// Name calls the underlying Name.
+func (x *UMPFunctionBlock) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// FunctionBlockID calls the underlying FunctionBlockID.
+func (x *UMPFunctionBlock) FunctionBlockID() uint8 {
+	return x.inner.FunctionBlockID()
+}
+
+// Direction calls the underlying Direction.
+func (x *UMPFunctionBlock) Direction() raw.MIDIUMPFunctionBlockDirection {
+	return x.inner.Direction()
+}
+
+// FirstGroup calls the underlying FirstGroup.
+func (x *UMPFunctionBlock) FirstGroup() uint8 {
+	return x.inner.FirstGroup()
+}
+
+// TotalGroupsSpanned calls the underlying TotalGroupsSpanned.
+func (x *UMPFunctionBlock) TotalGroupsSpanned() uint8 {
+	return x.inner.TotalGroupsSpanned()
+}
+
+// MaxSysEx8Streams calls the underlying MaxSysEx8Streams.
+func (x *UMPFunctionBlock) MaxSysEx8Streams() uint8 {
+	return x.inner.MaxSysEx8Streams()
+}
+
+// MIDI1Info calls the underlying MIDI1Info.
+func (x *UMPFunctionBlock) MIDI1Info() raw.MIDIUMPFunctionBlockMIDI1Info {
+	return x.inner.MIDI1Info()
+}
+
+// UIHint calls the underlying UIHint.
+func (x *UMPFunctionBlock) UIHint() raw.MIDIUMPFunctionBlockUIHint {
+	return x.inner.UIHint()
+}
+
+// UMPEndpoint calls the underlying UMPEndpoint.
+func (x *UMPFunctionBlock) UMPEndpoint() *UMPEndpoint {
+	_r := x.inner.UMPEndpoint()
+	if _r == nil {
+		return nil
+	}
+	return &UMPEndpoint{inner: _r}
+}
+
+// MidiCIDevice calls the underlying MidiCIDevice.
+func (x *UMPFunctionBlock) MidiCIDevice() *CIDevice {
+	_r := x.inner.MidiCIDevice()
+	if _r == nil {
+		return nil
+	}
+	return &CIDevice{inner: _r}
+}
+
+// IsEnabled calls the underlying IsEnabled.
+func (x *UMPFunctionBlock) IsEnabled() bool {
+	return x.inner.IsEnabled()
+}
+
 func (x *UMPFunctionBlock) asUMPFunctionBlock() *raw.MIDIUMPFunctionBlock { return x.inner }
+
+// UMPFunctionBlockable is the interface implemented by [UMPFunctionBlock], for mocking and DI.
+type UMPFunctionBlockable interface {
+	Unwrap() *raw.MIDIUMPFunctionBlock
+	Name() string
+	FunctionBlockID() uint8
+	Direction() raw.MIDIUMPFunctionBlockDirection
+	FirstGroup() uint8
+	TotalGroupsSpanned() uint8
+	MaxSysEx8Streams() uint8
+	MIDI1Info() raw.MIDIUMPFunctionBlockMIDI1Info
+	UIHint() raw.MIDIUMPFunctionBlockUIHint
+	UMPEndpoint() *UMPEndpoint
+	MidiCIDevice() *CIDevice
+	IsEnabled() bool
+}
+
+var _ UMPFunctionBlockable = (*UMPFunctionBlock)(nil)
 

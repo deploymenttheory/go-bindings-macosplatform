@@ -7,6 +7,7 @@ package avfoundation
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -63,11 +64,14 @@ func (x *AssetDownloadContentConfiguration) VariantQualifiers() []*raw.AVAssetVa
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AVAssetVariantQualifier, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVAssetVariantQualifier {
+		return raw.AVAssetVariantQualifierFromID(purego.Retain(_id))
+	})
+}
+
+// SetVariantQualifiers calls the underlying SetVariantQualifiers.
+func (x *AssetDownloadContentConfiguration) SetVariantQualifiers(variantQualifiers *foundation.NSArray[*raw.AVAssetVariantQualifier]) {
+	x.inner.SetVariantQualifiers(variantQualifiers)
 }
 
 // MediaSelections returns the collection as a Go slice.
@@ -76,10 +80,26 @@ func (x *AssetDownloadContentConfiguration) MediaSelections() []*raw.AVMediaSele
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AVMediaSelection, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVMediaSelection {
+		return raw.AVMediaSelectionFromID(purego.Retain(_id))
+	})
 }
+
+// SetMediaSelections calls the underlying SetMediaSelections.
+func (x *AssetDownloadContentConfiguration) SetMediaSelections(mediaSelections *foundation.NSArray[*raw.AVMediaSelection]) {
+	x.inner.SetMediaSelections(mediaSelections)
+}
+
+// AssetDownloadContentConfigurationable is the interface implemented by [AssetDownloadContentConfiguration], for mocking and DI.
+type AssetDownloadContentConfigurationable interface {
+	Unwrap() *raw.AVAssetDownloadContentConfiguration
+	WithVariantQualifiers(items ...*raw.AVAssetVariantQualifier) *AssetDownloadContentConfiguration
+	WithMediaSelections(items ...MediaSelectionProvider) *AssetDownloadContentConfiguration
+	VariantQualifiers() []*raw.AVAssetVariantQualifier
+	SetVariantQualifiers(variantQualifiers *foundation.NSArray[*raw.AVAssetVariantQualifier])
+	MediaSelections() []*raw.AVMediaSelection
+	SetMediaSelections(mediaSelections *foundation.NSArray[*raw.AVMediaSelection])
+}
+
+var _ AssetDownloadContentConfigurationable = (*AssetDownloadContentConfiguration)(nil)
 

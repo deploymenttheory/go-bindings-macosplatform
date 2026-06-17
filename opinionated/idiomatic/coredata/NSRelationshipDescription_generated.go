@@ -59,5 +59,104 @@ func (x *RelationshipDescription) WithOrdered(ordered bool) *RelationshipDescrip
 	return x
 }
 
+// DestinationEntity calls the underlying DestinationEntity.
+func (x *RelationshipDescription) DestinationEntity() *EntityDescription {
+	_r := x.inner.DestinationEntity()
+	if _r == nil {
+		return nil
+	}
+	return &EntityDescription{inner: _r}
+}
+
+// SetDestinationEntity calls the underlying SetDestinationEntity.
+func (x *RelationshipDescription) SetDestinationEntity(destinationEntity *raw.NSEntityDescription) {
+	x.inner.SetDestinationEntity(destinationEntity)
+}
+
+// InverseRelationship calls the underlying InverseRelationship.
+func (x *RelationshipDescription) InverseRelationship() *RelationshipDescription {
+	_r := x.inner.InverseRelationship()
+	if _r == nil {
+		return nil
+	}
+	return &RelationshipDescription{inner: _r}
+}
+
+// SetInverseRelationship calls the underlying SetInverseRelationship.
+func (x *RelationshipDescription) SetInverseRelationship(inverseRelationship *raw.NSRelationshipDescription) {
+	x.inner.SetInverseRelationship(inverseRelationship)
+}
+
+// MaxCount calls the underlying MaxCount.
+func (x *RelationshipDescription) MaxCount() uint {
+	return x.inner.MaxCount()
+}
+
+// SetMaxCount calls the underlying SetMaxCount.
+func (x *RelationshipDescription) SetMaxCount(maxCount uint) {
+	x.inner.SetMaxCount(maxCount)
+}
+
+// MinCount calls the underlying MinCount.
+func (x *RelationshipDescription) MinCount() uint {
+	return x.inner.MinCount()
+}
+
+// SetMinCount calls the underlying SetMinCount.
+func (x *RelationshipDescription) SetMinCount(minCount uint) {
+	x.inner.SetMinCount(minCount)
+}
+
+// DeleteRule calls the underlying DeleteRule.
+func (x *RelationshipDescription) DeleteRule() raw.NSDeleteRule {
+	return x.inner.DeleteRule()
+}
+
+// SetDeleteRule calls the underlying SetDeleteRule.
+func (x *RelationshipDescription) SetDeleteRule(deleteRule raw.NSDeleteRule) {
+	x.inner.SetDeleteRule(deleteRule)
+}
+
+// IsToMany calls the underlying IsToMany.
+func (x *RelationshipDescription) IsToMany() bool {
+	return x.inner.IsToMany()
+}
+
+// IsOrdered calls the underlying IsOrdered.
+func (x *RelationshipDescription) IsOrdered() bool {
+	return x.inner.IsOrdered()
+}
+
+// SetOrdered calls the underlying SetOrdered.
+func (x *RelationshipDescription) SetOrdered(ordered bool) {
+	x.inner.SetOrdered(ordered)
+}
+
 func (x *RelationshipDescription) asPropertyDescription() *raw.NSPropertyDescription { return &x.inner.NSPropertyDescription }
+
+// RelationshipDescriptionable is the interface implemented by [RelationshipDescription], for mocking and DI.
+type RelationshipDescriptionable interface {
+	Unwrap() *raw.NSRelationshipDescription
+	WithDestinationEntity(destinationEntity *raw.NSEntityDescription) *RelationshipDescription
+	WithInverseRelationship(inverseRelationship *raw.NSRelationshipDescription) *RelationshipDescription
+	WithMaxCount(maxCount uint) *RelationshipDescription
+	WithMinCount(minCount uint) *RelationshipDescription
+	WithDeleteRule(deleteRule raw.NSDeleteRule) *RelationshipDescription
+	WithOrdered(ordered bool) *RelationshipDescription
+	DestinationEntity() *EntityDescription
+	SetDestinationEntity(destinationEntity *raw.NSEntityDescription)
+	InverseRelationship() *RelationshipDescription
+	SetInverseRelationship(inverseRelationship *raw.NSRelationshipDescription)
+	MaxCount() uint
+	SetMaxCount(maxCount uint)
+	MinCount() uint
+	SetMinCount(minCount uint)
+	DeleteRule() raw.NSDeleteRule
+	SetDeleteRule(deleteRule raw.NSDeleteRule)
+	IsToMany() bool
+	IsOrdered() bool
+	SetOrdered(ordered bool)
+}
+
+var _ RelationshipDescriptionable = (*RelationshipDescription)(nil)
 

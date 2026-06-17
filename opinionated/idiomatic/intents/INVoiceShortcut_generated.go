@@ -5,7 +5,9 @@
 package intents
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +24,37 @@ func NewVoiceShortcut() *VoiceShortcut {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("INVoiceShortcut")), objc.RegisterName("new"))
 	return &VoiceShortcut{inner: raw.INVoiceShortcutFromID(_id)}
 }
+
+// Identifier calls the underlying Identifier.
+func (x *VoiceShortcut) Identifier() *foundation.NSUUID {
+	return x.inner.Identifier()
+}
+
+// InvocationPhrase calls the underlying InvocationPhrase.
+func (x *VoiceShortcut) InvocationPhrase() string {
+	_r := x.inner.InvocationPhrase()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Shortcut calls the underlying Shortcut.
+func (x *VoiceShortcut) Shortcut() *Shortcut {
+	_r := x.inner.Shortcut()
+	if _r == nil {
+		return nil
+	}
+	return &Shortcut{inner: _r}
+}
+
+// VoiceShortcutable is the interface implemented by [VoiceShortcut], for mocking and DI.
+type VoiceShortcutable interface {
+	Unwrap() *raw.INVoiceShortcut
+	Identifier() *foundation.NSUUID
+	InvocationPhrase() string
+	Shortcut() *Shortcut
+}
+
+var _ VoiceShortcutable = (*VoiceShortcut)(nil)
 

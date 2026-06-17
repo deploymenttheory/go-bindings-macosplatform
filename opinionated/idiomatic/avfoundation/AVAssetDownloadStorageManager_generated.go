@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,27 @@ func NewAssetDownloadStorageManager() *AssetDownloadStorageManager {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAssetDownloadStorageManager")), objc.RegisterName("new"))
 	return &AssetDownloadStorageManager{inner: raw.AVAssetDownloadStorageManagerFromID(_id)}
 }
+
+// SetStorageManagementPolicyForURL calls the underlying SetStorageManagementPolicyForURL.
+func (x *AssetDownloadStorageManager) SetStorageManagementPolicyForURL(storageManagementPolicy *raw.AVAssetDownloadStorageManagementPolicy, downloadStorageURL string) {
+	x.inner.SetStorageManagementPolicyForURL(storageManagementPolicy, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(downloadStorageURL)))
+}
+
+// StorageManagementPolicyForURL calls the underlying StorageManagementPolicyForURL.
+func (x *AssetDownloadStorageManager) StorageManagementPolicyForURL(downloadStorageURL string) *AssetDownloadStorageManagementPolicy {
+	_r := x.inner.StorageManagementPolicyForURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(downloadStorageURL)))
+	if _r == nil {
+		return nil
+	}
+	return &AssetDownloadStorageManagementPolicy{inner: _r}
+}
+
+// AssetDownloadStorageManagerable is the interface implemented by [AssetDownloadStorageManager], for mocking and DI.
+type AssetDownloadStorageManagerable interface {
+	Unwrap() *raw.AVAssetDownloadStorageManager
+	SetStorageManagementPolicyForURL(storageManagementPolicy *raw.AVAssetDownloadStorageManagementPolicy, downloadStorageURL string)
+	StorageManagementPolicyForURL(downloadStorageURL string) *AssetDownloadStorageManagementPolicy
+}
+
+var _ AssetDownloadStorageManagerable = (*AssetDownloadStorageManager)(nil)
 

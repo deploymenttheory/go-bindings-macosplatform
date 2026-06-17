@@ -43,3 +43,48 @@ func (x *MTRThermostatClusterAtomicResponseParams) WithTimeout(timeout *foundati
 	return x
 }
 
+// StatusCode calls the underlying StatusCode.
+func (x *MTRThermostatClusterAtomicResponseParams) StatusCode() *foundation.NSNumber {
+	return x.inner.StatusCode()
+}
+
+// SetStatusCode calls the underlying SetStatusCode.
+func (x *MTRThermostatClusterAtomicResponseParams) SetStatusCode(statusCode *foundation.NSNumber) {
+	x.inner.SetStatusCode(statusCode)
+}
+
+// AttributeStatus calls the underlying AttributeStatus.
+func (x *MTRThermostatClusterAtomicResponseParams) AttributeStatus() *foundation.NSArray[objc.ID] {
+	return x.inner.AttributeStatus()
+}
+
+// SetAttributeStatus calls the underlying SetAttributeStatus.
+func (x *MTRThermostatClusterAtomicResponseParams) SetAttributeStatus(attributeStatus *foundation.NSArray[objc.ID]) {
+	x.inner.SetAttributeStatus(attributeStatus)
+}
+
+// Timeout calls the underlying Timeout.
+func (x *MTRThermostatClusterAtomicResponseParams) Timeout() *foundation.NSNumber {
+	return x.inner.Timeout()
+}
+
+// SetTimeout calls the underlying SetTimeout.
+func (x *MTRThermostatClusterAtomicResponseParams) SetTimeout(timeout *foundation.NSNumber) {
+	x.inner.SetTimeout(timeout)
+}
+
+// MTRThermostatClusterAtomicResponseParamsable is the interface implemented by [MTRThermostatClusterAtomicResponseParams], for mocking and DI.
+type MTRThermostatClusterAtomicResponseParamsable interface {
+	Unwrap() *raw.MTRThermostatClusterAtomicResponseParams
+	WithStatusCode(statusCode *foundation.NSNumber) *MTRThermostatClusterAtomicResponseParams
+	WithTimeout(timeout *foundation.NSNumber) *MTRThermostatClusterAtomicResponseParams
+	StatusCode() *foundation.NSNumber
+	SetStatusCode(statusCode *foundation.NSNumber)
+	AttributeStatus() *foundation.NSArray[objc.ID]
+	SetAttributeStatus(attributeStatus *foundation.NSArray[objc.ID])
+	Timeout() *foundation.NSNumber
+	SetTimeout(timeout *foundation.NSNumber)
+}
+
+var _ MTRThermostatClusterAtomicResponseParamsable = (*MTRThermostatClusterAtomicResponseParams)(nil)
+

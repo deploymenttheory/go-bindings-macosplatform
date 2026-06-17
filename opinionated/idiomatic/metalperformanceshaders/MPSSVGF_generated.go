@@ -11,6 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsrayintersector"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // SVGF wraps [raw.MPSSVGF] with a fluent Go API.
@@ -125,5 +126,259 @@ func (x *SVGF) WithChannelCount2(channelCount2 uint) *SVGF {
 	return x
 }
 
+// CopyWithZoneDevice calls the underlying CopyWithZoneDevice.
+func (x *SVGF) CopyWithZoneDevice(zone unsafe.Pointer, device metal.MTLDevice) *SVGF {
+	_r := x.inner.CopyWithZoneDevice(zone, device)
+	if _r == nil {
+		return nil
+	}
+	return &SVGF{inner: _r}
+}
+
+// EncodeWithCoder calls the underlying EncodeWithCoder.
+func (x *SVGF) EncodeWithCoder(coder *foundation.NSCoder) {
+	x.inner.EncodeWithCoder(coder)
+}
+
+// EncodeReprojectionToCommandBufferSourceTexturePreviousTextureDestinationTexturePreviousLuminanceMomentsTextureDestinationLuminanceMomentsTexturePreviousFrameCountTextureDestinationFrameCountTextureMotionVectorTextureDepthNormalTexturePreviousDepthNormalTexture calls the underlying EncodeReprojectionToCommandBufferSourceTexturePreviousTextureDestinationTexturePreviousLuminanceMomentsTextureDestinationLuminanceMomentsTexturePreviousFrameCountTextureDestinationFrameCountTextureMotionVectorTextureDepthNormalTexturePreviousDepthNormalTexture.
+func (x *SVGF) EncodeReprojectionToCommandBufferSourceTexturePreviousTextureDestinationTexturePreviousLuminanceMomentsTextureDestinationLuminanceMomentsTexturePreviousFrameCountTextureDestinationFrameCountTextureMotionVectorTextureDepthNormalTexturePreviousDepthNormalTexture(commandBuffer metal.MTLCommandBuffer, sourceTexture metal.MTLTexture, previousTexture metal.MTLTexture, destinationTexture metal.MTLTexture, previousLuminanceMomentsTexture metal.MTLTexture, destinationLuminanceMomentsTexture metal.MTLTexture, previousFrameCountTexture metal.MTLTexture, destinationFrameCountTexture metal.MTLTexture, motionVectorTexture metal.MTLTexture, depthNormalTexture metal.MTLTexture, previousDepthNormalTexture metal.MTLTexture) {
+	x.inner.EncodeReprojectionToCommandBufferSourceTexturePreviousTextureDestinationTexturePreviousLuminanceMomentsTextureDestinationLuminanceMomentsTexturePreviousFrameCountTextureDestinationFrameCountTextureMotionVectorTextureDepthNormalTexturePreviousDepthNormalTexture(commandBuffer, sourceTexture, previousTexture, destinationTexture, previousLuminanceMomentsTexture, destinationLuminanceMomentsTexture, previousFrameCountTexture, destinationFrameCountTexture, motionVectorTexture, depthNormalTexture, previousDepthNormalTexture)
+}
+
+// EncodeReprojectionToCommandBufferSourceTexturePreviousTextureDestinationTexturePreviousLuminanceMomentsTextureDestinationLuminanceMomentsTextureSourceTexture2PreviousTexture2DestinationTexture2PreviousLuminanceMomentsTexture2DestinationLuminanceMomentsTexture2PreviousFrameCountTextureDestinationFrameCountTextureMotionVectorTextureDepthNormalTexturePreviousDepthNormalTexture calls the underlying EncodeReprojectionToCommandBufferSourceTexturePreviousTextureDestinationTexturePreviousLuminanceMomentsTextureDestinationLuminanceMomentsTextureSourceTexture2PreviousTexture2DestinationTexture2PreviousLuminanceMomentsTexture2DestinationLuminanceMomentsTexture2PreviousFrameCountTextureDestinationFrameCountTextureMotionVectorTextureDepthNormalTexturePreviousDepthNormalTexture.
+func (x *SVGF) EncodeReprojectionToCommandBufferSourceTexturePreviousTextureDestinationTexturePreviousLuminanceMomentsTextureDestinationLuminanceMomentsTextureSourceTexture2PreviousTexture2DestinationTexture2PreviousLuminanceMomentsTexture2DestinationLuminanceMomentsTexture2PreviousFrameCountTextureDestinationFrameCountTextureMotionVectorTextureDepthNormalTexturePreviousDepthNormalTexture(commandBuffer metal.MTLCommandBuffer, sourceTexture metal.MTLTexture, previousTexture metal.MTLTexture, destinationTexture metal.MTLTexture, previousLuminanceMomentsTexture metal.MTLTexture, destinationLuminanceMomentsTexture metal.MTLTexture, sourceTexture2 metal.MTLTexture, previousTexture2 metal.MTLTexture, destinationTexture2 metal.MTLTexture, previousLuminanceMomentsTexture2 metal.MTLTexture, destinationLuminanceMomentsTexture2 metal.MTLTexture, previousFrameCountTexture metal.MTLTexture, destinationFrameCountTexture metal.MTLTexture, motionVectorTexture metal.MTLTexture, depthNormalTexture metal.MTLTexture, previousDepthNormalTexture metal.MTLTexture) {
+	x.inner.EncodeReprojectionToCommandBufferSourceTexturePreviousTextureDestinationTexturePreviousLuminanceMomentsTextureDestinationLuminanceMomentsTextureSourceTexture2PreviousTexture2DestinationTexture2PreviousLuminanceMomentsTexture2DestinationLuminanceMomentsTexture2PreviousFrameCountTextureDestinationFrameCountTextureMotionVectorTextureDepthNormalTexturePreviousDepthNormalTexture(commandBuffer, sourceTexture, previousTexture, destinationTexture, previousLuminanceMomentsTexture, destinationLuminanceMomentsTexture, sourceTexture2, previousTexture2, destinationTexture2, previousLuminanceMomentsTexture2, destinationLuminanceMomentsTexture2, previousFrameCountTexture, destinationFrameCountTexture, motionVectorTexture, depthNormalTexture, previousDepthNormalTexture)
+}
+
+// EncodeVarianceEstimationToCommandBufferSourceTextureLuminanceMomentsTextureDestinationTextureFrameCountTextureDepthNormalTexture calls the underlying EncodeVarianceEstimationToCommandBufferSourceTextureLuminanceMomentsTextureDestinationTextureFrameCountTextureDepthNormalTexture.
+func (x *SVGF) EncodeVarianceEstimationToCommandBufferSourceTextureLuminanceMomentsTextureDestinationTextureFrameCountTextureDepthNormalTexture(commandBuffer metal.MTLCommandBuffer, sourceTexture metal.MTLTexture, luminanceMomentsTexture metal.MTLTexture, destinationTexture metal.MTLTexture, frameCountTexture metal.MTLTexture, depthNormalTexture metal.MTLTexture) {
+	x.inner.EncodeVarianceEstimationToCommandBufferSourceTextureLuminanceMomentsTextureDestinationTextureFrameCountTextureDepthNormalTexture(commandBuffer, sourceTexture, luminanceMomentsTexture, destinationTexture, frameCountTexture, depthNormalTexture)
+}
+
+// EncodeVarianceEstimationToCommandBufferSourceTextureLuminanceMomentsTextureDestinationTextureSourceTexture2LuminanceMomentsTexture2DestinationTexture2FrameCountTextureDepthNormalTexture calls the underlying EncodeVarianceEstimationToCommandBufferSourceTextureLuminanceMomentsTextureDestinationTextureSourceTexture2LuminanceMomentsTexture2DestinationTexture2FrameCountTextureDepthNormalTexture.
+func (x *SVGF) EncodeVarianceEstimationToCommandBufferSourceTextureLuminanceMomentsTextureDestinationTextureSourceTexture2LuminanceMomentsTexture2DestinationTexture2FrameCountTextureDepthNormalTexture(commandBuffer metal.MTLCommandBuffer, sourceTexture metal.MTLTexture, luminanceMomentsTexture metal.MTLTexture, destinationTexture metal.MTLTexture, sourceTexture2 metal.MTLTexture, luminanceMomentsTexture2 metal.MTLTexture, destinationTexture2 metal.MTLTexture, frameCountTexture metal.MTLTexture, depthNormalTexture metal.MTLTexture) {
+	x.inner.EncodeVarianceEstimationToCommandBufferSourceTextureLuminanceMomentsTextureDestinationTextureSourceTexture2LuminanceMomentsTexture2DestinationTexture2FrameCountTextureDepthNormalTexture(commandBuffer, sourceTexture, luminanceMomentsTexture, destinationTexture, sourceTexture2, luminanceMomentsTexture2, destinationTexture2, frameCountTexture, depthNormalTexture)
+}
+
+// EncodeBilateralFilterToCommandBufferStepDistanceSourceTextureDestinationTextureDepthNormalTexture calls the underlying EncodeBilateralFilterToCommandBufferStepDistanceSourceTextureDestinationTextureDepthNormalTexture.
+func (x *SVGF) EncodeBilateralFilterToCommandBufferStepDistanceSourceTextureDestinationTextureDepthNormalTexture(commandBuffer metal.MTLCommandBuffer, stepDistance uint, sourceTexture metal.MTLTexture, destinationTexture metal.MTLTexture, depthNormalTexture metal.MTLTexture) {
+	x.inner.EncodeBilateralFilterToCommandBufferStepDistanceSourceTextureDestinationTextureDepthNormalTexture(commandBuffer, stepDistance, sourceTexture, destinationTexture, depthNormalTexture)
+}
+
+// EncodeBilateralFilterToCommandBufferStepDistanceSourceTextureDestinationTextureSourceTexture2DestinationTexture2DepthNormalTexture calls the underlying EncodeBilateralFilterToCommandBufferStepDistanceSourceTextureDestinationTextureSourceTexture2DestinationTexture2DepthNormalTexture.
+func (x *SVGF) EncodeBilateralFilterToCommandBufferStepDistanceSourceTextureDestinationTextureSourceTexture2DestinationTexture2DepthNormalTexture(commandBuffer metal.MTLCommandBuffer, stepDistance uint, sourceTexture metal.MTLTexture, destinationTexture metal.MTLTexture, sourceTexture2 metal.MTLTexture, destinationTexture2 metal.MTLTexture, depthNormalTexture metal.MTLTexture) {
+	x.inner.EncodeBilateralFilterToCommandBufferStepDistanceSourceTextureDestinationTextureSourceTexture2DestinationTexture2DepthNormalTexture(commandBuffer, stepDistance, sourceTexture, destinationTexture, sourceTexture2, destinationTexture2, depthNormalTexture)
+}
+
+// DepthWeight calls the underlying DepthWeight.
+func (x *SVGF) DepthWeight() float32 {
+	return x.inner.DepthWeight()
+}
+
+// SetDepthWeight calls the underlying SetDepthWeight.
+func (x *SVGF) SetDepthWeight(depthWeight float32) {
+	x.inner.SetDepthWeight(depthWeight)
+}
+
+// NormalWeight calls the underlying NormalWeight.
+func (x *SVGF) NormalWeight() float32 {
+	return x.inner.NormalWeight()
+}
+
+// SetNormalWeight calls the underlying SetNormalWeight.
+func (x *SVGF) SetNormalWeight(normalWeight float32) {
+	x.inner.SetNormalWeight(normalWeight)
+}
+
+// LuminanceWeight calls the underlying LuminanceWeight.
+func (x *SVGF) LuminanceWeight() float32 {
+	return x.inner.LuminanceWeight()
+}
+
+// SetLuminanceWeight calls the underlying SetLuminanceWeight.
+func (x *SVGF) SetLuminanceWeight(luminanceWeight float32) {
+	x.inner.SetLuminanceWeight(luminanceWeight)
+}
+
+// TemporalWeighting calls the underlying TemporalWeighting.
+func (x *SVGF) TemporalWeighting() mpsrayintersector.MPSTemporalWeighting {
+	return x.inner.TemporalWeighting()
+}
+
+// SetTemporalWeighting calls the underlying SetTemporalWeighting.
+func (x *SVGF) SetTemporalWeighting(temporalWeighting mpsrayintersector.MPSTemporalWeighting) {
+	x.inner.SetTemporalWeighting(temporalWeighting)
+}
+
+// TemporalReprojectionBlendFactor calls the underlying TemporalReprojectionBlendFactor.
+func (x *SVGF) TemporalReprojectionBlendFactor() float32 {
+	return x.inner.TemporalReprojectionBlendFactor()
+}
+
+// SetTemporalReprojectionBlendFactor calls the underlying SetTemporalReprojectionBlendFactor.
+func (x *SVGF) SetTemporalReprojectionBlendFactor(temporalReprojectionBlendFactor float32) {
+	x.inner.SetTemporalReprojectionBlendFactor(temporalReprojectionBlendFactor)
+}
+
+// ReprojectionThreshold calls the underlying ReprojectionThreshold.
+func (x *SVGF) ReprojectionThreshold() float32 {
+	return x.inner.ReprojectionThreshold()
+}
+
+// SetReprojectionThreshold calls the underlying SetReprojectionThreshold.
+func (x *SVGF) SetReprojectionThreshold(reprojectionThreshold float32) {
+	x.inner.SetReprojectionThreshold(reprojectionThreshold)
+}
+
+// MinimumFramesForVarianceEstimation calls the underlying MinimumFramesForVarianceEstimation.
+func (x *SVGF) MinimumFramesForVarianceEstimation() uint {
+	return x.inner.MinimumFramesForVarianceEstimation()
+}
+
+// SetMinimumFramesForVarianceEstimation calls the underlying SetMinimumFramesForVarianceEstimation.
+func (x *SVGF) SetMinimumFramesForVarianceEstimation(minimumFramesForVarianceEstimation uint) {
+	x.inner.SetMinimumFramesForVarianceEstimation(minimumFramesForVarianceEstimation)
+}
+
+// VarianceEstimationRadius calls the underlying VarianceEstimationRadius.
+func (x *SVGF) VarianceEstimationRadius() uint {
+	return x.inner.VarianceEstimationRadius()
+}
+
+// SetVarianceEstimationRadius calls the underlying SetVarianceEstimationRadius.
+func (x *SVGF) SetVarianceEstimationRadius(varianceEstimationRadius uint) {
+	x.inner.SetVarianceEstimationRadius(varianceEstimationRadius)
+}
+
+// VarianceEstimationSigma calls the underlying VarianceEstimationSigma.
+func (x *SVGF) VarianceEstimationSigma() float32 {
+	return x.inner.VarianceEstimationSigma()
+}
+
+// SetVarianceEstimationSigma calls the underlying SetVarianceEstimationSigma.
+func (x *SVGF) SetVarianceEstimationSigma(varianceEstimationSigma float32) {
+	x.inner.SetVarianceEstimationSigma(varianceEstimationSigma)
+}
+
+// VariancePrefilterSigma calls the underlying VariancePrefilterSigma.
+func (x *SVGF) VariancePrefilterSigma() float32 {
+	return x.inner.VariancePrefilterSigma()
+}
+
+// SetVariancePrefilterSigma calls the underlying SetVariancePrefilterSigma.
+func (x *SVGF) SetVariancePrefilterSigma(variancePrefilterSigma float32) {
+	x.inner.SetVariancePrefilterSigma(variancePrefilterSigma)
+}
+
+// VariancePrefilterRadius calls the underlying VariancePrefilterRadius.
+func (x *SVGF) VariancePrefilterRadius() uint {
+	return x.inner.VariancePrefilterRadius()
+}
+
+// SetVariancePrefilterRadius calls the underlying SetVariancePrefilterRadius.
+func (x *SVGF) SetVariancePrefilterRadius(variancePrefilterRadius uint) {
+	x.inner.SetVariancePrefilterRadius(variancePrefilterRadius)
+}
+
+// BilateralFilterSigma calls the underlying BilateralFilterSigma.
+func (x *SVGF) BilateralFilterSigma() float32 {
+	return x.inner.BilateralFilterSigma()
+}
+
+// SetBilateralFilterSigma calls the underlying SetBilateralFilterSigma.
+func (x *SVGF) SetBilateralFilterSigma(bilateralFilterSigma float32) {
+	x.inner.SetBilateralFilterSigma(bilateralFilterSigma)
+}
+
+// BilateralFilterRadius calls the underlying BilateralFilterRadius.
+func (x *SVGF) BilateralFilterRadius() uint {
+	return x.inner.BilateralFilterRadius()
+}
+
+// SetBilateralFilterRadius calls the underlying SetBilateralFilterRadius.
+func (x *SVGF) SetBilateralFilterRadius(bilateralFilterRadius uint) {
+	x.inner.SetBilateralFilterRadius(bilateralFilterRadius)
+}
+
+// ChannelCount calls the underlying ChannelCount.
+func (x *SVGF) ChannelCount() uint {
+	return x.inner.ChannelCount()
+}
+
+// SetChannelCount calls the underlying SetChannelCount.
+func (x *SVGF) SetChannelCount(channelCount uint) {
+	x.inner.SetChannelCount(channelCount)
+}
+
+// ChannelCount2 calls the underlying ChannelCount2.
+func (x *SVGF) ChannelCount2() uint {
+	return x.inner.ChannelCount2()
+}
+
+// SetChannelCount2 calls the underlying SetChannelCount2.
+func (x *SVGF) SetChannelCount2(channelCount2 uint) {
+	x.inner.SetChannelCount2(channelCount2)
+}
+
 func (x *SVGF) asKernel() *mpscore.MPSKernel { return &x.inner.MPSKernel }
+
+// SVGFable is the interface implemented by [SVGF], for mocking and DI.
+type SVGFable interface {
+	Unwrap() *raw.MPSSVGF
+	WithDepthWeight(depthWeight float32) *SVGF
+	WithNormalWeight(normalWeight float32) *SVGF
+	WithLuminanceWeight(luminanceWeight float32) *SVGF
+	WithTemporalWeighting(temporalWeighting mpsrayintersector.MPSTemporalWeighting) *SVGF
+	WithTemporalReprojectionBlendFactor(temporalReprojectionBlendFactor float32) *SVGF
+	WithReprojectionThreshold(reprojectionThreshold float32) *SVGF
+	WithMinimumFramesForVarianceEstimation(minimumFramesForVarianceEstimation uint) *SVGF
+	WithVarianceEstimationRadius(varianceEstimationRadius uint) *SVGF
+	WithVarianceEstimationSigma(varianceEstimationSigma float32) *SVGF
+	WithVariancePrefilterSigma(variancePrefilterSigma float32) *SVGF
+	WithVariancePrefilterRadius(variancePrefilterRadius uint) *SVGF
+	WithBilateralFilterSigma(bilateralFilterSigma float32) *SVGF
+	WithBilateralFilterRadius(bilateralFilterRadius uint) *SVGF
+	WithChannelCount(channelCount uint) *SVGF
+	WithChannelCount2(channelCount2 uint) *SVGF
+	CopyWithZoneDevice(zone unsafe.Pointer, device metal.MTLDevice) *SVGF
+	EncodeWithCoder(coder *foundation.NSCoder)
+	EncodeReprojectionToCommandBufferSourceTexturePreviousTextureDestinationTexturePreviousLuminanceMomentsTextureDestinationLuminanceMomentsTexturePreviousFrameCountTextureDestinationFrameCountTextureMotionVectorTextureDepthNormalTexturePreviousDepthNormalTexture(commandBuffer metal.MTLCommandBuffer, sourceTexture metal.MTLTexture, previousTexture metal.MTLTexture, destinationTexture metal.MTLTexture, previousLuminanceMomentsTexture metal.MTLTexture, destinationLuminanceMomentsTexture metal.MTLTexture, previousFrameCountTexture metal.MTLTexture, destinationFrameCountTexture metal.MTLTexture, motionVectorTexture metal.MTLTexture, depthNormalTexture metal.MTLTexture, previousDepthNormalTexture metal.MTLTexture)
+	EncodeReprojectionToCommandBufferSourceTexturePreviousTextureDestinationTexturePreviousLuminanceMomentsTextureDestinationLuminanceMomentsTextureSourceTexture2PreviousTexture2DestinationTexture2PreviousLuminanceMomentsTexture2DestinationLuminanceMomentsTexture2PreviousFrameCountTextureDestinationFrameCountTextureMotionVectorTextureDepthNormalTexturePreviousDepthNormalTexture(commandBuffer metal.MTLCommandBuffer, sourceTexture metal.MTLTexture, previousTexture metal.MTLTexture, destinationTexture metal.MTLTexture, previousLuminanceMomentsTexture metal.MTLTexture, destinationLuminanceMomentsTexture metal.MTLTexture, sourceTexture2 metal.MTLTexture, previousTexture2 metal.MTLTexture, destinationTexture2 metal.MTLTexture, previousLuminanceMomentsTexture2 metal.MTLTexture, destinationLuminanceMomentsTexture2 metal.MTLTexture, previousFrameCountTexture metal.MTLTexture, destinationFrameCountTexture metal.MTLTexture, motionVectorTexture metal.MTLTexture, depthNormalTexture metal.MTLTexture, previousDepthNormalTexture metal.MTLTexture)
+	EncodeVarianceEstimationToCommandBufferSourceTextureLuminanceMomentsTextureDestinationTextureFrameCountTextureDepthNormalTexture(commandBuffer metal.MTLCommandBuffer, sourceTexture metal.MTLTexture, luminanceMomentsTexture metal.MTLTexture, destinationTexture metal.MTLTexture, frameCountTexture metal.MTLTexture, depthNormalTexture metal.MTLTexture)
+	EncodeVarianceEstimationToCommandBufferSourceTextureLuminanceMomentsTextureDestinationTextureSourceTexture2LuminanceMomentsTexture2DestinationTexture2FrameCountTextureDepthNormalTexture(commandBuffer metal.MTLCommandBuffer, sourceTexture metal.MTLTexture, luminanceMomentsTexture metal.MTLTexture, destinationTexture metal.MTLTexture, sourceTexture2 metal.MTLTexture, luminanceMomentsTexture2 metal.MTLTexture, destinationTexture2 metal.MTLTexture, frameCountTexture metal.MTLTexture, depthNormalTexture metal.MTLTexture)
+	EncodeBilateralFilterToCommandBufferStepDistanceSourceTextureDestinationTextureDepthNormalTexture(commandBuffer metal.MTLCommandBuffer, stepDistance uint, sourceTexture metal.MTLTexture, destinationTexture metal.MTLTexture, depthNormalTexture metal.MTLTexture)
+	EncodeBilateralFilterToCommandBufferStepDistanceSourceTextureDestinationTextureSourceTexture2DestinationTexture2DepthNormalTexture(commandBuffer metal.MTLCommandBuffer, stepDistance uint, sourceTexture metal.MTLTexture, destinationTexture metal.MTLTexture, sourceTexture2 metal.MTLTexture, destinationTexture2 metal.MTLTexture, depthNormalTexture metal.MTLTexture)
+	DepthWeight() float32
+	SetDepthWeight(depthWeight float32)
+	NormalWeight() float32
+	SetNormalWeight(normalWeight float32)
+	LuminanceWeight() float32
+	SetLuminanceWeight(luminanceWeight float32)
+	TemporalWeighting() mpsrayintersector.MPSTemporalWeighting
+	SetTemporalWeighting(temporalWeighting mpsrayintersector.MPSTemporalWeighting)
+	TemporalReprojectionBlendFactor() float32
+	SetTemporalReprojectionBlendFactor(temporalReprojectionBlendFactor float32)
+	ReprojectionThreshold() float32
+	SetReprojectionThreshold(reprojectionThreshold float32)
+	MinimumFramesForVarianceEstimation() uint
+	SetMinimumFramesForVarianceEstimation(minimumFramesForVarianceEstimation uint)
+	VarianceEstimationRadius() uint
+	SetVarianceEstimationRadius(varianceEstimationRadius uint)
+	VarianceEstimationSigma() float32
+	SetVarianceEstimationSigma(varianceEstimationSigma float32)
+	VariancePrefilterSigma() float32
+	SetVariancePrefilterSigma(variancePrefilterSigma float32)
+	VariancePrefilterRadius() uint
+	SetVariancePrefilterRadius(variancePrefilterRadius uint)
+	BilateralFilterSigma() float32
+	SetBilateralFilterSigma(bilateralFilterSigma float32)
+	BilateralFilterRadius() uint
+	SetBilateralFilterRadius(bilateralFilterRadius uint)
+	ChannelCount() uint
+	SetChannelCount(channelCount uint)
+	ChannelCount2() uint
+	SetChannelCount2(channelCount2 uint)
+}
+
+var _ SVGFable = (*SVGF)(nil)
 

@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -35,4 +36,45 @@ func (x *MTRChannelClusterProgramCategoryStruct) WithSubCategory(subCategory str
 	x.inner.SetSubCategory(foundation.NSStringStringWithUTF8String(subCategory))
 	return x
 }
+
+// Category calls the underlying Category.
+func (x *MTRChannelClusterProgramCategoryStruct) Category() string {
+	_r := x.inner.Category()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetCategory calls the underlying SetCategory.
+func (x *MTRChannelClusterProgramCategoryStruct) SetCategory(category string) {
+	x.inner.SetCategory(foundation.NSStringStringWithUTF8String(category))
+}
+
+// SubCategory calls the underlying SubCategory.
+func (x *MTRChannelClusterProgramCategoryStruct) SubCategory() string {
+	_r := x.inner.SubCategory()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetSubCategory calls the underlying SetSubCategory.
+func (x *MTRChannelClusterProgramCategoryStruct) SetSubCategory(subCategory string) {
+	x.inner.SetSubCategory(foundation.NSStringStringWithUTF8String(subCategory))
+}
+
+// MTRChannelClusterProgramCategoryStructable is the interface implemented by [MTRChannelClusterProgramCategoryStruct], for mocking and DI.
+type MTRChannelClusterProgramCategoryStructable interface {
+	Unwrap() *raw.MTRChannelClusterProgramCategoryStruct
+	WithCategory(category string) *MTRChannelClusterProgramCategoryStruct
+	WithSubCategory(subCategory string) *MTRChannelClusterProgramCategoryStruct
+	Category() string
+	SetCategory(category string)
+	SubCategory() string
+	SetSubCategory(subCategory string)
+}
+
+var _ MTRChannelClusterProgramCategoryStructable = (*MTRChannelClusterProgramCategoryStruct)(nil)
 

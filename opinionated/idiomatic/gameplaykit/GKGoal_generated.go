@@ -23,3 +23,10 @@ func NewGoal() *Goal {
 	return &Goal{inner: raw.GKGoalFromID(_id)}
 }
 
+// Goalable is the interface implemented by [Goal], for mocking and DI.
+type Goalable interface {
+	Unwrap() *raw.GKGoal
+}
+
+var _ Goalable = (*Goal)(nil)
+

@@ -120,5 +120,226 @@ func (x *GraphPooling2DOpDescriptor) WithIncludeZeroPadToAverage(includeZeroPadT
 	return x
 }
 
+// SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom calls the underlying SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom.
+func (x *GraphPooling2DOpDescriptor) SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom(paddingLeft uint, paddingRight uint, paddingTop uint, paddingBottom uint) {
+	x.inner.SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom(paddingLeft, paddingRight, paddingTop, paddingBottom)
+}
+
+// KernelWidth calls the underlying KernelWidth.
+func (x *GraphPooling2DOpDescriptor) KernelWidth() uint {
+	return x.inner.KernelWidth()
+}
+
+// SetKernelWidth calls the underlying SetKernelWidth.
+func (x *GraphPooling2DOpDescriptor) SetKernelWidth(kernelWidth uint) {
+	x.inner.SetKernelWidth(kernelWidth)
+}
+
+// KernelHeight calls the underlying KernelHeight.
+func (x *GraphPooling2DOpDescriptor) KernelHeight() uint {
+	return x.inner.KernelHeight()
+}
+
+// SetKernelHeight calls the underlying SetKernelHeight.
+func (x *GraphPooling2DOpDescriptor) SetKernelHeight(kernelHeight uint) {
+	x.inner.SetKernelHeight(kernelHeight)
+}
+
+// StrideInX calls the underlying StrideInX.
+func (x *GraphPooling2DOpDescriptor) StrideInX() uint {
+	return x.inner.StrideInX()
+}
+
+// SetStrideInX calls the underlying SetStrideInX.
+func (x *GraphPooling2DOpDescriptor) SetStrideInX(strideInX uint) {
+	x.inner.SetStrideInX(strideInX)
+}
+
+// StrideInY calls the underlying StrideInY.
+func (x *GraphPooling2DOpDescriptor) StrideInY() uint {
+	return x.inner.StrideInY()
+}
+
+// SetStrideInY calls the underlying SetStrideInY.
+func (x *GraphPooling2DOpDescriptor) SetStrideInY(strideInY uint) {
+	x.inner.SetStrideInY(strideInY)
+}
+
+// DilationRateInX calls the underlying DilationRateInX.
+func (x *GraphPooling2DOpDescriptor) DilationRateInX() uint {
+	return x.inner.DilationRateInX()
+}
+
+// SetDilationRateInX calls the underlying SetDilationRateInX.
+func (x *GraphPooling2DOpDescriptor) SetDilationRateInX(dilationRateInX uint) {
+	x.inner.SetDilationRateInX(dilationRateInX)
+}
+
+// DilationRateInY calls the underlying DilationRateInY.
+func (x *GraphPooling2DOpDescriptor) DilationRateInY() uint {
+	return x.inner.DilationRateInY()
+}
+
+// SetDilationRateInY calls the underlying SetDilationRateInY.
+func (x *GraphPooling2DOpDescriptor) SetDilationRateInY(dilationRateInY uint) {
+	x.inner.SetDilationRateInY(dilationRateInY)
+}
+
+// PaddingLeft calls the underlying PaddingLeft.
+func (x *GraphPooling2DOpDescriptor) PaddingLeft() uint {
+	return x.inner.PaddingLeft()
+}
+
+// SetPaddingLeft calls the underlying SetPaddingLeft.
+func (x *GraphPooling2DOpDescriptor) SetPaddingLeft(paddingLeft uint) {
+	x.inner.SetPaddingLeft(paddingLeft)
+}
+
+// PaddingRight calls the underlying PaddingRight.
+func (x *GraphPooling2DOpDescriptor) PaddingRight() uint {
+	return x.inner.PaddingRight()
+}
+
+// SetPaddingRight calls the underlying SetPaddingRight.
+func (x *GraphPooling2DOpDescriptor) SetPaddingRight(paddingRight uint) {
+	x.inner.SetPaddingRight(paddingRight)
+}
+
+// PaddingTop calls the underlying PaddingTop.
+func (x *GraphPooling2DOpDescriptor) PaddingTop() uint {
+	return x.inner.PaddingTop()
+}
+
+// SetPaddingTop calls the underlying SetPaddingTop.
+func (x *GraphPooling2DOpDescriptor) SetPaddingTop(paddingTop uint) {
+	x.inner.SetPaddingTop(paddingTop)
+}
+
+// PaddingBottom calls the underlying PaddingBottom.
+func (x *GraphPooling2DOpDescriptor) PaddingBottom() uint {
+	return x.inner.PaddingBottom()
+}
+
+// SetPaddingBottom calls the underlying SetPaddingBottom.
+func (x *GraphPooling2DOpDescriptor) SetPaddingBottom(paddingBottom uint) {
+	x.inner.SetPaddingBottom(paddingBottom)
+}
+
+// PaddingStyle calls the underlying PaddingStyle.
+func (x *GraphPooling2DOpDescriptor) PaddingStyle() raw.MPSGraphPaddingStyle {
+	return x.inner.PaddingStyle()
+}
+
+// SetPaddingStyle calls the underlying SetPaddingStyle.
+func (x *GraphPooling2DOpDescriptor) SetPaddingStyle(paddingStyle raw.MPSGraphPaddingStyle) {
+	x.inner.SetPaddingStyle(paddingStyle)
+}
+
+// DataLayout calls the underlying DataLayout.
+func (x *GraphPooling2DOpDescriptor) DataLayout() raw.MPSGraphTensorNamedDataLayout {
+	return x.inner.DataLayout()
+}
+
+// SetDataLayout calls the underlying SetDataLayout.
+func (x *GraphPooling2DOpDescriptor) SetDataLayout(dataLayout raw.MPSGraphTensorNamedDataLayout) {
+	x.inner.SetDataLayout(dataLayout)
+}
+
+// ReturnIndicesMode calls the underlying ReturnIndicesMode.
+func (x *GraphPooling2DOpDescriptor) ReturnIndicesMode() raw.MPSGraphPoolingReturnIndicesMode {
+	return x.inner.ReturnIndicesMode()
+}
+
+// SetReturnIndicesMode calls the underlying SetReturnIndicesMode.
+func (x *GraphPooling2DOpDescriptor) SetReturnIndicesMode(returnIndicesMode raw.MPSGraphPoolingReturnIndicesMode) {
+	x.inner.SetReturnIndicesMode(returnIndicesMode)
+}
+
+// ReturnIndicesDataType calls the underlying ReturnIndicesDataType.
+func (x *GraphPooling2DOpDescriptor) ReturnIndicesDataType() mpscore.MPSDataType {
+	return x.inner.ReturnIndicesDataType()
+}
+
+// SetReturnIndicesDataType calls the underlying SetReturnIndicesDataType.
+func (x *GraphPooling2DOpDescriptor) SetReturnIndicesDataType(returnIndicesDataType mpscore.MPSDataType) {
+	x.inner.SetReturnIndicesDataType(returnIndicesDataType)
+}
+
+// CeilMode calls the underlying CeilMode.
+func (x *GraphPooling2DOpDescriptor) CeilMode() bool {
+	return x.inner.CeilMode()
+}
+
+// SetCeilMode calls the underlying SetCeilMode.
+func (x *GraphPooling2DOpDescriptor) SetCeilMode(ceilMode bool) {
+	x.inner.SetCeilMode(ceilMode)
+}
+
+// IncludeZeroPadToAverage calls the underlying IncludeZeroPadToAverage.
+func (x *GraphPooling2DOpDescriptor) IncludeZeroPadToAverage() bool {
+	return x.inner.IncludeZeroPadToAverage()
+}
+
+// SetIncludeZeroPadToAverage calls the underlying SetIncludeZeroPadToAverage.
+func (x *GraphPooling2DOpDescriptor) SetIncludeZeroPadToAverage(includeZeroPadToAverage bool) {
+	x.inner.SetIncludeZeroPadToAverage(includeZeroPadToAverage)
+}
+
 func (x *GraphPooling2DOpDescriptor) asGraphObject() *raw.MPSGraphObject { return &x.inner.MPSGraphObject }
+
+// GraphPooling2DOpDescriptorable is the interface implemented by [GraphPooling2DOpDescriptor], for mocking and DI.
+type GraphPooling2DOpDescriptorable interface {
+	Unwrap() *raw.MPSGraphPooling2DOpDescriptor
+	WithKernelWidth(kernelWidth uint) *GraphPooling2DOpDescriptor
+	WithKernelHeight(kernelHeight uint) *GraphPooling2DOpDescriptor
+	WithStrideInX(strideInX uint) *GraphPooling2DOpDescriptor
+	WithStrideInY(strideInY uint) *GraphPooling2DOpDescriptor
+	WithDilationRateInX(dilationRateInX uint) *GraphPooling2DOpDescriptor
+	WithDilationRateInY(dilationRateInY uint) *GraphPooling2DOpDescriptor
+	WithPaddingLeft(paddingLeft uint) *GraphPooling2DOpDescriptor
+	WithPaddingRight(paddingRight uint) *GraphPooling2DOpDescriptor
+	WithPaddingTop(paddingTop uint) *GraphPooling2DOpDescriptor
+	WithPaddingBottom(paddingBottom uint) *GraphPooling2DOpDescriptor
+	WithPaddingStyle(paddingStyle raw.MPSGraphPaddingStyle) *GraphPooling2DOpDescriptor
+	WithDataLayout(dataLayout raw.MPSGraphTensorNamedDataLayout) *GraphPooling2DOpDescriptor
+	WithReturnIndicesMode(returnIndicesMode raw.MPSGraphPoolingReturnIndicesMode) *GraphPooling2DOpDescriptor
+	WithReturnIndicesDataType(returnIndicesDataType mpscore.MPSDataType) *GraphPooling2DOpDescriptor
+	WithCeilMode(ceilMode bool) *GraphPooling2DOpDescriptor
+	WithIncludeZeroPadToAverage(includeZeroPadToAverage bool) *GraphPooling2DOpDescriptor
+	SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom(paddingLeft uint, paddingRight uint, paddingTop uint, paddingBottom uint)
+	KernelWidth() uint
+	SetKernelWidth(kernelWidth uint)
+	KernelHeight() uint
+	SetKernelHeight(kernelHeight uint)
+	StrideInX() uint
+	SetStrideInX(strideInX uint)
+	StrideInY() uint
+	SetStrideInY(strideInY uint)
+	DilationRateInX() uint
+	SetDilationRateInX(dilationRateInX uint)
+	DilationRateInY() uint
+	SetDilationRateInY(dilationRateInY uint)
+	PaddingLeft() uint
+	SetPaddingLeft(paddingLeft uint)
+	PaddingRight() uint
+	SetPaddingRight(paddingRight uint)
+	PaddingTop() uint
+	SetPaddingTop(paddingTop uint)
+	PaddingBottom() uint
+	SetPaddingBottom(paddingBottom uint)
+	PaddingStyle() raw.MPSGraphPaddingStyle
+	SetPaddingStyle(paddingStyle raw.MPSGraphPaddingStyle)
+	DataLayout() raw.MPSGraphTensorNamedDataLayout
+	SetDataLayout(dataLayout raw.MPSGraphTensorNamedDataLayout)
+	ReturnIndicesMode() raw.MPSGraphPoolingReturnIndicesMode
+	SetReturnIndicesMode(returnIndicesMode raw.MPSGraphPoolingReturnIndicesMode)
+	ReturnIndicesDataType() mpscore.MPSDataType
+	SetReturnIndicesDataType(returnIndicesDataType mpscore.MPSDataType)
+	CeilMode() bool
+	SetCeilMode(ceilMode bool)
+	IncludeZeroPadToAverage() bool
+	SetIncludeZeroPadToAverage(includeZeroPadToAverage bool)
+}
+
+var _ GraphPooling2DOpDescriptorable = (*GraphPooling2DOpDescriptor)(nil)
 

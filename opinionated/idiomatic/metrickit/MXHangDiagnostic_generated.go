@@ -5,6 +5,7 @@
 package metrickit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metrickit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,5 +24,28 @@ func NewHangDiagnostic() *HangDiagnostic {
 	return &HangDiagnostic{inner: raw.MXHangDiagnosticFromID(_id)}
 }
 
+// CallStackTree calls the underlying CallStackTree.
+func (x *HangDiagnostic) CallStackTree() *CallStackTree {
+	_r := x.inner.CallStackTree()
+	if _r == nil {
+		return nil
+	}
+	return &CallStackTree{inner: _r}
+}
+
+// HangDuration calls the underlying HangDuration.
+func (x *HangDiagnostic) HangDuration() *foundation.NSMeasurement[*foundation.NSUnitDuration] {
+	return x.inner.HangDuration()
+}
+
 func (x *HangDiagnostic) asDiagnostic() *raw.MXDiagnostic { return &x.inner.MXDiagnostic }
+
+// HangDiagnosticable is the interface implemented by [HangDiagnostic], for mocking and DI.
+type HangDiagnosticable interface {
+	Unwrap() *raw.MXHangDiagnostic
+	CallStackTree() *CallStackTree
+	HangDuration() *foundation.NSMeasurement[*foundation.NSUnitDuration]
+}
+
+var _ HangDiagnosticable = (*HangDiagnostic)(nil)
 

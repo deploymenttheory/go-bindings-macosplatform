@@ -23,3 +23,10 @@ func NewMTRSmokeCOAlarmClusterSelfTestCompleteEvent() *MTRSmokeCOAlarmClusterSel
 	return &MTRSmokeCOAlarmClusterSelfTestCompleteEvent{inner: raw.MTRSmokeCOAlarmClusterSelfTestCompleteEventFromID(_id)}
 }
 
+// MTRSmokeCOAlarmClusterSelfTestCompleteEventable is the interface implemented by [MTRSmokeCOAlarmClusterSelfTestCompleteEvent], for mocking and DI.
+type MTRSmokeCOAlarmClusterSelfTestCompleteEventable interface {
+	Unwrap() *raw.MTRSmokeCOAlarmClusterSelfTestCompleteEvent
+}
+
+var _ MTRSmokeCOAlarmClusterSelfTestCompleteEventable = (*MTRSmokeCOAlarmClusterSelfTestCompleteEvent)(nil)
+

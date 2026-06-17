@@ -27,3 +27,10 @@ func (x *NNGradientFilterNode) asNNGradientFilterNode() *raw.MPSNNGradientFilter
 
 func (x *NNGradientFilterNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNFilterNode }
 
+// NNGradientFilterNodeable is the interface implemented by [NNGradientFilterNode], for mocking and DI.
+type NNGradientFilterNodeable interface {
+	Unwrap() *raw.MPSNNGradientFilterNode
+}
+
+var _ NNGradientFilterNodeable = (*NNGradientFilterNode)(nil)
+

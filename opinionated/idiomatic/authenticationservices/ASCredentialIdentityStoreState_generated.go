@@ -23,3 +23,22 @@ func NewCredentialIdentityStoreState() *CredentialIdentityStoreState {
 	return &CredentialIdentityStoreState{inner: raw.ASCredentialIdentityStoreStateFromID(_id)}
 }
 
+// IsEnabled calls the underlying IsEnabled.
+func (x *CredentialIdentityStoreState) IsEnabled() bool {
+	return x.inner.IsEnabled()
+}
+
+// SupportsIncrementalUpdates calls the underlying SupportsIncrementalUpdates.
+func (x *CredentialIdentityStoreState) SupportsIncrementalUpdates() bool {
+	return x.inner.SupportsIncrementalUpdates()
+}
+
+// CredentialIdentityStoreStateable is the interface implemented by [CredentialIdentityStoreState], for mocking and DI.
+type CredentialIdentityStoreStateable interface {
+	Unwrap() *raw.ASCredentialIdentityStoreState
+	IsEnabled() bool
+	SupportsIncrementalUpdates() bool
+}
+
+var _ CredentialIdentityStoreStateable = (*CredentialIdentityStoreState)(nil)
+

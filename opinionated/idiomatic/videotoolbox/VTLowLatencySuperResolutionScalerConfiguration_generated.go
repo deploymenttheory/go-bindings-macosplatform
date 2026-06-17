@@ -7,6 +7,7 @@ package videotoolbox
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/videotoolbox"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -25,16 +26,52 @@ func NewLowLatencySuperResolutionScalerConfigurationWithFrameWidthFrameHeightSca
 	return &LowLatencySuperResolutionScalerConfiguration{inner: raw.VTLowLatencySuperResolutionScalerConfigurationFromID(_id)}
 }
 
+// FrameWidth calls the underlying FrameWidth.
+func (x *LowLatencySuperResolutionScalerConfiguration) FrameWidth() int {
+	return x.inner.FrameWidth()
+}
+
+// FrameHeight calls the underlying FrameHeight.
+func (x *LowLatencySuperResolutionScalerConfiguration) FrameHeight() int {
+	return x.inner.FrameHeight()
+}
+
 // FrameSupportedPixelFormats returns the collection as a Go slice.
 func (x *LowLatencySuperResolutionScalerConfiguration) FrameSupportedPixelFormats() []*foundation.NSNumber {
 	arr := x.inner.FrameSupportedPixelFormats()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
 }
+
+// SourcePixelBufferAttributes calls the underlying SourcePixelBufferAttributes.
+func (x *LowLatencySuperResolutionScalerConfiguration) SourcePixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.SourcePixelBufferAttributes()
+}
+
+// DestinationPixelBufferAttributes calls the underlying DestinationPixelBufferAttributes.
+func (x *LowLatencySuperResolutionScalerConfiguration) DestinationPixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.DestinationPixelBufferAttributes()
+}
+
+// ScaleFactor calls the underlying ScaleFactor.
+func (x *LowLatencySuperResolutionScalerConfiguration) ScaleFactor() float32 {
+	return x.inner.ScaleFactor()
+}
+
+// LowLatencySuperResolutionScalerConfigurationable is the interface implemented by [LowLatencySuperResolutionScalerConfiguration], for mocking and DI.
+type LowLatencySuperResolutionScalerConfigurationable interface {
+	Unwrap() *raw.VTLowLatencySuperResolutionScalerConfiguration
+	FrameWidth() int
+	FrameHeight() int
+	FrameSupportedPixelFormats() []*foundation.NSNumber
+	SourcePixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	DestinationPixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ScaleFactor() float32
+}
+
+var _ LowLatencySuperResolutionScalerConfigurationable = (*LowLatencySuperResolutionScalerConfiguration)(nil)
 

@@ -6,6 +6,7 @@ package coreml
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,49 @@ func NewUpdateContext() *UpdateContext {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLUpdateContext")), objc.RegisterName("new"))
 	return &UpdateContext{inner: raw.MLUpdateContextFromID(_id)}
 }
+
+// Task calls the underlying Task.
+func (x *UpdateContext) Task() *UpdateTask {
+	_r := x.inner.Task()
+	if _r == nil {
+		return nil
+	}
+	return &UpdateTask{inner: _r}
+}
+
+// Model calls the underlying Model.
+func (x *UpdateContext) Model() *Model {
+	_r := x.inner.Model()
+	if _r == nil {
+		return nil
+	}
+	return &Model{inner: _r}
+}
+
+// Event calls the underlying Event.
+func (x *UpdateContext) Event() raw.MLUpdateProgressEvent {
+	return x.inner.Event()
+}
+
+// Metrics calls the underlying Metrics.
+func (x *UpdateContext) Metrics() *foundation.NSDictionary[*raw.MLMetricKey, objc.ID] {
+	return x.inner.Metrics()
+}
+
+// Parameters calls the underlying Parameters.
+func (x *UpdateContext) Parameters() *foundation.NSDictionary[*raw.MLParameterKey, objc.ID] {
+	return x.inner.Parameters()
+}
+
+// UpdateContextable is the interface implemented by [UpdateContext], for mocking and DI.
+type UpdateContextable interface {
+	Unwrap() *raw.MLUpdateContext
+	Task() *UpdateTask
+	Model() *Model
+	Event() raw.MLUpdateProgressEvent
+	Metrics() *foundation.NSDictionary[*raw.MLMetricKey, objc.ID]
+	Parameters() *foundation.NSDictionary[*raw.MLParameterKey, objc.ID]
+}
+
+var _ UpdateContextable = (*UpdateContext)(nil)
 

@@ -7,6 +7,7 @@ package audiovideobridging
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/audiovideobridging"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -32,5 +33,32 @@ func NewAVB1722ControlInterfaceWithInterface(anInterface *raw.AVBInterface) *AVB
 	return &AVB1722ControlInterface{inner: raw.AVB1722ControlInterfaceFromID(_id)}
 }
 
+// InterfaceName calls the underlying InterfaceName.
+func (x *AVB1722ControlInterface) InterfaceName() string {
+	_r := x.inner.InterfaceName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Interface calls the underlying Interface.
+func (x *AVB1722ControlInterface) Interface() *Interface {
+	_r := x.inner.Interface()
+	if _r == nil {
+		return nil
+	}
+	return &Interface{inner: _r}
+}
+
 func (x *AVB1722ControlInterface) asAVB1722ControlInterface() *raw.AVB1722ControlInterface { return x.inner }
+
+// AVB1722ControlInterfaceable is the interface implemented by [AVB1722ControlInterface], for mocking and DI.
+type AVB1722ControlInterfaceable interface {
+	Unwrap() *raw.AVB1722ControlInterface
+	InterfaceName() string
+	Interface() *Interface
+}
+
+var _ AVB1722ControlInterfaceable = (*AVB1722ControlInterface)(nil)
 

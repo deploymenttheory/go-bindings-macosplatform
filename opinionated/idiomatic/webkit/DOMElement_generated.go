@@ -5,8 +5,10 @@
 package webkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,6 +56,411 @@ func (x *DOMElement) WithClassName(className string) *DOMElement {
 	return x
 }
 
+// GetAttribute calls the underlying GetAttribute.
+func (x *DOMElement) GetAttribute(name string) string {
+	_r := x.inner.GetAttribute(foundation.NSStringStringWithUTF8String(name))
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetAttributeValue calls the underlying SetAttributeValue.
+func (x *DOMElement) SetAttributeValue(name string, value string) {
+	x.inner.SetAttributeValue(foundation.NSStringStringWithUTF8String(name), foundation.NSStringStringWithUTF8String(value))
+}
+
+// RemoveAttribute calls the underlying RemoveAttribute.
+func (x *DOMElement) RemoveAttribute(name string) {
+	x.inner.RemoveAttribute(foundation.NSStringStringWithUTF8String(name))
+}
+
+// GetAttributeNode calls the underlying GetAttributeNode.
+func (x *DOMElement) GetAttributeNode(name string) *DOMAttr {
+	_r := x.inner.GetAttributeNode(foundation.NSStringStringWithUTF8String(name))
+	if _r == nil {
+		return nil
+	}
+	return &DOMAttr{inner: _r}
+}
+
+// SetAttributeNode calls the underlying SetAttributeNode.
+func (x *DOMElement) SetAttributeNode(newAttr *raw.DOMAttr) *DOMAttr {
+	_r := x.inner.SetAttributeNode(newAttr)
+	if _r == nil {
+		return nil
+	}
+	return &DOMAttr{inner: _r}
+}
+
+// RemoveAttributeNode calls the underlying RemoveAttributeNode.
+func (x *DOMElement) RemoveAttributeNode(oldAttr *raw.DOMAttr) *DOMAttr {
+	_r := x.inner.RemoveAttributeNode(oldAttr)
+	if _r == nil {
+		return nil
+	}
+	return &DOMAttr{inner: _r}
+}
+
+// GetElementsByTagName calls the underlying GetElementsByTagName.
+func (x *DOMElement) GetElementsByTagName(name string) *DOMNodeList {
+	_r := x.inner.GetElementsByTagName(foundation.NSStringStringWithUTF8String(name))
+	if _r == nil {
+		return nil
+	}
+	return &DOMNodeList{inner: _r}
+}
+
+// GetAttributeNSLocalName calls the underlying GetAttributeNSLocalName.
+func (x *DOMElement) GetAttributeNSLocalName(namespaceURI string, localName string) string {
+	_r := x.inner.GetAttributeNSLocalName(foundation.NSStringStringWithUTF8String(namespaceURI), foundation.NSStringStringWithUTF8String(localName))
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetAttributeNSQualifiedNameValue calls the underlying SetAttributeNSQualifiedNameValue.
+func (x *DOMElement) SetAttributeNSQualifiedNameValue(namespaceURI string, qualifiedName string, value string) {
+	x.inner.SetAttributeNSQualifiedNameValue(foundation.NSStringStringWithUTF8String(namespaceURI), foundation.NSStringStringWithUTF8String(qualifiedName), foundation.NSStringStringWithUTF8String(value))
+}
+
+// RemoveAttributeNSLocalName calls the underlying RemoveAttributeNSLocalName.
+func (x *DOMElement) RemoveAttributeNSLocalName(namespaceURI string, localName string) {
+	x.inner.RemoveAttributeNSLocalName(foundation.NSStringStringWithUTF8String(namespaceURI), foundation.NSStringStringWithUTF8String(localName))
+}
+
+// GetElementsByTagNameNSLocalName calls the underlying GetElementsByTagNameNSLocalName.
+func (x *DOMElement) GetElementsByTagNameNSLocalName(namespaceURI string, localName string) *DOMNodeList {
+	_r := x.inner.GetElementsByTagNameNSLocalName(foundation.NSStringStringWithUTF8String(namespaceURI), foundation.NSStringStringWithUTF8String(localName))
+	if _r == nil {
+		return nil
+	}
+	return &DOMNodeList{inner: _r}
+}
+
+// GetAttributeNodeNSLocalName calls the underlying GetAttributeNodeNSLocalName.
+func (x *DOMElement) GetAttributeNodeNSLocalName(namespaceURI string, localName string) *DOMAttr {
+	_r := x.inner.GetAttributeNodeNSLocalName(foundation.NSStringStringWithUTF8String(namespaceURI), foundation.NSStringStringWithUTF8String(localName))
+	if _r == nil {
+		return nil
+	}
+	return &DOMAttr{inner: _r}
+}
+
+// SetAttributeNodeNS calls the underlying SetAttributeNodeNS.
+func (x *DOMElement) SetAttributeNodeNS(newAttr *raw.DOMAttr) *DOMAttr {
+	_r := x.inner.SetAttributeNodeNS(newAttr)
+	if _r == nil {
+		return nil
+	}
+	return &DOMAttr{inner: _r}
+}
+
+// HasAttribute calls the underlying HasAttribute.
+func (x *DOMElement) HasAttribute(name string) bool {
+	return x.inner.HasAttribute(foundation.NSStringStringWithUTF8String(name))
+}
+
+// HasAttributeNSLocalName calls the underlying HasAttributeNSLocalName.
+func (x *DOMElement) HasAttributeNSLocalName(namespaceURI string, localName string) bool {
+	return x.inner.HasAttributeNSLocalName(foundation.NSStringStringWithUTF8String(namespaceURI), foundation.NSStringStringWithUTF8String(localName))
+}
+
+// Focus calls the underlying Focus.
+func (x *DOMElement) Focus() {
+	x.inner.Focus()
+}
+
+// Blur calls the underlying Blur.
+func (x *DOMElement) Blur() {
+	x.inner.Blur()
+}
+
+// ScrollIntoView calls the underlying ScrollIntoView.
+func (x *DOMElement) ScrollIntoView(alignWithTop bool) {
+	x.inner.ScrollIntoView(alignWithTop)
+}
+
+// ScrollIntoViewIfNeeded calls the underlying ScrollIntoViewIfNeeded.
+func (x *DOMElement) ScrollIntoViewIfNeeded(centerIfNeeded bool) {
+	x.inner.ScrollIntoViewIfNeeded(centerIfNeeded)
+}
+
+// GetElementsByClassName calls the underlying GetElementsByClassName.
+func (x *DOMElement) GetElementsByClassName(name string) *DOMNodeList {
+	_r := x.inner.GetElementsByClassName(foundation.NSStringStringWithUTF8String(name))
+	if _r == nil {
+		return nil
+	}
+	return &DOMNodeList{inner: _r}
+}
+
+// WebkitRequestFullScreen calls the underlying WebkitRequestFullScreen.
+func (x *DOMElement) WebkitRequestFullScreen(flags uint16) {
+	x.inner.WebkitRequestFullScreen(flags)
+}
+
+// QuerySelector calls the underlying QuerySelector.
+func (x *DOMElement) QuerySelector(selectors string) *DOMElement {
+	_r := x.inner.QuerySelector(foundation.NSStringStringWithUTF8String(selectors))
+	if _r == nil {
+		return nil
+	}
+	return &DOMElement{inner: _r}
+}
+
+// QuerySelectorAll calls the underlying QuerySelectorAll.
+func (x *DOMElement) QuerySelectorAll(selectors string) *DOMNodeList {
+	_r := x.inner.QuerySelectorAll(foundation.NSStringStringWithUTF8String(selectors))
+	if _r == nil {
+		return nil
+	}
+	return &DOMNodeList{inner: _r}
+}
+
+// TagName calls the underlying TagName.
+func (x *DOMElement) TagName() string {
+	_r := x.inner.TagName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Style calls the underlying Style.
+func (x *DOMElement) Style() *DOMCSSStyleDeclaration {
+	_r := x.inner.Style()
+	if _r == nil {
+		return nil
+	}
+	return &DOMCSSStyleDeclaration{inner: _r}
+}
+
+// OffsetLeft calls the underlying OffsetLeft.
+func (x *DOMElement) OffsetLeft() int {
+	return x.inner.OffsetLeft()
+}
+
+// OffsetTop calls the underlying OffsetTop.
+func (x *DOMElement) OffsetTop() int {
+	return x.inner.OffsetTop()
+}
+
+// OffsetWidth calls the underlying OffsetWidth.
+func (x *DOMElement) OffsetWidth() int {
+	return x.inner.OffsetWidth()
+}
+
+// OffsetHeight calls the underlying OffsetHeight.
+func (x *DOMElement) OffsetHeight() int {
+	return x.inner.OffsetHeight()
+}
+
+// ClientLeft calls the underlying ClientLeft.
+func (x *DOMElement) ClientLeft() int {
+	return x.inner.ClientLeft()
+}
+
+// ClientTop calls the underlying ClientTop.
+func (x *DOMElement) ClientTop() int {
+	return x.inner.ClientTop()
+}
+
+// ClientWidth calls the underlying ClientWidth.
+func (x *DOMElement) ClientWidth() int {
+	return x.inner.ClientWidth()
+}
+
+// ClientHeight calls the underlying ClientHeight.
+func (x *DOMElement) ClientHeight() int {
+	return x.inner.ClientHeight()
+}
+
+// ScrollLeft calls the underlying ScrollLeft.
+func (x *DOMElement) ScrollLeft() int {
+	return x.inner.ScrollLeft()
+}
+
+// SetScrollLeft calls the underlying SetScrollLeft.
+func (x *DOMElement) SetScrollLeft(scrollLeft int) {
+	x.inner.SetScrollLeft(scrollLeft)
+}
+
+// ScrollTop calls the underlying ScrollTop.
+func (x *DOMElement) ScrollTop() int {
+	return x.inner.ScrollTop()
+}
+
+// SetScrollTop calls the underlying SetScrollTop.
+func (x *DOMElement) SetScrollTop(scrollTop int) {
+	x.inner.SetScrollTop(scrollTop)
+}
+
+// ScrollWidth calls the underlying ScrollWidth.
+func (x *DOMElement) ScrollWidth() int {
+	return x.inner.ScrollWidth()
+}
+
+// ScrollHeight calls the underlying ScrollHeight.
+func (x *DOMElement) ScrollHeight() int {
+	return x.inner.ScrollHeight()
+}
+
+// OffsetParent calls the underlying OffsetParent.
+func (x *DOMElement) OffsetParent() *DOMElement {
+	_r := x.inner.OffsetParent()
+	if _r == nil {
+		return nil
+	}
+	return &DOMElement{inner: _r}
+}
+
+// InnerHTML calls the underlying InnerHTML.
+func (x *DOMElement) InnerHTML() string {
+	_r := x.inner.InnerHTML()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetInnerHTML calls the underlying SetInnerHTML.
+func (x *DOMElement) SetInnerHTML(innerHTML string) {
+	x.inner.SetInnerHTML(foundation.NSStringStringWithUTF8String(innerHTML))
+}
+
+// OuterHTML calls the underlying OuterHTML.
+func (x *DOMElement) OuterHTML() string {
+	_r := x.inner.OuterHTML()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetOuterHTML calls the underlying SetOuterHTML.
+func (x *DOMElement) SetOuterHTML(outerHTML string) {
+	x.inner.SetOuterHTML(foundation.NSStringStringWithUTF8String(outerHTML))
+}
+
+// SetClassName calls the underlying SetClassName.
+func (x *DOMElement) SetClassName(className string) {
+	x.inner.SetClassName(foundation.NSStringStringWithUTF8String(className))
+}
+
+// InnerText calls the underlying InnerText.
+func (x *DOMElement) InnerText() string {
+	_r := x.inner.InnerText()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// PreviousElementSibling calls the underlying PreviousElementSibling.
+func (x *DOMElement) PreviousElementSibling() *DOMElement {
+	_r := x.inner.PreviousElementSibling()
+	if _r == nil {
+		return nil
+	}
+	return &DOMElement{inner: _r}
+}
+
+// NextElementSibling calls the underlying NextElementSibling.
+func (x *DOMElement) NextElementSibling() *DOMElement {
+	_r := x.inner.NextElementSibling()
+	if _r == nil {
+		return nil
+	}
+	return &DOMElement{inner: _r}
+}
+
+// FirstElementChild calls the underlying FirstElementChild.
+func (x *DOMElement) FirstElementChild() *DOMElement {
+	_r := x.inner.FirstElementChild()
+	if _r == nil {
+		return nil
+	}
+	return &DOMElement{inner: _r}
+}
+
+// LastElementChild calls the underlying LastElementChild.
+func (x *DOMElement) LastElementChild() *DOMElement {
+	_r := x.inner.LastElementChild()
+	if _r == nil {
+		return nil
+	}
+	return &DOMElement{inner: _r}
+}
+
+// ChildElementCount calls the underlying ChildElementCount.
+func (x *DOMElement) ChildElementCount() uint {
+	return x.inner.ChildElementCount()
+}
+
+// SetAttribute calls the underlying SetAttribute.
+func (x *DOMElement) SetAttribute(name string, value string) {
+	x.inner.SetAttribute(foundation.NSStringStringWithUTF8String(name), foundation.NSStringStringWithUTF8String(value))
+}
+
+// GetAttributeNS calls the underlying GetAttributeNS.
+func (x *DOMElement) GetAttributeNS(namespaceURI string, localName string) string {
+	_r := x.inner.GetAttributeNS(foundation.NSStringStringWithUTF8String(namespaceURI), foundation.NSStringStringWithUTF8String(localName))
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetAttributeNS calls the underlying SetAttributeNS.
+func (x *DOMElement) SetAttributeNS(namespaceURI string, qualifiedName string, value string) {
+	x.inner.SetAttributeNS(foundation.NSStringStringWithUTF8String(namespaceURI), foundation.NSStringStringWithUTF8String(qualifiedName), foundation.NSStringStringWithUTF8String(value))
+}
+
+// RemoveAttributeNS calls the underlying RemoveAttributeNS.
+func (x *DOMElement) RemoveAttributeNS(namespaceURI string, localName string) {
+	x.inner.RemoveAttributeNS(foundation.NSStringStringWithUTF8String(namespaceURI), foundation.NSStringStringWithUTF8String(localName))
+}
+
+// GetElementsByTagNameNS calls the underlying GetElementsByTagNameNS.
+func (x *DOMElement) GetElementsByTagNameNS(namespaceURI string, localName string) *DOMNodeList {
+	_r := x.inner.GetElementsByTagNameNS(foundation.NSStringStringWithUTF8String(namespaceURI), foundation.NSStringStringWithUTF8String(localName))
+	if _r == nil {
+		return nil
+	}
+	return &DOMNodeList{inner: _r}
+}
+
+// GetAttributeNodeNS calls the underlying GetAttributeNodeNS.
+func (x *DOMElement) GetAttributeNodeNS(namespaceURI string, localName string) *DOMAttr {
+	_r := x.inner.GetAttributeNodeNS(foundation.NSStringStringWithUTF8String(namespaceURI), foundation.NSStringStringWithUTF8String(localName))
+	if _r == nil {
+		return nil
+	}
+	return &DOMAttr{inner: _r}
+}
+
+// HasAttributeNS calls the underlying HasAttributeNS.
+func (x *DOMElement) HasAttributeNS(namespaceURI string, localName string) bool {
+	return x.inner.HasAttributeNS(foundation.NSStringStringWithUTF8String(namespaceURI), foundation.NSStringStringWithUTF8String(localName))
+}
+
+// ScrollByLines calls the underlying ScrollByLines.
+func (x *DOMElement) ScrollByLines(lines int) {
+	x.inner.ScrollByLines(lines)
+}
+
+// ScrollByPages calls the underlying ScrollByPages.
+func (x *DOMElement) ScrollByPages(pages int) {
+	x.inner.ScrollByPages(pages)
+}
+
+// Image calls the underlying Image.
+func (x *DOMElement) Image() *appkit.NSImage {
+	return x.inner.Image()
+}
+
 func (x *DOMElement) asDOMElement() *raw.DOMElement { return x.inner }
 
 func (x *DOMElement) asDOMNode() *raw.DOMNode { return &x.inner.DOMNode }
@@ -61,4 +468,77 @@ func (x *DOMElement) asDOMNode() *raw.DOMNode { return &x.inner.DOMNode }
 func (x *DOMElement) asDOMObject() *raw.DOMObject { return &x.inner.DOMNode.DOMObject }
 
 func (x *DOMElement) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMNode.DOMObject.WebScriptObject }
+
+// DOMElementable is the interface implemented by [DOMElement], for mocking and DI.
+type DOMElementable interface {
+	Unwrap() *raw.DOMElement
+	WithScrollLeft(scrollLeft int) *DOMElement
+	WithScrollTop(scrollTop int) *DOMElement
+	WithInnerHTML(innerHTML string) *DOMElement
+	WithOuterHTML(outerHTML string) *DOMElement
+	WithClassName(className string) *DOMElement
+	GetAttribute(name string) string
+	SetAttributeValue(name string, value string)
+	RemoveAttribute(name string)
+	GetAttributeNode(name string) *DOMAttr
+	SetAttributeNode(newAttr *raw.DOMAttr) *DOMAttr
+	RemoveAttributeNode(oldAttr *raw.DOMAttr) *DOMAttr
+	GetElementsByTagName(name string) *DOMNodeList
+	GetAttributeNSLocalName(namespaceURI string, localName string) string
+	SetAttributeNSQualifiedNameValue(namespaceURI string, qualifiedName string, value string)
+	RemoveAttributeNSLocalName(namespaceURI string, localName string)
+	GetElementsByTagNameNSLocalName(namespaceURI string, localName string) *DOMNodeList
+	GetAttributeNodeNSLocalName(namespaceURI string, localName string) *DOMAttr
+	SetAttributeNodeNS(newAttr *raw.DOMAttr) *DOMAttr
+	HasAttribute(name string) bool
+	HasAttributeNSLocalName(namespaceURI string, localName string) bool
+	Focus()
+	Blur()
+	ScrollIntoView(alignWithTop bool)
+	ScrollIntoViewIfNeeded(centerIfNeeded bool)
+	GetElementsByClassName(name string) *DOMNodeList
+	WebkitRequestFullScreen(flags uint16)
+	QuerySelector(selectors string) *DOMElement
+	QuerySelectorAll(selectors string) *DOMNodeList
+	TagName() string
+	Style() *DOMCSSStyleDeclaration
+	OffsetLeft() int
+	OffsetTop() int
+	OffsetWidth() int
+	OffsetHeight() int
+	ClientLeft() int
+	ClientTop() int
+	ClientWidth() int
+	ClientHeight() int
+	ScrollLeft() int
+	SetScrollLeft(scrollLeft int)
+	ScrollTop() int
+	SetScrollTop(scrollTop int)
+	ScrollWidth() int
+	ScrollHeight() int
+	OffsetParent() *DOMElement
+	InnerHTML() string
+	SetInnerHTML(innerHTML string)
+	OuterHTML() string
+	SetOuterHTML(outerHTML string)
+	SetClassName(className string)
+	InnerText() string
+	PreviousElementSibling() *DOMElement
+	NextElementSibling() *DOMElement
+	FirstElementChild() *DOMElement
+	LastElementChild() *DOMElement
+	ChildElementCount() uint
+	SetAttribute(name string, value string)
+	GetAttributeNS(namespaceURI string, localName string) string
+	SetAttributeNS(namespaceURI string, qualifiedName string, value string)
+	RemoveAttributeNS(namespaceURI string, localName string)
+	GetElementsByTagNameNS(namespaceURI string, localName string) *DOMNodeList
+	GetAttributeNodeNS(namespaceURI string, localName string) *DOMAttr
+	HasAttributeNS(namespaceURI string, localName string) bool
+	ScrollByLines(lines int)
+	ScrollByPages(pages int)
+	Image() *appkit.NSImage
+}
+
+var _ DOMElementable = (*DOMElement)(nil)
 

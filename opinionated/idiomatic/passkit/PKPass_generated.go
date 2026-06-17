@@ -31,18 +31,156 @@ func NewPassWithDataError(data *foundation.NSData) (*Pass, error) {
 	return &Pass{inner: raw.PKPassFromID(_id)}, nil
 }
 
+// LocalizedValueForFieldKey calls the underlying LocalizedValueForFieldKey.
+func (x *Pass) LocalizedValueForFieldKey(key string) objc.ID {
+	return x.inner.LocalizedValueForFieldKey(foundation.NSStringStringWithUTF8String(key))
+}
+
+// PassType calls the underlying PassType.
+func (x *Pass) PassType() raw.PKPassType {
+	return x.inner.PassType()
+}
+
+// PaymentPass calls the underlying PaymentPass.
+func (x *Pass) PaymentPass() *PaymentPass {
+	_r := x.inner.PaymentPass()
+	if _r == nil {
+		return nil
+	}
+	return &PaymentPass{inner: _r}
+}
+
+// SecureElementPass calls the underlying SecureElementPass.
+func (x *Pass) SecureElementPass() *SecureElementPass {
+	_r := x.inner.SecureElementPass()
+	if _r == nil {
+		return nil
+	}
+	return &SecureElementPass{inner: _r}
+}
+
+// SerialNumber calls the underlying SerialNumber.
+func (x *Pass) SerialNumber() string {
+	_r := x.inner.SerialNumber()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// PassTypeIdentifier calls the underlying PassTypeIdentifier.
+func (x *Pass) PassTypeIdentifier() string {
+	_r := x.inner.PassTypeIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// WebServiceURL calls the underlying WebServiceURL.
+func (x *Pass) WebServiceURL() *foundation.NSURL {
+	return x.inner.WebServiceURL()
+}
+
+// AuthenticationToken calls the underlying AuthenticationToken.
+func (x *Pass) AuthenticationToken() string {
+	_r := x.inner.AuthenticationToken()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// LocalizedName calls the underlying LocalizedName.
+func (x *Pass) LocalizedName() string {
+	_r := x.inner.LocalizedName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// LocalizedDescription calls the underlying LocalizedDescription.
+func (x *Pass) LocalizedDescription() string {
+	_r := x.inner.LocalizedDescription()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// OrganizationName calls the underlying OrganizationName.
+func (x *Pass) OrganizationName() string {
+	_r := x.inner.OrganizationName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// RelevantDate calls the underlying RelevantDate.
+func (x *Pass) RelevantDate() *foundation.NSDate {
+	return x.inner.RelevantDate()
+}
+
 // RelevantDates returns the collection as a Go slice.
 func (x *Pass) RelevantDates() []*raw.PKPassRelevantDate {
 	arr := x.inner.RelevantDates()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.PKPassRelevantDate, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PKPassRelevantDate {
+		return raw.PKPassRelevantDateFromID(purego.Retain(_id))
+	})
+}
+
+// UserInfo calls the underlying UserInfo.
+func (x *Pass) UserInfo() *foundation.NSDictionary[objc.ID, objc.ID] {
+	return x.inner.UserInfo()
+}
+
+// PassURL calls the underlying PassURL.
+func (x *Pass) PassURL() *foundation.NSURL {
+	return x.inner.PassURL()
+}
+
+// IsRemotePass calls the underlying IsRemotePass.
+func (x *Pass) IsRemotePass() bool {
+	return x.inner.IsRemotePass()
+}
+
+// DeviceName calls the underlying DeviceName.
+func (x *Pass) DeviceName() string {
+	_r := x.inner.DeviceName()
+	if _r == nil {
+		return ""
 	}
-	return out
+	return purego.GoString(_r.Ptr())
 }
 
 func (x *Pass) asPass() *raw.PKPass { return x.inner }
+
+// Passable is the interface implemented by [Pass], for mocking and DI.
+type Passable interface {
+	Unwrap() *raw.PKPass
+	LocalizedValueForFieldKey(key string) objc.ID
+	PassType() raw.PKPassType
+	PaymentPass() *PaymentPass
+	SecureElementPass() *SecureElementPass
+	SerialNumber() string
+	PassTypeIdentifier() string
+	WebServiceURL() *foundation.NSURL
+	AuthenticationToken() string
+	LocalizedName() string
+	LocalizedDescription() string
+	OrganizationName() string
+	RelevantDate() *foundation.NSDate
+	RelevantDates() []*raw.PKPassRelevantDate
+	UserInfo() *foundation.NSDictionary[objc.ID, objc.ID]
+	PassURL() *foundation.NSURL
+	IsRemotePass() bool
+	DeviceName() string
+}
+
+var _ Passable = (*Pass)(nil)
 

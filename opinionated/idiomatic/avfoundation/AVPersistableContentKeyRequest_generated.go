@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +24,18 @@ func NewPersistableContentKeyRequest() *PersistableContentKeyRequest {
 	return &PersistableContentKeyRequest{inner: raw.AVPersistableContentKeyRequestFromID(_id)}
 }
 
+// PersistableContentKeyFromKeyVendorResponseOptionsError calls the underlying PersistableContentKeyFromKeyVendorResponseOptionsError.
+func (x *PersistableContentKeyRequest) PersistableContentKeyFromKeyVendorResponseOptionsError(keyVendorResponse *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*foundation.NSData, error) {
+	return x.inner.PersistableContentKeyFromKeyVendorResponseOptionsError(keyVendorResponse, options)
+}
+
 func (x *PersistableContentKeyRequest) asContentKeyRequest() *raw.AVContentKeyRequest { return &x.inner.AVContentKeyRequest }
+
+// PersistableContentKeyRequestable is the interface implemented by [PersistableContentKeyRequest], for mocking and DI.
+type PersistableContentKeyRequestable interface {
+	Unwrap() *raw.AVPersistableContentKeyRequest
+	PersistableContentKeyFromKeyVendorResponseOptionsError(keyVendorResponse *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*foundation.NSData, error)
+}
+
+var _ PersistableContentKeyRequestable = (*PersistableContentKeyRequest)(nil)
 

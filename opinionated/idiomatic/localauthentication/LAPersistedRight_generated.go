@@ -23,5 +23,32 @@ func NewPersistedRight() *PersistedRight {
 	return &PersistedRight{inner: raw.LAPersistedRightFromID(_id)}
 }
 
+// Key calls the underlying Key.
+func (x *PersistedRight) Key() *PrivateKey {
+	_r := x.inner.Key()
+	if _r == nil {
+		return nil
+	}
+	return &PrivateKey{inner: _r}
+}
+
+// Secret calls the underlying Secret.
+func (x *PersistedRight) Secret() *Secret {
+	_r := x.inner.Secret()
+	if _r == nil {
+		return nil
+	}
+	return &Secret{inner: _r}
+}
+
 func (x *PersistedRight) asRight() *raw.LARight { return &x.inner.LARight }
+
+// PersistedRightable is the interface implemented by [PersistedRight], for mocking and DI.
+type PersistedRightable interface {
+	Unwrap() *raw.LAPersistedRight
+	Key() *PrivateKey
+	Secret() *Secret
+}
+
+var _ PersistedRightable = (*PersistedRight)(nil)
 

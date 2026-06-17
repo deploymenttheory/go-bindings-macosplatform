@@ -7,6 +7,7 @@ package coreimage
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -36,31 +37,98 @@ func (x *Filter) WithEnabled(enabled bool) *Filter {
 	return x
 }
 
+// Name calls the underlying Name.
+func (x *Filter) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetName calls the underlying SetName.
+func (x *Filter) SetName(aString string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(aString))
+}
+
+// SetDefaults calls the underlying SetDefaults.
+func (x *Filter) SetDefaults() {
+	x.inner.SetDefaults()
+}
+
+// ApplyArgumentsOptions calls the underlying ApplyArgumentsOptions.
+func (x *Filter) ApplyArgumentsOptions(k *raw.CIKernel, args *foundation.NSArray[objc.ID], dict *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Image {
+	_r := x.inner.ApplyArgumentsOptions(k, args, dict)
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// OutputImage calls the underlying OutputImage.
+func (x *Filter) OutputImage() *Image {
+	_r := x.inner.OutputImage()
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// IsEnabled calls the underlying IsEnabled.
+func (x *Filter) IsEnabled() bool {
+	return x.inner.IsEnabled()
+}
+
+// SetEnabled calls the underlying SetEnabled.
+func (x *Filter) SetEnabled(enabled bool) {
+	x.inner.SetEnabled(enabled)
+}
+
 // InputKeys returns the collection as a Go slice.
-func (x *Filter) InputKeys() []*foundation.NSString {
+func (x *Filter) InputKeys() []string {
 	arr := x.inner.InputKeys()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
 
 // OutputKeys returns the collection as a Go slice.
-func (x *Filter) OutputKeys() []*foundation.NSString {
+func (x *Filter) OutputKeys() []string {
 	arr := x.inner.OutputKeys()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// Attributes calls the underlying Attributes.
+func (x *Filter) Attributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.Attributes()
 }
 
 func (x *Filter) asFilter() *raw.CIFilter { return x.inner }
+
+// Filterable is the interface implemented by [Filter], for mocking and DI.
+type Filterable interface {
+	Unwrap() *raw.CIFilter
+	WithName(name string) *Filter
+	WithEnabled(enabled bool) *Filter
+	Name() string
+	SetName(aString string)
+	SetDefaults()
+	ApplyArgumentsOptions(k *raw.CIKernel, args *foundation.NSArray[objc.ID], dict *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Image
+	OutputImage() *Image
+	IsEnabled() bool
+	SetEnabled(enabled bool)
+	InputKeys() []string
+	OutputKeys() []string
+	Attributes() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+}
+
+var _ Filterable = (*Filter)(nil)
 

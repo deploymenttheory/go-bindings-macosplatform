@@ -7,6 +7,7 @@ package coremediaio
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremediaio"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,4 +55,90 @@ func (x *ExtensionDeviceProperties) WithPropertiesDictionary(propertiesDictionar
 	x.inner.SetPropertiesDictionary(propertiesDictionary)
 	return x
 }
+
+// SetPropertyStateForProperty calls the underlying SetPropertyStateForProperty.
+func (x *ExtensionDeviceProperties) SetPropertyStateForProperty(propertyState *raw.CMIOExtensionPropertyState[objc.ID], property *foundation.NSString) {
+	x.inner.SetPropertyStateForProperty(propertyState, property)
+}
+
+// Model calls the underlying Model.
+func (x *ExtensionDeviceProperties) Model() string {
+	_r := x.inner.Model()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetModel calls the underlying SetModel.
+func (x *ExtensionDeviceProperties) SetModel(model string) {
+	x.inner.SetModel(foundation.NSStringStringWithUTF8String(model))
+}
+
+// Suspended calls the underlying Suspended.
+func (x *ExtensionDeviceProperties) Suspended() *foundation.NSNumber {
+	return x.inner.Suspended()
+}
+
+// SetSuspended calls the underlying SetSuspended.
+func (x *ExtensionDeviceProperties) SetSuspended(suspended *foundation.NSNumber) {
+	x.inner.SetSuspended(suspended)
+}
+
+// TransportType calls the underlying TransportType.
+func (x *ExtensionDeviceProperties) TransportType() *foundation.NSNumber {
+	return x.inner.TransportType()
+}
+
+// SetTransportType calls the underlying SetTransportType.
+func (x *ExtensionDeviceProperties) SetTransportType(transportType *foundation.NSNumber) {
+	x.inner.SetTransportType(transportType)
+}
+
+// LinkedCoreAudioDeviceUID calls the underlying LinkedCoreAudioDeviceUID.
+func (x *ExtensionDeviceProperties) LinkedCoreAudioDeviceUID() string {
+	_r := x.inner.LinkedCoreAudioDeviceUID()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLinkedCoreAudioDeviceUID calls the underlying SetLinkedCoreAudioDeviceUID.
+func (x *ExtensionDeviceProperties) SetLinkedCoreAudioDeviceUID(linkedCoreAudioDeviceUID string) {
+	x.inner.SetLinkedCoreAudioDeviceUID(foundation.NSStringStringWithUTF8String(linkedCoreAudioDeviceUID))
+}
+
+// PropertiesDictionary calls the underlying PropertiesDictionary.
+func (x *ExtensionDeviceProperties) PropertiesDictionary() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.PropertiesDictionary()
+}
+
+// SetPropertiesDictionary calls the underlying SetPropertiesDictionary.
+func (x *ExtensionDeviceProperties) SetPropertiesDictionary(propertiesDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
+	x.inner.SetPropertiesDictionary(propertiesDictionary)
+}
+
+// ExtensionDevicePropertiesable is the interface implemented by [ExtensionDeviceProperties], for mocking and DI.
+type ExtensionDevicePropertiesable interface {
+	Unwrap() *raw.CMIOExtensionDeviceProperties
+	WithModel(model string) *ExtensionDeviceProperties
+	WithSuspended(suspended *foundation.NSNumber) *ExtensionDeviceProperties
+	WithTransportType(transportType *foundation.NSNumber) *ExtensionDeviceProperties
+	WithLinkedCoreAudioDeviceUID(linkedCoreAudioDeviceUID string) *ExtensionDeviceProperties
+	WithPropertiesDictionary(propertiesDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) *ExtensionDeviceProperties
+	SetPropertyStateForProperty(propertyState *raw.CMIOExtensionPropertyState[objc.ID], property *foundation.NSString)
+	Model() string
+	SetModel(model string)
+	Suspended() *foundation.NSNumber
+	SetSuspended(suspended *foundation.NSNumber)
+	TransportType() *foundation.NSNumber
+	SetTransportType(transportType *foundation.NSNumber)
+	LinkedCoreAudioDeviceUID() string
+	SetLinkedCoreAudioDeviceUID(linkedCoreAudioDeviceUID string)
+	PropertiesDictionary() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	SetPropertiesDictionary(propertiesDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID])
+}
+
+var _ ExtensionDevicePropertiesable = (*ExtensionDeviceProperties)(nil)
 

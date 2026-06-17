@@ -7,6 +7,7 @@ package accessibility
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/accessibility"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,16 +25,32 @@ func NewBrailleTranslationResult() *BrailleTranslationResult {
 	return &BrailleTranslationResult{inner: raw.AXBrailleTranslationResultFromID(_id)}
 }
 
+// ResultString calls the underlying ResultString.
+func (x *BrailleTranslationResult) ResultString() string {
+	_r := x.inner.ResultString()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 // LocationMap returns the collection as a Go slice.
 func (x *BrailleTranslationResult) LocationMap() []*foundation.NSNumber {
 	arr := x.inner.LocationMap()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
 }
+
+// BrailleTranslationResultable is the interface implemented by [BrailleTranslationResult], for mocking and DI.
+type BrailleTranslationResultable interface {
+	Unwrap() *raw.AXBrailleTranslationResult
+	ResultString() string
+	LocationMap() []*foundation.NSNumber
+}
+
+var _ BrailleTranslationResultable = (*BrailleTranslationResult)(nil)
 

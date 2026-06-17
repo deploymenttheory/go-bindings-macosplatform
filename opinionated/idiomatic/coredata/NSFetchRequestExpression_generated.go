@@ -6,6 +6,7 @@ package coredata
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,29 @@ func NewFetchRequestExpression() *FetchRequestExpression {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSFetchRequestExpression")), objc.RegisterName("new"))
 	return &FetchRequestExpression{inner: raw.NSFetchRequestExpressionFromID(_id)}
 }
+
+// RequestExpression calls the underlying RequestExpression.
+func (x *FetchRequestExpression) RequestExpression() *foundation.NSExpression {
+	return x.inner.RequestExpression()
+}
+
+// ContextExpression calls the underlying ContextExpression.
+func (x *FetchRequestExpression) ContextExpression() *foundation.NSExpression {
+	return x.inner.ContextExpression()
+}
+
+// IsCountOnlyRequest calls the underlying IsCountOnlyRequest.
+func (x *FetchRequestExpression) IsCountOnlyRequest() bool {
+	return x.inner.IsCountOnlyRequest()
+}
+
+// FetchRequestExpressionable is the interface implemented by [FetchRequestExpression], for mocking and DI.
+type FetchRequestExpressionable interface {
+	Unwrap() *raw.NSFetchRequestExpression
+	RequestExpression() *foundation.NSExpression
+	ContextExpression() *foundation.NSExpression
+	IsCountOnlyRequest() bool
+}
+
+var _ FetchRequestExpressionable = (*FetchRequestExpression)(nil)
 

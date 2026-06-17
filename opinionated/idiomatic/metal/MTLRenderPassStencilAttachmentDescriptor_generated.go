@@ -35,5 +35,38 @@ func (x *RenderPassStencilAttachmentDescriptor) WithStencilResolveFilter(stencil
 	return x
 }
 
+// ClearStencil calls the underlying ClearStencil.
+func (x *RenderPassStencilAttachmentDescriptor) ClearStencil() uint32 {
+	return x.inner.ClearStencil()
+}
+
+// SetClearStencil calls the underlying SetClearStencil.
+func (x *RenderPassStencilAttachmentDescriptor) SetClearStencil(clearStencil uint32) {
+	x.inner.SetClearStencil(clearStencil)
+}
+
+// StencilResolveFilter calls the underlying StencilResolveFilter.
+func (x *RenderPassStencilAttachmentDescriptor) StencilResolveFilter() raw.MTLMultisampleStencilResolveFilter {
+	return x.inner.StencilResolveFilter()
+}
+
+// SetStencilResolveFilter calls the underlying SetStencilResolveFilter.
+func (x *RenderPassStencilAttachmentDescriptor) SetStencilResolveFilter(stencilResolveFilter raw.MTLMultisampleStencilResolveFilter) {
+	x.inner.SetStencilResolveFilter(stencilResolveFilter)
+}
+
 func (x *RenderPassStencilAttachmentDescriptor) asRenderPassAttachmentDescriptor() *raw.MTLRenderPassAttachmentDescriptor { return &x.inner.MTLRenderPassAttachmentDescriptor }
+
+// RenderPassStencilAttachmentDescriptorable is the interface implemented by [RenderPassStencilAttachmentDescriptor], for mocking and DI.
+type RenderPassStencilAttachmentDescriptorable interface {
+	Unwrap() *raw.MTLRenderPassStencilAttachmentDescriptor
+	WithClearStencil(clearStencil uint32) *RenderPassStencilAttachmentDescriptor
+	WithStencilResolveFilter(stencilResolveFilter raw.MTLMultisampleStencilResolveFilter) *RenderPassStencilAttachmentDescriptor
+	ClearStencil() uint32
+	SetClearStencil(clearStencil uint32)
+	StencilResolveFilter() raw.MTLMultisampleStencilResolveFilter
+	SetStencilResolveFilter(stencilResolveFilter raw.MTLMultisampleStencilResolveFilter)
+}
+
+var _ RenderPassStencilAttachmentDescriptorable = (*RenderPassStencilAttachmentDescriptor)(nil)
 

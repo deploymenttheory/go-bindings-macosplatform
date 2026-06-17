@@ -7,6 +7,7 @@ package networkextension
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -89,16 +90,145 @@ func (x *NERelay) WithIdentityDataPassword(identityDataPassword string) *NERelay
 	return x
 }
 
+// HTTP3RelayURL calls the underlying HTTP3RelayURL.
+func (x *NERelay) HTTP3RelayURL() *foundation.NSURL {
+	return x.inner.HTTP3RelayURL()
+}
+
+// SetHTTP3RelayURL calls the underlying SetHTTP3RelayURL.
+func (x *NERelay) SetHTTP3RelayURL(hTTP3RelayURL string) {
+	x.inner.SetHTTP3RelayURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(hTTP3RelayURL)))
+}
+
+// HTTP2RelayURL calls the underlying HTTP2RelayURL.
+func (x *NERelay) HTTP2RelayURL() *foundation.NSURL {
+	return x.inner.HTTP2RelayURL()
+}
+
+// SetHTTP2RelayURL calls the underlying SetHTTP2RelayURL.
+func (x *NERelay) SetHTTP2RelayURL(hTTP2RelayURL string) {
+	x.inner.SetHTTP2RelayURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(hTTP2RelayURL)))
+}
+
+// DnsOverHTTPSURL calls the underlying DnsOverHTTPSURL.
+func (x *NERelay) DnsOverHTTPSURL() *foundation.NSURL {
+	return x.inner.DnsOverHTTPSURL()
+}
+
+// SetDnsOverHTTPSURL calls the underlying SetDnsOverHTTPSURL.
+func (x *NERelay) SetDnsOverHTTPSURL(dnsOverHTTPSURL string) {
+	x.inner.SetDnsOverHTTPSURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(dnsOverHTTPSURL)))
+}
+
+// SyntheticDNSAnswerIPv4Prefix calls the underlying SyntheticDNSAnswerIPv4Prefix.
+func (x *NERelay) SyntheticDNSAnswerIPv4Prefix() string {
+	_r := x.inner.SyntheticDNSAnswerIPv4Prefix()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetSyntheticDNSAnswerIPv4Prefix calls the underlying SetSyntheticDNSAnswerIPv4Prefix.
+func (x *NERelay) SetSyntheticDNSAnswerIPv4Prefix(syntheticDNSAnswerIPv4Prefix string) {
+	x.inner.SetSyntheticDNSAnswerIPv4Prefix(foundation.NSStringStringWithUTF8String(syntheticDNSAnswerIPv4Prefix))
+}
+
+// SyntheticDNSAnswerIPv6Prefix calls the underlying SyntheticDNSAnswerIPv6Prefix.
+func (x *NERelay) SyntheticDNSAnswerIPv6Prefix() string {
+	_r := x.inner.SyntheticDNSAnswerIPv6Prefix()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetSyntheticDNSAnswerIPv6Prefix calls the underlying SetSyntheticDNSAnswerIPv6Prefix.
+func (x *NERelay) SetSyntheticDNSAnswerIPv6Prefix(syntheticDNSAnswerIPv6Prefix string) {
+	x.inner.SetSyntheticDNSAnswerIPv6Prefix(foundation.NSStringStringWithUTF8String(syntheticDNSAnswerIPv6Prefix))
+}
+
+// AdditionalHTTPHeaderFields calls the underlying AdditionalHTTPHeaderFields.
+func (x *NERelay) AdditionalHTTPHeaderFields() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString] {
+	return x.inner.AdditionalHTTPHeaderFields()
+}
+
+// SetAdditionalHTTPHeaderFields calls the underlying SetAdditionalHTTPHeaderFields.
+func (x *NERelay) SetAdditionalHTTPHeaderFields(additionalHTTPHeaderFields *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]) {
+	x.inner.SetAdditionalHTTPHeaderFields(additionalHTTPHeaderFields)
+}
+
 // RawPublicKeys returns the collection as a Go slice.
 func (x *NERelay) RawPublicKeys() []*foundation.NSData {
 	arr := x.inner.RawPublicKeys()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSData, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSData {
+		return foundation.NSDataFromID(purego.Retain(_id))
+	})
 }
+
+// SetRawPublicKeys calls the underlying SetRawPublicKeys.
+func (x *NERelay) SetRawPublicKeys(rawPublicKeys *foundation.NSArray[*foundation.NSData]) {
+	x.inner.SetRawPublicKeys(rawPublicKeys)
+}
+
+// IdentityData calls the underlying IdentityData.
+func (x *NERelay) IdentityData() *foundation.NSData {
+	return x.inner.IdentityData()
+}
+
+// SetIdentityData calls the underlying SetIdentityData.
+func (x *NERelay) SetIdentityData(identityData *foundation.NSData) {
+	x.inner.SetIdentityData(identityData)
+}
+
+// IdentityDataPassword calls the underlying IdentityDataPassword.
+func (x *NERelay) IdentityDataPassword() string {
+	_r := x.inner.IdentityDataPassword()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetIdentityDataPassword calls the underlying SetIdentityDataPassword.
+func (x *NERelay) SetIdentityDataPassword(identityDataPassword string) {
+	x.inner.SetIdentityDataPassword(foundation.NSStringStringWithUTF8String(identityDataPassword))
+}
+
+// NERelayable is the interface implemented by [NERelay], for mocking and DI.
+type NERelayable interface {
+	Unwrap() *raw.NERelay
+	WithHTTP3RelayURL(hTTP3RelayURL string) *NERelay
+	WithHTTP2RelayURL(hTTP2RelayURL string) *NERelay
+	WithDnsOverHTTPSURL(dnsOverHTTPSURL string) *NERelay
+	WithSyntheticDNSAnswerIPv4Prefix(syntheticDNSAnswerIPv4Prefix string) *NERelay
+	WithSyntheticDNSAnswerIPv6Prefix(syntheticDNSAnswerIPv6Prefix string) *NERelay
+	WithAdditionalHTTPHeaderFields(additionalHTTPHeaderFields *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]) *NERelay
+	WithRawPublicKeys(items ...*foundation.NSData) *NERelay
+	WithIdentityData(identityData *foundation.NSData) *NERelay
+	WithIdentityDataPassword(identityDataPassword string) *NERelay
+	HTTP3RelayURL() *foundation.NSURL
+	SetHTTP3RelayURL(hTTP3RelayURL string)
+	HTTP2RelayURL() *foundation.NSURL
+	SetHTTP2RelayURL(hTTP2RelayURL string)
+	DnsOverHTTPSURL() *foundation.NSURL
+	SetDnsOverHTTPSURL(dnsOverHTTPSURL string)
+	SyntheticDNSAnswerIPv4Prefix() string
+	SetSyntheticDNSAnswerIPv4Prefix(syntheticDNSAnswerIPv4Prefix string)
+	SyntheticDNSAnswerIPv6Prefix() string
+	SetSyntheticDNSAnswerIPv6Prefix(syntheticDNSAnswerIPv6Prefix string)
+	AdditionalHTTPHeaderFields() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]
+	SetAdditionalHTTPHeaderFields(additionalHTTPHeaderFields *foundation.NSDictionary[*foundation.NSString, *foundation.NSString])
+	RawPublicKeys() []*foundation.NSData
+	SetRawPublicKeys(rawPublicKeys *foundation.NSArray[*foundation.NSData])
+	IdentityData() *foundation.NSData
+	SetIdentityData(identityData *foundation.NSData)
+	IdentityDataPassword() string
+	SetIdentityDataPassword(identityDataPassword string)
+}
+
+var _ NERelayable = (*NERelay)(nil)
 

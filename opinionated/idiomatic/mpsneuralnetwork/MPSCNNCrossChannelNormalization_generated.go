@@ -51,5 +51,57 @@ func (x *CNNCrossChannelNormalization) WithDelta(delta float32) *CNNCrossChannel
 	return x
 }
 
+// Alpha calls the underlying Alpha.
+func (x *CNNCrossChannelNormalization) Alpha() float32 {
+	return x.inner.Alpha()
+}
+
+// SetAlpha calls the underlying SetAlpha.
+func (x *CNNCrossChannelNormalization) SetAlpha(alpha float32) {
+	x.inner.SetAlpha(alpha)
+}
+
+// Beta calls the underlying Beta.
+func (x *CNNCrossChannelNormalization) Beta() float32 {
+	return x.inner.Beta()
+}
+
+// SetBeta calls the underlying SetBeta.
+func (x *CNNCrossChannelNormalization) SetBeta(beta float32) {
+	x.inner.SetBeta(beta)
+}
+
+// Delta calls the underlying Delta.
+func (x *CNNCrossChannelNormalization) Delta() float32 {
+	return x.inner.Delta()
+}
+
+// SetDelta calls the underlying SetDelta.
+func (x *CNNCrossChannelNormalization) SetDelta(delta float32) {
+	x.inner.SetDelta(delta)
+}
+
+// KernelSize calls the underlying KernelSize.
+func (x *CNNCrossChannelNormalization) KernelSize() uint {
+	return x.inner.KernelSize()
+}
+
 func (x *CNNCrossChannelNormalization) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSCNNKernel }
+
+// CNNCrossChannelNormalizationable is the interface implemented by [CNNCrossChannelNormalization], for mocking and DI.
+type CNNCrossChannelNormalizationable interface {
+	Unwrap() *raw.MPSCNNCrossChannelNormalization
+	WithAlpha(alpha float32) *CNNCrossChannelNormalization
+	WithBeta(beta float32) *CNNCrossChannelNormalization
+	WithDelta(delta float32) *CNNCrossChannelNormalization
+	Alpha() float32
+	SetAlpha(alpha float32)
+	Beta() float32
+	SetBeta(beta float32)
+	Delta() float32
+	SetDelta(delta float32)
+	KernelSize() uint
+}
+
+var _ CNNCrossChannelNormalizationable = (*CNNCrossChannelNormalization)(nil)
 

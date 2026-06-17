@@ -6,6 +6,7 @@ package coremotion
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremotion"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +24,54 @@ func NewMotionActivity() *MotionActivity {
 	return &MotionActivity{inner: raw.CMMotionActivityFromID(_id)}
 }
 
+// Confidence calls the underlying Confidence.
+func (x *MotionActivity) Confidence() raw.CMMotionActivityConfidence {
+	return x.inner.Confidence()
+}
+
+// StartDate calls the underlying StartDate.
+func (x *MotionActivity) StartDate() *foundation.NSDate {
+	return x.inner.StartDate()
+}
+
+// Unknown calls the underlying Unknown.
+func (x *MotionActivity) Unknown() bool {
+	return x.inner.Unknown()
+}
+
+// Stationary calls the underlying Stationary.
+func (x *MotionActivity) Stationary() bool {
+	return x.inner.Stationary()
+}
+
+// Walking calls the underlying Walking.
+func (x *MotionActivity) Walking() bool {
+	return x.inner.Walking()
+}
+
+// Running calls the underlying Running.
+func (x *MotionActivity) Running() bool {
+	return x.inner.Running()
+}
+
+// Automotive calls the underlying Automotive.
+func (x *MotionActivity) Automotive() bool {
+	return x.inner.Automotive()
+}
+
 func (x *MotionActivity) asLogItem() *raw.CMLogItem { return &x.inner.CMLogItem }
+
+// MotionActivityable is the interface implemented by [MotionActivity], for mocking and DI.
+type MotionActivityable interface {
+	Unwrap() *raw.CMMotionActivity
+	Confidence() raw.CMMotionActivityConfidence
+	StartDate() *foundation.NSDate
+	Unknown() bool
+	Stationary() bool
+	Walking() bool
+	Running() bool
+	Automotive() bool
+}
+
+var _ MotionActivityable = (*MotionActivity)(nil)
 

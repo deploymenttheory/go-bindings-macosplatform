@@ -48,3 +48,62 @@ func (x *MTRActionsClusterActionFailedEvent) WithError(error_ *foundation.NSNumb
 	return x
 }
 
+// ActionID calls the underlying ActionID.
+func (x *MTRActionsClusterActionFailedEvent) ActionID() *foundation.NSNumber {
+	return x.inner.ActionID()
+}
+
+// SetActionID calls the underlying SetActionID.
+func (x *MTRActionsClusterActionFailedEvent) SetActionID(actionID *foundation.NSNumber) {
+	x.inner.SetActionID(actionID)
+}
+
+// InvokeID calls the underlying InvokeID.
+func (x *MTRActionsClusterActionFailedEvent) InvokeID() *foundation.NSNumber {
+	return x.inner.InvokeID()
+}
+
+// SetInvokeID calls the underlying SetInvokeID.
+func (x *MTRActionsClusterActionFailedEvent) SetInvokeID(invokeID *foundation.NSNumber) {
+	x.inner.SetInvokeID(invokeID)
+}
+
+// GetNewState calls the underlying GetNewState.
+func (x *MTRActionsClusterActionFailedEvent) GetNewState() *foundation.NSNumber {
+	return x.inner.GetNewState()
+}
+
+// SetNewState calls the underlying SetNewState.
+func (x *MTRActionsClusterActionFailedEvent) SetNewState(newState *foundation.NSNumber) {
+	x.inner.SetNewState(newState)
+}
+
+// Error calls the underlying Error.
+func (x *MTRActionsClusterActionFailedEvent) Error() *foundation.NSNumber {
+	return x.inner.Error()
+}
+
+// SetError calls the underlying SetError.
+func (x *MTRActionsClusterActionFailedEvent) SetError(error_ *foundation.NSNumber) {
+	x.inner.SetError(error_)
+}
+
+// MTRActionsClusterActionFailedEventable is the interface implemented by [MTRActionsClusterActionFailedEvent], for mocking and DI.
+type MTRActionsClusterActionFailedEventable interface {
+	Unwrap() *raw.MTRActionsClusterActionFailedEvent
+	WithActionID(actionID *foundation.NSNumber) *MTRActionsClusterActionFailedEvent
+	WithInvokeID(invokeID *foundation.NSNumber) *MTRActionsClusterActionFailedEvent
+	WithNewState(newState *foundation.NSNumber) *MTRActionsClusterActionFailedEvent
+	WithError(error_ *foundation.NSNumber) *MTRActionsClusterActionFailedEvent
+	ActionID() *foundation.NSNumber
+	SetActionID(actionID *foundation.NSNumber)
+	InvokeID() *foundation.NSNumber
+	SetInvokeID(invokeID *foundation.NSNumber)
+	GetNewState() *foundation.NSNumber
+	SetNewState(newState *foundation.NSNumber)
+	Error() *foundation.NSNumber
+	SetError(error_ *foundation.NSNumber)
+}
+
+var _ MTRActionsClusterActionFailedEventable = (*MTRActionsClusterActionFailedEvent)(nil)
+

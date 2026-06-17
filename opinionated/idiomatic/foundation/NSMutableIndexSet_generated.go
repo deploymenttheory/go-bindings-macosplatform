@@ -23,7 +23,62 @@ func NewMutableIndexSet() *MutableIndexSet {
 	return &MutableIndexSet{inner: raw.NSMutableIndexSetFromID(_id)}
 }
 
+// AddIndexes calls the underlying AddIndexes.
+func (x *MutableIndexSet) AddIndexes(indexSet *raw.NSIndexSet) {
+	x.inner.AddIndexes(indexSet)
+}
+
+// RemoveIndexes calls the underlying RemoveIndexes.
+func (x *MutableIndexSet) RemoveIndexes(indexSet *raw.NSIndexSet) {
+	x.inner.RemoveIndexes(indexSet)
+}
+
+// RemoveAllIndexes calls the underlying RemoveAllIndexes.
+func (x *MutableIndexSet) RemoveAllIndexes() {
+	x.inner.RemoveAllIndexes()
+}
+
+// AddIndex calls the underlying AddIndex.
+func (x *MutableIndexSet) AddIndex(value uint) {
+	x.inner.AddIndex(value)
+}
+
+// RemoveIndex calls the underlying RemoveIndex.
+func (x *MutableIndexSet) RemoveIndex(value uint) {
+	x.inner.RemoveIndex(value)
+}
+
+// AddIndexesInRange calls the underlying AddIndexesInRange.
+func (x *MutableIndexSet) AddIndexesInRange(range_ raw.NSRange) {
+	x.inner.AddIndexesInRange(range_)
+}
+
+// RemoveIndexesInRange calls the underlying RemoveIndexesInRange.
+func (x *MutableIndexSet) RemoveIndexesInRange(range_ raw.NSRange) {
+	x.inner.RemoveIndexesInRange(range_)
+}
+
+// ShiftIndexesStartingAtIndexBy calls the underlying ShiftIndexesStartingAtIndexBy.
+func (x *MutableIndexSet) ShiftIndexesStartingAtIndexBy(index uint, delta int) {
+	x.inner.ShiftIndexesStartingAtIndexBy(index, delta)
+}
+
 func (x *MutableIndexSet) asIndexSet() *raw.NSIndexSet { return &x.inner.NSIndexSet }
 
 func (x *MutableIndexSet) asObject() *raw.NSObject { return &x.inner.NSIndexSet.NSObject }
+
+// MutableIndexSetable is the interface implemented by [MutableIndexSet], for mocking and DI.
+type MutableIndexSetable interface {
+	Unwrap() *raw.NSMutableIndexSet
+	AddIndexes(indexSet *raw.NSIndexSet)
+	RemoveIndexes(indexSet *raw.NSIndexSet)
+	RemoveAllIndexes()
+	AddIndex(value uint)
+	RemoveIndex(value uint)
+	AddIndexesInRange(range_ raw.NSRange)
+	RemoveIndexesInRange(range_ raw.NSRange)
+	ShiftIndexesStartingAtIndexBy(index uint, delta int)
+}
+
+var _ MutableIndexSetable = (*MutableIndexSet)(nil)
 

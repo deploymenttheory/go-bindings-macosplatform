@@ -23,3 +23,10 @@ func NewMTRSmokeCOAlarmClusterAllClearEvent() *MTRSmokeCOAlarmClusterAllClearEve
 	return &MTRSmokeCOAlarmClusterAllClearEvent{inner: raw.MTRSmokeCOAlarmClusterAllClearEventFromID(_id)}
 }
 
+// MTRSmokeCOAlarmClusterAllClearEventable is the interface implemented by [MTRSmokeCOAlarmClusterAllClearEvent], for mocking and DI.
+type MTRSmokeCOAlarmClusterAllClearEventable interface {
+	Unwrap() *raw.MTRSmokeCOAlarmClusterAllClearEvent
+}
+
+var _ MTRSmokeCOAlarmClusterAllClearEventable = (*MTRSmokeCOAlarmClusterAllClearEvent)(nil)
+

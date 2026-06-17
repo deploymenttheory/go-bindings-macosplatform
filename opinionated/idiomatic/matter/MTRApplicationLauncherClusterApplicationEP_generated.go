@@ -25,3 +25,10 @@ func NewMTRApplicationLauncherClusterApplicationEP() *MTRApplicationLauncherClus
 
 func (x *MTRApplicationLauncherClusterApplicationEP) asMTRApplicationLauncherClusterApplicationEPStruct() *raw.MTRApplicationLauncherClusterApplicationEPStruct { return &x.inner.MTRApplicationLauncherClusterApplicationEPStruct }
 
+// MTRApplicationLauncherClusterApplicationEPable is the interface implemented by [MTRApplicationLauncherClusterApplicationEP], for mocking and DI.
+type MTRApplicationLauncherClusterApplicationEPable interface {
+	Unwrap() *raw.MTRApplicationLauncherClusterApplicationEP
+}
+
+var _ MTRApplicationLauncherClusterApplicationEPable = (*MTRApplicationLauncherClusterApplicationEP)(nil)
+

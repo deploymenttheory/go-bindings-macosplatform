@@ -39,3 +39,64 @@ func NewStrokePointWithLocationTimeOffsetSizeOpacityForceAzimuthAltitudeSecondar
 	return &StrokePoint{inner: raw.PKStrokePointFromID(_id)}
 }
 
+// Location calls the underlying Location.
+func (x *StrokePoint) Location() corefoundation.CGPoint {
+	return x.inner.Location()
+}
+
+// TimeOffset calls the underlying TimeOffset.
+func (x *StrokePoint) TimeOffset() float64 {
+	return x.inner.TimeOffset()
+}
+
+// Size calls the underlying Size.
+func (x *StrokePoint) Size() corefoundation.CGSize {
+	return x.inner.Size()
+}
+
+// Opacity calls the underlying Opacity.
+func (x *StrokePoint) Opacity() float64 {
+	return x.inner.Opacity()
+}
+
+// Azimuth calls the underlying Azimuth.
+func (x *StrokePoint) Azimuth() float64 {
+	return x.inner.Azimuth()
+}
+
+// Force calls the underlying Force.
+func (x *StrokePoint) Force() float64 {
+	return x.inner.Force()
+}
+
+// Altitude calls the underlying Altitude.
+func (x *StrokePoint) Altitude() float64 {
+	return x.inner.Altitude()
+}
+
+// SecondaryScale calls the underlying SecondaryScale.
+func (x *StrokePoint) SecondaryScale() float64 {
+	return x.inner.SecondaryScale()
+}
+
+// Threshold calls the underlying Threshold.
+func (x *StrokePoint) Threshold() float64 {
+	return x.inner.Threshold()
+}
+
+// StrokePointable is the interface implemented by [StrokePoint], for mocking and DI.
+type StrokePointable interface {
+	Unwrap() *raw.PKStrokePoint
+	Location() corefoundation.CGPoint
+	TimeOffset() float64
+	Size() corefoundation.CGSize
+	Opacity() float64
+	Azimuth() float64
+	Force() float64
+	Altitude() float64
+	SecondaryScale() float64
+	Threshold() float64
+}
+
+var _ StrokePointable = (*StrokePoint)(nil)
+

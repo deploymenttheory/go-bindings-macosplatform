@@ -5,6 +5,7 @@
 package mpsneuralnetwork
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,7 +24,42 @@ func NewCNNConvolutionGradientState() *CNNConvolutionGradientState {
 	return &CNNConvolutionGradientState{inner: raw.MPSCNNConvolutionGradientStateFromID(_id)}
 }
 
+// GradientForWeights calls the underlying GradientForWeights.
+func (x *CNNConvolutionGradientState) GradientForWeights() metal.MTLBuffer {
+	return x.inner.GradientForWeights()
+}
+
+// GradientForBiases calls the underlying GradientForBiases.
+func (x *CNNConvolutionGradientState) GradientForBiases() metal.MTLBuffer {
+	return x.inner.GradientForBiases()
+}
+
+// Convolution calls the underlying Convolution.
+func (x *CNNConvolutionGradientState) Convolution() *CNNConvolution {
+	_r := x.inner.Convolution()
+	if _r == nil {
+		return nil
+	}
+	return &CNNConvolution{inner: _r}
+}
+
+// GradientForWeightsLayout calls the underlying GradientForWeightsLayout.
+func (x *CNNConvolutionGradientState) GradientForWeightsLayout() raw.MPSCNNConvolutionWeightsLayout {
+	return x.inner.GradientForWeightsLayout()
+}
+
 func (x *CNNConvolutionGradientState) asCNNConvolutionGradientState() *raw.MPSCNNConvolutionGradientState { return x.inner }
 
 func (x *CNNConvolutionGradientState) asNNGradientState() *raw.MPSNNGradientState { return &x.inner.MPSNNGradientState }
+
+// CNNConvolutionGradientStateable is the interface implemented by [CNNConvolutionGradientState], for mocking and DI.
+type CNNConvolutionGradientStateable interface {
+	Unwrap() *raw.MPSCNNConvolutionGradientState
+	GradientForWeights() metal.MTLBuffer
+	GradientForBiases() metal.MTLBuffer
+	Convolution() *CNNConvolution
+	GradientForWeightsLayout() raw.MPSCNNConvolutionWeightsLayout
+}
+
+var _ CNNConvolutionGradientStateable = (*CNNConvolutionGradientState)(nil)
 

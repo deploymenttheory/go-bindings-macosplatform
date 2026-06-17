@@ -44,5 +44,56 @@ func (x *ReferenceNode) WithLoadingPolicy(loadingPolicy raw.SCNReferenceLoadingP
 	return x
 }
 
+// Load calls the underlying Load.
+func (x *ReferenceNode) Load() {
+	x.inner.Load()
+}
+
+// Unload calls the underlying Unload.
+func (x *ReferenceNode) Unload() {
+	x.inner.Unload()
+}
+
+// ReferenceURL calls the underlying ReferenceURL.
+func (x *ReferenceNode) ReferenceURL() *foundation.NSURL {
+	return x.inner.ReferenceURL()
+}
+
+// SetReferenceURL calls the underlying SetReferenceURL.
+func (x *ReferenceNode) SetReferenceURL(referenceURL string) {
+	x.inner.SetReferenceURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(referenceURL)))
+}
+
+// LoadingPolicy calls the underlying LoadingPolicy.
+func (x *ReferenceNode) LoadingPolicy() raw.SCNReferenceLoadingPolicy {
+	return x.inner.LoadingPolicy()
+}
+
+// SetLoadingPolicy calls the underlying SetLoadingPolicy.
+func (x *ReferenceNode) SetLoadingPolicy(loadingPolicy raw.SCNReferenceLoadingPolicy) {
+	x.inner.SetLoadingPolicy(loadingPolicy)
+}
+
+// IsLoaded calls the underlying IsLoaded.
+func (x *ReferenceNode) IsLoaded() bool {
+	return x.inner.IsLoaded()
+}
+
 func (x *ReferenceNode) asNode() *raw.SCNNode { return &x.inner.SCNNode }
+
+// ReferenceNodeable is the interface implemented by [ReferenceNode], for mocking and DI.
+type ReferenceNodeable interface {
+	Unwrap() *raw.SCNReferenceNode
+	WithReferenceURL(referenceURL string) *ReferenceNode
+	WithLoadingPolicy(loadingPolicy raw.SCNReferenceLoadingPolicy) *ReferenceNode
+	Load()
+	Unload()
+	ReferenceURL() *foundation.NSURL
+	SetReferenceURL(referenceURL string)
+	LoadingPolicy() raw.SCNReferenceLoadingPolicy
+	SetLoadingPolicy(loadingPolicy raw.SCNReferenceLoadingPolicy)
+	IsLoaded() bool
+}
+
+var _ ReferenceNodeable = (*ReferenceNode)(nil)
 

@@ -23,7 +23,30 @@ func NewDescriptor() *Descriptor {
 	return &Descriptor{inner: raw.CBDescriptorFromID(_id)}
 }
 
+// Characteristic calls the underlying Characteristic.
+func (x *Descriptor) Characteristic() *Characteristic {
+	_r := x.inner.Characteristic()
+	if _r == nil {
+		return nil
+	}
+	return &Characteristic{inner: _r}
+}
+
+// Value calls the underlying Value.
+func (x *Descriptor) Value() objc.ID {
+	return x.inner.Value()
+}
+
 func (x *Descriptor) asDescriptor() *raw.CBDescriptor { return x.inner }
 
 func (x *Descriptor) asAttribute() *raw.CBAttribute { return &x.inner.CBAttribute }
+
+// Descriptorable is the interface implemented by [Descriptor], for mocking and DI.
+type Descriptorable interface {
+	Unwrap() *raw.CBDescriptor
+	Characteristic() *Characteristic
+	Value() objc.ID
+}
+
+var _ Descriptorable = (*Descriptor)(nil)
 

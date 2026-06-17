@@ -23,3 +23,26 @@ func NewSyncEngineFetchChangesContext() *SyncEngineFetchChangesContext {
 	return &SyncEngineFetchChangesContext{inner: raw.CKSyncEngineFetchChangesContextFromID(_id)}
 }
 
+// Reason calls the underlying Reason.
+func (x *SyncEngineFetchChangesContext) Reason() raw.CKSyncEngineSyncReason {
+	return x.inner.Reason()
+}
+
+// Options calls the underlying Options.
+func (x *SyncEngineFetchChangesContext) Options() *SyncEngineFetchChangesOptions {
+	_r := x.inner.Options()
+	if _r == nil {
+		return nil
+	}
+	return &SyncEngineFetchChangesOptions{inner: _r}
+}
+
+// SyncEngineFetchChangesContextable is the interface implemented by [SyncEngineFetchChangesContext], for mocking and DI.
+type SyncEngineFetchChangesContextable interface {
+	Unwrap() *raw.CKSyncEngineFetchChangesContext
+	Reason() raw.CKSyncEngineSyncReason
+	Options() *SyncEngineFetchChangesOptions
+}
+
+var _ SyncEngineFetchChangesContextable = (*SyncEngineFetchChangesContext)(nil)
+

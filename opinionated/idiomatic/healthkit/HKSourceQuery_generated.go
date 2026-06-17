@@ -28,3 +28,10 @@ func NewSourceQueryWithSampleTypeSamplePredicateCompletionHandler(sampleType *ra
 
 func (x *SourceQuery) asQuery() *raw.HKQuery { return &x.inner.HKQuery }
 
+// SourceQueryable is the interface implemented by [SourceQuery], for mocking and DI.
+type SourceQueryable interface {
+	Unwrap() *raw.HKSourceQuery
+}
+
+var _ SourceQueryable = (*SourceQuery)(nil)
+

@@ -7,6 +7,7 @@ package audiovideobridging
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/audiovideobridging"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // AVB17221AECPInterface wraps [raw.AVB17221AECPInterface] with a fluent Go API.
@@ -23,5 +24,54 @@ func NewAVB17221AECPInterface() *AVB17221AECPInterface {
 	return &AVB17221AECPInterface{inner: raw.AVB17221AECPInterfaceFromID(_id)}
 }
 
+// SetCommandHandlerForEntityID calls the underlying SetCommandHandlerForEntityID.
+func (x *AVB17221AECPInterface) SetCommandHandlerForEntityID(handler raw.AVB17221AECPClient, targetEntityID uint64) bool {
+	return x.inner.SetCommandHandlerForEntityID(handler, targetEntityID)
+}
+
+// RemoveCommandHandlerForEntityID calls the underlying RemoveCommandHandlerForEntityID.
+func (x *AVB17221AECPInterface) RemoveCommandHandlerForEntityID(targetEntityID uint64) {
+	x.inner.RemoveCommandHandlerForEntityID(targetEntityID)
+}
+
+// SetResponseHandlerForControllerEntityID calls the underlying SetResponseHandlerForControllerEntityID.
+func (x *AVB17221AECPInterface) SetResponseHandlerForControllerEntityID(handler raw.AVB17221AECPClient, controllerEntityID uint64) bool {
+	return x.inner.SetResponseHandlerForControllerEntityID(handler, controllerEntityID)
+}
+
+// RemoveResponseHandlerForControllerEntityID calls the underlying RemoveResponseHandlerForControllerEntityID.
+func (x *AVB17221AECPInterface) RemoveResponseHandlerForControllerEntityID(controllerEntityID uint64) {
+	x.inner.RemoveResponseHandlerForControllerEntityID(controllerEntityID)
+}
+
+// SendCommandToMACAddressCompletionHandler calls the underlying SendCommandToMACAddressCompletionHandler.
+func (x *AVB17221AECPInterface) SendCommandToMACAddressCompletionHandler(message *raw.AVB17221AECPMessage, destMAC *raw.AVBMACAddress, completionHandler func(unsafe.Pointer, *raw.AVB17221AECPMessage)) bool {
+	return x.inner.SendCommandToMACAddressCompletionHandler(message, destMAC, completionHandler)
+}
+
+// SendResponseToMACAddressError calls the underlying SendResponseToMACAddressError.
+func (x *AVB17221AECPInterface) SendResponseToMACAddressError(message *raw.AVB17221AECPMessage, destMAC *raw.AVBMACAddress) (bool, error) {
+	return x.inner.SendResponseToMACAddressError(message, destMAC)
+}
+
+// SendVendorUniqueCommandToMACAddressExpectResponseWithinTimeoutCompletionHandler calls the underlying SendVendorUniqueCommandToMACAddressExpectResponseWithinTimeoutCompletionHandler.
+func (x *AVB17221AECPInterface) SendVendorUniqueCommandToMACAddressExpectResponseWithinTimeoutCompletionHandler(message *raw.AVB17221AECPVendorMessage, destMAC *raw.AVBMACAddress, timeout int64, completionHandler func(unsafe.Pointer, *raw.AVB17221AECPMessage)) bool {
+	return x.inner.SendVendorUniqueCommandToMACAddressExpectResponseWithinTimeoutCompletionHandler(message, destMAC, timeout, completionHandler)
+}
+
 func (x *AVB17221AECPInterface) asAVB1722ControlInterface() *raw.AVB1722ControlInterface { return &x.inner.AVB1722ControlInterface }
+
+// AVB17221AECPInterfaceable is the interface implemented by [AVB17221AECPInterface], for mocking and DI.
+type AVB17221AECPInterfaceable interface {
+	Unwrap() *raw.AVB17221AECPInterface
+	SetCommandHandlerForEntityID(handler raw.AVB17221AECPClient, targetEntityID uint64) bool
+	RemoveCommandHandlerForEntityID(targetEntityID uint64)
+	SetResponseHandlerForControllerEntityID(handler raw.AVB17221AECPClient, controllerEntityID uint64) bool
+	RemoveResponseHandlerForControllerEntityID(controllerEntityID uint64)
+	SendCommandToMACAddressCompletionHandler(message *raw.AVB17221AECPMessage, destMAC *raw.AVBMACAddress, completionHandler func(unsafe.Pointer, *raw.AVB17221AECPMessage)) bool
+	SendResponseToMACAddressError(message *raw.AVB17221AECPMessage, destMAC *raw.AVBMACAddress) (bool, error)
+	SendVendorUniqueCommandToMACAddressExpectResponseWithinTimeoutCompletionHandler(message *raw.AVB17221AECPVendorMessage, destMAC *raw.AVBMACAddress, timeout int64, completionHandler func(unsafe.Pointer, *raw.AVB17221AECPMessage)) bool
+}
+
+var _ AVB17221AECPInterfaceable = (*AVB17221AECPInterface)(nil)
 

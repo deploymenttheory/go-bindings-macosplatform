@@ -5,6 +5,7 @@
 package quartzcomposer
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcomposer"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +23,65 @@ func NewCompositionParameterView() *CompositionParameterView {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("QCCompositionParameterView")), objc.RegisterName("new"))
 	return &CompositionParameterView{inner: raw.QCCompositionParameterViewFromID(_id)}
 }
+
+// SetCompositionRenderer calls the underlying SetCompositionRenderer.
+func (x *CompositionParameterView) SetCompositionRenderer(renderer raw.QCCompositionRenderer) {
+	x.inner.SetCompositionRenderer(renderer)
+}
+
+// CompositionRenderer calls the underlying CompositionRenderer.
+func (x *CompositionParameterView) CompositionRenderer() raw.QCCompositionRenderer {
+	return x.inner.CompositionRenderer()
+}
+
+// HasParameters calls the underlying HasParameters.
+func (x *CompositionParameterView) HasParameters() bool {
+	return x.inner.HasParameters()
+}
+
+// SetBackgroundColor calls the underlying SetBackgroundColor.
+func (x *CompositionParameterView) SetBackgroundColor(color *appkit.NSColor) {
+	x.inner.SetBackgroundColor(color)
+}
+
+// BackgroundColor calls the underlying BackgroundColor.
+func (x *CompositionParameterView) BackgroundColor() *appkit.NSColor {
+	return x.inner.BackgroundColor()
+}
+
+// SetDrawsBackground calls the underlying SetDrawsBackground.
+func (x *CompositionParameterView) SetDrawsBackground(flag bool) {
+	x.inner.SetDrawsBackground(flag)
+}
+
+// DrawsBackground calls the underlying DrawsBackground.
+func (x *CompositionParameterView) DrawsBackground() bool {
+	return x.inner.DrawsBackground()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *CompositionParameterView) SetDelegate(delegate objc.ID) {
+	x.inner.SetDelegate(delegate)
+}
+
+// Delegate calls the underlying Delegate.
+func (x *CompositionParameterView) Delegate() objc.ID {
+	return x.inner.Delegate()
+}
+
+// CompositionParameterViewable is the interface implemented by [CompositionParameterView], for mocking and DI.
+type CompositionParameterViewable interface {
+	Unwrap() *raw.QCCompositionParameterView
+	SetCompositionRenderer(renderer raw.QCCompositionRenderer)
+	CompositionRenderer() raw.QCCompositionRenderer
+	HasParameters() bool
+	SetBackgroundColor(color *appkit.NSColor)
+	BackgroundColor() *appkit.NSColor
+	SetDrawsBackground(flag bool)
+	DrawsBackground() bool
+	SetDelegate(delegate objc.ID)
+	Delegate() objc.ID
+}
+
+var _ CompositionParameterViewable = (*CompositionParameterView)(nil)
 

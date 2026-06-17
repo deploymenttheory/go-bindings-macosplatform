@@ -6,6 +6,8 @@ package accessibility
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/accessibility"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -28,4 +30,56 @@ func (x *CustomContent) WithImportance(importance raw.AXCustomContentImportance)
 	x.inner.SetImportance(importance)
 	return x
 }
+
+// Label calls the underlying Label.
+func (x *CustomContent) Label() string {
+	_r := x.inner.Label()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// AttributedLabel calls the underlying AttributedLabel.
+func (x *CustomContent) AttributedLabel() *foundation.NSAttributedString {
+	return x.inner.AttributedLabel()
+}
+
+// Value calls the underlying Value.
+func (x *CustomContent) Value() string {
+	_r := x.inner.Value()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// AttributedValue calls the underlying AttributedValue.
+func (x *CustomContent) AttributedValue() *foundation.NSAttributedString {
+	return x.inner.AttributedValue()
+}
+
+// Importance calls the underlying Importance.
+func (x *CustomContent) Importance() raw.AXCustomContentImportance {
+	return x.inner.Importance()
+}
+
+// SetImportance calls the underlying SetImportance.
+func (x *CustomContent) SetImportance(importance raw.AXCustomContentImportance) {
+	x.inner.SetImportance(importance)
+}
+
+// CustomContentable is the interface implemented by [CustomContent], for mocking and DI.
+type CustomContentable interface {
+	Unwrap() *raw.AXCustomContent
+	WithImportance(importance raw.AXCustomContentImportance) *CustomContent
+	Label() string
+	AttributedLabel() *foundation.NSAttributedString
+	Value() string
+	AttributedValue() *foundation.NSAttributedString
+	Importance() raw.AXCustomContentImportance
+	SetImportance(importance raw.AXCustomContentImportance)
+}
+
+var _ CustomContentable = (*CustomContent)(nil)
 

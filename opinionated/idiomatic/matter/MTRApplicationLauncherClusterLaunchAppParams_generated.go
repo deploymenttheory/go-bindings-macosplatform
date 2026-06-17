@@ -48,3 +48,66 @@ func (x *MTRApplicationLauncherClusterLaunchAppParams) WithServerSideProcessingT
 	return x
 }
 
+// Application calls the underlying Application.
+func (x *MTRApplicationLauncherClusterLaunchAppParams) Application() *MTRApplicationLauncherClusterApplicationStruct {
+	_r := x.inner.Application()
+	if _r == nil {
+		return nil
+	}
+	return &MTRApplicationLauncherClusterApplicationStruct{inner: _r}
+}
+
+// SetApplication calls the underlying SetApplication.
+func (x *MTRApplicationLauncherClusterLaunchAppParams) SetApplication(application *raw.MTRApplicationLauncherClusterApplicationStruct) {
+	x.inner.SetApplication(application)
+}
+
+// Data calls the underlying Data.
+func (x *MTRApplicationLauncherClusterLaunchAppParams) Data() *foundation.NSData {
+	return x.inner.Data()
+}
+
+// SetData calls the underlying SetData.
+func (x *MTRApplicationLauncherClusterLaunchAppParams) SetData(data *foundation.NSData) {
+	x.inner.SetData(data)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRApplicationLauncherClusterLaunchAppParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRApplicationLauncherClusterLaunchAppParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRApplicationLauncherClusterLaunchAppParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRApplicationLauncherClusterLaunchAppParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRApplicationLauncherClusterLaunchAppParamsable is the interface implemented by [MTRApplicationLauncherClusterLaunchAppParams], for mocking and DI.
+type MTRApplicationLauncherClusterLaunchAppParamsable interface {
+	Unwrap() *raw.MTRApplicationLauncherClusterLaunchAppParams
+	WithApplication(application MTRApplicationLauncherClusterApplicationStructProvider) *MTRApplicationLauncherClusterLaunchAppParams
+	WithData(data *foundation.NSData) *MTRApplicationLauncherClusterLaunchAppParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRApplicationLauncherClusterLaunchAppParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRApplicationLauncherClusterLaunchAppParams
+	Application() *MTRApplicationLauncherClusterApplicationStruct
+	SetApplication(application *raw.MTRApplicationLauncherClusterApplicationStruct)
+	Data() *foundation.NSData
+	SetData(data *foundation.NSData)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRApplicationLauncherClusterLaunchAppParamsable = (*MTRApplicationLauncherClusterLaunchAppParams)(nil)
+

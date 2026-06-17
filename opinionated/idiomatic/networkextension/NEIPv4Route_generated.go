@@ -7,6 +7,7 @@ package networkextension
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -30,4 +31,48 @@ func (x *NEIPv4Route) WithGatewayAddress(gatewayAddress string) *NEIPv4Route {
 	x.inner.SetGatewayAddress(foundation.NSStringStringWithUTF8String(gatewayAddress))
 	return x
 }
+
+// DestinationAddress calls the underlying DestinationAddress.
+func (x *NEIPv4Route) DestinationAddress() string {
+	_r := x.inner.DestinationAddress()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// DestinationSubnetMask calls the underlying DestinationSubnetMask.
+func (x *NEIPv4Route) DestinationSubnetMask() string {
+	_r := x.inner.DestinationSubnetMask()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// GatewayAddress calls the underlying GatewayAddress.
+func (x *NEIPv4Route) GatewayAddress() string {
+	_r := x.inner.GatewayAddress()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetGatewayAddress calls the underlying SetGatewayAddress.
+func (x *NEIPv4Route) SetGatewayAddress(gatewayAddress string) {
+	x.inner.SetGatewayAddress(foundation.NSStringStringWithUTF8String(gatewayAddress))
+}
+
+// NEIPv4Routeable is the interface implemented by [NEIPv4Route], for mocking and DI.
+type NEIPv4Routeable interface {
+	Unwrap() *raw.NEIPv4Route
+	WithGatewayAddress(gatewayAddress string) *NEIPv4Route
+	DestinationAddress() string
+	DestinationSubnetMask() string
+	GatewayAddress() string
+	SetGatewayAddress(gatewayAddress string)
+}
+
+var _ NEIPv4Routeable = (*NEIPv4Route)(nil)
 

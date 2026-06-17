@@ -48,3 +48,62 @@ func (x *MTRDeviceEnergyManagementClusterStartTimeAdjustRequestParams) WithServe
 	return x
 }
 
+// RequestedStartTime calls the underlying RequestedStartTime.
+func (x *MTRDeviceEnergyManagementClusterStartTimeAdjustRequestParams) RequestedStartTime() *foundation.NSNumber {
+	return x.inner.RequestedStartTime()
+}
+
+// SetRequestedStartTime calls the underlying SetRequestedStartTime.
+func (x *MTRDeviceEnergyManagementClusterStartTimeAdjustRequestParams) SetRequestedStartTime(requestedStartTime *foundation.NSNumber) {
+	x.inner.SetRequestedStartTime(requestedStartTime)
+}
+
+// Cause calls the underlying Cause.
+func (x *MTRDeviceEnergyManagementClusterStartTimeAdjustRequestParams) Cause() *foundation.NSNumber {
+	return x.inner.Cause()
+}
+
+// SetCause calls the underlying SetCause.
+func (x *MTRDeviceEnergyManagementClusterStartTimeAdjustRequestParams) SetCause(cause *foundation.NSNumber) {
+	x.inner.SetCause(cause)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRDeviceEnergyManagementClusterStartTimeAdjustRequestParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRDeviceEnergyManagementClusterStartTimeAdjustRequestParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRDeviceEnergyManagementClusterStartTimeAdjustRequestParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRDeviceEnergyManagementClusterStartTimeAdjustRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRDeviceEnergyManagementClusterStartTimeAdjustRequestParamsable is the interface implemented by [MTRDeviceEnergyManagementClusterStartTimeAdjustRequestParams], for mocking and DI.
+type MTRDeviceEnergyManagementClusterStartTimeAdjustRequestParamsable interface {
+	Unwrap() *raw.MTRDeviceEnergyManagementClusterStartTimeAdjustRequestParams
+	WithRequestedStartTime(requestedStartTime *foundation.NSNumber) *MTRDeviceEnergyManagementClusterStartTimeAdjustRequestParams
+	WithCause(cause *foundation.NSNumber) *MTRDeviceEnergyManagementClusterStartTimeAdjustRequestParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRDeviceEnergyManagementClusterStartTimeAdjustRequestParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRDeviceEnergyManagementClusterStartTimeAdjustRequestParams
+	RequestedStartTime() *foundation.NSNumber
+	SetRequestedStartTime(requestedStartTime *foundation.NSNumber)
+	Cause() *foundation.NSNumber
+	SetCause(cause *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRDeviceEnergyManagementClusterStartTimeAdjustRequestParamsable = (*MTRDeviceEnergyManagementClusterStartTimeAdjustRequestParams)(nil)
+

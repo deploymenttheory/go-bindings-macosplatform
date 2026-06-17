@@ -6,6 +6,7 @@ package coremidi
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremidi"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,17 @@ func NewCIDiscoveryManager() *CIDiscoveryManager {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MIDICIDiscoveryManager")), objc.RegisterName("new"))
 	return &CIDiscoveryManager{inner: raw.MIDICIDiscoveryManagerFromID(_id)}
 }
+
+// DiscoverWithHandler calls the underlying DiscoverWithHandler.
+func (x *CIDiscoveryManager) DiscoverWithHandler(completedHandler func(*foundation.NSArray[*raw.MIDICIDiscoveredNode])) {
+	x.inner.DiscoverWithHandler(completedHandler)
+}
+
+// CIDiscoveryManagerable is the interface implemented by [CIDiscoveryManager], for mocking and DI.
+type CIDiscoveryManagerable interface {
+	Unwrap() *raw.MIDICIDiscoveryManager
+	DiscoverWithHandler(completedHandler func(*foundation.NSArray[*raw.MIDICIDiscoveredNode]))
+}
+
+var _ CIDiscoveryManagerable = (*CIDiscoveryManager)(nil)
 

@@ -7,7 +7,9 @@ package audiovideobridging
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/audiovideobridging"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // MACAddress wraps [raw.AVBMACAddress] with a fluent Go API.
@@ -42,4 +44,60 @@ func (x *MACAddress) WithMulticast(multicast bool) *MACAddress {
 	x.inner.SetMulticast(multicast)
 	return x
 }
+
+// Bytes calls the underlying Bytes.
+func (x *MACAddress) Bytes() unsafe.Pointer {
+	return x.inner.Bytes()
+}
+
+// DataRepresentation calls the underlying DataRepresentation.
+func (x *MACAddress) DataRepresentation() *foundation.NSData {
+	return x.inner.DataRepresentation()
+}
+
+// SetDataRepresentation calls the underlying SetDataRepresentation.
+func (x *MACAddress) SetDataRepresentation(dataRepresentation *foundation.NSData) {
+	x.inner.SetDataRepresentation(dataRepresentation)
+}
+
+// StringRepresentation calls the underlying StringRepresentation.
+func (x *MACAddress) StringRepresentation() string {
+	_r := x.inner.StringRepresentation()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetStringRepresentation calls the underlying SetStringRepresentation.
+func (x *MACAddress) SetStringRepresentation(stringRepresentation string) {
+	x.inner.SetStringRepresentation(foundation.NSStringStringWithUTF8String(stringRepresentation))
+}
+
+// IsMulticast calls the underlying IsMulticast.
+func (x *MACAddress) IsMulticast() bool {
+	return x.inner.IsMulticast()
+}
+
+// SetMulticast calls the underlying SetMulticast.
+func (x *MACAddress) SetMulticast(multicast bool) {
+	x.inner.SetMulticast(multicast)
+}
+
+// MACAddressable is the interface implemented by [MACAddress], for mocking and DI.
+type MACAddressable interface {
+	Unwrap() *raw.AVBMACAddress
+	WithDataRepresentation(dataRepresentation *foundation.NSData) *MACAddress
+	WithStringRepresentation(stringRepresentation string) *MACAddress
+	WithMulticast(multicast bool) *MACAddress
+	Bytes() unsafe.Pointer
+	DataRepresentation() *foundation.NSData
+	SetDataRepresentation(dataRepresentation *foundation.NSData)
+	StringRepresentation() string
+	SetStringRepresentation(stringRepresentation string)
+	IsMulticast() bool
+	SetMulticast(multicast bool)
+}
+
+var _ MACAddressable = (*MACAddress)(nil)
 

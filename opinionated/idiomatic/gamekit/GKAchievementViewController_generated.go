@@ -29,5 +29,25 @@ func (x *AchievementViewController) WithAchievementDelegate(achievementDelegate 
 	return x
 }
 
+// AchievementDelegate calls the underlying AchievementDelegate.
+func (x *AchievementViewController) AchievementDelegate() raw.GKAchievementViewControllerDelegate {
+	return x.inner.AchievementDelegate()
+}
+
+// SetAchievementDelegate calls the underlying SetAchievementDelegate.
+func (x *AchievementViewController) SetAchievementDelegate(achievementDelegate raw.GKAchievementViewControllerDelegate) {
+	x.inner.SetAchievementDelegate(achievementDelegate)
+}
+
 func (x *AchievementViewController) asGameCenterViewController() *raw.GKGameCenterViewController { return &x.inner.GKGameCenterViewController }
+
+// AchievementViewControllerable is the interface implemented by [AchievementViewController], for mocking and DI.
+type AchievementViewControllerable interface {
+	Unwrap() *raw.GKAchievementViewController
+	WithAchievementDelegate(achievementDelegate raw.GKAchievementViewControllerDelegate) *AchievementViewController
+	AchievementDelegate() raw.GKAchievementViewControllerDelegate
+	SetAchievementDelegate(achievementDelegate raw.GKAchievementViewControllerDelegate)
+}
+
+var _ AchievementViewControllerable = (*AchievementViewController)(nil)
 

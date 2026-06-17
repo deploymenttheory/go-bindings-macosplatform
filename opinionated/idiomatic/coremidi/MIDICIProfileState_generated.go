@@ -7,6 +7,7 @@ package coremidi
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremidi"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -32,17 +33,20 @@ func NewCIProfileStateWithEnabledProfilesDisabledProfiles(enabled *foundation.NS
 	return &CIProfileState{inner: raw.MIDICIProfileStateFromID(_id)}
 }
 
+// MidiChannel calls the underlying MidiChannel.
+func (x *CIProfileState) MidiChannel() uint8 {
+	return x.inner.MidiChannel()
+}
+
 // EnabledProfiles returns the collection as a Go slice.
 func (x *CIProfileState) EnabledProfiles() []*raw.MIDICIProfile {
 	arr := x.inner.EnabledProfiles()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MIDICIProfile, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MIDICIProfile {
+		return raw.MIDICIProfileFromID(purego.Retain(_id))
+	})
 }
 
 // DisabledProfiles returns the collection as a Go slice.
@@ -51,10 +55,18 @@ func (x *CIProfileState) DisabledProfiles() []*raw.MIDICIProfile {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MIDICIProfile, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MIDICIProfile {
+		return raw.MIDICIProfileFromID(purego.Retain(_id))
+	})
 }
+
+// CIProfileStateable is the interface implemented by [CIProfileState], for mocking and DI.
+type CIProfileStateable interface {
+	Unwrap() *raw.MIDICIProfileState
+	MidiChannel() uint8
+	EnabledProfiles() []*raw.MIDICIProfile
+	DisabledProfiles() []*raw.MIDICIProfile
+}
+
+var _ CIProfileStateable = (*CIProfileState)(nil)
 

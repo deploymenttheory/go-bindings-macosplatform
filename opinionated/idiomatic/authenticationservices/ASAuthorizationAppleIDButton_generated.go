@@ -30,3 +30,23 @@ func (x *AuthorizationAppleIDButton) WithCornerRadius(cornerRadius float64) *Aut
 	return x
 }
 
+// CornerRadius calls the underlying CornerRadius.
+func (x *AuthorizationAppleIDButton) CornerRadius() float64 {
+	return x.inner.CornerRadius()
+}
+
+// SetCornerRadius calls the underlying SetCornerRadius.
+func (x *AuthorizationAppleIDButton) SetCornerRadius(cornerRadius float64) {
+	x.inner.SetCornerRadius(cornerRadius)
+}
+
+// AuthorizationAppleIDButtonable is the interface implemented by [AuthorizationAppleIDButton], for mocking and DI.
+type AuthorizationAppleIDButtonable interface {
+	Unwrap() *raw.ASAuthorizationAppleIDButton
+	WithCornerRadius(cornerRadius float64) *AuthorizationAppleIDButton
+	CornerRadius() float64
+	SetCornerRadius(cornerRadius float64)
+}
+
+var _ AuthorizationAppleIDButtonable = (*AuthorizationAppleIDButton)(nil)
+

@@ -25,3 +25,10 @@ func NewGlobalMetaParameterAsset() *GlobalMetaParameterAsset {
 
 func (x *GlobalMetaParameterAsset) asAsset() *raw.PHASEAsset { return &x.inner.PHASEAsset }
 
+// GlobalMetaParameterAssetable is the interface implemented by [GlobalMetaParameterAsset], for mocking and DI.
+type GlobalMetaParameterAssetable interface {
+	Unwrap() *raw.PHASEGlobalMetaParameterAsset
+}
+
+var _ GlobalMetaParameterAssetable = (*GlobalMetaParameterAsset)(nil)
+

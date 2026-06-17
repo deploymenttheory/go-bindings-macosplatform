@@ -5,9 +5,12 @@
 package healthkit
 
 import (
+	"context"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // QuantitySeriesSampleBuilder wraps [raw.HKQuantitySeriesSampleBuilder] with a fluent Go API.
@@ -24,4 +27,105 @@ func NewQuantitySeriesSampleBuilderWithHealthStoreQuantityTypeStartDateDevice(he
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHealthStore:quantityType:startDate:device:"), healthStore.Ptr(), quantityType.Ptr(), startDate.Ptr(), device.Ptr())
 	return &QuantitySeriesSampleBuilder{inner: raw.HKQuantitySeriesSampleBuilderFromID(_id)}
 }
+
+// InsertQuantityDateIntervalError calls the underlying InsertQuantityDateIntervalError.
+func (x *QuantitySeriesSampleBuilder) InsertQuantityDateIntervalError(quantity *raw.HKQuantity, dateInterval *foundation.NSDateInterval) (bool, error) {
+	return x.inner.InsertQuantityDateIntervalError(quantity, dateInterval)
+}
+
+// InsertQuantityDateError calls the underlying InsertQuantityDateError.
+func (x *QuantitySeriesSampleBuilder) InsertQuantityDateError(quantity *raw.HKQuantity, date *foundation.NSDate) (bool, error) {
+	return x.inner.InsertQuantityDateError(quantity, date)
+}
+
+// FinishSeriesWithMetadataEndDateCompletion blocks until the operation completes or ctx is cancelled.
+func (x *QuantitySeriesSampleBuilder) FinishSeriesWithMetadataEndDateCompletion(ctx context.Context, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID], endDate *foundation.NSDate) (*foundation.NSArray[*raw.HKQuantitySample], error) {
+	type _result struct {
+		val *foundation.NSArray[*raw.HKQuantitySample]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.FinishSeriesWithMetadataEndDateCompletion(metadata, endDate, func(_p0 *foundation.NSArray[*raw.HKQuantitySample], _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[*raw.HKQuantitySample]
+		return _zero, ctx.Err()
+	}
+}
+
+// FinishSeriesWithMetadataCompletion blocks until the operation completes or ctx is cancelled.
+func (x *QuantitySeriesSampleBuilder) FinishSeriesWithMetadataCompletion(ctx context.Context, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*foundation.NSArray[*raw.HKQuantitySample], error) {
+	type _result struct {
+		val *foundation.NSArray[*raw.HKQuantitySample]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.FinishSeriesWithMetadataCompletion(metadata, func(_p0 *foundation.NSArray[*raw.HKQuantitySample], _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[*raw.HKQuantitySample]
+		return _zero, ctx.Err()
+	}
+}
+
+// Discard calls the underlying Discard.
+func (x *QuantitySeriesSampleBuilder) Discard() {
+	x.inner.Discard()
+}
+
+// QuantityType calls the underlying QuantityType.
+func (x *QuantitySeriesSampleBuilder) QuantityType() *QuantityType {
+	_r := x.inner.QuantityType()
+	if _r == nil {
+		return nil
+	}
+	return &QuantityType{inner: _r}
+}
+
+// StartDate calls the underlying StartDate.
+func (x *QuantitySeriesSampleBuilder) StartDate() *foundation.NSDate {
+	return x.inner.StartDate()
+}
+
+// Device calls the underlying Device.
+func (x *QuantitySeriesSampleBuilder) Device() *Device {
+	_r := x.inner.Device()
+	if _r == nil {
+		return nil
+	}
+	return &Device{inner: _r}
+}
+
+// QuantitySeriesSampleBuilderable is the interface implemented by [QuantitySeriesSampleBuilder], for mocking and DI.
+type QuantitySeriesSampleBuilderable interface {
+	Unwrap() *raw.HKQuantitySeriesSampleBuilder
+	InsertQuantityDateIntervalError(quantity *raw.HKQuantity, dateInterval *foundation.NSDateInterval) (bool, error)
+	InsertQuantityDateError(quantity *raw.HKQuantity, date *foundation.NSDate) (bool, error)
+	FinishSeriesWithMetadataEndDateCompletion(ctx context.Context, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID], endDate *foundation.NSDate) (*foundation.NSArray[*raw.HKQuantitySample], error)
+	FinishSeriesWithMetadataCompletion(ctx context.Context, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*foundation.NSArray[*raw.HKQuantitySample], error)
+	Discard()
+	QuantityType() *QuantityType
+	StartDate() *foundation.NSDate
+	Device() *Device
+}
+
+var _ QuantitySeriesSampleBuilderable = (*QuantitySeriesSampleBuilder)(nil)
 

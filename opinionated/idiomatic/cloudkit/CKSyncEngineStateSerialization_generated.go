@@ -23,3 +23,10 @@ func NewSyncEngineStateSerialization() *SyncEngineStateSerialization {
 	return &SyncEngineStateSerialization{inner: raw.CKSyncEngineStateSerializationFromID(_id)}
 }
 
+// SyncEngineStateSerializationable is the interface implemented by [SyncEngineStateSerialization], for mocking and DI.
+type SyncEngineStateSerializationable interface {
+	Unwrap() *raw.CKSyncEngineStateSerialization
+}
+
+var _ SyncEngineStateSerializationable = (*SyncEngineStateSerialization)(nil)
+

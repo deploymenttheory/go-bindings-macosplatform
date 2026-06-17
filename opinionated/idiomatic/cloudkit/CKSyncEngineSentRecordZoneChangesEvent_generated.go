@@ -6,6 +6,8 @@ package cloudkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -29,11 +31,9 @@ func (x *SyncEngineSentRecordZoneChangesEvent) SavedRecords() []*raw.CKRecord {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.CKRecord, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CKRecord {
+		return raw.CKRecordFromID(purego.Retain(_id))
+	})
 }
 
 // FailedRecordSaves returns the collection as a Go slice.
@@ -42,11 +42,9 @@ func (x *SyncEngineSentRecordZoneChangesEvent) FailedRecordSaves() []*raw.CKSync
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.CKSyncEngineFailedRecordSave, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CKSyncEngineFailedRecordSave {
+		return raw.CKSyncEngineFailedRecordSaveFromID(purego.Retain(_id))
+	})
 }
 
 // DeletedRecordIDs returns the collection as a Go slice.
@@ -55,12 +53,26 @@ func (x *SyncEngineSentRecordZoneChangesEvent) DeletedRecordIDs() []*raw.CKRecor
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.CKRecordID, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CKRecordID {
+		return raw.CKRecordIDFromID(purego.Retain(_id))
+	})
+}
+
+// FailedRecordDeletes calls the underlying FailedRecordDeletes.
+func (x *SyncEngineSentRecordZoneChangesEvent) FailedRecordDeletes() *foundation.NSDictionary[*raw.CKRecordID, objc.ID] {
+	return x.inner.FailedRecordDeletes()
 }
 
 func (x *SyncEngineSentRecordZoneChangesEvent) asSyncEngineEvent() *raw.CKSyncEngineEvent { return &x.inner.CKSyncEngineEvent }
+
+// SyncEngineSentRecordZoneChangesEventable is the interface implemented by [SyncEngineSentRecordZoneChangesEvent], for mocking and DI.
+type SyncEngineSentRecordZoneChangesEventable interface {
+	Unwrap() *raw.CKSyncEngineSentRecordZoneChangesEvent
+	SavedRecords() []*raw.CKRecord
+	FailedRecordSaves() []*raw.CKSyncEngineFailedRecordSave
+	DeletedRecordIDs() []*raw.CKRecordID
+	FailedRecordDeletes() *foundation.NSDictionary[*raw.CKRecordID, objc.ID]
+}
+
+var _ SyncEngineSentRecordZoneChangesEventable = (*SyncEngineSentRecordZoneChangesEvent)(nil)
 

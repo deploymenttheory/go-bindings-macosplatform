@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,31 @@ func NewCaptureDeviceInputSource() *CaptureDeviceInputSource {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptureDeviceInputSource")), objc.RegisterName("new"))
 	return &CaptureDeviceInputSource{inner: raw.AVCaptureDeviceInputSourceFromID(_id)}
 }
+
+// InputSourceID calls the underlying InputSourceID.
+func (x *CaptureDeviceInputSource) InputSourceID() string {
+	_r := x.inner.InputSourceID()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// LocalizedName calls the underlying LocalizedName.
+func (x *CaptureDeviceInputSource) LocalizedName() string {
+	_r := x.inner.LocalizedName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// CaptureDeviceInputSourceable is the interface implemented by [CaptureDeviceInputSource], for mocking and DI.
+type CaptureDeviceInputSourceable interface {
+	Unwrap() *raw.AVCaptureDeviceInputSource
+	InputSourceID() string
+	LocalizedName() string
+}
+
+var _ CaptureDeviceInputSourceable = (*CaptureDeviceInputSource)(nil)
 

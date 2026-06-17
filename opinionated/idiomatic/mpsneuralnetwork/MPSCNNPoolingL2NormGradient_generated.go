@@ -39,3 +39,10 @@ func (x *CNNPoolingL2NormGradient) asCNNGradientKernel() *raw.MPSCNNGradientKern
 
 func (x *CNNPoolingL2NormGradient) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel { return &x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel }
 
+// CNNPoolingL2NormGradientable is the interface implemented by [CNNPoolingL2NormGradient], for mocking and DI.
+type CNNPoolingL2NormGradientable interface {
+	Unwrap() *raw.MPSCNNPoolingL2NormGradient
+}
+
+var _ CNNPoolingL2NormGradientable = (*CNNPoolingL2NormGradient)(nil)
+

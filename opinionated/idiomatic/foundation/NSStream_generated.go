@@ -7,6 +7,7 @@ package foundation
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Stream wraps [raw.NSStream] with a fluent Go API.
@@ -29,7 +30,75 @@ func (x *Stream) WithDelegate(delegate raw.NSStreamDelegate) *Stream {
 	return x
 }
 
+// Open calls the underlying Open.
+func (x *Stream) Open() {
+	x.inner.Open()
+}
+
+// Close calls the underlying Close.
+func (x *Stream) Close() {
+	x.inner.Close()
+}
+
+// PropertyForKey calls the underlying PropertyForKey.
+func (x *Stream) PropertyForKey(key *raw.NSString) objc.ID {
+	return x.inner.PropertyForKey(key)
+}
+
+// SetPropertyForKey calls the underlying SetPropertyForKey.
+func (x *Stream) SetPropertyForKey(property objc.ID, key *raw.NSString) bool {
+	return x.inner.SetPropertyForKey(property, key)
+}
+
+// ScheduleInRunLoopForMode calls the underlying ScheduleInRunLoopForMode.
+func (x *Stream) ScheduleInRunLoopForMode(aRunLoop *raw.NSRunLoop, mode *raw.NSString) {
+	x.inner.ScheduleInRunLoopForMode(aRunLoop, mode)
+}
+
+// RemoveFromRunLoopForMode calls the underlying RemoveFromRunLoopForMode.
+func (x *Stream) RemoveFromRunLoopForMode(aRunLoop *raw.NSRunLoop, mode *raw.NSString) {
+	x.inner.RemoveFromRunLoopForMode(aRunLoop, mode)
+}
+
+// Delegate calls the underlying Delegate.
+func (x *Stream) Delegate() raw.NSStreamDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *Stream) SetDelegate(delegate raw.NSStreamDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// StreamStatus calls the underlying StreamStatus.
+func (x *Stream) StreamStatus() raw.NSStreamStatus {
+	return x.inner.StreamStatus()
+}
+
+// StreamError calls the underlying StreamError.
+func (x *Stream) StreamError() unsafe.Pointer {
+	return x.inner.StreamError()
+}
+
 func (x *Stream) asStream() *raw.NSStream { return x.inner }
 
 func (x *Stream) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// Streamable is the interface implemented by [Stream], for mocking and DI.
+type Streamable interface {
+	Unwrap() *raw.NSStream
+	WithDelegate(delegate raw.NSStreamDelegate) *Stream
+	Open()
+	Close()
+	PropertyForKey(key *raw.NSString) objc.ID
+	SetPropertyForKey(property objc.ID, key *raw.NSString) bool
+	ScheduleInRunLoopForMode(aRunLoop *raw.NSRunLoop, mode *raw.NSString)
+	RemoveFromRunLoopForMode(aRunLoop *raw.NSRunLoop, mode *raw.NSString)
+	Delegate() raw.NSStreamDelegate
+	SetDelegate(delegate raw.NSStreamDelegate)
+	StreamStatus() raw.NSStreamStatus
+	StreamError() unsafe.Pointer
+}
+
+var _ Streamable = (*Stream)(nil)
 

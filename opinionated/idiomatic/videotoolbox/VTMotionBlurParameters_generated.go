@@ -24,3 +24,82 @@ func NewMotionBlurParametersWithSourceFrameNextFramePreviousFrameNextOpticalFlow
 	return &MotionBlurParameters{inner: raw.VTMotionBlurParametersFromID(_id)}
 }
 
+// SourceFrame calls the underlying SourceFrame.
+func (x *MotionBlurParameters) SourceFrame() *FrameProcessorFrame {
+	_r := x.inner.SourceFrame()
+	if _r == nil {
+		return nil
+	}
+	return &FrameProcessorFrame{inner: _r}
+}
+
+// NextFrame calls the underlying NextFrame.
+func (x *MotionBlurParameters) NextFrame() *FrameProcessorFrame {
+	_r := x.inner.NextFrame()
+	if _r == nil {
+		return nil
+	}
+	return &FrameProcessorFrame{inner: _r}
+}
+
+// PreviousFrame calls the underlying PreviousFrame.
+func (x *MotionBlurParameters) PreviousFrame() *FrameProcessorFrame {
+	_r := x.inner.PreviousFrame()
+	if _r == nil {
+		return nil
+	}
+	return &FrameProcessorFrame{inner: _r}
+}
+
+// NextOpticalFlow calls the underlying NextOpticalFlow.
+func (x *MotionBlurParameters) NextOpticalFlow() *FrameProcessorOpticalFlow {
+	_r := x.inner.NextOpticalFlow()
+	if _r == nil {
+		return nil
+	}
+	return &FrameProcessorOpticalFlow{inner: _r}
+}
+
+// PreviousOpticalFlow calls the underlying PreviousOpticalFlow.
+func (x *MotionBlurParameters) PreviousOpticalFlow() *FrameProcessorOpticalFlow {
+	_r := x.inner.PreviousOpticalFlow()
+	if _r == nil {
+		return nil
+	}
+	return &FrameProcessorOpticalFlow{inner: _r}
+}
+
+// MotionBlurStrength calls the underlying MotionBlurStrength.
+func (x *MotionBlurParameters) MotionBlurStrength() int {
+	return x.inner.MotionBlurStrength()
+}
+
+// SubmissionMode calls the underlying SubmissionMode.
+func (x *MotionBlurParameters) SubmissionMode() raw.VTMotionBlurParametersSubmissionMode {
+	return x.inner.SubmissionMode()
+}
+
+// DestinationFrame calls the underlying DestinationFrame.
+func (x *MotionBlurParameters) DestinationFrame() *FrameProcessorFrame {
+	_r := x.inner.DestinationFrame()
+	if _r == nil {
+		return nil
+	}
+	return &FrameProcessorFrame{inner: _r}
+}
+
+// MotionBlurParametersable is the interface implemented by [MotionBlurParameters], for mocking and DI.
+type MotionBlurParametersable interface {
+	Unwrap() *raw.VTMotionBlurParameters
+	SourceFrame() *FrameProcessorFrame
+	NextFrame() *FrameProcessorFrame
+	PreviousFrame() *FrameProcessorFrame
+	NextOpticalFlow() *FrameProcessorOpticalFlow
+	PreviousOpticalFlow() *FrameProcessorOpticalFlow
+	MotionBlurStrength() int
+	SubmissionMode() raw.VTMotionBlurParametersSubmissionMode
+	DestinationFrame() *FrameProcessorFrame
+}
+
+var _ MotionBlurParametersable = (*MotionBlurParameters)(nil)
+

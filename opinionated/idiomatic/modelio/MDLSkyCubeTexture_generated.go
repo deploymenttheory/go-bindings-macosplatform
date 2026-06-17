@@ -99,5 +99,185 @@ func (x *SkyCubeTexture) WithSaturation(saturation float32) *SkyCubeTexture {
 	return x
 }
 
+// UpdateTexture calls the underlying UpdateTexture.
+func (x *SkyCubeTexture) UpdateTexture() {
+	x.inner.UpdateTexture()
+}
+
+// Turbidity calls the underlying Turbidity.
+func (x *SkyCubeTexture) Turbidity() float32 {
+	return x.inner.Turbidity()
+}
+
+// SetTurbidity calls the underlying SetTurbidity.
+func (x *SkyCubeTexture) SetTurbidity(turbidity float32) {
+	x.inner.SetTurbidity(turbidity)
+}
+
+// SunElevation calls the underlying SunElevation.
+func (x *SkyCubeTexture) SunElevation() float32 {
+	return x.inner.SunElevation()
+}
+
+// SetSunElevation calls the underlying SetSunElevation.
+func (x *SkyCubeTexture) SetSunElevation(sunElevation float32) {
+	x.inner.SetSunElevation(sunElevation)
+}
+
+// SunAzimuth calls the underlying SunAzimuth.
+func (x *SkyCubeTexture) SunAzimuth() float32 {
+	return x.inner.SunAzimuth()
+}
+
+// SetSunAzimuth calls the underlying SetSunAzimuth.
+func (x *SkyCubeTexture) SetSunAzimuth(sunAzimuth float32) {
+	x.inner.SetSunAzimuth(sunAzimuth)
+}
+
+// UpperAtmosphereScattering calls the underlying UpperAtmosphereScattering.
+func (x *SkyCubeTexture) UpperAtmosphereScattering() float32 {
+	return x.inner.UpperAtmosphereScattering()
+}
+
+// SetUpperAtmosphereScattering calls the underlying SetUpperAtmosphereScattering.
+func (x *SkyCubeTexture) SetUpperAtmosphereScattering(upperAtmosphereScattering float32) {
+	x.inner.SetUpperAtmosphereScattering(upperAtmosphereScattering)
+}
+
+// GroundAlbedo calls the underlying GroundAlbedo.
+func (x *SkyCubeTexture) GroundAlbedo() float32 {
+	return x.inner.GroundAlbedo()
+}
+
+// SetGroundAlbedo calls the underlying SetGroundAlbedo.
+func (x *SkyCubeTexture) SetGroundAlbedo(groundAlbedo float32) {
+	x.inner.SetGroundAlbedo(groundAlbedo)
+}
+
+// HorizonElevation calls the underlying HorizonElevation.
+func (x *SkyCubeTexture) HorizonElevation() float32 {
+	return x.inner.HorizonElevation()
+}
+
+// SetHorizonElevation calls the underlying SetHorizonElevation.
+func (x *SkyCubeTexture) SetHorizonElevation(horizonElevation float32) {
+	x.inner.SetHorizonElevation(horizonElevation)
+}
+
+// GroundColor calls the underlying GroundColor.
+func (x *SkyCubeTexture) GroundColor() unsafe.Pointer {
+	return x.inner.GroundColor()
+}
+
+// SetGroundColor calls the underlying SetGroundColor.
+func (x *SkyCubeTexture) SetGroundColor(groundColor unsafe.Pointer) {
+	x.inner.SetGroundColor(groundColor)
+}
+
+// Gamma calls the underlying Gamma.
+func (x *SkyCubeTexture) Gamma() float32 {
+	return x.inner.Gamma()
+}
+
+// SetGamma calls the underlying SetGamma.
+func (x *SkyCubeTexture) SetGamma(gamma float32) {
+	x.inner.SetGamma(gamma)
+}
+
+// Exposure calls the underlying Exposure.
+func (x *SkyCubeTexture) Exposure() float32 {
+	return x.inner.Exposure()
+}
+
+// SetExposure calls the underlying SetExposure.
+func (x *SkyCubeTexture) SetExposure(exposure float32) {
+	x.inner.SetExposure(exposure)
+}
+
+// Brightness calls the underlying Brightness.
+func (x *SkyCubeTexture) Brightness() float32 {
+	return x.inner.Brightness()
+}
+
+// SetBrightness calls the underlying SetBrightness.
+func (x *SkyCubeTexture) SetBrightness(brightness float32) {
+	x.inner.SetBrightness(brightness)
+}
+
+// Contrast calls the underlying Contrast.
+func (x *SkyCubeTexture) Contrast() float32 {
+	return x.inner.Contrast()
+}
+
+// SetContrast calls the underlying SetContrast.
+func (x *SkyCubeTexture) SetContrast(contrast float32) {
+	x.inner.SetContrast(contrast)
+}
+
+// Saturation calls the underlying Saturation.
+func (x *SkyCubeTexture) Saturation() float32 {
+	return x.inner.Saturation()
+}
+
+// SetSaturation calls the underlying SetSaturation.
+func (x *SkyCubeTexture) SetSaturation(saturation float32) {
+	x.inner.SetSaturation(saturation)
+}
+
+// HighDynamicRangeCompression calls the underlying HighDynamicRangeCompression.
+func (x *SkyCubeTexture) HighDynamicRangeCompression() unsafe.Pointer {
+	return x.inner.HighDynamicRangeCompression()
+}
+
+// SetHighDynamicRangeCompression calls the underlying SetHighDynamicRangeCompression.
+func (x *SkyCubeTexture) SetHighDynamicRangeCompression(highDynamicRangeCompression unsafe.Pointer) {
+	x.inner.SetHighDynamicRangeCompression(highDynamicRangeCompression)
+}
+
 func (x *SkyCubeTexture) asTexture() *raw.MDLTexture { return &x.inner.MDLTexture }
+
+// SkyCubeTextureable is the interface implemented by [SkyCubeTexture], for mocking and DI.
+type SkyCubeTextureable interface {
+	Unwrap() *raw.MDLSkyCubeTexture
+	WithTurbidity(turbidity float32) *SkyCubeTexture
+	WithSunElevation(sunElevation float32) *SkyCubeTexture
+	WithSunAzimuth(sunAzimuth float32) *SkyCubeTexture
+	WithUpperAtmosphereScattering(upperAtmosphereScattering float32) *SkyCubeTexture
+	WithGroundAlbedo(groundAlbedo float32) *SkyCubeTexture
+	WithHorizonElevation(horizonElevation float32) *SkyCubeTexture
+	WithGamma(gamma float32) *SkyCubeTexture
+	WithExposure(exposure float32) *SkyCubeTexture
+	WithBrightness(brightness float32) *SkyCubeTexture
+	WithContrast(contrast float32) *SkyCubeTexture
+	WithSaturation(saturation float32) *SkyCubeTexture
+	UpdateTexture()
+	Turbidity() float32
+	SetTurbidity(turbidity float32)
+	SunElevation() float32
+	SetSunElevation(sunElevation float32)
+	SunAzimuth() float32
+	SetSunAzimuth(sunAzimuth float32)
+	UpperAtmosphereScattering() float32
+	SetUpperAtmosphereScattering(upperAtmosphereScattering float32)
+	GroundAlbedo() float32
+	SetGroundAlbedo(groundAlbedo float32)
+	HorizonElevation() float32
+	SetHorizonElevation(horizonElevation float32)
+	GroundColor() unsafe.Pointer
+	SetGroundColor(groundColor unsafe.Pointer)
+	Gamma() float32
+	SetGamma(gamma float32)
+	Exposure() float32
+	SetExposure(exposure float32)
+	Brightness() float32
+	SetBrightness(brightness float32)
+	Contrast() float32
+	SetContrast(contrast float32)
+	Saturation() float32
+	SetSaturation(saturation float32)
+	HighDynamicRangeCompression() unsafe.Pointer
+	SetHighDynamicRangeCompression(highDynamicRangeCompression unsafe.Pointer)
+}
+
+var _ SkyCubeTextureable = (*SkyCubeTexture)(nil)
 

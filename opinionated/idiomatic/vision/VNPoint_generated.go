@@ -32,5 +32,36 @@ func NewPointWithLocation(location corefoundation.CGPoint) *Point {
 	return &Point{inner: raw.VNPointFromID(_id)}
 }
 
+// DistanceToPoint calls the underlying DistanceToPoint.
+func (x *Point) DistanceToPoint(point *raw.VNPoint) float64 {
+	return x.inner.DistanceToPoint(point)
+}
+
+// Location calls the underlying Location.
+func (x *Point) Location() corefoundation.CGPoint {
+	return x.inner.Location()
+}
+
+// X calls the underlying X.
+func (x *Point) X() float64 {
+	return x.inner.X()
+}
+
+// Y calls the underlying Y.
+func (x *Point) Y() float64 {
+	return x.inner.Y()
+}
+
 func (x *Point) asPoint() *raw.VNPoint { return x.inner }
+
+// Pointable is the interface implemented by [Point], for mocking and DI.
+type Pointable interface {
+	Unwrap() *raw.VNPoint
+	DistanceToPoint(point *raw.VNPoint) float64
+	Location() corefoundation.CGPoint
+	X() float64
+	Y() float64
+}
+
+var _ Pointable = (*Point)(nil)
 

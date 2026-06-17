@@ -25,3 +25,10 @@ func NewMTRTestClusterClusterSimpleStructResponseParams() *MTRTestClusterCluster
 
 func (x *MTRTestClusterClusterSimpleStructResponseParams) asMTRUnitTestingClusterSimpleStructResponseParams() *raw.MTRUnitTestingClusterSimpleStructResponseParams { return &x.inner.MTRUnitTestingClusterSimpleStructResponseParams }
 
+// MTRTestClusterClusterSimpleStructResponseParamsable is the interface implemented by [MTRTestClusterClusterSimpleStructResponseParams], for mocking and DI.
+type MTRTestClusterClusterSimpleStructResponseParamsable interface {
+	Unwrap() *raw.MTRTestClusterClusterSimpleStructResponseParams
+}
+
+var _ MTRTestClusterClusterSimpleStructResponseParamsable = (*MTRTestClusterClusterSimpleStructResponseParams)(nil)
+

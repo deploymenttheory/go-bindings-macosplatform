@@ -7,6 +7,7 @@ package authenticationservices
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -37,4 +38,56 @@ func (x *PasskeyRegistrationCredential) WithExtensionOutput(extensionOutput *raw
 	x.inner.SetExtensionOutput(extensionOutput)
 	return x
 }
+
+// RelyingParty calls the underlying RelyingParty.
+func (x *PasskeyRegistrationCredential) RelyingParty() string {
+	_r := x.inner.RelyingParty()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ClientDataHash calls the underlying ClientDataHash.
+func (x *PasskeyRegistrationCredential) ClientDataHash() *foundation.NSData {
+	return x.inner.ClientDataHash()
+}
+
+// CredentialID calls the underlying CredentialID.
+func (x *PasskeyRegistrationCredential) CredentialID() *foundation.NSData {
+	return x.inner.CredentialID()
+}
+
+// AttestationObject calls the underlying AttestationObject.
+func (x *PasskeyRegistrationCredential) AttestationObject() *foundation.NSData {
+	return x.inner.AttestationObject()
+}
+
+// ExtensionOutput calls the underlying ExtensionOutput.
+func (x *PasskeyRegistrationCredential) ExtensionOutput() *PasskeyRegistrationCredentialExtensionOutput {
+	_r := x.inner.ExtensionOutput()
+	if _r == nil {
+		return nil
+	}
+	return &PasskeyRegistrationCredentialExtensionOutput{inner: _r}
+}
+
+// SetExtensionOutput calls the underlying SetExtensionOutput.
+func (x *PasskeyRegistrationCredential) SetExtensionOutput(extensionOutput *raw.ASPasskeyRegistrationCredentialExtensionOutput) {
+	x.inner.SetExtensionOutput(extensionOutput)
+}
+
+// PasskeyRegistrationCredentialable is the interface implemented by [PasskeyRegistrationCredential], for mocking and DI.
+type PasskeyRegistrationCredentialable interface {
+	Unwrap() *raw.ASPasskeyRegistrationCredential
+	WithExtensionOutput(extensionOutput *raw.ASPasskeyRegistrationCredentialExtensionOutput) *PasskeyRegistrationCredential
+	RelyingParty() string
+	ClientDataHash() *foundation.NSData
+	CredentialID() *foundation.NSData
+	AttestationObject() *foundation.NSData
+	ExtensionOutput() *PasskeyRegistrationCredentialExtensionOutput
+	SetExtensionOutput(extensionOutput *raw.ASPasskeyRegistrationCredentialExtensionOutput)
+}
+
+var _ PasskeyRegistrationCredentialable = (*PasskeyRegistrationCredential)(nil)
 

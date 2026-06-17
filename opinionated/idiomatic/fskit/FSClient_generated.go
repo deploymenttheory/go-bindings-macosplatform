@@ -5,8 +5,12 @@
 package fskit
 
 import (
+	"context"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/fskit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Client wraps [raw.FSClient] with a fluent Go API.
@@ -22,4 +26,36 @@ func NewClient() *Client {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("FSClient")), objc.RegisterName("new"))
 	return &Client{inner: raw.FSClientFromID(_id)}
 }
+
+// FetchInstalledExtensions blocks until the operation completes or ctx is cancelled.
+func (x *Client) FetchInstalledExtensions(ctx context.Context) (*foundation.NSArray[*raw.FSModuleIdentity], error) {
+	type _result struct {
+		val *foundation.NSArray[*raw.FSModuleIdentity]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.FetchInstalledExtensionsWithCompletionHandler(func(_p0 *foundation.NSArray[*raw.FSModuleIdentity], _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[*raw.FSModuleIdentity]
+		return _zero, ctx.Err()
+	}
+}
+
+// Clientable is the interface implemented by [Client], for mocking and DI.
+type Clientable interface {
+	Unwrap() *raw.FSClient
+	FetchInstalledExtensions(ctx context.Context) (*foundation.NSArray[*raw.FSModuleIdentity], error)
+}
+
+var _ Clientable = (*Client)(nil)
 

@@ -24,3 +24,22 @@ func NewPressureConfigurationWithPressureBehavior(pressureBehavior raw.NSPressur
 	return &PressureConfiguration{inner: raw.NSPressureConfigurationFromID(_id)}
 }
 
+// Set calls the underlying Set.
+func (x *PressureConfiguration) Set() {
+	x.inner.Set()
+}
+
+// PressureBehavior calls the underlying PressureBehavior.
+func (x *PressureConfiguration) PressureBehavior() raw.NSPressureBehavior {
+	return x.inner.PressureBehavior()
+}
+
+// PressureConfigurationable is the interface implemented by [PressureConfiguration], for mocking and DI.
+type PressureConfigurationable interface {
+	Unwrap() *raw.NSPressureConfiguration
+	Set()
+	PressureBehavior() raw.NSPressureBehavior
+}
+
+var _ PressureConfigurationable = (*PressureConfiguration)(nil)
+

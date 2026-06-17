@@ -5,7 +5,9 @@
 package metal
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,18 +25,34 @@ func NewStructType() *StructType {
 	return &StructType{inner: raw.MTLStructTypeFromID(_id)}
 }
 
+// MemberByName calls the underlying MemberByName.
+func (x *StructType) MemberByName(name string) *StructMember {
+	_r := x.inner.MemberByName(foundation.NSStringStringWithUTF8String(name))
+	if _r == nil {
+		return nil
+	}
+	return &StructMember{inner: _r}
+}
+
 // Members returns the collection as a Go slice.
 func (x *StructType) Members() []*raw.MTLStructMember {
 	arr := x.inner.Members()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MTLStructMember, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MTLStructMember {
+		return raw.MTLStructMemberFromID(purego.Retain(_id))
+	})
 }
 
 func (x *StructType) asType() *raw.MTLType { return &x.inner.MTLType }
+
+// StructTypeable is the interface implemented by [StructType], for mocking and DI.
+type StructTypeable interface {
+	Unwrap() *raw.MTLStructType
+	MemberByName(name string) *StructMember
+	Members() []*raw.MTLStructMember
+}
+
+var _ StructTypeable = (*StructType)(nil)
 

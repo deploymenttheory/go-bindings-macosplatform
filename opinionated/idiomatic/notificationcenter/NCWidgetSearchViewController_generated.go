@@ -7,6 +7,7 @@ package notificationcenter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/notificationcenter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -47,4 +48,87 @@ func (x *WidgetSearchViewController) WithSearchResultKeyPath(searchResultKeyPath
 	x.inner.SetSearchResultKeyPath(foundation.NSStringStringWithUTF8String(searchResultKeyPath))
 	return x
 }
+
+// Delegate calls the underlying Delegate.
+func (x *WidgetSearchViewController) Delegate() raw.NCWidgetSearchViewDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *WidgetSearchViewController) SetDelegate(delegate raw.NCWidgetSearchViewDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// SearchResults calls the underlying SearchResults.
+func (x *WidgetSearchViewController) SearchResults() *foundation.NSArray[objc.ID] {
+	return x.inner.SearchResults()
+}
+
+// SetSearchResults calls the underlying SetSearchResults.
+func (x *WidgetSearchViewController) SetSearchResults(searchResults *foundation.NSArray[objc.ID]) {
+	x.inner.SetSearchResults(searchResults)
+}
+
+// SearchDescription calls the underlying SearchDescription.
+func (x *WidgetSearchViewController) SearchDescription() string {
+	_r := x.inner.SearchDescription()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetSearchDescription calls the underlying SetSearchDescription.
+func (x *WidgetSearchViewController) SetSearchDescription(searchDescription string) {
+	x.inner.SetSearchDescription(foundation.NSStringStringWithUTF8String(searchDescription))
+}
+
+// SearchResultsPlaceholderString calls the underlying SearchResultsPlaceholderString.
+func (x *WidgetSearchViewController) SearchResultsPlaceholderString() string {
+	_r := x.inner.SearchResultsPlaceholderString()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetSearchResultsPlaceholderString calls the underlying SetSearchResultsPlaceholderString.
+func (x *WidgetSearchViewController) SetSearchResultsPlaceholderString(searchResultsPlaceholderString string) {
+	x.inner.SetSearchResultsPlaceholderString(foundation.NSStringStringWithUTF8String(searchResultsPlaceholderString))
+}
+
+// SearchResultKeyPath calls the underlying SearchResultKeyPath.
+func (x *WidgetSearchViewController) SearchResultKeyPath() string {
+	_r := x.inner.SearchResultKeyPath()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetSearchResultKeyPath calls the underlying SetSearchResultKeyPath.
+func (x *WidgetSearchViewController) SetSearchResultKeyPath(searchResultKeyPath string) {
+	x.inner.SetSearchResultKeyPath(foundation.NSStringStringWithUTF8String(searchResultKeyPath))
+}
+
+// WidgetSearchViewControllerable is the interface implemented by [WidgetSearchViewController], for mocking and DI.
+type WidgetSearchViewControllerable interface {
+	Unwrap() *raw.NCWidgetSearchViewController
+	WithDelegate(delegate raw.NCWidgetSearchViewDelegate) *WidgetSearchViewController
+	WithSearchDescription(searchDescription string) *WidgetSearchViewController
+	WithSearchResultsPlaceholderString(searchResultsPlaceholderString string) *WidgetSearchViewController
+	WithSearchResultKeyPath(searchResultKeyPath string) *WidgetSearchViewController
+	Delegate() raw.NCWidgetSearchViewDelegate
+	SetDelegate(delegate raw.NCWidgetSearchViewDelegate)
+	SearchResults() *foundation.NSArray[objc.ID]
+	SetSearchResults(searchResults *foundation.NSArray[objc.ID])
+	SearchDescription() string
+	SetSearchDescription(searchDescription string)
+	SearchResultsPlaceholderString() string
+	SetSearchResultsPlaceholderString(searchResultsPlaceholderString string)
+	SearchResultKeyPath() string
+	SetSearchResultKeyPath(searchResultKeyPath string)
+}
+
+var _ WidgetSearchViewControllerable = (*WidgetSearchViewController)(nil)
 

@@ -37,3 +37,35 @@ func (x *MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams) WithTim
 	return x
 }
 
+// GroupKeySetIDs calls the underlying GroupKeySetIDs.
+func (x *MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams) GroupKeySetIDs() *foundation.NSArray[objc.ID] {
+	return x.inner.GroupKeySetIDs()
+}
+
+// SetGroupKeySetIDs calls the underlying SetGroupKeySetIDs.
+func (x *MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams) SetGroupKeySetIDs(groupKeySetIDs *foundation.NSArray[objc.ID]) {
+	x.inner.SetGroupKeySetIDs(groupKeySetIDs)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParamsable is the interface implemented by [MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams], for mocking and DI.
+type MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParamsable interface {
+	Unwrap() *raw.MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams
+	GroupKeySetIDs() *foundation.NSArray[objc.ID]
+	SetGroupKeySetIDs(groupKeySetIDs *foundation.NSArray[objc.ID])
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+}
+
+var _ MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParamsable = (*MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams)(nil)
+

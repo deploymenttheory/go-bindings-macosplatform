@@ -5,6 +5,7 @@
 package spritekit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,5 +36,58 @@ func (x *PhysicsJoint) WithBodyB(bodyB *raw.SKPhysicsBody) *PhysicsJoint {
 	return x
 }
 
+// BodyA calls the underlying BodyA.
+func (x *PhysicsJoint) BodyA() *PhysicsBody {
+	_r := x.inner.BodyA()
+	if _r == nil {
+		return nil
+	}
+	return &PhysicsBody{inner: _r}
+}
+
+// SetBodyA calls the underlying SetBodyA.
+func (x *PhysicsJoint) SetBodyA(bodyA *raw.SKPhysicsBody) {
+	x.inner.SetBodyA(bodyA)
+}
+
+// BodyB calls the underlying BodyB.
+func (x *PhysicsJoint) BodyB() *PhysicsBody {
+	_r := x.inner.BodyB()
+	if _r == nil {
+		return nil
+	}
+	return &PhysicsBody{inner: _r}
+}
+
+// SetBodyB calls the underlying SetBodyB.
+func (x *PhysicsJoint) SetBodyB(bodyB *raw.SKPhysicsBody) {
+	x.inner.SetBodyB(bodyB)
+}
+
+// ReactionForce calls the underlying ReactionForce.
+func (x *PhysicsJoint) ReactionForce() corefoundation.CGVector {
+	return x.inner.ReactionForce()
+}
+
+// ReactionTorque calls the underlying ReactionTorque.
+func (x *PhysicsJoint) ReactionTorque() float64 {
+	return x.inner.ReactionTorque()
+}
+
 func (x *PhysicsJoint) asPhysicsJoint() *raw.SKPhysicsJoint { return x.inner }
+
+// PhysicsJointable is the interface implemented by [PhysicsJoint], for mocking and DI.
+type PhysicsJointable interface {
+	Unwrap() *raw.SKPhysicsJoint
+	WithBodyA(bodyA *raw.SKPhysicsBody) *PhysicsJoint
+	WithBodyB(bodyB *raw.SKPhysicsBody) *PhysicsJoint
+	BodyA() *PhysicsBody
+	SetBodyA(bodyA *raw.SKPhysicsBody)
+	BodyB() *PhysicsBody
+	SetBodyB(bodyB *raw.SKPhysicsBody)
+	ReactionForce() corefoundation.CGVector
+	ReactionTorque() float64
+}
+
+var _ PhysicsJointable = (*PhysicsJoint)(nil)
 

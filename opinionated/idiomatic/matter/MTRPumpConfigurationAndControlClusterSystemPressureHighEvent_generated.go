@@ -23,3 +23,10 @@ func NewMTRPumpConfigurationAndControlClusterSystemPressureHighEvent() *MTRPumpC
 	return &MTRPumpConfigurationAndControlClusterSystemPressureHighEvent{inner: raw.MTRPumpConfigurationAndControlClusterSystemPressureHighEventFromID(_id)}
 }
 
+// MTRPumpConfigurationAndControlClusterSystemPressureHighEventable is the interface implemented by [MTRPumpConfigurationAndControlClusterSystemPressureHighEvent], for mocking and DI.
+type MTRPumpConfigurationAndControlClusterSystemPressureHighEventable interface {
+	Unwrap() *raw.MTRPumpConfigurationAndControlClusterSystemPressureHighEvent
+}
+
+var _ MTRPumpConfigurationAndControlClusterSystemPressureHighEventable = (*MTRPumpConfigurationAndControlClusterSystemPressureHighEvent)(nil)
+

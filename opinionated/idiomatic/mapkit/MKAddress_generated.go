@@ -7,6 +7,7 @@ package mapkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,4 +25,31 @@ func NewAddressWithFullAddressShortAddress(fullAddress string, shortAddress stri
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFullAddress:shortAddress:"), foundation.NSStringStringWithUTF8String(fullAddress).Ptr(), foundation.NSStringStringWithUTF8String(shortAddress).Ptr())
 	return &Address{inner: raw.MKAddressFromID(_id)}
 }
+
+// FullAddress calls the underlying FullAddress.
+func (x *Address) FullAddress() string {
+	_r := x.inner.FullAddress()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ShortAddress calls the underlying ShortAddress.
+func (x *Address) ShortAddress() string {
+	_r := x.inner.ShortAddress()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Addressable is the interface implemented by [Address], for mocking and DI.
+type Addressable interface {
+	Unwrap() *raw.MKAddress
+	FullAddress() string
+	ShortAddress() string
+}
+
+var _ Addressable = (*Address)(nil)
 

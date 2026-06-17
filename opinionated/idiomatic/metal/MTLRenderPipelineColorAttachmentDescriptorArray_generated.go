@@ -23,3 +23,26 @@ func NewRenderPipelineColorAttachmentDescriptorArray() *RenderPipelineColorAttac
 	return &RenderPipelineColorAttachmentDescriptorArray{inner: raw.MTLRenderPipelineColorAttachmentDescriptorArrayFromID(_id)}
 }
 
+// ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
+func (x *RenderPipelineColorAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex uint) *RenderPipelineColorAttachmentDescriptor {
+	_r := x.inner.ObjectAtIndexedSubscript(attachmentIndex)
+	if _r == nil {
+		return nil
+	}
+	return &RenderPipelineColorAttachmentDescriptor{inner: _r}
+}
+
+// SetObjectAtIndexedSubscript calls the underlying SetObjectAtIndexedSubscript.
+func (x *RenderPipelineColorAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *raw.MTLRenderPipelineColorAttachmentDescriptor, attachmentIndex uint) {
+	x.inner.SetObjectAtIndexedSubscript(attachment, attachmentIndex)
+}
+
+// RenderPipelineColorAttachmentDescriptorArrayable is the interface implemented by [RenderPipelineColorAttachmentDescriptorArray], for mocking and DI.
+type RenderPipelineColorAttachmentDescriptorArrayable interface {
+	Unwrap() *raw.MTLRenderPipelineColorAttachmentDescriptorArray
+	ObjectAtIndexedSubscript(attachmentIndex uint) *RenderPipelineColorAttachmentDescriptor
+	SetObjectAtIndexedSubscript(attachment *raw.MTLRenderPipelineColorAttachmentDescriptor, attachmentIndex uint)
+}
+
+var _ RenderPipelineColorAttachmentDescriptorArrayable = (*RenderPipelineColorAttachmentDescriptorArray)(nil)
+

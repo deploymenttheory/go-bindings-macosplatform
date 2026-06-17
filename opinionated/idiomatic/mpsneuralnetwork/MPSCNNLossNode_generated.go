@@ -24,5 +24,22 @@ func NewCNNLossNodeWithSourceLossDescriptor(source *raw.MPSNNImageNode, descript
 	return &CNNLossNode{inner: raw.MPSCNNLossNodeFromID(_id)}
 }
 
+// InputLabels calls the underlying InputLabels.
+func (x *CNNLossNode) InputLabels() *NNLabelsNode {
+	_r := x.inner.InputLabels()
+	if _r == nil {
+		return nil
+	}
+	return &NNLabelsNode{inner: _r}
+}
+
 func (x *CNNLossNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNFilterNode }
+
+// CNNLossNodeable is the interface implemented by [CNNLossNode], for mocking and DI.
+type CNNLossNodeable interface {
+	Unwrap() *raw.MPSCNNLossNode
+	InputLabels() *NNLabelsNode
+}
+
+var _ CNNLossNodeable = (*CNNLossNode)(nil)
 

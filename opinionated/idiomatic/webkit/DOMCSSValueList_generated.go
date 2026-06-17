@@ -23,9 +23,32 @@ func NewDOMCSSValueList() *DOMCSSValueList {
 	return &DOMCSSValueList{inner: raw.DOMCSSValueListFromID(_id)}
 }
 
+// Item calls the underlying Item.
+func (x *DOMCSSValueList) Item(index uint) *DOMCSSValue {
+	_r := x.inner.Item(index)
+	if _r == nil {
+		return nil
+	}
+	return &DOMCSSValue{inner: _r}
+}
+
+// Length calls the underlying Length.
+func (x *DOMCSSValueList) Length() uint {
+	return x.inner.Length()
+}
+
 func (x *DOMCSSValueList) asDOMCSSValue() *raw.DOMCSSValue { return &x.inner.DOMCSSValue }
 
 func (x *DOMCSSValueList) asDOMObject() *raw.DOMObject { return &x.inner.DOMCSSValue.DOMObject }
 
 func (x *DOMCSSValueList) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMCSSValue.DOMObject.WebScriptObject }
+
+// DOMCSSValueListable is the interface implemented by [DOMCSSValueList], for mocking and DI.
+type DOMCSSValueListable interface {
+	Unwrap() *raw.DOMCSSValueList
+	Item(index uint) *DOMCSSValue
+	Length() uint
+}
+
+var _ DOMCSSValueListable = (*DOMCSSValueList)(nil)
 

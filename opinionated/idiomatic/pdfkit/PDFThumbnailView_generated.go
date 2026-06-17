@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/pdfkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -67,16 +68,117 @@ func (x *ThumbnailView) WithAllowsMultipleSelection(allowsMultipleSelection bool
 	return x
 }
 
+// PDFView calls the underlying PDFView.
+func (x *ThumbnailView) PDFView() *View {
+	_r := x.inner.PDFView()
+	if _r == nil {
+		return nil
+	}
+	return &View{inner: _r}
+}
+
+// SetPDFView calls the underlying SetPDFView.
+func (x *ThumbnailView) SetPDFView(pDFView *raw.PDFView) {
+	x.inner.SetPDFView(pDFView)
+}
+
+// BackgroundColor calls the underlying BackgroundColor.
+func (x *ThumbnailView) BackgroundColor() *appkit.NSColor {
+	return x.inner.BackgroundColor()
+}
+
+// SetBackgroundColor calls the underlying SetBackgroundColor.
+func (x *ThumbnailView) SetBackgroundColor(backgroundColor *appkit.NSColor) {
+	x.inner.SetBackgroundColor(backgroundColor)
+}
+
 // SelectedPages returns the collection as a Go slice.
 func (x *ThumbnailView) SelectedPages() []*raw.PDFPage {
 	arr := x.inner.SelectedPages()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.PDFPage, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PDFPage {
+		return raw.PDFPageFromID(purego.Retain(_id))
+	})
 }
+
+// ThumbnailSize calls the underlying ThumbnailSize.
+func (x *ThumbnailView) ThumbnailSize() corefoundation.CGSize {
+	return x.inner.ThumbnailSize()
+}
+
+// SetThumbnailSize calls the underlying SetThumbnailSize.
+func (x *ThumbnailView) SetThumbnailSize(thumbnailSize corefoundation.CGSize) {
+	x.inner.SetThumbnailSize(thumbnailSize)
+}
+
+// MaximumNumberOfColumns calls the underlying MaximumNumberOfColumns.
+func (x *ThumbnailView) MaximumNumberOfColumns() uint {
+	return x.inner.MaximumNumberOfColumns()
+}
+
+// SetMaximumNumberOfColumns calls the underlying SetMaximumNumberOfColumns.
+func (x *ThumbnailView) SetMaximumNumberOfColumns(maximumNumberOfColumns uint) {
+	x.inner.SetMaximumNumberOfColumns(maximumNumberOfColumns)
+}
+
+// LabelFont calls the underlying LabelFont.
+func (x *ThumbnailView) LabelFont() *appkit.NSFont {
+	return x.inner.LabelFont()
+}
+
+// SetLabelFont calls the underlying SetLabelFont.
+func (x *ThumbnailView) SetLabelFont(labelFont *appkit.NSFont) {
+	x.inner.SetLabelFont(labelFont)
+}
+
+// AllowsDragging calls the underlying AllowsDragging.
+func (x *ThumbnailView) AllowsDragging() bool {
+	return x.inner.AllowsDragging()
+}
+
+// SetAllowsDragging calls the underlying SetAllowsDragging.
+func (x *ThumbnailView) SetAllowsDragging(allowsDragging bool) {
+	x.inner.SetAllowsDragging(allowsDragging)
+}
+
+// AllowsMultipleSelection calls the underlying AllowsMultipleSelection.
+func (x *ThumbnailView) AllowsMultipleSelection() bool {
+	return x.inner.AllowsMultipleSelection()
+}
+
+// SetAllowsMultipleSelection calls the underlying SetAllowsMultipleSelection.
+func (x *ThumbnailView) SetAllowsMultipleSelection(allowsMultipleSelection bool) {
+	x.inner.SetAllowsMultipleSelection(allowsMultipleSelection)
+}
+
+// ThumbnailViewable is the interface implemented by [ThumbnailView], for mocking and DI.
+type ThumbnailViewable interface {
+	Unwrap() *raw.PDFThumbnailView
+	WithPDFView(pDFView *raw.PDFView) *ThumbnailView
+	WithBackgroundColor(backgroundColor *appkit.NSColor) *ThumbnailView
+	WithThumbnailSize(thumbnailSize corefoundation.CGSize) *ThumbnailView
+	WithMaximumNumberOfColumns(maximumNumberOfColumns uint) *ThumbnailView
+	WithLabelFont(labelFont *appkit.NSFont) *ThumbnailView
+	WithAllowsDragging(allowsDragging bool) *ThumbnailView
+	WithAllowsMultipleSelection(allowsMultipleSelection bool) *ThumbnailView
+	PDFView() *View
+	SetPDFView(pDFView *raw.PDFView)
+	BackgroundColor() *appkit.NSColor
+	SetBackgroundColor(backgroundColor *appkit.NSColor)
+	SelectedPages() []*raw.PDFPage
+	ThumbnailSize() corefoundation.CGSize
+	SetThumbnailSize(thumbnailSize corefoundation.CGSize)
+	MaximumNumberOfColumns() uint
+	SetMaximumNumberOfColumns(maximumNumberOfColumns uint)
+	LabelFont() *appkit.NSFont
+	SetLabelFont(labelFont *appkit.NSFont)
+	AllowsDragging() bool
+	SetAllowsDragging(allowsDragging bool)
+	AllowsMultipleSelection() bool
+	SetAllowsMultipleSelection(allowsMultipleSelection bool)
+}
+
+var _ ThumbnailViewable = (*ThumbnailView)(nil)
 

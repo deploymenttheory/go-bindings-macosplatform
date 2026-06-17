@@ -29,3 +29,49 @@ func (x *RacingWheel) AcquireDevice() error {
 	return err
 }
 
+// RelinquishDevice calls the underlying RelinquishDevice.
+func (x *RacingWheel) RelinquishDevice() {
+	x.inner.RelinquishDevice()
+}
+
+// Capture calls the underlying Capture.
+func (x *RacingWheel) Capture() *RacingWheel {
+	_r := x.inner.Capture()
+	if _r == nil {
+		return nil
+	}
+	return &RacingWheel{inner: _r}
+}
+
+// IsAcquired calls the underlying IsAcquired.
+func (x *RacingWheel) IsAcquired() bool {
+	return x.inner.IsAcquired()
+}
+
+// WheelInput calls the underlying WheelInput.
+func (x *RacingWheel) WheelInput() *RacingWheelInput {
+	_r := x.inner.WheelInput()
+	if _r == nil {
+		return nil
+	}
+	return &RacingWheelInput{inner: _r}
+}
+
+// IsSnapshot calls the underlying IsSnapshot.
+func (x *RacingWheel) IsSnapshot() bool {
+	return x.inner.IsSnapshot()
+}
+
+// RacingWheelable is the interface implemented by [RacingWheel], for mocking and DI.
+type RacingWheelable interface {
+	Unwrap() *raw.GCRacingWheel
+	AcquireDevice() error
+	RelinquishDevice()
+	Capture() *RacingWheel
+	IsAcquired() bool
+	WheelInput() *RacingWheelInput
+	IsSnapshot() bool
+}
+
+var _ RacingWheelable = (*RacingWheel)(nil)
+

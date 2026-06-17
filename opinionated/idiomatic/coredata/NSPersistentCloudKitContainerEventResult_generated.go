@@ -23,5 +23,24 @@ func NewPersistentCloudKitContainerEventResult() *PersistentCloudKitContainerEve
 	return &PersistentCloudKitContainerEventResult{inner: raw.NSPersistentCloudKitContainerEventResultFromID(_id)}
 }
 
+// Result calls the underlying Result.
+func (x *PersistentCloudKitContainerEventResult) Result() objc.ID {
+	return x.inner.Result()
+}
+
+// ResultType calls the underlying ResultType.
+func (x *PersistentCloudKitContainerEventResult) ResultType() raw.NSPersistentCloudKitContainerEventResultType {
+	return x.inner.ResultType()
+}
+
 func (x *PersistentCloudKitContainerEventResult) asPersistentStoreResult() *raw.NSPersistentStoreResult { return &x.inner.NSPersistentStoreResult }
+
+// PersistentCloudKitContainerEventResultable is the interface implemented by [PersistentCloudKitContainerEventResult], for mocking and DI.
+type PersistentCloudKitContainerEventResultable interface {
+	Unwrap() *raw.NSPersistentCloudKitContainerEventResult
+	Result() objc.ID
+	ResultType() raw.NSPersistentCloudKitContainerEventResultType
+}
+
+var _ PersistentCloudKitContainerEventResultable = (*PersistentCloudKitContainerEventResult)(nil)
 

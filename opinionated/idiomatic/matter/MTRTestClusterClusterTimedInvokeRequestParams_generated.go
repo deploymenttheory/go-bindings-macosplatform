@@ -25,3 +25,10 @@ func NewMTRTestClusterClusterTimedInvokeRequestParams() *MTRTestClusterClusterTi
 
 func (x *MTRTestClusterClusterTimedInvokeRequestParams) asMTRUnitTestingClusterTimedInvokeRequestParams() *raw.MTRUnitTestingClusterTimedInvokeRequestParams { return &x.inner.MTRUnitTestingClusterTimedInvokeRequestParams }
 
+// MTRTestClusterClusterTimedInvokeRequestParamsable is the interface implemented by [MTRTestClusterClusterTimedInvokeRequestParams], for mocking and DI.
+type MTRTestClusterClusterTimedInvokeRequestParamsable interface {
+	Unwrap() *raw.MTRTestClusterClusterTimedInvokeRequestParams
+}
+
+var _ MTRTestClusterClusterTimedInvokeRequestParamsable = (*MTRTestClusterClusterTimedInvokeRequestParams)(nil)
+

@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -29,10 +30,16 @@ func (x *PlaybackCoordinationMedium) ConnectedPlaybackCoordinators() []*raw.AVPl
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AVPlayerPlaybackCoordinator, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVPlayerPlaybackCoordinator {
+		return raw.AVPlayerPlaybackCoordinatorFromID(purego.Retain(_id))
+	})
 }
+
+// PlaybackCoordinationMediumable is the interface implemented by [PlaybackCoordinationMedium], for mocking and DI.
+type PlaybackCoordinationMediumable interface {
+	Unwrap() *raw.AVPlaybackCoordinationMedium
+	ConnectedPlaybackCoordinators() []*raw.AVPlayerPlaybackCoordinator
+}
+
+var _ PlaybackCoordinationMediumable = (*PlaybackCoordinationMedium)(nil)
 

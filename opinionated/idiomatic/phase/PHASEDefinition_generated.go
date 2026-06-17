@@ -6,6 +6,7 @@ package phase
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +24,22 @@ func NewDefinition() *Definition {
 	return &Definition{inner: raw.PHASEDefinitionFromID(_id)}
 }
 
+// Identifier calls the underlying Identifier.
+func (x *Definition) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 func (x *Definition) asDefinition() *raw.PHASEDefinition { return x.inner }
+
+// Definitionable is the interface implemented by [Definition], for mocking and DI.
+type Definitionable interface {
+	Unwrap() *raw.PHASEDefinition
+	Identifier() string
+}
+
+var _ Definitionable = (*Definition)(nil)
 

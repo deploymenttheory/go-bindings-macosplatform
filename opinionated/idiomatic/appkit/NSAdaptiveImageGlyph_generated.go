@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -31,4 +32,37 @@ func NewAdaptiveImageGlyphWithCoder(coder *foundation.NSCoder) *AdaptiveImageGly
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), coder.Ptr())
 	return &AdaptiveImageGlyph{inner: raw.NSAdaptiveImageGlyphFromID(_id)}
 }
+
+// ImageContent calls the underlying ImageContent.
+func (x *AdaptiveImageGlyph) ImageContent() *foundation.NSData {
+	return x.inner.ImageContent()
+}
+
+// ContentIdentifier calls the underlying ContentIdentifier.
+func (x *AdaptiveImageGlyph) ContentIdentifier() string {
+	_r := x.inner.ContentIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ContentDescription calls the underlying ContentDescription.
+func (x *AdaptiveImageGlyph) ContentDescription() string {
+	_r := x.inner.ContentDescription()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// AdaptiveImageGlyphable is the interface implemented by [AdaptiveImageGlyph], for mocking and DI.
+type AdaptiveImageGlyphable interface {
+	Unwrap() *raw.NSAdaptiveImageGlyph
+	ImageContent() *foundation.NSData
+	ContentIdentifier() string
+	ContentDescription() string
+}
+
+var _ AdaptiveImageGlyphable = (*AdaptiveImageGlyph)(nil)
 

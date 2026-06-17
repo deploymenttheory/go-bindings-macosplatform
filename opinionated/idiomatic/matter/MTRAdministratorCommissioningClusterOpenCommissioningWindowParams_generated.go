@@ -72,3 +72,114 @@ func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) With
 	return x
 }
 
+// CommissioningTimeout calls the underlying CommissioningTimeout.
+func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) CommissioningTimeout() *foundation.NSNumber {
+	return x.inner.CommissioningTimeout()
+}
+
+// SetCommissioningTimeout calls the underlying SetCommissioningTimeout.
+func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) SetCommissioningTimeout(commissioningTimeout *foundation.NSNumber) {
+	x.inner.SetCommissioningTimeout(commissioningTimeout)
+}
+
+// PakePasscodeVerifier calls the underlying PakePasscodeVerifier.
+func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) PakePasscodeVerifier() *foundation.NSData {
+	return x.inner.PakePasscodeVerifier()
+}
+
+// SetPakePasscodeVerifier calls the underlying SetPakePasscodeVerifier.
+func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) SetPakePasscodeVerifier(pakePasscodeVerifier *foundation.NSData) {
+	x.inner.SetPakePasscodeVerifier(pakePasscodeVerifier)
+}
+
+// Discriminator calls the underlying Discriminator.
+func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) Discriminator() *foundation.NSNumber {
+	return x.inner.Discriminator()
+}
+
+// SetDiscriminator calls the underlying SetDiscriminator.
+func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) SetDiscriminator(discriminator *foundation.NSNumber) {
+	x.inner.SetDiscriminator(discriminator)
+}
+
+// Iterations calls the underlying Iterations.
+func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) Iterations() *foundation.NSNumber {
+	return x.inner.Iterations()
+}
+
+// SetIterations calls the underlying SetIterations.
+func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) SetIterations(iterations *foundation.NSNumber) {
+	x.inner.SetIterations(iterations)
+}
+
+// Salt calls the underlying Salt.
+func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) Salt() *foundation.NSData {
+	return x.inner.Salt()
+}
+
+// SetSalt calls the underlying SetSalt.
+func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) SetSalt(salt *foundation.NSData) {
+	x.inner.SetSalt(salt)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// PakeVerifier calls the underlying PakeVerifier.
+func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) PakeVerifier() *foundation.NSData {
+	return x.inner.PakeVerifier()
+}
+
+// SetPakeVerifier calls the underlying SetPakeVerifier.
+func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) SetPakeVerifier(pakeVerifier *foundation.NSData) {
+	x.inner.SetPakeVerifier(pakeVerifier)
+}
+
+// MTRAdministratorCommissioningClusterOpenCommissioningWindowParamsable is the interface implemented by [MTRAdministratorCommissioningClusterOpenCommissioningWindowParams], for mocking and DI.
+type MTRAdministratorCommissioningClusterOpenCommissioningWindowParamsable interface {
+	Unwrap() *raw.MTRAdministratorCommissioningClusterOpenCommissioningWindowParams
+	WithCommissioningTimeout(commissioningTimeout *foundation.NSNumber) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams
+	WithPakePasscodeVerifier(pakePasscodeVerifier *foundation.NSData) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams
+	WithDiscriminator(discriminator *foundation.NSNumber) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams
+	WithIterations(iterations *foundation.NSNumber) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams
+	WithSalt(salt *foundation.NSData) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams
+	WithPakeVerifier(pakeVerifier *foundation.NSData) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams
+	CommissioningTimeout() *foundation.NSNumber
+	SetCommissioningTimeout(commissioningTimeout *foundation.NSNumber)
+	PakePasscodeVerifier() *foundation.NSData
+	SetPakePasscodeVerifier(pakePasscodeVerifier *foundation.NSData)
+	Discriminator() *foundation.NSNumber
+	SetDiscriminator(discriminator *foundation.NSNumber)
+	Iterations() *foundation.NSNumber
+	SetIterations(iterations *foundation.NSNumber)
+	Salt() *foundation.NSData
+	SetSalt(salt *foundation.NSData)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+	PakeVerifier() *foundation.NSData
+	SetPakeVerifier(pakeVerifier *foundation.NSData)
+}
+
+var _ MTRAdministratorCommissioningClusterOpenCommissioningWindowParamsable = (*MTRAdministratorCommissioningClusterOpenCommissioningWindowParams)(nil)
+

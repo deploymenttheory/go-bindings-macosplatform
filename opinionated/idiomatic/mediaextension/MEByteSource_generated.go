@@ -5,9 +5,13 @@
 package mediaextension
 
 import (
+	"context"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mediaextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/uniformtypeidentifiers"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // ByteSource wraps [raw.MEByteSource] with a fluent Go API.
@@ -24,16 +28,100 @@ func NewByteSource() *ByteSource {
 	return &ByteSource{inner: raw.MEByteSourceFromID(_id)}
 }
 
+// ReadDataOfLengthFromOffsetToDestinationCompletionHandler calls the underlying ReadDataOfLengthFromOffsetToDestinationCompletionHandler.
+func (x *ByteSource) ReadDataOfLengthFromOffsetToDestinationCompletionHandler(length uint, offset int64, dest unsafe.Pointer, completionHandler func(uint, unsafe.Pointer)) {
+	x.inner.ReadDataOfLengthFromOffsetToDestinationCompletionHandler(length, offset, dest, completionHandler)
+}
+
+// ReadDataOfLengthFromOffset blocks until the operation completes or ctx is cancelled.
+func (x *ByteSource) ReadDataOfLengthFromOffset(ctx context.Context, length uint, offset int64) (*foundation.NSData, error) {
+	type _result struct {
+		val *foundation.NSData
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadDataOfLengthFromOffsetCompletionHandler(length, offset, func(_p0 *foundation.NSData, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSData
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadDataOfLengthFromOffsetToDestinationBytesReadError calls the underlying ReadDataOfLengthFromOffsetToDestinationBytesReadError.
+func (x *ByteSource) ReadDataOfLengthFromOffsetToDestinationBytesReadError(length uint, offset int64, dest unsafe.Pointer, bytesReadOut *uint) (bool, error) {
+	return x.inner.ReadDataOfLengthFromOffsetToDestinationBytesReadError(length, offset, dest, bytesReadOut)
+}
+
+// AvailableLengthAtOffset calls the underlying AvailableLengthAtOffset.
+func (x *ByteSource) AvailableLengthAtOffset(offset int64) int64 {
+	return x.inner.AvailableLengthAtOffset(offset)
+}
+
+// ByteSourceForRelatedFileNameError calls the underlying ByteSourceForRelatedFileNameError.
+func (x *ByteSource) ByteSourceForRelatedFileNameError(fileName string) (*ByteSource, error) {
+	_r, _err := x.inner.ByteSourceForRelatedFileNameError(foundation.NSStringStringWithUTF8String(fileName))
+	if _err != nil {
+		return nil, _err
+	}
+	if _r == nil {
+		return nil, nil
+	}
+	return &ByteSource{inner: _r}, nil
+}
+
+// FileName calls the underlying FileName.
+func (x *ByteSource) FileName() string {
+	_r := x.inner.FileName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ContentType calls the underlying ContentType.
+func (x *ByteSource) ContentType() *uniformtypeidentifiers.UTType {
+	return x.inner.ContentType()
+}
+
+// FileLength calls the underlying FileLength.
+func (x *ByteSource) FileLength() int64 {
+	return x.inner.FileLength()
+}
+
 // RelatedFileNamesInSameDirectory returns the collection as a Go slice.
-func (x *ByteSource) RelatedFileNamesInSameDirectory() []*foundation.NSString {
+func (x *ByteSource) RelatedFileNamesInSameDirectory() []string {
 	arr := x.inner.RelatedFileNamesInSameDirectory()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
+
+// ByteSourceable is the interface implemented by [ByteSource], for mocking and DI.
+type ByteSourceable interface {
+	Unwrap() *raw.MEByteSource
+	ReadDataOfLengthFromOffsetToDestinationCompletionHandler(length uint, offset int64, dest unsafe.Pointer, completionHandler func(uint, unsafe.Pointer))
+	ReadDataOfLengthFromOffset(ctx context.Context, length uint, offset int64) (*foundation.NSData, error)
+	ReadDataOfLengthFromOffsetToDestinationBytesReadError(length uint, offset int64, dest unsafe.Pointer, bytesReadOut *uint) (bool, error)
+	AvailableLengthAtOffset(offset int64) int64
+	ByteSourceForRelatedFileNameError(fileName string) (*ByteSource, error)
+	FileName() string
+	ContentType() *uniformtypeidentifiers.UTType
+	FileLength() int64
+	RelatedFileNamesInSameDirectory() []string
+}
+
+var _ ByteSourceable = (*ByteSource)(nil)
 

@@ -657,6 +657,12 @@ func GenerateIdiomatic(cfg IdiomaticConfig) error {
 			fmt.Fprintf(os.Stderr, "idiomatic: emitted %s → %s\n", fw.Framework, outDir)
 		}
 	}
+
+	// The per-framework opinionated/idiomatic/<fw> packages are themselves the
+	// fluent entry points: callers import only the frameworks they use. No
+	// all-frameworks aggregator is emitted — one would transitively import (and,
+	// via each raw package's init, eagerly dlopen) every framework, defeating
+	// minimal imports.
 	return nil
 }
 

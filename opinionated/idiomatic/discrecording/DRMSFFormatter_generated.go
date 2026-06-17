@@ -7,6 +7,7 @@ package discrecording
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/discrecording"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,4 +25,27 @@ func NewMSFFormatterWithFormat(format string) *MSFFormatter {
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFormat:"), foundation.NSStringStringWithUTF8String(format).Ptr())
 	return &MSFFormatter{inner: raw.DRMSFFormatterFromID(_id)}
 }
+
+// Format calls the underlying Format.
+func (x *MSFFormatter) Format() string {
+	_r := x.inner.Format()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetFormat calls the underlying SetFormat.
+func (x *MSFFormatter) SetFormat(format string) {
+	x.inner.SetFormat(foundation.NSStringStringWithUTF8String(format))
+}
+
+// MSFFormatterable is the interface implemented by [MSFFormatter], for mocking and DI.
+type MSFFormatterable interface {
+	Unwrap() *raw.DRMSFFormatter
+	Format() string
+	SetFormat(format string)
+}
+
+var _ MSFFormatterable = (*MSFFormatter)(nil)
 

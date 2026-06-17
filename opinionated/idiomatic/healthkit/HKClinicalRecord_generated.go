@@ -6,6 +6,7 @@ package healthkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,7 +24,44 @@ func NewClinicalRecord() *ClinicalRecord {
 	return &ClinicalRecord{inner: raw.HKClinicalRecordFromID(_id)}
 }
 
+// ClinicalType calls the underlying ClinicalType.
+func (x *ClinicalRecord) ClinicalType() *ClinicalType {
+	_r := x.inner.ClinicalType()
+	if _r == nil {
+		return nil
+	}
+	return &ClinicalType{inner: _r}
+}
+
+// DisplayName calls the underlying DisplayName.
+func (x *ClinicalRecord) DisplayName() string {
+	_r := x.inner.DisplayName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// FHIRResource calls the underlying FHIRResource.
+func (x *ClinicalRecord) FHIRResource() *FHIRResource {
+	_r := x.inner.FHIRResource()
+	if _r == nil {
+		return nil
+	}
+	return &FHIRResource{inner: _r}
+}
+
 func (x *ClinicalRecord) asSample() *raw.HKSample { return &x.inner.HKSample }
 
 func (x *ClinicalRecord) asObject() *raw.HKObject { return &x.inner.HKSample.HKObject }
+
+// ClinicalRecordable is the interface implemented by [ClinicalRecord], for mocking and DI.
+type ClinicalRecordable interface {
+	Unwrap() *raw.HKClinicalRecord
+	ClinicalType() *ClinicalType
+	DisplayName() string
+	FHIRResource() *FHIRResource
+}
+
+var _ ClinicalRecordable = (*ClinicalRecord)(nil)
 

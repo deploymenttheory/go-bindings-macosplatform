@@ -42,3 +42,49 @@ func (x *MTRRVCRunModeClusterChangeToModeParams) WithServerSideProcessingTimeout
 	return x
 }
 
+// GetNewMode calls the underlying GetNewMode.
+func (x *MTRRVCRunModeClusterChangeToModeParams) GetNewMode() *foundation.NSNumber {
+	return x.inner.GetNewMode()
+}
+
+// SetNewMode calls the underlying SetNewMode.
+func (x *MTRRVCRunModeClusterChangeToModeParams) SetNewMode(newMode *foundation.NSNumber) {
+	x.inner.SetNewMode(newMode)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRRVCRunModeClusterChangeToModeParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRRVCRunModeClusterChangeToModeParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRRVCRunModeClusterChangeToModeParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRRVCRunModeClusterChangeToModeParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRRVCRunModeClusterChangeToModeParamsable is the interface implemented by [MTRRVCRunModeClusterChangeToModeParams], for mocking and DI.
+type MTRRVCRunModeClusterChangeToModeParamsable interface {
+	Unwrap() *raw.MTRRVCRunModeClusterChangeToModeParams
+	WithNewMode(newMode *foundation.NSNumber) *MTRRVCRunModeClusterChangeToModeParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRRVCRunModeClusterChangeToModeParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRRVCRunModeClusterChangeToModeParams
+	GetNewMode() *foundation.NSNumber
+	SetNewMode(newMode *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRRVCRunModeClusterChangeToModeParamsable = (*MTRRVCRunModeClusterChangeToModeParams)(nil)
+

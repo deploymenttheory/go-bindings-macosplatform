@@ -40,3 +40,34 @@ func NewDateComponentsRangeWithEKRecurrenceRule(recurrenceRule *eventkit.EKRecur
 	return &DateComponentsRange{inner: raw.INDateComponentsRangeFromID(_id)}
 }
 
+// EKRecurrenceRule calls the underlying EKRecurrenceRule.
+func (x *DateComponentsRange) EKRecurrenceRule() *eventkit.EKRecurrenceRule {
+	return x.inner.EKRecurrenceRule()
+}
+
+// StartDateComponents calls the underlying StartDateComponents.
+func (x *DateComponentsRange) StartDateComponents() *foundation.NSDateComponents {
+	return x.inner.StartDateComponents()
+}
+
+// EndDateComponents calls the underlying EndDateComponents.
+func (x *DateComponentsRange) EndDateComponents() *foundation.NSDateComponents {
+	return x.inner.EndDateComponents()
+}
+
+// RecurrenceRule calls the underlying RecurrenceRule.
+func (x *DateComponentsRange) RecurrenceRule() objc.ID {
+	return x.inner.RecurrenceRule()
+}
+
+// DateComponentsRangeable is the interface implemented by [DateComponentsRange], for mocking and DI.
+type DateComponentsRangeable interface {
+	Unwrap() *raw.INDateComponentsRange
+	EKRecurrenceRule() *eventkit.EKRecurrenceRule
+	StartDateComponents() *foundation.NSDateComponents
+	EndDateComponents() *foundation.NSDateComponents
+	RecurrenceRule() objc.ID
+}
+
+var _ DateComponentsRangeable = (*DateComponentsRange)(nil)
+

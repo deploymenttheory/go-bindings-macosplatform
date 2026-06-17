@@ -7,7 +7,9 @@ package localauthentication
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/localauthentication"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Context wraps [raw.LAContext] with a fluent Go API.
@@ -59,4 +61,159 @@ func (x *Context) WithInteractionNotAllowed(interactionNotAllowed bool) *Context
 	x.inner.SetInteractionNotAllowed(interactionNotAllowed)
 	return x
 }
+
+// CanEvaluatePolicyError calls the underlying CanEvaluatePolicyError.
+func (x *Context) CanEvaluatePolicyError(policy raw.LAPolicy) (bool, error) {
+	return x.inner.CanEvaluatePolicyError(policy)
+}
+
+// EvaluatePolicyLocalizedReasonReply calls the underlying EvaluatePolicyLocalizedReasonReply.
+func (x *Context) EvaluatePolicyLocalizedReasonReply(policy raw.LAPolicy, localizedReason string, reply func(bool, unsafe.Pointer)) {
+	x.inner.EvaluatePolicyLocalizedReasonReply(policy, foundation.NSStringStringWithUTF8String(localizedReason), reply)
+}
+
+// Invalidate calls the underlying Invalidate.
+func (x *Context) Invalidate() {
+	x.inner.Invalidate()
+}
+
+// SetCredentialType calls the underlying SetCredentialType.
+func (x *Context) SetCredentialType(credential *foundation.NSData, type_ raw.LACredentialType) bool {
+	return x.inner.SetCredentialType(credential, type_)
+}
+
+// IsCredentialSet calls the underlying IsCredentialSet.
+func (x *Context) IsCredentialSet(type_ raw.LACredentialType) bool {
+	return x.inner.IsCredentialSet(type_)
+}
+
+// EvaluateAccessControlOperationLocalizedReasonReply calls the underlying EvaluateAccessControlOperationLocalizedReasonReply.
+func (x *Context) EvaluateAccessControlOperationLocalizedReasonReply(accessControl unsafe.Pointer, operation raw.LAAccessControlOperation, localizedReason string, reply func(bool, unsafe.Pointer)) {
+	x.inner.EvaluateAccessControlOperationLocalizedReasonReply(accessControl, operation, foundation.NSStringStringWithUTF8String(localizedReason), reply)
+}
+
+// LocalizedFallbackTitle calls the underlying LocalizedFallbackTitle.
+func (x *Context) LocalizedFallbackTitle() string {
+	_r := x.inner.LocalizedFallbackTitle()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLocalizedFallbackTitle calls the underlying SetLocalizedFallbackTitle.
+func (x *Context) SetLocalizedFallbackTitle(localizedFallbackTitle string) {
+	x.inner.SetLocalizedFallbackTitle(foundation.NSStringStringWithUTF8String(localizedFallbackTitle))
+}
+
+// MaxBiometryFailures calls the underlying MaxBiometryFailures.
+func (x *Context) MaxBiometryFailures() *foundation.NSNumber {
+	return x.inner.MaxBiometryFailures()
+}
+
+// SetMaxBiometryFailures calls the underlying SetMaxBiometryFailures.
+func (x *Context) SetMaxBiometryFailures(maxBiometryFailures *foundation.NSNumber) {
+	x.inner.SetMaxBiometryFailures(maxBiometryFailures)
+}
+
+// LocalizedCancelTitle calls the underlying LocalizedCancelTitle.
+func (x *Context) LocalizedCancelTitle() string {
+	_r := x.inner.LocalizedCancelTitle()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLocalizedCancelTitle calls the underlying SetLocalizedCancelTitle.
+func (x *Context) SetLocalizedCancelTitle(localizedCancelTitle string) {
+	x.inner.SetLocalizedCancelTitle(foundation.NSStringStringWithUTF8String(localizedCancelTitle))
+}
+
+// TouchIDAuthenticationAllowableReuseDuration calls the underlying TouchIDAuthenticationAllowableReuseDuration.
+func (x *Context) TouchIDAuthenticationAllowableReuseDuration() float64 {
+	return x.inner.TouchIDAuthenticationAllowableReuseDuration()
+}
+
+// SetTouchIDAuthenticationAllowableReuseDuration calls the underlying SetTouchIDAuthenticationAllowableReuseDuration.
+func (x *Context) SetTouchIDAuthenticationAllowableReuseDuration(touchIDAuthenticationAllowableReuseDuration float64) {
+	x.inner.SetTouchIDAuthenticationAllowableReuseDuration(touchIDAuthenticationAllowableReuseDuration)
+}
+
+// LocalizedReason calls the underlying LocalizedReason.
+func (x *Context) LocalizedReason() string {
+	_r := x.inner.LocalizedReason()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLocalizedReason calls the underlying SetLocalizedReason.
+func (x *Context) SetLocalizedReason(localizedReason string) {
+	x.inner.SetLocalizedReason(foundation.NSStringStringWithUTF8String(localizedReason))
+}
+
+// InteractionNotAllowed calls the underlying InteractionNotAllowed.
+func (x *Context) InteractionNotAllowed() bool {
+	return x.inner.InteractionNotAllowed()
+}
+
+// SetInteractionNotAllowed calls the underlying SetInteractionNotAllowed.
+func (x *Context) SetInteractionNotAllowed(interactionNotAllowed bool) {
+	x.inner.SetInteractionNotAllowed(interactionNotAllowed)
+}
+
+// BiometryType calls the underlying BiometryType.
+func (x *Context) BiometryType() raw.LABiometryType {
+	return x.inner.BiometryType()
+}
+
+// EvaluatedPolicyDomainState calls the underlying EvaluatedPolicyDomainState.
+func (x *Context) EvaluatedPolicyDomainState() *foundation.NSData {
+	return x.inner.EvaluatedPolicyDomainState()
+}
+
+// DomainState calls the underlying DomainState.
+func (x *Context) DomainState() *DomainState {
+	_r := x.inner.DomainState()
+	if _r == nil {
+		return nil
+	}
+	return &DomainState{inner: _r}
+}
+
+// Contextable is the interface implemented by [Context], for mocking and DI.
+type Contextable interface {
+	Unwrap() *raw.LAContext
+	WithLocalizedFallbackTitle(localizedFallbackTitle string) *Context
+	WithMaxBiometryFailures(maxBiometryFailures *foundation.NSNumber) *Context
+	WithLocalizedCancelTitle(localizedCancelTitle string) *Context
+	WithTouchIDAuthenticationAllowableReuseDuration(touchIDAuthenticationAllowableReuseDuration float64) *Context
+	WithLocalizedReason(localizedReason string) *Context
+	WithInteractionNotAllowed(interactionNotAllowed bool) *Context
+	CanEvaluatePolicyError(policy raw.LAPolicy) (bool, error)
+	EvaluatePolicyLocalizedReasonReply(policy raw.LAPolicy, localizedReason string, reply func(bool, unsafe.Pointer))
+	Invalidate()
+	SetCredentialType(credential *foundation.NSData, type_ raw.LACredentialType) bool
+	IsCredentialSet(type_ raw.LACredentialType) bool
+	EvaluateAccessControlOperationLocalizedReasonReply(accessControl unsafe.Pointer, operation raw.LAAccessControlOperation, localizedReason string, reply func(bool, unsafe.Pointer))
+	LocalizedFallbackTitle() string
+	SetLocalizedFallbackTitle(localizedFallbackTitle string)
+	MaxBiometryFailures() *foundation.NSNumber
+	SetMaxBiometryFailures(maxBiometryFailures *foundation.NSNumber)
+	LocalizedCancelTitle() string
+	SetLocalizedCancelTitle(localizedCancelTitle string)
+	TouchIDAuthenticationAllowableReuseDuration() float64
+	SetTouchIDAuthenticationAllowableReuseDuration(touchIDAuthenticationAllowableReuseDuration float64)
+	LocalizedReason() string
+	SetLocalizedReason(localizedReason string)
+	InteractionNotAllowed() bool
+	SetInteractionNotAllowed(interactionNotAllowed bool)
+	BiometryType() raw.LABiometryType
+	EvaluatedPolicyDomainState() *foundation.NSData
+	DomainState() *DomainState
+}
+
+var _ Contextable = (*Context)(nil)
 

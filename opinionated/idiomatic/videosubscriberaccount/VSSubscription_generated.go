@@ -7,6 +7,7 @@ package videosubscriberaccount
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/videosubscriberaccount"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -59,16 +60,72 @@ func (x *VSSubscription) WithBillingIdentifier(billingIdentifier string) *VSSubs
 	return x
 }
 
+// ExpirationDate calls the underlying ExpirationDate.
+func (x *VSSubscription) ExpirationDate() *foundation.NSDate {
+	return x.inner.ExpirationDate()
+}
+
+// SetExpirationDate calls the underlying SetExpirationDate.
+func (x *VSSubscription) SetExpirationDate(expirationDate *foundation.NSDate) {
+	x.inner.SetExpirationDate(expirationDate)
+}
+
+// AccessLevel calls the underlying AccessLevel.
+func (x *VSSubscription) AccessLevel() raw.VSSubscriptionAccessLevel {
+	return x.inner.AccessLevel()
+}
+
+// SetAccessLevel calls the underlying SetAccessLevel.
+func (x *VSSubscription) SetAccessLevel(accessLevel raw.VSSubscriptionAccessLevel) {
+	x.inner.SetAccessLevel(accessLevel)
+}
+
 // TierIdentifiers returns the collection as a Go slice.
-func (x *VSSubscription) TierIdentifiers() []*foundation.NSString {
+func (x *VSSubscription) TierIdentifiers() []string {
 	arr := x.inner.TierIdentifiers()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
+
+// SetTierIdentifiers calls the underlying SetTierIdentifiers.
+func (x *VSSubscription) SetTierIdentifiers(tierIdentifiers *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetTierIdentifiers(tierIdentifiers)
+}
+
+// BillingIdentifier calls the underlying BillingIdentifier.
+func (x *VSSubscription) BillingIdentifier() string {
+	_r := x.inner.BillingIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetBillingIdentifier calls the underlying SetBillingIdentifier.
+func (x *VSSubscription) SetBillingIdentifier(billingIdentifier string) {
+	x.inner.SetBillingIdentifier(foundation.NSStringStringWithUTF8String(billingIdentifier))
+}
+
+// VSSubscriptionable is the interface implemented by [VSSubscription], for mocking and DI.
+type VSSubscriptionable interface {
+	Unwrap() *raw.VSSubscription
+	WithExpirationDate(expirationDate *foundation.NSDate) *VSSubscription
+	WithAccessLevel(accessLevel raw.VSSubscriptionAccessLevel) *VSSubscription
+	WithTierIdentifiers(items ...*foundation.NSString) *VSSubscription
+	WithBillingIdentifier(billingIdentifier string) *VSSubscription
+	ExpirationDate() *foundation.NSDate
+	SetExpirationDate(expirationDate *foundation.NSDate)
+	AccessLevel() raw.VSSubscriptionAccessLevel
+	SetAccessLevel(accessLevel raw.VSSubscriptionAccessLevel)
+	TierIdentifiers() []string
+	SetTierIdentifiers(tierIdentifiers *foundation.NSArray[*foundation.NSString])
+	BillingIdentifier() string
+	SetBillingIdentifier(billingIdentifier string)
+}
+
+var _ VSSubscriptionable = (*VSSubscription)(nil)
 

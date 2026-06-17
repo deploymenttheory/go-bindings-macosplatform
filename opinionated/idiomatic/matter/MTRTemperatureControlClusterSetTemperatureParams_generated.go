@@ -48,3 +48,62 @@ func (x *MTRTemperatureControlClusterSetTemperatureParams) WithServerSideProcess
 	return x
 }
 
+// TargetTemperature calls the underlying TargetTemperature.
+func (x *MTRTemperatureControlClusterSetTemperatureParams) TargetTemperature() *foundation.NSNumber {
+	return x.inner.TargetTemperature()
+}
+
+// SetTargetTemperature calls the underlying SetTargetTemperature.
+func (x *MTRTemperatureControlClusterSetTemperatureParams) SetTargetTemperature(targetTemperature *foundation.NSNumber) {
+	x.inner.SetTargetTemperature(targetTemperature)
+}
+
+// TargetTemperatureLevel calls the underlying TargetTemperatureLevel.
+func (x *MTRTemperatureControlClusterSetTemperatureParams) TargetTemperatureLevel() *foundation.NSNumber {
+	return x.inner.TargetTemperatureLevel()
+}
+
+// SetTargetTemperatureLevel calls the underlying SetTargetTemperatureLevel.
+func (x *MTRTemperatureControlClusterSetTemperatureParams) SetTargetTemperatureLevel(targetTemperatureLevel *foundation.NSNumber) {
+	x.inner.SetTargetTemperatureLevel(targetTemperatureLevel)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRTemperatureControlClusterSetTemperatureParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRTemperatureControlClusterSetTemperatureParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRTemperatureControlClusterSetTemperatureParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRTemperatureControlClusterSetTemperatureParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRTemperatureControlClusterSetTemperatureParamsable is the interface implemented by [MTRTemperatureControlClusterSetTemperatureParams], for mocking and DI.
+type MTRTemperatureControlClusterSetTemperatureParamsable interface {
+	Unwrap() *raw.MTRTemperatureControlClusterSetTemperatureParams
+	WithTargetTemperature(targetTemperature *foundation.NSNumber) *MTRTemperatureControlClusterSetTemperatureParams
+	WithTargetTemperatureLevel(targetTemperatureLevel *foundation.NSNumber) *MTRTemperatureControlClusterSetTemperatureParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTemperatureControlClusterSetTemperatureParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRTemperatureControlClusterSetTemperatureParams
+	TargetTemperature() *foundation.NSNumber
+	SetTargetTemperature(targetTemperature *foundation.NSNumber)
+	TargetTemperatureLevel() *foundation.NSNumber
+	SetTargetTemperatureLevel(targetTemperatureLevel *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRTemperatureControlClusterSetTemperatureParamsable = (*MTRTemperatureControlClusterSetTemperatureParams)(nil)
+

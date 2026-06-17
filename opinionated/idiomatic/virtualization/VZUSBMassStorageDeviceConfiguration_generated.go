@@ -26,3 +26,10 @@ func NewUSBMassStorageDeviceConfigurationWithAttachment(attachment *raw.VZStorag
 
 func (x *USBMassStorageDeviceConfiguration) asStorageDeviceConfiguration() *raw.VZStorageDeviceConfiguration { return &x.inner.VZStorageDeviceConfiguration }
 
+// USBMassStorageDeviceConfigurationable is the interface implemented by [USBMassStorageDeviceConfiguration], for mocking and DI.
+type USBMassStorageDeviceConfigurationable interface {
+	Unwrap() *raw.VZUSBMassStorageDeviceConfiguration
+}
+
+var _ USBMassStorageDeviceConfigurationable = (*USBMassStorageDeviceConfiguration)(nil)
+

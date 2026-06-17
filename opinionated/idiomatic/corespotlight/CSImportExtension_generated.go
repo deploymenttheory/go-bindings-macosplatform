@@ -6,6 +6,7 @@ package corespotlight
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corespotlight"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,17 @@ func NewImportExtension() *ImportExtension {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CSImportExtension")), objc.RegisterName("new"))
 	return &ImportExtension{inner: raw.CSImportExtensionFromID(_id)}
 }
+
+// UpdateAttributesForFileAtURLError calls the underlying UpdateAttributesForFileAtURLError.
+func (x *ImportExtension) UpdateAttributesForFileAtURLError(attributes *raw.CSSearchableItemAttributeSet, contentURL string) (bool, error) {
+	return x.inner.UpdateAttributesForFileAtURLError(attributes, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(contentURL)))
+}
+
+// ImportExtensionable is the interface implemented by [ImportExtension], for mocking and DI.
+type ImportExtensionable interface {
+	Unwrap() *raw.CSImportExtension
+	UpdateAttributesForFileAtURLError(attributes *raw.CSSearchableItemAttributeSet, contentURL string) (bool, error)
+}
+
+var _ ImportExtensionable = (*ImportExtension)(nil)
 

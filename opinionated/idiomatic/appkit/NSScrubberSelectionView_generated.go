@@ -29,3 +29,10 @@ func (x *ScrubberSelectionView) asView() *raw.NSView { return &x.inner.NSScrubbe
 
 func (x *ScrubberSelectionView) asResponder() *raw.NSResponder { return &x.inner.NSScrubberArrangedView.NSView.NSResponder }
 
+// ScrubberSelectionViewable is the interface implemented by [ScrubberSelectionView], for mocking and DI.
+type ScrubberSelectionViewable interface {
+	Unwrap() *raw.NSScrubberSelectionView
+}
+
+var _ ScrubberSelectionViewable = (*ScrubberSelectionView)(nil)
+

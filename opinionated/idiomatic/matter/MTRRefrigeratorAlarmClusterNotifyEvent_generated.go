@@ -48,3 +48,62 @@ func (x *MTRRefrigeratorAlarmClusterNotifyEvent) WithMask(mask *foundation.NSNum
 	return x
 }
 
+// Active calls the underlying Active.
+func (x *MTRRefrigeratorAlarmClusterNotifyEvent) Active() *foundation.NSNumber {
+	return x.inner.Active()
+}
+
+// SetActive calls the underlying SetActive.
+func (x *MTRRefrigeratorAlarmClusterNotifyEvent) SetActive(active *foundation.NSNumber) {
+	x.inner.SetActive(active)
+}
+
+// Inactive calls the underlying Inactive.
+func (x *MTRRefrigeratorAlarmClusterNotifyEvent) Inactive() *foundation.NSNumber {
+	return x.inner.Inactive()
+}
+
+// SetInactive calls the underlying SetInactive.
+func (x *MTRRefrigeratorAlarmClusterNotifyEvent) SetInactive(inactive *foundation.NSNumber) {
+	x.inner.SetInactive(inactive)
+}
+
+// State calls the underlying State.
+func (x *MTRRefrigeratorAlarmClusterNotifyEvent) State() *foundation.NSNumber {
+	return x.inner.State()
+}
+
+// SetState calls the underlying SetState.
+func (x *MTRRefrigeratorAlarmClusterNotifyEvent) SetState(state *foundation.NSNumber) {
+	x.inner.SetState(state)
+}
+
+// Mask calls the underlying Mask.
+func (x *MTRRefrigeratorAlarmClusterNotifyEvent) Mask() *foundation.NSNumber {
+	return x.inner.Mask()
+}
+
+// SetMask calls the underlying SetMask.
+func (x *MTRRefrigeratorAlarmClusterNotifyEvent) SetMask(mask *foundation.NSNumber) {
+	x.inner.SetMask(mask)
+}
+
+// MTRRefrigeratorAlarmClusterNotifyEventable is the interface implemented by [MTRRefrigeratorAlarmClusterNotifyEvent], for mocking and DI.
+type MTRRefrigeratorAlarmClusterNotifyEventable interface {
+	Unwrap() *raw.MTRRefrigeratorAlarmClusterNotifyEvent
+	WithActive(active *foundation.NSNumber) *MTRRefrigeratorAlarmClusterNotifyEvent
+	WithInactive(inactive *foundation.NSNumber) *MTRRefrigeratorAlarmClusterNotifyEvent
+	WithState(state *foundation.NSNumber) *MTRRefrigeratorAlarmClusterNotifyEvent
+	WithMask(mask *foundation.NSNumber) *MTRRefrigeratorAlarmClusterNotifyEvent
+	Active() *foundation.NSNumber
+	SetActive(active *foundation.NSNumber)
+	Inactive() *foundation.NSNumber
+	SetInactive(inactive *foundation.NSNumber)
+	State() *foundation.NSNumber
+	SetState(state *foundation.NSNumber)
+	Mask() *foundation.NSNumber
+	SetMask(mask *foundation.NSNumber)
+}
+
+var _ MTRRefrigeratorAlarmClusterNotifyEventable = (*MTRRefrigeratorAlarmClusterNotifyEvent)(nil)
+

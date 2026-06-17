@@ -30,5 +30,25 @@ func (x *TemporaryImage) WithReadCount(readCount uint) *TemporaryImage {
 	return x
 }
 
+// ReadCount calls the underlying ReadCount.
+func (x *TemporaryImage) ReadCount() uint {
+	return x.inner.ReadCount()
+}
+
+// SetReadCount calls the underlying SetReadCount.
+func (x *TemporaryImage) SetReadCount(readCount uint) {
+	x.inner.SetReadCount(readCount)
+}
+
 func (x *TemporaryImage) asImage() *mpscore.MPSImage { return &x.inner.MPSImage }
+
+// TemporaryImageable is the interface implemented by [TemporaryImage], for mocking and DI.
+type TemporaryImageable interface {
+	Unwrap() *raw.MPSTemporaryImage
+	WithReadCount(readCount uint) *TemporaryImage
+	ReadCount() uint
+	SetReadCount(readCount uint)
+}
+
+var _ TemporaryImageable = (*TemporaryImage)(nil)
 

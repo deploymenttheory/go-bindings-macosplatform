@@ -7,6 +7,7 @@ package avfaudio
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,29 +25,52 @@ func NewAudioUnitComponentManager() *AudioUnitComponentManager {
 	return &AudioUnitComponentManager{inner: raw.AVAudioUnitComponentManagerFromID(_id)}
 }
 
+// ComponentsMatchingPredicate calls the underlying ComponentsMatchingPredicate.
+func (x *AudioUnitComponentManager) ComponentsMatchingPredicate(predicate *foundation.NSPredicate) *foundation.NSArray[*raw.AVAudioUnitComponent] {
+	return x.inner.ComponentsMatchingPredicate(predicate)
+}
+
+// ComponentsPassingTest calls the underlying ComponentsPassingTest.
+func (x *AudioUnitComponentManager) ComponentsPassingTest(testHandler func(*raw.AVAudioUnitComponent, *bool) bool) *foundation.NSArray[*raw.AVAudioUnitComponent] {
+	return x.inner.ComponentsPassingTest(testHandler)
+}
+
+// ComponentsMatchingDescription calls the underlying ComponentsMatchingDescription.
+func (x *AudioUnitComponentManager) ComponentsMatchingDescription(desc objc.ID) *foundation.NSArray[*raw.AVAudioUnitComponent] {
+	return x.inner.ComponentsMatchingDescription(desc)
+}
+
 // TagNames returns the collection as a Go slice.
-func (x *AudioUnitComponentManager) TagNames() []*foundation.NSString {
+func (x *AudioUnitComponentManager) TagNames() []string {
 	arr := x.inner.TagNames()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
 
 // StandardLocalizedTagNames returns the collection as a Go slice.
-func (x *AudioUnitComponentManager) StandardLocalizedTagNames() []*foundation.NSString {
+func (x *AudioUnitComponentManager) StandardLocalizedTagNames() []string {
 	arr := x.inner.StandardLocalizedTagNames()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
+
+// AudioUnitComponentManagerable is the interface implemented by [AudioUnitComponentManager], for mocking and DI.
+type AudioUnitComponentManagerable interface {
+	Unwrap() *raw.AVAudioUnitComponentManager
+	ComponentsMatchingPredicate(predicate *foundation.NSPredicate) *foundation.NSArray[*raw.AVAudioUnitComponent]
+	ComponentsPassingTest(testHandler func(*raw.AVAudioUnitComponent, *bool) bool) *foundation.NSArray[*raw.AVAudioUnitComponent]
+	ComponentsMatchingDescription(desc objc.ID) *foundation.NSArray[*raw.AVAudioUnitComponent]
+	TagNames() []string
+	StandardLocalizedTagNames() []string
+}
+
+var _ AudioUnitComponentManagerable = (*AudioUnitComponentManager)(nil)
 

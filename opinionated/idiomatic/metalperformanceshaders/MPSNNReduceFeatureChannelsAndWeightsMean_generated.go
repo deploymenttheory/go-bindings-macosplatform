@@ -41,3 +41,10 @@ func (x *NNReduceFeatureChannelsAndWeightsMean) asCNNBinaryKernel() *mpsneuralne
 
 func (x *NNReduceFeatureChannelsAndWeightsMean) asKernel() *mpscore.MPSKernel { return &x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.MPSKernel }
 
+// NNReduceFeatureChannelsAndWeightsMeanable is the interface implemented by [NNReduceFeatureChannelsAndWeightsMean], for mocking and DI.
+type NNReduceFeatureChannelsAndWeightsMeanable interface {
+	Unwrap() *raw.MPSNNReduceFeatureChannelsAndWeightsMean
+}
+
+var _ NNReduceFeatureChannelsAndWeightsMeanable = (*NNReduceFeatureChannelsAndWeightsMean)(nil)
+

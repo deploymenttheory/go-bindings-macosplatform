@@ -25,3 +25,10 @@ func NewMTRApplicationLauncherClusterApplication() *MTRApplicationLauncherCluste
 
 func (x *MTRApplicationLauncherClusterApplication) asMTRApplicationLauncherClusterApplicationStruct() *raw.MTRApplicationLauncherClusterApplicationStruct { return &x.inner.MTRApplicationLauncherClusterApplicationStruct }
 
+// MTRApplicationLauncherClusterApplicationable is the interface implemented by [MTRApplicationLauncherClusterApplication], for mocking and DI.
+type MTRApplicationLauncherClusterApplicationable interface {
+	Unwrap() *raw.MTRApplicationLauncherClusterApplication
+}
+
+var _ MTRApplicationLauncherClusterApplicationable = (*MTRApplicationLauncherClusterApplication)(nil)
+

@@ -6,7 +6,9 @@ package avfaudio
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // AudioEngine wraps [raw.AVAudioEngine] with a fluent Go API.
@@ -29,9 +31,284 @@ func (x *AudioEngine) WithAutoShutdownEnabled(autoShutdownEnabled bool) *AudioEn
 	return x
 }
 
+// AttachNode calls the underlying AttachNode.
+func (x *AudioEngine) AttachNode(node *raw.AVAudioNode) {
+	x.inner.AttachNode(node)
+}
+
+// DetachNode calls the underlying DetachNode.
+func (x *AudioEngine) DetachNode(node *raw.AVAudioNode) {
+	x.inner.DetachNode(node)
+}
+
+// ConnectToFromBusToBusFormat calls the underlying ConnectToFromBusToBusFormat.
+func (x *AudioEngine) ConnectToFromBusToBusFormat(node1 *raw.AVAudioNode, node2 *raw.AVAudioNode, bus1 uint, bus2 uint, format *raw.AVAudioFormat) {
+	x.inner.ConnectToFromBusToBusFormat(node1, node2, bus1, bus2, format)
+}
+
+// ConnectToFormat calls the underlying ConnectToFormat.
+func (x *AudioEngine) ConnectToFormat(node1 *raw.AVAudioNode, node2 *raw.AVAudioNode, format *raw.AVAudioFormat) {
+	x.inner.ConnectToFormat(node1, node2, format)
+}
+
+// ConnectToConnectionPointsFromBusFormat calls the underlying ConnectToConnectionPointsFromBusFormat.
+func (x *AudioEngine) ConnectToConnectionPointsFromBusFormat(sourceNode *raw.AVAudioNode, destNodes *foundation.NSArray[*raw.AVAudioConnectionPoint], sourceBus uint, format *raw.AVAudioFormat) {
+	x.inner.ConnectToConnectionPointsFromBusFormat(sourceNode, destNodes, sourceBus, format)
+}
+
+// DisconnectNodeInputBus calls the underlying DisconnectNodeInputBus.
+func (x *AudioEngine) DisconnectNodeInputBus(node *raw.AVAudioNode, bus uint) {
+	x.inner.DisconnectNodeInputBus(node, bus)
+}
+
+// DisconnectNodeInput calls the underlying DisconnectNodeInput.
+func (x *AudioEngine) DisconnectNodeInput(node *raw.AVAudioNode) {
+	x.inner.DisconnectNodeInput(node)
+}
+
+// DisconnectNodeOutputBus calls the underlying DisconnectNodeOutputBus.
+func (x *AudioEngine) DisconnectNodeOutputBus(node *raw.AVAudioNode, bus uint) {
+	x.inner.DisconnectNodeOutputBus(node, bus)
+}
+
+// DisconnectNodeOutput calls the underlying DisconnectNodeOutput.
+func (x *AudioEngine) DisconnectNodeOutput(node *raw.AVAudioNode) {
+	x.inner.DisconnectNodeOutput(node)
+}
+
+// Prepare calls the underlying Prepare.
+func (x *AudioEngine) Prepare() {
+	x.inner.Prepare()
+}
+
 // StartAndReturnError returns any validation error.
 func (x *AudioEngine) StartAndReturnError() error {
 	_, err := x.inner.StartAndReturnError()
 	return err
 }
+
+// Pause calls the underlying Pause.
+func (x *AudioEngine) Pause() {
+	x.inner.Pause()
+}
+
+// Reset calls the underlying Reset.
+func (x *AudioEngine) Reset() {
+	x.inner.Reset()
+}
+
+// Stop calls the underlying Stop.
+func (x *AudioEngine) Stop() {
+	x.inner.Stop()
+}
+
+// InputConnectionPointForNodeInputBus calls the underlying InputConnectionPointForNodeInputBus.
+func (x *AudioEngine) InputConnectionPointForNodeInputBus(node *raw.AVAudioNode, bus uint) *AudioConnectionPoint {
+	_r := x.inner.InputConnectionPointForNodeInputBus(node, bus)
+	if _r == nil {
+		return nil
+	}
+	return &AudioConnectionPoint{inner: _r}
+}
+
+// OutputConnectionPointsForNodeOutputBus calls the underlying OutputConnectionPointsForNodeOutputBus.
+func (x *AudioEngine) OutputConnectionPointsForNodeOutputBus(node *raw.AVAudioNode, bus uint) *foundation.NSArray[*raw.AVAudioConnectionPoint] {
+	return x.inner.OutputConnectionPointsForNodeOutputBus(node, bus)
+}
+
+// EnableManualRenderingModeFormatMaximumFrameCountError calls the underlying EnableManualRenderingModeFormatMaximumFrameCountError.
+func (x *AudioEngine) EnableManualRenderingModeFormatMaximumFrameCountError(mode raw.AVAudioEngineManualRenderingMode, pcmFormat *raw.AVAudioFormat, maximumFrameCount uint32) (bool, error) {
+	return x.inner.EnableManualRenderingModeFormatMaximumFrameCountError(mode, pcmFormat, maximumFrameCount)
+}
+
+// DisableManualRenderingMode calls the underlying DisableManualRenderingMode.
+func (x *AudioEngine) DisableManualRenderingMode() {
+	x.inner.DisableManualRenderingMode()
+}
+
+// RenderOfflineToBufferError calls the underlying RenderOfflineToBufferError.
+func (x *AudioEngine) RenderOfflineToBufferError(numberOfFrames uint32, buffer *raw.AVAudioPCMBuffer) (raw.AVAudioEngineManualRenderingStatus, error) {
+	return x.inner.RenderOfflineToBufferError(numberOfFrames, buffer)
+}
+
+// ConnectMIDIToFormatBlock calls the underlying ConnectMIDIToFormatBlock.
+func (x *AudioEngine) ConnectMIDIToFormatBlock(sourceNode *raw.AVAudioNode, destinationNode *raw.AVAudioNode, format *raw.AVAudioFormat, tapBlock func(int64, uint8, int, unsafe.Pointer) int) {
+	x.inner.ConnectMIDIToFormatBlock(sourceNode, destinationNode, format, tapBlock)
+}
+
+// ConnectMIDIToFormatEventListBlock calls the underlying ConnectMIDIToFormatEventListBlock.
+func (x *AudioEngine) ConnectMIDIToFormatEventListBlock(sourceNode *raw.AVAudioNode, destinationNode *raw.AVAudioNode, format *raw.AVAudioFormat, tapBlock func(int64, uint8, unsafe.Pointer) int) {
+	x.inner.ConnectMIDIToFormatEventListBlock(sourceNode, destinationNode, format, tapBlock)
+}
+
+// ConnectMIDIToNodesFormatBlock calls the underlying ConnectMIDIToNodesFormatBlock.
+func (x *AudioEngine) ConnectMIDIToNodesFormatBlock(sourceNode *raw.AVAudioNode, destinationNodes *foundation.NSArray[*raw.AVAudioNode], format *raw.AVAudioFormat, tapBlock func(int64, uint8, int, unsafe.Pointer) int) {
+	x.inner.ConnectMIDIToNodesFormatBlock(sourceNode, destinationNodes, format, tapBlock)
+}
+
+// ConnectMIDIToNodesFormatEventListBlock calls the underlying ConnectMIDIToNodesFormatEventListBlock.
+func (x *AudioEngine) ConnectMIDIToNodesFormatEventListBlock(sourceNode *raw.AVAudioNode, destinationNodes *foundation.NSArray[*raw.AVAudioNode], format *raw.AVAudioFormat, tapBlock func(int64, uint8, unsafe.Pointer) int) {
+	x.inner.ConnectMIDIToNodesFormatEventListBlock(sourceNode, destinationNodes, format, tapBlock)
+}
+
+// DisconnectMIDIFrom calls the underlying DisconnectMIDIFrom.
+func (x *AudioEngine) DisconnectMIDIFrom(sourceNode *raw.AVAudioNode, destinationNode *raw.AVAudioNode) {
+	x.inner.DisconnectMIDIFrom(sourceNode, destinationNode)
+}
+
+// DisconnectMIDIFromNodes calls the underlying DisconnectMIDIFromNodes.
+func (x *AudioEngine) DisconnectMIDIFromNodes(sourceNode *raw.AVAudioNode, destinationNodes *foundation.NSArray[*raw.AVAudioNode]) {
+	x.inner.DisconnectMIDIFromNodes(sourceNode, destinationNodes)
+}
+
+// DisconnectMIDIInput calls the underlying DisconnectMIDIInput.
+func (x *AudioEngine) DisconnectMIDIInput(node *raw.AVAudioNode) {
+	x.inner.DisconnectMIDIInput(node)
+}
+
+// DisconnectMIDIOutput calls the underlying DisconnectMIDIOutput.
+func (x *AudioEngine) DisconnectMIDIOutput(node *raw.AVAudioNode) {
+	x.inner.DisconnectMIDIOutput(node)
+}
+
+// MusicSequence calls the underlying MusicSequence.
+func (x *AudioEngine) MusicSequence() unsafe.Pointer {
+	return x.inner.MusicSequence()
+}
+
+// SetMusicSequence calls the underlying SetMusicSequence.
+func (x *AudioEngine) SetMusicSequence(musicSequence unsafe.Pointer) {
+	x.inner.SetMusicSequence(musicSequence)
+}
+
+// OutputNode calls the underlying OutputNode.
+func (x *AudioEngine) OutputNode() *AudioOutputNode {
+	_r := x.inner.OutputNode()
+	if _r == nil {
+		return nil
+	}
+	return &AudioOutputNode{inner: _r}
+}
+
+// InputNode calls the underlying InputNode.
+func (x *AudioEngine) InputNode() *AudioInputNode {
+	_r := x.inner.InputNode()
+	if _r == nil {
+		return nil
+	}
+	return &AudioInputNode{inner: _r}
+}
+
+// MainMixerNode calls the underlying MainMixerNode.
+func (x *AudioEngine) MainMixerNode() *AudioMixerNode {
+	_r := x.inner.MainMixerNode()
+	if _r == nil {
+		return nil
+	}
+	return &AudioMixerNode{inner: _r}
+}
+
+// IsRunning calls the underlying IsRunning.
+func (x *AudioEngine) IsRunning() bool {
+	return x.inner.IsRunning()
+}
+
+// IsAutoShutdownEnabled calls the underlying IsAutoShutdownEnabled.
+func (x *AudioEngine) IsAutoShutdownEnabled() bool {
+	return x.inner.IsAutoShutdownEnabled()
+}
+
+// SetAutoShutdownEnabled calls the underlying SetAutoShutdownEnabled.
+func (x *AudioEngine) SetAutoShutdownEnabled(autoShutdownEnabled bool) {
+	x.inner.SetAutoShutdownEnabled(autoShutdownEnabled)
+}
+
+// AttachedNodes calls the underlying AttachedNodes.
+func (x *AudioEngine) AttachedNodes() *foundation.NSSet[*raw.AVAudioNode] {
+	return x.inner.AttachedNodes()
+}
+
+// ManualRenderingBlock calls the underlying ManualRenderingBlock.
+func (x *AudioEngine) ManualRenderingBlock() objc.Block {
+	return x.inner.ManualRenderingBlock()
+}
+
+// IsInManualRenderingMode calls the underlying IsInManualRenderingMode.
+func (x *AudioEngine) IsInManualRenderingMode() bool {
+	return x.inner.IsInManualRenderingMode()
+}
+
+// ManualRenderingMode calls the underlying ManualRenderingMode.
+func (x *AudioEngine) ManualRenderingMode() raw.AVAudioEngineManualRenderingMode {
+	return x.inner.ManualRenderingMode()
+}
+
+// ManualRenderingFormat calls the underlying ManualRenderingFormat.
+func (x *AudioEngine) ManualRenderingFormat() *AudioFormat {
+	_r := x.inner.ManualRenderingFormat()
+	if _r == nil {
+		return nil
+	}
+	return &AudioFormat{inner: _r}
+}
+
+// ManualRenderingMaximumFrameCount calls the underlying ManualRenderingMaximumFrameCount.
+func (x *AudioEngine) ManualRenderingMaximumFrameCount() uint32 {
+	return x.inner.ManualRenderingMaximumFrameCount()
+}
+
+// ManualRenderingSampleTime calls the underlying ManualRenderingSampleTime.
+func (x *AudioEngine) ManualRenderingSampleTime() int64 {
+	return x.inner.ManualRenderingSampleTime()
+}
+
+// AudioEngineable is the interface implemented by [AudioEngine], for mocking and DI.
+type AudioEngineable interface {
+	Unwrap() *raw.AVAudioEngine
+	WithAutoShutdownEnabled(autoShutdownEnabled bool) *AudioEngine
+	AttachNode(node *raw.AVAudioNode)
+	DetachNode(node *raw.AVAudioNode)
+	ConnectToFromBusToBusFormat(node1 *raw.AVAudioNode, node2 *raw.AVAudioNode, bus1 uint, bus2 uint, format *raw.AVAudioFormat)
+	ConnectToFormat(node1 *raw.AVAudioNode, node2 *raw.AVAudioNode, format *raw.AVAudioFormat)
+	ConnectToConnectionPointsFromBusFormat(sourceNode *raw.AVAudioNode, destNodes *foundation.NSArray[*raw.AVAudioConnectionPoint], sourceBus uint, format *raw.AVAudioFormat)
+	DisconnectNodeInputBus(node *raw.AVAudioNode, bus uint)
+	DisconnectNodeInput(node *raw.AVAudioNode)
+	DisconnectNodeOutputBus(node *raw.AVAudioNode, bus uint)
+	DisconnectNodeOutput(node *raw.AVAudioNode)
+	Prepare()
+	StartAndReturnError() error
+	Pause()
+	Reset()
+	Stop()
+	InputConnectionPointForNodeInputBus(node *raw.AVAudioNode, bus uint) *AudioConnectionPoint
+	OutputConnectionPointsForNodeOutputBus(node *raw.AVAudioNode, bus uint) *foundation.NSArray[*raw.AVAudioConnectionPoint]
+	EnableManualRenderingModeFormatMaximumFrameCountError(mode raw.AVAudioEngineManualRenderingMode, pcmFormat *raw.AVAudioFormat, maximumFrameCount uint32) (bool, error)
+	DisableManualRenderingMode()
+	RenderOfflineToBufferError(numberOfFrames uint32, buffer *raw.AVAudioPCMBuffer) (raw.AVAudioEngineManualRenderingStatus, error)
+	ConnectMIDIToFormatBlock(sourceNode *raw.AVAudioNode, destinationNode *raw.AVAudioNode, format *raw.AVAudioFormat, tapBlock func(int64, uint8, int, unsafe.Pointer) int)
+	ConnectMIDIToFormatEventListBlock(sourceNode *raw.AVAudioNode, destinationNode *raw.AVAudioNode, format *raw.AVAudioFormat, tapBlock func(int64, uint8, unsafe.Pointer) int)
+	ConnectMIDIToNodesFormatBlock(sourceNode *raw.AVAudioNode, destinationNodes *foundation.NSArray[*raw.AVAudioNode], format *raw.AVAudioFormat, tapBlock func(int64, uint8, int, unsafe.Pointer) int)
+	ConnectMIDIToNodesFormatEventListBlock(sourceNode *raw.AVAudioNode, destinationNodes *foundation.NSArray[*raw.AVAudioNode], format *raw.AVAudioFormat, tapBlock func(int64, uint8, unsafe.Pointer) int)
+	DisconnectMIDIFrom(sourceNode *raw.AVAudioNode, destinationNode *raw.AVAudioNode)
+	DisconnectMIDIFromNodes(sourceNode *raw.AVAudioNode, destinationNodes *foundation.NSArray[*raw.AVAudioNode])
+	DisconnectMIDIInput(node *raw.AVAudioNode)
+	DisconnectMIDIOutput(node *raw.AVAudioNode)
+	MusicSequence() unsafe.Pointer
+	SetMusicSequence(musicSequence unsafe.Pointer)
+	OutputNode() *AudioOutputNode
+	InputNode() *AudioInputNode
+	MainMixerNode() *AudioMixerNode
+	IsRunning() bool
+	IsAutoShutdownEnabled() bool
+	SetAutoShutdownEnabled(autoShutdownEnabled bool)
+	AttachedNodes() *foundation.NSSet[*raw.AVAudioNode]
+	ManualRenderingBlock() objc.Block
+	IsInManualRenderingMode() bool
+	ManualRenderingMode() raw.AVAudioEngineManualRenderingMode
+	ManualRenderingFormat() *AudioFormat
+	ManualRenderingMaximumFrameCount() uint32
+	ManualRenderingSampleTime() int64
+}
+
+var _ AudioEngineable = (*AudioEngine)(nil)
 

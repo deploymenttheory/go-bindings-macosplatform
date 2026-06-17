@@ -31,7 +31,33 @@ func (x *BinaryItem) WithValue(value bool) *BinaryItem {
 	return x
 }
 
+// Value calls the underlying Value.
+func (x *BinaryItem) Value() bool {
+	return x.inner.Value()
+}
+
+// SetValue calls the underlying SetValue.
+func (x *BinaryItem) SetValue(value bool) {
+	x.inner.SetValue(value)
+}
+
+// ValueType calls the underlying ValueType.
+func (x *BinaryItem) ValueType() raw.CLSBinaryValueType {
+	return x.inner.ValueType()
+}
+
 func (x *BinaryItem) asActivityItem() *raw.CLSActivityItem { return &x.inner.CLSActivityItem }
 
 func (x *BinaryItem) asObject() *raw.CLSObject { return &x.inner.CLSActivityItem.CLSObject }
+
+// BinaryItemable is the interface implemented by [BinaryItem], for mocking and DI.
+type BinaryItemable interface {
+	Unwrap() *raw.CLSBinaryItem
+	WithValue(value bool) *BinaryItem
+	Value() bool
+	SetValue(value bool)
+	ValueType() raw.CLSBinaryValueType
+}
+
+var _ BinaryItemable = (*BinaryItem)(nil)
 

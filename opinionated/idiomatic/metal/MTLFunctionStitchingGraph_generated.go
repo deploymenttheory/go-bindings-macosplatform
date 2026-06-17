@@ -7,6 +7,7 @@ package metal
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -54,16 +55,75 @@ func (x *FunctionStitchingGraph) WithOutputNode(outputNode *raw.MTLFunctionStitc
 	return x
 }
 
+// FunctionName calls the underlying FunctionName.
+func (x *FunctionStitchingGraph) FunctionName() string {
+	_r := x.inner.FunctionName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetFunctionName calls the underlying SetFunctionName.
+func (x *FunctionStitchingGraph) SetFunctionName(functionName string) {
+	x.inner.SetFunctionName(foundation.NSStringStringWithUTF8String(functionName))
+}
+
 // Nodes returns the collection as a Go slice.
 func (x *FunctionStitchingGraph) Nodes() []*raw.MTLFunctionStitchingFunctionNode {
 	arr := x.inner.Nodes()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MTLFunctionStitchingFunctionNode, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MTLFunctionStitchingFunctionNode {
+		return raw.MTLFunctionStitchingFunctionNodeFromID(purego.Retain(_id))
+	})
 }
+
+// SetNodes calls the underlying SetNodes.
+func (x *FunctionStitchingGraph) SetNodes(nodes *foundation.NSArray[*raw.MTLFunctionStitchingFunctionNode]) {
+	x.inner.SetNodes(nodes)
+}
+
+// OutputNode calls the underlying OutputNode.
+func (x *FunctionStitchingGraph) OutputNode() *FunctionStitchingFunctionNode {
+	_r := x.inner.OutputNode()
+	if _r == nil {
+		return nil
+	}
+	return &FunctionStitchingFunctionNode{inner: _r}
+}
+
+// SetOutputNode calls the underlying SetOutputNode.
+func (x *FunctionStitchingGraph) SetOutputNode(outputNode *raw.MTLFunctionStitchingFunctionNode) {
+	x.inner.SetOutputNode(outputNode)
+}
+
+// Attributes calls the underlying Attributes.
+func (x *FunctionStitchingGraph) Attributes() *foundation.NSArray[raw.MTLFunctionStitchingAttribute] {
+	return x.inner.Attributes()
+}
+
+// SetAttributes calls the underlying SetAttributes.
+func (x *FunctionStitchingGraph) SetAttributes(attributes *foundation.NSArray[raw.MTLFunctionStitchingAttribute]) {
+	x.inner.SetAttributes(attributes)
+}
+
+// FunctionStitchingGraphable is the interface implemented by [FunctionStitchingGraph], for mocking and DI.
+type FunctionStitchingGraphable interface {
+	Unwrap() *raw.MTLFunctionStitchingGraph
+	WithFunctionName(functionName string) *FunctionStitchingGraph
+	WithNodes(items ...*raw.MTLFunctionStitchingFunctionNode) *FunctionStitchingGraph
+	WithOutputNode(outputNode *raw.MTLFunctionStitchingFunctionNode) *FunctionStitchingGraph
+	FunctionName() string
+	SetFunctionName(functionName string)
+	Nodes() []*raw.MTLFunctionStitchingFunctionNode
+	SetNodes(nodes *foundation.NSArray[*raw.MTLFunctionStitchingFunctionNode])
+	OutputNode() *FunctionStitchingFunctionNode
+	SetOutputNode(outputNode *raw.MTLFunctionStitchingFunctionNode)
+	Attributes() *foundation.NSArray[raw.MTLFunctionStitchingAttribute]
+	SetAttributes(attributes *foundation.NSArray[raw.MTLFunctionStitchingAttribute])
+}
+
+var _ FunctionStitchingGraphable = (*FunctionStitchingGraph)(nil)
 

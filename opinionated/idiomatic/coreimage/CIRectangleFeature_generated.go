@@ -5,6 +5,7 @@
 package coreimage
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,5 +24,36 @@ func NewRectangleFeature() *RectangleFeature {
 	return &RectangleFeature{inner: raw.CIRectangleFeatureFromID(_id)}
 }
 
+// TopLeft calls the underlying TopLeft.
+func (x *RectangleFeature) TopLeft() corefoundation.CGPoint {
+	return x.inner.TopLeft()
+}
+
+// TopRight calls the underlying TopRight.
+func (x *RectangleFeature) TopRight() corefoundation.CGPoint {
+	return x.inner.TopRight()
+}
+
+// BottomLeft calls the underlying BottomLeft.
+func (x *RectangleFeature) BottomLeft() corefoundation.CGPoint {
+	return x.inner.BottomLeft()
+}
+
+// BottomRight calls the underlying BottomRight.
+func (x *RectangleFeature) BottomRight() corefoundation.CGPoint {
+	return x.inner.BottomRight()
+}
+
 func (x *RectangleFeature) asFeature() *raw.CIFeature { return &x.inner.CIFeature }
+
+// RectangleFeatureable is the interface implemented by [RectangleFeature], for mocking and DI.
+type RectangleFeatureable interface {
+	Unwrap() *raw.CIRectangleFeature
+	TopLeft() corefoundation.CGPoint
+	TopRight() corefoundation.CGPoint
+	BottomLeft() corefoundation.CGPoint
+	BottomRight() corefoundation.CGPoint
+}
+
+var _ RectangleFeatureable = (*RectangleFeature)(nil)
 

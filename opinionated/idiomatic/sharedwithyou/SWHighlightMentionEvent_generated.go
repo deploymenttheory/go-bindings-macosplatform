@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/sharedwithyou"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/sharedwithyoucore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -32,4 +33,21 @@ func NewHighlightMentionEventWithHighlightMentionedPersonIdentity(highlight *raw
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHighlight:mentionedPersonIdentity:"), highlight.Ptr(), identity.Ptr())
 	return &HighlightMentionEvent{inner: raw.SWHighlightMentionEventFromID(_id)}
 }
+
+// MentionedPersonHandle calls the underlying MentionedPersonHandle.
+func (x *HighlightMentionEvent) MentionedPersonHandle() string {
+	_r := x.inner.MentionedPersonHandle()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// HighlightMentionEventable is the interface implemented by [HighlightMentionEvent], for mocking and DI.
+type HighlightMentionEventable interface {
+	Unwrap() *raw.SWHighlightMentionEvent
+	MentionedPersonHandle() string
+}
+
+var _ HighlightMentionEventable = (*HighlightMentionEvent)(nil)
 

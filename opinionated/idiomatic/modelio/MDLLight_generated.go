@@ -7,7 +7,9 @@ package modelio
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Light wraps [raw.MDLLight] with a fluent Go API.
@@ -36,7 +38,56 @@ func (x *Light) WithColorSpace(colorSpace string) *Light {
 	return x
 }
 
+// IrradianceAtPoint calls the underlying IrradianceAtPoint.
+func (x *Light) IrradianceAtPoint(point unsafe.Pointer) unsafe.Pointer {
+	return x.inner.IrradianceAtPoint(point)
+}
+
+// IrradianceAtPointColorSpace calls the underlying IrradianceAtPointColorSpace.
+func (x *Light) IrradianceAtPointColorSpace(point unsafe.Pointer, colorSpace unsafe.Pointer) unsafe.Pointer {
+	return x.inner.IrradianceAtPointColorSpace(point, colorSpace)
+}
+
+// LightType calls the underlying LightType.
+func (x *Light) LightType() raw.MDLLightType {
+	return x.inner.LightType()
+}
+
+// SetLightType calls the underlying SetLightType.
+func (x *Light) SetLightType(lightType raw.MDLLightType) {
+	x.inner.SetLightType(lightType)
+}
+
+// ColorSpace calls the underlying ColorSpace.
+func (x *Light) ColorSpace() string {
+	_r := x.inner.ColorSpace()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetColorSpace calls the underlying SetColorSpace.
+func (x *Light) SetColorSpace(colorSpace string) {
+	x.inner.SetColorSpace(foundation.NSStringStringWithUTF8String(colorSpace))
+}
+
 func (x *Light) asLight() *raw.MDLLight { return x.inner }
 
 func (x *Light) asObject() *raw.MDLObject { return &x.inner.MDLObject }
+
+// Lightable is the interface implemented by [Light], for mocking and DI.
+type Lightable interface {
+	Unwrap() *raw.MDLLight
+	WithLightType(lightType raw.MDLLightType) *Light
+	WithColorSpace(colorSpace string) *Light
+	IrradianceAtPoint(point unsafe.Pointer) unsafe.Pointer
+	IrradianceAtPointColorSpace(point unsafe.Pointer, colorSpace unsafe.Pointer) unsafe.Pointer
+	LightType() raw.MDLLightType
+	SetLightType(lightType raw.MDLLightType)
+	ColorSpace() string
+	SetColorSpace(colorSpace string)
+}
+
+var _ Lightable = (*Light)(nil)
 

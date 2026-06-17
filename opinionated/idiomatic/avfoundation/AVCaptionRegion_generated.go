@@ -6,6 +6,8 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +25,64 @@ func NewCaptionRegion() *CaptionRegion {
 	return &CaptionRegion{inner: raw.AVCaptionRegionFromID(_id)}
 }
 
+// EncodeWithCoder calls the underlying EncodeWithCoder.
+func (x *CaptionRegion) EncodeWithCoder(encoder *foundation.NSCoder) {
+	x.inner.EncodeWithCoder(encoder)
+}
+
+// IsEqual calls the underlying IsEqual.
+func (x *CaptionRegion) IsEqual(object objc.ID) bool {
+	return x.inner.IsEqual(object)
+}
+
+// Identifier calls the underlying Identifier.
+func (x *CaptionRegion) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Origin calls the underlying Origin.
+func (x *CaptionRegion) Origin() raw.AVCaptionPoint {
+	return x.inner.Origin()
+}
+
+// Size calls the underlying Size.
+func (x *CaptionRegion) Size() raw.AVCaptionSize {
+	return x.inner.Size()
+}
+
+// Scroll calls the underlying Scroll.
+func (x *CaptionRegion) Scroll() raw.AVCaptionRegionScroll {
+	return x.inner.Scroll()
+}
+
+// DisplayAlignment calls the underlying DisplayAlignment.
+func (x *CaptionRegion) DisplayAlignment() raw.AVCaptionRegionDisplayAlignment {
+	return x.inner.DisplayAlignment()
+}
+
+// WritingMode calls the underlying WritingMode.
+func (x *CaptionRegion) WritingMode() raw.AVCaptionRegionWritingMode {
+	return x.inner.WritingMode()
+}
+
 func (x *CaptionRegion) asCaptionRegion() *raw.AVCaptionRegion { return x.inner }
+
+// CaptionRegionable is the interface implemented by [CaptionRegion], for mocking and DI.
+type CaptionRegionable interface {
+	Unwrap() *raw.AVCaptionRegion
+	EncodeWithCoder(encoder *foundation.NSCoder)
+	IsEqual(object objc.ID) bool
+	Identifier() string
+	Origin() raw.AVCaptionPoint
+	Size() raw.AVCaptionSize
+	Scroll() raw.AVCaptionRegionScroll
+	DisplayAlignment() raw.AVCaptionRegionDisplayAlignment
+	WritingMode() raw.AVCaptionRegionWritingMode
+}
+
+var _ CaptionRegionable = (*CaptionRegion)(nil)
 

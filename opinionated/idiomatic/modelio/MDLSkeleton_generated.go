@@ -7,6 +7,7 @@ package modelio
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -26,17 +27,43 @@ func NewSkeletonWithNameJointPaths(name string, jointPaths *foundation.NSArray[*
 }
 
 // JointPaths returns the collection as a Go slice.
-func (x *Skeleton) JointPaths() []*foundation.NSString {
+func (x *Skeleton) JointPaths() []string {
 	arr := x.inner.JointPaths()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// JointBindTransforms calls the underlying JointBindTransforms.
+func (x *Skeleton) JointBindTransforms() *Matrix4x4Array {
+	_r := x.inner.JointBindTransforms()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &Matrix4x4Array{inner: _r}
+}
+
+// JointRestTransforms calls the underlying JointRestTransforms.
+func (x *Skeleton) JointRestTransforms() *Matrix4x4Array {
+	_r := x.inner.JointRestTransforms()
+	if _r == nil {
+		return nil
+	}
+	return &Matrix4x4Array{inner: _r}
 }
 
 func (x *Skeleton) asObject() *raw.MDLObject { return &x.inner.MDLObject }
+
+// Skeletonable is the interface implemented by [Skeleton], for mocking and DI.
+type Skeletonable interface {
+	Unwrap() *raw.MDLSkeleton
+	JointPaths() []string
+	JointBindTransforms() *Matrix4x4Array
+	JointRestTransforms() *Matrix4x4Array
+}
+
+var _ Skeletonable = (*Skeleton)(nil)
 

@@ -23,5 +23,18 @@ func NewGyroData() *GyroData {
 	return &GyroData{inner: raw.CMGyroDataFromID(_id)}
 }
 
+// RotationRate calls the underlying RotationRate.
+func (x *GyroData) RotationRate() raw.CMRotationRate {
+	return x.inner.RotationRate()
+}
+
 func (x *GyroData) asLogItem() *raw.CMLogItem { return &x.inner.CMLogItem }
+
+// GyroDataable is the interface implemented by [GyroData], for mocking and DI.
+type GyroDataable interface {
+	Unwrap() *raw.CMGyroData
+	RotationRate() raw.CMRotationRate
+}
+
+var _ GyroDataable = (*GyroData)(nil)
 

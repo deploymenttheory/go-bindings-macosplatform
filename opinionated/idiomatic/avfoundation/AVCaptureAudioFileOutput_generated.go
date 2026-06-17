@@ -7,6 +7,7 @@ package avfoundation
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -47,20 +48,52 @@ func (x *CaptureAudioFileOutput) WithAudioSettings(audioSettings *foundation.NSD
 	return x
 }
 
+// StartRecordingToOutputFileURLOutputFileTypeRecordingDelegate calls the underlying StartRecordingToOutputFileURLOutputFileTypeRecordingDelegate.
+func (x *CaptureAudioFileOutput) StartRecordingToOutputFileURLOutputFileTypeRecordingDelegate(outputFileURL string, fileType *foundation.NSString, delegate raw.AVCaptureFileOutputRecordingDelegate) {
+	x.inner.StartRecordingToOutputFileURLOutputFileTypeRecordingDelegate(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(outputFileURL)), fileType, delegate)
+}
+
 // Metadata returns the collection as a Go slice.
 func (x *CaptureAudioFileOutput) Metadata() []*raw.AVMetadataItem {
 	arr := x.inner.Metadata()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AVMetadataItem, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVMetadataItem {
+		return raw.AVMetadataItemFromID(purego.Retain(_id))
+	})
+}
+
+// SetMetadata calls the underlying SetMetadata.
+func (x *CaptureAudioFileOutput) SetMetadata(metadata *foundation.NSArray[*raw.AVMetadataItem]) {
+	x.inner.SetMetadata(metadata)
+}
+
+// AudioSettings calls the underlying AudioSettings.
+func (x *CaptureAudioFileOutput) AudioSettings() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.AudioSettings()
+}
+
+// SetAudioSettings calls the underlying SetAudioSettings.
+func (x *CaptureAudioFileOutput) SetAudioSettings(audioSettings *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
+	x.inner.SetAudioSettings(audioSettings)
 }
 
 func (x *CaptureAudioFileOutput) asCaptureFileOutput() *raw.AVCaptureFileOutput { return &x.inner.AVCaptureFileOutput }
 
 func (x *CaptureAudioFileOutput) asCaptureOutput() *raw.AVCaptureOutput { return &x.inner.AVCaptureFileOutput.AVCaptureOutput }
+
+// CaptureAudioFileOutputable is the interface implemented by [CaptureAudioFileOutput], for mocking and DI.
+type CaptureAudioFileOutputable interface {
+	Unwrap() *raw.AVCaptureAudioFileOutput
+	WithMetadata(items ...MetadataItemProvider) *CaptureAudioFileOutput
+	WithAudioSettings(audioSettings *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CaptureAudioFileOutput
+	StartRecordingToOutputFileURLOutputFileTypeRecordingDelegate(outputFileURL string, fileType *foundation.NSString, delegate raw.AVCaptureFileOutputRecordingDelegate)
+	Metadata() []*raw.AVMetadataItem
+	SetMetadata(metadata *foundation.NSArray[*raw.AVMetadataItem])
+	AudioSettings() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	SetAudioSettings(audioSettings *foundation.NSDictionary[*foundation.NSString, objc.ID])
+}
+
+var _ CaptureAudioFileOutputable = (*CaptureAudioFileOutput)(nil)
 

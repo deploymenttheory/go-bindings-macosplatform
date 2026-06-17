@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // UserActivity wraps [raw.NSUserActivity] with a fluent Go API.
@@ -121,5 +122,271 @@ func (x *UserActivity) WithPersistentIdentifier(persistentIdentifier StringProvi
 	return x
 }
 
+// AddUserInfoEntriesFromDictionary calls the underlying AddUserInfoEntriesFromDictionary.
+func (x *UserActivity) AddUserInfoEntriesFromDictionary(otherDictionary *raw.NSDictionary[objc.ID, objc.ID]) {
+	x.inner.AddUserInfoEntriesFromDictionary(otherDictionary)
+}
+
+// BecomeCurrent calls the underlying BecomeCurrent.
+func (x *UserActivity) BecomeCurrent() {
+	x.inner.BecomeCurrent()
+}
+
+// ResignCurrent calls the underlying ResignCurrent.
+func (x *UserActivity) ResignCurrent() {
+	x.inner.ResignCurrent()
+}
+
+// Invalidate calls the underlying Invalidate.
+func (x *UserActivity) Invalidate() {
+	x.inner.Invalidate()
+}
+
+// GetContinuationStreamsWithCompletionHandler calls the underlying GetContinuationStreamsWithCompletionHandler.
+func (x *UserActivity) GetContinuationStreamsWithCompletionHandler(completionHandler func(*raw.NSInputStream, *raw.NSOutputStream, unsafe.Pointer)) {
+	x.inner.GetContinuationStreamsWithCompletionHandler(completionHandler)
+}
+
+// ActivityType calls the underlying ActivityType.
+func (x *UserActivity) ActivityType() *String {
+	_r := x.inner.ActivityType()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// Title calls the underlying Title.
+func (x *UserActivity) Title() *String {
+	_r := x.inner.Title()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SetTitle calls the underlying SetTitle.
+func (x *UserActivity) SetTitle(title string) {
+	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+}
+
+// UserInfo calls the underlying UserInfo.
+func (x *UserActivity) UserInfo() *raw.NSDictionary[objc.ID, objc.ID] {
+	return x.inner.UserInfo()
+}
+
+// SetUserInfo calls the underlying SetUserInfo.
+func (x *UserActivity) SetUserInfo(userInfo *raw.NSDictionary[objc.ID, objc.ID]) {
+	x.inner.SetUserInfo(userInfo)
+}
+
+// RequiredUserInfoKeys calls the underlying RequiredUserInfoKeys.
+func (x *UserActivity) RequiredUserInfoKeys() *raw.NSSet[*raw.NSString] {
+	return x.inner.RequiredUserInfoKeys()
+}
+
+// SetRequiredUserInfoKeys calls the underlying SetRequiredUserInfoKeys.
+func (x *UserActivity) SetRequiredUserInfoKeys(requiredUserInfoKeys *raw.NSSet[*raw.NSString]) {
+	x.inner.SetRequiredUserInfoKeys(requiredUserInfoKeys)
+}
+
+// NeedsSave calls the underlying NeedsSave.
+func (x *UserActivity) NeedsSave() bool {
+	return x.inner.NeedsSave()
+}
+
+// SetNeedsSave calls the underlying SetNeedsSave.
+func (x *UserActivity) SetNeedsSave(needsSave bool) {
+	x.inner.SetNeedsSave(needsSave)
+}
+
+// WebpageURL calls the underlying WebpageURL.
+func (x *UserActivity) WebpageURL() *URL {
+	_r := x.inner.WebpageURL()
+	if _r == nil {
+		return nil
+	}
+	return &URL{inner: _r}
+}
+
+// SetWebpageURL calls the underlying SetWebpageURL.
+func (x *UserActivity) SetWebpageURL(webpageURL string) {
+	x.inner.SetWebpageURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(webpageURL)))
+}
+
+// ReferrerURL calls the underlying ReferrerURL.
+func (x *UserActivity) ReferrerURL() *URL {
+	_r := x.inner.ReferrerURL()
+	if _r == nil {
+		return nil
+	}
+	return &URL{inner: _r}
+}
+
+// SetReferrerURL calls the underlying SetReferrerURL.
+func (x *UserActivity) SetReferrerURL(referrerURL string) {
+	x.inner.SetReferrerURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(referrerURL)))
+}
+
+// ExpirationDate calls the underlying ExpirationDate.
+func (x *UserActivity) ExpirationDate() *Date {
+	_r := x.inner.ExpirationDate()
+	if _r == nil {
+		return nil
+	}
+	return &Date{inner: _r}
+}
+
+// SetExpirationDate calls the underlying SetExpirationDate.
+func (x *UserActivity) SetExpirationDate(expirationDate *raw.NSDate) {
+	x.inner.SetExpirationDate(expirationDate)
+}
+
+// Keywords calls the underlying Keywords.
+func (x *UserActivity) Keywords() *raw.NSSet[*raw.NSString] {
+	return x.inner.Keywords()
+}
+
+// SetKeywords calls the underlying SetKeywords.
+func (x *UserActivity) SetKeywords(keywords *raw.NSSet[*raw.NSString]) {
+	x.inner.SetKeywords(keywords)
+}
+
+// SupportsContinuationStreams calls the underlying SupportsContinuationStreams.
+func (x *UserActivity) SupportsContinuationStreams() bool {
+	return x.inner.SupportsContinuationStreams()
+}
+
+// SetSupportsContinuationStreams calls the underlying SetSupportsContinuationStreams.
+func (x *UserActivity) SetSupportsContinuationStreams(supportsContinuationStreams bool) {
+	x.inner.SetSupportsContinuationStreams(supportsContinuationStreams)
+}
+
+// Delegate calls the underlying Delegate.
+func (x *UserActivity) Delegate() raw.NSUserActivityDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *UserActivity) SetDelegate(delegate raw.NSUserActivityDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// TargetContentIdentifier calls the underlying TargetContentIdentifier.
+func (x *UserActivity) TargetContentIdentifier() *String {
+	_r := x.inner.TargetContentIdentifier()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SetTargetContentIdentifier calls the underlying SetTargetContentIdentifier.
+func (x *UserActivity) SetTargetContentIdentifier(targetContentIdentifier string) {
+	x.inner.SetTargetContentIdentifier(foundation.NSStringStringWithUTF8String(targetContentIdentifier))
+}
+
+// IsEligibleForHandoff calls the underlying IsEligibleForHandoff.
+func (x *UserActivity) IsEligibleForHandoff() bool {
+	return x.inner.IsEligibleForHandoff()
+}
+
+// SetEligibleForHandoff calls the underlying SetEligibleForHandoff.
+func (x *UserActivity) SetEligibleForHandoff(eligibleForHandoff bool) {
+	x.inner.SetEligibleForHandoff(eligibleForHandoff)
+}
+
+// IsEligibleForSearch calls the underlying IsEligibleForSearch.
+func (x *UserActivity) IsEligibleForSearch() bool {
+	return x.inner.IsEligibleForSearch()
+}
+
+// SetEligibleForSearch calls the underlying SetEligibleForSearch.
+func (x *UserActivity) SetEligibleForSearch(eligibleForSearch bool) {
+	x.inner.SetEligibleForSearch(eligibleForSearch)
+}
+
+// IsEligibleForPublicIndexing calls the underlying IsEligibleForPublicIndexing.
+func (x *UserActivity) IsEligibleForPublicIndexing() bool {
+	return x.inner.IsEligibleForPublicIndexing()
+}
+
+// SetEligibleForPublicIndexing calls the underlying SetEligibleForPublicIndexing.
+func (x *UserActivity) SetEligibleForPublicIndexing(eligibleForPublicIndexing bool) {
+	x.inner.SetEligibleForPublicIndexing(eligibleForPublicIndexing)
+}
+
+// PersistentIdentifier calls the underlying PersistentIdentifier.
+func (x *UserActivity) PersistentIdentifier() *String {
+	_r := x.inner.PersistentIdentifier()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SetPersistentIdentifier calls the underlying SetPersistentIdentifier.
+func (x *UserActivity) SetPersistentIdentifier(persistentIdentifier *raw.NSString) {
+	x.inner.SetPersistentIdentifier(persistentIdentifier)
+}
+
 func (x *UserActivity) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// UserActivityable is the interface implemented by [UserActivity], for mocking and DI.
+type UserActivityable interface {
+	Unwrap() *raw.NSUserActivity
+	WithTitle(title string) *UserActivity
+	WithUserInfo(userInfo *raw.NSDictionary[objc.ID, objc.ID]) *UserActivity
+	WithRequiredUserInfoKeys(requiredUserInfoKeys *raw.NSSet[*raw.NSString]) *UserActivity
+	WithNeedsSave(needsSave bool) *UserActivity
+	WithWebpageURL(webpageURL string) *UserActivity
+	WithReferrerURL(referrerURL string) *UserActivity
+	WithExpirationDate(expirationDate DateProvider) *UserActivity
+	WithKeywords(keywords *raw.NSSet[*raw.NSString]) *UserActivity
+	WithSupportsContinuationStreams(supportsContinuationStreams bool) *UserActivity
+	WithDelegate(delegate raw.NSUserActivityDelegate) *UserActivity
+	WithTargetContentIdentifier(targetContentIdentifier string) *UserActivity
+	WithEligibleForHandoff(eligibleForHandoff bool) *UserActivity
+	WithEligibleForSearch(eligibleForSearch bool) *UserActivity
+	WithEligibleForPublicIndexing(eligibleForPublicIndexing bool) *UserActivity
+	WithPersistentIdentifier(persistentIdentifier StringProvider) *UserActivity
+	AddUserInfoEntriesFromDictionary(otherDictionary *raw.NSDictionary[objc.ID, objc.ID])
+	BecomeCurrent()
+	ResignCurrent()
+	Invalidate()
+	GetContinuationStreamsWithCompletionHandler(completionHandler func(*raw.NSInputStream, *raw.NSOutputStream, unsafe.Pointer))
+	ActivityType() *String
+	Title() *String
+	SetTitle(title string)
+	UserInfo() *raw.NSDictionary[objc.ID, objc.ID]
+	SetUserInfo(userInfo *raw.NSDictionary[objc.ID, objc.ID])
+	RequiredUserInfoKeys() *raw.NSSet[*raw.NSString]
+	SetRequiredUserInfoKeys(requiredUserInfoKeys *raw.NSSet[*raw.NSString])
+	NeedsSave() bool
+	SetNeedsSave(needsSave bool)
+	WebpageURL() *URL
+	SetWebpageURL(webpageURL string)
+	ReferrerURL() *URL
+	SetReferrerURL(referrerURL string)
+	ExpirationDate() *Date
+	SetExpirationDate(expirationDate *raw.NSDate)
+	Keywords() *raw.NSSet[*raw.NSString]
+	SetKeywords(keywords *raw.NSSet[*raw.NSString])
+	SupportsContinuationStreams() bool
+	SetSupportsContinuationStreams(supportsContinuationStreams bool)
+	Delegate() raw.NSUserActivityDelegate
+	SetDelegate(delegate raw.NSUserActivityDelegate)
+	TargetContentIdentifier() *String
+	SetTargetContentIdentifier(targetContentIdentifier string)
+	IsEligibleForHandoff() bool
+	SetEligibleForHandoff(eligibleForHandoff bool)
+	IsEligibleForSearch() bool
+	SetEligibleForSearch(eligibleForSearch bool)
+	IsEligibleForPublicIndexing() bool
+	SetEligibleForPublicIndexing(eligibleForPublicIndexing bool)
+	PersistentIdentifier() *String
+	SetPersistentIdentifier(persistentIdentifier *raw.NSString)
+}
+
+var _ UserActivityable = (*UserActivity)(nil)
 

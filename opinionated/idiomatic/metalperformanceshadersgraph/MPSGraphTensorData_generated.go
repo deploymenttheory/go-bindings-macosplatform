@@ -91,5 +91,40 @@ func NewGraphTensorDataWithMTLTensor(tensor metal.MTLTensor) *GraphTensorData {
 	return &GraphTensorData{inner: raw.MPSGraphTensorDataFromID(_id)}
 }
 
+// Mpsndarray calls the underlying Mpsndarray.
+func (x *GraphTensorData) Mpsndarray() *mpscore.MPSNDArray {
+	return x.inner.Mpsndarray()
+}
+
+// Shape calls the underlying Shape.
+func (x *GraphTensorData) Shape() unsafe.Pointer {
+	return x.inner.Shape()
+}
+
+// DataType calls the underlying DataType.
+func (x *GraphTensorData) DataType() mpscore.MPSDataType {
+	return x.inner.DataType()
+}
+
+// Device calls the underlying Device.
+func (x *GraphTensorData) Device() *GraphDevice {
+	_r := x.inner.Device()
+	if _r == nil {
+		return nil
+	}
+	return &GraphDevice{inner: _r}
+}
+
 func (x *GraphTensorData) asGraphObject() *raw.MPSGraphObject { return &x.inner.MPSGraphObject }
+
+// GraphTensorDataable is the interface implemented by [GraphTensorData], for mocking and DI.
+type GraphTensorDataable interface {
+	Unwrap() *raw.MPSGraphTensorData
+	Mpsndarray() *mpscore.MPSNDArray
+	Shape() unsafe.Pointer
+	DataType() mpscore.MPSDataType
+	Device() *GraphDevice
+}
+
+var _ GraphTensorDataable = (*GraphTensorData)(nil)
 

@@ -6,6 +6,7 @@ package calendarstore
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/calendarstore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,95 @@ func NewCalCalendarStore() *CalCalendarStore {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CalCalendarStore")), objc.RegisterName("new"))
 	return &CalCalendarStore{inner: raw.CalCalendarStoreFromID(_id)}
 }
+
+// Calendars calls the underlying Calendars.
+func (x *CalCalendarStore) Calendars() *foundation.NSArray[objc.ID] {
+	return x.inner.Calendars()
+}
+
+// CalendarWithUID calls the underlying CalendarWithUID.
+func (x *CalCalendarStore) CalendarWithUID(uID string) *CalCalendar {
+	_r := x.inner.CalendarWithUID(foundation.NSStringStringWithUTF8String(uID))
+	if _r == nil {
+		return nil
+	}
+	return &CalCalendar{inner: _r}
+}
+
+// SaveCalendarError calls the underlying SaveCalendarError.
+func (x *CalCalendarStore) SaveCalendarError(calendar *raw.CalCalendar) (bool, error) {
+	return x.inner.SaveCalendarError(calendar)
+}
+
+// RemoveCalendarError calls the underlying RemoveCalendarError.
+func (x *CalCalendarStore) RemoveCalendarError(calendar *raw.CalCalendar) (bool, error) {
+	return x.inner.RemoveCalendarError(calendar)
+}
+
+// EventsWithPredicate calls the underlying EventsWithPredicate.
+func (x *CalCalendarStore) EventsWithPredicate(predicate *foundation.NSPredicate) *foundation.NSArray[objc.ID] {
+	return x.inner.EventsWithPredicate(predicate)
+}
+
+// EventWithUIDOccurrence calls the underlying EventWithUIDOccurrence.
+func (x *CalCalendarStore) EventWithUIDOccurrence(uid string, date *foundation.NSDate) *CalEvent {
+	_r := x.inner.EventWithUIDOccurrence(foundation.NSStringStringWithUTF8String(uid), date)
+	if _r == nil {
+		return nil
+	}
+	return &CalEvent{inner: _r}
+}
+
+// TasksWithPredicate calls the underlying TasksWithPredicate.
+func (x *CalCalendarStore) TasksWithPredicate(predicate *foundation.NSPredicate) *foundation.NSArray[objc.ID] {
+	return x.inner.TasksWithPredicate(predicate)
+}
+
+// TaskWithUID calls the underlying TaskWithUID.
+func (x *CalCalendarStore) TaskWithUID(uid string) *CalTask {
+	_r := x.inner.TaskWithUID(foundation.NSStringStringWithUTF8String(uid))
+	if _r == nil {
+		return nil
+	}
+	return &CalTask{inner: _r}
+}
+
+// SaveEventSpanError calls the underlying SaveEventSpanError.
+func (x *CalCalendarStore) SaveEventSpanError(event *raw.CalEvent, span raw.CalSpan) (bool, error) {
+	return x.inner.SaveEventSpanError(event, span)
+}
+
+// RemoveEventSpanError calls the underlying RemoveEventSpanError.
+func (x *CalCalendarStore) RemoveEventSpanError(event *raw.CalEvent, span raw.CalSpan) (bool, error) {
+	return x.inner.RemoveEventSpanError(event, span)
+}
+
+// SaveTaskError calls the underlying SaveTaskError.
+func (x *CalCalendarStore) SaveTaskError(task *raw.CalTask) (bool, error) {
+	return x.inner.SaveTaskError(task)
+}
+
+// RemoveTaskError calls the underlying RemoveTaskError.
+func (x *CalCalendarStore) RemoveTaskError(task *raw.CalTask) (bool, error) {
+	return x.inner.RemoveTaskError(task)
+}
+
+// CalCalendarStoreable is the interface implemented by [CalCalendarStore], for mocking and DI.
+type CalCalendarStoreable interface {
+	Unwrap() *raw.CalCalendarStore
+	Calendars() *foundation.NSArray[objc.ID]
+	CalendarWithUID(uID string) *CalCalendar
+	SaveCalendarError(calendar *raw.CalCalendar) (bool, error)
+	RemoveCalendarError(calendar *raw.CalCalendar) (bool, error)
+	EventsWithPredicate(predicate *foundation.NSPredicate) *foundation.NSArray[objc.ID]
+	EventWithUIDOccurrence(uid string, date *foundation.NSDate) *CalEvent
+	TasksWithPredicate(predicate *foundation.NSPredicate) *foundation.NSArray[objc.ID]
+	TaskWithUID(uid string) *CalTask
+	SaveEventSpanError(event *raw.CalEvent, span raw.CalSpan) (bool, error)
+	RemoveEventSpanError(event *raw.CalEvent, span raw.CalSpan) (bool, error)
+	SaveTaskError(task *raw.CalTask) (bool, error)
+	RemoveTaskError(task *raw.CalTask) (bool, error)
+}
+
+var _ CalCalendarStoreable = (*CalCalendarStore)(nil)
 

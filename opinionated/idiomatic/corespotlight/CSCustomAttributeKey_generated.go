@@ -7,6 +7,7 @@ package corespotlight
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corespotlight"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -31,4 +32,45 @@ func NewCustomAttributeKeyWithKeyNameSearchableSearchableByDefaultUniqueMultiVal
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithKeyName:searchable:searchableByDefault:unique:multiValued:"), foundation.NSStringStringWithUTF8String(keyName).Ptr(), searchable, searchableByDefault, unique, multiValued)
 	return &CustomAttributeKey{inner: raw.CSCustomAttributeKeyFromID(_id)}
 }
+
+// KeyName calls the underlying KeyName.
+func (x *CustomAttributeKey) KeyName() string {
+	_r := x.inner.KeyName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// IsSearchable calls the underlying IsSearchable.
+func (x *CustomAttributeKey) IsSearchable() bool {
+	return x.inner.IsSearchable()
+}
+
+// IsSearchableByDefault calls the underlying IsSearchableByDefault.
+func (x *CustomAttributeKey) IsSearchableByDefault() bool {
+	return x.inner.IsSearchableByDefault()
+}
+
+// IsUnique calls the underlying IsUnique.
+func (x *CustomAttributeKey) IsUnique() bool {
+	return x.inner.IsUnique()
+}
+
+// IsMultiValued calls the underlying IsMultiValued.
+func (x *CustomAttributeKey) IsMultiValued() bool {
+	return x.inner.IsMultiValued()
+}
+
+// CustomAttributeKeyable is the interface implemented by [CustomAttributeKey], for mocking and DI.
+type CustomAttributeKeyable interface {
+	Unwrap() *raw.CSCustomAttributeKey
+	KeyName() string
+	IsSearchable() bool
+	IsSearchableByDefault() bool
+	IsUnique() bool
+	IsMultiValued() bool
+}
+
+var _ CustomAttributeKeyable = (*CustomAttributeKey)(nil)
 

@@ -23,5 +23,18 @@ func NewCentral() *Central {
 	return &Central{inner: raw.CBCentralFromID(_id)}
 }
 
+// MaximumUpdateValueLength calls the underlying MaximumUpdateValueLength.
+func (x *Central) MaximumUpdateValueLength() uint {
+	return x.inner.MaximumUpdateValueLength()
+}
+
 func (x *Central) asPeer() *raw.CBPeer { return &x.inner.CBPeer }
+
+// Centralable is the interface implemented by [Central], for mocking and DI.
+type Centralable interface {
+	Unwrap() *raw.CBCentral
+	MaximumUpdateValueLength() uint
+}
+
+var _ Centralable = (*Central)(nil)
 

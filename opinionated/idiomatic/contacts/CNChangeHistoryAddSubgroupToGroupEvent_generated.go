@@ -23,5 +23,32 @@ func NewChangeHistoryAddSubgroupToGroupEvent() *ChangeHistoryAddSubgroupToGroupE
 	return &ChangeHistoryAddSubgroupToGroupEvent{inner: raw.CNChangeHistoryAddSubgroupToGroupEventFromID(_id)}
 }
 
+// Subgroup calls the underlying Subgroup.
+func (x *ChangeHistoryAddSubgroupToGroupEvent) Subgroup() *Group {
+	_r := x.inner.Subgroup()
+	if _r == nil {
+		return nil
+	}
+	return &Group{inner: _r}
+}
+
+// Group calls the underlying Group.
+func (x *ChangeHistoryAddSubgroupToGroupEvent) Group() *Group {
+	_r := x.inner.Group()
+	if _r == nil {
+		return nil
+	}
+	return &Group{inner: _r}
+}
+
 func (x *ChangeHistoryAddSubgroupToGroupEvent) asChangeHistoryEvent() *raw.CNChangeHistoryEvent { return &x.inner.CNChangeHistoryEvent }
+
+// ChangeHistoryAddSubgroupToGroupEventable is the interface implemented by [ChangeHistoryAddSubgroupToGroupEvent], for mocking and DI.
+type ChangeHistoryAddSubgroupToGroupEventable interface {
+	Unwrap() *raw.CNChangeHistoryAddSubgroupToGroupEvent
+	Subgroup() *Group
+	Group() *Group
+}
+
+var _ ChangeHistoryAddSubgroupToGroupEventable = (*ChangeHistoryAddSubgroupToGroupEvent)(nil)
 

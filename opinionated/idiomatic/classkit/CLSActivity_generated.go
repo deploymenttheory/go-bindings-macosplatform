@@ -6,6 +6,7 @@ package classkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/classkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -35,18 +36,96 @@ func (x *Activity) WithPrimaryActivityItem(primaryActivityItem ActivityItemProvi
 	return x
 }
 
+// AddProgressRangeFromStartToEnd calls the underlying AddProgressRangeFromStartToEnd.
+func (x *Activity) AddProgressRangeFromStartToEnd(start float64, end float64) {
+	x.inner.AddProgressRangeFromStartToEnd(start, end)
+}
+
+// AddAdditionalActivityItem calls the underlying AddAdditionalActivityItem.
+func (x *Activity) AddAdditionalActivityItem(activityItem *raw.CLSActivityItem) {
+	x.inner.AddAdditionalActivityItem(activityItem)
+}
+
+// Progress calls the underlying Progress.
+func (x *Activity) Progress() float64 {
+	return x.inner.Progress()
+}
+
+// SetProgress calls the underlying SetProgress.
+func (x *Activity) SetProgress(progress float64) {
+	x.inner.SetProgress(progress)
+}
+
+// Duration calls the underlying Duration.
+func (x *Activity) Duration() float64 {
+	return x.inner.Duration()
+}
+
+// PrimaryActivityItem calls the underlying PrimaryActivityItem.
+func (x *Activity) PrimaryActivityItem() *ActivityItem {
+	_r := x.inner.PrimaryActivityItem()
+	if _r == nil {
+		return nil
+	}
+	return &ActivityItem{inner: _r}
+}
+
+// SetPrimaryActivityItem calls the underlying SetPrimaryActivityItem.
+func (x *Activity) SetPrimaryActivityItem(primaryActivityItem *raw.CLSActivityItem) {
+	x.inner.SetPrimaryActivityItem(primaryActivityItem)
+}
+
 // AdditionalActivityItems returns the collection as a Go slice.
 func (x *Activity) AdditionalActivityItems() []*raw.CLSActivityItem {
 	arr := x.inner.AdditionalActivityItems()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.CLSActivityItem, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CLSActivityItem {
+		return raw.CLSActivityItemFromID(purego.Retain(_id))
+	})
+}
+
+// Start calls the underlying Start.
+func (x *Activity) Start() {
+	x.inner.Start()
+}
+
+// Stop calls the underlying Stop.
+func (x *Activity) Stop() {
+	x.inner.Stop()
+}
+
+// RemoveAllActivityItems calls the underlying RemoveAllActivityItems.
+func (x *Activity) RemoveAllActivityItems() {
+	x.inner.RemoveAllActivityItems()
+}
+
+// IsStarted calls the underlying IsStarted.
+func (x *Activity) IsStarted() bool {
+	return x.inner.IsStarted()
 }
 
 func (x *Activity) asObject() *raw.CLSObject { return &x.inner.CLSObject }
+
+// Activityable is the interface implemented by [Activity], for mocking and DI.
+type Activityable interface {
+	Unwrap() *raw.CLSActivity
+	WithProgress(progress float64) *Activity
+	WithPrimaryActivityItem(primaryActivityItem ActivityItemProvider) *Activity
+	AddProgressRangeFromStartToEnd(start float64, end float64)
+	AddAdditionalActivityItem(activityItem *raw.CLSActivityItem)
+	Progress() float64
+	SetProgress(progress float64)
+	Duration() float64
+	PrimaryActivityItem() *ActivityItem
+	SetPrimaryActivityItem(primaryActivityItem *raw.CLSActivityItem)
+	AdditionalActivityItems() []*raw.CLSActivityItem
+	Start()
+	Stop()
+	RemoveAllActivityItems()
+	IsStarted() bool
+}
+
+var _ Activityable = (*Activity)(nil)
 

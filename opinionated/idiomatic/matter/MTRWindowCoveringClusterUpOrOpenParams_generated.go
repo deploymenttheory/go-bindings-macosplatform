@@ -36,3 +36,36 @@ func (x *MTRWindowCoveringClusterUpOrOpenParams) WithServerSideProcessingTimeout
 	return x
 }
 
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRWindowCoveringClusterUpOrOpenParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRWindowCoveringClusterUpOrOpenParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRWindowCoveringClusterUpOrOpenParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRWindowCoveringClusterUpOrOpenParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRWindowCoveringClusterUpOrOpenParamsable is the interface implemented by [MTRWindowCoveringClusterUpOrOpenParams], for mocking and DI.
+type MTRWindowCoveringClusterUpOrOpenParamsable interface {
+	Unwrap() *raw.MTRWindowCoveringClusterUpOrOpenParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRWindowCoveringClusterUpOrOpenParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRWindowCoveringClusterUpOrOpenParams
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRWindowCoveringClusterUpOrOpenParamsable = (*MTRWindowCoveringClusterUpOrOpenParams)(nil)
+

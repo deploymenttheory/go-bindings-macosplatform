@@ -23,3 +23,10 @@ func NewAnimationEvent() *AnimationEvent {
 	return &AnimationEvent{inner: raw.SCNAnimationEventFromID(_id)}
 }
 
+// AnimationEventable is the interface implemented by [AnimationEvent], for mocking and DI.
+type AnimationEventable interface {
+	Unwrap() *raw.SCNAnimationEvent
+}
+
+var _ AnimationEventable = (*AnimationEvent)(nil)
+

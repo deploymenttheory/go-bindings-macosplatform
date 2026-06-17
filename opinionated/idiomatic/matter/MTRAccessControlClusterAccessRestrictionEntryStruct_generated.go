@@ -42,3 +42,61 @@ func (x *MTRAccessControlClusterAccessRestrictionEntryStruct) WithFabricIndex(fa
 	return x
 }
 
+// Endpoint calls the underlying Endpoint.
+func (x *MTRAccessControlClusterAccessRestrictionEntryStruct) Endpoint() *foundation.NSNumber {
+	return x.inner.Endpoint()
+}
+
+// SetEndpoint calls the underlying SetEndpoint.
+func (x *MTRAccessControlClusterAccessRestrictionEntryStruct) SetEndpoint(endpoint *foundation.NSNumber) {
+	x.inner.SetEndpoint(endpoint)
+}
+
+// Cluster calls the underlying Cluster.
+func (x *MTRAccessControlClusterAccessRestrictionEntryStruct) Cluster() *foundation.NSNumber {
+	return x.inner.Cluster()
+}
+
+// SetCluster calls the underlying SetCluster.
+func (x *MTRAccessControlClusterAccessRestrictionEntryStruct) SetCluster(cluster *foundation.NSNumber) {
+	x.inner.SetCluster(cluster)
+}
+
+// Restrictions calls the underlying Restrictions.
+func (x *MTRAccessControlClusterAccessRestrictionEntryStruct) Restrictions() *foundation.NSArray[objc.ID] {
+	return x.inner.Restrictions()
+}
+
+// SetRestrictions calls the underlying SetRestrictions.
+func (x *MTRAccessControlClusterAccessRestrictionEntryStruct) SetRestrictions(restrictions *foundation.NSArray[objc.ID]) {
+	x.inner.SetRestrictions(restrictions)
+}
+
+// FabricIndex calls the underlying FabricIndex.
+func (x *MTRAccessControlClusterAccessRestrictionEntryStruct) FabricIndex() *foundation.NSNumber {
+	return x.inner.FabricIndex()
+}
+
+// SetFabricIndex calls the underlying SetFabricIndex.
+func (x *MTRAccessControlClusterAccessRestrictionEntryStruct) SetFabricIndex(fabricIndex *foundation.NSNumber) {
+	x.inner.SetFabricIndex(fabricIndex)
+}
+
+// MTRAccessControlClusterAccessRestrictionEntryStructable is the interface implemented by [MTRAccessControlClusterAccessRestrictionEntryStruct], for mocking and DI.
+type MTRAccessControlClusterAccessRestrictionEntryStructable interface {
+	Unwrap() *raw.MTRAccessControlClusterAccessRestrictionEntryStruct
+	WithEndpoint(endpoint *foundation.NSNumber) *MTRAccessControlClusterAccessRestrictionEntryStruct
+	WithCluster(cluster *foundation.NSNumber) *MTRAccessControlClusterAccessRestrictionEntryStruct
+	WithFabricIndex(fabricIndex *foundation.NSNumber) *MTRAccessControlClusterAccessRestrictionEntryStruct
+	Endpoint() *foundation.NSNumber
+	SetEndpoint(endpoint *foundation.NSNumber)
+	Cluster() *foundation.NSNumber
+	SetCluster(cluster *foundation.NSNumber)
+	Restrictions() *foundation.NSArray[objc.ID]
+	SetRestrictions(restrictions *foundation.NSArray[objc.ID])
+	FabricIndex() *foundation.NSNumber
+	SetFabricIndex(fabricIndex *foundation.NSNumber)
+}
+
+var _ MTRAccessControlClusterAccessRestrictionEntryStructable = (*MTRAccessControlClusterAccessRestrictionEntryStruct)(nil)
+

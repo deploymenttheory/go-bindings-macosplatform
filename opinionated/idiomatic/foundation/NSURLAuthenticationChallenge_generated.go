@@ -32,5 +32,60 @@ func NewURLAuthenticationChallengeWithAuthenticationChallengeSender(challenge *r
 	return &URLAuthenticationChallenge{inner: raw.NSURLAuthenticationChallengeFromID(_id)}
 }
 
+// ProtectionSpace calls the underlying ProtectionSpace.
+func (x *URLAuthenticationChallenge) ProtectionSpace() *URLProtectionSpace {
+	_r := x.inner.ProtectionSpace()
+	if _r == nil {
+		return nil
+	}
+	return &URLProtectionSpace{inner: _r}
+}
+
+// ProposedCredential calls the underlying ProposedCredential.
+func (x *URLAuthenticationChallenge) ProposedCredential() *URLCredential {
+	_r := x.inner.ProposedCredential()
+	if _r == nil {
+		return nil
+	}
+	return &URLCredential{inner: _r}
+}
+
+// PreviousFailureCount calls the underlying PreviousFailureCount.
+func (x *URLAuthenticationChallenge) PreviousFailureCount() int {
+	return x.inner.PreviousFailureCount()
+}
+
+// FailureResponse calls the underlying FailureResponse.
+func (x *URLAuthenticationChallenge) FailureResponse() *URLResponse {
+	_r := x.inner.FailureResponse()
+	if _r == nil {
+		return nil
+	}
+	return &URLResponse{inner: _r}
+}
+
+// Error calls the underlying Error.
+func (x *URLAuthenticationChallenge) Error() unsafe.Pointer {
+	return x.inner.Error()
+}
+
+// Sender calls the underlying Sender.
+func (x *URLAuthenticationChallenge) Sender() raw.NSURLAuthenticationChallengeSender {
+	return x.inner.Sender()
+}
+
 func (x *URLAuthenticationChallenge) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// URLAuthenticationChallengeable is the interface implemented by [URLAuthenticationChallenge], for mocking and DI.
+type URLAuthenticationChallengeable interface {
+	Unwrap() *raw.NSURLAuthenticationChallenge
+	ProtectionSpace() *URLProtectionSpace
+	ProposedCredential() *URLCredential
+	PreviousFailureCount() int
+	FailureResponse() *URLResponse
+	Error() unsafe.Pointer
+	Sender() raw.NSURLAuthenticationChallengeSender
+}
+
+var _ URLAuthenticationChallengeable = (*URLAuthenticationChallenge)(nil)
 

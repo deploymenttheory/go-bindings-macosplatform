@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
@@ -41,7 +42,87 @@ func (x *PersonNameComponentsFormatter) WithLocale(locale *raw.NSLocale) *Person
 	return x
 }
 
+// StringFromPersonNameComponents calls the underlying StringFromPersonNameComponents.
+func (x *PersonNameComponentsFormatter) StringFromPersonNameComponents(components *raw.NSPersonNameComponents) *String {
+	_r := x.inner.StringFromPersonNameComponents(components)
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// AnnotatedStringFromPersonNameComponents calls the underlying AnnotatedStringFromPersonNameComponents.
+func (x *PersonNameComponentsFormatter) AnnotatedStringFromPersonNameComponents(components *raw.NSPersonNameComponents) *AttributedString {
+	_r := x.inner.AnnotatedStringFromPersonNameComponents(components)
+	if _r == nil {
+		return nil
+	}
+	return &AttributedString{inner: _r}
+}
+
+// PersonNameComponentsFromString calls the underlying PersonNameComponentsFromString.
+func (x *PersonNameComponentsFormatter) PersonNameComponentsFromString(string_ string) *PersonNameComponents {
+	_r := x.inner.PersonNameComponentsFromString(foundation.NSStringStringWithUTF8String(string_))
+	if _r == nil {
+		return nil
+	}
+	return &PersonNameComponents{inner: _r}
+}
+
+// Style calls the underlying Style.
+func (x *PersonNameComponentsFormatter) Style() raw.NSPersonNameComponentsFormatterStyle {
+	return x.inner.Style()
+}
+
+// SetStyle calls the underlying SetStyle.
+func (x *PersonNameComponentsFormatter) SetStyle(style raw.NSPersonNameComponentsFormatterStyle) {
+	x.inner.SetStyle(style)
+}
+
+// IsPhonetic calls the underlying IsPhonetic.
+func (x *PersonNameComponentsFormatter) IsPhonetic() bool {
+	return x.inner.IsPhonetic()
+}
+
+// SetPhonetic calls the underlying SetPhonetic.
+func (x *PersonNameComponentsFormatter) SetPhonetic(phonetic bool) {
+	x.inner.SetPhonetic(phonetic)
+}
+
+// Locale calls the underlying Locale.
+func (x *PersonNameComponentsFormatter) Locale() *Locale {
+	_r := x.inner.Locale()
+	if _r == nil {
+		return nil
+	}
+	return &Locale{inner: _r}
+}
+
+// SetLocale calls the underlying SetLocale.
+func (x *PersonNameComponentsFormatter) SetLocale(locale *raw.NSLocale) {
+	x.inner.SetLocale(locale)
+}
+
 func (x *PersonNameComponentsFormatter) asFormatter() *raw.NSFormatter { return &x.inner.NSFormatter }
 
 func (x *PersonNameComponentsFormatter) asObject() *raw.NSObject { return &x.inner.NSFormatter.NSObject }
+
+// PersonNameComponentsFormatterable is the interface implemented by [PersonNameComponentsFormatter], for mocking and DI.
+type PersonNameComponentsFormatterable interface {
+	Unwrap() *raw.NSPersonNameComponentsFormatter
+	WithStyle(style raw.NSPersonNameComponentsFormatterStyle) *PersonNameComponentsFormatter
+	WithPhonetic(phonetic bool) *PersonNameComponentsFormatter
+	WithLocale(locale *raw.NSLocale) *PersonNameComponentsFormatter
+	StringFromPersonNameComponents(components *raw.NSPersonNameComponents) *String
+	AnnotatedStringFromPersonNameComponents(components *raw.NSPersonNameComponents) *AttributedString
+	PersonNameComponentsFromString(string_ string) *PersonNameComponents
+	Style() raw.NSPersonNameComponentsFormatterStyle
+	SetStyle(style raw.NSPersonNameComponentsFormatterStyle)
+	IsPhonetic() bool
+	SetPhonetic(phonetic bool)
+	Locale() *Locale
+	SetLocale(locale *raw.NSLocale)
+}
+
+var _ PersonNameComponentsFormatterable = (*PersonNameComponentsFormatter)(nil)
 

@@ -8,6 +8,7 @@ import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -60,4 +61,105 @@ func (x *CollectionViewLayoutAttributes) WithIndexPath(indexPath *foundation.NSI
 	x.inner.SetIndexPath(indexPath)
 	return x
 }
+
+// Frame calls the underlying Frame.
+func (x *CollectionViewLayoutAttributes) Frame() corefoundation.CGRect {
+	return x.inner.Frame()
+}
+
+// SetFrame calls the underlying SetFrame.
+func (x *CollectionViewLayoutAttributes) SetFrame(frame corefoundation.CGRect) {
+	x.inner.SetFrame(frame)
+}
+
+// Size calls the underlying Size.
+func (x *CollectionViewLayoutAttributes) Size() corefoundation.CGSize {
+	return x.inner.Size()
+}
+
+// SetSize calls the underlying SetSize.
+func (x *CollectionViewLayoutAttributes) SetSize(size corefoundation.CGSize) {
+	x.inner.SetSize(size)
+}
+
+// Alpha calls the underlying Alpha.
+func (x *CollectionViewLayoutAttributes) Alpha() float64 {
+	return x.inner.Alpha()
+}
+
+// SetAlpha calls the underlying SetAlpha.
+func (x *CollectionViewLayoutAttributes) SetAlpha(alpha float64) {
+	x.inner.SetAlpha(alpha)
+}
+
+// ZIndex calls the underlying ZIndex.
+func (x *CollectionViewLayoutAttributes) ZIndex() int {
+	return x.inner.ZIndex()
+}
+
+// SetZIndex calls the underlying SetZIndex.
+func (x *CollectionViewLayoutAttributes) SetZIndex(zIndex int) {
+	x.inner.SetZIndex(zIndex)
+}
+
+// IsHidden calls the underlying IsHidden.
+func (x *CollectionViewLayoutAttributes) IsHidden() bool {
+	return x.inner.IsHidden()
+}
+
+// SetHidden calls the underlying SetHidden.
+func (x *CollectionViewLayoutAttributes) SetHidden(hidden bool) {
+	x.inner.SetHidden(hidden)
+}
+
+// IndexPath calls the underlying IndexPath.
+func (x *CollectionViewLayoutAttributes) IndexPath() *foundation.NSIndexPath {
+	return x.inner.IndexPath()
+}
+
+// SetIndexPath calls the underlying SetIndexPath.
+func (x *CollectionViewLayoutAttributes) SetIndexPath(indexPath *foundation.NSIndexPath) {
+	x.inner.SetIndexPath(indexPath)
+}
+
+// RepresentedElementCategory calls the underlying RepresentedElementCategory.
+func (x *CollectionViewLayoutAttributes) RepresentedElementCategory() raw.NSCollectionElementCategory {
+	return x.inner.RepresentedElementCategory()
+}
+
+// RepresentedElementKind calls the underlying RepresentedElementKind.
+func (x *CollectionViewLayoutAttributes) RepresentedElementKind() string {
+	_r := x.inner.RepresentedElementKind()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// CollectionViewLayoutAttributesable is the interface implemented by [CollectionViewLayoutAttributes], for mocking and DI.
+type CollectionViewLayoutAttributesable interface {
+	Unwrap() *raw.NSCollectionViewLayoutAttributes
+	WithFrame(frame corefoundation.CGRect) *CollectionViewLayoutAttributes
+	WithSize(size corefoundation.CGSize) *CollectionViewLayoutAttributes
+	WithAlpha(alpha float64) *CollectionViewLayoutAttributes
+	WithZIndex(zIndex int) *CollectionViewLayoutAttributes
+	WithHidden(hidden bool) *CollectionViewLayoutAttributes
+	WithIndexPath(indexPath *foundation.NSIndexPath) *CollectionViewLayoutAttributes
+	Frame() corefoundation.CGRect
+	SetFrame(frame corefoundation.CGRect)
+	Size() corefoundation.CGSize
+	SetSize(size corefoundation.CGSize)
+	Alpha() float64
+	SetAlpha(alpha float64)
+	ZIndex() int
+	SetZIndex(zIndex int)
+	IsHidden() bool
+	SetHidden(hidden bool)
+	IndexPath() *foundation.NSIndexPath
+	SetIndexPath(indexPath *foundation.NSIndexPath)
+	RepresentedElementCategory() raw.NSCollectionElementCategory
+	RepresentedElementKind() string
+}
+
+var _ CollectionViewLayoutAttributesable = (*CollectionViewLayoutAttributes)(nil)
 

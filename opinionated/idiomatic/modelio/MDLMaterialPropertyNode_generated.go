@@ -5,8 +5,10 @@
 package modelio
 
 import (
+	"context"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -31,17 +33,43 @@ func (x *MaterialPropertyNode) WithEvaluationFunction(evaluationFunction func(*r
 	return x
 }
 
+// EvaluationFunction calls the underlying EvaluationFunction.
+func (x *MaterialPropertyNode) EvaluationFunction() objc.Block {
+	return x.inner.EvaluationFunction()
+}
+
+// SetEvaluationFunction blocks until the operation completes or ctx is cancelled.
+func (x *MaterialPropertyNode) SetEvaluationFunction(ctx context.Context) (*MaterialPropertyNode, error) {
+	type _result struct {
+		val *MaterialPropertyNode
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SetEvaluationFunction(func(_p0 *raw.MDLMaterialPropertyNode) {
+		var _o _result
+		if _p0 != nil {
+			_o.val = &MaterialPropertyNode{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MaterialPropertyNode
+		return _zero, ctx.Err()
+	}
+}
+
 // Inputs returns the collection as a Go slice.
 func (x *MaterialPropertyNode) Inputs() []*raw.MDLMaterialProperty {
 	arr := x.inner.Inputs()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MDLMaterialProperty, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MDLMaterialProperty {
+		return raw.MDLMaterialPropertyFromID(purego.Retain(_id))
+	})
 }
 
 // Outputs returns the collection as a Go slice.
@@ -50,12 +78,22 @@ func (x *MaterialPropertyNode) Outputs() []*raw.MDLMaterialProperty {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MDLMaterialProperty, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MDLMaterialProperty {
+		return raw.MDLMaterialPropertyFromID(purego.Retain(_id))
+	})
 }
 
 func (x *MaterialPropertyNode) asMaterialPropertyNode() *raw.MDLMaterialPropertyNode { return x.inner }
+
+// MaterialPropertyNodeable is the interface implemented by [MaterialPropertyNode], for mocking and DI.
+type MaterialPropertyNodeable interface {
+	Unwrap() *raw.MDLMaterialPropertyNode
+	WithEvaluationFunction(evaluationFunction func(*raw.MDLMaterialPropertyNode)) *MaterialPropertyNode
+	EvaluationFunction() objc.Block
+	SetEvaluationFunction(ctx context.Context) (*MaterialPropertyNode, error)
+	Inputs() []*raw.MDLMaterialProperty
+	Outputs() []*raw.MDLMaterialProperty
+}
+
+var _ MaterialPropertyNodeable = (*MaterialPropertyNode)(nil)
 

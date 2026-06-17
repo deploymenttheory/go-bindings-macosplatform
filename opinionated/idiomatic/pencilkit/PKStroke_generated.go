@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/pencilkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -33,16 +34,72 @@ func NewStrokeWithInkStrokePathTransformMaskRandomSeed(ink *raw.PKInk, strokePat
 	return &Stroke{inner: raw.PKStrokeFromID(_id)}
 }
 
+// Ink calls the underlying Ink.
+func (x *Stroke) Ink() *Ink {
+	_r := x.inner.Ink()
+	if _r == nil {
+		return nil
+	}
+	return &Ink{inner: _r}
+}
+
+// Transform calls the underlying Transform.
+func (x *Stroke) Transform() corefoundation.CGAffineTransform {
+	return x.inner.Transform()
+}
+
+// Path calls the underlying Path.
+func (x *Stroke) Path() *StrokePath {
+	_r := x.inner.Path()
+	if _r == nil {
+		return nil
+	}
+	return &StrokePath{inner: _r}
+}
+
+// Mask calls the underlying Mask.
+func (x *Stroke) Mask() *appkit.NSBezierPath {
+	return x.inner.Mask()
+}
+
+// RenderBounds calls the underlying RenderBounds.
+func (x *Stroke) RenderBounds() corefoundation.CGRect {
+	return x.inner.RenderBounds()
+}
+
 // MaskedPathRanges returns the collection as a Go slice.
 func (x *Stroke) MaskedPathRanges() []*raw.PKFloatRange {
 	arr := x.inner.MaskedPathRanges()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.PKFloatRange, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PKFloatRange {
+		return raw.PKFloatRangeFromID(purego.Retain(_id))
+	})
 }
+
+// RandomSeed calls the underlying RandomSeed.
+func (x *Stroke) RandomSeed() uint32 {
+	return x.inner.RandomSeed()
+}
+
+// RequiredContentVersion calls the underlying RequiredContentVersion.
+func (x *Stroke) RequiredContentVersion() raw.PKContentVersion {
+	return x.inner.RequiredContentVersion()
+}
+
+// Strokeable is the interface implemented by [Stroke], for mocking and DI.
+type Strokeable interface {
+	Unwrap() *raw.PKStroke
+	Ink() *Ink
+	Transform() corefoundation.CGAffineTransform
+	Path() *StrokePath
+	Mask() *appkit.NSBezierPath
+	RenderBounds() corefoundation.CGRect
+	MaskedPathRanges() []*raw.PKFloatRange
+	RandomSeed() uint32
+	RequiredContentVersion() raw.PKContentVersion
+}
+
+var _ Strokeable = (*Stroke)(nil)
 

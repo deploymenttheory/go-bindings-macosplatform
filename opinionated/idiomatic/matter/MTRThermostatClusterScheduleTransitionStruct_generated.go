@@ -60,3 +60,88 @@ func (x *MTRThermostatClusterScheduleTransitionStruct) WithHeatingSetpoint(heati
 	return x
 }
 
+// DayOfWeek calls the underlying DayOfWeek.
+func (x *MTRThermostatClusterScheduleTransitionStruct) DayOfWeek() *foundation.NSNumber {
+	return x.inner.DayOfWeek()
+}
+
+// SetDayOfWeek calls the underlying SetDayOfWeek.
+func (x *MTRThermostatClusterScheduleTransitionStruct) SetDayOfWeek(dayOfWeek *foundation.NSNumber) {
+	x.inner.SetDayOfWeek(dayOfWeek)
+}
+
+// TransitionTime calls the underlying TransitionTime.
+func (x *MTRThermostatClusterScheduleTransitionStruct) TransitionTime() *foundation.NSNumber {
+	return x.inner.TransitionTime()
+}
+
+// SetTransitionTime calls the underlying SetTransitionTime.
+func (x *MTRThermostatClusterScheduleTransitionStruct) SetTransitionTime(transitionTime *foundation.NSNumber) {
+	x.inner.SetTransitionTime(transitionTime)
+}
+
+// PresetHandle calls the underlying PresetHandle.
+func (x *MTRThermostatClusterScheduleTransitionStruct) PresetHandle() *foundation.NSData {
+	return x.inner.PresetHandle()
+}
+
+// SetPresetHandle calls the underlying SetPresetHandle.
+func (x *MTRThermostatClusterScheduleTransitionStruct) SetPresetHandle(presetHandle *foundation.NSData) {
+	x.inner.SetPresetHandle(presetHandle)
+}
+
+// SystemMode calls the underlying SystemMode.
+func (x *MTRThermostatClusterScheduleTransitionStruct) SystemMode() *foundation.NSNumber {
+	return x.inner.SystemMode()
+}
+
+// SetSystemMode calls the underlying SetSystemMode.
+func (x *MTRThermostatClusterScheduleTransitionStruct) SetSystemMode(systemMode *foundation.NSNumber) {
+	x.inner.SetSystemMode(systemMode)
+}
+
+// CoolingSetpoint calls the underlying CoolingSetpoint.
+func (x *MTRThermostatClusterScheduleTransitionStruct) CoolingSetpoint() *foundation.NSNumber {
+	return x.inner.CoolingSetpoint()
+}
+
+// SetCoolingSetpoint calls the underlying SetCoolingSetpoint.
+func (x *MTRThermostatClusterScheduleTransitionStruct) SetCoolingSetpoint(coolingSetpoint *foundation.NSNumber) {
+	x.inner.SetCoolingSetpoint(coolingSetpoint)
+}
+
+// HeatingSetpoint calls the underlying HeatingSetpoint.
+func (x *MTRThermostatClusterScheduleTransitionStruct) HeatingSetpoint() *foundation.NSNumber {
+	return x.inner.HeatingSetpoint()
+}
+
+// SetHeatingSetpoint calls the underlying SetHeatingSetpoint.
+func (x *MTRThermostatClusterScheduleTransitionStruct) SetHeatingSetpoint(heatingSetpoint *foundation.NSNumber) {
+	x.inner.SetHeatingSetpoint(heatingSetpoint)
+}
+
+// MTRThermostatClusterScheduleTransitionStructable is the interface implemented by [MTRThermostatClusterScheduleTransitionStruct], for mocking and DI.
+type MTRThermostatClusterScheduleTransitionStructable interface {
+	Unwrap() *raw.MTRThermostatClusterScheduleTransitionStruct
+	WithDayOfWeek(dayOfWeek *foundation.NSNumber) *MTRThermostatClusterScheduleTransitionStruct
+	WithTransitionTime(transitionTime *foundation.NSNumber) *MTRThermostatClusterScheduleTransitionStruct
+	WithPresetHandle(presetHandle *foundation.NSData) *MTRThermostatClusterScheduleTransitionStruct
+	WithSystemMode(systemMode *foundation.NSNumber) *MTRThermostatClusterScheduleTransitionStruct
+	WithCoolingSetpoint(coolingSetpoint *foundation.NSNumber) *MTRThermostatClusterScheduleTransitionStruct
+	WithHeatingSetpoint(heatingSetpoint *foundation.NSNumber) *MTRThermostatClusterScheduleTransitionStruct
+	DayOfWeek() *foundation.NSNumber
+	SetDayOfWeek(dayOfWeek *foundation.NSNumber)
+	TransitionTime() *foundation.NSNumber
+	SetTransitionTime(transitionTime *foundation.NSNumber)
+	PresetHandle() *foundation.NSData
+	SetPresetHandle(presetHandle *foundation.NSData)
+	SystemMode() *foundation.NSNumber
+	SetSystemMode(systemMode *foundation.NSNumber)
+	CoolingSetpoint() *foundation.NSNumber
+	SetCoolingSetpoint(coolingSetpoint *foundation.NSNumber)
+	HeatingSetpoint() *foundation.NSNumber
+	SetHeatingSetpoint(heatingSetpoint *foundation.NSNumber)
+}
+
+var _ MTRThermostatClusterScheduleTransitionStructable = (*MTRThermostatClusterScheduleTransitionStruct)(nil)
+

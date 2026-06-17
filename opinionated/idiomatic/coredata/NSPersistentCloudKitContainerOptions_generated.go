@@ -7,6 +7,7 @@ package coredata
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -30,4 +31,34 @@ func (x *PersistentCloudKitContainerOptions) WithDatabaseScope(databaseScope obj
 	x.inner.SetDatabaseScope(databaseScope)
 	return x
 }
+
+// ContainerIdentifier calls the underlying ContainerIdentifier.
+func (x *PersistentCloudKitContainerOptions) ContainerIdentifier() string {
+	_r := x.inner.ContainerIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// DatabaseScope calls the underlying DatabaseScope.
+func (x *PersistentCloudKitContainerOptions) DatabaseScope() objc.ID {
+	return x.inner.DatabaseScope()
+}
+
+// SetDatabaseScope calls the underlying SetDatabaseScope.
+func (x *PersistentCloudKitContainerOptions) SetDatabaseScope(databaseScope objc.ID) {
+	x.inner.SetDatabaseScope(databaseScope)
+}
+
+// PersistentCloudKitContainerOptionsable is the interface implemented by [PersistentCloudKitContainerOptions], for mocking and DI.
+type PersistentCloudKitContainerOptionsable interface {
+	Unwrap() *raw.NSPersistentCloudKitContainerOptions
+	WithDatabaseScope(databaseScope objc.ID) *PersistentCloudKitContainerOptions
+	ContainerIdentifier() string
+	DatabaseScope() objc.ID
+	SetDatabaseScope(databaseScope objc.ID)
+}
+
+var _ PersistentCloudKitContainerOptionsable = (*PersistentCloudKitContainerOptions)(nil)
 

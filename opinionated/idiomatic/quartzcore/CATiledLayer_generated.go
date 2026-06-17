@@ -42,5 +42,51 @@ func (x *TiledLayer) WithTileSize(tileSize corefoundation.CGSize) *TiledLayer {
 	return x
 }
 
+// LevelsOfDetail calls the underlying LevelsOfDetail.
+func (x *TiledLayer) LevelsOfDetail() uint {
+	return x.inner.LevelsOfDetail()
+}
+
+// SetLevelsOfDetail calls the underlying SetLevelsOfDetail.
+func (x *TiledLayer) SetLevelsOfDetail(levelsOfDetail uint) {
+	x.inner.SetLevelsOfDetail(levelsOfDetail)
+}
+
+// LevelsOfDetailBias calls the underlying LevelsOfDetailBias.
+func (x *TiledLayer) LevelsOfDetailBias() uint {
+	return x.inner.LevelsOfDetailBias()
+}
+
+// SetLevelsOfDetailBias calls the underlying SetLevelsOfDetailBias.
+func (x *TiledLayer) SetLevelsOfDetailBias(levelsOfDetailBias uint) {
+	x.inner.SetLevelsOfDetailBias(levelsOfDetailBias)
+}
+
+// TileSize calls the underlying TileSize.
+func (x *TiledLayer) TileSize() corefoundation.CGSize {
+	return x.inner.TileSize()
+}
+
+// SetTileSize calls the underlying SetTileSize.
+func (x *TiledLayer) SetTileSize(tileSize corefoundation.CGSize) {
+	x.inner.SetTileSize(tileSize)
+}
+
 func (x *TiledLayer) asLayer() *raw.CALayer { return &x.inner.CALayer }
+
+// TiledLayerable is the interface implemented by [TiledLayer], for mocking and DI.
+type TiledLayerable interface {
+	Unwrap() *raw.CATiledLayer
+	WithLevelsOfDetail(levelsOfDetail uint) *TiledLayer
+	WithLevelsOfDetailBias(levelsOfDetailBias uint) *TiledLayer
+	WithTileSize(tileSize corefoundation.CGSize) *TiledLayer
+	LevelsOfDetail() uint
+	SetLevelsOfDetail(levelsOfDetail uint)
+	LevelsOfDetailBias() uint
+	SetLevelsOfDetailBias(levelsOfDetailBias uint)
+	TileSize() corefoundation.CGSize
+	SetTileSize(tileSize corefoundation.CGSize)
+}
+
+var _ TiledLayerable = (*TiledLayer)(nil)
 

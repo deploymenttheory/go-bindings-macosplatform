@@ -33,3 +33,10 @@ func (x *DOMCDATASection) asDOMObject() *raw.DOMObject { return &x.inner.DOMText
 
 func (x *DOMCDATASection) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMText.DOMCharacterData.DOMNode.DOMObject.WebScriptObject }
 
+// DOMCDATASectionable is the interface implemented by [DOMCDATASection], for mocking and DI.
+type DOMCDATASectionable interface {
+	Unwrap() *raw.DOMCDATASection
+}
+
+var _ DOMCDATASectionable = (*DOMCDATASection)(nil)
+

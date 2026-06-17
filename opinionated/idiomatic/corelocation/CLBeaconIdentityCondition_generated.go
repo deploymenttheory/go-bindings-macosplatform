@@ -39,7 +39,32 @@ func NewBeaconIdentityConditionWithUUIDMajorMinor(uuid *foundation.NSUUID, major
 	return &BeaconIdentityCondition{inner: raw.CLBeaconIdentityConditionFromID(_id)}
 }
 
+// UUID calls the underlying UUID.
+func (x *BeaconIdentityCondition) UUID() *foundation.NSUUID {
+	return x.inner.UUID()
+}
+
+// Major calls the underlying Major.
+func (x *BeaconIdentityCondition) Major() *foundation.NSNumber {
+	return x.inner.Major()
+}
+
+// Minor calls the underlying Minor.
+func (x *BeaconIdentityCondition) Minor() *foundation.NSNumber {
+	return x.inner.Minor()
+}
+
 func (x *BeaconIdentityCondition) asBeaconIdentityCondition() *raw.CLBeaconIdentityCondition { return x.inner }
 
 func (x *BeaconIdentityCondition) asCondition() *raw.CLCondition { return &x.inner.CLCondition }
+
+// BeaconIdentityConditionable is the interface implemented by [BeaconIdentityCondition], for mocking and DI.
+type BeaconIdentityConditionable interface {
+	Unwrap() *raw.CLBeaconIdentityCondition
+	UUID() *foundation.NSUUID
+	Major() *foundation.NSNumber
+	Minor() *foundation.NSNumber
+}
+
+var _ BeaconIdentityConditionable = (*BeaconIdentityCondition)(nil)
 

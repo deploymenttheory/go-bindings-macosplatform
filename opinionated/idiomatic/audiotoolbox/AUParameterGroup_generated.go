@@ -6,6 +6,7 @@ package audiotoolbox
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/audiotoolbox"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -29,11 +30,9 @@ func (x *ParameterGroup) Children() []*raw.AUParameterNode {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AUParameterNode, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AUParameterNode {
+		return raw.AUParameterNodeFromID(purego.Retain(_id))
+	})
 }
 
 // AllParameters returns the collection as a Go slice.
@@ -42,14 +41,21 @@ func (x *ParameterGroup) AllParameters() []*raw.AUParameter {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AUParameter, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AUParameter {
+		return raw.AUParameterFromID(purego.Retain(_id))
+	})
 }
 
 func (x *ParameterGroup) asParameterGroup() *raw.AUParameterGroup { return x.inner }
 
 func (x *ParameterGroup) asParameterNode() *raw.AUParameterNode { return &x.inner.AUParameterNode }
+
+// ParameterGroupable is the interface implemented by [ParameterGroup], for mocking and DI.
+type ParameterGroupable interface {
+	Unwrap() *raw.AUParameterGroup
+	Children() []*raw.AUParameterNode
+	AllParameters() []*raw.AUParameter
+}
+
+var _ ParameterGroupable = (*ParameterGroup)(nil)
 

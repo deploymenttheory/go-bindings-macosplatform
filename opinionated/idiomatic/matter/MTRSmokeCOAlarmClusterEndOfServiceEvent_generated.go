@@ -23,3 +23,10 @@ func NewMTRSmokeCOAlarmClusterEndOfServiceEvent() *MTRSmokeCOAlarmClusterEndOfSe
 	return &MTRSmokeCOAlarmClusterEndOfServiceEvent{inner: raw.MTRSmokeCOAlarmClusterEndOfServiceEventFromID(_id)}
 }
 
+// MTRSmokeCOAlarmClusterEndOfServiceEventable is the interface implemented by [MTRSmokeCOAlarmClusterEndOfServiceEvent], for mocking and DI.
+type MTRSmokeCOAlarmClusterEndOfServiceEventable interface {
+	Unwrap() *raw.MTRSmokeCOAlarmClusterEndOfServiceEvent
+}
+
+var _ MTRSmokeCOAlarmClusterEndOfServiceEventable = (*MTRSmokeCOAlarmClusterEndOfServiceEvent)(nil)
+

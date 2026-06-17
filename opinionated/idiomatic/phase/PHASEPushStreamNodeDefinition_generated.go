@@ -39,9 +39,35 @@ func (x *PushStreamNodeDefinition) WithNormalize(normalize bool) *PushStreamNode
 	return x
 }
 
+// Format calls the underlying Format.
+func (x *PushStreamNodeDefinition) Format() *avfaudio.AVAudioFormat {
+	return x.inner.Format()
+}
+
+// Normalize calls the underlying Normalize.
+func (x *PushStreamNodeDefinition) Normalize() bool {
+	return x.inner.Normalize()
+}
+
+// SetNormalize calls the underlying SetNormalize.
+func (x *PushStreamNodeDefinition) SetNormalize(normalize bool) {
+	x.inner.SetNormalize(normalize)
+}
+
 func (x *PushStreamNodeDefinition) asGeneratorNodeDefinition() *raw.PHASEGeneratorNodeDefinition { return &x.inner.PHASEGeneratorNodeDefinition }
 
 func (x *PushStreamNodeDefinition) asSoundEventNodeDefinition() *raw.PHASESoundEventNodeDefinition { return &x.inner.PHASEGeneratorNodeDefinition.PHASESoundEventNodeDefinition }
 
 func (x *PushStreamNodeDefinition) asDefinition() *raw.PHASEDefinition { return &x.inner.PHASEGeneratorNodeDefinition.PHASESoundEventNodeDefinition.PHASEDefinition }
+
+// PushStreamNodeDefinitionable is the interface implemented by [PushStreamNodeDefinition], for mocking and DI.
+type PushStreamNodeDefinitionable interface {
+	Unwrap() *raw.PHASEPushStreamNodeDefinition
+	WithNormalize(normalize bool) *PushStreamNodeDefinition
+	Format() *avfaudio.AVAudioFormat
+	Normalize() bool
+	SetNormalize(normalize bool)
+}
+
+var _ PushStreamNodeDefinitionable = (*PushStreamNodeDefinition)(nil)
 

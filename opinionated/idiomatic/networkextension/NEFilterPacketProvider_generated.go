@@ -31,7 +31,43 @@ func (x *NEFilterPacketProvider) WithPacketHandler(packetHandler func(*raw.NEFil
 	return x
 }
 
+// DelayCurrentPacket calls the underlying DelayCurrentPacket.
+func (x *NEFilterPacketProvider) DelayCurrentPacket(context_ *raw.NEFilterPacketContext) *NEPacket {
+	_r := x.inner.DelayCurrentPacket(context_)
+	if _r == nil {
+		return nil
+	}
+	return &NEPacket{inner: _r}
+}
+
+// AllowPacket calls the underlying AllowPacket.
+func (x *NEFilterPacketProvider) AllowPacket(packet *raw.NEPacket) {
+	x.inner.AllowPacket(packet)
+}
+
+// PacketHandler calls the underlying PacketHandler.
+func (x *NEFilterPacketProvider) PacketHandler() objc.Block {
+	return x.inner.PacketHandler()
+}
+
+// SetPacketHandler calls the underlying SetPacketHandler.
+func (x *NEFilterPacketProvider) SetPacketHandler(packetHandler func(*raw.NEFilterPacketContext, *foundation.NSObject, raw.NETrafficDirection, unsafe.Pointer, unsafe.Pointer) raw.NEFilterPacketProviderVerdict) {
+	x.inner.SetPacketHandler(packetHandler)
+}
+
 func (x *NEFilterPacketProvider) asNEFilterProvider() *raw.NEFilterProvider { return &x.inner.NEFilterProvider }
 
 func (x *NEFilterPacketProvider) asNEProvider() *raw.NEProvider { return &x.inner.NEFilterProvider.NEProvider }
+
+// NEFilterPacketProviderable is the interface implemented by [NEFilterPacketProvider], for mocking and DI.
+type NEFilterPacketProviderable interface {
+	Unwrap() *raw.NEFilterPacketProvider
+	WithPacketHandler(packetHandler func(*raw.NEFilterPacketContext, *foundation.NSObject, raw.NETrafficDirection, unsafe.Pointer, unsafe.Pointer) raw.NEFilterPacketProviderVerdict) *NEFilterPacketProvider
+	DelayCurrentPacket(context_ *raw.NEFilterPacketContext) *NEPacket
+	AllowPacket(packet *raw.NEPacket)
+	PacketHandler() objc.Block
+	SetPacketHandler(packetHandler func(*raw.NEFilterPacketContext, *foundation.NSObject, raw.NETrafficDirection, unsafe.Pointer, unsafe.Pointer) raw.NEFilterPacketProviderVerdict)
+}
+
+var _ NEFilterPacketProviderable = (*NEFilterPacketProvider)(nil)
 

@@ -6,6 +6,7 @@ package coreml
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -29,10 +30,16 @@ func (x *ModelStructureNeuralNetwork) Layers() []*raw.MLModelStructureNeuralNetw
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MLModelStructureNeuralNetworkLayer, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MLModelStructureNeuralNetworkLayer {
+		return raw.MLModelStructureNeuralNetworkLayerFromID(purego.Retain(_id))
+	})
 }
+
+// ModelStructureNeuralNetworkable is the interface implemented by [ModelStructureNeuralNetwork], for mocking and DI.
+type ModelStructureNeuralNetworkable interface {
+	Unwrap() *raw.MLModelStructureNeuralNetwork
+	Layers() []*raw.MLModelStructureNeuralNetworkLayer
+}
+
+var _ ModelStructureNeuralNetworkable = (*ModelStructureNeuralNetwork)(nil)
 

@@ -48,3 +48,62 @@ func (x *MTRICDManagementClusterUnregisterClientParams) WithServerSideProcessing
 	return x
 }
 
+// CheckInNodeID calls the underlying CheckInNodeID.
+func (x *MTRICDManagementClusterUnregisterClientParams) CheckInNodeID() *foundation.NSNumber {
+	return x.inner.CheckInNodeID()
+}
+
+// SetCheckInNodeID calls the underlying SetCheckInNodeID.
+func (x *MTRICDManagementClusterUnregisterClientParams) SetCheckInNodeID(checkInNodeID *foundation.NSNumber) {
+	x.inner.SetCheckInNodeID(checkInNodeID)
+}
+
+// VerificationKey calls the underlying VerificationKey.
+func (x *MTRICDManagementClusterUnregisterClientParams) VerificationKey() *foundation.NSData {
+	return x.inner.VerificationKey()
+}
+
+// SetVerificationKey calls the underlying SetVerificationKey.
+func (x *MTRICDManagementClusterUnregisterClientParams) SetVerificationKey(verificationKey *foundation.NSData) {
+	x.inner.SetVerificationKey(verificationKey)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRICDManagementClusterUnregisterClientParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRICDManagementClusterUnregisterClientParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRICDManagementClusterUnregisterClientParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRICDManagementClusterUnregisterClientParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRICDManagementClusterUnregisterClientParamsable is the interface implemented by [MTRICDManagementClusterUnregisterClientParams], for mocking and DI.
+type MTRICDManagementClusterUnregisterClientParamsable interface {
+	Unwrap() *raw.MTRICDManagementClusterUnregisterClientParams
+	WithCheckInNodeID(checkInNodeID *foundation.NSNumber) *MTRICDManagementClusterUnregisterClientParams
+	WithVerificationKey(verificationKey *foundation.NSData) *MTRICDManagementClusterUnregisterClientParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRICDManagementClusterUnregisterClientParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRICDManagementClusterUnregisterClientParams
+	CheckInNodeID() *foundation.NSNumber
+	SetCheckInNodeID(checkInNodeID *foundation.NSNumber)
+	VerificationKey() *foundation.NSData
+	SetVerificationKey(verificationKey *foundation.NSData)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRICDManagementClusterUnregisterClientParamsable = (*MTRICDManagementClusterUnregisterClientParams)(nil)
+

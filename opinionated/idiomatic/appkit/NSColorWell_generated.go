@@ -6,6 +6,7 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -71,9 +72,158 @@ func (x *ColorWell) WithMaximumLinearExposure(maximumLinearExposure float64) *Co
 	return x
 }
 
+// Deactivate calls the underlying Deactivate.
+func (x *ColorWell) Deactivate() {
+	x.inner.Deactivate()
+}
+
+// Activate calls the underlying Activate.
+func (x *ColorWell) Activate(exclusive bool) {
+	x.inner.Activate(exclusive)
+}
+
+// DrawWellInside calls the underlying DrawWellInside.
+func (x *ColorWell) DrawWellInside(insideRect corefoundation.CGRect) {
+	x.inner.DrawWellInside(insideRect)
+}
+
+// TakeColorFrom calls the underlying TakeColorFrom.
+func (x *ColorWell) TakeColorFrom(sender objc.ID) {
+	x.inner.TakeColorFrom(sender)
+}
+
+// IsActive calls the underlying IsActive.
+func (x *ColorWell) IsActive() bool {
+	return x.inner.IsActive()
+}
+
+// IsBordered calls the underlying IsBordered.
+func (x *ColorWell) IsBordered() bool {
+	return x.inner.IsBordered()
+}
+
+// SetBordered calls the underlying SetBordered.
+func (x *ColorWell) SetBordered(bordered bool) {
+	x.inner.SetBordered(bordered)
+}
+
+// Color calls the underlying Color.
+func (x *ColorWell) Color() *Color {
+	_r := x.inner.Color()
+	if _r == nil {
+		return nil
+	}
+	return &Color{inner: _r}
+}
+
+// SetColor calls the underlying SetColor.
+func (x *ColorWell) SetColor(color *raw.NSColor) {
+	x.inner.SetColor(color)
+}
+
+// ColorWellStyle calls the underlying ColorWellStyle.
+func (x *ColorWell) ColorWellStyle() raw.NSColorWellStyle {
+	return x.inner.ColorWellStyle()
+}
+
+// SetColorWellStyle calls the underlying SetColorWellStyle.
+func (x *ColorWell) SetColorWellStyle(colorWellStyle raw.NSColorWellStyle) {
+	x.inner.SetColorWellStyle(colorWellStyle)
+}
+
+// Image calls the underlying Image.
+func (x *ColorWell) Image() *Image {
+	_r := x.inner.Image()
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// SetImage calls the underlying SetImage.
+func (x *ColorWell) SetImage(image *raw.NSImage) {
+	x.inner.SetImage(image)
+}
+
+// PulldownTarget calls the underlying PulldownTarget.
+func (x *ColorWell) PulldownTarget() objc.ID {
+	return x.inner.PulldownTarget()
+}
+
+// SetPulldownTarget calls the underlying SetPulldownTarget.
+func (x *ColorWell) SetPulldownTarget(pulldownTarget objc.ID) {
+	x.inner.SetPulldownTarget(pulldownTarget)
+}
+
+// PulldownAction calls the underlying PulldownAction.
+func (x *ColorWell) PulldownAction() objc.SEL {
+	return x.inner.PulldownAction()
+}
+
+// SetPulldownAction calls the underlying SetPulldownAction.
+func (x *ColorWell) SetPulldownAction(pulldownAction objc.SEL) {
+	x.inner.SetPulldownAction(pulldownAction)
+}
+
+// SupportsAlpha calls the underlying SupportsAlpha.
+func (x *ColorWell) SupportsAlpha() bool {
+	return x.inner.SupportsAlpha()
+}
+
+// SetSupportsAlpha calls the underlying SetSupportsAlpha.
+func (x *ColorWell) SetSupportsAlpha(supportsAlpha bool) {
+	x.inner.SetSupportsAlpha(supportsAlpha)
+}
+
+// MaximumLinearExposure calls the underlying MaximumLinearExposure.
+func (x *ColorWell) MaximumLinearExposure() float64 {
+	return x.inner.MaximumLinearExposure()
+}
+
+// SetMaximumLinearExposure calls the underlying SetMaximumLinearExposure.
+func (x *ColorWell) SetMaximumLinearExposure(maximumLinearExposure float64) {
+	x.inner.SetMaximumLinearExposure(maximumLinearExposure)
+}
+
 func (x *ColorWell) asControl() *raw.NSControl { return &x.inner.NSControl }
 
 func (x *ColorWell) asView() *raw.NSView { return &x.inner.NSControl.NSView }
 
 func (x *ColorWell) asResponder() *raw.NSResponder { return &x.inner.NSControl.NSView.NSResponder }
+
+// ColorWellable is the interface implemented by [ColorWell], for mocking and DI.
+type ColorWellable interface {
+	Unwrap() *raw.NSColorWell
+	WithBordered(bordered bool) *ColorWell
+	WithColor(color *raw.NSColor) *ColorWell
+	WithColorWellStyle(colorWellStyle raw.NSColorWellStyle) *ColorWell
+	WithImage(image *raw.NSImage) *ColorWell
+	WithPulldownTarget(pulldownTarget objc.ID) *ColorWell
+	WithPulldownAction(pulldownAction objc.SEL) *ColorWell
+	WithSupportsAlpha(supportsAlpha bool) *ColorWell
+	WithMaximumLinearExposure(maximumLinearExposure float64) *ColorWell
+	Deactivate()
+	Activate(exclusive bool)
+	DrawWellInside(insideRect corefoundation.CGRect)
+	TakeColorFrom(sender objc.ID)
+	IsActive() bool
+	IsBordered() bool
+	SetBordered(bordered bool)
+	Color() *Color
+	SetColor(color *raw.NSColor)
+	ColorWellStyle() raw.NSColorWellStyle
+	SetColorWellStyle(colorWellStyle raw.NSColorWellStyle)
+	Image() *Image
+	SetImage(image *raw.NSImage)
+	PulldownTarget() objc.ID
+	SetPulldownTarget(pulldownTarget objc.ID)
+	PulldownAction() objc.SEL
+	SetPulldownAction(pulldownAction objc.SEL)
+	SupportsAlpha() bool
+	SetSupportsAlpha(supportsAlpha bool)
+	MaximumLinearExposure() float64
+	SetMaximumLinearExposure(maximumLinearExposure float64)
+}
+
+var _ ColorWellable = (*ColorWell)(nil)
 

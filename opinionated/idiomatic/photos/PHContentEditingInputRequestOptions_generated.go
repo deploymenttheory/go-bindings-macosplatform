@@ -41,3 +41,49 @@ func (x *ContentEditingInputRequestOptions) WithProgressHandler(progressHandler 
 	return x
 }
 
+// CanHandleAdjustmentData calls the underlying CanHandleAdjustmentData.
+func (x *ContentEditingInputRequestOptions) CanHandleAdjustmentData() objc.Block {
+	return x.inner.CanHandleAdjustmentData()
+}
+
+// SetCanHandleAdjustmentData calls the underlying SetCanHandleAdjustmentData.
+func (x *ContentEditingInputRequestOptions) SetCanHandleAdjustmentData(canHandleAdjustmentData func(*raw.PHAdjustmentData) bool) {
+	x.inner.SetCanHandleAdjustmentData(canHandleAdjustmentData)
+}
+
+// IsNetworkAccessAllowed calls the underlying IsNetworkAccessAllowed.
+func (x *ContentEditingInputRequestOptions) IsNetworkAccessAllowed() bool {
+	return x.inner.IsNetworkAccessAllowed()
+}
+
+// SetNetworkAccessAllowed calls the underlying SetNetworkAccessAllowed.
+func (x *ContentEditingInputRequestOptions) SetNetworkAccessAllowed(networkAccessAllowed bool) {
+	x.inner.SetNetworkAccessAllowed(networkAccessAllowed)
+}
+
+// ProgressHandler calls the underlying ProgressHandler.
+func (x *ContentEditingInputRequestOptions) ProgressHandler() objc.Block {
+	return x.inner.ProgressHandler()
+}
+
+// SetProgressHandler calls the underlying SetProgressHandler.
+func (x *ContentEditingInputRequestOptions) SetProgressHandler(progressHandler func(float64, *bool)) {
+	x.inner.SetProgressHandler(progressHandler)
+}
+
+// ContentEditingInputRequestOptionsable is the interface implemented by [ContentEditingInputRequestOptions], for mocking and DI.
+type ContentEditingInputRequestOptionsable interface {
+	Unwrap() *raw.PHContentEditingInputRequestOptions
+	WithCanHandleAdjustmentData(canHandleAdjustmentData func(*raw.PHAdjustmentData) bool) *ContentEditingInputRequestOptions
+	WithNetworkAccessAllowed(networkAccessAllowed bool) *ContentEditingInputRequestOptions
+	WithProgressHandler(progressHandler func(float64, *bool)) *ContentEditingInputRequestOptions
+	CanHandleAdjustmentData() objc.Block
+	SetCanHandleAdjustmentData(canHandleAdjustmentData func(*raw.PHAdjustmentData) bool)
+	IsNetworkAccessAllowed() bool
+	SetNetworkAccessAllowed(networkAccessAllowed bool)
+	ProgressHandler() objc.Block
+	SetProgressHandler(progressHandler func(float64, *bool))
+}
+
+var _ ContentEditingInputRequestOptionsable = (*ContentEditingInputRequestOptions)(nil)
+

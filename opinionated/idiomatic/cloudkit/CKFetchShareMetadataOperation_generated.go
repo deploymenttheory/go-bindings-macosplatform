@@ -90,11 +90,24 @@ func (x *FetchShareMetadataOperation) ShareURLs() []*foundation.NSURL {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSURL, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSURL {
+		return foundation.NSURLFromID(purego.Retain(_id))
+	})
+}
+
+// SetShareURLs calls the underlying SetShareURLs.
+func (x *FetchShareMetadataOperation) SetShareURLs(shareURLs *foundation.NSArray[*foundation.NSURL]) {
+	x.inner.SetShareURLs(shareURLs)
+}
+
+// ShouldFetchRootRecord calls the underlying ShouldFetchRootRecord.
+func (x *FetchShareMetadataOperation) ShouldFetchRootRecord() bool {
+	return x.inner.ShouldFetchRootRecord()
+}
+
+// SetShouldFetchRootRecord calls the underlying SetShouldFetchRootRecord.
+func (x *FetchShareMetadataOperation) SetShouldFetchRootRecord(shouldFetchRootRecord bool) {
+	x.inner.SetShouldFetchRootRecord(shouldFetchRootRecord)
 }
 
 // RootRecordDesiredKeys returns the collection as a Go slice.
@@ -103,22 +116,40 @@ func (x *FetchShareMetadataOperation) RootRecordDesiredKeys() []*foundation.NSSt
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	})
+}
+
+// SetRootRecordDesiredKeys calls the underlying SetRootRecordDesiredKeys.
+func (x *FetchShareMetadataOperation) SetRootRecordDesiredKeys(rootRecordDesiredKeys *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetRootRecordDesiredKeys(rootRecordDesiredKeys)
+}
+
+// PerShareMetadataBlock calls the underlying PerShareMetadataBlock.
+func (x *FetchShareMetadataOperation) PerShareMetadataBlock() objc.Block {
+	return x.inner.PerShareMetadataBlock()
+}
+
+// SetPerShareMetadataBlock calls the underlying SetPerShareMetadataBlock.
+func (x *FetchShareMetadataOperation) SetPerShareMetadataBlock(perShareMetadataBlock func(*foundation.NSURL, *raw.CKShareMetadata, unsafe.Pointer)) {
+	x.inner.SetPerShareMetadataBlock(perShareMetadataBlock)
+}
+
+// FetchShareMetadataCompletionBlock calls the underlying FetchShareMetadataCompletionBlock.
+func (x *FetchShareMetadataOperation) FetchShareMetadataCompletionBlock() objc.Block {
+	return x.inner.FetchShareMetadataCompletionBlock()
 }
 
 // SetFetchShareMetadataCompletionBlock blocks until the operation completes or ctx is cancelled.
 func (x *FetchShareMetadataOperation) SetFetchShareMetadataCompletionBlock(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.SetFetchShareMetadataCompletionBlock(func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -129,4 +160,26 @@ func (x *FetchShareMetadataOperation) SetFetchShareMetadataCompletionBlock(ctx c
 }
 
 func (x *FetchShareMetadataOperation) asOperation() *raw.CKOperation { return &x.inner.CKOperation }
+
+// FetchShareMetadataOperationable is the interface implemented by [FetchShareMetadataOperation], for mocking and DI.
+type FetchShareMetadataOperationable interface {
+	Unwrap() *raw.CKFetchShareMetadataOperation
+	WithShareURLs(items ...*foundation.NSURL) *FetchShareMetadataOperation
+	WithShouldFetchRootRecord(shouldFetchRootRecord bool) *FetchShareMetadataOperation
+	WithRootRecordDesiredKeys(items ...*foundation.NSString) *FetchShareMetadataOperation
+	WithPerShareMetadataBlock(perShareMetadataBlock func(*foundation.NSURL, *raw.CKShareMetadata, unsafe.Pointer)) *FetchShareMetadataOperation
+	WithFetchShareMetadataCompletionBlock(fetchShareMetadataCompletionBlock func(unsafe.Pointer)) *FetchShareMetadataOperation
+	ShareURLs() []*foundation.NSURL
+	SetShareURLs(shareURLs *foundation.NSArray[*foundation.NSURL])
+	ShouldFetchRootRecord() bool
+	SetShouldFetchRootRecord(shouldFetchRootRecord bool)
+	RootRecordDesiredKeys() []*foundation.NSString
+	SetRootRecordDesiredKeys(rootRecordDesiredKeys *foundation.NSArray[*foundation.NSString])
+	PerShareMetadataBlock() objc.Block
+	SetPerShareMetadataBlock(perShareMetadataBlock func(*foundation.NSURL, *raw.CKShareMetadata, unsafe.Pointer))
+	FetchShareMetadataCompletionBlock() objc.Block
+	SetFetchShareMetadataCompletionBlock(ctx context.Context) error
+}
+
+var _ FetchShareMetadataOperationable = (*FetchShareMetadataOperation)(nil)
 

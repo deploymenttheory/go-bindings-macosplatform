@@ -23,5 +23,36 @@ func NewTextureReferenceType() *TextureReferenceType {
 	return &TextureReferenceType{inner: raw.MTLTextureReferenceTypeFromID(_id)}
 }
 
+// TextureDataType calls the underlying TextureDataType.
+func (x *TextureReferenceType) TextureDataType() raw.MTLDataType {
+	return x.inner.TextureDataType()
+}
+
+// TextureType calls the underlying TextureType.
+func (x *TextureReferenceType) TextureType() raw.MTLTextureType {
+	return x.inner.TextureType()
+}
+
+// Access calls the underlying Access.
+func (x *TextureReferenceType) Access() raw.MTLBindingAccess {
+	return x.inner.Access()
+}
+
+// IsDepthTexture calls the underlying IsDepthTexture.
+func (x *TextureReferenceType) IsDepthTexture() bool {
+	return x.inner.IsDepthTexture()
+}
+
 func (x *TextureReferenceType) asType() *raw.MTLType { return &x.inner.MTLType }
+
+// TextureReferenceTypeable is the interface implemented by [TextureReferenceType], for mocking and DI.
+type TextureReferenceTypeable interface {
+	Unwrap() *raw.MTLTextureReferenceType
+	TextureDataType() raw.MTLDataType
+	TextureType() raw.MTLTextureType
+	Access() raw.MTLBindingAccess
+	IsDepthTexture() bool
+}
+
+var _ TextureReferenceTypeable = (*TextureReferenceType)(nil)
 

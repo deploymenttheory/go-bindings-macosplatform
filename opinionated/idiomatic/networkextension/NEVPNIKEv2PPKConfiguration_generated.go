@@ -7,6 +7,7 @@ package networkextension
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -30,4 +31,40 @@ func (x *NEVPNIKEv2PPKConfiguration) WithIsMandatory(isMandatory bool) *NEVPNIKE
 	x.inner.SetIsMandatory(isMandatory)
 	return x
 }
+
+// Identifier calls the underlying Identifier.
+func (x *NEVPNIKEv2PPKConfiguration) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// KeychainReference calls the underlying KeychainReference.
+func (x *NEVPNIKEv2PPKConfiguration) KeychainReference() *foundation.NSData {
+	return x.inner.KeychainReference()
+}
+
+// IsMandatory calls the underlying IsMandatory.
+func (x *NEVPNIKEv2PPKConfiguration) IsMandatory() bool {
+	return x.inner.IsMandatory()
+}
+
+// SetIsMandatory calls the underlying SetIsMandatory.
+func (x *NEVPNIKEv2PPKConfiguration) SetIsMandatory(isMandatory bool) {
+	x.inner.SetIsMandatory(isMandatory)
+}
+
+// NEVPNIKEv2PPKConfigurationable is the interface implemented by [NEVPNIKEv2PPKConfiguration], for mocking and DI.
+type NEVPNIKEv2PPKConfigurationable interface {
+	Unwrap() *raw.NEVPNIKEv2PPKConfiguration
+	WithIsMandatory(isMandatory bool) *NEVPNIKEv2PPKConfiguration
+	Identifier() string
+	KeychainReference() *foundation.NSData
+	IsMandatory() bool
+	SetIsMandatory(isMandatory bool)
+}
+
+var _ NEVPNIKEv2PPKConfigurationable = (*NEVPNIKEv2PPKConfiguration)(nil)
 

@@ -7,6 +7,7 @@ package syncservices
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/syncservices"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,4 +25,39 @@ func NewISyncChangeWithChangeTypeRecordIdentifierChanges(type_ int, recordIdenti
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithChangeType:recordIdentifier:changes:"), type_, foundation.NSStringStringWithUTF8String(recordIdentifier).Ptr(), changes.Ptr())
 	return &ISyncChange{inner: raw.ISyncChangeFromID(_id)}
 }
+
+// Type calls the underlying Type.
+func (x *ISyncChange) Type() int {
+	return x.inner.Type()
+}
+
+// RecordIdentifier calls the underlying RecordIdentifier.
+func (x *ISyncChange) RecordIdentifier() string {
+	_r := x.inner.RecordIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Record calls the underlying Record.
+func (x *ISyncChange) Record() *foundation.NSDictionary[objc.ID, objc.ID] {
+	return x.inner.Record()
+}
+
+// Changes calls the underlying Changes.
+func (x *ISyncChange) Changes() *foundation.NSArray[objc.ID] {
+	return x.inner.Changes()
+}
+
+// ISyncChangeable is the interface implemented by [ISyncChange], for mocking and DI.
+type ISyncChangeable interface {
+	Unwrap() *raw.ISyncChange
+	Type() int
+	RecordIdentifier() string
+	Record() *foundation.NSDictionary[objc.ID, objc.ID]
+	Changes() *foundation.NSArray[objc.ID]
+}
+
+var _ ISyncChangeable = (*ISyncChange)(nil)
 

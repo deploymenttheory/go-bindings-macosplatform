@@ -26,15 +26,20 @@ func NewURLSessionStreamTask() *URLSessionStreamTask {
 	return &URLSessionStreamTask{inner: raw.NSURLSessionStreamTaskFromID(_id)}
 }
 
+// ReadDataOfMinLengthMaxLengthTimeoutCompletionHandler calls the underlying ReadDataOfMinLengthMaxLengthTimeoutCompletionHandler.
+func (x *URLSessionStreamTask) ReadDataOfMinLengthMaxLengthTimeoutCompletionHandler(minBytes uint, maxBytes uint, timeout float64, completionHandler func(unsafe.Pointer, bool, unsafe.Pointer)) {
+	x.inner.ReadDataOfMinLengthMaxLengthTimeoutCompletionHandler(minBytes, maxBytes, timeout, completionHandler)
+}
+
 // WriteDataTimeout blocks until the operation completes or ctx is cancelled.
 func (x *URLSessionStreamTask) WriteDataTimeout(ctx context.Context, data *raw.NSData, timeout float64) error {
 	_ch := make(chan error, 1)
 	x.inner.WriteDataTimeoutCompletionHandler(data, timeout, func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -44,7 +49,46 @@ func (x *URLSessionStreamTask) WriteDataTimeout(ctx context.Context, data *raw.N
 	}
 }
 
+// CaptureStreams calls the underlying CaptureStreams.
+func (x *URLSessionStreamTask) CaptureStreams() {
+	x.inner.CaptureStreams()
+}
+
+// CloseWrite calls the underlying CloseWrite.
+func (x *URLSessionStreamTask) CloseWrite() {
+	x.inner.CloseWrite()
+}
+
+// CloseRead calls the underlying CloseRead.
+func (x *URLSessionStreamTask) CloseRead() {
+	x.inner.CloseRead()
+}
+
+// StartSecureConnection calls the underlying StartSecureConnection.
+func (x *URLSessionStreamTask) StartSecureConnection() {
+	x.inner.StartSecureConnection()
+}
+
+// StopSecureConnection calls the underlying StopSecureConnection.
+func (x *URLSessionStreamTask) StopSecureConnection() {
+	x.inner.StopSecureConnection()
+}
+
 func (x *URLSessionStreamTask) asURLSessionTask() *raw.NSURLSessionTask { return &x.inner.NSURLSessionTask }
 
 func (x *URLSessionStreamTask) asObject() *raw.NSObject { return &x.inner.NSURLSessionTask.NSObject }
+
+// URLSessionStreamTaskable is the interface implemented by [URLSessionStreamTask], for mocking and DI.
+type URLSessionStreamTaskable interface {
+	Unwrap() *raw.NSURLSessionStreamTask
+	ReadDataOfMinLengthMaxLengthTimeoutCompletionHandler(minBytes uint, maxBytes uint, timeout float64, completionHandler func(unsafe.Pointer, bool, unsafe.Pointer))
+	WriteDataTimeout(ctx context.Context, data *raw.NSData, timeout float64) error
+	CaptureStreams()
+	CloseWrite()
+	CloseRead()
+	StartSecureConnection()
+	StopSecureConnection()
+}
+
+var _ URLSessionStreamTaskable = (*URLSessionStreamTask)(nil)
 

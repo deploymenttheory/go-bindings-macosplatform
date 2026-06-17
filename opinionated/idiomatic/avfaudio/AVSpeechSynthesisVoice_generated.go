@@ -6,6 +6,8 @@ package avfaudio
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +24,65 @@ func NewSpeechSynthesisVoice() *SpeechSynthesisVoice {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVSpeechSynthesisVoice")), objc.RegisterName("new"))
 	return &SpeechSynthesisVoice{inner: raw.AVSpeechSynthesisVoiceFromID(_id)}
 }
+
+// Language calls the underlying Language.
+func (x *SpeechSynthesisVoice) Language() string {
+	_r := x.inner.Language()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Identifier calls the underlying Identifier.
+func (x *SpeechSynthesisVoice) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Name calls the underlying Name.
+func (x *SpeechSynthesisVoice) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Quality calls the underlying Quality.
+func (x *SpeechSynthesisVoice) Quality() raw.AVSpeechSynthesisVoiceQuality {
+	return x.inner.Quality()
+}
+
+// Gender calls the underlying Gender.
+func (x *SpeechSynthesisVoice) Gender() raw.AVSpeechSynthesisVoiceGender {
+	return x.inner.Gender()
+}
+
+// AudioFileSettings calls the underlying AudioFileSettings.
+func (x *SpeechSynthesisVoice) AudioFileSettings() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.AudioFileSettings()
+}
+
+// VoiceTraits calls the underlying VoiceTraits.
+func (x *SpeechSynthesisVoice) VoiceTraits() raw.AVSpeechSynthesisVoiceTraits {
+	return x.inner.VoiceTraits()
+}
+
+// SpeechSynthesisVoiceable is the interface implemented by [SpeechSynthesisVoice], for mocking and DI.
+type SpeechSynthesisVoiceable interface {
+	Unwrap() *raw.AVSpeechSynthesisVoice
+	Language() string
+	Identifier() string
+	Name() string
+	Quality() raw.AVSpeechSynthesisVoiceQuality
+	Gender() raw.AVSpeechSynthesisVoiceGender
+	AudioFileSettings() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	VoiceTraits() raw.AVSpeechSynthesisVoiceTraits
+}
+
+var _ SpeechSynthesisVoiceable = (*SpeechSynthesisVoice)(nil)
 

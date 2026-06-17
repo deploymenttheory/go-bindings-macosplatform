@@ -63,15 +63,66 @@ func (x *SearchQuery) WithProtectionClasses(items ...*foundation.NSString) *Sear
 	return x
 }
 
+// Start calls the underlying Start.
+func (x *SearchQuery) Start() {
+	x.inner.Start()
+}
+
+// Cancel calls the underlying Cancel.
+func (x *SearchQuery) Cancel() {
+	x.inner.Cancel()
+}
+
+// IsCancelled calls the underlying IsCancelled.
+func (x *SearchQuery) IsCancelled() bool {
+	return x.inner.IsCancelled()
+}
+
+// FoundItemCount calls the underlying FoundItemCount.
+func (x *SearchQuery) FoundItemCount() uint {
+	return x.inner.FoundItemCount()
+}
+
+// FoundItemsHandler calls the underlying FoundItemsHandler.
+func (x *SearchQuery) FoundItemsHandler() objc.Block {
+	return x.inner.FoundItemsHandler()
+}
+
+// SetFoundItemsHandler blocks until the operation completes or ctx is cancelled.
+func (x *SearchQuery) SetFoundItemsHandler(ctx context.Context) (*foundation.NSArray[*raw.CSSearchableItem], error) {
+	type _result struct {
+		val *foundation.NSArray[*raw.CSSearchableItem]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SetFoundItemsHandler(func(_p0 *foundation.NSArray[*raw.CSSearchableItem]) {
+		var _o _result
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[*raw.CSSearchableItem]
+		return _zero, ctx.Err()
+	}
+}
+
+// CompletionHandler calls the underlying CompletionHandler.
+func (x *SearchQuery) CompletionHandler() objc.Block {
+	return x.inner.CompletionHandler()
+}
+
 // Set blocks until the operation completes or ctx is cancelled.
 func (x *SearchQuery) Set(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.SetCompletionHandler(func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -87,12 +138,35 @@ func (x *SearchQuery) ProtectionClasses() []*foundation.NSString {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	})
+}
+
+// SetProtectionClasses calls the underlying SetProtectionClasses.
+func (x *SearchQuery) SetProtectionClasses(protectionClasses *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetProtectionClasses(protectionClasses)
 }
 
 func (x *SearchQuery) asSearchQuery() *raw.CSSearchQuery { return x.inner }
+
+// SearchQueryable is the interface implemented by [SearchQuery], for mocking and DI.
+type SearchQueryable interface {
+	Unwrap() *raw.CSSearchQuery
+	WithFoundItemsHandler(foundItemsHandler func(*foundation.NSArray[*raw.CSSearchableItem])) *SearchQuery
+	WithCompletionHandler(completionHandler func(unsafe.Pointer)) *SearchQuery
+	WithProtectionClasses(items ...*foundation.NSString) *SearchQuery
+	Start()
+	Cancel()
+	IsCancelled() bool
+	FoundItemCount() uint
+	FoundItemsHandler() objc.Block
+	SetFoundItemsHandler(ctx context.Context) (*foundation.NSArray[*raw.CSSearchableItem], error)
+	CompletionHandler() objc.Block
+	Set(ctx context.Context) error
+	ProtectionClasses() []*foundation.NSString
+	SetProtectionClasses(protectionClasses *foundation.NSArray[*foundation.NSString])
+}
+
+var _ SearchQueryable = (*SearchQuery)(nil)
 

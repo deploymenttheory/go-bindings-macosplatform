@@ -23,5 +23,18 @@ func NewDatabaseNotification() *DatabaseNotification {
 	return &DatabaseNotification{inner: raw.CKDatabaseNotificationFromID(_id)}
 }
 
+// DatabaseScope calls the underlying DatabaseScope.
+func (x *DatabaseNotification) DatabaseScope() raw.CKDatabaseScope {
+	return x.inner.DatabaseScope()
+}
+
 func (x *DatabaseNotification) asNotification() *raw.CKNotification { return &x.inner.CKNotification }
+
+// DatabaseNotificationable is the interface implemented by [DatabaseNotification], for mocking and DI.
+type DatabaseNotificationable interface {
+	Unwrap() *raw.CKDatabaseNotification
+	DatabaseScope() raw.CKDatabaseScope
+}
+
+var _ DatabaseNotificationable = (*DatabaseNotification)(nil)
 

@@ -25,3 +25,10 @@ func NewLinuxRosettaCachingOptions() *LinuxRosettaCachingOptions {
 
 func (x *LinuxRosettaCachingOptions) asLinuxRosettaCachingOptions() *raw.VZLinuxRosettaCachingOptions { return x.inner }
 
+// LinuxRosettaCachingOptionsable is the interface implemented by [LinuxRosettaCachingOptions], for mocking and DI.
+type LinuxRosettaCachingOptionsable interface {
+	Unwrap() *raw.VZLinuxRosettaCachingOptions
+}
+
+var _ LinuxRosettaCachingOptionsable = (*LinuxRosettaCachingOptions)(nil)
+

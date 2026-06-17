@@ -25,3 +25,10 @@ func NewMTRDoorLockClusterDlCredential() *MTRDoorLockClusterDlCredential {
 
 func (x *MTRDoorLockClusterDlCredential) asMTRDoorLockClusterCredentialStruct() *raw.MTRDoorLockClusterCredentialStruct { return &x.inner.MTRDoorLockClusterCredentialStruct }
 
+// MTRDoorLockClusterDlCredentialable is the interface implemented by [MTRDoorLockClusterDlCredential], for mocking and DI.
+type MTRDoorLockClusterDlCredentialable interface {
+	Unwrap() *raw.MTRDoorLockClusterDlCredential
+}
+
+var _ MTRDoorLockClusterDlCredentialable = (*MTRDoorLockClusterDlCredential)(nil)
+

@@ -6,6 +6,7 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,29 @@ func NewCollectionViewUpdateItem() *CollectionViewUpdateItem {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCollectionViewUpdateItem")), objc.RegisterName("new"))
 	return &CollectionViewUpdateItem{inner: raw.NSCollectionViewUpdateItemFromID(_id)}
 }
+
+// IndexPathBeforeUpdate calls the underlying IndexPathBeforeUpdate.
+func (x *CollectionViewUpdateItem) IndexPathBeforeUpdate() *foundation.NSIndexPath {
+	return x.inner.IndexPathBeforeUpdate()
+}
+
+// IndexPathAfterUpdate calls the underlying IndexPathAfterUpdate.
+func (x *CollectionViewUpdateItem) IndexPathAfterUpdate() *foundation.NSIndexPath {
+	return x.inner.IndexPathAfterUpdate()
+}
+
+// UpdateAction calls the underlying UpdateAction.
+func (x *CollectionViewUpdateItem) UpdateAction() raw.NSCollectionUpdateAction {
+	return x.inner.UpdateAction()
+}
+
+// CollectionViewUpdateItemable is the interface implemented by [CollectionViewUpdateItem], for mocking and DI.
+type CollectionViewUpdateItemable interface {
+	Unwrap() *raw.NSCollectionViewUpdateItem
+	IndexPathBeforeUpdate() *foundation.NSIndexPath
+	IndexPathAfterUpdate() *foundation.NSIndexPath
+	UpdateAction() raw.NSCollectionUpdateAction
+}
+
+var _ CollectionViewUpdateItemable = (*CollectionViewUpdateItem)(nil)
 

@@ -28,3 +28,10 @@ func (x *NNReductionColumnMinNode) asNNUnaryReductionNode() *mpsneuralnetwork.MP
 
 func (x *NNReductionColumnMinNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode }
 
+// NNReductionColumnMinNodeable is the interface implemented by [NNReductionColumnMinNode], for mocking and DI.
+type NNReductionColumnMinNodeable interface {
+	Unwrap() *raw.MPSNNReductionColumnMinNode
+}
+
+var _ NNReductionColumnMinNodeable = (*NNReductionColumnMinNode)(nil)
+

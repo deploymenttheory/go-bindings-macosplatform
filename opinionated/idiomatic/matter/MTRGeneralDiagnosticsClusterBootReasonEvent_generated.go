@@ -30,3 +30,23 @@ func (x *MTRGeneralDiagnosticsClusterBootReasonEvent) WithBootReason(bootReason 
 	return x
 }
 
+// BootReason calls the underlying BootReason.
+func (x *MTRGeneralDiagnosticsClusterBootReasonEvent) BootReason() *foundation.NSNumber {
+	return x.inner.BootReason()
+}
+
+// SetBootReason calls the underlying SetBootReason.
+func (x *MTRGeneralDiagnosticsClusterBootReasonEvent) SetBootReason(bootReason *foundation.NSNumber) {
+	x.inner.SetBootReason(bootReason)
+}
+
+// MTRGeneralDiagnosticsClusterBootReasonEventable is the interface implemented by [MTRGeneralDiagnosticsClusterBootReasonEvent], for mocking and DI.
+type MTRGeneralDiagnosticsClusterBootReasonEventable interface {
+	Unwrap() *raw.MTRGeneralDiagnosticsClusterBootReasonEvent
+	WithBootReason(bootReason *foundation.NSNumber) *MTRGeneralDiagnosticsClusterBootReasonEvent
+	BootReason() *foundation.NSNumber
+	SetBootReason(bootReason *foundation.NSNumber)
+}
+
+var _ MTRGeneralDiagnosticsClusterBootReasonEventable = (*MTRGeneralDiagnosticsClusterBootReasonEvent)(nil)
+

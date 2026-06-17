@@ -6,8 +6,11 @@ package cinematic
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cinematic"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // ObjectTracker wraps [raw.CNObjectTracker] with a fluent Go API.
@@ -24,4 +27,53 @@ func NewObjectTrackerWithCommandQueue(commandQueue metal.MTLCommandQueue) *Objec
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCommandQueue:"), commandQueue)
 	return &ObjectTracker{inner: raw.CNObjectTrackerFromID(_id)}
 }
+
+// FindObjectAtPointSourceImage calls the underlying FindObjectAtPointSourceImage.
+func (x *ObjectTracker) FindObjectAtPointSourceImage(point corefoundation.CGPoint, sourceImage unsafe.Pointer) *BoundsPrediction {
+	_r := x.inner.FindObjectAtPointSourceImage(point, sourceImage)
+	if _r == nil {
+		return nil
+	}
+	return &BoundsPrediction{inner: _r}
+}
+
+// StartTrackingAtWithinSourceImageSourceDisparity calls the underlying StartTrackingAtWithinSourceImageSourceDisparity.
+func (x *ObjectTracker) StartTrackingAtWithinSourceImageSourceDisparity(time_ coremedia.CMTime, normalizedBounds corefoundation.CGRect, sourceImage unsafe.Pointer, sourceDisparity unsafe.Pointer) bool {
+	return x.inner.StartTrackingAtWithinSourceImageSourceDisparity(time_, normalizedBounds, sourceImage, sourceDisparity)
+}
+
+// ContinueTrackingAtSourceImageSourceDisparity calls the underlying ContinueTrackingAtSourceImageSourceDisparity.
+func (x *ObjectTracker) ContinueTrackingAtSourceImageSourceDisparity(time_ coremedia.CMTime, sourceImage unsafe.Pointer, sourceDisparity unsafe.Pointer) *BoundsPrediction {
+	_r := x.inner.ContinueTrackingAtSourceImageSourceDisparity(time_, sourceImage, sourceDisparity)
+	if _r == nil {
+		return nil
+	}
+	return &BoundsPrediction{inner: _r}
+}
+
+// FinishDetectionTrack calls the underlying FinishDetectionTrack.
+func (x *ObjectTracker) FinishDetectionTrack() *DetectionTrack {
+	_r := x.inner.FinishDetectionTrack()
+	if _r == nil {
+		return nil
+	}
+	return &DetectionTrack{inner: _r}
+}
+
+// ResetDetectionTrack calls the underlying ResetDetectionTrack.
+func (x *ObjectTracker) ResetDetectionTrack() {
+	x.inner.ResetDetectionTrack()
+}
+
+// ObjectTrackerable is the interface implemented by [ObjectTracker], for mocking and DI.
+type ObjectTrackerable interface {
+	Unwrap() *raw.CNObjectTracker
+	FindObjectAtPointSourceImage(point corefoundation.CGPoint, sourceImage unsafe.Pointer) *BoundsPrediction
+	StartTrackingAtWithinSourceImageSourceDisparity(time_ coremedia.CMTime, normalizedBounds corefoundation.CGRect, sourceImage unsafe.Pointer, sourceDisparity unsafe.Pointer) bool
+	ContinueTrackingAtSourceImageSourceDisparity(time_ coremedia.CMTime, sourceImage unsafe.Pointer, sourceDisparity unsafe.Pointer) *BoundsPrediction
+	FinishDetectionTrack() *DetectionTrack
+	ResetDetectionTrack()
+}
+
+var _ ObjectTrackerable = (*ObjectTracker)(nil)
 

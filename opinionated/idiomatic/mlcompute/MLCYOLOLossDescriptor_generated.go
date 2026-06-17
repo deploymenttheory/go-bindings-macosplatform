@@ -5,6 +5,7 @@
 package mlcompute
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
 	"github.com/ebitengine/purego/objc"
 )
@@ -70,4 +71,127 @@ func (x *YOLOLossDescriptor) WithMaximumIOUForObjectAbsence(maximumIOUForObjectA
 	x.inner.SetMaximumIOUForObjectAbsence(maximumIOUForObjectAbsence)
 	return x
 }
+
+// AnchorBoxCount calls the underlying AnchorBoxCount.
+func (x *YOLOLossDescriptor) AnchorBoxCount() uint {
+	return x.inner.AnchorBoxCount()
+}
+
+// AnchorBoxes calls the underlying AnchorBoxes.
+func (x *YOLOLossDescriptor) AnchorBoxes() *foundation.NSData {
+	return x.inner.AnchorBoxes()
+}
+
+// ShouldRescore calls the underlying ShouldRescore.
+func (x *YOLOLossDescriptor) ShouldRescore() bool {
+	return x.inner.ShouldRescore()
+}
+
+// SetShouldRescore calls the underlying SetShouldRescore.
+func (x *YOLOLossDescriptor) SetShouldRescore(shouldRescore bool) {
+	x.inner.SetShouldRescore(shouldRescore)
+}
+
+// ScaleSpatialPositionLoss calls the underlying ScaleSpatialPositionLoss.
+func (x *YOLOLossDescriptor) ScaleSpatialPositionLoss() float32 {
+	return x.inner.ScaleSpatialPositionLoss()
+}
+
+// SetScaleSpatialPositionLoss calls the underlying SetScaleSpatialPositionLoss.
+func (x *YOLOLossDescriptor) SetScaleSpatialPositionLoss(scaleSpatialPositionLoss float32) {
+	x.inner.SetScaleSpatialPositionLoss(scaleSpatialPositionLoss)
+}
+
+// ScaleSpatialSizeLoss calls the underlying ScaleSpatialSizeLoss.
+func (x *YOLOLossDescriptor) ScaleSpatialSizeLoss() float32 {
+	return x.inner.ScaleSpatialSizeLoss()
+}
+
+// SetScaleSpatialSizeLoss calls the underlying SetScaleSpatialSizeLoss.
+func (x *YOLOLossDescriptor) SetScaleSpatialSizeLoss(scaleSpatialSizeLoss float32) {
+	x.inner.SetScaleSpatialSizeLoss(scaleSpatialSizeLoss)
+}
+
+// ScaleNoObjectConfidenceLoss calls the underlying ScaleNoObjectConfidenceLoss.
+func (x *YOLOLossDescriptor) ScaleNoObjectConfidenceLoss() float32 {
+	return x.inner.ScaleNoObjectConfidenceLoss()
+}
+
+// SetScaleNoObjectConfidenceLoss calls the underlying SetScaleNoObjectConfidenceLoss.
+func (x *YOLOLossDescriptor) SetScaleNoObjectConfidenceLoss(scaleNoObjectConfidenceLoss float32) {
+	x.inner.SetScaleNoObjectConfidenceLoss(scaleNoObjectConfidenceLoss)
+}
+
+// ScaleObjectConfidenceLoss calls the underlying ScaleObjectConfidenceLoss.
+func (x *YOLOLossDescriptor) ScaleObjectConfidenceLoss() float32 {
+	return x.inner.ScaleObjectConfidenceLoss()
+}
+
+// SetScaleObjectConfidenceLoss calls the underlying SetScaleObjectConfidenceLoss.
+func (x *YOLOLossDescriptor) SetScaleObjectConfidenceLoss(scaleObjectConfidenceLoss float32) {
+	x.inner.SetScaleObjectConfidenceLoss(scaleObjectConfidenceLoss)
+}
+
+// ScaleClassLoss calls the underlying ScaleClassLoss.
+func (x *YOLOLossDescriptor) ScaleClassLoss() float32 {
+	return x.inner.ScaleClassLoss()
+}
+
+// SetScaleClassLoss calls the underlying SetScaleClassLoss.
+func (x *YOLOLossDescriptor) SetScaleClassLoss(scaleClassLoss float32) {
+	x.inner.SetScaleClassLoss(scaleClassLoss)
+}
+
+// MinimumIOUForObjectPresence calls the underlying MinimumIOUForObjectPresence.
+func (x *YOLOLossDescriptor) MinimumIOUForObjectPresence() float32 {
+	return x.inner.MinimumIOUForObjectPresence()
+}
+
+// SetMinimumIOUForObjectPresence calls the underlying SetMinimumIOUForObjectPresence.
+func (x *YOLOLossDescriptor) SetMinimumIOUForObjectPresence(minimumIOUForObjectPresence float32) {
+	x.inner.SetMinimumIOUForObjectPresence(minimumIOUForObjectPresence)
+}
+
+// MaximumIOUForObjectAbsence calls the underlying MaximumIOUForObjectAbsence.
+func (x *YOLOLossDescriptor) MaximumIOUForObjectAbsence() float32 {
+	return x.inner.MaximumIOUForObjectAbsence()
+}
+
+// SetMaximumIOUForObjectAbsence calls the underlying SetMaximumIOUForObjectAbsence.
+func (x *YOLOLossDescriptor) SetMaximumIOUForObjectAbsence(maximumIOUForObjectAbsence float32) {
+	x.inner.SetMaximumIOUForObjectAbsence(maximumIOUForObjectAbsence)
+}
+
+// YOLOLossDescriptorable is the interface implemented by [YOLOLossDescriptor], for mocking and DI.
+type YOLOLossDescriptorable interface {
+	Unwrap() *raw.MLCYOLOLossDescriptor
+	WithShouldRescore(shouldRescore bool) *YOLOLossDescriptor
+	WithScaleSpatialPositionLoss(scaleSpatialPositionLoss float32) *YOLOLossDescriptor
+	WithScaleSpatialSizeLoss(scaleSpatialSizeLoss float32) *YOLOLossDescriptor
+	WithScaleNoObjectConfidenceLoss(scaleNoObjectConfidenceLoss float32) *YOLOLossDescriptor
+	WithScaleObjectConfidenceLoss(scaleObjectConfidenceLoss float32) *YOLOLossDescriptor
+	WithScaleClassLoss(scaleClassLoss float32) *YOLOLossDescriptor
+	WithMinimumIOUForObjectPresence(minimumIOUForObjectPresence float32) *YOLOLossDescriptor
+	WithMaximumIOUForObjectAbsence(maximumIOUForObjectAbsence float32) *YOLOLossDescriptor
+	AnchorBoxCount() uint
+	AnchorBoxes() *foundation.NSData
+	ShouldRescore() bool
+	SetShouldRescore(shouldRescore bool)
+	ScaleSpatialPositionLoss() float32
+	SetScaleSpatialPositionLoss(scaleSpatialPositionLoss float32)
+	ScaleSpatialSizeLoss() float32
+	SetScaleSpatialSizeLoss(scaleSpatialSizeLoss float32)
+	ScaleNoObjectConfidenceLoss() float32
+	SetScaleNoObjectConfidenceLoss(scaleNoObjectConfidenceLoss float32)
+	ScaleObjectConfidenceLoss() float32
+	SetScaleObjectConfidenceLoss(scaleObjectConfidenceLoss float32)
+	ScaleClassLoss() float32
+	SetScaleClassLoss(scaleClassLoss float32)
+	MinimumIOUForObjectPresence() float32
+	SetMinimumIOUForObjectPresence(minimumIOUForObjectPresence float32)
+	MaximumIOUForObjectAbsence() float32
+	SetMaximumIOUForObjectAbsence(maximumIOUForObjectAbsence float32)
+}
+
+var _ YOLOLossDescriptorable = (*YOLOLossDescriptor)(nil)
 

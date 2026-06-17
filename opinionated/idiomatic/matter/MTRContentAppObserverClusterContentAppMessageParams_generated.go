@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -47,4 +48,71 @@ func (x *MTRContentAppObserverClusterContentAppMessageParams) WithServerSideProc
 	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
 	return x
 }
+
+// Data calls the underlying Data.
+func (x *MTRContentAppObserverClusterContentAppMessageParams) Data() string {
+	_r := x.inner.Data()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetData calls the underlying SetData.
+func (x *MTRContentAppObserverClusterContentAppMessageParams) SetData(data string) {
+	x.inner.SetData(foundation.NSStringStringWithUTF8String(data))
+}
+
+// EncodingHint calls the underlying EncodingHint.
+func (x *MTRContentAppObserverClusterContentAppMessageParams) EncodingHint() string {
+	_r := x.inner.EncodingHint()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetEncodingHint calls the underlying SetEncodingHint.
+func (x *MTRContentAppObserverClusterContentAppMessageParams) SetEncodingHint(encodingHint string) {
+	x.inner.SetEncodingHint(foundation.NSStringStringWithUTF8String(encodingHint))
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRContentAppObserverClusterContentAppMessageParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRContentAppObserverClusterContentAppMessageParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRContentAppObserverClusterContentAppMessageParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRContentAppObserverClusterContentAppMessageParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRContentAppObserverClusterContentAppMessageParamsable is the interface implemented by [MTRContentAppObserverClusterContentAppMessageParams], for mocking and DI.
+type MTRContentAppObserverClusterContentAppMessageParamsable interface {
+	Unwrap() *raw.MTRContentAppObserverClusterContentAppMessageParams
+	WithData(data string) *MTRContentAppObserverClusterContentAppMessageParams
+	WithEncodingHint(encodingHint string) *MTRContentAppObserverClusterContentAppMessageParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRContentAppObserverClusterContentAppMessageParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRContentAppObserverClusterContentAppMessageParams
+	Data() string
+	SetData(data string)
+	EncodingHint() string
+	SetEncodingHint(encodingHint string)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRContentAppObserverClusterContentAppMessageParamsable = (*MTRContentAppObserverClusterContentAppMessageParams)(nil)
 

@@ -35,5 +35,38 @@ func (x *RotationGestureRecognizer) WithRotationInDegrees(rotationInDegrees floa
 	return x
 }
 
+// Rotation calls the underlying Rotation.
+func (x *RotationGestureRecognizer) Rotation() float64 {
+	return x.inner.Rotation()
+}
+
+// SetRotation calls the underlying SetRotation.
+func (x *RotationGestureRecognizer) SetRotation(rotation float64) {
+	x.inner.SetRotation(rotation)
+}
+
+// RotationInDegrees calls the underlying RotationInDegrees.
+func (x *RotationGestureRecognizer) RotationInDegrees() float64 {
+	return x.inner.RotationInDegrees()
+}
+
+// SetRotationInDegrees calls the underlying SetRotationInDegrees.
+func (x *RotationGestureRecognizer) SetRotationInDegrees(rotationInDegrees float64) {
+	x.inner.SetRotationInDegrees(rotationInDegrees)
+}
+
 func (x *RotationGestureRecognizer) asGestureRecognizer() *raw.NSGestureRecognizer { return &x.inner.NSGestureRecognizer }
+
+// RotationGestureRecognizerable is the interface implemented by [RotationGestureRecognizer], for mocking and DI.
+type RotationGestureRecognizerable interface {
+	Unwrap() *raw.NSRotationGestureRecognizer
+	WithRotation(rotation float64) *RotationGestureRecognizer
+	WithRotationInDegrees(rotationInDegrees float64) *RotationGestureRecognizer
+	Rotation() float64
+	SetRotation(rotation float64)
+	RotationInDegrees() float64
+	SetRotationInDegrees(rotationInDegrees float64)
+}
+
+var _ RotationGestureRecognizerable = (*RotationGestureRecognizer)(nil)
 

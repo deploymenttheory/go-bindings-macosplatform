@@ -24,5 +24,30 @@ func NewCNNNeuronNode() *CNNNeuronNode {
 	return &CNNNeuronNode{inner: raw.MPSCNNNeuronNodeFromID(_id)}
 }
 
+// A calls the underlying A.
+func (x *CNNNeuronNode) A() float32 {
+	return x.inner.A()
+}
+
+// B calls the underlying B.
+func (x *CNNNeuronNode) B() float32 {
+	return x.inner.B()
+}
+
+// C calls the underlying C.
+func (x *CNNNeuronNode) C() float32 {
+	return x.inner.C()
+}
+
 func (x *CNNNeuronNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNFilterNode }
+
+// CNNNeuronNodeable is the interface implemented by [CNNNeuronNode], for mocking and DI.
+type CNNNeuronNodeable interface {
+	Unwrap() *raw.MPSCNNNeuronNode
+	A() float32
+	B() float32
+	C() float32
+}
+
+var _ CNNNeuronNodeable = (*CNNNeuronNode)(nil)
 

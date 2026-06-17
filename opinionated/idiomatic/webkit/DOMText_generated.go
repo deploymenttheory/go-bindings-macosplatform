@@ -5,7 +5,9 @@
 package webkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,6 +25,33 @@ func NewDOMText() *DOMText {
 	return &DOMText{inner: raw.DOMTextFromID(_id)}
 }
 
+// SplitText calls the underlying SplitText.
+func (x *DOMText) SplitText(offset uint) *DOMText {
+	_r := x.inner.SplitText(offset)
+	if _r == nil {
+		return nil
+	}
+	return &DOMText{inner: _r}
+}
+
+// ReplaceWholeText calls the underlying ReplaceWholeText.
+func (x *DOMText) ReplaceWholeText(content string) *DOMText {
+	_r := x.inner.ReplaceWholeText(foundation.NSStringStringWithUTF8String(content))
+	if _r == nil {
+		return nil
+	}
+	return &DOMText{inner: _r}
+}
+
+// WholeText calls the underlying WholeText.
+func (x *DOMText) WholeText() string {
+	_r := x.inner.WholeText()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 func (x *DOMText) asDOMText() *raw.DOMText { return x.inner }
 
 func (x *DOMText) asDOMCharacterData() *raw.DOMCharacterData { return &x.inner.DOMCharacterData }
@@ -32,4 +61,14 @@ func (x *DOMText) asDOMNode() *raw.DOMNode { return &x.inner.DOMCharacterData.DO
 func (x *DOMText) asDOMObject() *raw.DOMObject { return &x.inner.DOMCharacterData.DOMNode.DOMObject }
 
 func (x *DOMText) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMCharacterData.DOMNode.DOMObject.WebScriptObject }
+
+// DOMTextable is the interface implemented by [DOMText], for mocking and DI.
+type DOMTextable interface {
+	Unwrap() *raw.DOMText
+	SplitText(offset uint) *DOMText
+	ReplaceWholeText(content string) *DOMText
+	WholeText() string
+}
+
+var _ DOMTextable = (*DOMText)(nil)
 

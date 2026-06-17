@@ -5,6 +5,7 @@
 package metrickit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metrickit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,5 +24,28 @@ func NewDiskWriteExceptionDiagnostic() *DiskWriteExceptionDiagnostic {
 	return &DiskWriteExceptionDiagnostic{inner: raw.MXDiskWriteExceptionDiagnosticFromID(_id)}
 }
 
+// CallStackTree calls the underlying CallStackTree.
+func (x *DiskWriteExceptionDiagnostic) CallStackTree() *CallStackTree {
+	_r := x.inner.CallStackTree()
+	if _r == nil {
+		return nil
+	}
+	return &CallStackTree{inner: _r}
+}
+
+// TotalWritesCaused calls the underlying TotalWritesCaused.
+func (x *DiskWriteExceptionDiagnostic) TotalWritesCaused() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage] {
+	return x.inner.TotalWritesCaused()
+}
+
 func (x *DiskWriteExceptionDiagnostic) asDiagnostic() *raw.MXDiagnostic { return &x.inner.MXDiagnostic }
+
+// DiskWriteExceptionDiagnosticable is the interface implemented by [DiskWriteExceptionDiagnostic], for mocking and DI.
+type DiskWriteExceptionDiagnosticable interface {
+	Unwrap() *raw.MXDiskWriteExceptionDiagnostic
+	CallStackTree() *CallStackTree
+	TotalWritesCaused() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage]
+}
+
+var _ DiskWriteExceptionDiagnosticable = (*DiskWriteExceptionDiagnostic)(nil)
 

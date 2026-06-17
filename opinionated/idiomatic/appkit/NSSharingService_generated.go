@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -60,17 +61,118 @@ func (x *SharingService) WithSubject(subject string) *SharingService {
 	return x
 }
 
+// CanPerformWithItems calls the underlying CanPerformWithItems.
+func (x *SharingService) CanPerformWithItems(items *foundation.NSArray[objc.ID]) bool {
+	return x.inner.CanPerformWithItems(items)
+}
+
+// PerformWithItems calls the underlying PerformWithItems.
+func (x *SharingService) PerformWithItems(items *foundation.NSArray[objc.ID]) {
+	x.inner.PerformWithItems(items)
+}
+
+// Delegate calls the underlying Delegate.
+func (x *SharingService) Delegate() raw.NSSharingServiceDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *SharingService) SetDelegate(delegate raw.NSSharingServiceDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// Title calls the underlying Title.
+func (x *SharingService) Title() string {
+	_r := x.inner.Title()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Image calls the underlying Image.
+func (x *SharingService) Image() *Image {
+	_r := x.inner.Image()
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// AlternateImage calls the underlying AlternateImage.
+func (x *SharingService) AlternateImage() *Image {
+	_r := x.inner.AlternateImage()
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// MenuItemTitle calls the underlying MenuItemTitle.
+func (x *SharingService) MenuItemTitle() string {
+	_r := x.inner.MenuItemTitle()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetMenuItemTitle calls the underlying SetMenuItemTitle.
+func (x *SharingService) SetMenuItemTitle(menuItemTitle string) {
+	x.inner.SetMenuItemTitle(foundation.NSStringStringWithUTF8String(menuItemTitle))
+}
+
 // Recipients returns the collection as a Go slice.
-func (x *SharingService) Recipients() []*foundation.NSString {
+func (x *SharingService) Recipients() []string {
 	arr := x.inner.Recipients()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// SetRecipients calls the underlying SetRecipients.
+func (x *SharingService) SetRecipients(recipients *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetRecipients(recipients)
+}
+
+// Subject calls the underlying Subject.
+func (x *SharingService) Subject() string {
+	_r := x.inner.Subject()
+	if _r == nil {
+		return ""
 	}
-	return out
+	return purego.GoString(_r.Ptr())
+}
+
+// SetSubject calls the underlying SetSubject.
+func (x *SharingService) SetSubject(subject string) {
+	x.inner.SetSubject(foundation.NSStringStringWithUTF8String(subject))
+}
+
+// MessageBody calls the underlying MessageBody.
+func (x *SharingService) MessageBody() string {
+	_r := x.inner.MessageBody()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// PermanentLink calls the underlying PermanentLink.
+func (x *SharingService) PermanentLink() *foundation.NSURL {
+	return x.inner.PermanentLink()
+}
+
+// AccountName calls the underlying AccountName.
+func (x *SharingService) AccountName() string {
+	_r := x.inner.AccountName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
 }
 
 // AttachmentFileURLs returns the collection as a Go slice.
@@ -79,10 +181,36 @@ func (x *SharingService) AttachmentFileURLs() []*foundation.NSURL {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSURL, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSURL {
+		return foundation.NSURLFromID(purego.Retain(_id))
+	})
 }
+
+// SharingServiceable is the interface implemented by [SharingService], for mocking and DI.
+type SharingServiceable interface {
+	Unwrap() *raw.NSSharingService
+	WithDelegate(delegate raw.NSSharingServiceDelegate) *SharingService
+	WithMenuItemTitle(menuItemTitle string) *SharingService
+	WithRecipients(items ...*foundation.NSString) *SharingService
+	WithSubject(subject string) *SharingService
+	CanPerformWithItems(items *foundation.NSArray[objc.ID]) bool
+	PerformWithItems(items *foundation.NSArray[objc.ID])
+	Delegate() raw.NSSharingServiceDelegate
+	SetDelegate(delegate raw.NSSharingServiceDelegate)
+	Title() string
+	Image() *Image
+	AlternateImage() *Image
+	MenuItemTitle() string
+	SetMenuItemTitle(menuItemTitle string)
+	Recipients() []string
+	SetRecipients(recipients *foundation.NSArray[*foundation.NSString])
+	Subject() string
+	SetSubject(subject string)
+	MessageBody() string
+	PermanentLink() *foundation.NSURL
+	AccountName() string
+	AttachmentFileURLs() []*foundation.NSURL
+}
+
+var _ SharingServiceable = (*SharingService)(nil)
 

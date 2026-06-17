@@ -25,3 +25,26 @@ func NewQueryDescriptorWithSampleTypePredicate(sampleType *raw.HKSampleType, pre
 	return &QueryDescriptor{inner: raw.HKQueryDescriptorFromID(_id)}
 }
 
+// SampleType calls the underlying SampleType.
+func (x *QueryDescriptor) SampleType() *SampleType {
+	_r := x.inner.SampleType()
+	if _r == nil {
+		return nil
+	}
+	return &SampleType{inner: _r}
+}
+
+// Predicate calls the underlying Predicate.
+func (x *QueryDescriptor) Predicate() *foundation.NSPredicate {
+	return x.inner.Predicate()
+}
+
+// QueryDescriptorable is the interface implemented by [QueryDescriptor], for mocking and DI.
+type QueryDescriptorable interface {
+	Unwrap() *raw.HKQueryDescriptor
+	SampleType() *SampleType
+	Predicate() *foundation.NSPredicate
+}
+
+var _ QueryDescriptorable = (*QueryDescriptor)(nil)
+

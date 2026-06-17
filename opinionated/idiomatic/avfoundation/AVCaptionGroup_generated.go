@@ -8,6 +8,7 @@ import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -33,16 +34,28 @@ func NewCaptionGroupWithTimeRange(timeRange coremedia.CMTimeRange) *CaptionGroup
 	return &CaptionGroup{inner: raw.AVCaptionGroupFromID(_id)}
 }
 
+// TimeRange calls the underlying TimeRange.
+func (x *CaptionGroup) TimeRange() coremedia.CMTimeRange {
+	return x.inner.TimeRange()
+}
+
 // Captions returns the collection as a Go slice.
 func (x *CaptionGroup) Captions() []*raw.AVCaption {
 	arr := x.inner.Captions()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AVCaption, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVCaption {
+		return raw.AVCaptionFromID(purego.Retain(_id))
+	})
 }
+
+// CaptionGroupable is the interface implemented by [CaptionGroup], for mocking and DI.
+type CaptionGroupable interface {
+	Unwrap() *raw.AVCaptionGroup
+	TimeRange() coremedia.CMTimeRange
+	Captions() []*raw.AVCaption
+}
+
+var _ CaptionGroupable = (*CaptionGroup)(nil)
 

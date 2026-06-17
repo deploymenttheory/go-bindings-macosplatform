@@ -76,3 +76,113 @@ func (x *ImageEDLines) WithMergeLocalityThreshold(mergeLocalityThreshold float32
 	return x
 }
 
+// EncodeToCommandBufferSourceTextureDestinationTextureEndpointBufferEndpointOffset calls the underlying EncodeToCommandBufferSourceTextureDestinationTextureEndpointBufferEndpointOffset.
+func (x *ImageEDLines) EncodeToCommandBufferSourceTextureDestinationTextureEndpointBufferEndpointOffset(commandBuffer metal.MTLCommandBuffer, source metal.MTLTexture, dest metal.MTLTexture, endpointBuffer metal.MTLBuffer, endpointOffset uint) {
+	x.inner.EncodeToCommandBufferSourceTextureDestinationTextureEndpointBufferEndpointOffset(commandBuffer, source, dest, endpointBuffer, endpointOffset)
+}
+
+// ClipRectSource calls the underlying ClipRectSource.
+func (x *ImageEDLines) ClipRectSource() metal.MTLRegion {
+	return x.inner.ClipRectSource()
+}
+
+// SetClipRectSource calls the underlying SetClipRectSource.
+func (x *ImageEDLines) SetClipRectSource(clipRectSource metal.MTLRegion) {
+	x.inner.SetClipRectSource(clipRectSource)
+}
+
+// GaussianSigma calls the underlying GaussianSigma.
+func (x *ImageEDLines) GaussianSigma() float32 {
+	return x.inner.GaussianSigma()
+}
+
+// MinLineLength calls the underlying MinLineLength.
+func (x *ImageEDLines) MinLineLength() uint16 {
+	return x.inner.MinLineLength()
+}
+
+// SetMinLineLength calls the underlying SetMinLineLength.
+func (x *ImageEDLines) SetMinLineLength(minLineLength uint16) {
+	x.inner.SetMinLineLength(minLineLength)
+}
+
+// MaxLines calls the underlying MaxLines.
+func (x *ImageEDLines) MaxLines() uint {
+	return x.inner.MaxLines()
+}
+
+// SetMaxLines calls the underlying SetMaxLines.
+func (x *ImageEDLines) SetMaxLines(maxLines uint) {
+	x.inner.SetMaxLines(maxLines)
+}
+
+// DetailRatio calls the underlying DetailRatio.
+func (x *ImageEDLines) DetailRatio() uint16 {
+	return x.inner.DetailRatio()
+}
+
+// SetDetailRatio calls the underlying SetDetailRatio.
+func (x *ImageEDLines) SetDetailRatio(detailRatio uint16) {
+	x.inner.SetDetailRatio(detailRatio)
+}
+
+// GradientThreshold calls the underlying GradientThreshold.
+func (x *ImageEDLines) GradientThreshold() float32 {
+	return x.inner.GradientThreshold()
+}
+
+// SetGradientThreshold calls the underlying SetGradientThreshold.
+func (x *ImageEDLines) SetGradientThreshold(gradientThreshold float32) {
+	x.inner.SetGradientThreshold(gradientThreshold)
+}
+
+// LineErrorThreshold calls the underlying LineErrorThreshold.
+func (x *ImageEDLines) LineErrorThreshold() float32 {
+	return x.inner.LineErrorThreshold()
+}
+
+// SetLineErrorThreshold calls the underlying SetLineErrorThreshold.
+func (x *ImageEDLines) SetLineErrorThreshold(lineErrorThreshold float32) {
+	x.inner.SetLineErrorThreshold(lineErrorThreshold)
+}
+
+// MergeLocalityThreshold calls the underlying MergeLocalityThreshold.
+func (x *ImageEDLines) MergeLocalityThreshold() float32 {
+	return x.inner.MergeLocalityThreshold()
+}
+
+// SetMergeLocalityThreshold calls the underlying SetMergeLocalityThreshold.
+func (x *ImageEDLines) SetMergeLocalityThreshold(mergeLocalityThreshold float32) {
+	x.inner.SetMergeLocalityThreshold(mergeLocalityThreshold)
+}
+
+// ImageEDLinesable is the interface implemented by [ImageEDLines], for mocking and DI.
+type ImageEDLinesable interface {
+	Unwrap() *raw.MPSImageEDLines
+	WithClipRectSource(clipRectSource metal.MTLRegion) *ImageEDLines
+	WithMinLineLength(minLineLength uint16) *ImageEDLines
+	WithMaxLines(maxLines uint) *ImageEDLines
+	WithDetailRatio(detailRatio uint16) *ImageEDLines
+	WithGradientThreshold(gradientThreshold float32) *ImageEDLines
+	WithLineErrorThreshold(lineErrorThreshold float32) *ImageEDLines
+	WithMergeLocalityThreshold(mergeLocalityThreshold float32) *ImageEDLines
+	EncodeToCommandBufferSourceTextureDestinationTextureEndpointBufferEndpointOffset(commandBuffer metal.MTLCommandBuffer, source metal.MTLTexture, dest metal.MTLTexture, endpointBuffer metal.MTLBuffer, endpointOffset uint)
+	ClipRectSource() metal.MTLRegion
+	SetClipRectSource(clipRectSource metal.MTLRegion)
+	GaussianSigma() float32
+	MinLineLength() uint16
+	SetMinLineLength(minLineLength uint16)
+	MaxLines() uint
+	SetMaxLines(maxLines uint)
+	DetailRatio() uint16
+	SetDetailRatio(detailRatio uint16)
+	GradientThreshold() float32
+	SetGradientThreshold(gradientThreshold float32)
+	LineErrorThreshold() float32
+	SetLineErrorThreshold(lineErrorThreshold float32)
+	MergeLocalityThreshold() float32
+	SetMergeLocalityThreshold(mergeLocalityThreshold float32)
+}
+
+var _ ImageEDLinesable = (*ImageEDLines)(nil)
+

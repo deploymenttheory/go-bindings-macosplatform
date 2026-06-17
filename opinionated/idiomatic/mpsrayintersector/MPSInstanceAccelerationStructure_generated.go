@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsrayintersector"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -96,12 +97,129 @@ func (x *InstanceAccelerationStructure) AccelerationStructures() []*raw.MPSPolyg
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MPSPolygonAccelerationStructure, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MPSPolygonAccelerationStructure {
+		return raw.MPSPolygonAccelerationStructureFromID(purego.Retain(_id))
+	})
+}
+
+// SetAccelerationStructures calls the underlying SetAccelerationStructures.
+func (x *InstanceAccelerationStructure) SetAccelerationStructures(accelerationStructures *foundation.NSArray[*raw.MPSPolygonAccelerationStructure]) {
+	x.inner.SetAccelerationStructures(accelerationStructures)
+}
+
+// InstanceBuffer calls the underlying InstanceBuffer.
+func (x *InstanceAccelerationStructure) InstanceBuffer() metal.MTLBuffer {
+	return x.inner.InstanceBuffer()
+}
+
+// SetInstanceBuffer calls the underlying SetInstanceBuffer.
+func (x *InstanceAccelerationStructure) SetInstanceBuffer(instanceBuffer metal.MTLBuffer) {
+	x.inner.SetInstanceBuffer(instanceBuffer)
+}
+
+// InstanceBufferOffset calls the underlying InstanceBufferOffset.
+func (x *InstanceAccelerationStructure) InstanceBufferOffset() uint {
+	return x.inner.InstanceBufferOffset()
+}
+
+// SetInstanceBufferOffset calls the underlying SetInstanceBufferOffset.
+func (x *InstanceAccelerationStructure) SetInstanceBufferOffset(instanceBufferOffset uint) {
+	x.inner.SetInstanceBufferOffset(instanceBufferOffset)
+}
+
+// TransformBuffer calls the underlying TransformBuffer.
+func (x *InstanceAccelerationStructure) TransformBuffer() metal.MTLBuffer {
+	return x.inner.TransformBuffer()
+}
+
+// SetTransformBuffer calls the underlying SetTransformBuffer.
+func (x *InstanceAccelerationStructure) SetTransformBuffer(transformBuffer metal.MTLBuffer) {
+	x.inner.SetTransformBuffer(transformBuffer)
+}
+
+// TransformBufferOffset calls the underlying TransformBufferOffset.
+func (x *InstanceAccelerationStructure) TransformBufferOffset() uint {
+	return x.inner.TransformBufferOffset()
+}
+
+// SetTransformBufferOffset calls the underlying SetTransformBufferOffset.
+func (x *InstanceAccelerationStructure) SetTransformBufferOffset(transformBufferOffset uint) {
+	x.inner.SetTransformBufferOffset(transformBufferOffset)
+}
+
+// TransformType calls the underlying TransformType.
+func (x *InstanceAccelerationStructure) TransformType() raw.MPSTransformType {
+	return x.inner.TransformType()
+}
+
+// SetTransformType calls the underlying SetTransformType.
+func (x *InstanceAccelerationStructure) SetTransformType(transformType raw.MPSTransformType) {
+	x.inner.SetTransformType(transformType)
+}
+
+// MaskBuffer calls the underlying MaskBuffer.
+func (x *InstanceAccelerationStructure) MaskBuffer() metal.MTLBuffer {
+	return x.inner.MaskBuffer()
+}
+
+// SetMaskBuffer calls the underlying SetMaskBuffer.
+func (x *InstanceAccelerationStructure) SetMaskBuffer(maskBuffer metal.MTLBuffer) {
+	x.inner.SetMaskBuffer(maskBuffer)
+}
+
+// MaskBufferOffset calls the underlying MaskBufferOffset.
+func (x *InstanceAccelerationStructure) MaskBufferOffset() uint {
+	return x.inner.MaskBufferOffset()
+}
+
+// SetMaskBufferOffset calls the underlying SetMaskBufferOffset.
+func (x *InstanceAccelerationStructure) SetMaskBufferOffset(maskBufferOffset uint) {
+	x.inner.SetMaskBufferOffset(maskBufferOffset)
+}
+
+// InstanceCount calls the underlying InstanceCount.
+func (x *InstanceAccelerationStructure) InstanceCount() uint {
+	return x.inner.InstanceCount()
+}
+
+// SetInstanceCount calls the underlying SetInstanceCount.
+func (x *InstanceAccelerationStructure) SetInstanceCount(instanceCount uint) {
+	x.inner.SetInstanceCount(instanceCount)
 }
 
 func (x *InstanceAccelerationStructure) asAccelerationStructure() *raw.MPSAccelerationStructure { return &x.inner.MPSAccelerationStructure }
+
+// InstanceAccelerationStructureable is the interface implemented by [InstanceAccelerationStructure], for mocking and DI.
+type InstanceAccelerationStructureable interface {
+	Unwrap() *raw.MPSInstanceAccelerationStructure
+	WithAccelerationStructures(items ...PolygonAccelerationStructureProvider) *InstanceAccelerationStructure
+	WithInstanceBuffer(instanceBuffer metal.MTLBuffer) *InstanceAccelerationStructure
+	WithInstanceBufferOffset(instanceBufferOffset uint) *InstanceAccelerationStructure
+	WithTransformBuffer(transformBuffer metal.MTLBuffer) *InstanceAccelerationStructure
+	WithTransformBufferOffset(transformBufferOffset uint) *InstanceAccelerationStructure
+	WithTransformType(transformType raw.MPSTransformType) *InstanceAccelerationStructure
+	WithMaskBuffer(maskBuffer metal.MTLBuffer) *InstanceAccelerationStructure
+	WithMaskBufferOffset(maskBufferOffset uint) *InstanceAccelerationStructure
+	WithInstanceCount(instanceCount uint) *InstanceAccelerationStructure
+	AccelerationStructures() []*raw.MPSPolygonAccelerationStructure
+	SetAccelerationStructures(accelerationStructures *foundation.NSArray[*raw.MPSPolygonAccelerationStructure])
+	InstanceBuffer() metal.MTLBuffer
+	SetInstanceBuffer(instanceBuffer metal.MTLBuffer)
+	InstanceBufferOffset() uint
+	SetInstanceBufferOffset(instanceBufferOffset uint)
+	TransformBuffer() metal.MTLBuffer
+	SetTransformBuffer(transformBuffer metal.MTLBuffer)
+	TransformBufferOffset() uint
+	SetTransformBufferOffset(transformBufferOffset uint)
+	TransformType() raw.MPSTransformType
+	SetTransformType(transformType raw.MPSTransformType)
+	MaskBuffer() metal.MTLBuffer
+	SetMaskBuffer(maskBuffer metal.MTLBuffer)
+	MaskBufferOffset() uint
+	SetMaskBufferOffset(maskBufferOffset uint)
+	InstanceCount() uint
+	SetInstanceCount(instanceCount uint)
+}
+
+var _ InstanceAccelerationStructureable = (*InstanceAccelerationStructure)(nil)
 

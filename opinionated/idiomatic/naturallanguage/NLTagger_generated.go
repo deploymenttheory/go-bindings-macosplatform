@@ -7,6 +7,7 @@ package naturallanguage
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/naturallanguage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -31,16 +32,125 @@ func (x *Tagger) WithString(string_ string) *Tagger {
 	return x
 }
 
+// TokenRangeAtIndexUnit calls the underlying TokenRangeAtIndexUnit.
+func (x *Tagger) TokenRangeAtIndexUnit(characterIndex uint, unit raw.NLTokenUnit) foundation.NSRange {
+	return x.inner.TokenRangeAtIndexUnit(characterIndex, unit)
+}
+
+// TokenRangeForRangeUnit calls the underlying TokenRangeForRangeUnit.
+func (x *Tagger) TokenRangeForRangeUnit(range_ foundation.NSRange, unit raw.NLTokenUnit) foundation.NSRange {
+	return x.inner.TokenRangeForRangeUnit(range_, unit)
+}
+
+// EnumerateTagsInRangeUnitSchemeOptionsUsing calls the underlying EnumerateTagsInRangeUnitSchemeOptionsUsing.
+func (x *Tagger) EnumerateTagsInRangeUnitSchemeOptionsUsing(range_ foundation.NSRange, unit raw.NLTokenUnit, scheme *foundation.NSString, options raw.NLTaggerOptions, block objc.Block) {
+	x.inner.EnumerateTagsInRangeUnitSchemeOptionsUsing(range_, unit, scheme, options, block)
+}
+
+// TagAtIndexUnitSchemeTokenRange calls the underlying TagAtIndexUnitSchemeTokenRange.
+func (x *Tagger) TagAtIndexUnitSchemeTokenRange(characterIndex uint, unit raw.NLTokenUnit, scheme *foundation.NSString, tokenRange *foundation.NSRange) string {
+	_r := x.inner.TagAtIndexUnitSchemeTokenRange(characterIndex, unit, scheme, tokenRange)
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// TagsInRangeUnitSchemeOptionsTokenRanges calls the underlying TagsInRangeUnitSchemeOptionsTokenRanges.
+func (x *Tagger) TagsInRangeUnitSchemeOptionsTokenRanges(range_ foundation.NSRange, unit raw.NLTokenUnit, scheme *foundation.NSString, options raw.NLTaggerOptions, tokenRanges *foundation.NSArray[*foundation.NSValue]) *foundation.NSArray[*foundation.NSString] {
+	return x.inner.TagsInRangeUnitSchemeOptionsTokenRanges(range_, unit, scheme, options, tokenRanges)
+}
+
+// TagHypothesesAtIndexUnitSchemeMaximumCountTokenRange calls the underlying TagHypothesesAtIndexUnitSchemeMaximumCountTokenRange.
+func (x *Tagger) TagHypothesesAtIndexUnitSchemeMaximumCountTokenRange(characterIndex uint, unit raw.NLTokenUnit, scheme *foundation.NSString, maximumCount uint, tokenRange *foundation.NSRange) *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber] {
+	return x.inner.TagHypothesesAtIndexUnitSchemeMaximumCountTokenRange(characterIndex, unit, scheme, maximumCount, tokenRange)
+}
+
+// SetLanguageRange calls the underlying SetLanguageRange.
+func (x *Tagger) SetLanguageRange(language *foundation.NSString, range_ foundation.NSRange) {
+	x.inner.SetLanguageRange(language, range_)
+}
+
+// SetOrthographyRange calls the underlying SetOrthographyRange.
+func (x *Tagger) SetOrthographyRange(orthography *foundation.NSOrthography, range_ foundation.NSRange) {
+	x.inner.SetOrthographyRange(orthography, range_)
+}
+
+// SetModelsForTagScheme calls the underlying SetModelsForTagScheme.
+func (x *Tagger) SetModelsForTagScheme(models *foundation.NSArray[*raw.NLModel], tagScheme *foundation.NSString) {
+	x.inner.SetModelsForTagScheme(models, tagScheme)
+}
+
+// ModelsForTagScheme calls the underlying ModelsForTagScheme.
+func (x *Tagger) ModelsForTagScheme(tagScheme *foundation.NSString) *foundation.NSArray[*raw.NLModel] {
+	return x.inner.ModelsForTagScheme(tagScheme)
+}
+
+// SetGazetteersForTagScheme calls the underlying SetGazetteersForTagScheme.
+func (x *Tagger) SetGazetteersForTagScheme(gazetteers *foundation.NSArray[*raw.NLGazetteer], tagScheme *foundation.NSString) {
+	x.inner.SetGazetteersForTagScheme(gazetteers, tagScheme)
+}
+
+// GazetteersForTagScheme calls the underlying GazetteersForTagScheme.
+func (x *Tagger) GazetteersForTagScheme(tagScheme *foundation.NSString) *foundation.NSArray[*raw.NLGazetteer] {
+	return x.inner.GazetteersForTagScheme(tagScheme)
+}
+
 // TagSchemes returns the collection as a Go slice.
 func (x *Tagger) TagSchemes() []*foundation.NSString {
 	arr := x.inner.TagSchemes()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	})
 }
+
+// String calls the underlying String.
+func (x *Tagger) String() string {
+	_r := x.inner.String()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetString calls the underlying SetString.
+func (x *Tagger) SetString(string_ string) {
+	x.inner.SetString(foundation.NSStringStringWithUTF8String(string_))
+}
+
+// DominantLanguage calls the underlying DominantLanguage.
+func (x *Tagger) DominantLanguage() string {
+	_r := x.inner.DominantLanguage()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Taggerable is the interface implemented by [Tagger], for mocking and DI.
+type Taggerable interface {
+	Unwrap() *raw.NLTagger
+	WithString(string_ string) *Tagger
+	TokenRangeAtIndexUnit(characterIndex uint, unit raw.NLTokenUnit) foundation.NSRange
+	TokenRangeForRangeUnit(range_ foundation.NSRange, unit raw.NLTokenUnit) foundation.NSRange
+	EnumerateTagsInRangeUnitSchemeOptionsUsing(range_ foundation.NSRange, unit raw.NLTokenUnit, scheme *foundation.NSString, options raw.NLTaggerOptions, block objc.Block)
+	TagAtIndexUnitSchemeTokenRange(characterIndex uint, unit raw.NLTokenUnit, scheme *foundation.NSString, tokenRange *foundation.NSRange) string
+	TagsInRangeUnitSchemeOptionsTokenRanges(range_ foundation.NSRange, unit raw.NLTokenUnit, scheme *foundation.NSString, options raw.NLTaggerOptions, tokenRanges *foundation.NSArray[*foundation.NSValue]) *foundation.NSArray[*foundation.NSString]
+	TagHypothesesAtIndexUnitSchemeMaximumCountTokenRange(characterIndex uint, unit raw.NLTokenUnit, scheme *foundation.NSString, maximumCount uint, tokenRange *foundation.NSRange) *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber]
+	SetLanguageRange(language *foundation.NSString, range_ foundation.NSRange)
+	SetOrthographyRange(orthography *foundation.NSOrthography, range_ foundation.NSRange)
+	SetModelsForTagScheme(models *foundation.NSArray[*raw.NLModel], tagScheme *foundation.NSString)
+	ModelsForTagScheme(tagScheme *foundation.NSString) *foundation.NSArray[*raw.NLModel]
+	SetGazetteersForTagScheme(gazetteers *foundation.NSArray[*raw.NLGazetteer], tagScheme *foundation.NSString)
+	GazetteersForTagScheme(tagScheme *foundation.NSString) *foundation.NSArray[*raw.NLGazetteer]
+	TagSchemes() []*foundation.NSString
+	String() string
+	SetString(string_ string)
+	DominantLanguage() string
+}
+
+var _ Taggerable = (*Tagger)(nil)
 

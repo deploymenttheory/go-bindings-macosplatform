@@ -23,3 +23,10 @@ func NewQueryCursor() *QueryCursor {
 	return &QueryCursor{inner: raw.CKQueryCursorFromID(_id)}
 }
 
+// QueryCursorable is the interface implemented by [QueryCursor], for mocking and DI.
+type QueryCursorable interface {
+	Unwrap() *raw.CKQueryCursor
+}
+
+var _ QueryCursorable = (*QueryCursor)(nil)
+

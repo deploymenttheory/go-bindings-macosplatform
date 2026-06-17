@@ -7,7 +7,9 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // FontAssetRequest wraps [raw.NSFontAssetRequest] with a fluent Go API.
@@ -25,16 +27,34 @@ func NewFontAssetRequestWithFontDescriptorsOptions(fontDescriptors *foundation.N
 	return &FontAssetRequest{inner: raw.NSFontAssetRequestFromID(_id)}
 }
 
+// DownloadFontAssetsWithCompletionHandler calls the underlying DownloadFontAssetsWithCompletionHandler.
+func (x *FontAssetRequest) DownloadFontAssetsWithCompletionHandler(completionHandler func(unsafe.Pointer) bool) {
+	x.inner.DownloadFontAssetsWithCompletionHandler(completionHandler)
+}
+
 // DownloadedFontDescriptors returns the collection as a Go slice.
 func (x *FontAssetRequest) DownloadedFontDescriptors() []*raw.NSFontDescriptor {
 	arr := x.inner.DownloadedFontDescriptors()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSFontDescriptor, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSFontDescriptor {
+		return raw.NSFontDescriptorFromID(purego.Retain(_id))
+	})
 }
+
+// Progress calls the underlying Progress.
+func (x *FontAssetRequest) Progress() *foundation.NSProgress {
+	return x.inner.Progress()
+}
+
+// FontAssetRequestable is the interface implemented by [FontAssetRequest], for mocking and DI.
+type FontAssetRequestable interface {
+	Unwrap() *raw.NSFontAssetRequest
+	DownloadFontAssetsWithCompletionHandler(completionHandler func(unsafe.Pointer) bool)
+	DownloadedFontDescriptors() []*raw.NSFontDescriptor
+	Progress() *foundation.NSProgress
+}
+
+var _ FontAssetRequestable = (*FontAssetRequest)(nil)
 

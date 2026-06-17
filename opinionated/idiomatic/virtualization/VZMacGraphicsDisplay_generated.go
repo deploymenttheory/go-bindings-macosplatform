@@ -23,5 +23,18 @@ func NewMacGraphicsDisplay() *MacGraphicsDisplay {
 	return &MacGraphicsDisplay{inner: raw.VZMacGraphicsDisplayFromID(_id)}
 }
 
+// PixelsPerInch calls the underlying PixelsPerInch.
+func (x *MacGraphicsDisplay) PixelsPerInch() int {
+	return x.inner.PixelsPerInch()
+}
+
 func (x *MacGraphicsDisplay) asGraphicsDisplay() *raw.VZGraphicsDisplay { return &x.inner.VZGraphicsDisplay }
+
+// MacGraphicsDisplayable is the interface implemented by [MacGraphicsDisplay], for mocking and DI.
+type MacGraphicsDisplayable interface {
+	Unwrap() *raw.VZMacGraphicsDisplay
+	PixelsPerInch() int
+}
+
+var _ MacGraphicsDisplayable = (*MacGraphicsDisplay)(nil)
 

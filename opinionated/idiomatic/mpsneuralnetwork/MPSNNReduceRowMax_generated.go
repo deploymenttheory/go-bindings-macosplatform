@@ -37,3 +37,10 @@ func (x *NNReduceRowMax) asNNReduceUnary() *raw.MPSNNReduceUnary { return &x.inn
 
 func (x *NNReduceRowMax) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSNNReduceUnary.MPSCNNKernel }
 
+// NNReduceRowMaxable is the interface implemented by [NNReduceRowMax], for mocking and DI.
+type NNReduceRowMaxable interface {
+	Unwrap() *raw.MPSNNReduceRowMax
+}
+
+var _ NNReduceRowMaxable = (*NNReduceRowMax)(nil)
+

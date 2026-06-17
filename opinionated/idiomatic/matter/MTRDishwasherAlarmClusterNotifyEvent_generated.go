@@ -48,3 +48,62 @@ func (x *MTRDishwasherAlarmClusterNotifyEvent) WithMask(mask *foundation.NSNumbe
 	return x
 }
 
+// Active calls the underlying Active.
+func (x *MTRDishwasherAlarmClusterNotifyEvent) Active() *foundation.NSNumber {
+	return x.inner.Active()
+}
+
+// SetActive calls the underlying SetActive.
+func (x *MTRDishwasherAlarmClusterNotifyEvent) SetActive(active *foundation.NSNumber) {
+	x.inner.SetActive(active)
+}
+
+// Inactive calls the underlying Inactive.
+func (x *MTRDishwasherAlarmClusterNotifyEvent) Inactive() *foundation.NSNumber {
+	return x.inner.Inactive()
+}
+
+// SetInactive calls the underlying SetInactive.
+func (x *MTRDishwasherAlarmClusterNotifyEvent) SetInactive(inactive *foundation.NSNumber) {
+	x.inner.SetInactive(inactive)
+}
+
+// State calls the underlying State.
+func (x *MTRDishwasherAlarmClusterNotifyEvent) State() *foundation.NSNumber {
+	return x.inner.State()
+}
+
+// SetState calls the underlying SetState.
+func (x *MTRDishwasherAlarmClusterNotifyEvent) SetState(state *foundation.NSNumber) {
+	x.inner.SetState(state)
+}
+
+// Mask calls the underlying Mask.
+func (x *MTRDishwasherAlarmClusterNotifyEvent) Mask() *foundation.NSNumber {
+	return x.inner.Mask()
+}
+
+// SetMask calls the underlying SetMask.
+func (x *MTRDishwasherAlarmClusterNotifyEvent) SetMask(mask *foundation.NSNumber) {
+	x.inner.SetMask(mask)
+}
+
+// MTRDishwasherAlarmClusterNotifyEventable is the interface implemented by [MTRDishwasherAlarmClusterNotifyEvent], for mocking and DI.
+type MTRDishwasherAlarmClusterNotifyEventable interface {
+	Unwrap() *raw.MTRDishwasherAlarmClusterNotifyEvent
+	WithActive(active *foundation.NSNumber) *MTRDishwasherAlarmClusterNotifyEvent
+	WithInactive(inactive *foundation.NSNumber) *MTRDishwasherAlarmClusterNotifyEvent
+	WithState(state *foundation.NSNumber) *MTRDishwasherAlarmClusterNotifyEvent
+	WithMask(mask *foundation.NSNumber) *MTRDishwasherAlarmClusterNotifyEvent
+	Active() *foundation.NSNumber
+	SetActive(active *foundation.NSNumber)
+	Inactive() *foundation.NSNumber
+	SetInactive(inactive *foundation.NSNumber)
+	State() *foundation.NSNumber
+	SetState(state *foundation.NSNumber)
+	Mask() *foundation.NSNumber
+	SetMask(mask *foundation.NSNumber)
+}
+
+var _ MTRDishwasherAlarmClusterNotifyEventable = (*MTRDishwasherAlarmClusterNotifyEvent)(nil)
+

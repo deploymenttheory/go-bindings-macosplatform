@@ -5,7 +5,9 @@
 package usernotifications
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/usernotifications"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,18 +25,147 @@ func NewNotificationContent() *NotificationContent {
 	return &NotificationContent{inner: raw.UNNotificationContentFromID(_id)}
 }
 
+// ContentByUpdatingWithProviderError calls the underlying ContentByUpdatingWithProviderError.
+func (x *NotificationContent) ContentByUpdatingWithProviderError(provider raw.UNNotificationContentProviding) (*NotificationContent, error) {
+	_r, _err := x.inner.ContentByUpdatingWithProviderError(provider)
+	if _err != nil {
+		return nil, _err
+	}
+	if _r == nil {
+		return nil, nil
+	}
+	return &NotificationContent{inner: _r}, nil
+}
+
 // Attachments returns the collection as a Go slice.
 func (x *NotificationContent) Attachments() []*raw.UNNotificationAttachment {
 	arr := x.inner.Attachments()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.UNNotificationAttachment, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.UNNotificationAttachment {
+		return raw.UNNotificationAttachmentFromID(purego.Retain(_id))
+	})
+}
+
+// Badge calls the underlying Badge.
+func (x *NotificationContent) Badge() *foundation.NSNumber {
+	return x.inner.Badge()
+}
+
+// Body calls the underlying Body.
+func (x *NotificationContent) Body() string {
+	_r := x.inner.Body()
+	if _r == nil {
+		return ""
 	}
-	return out
+	return purego.GoString(_r.Ptr())
+}
+
+// CategoryIdentifier calls the underlying CategoryIdentifier.
+func (x *NotificationContent) CategoryIdentifier() string {
+	_r := x.inner.CategoryIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Subtitle calls the underlying Subtitle.
+func (x *NotificationContent) Subtitle() string {
+	_r := x.inner.Subtitle()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ThreadIdentifier calls the underlying ThreadIdentifier.
+func (x *NotificationContent) ThreadIdentifier() string {
+	_r := x.inner.ThreadIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Title calls the underlying Title.
+func (x *NotificationContent) Title() string {
+	_r := x.inner.Title()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// UserInfo calls the underlying UserInfo.
+func (x *NotificationContent) UserInfo() *foundation.NSDictionary[objc.ID, objc.ID] {
+	return x.inner.UserInfo()
+}
+
+// SummaryArgument calls the underlying SummaryArgument.
+func (x *NotificationContent) SummaryArgument() string {
+	_r := x.inner.SummaryArgument()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SummaryArgumentCount calls the underlying SummaryArgumentCount.
+func (x *NotificationContent) SummaryArgumentCount() uint {
+	return x.inner.SummaryArgumentCount()
+}
+
+// TargetContentIdentifier calls the underlying TargetContentIdentifier.
+func (x *NotificationContent) TargetContentIdentifier() string {
+	_r := x.inner.TargetContentIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// InterruptionLevel calls the underlying InterruptionLevel.
+func (x *NotificationContent) InterruptionLevel() raw.UNNotificationInterruptionLevel {
+	return x.inner.InterruptionLevel()
+}
+
+// RelevanceScore calls the underlying RelevanceScore.
+func (x *NotificationContent) RelevanceScore() float64 {
+	return x.inner.RelevanceScore()
+}
+
+// FilterCriteria calls the underlying FilterCriteria.
+func (x *NotificationContent) FilterCriteria() string {
+	_r := x.inner.FilterCriteria()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
 }
 
 func (x *NotificationContent) asNotificationContent() *raw.UNNotificationContent { return x.inner }
+
+// NotificationContentable is the interface implemented by [NotificationContent], for mocking and DI.
+type NotificationContentable interface {
+	Unwrap() *raw.UNNotificationContent
+	ContentByUpdatingWithProviderError(provider raw.UNNotificationContentProviding) (*NotificationContent, error)
+	Attachments() []*raw.UNNotificationAttachment
+	Badge() *foundation.NSNumber
+	Body() string
+	CategoryIdentifier() string
+	Subtitle() string
+	ThreadIdentifier() string
+	Title() string
+	UserInfo() *foundation.NSDictionary[objc.ID, objc.ID]
+	SummaryArgument() string
+	SummaryArgumentCount() uint
+	TargetContentIdentifier() string
+	InterruptionLevel() raw.UNNotificationInterruptionLevel
+	RelevanceScore() float64
+	FilterCriteria() string
+}
+
+var _ NotificationContentable = (*NotificationContent)(nil)
 

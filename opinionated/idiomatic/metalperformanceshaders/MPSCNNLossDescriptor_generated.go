@@ -72,3 +72,114 @@ func (x *CNNLossDescriptor) WithDelta(delta float32) *CNNLossDescriptor {
 	return x
 }
 
+// LossType calls the underlying LossType.
+func (x *CNNLossDescriptor) LossType() mpsneuralnetwork.MPSCNNLossType {
+	return x.inner.LossType()
+}
+
+// SetLossType calls the underlying SetLossType.
+func (x *CNNLossDescriptor) SetLossType(lossType mpsneuralnetwork.MPSCNNLossType) {
+	x.inner.SetLossType(lossType)
+}
+
+// ReductionType calls the underlying ReductionType.
+func (x *CNNLossDescriptor) ReductionType() mpsneuralnetwork.MPSCNNReductionType {
+	return x.inner.ReductionType()
+}
+
+// SetReductionType calls the underlying SetReductionType.
+func (x *CNNLossDescriptor) SetReductionType(reductionType mpsneuralnetwork.MPSCNNReductionType) {
+	x.inner.SetReductionType(reductionType)
+}
+
+// ReduceAcrossBatch calls the underlying ReduceAcrossBatch.
+func (x *CNNLossDescriptor) ReduceAcrossBatch() bool {
+	return x.inner.ReduceAcrossBatch()
+}
+
+// SetReduceAcrossBatch calls the underlying SetReduceAcrossBatch.
+func (x *CNNLossDescriptor) SetReduceAcrossBatch(reduceAcrossBatch bool) {
+	x.inner.SetReduceAcrossBatch(reduceAcrossBatch)
+}
+
+// Weight calls the underlying Weight.
+func (x *CNNLossDescriptor) Weight() float32 {
+	return x.inner.Weight()
+}
+
+// SetWeight calls the underlying SetWeight.
+func (x *CNNLossDescriptor) SetWeight(weight float32) {
+	x.inner.SetWeight(weight)
+}
+
+// LabelSmoothing calls the underlying LabelSmoothing.
+func (x *CNNLossDescriptor) LabelSmoothing() float32 {
+	return x.inner.LabelSmoothing()
+}
+
+// SetLabelSmoothing calls the underlying SetLabelSmoothing.
+func (x *CNNLossDescriptor) SetLabelSmoothing(labelSmoothing float32) {
+	x.inner.SetLabelSmoothing(labelSmoothing)
+}
+
+// NumberOfClasses calls the underlying NumberOfClasses.
+func (x *CNNLossDescriptor) NumberOfClasses() uint {
+	return x.inner.NumberOfClasses()
+}
+
+// SetNumberOfClasses calls the underlying SetNumberOfClasses.
+func (x *CNNLossDescriptor) SetNumberOfClasses(numberOfClasses uint) {
+	x.inner.SetNumberOfClasses(numberOfClasses)
+}
+
+// Epsilon calls the underlying Epsilon.
+func (x *CNNLossDescriptor) Epsilon() float32 {
+	return x.inner.Epsilon()
+}
+
+// SetEpsilon calls the underlying SetEpsilon.
+func (x *CNNLossDescriptor) SetEpsilon(epsilon float32) {
+	x.inner.SetEpsilon(epsilon)
+}
+
+// Delta calls the underlying Delta.
+func (x *CNNLossDescriptor) Delta() float32 {
+	return x.inner.Delta()
+}
+
+// SetDelta calls the underlying SetDelta.
+func (x *CNNLossDescriptor) SetDelta(delta float32) {
+	x.inner.SetDelta(delta)
+}
+
+// CNNLossDescriptorable is the interface implemented by [CNNLossDescriptor], for mocking and DI.
+type CNNLossDescriptorable interface {
+	Unwrap() *raw.MPSCNNLossDescriptor
+	WithLossType(lossType mpsneuralnetwork.MPSCNNLossType) *CNNLossDescriptor
+	WithReductionType(reductionType mpsneuralnetwork.MPSCNNReductionType) *CNNLossDescriptor
+	WithReduceAcrossBatch(reduceAcrossBatch bool) *CNNLossDescriptor
+	WithWeight(weight float32) *CNNLossDescriptor
+	WithLabelSmoothing(labelSmoothing float32) *CNNLossDescriptor
+	WithNumberOfClasses(numberOfClasses uint) *CNNLossDescriptor
+	WithEpsilon(epsilon float32) *CNNLossDescriptor
+	WithDelta(delta float32) *CNNLossDescriptor
+	LossType() mpsneuralnetwork.MPSCNNLossType
+	SetLossType(lossType mpsneuralnetwork.MPSCNNLossType)
+	ReductionType() mpsneuralnetwork.MPSCNNReductionType
+	SetReductionType(reductionType mpsneuralnetwork.MPSCNNReductionType)
+	ReduceAcrossBatch() bool
+	SetReduceAcrossBatch(reduceAcrossBatch bool)
+	Weight() float32
+	SetWeight(weight float32)
+	LabelSmoothing() float32
+	SetLabelSmoothing(labelSmoothing float32)
+	NumberOfClasses() uint
+	SetNumberOfClasses(numberOfClasses uint)
+	Epsilon() float32
+	SetEpsilon(epsilon float32)
+	Delta() float32
+	SetDelta(delta float32)
+}
+
+var _ CNNLossDescriptorable = (*CNNLossDescriptor)(nil)
+

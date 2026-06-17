@@ -6,6 +6,7 @@ package phase
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,37 @@ func NewMixer() *Mixer {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEMixer")), objc.RegisterName("new"))
 	return &Mixer{inner: raw.PHASEMixerFromID(_id)}
 }
+
+// Identifier calls the underlying Identifier.
+func (x *Mixer) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Gain calls the underlying Gain.
+func (x *Mixer) Gain() float64 {
+	return x.inner.Gain()
+}
+
+// GainMetaParameter calls the underlying GainMetaParameter.
+func (x *Mixer) GainMetaParameter() *MetaParameter {
+	_r := x.inner.GainMetaParameter()
+	if _r == nil {
+		return nil
+	}
+	return &MetaParameter{inner: _r}
+}
+
+// Mixerable is the interface implemented by [Mixer], for mocking and DI.
+type Mixerable interface {
+	Unwrap() *raw.PHASEMixer
+	Identifier() string
+	Gain() float64
+	GainMetaParameter() *MetaParameter
+}
+
+var _ Mixerable = (*Mixer)(nil)
 

@@ -7,6 +7,7 @@ package virtualization
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -47,12 +48,25 @@ func (x *VirtioGraphicsDeviceConfiguration) Scanouts() []*raw.VZVirtioGraphicsSc
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.VZVirtioGraphicsScanoutConfiguration, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.VZVirtioGraphicsScanoutConfiguration {
+		return raw.VZVirtioGraphicsScanoutConfigurationFromID(purego.Retain(_id))
+	})
+}
+
+// SetScanouts calls the underlying SetScanouts.
+func (x *VirtioGraphicsDeviceConfiguration) SetScanouts(scanouts *foundation.NSArray[*raw.VZVirtioGraphicsScanoutConfiguration]) {
+	x.inner.SetScanouts(scanouts)
 }
 
 func (x *VirtioGraphicsDeviceConfiguration) asGraphicsDeviceConfiguration() *raw.VZGraphicsDeviceConfiguration { return &x.inner.VZGraphicsDeviceConfiguration }
+
+// VirtioGraphicsDeviceConfigurationable is the interface implemented by [VirtioGraphicsDeviceConfiguration], for mocking and DI.
+type VirtioGraphicsDeviceConfigurationable interface {
+	Unwrap() *raw.VZVirtioGraphicsDeviceConfiguration
+	WithScanouts(items ...*raw.VZVirtioGraphicsScanoutConfiguration) *VirtioGraphicsDeviceConfiguration
+	Scanouts() []*raw.VZVirtioGraphicsScanoutConfiguration
+	SetScanouts(scanouts *foundation.NSArray[*raw.VZVirtioGraphicsScanoutConfiguration])
+}
+
+var _ VirtioGraphicsDeviceConfigurationable = (*VirtioGraphicsDeviceConfiguration)(nil)
 

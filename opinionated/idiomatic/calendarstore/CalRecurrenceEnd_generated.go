@@ -6,6 +6,7 @@ package calendarstore
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/calendarstore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,29 @@ func NewCalRecurrenceEnd() *CalRecurrenceEnd {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CalRecurrenceEnd")), objc.RegisterName("new"))
 	return &CalRecurrenceEnd{inner: raw.CalRecurrenceEndFromID(_id)}
 }
+
+// UsesEndDate calls the underlying UsesEndDate.
+func (x *CalRecurrenceEnd) UsesEndDate() bool {
+	return x.inner.UsesEndDate()
+}
+
+// EndDate calls the underlying EndDate.
+func (x *CalRecurrenceEnd) EndDate() *foundation.NSDate {
+	return x.inner.EndDate()
+}
+
+// OccurrenceCount calls the underlying OccurrenceCount.
+func (x *CalRecurrenceEnd) OccurrenceCount() uint {
+	return x.inner.OccurrenceCount()
+}
+
+// CalRecurrenceEndable is the interface implemented by [CalRecurrenceEnd], for mocking and DI.
+type CalRecurrenceEndable interface {
+	Unwrap() *raw.CalRecurrenceEnd
+	UsesEndDate() bool
+	EndDate() *foundation.NSDate
+	OccurrenceCount() uint
+}
+
+var _ CalRecurrenceEndable = (*CalRecurrenceEnd)(nil)
 

@@ -72,3 +72,114 @@ func (x *MTRColorControlClusterMoveColorTemperatureParams) WithServerSideProcess
 	return x
 }
 
+// MoveMode calls the underlying MoveMode.
+func (x *MTRColorControlClusterMoveColorTemperatureParams) MoveMode() *foundation.NSNumber {
+	return x.inner.MoveMode()
+}
+
+// SetMoveMode calls the underlying SetMoveMode.
+func (x *MTRColorControlClusterMoveColorTemperatureParams) SetMoveMode(moveMode *foundation.NSNumber) {
+	x.inner.SetMoveMode(moveMode)
+}
+
+// Rate calls the underlying Rate.
+func (x *MTRColorControlClusterMoveColorTemperatureParams) Rate() *foundation.NSNumber {
+	return x.inner.Rate()
+}
+
+// SetRate calls the underlying SetRate.
+func (x *MTRColorControlClusterMoveColorTemperatureParams) SetRate(rate *foundation.NSNumber) {
+	x.inner.SetRate(rate)
+}
+
+// ColorTemperatureMinimumMireds calls the underlying ColorTemperatureMinimumMireds.
+func (x *MTRColorControlClusterMoveColorTemperatureParams) ColorTemperatureMinimumMireds() *foundation.NSNumber {
+	return x.inner.ColorTemperatureMinimumMireds()
+}
+
+// SetColorTemperatureMinimumMireds calls the underlying SetColorTemperatureMinimumMireds.
+func (x *MTRColorControlClusterMoveColorTemperatureParams) SetColorTemperatureMinimumMireds(colorTemperatureMinimumMireds *foundation.NSNumber) {
+	x.inner.SetColorTemperatureMinimumMireds(colorTemperatureMinimumMireds)
+}
+
+// ColorTemperatureMaximumMireds calls the underlying ColorTemperatureMaximumMireds.
+func (x *MTRColorControlClusterMoveColorTemperatureParams) ColorTemperatureMaximumMireds() *foundation.NSNumber {
+	return x.inner.ColorTemperatureMaximumMireds()
+}
+
+// SetColorTemperatureMaximumMireds calls the underlying SetColorTemperatureMaximumMireds.
+func (x *MTRColorControlClusterMoveColorTemperatureParams) SetColorTemperatureMaximumMireds(colorTemperatureMaximumMireds *foundation.NSNumber) {
+	x.inner.SetColorTemperatureMaximumMireds(colorTemperatureMaximumMireds)
+}
+
+// OptionsMask calls the underlying OptionsMask.
+func (x *MTRColorControlClusterMoveColorTemperatureParams) OptionsMask() *foundation.NSNumber {
+	return x.inner.OptionsMask()
+}
+
+// SetOptionsMask calls the underlying SetOptionsMask.
+func (x *MTRColorControlClusterMoveColorTemperatureParams) SetOptionsMask(optionsMask *foundation.NSNumber) {
+	x.inner.SetOptionsMask(optionsMask)
+}
+
+// OptionsOverride calls the underlying OptionsOverride.
+func (x *MTRColorControlClusterMoveColorTemperatureParams) OptionsOverride() *foundation.NSNumber {
+	return x.inner.OptionsOverride()
+}
+
+// SetOptionsOverride calls the underlying SetOptionsOverride.
+func (x *MTRColorControlClusterMoveColorTemperatureParams) SetOptionsOverride(optionsOverride *foundation.NSNumber) {
+	x.inner.SetOptionsOverride(optionsOverride)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRColorControlClusterMoveColorTemperatureParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRColorControlClusterMoveColorTemperatureParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRColorControlClusterMoveColorTemperatureParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRColorControlClusterMoveColorTemperatureParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRColorControlClusterMoveColorTemperatureParamsable is the interface implemented by [MTRColorControlClusterMoveColorTemperatureParams], for mocking and DI.
+type MTRColorControlClusterMoveColorTemperatureParamsable interface {
+	Unwrap() *raw.MTRColorControlClusterMoveColorTemperatureParams
+	WithMoveMode(moveMode *foundation.NSNumber) *MTRColorControlClusterMoveColorTemperatureParams
+	WithRate(rate *foundation.NSNumber) *MTRColorControlClusterMoveColorTemperatureParams
+	WithColorTemperatureMinimumMireds(colorTemperatureMinimumMireds *foundation.NSNumber) *MTRColorControlClusterMoveColorTemperatureParams
+	WithColorTemperatureMaximumMireds(colorTemperatureMaximumMireds *foundation.NSNumber) *MTRColorControlClusterMoveColorTemperatureParams
+	WithOptionsMask(optionsMask *foundation.NSNumber) *MTRColorControlClusterMoveColorTemperatureParams
+	WithOptionsOverride(optionsOverride *foundation.NSNumber) *MTRColorControlClusterMoveColorTemperatureParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRColorControlClusterMoveColorTemperatureParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRColorControlClusterMoveColorTemperatureParams
+	MoveMode() *foundation.NSNumber
+	SetMoveMode(moveMode *foundation.NSNumber)
+	Rate() *foundation.NSNumber
+	SetRate(rate *foundation.NSNumber)
+	ColorTemperatureMinimumMireds() *foundation.NSNumber
+	SetColorTemperatureMinimumMireds(colorTemperatureMinimumMireds *foundation.NSNumber)
+	ColorTemperatureMaximumMireds() *foundation.NSNumber
+	SetColorTemperatureMaximumMireds(colorTemperatureMaximumMireds *foundation.NSNumber)
+	OptionsMask() *foundation.NSNumber
+	SetOptionsMask(optionsMask *foundation.NSNumber)
+	OptionsOverride() *foundation.NSNumber
+	SetOptionsOverride(optionsOverride *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRColorControlClusterMoveColorTemperatureParamsable = (*MTRColorControlClusterMoveColorTemperatureParams)(nil)
+

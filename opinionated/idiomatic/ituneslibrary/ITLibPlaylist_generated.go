@@ -5,7 +5,9 @@
 package ituneslibrary
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/ituneslibrary"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,18 +25,76 @@ func NewLibPlaylist() *LibPlaylist {
 	return &LibPlaylist{inner: raw.ITLibPlaylistFromID(_id)}
 }
 
+// Name calls the underlying Name.
+func (x *LibPlaylist) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// IsPrimary calls the underlying IsPrimary.
+func (x *LibPlaylist) IsPrimary() bool {
+	return x.inner.IsPrimary()
+}
+
+// ParentID calls the underlying ParentID.
+func (x *LibPlaylist) ParentID() *foundation.NSNumber {
+	return x.inner.ParentID()
+}
+
+// IsVisible calls the underlying IsVisible.
+func (x *LibPlaylist) IsVisible() bool {
+	return x.inner.IsVisible()
+}
+
+// IsAllItemsPlaylist calls the underlying IsAllItemsPlaylist.
+func (x *LibPlaylist) IsAllItemsPlaylist() bool {
+	return x.inner.IsAllItemsPlaylist()
+}
+
 // Items returns the collection as a Go slice.
 func (x *LibPlaylist) Items() []*raw.ITLibMediaItem {
 	arr := x.inner.Items()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.ITLibMediaItem, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.ITLibMediaItem {
+		return raw.ITLibMediaItemFromID(purego.Retain(_id))
+	})
+}
+
+// DistinguishedKind calls the underlying DistinguishedKind.
+func (x *LibPlaylist) DistinguishedKind() raw.ITLibDistinguishedPlaylistKind {
+	return x.inner.DistinguishedKind()
+}
+
+// Kind calls the underlying Kind.
+func (x *LibPlaylist) Kind() raw.ITLibPlaylistKind {
+	return x.inner.Kind()
+}
+
+// IsMaster calls the underlying IsMaster.
+func (x *LibPlaylist) IsMaster() bool {
+	return x.inner.IsMaster()
 }
 
 func (x *LibPlaylist) asLibMediaEntity() *raw.ITLibMediaEntity { return &x.inner.ITLibMediaEntity }
+
+// LibPlaylistable is the interface implemented by [LibPlaylist], for mocking and DI.
+type LibPlaylistable interface {
+	Unwrap() *raw.ITLibPlaylist
+	Name() string
+	IsPrimary() bool
+	ParentID() *foundation.NSNumber
+	IsVisible() bool
+	IsAllItemsPlaylist() bool
+	Items() []*raw.ITLibMediaItem
+	DistinguishedKind() raw.ITLibDistinguishedPlaylistKind
+	Kind() raw.ITLibPlaylistKind
+	IsMaster() bool
+}
+
+var _ LibPlaylistable = (*LibPlaylist)(nil)
 

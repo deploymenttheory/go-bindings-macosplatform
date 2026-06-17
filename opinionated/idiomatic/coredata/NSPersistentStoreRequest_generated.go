@@ -7,6 +7,7 @@ package coredata
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -47,12 +48,31 @@ func (x *PersistentStoreRequest) AffectedStores() []*raw.NSPersistentStore {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSPersistentStore, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSPersistentStore {
+		return raw.NSPersistentStoreFromID(purego.Retain(_id))
+	})
+}
+
+// SetAffectedStores calls the underlying SetAffectedStores.
+func (x *PersistentStoreRequest) SetAffectedStores(affectedStores *foundation.NSArray[*raw.NSPersistentStore]) {
+	x.inner.SetAffectedStores(affectedStores)
+}
+
+// RequestType calls the underlying RequestType.
+func (x *PersistentStoreRequest) RequestType() raw.NSPersistentStoreRequestType {
+	return x.inner.RequestType()
 }
 
 func (x *PersistentStoreRequest) asPersistentStoreRequest() *raw.NSPersistentStoreRequest { return x.inner }
+
+// PersistentStoreRequestable is the interface implemented by [PersistentStoreRequest], for mocking and DI.
+type PersistentStoreRequestable interface {
+	Unwrap() *raw.NSPersistentStoreRequest
+	WithAffectedStores(items ...PersistentStoreProvider) *PersistentStoreRequest
+	AffectedStores() []*raw.NSPersistentStore
+	SetAffectedStores(affectedStores *foundation.NSArray[*raw.NSPersistentStore])
+	RequestType() raw.NSPersistentStoreRequestType
+}
+
+var _ PersistentStoreRequestable = (*PersistentStoreRequest)(nil)
 

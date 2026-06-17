@@ -49,3 +49,57 @@ func (x *MTRContentAppObserverClusterContentAppMessageResponseParams) WithEncodi
 	return x
 }
 
+// Status calls the underlying Status.
+func (x *MTRContentAppObserverClusterContentAppMessageResponseParams) Status() *foundation.NSNumber {
+	return x.inner.Status()
+}
+
+// SetStatus calls the underlying SetStatus.
+func (x *MTRContentAppObserverClusterContentAppMessageResponseParams) SetStatus(status *foundation.NSNumber) {
+	x.inner.SetStatus(status)
+}
+
+// Data calls the underlying Data.
+func (x *MTRContentAppObserverClusterContentAppMessageResponseParams) Data() string {
+	_r := x.inner.Data()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetData calls the underlying SetData.
+func (x *MTRContentAppObserverClusterContentAppMessageResponseParams) SetData(data string) {
+	x.inner.SetData(foundation.NSStringStringWithUTF8String(data))
+}
+
+// EncodingHint calls the underlying EncodingHint.
+func (x *MTRContentAppObserverClusterContentAppMessageResponseParams) EncodingHint() string {
+	_r := x.inner.EncodingHint()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetEncodingHint calls the underlying SetEncodingHint.
+func (x *MTRContentAppObserverClusterContentAppMessageResponseParams) SetEncodingHint(encodingHint string) {
+	x.inner.SetEncodingHint(foundation.NSStringStringWithUTF8String(encodingHint))
+}
+
+// MTRContentAppObserverClusterContentAppMessageResponseParamsable is the interface implemented by [MTRContentAppObserverClusterContentAppMessageResponseParams], for mocking and DI.
+type MTRContentAppObserverClusterContentAppMessageResponseParamsable interface {
+	Unwrap() *raw.MTRContentAppObserverClusterContentAppMessageResponseParams
+	WithStatus(status *foundation.NSNumber) *MTRContentAppObserverClusterContentAppMessageResponseParams
+	WithData(data string) *MTRContentAppObserverClusterContentAppMessageResponseParams
+	WithEncodingHint(encodingHint string) *MTRContentAppObserverClusterContentAppMessageResponseParams
+	Status() *foundation.NSNumber
+	SetStatus(status *foundation.NSNumber)
+	Data() string
+	SetData(data string)
+	EncodingHint() string
+	SetEncodingHint(encodingHint string)
+}
+
+var _ MTRContentAppObserverClusterContentAppMessageResponseParamsable = (*MTRContentAppObserverClusterContentAppMessageResponseParams)(nil)
+

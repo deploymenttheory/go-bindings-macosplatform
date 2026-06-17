@@ -30,5 +30,37 @@ func (x *AsynchronousFetchRequest) WithEstimatedResultCount(estimatedResultCount
 	return x
 }
 
+// FetchRequest calls the underlying FetchRequest.
+func (x *AsynchronousFetchRequest) FetchRequest() *raw.NSFetchRequest[objc.ID] {
+	return x.inner.FetchRequest()
+}
+
+// CompletionBlock calls the underlying CompletionBlock.
+func (x *AsynchronousFetchRequest) CompletionBlock() objc.Block {
+	return x.inner.CompletionBlock()
+}
+
+// EstimatedResultCount calls the underlying EstimatedResultCount.
+func (x *AsynchronousFetchRequest) EstimatedResultCount() int {
+	return x.inner.EstimatedResultCount()
+}
+
+// SetEstimatedResultCount calls the underlying SetEstimatedResultCount.
+func (x *AsynchronousFetchRequest) SetEstimatedResultCount(estimatedResultCount int) {
+	x.inner.SetEstimatedResultCount(estimatedResultCount)
+}
+
 func (x *AsynchronousFetchRequest) asPersistentStoreRequest() *raw.NSPersistentStoreRequest { return &x.inner.NSPersistentStoreRequest }
+
+// AsynchronousFetchRequestable is the interface implemented by [AsynchronousFetchRequest], for mocking and DI.
+type AsynchronousFetchRequestable interface {
+	Unwrap() *raw.NSAsynchronousFetchRequest[objc.ID]
+	WithEstimatedResultCount(estimatedResultCount int) *AsynchronousFetchRequest
+	FetchRequest() *raw.NSFetchRequest[objc.ID]
+	CompletionBlock() objc.Block
+	EstimatedResultCount() int
+	SetEstimatedResultCount(estimatedResultCount int)
+}
+
+var _ AsynchronousFetchRequestable = (*AsynchronousFetchRequest)(nil)
 

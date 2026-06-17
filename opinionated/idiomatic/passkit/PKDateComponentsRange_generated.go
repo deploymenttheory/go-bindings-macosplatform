@@ -25,3 +25,22 @@ func NewDateComponentsRangeWithStartDateComponentsEndDateComponents(startDateCom
 	return &DateComponentsRange{inner: raw.PKDateComponentsRangeFromID(_id)}
 }
 
+// StartDateComponents calls the underlying StartDateComponents.
+func (x *DateComponentsRange) StartDateComponents() *foundation.NSDateComponents {
+	return x.inner.StartDateComponents()
+}
+
+// EndDateComponents calls the underlying EndDateComponents.
+func (x *DateComponentsRange) EndDateComponents() *foundation.NSDateComponents {
+	return x.inner.EndDateComponents()
+}
+
+// DateComponentsRangeable is the interface implemented by [DateComponentsRange], for mocking and DI.
+type DateComponentsRangeable interface {
+	Unwrap() *raw.PKDateComponentsRange
+	StartDateComponents() *foundation.NSDateComponents
+	EndDateComponents() *foundation.NSDateComponents
+}
+
+var _ DateComponentsRangeable = (*DateComponentsRange)(nil)
+

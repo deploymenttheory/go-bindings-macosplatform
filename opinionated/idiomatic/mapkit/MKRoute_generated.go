@@ -5,9 +5,10 @@
 package mapkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Route wraps [raw.MKRoute] with a fluent Go API.
@@ -24,17 +25,48 @@ func NewRoute() *Route {
 	return &Route{inner: raw.MKRouteFromID(_id)}
 }
 
+// Name calls the underlying Name.
+func (x *Route) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 // AdvisoryNotices returns the collection as a Go slice.
-func (x *Route) AdvisoryNotices() []*foundation.NSString {
+func (x *Route) AdvisoryNotices() []string {
 	arr := x.inner.AdvisoryNotices()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// Distance calls the underlying Distance.
+func (x *Route) Distance() unsafe.Pointer {
+	return x.inner.Distance()
+}
+
+// ExpectedTravelTime calls the underlying ExpectedTravelTime.
+func (x *Route) ExpectedTravelTime() float64 {
+	return x.inner.ExpectedTravelTime()
+}
+
+// TransportType calls the underlying TransportType.
+func (x *Route) TransportType() raw.MKDirectionsTransportType {
+	return x.inner.TransportType()
+}
+
+// Polyline calls the underlying Polyline.
+func (x *Route) Polyline() *Polyline {
+	_r := x.inner.Polyline()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &Polyline{inner: _r}
 }
 
 // Steps returns the collection as a Go slice.
@@ -43,10 +75,34 @@ func (x *Route) Steps() []*raw.MKRouteStep {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MKRouteStep, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MKRouteStep {
+		return raw.MKRouteStepFromID(purego.Retain(_id))
+	})
 }
+
+// HasTolls calls the underlying HasTolls.
+func (x *Route) HasTolls() bool {
+	return x.inner.HasTolls()
+}
+
+// HasHighways calls the underlying HasHighways.
+func (x *Route) HasHighways() bool {
+	return x.inner.HasHighways()
+}
+
+// Routeable is the interface implemented by [Route], for mocking and DI.
+type Routeable interface {
+	Unwrap() *raw.MKRoute
+	Name() string
+	AdvisoryNotices() []string
+	Distance() unsafe.Pointer
+	ExpectedTravelTime() float64
+	TransportType() raw.MKDirectionsTransportType
+	Polyline() *Polyline
+	Steps() []*raw.MKRouteStep
+	HasTolls() bool
+	HasHighways() bool
+}
+
+var _ Routeable = (*Route)(nil)
 

@@ -32,5 +32,24 @@ func NewMTRXPCDeviceControllerParametersWithXPConnectionBlockUniqueIdentifier(xp
 	return &MTRXPCDeviceControllerParameters{inner: raw.MTRXPCDeviceControllerParametersFromID(_id)}
 }
 
+// UniqueIdentifier calls the underlying UniqueIdentifier.
+func (x *MTRXPCDeviceControllerParameters) UniqueIdentifier() *foundation.NSUUID {
+	return x.inner.UniqueIdentifier()
+}
+
+// XpcConnectionBlock calls the underlying XpcConnectionBlock.
+func (x *MTRXPCDeviceControllerParameters) XpcConnectionBlock() objc.Block {
+	return x.inner.XpcConnectionBlock()
+}
+
 func (x *MTRXPCDeviceControllerParameters) asMTRDeviceControllerAbstractParameters() *raw.MTRDeviceControllerAbstractParameters { return &x.inner.MTRDeviceControllerAbstractParameters }
+
+// MTRXPCDeviceControllerParametersable is the interface implemented by [MTRXPCDeviceControllerParameters], for mocking and DI.
+type MTRXPCDeviceControllerParametersable interface {
+	Unwrap() *raw.MTRXPCDeviceControllerParameters
+	UniqueIdentifier() *foundation.NSUUID
+	XpcConnectionBlock() objc.Block
+}
+
+var _ MTRXPCDeviceControllerParametersable = (*MTRXPCDeviceControllerParameters)(nil)
 

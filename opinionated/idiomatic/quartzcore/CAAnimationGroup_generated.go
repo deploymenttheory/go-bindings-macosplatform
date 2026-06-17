@@ -7,6 +7,7 @@ package quartzcore
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -47,12 +48,25 @@ func (x *AnimationGroup) Animations() []*raw.CAAnimation {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.CAAnimation, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CAAnimation {
+		return raw.CAAnimationFromID(purego.Retain(_id))
+	})
+}
+
+// SetAnimations calls the underlying SetAnimations.
+func (x *AnimationGroup) SetAnimations(animations *foundation.NSArray[*raw.CAAnimation]) {
+	x.inner.SetAnimations(animations)
 }
 
 func (x *AnimationGroup) asAnimation() *raw.CAAnimation { return &x.inner.CAAnimation }
+
+// AnimationGroupable is the interface implemented by [AnimationGroup], for mocking and DI.
+type AnimationGroupable interface {
+	Unwrap() *raw.CAAnimationGroup
+	WithAnimations(items ...AnimationProvider) *AnimationGroup
+	Animations() []*raw.CAAnimation
+	SetAnimations(animations *foundation.NSArray[*raw.CAAnimation])
+}
+
+var _ AnimationGroupable = (*AnimationGroup)(nil)
 

@@ -60,3 +60,88 @@ func (x *MTRLevelControlClusterMoveToLevelParams) WithServerSideProcessingTimeou
 	return x
 }
 
+// Level calls the underlying Level.
+func (x *MTRLevelControlClusterMoveToLevelParams) Level() *foundation.NSNumber {
+	return x.inner.Level()
+}
+
+// SetLevel calls the underlying SetLevel.
+func (x *MTRLevelControlClusterMoveToLevelParams) SetLevel(level *foundation.NSNumber) {
+	x.inner.SetLevel(level)
+}
+
+// TransitionTime calls the underlying TransitionTime.
+func (x *MTRLevelControlClusterMoveToLevelParams) TransitionTime() *foundation.NSNumber {
+	return x.inner.TransitionTime()
+}
+
+// SetTransitionTime calls the underlying SetTransitionTime.
+func (x *MTRLevelControlClusterMoveToLevelParams) SetTransitionTime(transitionTime *foundation.NSNumber) {
+	x.inner.SetTransitionTime(transitionTime)
+}
+
+// OptionsMask calls the underlying OptionsMask.
+func (x *MTRLevelControlClusterMoveToLevelParams) OptionsMask() *foundation.NSNumber {
+	return x.inner.OptionsMask()
+}
+
+// SetOptionsMask calls the underlying SetOptionsMask.
+func (x *MTRLevelControlClusterMoveToLevelParams) SetOptionsMask(optionsMask *foundation.NSNumber) {
+	x.inner.SetOptionsMask(optionsMask)
+}
+
+// OptionsOverride calls the underlying OptionsOverride.
+func (x *MTRLevelControlClusterMoveToLevelParams) OptionsOverride() *foundation.NSNumber {
+	return x.inner.OptionsOverride()
+}
+
+// SetOptionsOverride calls the underlying SetOptionsOverride.
+func (x *MTRLevelControlClusterMoveToLevelParams) SetOptionsOverride(optionsOverride *foundation.NSNumber) {
+	x.inner.SetOptionsOverride(optionsOverride)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRLevelControlClusterMoveToLevelParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRLevelControlClusterMoveToLevelParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRLevelControlClusterMoveToLevelParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRLevelControlClusterMoveToLevelParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRLevelControlClusterMoveToLevelParamsable is the interface implemented by [MTRLevelControlClusterMoveToLevelParams], for mocking and DI.
+type MTRLevelControlClusterMoveToLevelParamsable interface {
+	Unwrap() *raw.MTRLevelControlClusterMoveToLevelParams
+	WithLevel(level *foundation.NSNumber) *MTRLevelControlClusterMoveToLevelParams
+	WithTransitionTime(transitionTime *foundation.NSNumber) *MTRLevelControlClusterMoveToLevelParams
+	WithOptionsMask(optionsMask *foundation.NSNumber) *MTRLevelControlClusterMoveToLevelParams
+	WithOptionsOverride(optionsOverride *foundation.NSNumber) *MTRLevelControlClusterMoveToLevelParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRLevelControlClusterMoveToLevelParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRLevelControlClusterMoveToLevelParams
+	Level() *foundation.NSNumber
+	SetLevel(level *foundation.NSNumber)
+	TransitionTime() *foundation.NSNumber
+	SetTransitionTime(transitionTime *foundation.NSNumber)
+	OptionsMask() *foundation.NSNumber
+	SetOptionsMask(optionsMask *foundation.NSNumber)
+	OptionsOverride() *foundation.NSNumber
+	SetOptionsOverride(optionsOverride *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRLevelControlClusterMoveToLevelParamsable = (*MTRLevelControlClusterMoveToLevelParams)(nil)
+

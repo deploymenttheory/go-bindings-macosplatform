@@ -5,7 +5,9 @@
 package passkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +24,49 @@ func NewStoredValuePassBalance() *StoredValuePassBalance {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PKStoredValuePassBalance")), objc.RegisterName("new"))
 	return &StoredValuePassBalance{inner: raw.PKStoredValuePassBalanceFromID(_id)}
 }
+
+// IsEqualToBalance calls the underlying IsEqualToBalance.
+func (x *StoredValuePassBalance) IsEqualToBalance(balance *raw.PKStoredValuePassBalance) bool {
+	return x.inner.IsEqualToBalance(balance)
+}
+
+// Amount calls the underlying Amount.
+func (x *StoredValuePassBalance) Amount() *foundation.NSDecimalNumber {
+	return x.inner.Amount()
+}
+
+// CurrencyCode calls the underlying CurrencyCode.
+func (x *StoredValuePassBalance) CurrencyCode() string {
+	_r := x.inner.CurrencyCode()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// BalanceType calls the underlying BalanceType.
+func (x *StoredValuePassBalance) BalanceType() string {
+	_r := x.inner.BalanceType()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ExpiryDate calls the underlying ExpiryDate.
+func (x *StoredValuePassBalance) ExpiryDate() *foundation.NSDate {
+	return x.inner.ExpiryDate()
+}
+
+// StoredValuePassBalanceable is the interface implemented by [StoredValuePassBalance], for mocking and DI.
+type StoredValuePassBalanceable interface {
+	Unwrap() *raw.PKStoredValuePassBalance
+	IsEqualToBalance(balance *raw.PKStoredValuePassBalance) bool
+	Amount() *foundation.NSDecimalNumber
+	CurrencyCode() string
+	BalanceType() string
+	ExpiryDate() *foundation.NSDate
+}
+
+var _ StoredValuePassBalanceable = (*StoredValuePassBalance)(nil)
 

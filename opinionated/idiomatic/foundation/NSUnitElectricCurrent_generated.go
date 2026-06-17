@@ -29,3 +29,10 @@ func (x *UnitElectricCurrent) asUnit() *raw.NSUnit { return &x.inner.NSDimension
 
 func (x *UnitElectricCurrent) asObject() *raw.NSObject { return &x.inner.NSDimension.NSUnit.NSObject }
 
+// UnitElectricCurrentable is the interface implemented by [UnitElectricCurrent], for mocking and DI.
+type UnitElectricCurrentable interface {
+	Unwrap() *raw.NSUnitElectricCurrent
+}
+
+var _ UnitElectricCurrentable = (*UnitElectricCurrent)(nil)
+

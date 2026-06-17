@@ -29,3 +29,10 @@ func (x *DOMDocumentFragment) asDOMObject() *raw.DOMObject { return &x.inner.DOM
 
 func (x *DOMDocumentFragment) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMNode.DOMObject.WebScriptObject }
 
+// DOMDocumentFragmentable is the interface implemented by [DOMDocumentFragment], for mocking and DI.
+type DOMDocumentFragmentable interface {
+	Unwrap() *raw.DOMDocumentFragment
+}
+
+var _ DOMDocumentFragmentable = (*DOMDocumentFragment)(nil)
+

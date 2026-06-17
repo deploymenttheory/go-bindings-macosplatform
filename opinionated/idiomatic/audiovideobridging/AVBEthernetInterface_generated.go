@@ -25,3 +25,10 @@ func NewEthernetInterface() *EthernetInterface {
 
 func (x *EthernetInterface) asInterface() *raw.AVBInterface { return &x.inner.AVBInterface }
 
+// EthernetInterfaceable is the interface implemented by [EthernetInterface], for mocking and DI.
+type EthernetInterfaceable interface {
+	Unwrap() *raw.AVBEthernetInterface
+}
+
+var _ EthernetInterfaceable = (*EthernetInterface)(nil)
+

@@ -36,3 +36,36 @@ func (x *MTREthernetNetworkDiagnosticsClusterResetCountsParams) WithServerSidePr
 	return x
 }
 
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTREthernetNetworkDiagnosticsClusterResetCountsParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTREthernetNetworkDiagnosticsClusterResetCountsParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTREthernetNetworkDiagnosticsClusterResetCountsParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTREthernetNetworkDiagnosticsClusterResetCountsParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTREthernetNetworkDiagnosticsClusterResetCountsParamsable is the interface implemented by [MTREthernetNetworkDiagnosticsClusterResetCountsParams], for mocking and DI.
+type MTREthernetNetworkDiagnosticsClusterResetCountsParamsable interface {
+	Unwrap() *raw.MTREthernetNetworkDiagnosticsClusterResetCountsParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTREthernetNetworkDiagnosticsClusterResetCountsParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTREthernetNetworkDiagnosticsClusterResetCountsParams
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTREthernetNetworkDiagnosticsClusterResetCountsParamsable = (*MTREthernetNetworkDiagnosticsClusterResetCountsParams)(nil)
+

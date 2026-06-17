@@ -36,5 +36,38 @@ func (x *RNNSingleGateDescriptor) WithRecurrentWeights(recurrentWeights mpsneura
 	return x
 }
 
+// InputWeights calls the underlying InputWeights.
+func (x *RNNSingleGateDescriptor) InputWeights() mpsneuralnetwork.MPSCNNConvolutionDataSource {
+	return x.inner.InputWeights()
+}
+
+// SetInputWeights calls the underlying SetInputWeights.
+func (x *RNNSingleGateDescriptor) SetInputWeights(inputWeights mpsneuralnetwork.MPSCNNConvolutionDataSource) {
+	x.inner.SetInputWeights(inputWeights)
+}
+
+// RecurrentWeights calls the underlying RecurrentWeights.
+func (x *RNNSingleGateDescriptor) RecurrentWeights() mpsneuralnetwork.MPSCNNConvolutionDataSource {
+	return x.inner.RecurrentWeights()
+}
+
+// SetRecurrentWeights calls the underlying SetRecurrentWeights.
+func (x *RNNSingleGateDescriptor) SetRecurrentWeights(recurrentWeights mpsneuralnetwork.MPSCNNConvolutionDataSource) {
+	x.inner.SetRecurrentWeights(recurrentWeights)
+}
+
 func (x *RNNSingleGateDescriptor) asRNNDescriptor() *mpsneuralnetwork.MPSRNNDescriptor { return &x.inner.MPSRNNDescriptor }
+
+// RNNSingleGateDescriptorable is the interface implemented by [RNNSingleGateDescriptor], for mocking and DI.
+type RNNSingleGateDescriptorable interface {
+	Unwrap() *raw.MPSRNNSingleGateDescriptor
+	WithInputWeights(inputWeights mpsneuralnetwork.MPSCNNConvolutionDataSource) *RNNSingleGateDescriptor
+	WithRecurrentWeights(recurrentWeights mpsneuralnetwork.MPSCNNConvolutionDataSource) *RNNSingleGateDescriptor
+	InputWeights() mpsneuralnetwork.MPSCNNConvolutionDataSource
+	SetInputWeights(inputWeights mpsneuralnetwork.MPSCNNConvolutionDataSource)
+	RecurrentWeights() mpsneuralnetwork.MPSCNNConvolutionDataSource
+	SetRecurrentWeights(recurrentWeights mpsneuralnetwork.MPSCNNConvolutionDataSource)
+}
+
+var _ RNNSingleGateDescriptorable = (*RNNSingleGateDescriptor)(nil)
 

@@ -31,5 +31,62 @@ func NewURLConnectionWithRequestDelegate(request *raw.NSURLRequest, delegate obj
 	return &URLConnection{inner: raw.NSURLConnectionFromID(_id)}
 }
 
+// Start calls the underlying Start.
+func (x *URLConnection) Start() {
+	x.inner.Start()
+}
+
+// Cancel calls the underlying Cancel.
+func (x *URLConnection) Cancel() {
+	x.inner.Cancel()
+}
+
+// ScheduleInRunLoopForMode calls the underlying ScheduleInRunLoopForMode.
+func (x *URLConnection) ScheduleInRunLoopForMode(aRunLoop *raw.NSRunLoop, mode *raw.NSString) {
+	x.inner.ScheduleInRunLoopForMode(aRunLoop, mode)
+}
+
+// UnscheduleFromRunLoopForMode calls the underlying UnscheduleFromRunLoopForMode.
+func (x *URLConnection) UnscheduleFromRunLoopForMode(aRunLoop *raw.NSRunLoop, mode *raw.NSString) {
+	x.inner.UnscheduleFromRunLoopForMode(aRunLoop, mode)
+}
+
+// SetDelegateQueue calls the underlying SetDelegateQueue.
+func (x *URLConnection) SetDelegateQueue(queue *raw.NSOperationQueue) {
+	x.inner.SetDelegateQueue(queue)
+}
+
+// OriginalRequest calls the underlying OriginalRequest.
+func (x *URLConnection) OriginalRequest() *URLRequest {
+	_r := x.inner.OriginalRequest()
+	if _r == nil {
+		return nil
+	}
+	return &URLRequest{inner: _r}
+}
+
+// CurrentRequest calls the underlying CurrentRequest.
+func (x *URLConnection) CurrentRequest() *URLRequest {
+	_r := x.inner.CurrentRequest()
+	if _r == nil {
+		return nil
+	}
+	return &URLRequest{inner: _r}
+}
+
 func (x *URLConnection) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// URLConnectionable is the interface implemented by [URLConnection], for mocking and DI.
+type URLConnectionable interface {
+	Unwrap() *raw.NSURLConnection
+	Start()
+	Cancel()
+	ScheduleInRunLoopForMode(aRunLoop *raw.NSRunLoop, mode *raw.NSString)
+	UnscheduleFromRunLoopForMode(aRunLoop *raw.NSRunLoop, mode *raw.NSString)
+	SetDelegateQueue(queue *raw.NSOperationQueue)
+	OriginalRequest() *URLRequest
+	CurrentRequest() *URLRequest
+}
+
+var _ URLConnectionable = (*URLConnection)(nil)
 

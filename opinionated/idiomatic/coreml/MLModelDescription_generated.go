@@ -6,6 +6,8 @@ package coreml
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +24,79 @@ func NewModelDescription() *ModelDescription {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLModelDescription")), objc.RegisterName("new"))
 	return &ModelDescription{inner: raw.MLModelDescriptionFromID(_id)}
 }
+
+// InputDescriptionsByName calls the underlying InputDescriptionsByName.
+func (x *ModelDescription) InputDescriptionsByName() *foundation.NSDictionary[*foundation.NSString, *raw.MLFeatureDescription] {
+	return x.inner.InputDescriptionsByName()
+}
+
+// OutputDescriptionsByName calls the underlying OutputDescriptionsByName.
+func (x *ModelDescription) OutputDescriptionsByName() *foundation.NSDictionary[*foundation.NSString, *raw.MLFeatureDescription] {
+	return x.inner.OutputDescriptionsByName()
+}
+
+// StateDescriptionsByName calls the underlying StateDescriptionsByName.
+func (x *ModelDescription) StateDescriptionsByName() *foundation.NSDictionary[*foundation.NSString, *raw.MLFeatureDescription] {
+	return x.inner.StateDescriptionsByName()
+}
+
+// PredictedFeatureName calls the underlying PredictedFeatureName.
+func (x *ModelDescription) PredictedFeatureName() string {
+	_r := x.inner.PredictedFeatureName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// PredictedProbabilitiesName calls the underlying PredictedProbabilitiesName.
+func (x *ModelDescription) PredictedProbabilitiesName() string {
+	_r := x.inner.PredictedProbabilitiesName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Metadata calls the underlying Metadata.
+func (x *ModelDescription) Metadata() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.Metadata()
+}
+
+// ClassLabels calls the underlying ClassLabels.
+func (x *ModelDescription) ClassLabels() *foundation.NSArray[objc.ID] {
+	return x.inner.ClassLabels()
+}
+
+// IsUpdatable calls the underlying IsUpdatable.
+func (x *ModelDescription) IsUpdatable() bool {
+	return x.inner.IsUpdatable()
+}
+
+// TrainingInputDescriptionsByName calls the underlying TrainingInputDescriptionsByName.
+func (x *ModelDescription) TrainingInputDescriptionsByName() *foundation.NSDictionary[*foundation.NSString, *raw.MLFeatureDescription] {
+	return x.inner.TrainingInputDescriptionsByName()
+}
+
+// ParameterDescriptionsByKey calls the underlying ParameterDescriptionsByKey.
+func (x *ModelDescription) ParameterDescriptionsByKey() *foundation.NSDictionary[*raw.MLParameterKey, *raw.MLParameterDescription] {
+	return x.inner.ParameterDescriptionsByKey()
+}
+
+// ModelDescriptionable is the interface implemented by [ModelDescription], for mocking and DI.
+type ModelDescriptionable interface {
+	Unwrap() *raw.MLModelDescription
+	InputDescriptionsByName() *foundation.NSDictionary[*foundation.NSString, *raw.MLFeatureDescription]
+	OutputDescriptionsByName() *foundation.NSDictionary[*foundation.NSString, *raw.MLFeatureDescription]
+	StateDescriptionsByName() *foundation.NSDictionary[*foundation.NSString, *raw.MLFeatureDescription]
+	PredictedFeatureName() string
+	PredictedProbabilitiesName() string
+	Metadata() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ClassLabels() *foundation.NSArray[objc.ID]
+	IsUpdatable() bool
+	TrainingInputDescriptionsByName() *foundation.NSDictionary[*foundation.NSString, *raw.MLFeatureDescription]
+	ParameterDescriptionsByKey() *foundation.NSDictionary[*raw.MLParameterKey, *raw.MLParameterDescription]
+}
+
+var _ ModelDescriptionable = (*ModelDescription)(nil)
 

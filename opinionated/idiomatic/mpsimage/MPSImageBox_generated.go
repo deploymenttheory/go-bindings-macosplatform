@@ -33,7 +33,26 @@ func NewImageBoxWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDe
 	return &ImageBox{inner: raw.MPSImageBoxFromID(_id)}
 }
 
+// KernelHeight calls the underlying KernelHeight.
+func (x *ImageBox) KernelHeight() uint {
+	return x.inner.KernelHeight()
+}
+
+// KernelWidth calls the underlying KernelWidth.
+func (x *ImageBox) KernelWidth() uint {
+	return x.inner.KernelWidth()
+}
+
 func (x *ImageBox) asImageBox() *raw.MPSImageBox { return x.inner }
 
 func (x *ImageBox) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.inner.MPSUnaryImageKernel }
+
+// ImageBoxable is the interface implemented by [ImageBox], for mocking and DI.
+type ImageBoxable interface {
+	Unwrap() *raw.MPSImageBox
+	KernelHeight() uint
+	KernelWidth() uint
+}
+
+var _ ImageBoxable = (*ImageBox)(nil)
 

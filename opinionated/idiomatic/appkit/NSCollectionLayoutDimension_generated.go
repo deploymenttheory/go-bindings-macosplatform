@@ -23,3 +23,40 @@ func NewCollectionLayoutDimension() *CollectionLayoutDimension {
 	return &CollectionLayoutDimension{inner: raw.NSCollectionLayoutDimensionFromID(_id)}
 }
 
+// IsFractionalWidth calls the underlying IsFractionalWidth.
+func (x *CollectionLayoutDimension) IsFractionalWidth() bool {
+	return x.inner.IsFractionalWidth()
+}
+
+// IsFractionalHeight calls the underlying IsFractionalHeight.
+func (x *CollectionLayoutDimension) IsFractionalHeight() bool {
+	return x.inner.IsFractionalHeight()
+}
+
+// IsAbsolute calls the underlying IsAbsolute.
+func (x *CollectionLayoutDimension) IsAbsolute() bool {
+	return x.inner.IsAbsolute()
+}
+
+// IsEstimated calls the underlying IsEstimated.
+func (x *CollectionLayoutDimension) IsEstimated() bool {
+	return x.inner.IsEstimated()
+}
+
+// Dimension calls the underlying Dimension.
+func (x *CollectionLayoutDimension) Dimension() float64 {
+	return x.inner.Dimension()
+}
+
+// CollectionLayoutDimensionable is the interface implemented by [CollectionLayoutDimension], for mocking and DI.
+type CollectionLayoutDimensionable interface {
+	Unwrap() *raw.NSCollectionLayoutDimension
+	IsFractionalWidth() bool
+	IsFractionalHeight() bool
+	IsAbsolute() bool
+	IsEstimated() bool
+	Dimension() float64
+}
+
+var _ CollectionLayoutDimensionable = (*CollectionLayoutDimension)(nil)
+

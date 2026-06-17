@@ -7,7 +7,10 @@ package avfoundation
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imageio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // DepthData wraps [raw.AVDepthData] with a fluent Go API.
@@ -24,16 +27,101 @@ func NewDepthData() *DepthData {
 	return &DepthData{inner: raw.AVDepthDataFromID(_id)}
 }
 
+// DepthDataByConvertingToDepthDataType calls the underlying DepthDataByConvertingToDepthDataType.
+func (x *DepthData) DepthDataByConvertingToDepthDataType(depthDataType uint) *DepthData {
+	_r := x.inner.DepthDataByConvertingToDepthDataType(depthDataType)
+	if _r == nil {
+		return nil
+	}
+	return &DepthData{inner: _r}
+}
+
+// DepthDataByApplyingExifOrientation calls the underlying DepthDataByApplyingExifOrientation.
+func (x *DepthData) DepthDataByApplyingExifOrientation(exifOrientation imageio.CGImagePropertyOrientation) *DepthData {
+	_r := x.inner.DepthDataByApplyingExifOrientation(exifOrientation)
+	if _r == nil {
+		return nil
+	}
+	return &DepthData{inner: _r}
+}
+
+// DepthDataByReplacingDepthDataMapWithPixelBufferError calls the underlying DepthDataByReplacingDepthDataMapWithPixelBufferError.
+func (x *DepthData) DepthDataByReplacingDepthDataMapWithPixelBufferError(pixelBuffer unsafe.Pointer) (*DepthData, error) {
+	_r, _err := x.inner.DepthDataByReplacingDepthDataMapWithPixelBufferError(pixelBuffer)
+	if _err != nil {
+		return nil, _err
+	}
+	if _r == nil {
+		return nil, nil
+	}
+	return &DepthData{inner: _r}, nil
+}
+
+// DictionaryRepresentationForAuxiliaryDataType calls the underlying DictionaryRepresentationForAuxiliaryDataType.
+func (x *DepthData) DictionaryRepresentationForAuxiliaryDataType(outAuxDataType string) *foundation.NSDictionary[objc.ID, objc.ID] {
+	return x.inner.DictionaryRepresentationForAuxiliaryDataType(foundation.NSStringStringWithUTF8String(outAuxDataType))
+}
+
 // AvailableDepthDataTypes returns the collection as a Go slice.
 func (x *DepthData) AvailableDepthDataTypes() []*foundation.NSNumber {
 	arr := x.inner.AvailableDepthDataTypes()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
 }
+
+// DepthDataType calls the underlying DepthDataType.
+func (x *DepthData) DepthDataType() uint {
+	return x.inner.DepthDataType()
+}
+
+// DepthDataMap calls the underlying DepthDataMap.
+func (x *DepthData) DepthDataMap() unsafe.Pointer {
+	return x.inner.DepthDataMap()
+}
+
+// DepthDataQuality calls the underlying DepthDataQuality.
+func (x *DepthData) DepthDataQuality() raw.AVDepthDataQuality {
+	return x.inner.DepthDataQuality()
+}
+
+// IsDepthDataFiltered calls the underlying IsDepthDataFiltered.
+func (x *DepthData) IsDepthDataFiltered() bool {
+	return x.inner.IsDepthDataFiltered()
+}
+
+// DepthDataAccuracy calls the underlying DepthDataAccuracy.
+func (x *DepthData) DepthDataAccuracy() raw.AVDepthDataAccuracy {
+	return x.inner.DepthDataAccuracy()
+}
+
+// CameraCalibrationData calls the underlying CameraCalibrationData.
+func (x *DepthData) CameraCalibrationData() *CameraCalibrationData {
+	_r := x.inner.CameraCalibrationData()
+	if _r == nil {
+		return nil
+	}
+	return &CameraCalibrationData{inner: _r}
+}
+
+// DepthDataable is the interface implemented by [DepthData], for mocking and DI.
+type DepthDataable interface {
+	Unwrap() *raw.AVDepthData
+	DepthDataByConvertingToDepthDataType(depthDataType uint) *DepthData
+	DepthDataByApplyingExifOrientation(exifOrientation imageio.CGImagePropertyOrientation) *DepthData
+	DepthDataByReplacingDepthDataMapWithPixelBufferError(pixelBuffer unsafe.Pointer) (*DepthData, error)
+	DictionaryRepresentationForAuxiliaryDataType(outAuxDataType string) *foundation.NSDictionary[objc.ID, objc.ID]
+	AvailableDepthDataTypes() []*foundation.NSNumber
+	DepthDataType() uint
+	DepthDataMap() unsafe.Pointer
+	DepthDataQuality() raw.AVDepthDataQuality
+	IsDepthDataFiltered() bool
+	DepthDataAccuracy() raw.AVDepthDataAccuracy
+	CameraCalibrationData() *CameraCalibrationData
+}
+
+var _ DepthDataable = (*DepthData)(nil)
 

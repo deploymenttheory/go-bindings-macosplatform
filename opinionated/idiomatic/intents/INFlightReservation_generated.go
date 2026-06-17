@@ -32,5 +32,32 @@ func NewFlightReservationWithItemReferenceReservationNumberBookingTimeReservatio
 	return &FlightReservation{inner: raw.INFlightReservationFromID(_id)}
 }
 
+// ReservedSeat calls the underlying ReservedSeat.
+func (x *FlightReservation) ReservedSeat() *Seat {
+	_r := x.inner.ReservedSeat()
+	if _r == nil {
+		return nil
+	}
+	return &Seat{inner: _r}
+}
+
+// Flight calls the underlying Flight.
+func (x *FlightReservation) Flight() *Flight {
+	_r := x.inner.Flight()
+	if _r == nil {
+		return nil
+	}
+	return &Flight{inner: _r}
+}
+
 func (x *FlightReservation) asReservation() *raw.INReservation { return &x.inner.INReservation }
+
+// FlightReservationable is the interface implemented by [FlightReservation], for mocking and DI.
+type FlightReservationable interface {
+	Unwrap() *raw.INFlightReservation
+	ReservedSeat() *Seat
+	Flight() *Flight
+}
+
+var _ FlightReservationable = (*FlightReservation)(nil)
 

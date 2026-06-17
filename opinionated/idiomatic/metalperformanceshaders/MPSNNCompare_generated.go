@@ -39,9 +39,42 @@ func (x *NNCompare) WithThreshold(threshold float32) *NNCompare {
 	return x
 }
 
+// ComparisonType calls the underlying ComparisonType.
+func (x *NNCompare) ComparisonType() mpsneuralnetwork.MPSNNComparisonType {
+	return x.inner.ComparisonType()
+}
+
+// SetComparisonType calls the underlying SetComparisonType.
+func (x *NNCompare) SetComparisonType(comparisonType mpsneuralnetwork.MPSNNComparisonType) {
+	x.inner.SetComparisonType(comparisonType)
+}
+
+// Threshold calls the underlying Threshold.
+func (x *NNCompare) Threshold() float32 {
+	return x.inner.Threshold()
+}
+
+// SetThreshold calls the underlying SetThreshold.
+func (x *NNCompare) SetThreshold(threshold float32) {
+	x.inner.SetThreshold(threshold)
+}
+
 func (x *NNCompare) asCNNArithmetic() *mpsneuralnetwork.MPSCNNArithmetic { return &x.inner.MPSCNNArithmetic }
 
 func (x *NNCompare) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel { return &x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel }
 
 func (x *NNCompare) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.MPSKernel }
+
+// NNCompareable is the interface implemented by [NNCompare], for mocking and DI.
+type NNCompareable interface {
+	Unwrap() *raw.MPSNNCompare
+	WithComparisonType(comparisonType mpsneuralnetwork.MPSNNComparisonType) *NNCompare
+	WithThreshold(threshold float32) *NNCompare
+	ComparisonType() mpsneuralnetwork.MPSNNComparisonType
+	SetComparisonType(comparisonType mpsneuralnetwork.MPSNNComparisonType)
+	Threshold() float32
+	SetThreshold(threshold float32)
+}
+
+var _ NNCompareable = (*NNCompare)(nil)
 

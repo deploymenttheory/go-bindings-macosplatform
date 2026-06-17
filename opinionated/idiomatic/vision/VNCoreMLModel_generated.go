@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -36,4 +37,41 @@ func (x *CoreMLModel) WithFeatureProvider(featureProvider coreml.MLFeatureProvid
 	x.inner.SetFeatureProvider(featureProvider)
 	return x
 }
+
+// InputImageFeatureName calls the underlying InputImageFeatureName.
+func (x *CoreMLModel) InputImageFeatureName() string {
+	_r := x.inner.InputImageFeatureName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetInputImageFeatureName calls the underlying SetInputImageFeatureName.
+func (x *CoreMLModel) SetInputImageFeatureName(inputImageFeatureName string) {
+	x.inner.SetInputImageFeatureName(foundation.NSStringStringWithUTF8String(inputImageFeatureName))
+}
+
+// FeatureProvider calls the underlying FeatureProvider.
+func (x *CoreMLModel) FeatureProvider() coreml.MLFeatureProvider {
+	return x.inner.FeatureProvider()
+}
+
+// SetFeatureProvider calls the underlying SetFeatureProvider.
+func (x *CoreMLModel) SetFeatureProvider(featureProvider coreml.MLFeatureProvider) {
+	x.inner.SetFeatureProvider(featureProvider)
+}
+
+// CoreMLModelable is the interface implemented by [CoreMLModel], for mocking and DI.
+type CoreMLModelable interface {
+	Unwrap() *raw.VNCoreMLModel
+	WithInputImageFeatureName(inputImageFeatureName string) *CoreMLModel
+	WithFeatureProvider(featureProvider coreml.MLFeatureProvider) *CoreMLModel
+	InputImageFeatureName() string
+	SetInputImageFeatureName(inputImageFeatureName string)
+	FeatureProvider() coreml.MLFeatureProvider
+	SetFeatureProvider(featureProvider coreml.MLFeatureProvider)
+}
+
+var _ CoreMLModelable = (*CoreMLModel)(nil)
 

@@ -30,3 +30,50 @@ func NewHostCIControllerStateMachineWithInterfaceError(interface_ *raw.IOUSBHost
 	return &HostCIControllerStateMachine{inner: raw.IOUSBHostCIControllerStateMachineFromID(_id)}, nil
 }
 
+// InspectCommandError calls the underlying InspectCommandError.
+func (x *HostCIControllerStateMachine) InspectCommandError(command *raw.IOUSBHostCIMessage) (bool, error) {
+	return x.inner.InspectCommandError(command)
+}
+
+// RespondToCommandStatusError calls the underlying RespondToCommandStatusError.
+func (x *HostCIControllerStateMachine) RespondToCommandStatusError(command *raw.IOUSBHostCIMessage, status raw.IOUSBHostCIMessageStatus) (bool, error) {
+	return x.inner.RespondToCommandStatusError(command, status)
+}
+
+// RespondToCommandStatusFrameTimestampError calls the underlying RespondToCommandStatusFrameTimestampError.
+func (x *HostCIControllerStateMachine) RespondToCommandStatusFrameTimestampError(command *raw.IOUSBHostCIMessage, status raw.IOUSBHostCIMessageStatus, frame uint64, timestamp uint64) (bool, error) {
+	return x.inner.RespondToCommandStatusFrameTimestampError(command, status, frame, timestamp)
+}
+
+// EnqueueUpdatedFrameTimestampError calls the underlying EnqueueUpdatedFrameTimestampError.
+func (x *HostCIControllerStateMachine) EnqueueUpdatedFrameTimestampError(frame uint64, timestamp uint64) (bool, error) {
+	return x.inner.EnqueueUpdatedFrameTimestampError(frame, timestamp)
+}
+
+// ControllerState calls the underlying ControllerState.
+func (x *HostCIControllerStateMachine) ControllerState() raw.IOUSBHostCIControllerState {
+	return x.inner.ControllerState()
+}
+
+// ControllerInterface calls the underlying ControllerInterface.
+func (x *HostCIControllerStateMachine) ControllerInterface() *HostControllerInterface {
+	_r := x.inner.ControllerInterface()
+	if _r == nil {
+		return nil
+	}
+	return &HostControllerInterface{inner: _r}
+}
+
+// HostCIControllerStateMachineable is the interface implemented by [HostCIControllerStateMachine], for mocking and DI.
+type HostCIControllerStateMachineable interface {
+	Unwrap() *raw.IOUSBHostCIControllerStateMachine
+	InspectCommandError(command *raw.IOUSBHostCIMessage) (bool, error)
+	RespondToCommandStatusError(command *raw.IOUSBHostCIMessage, status raw.IOUSBHostCIMessageStatus) (bool, error)
+	RespondToCommandStatusFrameTimestampError(command *raw.IOUSBHostCIMessage, status raw.IOUSBHostCIMessageStatus, frame uint64, timestamp uint64) (bool, error)
+	EnqueueUpdatedFrameTimestampError(frame uint64, timestamp uint64) (bool, error)
+	ControllerState() raw.IOUSBHostCIControllerState
+	ControllerInterface() *HostControllerInterface
+}
+
+var _ HostCIControllerStateMachineable = (*HostCIControllerStateMachine)(nil)
+

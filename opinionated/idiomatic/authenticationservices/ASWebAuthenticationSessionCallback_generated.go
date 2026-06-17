@@ -6,6 +6,7 @@ package authenticationservices
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,17 @@ func NewWebAuthenticationSessionCallback() *WebAuthenticationSessionCallback {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ASWebAuthenticationSessionCallback")), objc.RegisterName("new"))
 	return &WebAuthenticationSessionCallback{inner: raw.ASWebAuthenticationSessionCallbackFromID(_id)}
 }
+
+// MatchesURL calls the underlying MatchesURL.
+func (x *WebAuthenticationSessionCallback) MatchesURL(url string) bool {
+	return x.inner.MatchesURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
+}
+
+// WebAuthenticationSessionCallbackable is the interface implemented by [WebAuthenticationSessionCallback], for mocking and DI.
+type WebAuthenticationSessionCallbackable interface {
+	Unwrap() *raw.ASWebAuthenticationSessionCallback
+	MatchesURL(url string) bool
+}
+
+var _ WebAuthenticationSessionCallbackable = (*WebAuthenticationSessionCallback)(nil)
 

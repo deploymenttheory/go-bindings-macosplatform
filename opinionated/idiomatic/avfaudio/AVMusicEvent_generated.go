@@ -25,3 +25,10 @@ func NewMusicEvent() *MusicEvent {
 
 func (x *MusicEvent) asMusicEvent() *raw.AVMusicEvent { return x.inner }
 
+// MusicEventable is the interface implemented by [MusicEvent], for mocking and DI.
+type MusicEventable interface {
+	Unwrap() *raw.AVMusicEvent
+}
+
+var _ MusicEventable = (*MusicEvent)(nil)
+

@@ -7,6 +7,7 @@ package avfoundation
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,16 +55,91 @@ func (x *AssetResourceLoadingContentInformationRequest) WithEntireLengthAvailabl
 	return x
 }
 
+// ContentType calls the underlying ContentType.
+func (x *AssetResourceLoadingContentInformationRequest) ContentType() string {
+	_r := x.inner.ContentType()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetContentType calls the underlying SetContentType.
+func (x *AssetResourceLoadingContentInformationRequest) SetContentType(contentType string) {
+	x.inner.SetContentType(foundation.NSStringStringWithUTF8String(contentType))
+}
+
 // AllowedContentTypes returns the collection as a Go slice.
-func (x *AssetResourceLoadingContentInformationRequest) AllowedContentTypes() []*foundation.NSString {
+func (x *AssetResourceLoadingContentInformationRequest) AllowedContentTypes() []string {
 	arr := x.inner.AllowedContentTypes()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
+
+// ContentLength calls the underlying ContentLength.
+func (x *AssetResourceLoadingContentInformationRequest) ContentLength() int64 {
+	return x.inner.ContentLength()
+}
+
+// SetContentLength calls the underlying SetContentLength.
+func (x *AssetResourceLoadingContentInformationRequest) SetContentLength(contentLength int64) {
+	x.inner.SetContentLength(contentLength)
+}
+
+// IsByteRangeAccessSupported calls the underlying IsByteRangeAccessSupported.
+func (x *AssetResourceLoadingContentInformationRequest) IsByteRangeAccessSupported() bool {
+	return x.inner.IsByteRangeAccessSupported()
+}
+
+// SetByteRangeAccessSupported calls the underlying SetByteRangeAccessSupported.
+func (x *AssetResourceLoadingContentInformationRequest) SetByteRangeAccessSupported(byteRangeAccessSupported bool) {
+	x.inner.SetByteRangeAccessSupported(byteRangeAccessSupported)
+}
+
+// RenewalDate calls the underlying RenewalDate.
+func (x *AssetResourceLoadingContentInformationRequest) RenewalDate() *foundation.NSDate {
+	return x.inner.RenewalDate()
+}
+
+// SetRenewalDate calls the underlying SetRenewalDate.
+func (x *AssetResourceLoadingContentInformationRequest) SetRenewalDate(renewalDate *foundation.NSDate) {
+	x.inner.SetRenewalDate(renewalDate)
+}
+
+// IsEntireLengthAvailableOnDemand calls the underlying IsEntireLengthAvailableOnDemand.
+func (x *AssetResourceLoadingContentInformationRequest) IsEntireLengthAvailableOnDemand() bool {
+	return x.inner.IsEntireLengthAvailableOnDemand()
+}
+
+// SetEntireLengthAvailableOnDemand calls the underlying SetEntireLengthAvailableOnDemand.
+func (x *AssetResourceLoadingContentInformationRequest) SetEntireLengthAvailableOnDemand(entireLengthAvailableOnDemand bool) {
+	x.inner.SetEntireLengthAvailableOnDemand(entireLengthAvailableOnDemand)
+}
+
+// AssetResourceLoadingContentInformationRequestable is the interface implemented by [AssetResourceLoadingContentInformationRequest], for mocking and DI.
+type AssetResourceLoadingContentInformationRequestable interface {
+	Unwrap() *raw.AVAssetResourceLoadingContentInformationRequest
+	WithContentType(contentType string) *AssetResourceLoadingContentInformationRequest
+	WithContentLength(contentLength int64) *AssetResourceLoadingContentInformationRequest
+	WithByteRangeAccessSupported(byteRangeAccessSupported bool) *AssetResourceLoadingContentInformationRequest
+	WithRenewalDate(renewalDate *foundation.NSDate) *AssetResourceLoadingContentInformationRequest
+	WithEntireLengthAvailableOnDemand(entireLengthAvailableOnDemand bool) *AssetResourceLoadingContentInformationRequest
+	ContentType() string
+	SetContentType(contentType string)
+	AllowedContentTypes() []string
+	ContentLength() int64
+	SetContentLength(contentLength int64)
+	IsByteRangeAccessSupported() bool
+	SetByteRangeAccessSupported(byteRangeAccessSupported bool)
+	RenewalDate() *foundation.NSDate
+	SetRenewalDate(renewalDate *foundation.NSDate)
+	IsEntireLengthAvailableOnDemand() bool
+	SetEntireLengthAvailableOnDemand(entireLengthAvailableOnDemand bool)
+}
+
+var _ AssetResourceLoadingContentInformationRequestable = (*AssetResourceLoadingContentInformationRequest)(nil)
 

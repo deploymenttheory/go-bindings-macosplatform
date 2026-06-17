@@ -23,3 +23,10 @@ func NewPickerFilter() *PickerFilter {
 	return &PickerFilter{inner: raw.PHPickerFilterFromID(_id)}
 }
 
+// PickerFilterable is the interface implemented by [PickerFilter], for mocking and DI.
+type PickerFilterable interface {
+	Unwrap() *raw.PHPickerFilter
+}
+
+var _ PickerFilterable = (*PickerFilter)(nil)
+

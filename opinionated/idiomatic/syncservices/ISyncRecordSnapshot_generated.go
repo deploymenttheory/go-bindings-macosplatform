@@ -5,8 +5,11 @@
 package syncservices
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/syncservices"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // ISyncRecordSnapshot wraps [raw.ISyncRecordSnapshot] with a fluent Go API.
@@ -22,4 +25,51 @@ func NewISyncRecordSnapshot() *ISyncRecordSnapshot {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ISyncRecordSnapshot")), objc.RegisterName("new"))
 	return &ISyncRecordSnapshot{inner: raw.ISyncRecordSnapshotFromID(_id)}
 }
+
+// RecordsWithIdentifiers calls the underlying RecordsWithIdentifiers.
+func (x *ISyncRecordSnapshot) RecordsWithIdentifiers(recordIds *foundation.NSArray[objc.ID]) *foundation.NSDictionary[objc.ID, objc.ID] {
+	return x.inner.RecordsWithIdentifiers(recordIds)
+}
+
+// TargetIdentifiersForRelationshipNameWithSourceIdentifier calls the underlying TargetIdentifiersForRelationshipNameWithSourceIdentifier.
+func (x *ISyncRecordSnapshot) TargetIdentifiersForRelationshipNameWithSourceIdentifier(relationshipName string, sourceId string) *foundation.NSArray[objc.ID] {
+	return x.inner.TargetIdentifiersForRelationshipNameWithSourceIdentifier(foundation.NSStringStringWithUTF8String(relationshipName), foundation.NSStringStringWithUTF8String(sourceId))
+}
+
+// SourceIdentifiersForRelationshipNameWithTargetIdentifier calls the underlying SourceIdentifiersForRelationshipNameWithTargetIdentifier.
+func (x *ISyncRecordSnapshot) SourceIdentifiersForRelationshipNameWithTargetIdentifier(relationshipName string, sourceId string) *foundation.NSArray[objc.ID] {
+	return x.inner.SourceIdentifiersForRelationshipNameWithTargetIdentifier(foundation.NSStringStringWithUTF8String(relationshipName), foundation.NSStringStringWithUTF8String(sourceId))
+}
+
+// RecordsWithMatchingAttributes calls the underlying RecordsWithMatchingAttributes.
+func (x *ISyncRecordSnapshot) RecordsWithMatchingAttributes(attributes *foundation.NSDictionary[objc.ID, objc.ID]) *foundation.NSDictionary[objc.ID, objc.ID] {
+	return x.inner.RecordsWithMatchingAttributes(attributes)
+}
+
+// RecordReferenceForRecordWithIdentifier calls the underlying RecordReferenceForRecordWithIdentifier.
+func (x *ISyncRecordSnapshot) RecordReferenceForRecordWithIdentifier(identifier string) unsafe.Pointer {
+	return x.inner.RecordReferenceForRecordWithIdentifier(foundation.NSStringStringWithUTF8String(identifier))
+}
+
+// RecordIdentifierForReferenceIsModified calls the underlying RecordIdentifierForReferenceIsModified.
+func (x *ISyncRecordSnapshot) RecordIdentifierForReferenceIsModified(reference unsafe.Pointer, pModified *bool) string {
+	_r := x.inner.RecordIdentifierForReferenceIsModified(reference, pModified)
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ISyncRecordSnapshotable is the interface implemented by [ISyncRecordSnapshot], for mocking and DI.
+type ISyncRecordSnapshotable interface {
+	Unwrap() *raw.ISyncRecordSnapshot
+	RecordsWithIdentifiers(recordIds *foundation.NSArray[objc.ID]) *foundation.NSDictionary[objc.ID, objc.ID]
+	TargetIdentifiersForRelationshipNameWithSourceIdentifier(relationshipName string, sourceId string) *foundation.NSArray[objc.ID]
+	SourceIdentifiersForRelationshipNameWithTargetIdentifier(relationshipName string, sourceId string) *foundation.NSArray[objc.ID]
+	RecordsWithMatchingAttributes(attributes *foundation.NSDictionary[objc.ID, objc.ID]) *foundation.NSDictionary[objc.ID, objc.ID]
+	RecordReferenceForRecordWithIdentifier(identifier string) unsafe.Pointer
+	RecordIdentifierForReferenceIsModified(reference unsafe.Pointer, pModified *bool) string
+}
+
+var _ ISyncRecordSnapshotable = (*ISyncRecordSnapshot)(nil)
 

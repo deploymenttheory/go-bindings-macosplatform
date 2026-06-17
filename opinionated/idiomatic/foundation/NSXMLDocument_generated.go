@@ -96,13 +96,188 @@ func (x *XMLDocument) WithDTD(dTD *raw.NSXMLDTD) *XMLDocument {
 	return x
 }
 
+// SetRootElement calls the underlying SetRootElement.
+func (x *XMLDocument) SetRootElement(root *raw.NSXMLElement) {
+	x.inner.SetRootElement(root)
+}
+
+// RootElement calls the underlying RootElement.
+func (x *XMLDocument) RootElement() *XMLElement {
+	_r := x.inner.RootElement()
+	if _r == nil {
+		return nil
+	}
+	return &XMLElement{inner: _r}
+}
+
+// InsertChildAtIndex calls the underlying InsertChildAtIndex.
+func (x *XMLDocument) InsertChildAtIndex(child *raw.NSXMLNode, index uint) {
+	x.inner.InsertChildAtIndex(child, index)
+}
+
+// InsertChildrenAtIndex calls the underlying InsertChildrenAtIndex.
+func (x *XMLDocument) InsertChildrenAtIndex(children *raw.NSArray[*raw.NSXMLNode], index uint) {
+	x.inner.InsertChildrenAtIndex(children, index)
+}
+
+// RemoveChildAtIndex calls the underlying RemoveChildAtIndex.
+func (x *XMLDocument) RemoveChildAtIndex(index uint) {
+	x.inner.RemoveChildAtIndex(index)
+}
+
+// SetChildren calls the underlying SetChildren.
+func (x *XMLDocument) SetChildren(children *raw.NSArray[*raw.NSXMLNode]) {
+	x.inner.SetChildren(children)
+}
+
+// AddChild calls the underlying AddChild.
+func (x *XMLDocument) AddChild(child *raw.NSXMLNode) {
+	x.inner.AddChild(child)
+}
+
+// ReplaceChildAtIndexWithNode calls the underlying ReplaceChildAtIndexWithNode.
+func (x *XMLDocument) ReplaceChildAtIndexWithNode(index uint, node *raw.NSXMLNode) {
+	x.inner.ReplaceChildAtIndexWithNode(index, node)
+}
+
+// XMLDataWithOptions calls the underlying XMLDataWithOptions.
+func (x *XMLDocument) XMLDataWithOptions(options raw.NSXMLNodeOptions) *Data {
+	_r := x.inner.XMLDataWithOptions(options)
+	if _r == nil {
+		return nil
+	}
+	return &Data{inner: _r}
+}
+
+// ObjectByApplyingXSLTArgumentsError calls the underlying ObjectByApplyingXSLTArgumentsError.
+func (x *XMLDocument) ObjectByApplyingXSLTArgumentsError(xslt *raw.NSData, arguments *raw.NSDictionary[*raw.NSString, *raw.NSString]) (objc.ID, error) {
+	return x.inner.ObjectByApplyingXSLTArgumentsError(xslt, arguments)
+}
+
+// ObjectByApplyingXSLTStringArgumentsError calls the underlying ObjectByApplyingXSLTStringArgumentsError.
+func (x *XMLDocument) ObjectByApplyingXSLTStringArgumentsError(xslt string, arguments *raw.NSDictionary[*raw.NSString, *raw.NSString]) (objc.ID, error) {
+	return x.inner.ObjectByApplyingXSLTStringArgumentsError(foundation.NSStringStringWithUTF8String(xslt), arguments)
+}
+
+// ObjectByApplyingXSLTAtURLArgumentsError calls the underlying ObjectByApplyingXSLTAtURLArgumentsError.
+func (x *XMLDocument) ObjectByApplyingXSLTAtURLArgumentsError(xsltURL string, argument *raw.NSDictionary[*raw.NSString, *raw.NSString]) (objc.ID, error) {
+	return x.inner.ObjectByApplyingXSLTAtURLArgumentsError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(xsltURL)), argument)
+}
+
 // ValidateAndReturnError returns any validation error.
 func (x *XMLDocument) ValidateAndReturnError() error {
 	_, err := x.inner.ValidateAndReturnError()
 	return err
 }
 
+// CharacterEncoding calls the underlying CharacterEncoding.
+func (x *XMLDocument) CharacterEncoding() *String {
+	_r := x.inner.CharacterEncoding()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SetCharacterEncoding calls the underlying SetCharacterEncoding.
+func (x *XMLDocument) SetCharacterEncoding(characterEncoding string) {
+	x.inner.SetCharacterEncoding(foundation.NSStringStringWithUTF8String(characterEncoding))
+}
+
+// IsStandalone calls the underlying IsStandalone.
+func (x *XMLDocument) IsStandalone() bool {
+	return x.inner.IsStandalone()
+}
+
+// SetStandalone calls the underlying SetStandalone.
+func (x *XMLDocument) SetStandalone(standalone bool) {
+	x.inner.SetStandalone(standalone)
+}
+
+// DocumentContentKind calls the underlying DocumentContentKind.
+func (x *XMLDocument) DocumentContentKind() raw.NSXMLDocumentContentKind {
+	return x.inner.DocumentContentKind()
+}
+
+// SetDocumentContentKind calls the underlying SetDocumentContentKind.
+func (x *XMLDocument) SetDocumentContentKind(documentContentKind raw.NSXMLDocumentContentKind) {
+	x.inner.SetDocumentContentKind(documentContentKind)
+}
+
+// MIMEType calls the underlying MIMEType.
+func (x *XMLDocument) MIMEType() *String {
+	_r := x.inner.MIMEType()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SetMIMEType calls the underlying SetMIMEType.
+func (x *XMLDocument) SetMIMEType(mIMEType string) {
+	x.inner.SetMIMEType(foundation.NSStringStringWithUTF8String(mIMEType))
+}
+
+// DTD calls the underlying DTD.
+func (x *XMLDocument) DTD() *XMLDTD {
+	_r := x.inner.DTD()
+	if _r == nil {
+		return nil
+	}
+	return &XMLDTD{inner: _r}
+}
+
+// SetDTD calls the underlying SetDTD.
+func (x *XMLDocument) SetDTD(dTD *raw.NSXMLDTD) {
+	x.inner.SetDTD(dTD)
+}
+
+// XMLData calls the underlying XMLData.
+func (x *XMLDocument) XMLData() *Data {
+	_r := x.inner.XMLData()
+	if _r == nil {
+		return nil
+	}
+	return &Data{inner: _r}
+}
+
 func (x *XMLDocument) asXMLNode() *raw.NSXMLNode { return &x.inner.NSXMLNode }
 
 func (x *XMLDocument) asObject() *raw.NSObject { return &x.inner.NSXMLNode.NSObject }
+
+// XMLDocumentable is the interface implemented by [XMLDocument], for mocking and DI.
+type XMLDocumentable interface {
+	Unwrap() *raw.NSXMLDocument
+	WithCharacterEncoding(characterEncoding string) *XMLDocument
+	WithStandalone(standalone bool) *XMLDocument
+	WithDocumentContentKind(documentContentKind raw.NSXMLDocumentContentKind) *XMLDocument
+	WithMIMEType(mIMEType string) *XMLDocument
+	WithDTD(dTD *raw.NSXMLDTD) *XMLDocument
+	SetRootElement(root *raw.NSXMLElement)
+	RootElement() *XMLElement
+	InsertChildAtIndex(child *raw.NSXMLNode, index uint)
+	InsertChildrenAtIndex(children *raw.NSArray[*raw.NSXMLNode], index uint)
+	RemoveChildAtIndex(index uint)
+	SetChildren(children *raw.NSArray[*raw.NSXMLNode])
+	AddChild(child *raw.NSXMLNode)
+	ReplaceChildAtIndexWithNode(index uint, node *raw.NSXMLNode)
+	XMLDataWithOptions(options raw.NSXMLNodeOptions) *Data
+	ObjectByApplyingXSLTArgumentsError(xslt *raw.NSData, arguments *raw.NSDictionary[*raw.NSString, *raw.NSString]) (objc.ID, error)
+	ObjectByApplyingXSLTStringArgumentsError(xslt string, arguments *raw.NSDictionary[*raw.NSString, *raw.NSString]) (objc.ID, error)
+	ObjectByApplyingXSLTAtURLArgumentsError(xsltURL string, argument *raw.NSDictionary[*raw.NSString, *raw.NSString]) (objc.ID, error)
+	ValidateAndReturnError() error
+	CharacterEncoding() *String
+	SetCharacterEncoding(characterEncoding string)
+	IsStandalone() bool
+	SetStandalone(standalone bool)
+	DocumentContentKind() raw.NSXMLDocumentContentKind
+	SetDocumentContentKind(documentContentKind raw.NSXMLDocumentContentKind)
+	MIMEType() *String
+	SetMIMEType(mIMEType string)
+	DTD() *XMLDTD
+	SetDTD(dTD *raw.NSXMLDTD)
+	XMLData() *Data
+}
+
+var _ XMLDocumentable = (*XMLDocument)(nil)
 

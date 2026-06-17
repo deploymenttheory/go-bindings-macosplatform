@@ -29,3 +29,10 @@ func (x *UnitElectricCharge) asUnit() *raw.NSUnit { return &x.inner.NSDimension.
 
 func (x *UnitElectricCharge) asObject() *raw.NSObject { return &x.inner.NSDimension.NSUnit.NSObject }
 
+// UnitElectricChargeable is the interface implemented by [UnitElectricCharge], for mocking and DI.
+type UnitElectricChargeable interface {
+	Unwrap() *raw.NSUnitElectricCharge
+}
+
+var _ UnitElectricChargeable = (*UnitElectricCharge)(nil)
+

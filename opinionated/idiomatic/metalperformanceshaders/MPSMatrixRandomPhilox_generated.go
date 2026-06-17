@@ -53,3 +53,10 @@ func (x *MatrixRandomPhilox) asMatrixRandom() *mpsmatrix.MPSMatrixRandom { retur
 
 func (x *MatrixRandomPhilox) asKernel() *mpscore.MPSKernel { return &x.inner.MPSMatrixRandom.MPSKernel }
 
+// MatrixRandomPhiloxable is the interface implemented by [MatrixRandomPhilox], for mocking and DI.
+type MatrixRandomPhiloxable interface {
+	Unwrap() *raw.MPSMatrixRandomPhilox
+}
+
+var _ MatrixRandomPhiloxable = (*MatrixRandomPhilox)(nil)
+

@@ -6,6 +6,8 @@ package coredata
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,16 +25,100 @@ func NewPersistentHistoryTransaction() *PersistentHistoryTransaction {
 	return &PersistentHistoryTransaction{inner: raw.NSPersistentHistoryTransactionFromID(_id)}
 }
 
+// ObjectIDNotification calls the underlying ObjectIDNotification.
+func (x *PersistentHistoryTransaction) ObjectIDNotification() *foundation.NSNotification {
+	return x.inner.ObjectIDNotification()
+}
+
+// Timestamp calls the underlying Timestamp.
+func (x *PersistentHistoryTransaction) Timestamp() *foundation.NSDate {
+	return x.inner.Timestamp()
+}
+
 // Changes returns the collection as a Go slice.
 func (x *PersistentHistoryTransaction) Changes() []*raw.NSPersistentHistoryChange {
 	arr := x.inner.Changes()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSPersistentHistoryChange, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSPersistentHistoryChange {
+		return raw.NSPersistentHistoryChangeFromID(purego.Retain(_id))
+	})
 }
+
+// TransactionNumber calls the underlying TransactionNumber.
+func (x *PersistentHistoryTransaction) TransactionNumber() int64 {
+	return x.inner.TransactionNumber()
+}
+
+// StoreID calls the underlying StoreID.
+func (x *PersistentHistoryTransaction) StoreID() string {
+	_r := x.inner.StoreID()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// BundleID calls the underlying BundleID.
+func (x *PersistentHistoryTransaction) BundleID() string {
+	_r := x.inner.BundleID()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ProcessID calls the underlying ProcessID.
+func (x *PersistentHistoryTransaction) ProcessID() string {
+	_r := x.inner.ProcessID()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ContextName calls the underlying ContextName.
+func (x *PersistentHistoryTransaction) ContextName() string {
+	_r := x.inner.ContextName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Author calls the underlying Author.
+func (x *PersistentHistoryTransaction) Author() string {
+	_r := x.inner.Author()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Token calls the underlying Token.
+func (x *PersistentHistoryTransaction) Token() *PersistentHistoryToken {
+	_r := x.inner.Token()
+	if _r == nil {
+		return nil
+	}
+	return &PersistentHistoryToken{inner: _r}
+}
+
+// PersistentHistoryTransactionable is the interface implemented by [PersistentHistoryTransaction], for mocking and DI.
+type PersistentHistoryTransactionable interface {
+	Unwrap() *raw.NSPersistentHistoryTransaction
+	ObjectIDNotification() *foundation.NSNotification
+	Timestamp() *foundation.NSDate
+	Changes() []*raw.NSPersistentHistoryChange
+	TransactionNumber() int64
+	StoreID() string
+	BundleID() string
+	ProcessID() string
+	ContextName() string
+	Author() string
+	Token() *PersistentHistoryToken
+}
+
+var _ PersistentHistoryTransactionable = (*PersistentHistoryTransaction)(nil)
 

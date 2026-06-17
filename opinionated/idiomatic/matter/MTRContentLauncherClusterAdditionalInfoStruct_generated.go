@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -36,5 +37,46 @@ func (x *MTRContentLauncherClusterAdditionalInfoStruct) WithValue(value string) 
 	return x
 }
 
+// Name calls the underlying Name.
+func (x *MTRContentLauncherClusterAdditionalInfoStruct) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetName calls the underlying SetName.
+func (x *MTRContentLauncherClusterAdditionalInfoStruct) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
+// Value calls the underlying Value.
+func (x *MTRContentLauncherClusterAdditionalInfoStruct) Value() string {
+	_r := x.inner.Value()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetValue calls the underlying SetValue.
+func (x *MTRContentLauncherClusterAdditionalInfoStruct) SetValue(value string) {
+	x.inner.SetValue(foundation.NSStringStringWithUTF8String(value))
+}
+
 func (x *MTRContentLauncherClusterAdditionalInfoStruct) asMTRContentLauncherClusterAdditionalInfoStruct() *raw.MTRContentLauncherClusterAdditionalInfoStruct { return x.inner }
+
+// MTRContentLauncherClusterAdditionalInfoStructable is the interface implemented by [MTRContentLauncherClusterAdditionalInfoStruct], for mocking and DI.
+type MTRContentLauncherClusterAdditionalInfoStructable interface {
+	Unwrap() *raw.MTRContentLauncherClusterAdditionalInfoStruct
+	WithName(name string) *MTRContentLauncherClusterAdditionalInfoStruct
+	WithValue(value string) *MTRContentLauncherClusterAdditionalInfoStruct
+	Name() string
+	SetName(name string)
+	Value() string
+	SetValue(value string)
+}
+
+var _ MTRContentLauncherClusterAdditionalInfoStructable = (*MTRContentLauncherClusterAdditionalInfoStruct)(nil)
 

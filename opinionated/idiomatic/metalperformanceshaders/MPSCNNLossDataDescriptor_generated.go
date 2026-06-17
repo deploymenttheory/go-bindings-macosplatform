@@ -5,7 +5,9 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -34,4 +36,49 @@ func (x *CNNLossDataDescriptor) WithBytesPerImage(bytesPerImage uint) *CNNLossDa
 	x.inner.SetBytesPerImage(bytesPerImage)
 	return x
 }
+
+// Layout calls the underlying Layout.
+func (x *CNNLossDataDescriptor) Layout() mpscore.MPSDataLayout {
+	return x.inner.Layout()
+}
+
+// Size calls the underlying Size.
+func (x *CNNLossDataDescriptor) Size() metal.MTLSize {
+	return x.inner.Size()
+}
+
+// BytesPerRow calls the underlying BytesPerRow.
+func (x *CNNLossDataDescriptor) BytesPerRow() uint {
+	return x.inner.BytesPerRow()
+}
+
+// SetBytesPerRow calls the underlying SetBytesPerRow.
+func (x *CNNLossDataDescriptor) SetBytesPerRow(bytesPerRow uint) {
+	x.inner.SetBytesPerRow(bytesPerRow)
+}
+
+// BytesPerImage calls the underlying BytesPerImage.
+func (x *CNNLossDataDescriptor) BytesPerImage() uint {
+	return x.inner.BytesPerImage()
+}
+
+// SetBytesPerImage calls the underlying SetBytesPerImage.
+func (x *CNNLossDataDescriptor) SetBytesPerImage(bytesPerImage uint) {
+	x.inner.SetBytesPerImage(bytesPerImage)
+}
+
+// CNNLossDataDescriptorable is the interface implemented by [CNNLossDataDescriptor], for mocking and DI.
+type CNNLossDataDescriptorable interface {
+	Unwrap() *raw.MPSCNNLossDataDescriptor
+	WithBytesPerRow(bytesPerRow uint) *CNNLossDataDescriptor
+	WithBytesPerImage(bytesPerImage uint) *CNNLossDataDescriptor
+	Layout() mpscore.MPSDataLayout
+	Size() metal.MTLSize
+	BytesPerRow() uint
+	SetBytesPerRow(bytesPerRow uint)
+	BytesPerImage() uint
+	SetBytesPerImage(bytesPerImage uint)
+}
+
+var _ CNNLossDataDescriptorable = (*CNNLossDataDescriptor)(nil)
 

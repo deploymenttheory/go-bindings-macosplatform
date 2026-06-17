@@ -42,3 +42,49 @@ func (x *AssessmentParticipantConfiguration) WithConfigurationInfo(configuration
 	return x
 }
 
+// AllowsNetworkAccess calls the underlying AllowsNetworkAccess.
+func (x *AssessmentParticipantConfiguration) AllowsNetworkAccess() bool {
+	return x.inner.AllowsNetworkAccess()
+}
+
+// SetAllowsNetworkAccess calls the underlying SetAllowsNetworkAccess.
+func (x *AssessmentParticipantConfiguration) SetAllowsNetworkAccess(allowsNetworkAccess bool) {
+	x.inner.SetAllowsNetworkAccess(allowsNetworkAccess)
+}
+
+// IsRequired calls the underlying IsRequired.
+func (x *AssessmentParticipantConfiguration) IsRequired() bool {
+	return x.inner.IsRequired()
+}
+
+// SetRequired calls the underlying SetRequired.
+func (x *AssessmentParticipantConfiguration) SetRequired(required bool) {
+	x.inner.SetRequired(required)
+}
+
+// ConfigurationInfo calls the underlying ConfigurationInfo.
+func (x *AssessmentParticipantConfiguration) ConfigurationInfo() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ConfigurationInfo()
+}
+
+// SetConfigurationInfo calls the underlying SetConfigurationInfo.
+func (x *AssessmentParticipantConfiguration) SetConfigurationInfo(configurationInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
+	x.inner.SetConfigurationInfo(configurationInfo)
+}
+
+// AssessmentParticipantConfigurationable is the interface implemented by [AssessmentParticipantConfiguration], for mocking and DI.
+type AssessmentParticipantConfigurationable interface {
+	Unwrap() *raw.AEAssessmentParticipantConfiguration
+	WithAllowsNetworkAccess(allowsNetworkAccess bool) *AssessmentParticipantConfiguration
+	WithRequired(required bool) *AssessmentParticipantConfiguration
+	WithConfigurationInfo(configurationInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AssessmentParticipantConfiguration
+	AllowsNetworkAccess() bool
+	SetAllowsNetworkAccess(allowsNetworkAccess bool)
+	IsRequired() bool
+	SetRequired(required bool)
+	ConfigurationInfo() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	SetConfigurationInfo(configurationInfo *foundation.NSDictionary[*foundation.NSString, objc.ID])
+}
+
+var _ AssessmentParticipantConfigurationable = (*AssessmentParticipantConfiguration)(nil)
+

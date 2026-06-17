@@ -7,7 +7,9 @@ package naturallanguage
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/naturallanguage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // ContextualEmbedding wraps [raw.NLContextualEmbedding] with a fluent Go API.
@@ -30,17 +32,46 @@ func (x *ContextualEmbedding) Load() error {
 	return err
 }
 
+// Unload calls the underlying Unload.
+func (x *ContextualEmbedding) Unload() {
+	x.inner.Unload()
+}
+
+// EmbeddingResultForStringLanguageError calls the underlying EmbeddingResultForStringLanguageError.
+func (x *ContextualEmbedding) EmbeddingResultForStringLanguageError(string_ string, language *foundation.NSString) (*ContextualEmbeddingResult, error) {
+	_r, _err := x.inner.EmbeddingResultForStringLanguageError(foundation.NSStringStringWithUTF8String(string_), language)
+	if _err != nil {
+		return nil, _err
+	}
+	if _r == nil {
+		return nil, nil
+	}
+	return &ContextualEmbeddingResult{inner: _r}, nil
+}
+
+// RequestEmbeddingAssetsWithCompletionHandler calls the underlying RequestEmbeddingAssetsWithCompletionHandler.
+func (x *ContextualEmbedding) RequestEmbeddingAssetsWithCompletionHandler(completionHandler func(raw.NLContextualEmbeddingAssetsResult, unsafe.Pointer)) {
+	x.inner.RequestEmbeddingAssetsWithCompletionHandler(completionHandler)
+}
+
+// ModelIdentifier calls the underlying ModelIdentifier.
+func (x *ContextualEmbedding) ModelIdentifier() string {
+	_r := x.inner.ModelIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 // Languages returns the collection as a Go slice.
 func (x *ContextualEmbedding) Languages() []*foundation.NSString {
 	arr := x.inner.Languages()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	})
 }
 
 // Scripts returns the collection as a Go slice.
@@ -49,10 +80,46 @@ func (x *ContextualEmbedding) Scripts() []*foundation.NSString {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	})
 }
+
+// Revision calls the underlying Revision.
+func (x *ContextualEmbedding) Revision() uint {
+	return x.inner.Revision()
+}
+
+// Dimension calls the underlying Dimension.
+func (x *ContextualEmbedding) Dimension() uint {
+	return x.inner.Dimension()
+}
+
+// MaximumSequenceLength calls the underlying MaximumSequenceLength.
+func (x *ContextualEmbedding) MaximumSequenceLength() uint {
+	return x.inner.MaximumSequenceLength()
+}
+
+// HasAvailableAssets calls the underlying HasAvailableAssets.
+func (x *ContextualEmbedding) HasAvailableAssets() bool {
+	return x.inner.HasAvailableAssets()
+}
+
+// ContextualEmbeddingable is the interface implemented by [ContextualEmbedding], for mocking and DI.
+type ContextualEmbeddingable interface {
+	Unwrap() *raw.NLContextualEmbedding
+	Load() error
+	Unload()
+	EmbeddingResultForStringLanguageError(string_ string, language *foundation.NSString) (*ContextualEmbeddingResult, error)
+	RequestEmbeddingAssetsWithCompletionHandler(completionHandler func(raw.NLContextualEmbeddingAssetsResult, unsafe.Pointer))
+	ModelIdentifier() string
+	Languages() []*foundation.NSString
+	Scripts() []*foundation.NSString
+	Revision() uint
+	Dimension() uint
+	MaximumSequenceLength() uint
+	HasAvailableAssets() bool
+}
+
+var _ ContextualEmbeddingable = (*ContextualEmbedding)(nil)
 

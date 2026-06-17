@@ -6,6 +6,7 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -47,20 +48,96 @@ func (x *CollectionViewItem) WithTextField(textField TextFieldProvider) *Collect
 	return x
 }
 
+// CollectionView calls the underlying CollectionView.
+func (x *CollectionViewItem) CollectionView() *CollectionView {
+	_r := x.inner.CollectionView()
+	if _r == nil {
+		return nil
+	}
+	return &CollectionView{inner: _r}
+}
+
+// IsSelected calls the underlying IsSelected.
+func (x *CollectionViewItem) IsSelected() bool {
+	return x.inner.IsSelected()
+}
+
+// SetSelected calls the underlying SetSelected.
+func (x *CollectionViewItem) SetSelected(selected bool) {
+	x.inner.SetSelected(selected)
+}
+
+// HighlightState calls the underlying HighlightState.
+func (x *CollectionViewItem) HighlightState() raw.NSCollectionViewItemHighlightState {
+	return x.inner.HighlightState()
+}
+
+// SetHighlightState calls the underlying SetHighlightState.
+func (x *CollectionViewItem) SetHighlightState(highlightState raw.NSCollectionViewItemHighlightState) {
+	x.inner.SetHighlightState(highlightState)
+}
+
+// ImageView calls the underlying ImageView.
+func (x *CollectionViewItem) ImageView() *ImageView {
+	_r := x.inner.ImageView()
+	if _r == nil {
+		return nil
+	}
+	return &ImageView{inner: _r}
+}
+
+// SetImageView calls the underlying SetImageView.
+func (x *CollectionViewItem) SetImageView(imageView *raw.NSImageView) {
+	x.inner.SetImageView(imageView)
+}
+
+// TextField calls the underlying TextField.
+func (x *CollectionViewItem) TextField() *TextField {
+	_r := x.inner.TextField()
+	if _r == nil {
+		return nil
+	}
+	return &TextField{inner: _r}
+}
+
+// SetTextField calls the underlying SetTextField.
+func (x *CollectionViewItem) SetTextField(textField *raw.NSTextField) {
+	x.inner.SetTextField(textField)
+}
+
 // DraggingImageComponents returns the collection as a Go slice.
 func (x *CollectionViewItem) DraggingImageComponents() []*raw.NSDraggingImageComponent {
 	arr := x.inner.DraggingImageComponents()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSDraggingImageComponent, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSDraggingImageComponent {
+		return raw.NSDraggingImageComponentFromID(purego.Retain(_id))
+	})
 }
 
 func (x *CollectionViewItem) asViewController() *raw.NSViewController { return &x.inner.NSViewController }
 
 func (x *CollectionViewItem) asResponder() *raw.NSResponder { return &x.inner.NSViewController.NSResponder }
+
+// CollectionViewItemable is the interface implemented by [CollectionViewItem], for mocking and DI.
+type CollectionViewItemable interface {
+	Unwrap() *raw.NSCollectionViewItem
+	WithSelected(selected bool) *CollectionViewItem
+	WithHighlightState(highlightState raw.NSCollectionViewItemHighlightState) *CollectionViewItem
+	WithImageView(imageView *raw.NSImageView) *CollectionViewItem
+	WithTextField(textField TextFieldProvider) *CollectionViewItem
+	CollectionView() *CollectionView
+	IsSelected() bool
+	SetSelected(selected bool)
+	HighlightState() raw.NSCollectionViewItemHighlightState
+	SetHighlightState(highlightState raw.NSCollectionViewItemHighlightState)
+	ImageView() *ImageView
+	SetImageView(imageView *raw.NSImageView)
+	TextField() *TextField
+	SetTextField(textField *raw.NSTextField)
+	DraggingImageComponents() []*raw.NSDraggingImageComponent
+}
+
+var _ CollectionViewItemable = (*CollectionViewItem)(nil)
 

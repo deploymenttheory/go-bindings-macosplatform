@@ -48,3 +48,62 @@ func (x *MTRValveConfigurationAndControlClusterOpenParams) WithServerSideProcess
 	return x
 }
 
+// OpenDuration calls the underlying OpenDuration.
+func (x *MTRValveConfigurationAndControlClusterOpenParams) OpenDuration() *foundation.NSNumber {
+	return x.inner.OpenDuration()
+}
+
+// SetOpenDuration calls the underlying SetOpenDuration.
+func (x *MTRValveConfigurationAndControlClusterOpenParams) SetOpenDuration(openDuration *foundation.NSNumber) {
+	x.inner.SetOpenDuration(openDuration)
+}
+
+// TargetLevel calls the underlying TargetLevel.
+func (x *MTRValveConfigurationAndControlClusterOpenParams) TargetLevel() *foundation.NSNumber {
+	return x.inner.TargetLevel()
+}
+
+// SetTargetLevel calls the underlying SetTargetLevel.
+func (x *MTRValveConfigurationAndControlClusterOpenParams) SetTargetLevel(targetLevel *foundation.NSNumber) {
+	x.inner.SetTargetLevel(targetLevel)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRValveConfigurationAndControlClusterOpenParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRValveConfigurationAndControlClusterOpenParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRValveConfigurationAndControlClusterOpenParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRValveConfigurationAndControlClusterOpenParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRValveConfigurationAndControlClusterOpenParamsable is the interface implemented by [MTRValveConfigurationAndControlClusterOpenParams], for mocking and DI.
+type MTRValveConfigurationAndControlClusterOpenParamsable interface {
+	Unwrap() *raw.MTRValveConfigurationAndControlClusterOpenParams
+	WithOpenDuration(openDuration *foundation.NSNumber) *MTRValveConfigurationAndControlClusterOpenParams
+	WithTargetLevel(targetLevel *foundation.NSNumber) *MTRValveConfigurationAndControlClusterOpenParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRValveConfigurationAndControlClusterOpenParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRValveConfigurationAndControlClusterOpenParams
+	OpenDuration() *foundation.NSNumber
+	SetOpenDuration(openDuration *foundation.NSNumber)
+	TargetLevel() *foundation.NSNumber
+	SetTargetLevel(targetLevel *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRValveConfigurationAndControlClusterOpenParamsable = (*MTRValveConfigurationAndControlClusterOpenParams)(nil)
+

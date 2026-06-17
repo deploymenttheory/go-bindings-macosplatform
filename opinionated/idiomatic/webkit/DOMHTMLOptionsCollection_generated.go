@@ -5,6 +5,7 @@
 package webkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,7 +36,72 @@ func (x *DOMHTMLOptionsCollection) WithLength(length uint) *DOMHTMLOptionsCollec
 	return x
 }
 
+// NamedItem calls the underlying NamedItem.
+func (x *DOMHTMLOptionsCollection) NamedItem(name string) *DOMNode {
+	_r := x.inner.NamedItem(foundation.NSStringStringWithUTF8String(name))
+	if _r == nil {
+		return nil
+	}
+	return &DOMNode{inner: _r}
+}
+
+// AddIndex calls the underlying AddIndex.
+func (x *DOMHTMLOptionsCollection) AddIndex(option *raw.DOMHTMLOptionElement, index uint) {
+	x.inner.AddIndex(option, index)
+}
+
+// Remove calls the underlying Remove.
+func (x *DOMHTMLOptionsCollection) Remove(index uint) {
+	x.inner.Remove(index)
+}
+
+// Item calls the underlying Item.
+func (x *DOMHTMLOptionsCollection) Item(index uint) *DOMNode {
+	_r := x.inner.Item(index)
+	if _r == nil {
+		return nil
+	}
+	return &DOMNode{inner: _r}
+}
+
+// SelectedIndex calls the underlying SelectedIndex.
+func (x *DOMHTMLOptionsCollection) SelectedIndex() int {
+	return x.inner.SelectedIndex()
+}
+
+// SetSelectedIndex calls the underlying SetSelectedIndex.
+func (x *DOMHTMLOptionsCollection) SetSelectedIndex(selectedIndex int) {
+	x.inner.SetSelectedIndex(selectedIndex)
+}
+
+// Length calls the underlying Length.
+func (x *DOMHTMLOptionsCollection) Length() uint {
+	return x.inner.Length()
+}
+
+// SetLength calls the underlying SetLength.
+func (x *DOMHTMLOptionsCollection) SetLength(length uint) {
+	x.inner.SetLength(length)
+}
+
 func (x *DOMHTMLOptionsCollection) asDOMObject() *raw.DOMObject { return &x.inner.DOMObject }
 
 func (x *DOMHTMLOptionsCollection) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMObject.WebScriptObject }
+
+// DOMHTMLOptionsCollectionable is the interface implemented by [DOMHTMLOptionsCollection], for mocking and DI.
+type DOMHTMLOptionsCollectionable interface {
+	Unwrap() *raw.DOMHTMLOptionsCollection
+	WithSelectedIndex(selectedIndex int) *DOMHTMLOptionsCollection
+	WithLength(length uint) *DOMHTMLOptionsCollection
+	NamedItem(name string) *DOMNode
+	AddIndex(option *raw.DOMHTMLOptionElement, index uint)
+	Remove(index uint)
+	Item(index uint) *DOMNode
+	SelectedIndex() int
+	SetSelectedIndex(selectedIndex int)
+	Length() uint
+	SetLength(length uint)
+}
+
+var _ DOMHTMLOptionsCollectionable = (*DOMHTMLOptionsCollection)(nil)
 

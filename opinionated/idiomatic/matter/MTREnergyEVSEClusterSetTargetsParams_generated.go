@@ -36,3 +36,48 @@ func (x *MTREnergyEVSEClusterSetTargetsParams) WithServerSideProcessingTimeout(s
 	return x
 }
 
+// ChargingTargetSchedules calls the underlying ChargingTargetSchedules.
+func (x *MTREnergyEVSEClusterSetTargetsParams) ChargingTargetSchedules() *foundation.NSArray[objc.ID] {
+	return x.inner.ChargingTargetSchedules()
+}
+
+// SetChargingTargetSchedules calls the underlying SetChargingTargetSchedules.
+func (x *MTREnergyEVSEClusterSetTargetsParams) SetChargingTargetSchedules(chargingTargetSchedules *foundation.NSArray[objc.ID]) {
+	x.inner.SetChargingTargetSchedules(chargingTargetSchedules)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTREnergyEVSEClusterSetTargetsParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTREnergyEVSEClusterSetTargetsParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTREnergyEVSEClusterSetTargetsParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTREnergyEVSEClusterSetTargetsParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTREnergyEVSEClusterSetTargetsParamsable is the interface implemented by [MTREnergyEVSEClusterSetTargetsParams], for mocking and DI.
+type MTREnergyEVSEClusterSetTargetsParamsable interface {
+	Unwrap() *raw.MTREnergyEVSEClusterSetTargetsParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTREnergyEVSEClusterSetTargetsParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTREnergyEVSEClusterSetTargetsParams
+	ChargingTargetSchedules() *foundation.NSArray[objc.ID]
+	SetChargingTargetSchedules(chargingTargetSchedules *foundation.NSArray[objc.ID])
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTREnergyEVSEClusterSetTargetsParamsable = (*MTREnergyEVSEClusterSetTargetsParams)(nil)
+

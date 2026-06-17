@@ -33,3 +33,22 @@ func NewImageFindKeypointsWithCoderDevice(aDecoder *foundation.NSCoder, device m
 	return &ImageFindKeypoints{inner: raw.MPSImageFindKeypointsFromID(_id)}
 }
 
+// EncodeToCommandBufferSourceTextureRegionsNumberOfRegionsKeypointCountBufferKeypointCountBufferOffsetKeypointDataBufferKeypointDataBufferOffset calls the underlying EncodeToCommandBufferSourceTextureRegionsNumberOfRegionsKeypointCountBufferKeypointCountBufferOffsetKeypointDataBufferKeypointDataBufferOffset.
+func (x *ImageFindKeypoints) EncodeToCommandBufferSourceTextureRegionsNumberOfRegionsKeypointCountBufferKeypointCountBufferOffsetKeypointDataBufferKeypointDataBufferOffset(commandBuffer metal.MTLCommandBuffer, source metal.MTLTexture, regions *metal.MTLRegion, numberOfRegions uint, keypointCountBuffer metal.MTLBuffer, keypointCountBufferOffset uint, keypointDataBuffer metal.MTLBuffer, keypointDataBufferOffset uint) {
+	x.inner.EncodeToCommandBufferSourceTextureRegionsNumberOfRegionsKeypointCountBufferKeypointCountBufferOffsetKeypointDataBufferKeypointDataBufferOffset(commandBuffer, source, regions, numberOfRegions, keypointCountBuffer, keypointCountBufferOffset, keypointDataBuffer, keypointDataBufferOffset)
+}
+
+// KeypointRangeInfo calls the underlying KeypointRangeInfo.
+func (x *ImageFindKeypoints) KeypointRangeInfo() raw.MPSImageKeypointRangeInfo {
+	return x.inner.KeypointRangeInfo()
+}
+
+// ImageFindKeypointsable is the interface implemented by [ImageFindKeypoints], for mocking and DI.
+type ImageFindKeypointsable interface {
+	Unwrap() *raw.MPSImageFindKeypoints
+	EncodeToCommandBufferSourceTextureRegionsNumberOfRegionsKeypointCountBufferKeypointCountBufferOffsetKeypointDataBufferKeypointDataBufferOffset(commandBuffer metal.MTLCommandBuffer, source metal.MTLTexture, regions *metal.MTLRegion, numberOfRegions uint, keypointCountBuffer metal.MTLBuffer, keypointCountBufferOffset uint, keypointDataBuffer metal.MTLBuffer, keypointDataBufferOffset uint)
+	KeypointRangeInfo() raw.MPSImageKeypointRangeInfo
+}
+
+var _ ImageFindKeypointsable = (*ImageFindKeypoints)(nil)
+

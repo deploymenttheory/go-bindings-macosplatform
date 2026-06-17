@@ -7,6 +7,7 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -30,6 +31,20 @@ func (x *DOMHTMLQuoteElement) WithCite(cite string) *DOMHTMLQuoteElement {
 	return x
 }
 
+// Cite calls the underlying Cite.
+func (x *DOMHTMLQuoteElement) Cite() string {
+	_r := x.inner.Cite()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetCite calls the underlying SetCite.
+func (x *DOMHTMLQuoteElement) SetCite(cite string) {
+	x.inner.SetCite(foundation.NSStringStringWithUTF8String(cite))
+}
+
 func (x *DOMHTMLQuoteElement) asDOMHTMLElement() *raw.DOMHTMLElement { return &x.inner.DOMHTMLElement }
 
 func (x *DOMHTMLQuoteElement) asDOMElement() *raw.DOMElement { return &x.inner.DOMHTMLElement.DOMElement }
@@ -39,4 +54,14 @@ func (x *DOMHTMLQuoteElement) asDOMNode() *raw.DOMNode { return &x.inner.DOMHTML
 func (x *DOMHTMLQuoteElement) asDOMObject() *raw.DOMObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject }
 
 func (x *DOMHTMLQuoteElement) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject }
+
+// DOMHTMLQuoteElementable is the interface implemented by [DOMHTMLQuoteElement], for mocking and DI.
+type DOMHTMLQuoteElementable interface {
+	Unwrap() *raw.DOMHTMLQuoteElement
+	WithCite(cite string) *DOMHTMLQuoteElement
+	Cite() string
+	SetCite(cite string)
+}
+
+var _ DOMHTMLQuoteElementable = (*DOMHTMLQuoteElement)(nil)
 

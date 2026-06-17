@@ -23,5 +23,42 @@ func NewObject() *Object {
 	return &Object{inner: raw.EKObjectFromID(_id)}
 }
 
+// Reset calls the underlying Reset.
+func (x *Object) Reset() {
+	x.inner.Reset()
+}
+
+// Rollback calls the underlying Rollback.
+func (x *Object) Rollback() {
+	x.inner.Rollback()
+}
+
+// Refresh calls the underlying Refresh.
+func (x *Object) Refresh() bool {
+	return x.inner.Refresh()
+}
+
+// HasChanges calls the underlying HasChanges.
+func (x *Object) HasChanges() bool {
+	return x.inner.HasChanges()
+}
+
+// IsNew calls the underlying IsNew.
+func (x *Object) IsNew() bool {
+	return x.inner.IsNew()
+}
+
 func (x *Object) asObject() *raw.EKObject { return x.inner }
+
+// Objectable is the interface implemented by [Object], for mocking and DI.
+type Objectable interface {
+	Unwrap() *raw.EKObject
+	Reset()
+	Rollback()
+	Refresh() bool
+	HasChanges() bool
+	IsNew() bool
+}
+
+var _ Objectable = (*Object)(nil)
 

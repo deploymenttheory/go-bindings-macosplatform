@@ -5,9 +5,12 @@
 package matter
 
 import (
+	"context"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // MTRBaseClusterWaterHeaterMode wraps [raw.MTRBaseClusterWaterHeaterMode] with a fluent Go API.
@@ -25,7 +28,239 @@ func NewMTRBaseClusterWaterHeaterModeWithDeviceEndpointIDQueue(device *raw.MTRBa
 	return &MTRBaseClusterWaterHeaterMode{inner: raw.MTRBaseClusterWaterHeaterModeFromID(_id)}
 }
 
+// ChangeToModeWithParamsCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterWaterHeaterMode) ChangeToModeWithParamsCompletion(ctx context.Context, params *raw.MTRWaterHeaterModeClusterChangeToModeParams) (*MTRWaterHeaterModeClusterChangeToModeResponseParams, error) {
+	type _result struct {
+		val *MTRWaterHeaterModeClusterChangeToModeResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ChangeToModeWithParamsCompletion(params, func(_p0 *raw.MTRWaterHeaterModeClusterChangeToModeResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTRWaterHeaterModeClusterChangeToModeResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTRWaterHeaterModeClusterChangeToModeResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeSupportedModesWithCompletion calls the underlying ReadAttributeSupportedModesWithCompletion.
+func (x *MTRBaseClusterWaterHeaterMode) ReadAttributeSupportedModesWithCompletion(completion objc.Block) {
+	x.inner.ReadAttributeSupportedModesWithCompletion(completion)
+}
+
+// SubscribeAttributeSupportedModesWithParamsSubscriptionEstablishedReportHandler calls the underlying SubscribeAttributeSupportedModesWithParamsSubscriptionEstablishedReportHandler.
+func (x *MTRBaseClusterWaterHeaterMode) SubscribeAttributeSupportedModesWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block) {
+	x.inner.SubscribeAttributeSupportedModesWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, reportHandler)
+}
+
+// ReadAttributeCurrentModeWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterWaterHeaterMode) ReadAttributeCurrentModeWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeCurrentModeWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// SubscribeAttributeCurrentModeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterWaterHeaterMode) SubscribeAttributeCurrentModeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeCurrentModeWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeGeneratedCommandListWithCompletion calls the underlying ReadAttributeGeneratedCommandListWithCompletion.
+func (x *MTRBaseClusterWaterHeaterMode) ReadAttributeGeneratedCommandListWithCompletion(completion objc.Block) {
+	x.inner.ReadAttributeGeneratedCommandListWithCompletion(completion)
+}
+
+// SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler calls the underlying SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler.
+func (x *MTRBaseClusterWaterHeaterMode) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block) {
+	x.inner.SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, reportHandler)
+}
+
+// ReadAttributeAcceptedCommandListWithCompletion calls the underlying ReadAttributeAcceptedCommandListWithCompletion.
+func (x *MTRBaseClusterWaterHeaterMode) ReadAttributeAcceptedCommandListWithCompletion(completion objc.Block) {
+	x.inner.ReadAttributeAcceptedCommandListWithCompletion(completion)
+}
+
+// SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler calls the underlying SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler.
+func (x *MTRBaseClusterWaterHeaterMode) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block) {
+	x.inner.SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, reportHandler)
+}
+
+// ReadAttributeAttributeListWithCompletion calls the underlying ReadAttributeAttributeListWithCompletion.
+func (x *MTRBaseClusterWaterHeaterMode) ReadAttributeAttributeListWithCompletion(completion objc.Block) {
+	x.inner.ReadAttributeAttributeListWithCompletion(completion)
+}
+
+// SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler calls the underlying SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler.
+func (x *MTRBaseClusterWaterHeaterMode) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block) {
+	x.inner.SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, reportHandler)
+}
+
+// ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterWaterHeaterMode) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeFeatureMapWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterWaterHeaterMode) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterWaterHeaterMode) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeClusterRevisionWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterWaterHeaterMode) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
 func (x *MTRBaseClusterWaterHeaterMode) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
 
 func (x *MTRBaseClusterWaterHeaterMode) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+
+// MTRBaseClusterWaterHeaterModeable is the interface implemented by [MTRBaseClusterWaterHeaterMode], for mocking and DI.
+type MTRBaseClusterWaterHeaterModeable interface {
+	Unwrap() *raw.MTRBaseClusterWaterHeaterMode
+	ChangeToModeWithParamsCompletion(ctx context.Context, params *raw.MTRWaterHeaterModeClusterChangeToModeParams) (*MTRWaterHeaterModeClusterChangeToModeResponseParams, error)
+	ReadAttributeSupportedModesWithCompletion(completion objc.Block)
+	SubscribeAttributeSupportedModesWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block)
+	ReadAttributeCurrentModeWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	SubscribeAttributeCurrentModeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeGeneratedCommandListWithCompletion(completion objc.Block)
+	SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block)
+	ReadAttributeAcceptedCommandListWithCompletion(completion objc.Block)
+	SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block)
+	ReadAttributeAttributeListWithCompletion(completion objc.Block)
+	SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block)
+	ReadAttributeFeatureMapWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+}
+
+var _ MTRBaseClusterWaterHeaterModeable = (*MTRBaseClusterWaterHeaterMode)(nil)
 

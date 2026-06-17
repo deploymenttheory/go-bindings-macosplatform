@@ -57,5 +57,38 @@ func (x *EntityIdentifier) WithQualifier(qualifier *foundation.NSData) *EntityId
 	return x
 }
 
+// Uuid calls the underlying Uuid.
+func (x *EntityIdentifier) Uuid() *foundation.NSUUID {
+	return x.inner.Uuid()
+}
+
+// SetUuid calls the underlying SetUuid.
+func (x *EntityIdentifier) SetUuid(uuid *foundation.NSUUID) {
+	x.inner.SetUuid(uuid)
+}
+
+// Qualifier calls the underlying Qualifier.
+func (x *EntityIdentifier) Qualifier() *foundation.NSData {
+	return x.inner.Qualifier()
+}
+
+// SetQualifier calls the underlying SetQualifier.
+func (x *EntityIdentifier) SetQualifier(qualifier *foundation.NSData) {
+	x.inner.SetQualifier(qualifier)
+}
+
 func (x *EntityIdentifier) asEntityIdentifier() *raw.FSEntityIdentifier { return x.inner }
+
+// EntityIdentifierable is the interface implemented by [EntityIdentifier], for mocking and DI.
+type EntityIdentifierable interface {
+	Unwrap() *raw.FSEntityIdentifier
+	WithUuid(uuid *foundation.NSUUID) *EntityIdentifier
+	WithQualifier(qualifier *foundation.NSData) *EntityIdentifier
+	Uuid() *foundation.NSUUID
+	SetUuid(uuid *foundation.NSUUID)
+	Qualifier() *foundation.NSData
+	SetQualifier(qualifier *foundation.NSData)
+}
+
+var _ EntityIdentifierable = (*EntityIdentifier)(nil)
 

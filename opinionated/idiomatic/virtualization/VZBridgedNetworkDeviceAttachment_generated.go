@@ -24,5 +24,22 @@ func NewBridgedNetworkDeviceAttachmentWithInterface(interface_ *raw.VZBridgedNet
 	return &BridgedNetworkDeviceAttachment{inner: raw.VZBridgedNetworkDeviceAttachmentFromID(_id)}
 }
 
+// Interface calls the underlying Interface.
+func (x *BridgedNetworkDeviceAttachment) Interface() *BridgedNetworkInterface {
+	_r := x.inner.Interface()
+	if _r == nil {
+		return nil
+	}
+	return &BridgedNetworkInterface{inner: _r}
+}
+
 func (x *BridgedNetworkDeviceAttachment) asNetworkDeviceAttachment() *raw.VZNetworkDeviceAttachment { return &x.inner.VZNetworkDeviceAttachment }
+
+// BridgedNetworkDeviceAttachmentable is the interface implemented by [BridgedNetworkDeviceAttachment], for mocking and DI.
+type BridgedNetworkDeviceAttachmentable interface {
+	Unwrap() *raw.VZBridgedNetworkDeviceAttachment
+	Interface() *BridgedNetworkInterface
+}
+
+var _ BridgedNetworkDeviceAttachmentable = (*BridgedNetworkDeviceAttachment)(nil)
 

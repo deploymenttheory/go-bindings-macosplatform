@@ -29,3 +29,10 @@ func (x *CNNLogSoftMaxGradientNode) asNNGradientFilterNode() *mpsneuralnetwork.M
 
 func (x *CNNLogSoftMaxGradientNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNGradientFilterNode.MPSNNFilterNode }
 
+// CNNLogSoftMaxGradientNodeable is the interface implemented by [CNNLogSoftMaxGradientNode], for mocking and DI.
+type CNNLogSoftMaxGradientNodeable interface {
+	Unwrap() *raw.MPSCNNLogSoftMaxGradientNode
+}
+
+var _ CNNLogSoftMaxGradientNodeable = (*CNNLogSoftMaxGradientNode)(nil)
+

@@ -7,7 +7,9 @@ package modelio
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // VertexAttribute wraps [raw.MDLVertexAttribute] with a fluent Go API.
@@ -60,4 +62,86 @@ func (x *VertexAttribute) WithTime(time_ float64) *VertexAttribute {
 	x.inner.SetTime(time_)
 	return x
 }
+
+// Name calls the underlying Name.
+func (x *VertexAttribute) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetName calls the underlying SetName.
+func (x *VertexAttribute) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
+// Format calls the underlying Format.
+func (x *VertexAttribute) Format() raw.MDLVertexFormat {
+	return x.inner.Format()
+}
+
+// SetFormat calls the underlying SetFormat.
+func (x *VertexAttribute) SetFormat(format raw.MDLVertexFormat) {
+	x.inner.SetFormat(format)
+}
+
+// Offset calls the underlying Offset.
+func (x *VertexAttribute) Offset() uint {
+	return x.inner.Offset()
+}
+
+// SetOffset calls the underlying SetOffset.
+func (x *VertexAttribute) SetOffset(offset uint) {
+	x.inner.SetOffset(offset)
+}
+
+// BufferIndex calls the underlying BufferIndex.
+func (x *VertexAttribute) BufferIndex() uint {
+	return x.inner.BufferIndex()
+}
+
+// SetBufferIndex calls the underlying SetBufferIndex.
+func (x *VertexAttribute) SetBufferIndex(bufferIndex uint) {
+	x.inner.SetBufferIndex(bufferIndex)
+}
+
+// Time calls the underlying Time.
+func (x *VertexAttribute) Time() float64 {
+	return x.inner.Time()
+}
+
+// SetTime calls the underlying SetTime.
+func (x *VertexAttribute) SetTime(time_ float64) {
+	x.inner.SetTime(time_)
+}
+
+// SetInitializationValue calls the underlying SetInitializationValue.
+func (x *VertexAttribute) SetInitializationValue(initializationValue unsafe.Pointer) {
+	x.inner.SetInitializationValue(initializationValue)
+}
+
+// VertexAttributeable is the interface implemented by [VertexAttribute], for mocking and DI.
+type VertexAttributeable interface {
+	Unwrap() *raw.MDLVertexAttribute
+	WithName(name string) *VertexAttribute
+	WithFormat(format raw.MDLVertexFormat) *VertexAttribute
+	WithOffset(offset uint) *VertexAttribute
+	WithBufferIndex(bufferIndex uint) *VertexAttribute
+	WithTime(time_ float64) *VertexAttribute
+	Name() string
+	SetName(name string)
+	Format() raw.MDLVertexFormat
+	SetFormat(format raw.MDLVertexFormat)
+	Offset() uint
+	SetOffset(offset uint)
+	BufferIndex() uint
+	SetBufferIndex(bufferIndex uint)
+	Time() float64
+	SetTime(time_ float64)
+	SetInitializationValue(initializationValue unsafe.Pointer)
+}
+
+var _ VertexAttributeable = (*VertexAttribute)(nil)
 

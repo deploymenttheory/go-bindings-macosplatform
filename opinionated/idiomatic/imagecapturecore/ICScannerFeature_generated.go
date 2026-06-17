@@ -6,6 +6,7 @@ package imagecapturecore
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imagecapturecore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +24,48 @@ func NewScannerFeature() *ScannerFeature {
 	return &ScannerFeature{inner: raw.ICScannerFeatureFromID(_id)}
 }
 
+// Type calls the underlying Type.
+func (x *ScannerFeature) Type() raw.ICScannerFeatureType {
+	return x.inner.Type()
+}
+
+// InternalName calls the underlying InternalName.
+func (x *ScannerFeature) InternalName() string {
+	_r := x.inner.InternalName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// HumanReadableName calls the underlying HumanReadableName.
+func (x *ScannerFeature) HumanReadableName() string {
+	_r := x.inner.HumanReadableName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Tooltip calls the underlying Tooltip.
+func (x *ScannerFeature) Tooltip() string {
+	_r := x.inner.Tooltip()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 func (x *ScannerFeature) asScannerFeature() *raw.ICScannerFeature { return x.inner }
+
+// ScannerFeatureable is the interface implemented by [ScannerFeature], for mocking and DI.
+type ScannerFeatureable interface {
+	Unwrap() *raw.ICScannerFeature
+	Type() raw.ICScannerFeatureType
+	InternalName() string
+	HumanReadableName() string
+	Tooltip() string
+}
+
+var _ ScannerFeatureable = (*ScannerFeature)(nil)
 

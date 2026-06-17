@@ -23,3 +23,26 @@ func NewVirtioConsolePortArray() *VirtioConsolePortArray {
 	return &VirtioConsolePortArray{inner: raw.VZVirtioConsolePortArrayFromID(_id)}
 }
 
+// ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
+func (x *VirtioConsolePortArray) ObjectAtIndexedSubscript(portIndex uint) *VirtioConsolePort {
+	_r := x.inner.ObjectAtIndexedSubscript(portIndex)
+	if _r == nil {
+		return nil
+	}
+	return &VirtioConsolePort{inner: _r}
+}
+
+// MaximumPortCount calls the underlying MaximumPortCount.
+func (x *VirtioConsolePortArray) MaximumPortCount() uint32 {
+	return x.inner.MaximumPortCount()
+}
+
+// VirtioConsolePortArrayable is the interface implemented by [VirtioConsolePortArray], for mocking and DI.
+type VirtioConsolePortArrayable interface {
+	Unwrap() *raw.VZVirtioConsolePortArray
+	ObjectAtIndexedSubscript(portIndex uint) *VirtioConsolePort
+	MaximumPortCount() uint32
+}
+
+var _ VirtioConsolePortArrayable = (*VirtioConsolePortArray)(nil)
+

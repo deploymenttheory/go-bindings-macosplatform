@@ -38,7 +38,31 @@ func (x *NameSpecifier) WithName(name string) *NameSpecifier {
 	return x
 }
 
+// Name calls the underlying Name.
+func (x *NameSpecifier) Name() *String {
+	_r := x.inner.Name()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SetName calls the underlying SetName.
+func (x *NameSpecifier) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
 func (x *NameSpecifier) asScriptObjectSpecifier() *raw.NSScriptObjectSpecifier { return &x.inner.NSScriptObjectSpecifier }
 
 func (x *NameSpecifier) asObject() *raw.NSObject { return &x.inner.NSScriptObjectSpecifier.NSObject }
+
+// NameSpecifierable is the interface implemented by [NameSpecifier], for mocking and DI.
+type NameSpecifierable interface {
+	Unwrap() *raw.NSNameSpecifier
+	WithName(name string) *NameSpecifier
+	Name() *String
+	SetName(name string)
+}
+
+var _ NameSpecifierable = (*NameSpecifier)(nil)
 

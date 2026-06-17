@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -109,4 +110,224 @@ func (x *TableColumn) WithDataCell(dataCell objc.ID) *TableColumn {
 	x.inner.SetDataCell(dataCell)
 	return x
 }
+
+// SizeToFit calls the underlying SizeToFit.
+func (x *TableColumn) SizeToFit() {
+	x.inner.SizeToFit()
+}
+
+// Identifier calls the underlying Identifier.
+func (x *TableColumn) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetIdentifier calls the underlying SetIdentifier.
+func (x *TableColumn) SetIdentifier(identifier *foundation.NSString) {
+	x.inner.SetIdentifier(identifier)
+}
+
+// TableView calls the underlying TableView.
+func (x *TableColumn) TableView() *TableView {
+	_r := x.inner.TableView()
+	if _r == nil {
+		return nil
+	}
+	return &TableView{inner: _r}
+}
+
+// SetTableView calls the underlying SetTableView.
+func (x *TableColumn) SetTableView(tableView *raw.NSTableView) {
+	x.inner.SetTableView(tableView)
+}
+
+// Width calls the underlying Width.
+func (x *TableColumn) Width() float64 {
+	return x.inner.Width()
+}
+
+// SetWidth calls the underlying SetWidth.
+func (x *TableColumn) SetWidth(width float64) {
+	x.inner.SetWidth(width)
+}
+
+// MinWidth calls the underlying MinWidth.
+func (x *TableColumn) MinWidth() float64 {
+	return x.inner.MinWidth()
+}
+
+// SetMinWidth calls the underlying SetMinWidth.
+func (x *TableColumn) SetMinWidth(minWidth float64) {
+	x.inner.SetMinWidth(minWidth)
+}
+
+// MaxWidth calls the underlying MaxWidth.
+func (x *TableColumn) MaxWidth() float64 {
+	return x.inner.MaxWidth()
+}
+
+// SetMaxWidth calls the underlying SetMaxWidth.
+func (x *TableColumn) SetMaxWidth(maxWidth float64) {
+	x.inner.SetMaxWidth(maxWidth)
+}
+
+// Title calls the underlying Title.
+func (x *TableColumn) Title() string {
+	_r := x.inner.Title()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetTitle calls the underlying SetTitle.
+func (x *TableColumn) SetTitle(title string) {
+	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+}
+
+// HeaderCell calls the underlying HeaderCell.
+func (x *TableColumn) HeaderCell() *TableHeaderCell {
+	_r := x.inner.HeaderCell()
+	if _r == nil {
+		return nil
+	}
+	return &TableHeaderCell{inner: _r}
+}
+
+// SetHeaderCell calls the underlying SetHeaderCell.
+func (x *TableColumn) SetHeaderCell(headerCell *raw.NSTableHeaderCell) {
+	x.inner.SetHeaderCell(headerCell)
+}
+
+// IsEditable calls the underlying IsEditable.
+func (x *TableColumn) IsEditable() bool {
+	return x.inner.IsEditable()
+}
+
+// SetEditable calls the underlying SetEditable.
+func (x *TableColumn) SetEditable(editable bool) {
+	x.inner.SetEditable(editable)
+}
+
+// SortDescriptorPrototype calls the underlying SortDescriptorPrototype.
+func (x *TableColumn) SortDescriptorPrototype() *foundation.NSSortDescriptor {
+	return x.inner.SortDescriptorPrototype()
+}
+
+// SetSortDescriptorPrototype calls the underlying SetSortDescriptorPrototype.
+func (x *TableColumn) SetSortDescriptorPrototype(sortDescriptorPrototype *foundation.NSSortDescriptor) {
+	x.inner.SetSortDescriptorPrototype(sortDescriptorPrototype)
+}
+
+// ResizingMask calls the underlying ResizingMask.
+func (x *TableColumn) ResizingMask() raw.NSTableColumnResizingOptions {
+	return x.inner.ResizingMask()
+}
+
+// SetResizingMask calls the underlying SetResizingMask.
+func (x *TableColumn) SetResizingMask(resizingMask raw.NSTableColumnResizingOptions) {
+	x.inner.SetResizingMask(resizingMask)
+}
+
+// HeaderToolTip calls the underlying HeaderToolTip.
+func (x *TableColumn) HeaderToolTip() string {
+	_r := x.inner.HeaderToolTip()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetHeaderToolTip calls the underlying SetHeaderToolTip.
+func (x *TableColumn) SetHeaderToolTip(headerToolTip string) {
+	x.inner.SetHeaderToolTip(foundation.NSStringStringWithUTF8String(headerToolTip))
+}
+
+// IsHidden calls the underlying IsHidden.
+func (x *TableColumn) IsHidden() bool {
+	return x.inner.IsHidden()
+}
+
+// SetHidden calls the underlying SetHidden.
+func (x *TableColumn) SetHidden(hidden bool) {
+	x.inner.SetHidden(hidden)
+}
+
+// SetResizable calls the underlying SetResizable.
+func (x *TableColumn) SetResizable(flag bool) {
+	x.inner.SetResizable(flag)
+}
+
+// IsResizable calls the underlying IsResizable.
+func (x *TableColumn) IsResizable() bool {
+	return x.inner.IsResizable()
+}
+
+// DataCellForRow calls the underlying DataCellForRow.
+func (x *TableColumn) DataCellForRow(row int) objc.ID {
+	return x.inner.DataCellForRow(row)
+}
+
+// DataCell calls the underlying DataCell.
+func (x *TableColumn) DataCell() objc.ID {
+	return x.inner.DataCell()
+}
+
+// SetDataCell calls the underlying SetDataCell.
+func (x *TableColumn) SetDataCell(dataCell objc.ID) {
+	x.inner.SetDataCell(dataCell)
+}
+
+// TableColumnable is the interface implemented by [TableColumn], for mocking and DI.
+type TableColumnable interface {
+	Unwrap() *raw.NSTableColumn
+	WithIdentifier(identifier *foundation.NSString) *TableColumn
+	WithTableView(tableView TableViewProvider) *TableColumn
+	WithWidth(width float64) *TableColumn
+	WithMinWidth(minWidth float64) *TableColumn
+	WithMaxWidth(maxWidth float64) *TableColumn
+	WithTitle(title string) *TableColumn
+	WithHeaderCell(headerCell *raw.NSTableHeaderCell) *TableColumn
+	WithEditable(editable bool) *TableColumn
+	WithSortDescriptorPrototype(sortDescriptorPrototype *foundation.NSSortDescriptor) *TableColumn
+	WithResizingMask(resizingMask raw.NSTableColumnResizingOptions) *TableColumn
+	WithHeaderToolTip(headerToolTip string) *TableColumn
+	WithHidden(hidden bool) *TableColumn
+	WithDataCell(dataCell objc.ID) *TableColumn
+	SizeToFit()
+	Identifier() string
+	SetIdentifier(identifier *foundation.NSString)
+	TableView() *TableView
+	SetTableView(tableView *raw.NSTableView)
+	Width() float64
+	SetWidth(width float64)
+	MinWidth() float64
+	SetMinWidth(minWidth float64)
+	MaxWidth() float64
+	SetMaxWidth(maxWidth float64)
+	Title() string
+	SetTitle(title string)
+	HeaderCell() *TableHeaderCell
+	SetHeaderCell(headerCell *raw.NSTableHeaderCell)
+	IsEditable() bool
+	SetEditable(editable bool)
+	SortDescriptorPrototype() *foundation.NSSortDescriptor
+	SetSortDescriptorPrototype(sortDescriptorPrototype *foundation.NSSortDescriptor)
+	ResizingMask() raw.NSTableColumnResizingOptions
+	SetResizingMask(resizingMask raw.NSTableColumnResizingOptions)
+	HeaderToolTip() string
+	SetHeaderToolTip(headerToolTip string)
+	IsHidden() bool
+	SetHidden(hidden bool)
+	SetResizable(flag bool)
+	IsResizable() bool
+	DataCellForRow(row int) objc.ID
+	DataCell() objc.ID
+	SetDataCell(dataCell objc.ID)
+}
+
+var _ TableColumnable = (*TableColumn)(nil)
 

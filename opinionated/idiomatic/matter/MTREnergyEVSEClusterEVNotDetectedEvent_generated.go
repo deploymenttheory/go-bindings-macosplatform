@@ -48,3 +48,62 @@ func (x *MTREnergyEVSEClusterEVNotDetectedEvent) WithSessionEnergyCharged(sessio
 	return x
 }
 
+// SessionID calls the underlying SessionID.
+func (x *MTREnergyEVSEClusterEVNotDetectedEvent) SessionID() *foundation.NSNumber {
+	return x.inner.SessionID()
+}
+
+// SetSessionID calls the underlying SetSessionID.
+func (x *MTREnergyEVSEClusterEVNotDetectedEvent) SetSessionID(sessionID *foundation.NSNumber) {
+	x.inner.SetSessionID(sessionID)
+}
+
+// State calls the underlying State.
+func (x *MTREnergyEVSEClusterEVNotDetectedEvent) State() *foundation.NSNumber {
+	return x.inner.State()
+}
+
+// SetState calls the underlying SetState.
+func (x *MTREnergyEVSEClusterEVNotDetectedEvent) SetState(state *foundation.NSNumber) {
+	x.inner.SetState(state)
+}
+
+// SessionDuration calls the underlying SessionDuration.
+func (x *MTREnergyEVSEClusterEVNotDetectedEvent) SessionDuration() *foundation.NSNumber {
+	return x.inner.SessionDuration()
+}
+
+// SetSessionDuration calls the underlying SetSessionDuration.
+func (x *MTREnergyEVSEClusterEVNotDetectedEvent) SetSessionDuration(sessionDuration *foundation.NSNumber) {
+	x.inner.SetSessionDuration(sessionDuration)
+}
+
+// SessionEnergyCharged calls the underlying SessionEnergyCharged.
+func (x *MTREnergyEVSEClusterEVNotDetectedEvent) SessionEnergyCharged() *foundation.NSNumber {
+	return x.inner.SessionEnergyCharged()
+}
+
+// SetSessionEnergyCharged calls the underlying SetSessionEnergyCharged.
+func (x *MTREnergyEVSEClusterEVNotDetectedEvent) SetSessionEnergyCharged(sessionEnergyCharged *foundation.NSNumber) {
+	x.inner.SetSessionEnergyCharged(sessionEnergyCharged)
+}
+
+// MTREnergyEVSEClusterEVNotDetectedEventable is the interface implemented by [MTREnergyEVSEClusterEVNotDetectedEvent], for mocking and DI.
+type MTREnergyEVSEClusterEVNotDetectedEventable interface {
+	Unwrap() *raw.MTREnergyEVSEClusterEVNotDetectedEvent
+	WithSessionID(sessionID *foundation.NSNumber) *MTREnergyEVSEClusterEVNotDetectedEvent
+	WithState(state *foundation.NSNumber) *MTREnergyEVSEClusterEVNotDetectedEvent
+	WithSessionDuration(sessionDuration *foundation.NSNumber) *MTREnergyEVSEClusterEVNotDetectedEvent
+	WithSessionEnergyCharged(sessionEnergyCharged *foundation.NSNumber) *MTREnergyEVSEClusterEVNotDetectedEvent
+	SessionID() *foundation.NSNumber
+	SetSessionID(sessionID *foundation.NSNumber)
+	State() *foundation.NSNumber
+	SetState(state *foundation.NSNumber)
+	SessionDuration() *foundation.NSNumber
+	SetSessionDuration(sessionDuration *foundation.NSNumber)
+	SessionEnergyCharged() *foundation.NSNumber
+	SetSessionEnergyCharged(sessionEnergyCharged *foundation.NSNumber)
+}
+
+var _ MTREnergyEVSEClusterEVNotDetectedEventable = (*MTREnergyEVSEClusterEVNotDetectedEvent)(nil)
+

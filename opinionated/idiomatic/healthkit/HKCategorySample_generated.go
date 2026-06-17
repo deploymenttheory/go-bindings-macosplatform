@@ -23,7 +23,30 @@ func NewCategorySample() *CategorySample {
 	return &CategorySample{inner: raw.HKCategorySampleFromID(_id)}
 }
 
+// CategoryType calls the underlying CategoryType.
+func (x *CategorySample) CategoryType() *CategoryType {
+	_r := x.inner.CategoryType()
+	if _r == nil {
+		return nil
+	}
+	return &CategoryType{inner: _r}
+}
+
+// Value calls the underlying Value.
+func (x *CategorySample) Value() int {
+	return x.inner.Value()
+}
+
 func (x *CategorySample) asSample() *raw.HKSample { return &x.inner.HKSample }
 
 func (x *CategorySample) asObject() *raw.HKObject { return &x.inner.HKSample.HKObject }
+
+// CategorySampleable is the interface implemented by [CategorySample], for mocking and DI.
+type CategorySampleable interface {
+	Unwrap() *raw.HKCategorySample
+	CategoryType() *CategoryType
+	Value() int
+}
+
+var _ CategorySampleable = (*CategorySample)(nil)
 

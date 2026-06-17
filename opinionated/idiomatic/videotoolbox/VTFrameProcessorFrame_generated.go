@@ -26,3 +26,22 @@ func NewFrameProcessorFrameWithBufferPresentationTimeStamp(buffer unsafe.Pointer
 	return &FrameProcessorFrame{inner: raw.VTFrameProcessorFrameFromID(_id)}
 }
 
+// Buffer calls the underlying Buffer.
+func (x *FrameProcessorFrame) Buffer() unsafe.Pointer {
+	return x.inner.Buffer()
+}
+
+// PresentationTimeStamp calls the underlying PresentationTimeStamp.
+func (x *FrameProcessorFrame) PresentationTimeStamp() coremedia.CMTime {
+	return x.inner.PresentationTimeStamp()
+}
+
+// FrameProcessorFrameable is the interface implemented by [FrameProcessorFrame], for mocking and DI.
+type FrameProcessorFrameable interface {
+	Unwrap() *raw.VTFrameProcessorFrame
+	Buffer() unsafe.Pointer
+	PresentationTimeStamp() coremedia.CMTime
+}
+
+var _ FrameProcessorFrameable = (*FrameProcessorFrame)(nil)
+

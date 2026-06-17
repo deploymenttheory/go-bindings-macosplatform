@@ -42,11 +42,11 @@ func (x *WKWebExtensionMessagePort) WithDisconnectHandler(disconnectHandler func
 func (x *WKWebExtensionMessagePort) SendMessage(ctx context.Context, message objc.ID) error {
 	_ch := make(chan error, 1)
 	x.inner.SendMessageCompletionHandler(message, func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -56,15 +56,49 @@ func (x *WKWebExtensionMessagePort) SendMessage(ctx context.Context, message obj
 	}
 }
 
+// Disconnect calls the underlying Disconnect.
+func (x *WKWebExtensionMessagePort) Disconnect() {
+	x.inner.Disconnect()
+}
+
+// DisconnectWithError calls the underlying DisconnectWithError.
+func (x *WKWebExtensionMessagePort) DisconnectWithError(error_ unsafe.Pointer) {
+	x.inner.DisconnectWithError(error_)
+}
+
+// ApplicationIdentifier calls the underlying ApplicationIdentifier.
+func (x *WKWebExtensionMessagePort) ApplicationIdentifier() string {
+	_r := x.inner.ApplicationIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// MessageHandler calls the underlying MessageHandler.
+func (x *WKWebExtensionMessagePort) MessageHandler() objc.Block {
+	return x.inner.MessageHandler()
+}
+
+// SetMessageHandler calls the underlying SetMessageHandler.
+func (x *WKWebExtensionMessagePort) SetMessageHandler(messageHandler func(objc.ID, unsafe.Pointer)) {
+	x.inner.SetMessageHandler(messageHandler)
+}
+
+// DisconnectHandler calls the underlying DisconnectHandler.
+func (x *WKWebExtensionMessagePort) DisconnectHandler() objc.Block {
+	return x.inner.DisconnectHandler()
+}
+
 // SetDisconnectHandler blocks until the operation completes or ctx is cancelled.
 func (x *WKWebExtensionMessagePort) SetDisconnectHandler(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.SetDisconnectHandler(func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -73,4 +107,27 @@ func (x *WKWebExtensionMessagePort) SetDisconnectHandler(ctx context.Context) er
 		return ctx.Err()
 	}
 }
+
+// IsDisconnected calls the underlying IsDisconnected.
+func (x *WKWebExtensionMessagePort) IsDisconnected() bool {
+	return x.inner.IsDisconnected()
+}
+
+// WKWebExtensionMessagePortable is the interface implemented by [WKWebExtensionMessagePort], for mocking and DI.
+type WKWebExtensionMessagePortable interface {
+	Unwrap() *raw.WKWebExtensionMessagePort
+	WithMessageHandler(messageHandler func(objc.ID, unsafe.Pointer)) *WKWebExtensionMessagePort
+	WithDisconnectHandler(disconnectHandler func(unsafe.Pointer)) *WKWebExtensionMessagePort
+	SendMessage(ctx context.Context, message objc.ID) error
+	Disconnect()
+	DisconnectWithError(error_ unsafe.Pointer)
+	ApplicationIdentifier() string
+	MessageHandler() objc.Block
+	SetMessageHandler(messageHandler func(objc.ID, unsafe.Pointer))
+	DisconnectHandler() objc.Block
+	SetDisconnectHandler(ctx context.Context) error
+	IsDisconnected() bool
+}
+
+var _ WKWebExtensionMessagePortable = (*WKWebExtensionMessagePort)(nil)
 

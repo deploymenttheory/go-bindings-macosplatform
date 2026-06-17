@@ -7,6 +7,7 @@ package installerplugins
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/installerplugins"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -72,4 +73,162 @@ func (x *InstallerPane) WithPreviousEnabled(previousEnabled bool) *InstallerPane
 	x.inner.SetPreviousEnabled(previousEnabled)
 	return x
 }
+
+// ContentView calls the underlying ContentView.
+func (x *InstallerPane) ContentView() *appkit.NSView {
+	return x.inner.ContentView()
+}
+
+// FirstKeyView calls the underlying FirstKeyView.
+func (x *InstallerPane) FirstKeyView() *appkit.NSView {
+	return x.inner.FirstKeyView()
+}
+
+// LastKeyView calls the underlying LastKeyView.
+func (x *InstallerPane) LastKeyView() *appkit.NSView {
+	return x.inner.LastKeyView()
+}
+
+// NextPane calls the underlying NextPane.
+func (x *InstallerPane) NextPane() *InstallerPane {
+	_r := x.inner.NextPane()
+	if _r == nil {
+		return nil
+	}
+	return &InstallerPane{inner: _r}
+}
+
+// WillEnterPane calls the underlying WillEnterPane.
+func (x *InstallerPane) WillEnterPane(dir raw.InstallerSectionDirection) {
+	x.inner.WillEnterPane(dir)
+}
+
+// DidEnterPane calls the underlying DidEnterPane.
+func (x *InstallerPane) DidEnterPane(dir raw.InstallerSectionDirection) {
+	x.inner.DidEnterPane(dir)
+}
+
+// ShouldExitPane calls the underlying ShouldExitPane.
+func (x *InstallerPane) ShouldExitPane(dir raw.InstallerSectionDirection) bool {
+	return x.inner.ShouldExitPane(dir)
+}
+
+// WillExitPane calls the underlying WillExitPane.
+func (x *InstallerPane) WillExitPane(dir raw.InstallerSectionDirection) {
+	x.inner.WillExitPane(dir)
+}
+
+// DidExitPane calls the underlying DidExitPane.
+func (x *InstallerPane) DidExitPane(dir raw.InstallerSectionDirection) {
+	x.inner.DidExitPane(dir)
+}
+
+// SetContentView calls the underlying SetContentView.
+func (x *InstallerPane) SetContentView(contentView *appkit.NSView) {
+	x.inner.SetContentView(contentView)
+}
+
+// SetInitialKeyView calls the underlying SetInitialKeyView.
+func (x *InstallerPane) SetInitialKeyView(initialKeyView *appkit.NSView) {
+	x.inner.SetInitialKeyView(initialKeyView)
+}
+
+// SetFirstKeyView calls the underlying SetFirstKeyView.
+func (x *InstallerPane) SetFirstKeyView(firstKeyView *appkit.NSView) {
+	x.inner.SetFirstKeyView(firstKeyView)
+}
+
+// SetLastKeyView calls the underlying SetLastKeyView.
+func (x *InstallerPane) SetLastKeyView(lastKeyView *appkit.NSView) {
+	x.inner.SetLastKeyView(lastKeyView)
+}
+
+// SetNextPane calls the underlying SetNextPane.
+func (x *InstallerPane) SetNextPane(nextPane *raw.InstallerPane) {
+	x.inner.SetNextPane(nextPane)
+}
+
+// Title calls the underlying Title.
+func (x *InstallerPane) Title() string {
+	_r := x.inner.Title()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Section calls the underlying Section.
+func (x *InstallerPane) Section() *InstallerSection {
+	_r := x.inner.Section()
+	if _r == nil {
+		return nil
+	}
+	return &InstallerSection{inner: _r}
+}
+
+// NextEnabled calls the underlying NextEnabled.
+func (x *InstallerPane) NextEnabled() bool {
+	return x.inner.NextEnabled()
+}
+
+// SetNextEnabled calls the underlying SetNextEnabled.
+func (x *InstallerPane) SetNextEnabled(nextEnabled bool) {
+	x.inner.SetNextEnabled(nextEnabled)
+}
+
+// PreviousEnabled calls the underlying PreviousEnabled.
+func (x *InstallerPane) PreviousEnabled() bool {
+	return x.inner.PreviousEnabled()
+}
+
+// SetPreviousEnabled calls the underlying SetPreviousEnabled.
+func (x *InstallerPane) SetPreviousEnabled(previousEnabled bool) {
+	x.inner.SetPreviousEnabled(previousEnabled)
+}
+
+// GotoNextPane calls the underlying GotoNextPane.
+func (x *InstallerPane) GotoNextPane() bool {
+	return x.inner.GotoNextPane()
+}
+
+// GotoPreviousPane calls the underlying GotoPreviousPane.
+func (x *InstallerPane) GotoPreviousPane() bool {
+	return x.inner.GotoPreviousPane()
+}
+
+// InstallerPaneable is the interface implemented by [InstallerPane], for mocking and DI.
+type InstallerPaneable interface {
+	Unwrap() *raw.InstallerPane
+	WithContentView(contentView *appkit.NSView) *InstallerPane
+	WithInitialKeyView(initialKeyView *appkit.NSView) *InstallerPane
+	WithFirstKeyView(firstKeyView *appkit.NSView) *InstallerPane
+	WithLastKeyView(lastKeyView *appkit.NSView) *InstallerPane
+	WithNextPane(nextPane *raw.InstallerPane) *InstallerPane
+	WithNextEnabled(nextEnabled bool) *InstallerPane
+	WithPreviousEnabled(previousEnabled bool) *InstallerPane
+	ContentView() *appkit.NSView
+	FirstKeyView() *appkit.NSView
+	LastKeyView() *appkit.NSView
+	NextPane() *InstallerPane
+	WillEnterPane(dir raw.InstallerSectionDirection)
+	DidEnterPane(dir raw.InstallerSectionDirection)
+	ShouldExitPane(dir raw.InstallerSectionDirection) bool
+	WillExitPane(dir raw.InstallerSectionDirection)
+	DidExitPane(dir raw.InstallerSectionDirection)
+	SetContentView(contentView *appkit.NSView)
+	SetInitialKeyView(initialKeyView *appkit.NSView)
+	SetFirstKeyView(firstKeyView *appkit.NSView)
+	SetLastKeyView(lastKeyView *appkit.NSView)
+	SetNextPane(nextPane *raw.InstallerPane)
+	Title() string
+	Section() *InstallerSection
+	NextEnabled() bool
+	SetNextEnabled(nextEnabled bool)
+	PreviousEnabled() bool
+	SetPreviousEnabled(previousEnabled bool)
+	GotoNextPane() bool
+	GotoPreviousPane() bool
+}
+
+var _ InstallerPaneable = (*InstallerPane)(nil)
 

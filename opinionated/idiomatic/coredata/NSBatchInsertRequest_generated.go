@@ -7,6 +7,7 @@ package coredata
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -101,18 +102,84 @@ func (x *BatchInsertRequest) WithResultType(resultType raw.NSBatchInsertRequestR
 	return x
 }
 
-// ObjectsToInsert returns the collection as a Go slice.
-func (x *BatchInsertRequest) ObjectsToInsert() []*foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	arr := x.inner.ObjectsToInsert()
-	if arr == nil {
+// EntityName calls the underlying EntityName.
+func (x *BatchInsertRequest) EntityName() string {
+	_r := x.inner.EntityName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Entity calls the underlying Entity.
+func (x *BatchInsertRequest) Entity() *EntityDescription {
+	_r := x.inner.Entity()
+	if _r == nil {
 		return nil
 	}
-	out := make([]*foundation.NSDictionary[*foundation.NSString, objc.ID], arr.Count())
-	for i := range out {
-		out[i] = foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](arr.ObjectAtIndex(uint(i)))
-	}
-	return out
+	return &EntityDescription{inner: _r}
+}
+
+// ObjectsToInsert calls the underlying ObjectsToInsert.
+func (x *BatchInsertRequest) ObjectsToInsert() *foundation.NSArray[objc.ID] {
+	return x.inner.ObjectsToInsert()
+}
+
+// SetObjectsToInsert calls the underlying SetObjectsToInsert.
+func (x *BatchInsertRequest) SetObjectsToInsert(objectsToInsert *foundation.NSArray[objc.ID]) {
+	x.inner.SetObjectsToInsert(objectsToInsert)
+}
+
+// DictionaryHandler calls the underlying DictionaryHandler.
+func (x *BatchInsertRequest) DictionaryHandler() objc.Block {
+	return x.inner.DictionaryHandler()
+}
+
+// SetDictionaryHandler calls the underlying SetDictionaryHandler.
+func (x *BatchInsertRequest) SetDictionaryHandler(dictionaryHandler objc.Block) {
+	x.inner.SetDictionaryHandler(dictionaryHandler)
+}
+
+// ManagedObjectHandler calls the underlying ManagedObjectHandler.
+func (x *BatchInsertRequest) ManagedObjectHandler() objc.Block {
+	return x.inner.ManagedObjectHandler()
+}
+
+// SetManagedObjectHandler calls the underlying SetManagedObjectHandler.
+func (x *BatchInsertRequest) SetManagedObjectHandler(managedObjectHandler func(*raw.NSManagedObject) bool) {
+	x.inner.SetManagedObjectHandler(managedObjectHandler)
+}
+
+// ResultType calls the underlying ResultType.
+func (x *BatchInsertRequest) ResultType() raw.NSBatchInsertRequestResultType {
+	return x.inner.ResultType()
+}
+
+// SetResultType calls the underlying SetResultType.
+func (x *BatchInsertRequest) SetResultType(resultType raw.NSBatchInsertRequestResultType) {
+	x.inner.SetResultType(resultType)
 }
 
 func (x *BatchInsertRequest) asPersistentStoreRequest() *raw.NSPersistentStoreRequest { return &x.inner.NSPersistentStoreRequest }
+
+// BatchInsertRequestable is the interface implemented by [BatchInsertRequest], for mocking and DI.
+type BatchInsertRequestable interface {
+	Unwrap() *raw.NSBatchInsertRequest
+	WithObjectsToInsert(items ...*foundation.NSDictionary[*foundation.NSString, objc.ID]) *BatchInsertRequest
+	WithDictionaryHandler(dictionaryHandler objc.Block) *BatchInsertRequest
+	WithManagedObjectHandler(managedObjectHandler func(*raw.NSManagedObject) bool) *BatchInsertRequest
+	WithResultType(resultType raw.NSBatchInsertRequestResultType) *BatchInsertRequest
+	EntityName() string
+	Entity() *EntityDescription
+	ObjectsToInsert() *foundation.NSArray[objc.ID]
+	SetObjectsToInsert(objectsToInsert *foundation.NSArray[objc.ID])
+	DictionaryHandler() objc.Block
+	SetDictionaryHandler(dictionaryHandler objc.Block)
+	ManagedObjectHandler() objc.Block
+	SetManagedObjectHandler(managedObjectHandler func(*raw.NSManagedObject) bool)
+	ResultType() raw.NSBatchInsertRequestResultType
+	SetResultType(resultType raw.NSBatchInsertRequestResultType)
+}
+
+var _ BatchInsertRequestable = (*BatchInsertRequest)(nil)
 

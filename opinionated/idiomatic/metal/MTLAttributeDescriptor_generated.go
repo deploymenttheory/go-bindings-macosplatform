@@ -41,3 +41,49 @@ func (x *AttributeDescriptor) WithBufferIndex(bufferIndex uint) *AttributeDescri
 	return x
 }
 
+// Format calls the underlying Format.
+func (x *AttributeDescriptor) Format() raw.MTLAttributeFormat {
+	return x.inner.Format()
+}
+
+// SetFormat calls the underlying SetFormat.
+func (x *AttributeDescriptor) SetFormat(format raw.MTLAttributeFormat) {
+	x.inner.SetFormat(format)
+}
+
+// Offset calls the underlying Offset.
+func (x *AttributeDescriptor) Offset() uint {
+	return x.inner.Offset()
+}
+
+// SetOffset calls the underlying SetOffset.
+func (x *AttributeDescriptor) SetOffset(offset uint) {
+	x.inner.SetOffset(offset)
+}
+
+// BufferIndex calls the underlying BufferIndex.
+func (x *AttributeDescriptor) BufferIndex() uint {
+	return x.inner.BufferIndex()
+}
+
+// SetBufferIndex calls the underlying SetBufferIndex.
+func (x *AttributeDescriptor) SetBufferIndex(bufferIndex uint) {
+	x.inner.SetBufferIndex(bufferIndex)
+}
+
+// AttributeDescriptorable is the interface implemented by [AttributeDescriptor], for mocking and DI.
+type AttributeDescriptorable interface {
+	Unwrap() *raw.MTLAttributeDescriptor
+	WithFormat(format raw.MTLAttributeFormat) *AttributeDescriptor
+	WithOffset(offset uint) *AttributeDescriptor
+	WithBufferIndex(bufferIndex uint) *AttributeDescriptor
+	Format() raw.MTLAttributeFormat
+	SetFormat(format raw.MTLAttributeFormat)
+	Offset() uint
+	SetOffset(offset uint)
+	BufferIndex() uint
+	SetBufferIndex(bufferIndex uint)
+}
+
+var _ AttributeDescriptorable = (*AttributeDescriptor)(nil)
+

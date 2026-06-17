@@ -23,3 +23,10 @@ func NewFinderSync() *FinderSync {
 	return &FinderSync{inner: raw.FIFinderSyncFromID(_id)}
 }
 
+// FinderSyncable is the interface implemented by [FinderSync], for mocking and DI.
+type FinderSyncable interface {
+	Unwrap() *raw.FIFinderSync
+}
+
+var _ FinderSyncable = (*FinderSync)(nil)
+

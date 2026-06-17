@@ -37,3 +37,10 @@ func (x *CNNPoolingL2Norm) asCNNPooling() *raw.MPSCNNPooling { return &x.inner.M
 
 func (x *CNNPoolingL2Norm) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSCNNPooling.MPSCNNKernel }
 
+// CNNPoolingL2Normable is the interface implemented by [CNNPoolingL2Norm], for mocking and DI.
+type CNNPoolingL2Normable interface {
+	Unwrap() *raw.MPSCNNPoolingL2Norm
+}
+
+var _ CNNPoolingL2Normable = (*CNNPoolingL2Norm)(nil)
+

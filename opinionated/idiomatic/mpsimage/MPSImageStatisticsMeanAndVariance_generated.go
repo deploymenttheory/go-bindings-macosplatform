@@ -39,5 +39,25 @@ func (x *ImageStatisticsMeanAndVariance) WithClipRectSource(clipRectSource metal
 	return x
 }
 
+// ClipRectSource calls the underlying ClipRectSource.
+func (x *ImageStatisticsMeanAndVariance) ClipRectSource() metal.MTLRegion {
+	return x.inner.ClipRectSource()
+}
+
+// SetClipRectSource calls the underlying SetClipRectSource.
+func (x *ImageStatisticsMeanAndVariance) SetClipRectSource(clipRectSource metal.MTLRegion) {
+	x.inner.SetClipRectSource(clipRectSource)
+}
+
 func (x *ImageStatisticsMeanAndVariance) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.inner.MPSUnaryImageKernel }
+
+// ImageStatisticsMeanAndVarianceable is the interface implemented by [ImageStatisticsMeanAndVariance], for mocking and DI.
+type ImageStatisticsMeanAndVarianceable interface {
+	Unwrap() *raw.MPSImageStatisticsMeanAndVariance
+	WithClipRectSource(clipRectSource metal.MTLRegion) *ImageStatisticsMeanAndVariance
+	ClipRectSource() metal.MTLRegion
+	SetClipRectSource(clipRectSource metal.MTLRegion)
+}
+
+var _ ImageStatisticsMeanAndVarianceable = (*ImageStatisticsMeanAndVariance)(nil)
 

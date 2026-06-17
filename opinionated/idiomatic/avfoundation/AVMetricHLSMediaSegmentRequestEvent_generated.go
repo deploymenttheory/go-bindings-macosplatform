@@ -6,6 +6,8 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +25,62 @@ func NewMetricHLSMediaSegmentRequestEvent() *MetricHLSMediaSegmentRequestEvent {
 	return &MetricHLSMediaSegmentRequestEvent{inner: raw.AVMetricHLSMediaSegmentRequestEventFromID(_id)}
 }
 
+// Url calls the underlying Url.
+func (x *MetricHLSMediaSegmentRequestEvent) Url() *foundation.NSURL {
+	return x.inner.Url()
+}
+
+// IsMapSegment calls the underlying IsMapSegment.
+func (x *MetricHLSMediaSegmentRequestEvent) IsMapSegment() bool {
+	return x.inner.IsMapSegment()
+}
+
+// MediaType calls the underlying MediaType.
+func (x *MetricHLSMediaSegmentRequestEvent) MediaType() string {
+	_r := x.inner.MediaType()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ByteRange calls the underlying ByteRange.
+func (x *MetricHLSMediaSegmentRequestEvent) ByteRange() foundation.NSRange {
+	return x.inner.ByteRange()
+}
+
+// IndexFileURL calls the underlying IndexFileURL.
+func (x *MetricHLSMediaSegmentRequestEvent) IndexFileURL() *foundation.NSURL {
+	return x.inner.IndexFileURL()
+}
+
+// SegmentDuration calls the underlying SegmentDuration.
+func (x *MetricHLSMediaSegmentRequestEvent) SegmentDuration() float64 {
+	return x.inner.SegmentDuration()
+}
+
+// MediaResourceRequestEvent calls the underlying MediaResourceRequestEvent.
+func (x *MetricHLSMediaSegmentRequestEvent) MediaResourceRequestEvent() *MetricMediaResourceRequestEvent {
+	_r := x.inner.MediaResourceRequestEvent()
+	if _r == nil {
+		return nil
+	}
+	return &MetricMediaResourceRequestEvent{inner: _r}
+}
+
 func (x *MetricHLSMediaSegmentRequestEvent) asMetricEvent() *raw.AVMetricEvent { return &x.inner.AVMetricEvent }
+
+// MetricHLSMediaSegmentRequestEventable is the interface implemented by [MetricHLSMediaSegmentRequestEvent], for mocking and DI.
+type MetricHLSMediaSegmentRequestEventable interface {
+	Unwrap() *raw.AVMetricHLSMediaSegmentRequestEvent
+	Url() *foundation.NSURL
+	IsMapSegment() bool
+	MediaType() string
+	ByteRange() foundation.NSRange
+	IndexFileURL() *foundation.NSURL
+	SegmentDuration() float64
+	MediaResourceRequestEvent() *MetricMediaResourceRequestEvent
+}
+
+var _ MetricHLSMediaSegmentRequestEventable = (*MetricHLSMediaSegmentRequestEvent)(nil)
 

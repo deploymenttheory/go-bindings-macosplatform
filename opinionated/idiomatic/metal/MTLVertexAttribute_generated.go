@@ -6,6 +6,7 @@ package metal
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,51 @@ func NewVertexAttribute() *VertexAttribute {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLVertexAttribute")), objc.RegisterName("new"))
 	return &VertexAttribute{inner: raw.MTLVertexAttributeFromID(_id)}
 }
+
+// Name calls the underlying Name.
+func (x *VertexAttribute) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// AttributeIndex calls the underlying AttributeIndex.
+func (x *VertexAttribute) AttributeIndex() uint {
+	return x.inner.AttributeIndex()
+}
+
+// AttributeType calls the underlying AttributeType.
+func (x *VertexAttribute) AttributeType() raw.MTLDataType {
+	return x.inner.AttributeType()
+}
+
+// IsActive calls the underlying IsActive.
+func (x *VertexAttribute) IsActive() bool {
+	return x.inner.IsActive()
+}
+
+// IsPatchData calls the underlying IsPatchData.
+func (x *VertexAttribute) IsPatchData() bool {
+	return x.inner.IsPatchData()
+}
+
+// IsPatchControlPointData calls the underlying IsPatchControlPointData.
+func (x *VertexAttribute) IsPatchControlPointData() bool {
+	return x.inner.IsPatchControlPointData()
+}
+
+// VertexAttributeable is the interface implemented by [VertexAttribute], for mocking and DI.
+type VertexAttributeable interface {
+	Unwrap() *raw.MTLVertexAttribute
+	Name() string
+	AttributeIndex() uint
+	AttributeType() raw.MTLDataType
+	IsActive() bool
+	IsPatchData() bool
+	IsPatchControlPointData() bool
+}
+
+var _ VertexAttributeable = (*VertexAttribute)(nil)
 

@@ -7,6 +7,7 @@ package authenticationservices
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -59,12 +60,59 @@ func (x *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest) AllowedCre
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor {
+		return raw.ASAuthorizationSecurityKeyPublicKeyCredentialDescriptorFromID(purego.Retain(_id))
+	})
+}
+
+// SetAllowedCredentials calls the underlying SetAllowedCredentials.
+func (x *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest) SetAllowedCredentials(allowedCredentials *foundation.NSArray[*raw.ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor]) {
+	x.inner.SetAllowedCredentials(allowedCredentials)
+}
+
+// AppID calls the underlying AppID.
+func (x *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest) AppID() string {
+	_r := x.inner.AppID()
+	if _r == nil {
+		return ""
 	}
-	return out
+	return purego.GoString(_r.Ptr())
+}
+
+// SetAppID calls the underlying SetAppID.
+func (x *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest) SetAppID(appID string) {
+	x.inner.SetAppID(foundation.NSStringStringWithUTF8String(appID))
+}
+
+// Prf calls the underlying Prf.
+func (x *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest) Prf() *AuthorizationPublicKeyCredentialPRFAssertionInput {
+	_r := x.inner.Prf()
+	if _r == nil {
+		return nil
+	}
+	return &AuthorizationPublicKeyCredentialPRFAssertionInput{inner: _r}
+}
+
+// SetPrf calls the underlying SetPrf.
+func (x *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest) SetPrf(prf *raw.ASAuthorizationPublicKeyCredentialPRFAssertionInput) {
+	x.inner.SetPrf(prf)
 }
 
 func (x *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest) asAuthorizationRequest() *raw.ASAuthorizationRequest { return &x.inner.ASAuthorizationRequest }
+
+// AuthorizationSecurityKeyPublicKeyCredentialAssertionRequestable is the interface implemented by [AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest], for mocking and DI.
+type AuthorizationSecurityKeyPublicKeyCredentialAssertionRequestable interface {
+	Unwrap() *raw.ASAuthorizationSecurityKeyPublicKeyCredentialAssertionRequest
+	WithAllowedCredentials(items ...*raw.ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor) *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest
+	WithAppID(appID string) *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest
+	WithPrf(prf *raw.ASAuthorizationPublicKeyCredentialPRFAssertionInput) *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest
+	AllowedCredentials() []*raw.ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor
+	SetAllowedCredentials(allowedCredentials *foundation.NSArray[*raw.ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor])
+	AppID() string
+	SetAppID(appID string)
+	Prf() *AuthorizationPublicKeyCredentialPRFAssertionInput
+	SetPrf(prf *raw.ASAuthorizationPublicKeyCredentialPRFAssertionInput)
+}
+
+var _ AuthorizationSecurityKeyPublicKeyCredentialAssertionRequestable = (*AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest)(nil)
 

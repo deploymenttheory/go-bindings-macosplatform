@@ -5,6 +5,7 @@
 package quartzcore
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	"github.com/ebitengine/purego/objc"
 )
@@ -34,4 +35,73 @@ func (x *DisplayLink) WithPreferredFrameRateRange(preferredFrameRateRange raw.CA
 	x.inner.SetPreferredFrameRateRange(preferredFrameRateRange)
 	return x
 }
+
+// AddToRunLoopForMode calls the underlying AddToRunLoopForMode.
+func (x *DisplayLink) AddToRunLoopForMode(runloop *foundation.NSRunLoop, mode *foundation.NSString) {
+	x.inner.AddToRunLoopForMode(runloop, mode)
+}
+
+// RemoveFromRunLoopForMode calls the underlying RemoveFromRunLoopForMode.
+func (x *DisplayLink) RemoveFromRunLoopForMode(runloop *foundation.NSRunLoop, mode *foundation.NSString) {
+	x.inner.RemoveFromRunLoopForMode(runloop, mode)
+}
+
+// Invalidate calls the underlying Invalidate.
+func (x *DisplayLink) Invalidate() {
+	x.inner.Invalidate()
+}
+
+// Timestamp calls the underlying Timestamp.
+func (x *DisplayLink) Timestamp() float64 {
+	return x.inner.Timestamp()
+}
+
+// Duration calls the underlying Duration.
+func (x *DisplayLink) Duration() float64 {
+	return x.inner.Duration()
+}
+
+// TargetTimestamp calls the underlying TargetTimestamp.
+func (x *DisplayLink) TargetTimestamp() float64 {
+	return x.inner.TargetTimestamp()
+}
+
+// IsPaused calls the underlying IsPaused.
+func (x *DisplayLink) IsPaused() bool {
+	return x.inner.IsPaused()
+}
+
+// SetPaused calls the underlying SetPaused.
+func (x *DisplayLink) SetPaused(paused bool) {
+	x.inner.SetPaused(paused)
+}
+
+// PreferredFrameRateRange calls the underlying PreferredFrameRateRange.
+func (x *DisplayLink) PreferredFrameRateRange() raw.CAFrameRateRange {
+	return x.inner.PreferredFrameRateRange()
+}
+
+// SetPreferredFrameRateRange calls the underlying SetPreferredFrameRateRange.
+func (x *DisplayLink) SetPreferredFrameRateRange(preferredFrameRateRange raw.CAFrameRateRange) {
+	x.inner.SetPreferredFrameRateRange(preferredFrameRateRange)
+}
+
+// DisplayLinkable is the interface implemented by [DisplayLink], for mocking and DI.
+type DisplayLinkable interface {
+	Unwrap() *raw.CADisplayLink
+	WithPaused(paused bool) *DisplayLink
+	WithPreferredFrameRateRange(preferredFrameRateRange raw.CAFrameRateRange) *DisplayLink
+	AddToRunLoopForMode(runloop *foundation.NSRunLoop, mode *foundation.NSString)
+	RemoveFromRunLoopForMode(runloop *foundation.NSRunLoop, mode *foundation.NSString)
+	Invalidate()
+	Timestamp() float64
+	Duration() float64
+	TargetTimestamp() float64
+	IsPaused() bool
+	SetPaused(paused bool)
+	PreferredFrameRateRange() raw.CAFrameRateRange
+	SetPreferredFrameRateRange(preferredFrameRateRange raw.CAFrameRateRange)
+}
+
+var _ DisplayLinkable = (*DisplayLink)(nil)
 

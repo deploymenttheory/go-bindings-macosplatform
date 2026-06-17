@@ -7,6 +7,7 @@ package intents
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,16 +54,84 @@ func NewCallRecordWithIdentifierDateCreatedCallerCallRecordTypeCallCapabilityCal
 	return &CallRecord{inner: raw.INCallRecordFromID(_id)}
 }
 
+// Identifier calls the underlying Identifier.
+func (x *CallRecord) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// DateCreated calls the underlying DateCreated.
+func (x *CallRecord) DateCreated() *foundation.NSDate {
+	return x.inner.DateCreated()
+}
+
+// CallRecordType calls the underlying CallRecordType.
+func (x *CallRecord) CallRecordType() raw.INCallRecordType {
+	return x.inner.CallRecordType()
+}
+
+// CallDuration calls the underlying CallDuration.
+func (x *CallRecord) CallDuration() *foundation.NSNumber {
+	return x.inner.CallDuration()
+}
+
+// Unseen calls the underlying Unseen.
+func (x *CallRecord) Unseen() *foundation.NSNumber {
+	return x.inner.Unseen()
+}
+
+// CallCapability calls the underlying CallCapability.
+func (x *CallRecord) CallCapability() raw.INCallCapability {
+	return x.inner.CallCapability()
+}
+
+// NumberOfCalls calls the underlying NumberOfCalls.
+func (x *CallRecord) NumberOfCalls() *foundation.NSNumber {
+	return x.inner.NumberOfCalls()
+}
+
+// IsCallerIdBlocked calls the underlying IsCallerIdBlocked.
+func (x *CallRecord) IsCallerIdBlocked() *foundation.NSNumber {
+	return x.inner.IsCallerIdBlocked()
+}
+
 // Participants returns the collection as a Go slice.
 func (x *CallRecord) Participants() []*raw.INPerson {
 	arr := x.inner.Participants()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.INPerson, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.INPerson {
+		return raw.INPersonFromID(purego.Retain(_id))
+	})
 }
+
+// Caller calls the underlying Caller.
+func (x *CallRecord) Caller() *Person {
+	_r := x.inner.Caller()
+	if _r == nil {
+		return nil
+	}
+	return &Person{inner: _r}
+}
+
+// CallRecordable is the interface implemented by [CallRecord], for mocking and DI.
+type CallRecordable interface {
+	Unwrap() *raw.INCallRecord
+	Identifier() string
+	DateCreated() *foundation.NSDate
+	CallRecordType() raw.INCallRecordType
+	CallDuration() *foundation.NSNumber
+	Unseen() *foundation.NSNumber
+	CallCapability() raw.INCallCapability
+	NumberOfCalls() *foundation.NSNumber
+	IsCallerIdBlocked() *foundation.NSNumber
+	Participants() []*raw.INPerson
+	Caller() *Person
+}
+
+var _ CallRecordable = (*CallRecord)(nil)
 

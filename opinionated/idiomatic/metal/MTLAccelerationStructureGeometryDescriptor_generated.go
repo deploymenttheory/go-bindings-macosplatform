@@ -7,6 +7,7 @@ package metal
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -72,5 +73,120 @@ func (x *AccelerationStructureGeometryDescriptor) WithPrimitiveDataElementSize(p
 	return x
 }
 
+// IntersectionFunctionTableOffset calls the underlying IntersectionFunctionTableOffset.
+func (x *AccelerationStructureGeometryDescriptor) IntersectionFunctionTableOffset() uint {
+	return x.inner.IntersectionFunctionTableOffset()
+}
+
+// SetIntersectionFunctionTableOffset calls the underlying SetIntersectionFunctionTableOffset.
+func (x *AccelerationStructureGeometryDescriptor) SetIntersectionFunctionTableOffset(intersectionFunctionTableOffset uint) {
+	x.inner.SetIntersectionFunctionTableOffset(intersectionFunctionTableOffset)
+}
+
+// Opaque calls the underlying Opaque.
+func (x *AccelerationStructureGeometryDescriptor) Opaque() bool {
+	return x.inner.Opaque()
+}
+
+// SetOpaque calls the underlying SetOpaque.
+func (x *AccelerationStructureGeometryDescriptor) SetOpaque(opaque bool) {
+	x.inner.SetOpaque(opaque)
+}
+
+// AllowDuplicateIntersectionFunctionInvocation calls the underlying AllowDuplicateIntersectionFunctionInvocation.
+func (x *AccelerationStructureGeometryDescriptor) AllowDuplicateIntersectionFunctionInvocation() bool {
+	return x.inner.AllowDuplicateIntersectionFunctionInvocation()
+}
+
+// SetAllowDuplicateIntersectionFunctionInvocation calls the underlying SetAllowDuplicateIntersectionFunctionInvocation.
+func (x *AccelerationStructureGeometryDescriptor) SetAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation bool) {
+	x.inner.SetAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation)
+}
+
+// Label calls the underlying Label.
+func (x *AccelerationStructureGeometryDescriptor) Label() string {
+	_r := x.inner.Label()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLabel calls the underlying SetLabel.
+func (x *AccelerationStructureGeometryDescriptor) SetLabel(label string) {
+	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+}
+
+// PrimitiveDataBuffer calls the underlying PrimitiveDataBuffer.
+func (x *AccelerationStructureGeometryDescriptor) PrimitiveDataBuffer() raw.MTLBuffer {
+	return x.inner.PrimitiveDataBuffer()
+}
+
+// SetPrimitiveDataBuffer calls the underlying SetPrimitiveDataBuffer.
+func (x *AccelerationStructureGeometryDescriptor) SetPrimitiveDataBuffer(primitiveDataBuffer raw.MTLBuffer) {
+	x.inner.SetPrimitiveDataBuffer(primitiveDataBuffer)
+}
+
+// PrimitiveDataBufferOffset calls the underlying PrimitiveDataBufferOffset.
+func (x *AccelerationStructureGeometryDescriptor) PrimitiveDataBufferOffset() uint {
+	return x.inner.PrimitiveDataBufferOffset()
+}
+
+// SetPrimitiveDataBufferOffset calls the underlying SetPrimitiveDataBufferOffset.
+func (x *AccelerationStructureGeometryDescriptor) SetPrimitiveDataBufferOffset(primitiveDataBufferOffset uint) {
+	x.inner.SetPrimitiveDataBufferOffset(primitiveDataBufferOffset)
+}
+
+// PrimitiveDataStride calls the underlying PrimitiveDataStride.
+func (x *AccelerationStructureGeometryDescriptor) PrimitiveDataStride() uint {
+	return x.inner.PrimitiveDataStride()
+}
+
+// SetPrimitiveDataStride calls the underlying SetPrimitiveDataStride.
+func (x *AccelerationStructureGeometryDescriptor) SetPrimitiveDataStride(primitiveDataStride uint) {
+	x.inner.SetPrimitiveDataStride(primitiveDataStride)
+}
+
+// PrimitiveDataElementSize calls the underlying PrimitiveDataElementSize.
+func (x *AccelerationStructureGeometryDescriptor) PrimitiveDataElementSize() uint {
+	return x.inner.PrimitiveDataElementSize()
+}
+
+// SetPrimitiveDataElementSize calls the underlying SetPrimitiveDataElementSize.
+func (x *AccelerationStructureGeometryDescriptor) SetPrimitiveDataElementSize(primitiveDataElementSize uint) {
+	x.inner.SetPrimitiveDataElementSize(primitiveDataElementSize)
+}
+
 func (x *AccelerationStructureGeometryDescriptor) asAccelerationStructureGeometryDescriptor() *raw.MTLAccelerationStructureGeometryDescriptor { return x.inner }
+
+// AccelerationStructureGeometryDescriptorable is the interface implemented by [AccelerationStructureGeometryDescriptor], for mocking and DI.
+type AccelerationStructureGeometryDescriptorable interface {
+	Unwrap() *raw.MTLAccelerationStructureGeometryDescriptor
+	WithIntersectionFunctionTableOffset(intersectionFunctionTableOffset uint) *AccelerationStructureGeometryDescriptor
+	WithOpaque(opaque bool) *AccelerationStructureGeometryDescriptor
+	WithAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation bool) *AccelerationStructureGeometryDescriptor
+	WithLabel(label string) *AccelerationStructureGeometryDescriptor
+	WithPrimitiveDataBuffer(primitiveDataBuffer raw.MTLBuffer) *AccelerationStructureGeometryDescriptor
+	WithPrimitiveDataBufferOffset(primitiveDataBufferOffset uint) *AccelerationStructureGeometryDescriptor
+	WithPrimitiveDataStride(primitiveDataStride uint) *AccelerationStructureGeometryDescriptor
+	WithPrimitiveDataElementSize(primitiveDataElementSize uint) *AccelerationStructureGeometryDescriptor
+	IntersectionFunctionTableOffset() uint
+	SetIntersectionFunctionTableOffset(intersectionFunctionTableOffset uint)
+	Opaque() bool
+	SetOpaque(opaque bool)
+	AllowDuplicateIntersectionFunctionInvocation() bool
+	SetAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation bool)
+	Label() string
+	SetLabel(label string)
+	PrimitiveDataBuffer() raw.MTLBuffer
+	SetPrimitiveDataBuffer(primitiveDataBuffer raw.MTLBuffer)
+	PrimitiveDataBufferOffset() uint
+	SetPrimitiveDataBufferOffset(primitiveDataBufferOffset uint)
+	PrimitiveDataStride() uint
+	SetPrimitiveDataStride(primitiveDataStride uint)
+	PrimitiveDataElementSize() uint
+	SetPrimitiveDataElementSize(primitiveDataElementSize uint)
+}
+
+var _ AccelerationStructureGeometryDescriptorable = (*AccelerationStructureGeometryDescriptor)(nil)
 

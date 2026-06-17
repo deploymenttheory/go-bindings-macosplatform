@@ -29,5 +29,25 @@ func (x *PhysicsJointLimit) WithMaxLength(maxLength float64) *PhysicsJointLimit 
 	return x
 }
 
+// MaxLength calls the underlying MaxLength.
+func (x *PhysicsJointLimit) MaxLength() float64 {
+	return x.inner.MaxLength()
+}
+
+// SetMaxLength calls the underlying SetMaxLength.
+func (x *PhysicsJointLimit) SetMaxLength(maxLength float64) {
+	x.inner.SetMaxLength(maxLength)
+}
+
 func (x *PhysicsJointLimit) asPhysicsJoint() *raw.SKPhysicsJoint { return &x.inner.SKPhysicsJoint }
+
+// PhysicsJointLimitable is the interface implemented by [PhysicsJointLimit], for mocking and DI.
+type PhysicsJointLimitable interface {
+	Unwrap() *raw.SKPhysicsJointLimit
+	WithMaxLength(maxLength float64) *PhysicsJointLimit
+	MaxLength() float64
+	SetMaxLength(maxLength float64)
+}
+
+var _ PhysicsJointLimitable = (*PhysicsJointLimit)(nil)
 

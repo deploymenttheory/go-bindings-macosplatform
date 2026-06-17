@@ -69,3 +69,132 @@ func (x *RulerMarker) WithRepresentedObject(representedObject foundation.NSCopyi
 	return x
 }
 
+// DrawRect calls the underlying DrawRect.
+func (x *RulerMarker) DrawRect(rect corefoundation.CGRect) {
+	x.inner.DrawRect(rect)
+}
+
+// TrackMouseAdding calls the underlying TrackMouseAdding.
+func (x *RulerMarker) TrackMouseAdding(mouseDownEvent *raw.NSEvent, isAdding bool) bool {
+	return x.inner.TrackMouseAdding(mouseDownEvent, isAdding)
+}
+
+// Ruler calls the underlying Ruler.
+func (x *RulerMarker) Ruler() *RulerView {
+	_r := x.inner.Ruler()
+	if _r == nil {
+		return nil
+	}
+	return &RulerView{inner: _r}
+}
+
+// MarkerLocation calls the underlying MarkerLocation.
+func (x *RulerMarker) MarkerLocation() float64 {
+	return x.inner.MarkerLocation()
+}
+
+// SetMarkerLocation calls the underlying SetMarkerLocation.
+func (x *RulerMarker) SetMarkerLocation(markerLocation float64) {
+	x.inner.SetMarkerLocation(markerLocation)
+}
+
+// Image calls the underlying Image.
+func (x *RulerMarker) Image() *Image {
+	_r := x.inner.Image()
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// SetImage calls the underlying SetImage.
+func (x *RulerMarker) SetImage(image *raw.NSImage) {
+	x.inner.SetImage(image)
+}
+
+// ImageOrigin calls the underlying ImageOrigin.
+func (x *RulerMarker) ImageOrigin() corefoundation.CGPoint {
+	return x.inner.ImageOrigin()
+}
+
+// SetImageOrigin calls the underlying SetImageOrigin.
+func (x *RulerMarker) SetImageOrigin(imageOrigin corefoundation.CGPoint) {
+	x.inner.SetImageOrigin(imageOrigin)
+}
+
+// IsMovable calls the underlying IsMovable.
+func (x *RulerMarker) IsMovable() bool {
+	return x.inner.IsMovable()
+}
+
+// SetMovable calls the underlying SetMovable.
+func (x *RulerMarker) SetMovable(movable bool) {
+	x.inner.SetMovable(movable)
+}
+
+// IsRemovable calls the underlying IsRemovable.
+func (x *RulerMarker) IsRemovable() bool {
+	return x.inner.IsRemovable()
+}
+
+// SetRemovable calls the underlying SetRemovable.
+func (x *RulerMarker) SetRemovable(removable bool) {
+	x.inner.SetRemovable(removable)
+}
+
+// IsDragging calls the underlying IsDragging.
+func (x *RulerMarker) IsDragging() bool {
+	return x.inner.IsDragging()
+}
+
+// RepresentedObject calls the underlying RepresentedObject.
+func (x *RulerMarker) RepresentedObject() foundation.NSCopying {
+	return x.inner.RepresentedObject()
+}
+
+// SetRepresentedObject calls the underlying SetRepresentedObject.
+func (x *RulerMarker) SetRepresentedObject(representedObject foundation.NSCopying) {
+	x.inner.SetRepresentedObject(representedObject)
+}
+
+// ImageRectInRuler calls the underlying ImageRectInRuler.
+func (x *RulerMarker) ImageRectInRuler() corefoundation.CGRect {
+	return x.inner.ImageRectInRuler()
+}
+
+// ThicknessRequiredInRuler calls the underlying ThicknessRequiredInRuler.
+func (x *RulerMarker) ThicknessRequiredInRuler() float64 {
+	return x.inner.ThicknessRequiredInRuler()
+}
+
+// RulerMarkerable is the interface implemented by [RulerMarker], for mocking and DI.
+type RulerMarkerable interface {
+	Unwrap() *raw.NSRulerMarker
+	WithMarkerLocation(markerLocation float64) *RulerMarker
+	WithImage(image *raw.NSImage) *RulerMarker
+	WithImageOrigin(imageOrigin corefoundation.CGPoint) *RulerMarker
+	WithMovable(movable bool) *RulerMarker
+	WithRemovable(removable bool) *RulerMarker
+	WithRepresentedObject(representedObject foundation.NSCopying) *RulerMarker
+	DrawRect(rect corefoundation.CGRect)
+	TrackMouseAdding(mouseDownEvent *raw.NSEvent, isAdding bool) bool
+	Ruler() *RulerView
+	MarkerLocation() float64
+	SetMarkerLocation(markerLocation float64)
+	Image() *Image
+	SetImage(image *raw.NSImage)
+	ImageOrigin() corefoundation.CGPoint
+	SetImageOrigin(imageOrigin corefoundation.CGPoint)
+	IsMovable() bool
+	SetMovable(movable bool)
+	IsRemovable() bool
+	SetRemovable(removable bool)
+	IsDragging() bool
+	RepresentedObject() foundation.NSCopying
+	SetRepresentedObject(representedObject foundation.NSCopying)
+	ImageRectInRuler() corefoundation.CGRect
+	ThicknessRequiredInRuler() float64
+}
+
+var _ RulerMarkerable = (*RulerMarker)(nil)
+

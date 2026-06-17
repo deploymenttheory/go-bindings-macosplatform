@@ -27,7 +27,20 @@ func NewMatrixSolveLUWithDeviceTransposeOrderNumberOfRightHandSides(device metal
 	return &MatrixSolveLU{inner: raw.MPSMatrixSolveLUFromID(_id)}
 }
 
+// EncodeToCommandBufferSourceMatrixRightHandSideMatrixPivotIndicesSolutionMatrix calls the underlying EncodeToCommandBufferSourceMatrixRightHandSideMatrixPivotIndicesSolutionMatrix.
+func (x *MatrixSolveLU) EncodeToCommandBufferSourceMatrixRightHandSideMatrixPivotIndicesSolutionMatrix(commandBuffer metal.MTLCommandBuffer, sourceMatrix *mpscore.MPSMatrix, rightHandSideMatrix *mpscore.MPSMatrix, pivotIndices *mpscore.MPSMatrix, solutionMatrix *mpscore.MPSMatrix) {
+	x.inner.EncodeToCommandBufferSourceMatrixRightHandSideMatrixPivotIndicesSolutionMatrix(commandBuffer, sourceMatrix, rightHandSideMatrix, pivotIndices, solutionMatrix)
+}
+
 func (x *MatrixSolveLU) asMatrixBinaryKernel() *mpsmatrix.MPSMatrixBinaryKernel { return &x.inner.MPSMatrixBinaryKernel }
 
 func (x *MatrixSolveLU) asKernel() *mpscore.MPSKernel { return &x.inner.MPSMatrixBinaryKernel.MPSKernel }
+
+// MatrixSolveLUable is the interface implemented by [MatrixSolveLU], for mocking and DI.
+type MatrixSolveLUable interface {
+	Unwrap() *raw.MPSMatrixSolveLU
+	EncodeToCommandBufferSourceMatrixRightHandSideMatrixPivotIndicesSolutionMatrix(commandBuffer metal.MTLCommandBuffer, sourceMatrix *mpscore.MPSMatrix, rightHandSideMatrix *mpscore.MPSMatrix, pivotIndices *mpscore.MPSMatrix, solutionMatrix *mpscore.MPSMatrix)
+}
+
+var _ MatrixSolveLUable = (*MatrixSolveLU)(nil)
 

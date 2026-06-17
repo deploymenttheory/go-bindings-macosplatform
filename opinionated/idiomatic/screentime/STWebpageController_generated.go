@@ -7,6 +7,7 @@ package screentime
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/screentime"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,4 +54,92 @@ func (x *WebpageController) WithProfileIdentifier(profileIdentifier *foundation.
 	x.inner.SetProfileIdentifier(profileIdentifier)
 	return x
 }
+
+// SetBundleIdentifierError calls the underlying SetBundleIdentifierError.
+func (x *WebpageController) SetBundleIdentifierError(bundleIdentifier string) (bool, error) {
+	return x.inner.SetBundleIdentifierError(foundation.NSStringStringWithUTF8String(bundleIdentifier))
+}
+
+// SuppressUsageRecording calls the underlying SuppressUsageRecording.
+func (x *WebpageController) SuppressUsageRecording() bool {
+	return x.inner.SuppressUsageRecording()
+}
+
+// SetSuppressUsageRecording calls the underlying SetSuppressUsageRecording.
+func (x *WebpageController) SetSuppressUsageRecording(suppressUsageRecording bool) {
+	x.inner.SetSuppressUsageRecording(suppressUsageRecording)
+}
+
+// URL calls the underlying URL.
+func (x *WebpageController) URL() *foundation.NSURL {
+	return x.inner.URL()
+}
+
+// SetURL calls the underlying SetURL.
+func (x *WebpageController) SetURL(uRL string) {
+	x.inner.SetURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
+}
+
+// URLIsPlayingVideo calls the underlying URLIsPlayingVideo.
+func (x *WebpageController) URLIsPlayingVideo() bool {
+	return x.inner.URLIsPlayingVideo()
+}
+
+// SetURLIsPlayingVideo calls the underlying SetURLIsPlayingVideo.
+func (x *WebpageController) SetURLIsPlayingVideo(uRLIsPlayingVideo bool) {
+	x.inner.SetURLIsPlayingVideo(uRLIsPlayingVideo)
+}
+
+// URLIsPictureInPicture calls the underlying URLIsPictureInPicture.
+func (x *WebpageController) URLIsPictureInPicture() bool {
+	return x.inner.URLIsPictureInPicture()
+}
+
+// SetURLIsPictureInPicture calls the underlying SetURLIsPictureInPicture.
+func (x *WebpageController) SetURLIsPictureInPicture(uRLIsPictureInPicture bool) {
+	x.inner.SetURLIsPictureInPicture(uRLIsPictureInPicture)
+}
+
+// URLIsBlocked calls the underlying URLIsBlocked.
+func (x *WebpageController) URLIsBlocked() bool {
+	return x.inner.URLIsBlocked()
+}
+
+// ProfileIdentifier calls the underlying ProfileIdentifier.
+func (x *WebpageController) ProfileIdentifier() string {
+	_r := x.inner.ProfileIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetProfileIdentifier calls the underlying SetProfileIdentifier.
+func (x *WebpageController) SetProfileIdentifier(profileIdentifier *foundation.NSString) {
+	x.inner.SetProfileIdentifier(profileIdentifier)
+}
+
+// WebpageControllerable is the interface implemented by [WebpageController], for mocking and DI.
+type WebpageControllerable interface {
+	Unwrap() *raw.STWebpageController
+	WithSuppressUsageRecording(suppressUsageRecording bool) *WebpageController
+	WithURL(uRL string) *WebpageController
+	WithURLIsPlayingVideo(uRLIsPlayingVideo bool) *WebpageController
+	WithURLIsPictureInPicture(uRLIsPictureInPicture bool) *WebpageController
+	WithProfileIdentifier(profileIdentifier *foundation.NSString) *WebpageController
+	SetBundleIdentifierError(bundleIdentifier string) (bool, error)
+	SuppressUsageRecording() bool
+	SetSuppressUsageRecording(suppressUsageRecording bool)
+	URL() *foundation.NSURL
+	SetURL(uRL string)
+	URLIsPlayingVideo() bool
+	SetURLIsPlayingVideo(uRLIsPlayingVideo bool)
+	URLIsPictureInPicture() bool
+	SetURLIsPictureInPicture(uRLIsPictureInPicture bool)
+	URLIsBlocked() bool
+	ProfileIdentifier() string
+	SetProfileIdentifier(profileIdentifier *foundation.NSString)
+}
+
+var _ WebpageControllerable = (*WebpageController)(nil)
 

@@ -7,7 +7,10 @@ package avfoundation
 import (
 	"context"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // SampleBufferVideoRenderer wraps [raw.AVSampleBufferVideoRenderer] with a fluent Go API.
@@ -37,4 +40,66 @@ func (x *SampleBufferVideoRenderer) FlushWithRemovalOfDisplayedImage(ctx context
 		return ctx.Err()
 	}
 }
+
+// Status calls the underlying Status.
+func (x *SampleBufferVideoRenderer) Status() raw.AVQueuedSampleBufferRenderingStatus {
+	return x.inner.Status()
+}
+
+// Error calls the underlying Error.
+func (x *SampleBufferVideoRenderer) Error() unsafe.Pointer {
+	return x.inner.Error()
+}
+
+// RequiresFlushToResumeDecoding calls the underlying RequiresFlushToResumeDecoding.
+func (x *SampleBufferVideoRenderer) RequiresFlushToResumeDecoding() bool {
+	return x.inner.RequiresFlushToResumeDecoding()
+}
+
+// CopyDisplayedPixelBuffer calls the underlying CopyDisplayedPixelBuffer.
+func (x *SampleBufferVideoRenderer) CopyDisplayedPixelBuffer() unsafe.Pointer {
+	return x.inner.CopyDisplayedPixelBuffer()
+}
+
+// ExpectMinimumUpcomingSampleBufferPresentationTime calls the underlying ExpectMinimumUpcomingSampleBufferPresentationTime.
+func (x *SampleBufferVideoRenderer) ExpectMinimumUpcomingSampleBufferPresentationTime(minimumUpcomingPresentationTime coremedia.CMTime) {
+	x.inner.ExpectMinimumUpcomingSampleBufferPresentationTime(minimumUpcomingPresentationTime)
+}
+
+// ExpectMonotonicallyIncreasingUpcomingSampleBufferPresentationTimes calls the underlying ExpectMonotonicallyIncreasingUpcomingSampleBufferPresentationTimes.
+func (x *SampleBufferVideoRenderer) ExpectMonotonicallyIncreasingUpcomingSampleBufferPresentationTimes() {
+	x.inner.ExpectMonotonicallyIncreasingUpcomingSampleBufferPresentationTimes()
+}
+
+// ResetUpcomingSampleBufferPresentationTimeExpectations calls the underlying ResetUpcomingSampleBufferPresentationTimeExpectations.
+func (x *SampleBufferVideoRenderer) ResetUpcomingSampleBufferPresentationTimeExpectations() {
+	x.inner.ResetUpcomingSampleBufferPresentationTimeExpectations()
+}
+
+// RecommendedPixelBufferAttributes calls the underlying RecommendedPixelBufferAttributes.
+func (x *SampleBufferVideoRenderer) RecommendedPixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.RecommendedPixelBufferAttributes()
+}
+
+// LoadVideoPerformanceMetricsWithCompletionHandler calls the underlying LoadVideoPerformanceMetricsWithCompletionHandler.
+func (x *SampleBufferVideoRenderer) LoadVideoPerformanceMetricsWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
+	x.inner.LoadVideoPerformanceMetricsWithCompletionHandler(completionHandler)
+}
+
+// SampleBufferVideoRendererable is the interface implemented by [SampleBufferVideoRenderer], for mocking and DI.
+type SampleBufferVideoRendererable interface {
+	Unwrap() *raw.AVSampleBufferVideoRenderer
+	FlushWithRemovalOfDisplayedImage(ctx context.Context, removeDisplayedImage bool) error
+	Status() raw.AVQueuedSampleBufferRenderingStatus
+	Error() unsafe.Pointer
+	RequiresFlushToResumeDecoding() bool
+	CopyDisplayedPixelBuffer() unsafe.Pointer
+	ExpectMinimumUpcomingSampleBufferPresentationTime(minimumUpcomingPresentationTime coremedia.CMTime)
+	ExpectMonotonicallyIncreasingUpcomingSampleBufferPresentationTimes()
+	ResetUpcomingSampleBufferPresentationTimeExpectations()
+	RecommendedPixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	LoadVideoPerformanceMetricsWithCompletionHandler(completionHandler func(unsafe.Pointer))
+}
+
+var _ SampleBufferVideoRendererable = (*SampleBufferVideoRenderer)(nil)
 

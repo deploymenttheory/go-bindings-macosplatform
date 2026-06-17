@@ -23,3 +23,10 @@ func NewItem() *Item {
 	return &Item{inner: raw.FSItemFromID(_id)}
 }
 
+// Itemable is the interface implemented by [Item], for mocking and DI.
+type Itemable interface {
+	Unwrap() *raw.FSItem
+}
+
+var _ Itemable = (*Item)(nil)
+

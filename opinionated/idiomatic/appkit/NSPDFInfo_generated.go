@@ -8,6 +8,7 @@ import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -66,16 +67,87 @@ func (x *PDFInfo) WithPaperSize(paperSize corefoundation.CGSize) *PDFInfo {
 	return x
 }
 
+// URL calls the underlying URL.
+func (x *PDFInfo) URL() *foundation.NSURL {
+	return x.inner.URL()
+}
+
+// SetURL calls the underlying SetURL.
+func (x *PDFInfo) SetURL(uRL string) {
+	x.inner.SetURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
+}
+
+// IsFileExtensionHidden calls the underlying IsFileExtensionHidden.
+func (x *PDFInfo) IsFileExtensionHidden() bool {
+	return x.inner.IsFileExtensionHidden()
+}
+
+// SetFileExtensionHidden calls the underlying SetFileExtensionHidden.
+func (x *PDFInfo) SetFileExtensionHidden(fileExtensionHidden bool) {
+	x.inner.SetFileExtensionHidden(fileExtensionHidden)
+}
+
 // TagNames returns the collection as a Go slice.
-func (x *PDFInfo) TagNames() []*foundation.NSString {
+func (x *PDFInfo) TagNames() []string {
 	arr := x.inner.TagNames()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
+
+// SetTagNames calls the underlying SetTagNames.
+func (x *PDFInfo) SetTagNames(tagNames *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetTagNames(tagNames)
+}
+
+// Orientation calls the underlying Orientation.
+func (x *PDFInfo) Orientation() raw.NSPaperOrientation {
+	return x.inner.Orientation()
+}
+
+// SetOrientation calls the underlying SetOrientation.
+func (x *PDFInfo) SetOrientation(orientation raw.NSPaperOrientation) {
+	x.inner.SetOrientation(orientation)
+}
+
+// PaperSize calls the underlying PaperSize.
+func (x *PDFInfo) PaperSize() corefoundation.CGSize {
+	return x.inner.PaperSize()
+}
+
+// SetPaperSize calls the underlying SetPaperSize.
+func (x *PDFInfo) SetPaperSize(paperSize corefoundation.CGSize) {
+	x.inner.SetPaperSize(paperSize)
+}
+
+// Attributes calls the underlying Attributes.
+func (x *PDFInfo) Attributes() *foundation.NSMutableDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.Attributes()
+}
+
+// PDFInfoable is the interface implemented by [PDFInfo], for mocking and DI.
+type PDFInfoable interface {
+	Unwrap() *raw.NSPDFInfo
+	WithURL(uRL string) *PDFInfo
+	WithFileExtensionHidden(fileExtensionHidden bool) *PDFInfo
+	WithTagNames(items ...*foundation.NSString) *PDFInfo
+	WithOrientation(orientation raw.NSPaperOrientation) *PDFInfo
+	WithPaperSize(paperSize corefoundation.CGSize) *PDFInfo
+	URL() *foundation.NSURL
+	SetURL(uRL string)
+	IsFileExtensionHidden() bool
+	SetFileExtensionHidden(fileExtensionHidden bool)
+	TagNames() []string
+	SetTagNames(tagNames *foundation.NSArray[*foundation.NSString])
+	Orientation() raw.NSPaperOrientation
+	SetOrientation(orientation raw.NSPaperOrientation)
+	PaperSize() corefoundation.CGSize
+	SetPaperSize(paperSize corefoundation.CGSize)
+	Attributes() *foundation.NSMutableDictionary[*foundation.NSString, objc.ID]
+}
+
+var _ PDFInfoable = (*PDFInfo)(nil)
 

@@ -5,9 +5,12 @@
 package matter
 
 import (
+	"context"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // MTRBaseClusterThreadNetworkDirectory wraps [raw.MTRBaseClusterThreadNetworkDirectory] with a fluent Go API.
@@ -25,7 +28,313 @@ func NewMTRBaseClusterThreadNetworkDirectoryWithDeviceEndpointIDQueue(device *ra
 	return &MTRBaseClusterThreadNetworkDirectory{inner: raw.MTRBaseClusterThreadNetworkDirectoryFromID(_id)}
 }
 
+// AddNetworkWithParamsCompletion calls the underlying AddNetworkWithParamsCompletion.
+func (x *MTRBaseClusterThreadNetworkDirectory) AddNetworkWithParamsCompletion(params *raw.MTRThreadNetworkDirectoryClusterAddNetworkParams, completion func(unsafe.Pointer)) {
+	x.inner.AddNetworkWithParamsCompletion(params, completion)
+}
+
+// RemoveNetworkWithParamsCompletion calls the underlying RemoveNetworkWithParamsCompletion.
+func (x *MTRBaseClusterThreadNetworkDirectory) RemoveNetworkWithParamsCompletion(params *raw.MTRThreadNetworkDirectoryClusterRemoveNetworkParams, completion func(unsafe.Pointer)) {
+	x.inner.RemoveNetworkWithParamsCompletion(params, completion)
+}
+
+// GetOperationalDatasetWithParamsCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterThreadNetworkDirectory) GetOperationalDatasetWithParamsCompletion(ctx context.Context, params *raw.MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams) (*MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams, error) {
+	type _result struct {
+		val *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.GetOperationalDatasetWithParamsCompletion(params, func(_p0 *raw.MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributePreferredExtendedPanIDWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterThreadNetworkDirectory) ReadAttributePreferredExtendedPanIDWithCompletion(ctx context.Context) (*foundation.NSData, error) {
+	type _result struct {
+		val *foundation.NSData
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributePreferredExtendedPanIDWithCompletion(func(_p0 *foundation.NSData, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSData
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributePreferredExtendedPanIDWithValueCompletion calls the underlying WriteAttributePreferredExtendedPanIDWithValueCompletion.
+func (x *MTRBaseClusterThreadNetworkDirectory) WriteAttributePreferredExtendedPanIDWithValueCompletion(value *foundation.NSData, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributePreferredExtendedPanIDWithValueCompletion(value, completion)
+}
+
+// WriteAttributePreferredExtendedPanIDWithValueParamsCompletion calls the underlying WriteAttributePreferredExtendedPanIDWithValueParamsCompletion.
+func (x *MTRBaseClusterThreadNetworkDirectory) WriteAttributePreferredExtendedPanIDWithValueParamsCompletion(value *foundation.NSData, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributePreferredExtendedPanIDWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributePreferredExtendedPanIDWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterThreadNetworkDirectory) SubscribeAttributePreferredExtendedPanIDWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSData, error) {
+	type _result struct {
+		val *foundation.NSData
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributePreferredExtendedPanIDWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSData, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSData
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeThreadNetworksWithCompletion calls the underlying ReadAttributeThreadNetworksWithCompletion.
+func (x *MTRBaseClusterThreadNetworkDirectory) ReadAttributeThreadNetworksWithCompletion(completion objc.Block) {
+	x.inner.ReadAttributeThreadNetworksWithCompletion(completion)
+}
+
+// SubscribeAttributeThreadNetworksWithParamsSubscriptionEstablishedReportHandler calls the underlying SubscribeAttributeThreadNetworksWithParamsSubscriptionEstablishedReportHandler.
+func (x *MTRBaseClusterThreadNetworkDirectory) SubscribeAttributeThreadNetworksWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block) {
+	x.inner.SubscribeAttributeThreadNetworksWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, reportHandler)
+}
+
+// ReadAttributeThreadNetworkTableSizeWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterThreadNetworkDirectory) ReadAttributeThreadNetworkTableSizeWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeThreadNetworkTableSizeWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// SubscribeAttributeThreadNetworkTableSizeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterThreadNetworkDirectory) SubscribeAttributeThreadNetworkTableSizeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeThreadNetworkTableSizeWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeGeneratedCommandListWithCompletion calls the underlying ReadAttributeGeneratedCommandListWithCompletion.
+func (x *MTRBaseClusterThreadNetworkDirectory) ReadAttributeGeneratedCommandListWithCompletion(completion objc.Block) {
+	x.inner.ReadAttributeGeneratedCommandListWithCompletion(completion)
+}
+
+// SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler calls the underlying SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler.
+func (x *MTRBaseClusterThreadNetworkDirectory) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block) {
+	x.inner.SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, reportHandler)
+}
+
+// ReadAttributeAcceptedCommandListWithCompletion calls the underlying ReadAttributeAcceptedCommandListWithCompletion.
+func (x *MTRBaseClusterThreadNetworkDirectory) ReadAttributeAcceptedCommandListWithCompletion(completion objc.Block) {
+	x.inner.ReadAttributeAcceptedCommandListWithCompletion(completion)
+}
+
+// SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler calls the underlying SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler.
+func (x *MTRBaseClusterThreadNetworkDirectory) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block) {
+	x.inner.SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, reportHandler)
+}
+
+// ReadAttributeAttributeListWithCompletion calls the underlying ReadAttributeAttributeListWithCompletion.
+func (x *MTRBaseClusterThreadNetworkDirectory) ReadAttributeAttributeListWithCompletion(completion objc.Block) {
+	x.inner.ReadAttributeAttributeListWithCompletion(completion)
+}
+
+// SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler calls the underlying SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler.
+func (x *MTRBaseClusterThreadNetworkDirectory) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block) {
+	x.inner.SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, reportHandler)
+}
+
+// ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterThreadNetworkDirectory) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeFeatureMapWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterThreadNetworkDirectory) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterThreadNetworkDirectory) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeClusterRevisionWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterThreadNetworkDirectory) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
 func (x *MTRBaseClusterThreadNetworkDirectory) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
 
 func (x *MTRBaseClusterThreadNetworkDirectory) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+
+// MTRBaseClusterThreadNetworkDirectoryable is the interface implemented by [MTRBaseClusterThreadNetworkDirectory], for mocking and DI.
+type MTRBaseClusterThreadNetworkDirectoryable interface {
+	Unwrap() *raw.MTRBaseClusterThreadNetworkDirectory
+	AddNetworkWithParamsCompletion(params *raw.MTRThreadNetworkDirectoryClusterAddNetworkParams, completion func(unsafe.Pointer))
+	RemoveNetworkWithParamsCompletion(params *raw.MTRThreadNetworkDirectoryClusterRemoveNetworkParams, completion func(unsafe.Pointer))
+	GetOperationalDatasetWithParamsCompletion(ctx context.Context, params *raw.MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams) (*MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams, error)
+	ReadAttributePreferredExtendedPanIDWithCompletion(ctx context.Context) (*foundation.NSData, error)
+	WriteAttributePreferredExtendedPanIDWithValueCompletion(value *foundation.NSData, completion func(unsafe.Pointer))
+	WriteAttributePreferredExtendedPanIDWithValueParamsCompletion(value *foundation.NSData, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributePreferredExtendedPanIDWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSData, error)
+	ReadAttributeThreadNetworksWithCompletion(completion objc.Block)
+	SubscribeAttributeThreadNetworksWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block)
+	ReadAttributeThreadNetworkTableSizeWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	SubscribeAttributeThreadNetworkTableSizeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeGeneratedCommandListWithCompletion(completion objc.Block)
+	SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block)
+	ReadAttributeAcceptedCommandListWithCompletion(completion objc.Block)
+	SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block)
+	ReadAttributeAttributeListWithCompletion(completion objc.Block)
+	SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block)
+	ReadAttributeFeatureMapWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+}
+
+var _ MTRBaseClusterThreadNetworkDirectoryable = (*MTRBaseClusterThreadNetworkDirectory)(nil)
 

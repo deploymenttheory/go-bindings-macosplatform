@@ -23,3 +23,26 @@ func NewSyncEngineSendChangesContext() *SyncEngineSendChangesContext {
 	return &SyncEngineSendChangesContext{inner: raw.CKSyncEngineSendChangesContextFromID(_id)}
 }
 
+// Reason calls the underlying Reason.
+func (x *SyncEngineSendChangesContext) Reason() raw.CKSyncEngineSyncReason {
+	return x.inner.Reason()
+}
+
+// Options calls the underlying Options.
+func (x *SyncEngineSendChangesContext) Options() *SyncEngineSendChangesOptions {
+	_r := x.inner.Options()
+	if _r == nil {
+		return nil
+	}
+	return &SyncEngineSendChangesOptions{inner: _r}
+}
+
+// SyncEngineSendChangesContextable is the interface implemented by [SyncEngineSendChangesContext], for mocking and DI.
+type SyncEngineSendChangesContextable interface {
+	Unwrap() *raw.CKSyncEngineSendChangesContext
+	Reason() raw.CKSyncEngineSyncReason
+	Options() *SyncEngineSendChangesOptions
+}
+
+var _ SyncEngineSendChangesContextable = (*SyncEngineSendChangesContext)(nil)
+

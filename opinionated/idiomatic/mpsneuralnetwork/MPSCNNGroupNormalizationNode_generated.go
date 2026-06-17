@@ -30,5 +30,25 @@ func (x *CNNGroupNormalizationNode) WithTrainingStyle(trainingStyle raw.MPSNNTra
 	return x
 }
 
+// TrainingStyle calls the underlying TrainingStyle.
+func (x *CNNGroupNormalizationNode) TrainingStyle() raw.MPSNNTrainingStyle {
+	return x.inner.TrainingStyle()
+}
+
+// SetTrainingStyle calls the underlying SetTrainingStyle.
+func (x *CNNGroupNormalizationNode) SetTrainingStyle(trainingStyle raw.MPSNNTrainingStyle) {
+	x.inner.SetTrainingStyle(trainingStyle)
+}
+
 func (x *CNNGroupNormalizationNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNFilterNode }
+
+// CNNGroupNormalizationNodeable is the interface implemented by [CNNGroupNormalizationNode], for mocking and DI.
+type CNNGroupNormalizationNodeable interface {
+	Unwrap() *raw.MPSCNNGroupNormalizationNode
+	WithTrainingStyle(trainingStyle raw.MPSNNTrainingStyle) *CNNGroupNormalizationNode
+	TrainingStyle() raw.MPSNNTrainingStyle
+	SetTrainingStyle(trainingStyle raw.MPSNNTrainingStyle)
+}
+
+var _ CNNGroupNormalizationNodeable = (*CNNGroupNormalizationNode)(nil)
 

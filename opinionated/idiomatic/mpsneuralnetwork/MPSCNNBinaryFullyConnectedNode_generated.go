@@ -37,3 +37,10 @@ func (x *CNNBinaryFullyConnectedNode) asCNNConvolutionNode() *raw.MPSCNNConvolut
 
 func (x *CNNBinaryFullyConnectedNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSCNNBinaryConvolutionNode.MPSCNNConvolutionNode.MPSNNFilterNode }
 
+// CNNBinaryFullyConnectedNodeable is the interface implemented by [CNNBinaryFullyConnectedNode], for mocking and DI.
+type CNNBinaryFullyConnectedNodeable interface {
+	Unwrap() *raw.MPSCNNBinaryFullyConnectedNode
+}
+
+var _ CNNBinaryFullyConnectedNodeable = (*CNNBinaryFullyConnectedNode)(nil)
+

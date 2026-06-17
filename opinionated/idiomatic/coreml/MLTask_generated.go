@@ -6,7 +6,9 @@ package coreml
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Task wraps [raw.MLTask] with a fluent Go API.
@@ -23,5 +25,46 @@ func NewTask() *Task {
 	return &Task{inner: raw.MLTaskFromID(_id)}
 }
 
+// Resume calls the underlying Resume.
+func (x *Task) Resume() {
+	x.inner.Resume()
+}
+
+// Cancel calls the underlying Cancel.
+func (x *Task) Cancel() {
+	x.inner.Cancel()
+}
+
+// TaskIdentifier calls the underlying TaskIdentifier.
+func (x *Task) TaskIdentifier() string {
+	_r := x.inner.TaskIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// State calls the underlying State.
+func (x *Task) State() raw.MLTaskState {
+	return x.inner.State()
+}
+
+// Error calls the underlying Error.
+func (x *Task) Error() unsafe.Pointer {
+	return x.inner.Error()
+}
+
 func (x *Task) asTask() *raw.MLTask { return x.inner }
+
+// Taskable is the interface implemented by [Task], for mocking and DI.
+type Taskable interface {
+	Unwrap() *raw.MLTask
+	Resume()
+	Cancel()
+	TaskIdentifier() string
+	State() raw.MLTaskState
+	Error() unsafe.Pointer
+}
+
+var _ Taskable = (*Task)(nil)
 

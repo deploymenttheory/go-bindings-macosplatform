@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,5 +24,24 @@ func NewMTRClusterPath() *MTRClusterPath {
 	return &MTRClusterPath{inner: raw.MTRClusterPathFromID(_id)}
 }
 
+// Endpoint calls the underlying Endpoint.
+func (x *MTRClusterPath) Endpoint() *foundation.NSNumber {
+	return x.inner.Endpoint()
+}
+
+// Cluster calls the underlying Cluster.
+func (x *MTRClusterPath) Cluster() *foundation.NSNumber {
+	return x.inner.Cluster()
+}
+
 func (x *MTRClusterPath) asMTRClusterPath() *raw.MTRClusterPath { return x.inner }
+
+// MTRClusterPathable is the interface implemented by [MTRClusterPath], for mocking and DI.
+type MTRClusterPathable interface {
+	Unwrap() *raw.MTRClusterPath
+	Endpoint() *foundation.NSNumber
+	Cluster() *foundation.NSNumber
+}
+
+var _ MTRClusterPathable = (*MTRClusterPath)(nil)
 

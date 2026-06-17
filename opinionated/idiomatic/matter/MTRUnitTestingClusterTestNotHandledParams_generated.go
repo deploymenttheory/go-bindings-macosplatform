@@ -36,5 +36,38 @@ func (x *MTRUnitTestingClusterTestNotHandledParams) WithServerSideProcessingTime
 	return x
 }
 
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRUnitTestingClusterTestNotHandledParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRUnitTestingClusterTestNotHandledParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRUnitTestingClusterTestNotHandledParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRUnitTestingClusterTestNotHandledParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
 func (x *MTRUnitTestingClusterTestNotHandledParams) asMTRUnitTestingClusterTestNotHandledParams() *raw.MTRUnitTestingClusterTestNotHandledParams { return x.inner }
+
+// MTRUnitTestingClusterTestNotHandledParamsable is the interface implemented by [MTRUnitTestingClusterTestNotHandledParams], for mocking and DI.
+type MTRUnitTestingClusterTestNotHandledParamsable interface {
+	Unwrap() *raw.MTRUnitTestingClusterTestNotHandledParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRUnitTestingClusterTestNotHandledParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRUnitTestingClusterTestNotHandledParams
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRUnitTestingClusterTestNotHandledParamsable = (*MTRUnitTestingClusterTestNotHandledParams)(nil)
 

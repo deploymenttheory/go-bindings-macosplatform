@@ -7,6 +7,7 @@ package metal
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -36,5 +37,42 @@ func (x *MTL4LibraryFunctionDescriptor) WithLibrary(library raw.MTLLibrary) *MTL
 	return x
 }
 
+// Name calls the underlying Name.
+func (x *MTL4LibraryFunctionDescriptor) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetName calls the underlying SetName.
+func (x *MTL4LibraryFunctionDescriptor) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
+// Library calls the underlying Library.
+func (x *MTL4LibraryFunctionDescriptor) Library() raw.MTLLibrary {
+	return x.inner.Library()
+}
+
+// SetLibrary calls the underlying SetLibrary.
+func (x *MTL4LibraryFunctionDescriptor) SetLibrary(library raw.MTLLibrary) {
+	x.inner.SetLibrary(library)
+}
+
 func (x *MTL4LibraryFunctionDescriptor) asMTL4FunctionDescriptor() *raw.MTL4FunctionDescriptor { return &x.inner.MTL4FunctionDescriptor }
+
+// MTL4LibraryFunctionDescriptorable is the interface implemented by [MTL4LibraryFunctionDescriptor], for mocking and DI.
+type MTL4LibraryFunctionDescriptorable interface {
+	Unwrap() *raw.MTL4LibraryFunctionDescriptor
+	WithName(name string) *MTL4LibraryFunctionDescriptor
+	WithLibrary(library raw.MTLLibrary) *MTL4LibraryFunctionDescriptor
+	Name() string
+	SetName(name string)
+	Library() raw.MTLLibrary
+	SetLibrary(library raw.MTLLibrary)
+}
+
+var _ MTL4LibraryFunctionDescriptorable = (*MTL4LibraryFunctionDescriptor)(nil)
 

@@ -7,6 +7,7 @@ package callkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/callkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -78,4 +79,129 @@ func (x *ProviderConfiguration) WithSupportedHandleTypes(supportedHandleTypes *f
 	x.inner.SetSupportedHandleTypes(supportedHandleTypes)
 	return x
 }
+
+// LocalizedName calls the underlying LocalizedName.
+func (x *ProviderConfiguration) LocalizedName() string {
+	_r := x.inner.LocalizedName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// RingtoneSound calls the underlying RingtoneSound.
+func (x *ProviderConfiguration) RingtoneSound() string {
+	_r := x.inner.RingtoneSound()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetRingtoneSound calls the underlying SetRingtoneSound.
+func (x *ProviderConfiguration) SetRingtoneSound(ringtoneSound string) {
+	x.inner.SetRingtoneSound(foundation.NSStringStringWithUTF8String(ringtoneSound))
+}
+
+// IconTemplateImageData calls the underlying IconTemplateImageData.
+func (x *ProviderConfiguration) IconTemplateImageData() *foundation.NSData {
+	return x.inner.IconTemplateImageData()
+}
+
+// SetIconTemplateImageData calls the underlying SetIconTemplateImageData.
+func (x *ProviderConfiguration) SetIconTemplateImageData(iconTemplateImageData *foundation.NSData) {
+	x.inner.SetIconTemplateImageData(iconTemplateImageData)
+}
+
+// MaximumCallGroups calls the underlying MaximumCallGroups.
+func (x *ProviderConfiguration) MaximumCallGroups() uint {
+	return x.inner.MaximumCallGroups()
+}
+
+// SetMaximumCallGroups calls the underlying SetMaximumCallGroups.
+func (x *ProviderConfiguration) SetMaximumCallGroups(maximumCallGroups uint) {
+	x.inner.SetMaximumCallGroups(maximumCallGroups)
+}
+
+// MaximumCallsPerCallGroup calls the underlying MaximumCallsPerCallGroup.
+func (x *ProviderConfiguration) MaximumCallsPerCallGroup() uint {
+	return x.inner.MaximumCallsPerCallGroup()
+}
+
+// SetMaximumCallsPerCallGroup calls the underlying SetMaximumCallsPerCallGroup.
+func (x *ProviderConfiguration) SetMaximumCallsPerCallGroup(maximumCallsPerCallGroup uint) {
+	x.inner.SetMaximumCallsPerCallGroup(maximumCallsPerCallGroup)
+}
+
+// IncludesCallsInRecents calls the underlying IncludesCallsInRecents.
+func (x *ProviderConfiguration) IncludesCallsInRecents() bool {
+	return x.inner.IncludesCallsInRecents()
+}
+
+// SetIncludesCallsInRecents calls the underlying SetIncludesCallsInRecents.
+func (x *ProviderConfiguration) SetIncludesCallsInRecents(includesCallsInRecents bool) {
+	x.inner.SetIncludesCallsInRecents(includesCallsInRecents)
+}
+
+// SupportsVideo calls the underlying SupportsVideo.
+func (x *ProviderConfiguration) SupportsVideo() bool {
+	return x.inner.SupportsVideo()
+}
+
+// SetSupportsVideo calls the underlying SetSupportsVideo.
+func (x *ProviderConfiguration) SetSupportsVideo(supportsVideo bool) {
+	x.inner.SetSupportsVideo(supportsVideo)
+}
+
+// SupportsAudioTranslation calls the underlying SupportsAudioTranslation.
+func (x *ProviderConfiguration) SupportsAudioTranslation() bool {
+	return x.inner.SupportsAudioTranslation()
+}
+
+// SetSupportsAudioTranslation calls the underlying SetSupportsAudioTranslation.
+func (x *ProviderConfiguration) SetSupportsAudioTranslation(supportsAudioTranslation bool) {
+	x.inner.SetSupportsAudioTranslation(supportsAudioTranslation)
+}
+
+// SupportedHandleTypes calls the underlying SupportedHandleTypes.
+func (x *ProviderConfiguration) SupportedHandleTypes() *foundation.NSSet[*foundation.NSNumber] {
+	return x.inner.SupportedHandleTypes()
+}
+
+// SetSupportedHandleTypes calls the underlying SetSupportedHandleTypes.
+func (x *ProviderConfiguration) SetSupportedHandleTypes(supportedHandleTypes *foundation.NSSet[*foundation.NSNumber]) {
+	x.inner.SetSupportedHandleTypes(supportedHandleTypes)
+}
+
+// ProviderConfigurationable is the interface implemented by [ProviderConfiguration], for mocking and DI.
+type ProviderConfigurationable interface {
+	Unwrap() *raw.CXProviderConfiguration
+	WithRingtoneSound(ringtoneSound string) *ProviderConfiguration
+	WithIconTemplateImageData(iconTemplateImageData *foundation.NSData) *ProviderConfiguration
+	WithMaximumCallGroups(maximumCallGroups uint) *ProviderConfiguration
+	WithMaximumCallsPerCallGroup(maximumCallsPerCallGroup uint) *ProviderConfiguration
+	WithIncludesCallsInRecents(includesCallsInRecents bool) *ProviderConfiguration
+	WithSupportsVideo(supportsVideo bool) *ProviderConfiguration
+	WithSupportsAudioTranslation(supportsAudioTranslation bool) *ProviderConfiguration
+	WithSupportedHandleTypes(supportedHandleTypes *foundation.NSSet[*foundation.NSNumber]) *ProviderConfiguration
+	LocalizedName() string
+	RingtoneSound() string
+	SetRingtoneSound(ringtoneSound string)
+	IconTemplateImageData() *foundation.NSData
+	SetIconTemplateImageData(iconTemplateImageData *foundation.NSData)
+	MaximumCallGroups() uint
+	SetMaximumCallGroups(maximumCallGroups uint)
+	MaximumCallsPerCallGroup() uint
+	SetMaximumCallsPerCallGroup(maximumCallsPerCallGroup uint)
+	IncludesCallsInRecents() bool
+	SetIncludesCallsInRecents(includesCallsInRecents bool)
+	SupportsVideo() bool
+	SetSupportsVideo(supportsVideo bool)
+	SupportsAudioTranslation() bool
+	SetSupportsAudioTranslation(supportsAudioTranslation bool)
+	SupportedHandleTypes() *foundation.NSSet[*foundation.NSNumber]
+	SetSupportedHandleTypes(supportedHandleTypes *foundation.NSSet[*foundation.NSNumber])
+}
+
+var _ ProviderConfigurationable = (*ProviderConfiguration)(nil)
 

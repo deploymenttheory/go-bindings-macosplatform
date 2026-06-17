@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -41,4 +42,64 @@ func (x *DictionaryControllerKeyValuePair) WithLocalizedKey(localizedKey string)
 	x.inner.SetLocalizedKey(foundation.NSStringStringWithUTF8String(localizedKey))
 	return x
 }
+
+// Key calls the underlying Key.
+func (x *DictionaryControllerKeyValuePair) Key() string {
+	_r := x.inner.Key()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetKey calls the underlying SetKey.
+func (x *DictionaryControllerKeyValuePair) SetKey(key string) {
+	x.inner.SetKey(foundation.NSStringStringWithUTF8String(key))
+}
+
+// Value calls the underlying Value.
+func (x *DictionaryControllerKeyValuePair) Value() objc.ID {
+	return x.inner.Value()
+}
+
+// SetValue calls the underlying SetValue.
+func (x *DictionaryControllerKeyValuePair) SetValue(value objc.ID) {
+	x.inner.SetValue(value)
+}
+
+// LocalizedKey calls the underlying LocalizedKey.
+func (x *DictionaryControllerKeyValuePair) LocalizedKey() string {
+	_r := x.inner.LocalizedKey()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLocalizedKey calls the underlying SetLocalizedKey.
+func (x *DictionaryControllerKeyValuePair) SetLocalizedKey(localizedKey string) {
+	x.inner.SetLocalizedKey(foundation.NSStringStringWithUTF8String(localizedKey))
+}
+
+// IsExplicitlyIncluded calls the underlying IsExplicitlyIncluded.
+func (x *DictionaryControllerKeyValuePair) IsExplicitlyIncluded() bool {
+	return x.inner.IsExplicitlyIncluded()
+}
+
+// DictionaryControllerKeyValuePairable is the interface implemented by [DictionaryControllerKeyValuePair], for mocking and DI.
+type DictionaryControllerKeyValuePairable interface {
+	Unwrap() *raw.NSDictionaryControllerKeyValuePair
+	WithKey(key string) *DictionaryControllerKeyValuePair
+	WithValue(value objc.ID) *DictionaryControllerKeyValuePair
+	WithLocalizedKey(localizedKey string) *DictionaryControllerKeyValuePair
+	Key() string
+	SetKey(key string)
+	Value() objc.ID
+	SetValue(value objc.ID)
+	LocalizedKey() string
+	SetLocalizedKey(localizedKey string)
+	IsExplicitlyIncluded() bool
+}
+
+var _ DictionaryControllerKeyValuePairable = (*DictionaryControllerKeyValuePair)(nil)
 

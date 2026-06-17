@@ -7,6 +7,7 @@ package speech
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/speech"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // SpeechRecognitionTask wraps [raw.SFSpeechRecognitionTask] with a fluent Go API.
@@ -22,4 +23,47 @@ func NewSpeechRecognitionTask() *SpeechRecognitionTask {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SFSpeechRecognitionTask")), objc.RegisterName("new"))
 	return &SpeechRecognitionTask{inner: raw.SFSpeechRecognitionTaskFromID(_id)}
 }
+
+// Finish calls the underlying Finish.
+func (x *SpeechRecognitionTask) Finish() {
+	x.inner.Finish()
+}
+
+// Cancel calls the underlying Cancel.
+func (x *SpeechRecognitionTask) Cancel() {
+	x.inner.Cancel()
+}
+
+// State calls the underlying State.
+func (x *SpeechRecognitionTask) State() raw.SFSpeechRecognitionTaskState {
+	return x.inner.State()
+}
+
+// IsFinishing calls the underlying IsFinishing.
+func (x *SpeechRecognitionTask) IsFinishing() bool {
+	return x.inner.IsFinishing()
+}
+
+// IsCancelled calls the underlying IsCancelled.
+func (x *SpeechRecognitionTask) IsCancelled() bool {
+	return x.inner.IsCancelled()
+}
+
+// Error calls the underlying Error.
+func (x *SpeechRecognitionTask) Error() unsafe.Pointer {
+	return x.inner.Error()
+}
+
+// SpeechRecognitionTaskable is the interface implemented by [SpeechRecognitionTask], for mocking and DI.
+type SpeechRecognitionTaskable interface {
+	Unwrap() *raw.SFSpeechRecognitionTask
+	Finish()
+	Cancel()
+	State() raw.SFSpeechRecognitionTaskState
+	IsFinishing() bool
+	IsCancelled() bool
+	Error() unsafe.Pointer
+}
+
+var _ SpeechRecognitionTaskable = (*SpeechRecognitionTask)(nil)
 

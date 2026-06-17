@@ -7,6 +7,7 @@ package mapkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -31,12 +32,18 @@ func (x *MultiPolyline) Polylines() []*raw.MKPolyline {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MKPolyline, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MKPolyline {
+		return raw.MKPolylineFromID(purego.Retain(_id))
+	})
 }
 
 func (x *MultiPolyline) asShape() *raw.MKShape { return &x.inner.MKShape }
+
+// MultiPolylineable is the interface implemented by [MultiPolyline], for mocking and DI.
+type MultiPolylineable interface {
+	Unwrap() *raw.MKMultiPolyline
+	Polylines() []*raw.MKPolyline
+}
+
+var _ MultiPolylineable = (*MultiPolyline)(nil)
 

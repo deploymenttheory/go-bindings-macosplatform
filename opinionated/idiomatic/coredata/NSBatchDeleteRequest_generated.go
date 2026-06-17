@@ -38,5 +38,31 @@ func (x *BatchDeleteRequest) WithResultType(resultType raw.NSBatchDeleteRequestR
 	return x
 }
 
+// ResultType calls the underlying ResultType.
+func (x *BatchDeleteRequest) ResultType() raw.NSBatchDeleteRequestResultType {
+	return x.inner.ResultType()
+}
+
+// SetResultType calls the underlying SetResultType.
+func (x *BatchDeleteRequest) SetResultType(resultType raw.NSBatchDeleteRequestResultType) {
+	x.inner.SetResultType(resultType)
+}
+
+// FetchRequest calls the underlying FetchRequest.
+func (x *BatchDeleteRequest) FetchRequest() *raw.NSFetchRequest[objc.ID] {
+	return x.inner.FetchRequest()
+}
+
 func (x *BatchDeleteRequest) asPersistentStoreRequest() *raw.NSPersistentStoreRequest { return &x.inner.NSPersistentStoreRequest }
+
+// BatchDeleteRequestable is the interface implemented by [BatchDeleteRequest], for mocking and DI.
+type BatchDeleteRequestable interface {
+	Unwrap() *raw.NSBatchDeleteRequest
+	WithResultType(resultType raw.NSBatchDeleteRequestResultType) *BatchDeleteRequest
+	ResultType() raw.NSBatchDeleteRequestResultType
+	SetResultType(resultType raw.NSBatchDeleteRequestResultType)
+	FetchRequest() *raw.NSFetchRequest[objc.ID]
+}
+
+var _ BatchDeleteRequestable = (*BatchDeleteRequest)(nil)
 

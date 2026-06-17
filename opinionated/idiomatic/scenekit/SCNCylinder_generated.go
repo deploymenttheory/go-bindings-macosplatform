@@ -47,5 +47,64 @@ func (x *Cylinder) WithHeightSegmentCount(heightSegmentCount int) *Cylinder {
 	return x
 }
 
+// Radius calls the underlying Radius.
+func (x *Cylinder) Radius() float64 {
+	return x.inner.Radius()
+}
+
+// SetRadius calls the underlying SetRadius.
+func (x *Cylinder) SetRadius(radius float64) {
+	x.inner.SetRadius(radius)
+}
+
+// Height calls the underlying Height.
+func (x *Cylinder) Height() float64 {
+	return x.inner.Height()
+}
+
+// SetHeight calls the underlying SetHeight.
+func (x *Cylinder) SetHeight(height float64) {
+	x.inner.SetHeight(height)
+}
+
+// RadialSegmentCount calls the underlying RadialSegmentCount.
+func (x *Cylinder) RadialSegmentCount() int {
+	return x.inner.RadialSegmentCount()
+}
+
+// SetRadialSegmentCount calls the underlying SetRadialSegmentCount.
+func (x *Cylinder) SetRadialSegmentCount(radialSegmentCount int) {
+	x.inner.SetRadialSegmentCount(radialSegmentCount)
+}
+
+// HeightSegmentCount calls the underlying HeightSegmentCount.
+func (x *Cylinder) HeightSegmentCount() int {
+	return x.inner.HeightSegmentCount()
+}
+
+// SetHeightSegmentCount calls the underlying SetHeightSegmentCount.
+func (x *Cylinder) SetHeightSegmentCount(heightSegmentCount int) {
+	x.inner.SetHeightSegmentCount(heightSegmentCount)
+}
+
 func (x *Cylinder) asGeometry() *raw.SCNGeometry { return &x.inner.SCNGeometry }
+
+// Cylinderable is the interface implemented by [Cylinder], for mocking and DI.
+type Cylinderable interface {
+	Unwrap() *raw.SCNCylinder
+	WithRadius(radius float64) *Cylinder
+	WithHeight(height float64) *Cylinder
+	WithRadialSegmentCount(radialSegmentCount int) *Cylinder
+	WithHeightSegmentCount(heightSegmentCount int) *Cylinder
+	Radius() float64
+	SetRadius(radius float64)
+	Height() float64
+	SetHeight(height float64)
+	RadialSegmentCount() int
+	SetRadialSegmentCount(radialSegmentCount int)
+	HeightSegmentCount() int
+	SetHeightSegmentCount(heightSegmentCount int)
+}
+
+var _ Cylinderable = (*Cylinder)(nil)
 

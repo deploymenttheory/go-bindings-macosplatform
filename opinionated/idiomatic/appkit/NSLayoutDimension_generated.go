@@ -23,5 +23,102 @@ func NewLayoutDimension() *LayoutDimension {
 	return &LayoutDimension{inner: raw.NSLayoutDimensionFromID(_id)}
 }
 
+// ConstraintEqualToConstant calls the underlying ConstraintEqualToConstant.
+func (x *LayoutDimension) ConstraintEqualToConstant(c float64) *LayoutConstraint {
+	_r := x.inner.ConstraintEqualToConstant(c)
+	if _r == nil {
+		return nil
+	}
+	return &LayoutConstraint{inner: _r}
+}
+
+// ConstraintGreaterThanOrEqualToConstant calls the underlying ConstraintGreaterThanOrEqualToConstant.
+func (x *LayoutDimension) ConstraintGreaterThanOrEqualToConstant(c float64) *LayoutConstraint {
+	_r := x.inner.ConstraintGreaterThanOrEqualToConstant(c)
+	if _r == nil {
+		return nil
+	}
+	return &LayoutConstraint{inner: _r}
+}
+
+// ConstraintLessThanOrEqualToConstant calls the underlying ConstraintLessThanOrEqualToConstant.
+func (x *LayoutDimension) ConstraintLessThanOrEqualToConstant(c float64) *LayoutConstraint {
+	_r := x.inner.ConstraintLessThanOrEqualToConstant(c)
+	if _r == nil {
+		return nil
+	}
+	return &LayoutConstraint{inner: _r}
+}
+
+// ConstraintEqualToAnchorMultiplier calls the underlying ConstraintEqualToAnchorMultiplier.
+func (x *LayoutDimension) ConstraintEqualToAnchorMultiplier(anchor *raw.NSLayoutDimension, m float64) *LayoutConstraint {
+	_r := x.inner.ConstraintEqualToAnchorMultiplier(anchor, m)
+	if _r == nil {
+		return nil
+	}
+	return &LayoutConstraint{inner: _r}
+}
+
+// ConstraintGreaterThanOrEqualToAnchorMultiplier calls the underlying ConstraintGreaterThanOrEqualToAnchorMultiplier.
+func (x *LayoutDimension) ConstraintGreaterThanOrEqualToAnchorMultiplier(anchor *raw.NSLayoutDimension, m float64) *LayoutConstraint {
+	_r := x.inner.ConstraintGreaterThanOrEqualToAnchorMultiplier(anchor, m)
+	if _r == nil {
+		return nil
+	}
+	return &LayoutConstraint{inner: _r}
+}
+
+// ConstraintLessThanOrEqualToAnchorMultiplier calls the underlying ConstraintLessThanOrEqualToAnchorMultiplier.
+func (x *LayoutDimension) ConstraintLessThanOrEqualToAnchorMultiplier(anchor *raw.NSLayoutDimension, m float64) *LayoutConstraint {
+	_r := x.inner.ConstraintLessThanOrEqualToAnchorMultiplier(anchor, m)
+	if _r == nil {
+		return nil
+	}
+	return &LayoutConstraint{inner: _r}
+}
+
+// ConstraintEqualToAnchorMultiplierConstant calls the underlying ConstraintEqualToAnchorMultiplierConstant.
+func (x *LayoutDimension) ConstraintEqualToAnchorMultiplierConstant(anchor *raw.NSLayoutDimension, m float64, c float64) *LayoutConstraint {
+	_r := x.inner.ConstraintEqualToAnchorMultiplierConstant(anchor, m, c)
+	if _r == nil {
+		return nil
+	}
+	return &LayoutConstraint{inner: _r}
+}
+
+// ConstraintGreaterThanOrEqualToAnchorMultiplierConstant calls the underlying ConstraintGreaterThanOrEqualToAnchorMultiplierConstant.
+func (x *LayoutDimension) ConstraintGreaterThanOrEqualToAnchorMultiplierConstant(anchor *raw.NSLayoutDimension, m float64, c float64) *LayoutConstraint {
+	_r := x.inner.ConstraintGreaterThanOrEqualToAnchorMultiplierConstant(anchor, m, c)
+	if _r == nil {
+		return nil
+	}
+	return &LayoutConstraint{inner: _r}
+}
+
+// ConstraintLessThanOrEqualToAnchorMultiplierConstant calls the underlying ConstraintLessThanOrEqualToAnchorMultiplierConstant.
+func (x *LayoutDimension) ConstraintLessThanOrEqualToAnchorMultiplierConstant(anchor *raw.NSLayoutDimension, m float64, c float64) *LayoutConstraint {
+	_r := x.inner.ConstraintLessThanOrEqualToAnchorMultiplierConstant(anchor, m, c)
+	if _r == nil {
+		return nil
+	}
+	return &LayoutConstraint{inner: _r}
+}
+
 func (x *LayoutDimension) asLayoutAnchor() *raw.NSLayoutAnchor[objc.ID] { return &x.inner.NSLayoutAnchor }
+
+// LayoutDimensionable is the interface implemented by [LayoutDimension], for mocking and DI.
+type LayoutDimensionable interface {
+	Unwrap() *raw.NSLayoutDimension
+	ConstraintEqualToConstant(c float64) *LayoutConstraint
+	ConstraintGreaterThanOrEqualToConstant(c float64) *LayoutConstraint
+	ConstraintLessThanOrEqualToConstant(c float64) *LayoutConstraint
+	ConstraintEqualToAnchorMultiplier(anchor *raw.NSLayoutDimension, m float64) *LayoutConstraint
+	ConstraintGreaterThanOrEqualToAnchorMultiplier(anchor *raw.NSLayoutDimension, m float64) *LayoutConstraint
+	ConstraintLessThanOrEqualToAnchorMultiplier(anchor *raw.NSLayoutDimension, m float64) *LayoutConstraint
+	ConstraintEqualToAnchorMultiplierConstant(anchor *raw.NSLayoutDimension, m float64, c float64) *LayoutConstraint
+	ConstraintGreaterThanOrEqualToAnchorMultiplierConstant(anchor *raw.NSLayoutDimension, m float64, c float64) *LayoutConstraint
+	ConstraintLessThanOrEqualToAnchorMultiplierConstant(anchor *raw.NSLayoutDimension, m float64, c float64) *LayoutConstraint
+}
+
+var _ LayoutDimensionable = (*LayoutDimension)(nil)
 

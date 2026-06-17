@@ -5,6 +5,7 @@
 package mpsneuralnetwork
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,5 +24,46 @@ func NewCNNGroupNormalizationGradientState() *CNNGroupNormalizationGradientState
 	return &CNNGroupNormalizationGradientState{inner: raw.MPSCNNGroupNormalizationGradientStateFromID(_id)}
 }
 
+// GroupNormalization calls the underlying GroupNormalization.
+func (x *CNNGroupNormalizationGradientState) GroupNormalization() *CNNGroupNormalization {
+	_r := x.inner.GroupNormalization()
+	if _r == nil {
+		return nil
+	}
+	return &CNNGroupNormalization{inner: _r}
+}
+
+// Gamma calls the underlying Gamma.
+func (x *CNNGroupNormalizationGradientState) Gamma() metal.MTLBuffer {
+	return x.inner.Gamma()
+}
+
+// Beta calls the underlying Beta.
+func (x *CNNGroupNormalizationGradientState) Beta() metal.MTLBuffer {
+	return x.inner.Beta()
+}
+
+// GradientForGamma calls the underlying GradientForGamma.
+func (x *CNNGroupNormalizationGradientState) GradientForGamma() metal.MTLBuffer {
+	return x.inner.GradientForGamma()
+}
+
+// GradientForBeta calls the underlying GradientForBeta.
+func (x *CNNGroupNormalizationGradientState) GradientForBeta() metal.MTLBuffer {
+	return x.inner.GradientForBeta()
+}
+
 func (x *CNNGroupNormalizationGradientState) asNNGradientState() *raw.MPSNNGradientState { return &x.inner.MPSNNGradientState }
+
+// CNNGroupNormalizationGradientStateable is the interface implemented by [CNNGroupNormalizationGradientState], for mocking and DI.
+type CNNGroupNormalizationGradientStateable interface {
+	Unwrap() *raw.MPSCNNGroupNormalizationGradientState
+	GroupNormalization() *CNNGroupNormalization
+	Gamma() metal.MTLBuffer
+	Beta() metal.MTLBuffer
+	GradientForGamma() metal.MTLBuffer
+	GradientForBeta() metal.MTLBuffer
+}
+
+var _ CNNGroupNormalizationGradientStateable = (*CNNGroupNormalizationGradientState)(nil)
 

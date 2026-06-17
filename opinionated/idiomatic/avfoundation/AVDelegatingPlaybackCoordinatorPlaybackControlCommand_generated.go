@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +24,32 @@ func NewDelegatingPlaybackCoordinatorPlaybackControlCommand() *DelegatingPlaybac
 	return &DelegatingPlaybackCoordinatorPlaybackControlCommand{inner: raw.AVDelegatingPlaybackCoordinatorPlaybackControlCommandFromID(_id)}
 }
 
+// Originator calls the underlying Originator.
+func (x *DelegatingPlaybackCoordinatorPlaybackControlCommand) Originator() *CoordinatedPlaybackParticipant {
+	_r := x.inner.Originator()
+	if _r == nil {
+		return nil
+	}
+	return &CoordinatedPlaybackParticipant{inner: _r}
+}
+
+// ExpectedCurrentItemIdentifier calls the underlying ExpectedCurrentItemIdentifier.
+func (x *DelegatingPlaybackCoordinatorPlaybackControlCommand) ExpectedCurrentItemIdentifier() string {
+	_r := x.inner.ExpectedCurrentItemIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 func (x *DelegatingPlaybackCoordinatorPlaybackControlCommand) asDelegatingPlaybackCoordinatorPlaybackControlCommand() *raw.AVDelegatingPlaybackCoordinatorPlaybackControlCommand { return x.inner }
+
+// DelegatingPlaybackCoordinatorPlaybackControlCommandable is the interface implemented by [DelegatingPlaybackCoordinatorPlaybackControlCommand], for mocking and DI.
+type DelegatingPlaybackCoordinatorPlaybackControlCommandable interface {
+	Unwrap() *raw.AVDelegatingPlaybackCoordinatorPlaybackControlCommand
+	Originator() *CoordinatedPlaybackParticipant
+	ExpectedCurrentItemIdentifier() string
+}
+
+var _ DelegatingPlaybackCoordinatorPlaybackControlCommandable = (*DelegatingPlaybackCoordinatorPlaybackControlCommand)(nil)
 

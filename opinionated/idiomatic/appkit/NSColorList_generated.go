@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -32,16 +33,84 @@ func NewColorListWithNameFromFile(name *foundation.NSString, path string) *Color
 	return &ColorList{inner: raw.NSColorListFromID(_id)}
 }
 
+// SetColorForKey calls the underlying SetColorForKey.
+func (x *ColorList) SetColorForKey(color *raw.NSColor, key *foundation.NSString) {
+	x.inner.SetColorForKey(color, key)
+}
+
+// InsertColorKeyAtIndex calls the underlying InsertColorKeyAtIndex.
+func (x *ColorList) InsertColorKeyAtIndex(color *raw.NSColor, key *foundation.NSString, loc uint) {
+	x.inner.InsertColorKeyAtIndex(color, key, loc)
+}
+
+// RemoveColorWithKey calls the underlying RemoveColorWithKey.
+func (x *ColorList) RemoveColorWithKey(key *foundation.NSString) {
+	x.inner.RemoveColorWithKey(key)
+}
+
+// ColorWithKey calls the underlying ColorWithKey.
+func (x *ColorList) ColorWithKey(key *foundation.NSString) *Color {
+	_r := x.inner.ColorWithKey(key)
+	if _r == nil {
+		return nil
+	}
+	return &Color{inner: _r}
+}
+
+// WriteToURLError calls the underlying WriteToURLError.
+func (x *ColorList) WriteToURLError(url string) (bool, error) {
+	return x.inner.WriteToURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
+}
+
+// WriteToFile calls the underlying WriteToFile.
+func (x *ColorList) WriteToFile(path string) bool {
+	return x.inner.WriteToFile(foundation.NSStringStringWithUTF8String(path))
+}
+
+// RemoveFile calls the underlying RemoveFile.
+func (x *ColorList) RemoveFile() {
+	x.inner.RemoveFile()
+}
+
+// Name calls the underlying Name.
+func (x *ColorList) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 // AllKeys returns the collection as a Go slice.
 func (x *ColorList) AllKeys() []*foundation.NSString {
 	arr := x.inner.AllKeys()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	})
 }
+
+// IsEditable calls the underlying IsEditable.
+func (x *ColorList) IsEditable() bool {
+	return x.inner.IsEditable()
+}
+
+// ColorListable is the interface implemented by [ColorList], for mocking and DI.
+type ColorListable interface {
+	Unwrap() *raw.NSColorList
+	SetColorForKey(color *raw.NSColor, key *foundation.NSString)
+	InsertColorKeyAtIndex(color *raw.NSColor, key *foundation.NSString, loc uint)
+	RemoveColorWithKey(key *foundation.NSString)
+	ColorWithKey(key *foundation.NSString) *Color
+	WriteToURLError(url string) (bool, error)
+	WriteToFile(path string) bool
+	RemoveFile()
+	Name() string
+	AllKeys() []*foundation.NSString
+	IsEditable() bool
+}
+
+var _ ColorListable = (*ColorList)(nil)
 

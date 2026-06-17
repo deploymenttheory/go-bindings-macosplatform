@@ -24,5 +24,24 @@ func NewRNNRecurrentImageState() *RNNRecurrentImageState {
 	return &RNNRecurrentImageState{inner: raw.MPSRNNRecurrentImageStateFromID(_id)}
 }
 
+// GetRecurrentOutputImageForLayerIndex calls the underlying GetRecurrentOutputImageForLayerIndex.
+func (x *RNNRecurrentImageState) GetRecurrentOutputImageForLayerIndex(layerIndex uint) *mpscore.MPSImage {
+	return x.inner.GetRecurrentOutputImageForLayerIndex(layerIndex)
+}
+
+// GetMemoryCellImageForLayerIndex calls the underlying GetMemoryCellImageForLayerIndex.
+func (x *RNNRecurrentImageState) GetMemoryCellImageForLayerIndex(layerIndex uint) *mpscore.MPSImage {
+	return x.inner.GetMemoryCellImageForLayerIndex(layerIndex)
+}
+
 func (x *RNNRecurrentImageState) asState() *mpscore.MPSState { return &x.inner.MPSState }
+
+// RNNRecurrentImageStateable is the interface implemented by [RNNRecurrentImageState], for mocking and DI.
+type RNNRecurrentImageStateable interface {
+	Unwrap() *raw.MPSRNNRecurrentImageState
+	GetRecurrentOutputImageForLayerIndex(layerIndex uint) *mpscore.MPSImage
+	GetMemoryCellImageForLayerIndex(layerIndex uint) *mpscore.MPSImage
+}
+
+var _ RNNRecurrentImageStateable = (*RNNRecurrentImageState)(nil)
 

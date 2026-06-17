@@ -6,6 +6,7 @@ package vision
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +24,40 @@ func NewClassificationObservation() *ClassificationObservation {
 	return &ClassificationObservation{inner: raw.VNClassificationObservationFromID(_id)}
 }
 
+// Identifier calls the underlying Identifier.
+func (x *ClassificationObservation) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// HasMinimumRecallForPrecision calls the underlying HasMinimumRecallForPrecision.
+func (x *ClassificationObservation) HasMinimumRecallForPrecision(minimumRecall float32, precision float32) bool {
+	return x.inner.HasMinimumRecallForPrecision(minimumRecall, precision)
+}
+
+// HasMinimumPrecisionForRecall calls the underlying HasMinimumPrecisionForRecall.
+func (x *ClassificationObservation) HasMinimumPrecisionForRecall(minimumPrecision float32, recall float32) bool {
+	return x.inner.HasMinimumPrecisionForRecall(minimumPrecision, recall)
+}
+
+// HasPrecisionRecallCurve calls the underlying HasPrecisionRecallCurve.
+func (x *ClassificationObservation) HasPrecisionRecallCurve() bool {
+	return x.inner.HasPrecisionRecallCurve()
+}
+
 func (x *ClassificationObservation) asObservation() *raw.VNObservation { return &x.inner.VNObservation }
+
+// ClassificationObservationable is the interface implemented by [ClassificationObservation], for mocking and DI.
+type ClassificationObservationable interface {
+	Unwrap() *raw.VNClassificationObservation
+	Identifier() string
+	HasMinimumRecallForPrecision(minimumRecall float32, precision float32) bool
+	HasMinimumPrecisionForRecall(minimumPrecision float32, recall float32) bool
+	HasPrecisionRecallCurve() bool
+}
+
+var _ ClassificationObservationable = (*ClassificationObservation)(nil)
 

@@ -29,3 +29,10 @@ func (x *CNNArithmeticGradientState) asNNBinaryGradientState() *mpsneuralnetwork
 
 func (x *CNNArithmeticGradientState) asState() *mpscore.MPSState { return &x.inner.MPSNNBinaryGradientState.MPSState }
 
+// CNNArithmeticGradientStateable is the interface implemented by [CNNArithmeticGradientState], for mocking and DI.
+type CNNArithmeticGradientStateable interface {
+	Unwrap() *raw.MPSCNNArithmeticGradientState
+}
+
+var _ CNNArithmeticGradientStateable = (*CNNArithmeticGradientState)(nil)
+

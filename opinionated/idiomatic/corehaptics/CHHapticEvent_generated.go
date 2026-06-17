@@ -7,6 +7,7 @@ package corehaptics
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corehaptics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -58,16 +59,58 @@ func (x *HapticEvent) WithDuration(duration float64) *HapticEvent {
 	return x
 }
 
+// Type calls the underlying Type.
+func (x *HapticEvent) Type() string {
+	_r := x.inner.Type()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 // EventParameters returns the collection as a Go slice.
 func (x *HapticEvent) EventParameters() []*raw.CHHapticEventParameter {
 	arr := x.inner.EventParameters()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.CHHapticEventParameter, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CHHapticEventParameter {
+		return raw.CHHapticEventParameterFromID(purego.Retain(_id))
+	})
 }
+
+// RelativeTime calls the underlying RelativeTime.
+func (x *HapticEvent) RelativeTime() float64 {
+	return x.inner.RelativeTime()
+}
+
+// SetRelativeTime calls the underlying SetRelativeTime.
+func (x *HapticEvent) SetRelativeTime(relativeTime float64) {
+	x.inner.SetRelativeTime(relativeTime)
+}
+
+// Duration calls the underlying Duration.
+func (x *HapticEvent) Duration() float64 {
+	return x.inner.Duration()
+}
+
+// SetDuration calls the underlying SetDuration.
+func (x *HapticEvent) SetDuration(duration float64) {
+	x.inner.SetDuration(duration)
+}
+
+// HapticEventable is the interface implemented by [HapticEvent], for mocking and DI.
+type HapticEventable interface {
+	Unwrap() *raw.CHHapticEvent
+	WithRelativeTime(relativeTime float64) *HapticEvent
+	WithDuration(duration float64) *HapticEvent
+	Type() string
+	EventParameters() []*raw.CHHapticEventParameter
+	RelativeTime() float64
+	SetRelativeTime(relativeTime float64)
+	Duration() float64
+	SetDuration(duration float64)
+}
+
+var _ HapticEventable = (*HapticEvent)(nil)
 

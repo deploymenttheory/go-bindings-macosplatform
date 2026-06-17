@@ -27,3 +27,10 @@ func (x *DetectFaceRectanglesRequest) asImageBasedRequest() *raw.VNImageBasedReq
 
 func (x *DetectFaceRectanglesRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageBasedRequest.VNRequest }
 
+// DetectFaceRectanglesRequestable is the interface implemented by [DetectFaceRectanglesRequest], for mocking and DI.
+type DetectFaceRectanglesRequestable interface {
+	Unwrap() *raw.VNDetectFaceRectanglesRequest
+}
+
+var _ DetectFaceRectanglesRequestable = (*DetectFaceRectanglesRequest)(nil)
+

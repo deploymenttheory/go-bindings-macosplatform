@@ -6,6 +6,7 @@ package screencapturekit
 
 import (
 	"context"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/screencapturekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
@@ -27,15 +28,25 @@ func NewStreamWithFilterConfigurationDelegate(contentFilter *raw.SCContentFilter
 	return &Stream{inner: raw.SCStreamFromID(_id)}
 }
 
+// AddStreamOutputTypeSampleHandlerQueueError calls the underlying AddStreamOutputTypeSampleHandlerQueueError.
+func (x *Stream) AddStreamOutputTypeSampleHandlerQueueError(output raw.SCStreamOutput, type_ raw.SCStreamOutputType, sampleHandlerQueue *foundation.NSObject) (bool, error) {
+	return x.inner.AddStreamOutputTypeSampleHandlerQueueError(output, type_, sampleHandlerQueue)
+}
+
+// RemoveStreamOutputTypeError calls the underlying RemoveStreamOutputTypeError.
+func (x *Stream) RemoveStreamOutputTypeError(output raw.SCStreamOutput, type_ raw.SCStreamOutputType) (bool, error) {
+	return x.inner.RemoveStreamOutputTypeError(output, type_)
+}
+
 // UpdateContentFilter blocks until the operation completes or ctx is cancelled.
 func (x *Stream) UpdateContentFilter(ctx context.Context, contentFilter *raw.SCContentFilter) error {
 	_ch := make(chan error, 1)
 	x.inner.UpdateContentFilterCompletionHandler(contentFilter, func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -49,11 +60,11 @@ func (x *Stream) UpdateContentFilter(ctx context.Context, contentFilter *raw.SCC
 func (x *Stream) UpdateConfiguration(ctx context.Context, streamConfig *raw.SCStreamConfiguration) error {
 	_ch := make(chan error, 1)
 	x.inner.UpdateConfigurationCompletionHandler(streamConfig, func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -67,11 +78,11 @@ func (x *Stream) UpdateConfiguration(ctx context.Context, streamConfig *raw.SCSt
 func (x *Stream) StartCapture(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.StartCaptureWithCompletionHandler(func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -85,11 +96,11 @@ func (x *Stream) StartCapture(ctx context.Context) error {
 func (x *Stream) StopCapture(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.StopCaptureWithCompletionHandler(func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -98,4 +109,35 @@ func (x *Stream) StopCapture(ctx context.Context) error {
 		return ctx.Err()
 	}
 }
+
+// AddRecordingOutputError calls the underlying AddRecordingOutputError.
+func (x *Stream) AddRecordingOutputError(recordingOutput *raw.SCRecordingOutput) (bool, error) {
+	return x.inner.AddRecordingOutputError(recordingOutput)
+}
+
+// RemoveRecordingOutputError calls the underlying RemoveRecordingOutputError.
+func (x *Stream) RemoveRecordingOutputError(recordingOutput *raw.SCRecordingOutput) (bool, error) {
+	return x.inner.RemoveRecordingOutputError(recordingOutput)
+}
+
+// SynchronizationClock calls the underlying SynchronizationClock.
+func (x *Stream) SynchronizationClock() unsafe.Pointer {
+	return x.inner.SynchronizationClock()
+}
+
+// Streamable is the interface implemented by [Stream], for mocking and DI.
+type Streamable interface {
+	Unwrap() *raw.SCStream
+	AddStreamOutputTypeSampleHandlerQueueError(output raw.SCStreamOutput, type_ raw.SCStreamOutputType, sampleHandlerQueue *foundation.NSObject) (bool, error)
+	RemoveStreamOutputTypeError(output raw.SCStreamOutput, type_ raw.SCStreamOutputType) (bool, error)
+	UpdateContentFilter(ctx context.Context, contentFilter *raw.SCContentFilter) error
+	UpdateConfiguration(ctx context.Context, streamConfig *raw.SCStreamConfiguration) error
+	StartCapture(ctx context.Context) error
+	StopCapture(ctx context.Context) error
+	AddRecordingOutputError(recordingOutput *raw.SCRecordingOutput) (bool, error)
+	RemoveRecordingOutputError(recordingOutput *raw.SCRecordingOutput) (bool, error)
+	SynchronizationClock() unsafe.Pointer
+}
+
+var _ Streamable = (*Stream)(nil)
 

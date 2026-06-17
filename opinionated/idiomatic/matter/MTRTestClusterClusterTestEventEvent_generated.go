@@ -25,3 +25,10 @@ func NewMTRTestClusterClusterTestEventEvent() *MTRTestClusterClusterTestEventEve
 
 func (x *MTRTestClusterClusterTestEventEvent) asMTRUnitTestingClusterTestEventEvent() *raw.MTRUnitTestingClusterTestEventEvent { return &x.inner.MTRUnitTestingClusterTestEventEvent }
 
+// MTRTestClusterClusterTestEventEventable is the interface implemented by [MTRTestClusterClusterTestEventEvent], for mocking and DI.
+type MTRTestClusterClusterTestEventEventable interface {
+	Unwrap() *raw.MTRTestClusterClusterTestEventEvent
+}
+
+var _ MTRTestClusterClusterTestEventEventable = (*MTRTestClusterClusterTestEventEvent)(nil)
+

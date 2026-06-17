@@ -5,8 +5,10 @@
 package networkextension
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // NETunnelProviderSession wraps [raw.NETunnelProviderSession] with a fluent Go API.
@@ -23,5 +25,30 @@ func NewNETunnelProviderSession() *NETunnelProviderSession {
 	return &NETunnelProviderSession{inner: raw.NETunnelProviderSessionFromID(_id)}
 }
 
+// StartTunnelWithOptionsAndReturnError calls the underlying StartTunnelWithOptionsAndReturnError.
+func (x *NETunnelProviderSession) StartTunnelWithOptionsAndReturnError(options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
+	return x.inner.StartTunnelWithOptionsAndReturnError(options)
+}
+
+// StopTunnel calls the underlying StopTunnel.
+func (x *NETunnelProviderSession) StopTunnel() {
+	x.inner.StopTunnel()
+}
+
+// SendProviderMessageReturnErrorResponseHandler calls the underlying SendProviderMessageReturnErrorResponseHandler.
+func (x *NETunnelProviderSession) SendProviderMessageReturnErrorResponseHandler(messageData *foundation.NSData, error_ unsafe.Pointer, responseHandler func(*foundation.NSData)) bool {
+	return x.inner.SendProviderMessageReturnErrorResponseHandler(messageData, error_, responseHandler)
+}
+
 func (x *NETunnelProviderSession) asNEVPNConnection() *raw.NEVPNConnection { return &x.inner.NEVPNConnection }
+
+// NETunnelProviderSessionable is the interface implemented by [NETunnelProviderSession], for mocking and DI.
+type NETunnelProviderSessionable interface {
+	Unwrap() *raw.NETunnelProviderSession
+	StartTunnelWithOptionsAndReturnError(options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error)
+	StopTunnel()
+	SendProviderMessageReturnErrorResponseHandler(messageData *foundation.NSData, error_ unsafe.Pointer, responseHandler func(*foundation.NSData)) bool
+}
+
+var _ NETunnelProviderSessionable = (*NETunnelProviderSession)(nil)
 

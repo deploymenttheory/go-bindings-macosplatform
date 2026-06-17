@@ -32,3 +32,22 @@ func NewPredicateWithDevice(device metal.MTLDevice) *Predicate {
 	return &Predicate{inner: raw.MPSPredicateFromID(_id)}
 }
 
+// PredicateBuffer calls the underlying PredicateBuffer.
+func (x *Predicate) PredicateBuffer() metal.MTLBuffer {
+	return x.inner.PredicateBuffer()
+}
+
+// PredicateOffset calls the underlying PredicateOffset.
+func (x *Predicate) PredicateOffset() uint {
+	return x.inner.PredicateOffset()
+}
+
+// Predicateable is the interface implemented by [Predicate], for mocking and DI.
+type Predicateable interface {
+	Unwrap() *raw.MPSPredicate
+	PredicateBuffer() metal.MTLBuffer
+	PredicateOffset() uint
+}
+
+var _ Predicateable = (*Predicate)(nil)
+

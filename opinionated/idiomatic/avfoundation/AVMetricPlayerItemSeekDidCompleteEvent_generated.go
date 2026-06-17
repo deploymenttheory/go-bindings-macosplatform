@@ -23,7 +23,20 @@ func NewMetricPlayerItemSeekDidCompleteEvent() *MetricPlayerItemSeekDidCompleteE
 	return &MetricPlayerItemSeekDidCompleteEvent{inner: raw.AVMetricPlayerItemSeekDidCompleteEventFromID(_id)}
 }
 
+// DidSeekInBuffer calls the underlying DidSeekInBuffer.
+func (x *MetricPlayerItemSeekDidCompleteEvent) DidSeekInBuffer() bool {
+	return x.inner.DidSeekInBuffer()
+}
+
 func (x *MetricPlayerItemSeekDidCompleteEvent) asMetricPlayerItemRateChangeEvent() *raw.AVMetricPlayerItemRateChangeEvent { return &x.inner.AVMetricPlayerItemRateChangeEvent }
 
 func (x *MetricPlayerItemSeekDidCompleteEvent) asMetricEvent() *raw.AVMetricEvent { return &x.inner.AVMetricPlayerItemRateChangeEvent.AVMetricEvent }
+
+// MetricPlayerItemSeekDidCompleteEventable is the interface implemented by [MetricPlayerItemSeekDidCompleteEvent], for mocking and DI.
+type MetricPlayerItemSeekDidCompleteEventable interface {
+	Unwrap() *raw.AVMetricPlayerItemSeekDidCompleteEvent
+	DidSeekInBuffer() bool
+}
+
+var _ MetricPlayerItemSeekDidCompleteEventable = (*MetricPlayerItemSeekDidCompleteEvent)(nil)
 

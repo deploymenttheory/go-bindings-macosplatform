@@ -23,3 +23,32 @@ func NewEnvironment() *Environment {
 	return &Environment{inner: raw.LAEnvironmentFromID(_id)}
 }
 
+// AddObserver calls the underlying AddObserver.
+func (x *Environment) AddObserver(observer raw.LAEnvironmentObserver) {
+	x.inner.AddObserver(observer)
+}
+
+// RemoveObserver calls the underlying RemoveObserver.
+func (x *Environment) RemoveObserver(observer raw.LAEnvironmentObserver) {
+	x.inner.RemoveObserver(observer)
+}
+
+// State calls the underlying State.
+func (x *Environment) State() *EnvironmentState {
+	_r := x.inner.State()
+	if _r == nil {
+		return nil
+	}
+	return &EnvironmentState{inner: _r}
+}
+
+// Environmentable is the interface implemented by [Environment], for mocking and DI.
+type Environmentable interface {
+	Unwrap() *raw.LAEnvironment
+	AddObserver(observer raw.LAEnvironmentObserver)
+	RemoveObserver(observer raw.LAEnvironmentObserver)
+	State() *EnvironmentState
+}
+
+var _ Environmentable = (*Environment)(nil)
+

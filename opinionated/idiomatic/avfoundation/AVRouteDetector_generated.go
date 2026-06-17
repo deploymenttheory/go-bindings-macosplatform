@@ -29,3 +29,29 @@ func (x *RouteDetector) WithRouteDetectionEnabled(routeDetectionEnabled bool) *R
 	return x
 }
 
+// IsRouteDetectionEnabled calls the underlying IsRouteDetectionEnabled.
+func (x *RouteDetector) IsRouteDetectionEnabled() bool {
+	return x.inner.IsRouteDetectionEnabled()
+}
+
+// SetRouteDetectionEnabled calls the underlying SetRouteDetectionEnabled.
+func (x *RouteDetector) SetRouteDetectionEnabled(routeDetectionEnabled bool) {
+	x.inner.SetRouteDetectionEnabled(routeDetectionEnabled)
+}
+
+// MultipleRoutesDetected calls the underlying MultipleRoutesDetected.
+func (x *RouteDetector) MultipleRoutesDetected() bool {
+	return x.inner.MultipleRoutesDetected()
+}
+
+// RouteDetectorable is the interface implemented by [RouteDetector], for mocking and DI.
+type RouteDetectorable interface {
+	Unwrap() *raw.AVRouteDetector
+	WithRouteDetectionEnabled(routeDetectionEnabled bool) *RouteDetector
+	IsRouteDetectionEnabled() bool
+	SetRouteDetectionEnabled(routeDetectionEnabled bool)
+	MultipleRoutesDetected() bool
+}
+
+var _ RouteDetectorable = (*RouteDetector)(nil)
+

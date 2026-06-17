@@ -6,6 +6,7 @@ package modelio
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,31 @@ func NewTransformMatrixOp() *TransformMatrixOp {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLTransformMatrixOp")), objc.RegisterName("new"))
 	return &TransformMatrixOp{inner: raw.MDLTransformMatrixOpFromID(_id)}
 }
+
+// Name calls the underlying Name.
+func (x *TransformMatrixOp) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// AnimatedValue calls the underlying AnimatedValue.
+func (x *TransformMatrixOp) AnimatedValue() *AnimatedMatrix4x4 {
+	_r := x.inner.AnimatedValue()
+	if _r == nil {
+		return nil
+	}
+	return &AnimatedMatrix4x4{inner: _r}
+}
+
+// TransformMatrixOpable is the interface implemented by [TransformMatrixOp], for mocking and DI.
+type TransformMatrixOpable interface {
+	Unwrap() *raw.MDLTransformMatrixOp
+	Name() string
+	AnimatedValue() *AnimatedMatrix4x4
+}
+
+var _ TransformMatrixOpable = (*TransformMatrixOp)(nil)
 

@@ -7,6 +7,7 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -90,6 +91,152 @@ func (x *DOMHTMLAppletElement) WithWidth(width string) *DOMHTMLAppletElement {
 	return x
 }
 
+// Align calls the underlying Align.
+func (x *DOMHTMLAppletElement) Align() string {
+	_r := x.inner.Align()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetAlign calls the underlying SetAlign.
+func (x *DOMHTMLAppletElement) SetAlign(align string) {
+	x.inner.SetAlign(foundation.NSStringStringWithUTF8String(align))
+}
+
+// Alt calls the underlying Alt.
+func (x *DOMHTMLAppletElement) Alt() string {
+	_r := x.inner.Alt()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetAlt calls the underlying SetAlt.
+func (x *DOMHTMLAppletElement) SetAlt(alt string) {
+	x.inner.SetAlt(foundation.NSStringStringWithUTF8String(alt))
+}
+
+// Archive calls the underlying Archive.
+func (x *DOMHTMLAppletElement) Archive() string {
+	_r := x.inner.Archive()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetArchive calls the underlying SetArchive.
+func (x *DOMHTMLAppletElement) SetArchive(archive string) {
+	x.inner.SetArchive(foundation.NSStringStringWithUTF8String(archive))
+}
+
+// Code calls the underlying Code.
+func (x *DOMHTMLAppletElement) Code() string {
+	_r := x.inner.Code()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetCode calls the underlying SetCode.
+func (x *DOMHTMLAppletElement) SetCode(code string) {
+	x.inner.SetCode(foundation.NSStringStringWithUTF8String(code))
+}
+
+// CodeBase calls the underlying CodeBase.
+func (x *DOMHTMLAppletElement) CodeBase() string {
+	_r := x.inner.CodeBase()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetCodeBase calls the underlying SetCodeBase.
+func (x *DOMHTMLAppletElement) SetCodeBase(codeBase string) {
+	x.inner.SetCodeBase(foundation.NSStringStringWithUTF8String(codeBase))
+}
+
+// Height calls the underlying Height.
+func (x *DOMHTMLAppletElement) Height() string {
+	_r := x.inner.Height()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetHeight calls the underlying SetHeight.
+func (x *DOMHTMLAppletElement) SetHeight(height string) {
+	x.inner.SetHeight(foundation.NSStringStringWithUTF8String(height))
+}
+
+// Hspace calls the underlying Hspace.
+func (x *DOMHTMLAppletElement) Hspace() int {
+	return x.inner.Hspace()
+}
+
+// SetHspace calls the underlying SetHspace.
+func (x *DOMHTMLAppletElement) SetHspace(hspace int) {
+	x.inner.SetHspace(hspace)
+}
+
+// Name calls the underlying Name.
+func (x *DOMHTMLAppletElement) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetName calls the underlying SetName.
+func (x *DOMHTMLAppletElement) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
+// Object calls the underlying Object.
+func (x *DOMHTMLAppletElement) Object() string {
+	_r := x.inner.Object()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetObject calls the underlying SetObject.
+func (x *DOMHTMLAppletElement) SetObject(object string) {
+	x.inner.SetObject(foundation.NSStringStringWithUTF8String(object))
+}
+
+// Vspace calls the underlying Vspace.
+func (x *DOMHTMLAppletElement) Vspace() int {
+	return x.inner.Vspace()
+}
+
+// SetVspace calls the underlying SetVspace.
+func (x *DOMHTMLAppletElement) SetVspace(vspace int) {
+	x.inner.SetVspace(vspace)
+}
+
+// Width calls the underlying Width.
+func (x *DOMHTMLAppletElement) Width() string {
+	_r := x.inner.Width()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetWidth calls the underlying SetWidth.
+func (x *DOMHTMLAppletElement) SetWidth(width string) {
+	x.inner.SetWidth(foundation.NSStringStringWithUTF8String(width))
+}
+
 func (x *DOMHTMLAppletElement) asDOMHTMLElement() *raw.DOMHTMLElement { return &x.inner.DOMHTMLElement }
 
 func (x *DOMHTMLAppletElement) asDOMElement() *raw.DOMElement { return &x.inner.DOMHTMLElement.DOMElement }
@@ -99,4 +246,44 @@ func (x *DOMHTMLAppletElement) asDOMNode() *raw.DOMNode { return &x.inner.DOMHTM
 func (x *DOMHTMLAppletElement) asDOMObject() *raw.DOMObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject }
 
 func (x *DOMHTMLAppletElement) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject }
+
+// DOMHTMLAppletElementable is the interface implemented by [DOMHTMLAppletElement], for mocking and DI.
+type DOMHTMLAppletElementable interface {
+	Unwrap() *raw.DOMHTMLAppletElement
+	WithAlign(align string) *DOMHTMLAppletElement
+	WithAlt(alt string) *DOMHTMLAppletElement
+	WithArchive(archive string) *DOMHTMLAppletElement
+	WithCode(code string) *DOMHTMLAppletElement
+	WithCodeBase(codeBase string) *DOMHTMLAppletElement
+	WithHeight(height string) *DOMHTMLAppletElement
+	WithHspace(hspace int) *DOMHTMLAppletElement
+	WithName(name string) *DOMHTMLAppletElement
+	WithObject(object string) *DOMHTMLAppletElement
+	WithVspace(vspace int) *DOMHTMLAppletElement
+	WithWidth(width string) *DOMHTMLAppletElement
+	Align() string
+	SetAlign(align string)
+	Alt() string
+	SetAlt(alt string)
+	Archive() string
+	SetArchive(archive string)
+	Code() string
+	SetCode(code string)
+	CodeBase() string
+	SetCodeBase(codeBase string)
+	Height() string
+	SetHeight(height string)
+	Hspace() int
+	SetHspace(hspace int)
+	Name() string
+	SetName(name string)
+	Object() string
+	SetObject(object string)
+	Vspace() int
+	SetVspace(vspace int)
+	Width() string
+	SetWidth(width string)
+}
+
+var _ DOMHTMLAppletElementable = (*DOMHTMLAppletElement)(nil)
 

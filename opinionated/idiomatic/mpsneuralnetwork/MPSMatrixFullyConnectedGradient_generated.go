@@ -7,6 +7,7 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -56,4 +57,75 @@ func (x *MatrixFullyConnectedGradient) WithAlpha(alpha float64) *MatrixFullyConn
 	x.inner.SetAlpha(alpha)
 	return x
 }
+
+// EncodeGradientForDataToCommandBufferGradientMatrixWeightMatrixResultGradientForDataMatrix calls the underlying EncodeGradientForDataToCommandBufferGradientMatrixWeightMatrixResultGradientForDataMatrix.
+func (x *MatrixFullyConnectedGradient) EncodeGradientForDataToCommandBufferGradientMatrixWeightMatrixResultGradientForDataMatrix(commandBuffer metal.MTLCommandBuffer, gradientMatrix *mpscore.MPSMatrix, weightMatrix *mpscore.MPSMatrix, resultGradientForDataMatrix *mpscore.MPSMatrix) {
+	x.inner.EncodeGradientForDataToCommandBufferGradientMatrixWeightMatrixResultGradientForDataMatrix(commandBuffer, gradientMatrix, weightMatrix, resultGradientForDataMatrix)
+}
+
+// EncodeGradientForWeightsAndBiasToCommandBufferGradientMatrixInputMatrixResultGradientForWeightMatrixResultGradientForBiasVector calls the underlying EncodeGradientForWeightsAndBiasToCommandBufferGradientMatrixInputMatrixResultGradientForWeightMatrixResultGradientForBiasVector.
+func (x *MatrixFullyConnectedGradient) EncodeGradientForWeightsAndBiasToCommandBufferGradientMatrixInputMatrixResultGradientForWeightMatrixResultGradientForBiasVector(commandBuffer metal.MTLCommandBuffer, gradientMatrix *mpscore.MPSMatrix, inputMatrix *mpscore.MPSMatrix, resultGradientForWeightMatrix *mpscore.MPSMatrix, resultGradientForBiasVector *mpscore.MPSVector) {
+	x.inner.EncodeGradientForWeightsAndBiasToCommandBufferGradientMatrixInputMatrixResultGradientForWeightMatrixResultGradientForBiasVector(commandBuffer, gradientMatrix, inputMatrix, resultGradientForWeightMatrix, resultGradientForBiasVector)
+}
+
+// SourceNumberOfFeatureVectors calls the underlying SourceNumberOfFeatureVectors.
+func (x *MatrixFullyConnectedGradient) SourceNumberOfFeatureVectors() uint {
+	return x.inner.SourceNumberOfFeatureVectors()
+}
+
+// SetSourceNumberOfFeatureVectors calls the underlying SetSourceNumberOfFeatureVectors.
+func (x *MatrixFullyConnectedGradient) SetSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors uint) {
+	x.inner.SetSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors)
+}
+
+// SourceOutputFeatureChannels calls the underlying SourceOutputFeatureChannels.
+func (x *MatrixFullyConnectedGradient) SourceOutputFeatureChannels() uint {
+	return x.inner.SourceOutputFeatureChannels()
+}
+
+// SetSourceOutputFeatureChannels calls the underlying SetSourceOutputFeatureChannels.
+func (x *MatrixFullyConnectedGradient) SetSourceOutputFeatureChannels(sourceOutputFeatureChannels uint) {
+	x.inner.SetSourceOutputFeatureChannels(sourceOutputFeatureChannels)
+}
+
+// SourceInputFeatureChannels calls the underlying SourceInputFeatureChannels.
+func (x *MatrixFullyConnectedGradient) SourceInputFeatureChannels() uint {
+	return x.inner.SourceInputFeatureChannels()
+}
+
+// SetSourceInputFeatureChannels calls the underlying SetSourceInputFeatureChannels.
+func (x *MatrixFullyConnectedGradient) SetSourceInputFeatureChannels(sourceInputFeatureChannels uint) {
+	x.inner.SetSourceInputFeatureChannels(sourceInputFeatureChannels)
+}
+
+// Alpha calls the underlying Alpha.
+func (x *MatrixFullyConnectedGradient) Alpha() float64 {
+	return x.inner.Alpha()
+}
+
+// SetAlpha calls the underlying SetAlpha.
+func (x *MatrixFullyConnectedGradient) SetAlpha(alpha float64) {
+	x.inner.SetAlpha(alpha)
+}
+
+// MatrixFullyConnectedGradientable is the interface implemented by [MatrixFullyConnectedGradient], for mocking and DI.
+type MatrixFullyConnectedGradientable interface {
+	Unwrap() *raw.MPSMatrixFullyConnectedGradient
+	WithSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors uint) *MatrixFullyConnectedGradient
+	WithSourceOutputFeatureChannels(sourceOutputFeatureChannels uint) *MatrixFullyConnectedGradient
+	WithSourceInputFeatureChannels(sourceInputFeatureChannels uint) *MatrixFullyConnectedGradient
+	WithAlpha(alpha float64) *MatrixFullyConnectedGradient
+	EncodeGradientForDataToCommandBufferGradientMatrixWeightMatrixResultGradientForDataMatrix(commandBuffer metal.MTLCommandBuffer, gradientMatrix *mpscore.MPSMatrix, weightMatrix *mpscore.MPSMatrix, resultGradientForDataMatrix *mpscore.MPSMatrix)
+	EncodeGradientForWeightsAndBiasToCommandBufferGradientMatrixInputMatrixResultGradientForWeightMatrixResultGradientForBiasVector(commandBuffer metal.MTLCommandBuffer, gradientMatrix *mpscore.MPSMatrix, inputMatrix *mpscore.MPSMatrix, resultGradientForWeightMatrix *mpscore.MPSMatrix, resultGradientForBiasVector *mpscore.MPSVector)
+	SourceNumberOfFeatureVectors() uint
+	SetSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors uint)
+	SourceOutputFeatureChannels() uint
+	SetSourceOutputFeatureChannels(sourceOutputFeatureChannels uint)
+	SourceInputFeatureChannels() uint
+	SetSourceInputFeatureChannels(sourceInputFeatureChannels uint)
+	Alpha() float64
+	SetAlpha(alpha float64)
+}
+
+var _ MatrixFullyConnectedGradientable = (*MatrixFullyConnectedGradient)(nil)
 

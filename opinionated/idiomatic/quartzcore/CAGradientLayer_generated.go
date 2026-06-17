@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -60,18 +61,86 @@ func (x *GradientLayer) WithType(type_ *foundation.NSString) *GradientLayer {
 	return x
 }
 
+// Colors calls the underlying Colors.
+func (x *GradientLayer) Colors() *foundation.NSArray[objc.ID] {
+	return x.inner.Colors()
+}
+
+// SetColors calls the underlying SetColors.
+func (x *GradientLayer) SetColors(colors *foundation.NSArray[objc.ID]) {
+	x.inner.SetColors(colors)
+}
+
 // Locations returns the collection as a Go slice.
 func (x *GradientLayer) Locations() []*foundation.NSNumber {
 	arr := x.inner.Locations()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
+}
+
+// SetLocations calls the underlying SetLocations.
+func (x *GradientLayer) SetLocations(locations *foundation.NSArray[*foundation.NSNumber]) {
+	x.inner.SetLocations(locations)
+}
+
+// StartPoint calls the underlying StartPoint.
+func (x *GradientLayer) StartPoint() corefoundation.CGPoint {
+	return x.inner.StartPoint()
+}
+
+// SetStartPoint calls the underlying SetStartPoint.
+func (x *GradientLayer) SetStartPoint(startPoint corefoundation.CGPoint) {
+	x.inner.SetStartPoint(startPoint)
+}
+
+// EndPoint calls the underlying EndPoint.
+func (x *GradientLayer) EndPoint() corefoundation.CGPoint {
+	return x.inner.EndPoint()
+}
+
+// SetEndPoint calls the underlying SetEndPoint.
+func (x *GradientLayer) SetEndPoint(endPoint corefoundation.CGPoint) {
+	x.inner.SetEndPoint(endPoint)
+}
+
+// Type calls the underlying Type.
+func (x *GradientLayer) Type() string {
+	_r := x.inner.Type()
+	if _r == nil {
+		return ""
 	}
-	return out
+	return purego.GoString(_r.Ptr())
+}
+
+// SetType calls the underlying SetType.
+func (x *GradientLayer) SetType(type_ *foundation.NSString) {
+	x.inner.SetType(type_)
 }
 
 func (x *GradientLayer) asLayer() *raw.CALayer { return &x.inner.CALayer }
+
+// GradientLayerable is the interface implemented by [GradientLayer], for mocking and DI.
+type GradientLayerable interface {
+	Unwrap() *raw.CAGradientLayer
+	WithLocations(items ...*foundation.NSNumber) *GradientLayer
+	WithStartPoint(startPoint corefoundation.CGPoint) *GradientLayer
+	WithEndPoint(endPoint corefoundation.CGPoint) *GradientLayer
+	WithType(type_ *foundation.NSString) *GradientLayer
+	Colors() *foundation.NSArray[objc.ID]
+	SetColors(colors *foundation.NSArray[objc.ID])
+	Locations() []*foundation.NSNumber
+	SetLocations(locations *foundation.NSArray[*foundation.NSNumber])
+	StartPoint() corefoundation.CGPoint
+	SetStartPoint(startPoint corefoundation.CGPoint)
+	EndPoint() corefoundation.CGPoint
+	SetEndPoint(endPoint corefoundation.CGPoint)
+	Type() string
+	SetType(type_ *foundation.NSString)
+}
+
+var _ GradientLayerable = (*GradientLayer)(nil)
 

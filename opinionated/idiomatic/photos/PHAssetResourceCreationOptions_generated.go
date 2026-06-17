@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/uniformtypeidentifiers"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -48,4 +49,71 @@ func (x *AssetResourceCreationOptions) WithShouldMoveFile(shouldMoveFile bool) *
 	x.inner.SetShouldMoveFile(shouldMoveFile)
 	return x
 }
+
+// OriginalFilename calls the underlying OriginalFilename.
+func (x *AssetResourceCreationOptions) OriginalFilename() string {
+	_r := x.inner.OriginalFilename()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetOriginalFilename calls the underlying SetOriginalFilename.
+func (x *AssetResourceCreationOptions) SetOriginalFilename(originalFilename string) {
+	x.inner.SetOriginalFilename(foundation.NSStringStringWithUTF8String(originalFilename))
+}
+
+// ContentType calls the underlying ContentType.
+func (x *AssetResourceCreationOptions) ContentType() *uniformtypeidentifiers.UTType {
+	return x.inner.ContentType()
+}
+
+// SetContentType calls the underlying SetContentType.
+func (x *AssetResourceCreationOptions) SetContentType(contentType *uniformtypeidentifiers.UTType) {
+	x.inner.SetContentType(contentType)
+}
+
+// UniformTypeIdentifier calls the underlying UniformTypeIdentifier.
+func (x *AssetResourceCreationOptions) UniformTypeIdentifier() string {
+	_r := x.inner.UniformTypeIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetUniformTypeIdentifier calls the underlying SetUniformTypeIdentifier.
+func (x *AssetResourceCreationOptions) SetUniformTypeIdentifier(uniformTypeIdentifier string) {
+	x.inner.SetUniformTypeIdentifier(foundation.NSStringStringWithUTF8String(uniformTypeIdentifier))
+}
+
+// ShouldMoveFile calls the underlying ShouldMoveFile.
+func (x *AssetResourceCreationOptions) ShouldMoveFile() bool {
+	return x.inner.ShouldMoveFile()
+}
+
+// SetShouldMoveFile calls the underlying SetShouldMoveFile.
+func (x *AssetResourceCreationOptions) SetShouldMoveFile(shouldMoveFile bool) {
+	x.inner.SetShouldMoveFile(shouldMoveFile)
+}
+
+// AssetResourceCreationOptionsable is the interface implemented by [AssetResourceCreationOptions], for mocking and DI.
+type AssetResourceCreationOptionsable interface {
+	Unwrap() *raw.PHAssetResourceCreationOptions
+	WithOriginalFilename(originalFilename string) *AssetResourceCreationOptions
+	WithContentType(contentType *uniformtypeidentifiers.UTType) *AssetResourceCreationOptions
+	WithUniformTypeIdentifier(uniformTypeIdentifier string) *AssetResourceCreationOptions
+	WithShouldMoveFile(shouldMoveFile bool) *AssetResourceCreationOptions
+	OriginalFilename() string
+	SetOriginalFilename(originalFilename string)
+	ContentType() *uniformtypeidentifiers.UTType
+	SetContentType(contentType *uniformtypeidentifiers.UTType)
+	UniformTypeIdentifier() string
+	SetUniformTypeIdentifier(uniformTypeIdentifier string)
+	ShouldMoveFile() bool
+	SetShouldMoveFile(shouldMoveFile bool)
+}
+
+var _ AssetResourceCreationOptionsable = (*AssetResourceCreationOptions)(nil)
 

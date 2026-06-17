@@ -25,3 +25,10 @@ func NewVolumeIdentifier() *VolumeIdentifier {
 
 func (x *VolumeIdentifier) asEntityIdentifier() *raw.FSEntityIdentifier { return &x.inner.FSEntityIdentifier }
 
+// VolumeIdentifierable is the interface implemented by [VolumeIdentifier], for mocking and DI.
+type VolumeIdentifierable interface {
+	Unwrap() *raw.FSVolumeIdentifier
+}
+
+var _ VolumeIdentifierable = (*VolumeIdentifier)(nil)
+

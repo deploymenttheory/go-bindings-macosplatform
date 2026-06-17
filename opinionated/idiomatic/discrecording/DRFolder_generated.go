@@ -32,5 +32,42 @@ func NewFolderWithName(name string) *Folder {
 	return &Folder{inner: raw.DRFolderFromID(_id)}
 }
 
+// MakeVirtual calls the underlying MakeVirtual.
+func (x *Folder) MakeVirtual() {
+	x.inner.MakeVirtual()
+}
+
+// AddChild calls the underlying AddChild.
+func (x *Folder) AddChild(child *raw.DRFSObject) {
+	x.inner.AddChild(child)
+}
+
+// RemoveChild calls the underlying RemoveChild.
+func (x *Folder) RemoveChild(child *raw.DRFSObject) {
+	x.inner.RemoveChild(child)
+}
+
+// Count calls the underlying Count.
+func (x *Folder) Count() uint {
+	return x.inner.Count()
+}
+
+// Children calls the underlying Children.
+func (x *Folder) Children() *foundation.NSArray[objc.ID] {
+	return x.inner.Children()
+}
+
 func (x *Folder) asFSObject() *raw.DRFSObject { return &x.inner.DRFSObject }
+
+// Folderable is the interface implemented by [Folder], for mocking and DI.
+type Folderable interface {
+	Unwrap() *raw.DRFolder
+	MakeVirtual()
+	AddChild(child *raw.DRFSObject)
+	RemoveChild(child *raw.DRFSObject)
+	Count() uint
+	Children() *foundation.NSArray[objc.ID]
+}
+
+var _ Folderable = (*Folder)(nil)
 

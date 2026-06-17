@@ -43,3 +43,40 @@ func (x *MTRServiceAreaClusterSkipAreaResponseParams) WithStatusText(statusText 
 	return x
 }
 
+// Status calls the underlying Status.
+func (x *MTRServiceAreaClusterSkipAreaResponseParams) Status() *foundation.NSNumber {
+	return x.inner.Status()
+}
+
+// SetStatus calls the underlying SetStatus.
+func (x *MTRServiceAreaClusterSkipAreaResponseParams) SetStatus(status *foundation.NSNumber) {
+	x.inner.SetStatus(status)
+}
+
+// StatusText calls the underlying StatusText.
+func (x *MTRServiceAreaClusterSkipAreaResponseParams) StatusText() string {
+	_r := x.inner.StatusText()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetStatusText calls the underlying SetStatusText.
+func (x *MTRServiceAreaClusterSkipAreaResponseParams) SetStatusText(statusText string) {
+	x.inner.SetStatusText(foundation.NSStringStringWithUTF8String(statusText))
+}
+
+// MTRServiceAreaClusterSkipAreaResponseParamsable is the interface implemented by [MTRServiceAreaClusterSkipAreaResponseParams], for mocking and DI.
+type MTRServiceAreaClusterSkipAreaResponseParamsable interface {
+	Unwrap() *raw.MTRServiceAreaClusterSkipAreaResponseParams
+	WithStatus(status *foundation.NSNumber) *MTRServiceAreaClusterSkipAreaResponseParams
+	WithStatusText(statusText string) *MTRServiceAreaClusterSkipAreaResponseParams
+	Status() *foundation.NSNumber
+	SetStatus(status *foundation.NSNumber)
+	StatusText() string
+	SetStatusText(statusText string)
+}
+
+var _ MTRServiceAreaClusterSkipAreaResponseParamsable = (*MTRServiceAreaClusterSkipAreaResponseParams)(nil)
+

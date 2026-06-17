@@ -39,3 +39,40 @@ func NewSyncEngineSendChangesScopeWithRecordIDs(recordIDs *foundation.NSSet[*raw
 	return &SyncEngineSendChangesScope{inner: raw.CKSyncEngineSendChangesScopeFromID(_id)}
 }
 
+// ContainsRecordID calls the underlying ContainsRecordID.
+func (x *SyncEngineSendChangesScope) ContainsRecordID(recordID *raw.CKRecordID) bool {
+	return x.inner.ContainsRecordID(recordID)
+}
+
+// ContainsPendingRecordZoneChange calls the underlying ContainsPendingRecordZoneChange.
+func (x *SyncEngineSendChangesScope) ContainsPendingRecordZoneChange(pendingRecordZoneChange *raw.CKSyncEnginePendingRecordZoneChange) bool {
+	return x.inner.ContainsPendingRecordZoneChange(pendingRecordZoneChange)
+}
+
+// ZoneIDs calls the underlying ZoneIDs.
+func (x *SyncEngineSendChangesScope) ZoneIDs() *foundation.NSSet[*raw.CKRecordZoneID] {
+	return x.inner.ZoneIDs()
+}
+
+// ExcludedZoneIDs calls the underlying ExcludedZoneIDs.
+func (x *SyncEngineSendChangesScope) ExcludedZoneIDs() *foundation.NSSet[*raw.CKRecordZoneID] {
+	return x.inner.ExcludedZoneIDs()
+}
+
+// RecordIDs calls the underlying RecordIDs.
+func (x *SyncEngineSendChangesScope) RecordIDs() *foundation.NSSet[*raw.CKRecordID] {
+	return x.inner.RecordIDs()
+}
+
+// SyncEngineSendChangesScopeable is the interface implemented by [SyncEngineSendChangesScope], for mocking and DI.
+type SyncEngineSendChangesScopeable interface {
+	Unwrap() *raw.CKSyncEngineSendChangesScope
+	ContainsRecordID(recordID *raw.CKRecordID) bool
+	ContainsPendingRecordZoneChange(pendingRecordZoneChange *raw.CKSyncEnginePendingRecordZoneChange) bool
+	ZoneIDs() *foundation.NSSet[*raw.CKRecordZoneID]
+	ExcludedZoneIDs() *foundation.NSSet[*raw.CKRecordZoneID]
+	RecordIDs() *foundation.NSSet[*raw.CKRecordID]
+}
+
+var _ SyncEngineSendChangesScopeable = (*SyncEngineSendChangesScope)(nil)
+

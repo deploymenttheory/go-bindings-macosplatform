@@ -23,3 +23,16 @@ func NewSliderAccessoryBehavior() *SliderAccessoryBehavior {
 	return &SliderAccessoryBehavior{inner: raw.NSSliderAccessoryBehaviorFromID(_id)}
 }
 
+// HandleAction calls the underlying HandleAction.
+func (x *SliderAccessoryBehavior) HandleAction(sender *raw.NSSliderAccessory) {
+	x.inner.HandleAction(sender)
+}
+
+// SliderAccessoryBehaviorable is the interface implemented by [SliderAccessoryBehavior], for mocking and DI.
+type SliderAccessoryBehaviorable interface {
+	Unwrap() *raw.NSSliderAccessoryBehavior
+	HandleAction(sender *raw.NSSliderAccessory)
+}
+
+var _ SliderAccessoryBehaviorable = (*SliderAccessoryBehavior)(nil)
+

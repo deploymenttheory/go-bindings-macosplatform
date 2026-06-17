@@ -23,3 +23,10 @@ func NewMTRDeviceEnergyManagementClusterPausedEvent() *MTRDeviceEnergyManagement
 	return &MTRDeviceEnergyManagementClusterPausedEvent{inner: raw.MTRDeviceEnergyManagementClusterPausedEventFromID(_id)}
 }
 
+// MTRDeviceEnergyManagementClusterPausedEventable is the interface implemented by [MTRDeviceEnergyManagementClusterPausedEvent], for mocking and DI.
+type MTRDeviceEnergyManagementClusterPausedEventable interface {
+	Unwrap() *raw.MTRDeviceEnergyManagementClusterPausedEvent
+}
+
+var _ MTRDeviceEnergyManagementClusterPausedEventable = (*MTRDeviceEnergyManagementClusterPausedEvent)(nil)
+

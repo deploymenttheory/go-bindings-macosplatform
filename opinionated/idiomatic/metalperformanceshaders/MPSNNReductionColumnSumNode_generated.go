@@ -28,3 +28,10 @@ func (x *NNReductionColumnSumNode) asNNUnaryReductionNode() *mpsneuralnetwork.MP
 
 func (x *NNReductionColumnSumNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode }
 
+// NNReductionColumnSumNodeable is the interface implemented by [NNReductionColumnSumNode], for mocking and DI.
+type NNReductionColumnSumNodeable interface {
+	Unwrap() *raw.MPSNNReductionColumnSumNode
+}
+
+var _ NNReductionColumnSumNodeable = (*NNReductionColumnSumNode)(nil)
+

@@ -6,6 +6,7 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
@@ -66,7 +67,159 @@ func (x *ClipView) WithCopiesOnScroll(copiesOnScroll bool) *ClipView {
 	return x
 }
 
+// ViewFrameChanged calls the underlying ViewFrameChanged.
+func (x *ClipView) ViewFrameChanged(notification *foundation.NSNotification) {
+	x.inner.ViewFrameChanged(notification)
+}
+
+// ViewBoundsChanged calls the underlying ViewBoundsChanged.
+func (x *ClipView) ViewBoundsChanged(notification *foundation.NSNotification) {
+	x.inner.ViewBoundsChanged(notification)
+}
+
+// ScrollToPoint calls the underlying ScrollToPoint.
+func (x *ClipView) ScrollToPoint(newOrigin corefoundation.CGPoint) {
+	x.inner.ScrollToPoint(newOrigin)
+}
+
+// ConstrainBoundsRect calls the underlying ConstrainBoundsRect.
+func (x *ClipView) ConstrainBoundsRect(proposedBounds corefoundation.CGRect) corefoundation.CGRect {
+	return x.inner.ConstrainBoundsRect(proposedBounds)
+}
+
+// BackgroundColor calls the underlying BackgroundColor.
+func (x *ClipView) BackgroundColor() *Color {
+	_r := x.inner.BackgroundColor()
+	if _r == nil {
+		return nil
+	}
+	return &Color{inner: _r}
+}
+
+// SetBackgroundColor calls the underlying SetBackgroundColor.
+func (x *ClipView) SetBackgroundColor(backgroundColor *raw.NSColor) {
+	x.inner.SetBackgroundColor(backgroundColor)
+}
+
+// DrawsBackground calls the underlying DrawsBackground.
+func (x *ClipView) DrawsBackground() bool {
+	return x.inner.DrawsBackground()
+}
+
+// SetDrawsBackground calls the underlying SetDrawsBackground.
+func (x *ClipView) SetDrawsBackground(drawsBackground bool) {
+	x.inner.SetDrawsBackground(drawsBackground)
+}
+
+// DocumentView calls the underlying DocumentView.
+func (x *ClipView) DocumentView() *View {
+	_r := x.inner.DocumentView()
+	if _r == nil {
+		return nil
+	}
+	return &View{inner: _r}
+}
+
+// SetDocumentView calls the underlying SetDocumentView.
+func (x *ClipView) SetDocumentView(documentView *raw.NSView) {
+	x.inner.SetDocumentView(documentView)
+}
+
+// DocumentRect calls the underlying DocumentRect.
+func (x *ClipView) DocumentRect() corefoundation.CGRect {
+	return x.inner.DocumentRect()
+}
+
+// DocumentCursor calls the underlying DocumentCursor.
+func (x *ClipView) DocumentCursor() *Cursor {
+	_r := x.inner.DocumentCursor()
+	if _r == nil {
+		return nil
+	}
+	return &Cursor{inner: _r}
+}
+
+// SetDocumentCursor calls the underlying SetDocumentCursor.
+func (x *ClipView) SetDocumentCursor(documentCursor *raw.NSCursor) {
+	x.inner.SetDocumentCursor(documentCursor)
+}
+
+// DocumentVisibleRect calls the underlying DocumentVisibleRect.
+func (x *ClipView) DocumentVisibleRect() corefoundation.CGRect {
+	return x.inner.DocumentVisibleRect()
+}
+
+// ContentInsets calls the underlying ContentInsets.
+func (x *ClipView) ContentInsets() foundation.NSEdgeInsets {
+	return x.inner.ContentInsets()
+}
+
+// SetContentInsets calls the underlying SetContentInsets.
+func (x *ClipView) SetContentInsets(contentInsets foundation.NSEdgeInsets) {
+	x.inner.SetContentInsets(contentInsets)
+}
+
+// AutomaticallyAdjustsContentInsets calls the underlying AutomaticallyAdjustsContentInsets.
+func (x *ClipView) AutomaticallyAdjustsContentInsets() bool {
+	return x.inner.AutomaticallyAdjustsContentInsets()
+}
+
+// SetAutomaticallyAdjustsContentInsets calls the underlying SetAutomaticallyAdjustsContentInsets.
+func (x *ClipView) SetAutomaticallyAdjustsContentInsets(automaticallyAdjustsContentInsets bool) {
+	x.inner.SetAutomaticallyAdjustsContentInsets(automaticallyAdjustsContentInsets)
+}
+
+// ConstrainScrollPoint calls the underlying ConstrainScrollPoint.
+func (x *ClipView) ConstrainScrollPoint(newOrigin corefoundation.CGPoint) corefoundation.CGPoint {
+	return x.inner.ConstrainScrollPoint(newOrigin)
+}
+
+// CopiesOnScroll calls the underlying CopiesOnScroll.
+func (x *ClipView) CopiesOnScroll() bool {
+	return x.inner.CopiesOnScroll()
+}
+
+// SetCopiesOnScroll calls the underlying SetCopiesOnScroll.
+func (x *ClipView) SetCopiesOnScroll(copiesOnScroll bool) {
+	x.inner.SetCopiesOnScroll(copiesOnScroll)
+}
+
 func (x *ClipView) asView() *raw.NSView { return &x.inner.NSView }
 
 func (x *ClipView) asResponder() *raw.NSResponder { return &x.inner.NSView.NSResponder }
+
+// ClipViewable is the interface implemented by [ClipView], for mocking and DI.
+type ClipViewable interface {
+	Unwrap() *raw.NSClipView
+	WithBackgroundColor(backgroundColor *raw.NSColor) *ClipView
+	WithDrawsBackground(drawsBackground bool) *ClipView
+	WithDocumentView(documentView ViewProvider) *ClipView
+	WithDocumentCursor(documentCursor *raw.NSCursor) *ClipView
+	WithContentInsets(contentInsets foundation.NSEdgeInsets) *ClipView
+	WithAutomaticallyAdjustsContentInsets(automaticallyAdjustsContentInsets bool) *ClipView
+	WithCopiesOnScroll(copiesOnScroll bool) *ClipView
+	ViewFrameChanged(notification *foundation.NSNotification)
+	ViewBoundsChanged(notification *foundation.NSNotification)
+	ScrollToPoint(newOrigin corefoundation.CGPoint)
+	ConstrainBoundsRect(proposedBounds corefoundation.CGRect) corefoundation.CGRect
+	BackgroundColor() *Color
+	SetBackgroundColor(backgroundColor *raw.NSColor)
+	DrawsBackground() bool
+	SetDrawsBackground(drawsBackground bool)
+	DocumentView() *View
+	SetDocumentView(documentView *raw.NSView)
+	DocumentRect() corefoundation.CGRect
+	DocumentCursor() *Cursor
+	SetDocumentCursor(documentCursor *raw.NSCursor)
+	DocumentVisibleRect() corefoundation.CGRect
+	ContentInsets() foundation.NSEdgeInsets
+	SetContentInsets(contentInsets foundation.NSEdgeInsets)
+	AutomaticallyAdjustsContentInsets() bool
+	SetAutomaticallyAdjustsContentInsets(automaticallyAdjustsContentInsets bool)
+	ConstrainScrollPoint(newOrigin corefoundation.CGPoint) corefoundation.CGPoint
+	CopiesOnScroll() bool
+	SetCopiesOnScroll(copiesOnScroll bool)
+}
+
+var _ ClipViewable = (*ClipView)(nil)
 

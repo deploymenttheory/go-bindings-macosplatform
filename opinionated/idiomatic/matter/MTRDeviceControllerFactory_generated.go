@@ -6,6 +6,7 @@ package matter
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,16 +24,72 @@ func NewMTRDeviceControllerFactory() *MTRDeviceControllerFactory {
 	return &MTRDeviceControllerFactory{inner: raw.MTRDeviceControllerFactoryFromID(_id)}
 }
 
+// StartControllerFactoryError calls the underlying StartControllerFactoryError.
+func (x *MTRDeviceControllerFactory) StartControllerFactoryError(startupParams *raw.MTRDeviceControllerFactoryParams) (bool, error) {
+	return x.inner.StartControllerFactoryError(startupParams)
+}
+
+// StopControllerFactory calls the underlying StopControllerFactory.
+func (x *MTRDeviceControllerFactory) StopControllerFactory() {
+	x.inner.StopControllerFactory()
+}
+
+// CreateControllerOnExistingFabricError calls the underlying CreateControllerOnExistingFabricError.
+func (x *MTRDeviceControllerFactory) CreateControllerOnExistingFabricError(startupParams *raw.MTRDeviceControllerStartupParams) (*MTRDeviceController, error) {
+	_r, _err := x.inner.CreateControllerOnExistingFabricError(startupParams)
+	if _err != nil {
+		return nil, _err
+	}
+	if _r == nil {
+		return nil, nil
+	}
+	return &MTRDeviceController{inner: _r}, nil
+}
+
+// CreateControllerOnNewFabricError calls the underlying CreateControllerOnNewFabricError.
+func (x *MTRDeviceControllerFactory) CreateControllerOnNewFabricError(startupParams *raw.MTRDeviceControllerStartupParams) (*MTRDeviceController, error) {
+	_r, _err := x.inner.CreateControllerOnNewFabricError(startupParams)
+	if _err != nil {
+		return nil, _err
+	}
+	if _r == nil {
+		return nil, nil
+	}
+	return &MTRDeviceController{inner: _r}, nil
+}
+
+// PreWarmCommissioningSession calls the underlying PreWarmCommissioningSession.
+func (x *MTRDeviceControllerFactory) PreWarmCommissioningSession() {
+	x.inner.PreWarmCommissioningSession()
+}
+
+// IsRunning calls the underlying IsRunning.
+func (x *MTRDeviceControllerFactory) IsRunning() bool {
+	return x.inner.IsRunning()
+}
+
 // KnownFabrics returns the collection as a Go slice.
 func (x *MTRDeviceControllerFactory) KnownFabrics() []*raw.MTRFabricInfo {
 	arr := x.inner.KnownFabrics()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MTRFabricInfo, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MTRFabricInfo {
+		return raw.MTRFabricInfoFromID(purego.Retain(_id))
+	})
 }
+
+// MTRDeviceControllerFactoryable is the interface implemented by [MTRDeviceControllerFactory], for mocking and DI.
+type MTRDeviceControllerFactoryable interface {
+	Unwrap() *raw.MTRDeviceControllerFactory
+	StartControllerFactoryError(startupParams *raw.MTRDeviceControllerFactoryParams) (bool, error)
+	StopControllerFactory()
+	CreateControllerOnExistingFabricError(startupParams *raw.MTRDeviceControllerStartupParams) (*MTRDeviceController, error)
+	CreateControllerOnNewFabricError(startupParams *raw.MTRDeviceControllerStartupParams) (*MTRDeviceController, error)
+	PreWarmCommissioningSession()
+	IsRunning() bool
+	KnownFabrics() []*raw.MTRFabricInfo
+}
+
+var _ MTRDeviceControllerFactoryable = (*MTRDeviceControllerFactory)(nil)
 

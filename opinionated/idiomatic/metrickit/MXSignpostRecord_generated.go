@@ -5,7 +5,9 @@
 package metrickit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metrickit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +24,77 @@ func NewSignpostRecord() *SignpostRecord {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MXSignpostRecord")), objc.RegisterName("new"))
 	return &SignpostRecord{inner: raw.MXSignpostRecordFromID(_id)}
 }
+
+// JSONRepresentation calls the underlying JSONRepresentation.
+func (x *SignpostRecord) JSONRepresentation() *foundation.NSData {
+	return x.inner.JSONRepresentation()
+}
+
+// DictionaryRepresentation calls the underlying DictionaryRepresentation.
+func (x *SignpostRecord) DictionaryRepresentation() *foundation.NSDictionary[objc.ID, objc.ID] {
+	return x.inner.DictionaryRepresentation()
+}
+
+// Subsystem calls the underlying Subsystem.
+func (x *SignpostRecord) Subsystem() string {
+	_r := x.inner.Subsystem()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Category calls the underlying Category.
+func (x *SignpostRecord) Category() string {
+	_r := x.inner.Category()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Name calls the underlying Name.
+func (x *SignpostRecord) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// BeginTimeStamp calls the underlying BeginTimeStamp.
+func (x *SignpostRecord) BeginTimeStamp() *foundation.NSDate {
+	return x.inner.BeginTimeStamp()
+}
+
+// EndTimeStamp calls the underlying EndTimeStamp.
+func (x *SignpostRecord) EndTimeStamp() *foundation.NSDate {
+	return x.inner.EndTimeStamp()
+}
+
+// Duration calls the underlying Duration.
+func (x *SignpostRecord) Duration() *foundation.NSMeasurement[*foundation.NSUnitDuration] {
+	return x.inner.Duration()
+}
+
+// IsInterval calls the underlying IsInterval.
+func (x *SignpostRecord) IsInterval() bool {
+	return x.inner.IsInterval()
+}
+
+// SignpostRecordable is the interface implemented by [SignpostRecord], for mocking and DI.
+type SignpostRecordable interface {
+	Unwrap() *raw.MXSignpostRecord
+	JSONRepresentation() *foundation.NSData
+	DictionaryRepresentation() *foundation.NSDictionary[objc.ID, objc.ID]
+	Subsystem() string
+	Category() string
+	Name() string
+	BeginTimeStamp() *foundation.NSDate
+	EndTimeStamp() *foundation.NSDate
+	Duration() *foundation.NSMeasurement[*foundation.NSUnitDuration]
+	IsInterval() bool
+}
+
+var _ SignpostRecordable = (*SignpostRecord)(nil)
 

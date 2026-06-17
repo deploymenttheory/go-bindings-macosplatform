@@ -5,8 +5,10 @@
 package videotoolbox
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/videotoolbox"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // FrameProcessor wraps [raw.VTFrameProcessor] with a fluent Go API.
@@ -22,4 +24,47 @@ func NewFrameProcessor() *FrameProcessor {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VTFrameProcessor")), objc.RegisterName("new"))
 	return &FrameProcessor{inner: raw.VTFrameProcessorFromID(_id)}
 }
+
+// StartSessionWithConfigurationError calls the underlying StartSessionWithConfigurationError.
+func (x *FrameProcessor) StartSessionWithConfigurationError(configuration raw.VTFrameProcessorConfiguration) (bool, error) {
+	return x.inner.StartSessionWithConfigurationError(configuration)
+}
+
+// ProcessWithParametersError calls the underlying ProcessWithParametersError.
+func (x *FrameProcessor) ProcessWithParametersError(parameters raw.VTFrameProcessorParameters) (bool, error) {
+	return x.inner.ProcessWithParametersError(parameters)
+}
+
+// ProcessWithParametersCompletionHandler calls the underlying ProcessWithParametersCompletionHandler.
+func (x *FrameProcessor) ProcessWithParametersCompletionHandler(parameters raw.VTFrameProcessorParameters, completionHandler func(objc.ID, unsafe.Pointer)) {
+	x.inner.ProcessWithParametersCompletionHandler(parameters, completionHandler)
+}
+
+// ProcessWithParametersFrameOutputHandler calls the underlying ProcessWithParametersFrameOutputHandler.
+func (x *FrameProcessor) ProcessWithParametersFrameOutputHandler(parameters raw.VTFrameProcessorParameters, frameOutputHandler objc.Block) {
+	x.inner.ProcessWithParametersFrameOutputHandler(parameters, frameOutputHandler)
+}
+
+// ProcessWithCommandBufferParameters calls the underlying ProcessWithCommandBufferParameters.
+func (x *FrameProcessor) ProcessWithCommandBufferParameters(commandBuffer metal.MTLCommandBuffer, parameters raw.VTFrameProcessorParameters) {
+	x.inner.ProcessWithCommandBufferParameters(commandBuffer, parameters)
+}
+
+// EndSession calls the underlying EndSession.
+func (x *FrameProcessor) EndSession() {
+	x.inner.EndSession()
+}
+
+// FrameProcessorable is the interface implemented by [FrameProcessor], for mocking and DI.
+type FrameProcessorable interface {
+	Unwrap() *raw.VTFrameProcessor
+	StartSessionWithConfigurationError(configuration raw.VTFrameProcessorConfiguration) (bool, error)
+	ProcessWithParametersError(parameters raw.VTFrameProcessorParameters) (bool, error)
+	ProcessWithParametersCompletionHandler(parameters raw.VTFrameProcessorParameters, completionHandler func(objc.ID, unsafe.Pointer))
+	ProcessWithParametersFrameOutputHandler(parameters raw.VTFrameProcessorParameters, frameOutputHandler objc.Block)
+	ProcessWithCommandBufferParameters(commandBuffer metal.MTLCommandBuffer, parameters raw.VTFrameProcessorParameters)
+	EndSession()
+}
+
+var _ FrameProcessorable = (*FrameProcessor)(nil)
 

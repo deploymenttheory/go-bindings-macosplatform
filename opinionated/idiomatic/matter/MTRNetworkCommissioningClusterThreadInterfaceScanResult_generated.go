@@ -25,3 +25,10 @@ func NewMTRNetworkCommissioningClusterThreadInterfaceScanResult() *MTRNetworkCom
 
 func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResult) asMTRNetworkCommissioningClusterThreadInterfaceScanResultStruct() *raw.MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct { return &x.inner.MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct }
 
+// MTRNetworkCommissioningClusterThreadInterfaceScanResultable is the interface implemented by [MTRNetworkCommissioningClusterThreadInterfaceScanResult], for mocking and DI.
+type MTRNetworkCommissioningClusterThreadInterfaceScanResultable interface {
+	Unwrap() *raw.MTRNetworkCommissioningClusterThreadInterfaceScanResult
+}
+
+var _ MTRNetworkCommissioningClusterThreadInterfaceScanResultable = (*MTRNetworkCommissioningClusterThreadInterfaceScanResult)(nil)
+

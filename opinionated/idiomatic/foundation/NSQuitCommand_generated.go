@@ -23,7 +23,20 @@ func NewQuitCommand() *QuitCommand {
 	return &QuitCommand{inner: raw.NSQuitCommandFromID(_id)}
 }
 
+// SaveOptions calls the underlying SaveOptions.
+func (x *QuitCommand) SaveOptions() raw.NSSaveOptions {
+	return x.inner.SaveOptions()
+}
+
 func (x *QuitCommand) asScriptCommand() *raw.NSScriptCommand { return &x.inner.NSScriptCommand }
 
 func (x *QuitCommand) asObject() *raw.NSObject { return &x.inner.NSScriptCommand.NSObject }
+
+// QuitCommandable is the interface implemented by [QuitCommand], for mocking and DI.
+type QuitCommandable interface {
+	Unwrap() *raw.NSQuitCommand
+	SaveOptions() raw.NSSaveOptions
+}
+
+var _ QuitCommandable = (*QuitCommand)(nil)
 

@@ -24,3 +24,46 @@ func NewOpticalFlowParametersWithSourceFrameNextFrameSubmissionModeDestinationOp
 	return &OpticalFlowParameters{inner: raw.VTOpticalFlowParametersFromID(_id)}
 }
 
+// SourceFrame calls the underlying SourceFrame.
+func (x *OpticalFlowParameters) SourceFrame() *FrameProcessorFrame {
+	_r := x.inner.SourceFrame()
+	if _r == nil {
+		return nil
+	}
+	return &FrameProcessorFrame{inner: _r}
+}
+
+// NextFrame calls the underlying NextFrame.
+func (x *OpticalFlowParameters) NextFrame() *FrameProcessorFrame {
+	_r := x.inner.NextFrame()
+	if _r == nil {
+		return nil
+	}
+	return &FrameProcessorFrame{inner: _r}
+}
+
+// SubmissionMode calls the underlying SubmissionMode.
+func (x *OpticalFlowParameters) SubmissionMode() raw.VTOpticalFlowParametersSubmissionMode {
+	return x.inner.SubmissionMode()
+}
+
+// DestinationOpticalFlow calls the underlying DestinationOpticalFlow.
+func (x *OpticalFlowParameters) DestinationOpticalFlow() *FrameProcessorOpticalFlow {
+	_r := x.inner.DestinationOpticalFlow()
+	if _r == nil {
+		return nil
+	}
+	return &FrameProcessorOpticalFlow{inner: _r}
+}
+
+// OpticalFlowParametersable is the interface implemented by [OpticalFlowParameters], for mocking and DI.
+type OpticalFlowParametersable interface {
+	Unwrap() *raw.VTOpticalFlowParameters
+	SourceFrame() *FrameProcessorFrame
+	NextFrame() *FrameProcessorFrame
+	SubmissionMode() raw.VTOpticalFlowParametersSubmissionMode
+	DestinationOpticalFlow() *FrameProcessorOpticalFlow
+}
+
+var _ OpticalFlowParametersable = (*OpticalFlowParameters)(nil)
+

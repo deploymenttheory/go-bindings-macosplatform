@@ -30,3 +30,39 @@ func (x *RemoteLayerClient) WithLayer(layer LayerProvider) *RemoteLayerClient {
 	return x
 }
 
+// Invalidate calls the underlying Invalidate.
+func (x *RemoteLayerClient) Invalidate() {
+	x.inner.Invalidate()
+}
+
+// ClientId calls the underlying ClientId.
+func (x *RemoteLayerClient) ClientId() uint32 {
+	return x.inner.ClientId()
+}
+
+// Layer calls the underlying Layer.
+func (x *RemoteLayerClient) Layer() *Layer {
+	_r := x.inner.Layer()
+	if _r == nil {
+		return nil
+	}
+	return &Layer{inner: _r}
+}
+
+// SetLayer calls the underlying SetLayer.
+func (x *RemoteLayerClient) SetLayer(layer *raw.CALayer) {
+	x.inner.SetLayer(layer)
+}
+
+// RemoteLayerClientable is the interface implemented by [RemoteLayerClient], for mocking and DI.
+type RemoteLayerClientable interface {
+	Unwrap() *raw.CARemoteLayerClient
+	WithLayer(layer LayerProvider) *RemoteLayerClient
+	Invalidate()
+	ClientId() uint32
+	Layer() *Layer
+	SetLayer(layer *raw.CALayer)
+}
+
+var _ RemoteLayerClientable = (*RemoteLayerClient)(nil)
+

@@ -23,3 +23,36 @@ func NewTintConfiguration() *TintConfiguration {
 	return &TintConfiguration{inner: raw.NSTintConfigurationFromID(_id)}
 }
 
+// BaseTintColor calls the underlying BaseTintColor.
+func (x *TintConfiguration) BaseTintColor() *Color {
+	_r := x.inner.BaseTintColor()
+	if _r == nil {
+		return nil
+	}
+	return &Color{inner: _r}
+}
+
+// EquivalentContentTintColor calls the underlying EquivalentContentTintColor.
+func (x *TintConfiguration) EquivalentContentTintColor() *Color {
+	_r := x.inner.EquivalentContentTintColor()
+	if _r == nil {
+		return nil
+	}
+	return &Color{inner: _r}
+}
+
+// AdaptsToUserAccentColor calls the underlying AdaptsToUserAccentColor.
+func (x *TintConfiguration) AdaptsToUserAccentColor() bool {
+	return x.inner.AdaptsToUserAccentColor()
+}
+
+// TintConfigurationable is the interface implemented by [TintConfiguration], for mocking and DI.
+type TintConfigurationable interface {
+	Unwrap() *raw.NSTintConfiguration
+	BaseTintColor() *Color
+	EquivalentContentTintColor() *Color
+	AdaptsToUserAccentColor() bool
+}
+
+var _ TintConfigurationable = (*TintConfiguration)(nil)
+

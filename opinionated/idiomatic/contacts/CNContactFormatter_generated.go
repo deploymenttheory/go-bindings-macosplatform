@@ -6,6 +6,8 @@ package contacts
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/contacts"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -28,4 +30,40 @@ func (x *ContactFormatter) WithStyle(style raw.CNContactFormatterStyle) *Contact
 	x.inner.SetStyle(style)
 	return x
 }
+
+// StringFromContact calls the underlying StringFromContact.
+func (x *ContactFormatter) StringFromContact(contact *raw.CNContact) string {
+	_r := x.inner.StringFromContact(contact)
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// AttributedStringFromContactDefaultAttributes calls the underlying AttributedStringFromContactDefaultAttributes.
+func (x *ContactFormatter) AttributedStringFromContactDefaultAttributes(contact *raw.CNContact, attributes *foundation.NSDictionary[objc.ID, objc.ID]) *foundation.NSAttributedString {
+	return x.inner.AttributedStringFromContactDefaultAttributes(contact, attributes)
+}
+
+// Style calls the underlying Style.
+func (x *ContactFormatter) Style() raw.CNContactFormatterStyle {
+	return x.inner.Style()
+}
+
+// SetStyle calls the underlying SetStyle.
+func (x *ContactFormatter) SetStyle(style raw.CNContactFormatterStyle) {
+	x.inner.SetStyle(style)
+}
+
+// ContactFormatterable is the interface implemented by [ContactFormatter], for mocking and DI.
+type ContactFormatterable interface {
+	Unwrap() *raw.CNContactFormatter
+	WithStyle(style raw.CNContactFormatterStyle) *ContactFormatter
+	StringFromContact(contact *raw.CNContact) string
+	AttributedStringFromContactDefaultAttributes(contact *raw.CNContact, attributes *foundation.NSDictionary[objc.ID, objc.ID]) *foundation.NSAttributedString
+	Style() raw.CNContactFormatterStyle
+	SetStyle(style raw.CNContactFormatterStyle)
+}
+
+var _ ContactFormatterable = (*ContactFormatter)(nil)
 

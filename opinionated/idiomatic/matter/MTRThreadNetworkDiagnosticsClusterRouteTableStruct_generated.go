@@ -84,5 +84,142 @@ func (x *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) WithLinkEstablished
 	return x
 }
 
+// ExtAddress calls the underlying ExtAddress.
+func (x *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) ExtAddress() *foundation.NSNumber {
+	return x.inner.ExtAddress()
+}
+
+// SetExtAddress calls the underlying SetExtAddress.
+func (x *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) SetExtAddress(extAddress *foundation.NSNumber) {
+	x.inner.SetExtAddress(extAddress)
+}
+
+// Rloc16 calls the underlying Rloc16.
+func (x *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) Rloc16() *foundation.NSNumber {
+	return x.inner.Rloc16()
+}
+
+// SetRloc16 calls the underlying SetRloc16.
+func (x *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) SetRloc16(rloc16 *foundation.NSNumber) {
+	x.inner.SetRloc16(rloc16)
+}
+
+// RouterId calls the underlying RouterId.
+func (x *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) RouterId() *foundation.NSNumber {
+	return x.inner.RouterId()
+}
+
+// SetRouterId calls the underlying SetRouterId.
+func (x *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) SetRouterId(routerId *foundation.NSNumber) {
+	x.inner.SetRouterId(routerId)
+}
+
+// NextHop calls the underlying NextHop.
+func (x *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) NextHop() *foundation.NSNumber {
+	return x.inner.NextHop()
+}
+
+// SetNextHop calls the underlying SetNextHop.
+func (x *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) SetNextHop(nextHop *foundation.NSNumber) {
+	x.inner.SetNextHop(nextHop)
+}
+
+// PathCost calls the underlying PathCost.
+func (x *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) PathCost() *foundation.NSNumber {
+	return x.inner.PathCost()
+}
+
+// SetPathCost calls the underlying SetPathCost.
+func (x *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) SetPathCost(pathCost *foundation.NSNumber) {
+	x.inner.SetPathCost(pathCost)
+}
+
+// LqiIn calls the underlying LqiIn.
+func (x *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) LqiIn() *foundation.NSNumber {
+	return x.inner.LqiIn()
+}
+
+// SetLqiIn calls the underlying SetLqiIn.
+func (x *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) SetLqiIn(lqiIn *foundation.NSNumber) {
+	x.inner.SetLqiIn(lqiIn)
+}
+
+// LqiOut calls the underlying LqiOut.
+func (x *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) LqiOut() *foundation.NSNumber {
+	return x.inner.LqiOut()
+}
+
+// SetLqiOut calls the underlying SetLqiOut.
+func (x *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) SetLqiOut(lqiOut *foundation.NSNumber) {
+	x.inner.SetLqiOut(lqiOut)
+}
+
+// Age calls the underlying Age.
+func (x *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) Age() *foundation.NSNumber {
+	return x.inner.Age()
+}
+
+// SetAge calls the underlying SetAge.
+func (x *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) SetAge(age *foundation.NSNumber) {
+	x.inner.SetAge(age)
+}
+
+// Allocated calls the underlying Allocated.
+func (x *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) Allocated() *foundation.NSNumber {
+	return x.inner.Allocated()
+}
+
+// SetAllocated calls the underlying SetAllocated.
+func (x *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) SetAllocated(allocated *foundation.NSNumber) {
+	x.inner.SetAllocated(allocated)
+}
+
+// LinkEstablished calls the underlying LinkEstablished.
+func (x *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) LinkEstablished() *foundation.NSNumber {
+	return x.inner.LinkEstablished()
+}
+
+// SetLinkEstablished calls the underlying SetLinkEstablished.
+func (x *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) SetLinkEstablished(linkEstablished *foundation.NSNumber) {
+	x.inner.SetLinkEstablished(linkEstablished)
+}
+
 func (x *MTRThreadNetworkDiagnosticsClusterRouteTableStruct) asMTRThreadNetworkDiagnosticsClusterRouteTableStruct() *raw.MTRThreadNetworkDiagnosticsClusterRouteTableStruct { return x.inner }
+
+// MTRThreadNetworkDiagnosticsClusterRouteTableStructable is the interface implemented by [MTRThreadNetworkDiagnosticsClusterRouteTableStruct], for mocking and DI.
+type MTRThreadNetworkDiagnosticsClusterRouteTableStructable interface {
+	Unwrap() *raw.MTRThreadNetworkDiagnosticsClusterRouteTableStruct
+	WithExtAddress(extAddress *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterRouteTableStruct
+	WithRloc16(rloc16 *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterRouteTableStruct
+	WithRouterId(routerId *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterRouteTableStruct
+	WithNextHop(nextHop *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterRouteTableStruct
+	WithPathCost(pathCost *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterRouteTableStruct
+	WithLqiIn(lqiIn *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterRouteTableStruct
+	WithLqiOut(lqiOut *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterRouteTableStruct
+	WithAge(age *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterRouteTableStruct
+	WithAllocated(allocated *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterRouteTableStruct
+	WithLinkEstablished(linkEstablished *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterRouteTableStruct
+	ExtAddress() *foundation.NSNumber
+	SetExtAddress(extAddress *foundation.NSNumber)
+	Rloc16() *foundation.NSNumber
+	SetRloc16(rloc16 *foundation.NSNumber)
+	RouterId() *foundation.NSNumber
+	SetRouterId(routerId *foundation.NSNumber)
+	NextHop() *foundation.NSNumber
+	SetNextHop(nextHop *foundation.NSNumber)
+	PathCost() *foundation.NSNumber
+	SetPathCost(pathCost *foundation.NSNumber)
+	LqiIn() *foundation.NSNumber
+	SetLqiIn(lqiIn *foundation.NSNumber)
+	LqiOut() *foundation.NSNumber
+	SetLqiOut(lqiOut *foundation.NSNumber)
+	Age() *foundation.NSNumber
+	SetAge(age *foundation.NSNumber)
+	Allocated() *foundation.NSNumber
+	SetAllocated(allocated *foundation.NSNumber)
+	LinkEstablished() *foundation.NSNumber
+	SetLinkEstablished(linkEstablished *foundation.NSNumber)
+}
+
+var _ MTRThreadNetworkDiagnosticsClusterRouteTableStructable = (*MTRThreadNetworkDiagnosticsClusterRouteTableStruct)(nil)
 

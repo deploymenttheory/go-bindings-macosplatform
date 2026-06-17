@@ -7,6 +7,7 @@ package authenticationservices
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -30,7 +31,31 @@ func (x *AuthorizationAppleIDRequest) WithUser(user string) *AuthorizationAppleI
 	return x
 }
 
+// User calls the underlying User.
+func (x *AuthorizationAppleIDRequest) User() string {
+	_r := x.inner.User()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetUser calls the underlying SetUser.
+func (x *AuthorizationAppleIDRequest) SetUser(user string) {
+	x.inner.SetUser(foundation.NSStringStringWithUTF8String(user))
+}
+
 func (x *AuthorizationAppleIDRequest) asAuthorizationOpenIDRequest() *raw.ASAuthorizationOpenIDRequest { return &x.inner.ASAuthorizationOpenIDRequest }
 
 func (x *AuthorizationAppleIDRequest) asAuthorizationRequest() *raw.ASAuthorizationRequest { return &x.inner.ASAuthorizationOpenIDRequest.ASAuthorizationRequest }
+
+// AuthorizationAppleIDRequestable is the interface implemented by [AuthorizationAppleIDRequest], for mocking and DI.
+type AuthorizationAppleIDRequestable interface {
+	Unwrap() *raw.ASAuthorizationAppleIDRequest
+	WithUser(user string) *AuthorizationAppleIDRequest
+	User() string
+	SetUser(user string)
+}
+
+var _ AuthorizationAppleIDRequestable = (*AuthorizationAppleIDRequest)(nil)
 

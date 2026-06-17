@@ -47,9 +47,68 @@ func (x *AudioUnitDelay) WithWetDryMix(wetDryMix float32) *AudioUnitDelay {
 	return x
 }
 
+// DelayTime calls the underlying DelayTime.
+func (x *AudioUnitDelay) DelayTime() float64 {
+	return x.inner.DelayTime()
+}
+
+// SetDelayTime calls the underlying SetDelayTime.
+func (x *AudioUnitDelay) SetDelayTime(delayTime float64) {
+	x.inner.SetDelayTime(delayTime)
+}
+
+// Feedback calls the underlying Feedback.
+func (x *AudioUnitDelay) Feedback() float32 {
+	return x.inner.Feedback()
+}
+
+// SetFeedback calls the underlying SetFeedback.
+func (x *AudioUnitDelay) SetFeedback(feedback float32) {
+	x.inner.SetFeedback(feedback)
+}
+
+// LowPassCutoff calls the underlying LowPassCutoff.
+func (x *AudioUnitDelay) LowPassCutoff() float32 {
+	return x.inner.LowPassCutoff()
+}
+
+// SetLowPassCutoff calls the underlying SetLowPassCutoff.
+func (x *AudioUnitDelay) SetLowPassCutoff(lowPassCutoff float32) {
+	x.inner.SetLowPassCutoff(lowPassCutoff)
+}
+
+// WetDryMix calls the underlying WetDryMix.
+func (x *AudioUnitDelay) WetDryMix() float32 {
+	return x.inner.WetDryMix()
+}
+
+// SetWetDryMix calls the underlying SetWetDryMix.
+func (x *AudioUnitDelay) SetWetDryMix(wetDryMix float32) {
+	x.inner.SetWetDryMix(wetDryMix)
+}
+
 func (x *AudioUnitDelay) asAudioUnitEffect() *raw.AVAudioUnitEffect { return &x.inner.AVAudioUnitEffect }
 
 func (x *AudioUnitDelay) asAudioUnit() *raw.AVAudioUnit { return &x.inner.AVAudioUnitEffect.AVAudioUnit }
 
 func (x *AudioUnitDelay) asAudioNode() *raw.AVAudioNode { return &x.inner.AVAudioUnitEffect.AVAudioUnit.AVAudioNode }
+
+// AudioUnitDelayable is the interface implemented by [AudioUnitDelay], for mocking and DI.
+type AudioUnitDelayable interface {
+	Unwrap() *raw.AVAudioUnitDelay
+	WithDelayTime(delayTime float64) *AudioUnitDelay
+	WithFeedback(feedback float32) *AudioUnitDelay
+	WithLowPassCutoff(lowPassCutoff float32) *AudioUnitDelay
+	WithWetDryMix(wetDryMix float32) *AudioUnitDelay
+	DelayTime() float64
+	SetDelayTime(delayTime float64)
+	Feedback() float32
+	SetFeedback(feedback float32)
+	LowPassCutoff() float32
+	SetLowPassCutoff(lowPassCutoff float32)
+	WetDryMix() float32
+	SetWetDryMix(wetDryMix float32)
+}
+
+var _ AudioUnitDelayable = (*AudioUnitDelay)(nil)
 

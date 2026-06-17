@@ -43,16 +43,89 @@ func (x *Workflow) WithInput(input objc.ID) *Workflow {
 	return x
 }
 
+// WriteToURLError calls the underlying WriteToURLError.
+func (x *Workflow) WriteToURLError(fileURL string) (bool, error) {
+	return x.inner.WriteToURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)))
+}
+
+// SetValueForVariableWithName calls the underlying SetValueForVariableWithName.
+func (x *Workflow) SetValueForVariableWithName(value objc.ID, variableName string) bool {
+	return x.inner.SetValueForVariableWithName(value, foundation.NSStringStringWithUTF8String(variableName))
+}
+
+// ValueForVariableWithName calls the underlying ValueForVariableWithName.
+func (x *Workflow) ValueForVariableWithName(variableName string) objc.ID {
+	return x.inner.ValueForVariableWithName(foundation.NSStringStringWithUTF8String(variableName))
+}
+
+// AddAction calls the underlying AddAction.
+func (x *Workflow) AddAction(action *raw.AMAction) {
+	x.inner.AddAction(action)
+}
+
+// RemoveAction calls the underlying RemoveAction.
+func (x *Workflow) RemoveAction(action *raw.AMAction) {
+	x.inner.RemoveAction(action)
+}
+
+// InsertActionAtIndex calls the underlying InsertActionAtIndex.
+func (x *Workflow) InsertActionAtIndex(action *raw.AMAction, index uint) {
+	x.inner.InsertActionAtIndex(action, index)
+}
+
+// MoveActionAtIndexToIndex calls the underlying MoveActionAtIndexToIndex.
+func (x *Workflow) MoveActionAtIndexToIndex(startIndex uint, endIndex uint) {
+	x.inner.MoveActionAtIndexToIndex(startIndex, endIndex)
+}
+
+// FileURL calls the underlying FileURL.
+func (x *Workflow) FileURL() *foundation.NSURL {
+	return x.inner.FileURL()
+}
+
 // Actions returns the collection as a Go slice.
 func (x *Workflow) Actions() []*raw.AMAction {
 	arr := x.inner.Actions()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AMAction, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AMAction {
+		return raw.AMActionFromID(purego.Retain(_id))
+	})
 }
+
+// Input calls the underlying Input.
+func (x *Workflow) Input() objc.ID {
+	return x.inner.Input()
+}
+
+// SetInput calls the underlying SetInput.
+func (x *Workflow) SetInput(input objc.ID) {
+	x.inner.SetInput(input)
+}
+
+// Output calls the underlying Output.
+func (x *Workflow) Output() unsafe.Pointer {
+	return x.inner.Output()
+}
+
+// Workflowable is the interface implemented by [Workflow], for mocking and DI.
+type Workflowable interface {
+	Unwrap() *raw.AMWorkflow
+	WithInput(input objc.ID) *Workflow
+	WriteToURLError(fileURL string) (bool, error)
+	SetValueForVariableWithName(value objc.ID, variableName string) bool
+	ValueForVariableWithName(variableName string) objc.ID
+	AddAction(action *raw.AMAction)
+	RemoveAction(action *raw.AMAction)
+	InsertActionAtIndex(action *raw.AMAction, index uint)
+	MoveActionAtIndexToIndex(startIndex uint, endIndex uint)
+	FileURL() *foundation.NSURL
+	Actions() []*raw.AMAction
+	Input() objc.ID
+	SetInput(input objc.ID)
+	Output() unsafe.Pointer
+}
+
+var _ Workflowable = (*Workflow)(nil)
 

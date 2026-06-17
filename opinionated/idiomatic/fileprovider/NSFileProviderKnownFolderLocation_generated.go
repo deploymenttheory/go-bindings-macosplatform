@@ -32,3 +32,10 @@ func NewFileProviderKnownFolderLocationWithExistingItemIdentifier(existingItemId
 	return &FileProviderKnownFolderLocation{inner: raw.NSFileProviderKnownFolderLocationFromID(_id)}
 }
 
+// FileProviderKnownFolderLocationable is the interface implemented by [FileProviderKnownFolderLocation], for mocking and DI.
+type FileProviderKnownFolderLocationable interface {
+	Unwrap() *raw.NSFileProviderKnownFolderLocation
+}
+
+var _ FileProviderKnownFolderLocationable = (*FileProviderKnownFolderLocation)(nil)
+

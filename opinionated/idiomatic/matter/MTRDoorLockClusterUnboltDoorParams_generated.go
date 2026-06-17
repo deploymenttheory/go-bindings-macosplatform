@@ -42,3 +42,49 @@ func (x *MTRDoorLockClusterUnboltDoorParams) WithServerSideProcessingTimeout(ser
 	return x
 }
 
+// PinCode calls the underlying PinCode.
+func (x *MTRDoorLockClusterUnboltDoorParams) PinCode() *foundation.NSData {
+	return x.inner.PinCode()
+}
+
+// SetPinCode calls the underlying SetPinCode.
+func (x *MTRDoorLockClusterUnboltDoorParams) SetPinCode(pinCode *foundation.NSData) {
+	x.inner.SetPinCode(pinCode)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRDoorLockClusterUnboltDoorParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRDoorLockClusterUnboltDoorParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRDoorLockClusterUnboltDoorParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRDoorLockClusterUnboltDoorParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRDoorLockClusterUnboltDoorParamsable is the interface implemented by [MTRDoorLockClusterUnboltDoorParams], for mocking and DI.
+type MTRDoorLockClusterUnboltDoorParamsable interface {
+	Unwrap() *raw.MTRDoorLockClusterUnboltDoorParams
+	WithPinCode(pinCode *foundation.NSData) *MTRDoorLockClusterUnboltDoorParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRDoorLockClusterUnboltDoorParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRDoorLockClusterUnboltDoorParams
+	PinCode() *foundation.NSData
+	SetPinCode(pinCode *foundation.NSData)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRDoorLockClusterUnboltDoorParamsable = (*MTRDoorLockClusterUnboltDoorParams)(nil)
+

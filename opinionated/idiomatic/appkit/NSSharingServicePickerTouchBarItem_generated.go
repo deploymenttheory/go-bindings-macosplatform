@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -48,5 +49,72 @@ func (x *SharingServicePickerTouchBarItem) WithButtonImage(buttonImage *raw.NSIm
 	return x
 }
 
+// Delegate calls the underlying Delegate.
+func (x *SharingServicePickerTouchBarItem) Delegate() raw.NSSharingServicePickerTouchBarItemDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *SharingServicePickerTouchBarItem) SetDelegate(delegate raw.NSSharingServicePickerTouchBarItemDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// IsEnabled calls the underlying IsEnabled.
+func (x *SharingServicePickerTouchBarItem) IsEnabled() bool {
+	return x.inner.IsEnabled()
+}
+
+// SetEnabled calls the underlying SetEnabled.
+func (x *SharingServicePickerTouchBarItem) SetEnabled(enabled bool) {
+	x.inner.SetEnabled(enabled)
+}
+
+// ButtonTitle calls the underlying ButtonTitle.
+func (x *SharingServicePickerTouchBarItem) ButtonTitle() string {
+	_r := x.inner.ButtonTitle()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetButtonTitle calls the underlying SetButtonTitle.
+func (x *SharingServicePickerTouchBarItem) SetButtonTitle(buttonTitle string) {
+	x.inner.SetButtonTitle(foundation.NSStringStringWithUTF8String(buttonTitle))
+}
+
+// ButtonImage calls the underlying ButtonImage.
+func (x *SharingServicePickerTouchBarItem) ButtonImage() *Image {
+	_r := x.inner.ButtonImage()
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// SetButtonImage calls the underlying SetButtonImage.
+func (x *SharingServicePickerTouchBarItem) SetButtonImage(buttonImage *raw.NSImage) {
+	x.inner.SetButtonImage(buttonImage)
+}
+
 func (x *SharingServicePickerTouchBarItem) asTouchBarItem() *raw.NSTouchBarItem { return &x.inner.NSTouchBarItem }
+
+// SharingServicePickerTouchBarItemable is the interface implemented by [SharingServicePickerTouchBarItem], for mocking and DI.
+type SharingServicePickerTouchBarItemable interface {
+	Unwrap() *raw.NSSharingServicePickerTouchBarItem
+	WithDelegate(delegate raw.NSSharingServicePickerTouchBarItemDelegate) *SharingServicePickerTouchBarItem
+	WithEnabled(enabled bool) *SharingServicePickerTouchBarItem
+	WithButtonTitle(buttonTitle string) *SharingServicePickerTouchBarItem
+	WithButtonImage(buttonImage *raw.NSImage) *SharingServicePickerTouchBarItem
+	Delegate() raw.NSSharingServicePickerTouchBarItemDelegate
+	SetDelegate(delegate raw.NSSharingServicePickerTouchBarItemDelegate)
+	IsEnabled() bool
+	SetEnabled(enabled bool)
+	ButtonTitle() string
+	SetButtonTitle(buttonTitle string)
+	ButtonImage() *Image
+	SetButtonImage(buttonImage *raw.NSImage)
+}
+
+var _ SharingServicePickerTouchBarItemable = (*SharingServicePickerTouchBarItem)(nil)
 

@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -41,4 +42,54 @@ func (x *MTRChannelClusterChangeChannelParams) WithServerSideProcessingTimeout(s
 	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
 	return x
 }
+
+// Match calls the underlying Match.
+func (x *MTRChannelClusterChangeChannelParams) Match() string {
+	_r := x.inner.Match()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetMatch calls the underlying SetMatch.
+func (x *MTRChannelClusterChangeChannelParams) SetMatch(match string) {
+	x.inner.SetMatch(foundation.NSStringStringWithUTF8String(match))
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRChannelClusterChangeChannelParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRChannelClusterChangeChannelParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRChannelClusterChangeChannelParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRChannelClusterChangeChannelParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRChannelClusterChangeChannelParamsable is the interface implemented by [MTRChannelClusterChangeChannelParams], for mocking and DI.
+type MTRChannelClusterChangeChannelParamsable interface {
+	Unwrap() *raw.MTRChannelClusterChangeChannelParams
+	WithMatch(match string) *MTRChannelClusterChangeChannelParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRChannelClusterChangeChannelParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRChannelClusterChangeChannelParams
+	Match() string
+	SetMatch(match string)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRChannelClusterChangeChannelParamsable = (*MTRChannelClusterChangeChannelParams)(nil)
 

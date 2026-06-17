@@ -23,5 +23,24 @@ func NewChangeShuffleModeCommandEvent() *ChangeShuffleModeCommandEvent {
 	return &ChangeShuffleModeCommandEvent{inner: raw.MPChangeShuffleModeCommandEventFromID(_id)}
 }
 
+// ShuffleType calls the underlying ShuffleType.
+func (x *ChangeShuffleModeCommandEvent) ShuffleType() raw.MPShuffleType {
+	return x.inner.ShuffleType()
+}
+
+// PreservesShuffleMode calls the underlying PreservesShuffleMode.
+func (x *ChangeShuffleModeCommandEvent) PreservesShuffleMode() bool {
+	return x.inner.PreservesShuffleMode()
+}
+
 func (x *ChangeShuffleModeCommandEvent) asRemoteCommandEvent() *raw.MPRemoteCommandEvent { return &x.inner.MPRemoteCommandEvent }
+
+// ChangeShuffleModeCommandEventable is the interface implemented by [ChangeShuffleModeCommandEvent], for mocking and DI.
+type ChangeShuffleModeCommandEventable interface {
+	Unwrap() *raw.MPChangeShuffleModeCommandEvent
+	ShuffleType() raw.MPShuffleType
+	PreservesShuffleMode() bool
+}
+
+var _ ChangeShuffleModeCommandEventable = (*ChangeShuffleModeCommandEvent)(nil)
 

@@ -6,6 +6,7 @@ package vision
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -29,11 +30,9 @@ func (x *TextObservation) CharacterBoxes() []*raw.VNRectangleObservation {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.VNRectangleObservation, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.VNRectangleObservation {
+		return raw.VNRectangleObservationFromID(purego.Retain(_id))
+	})
 }
 
 func (x *TextObservation) asRectangleObservation() *raw.VNRectangleObservation { return &x.inner.VNRectangleObservation }
@@ -41,4 +40,12 @@ func (x *TextObservation) asRectangleObservation() *raw.VNRectangleObservation {
 func (x *TextObservation) asDetectedObjectObservation() *raw.VNDetectedObjectObservation { return &x.inner.VNRectangleObservation.VNDetectedObjectObservation }
 
 func (x *TextObservation) asObservation() *raw.VNObservation { return &x.inner.VNRectangleObservation.VNDetectedObjectObservation.VNObservation }
+
+// TextObservationable is the interface implemented by [TextObservation], for mocking and DI.
+type TextObservationable interface {
+	Unwrap() *raw.VNTextObservation
+	CharacterBoxes() []*raw.VNRectangleObservation
+}
+
+var _ TextObservationable = (*TextObservation)(nil)
 

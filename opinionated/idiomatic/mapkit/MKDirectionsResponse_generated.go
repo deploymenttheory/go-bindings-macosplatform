@@ -6,6 +6,7 @@ package mapkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,16 +24,42 @@ func NewDirectionsResponse() *DirectionsResponse {
 	return &DirectionsResponse{inner: raw.MKDirectionsResponseFromID(_id)}
 }
 
+// Source calls the underlying Source.
+func (x *DirectionsResponse) Source() *MapItem {
+	_r := x.inner.Source()
+	if _r == nil {
+		return nil
+	}
+	return &MapItem{inner: _r}
+}
+
+// Destination calls the underlying Destination.
+func (x *DirectionsResponse) Destination() *MapItem {
+	_r := x.inner.Destination()
+	if _r == nil {
+		return nil
+	}
+	return &MapItem{inner: _r}
+}
+
 // Routes returns the collection as a Go slice.
 func (x *DirectionsResponse) Routes() []*raw.MKRoute {
 	arr := x.inner.Routes()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MKRoute, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MKRoute {
+		return raw.MKRouteFromID(purego.Retain(_id))
+	})
 }
+
+// DirectionsResponseable is the interface implemented by [DirectionsResponse], for mocking and DI.
+type DirectionsResponseable interface {
+	Unwrap() *raw.MKDirectionsResponse
+	Source() *MapItem
+	Destination() *MapItem
+	Routes() []*raw.MKRoute
+}
+
+var _ DirectionsResponseable = (*DirectionsResponse)(nil)
 

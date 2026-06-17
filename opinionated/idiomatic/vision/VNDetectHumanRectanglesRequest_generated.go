@@ -29,7 +29,27 @@ func (x *DetectHumanRectanglesRequest) WithUpperBodyOnly(upperBodyOnly bool) *De
 	return x
 }
 
+// UpperBodyOnly calls the underlying UpperBodyOnly.
+func (x *DetectHumanRectanglesRequest) UpperBodyOnly() bool {
+	return x.inner.UpperBodyOnly()
+}
+
+// SetUpperBodyOnly calls the underlying SetUpperBodyOnly.
+func (x *DetectHumanRectanglesRequest) SetUpperBodyOnly(upperBodyOnly bool) {
+	x.inner.SetUpperBodyOnly(upperBodyOnly)
+}
+
 func (x *DetectHumanRectanglesRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNImageBasedRequest }
 
 func (x *DetectHumanRectanglesRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageBasedRequest.VNRequest }
+
+// DetectHumanRectanglesRequestable is the interface implemented by [DetectHumanRectanglesRequest], for mocking and DI.
+type DetectHumanRectanglesRequestable interface {
+	Unwrap() *raw.VNDetectHumanRectanglesRequest
+	WithUpperBodyOnly(upperBodyOnly bool) *DetectHumanRectanglesRequest
+	UpperBodyOnly() bool
+	SetUpperBodyOnly(upperBodyOnly bool)
+}
+
+var _ DetectHumanRectanglesRequestable = (*DetectHumanRectanglesRequest)(nil)
 

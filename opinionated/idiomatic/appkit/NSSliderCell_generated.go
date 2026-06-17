@@ -6,6 +6,7 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -77,7 +78,241 @@ func (x *SliderCell) WithAllowsTickMarkValuesOnly(allowsTickMarkValuesOnly bool)
 	return x
 }
 
+// KnobRectFlipped calls the underlying KnobRectFlipped.
+func (x *SliderCell) KnobRectFlipped(flipped bool) corefoundation.CGRect {
+	return x.inner.KnobRectFlipped(flipped)
+}
+
+// BarRectFlipped calls the underlying BarRectFlipped.
+func (x *SliderCell) BarRectFlipped(flipped bool) corefoundation.CGRect {
+	return x.inner.BarRectFlipped(flipped)
+}
+
+// DrawKnob calls the underlying DrawKnob.
+func (x *SliderCell) DrawKnob(knobRect corefoundation.CGRect) {
+	x.inner.DrawKnob(knobRect)
+}
+
+// DrawKnob2 calls the underlying DrawKnob2.
+func (x *SliderCell) DrawKnob2() {
+	x.inner.DrawKnob2()
+}
+
+// DrawBarInsideFlipped calls the underlying DrawBarInsideFlipped.
+func (x *SliderCell) DrawBarInsideFlipped(rect corefoundation.CGRect, flipped bool) {
+	x.inner.DrawBarInsideFlipped(rect, flipped)
+}
+
+// MinValue calls the underlying MinValue.
+func (x *SliderCell) MinValue() float64 {
+	return x.inner.MinValue()
+}
+
+// SetMinValue calls the underlying SetMinValue.
+func (x *SliderCell) SetMinValue(minValue float64) {
+	x.inner.SetMinValue(minValue)
+}
+
+// MaxValue calls the underlying MaxValue.
+func (x *SliderCell) MaxValue() float64 {
+	return x.inner.MaxValue()
+}
+
+// SetMaxValue calls the underlying SetMaxValue.
+func (x *SliderCell) SetMaxValue(maxValue float64) {
+	x.inner.SetMaxValue(maxValue)
+}
+
+// AltIncrementValue calls the underlying AltIncrementValue.
+func (x *SliderCell) AltIncrementValue() float64 {
+	return x.inner.AltIncrementValue()
+}
+
+// SetAltIncrementValue calls the underlying SetAltIncrementValue.
+func (x *SliderCell) SetAltIncrementValue(altIncrementValue float64) {
+	x.inner.SetAltIncrementValue(altIncrementValue)
+}
+
+// SliderType calls the underlying SliderType.
+func (x *SliderCell) SliderType() raw.NSSliderType {
+	return x.inner.SliderType()
+}
+
+// SetSliderType calls the underlying SetSliderType.
+func (x *SliderCell) SetSliderType(sliderType raw.NSSliderType) {
+	x.inner.SetSliderType(sliderType)
+}
+
+// IsVertical calls the underlying IsVertical.
+func (x *SliderCell) IsVertical() bool {
+	return x.inner.IsVertical()
+}
+
+// SetVertical calls the underlying SetVertical.
+func (x *SliderCell) SetVertical(vertical bool) {
+	x.inner.SetVertical(vertical)
+}
+
+// TrackRect calls the underlying TrackRect.
+func (x *SliderCell) TrackRect() corefoundation.CGRect {
+	return x.inner.TrackRect()
+}
+
+// KnobThickness calls the underlying KnobThickness.
+func (x *SliderCell) KnobThickness() float64 {
+	return x.inner.KnobThickness()
+}
+
+// TickMarkValueAtIndex calls the underlying TickMarkValueAtIndex.
+func (x *SliderCell) TickMarkValueAtIndex(index int) float64 {
+	return x.inner.TickMarkValueAtIndex(index)
+}
+
+// RectOfTickMarkAtIndex calls the underlying RectOfTickMarkAtIndex.
+func (x *SliderCell) RectOfTickMarkAtIndex(index int) corefoundation.CGRect {
+	return x.inner.RectOfTickMarkAtIndex(index)
+}
+
+// IndexOfTickMarkAtPoint calls the underlying IndexOfTickMarkAtPoint.
+func (x *SliderCell) IndexOfTickMarkAtPoint(point corefoundation.CGPoint) int {
+	return x.inner.IndexOfTickMarkAtPoint(point)
+}
+
+// ClosestTickMarkValueToValue calls the underlying ClosestTickMarkValueToValue.
+func (x *SliderCell) ClosestTickMarkValueToValue(value float64) float64 {
+	return x.inner.ClosestTickMarkValueToValue(value)
+}
+
+// DrawTickMarks calls the underlying DrawTickMarks.
+func (x *SliderCell) DrawTickMarks() {
+	x.inner.DrawTickMarks()
+}
+
+// NumberOfTickMarks calls the underlying NumberOfTickMarks.
+func (x *SliderCell) NumberOfTickMarks() int {
+	return x.inner.NumberOfTickMarks()
+}
+
+// SetNumberOfTickMarks calls the underlying SetNumberOfTickMarks.
+func (x *SliderCell) SetNumberOfTickMarks(numberOfTickMarks int) {
+	x.inner.SetNumberOfTickMarks(numberOfTickMarks)
+}
+
+// TickMarkPosition calls the underlying TickMarkPosition.
+func (x *SliderCell) TickMarkPosition() raw.NSTickMarkPosition {
+	return x.inner.TickMarkPosition()
+}
+
+// SetTickMarkPosition calls the underlying SetTickMarkPosition.
+func (x *SliderCell) SetTickMarkPosition(tickMarkPosition raw.NSTickMarkPosition) {
+	x.inner.SetTickMarkPosition(tickMarkPosition)
+}
+
+// AllowsTickMarkValuesOnly calls the underlying AllowsTickMarkValuesOnly.
+func (x *SliderCell) AllowsTickMarkValuesOnly() bool {
+	return x.inner.AllowsTickMarkValuesOnly()
+}
+
+// SetAllowsTickMarkValuesOnly calls the underlying SetAllowsTickMarkValuesOnly.
+func (x *SliderCell) SetAllowsTickMarkValuesOnly(allowsTickMarkValuesOnly bool) {
+	x.inner.SetAllowsTickMarkValuesOnly(allowsTickMarkValuesOnly)
+}
+
+// SetTitleCell calls the underlying SetTitleCell.
+func (x *SliderCell) SetTitleCell(cell *raw.NSCell) {
+	x.inner.SetTitleCell(cell)
+}
+
+// TitleCell calls the underlying TitleCell.
+func (x *SliderCell) TitleCell() objc.ID {
+	return x.inner.TitleCell()
+}
+
+// SetTitleColor calls the underlying SetTitleColor.
+func (x *SliderCell) SetTitleColor(newColor *raw.NSColor) {
+	x.inner.SetTitleColor(newColor)
+}
+
+// TitleColor calls the underlying TitleColor.
+func (x *SliderCell) TitleColor() *Color {
+	_r := x.inner.TitleColor()
+	if _r == nil {
+		return nil
+	}
+	return &Color{inner: _r}
+}
+
+// SetTitleFont calls the underlying SetTitleFont.
+func (x *SliderCell) SetTitleFont(fontObj *raw.NSFont) {
+	x.inner.SetTitleFont(fontObj)
+}
+
+// TitleFont calls the underlying TitleFont.
+func (x *SliderCell) TitleFont() *Font {
+	_r := x.inner.TitleFont()
+	if _r == nil {
+		return nil
+	}
+	return &Font{inner: _r}
+}
+
+// SetKnobThickness calls the underlying SetKnobThickness.
+func (x *SliderCell) SetKnobThickness(thickness float64) {
+	x.inner.SetKnobThickness(thickness)
+}
+
 func (x *SliderCell) asActionCell() *raw.NSActionCell { return &x.inner.NSActionCell }
 
 func (x *SliderCell) asCell() *raw.NSCell { return &x.inner.NSActionCell.NSCell }
+
+// SliderCellable is the interface implemented by [SliderCell], for mocking and DI.
+type SliderCellable interface {
+	Unwrap() *raw.NSSliderCell
+	WithMinValue(minValue float64) *SliderCell
+	WithMaxValue(maxValue float64) *SliderCell
+	WithAltIncrementValue(altIncrementValue float64) *SliderCell
+	WithSliderType(sliderType raw.NSSliderType) *SliderCell
+	WithVertical(vertical bool) *SliderCell
+	WithKnobThickness(knobThickness float64) *SliderCell
+	WithNumberOfTickMarks(numberOfTickMarks int) *SliderCell
+	WithTickMarkPosition(tickMarkPosition raw.NSTickMarkPosition) *SliderCell
+	WithAllowsTickMarkValuesOnly(allowsTickMarkValuesOnly bool) *SliderCell
+	KnobRectFlipped(flipped bool) corefoundation.CGRect
+	BarRectFlipped(flipped bool) corefoundation.CGRect
+	DrawKnob(knobRect corefoundation.CGRect)
+	DrawKnob2()
+	DrawBarInsideFlipped(rect corefoundation.CGRect, flipped bool)
+	MinValue() float64
+	SetMinValue(minValue float64)
+	MaxValue() float64
+	SetMaxValue(maxValue float64)
+	AltIncrementValue() float64
+	SetAltIncrementValue(altIncrementValue float64)
+	SliderType() raw.NSSliderType
+	SetSliderType(sliderType raw.NSSliderType)
+	IsVertical() bool
+	SetVertical(vertical bool)
+	TrackRect() corefoundation.CGRect
+	KnobThickness() float64
+	TickMarkValueAtIndex(index int) float64
+	RectOfTickMarkAtIndex(index int) corefoundation.CGRect
+	IndexOfTickMarkAtPoint(point corefoundation.CGPoint) int
+	ClosestTickMarkValueToValue(value float64) float64
+	DrawTickMarks()
+	NumberOfTickMarks() int
+	SetNumberOfTickMarks(numberOfTickMarks int)
+	TickMarkPosition() raw.NSTickMarkPosition
+	SetTickMarkPosition(tickMarkPosition raw.NSTickMarkPosition)
+	AllowsTickMarkValuesOnly() bool
+	SetAllowsTickMarkValuesOnly(allowsTickMarkValuesOnly bool)
+	SetTitleCell(cell *raw.NSCell)
+	TitleCell() objc.ID
+	SetTitleColor(newColor *raw.NSColor)
+	TitleColor() *Color
+	SetTitleFont(fontObj *raw.NSFont)
+	TitleFont() *Font
+	SetKnobThickness(thickness float64)
+}
+
+var _ SliderCellable = (*SliderCell)(nil)
 

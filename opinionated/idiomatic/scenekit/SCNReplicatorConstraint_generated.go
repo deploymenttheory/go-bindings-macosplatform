@@ -65,5 +65,107 @@ func (x *ReplicatorConstraint) WithScaleOffset(scaleOffset raw.SCNVector3) *Repl
 	return x
 }
 
+// Target calls the underlying Target.
+func (x *ReplicatorConstraint) Target() *Node {
+	_r := x.inner.Target()
+	if _r == nil {
+		return nil
+	}
+	return &Node{inner: _r}
+}
+
+// SetTarget calls the underlying SetTarget.
+func (x *ReplicatorConstraint) SetTarget(target *raw.SCNNode) {
+	x.inner.SetTarget(target)
+}
+
+// ReplicatesOrientation calls the underlying ReplicatesOrientation.
+func (x *ReplicatorConstraint) ReplicatesOrientation() bool {
+	return x.inner.ReplicatesOrientation()
+}
+
+// SetReplicatesOrientation calls the underlying SetReplicatesOrientation.
+func (x *ReplicatorConstraint) SetReplicatesOrientation(replicatesOrientation bool) {
+	x.inner.SetReplicatesOrientation(replicatesOrientation)
+}
+
+// ReplicatesPosition calls the underlying ReplicatesPosition.
+func (x *ReplicatorConstraint) ReplicatesPosition() bool {
+	return x.inner.ReplicatesPosition()
+}
+
+// SetReplicatesPosition calls the underlying SetReplicatesPosition.
+func (x *ReplicatorConstraint) SetReplicatesPosition(replicatesPosition bool) {
+	x.inner.SetReplicatesPosition(replicatesPosition)
+}
+
+// ReplicatesScale calls the underlying ReplicatesScale.
+func (x *ReplicatorConstraint) ReplicatesScale() bool {
+	return x.inner.ReplicatesScale()
+}
+
+// SetReplicatesScale calls the underlying SetReplicatesScale.
+func (x *ReplicatorConstraint) SetReplicatesScale(replicatesScale bool) {
+	x.inner.SetReplicatesScale(replicatesScale)
+}
+
+// OrientationOffset calls the underlying OrientationOffset.
+func (x *ReplicatorConstraint) OrientationOffset() raw.SCNVector4 {
+	return x.inner.OrientationOffset()
+}
+
+// SetOrientationOffset calls the underlying SetOrientationOffset.
+func (x *ReplicatorConstraint) SetOrientationOffset(orientationOffset raw.SCNVector4) {
+	x.inner.SetOrientationOffset(orientationOffset)
+}
+
+// PositionOffset calls the underlying PositionOffset.
+func (x *ReplicatorConstraint) PositionOffset() raw.SCNVector3 {
+	return x.inner.PositionOffset()
+}
+
+// SetPositionOffset calls the underlying SetPositionOffset.
+func (x *ReplicatorConstraint) SetPositionOffset(positionOffset raw.SCNVector3) {
+	x.inner.SetPositionOffset(positionOffset)
+}
+
+// ScaleOffset calls the underlying ScaleOffset.
+func (x *ReplicatorConstraint) ScaleOffset() raw.SCNVector3 {
+	return x.inner.ScaleOffset()
+}
+
+// SetScaleOffset calls the underlying SetScaleOffset.
+func (x *ReplicatorConstraint) SetScaleOffset(scaleOffset raw.SCNVector3) {
+	x.inner.SetScaleOffset(scaleOffset)
+}
+
 func (x *ReplicatorConstraint) asConstraint() *raw.SCNConstraint { return &x.inner.SCNConstraint }
+
+// ReplicatorConstraintable is the interface implemented by [ReplicatorConstraint], for mocking and DI.
+type ReplicatorConstraintable interface {
+	Unwrap() *raw.SCNReplicatorConstraint
+	WithTarget(target NodeProvider) *ReplicatorConstraint
+	WithReplicatesOrientation(replicatesOrientation bool) *ReplicatorConstraint
+	WithReplicatesPosition(replicatesPosition bool) *ReplicatorConstraint
+	WithReplicatesScale(replicatesScale bool) *ReplicatorConstraint
+	WithOrientationOffset(orientationOffset raw.SCNVector4) *ReplicatorConstraint
+	WithPositionOffset(positionOffset raw.SCNVector3) *ReplicatorConstraint
+	WithScaleOffset(scaleOffset raw.SCNVector3) *ReplicatorConstraint
+	Target() *Node
+	SetTarget(target *raw.SCNNode)
+	ReplicatesOrientation() bool
+	SetReplicatesOrientation(replicatesOrientation bool)
+	ReplicatesPosition() bool
+	SetReplicatesPosition(replicatesPosition bool)
+	ReplicatesScale() bool
+	SetReplicatesScale(replicatesScale bool)
+	OrientationOffset() raw.SCNVector4
+	SetOrientationOffset(orientationOffset raw.SCNVector4)
+	PositionOffset() raw.SCNVector3
+	SetPositionOffset(positionOffset raw.SCNVector3)
+	ScaleOffset() raw.SCNVector3
+	SetScaleOffset(scaleOffset raw.SCNVector3)
+}
+
+var _ ReplicatorConstraintable = (*ReplicatorConstraint)(nil)
 

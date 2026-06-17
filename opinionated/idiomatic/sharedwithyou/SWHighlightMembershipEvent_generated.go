@@ -24,3 +24,16 @@ func NewHighlightMembershipEventWithHighlightTrigger(highlight *raw.SWHighlight,
 	return &HighlightMembershipEvent{inner: raw.SWHighlightMembershipEventFromID(_id)}
 }
 
+// MembershipEventTrigger calls the underlying MembershipEventTrigger.
+func (x *HighlightMembershipEvent) MembershipEventTrigger() raw.SWHighlightMembershipEventTrigger {
+	return x.inner.MembershipEventTrigger()
+}
+
+// HighlightMembershipEventable is the interface implemented by [HighlightMembershipEvent], for mocking and DI.
+type HighlightMembershipEventable interface {
+	Unwrap() *raw.SWHighlightMembershipEvent
+	MembershipEventTrigger() raw.SWHighlightMembershipEventTrigger
+}
+
+var _ HighlightMembershipEventable = (*HighlightMembershipEvent)(nil)
+

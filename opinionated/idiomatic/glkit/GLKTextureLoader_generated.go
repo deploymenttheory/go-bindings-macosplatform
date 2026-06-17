@@ -6,8 +6,10 @@ package glkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/glkit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // TextureLoader wraps [raw.GLKTextureLoader] with a fluent Go API.
@@ -24,4 +26,59 @@ func NewTextureLoaderWithShareContext(context_ *appkit.NSOpenGLContext) *Texture
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithShareContext:"), context_.Ptr())
 	return &TextureLoader{inner: raw.GLKTextureLoaderFromID(_id)}
 }
+
+// TextureWithContentsOfFileOptionsQueueCompletionHandler calls the underlying TextureWithContentsOfFileOptionsQueueCompletionHandler.
+func (x *TextureLoader) TextureWithContentsOfFileOptionsQueueCompletionHandler(path string, options *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber], queue *foundation.NSObject, block func(*raw.GLKTextureInfo, unsafe.Pointer)) {
+	x.inner.TextureWithContentsOfFileOptionsQueueCompletionHandler(foundation.NSStringStringWithUTF8String(path), options, queue, block)
+}
+
+// TextureWithContentsOfURLOptionsQueueCompletionHandler calls the underlying TextureWithContentsOfURLOptionsQueueCompletionHandler.
+func (x *TextureLoader) TextureWithContentsOfURLOptionsQueueCompletionHandler(url string, options *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber], queue *foundation.NSObject, block func(*raw.GLKTextureInfo, unsafe.Pointer)) {
+	x.inner.TextureWithContentsOfURLOptionsQueueCompletionHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), options, queue, block)
+}
+
+// TextureWithNameScaleFactorBundleOptionsQueueCompletionHandler calls the underlying TextureWithNameScaleFactorBundleOptionsQueueCompletionHandler.
+func (x *TextureLoader) TextureWithNameScaleFactorBundleOptionsQueueCompletionHandler(name string, scaleFactor float64, bundle *foundation.NSBundle, options *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber], queue *foundation.NSObject, block func(*raw.GLKTextureInfo, unsafe.Pointer)) {
+	x.inner.TextureWithNameScaleFactorBundleOptionsQueueCompletionHandler(foundation.NSStringStringWithUTF8String(name), scaleFactor, bundle, options, queue, block)
+}
+
+// TextureWithContentsOfDataOptionsQueueCompletionHandler calls the underlying TextureWithContentsOfDataOptionsQueueCompletionHandler.
+func (x *TextureLoader) TextureWithContentsOfDataOptionsQueueCompletionHandler(data *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber], queue *foundation.NSObject, block func(*raw.GLKTextureInfo, unsafe.Pointer)) {
+	x.inner.TextureWithContentsOfDataOptionsQueueCompletionHandler(data, options, queue, block)
+}
+
+// TextureWithCGImageOptionsQueueCompletionHandler calls the underlying TextureWithCGImageOptionsQueueCompletionHandler.
+func (x *TextureLoader) TextureWithCGImageOptionsQueueCompletionHandler(cgImage unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber], queue *foundation.NSObject, block func(*raw.GLKTextureInfo, unsafe.Pointer)) {
+	x.inner.TextureWithCGImageOptionsQueueCompletionHandler(cgImage, options, queue, block)
+}
+
+// CubeMapWithContentsOfFilesOptionsQueueCompletionHandler calls the underlying CubeMapWithContentsOfFilesOptionsQueueCompletionHandler.
+func (x *TextureLoader) CubeMapWithContentsOfFilesOptionsQueueCompletionHandler(paths *foundation.NSArray[objc.ID], options *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber], queue *foundation.NSObject, block func(*raw.GLKTextureInfo, unsafe.Pointer)) {
+	x.inner.CubeMapWithContentsOfFilesOptionsQueueCompletionHandler(paths, options, queue, block)
+}
+
+// CubeMapWithContentsOfFileOptionsQueueCompletionHandler calls the underlying CubeMapWithContentsOfFileOptionsQueueCompletionHandler.
+func (x *TextureLoader) CubeMapWithContentsOfFileOptionsQueueCompletionHandler(path string, options *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber], queue *foundation.NSObject, block func(*raw.GLKTextureInfo, unsafe.Pointer)) {
+	x.inner.CubeMapWithContentsOfFileOptionsQueueCompletionHandler(foundation.NSStringStringWithUTF8String(path), options, queue, block)
+}
+
+// CubeMapWithContentsOfURLOptionsQueueCompletionHandler calls the underlying CubeMapWithContentsOfURLOptionsQueueCompletionHandler.
+func (x *TextureLoader) CubeMapWithContentsOfURLOptionsQueueCompletionHandler(url string, options *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber], queue *foundation.NSObject, block func(*raw.GLKTextureInfo, unsafe.Pointer)) {
+	x.inner.CubeMapWithContentsOfURLOptionsQueueCompletionHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), options, queue, block)
+}
+
+// TextureLoaderable is the interface implemented by [TextureLoader], for mocking and DI.
+type TextureLoaderable interface {
+	Unwrap() *raw.GLKTextureLoader
+	TextureWithContentsOfFileOptionsQueueCompletionHandler(path string, options *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber], queue *foundation.NSObject, block func(*raw.GLKTextureInfo, unsafe.Pointer))
+	TextureWithContentsOfURLOptionsQueueCompletionHandler(url string, options *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber], queue *foundation.NSObject, block func(*raw.GLKTextureInfo, unsafe.Pointer))
+	TextureWithNameScaleFactorBundleOptionsQueueCompletionHandler(name string, scaleFactor float64, bundle *foundation.NSBundle, options *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber], queue *foundation.NSObject, block func(*raw.GLKTextureInfo, unsafe.Pointer))
+	TextureWithContentsOfDataOptionsQueueCompletionHandler(data *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber], queue *foundation.NSObject, block func(*raw.GLKTextureInfo, unsafe.Pointer))
+	TextureWithCGImageOptionsQueueCompletionHandler(cgImage unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber], queue *foundation.NSObject, block func(*raw.GLKTextureInfo, unsafe.Pointer))
+	CubeMapWithContentsOfFilesOptionsQueueCompletionHandler(paths *foundation.NSArray[objc.ID], options *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber], queue *foundation.NSObject, block func(*raw.GLKTextureInfo, unsafe.Pointer))
+	CubeMapWithContentsOfFileOptionsQueueCompletionHandler(path string, options *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber], queue *foundation.NSObject, block func(*raw.GLKTextureInfo, unsafe.Pointer))
+	CubeMapWithContentsOfURLOptionsQueueCompletionHandler(url string, options *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber], queue *foundation.NSObject, block func(*raw.GLKTextureInfo, unsafe.Pointer))
+}
+
+var _ TextureLoaderable = (*TextureLoader)(nil)
 

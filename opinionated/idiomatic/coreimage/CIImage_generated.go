@@ -9,7 +9,9 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imageio"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -218,16 +220,414 @@ func NewImageWithImageProviderSizeFormatColorSpaceOptions(provider objc.ID, widt
 	return &Image{inner: raw.CIImageFromID(_id)}
 }
 
+// ImageByApplyingTransform calls the underlying ImageByApplyingTransform.
+func (x *Image) ImageByApplyingTransform(matrix corefoundation.CGAffineTransform) *Image {
+	_r := x.inner.ImageByApplyingTransform(matrix)
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// ImageByApplyingTransformHighQualityDownsample calls the underlying ImageByApplyingTransformHighQualityDownsample.
+func (x *Image) ImageByApplyingTransformHighQualityDownsample(matrix corefoundation.CGAffineTransform, highQualityDownsample bool) *Image {
+	_r := x.inner.ImageByApplyingTransformHighQualityDownsample(matrix, highQualityDownsample)
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// ImageByApplyingOrientation calls the underlying ImageByApplyingOrientation.
+func (x *Image) ImageByApplyingOrientation(orientation int) *Image {
+	_r := x.inner.ImageByApplyingOrientation(orientation)
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// ImageTransformForOrientation calls the underlying ImageTransformForOrientation.
+func (x *Image) ImageTransformForOrientation(orientation int) corefoundation.CGAffineTransform {
+	return x.inner.ImageTransformForOrientation(orientation)
+}
+
+// ImageByApplyingCGOrientation calls the underlying ImageByApplyingCGOrientation.
+func (x *Image) ImageByApplyingCGOrientation(orientation imageio.CGImagePropertyOrientation) *Image {
+	_r := x.inner.ImageByApplyingCGOrientation(orientation)
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// ImageTransformForCGOrientation calls the underlying ImageTransformForCGOrientation.
+func (x *Image) ImageTransformForCGOrientation(orientation imageio.CGImagePropertyOrientation) corefoundation.CGAffineTransform {
+	return x.inner.ImageTransformForCGOrientation(orientation)
+}
+
+// ImageByCompositingOverImage calls the underlying ImageByCompositingOverImage.
+func (x *Image) ImageByCompositingOverImage(dest *raw.CIImage) *Image {
+	_r := x.inner.ImageByCompositingOverImage(dest)
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// ImageByCroppingToRect calls the underlying ImageByCroppingToRect.
+func (x *Image) ImageByCroppingToRect(rect corefoundation.CGRect) *Image {
+	_r := x.inner.ImageByCroppingToRect(rect)
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// ImageByClampingToExtent calls the underlying ImageByClampingToExtent.
+func (x *Image) ImageByClampingToExtent() *Image {
+	_r := x.inner.ImageByClampingToExtent()
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// ImageByClampingToRect calls the underlying ImageByClampingToRect.
+func (x *Image) ImageByClampingToRect(rect corefoundation.CGRect) *Image {
+	_r := x.inner.ImageByClampingToRect(rect)
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// ImageByApplyingFilterWithInputParameters calls the underlying ImageByApplyingFilterWithInputParameters.
+func (x *Image) ImageByApplyingFilterWithInputParameters(filterName string, params *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Image {
+	_r := x.inner.ImageByApplyingFilterWithInputParameters(foundation.NSStringStringWithUTF8String(filterName), params)
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// ImageByApplyingFilter calls the underlying ImageByApplyingFilter.
+func (x *Image) ImageByApplyingFilter(filterName string) *Image {
+	_r := x.inner.ImageByApplyingFilter(foundation.NSStringStringWithUTF8String(filterName))
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// ImageByColorMatchingColorSpaceToWorkingSpace calls the underlying ImageByColorMatchingColorSpaceToWorkingSpace.
+func (x *Image) ImageByColorMatchingColorSpaceToWorkingSpace(colorSpace unsafe.Pointer) *Image {
+	_r := x.inner.ImageByColorMatchingColorSpaceToWorkingSpace(colorSpace)
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// ImageByColorMatchingWorkingSpaceToColorSpace calls the underlying ImageByColorMatchingWorkingSpaceToColorSpace.
+func (x *Image) ImageByColorMatchingWorkingSpaceToColorSpace(colorSpace unsafe.Pointer) *Image {
+	_r := x.inner.ImageByColorMatchingWorkingSpaceToColorSpace(colorSpace)
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// ImageByPremultiplyingAlpha calls the underlying ImageByPremultiplyingAlpha.
+func (x *Image) ImageByPremultiplyingAlpha() *Image {
+	_r := x.inner.ImageByPremultiplyingAlpha()
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// ImageByUnpremultiplyingAlpha calls the underlying ImageByUnpremultiplyingAlpha.
+func (x *Image) ImageByUnpremultiplyingAlpha() *Image {
+	_r := x.inner.ImageByUnpremultiplyingAlpha()
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// ImageBySettingAlphaOneInExtent calls the underlying ImageBySettingAlphaOneInExtent.
+func (x *Image) ImageBySettingAlphaOneInExtent(extent corefoundation.CGRect) *Image {
+	_r := x.inner.ImageBySettingAlphaOneInExtent(extent)
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// ImageByApplyingGaussianBlurWithSigma calls the underlying ImageByApplyingGaussianBlurWithSigma.
+func (x *Image) ImageByApplyingGaussianBlurWithSigma(sigma float64) *Image {
+	_r := x.inner.ImageByApplyingGaussianBlurWithSigma(sigma)
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// ImageBySettingProperties calls the underlying ImageBySettingProperties.
+func (x *Image) ImageBySettingProperties(properties *foundation.NSDictionary[objc.ID, objc.ID]) *Image {
+	_r := x.inner.ImageBySettingProperties(properties)
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// ImageBySamplingLinear calls the underlying ImageBySamplingLinear.
+func (x *Image) ImageBySamplingLinear() *Image {
+	_r := x.inner.ImageBySamplingLinear()
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// ImageBySamplingNearest calls the underlying ImageBySamplingNearest.
+func (x *Image) ImageBySamplingNearest() *Image {
+	_r := x.inner.ImageBySamplingNearest()
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// ImageByInsertingIntermediate calls the underlying ImageByInsertingIntermediate.
+func (x *Image) ImageByInsertingIntermediate() *Image {
+	_r := x.inner.ImageByInsertingIntermediate()
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// ImageByInsertingIntermediate2 calls the underlying ImageByInsertingIntermediate2.
+func (x *Image) ImageByInsertingIntermediate2(cache bool) *Image {
+	_r := x.inner.ImageByInsertingIntermediate2(cache)
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// ImageByInsertingTiledIntermediate calls the underlying ImageByInsertingTiledIntermediate.
+func (x *Image) ImageByInsertingTiledIntermediate() *Image {
+	_r := x.inner.ImageByInsertingTiledIntermediate()
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// ImageByApplyingGainMap calls the underlying ImageByApplyingGainMap.
+func (x *Image) ImageByApplyingGainMap(gainmap *raw.CIImage) *Image {
+	_r := x.inner.ImageByApplyingGainMap(gainmap)
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// ImageByApplyingGainMapHeadroom calls the underlying ImageByApplyingGainMapHeadroom.
+func (x *Image) ImageByApplyingGainMapHeadroom(gainmap *raw.CIImage, headroom float32) *Image {
+	_r := x.inner.ImageByApplyingGainMapHeadroom(gainmap, headroom)
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// ImageBySettingContentHeadroom calls the underlying ImageBySettingContentHeadroom.
+func (x *Image) ImageBySettingContentHeadroom(headroom float32) *Image {
+	_r := x.inner.ImageBySettingContentHeadroom(headroom)
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// ImageBySettingContentAverageLightLevel calls the underlying ImageBySettingContentAverageLightLevel.
+func (x *Image) ImageBySettingContentAverageLightLevel(average float32) *Image {
+	_r := x.inner.ImageBySettingContentAverageLightLevel(average)
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// RegionOfInterestForImageInRect calls the underlying RegionOfInterestForImageInRect.
+func (x *Image) RegionOfInterestForImageInRect(image *raw.CIImage, rect corefoundation.CGRect) corefoundation.CGRect {
+	return x.inner.RegionOfInterestForImageInRect(image, rect)
+}
+
+// Extent calls the underlying Extent.
+func (x *Image) Extent() corefoundation.CGRect {
+	return x.inner.Extent()
+}
+
+// IsOpaque calls the underlying IsOpaque.
+func (x *Image) IsOpaque() bool {
+	return x.inner.IsOpaque()
+}
+
+// Properties calls the underlying Properties.
+func (x *Image) Properties() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.Properties()
+}
+
+// Definition calls the underlying Definition.
+func (x *Image) Definition() *FilterShape {
+	_r := x.inner.Definition()
+	if _r == nil {
+		return nil
+	}
+	return &FilterShape{inner: _r}
+}
+
+// Url calls the underlying Url.
+func (x *Image) Url() *foundation.NSURL {
+	return x.inner.Url()
+}
+
+// ColorSpace calls the underlying ColorSpace.
+func (x *Image) ColorSpace() unsafe.Pointer {
+	return x.inner.ColorSpace()
+}
+
+// ContentHeadroom calls the underlying ContentHeadroom.
+func (x *Image) ContentHeadroom() float32 {
+	return x.inner.ContentHeadroom()
+}
+
+// ContentAverageLightLevel calls the underlying ContentAverageLightLevel.
+func (x *Image) ContentAverageLightLevel() float32 {
+	return x.inner.ContentAverageLightLevel()
+}
+
+// PixelBuffer calls the underlying PixelBuffer.
+func (x *Image) PixelBuffer() unsafe.Pointer {
+	return x.inner.PixelBuffer()
+}
+
+// CGImage calls the underlying CGImage.
+func (x *Image) CGImage() unsafe.Pointer {
+	return x.inner.CGImage()
+}
+
+// MetalTexture calls the underlying MetalTexture.
+func (x *Image) MetalTexture() metal.MTLTexture {
+	return x.inner.MetalTexture()
+}
+
 // AutoAdjustmentFilters returns the collection as a Go slice.
 func (x *Image) AutoAdjustmentFilters() []*raw.CIFilter {
 	arr := x.inner.AutoAdjustmentFilters()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.CIFilter, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CIFilter {
+		return raw.CIFilterFromID(purego.Retain(_id))
+	})
 }
+
+// AutoAdjustmentFiltersWithOptions calls the underlying AutoAdjustmentFiltersWithOptions.
+func (x *Image) AutoAdjustmentFiltersWithOptions(options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSArray[*raw.CIFilter] {
+	return x.inner.AutoAdjustmentFiltersWithOptions(options)
+}
+
+// ImageByConvertingWorkingSpaceToLab calls the underlying ImageByConvertingWorkingSpaceToLab.
+func (x *Image) ImageByConvertingWorkingSpaceToLab() *Image {
+	_r := x.inner.ImageByConvertingWorkingSpaceToLab()
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// ImageByConvertingLabToWorkingSpace calls the underlying ImageByConvertingLabToWorkingSpace.
+func (x *Image) ImageByConvertingLabToWorkingSpace() *Image {
+	_r := x.inner.ImageByConvertingLabToWorkingSpace()
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// DepthData calls the underlying DepthData.
+func (x *Image) DepthData() *avfoundation.AVDepthData {
+	return x.inner.DepthData()
+}
+
+// PortraitEffectsMatte calls the underlying PortraitEffectsMatte.
+func (x *Image) PortraitEffectsMatte() *avfoundation.AVPortraitEffectsMatte {
+	return x.inner.PortraitEffectsMatte()
+}
+
+// SemanticSegmentationMatte calls the underlying SemanticSegmentationMatte.
+func (x *Image) SemanticSegmentationMatte() *avfoundation.AVSemanticSegmentationMatte {
+	return x.inner.SemanticSegmentationMatte()
+}
+
+// Imageable is the interface implemented by [Image], for mocking and DI.
+type Imageable interface {
+	Unwrap() *raw.CIImage
+	ImageByApplyingTransform(matrix corefoundation.CGAffineTransform) *Image
+	ImageByApplyingTransformHighQualityDownsample(matrix corefoundation.CGAffineTransform, highQualityDownsample bool) *Image
+	ImageByApplyingOrientation(orientation int) *Image
+	ImageTransformForOrientation(orientation int) corefoundation.CGAffineTransform
+	ImageByApplyingCGOrientation(orientation imageio.CGImagePropertyOrientation) *Image
+	ImageTransformForCGOrientation(orientation imageio.CGImagePropertyOrientation) corefoundation.CGAffineTransform
+	ImageByCompositingOverImage(dest *raw.CIImage) *Image
+	ImageByCroppingToRect(rect corefoundation.CGRect) *Image
+	ImageByClampingToExtent() *Image
+	ImageByClampingToRect(rect corefoundation.CGRect) *Image
+	ImageByApplyingFilterWithInputParameters(filterName string, params *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Image
+	ImageByApplyingFilter(filterName string) *Image
+	ImageByColorMatchingColorSpaceToWorkingSpace(colorSpace unsafe.Pointer) *Image
+	ImageByColorMatchingWorkingSpaceToColorSpace(colorSpace unsafe.Pointer) *Image
+	ImageByPremultiplyingAlpha() *Image
+	ImageByUnpremultiplyingAlpha() *Image
+	ImageBySettingAlphaOneInExtent(extent corefoundation.CGRect) *Image
+	ImageByApplyingGaussianBlurWithSigma(sigma float64) *Image
+	ImageBySettingProperties(properties *foundation.NSDictionary[objc.ID, objc.ID]) *Image
+	ImageBySamplingLinear() *Image
+	ImageBySamplingNearest() *Image
+	ImageByInsertingIntermediate() *Image
+	ImageByInsertingIntermediate2(cache bool) *Image
+	ImageByInsertingTiledIntermediate() *Image
+	ImageByApplyingGainMap(gainmap *raw.CIImage) *Image
+	ImageByApplyingGainMapHeadroom(gainmap *raw.CIImage, headroom float32) *Image
+	ImageBySettingContentHeadroom(headroom float32) *Image
+	ImageBySettingContentAverageLightLevel(average float32) *Image
+	RegionOfInterestForImageInRect(image *raw.CIImage, rect corefoundation.CGRect) corefoundation.CGRect
+	Extent() corefoundation.CGRect
+	IsOpaque() bool
+	Properties() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	Definition() *FilterShape
+	Url() *foundation.NSURL
+	ColorSpace() unsafe.Pointer
+	ContentHeadroom() float32
+	ContentAverageLightLevel() float32
+	PixelBuffer() unsafe.Pointer
+	CGImage() unsafe.Pointer
+	MetalTexture() metal.MTLTexture
+	AutoAdjustmentFilters() []*raw.CIFilter
+	AutoAdjustmentFiltersWithOptions(options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSArray[*raw.CIFilter]
+	ImageByConvertingWorkingSpaceToLab() *Image
+	ImageByConvertingLabToWorkingSpace() *Image
+	DepthData() *avfoundation.AVDepthData
+	PortraitEffectsMatte() *avfoundation.AVPortraitEffectsMatte
+	SemanticSegmentationMatte() *avfoundation.AVSemanticSegmentationMatte
+}
+
+var _ Imageable = (*Image)(nil)
 

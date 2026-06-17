@@ -47,5 +47,64 @@ func (x *EffectPropertyTexture) WithEnvMode(envMode raw.GLKTextureEnvMode) *Effe
 	return x
 }
 
+// Enabled calls the underlying Enabled.
+func (x *EffectPropertyTexture) Enabled() uint8 {
+	return x.inner.Enabled()
+}
+
+// SetEnabled calls the underlying SetEnabled.
+func (x *EffectPropertyTexture) SetEnabled(enabled uint8) {
+	x.inner.SetEnabled(enabled)
+}
+
+// Name calls the underlying Name.
+func (x *EffectPropertyTexture) Name() uint32 {
+	return x.inner.Name()
+}
+
+// SetName calls the underlying SetName.
+func (x *EffectPropertyTexture) SetName(name uint32) {
+	x.inner.SetName(name)
+}
+
+// Target calls the underlying Target.
+func (x *EffectPropertyTexture) Target() raw.GLKTextureTarget {
+	return x.inner.Target()
+}
+
+// SetTarget calls the underlying SetTarget.
+func (x *EffectPropertyTexture) SetTarget(target raw.GLKTextureTarget) {
+	x.inner.SetTarget(target)
+}
+
+// EnvMode calls the underlying EnvMode.
+func (x *EffectPropertyTexture) EnvMode() raw.GLKTextureEnvMode {
+	return x.inner.EnvMode()
+}
+
+// SetEnvMode calls the underlying SetEnvMode.
+func (x *EffectPropertyTexture) SetEnvMode(envMode raw.GLKTextureEnvMode) {
+	x.inner.SetEnvMode(envMode)
+}
+
 func (x *EffectPropertyTexture) asEffectProperty() *raw.GLKEffectProperty { return &x.inner.GLKEffectProperty }
+
+// EffectPropertyTextureable is the interface implemented by [EffectPropertyTexture], for mocking and DI.
+type EffectPropertyTextureable interface {
+	Unwrap() *raw.GLKEffectPropertyTexture
+	WithEnabled(enabled uint8) *EffectPropertyTexture
+	WithName(name uint32) *EffectPropertyTexture
+	WithTarget(target raw.GLKTextureTarget) *EffectPropertyTexture
+	WithEnvMode(envMode raw.GLKTextureEnvMode) *EffectPropertyTexture
+	Enabled() uint8
+	SetEnabled(enabled uint8)
+	Name() uint32
+	SetName(name uint32)
+	Target() raw.GLKTextureTarget
+	SetTarget(target raw.GLKTextureTarget)
+	EnvMode() raw.GLKTextureEnvMode
+	SetEnvMode(envMode raw.GLKTextureEnvMode)
+}
+
+var _ EffectPropertyTextureable = (*EffectPropertyTexture)(nil)
 

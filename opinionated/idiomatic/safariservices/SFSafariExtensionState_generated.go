@@ -23,3 +23,16 @@ func NewSafariExtensionState() *SafariExtensionState {
 	return &SafariExtensionState{inner: raw.SFSafariExtensionStateFromID(_id)}
 }
 
+// IsEnabled calls the underlying IsEnabled.
+func (x *SafariExtensionState) IsEnabled() bool {
+	return x.inner.IsEnabled()
+}
+
+// SafariExtensionStateable is the interface implemented by [SafariExtensionState], for mocking and DI.
+type SafariExtensionStateable interface {
+	Unwrap() *raw.SFSafariExtensionState
+	IsEnabled() bool
+}
+
+var _ SafariExtensionStateable = (*SafariExtensionState)(nil)
+

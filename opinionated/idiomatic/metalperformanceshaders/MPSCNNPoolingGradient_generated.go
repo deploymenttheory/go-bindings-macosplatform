@@ -48,9 +48,29 @@ func (x *CNNPoolingGradient) WithSourceSize(sourceSize metal.MTLSize) *CNNPoolin
 	return x
 }
 
+// SourceSize calls the underlying SourceSize.
+func (x *CNNPoolingGradient) SourceSize() metal.MTLSize {
+	return x.inner.SourceSize()
+}
+
+// SetSourceSize calls the underlying SetSourceSize.
+func (x *CNNPoolingGradient) SetSourceSize(sourceSize metal.MTLSize) {
+	x.inner.SetSourceSize(sourceSize)
+}
+
 func (x *CNNPoolingGradient) asCNNGradientKernel() *mpsneuralnetwork.MPSCNNGradientKernel { return &x.inner.MPSCNNGradientKernel }
 
 func (x *CNNPoolingGradient) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel { return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel }
 
 func (x *CNNPoolingGradient) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel }
+
+// CNNPoolingGradientable is the interface implemented by [CNNPoolingGradient], for mocking and DI.
+type CNNPoolingGradientable interface {
+	Unwrap() *raw.MPSCNNPoolingGradient
+	WithSourceSize(sourceSize metal.MTLSize) *CNNPoolingGradient
+	SourceSize() metal.MTLSize
+	SetSourceSize(sourceSize metal.MTLSize)
+}
+
+var _ CNNPoolingGradientable = (*CNNPoolingGradient)(nil)
 

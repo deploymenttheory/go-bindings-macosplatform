@@ -60,5 +60,90 @@ func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) WithRssi(r
 	return x
 }
 
+// Security calls the underlying Security.
+func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) Security() *foundation.NSNumber {
+	return x.inner.Security()
+}
+
+// SetSecurity calls the underlying SetSecurity.
+func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) SetSecurity(security *foundation.NSNumber) {
+	x.inner.SetSecurity(security)
+}
+
+// Ssid calls the underlying Ssid.
+func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) Ssid() *foundation.NSData {
+	return x.inner.Ssid()
+}
+
+// SetSsid calls the underlying SetSsid.
+func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) SetSsid(ssid *foundation.NSData) {
+	x.inner.SetSsid(ssid)
+}
+
+// Bssid calls the underlying Bssid.
+func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) Bssid() *foundation.NSData {
+	return x.inner.Bssid()
+}
+
+// SetBssid calls the underlying SetBssid.
+func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) SetBssid(bssid *foundation.NSData) {
+	x.inner.SetBssid(bssid)
+}
+
+// Channel calls the underlying Channel.
+func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) Channel() *foundation.NSNumber {
+	return x.inner.Channel()
+}
+
+// SetChannel calls the underlying SetChannel.
+func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) SetChannel(channel *foundation.NSNumber) {
+	x.inner.SetChannel(channel)
+}
+
+// WiFiBand calls the underlying WiFiBand.
+func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) WiFiBand() *foundation.NSNumber {
+	return x.inner.WiFiBand()
+}
+
+// SetWiFiBand calls the underlying SetWiFiBand.
+func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) SetWiFiBand(wiFiBand *foundation.NSNumber) {
+	x.inner.SetWiFiBand(wiFiBand)
+}
+
+// Rssi calls the underlying Rssi.
+func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) Rssi() *foundation.NSNumber {
+	return x.inner.Rssi()
+}
+
+// SetRssi calls the underlying SetRssi.
+func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) SetRssi(rssi *foundation.NSNumber) {
+	x.inner.SetRssi(rssi)
+}
+
 func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) asMTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct() *raw.MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct { return x.inner }
+
+// MTRNetworkCommissioningClusterWiFiInterfaceScanResultStructable is the interface implemented by [MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct], for mocking and DI.
+type MTRNetworkCommissioningClusterWiFiInterfaceScanResultStructable interface {
+	Unwrap() *raw.MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct
+	WithSecurity(security *foundation.NSNumber) *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct
+	WithSsid(ssid *foundation.NSData) *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct
+	WithBssid(bssid *foundation.NSData) *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct
+	WithChannel(channel *foundation.NSNumber) *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct
+	WithWiFiBand(wiFiBand *foundation.NSNumber) *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct
+	WithRssi(rssi *foundation.NSNumber) *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct
+	Security() *foundation.NSNumber
+	SetSecurity(security *foundation.NSNumber)
+	Ssid() *foundation.NSData
+	SetSsid(ssid *foundation.NSData)
+	Bssid() *foundation.NSData
+	SetBssid(bssid *foundation.NSData)
+	Channel() *foundation.NSNumber
+	SetChannel(channel *foundation.NSNumber)
+	WiFiBand() *foundation.NSNumber
+	SetWiFiBand(wiFiBand *foundation.NSNumber)
+	Rssi() *foundation.NSNumber
+	SetRssi(rssi *foundation.NSNumber)
+}
+
+var _ MTRNetworkCommissioningClusterWiFiInterfaceScanResultStructable = (*MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct)(nil)
 

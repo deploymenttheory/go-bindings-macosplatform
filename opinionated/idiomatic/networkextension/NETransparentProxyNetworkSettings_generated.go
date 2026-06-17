@@ -7,6 +7,7 @@ package networkextension
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -63,11 +64,14 @@ func (x *NETransparentProxyNetworkSettings) IncludedNetworkRules() []*raw.NENetw
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NENetworkRule, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NENetworkRule {
+		return raw.NENetworkRuleFromID(purego.Retain(_id))
+	})
+}
+
+// SetIncludedNetworkRules calls the underlying SetIncludedNetworkRules.
+func (x *NETransparentProxyNetworkSettings) SetIncludedNetworkRules(includedNetworkRules *foundation.NSArray[*raw.NENetworkRule]) {
+	x.inner.SetIncludedNetworkRules(includedNetworkRules)
 }
 
 // ExcludedNetworkRules returns the collection as a Go slice.
@@ -76,12 +80,28 @@ func (x *NETransparentProxyNetworkSettings) ExcludedNetworkRules() []*raw.NENetw
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NENetworkRule, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NENetworkRule {
+		return raw.NENetworkRuleFromID(purego.Retain(_id))
+	})
+}
+
+// SetExcludedNetworkRules calls the underlying SetExcludedNetworkRules.
+func (x *NETransparentProxyNetworkSettings) SetExcludedNetworkRules(excludedNetworkRules *foundation.NSArray[*raw.NENetworkRule]) {
+	x.inner.SetExcludedNetworkRules(excludedNetworkRules)
 }
 
 func (x *NETransparentProxyNetworkSettings) asNETunnelNetworkSettings() *raw.NETunnelNetworkSettings { return &x.inner.NETunnelNetworkSettings }
+
+// NETransparentProxyNetworkSettingsable is the interface implemented by [NETransparentProxyNetworkSettings], for mocking and DI.
+type NETransparentProxyNetworkSettingsable interface {
+	Unwrap() *raw.NETransparentProxyNetworkSettings
+	WithIncludedNetworkRules(items ...*raw.NENetworkRule) *NETransparentProxyNetworkSettings
+	WithExcludedNetworkRules(items ...*raw.NENetworkRule) *NETransparentProxyNetworkSettings
+	IncludedNetworkRules() []*raw.NENetworkRule
+	SetIncludedNetworkRules(includedNetworkRules *foundation.NSArray[*raw.NENetworkRule])
+	ExcludedNetworkRules() []*raw.NENetworkRule
+	SetExcludedNetworkRules(excludedNetworkRules *foundation.NSArray[*raw.NENetworkRule])
+}
+
+var _ NETransparentProxyNetworkSettingsable = (*NETransparentProxyNetworkSettings)(nil)
 

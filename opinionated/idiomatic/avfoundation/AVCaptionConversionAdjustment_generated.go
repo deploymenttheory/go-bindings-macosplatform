@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +24,22 @@ func NewCaptionConversionAdjustment() *CaptionConversionAdjustment {
 	return &CaptionConversionAdjustment{inner: raw.AVCaptionConversionAdjustmentFromID(_id)}
 }
 
+// AdjustmentType calls the underlying AdjustmentType.
+func (x *CaptionConversionAdjustment) AdjustmentType() string {
+	_r := x.inner.AdjustmentType()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 func (x *CaptionConversionAdjustment) asCaptionConversionAdjustment() *raw.AVCaptionConversionAdjustment { return x.inner }
+
+// CaptionConversionAdjustmentable is the interface implemented by [CaptionConversionAdjustment], for mocking and DI.
+type CaptionConversionAdjustmentable interface {
+	Unwrap() *raw.AVCaptionConversionAdjustment
+	AdjustmentType() string
+}
+
+var _ CaptionConversionAdjustmentable = (*CaptionConversionAdjustment)(nil)
 

@@ -5,6 +5,7 @@
 package javaruntimesupport
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/javaruntimesupport"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +23,17 @@ func NewSymbolicator() *Symbolicator {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("JRSSymbolicator")), objc.RegisterName("new"))
 	return &Symbolicator{inner: raw.JRSSymbolicatorFromID(_id)}
 }
+
+// AddressForSymbol calls the underlying AddressForSymbol.
+func (x *Symbolicator) AddressForSymbol(symbolName string) uint64 {
+	return x.inner.AddressForSymbol(foundation.NSStringStringWithUTF8String(symbolName))
+}
+
+// Symbolicatorable is the interface implemented by [Symbolicator], for mocking and DI.
+type Symbolicatorable interface {
+	Unwrap() *raw.JRSSymbolicator
+	AddressForSymbol(symbolName string) uint64
+}
+
+var _ Symbolicatorable = (*Symbolicator)(nil)
 

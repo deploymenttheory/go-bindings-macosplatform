@@ -7,6 +7,7 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -30,6 +31,20 @@ func (x *DOMHTMLBRElement) WithClear(clear string) *DOMHTMLBRElement {
 	return x
 }
 
+// Clear calls the underlying Clear.
+func (x *DOMHTMLBRElement) Clear() string {
+	_r := x.inner.Clear()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetClear calls the underlying SetClear.
+func (x *DOMHTMLBRElement) SetClear(clear string) {
+	x.inner.SetClear(foundation.NSStringStringWithUTF8String(clear))
+}
+
 func (x *DOMHTMLBRElement) asDOMHTMLElement() *raw.DOMHTMLElement { return &x.inner.DOMHTMLElement }
 
 func (x *DOMHTMLBRElement) asDOMElement() *raw.DOMElement { return &x.inner.DOMHTMLElement.DOMElement }
@@ -39,4 +54,14 @@ func (x *DOMHTMLBRElement) asDOMNode() *raw.DOMNode { return &x.inner.DOMHTMLEle
 func (x *DOMHTMLBRElement) asDOMObject() *raw.DOMObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject }
 
 func (x *DOMHTMLBRElement) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject }
+
+// DOMHTMLBRElementable is the interface implemented by [DOMHTMLBRElement], for mocking and DI.
+type DOMHTMLBRElementable interface {
+	Unwrap() *raw.DOMHTMLBRElement
+	WithClear(clear string) *DOMHTMLBRElement
+	Clear() string
+	SetClear(clear string)
+}
+
+var _ DOMHTMLBRElementable = (*DOMHTMLBRElement)(nil)
 

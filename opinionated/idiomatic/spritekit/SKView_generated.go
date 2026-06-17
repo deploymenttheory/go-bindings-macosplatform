@@ -5,6 +5,7 @@
 package spritekit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
 	"github.com/ebitengine/purego/objc"
@@ -119,4 +120,273 @@ func (x *View) WithPreferredFrameRate(preferredFrameRate float32) *View {
 	x.inner.SetPreferredFrameRate(preferredFrameRate)
 	return x
 }
+
+// PresentScene calls the underlying PresentScene.
+func (x *View) PresentScene(scene *raw.SKScene) {
+	x.inner.PresentScene(scene)
+}
+
+// PresentSceneTransition calls the underlying PresentSceneTransition.
+func (x *View) PresentSceneTransition(scene *raw.SKScene, transition *raw.SKTransition) {
+	x.inner.PresentSceneTransition(scene, transition)
+}
+
+// TextureFromNode calls the underlying TextureFromNode.
+func (x *View) TextureFromNode(node *raw.SKNode) *Texture {
+	_r := x.inner.TextureFromNode(node)
+	if _r == nil {
+		return nil
+	}
+	return &Texture{inner: _r}
+}
+
+// TextureFromNodeCrop calls the underlying TextureFromNodeCrop.
+func (x *View) TextureFromNodeCrop(node *raw.SKNode, crop corefoundation.CGRect) *Texture {
+	_r := x.inner.TextureFromNodeCrop(node, crop)
+	if _r == nil {
+		return nil
+	}
+	return &Texture{inner: _r}
+}
+
+// ConvertPointToScene calls the underlying ConvertPointToScene.
+func (x *View) ConvertPointToScene(point corefoundation.CGPoint, scene *raw.SKScene) corefoundation.CGPoint {
+	return x.inner.ConvertPointToScene(point, scene)
+}
+
+// ConvertPointFromScene calls the underlying ConvertPointFromScene.
+func (x *View) ConvertPointFromScene(point corefoundation.CGPoint, scene *raw.SKScene) corefoundation.CGPoint {
+	return x.inner.ConvertPointFromScene(point, scene)
+}
+
+// IsPaused calls the underlying IsPaused.
+func (x *View) IsPaused() bool {
+	return x.inner.IsPaused()
+}
+
+// SetPaused calls the underlying SetPaused.
+func (x *View) SetPaused(paused bool) {
+	x.inner.SetPaused(paused)
+}
+
+// ShowsFPS calls the underlying ShowsFPS.
+func (x *View) ShowsFPS() bool {
+	return x.inner.ShowsFPS()
+}
+
+// SetShowsFPS calls the underlying SetShowsFPS.
+func (x *View) SetShowsFPS(showsFPS bool) {
+	x.inner.SetShowsFPS(showsFPS)
+}
+
+// ShowsDrawCount calls the underlying ShowsDrawCount.
+func (x *View) ShowsDrawCount() bool {
+	return x.inner.ShowsDrawCount()
+}
+
+// SetShowsDrawCount calls the underlying SetShowsDrawCount.
+func (x *View) SetShowsDrawCount(showsDrawCount bool) {
+	x.inner.SetShowsDrawCount(showsDrawCount)
+}
+
+// ShowsNodeCount calls the underlying ShowsNodeCount.
+func (x *View) ShowsNodeCount() bool {
+	return x.inner.ShowsNodeCount()
+}
+
+// SetShowsNodeCount calls the underlying SetShowsNodeCount.
+func (x *View) SetShowsNodeCount(showsNodeCount bool) {
+	x.inner.SetShowsNodeCount(showsNodeCount)
+}
+
+// ShowsQuadCount calls the underlying ShowsQuadCount.
+func (x *View) ShowsQuadCount() bool {
+	return x.inner.ShowsQuadCount()
+}
+
+// SetShowsQuadCount calls the underlying SetShowsQuadCount.
+func (x *View) SetShowsQuadCount(showsQuadCount bool) {
+	x.inner.SetShowsQuadCount(showsQuadCount)
+}
+
+// ShowsPhysics calls the underlying ShowsPhysics.
+func (x *View) ShowsPhysics() bool {
+	return x.inner.ShowsPhysics()
+}
+
+// SetShowsPhysics calls the underlying SetShowsPhysics.
+func (x *View) SetShowsPhysics(showsPhysics bool) {
+	x.inner.SetShowsPhysics(showsPhysics)
+}
+
+// ShowsFields calls the underlying ShowsFields.
+func (x *View) ShowsFields() bool {
+	return x.inner.ShowsFields()
+}
+
+// SetShowsFields calls the underlying SetShowsFields.
+func (x *View) SetShowsFields(showsFields bool) {
+	x.inner.SetShowsFields(showsFields)
+}
+
+// IsAsynchronous calls the underlying IsAsynchronous.
+func (x *View) IsAsynchronous() bool {
+	return x.inner.IsAsynchronous()
+}
+
+// SetAsynchronous calls the underlying SetAsynchronous.
+func (x *View) SetAsynchronous(asynchronous bool) {
+	x.inner.SetAsynchronous(asynchronous)
+}
+
+// AllowsTransparency calls the underlying AllowsTransparency.
+func (x *View) AllowsTransparency() bool {
+	return x.inner.AllowsTransparency()
+}
+
+// SetAllowsTransparency calls the underlying SetAllowsTransparency.
+func (x *View) SetAllowsTransparency(allowsTransparency bool) {
+	x.inner.SetAllowsTransparency(allowsTransparency)
+}
+
+// IgnoresSiblingOrder calls the underlying IgnoresSiblingOrder.
+func (x *View) IgnoresSiblingOrder() bool {
+	return x.inner.IgnoresSiblingOrder()
+}
+
+// SetIgnoresSiblingOrder calls the underlying SetIgnoresSiblingOrder.
+func (x *View) SetIgnoresSiblingOrder(ignoresSiblingOrder bool) {
+	x.inner.SetIgnoresSiblingOrder(ignoresSiblingOrder)
+}
+
+// ShouldCullNonVisibleNodes calls the underlying ShouldCullNonVisibleNodes.
+func (x *View) ShouldCullNonVisibleNodes() bool {
+	return x.inner.ShouldCullNonVisibleNodes()
+}
+
+// SetShouldCullNonVisibleNodes calls the underlying SetShouldCullNonVisibleNodes.
+func (x *View) SetShouldCullNonVisibleNodes(shouldCullNonVisibleNodes bool) {
+	x.inner.SetShouldCullNonVisibleNodes(shouldCullNonVisibleNodes)
+}
+
+// PreferredFramesPerSecond calls the underlying PreferredFramesPerSecond.
+func (x *View) PreferredFramesPerSecond() int {
+	return x.inner.PreferredFramesPerSecond()
+}
+
+// SetPreferredFramesPerSecond calls the underlying SetPreferredFramesPerSecond.
+func (x *View) SetPreferredFramesPerSecond(preferredFramesPerSecond int) {
+	x.inner.SetPreferredFramesPerSecond(preferredFramesPerSecond)
+}
+
+// DisableDepthStencilBuffer calls the underlying DisableDepthStencilBuffer.
+func (x *View) DisableDepthStencilBuffer() bool {
+	return x.inner.DisableDepthStencilBuffer()
+}
+
+// SetDisableDepthStencilBuffer calls the underlying SetDisableDepthStencilBuffer.
+func (x *View) SetDisableDepthStencilBuffer(disableDepthStencilBuffer bool) {
+	x.inner.SetDisableDepthStencilBuffer(disableDepthStencilBuffer)
+}
+
+// Delegate calls the underlying Delegate.
+func (x *View) Delegate() *foundation.NSObject {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *View) SetDelegate(delegate *foundation.NSObject) {
+	x.inner.SetDelegate(delegate)
+}
+
+// FrameInterval calls the underlying FrameInterval.
+func (x *View) FrameInterval() int {
+	return x.inner.FrameInterval()
+}
+
+// SetFrameInterval calls the underlying SetFrameInterval.
+func (x *View) SetFrameInterval(frameInterval int) {
+	x.inner.SetFrameInterval(frameInterval)
+}
+
+// PreferredFrameRate calls the underlying PreferredFrameRate.
+func (x *View) PreferredFrameRate() float32 {
+	return x.inner.PreferredFrameRate()
+}
+
+// SetPreferredFrameRate calls the underlying SetPreferredFrameRate.
+func (x *View) SetPreferredFrameRate(preferredFrameRate float32) {
+	x.inner.SetPreferredFrameRate(preferredFrameRate)
+}
+
+// Scene calls the underlying Scene.
+func (x *View) Scene() *Scene {
+	_r := x.inner.Scene()
+	if _r == nil {
+		return nil
+	}
+	return &Scene{inner: _r}
+}
+
+// Viewable is the interface implemented by [View], for mocking and DI.
+type Viewable interface {
+	Unwrap() *raw.SKView
+	WithPaused(paused bool) *View
+	WithShowsFPS(showsFPS bool) *View
+	WithShowsDrawCount(showsDrawCount bool) *View
+	WithShowsNodeCount(showsNodeCount bool) *View
+	WithShowsQuadCount(showsQuadCount bool) *View
+	WithShowsPhysics(showsPhysics bool) *View
+	WithShowsFields(showsFields bool) *View
+	WithAsynchronous(asynchronous bool) *View
+	WithAllowsTransparency(allowsTransparency bool) *View
+	WithIgnoresSiblingOrder(ignoresSiblingOrder bool) *View
+	WithShouldCullNonVisibleNodes(shouldCullNonVisibleNodes bool) *View
+	WithPreferredFramesPerSecond(preferredFramesPerSecond int) *View
+	WithDisableDepthStencilBuffer(disableDepthStencilBuffer bool) *View
+	WithDelegate(delegate *foundation.NSObject) *View
+	WithFrameInterval(frameInterval int) *View
+	WithPreferredFrameRate(preferredFrameRate float32) *View
+	PresentScene(scene *raw.SKScene)
+	PresentSceneTransition(scene *raw.SKScene, transition *raw.SKTransition)
+	TextureFromNode(node *raw.SKNode) *Texture
+	TextureFromNodeCrop(node *raw.SKNode, crop corefoundation.CGRect) *Texture
+	ConvertPointToScene(point corefoundation.CGPoint, scene *raw.SKScene) corefoundation.CGPoint
+	ConvertPointFromScene(point corefoundation.CGPoint, scene *raw.SKScene) corefoundation.CGPoint
+	IsPaused() bool
+	SetPaused(paused bool)
+	ShowsFPS() bool
+	SetShowsFPS(showsFPS bool)
+	ShowsDrawCount() bool
+	SetShowsDrawCount(showsDrawCount bool)
+	ShowsNodeCount() bool
+	SetShowsNodeCount(showsNodeCount bool)
+	ShowsQuadCount() bool
+	SetShowsQuadCount(showsQuadCount bool)
+	ShowsPhysics() bool
+	SetShowsPhysics(showsPhysics bool)
+	ShowsFields() bool
+	SetShowsFields(showsFields bool)
+	IsAsynchronous() bool
+	SetAsynchronous(asynchronous bool)
+	AllowsTransparency() bool
+	SetAllowsTransparency(allowsTransparency bool)
+	IgnoresSiblingOrder() bool
+	SetIgnoresSiblingOrder(ignoresSiblingOrder bool)
+	ShouldCullNonVisibleNodes() bool
+	SetShouldCullNonVisibleNodes(shouldCullNonVisibleNodes bool)
+	PreferredFramesPerSecond() int
+	SetPreferredFramesPerSecond(preferredFramesPerSecond int)
+	DisableDepthStencilBuffer() bool
+	SetDisableDepthStencilBuffer(disableDepthStencilBuffer bool)
+	Delegate() *foundation.NSObject
+	SetDelegate(delegate *foundation.NSObject)
+	FrameInterval() int
+	SetFrameInterval(frameInterval int)
+	PreferredFrameRate() float32
+	SetPreferredFrameRate(preferredFrameRate float32)
+	Scene() *Scene
+}
+
+var _ Viewable = (*View)(nil)
 

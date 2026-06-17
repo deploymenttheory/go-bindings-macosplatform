@@ -6,6 +6,7 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -29,5 +30,35 @@ func (x *CollectionLayoutDecorationItem) WithZIndex(zIndex int) *CollectionLayou
 	return x
 }
 
+// ZIndex calls the underlying ZIndex.
+func (x *CollectionLayoutDecorationItem) ZIndex() int {
+	return x.inner.ZIndex()
+}
+
+// SetZIndex calls the underlying SetZIndex.
+func (x *CollectionLayoutDecorationItem) SetZIndex(zIndex int) {
+	x.inner.SetZIndex(zIndex)
+}
+
+// ElementKind calls the underlying ElementKind.
+func (x *CollectionLayoutDecorationItem) ElementKind() string {
+	_r := x.inner.ElementKind()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 func (x *CollectionLayoutDecorationItem) asCollectionLayoutItem() *raw.NSCollectionLayoutItem { return &x.inner.NSCollectionLayoutItem }
+
+// CollectionLayoutDecorationItemable is the interface implemented by [CollectionLayoutDecorationItem], for mocking and DI.
+type CollectionLayoutDecorationItemable interface {
+	Unwrap() *raw.NSCollectionLayoutDecorationItem
+	WithZIndex(zIndex int) *CollectionLayoutDecorationItem
+	ZIndex() int
+	SetZIndex(zIndex int)
+	ElementKind() string
+}
+
+var _ CollectionLayoutDecorationItemable = (*CollectionLayoutDecorationItem)(nil)
 

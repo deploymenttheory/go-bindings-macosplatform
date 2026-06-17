@@ -45,3 +45,54 @@ func (x *ImageNormalizedHistogram) WithZeroHistogram(zeroHistogram bool) *ImageN
 	return x
 }
 
+// EncodeToCommandBufferSourceTextureMinmaxTextureHistogramHistogramOffset calls the underlying EncodeToCommandBufferSourceTextureMinmaxTextureHistogramHistogramOffset.
+func (x *ImageNormalizedHistogram) EncodeToCommandBufferSourceTextureMinmaxTextureHistogramHistogramOffset(commandBuffer metal.MTLCommandBuffer, source metal.MTLTexture, minmaxTexture metal.MTLTexture, histogram metal.MTLBuffer, histogramOffset uint) {
+	x.inner.EncodeToCommandBufferSourceTextureMinmaxTextureHistogramHistogramOffset(commandBuffer, source, minmaxTexture, histogram, histogramOffset)
+}
+
+// HistogramSizeForSourceFormat calls the underlying HistogramSizeForSourceFormat.
+func (x *ImageNormalizedHistogram) HistogramSizeForSourceFormat(sourceFormat metal.MTLPixelFormat) uint {
+	return x.inner.HistogramSizeForSourceFormat(sourceFormat)
+}
+
+// ClipRectSource calls the underlying ClipRectSource.
+func (x *ImageNormalizedHistogram) ClipRectSource() metal.MTLRegion {
+	return x.inner.ClipRectSource()
+}
+
+// SetClipRectSource calls the underlying SetClipRectSource.
+func (x *ImageNormalizedHistogram) SetClipRectSource(clipRectSource metal.MTLRegion) {
+	x.inner.SetClipRectSource(clipRectSource)
+}
+
+// ZeroHistogram calls the underlying ZeroHistogram.
+func (x *ImageNormalizedHistogram) ZeroHistogram() bool {
+	return x.inner.ZeroHistogram()
+}
+
+// SetZeroHistogram calls the underlying SetZeroHistogram.
+func (x *ImageNormalizedHistogram) SetZeroHistogram(zeroHistogram bool) {
+	x.inner.SetZeroHistogram(zeroHistogram)
+}
+
+// HistogramInfo calls the underlying HistogramInfo.
+func (x *ImageNormalizedHistogram) HistogramInfo() raw.MPSImageHistogramInfo {
+	return x.inner.HistogramInfo()
+}
+
+// ImageNormalizedHistogramable is the interface implemented by [ImageNormalizedHistogram], for mocking and DI.
+type ImageNormalizedHistogramable interface {
+	Unwrap() *raw.MPSImageNormalizedHistogram
+	WithClipRectSource(clipRectSource metal.MTLRegion) *ImageNormalizedHistogram
+	WithZeroHistogram(zeroHistogram bool) *ImageNormalizedHistogram
+	EncodeToCommandBufferSourceTextureMinmaxTextureHistogramHistogramOffset(commandBuffer metal.MTLCommandBuffer, source metal.MTLTexture, minmaxTexture metal.MTLTexture, histogram metal.MTLBuffer, histogramOffset uint)
+	HistogramSizeForSourceFormat(sourceFormat metal.MTLPixelFormat) uint
+	ClipRectSource() metal.MTLRegion
+	SetClipRectSource(clipRectSource metal.MTLRegion)
+	ZeroHistogram() bool
+	SetZeroHistogram(zeroHistogram bool)
+	HistogramInfo() raw.MPSImageHistogramInfo
+}
+
+var _ ImageNormalizedHistogramable = (*ImageNormalizedHistogram)(nil)
+

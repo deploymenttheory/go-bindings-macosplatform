@@ -32,3 +32,28 @@ func NewPictureInPictureControllerContentSourceWithSampleBufferDisplayLayerPlayb
 	return &PictureInPictureControllerContentSource{inner: raw.AVPictureInPictureControllerContentSourceFromID(_id)}
 }
 
+// PlayerLayer calls the underlying PlayerLayer.
+func (x *PictureInPictureControllerContentSource) PlayerLayer() *avfoundation.AVPlayerLayer {
+	return x.inner.PlayerLayer()
+}
+
+// SampleBufferDisplayLayer calls the underlying SampleBufferDisplayLayer.
+func (x *PictureInPictureControllerContentSource) SampleBufferDisplayLayer() *avfoundation.AVSampleBufferDisplayLayer {
+	return x.inner.SampleBufferDisplayLayer()
+}
+
+// SampleBufferPlaybackDelegate calls the underlying SampleBufferPlaybackDelegate.
+func (x *PictureInPictureControllerContentSource) SampleBufferPlaybackDelegate() raw.AVPictureInPictureSampleBufferPlaybackDelegate {
+	return x.inner.SampleBufferPlaybackDelegate()
+}
+
+// PictureInPictureControllerContentSourceable is the interface implemented by [PictureInPictureControllerContentSource], for mocking and DI.
+type PictureInPictureControllerContentSourceable interface {
+	Unwrap() *raw.AVPictureInPictureControllerContentSource
+	PlayerLayer() *avfoundation.AVPlayerLayer
+	SampleBufferDisplayLayer() *avfoundation.AVSampleBufferDisplayLayer
+	SampleBufferPlaybackDelegate() raw.AVPictureInPictureSampleBufferPlaybackDelegate
+}
+
+var _ PictureInPictureControllerContentSourceable = (*PictureInPictureControllerContentSource)(nil)
+

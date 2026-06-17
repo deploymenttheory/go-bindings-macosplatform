@@ -6,6 +6,7 @@ package vision
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,7 +24,24 @@ func NewRecognizedPoint3D() *RecognizedPoint3D {
 	return &RecognizedPoint3D{inner: raw.VNRecognizedPoint3DFromID(_id)}
 }
 
+// Identifier calls the underlying Identifier.
+func (x *RecognizedPoint3D) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 func (x *RecognizedPoint3D) asRecognizedPoint3D() *raw.VNRecognizedPoint3D { return x.inner }
 
 func (x *RecognizedPoint3D) asPoint3D() *raw.VNPoint3D { return &x.inner.VNPoint3D }
+
+// RecognizedPoint3Dable is the interface implemented by [RecognizedPoint3D], for mocking and DI.
+type RecognizedPoint3Dable interface {
+	Unwrap() *raw.VNRecognizedPoint3D
+	Identifier() string
+}
+
+var _ RecognizedPoint3Dable = (*RecognizedPoint3D)(nil)
 

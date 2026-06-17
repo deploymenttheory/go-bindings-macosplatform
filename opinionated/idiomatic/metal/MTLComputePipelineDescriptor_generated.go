@@ -7,6 +7,7 @@ package metal
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -89,4 +90,218 @@ func (x *ComputePipelineDescriptor) WithRequiredThreadsPerThreadgroup(requiredTh
 	x.inner.SetRequiredThreadsPerThreadgroup(requiredThreadsPerThreadgroup)
 	return x
 }
+
+// Reset calls the underlying Reset.
+func (x *ComputePipelineDescriptor) Reset() {
+	x.inner.Reset()
+}
+
+// Label calls the underlying Label.
+func (x *ComputePipelineDescriptor) Label() string {
+	_r := x.inner.Label()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLabel calls the underlying SetLabel.
+func (x *ComputePipelineDescriptor) SetLabel(label string) {
+	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+}
+
+// ComputeFunction calls the underlying ComputeFunction.
+func (x *ComputePipelineDescriptor) ComputeFunction() raw.MTLFunction {
+	return x.inner.ComputeFunction()
+}
+
+// SetComputeFunction calls the underlying SetComputeFunction.
+func (x *ComputePipelineDescriptor) SetComputeFunction(computeFunction raw.MTLFunction) {
+	x.inner.SetComputeFunction(computeFunction)
+}
+
+// ThreadGroupSizeIsMultipleOfThreadExecutionWidth calls the underlying ThreadGroupSizeIsMultipleOfThreadExecutionWidth.
+func (x *ComputePipelineDescriptor) ThreadGroupSizeIsMultipleOfThreadExecutionWidth() bool {
+	return x.inner.ThreadGroupSizeIsMultipleOfThreadExecutionWidth()
+}
+
+// SetThreadGroupSizeIsMultipleOfThreadExecutionWidth calls the underlying SetThreadGroupSizeIsMultipleOfThreadExecutionWidth.
+func (x *ComputePipelineDescriptor) SetThreadGroupSizeIsMultipleOfThreadExecutionWidth(threadGroupSizeIsMultipleOfThreadExecutionWidth bool) {
+	x.inner.SetThreadGroupSizeIsMultipleOfThreadExecutionWidth(threadGroupSizeIsMultipleOfThreadExecutionWidth)
+}
+
+// MaxTotalThreadsPerThreadgroup calls the underlying MaxTotalThreadsPerThreadgroup.
+func (x *ComputePipelineDescriptor) MaxTotalThreadsPerThreadgroup() uint {
+	return x.inner.MaxTotalThreadsPerThreadgroup()
+}
+
+// SetMaxTotalThreadsPerThreadgroup calls the underlying SetMaxTotalThreadsPerThreadgroup.
+func (x *ComputePipelineDescriptor) SetMaxTotalThreadsPerThreadgroup(maxTotalThreadsPerThreadgroup uint) {
+	x.inner.SetMaxTotalThreadsPerThreadgroup(maxTotalThreadsPerThreadgroup)
+}
+
+// StageInputDescriptor calls the underlying StageInputDescriptor.
+func (x *ComputePipelineDescriptor) StageInputDescriptor() *StageInputOutputDescriptor {
+	_r := x.inner.StageInputDescriptor()
+	if _r == nil {
+		return nil
+	}
+	return &StageInputOutputDescriptor{inner: _r}
+}
+
+// SetStageInputDescriptor calls the underlying SetStageInputDescriptor.
+func (x *ComputePipelineDescriptor) SetStageInputDescriptor(stageInputDescriptor *raw.MTLStageInputOutputDescriptor) {
+	x.inner.SetStageInputDescriptor(stageInputDescriptor)
+}
+
+// Buffers calls the underlying Buffers.
+func (x *ComputePipelineDescriptor) Buffers() *PipelineBufferDescriptorArray {
+	_r := x.inner.Buffers()
+	if _r == nil {
+		return nil
+	}
+	return &PipelineBufferDescriptorArray{inner: _r}
+}
+
+// SupportIndirectCommandBuffers calls the underlying SupportIndirectCommandBuffers.
+func (x *ComputePipelineDescriptor) SupportIndirectCommandBuffers() bool {
+	return x.inner.SupportIndirectCommandBuffers()
+}
+
+// SetSupportIndirectCommandBuffers calls the underlying SetSupportIndirectCommandBuffers.
+func (x *ComputePipelineDescriptor) SetSupportIndirectCommandBuffers(supportIndirectCommandBuffers bool) {
+	x.inner.SetSupportIndirectCommandBuffers(supportIndirectCommandBuffers)
+}
+
+// InsertLibraries calls the underlying InsertLibraries.
+func (x *ComputePipelineDescriptor) InsertLibraries() *foundation.NSArray[raw.MTLDynamicLibrary] {
+	return x.inner.InsertLibraries()
+}
+
+// SetInsertLibraries calls the underlying SetInsertLibraries.
+func (x *ComputePipelineDescriptor) SetInsertLibraries(insertLibraries *foundation.NSArray[raw.MTLDynamicLibrary]) {
+	x.inner.SetInsertLibraries(insertLibraries)
+}
+
+// PreloadedLibraries calls the underlying PreloadedLibraries.
+func (x *ComputePipelineDescriptor) PreloadedLibraries() *foundation.NSArray[raw.MTLDynamicLibrary] {
+	return x.inner.PreloadedLibraries()
+}
+
+// SetPreloadedLibraries calls the underlying SetPreloadedLibraries.
+func (x *ComputePipelineDescriptor) SetPreloadedLibraries(preloadedLibraries *foundation.NSArray[raw.MTLDynamicLibrary]) {
+	x.inner.SetPreloadedLibraries(preloadedLibraries)
+}
+
+// BinaryArchives calls the underlying BinaryArchives.
+func (x *ComputePipelineDescriptor) BinaryArchives() *foundation.NSArray[raw.MTLBinaryArchive] {
+	return x.inner.BinaryArchives()
+}
+
+// SetBinaryArchives calls the underlying SetBinaryArchives.
+func (x *ComputePipelineDescriptor) SetBinaryArchives(binaryArchives *foundation.NSArray[raw.MTLBinaryArchive]) {
+	x.inner.SetBinaryArchives(binaryArchives)
+}
+
+// LinkedFunctions calls the underlying LinkedFunctions.
+func (x *ComputePipelineDescriptor) LinkedFunctions() *LinkedFunctions {
+	_r := x.inner.LinkedFunctions()
+	if _r == nil {
+		return nil
+	}
+	return &LinkedFunctions{inner: _r}
+}
+
+// SetLinkedFunctions calls the underlying SetLinkedFunctions.
+func (x *ComputePipelineDescriptor) SetLinkedFunctions(linkedFunctions *raw.MTLLinkedFunctions) {
+	x.inner.SetLinkedFunctions(linkedFunctions)
+}
+
+// SupportAddingBinaryFunctions calls the underlying SupportAddingBinaryFunctions.
+func (x *ComputePipelineDescriptor) SupportAddingBinaryFunctions() bool {
+	return x.inner.SupportAddingBinaryFunctions()
+}
+
+// SetSupportAddingBinaryFunctions calls the underlying SetSupportAddingBinaryFunctions.
+func (x *ComputePipelineDescriptor) SetSupportAddingBinaryFunctions(supportAddingBinaryFunctions bool) {
+	x.inner.SetSupportAddingBinaryFunctions(supportAddingBinaryFunctions)
+}
+
+// MaxCallStackDepth calls the underlying MaxCallStackDepth.
+func (x *ComputePipelineDescriptor) MaxCallStackDepth() uint {
+	return x.inner.MaxCallStackDepth()
+}
+
+// SetMaxCallStackDepth calls the underlying SetMaxCallStackDepth.
+func (x *ComputePipelineDescriptor) SetMaxCallStackDepth(maxCallStackDepth uint) {
+	x.inner.SetMaxCallStackDepth(maxCallStackDepth)
+}
+
+// ShaderValidation calls the underlying ShaderValidation.
+func (x *ComputePipelineDescriptor) ShaderValidation() raw.MTLShaderValidation {
+	return x.inner.ShaderValidation()
+}
+
+// SetShaderValidation calls the underlying SetShaderValidation.
+func (x *ComputePipelineDescriptor) SetShaderValidation(shaderValidation raw.MTLShaderValidation) {
+	x.inner.SetShaderValidation(shaderValidation)
+}
+
+// RequiredThreadsPerThreadgroup calls the underlying RequiredThreadsPerThreadgroup.
+func (x *ComputePipelineDescriptor) RequiredThreadsPerThreadgroup() raw.MTLSize {
+	return x.inner.RequiredThreadsPerThreadgroup()
+}
+
+// SetRequiredThreadsPerThreadgroup calls the underlying SetRequiredThreadsPerThreadgroup.
+func (x *ComputePipelineDescriptor) SetRequiredThreadsPerThreadgroup(requiredThreadsPerThreadgroup raw.MTLSize) {
+	x.inner.SetRequiredThreadsPerThreadgroup(requiredThreadsPerThreadgroup)
+}
+
+// ComputePipelineDescriptorable is the interface implemented by [ComputePipelineDescriptor], for mocking and DI.
+type ComputePipelineDescriptorable interface {
+	Unwrap() *raw.MTLComputePipelineDescriptor
+	WithLabel(label string) *ComputePipelineDescriptor
+	WithComputeFunction(computeFunction raw.MTLFunction) *ComputePipelineDescriptor
+	WithThreadGroupSizeIsMultipleOfThreadExecutionWidth(threadGroupSizeIsMultipleOfThreadExecutionWidth bool) *ComputePipelineDescriptor
+	WithMaxTotalThreadsPerThreadgroup(maxTotalThreadsPerThreadgroup uint) *ComputePipelineDescriptor
+	WithStageInputDescriptor(stageInputDescriptor *raw.MTLStageInputOutputDescriptor) *ComputePipelineDescriptor
+	WithSupportIndirectCommandBuffers(supportIndirectCommandBuffers bool) *ComputePipelineDescriptor
+	WithLinkedFunctions(linkedFunctions *raw.MTLLinkedFunctions) *ComputePipelineDescriptor
+	WithSupportAddingBinaryFunctions(supportAddingBinaryFunctions bool) *ComputePipelineDescriptor
+	WithMaxCallStackDepth(maxCallStackDepth uint) *ComputePipelineDescriptor
+	WithShaderValidation(shaderValidation raw.MTLShaderValidation) *ComputePipelineDescriptor
+	WithRequiredThreadsPerThreadgroup(requiredThreadsPerThreadgroup raw.MTLSize) *ComputePipelineDescriptor
+	Reset()
+	Label() string
+	SetLabel(label string)
+	ComputeFunction() raw.MTLFunction
+	SetComputeFunction(computeFunction raw.MTLFunction)
+	ThreadGroupSizeIsMultipleOfThreadExecutionWidth() bool
+	SetThreadGroupSizeIsMultipleOfThreadExecutionWidth(threadGroupSizeIsMultipleOfThreadExecutionWidth bool)
+	MaxTotalThreadsPerThreadgroup() uint
+	SetMaxTotalThreadsPerThreadgroup(maxTotalThreadsPerThreadgroup uint)
+	StageInputDescriptor() *StageInputOutputDescriptor
+	SetStageInputDescriptor(stageInputDescriptor *raw.MTLStageInputOutputDescriptor)
+	Buffers() *PipelineBufferDescriptorArray
+	SupportIndirectCommandBuffers() bool
+	SetSupportIndirectCommandBuffers(supportIndirectCommandBuffers bool)
+	InsertLibraries() *foundation.NSArray[raw.MTLDynamicLibrary]
+	SetInsertLibraries(insertLibraries *foundation.NSArray[raw.MTLDynamicLibrary])
+	PreloadedLibraries() *foundation.NSArray[raw.MTLDynamicLibrary]
+	SetPreloadedLibraries(preloadedLibraries *foundation.NSArray[raw.MTLDynamicLibrary])
+	BinaryArchives() *foundation.NSArray[raw.MTLBinaryArchive]
+	SetBinaryArchives(binaryArchives *foundation.NSArray[raw.MTLBinaryArchive])
+	LinkedFunctions() *LinkedFunctions
+	SetLinkedFunctions(linkedFunctions *raw.MTLLinkedFunctions)
+	SupportAddingBinaryFunctions() bool
+	SetSupportAddingBinaryFunctions(supportAddingBinaryFunctions bool)
+	MaxCallStackDepth() uint
+	SetMaxCallStackDepth(maxCallStackDepth uint)
+	ShaderValidation() raw.MTLShaderValidation
+	SetShaderValidation(shaderValidation raw.MTLShaderValidation)
+	RequiredThreadsPerThreadgroup() raw.MTLSize
+	SetRequiredThreadsPerThreadgroup(requiredThreadsPerThreadgroup raw.MTLSize)
+}
+
+var _ ComputePipelineDescriptorable = (*ComputePipelineDescriptor)(nil)
 

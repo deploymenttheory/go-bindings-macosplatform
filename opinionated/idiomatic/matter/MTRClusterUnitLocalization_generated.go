@@ -32,7 +32,62 @@ func NewMTRClusterUnitLocalizationWithDeviceEndpointQueue(device *raw.MTRDevice,
 	return &MTRClusterUnitLocalization{inner: raw.MTRClusterUnitLocalizationFromID(_id)}
 }
 
+// ReadAttributeTemperatureUnitWithParams calls the underlying ReadAttributeTemperatureUnitWithParams.
+func (x *MTRClusterUnitLocalization) ReadAttributeTemperatureUnitWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeTemperatureUnitWithParams(params)
+}
+
+// WriteAttributeTemperatureUnitWithValueExpectedValueInterval calls the underlying WriteAttributeTemperatureUnitWithValueExpectedValueInterval.
+func (x *MTRClusterUnitLocalization) WriteAttributeTemperatureUnitWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
+	x.inner.WriteAttributeTemperatureUnitWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+}
+
+// WriteAttributeTemperatureUnitWithValueExpectedValueIntervalParams calls the underlying WriteAttributeTemperatureUnitWithValueExpectedValueIntervalParams.
+func (x *MTRClusterUnitLocalization) WriteAttributeTemperatureUnitWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
+	x.inner.WriteAttributeTemperatureUnitWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+}
+
+// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
+func (x *MTRClusterUnitLocalization) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+}
+
+// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
+func (x *MTRClusterUnitLocalization) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
+}
+
+// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
+func (x *MTRClusterUnitLocalization) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeAttributeListWithParams(params)
+}
+
+// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
+func (x *MTRClusterUnitLocalization) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeFeatureMapWithParams(params)
+}
+
+// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
+func (x *MTRClusterUnitLocalization) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeClusterRevisionWithParams(params)
+}
+
 func (x *MTRClusterUnitLocalization) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
 
 func (x *MTRClusterUnitLocalization) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+
+// MTRClusterUnitLocalizationable is the interface implemented by [MTRClusterUnitLocalization], for mocking and DI.
+type MTRClusterUnitLocalizationable interface {
+	Unwrap() *raw.MTRClusterUnitLocalization
+	ReadAttributeTemperatureUnitWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	WriteAttributeTemperatureUnitWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
+	WriteAttributeTemperatureUnitWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
+	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+}
+
+var _ MTRClusterUnitLocalizationable = (*MTRClusterUnitLocalization)(nil)
 

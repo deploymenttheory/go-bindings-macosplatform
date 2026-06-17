@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -113,16 +114,185 @@ func (x *WorkspaceOpenConfiguration) WithRequiresUniversalLinks(requiresUniversa
 	return x
 }
 
+// PromptsUserIfNeeded calls the underlying PromptsUserIfNeeded.
+func (x *WorkspaceOpenConfiguration) PromptsUserIfNeeded() bool {
+	return x.inner.PromptsUserIfNeeded()
+}
+
+// SetPromptsUserIfNeeded calls the underlying SetPromptsUserIfNeeded.
+func (x *WorkspaceOpenConfiguration) SetPromptsUserIfNeeded(promptsUserIfNeeded bool) {
+	x.inner.SetPromptsUserIfNeeded(promptsUserIfNeeded)
+}
+
+// AddsToRecentItems calls the underlying AddsToRecentItems.
+func (x *WorkspaceOpenConfiguration) AddsToRecentItems() bool {
+	return x.inner.AddsToRecentItems()
+}
+
+// SetAddsToRecentItems calls the underlying SetAddsToRecentItems.
+func (x *WorkspaceOpenConfiguration) SetAddsToRecentItems(addsToRecentItems bool) {
+	x.inner.SetAddsToRecentItems(addsToRecentItems)
+}
+
+// Activates calls the underlying Activates.
+func (x *WorkspaceOpenConfiguration) Activates() bool {
+	return x.inner.Activates()
+}
+
+// SetActivates calls the underlying SetActivates.
+func (x *WorkspaceOpenConfiguration) SetActivates(activates bool) {
+	x.inner.SetActivates(activates)
+}
+
+// Hides calls the underlying Hides.
+func (x *WorkspaceOpenConfiguration) Hides() bool {
+	return x.inner.Hides()
+}
+
+// SetHides calls the underlying SetHides.
+func (x *WorkspaceOpenConfiguration) SetHides(hides bool) {
+	x.inner.SetHides(hides)
+}
+
+// HidesOthers calls the underlying HidesOthers.
+func (x *WorkspaceOpenConfiguration) HidesOthers() bool {
+	return x.inner.HidesOthers()
+}
+
+// SetHidesOthers calls the underlying SetHidesOthers.
+func (x *WorkspaceOpenConfiguration) SetHidesOthers(hidesOthers bool) {
+	x.inner.SetHidesOthers(hidesOthers)
+}
+
+// IsForPrinting calls the underlying IsForPrinting.
+func (x *WorkspaceOpenConfiguration) IsForPrinting() bool {
+	return x.inner.IsForPrinting()
+}
+
+// SetForPrinting calls the underlying SetForPrinting.
+func (x *WorkspaceOpenConfiguration) SetForPrinting(forPrinting bool) {
+	x.inner.SetForPrinting(forPrinting)
+}
+
+// CreatesNewApplicationInstance calls the underlying CreatesNewApplicationInstance.
+func (x *WorkspaceOpenConfiguration) CreatesNewApplicationInstance() bool {
+	return x.inner.CreatesNewApplicationInstance()
+}
+
+// SetCreatesNewApplicationInstance calls the underlying SetCreatesNewApplicationInstance.
+func (x *WorkspaceOpenConfiguration) SetCreatesNewApplicationInstance(createsNewApplicationInstance bool) {
+	x.inner.SetCreatesNewApplicationInstance(createsNewApplicationInstance)
+}
+
+// AllowsRunningApplicationSubstitution calls the underlying AllowsRunningApplicationSubstitution.
+func (x *WorkspaceOpenConfiguration) AllowsRunningApplicationSubstitution() bool {
+	return x.inner.AllowsRunningApplicationSubstitution()
+}
+
+// SetAllowsRunningApplicationSubstitution calls the underlying SetAllowsRunningApplicationSubstitution.
+func (x *WorkspaceOpenConfiguration) SetAllowsRunningApplicationSubstitution(allowsRunningApplicationSubstitution bool) {
+	x.inner.SetAllowsRunningApplicationSubstitution(allowsRunningApplicationSubstitution)
+}
+
 // Arguments returns the collection as a Go slice.
-func (x *WorkspaceOpenConfiguration) Arguments() []*foundation.NSString {
+func (x *WorkspaceOpenConfiguration) Arguments() []string {
 	arr := x.inner.Arguments()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
+
+// SetArguments calls the underlying SetArguments.
+func (x *WorkspaceOpenConfiguration) SetArguments(arguments *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetArguments(arguments)
+}
+
+// Environment calls the underlying Environment.
+func (x *WorkspaceOpenConfiguration) Environment() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString] {
+	return x.inner.Environment()
+}
+
+// SetEnvironment calls the underlying SetEnvironment.
+func (x *WorkspaceOpenConfiguration) SetEnvironment(environment *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]) {
+	x.inner.SetEnvironment(environment)
+}
+
+// AppleEvent calls the underlying AppleEvent.
+func (x *WorkspaceOpenConfiguration) AppleEvent() *foundation.NSAppleEventDescriptor {
+	return x.inner.AppleEvent()
+}
+
+// SetAppleEvent calls the underlying SetAppleEvent.
+func (x *WorkspaceOpenConfiguration) SetAppleEvent(appleEvent *foundation.NSAppleEventDescriptor) {
+	x.inner.SetAppleEvent(appleEvent)
+}
+
+// Architecture calls the underlying Architecture.
+func (x *WorkspaceOpenConfiguration) Architecture() int {
+	return x.inner.Architecture()
+}
+
+// SetArchitecture calls the underlying SetArchitecture.
+func (x *WorkspaceOpenConfiguration) SetArchitecture(architecture int) {
+	x.inner.SetArchitecture(architecture)
+}
+
+// RequiresUniversalLinks calls the underlying RequiresUniversalLinks.
+func (x *WorkspaceOpenConfiguration) RequiresUniversalLinks() bool {
+	return x.inner.RequiresUniversalLinks()
+}
+
+// SetRequiresUniversalLinks calls the underlying SetRequiresUniversalLinks.
+func (x *WorkspaceOpenConfiguration) SetRequiresUniversalLinks(requiresUniversalLinks bool) {
+	x.inner.SetRequiresUniversalLinks(requiresUniversalLinks)
+}
+
+// WorkspaceOpenConfigurationable is the interface implemented by [WorkspaceOpenConfiguration], for mocking and DI.
+type WorkspaceOpenConfigurationable interface {
+	Unwrap() *raw.NSWorkspaceOpenConfiguration
+	WithPromptsUserIfNeeded(promptsUserIfNeeded bool) *WorkspaceOpenConfiguration
+	WithAddsToRecentItems(addsToRecentItems bool) *WorkspaceOpenConfiguration
+	WithActivates(activates bool) *WorkspaceOpenConfiguration
+	WithHides(hides bool) *WorkspaceOpenConfiguration
+	WithHidesOthers(hidesOthers bool) *WorkspaceOpenConfiguration
+	WithForPrinting(forPrinting bool) *WorkspaceOpenConfiguration
+	WithCreatesNewApplicationInstance(createsNewApplicationInstance bool) *WorkspaceOpenConfiguration
+	WithAllowsRunningApplicationSubstitution(allowsRunningApplicationSubstitution bool) *WorkspaceOpenConfiguration
+	WithArguments(items ...*foundation.NSString) *WorkspaceOpenConfiguration
+	WithEnvironment(environment *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]) *WorkspaceOpenConfiguration
+	WithAppleEvent(appleEvent *foundation.NSAppleEventDescriptor) *WorkspaceOpenConfiguration
+	WithArchitecture(architecture int) *WorkspaceOpenConfiguration
+	WithRequiresUniversalLinks(requiresUniversalLinks bool) *WorkspaceOpenConfiguration
+	PromptsUserIfNeeded() bool
+	SetPromptsUserIfNeeded(promptsUserIfNeeded bool)
+	AddsToRecentItems() bool
+	SetAddsToRecentItems(addsToRecentItems bool)
+	Activates() bool
+	SetActivates(activates bool)
+	Hides() bool
+	SetHides(hides bool)
+	HidesOthers() bool
+	SetHidesOthers(hidesOthers bool)
+	IsForPrinting() bool
+	SetForPrinting(forPrinting bool)
+	CreatesNewApplicationInstance() bool
+	SetCreatesNewApplicationInstance(createsNewApplicationInstance bool)
+	AllowsRunningApplicationSubstitution() bool
+	SetAllowsRunningApplicationSubstitution(allowsRunningApplicationSubstitution bool)
+	Arguments() []string
+	SetArguments(arguments *foundation.NSArray[*foundation.NSString])
+	Environment() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]
+	SetEnvironment(environment *foundation.NSDictionary[*foundation.NSString, *foundation.NSString])
+	AppleEvent() *foundation.NSAppleEventDescriptor
+	SetAppleEvent(appleEvent *foundation.NSAppleEventDescriptor)
+	Architecture() int
+	SetArchitecture(architecture int)
+	RequiresUniversalLinks() bool
+	SetRequiresUniversalLinks(requiresUniversalLinks bool)
+}
+
+var _ WorkspaceOpenConfigurationable = (*WorkspaceOpenConfiguration)(nil)
 

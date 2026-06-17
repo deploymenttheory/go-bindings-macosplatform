@@ -23,3 +23,10 @@ func NewMTRPumpConfigurationAndControlClusterSupplyVoltageHighEvent() *MTRPumpCo
 	return &MTRPumpConfigurationAndControlClusterSupplyVoltageHighEvent{inner: raw.MTRPumpConfigurationAndControlClusterSupplyVoltageHighEventFromID(_id)}
 }
 
+// MTRPumpConfigurationAndControlClusterSupplyVoltageHighEventable is the interface implemented by [MTRPumpConfigurationAndControlClusterSupplyVoltageHighEvent], for mocking and DI.
+type MTRPumpConfigurationAndControlClusterSupplyVoltageHighEventable interface {
+	Unwrap() *raw.MTRPumpConfigurationAndControlClusterSupplyVoltageHighEvent
+}
+
+var _ MTRPumpConfigurationAndControlClusterSupplyVoltageHighEventable = (*MTRPumpConfigurationAndControlClusterSupplyVoltageHighEvent)(nil)
+

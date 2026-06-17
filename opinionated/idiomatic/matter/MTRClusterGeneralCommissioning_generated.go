@@ -5,9 +5,12 @@
 package matter
 
 import (
+	"context"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // MTRClusterGeneralCommissioning wraps [raw.MTRClusterGeneralCommissioning] with a fluent Go API.
@@ -32,7 +35,302 @@ func NewMTRClusterGeneralCommissioningWithDeviceEndpointQueue(device *raw.MTRDev
 	return &MTRClusterGeneralCommissioning{inner: raw.MTRClusterGeneralCommissioningFromID(_id)}
 }
 
+// ArmFailSafeWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRClusterGeneralCommissioning) ArmFailSafeWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRGeneralCommissioningClusterArmFailSafeParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRGeneralCommissioningClusterArmFailSafeResponseParams, error) {
+	type _result struct {
+		val *MTRGeneralCommissioningClusterArmFailSafeResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ArmFailSafeWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTRGeneralCommissioningClusterArmFailSafeResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTRGeneralCommissioningClusterArmFailSafeResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTRGeneralCommissioningClusterArmFailSafeResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
+// SetRegulatoryConfigWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRClusterGeneralCommissioning) SetRegulatoryConfigWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRGeneralCommissioningClusterSetRegulatoryConfigParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams, error) {
+	type _result struct {
+		val *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SetRegulatoryConfigWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
+// CommissioningCompleteWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRClusterGeneralCommissioning) CommissioningCompleteWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRGeneralCommissioningClusterCommissioningCompleteParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRGeneralCommissioningClusterCommissioningCompleteResponseParams, error) {
+	type _result struct {
+		val *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.CommissioningCompleteWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTRGeneralCommissioningClusterCommissioningCompleteResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTRGeneralCommissioningClusterCommissioningCompleteResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
+// CommissioningCompleteWithExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRClusterGeneralCommissioning) CommissioningCompleteWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRGeneralCommissioningClusterCommissioningCompleteResponseParams, error) {
+	type _result struct {
+		val *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.CommissioningCompleteWithExpectedValuesExpectedValueIntervalCompletion(expectedValues, expectedValueIntervalMs, func(_p0 *raw.MTRGeneralCommissioningClusterCommissioningCompleteResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTRGeneralCommissioningClusterCommissioningCompleteResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeBreadcrumbWithParams calls the underlying ReadAttributeBreadcrumbWithParams.
+func (x *MTRClusterGeneralCommissioning) ReadAttributeBreadcrumbWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeBreadcrumbWithParams(params)
+}
+
+// WriteAttributeBreadcrumbWithValueExpectedValueInterval calls the underlying WriteAttributeBreadcrumbWithValueExpectedValueInterval.
+func (x *MTRClusterGeneralCommissioning) WriteAttributeBreadcrumbWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
+	x.inner.WriteAttributeBreadcrumbWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+}
+
+// WriteAttributeBreadcrumbWithValueExpectedValueIntervalParams calls the underlying WriteAttributeBreadcrumbWithValueExpectedValueIntervalParams.
+func (x *MTRClusterGeneralCommissioning) WriteAttributeBreadcrumbWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
+	x.inner.WriteAttributeBreadcrumbWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+}
+
+// ReadAttributeBasicCommissioningInfoWithParams calls the underlying ReadAttributeBasicCommissioningInfoWithParams.
+func (x *MTRClusterGeneralCommissioning) ReadAttributeBasicCommissioningInfoWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeBasicCommissioningInfoWithParams(params)
+}
+
+// ReadAttributeRegulatoryConfigWithParams calls the underlying ReadAttributeRegulatoryConfigWithParams.
+func (x *MTRClusterGeneralCommissioning) ReadAttributeRegulatoryConfigWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeRegulatoryConfigWithParams(params)
+}
+
+// ReadAttributeLocationCapabilityWithParams calls the underlying ReadAttributeLocationCapabilityWithParams.
+func (x *MTRClusterGeneralCommissioning) ReadAttributeLocationCapabilityWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeLocationCapabilityWithParams(params)
+}
+
+// ReadAttributeSupportsConcurrentConnectionWithParams calls the underlying ReadAttributeSupportsConcurrentConnectionWithParams.
+func (x *MTRClusterGeneralCommissioning) ReadAttributeSupportsConcurrentConnectionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeSupportsConcurrentConnectionWithParams(params)
+}
+
+// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
+func (x *MTRClusterGeneralCommissioning) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+}
+
+// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
+func (x *MTRClusterGeneralCommissioning) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
+}
+
+// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
+func (x *MTRClusterGeneralCommissioning) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeAttributeListWithParams(params)
+}
+
+// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
+func (x *MTRClusterGeneralCommissioning) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeFeatureMapWithParams(params)
+}
+
+// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
+func (x *MTRClusterGeneralCommissioning) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeClusterRevisionWithParams(params)
+}
+
+// ArmFailSafeWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
+func (x *MTRClusterGeneralCommissioning) ArmFailSafeWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTRGeneralCommissioningClusterArmFailSafeParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRGeneralCommissioningClusterArmFailSafeResponseParams, error) {
+	type _result struct {
+		val *MTRGeneralCommissioningClusterArmFailSafeResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ArmFailSafeWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTRGeneralCommissioningClusterArmFailSafeResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTRGeneralCommissioningClusterArmFailSafeResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTRGeneralCommissioningClusterArmFailSafeResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
+// SetRegulatoryConfigWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
+func (x *MTRClusterGeneralCommissioning) SetRegulatoryConfigWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTRGeneralCommissioningClusterSetRegulatoryConfigParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams, error) {
+	type _result struct {
+		val *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SetRegulatoryConfigWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
+// CommissioningCompleteWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
+func (x *MTRClusterGeneralCommissioning) CommissioningCompleteWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTRGeneralCommissioningClusterCommissioningCompleteParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRGeneralCommissioningClusterCommissioningCompleteResponseParams, error) {
+	type _result struct {
+		val *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.CommissioningCompleteWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTRGeneralCommissioningClusterCommissioningCompleteResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTRGeneralCommissioningClusterCommissioningCompleteResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
+// CommissioningCompleteWithExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
+func (x *MTRClusterGeneralCommissioning) CommissioningCompleteWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRGeneralCommissioningClusterCommissioningCompleteResponseParams, error) {
+	type _result struct {
+		val *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.CommissioningCompleteWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues, expectedValueIntervalMs, func(_p0 *raw.MTRGeneralCommissioningClusterCommissioningCompleteResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTRGeneralCommissioningClusterCommissioningCompleteResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
 func (x *MTRClusterGeneralCommissioning) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
 
 func (x *MTRClusterGeneralCommissioning) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+
+// MTRClusterGeneralCommissioningable is the interface implemented by [MTRClusterGeneralCommissioning], for mocking and DI.
+type MTRClusterGeneralCommissioningable interface {
+	Unwrap() *raw.MTRClusterGeneralCommissioning
+	ArmFailSafeWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRGeneralCommissioningClusterArmFailSafeParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRGeneralCommissioningClusterArmFailSafeResponseParams, error)
+	SetRegulatoryConfigWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRGeneralCommissioningClusterSetRegulatoryConfigParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams, error)
+	CommissioningCompleteWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRGeneralCommissioningClusterCommissioningCompleteParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRGeneralCommissioningClusterCommissioningCompleteResponseParams, error)
+	CommissioningCompleteWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRGeneralCommissioningClusterCommissioningCompleteResponseParams, error)
+	ReadAttributeBreadcrumbWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	WriteAttributeBreadcrumbWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
+	WriteAttributeBreadcrumbWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
+	ReadAttributeBasicCommissioningInfoWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeRegulatoryConfigWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeLocationCapabilityWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeSupportsConcurrentConnectionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ArmFailSafeWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTRGeneralCommissioningClusterArmFailSafeParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRGeneralCommissioningClusterArmFailSafeResponseParams, error)
+	SetRegulatoryConfigWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTRGeneralCommissioningClusterSetRegulatoryConfigParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams, error)
+	CommissioningCompleteWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTRGeneralCommissioningClusterCommissioningCompleteParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRGeneralCommissioningClusterCommissioningCompleteResponseParams, error)
+	CommissioningCompleteWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRGeneralCommissioningClusterCommissioningCompleteResponseParams, error)
+}
+
+var _ MTRClusterGeneralCommissioningable = (*MTRClusterGeneralCommissioning)(nil)
 

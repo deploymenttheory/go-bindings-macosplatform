@@ -23,3 +23,16 @@ func NewSystemExtensionManager() *SystemExtensionManager {
 	return &SystemExtensionManager{inner: raw.OSSystemExtensionManagerFromID(_id)}
 }
 
+// SubmitRequest calls the underlying SubmitRequest.
+func (x *SystemExtensionManager) SubmitRequest(request *raw.OSSystemExtensionRequest) {
+	x.inner.SubmitRequest(request)
+}
+
+// SystemExtensionManagerable is the interface implemented by [SystemExtensionManager], for mocking and DI.
+type SystemExtensionManagerable interface {
+	Unwrap() *raw.OSSystemExtensionManager
+	SubmitRequest(request *raw.OSSystemExtensionRequest)
+}
+
+var _ SystemExtensionManagerable = (*SystemExtensionManager)(nil)
+

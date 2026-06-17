@@ -29,3 +29,10 @@ func (x *UnitElectricPotentialDifference) asUnit() *raw.NSUnit { return &x.inner
 
 func (x *UnitElectricPotentialDifference) asObject() *raw.NSObject { return &x.inner.NSDimension.NSUnit.NSObject }
 
+// UnitElectricPotentialDifferenceable is the interface implemented by [UnitElectricPotentialDifference], for mocking and DI.
+type UnitElectricPotentialDifferenceable interface {
+	Unwrap() *raw.NSUnitElectricPotentialDifference
+}
+
+var _ UnitElectricPotentialDifferenceable = (*UnitElectricPotentialDifference)(nil)
+

@@ -37,3 +37,10 @@ func (x *CNNDilatedPoolingMax) asCNNPooling() *raw.MPSCNNPooling { return &x.inn
 
 func (x *CNNDilatedPoolingMax) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSCNNPooling.MPSCNNKernel }
 
+// CNNDilatedPoolingMaxable is the interface implemented by [CNNDilatedPoolingMax], for mocking and DI.
+type CNNDilatedPoolingMaxable interface {
+	Unwrap() *raw.MPSCNNDilatedPoolingMax
+}
+
+var _ CNNDilatedPoolingMaxable = (*CNNDilatedPoolingMax)(nil)
+

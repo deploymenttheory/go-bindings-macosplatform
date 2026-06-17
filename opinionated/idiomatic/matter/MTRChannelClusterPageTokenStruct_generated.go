@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -41,4 +42,58 @@ func (x *MTRChannelClusterPageTokenStruct) WithBefore(before string) *MTRChannel
 	x.inner.SetBefore(foundation.NSStringStringWithUTF8String(before))
 	return x
 }
+
+// Limit calls the underlying Limit.
+func (x *MTRChannelClusterPageTokenStruct) Limit() *foundation.NSNumber {
+	return x.inner.Limit()
+}
+
+// SetLimit calls the underlying SetLimit.
+func (x *MTRChannelClusterPageTokenStruct) SetLimit(limit *foundation.NSNumber) {
+	x.inner.SetLimit(limit)
+}
+
+// After calls the underlying After.
+func (x *MTRChannelClusterPageTokenStruct) After() string {
+	_r := x.inner.After()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetAfter calls the underlying SetAfter.
+func (x *MTRChannelClusterPageTokenStruct) SetAfter(after string) {
+	x.inner.SetAfter(foundation.NSStringStringWithUTF8String(after))
+}
+
+// Before calls the underlying Before.
+func (x *MTRChannelClusterPageTokenStruct) Before() string {
+	_r := x.inner.Before()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetBefore calls the underlying SetBefore.
+func (x *MTRChannelClusterPageTokenStruct) SetBefore(before string) {
+	x.inner.SetBefore(foundation.NSStringStringWithUTF8String(before))
+}
+
+// MTRChannelClusterPageTokenStructable is the interface implemented by [MTRChannelClusterPageTokenStruct], for mocking and DI.
+type MTRChannelClusterPageTokenStructable interface {
+	Unwrap() *raw.MTRChannelClusterPageTokenStruct
+	WithLimit(limit *foundation.NSNumber) *MTRChannelClusterPageTokenStruct
+	WithAfter(after string) *MTRChannelClusterPageTokenStruct
+	WithBefore(before string) *MTRChannelClusterPageTokenStruct
+	Limit() *foundation.NSNumber
+	SetLimit(limit *foundation.NSNumber)
+	After() string
+	SetAfter(after string)
+	Before() string
+	SetBefore(before string)
+}
+
+var _ MTRChannelClusterPageTokenStructable = (*MTRChannelClusterPageTokenStruct)(nil)
 

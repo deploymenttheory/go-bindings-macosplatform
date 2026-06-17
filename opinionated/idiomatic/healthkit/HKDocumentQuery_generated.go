@@ -7,6 +7,7 @@ package healthkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -26,18 +27,36 @@ func NewDocumentQueryWithDocumentTypePredicateLimitSortDescriptorsIncludeDocumen
 	return &DocumentQuery{inner: raw.HKDocumentQueryFromID(_id)}
 }
 
+// Limit calls the underlying Limit.
+func (x *DocumentQuery) Limit() uint {
+	return x.inner.Limit()
+}
+
 // SortDescriptors returns the collection as a Go slice.
 func (x *DocumentQuery) SortDescriptors() []*foundation.NSSortDescriptor {
 	arr := x.inner.SortDescriptors()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSSortDescriptor, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSSortDescriptor {
+		return foundation.NSSortDescriptorFromID(purego.Retain(_id))
+	})
+}
+
+// IncludeDocumentData calls the underlying IncludeDocumentData.
+func (x *DocumentQuery) IncludeDocumentData() bool {
+	return x.inner.IncludeDocumentData()
 }
 
 func (x *DocumentQuery) asQuery() *raw.HKQuery { return &x.inner.HKQuery }
+
+// DocumentQueryable is the interface implemented by [DocumentQuery], for mocking and DI.
+type DocumentQueryable interface {
+	Unwrap() *raw.HKDocumentQuery
+	Limit() uint
+	SortDescriptors() []*foundation.NSSortDescriptor
+	IncludeDocumentData() bool
+}
+
+var _ DocumentQueryable = (*DocumentQuery)(nil)
 

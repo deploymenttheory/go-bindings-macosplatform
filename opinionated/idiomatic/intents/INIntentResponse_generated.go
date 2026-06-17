@@ -30,5 +30,25 @@ func (x *IntentResponse) WithUserActivity(userActivity *foundation.NSUserActivit
 	return x
 }
 
+// UserActivity calls the underlying UserActivity.
+func (x *IntentResponse) UserActivity() *foundation.NSUserActivity {
+	return x.inner.UserActivity()
+}
+
+// SetUserActivity calls the underlying SetUserActivity.
+func (x *IntentResponse) SetUserActivity(userActivity *foundation.NSUserActivity) {
+	x.inner.SetUserActivity(userActivity)
+}
+
 func (x *IntentResponse) asIntentResponse() *raw.INIntentResponse { return x.inner }
+
+// IntentResponseable is the interface implemented by [IntentResponse], for mocking and DI.
+type IntentResponseable interface {
+	Unwrap() *raw.INIntentResponse
+	WithUserActivity(userActivity *foundation.NSUserActivity) *IntentResponse
+	UserActivity() *foundation.NSUserActivity
+	SetUserActivity(userActivity *foundation.NSUserActivity)
+}
+
+var _ IntentResponseable = (*IntentResponse)(nil)
 

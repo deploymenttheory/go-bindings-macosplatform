@@ -7,6 +7,7 @@ package avfoundation
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -74,18 +75,104 @@ func (x *CaptureSlider) WithAccessibilityIdentifier(accessibilityIdentifier stri
 	return x
 }
 
+// SetActionQueueAction calls the underlying SetActionQueueAction.
+func (x *CaptureSlider) SetActionQueueAction(actionQueue *foundation.NSObject, action func(float32)) {
+	x.inner.SetActionQueueAction(actionQueue, action)
+}
+
+// Value calls the underlying Value.
+func (x *CaptureSlider) Value() float32 {
+	return x.inner.Value()
+}
+
+// SetValue calls the underlying SetValue.
+func (x *CaptureSlider) SetValue(value float32) {
+	x.inner.SetValue(value)
+}
+
+// LocalizedValueFormat calls the underlying LocalizedValueFormat.
+func (x *CaptureSlider) LocalizedValueFormat() string {
+	_r := x.inner.LocalizedValueFormat()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLocalizedValueFormat calls the underlying SetLocalizedValueFormat.
+func (x *CaptureSlider) SetLocalizedValueFormat(localizedValueFormat string) {
+	x.inner.SetLocalizedValueFormat(foundation.NSStringStringWithUTF8String(localizedValueFormat))
+}
+
 // ProminentValues returns the collection as a Go slice.
 func (x *CaptureSlider) ProminentValues() []*foundation.NSNumber {
 	arr := x.inner.ProminentValues()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
+}
+
+// SetProminentValues calls the underlying SetProminentValues.
+func (x *CaptureSlider) SetProminentValues(prominentValues *foundation.NSArray[*foundation.NSNumber]) {
+	x.inner.SetProminentValues(prominentValues)
+}
+
+// LocalizedTitle calls the underlying LocalizedTitle.
+func (x *CaptureSlider) LocalizedTitle() string {
+	_r := x.inner.LocalizedTitle()
+	if _r == nil {
+		return ""
 	}
-	return out
+	return purego.GoString(_r.Ptr())
+}
+
+// SymbolName calls the underlying SymbolName.
+func (x *CaptureSlider) SymbolName() string {
+	_r := x.inner.SymbolName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// AccessibilityIdentifier calls the underlying AccessibilityIdentifier.
+func (x *CaptureSlider) AccessibilityIdentifier() string {
+	_r := x.inner.AccessibilityIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetAccessibilityIdentifier calls the underlying SetAccessibilityIdentifier.
+func (x *CaptureSlider) SetAccessibilityIdentifier(accessibilityIdentifier string) {
+	x.inner.SetAccessibilityIdentifier(foundation.NSStringStringWithUTF8String(accessibilityIdentifier))
 }
 
 func (x *CaptureSlider) asCaptureControl() *raw.AVCaptureControl { return &x.inner.AVCaptureControl }
+
+// CaptureSliderable is the interface implemented by [CaptureSlider], for mocking and DI.
+type CaptureSliderable interface {
+	Unwrap() *raw.AVCaptureSlider
+	WithValue(value float32) *CaptureSlider
+	WithLocalizedValueFormat(localizedValueFormat string) *CaptureSlider
+	WithProminentValues(items ...*foundation.NSNumber) *CaptureSlider
+	WithAccessibilityIdentifier(accessibilityIdentifier string) *CaptureSlider
+	SetActionQueueAction(actionQueue *foundation.NSObject, action func(float32))
+	Value() float32
+	SetValue(value float32)
+	LocalizedValueFormat() string
+	SetLocalizedValueFormat(localizedValueFormat string)
+	ProminentValues() []*foundation.NSNumber
+	SetProminentValues(prominentValues *foundation.NSArray[*foundation.NSNumber])
+	LocalizedTitle() string
+	SymbolName() string
+	AccessibilityIdentifier() string
+	SetAccessibilityIdentifier(accessibilityIdentifier string)
+}
+
+var _ CaptureSliderable = (*CaptureSlider)(nil)
 

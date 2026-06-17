@@ -7,6 +7,7 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -30,6 +31,20 @@ func (x *DOMHTMLTableCaptionElement) WithAlign(align string) *DOMHTMLTableCaptio
 	return x
 }
 
+// Align calls the underlying Align.
+func (x *DOMHTMLTableCaptionElement) Align() string {
+	_r := x.inner.Align()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetAlign calls the underlying SetAlign.
+func (x *DOMHTMLTableCaptionElement) SetAlign(align string) {
+	x.inner.SetAlign(foundation.NSStringStringWithUTF8String(align))
+}
+
 func (x *DOMHTMLTableCaptionElement) asDOMHTMLElement() *raw.DOMHTMLElement { return &x.inner.DOMHTMLElement }
 
 func (x *DOMHTMLTableCaptionElement) asDOMElement() *raw.DOMElement { return &x.inner.DOMHTMLElement.DOMElement }
@@ -39,4 +54,14 @@ func (x *DOMHTMLTableCaptionElement) asDOMNode() *raw.DOMNode { return &x.inner.
 func (x *DOMHTMLTableCaptionElement) asDOMObject() *raw.DOMObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject }
 
 func (x *DOMHTMLTableCaptionElement) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject }
+
+// DOMHTMLTableCaptionElementable is the interface implemented by [DOMHTMLTableCaptionElement], for mocking and DI.
+type DOMHTMLTableCaptionElementable interface {
+	Unwrap() *raw.DOMHTMLTableCaptionElement
+	WithAlign(align string) *DOMHTMLTableCaptionElement
+	Align() string
+	SetAlign(align string)
+}
+
+var _ DOMHTMLTableCaptionElementable = (*DOMHTMLTableCaptionElement)(nil)
 

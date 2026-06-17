@@ -7,6 +7,7 @@ package authenticationservices
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,4 +25,21 @@ func NewOneTimeCodeCredentialWithCode(code string) *OneTimeCodeCredential {
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCode:"), foundation.NSStringStringWithUTF8String(code).Ptr())
 	return &OneTimeCodeCredential{inner: raw.ASOneTimeCodeCredentialFromID(_id)}
 }
+
+// Code calls the underlying Code.
+func (x *OneTimeCodeCredential) Code() string {
+	_r := x.inner.Code()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// OneTimeCodeCredentialable is the interface implemented by [OneTimeCodeCredential], for mocking and DI.
+type OneTimeCodeCredentialable interface {
+	Unwrap() *raw.ASOneTimeCodeCredential
+	Code() string
+}
+
+var _ OneTimeCodeCredentialable = (*OneTimeCodeCredential)(nil)
 

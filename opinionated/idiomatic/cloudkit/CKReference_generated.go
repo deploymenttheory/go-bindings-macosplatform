@@ -31,3 +31,26 @@ func NewReferenceWithRecordAction(record *raw.CKRecord, action raw.CKReferenceAc
 	return &Reference{inner: raw.CKReferenceFromID(_id)}
 }
 
+// ReferenceAction calls the underlying ReferenceAction.
+func (x *Reference) ReferenceAction() raw.CKReferenceAction {
+	return x.inner.ReferenceAction()
+}
+
+// RecordID calls the underlying RecordID.
+func (x *Reference) RecordID() *RecordID {
+	_r := x.inner.RecordID()
+	if _r == nil {
+		return nil
+	}
+	return &RecordID{inner: _r}
+}
+
+// Referenceable is the interface implemented by [Reference], for mocking and DI.
+type Referenceable interface {
+	Unwrap() *raw.CKReference
+	ReferenceAction() raw.CKReferenceAction
+	RecordID() *RecordID
+}
+
+var _ Referenceable = (*Reference)(nil)
+

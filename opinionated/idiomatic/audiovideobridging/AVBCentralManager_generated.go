@@ -23,3 +23,34 @@ func NewCentralManager() *CentralManager {
 	return &CentralManager{inner: raw.AVBCentralManagerFromID(_id)}
 }
 
+// StartControllerMatching calls the underlying StartControllerMatching.
+func (x *CentralManager) StartControllerMatching() {
+	x.inner.StartControllerMatching()
+}
+
+// DidAddInterface calls the underlying DidAddInterface.
+func (x *CentralManager) DidAddInterface(interface_ *raw.AVBInterface) {
+	x.inner.DidAddInterface(interface_)
+}
+
+// DidRemoveInterface calls the underlying DidRemoveInterface.
+func (x *CentralManager) DidRemoveInterface(interface_ *raw.AVBInterface) {
+	x.inner.DidRemoveInterface(interface_)
+}
+
+// StreamingEnabledInterfacesOnly calls the underlying StreamingEnabledInterfacesOnly.
+func (x *CentralManager) StreamingEnabledInterfacesOnly() bool {
+	return x.inner.StreamingEnabledInterfacesOnly()
+}
+
+// CentralManagerable is the interface implemented by [CentralManager], for mocking and DI.
+type CentralManagerable interface {
+	Unwrap() *raw.AVBCentralManager
+	StartControllerMatching()
+	DidAddInterface(interface_ *raw.AVBInterface)
+	DidRemoveInterface(interface_ *raw.AVBInterface)
+	StreamingEnabledInterfacesOnly() bool
+}
+
+var _ CentralManagerable = (*CentralManager)(nil)
+

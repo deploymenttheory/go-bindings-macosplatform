@@ -41,9 +41,55 @@ func (x *BasicAnimation) WithByValue(byValue objc.ID) *BasicAnimation {
 	return x
 }
 
+// FromValue calls the underlying FromValue.
+func (x *BasicAnimation) FromValue() objc.ID {
+	return x.inner.FromValue()
+}
+
+// SetFromValue calls the underlying SetFromValue.
+func (x *BasicAnimation) SetFromValue(fromValue objc.ID) {
+	x.inner.SetFromValue(fromValue)
+}
+
+// ToValue calls the underlying ToValue.
+func (x *BasicAnimation) ToValue() objc.ID {
+	return x.inner.ToValue()
+}
+
+// SetToValue calls the underlying SetToValue.
+func (x *BasicAnimation) SetToValue(toValue objc.ID) {
+	x.inner.SetToValue(toValue)
+}
+
+// ByValue calls the underlying ByValue.
+func (x *BasicAnimation) ByValue() objc.ID {
+	return x.inner.ByValue()
+}
+
+// SetByValue calls the underlying SetByValue.
+func (x *BasicAnimation) SetByValue(byValue objc.ID) {
+	x.inner.SetByValue(byValue)
+}
+
 func (x *BasicAnimation) asBasicAnimation() *raw.CABasicAnimation { return x.inner }
 
 func (x *BasicAnimation) asPropertyAnimation() *raw.CAPropertyAnimation { return &x.inner.CAPropertyAnimation }
 
 func (x *BasicAnimation) asAnimation() *raw.CAAnimation { return &x.inner.CAPropertyAnimation.CAAnimation }
+
+// BasicAnimationable is the interface implemented by [BasicAnimation], for mocking and DI.
+type BasicAnimationable interface {
+	Unwrap() *raw.CABasicAnimation
+	WithFromValue(fromValue objc.ID) *BasicAnimation
+	WithToValue(toValue objc.ID) *BasicAnimation
+	WithByValue(byValue objc.ID) *BasicAnimation
+	FromValue() objc.ID
+	SetFromValue(fromValue objc.ID)
+	ToValue() objc.ID
+	SetToValue(toValue objc.ID)
+	ByValue() objc.ID
+	SetByValue(byValue objc.ID)
+}
+
+var _ BasicAnimationable = (*BasicAnimation)(nil)
 

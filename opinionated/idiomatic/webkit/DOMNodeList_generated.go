@@ -23,7 +23,30 @@ func NewDOMNodeList() *DOMNodeList {
 	return &DOMNodeList{inner: raw.DOMNodeListFromID(_id)}
 }
 
+// Item calls the underlying Item.
+func (x *DOMNodeList) Item(index uint) *DOMNode {
+	_r := x.inner.Item(index)
+	if _r == nil {
+		return nil
+	}
+	return &DOMNode{inner: _r}
+}
+
+// Length calls the underlying Length.
+func (x *DOMNodeList) Length() uint {
+	return x.inner.Length()
+}
+
 func (x *DOMNodeList) asDOMObject() *raw.DOMObject { return &x.inner.DOMObject }
 
 func (x *DOMNodeList) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMObject.WebScriptObject }
+
+// DOMNodeListable is the interface implemented by [DOMNodeList], for mocking and DI.
+type DOMNodeListable interface {
+	Unwrap() *raw.DOMNodeList
+	Item(index uint) *DOMNode
+	Length() uint
+}
+
+var _ DOMNodeListable = (*DOMNodeList)(nil)
 

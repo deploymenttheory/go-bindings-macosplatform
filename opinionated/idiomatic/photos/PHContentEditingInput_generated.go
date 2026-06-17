@@ -5,8 +5,14 @@
 package photos
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/uniformtypeidentifiers"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // ContentEditingInput wraps [raw.PHContentEditingInput] with a fluent Go API.
@@ -22,4 +28,101 @@ func NewContentEditingInput() *ContentEditingInput {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHContentEditingInput")), objc.RegisterName("new"))
 	return &ContentEditingInput{inner: raw.PHContentEditingInputFromID(_id)}
 }
+
+// MediaType calls the underlying MediaType.
+func (x *ContentEditingInput) MediaType() raw.PHAssetMediaType {
+	return x.inner.MediaType()
+}
+
+// MediaSubtypes calls the underlying MediaSubtypes.
+func (x *ContentEditingInput) MediaSubtypes() raw.PHAssetMediaSubtype {
+	return x.inner.MediaSubtypes()
+}
+
+// CreationDate calls the underlying CreationDate.
+func (x *ContentEditingInput) CreationDate() *foundation.NSDate {
+	return x.inner.CreationDate()
+}
+
+// Location calls the underlying Location.
+func (x *ContentEditingInput) Location() unsafe.Pointer {
+	return x.inner.Location()
+}
+
+// ContentType calls the underlying ContentType.
+func (x *ContentEditingInput) ContentType() *uniformtypeidentifiers.UTType {
+	return x.inner.ContentType()
+}
+
+// UniformTypeIdentifier calls the underlying UniformTypeIdentifier.
+func (x *ContentEditingInput) UniformTypeIdentifier() string {
+	_r := x.inner.UniformTypeIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// PlaybackStyle calls the underlying PlaybackStyle.
+func (x *ContentEditingInput) PlaybackStyle() raw.PHAssetPlaybackStyle {
+	return x.inner.PlaybackStyle()
+}
+
+// AdjustmentData calls the underlying AdjustmentData.
+func (x *ContentEditingInput) AdjustmentData() *AdjustmentData {
+	_r := x.inner.AdjustmentData()
+	if _r == nil {
+		return nil
+	}
+	return &AdjustmentData{inner: _r}
+}
+
+// DisplaySizeImage calls the underlying DisplaySizeImage.
+func (x *ContentEditingInput) DisplaySizeImage() *appkit.NSImage {
+	return x.inner.DisplaySizeImage()
+}
+
+// FullSizeImageURL calls the underlying FullSizeImageURL.
+func (x *ContentEditingInput) FullSizeImageURL() *foundation.NSURL {
+	return x.inner.FullSizeImageURL()
+}
+
+// FullSizeImageOrientation calls the underlying FullSizeImageOrientation.
+func (x *ContentEditingInput) FullSizeImageOrientation() int {
+	return x.inner.FullSizeImageOrientation()
+}
+
+// AudiovisualAsset calls the underlying AudiovisualAsset.
+func (x *ContentEditingInput) AudiovisualAsset() *avfoundation.AVAsset {
+	return x.inner.AudiovisualAsset()
+}
+
+// LivePhoto calls the underlying LivePhoto.
+func (x *ContentEditingInput) LivePhoto() *LivePhoto {
+	_r := x.inner.LivePhoto()
+	if _r == nil {
+		return nil
+	}
+	return &LivePhoto{inner: _r}
+}
+
+// ContentEditingInputable is the interface implemented by [ContentEditingInput], for mocking and DI.
+type ContentEditingInputable interface {
+	Unwrap() *raw.PHContentEditingInput
+	MediaType() raw.PHAssetMediaType
+	MediaSubtypes() raw.PHAssetMediaSubtype
+	CreationDate() *foundation.NSDate
+	Location() unsafe.Pointer
+	ContentType() *uniformtypeidentifiers.UTType
+	UniformTypeIdentifier() string
+	PlaybackStyle() raw.PHAssetPlaybackStyle
+	AdjustmentData() *AdjustmentData
+	DisplaySizeImage() *appkit.NSImage
+	FullSizeImageURL() *foundation.NSURL
+	FullSizeImageOrientation() int
+	AudiovisualAsset() *avfoundation.AVAsset
+	LivePhoto() *LivePhoto
+}
+
+var _ ContentEditingInputable = (*ContentEditingInput)(nil)
 

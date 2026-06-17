@@ -10,6 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -201,17 +202,44 @@ func (x *PlayerItem) WithAutomaticallyHandlesInterstitialEvents(automaticallyHan
 	return x
 }
 
+// Status calls the underlying Status.
+func (x *PlayerItem) Status() raw.AVPlayerItemStatus {
+	return x.inner.Status()
+}
+
+// Error calls the underlying Error.
+func (x *PlayerItem) Error() unsafe.Pointer {
+	return x.inner.Error()
+}
+
+// Asset calls the underlying Asset.
+func (x *PlayerItem) Asset() *Asset {
+	_r := x.inner.Asset()
+	if _r == nil {
+		return nil
+	}
+	return &Asset{inner: _r}
+}
+
 // Tracks returns the collection as a Go slice.
 func (x *PlayerItem) Tracks() []*raw.AVPlayerItemTrack {
 	arr := x.inner.Tracks()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AVPlayerItemTrack, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVPlayerItemTrack {
+		return raw.AVPlayerItemTrackFromID(purego.Retain(_id))
+	})
+}
+
+// Duration calls the underlying Duration.
+func (x *PlayerItem) Duration() coremedia.CMTime {
+	return x.inner.Duration()
+}
+
+// PresentationSize calls the underlying PresentationSize.
+func (x *PlayerItem) PresentationSize() corefoundation.CGSize {
+	return x.inner.PresentationSize()
 }
 
 // TimedMetadata returns the collection as a Go slice.
@@ -220,24 +248,135 @@ func (x *PlayerItem) TimedMetadata() []*raw.AVMetadataItem {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AVMetadataItem, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVMetadataItem {
+		return raw.AVMetadataItemFromID(purego.Retain(_id))
+	})
 }
 
 // AutomaticallyLoadedAssetKeys returns the collection as a Go slice.
-func (x *PlayerItem) AutomaticallyLoadedAssetKeys() []*foundation.NSString {
+func (x *PlayerItem) AutomaticallyLoadedAssetKeys() []string {
 	arr := x.inner.AutomaticallyLoadedAssetKeys()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// CanPlayFastForward calls the underlying CanPlayFastForward.
+func (x *PlayerItem) CanPlayFastForward() bool {
+	return x.inner.CanPlayFastForward()
+}
+
+// CanPlaySlowForward calls the underlying CanPlaySlowForward.
+func (x *PlayerItem) CanPlaySlowForward() bool {
+	return x.inner.CanPlaySlowForward()
+}
+
+// CanPlayReverse calls the underlying CanPlayReverse.
+func (x *PlayerItem) CanPlayReverse() bool {
+	return x.inner.CanPlayReverse()
+}
+
+// CanPlaySlowReverse calls the underlying CanPlaySlowReverse.
+func (x *PlayerItem) CanPlaySlowReverse() bool {
+	return x.inner.CanPlaySlowReverse()
+}
+
+// CanPlayFastReverse calls the underlying CanPlayFastReverse.
+func (x *PlayerItem) CanPlayFastReverse() bool {
+	return x.inner.CanPlayFastReverse()
+}
+
+// CanStepForward calls the underlying CanStepForward.
+func (x *PlayerItem) CanStepForward() bool {
+	return x.inner.CanStepForward()
+}
+
+// CanStepBackward calls the underlying CanStepBackward.
+func (x *PlayerItem) CanStepBackward() bool {
+	return x.inner.CanStepBackward()
+}
+
+// ConfiguredTimeOffsetFromLive calls the underlying ConfiguredTimeOffsetFromLive.
+func (x *PlayerItem) ConfiguredTimeOffsetFromLive() coremedia.CMTime {
+	return x.inner.ConfiguredTimeOffsetFromLive()
+}
+
+// SetConfiguredTimeOffsetFromLive calls the underlying SetConfiguredTimeOffsetFromLive.
+func (x *PlayerItem) SetConfiguredTimeOffsetFromLive(configuredTimeOffsetFromLive coremedia.CMTime) {
+	x.inner.SetConfiguredTimeOffsetFromLive(configuredTimeOffsetFromLive)
+}
+
+// RecommendedTimeOffsetFromLive calls the underlying RecommendedTimeOffsetFromLive.
+func (x *PlayerItem) RecommendedTimeOffsetFromLive() coremedia.CMTime {
+	return x.inner.RecommendedTimeOffsetFromLive()
+}
+
+// AutomaticallyPreservesTimeOffsetFromLive calls the underlying AutomaticallyPreservesTimeOffsetFromLive.
+func (x *PlayerItem) AutomaticallyPreservesTimeOffsetFromLive() bool {
+	return x.inner.AutomaticallyPreservesTimeOffsetFromLive()
+}
+
+// SetAutomaticallyPreservesTimeOffsetFromLive calls the underlying SetAutomaticallyPreservesTimeOffsetFromLive.
+func (x *PlayerItem) SetAutomaticallyPreservesTimeOffsetFromLive(automaticallyPreservesTimeOffsetFromLive bool) {
+	x.inner.SetAutomaticallyPreservesTimeOffsetFromLive(automaticallyPreservesTimeOffsetFromLive)
+}
+
+// CurrentTime calls the underlying CurrentTime.
+func (x *PlayerItem) CurrentTime() coremedia.CMTime {
+	return x.inner.CurrentTime()
+}
+
+// SeekToTimeCompletionHandler calls the underlying SeekToTimeCompletionHandler.
+func (x *PlayerItem) SeekToTimeCompletionHandler(time_ coremedia.CMTime, completionHandler func(bool)) {
+	x.inner.SeekToTimeCompletionHandler(time_, completionHandler)
+}
+
+// SeekToTimeToleranceBeforeToleranceAfterCompletionHandler calls the underlying SeekToTimeToleranceBeforeToleranceAfterCompletionHandler.
+func (x *PlayerItem) SeekToTimeToleranceBeforeToleranceAfterCompletionHandler(time_ coremedia.CMTime, toleranceBefore coremedia.CMTime, toleranceAfter coremedia.CMTime, completionHandler func(bool)) {
+	x.inner.SeekToTimeToleranceBeforeToleranceAfterCompletionHandler(time_, toleranceBefore, toleranceAfter, completionHandler)
+}
+
+// CancelPendingSeeks calls the underlying CancelPendingSeeks.
+func (x *PlayerItem) CancelPendingSeeks() {
+	x.inner.CancelPendingSeeks()
+}
+
+// CurrentDate calls the underlying CurrentDate.
+func (x *PlayerItem) CurrentDate() *foundation.NSDate {
+	return x.inner.CurrentDate()
+}
+
+// SeekToDateCompletionHandler calls the underlying SeekToDateCompletionHandler.
+func (x *PlayerItem) SeekToDateCompletionHandler(date *foundation.NSDate, completionHandler func(bool)) bool {
+	return x.inner.SeekToDateCompletionHandler(date, completionHandler)
+}
+
+// StepByCount calls the underlying StepByCount.
+func (x *PlayerItem) StepByCount(stepCount int) {
+	x.inner.StepByCount(stepCount)
+}
+
+// ForwardPlaybackEndTime calls the underlying ForwardPlaybackEndTime.
+func (x *PlayerItem) ForwardPlaybackEndTime() coremedia.CMTime {
+	return x.inner.ForwardPlaybackEndTime()
+}
+
+// SetForwardPlaybackEndTime calls the underlying SetForwardPlaybackEndTime.
+func (x *PlayerItem) SetForwardPlaybackEndTime(forwardPlaybackEndTime coremedia.CMTime) {
+	x.inner.SetForwardPlaybackEndTime(forwardPlaybackEndTime)
+}
+
+// ReversePlaybackEndTime calls the underlying ReversePlaybackEndTime.
+func (x *PlayerItem) ReversePlaybackEndTime() coremedia.CMTime {
+	return x.inner.ReversePlaybackEndTime()
+}
+
+// SetReversePlaybackEndTime calls the underlying SetReversePlaybackEndTime.
+func (x *PlayerItem) SetReversePlaybackEndTime(reversePlaybackEndTime coremedia.CMTime) {
+	x.inner.SetReversePlaybackEndTime(reversePlaybackEndTime)
 }
 
 // SeekableTimeRanges returns the collection as a Go slice.
@@ -246,11 +385,43 @@ func (x *PlayerItem) SeekableTimeRanges() []*foundation.NSValue {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSValue, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSValue {
+		return foundation.NSValueFromID(purego.Retain(_id))
+	})
+}
+
+// Timebase calls the underlying Timebase.
+func (x *PlayerItem) Timebase() unsafe.Pointer {
+	return x.inner.Timebase()
+}
+
+// VideoComposition calls the underlying VideoComposition.
+func (x *PlayerItem) VideoComposition() *VideoComposition {
+	_r := x.inner.VideoComposition()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &VideoComposition{inner: _r}
+}
+
+// SetVideoComposition calls the underlying SetVideoComposition.
+func (x *PlayerItem) SetVideoComposition(videoComposition *raw.AVVideoComposition) {
+	x.inner.SetVideoComposition(videoComposition)
+}
+
+// CustomVideoCompositor calls the underlying CustomVideoCompositor.
+func (x *PlayerItem) CustomVideoCompositor() raw.AVVideoCompositing {
+	return x.inner.CustomVideoCompositor()
+}
+
+// SeekingWaitsForVideoCompositionRendering calls the underlying SeekingWaitsForVideoCompositionRendering.
+func (x *PlayerItem) SeekingWaitsForVideoCompositionRendering() bool {
+	return x.inner.SeekingWaitsForVideoCompositionRendering()
+}
+
+// SetSeekingWaitsForVideoCompositionRendering calls the underlying SetSeekingWaitsForVideoCompositionRendering.
+func (x *PlayerItem) SetSeekingWaitsForVideoCompositionRendering(seekingWaitsForVideoCompositionRendering bool) {
+	x.inner.SetSeekingWaitsForVideoCompositionRendering(seekingWaitsForVideoCompositionRendering)
 }
 
 // TextStyleRules returns the collection as a Go slice.
@@ -259,11 +430,86 @@ func (x *PlayerItem) TextStyleRules() []*raw.AVTextStyleRule {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AVTextStyleRule, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVTextStyleRule {
+		return raw.AVTextStyleRuleFromID(purego.Retain(_id))
+	})
+}
+
+// SetTextStyleRules calls the underlying SetTextStyleRules.
+func (x *PlayerItem) SetTextStyleRules(textStyleRules *foundation.NSArray[*raw.AVTextStyleRule]) {
+	x.inner.SetTextStyleRules(textStyleRules)
+}
+
+// VideoApertureMode calls the underlying VideoApertureMode.
+func (x *PlayerItem) VideoApertureMode() string {
+	_r := x.inner.VideoApertureMode()
+	if _r == nil {
+		return ""
 	}
-	return out
+	return purego.GoString(_r.Ptr())
+}
+
+// SetVideoApertureMode calls the underlying SetVideoApertureMode.
+func (x *PlayerItem) SetVideoApertureMode(videoApertureMode *foundation.NSString) {
+	x.inner.SetVideoApertureMode(videoApertureMode)
+}
+
+// AppliesPerFrameHDRDisplayMetadata calls the underlying AppliesPerFrameHDRDisplayMetadata.
+func (x *PlayerItem) AppliesPerFrameHDRDisplayMetadata() bool {
+	return x.inner.AppliesPerFrameHDRDisplayMetadata()
+}
+
+// SetAppliesPerFrameHDRDisplayMetadata calls the underlying SetAppliesPerFrameHDRDisplayMetadata.
+func (x *PlayerItem) SetAppliesPerFrameHDRDisplayMetadata(appliesPerFrameHDRDisplayMetadata bool) {
+	x.inner.SetAppliesPerFrameHDRDisplayMetadata(appliesPerFrameHDRDisplayMetadata)
+}
+
+// AudioTimePitchAlgorithm calls the underlying AudioTimePitchAlgorithm.
+func (x *PlayerItem) AudioTimePitchAlgorithm() string {
+	_r := x.inner.AudioTimePitchAlgorithm()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetAudioTimePitchAlgorithm calls the underlying SetAudioTimePitchAlgorithm.
+func (x *PlayerItem) SetAudioTimePitchAlgorithm(audioTimePitchAlgorithm *foundation.NSString) {
+	x.inner.SetAudioTimePitchAlgorithm(audioTimePitchAlgorithm)
+}
+
+// IsAudioSpatializationAllowed calls the underlying IsAudioSpatializationAllowed.
+func (x *PlayerItem) IsAudioSpatializationAllowed() bool {
+	return x.inner.IsAudioSpatializationAllowed()
+}
+
+// SetAudioSpatializationAllowed calls the underlying SetAudioSpatializationAllowed.
+func (x *PlayerItem) SetAudioSpatializationAllowed(audioSpatializationAllowed bool) {
+	x.inner.SetAudioSpatializationAllowed(audioSpatializationAllowed)
+}
+
+// AllowedAudioSpatializationFormats calls the underlying AllowedAudioSpatializationFormats.
+func (x *PlayerItem) AllowedAudioSpatializationFormats() raw.AVAudioSpatializationFormats {
+	return x.inner.AllowedAudioSpatializationFormats()
+}
+
+// SetAllowedAudioSpatializationFormats calls the underlying SetAllowedAudioSpatializationFormats.
+func (x *PlayerItem) SetAllowedAudioSpatializationFormats(allowedAudioSpatializationFormats raw.AVAudioSpatializationFormats) {
+	x.inner.SetAllowedAudioSpatializationFormats(allowedAudioSpatializationFormats)
+}
+
+// AudioMix calls the underlying AudioMix.
+func (x *PlayerItem) AudioMix() *AudioMix {
+	_r := x.inner.AudioMix()
+	if _r == nil {
+		return nil
+	}
+	return &AudioMix{inner: _r}
+}
+
+// SetAudioMix calls the underlying SetAudioMix.
+func (x *PlayerItem) SetAudioMix(audioMix *raw.AVAudioMix) {
+	x.inner.SetAudioMix(audioMix)
 }
 
 // LoadedTimeRanges returns the collection as a Go slice.
@@ -272,11 +518,152 @@ func (x *PlayerItem) LoadedTimeRanges() []*foundation.NSValue {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSValue, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSValue {
+		return foundation.NSValueFromID(purego.Retain(_id))
+	})
+}
+
+// IsPlaybackLikelyToKeepUp calls the underlying IsPlaybackLikelyToKeepUp.
+func (x *PlayerItem) IsPlaybackLikelyToKeepUp() bool {
+	return x.inner.IsPlaybackLikelyToKeepUp()
+}
+
+// IsPlaybackBufferFull calls the underlying IsPlaybackBufferFull.
+func (x *PlayerItem) IsPlaybackBufferFull() bool {
+	return x.inner.IsPlaybackBufferFull()
+}
+
+// IsPlaybackBufferEmpty calls the underlying IsPlaybackBufferEmpty.
+func (x *PlayerItem) IsPlaybackBufferEmpty() bool {
+	return x.inner.IsPlaybackBufferEmpty()
+}
+
+// CanUseNetworkResourcesForLiveStreamingWhilePaused calls the underlying CanUseNetworkResourcesForLiveStreamingWhilePaused.
+func (x *PlayerItem) CanUseNetworkResourcesForLiveStreamingWhilePaused() bool {
+	return x.inner.CanUseNetworkResourcesForLiveStreamingWhilePaused()
+}
+
+// SetCanUseNetworkResourcesForLiveStreamingWhilePaused calls the underlying SetCanUseNetworkResourcesForLiveStreamingWhilePaused.
+func (x *PlayerItem) SetCanUseNetworkResourcesForLiveStreamingWhilePaused(canUseNetworkResourcesForLiveStreamingWhilePaused bool) {
+	x.inner.SetCanUseNetworkResourcesForLiveStreamingWhilePaused(canUseNetworkResourcesForLiveStreamingWhilePaused)
+}
+
+// PreferredForwardBufferDuration calls the underlying PreferredForwardBufferDuration.
+func (x *PlayerItem) PreferredForwardBufferDuration() float64 {
+	return x.inner.PreferredForwardBufferDuration()
+}
+
+// SetPreferredForwardBufferDuration calls the underlying SetPreferredForwardBufferDuration.
+func (x *PlayerItem) SetPreferredForwardBufferDuration(preferredForwardBufferDuration float64) {
+	x.inner.SetPreferredForwardBufferDuration(preferredForwardBufferDuration)
+}
+
+// PreferredPeakBitRate calls the underlying PreferredPeakBitRate.
+func (x *PlayerItem) PreferredPeakBitRate() float64 {
+	return x.inner.PreferredPeakBitRate()
+}
+
+// SetPreferredPeakBitRate calls the underlying SetPreferredPeakBitRate.
+func (x *PlayerItem) SetPreferredPeakBitRate(preferredPeakBitRate float64) {
+	x.inner.SetPreferredPeakBitRate(preferredPeakBitRate)
+}
+
+// PreferredPeakBitRateForExpensiveNetworks calls the underlying PreferredPeakBitRateForExpensiveNetworks.
+func (x *PlayerItem) PreferredPeakBitRateForExpensiveNetworks() float64 {
+	return x.inner.PreferredPeakBitRateForExpensiveNetworks()
+}
+
+// SetPreferredPeakBitRateForExpensiveNetworks calls the underlying SetPreferredPeakBitRateForExpensiveNetworks.
+func (x *PlayerItem) SetPreferredPeakBitRateForExpensiveNetworks(preferredPeakBitRateForExpensiveNetworks float64) {
+	x.inner.SetPreferredPeakBitRateForExpensiveNetworks(preferredPeakBitRateForExpensiveNetworks)
+}
+
+// PreferredMaximumResolution calls the underlying PreferredMaximumResolution.
+func (x *PlayerItem) PreferredMaximumResolution() corefoundation.CGSize {
+	return x.inner.PreferredMaximumResolution()
+}
+
+// SetPreferredMaximumResolution calls the underlying SetPreferredMaximumResolution.
+func (x *PlayerItem) SetPreferredMaximumResolution(preferredMaximumResolution corefoundation.CGSize) {
+	x.inner.SetPreferredMaximumResolution(preferredMaximumResolution)
+}
+
+// PreferredMaximumResolutionForExpensiveNetworks calls the underlying PreferredMaximumResolutionForExpensiveNetworks.
+func (x *PlayerItem) PreferredMaximumResolutionForExpensiveNetworks() corefoundation.CGSize {
+	return x.inner.PreferredMaximumResolutionForExpensiveNetworks()
+}
+
+// SetPreferredMaximumResolutionForExpensiveNetworks calls the underlying SetPreferredMaximumResolutionForExpensiveNetworks.
+func (x *PlayerItem) SetPreferredMaximumResolutionForExpensiveNetworks(preferredMaximumResolutionForExpensiveNetworks corefoundation.CGSize) {
+	x.inner.SetPreferredMaximumResolutionForExpensiveNetworks(preferredMaximumResolutionForExpensiveNetworks)
+}
+
+// StartsOnFirstEligibleVariant calls the underlying StartsOnFirstEligibleVariant.
+func (x *PlayerItem) StartsOnFirstEligibleVariant() bool {
+	return x.inner.StartsOnFirstEligibleVariant()
+}
+
+// SetStartsOnFirstEligibleVariant calls the underlying SetStartsOnFirstEligibleVariant.
+func (x *PlayerItem) SetStartsOnFirstEligibleVariant(startsOnFirstEligibleVariant bool) {
+	x.inner.SetStartsOnFirstEligibleVariant(startsOnFirstEligibleVariant)
+}
+
+// VariantPreferences calls the underlying VariantPreferences.
+func (x *PlayerItem) VariantPreferences() raw.AVVariantPreferences {
+	return x.inner.VariantPreferences()
+}
+
+// SetVariantPreferences calls the underlying SetVariantPreferences.
+func (x *PlayerItem) SetVariantPreferences(variantPreferences raw.AVVariantPreferences) {
+	x.inner.SetVariantPreferences(variantPreferences)
+}
+
+// SelectMediaOptionInMediaSelectionGroup calls the underlying SelectMediaOptionInMediaSelectionGroup.
+func (x *PlayerItem) SelectMediaOptionInMediaSelectionGroup(mediaSelectionOption *raw.AVMediaSelectionOption, mediaSelectionGroup *raw.AVMediaSelectionGroup) {
+	x.inner.SelectMediaOptionInMediaSelectionGroup(mediaSelectionOption, mediaSelectionGroup)
+}
+
+// SelectMediaOptionAutomaticallyInMediaSelectionGroup calls the underlying SelectMediaOptionAutomaticallyInMediaSelectionGroup.
+func (x *PlayerItem) SelectMediaOptionAutomaticallyInMediaSelectionGroup(mediaSelectionGroup *raw.AVMediaSelectionGroup) {
+	x.inner.SelectMediaOptionAutomaticallyInMediaSelectionGroup(mediaSelectionGroup)
+}
+
+// CurrentMediaSelection calls the underlying CurrentMediaSelection.
+func (x *PlayerItem) CurrentMediaSelection() *MediaSelection {
+	_r := x.inner.CurrentMediaSelection()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &MediaSelection{inner: _r}
+}
+
+// SelectMediaPresentationLanguageForMediaSelectionGroup calls the underlying SelectMediaPresentationLanguageForMediaSelectionGroup.
+func (x *PlayerItem) SelectMediaPresentationLanguageForMediaSelectionGroup(language string, mediaSelectionGroup *raw.AVMediaSelectionGroup) {
+	x.inner.SelectMediaPresentationLanguageForMediaSelectionGroup(foundation.NSStringStringWithUTF8String(language), mediaSelectionGroup)
+}
+
+// SelectedMediaPresentationLanguageForMediaSelectionGroup calls the underlying SelectedMediaPresentationLanguageForMediaSelectionGroup.
+func (x *PlayerItem) SelectedMediaPresentationLanguageForMediaSelectionGroup(mediaSelectionGroup *raw.AVMediaSelectionGroup) string {
+	_r := x.inner.SelectedMediaPresentationLanguageForMediaSelectionGroup(mediaSelectionGroup)
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SelectMediaPresentationSettingForMediaSelectionGroup calls the underlying SelectMediaPresentationSettingForMediaSelectionGroup.
+func (x *PlayerItem) SelectMediaPresentationSettingForMediaSelectionGroup(mediaPresentationSetting *raw.AVMediaPresentationSetting, mediaSelectionGroup *raw.AVMediaSelectionGroup) {
+	x.inner.SelectMediaPresentationSettingForMediaSelectionGroup(mediaPresentationSetting, mediaSelectionGroup)
+}
+
+// SelectedMediaPresentationSettingsForMediaSelectionGroup calls the underlying SelectedMediaPresentationSettingsForMediaSelectionGroup.
+func (x *PlayerItem) SelectedMediaPresentationSettingsForMediaSelectionGroup(mediaSelectionGroup *raw.AVMediaSelectionGroup) *foundation.NSDictionary[*raw.AVMediaPresentationSelector, objc.ID] {
+	return x.inner.SelectedMediaPresentationSettingsForMediaSelectionGroup(mediaSelectionGroup)
+}
+
+// EffectiveMediaPresentationSettingsForMediaSelectionGroup calls the underlying EffectiveMediaPresentationSettingsForMediaSelectionGroup.
+func (x *PlayerItem) EffectiveMediaPresentationSettingsForMediaSelectionGroup(mediaSelectionGroup *raw.AVMediaSelectionGroup) *foundation.NSDictionary[*raw.AVMediaPresentationSelector, objc.ID] {
+	return x.inner.EffectiveMediaPresentationSettingsForMediaSelectionGroup(mediaSelectionGroup)
 }
 
 // PreferredCustomMediaSelectionSchemes returns the collection as a Go slice.
@@ -285,11 +672,42 @@ func (x *PlayerItem) PreferredCustomMediaSelectionSchemes() []*raw.AVCustomMedia
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AVCustomMediaSelectionScheme, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVCustomMediaSelectionScheme {
+		return raw.AVCustomMediaSelectionSchemeFromID(purego.Retain(_id))
+	})
+}
+
+// SetPreferredCustomMediaSelectionSchemes calls the underlying SetPreferredCustomMediaSelectionSchemes.
+func (x *PlayerItem) SetPreferredCustomMediaSelectionSchemes(preferredCustomMediaSelectionSchemes *foundation.NSArray[*raw.AVCustomMediaSelectionScheme]) {
+	x.inner.SetPreferredCustomMediaSelectionSchemes(preferredCustomMediaSelectionSchemes)
+}
+
+// AccessLog calls the underlying AccessLog.
+func (x *PlayerItem) AccessLog() *PlayerItemAccessLog {
+	_r := x.inner.AccessLog()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &PlayerItemAccessLog{inner: _r}
+}
+
+// ErrorLog calls the underlying ErrorLog.
+func (x *PlayerItem) ErrorLog() *PlayerItemErrorLog {
+	_r := x.inner.ErrorLog()
+	if _r == nil {
+		return nil
+	}
+	return &PlayerItemErrorLog{inner: _r}
+}
+
+// AddOutput calls the underlying AddOutput.
+func (x *PlayerItem) AddOutput(output *raw.AVPlayerItemOutput) {
+	x.inner.AddOutput(output)
+}
+
+// RemoveOutput calls the underlying RemoveOutput.
+func (x *PlayerItem) RemoveOutput(output *raw.AVPlayerItemOutput) {
+	x.inner.RemoveOutput(output)
 }
 
 // Outputs returns the collection as a Go slice.
@@ -298,11 +716,19 @@ func (x *PlayerItem) Outputs() []*raw.AVPlayerItemOutput {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AVPlayerItemOutput, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVPlayerItemOutput {
+		return raw.AVPlayerItemOutputFromID(purego.Retain(_id))
+	})
+}
+
+// AddMediaDataCollector calls the underlying AddMediaDataCollector.
+func (x *PlayerItem) AddMediaDataCollector(collector *raw.AVPlayerItemMediaDataCollector) {
+	x.inner.AddMediaDataCollector(collector)
+}
+
+// RemoveMediaDataCollector calls the underlying RemoveMediaDataCollector.
+func (x *PlayerItem) RemoveMediaDataCollector(collector *raw.AVPlayerItemMediaDataCollector) {
+	x.inner.RemoveMediaDataCollector(collector)
 }
 
 // MediaDataCollectors returns the collection as a Go slice.
@@ -311,11 +737,33 @@ func (x *PlayerItem) MediaDataCollectors() []*raw.AVPlayerItemMediaDataCollector
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AVPlayerItemMediaDataCollector, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVPlayerItemMediaDataCollector {
+		return raw.AVPlayerItemMediaDataCollectorFromID(purego.Retain(_id))
+	})
+}
+
+// SeekToTime calls the underlying SeekToTime.
+func (x *PlayerItem) SeekToTime(time_ coremedia.CMTime) {
+	x.inner.SeekToTime(time_)
+}
+
+// SeekToTimeToleranceBeforeToleranceAfter calls the underlying SeekToTimeToleranceBeforeToleranceAfter.
+func (x *PlayerItem) SeekToTimeToleranceBeforeToleranceAfter(time_ coremedia.CMTime, toleranceBefore coremedia.CMTime, toleranceAfter coremedia.CMTime) {
+	x.inner.SeekToTimeToleranceBeforeToleranceAfter(time_, toleranceBefore, toleranceAfter)
+}
+
+// SeekToDate calls the underlying SeekToDate.
+func (x *PlayerItem) SeekToDate(date *foundation.NSDate) bool {
+	return x.inner.SeekToDate(date)
+}
+
+// SelectedMediaOptionInMediaSelectionGroup calls the underlying SelectedMediaOptionInMediaSelectionGroup.
+func (x *PlayerItem) SelectedMediaOptionInMediaSelectionGroup(mediaSelectionGroup *raw.AVMediaSelectionGroup) *MediaSelectionOption {
+	_r := x.inner.SelectedMediaOptionInMediaSelectionGroup(mediaSelectionGroup)
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &MediaSelectionOption{inner: _r}
 }
 
 // RequestContentAuthorizationAsynchronouslyWithTimeoutInterval blocks until the operation completes or ctx is cancelled.
@@ -331,4 +779,201 @@ func (x *PlayerItem) RequestContentAuthorizationAsynchronouslyWithTimeoutInterva
 		return ctx.Err()
 	}
 }
+
+// CancelContentAuthorizationRequest calls the underlying CancelContentAuthorizationRequest.
+func (x *PlayerItem) CancelContentAuthorizationRequest() {
+	x.inner.CancelContentAuthorizationRequest()
+}
+
+// IsAuthorizationRequiredForPlayback calls the underlying IsAuthorizationRequiredForPlayback.
+func (x *PlayerItem) IsAuthorizationRequiredForPlayback() bool {
+	return x.inner.IsAuthorizationRequiredForPlayback()
+}
+
+// IsApplicationAuthorizedForPlayback calls the underlying IsApplicationAuthorizedForPlayback.
+func (x *PlayerItem) IsApplicationAuthorizedForPlayback() bool {
+	return x.inner.IsApplicationAuthorizedForPlayback()
+}
+
+// IsContentAuthorizedForPlayback calls the underlying IsContentAuthorizedForPlayback.
+func (x *PlayerItem) IsContentAuthorizedForPlayback() bool {
+	return x.inner.IsContentAuthorizedForPlayback()
+}
+
+// ContentAuthorizationRequestStatus calls the underlying ContentAuthorizationRequestStatus.
+func (x *PlayerItem) ContentAuthorizationRequestStatus() raw.AVContentAuthorizationStatus {
+	return x.inner.ContentAuthorizationRequestStatus()
+}
+
+// AutomaticallyHandlesInterstitialEvents calls the underlying AutomaticallyHandlesInterstitialEvents.
+func (x *PlayerItem) AutomaticallyHandlesInterstitialEvents() bool {
+	return x.inner.AutomaticallyHandlesInterstitialEvents()
+}
+
+// SetAutomaticallyHandlesInterstitialEvents calls the underlying SetAutomaticallyHandlesInterstitialEvents.
+func (x *PlayerItem) SetAutomaticallyHandlesInterstitialEvents(automaticallyHandlesInterstitialEvents bool) {
+	x.inner.SetAutomaticallyHandlesInterstitialEvents(automaticallyHandlesInterstitialEvents)
+}
+
+// TemplatePlayerItem calls the underlying TemplatePlayerItem.
+func (x *PlayerItem) TemplatePlayerItem() *PlayerItem {
+	_r := x.inner.TemplatePlayerItem()
+	if _r == nil {
+		return nil
+	}
+	return &PlayerItem{inner: _r}
+}
+
+// InterstitialEventIdentifier calls the underlying InterstitialEventIdentifier.
+func (x *PlayerItem) InterstitialEventIdentifier() string {
+	_r := x.inner.InterstitialEventIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// IntegratedTimeline calls the underlying IntegratedTimeline.
+func (x *PlayerItem) IntegratedTimeline() *PlayerItemIntegratedTimeline {
+	_r := x.inner.IntegratedTimeline()
+	if _r == nil {
+		return nil
+	}
+	return &PlayerItemIntegratedTimeline{inner: _r}
+}
+
+// PlayerItemable is the interface implemented by [PlayerItem], for mocking and DI.
+type PlayerItemable interface {
+	Unwrap() *raw.AVPlayerItem
+	WithConfiguredTimeOffsetFromLive(configuredTimeOffsetFromLive coremedia.CMTime) *PlayerItem
+	WithAutomaticallyPreservesTimeOffsetFromLive(automaticallyPreservesTimeOffsetFromLive bool) *PlayerItem
+	WithForwardPlaybackEndTime(forwardPlaybackEndTime coremedia.CMTime) *PlayerItem
+	WithReversePlaybackEndTime(reversePlaybackEndTime coremedia.CMTime) *PlayerItem
+	WithVideoComposition(videoComposition VideoCompositionProvider) *PlayerItem
+	WithSeekingWaitsForVideoCompositionRendering(seekingWaitsForVideoCompositionRendering bool) *PlayerItem
+	WithTextStyleRules(items ...*raw.AVTextStyleRule) *PlayerItem
+	WithVideoApertureMode(videoApertureMode *foundation.NSString) *PlayerItem
+	WithAppliesPerFrameHDRDisplayMetadata(appliesPerFrameHDRDisplayMetadata bool) *PlayerItem
+	WithAudioTimePitchAlgorithm(audioTimePitchAlgorithm *foundation.NSString) *PlayerItem
+	WithAudioSpatializationAllowed(audioSpatializationAllowed bool) *PlayerItem
+	WithAllowedAudioSpatializationFormats(allowedAudioSpatializationFormats raw.AVAudioSpatializationFormats) *PlayerItem
+	WithAudioMix(audioMix AudioMixProvider) *PlayerItem
+	WithCanUseNetworkResourcesForLiveStreamingWhilePaused(canUseNetworkResourcesForLiveStreamingWhilePaused bool) *PlayerItem
+	WithPreferredForwardBufferDuration(preferredForwardBufferDuration float64) *PlayerItem
+	WithPreferredPeakBitRate(preferredPeakBitRate float64) *PlayerItem
+	WithPreferredPeakBitRateForExpensiveNetworks(preferredPeakBitRateForExpensiveNetworks float64) *PlayerItem
+	WithPreferredMaximumResolution(preferredMaximumResolution corefoundation.CGSize) *PlayerItem
+	WithPreferredMaximumResolutionForExpensiveNetworks(preferredMaximumResolutionForExpensiveNetworks corefoundation.CGSize) *PlayerItem
+	WithStartsOnFirstEligibleVariant(startsOnFirstEligibleVariant bool) *PlayerItem
+	WithVariantPreferences(variantPreferences raw.AVVariantPreferences) *PlayerItem
+	WithPreferredCustomMediaSelectionSchemes(items ...*raw.AVCustomMediaSelectionScheme) *PlayerItem
+	WithAutomaticallyHandlesInterstitialEvents(automaticallyHandlesInterstitialEvents bool) *PlayerItem
+	Status() raw.AVPlayerItemStatus
+	Error() unsafe.Pointer
+	Asset() *Asset
+	Tracks() []*raw.AVPlayerItemTrack
+	Duration() coremedia.CMTime
+	PresentationSize() corefoundation.CGSize
+	TimedMetadata() []*raw.AVMetadataItem
+	AutomaticallyLoadedAssetKeys() []string
+	CanPlayFastForward() bool
+	CanPlaySlowForward() bool
+	CanPlayReverse() bool
+	CanPlaySlowReverse() bool
+	CanPlayFastReverse() bool
+	CanStepForward() bool
+	CanStepBackward() bool
+	ConfiguredTimeOffsetFromLive() coremedia.CMTime
+	SetConfiguredTimeOffsetFromLive(configuredTimeOffsetFromLive coremedia.CMTime)
+	RecommendedTimeOffsetFromLive() coremedia.CMTime
+	AutomaticallyPreservesTimeOffsetFromLive() bool
+	SetAutomaticallyPreservesTimeOffsetFromLive(automaticallyPreservesTimeOffsetFromLive bool)
+	CurrentTime() coremedia.CMTime
+	SeekToTimeCompletionHandler(time_ coremedia.CMTime, completionHandler func(bool))
+	SeekToTimeToleranceBeforeToleranceAfterCompletionHandler(time_ coremedia.CMTime, toleranceBefore coremedia.CMTime, toleranceAfter coremedia.CMTime, completionHandler func(bool))
+	CancelPendingSeeks()
+	CurrentDate() *foundation.NSDate
+	SeekToDateCompletionHandler(date *foundation.NSDate, completionHandler func(bool)) bool
+	StepByCount(stepCount int)
+	ForwardPlaybackEndTime() coremedia.CMTime
+	SetForwardPlaybackEndTime(forwardPlaybackEndTime coremedia.CMTime)
+	ReversePlaybackEndTime() coremedia.CMTime
+	SetReversePlaybackEndTime(reversePlaybackEndTime coremedia.CMTime)
+	SeekableTimeRanges() []*foundation.NSValue
+	Timebase() unsafe.Pointer
+	VideoComposition() *VideoComposition
+	SetVideoComposition(videoComposition *raw.AVVideoComposition)
+	CustomVideoCompositor() raw.AVVideoCompositing
+	SeekingWaitsForVideoCompositionRendering() bool
+	SetSeekingWaitsForVideoCompositionRendering(seekingWaitsForVideoCompositionRendering bool)
+	TextStyleRules() []*raw.AVTextStyleRule
+	SetTextStyleRules(textStyleRules *foundation.NSArray[*raw.AVTextStyleRule])
+	VideoApertureMode() string
+	SetVideoApertureMode(videoApertureMode *foundation.NSString)
+	AppliesPerFrameHDRDisplayMetadata() bool
+	SetAppliesPerFrameHDRDisplayMetadata(appliesPerFrameHDRDisplayMetadata bool)
+	AudioTimePitchAlgorithm() string
+	SetAudioTimePitchAlgorithm(audioTimePitchAlgorithm *foundation.NSString)
+	IsAudioSpatializationAllowed() bool
+	SetAudioSpatializationAllowed(audioSpatializationAllowed bool)
+	AllowedAudioSpatializationFormats() raw.AVAudioSpatializationFormats
+	SetAllowedAudioSpatializationFormats(allowedAudioSpatializationFormats raw.AVAudioSpatializationFormats)
+	AudioMix() *AudioMix
+	SetAudioMix(audioMix *raw.AVAudioMix)
+	LoadedTimeRanges() []*foundation.NSValue
+	IsPlaybackLikelyToKeepUp() bool
+	IsPlaybackBufferFull() bool
+	IsPlaybackBufferEmpty() bool
+	CanUseNetworkResourcesForLiveStreamingWhilePaused() bool
+	SetCanUseNetworkResourcesForLiveStreamingWhilePaused(canUseNetworkResourcesForLiveStreamingWhilePaused bool)
+	PreferredForwardBufferDuration() float64
+	SetPreferredForwardBufferDuration(preferredForwardBufferDuration float64)
+	PreferredPeakBitRate() float64
+	SetPreferredPeakBitRate(preferredPeakBitRate float64)
+	PreferredPeakBitRateForExpensiveNetworks() float64
+	SetPreferredPeakBitRateForExpensiveNetworks(preferredPeakBitRateForExpensiveNetworks float64)
+	PreferredMaximumResolution() corefoundation.CGSize
+	SetPreferredMaximumResolution(preferredMaximumResolution corefoundation.CGSize)
+	PreferredMaximumResolutionForExpensiveNetworks() corefoundation.CGSize
+	SetPreferredMaximumResolutionForExpensiveNetworks(preferredMaximumResolutionForExpensiveNetworks corefoundation.CGSize)
+	StartsOnFirstEligibleVariant() bool
+	SetStartsOnFirstEligibleVariant(startsOnFirstEligibleVariant bool)
+	VariantPreferences() raw.AVVariantPreferences
+	SetVariantPreferences(variantPreferences raw.AVVariantPreferences)
+	SelectMediaOptionInMediaSelectionGroup(mediaSelectionOption *raw.AVMediaSelectionOption, mediaSelectionGroup *raw.AVMediaSelectionGroup)
+	SelectMediaOptionAutomaticallyInMediaSelectionGroup(mediaSelectionGroup *raw.AVMediaSelectionGroup)
+	CurrentMediaSelection() *MediaSelection
+	SelectMediaPresentationLanguageForMediaSelectionGroup(language string, mediaSelectionGroup *raw.AVMediaSelectionGroup)
+	SelectedMediaPresentationLanguageForMediaSelectionGroup(mediaSelectionGroup *raw.AVMediaSelectionGroup) string
+	SelectMediaPresentationSettingForMediaSelectionGroup(mediaPresentationSetting *raw.AVMediaPresentationSetting, mediaSelectionGroup *raw.AVMediaSelectionGroup)
+	SelectedMediaPresentationSettingsForMediaSelectionGroup(mediaSelectionGroup *raw.AVMediaSelectionGroup) *foundation.NSDictionary[*raw.AVMediaPresentationSelector, objc.ID]
+	EffectiveMediaPresentationSettingsForMediaSelectionGroup(mediaSelectionGroup *raw.AVMediaSelectionGroup) *foundation.NSDictionary[*raw.AVMediaPresentationSelector, objc.ID]
+	PreferredCustomMediaSelectionSchemes() []*raw.AVCustomMediaSelectionScheme
+	SetPreferredCustomMediaSelectionSchemes(preferredCustomMediaSelectionSchemes *foundation.NSArray[*raw.AVCustomMediaSelectionScheme])
+	AccessLog() *PlayerItemAccessLog
+	ErrorLog() *PlayerItemErrorLog
+	AddOutput(output *raw.AVPlayerItemOutput)
+	RemoveOutput(output *raw.AVPlayerItemOutput)
+	Outputs() []*raw.AVPlayerItemOutput
+	AddMediaDataCollector(collector *raw.AVPlayerItemMediaDataCollector)
+	RemoveMediaDataCollector(collector *raw.AVPlayerItemMediaDataCollector)
+	MediaDataCollectors() []*raw.AVPlayerItemMediaDataCollector
+	SeekToTime(time_ coremedia.CMTime)
+	SeekToTimeToleranceBeforeToleranceAfter(time_ coremedia.CMTime, toleranceBefore coremedia.CMTime, toleranceAfter coremedia.CMTime)
+	SeekToDate(date *foundation.NSDate) bool
+	SelectedMediaOptionInMediaSelectionGroup(mediaSelectionGroup *raw.AVMediaSelectionGroup) *MediaSelectionOption
+	RequestContentAuthorizationAsynchronouslyWithTimeoutInterval(ctx context.Context, timeoutInterval float64) error
+	CancelContentAuthorizationRequest()
+	IsAuthorizationRequiredForPlayback() bool
+	IsApplicationAuthorizedForPlayback() bool
+	IsContentAuthorizedForPlayback() bool
+	ContentAuthorizationRequestStatus() raw.AVContentAuthorizationStatus
+	AutomaticallyHandlesInterstitialEvents() bool
+	SetAutomaticallyHandlesInterstitialEvents(automaticallyHandlesInterstitialEvents bool)
+	TemplatePlayerItem() *PlayerItem
+	InterstitialEventIdentifier() string
+	IntegratedTimeline() *PlayerItemIntegratedTimeline
+}
+
+var _ PlayerItemable = (*PlayerItem)(nil)
 

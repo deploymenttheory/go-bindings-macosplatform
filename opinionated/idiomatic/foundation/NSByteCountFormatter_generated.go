@@ -77,7 +77,151 @@ func (x *ByteCountFormatter) WithFormattingContext(formattingContext raw.NSForma
 	return x
 }
 
+// StringFromByteCount calls the underlying StringFromByteCount.
+func (x *ByteCountFormatter) StringFromByteCount(byteCount int64) *String {
+	_r := x.inner.StringFromByteCount(byteCount)
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// StringFromMeasurement calls the underlying StringFromMeasurement.
+func (x *ByteCountFormatter) StringFromMeasurement(measurement *raw.NSMeasurement[*raw.NSUnitInformationStorage]) *String {
+	_r := x.inner.StringFromMeasurement(measurement)
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// AllowedUnits calls the underlying AllowedUnits.
+func (x *ByteCountFormatter) AllowedUnits() raw.NSByteCountFormatterUnits {
+	return x.inner.AllowedUnits()
+}
+
+// SetAllowedUnits calls the underlying SetAllowedUnits.
+func (x *ByteCountFormatter) SetAllowedUnits(allowedUnits raw.NSByteCountFormatterUnits) {
+	x.inner.SetAllowedUnits(allowedUnits)
+}
+
+// CountStyle calls the underlying CountStyle.
+func (x *ByteCountFormatter) CountStyle() raw.NSByteCountFormatterCountStyle {
+	return x.inner.CountStyle()
+}
+
+// SetCountStyle calls the underlying SetCountStyle.
+func (x *ByteCountFormatter) SetCountStyle(countStyle raw.NSByteCountFormatterCountStyle) {
+	x.inner.SetCountStyle(countStyle)
+}
+
+// AllowsNonnumericFormatting calls the underlying AllowsNonnumericFormatting.
+func (x *ByteCountFormatter) AllowsNonnumericFormatting() bool {
+	return x.inner.AllowsNonnumericFormatting()
+}
+
+// SetAllowsNonnumericFormatting calls the underlying SetAllowsNonnumericFormatting.
+func (x *ByteCountFormatter) SetAllowsNonnumericFormatting(allowsNonnumericFormatting bool) {
+	x.inner.SetAllowsNonnumericFormatting(allowsNonnumericFormatting)
+}
+
+// IncludesUnit calls the underlying IncludesUnit.
+func (x *ByteCountFormatter) IncludesUnit() bool {
+	return x.inner.IncludesUnit()
+}
+
+// SetIncludesUnit calls the underlying SetIncludesUnit.
+func (x *ByteCountFormatter) SetIncludesUnit(includesUnit bool) {
+	x.inner.SetIncludesUnit(includesUnit)
+}
+
+// IncludesCount calls the underlying IncludesCount.
+func (x *ByteCountFormatter) IncludesCount() bool {
+	return x.inner.IncludesCount()
+}
+
+// SetIncludesCount calls the underlying SetIncludesCount.
+func (x *ByteCountFormatter) SetIncludesCount(includesCount bool) {
+	x.inner.SetIncludesCount(includesCount)
+}
+
+// IncludesActualByteCount calls the underlying IncludesActualByteCount.
+func (x *ByteCountFormatter) IncludesActualByteCount() bool {
+	return x.inner.IncludesActualByteCount()
+}
+
+// SetIncludesActualByteCount calls the underlying SetIncludesActualByteCount.
+func (x *ByteCountFormatter) SetIncludesActualByteCount(includesActualByteCount bool) {
+	x.inner.SetIncludesActualByteCount(includesActualByteCount)
+}
+
+// IsAdaptive calls the underlying IsAdaptive.
+func (x *ByteCountFormatter) IsAdaptive() bool {
+	return x.inner.IsAdaptive()
+}
+
+// SetAdaptive calls the underlying SetAdaptive.
+func (x *ByteCountFormatter) SetAdaptive(adaptive bool) {
+	x.inner.SetAdaptive(adaptive)
+}
+
+// ZeroPadsFractionDigits calls the underlying ZeroPadsFractionDigits.
+func (x *ByteCountFormatter) ZeroPadsFractionDigits() bool {
+	return x.inner.ZeroPadsFractionDigits()
+}
+
+// SetZeroPadsFractionDigits calls the underlying SetZeroPadsFractionDigits.
+func (x *ByteCountFormatter) SetZeroPadsFractionDigits(zeroPadsFractionDigits bool) {
+	x.inner.SetZeroPadsFractionDigits(zeroPadsFractionDigits)
+}
+
+// FormattingContext calls the underlying FormattingContext.
+func (x *ByteCountFormatter) FormattingContext() raw.NSFormattingContext {
+	return x.inner.FormattingContext()
+}
+
+// SetFormattingContext calls the underlying SetFormattingContext.
+func (x *ByteCountFormatter) SetFormattingContext(formattingContext raw.NSFormattingContext) {
+	x.inner.SetFormattingContext(formattingContext)
+}
+
 func (x *ByteCountFormatter) asFormatter() *raw.NSFormatter { return &x.inner.NSFormatter }
 
 func (x *ByteCountFormatter) asObject() *raw.NSObject { return &x.inner.NSFormatter.NSObject }
+
+// ByteCountFormatterable is the interface implemented by [ByteCountFormatter], for mocking and DI.
+type ByteCountFormatterable interface {
+	Unwrap() *raw.NSByteCountFormatter
+	WithAllowedUnits(allowedUnits raw.NSByteCountFormatterUnits) *ByteCountFormatter
+	WithCountStyle(countStyle raw.NSByteCountFormatterCountStyle) *ByteCountFormatter
+	WithAllowsNonnumericFormatting(allowsNonnumericFormatting bool) *ByteCountFormatter
+	WithIncludesUnit(includesUnit bool) *ByteCountFormatter
+	WithIncludesCount(includesCount bool) *ByteCountFormatter
+	WithIncludesActualByteCount(includesActualByteCount bool) *ByteCountFormatter
+	WithAdaptive(adaptive bool) *ByteCountFormatter
+	WithZeroPadsFractionDigits(zeroPadsFractionDigits bool) *ByteCountFormatter
+	WithFormattingContext(formattingContext raw.NSFormattingContext) *ByteCountFormatter
+	StringFromByteCount(byteCount int64) *String
+	StringFromMeasurement(measurement *raw.NSMeasurement[*raw.NSUnitInformationStorage]) *String
+	AllowedUnits() raw.NSByteCountFormatterUnits
+	SetAllowedUnits(allowedUnits raw.NSByteCountFormatterUnits)
+	CountStyle() raw.NSByteCountFormatterCountStyle
+	SetCountStyle(countStyle raw.NSByteCountFormatterCountStyle)
+	AllowsNonnumericFormatting() bool
+	SetAllowsNonnumericFormatting(allowsNonnumericFormatting bool)
+	IncludesUnit() bool
+	SetIncludesUnit(includesUnit bool)
+	IncludesCount() bool
+	SetIncludesCount(includesCount bool)
+	IncludesActualByteCount() bool
+	SetIncludesActualByteCount(includesActualByteCount bool)
+	IsAdaptive() bool
+	SetAdaptive(adaptive bool)
+	ZeroPadsFractionDigits() bool
+	SetZeroPadsFractionDigits(zeroPadsFractionDigits bool)
+	FormattingContext() raw.NSFormattingContext
+	SetFormattingContext(formattingContext raw.NSFormattingContext)
+}
+
+var _ ByteCountFormatterable = (*ByteCountFormatter)(nil)
 

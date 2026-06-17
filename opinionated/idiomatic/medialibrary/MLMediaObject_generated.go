@@ -5,7 +5,10 @@
 package medialibrary
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/medialibrary"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +25,109 @@ func NewMediaObject() *MediaObject {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLMediaObject")), objc.RegisterName("new"))
 	return &MediaObject{inner: raw.MLMediaObjectFromID(_id)}
 }
+
+// MediaLibrary calls the underlying MediaLibrary.
+func (x *MediaObject) MediaLibrary() *MediaLibrary {
+	_r := x.inner.MediaLibrary()
+	if _r == nil {
+		return nil
+	}
+	return &MediaLibrary{inner: _r}
+}
+
+// Identifier calls the underlying Identifier.
+func (x *MediaObject) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// MediaSourceIdentifier calls the underlying MediaSourceIdentifier.
+func (x *MediaObject) MediaSourceIdentifier() string {
+	_r := x.inner.MediaSourceIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Attributes calls the underlying Attributes.
+func (x *MediaObject) Attributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.Attributes()
+}
+
+// MediaType calls the underlying MediaType.
+func (x *MediaObject) MediaType() raw.MLMediaType {
+	return x.inner.MediaType()
+}
+
+// ContentType calls the underlying ContentType.
+func (x *MediaObject) ContentType() string {
+	_r := x.inner.ContentType()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Name calls the underlying Name.
+func (x *MediaObject) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// URL calls the underlying URL.
+func (x *MediaObject) URL() *foundation.NSURL {
+	return x.inner.URL()
+}
+
+// OriginalURL calls the underlying OriginalURL.
+func (x *MediaObject) OriginalURL() *foundation.NSURL {
+	return x.inner.OriginalURL()
+}
+
+// FileSize calls the underlying FileSize.
+func (x *MediaObject) FileSize() uint {
+	return x.inner.FileSize()
+}
+
+// ModificationDate calls the underlying ModificationDate.
+func (x *MediaObject) ModificationDate() *foundation.NSDate {
+	return x.inner.ModificationDate()
+}
+
+// ThumbnailURL calls the underlying ThumbnailURL.
+func (x *MediaObject) ThumbnailURL() *foundation.NSURL {
+	return x.inner.ThumbnailURL()
+}
+
+// ArtworkImage calls the underlying ArtworkImage.
+func (x *MediaObject) ArtworkImage() *appkit.NSImage {
+	return x.inner.ArtworkImage()
+}
+
+// MediaObjectable is the interface implemented by [MediaObject], for mocking and DI.
+type MediaObjectable interface {
+	Unwrap() *raw.MLMediaObject
+	MediaLibrary() *MediaLibrary
+	Identifier() string
+	MediaSourceIdentifier() string
+	Attributes() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	MediaType() raw.MLMediaType
+	ContentType() string
+	Name() string
+	URL() *foundation.NSURL
+	OriginalURL() *foundation.NSURL
+	FileSize() uint
+	ModificationDate() *foundation.NSDate
+	ThumbnailURL() *foundation.NSURL
+	ArtworkImage() *appkit.NSImage
+}
+
+var _ MediaObjectable = (*MediaObject)(nil)
 

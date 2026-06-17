@@ -48,3 +48,62 @@ func (x *MTROperationalCredentialsClusterUpdateNOCParams) WithServerSideProcessi
 	return x
 }
 
+// NocValue calls the underlying NocValue.
+func (x *MTROperationalCredentialsClusterUpdateNOCParams) NocValue() *foundation.NSData {
+	return x.inner.NocValue()
+}
+
+// SetNocValue calls the underlying SetNocValue.
+func (x *MTROperationalCredentialsClusterUpdateNOCParams) SetNocValue(nocValue *foundation.NSData) {
+	x.inner.SetNocValue(nocValue)
+}
+
+// IcacValue calls the underlying IcacValue.
+func (x *MTROperationalCredentialsClusterUpdateNOCParams) IcacValue() *foundation.NSData {
+	return x.inner.IcacValue()
+}
+
+// SetIcacValue calls the underlying SetIcacValue.
+func (x *MTROperationalCredentialsClusterUpdateNOCParams) SetIcacValue(icacValue *foundation.NSData) {
+	x.inner.SetIcacValue(icacValue)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTROperationalCredentialsClusterUpdateNOCParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTROperationalCredentialsClusterUpdateNOCParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTROperationalCredentialsClusterUpdateNOCParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTROperationalCredentialsClusterUpdateNOCParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTROperationalCredentialsClusterUpdateNOCParamsable is the interface implemented by [MTROperationalCredentialsClusterUpdateNOCParams], for mocking and DI.
+type MTROperationalCredentialsClusterUpdateNOCParamsable interface {
+	Unwrap() *raw.MTROperationalCredentialsClusterUpdateNOCParams
+	WithNocValue(nocValue *foundation.NSData) *MTROperationalCredentialsClusterUpdateNOCParams
+	WithIcacValue(icacValue *foundation.NSData) *MTROperationalCredentialsClusterUpdateNOCParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTROperationalCredentialsClusterUpdateNOCParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTROperationalCredentialsClusterUpdateNOCParams
+	NocValue() *foundation.NSData
+	SetNocValue(nocValue *foundation.NSData)
+	IcacValue() *foundation.NSData
+	SetIcacValue(icacValue *foundation.NSData)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTROperationalCredentialsClusterUpdateNOCParamsable = (*MTROperationalCredentialsClusterUpdateNOCParams)(nil)
+

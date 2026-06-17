@@ -7,6 +7,7 @@ package avfaudio
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -47,16 +48,54 @@ func (x *SpeechSynthesisProviderAudioUnit) WithSpeechSynthesisOutputMetadataBloc
 	return x
 }
 
+// SynthesizeSpeechRequest calls the underlying SynthesizeSpeechRequest.
+func (x *SpeechSynthesisProviderAudioUnit) SynthesizeSpeechRequest(speechRequest *raw.AVSpeechSynthesisProviderRequest) {
+	x.inner.SynthesizeSpeechRequest(speechRequest)
+}
+
+// CancelSpeechRequest calls the underlying CancelSpeechRequest.
+func (x *SpeechSynthesisProviderAudioUnit) CancelSpeechRequest() {
+	x.inner.CancelSpeechRequest()
+}
+
 // SpeechVoices returns the collection as a Go slice.
 func (x *SpeechSynthesisProviderAudioUnit) SpeechVoices() []*raw.AVSpeechSynthesisProviderVoice {
 	arr := x.inner.SpeechVoices()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AVSpeechSynthesisProviderVoice, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVSpeechSynthesisProviderVoice {
+		return raw.AVSpeechSynthesisProviderVoiceFromID(purego.Retain(_id))
+	})
 }
+
+// SetSpeechVoices calls the underlying SetSpeechVoices.
+func (x *SpeechSynthesisProviderAudioUnit) SetSpeechVoices(speechVoices *foundation.NSArray[*raw.AVSpeechSynthesisProviderVoice]) {
+	x.inner.SetSpeechVoices(speechVoices)
+}
+
+// SpeechSynthesisOutputMetadataBlock calls the underlying SpeechSynthesisOutputMetadataBlock.
+func (x *SpeechSynthesisProviderAudioUnit) SpeechSynthesisOutputMetadataBlock() objc.Block {
+	return x.inner.SpeechSynthesisOutputMetadataBlock()
+}
+
+// SetSpeechSynthesisOutputMetadataBlock calls the underlying SetSpeechSynthesisOutputMetadataBlock.
+func (x *SpeechSynthesisProviderAudioUnit) SetSpeechSynthesisOutputMetadataBlock(speechSynthesisOutputMetadataBlock func(*foundation.NSArray[*raw.AVSpeechSynthesisMarker], *raw.AVSpeechSynthesisProviderRequest)) {
+	x.inner.SetSpeechSynthesisOutputMetadataBlock(speechSynthesisOutputMetadataBlock)
+}
+
+// SpeechSynthesisProviderAudioUnitable is the interface implemented by [SpeechSynthesisProviderAudioUnit], for mocking and DI.
+type SpeechSynthesisProviderAudioUnitable interface {
+	Unwrap() *raw.AVSpeechSynthesisProviderAudioUnit
+	WithSpeechVoices(items ...*raw.AVSpeechSynthesisProviderVoice) *SpeechSynthesisProviderAudioUnit
+	WithSpeechSynthesisOutputMetadataBlock(speechSynthesisOutputMetadataBlock func(*foundation.NSArray[*raw.AVSpeechSynthesisMarker], *raw.AVSpeechSynthesisProviderRequest)) *SpeechSynthesisProviderAudioUnit
+	SynthesizeSpeechRequest(speechRequest *raw.AVSpeechSynthesisProviderRequest)
+	CancelSpeechRequest()
+	SpeechVoices() []*raw.AVSpeechSynthesisProviderVoice
+	SetSpeechVoices(speechVoices *foundation.NSArray[*raw.AVSpeechSynthesisProviderVoice])
+	SpeechSynthesisOutputMetadataBlock() objc.Block
+	SetSpeechSynthesisOutputMetadataBlock(speechSynthesisOutputMetadataBlock func(*foundation.NSArray[*raw.AVSpeechSynthesisMarker], *raw.AVSpeechSynthesisProviderRequest))
+}
+
+var _ SpeechSynthesisProviderAudioUnitable = (*SpeechSynthesisProviderAudioUnit)(nil)
 

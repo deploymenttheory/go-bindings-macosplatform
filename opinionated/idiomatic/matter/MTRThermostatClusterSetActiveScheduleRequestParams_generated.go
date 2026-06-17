@@ -42,3 +42,49 @@ func (x *MTRThermostatClusterSetActiveScheduleRequestParams) WithServerSideProce
 	return x
 }
 
+// ScheduleHandle calls the underlying ScheduleHandle.
+func (x *MTRThermostatClusterSetActiveScheduleRequestParams) ScheduleHandle() *foundation.NSData {
+	return x.inner.ScheduleHandle()
+}
+
+// SetScheduleHandle calls the underlying SetScheduleHandle.
+func (x *MTRThermostatClusterSetActiveScheduleRequestParams) SetScheduleHandle(scheduleHandle *foundation.NSData) {
+	x.inner.SetScheduleHandle(scheduleHandle)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRThermostatClusterSetActiveScheduleRequestParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRThermostatClusterSetActiveScheduleRequestParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRThermostatClusterSetActiveScheduleRequestParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRThermostatClusterSetActiveScheduleRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRThermostatClusterSetActiveScheduleRequestParamsable is the interface implemented by [MTRThermostatClusterSetActiveScheduleRequestParams], for mocking and DI.
+type MTRThermostatClusterSetActiveScheduleRequestParamsable interface {
+	Unwrap() *raw.MTRThermostatClusterSetActiveScheduleRequestParams
+	WithScheduleHandle(scheduleHandle *foundation.NSData) *MTRThermostatClusterSetActiveScheduleRequestParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRThermostatClusterSetActiveScheduleRequestParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRThermostatClusterSetActiveScheduleRequestParams
+	ScheduleHandle() *foundation.NSData
+	SetScheduleHandle(scheduleHandle *foundation.NSData)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRThermostatClusterSetActiveScheduleRequestParamsable = (*MTRThermostatClusterSetActiveScheduleRequestParams)(nil)
+

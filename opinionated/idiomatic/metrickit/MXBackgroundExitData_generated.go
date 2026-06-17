@@ -23,3 +23,70 @@ func NewBackgroundExitData() *BackgroundExitData {
 	return &BackgroundExitData{inner: raw.MXBackgroundExitDataFromID(_id)}
 }
 
+// CumulativeNormalAppExitCount calls the underlying CumulativeNormalAppExitCount.
+func (x *BackgroundExitData) CumulativeNormalAppExitCount() uint {
+	return x.inner.CumulativeNormalAppExitCount()
+}
+
+// CumulativeMemoryResourceLimitExitCount calls the underlying CumulativeMemoryResourceLimitExitCount.
+func (x *BackgroundExitData) CumulativeMemoryResourceLimitExitCount() uint {
+	return x.inner.CumulativeMemoryResourceLimitExitCount()
+}
+
+// CumulativeCPUResourceLimitExitCount calls the underlying CumulativeCPUResourceLimitExitCount.
+func (x *BackgroundExitData) CumulativeCPUResourceLimitExitCount() uint {
+	return x.inner.CumulativeCPUResourceLimitExitCount()
+}
+
+// CumulativeMemoryPressureExitCount calls the underlying CumulativeMemoryPressureExitCount.
+func (x *BackgroundExitData) CumulativeMemoryPressureExitCount() uint {
+	return x.inner.CumulativeMemoryPressureExitCount()
+}
+
+// CumulativeBadAccessExitCount calls the underlying CumulativeBadAccessExitCount.
+func (x *BackgroundExitData) CumulativeBadAccessExitCount() uint {
+	return x.inner.CumulativeBadAccessExitCount()
+}
+
+// CumulativeAbnormalExitCount calls the underlying CumulativeAbnormalExitCount.
+func (x *BackgroundExitData) CumulativeAbnormalExitCount() uint {
+	return x.inner.CumulativeAbnormalExitCount()
+}
+
+// CumulativeIllegalInstructionExitCount calls the underlying CumulativeIllegalInstructionExitCount.
+func (x *BackgroundExitData) CumulativeIllegalInstructionExitCount() uint {
+	return x.inner.CumulativeIllegalInstructionExitCount()
+}
+
+// CumulativeAppWatchdogExitCount calls the underlying CumulativeAppWatchdogExitCount.
+func (x *BackgroundExitData) CumulativeAppWatchdogExitCount() uint {
+	return x.inner.CumulativeAppWatchdogExitCount()
+}
+
+// CumulativeSuspendedWithLockedFileExitCount calls the underlying CumulativeSuspendedWithLockedFileExitCount.
+func (x *BackgroundExitData) CumulativeSuspendedWithLockedFileExitCount() uint {
+	return x.inner.CumulativeSuspendedWithLockedFileExitCount()
+}
+
+// CumulativeBackgroundTaskAssertionTimeoutExitCount calls the underlying CumulativeBackgroundTaskAssertionTimeoutExitCount.
+func (x *BackgroundExitData) CumulativeBackgroundTaskAssertionTimeoutExitCount() uint {
+	return x.inner.CumulativeBackgroundTaskAssertionTimeoutExitCount()
+}
+
+// BackgroundExitDataable is the interface implemented by [BackgroundExitData], for mocking and DI.
+type BackgroundExitDataable interface {
+	Unwrap() *raw.MXBackgroundExitData
+	CumulativeNormalAppExitCount() uint
+	CumulativeMemoryResourceLimitExitCount() uint
+	CumulativeCPUResourceLimitExitCount() uint
+	CumulativeMemoryPressureExitCount() uint
+	CumulativeBadAccessExitCount() uint
+	CumulativeAbnormalExitCount() uint
+	CumulativeIllegalInstructionExitCount() uint
+	CumulativeAppWatchdogExitCount() uint
+	CumulativeSuspendedWithLockedFileExitCount() uint
+	CumulativeBackgroundTaskAssertionTimeoutExitCount() uint
+}
+
+var _ BackgroundExitDataable = (*BackgroundExitData)(nil)
+

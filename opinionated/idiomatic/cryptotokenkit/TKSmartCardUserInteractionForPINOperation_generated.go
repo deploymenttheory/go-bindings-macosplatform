@@ -7,6 +7,7 @@ package cryptotokenkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cryptotokenkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -65,20 +66,85 @@ func (x *SmartCardUserInteractionForPINOperation) WithResultData(resultData *fou
 	return x
 }
 
+// PINCompletion calls the underlying PINCompletion.
+func (x *SmartCardUserInteractionForPINOperation) PINCompletion() raw.TKSmartCardPINCompletion {
+	return x.inner.PINCompletion()
+}
+
+// SetPINCompletion calls the underlying SetPINCompletion.
+func (x *SmartCardUserInteractionForPINOperation) SetPINCompletion(pINCompletion raw.TKSmartCardPINCompletion) {
+	x.inner.SetPINCompletion(pINCompletion)
+}
+
 // PINMessageIndices returns the collection as a Go slice.
 func (x *SmartCardUserInteractionForPINOperation) PINMessageIndices() []*foundation.NSNumber {
 	arr := x.inner.PINMessageIndices()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
+}
+
+// SetPINMessageIndices calls the underlying SetPINMessageIndices.
+func (x *SmartCardUserInteractionForPINOperation) SetPINMessageIndices(pINMessageIndices *foundation.NSArray[*foundation.NSNumber]) {
+	x.inner.SetPINMessageIndices(pINMessageIndices)
+}
+
+// Locale calls the underlying Locale.
+func (x *SmartCardUserInteractionForPINOperation) Locale() *foundation.NSLocale {
+	return x.inner.Locale()
+}
+
+// SetLocale calls the underlying SetLocale.
+func (x *SmartCardUserInteractionForPINOperation) SetLocale(locale *foundation.NSLocale) {
+	x.inner.SetLocale(locale)
+}
+
+// ResultSW calls the underlying ResultSW.
+func (x *SmartCardUserInteractionForPINOperation) ResultSW() uint16 {
+	return x.inner.ResultSW()
+}
+
+// SetResultSW calls the underlying SetResultSW.
+func (x *SmartCardUserInteractionForPINOperation) SetResultSW(resultSW uint16) {
+	x.inner.SetResultSW(resultSW)
+}
+
+// ResultData calls the underlying ResultData.
+func (x *SmartCardUserInteractionForPINOperation) ResultData() *foundation.NSData {
+	return x.inner.ResultData()
+}
+
+// SetResultData calls the underlying SetResultData.
+func (x *SmartCardUserInteractionForPINOperation) SetResultData(resultData *foundation.NSData) {
+	x.inner.SetResultData(resultData)
 }
 
 func (x *SmartCardUserInteractionForPINOperation) asSmartCardUserInteractionForPINOperation() *raw.TKSmartCardUserInteractionForPINOperation { return x.inner }
 
 func (x *SmartCardUserInteractionForPINOperation) asSmartCardUserInteraction() *raw.TKSmartCardUserInteraction { return &x.inner.TKSmartCardUserInteraction }
+
+// SmartCardUserInteractionForPINOperationable is the interface implemented by [SmartCardUserInteractionForPINOperation], for mocking and DI.
+type SmartCardUserInteractionForPINOperationable interface {
+	Unwrap() *raw.TKSmartCardUserInteractionForPINOperation
+	WithPINCompletion(pINCompletion raw.TKSmartCardPINCompletion) *SmartCardUserInteractionForPINOperation
+	WithPINMessageIndices(items ...*foundation.NSNumber) *SmartCardUserInteractionForPINOperation
+	WithLocale(locale *foundation.NSLocale) *SmartCardUserInteractionForPINOperation
+	WithResultSW(resultSW uint16) *SmartCardUserInteractionForPINOperation
+	WithResultData(resultData *foundation.NSData) *SmartCardUserInteractionForPINOperation
+	PINCompletion() raw.TKSmartCardPINCompletion
+	SetPINCompletion(pINCompletion raw.TKSmartCardPINCompletion)
+	PINMessageIndices() []*foundation.NSNumber
+	SetPINMessageIndices(pINMessageIndices *foundation.NSArray[*foundation.NSNumber])
+	Locale() *foundation.NSLocale
+	SetLocale(locale *foundation.NSLocale)
+	ResultSW() uint16
+	SetResultSW(resultSW uint16)
+	ResultData() *foundation.NSData
+	SetResultData(resultData *foundation.NSData)
+}
+
+var _ SmartCardUserInteractionForPINOperationable = (*SmartCardUserInteractionForPINOperation)(nil)
 

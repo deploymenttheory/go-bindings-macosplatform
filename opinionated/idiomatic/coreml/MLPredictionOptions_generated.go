@@ -36,3 +36,36 @@ func (x *PredictionOptions) WithOutputBackings(outputBackings *foundation.NSDict
 	return x
 }
 
+// UsesCPUOnly calls the underlying UsesCPUOnly.
+func (x *PredictionOptions) UsesCPUOnly() bool {
+	return x.inner.UsesCPUOnly()
+}
+
+// SetUsesCPUOnly calls the underlying SetUsesCPUOnly.
+func (x *PredictionOptions) SetUsesCPUOnly(usesCPUOnly bool) {
+	x.inner.SetUsesCPUOnly(usesCPUOnly)
+}
+
+// OutputBackings calls the underlying OutputBackings.
+func (x *PredictionOptions) OutputBackings() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.OutputBackings()
+}
+
+// SetOutputBackings calls the underlying SetOutputBackings.
+func (x *PredictionOptions) SetOutputBackings(outputBackings *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
+	x.inner.SetOutputBackings(outputBackings)
+}
+
+// PredictionOptionsable is the interface implemented by [PredictionOptions], for mocking and DI.
+type PredictionOptionsable interface {
+	Unwrap() *raw.MLPredictionOptions
+	WithUsesCPUOnly(usesCPUOnly bool) *PredictionOptions
+	WithOutputBackings(outputBackings *foundation.NSDictionary[*foundation.NSString, objc.ID]) *PredictionOptions
+	UsesCPUOnly() bool
+	SetUsesCPUOnly(usesCPUOnly bool)
+	OutputBackings() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	SetOutputBackings(outputBackings *foundation.NSDictionary[*foundation.NSString, objc.ID])
+}
+
+var _ PredictionOptionsable = (*PredictionOptions)(nil)
+

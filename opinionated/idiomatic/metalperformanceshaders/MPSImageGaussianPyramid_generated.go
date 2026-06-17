@@ -31,3 +31,10 @@ func (x *ImageGaussianPyramid) asUnaryImageKernel() *mpsimage.MPSUnaryImageKerne
 
 func (x *ImageGaussianPyramid) asKernel() *mpscore.MPSKernel { return &x.inner.MPSImagePyramid.MPSUnaryImageKernel.MPSKernel }
 
+// ImageGaussianPyramidable is the interface implemented by [ImageGaussianPyramid], for mocking and DI.
+type ImageGaussianPyramidable interface {
+	Unwrap() *raw.MPSImageGaussianPyramid
+}
+
+var _ ImageGaussianPyramidable = (*ImageGaussianPyramid)(nil)
+

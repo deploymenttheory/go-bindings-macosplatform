@@ -5,7 +5,9 @@
 package vision
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +24,40 @@ func NewRecognizedText() *RecognizedText {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VNRecognizedText")), objc.RegisterName("new"))
 	return &RecognizedText{inner: raw.VNRecognizedTextFromID(_id)}
 }
+
+// BoundingBoxForRangeError calls the underlying BoundingBoxForRangeError.
+func (x *RecognizedText) BoundingBoxForRangeError(range_ foundation.NSRange) (*RectangleObservation, error) {
+	_r, _err := x.inner.BoundingBoxForRangeError(range_)
+	if _err != nil {
+		return nil, _err
+	}
+	if _r == nil {
+		return nil, nil
+	}
+	return &RectangleObservation{inner: _r}, nil
+}
+
+// String calls the underlying String.
+func (x *RecognizedText) String() string {
+	_r := x.inner.String()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Confidence calls the underlying Confidence.
+func (x *RecognizedText) Confidence() float32 {
+	return x.inner.Confidence()
+}
+
+// RecognizedTextable is the interface implemented by [RecognizedText], for mocking and DI.
+type RecognizedTextable interface {
+	Unwrap() *raw.VNRecognizedText
+	BoundingBoxForRangeError(range_ foundation.NSRange) (*RectangleObservation, error)
+	String() string
+	Confidence() float32
+}
+
+var _ RecognizedTextable = (*RecognizedText)(nil)
 

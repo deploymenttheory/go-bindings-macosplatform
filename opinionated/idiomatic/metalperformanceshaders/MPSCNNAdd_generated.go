@@ -33,3 +33,10 @@ func (x *CNNAdd) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel { retu
 
 func (x *CNNAdd) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.MPSKernel }
 
+// CNNAddable is the interface implemented by [CNNAdd], for mocking and DI.
+type CNNAddable interface {
+	Unwrap() *raw.MPSCNNAdd
+}
+
+var _ CNNAddable = (*CNNAdd)(nil)
+

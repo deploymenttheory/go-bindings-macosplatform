@@ -7,6 +7,7 @@ package authenticationservices
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -45,17 +46,34 @@ func (x *PasskeyCredentialRequest) WithUserVerificationPreference(userVerificati
 	return x
 }
 
+// ClientDataHash calls the underlying ClientDataHash.
+func (x *PasskeyCredentialRequest) ClientDataHash() *foundation.NSData {
+	return x.inner.ClientDataHash()
+}
+
+// UserVerificationPreference calls the underlying UserVerificationPreference.
+func (x *PasskeyCredentialRequest) UserVerificationPreference() string {
+	_r := x.inner.UserVerificationPreference()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetUserVerificationPreference calls the underlying SetUserVerificationPreference.
+func (x *PasskeyCredentialRequest) SetUserVerificationPreference(userVerificationPreference *foundation.NSString) {
+	x.inner.SetUserVerificationPreference(userVerificationPreference)
+}
+
 // SupportedAlgorithms returns the collection as a Go slice.
 func (x *PasskeyCredentialRequest) SupportedAlgorithms() []*foundation.NSNumber {
 	arr := x.inner.SupportedAlgorithms()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
 }
 
 // ExcludedCredentials returns the collection as a Go slice.
@@ -64,10 +82,41 @@ func (x *PasskeyCredentialRequest) ExcludedCredentials() []*raw.ASAuthorizationP
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.ASAuthorizationPlatformPublicKeyCredentialDescriptor, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.ASAuthorizationPlatformPublicKeyCredentialDescriptor {
+		return raw.ASAuthorizationPlatformPublicKeyCredentialDescriptorFromID(purego.Retain(_id))
+	})
 }
+
+// AssertionExtensionInput calls the underlying AssertionExtensionInput.
+func (x *PasskeyCredentialRequest) AssertionExtensionInput() *PasskeyAssertionCredentialExtensionInput {
+	_r := x.inner.AssertionExtensionInput()
+	if _r == nil {
+		return nil
+	}
+	return &PasskeyAssertionCredentialExtensionInput{inner: _r}
+}
+
+// RegistrationExtensionInput calls the underlying RegistrationExtensionInput.
+func (x *PasskeyCredentialRequest) RegistrationExtensionInput() *PasskeyRegistrationCredentialExtensionInput {
+	_r := x.inner.RegistrationExtensionInput()
+	if _r == nil {
+		return nil
+	}
+	return &PasskeyRegistrationCredentialExtensionInput{inner: _r}
+}
+
+// PasskeyCredentialRequestable is the interface implemented by [PasskeyCredentialRequest], for mocking and DI.
+type PasskeyCredentialRequestable interface {
+	Unwrap() *raw.ASPasskeyCredentialRequest
+	WithUserVerificationPreference(userVerificationPreference *foundation.NSString) *PasskeyCredentialRequest
+	ClientDataHash() *foundation.NSData
+	UserVerificationPreference() string
+	SetUserVerificationPreference(userVerificationPreference *foundation.NSString)
+	SupportedAlgorithms() []*foundation.NSNumber
+	ExcludedCredentials() []*raw.ASAuthorizationPlatformPublicKeyCredentialDescriptor
+	AssertionExtensionInput() *PasskeyAssertionCredentialExtensionInput
+	RegistrationExtensionInput() *PasskeyRegistrationCredentialExtensionInput
+}
+
+var _ PasskeyCredentialRequestable = (*PasskeyCredentialRequest)(nil)
 

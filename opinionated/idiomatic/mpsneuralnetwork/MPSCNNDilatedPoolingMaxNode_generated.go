@@ -38,5 +38,24 @@ func NewCNNDilatedPoolingMaxNodeWithSourceFilterSize(sourceNode *raw.MPSNNImageN
 	return &CNNDilatedPoolingMaxNode{inner: raw.MPSCNNDilatedPoolingMaxNodeFromID(_id)}
 }
 
+// DilationRateX calls the underlying DilationRateX.
+func (x *CNNDilatedPoolingMaxNode) DilationRateX() uint {
+	return x.inner.DilationRateX()
+}
+
+// DilationRateY calls the underlying DilationRateY.
+func (x *CNNDilatedPoolingMaxNode) DilationRateY() uint {
+	return x.inner.DilationRateY()
+}
+
 func (x *CNNDilatedPoolingMaxNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNFilterNode }
+
+// CNNDilatedPoolingMaxNodeable is the interface implemented by [CNNDilatedPoolingMaxNode], for mocking and DI.
+type CNNDilatedPoolingMaxNodeable interface {
+	Unwrap() *raw.MPSCNNDilatedPoolingMaxNode
+	DilationRateX() uint
+	DilationRateY() uint
+}
+
+var _ CNNDilatedPoolingMaxNodeable = (*CNNDilatedPoolingMaxNode)(nil)
 

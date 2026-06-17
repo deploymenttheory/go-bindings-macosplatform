@@ -23,3 +23,10 @@ func NewNEFilterPacketContext() *NEFilterPacketContext {
 	return &NEFilterPacketContext{inner: raw.NEFilterPacketContextFromID(_id)}
 }
 
+// NEFilterPacketContextable is the interface implemented by [NEFilterPacketContext], for mocking and DI.
+type NEFilterPacketContextable interface {
+	Unwrap() *raw.NEFilterPacketContext
+}
+
+var _ NEFilterPacketContextable = (*NEFilterPacketContext)(nil)
+

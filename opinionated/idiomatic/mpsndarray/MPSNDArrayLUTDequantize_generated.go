@@ -29,3 +29,10 @@ func (x *ArrayLUTDequantize) asArrayMultiaryKernel() *raw.MPSNDArrayMultiaryKern
 
 func (x *ArrayLUTDequantize) asArrayMultiaryBase() *raw.MPSNDArrayMultiaryBase { return &x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase }
 
+// ArrayLUTDequantizeable is the interface implemented by [ArrayLUTDequantize], for mocking and DI.
+type ArrayLUTDequantizeable interface {
+	Unwrap() *raw.MPSNDArrayLUTDequantize
+}
+
+var _ ArrayLUTDequantizeable = (*ArrayLUTDequantize)(nil)
+

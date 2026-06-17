@@ -29,3 +29,10 @@ func (x *CNNLogSoftMax) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x
 
 func (x *CNNLogSoftMax) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNKernel.MPSKernel }
 
+// CNNLogSoftMaxable is the interface implemented by [CNNLogSoftMax], for mocking and DI.
+type CNNLogSoftMaxable interface {
+	Unwrap() *raw.MPSCNNLogSoftMax
+}
+
+var _ CNNLogSoftMaxable = (*CNNLogSoftMax)(nil)
+

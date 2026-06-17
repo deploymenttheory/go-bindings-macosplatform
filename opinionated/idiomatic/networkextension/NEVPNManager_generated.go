@@ -77,11 +77,11 @@ func (x *NEVPNManager) WithEnabled(enabled bool) *NEVPNManager {
 func (x *NEVPNManager) LoadFromPreferences(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.LoadFromPreferencesWithCompletionHandler(func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -95,11 +95,11 @@ func (x *NEVPNManager) LoadFromPreferences(ctx context.Context) error {
 func (x *NEVPNManager) RemoveFromPreferences(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.RemoveFromPreferencesWithCompletionHandler(func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -113,11 +113,11 @@ func (x *NEVPNManager) RemoveFromPreferences(ctx context.Context) error {
 func (x *NEVPNManager) SaveToPreferences(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.SaveToPreferencesWithCompletionHandler(func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -127,18 +127,127 @@ func (x *NEVPNManager) SaveToPreferences(ctx context.Context) error {
 	}
 }
 
+// SetAuthorization calls the underlying SetAuthorization.
+func (x *NEVPNManager) SetAuthorization(authorization unsafe.Pointer) {
+	x.inner.SetAuthorization(authorization)
+}
+
 // OnDemandRules returns the collection as a Go slice.
 func (x *NEVPNManager) OnDemandRules() []*raw.NEOnDemandRule {
 	arr := x.inner.OnDemandRules()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NEOnDemandRule, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NEOnDemandRule {
+		return raw.NEOnDemandRuleFromID(purego.Retain(_id))
+	})
+}
+
+// SetOnDemandRules calls the underlying SetOnDemandRules.
+func (x *NEVPNManager) SetOnDemandRules(onDemandRules *foundation.NSArray[*raw.NEOnDemandRule]) {
+	x.inner.SetOnDemandRules(onDemandRules)
+}
+
+// IsOnDemandEnabled calls the underlying IsOnDemandEnabled.
+func (x *NEVPNManager) IsOnDemandEnabled() bool {
+	return x.inner.IsOnDemandEnabled()
+}
+
+// SetOnDemandEnabled calls the underlying SetOnDemandEnabled.
+func (x *NEVPNManager) SetOnDemandEnabled(onDemandEnabled bool) {
+	x.inner.SetOnDemandEnabled(onDemandEnabled)
+}
+
+// LocalizedDescription calls the underlying LocalizedDescription.
+func (x *NEVPNManager) LocalizedDescription() string {
+	_r := x.inner.LocalizedDescription()
+	if _r == nil {
+		return ""
 	}
-	return out
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLocalizedDescription calls the underlying SetLocalizedDescription.
+func (x *NEVPNManager) SetLocalizedDescription(localizedDescription string) {
+	x.inner.SetLocalizedDescription(foundation.NSStringStringWithUTF8String(localizedDescription))
+}
+
+// Protocol calls the underlying Protocol.
+func (x *NEVPNManager) Protocol() *NEVPNProtocol {
+	_r := x.inner.Protocol()
+	if _r == nil {
+		return nil
+	}
+	return &NEVPNProtocol{inner: _r}
+}
+
+// SetProtocol calls the underlying SetProtocol.
+func (x *NEVPNManager) SetProtocol(protocol *raw.NEVPNProtocol) {
+	x.inner.SetProtocol(protocol)
+}
+
+// ProtocolConfiguration calls the underlying ProtocolConfiguration.
+func (x *NEVPNManager) ProtocolConfiguration() *NEVPNProtocol {
+	_r := x.inner.ProtocolConfiguration()
+	if _r == nil {
+		return nil
+	}
+	return &NEVPNProtocol{inner: _r}
+}
+
+// SetProtocolConfiguration calls the underlying SetProtocolConfiguration.
+func (x *NEVPNManager) SetProtocolConfiguration(protocolConfiguration *raw.NEVPNProtocol) {
+	x.inner.SetProtocolConfiguration(protocolConfiguration)
+}
+
+// Connection calls the underlying Connection.
+func (x *NEVPNManager) Connection() *NEVPNConnection {
+	_r := x.inner.Connection()
+	if _r == nil {
+		return nil
+	}
+	return &NEVPNConnection{inner: _r}
+}
+
+// IsEnabled calls the underlying IsEnabled.
+func (x *NEVPNManager) IsEnabled() bool {
+	return x.inner.IsEnabled()
+}
+
+// SetEnabled calls the underlying SetEnabled.
+func (x *NEVPNManager) SetEnabled(enabled bool) {
+	x.inner.SetEnabled(enabled)
 }
 
 func (x *NEVPNManager) asNEVPNManager() *raw.NEVPNManager { return x.inner }
+
+// NEVPNManagerable is the interface implemented by [NEVPNManager], for mocking and DI.
+type NEVPNManagerable interface {
+	Unwrap() *raw.NEVPNManager
+	WithOnDemandRules(items ...NEOnDemandRuleProvider) *NEVPNManager
+	WithOnDemandEnabled(onDemandEnabled bool) *NEVPNManager
+	WithLocalizedDescription(localizedDescription string) *NEVPNManager
+	WithProtocol(protocol NEVPNProtocolProvider) *NEVPNManager
+	WithProtocolConfiguration(protocolConfiguration NEVPNProtocolProvider) *NEVPNManager
+	WithEnabled(enabled bool) *NEVPNManager
+	LoadFromPreferences(ctx context.Context) error
+	RemoveFromPreferences(ctx context.Context) error
+	SaveToPreferences(ctx context.Context) error
+	SetAuthorization(authorization unsafe.Pointer)
+	OnDemandRules() []*raw.NEOnDemandRule
+	SetOnDemandRules(onDemandRules *foundation.NSArray[*raw.NEOnDemandRule])
+	IsOnDemandEnabled() bool
+	SetOnDemandEnabled(onDemandEnabled bool)
+	LocalizedDescription() string
+	SetLocalizedDescription(localizedDescription string)
+	Protocol() *NEVPNProtocol
+	SetProtocol(protocol *raw.NEVPNProtocol)
+	ProtocolConfiguration() *NEVPNProtocol
+	SetProtocolConfiguration(protocolConfiguration *raw.NEVPNProtocol)
+	Connection() *NEVPNConnection
+	IsEnabled() bool
+	SetEnabled(enabled bool)
+}
+
+var _ NEVPNManagerable = (*NEVPNManager)(nil)
 

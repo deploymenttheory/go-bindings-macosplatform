@@ -8,6 +8,7 @@ import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/audiotoolbox"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // AudioUnitBusArray wraps [raw.AUAudioUnitBusArray] with a fluent Go API.
@@ -31,4 +32,73 @@ func NewAudioUnitBusArrayWithAudioUnitBusType(owner *raw.AUAudioUnit, busType ra
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAudioUnit:busType:"), owner.Ptr(), busType)
 	return &AudioUnitBusArray{inner: raw.AUAudioUnitBusArrayFromID(_id)}
 }
+
+// ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
+func (x *AudioUnitBusArray) ObjectAtIndexedSubscript(index uint) *AudioUnitBus {
+	_r := x.inner.ObjectAtIndexedSubscript(index)
+	if _r == nil {
+		return nil
+	}
+	return &AudioUnitBus{inner: _r}
+}
+
+// SetBusCountError calls the underlying SetBusCountError.
+func (x *AudioUnitBusArray) SetBusCountError(count uint) (bool, error) {
+	return x.inner.SetBusCountError(count)
+}
+
+// AddObserverToAllBussesForKeyPathOptionsContext calls the underlying AddObserverToAllBussesForKeyPathOptionsContext.
+func (x *AudioUnitBusArray) AddObserverToAllBussesForKeyPathOptionsContext(observer *foundation.NSObject, keyPath string, options foundation.NSKeyValueObservingOptions, context_ unsafe.Pointer) {
+	x.inner.AddObserverToAllBussesForKeyPathOptionsContext(observer, foundation.NSStringStringWithUTF8String(keyPath), options, context_)
+}
+
+// RemoveObserverFromAllBussesForKeyPathContext calls the underlying RemoveObserverFromAllBussesForKeyPathContext.
+func (x *AudioUnitBusArray) RemoveObserverFromAllBussesForKeyPathContext(observer *foundation.NSObject, keyPath string, context_ unsafe.Pointer) {
+	x.inner.RemoveObserverFromAllBussesForKeyPathContext(observer, foundation.NSStringStringWithUTF8String(keyPath), context_)
+}
+
+// Count calls the underlying Count.
+func (x *AudioUnitBusArray) Count() uint {
+	return x.inner.Count()
+}
+
+// IsCountChangeable calls the underlying IsCountChangeable.
+func (x *AudioUnitBusArray) IsCountChangeable() bool {
+	return x.inner.IsCountChangeable()
+}
+
+// OwnerAudioUnit calls the underlying OwnerAudioUnit.
+func (x *AudioUnitBusArray) OwnerAudioUnit() *AudioUnit {
+	_r := x.inner.OwnerAudioUnit()
+	if _r == nil {
+		return nil
+	}
+	return &AudioUnit{inner: _r}
+}
+
+// BusType calls the underlying BusType.
+func (x *AudioUnitBusArray) BusType() raw.AUAudioUnitBusType {
+	return x.inner.BusType()
+}
+
+// ReplaceBusses calls the underlying ReplaceBusses.
+func (x *AudioUnitBusArray) ReplaceBusses(busArray *foundation.NSArray[*raw.AUAudioUnitBus]) {
+	x.inner.ReplaceBusses(busArray)
+}
+
+// AudioUnitBusArrayable is the interface implemented by [AudioUnitBusArray], for mocking and DI.
+type AudioUnitBusArrayable interface {
+	Unwrap() *raw.AUAudioUnitBusArray
+	ObjectAtIndexedSubscript(index uint) *AudioUnitBus
+	SetBusCountError(count uint) (bool, error)
+	AddObserverToAllBussesForKeyPathOptionsContext(observer *foundation.NSObject, keyPath string, options foundation.NSKeyValueObservingOptions, context_ unsafe.Pointer)
+	RemoveObserverFromAllBussesForKeyPathContext(observer *foundation.NSObject, keyPath string, context_ unsafe.Pointer)
+	Count() uint
+	IsCountChangeable() bool
+	OwnerAudioUnit() *AudioUnit
+	BusType() raw.AUAudioUnitBusType
+	ReplaceBusses(busArray *foundation.NSArray[*raw.AUAudioUnitBus])
+}
+
+var _ AudioUnitBusArrayable = (*AudioUnitBusArray)(nil)
 

@@ -6,6 +6,7 @@ package healthkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +24,28 @@ func NewObjectType() *ObjectType {
 	return &ObjectType{inner: raw.HKObjectTypeFromID(_id)}
 }
 
+// RequiresPerObjectAuthorization calls the underlying RequiresPerObjectAuthorization.
+func (x *ObjectType) RequiresPerObjectAuthorization() bool {
+	return x.inner.RequiresPerObjectAuthorization()
+}
+
+// Identifier calls the underlying Identifier.
+func (x *ObjectType) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 func (x *ObjectType) asObjectType() *raw.HKObjectType { return x.inner }
+
+// ObjectTypeable is the interface implemented by [ObjectType], for mocking and DI.
+type ObjectTypeable interface {
+	Unwrap() *raw.HKObjectType
+	RequiresPerObjectAuthorization() bool
+	Identifier() string
+}
+
+var _ ObjectTypeable = (*ObjectType)(nil)
 

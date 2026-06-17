@@ -23,3 +23,10 @@ func NewScreenSaverDefaults() *ScreenSaverDefaults {
 	return &ScreenSaverDefaults{inner: raw.ScreenSaverDefaultsFromID(_id)}
 }
 
+// ScreenSaverDefaultsable is the interface implemented by [ScreenSaverDefaults], for mocking and DI.
+type ScreenSaverDefaultsable interface {
+	Unwrap() *raw.ScreenSaverDefaults
+}
+
+var _ ScreenSaverDefaultsable = (*ScreenSaverDefaults)(nil)
+

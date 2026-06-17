@@ -7,6 +7,7 @@ package networkextension
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -47,12 +48,25 @@ func (x *NEOnDemandRuleEvaluateConnection) ConnectionRules() []*raw.NEEvaluateCo
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NEEvaluateConnectionRule, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NEEvaluateConnectionRule {
+		return raw.NEEvaluateConnectionRuleFromID(purego.Retain(_id))
+	})
+}
+
+// SetConnectionRules calls the underlying SetConnectionRules.
+func (x *NEOnDemandRuleEvaluateConnection) SetConnectionRules(connectionRules *foundation.NSArray[*raw.NEEvaluateConnectionRule]) {
+	x.inner.SetConnectionRules(connectionRules)
 }
 
 func (x *NEOnDemandRuleEvaluateConnection) asNEOnDemandRule() *raw.NEOnDemandRule { return &x.inner.NEOnDemandRule }
+
+// NEOnDemandRuleEvaluateConnectionable is the interface implemented by [NEOnDemandRuleEvaluateConnection], for mocking and DI.
+type NEOnDemandRuleEvaluateConnectionable interface {
+	Unwrap() *raw.NEOnDemandRuleEvaluateConnection
+	WithConnectionRules(items ...*raw.NEEvaluateConnectionRule) *NEOnDemandRuleEvaluateConnection
+	ConnectionRules() []*raw.NEEvaluateConnectionRule
+	SetConnectionRules(connectionRules *foundation.NSArray[*raw.NEEvaluateConnectionRule])
+}
+
+var _ NEOnDemandRuleEvaluateConnectionable = (*NEOnDemandRuleEvaluateConnection)(nil)
 

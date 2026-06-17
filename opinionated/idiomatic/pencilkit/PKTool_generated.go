@@ -25,3 +25,10 @@ func NewTool() *Tool {
 
 func (x *Tool) asTool() *raw.PKTool { return x.inner }
 
+// Toolable is the interface implemented by [Tool], for mocking and DI.
+type Toolable interface {
+	Unwrap() *raw.PKTool
+}
+
+var _ Toolable = (*Tool)(nil)
+

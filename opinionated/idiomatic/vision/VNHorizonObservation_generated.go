@@ -5,6 +5,7 @@
 package vision
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,5 +24,30 @@ func NewHorizonObservation() *HorizonObservation {
 	return &HorizonObservation{inner: raw.VNHorizonObservationFromID(_id)}
 }
 
+// TransformForImageWidthHeight calls the underlying TransformForImageWidthHeight.
+func (x *HorizonObservation) TransformForImageWidthHeight(width uint, height uint) corefoundation.CGAffineTransform {
+	return x.inner.TransformForImageWidthHeight(width, height)
+}
+
+// Transform calls the underlying Transform.
+func (x *HorizonObservation) Transform() corefoundation.CGAffineTransform {
+	return x.inner.Transform()
+}
+
+// Angle calls the underlying Angle.
+func (x *HorizonObservation) Angle() float64 {
+	return x.inner.Angle()
+}
+
 func (x *HorizonObservation) asObservation() *raw.VNObservation { return &x.inner.VNObservation }
+
+// HorizonObservationable is the interface implemented by [HorizonObservation], for mocking and DI.
+type HorizonObservationable interface {
+	Unwrap() *raw.VNHorizonObservation
+	TransformForImageWidthHeight(width uint, height uint) corefoundation.CGAffineTransform
+	Transform() corefoundation.CGAffineTransform
+	Angle() float64
+}
+
+var _ HorizonObservationable = (*HorizonObservation)(nil)
 

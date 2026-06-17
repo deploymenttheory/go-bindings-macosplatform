@@ -25,3 +25,10 @@ func NewMTRTestClusterClusterTestSpecificResponseParams() *MTRTestClusterCluster
 
 func (x *MTRTestClusterClusterTestSpecificResponseParams) asMTRUnitTestingClusterTestSpecificResponseParams() *raw.MTRUnitTestingClusterTestSpecificResponseParams { return &x.inner.MTRUnitTestingClusterTestSpecificResponseParams }
 
+// MTRTestClusterClusterTestSpecificResponseParamsable is the interface implemented by [MTRTestClusterClusterTestSpecificResponseParams], for mocking and DI.
+type MTRTestClusterClusterTestSpecificResponseParamsable interface {
+	Unwrap() *raw.MTRTestClusterClusterTestSpecificResponseParams
+}
+
+var _ MTRTestClusterClusterTestSpecificResponseParamsable = (*MTRTestClusterClusterTestSpecificResponseParams)(nil)
+

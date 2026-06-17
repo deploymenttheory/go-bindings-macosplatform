@@ -46,3 +46,34 @@ func NewMTROperationalCSRInfoWithCSRResponseParams(responseParams *raw.MTROperat
 	return &MTROperationalCSRInfo{inner: raw.MTROperationalCSRInfoFromID(_id)}
 }
 
+// Csr calls the underlying Csr.
+func (x *MTROperationalCSRInfo) Csr() *foundation.NSData {
+	return x.inner.Csr()
+}
+
+// CsrNonce calls the underlying CsrNonce.
+func (x *MTROperationalCSRInfo) CsrNonce() *foundation.NSData {
+	return x.inner.CsrNonce()
+}
+
+// CsrElementsTLV calls the underlying CsrElementsTLV.
+func (x *MTROperationalCSRInfo) CsrElementsTLV() *foundation.NSData {
+	return x.inner.CsrElementsTLV()
+}
+
+// AttestationSignature calls the underlying AttestationSignature.
+func (x *MTROperationalCSRInfo) AttestationSignature() *foundation.NSData {
+	return x.inner.AttestationSignature()
+}
+
+// MTROperationalCSRInfoable is the interface implemented by [MTROperationalCSRInfo], for mocking and DI.
+type MTROperationalCSRInfoable interface {
+	Unwrap() *raw.MTROperationalCSRInfo
+	Csr() *foundation.NSData
+	CsrNonce() *foundation.NSData
+	CsrElementsTLV() *foundation.NSData
+	AttestationSignature() *foundation.NSData
+}
+
+var _ MTROperationalCSRInfoable = (*MTROperationalCSRInfo)(nil)
+

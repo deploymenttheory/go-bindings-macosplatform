@@ -10,6 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // SK3DNode wraps [raw.SK3DNode] with a fluent Go API.
@@ -76,5 +77,121 @@ func (x *SK3DNode) WithAutoenablesDefaultLighting(autoenablesDefaultLighting boo
 	return x
 }
 
+// HitTestOptions calls the underlying HitTestOptions.
+func (x *SK3DNode) HitTestOptions(point corefoundation.CGPoint, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSArray[*scenekit.SCNHitTestResult] {
+	return x.inner.HitTestOptions(point, options)
+}
+
+// ProjectPoint calls the underlying ProjectPoint.
+func (x *SK3DNode) ProjectPoint(point unsafe.Pointer) unsafe.Pointer {
+	return x.inner.ProjectPoint(point)
+}
+
+// UnprojectPoint calls the underlying UnprojectPoint.
+func (x *SK3DNode) UnprojectPoint(point unsafe.Pointer) unsafe.Pointer {
+	return x.inner.UnprojectPoint(point)
+}
+
+// ViewportSize calls the underlying ViewportSize.
+func (x *SK3DNode) ViewportSize() corefoundation.CGSize {
+	return x.inner.ViewportSize()
+}
+
+// SetViewportSize calls the underlying SetViewportSize.
+func (x *SK3DNode) SetViewportSize(viewportSize corefoundation.CGSize) {
+	x.inner.SetViewportSize(viewportSize)
+}
+
+// ScnScene calls the underlying ScnScene.
+func (x *SK3DNode) ScnScene() *scenekit.SCNScene {
+	return x.inner.ScnScene()
+}
+
+// SetScnScene calls the underlying SetScnScene.
+func (x *SK3DNode) SetScnScene(scnScene *scenekit.SCNScene) {
+	x.inner.SetScnScene(scnScene)
+}
+
+// SceneTime calls the underlying SceneTime.
+func (x *SK3DNode) SceneTime() float64 {
+	return x.inner.SceneTime()
+}
+
+// SetSceneTime calls the underlying SetSceneTime.
+func (x *SK3DNode) SetSceneTime(sceneTime float64) {
+	x.inner.SetSceneTime(sceneTime)
+}
+
+// IsPlaying calls the underlying IsPlaying.
+func (x *SK3DNode) IsPlaying() bool {
+	return x.inner.IsPlaying()
+}
+
+// SetPlaying calls the underlying SetPlaying.
+func (x *SK3DNode) SetPlaying(playing bool) {
+	x.inner.SetPlaying(playing)
+}
+
+// Loops calls the underlying Loops.
+func (x *SK3DNode) Loops() bool {
+	return x.inner.Loops()
+}
+
+// SetLoops calls the underlying SetLoops.
+func (x *SK3DNode) SetLoops(loops bool) {
+	x.inner.SetLoops(loops)
+}
+
+// PointOfView calls the underlying PointOfView.
+func (x *SK3DNode) PointOfView() *scenekit.SCNNode {
+	return x.inner.PointOfView()
+}
+
+// SetPointOfView calls the underlying SetPointOfView.
+func (x *SK3DNode) SetPointOfView(pointOfView *scenekit.SCNNode) {
+	x.inner.SetPointOfView(pointOfView)
+}
+
+// AutoenablesDefaultLighting calls the underlying AutoenablesDefaultLighting.
+func (x *SK3DNode) AutoenablesDefaultLighting() bool {
+	return x.inner.AutoenablesDefaultLighting()
+}
+
+// SetAutoenablesDefaultLighting calls the underlying SetAutoenablesDefaultLighting.
+func (x *SK3DNode) SetAutoenablesDefaultLighting(autoenablesDefaultLighting bool) {
+	x.inner.SetAutoenablesDefaultLighting(autoenablesDefaultLighting)
+}
+
 func (x *SK3DNode) asNode() *raw.SKNode { return &x.inner.SKNode }
+
+// SK3DNodeable is the interface implemented by [SK3DNode], for mocking and DI.
+type SK3DNodeable interface {
+	Unwrap() *raw.SK3DNode
+	WithViewportSize(viewportSize corefoundation.CGSize) *SK3DNode
+	WithScnScene(scnScene *scenekit.SCNScene) *SK3DNode
+	WithSceneTime(sceneTime float64) *SK3DNode
+	WithPlaying(playing bool) *SK3DNode
+	WithLoops(loops bool) *SK3DNode
+	WithPointOfView(pointOfView *scenekit.SCNNode) *SK3DNode
+	WithAutoenablesDefaultLighting(autoenablesDefaultLighting bool) *SK3DNode
+	HitTestOptions(point corefoundation.CGPoint, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSArray[*scenekit.SCNHitTestResult]
+	ProjectPoint(point unsafe.Pointer) unsafe.Pointer
+	UnprojectPoint(point unsafe.Pointer) unsafe.Pointer
+	ViewportSize() corefoundation.CGSize
+	SetViewportSize(viewportSize corefoundation.CGSize)
+	ScnScene() *scenekit.SCNScene
+	SetScnScene(scnScene *scenekit.SCNScene)
+	SceneTime() float64
+	SetSceneTime(sceneTime float64)
+	IsPlaying() bool
+	SetPlaying(playing bool)
+	Loops() bool
+	SetLoops(loops bool)
+	PointOfView() *scenekit.SCNNode
+	SetPointOfView(pointOfView *scenekit.SCNNode)
+	AutoenablesDefaultLighting() bool
+	SetAutoenablesDefaultLighting(autoenablesDefaultLighting bool)
+}
+
+var _ SK3DNodeable = (*SK3DNode)(nil)
 

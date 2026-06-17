@@ -9,6 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // MutableCaption wraps [raw.AVMutableCaption] with a fluent Go API.
@@ -55,5 +56,131 @@ func (x *MutableCaption) WithAnimation(animation raw.AVCaptionAnimation) *Mutabl
 	return x
 }
 
+// SetText calls the underlying SetText.
+func (x *MutableCaption) SetText(text string) {
+	x.inner.SetText(foundation.NSStringStringWithUTF8String(text))
+}
+
+// SetTimeRange calls the underlying SetTimeRange.
+func (x *MutableCaption) SetTimeRange(timeRange coremedia.CMTimeRange) {
+	x.inner.SetTimeRange(timeRange)
+}
+
+// SetTextColorInRange calls the underlying SetTextColorInRange.
+func (x *MutableCaption) SetTextColorInRange(color unsafe.Pointer, range_ foundation.NSRange) {
+	x.inner.SetTextColorInRange(color, range_)
+}
+
+// SetBackgroundColorInRange calls the underlying SetBackgroundColorInRange.
+func (x *MutableCaption) SetBackgroundColorInRange(color unsafe.Pointer, range_ foundation.NSRange) {
+	x.inner.SetBackgroundColorInRange(color, range_)
+}
+
+// SetFontWeightInRange calls the underlying SetFontWeightInRange.
+func (x *MutableCaption) SetFontWeightInRange(fontWeight raw.AVCaptionFontWeight, range_ foundation.NSRange) {
+	x.inner.SetFontWeightInRange(fontWeight, range_)
+}
+
+// SetFontStyleInRange calls the underlying SetFontStyleInRange.
+func (x *MutableCaption) SetFontStyleInRange(fontStyle raw.AVCaptionFontStyle, range_ foundation.NSRange) {
+	x.inner.SetFontStyleInRange(fontStyle, range_)
+}
+
+// SetDecorationInRange calls the underlying SetDecorationInRange.
+func (x *MutableCaption) SetDecorationInRange(decoration raw.AVCaptionDecoration, range_ foundation.NSRange) {
+	x.inner.SetDecorationInRange(decoration, range_)
+}
+
+// SetTextCombineInRange calls the underlying SetTextCombineInRange.
+func (x *MutableCaption) SetTextCombineInRange(textCombine raw.AVCaptionTextCombine, range_ foundation.NSRange) {
+	x.inner.SetTextCombineInRange(textCombine, range_)
+}
+
+// SetRubyInRange calls the underlying SetRubyInRange.
+func (x *MutableCaption) SetRubyInRange(ruby *raw.AVCaptionRuby, range_ foundation.NSRange) {
+	x.inner.SetRubyInRange(ruby, range_)
+}
+
+// RemoveTextColorInRange calls the underlying RemoveTextColorInRange.
+func (x *MutableCaption) RemoveTextColorInRange(range_ foundation.NSRange) {
+	x.inner.RemoveTextColorInRange(range_)
+}
+
+// RemoveBackgroundColorInRange calls the underlying RemoveBackgroundColorInRange.
+func (x *MutableCaption) RemoveBackgroundColorInRange(range_ foundation.NSRange) {
+	x.inner.RemoveBackgroundColorInRange(range_)
+}
+
+// RemoveFontWeightInRange calls the underlying RemoveFontWeightInRange.
+func (x *MutableCaption) RemoveFontWeightInRange(range_ foundation.NSRange) {
+	x.inner.RemoveFontWeightInRange(range_)
+}
+
+// RemoveFontStyleInRange calls the underlying RemoveFontStyleInRange.
+func (x *MutableCaption) RemoveFontStyleInRange(range_ foundation.NSRange) {
+	x.inner.RemoveFontStyleInRange(range_)
+}
+
+// RemoveDecorationInRange calls the underlying RemoveDecorationInRange.
+func (x *MutableCaption) RemoveDecorationInRange(range_ foundation.NSRange) {
+	x.inner.RemoveDecorationInRange(range_)
+}
+
+// RemoveTextCombineInRange calls the underlying RemoveTextCombineInRange.
+func (x *MutableCaption) RemoveTextCombineInRange(range_ foundation.NSRange) {
+	x.inner.RemoveTextCombineInRange(range_)
+}
+
+// RemoveRubyInRange calls the underlying RemoveRubyInRange.
+func (x *MutableCaption) RemoveRubyInRange(range_ foundation.NSRange) {
+	x.inner.RemoveRubyInRange(range_)
+}
+
+// SetRegion calls the underlying SetRegion.
+func (x *MutableCaption) SetRegion(region *raw.AVCaptionRegion) {
+	x.inner.SetRegion(region)
+}
+
+// SetTextAlignment calls the underlying SetTextAlignment.
+func (x *MutableCaption) SetTextAlignment(textAlignment raw.AVCaptionTextAlignment) {
+	x.inner.SetTextAlignment(textAlignment)
+}
+
+// SetAnimation calls the underlying SetAnimation.
+func (x *MutableCaption) SetAnimation(animation raw.AVCaptionAnimation) {
+	x.inner.SetAnimation(animation)
+}
+
 func (x *MutableCaption) asCaption() *raw.AVCaption { return &x.inner.AVCaption }
+
+// MutableCaptionable is the interface implemented by [MutableCaption], for mocking and DI.
+type MutableCaptionable interface {
+	Unwrap() *raw.AVMutableCaption
+	WithText(text string) *MutableCaption
+	WithTimeRange(timeRange coremedia.CMTimeRange) *MutableCaption
+	WithRegion(region CaptionRegionProvider) *MutableCaption
+	WithTextAlignment(textAlignment raw.AVCaptionTextAlignment) *MutableCaption
+	WithAnimation(animation raw.AVCaptionAnimation) *MutableCaption
+	SetText(text string)
+	SetTimeRange(timeRange coremedia.CMTimeRange)
+	SetTextColorInRange(color unsafe.Pointer, range_ foundation.NSRange)
+	SetBackgroundColorInRange(color unsafe.Pointer, range_ foundation.NSRange)
+	SetFontWeightInRange(fontWeight raw.AVCaptionFontWeight, range_ foundation.NSRange)
+	SetFontStyleInRange(fontStyle raw.AVCaptionFontStyle, range_ foundation.NSRange)
+	SetDecorationInRange(decoration raw.AVCaptionDecoration, range_ foundation.NSRange)
+	SetTextCombineInRange(textCombine raw.AVCaptionTextCombine, range_ foundation.NSRange)
+	SetRubyInRange(ruby *raw.AVCaptionRuby, range_ foundation.NSRange)
+	RemoveTextColorInRange(range_ foundation.NSRange)
+	RemoveBackgroundColorInRange(range_ foundation.NSRange)
+	RemoveFontWeightInRange(range_ foundation.NSRange)
+	RemoveFontStyleInRange(range_ foundation.NSRange)
+	RemoveDecorationInRange(range_ foundation.NSRange)
+	RemoveTextCombineInRange(range_ foundation.NSRange)
+	RemoveRubyInRange(range_ foundation.NSRange)
+	SetRegion(region *raw.AVCaptionRegion)
+	SetTextAlignment(textAlignment raw.AVCaptionTextAlignment)
+	SetAnimation(animation raw.AVCaptionAnimation)
+}
+
+var _ MutableCaptionable = (*MutableCaption)(nil)
 

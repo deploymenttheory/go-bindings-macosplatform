@@ -7,6 +7,7 @@ package glkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/glkit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // ReflectionMapEffect wraps [raw.GLKReflectionMapEffect] with a fluent Go API.
@@ -23,5 +24,34 @@ func NewReflectionMapEffect() *ReflectionMapEffect {
 	return &ReflectionMapEffect{inner: raw.GLKReflectionMapEffectFromID(_id)}
 }
 
+// TextureCubeMap calls the underlying TextureCubeMap.
+func (x *ReflectionMapEffect) TextureCubeMap() *EffectPropertyTexture {
+	_r := x.inner.TextureCubeMap()
+	if _r == nil {
+		return nil
+	}
+	return &EffectPropertyTexture{inner: _r}
+}
+
+// Matrix calls the underlying Matrix.
+func (x *ReflectionMapEffect) Matrix() unsafe.Pointer {
+	return x.inner.Matrix()
+}
+
+// SetMatrix calls the underlying SetMatrix.
+func (x *ReflectionMapEffect) SetMatrix(matrix unsafe.Pointer) {
+	x.inner.SetMatrix(matrix)
+}
+
 func (x *ReflectionMapEffect) asBaseEffect() *raw.GLKBaseEffect { return &x.inner.GLKBaseEffect }
+
+// ReflectionMapEffectable is the interface implemented by [ReflectionMapEffect], for mocking and DI.
+type ReflectionMapEffectable interface {
+	Unwrap() *raw.GLKReflectionMapEffect
+	TextureCubeMap() *EffectPropertyTexture
+	Matrix() unsafe.Pointer
+	SetMatrix(matrix unsafe.Pointer)
+}
+
+var _ ReflectionMapEffectable = (*ReflectionMapEffect)(nil)
 

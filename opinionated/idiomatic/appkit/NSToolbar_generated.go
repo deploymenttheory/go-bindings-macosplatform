@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -138,17 +139,108 @@ func (x *Toolbar) WithShowsBaselineSeparator(showsBaselineSeparator bool) *Toolb
 	return x
 }
 
+// InsertItemWithItemIdentifierAtIndex calls the underlying InsertItemWithItemIdentifierAtIndex.
+func (x *Toolbar) InsertItemWithItemIdentifierAtIndex(itemIdentifier *foundation.NSString, index int) {
+	x.inner.InsertItemWithItemIdentifierAtIndex(itemIdentifier, index)
+}
+
+// RemoveItemAtIndex calls the underlying RemoveItemAtIndex.
+func (x *Toolbar) RemoveItemAtIndex(index int) {
+	x.inner.RemoveItemAtIndex(index)
+}
+
+// RemoveItemWithItemIdentifier calls the underlying RemoveItemWithItemIdentifier.
+func (x *Toolbar) RemoveItemWithItemIdentifier(itemIdentifier *foundation.NSString) {
+	x.inner.RemoveItemWithItemIdentifier(itemIdentifier)
+}
+
+// RunCustomizationPalette calls the underlying RunCustomizationPalette.
+func (x *Toolbar) RunCustomizationPalette(sender objc.ID) {
+	x.inner.RunCustomizationPalette(sender)
+}
+
+// ValidateVisibleItems calls the underlying ValidateVisibleItems.
+func (x *Toolbar) ValidateVisibleItems() {
+	x.inner.ValidateVisibleItems()
+}
+
+// Delegate calls the underlying Delegate.
+func (x *Toolbar) Delegate() raw.NSToolbarDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *Toolbar) SetDelegate(delegate raw.NSToolbarDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// CustomizationPaletteIsRunning calls the underlying CustomizationPaletteIsRunning.
+func (x *Toolbar) CustomizationPaletteIsRunning() bool {
+	return x.inner.CustomizationPaletteIsRunning()
+}
+
+// DisplayMode calls the underlying DisplayMode.
+func (x *Toolbar) DisplayMode() raw.NSToolbarDisplayMode {
+	return x.inner.DisplayMode()
+}
+
+// SetDisplayMode calls the underlying SetDisplayMode.
+func (x *Toolbar) SetDisplayMode(displayMode raw.NSToolbarDisplayMode) {
+	x.inner.SetDisplayMode(displayMode)
+}
+
+// SelectedItemIdentifier calls the underlying SelectedItemIdentifier.
+func (x *Toolbar) SelectedItemIdentifier() string {
+	_r := x.inner.SelectedItemIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetSelectedItemIdentifier calls the underlying SetSelectedItemIdentifier.
+func (x *Toolbar) SetSelectedItemIdentifier(selectedItemIdentifier *foundation.NSString) {
+	x.inner.SetSelectedItemIdentifier(selectedItemIdentifier)
+}
+
+// AllowsUserCustomization calls the underlying AllowsUserCustomization.
+func (x *Toolbar) AllowsUserCustomization() bool {
+	return x.inner.AllowsUserCustomization()
+}
+
+// SetAllowsUserCustomization calls the underlying SetAllowsUserCustomization.
+func (x *Toolbar) SetAllowsUserCustomization(allowsUserCustomization bool) {
+	x.inner.SetAllowsUserCustomization(allowsUserCustomization)
+}
+
+// AllowsDisplayModeCustomization calls the underlying AllowsDisplayModeCustomization.
+func (x *Toolbar) AllowsDisplayModeCustomization() bool {
+	return x.inner.AllowsDisplayModeCustomization()
+}
+
+// SetAllowsDisplayModeCustomization calls the underlying SetAllowsDisplayModeCustomization.
+func (x *Toolbar) SetAllowsDisplayModeCustomization(allowsDisplayModeCustomization bool) {
+	x.inner.SetAllowsDisplayModeCustomization(allowsDisplayModeCustomization)
+}
+
+// Identifier calls the underlying Identifier.
+func (x *Toolbar) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 // Items returns the collection as a Go slice.
 func (x *Toolbar) Items() []*raw.NSToolbarItem {
 	arr := x.inner.Items()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSToolbarItem, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSToolbarItem {
+		return raw.NSToolbarItemFromID(purego.Retain(_id))
+	})
 }
 
 // VisibleItems returns the collection as a Go slice.
@@ -157,11 +249,9 @@ func (x *Toolbar) VisibleItems() []*raw.NSToolbarItem {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSToolbarItem, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSToolbarItem {
+		return raw.NSToolbarItemFromID(purego.Retain(_id))
+	})
 }
 
 // ItemIdentifiers returns the collection as a Go slice.
@@ -170,10 +260,185 @@ func (x *Toolbar) ItemIdentifiers() []*foundation.NSString {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	})
 }
+
+// SetItemIdentifiers calls the underlying SetItemIdentifiers.
+func (x *Toolbar) SetItemIdentifiers(itemIdentifiers *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetItemIdentifiers(itemIdentifiers)
+}
+
+// CenteredItemIdentifiers calls the underlying CenteredItemIdentifiers.
+func (x *Toolbar) CenteredItemIdentifiers() *foundation.NSSet[*foundation.NSString] {
+	return x.inner.CenteredItemIdentifiers()
+}
+
+// SetCenteredItemIdentifiers calls the underlying SetCenteredItemIdentifiers.
+func (x *Toolbar) SetCenteredItemIdentifiers(centeredItemIdentifiers *foundation.NSSet[*foundation.NSString]) {
+	x.inner.SetCenteredItemIdentifiers(centeredItemIdentifiers)
+}
+
+// AutosavesConfiguration calls the underlying AutosavesConfiguration.
+func (x *Toolbar) AutosavesConfiguration() bool {
+	return x.inner.AutosavesConfiguration()
+}
+
+// SetAutosavesConfiguration calls the underlying SetAutosavesConfiguration.
+func (x *Toolbar) SetAutosavesConfiguration(autosavesConfiguration bool) {
+	x.inner.SetAutosavesConfiguration(autosavesConfiguration)
+}
+
+// AllowsExtensionItems calls the underlying AllowsExtensionItems.
+func (x *Toolbar) AllowsExtensionItems() bool {
+	return x.inner.AllowsExtensionItems()
+}
+
+// SetAllowsExtensionItems calls the underlying SetAllowsExtensionItems.
+func (x *Toolbar) SetAllowsExtensionItems(allowsExtensionItems bool) {
+	x.inner.SetAllowsExtensionItems(allowsExtensionItems)
+}
+
+// SetConfigurationFromDictionary calls the underlying SetConfigurationFromDictionary.
+func (x *Toolbar) SetConfigurationFromDictionary(configDict *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
+	x.inner.SetConfigurationFromDictionary(configDict)
+}
+
+// SizeMode calls the underlying SizeMode.
+func (x *Toolbar) SizeMode() raw.NSToolbarSizeMode {
+	return x.inner.SizeMode()
+}
+
+// SetSizeMode calls the underlying SetSizeMode.
+func (x *Toolbar) SetSizeMode(sizeMode raw.NSToolbarSizeMode) {
+	x.inner.SetSizeMode(sizeMode)
+}
+
+// CenteredItemIdentifier calls the underlying CenteredItemIdentifier.
+func (x *Toolbar) CenteredItemIdentifier() string {
+	_r := x.inner.CenteredItemIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetCenteredItemIdentifier calls the underlying SetCenteredItemIdentifier.
+func (x *Toolbar) SetCenteredItemIdentifier(centeredItemIdentifier *foundation.NSString) {
+	x.inner.SetCenteredItemIdentifier(centeredItemIdentifier)
+}
+
+// FullScreenAccessoryView calls the underlying FullScreenAccessoryView.
+func (x *Toolbar) FullScreenAccessoryView() *View {
+	_r := x.inner.FullScreenAccessoryView()
+	if _r == nil {
+		return nil
+	}
+	return &View{inner: _r}
+}
+
+// SetFullScreenAccessoryView calls the underlying SetFullScreenAccessoryView.
+func (x *Toolbar) SetFullScreenAccessoryView(fullScreenAccessoryView *raw.NSView) {
+	x.inner.SetFullScreenAccessoryView(fullScreenAccessoryView)
+}
+
+// FullScreenAccessoryViewMinHeight calls the underlying FullScreenAccessoryViewMinHeight.
+func (x *Toolbar) FullScreenAccessoryViewMinHeight() float64 {
+	return x.inner.FullScreenAccessoryViewMinHeight()
+}
+
+// SetFullScreenAccessoryViewMinHeight calls the underlying SetFullScreenAccessoryViewMinHeight.
+func (x *Toolbar) SetFullScreenAccessoryViewMinHeight(fullScreenAccessoryViewMinHeight float64) {
+	x.inner.SetFullScreenAccessoryViewMinHeight(fullScreenAccessoryViewMinHeight)
+}
+
+// FullScreenAccessoryViewMaxHeight calls the underlying FullScreenAccessoryViewMaxHeight.
+func (x *Toolbar) FullScreenAccessoryViewMaxHeight() float64 {
+	return x.inner.FullScreenAccessoryViewMaxHeight()
+}
+
+// SetFullScreenAccessoryViewMaxHeight calls the underlying SetFullScreenAccessoryViewMaxHeight.
+func (x *Toolbar) SetFullScreenAccessoryViewMaxHeight(fullScreenAccessoryViewMaxHeight float64) {
+	x.inner.SetFullScreenAccessoryViewMaxHeight(fullScreenAccessoryViewMaxHeight)
+}
+
+// ShowsBaselineSeparator calls the underlying ShowsBaselineSeparator.
+func (x *Toolbar) ShowsBaselineSeparator() bool {
+	return x.inner.ShowsBaselineSeparator()
+}
+
+// SetShowsBaselineSeparator calls the underlying SetShowsBaselineSeparator.
+func (x *Toolbar) SetShowsBaselineSeparator(showsBaselineSeparator bool) {
+	x.inner.SetShowsBaselineSeparator(showsBaselineSeparator)
+}
+
+// ConfigurationDictionary calls the underlying ConfigurationDictionary.
+func (x *Toolbar) ConfigurationDictionary() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ConfigurationDictionary()
+}
+
+// Toolbarable is the interface implemented by [Toolbar], for mocking and DI.
+type Toolbarable interface {
+	Unwrap() *raw.NSToolbar
+	WithDelegate(delegate raw.NSToolbarDelegate) *Toolbar
+	WithVisible(visible bool) *Toolbar
+	WithDisplayMode(displayMode raw.NSToolbarDisplayMode) *Toolbar
+	WithSelectedItemIdentifier(selectedItemIdentifier *foundation.NSString) *Toolbar
+	WithAllowsUserCustomization(allowsUserCustomization bool) *Toolbar
+	WithAllowsDisplayModeCustomization(allowsDisplayModeCustomization bool) *Toolbar
+	WithItemIdentifiers(items ...*foundation.NSString) *Toolbar
+	WithCenteredItemIdentifiers(centeredItemIdentifiers *foundation.NSSet[*foundation.NSString]) *Toolbar
+	WithAutosavesConfiguration(autosavesConfiguration bool) *Toolbar
+	WithAllowsExtensionItems(allowsExtensionItems bool) *Toolbar
+	WithSizeMode(sizeMode raw.NSToolbarSizeMode) *Toolbar
+	WithCenteredItemIdentifier(centeredItemIdentifier *foundation.NSString) *Toolbar
+	WithFullScreenAccessoryView(fullScreenAccessoryView ViewProvider) *Toolbar
+	WithFullScreenAccessoryViewMinHeight(fullScreenAccessoryViewMinHeight float64) *Toolbar
+	WithFullScreenAccessoryViewMaxHeight(fullScreenAccessoryViewMaxHeight float64) *Toolbar
+	WithShowsBaselineSeparator(showsBaselineSeparator bool) *Toolbar
+	InsertItemWithItemIdentifierAtIndex(itemIdentifier *foundation.NSString, index int)
+	RemoveItemAtIndex(index int)
+	RemoveItemWithItemIdentifier(itemIdentifier *foundation.NSString)
+	RunCustomizationPalette(sender objc.ID)
+	ValidateVisibleItems()
+	Delegate() raw.NSToolbarDelegate
+	SetDelegate(delegate raw.NSToolbarDelegate)
+	CustomizationPaletteIsRunning() bool
+	DisplayMode() raw.NSToolbarDisplayMode
+	SetDisplayMode(displayMode raw.NSToolbarDisplayMode)
+	SelectedItemIdentifier() string
+	SetSelectedItemIdentifier(selectedItemIdentifier *foundation.NSString)
+	AllowsUserCustomization() bool
+	SetAllowsUserCustomization(allowsUserCustomization bool)
+	AllowsDisplayModeCustomization() bool
+	SetAllowsDisplayModeCustomization(allowsDisplayModeCustomization bool)
+	Identifier() string
+	Items() []*raw.NSToolbarItem
+	VisibleItems() []*raw.NSToolbarItem
+	ItemIdentifiers() []*foundation.NSString
+	SetItemIdentifiers(itemIdentifiers *foundation.NSArray[*foundation.NSString])
+	CenteredItemIdentifiers() *foundation.NSSet[*foundation.NSString]
+	SetCenteredItemIdentifiers(centeredItemIdentifiers *foundation.NSSet[*foundation.NSString])
+	AutosavesConfiguration() bool
+	SetAutosavesConfiguration(autosavesConfiguration bool)
+	AllowsExtensionItems() bool
+	SetAllowsExtensionItems(allowsExtensionItems bool)
+	SetConfigurationFromDictionary(configDict *foundation.NSDictionary[*foundation.NSString, objc.ID])
+	SizeMode() raw.NSToolbarSizeMode
+	SetSizeMode(sizeMode raw.NSToolbarSizeMode)
+	CenteredItemIdentifier() string
+	SetCenteredItemIdentifier(centeredItemIdentifier *foundation.NSString)
+	FullScreenAccessoryView() *View
+	SetFullScreenAccessoryView(fullScreenAccessoryView *raw.NSView)
+	FullScreenAccessoryViewMinHeight() float64
+	SetFullScreenAccessoryViewMinHeight(fullScreenAccessoryViewMinHeight float64)
+	FullScreenAccessoryViewMaxHeight() float64
+	SetFullScreenAccessoryViewMaxHeight(fullScreenAccessoryViewMaxHeight float64)
+	ShowsBaselineSeparator() bool
+	SetShowsBaselineSeparator(showsBaselineSeparator bool)
+	ConfigurationDictionary() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+}
+
+var _ Toolbarable = (*Toolbar)(nil)
 

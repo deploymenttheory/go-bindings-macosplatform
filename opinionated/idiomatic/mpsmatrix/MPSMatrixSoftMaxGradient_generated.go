@@ -7,6 +7,7 @@ package mpsmatrix
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsmatrix"
 	"github.com/ebitengine/purego/objc"
 )
@@ -45,7 +46,46 @@ func (x *MatrixSoftMaxGradient) WithSourceColumns(sourceColumns uint) *MatrixSof
 	return x
 }
 
+// EncodeToCommandBufferGradientMatrixForwardOutputMatrixResultMatrix calls the underlying EncodeToCommandBufferGradientMatrixForwardOutputMatrixResultMatrix.
+func (x *MatrixSoftMaxGradient) EncodeToCommandBufferGradientMatrixForwardOutputMatrixResultMatrix(commandBuffer metal.MTLCommandBuffer, gradientMatrix *mpscore.MPSMatrix, forwardOutputMatrix *mpscore.MPSMatrix, resultMatrix *mpscore.MPSMatrix) {
+	x.inner.EncodeToCommandBufferGradientMatrixForwardOutputMatrixResultMatrix(commandBuffer, gradientMatrix, forwardOutputMatrix, resultMatrix)
+}
+
+// SourceRows calls the underlying SourceRows.
+func (x *MatrixSoftMaxGradient) SourceRows() uint {
+	return x.inner.SourceRows()
+}
+
+// SetSourceRows calls the underlying SetSourceRows.
+func (x *MatrixSoftMaxGradient) SetSourceRows(sourceRows uint) {
+	x.inner.SetSourceRows(sourceRows)
+}
+
+// SourceColumns calls the underlying SourceColumns.
+func (x *MatrixSoftMaxGradient) SourceColumns() uint {
+	return x.inner.SourceColumns()
+}
+
+// SetSourceColumns calls the underlying SetSourceColumns.
+func (x *MatrixSoftMaxGradient) SetSourceColumns(sourceColumns uint) {
+	x.inner.SetSourceColumns(sourceColumns)
+}
+
 func (x *MatrixSoftMaxGradient) asMatrixSoftMaxGradient() *raw.MPSMatrixSoftMaxGradient { return x.inner }
 
 func (x *MatrixSoftMaxGradient) asMatrixBinaryKernel() *raw.MPSMatrixBinaryKernel { return &x.inner.MPSMatrixBinaryKernel }
+
+// MatrixSoftMaxGradientable is the interface implemented by [MatrixSoftMaxGradient], for mocking and DI.
+type MatrixSoftMaxGradientable interface {
+	Unwrap() *raw.MPSMatrixSoftMaxGradient
+	WithSourceRows(sourceRows uint) *MatrixSoftMaxGradient
+	WithSourceColumns(sourceColumns uint) *MatrixSoftMaxGradient
+	EncodeToCommandBufferGradientMatrixForwardOutputMatrixResultMatrix(commandBuffer metal.MTLCommandBuffer, gradientMatrix *mpscore.MPSMatrix, forwardOutputMatrix *mpscore.MPSMatrix, resultMatrix *mpscore.MPSMatrix)
+	SourceRows() uint
+	SetSourceRows(sourceRows uint)
+	SourceColumns() uint
+	SetSourceColumns(sourceColumns uint)
+}
+
+var _ MatrixSoftMaxGradientable = (*MatrixSoftMaxGradient)(nil)
 

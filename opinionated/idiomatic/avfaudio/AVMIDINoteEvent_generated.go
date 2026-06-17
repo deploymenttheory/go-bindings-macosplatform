@@ -48,5 +48,64 @@ func (x *MIDINoteEvent) WithDuration(duration float64) *MIDINoteEvent {
 	return x
 }
 
+// Channel calls the underlying Channel.
+func (x *MIDINoteEvent) Channel() uint {
+	return x.inner.Channel()
+}
+
+// SetChannel calls the underlying SetChannel.
+func (x *MIDINoteEvent) SetChannel(channel uint) {
+	x.inner.SetChannel(channel)
+}
+
+// Key calls the underlying Key.
+func (x *MIDINoteEvent) Key() uint {
+	return x.inner.Key()
+}
+
+// SetKey calls the underlying SetKey.
+func (x *MIDINoteEvent) SetKey(key uint) {
+	x.inner.SetKey(key)
+}
+
+// Velocity calls the underlying Velocity.
+func (x *MIDINoteEvent) Velocity() uint {
+	return x.inner.Velocity()
+}
+
+// SetVelocity calls the underlying SetVelocity.
+func (x *MIDINoteEvent) SetVelocity(velocity uint) {
+	x.inner.SetVelocity(velocity)
+}
+
+// Duration calls the underlying Duration.
+func (x *MIDINoteEvent) Duration() float64 {
+	return x.inner.Duration()
+}
+
+// SetDuration calls the underlying SetDuration.
+func (x *MIDINoteEvent) SetDuration(duration float64) {
+	x.inner.SetDuration(duration)
+}
+
 func (x *MIDINoteEvent) asMusicEvent() *raw.AVMusicEvent { return &x.inner.AVMusicEvent }
+
+// MIDINoteEventable is the interface implemented by [MIDINoteEvent], for mocking and DI.
+type MIDINoteEventable interface {
+	Unwrap() *raw.AVMIDINoteEvent
+	WithChannel(channel uint) *MIDINoteEvent
+	WithKey(key uint) *MIDINoteEvent
+	WithVelocity(velocity uint) *MIDINoteEvent
+	WithDuration(duration float64) *MIDINoteEvent
+	Channel() uint
+	SetChannel(channel uint)
+	Key() uint
+	SetKey(key uint)
+	Velocity() uint
+	SetVelocity(velocity uint)
+	Duration() float64
+	SetDuration(duration float64)
+}
+
+var _ MIDINoteEventable = (*MIDINoteEvent)(nil)
 

@@ -90,3 +90,153 @@ func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) WithMaxSyst
 	return x
 }
 
+// MeasurementType calls the underlying MeasurementType.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) MeasurementType() *foundation.NSNumber {
+	return x.inner.MeasurementType()
+}
+
+// SetMeasurementType calls the underlying SetMeasurementType.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) SetMeasurementType(measurementType *foundation.NSNumber) {
+	x.inner.SetMeasurementType(measurementType)
+}
+
+// Min calls the underlying Min.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) Min() *foundation.NSNumber {
+	return x.inner.Min()
+}
+
+// SetMin calls the underlying SetMin.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) SetMin(min *foundation.NSNumber) {
+	x.inner.SetMin(min)
+}
+
+// Max calls the underlying Max.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) Max() *foundation.NSNumber {
+	return x.inner.Max()
+}
+
+// SetMax calls the underlying SetMax.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) SetMax(max *foundation.NSNumber) {
+	x.inner.SetMax(max)
+}
+
+// StartTimestamp calls the underlying StartTimestamp.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) StartTimestamp() *foundation.NSNumber {
+	return x.inner.StartTimestamp()
+}
+
+// SetStartTimestamp calls the underlying SetStartTimestamp.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) SetStartTimestamp(startTimestamp *foundation.NSNumber) {
+	x.inner.SetStartTimestamp(startTimestamp)
+}
+
+// EndTimestamp calls the underlying EndTimestamp.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) EndTimestamp() *foundation.NSNumber {
+	return x.inner.EndTimestamp()
+}
+
+// SetEndTimestamp calls the underlying SetEndTimestamp.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) SetEndTimestamp(endTimestamp *foundation.NSNumber) {
+	x.inner.SetEndTimestamp(endTimestamp)
+}
+
+// MinTimestamp calls the underlying MinTimestamp.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) MinTimestamp() *foundation.NSNumber {
+	return x.inner.MinTimestamp()
+}
+
+// SetMinTimestamp calls the underlying SetMinTimestamp.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) SetMinTimestamp(minTimestamp *foundation.NSNumber) {
+	x.inner.SetMinTimestamp(minTimestamp)
+}
+
+// MaxTimestamp calls the underlying MaxTimestamp.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) MaxTimestamp() *foundation.NSNumber {
+	return x.inner.MaxTimestamp()
+}
+
+// SetMaxTimestamp calls the underlying SetMaxTimestamp.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) SetMaxTimestamp(maxTimestamp *foundation.NSNumber) {
+	x.inner.SetMaxTimestamp(maxTimestamp)
+}
+
+// StartSystime calls the underlying StartSystime.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) StartSystime() *foundation.NSNumber {
+	return x.inner.StartSystime()
+}
+
+// SetStartSystime calls the underlying SetStartSystime.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) SetStartSystime(startSystime *foundation.NSNumber) {
+	x.inner.SetStartSystime(startSystime)
+}
+
+// EndSystime calls the underlying EndSystime.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) EndSystime() *foundation.NSNumber {
+	return x.inner.EndSystime()
+}
+
+// SetEndSystime calls the underlying SetEndSystime.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) SetEndSystime(endSystime *foundation.NSNumber) {
+	x.inner.SetEndSystime(endSystime)
+}
+
+// MinSystime calls the underlying MinSystime.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) MinSystime() *foundation.NSNumber {
+	return x.inner.MinSystime()
+}
+
+// SetMinSystime calls the underlying SetMinSystime.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) SetMinSystime(minSystime *foundation.NSNumber) {
+	x.inner.SetMinSystime(minSystime)
+}
+
+// MaxSystime calls the underlying MaxSystime.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) MaxSystime() *foundation.NSNumber {
+	return x.inner.MaxSystime()
+}
+
+// SetMaxSystime calls the underlying SetMaxSystime.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct) SetMaxSystime(maxSystime *foundation.NSNumber) {
+	x.inner.SetMaxSystime(maxSystime)
+}
+
+// MTRElectricalPowerMeasurementClusterMeasurementRangeStructable is the interface implemented by [MTRElectricalPowerMeasurementClusterMeasurementRangeStruct], for mocking and DI.
+type MTRElectricalPowerMeasurementClusterMeasurementRangeStructable interface {
+	Unwrap() *raw.MTRElectricalPowerMeasurementClusterMeasurementRangeStruct
+	WithMeasurementType(measurementType *foundation.NSNumber) *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct
+	WithMin(min *foundation.NSNumber) *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct
+	WithMax(max *foundation.NSNumber) *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct
+	WithStartTimestamp(startTimestamp *foundation.NSNumber) *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct
+	WithEndTimestamp(endTimestamp *foundation.NSNumber) *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct
+	WithMinTimestamp(minTimestamp *foundation.NSNumber) *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct
+	WithMaxTimestamp(maxTimestamp *foundation.NSNumber) *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct
+	WithStartSystime(startSystime *foundation.NSNumber) *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct
+	WithEndSystime(endSystime *foundation.NSNumber) *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct
+	WithMinSystime(minSystime *foundation.NSNumber) *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct
+	WithMaxSystime(maxSystime *foundation.NSNumber) *MTRElectricalPowerMeasurementClusterMeasurementRangeStruct
+	MeasurementType() *foundation.NSNumber
+	SetMeasurementType(measurementType *foundation.NSNumber)
+	Min() *foundation.NSNumber
+	SetMin(min *foundation.NSNumber)
+	Max() *foundation.NSNumber
+	SetMax(max *foundation.NSNumber)
+	StartTimestamp() *foundation.NSNumber
+	SetStartTimestamp(startTimestamp *foundation.NSNumber)
+	EndTimestamp() *foundation.NSNumber
+	SetEndTimestamp(endTimestamp *foundation.NSNumber)
+	MinTimestamp() *foundation.NSNumber
+	SetMinTimestamp(minTimestamp *foundation.NSNumber)
+	MaxTimestamp() *foundation.NSNumber
+	SetMaxTimestamp(maxTimestamp *foundation.NSNumber)
+	StartSystime() *foundation.NSNumber
+	SetStartSystime(startSystime *foundation.NSNumber)
+	EndSystime() *foundation.NSNumber
+	SetEndSystime(endSystime *foundation.NSNumber)
+	MinSystime() *foundation.NSNumber
+	SetMinSystime(minSystime *foundation.NSNumber)
+	MaxSystime() *foundation.NSNumber
+	SetMaxSystime(maxSystime *foundation.NSNumber)
+}
+
+var _ MTRElectricalPowerMeasurementClusterMeasurementRangeStructable = (*MTRElectricalPowerMeasurementClusterMeasurementRangeStruct)(nil)
+

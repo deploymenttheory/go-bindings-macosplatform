@@ -54,5 +54,97 @@ func (x *PhysicsConeTwistJoint) WithMaximumTwistAngle(maximumTwistAngle float64)
 	return x
 }
 
+// BodyA calls the underlying BodyA.
+func (x *PhysicsConeTwistJoint) BodyA() *PhysicsBody {
+	_r := x.inner.BodyA()
+	if _r == nil {
+		return nil
+	}
+	return &PhysicsBody{inner: _r}
+}
+
+// FrameA calls the underlying FrameA.
+func (x *PhysicsConeTwistJoint) FrameA() quartzcore.CATransform3D {
+	return x.inner.FrameA()
+}
+
+// SetFrameA calls the underlying SetFrameA.
+func (x *PhysicsConeTwistJoint) SetFrameA(frameA quartzcore.CATransform3D) {
+	x.inner.SetFrameA(frameA)
+}
+
+// BodyB calls the underlying BodyB.
+func (x *PhysicsConeTwistJoint) BodyB() *PhysicsBody {
+	_r := x.inner.BodyB()
+	if _r == nil {
+		return nil
+	}
+	return &PhysicsBody{inner: _r}
+}
+
+// FrameB calls the underlying FrameB.
+func (x *PhysicsConeTwistJoint) FrameB() quartzcore.CATransform3D {
+	return x.inner.FrameB()
+}
+
+// SetFrameB calls the underlying SetFrameB.
+func (x *PhysicsConeTwistJoint) SetFrameB(frameB quartzcore.CATransform3D) {
+	x.inner.SetFrameB(frameB)
+}
+
+// MaximumAngularLimit1 calls the underlying MaximumAngularLimit1.
+func (x *PhysicsConeTwistJoint) MaximumAngularLimit1() float64 {
+	return x.inner.MaximumAngularLimit1()
+}
+
+// SetMaximumAngularLimit1 calls the underlying SetMaximumAngularLimit1.
+func (x *PhysicsConeTwistJoint) SetMaximumAngularLimit1(maximumAngularLimit1 float64) {
+	x.inner.SetMaximumAngularLimit1(maximumAngularLimit1)
+}
+
+// MaximumAngularLimit2 calls the underlying MaximumAngularLimit2.
+func (x *PhysicsConeTwistJoint) MaximumAngularLimit2() float64 {
+	return x.inner.MaximumAngularLimit2()
+}
+
+// SetMaximumAngularLimit2 calls the underlying SetMaximumAngularLimit2.
+func (x *PhysicsConeTwistJoint) SetMaximumAngularLimit2(maximumAngularLimit2 float64) {
+	x.inner.SetMaximumAngularLimit2(maximumAngularLimit2)
+}
+
+// MaximumTwistAngle calls the underlying MaximumTwistAngle.
+func (x *PhysicsConeTwistJoint) MaximumTwistAngle() float64 {
+	return x.inner.MaximumTwistAngle()
+}
+
+// SetMaximumTwistAngle calls the underlying SetMaximumTwistAngle.
+func (x *PhysicsConeTwistJoint) SetMaximumTwistAngle(maximumTwistAngle float64) {
+	x.inner.SetMaximumTwistAngle(maximumTwistAngle)
+}
+
 func (x *PhysicsConeTwistJoint) asPhysicsBehavior() *raw.SCNPhysicsBehavior { return &x.inner.SCNPhysicsBehavior }
+
+// PhysicsConeTwistJointable is the interface implemented by [PhysicsConeTwistJoint], for mocking and DI.
+type PhysicsConeTwistJointable interface {
+	Unwrap() *raw.SCNPhysicsConeTwistJoint
+	WithFrameA(frameA quartzcore.CATransform3D) *PhysicsConeTwistJoint
+	WithFrameB(frameB quartzcore.CATransform3D) *PhysicsConeTwistJoint
+	WithMaximumAngularLimit1(maximumAngularLimit1 float64) *PhysicsConeTwistJoint
+	WithMaximumAngularLimit2(maximumAngularLimit2 float64) *PhysicsConeTwistJoint
+	WithMaximumTwistAngle(maximumTwistAngle float64) *PhysicsConeTwistJoint
+	BodyA() *PhysicsBody
+	FrameA() quartzcore.CATransform3D
+	SetFrameA(frameA quartzcore.CATransform3D)
+	BodyB() *PhysicsBody
+	FrameB() quartzcore.CATransform3D
+	SetFrameB(frameB quartzcore.CATransform3D)
+	MaximumAngularLimit1() float64
+	SetMaximumAngularLimit1(maximumAngularLimit1 float64)
+	MaximumAngularLimit2() float64
+	SetMaximumAngularLimit2(maximumAngularLimit2 float64)
+	MaximumTwistAngle() float64
+	SetMaximumTwistAngle(maximumTwistAngle float64)
+}
+
+var _ PhysicsConeTwistJointable = (*PhysicsConeTwistJoint)(nil)
 

@@ -29,5 +29,25 @@ func (x *MTRDeviceControllerAbstractParameters) WithStartSuspended(startSuspende
 	return x
 }
 
+// StartSuspended calls the underlying StartSuspended.
+func (x *MTRDeviceControllerAbstractParameters) StartSuspended() bool {
+	return x.inner.StartSuspended()
+}
+
+// SetStartSuspended calls the underlying SetStartSuspended.
+func (x *MTRDeviceControllerAbstractParameters) SetStartSuspended(startSuspended bool) {
+	x.inner.SetStartSuspended(startSuspended)
+}
+
 func (x *MTRDeviceControllerAbstractParameters) asMTRDeviceControllerAbstractParameters() *raw.MTRDeviceControllerAbstractParameters { return x.inner }
+
+// MTRDeviceControllerAbstractParametersable is the interface implemented by [MTRDeviceControllerAbstractParameters], for mocking and DI.
+type MTRDeviceControllerAbstractParametersable interface {
+	Unwrap() *raw.MTRDeviceControllerAbstractParameters
+	WithStartSuspended(startSuspended bool) *MTRDeviceControllerAbstractParameters
+	StartSuspended() bool
+	SetStartSuspended(startSuspended bool)
+}
+
+var _ MTRDeviceControllerAbstractParametersable = (*MTRDeviceControllerAbstractParameters)(nil)
 

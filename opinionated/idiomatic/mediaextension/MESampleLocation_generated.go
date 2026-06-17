@@ -25,3 +25,26 @@ func NewSampleLocationWithByteSourceSampleLocation(byteSource *raw.MEByteSource,
 	return &SampleLocation{inner: raw.MESampleLocationFromID(_id)}
 }
 
+// SampleLocation calls the underlying SampleLocation.
+func (x *SampleLocation) SampleLocation() avfoundation.AVSampleCursorStorageRange {
+	return x.inner.SampleLocation()
+}
+
+// ByteSource calls the underlying ByteSource.
+func (x *SampleLocation) ByteSource() *ByteSource {
+	_r := x.inner.ByteSource()
+	if _r == nil {
+		return nil
+	}
+	return &ByteSource{inner: _r}
+}
+
+// SampleLocationable is the interface implemented by [SampleLocation], for mocking and DI.
+type SampleLocationable interface {
+	Unwrap() *raw.MESampleLocation
+	SampleLocation() avfoundation.AVSampleCursorStorageRange
+	ByteSource() *ByteSource
+}
+
+var _ SampleLocationable = (*SampleLocation)(nil)
+

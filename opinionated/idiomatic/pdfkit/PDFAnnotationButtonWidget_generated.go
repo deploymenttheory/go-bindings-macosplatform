@@ -5,7 +5,9 @@
 package pdfkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/pdfkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +25,52 @@ func NewAnnotationButtonWidget() *AnnotationButtonWidget {
 	return &AnnotationButtonWidget{inner: raw.PDFAnnotationButtonWidgetFromID(_id)}
 }
 
+// ControlType calls the underlying ControlType.
+func (x *AnnotationButtonWidget) ControlType() raw.PDFWidgetControlType {
+	return x.inner.ControlType()
+}
+
+// SetControlType calls the underlying SetControlType.
+func (x *AnnotationButtonWidget) SetControlType(type_ raw.PDFWidgetControlType) {
+	x.inner.SetControlType(type_)
+}
+
+// State calls the underlying State.
+func (x *AnnotationButtonWidget) State() int {
+	return x.inner.State()
+}
+
+// SetState calls the underlying SetState.
+func (x *AnnotationButtonWidget) SetState(value int) {
+	x.inner.SetState(value)
+}
+
+// OnStateValue calls the underlying OnStateValue.
+func (x *AnnotationButtonWidget) OnStateValue() string {
+	_r := x.inner.OnStateValue()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetOnStateValue calls the underlying SetOnStateValue.
+func (x *AnnotationButtonWidget) SetOnStateValue(name string) {
+	x.inner.SetOnStateValue(foundation.NSStringStringWithUTF8String(name))
+}
+
 func (x *AnnotationButtonWidget) asAnnotation() *raw.PDFAnnotation { return &x.inner.PDFAnnotation }
+
+// AnnotationButtonWidgetable is the interface implemented by [AnnotationButtonWidget], for mocking and DI.
+type AnnotationButtonWidgetable interface {
+	Unwrap() *raw.PDFAnnotationButtonWidget
+	ControlType() raw.PDFWidgetControlType
+	SetControlType(type_ raw.PDFWidgetControlType)
+	State() int
+	SetState(value int)
+	OnStateValue() string
+	SetOnStateValue(name string)
+}
+
+var _ AnnotationButtonWidgetable = (*AnnotationButtonWidget)(nil)
 

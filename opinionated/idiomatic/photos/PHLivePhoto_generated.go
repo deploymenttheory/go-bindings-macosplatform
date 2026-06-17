@@ -5,6 +5,7 @@
 package photos
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +23,17 @@ func NewLivePhoto() *LivePhoto {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHLivePhoto")), objc.RegisterName("new"))
 	return &LivePhoto{inner: raw.PHLivePhotoFromID(_id)}
 }
+
+// Size calls the underlying Size.
+func (x *LivePhoto) Size() corefoundation.CGSize {
+	return x.inner.Size()
+}
+
+// LivePhotoable is the interface implemented by [LivePhoto], for mocking and DI.
+type LivePhotoable interface {
+	Unwrap() *raw.PHLivePhoto
+	Size() corefoundation.CGSize
+}
+
+var _ LivePhotoable = (*LivePhoto)(nil)
 

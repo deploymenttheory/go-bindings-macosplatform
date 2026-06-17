@@ -27,3 +27,10 @@ func NewCNNSoftMaxNodeWithSource(sourceNode *mpsneuralnetwork.MPSNNImageNode) *C
 
 func (x *CNNSoftMaxNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNFilterNode }
 
+// CNNSoftMaxNodeable is the interface implemented by [CNNSoftMaxNode], for mocking and DI.
+type CNNSoftMaxNodeable interface {
+	Unwrap() *raw.MPSCNNSoftMaxNode
+}
+
+var _ CNNSoftMaxNodeable = (*CNNSoftMaxNode)(nil)
+

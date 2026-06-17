@@ -6,6 +6,7 @@ package quartzcore
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,21 @@ func NewValueFunction() *ValueFunction {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CAValueFunction")), objc.RegisterName("new"))
 	return &ValueFunction{inner: raw.CAValueFunctionFromID(_id)}
 }
+
+// Name calls the underlying Name.
+func (x *ValueFunction) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ValueFunctionable is the interface implemented by [ValueFunction], for mocking and DI.
+type ValueFunctionable interface {
+	Unwrap() *raw.CAValueFunction
+	Name() string
+}
+
+var _ ValueFunctionable = (*ValueFunction)(nil)
 

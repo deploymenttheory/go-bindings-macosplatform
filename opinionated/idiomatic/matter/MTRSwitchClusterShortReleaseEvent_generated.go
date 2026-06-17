@@ -30,3 +30,23 @@ func (x *MTRSwitchClusterShortReleaseEvent) WithPreviousPosition(previousPositio
 	return x
 }
 
+// PreviousPosition calls the underlying PreviousPosition.
+func (x *MTRSwitchClusterShortReleaseEvent) PreviousPosition() *foundation.NSNumber {
+	return x.inner.PreviousPosition()
+}
+
+// SetPreviousPosition calls the underlying SetPreviousPosition.
+func (x *MTRSwitchClusterShortReleaseEvent) SetPreviousPosition(previousPosition *foundation.NSNumber) {
+	x.inner.SetPreviousPosition(previousPosition)
+}
+
+// MTRSwitchClusterShortReleaseEventable is the interface implemented by [MTRSwitchClusterShortReleaseEvent], for mocking and DI.
+type MTRSwitchClusterShortReleaseEventable interface {
+	Unwrap() *raw.MTRSwitchClusterShortReleaseEvent
+	WithPreviousPosition(previousPosition *foundation.NSNumber) *MTRSwitchClusterShortReleaseEvent
+	PreviousPosition() *foundation.NSNumber
+	SetPreviousPosition(previousPosition *foundation.NSNumber)
+}
+
+var _ MTRSwitchClusterShortReleaseEventable = (*MTRSwitchClusterShortReleaseEvent)(nil)
+

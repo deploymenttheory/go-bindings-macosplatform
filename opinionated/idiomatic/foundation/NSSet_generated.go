@@ -66,7 +66,144 @@ func NewSetWithArray(array *raw.NSArray[objc.ID]) *Set {
 	return &Set{inner: raw.NSSetFromID[objc.ID](_id)}
 }
 
+// Member calls the underlying Member.
+func (x *Set) Member(object objc.ID) objc.ID {
+	return x.inner.Member(object)
+}
+
+// ObjectEnumerator calls the underlying ObjectEnumerator.
+func (x *Set) ObjectEnumerator() *raw.NSEnumerator[objc.ID] {
+	return x.inner.ObjectEnumerator()
+}
+
+// Count calls the underlying Count.
+func (x *Set) Count() uint {
+	return x.inner.Count()
+}
+
+// AnyObject calls the underlying AnyObject.
+func (x *Set) AnyObject() objc.ID {
+	return x.inner.AnyObject()
+}
+
+// ContainsObject calls the underlying ContainsObject.
+func (x *Set) ContainsObject(anObject objc.ID) bool {
+	return x.inner.ContainsObject(anObject)
+}
+
+// DescriptionWithLocale calls the underlying DescriptionWithLocale.
+func (x *Set) DescriptionWithLocale(locale objc.ID) *String {
+	_r := x.inner.DescriptionWithLocale(locale)
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// IntersectsSet calls the underlying IntersectsSet.
+func (x *Set) IntersectsSet(otherSet *raw.NSSet[objc.ID]) bool {
+	return x.inner.IntersectsSet(otherSet)
+}
+
+// IsEqualToSet calls the underlying IsEqualToSet.
+func (x *Set) IsEqualToSet(otherSet *raw.NSSet[objc.ID]) bool {
+	return x.inner.IsEqualToSet(otherSet)
+}
+
+// IsSubsetOfSet calls the underlying IsSubsetOfSet.
+func (x *Set) IsSubsetOfSet(otherSet *raw.NSSet[objc.ID]) bool {
+	return x.inner.IsSubsetOfSet(otherSet)
+}
+
+// MakeObjectsPerformSelector calls the underlying MakeObjectsPerformSelector.
+func (x *Set) MakeObjectsPerformSelector(aSelector objc.SEL) {
+	x.inner.MakeObjectsPerformSelector(aSelector)
+}
+
+// MakeObjectsPerformSelectorWithObject calls the underlying MakeObjectsPerformSelectorWithObject.
+func (x *Set) MakeObjectsPerformSelectorWithObject(aSelector objc.SEL, argument objc.ID) {
+	x.inner.MakeObjectsPerformSelectorWithObject(aSelector, argument)
+}
+
+// SetByAddingObject calls the underlying SetByAddingObject.
+func (x *Set) SetByAddingObject(anObject objc.ID) *raw.NSSet[objc.ID] {
+	return x.inner.SetByAddingObject(anObject)
+}
+
+// SetByAddingObjectsFromSet calls the underlying SetByAddingObjectsFromSet.
+func (x *Set) SetByAddingObjectsFromSet(other *raw.NSSet[objc.ID]) *raw.NSSet[objc.ID] {
+	return x.inner.SetByAddingObjectsFromSet(other)
+}
+
+// SetByAddingObjectsFromArray calls the underlying SetByAddingObjectsFromArray.
+func (x *Set) SetByAddingObjectsFromArray(other *raw.NSArray[objc.ID]) *raw.NSSet[objc.ID] {
+	return x.inner.SetByAddingObjectsFromArray(other)
+}
+
+// EnumerateObjectsUsing calls the underlying EnumerateObjectsUsing.
+func (x *Set) EnumerateObjectsUsing(block objc.Block) {
+	x.inner.EnumerateObjectsUsing(block)
+}
+
+// EnumerateObjectsWithOptionsUsing calls the underlying EnumerateObjectsWithOptionsUsing.
+func (x *Set) EnumerateObjectsWithOptionsUsing(opts raw.NSEnumerationOptions, block objc.Block) {
+	x.inner.EnumerateObjectsWithOptionsUsing(opts, block)
+}
+
+// ObjectsPassingTest calls the underlying ObjectsPassingTest.
+func (x *Set) ObjectsPassingTest(predicate objc.Block) *raw.NSSet[objc.ID] {
+	return x.inner.ObjectsPassingTest(predicate)
+}
+
+// ObjectsWithOptionsPassingTest calls the underlying ObjectsWithOptionsPassingTest.
+func (x *Set) ObjectsWithOptionsPassingTest(opts raw.NSEnumerationOptions, predicate objc.Block) *raw.NSSet[objc.ID] {
+	return x.inner.ObjectsWithOptionsPassingTest(opts, predicate)
+}
+
+// AllObjects calls the underlying AllObjects.
+func (x *Set) AllObjects() *raw.NSArray[objc.ID] {
+	return x.inner.AllObjects()
+}
+
+// SortedArrayUsingDescriptors calls the underlying SortedArrayUsingDescriptors.
+func (x *Set) SortedArrayUsingDescriptors(sortDescriptors *raw.NSArray[*raw.NSSortDescriptor]) *raw.NSArray[objc.ID] {
+	return x.inner.SortedArrayUsingDescriptors(sortDescriptors)
+}
+
+// FilteredSetUsingPredicate calls the underlying FilteredSetUsingPredicate.
+func (x *Set) FilteredSetUsingPredicate(predicate *raw.NSPredicate) *raw.NSSet[objc.ID] {
+	return x.inner.FilteredSetUsingPredicate(predicate)
+}
+
 func (x *Set) asSet() *raw.NSSet[objc.ID] { return x.inner }
 
 func (x *Set) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// Setable is the interface implemented by [Set], for mocking and DI.
+type Setable interface {
+	Unwrap() *raw.NSSet[objc.ID]
+	Member(object objc.ID) objc.ID
+	ObjectEnumerator() *raw.NSEnumerator[objc.ID]
+	Count() uint
+	AnyObject() objc.ID
+	ContainsObject(anObject objc.ID) bool
+	DescriptionWithLocale(locale objc.ID) *String
+	IntersectsSet(otherSet *raw.NSSet[objc.ID]) bool
+	IsEqualToSet(otherSet *raw.NSSet[objc.ID]) bool
+	IsSubsetOfSet(otherSet *raw.NSSet[objc.ID]) bool
+	MakeObjectsPerformSelector(aSelector objc.SEL)
+	MakeObjectsPerformSelectorWithObject(aSelector objc.SEL, argument objc.ID)
+	SetByAddingObject(anObject objc.ID) *raw.NSSet[objc.ID]
+	SetByAddingObjectsFromSet(other *raw.NSSet[objc.ID]) *raw.NSSet[objc.ID]
+	SetByAddingObjectsFromArray(other *raw.NSArray[objc.ID]) *raw.NSSet[objc.ID]
+	EnumerateObjectsUsing(block objc.Block)
+	EnumerateObjectsWithOptionsUsing(opts raw.NSEnumerationOptions, block objc.Block)
+	ObjectsPassingTest(predicate objc.Block) *raw.NSSet[objc.ID]
+	ObjectsWithOptionsPassingTest(opts raw.NSEnumerationOptions, predicate objc.Block) *raw.NSSet[objc.ID]
+	AllObjects() *raw.NSArray[objc.ID]
+	SortedArrayUsingDescriptors(sortDescriptors *raw.NSArray[*raw.NSSortDescriptor]) *raw.NSArray[objc.ID]
+	FilteredSetUsingPredicate(predicate *raw.NSPredicate) *raw.NSSet[objc.ID]
+}
+
+var _ Setable = (*Set)(nil)
 

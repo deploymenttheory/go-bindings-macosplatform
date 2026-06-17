@@ -25,5 +25,18 @@ func NewShareFocusStatusIntentResponseWithCodeUserActivity(code raw.INShareFocus
 	return &ShareFocusStatusIntentResponse{inner: raw.INShareFocusStatusIntentResponseFromID(_id)}
 }
 
+// Code calls the underlying Code.
+func (x *ShareFocusStatusIntentResponse) Code() raw.INShareFocusStatusIntentResponseCode {
+	return x.inner.Code()
+}
+
 func (x *ShareFocusStatusIntentResponse) asIntentResponse() *raw.INIntentResponse { return &x.inner.INIntentResponse }
+
+// ShareFocusStatusIntentResponseable is the interface implemented by [ShareFocusStatusIntentResponse], for mocking and DI.
+type ShareFocusStatusIntentResponseable interface {
+	Unwrap() *raw.INShareFocusStatusIntentResponse
+	Code() raw.INShareFocusStatusIntentResponseCode
+}
+
+var _ ShareFocusStatusIntentResponseable = (*ShareFocusStatusIntentResponse)(nil)
 

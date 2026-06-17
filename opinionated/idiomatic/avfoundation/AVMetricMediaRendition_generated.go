@@ -6,6 +6,8 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +24,27 @@ func NewMetricMediaRendition() *MetricMediaRendition {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMetricMediaRendition")), objc.RegisterName("new"))
 	return &MetricMediaRendition{inner: raw.AVMetricMediaRenditionFromID(_id)}
 }
+
+// StableID calls the underlying StableID.
+func (x *MetricMediaRendition) StableID() string {
+	_r := x.inner.StableID()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// URL calls the underlying URL.
+func (x *MetricMediaRendition) URL() *foundation.NSURL {
+	return x.inner.URL()
+}
+
+// MetricMediaRenditionable is the interface implemented by [MetricMediaRendition], for mocking and DI.
+type MetricMediaRenditionable interface {
+	Unwrap() *raw.AVMetricMediaRendition
+	StableID() string
+	URL() *foundation.NSURL
+}
+
+var _ MetricMediaRenditionable = (*MetricMediaRendition)(nil)
 

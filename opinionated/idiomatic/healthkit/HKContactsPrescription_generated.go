@@ -6,6 +6,7 @@ package healthkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,9 +24,46 @@ func NewContactsPrescription() *ContactsPrescription {
 	return &ContactsPrescription{inner: raw.HKContactsPrescriptionFromID(_id)}
 }
 
+// RightEye calls the underlying RightEye.
+func (x *ContactsPrescription) RightEye() *ContactsLensSpecification {
+	_r := x.inner.RightEye()
+	if _r == nil {
+		return nil
+	}
+	return &ContactsLensSpecification{inner: _r}
+}
+
+// LeftEye calls the underlying LeftEye.
+func (x *ContactsPrescription) LeftEye() *ContactsLensSpecification {
+	_r := x.inner.LeftEye()
+	if _r == nil {
+		return nil
+	}
+	return &ContactsLensSpecification{inner: _r}
+}
+
+// Brand calls the underlying Brand.
+func (x *ContactsPrescription) Brand() string {
+	_r := x.inner.Brand()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 func (x *ContactsPrescription) asVisionPrescription() *raw.HKVisionPrescription { return &x.inner.HKVisionPrescription }
 
 func (x *ContactsPrescription) asSample() *raw.HKSample { return &x.inner.HKVisionPrescription.HKSample }
 
 func (x *ContactsPrescription) asObject() *raw.HKObject { return &x.inner.HKVisionPrescription.HKSample.HKObject }
+
+// ContactsPrescriptionable is the interface implemented by [ContactsPrescription], for mocking and DI.
+type ContactsPrescriptionable interface {
+	Unwrap() *raw.HKContactsPrescription
+	RightEye() *ContactsLensSpecification
+	LeftEye() *ContactsLensSpecification
+	Brand() string
+}
+
+var _ ContactsPrescriptionable = (*ContactsPrescription)(nil)
 

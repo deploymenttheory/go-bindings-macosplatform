@@ -37,5 +37,22 @@ func NewLinuxRosettaUnixSocketCachingOptionsWithPathError(path string) (*LinuxRo
 	return &LinuxRosettaUnixSocketCachingOptions{inner: raw.VZLinuxRosettaUnixSocketCachingOptionsFromID(_id)}, nil
 }
 
+// Path calls the underlying Path.
+func (x *LinuxRosettaUnixSocketCachingOptions) Path() string {
+	_r := x.inner.Path()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 func (x *LinuxRosettaUnixSocketCachingOptions) asLinuxRosettaCachingOptions() *raw.VZLinuxRosettaCachingOptions { return &x.inner.VZLinuxRosettaCachingOptions }
+
+// LinuxRosettaUnixSocketCachingOptionsable is the interface implemented by [LinuxRosettaUnixSocketCachingOptions], for mocking and DI.
+type LinuxRosettaUnixSocketCachingOptionsable interface {
+	Unwrap() *raw.VZLinuxRosettaUnixSocketCachingOptions
+	Path() string
+}
+
+var _ LinuxRosettaUnixSocketCachingOptionsable = (*LinuxRosettaUnixSocketCachingOptions)(nil)
 

@@ -6,6 +6,7 @@ package webkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,9 +24,26 @@ func NewDOMCSSCharsetRule() *DOMCSSCharsetRule {
 	return &DOMCSSCharsetRule{inner: raw.DOMCSSCharsetRuleFromID(_id)}
 }
 
+// Encoding calls the underlying Encoding.
+func (x *DOMCSSCharsetRule) Encoding() string {
+	_r := x.inner.Encoding()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 func (x *DOMCSSCharsetRule) asDOMCSSRule() *raw.DOMCSSRule { return &x.inner.DOMCSSRule }
 
 func (x *DOMCSSCharsetRule) asDOMObject() *raw.DOMObject { return &x.inner.DOMCSSRule.DOMObject }
 
 func (x *DOMCSSCharsetRule) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMCSSRule.DOMObject.WebScriptObject }
+
+// DOMCSSCharsetRuleable is the interface implemented by [DOMCSSCharsetRule], for mocking and DI.
+type DOMCSSCharsetRuleable interface {
+	Unwrap() *raw.DOMCSSCharsetRule
+	Encoding() string
+}
+
+var _ DOMCSSCharsetRuleable = (*DOMCSSCharsetRule)(nil)
 

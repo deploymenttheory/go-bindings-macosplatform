@@ -7,6 +7,7 @@ package networkextension
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -31,10 +32,22 @@ func (x *NEFilterSettings) Rules() []*raw.NEFilterRule {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NEFilterRule, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NEFilterRule {
+		return raw.NEFilterRuleFromID(purego.Retain(_id))
+	})
 }
+
+// DefaultAction calls the underlying DefaultAction.
+func (x *NEFilterSettings) DefaultAction() raw.NEFilterAction {
+	return x.inner.DefaultAction()
+}
+
+// NEFilterSettingsable is the interface implemented by [NEFilterSettings], for mocking and DI.
+type NEFilterSettingsable interface {
+	Unwrap() *raw.NEFilterSettings
+	Rules() []*raw.NEFilterRule
+	DefaultAction() raw.NEFilterAction
+}
+
+var _ NEFilterSettingsable = (*NEFilterSettings)(nil)
 

@@ -6,6 +6,8 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,17 +26,44 @@ func NewTreeNodeWithRepresentedObject(modelObject objc.ID) *TreeNode {
 	return &TreeNode{inner: raw.NSTreeNodeFromID(_id)}
 }
 
+// DescendantNodeAtIndexPath calls the underlying DescendantNodeAtIndexPath.
+func (x *TreeNode) DescendantNodeAtIndexPath(indexPath *foundation.NSIndexPath) *TreeNode {
+	_r := x.inner.DescendantNodeAtIndexPath(indexPath)
+	if _r == nil {
+		return nil
+	}
+	return &TreeNode{inner: _r}
+}
+
+// SortWithSortDescriptorsRecursively calls the underlying SortWithSortDescriptorsRecursively.
+func (x *TreeNode) SortWithSortDescriptorsRecursively(sortDescriptors *foundation.NSArray[*foundation.NSSortDescriptor], recursively bool) {
+	x.inner.SortWithSortDescriptorsRecursively(sortDescriptors, recursively)
+}
+
+// RepresentedObject calls the underlying RepresentedObject.
+func (x *TreeNode) RepresentedObject() objc.ID {
+	return x.inner.RepresentedObject()
+}
+
+// IndexPath calls the underlying IndexPath.
+func (x *TreeNode) IndexPath() *foundation.NSIndexPath {
+	return x.inner.IndexPath()
+}
+
+// IsLeaf calls the underlying IsLeaf.
+func (x *TreeNode) IsLeaf() bool {
+	return x.inner.IsLeaf()
+}
+
 // ChildNodes returns the collection as a Go slice.
 func (x *TreeNode) ChildNodes() []*raw.NSTreeNode {
 	arr := x.inner.ChildNodes()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSTreeNode, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSTreeNode {
+		return raw.NSTreeNodeFromID(purego.Retain(_id))
+	})
 }
 
 // MutableChildNodes returns the collection as a Go slice.
@@ -43,10 +72,32 @@ func (x *TreeNode) MutableChildNodes() []*raw.NSTreeNode {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSTreeNode, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSTreeNode {
+		return raw.NSTreeNodeFromID(purego.Retain(_id))
+	})
 }
+
+// ParentNode calls the underlying ParentNode.
+func (x *TreeNode) ParentNode() *TreeNode {
+	_r := x.inner.ParentNode()
+	if _r == nil {
+		return nil
+	}
+	return &TreeNode{inner: _r}
+}
+
+// TreeNodeable is the interface implemented by [TreeNode], for mocking and DI.
+type TreeNodeable interface {
+	Unwrap() *raw.NSTreeNode
+	DescendantNodeAtIndexPath(indexPath *foundation.NSIndexPath) *TreeNode
+	SortWithSortDescriptorsRecursively(sortDescriptors *foundation.NSArray[*foundation.NSSortDescriptor], recursively bool)
+	RepresentedObject() objc.ID
+	IndexPath() *foundation.NSIndexPath
+	IsLeaf() bool
+	ChildNodes() []*raw.NSTreeNode
+	MutableChildNodes() []*raw.NSTreeNode
+	ParentNode() *TreeNode
+}
+
+var _ TreeNodeable = (*TreeNode)(nil)
 

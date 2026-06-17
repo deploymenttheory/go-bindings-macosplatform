@@ -7,6 +7,7 @@ package modelio
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // PhysicallyPlausibleLight wraps [raw.MDLPhysicallyPlausibleLight] with a fluent Go API.
@@ -53,9 +54,99 @@ func (x *PhysicallyPlausibleLight) WithAttenuationEndDistance(attenuationEndDist
 	return x
 }
 
+// SetColorByTemperature calls the underlying SetColorByTemperature.
+func (x *PhysicallyPlausibleLight) SetColorByTemperature(temperature float32) {
+	x.inner.SetColorByTemperature(temperature)
+}
+
+// Color calls the underlying Color.
+func (x *PhysicallyPlausibleLight) Color() unsafe.Pointer {
+	return x.inner.Color()
+}
+
+// SetColor calls the underlying SetColor.
+func (x *PhysicallyPlausibleLight) SetColor(color unsafe.Pointer) {
+	x.inner.SetColor(color)
+}
+
+// Lumens calls the underlying Lumens.
+func (x *PhysicallyPlausibleLight) Lumens() float32 {
+	return x.inner.Lumens()
+}
+
+// SetLumens calls the underlying SetLumens.
+func (x *PhysicallyPlausibleLight) SetLumens(lumens float32) {
+	x.inner.SetLumens(lumens)
+}
+
+// InnerConeAngle calls the underlying InnerConeAngle.
+func (x *PhysicallyPlausibleLight) InnerConeAngle() float32 {
+	return x.inner.InnerConeAngle()
+}
+
+// SetInnerConeAngle calls the underlying SetInnerConeAngle.
+func (x *PhysicallyPlausibleLight) SetInnerConeAngle(innerConeAngle float32) {
+	x.inner.SetInnerConeAngle(innerConeAngle)
+}
+
+// OuterConeAngle calls the underlying OuterConeAngle.
+func (x *PhysicallyPlausibleLight) OuterConeAngle() float32 {
+	return x.inner.OuterConeAngle()
+}
+
+// SetOuterConeAngle calls the underlying SetOuterConeAngle.
+func (x *PhysicallyPlausibleLight) SetOuterConeAngle(outerConeAngle float32) {
+	x.inner.SetOuterConeAngle(outerConeAngle)
+}
+
+// AttenuationStartDistance calls the underlying AttenuationStartDistance.
+func (x *PhysicallyPlausibleLight) AttenuationStartDistance() float32 {
+	return x.inner.AttenuationStartDistance()
+}
+
+// SetAttenuationStartDistance calls the underlying SetAttenuationStartDistance.
+func (x *PhysicallyPlausibleLight) SetAttenuationStartDistance(attenuationStartDistance float32) {
+	x.inner.SetAttenuationStartDistance(attenuationStartDistance)
+}
+
+// AttenuationEndDistance calls the underlying AttenuationEndDistance.
+func (x *PhysicallyPlausibleLight) AttenuationEndDistance() float32 {
+	return x.inner.AttenuationEndDistance()
+}
+
+// SetAttenuationEndDistance calls the underlying SetAttenuationEndDistance.
+func (x *PhysicallyPlausibleLight) SetAttenuationEndDistance(attenuationEndDistance float32) {
+	x.inner.SetAttenuationEndDistance(attenuationEndDistance)
+}
+
 func (x *PhysicallyPlausibleLight) asPhysicallyPlausibleLight() *raw.MDLPhysicallyPlausibleLight { return x.inner }
 
 func (x *PhysicallyPlausibleLight) asLight() *raw.MDLLight { return &x.inner.MDLLight }
 
 func (x *PhysicallyPlausibleLight) asObject() *raw.MDLObject { return &x.inner.MDLLight.MDLObject }
+
+// PhysicallyPlausibleLightable is the interface implemented by [PhysicallyPlausibleLight], for mocking and DI.
+type PhysicallyPlausibleLightable interface {
+	Unwrap() *raw.MDLPhysicallyPlausibleLight
+	WithLumens(lumens float32) *PhysicallyPlausibleLight
+	WithInnerConeAngle(innerConeAngle float32) *PhysicallyPlausibleLight
+	WithOuterConeAngle(outerConeAngle float32) *PhysicallyPlausibleLight
+	WithAttenuationStartDistance(attenuationStartDistance float32) *PhysicallyPlausibleLight
+	WithAttenuationEndDistance(attenuationEndDistance float32) *PhysicallyPlausibleLight
+	SetColorByTemperature(temperature float32)
+	Color() unsafe.Pointer
+	SetColor(color unsafe.Pointer)
+	Lumens() float32
+	SetLumens(lumens float32)
+	InnerConeAngle() float32
+	SetInnerConeAngle(innerConeAngle float32)
+	OuterConeAngle() float32
+	SetOuterConeAngle(outerConeAngle float32)
+	AttenuationStartDistance() float32
+	SetAttenuationStartDistance(attenuationStartDistance float32)
+	AttenuationEndDistance() float32
+	SetAttenuationEndDistance(attenuationEndDistance float32)
+}
+
+var _ PhysicallyPlausibleLightable = (*PhysicallyPlausibleLight)(nil)
 

@@ -23,5 +23,42 @@ func NewCompositeBehavior() *CompositeBehavior {
 	return &CompositeBehavior{inner: raw.GKCompositeBehaviorFromID(_id)}
 }
 
+// SetWeightForBehavior calls the underlying SetWeightForBehavior.
+func (x *CompositeBehavior) SetWeightForBehavior(weight float32, behavior *raw.GKBehavior) {
+	x.inner.SetWeightForBehavior(weight, behavior)
+}
+
+// WeightForBehavior calls the underlying WeightForBehavior.
+func (x *CompositeBehavior) WeightForBehavior(behavior *raw.GKBehavior) float32 {
+	return x.inner.WeightForBehavior(behavior)
+}
+
+// RemoveBehavior calls the underlying RemoveBehavior.
+func (x *CompositeBehavior) RemoveBehavior(behavior *raw.GKBehavior) {
+	x.inner.RemoveBehavior(behavior)
+}
+
+// RemoveAllBehaviors calls the underlying RemoveAllBehaviors.
+func (x *CompositeBehavior) RemoveAllBehaviors() {
+	x.inner.RemoveAllBehaviors()
+}
+
+// BehaviorCount calls the underlying BehaviorCount.
+func (x *CompositeBehavior) BehaviorCount() int {
+	return x.inner.BehaviorCount()
+}
+
 func (x *CompositeBehavior) asBehavior() *raw.GKBehavior { return &x.inner.GKBehavior }
+
+// CompositeBehaviorable is the interface implemented by [CompositeBehavior], for mocking and DI.
+type CompositeBehaviorable interface {
+	Unwrap() *raw.GKCompositeBehavior
+	SetWeightForBehavior(weight float32, behavior *raw.GKBehavior)
+	WeightForBehavior(behavior *raw.GKBehavior) float32
+	RemoveBehavior(behavior *raw.GKBehavior)
+	RemoveAllBehaviors()
+	BehaviorCount() int
+}
+
+var _ CompositeBehaviorable = (*CompositeBehavior)(nil)
 

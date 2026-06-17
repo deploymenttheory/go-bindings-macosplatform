@@ -48,3 +48,98 @@ func (x *GeometryElement) WithMaximumPointScreenSpaceRadius(maximumPointScreenSp
 	return x
 }
 
+// Data calls the underlying Data.
+func (x *GeometryElement) Data() *foundation.NSData {
+	return x.inner.Data()
+}
+
+// PrimitiveType calls the underlying PrimitiveType.
+func (x *GeometryElement) PrimitiveType() raw.SCNGeometryPrimitiveType {
+	return x.inner.PrimitiveType()
+}
+
+// PrimitiveCount calls the underlying PrimitiveCount.
+func (x *GeometryElement) PrimitiveCount() int {
+	return x.inner.PrimitiveCount()
+}
+
+// HasInterleavedIndicesChannels calls the underlying HasInterleavedIndicesChannels.
+func (x *GeometryElement) HasInterleavedIndicesChannels() bool {
+	return x.inner.HasInterleavedIndicesChannels()
+}
+
+// IndicesChannelCount calls the underlying IndicesChannelCount.
+func (x *GeometryElement) IndicesChannelCount() int {
+	return x.inner.IndicesChannelCount()
+}
+
+// BytesPerIndex calls the underlying BytesPerIndex.
+func (x *GeometryElement) BytesPerIndex() int {
+	return x.inner.BytesPerIndex()
+}
+
+// PrimitiveRange calls the underlying PrimitiveRange.
+func (x *GeometryElement) PrimitiveRange() foundation.NSRange {
+	return x.inner.PrimitiveRange()
+}
+
+// SetPrimitiveRange calls the underlying SetPrimitiveRange.
+func (x *GeometryElement) SetPrimitiveRange(primitiveRange foundation.NSRange) {
+	x.inner.SetPrimitiveRange(primitiveRange)
+}
+
+// PointSize calls the underlying PointSize.
+func (x *GeometryElement) PointSize() float64 {
+	return x.inner.PointSize()
+}
+
+// SetPointSize calls the underlying SetPointSize.
+func (x *GeometryElement) SetPointSize(pointSize float64) {
+	x.inner.SetPointSize(pointSize)
+}
+
+// MinimumPointScreenSpaceRadius calls the underlying MinimumPointScreenSpaceRadius.
+func (x *GeometryElement) MinimumPointScreenSpaceRadius() float64 {
+	return x.inner.MinimumPointScreenSpaceRadius()
+}
+
+// SetMinimumPointScreenSpaceRadius calls the underlying SetMinimumPointScreenSpaceRadius.
+func (x *GeometryElement) SetMinimumPointScreenSpaceRadius(minimumPointScreenSpaceRadius float64) {
+	x.inner.SetMinimumPointScreenSpaceRadius(minimumPointScreenSpaceRadius)
+}
+
+// MaximumPointScreenSpaceRadius calls the underlying MaximumPointScreenSpaceRadius.
+func (x *GeometryElement) MaximumPointScreenSpaceRadius() float64 {
+	return x.inner.MaximumPointScreenSpaceRadius()
+}
+
+// SetMaximumPointScreenSpaceRadius calls the underlying SetMaximumPointScreenSpaceRadius.
+func (x *GeometryElement) SetMaximumPointScreenSpaceRadius(maximumPointScreenSpaceRadius float64) {
+	x.inner.SetMaximumPointScreenSpaceRadius(maximumPointScreenSpaceRadius)
+}
+
+// GeometryElementable is the interface implemented by [GeometryElement], for mocking and DI.
+type GeometryElementable interface {
+	Unwrap() *raw.SCNGeometryElement
+	WithPrimitiveRange(primitiveRange foundation.NSRange) *GeometryElement
+	WithPointSize(pointSize float64) *GeometryElement
+	WithMinimumPointScreenSpaceRadius(minimumPointScreenSpaceRadius float64) *GeometryElement
+	WithMaximumPointScreenSpaceRadius(maximumPointScreenSpaceRadius float64) *GeometryElement
+	Data() *foundation.NSData
+	PrimitiveType() raw.SCNGeometryPrimitiveType
+	PrimitiveCount() int
+	HasInterleavedIndicesChannels() bool
+	IndicesChannelCount() int
+	BytesPerIndex() int
+	PrimitiveRange() foundation.NSRange
+	SetPrimitiveRange(primitiveRange foundation.NSRange)
+	PointSize() float64
+	SetPointSize(pointSize float64)
+	MinimumPointScreenSpaceRadius() float64
+	SetMinimumPointScreenSpaceRadius(minimumPointScreenSpaceRadius float64)
+	MaximumPointScreenSpaceRadius() float64
+	SetMaximumPointScreenSpaceRadius(maximumPointScreenSpaceRadius float64)
+}
+
+var _ GeometryElementable = (*GeometryElement)(nil)
+

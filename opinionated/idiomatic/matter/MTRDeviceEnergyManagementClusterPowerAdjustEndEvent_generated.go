@@ -42,3 +42,49 @@ func (x *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) WithEnergyUse(ener
 	return x
 }
 
+// Cause calls the underlying Cause.
+func (x *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) Cause() *foundation.NSNumber {
+	return x.inner.Cause()
+}
+
+// SetCause calls the underlying SetCause.
+func (x *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) SetCause(cause *foundation.NSNumber) {
+	x.inner.SetCause(cause)
+}
+
+// Duration calls the underlying Duration.
+func (x *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) Duration() *foundation.NSNumber {
+	return x.inner.Duration()
+}
+
+// SetDuration calls the underlying SetDuration.
+func (x *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) SetDuration(duration *foundation.NSNumber) {
+	x.inner.SetDuration(duration)
+}
+
+// EnergyUse calls the underlying EnergyUse.
+func (x *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) EnergyUse() *foundation.NSNumber {
+	return x.inner.EnergyUse()
+}
+
+// SetEnergyUse calls the underlying SetEnergyUse.
+func (x *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) SetEnergyUse(energyUse *foundation.NSNumber) {
+	x.inner.SetEnergyUse(energyUse)
+}
+
+// MTRDeviceEnergyManagementClusterPowerAdjustEndEventable is the interface implemented by [MTRDeviceEnergyManagementClusterPowerAdjustEndEvent], for mocking and DI.
+type MTRDeviceEnergyManagementClusterPowerAdjustEndEventable interface {
+	Unwrap() *raw.MTRDeviceEnergyManagementClusterPowerAdjustEndEvent
+	WithCause(cause *foundation.NSNumber) *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent
+	WithDuration(duration *foundation.NSNumber) *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent
+	WithEnergyUse(energyUse *foundation.NSNumber) *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent
+	Cause() *foundation.NSNumber
+	SetCause(cause *foundation.NSNumber)
+	Duration() *foundation.NSNumber
+	SetDuration(duration *foundation.NSNumber)
+	EnergyUse() *foundation.NSNumber
+	SetEnergyUse(energyUse *foundation.NSNumber)
+}
+
+var _ MTRDeviceEnergyManagementClusterPowerAdjustEndEventable = (*MTRDeviceEnergyManagementClusterPowerAdjustEndEvent)(nil)
+

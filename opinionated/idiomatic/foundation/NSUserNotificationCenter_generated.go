@@ -6,6 +6,7 @@ package foundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -46,17 +47,55 @@ func (x *UserNotificationCenter) WithScheduledNotifications(items ...*raw.NSUser
 	return x
 }
 
+// ScheduleNotification calls the underlying ScheduleNotification.
+func (x *UserNotificationCenter) ScheduleNotification(notification *raw.NSUserNotification) {
+	x.inner.ScheduleNotification(notification)
+}
+
+// RemoveScheduledNotification calls the underlying RemoveScheduledNotification.
+func (x *UserNotificationCenter) RemoveScheduledNotification(notification *raw.NSUserNotification) {
+	x.inner.RemoveScheduledNotification(notification)
+}
+
+// DeliverNotification calls the underlying DeliverNotification.
+func (x *UserNotificationCenter) DeliverNotification(notification *raw.NSUserNotification) {
+	x.inner.DeliverNotification(notification)
+}
+
+// RemoveDeliveredNotification calls the underlying RemoveDeliveredNotification.
+func (x *UserNotificationCenter) RemoveDeliveredNotification(notification *raw.NSUserNotification) {
+	x.inner.RemoveDeliveredNotification(notification)
+}
+
+// RemoveAllDeliveredNotifications calls the underlying RemoveAllDeliveredNotifications.
+func (x *UserNotificationCenter) RemoveAllDeliveredNotifications() {
+	x.inner.RemoveAllDeliveredNotifications()
+}
+
+// Delegate calls the underlying Delegate.
+func (x *UserNotificationCenter) Delegate() raw.NSUserNotificationCenterDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *UserNotificationCenter) SetDelegate(delegate raw.NSUserNotificationCenterDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
 // ScheduledNotifications returns the collection as a Go slice.
 func (x *UserNotificationCenter) ScheduledNotifications() []*raw.NSUserNotification {
 	arr := x.inner.ScheduledNotifications()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSUserNotification, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSUserNotification {
+		return raw.NSUserNotificationFromID(purego.Retain(_id))
+	})
+}
+
+// SetScheduledNotifications calls the underlying SetScheduledNotifications.
+func (x *UserNotificationCenter) SetScheduledNotifications(scheduledNotifications *raw.NSArray[*raw.NSUserNotification]) {
+	x.inner.SetScheduledNotifications(scheduledNotifications)
 }
 
 // DeliveredNotifications returns the collection as a Go slice.
@@ -65,12 +104,29 @@ func (x *UserNotificationCenter) DeliveredNotifications() []*raw.NSUserNotificat
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSUserNotification, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSUserNotification {
+		return raw.NSUserNotificationFromID(purego.Retain(_id))
+	})
 }
 
 func (x *UserNotificationCenter) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// UserNotificationCenterable is the interface implemented by [UserNotificationCenter], for mocking and DI.
+type UserNotificationCenterable interface {
+	Unwrap() *raw.NSUserNotificationCenter
+	WithDelegate(delegate raw.NSUserNotificationCenterDelegate) *UserNotificationCenter
+	WithScheduledNotifications(items ...*raw.NSUserNotification) *UserNotificationCenter
+	ScheduleNotification(notification *raw.NSUserNotification)
+	RemoveScheduledNotification(notification *raw.NSUserNotification)
+	DeliverNotification(notification *raw.NSUserNotification)
+	RemoveDeliveredNotification(notification *raw.NSUserNotification)
+	RemoveAllDeliveredNotifications()
+	Delegate() raw.NSUserNotificationCenterDelegate
+	SetDelegate(delegate raw.NSUserNotificationCenterDelegate)
+	ScheduledNotifications() []*raw.NSUserNotification
+	SetScheduledNotifications(scheduledNotifications *raw.NSArray[*raw.NSUserNotification])
+	DeliveredNotifications() []*raw.NSUserNotification
+}
+
+var _ UserNotificationCenterable = (*UserNotificationCenter)(nil)
 

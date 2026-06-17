@@ -43,3 +43,40 @@ func (x *MTRGroupKeyManagementClusterKeySetReadResponseParams) WithTimedInvokeTi
 	return x
 }
 
+// GroupKeySet calls the underlying GroupKeySet.
+func (x *MTRGroupKeyManagementClusterKeySetReadResponseParams) GroupKeySet() *MTRGroupKeyManagementClusterGroupKeySetStruct {
+	_r := x.inner.GroupKeySet()
+	if _r == nil {
+		return nil
+	}
+	return &MTRGroupKeyManagementClusterGroupKeySetStruct{inner: _r}
+}
+
+// SetGroupKeySet calls the underlying SetGroupKeySet.
+func (x *MTRGroupKeyManagementClusterKeySetReadResponseParams) SetGroupKeySet(groupKeySet *raw.MTRGroupKeyManagementClusterGroupKeySetStruct) {
+	x.inner.SetGroupKeySet(groupKeySet)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRGroupKeyManagementClusterKeySetReadResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRGroupKeyManagementClusterKeySetReadResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// MTRGroupKeyManagementClusterKeySetReadResponseParamsable is the interface implemented by [MTRGroupKeyManagementClusterKeySetReadResponseParams], for mocking and DI.
+type MTRGroupKeyManagementClusterKeySetReadResponseParamsable interface {
+	Unwrap() *raw.MTRGroupKeyManagementClusterKeySetReadResponseParams
+	WithGroupKeySet(groupKeySet *raw.MTRGroupKeyManagementClusterGroupKeySetStruct) *MTRGroupKeyManagementClusterKeySetReadResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRGroupKeyManagementClusterKeySetReadResponseParams
+	GroupKeySet() *MTRGroupKeyManagementClusterGroupKeySetStruct
+	SetGroupKeySet(groupKeySet *raw.MTRGroupKeyManagementClusterGroupKeySetStruct)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+}
+
+var _ MTRGroupKeyManagementClusterKeySetReadResponseParamsable = (*MTRGroupKeyManagementClusterKeySetReadResponseParams)(nil)
+

@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/pencilkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -25,4 +26,33 @@ func NewInkWithInkTypeColor(type_ *foundation.NSString, color *appkit.NSColor) *
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInkType:color:"), type_.Ptr(), color.Ptr())
 	return &Ink{inner: raw.PKInkFromID(_id)}
 }
+
+// InkType calls the underlying InkType.
+func (x *Ink) InkType() string {
+	_r := x.inner.InkType()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Color calls the underlying Color.
+func (x *Ink) Color() *appkit.NSColor {
+	return x.inner.Color()
+}
+
+// RequiredContentVersion calls the underlying RequiredContentVersion.
+func (x *Ink) RequiredContentVersion() raw.PKContentVersion {
+	return x.inner.RequiredContentVersion()
+}
+
+// Inkable is the interface implemented by [Ink], for mocking and DI.
+type Inkable interface {
+	Unwrap() *raw.PKInk
+	InkType() string
+	Color() *appkit.NSColor
+	RequiredContentVersion() raw.PKContentVersion
+}
+
+var _ Inkable = (*Ink)(nil)
 

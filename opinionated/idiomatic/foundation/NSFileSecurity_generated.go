@@ -26,3 +26,10 @@ func NewFileSecurityWithCoder(coder *raw.NSCoder) *FileSecurity {
 
 func (x *FileSecurity) asObject() *raw.NSObject { return &x.inner.NSObject }
 
+// FileSecurityable is the interface implemented by [FileSecurity], for mocking and DI.
+type FileSecurityable interface {
+	Unwrap() *raw.NSFileSecurity
+}
+
+var _ FileSecurityable = (*FileSecurity)(nil)
+

@@ -25,3 +25,22 @@ func NewAuthorizationPublicKeyCredentialPRFAssertionInputValuesWithSaltInput1Sal
 	return &AuthorizationPublicKeyCredentialPRFAssertionInputValues{inner: raw.ASAuthorizationPublicKeyCredentialPRFAssertionInputValuesFromID(_id)}
 }
 
+// SaltInput1 calls the underlying SaltInput1.
+func (x *AuthorizationPublicKeyCredentialPRFAssertionInputValues) SaltInput1() *foundation.NSData {
+	return x.inner.SaltInput1()
+}
+
+// SaltInput2 calls the underlying SaltInput2.
+func (x *AuthorizationPublicKeyCredentialPRFAssertionInputValues) SaltInput2() *foundation.NSData {
+	return x.inner.SaltInput2()
+}
+
+// AuthorizationPublicKeyCredentialPRFAssertionInputValuesable is the interface implemented by [AuthorizationPublicKeyCredentialPRFAssertionInputValues], for mocking and DI.
+type AuthorizationPublicKeyCredentialPRFAssertionInputValuesable interface {
+	Unwrap() *raw.ASAuthorizationPublicKeyCredentialPRFAssertionInputValues
+	SaltInput1() *foundation.NSData
+	SaltInput2() *foundation.NSData
+}
+
+var _ AuthorizationPublicKeyCredentialPRFAssertionInputValuesable = (*AuthorizationPublicKeyCredentialPRFAssertionInputValues)(nil)
+

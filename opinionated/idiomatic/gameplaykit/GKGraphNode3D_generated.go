@@ -25,5 +25,24 @@ func NewGraphNode3DWithPoint(point unsafe.Pointer) *GraphNode3D {
 	return &GraphNode3D{inner: raw.GKGraphNode3DFromID(_id)}
 }
 
+// Position calls the underlying Position.
+func (x *GraphNode3D) Position() unsafe.Pointer {
+	return x.inner.Position()
+}
+
+// SetPosition calls the underlying SetPosition.
+func (x *GraphNode3D) SetPosition(position unsafe.Pointer) {
+	x.inner.SetPosition(position)
+}
+
 func (x *GraphNode3D) asGraphNode() *raw.GKGraphNode { return &x.inner.GKGraphNode }
+
+// GraphNode3Dable is the interface implemented by [GraphNode3D], for mocking and DI.
+type GraphNode3Dable interface {
+	Unwrap() *raw.GKGraphNode3D
+	Position() unsafe.Pointer
+	SetPosition(position unsafe.Pointer)
+}
+
+var _ GraphNode3Dable = (*GraphNode3D)(nil)
 

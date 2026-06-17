@@ -33,3 +33,10 @@ func (x *NDArrayLUTDequantize) asNDArrayMultiaryBase() *mpsndarray.MPSNDArrayMul
 
 func (x *NDArrayLUTDequantize) asKernel() *mpscore.MPSKernel { return &x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel }
 
+// NDArrayLUTDequantizeable is the interface implemented by [NDArrayLUTDequantize], for mocking and DI.
+type NDArrayLUTDequantizeable interface {
+	Unwrap() *raw.MPSNDArrayLUTDequantize
+}
+
+var _ NDArrayLUTDequantizeable = (*NDArrayLUTDequantize)(nil)
+

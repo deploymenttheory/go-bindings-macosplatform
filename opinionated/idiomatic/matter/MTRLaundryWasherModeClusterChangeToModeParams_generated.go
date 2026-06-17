@@ -42,3 +42,49 @@ func (x *MTRLaundryWasherModeClusterChangeToModeParams) WithServerSideProcessing
 	return x
 }
 
+// GetNewMode calls the underlying GetNewMode.
+func (x *MTRLaundryWasherModeClusterChangeToModeParams) GetNewMode() *foundation.NSNumber {
+	return x.inner.GetNewMode()
+}
+
+// SetNewMode calls the underlying SetNewMode.
+func (x *MTRLaundryWasherModeClusterChangeToModeParams) SetNewMode(newMode *foundation.NSNumber) {
+	x.inner.SetNewMode(newMode)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRLaundryWasherModeClusterChangeToModeParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRLaundryWasherModeClusterChangeToModeParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRLaundryWasherModeClusterChangeToModeParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRLaundryWasherModeClusterChangeToModeParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRLaundryWasherModeClusterChangeToModeParamsable is the interface implemented by [MTRLaundryWasherModeClusterChangeToModeParams], for mocking and DI.
+type MTRLaundryWasherModeClusterChangeToModeParamsable interface {
+	Unwrap() *raw.MTRLaundryWasherModeClusterChangeToModeParams
+	WithNewMode(newMode *foundation.NSNumber) *MTRLaundryWasherModeClusterChangeToModeParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRLaundryWasherModeClusterChangeToModeParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRLaundryWasherModeClusterChangeToModeParams
+	GetNewMode() *foundation.NSNumber
+	SetNewMode(newMode *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRLaundryWasherModeClusterChangeToModeParamsable = (*MTRLaundryWasherModeClusterChangeToModeParams)(nil)
+

@@ -5,6 +5,7 @@
 package metal
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +23,23 @@ func NewMTL4CompilerTaskOptions() *MTL4CompilerTaskOptions {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTL4CompilerTaskOptions")), objc.RegisterName("new"))
 	return &MTL4CompilerTaskOptions{inner: raw.MTL4CompilerTaskOptionsFromID(_id)}
 }
+
+// LookupArchives calls the underlying LookupArchives.
+func (x *MTL4CompilerTaskOptions) LookupArchives() *foundation.NSArray[raw.MTL4Archive] {
+	return x.inner.LookupArchives()
+}
+
+// SetLookupArchives calls the underlying SetLookupArchives.
+func (x *MTL4CompilerTaskOptions) SetLookupArchives(lookupArchives *foundation.NSArray[raw.MTL4Archive]) {
+	x.inner.SetLookupArchives(lookupArchives)
+}
+
+// MTL4CompilerTaskOptionsable is the interface implemented by [MTL4CompilerTaskOptions], for mocking and DI.
+type MTL4CompilerTaskOptionsable interface {
+	Unwrap() *raw.MTL4CompilerTaskOptions
+	LookupArchives() *foundation.NSArray[raw.MTL4Archive]
+	SetLookupArchives(lookupArchives *foundation.NSArray[raw.MTL4Archive])
+}
+
+var _ MTL4CompilerTaskOptionsable = (*MTL4CompilerTaskOptions)(nil)
 

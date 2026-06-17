@@ -7,6 +7,7 @@ package corelocation
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corelocation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -38,5 +39,66 @@ func (x *Region) WithNotifyOnExit(notifyOnExit bool) *Region {
 	return x
 }
 
+// ContainsCoordinate calls the underlying ContainsCoordinate.
+func (x *Region) ContainsCoordinate(coordinate unsafe.Pointer) bool {
+	return x.inner.ContainsCoordinate(coordinate)
+}
+
+// Center calls the underlying Center.
+func (x *Region) Center() unsafe.Pointer {
+	return x.inner.Center()
+}
+
+// Radius calls the underlying Radius.
+func (x *Region) Radius() unsafe.Pointer {
+	return x.inner.Radius()
+}
+
+// Identifier calls the underlying Identifier.
+func (x *Region) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// NotifyOnEntry calls the underlying NotifyOnEntry.
+func (x *Region) NotifyOnEntry() bool {
+	return x.inner.NotifyOnEntry()
+}
+
+// SetNotifyOnEntry calls the underlying SetNotifyOnEntry.
+func (x *Region) SetNotifyOnEntry(notifyOnEntry bool) {
+	x.inner.SetNotifyOnEntry(notifyOnEntry)
+}
+
+// NotifyOnExit calls the underlying NotifyOnExit.
+func (x *Region) NotifyOnExit() bool {
+	return x.inner.NotifyOnExit()
+}
+
+// SetNotifyOnExit calls the underlying SetNotifyOnExit.
+func (x *Region) SetNotifyOnExit(notifyOnExit bool) {
+	x.inner.SetNotifyOnExit(notifyOnExit)
+}
+
 func (x *Region) asRegion() *raw.CLRegion { return x.inner }
+
+// Regionable is the interface implemented by [Region], for mocking and DI.
+type Regionable interface {
+	Unwrap() *raw.CLRegion
+	WithNotifyOnEntry(notifyOnEntry bool) *Region
+	WithNotifyOnExit(notifyOnExit bool) *Region
+	ContainsCoordinate(coordinate unsafe.Pointer) bool
+	Center() unsafe.Pointer
+	Radius() unsafe.Pointer
+	Identifier() string
+	NotifyOnEntry() bool
+	SetNotifyOnEntry(notifyOnEntry bool)
+	NotifyOnExit() bool
+	SetNotifyOnExit(notifyOnExit bool)
+}
+
+var _ Regionable = (*Region)(nil)
 

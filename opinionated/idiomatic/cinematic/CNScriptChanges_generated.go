@@ -7,6 +7,7 @@ package cinematic
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cinematic"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -25,17 +26,25 @@ func NewScriptChangesWithDataRepresentation(dataRepresentation *foundation.NSDat
 	return &ScriptChanges{inner: raw.CNScriptChangesFromID(_id)}
 }
 
+// DataRepresentation calls the underlying DataRepresentation.
+func (x *ScriptChanges) DataRepresentation() *foundation.NSData {
+	return x.inner.DataRepresentation()
+}
+
+// FNumber calls the underlying FNumber.
+func (x *ScriptChanges) FNumber() float32 {
+	return x.inner.FNumber()
+}
+
 // UserDecisions returns the collection as a Go slice.
 func (x *ScriptChanges) UserDecisions() []*raw.CNDecision {
 	arr := x.inner.UserDecisions()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.CNDecision, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CNDecision {
+		return raw.CNDecisionFromID(purego.Retain(_id))
+	})
 }
 
 // AddedDetectionTracks returns the collection as a Go slice.
@@ -44,10 +53,19 @@ func (x *ScriptChanges) AddedDetectionTracks() []*raw.CNDetectionTrack {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.CNDetectionTrack, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CNDetectionTrack {
+		return raw.CNDetectionTrackFromID(purego.Retain(_id))
+	})
 }
+
+// ScriptChangesable is the interface implemented by [ScriptChanges], for mocking and DI.
+type ScriptChangesable interface {
+	Unwrap() *raw.CNScriptChanges
+	DataRepresentation() *foundation.NSData
+	FNumber() float32
+	UserDecisions() []*raw.CNDecision
+	AddedDetectionTracks() []*raw.CNDetectionTrack
+}
+
+var _ ScriptChangesable = (*ScriptChanges)(nil)
 

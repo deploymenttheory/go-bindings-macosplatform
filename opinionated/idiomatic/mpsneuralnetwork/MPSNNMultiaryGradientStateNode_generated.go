@@ -25,3 +25,10 @@ func NewNNMultiaryGradientStateNode() *NNMultiaryGradientStateNode {
 
 func (x *NNMultiaryGradientStateNode) asNNStateNode() *raw.MPSNNStateNode { return &x.inner.MPSNNStateNode }
 
+// NNMultiaryGradientStateNodeable is the interface implemented by [NNMultiaryGradientStateNode], for mocking and DI.
+type NNMultiaryGradientStateNodeable interface {
+	Unwrap() *raw.MPSNNMultiaryGradientStateNode
+}
+
+var _ NNMultiaryGradientStateNodeable = (*NNMultiaryGradientStateNode)(nil)
+

@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
@@ -61,7 +62,59 @@ func (x *KeyedUnarchiver) WithDecodingFailurePolicy(decodingFailurePolicy raw.NS
 	return x
 }
 
+// FinishDecoding calls the underlying FinishDecoding.
+func (x *KeyedUnarchiver) FinishDecoding() {
+	x.inner.FinishDecoding()
+}
+
+// SetClassForClassName calls the underlying SetClassForClassName.
+func (x *KeyedUnarchiver) SetClassForClassName(cls objc.Class, codedName string) {
+	x.inner.SetClassForClassName(cls, foundation.NSStringStringWithUTF8String(codedName))
+}
+
+// ClassForClassName calls the underlying ClassForClassName.
+func (x *KeyedUnarchiver) ClassForClassName(codedName string) objc.Class {
+	return x.inner.ClassForClassName(foundation.NSStringStringWithUTF8String(codedName))
+}
+
+// Delegate calls the underlying Delegate.
+func (x *KeyedUnarchiver) Delegate() raw.NSKeyedUnarchiverDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *KeyedUnarchiver) SetDelegate(delegate raw.NSKeyedUnarchiverDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// SetRequiresSecureCoding calls the underlying SetRequiresSecureCoding.
+func (x *KeyedUnarchiver) SetRequiresSecureCoding(requiresSecureCoding bool) {
+	x.inner.SetRequiresSecureCoding(requiresSecureCoding)
+}
+
+// SetDecodingFailurePolicy calls the underlying SetDecodingFailurePolicy.
+func (x *KeyedUnarchiver) SetDecodingFailurePolicy(decodingFailurePolicy raw.NSDecodingFailurePolicy) {
+	x.inner.SetDecodingFailurePolicy(decodingFailurePolicy)
+}
+
 func (x *KeyedUnarchiver) asCoder() *raw.NSCoder { return &x.inner.NSCoder }
 
 func (x *KeyedUnarchiver) asObject() *raw.NSObject { return &x.inner.NSCoder.NSObject }
+
+// KeyedUnarchiverable is the interface implemented by [KeyedUnarchiver], for mocking and DI.
+type KeyedUnarchiverable interface {
+	Unwrap() *raw.NSKeyedUnarchiver
+	WithDelegate(delegate raw.NSKeyedUnarchiverDelegate) *KeyedUnarchiver
+	WithRequiresSecureCoding(requiresSecureCoding bool) *KeyedUnarchiver
+	WithDecodingFailurePolicy(decodingFailurePolicy raw.NSDecodingFailurePolicy) *KeyedUnarchiver
+	FinishDecoding()
+	SetClassForClassName(cls objc.Class, codedName string)
+	ClassForClassName(codedName string) objc.Class
+	Delegate() raw.NSKeyedUnarchiverDelegate
+	SetDelegate(delegate raw.NSKeyedUnarchiverDelegate)
+	SetRequiresSecureCoding(requiresSecureCoding bool)
+	SetDecodingFailurePolicy(decodingFailurePolicy raw.NSDecodingFailurePolicy)
+}
+
+var _ KeyedUnarchiverable = (*KeyedUnarchiver)(nil)
 

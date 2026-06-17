@@ -5,6 +5,7 @@
 package imagekit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imagekit"
@@ -25,4 +26,23 @@ func NewFilterUIViewWithFrameFilter(frameRect corefoundation.CGRect, inFilter *c
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrame:filter:"), frameRect, inFilter.Ptr())
 	return &FilterUIView{inner: raw.IKFilterUIViewFromID(_id)}
 }
+
+// Filter calls the underlying Filter.
+func (x *FilterUIView) Filter() *coreimage.CIFilter {
+	return x.inner.Filter()
+}
+
+// ObjectController calls the underlying ObjectController.
+func (x *FilterUIView) ObjectController() *appkit.NSObjectController {
+	return x.inner.ObjectController()
+}
+
+// FilterUIViewable is the interface implemented by [FilterUIView], for mocking and DI.
+type FilterUIViewable interface {
+	Unwrap() *raw.IKFilterUIView
+	Filter() *coreimage.CIFilter
+	ObjectController() *appkit.NSObjectController
+}
+
+var _ FilterUIViewable = (*FilterUIView)(nil)
 

@@ -5,7 +5,9 @@
 package pdfkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/pdfkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +25,28 @@ func NewAnnotationStamp() *AnnotationStamp {
 	return &AnnotationStamp{inner: raw.PDFAnnotationStampFromID(_id)}
 }
 
+// Name calls the underlying Name.
+func (x *AnnotationStamp) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetName calls the underlying SetName.
+func (x *AnnotationStamp) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
 func (x *AnnotationStamp) asAnnotation() *raw.PDFAnnotation { return &x.inner.PDFAnnotation }
+
+// AnnotationStampable is the interface implemented by [AnnotationStamp], for mocking and DI.
+type AnnotationStampable interface {
+	Unwrap() *raw.PDFAnnotationStamp
+	Name() string
+	SetName(name string)
+}
+
+var _ AnnotationStampable = (*AnnotationStamp)(nil)
 

@@ -26,3 +26,10 @@ func NewSyncEnginePendingZoneDeleteWithZoneID(zoneID *raw.CKRecordZoneID) *SyncE
 
 func (x *SyncEnginePendingZoneDelete) asSyncEnginePendingDatabaseChange() *raw.CKSyncEnginePendingDatabaseChange { return &x.inner.CKSyncEnginePendingDatabaseChange }
 
+// SyncEnginePendingZoneDeleteable is the interface implemented by [SyncEnginePendingZoneDelete], for mocking and DI.
+type SyncEnginePendingZoneDeleteable interface {
+	Unwrap() *raw.CKSyncEnginePendingZoneDelete
+}
+
+var _ SyncEnginePendingZoneDeleteable = (*SyncEnginePendingZoneDelete)(nil)
+

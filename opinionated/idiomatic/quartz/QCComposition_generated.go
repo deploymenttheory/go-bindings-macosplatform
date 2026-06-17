@@ -5,6 +5,7 @@
 package quartz
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartz"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +23,35 @@ func NewQCComposition() *QCComposition {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("QCComposition")), objc.RegisterName("new"))
 	return &QCComposition{inner: raw.QCCompositionFromID(_id)}
 }
+
+// Protocols calls the underlying Protocols.
+func (x *QCComposition) Protocols() *foundation.NSArray[objc.ID] {
+	return x.inner.Protocols()
+}
+
+// Attributes calls the underlying Attributes.
+func (x *QCComposition) Attributes() *foundation.NSDictionary[objc.ID, objc.ID] {
+	return x.inner.Attributes()
+}
+
+// InputKeys calls the underlying InputKeys.
+func (x *QCComposition) InputKeys() *foundation.NSArray[objc.ID] {
+	return x.inner.InputKeys()
+}
+
+// OutputKeys calls the underlying OutputKeys.
+func (x *QCComposition) OutputKeys() *foundation.NSArray[objc.ID] {
+	return x.inner.OutputKeys()
+}
+
+// QCCompositionable is the interface implemented by [QCComposition], for mocking and DI.
+type QCCompositionable interface {
+	Unwrap() *raw.QCComposition
+	Protocols() *foundation.NSArray[objc.ID]
+	Attributes() *foundation.NSDictionary[objc.ID, objc.ID]
+	InputKeys() *foundation.NSArray[objc.ID]
+	OutputKeys() *foundation.NSArray[objc.ID]
+}
+
+var _ QCCompositionable = (*QCComposition)(nil)
 

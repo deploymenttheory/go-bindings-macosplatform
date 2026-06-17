@@ -6,6 +6,7 @@ package cryptotokenkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cryptotokenkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -25,5 +26,18 @@ func NewTokenKeychainCertificateWithCertificateObjectID(certificateRef unsafe.Po
 	return &TokenKeychainCertificate{inner: raw.TKTokenKeychainCertificateFromID(_id)}
 }
 
+// Data calls the underlying Data.
+func (x *TokenKeychainCertificate) Data() *foundation.NSData {
+	return x.inner.Data()
+}
+
 func (x *TokenKeychainCertificate) asTokenKeychainItem() *raw.TKTokenKeychainItem { return &x.inner.TKTokenKeychainItem }
+
+// TokenKeychainCertificateable is the interface implemented by [TokenKeychainCertificate], for mocking and DI.
+type TokenKeychainCertificateable interface {
+	Unwrap() *raw.TKTokenKeychainCertificate
+	Data() *foundation.NSData
+}
+
+var _ TokenKeychainCertificateable = (*TokenKeychainCertificate)(nil)
 

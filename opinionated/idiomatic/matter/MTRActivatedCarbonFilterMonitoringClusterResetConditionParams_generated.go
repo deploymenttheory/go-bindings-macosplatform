@@ -36,3 +36,36 @@ func (x *MTRActivatedCarbonFilterMonitoringClusterResetConditionParams) WithServ
 	return x
 }
 
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRActivatedCarbonFilterMonitoringClusterResetConditionParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRActivatedCarbonFilterMonitoringClusterResetConditionParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRActivatedCarbonFilterMonitoringClusterResetConditionParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRActivatedCarbonFilterMonitoringClusterResetConditionParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRActivatedCarbonFilterMonitoringClusterResetConditionParamsable is the interface implemented by [MTRActivatedCarbonFilterMonitoringClusterResetConditionParams], for mocking and DI.
+type MTRActivatedCarbonFilterMonitoringClusterResetConditionParamsable interface {
+	Unwrap() *raw.MTRActivatedCarbonFilterMonitoringClusterResetConditionParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRActivatedCarbonFilterMonitoringClusterResetConditionParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRActivatedCarbonFilterMonitoringClusterResetConditionParams
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRActivatedCarbonFilterMonitoringClusterResetConditionParamsable = (*MTRActivatedCarbonFilterMonitoringClusterResetConditionParams)(nil)
+

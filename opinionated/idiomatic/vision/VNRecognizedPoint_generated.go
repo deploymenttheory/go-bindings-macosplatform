@@ -6,6 +6,7 @@ package vision
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,7 +24,24 @@ func NewRecognizedPoint() *RecognizedPoint {
 	return &RecognizedPoint{inner: raw.VNRecognizedPointFromID(_id)}
 }
 
+// Identifier calls the underlying Identifier.
+func (x *RecognizedPoint) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 func (x *RecognizedPoint) asDetectedPoint() *raw.VNDetectedPoint { return &x.inner.VNDetectedPoint }
 
 func (x *RecognizedPoint) asPoint() *raw.VNPoint { return &x.inner.VNDetectedPoint.VNPoint }
+
+// RecognizedPointable is the interface implemented by [RecognizedPoint], for mocking and DI.
+type RecognizedPointable interface {
+	Unwrap() *raw.VNRecognizedPoint
+	Identifier() string
+}
+
+var _ RecognizedPointable = (*RecognizedPoint)(nil)
 

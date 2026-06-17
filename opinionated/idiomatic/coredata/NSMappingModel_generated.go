@@ -7,6 +7,7 @@ package coredata
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -48,10 +49,29 @@ func (x *MappingModel) EntityMappings() []*raw.NSEntityMapping {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSEntityMapping, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSEntityMapping {
+		return raw.NSEntityMappingFromID(purego.Retain(_id))
+	})
 }
+
+// SetEntityMappings calls the underlying SetEntityMappings.
+func (x *MappingModel) SetEntityMappings(entityMappings *foundation.NSArray[*raw.NSEntityMapping]) {
+	x.inner.SetEntityMappings(entityMappings)
+}
+
+// EntityMappingsByName calls the underlying EntityMappingsByName.
+func (x *MappingModel) EntityMappingsByName() *foundation.NSDictionary[*foundation.NSString, *raw.NSEntityMapping] {
+	return x.inner.EntityMappingsByName()
+}
+
+// MappingModelable is the interface implemented by [MappingModel], for mocking and DI.
+type MappingModelable interface {
+	Unwrap() *raw.NSMappingModel
+	WithEntityMappings(items ...*raw.NSEntityMapping) *MappingModel
+	EntityMappings() []*raw.NSEntityMapping
+	SetEntityMappings(entityMappings *foundation.NSArray[*raw.NSEntityMapping])
+	EntityMappingsByName() *foundation.NSDictionary[*foundation.NSString, *raw.NSEntityMapping]
+}
+
+var _ MappingModelable = (*MappingModel)(nil)
 

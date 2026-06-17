@@ -25,3 +25,10 @@ func NewNEOnDemandRuleDisconnect() *NEOnDemandRuleDisconnect {
 
 func (x *NEOnDemandRuleDisconnect) asNEOnDemandRule() *raw.NEOnDemandRule { return &x.inner.NEOnDemandRule }
 
+// NEOnDemandRuleDisconnectable is the interface implemented by [NEOnDemandRuleDisconnect], for mocking and DI.
+type NEOnDemandRuleDisconnectable interface {
+	Unwrap() *raw.NEOnDemandRuleDisconnect
+}
+
+var _ NEOnDemandRuleDisconnectable = (*NEOnDemandRuleDisconnect)(nil)
+

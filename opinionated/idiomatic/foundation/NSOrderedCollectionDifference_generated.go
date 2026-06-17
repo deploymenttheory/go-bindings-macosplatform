@@ -38,31 +38,42 @@ func NewOrderedCollectionDifferenceWithInsertIndexesInsertedObjectsRemoveIndexes
 	return &OrderedCollectionDifference{inner: raw.NSOrderedCollectionDifferenceFromID[objc.ID](_id)}
 }
 
-// Insertions returns the collection as a Go slice.
-func (x *OrderedCollectionDifference) Insertions() []*raw.NSOrderedCollectionChange[objc.ID] {
-	arr := x.inner.Insertions()
-	if arr == nil {
-		return nil
-	}
-	out := make([]*raw.NSOrderedCollectionChange[objc.ID], arr.Count())
-	for i := range out {
-		out[i] = raw.NSOrderedCollectionChangeFromID[objc.ID](arr.ObjectAtIndex(uint(i)))
-	}
-	return out
+// DifferenceByTransformingChangesWith calls the underlying DifferenceByTransformingChangesWith.
+func (x *OrderedCollectionDifference) DifferenceByTransformingChangesWith(block objc.Block) *raw.NSOrderedCollectionDifference[objc.ID] {
+	return x.inner.DifferenceByTransformingChangesWith(block)
 }
 
-// Removals returns the collection as a Go slice.
-func (x *OrderedCollectionDifference) Removals() []*raw.NSOrderedCollectionChange[objc.ID] {
-	arr := x.inner.Removals()
-	if arr == nil {
-		return nil
-	}
-	out := make([]*raw.NSOrderedCollectionChange[objc.ID], arr.Count())
-	for i := range out {
-		out[i] = raw.NSOrderedCollectionChangeFromID[objc.ID](arr.ObjectAtIndex(uint(i)))
-	}
-	return out
+// InverseDifference calls the underlying InverseDifference.
+func (x *OrderedCollectionDifference) InverseDifference() *raw.NSOrderedCollectionDifference[objc.ID] {
+	return x.inner.InverseDifference()
+}
+
+// Insertions calls the underlying Insertions.
+func (x *OrderedCollectionDifference) Insertions() *raw.NSArray[objc.ID] {
+	return x.inner.Insertions()
+}
+
+// Removals calls the underlying Removals.
+func (x *OrderedCollectionDifference) Removals() *raw.NSArray[objc.ID] {
+	return x.inner.Removals()
+}
+
+// HasChanges calls the underlying HasChanges.
+func (x *OrderedCollectionDifference) HasChanges() bool {
+	return x.inner.HasChanges()
 }
 
 func (x *OrderedCollectionDifference) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// OrderedCollectionDifferenceable is the interface implemented by [OrderedCollectionDifference], for mocking and DI.
+type OrderedCollectionDifferenceable interface {
+	Unwrap() *raw.NSOrderedCollectionDifference[objc.ID]
+	DifferenceByTransformingChangesWith(block objc.Block) *raw.NSOrderedCollectionDifference[objc.ID]
+	InverseDifference() *raw.NSOrderedCollectionDifference[objc.ID]
+	Insertions() *raw.NSArray[objc.ID]
+	Removals() *raw.NSArray[objc.ID]
+	HasChanges() bool
+}
+
+var _ OrderedCollectionDifferenceable = (*OrderedCollectionDifference)(nil)
 

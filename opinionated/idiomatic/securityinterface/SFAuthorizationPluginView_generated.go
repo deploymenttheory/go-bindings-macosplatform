@@ -5,6 +5,8 @@
 package securityinterface
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/securityinterface"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
@@ -24,4 +26,101 @@ func NewAuthorizationPluginViewWithCallbacksAndEngineRef(callbacks unsafe.Pointe
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCallbacks:andEngineRef:"), callbacks, engineRef)
 	return &AuthorizationPluginView{inner: raw.SFAuthorizationPluginViewFromID(_id)}
 }
+
+// EngineRef calls the underlying EngineRef.
+func (x *AuthorizationPluginView) EngineRef() unsafe.Pointer {
+	return x.inner.EngineRef()
+}
+
+// Callbacks calls the underlying Callbacks.
+func (x *AuthorizationPluginView) Callbacks() unsafe.Pointer {
+	return x.inner.Callbacks()
+}
+
+// ButtonPressed calls the underlying ButtonPressed.
+func (x *AuthorizationPluginView) ButtonPressed(inButtonType raw.SFButtonType) {
+	x.inner.ButtonPressed(inButtonType)
+}
+
+// LastError calls the underlying LastError.
+func (x *AuthorizationPluginView) LastError() unsafe.Pointer {
+	return x.inner.LastError()
+}
+
+// DidActivate calls the underlying DidActivate.
+func (x *AuthorizationPluginView) DidActivate() {
+	x.inner.DidActivate()
+}
+
+// WillActivateWithUser calls the underlying WillActivateWithUser.
+func (x *AuthorizationPluginView) WillActivateWithUser(inUserInformation *foundation.NSDictionary[objc.ID, objc.ID]) {
+	x.inner.WillActivateWithUser(inUserInformation)
+}
+
+// DidDeactivate calls the underlying DidDeactivate.
+func (x *AuthorizationPluginView) DidDeactivate() {
+	x.inner.DidDeactivate()
+}
+
+// FirstKeyView calls the underlying FirstKeyView.
+func (x *AuthorizationPluginView) FirstKeyView() *appkit.NSView {
+	return x.inner.FirstKeyView()
+}
+
+// FirstResponder calls the underlying FirstResponder.
+func (x *AuthorizationPluginView) FirstResponder() *appkit.NSResponder {
+	return x.inner.FirstResponder()
+}
+
+// LastKeyView calls the underlying LastKeyView.
+func (x *AuthorizationPluginView) LastKeyView() *appkit.NSView {
+	return x.inner.LastKeyView()
+}
+
+// SetEnabled calls the underlying SetEnabled.
+func (x *AuthorizationPluginView) SetEnabled(inEnabled bool) {
+	x.inner.SetEnabled(inEnabled)
+}
+
+// ViewForType calls the underlying ViewForType.
+func (x *AuthorizationPluginView) ViewForType(inType raw.SFViewType) *appkit.NSView {
+	return x.inner.ViewForType(inType)
+}
+
+// DisplayView calls the underlying DisplayView.
+func (x *AuthorizationPluginView) DisplayView() {
+	x.inner.DisplayView()
+}
+
+// SetButtonEnabled calls the underlying SetButtonEnabled.
+func (x *AuthorizationPluginView) SetButtonEnabled(inButtonType raw.SFButtonType, inEnabled bool) {
+	x.inner.SetButtonEnabled(inButtonType, inEnabled)
+}
+
+// UpdateView calls the underlying UpdateView.
+func (x *AuthorizationPluginView) UpdateView() {
+	x.inner.UpdateView()
+}
+
+// AuthorizationPluginViewable is the interface implemented by [AuthorizationPluginView], for mocking and DI.
+type AuthorizationPluginViewable interface {
+	Unwrap() *raw.SFAuthorizationPluginView
+	EngineRef() unsafe.Pointer
+	Callbacks() unsafe.Pointer
+	ButtonPressed(inButtonType raw.SFButtonType)
+	LastError() unsafe.Pointer
+	DidActivate()
+	WillActivateWithUser(inUserInformation *foundation.NSDictionary[objc.ID, objc.ID])
+	DidDeactivate()
+	FirstKeyView() *appkit.NSView
+	FirstResponder() *appkit.NSResponder
+	LastKeyView() *appkit.NSView
+	SetEnabled(inEnabled bool)
+	ViewForType(inType raw.SFViewType) *appkit.NSView
+	DisplayView()
+	SetButtonEnabled(inButtonType raw.SFButtonType, inEnabled bool)
+	UpdateView()
+}
+
+var _ AuthorizationPluginViewable = (*AuthorizationPluginView)(nil)
 

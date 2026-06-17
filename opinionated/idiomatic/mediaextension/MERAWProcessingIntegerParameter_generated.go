@@ -58,5 +58,49 @@ func (x *RAWProcessingIntegerParameter) WithCurrentValue(currentValue int) *RAWP
 	return x
 }
 
+// HasNeutralValue calls the underlying HasNeutralValue.
+func (x *RAWProcessingIntegerParameter) HasNeutralValue(outNeutralValue *int64) bool {
+	return x.inner.HasNeutralValue(outNeutralValue)
+}
+
+// HasCameraValue calls the underlying HasCameraValue.
+func (x *RAWProcessingIntegerParameter) HasCameraValue(outCameraValue *int64) bool {
+	return x.inner.HasCameraValue(outCameraValue)
+}
+
+// MaximumValue calls the underlying MaximumValue.
+func (x *RAWProcessingIntegerParameter) MaximumValue() int {
+	return x.inner.MaximumValue()
+}
+
+// MinimumValue calls the underlying MinimumValue.
+func (x *RAWProcessingIntegerParameter) MinimumValue() int {
+	return x.inner.MinimumValue()
+}
+
+// CurrentValue calls the underlying CurrentValue.
+func (x *RAWProcessingIntegerParameter) CurrentValue() int {
+	return x.inner.CurrentValue()
+}
+
+// SetCurrentValue calls the underlying SetCurrentValue.
+func (x *RAWProcessingIntegerParameter) SetCurrentValue(currentValue int) {
+	x.inner.SetCurrentValue(currentValue)
+}
+
 func (x *RAWProcessingIntegerParameter) asRAWProcessingParameter() *raw.MERAWProcessingParameter { return &x.inner.MERAWProcessingParameter }
+
+// RAWProcessingIntegerParameterable is the interface implemented by [RAWProcessingIntegerParameter], for mocking and DI.
+type RAWProcessingIntegerParameterable interface {
+	Unwrap() *raw.MERAWProcessingIntegerParameter
+	WithCurrentValue(currentValue int) *RAWProcessingIntegerParameter
+	HasNeutralValue(outNeutralValue *int64) bool
+	HasCameraValue(outCameraValue *int64) bool
+	MaximumValue() int
+	MinimumValue() int
+	CurrentValue() int
+	SetCurrentValue(currentValue int)
+}
+
+var _ RAWProcessingIntegerParameterable = (*RAWProcessingIntegerParameter)(nil)
 

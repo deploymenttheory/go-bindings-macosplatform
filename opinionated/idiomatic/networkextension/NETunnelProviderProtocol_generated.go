@@ -7,6 +7,7 @@ package networkextension
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -36,5 +37,42 @@ func (x *NETunnelProviderProtocol) WithProviderBundleIdentifier(providerBundleId
 	return x
 }
 
+// ProviderConfiguration calls the underlying ProviderConfiguration.
+func (x *NETunnelProviderProtocol) ProviderConfiguration() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ProviderConfiguration()
+}
+
+// SetProviderConfiguration calls the underlying SetProviderConfiguration.
+func (x *NETunnelProviderProtocol) SetProviderConfiguration(providerConfiguration *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
+	x.inner.SetProviderConfiguration(providerConfiguration)
+}
+
+// ProviderBundleIdentifier calls the underlying ProviderBundleIdentifier.
+func (x *NETunnelProviderProtocol) ProviderBundleIdentifier() string {
+	_r := x.inner.ProviderBundleIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetProviderBundleIdentifier calls the underlying SetProviderBundleIdentifier.
+func (x *NETunnelProviderProtocol) SetProviderBundleIdentifier(providerBundleIdentifier string) {
+	x.inner.SetProviderBundleIdentifier(foundation.NSStringStringWithUTF8String(providerBundleIdentifier))
+}
+
 func (x *NETunnelProviderProtocol) asNEVPNProtocol() *raw.NEVPNProtocol { return &x.inner.NEVPNProtocol }
+
+// NETunnelProviderProtocolable is the interface implemented by [NETunnelProviderProtocol], for mocking and DI.
+type NETunnelProviderProtocolable interface {
+	Unwrap() *raw.NETunnelProviderProtocol
+	WithProviderConfiguration(providerConfiguration *foundation.NSDictionary[*foundation.NSString, objc.ID]) *NETunnelProviderProtocol
+	WithProviderBundleIdentifier(providerBundleIdentifier string) *NETunnelProviderProtocol
+	ProviderConfiguration() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	SetProviderConfiguration(providerConfiguration *foundation.NSDictionary[*foundation.NSString, objc.ID])
+	ProviderBundleIdentifier() string
+	SetProviderBundleIdentifier(providerBundleIdentifier string)
+}
+
+var _ NETunnelProviderProtocolable = (*NETunnelProviderProtocol)(nil)
 

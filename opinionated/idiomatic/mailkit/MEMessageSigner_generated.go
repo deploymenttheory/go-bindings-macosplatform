@@ -7,6 +7,7 @@ package mailkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mailkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -31,10 +32,32 @@ func (x *MessageSigner) EmailAddresses() []*raw.MEEmailAddress {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MEEmailAddress, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MEEmailAddress {
+		return raw.MEEmailAddressFromID(purego.Retain(_id))
+	})
 }
+
+// Label calls the underlying Label.
+func (x *MessageSigner) Label() string {
+	_r := x.inner.Label()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Context calls the underlying Context.
+func (x *MessageSigner) Context() *foundation.NSData {
+	return x.inner.Context()
+}
+
+// MessageSignerable is the interface implemented by [MessageSigner], for mocking and DI.
+type MessageSignerable interface {
+	Unwrap() *raw.MEMessageSigner
+	EmailAddresses() []*raw.MEEmailAddress
+	Label() string
+	Context() *foundation.NSData
+}
+
+var _ MessageSignerable = (*MessageSigner)(nil)
 

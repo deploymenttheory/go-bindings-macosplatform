@@ -25,5 +25,36 @@ func NewPDF417CodeDescriptorWithPayloadIsCompactRowCountColumnCount(errorCorrect
 	return &PDF417CodeDescriptor{inner: raw.CIPDF417CodeDescriptorFromID(_id)}
 }
 
+// ErrorCorrectedPayload calls the underlying ErrorCorrectedPayload.
+func (x *PDF417CodeDescriptor) ErrorCorrectedPayload() *foundation.NSData {
+	return x.inner.ErrorCorrectedPayload()
+}
+
+// IsCompact calls the underlying IsCompact.
+func (x *PDF417CodeDescriptor) IsCompact() bool {
+	return x.inner.IsCompact()
+}
+
+// RowCount calls the underlying RowCount.
+func (x *PDF417CodeDescriptor) RowCount() int {
+	return x.inner.RowCount()
+}
+
+// ColumnCount calls the underlying ColumnCount.
+func (x *PDF417CodeDescriptor) ColumnCount() int {
+	return x.inner.ColumnCount()
+}
+
 func (x *PDF417CodeDescriptor) asBarcodeDescriptor() *raw.CIBarcodeDescriptor { return &x.inner.CIBarcodeDescriptor }
+
+// PDF417CodeDescriptorable is the interface implemented by [PDF417CodeDescriptor], for mocking and DI.
+type PDF417CodeDescriptorable interface {
+	Unwrap() *raw.CIPDF417CodeDescriptor
+	ErrorCorrectedPayload() *foundation.NSData
+	IsCompact() bool
+	RowCount() int
+	ColumnCount() int
+}
+
+var _ PDF417CodeDescriptorable = (*PDF417CodeDescriptor)(nil)
 

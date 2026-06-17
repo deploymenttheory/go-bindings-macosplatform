@@ -7,6 +7,7 @@ package avfoundation
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // CompositionTrackFormatDescriptionReplacement wraps [raw.AVCompositionTrackFormatDescriptionReplacement] with a fluent Go API.
@@ -22,4 +23,23 @@ func NewCompositionTrackFormatDescriptionReplacement() *CompositionTrackFormatDe
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCompositionTrackFormatDescriptionReplacement")), objc.RegisterName("new"))
 	return &CompositionTrackFormatDescriptionReplacement{inner: raw.AVCompositionTrackFormatDescriptionReplacementFromID(_id)}
 }
+
+// OriginalFormatDescription calls the underlying OriginalFormatDescription.
+func (x *CompositionTrackFormatDescriptionReplacement) OriginalFormatDescription() unsafe.Pointer {
+	return x.inner.OriginalFormatDescription()
+}
+
+// ReplacementFormatDescription calls the underlying ReplacementFormatDescription.
+func (x *CompositionTrackFormatDescriptionReplacement) ReplacementFormatDescription() unsafe.Pointer {
+	return x.inner.ReplacementFormatDescription()
+}
+
+// CompositionTrackFormatDescriptionReplacementable is the interface implemented by [CompositionTrackFormatDescriptionReplacement], for mocking and DI.
+type CompositionTrackFormatDescriptionReplacementable interface {
+	Unwrap() *raw.AVCompositionTrackFormatDescriptionReplacement
+	OriginalFormatDescription() unsafe.Pointer
+	ReplacementFormatDescription() unsafe.Pointer
+}
+
+var _ CompositionTrackFormatDescriptionReplacementable = (*CompositionTrackFormatDescriptionReplacement)(nil)
 

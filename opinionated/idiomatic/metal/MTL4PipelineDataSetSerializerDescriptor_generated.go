@@ -29,3 +29,23 @@ func (x *MTL4PipelineDataSetSerializerDescriptor) WithConfiguration(configuratio
 	return x
 }
 
+// Configuration calls the underlying Configuration.
+func (x *MTL4PipelineDataSetSerializerDescriptor) Configuration() raw.MTL4PipelineDataSetSerializerConfiguration {
+	return x.inner.Configuration()
+}
+
+// SetConfiguration calls the underlying SetConfiguration.
+func (x *MTL4PipelineDataSetSerializerDescriptor) SetConfiguration(configuration raw.MTL4PipelineDataSetSerializerConfiguration) {
+	x.inner.SetConfiguration(configuration)
+}
+
+// MTL4PipelineDataSetSerializerDescriptorable is the interface implemented by [MTL4PipelineDataSetSerializerDescriptor], for mocking and DI.
+type MTL4PipelineDataSetSerializerDescriptorable interface {
+	Unwrap() *raw.MTL4PipelineDataSetSerializerDescriptor
+	WithConfiguration(configuration raw.MTL4PipelineDataSetSerializerConfiguration) *MTL4PipelineDataSetSerializerDescriptor
+	Configuration() raw.MTL4PipelineDataSetSerializerConfiguration
+	SetConfiguration(configuration raw.MTL4PipelineDataSetSerializerConfiguration)
+}
+
+var _ MTL4PipelineDataSetSerializerDescriptorable = (*MTL4PipelineDataSetSerializerDescriptor)(nil)
+

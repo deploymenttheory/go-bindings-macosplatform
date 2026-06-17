@@ -49,5 +49,55 @@ func (x *MTRContentLauncherClusterLauncherResponseParams) WithTimedInvokeTimeout
 	return x
 }
 
+// Status calls the underlying Status.
+func (x *MTRContentLauncherClusterLauncherResponseParams) Status() *foundation.NSNumber {
+	return x.inner.Status()
+}
+
+// SetStatus calls the underlying SetStatus.
+func (x *MTRContentLauncherClusterLauncherResponseParams) SetStatus(status *foundation.NSNumber) {
+	x.inner.SetStatus(status)
+}
+
+// Data calls the underlying Data.
+func (x *MTRContentLauncherClusterLauncherResponseParams) Data() string {
+	_r := x.inner.Data()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetData calls the underlying SetData.
+func (x *MTRContentLauncherClusterLauncherResponseParams) SetData(data string) {
+	x.inner.SetData(foundation.NSStringStringWithUTF8String(data))
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRContentLauncherClusterLauncherResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRContentLauncherClusterLauncherResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
 func (x *MTRContentLauncherClusterLauncherResponseParams) asMTRContentLauncherClusterLauncherResponseParams() *raw.MTRContentLauncherClusterLauncherResponseParams { return x.inner }
+
+// MTRContentLauncherClusterLauncherResponseParamsable is the interface implemented by [MTRContentLauncherClusterLauncherResponseParams], for mocking and DI.
+type MTRContentLauncherClusterLauncherResponseParamsable interface {
+	Unwrap() *raw.MTRContentLauncherClusterLauncherResponseParams
+	WithStatus(status *foundation.NSNumber) *MTRContentLauncherClusterLauncherResponseParams
+	WithData(data string) *MTRContentLauncherClusterLauncherResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRContentLauncherClusterLauncherResponseParams
+	Status() *foundation.NSNumber
+	SetStatus(status *foundation.NSNumber)
+	Data() string
+	SetData(data string)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+}
+
+var _ MTRContentLauncherClusterLauncherResponseParamsable = (*MTRContentLauncherClusterLauncherResponseParams)(nil)
 

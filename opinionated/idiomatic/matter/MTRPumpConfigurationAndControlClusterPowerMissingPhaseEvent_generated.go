@@ -23,3 +23,10 @@ func NewMTRPumpConfigurationAndControlClusterPowerMissingPhaseEvent() *MTRPumpCo
 	return &MTRPumpConfigurationAndControlClusterPowerMissingPhaseEvent{inner: raw.MTRPumpConfigurationAndControlClusterPowerMissingPhaseEventFromID(_id)}
 }
 
+// MTRPumpConfigurationAndControlClusterPowerMissingPhaseEventable is the interface implemented by [MTRPumpConfigurationAndControlClusterPowerMissingPhaseEvent], for mocking and DI.
+type MTRPumpConfigurationAndControlClusterPowerMissingPhaseEventable interface {
+	Unwrap() *raw.MTRPumpConfigurationAndControlClusterPowerMissingPhaseEvent
+}
+
+var _ MTRPumpConfigurationAndControlClusterPowerMissingPhaseEventable = (*MTRPumpConfigurationAndControlClusterPowerMissingPhaseEvent)(nil)
+

@@ -5,8 +5,10 @@
 package coredata
 
 import (
+	"context"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -49,18 +51,132 @@ func (x *PersistentContainer) WithPersistentStoreDescriptions(items ...*raw.NSPe
 	return x
 }
 
+// LoadPersistentStores blocks until the operation completes or ctx is cancelled.
+func (x *PersistentContainer) LoadPersistentStores(ctx context.Context) (*PersistentStoreDescription, error) {
+	type _result struct {
+		val *PersistentStoreDescription
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.LoadPersistentStoresWithCompletionHandler(func(_p0 *raw.NSPersistentStoreDescription, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &PersistentStoreDescription{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *PersistentStoreDescription
+		return _zero, ctx.Err()
+	}
+}
+
+// NewBackgroundContext calls the underlying NewBackgroundContext.
+func (x *PersistentContainer) NewBackgroundContext() *ManagedObjectContext {
+	_r := x.inner.NewBackgroundContext()
+	if _r == nil {
+		return nil
+	}
+	return &ManagedObjectContext{inner: _r}
+}
+
+// PerformBackgroundTask blocks until the operation completes or ctx is cancelled.
+func (x *PersistentContainer) PerformBackgroundTask(ctx context.Context) (*ManagedObjectContext, error) {
+	type _result struct {
+		val *ManagedObjectContext
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.PerformBackgroundTask(func(_p0 *raw.NSManagedObjectContext) {
+		var _o _result
+		if _p0 != nil {
+			_o.val = &ManagedObjectContext{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *ManagedObjectContext
+		return _zero, ctx.Err()
+	}
+}
+
+// Name calls the underlying Name.
+func (x *PersistentContainer) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ViewContext calls the underlying ViewContext.
+func (x *PersistentContainer) ViewContext() *ManagedObjectContext {
+	_r := x.inner.ViewContext()
+	if _r == nil {
+		return nil
+	}
+	return &ManagedObjectContext{inner: _r}
+}
+
+// ManagedObjectModel calls the underlying ManagedObjectModel.
+func (x *PersistentContainer) ManagedObjectModel() *ManagedObjectModel {
+	_r := x.inner.ManagedObjectModel()
+	if _r == nil {
+		return nil
+	}
+	return &ManagedObjectModel{inner: _r}
+}
+
+// PersistentStoreCoordinator calls the underlying PersistentStoreCoordinator.
+func (x *PersistentContainer) PersistentStoreCoordinator() *PersistentStoreCoordinator {
+	_r := x.inner.PersistentStoreCoordinator()
+	if _r == nil {
+		return nil
+	}
+	return &PersistentStoreCoordinator{inner: _r}
+}
+
 // PersistentStoreDescriptions returns the collection as a Go slice.
 func (x *PersistentContainer) PersistentStoreDescriptions() []*raw.NSPersistentStoreDescription {
 	arr := x.inner.PersistentStoreDescriptions()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSPersistentStoreDescription, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSPersistentStoreDescription {
+		return raw.NSPersistentStoreDescriptionFromID(purego.Retain(_id))
+	})
+}
+
+// SetPersistentStoreDescriptions calls the underlying SetPersistentStoreDescriptions.
+func (x *PersistentContainer) SetPersistentStoreDescriptions(persistentStoreDescriptions *foundation.NSArray[*raw.NSPersistentStoreDescription]) {
+	x.inner.SetPersistentStoreDescriptions(persistentStoreDescriptions)
 }
 
 func (x *PersistentContainer) asPersistentContainer() *raw.NSPersistentContainer { return x.inner }
+
+// PersistentContainerable is the interface implemented by [PersistentContainer], for mocking and DI.
+type PersistentContainerable interface {
+	Unwrap() *raw.NSPersistentContainer
+	WithPersistentStoreDescriptions(items ...*raw.NSPersistentStoreDescription) *PersistentContainer
+	LoadPersistentStores(ctx context.Context) (*PersistentStoreDescription, error)
+	NewBackgroundContext() *ManagedObjectContext
+	PerformBackgroundTask(ctx context.Context) (*ManagedObjectContext, error)
+	Name() string
+	ViewContext() *ManagedObjectContext
+	ManagedObjectModel() *ManagedObjectModel
+	PersistentStoreCoordinator() *PersistentStoreCoordinator
+	PersistentStoreDescriptions() []*raw.NSPersistentStoreDescription
+	SetPersistentStoreDescriptions(persistentStoreDescriptions *foundation.NSArray[*raw.NSPersistentStoreDescription])
+}
+
+var _ PersistentContainerable = (*PersistentContainer)(nil)
 

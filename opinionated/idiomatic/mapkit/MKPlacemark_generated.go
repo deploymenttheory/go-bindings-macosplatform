@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/contacts"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -40,4 +41,21 @@ func NewPlacemarkWithCoordinatePostalAddress(coordinate unsafe.Pointer, postalAd
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoordinate:postalAddress:"), coordinate, postalAddress.Ptr())
 	return &Placemark{inner: raw.MKPlacemarkFromID(_id)}
 }
+
+// CountryCode calls the underlying CountryCode.
+func (x *Placemark) CountryCode() string {
+	_r := x.inner.CountryCode()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Placemarkable is the interface implemented by [Placemark], for mocking and DI.
+type Placemarkable interface {
+	Unwrap() *raw.MKPlacemark
+	CountryCode() string
+}
+
+var _ Placemarkable = (*Placemark)(nil)
 

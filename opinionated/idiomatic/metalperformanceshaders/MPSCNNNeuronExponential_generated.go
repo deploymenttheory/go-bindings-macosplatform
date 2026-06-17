@@ -33,3 +33,10 @@ func (x *CNNNeuronExponential) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { re
 
 func (x *CNNNeuronExponential) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNNeuron.MPSCNNKernel.MPSKernel }
 
+// CNNNeuronExponentialable is the interface implemented by [CNNNeuronExponential], for mocking and DI.
+type CNNNeuronExponentialable interface {
+	Unwrap() *raw.MPSCNNNeuronExponential
+}
+
+var _ CNNNeuronExponentialable = (*CNNNeuronExponential)(nil)
+

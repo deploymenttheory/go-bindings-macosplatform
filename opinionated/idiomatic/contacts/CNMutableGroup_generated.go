@@ -30,5 +30,19 @@ func (x *MutableGroup) WithName(name string) *MutableGroup {
 	return x
 }
 
+// SetName calls the underlying SetName.
+func (x *MutableGroup) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
 func (x *MutableGroup) asGroup() *raw.CNGroup { return &x.inner.CNGroup }
+
+// MutableGroupable is the interface implemented by [MutableGroup], for mocking and DI.
+type MutableGroupable interface {
+	Unwrap() *raw.CNMutableGroup
+	WithName(name string) *MutableGroup
+	SetName(name string)
+}
+
+var _ MutableGroupable = (*MutableGroup)(nil)
 

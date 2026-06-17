@@ -5,6 +5,7 @@
 package vision
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,5 +24,36 @@ func NewFeaturePrintObservation() *FeaturePrintObservation {
 	return &FeaturePrintObservation{inner: raw.VNFeaturePrintObservationFromID(_id)}
 }
 
+// ComputeDistanceToFeaturePrintObservationError calls the underlying ComputeDistanceToFeaturePrintObservationError.
+func (x *FeaturePrintObservation) ComputeDistanceToFeaturePrintObservationError(outDistance *float32, featurePrint *raw.VNFeaturePrintObservation) (bool, error) {
+	return x.inner.ComputeDistanceToFeaturePrintObservationError(outDistance, featurePrint)
+}
+
+// ElementType calls the underlying ElementType.
+func (x *FeaturePrintObservation) ElementType() raw.VNElementType {
+	return x.inner.ElementType()
+}
+
+// ElementCount calls the underlying ElementCount.
+func (x *FeaturePrintObservation) ElementCount() uint {
+	return x.inner.ElementCount()
+}
+
+// Data calls the underlying Data.
+func (x *FeaturePrintObservation) Data() *foundation.NSData {
+	return x.inner.Data()
+}
+
 func (x *FeaturePrintObservation) asObservation() *raw.VNObservation { return &x.inner.VNObservation }
+
+// FeaturePrintObservationable is the interface implemented by [FeaturePrintObservation], for mocking and DI.
+type FeaturePrintObservationable interface {
+	Unwrap() *raw.VNFeaturePrintObservation
+	ComputeDistanceToFeaturePrintObservationError(outDistance *float32, featurePrint *raw.VNFeaturePrintObservation) (bool, error)
+	ElementType() raw.VNElementType
+	ElementCount() uint
+	Data() *foundation.NSData
+}
+
+var _ FeaturePrintObservationable = (*FeaturePrintObservation)(nil)
 

@@ -7,7 +7,9 @@ package eventkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/eventkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // StructuredLocation wraps [raw.EKStructuredLocation] with a fluent Go API.
@@ -36,5 +38,54 @@ func (x *StructuredLocation) WithRadius(radius float64) *StructuredLocation {
 	return x
 }
 
+// Title calls the underlying Title.
+func (x *StructuredLocation) Title() string {
+	_r := x.inner.Title()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetTitle calls the underlying SetTitle.
+func (x *StructuredLocation) SetTitle(title string) {
+	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+}
+
+// GeoLocation calls the underlying GeoLocation.
+func (x *StructuredLocation) GeoLocation() unsafe.Pointer {
+	return x.inner.GeoLocation()
+}
+
+// SetGeoLocation calls the underlying SetGeoLocation.
+func (x *StructuredLocation) SetGeoLocation(geoLocation unsafe.Pointer) {
+	x.inner.SetGeoLocation(geoLocation)
+}
+
+// Radius calls the underlying Radius.
+func (x *StructuredLocation) Radius() float64 {
+	return x.inner.Radius()
+}
+
+// SetRadius calls the underlying SetRadius.
+func (x *StructuredLocation) SetRadius(radius float64) {
+	x.inner.SetRadius(radius)
+}
+
 func (x *StructuredLocation) asObject() *raw.EKObject { return &x.inner.EKObject }
+
+// StructuredLocationable is the interface implemented by [StructuredLocation], for mocking and DI.
+type StructuredLocationable interface {
+	Unwrap() *raw.EKStructuredLocation
+	WithTitle(title string) *StructuredLocation
+	WithRadius(radius float64) *StructuredLocation
+	Title() string
+	SetTitle(title string)
+	GeoLocation() unsafe.Pointer
+	SetGeoLocation(geoLocation unsafe.Pointer)
+	Radius() float64
+	SetRadius(radius float64)
+}
+
+var _ StructuredLocationable = (*StructuredLocation)(nil)
 

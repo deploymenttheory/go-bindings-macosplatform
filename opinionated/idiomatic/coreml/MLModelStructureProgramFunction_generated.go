@@ -6,6 +6,7 @@ package coreml
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -29,10 +30,26 @@ func (x *ModelStructureProgramFunction) Inputs() []*raw.MLModelStructureProgramN
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MLModelStructureProgramNamedValueType, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MLModelStructureProgramNamedValueType {
+		return raw.MLModelStructureProgramNamedValueTypeFromID(purego.Retain(_id))
+	})
 }
+
+// Block calls the underlying Block.
+func (x *ModelStructureProgramFunction) Block() *ModelStructureProgramBlock {
+	_r := x.inner.Block()
+	if _r == nil {
+		return nil
+	}
+	return &ModelStructureProgramBlock{inner: _r}
+}
+
+// ModelStructureProgramFunctionable is the interface implemented by [ModelStructureProgramFunction], for mocking and DI.
+type ModelStructureProgramFunctionable interface {
+	Unwrap() *raw.MLModelStructureProgramFunction
+	Inputs() []*raw.MLModelStructureProgramNamedValueType
+	Block() *ModelStructureProgramBlock
+}
+
+var _ ModelStructureProgramFunctionable = (*ModelStructureProgramFunction)(nil)
 

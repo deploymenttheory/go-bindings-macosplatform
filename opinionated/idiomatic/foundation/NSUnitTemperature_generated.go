@@ -29,3 +29,10 @@ func (x *UnitTemperature) asUnit() *raw.NSUnit { return &x.inner.NSDimension.NSU
 
 func (x *UnitTemperature) asObject() *raw.NSObject { return &x.inner.NSDimension.NSUnit.NSObject }
 
+// UnitTemperatureable is the interface implemented by [UnitTemperature], for mocking and DI.
+type UnitTemperatureable interface {
+	Unwrap() *raw.NSUnitTemperature
+}
+
+var _ UnitTemperatureable = (*UnitTemperature)(nil)
+

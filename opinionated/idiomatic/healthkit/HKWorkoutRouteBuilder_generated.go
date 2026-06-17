@@ -5,8 +5,12 @@
 package healthkit
 
 import (
+	"context"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // WorkoutRouteBuilder wraps [raw.HKWorkoutRouteBuilder] with a fluent Go API.
@@ -24,5 +28,51 @@ func NewWorkoutRouteBuilderWithHealthStoreDevice(healthStore *raw.HKHealthStore,
 	return &WorkoutRouteBuilder{inner: raw.HKWorkoutRouteBuilderFromID(_id)}
 }
 
+// InsertRouteDataCompletion calls the underlying InsertRouteDataCompletion.
+func (x *WorkoutRouteBuilder) InsertRouteDataCompletion(routeData *foundation.NSArray[objc.ID], completion func(bool, unsafe.Pointer)) {
+	x.inner.InsertRouteDataCompletion(routeData, completion)
+}
+
+// AddMetadataCompletion calls the underlying AddMetadataCompletion.
+func (x *WorkoutRouteBuilder) AddMetadataCompletion(metadata *foundation.NSDictionary[*foundation.NSString, objc.ID], completion func(bool, unsafe.Pointer)) {
+	x.inner.AddMetadataCompletion(metadata, completion)
+}
+
+// FinishRouteWithWorkoutMetadataCompletion blocks until the operation completes or ctx is cancelled.
+func (x *WorkoutRouteBuilder) FinishRouteWithWorkoutMetadataCompletion(ctx context.Context, workout *raw.HKWorkout, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*WorkoutRoute, error) {
+	type _result struct {
+		val *WorkoutRoute
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.FinishRouteWithWorkoutMetadataCompletion(workout, metadata, func(_p0 *raw.HKWorkoutRoute, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &WorkoutRoute{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *WorkoutRoute
+		return _zero, ctx.Err()
+	}
+}
+
 func (x *WorkoutRouteBuilder) asSeriesBuilder() *raw.HKSeriesBuilder { return &x.inner.HKSeriesBuilder }
+
+// WorkoutRouteBuilderable is the interface implemented by [WorkoutRouteBuilder], for mocking and DI.
+type WorkoutRouteBuilderable interface {
+	Unwrap() *raw.HKWorkoutRouteBuilder
+	InsertRouteDataCompletion(routeData *foundation.NSArray[objc.ID], completion func(bool, unsafe.Pointer))
+	AddMetadataCompletion(metadata *foundation.NSDictionary[*foundation.NSString, objc.ID], completion func(bool, unsafe.Pointer))
+	FinishRouteWithWorkoutMetadataCompletion(ctx context.Context, workout *raw.HKWorkout, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*WorkoutRoute, error)
+}
+
+var _ WorkoutRouteBuilderable = (*WorkoutRouteBuilder)(nil)
 

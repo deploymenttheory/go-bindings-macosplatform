@@ -6,6 +6,7 @@ package speech
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/speech"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,16 +24,48 @@ func NewSpeechRecognitionResult() *SpeechRecognitionResult {
 	return &SpeechRecognitionResult{inner: raw.SFSpeechRecognitionResultFromID(_id)}
 }
 
+// BestTranscription calls the underlying BestTranscription.
+func (x *SpeechRecognitionResult) BestTranscription() *Transcription {
+	_r := x.inner.BestTranscription()
+	if _r == nil {
+		return nil
+	}
+	return &Transcription{inner: _r}
+}
+
 // Transcriptions returns the collection as a Go slice.
 func (x *SpeechRecognitionResult) Transcriptions() []*raw.SFTranscription {
 	arr := x.inner.Transcriptions()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.SFTranscription, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SFTranscription {
+		return raw.SFTranscriptionFromID(purego.Retain(_id))
+	})
 }
+
+// IsFinal calls the underlying IsFinal.
+func (x *SpeechRecognitionResult) IsFinal() bool {
+	return x.inner.IsFinal()
+}
+
+// SpeechRecognitionMetadata calls the underlying SpeechRecognitionMetadata.
+func (x *SpeechRecognitionResult) SpeechRecognitionMetadata() *SpeechRecognitionMetadata {
+	_r := x.inner.SpeechRecognitionMetadata()
+	if _r == nil {
+		return nil
+	}
+	return &SpeechRecognitionMetadata{inner: _r}
+}
+
+// SpeechRecognitionResultable is the interface implemented by [SpeechRecognitionResult], for mocking and DI.
+type SpeechRecognitionResultable interface {
+	Unwrap() *raw.SFSpeechRecognitionResult
+	BestTranscription() *Transcription
+	Transcriptions() []*raw.SFTranscription
+	IsFinal() bool
+	SpeechRecognitionMetadata() *SpeechRecognitionMetadata
+}
+
+var _ SpeechRecognitionResultable = (*SpeechRecognitionResult)(nil)
 

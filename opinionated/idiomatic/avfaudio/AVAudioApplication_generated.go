@@ -23,3 +23,34 @@ func NewAudioApplication() *AudioApplication {
 	return &AudioApplication{inner: raw.AVAudioApplicationFromID(_id)}
 }
 
+// SetInputMutedError calls the underlying SetInputMutedError.
+func (x *AudioApplication) SetInputMutedError(muted bool) (bool, error) {
+	return x.inner.SetInputMutedError(muted)
+}
+
+// SetInputMuteStateChangeHandlerError calls the underlying SetInputMuteStateChangeHandlerError.
+func (x *AudioApplication) SetInputMuteStateChangeHandlerError(inputMuteHandler func(bool) bool) (bool, error) {
+	return x.inner.SetInputMuteStateChangeHandlerError(inputMuteHandler)
+}
+
+// IsInputMuted calls the underlying IsInputMuted.
+func (x *AudioApplication) IsInputMuted() bool {
+	return x.inner.IsInputMuted()
+}
+
+// RecordPermission calls the underlying RecordPermission.
+func (x *AudioApplication) RecordPermission() raw.AVAudioApplicationRecordPermission {
+	return x.inner.RecordPermission()
+}
+
+// AudioApplicationable is the interface implemented by [AudioApplication], for mocking and DI.
+type AudioApplicationable interface {
+	Unwrap() *raw.AVAudioApplication
+	SetInputMutedError(muted bool) (bool, error)
+	SetInputMuteStateChangeHandlerError(inputMuteHandler func(bool) bool) (bool, error)
+	IsInputMuted() bool
+	RecordPermission() raw.AVAudioApplicationRecordPermission
+}
+
+var _ AudioApplicationable = (*AudioApplication)(nil)
+

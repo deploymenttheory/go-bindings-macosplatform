@@ -37,3 +37,23 @@ func (x *MTRICDManagementClusterRegisterClientResponseParams) WithIcdCounter(icd
 	return x
 }
 
+// IcdCounter calls the underlying IcdCounter.
+func (x *MTRICDManagementClusterRegisterClientResponseParams) IcdCounter() *foundation.NSNumber {
+	return x.inner.IcdCounter()
+}
+
+// SetIcdCounter calls the underlying SetIcdCounter.
+func (x *MTRICDManagementClusterRegisterClientResponseParams) SetIcdCounter(icdCounter *foundation.NSNumber) {
+	x.inner.SetIcdCounter(icdCounter)
+}
+
+// MTRICDManagementClusterRegisterClientResponseParamsable is the interface implemented by [MTRICDManagementClusterRegisterClientResponseParams], for mocking and DI.
+type MTRICDManagementClusterRegisterClientResponseParamsable interface {
+	Unwrap() *raw.MTRICDManagementClusterRegisterClientResponseParams
+	WithIcdCounter(icdCounter *foundation.NSNumber) *MTRICDManagementClusterRegisterClientResponseParams
+	IcdCounter() *foundation.NSNumber
+	SetIcdCounter(icdCounter *foundation.NSNumber)
+}
+
+var _ MTRICDManagementClusterRegisterClientResponseParamsable = (*MTRICDManagementClusterRegisterClientResponseParams)(nil)
+

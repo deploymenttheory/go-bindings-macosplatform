@@ -36,7 +36,50 @@ func (x *CircleRenderer) WithStrokeEnd(strokeEnd float64) *CircleRenderer {
 	return x
 }
 
+// Circle calls the underlying Circle.
+func (x *CircleRenderer) Circle() *Circle {
+	_r := x.inner.Circle()
+	if _r == nil {
+		return nil
+	}
+	return &Circle{inner: _r}
+}
+
+// StrokeStart calls the underlying StrokeStart.
+func (x *CircleRenderer) StrokeStart() float64 {
+	return x.inner.StrokeStart()
+}
+
+// SetStrokeStart calls the underlying SetStrokeStart.
+func (x *CircleRenderer) SetStrokeStart(strokeStart float64) {
+	x.inner.SetStrokeStart(strokeStart)
+}
+
+// StrokeEnd calls the underlying StrokeEnd.
+func (x *CircleRenderer) StrokeEnd() float64 {
+	return x.inner.StrokeEnd()
+}
+
+// SetStrokeEnd calls the underlying SetStrokeEnd.
+func (x *CircleRenderer) SetStrokeEnd(strokeEnd float64) {
+	x.inner.SetStrokeEnd(strokeEnd)
+}
+
 func (x *CircleRenderer) asOverlayPathRenderer() *raw.MKOverlayPathRenderer { return &x.inner.MKOverlayPathRenderer }
 
 func (x *CircleRenderer) asOverlayRenderer() *raw.MKOverlayRenderer { return &x.inner.MKOverlayPathRenderer.MKOverlayRenderer }
+
+// CircleRendererable is the interface implemented by [CircleRenderer], for mocking and DI.
+type CircleRendererable interface {
+	Unwrap() *raw.MKCircleRenderer
+	WithStrokeStart(strokeStart float64) *CircleRenderer
+	WithStrokeEnd(strokeEnd float64) *CircleRenderer
+	Circle() *Circle
+	StrokeStart() float64
+	SetStrokeStart(strokeStart float64)
+	StrokeEnd() float64
+	SetStrokeEnd(strokeEnd float64)
+}
+
+var _ CircleRendererable = (*CircleRenderer)(nil)
 

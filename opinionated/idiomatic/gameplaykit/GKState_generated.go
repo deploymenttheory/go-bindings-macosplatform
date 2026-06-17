@@ -23,3 +23,44 @@ func NewState() *State {
 	return &State{inner: raw.GKStateFromID(_id)}
 }
 
+// IsValidNextState calls the underlying IsValidNextState.
+func (x *State) IsValidNextState(stateClass objc.Class) bool {
+	return x.inner.IsValidNextState(stateClass)
+}
+
+// DidEnterWithPreviousState calls the underlying DidEnterWithPreviousState.
+func (x *State) DidEnterWithPreviousState(previousState *raw.GKState) {
+	x.inner.DidEnterWithPreviousState(previousState)
+}
+
+// UpdateWithDeltaTime calls the underlying UpdateWithDeltaTime.
+func (x *State) UpdateWithDeltaTime(seconds float64) {
+	x.inner.UpdateWithDeltaTime(seconds)
+}
+
+// WillExitWithNextState calls the underlying WillExitWithNextState.
+func (x *State) WillExitWithNextState(nextState *raw.GKState) {
+	x.inner.WillExitWithNextState(nextState)
+}
+
+// StateMachine calls the underlying StateMachine.
+func (x *State) StateMachine() *StateMachine {
+	_r := x.inner.StateMachine()
+	if _r == nil {
+		return nil
+	}
+	return &StateMachine{inner: _r}
+}
+
+// Stateable is the interface implemented by [State], for mocking and DI.
+type Stateable interface {
+	Unwrap() *raw.GKState
+	IsValidNextState(stateClass objc.Class) bool
+	DidEnterWithPreviousState(previousState *raw.GKState)
+	UpdateWithDeltaTime(seconds float64)
+	WillExitWithNextState(nextState *raw.GKState)
+	StateMachine() *StateMachine
+}
+
+var _ Stateable = (*State)(nil)
+

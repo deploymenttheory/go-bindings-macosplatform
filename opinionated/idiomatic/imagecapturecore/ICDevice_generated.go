@@ -33,15 +33,30 @@ func (x *Device) WithDelegate(delegate raw.ICDeviceDelegate) *Device {
 	return x
 }
 
+// RequestOpenSession calls the underlying RequestOpenSession.
+func (x *Device) RequestOpenSession() {
+	x.inner.RequestOpenSession()
+}
+
+// RequestCloseSession calls the underlying RequestCloseSession.
+func (x *Device) RequestCloseSession() {
+	x.inner.RequestCloseSession()
+}
+
+// RequestEject calls the underlying RequestEject.
+func (x *Device) RequestEject() {
+	x.inner.RequestEject()
+}
+
 // RequestOpenSessionWithOptionsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *Device) RequestOpenSessionWithOptionsCompletion(ctx context.Context, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) error {
 	_ch := make(chan error, 1)
 	x.inner.RequestOpenSessionWithOptionsCompletion(options, func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -55,11 +70,11 @@ func (x *Device) RequestOpenSessionWithOptionsCompletion(ctx context.Context, op
 func (x *Device) RequestCloseSessionWithOptionsCompletion(ctx context.Context, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) error {
 	_ch := make(chan error, 1)
 	x.inner.RequestCloseSessionWithOptionsCompletion(options, func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -73,11 +88,11 @@ func (x *Device) RequestCloseSessionWithOptionsCompletion(ctx context.Context, o
 func (x *Device) RequestEjectWithCompletion(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.RequestEjectWithCompletion(func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -87,18 +102,207 @@ func (x *Device) RequestEjectWithCompletion(ctx context.Context) error {
 	}
 }
 
+// RequestSendMessageOutDataMaxReturnedDataSizeSendMessageDelegateDidSendMessageSelectorContextInfo calls the underlying RequestSendMessageOutDataMaxReturnedDataSizeSendMessageDelegateDidSendMessageSelectorContextInfo.
+func (x *Device) RequestSendMessageOutDataMaxReturnedDataSizeSendMessageDelegateDidSendMessageSelectorContextInfo(messageCode uint, data *foundation.NSData, maxReturnedDataSize uint, sendMessageDelegate objc.ID, selector objc.SEL, contextInfo unsafe.Pointer) {
+	x.inner.RequestSendMessageOutDataMaxReturnedDataSizeSendMessageDelegateDidSendMessageSelectorContextInfo(messageCode, data, maxReturnedDataSize, sendMessageDelegate, selector, contextInfo)
+}
+
+// RequestEjectOrDisconnect calls the underlying RequestEjectOrDisconnect.
+func (x *Device) RequestEjectOrDisconnect() {
+	x.inner.RequestEjectOrDisconnect()
+}
+
+// RequestYield calls the underlying RequestYield.
+func (x *Device) RequestYield() {
+	x.inner.RequestYield()
+}
+
+// Delegate calls the underlying Delegate.
+func (x *Device) Delegate() raw.ICDeviceDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *Device) SetDelegate(delegate raw.ICDeviceDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// Type calls the underlying Type.
+func (x *Device) Type() raw.ICDeviceType {
+	return x.inner.Type()
+}
+
 // Capabilities returns the collection as a Go slice.
-func (x *Device) Capabilities() []*foundation.NSString {
+func (x *Device) Capabilities() []string {
 	arr := x.inner.Capabilities()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// Name calls the underlying Name.
+func (x *Device) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
 	}
-	return out
+	return purego.GoString(_r.Ptr())
+}
+
+// ProductKind calls the underlying ProductKind.
+func (x *Device) ProductKind() string {
+	_r := x.inner.ProductKind()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Icon calls the underlying Icon.
+func (x *Device) Icon() unsafe.Pointer {
+	return x.inner.Icon()
+}
+
+// SystemSymbolName calls the underlying SystemSymbolName.
+func (x *Device) SystemSymbolName() string {
+	_r := x.inner.SystemSymbolName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// TransportType calls the underlying TransportType.
+func (x *Device) TransportType() string {
+	_r := x.inner.TransportType()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// UUIDString calls the underlying UUIDString.
+func (x *Device) UUIDString() string {
+	_r := x.inner.UUIDString()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// LocationDescription calls the underlying LocationDescription.
+func (x *Device) LocationDescription() unsafe.Pointer {
+	return x.inner.LocationDescription()
+}
+
+// HasOpenSession calls the underlying HasOpenSession.
+func (x *Device) HasOpenSession() bool {
+	return x.inner.HasOpenSession()
+}
+
+// UserData calls the underlying UserData.
+func (x *Device) UserData() *foundation.NSMutableDictionary[objc.ID, objc.ID] {
+	return x.inner.UserData()
+}
+
+// ModulePath calls the underlying ModulePath.
+func (x *Device) ModulePath() unsafe.Pointer {
+	return x.inner.ModulePath()
+}
+
+// ModuleVersion calls the underlying ModuleVersion.
+func (x *Device) ModuleVersion() unsafe.Pointer {
+	return x.inner.ModuleVersion()
+}
+
+// SerialNumberString calls the underlying SerialNumberString.
+func (x *Device) SerialNumberString() unsafe.Pointer {
+	return x.inner.SerialNumberString()
+}
+
+// UsbLocationID calls the underlying UsbLocationID.
+func (x *Device) UsbLocationID() int {
+	return x.inner.UsbLocationID()
+}
+
+// UsbProductID calls the underlying UsbProductID.
+func (x *Device) UsbProductID() int {
+	return x.inner.UsbProductID()
+}
+
+// UsbVendorID calls the underlying UsbVendorID.
+func (x *Device) UsbVendorID() int {
+	return x.inner.UsbVendorID()
+}
+
+// AutolaunchApplicationPath calls the underlying AutolaunchApplicationPath.
+func (x *Device) AutolaunchApplicationPath() unsafe.Pointer {
+	return x.inner.AutolaunchApplicationPath()
+}
+
+// SetAutolaunchApplicationPath calls the underlying SetAutolaunchApplicationPath.
+func (x *Device) SetAutolaunchApplicationPath(autolaunchApplicationPath unsafe.Pointer) {
+	x.inner.SetAutolaunchApplicationPath(autolaunchApplicationPath)
+}
+
+// IsRemote calls the underlying IsRemote.
+func (x *Device) IsRemote() bool {
+	return x.inner.IsRemote()
+}
+
+// PersistentIDString calls the underlying PersistentIDString.
+func (x *Device) PersistentIDString() unsafe.Pointer {
+	return x.inner.PersistentIDString()
+}
+
+// ModuleExecutableArchitecture calls the underlying ModuleExecutableArchitecture.
+func (x *Device) ModuleExecutableArchitecture() int {
+	return x.inner.ModuleExecutableArchitecture()
 }
 
 func (x *Device) asDevice() *raw.ICDevice { return x.inner }
+
+// Deviceable is the interface implemented by [Device], for mocking and DI.
+type Deviceable interface {
+	Unwrap() *raw.ICDevice
+	WithDelegate(delegate raw.ICDeviceDelegate) *Device
+	RequestOpenSession()
+	RequestCloseSession()
+	RequestEject()
+	RequestOpenSessionWithOptionsCompletion(ctx context.Context, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) error
+	RequestCloseSessionWithOptionsCompletion(ctx context.Context, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) error
+	RequestEjectWithCompletion(ctx context.Context) error
+	RequestSendMessageOutDataMaxReturnedDataSizeSendMessageDelegateDidSendMessageSelectorContextInfo(messageCode uint, data *foundation.NSData, maxReturnedDataSize uint, sendMessageDelegate objc.ID, selector objc.SEL, contextInfo unsafe.Pointer)
+	RequestEjectOrDisconnect()
+	RequestYield()
+	Delegate() raw.ICDeviceDelegate
+	SetDelegate(delegate raw.ICDeviceDelegate)
+	Type() raw.ICDeviceType
+	Capabilities() []string
+	Name() string
+	ProductKind() string
+	Icon() unsafe.Pointer
+	SystemSymbolName() string
+	TransportType() string
+	UUIDString() string
+	LocationDescription() unsafe.Pointer
+	HasOpenSession() bool
+	UserData() *foundation.NSMutableDictionary[objc.ID, objc.ID]
+	ModulePath() unsafe.Pointer
+	ModuleVersion() unsafe.Pointer
+	SerialNumberString() unsafe.Pointer
+	UsbLocationID() int
+	UsbProductID() int
+	UsbVendorID() int
+	AutolaunchApplicationPath() unsafe.Pointer
+	SetAutolaunchApplicationPath(autolaunchApplicationPath unsafe.Pointer)
+	IsRemote() bool
+	PersistentIDString() unsafe.Pointer
+	ModuleExecutableArchitecture() int
+}
+
+var _ Deviceable = (*Device)(nil)
 

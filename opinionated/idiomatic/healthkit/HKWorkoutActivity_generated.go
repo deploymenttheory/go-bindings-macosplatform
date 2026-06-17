@@ -7,6 +7,7 @@ package healthkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -25,16 +26,78 @@ func NewWorkoutActivityWithWorkoutConfigurationStartDateEndDateMetadata(workoutC
 	return &WorkoutActivity{inner: raw.HKWorkoutActivityFromID(_id)}
 }
 
+// StatisticsForType calls the underlying StatisticsForType.
+func (x *WorkoutActivity) StatisticsForType(quantityType *raw.HKQuantityType) *Statistics {
+	_r := x.inner.StatisticsForType(quantityType)
+	if _r == nil {
+		return nil
+	}
+	return &Statistics{inner: _r}
+}
+
+// UUID calls the underlying UUID.
+func (x *WorkoutActivity) UUID() *foundation.NSUUID {
+	return x.inner.UUID()
+}
+
+// WorkoutConfiguration calls the underlying WorkoutConfiguration.
+func (x *WorkoutActivity) WorkoutConfiguration() *WorkoutConfiguration {
+	_r := x.inner.WorkoutConfiguration()
+	if _r == nil {
+		return nil
+	}
+	return &WorkoutConfiguration{inner: _r}
+}
+
+// StartDate calls the underlying StartDate.
+func (x *WorkoutActivity) StartDate() *foundation.NSDate {
+	return x.inner.StartDate()
+}
+
+// EndDate calls the underlying EndDate.
+func (x *WorkoutActivity) EndDate() *foundation.NSDate {
+	return x.inner.EndDate()
+}
+
+// Metadata calls the underlying Metadata.
+func (x *WorkoutActivity) Metadata() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.Metadata()
+}
+
+// Duration calls the underlying Duration.
+func (x *WorkoutActivity) Duration() float64 {
+	return x.inner.Duration()
+}
+
 // WorkoutEvents returns the collection as a Go slice.
 func (x *WorkoutActivity) WorkoutEvents() []*raw.HKWorkoutEvent {
 	arr := x.inner.WorkoutEvents()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.HKWorkoutEvent, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.HKWorkoutEvent {
+		return raw.HKWorkoutEventFromID(purego.Retain(_id))
+	})
 }
+
+// AllStatistics calls the underlying AllStatistics.
+func (x *WorkoutActivity) AllStatistics() *foundation.NSDictionary[*raw.HKQuantityType, *raw.HKStatistics] {
+	return x.inner.AllStatistics()
+}
+
+// WorkoutActivityable is the interface implemented by [WorkoutActivity], for mocking and DI.
+type WorkoutActivityable interface {
+	Unwrap() *raw.HKWorkoutActivity
+	StatisticsForType(quantityType *raw.HKQuantityType) *Statistics
+	UUID() *foundation.NSUUID
+	WorkoutConfiguration() *WorkoutConfiguration
+	StartDate() *foundation.NSDate
+	EndDate() *foundation.NSDate
+	Metadata() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	Duration() float64
+	WorkoutEvents() []*raw.HKWorkoutEvent
+	AllStatistics() *foundation.NSDictionary[*raw.HKQuantityType, *raw.HKStatistics]
+}
+
+var _ WorkoutActivityable = (*WorkoutActivity)(nil)
 

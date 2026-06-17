@@ -23,5 +23,42 @@ func NewMetadataFaceObject() *MetadataFaceObject {
 	return &MetadataFaceObject{inner: raw.AVMetadataFaceObjectFromID(_id)}
 }
 
+// FaceID calls the underlying FaceID.
+func (x *MetadataFaceObject) FaceID() int {
+	return x.inner.FaceID()
+}
+
+// HasRollAngle calls the underlying HasRollAngle.
+func (x *MetadataFaceObject) HasRollAngle() bool {
+	return x.inner.HasRollAngle()
+}
+
+// RollAngle calls the underlying RollAngle.
+func (x *MetadataFaceObject) RollAngle() float64 {
+	return x.inner.RollAngle()
+}
+
+// HasYawAngle calls the underlying HasYawAngle.
+func (x *MetadataFaceObject) HasYawAngle() bool {
+	return x.inner.HasYawAngle()
+}
+
+// YawAngle calls the underlying YawAngle.
+func (x *MetadataFaceObject) YawAngle() float64 {
+	return x.inner.YawAngle()
+}
+
 func (x *MetadataFaceObject) asMetadataObject() *raw.AVMetadataObject { return &x.inner.AVMetadataObject }
+
+// MetadataFaceObjectable is the interface implemented by [MetadataFaceObject], for mocking and DI.
+type MetadataFaceObjectable interface {
+	Unwrap() *raw.AVMetadataFaceObject
+	FaceID() int
+	HasRollAngle() bool
+	RollAngle() float64
+	HasYawAngle() bool
+	YawAngle() float64
+}
+
+var _ MetadataFaceObjectable = (*MetadataFaceObject)(nil)
 

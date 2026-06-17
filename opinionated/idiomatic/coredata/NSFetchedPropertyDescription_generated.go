@@ -29,5 +29,25 @@ func (x *FetchedPropertyDescription) WithFetchRequest(fetchRequest *raw.NSFetchR
 	return x
 }
 
+// FetchRequest calls the underlying FetchRequest.
+func (x *FetchedPropertyDescription) FetchRequest() *raw.NSFetchRequest[objc.ID] {
+	return x.inner.FetchRequest()
+}
+
+// SetFetchRequest calls the underlying SetFetchRequest.
+func (x *FetchedPropertyDescription) SetFetchRequest(fetchRequest *raw.NSFetchRequest[objc.ID]) {
+	x.inner.SetFetchRequest(fetchRequest)
+}
+
 func (x *FetchedPropertyDescription) asPropertyDescription() *raw.NSPropertyDescription { return &x.inner.NSPropertyDescription }
+
+// FetchedPropertyDescriptionable is the interface implemented by [FetchedPropertyDescription], for mocking and DI.
+type FetchedPropertyDescriptionable interface {
+	Unwrap() *raw.NSFetchedPropertyDescription
+	WithFetchRequest(fetchRequest *raw.NSFetchRequest[objc.ID]) *FetchedPropertyDescription
+	FetchRequest() *raw.NSFetchRequest[objc.ID]
+	SetFetchRequest(fetchRequest *raw.NSFetchRequest[objc.ID])
+}
+
+var _ FetchedPropertyDescriptionable = (*FetchedPropertyDescription)(nil)
 

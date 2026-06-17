@@ -6,6 +6,7 @@ package healthkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,21 @@ func NewHealthConceptIdentifier() *HealthConceptIdentifier {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKHealthConceptIdentifier")), objc.RegisterName("new"))
 	return &HealthConceptIdentifier{inner: raw.HKHealthConceptIdentifierFromID(_id)}
 }
+
+// Domain calls the underlying Domain.
+func (x *HealthConceptIdentifier) Domain() string {
+	_r := x.inner.Domain()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// HealthConceptIdentifierable is the interface implemented by [HealthConceptIdentifier], for mocking and DI.
+type HealthConceptIdentifierable interface {
+	Unwrap() *raw.HKHealthConceptIdentifier
+	Domain() string
+}
+
+var _ HealthConceptIdentifierable = (*HealthConceptIdentifier)(nil)
 

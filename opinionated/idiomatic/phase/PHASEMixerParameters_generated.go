@@ -5,6 +5,7 @@
 package phase
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +23,23 @@ func NewMixerParameters() *MixerParameters {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEMixerParameters")), objc.RegisterName("new"))
 	return &MixerParameters{inner: raw.PHASEMixerParametersFromID(_id)}
 }
+
+// AddSpatialMixerParametersWithIdentifierSourceListener calls the underlying AddSpatialMixerParametersWithIdentifierSourceListener.
+func (x *MixerParameters) AddSpatialMixerParametersWithIdentifierSourceListener(identifier string, source *raw.PHASESource, listener *raw.PHASEListener) {
+	x.inner.AddSpatialMixerParametersWithIdentifierSourceListener(foundation.NSStringStringWithUTF8String(identifier), source, listener)
+}
+
+// AddAmbientMixerParametersWithIdentifierListener calls the underlying AddAmbientMixerParametersWithIdentifierListener.
+func (x *MixerParameters) AddAmbientMixerParametersWithIdentifierListener(identifier string, listener *raw.PHASEListener) {
+	x.inner.AddAmbientMixerParametersWithIdentifierListener(foundation.NSStringStringWithUTF8String(identifier), listener)
+}
+
+// MixerParametersable is the interface implemented by [MixerParameters], for mocking and DI.
+type MixerParametersable interface {
+	Unwrap() *raw.PHASEMixerParameters
+	AddSpatialMixerParametersWithIdentifierSourceListener(identifier string, source *raw.PHASESource, listener *raw.PHASEListener)
+	AddAmbientMixerParametersWithIdentifierListener(identifier string, listener *raw.PHASEListener)
+}
+
+var _ MixerParametersable = (*MixerParameters)(nil)
 

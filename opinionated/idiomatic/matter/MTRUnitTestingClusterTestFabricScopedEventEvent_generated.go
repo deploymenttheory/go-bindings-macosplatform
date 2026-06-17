@@ -30,5 +30,25 @@ func (x *MTRUnitTestingClusterTestFabricScopedEventEvent) WithFabricIndex(fabric
 	return x
 }
 
+// FabricIndex calls the underlying FabricIndex.
+func (x *MTRUnitTestingClusterTestFabricScopedEventEvent) FabricIndex() *foundation.NSNumber {
+	return x.inner.FabricIndex()
+}
+
+// SetFabricIndex calls the underlying SetFabricIndex.
+func (x *MTRUnitTestingClusterTestFabricScopedEventEvent) SetFabricIndex(fabricIndex *foundation.NSNumber) {
+	x.inner.SetFabricIndex(fabricIndex)
+}
+
 func (x *MTRUnitTestingClusterTestFabricScopedEventEvent) asMTRUnitTestingClusterTestFabricScopedEventEvent() *raw.MTRUnitTestingClusterTestFabricScopedEventEvent { return x.inner }
+
+// MTRUnitTestingClusterTestFabricScopedEventEventable is the interface implemented by [MTRUnitTestingClusterTestFabricScopedEventEvent], for mocking and DI.
+type MTRUnitTestingClusterTestFabricScopedEventEventable interface {
+	Unwrap() *raw.MTRUnitTestingClusterTestFabricScopedEventEvent
+	WithFabricIndex(fabricIndex *foundation.NSNumber) *MTRUnitTestingClusterTestFabricScopedEventEvent
+	FabricIndex() *foundation.NSNumber
+	SetFabricIndex(fabricIndex *foundation.NSNumber)
+}
+
+var _ MTRUnitTestingClusterTestFabricScopedEventEventable = (*MTRUnitTestingClusterTestFabricScopedEventEvent)(nil)
 

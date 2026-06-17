@@ -6,6 +6,7 @@ package authenticationservices
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,23 @@ func NewAuthorizationPublicKeyCredentialLargeBlobAssertionOutput() *Authorizatio
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ASAuthorizationPublicKeyCredentialLargeBlobAssertionOutput")), objc.RegisterName("new"))
 	return &AuthorizationPublicKeyCredentialLargeBlobAssertionOutput{inner: raw.ASAuthorizationPublicKeyCredentialLargeBlobAssertionOutputFromID(_id)}
 }
+
+// ReadData calls the underlying ReadData.
+func (x *AuthorizationPublicKeyCredentialLargeBlobAssertionOutput) ReadData() *foundation.NSData {
+	return x.inner.ReadData()
+}
+
+// DidWrite calls the underlying DidWrite.
+func (x *AuthorizationPublicKeyCredentialLargeBlobAssertionOutput) DidWrite() bool {
+	return x.inner.DidWrite()
+}
+
+// AuthorizationPublicKeyCredentialLargeBlobAssertionOutputable is the interface implemented by [AuthorizationPublicKeyCredentialLargeBlobAssertionOutput], for mocking and DI.
+type AuthorizationPublicKeyCredentialLargeBlobAssertionOutputable interface {
+	Unwrap() *raw.ASAuthorizationPublicKeyCredentialLargeBlobAssertionOutput
+	ReadData() *foundation.NSData
+	DidWrite() bool
+}
+
+var _ AuthorizationPublicKeyCredentialLargeBlobAssertionOutputable = (*AuthorizationPublicKeyCredentialLargeBlobAssertionOutput)(nil)
 

@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +24,24 @@ func NewCaptionConversionTimeRangeAdjustment() *CaptionConversionTimeRangeAdjust
 	return &CaptionConversionTimeRangeAdjustment{inner: raw.AVCaptionConversionTimeRangeAdjustmentFromID(_id)}
 }
 
+// StartTimeOffset calls the underlying StartTimeOffset.
+func (x *CaptionConversionTimeRangeAdjustment) StartTimeOffset() coremedia.CMTime {
+	return x.inner.StartTimeOffset()
+}
+
+// DurationOffset calls the underlying DurationOffset.
+func (x *CaptionConversionTimeRangeAdjustment) DurationOffset() coremedia.CMTime {
+	return x.inner.DurationOffset()
+}
+
 func (x *CaptionConversionTimeRangeAdjustment) asCaptionConversionAdjustment() *raw.AVCaptionConversionAdjustment { return &x.inner.AVCaptionConversionAdjustment }
+
+// CaptionConversionTimeRangeAdjustmentable is the interface implemented by [CaptionConversionTimeRangeAdjustment], for mocking and DI.
+type CaptionConversionTimeRangeAdjustmentable interface {
+	Unwrap() *raw.AVCaptionConversionTimeRangeAdjustment
+	StartTimeOffset() coremedia.CMTime
+	DurationOffset() coremedia.CMTime
+}
+
+var _ CaptionConversionTimeRangeAdjustmentable = (*CaptionConversionTimeRangeAdjustment)(nil)
 

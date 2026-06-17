@@ -53,9 +53,81 @@ func (x *Stepper) WithAutorepeat(autorepeat bool) *Stepper {
 	return x
 }
 
+// MinValue calls the underlying MinValue.
+func (x *Stepper) MinValue() float64 {
+	return x.inner.MinValue()
+}
+
+// SetMinValue calls the underlying SetMinValue.
+func (x *Stepper) SetMinValue(minValue float64) {
+	x.inner.SetMinValue(minValue)
+}
+
+// MaxValue calls the underlying MaxValue.
+func (x *Stepper) MaxValue() float64 {
+	return x.inner.MaxValue()
+}
+
+// SetMaxValue calls the underlying SetMaxValue.
+func (x *Stepper) SetMaxValue(maxValue float64) {
+	x.inner.SetMaxValue(maxValue)
+}
+
+// Increment calls the underlying Increment.
+func (x *Stepper) Increment() float64 {
+	return x.inner.Increment()
+}
+
+// SetIncrement calls the underlying SetIncrement.
+func (x *Stepper) SetIncrement(increment float64) {
+	x.inner.SetIncrement(increment)
+}
+
+// ValueWraps calls the underlying ValueWraps.
+func (x *Stepper) ValueWraps() bool {
+	return x.inner.ValueWraps()
+}
+
+// SetValueWraps calls the underlying SetValueWraps.
+func (x *Stepper) SetValueWraps(valueWraps bool) {
+	x.inner.SetValueWraps(valueWraps)
+}
+
+// Autorepeat calls the underlying Autorepeat.
+func (x *Stepper) Autorepeat() bool {
+	return x.inner.Autorepeat()
+}
+
+// SetAutorepeat calls the underlying SetAutorepeat.
+func (x *Stepper) SetAutorepeat(autorepeat bool) {
+	x.inner.SetAutorepeat(autorepeat)
+}
+
 func (x *Stepper) asControl() *raw.NSControl { return &x.inner.NSControl }
 
 func (x *Stepper) asView() *raw.NSView { return &x.inner.NSControl.NSView }
 
 func (x *Stepper) asResponder() *raw.NSResponder { return &x.inner.NSControl.NSView.NSResponder }
+
+// Stepperable is the interface implemented by [Stepper], for mocking and DI.
+type Stepperable interface {
+	Unwrap() *raw.NSStepper
+	WithMinValue(minValue float64) *Stepper
+	WithMaxValue(maxValue float64) *Stepper
+	WithIncrement(increment float64) *Stepper
+	WithValueWraps(valueWraps bool) *Stepper
+	WithAutorepeat(autorepeat bool) *Stepper
+	MinValue() float64
+	SetMinValue(minValue float64)
+	MaxValue() float64
+	SetMaxValue(maxValue float64)
+	Increment() float64
+	SetIncrement(increment float64)
+	ValueWraps() bool
+	SetValueWraps(valueWraps bool)
+	Autorepeat() bool
+	SetAutorepeat(autorepeat bool)
+}
+
+var _ Stepperable = (*Stepper)(nil)
 

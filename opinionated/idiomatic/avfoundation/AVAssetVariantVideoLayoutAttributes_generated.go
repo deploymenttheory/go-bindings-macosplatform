@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,23 @@ func NewAssetVariantVideoLayoutAttributes() *AssetVariantVideoLayoutAttributes {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAssetVariantVideoLayoutAttributes")), objc.RegisterName("new"))
 	return &AssetVariantVideoLayoutAttributes{inner: raw.AVAssetVariantVideoLayoutAttributesFromID(_id)}
 }
+
+// StereoViewComponents calls the underlying StereoViewComponents.
+func (x *AssetVariantVideoLayoutAttributes) StereoViewComponents() coremedia.CMStereoViewComponents {
+	return x.inner.StereoViewComponents()
+}
+
+// ProjectionType calls the underlying ProjectionType.
+func (x *AssetVariantVideoLayoutAttributes) ProjectionType() coremedia.CMProjectionType {
+	return x.inner.ProjectionType()
+}
+
+// AssetVariantVideoLayoutAttributesable is the interface implemented by [AssetVariantVideoLayoutAttributes], for mocking and DI.
+type AssetVariantVideoLayoutAttributesable interface {
+	Unwrap() *raw.AVAssetVariantVideoLayoutAttributes
+	StereoViewComponents() coremedia.CMStereoViewComponents
+	ProjectionType() coremedia.CMProjectionType
+}
+
+var _ AssetVariantVideoLayoutAttributesable = (*AssetVariantVideoLayoutAttributes)(nil)
 

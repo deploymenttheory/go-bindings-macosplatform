@@ -5,6 +5,8 @@
 package quartz
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartz"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +24,65 @@ func NewQuartzFilterManager() *QuartzFilterManager {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("QuartzFilterManager")), objc.RegisterName("new"))
 	return &QuartzFilterManager{inner: raw.QuartzFilterManagerFromID(_id)}
 }
+
+// FilterPanel calls the underlying FilterPanel.
+func (x *QuartzFilterManager) FilterPanel() *appkit.NSPanel {
+	return x.inner.FilterPanel()
+}
+
+// FilterView calls the underlying FilterView.
+func (x *QuartzFilterManager) FilterView() *QuartzFilterView {
+	_r := x.inner.FilterView()
+	if _r == nil {
+		return nil
+	}
+	return &QuartzFilterView{inner: _r}
+}
+
+// SelectedFilter calls the underlying SelectedFilter.
+func (x *QuartzFilterManager) SelectedFilter() *QuartzFilter {
+	_r := x.inner.SelectedFilter()
+	if _r == nil {
+		return nil
+	}
+	return &QuartzFilter{inner: _r}
+}
+
+// SelectFilter calls the underlying SelectFilter.
+func (x *QuartzFilterManager) SelectFilter(filter *raw.QuartzFilter) bool {
+	return x.inner.SelectFilter(filter)
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *QuartzFilterManager) SetDelegate(aDelegate objc.ID) {
+	x.inner.SetDelegate(aDelegate)
+}
+
+// Delegate calls the underlying Delegate.
+func (x *QuartzFilterManager) Delegate() objc.ID {
+	return x.inner.Delegate()
+}
+
+// ImportFilter calls the underlying ImportFilter.
+func (x *QuartzFilterManager) ImportFilter(filterProperties *foundation.NSDictionary[objc.ID, objc.ID]) *QuartzFilter {
+	_r := x.inner.ImportFilter(filterProperties)
+	if _r == nil {
+		return nil
+	}
+	return &QuartzFilter{inner: _r}
+}
+
+// QuartzFilterManagerable is the interface implemented by [QuartzFilterManager], for mocking and DI.
+type QuartzFilterManagerable interface {
+	Unwrap() *raw.QuartzFilterManager
+	FilterPanel() *appkit.NSPanel
+	FilterView() *QuartzFilterView
+	SelectedFilter() *QuartzFilter
+	SelectFilter(filter *raw.QuartzFilter) bool
+	SetDelegate(aDelegate objc.ID)
+	Delegate() objc.ID
+	ImportFilter(filterProperties *foundation.NSDictionary[objc.ID, objc.ID]) *QuartzFilter
+}
+
+var _ QuartzFilterManagerable = (*QuartzFilterManager)(nil)
 

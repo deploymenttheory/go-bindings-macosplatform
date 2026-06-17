@@ -7,6 +7,7 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -48,6 +49,62 @@ func (x *DOMHTMLMetaElement) WithScheme(scheme string) *DOMHTMLMetaElement {
 	return x
 }
 
+// Content calls the underlying Content.
+func (x *DOMHTMLMetaElement) Content() string {
+	_r := x.inner.Content()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetContent calls the underlying SetContent.
+func (x *DOMHTMLMetaElement) SetContent(content string) {
+	x.inner.SetContent(foundation.NSStringStringWithUTF8String(content))
+}
+
+// HttpEquiv calls the underlying HttpEquiv.
+func (x *DOMHTMLMetaElement) HttpEquiv() string {
+	_r := x.inner.HttpEquiv()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetHttpEquiv calls the underlying SetHttpEquiv.
+func (x *DOMHTMLMetaElement) SetHttpEquiv(httpEquiv string) {
+	x.inner.SetHttpEquiv(foundation.NSStringStringWithUTF8String(httpEquiv))
+}
+
+// Name calls the underlying Name.
+func (x *DOMHTMLMetaElement) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetName calls the underlying SetName.
+func (x *DOMHTMLMetaElement) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
+// Scheme calls the underlying Scheme.
+func (x *DOMHTMLMetaElement) Scheme() string {
+	_r := x.inner.Scheme()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetScheme calls the underlying SetScheme.
+func (x *DOMHTMLMetaElement) SetScheme(scheme string) {
+	x.inner.SetScheme(foundation.NSStringStringWithUTF8String(scheme))
+}
+
 func (x *DOMHTMLMetaElement) asDOMHTMLElement() *raw.DOMHTMLElement { return &x.inner.DOMHTMLElement }
 
 func (x *DOMHTMLMetaElement) asDOMElement() *raw.DOMElement { return &x.inner.DOMHTMLElement.DOMElement }
@@ -57,4 +114,23 @@ func (x *DOMHTMLMetaElement) asDOMNode() *raw.DOMNode { return &x.inner.DOMHTMLE
 func (x *DOMHTMLMetaElement) asDOMObject() *raw.DOMObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject }
 
 func (x *DOMHTMLMetaElement) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject }
+
+// DOMHTMLMetaElementable is the interface implemented by [DOMHTMLMetaElement], for mocking and DI.
+type DOMHTMLMetaElementable interface {
+	Unwrap() *raw.DOMHTMLMetaElement
+	WithContent(content string) *DOMHTMLMetaElement
+	WithHttpEquiv(httpEquiv string) *DOMHTMLMetaElement
+	WithName(name string) *DOMHTMLMetaElement
+	WithScheme(scheme string) *DOMHTMLMetaElement
+	Content() string
+	SetContent(content string)
+	HttpEquiv() string
+	SetHttpEquiv(httpEquiv string)
+	Name() string
+	SetName(name string)
+	Scheme() string
+	SetScheme(scheme string)
+}
+
+var _ DOMHTMLMetaElementable = (*DOMHTMLMetaElement)(nil)
 

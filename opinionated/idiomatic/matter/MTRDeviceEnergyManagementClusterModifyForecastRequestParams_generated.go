@@ -48,3 +48,74 @@ func (x *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) WithServer
 	return x
 }
 
+// ForecastID calls the underlying ForecastID.
+func (x *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) ForecastID() *foundation.NSNumber {
+	return x.inner.ForecastID()
+}
+
+// SetForecastID calls the underlying SetForecastID.
+func (x *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) SetForecastID(forecastID *foundation.NSNumber) {
+	x.inner.SetForecastID(forecastID)
+}
+
+// SlotAdjustments calls the underlying SlotAdjustments.
+func (x *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) SlotAdjustments() *foundation.NSArray[objc.ID] {
+	return x.inner.SlotAdjustments()
+}
+
+// SetSlotAdjustments calls the underlying SetSlotAdjustments.
+func (x *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) SetSlotAdjustments(slotAdjustments *foundation.NSArray[objc.ID]) {
+	x.inner.SetSlotAdjustments(slotAdjustments)
+}
+
+// Cause calls the underlying Cause.
+func (x *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) Cause() *foundation.NSNumber {
+	return x.inner.Cause()
+}
+
+// SetCause calls the underlying SetCause.
+func (x *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) SetCause(cause *foundation.NSNumber) {
+	x.inner.SetCause(cause)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRDeviceEnergyManagementClusterModifyForecastRequestParamsable is the interface implemented by [MTRDeviceEnergyManagementClusterModifyForecastRequestParams], for mocking and DI.
+type MTRDeviceEnergyManagementClusterModifyForecastRequestParamsable interface {
+	Unwrap() *raw.MTRDeviceEnergyManagementClusterModifyForecastRequestParams
+	WithForecastID(forecastID *foundation.NSNumber) *MTRDeviceEnergyManagementClusterModifyForecastRequestParams
+	WithCause(cause *foundation.NSNumber) *MTRDeviceEnergyManagementClusterModifyForecastRequestParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRDeviceEnergyManagementClusterModifyForecastRequestParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRDeviceEnergyManagementClusterModifyForecastRequestParams
+	ForecastID() *foundation.NSNumber
+	SetForecastID(forecastID *foundation.NSNumber)
+	SlotAdjustments() *foundation.NSArray[objc.ID]
+	SetSlotAdjustments(slotAdjustments *foundation.NSArray[objc.ID])
+	Cause() *foundation.NSNumber
+	SetCause(cause *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRDeviceEnergyManagementClusterModifyForecastRequestParamsable = (*MTRDeviceEnergyManagementClusterModifyForecastRequestParams)(nil)
+

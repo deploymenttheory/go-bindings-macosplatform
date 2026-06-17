@@ -7,6 +7,7 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -30,9 +31,39 @@ func (x *DOMCSSValue) WithCssText(cssText string) *DOMCSSValue {
 	return x
 }
 
+// CssText calls the underlying CssText.
+func (x *DOMCSSValue) CssText() string {
+	_r := x.inner.CssText()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetCssText calls the underlying SetCssText.
+func (x *DOMCSSValue) SetCssText(cssText string) {
+	x.inner.SetCssText(foundation.NSStringStringWithUTF8String(cssText))
+}
+
+// CssValueType calls the underlying CssValueType.
+func (x *DOMCSSValue) CssValueType() uint16 {
+	return x.inner.CssValueType()
+}
+
 func (x *DOMCSSValue) asDOMCSSValue() *raw.DOMCSSValue { return x.inner }
 
 func (x *DOMCSSValue) asDOMObject() *raw.DOMObject { return &x.inner.DOMObject }
 
 func (x *DOMCSSValue) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMObject.WebScriptObject }
+
+// DOMCSSValueable is the interface implemented by [DOMCSSValue], for mocking and DI.
+type DOMCSSValueable interface {
+	Unwrap() *raw.DOMCSSValue
+	WithCssText(cssText string) *DOMCSSValue
+	CssText() string
+	SetCssText(cssText string)
+	CssValueType() uint16
+}
+
+var _ DOMCSSValueable = (*DOMCSSValue)(nil)
 

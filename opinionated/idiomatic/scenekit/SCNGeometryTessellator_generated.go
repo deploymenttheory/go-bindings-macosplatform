@@ -72,3 +72,114 @@ func (x *GeometryTessellator) WithSmoothingMode(smoothingMode raw.SCNTessellatio
 	return x
 }
 
+// TessellationFactorScale calls the underlying TessellationFactorScale.
+func (x *GeometryTessellator) TessellationFactorScale() float64 {
+	return x.inner.TessellationFactorScale()
+}
+
+// SetTessellationFactorScale calls the underlying SetTessellationFactorScale.
+func (x *GeometryTessellator) SetTessellationFactorScale(tessellationFactorScale float64) {
+	x.inner.SetTessellationFactorScale(tessellationFactorScale)
+}
+
+// TessellationPartitionMode calls the underlying TessellationPartitionMode.
+func (x *GeometryTessellator) TessellationPartitionMode() metal.MTLTessellationPartitionMode {
+	return x.inner.TessellationPartitionMode()
+}
+
+// SetTessellationPartitionMode calls the underlying SetTessellationPartitionMode.
+func (x *GeometryTessellator) SetTessellationPartitionMode(tessellationPartitionMode metal.MTLTessellationPartitionMode) {
+	x.inner.SetTessellationPartitionMode(tessellationPartitionMode)
+}
+
+// IsAdaptive calls the underlying IsAdaptive.
+func (x *GeometryTessellator) IsAdaptive() bool {
+	return x.inner.IsAdaptive()
+}
+
+// SetAdaptive calls the underlying SetAdaptive.
+func (x *GeometryTessellator) SetAdaptive(adaptive bool) {
+	x.inner.SetAdaptive(adaptive)
+}
+
+// IsScreenSpace calls the underlying IsScreenSpace.
+func (x *GeometryTessellator) IsScreenSpace() bool {
+	return x.inner.IsScreenSpace()
+}
+
+// SetScreenSpace calls the underlying SetScreenSpace.
+func (x *GeometryTessellator) SetScreenSpace(screenSpace bool) {
+	x.inner.SetScreenSpace(screenSpace)
+}
+
+// EdgeTessellationFactor calls the underlying EdgeTessellationFactor.
+func (x *GeometryTessellator) EdgeTessellationFactor() float64 {
+	return x.inner.EdgeTessellationFactor()
+}
+
+// SetEdgeTessellationFactor calls the underlying SetEdgeTessellationFactor.
+func (x *GeometryTessellator) SetEdgeTessellationFactor(edgeTessellationFactor float64) {
+	x.inner.SetEdgeTessellationFactor(edgeTessellationFactor)
+}
+
+// InsideTessellationFactor calls the underlying InsideTessellationFactor.
+func (x *GeometryTessellator) InsideTessellationFactor() float64 {
+	return x.inner.InsideTessellationFactor()
+}
+
+// SetInsideTessellationFactor calls the underlying SetInsideTessellationFactor.
+func (x *GeometryTessellator) SetInsideTessellationFactor(insideTessellationFactor float64) {
+	x.inner.SetInsideTessellationFactor(insideTessellationFactor)
+}
+
+// MaximumEdgeLength calls the underlying MaximumEdgeLength.
+func (x *GeometryTessellator) MaximumEdgeLength() float64 {
+	return x.inner.MaximumEdgeLength()
+}
+
+// SetMaximumEdgeLength calls the underlying SetMaximumEdgeLength.
+func (x *GeometryTessellator) SetMaximumEdgeLength(maximumEdgeLength float64) {
+	x.inner.SetMaximumEdgeLength(maximumEdgeLength)
+}
+
+// SmoothingMode calls the underlying SmoothingMode.
+func (x *GeometryTessellator) SmoothingMode() raw.SCNTessellationSmoothingMode {
+	return x.inner.SmoothingMode()
+}
+
+// SetSmoothingMode calls the underlying SetSmoothingMode.
+func (x *GeometryTessellator) SetSmoothingMode(smoothingMode raw.SCNTessellationSmoothingMode) {
+	x.inner.SetSmoothingMode(smoothingMode)
+}
+
+// GeometryTessellatorable is the interface implemented by [GeometryTessellator], for mocking and DI.
+type GeometryTessellatorable interface {
+	Unwrap() *raw.SCNGeometryTessellator
+	WithTessellationFactorScale(tessellationFactorScale float64) *GeometryTessellator
+	WithTessellationPartitionMode(tessellationPartitionMode metal.MTLTessellationPartitionMode) *GeometryTessellator
+	WithAdaptive(adaptive bool) *GeometryTessellator
+	WithScreenSpace(screenSpace bool) *GeometryTessellator
+	WithEdgeTessellationFactor(edgeTessellationFactor float64) *GeometryTessellator
+	WithInsideTessellationFactor(insideTessellationFactor float64) *GeometryTessellator
+	WithMaximumEdgeLength(maximumEdgeLength float64) *GeometryTessellator
+	WithSmoothingMode(smoothingMode raw.SCNTessellationSmoothingMode) *GeometryTessellator
+	TessellationFactorScale() float64
+	SetTessellationFactorScale(tessellationFactorScale float64)
+	TessellationPartitionMode() metal.MTLTessellationPartitionMode
+	SetTessellationPartitionMode(tessellationPartitionMode metal.MTLTessellationPartitionMode)
+	IsAdaptive() bool
+	SetAdaptive(adaptive bool)
+	IsScreenSpace() bool
+	SetScreenSpace(screenSpace bool)
+	EdgeTessellationFactor() float64
+	SetEdgeTessellationFactor(edgeTessellationFactor float64)
+	InsideTessellationFactor() float64
+	SetInsideTessellationFactor(insideTessellationFactor float64)
+	MaximumEdgeLength() float64
+	SetMaximumEdgeLength(maximumEdgeLength float64)
+	SmoothingMode() raw.SCNTessellationSmoothingMode
+	SetSmoothingMode(smoothingMode raw.SCNTessellationSmoothingMode)
+}
+
+var _ GeometryTessellatorable = (*GeometryTessellator)(nil)
+

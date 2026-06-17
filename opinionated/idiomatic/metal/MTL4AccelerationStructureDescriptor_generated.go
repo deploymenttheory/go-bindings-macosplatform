@@ -27,3 +27,10 @@ func (x *MTL4AccelerationStructureDescriptor) asMTL4AccelerationStructureDescrip
 
 func (x *MTL4AccelerationStructureDescriptor) asAccelerationStructureDescriptor() *raw.MTLAccelerationStructureDescriptor { return &x.inner.MTLAccelerationStructureDescriptor }
 
+// MTL4AccelerationStructureDescriptorable is the interface implemented by [MTL4AccelerationStructureDescriptor], for mocking and DI.
+type MTL4AccelerationStructureDescriptorable interface {
+	Unwrap() *raw.MTL4AccelerationStructureDescriptor
+}
+
+var _ MTL4AccelerationStructureDescriptorable = (*MTL4AccelerationStructureDescriptor)(nil)
+

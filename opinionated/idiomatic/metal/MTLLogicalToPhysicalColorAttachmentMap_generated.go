@@ -23,3 +23,28 @@ func NewLogicalToPhysicalColorAttachmentMap() *LogicalToPhysicalColorAttachmentM
 	return &LogicalToPhysicalColorAttachmentMap{inner: raw.MTLLogicalToPhysicalColorAttachmentMapFromID(_id)}
 }
 
+// SetPhysicalIndexForLogicalIndex calls the underlying SetPhysicalIndexForLogicalIndex.
+func (x *LogicalToPhysicalColorAttachmentMap) SetPhysicalIndexForLogicalIndex(physicalIndex uint, logicalIndex uint) {
+	x.inner.SetPhysicalIndexForLogicalIndex(physicalIndex, logicalIndex)
+}
+
+// GetPhysicalIndexForLogicalIndex calls the underlying GetPhysicalIndexForLogicalIndex.
+func (x *LogicalToPhysicalColorAttachmentMap) GetPhysicalIndexForLogicalIndex(logicalIndex uint) uint {
+	return x.inner.GetPhysicalIndexForLogicalIndex(logicalIndex)
+}
+
+// Reset calls the underlying Reset.
+func (x *LogicalToPhysicalColorAttachmentMap) Reset() {
+	x.inner.Reset()
+}
+
+// LogicalToPhysicalColorAttachmentMapable is the interface implemented by [LogicalToPhysicalColorAttachmentMap], for mocking and DI.
+type LogicalToPhysicalColorAttachmentMapable interface {
+	Unwrap() *raw.MTLLogicalToPhysicalColorAttachmentMap
+	SetPhysicalIndexForLogicalIndex(physicalIndex uint, logicalIndex uint)
+	GetPhysicalIndexForLogicalIndex(logicalIndex uint) uint
+	Reset()
+}
+
+var _ LogicalToPhysicalColorAttachmentMapable = (*LogicalToPhysicalColorAttachmentMap)(nil)
+

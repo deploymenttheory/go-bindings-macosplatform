@@ -7,6 +7,7 @@ package photos
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,4 +25,37 @@ func NewAdjustmentDataWithFormatIdentifierFormatVersionData(formatIdentifier str
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFormatIdentifier:formatVersion:data:"), foundation.NSStringStringWithUTF8String(formatIdentifier).Ptr(), foundation.NSStringStringWithUTF8String(formatVersion).Ptr(), data.Ptr())
 	return &AdjustmentData{inner: raw.PHAdjustmentDataFromID(_id)}
 }
+
+// FormatIdentifier calls the underlying FormatIdentifier.
+func (x *AdjustmentData) FormatIdentifier() string {
+	_r := x.inner.FormatIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// FormatVersion calls the underlying FormatVersion.
+func (x *AdjustmentData) FormatVersion() string {
+	_r := x.inner.FormatVersion()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Data calls the underlying Data.
+func (x *AdjustmentData) Data() *foundation.NSData {
+	return x.inner.Data()
+}
+
+// AdjustmentDataable is the interface implemented by [AdjustmentData], for mocking and DI.
+type AdjustmentDataable interface {
+	Unwrap() *raw.PHAdjustmentData
+	FormatIdentifier() string
+	FormatVersion() string
+	Data() *foundation.NSData
+}
+
+var _ AdjustmentDataable = (*AdjustmentData)(nil)
 

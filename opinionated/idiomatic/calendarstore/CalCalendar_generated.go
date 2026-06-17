@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/calendarstore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -42,4 +43,84 @@ func (x *CalCalendar) WithTitle(title string) *CalCalendar {
 	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
+
+// Color calls the underlying Color.
+func (x *CalCalendar) Color() *appkit.NSColor {
+	return x.inner.Color()
+}
+
+// SetColor calls the underlying SetColor.
+func (x *CalCalendar) SetColor(color *appkit.NSColor) {
+	x.inner.SetColor(color)
+}
+
+// Notes calls the underlying Notes.
+func (x *CalCalendar) Notes() string {
+	_r := x.inner.Notes()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetNotes calls the underlying SetNotes.
+func (x *CalCalendar) SetNotes(notes string) {
+	x.inner.SetNotes(foundation.NSStringStringWithUTF8String(notes))
+}
+
+// Title calls the underlying Title.
+func (x *CalCalendar) Title() string {
+	_r := x.inner.Title()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetTitle calls the underlying SetTitle.
+func (x *CalCalendar) SetTitle(title string) {
+	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+}
+
+// Type calls the underlying Type.
+func (x *CalCalendar) Type() string {
+	_r := x.inner.Type()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Uid calls the underlying Uid.
+func (x *CalCalendar) Uid() string {
+	_r := x.inner.Uid()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// IsEditable calls the underlying IsEditable.
+func (x *CalCalendar) IsEditable() bool {
+	return x.inner.IsEditable()
+}
+
+// CalCalendarable is the interface implemented by [CalCalendar], for mocking and DI.
+type CalCalendarable interface {
+	Unwrap() *raw.CalCalendar
+	WithColor(color *appkit.NSColor) *CalCalendar
+	WithNotes(notes string) *CalCalendar
+	WithTitle(title string) *CalCalendar
+	Color() *appkit.NSColor
+	SetColor(color *appkit.NSColor)
+	Notes() string
+	SetNotes(notes string)
+	Title() string
+	SetTitle(title string)
+	Type() string
+	Uid() string
+	IsEditable() bool
+}
+
+var _ CalCalendarable = (*CalCalendar)(nil)
 

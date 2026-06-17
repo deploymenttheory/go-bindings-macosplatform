@@ -49,3 +49,40 @@ func NewWebHistoryWithBundleIdentifierError(bundleIdentifier string) (*WebHistor
 	return &WebHistory{inner: raw.STWebHistoryFromID(_id)}, nil
 }
 
+// FetchHistoryDuringIntervalCompletionHandler calls the underlying FetchHistoryDuringIntervalCompletionHandler.
+func (x *WebHistory) FetchHistoryDuringIntervalCompletionHandler(interval *foundation.NSDateInterval, completionHandler objc.Block) {
+	x.inner.FetchHistoryDuringIntervalCompletionHandler(interval, completionHandler)
+}
+
+// FetchAllHistoryWithCompletionHandler calls the underlying FetchAllHistoryWithCompletionHandler.
+func (x *WebHistory) FetchAllHistoryWithCompletionHandler(completionHandler objc.Block) {
+	x.inner.FetchAllHistoryWithCompletionHandler(completionHandler)
+}
+
+// DeleteHistoryForURL calls the underlying DeleteHistoryForURL.
+func (x *WebHistory) DeleteHistoryForURL(url string) {
+	x.inner.DeleteHistoryForURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
+}
+
+// DeleteHistoryDuringInterval calls the underlying DeleteHistoryDuringInterval.
+func (x *WebHistory) DeleteHistoryDuringInterval(interval *foundation.NSDateInterval) {
+	x.inner.DeleteHistoryDuringInterval(interval)
+}
+
+// DeleteAllHistory calls the underlying DeleteAllHistory.
+func (x *WebHistory) DeleteAllHistory() {
+	x.inner.DeleteAllHistory()
+}
+
+// WebHistoryable is the interface implemented by [WebHistory], for mocking and DI.
+type WebHistoryable interface {
+	Unwrap() *raw.STWebHistory
+	FetchHistoryDuringIntervalCompletionHandler(interval *foundation.NSDateInterval, completionHandler objc.Block)
+	FetchAllHistoryWithCompletionHandler(completionHandler objc.Block)
+	DeleteHistoryForURL(url string)
+	DeleteHistoryDuringInterval(interval *foundation.NSDateInterval)
+	DeleteAllHistory()
+}
+
+var _ WebHistoryable = (*WebHistory)(nil)
+

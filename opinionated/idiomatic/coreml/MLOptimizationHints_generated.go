@@ -35,3 +35,36 @@ func (x *OptimizationHints) WithSpecializationStrategy(specializationStrategy ra
 	return x
 }
 
+// ReshapeFrequency calls the underlying ReshapeFrequency.
+func (x *OptimizationHints) ReshapeFrequency() raw.MLReshapeFrequencyHint {
+	return x.inner.ReshapeFrequency()
+}
+
+// SetReshapeFrequency calls the underlying SetReshapeFrequency.
+func (x *OptimizationHints) SetReshapeFrequency(reshapeFrequency raw.MLReshapeFrequencyHint) {
+	x.inner.SetReshapeFrequency(reshapeFrequency)
+}
+
+// SpecializationStrategy calls the underlying SpecializationStrategy.
+func (x *OptimizationHints) SpecializationStrategy() raw.MLSpecializationStrategy {
+	return x.inner.SpecializationStrategy()
+}
+
+// SetSpecializationStrategy calls the underlying SetSpecializationStrategy.
+func (x *OptimizationHints) SetSpecializationStrategy(specializationStrategy raw.MLSpecializationStrategy) {
+	x.inner.SetSpecializationStrategy(specializationStrategy)
+}
+
+// OptimizationHintsable is the interface implemented by [OptimizationHints], for mocking and DI.
+type OptimizationHintsable interface {
+	Unwrap() *raw.MLOptimizationHints
+	WithReshapeFrequency(reshapeFrequency raw.MLReshapeFrequencyHint) *OptimizationHints
+	WithSpecializationStrategy(specializationStrategy raw.MLSpecializationStrategy) *OptimizationHints
+	ReshapeFrequency() raw.MLReshapeFrequencyHint
+	SetReshapeFrequency(reshapeFrequency raw.MLReshapeFrequencyHint)
+	SpecializationStrategy() raw.MLSpecializationStrategy
+	SetSpecializationStrategy(specializationStrategy raw.MLSpecializationStrategy)
+}
+
+var _ OptimizationHintsable = (*OptimizationHints)(nil)
+

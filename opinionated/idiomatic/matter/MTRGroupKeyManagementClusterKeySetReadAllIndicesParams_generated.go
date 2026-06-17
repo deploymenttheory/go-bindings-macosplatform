@@ -36,3 +36,48 @@ func (x *MTRGroupKeyManagementClusterKeySetReadAllIndicesParams) WithServerSideP
 	return x
 }
 
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRGroupKeyManagementClusterKeySetReadAllIndicesParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRGroupKeyManagementClusterKeySetReadAllIndicesParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRGroupKeyManagementClusterKeySetReadAllIndicesParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRGroupKeyManagementClusterKeySetReadAllIndicesParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// GroupKeySetIDs calls the underlying GroupKeySetIDs.
+func (x *MTRGroupKeyManagementClusterKeySetReadAllIndicesParams) GroupKeySetIDs() *foundation.NSArray[objc.ID] {
+	return x.inner.GroupKeySetIDs()
+}
+
+// SetGroupKeySetIDs calls the underlying SetGroupKeySetIDs.
+func (x *MTRGroupKeyManagementClusterKeySetReadAllIndicesParams) SetGroupKeySetIDs(groupKeySetIDs *foundation.NSArray[objc.ID]) {
+	x.inner.SetGroupKeySetIDs(groupKeySetIDs)
+}
+
+// MTRGroupKeyManagementClusterKeySetReadAllIndicesParamsable is the interface implemented by [MTRGroupKeyManagementClusterKeySetReadAllIndicesParams], for mocking and DI.
+type MTRGroupKeyManagementClusterKeySetReadAllIndicesParamsable interface {
+	Unwrap() *raw.MTRGroupKeyManagementClusterKeySetReadAllIndicesParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRGroupKeyManagementClusterKeySetReadAllIndicesParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRGroupKeyManagementClusterKeySetReadAllIndicesParams
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+	GroupKeySetIDs() *foundation.NSArray[objc.ID]
+	SetGroupKeySetIDs(groupKeySetIDs *foundation.NSArray[objc.ID])
+}
+
+var _ MTRGroupKeyManagementClusterKeySetReadAllIndicesParamsable = (*MTRGroupKeyManagementClusterKeySetReadAllIndicesParams)(nil)
+

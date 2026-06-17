@@ -25,5 +25,18 @@ func NewMIDIMetaEventWithTypeData(type_ raw.AVMIDIMetaEventType, data *foundatio
 	return &MIDIMetaEvent{inner: raw.AVMIDIMetaEventFromID(_id)}
 }
 
+// Type calls the underlying Type.
+func (x *MIDIMetaEvent) Type() raw.AVMIDIMetaEventType {
+	return x.inner.Type()
+}
+
 func (x *MIDIMetaEvent) asMusicEvent() *raw.AVMusicEvent { return &x.inner.AVMusicEvent }
+
+// MIDIMetaEventable is the interface implemented by [MIDIMetaEvent], for mocking and DI.
+type MIDIMetaEventable interface {
+	Unwrap() *raw.AVMIDIMetaEvent
+	Type() raw.AVMIDIMetaEventType
+}
+
+var _ MIDIMetaEventable = (*MIDIMetaEvent)(nil)
 

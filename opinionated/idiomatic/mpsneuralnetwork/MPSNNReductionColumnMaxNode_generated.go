@@ -27,3 +27,10 @@ func (x *NNReductionColumnMaxNode) asNNUnaryReductionNode() *raw.MPSNNUnaryReduc
 
 func (x *NNReductionColumnMaxNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode }
 
+// NNReductionColumnMaxNodeable is the interface implemented by [NNReductionColumnMaxNode], for mocking and DI.
+type NNReductionColumnMaxNodeable interface {
+	Unwrap() *raw.MPSNNReductionColumnMaxNode
+}
+
+var _ NNReductionColumnMaxNodeable = (*NNReductionColumnMaxNode)(nil)
+

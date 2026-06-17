@@ -49,5 +49,76 @@ func (x *ContactFetchRequest) WithSortOrder(sortOrder raw.CNContactSortOrder) *C
 	return x
 }
 
+// Predicate calls the underlying Predicate.
+func (x *ContactFetchRequest) Predicate() *foundation.NSPredicate {
+	return x.inner.Predicate()
+}
+
+// SetPredicate calls the underlying SetPredicate.
+func (x *ContactFetchRequest) SetPredicate(predicate *foundation.NSPredicate) {
+	x.inner.SetPredicate(predicate)
+}
+
+// KeysToFetch calls the underlying KeysToFetch.
+func (x *ContactFetchRequest) KeysToFetch() *foundation.NSArray[raw.CNKeyDescriptor] {
+	return x.inner.KeysToFetch()
+}
+
+// SetKeysToFetch calls the underlying SetKeysToFetch.
+func (x *ContactFetchRequest) SetKeysToFetch(keysToFetch *foundation.NSArray[raw.CNKeyDescriptor]) {
+	x.inner.SetKeysToFetch(keysToFetch)
+}
+
+// MutableObjects calls the underlying MutableObjects.
+func (x *ContactFetchRequest) MutableObjects() bool {
+	return x.inner.MutableObjects()
+}
+
+// SetMutableObjects calls the underlying SetMutableObjects.
+func (x *ContactFetchRequest) SetMutableObjects(mutableObjects bool) {
+	x.inner.SetMutableObjects(mutableObjects)
+}
+
+// UnifyResults calls the underlying UnifyResults.
+func (x *ContactFetchRequest) UnifyResults() bool {
+	return x.inner.UnifyResults()
+}
+
+// SetUnifyResults calls the underlying SetUnifyResults.
+func (x *ContactFetchRequest) SetUnifyResults(unifyResults bool) {
+	x.inner.SetUnifyResults(unifyResults)
+}
+
+// SortOrder calls the underlying SortOrder.
+func (x *ContactFetchRequest) SortOrder() raw.CNContactSortOrder {
+	return x.inner.SortOrder()
+}
+
+// SetSortOrder calls the underlying SetSortOrder.
+func (x *ContactFetchRequest) SetSortOrder(sortOrder raw.CNContactSortOrder) {
+	x.inner.SetSortOrder(sortOrder)
+}
+
 func (x *ContactFetchRequest) asFetchRequest() *raw.CNFetchRequest { return &x.inner.CNFetchRequest }
+
+// ContactFetchRequestable is the interface implemented by [ContactFetchRequest], for mocking and DI.
+type ContactFetchRequestable interface {
+	Unwrap() *raw.CNContactFetchRequest
+	WithPredicate(predicate *foundation.NSPredicate) *ContactFetchRequest
+	WithMutableObjects(mutableObjects bool) *ContactFetchRequest
+	WithUnifyResults(unifyResults bool) *ContactFetchRequest
+	WithSortOrder(sortOrder raw.CNContactSortOrder) *ContactFetchRequest
+	Predicate() *foundation.NSPredicate
+	SetPredicate(predicate *foundation.NSPredicate)
+	KeysToFetch() *foundation.NSArray[raw.CNKeyDescriptor]
+	SetKeysToFetch(keysToFetch *foundation.NSArray[raw.CNKeyDescriptor])
+	MutableObjects() bool
+	SetMutableObjects(mutableObjects bool)
+	UnifyResults() bool
+	SetUnifyResults(unifyResults bool)
+	SortOrder() raw.CNContactSortOrder
+	SetSortOrder(sortOrder raw.CNContactSortOrder)
+}
+
+var _ ContactFetchRequestable = (*ContactFetchRequest)(nil)
 

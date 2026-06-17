@@ -27,3 +27,10 @@ func (x *SmartCardUserInteractionForSecurePINVerification) asSmartCardUserIntera
 
 func (x *SmartCardUserInteractionForSecurePINVerification) asSmartCardUserInteraction() *raw.TKSmartCardUserInteraction { return &x.inner.TKSmartCardUserInteractionForPINOperation.TKSmartCardUserInteraction }
 
+// SmartCardUserInteractionForSecurePINVerificationable is the interface implemented by [SmartCardUserInteractionForSecurePINVerification], for mocking and DI.
+type SmartCardUserInteractionForSecurePINVerificationable interface {
+	Unwrap() *raw.TKSmartCardUserInteractionForSecurePINVerification
+}
+
+var _ SmartCardUserInteractionForSecurePINVerificationable = (*SmartCardUserInteractionForSecurePINVerification)(nil)
+

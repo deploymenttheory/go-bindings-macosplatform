@@ -23,5 +23,18 @@ func NewChangeHistoryEvent() *ChangeHistoryEvent {
 	return &ChangeHistoryEvent{inner: raw.CNChangeHistoryEventFromID(_id)}
 }
 
+// AcceptEventVisitor calls the underlying AcceptEventVisitor.
+func (x *ChangeHistoryEvent) AcceptEventVisitor(visitor raw.CNChangeHistoryEventVisitor) {
+	x.inner.AcceptEventVisitor(visitor)
+}
+
 func (x *ChangeHistoryEvent) asChangeHistoryEvent() *raw.CNChangeHistoryEvent { return x.inner }
+
+// ChangeHistoryEventable is the interface implemented by [ChangeHistoryEvent], for mocking and DI.
+type ChangeHistoryEventable interface {
+	Unwrap() *raw.CNChangeHistoryEvent
+	AcceptEventVisitor(visitor raw.CNChangeHistoryEventVisitor)
+}
+
+var _ ChangeHistoryEventable = (*ChangeHistoryEvent)(nil)
 

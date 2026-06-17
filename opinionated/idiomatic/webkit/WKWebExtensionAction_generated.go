@@ -6,8 +6,10 @@ package webkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -37,16 +39,128 @@ func (x *WKWebExtensionAction) WithInspectionName(inspectionName string) *WKWebE
 	return x
 }
 
+// IconForSize calls the underlying IconForSize.
+func (x *WKWebExtensionAction) IconForSize(size corefoundation.CGSize) *appkit.NSImage {
+	return x.inner.IconForSize(size)
+}
+
+// ClosePopup calls the underlying ClosePopup.
+func (x *WKWebExtensionAction) ClosePopup() {
+	x.inner.ClosePopup()
+}
+
+// WebExtensionContext calls the underlying WebExtensionContext.
+func (x *WKWebExtensionAction) WebExtensionContext() *WKWebExtensionContext {
+	_r := x.inner.WebExtensionContext()
+	if _r == nil {
+		return nil
+	}
+	return &WKWebExtensionContext{inner: _r}
+}
+
+// AssociatedTab calls the underlying AssociatedTab.
+func (x *WKWebExtensionAction) AssociatedTab() raw.WKWebExtensionTab {
+	return x.inner.AssociatedTab()
+}
+
+// Label calls the underlying Label.
+func (x *WKWebExtensionAction) Label() string {
+	_r := x.inner.Label()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// BadgeText calls the underlying BadgeText.
+func (x *WKWebExtensionAction) BadgeText() string {
+	_r := x.inner.BadgeText()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// HasUnreadBadgeText calls the underlying HasUnreadBadgeText.
+func (x *WKWebExtensionAction) HasUnreadBadgeText() bool {
+	return x.inner.HasUnreadBadgeText()
+}
+
+// SetHasUnreadBadgeText calls the underlying SetHasUnreadBadgeText.
+func (x *WKWebExtensionAction) SetHasUnreadBadgeText(hasUnreadBadgeText bool) {
+	x.inner.SetHasUnreadBadgeText(hasUnreadBadgeText)
+}
+
+// InspectionName calls the underlying InspectionName.
+func (x *WKWebExtensionAction) InspectionName() string {
+	_r := x.inner.InspectionName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetInspectionName calls the underlying SetInspectionName.
+func (x *WKWebExtensionAction) SetInspectionName(inspectionName string) {
+	x.inner.SetInspectionName(foundation.NSStringStringWithUTF8String(inspectionName))
+}
+
+// IsEnabled calls the underlying IsEnabled.
+func (x *WKWebExtensionAction) IsEnabled() bool {
+	return x.inner.IsEnabled()
+}
+
 // MenuItems returns the collection as a Go slice.
 func (x *WKWebExtensionAction) MenuItems() []*appkit.NSMenuItem {
 	arr := x.inner.MenuItems()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*appkit.NSMenuItem, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *appkit.NSMenuItem {
+		return appkit.NSMenuItemFromID(purego.Retain(_id))
+	})
 }
+
+// PresentsPopup calls the underlying PresentsPopup.
+func (x *WKWebExtensionAction) PresentsPopup() bool {
+	return x.inner.PresentsPopup()
+}
+
+// PopupPopover calls the underlying PopupPopover.
+func (x *WKWebExtensionAction) PopupPopover() *appkit.NSPopover {
+	return x.inner.PopupPopover()
+}
+
+// PopupWebView calls the underlying PopupWebView.
+func (x *WKWebExtensionAction) PopupWebView() *WKWebView {
+	_r := x.inner.PopupWebView()
+	if _r == nil {
+		return nil
+	}
+	return &WKWebView{inner: _r}
+}
+
+// WKWebExtensionActionable is the interface implemented by [WKWebExtensionAction], for mocking and DI.
+type WKWebExtensionActionable interface {
+	Unwrap() *raw.WKWebExtensionAction
+	WithHasUnreadBadgeText(hasUnreadBadgeText bool) *WKWebExtensionAction
+	WithInspectionName(inspectionName string) *WKWebExtensionAction
+	IconForSize(size corefoundation.CGSize) *appkit.NSImage
+	ClosePopup()
+	WebExtensionContext() *WKWebExtensionContext
+	AssociatedTab() raw.WKWebExtensionTab
+	Label() string
+	BadgeText() string
+	HasUnreadBadgeText() bool
+	SetHasUnreadBadgeText(hasUnreadBadgeText bool)
+	InspectionName() string
+	SetInspectionName(inspectionName string)
+	IsEnabled() bool
+	MenuItems() []*appkit.NSMenuItem
+	PresentsPopup() bool
+	PopupPopover() *appkit.NSPopover
+	PopupWebView() *WKWebView
+}
+
+var _ WKWebExtensionActionable = (*WKWebExtensionAction)(nil)
 

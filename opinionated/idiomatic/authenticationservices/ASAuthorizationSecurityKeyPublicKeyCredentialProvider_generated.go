@@ -7,6 +7,7 @@ package authenticationservices
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,4 +25,41 @@ func NewAuthorizationSecurityKeyPublicKeyCredentialProviderWithRelyingPartyIdent
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRelyingPartyIdentifier:"), foundation.NSStringStringWithUTF8String(relyingPartyIdentifier).Ptr())
 	return &AuthorizationSecurityKeyPublicKeyCredentialProvider{inner: raw.ASAuthorizationSecurityKeyPublicKeyCredentialProviderFromID(_id)}
 }
+
+// CreateCredentialRegistrationRequestWithChallengeDisplayNameNameUserID calls the underlying CreateCredentialRegistrationRequestWithChallengeDisplayNameNameUserID.
+func (x *AuthorizationSecurityKeyPublicKeyCredentialProvider) CreateCredentialRegistrationRequestWithChallengeDisplayNameNameUserID(challenge *foundation.NSData, displayName string, name string, userID *foundation.NSData) *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest {
+	_r := x.inner.CreateCredentialRegistrationRequestWithChallengeDisplayNameNameUserID(challenge, foundation.NSStringStringWithUTF8String(displayName), foundation.NSStringStringWithUTF8String(name), userID)
+	if _r == nil {
+		return nil
+	}
+	return &AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest{inner: _r}
+}
+
+// CreateCredentialAssertionRequestWithChallenge calls the underlying CreateCredentialAssertionRequestWithChallenge.
+func (x *AuthorizationSecurityKeyPublicKeyCredentialProvider) CreateCredentialAssertionRequestWithChallenge(challenge *foundation.NSData) *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest {
+	_r := x.inner.CreateCredentialAssertionRequestWithChallenge(challenge)
+	if _r == nil {
+		return nil
+	}
+	return &AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest{inner: _r}
+}
+
+// RelyingPartyIdentifier calls the underlying RelyingPartyIdentifier.
+func (x *AuthorizationSecurityKeyPublicKeyCredentialProvider) RelyingPartyIdentifier() string {
+	_r := x.inner.RelyingPartyIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// AuthorizationSecurityKeyPublicKeyCredentialProviderable is the interface implemented by [AuthorizationSecurityKeyPublicKeyCredentialProvider], for mocking and DI.
+type AuthorizationSecurityKeyPublicKeyCredentialProviderable interface {
+	Unwrap() *raw.ASAuthorizationSecurityKeyPublicKeyCredentialProvider
+	CreateCredentialRegistrationRequestWithChallengeDisplayNameNameUserID(challenge *foundation.NSData, displayName string, name string, userID *foundation.NSData) *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest
+	CreateCredentialAssertionRequestWithChallenge(challenge *foundation.NSData) *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest
+	RelyingPartyIdentifier() string
+}
+
+var _ AuthorizationSecurityKeyPublicKeyCredentialProviderable = (*AuthorizationSecurityKeyPublicKeyCredentialProvider)(nil)
 

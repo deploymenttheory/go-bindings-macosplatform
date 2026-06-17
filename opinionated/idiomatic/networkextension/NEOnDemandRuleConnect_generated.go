@@ -25,3 +25,10 @@ func NewNEOnDemandRuleConnect() *NEOnDemandRuleConnect {
 
 func (x *NEOnDemandRuleConnect) asNEOnDemandRule() *raw.NEOnDemandRule { return &x.inner.NEOnDemandRule }
 
+// NEOnDemandRuleConnectable is the interface implemented by [NEOnDemandRuleConnect], for mocking and DI.
+type NEOnDemandRuleConnectable interface {
+	Unwrap() *raw.NEOnDemandRuleConnect
+}
+
+var _ NEOnDemandRuleConnectable = (*NEOnDemandRuleConnect)(nil)
+

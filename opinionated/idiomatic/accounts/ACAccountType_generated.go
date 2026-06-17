@@ -6,6 +6,7 @@ package accounts
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/accounts"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,37 @@ func NewAccountType() *AccountType {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ACAccountType")), objc.RegisterName("new"))
 	return &AccountType{inner: raw.ACAccountTypeFromID(_id)}
 }
+
+// AccountTypeDescription calls the underlying AccountTypeDescription.
+func (x *AccountType) AccountTypeDescription() string {
+	_r := x.inner.AccountTypeDescription()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Identifier calls the underlying Identifier.
+func (x *AccountType) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// AccessGranted calls the underlying AccessGranted.
+func (x *AccountType) AccessGranted() bool {
+	return x.inner.AccessGranted()
+}
+
+// AccountTypeable is the interface implemented by [AccountType], for mocking and DI.
+type AccountTypeable interface {
+	Unwrap() *raw.ACAccountType
+	AccountTypeDescription() string
+	Identifier() string
+	AccessGranted() bool
+}
+
+var _ AccountTypeable = (*AccountType)(nil)
 

@@ -23,3 +23,26 @@ func NewVertexAttributeDescriptorArray() *VertexAttributeDescriptorArray {
 	return &VertexAttributeDescriptorArray{inner: raw.MTLVertexAttributeDescriptorArrayFromID(_id)}
 }
 
+// ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
+func (x *VertexAttributeDescriptorArray) ObjectAtIndexedSubscript(index uint) *VertexAttributeDescriptor {
+	_r := x.inner.ObjectAtIndexedSubscript(index)
+	if _r == nil {
+		return nil
+	}
+	return &VertexAttributeDescriptor{inner: _r}
+}
+
+// SetObjectAtIndexedSubscript calls the underlying SetObjectAtIndexedSubscript.
+func (x *VertexAttributeDescriptorArray) SetObjectAtIndexedSubscript(attributeDesc *raw.MTLVertexAttributeDescriptor, index uint) {
+	x.inner.SetObjectAtIndexedSubscript(attributeDesc, index)
+}
+
+// VertexAttributeDescriptorArrayable is the interface implemented by [VertexAttributeDescriptorArray], for mocking and DI.
+type VertexAttributeDescriptorArrayable interface {
+	Unwrap() *raw.MTLVertexAttributeDescriptorArray
+	ObjectAtIndexedSubscript(index uint) *VertexAttributeDescriptor
+	SetObjectAtIndexedSubscript(attributeDesc *raw.MTLVertexAttributeDescriptor, index uint)
+}
+
+var _ VertexAttributeDescriptorArrayable = (*VertexAttributeDescriptorArray)(nil)
+

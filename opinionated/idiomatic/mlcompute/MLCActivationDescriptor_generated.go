@@ -23,3 +23,34 @@ func NewActivationDescriptor() *ActivationDescriptor {
 	return &ActivationDescriptor{inner: raw.MLCActivationDescriptorFromID(_id)}
 }
 
+// ActivationType calls the underlying ActivationType.
+func (x *ActivationDescriptor) ActivationType() raw.MLCActivationType {
+	return x.inner.ActivationType()
+}
+
+// A calls the underlying A.
+func (x *ActivationDescriptor) A() float32 {
+	return x.inner.A()
+}
+
+// B calls the underlying B.
+func (x *ActivationDescriptor) B() float32 {
+	return x.inner.B()
+}
+
+// C calls the underlying C.
+func (x *ActivationDescriptor) C() float32 {
+	return x.inner.C()
+}
+
+// ActivationDescriptorable is the interface implemented by [ActivationDescriptor], for mocking and DI.
+type ActivationDescriptorable interface {
+	Unwrap() *raw.MLCActivationDescriptor
+	ActivationType() raw.MLCActivationType
+	A() float32
+	B() float32
+	C() float32
+}
+
+var _ ActivationDescriptorable = (*ActivationDescriptor)(nil)
+

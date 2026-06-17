@@ -25,3 +25,10 @@ func NewMacOSBootLoader() *MacOSBootLoader {
 
 func (x *MacOSBootLoader) asBootLoader() *raw.VZBootLoader { return &x.inner.VZBootLoader }
 
+// MacOSBootLoaderable is the interface implemented by [MacOSBootLoader], for mocking and DI.
+type MacOSBootLoaderable interface {
+	Unwrap() *raw.VZMacOSBootLoader
+}
+
+var _ MacOSBootLoaderable = (*MacOSBootLoader)(nil)
+

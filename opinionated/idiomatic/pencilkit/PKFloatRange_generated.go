@@ -24,3 +24,22 @@ func NewFloatRangeWithLowerBoundUpperBound(lowerBound float64, upperBound float6
 	return &FloatRange{inner: raw.PKFloatRangeFromID(_id)}
 }
 
+// LowerBound calls the underlying LowerBound.
+func (x *FloatRange) LowerBound() float64 {
+	return x.inner.LowerBound()
+}
+
+// UpperBound calls the underlying UpperBound.
+func (x *FloatRange) UpperBound() float64 {
+	return x.inner.UpperBound()
+}
+
+// FloatRangeable is the interface implemented by [FloatRange], for mocking and DI.
+type FloatRangeable interface {
+	Unwrap() *raw.PKFloatRange
+	LowerBound() float64
+	UpperBound() float64
+}
+
+var _ FloatRangeable = (*FloatRange)(nil)
+

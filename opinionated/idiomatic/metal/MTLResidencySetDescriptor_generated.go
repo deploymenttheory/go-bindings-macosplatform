@@ -7,6 +7,7 @@ package metal
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -35,4 +36,35 @@ func (x *ResidencySetDescriptor) WithInitialCapacity(initialCapacity uint) *Resi
 	x.inner.SetInitialCapacity(initialCapacity)
 	return x
 }
+
+// Label calls the underlying Label.
+func (x *ResidencySetDescriptor) Label() string {
+	_r := x.inner.Label()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLabel calls the underlying SetLabel.
+func (x *ResidencySetDescriptor) SetLabel(label string) {
+	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+}
+
+// SetInitialCapacity calls the underlying SetInitialCapacity.
+func (x *ResidencySetDescriptor) SetInitialCapacity(initialCapacity uint) {
+	x.inner.SetInitialCapacity(initialCapacity)
+}
+
+// ResidencySetDescriptorable is the interface implemented by [ResidencySetDescriptor], for mocking and DI.
+type ResidencySetDescriptorable interface {
+	Unwrap() *raw.MTLResidencySetDescriptor
+	WithLabel(label string) *ResidencySetDescriptor
+	WithInitialCapacity(initialCapacity uint) *ResidencySetDescriptor
+	Label() string
+	SetLabel(label string)
+	SetInitialCapacity(initialCapacity uint)
+}
+
+var _ ResidencySetDescriptorable = (*ResidencySetDescriptor)(nil)
 

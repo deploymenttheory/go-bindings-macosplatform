@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,17 +25,20 @@ func NewMTREndpointInfo() *MTREndpointInfo {
 	return &MTREndpointInfo{inner: raw.MTREndpointInfoFromID(_id)}
 }
 
+// EndpointID calls the underlying EndpointID.
+func (x *MTREndpointInfo) EndpointID() *foundation.NSNumber {
+	return x.inner.EndpointID()
+}
+
 // DeviceTypes returns the collection as a Go slice.
 func (x *MTREndpointInfo) DeviceTypes() []*raw.MTRDeviceTypeRevision {
 	arr := x.inner.DeviceTypes()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MTRDeviceTypeRevision, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MTRDeviceTypeRevision {
+		return raw.MTRDeviceTypeRevisionFromID(purego.Retain(_id))
+	})
 }
 
 // PartsList returns the collection as a Go slice.
@@ -43,11 +47,9 @@ func (x *MTREndpointInfo) PartsList() []*foundation.NSNumber {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
 }
 
 // Children returns the collection as a Go slice.
@@ -56,10 +58,19 @@ func (x *MTREndpointInfo) Children() []*raw.MTREndpointInfo {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MTREndpointInfo, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MTREndpointInfo {
+		return raw.MTREndpointInfoFromID(purego.Retain(_id))
+	})
 }
+
+// MTREndpointInfoable is the interface implemented by [MTREndpointInfo], for mocking and DI.
+type MTREndpointInfoable interface {
+	Unwrap() *raw.MTREndpointInfo
+	EndpointID() *foundation.NSNumber
+	DeviceTypes() []*raw.MTRDeviceTypeRevision
+	PartsList() []*foundation.NSNumber
+	Children() []*raw.MTREndpointInfo
+}
+
+var _ MTREndpointInfoable = (*MTREndpointInfo)(nil)
 

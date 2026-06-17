@@ -6,6 +6,7 @@ package avfaudio
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -36,11 +37,19 @@ func (x *AudioUnitEQ) Bands() []*raw.AVAudioUnitEQFilterParameters {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AVAudioUnitEQFilterParameters, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVAudioUnitEQFilterParameters {
+		return raw.AVAudioUnitEQFilterParametersFromID(purego.Retain(_id))
+	})
+}
+
+// GlobalGain calls the underlying GlobalGain.
+func (x *AudioUnitEQ) GlobalGain() float32 {
+	return x.inner.GlobalGain()
+}
+
+// SetGlobalGain calls the underlying SetGlobalGain.
+func (x *AudioUnitEQ) SetGlobalGain(globalGain float32) {
+	x.inner.SetGlobalGain(globalGain)
 }
 
 func (x *AudioUnitEQ) asAudioUnitEffect() *raw.AVAudioUnitEffect { return &x.inner.AVAudioUnitEffect }
@@ -48,4 +57,15 @@ func (x *AudioUnitEQ) asAudioUnitEffect() *raw.AVAudioUnitEffect { return &x.inn
 func (x *AudioUnitEQ) asAudioUnit() *raw.AVAudioUnit { return &x.inner.AVAudioUnitEffect.AVAudioUnit }
 
 func (x *AudioUnitEQ) asAudioNode() *raw.AVAudioNode { return &x.inner.AVAudioUnitEffect.AVAudioUnit.AVAudioNode }
+
+// AudioUnitEQable is the interface implemented by [AudioUnitEQ], for mocking and DI.
+type AudioUnitEQable interface {
+	Unwrap() *raw.AVAudioUnitEQ
+	WithGlobalGain(globalGain float32) *AudioUnitEQ
+	Bands() []*raw.AVAudioUnitEQFilterParameters
+	GlobalGain() float32
+	SetGlobalGain(globalGain float32)
+}
+
+var _ AudioUnitEQable = (*AudioUnitEQ)(nil)
 

@@ -30,3 +30,23 @@ func (x *MTRSwitchClusterLongReleaseEvent) WithPreviousPosition(previousPosition
 	return x
 }
 
+// PreviousPosition calls the underlying PreviousPosition.
+func (x *MTRSwitchClusterLongReleaseEvent) PreviousPosition() *foundation.NSNumber {
+	return x.inner.PreviousPosition()
+}
+
+// SetPreviousPosition calls the underlying SetPreviousPosition.
+func (x *MTRSwitchClusterLongReleaseEvent) SetPreviousPosition(previousPosition *foundation.NSNumber) {
+	x.inner.SetPreviousPosition(previousPosition)
+}
+
+// MTRSwitchClusterLongReleaseEventable is the interface implemented by [MTRSwitchClusterLongReleaseEvent], for mocking and DI.
+type MTRSwitchClusterLongReleaseEventable interface {
+	Unwrap() *raw.MTRSwitchClusterLongReleaseEvent
+	WithPreviousPosition(previousPosition *foundation.NSNumber) *MTRSwitchClusterLongReleaseEvent
+	PreviousPosition() *foundation.NSNumber
+	SetPreviousPosition(previousPosition *foundation.NSNumber)
+}
+
+var _ MTRSwitchClusterLongReleaseEventable = (*MTRSwitchClusterLongReleaseEvent)(nil)
+

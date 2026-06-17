@@ -7,6 +7,7 @@ package vision
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,17 +25,32 @@ func NewRecognizedPoints3DObservation() *RecognizedPoints3DObservation {
 	return &RecognizedPoints3DObservation{inner: raw.VNRecognizedPoints3DObservationFromID(_id)}
 }
 
+// RecognizedPointForKeyError calls the underlying RecognizedPointForKeyError.
+func (x *RecognizedPoints3DObservation) RecognizedPointForKeyError(pointKey *foundation.NSString) (*RecognizedPoint3D, error) {
+	_r, _err := x.inner.RecognizedPointForKeyError(pointKey)
+	if _err != nil {
+		return nil, _err
+	}
+	if _r == nil {
+		return nil, nil
+	}
+	return &RecognizedPoint3D{inner: _r}, nil
+}
+
+// RecognizedPointsForGroupKeyError calls the underlying RecognizedPointsForGroupKeyError.
+func (x *RecognizedPoints3DObservation) RecognizedPointsForGroupKeyError(groupKey *foundation.NSString) (*foundation.NSDictionary[*foundation.NSString, *raw.VNRecognizedPoint3D], error) {
+	return x.inner.RecognizedPointsForGroupKeyError(groupKey)
+}
+
 // AvailableKeys returns the collection as a Go slice.
 func (x *RecognizedPoints3DObservation) AvailableKeys() []*foundation.NSString {
 	arr := x.inner.AvailableKeys()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	})
 }
 
 // AvailableGroupKeys returns the collection as a Go slice.
@@ -43,14 +59,23 @@ func (x *RecognizedPoints3DObservation) AvailableGroupKeys() []*foundation.NSStr
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	})
 }
 
 func (x *RecognizedPoints3DObservation) asRecognizedPoints3DObservation() *raw.VNRecognizedPoints3DObservation { return x.inner }
 
 func (x *RecognizedPoints3DObservation) asObservation() *raw.VNObservation { return &x.inner.VNObservation }
+
+// RecognizedPoints3DObservationable is the interface implemented by [RecognizedPoints3DObservation], for mocking and DI.
+type RecognizedPoints3DObservationable interface {
+	Unwrap() *raw.VNRecognizedPoints3DObservation
+	RecognizedPointForKeyError(pointKey *foundation.NSString) (*RecognizedPoint3D, error)
+	RecognizedPointsForGroupKeyError(groupKey *foundation.NSString) (*foundation.NSDictionary[*foundation.NSString, *raw.VNRecognizedPoint3D], error)
+	AvailableKeys() []*foundation.NSString
+	AvailableGroupKeys() []*foundation.NSString
+}
+
+var _ RecognizedPoints3DObservationable = (*RecognizedPoints3DObservation)(nil)
 

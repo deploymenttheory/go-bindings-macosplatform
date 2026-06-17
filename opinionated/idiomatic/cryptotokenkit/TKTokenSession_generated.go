@@ -30,5 +30,35 @@ func (x *TokenSession) WithDelegate(delegate raw.TKTokenSessionDelegate) *TokenS
 	return x
 }
 
+// Token calls the underlying Token.
+func (x *TokenSession) Token() *Token {
+	_r := x.inner.Token()
+	if _r == nil {
+		return nil
+	}
+	return &Token{inner: _r}
+}
+
+// Delegate calls the underlying Delegate.
+func (x *TokenSession) Delegate() raw.TKTokenSessionDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *TokenSession) SetDelegate(delegate raw.TKTokenSessionDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
 func (x *TokenSession) asTokenSession() *raw.TKTokenSession { return x.inner }
+
+// TokenSessionable is the interface implemented by [TokenSession], for mocking and DI.
+type TokenSessionable interface {
+	Unwrap() *raw.TKTokenSession
+	WithDelegate(delegate raw.TKTokenSessionDelegate) *TokenSession
+	Token() *Token
+	Delegate() raw.TKTokenSessionDelegate
+	SetDelegate(delegate raw.TKTokenSessionDelegate)
+}
+
+var _ TokenSessionable = (*TokenSession)(nil)
 

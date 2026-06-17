@@ -38,6 +38,11 @@ func (x *PaymentAuthorizationController) WithDelegate(delegate raw.PKPaymentAuth
 	return x
 }
 
+// PresentWithCompletion calls the underlying PresentWithCompletion.
+func (x *PaymentAuthorizationController) PresentWithCompletion(completion func(bool)) {
+	x.inner.PresentWithCompletion(completion)
+}
+
 // DismissWithCompletion blocks until the operation completes or ctx is cancelled.
 func (x *PaymentAuthorizationController) DismissWithCompletion(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -51,4 +56,26 @@ func (x *PaymentAuthorizationController) DismissWithCompletion(ctx context.Conte
 		return ctx.Err()
 	}
 }
+
+// Delegate calls the underlying Delegate.
+func (x *PaymentAuthorizationController) Delegate() raw.PKPaymentAuthorizationControllerDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *PaymentAuthorizationController) SetDelegate(delegate raw.PKPaymentAuthorizationControllerDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// PaymentAuthorizationControllerable is the interface implemented by [PaymentAuthorizationController], for mocking and DI.
+type PaymentAuthorizationControllerable interface {
+	Unwrap() *raw.PKPaymentAuthorizationController
+	WithDelegate(delegate raw.PKPaymentAuthorizationControllerDelegate) *PaymentAuthorizationController
+	PresentWithCompletion(completion func(bool))
+	DismissWithCompletion(ctx context.Context) error
+	Delegate() raw.PKPaymentAuthorizationControllerDelegate
+	SetDelegate(delegate raw.PKPaymentAuthorizationControllerDelegate)
+}
+
+var _ PaymentAuthorizationControllerable = (*PaymentAuthorizationController)(nil)
 

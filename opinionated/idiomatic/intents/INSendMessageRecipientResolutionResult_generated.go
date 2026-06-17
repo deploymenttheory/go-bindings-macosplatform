@@ -28,3 +28,10 @@ func (x *SendMessageRecipientResolutionResult) asPersonResolutionResult() *raw.I
 
 func (x *SendMessageRecipientResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult { return &x.inner.INPersonResolutionResult.INIntentResolutionResult }
 
+// SendMessageRecipientResolutionResultable is the interface implemented by [SendMessageRecipientResolutionResult], for mocking and DI.
+type SendMessageRecipientResolutionResultable interface {
+	Unwrap() *raw.INSendMessageRecipientResolutionResult
+}
+
+var _ SendMessageRecipientResolutionResultable = (*SendMessageRecipientResolutionResult)(nil)
+

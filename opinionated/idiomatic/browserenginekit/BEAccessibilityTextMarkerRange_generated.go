@@ -35,3 +35,44 @@ func (x *AccessibilityTextMarkerRange) WithEndMarker(endMarker *raw.BEAccessibil
 	return x
 }
 
+// StartMarker calls the underlying StartMarker.
+func (x *AccessibilityTextMarkerRange) StartMarker() *AccessibilityTextMarker {
+	_r := x.inner.StartMarker()
+	if _r == nil {
+		return nil
+	}
+	return &AccessibilityTextMarker{inner: _r}
+}
+
+// SetStartMarker calls the underlying SetStartMarker.
+func (x *AccessibilityTextMarkerRange) SetStartMarker(startMarker *raw.BEAccessibilityTextMarker) {
+	x.inner.SetStartMarker(startMarker)
+}
+
+// EndMarker calls the underlying EndMarker.
+func (x *AccessibilityTextMarkerRange) EndMarker() *AccessibilityTextMarker {
+	_r := x.inner.EndMarker()
+	if _r == nil {
+		return nil
+	}
+	return &AccessibilityTextMarker{inner: _r}
+}
+
+// SetEndMarker calls the underlying SetEndMarker.
+func (x *AccessibilityTextMarkerRange) SetEndMarker(endMarker *raw.BEAccessibilityTextMarker) {
+	x.inner.SetEndMarker(endMarker)
+}
+
+// AccessibilityTextMarkerRangeable is the interface implemented by [AccessibilityTextMarkerRange], for mocking and DI.
+type AccessibilityTextMarkerRangeable interface {
+	Unwrap() *raw.BEAccessibilityTextMarkerRange
+	WithStartMarker(startMarker *raw.BEAccessibilityTextMarker) *AccessibilityTextMarkerRange
+	WithEndMarker(endMarker *raw.BEAccessibilityTextMarker) *AccessibilityTextMarkerRange
+	StartMarker() *AccessibilityTextMarker
+	SetStartMarker(startMarker *raw.BEAccessibilityTextMarker)
+	EndMarker() *AccessibilityTextMarker
+	SetEndMarker(endMarker *raw.BEAccessibilityTextMarker)
+}
+
+var _ AccessibilityTextMarkerRangeable = (*AccessibilityTextMarkerRange)(nil)
+

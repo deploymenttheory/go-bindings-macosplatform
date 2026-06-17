@@ -7,6 +7,7 @@ package mpsmatrix
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsmatrix"
 	"github.com/ebitengine/purego/objc"
 )
@@ -57,5 +58,70 @@ func (x *MatrixFindTopK) WithNumberOfTopKValues(numberOfTopKValues uint) *Matrix
 	return x
 }
 
+// EncodeToCommandBufferInputMatrixResultIndexMatrixResultValueMatrix calls the underlying EncodeToCommandBufferInputMatrixResultIndexMatrixResultValueMatrix.
+func (x *MatrixFindTopK) EncodeToCommandBufferInputMatrixResultIndexMatrixResultValueMatrix(commandBuffer metal.MTLCommandBuffer, inputMatrix *mpscore.MPSMatrix, resultIndexMatrix *mpscore.MPSMatrix, resultValueMatrix *mpscore.MPSMatrix) {
+	x.inner.EncodeToCommandBufferInputMatrixResultIndexMatrixResultValueMatrix(commandBuffer, inputMatrix, resultIndexMatrix, resultValueMatrix)
+}
+
+// SourceRows calls the underlying SourceRows.
+func (x *MatrixFindTopK) SourceRows() uint {
+	return x.inner.SourceRows()
+}
+
+// SetSourceRows calls the underlying SetSourceRows.
+func (x *MatrixFindTopK) SetSourceRows(sourceRows uint) {
+	x.inner.SetSourceRows(sourceRows)
+}
+
+// SourceColumns calls the underlying SourceColumns.
+func (x *MatrixFindTopK) SourceColumns() uint {
+	return x.inner.SourceColumns()
+}
+
+// SetSourceColumns calls the underlying SetSourceColumns.
+func (x *MatrixFindTopK) SetSourceColumns(sourceColumns uint) {
+	x.inner.SetSourceColumns(sourceColumns)
+}
+
+// IndexOffset calls the underlying IndexOffset.
+func (x *MatrixFindTopK) IndexOffset() uint {
+	return x.inner.IndexOffset()
+}
+
+// SetIndexOffset calls the underlying SetIndexOffset.
+func (x *MatrixFindTopK) SetIndexOffset(indexOffset uint) {
+	x.inner.SetIndexOffset(indexOffset)
+}
+
+// NumberOfTopKValues calls the underlying NumberOfTopKValues.
+func (x *MatrixFindTopK) NumberOfTopKValues() uint {
+	return x.inner.NumberOfTopKValues()
+}
+
+// SetNumberOfTopKValues calls the underlying SetNumberOfTopKValues.
+func (x *MatrixFindTopK) SetNumberOfTopKValues(numberOfTopKValues uint) {
+	x.inner.SetNumberOfTopKValues(numberOfTopKValues)
+}
+
 func (x *MatrixFindTopK) asMatrixUnaryKernel() *raw.MPSMatrixUnaryKernel { return &x.inner.MPSMatrixUnaryKernel }
+
+// MatrixFindTopKable is the interface implemented by [MatrixFindTopK], for mocking and DI.
+type MatrixFindTopKable interface {
+	Unwrap() *raw.MPSMatrixFindTopK
+	WithSourceRows(sourceRows uint) *MatrixFindTopK
+	WithSourceColumns(sourceColumns uint) *MatrixFindTopK
+	WithIndexOffset(indexOffset uint) *MatrixFindTopK
+	WithNumberOfTopKValues(numberOfTopKValues uint) *MatrixFindTopK
+	EncodeToCommandBufferInputMatrixResultIndexMatrixResultValueMatrix(commandBuffer metal.MTLCommandBuffer, inputMatrix *mpscore.MPSMatrix, resultIndexMatrix *mpscore.MPSMatrix, resultValueMatrix *mpscore.MPSMatrix)
+	SourceRows() uint
+	SetSourceRows(sourceRows uint)
+	SourceColumns() uint
+	SetSourceColumns(sourceColumns uint)
+	IndexOffset() uint
+	SetIndexOffset(indexOffset uint)
+	NumberOfTopKValues() uint
+	SetNumberOfTopKValues(numberOfTopKValues uint)
+}
+
+var _ MatrixFindTopKable = (*MatrixFindTopK)(nil)
 

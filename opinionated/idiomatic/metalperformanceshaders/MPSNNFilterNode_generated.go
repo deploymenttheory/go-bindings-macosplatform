@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -37,16 +38,94 @@ func (x *NNFilterNode) WithLabel(label string) *NNFilterNode {
 	return x
 }
 
+// GradientFilterWithSource calls the underlying GradientFilterWithSource.
+func (x *NNFilterNode) GradientFilterWithSource(gradientImage *mpsneuralnetwork.MPSNNImageNode) *mpsneuralnetwork.MPSNNGradientFilterNode {
+	return x.inner.GradientFilterWithSource(gradientImage)
+}
+
+// GradientFilterWithSources calls the underlying GradientFilterWithSources.
+func (x *NNFilterNode) GradientFilterWithSources(gradientImages *foundation.NSArray[*mpsneuralnetwork.MPSNNImageNode]) *mpsneuralnetwork.MPSNNGradientFilterNode {
+	return x.inner.GradientFilterWithSources(gradientImages)
+}
+
+// GradientFiltersWithSources calls the underlying GradientFiltersWithSources.
+func (x *NNFilterNode) GradientFiltersWithSources(gradientImages *foundation.NSArray[*mpsneuralnetwork.MPSNNImageNode]) *foundation.NSArray[*mpsneuralnetwork.MPSNNGradientFilterNode] {
+	return x.inner.GradientFiltersWithSources(gradientImages)
+}
+
+// GradientFiltersWithSource calls the underlying GradientFiltersWithSource.
+func (x *NNFilterNode) GradientFiltersWithSource(gradientImage *mpsneuralnetwork.MPSNNImageNode) *foundation.NSArray[*mpsneuralnetwork.MPSNNGradientFilterNode] {
+	return x.inner.GradientFiltersWithSource(gradientImage)
+}
+
+// TrainingGraphWithSourceGradientNodeHandler calls the underlying TrainingGraphWithSourceGradientNodeHandler.
+func (x *NNFilterNode) TrainingGraphWithSourceGradientNodeHandler(gradientImage *mpsneuralnetwork.MPSNNImageNode, nodeHandler func(*mpsneuralnetwork.MPSNNFilterNode, *mpsneuralnetwork.MPSNNFilterNode, *mpsneuralnetwork.MPSNNImageNode, *mpsneuralnetwork.MPSNNImageNode)) *foundation.NSArray[*mpsneuralnetwork.MPSNNFilterNode] {
+	return x.inner.TrainingGraphWithSourceGradientNodeHandler(gradientImage, nodeHandler)
+}
+
+// ResultImage calls the underlying ResultImage.
+func (x *NNFilterNode) ResultImage() *mpsneuralnetwork.MPSNNImageNode {
+	return x.inner.ResultImage()
+}
+
+// ResultState calls the underlying ResultState.
+func (x *NNFilterNode) ResultState() *mpsneuralnetwork.MPSNNStateNode {
+	return x.inner.ResultState()
+}
+
 // ResultStates returns the collection as a Go slice.
 func (x *NNFilterNode) ResultStates() []*mpsneuralnetwork.MPSNNStateNode {
 	arr := x.inner.ResultStates()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*mpsneuralnetwork.MPSNNStateNode, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *mpsneuralnetwork.MPSNNStateNode {
+		return mpsneuralnetwork.MPSNNStateNodeFromID(purego.Retain(_id))
+	})
 }
+
+// PaddingPolicy calls the underlying PaddingPolicy.
+func (x *NNFilterNode) PaddingPolicy() mpsneuralnetwork.MPSNNPadding {
+	return x.inner.PaddingPolicy()
+}
+
+// SetPaddingPolicy calls the underlying SetPaddingPolicy.
+func (x *NNFilterNode) SetPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) {
+	x.inner.SetPaddingPolicy(paddingPolicy)
+}
+
+// Label calls the underlying Label.
+func (x *NNFilterNode) Label() string {
+	_r := x.inner.Label()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLabel calls the underlying SetLabel.
+func (x *NNFilterNode) SetLabel(label string) {
+	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+}
+
+// NNFilterNodeable is the interface implemented by [NNFilterNode], for mocking and DI.
+type NNFilterNodeable interface {
+	Unwrap() *raw.MPSNNFilterNode
+	WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *NNFilterNode
+	WithLabel(label string) *NNFilterNode
+	GradientFilterWithSource(gradientImage *mpsneuralnetwork.MPSNNImageNode) *mpsneuralnetwork.MPSNNGradientFilterNode
+	GradientFilterWithSources(gradientImages *foundation.NSArray[*mpsneuralnetwork.MPSNNImageNode]) *mpsneuralnetwork.MPSNNGradientFilterNode
+	GradientFiltersWithSources(gradientImages *foundation.NSArray[*mpsneuralnetwork.MPSNNImageNode]) *foundation.NSArray[*mpsneuralnetwork.MPSNNGradientFilterNode]
+	GradientFiltersWithSource(gradientImage *mpsneuralnetwork.MPSNNImageNode) *foundation.NSArray[*mpsneuralnetwork.MPSNNGradientFilterNode]
+	TrainingGraphWithSourceGradientNodeHandler(gradientImage *mpsneuralnetwork.MPSNNImageNode, nodeHandler func(*mpsneuralnetwork.MPSNNFilterNode, *mpsneuralnetwork.MPSNNFilterNode, *mpsneuralnetwork.MPSNNImageNode, *mpsneuralnetwork.MPSNNImageNode)) *foundation.NSArray[*mpsneuralnetwork.MPSNNFilterNode]
+	ResultImage() *mpsneuralnetwork.MPSNNImageNode
+	ResultState() *mpsneuralnetwork.MPSNNStateNode
+	ResultStates() []*mpsneuralnetwork.MPSNNStateNode
+	PaddingPolicy() mpsneuralnetwork.MPSNNPadding
+	SetPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding)
+	Label() string
+	SetLabel(label string)
+}
+
+var _ NNFilterNodeable = (*NNFilterNode)(nil)
 

@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -44,4 +45,70 @@ func (x *MTRThreadOperationalDataset) WithChannel(channel uint16) *MTRThreadOper
 	x.inner.SetChannel(channel)
 	return x
 }
+
+// Data calls the underlying Data.
+func (x *MTRThreadOperationalDataset) Data() *foundation.NSData {
+	return x.inner.Data()
+}
+
+// NetworkName calls the underlying NetworkName.
+func (x *MTRThreadOperationalDataset) NetworkName() string {
+	_r := x.inner.NetworkName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ExtendedPANID calls the underlying ExtendedPANID.
+func (x *MTRThreadOperationalDataset) ExtendedPANID() *foundation.NSData {
+	return x.inner.ExtendedPANID()
+}
+
+// MasterKey calls the underlying MasterKey.
+func (x *MTRThreadOperationalDataset) MasterKey() *foundation.NSData {
+	return x.inner.MasterKey()
+}
+
+// PSKc calls the underlying PSKc.
+func (x *MTRThreadOperationalDataset) PSKc() *foundation.NSData {
+	return x.inner.PSKc()
+}
+
+// ChannelNumber calls the underlying ChannelNumber.
+func (x *MTRThreadOperationalDataset) ChannelNumber() *foundation.NSNumber {
+	return x.inner.ChannelNumber()
+}
+
+// PanID calls the underlying PanID.
+func (x *MTRThreadOperationalDataset) PanID() *foundation.NSData {
+	return x.inner.PanID()
+}
+
+// Channel calls the underlying Channel.
+func (x *MTRThreadOperationalDataset) Channel() uint16 {
+	return x.inner.Channel()
+}
+
+// SetChannel calls the underlying SetChannel.
+func (x *MTRThreadOperationalDataset) SetChannel(channel uint16) {
+	x.inner.SetChannel(channel)
+}
+
+// MTRThreadOperationalDatasetable is the interface implemented by [MTRThreadOperationalDataset], for mocking and DI.
+type MTRThreadOperationalDatasetable interface {
+	Unwrap() *raw.MTRThreadOperationalDataset
+	WithChannel(channel uint16) *MTRThreadOperationalDataset
+	Data() *foundation.NSData
+	NetworkName() string
+	ExtendedPANID() *foundation.NSData
+	MasterKey() *foundation.NSData
+	PSKc() *foundation.NSData
+	ChannelNumber() *foundation.NSNumber
+	PanID() *foundation.NSData
+	Channel() uint16
+	SetChannel(channel uint16)
+}
+
+var _ MTRThreadOperationalDatasetable = (*MTRThreadOperationalDataset)(nil)
 

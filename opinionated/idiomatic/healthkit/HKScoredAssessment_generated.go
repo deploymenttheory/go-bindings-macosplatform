@@ -23,9 +23,22 @@ func NewScoredAssessment() *ScoredAssessment {
 	return &ScoredAssessment{inner: raw.HKScoredAssessmentFromID(_id)}
 }
 
+// Score calls the underlying Score.
+func (x *ScoredAssessment) Score() int {
+	return x.inner.Score()
+}
+
 func (x *ScoredAssessment) asScoredAssessment() *raw.HKScoredAssessment { return x.inner }
 
 func (x *ScoredAssessment) asSample() *raw.HKSample { return &x.inner.HKSample }
 
 func (x *ScoredAssessment) asObject() *raw.HKObject { return &x.inner.HKSample.HKObject }
+
+// ScoredAssessmentable is the interface implemented by [ScoredAssessment], for mocking and DI.
+type ScoredAssessmentable interface {
+	Unwrap() *raw.HKScoredAssessment
+	Score() int
+}
+
+var _ ScoredAssessmentable = (*ScoredAssessment)(nil)
 

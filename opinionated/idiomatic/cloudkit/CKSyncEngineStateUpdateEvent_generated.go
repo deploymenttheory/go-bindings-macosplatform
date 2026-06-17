@@ -23,5 +23,22 @@ func NewSyncEngineStateUpdateEvent() *SyncEngineStateUpdateEvent {
 	return &SyncEngineStateUpdateEvent{inner: raw.CKSyncEngineStateUpdateEventFromID(_id)}
 }
 
+// StateSerialization calls the underlying StateSerialization.
+func (x *SyncEngineStateUpdateEvent) StateSerialization() *SyncEngineStateSerialization {
+	_r := x.inner.StateSerialization()
+	if _r == nil {
+		return nil
+	}
+	return &SyncEngineStateSerialization{inner: _r}
+}
+
 func (x *SyncEngineStateUpdateEvent) asSyncEngineEvent() *raw.CKSyncEngineEvent { return &x.inner.CKSyncEngineEvent }
+
+// SyncEngineStateUpdateEventable is the interface implemented by [SyncEngineStateUpdateEvent], for mocking and DI.
+type SyncEngineStateUpdateEventable interface {
+	Unwrap() *raw.CKSyncEngineStateUpdateEvent
+	StateSerialization() *SyncEngineStateSerialization
+}
+
+var _ SyncEngineStateUpdateEventable = (*SyncEngineStateUpdateEvent)(nil)
 

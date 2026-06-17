@@ -6,6 +6,7 @@ package datadetection
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/datadetection"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +24,32 @@ func NewMatchPhoneNumber() *MatchPhoneNumber {
 	return &MatchPhoneNumber{inner: raw.DDMatchPhoneNumberFromID(_id)}
 }
 
+// PhoneNumber calls the underlying PhoneNumber.
+func (x *MatchPhoneNumber) PhoneNumber() string {
+	_r := x.inner.PhoneNumber()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Label calls the underlying Label.
+func (x *MatchPhoneNumber) Label() string {
+	_r := x.inner.Label()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 func (x *MatchPhoneNumber) asMatch() *raw.DDMatch { return &x.inner.DDMatch }
+
+// MatchPhoneNumberable is the interface implemented by [MatchPhoneNumber], for mocking and DI.
+type MatchPhoneNumberable interface {
+	Unwrap() *raw.DDMatchPhoneNumber
+	PhoneNumber() string
+	Label() string
+}
+
+var _ MatchPhoneNumberable = (*MatchPhoneNumber)(nil)
 

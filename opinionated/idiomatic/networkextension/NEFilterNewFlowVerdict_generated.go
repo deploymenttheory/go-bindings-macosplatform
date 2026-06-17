@@ -29,5 +29,25 @@ func (x *NEFilterNewFlowVerdict) WithStatisticsReportFrequency(statisticsReportF
 	return x
 }
 
+// StatisticsReportFrequency calls the underlying StatisticsReportFrequency.
+func (x *NEFilterNewFlowVerdict) StatisticsReportFrequency() raw.NEFilterReportFrequency {
+	return x.inner.StatisticsReportFrequency()
+}
+
+// SetStatisticsReportFrequency calls the underlying SetStatisticsReportFrequency.
+func (x *NEFilterNewFlowVerdict) SetStatisticsReportFrequency(statisticsReportFrequency raw.NEFilterReportFrequency) {
+	x.inner.SetStatisticsReportFrequency(statisticsReportFrequency)
+}
+
 func (x *NEFilterNewFlowVerdict) asNEFilterVerdict() *raw.NEFilterVerdict { return &x.inner.NEFilterVerdict }
+
+// NEFilterNewFlowVerdictable is the interface implemented by [NEFilterNewFlowVerdict], for mocking and DI.
+type NEFilterNewFlowVerdictable interface {
+	Unwrap() *raw.NEFilterNewFlowVerdict
+	WithStatisticsReportFrequency(statisticsReportFrequency raw.NEFilterReportFrequency) *NEFilterNewFlowVerdict
+	StatisticsReportFrequency() raw.NEFilterReportFrequency
+	SetStatisticsReportFrequency(statisticsReportFrequency raw.NEFilterReportFrequency)
+}
+
+var _ NEFilterNewFlowVerdictable = (*NEFilterNewFlowVerdict)(nil)
 

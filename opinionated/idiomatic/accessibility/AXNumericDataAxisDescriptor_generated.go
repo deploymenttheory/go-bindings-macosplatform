@@ -7,6 +7,7 @@ package accessibility
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/accessibility"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -73,16 +74,81 @@ func (x *NumericDataAxisDescriptor) WithGridlinePositions(items ...*foundation.N
 	return x
 }
 
+// ScaleType calls the underlying ScaleType.
+func (x *NumericDataAxisDescriptor) ScaleType() raw.AXNumericDataAxisDescriptorScale {
+	return x.inner.ScaleType()
+}
+
+// SetScaleType calls the underlying SetScaleType.
+func (x *NumericDataAxisDescriptor) SetScaleType(scaleType raw.AXNumericDataAxisDescriptorScale) {
+	x.inner.SetScaleType(scaleType)
+}
+
+// LowerBound calls the underlying LowerBound.
+func (x *NumericDataAxisDescriptor) LowerBound() float64 {
+	return x.inner.LowerBound()
+}
+
+// SetLowerBound calls the underlying SetLowerBound.
+func (x *NumericDataAxisDescriptor) SetLowerBound(lowerBound float64) {
+	x.inner.SetLowerBound(lowerBound)
+}
+
+// UpperBound calls the underlying UpperBound.
+func (x *NumericDataAxisDescriptor) UpperBound() float64 {
+	return x.inner.UpperBound()
+}
+
+// SetUpperBound calls the underlying SetUpperBound.
+func (x *NumericDataAxisDescriptor) SetUpperBound(upperBound float64) {
+	x.inner.SetUpperBound(upperBound)
+}
+
+// ValueDescriptionProvider calls the underlying ValueDescriptionProvider.
+func (x *NumericDataAxisDescriptor) ValueDescriptionProvider() objc.Block {
+	return x.inner.ValueDescriptionProvider()
+}
+
+// SetValueDescriptionProvider calls the underlying SetValueDescriptionProvider.
+func (x *NumericDataAxisDescriptor) SetValueDescriptionProvider(valueDescriptionProvider objc.Block) {
+	x.inner.SetValueDescriptionProvider(valueDescriptionProvider)
+}
+
 // GridlinePositions returns the collection as a Go slice.
 func (x *NumericDataAxisDescriptor) GridlinePositions() []*foundation.NSNumber {
 	arr := x.inner.GridlinePositions()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
 }
+
+// SetGridlinePositions calls the underlying SetGridlinePositions.
+func (x *NumericDataAxisDescriptor) SetGridlinePositions(gridlinePositions *foundation.NSArray[*foundation.NSNumber]) {
+	x.inner.SetGridlinePositions(gridlinePositions)
+}
+
+// NumericDataAxisDescriptorable is the interface implemented by [NumericDataAxisDescriptor], for mocking and DI.
+type NumericDataAxisDescriptorable interface {
+	Unwrap() *raw.AXNumericDataAxisDescriptor
+	WithScaleType(scaleType raw.AXNumericDataAxisDescriptorScale) *NumericDataAxisDescriptor
+	WithLowerBound(lowerBound float64) *NumericDataAxisDescriptor
+	WithUpperBound(upperBound float64) *NumericDataAxisDescriptor
+	WithValueDescriptionProvider(valueDescriptionProvider objc.Block) *NumericDataAxisDescriptor
+	WithGridlinePositions(items ...*foundation.NSNumber) *NumericDataAxisDescriptor
+	ScaleType() raw.AXNumericDataAxisDescriptorScale
+	SetScaleType(scaleType raw.AXNumericDataAxisDescriptorScale)
+	LowerBound() float64
+	SetLowerBound(lowerBound float64)
+	UpperBound() float64
+	SetUpperBound(upperBound float64)
+	ValueDescriptionProvider() objc.Block
+	SetValueDescriptionProvider(valueDescriptionProvider objc.Block)
+	GridlinePositions() []*foundation.NSNumber
+	SetGridlinePositions(gridlinePositions *foundation.NSArray[*foundation.NSNumber])
+}
+
+var _ NumericDataAxisDescriptorable = (*NumericDataAxisDescriptor)(nil)
 

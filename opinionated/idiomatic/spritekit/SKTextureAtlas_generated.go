@@ -8,6 +8,7 @@ import (
 	"context"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -25,6 +26,15 @@ func NewTextureAtlas() *TextureAtlas {
 	return &TextureAtlas{inner: raw.SKTextureAtlasFromID(_id)}
 }
 
+// TextureNamed calls the underlying TextureNamed.
+func (x *TextureAtlas) TextureNamed(name string) *Texture {
+	_r := x.inner.TextureNamed(foundation.NSStringStringWithUTF8String(name))
+	if _r == nil {
+		return nil
+	}
+	return &Texture{inner: _r}
+}
+
 // Preload blocks until the operation completes or ctx is cancelled.
 func (x *TextureAtlas) Preload(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -40,15 +50,23 @@ func (x *TextureAtlas) Preload(ctx context.Context) error {
 }
 
 // TextureNames returns the collection as a Go slice.
-func (x *TextureAtlas) TextureNames() []*foundation.NSString {
+func (x *TextureAtlas) TextureNames() []string {
 	arr := x.inner.TextureNames()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
+
+// TextureAtlasable is the interface implemented by [TextureAtlas], for mocking and DI.
+type TextureAtlasable interface {
+	Unwrap() *raw.SKTextureAtlas
+	TextureNamed(name string) *Texture
+	Preload(ctx context.Context) error
+	TextureNames() []string
+}
+
+var _ TextureAtlasable = (*TextureAtlas)(nil)
 

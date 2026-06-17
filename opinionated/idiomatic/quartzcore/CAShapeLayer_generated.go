@@ -7,6 +7,7 @@ package quartzcore
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -89,18 +90,183 @@ func (x *ShapeLayer) WithLineDashPattern(items ...*foundation.NSNumber) *ShapeLa
 	return x
 }
 
+// Path calls the underlying Path.
+func (x *ShapeLayer) Path() unsafe.Pointer {
+	return x.inner.Path()
+}
+
+// SetPath calls the underlying SetPath.
+func (x *ShapeLayer) SetPath(path unsafe.Pointer) {
+	x.inner.SetPath(path)
+}
+
+// FillColor calls the underlying FillColor.
+func (x *ShapeLayer) FillColor() unsafe.Pointer {
+	return x.inner.FillColor()
+}
+
+// SetFillColor calls the underlying SetFillColor.
+func (x *ShapeLayer) SetFillColor(fillColor unsafe.Pointer) {
+	x.inner.SetFillColor(fillColor)
+}
+
+// FillRule calls the underlying FillRule.
+func (x *ShapeLayer) FillRule() string {
+	_r := x.inner.FillRule()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetFillRule calls the underlying SetFillRule.
+func (x *ShapeLayer) SetFillRule(fillRule *foundation.NSString) {
+	x.inner.SetFillRule(fillRule)
+}
+
+// StrokeColor calls the underlying StrokeColor.
+func (x *ShapeLayer) StrokeColor() unsafe.Pointer {
+	return x.inner.StrokeColor()
+}
+
+// SetStrokeColor calls the underlying SetStrokeColor.
+func (x *ShapeLayer) SetStrokeColor(strokeColor unsafe.Pointer) {
+	x.inner.SetStrokeColor(strokeColor)
+}
+
+// StrokeStart calls the underlying StrokeStart.
+func (x *ShapeLayer) StrokeStart() float64 {
+	return x.inner.StrokeStart()
+}
+
+// SetStrokeStart calls the underlying SetStrokeStart.
+func (x *ShapeLayer) SetStrokeStart(strokeStart float64) {
+	x.inner.SetStrokeStart(strokeStart)
+}
+
+// StrokeEnd calls the underlying StrokeEnd.
+func (x *ShapeLayer) StrokeEnd() float64 {
+	return x.inner.StrokeEnd()
+}
+
+// SetStrokeEnd calls the underlying SetStrokeEnd.
+func (x *ShapeLayer) SetStrokeEnd(strokeEnd float64) {
+	x.inner.SetStrokeEnd(strokeEnd)
+}
+
+// LineWidth calls the underlying LineWidth.
+func (x *ShapeLayer) LineWidth() float64 {
+	return x.inner.LineWidth()
+}
+
+// SetLineWidth calls the underlying SetLineWidth.
+func (x *ShapeLayer) SetLineWidth(lineWidth float64) {
+	x.inner.SetLineWidth(lineWidth)
+}
+
+// MiterLimit calls the underlying MiterLimit.
+func (x *ShapeLayer) MiterLimit() float64 {
+	return x.inner.MiterLimit()
+}
+
+// SetMiterLimit calls the underlying SetMiterLimit.
+func (x *ShapeLayer) SetMiterLimit(miterLimit float64) {
+	x.inner.SetMiterLimit(miterLimit)
+}
+
+// LineCap calls the underlying LineCap.
+func (x *ShapeLayer) LineCap() string {
+	_r := x.inner.LineCap()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLineCap calls the underlying SetLineCap.
+func (x *ShapeLayer) SetLineCap(lineCap *foundation.NSString) {
+	x.inner.SetLineCap(lineCap)
+}
+
+// LineJoin calls the underlying LineJoin.
+func (x *ShapeLayer) LineJoin() string {
+	_r := x.inner.LineJoin()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLineJoin calls the underlying SetLineJoin.
+func (x *ShapeLayer) SetLineJoin(lineJoin *foundation.NSString) {
+	x.inner.SetLineJoin(lineJoin)
+}
+
+// LineDashPhase calls the underlying LineDashPhase.
+func (x *ShapeLayer) LineDashPhase() float64 {
+	return x.inner.LineDashPhase()
+}
+
+// SetLineDashPhase calls the underlying SetLineDashPhase.
+func (x *ShapeLayer) SetLineDashPhase(lineDashPhase float64) {
+	x.inner.SetLineDashPhase(lineDashPhase)
+}
+
 // LineDashPattern returns the collection as a Go slice.
 func (x *ShapeLayer) LineDashPattern() []*foundation.NSNumber {
 	arr := x.inner.LineDashPattern()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
+}
+
+// SetLineDashPattern calls the underlying SetLineDashPattern.
+func (x *ShapeLayer) SetLineDashPattern(lineDashPattern *foundation.NSArray[*foundation.NSNumber]) {
+	x.inner.SetLineDashPattern(lineDashPattern)
 }
 
 func (x *ShapeLayer) asLayer() *raw.CALayer { return &x.inner.CALayer }
+
+// ShapeLayerable is the interface implemented by [ShapeLayer], for mocking and DI.
+type ShapeLayerable interface {
+	Unwrap() *raw.CAShapeLayer
+	WithFillRule(fillRule *foundation.NSString) *ShapeLayer
+	WithStrokeStart(strokeStart float64) *ShapeLayer
+	WithStrokeEnd(strokeEnd float64) *ShapeLayer
+	WithLineWidth(lineWidth float64) *ShapeLayer
+	WithMiterLimit(miterLimit float64) *ShapeLayer
+	WithLineCap(lineCap *foundation.NSString) *ShapeLayer
+	WithLineJoin(lineJoin *foundation.NSString) *ShapeLayer
+	WithLineDashPhase(lineDashPhase float64) *ShapeLayer
+	WithLineDashPattern(items ...*foundation.NSNumber) *ShapeLayer
+	Path() unsafe.Pointer
+	SetPath(path unsafe.Pointer)
+	FillColor() unsafe.Pointer
+	SetFillColor(fillColor unsafe.Pointer)
+	FillRule() string
+	SetFillRule(fillRule *foundation.NSString)
+	StrokeColor() unsafe.Pointer
+	SetStrokeColor(strokeColor unsafe.Pointer)
+	StrokeStart() float64
+	SetStrokeStart(strokeStart float64)
+	StrokeEnd() float64
+	SetStrokeEnd(strokeEnd float64)
+	LineWidth() float64
+	SetLineWidth(lineWidth float64)
+	MiterLimit() float64
+	SetMiterLimit(miterLimit float64)
+	LineCap() string
+	SetLineCap(lineCap *foundation.NSString)
+	LineJoin() string
+	SetLineJoin(lineJoin *foundation.NSString)
+	LineDashPhase() float64
+	SetLineDashPhase(lineDashPhase float64)
+	LineDashPattern() []*foundation.NSNumber
+	SetLineDashPattern(lineDashPattern *foundation.NSArray[*foundation.NSNumber])
+}
+
+var _ ShapeLayerable = (*ShapeLayer)(nil)
 

@@ -41,3 +41,10 @@ func (x *ImageBilinearScale) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel 
 
 func (x *ImageBilinearScale) asKernel() *mpscore.MPSKernel { return &x.inner.MPSImageScale.MPSUnaryImageKernel.MPSKernel }
 
+// ImageBilinearScaleable is the interface implemented by [ImageBilinearScale], for mocking and DI.
+type ImageBilinearScaleable interface {
+	Unwrap() *raw.MPSImageBilinearScale
+}
+
+var _ ImageBilinearScaleable = (*ImageBilinearScale)(nil)
+

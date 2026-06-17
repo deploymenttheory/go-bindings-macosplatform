@@ -40,5 +40,73 @@ func (x *ArrayMultiaryBase) WithDestinationArrayAllocator(destinationArrayAlloca
 	return x
 }
 
+// OffsetsAtSourceIndex calls the underlying OffsetsAtSourceIndex.
+func (x *ArrayMultiaryBase) OffsetsAtSourceIndex(sourceIndex uint) raw.MPSNDArrayOffsets {
+	return x.inner.OffsetsAtSourceIndex(sourceIndex)
+}
+
+// EdgeModeAtSourceIndex calls the underlying EdgeModeAtSourceIndex.
+func (x *ArrayMultiaryBase) EdgeModeAtSourceIndex(sourceIndex uint) mpscore.MPSImageEdgeMode {
+	return x.inner.EdgeModeAtSourceIndex(sourceIndex)
+}
+
+// KernelSizesForSourceIndex calls the underlying KernelSizesForSourceIndex.
+func (x *ArrayMultiaryBase) KernelSizesForSourceIndex(sourceIndex uint) raw.MPSNDArraySizes {
+	return x.inner.KernelSizesForSourceIndex(sourceIndex)
+}
+
+// StridesForSourceIndex calls the underlying StridesForSourceIndex.
+func (x *ArrayMultiaryBase) StridesForSourceIndex(sourceIndex uint) raw.MPSNDArrayOffsets {
+	return x.inner.StridesForSourceIndex(sourceIndex)
+}
+
+// DilationRatesForSourceIndex calls the underlying DilationRatesForSourceIndex.
+func (x *ArrayMultiaryBase) DilationRatesForSourceIndex(sourceIndex uint) raw.MPSNDArraySizes {
+	return x.inner.DilationRatesForSourceIndex(sourceIndex)
+}
+
+// EncodeWithCoder calls the underlying EncodeWithCoder.
+func (x *ArrayMultiaryBase) EncodeWithCoder(coder *foundation.NSCoder) {
+	x.inner.EncodeWithCoder(coder)
+}
+
+// ResultStateForSourceArraysSourceStatesDestinationArray calls the underlying ResultStateForSourceArraysSourceStatesDestinationArray.
+func (x *ArrayMultiaryBase) ResultStateForSourceArraysSourceStatesDestinationArray(sourceArrays *foundation.NSArray[*mpscore.MPSNDArray], sourceStates *foundation.NSArray[*mpscore.MPSState], destinationArray *mpscore.MPSNDArray) *mpscore.MPSState {
+	return x.inner.ResultStateForSourceArraysSourceStatesDestinationArray(sourceArrays, sourceStates, destinationArray)
+}
+
+// DestinationArrayDescriptorForSourceArraysSourceState calls the underlying DestinationArrayDescriptorForSourceArraysSourceState.
+func (x *ArrayMultiaryBase) DestinationArrayDescriptorForSourceArraysSourceState(sources *foundation.NSArray[*mpscore.MPSNDArray], state *mpscore.MPSState) *mpscore.MPSNDArrayDescriptor {
+	return x.inner.DestinationArrayDescriptorForSourceArraysSourceState(sources, state)
+}
+
+// DestinationArrayAllocator calls the underlying DestinationArrayAllocator.
+func (x *ArrayMultiaryBase) DestinationArrayAllocator() mpscore.MPSNDArrayAllocator {
+	return x.inner.DestinationArrayAllocator()
+}
+
+// SetDestinationArrayAllocator calls the underlying SetDestinationArrayAllocator.
+func (x *ArrayMultiaryBase) SetDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) {
+	x.inner.SetDestinationArrayAllocator(destinationArrayAllocator)
+}
+
 func (x *ArrayMultiaryBase) asArrayMultiaryBase() *raw.MPSNDArrayMultiaryBase { return x.inner }
+
+// ArrayMultiaryBaseable is the interface implemented by [ArrayMultiaryBase], for mocking and DI.
+type ArrayMultiaryBaseable interface {
+	Unwrap() *raw.MPSNDArrayMultiaryBase
+	WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *ArrayMultiaryBase
+	OffsetsAtSourceIndex(sourceIndex uint) raw.MPSNDArrayOffsets
+	EdgeModeAtSourceIndex(sourceIndex uint) mpscore.MPSImageEdgeMode
+	KernelSizesForSourceIndex(sourceIndex uint) raw.MPSNDArraySizes
+	StridesForSourceIndex(sourceIndex uint) raw.MPSNDArrayOffsets
+	DilationRatesForSourceIndex(sourceIndex uint) raw.MPSNDArraySizes
+	EncodeWithCoder(coder *foundation.NSCoder)
+	ResultStateForSourceArraysSourceStatesDestinationArray(sourceArrays *foundation.NSArray[*mpscore.MPSNDArray], sourceStates *foundation.NSArray[*mpscore.MPSState], destinationArray *mpscore.MPSNDArray) *mpscore.MPSState
+	DestinationArrayDescriptorForSourceArraysSourceState(sources *foundation.NSArray[*mpscore.MPSNDArray], state *mpscore.MPSState) *mpscore.MPSNDArrayDescriptor
+	DestinationArrayAllocator() mpscore.MPSNDArrayAllocator
+	SetDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator)
+}
+
+var _ ArrayMultiaryBaseable = (*ArrayMultiaryBase)(nil)
 

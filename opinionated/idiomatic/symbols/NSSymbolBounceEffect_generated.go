@@ -23,5 +23,32 @@ func NewSymbolBounceEffect() *SymbolBounceEffect {
 	return &SymbolBounceEffect{inner: raw.NSSymbolBounceEffectFromID(_id)}
 }
 
+// EffectWithByLayer calls the underlying EffectWithByLayer.
+func (x *SymbolBounceEffect) EffectWithByLayer() *SymbolBounceEffect {
+	_r := x.inner.EffectWithByLayer()
+	if _r == nil {
+		return nil
+	}
+	return &SymbolBounceEffect{inner: _r}
+}
+
+// EffectWithWholeSymbol calls the underlying EffectWithWholeSymbol.
+func (x *SymbolBounceEffect) EffectWithWholeSymbol() *SymbolBounceEffect {
+	_r := x.inner.EffectWithWholeSymbol()
+	if _r == nil {
+		return nil
+	}
+	return &SymbolBounceEffect{inner: _r}
+}
+
 func (x *SymbolBounceEffect) asSymbolEffect() *raw.NSSymbolEffect { return &x.inner.NSSymbolEffect }
+
+// SymbolBounceEffectable is the interface implemented by [SymbolBounceEffect], for mocking and DI.
+type SymbolBounceEffectable interface {
+	Unwrap() *raw.NSSymbolBounceEffect
+	EffectWithByLayer() *SymbolBounceEffect
+	EffectWithWholeSymbol() *SymbolBounceEffect
+}
+
+var _ SymbolBounceEffectable = (*SymbolBounceEffect)(nil)
 

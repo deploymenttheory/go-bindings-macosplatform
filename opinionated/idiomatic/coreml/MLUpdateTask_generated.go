@@ -6,6 +6,7 @@ package coreml
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +24,18 @@ func NewUpdateTask() *UpdateTask {
 	return &UpdateTask{inner: raw.MLUpdateTaskFromID(_id)}
 }
 
+// ResumeWithParameters calls the underlying ResumeWithParameters.
+func (x *UpdateTask) ResumeWithParameters(updateParameters *foundation.NSDictionary[*raw.MLParameterKey, objc.ID]) {
+	x.inner.ResumeWithParameters(updateParameters)
+}
+
 func (x *UpdateTask) asTask() *raw.MLTask { return &x.inner.MLTask }
+
+// UpdateTaskable is the interface implemented by [UpdateTask], for mocking and DI.
+type UpdateTaskable interface {
+	Unwrap() *raw.MLUpdateTask
+	ResumeWithParameters(updateParameters *foundation.NSDictionary[*raw.MLParameterKey, objc.ID])
+}
+
+var _ UpdateTaskable = (*UpdateTask)(nil)
 

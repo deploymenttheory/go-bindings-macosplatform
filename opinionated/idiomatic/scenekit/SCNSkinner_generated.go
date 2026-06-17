@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -43,17 +44,53 @@ func (x *Skinner) WithBaseGeometryBindTransform(baseGeometryBindTransform quartz
 	return x
 }
 
+// Skeleton calls the underlying Skeleton.
+func (x *Skinner) Skeleton() *Node {
+	_r := x.inner.Skeleton()
+	if _r == nil {
+		return nil
+	}
+	return &Node{inner: _r}
+}
+
+// SetSkeleton calls the underlying SetSkeleton.
+func (x *Skinner) SetSkeleton(skeleton *raw.SCNNode) {
+	x.inner.SetSkeleton(skeleton)
+}
+
+// BaseGeometry calls the underlying BaseGeometry.
+func (x *Skinner) BaseGeometry() *Geometry {
+	_r := x.inner.BaseGeometry()
+	if _r == nil {
+		return nil
+	}
+	return &Geometry{inner: _r}
+}
+
+// SetBaseGeometry calls the underlying SetBaseGeometry.
+func (x *Skinner) SetBaseGeometry(baseGeometry *raw.SCNGeometry) {
+	x.inner.SetBaseGeometry(baseGeometry)
+}
+
+// BaseGeometryBindTransform calls the underlying BaseGeometryBindTransform.
+func (x *Skinner) BaseGeometryBindTransform() quartzcore.CATransform3D {
+	return x.inner.BaseGeometryBindTransform()
+}
+
+// SetBaseGeometryBindTransform calls the underlying SetBaseGeometryBindTransform.
+func (x *Skinner) SetBaseGeometryBindTransform(baseGeometryBindTransform quartzcore.CATransform3D) {
+	x.inner.SetBaseGeometryBindTransform(baseGeometryBindTransform)
+}
+
 // BoneInverseBindTransforms returns the collection as a Go slice.
 func (x *Skinner) BoneInverseBindTransforms() []*foundation.NSValue {
 	arr := x.inner.BoneInverseBindTransforms()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSValue, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSValue {
+		return foundation.NSValueFromID(purego.Retain(_id))
+	})
 }
 
 // Bones returns the collection as a Go slice.
@@ -62,10 +99,46 @@ func (x *Skinner) Bones() []*raw.SCNNode {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.SCNNode, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SCNNode {
+		return raw.SCNNodeFromID(purego.Retain(_id))
+	})
 }
+
+// BoneWeights calls the underlying BoneWeights.
+func (x *Skinner) BoneWeights() *GeometrySource {
+	_r := x.inner.BoneWeights()
+	if _r == nil {
+		return nil
+	}
+	return &GeometrySource{inner: _r}
+}
+
+// BoneIndices calls the underlying BoneIndices.
+func (x *Skinner) BoneIndices() *GeometrySource {
+	_r := x.inner.BoneIndices()
+	if _r == nil {
+		return nil
+	}
+	return &GeometrySource{inner: _r}
+}
+
+// Skinnerable is the interface implemented by [Skinner], for mocking and DI.
+type Skinnerable interface {
+	Unwrap() *raw.SCNSkinner
+	WithSkeleton(skeleton NodeProvider) *Skinner
+	WithBaseGeometry(baseGeometry GeometryProvider) *Skinner
+	WithBaseGeometryBindTransform(baseGeometryBindTransform quartzcore.CATransform3D) *Skinner
+	Skeleton() *Node
+	SetSkeleton(skeleton *raw.SCNNode)
+	BaseGeometry() *Geometry
+	SetBaseGeometry(baseGeometry *raw.SCNGeometry)
+	BaseGeometryBindTransform() quartzcore.CATransform3D
+	SetBaseGeometryBindTransform(baseGeometryBindTransform quartzcore.CATransform3D)
+	BoneInverseBindTransforms() []*foundation.NSValue
+	Bones() []*raw.SCNNode
+	BoneWeights() *GeometrySource
+	BoneIndices() *GeometrySource
+}
+
+var _ Skinnerable = (*Skinner)(nil)
 

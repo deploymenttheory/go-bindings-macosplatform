@@ -46,5 +46,58 @@ func NewSortDescriptorWithKeyAscendingComparator(key string, ascending bool, cmp
 	return &SortDescriptor{inner: raw.NSSortDescriptorFromID(_id)}
 }
 
+// AllowEvaluation calls the underlying AllowEvaluation.
+func (x *SortDescriptor) AllowEvaluation() {
+	x.inner.AllowEvaluation()
+}
+
+// CompareObjectToObject calls the underlying CompareObjectToObject.
+func (x *SortDescriptor) CompareObjectToObject(object1 objc.ID, object2 objc.ID) raw.NSComparisonResult {
+	return x.inner.CompareObjectToObject(object1, object2)
+}
+
+// Key calls the underlying Key.
+func (x *SortDescriptor) Key() *String {
+	_r := x.inner.Key()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// Ascending calls the underlying Ascending.
+func (x *SortDescriptor) Ascending() bool {
+	return x.inner.Ascending()
+}
+
+// Selector calls the underlying Selector.
+func (x *SortDescriptor) Selector() objc.SEL {
+	return x.inner.Selector()
+}
+
+// Comparator calls the underlying Comparator.
+func (x *SortDescriptor) Comparator() objc.Block {
+	return x.inner.Comparator()
+}
+
+// ReversedSortDescriptor calls the underlying ReversedSortDescriptor.
+func (x *SortDescriptor) ReversedSortDescriptor() objc.ID {
+	return x.inner.ReversedSortDescriptor()
+}
+
 func (x *SortDescriptor) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// SortDescriptorable is the interface implemented by [SortDescriptor], for mocking and DI.
+type SortDescriptorable interface {
+	Unwrap() *raw.NSSortDescriptor
+	AllowEvaluation()
+	CompareObjectToObject(object1 objc.ID, object2 objc.ID) raw.NSComparisonResult
+	Key() *String
+	Ascending() bool
+	Selector() objc.SEL
+	Comparator() objc.Block
+	ReversedSortDescriptor() objc.ID
+}
+
+var _ SortDescriptorable = (*SortDescriptor)(nil)
 

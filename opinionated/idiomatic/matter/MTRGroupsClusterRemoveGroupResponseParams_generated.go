@@ -55,3 +55,62 @@ func (x *MTRGroupsClusterRemoveGroupResponseParams) WithGroupId(groupId *foundat
 	return x
 }
 
+// Status calls the underlying Status.
+func (x *MTRGroupsClusterRemoveGroupResponseParams) Status() *foundation.NSNumber {
+	return x.inner.Status()
+}
+
+// SetStatus calls the underlying SetStatus.
+func (x *MTRGroupsClusterRemoveGroupResponseParams) SetStatus(status *foundation.NSNumber) {
+	x.inner.SetStatus(status)
+}
+
+// GroupID calls the underlying GroupID.
+func (x *MTRGroupsClusterRemoveGroupResponseParams) GroupID() *foundation.NSNumber {
+	return x.inner.GroupID()
+}
+
+// SetGroupID calls the underlying SetGroupID.
+func (x *MTRGroupsClusterRemoveGroupResponseParams) SetGroupID(groupID *foundation.NSNumber) {
+	x.inner.SetGroupID(groupID)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRGroupsClusterRemoveGroupResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRGroupsClusterRemoveGroupResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// GroupId calls the underlying GroupId.
+func (x *MTRGroupsClusterRemoveGroupResponseParams) GroupId() *foundation.NSNumber {
+	return x.inner.GroupId()
+}
+
+// SetGroupId calls the underlying SetGroupId.
+func (x *MTRGroupsClusterRemoveGroupResponseParams) SetGroupId(groupId *foundation.NSNumber) {
+	x.inner.SetGroupId(groupId)
+}
+
+// MTRGroupsClusterRemoveGroupResponseParamsable is the interface implemented by [MTRGroupsClusterRemoveGroupResponseParams], for mocking and DI.
+type MTRGroupsClusterRemoveGroupResponseParamsable interface {
+	Unwrap() *raw.MTRGroupsClusterRemoveGroupResponseParams
+	WithStatus(status *foundation.NSNumber) *MTRGroupsClusterRemoveGroupResponseParams
+	WithGroupID(groupID *foundation.NSNumber) *MTRGroupsClusterRemoveGroupResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRGroupsClusterRemoveGroupResponseParams
+	WithGroupId(groupId *foundation.NSNumber) *MTRGroupsClusterRemoveGroupResponseParams
+	Status() *foundation.NSNumber
+	SetStatus(status *foundation.NSNumber)
+	GroupID() *foundation.NSNumber
+	SetGroupID(groupID *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	GroupId() *foundation.NSNumber
+	SetGroupId(groupId *foundation.NSNumber)
+}
+
+var _ MTRGroupsClusterRemoveGroupResponseParamsable = (*MTRGroupsClusterRemoveGroupResponseParams)(nil)
+

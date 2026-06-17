@@ -23,7 +23,36 @@ func NewMetricPlayerItemRateChangeEvent() *MetricPlayerItemRateChangeEvent {
 	return &MetricPlayerItemRateChangeEvent{inner: raw.AVMetricPlayerItemRateChangeEventFromID(_id)}
 }
 
+// Rate calls the underlying Rate.
+func (x *MetricPlayerItemRateChangeEvent) Rate() float64 {
+	return x.inner.Rate()
+}
+
+// PreviousRate calls the underlying PreviousRate.
+func (x *MetricPlayerItemRateChangeEvent) PreviousRate() float64 {
+	return x.inner.PreviousRate()
+}
+
+// Variant calls the underlying Variant.
+func (x *MetricPlayerItemRateChangeEvent) Variant() *AssetVariant {
+	_r := x.inner.Variant()
+	if _r == nil {
+		return nil
+	}
+	return &AssetVariant{inner: _r}
+}
+
 func (x *MetricPlayerItemRateChangeEvent) asMetricPlayerItemRateChangeEvent() *raw.AVMetricPlayerItemRateChangeEvent { return x.inner }
 
 func (x *MetricPlayerItemRateChangeEvent) asMetricEvent() *raw.AVMetricEvent { return &x.inner.AVMetricEvent }
+
+// MetricPlayerItemRateChangeEventable is the interface implemented by [MetricPlayerItemRateChangeEvent], for mocking and DI.
+type MetricPlayerItemRateChangeEventable interface {
+	Unwrap() *raw.AVMetricPlayerItemRateChangeEvent
+	Rate() float64
+	PreviousRate() float64
+	Variant() *AssetVariant
+}
+
+var _ MetricPlayerItemRateChangeEventable = (*MetricPlayerItemRateChangeEvent)(nil)
 

@@ -7,6 +7,7 @@ package passkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -48,4 +49,75 @@ func (x *PaymentOrderDetails) WithAuthenticationToken(authenticationToken string
 	x.inner.SetAuthenticationToken(foundation.NSStringStringWithUTF8String(authenticationToken))
 	return x
 }
+
+// OrderTypeIdentifier calls the underlying OrderTypeIdentifier.
+func (x *PaymentOrderDetails) OrderTypeIdentifier() string {
+	_r := x.inner.OrderTypeIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetOrderTypeIdentifier calls the underlying SetOrderTypeIdentifier.
+func (x *PaymentOrderDetails) SetOrderTypeIdentifier(orderTypeIdentifier string) {
+	x.inner.SetOrderTypeIdentifier(foundation.NSStringStringWithUTF8String(orderTypeIdentifier))
+}
+
+// OrderIdentifier calls the underlying OrderIdentifier.
+func (x *PaymentOrderDetails) OrderIdentifier() string {
+	_r := x.inner.OrderIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetOrderIdentifier calls the underlying SetOrderIdentifier.
+func (x *PaymentOrderDetails) SetOrderIdentifier(orderIdentifier string) {
+	x.inner.SetOrderIdentifier(foundation.NSStringStringWithUTF8String(orderIdentifier))
+}
+
+// WebServiceURL calls the underlying WebServiceURL.
+func (x *PaymentOrderDetails) WebServiceURL() *foundation.NSURL {
+	return x.inner.WebServiceURL()
+}
+
+// SetWebServiceURL calls the underlying SetWebServiceURL.
+func (x *PaymentOrderDetails) SetWebServiceURL(webServiceURL string) {
+	x.inner.SetWebServiceURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(webServiceURL)))
+}
+
+// AuthenticationToken calls the underlying AuthenticationToken.
+func (x *PaymentOrderDetails) AuthenticationToken() string {
+	_r := x.inner.AuthenticationToken()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetAuthenticationToken calls the underlying SetAuthenticationToken.
+func (x *PaymentOrderDetails) SetAuthenticationToken(authenticationToken string) {
+	x.inner.SetAuthenticationToken(foundation.NSStringStringWithUTF8String(authenticationToken))
+}
+
+// PaymentOrderDetailsable is the interface implemented by [PaymentOrderDetails], for mocking and DI.
+type PaymentOrderDetailsable interface {
+	Unwrap() *raw.PKPaymentOrderDetails
+	WithOrderTypeIdentifier(orderTypeIdentifier string) *PaymentOrderDetails
+	WithOrderIdentifier(orderIdentifier string) *PaymentOrderDetails
+	WithWebServiceURL(webServiceURL string) *PaymentOrderDetails
+	WithAuthenticationToken(authenticationToken string) *PaymentOrderDetails
+	OrderTypeIdentifier() string
+	SetOrderTypeIdentifier(orderTypeIdentifier string)
+	OrderIdentifier() string
+	SetOrderIdentifier(orderIdentifier string)
+	WebServiceURL() *foundation.NSURL
+	SetWebServiceURL(webServiceURL string)
+	AuthenticationToken() string
+	SetAuthenticationToken(authenticationToken string)
+}
+
+var _ PaymentOrderDetailsable = (*PaymentOrderDetails)(nil)
 

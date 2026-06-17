@@ -47,3 +47,66 @@ func (x *WorkoutConfiguration) WithLapLength(lapLength *raw.HKQuantity) *Workout
 	return x
 }
 
+// ActivityType calls the underlying ActivityType.
+func (x *WorkoutConfiguration) ActivityType() raw.HKWorkoutActivityType {
+	return x.inner.ActivityType()
+}
+
+// SetActivityType calls the underlying SetActivityType.
+func (x *WorkoutConfiguration) SetActivityType(activityType raw.HKWorkoutActivityType) {
+	x.inner.SetActivityType(activityType)
+}
+
+// LocationType calls the underlying LocationType.
+func (x *WorkoutConfiguration) LocationType() raw.HKWorkoutSessionLocationType {
+	return x.inner.LocationType()
+}
+
+// SetLocationType calls the underlying SetLocationType.
+func (x *WorkoutConfiguration) SetLocationType(locationType raw.HKWorkoutSessionLocationType) {
+	x.inner.SetLocationType(locationType)
+}
+
+// SwimmingLocationType calls the underlying SwimmingLocationType.
+func (x *WorkoutConfiguration) SwimmingLocationType() raw.HKWorkoutSwimmingLocationType {
+	return x.inner.SwimmingLocationType()
+}
+
+// SetSwimmingLocationType calls the underlying SetSwimmingLocationType.
+func (x *WorkoutConfiguration) SetSwimmingLocationType(swimmingLocationType raw.HKWorkoutSwimmingLocationType) {
+	x.inner.SetSwimmingLocationType(swimmingLocationType)
+}
+
+// LapLength calls the underlying LapLength.
+func (x *WorkoutConfiguration) LapLength() *Quantity {
+	_r := x.inner.LapLength()
+	if _r == nil {
+		return nil
+	}
+	return &Quantity{inner: _r}
+}
+
+// SetLapLength calls the underlying SetLapLength.
+func (x *WorkoutConfiguration) SetLapLength(lapLength *raw.HKQuantity) {
+	x.inner.SetLapLength(lapLength)
+}
+
+// WorkoutConfigurationable is the interface implemented by [WorkoutConfiguration], for mocking and DI.
+type WorkoutConfigurationable interface {
+	Unwrap() *raw.HKWorkoutConfiguration
+	WithActivityType(activityType raw.HKWorkoutActivityType) *WorkoutConfiguration
+	WithLocationType(locationType raw.HKWorkoutSessionLocationType) *WorkoutConfiguration
+	WithSwimmingLocationType(swimmingLocationType raw.HKWorkoutSwimmingLocationType) *WorkoutConfiguration
+	WithLapLength(lapLength *raw.HKQuantity) *WorkoutConfiguration
+	ActivityType() raw.HKWorkoutActivityType
+	SetActivityType(activityType raw.HKWorkoutActivityType)
+	LocationType() raw.HKWorkoutSessionLocationType
+	SetLocationType(locationType raw.HKWorkoutSessionLocationType)
+	SwimmingLocationType() raw.HKWorkoutSwimmingLocationType
+	SetSwimmingLocationType(swimmingLocationType raw.HKWorkoutSwimmingLocationType)
+	LapLength() *Quantity
+	SetLapLength(lapLength *raw.HKQuantity)
+}
+
+var _ WorkoutConfigurationable = (*WorkoutConfiguration)(nil)
+

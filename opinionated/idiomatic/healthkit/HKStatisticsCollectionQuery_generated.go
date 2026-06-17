@@ -44,5 +44,50 @@ func (x *StatisticsCollectionQuery) WithStatisticsUpdateHandler(statisticsUpdate
 	return x
 }
 
+// AnchorDate calls the underlying AnchorDate.
+func (x *StatisticsCollectionQuery) AnchorDate() *foundation.NSDate {
+	return x.inner.AnchorDate()
+}
+
+// Options calls the underlying Options.
+func (x *StatisticsCollectionQuery) Options() raw.HKStatisticsOptions {
+	return x.inner.Options()
+}
+
+// IntervalComponents calls the underlying IntervalComponents.
+func (x *StatisticsCollectionQuery) IntervalComponents() *foundation.NSDateComponents {
+	return x.inner.IntervalComponents()
+}
+
+// SetInitialResultsHandler calls the underlying SetInitialResultsHandler.
+func (x *StatisticsCollectionQuery) SetInitialResultsHandler(initialResultsHandler func(*raw.HKStatisticsCollectionQuery, *raw.HKStatisticsCollection, unsafe.Pointer)) {
+	x.inner.SetInitialResultsHandler(initialResultsHandler)
+}
+
+// StatisticsUpdateHandler calls the underlying StatisticsUpdateHandler.
+func (x *StatisticsCollectionQuery) StatisticsUpdateHandler() objc.Block {
+	return x.inner.StatisticsUpdateHandler()
+}
+
+// SetStatisticsUpdateHandler calls the underlying SetStatisticsUpdateHandler.
+func (x *StatisticsCollectionQuery) SetStatisticsUpdateHandler(statisticsUpdateHandler func(*raw.HKStatisticsCollectionQuery, *raw.HKStatistics, *raw.HKStatisticsCollection, unsafe.Pointer)) {
+	x.inner.SetStatisticsUpdateHandler(statisticsUpdateHandler)
+}
+
 func (x *StatisticsCollectionQuery) asQuery() *raw.HKQuery { return &x.inner.HKQuery }
+
+// StatisticsCollectionQueryable is the interface implemented by [StatisticsCollectionQuery], for mocking and DI.
+type StatisticsCollectionQueryable interface {
+	Unwrap() *raw.HKStatisticsCollectionQuery
+	WithInitialResultsHandler(initialResultsHandler func(*raw.HKStatisticsCollectionQuery, *raw.HKStatisticsCollection, unsafe.Pointer)) *StatisticsCollectionQuery
+	WithStatisticsUpdateHandler(statisticsUpdateHandler func(*raw.HKStatisticsCollectionQuery, *raw.HKStatistics, *raw.HKStatisticsCollection, unsafe.Pointer)) *StatisticsCollectionQuery
+	AnchorDate() *foundation.NSDate
+	Options() raw.HKStatisticsOptions
+	IntervalComponents() *foundation.NSDateComponents
+	SetInitialResultsHandler(initialResultsHandler func(*raw.HKStatisticsCollectionQuery, *raw.HKStatisticsCollection, unsafe.Pointer))
+	StatisticsUpdateHandler() objc.Block
+	SetStatisticsUpdateHandler(statisticsUpdateHandler func(*raw.HKStatisticsCollectionQuery, *raw.HKStatistics, *raw.HKStatisticsCollection, unsafe.Pointer))
+}
+
+var _ StatisticsCollectionQueryable = (*StatisticsCollectionQuery)(nil)
 

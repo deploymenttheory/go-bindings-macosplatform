@@ -29,9 +29,35 @@ func (x *AudioUnitReverb) WithWetDryMix(wetDryMix float32) *AudioUnitReverb {
 	return x
 }
 
+// LoadFactoryPreset calls the underlying LoadFactoryPreset.
+func (x *AudioUnitReverb) LoadFactoryPreset(preset raw.AVAudioUnitReverbPreset) {
+	x.inner.LoadFactoryPreset(preset)
+}
+
+// WetDryMix calls the underlying WetDryMix.
+func (x *AudioUnitReverb) WetDryMix() float32 {
+	return x.inner.WetDryMix()
+}
+
+// SetWetDryMix calls the underlying SetWetDryMix.
+func (x *AudioUnitReverb) SetWetDryMix(wetDryMix float32) {
+	x.inner.SetWetDryMix(wetDryMix)
+}
+
 func (x *AudioUnitReverb) asAudioUnitEffect() *raw.AVAudioUnitEffect { return &x.inner.AVAudioUnitEffect }
 
 func (x *AudioUnitReverb) asAudioUnit() *raw.AVAudioUnit { return &x.inner.AVAudioUnitEffect.AVAudioUnit }
 
 func (x *AudioUnitReverb) asAudioNode() *raw.AVAudioNode { return &x.inner.AVAudioUnitEffect.AVAudioUnit.AVAudioNode }
+
+// AudioUnitReverbable is the interface implemented by [AudioUnitReverb], for mocking and DI.
+type AudioUnitReverbable interface {
+	Unwrap() *raw.AVAudioUnitReverb
+	WithWetDryMix(wetDryMix float32) *AudioUnitReverb
+	LoadFactoryPreset(preset raw.AVAudioUnitReverbPreset)
+	WetDryMix() float32
+	SetWetDryMix(wetDryMix float32)
+}
+
+var _ AudioUnitReverbable = (*AudioUnitReverb)(nil)
 

@@ -5,6 +5,7 @@
 package metrickit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metrickit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,5 +24,24 @@ func NewCPUMetric() *CPUMetric {
 	return &CPUMetric{inner: raw.MXCPUMetricFromID(_id)}
 }
 
+// CumulativeCPUTime calls the underlying CumulativeCPUTime.
+func (x *CPUMetric) CumulativeCPUTime() *foundation.NSMeasurement[*foundation.NSUnitDuration] {
+	return x.inner.CumulativeCPUTime()
+}
+
+// CumulativeCPUInstructions calls the underlying CumulativeCPUInstructions.
+func (x *CPUMetric) CumulativeCPUInstructions() *foundation.NSMeasurement[*foundation.NSUnit] {
+	return x.inner.CumulativeCPUInstructions()
+}
+
 func (x *CPUMetric) asMetric() *raw.MXMetric { return &x.inner.MXMetric }
+
+// CPUMetricable is the interface implemented by [CPUMetric], for mocking and DI.
+type CPUMetricable interface {
+	Unwrap() *raw.MXCPUMetric
+	CumulativeCPUTime() *foundation.NSMeasurement[*foundation.NSUnitDuration]
+	CumulativeCPUInstructions() *foundation.NSMeasurement[*foundation.NSUnit]
+}
+
+var _ CPUMetricable = (*CPUMetric)(nil)
 

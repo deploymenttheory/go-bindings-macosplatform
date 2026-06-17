@@ -23,3 +23,10 @@ func NewIKImageBrowserView() *IKImageBrowserView {
 	return &IKImageBrowserView{inner: raw.IKImageBrowserViewFromID(_id)}
 }
 
+// IKImageBrowserViewable is the interface implemented by [IKImageBrowserView], for mocking and DI.
+type IKImageBrowserViewable interface {
+	Unwrap() *raw.IKImageBrowserView
+}
+
+var _ IKImageBrowserViewable = (*IKImageBrowserView)(nil)
+

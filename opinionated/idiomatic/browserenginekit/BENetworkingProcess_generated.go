@@ -6,7 +6,9 @@ package browserenginekit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/browserenginekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // NetworkingProcess wraps [raw.BENetworkingProcess] with a fluent Go API.
@@ -22,4 +24,35 @@ func NewNetworkingProcess() *NetworkingProcess {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("BENetworkingProcess")), objc.RegisterName("new"))
 	return &NetworkingProcess{inner: raw.BENetworkingProcessFromID(_id)}
 }
+
+// Invalidate calls the underlying Invalidate.
+func (x *NetworkingProcess) Invalidate() {
+	x.inner.Invalidate()
+}
+
+// MakeLibXPCConnectionError calls the underlying MakeLibXPCConnectionError.
+func (x *NetworkingProcess) MakeLibXPCConnectionError() (*foundation.NSObject, error) {
+	return x.inner.MakeLibXPCConnectionError()
+}
+
+// GrantCapabilityError calls the underlying GrantCapabilityError.
+func (x *NetworkingProcess) GrantCapabilityError(capability *raw.BEProcessCapability) (raw.BEProcessCapabilityGrant, error) {
+	return x.inner.GrantCapabilityError(capability)
+}
+
+// GrantCapabilityErrorInvalidationHandler calls the underlying GrantCapabilityErrorInvalidationHandler.
+func (x *NetworkingProcess) GrantCapabilityErrorInvalidationHandler(capability *raw.BEProcessCapability, error_ unsafe.Pointer, invalidationHandler func()) raw.BEProcessCapabilityGrant {
+	return x.inner.GrantCapabilityErrorInvalidationHandler(capability, error_, invalidationHandler)
+}
+
+// NetworkingProcessable is the interface implemented by [NetworkingProcess], for mocking and DI.
+type NetworkingProcessable interface {
+	Unwrap() *raw.BENetworkingProcess
+	Invalidate()
+	MakeLibXPCConnectionError() (*foundation.NSObject, error)
+	GrantCapabilityError(capability *raw.BEProcessCapability) (raw.BEProcessCapabilityGrant, error)
+	GrantCapabilityErrorInvalidationHandler(capability *raw.BEProcessCapability, error_ unsafe.Pointer, invalidationHandler func()) raw.BEProcessCapabilityGrant
+}
+
+var _ NetworkingProcessable = (*NetworkingProcess)(nil)
 

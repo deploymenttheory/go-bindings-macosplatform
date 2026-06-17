@@ -31,11 +31,11 @@ func NewNEPacketTunnelProvider() *NEPacketTunnelProvider {
 func (x *NEPacketTunnelProvider) StartTunnelWithOptions(ctx context.Context, options *foundation.NSDictionary[*foundation.NSString, *foundation.NSObject]) error {
 	_ch := make(chan error, 1)
 	x.inner.StartTunnelWithOptionsCompletionHandler(options, func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -59,9 +59,60 @@ func (x *NEPacketTunnelProvider) StopTunnelWithReason(ctx context.Context, reaso
 	}
 }
 
+// CancelTunnelWithError calls the underlying CancelTunnelWithError.
+func (x *NEPacketTunnelProvider) CancelTunnelWithError(error_ unsafe.Pointer) {
+	x.inner.CancelTunnelWithError(error_)
+}
+
+// CreateTCPConnectionThroughTunnelToEndpointEnableTLSTLSParametersDelegate calls the underlying CreateTCPConnectionThroughTunnelToEndpointEnableTLSTLSParametersDelegate.
+func (x *NEPacketTunnelProvider) CreateTCPConnectionThroughTunnelToEndpointEnableTLSTLSParametersDelegate(remoteEndpoint unsafe.Pointer, enableTLS bool, tLSParameters *raw.NWTLSParameters, delegate objc.ID) *NWTCPConnection {
+	_r := x.inner.CreateTCPConnectionThroughTunnelToEndpointEnableTLSTLSParametersDelegate(remoteEndpoint, enableTLS, tLSParameters, delegate)
+	if _r == nil {
+		return nil
+	}
+	return &NWTCPConnection{inner: _r}
+}
+
+// CreateUDPSessionThroughTunnelToEndpointFromEndpoint calls the underlying CreateUDPSessionThroughTunnelToEndpointFromEndpoint.
+func (x *NEPacketTunnelProvider) CreateUDPSessionThroughTunnelToEndpointFromEndpoint(remoteEndpoint unsafe.Pointer, localEndpoint *raw.NWHostEndpoint) *NWUDPSession {
+	_r := x.inner.CreateUDPSessionThroughTunnelToEndpointFromEndpoint(remoteEndpoint, localEndpoint)
+	if _r == nil {
+		return nil
+	}
+	return &NWUDPSession{inner: _r}
+}
+
+// PacketFlow calls the underlying PacketFlow.
+func (x *NEPacketTunnelProvider) PacketFlow() *NEPacketTunnelFlow {
+	_r := x.inner.PacketFlow()
+	if _r == nil {
+		return nil
+	}
+	return &NEPacketTunnelFlow{inner: _r}
+}
+
+// VirtualInterface calls the underlying VirtualInterface.
+func (x *NEPacketTunnelProvider) VirtualInterface() *foundation.NSObject {
+	return x.inner.VirtualInterface()
+}
+
 func (x *NEPacketTunnelProvider) asNEPacketTunnelProvider() *raw.NEPacketTunnelProvider { return x.inner }
 
 func (x *NEPacketTunnelProvider) asNETunnelProvider() *raw.NETunnelProvider { return &x.inner.NETunnelProvider }
 
 func (x *NEPacketTunnelProvider) asNEProvider() *raw.NEProvider { return &x.inner.NETunnelProvider.NEProvider }
+
+// NEPacketTunnelProviderable is the interface implemented by [NEPacketTunnelProvider], for mocking and DI.
+type NEPacketTunnelProviderable interface {
+	Unwrap() *raw.NEPacketTunnelProvider
+	StartTunnelWithOptions(ctx context.Context, options *foundation.NSDictionary[*foundation.NSString, *foundation.NSObject]) error
+	StopTunnelWithReason(ctx context.Context, reason raw.NEProviderStopReason) error
+	CancelTunnelWithError(error_ unsafe.Pointer)
+	CreateTCPConnectionThroughTunnelToEndpointEnableTLSTLSParametersDelegate(remoteEndpoint unsafe.Pointer, enableTLS bool, tLSParameters *raw.NWTLSParameters, delegate objc.ID) *NWTCPConnection
+	CreateUDPSessionThroughTunnelToEndpointFromEndpoint(remoteEndpoint unsafe.Pointer, localEndpoint *raw.NWHostEndpoint) *NWUDPSession
+	PacketFlow() *NEPacketTunnelFlow
+	VirtualInterface() *foundation.NSObject
+}
+
+var _ NEPacketTunnelProviderable = (*NEPacketTunnelProvider)(nil)
 

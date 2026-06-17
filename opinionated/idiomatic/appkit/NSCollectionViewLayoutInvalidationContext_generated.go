@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -36,5 +37,86 @@ func (x *CollectionViewLayoutInvalidationContext) WithContentSizeAdjustment(cont
 	return x
 }
 
+// InvalidateItemsAtIndexPaths calls the underlying InvalidateItemsAtIndexPaths.
+func (x *CollectionViewLayoutInvalidationContext) InvalidateItemsAtIndexPaths(indexPaths *foundation.NSSet[*foundation.NSIndexPath]) {
+	x.inner.InvalidateItemsAtIndexPaths(indexPaths)
+}
+
+// InvalidateSupplementaryElementsOfKindAtIndexPaths calls the underlying InvalidateSupplementaryElementsOfKindAtIndexPaths.
+func (x *CollectionViewLayoutInvalidationContext) InvalidateSupplementaryElementsOfKindAtIndexPaths(elementKind *foundation.NSString, indexPaths *foundation.NSSet[*foundation.NSIndexPath]) {
+	x.inner.InvalidateSupplementaryElementsOfKindAtIndexPaths(elementKind, indexPaths)
+}
+
+// InvalidateDecorationElementsOfKindAtIndexPaths calls the underlying InvalidateDecorationElementsOfKindAtIndexPaths.
+func (x *CollectionViewLayoutInvalidationContext) InvalidateDecorationElementsOfKindAtIndexPaths(elementKind *foundation.NSString, indexPaths *foundation.NSSet[*foundation.NSIndexPath]) {
+	x.inner.InvalidateDecorationElementsOfKindAtIndexPaths(elementKind, indexPaths)
+}
+
+// InvalidateEverything calls the underlying InvalidateEverything.
+func (x *CollectionViewLayoutInvalidationContext) InvalidateEverything() bool {
+	return x.inner.InvalidateEverything()
+}
+
+// InvalidateDataSourceCounts calls the underlying InvalidateDataSourceCounts.
+func (x *CollectionViewLayoutInvalidationContext) InvalidateDataSourceCounts() bool {
+	return x.inner.InvalidateDataSourceCounts()
+}
+
+// InvalidatedItemIndexPaths calls the underlying InvalidatedItemIndexPaths.
+func (x *CollectionViewLayoutInvalidationContext) InvalidatedItemIndexPaths() *foundation.NSSet[*foundation.NSIndexPath] {
+	return x.inner.InvalidatedItemIndexPaths()
+}
+
+// InvalidatedSupplementaryIndexPaths calls the underlying InvalidatedSupplementaryIndexPaths.
+func (x *CollectionViewLayoutInvalidationContext) InvalidatedSupplementaryIndexPaths() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.InvalidatedSupplementaryIndexPaths()
+}
+
+// InvalidatedDecorationIndexPaths calls the underlying InvalidatedDecorationIndexPaths.
+func (x *CollectionViewLayoutInvalidationContext) InvalidatedDecorationIndexPaths() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.InvalidatedDecorationIndexPaths()
+}
+
+// ContentOffsetAdjustment calls the underlying ContentOffsetAdjustment.
+func (x *CollectionViewLayoutInvalidationContext) ContentOffsetAdjustment() corefoundation.CGPoint {
+	return x.inner.ContentOffsetAdjustment()
+}
+
+// SetContentOffsetAdjustment calls the underlying SetContentOffsetAdjustment.
+func (x *CollectionViewLayoutInvalidationContext) SetContentOffsetAdjustment(contentOffsetAdjustment corefoundation.CGPoint) {
+	x.inner.SetContentOffsetAdjustment(contentOffsetAdjustment)
+}
+
+// ContentSizeAdjustment calls the underlying ContentSizeAdjustment.
+func (x *CollectionViewLayoutInvalidationContext) ContentSizeAdjustment() corefoundation.CGSize {
+	return x.inner.ContentSizeAdjustment()
+}
+
+// SetContentSizeAdjustment calls the underlying SetContentSizeAdjustment.
+func (x *CollectionViewLayoutInvalidationContext) SetContentSizeAdjustment(contentSizeAdjustment corefoundation.CGSize) {
+	x.inner.SetContentSizeAdjustment(contentSizeAdjustment)
+}
+
 func (x *CollectionViewLayoutInvalidationContext) asCollectionViewLayoutInvalidationContext() *raw.NSCollectionViewLayoutInvalidationContext { return x.inner }
+
+// CollectionViewLayoutInvalidationContextable is the interface implemented by [CollectionViewLayoutInvalidationContext], for mocking and DI.
+type CollectionViewLayoutInvalidationContextable interface {
+	Unwrap() *raw.NSCollectionViewLayoutInvalidationContext
+	WithContentOffsetAdjustment(contentOffsetAdjustment corefoundation.CGPoint) *CollectionViewLayoutInvalidationContext
+	WithContentSizeAdjustment(contentSizeAdjustment corefoundation.CGSize) *CollectionViewLayoutInvalidationContext
+	InvalidateItemsAtIndexPaths(indexPaths *foundation.NSSet[*foundation.NSIndexPath])
+	InvalidateSupplementaryElementsOfKindAtIndexPaths(elementKind *foundation.NSString, indexPaths *foundation.NSSet[*foundation.NSIndexPath])
+	InvalidateDecorationElementsOfKindAtIndexPaths(elementKind *foundation.NSString, indexPaths *foundation.NSSet[*foundation.NSIndexPath])
+	InvalidateEverything() bool
+	InvalidateDataSourceCounts() bool
+	InvalidatedItemIndexPaths() *foundation.NSSet[*foundation.NSIndexPath]
+	InvalidatedSupplementaryIndexPaths() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	InvalidatedDecorationIndexPaths() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ContentOffsetAdjustment() corefoundation.CGPoint
+	SetContentOffsetAdjustment(contentOffsetAdjustment corefoundation.CGPoint)
+	ContentSizeAdjustment() corefoundation.CGSize
+	SetContentSizeAdjustment(contentSizeAdjustment corefoundation.CGSize)
+}
+
+var _ CollectionViewLayoutInvalidationContextable = (*CollectionViewLayoutInvalidationContext)(nil)
 

@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -47,18 +48,58 @@ func (x *CollectionLayoutGroup) WithInterItemSpacing(interItemSpacing *raw.NSCol
 	return x
 }
 
+// VisualDescription calls the underlying VisualDescription.
+func (x *CollectionLayoutGroup) VisualDescription() string {
+	_r := x.inner.VisualDescription()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetSupplementaryItems calls the underlying SetSupplementaryItems.
+func (x *CollectionLayoutGroup) SetSupplementaryItems(supplementaryItems *foundation.NSArray[*raw.NSCollectionLayoutSupplementaryItem]) {
+	x.inner.SetSupplementaryItems(supplementaryItems)
+}
+
+// InterItemSpacing calls the underlying InterItemSpacing.
+func (x *CollectionLayoutGroup) InterItemSpacing() *CollectionLayoutSpacing {
+	_r := x.inner.InterItemSpacing()
+	if _r == nil {
+		return nil
+	}
+	return &CollectionLayoutSpacing{inner: _r}
+}
+
+// SetInterItemSpacing calls the underlying SetInterItemSpacing.
+func (x *CollectionLayoutGroup) SetInterItemSpacing(interItemSpacing *raw.NSCollectionLayoutSpacing) {
+	x.inner.SetInterItemSpacing(interItemSpacing)
+}
+
 // Subitems returns the collection as a Go slice.
 func (x *CollectionLayoutGroup) Subitems() []*raw.NSCollectionLayoutItem {
 	arr := x.inner.Subitems()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSCollectionLayoutItem, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSCollectionLayoutItem {
+		return raw.NSCollectionLayoutItemFromID(purego.Retain(_id))
+	})
 }
 
 func (x *CollectionLayoutGroup) asCollectionLayoutItem() *raw.NSCollectionLayoutItem { return &x.inner.NSCollectionLayoutItem }
+
+// CollectionLayoutGroupable is the interface implemented by [CollectionLayoutGroup], for mocking and DI.
+type CollectionLayoutGroupable interface {
+	Unwrap() *raw.NSCollectionLayoutGroup
+	WithSupplementaryItems(items ...CollectionLayoutSupplementaryItemProvider) *CollectionLayoutGroup
+	WithInterItemSpacing(interItemSpacing *raw.NSCollectionLayoutSpacing) *CollectionLayoutGroup
+	VisualDescription() string
+	SetSupplementaryItems(supplementaryItems *foundation.NSArray[*raw.NSCollectionLayoutSupplementaryItem])
+	InterItemSpacing() *CollectionLayoutSpacing
+	SetInterItemSpacing(interItemSpacing *raw.NSCollectionLayoutSpacing)
+	Subitems() []*raw.NSCollectionLayoutItem
+}
+
+var _ CollectionLayoutGroupable = (*CollectionLayoutGroup)(nil)
 

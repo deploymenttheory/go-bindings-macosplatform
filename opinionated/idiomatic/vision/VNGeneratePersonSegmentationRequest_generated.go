@@ -7,6 +7,7 @@ package vision
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -53,11 +54,29 @@ func (x *GeneratePersonSegmentationRequest) SupportedOutputPixelFormats() ([]*fo
 	if arr == nil {
 		return nil, nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out, nil
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	}), nil
+}
+
+// QualityLevel calls the underlying QualityLevel.
+func (x *GeneratePersonSegmentationRequest) QualityLevel() raw.VNGeneratePersonSegmentationRequestQualityLevel {
+	return x.inner.QualityLevel()
+}
+
+// SetQualityLevel calls the underlying SetQualityLevel.
+func (x *GeneratePersonSegmentationRequest) SetQualityLevel(qualityLevel raw.VNGeneratePersonSegmentationRequestQualityLevel) {
+	x.inner.SetQualityLevel(qualityLevel)
+}
+
+// OutputPixelFormat calls the underlying OutputPixelFormat.
+func (x *GeneratePersonSegmentationRequest) OutputPixelFormat() uint {
+	return x.inner.OutputPixelFormat()
+}
+
+// SetOutputPixelFormat calls the underlying SetOutputPixelFormat.
+func (x *GeneratePersonSegmentationRequest) SetOutputPixelFormat(outputPixelFormat uint) {
+	x.inner.SetOutputPixelFormat(outputPixelFormat)
 }
 
 func (x *GeneratePersonSegmentationRequest) asStatefulRequest() *raw.VNStatefulRequest { return &x.inner.VNStatefulRequest }
@@ -65,4 +84,18 @@ func (x *GeneratePersonSegmentationRequest) asStatefulRequest() *raw.VNStatefulR
 func (x *GeneratePersonSegmentationRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNStatefulRequest.VNImageBasedRequest }
 
 func (x *GeneratePersonSegmentationRequest) asRequest() *raw.VNRequest { return &x.inner.VNStatefulRequest.VNImageBasedRequest.VNRequest }
+
+// GeneratePersonSegmentationRequestable is the interface implemented by [GeneratePersonSegmentationRequest], for mocking and DI.
+type GeneratePersonSegmentationRequestable interface {
+	Unwrap() *raw.VNGeneratePersonSegmentationRequest
+	WithQualityLevel(qualityLevel raw.VNGeneratePersonSegmentationRequestQualityLevel) *GeneratePersonSegmentationRequest
+	WithOutputPixelFormat(outputPixelFormat uint) *GeneratePersonSegmentationRequest
+	SupportedOutputPixelFormats() ([]*foundation.NSNumber, error)
+	QualityLevel() raw.VNGeneratePersonSegmentationRequestQualityLevel
+	SetQualityLevel(qualityLevel raw.VNGeneratePersonSegmentationRequestQualityLevel)
+	OutputPixelFormat() uint
+	SetOutputPixelFormat(outputPixelFormat uint)
+}
+
+var _ GeneratePersonSegmentationRequestable = (*GeneratePersonSegmentationRequest)(nil)
 

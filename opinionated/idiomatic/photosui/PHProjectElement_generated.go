@@ -5,6 +5,7 @@
 package photosui
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photosui"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,5 +24,24 @@ func NewProjectElement() *ProjectElement {
 	return &ProjectElement{inner: raw.PHProjectElementFromID(_id)}
 }
 
+// Weight calls the underlying Weight.
+func (x *ProjectElement) Weight() float64 {
+	return x.inner.Weight()
+}
+
+// Placement calls the underlying Placement.
+func (x *ProjectElement) Placement() corefoundation.CGRect {
+	return x.inner.Placement()
+}
+
 func (x *ProjectElement) asProjectElement() *raw.PHProjectElement { return x.inner }
+
+// ProjectElementable is the interface implemented by [ProjectElement], for mocking and DI.
+type ProjectElementable interface {
+	Unwrap() *raw.PHProjectElement
+	Weight() float64
+	Placement() corefoundation.CGRect
+}
+
+var _ ProjectElementable = (*ProjectElement)(nil)
 

@@ -6,6 +6,7 @@ package usernotifications
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/usernotifications"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +24,32 @@ func NewNotificationResponse() *NotificationResponse {
 	return &NotificationResponse{inner: raw.UNNotificationResponseFromID(_id)}
 }
 
+// Notification calls the underlying Notification.
+func (x *NotificationResponse) Notification() *Notification {
+	_r := x.inner.Notification()
+	if _r == nil {
+		return nil
+	}
+	return &Notification{inner: _r}
+}
+
+// ActionIdentifier calls the underlying ActionIdentifier.
+func (x *NotificationResponse) ActionIdentifier() string {
+	_r := x.inner.ActionIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 func (x *NotificationResponse) asNotificationResponse() *raw.UNNotificationResponse { return x.inner }
+
+// NotificationResponseable is the interface implemented by [NotificationResponse], for mocking and DI.
+type NotificationResponseable interface {
+	Unwrap() *raw.UNNotificationResponse
+	Notification() *Notification
+	ActionIdentifier() string
+}
+
+var _ NotificationResponseable = (*NotificationResponse)(nil)
 

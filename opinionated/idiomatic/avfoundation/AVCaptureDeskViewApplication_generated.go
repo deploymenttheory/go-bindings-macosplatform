@@ -30,11 +30,11 @@ func NewCaptureDeskViewApplication() *CaptureDeskViewApplication {
 func (x *CaptureDeskViewApplication) Present(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.PresentWithCompletionHandler(func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -48,11 +48,11 @@ func (x *CaptureDeskViewApplication) Present(ctx context.Context) error {
 func (x *CaptureDeskViewApplication) PresentWithLaunchConfiguration(ctx context.Context, launchConfiguration *raw.AVCaptureDeskViewApplicationLaunchConfiguration) error {
 	_ch := make(chan error, 1)
 	x.inner.PresentWithLaunchConfigurationCompletionHandler(launchConfiguration, func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -61,4 +61,13 @@ func (x *CaptureDeskViewApplication) PresentWithLaunchConfiguration(ctx context.
 		return ctx.Err()
 	}
 }
+
+// CaptureDeskViewApplicationable is the interface implemented by [CaptureDeskViewApplication], for mocking and DI.
+type CaptureDeskViewApplicationable interface {
+	Unwrap() *raw.AVCaptureDeskViewApplication
+	Present(ctx context.Context) error
+	PresentWithLaunchConfiguration(ctx context.Context, launchConfiguration *raw.AVCaptureDeskViewApplicationLaunchConfiguration) error
+}
+
+var _ CaptureDeskViewApplicationable = (*CaptureDeskViewApplication)(nil)
 

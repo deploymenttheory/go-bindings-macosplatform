@@ -5,8 +5,8 @@
 package vision
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -25,7 +25,7 @@ func NewClassifyImageRequest() *ClassifyImageRequest {
 }
 
 // SupportedIdentifiers returns the collection as a Go slice.
-func (x *ClassifyImageRequest) SupportedIdentifiers() ([]*foundation.NSString, error) {
+func (x *ClassifyImageRequest) SupportedIdentifiers() ([]string, error) {
 	arr, err := x.inner.SupportedIdentifiersAndReturnError()
 	if err != nil {
 		return nil, err
@@ -33,14 +33,20 @@ func (x *ClassifyImageRequest) SupportedIdentifiers() ([]*foundation.NSString, e
 	if arr == nil {
 		return nil, nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out, nil
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	}), nil
 }
 
 func (x *ClassifyImageRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNImageBasedRequest }
 
 func (x *ClassifyImageRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageBasedRequest.VNRequest }
+
+// ClassifyImageRequestable is the interface implemented by [ClassifyImageRequest], for mocking and DI.
+type ClassifyImageRequestable interface {
+	Unwrap() *raw.VNClassifyImageRequest
+	SupportedIdentifiers() ([]string, error)
+}
+
+var _ ClassifyImageRequestable = (*ClassifyImageRequest)(nil)
 

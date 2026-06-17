@@ -7,6 +7,7 @@ package intents
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,4 +25,61 @@ func NewRentalCarWithRentalCompanyNameTypeMakeModelRentalCarDescription(rentalCo
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRentalCompanyName:type:make:model:rentalCarDescription:"), foundation.NSStringStringWithUTF8String(rentalCompanyName).Ptr(), foundation.NSStringStringWithUTF8String(type_).Ptr(), foundation.NSStringStringWithUTF8String(make_).Ptr(), foundation.NSStringStringWithUTF8String(model).Ptr(), foundation.NSStringStringWithUTF8String(rentalCarDescription).Ptr())
 	return &RentalCar{inner: raw.INRentalCarFromID(_id)}
 }
+
+// RentalCompanyName calls the underlying RentalCompanyName.
+func (x *RentalCar) RentalCompanyName() string {
+	_r := x.inner.RentalCompanyName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Type calls the underlying Type.
+func (x *RentalCar) Type() string {
+	_r := x.inner.Type()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Make calls the underlying Make.
+func (x *RentalCar) Make() string {
+	_r := x.inner.Make()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Model calls the underlying Model.
+func (x *RentalCar) Model() string {
+	_r := x.inner.Model()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// RentalCarDescription calls the underlying RentalCarDescription.
+func (x *RentalCar) RentalCarDescription() string {
+	_r := x.inner.RentalCarDescription()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// RentalCarable is the interface implemented by [RentalCar], for mocking and DI.
+type RentalCarable interface {
+	Unwrap() *raw.INRentalCar
+	RentalCompanyName() string
+	Type() string
+	Make() string
+	Model() string
+	RentalCarDescription() string
+}
+
+var _ RentalCarable = (*RentalCar)(nil)
 

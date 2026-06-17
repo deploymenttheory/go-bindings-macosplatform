@@ -23,7 +23,30 @@ func NewCreateCommand() *CreateCommand {
 	return &CreateCommand{inner: raw.NSCreateCommandFromID(_id)}
 }
 
+// CreateClassDescription calls the underlying CreateClassDescription.
+func (x *CreateCommand) CreateClassDescription() *ScriptClassDescription {
+	_r := x.inner.CreateClassDescription()
+	if _r == nil {
+		return nil
+	}
+	return &ScriptClassDescription{inner: _r}
+}
+
+// ResolvedKeyDictionary calls the underlying ResolvedKeyDictionary.
+func (x *CreateCommand) ResolvedKeyDictionary() *raw.NSDictionary[*raw.NSString, objc.ID] {
+	return x.inner.ResolvedKeyDictionary()
+}
+
 func (x *CreateCommand) asScriptCommand() *raw.NSScriptCommand { return &x.inner.NSScriptCommand }
 
 func (x *CreateCommand) asObject() *raw.NSObject { return &x.inner.NSScriptCommand.NSObject }
+
+// CreateCommandable is the interface implemented by [CreateCommand], for mocking and DI.
+type CreateCommandable interface {
+	Unwrap() *raw.NSCreateCommand
+	CreateClassDescription() *ScriptClassDescription
+	ResolvedKeyDictionary() *raw.NSDictionary[*raw.NSString, objc.ID]
+}
+
+var _ CreateCommandable = (*CreateCommand)(nil)
 

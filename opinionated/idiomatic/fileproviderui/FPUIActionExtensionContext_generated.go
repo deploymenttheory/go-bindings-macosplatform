@@ -6,6 +6,7 @@ package fileproviderui
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/fileproviderui"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,27 @@ func NewActionExtensionContext() *ActionExtensionContext {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("FPUIActionExtensionContext")), objc.RegisterName("new"))
 	return &ActionExtensionContext{inner: raw.FPUIActionExtensionContextFromID(_id)}
 }
+
+// CompleteRequest calls the underlying CompleteRequest.
+func (x *ActionExtensionContext) CompleteRequest() {
+	x.inner.CompleteRequest()
+}
+
+// DomainIdentifier calls the underlying DomainIdentifier.
+func (x *ActionExtensionContext) DomainIdentifier() string {
+	_r := x.inner.DomainIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ActionExtensionContextable is the interface implemented by [ActionExtensionContext], for mocking and DI.
+type ActionExtensionContextable interface {
+	Unwrap() *raw.FPUIActionExtensionContext
+	CompleteRequest()
+	DomainIdentifier() string
+}
+
+var _ ActionExtensionContextable = (*ActionExtensionContext)(nil)
 

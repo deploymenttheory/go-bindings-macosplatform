@@ -31,3 +31,41 @@ func (x *MTRServerAttribute) WithValue(value *foundation.NSDictionary[*foundatio
 	return x
 }
 
+// SetValue calls the underlying SetValue.
+func (x *MTRServerAttribute) SetValue(value *foundation.NSDictionary[*foundation.NSString, objc.ID]) bool {
+	return x.inner.SetValue(value)
+}
+
+// AttributeID calls the underlying AttributeID.
+func (x *MTRServerAttribute) AttributeID() *foundation.NSNumber {
+	return x.inner.AttributeID()
+}
+
+// Value calls the underlying Value.
+func (x *MTRServerAttribute) Value() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.Value()
+}
+
+// RequiredReadPrivilege calls the underlying RequiredReadPrivilege.
+func (x *MTRServerAttribute) RequiredReadPrivilege() raw.MTRAccessControlEntryPrivilege {
+	return x.inner.RequiredReadPrivilege()
+}
+
+// IsWritable calls the underlying IsWritable.
+func (x *MTRServerAttribute) IsWritable() bool {
+	return x.inner.IsWritable()
+}
+
+// MTRServerAttributeable is the interface implemented by [MTRServerAttribute], for mocking and DI.
+type MTRServerAttributeable interface {
+	Unwrap() *raw.MTRServerAttribute
+	WithValue(value *foundation.NSDictionary[*foundation.NSString, objc.ID]) *MTRServerAttribute
+	SetValue(value *foundation.NSDictionary[*foundation.NSString, objc.ID]) bool
+	AttributeID() *foundation.NSNumber
+	Value() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	RequiredReadPrivilege() raw.MTRAccessControlEntryPrivilege
+	IsWritable() bool
+}
+
+var _ MTRServerAttributeable = (*MTRServerAttribute)(nil)
+

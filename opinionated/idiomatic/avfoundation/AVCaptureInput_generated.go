@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -29,12 +30,18 @@ func (x *CaptureInput) Ports() []*raw.AVCaptureInputPort {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AVCaptureInputPort, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVCaptureInputPort {
+		return raw.AVCaptureInputPortFromID(purego.Retain(_id))
+	})
 }
 
 func (x *CaptureInput) asCaptureInput() *raw.AVCaptureInput { return x.inner }
+
+// CaptureInputable is the interface implemented by [CaptureInput], for mocking and DI.
+type CaptureInputable interface {
+	Unwrap() *raw.AVCaptureInput
+	Ports() []*raw.AVCaptureInputPort
+}
+
+var _ CaptureInputable = (*CaptureInput)(nil)
 

@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // XMLParser wraps [raw.NSXMLParser] with a fluent Go API.
@@ -75,5 +76,140 @@ func (x *XMLParser) WithShouldResolveExternalEntities(shouldResolveExternalEntit
 	return x
 }
 
+// Parse calls the underlying Parse.
+func (x *XMLParser) Parse() bool {
+	return x.inner.Parse()
+}
+
+// AbortParsing calls the underlying AbortParsing.
+func (x *XMLParser) AbortParsing() {
+	x.inner.AbortParsing()
+}
+
+// Delegate calls the underlying Delegate.
+func (x *XMLParser) Delegate() raw.NSXMLParserDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *XMLParser) SetDelegate(delegate raw.NSXMLParserDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// ShouldProcessNamespaces calls the underlying ShouldProcessNamespaces.
+func (x *XMLParser) ShouldProcessNamespaces() bool {
+	return x.inner.ShouldProcessNamespaces()
+}
+
+// SetShouldProcessNamespaces calls the underlying SetShouldProcessNamespaces.
+func (x *XMLParser) SetShouldProcessNamespaces(shouldProcessNamespaces bool) {
+	x.inner.SetShouldProcessNamespaces(shouldProcessNamespaces)
+}
+
+// ShouldReportNamespacePrefixes calls the underlying ShouldReportNamespacePrefixes.
+func (x *XMLParser) ShouldReportNamespacePrefixes() bool {
+	return x.inner.ShouldReportNamespacePrefixes()
+}
+
+// SetShouldReportNamespacePrefixes calls the underlying SetShouldReportNamespacePrefixes.
+func (x *XMLParser) SetShouldReportNamespacePrefixes(shouldReportNamespacePrefixes bool) {
+	x.inner.SetShouldReportNamespacePrefixes(shouldReportNamespacePrefixes)
+}
+
+// ExternalEntityResolvingPolicy calls the underlying ExternalEntityResolvingPolicy.
+func (x *XMLParser) ExternalEntityResolvingPolicy() raw.NSXMLParserExternalEntityResolvingPolicy {
+	return x.inner.ExternalEntityResolvingPolicy()
+}
+
+// SetExternalEntityResolvingPolicy calls the underlying SetExternalEntityResolvingPolicy.
+func (x *XMLParser) SetExternalEntityResolvingPolicy(externalEntityResolvingPolicy raw.NSXMLParserExternalEntityResolvingPolicy) {
+	x.inner.SetExternalEntityResolvingPolicy(externalEntityResolvingPolicy)
+}
+
+// AllowedExternalEntityURLs calls the underlying AllowedExternalEntityURLs.
+func (x *XMLParser) AllowedExternalEntityURLs() *raw.NSSet[*raw.NSURL] {
+	return x.inner.AllowedExternalEntityURLs()
+}
+
+// SetAllowedExternalEntityURLs calls the underlying SetAllowedExternalEntityURLs.
+func (x *XMLParser) SetAllowedExternalEntityURLs(allowedExternalEntityURLs *raw.NSSet[*raw.NSURL]) {
+	x.inner.SetAllowedExternalEntityURLs(allowedExternalEntityURLs)
+}
+
+// ParserError calls the underlying ParserError.
+func (x *XMLParser) ParserError() unsafe.Pointer {
+	return x.inner.ParserError()
+}
+
+// ShouldResolveExternalEntities calls the underlying ShouldResolveExternalEntities.
+func (x *XMLParser) ShouldResolveExternalEntities() bool {
+	return x.inner.ShouldResolveExternalEntities()
+}
+
+// SetShouldResolveExternalEntities calls the underlying SetShouldResolveExternalEntities.
+func (x *XMLParser) SetShouldResolveExternalEntities(shouldResolveExternalEntities bool) {
+	x.inner.SetShouldResolveExternalEntities(shouldResolveExternalEntities)
+}
+
+// PublicID calls the underlying PublicID.
+func (x *XMLParser) PublicID() *String {
+	_r := x.inner.PublicID()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SystemID calls the underlying SystemID.
+func (x *XMLParser) SystemID() *String {
+	_r := x.inner.SystemID()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// LineNumber calls the underlying LineNumber.
+func (x *XMLParser) LineNumber() int {
+	return x.inner.LineNumber()
+}
+
+// ColumnNumber calls the underlying ColumnNumber.
+func (x *XMLParser) ColumnNumber() int {
+	return x.inner.ColumnNumber()
+}
+
 func (x *XMLParser) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// XMLParserable is the interface implemented by [XMLParser], for mocking and DI.
+type XMLParserable interface {
+	Unwrap() *raw.NSXMLParser
+	WithDelegate(delegate raw.NSXMLParserDelegate) *XMLParser
+	WithShouldProcessNamespaces(shouldProcessNamespaces bool) *XMLParser
+	WithShouldReportNamespacePrefixes(shouldReportNamespacePrefixes bool) *XMLParser
+	WithExternalEntityResolvingPolicy(externalEntityResolvingPolicy raw.NSXMLParserExternalEntityResolvingPolicy) *XMLParser
+	WithAllowedExternalEntityURLs(allowedExternalEntityURLs *raw.NSSet[*raw.NSURL]) *XMLParser
+	WithShouldResolveExternalEntities(shouldResolveExternalEntities bool) *XMLParser
+	Parse() bool
+	AbortParsing()
+	Delegate() raw.NSXMLParserDelegate
+	SetDelegate(delegate raw.NSXMLParserDelegate)
+	ShouldProcessNamespaces() bool
+	SetShouldProcessNamespaces(shouldProcessNamespaces bool)
+	ShouldReportNamespacePrefixes() bool
+	SetShouldReportNamespacePrefixes(shouldReportNamespacePrefixes bool)
+	ExternalEntityResolvingPolicy() raw.NSXMLParserExternalEntityResolvingPolicy
+	SetExternalEntityResolvingPolicy(externalEntityResolvingPolicy raw.NSXMLParserExternalEntityResolvingPolicy)
+	AllowedExternalEntityURLs() *raw.NSSet[*raw.NSURL]
+	SetAllowedExternalEntityURLs(allowedExternalEntityURLs *raw.NSSet[*raw.NSURL])
+	ParserError() unsafe.Pointer
+	ShouldResolveExternalEntities() bool
+	SetShouldResolveExternalEntities(shouldResolveExternalEntities bool)
+	PublicID() *String
+	SystemID() *String
+	LineNumber() int
+	ColumnNumber() int
+}
+
+var _ XMLParserable = (*XMLParser)(nil)
 

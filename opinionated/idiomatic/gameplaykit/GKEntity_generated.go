@@ -6,6 +6,7 @@ package gameplaykit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,16 +24,50 @@ func NewEntity() *Entity {
 	return &Entity{inner: raw.GKEntityFromID(_id)}
 }
 
+// UpdateWithDeltaTime calls the underlying UpdateWithDeltaTime.
+func (x *Entity) UpdateWithDeltaTime(seconds float64) {
+	x.inner.UpdateWithDeltaTime(seconds)
+}
+
+// AddComponent calls the underlying AddComponent.
+func (x *Entity) AddComponent(component *raw.GKComponent) {
+	x.inner.AddComponent(component)
+}
+
+// RemoveComponentForClass calls the underlying RemoveComponentForClass.
+func (x *Entity) RemoveComponentForClass(componentClass objc.Class) {
+	x.inner.RemoveComponentForClass(componentClass)
+}
+
+// ComponentForClass calls the underlying ComponentForClass.
+func (x *Entity) ComponentForClass(componentClass objc.Class) *Component {
+	_r := x.inner.ComponentForClass(componentClass)
+	if _r == nil {
+		return nil
+	}
+	return &Component{inner: _r}
+}
+
 // Components returns the collection as a Go slice.
 func (x *Entity) Components() []*raw.GKComponent {
 	arr := x.inner.Components()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.GKComponent, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.GKComponent {
+		return raw.GKComponentFromID(purego.Retain(_id))
+	})
 }
+
+// Entityable is the interface implemented by [Entity], for mocking and DI.
+type Entityable interface {
+	Unwrap() *raw.GKEntity
+	UpdateWithDeltaTime(seconds float64)
+	AddComponent(component *raw.GKComponent)
+	RemoveComponentForClass(componentClass objc.Class)
+	ComponentForClass(componentClass objc.Class) *Component
+	Components() []*raw.GKComponent
+}
+
+var _ Entityable = (*Entity)(nil)
 

@@ -29,3 +29,10 @@ func (x *ImageTranspose) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel { re
 
 func (x *ImageTranspose) asKernel() *mpscore.MPSKernel { return &x.inner.MPSUnaryImageKernel.MPSKernel }
 
+// ImageTransposeable is the interface implemented by [ImageTranspose], for mocking and DI.
+type ImageTransposeable interface {
+	Unwrap() *raw.MPSImageTranspose
+}
+
+var _ ImageTransposeable = (*ImageTranspose)(nil)
+

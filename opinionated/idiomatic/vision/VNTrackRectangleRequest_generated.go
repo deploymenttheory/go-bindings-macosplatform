@@ -38,3 +38,10 @@ func (x *TrackRectangleRequest) asImageBasedRequest() *raw.VNImageBasedRequest {
 
 func (x *TrackRectangleRequest) asRequest() *raw.VNRequest { return &x.inner.VNTrackingRequest.VNImageBasedRequest.VNRequest }
 
+// TrackRectangleRequestable is the interface implemented by [TrackRectangleRequest], for mocking and DI.
+type TrackRectangleRequestable interface {
+	Unwrap() *raw.VNTrackRectangleRequest
+}
+
+var _ TrackRectangleRequestable = (*TrackRectangleRequest)(nil)
+

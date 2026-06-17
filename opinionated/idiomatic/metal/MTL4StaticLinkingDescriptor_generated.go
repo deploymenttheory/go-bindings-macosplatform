@@ -7,6 +7,7 @@ package metal
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -69,11 +70,14 @@ func (x *MTL4StaticLinkingDescriptor) FunctionDescriptors() []*raw.MTL4FunctionD
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MTL4FunctionDescriptor, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MTL4FunctionDescriptor {
+		return raw.MTL4FunctionDescriptorFromID(purego.Retain(_id))
+	})
+}
+
+// SetFunctionDescriptors calls the underlying SetFunctionDescriptors.
+func (x *MTL4StaticLinkingDescriptor) SetFunctionDescriptors(functionDescriptors *foundation.NSArray[*raw.MTL4FunctionDescriptor]) {
+	x.inner.SetFunctionDescriptors(functionDescriptors)
 }
 
 // PrivateFunctionDescriptors returns the collection as a Go slice.
@@ -82,10 +86,39 @@ func (x *MTL4StaticLinkingDescriptor) PrivateFunctionDescriptors() []*raw.MTL4Fu
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MTL4FunctionDescriptor, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MTL4FunctionDescriptor {
+		return raw.MTL4FunctionDescriptorFromID(purego.Retain(_id))
+	})
 }
+
+// SetPrivateFunctionDescriptors calls the underlying SetPrivateFunctionDescriptors.
+func (x *MTL4StaticLinkingDescriptor) SetPrivateFunctionDescriptors(privateFunctionDescriptors *foundation.NSArray[*raw.MTL4FunctionDescriptor]) {
+	x.inner.SetPrivateFunctionDescriptors(privateFunctionDescriptors)
+}
+
+// Groups calls the underlying Groups.
+func (x *MTL4StaticLinkingDescriptor) Groups() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.Groups()
+}
+
+// SetGroups calls the underlying SetGroups.
+func (x *MTL4StaticLinkingDescriptor) SetGroups(groups *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
+	x.inner.SetGroups(groups)
+}
+
+// MTL4StaticLinkingDescriptorable is the interface implemented by [MTL4StaticLinkingDescriptor], for mocking and DI.
+type MTL4StaticLinkingDescriptorable interface {
+	Unwrap() *raw.MTL4StaticLinkingDescriptor
+	WithFunctionDescriptors(items ...MTL4FunctionDescriptorProvider) *MTL4StaticLinkingDescriptor
+	WithPrivateFunctionDescriptors(items ...MTL4FunctionDescriptorProvider) *MTL4StaticLinkingDescriptor
+	WithGroups(groups *foundation.NSDictionary[*foundation.NSString, objc.ID]) *MTL4StaticLinkingDescriptor
+	FunctionDescriptors() []*raw.MTL4FunctionDescriptor
+	SetFunctionDescriptors(functionDescriptors *foundation.NSArray[*raw.MTL4FunctionDescriptor])
+	PrivateFunctionDescriptors() []*raw.MTL4FunctionDescriptor
+	SetPrivateFunctionDescriptors(privateFunctionDescriptors *foundation.NSArray[*raw.MTL4FunctionDescriptor])
+	Groups() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	SetGroups(groups *foundation.NSDictionary[*foundation.NSString, objc.ID])
+}
+
+var _ MTL4StaticLinkingDescriptorable = (*MTL4StaticLinkingDescriptor)(nil)
 

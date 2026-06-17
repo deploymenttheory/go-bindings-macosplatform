@@ -23,9 +23,22 @@ func NewDOMBlob() *DOMBlob {
 	return &DOMBlob{inner: raw.DOMBlobFromID(_id)}
 }
 
+// Size calls the underlying Size.
+func (x *DOMBlob) Size() uint64 {
+	return x.inner.Size()
+}
+
 func (x *DOMBlob) asDOMBlob() *raw.DOMBlob { return x.inner }
 
 func (x *DOMBlob) asDOMObject() *raw.DOMObject { return &x.inner.DOMObject }
 
 func (x *DOMBlob) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMObject.WebScriptObject }
+
+// DOMBlobable is the interface implemented by [DOMBlob], for mocking and DI.
+type DOMBlobable interface {
+	Unwrap() *raw.DOMBlob
+	Size() uint64
+}
+
+var _ DOMBlobable = (*DOMBlob)(nil)
 

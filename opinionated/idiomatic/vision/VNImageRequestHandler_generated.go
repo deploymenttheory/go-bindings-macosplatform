@@ -120,3 +120,16 @@ func NewImageRequestHandlerWithCMSampleBufferDepthDataOrientationOptions(sampleB
 	return &ImageRequestHandler{inner: raw.VNImageRequestHandlerFromID(_id)}
 }
 
+// PerformRequestsError calls the underlying PerformRequestsError.
+func (x *ImageRequestHandler) PerformRequestsError(requests *foundation.NSArray[*raw.VNRequest]) (bool, error) {
+	return x.inner.PerformRequestsError(requests)
+}
+
+// ImageRequestHandlerable is the interface implemented by [ImageRequestHandler], for mocking and DI.
+type ImageRequestHandlerable interface {
+	Unwrap() *raw.VNImageRequestHandler
+	PerformRequestsError(requests *foundation.NSArray[*raw.VNRequest]) (bool, error)
+}
+
+var _ ImageRequestHandlerable = (*ImageRequestHandler)(nil)
+

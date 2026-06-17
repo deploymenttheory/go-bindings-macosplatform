@@ -5,8 +5,10 @@
 package vision
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // InstanceMaskObservation wraps [raw.VNInstanceMaskObservation] with a fluent Go API.
@@ -23,5 +25,42 @@ func NewInstanceMaskObservation() *InstanceMaskObservation {
 	return &InstanceMaskObservation{inner: raw.VNInstanceMaskObservationFromID(_id)}
 }
 
+// GenerateMaskForInstancesError calls the underlying GenerateMaskForInstancesError.
+func (x *InstanceMaskObservation) GenerateMaskForInstancesError(instances *foundation.NSIndexSet) (unsafe.Pointer, error) {
+	return x.inner.GenerateMaskForInstancesError(instances)
+}
+
+// GenerateMaskedImageOfInstancesFromRequestHandlerCroppedToInstancesExtentError calls the underlying GenerateMaskedImageOfInstancesFromRequestHandlerCroppedToInstancesExtentError.
+func (x *InstanceMaskObservation) GenerateMaskedImageOfInstancesFromRequestHandlerCroppedToInstancesExtentError(instances *foundation.NSIndexSet, requestHandler *raw.VNImageRequestHandler, cropResult bool) (unsafe.Pointer, error) {
+	return x.inner.GenerateMaskedImageOfInstancesFromRequestHandlerCroppedToInstancesExtentError(instances, requestHandler, cropResult)
+}
+
+// GenerateScaledMaskForImageForInstancesFromRequestHandlerError calls the underlying GenerateScaledMaskForImageForInstancesFromRequestHandlerError.
+func (x *InstanceMaskObservation) GenerateScaledMaskForImageForInstancesFromRequestHandlerError(instances *foundation.NSIndexSet, requestHandler *raw.VNImageRequestHandler) (unsafe.Pointer, error) {
+	return x.inner.GenerateScaledMaskForImageForInstancesFromRequestHandlerError(instances, requestHandler)
+}
+
+// InstanceMask calls the underlying InstanceMask.
+func (x *InstanceMaskObservation) InstanceMask() unsafe.Pointer {
+	return x.inner.InstanceMask()
+}
+
+// AllInstances calls the underlying AllInstances.
+func (x *InstanceMaskObservation) AllInstances() *foundation.NSIndexSet {
+	return x.inner.AllInstances()
+}
+
 func (x *InstanceMaskObservation) asObservation() *raw.VNObservation { return &x.inner.VNObservation }
+
+// InstanceMaskObservationable is the interface implemented by [InstanceMaskObservation], for mocking and DI.
+type InstanceMaskObservationable interface {
+	Unwrap() *raw.VNInstanceMaskObservation
+	GenerateMaskForInstancesError(instances *foundation.NSIndexSet) (unsafe.Pointer, error)
+	GenerateMaskedImageOfInstancesFromRequestHandlerCroppedToInstancesExtentError(instances *foundation.NSIndexSet, requestHandler *raw.VNImageRequestHandler, cropResult bool) (unsafe.Pointer, error)
+	GenerateScaledMaskForImageForInstancesFromRequestHandlerError(instances *foundation.NSIndexSet, requestHandler *raw.VNImageRequestHandler) (unsafe.Pointer, error)
+	InstanceMask() unsafe.Pointer
+	AllInstances() *foundation.NSIndexSet
+}
+
+var _ InstanceMaskObservationable = (*InstanceMaskObservation)(nil)
 

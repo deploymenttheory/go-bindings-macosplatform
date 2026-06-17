@@ -23,3 +23,16 @@ func NewFitzpatrickSkinTypeObject() *FitzpatrickSkinTypeObject {
 	return &FitzpatrickSkinTypeObject{inner: raw.HKFitzpatrickSkinTypeObjectFromID(_id)}
 }
 
+// SkinType calls the underlying SkinType.
+func (x *FitzpatrickSkinTypeObject) SkinType() raw.HKFitzpatrickSkinType {
+	return x.inner.SkinType()
+}
+
+// FitzpatrickSkinTypeObjectable is the interface implemented by [FitzpatrickSkinTypeObject], for mocking and DI.
+type FitzpatrickSkinTypeObjectable interface {
+	Unwrap() *raw.HKFitzpatrickSkinTypeObject
+	SkinType() raw.HKFitzpatrickSkinType
+}
+
+var _ FitzpatrickSkinTypeObjectable = (*FitzpatrickSkinTypeObject)(nil)
+

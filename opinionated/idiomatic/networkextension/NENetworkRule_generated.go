@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // NENetworkRule wraps [raw.NENetworkRule] with a fluent Go API.
@@ -59,4 +60,59 @@ func NewNENetworkRuleWithRemoteNetworkRemotePrefixLocalNetworkLocalPrefixProtoco
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRemoteNetwork:remotePrefix:localNetwork:localPrefix:protocol:direction:"), remoteNetwork.Ptr(), remotePrefix, localNetwork.Ptr(), localPrefix, protocol, direction)
 	return &NENetworkRule{inner: raw.NENetworkRuleFromID(_id)}
 }
+
+// MatchRemoteHostOrNetworkEndpoint calls the underlying MatchRemoteHostOrNetworkEndpoint.
+func (x *NENetworkRule) MatchRemoteHostOrNetworkEndpoint() *foundation.NSObject {
+	return x.inner.MatchRemoteHostOrNetworkEndpoint()
+}
+
+// MatchRemoteEndpoint calls the underlying MatchRemoteEndpoint.
+func (x *NENetworkRule) MatchRemoteEndpoint() unsafe.Pointer {
+	return x.inner.MatchRemoteEndpoint()
+}
+
+// MatchRemotePrefix calls the underlying MatchRemotePrefix.
+func (x *NENetworkRule) MatchRemotePrefix() uint {
+	return x.inner.MatchRemotePrefix()
+}
+
+// MatchLocalNetworkEndpoint calls the underlying MatchLocalNetworkEndpoint.
+func (x *NENetworkRule) MatchLocalNetworkEndpoint() *foundation.NSObject {
+	return x.inner.MatchLocalNetworkEndpoint()
+}
+
+// MatchLocalNetwork calls the underlying MatchLocalNetwork.
+func (x *NENetworkRule) MatchLocalNetwork() unsafe.Pointer {
+	return x.inner.MatchLocalNetwork()
+}
+
+// MatchLocalPrefix calls the underlying MatchLocalPrefix.
+func (x *NENetworkRule) MatchLocalPrefix() uint {
+	return x.inner.MatchLocalPrefix()
+}
+
+// MatchProtocol calls the underlying MatchProtocol.
+func (x *NENetworkRule) MatchProtocol() raw.NENetworkRuleProtocol {
+	return x.inner.MatchProtocol()
+}
+
+// MatchDirection calls the underlying MatchDirection.
+func (x *NENetworkRule) MatchDirection() raw.NETrafficDirection {
+	return x.inner.MatchDirection()
+}
+
+// NENetworkRuleable is the interface implemented by [NENetworkRule], for mocking and DI.
+type NENetworkRuleable interface {
+	Unwrap() *raw.NENetworkRule
+	MatchRemoteHostOrNetworkEndpoint() *foundation.NSObject
+	MatchRemoteEndpoint() unsafe.Pointer
+	MatchRemotePrefix() uint
+	MatchLocalNetworkEndpoint() *foundation.NSObject
+	MatchLocalNetwork() unsafe.Pointer
+	MatchLocalPrefix() uint
+	MatchProtocol() raw.NENetworkRuleProtocol
+	MatchDirection() raw.NETrafficDirection
+}
+
+var _ NENetworkRuleable = (*NENetworkRule)(nil)
 

@@ -5,6 +5,8 @@
 package mpsmatrix
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsmatrix"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,5 +37,62 @@ func (x *MatrixRandom) WithBatchSize(batchSize uint) *MatrixRandom {
 	return x
 }
 
+// EncodeToCommandBufferDestinationVector calls the underlying EncodeToCommandBufferDestinationVector.
+func (x *MatrixRandom) EncodeToCommandBufferDestinationVector(commandBuffer metal.MTLCommandBuffer, destinationVector *mpscore.MPSVector) {
+	x.inner.EncodeToCommandBufferDestinationVector(commandBuffer, destinationVector)
+}
+
+// EncodeToCommandBufferDestinationMatrix calls the underlying EncodeToCommandBufferDestinationMatrix.
+func (x *MatrixRandom) EncodeToCommandBufferDestinationMatrix(commandBuffer metal.MTLCommandBuffer, destinationMatrix *mpscore.MPSMatrix) {
+	x.inner.EncodeToCommandBufferDestinationMatrix(commandBuffer, destinationMatrix)
+}
+
+// DestinationDataType calls the underlying DestinationDataType.
+func (x *MatrixRandom) DestinationDataType() mpscore.MPSDataType {
+	return x.inner.DestinationDataType()
+}
+
+// DistributionType calls the underlying DistributionType.
+func (x *MatrixRandom) DistributionType() raw.MPSMatrixRandomDistribution {
+	return x.inner.DistributionType()
+}
+
+// BatchStart calls the underlying BatchStart.
+func (x *MatrixRandom) BatchStart() uint {
+	return x.inner.BatchStart()
+}
+
+// SetBatchStart calls the underlying SetBatchStart.
+func (x *MatrixRandom) SetBatchStart(batchStart uint) {
+	x.inner.SetBatchStart(batchStart)
+}
+
+// BatchSize calls the underlying BatchSize.
+func (x *MatrixRandom) BatchSize() uint {
+	return x.inner.BatchSize()
+}
+
+// SetBatchSize calls the underlying SetBatchSize.
+func (x *MatrixRandom) SetBatchSize(batchSize uint) {
+	x.inner.SetBatchSize(batchSize)
+}
+
 func (x *MatrixRandom) asMatrixRandom() *raw.MPSMatrixRandom { return x.inner }
+
+// MatrixRandomable is the interface implemented by [MatrixRandom], for mocking and DI.
+type MatrixRandomable interface {
+	Unwrap() *raw.MPSMatrixRandom
+	WithBatchStart(batchStart uint) *MatrixRandom
+	WithBatchSize(batchSize uint) *MatrixRandom
+	EncodeToCommandBufferDestinationVector(commandBuffer metal.MTLCommandBuffer, destinationVector *mpscore.MPSVector)
+	EncodeToCommandBufferDestinationMatrix(commandBuffer metal.MTLCommandBuffer, destinationMatrix *mpscore.MPSMatrix)
+	DestinationDataType() mpscore.MPSDataType
+	DistributionType() raw.MPSMatrixRandomDistribution
+	BatchStart() uint
+	SetBatchStart(batchStart uint)
+	BatchSize() uint
+	SetBatchSize(batchSize uint)
+}
+
+var _ MatrixRandomable = (*MatrixRandom)(nil)
 

@@ -7,6 +7,7 @@ package phase
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -31,12 +32,18 @@ func (x *Occluder) Shapes() []*raw.PHASEShape {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.PHASEShape, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PHASEShape {
+		return raw.PHASEShapeFromID(purego.Retain(_id))
+	})
 }
 
 func (x *Occluder) asObject() *raw.PHASEObject { return &x.inner.PHASEObject }
+
+// Occluderable is the interface implemented by [Occluder], for mocking and DI.
+type Occluderable interface {
+	Unwrap() *raw.PHASEOccluder
+	Shapes() []*raw.PHASEShape
+}
+
+var _ Occluderable = (*Occluder)(nil)
 

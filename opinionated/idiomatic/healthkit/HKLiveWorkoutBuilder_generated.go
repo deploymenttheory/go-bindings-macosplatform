@@ -41,5 +41,81 @@ func (x *LiveWorkoutBuilder) WithDataSource(dataSource *raw.HKLiveWorkoutDataSou
 	return x
 }
 
+// Delegate calls the underlying Delegate.
+func (x *LiveWorkoutBuilder) Delegate() raw.HKLiveWorkoutBuilderDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *LiveWorkoutBuilder) SetDelegate(delegate raw.HKLiveWorkoutBuilderDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// WorkoutSession calls the underlying WorkoutSession.
+func (x *LiveWorkoutBuilder) WorkoutSession() *WorkoutSession {
+	_r := x.inner.WorkoutSession()
+	if _r == nil {
+		return nil
+	}
+	return &WorkoutSession{inner: _r}
+}
+
+// ShouldCollectWorkoutEvents calls the underlying ShouldCollectWorkoutEvents.
+func (x *LiveWorkoutBuilder) ShouldCollectWorkoutEvents() bool {
+	return x.inner.ShouldCollectWorkoutEvents()
+}
+
+// SetShouldCollectWorkoutEvents calls the underlying SetShouldCollectWorkoutEvents.
+func (x *LiveWorkoutBuilder) SetShouldCollectWorkoutEvents(shouldCollectWorkoutEvents bool) {
+	x.inner.SetShouldCollectWorkoutEvents(shouldCollectWorkoutEvents)
+}
+
+// DataSource calls the underlying DataSource.
+func (x *LiveWorkoutBuilder) DataSource() *LiveWorkoutDataSource {
+	_r := x.inner.DataSource()
+	if _r == nil {
+		return nil
+	}
+	return &LiveWorkoutDataSource{inner: _r}
+}
+
+// SetDataSource calls the underlying SetDataSource.
+func (x *LiveWorkoutBuilder) SetDataSource(dataSource *raw.HKLiveWorkoutDataSource) {
+	x.inner.SetDataSource(dataSource)
+}
+
+// ElapsedTime calls the underlying ElapsedTime.
+func (x *LiveWorkoutBuilder) ElapsedTime() float64 {
+	return x.inner.ElapsedTime()
+}
+
+// CurrentWorkoutActivity calls the underlying CurrentWorkoutActivity.
+func (x *LiveWorkoutBuilder) CurrentWorkoutActivity() *WorkoutActivity {
+	_r := x.inner.CurrentWorkoutActivity()
+	if _r == nil {
+		return nil
+	}
+	return &WorkoutActivity{inner: _r}
+}
+
 func (x *LiveWorkoutBuilder) asWorkoutBuilder() *raw.HKWorkoutBuilder { return &x.inner.HKWorkoutBuilder }
+
+// LiveWorkoutBuilderable is the interface implemented by [LiveWorkoutBuilder], for mocking and DI.
+type LiveWorkoutBuilderable interface {
+	Unwrap() *raw.HKLiveWorkoutBuilder
+	WithDelegate(delegate raw.HKLiveWorkoutBuilderDelegate) *LiveWorkoutBuilder
+	WithShouldCollectWorkoutEvents(shouldCollectWorkoutEvents bool) *LiveWorkoutBuilder
+	WithDataSource(dataSource *raw.HKLiveWorkoutDataSource) *LiveWorkoutBuilder
+	Delegate() raw.HKLiveWorkoutBuilderDelegate
+	SetDelegate(delegate raw.HKLiveWorkoutBuilderDelegate)
+	WorkoutSession() *WorkoutSession
+	ShouldCollectWorkoutEvents() bool
+	SetShouldCollectWorkoutEvents(shouldCollectWorkoutEvents bool)
+	DataSource() *LiveWorkoutDataSource
+	SetDataSource(dataSource *raw.HKLiveWorkoutDataSource)
+	ElapsedTime() float64
+	CurrentWorkoutActivity() *WorkoutActivity
+}
+
+var _ LiveWorkoutBuilderable = (*LiveWorkoutBuilder)(nil)
 

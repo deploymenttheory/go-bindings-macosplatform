@@ -23,3 +23,10 @@ func NewImageProcessorKernel() *ImageProcessorKernel {
 	return &ImageProcessorKernel{inner: raw.CIImageProcessorKernelFromID(_id)}
 }
 
+// ImageProcessorKernelable is the interface implemented by [ImageProcessorKernel], for mocking and DI.
+type ImageProcessorKernelable interface {
+	Unwrap() *raw.CIImageProcessorKernel
+}
+
+var _ ImageProcessorKernelable = (*ImageProcessorKernel)(nil)
+

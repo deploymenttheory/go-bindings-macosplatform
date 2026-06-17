@@ -25,3 +25,10 @@ func NewInputServerWithDelegateName(delegate objc.ID, name string) *InputServer 
 	return &InputServer{inner: raw.NSInputServerFromID(_id)}
 }
 
+// InputServerable is the interface implemented by [InputServer], for mocking and DI.
+type InputServerable interface {
+	Unwrap() *raw.NSInputServer
+}
+
+var _ InputServerable = (*InputServer)(nil)
+

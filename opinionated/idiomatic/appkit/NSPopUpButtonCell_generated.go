@@ -6,7 +6,9 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -68,30 +70,245 @@ func (x *PopUpButtonCell) WithArrowPosition(arrowPosition raw.NSPopUpArrowPositi
 	return x
 }
 
+// AddItemWithTitle calls the underlying AddItemWithTitle.
+func (x *PopUpButtonCell) AddItemWithTitle(title string) {
+	x.inner.AddItemWithTitle(foundation.NSStringStringWithUTF8String(title))
+}
+
+// AddItemsWithTitles calls the underlying AddItemsWithTitles.
+func (x *PopUpButtonCell) AddItemsWithTitles(itemTitles *foundation.NSArray[*foundation.NSString]) {
+	x.inner.AddItemsWithTitles(itemTitles)
+}
+
+// InsertItemWithTitleAtIndex calls the underlying InsertItemWithTitleAtIndex.
+func (x *PopUpButtonCell) InsertItemWithTitleAtIndex(title string, index int) {
+	x.inner.InsertItemWithTitleAtIndex(foundation.NSStringStringWithUTF8String(title), index)
+}
+
+// RemoveItemWithTitle calls the underlying RemoveItemWithTitle.
+func (x *PopUpButtonCell) RemoveItemWithTitle(title string) {
+	x.inner.RemoveItemWithTitle(foundation.NSStringStringWithUTF8String(title))
+}
+
+// RemoveItemAtIndex calls the underlying RemoveItemAtIndex.
+func (x *PopUpButtonCell) RemoveItemAtIndex(index int) {
+	x.inner.RemoveItemAtIndex(index)
+}
+
+// RemoveAllItems calls the underlying RemoveAllItems.
+func (x *PopUpButtonCell) RemoveAllItems() {
+	x.inner.RemoveAllItems()
+}
+
+// IndexOfItem calls the underlying IndexOfItem.
+func (x *PopUpButtonCell) IndexOfItem(item *raw.NSMenuItem) int {
+	return x.inner.IndexOfItem(item)
+}
+
+// IndexOfItemWithTitle calls the underlying IndexOfItemWithTitle.
+func (x *PopUpButtonCell) IndexOfItemWithTitle(title string) int {
+	return x.inner.IndexOfItemWithTitle(foundation.NSStringStringWithUTF8String(title))
+}
+
+// IndexOfItemWithTag calls the underlying IndexOfItemWithTag.
+func (x *PopUpButtonCell) IndexOfItemWithTag(tag int) int {
+	return x.inner.IndexOfItemWithTag(tag)
+}
+
+// IndexOfItemWithRepresentedObject calls the underlying IndexOfItemWithRepresentedObject.
+func (x *PopUpButtonCell) IndexOfItemWithRepresentedObject(obj objc.ID) int {
+	return x.inner.IndexOfItemWithRepresentedObject(obj)
+}
+
+// IndexOfItemWithTargetAndAction calls the underlying IndexOfItemWithTargetAndAction.
+func (x *PopUpButtonCell) IndexOfItemWithTargetAndAction(target objc.ID, actionSelector objc.SEL) int {
+	return x.inner.IndexOfItemWithTargetAndAction(target, actionSelector)
+}
+
+// ItemAtIndex calls the underlying ItemAtIndex.
+func (x *PopUpButtonCell) ItemAtIndex(index int) *MenuItem {
+	_r := x.inner.ItemAtIndex(index)
+	if _r == nil {
+		return nil
+	}
+	return &MenuItem{inner: _r}
+}
+
+// ItemWithTitle calls the underlying ItemWithTitle.
+func (x *PopUpButtonCell) ItemWithTitle(title string) *MenuItem {
+	_r := x.inner.ItemWithTitle(foundation.NSStringStringWithUTF8String(title))
+	if _r == nil {
+		return nil
+	}
+	return &MenuItem{inner: _r}
+}
+
+// SelectItem calls the underlying SelectItem.
+func (x *PopUpButtonCell) SelectItem(item *raw.NSMenuItem) {
+	x.inner.SelectItem(item)
+}
+
+// SelectItemAtIndex calls the underlying SelectItemAtIndex.
+func (x *PopUpButtonCell) SelectItemAtIndex(index int) {
+	x.inner.SelectItemAtIndex(index)
+}
+
+// SelectItemWithTitle calls the underlying SelectItemWithTitle.
+func (x *PopUpButtonCell) SelectItemWithTitle(title string) {
+	x.inner.SelectItemWithTitle(foundation.NSStringStringWithUTF8String(title))
+}
+
+// SelectItemWithTag calls the underlying SelectItemWithTag.
+func (x *PopUpButtonCell) SelectItemWithTag(tag int) bool {
+	return x.inner.SelectItemWithTag(tag)
+}
+
+// SynchronizeTitleAndSelectedItem calls the underlying SynchronizeTitleAndSelectedItem.
+func (x *PopUpButtonCell) SynchronizeTitleAndSelectedItem() {
+	x.inner.SynchronizeTitleAndSelectedItem()
+}
+
+// ItemTitleAtIndex calls the underlying ItemTitleAtIndex.
+func (x *PopUpButtonCell) ItemTitleAtIndex(index int) string {
+	_r := x.inner.ItemTitleAtIndex(index)
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// AttachPopUpWithFrameInView calls the underlying AttachPopUpWithFrameInView.
+func (x *PopUpButtonCell) AttachPopUpWithFrameInView(cellFrame corefoundation.CGRect, controlView *raw.NSView) {
+	x.inner.AttachPopUpWithFrameInView(cellFrame, controlView)
+}
+
+// DismissPopUp calls the underlying DismissPopUp.
+func (x *PopUpButtonCell) DismissPopUp() {
+	x.inner.DismissPopUp()
+}
+
+// PerformClickWithFrameInView calls the underlying PerformClickWithFrameInView.
+func (x *PopUpButtonCell) PerformClickWithFrameInView(frame corefoundation.CGRect, controlView *raw.NSView) {
+	x.inner.PerformClickWithFrameInView(frame, controlView)
+}
+
+// PullsDown calls the underlying PullsDown.
+func (x *PopUpButtonCell) PullsDown() bool {
+	return x.inner.PullsDown()
+}
+
+// SetPullsDown calls the underlying SetPullsDown.
+func (x *PopUpButtonCell) SetPullsDown(pullsDown bool) {
+	x.inner.SetPullsDown(pullsDown)
+}
+
+// AutoenablesItems calls the underlying AutoenablesItems.
+func (x *PopUpButtonCell) AutoenablesItems() bool {
+	return x.inner.AutoenablesItems()
+}
+
+// SetAutoenablesItems calls the underlying SetAutoenablesItems.
+func (x *PopUpButtonCell) SetAutoenablesItems(autoenablesItems bool) {
+	x.inner.SetAutoenablesItems(autoenablesItems)
+}
+
+// PreferredEdge calls the underlying PreferredEdge.
+func (x *PopUpButtonCell) PreferredEdge() foundation.NSRectEdge {
+	return x.inner.PreferredEdge()
+}
+
+// SetPreferredEdge calls the underlying SetPreferredEdge.
+func (x *PopUpButtonCell) SetPreferredEdge(preferredEdge foundation.NSRectEdge) {
+	x.inner.SetPreferredEdge(preferredEdge)
+}
+
+// UsesItemFromMenu calls the underlying UsesItemFromMenu.
+func (x *PopUpButtonCell) UsesItemFromMenu() bool {
+	return x.inner.UsesItemFromMenu()
+}
+
+// SetUsesItemFromMenu calls the underlying SetUsesItemFromMenu.
+func (x *PopUpButtonCell) SetUsesItemFromMenu(usesItemFromMenu bool) {
+	x.inner.SetUsesItemFromMenu(usesItemFromMenu)
+}
+
+// AltersStateOfSelectedItem calls the underlying AltersStateOfSelectedItem.
+func (x *PopUpButtonCell) AltersStateOfSelectedItem() bool {
+	return x.inner.AltersStateOfSelectedItem()
+}
+
+// SetAltersStateOfSelectedItem calls the underlying SetAltersStateOfSelectedItem.
+func (x *PopUpButtonCell) SetAltersStateOfSelectedItem(altersStateOfSelectedItem bool) {
+	x.inner.SetAltersStateOfSelectedItem(altersStateOfSelectedItem)
+}
+
 // ItemArray returns the collection as a Go slice.
 func (x *PopUpButtonCell) ItemArray() []*raw.NSMenuItem {
 	arr := x.inner.ItemArray()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSMenuItem, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSMenuItem {
+		return raw.NSMenuItemFromID(purego.Retain(_id))
+	})
+}
+
+// NumberOfItems calls the underlying NumberOfItems.
+func (x *PopUpButtonCell) NumberOfItems() int {
+	return x.inner.NumberOfItems()
+}
+
+// LastItem calls the underlying LastItem.
+func (x *PopUpButtonCell) LastItem() *MenuItem {
+	_r := x.inner.LastItem()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &MenuItem{inner: _r}
+}
+
+// SelectedItem calls the underlying SelectedItem.
+func (x *PopUpButtonCell) SelectedItem() *MenuItem {
+	_r := x.inner.SelectedItem()
+	if _r == nil {
+		return nil
+	}
+	return &MenuItem{inner: _r}
+}
+
+// IndexOfSelectedItem calls the underlying IndexOfSelectedItem.
+func (x *PopUpButtonCell) IndexOfSelectedItem() int {
+	return x.inner.IndexOfSelectedItem()
 }
 
 // ItemTitles returns the collection as a Go slice.
-func (x *PopUpButtonCell) ItemTitles() []*foundation.NSString {
+func (x *PopUpButtonCell) ItemTitles() []string {
 	arr := x.inner.ItemTitles()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// TitleOfSelectedItem calls the underlying TitleOfSelectedItem.
+func (x *PopUpButtonCell) TitleOfSelectedItem() string {
+	_r := x.inner.TitleOfSelectedItem()
+	if _r == nil {
+		return ""
 	}
-	return out
+	return purego.GoString(_r.Ptr())
+}
+
+// ArrowPosition calls the underlying ArrowPosition.
+func (x *PopUpButtonCell) ArrowPosition() raw.NSPopUpArrowPosition {
+	return x.inner.ArrowPosition()
+}
+
+// SetArrowPosition calls the underlying SetArrowPosition.
+func (x *PopUpButtonCell) SetArrowPosition(arrowPosition raw.NSPopUpArrowPosition) {
+	x.inner.SetArrowPosition(arrowPosition)
 }
 
 func (x *PopUpButtonCell) asMenuItemCell() *raw.NSMenuItemCell { return &x.inner.NSMenuItemCell }
@@ -101,4 +318,58 @@ func (x *PopUpButtonCell) asButtonCell() *raw.NSButtonCell { return &x.inner.NSM
 func (x *PopUpButtonCell) asActionCell() *raw.NSActionCell { return &x.inner.NSMenuItemCell.NSButtonCell.NSActionCell }
 
 func (x *PopUpButtonCell) asCell() *raw.NSCell { return &x.inner.NSMenuItemCell.NSButtonCell.NSActionCell.NSCell }
+
+// PopUpButtonCellable is the interface implemented by [PopUpButtonCell], for mocking and DI.
+type PopUpButtonCellable interface {
+	Unwrap() *raw.NSPopUpButtonCell
+	WithPullsDown(pullsDown bool) *PopUpButtonCell
+	WithAutoenablesItems(autoenablesItems bool) *PopUpButtonCell
+	WithPreferredEdge(preferredEdge foundation.NSRectEdge) *PopUpButtonCell
+	WithUsesItemFromMenu(usesItemFromMenu bool) *PopUpButtonCell
+	WithAltersStateOfSelectedItem(altersStateOfSelectedItem bool) *PopUpButtonCell
+	WithArrowPosition(arrowPosition raw.NSPopUpArrowPosition) *PopUpButtonCell
+	AddItemWithTitle(title string)
+	AddItemsWithTitles(itemTitles *foundation.NSArray[*foundation.NSString])
+	InsertItemWithTitleAtIndex(title string, index int)
+	RemoveItemWithTitle(title string)
+	RemoveItemAtIndex(index int)
+	RemoveAllItems()
+	IndexOfItem(item *raw.NSMenuItem) int
+	IndexOfItemWithTitle(title string) int
+	IndexOfItemWithTag(tag int) int
+	IndexOfItemWithRepresentedObject(obj objc.ID) int
+	IndexOfItemWithTargetAndAction(target objc.ID, actionSelector objc.SEL) int
+	ItemAtIndex(index int) *MenuItem
+	ItemWithTitle(title string) *MenuItem
+	SelectItem(item *raw.NSMenuItem)
+	SelectItemAtIndex(index int)
+	SelectItemWithTitle(title string)
+	SelectItemWithTag(tag int) bool
+	SynchronizeTitleAndSelectedItem()
+	ItemTitleAtIndex(index int) string
+	AttachPopUpWithFrameInView(cellFrame corefoundation.CGRect, controlView *raw.NSView)
+	DismissPopUp()
+	PerformClickWithFrameInView(frame corefoundation.CGRect, controlView *raw.NSView)
+	PullsDown() bool
+	SetPullsDown(pullsDown bool)
+	AutoenablesItems() bool
+	SetAutoenablesItems(autoenablesItems bool)
+	PreferredEdge() foundation.NSRectEdge
+	SetPreferredEdge(preferredEdge foundation.NSRectEdge)
+	UsesItemFromMenu() bool
+	SetUsesItemFromMenu(usesItemFromMenu bool)
+	AltersStateOfSelectedItem() bool
+	SetAltersStateOfSelectedItem(altersStateOfSelectedItem bool)
+	ItemArray() []*raw.NSMenuItem
+	NumberOfItems() int
+	LastItem() *MenuItem
+	SelectedItem() *MenuItem
+	IndexOfSelectedItem() int
+	ItemTitles() []string
+	TitleOfSelectedItem() string
+	ArrowPosition() raw.NSPopUpArrowPosition
+	SetArrowPosition(arrowPosition raw.NSPopUpArrowPosition)
+}
+
+var _ PopUpButtonCellable = (*PopUpButtonCell)(nil)
 

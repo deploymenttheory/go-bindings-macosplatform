@@ -42,3 +42,49 @@ func (x *MTRGroupKeyManagementClusterGroupKeyMapStruct) WithFabricIndex(fabricIn
 	return x
 }
 
+// GroupId calls the underlying GroupId.
+func (x *MTRGroupKeyManagementClusterGroupKeyMapStruct) GroupId() *foundation.NSNumber {
+	return x.inner.GroupId()
+}
+
+// SetGroupId calls the underlying SetGroupId.
+func (x *MTRGroupKeyManagementClusterGroupKeyMapStruct) SetGroupId(groupId *foundation.NSNumber) {
+	x.inner.SetGroupId(groupId)
+}
+
+// GroupKeySetID calls the underlying GroupKeySetID.
+func (x *MTRGroupKeyManagementClusterGroupKeyMapStruct) GroupKeySetID() *foundation.NSNumber {
+	return x.inner.GroupKeySetID()
+}
+
+// SetGroupKeySetID calls the underlying SetGroupKeySetID.
+func (x *MTRGroupKeyManagementClusterGroupKeyMapStruct) SetGroupKeySetID(groupKeySetID *foundation.NSNumber) {
+	x.inner.SetGroupKeySetID(groupKeySetID)
+}
+
+// FabricIndex calls the underlying FabricIndex.
+func (x *MTRGroupKeyManagementClusterGroupKeyMapStruct) FabricIndex() *foundation.NSNumber {
+	return x.inner.FabricIndex()
+}
+
+// SetFabricIndex calls the underlying SetFabricIndex.
+func (x *MTRGroupKeyManagementClusterGroupKeyMapStruct) SetFabricIndex(fabricIndex *foundation.NSNumber) {
+	x.inner.SetFabricIndex(fabricIndex)
+}
+
+// MTRGroupKeyManagementClusterGroupKeyMapStructable is the interface implemented by [MTRGroupKeyManagementClusterGroupKeyMapStruct], for mocking and DI.
+type MTRGroupKeyManagementClusterGroupKeyMapStructable interface {
+	Unwrap() *raw.MTRGroupKeyManagementClusterGroupKeyMapStruct
+	WithGroupId(groupId *foundation.NSNumber) *MTRGroupKeyManagementClusterGroupKeyMapStruct
+	WithGroupKeySetID(groupKeySetID *foundation.NSNumber) *MTRGroupKeyManagementClusterGroupKeyMapStruct
+	WithFabricIndex(fabricIndex *foundation.NSNumber) *MTRGroupKeyManagementClusterGroupKeyMapStruct
+	GroupId() *foundation.NSNumber
+	SetGroupId(groupId *foundation.NSNumber)
+	GroupKeySetID() *foundation.NSNumber
+	SetGroupKeySetID(groupKeySetID *foundation.NSNumber)
+	FabricIndex() *foundation.NSNumber
+	SetFabricIndex(fabricIndex *foundation.NSNumber)
+}
+
+var _ MTRGroupKeyManagementClusterGroupKeyMapStructable = (*MTRGroupKeyManagementClusterGroupKeyMapStruct)(nil)
+

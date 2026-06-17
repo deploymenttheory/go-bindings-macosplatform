@@ -25,3 +25,10 @@ func NewMTRTimeSynchronizationClusterDstOffsetType() *MTRTimeSynchronizationClus
 
 func (x *MTRTimeSynchronizationClusterDstOffsetType) asMTRTimeSynchronizationClusterDSTOffsetStruct() *raw.MTRTimeSynchronizationClusterDSTOffsetStruct { return &x.inner.MTRTimeSynchronizationClusterDSTOffsetStruct }
 
+// MTRTimeSynchronizationClusterDstOffsetTypeable is the interface implemented by [MTRTimeSynchronizationClusterDstOffsetType], for mocking and DI.
+type MTRTimeSynchronizationClusterDstOffsetTypeable interface {
+	Unwrap() *raw.MTRTimeSynchronizationClusterDstOffsetType
+}
+
+var _ MTRTimeSynchronizationClusterDstOffsetTypeable = (*MTRTimeSynchronizationClusterDstOffsetType)(nil)
+

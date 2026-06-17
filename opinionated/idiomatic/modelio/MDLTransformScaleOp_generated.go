@@ -6,6 +6,7 @@ package modelio
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,31 @@ func NewTransformScaleOp() *TransformScaleOp {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLTransformScaleOp")), objc.RegisterName("new"))
 	return &TransformScaleOp{inner: raw.MDLTransformScaleOpFromID(_id)}
 }
+
+// Name calls the underlying Name.
+func (x *TransformScaleOp) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// AnimatedValue calls the underlying AnimatedValue.
+func (x *TransformScaleOp) AnimatedValue() *AnimatedVector3 {
+	_r := x.inner.AnimatedValue()
+	if _r == nil {
+		return nil
+	}
+	return &AnimatedVector3{inner: _r}
+}
+
+// TransformScaleOpable is the interface implemented by [TransformScaleOp], for mocking and DI.
+type TransformScaleOpable interface {
+	Unwrap() *raw.MDLTransformScaleOp
+	Name() string
+	AnimatedValue() *AnimatedVector3
+}
+
+var _ TransformScaleOpable = (*TransformScaleOp)(nil)
 

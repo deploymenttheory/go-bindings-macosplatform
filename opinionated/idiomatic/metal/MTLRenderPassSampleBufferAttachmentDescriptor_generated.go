@@ -53,3 +53,75 @@ func (x *RenderPassSampleBufferAttachmentDescriptor) WithEndOfFragmentSampleInde
 	return x
 }
 
+// SampleBuffer calls the underlying SampleBuffer.
+func (x *RenderPassSampleBufferAttachmentDescriptor) SampleBuffer() raw.MTLCounterSampleBuffer {
+	return x.inner.SampleBuffer()
+}
+
+// SetSampleBuffer calls the underlying SetSampleBuffer.
+func (x *RenderPassSampleBufferAttachmentDescriptor) SetSampleBuffer(sampleBuffer raw.MTLCounterSampleBuffer) {
+	x.inner.SetSampleBuffer(sampleBuffer)
+}
+
+// StartOfVertexSampleIndex calls the underlying StartOfVertexSampleIndex.
+func (x *RenderPassSampleBufferAttachmentDescriptor) StartOfVertexSampleIndex() uint {
+	return x.inner.StartOfVertexSampleIndex()
+}
+
+// SetStartOfVertexSampleIndex calls the underlying SetStartOfVertexSampleIndex.
+func (x *RenderPassSampleBufferAttachmentDescriptor) SetStartOfVertexSampleIndex(startOfVertexSampleIndex uint) {
+	x.inner.SetStartOfVertexSampleIndex(startOfVertexSampleIndex)
+}
+
+// EndOfVertexSampleIndex calls the underlying EndOfVertexSampleIndex.
+func (x *RenderPassSampleBufferAttachmentDescriptor) EndOfVertexSampleIndex() uint {
+	return x.inner.EndOfVertexSampleIndex()
+}
+
+// SetEndOfVertexSampleIndex calls the underlying SetEndOfVertexSampleIndex.
+func (x *RenderPassSampleBufferAttachmentDescriptor) SetEndOfVertexSampleIndex(endOfVertexSampleIndex uint) {
+	x.inner.SetEndOfVertexSampleIndex(endOfVertexSampleIndex)
+}
+
+// StartOfFragmentSampleIndex calls the underlying StartOfFragmentSampleIndex.
+func (x *RenderPassSampleBufferAttachmentDescriptor) StartOfFragmentSampleIndex() uint {
+	return x.inner.StartOfFragmentSampleIndex()
+}
+
+// SetStartOfFragmentSampleIndex calls the underlying SetStartOfFragmentSampleIndex.
+func (x *RenderPassSampleBufferAttachmentDescriptor) SetStartOfFragmentSampleIndex(startOfFragmentSampleIndex uint) {
+	x.inner.SetStartOfFragmentSampleIndex(startOfFragmentSampleIndex)
+}
+
+// EndOfFragmentSampleIndex calls the underlying EndOfFragmentSampleIndex.
+func (x *RenderPassSampleBufferAttachmentDescriptor) EndOfFragmentSampleIndex() uint {
+	return x.inner.EndOfFragmentSampleIndex()
+}
+
+// SetEndOfFragmentSampleIndex calls the underlying SetEndOfFragmentSampleIndex.
+func (x *RenderPassSampleBufferAttachmentDescriptor) SetEndOfFragmentSampleIndex(endOfFragmentSampleIndex uint) {
+	x.inner.SetEndOfFragmentSampleIndex(endOfFragmentSampleIndex)
+}
+
+// RenderPassSampleBufferAttachmentDescriptorable is the interface implemented by [RenderPassSampleBufferAttachmentDescriptor], for mocking and DI.
+type RenderPassSampleBufferAttachmentDescriptorable interface {
+	Unwrap() *raw.MTLRenderPassSampleBufferAttachmentDescriptor
+	WithSampleBuffer(sampleBuffer raw.MTLCounterSampleBuffer) *RenderPassSampleBufferAttachmentDescriptor
+	WithStartOfVertexSampleIndex(startOfVertexSampleIndex uint) *RenderPassSampleBufferAttachmentDescriptor
+	WithEndOfVertexSampleIndex(endOfVertexSampleIndex uint) *RenderPassSampleBufferAttachmentDescriptor
+	WithStartOfFragmentSampleIndex(startOfFragmentSampleIndex uint) *RenderPassSampleBufferAttachmentDescriptor
+	WithEndOfFragmentSampleIndex(endOfFragmentSampleIndex uint) *RenderPassSampleBufferAttachmentDescriptor
+	SampleBuffer() raw.MTLCounterSampleBuffer
+	SetSampleBuffer(sampleBuffer raw.MTLCounterSampleBuffer)
+	StartOfVertexSampleIndex() uint
+	SetStartOfVertexSampleIndex(startOfVertexSampleIndex uint)
+	EndOfVertexSampleIndex() uint
+	SetEndOfVertexSampleIndex(endOfVertexSampleIndex uint)
+	StartOfFragmentSampleIndex() uint
+	SetStartOfFragmentSampleIndex(startOfFragmentSampleIndex uint)
+	EndOfFragmentSampleIndex() uint
+	SetEndOfFragmentSampleIndex(endOfFragmentSampleIndex uint)
+}
+
+var _ RenderPassSampleBufferAttachmentDescriptorable = (*RenderPassSampleBufferAttachmentDescriptor)(nil)
+

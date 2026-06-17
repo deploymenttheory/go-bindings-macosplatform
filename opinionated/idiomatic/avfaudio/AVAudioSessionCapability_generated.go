@@ -23,3 +23,22 @@ func NewAudioSessionCapability() *AudioSessionCapability {
 	return &AudioSessionCapability{inner: raw.AVAudioSessionCapabilityFromID(_id)}
 }
 
+// IsSupported calls the underlying IsSupported.
+func (x *AudioSessionCapability) IsSupported() bool {
+	return x.inner.IsSupported()
+}
+
+// IsEnabled calls the underlying IsEnabled.
+func (x *AudioSessionCapability) IsEnabled() bool {
+	return x.inner.IsEnabled()
+}
+
+// AudioSessionCapabilityable is the interface implemented by [AudioSessionCapability], for mocking and DI.
+type AudioSessionCapabilityable interface {
+	Unwrap() *raw.AVAudioSessionCapability
+	IsSupported() bool
+	IsEnabled() bool
+}
+
+var _ AudioSessionCapabilityable = (*AudioSessionCapability)(nil)
+

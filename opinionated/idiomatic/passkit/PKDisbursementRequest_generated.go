@@ -7,6 +7,7 @@ package passkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -132,17 +133,58 @@ func (x *DisbursementRequest) WithIsDelegatedRequest(isDelegatedRequest bool) *D
 	return x
 }
 
+// MerchantIdentifier calls the underlying MerchantIdentifier.
+func (x *DisbursementRequest) MerchantIdentifier() string {
+	_r := x.inner.MerchantIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetMerchantIdentifier calls the underlying SetMerchantIdentifier.
+func (x *DisbursementRequest) SetMerchantIdentifier(merchantIdentifier string) {
+	x.inner.SetMerchantIdentifier(foundation.NSStringStringWithUTF8String(merchantIdentifier))
+}
+
+// RegionCode calls the underlying RegionCode.
+func (x *DisbursementRequest) RegionCode() string {
+	_r := x.inner.RegionCode()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetRegionCode calls the underlying SetRegionCode.
+func (x *DisbursementRequest) SetRegionCode(regionCode string) {
+	x.inner.SetRegionCode(foundation.NSStringStringWithUTF8String(regionCode))
+}
+
 // SupportedNetworks returns the collection as a Go slice.
 func (x *DisbursementRequest) SupportedNetworks() []*foundation.NSString {
 	arr := x.inner.SupportedNetworks()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	})
+}
+
+// SetSupportedNetworks calls the underlying SetSupportedNetworks.
+func (x *DisbursementRequest) SetSupportedNetworks(supportedNetworks *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetSupportedNetworks(supportedNetworks)
+}
+
+// MerchantCapabilities calls the underlying MerchantCapabilities.
+func (x *DisbursementRequest) MerchantCapabilities() raw.PKMerchantCapability {
+	return x.inner.MerchantCapabilities()
+}
+
+// SetMerchantCapabilities calls the underlying SetMerchantCapabilities.
+func (x *DisbursementRequest) SetMerchantCapabilities(merchantCapabilities raw.PKMerchantCapability) {
+	x.inner.SetMerchantCapabilities(merchantCapabilities)
 }
 
 // SummaryItems returns the collection as a Go slice.
@@ -151,11 +193,28 @@ func (x *DisbursementRequest) SummaryItems() []*raw.PKPaymentSummaryItem {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.PKPaymentSummaryItem, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PKPaymentSummaryItem {
+		return raw.PKPaymentSummaryItemFromID(purego.Retain(_id))
+	})
+}
+
+// SetSummaryItems calls the underlying SetSummaryItems.
+func (x *DisbursementRequest) SetSummaryItems(summaryItems *foundation.NSArray[*raw.PKPaymentSummaryItem]) {
+	x.inner.SetSummaryItems(summaryItems)
+}
+
+// CurrencyCode calls the underlying CurrencyCode.
+func (x *DisbursementRequest) CurrencyCode() string {
+	_r := x.inner.CurrencyCode()
+	if _r == nil {
+		return ""
 	}
-	return out
+	return purego.GoString(_r.Ptr())
+}
+
+// SetCurrencyCode calls the underlying SetCurrencyCode.
+func (x *DisbursementRequest) SetCurrencyCode(currencyCode string) {
+	x.inner.SetCurrencyCode(foundation.NSStringStringWithUTF8String(currencyCode))
 }
 
 // RequiredRecipientContactFields returns the collection as a Go slice.
@@ -164,23 +223,103 @@ func (x *DisbursementRequest) RequiredRecipientContactFields() []*foundation.NSS
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	})
+}
+
+// SetRequiredRecipientContactFields calls the underlying SetRequiredRecipientContactFields.
+func (x *DisbursementRequest) SetRequiredRecipientContactFields(requiredRecipientContactFields *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetRequiredRecipientContactFields(requiredRecipientContactFields)
+}
+
+// RecipientContact calls the underlying RecipientContact.
+func (x *DisbursementRequest) RecipientContact() *Contact {
+	_r := x.inner.RecipientContact()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &Contact{inner: _r}
+}
+
+// SetRecipientContact calls the underlying SetRecipientContact.
+func (x *DisbursementRequest) SetRecipientContact(recipientContact *raw.PKContact) {
+	x.inner.SetRecipientContact(recipientContact)
 }
 
 // SupportedRegions returns the collection as a Go slice.
-func (x *DisbursementRequest) SupportedRegions() []*foundation.NSString {
+func (x *DisbursementRequest) SupportedRegions() []string {
 	arr := x.inner.SupportedRegions()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
+
+// SetSupportedRegions calls the underlying SetSupportedRegions.
+func (x *DisbursementRequest) SetSupportedRegions(supportedRegions *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetSupportedRegions(supportedRegions)
+}
+
+// ApplicationData calls the underlying ApplicationData.
+func (x *DisbursementRequest) ApplicationData() *foundation.NSData {
+	return x.inner.ApplicationData()
+}
+
+// SetApplicationData calls the underlying SetApplicationData.
+func (x *DisbursementRequest) SetApplicationData(applicationData *foundation.NSData) {
+	x.inner.SetApplicationData(applicationData)
+}
+
+// IsDelegatedRequest calls the underlying IsDelegatedRequest.
+func (x *DisbursementRequest) IsDelegatedRequest() bool {
+	return x.inner.IsDelegatedRequest()
+}
+
+// SetIsDelegatedRequest calls the underlying SetIsDelegatedRequest.
+func (x *DisbursementRequest) SetIsDelegatedRequest(isDelegatedRequest bool) {
+	x.inner.SetIsDelegatedRequest(isDelegatedRequest)
+}
+
+// DisbursementRequestable is the interface implemented by [DisbursementRequest], for mocking and DI.
+type DisbursementRequestable interface {
+	Unwrap() *raw.PKDisbursementRequest
+	WithMerchantIdentifier(merchantIdentifier string) *DisbursementRequest
+	WithRegionCode(regionCode string) *DisbursementRequest
+	WithSupportedNetworks(items ...*foundation.NSString) *DisbursementRequest
+	WithMerchantCapabilities(merchantCapabilities raw.PKMerchantCapability) *DisbursementRequest
+	WithSummaryItems(items ...PaymentSummaryItemProvider) *DisbursementRequest
+	WithCurrencyCode(currencyCode string) *DisbursementRequest
+	WithRequiredRecipientContactFields(items ...*foundation.NSString) *DisbursementRequest
+	WithRecipientContact(recipientContact *raw.PKContact) *DisbursementRequest
+	WithSupportedRegions(items ...*foundation.NSString) *DisbursementRequest
+	WithApplicationData(applicationData *foundation.NSData) *DisbursementRequest
+	WithIsDelegatedRequest(isDelegatedRequest bool) *DisbursementRequest
+	MerchantIdentifier() string
+	SetMerchantIdentifier(merchantIdentifier string)
+	RegionCode() string
+	SetRegionCode(regionCode string)
+	SupportedNetworks() []*foundation.NSString
+	SetSupportedNetworks(supportedNetworks *foundation.NSArray[*foundation.NSString])
+	MerchantCapabilities() raw.PKMerchantCapability
+	SetMerchantCapabilities(merchantCapabilities raw.PKMerchantCapability)
+	SummaryItems() []*raw.PKPaymentSummaryItem
+	SetSummaryItems(summaryItems *foundation.NSArray[*raw.PKPaymentSummaryItem])
+	CurrencyCode() string
+	SetCurrencyCode(currencyCode string)
+	RequiredRecipientContactFields() []*foundation.NSString
+	SetRequiredRecipientContactFields(requiredRecipientContactFields *foundation.NSArray[*foundation.NSString])
+	RecipientContact() *Contact
+	SetRecipientContact(recipientContact *raw.PKContact)
+	SupportedRegions() []string
+	SetSupportedRegions(supportedRegions *foundation.NSArray[*foundation.NSString])
+	ApplicationData() *foundation.NSData
+	SetApplicationData(applicationData *foundation.NSData)
+	IsDelegatedRequest() bool
+	SetIsDelegatedRequest(isDelegatedRequest bool)
+}
+
+var _ DisbursementRequestable = (*DisbursementRequest)(nil)
 

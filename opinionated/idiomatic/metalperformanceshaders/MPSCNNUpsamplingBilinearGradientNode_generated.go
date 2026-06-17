@@ -25,7 +25,26 @@ func NewCNNUpsamplingBilinearGradientNodeWithSourceGradientSourceImageGradientSt
 	return &CNNUpsamplingBilinearGradientNode{inner: raw.MPSCNNUpsamplingBilinearGradientNodeFromID(_id)}
 }
 
+// ScaleFactorX calls the underlying ScaleFactorX.
+func (x *CNNUpsamplingBilinearGradientNode) ScaleFactorX() float64 {
+	return x.inner.ScaleFactorX()
+}
+
+// ScaleFactorY calls the underlying ScaleFactorY.
+func (x *CNNUpsamplingBilinearGradientNode) ScaleFactorY() float64 {
+	return x.inner.ScaleFactorY()
+}
+
 func (x *CNNUpsamplingBilinearGradientNode) asNNGradientFilterNode() *mpsneuralnetwork.MPSNNGradientFilterNode { return &x.inner.MPSNNGradientFilterNode }
 
 func (x *CNNUpsamplingBilinearGradientNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNGradientFilterNode.MPSNNFilterNode }
+
+// CNNUpsamplingBilinearGradientNodeable is the interface implemented by [CNNUpsamplingBilinearGradientNode], for mocking and DI.
+type CNNUpsamplingBilinearGradientNodeable interface {
+	Unwrap() *raw.MPSCNNUpsamplingBilinearGradientNode
+	ScaleFactorX() float64
+	ScaleFactorY() float64
+}
+
+var _ CNNUpsamplingBilinearGradientNodeable = (*CNNUpsamplingBilinearGradientNode)(nil)
 

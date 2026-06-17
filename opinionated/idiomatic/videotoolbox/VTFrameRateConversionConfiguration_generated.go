@@ -7,6 +7,7 @@ package videotoolbox
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/videotoolbox"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -25,16 +26,64 @@ func NewFrameRateConversionConfigurationWithFrameWidthFrameHeightUsePrecomputedF
 	return &FrameRateConversionConfiguration{inner: raw.VTFrameRateConversionConfigurationFromID(_id)}
 }
 
+// FrameWidth calls the underlying FrameWidth.
+func (x *FrameRateConversionConfiguration) FrameWidth() int {
+	return x.inner.FrameWidth()
+}
+
+// FrameHeight calls the underlying FrameHeight.
+func (x *FrameRateConversionConfiguration) FrameHeight() int {
+	return x.inner.FrameHeight()
+}
+
+// UsePrecomputedFlow calls the underlying UsePrecomputedFlow.
+func (x *FrameRateConversionConfiguration) UsePrecomputedFlow() bool {
+	return x.inner.UsePrecomputedFlow()
+}
+
+// QualityPrioritization calls the underlying QualityPrioritization.
+func (x *FrameRateConversionConfiguration) QualityPrioritization() raw.VTFrameRateConversionConfigurationQualityPrioritization {
+	return x.inner.QualityPrioritization()
+}
+
+// Revision calls the underlying Revision.
+func (x *FrameRateConversionConfiguration) Revision() raw.VTFrameRateConversionConfigurationRevision {
+	return x.inner.Revision()
+}
+
 // FrameSupportedPixelFormats returns the collection as a Go slice.
 func (x *FrameRateConversionConfiguration) FrameSupportedPixelFormats() []*foundation.NSNumber {
 	arr := x.inner.FrameSupportedPixelFormats()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
 }
+
+// SourcePixelBufferAttributes calls the underlying SourcePixelBufferAttributes.
+func (x *FrameRateConversionConfiguration) SourcePixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.SourcePixelBufferAttributes()
+}
+
+// DestinationPixelBufferAttributes calls the underlying DestinationPixelBufferAttributes.
+func (x *FrameRateConversionConfiguration) DestinationPixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.DestinationPixelBufferAttributes()
+}
+
+// FrameRateConversionConfigurationable is the interface implemented by [FrameRateConversionConfiguration], for mocking and DI.
+type FrameRateConversionConfigurationable interface {
+	Unwrap() *raw.VTFrameRateConversionConfiguration
+	FrameWidth() int
+	FrameHeight() int
+	UsePrecomputedFlow() bool
+	QualityPrioritization() raw.VTFrameRateConversionConfigurationQualityPrioritization
+	Revision() raw.VTFrameRateConversionConfigurationRevision
+	FrameSupportedPixelFormats() []*foundation.NSNumber
+	SourcePixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	DestinationPixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+}
+
+var _ FrameRateConversionConfigurationable = (*FrameRateConversionConfiguration)(nil)
 

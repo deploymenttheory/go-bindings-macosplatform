@@ -31,7 +31,27 @@ func (x *IndexSpecifier) WithIndex(index int) *IndexSpecifier {
 	return x
 }
 
+// Index calls the underlying Index.
+func (x *IndexSpecifier) Index() int {
+	return x.inner.Index()
+}
+
+// SetIndex calls the underlying SetIndex.
+func (x *IndexSpecifier) SetIndex(index int) {
+	x.inner.SetIndex(index)
+}
+
 func (x *IndexSpecifier) asScriptObjectSpecifier() *raw.NSScriptObjectSpecifier { return &x.inner.NSScriptObjectSpecifier }
 
 func (x *IndexSpecifier) asObject() *raw.NSObject { return &x.inner.NSScriptObjectSpecifier.NSObject }
+
+// IndexSpecifierable is the interface implemented by [IndexSpecifier], for mocking and DI.
+type IndexSpecifierable interface {
+	Unwrap() *raw.NSIndexSpecifier
+	WithIndex(index int) *IndexSpecifier
+	Index() int
+	SetIndex(index int)
+}
+
+var _ IndexSpecifierable = (*IndexSpecifier)(nil)
 

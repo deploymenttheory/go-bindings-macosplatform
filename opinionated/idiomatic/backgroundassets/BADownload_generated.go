@@ -6,6 +6,7 @@ package backgroundassets
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/backgroundassets"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +24,60 @@ func NewDownload() *Download {
 	return &Download{inner: raw.BADownloadFromID(_id)}
 }
 
+// CopyAsNonEssential calls the underlying CopyAsNonEssential.
+func (x *Download) CopyAsNonEssential() *Download {
+	_r := x.inner.CopyAsNonEssential()
+	if _r == nil {
+		return nil
+	}
+	return &Download{inner: _r}
+}
+
+// State calls the underlying State.
+func (x *Download) State() raw.BADownloadState {
+	return x.inner.State()
+}
+
+// Identifier calls the underlying Identifier.
+func (x *Download) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// UniqueIdentifier calls the underlying UniqueIdentifier.
+func (x *Download) UniqueIdentifier() string {
+	_r := x.inner.UniqueIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Priority calls the underlying Priority.
+func (x *Download) Priority() int {
+	return x.inner.Priority()
+}
+
+// IsEssential calls the underlying IsEssential.
+func (x *Download) IsEssential() bool {
+	return x.inner.IsEssential()
+}
+
 func (x *Download) asDownload() *raw.BADownload { return x.inner }
+
+// Downloadable is the interface implemented by [Download], for mocking and DI.
+type Downloadable interface {
+	Unwrap() *raw.BADownload
+	CopyAsNonEssential() *Download
+	State() raw.BADownloadState
+	Identifier() string
+	UniqueIdentifier() string
+	Priority() int
+	IsEssential() bool
+}
+
+var _ Downloadable = (*Download)(nil)
 

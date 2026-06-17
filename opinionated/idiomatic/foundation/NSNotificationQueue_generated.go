@@ -24,5 +24,30 @@ func NewNotificationQueueWithNotificationCenter(notificationCenter *raw.NSNotifi
 	return &NotificationQueue{inner: raw.NSNotificationQueueFromID(_id)}
 }
 
+// EnqueueNotificationPostingStyle calls the underlying EnqueueNotificationPostingStyle.
+func (x *NotificationQueue) EnqueueNotificationPostingStyle(notification *raw.NSNotification, postingStyle raw.NSPostingStyle) {
+	x.inner.EnqueueNotificationPostingStyle(notification, postingStyle)
+}
+
+// EnqueueNotificationPostingStyleCoalesceMaskForModes calls the underlying EnqueueNotificationPostingStyleCoalesceMaskForModes.
+func (x *NotificationQueue) EnqueueNotificationPostingStyleCoalesceMaskForModes(notification *raw.NSNotification, postingStyle raw.NSPostingStyle, coalesceMask raw.NSNotificationCoalescing, modes *raw.NSArray[*raw.NSString]) {
+	x.inner.EnqueueNotificationPostingStyleCoalesceMaskForModes(notification, postingStyle, coalesceMask, modes)
+}
+
+// DequeueNotificationsMatchingCoalesceMask calls the underlying DequeueNotificationsMatchingCoalesceMask.
+func (x *NotificationQueue) DequeueNotificationsMatchingCoalesceMask(notification *raw.NSNotification, coalesceMask uint) {
+	x.inner.DequeueNotificationsMatchingCoalesceMask(notification, coalesceMask)
+}
+
 func (x *NotificationQueue) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// NotificationQueueable is the interface implemented by [NotificationQueue], for mocking and DI.
+type NotificationQueueable interface {
+	Unwrap() *raw.NSNotificationQueue
+	EnqueueNotificationPostingStyle(notification *raw.NSNotification, postingStyle raw.NSPostingStyle)
+	EnqueueNotificationPostingStyleCoalesceMaskForModes(notification *raw.NSNotification, postingStyle raw.NSPostingStyle, coalesceMask raw.NSNotificationCoalescing, modes *raw.NSArray[*raw.NSString])
+	DequeueNotificationsMatchingCoalesceMask(notification *raw.NSNotification, coalesceMask uint)
+}
+
+var _ NotificationQueueable = (*NotificationQueue)(nil)
 

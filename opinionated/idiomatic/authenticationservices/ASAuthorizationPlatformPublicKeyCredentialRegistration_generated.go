@@ -23,3 +23,36 @@ func NewAuthorizationPlatformPublicKeyCredentialRegistration() *AuthorizationPla
 	return &AuthorizationPlatformPublicKeyCredentialRegistration{inner: raw.ASAuthorizationPlatformPublicKeyCredentialRegistrationFromID(_id)}
 }
 
+// Attachment calls the underlying Attachment.
+func (x *AuthorizationPlatformPublicKeyCredentialRegistration) Attachment() raw.ASAuthorizationPublicKeyCredentialAttachment {
+	return x.inner.Attachment()
+}
+
+// LargeBlob calls the underlying LargeBlob.
+func (x *AuthorizationPlatformPublicKeyCredentialRegistration) LargeBlob() *AuthorizationPublicKeyCredentialLargeBlobRegistrationOutput {
+	_r := x.inner.LargeBlob()
+	if _r == nil {
+		return nil
+	}
+	return &AuthorizationPublicKeyCredentialLargeBlobRegistrationOutput{inner: _r}
+}
+
+// Prf calls the underlying Prf.
+func (x *AuthorizationPlatformPublicKeyCredentialRegistration) Prf() *AuthorizationPublicKeyCredentialPRFRegistrationOutput {
+	_r := x.inner.Prf()
+	if _r == nil {
+		return nil
+	}
+	return &AuthorizationPublicKeyCredentialPRFRegistrationOutput{inner: _r}
+}
+
+// AuthorizationPlatformPublicKeyCredentialRegistrationable is the interface implemented by [AuthorizationPlatformPublicKeyCredentialRegistration], for mocking and DI.
+type AuthorizationPlatformPublicKeyCredentialRegistrationable interface {
+	Unwrap() *raw.ASAuthorizationPlatformPublicKeyCredentialRegistration
+	Attachment() raw.ASAuthorizationPublicKeyCredentialAttachment
+	LargeBlob() *AuthorizationPublicKeyCredentialLargeBlobRegistrationOutput
+	Prf() *AuthorizationPublicKeyCredentialPRFRegistrationOutput
+}
+
+var _ AuthorizationPlatformPublicKeyCredentialRegistrationable = (*AuthorizationPlatformPublicKeyCredentialRegistration)(nil)
+

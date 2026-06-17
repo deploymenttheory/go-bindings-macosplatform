@@ -8,6 +8,7 @@ import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -48,17 +49,30 @@ func (x *CaptureMetadataOutput) WithRectOfInterest(rectOfInterest corefoundation
 	return x
 }
 
+// SetMetadataObjectsDelegateQueue calls the underlying SetMetadataObjectsDelegateQueue.
+func (x *CaptureMetadataOutput) SetMetadataObjectsDelegateQueue(objectsDelegate raw.AVCaptureMetadataOutputObjectsDelegate, objectsCallbackQueue *foundation.NSObject) {
+	x.inner.SetMetadataObjectsDelegateQueue(objectsDelegate, objectsCallbackQueue)
+}
+
+// MetadataObjectsDelegate calls the underlying MetadataObjectsDelegate.
+func (x *CaptureMetadataOutput) MetadataObjectsDelegate() raw.AVCaptureMetadataOutputObjectsDelegate {
+	return x.inner.MetadataObjectsDelegate()
+}
+
+// MetadataObjectsCallbackQueue calls the underlying MetadataObjectsCallbackQueue.
+func (x *CaptureMetadataOutput) MetadataObjectsCallbackQueue() *foundation.NSObject {
+	return x.inner.MetadataObjectsCallbackQueue()
+}
+
 // AvailableMetadataObjectTypes returns the collection as a Go slice.
 func (x *CaptureMetadataOutput) AvailableMetadataObjectTypes() []*foundation.NSString {
 	arr := x.inner.AvailableMetadataObjectTypes()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	})
 }
 
 // MetadataObjectTypes returns the collection as a Go slice.
@@ -67,11 +81,24 @@ func (x *CaptureMetadataOutput) MetadataObjectTypes() []*foundation.NSString {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	})
+}
+
+// SetMetadataObjectTypes calls the underlying SetMetadataObjectTypes.
+func (x *CaptureMetadataOutput) SetMetadataObjectTypes(metadataObjectTypes *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetMetadataObjectTypes(metadataObjectTypes)
+}
+
+// RectOfInterest calls the underlying RectOfInterest.
+func (x *CaptureMetadataOutput) RectOfInterest() corefoundation.CGRect {
+	return x.inner.RectOfInterest()
+}
+
+// SetRectOfInterest calls the underlying SetRectOfInterest.
+func (x *CaptureMetadataOutput) SetRectOfInterest(rectOfInterest corefoundation.CGRect) {
+	x.inner.SetRectOfInterest(rectOfInterest)
 }
 
 // RequiredMetadataObjectTypesForCinematicVideoCapture returns the collection as a Go slice.
@@ -80,12 +107,28 @@ func (x *CaptureMetadataOutput) RequiredMetadataObjectTypesForCinematicVideoCapt
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	})
 }
 
 func (x *CaptureMetadataOutput) asCaptureOutput() *raw.AVCaptureOutput { return &x.inner.AVCaptureOutput }
+
+// CaptureMetadataOutputable is the interface implemented by [CaptureMetadataOutput], for mocking and DI.
+type CaptureMetadataOutputable interface {
+	Unwrap() *raw.AVCaptureMetadataOutput
+	WithMetadataObjectTypes(items ...*foundation.NSString) *CaptureMetadataOutput
+	WithRectOfInterest(rectOfInterest corefoundation.CGRect) *CaptureMetadataOutput
+	SetMetadataObjectsDelegateQueue(objectsDelegate raw.AVCaptureMetadataOutputObjectsDelegate, objectsCallbackQueue *foundation.NSObject)
+	MetadataObjectsDelegate() raw.AVCaptureMetadataOutputObjectsDelegate
+	MetadataObjectsCallbackQueue() *foundation.NSObject
+	AvailableMetadataObjectTypes() []*foundation.NSString
+	MetadataObjectTypes() []*foundation.NSString
+	SetMetadataObjectTypes(metadataObjectTypes *foundation.NSArray[*foundation.NSString])
+	RectOfInterest() corefoundation.CGRect
+	SetRectOfInterest(rectOfInterest corefoundation.CGRect)
+	RequiredMetadataObjectTypesForCinematicVideoCapture() []*foundation.NSString
+}
+
+var _ CaptureMetadataOutputable = (*CaptureMetadataOutput)(nil)
 

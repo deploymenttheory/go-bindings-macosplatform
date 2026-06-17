@@ -5,8 +5,10 @@
 package cloudkit
 
 import (
+	"context"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -84,20 +86,161 @@ func (x *FetchRecordChangesOperation) WithFetchRecordChangesCompletionBlock(fetc
 	return x
 }
 
+// RecordZoneID calls the underlying RecordZoneID.
+func (x *FetchRecordChangesOperation) RecordZoneID() *RecordZoneID {
+	_r := x.inner.RecordZoneID()
+	if _r == nil {
+		return nil
+	}
+	return &RecordZoneID{inner: _r}
+}
+
+// SetRecordZoneID calls the underlying SetRecordZoneID.
+func (x *FetchRecordChangesOperation) SetRecordZoneID(recordZoneID *raw.CKRecordZoneID) {
+	x.inner.SetRecordZoneID(recordZoneID)
+}
+
+// PreviousServerChangeToken calls the underlying PreviousServerChangeToken.
+func (x *FetchRecordChangesOperation) PreviousServerChangeToken() *ServerChangeToken {
+	_r := x.inner.PreviousServerChangeToken()
+	if _r == nil {
+		return nil
+	}
+	return &ServerChangeToken{inner: _r}
+}
+
+// SetPreviousServerChangeToken calls the underlying SetPreviousServerChangeToken.
+func (x *FetchRecordChangesOperation) SetPreviousServerChangeToken(previousServerChangeToken *raw.CKServerChangeToken) {
+	x.inner.SetPreviousServerChangeToken(previousServerChangeToken)
+}
+
+// ResultsLimit calls the underlying ResultsLimit.
+func (x *FetchRecordChangesOperation) ResultsLimit() uint {
+	return x.inner.ResultsLimit()
+}
+
+// SetResultsLimit calls the underlying SetResultsLimit.
+func (x *FetchRecordChangesOperation) SetResultsLimit(resultsLimit uint) {
+	x.inner.SetResultsLimit(resultsLimit)
+}
+
 // DesiredKeys returns the collection as a Go slice.
 func (x *FetchRecordChangesOperation) DesiredKeys() []*foundation.NSString {
 	arr := x.inner.DesiredKeys()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	})
+}
+
+// SetDesiredKeys calls the underlying SetDesiredKeys.
+func (x *FetchRecordChangesOperation) SetDesiredKeys(desiredKeys *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetDesiredKeys(desiredKeys)
+}
+
+// RecordChangedBlock calls the underlying RecordChangedBlock.
+func (x *FetchRecordChangesOperation) RecordChangedBlock() objc.Block {
+	return x.inner.RecordChangedBlock()
+}
+
+// SetRecordChangedBlock blocks until the operation completes or ctx is cancelled.
+func (x *FetchRecordChangesOperation) SetRecordChangedBlock(ctx context.Context) (*Record, error) {
+	type _result struct {
+		val *Record
+		err error
 	}
-	return out
+	_ch := make(chan _result, 1)
+	x.inner.SetRecordChangedBlock(func(_p0 *raw.CKRecord) {
+		var _o _result
+		if _p0 != nil {
+			_o.val = &Record{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *Record
+		return _zero, ctx.Err()
+	}
+}
+
+// RecordWithIDWasDeletedBlock calls the underlying RecordWithIDWasDeletedBlock.
+func (x *FetchRecordChangesOperation) RecordWithIDWasDeletedBlock() objc.Block {
+	return x.inner.RecordWithIDWasDeletedBlock()
+}
+
+// SetRecordWithIDWasDeletedBlock blocks until the operation completes or ctx is cancelled.
+func (x *FetchRecordChangesOperation) SetRecordWithIDWasDeletedBlock(ctx context.Context) (*RecordID, error) {
+	type _result struct {
+		val *RecordID
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SetRecordWithIDWasDeletedBlock(func(_p0 *raw.CKRecordID) {
+		var _o _result
+		if _p0 != nil {
+			_o.val = &RecordID{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *RecordID
+		return _zero, ctx.Err()
+	}
+}
+
+// MoreComing calls the underlying MoreComing.
+func (x *FetchRecordChangesOperation) MoreComing() bool {
+	return x.inner.MoreComing()
+}
+
+// FetchRecordChangesCompletionBlock calls the underlying FetchRecordChangesCompletionBlock.
+func (x *FetchRecordChangesOperation) FetchRecordChangesCompletionBlock() objc.Block {
+	return x.inner.FetchRecordChangesCompletionBlock()
+}
+
+// SetFetchRecordChangesCompletionBlock calls the underlying SetFetchRecordChangesCompletionBlock.
+func (x *FetchRecordChangesOperation) SetFetchRecordChangesCompletionBlock(fetchRecordChangesCompletionBlock func(*raw.CKServerChangeToken, *foundation.NSData, unsafe.Pointer)) {
+	x.inner.SetFetchRecordChangesCompletionBlock(fetchRecordChangesCompletionBlock)
 }
 
 func (x *FetchRecordChangesOperation) asDatabaseOperation() *raw.CKDatabaseOperation { return &x.inner.CKDatabaseOperation }
 
 func (x *FetchRecordChangesOperation) asOperation() *raw.CKOperation { return &x.inner.CKDatabaseOperation.CKOperation }
+
+// FetchRecordChangesOperationable is the interface implemented by [FetchRecordChangesOperation], for mocking and DI.
+type FetchRecordChangesOperationable interface {
+	Unwrap() *raw.CKFetchRecordChangesOperation
+	WithRecordZoneID(recordZoneID *raw.CKRecordZoneID) *FetchRecordChangesOperation
+	WithPreviousServerChangeToken(previousServerChangeToken *raw.CKServerChangeToken) *FetchRecordChangesOperation
+	WithResultsLimit(resultsLimit uint) *FetchRecordChangesOperation
+	WithDesiredKeys(items ...*foundation.NSString) *FetchRecordChangesOperation
+	WithRecordChangedBlock(recordChangedBlock func(*raw.CKRecord)) *FetchRecordChangesOperation
+	WithRecordWithIDWasDeletedBlock(recordWithIDWasDeletedBlock func(*raw.CKRecordID)) *FetchRecordChangesOperation
+	WithFetchRecordChangesCompletionBlock(fetchRecordChangesCompletionBlock func(*raw.CKServerChangeToken, *foundation.NSData, unsafe.Pointer)) *FetchRecordChangesOperation
+	RecordZoneID() *RecordZoneID
+	SetRecordZoneID(recordZoneID *raw.CKRecordZoneID)
+	PreviousServerChangeToken() *ServerChangeToken
+	SetPreviousServerChangeToken(previousServerChangeToken *raw.CKServerChangeToken)
+	ResultsLimit() uint
+	SetResultsLimit(resultsLimit uint)
+	DesiredKeys() []*foundation.NSString
+	SetDesiredKeys(desiredKeys *foundation.NSArray[*foundation.NSString])
+	RecordChangedBlock() objc.Block
+	SetRecordChangedBlock(ctx context.Context) (*Record, error)
+	RecordWithIDWasDeletedBlock() objc.Block
+	SetRecordWithIDWasDeletedBlock(ctx context.Context) (*RecordID, error)
+	MoreComing() bool
+	FetchRecordChangesCompletionBlock() objc.Block
+	SetFetchRecordChangesCompletionBlock(fetchRecordChangesCompletionBlock func(*raw.CKServerChangeToken, *foundation.NSData, unsafe.Pointer))
+}
+
+var _ FetchRecordChangesOperationable = (*FetchRecordChangesOperation)(nil)
 

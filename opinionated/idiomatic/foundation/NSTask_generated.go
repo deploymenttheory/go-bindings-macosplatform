@@ -5,8 +5,10 @@
 package foundation
 
 import (
+	"context"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -101,18 +103,263 @@ func (x *Task) LaunchAndReturnError() error {
 	return err
 }
 
+// Interrupt calls the underlying Interrupt.
+func (x *Task) Interrupt() {
+	x.inner.Interrupt()
+}
+
+// Terminate calls the underlying Terminate.
+func (x *Task) Terminate() {
+	x.inner.Terminate()
+}
+
+// Suspend calls the underlying Suspend.
+func (x *Task) Suspend() bool {
+	return x.inner.Suspend()
+}
+
+// Resume calls the underlying Resume.
+func (x *Task) Resume() bool {
+	return x.inner.Resume()
+}
+
+// ExecutableURL calls the underlying ExecutableURL.
+func (x *Task) ExecutableURL() *URL {
+	_r := x.inner.ExecutableURL()
+	if _r == nil {
+		return nil
+	}
+	return &URL{inner: _r}
+}
+
+// SetExecutableURL calls the underlying SetExecutableURL.
+func (x *Task) SetExecutableURL(executableURL string) {
+	x.inner.SetExecutableURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(executableURL)))
+}
+
 // Arguments returns the collection as a Go slice.
-func (x *Task) Arguments() []*raw.NSString {
+func (x *Task) Arguments() []string {
 	arr := x.inner.Arguments()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// SetArguments calls the underlying SetArguments.
+func (x *Task) SetArguments(arguments *raw.NSArray[*raw.NSString]) {
+	x.inner.SetArguments(arguments)
+}
+
+// Environment calls the underlying Environment.
+func (x *Task) Environment() *raw.NSDictionary[*raw.NSString, *raw.NSString] {
+	return x.inner.Environment()
+}
+
+// SetEnvironment calls the underlying SetEnvironment.
+func (x *Task) SetEnvironment(environment *raw.NSDictionary[*raw.NSString, *raw.NSString]) {
+	x.inner.SetEnvironment(environment)
+}
+
+// CurrentDirectoryURL calls the underlying CurrentDirectoryURL.
+func (x *Task) CurrentDirectoryURL() *URL {
+	_r := x.inner.CurrentDirectoryURL()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &URL{inner: _r}
+}
+
+// SetCurrentDirectoryURL calls the underlying SetCurrentDirectoryURL.
+func (x *Task) SetCurrentDirectoryURL(currentDirectoryURL string) {
+	x.inner.SetCurrentDirectoryURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(currentDirectoryURL)))
+}
+
+// LaunchRequirementData calls the underlying LaunchRequirementData.
+func (x *Task) LaunchRequirementData() *Data {
+	_r := x.inner.LaunchRequirementData()
+	if _r == nil {
+		return nil
+	}
+	return &Data{inner: _r}
+}
+
+// SetLaunchRequirementData calls the underlying SetLaunchRequirementData.
+func (x *Task) SetLaunchRequirementData(launchRequirementData *raw.NSData) {
+	x.inner.SetLaunchRequirementData(launchRequirementData)
+}
+
+// StandardInput calls the underlying StandardInput.
+func (x *Task) StandardInput() objc.ID {
+	return x.inner.StandardInput()
+}
+
+// SetStandardInput calls the underlying SetStandardInput.
+func (x *Task) SetStandardInput(standardInput objc.ID) {
+	x.inner.SetStandardInput(standardInput)
+}
+
+// StandardOutput calls the underlying StandardOutput.
+func (x *Task) StandardOutput() objc.ID {
+	return x.inner.StandardOutput()
+}
+
+// SetStandardOutput calls the underlying SetStandardOutput.
+func (x *Task) SetStandardOutput(standardOutput objc.ID) {
+	x.inner.SetStandardOutput(standardOutput)
+}
+
+// StandardError calls the underlying StandardError.
+func (x *Task) StandardError() objc.ID {
+	return x.inner.StandardError()
+}
+
+// SetStandardError calls the underlying SetStandardError.
+func (x *Task) SetStandardError(standardError objc.ID) {
+	x.inner.SetStandardError(standardError)
+}
+
+// ProcessIdentifier calls the underlying ProcessIdentifier.
+func (x *Task) ProcessIdentifier() int {
+	return x.inner.ProcessIdentifier()
+}
+
+// IsRunning calls the underlying IsRunning.
+func (x *Task) IsRunning() bool {
+	return x.inner.IsRunning()
+}
+
+// TerminationStatus calls the underlying TerminationStatus.
+func (x *Task) TerminationStatus() int {
+	return x.inner.TerminationStatus()
+}
+
+// TerminationReason calls the underlying TerminationReason.
+func (x *Task) TerminationReason() raw.NSTaskTerminationReason {
+	return x.inner.TerminationReason()
+}
+
+// TerminationHandler calls the underlying TerminationHandler.
+func (x *Task) TerminationHandler() objc.Block {
+	return x.inner.TerminationHandler()
+}
+
+// SetTerminationHandler blocks until the operation completes or ctx is cancelled.
+func (x *Task) SetTerminationHandler(ctx context.Context) (*Task, error) {
+	type _result struct {
+		val *Task
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SetTerminationHandler(func(_p0 *raw.NSTask) {
+		var _o _result
+		if _p0 != nil {
+			_o.val = &Task{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *Task
+		return _zero, ctx.Err()
+	}
+}
+
+// QualityOfService calls the underlying QualityOfService.
+func (x *Task) QualityOfService() raw.NSQualityOfService {
+	return x.inner.QualityOfService()
+}
+
+// SetQualityOfService calls the underlying SetQualityOfService.
+func (x *Task) SetQualityOfService(qualityOfService raw.NSQualityOfService) {
+	x.inner.SetQualityOfService(qualityOfService)
+}
+
+// WaitUntilExit calls the underlying WaitUntilExit.
+func (x *Task) WaitUntilExit() {
+	x.inner.WaitUntilExit()
+}
+
+// Launch calls the underlying Launch.
+func (x *Task) Launch() {
+	x.inner.Launch()
+}
+
+// LaunchPath calls the underlying LaunchPath.
+func (x *Task) LaunchPath() unsafe.Pointer {
+	return x.inner.LaunchPath()
+}
+
+// SetLaunchPath calls the underlying SetLaunchPath.
+func (x *Task) SetLaunchPath(launchPath unsafe.Pointer) {
+	x.inner.SetLaunchPath(launchPath)
+}
+
+// CurrentDirectoryPath calls the underlying CurrentDirectoryPath.
+func (x *Task) CurrentDirectoryPath() unsafe.Pointer {
+	return x.inner.CurrentDirectoryPath()
+}
+
+// SetCurrentDirectoryPath calls the underlying SetCurrentDirectoryPath.
+func (x *Task) SetCurrentDirectoryPath(currentDirectoryPath unsafe.Pointer) {
+	x.inner.SetCurrentDirectoryPath(currentDirectoryPath)
 }
 
 func (x *Task) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// Taskable is the interface implemented by [Task], for mocking and DI.
+type Taskable interface {
+	Unwrap() *raw.NSTask
+	WithExecutableURL(executableURL string) *Task
+	WithArguments(items ...StringProvider) *Task
+	WithEnvironment(environment *raw.NSDictionary[*raw.NSString, *raw.NSString]) *Task
+	WithCurrentDirectoryURL(currentDirectoryURL string) *Task
+	WithLaunchRequirementData(launchRequirementData DataProvider) *Task
+	WithStandardInput(standardInput objc.ID) *Task
+	WithStandardOutput(standardOutput objc.ID) *Task
+	WithStandardError(standardError objc.ID) *Task
+	WithTerminationHandler(terminationHandler func(*raw.NSTask)) *Task
+	WithQualityOfService(qualityOfService raw.NSQualityOfService) *Task
+	LaunchAndReturnError() error
+	Interrupt()
+	Terminate()
+	Suspend() bool
+	Resume() bool
+	ExecutableURL() *URL
+	SetExecutableURL(executableURL string)
+	Arguments() []string
+	SetArguments(arguments *raw.NSArray[*raw.NSString])
+	Environment() *raw.NSDictionary[*raw.NSString, *raw.NSString]
+	SetEnvironment(environment *raw.NSDictionary[*raw.NSString, *raw.NSString])
+	CurrentDirectoryURL() *URL
+	SetCurrentDirectoryURL(currentDirectoryURL string)
+	LaunchRequirementData() *Data
+	SetLaunchRequirementData(launchRequirementData *raw.NSData)
+	StandardInput() objc.ID
+	SetStandardInput(standardInput objc.ID)
+	StandardOutput() objc.ID
+	SetStandardOutput(standardOutput objc.ID)
+	StandardError() objc.ID
+	SetStandardError(standardError objc.ID)
+	ProcessIdentifier() int
+	IsRunning() bool
+	TerminationStatus() int
+	TerminationReason() raw.NSTaskTerminationReason
+	TerminationHandler() objc.Block
+	SetTerminationHandler(ctx context.Context) (*Task, error)
+	QualityOfService() raw.NSQualityOfService
+	SetQualityOfService(qualityOfService raw.NSQualityOfService)
+	WaitUntilExit()
+	Launch()
+	LaunchPath() unsafe.Pointer
+	SetLaunchPath(launchPath unsafe.Pointer)
+	CurrentDirectoryPath() unsafe.Pointer
+	SetCurrentDirectoryPath(currentDirectoryPath unsafe.Pointer)
+}
+
+var _ Taskable = (*Task)(nil)
 

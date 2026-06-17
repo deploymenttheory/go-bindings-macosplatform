@@ -5,6 +5,8 @@
 package mlcompute
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +24,29 @@ func NewDevice() *Device {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLCDevice")), objc.RegisterName("new"))
 	return &Device{inner: raw.MLCDeviceFromID(_id)}
 }
+
+// Type calls the underlying Type.
+func (x *Device) Type() raw.MLCDeviceType {
+	return x.inner.Type()
+}
+
+// ActualDeviceType calls the underlying ActualDeviceType.
+func (x *Device) ActualDeviceType() raw.MLCDeviceType {
+	return x.inner.ActualDeviceType()
+}
+
+// GpuDevices calls the underlying GpuDevices.
+func (x *Device) GpuDevices() *foundation.NSArray[metal.MTLDevice] {
+	return x.inner.GpuDevices()
+}
+
+// Deviceable is the interface implemented by [Device], for mocking and DI.
+type Deviceable interface {
+	Unwrap() *raw.MLCDevice
+	Type() raw.MLCDeviceType
+	ActualDeviceType() raw.MLCDeviceType
+	GpuDevices() *foundation.NSArray[metal.MTLDevice]
+}
+
+var _ Deviceable = (*Device)(nil)
 

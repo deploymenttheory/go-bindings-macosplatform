@@ -23,5 +23,18 @@ func NewLogEntryActivity() *LogEntryActivity {
 	return &LogEntryActivity{inner: raw.OSLogEntryActivityFromID(_id)}
 }
 
+// ParentActivityIdentifier calls the underlying ParentActivityIdentifier.
+func (x *LogEntryActivity) ParentActivityIdentifier() uint64 {
+	return x.inner.ParentActivityIdentifier()
+}
+
 func (x *LogEntryActivity) asLogEntry() *raw.OSLogEntry { return &x.inner.OSLogEntry }
+
+// LogEntryActivityable is the interface implemented by [LogEntryActivity], for mocking and DI.
+type LogEntryActivityable interface {
+	Unwrap() *raw.OSLogEntryActivity
+	ParentActivityIdentifier() uint64
+}
+
+var _ LogEntryActivityable = (*LogEntryActivity)(nil)
 

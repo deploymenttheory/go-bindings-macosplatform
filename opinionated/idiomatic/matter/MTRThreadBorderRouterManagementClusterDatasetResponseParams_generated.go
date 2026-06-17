@@ -37,3 +37,23 @@ func (x *MTRThreadBorderRouterManagementClusterDatasetResponseParams) WithDatase
 	return x
 }
 
+// Dataset calls the underlying Dataset.
+func (x *MTRThreadBorderRouterManagementClusterDatasetResponseParams) Dataset() *foundation.NSData {
+	return x.inner.Dataset()
+}
+
+// SetDataset calls the underlying SetDataset.
+func (x *MTRThreadBorderRouterManagementClusterDatasetResponseParams) SetDataset(dataset *foundation.NSData) {
+	x.inner.SetDataset(dataset)
+}
+
+// MTRThreadBorderRouterManagementClusterDatasetResponseParamsable is the interface implemented by [MTRThreadBorderRouterManagementClusterDatasetResponseParams], for mocking and DI.
+type MTRThreadBorderRouterManagementClusterDatasetResponseParamsable interface {
+	Unwrap() *raw.MTRThreadBorderRouterManagementClusterDatasetResponseParams
+	WithDataset(dataset *foundation.NSData) *MTRThreadBorderRouterManagementClusterDatasetResponseParams
+	Dataset() *foundation.NSData
+	SetDataset(dataset *foundation.NSData)
+}
+
+var _ MTRThreadBorderRouterManagementClusterDatasetResponseParamsable = (*MTRThreadBorderRouterManagementClusterDatasetResponseParams)(nil)
+

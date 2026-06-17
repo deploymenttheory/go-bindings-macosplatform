@@ -6,6 +6,7 @@ package usernotifications
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/usernotifications"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +24,32 @@ func NewTextInputNotificationAction() *TextInputNotificationAction {
 	return &TextInputNotificationAction{inner: raw.UNTextInputNotificationActionFromID(_id)}
 }
 
+// TextInputButtonTitle calls the underlying TextInputButtonTitle.
+func (x *TextInputNotificationAction) TextInputButtonTitle() string {
+	_r := x.inner.TextInputButtonTitle()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// TextInputPlaceholder calls the underlying TextInputPlaceholder.
+func (x *TextInputNotificationAction) TextInputPlaceholder() string {
+	_r := x.inner.TextInputPlaceholder()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 func (x *TextInputNotificationAction) asNotificationAction() *raw.UNNotificationAction { return &x.inner.UNNotificationAction }
+
+// TextInputNotificationActionable is the interface implemented by [TextInputNotificationAction], for mocking and DI.
+type TextInputNotificationActionable interface {
+	Unwrap() *raw.UNTextInputNotificationAction
+	TextInputButtonTitle() string
+	TextInputPlaceholder() string
+}
+
+var _ TextInputNotificationActionable = (*TextInputNotificationAction)(nil)
 

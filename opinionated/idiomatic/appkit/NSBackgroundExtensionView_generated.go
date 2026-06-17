@@ -35,7 +35,44 @@ func (x *BackgroundExtensionView) WithAutomaticallyPlacesContentView(automatical
 	return x
 }
 
+// ContentView calls the underlying ContentView.
+func (x *BackgroundExtensionView) ContentView() *View {
+	_r := x.inner.ContentView()
+	if _r == nil {
+		return nil
+	}
+	return &View{inner: _r}
+}
+
+// SetContentView calls the underlying SetContentView.
+func (x *BackgroundExtensionView) SetContentView(contentView *raw.NSView) {
+	x.inner.SetContentView(contentView)
+}
+
+// AutomaticallyPlacesContentView calls the underlying AutomaticallyPlacesContentView.
+func (x *BackgroundExtensionView) AutomaticallyPlacesContentView() bool {
+	return x.inner.AutomaticallyPlacesContentView()
+}
+
+// SetAutomaticallyPlacesContentView calls the underlying SetAutomaticallyPlacesContentView.
+func (x *BackgroundExtensionView) SetAutomaticallyPlacesContentView(automaticallyPlacesContentView bool) {
+	x.inner.SetAutomaticallyPlacesContentView(automaticallyPlacesContentView)
+}
+
 func (x *BackgroundExtensionView) asView() *raw.NSView { return &x.inner.NSView }
 
 func (x *BackgroundExtensionView) asResponder() *raw.NSResponder { return &x.inner.NSView.NSResponder }
+
+// BackgroundExtensionViewable is the interface implemented by [BackgroundExtensionView], for mocking and DI.
+type BackgroundExtensionViewable interface {
+	Unwrap() *raw.NSBackgroundExtensionView
+	WithContentView(contentView ViewProvider) *BackgroundExtensionView
+	WithAutomaticallyPlacesContentView(automaticallyPlacesContentView bool) *BackgroundExtensionView
+	ContentView() *View
+	SetContentView(contentView *raw.NSView)
+	AutomaticallyPlacesContentView() bool
+	SetAutomaticallyPlacesContentView(automaticallyPlacesContentView bool)
+}
+
+var _ BackgroundExtensionViewable = (*BackgroundExtensionView)(nil)
 

@@ -23,3 +23,26 @@ func NewComputePassSampleBufferAttachmentDescriptorArray() *ComputePassSampleBuf
 	return &ComputePassSampleBufferAttachmentDescriptorArray{inner: raw.MTLComputePassSampleBufferAttachmentDescriptorArrayFromID(_id)}
 }
 
+// ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
+func (x *ComputePassSampleBufferAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex uint) *ComputePassSampleBufferAttachmentDescriptor {
+	_r := x.inner.ObjectAtIndexedSubscript(attachmentIndex)
+	if _r == nil {
+		return nil
+	}
+	return &ComputePassSampleBufferAttachmentDescriptor{inner: _r}
+}
+
+// SetObjectAtIndexedSubscript calls the underlying SetObjectAtIndexedSubscript.
+func (x *ComputePassSampleBufferAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *raw.MTLComputePassSampleBufferAttachmentDescriptor, attachmentIndex uint) {
+	x.inner.SetObjectAtIndexedSubscript(attachment, attachmentIndex)
+}
+
+// ComputePassSampleBufferAttachmentDescriptorArrayable is the interface implemented by [ComputePassSampleBufferAttachmentDescriptorArray], for mocking and DI.
+type ComputePassSampleBufferAttachmentDescriptorArrayable interface {
+	Unwrap() *raw.MTLComputePassSampleBufferAttachmentDescriptorArray
+	ObjectAtIndexedSubscript(attachmentIndex uint) *ComputePassSampleBufferAttachmentDescriptor
+	SetObjectAtIndexedSubscript(attachment *raw.MTLComputePassSampleBufferAttachmentDescriptor, attachmentIndex uint)
+}
+
+var _ ComputePassSampleBufferAttachmentDescriptorArrayable = (*ComputePassSampleBufferAttachmentDescriptorArray)(nil)
+

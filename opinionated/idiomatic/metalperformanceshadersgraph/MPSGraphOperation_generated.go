@@ -6,6 +6,7 @@ package metalperformanceshadersgraph
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshadersgraph"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -29,11 +30,9 @@ func (x *GraphOperation) InputTensors() []*raw.MPSGraphTensor {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MPSGraphTensor, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MPSGraphTensor {
+		return raw.MPSGraphTensorFromID(purego.Retain(_id))
+	})
 }
 
 // OutputTensors returns the collection as a Go slice.
@@ -42,11 +41,9 @@ func (x *GraphOperation) OutputTensors() []*raw.MPSGraphTensor {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MPSGraphTensor, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MPSGraphTensor {
+		return raw.MPSGraphTensorFromID(purego.Retain(_id))
+	})
 }
 
 // ControlDependencies returns the collection as a Go slice.
@@ -55,14 +52,42 @@ func (x *GraphOperation) ControlDependencies() []*raw.MPSGraphOperation {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MPSGraphOperation, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MPSGraphOperation {
+		return raw.MPSGraphOperationFromID(purego.Retain(_id))
+	})
+}
+
+// Graph calls the underlying Graph.
+func (x *GraphOperation) Graph() *Graph {
+	_r := x.inner.Graph()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &Graph{inner: _r}
+}
+
+// Name calls the underlying Name.
+func (x *GraphOperation) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
 }
 
 func (x *GraphOperation) asGraphOperation() *raw.MPSGraphOperation { return x.inner }
 
 func (x *GraphOperation) asGraphObject() *raw.MPSGraphObject { return &x.inner.MPSGraphObject }
+
+// GraphOperationable is the interface implemented by [GraphOperation], for mocking and DI.
+type GraphOperationable interface {
+	Unwrap() *raw.MPSGraphOperation
+	InputTensors() []*raw.MPSGraphTensor
+	OutputTensors() []*raw.MPSGraphTensor
+	ControlDependencies() []*raw.MPSGraphOperation
+	Graph() *Graph
+	Name() string
+}
+
+var _ GraphOperationable = (*GraphOperation)(nil)
 

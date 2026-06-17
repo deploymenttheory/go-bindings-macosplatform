@@ -38,5 +38,34 @@ func NewUUIDWithUUIDBytes(bytes_ *uint8) *UUID {
 	return &UUID{inner: raw.NSUUIDFromID(_id)}
 }
 
+// GetUUIDBytes calls the underlying GetUUIDBytes.
+func (x *UUID) GetUUIDBytes(uuid *uint8) {
+	x.inner.GetUUIDBytes(uuid)
+}
+
+// Compare calls the underlying Compare.
+func (x *UUID) Compare(otherUUID *raw.NSUUID) raw.NSComparisonResult {
+	return x.inner.Compare(otherUUID)
+}
+
+// UUIDString calls the underlying UUIDString.
+func (x *UUID) UUIDString() *String {
+	_r := x.inner.UUIDString()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
 func (x *UUID) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// UUIDable is the interface implemented by [UUID], for mocking and DI.
+type UUIDable interface {
+	Unwrap() *raw.NSUUID
+	GetUUIDBytes(uuid *uint8)
+	Compare(otherUUID *raw.NSUUID) raw.NSComparisonResult
+	UUIDString() *String
+}
+
+var _ UUIDable = (*UUID)(nil)
 

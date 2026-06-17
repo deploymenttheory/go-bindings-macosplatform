@@ -6,6 +6,7 @@ package coremotion
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremotion"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,23 @@ func NewPedometerEvent() *PedometerEvent {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CMPedometerEvent")), objc.RegisterName("new"))
 	return &PedometerEvent{inner: raw.CMPedometerEventFromID(_id)}
 }
+
+// Date calls the underlying Date.
+func (x *PedometerEvent) Date() *foundation.NSDate {
+	return x.inner.Date()
+}
+
+// Type calls the underlying Type.
+func (x *PedometerEvent) Type() raw.CMPedometerEventType {
+	return x.inner.Type()
+}
+
+// PedometerEventable is the interface implemented by [PedometerEvent], for mocking and DI.
+type PedometerEventable interface {
+	Unwrap() *raw.CMPedometerEvent
+	Date() *foundation.NSDate
+	Type() raw.CMPedometerEventType
+}
+
+var _ PedometerEventable = (*PedometerEvent)(nil)
 

@@ -11,6 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // CNNDropout wraps [raw.MPSCNNDropout] with a fluent Go API.
@@ -35,7 +36,56 @@ func NewCNNDropoutWithDeviceKeepProbabilitySeedMaskStrideInPixels(device metal.M
 	return &CNNDropout{inner: raw.MPSCNNDropoutFromID(_id)}
 }
 
+// ResultStateForSourceImageSourceStatesDestinationImage calls the underlying ResultStateForSourceImageSourceStatesDestinationImage.
+func (x *CNNDropout) ResultStateForSourceImageSourceStatesDestinationImage(sourceImage *mpscore.MPSImage, sourceStates *foundation.NSArray[*mpscore.MPSState], destinationImage *mpscore.MPSImage) *mpsneuralnetwork.MPSCNNDropoutGradientState {
+	return x.inner.ResultStateForSourceImageSourceStatesDestinationImage(sourceImage, sourceStates, destinationImage)
+}
+
+// ResultStateBatchForSourceImageSourceStatesDestinationImage calls the underlying ResultStateBatchForSourceImageSourceStatesDestinationImage.
+func (x *CNNDropout) ResultStateBatchForSourceImageSourceStatesDestinationImage(sourceImage unsafe.Pointer, sourceStates *foundation.NSArray[objc.ID], destinationImage unsafe.Pointer) *mpsneuralnetwork.MPSCNNDropoutGradientState {
+	return x.inner.ResultStateBatchForSourceImageSourceStatesDestinationImage(sourceImage, sourceStates, destinationImage)
+}
+
+// TemporaryResultStateForCommandBufferSourceImageSourceStatesDestinationImage calls the underlying TemporaryResultStateForCommandBufferSourceImageSourceStatesDestinationImage.
+func (x *CNNDropout) TemporaryResultStateForCommandBufferSourceImageSourceStatesDestinationImage(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, sourceStates *foundation.NSArray[*mpscore.MPSState], destinationImage *mpscore.MPSImage) *mpsneuralnetwork.MPSCNNDropoutGradientState {
+	return x.inner.TemporaryResultStateForCommandBufferSourceImageSourceStatesDestinationImage(commandBuffer, sourceImage, sourceStates, destinationImage)
+}
+
+// TemporaryResultStateBatchForCommandBufferSourceImageSourceStatesDestinationImage calls the underlying TemporaryResultStateBatchForCommandBufferSourceImageSourceStatesDestinationImage.
+func (x *CNNDropout) TemporaryResultStateBatchForCommandBufferSourceImageSourceStatesDestinationImage(commandBuffer metal.MTLCommandBuffer, sourceImage unsafe.Pointer, sourceStates *foundation.NSArray[objc.ID], destinationImage unsafe.Pointer) unsafe.Pointer {
+	return x.inner.TemporaryResultStateBatchForCommandBufferSourceImageSourceStatesDestinationImage(commandBuffer, sourceImage, sourceStates, destinationImage)
+}
+
+// KeepProbability calls the underlying KeepProbability.
+func (x *CNNDropout) KeepProbability() float32 {
+	return x.inner.KeepProbability()
+}
+
+// Seed calls the underlying Seed.
+func (x *CNNDropout) Seed() uint {
+	return x.inner.Seed()
+}
+
+// MaskStrideInPixels calls the underlying MaskStrideInPixels.
+func (x *CNNDropout) MaskStrideInPixels() metal.MTLSize {
+	return x.inner.MaskStrideInPixels()
+}
+
 func (x *CNNDropout) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSCNNKernel }
 
 func (x *CNNDropout) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNKernel.MPSKernel }
+
+// CNNDropoutable is the interface implemented by [CNNDropout], for mocking and DI.
+type CNNDropoutable interface {
+	Unwrap() *raw.MPSCNNDropout
+	ResultStateForSourceImageSourceStatesDestinationImage(sourceImage *mpscore.MPSImage, sourceStates *foundation.NSArray[*mpscore.MPSState], destinationImage *mpscore.MPSImage) *mpsneuralnetwork.MPSCNNDropoutGradientState
+	ResultStateBatchForSourceImageSourceStatesDestinationImage(sourceImage unsafe.Pointer, sourceStates *foundation.NSArray[objc.ID], destinationImage unsafe.Pointer) *mpsneuralnetwork.MPSCNNDropoutGradientState
+	TemporaryResultStateForCommandBufferSourceImageSourceStatesDestinationImage(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, sourceStates *foundation.NSArray[*mpscore.MPSState], destinationImage *mpscore.MPSImage) *mpsneuralnetwork.MPSCNNDropoutGradientState
+	TemporaryResultStateBatchForCommandBufferSourceImageSourceStatesDestinationImage(commandBuffer metal.MTLCommandBuffer, sourceImage unsafe.Pointer, sourceStates *foundation.NSArray[objc.ID], destinationImage unsafe.Pointer) unsafe.Pointer
+	KeepProbability() float32
+	Seed() uint
+	MaskStrideInPixels() metal.MTLSize
+}
+
+var _ CNNDropoutable = (*CNNDropout)(nil)
 

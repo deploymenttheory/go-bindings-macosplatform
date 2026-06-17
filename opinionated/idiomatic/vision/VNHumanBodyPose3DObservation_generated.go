@@ -7,7 +7,9 @@ package vision
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // HumanBodyPose3DObservation wraps [raw.VNHumanBodyPose3DObservation] with a fluent Go API.
@@ -24,17 +26,68 @@ func NewHumanBodyPose3DObservation() *HumanBodyPose3DObservation {
 	return &HumanBodyPose3DObservation{inner: raw.VNHumanBodyPose3DObservationFromID(_id)}
 }
 
+// RecognizedPointsForJointsGroupNameError calls the underlying RecognizedPointsForJointsGroupNameError.
+func (x *HumanBodyPose3DObservation) RecognizedPointsForJointsGroupNameError(jointsGroupName *foundation.NSString) (*foundation.NSDictionary[*foundation.NSString, *raw.VNHumanBodyRecognizedPoint3D], error) {
+	return x.inner.RecognizedPointsForJointsGroupNameError(jointsGroupName)
+}
+
+// RecognizedPointForJointNameError calls the underlying RecognizedPointForJointNameError.
+func (x *HumanBodyPose3DObservation) RecognizedPointForJointNameError(jointName *foundation.NSString) (*HumanBodyRecognizedPoint3D, error) {
+	_r, _err := x.inner.RecognizedPointForJointNameError(jointName)
+	if _err != nil {
+		return nil, _err
+	}
+	if _r == nil {
+		return nil, nil
+	}
+	return &HumanBodyRecognizedPoint3D{inner: _r}, nil
+}
+
+// PointInImageForJointNameError calls the underlying PointInImageForJointNameError.
+func (x *HumanBodyPose3DObservation) PointInImageForJointNameError(jointName *foundation.NSString) (*Point, error) {
+	_r, _err := x.inner.PointInImageForJointNameError(jointName)
+	if _err != nil {
+		return nil, _err
+	}
+	if _r == nil {
+		return nil, nil
+	}
+	return &Point{inner: _r}, nil
+}
+
+// ParentJointNameForJointName calls the underlying ParentJointNameForJointName.
+func (x *HumanBodyPose3DObservation) ParentJointNameForJointName(jointName *foundation.NSString) string {
+	_r := x.inner.ParentJointNameForJointName(jointName)
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// GetCameraRelativePositionForJointNameError calls the underlying GetCameraRelativePositionForJointNameError.
+func (x *HumanBodyPose3DObservation) GetCameraRelativePositionForJointNameError(modelPositionOut unsafe.Pointer, jointName *foundation.NSString) (bool, error) {
+	return x.inner.GetCameraRelativePositionForJointNameError(modelPositionOut, jointName)
+}
+
+// HeightEstimation calls the underlying HeightEstimation.
+func (x *HumanBodyPose3DObservation) HeightEstimation() raw.VNHumanBodyPose3DObservationHeightEstimation {
+	return x.inner.HeightEstimation()
+}
+
+// CameraOriginMatrix calls the underlying CameraOriginMatrix.
+func (x *HumanBodyPose3DObservation) CameraOriginMatrix() unsafe.Pointer {
+	return x.inner.CameraOriginMatrix()
+}
+
 // AvailableJointsGroupNames returns the collection as a Go slice.
 func (x *HumanBodyPose3DObservation) AvailableJointsGroupNames() []*foundation.NSString {
 	arr := x.inner.AvailableJointsGroupNames()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	})
 }
 
 // AvailableJointNames returns the collection as a Go slice.
@@ -43,14 +96,34 @@ func (x *HumanBodyPose3DObservation) AvailableJointNames() []*foundation.NSStrin
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	})
+}
+
+// BodyHeight calls the underlying BodyHeight.
+func (x *HumanBodyPose3DObservation) BodyHeight() float32 {
+	return x.inner.BodyHeight()
 }
 
 func (x *HumanBodyPose3DObservation) asRecognizedPoints3DObservation() *raw.VNRecognizedPoints3DObservation { return &x.inner.VNRecognizedPoints3DObservation }
 
 func (x *HumanBodyPose3DObservation) asObservation() *raw.VNObservation { return &x.inner.VNRecognizedPoints3DObservation.VNObservation }
+
+// HumanBodyPose3DObservationable is the interface implemented by [HumanBodyPose3DObservation], for mocking and DI.
+type HumanBodyPose3DObservationable interface {
+	Unwrap() *raw.VNHumanBodyPose3DObservation
+	RecognizedPointsForJointsGroupNameError(jointsGroupName *foundation.NSString) (*foundation.NSDictionary[*foundation.NSString, *raw.VNHumanBodyRecognizedPoint3D], error)
+	RecognizedPointForJointNameError(jointName *foundation.NSString) (*HumanBodyRecognizedPoint3D, error)
+	PointInImageForJointNameError(jointName *foundation.NSString) (*Point, error)
+	ParentJointNameForJointName(jointName *foundation.NSString) string
+	GetCameraRelativePositionForJointNameError(modelPositionOut unsafe.Pointer, jointName *foundation.NSString) (bool, error)
+	HeightEstimation() raw.VNHumanBodyPose3DObservationHeightEstimation
+	CameraOriginMatrix() unsafe.Pointer
+	AvailableJointsGroupNames() []*foundation.NSString
+	AvailableJointNames() []*foundation.NSString
+	BodyHeight() float32
+}
+
+var _ HumanBodyPose3DObservationable = (*HumanBodyPose3DObservation)(nil)
 

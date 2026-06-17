@@ -5,6 +5,7 @@
 package virtualization
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,5 +24,24 @@ func NewUSBControllerConfiguration() *USBControllerConfiguration {
 	return &USBControllerConfiguration{inner: raw.VZUSBControllerConfigurationFromID(_id)}
 }
 
+// UsbDevices calls the underlying UsbDevices.
+func (x *USBControllerConfiguration) UsbDevices() *foundation.NSArray[raw.VZUSBDeviceConfiguration] {
+	return x.inner.UsbDevices()
+}
+
+// SetUsbDevices calls the underlying SetUsbDevices.
+func (x *USBControllerConfiguration) SetUsbDevices(usbDevices *foundation.NSArray[raw.VZUSBDeviceConfiguration]) {
+	x.inner.SetUsbDevices(usbDevices)
+}
+
 func (x *USBControllerConfiguration) asUSBControllerConfiguration() *raw.VZUSBControllerConfiguration { return x.inner }
+
+// USBControllerConfigurationable is the interface implemented by [USBControllerConfiguration], for mocking and DI.
+type USBControllerConfigurationable interface {
+	Unwrap() *raw.VZUSBControllerConfiguration
+	UsbDevices() *foundation.NSArray[raw.VZUSBDeviceConfiguration]
+	SetUsbDevices(usbDevices *foundation.NSArray[raw.VZUSBDeviceConfiguration])
+}
+
+var _ USBControllerConfigurationable = (*USBControllerConfiguration)(nil)
 

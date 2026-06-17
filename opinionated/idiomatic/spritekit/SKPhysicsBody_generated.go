@@ -7,6 +7,7 @@ package spritekit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -138,17 +139,220 @@ func (x *PhysicsBody) WithAngularVelocity(angularVelocity float64) *PhysicsBody 
 	return x
 }
 
+// ApplyForce calls the underlying ApplyForce.
+func (x *PhysicsBody) ApplyForce(force corefoundation.CGVector) {
+	x.inner.ApplyForce(force)
+}
+
+// ApplyForceAtPoint calls the underlying ApplyForceAtPoint.
+func (x *PhysicsBody) ApplyForceAtPoint(force corefoundation.CGVector, point corefoundation.CGPoint) {
+	x.inner.ApplyForceAtPoint(force, point)
+}
+
+// ApplyTorque calls the underlying ApplyTorque.
+func (x *PhysicsBody) ApplyTorque(torque float64) {
+	x.inner.ApplyTorque(torque)
+}
+
+// ApplyImpulse calls the underlying ApplyImpulse.
+func (x *PhysicsBody) ApplyImpulse(impulse corefoundation.CGVector) {
+	x.inner.ApplyImpulse(impulse)
+}
+
+// ApplyImpulseAtPoint calls the underlying ApplyImpulseAtPoint.
+func (x *PhysicsBody) ApplyImpulseAtPoint(impulse corefoundation.CGVector, point corefoundation.CGPoint) {
+	x.inner.ApplyImpulseAtPoint(impulse, point)
+}
+
+// ApplyAngularImpulse calls the underlying ApplyAngularImpulse.
+func (x *PhysicsBody) ApplyAngularImpulse(impulse float64) {
+	x.inner.ApplyAngularImpulse(impulse)
+}
+
 // AllContactedBodies returns the collection as a Go slice.
 func (x *PhysicsBody) AllContactedBodies() []*raw.SKPhysicsBody {
 	arr := x.inner.AllContactedBodies()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.SKPhysicsBody, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SKPhysicsBody {
+		return raw.SKPhysicsBodyFromID(purego.Retain(_id))
+	})
+}
+
+// IsDynamic calls the underlying IsDynamic.
+func (x *PhysicsBody) IsDynamic() bool {
+	return x.inner.IsDynamic()
+}
+
+// SetDynamic calls the underlying SetDynamic.
+func (x *PhysicsBody) SetDynamic(dynamic bool) {
+	x.inner.SetDynamic(dynamic)
+}
+
+// UsesPreciseCollisionDetection calls the underlying UsesPreciseCollisionDetection.
+func (x *PhysicsBody) UsesPreciseCollisionDetection() bool {
+	return x.inner.UsesPreciseCollisionDetection()
+}
+
+// SetUsesPreciseCollisionDetection calls the underlying SetUsesPreciseCollisionDetection.
+func (x *PhysicsBody) SetUsesPreciseCollisionDetection(usesPreciseCollisionDetection bool) {
+	x.inner.SetUsesPreciseCollisionDetection(usesPreciseCollisionDetection)
+}
+
+// AllowsRotation calls the underlying AllowsRotation.
+func (x *PhysicsBody) AllowsRotation() bool {
+	return x.inner.AllowsRotation()
+}
+
+// SetAllowsRotation calls the underlying SetAllowsRotation.
+func (x *PhysicsBody) SetAllowsRotation(allowsRotation bool) {
+	x.inner.SetAllowsRotation(allowsRotation)
+}
+
+// Pinned calls the underlying Pinned.
+func (x *PhysicsBody) Pinned() bool {
+	return x.inner.Pinned()
+}
+
+// SetPinned calls the underlying SetPinned.
+func (x *PhysicsBody) SetPinned(pinned bool) {
+	x.inner.SetPinned(pinned)
+}
+
+// IsResting calls the underlying IsResting.
+func (x *PhysicsBody) IsResting() bool {
+	return x.inner.IsResting()
+}
+
+// SetResting calls the underlying SetResting.
+func (x *PhysicsBody) SetResting(resting bool) {
+	x.inner.SetResting(resting)
+}
+
+// Friction calls the underlying Friction.
+func (x *PhysicsBody) Friction() float64 {
+	return x.inner.Friction()
+}
+
+// SetFriction calls the underlying SetFriction.
+func (x *PhysicsBody) SetFriction(friction float64) {
+	x.inner.SetFriction(friction)
+}
+
+// Charge calls the underlying Charge.
+func (x *PhysicsBody) Charge() float64 {
+	return x.inner.Charge()
+}
+
+// SetCharge calls the underlying SetCharge.
+func (x *PhysicsBody) SetCharge(charge float64) {
+	x.inner.SetCharge(charge)
+}
+
+// Restitution calls the underlying Restitution.
+func (x *PhysicsBody) Restitution() float64 {
+	return x.inner.Restitution()
+}
+
+// SetRestitution calls the underlying SetRestitution.
+func (x *PhysicsBody) SetRestitution(restitution float64) {
+	x.inner.SetRestitution(restitution)
+}
+
+// LinearDamping calls the underlying LinearDamping.
+func (x *PhysicsBody) LinearDamping() float64 {
+	return x.inner.LinearDamping()
+}
+
+// SetLinearDamping calls the underlying SetLinearDamping.
+func (x *PhysicsBody) SetLinearDamping(linearDamping float64) {
+	x.inner.SetLinearDamping(linearDamping)
+}
+
+// AngularDamping calls the underlying AngularDamping.
+func (x *PhysicsBody) AngularDamping() float64 {
+	return x.inner.AngularDamping()
+}
+
+// SetAngularDamping calls the underlying SetAngularDamping.
+func (x *PhysicsBody) SetAngularDamping(angularDamping float64) {
+	x.inner.SetAngularDamping(angularDamping)
+}
+
+// Density calls the underlying Density.
+func (x *PhysicsBody) Density() float64 {
+	return x.inner.Density()
+}
+
+// SetDensity calls the underlying SetDensity.
+func (x *PhysicsBody) SetDensity(density float64) {
+	x.inner.SetDensity(density)
+}
+
+// Mass calls the underlying Mass.
+func (x *PhysicsBody) Mass() float64 {
+	return x.inner.Mass()
+}
+
+// SetMass calls the underlying SetMass.
+func (x *PhysicsBody) SetMass(mass float64) {
+	x.inner.SetMass(mass)
+}
+
+// Area calls the underlying Area.
+func (x *PhysicsBody) Area() float64 {
+	return x.inner.Area()
+}
+
+// AffectedByGravity calls the underlying AffectedByGravity.
+func (x *PhysicsBody) AffectedByGravity() bool {
+	return x.inner.AffectedByGravity()
+}
+
+// SetAffectedByGravity calls the underlying SetAffectedByGravity.
+func (x *PhysicsBody) SetAffectedByGravity(affectedByGravity bool) {
+	x.inner.SetAffectedByGravity(affectedByGravity)
+}
+
+// FieldBitMask calls the underlying FieldBitMask.
+func (x *PhysicsBody) FieldBitMask() uint32 {
+	return x.inner.FieldBitMask()
+}
+
+// SetFieldBitMask calls the underlying SetFieldBitMask.
+func (x *PhysicsBody) SetFieldBitMask(fieldBitMask uint32) {
+	x.inner.SetFieldBitMask(fieldBitMask)
+}
+
+// CategoryBitMask calls the underlying CategoryBitMask.
+func (x *PhysicsBody) CategoryBitMask() uint32 {
+	return x.inner.CategoryBitMask()
+}
+
+// SetCategoryBitMask calls the underlying SetCategoryBitMask.
+func (x *PhysicsBody) SetCategoryBitMask(categoryBitMask uint32) {
+	x.inner.SetCategoryBitMask(categoryBitMask)
+}
+
+// CollisionBitMask calls the underlying CollisionBitMask.
+func (x *PhysicsBody) CollisionBitMask() uint32 {
+	return x.inner.CollisionBitMask()
+}
+
+// SetCollisionBitMask calls the underlying SetCollisionBitMask.
+func (x *PhysicsBody) SetCollisionBitMask(collisionBitMask uint32) {
+	x.inner.SetCollisionBitMask(collisionBitMask)
+}
+
+// ContactTestBitMask calls the underlying ContactTestBitMask.
+func (x *PhysicsBody) ContactTestBitMask() uint32 {
+	return x.inner.ContactTestBitMask()
+}
+
+// SetContactTestBitMask calls the underlying SetContactTestBitMask.
+func (x *PhysicsBody) SetContactTestBitMask(contactTestBitMask uint32) {
+	x.inner.SetContactTestBitMask(contactTestBitMask)
 }
 
 // Joints returns the collection as a Go slice.
@@ -157,10 +361,111 @@ func (x *PhysicsBody) Joints() []*raw.SKPhysicsJoint {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.SKPhysicsJoint, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SKPhysicsJoint {
+		return raw.SKPhysicsJointFromID(purego.Retain(_id))
+	})
 }
+
+// Node calls the underlying Node.
+func (x *PhysicsBody) Node() *Node {
+	_r := x.inner.Node()
+	if _r == nil {
+		return nil
+	}
+	return &Node{inner: _r}
+}
+
+// Velocity calls the underlying Velocity.
+func (x *PhysicsBody) Velocity() corefoundation.CGVector {
+	return x.inner.Velocity()
+}
+
+// SetVelocity calls the underlying SetVelocity.
+func (x *PhysicsBody) SetVelocity(velocity corefoundation.CGVector) {
+	x.inner.SetVelocity(velocity)
+}
+
+// AngularVelocity calls the underlying AngularVelocity.
+func (x *PhysicsBody) AngularVelocity() float64 {
+	return x.inner.AngularVelocity()
+}
+
+// SetAngularVelocity calls the underlying SetAngularVelocity.
+func (x *PhysicsBody) SetAngularVelocity(angularVelocity float64) {
+	x.inner.SetAngularVelocity(angularVelocity)
+}
+
+// PhysicsBodyable is the interface implemented by [PhysicsBody], for mocking and DI.
+type PhysicsBodyable interface {
+	Unwrap() *raw.SKPhysicsBody
+	WithDynamic(dynamic bool) *PhysicsBody
+	WithUsesPreciseCollisionDetection(usesPreciseCollisionDetection bool) *PhysicsBody
+	WithAllowsRotation(allowsRotation bool) *PhysicsBody
+	WithPinned(pinned bool) *PhysicsBody
+	WithResting(resting bool) *PhysicsBody
+	WithFriction(friction float64) *PhysicsBody
+	WithCharge(charge float64) *PhysicsBody
+	WithRestitution(restitution float64) *PhysicsBody
+	WithLinearDamping(linearDamping float64) *PhysicsBody
+	WithAngularDamping(angularDamping float64) *PhysicsBody
+	WithDensity(density float64) *PhysicsBody
+	WithMass(mass float64) *PhysicsBody
+	WithAffectedByGravity(affectedByGravity bool) *PhysicsBody
+	WithFieldBitMask(fieldBitMask uint32) *PhysicsBody
+	WithCategoryBitMask(categoryBitMask uint32) *PhysicsBody
+	WithCollisionBitMask(collisionBitMask uint32) *PhysicsBody
+	WithContactTestBitMask(contactTestBitMask uint32) *PhysicsBody
+	WithVelocity(velocity corefoundation.CGVector) *PhysicsBody
+	WithAngularVelocity(angularVelocity float64) *PhysicsBody
+	ApplyForce(force corefoundation.CGVector)
+	ApplyForceAtPoint(force corefoundation.CGVector, point corefoundation.CGPoint)
+	ApplyTorque(torque float64)
+	ApplyImpulse(impulse corefoundation.CGVector)
+	ApplyImpulseAtPoint(impulse corefoundation.CGVector, point corefoundation.CGPoint)
+	ApplyAngularImpulse(impulse float64)
+	AllContactedBodies() []*raw.SKPhysicsBody
+	IsDynamic() bool
+	SetDynamic(dynamic bool)
+	UsesPreciseCollisionDetection() bool
+	SetUsesPreciseCollisionDetection(usesPreciseCollisionDetection bool)
+	AllowsRotation() bool
+	SetAllowsRotation(allowsRotation bool)
+	Pinned() bool
+	SetPinned(pinned bool)
+	IsResting() bool
+	SetResting(resting bool)
+	Friction() float64
+	SetFriction(friction float64)
+	Charge() float64
+	SetCharge(charge float64)
+	Restitution() float64
+	SetRestitution(restitution float64)
+	LinearDamping() float64
+	SetLinearDamping(linearDamping float64)
+	AngularDamping() float64
+	SetAngularDamping(angularDamping float64)
+	Density() float64
+	SetDensity(density float64)
+	Mass() float64
+	SetMass(mass float64)
+	Area() float64
+	AffectedByGravity() bool
+	SetAffectedByGravity(affectedByGravity bool)
+	FieldBitMask() uint32
+	SetFieldBitMask(fieldBitMask uint32)
+	CategoryBitMask() uint32
+	SetCategoryBitMask(categoryBitMask uint32)
+	CollisionBitMask() uint32
+	SetCollisionBitMask(collisionBitMask uint32)
+	ContactTestBitMask() uint32
+	SetContactTestBitMask(contactTestBitMask uint32)
+	Joints() []*raw.SKPhysicsJoint
+	Node() *Node
+	Velocity() corefoundation.CGVector
+	SetVelocity(velocity corefoundation.CGVector)
+	AngularVelocity() float64
+	SetAngularVelocity(angularVelocity float64)
+}
+
+var _ PhysicsBodyable = (*PhysicsBody)(nil)
 

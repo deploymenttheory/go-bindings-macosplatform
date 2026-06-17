@@ -23,3 +23,10 @@ func NewSafariExtensionHandler() *SafariExtensionHandler {
 	return &SafariExtensionHandler{inner: raw.SFSafariExtensionHandlerFromID(_id)}
 }
 
+// SafariExtensionHandlerable is the interface implemented by [SafariExtensionHandler], for mocking and DI.
+type SafariExtensionHandlerable interface {
+	Unwrap() *raw.SFSafariExtensionHandler
+}
+
+var _ SafariExtensionHandlerable = (*SafariExtensionHandler)(nil)
+

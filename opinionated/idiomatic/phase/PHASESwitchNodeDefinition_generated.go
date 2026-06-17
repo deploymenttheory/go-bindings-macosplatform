@@ -32,7 +32,30 @@ func NewSwitchNodeDefinitionWithSwitchMetaParameterDefinition(switchMetaParamete
 	return &SwitchNodeDefinition{inner: raw.PHASESwitchNodeDefinitionFromID(_id)}
 }
 
+// AddSubtreeSwitchValue calls the underlying AddSubtreeSwitchValue.
+func (x *SwitchNodeDefinition) AddSubtreeSwitchValue(subtree *raw.PHASESoundEventNodeDefinition, switchValue string) {
+	x.inner.AddSubtreeSwitchValue(subtree, foundation.NSStringStringWithUTF8String(switchValue))
+}
+
+// SwitchMetaParameterDefinition calls the underlying SwitchMetaParameterDefinition.
+func (x *SwitchNodeDefinition) SwitchMetaParameterDefinition() *StringMetaParameterDefinition {
+	_r := x.inner.SwitchMetaParameterDefinition()
+	if _r == nil {
+		return nil
+	}
+	return &StringMetaParameterDefinition{inner: _r}
+}
+
 func (x *SwitchNodeDefinition) asSoundEventNodeDefinition() *raw.PHASESoundEventNodeDefinition { return &x.inner.PHASESoundEventNodeDefinition }
 
 func (x *SwitchNodeDefinition) asDefinition() *raw.PHASEDefinition { return &x.inner.PHASESoundEventNodeDefinition.PHASEDefinition }
+
+// SwitchNodeDefinitionable is the interface implemented by [SwitchNodeDefinition], for mocking and DI.
+type SwitchNodeDefinitionable interface {
+	Unwrap() *raw.PHASESwitchNodeDefinition
+	AddSubtreeSwitchValue(subtree *raw.PHASESoundEventNodeDefinition, switchValue string)
+	SwitchMetaParameterDefinition() *StringMetaParameterDefinition
+}
+
+var _ SwitchNodeDefinitionable = (*SwitchNodeDefinition)(nil)
 

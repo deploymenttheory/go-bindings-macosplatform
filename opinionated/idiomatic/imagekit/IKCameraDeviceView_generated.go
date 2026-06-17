@@ -5,9 +5,11 @@
 package imagekit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imagecapturecore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imagekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -102,4 +104,290 @@ func (x *CameraDeviceView) WithPostProcessApplication(postProcessApplication str
 	x.inner.SetPostProcessApplication(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(postProcessApplication)))
 	return x
 }
+
+// SelectedIndexes calls the underlying SelectedIndexes.
+func (x *CameraDeviceView) SelectedIndexes() *foundation.NSIndexSet {
+	return x.inner.SelectedIndexes()
+}
+
+// SelectIndexesByExtendingSelection calls the underlying SelectIndexesByExtendingSelection.
+func (x *CameraDeviceView) SelectIndexesByExtendingSelection(indexes *foundation.NSIndexSet, extend bool) {
+	x.inner.SelectIndexesByExtendingSelection(indexes, extend)
+}
+
+// RotateLeft calls the underlying RotateLeft.
+func (x *CameraDeviceView) RotateLeft(sender objc.ID) {
+	x.inner.RotateLeft(sender)
+}
+
+// RotateRight calls the underlying RotateRight.
+func (x *CameraDeviceView) RotateRight(sender objc.ID) {
+	x.inner.RotateRight(sender)
+}
+
+// DeleteSelectedItems calls the underlying DeleteSelectedItems.
+func (x *CameraDeviceView) DeleteSelectedItems(sender objc.ID) {
+	x.inner.DeleteSelectedItems(sender)
+}
+
+// DownloadSelectedItems calls the underlying DownloadSelectedItems.
+func (x *CameraDeviceView) DownloadSelectedItems(sender objc.ID) {
+	x.inner.DownloadSelectedItems(sender)
+}
+
+// DownloadAllItems calls the underlying DownloadAllItems.
+func (x *CameraDeviceView) DownloadAllItems(sender objc.ID) {
+	x.inner.DownloadAllItems(sender)
+}
+
+// SetCustomIconSizeSlider calls the underlying SetCustomIconSizeSlider.
+func (x *CameraDeviceView) SetCustomIconSizeSlider(slider *appkit.NSSlider) {
+	x.inner.SetCustomIconSizeSlider(slider)
+}
+
+// SetCustomModeControl calls the underlying SetCustomModeControl.
+func (x *CameraDeviceView) SetCustomModeControl(control *appkit.NSSegmentedControl) {
+	x.inner.SetCustomModeControl(control)
+}
+
+// SetCustomActionControl calls the underlying SetCustomActionControl.
+func (x *CameraDeviceView) SetCustomActionControl(control *appkit.NSSegmentedControl) {
+	x.inner.SetCustomActionControl(control)
+}
+
+// SetCustomRotateControl calls the underlying SetCustomRotateControl.
+func (x *CameraDeviceView) SetCustomRotateControl(control *appkit.NSSegmentedControl) {
+	x.inner.SetCustomRotateControl(control)
+}
+
+// SetCustomDeleteControl calls the underlying SetCustomDeleteControl.
+func (x *CameraDeviceView) SetCustomDeleteControl(control *appkit.NSSegmentedControl) {
+	x.inner.SetCustomDeleteControl(control)
+}
+
+// SetShowStatusInfoAsWindowSubtitle calls the underlying SetShowStatusInfoAsWindowSubtitle.
+func (x *CameraDeviceView) SetShowStatusInfoAsWindowSubtitle(value bool) {
+	x.inner.SetShowStatusInfoAsWindowSubtitle(value)
+}
+
+// Delegate calls the underlying Delegate.
+func (x *CameraDeviceView) Delegate() raw.IKCameraDeviceViewDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *CameraDeviceView) SetDelegate(delegate raw.IKCameraDeviceViewDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// CameraDevice calls the underlying CameraDevice.
+func (x *CameraDeviceView) CameraDevice() *imagecapturecore.ICCameraDevice {
+	return x.inner.CameraDevice()
+}
+
+// SetCameraDevice calls the underlying SetCameraDevice.
+func (x *CameraDeviceView) SetCameraDevice(cameraDevice *imagecapturecore.ICCameraDevice) {
+	x.inner.SetCameraDevice(cameraDevice)
+}
+
+// Mode calls the underlying Mode.
+func (x *CameraDeviceView) Mode() raw.IKCameraDeviceViewDisplayMode {
+	return x.inner.Mode()
+}
+
+// SetMode calls the underlying SetMode.
+func (x *CameraDeviceView) SetMode(mode raw.IKCameraDeviceViewDisplayMode) {
+	x.inner.SetMode(mode)
+}
+
+// HasDisplayModeTable calls the underlying HasDisplayModeTable.
+func (x *CameraDeviceView) HasDisplayModeTable() bool {
+	return x.inner.HasDisplayModeTable()
+}
+
+// SetHasDisplayModeTable calls the underlying SetHasDisplayModeTable.
+func (x *CameraDeviceView) SetHasDisplayModeTable(hasDisplayModeTable bool) {
+	x.inner.SetHasDisplayModeTable(hasDisplayModeTable)
+}
+
+// HasDisplayModeIcon calls the underlying HasDisplayModeIcon.
+func (x *CameraDeviceView) HasDisplayModeIcon() bool {
+	return x.inner.HasDisplayModeIcon()
+}
+
+// SetHasDisplayModeIcon calls the underlying SetHasDisplayModeIcon.
+func (x *CameraDeviceView) SetHasDisplayModeIcon(hasDisplayModeIcon bool) {
+	x.inner.SetHasDisplayModeIcon(hasDisplayModeIcon)
+}
+
+// DownloadAllControlLabel calls the underlying DownloadAllControlLabel.
+func (x *CameraDeviceView) DownloadAllControlLabel() string {
+	_r := x.inner.DownloadAllControlLabel()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetDownloadAllControlLabel calls the underlying SetDownloadAllControlLabel.
+func (x *CameraDeviceView) SetDownloadAllControlLabel(downloadAllControlLabel string) {
+	x.inner.SetDownloadAllControlLabel(foundation.NSStringStringWithUTF8String(downloadAllControlLabel))
+}
+
+// DownloadSelectedControlLabel calls the underlying DownloadSelectedControlLabel.
+func (x *CameraDeviceView) DownloadSelectedControlLabel() string {
+	_r := x.inner.DownloadSelectedControlLabel()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetDownloadSelectedControlLabel calls the underlying SetDownloadSelectedControlLabel.
+func (x *CameraDeviceView) SetDownloadSelectedControlLabel(downloadSelectedControlLabel string) {
+	x.inner.SetDownloadSelectedControlLabel(foundation.NSStringStringWithUTF8String(downloadSelectedControlLabel))
+}
+
+// IconSize calls the underlying IconSize.
+func (x *CameraDeviceView) IconSize() uint {
+	return x.inner.IconSize()
+}
+
+// SetIconSize calls the underlying SetIconSize.
+func (x *CameraDeviceView) SetIconSize(iconSize uint) {
+	x.inner.SetIconSize(iconSize)
+}
+
+// TransferMode calls the underlying TransferMode.
+func (x *CameraDeviceView) TransferMode() raw.IKCameraDeviceViewTransferMode {
+	return x.inner.TransferMode()
+}
+
+// SetTransferMode calls the underlying SetTransferMode.
+func (x *CameraDeviceView) SetTransferMode(transferMode raw.IKCameraDeviceViewTransferMode) {
+	x.inner.SetTransferMode(transferMode)
+}
+
+// DisplaysDownloadsDirectoryControl calls the underlying DisplaysDownloadsDirectoryControl.
+func (x *CameraDeviceView) DisplaysDownloadsDirectoryControl() bool {
+	return x.inner.DisplaysDownloadsDirectoryControl()
+}
+
+// SetDisplaysDownloadsDirectoryControl calls the underlying SetDisplaysDownloadsDirectoryControl.
+func (x *CameraDeviceView) SetDisplaysDownloadsDirectoryControl(displaysDownloadsDirectoryControl bool) {
+	x.inner.SetDisplaysDownloadsDirectoryControl(displaysDownloadsDirectoryControl)
+}
+
+// DownloadsDirectory calls the underlying DownloadsDirectory.
+func (x *CameraDeviceView) DownloadsDirectory() *foundation.NSURL {
+	return x.inner.DownloadsDirectory()
+}
+
+// SetDownloadsDirectory calls the underlying SetDownloadsDirectory.
+func (x *CameraDeviceView) SetDownloadsDirectory(downloadsDirectory string) {
+	x.inner.SetDownloadsDirectory(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(downloadsDirectory)))
+}
+
+// DisplaysPostProcessApplicationControl calls the underlying DisplaysPostProcessApplicationControl.
+func (x *CameraDeviceView) DisplaysPostProcessApplicationControl() bool {
+	return x.inner.DisplaysPostProcessApplicationControl()
+}
+
+// SetDisplaysPostProcessApplicationControl calls the underlying SetDisplaysPostProcessApplicationControl.
+func (x *CameraDeviceView) SetDisplaysPostProcessApplicationControl(displaysPostProcessApplicationControl bool) {
+	x.inner.SetDisplaysPostProcessApplicationControl(displaysPostProcessApplicationControl)
+}
+
+// PostProcessApplication calls the underlying PostProcessApplication.
+func (x *CameraDeviceView) PostProcessApplication() *foundation.NSURL {
+	return x.inner.PostProcessApplication()
+}
+
+// SetPostProcessApplication calls the underlying SetPostProcessApplication.
+func (x *CameraDeviceView) SetPostProcessApplication(postProcessApplication string) {
+	x.inner.SetPostProcessApplication(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(postProcessApplication)))
+}
+
+// CanRotateSelectedItemsLeft calls the underlying CanRotateSelectedItemsLeft.
+func (x *CameraDeviceView) CanRotateSelectedItemsLeft() bool {
+	return x.inner.CanRotateSelectedItemsLeft()
+}
+
+// CanRotateSelectedItemsRight calls the underlying CanRotateSelectedItemsRight.
+func (x *CameraDeviceView) CanRotateSelectedItemsRight() bool {
+	return x.inner.CanRotateSelectedItemsRight()
+}
+
+// CanDeleteSelectedItems calls the underlying CanDeleteSelectedItems.
+func (x *CameraDeviceView) CanDeleteSelectedItems() bool {
+	return x.inner.CanDeleteSelectedItems()
+}
+
+// CanDownloadSelectedItems calls the underlying CanDownloadSelectedItems.
+func (x *CameraDeviceView) CanDownloadSelectedItems() bool {
+	return x.inner.CanDownloadSelectedItems()
+}
+
+// CameraDeviceViewable is the interface implemented by [CameraDeviceView], for mocking and DI.
+type CameraDeviceViewable interface {
+	Unwrap() *raw.IKCameraDeviceView
+	WithDelegate(delegate raw.IKCameraDeviceViewDelegate) *CameraDeviceView
+	WithCameraDevice(cameraDevice *imagecapturecore.ICCameraDevice) *CameraDeviceView
+	WithMode(mode raw.IKCameraDeviceViewDisplayMode) *CameraDeviceView
+	WithHasDisplayModeTable(hasDisplayModeTable bool) *CameraDeviceView
+	WithHasDisplayModeIcon(hasDisplayModeIcon bool) *CameraDeviceView
+	WithDownloadAllControlLabel(downloadAllControlLabel string) *CameraDeviceView
+	WithDownloadSelectedControlLabel(downloadSelectedControlLabel string) *CameraDeviceView
+	WithIconSize(iconSize uint) *CameraDeviceView
+	WithTransferMode(transferMode raw.IKCameraDeviceViewTransferMode) *CameraDeviceView
+	WithDisplaysDownloadsDirectoryControl(displaysDownloadsDirectoryControl bool) *CameraDeviceView
+	WithDownloadsDirectory(downloadsDirectory string) *CameraDeviceView
+	WithDisplaysPostProcessApplicationControl(displaysPostProcessApplicationControl bool) *CameraDeviceView
+	WithPostProcessApplication(postProcessApplication string) *CameraDeviceView
+	SelectedIndexes() *foundation.NSIndexSet
+	SelectIndexesByExtendingSelection(indexes *foundation.NSIndexSet, extend bool)
+	RotateLeft(sender objc.ID)
+	RotateRight(sender objc.ID)
+	DeleteSelectedItems(sender objc.ID)
+	DownloadSelectedItems(sender objc.ID)
+	DownloadAllItems(sender objc.ID)
+	SetCustomIconSizeSlider(slider *appkit.NSSlider)
+	SetCustomModeControl(control *appkit.NSSegmentedControl)
+	SetCustomActionControl(control *appkit.NSSegmentedControl)
+	SetCustomRotateControl(control *appkit.NSSegmentedControl)
+	SetCustomDeleteControl(control *appkit.NSSegmentedControl)
+	SetShowStatusInfoAsWindowSubtitle(value bool)
+	Delegate() raw.IKCameraDeviceViewDelegate
+	SetDelegate(delegate raw.IKCameraDeviceViewDelegate)
+	CameraDevice() *imagecapturecore.ICCameraDevice
+	SetCameraDevice(cameraDevice *imagecapturecore.ICCameraDevice)
+	Mode() raw.IKCameraDeviceViewDisplayMode
+	SetMode(mode raw.IKCameraDeviceViewDisplayMode)
+	HasDisplayModeTable() bool
+	SetHasDisplayModeTable(hasDisplayModeTable bool)
+	HasDisplayModeIcon() bool
+	SetHasDisplayModeIcon(hasDisplayModeIcon bool)
+	DownloadAllControlLabel() string
+	SetDownloadAllControlLabel(downloadAllControlLabel string)
+	DownloadSelectedControlLabel() string
+	SetDownloadSelectedControlLabel(downloadSelectedControlLabel string)
+	IconSize() uint
+	SetIconSize(iconSize uint)
+	TransferMode() raw.IKCameraDeviceViewTransferMode
+	SetTransferMode(transferMode raw.IKCameraDeviceViewTransferMode)
+	DisplaysDownloadsDirectoryControl() bool
+	SetDisplaysDownloadsDirectoryControl(displaysDownloadsDirectoryControl bool)
+	DownloadsDirectory() *foundation.NSURL
+	SetDownloadsDirectory(downloadsDirectory string)
+	DisplaysPostProcessApplicationControl() bool
+	SetDisplaysPostProcessApplicationControl(displaysPostProcessApplicationControl bool)
+	PostProcessApplication() *foundation.NSURL
+	SetPostProcessApplication(postProcessApplication string)
+	CanRotateSelectedItemsLeft() bool
+	CanRotateSelectedItemsRight() bool
+	CanDeleteSelectedItems() bool
+	CanDownloadSelectedItems() bool
+}
+
+var _ CameraDeviceViewable = (*CameraDeviceView)(nil)
 

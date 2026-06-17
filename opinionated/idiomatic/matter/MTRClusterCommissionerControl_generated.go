@@ -5,9 +5,12 @@
 package matter
 
 import (
+	"context"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // MTRClusterCommissionerControl wraps [raw.MTRClusterCommissionerControl] with a fluent Go API.
@@ -25,7 +28,83 @@ func NewMTRClusterCommissionerControlWithDeviceEndpointIDQueue(device *raw.MTRDe
 	return &MTRClusterCommissionerControl{inner: raw.MTRClusterCommissionerControlFromID(_id)}
 }
 
+// RequestCommissioningApprovalWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying RequestCommissioningApprovalWithParamsExpectedValuesExpectedValueIntervalCompletion.
+func (x *MTRClusterCommissionerControl) RequestCommissioningApprovalWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRCommissionerControlClusterRequestCommissioningApprovalParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.RequestCommissioningApprovalWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+}
+
+// CommissionNodeWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRClusterCommissionerControl) CommissionNodeWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRCommissionerControlClusterCommissionNodeParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRCommissionerControlClusterReverseOpenCommissioningWindowParams, error) {
+	type _result struct {
+		val *MTRCommissionerControlClusterReverseOpenCommissioningWindowParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.CommissionNodeWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTRCommissionerControlClusterReverseOpenCommissioningWindowParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTRCommissionerControlClusterReverseOpenCommissioningWindowParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTRCommissionerControlClusterReverseOpenCommissioningWindowParams
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeSupportedDeviceCategoriesWithParams calls the underlying ReadAttributeSupportedDeviceCategoriesWithParams.
+func (x *MTRClusterCommissionerControl) ReadAttributeSupportedDeviceCategoriesWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeSupportedDeviceCategoriesWithParams(params)
+}
+
+// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
+func (x *MTRClusterCommissionerControl) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+}
+
+// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
+func (x *MTRClusterCommissionerControl) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
+}
+
+// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
+func (x *MTRClusterCommissionerControl) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeAttributeListWithParams(params)
+}
+
+// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
+func (x *MTRClusterCommissionerControl) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeFeatureMapWithParams(params)
+}
+
+// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
+func (x *MTRClusterCommissionerControl) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeClusterRevisionWithParams(params)
+}
+
 func (x *MTRClusterCommissionerControl) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
 
 func (x *MTRClusterCommissionerControl) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+
+// MTRClusterCommissionerControlable is the interface implemented by [MTRClusterCommissionerControl], for mocking and DI.
+type MTRClusterCommissionerControlable interface {
+	Unwrap() *raw.MTRClusterCommissionerControl
+	RequestCommissioningApprovalWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRCommissionerControlClusterRequestCommissioningApprovalParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
+	CommissionNodeWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRCommissionerControlClusterCommissionNodeParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRCommissionerControlClusterReverseOpenCommissioningWindowParams, error)
+	ReadAttributeSupportedDeviceCategoriesWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+}
+
+var _ MTRClusterCommissionerControlable = (*MTRClusterCommissionerControl)(nil)
 

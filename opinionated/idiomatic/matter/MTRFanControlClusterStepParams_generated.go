@@ -54,3 +54,75 @@ func (x *MTRFanControlClusterStepParams) WithServerSideProcessingTimeout(serverS
 	return x
 }
 
+// Direction calls the underlying Direction.
+func (x *MTRFanControlClusterStepParams) Direction() *foundation.NSNumber {
+	return x.inner.Direction()
+}
+
+// SetDirection calls the underlying SetDirection.
+func (x *MTRFanControlClusterStepParams) SetDirection(direction *foundation.NSNumber) {
+	x.inner.SetDirection(direction)
+}
+
+// Wrap calls the underlying Wrap.
+func (x *MTRFanControlClusterStepParams) Wrap() *foundation.NSNumber {
+	return x.inner.Wrap()
+}
+
+// SetWrap calls the underlying SetWrap.
+func (x *MTRFanControlClusterStepParams) SetWrap(wrap *foundation.NSNumber) {
+	x.inner.SetWrap(wrap)
+}
+
+// LowestOff calls the underlying LowestOff.
+func (x *MTRFanControlClusterStepParams) LowestOff() *foundation.NSNumber {
+	return x.inner.LowestOff()
+}
+
+// SetLowestOff calls the underlying SetLowestOff.
+func (x *MTRFanControlClusterStepParams) SetLowestOff(lowestOff *foundation.NSNumber) {
+	x.inner.SetLowestOff(lowestOff)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRFanControlClusterStepParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRFanControlClusterStepParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRFanControlClusterStepParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRFanControlClusterStepParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRFanControlClusterStepParamsable is the interface implemented by [MTRFanControlClusterStepParams], for mocking and DI.
+type MTRFanControlClusterStepParamsable interface {
+	Unwrap() *raw.MTRFanControlClusterStepParams
+	WithDirection(direction *foundation.NSNumber) *MTRFanControlClusterStepParams
+	WithWrap(wrap *foundation.NSNumber) *MTRFanControlClusterStepParams
+	WithLowestOff(lowestOff *foundation.NSNumber) *MTRFanControlClusterStepParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRFanControlClusterStepParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRFanControlClusterStepParams
+	Direction() *foundation.NSNumber
+	SetDirection(direction *foundation.NSNumber)
+	Wrap() *foundation.NSNumber
+	SetWrap(wrap *foundation.NSNumber)
+	LowestOff() *foundation.NSNumber
+	SetLowestOff(lowestOff *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRFanControlClusterStepParamsable = (*MTRFanControlClusterStepParams)(nil)
+

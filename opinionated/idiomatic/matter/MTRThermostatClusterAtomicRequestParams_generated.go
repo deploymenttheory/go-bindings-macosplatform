@@ -48,3 +48,74 @@ func (x *MTRThermostatClusterAtomicRequestParams) WithServerSideProcessingTimeou
 	return x
 }
 
+// RequestType calls the underlying RequestType.
+func (x *MTRThermostatClusterAtomicRequestParams) RequestType() *foundation.NSNumber {
+	return x.inner.RequestType()
+}
+
+// SetRequestType calls the underlying SetRequestType.
+func (x *MTRThermostatClusterAtomicRequestParams) SetRequestType(requestType *foundation.NSNumber) {
+	x.inner.SetRequestType(requestType)
+}
+
+// AttributeRequests calls the underlying AttributeRequests.
+func (x *MTRThermostatClusterAtomicRequestParams) AttributeRequests() *foundation.NSArray[objc.ID] {
+	return x.inner.AttributeRequests()
+}
+
+// SetAttributeRequests calls the underlying SetAttributeRequests.
+func (x *MTRThermostatClusterAtomicRequestParams) SetAttributeRequests(attributeRequests *foundation.NSArray[objc.ID]) {
+	x.inner.SetAttributeRequests(attributeRequests)
+}
+
+// Timeout calls the underlying Timeout.
+func (x *MTRThermostatClusterAtomicRequestParams) Timeout() *foundation.NSNumber {
+	return x.inner.Timeout()
+}
+
+// SetTimeout calls the underlying SetTimeout.
+func (x *MTRThermostatClusterAtomicRequestParams) SetTimeout(timeout *foundation.NSNumber) {
+	x.inner.SetTimeout(timeout)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRThermostatClusterAtomicRequestParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRThermostatClusterAtomicRequestParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRThermostatClusterAtomicRequestParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRThermostatClusterAtomicRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRThermostatClusterAtomicRequestParamsable is the interface implemented by [MTRThermostatClusterAtomicRequestParams], for mocking and DI.
+type MTRThermostatClusterAtomicRequestParamsable interface {
+	Unwrap() *raw.MTRThermostatClusterAtomicRequestParams
+	WithRequestType(requestType *foundation.NSNumber) *MTRThermostatClusterAtomicRequestParams
+	WithTimeout(timeout *foundation.NSNumber) *MTRThermostatClusterAtomicRequestParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRThermostatClusterAtomicRequestParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRThermostatClusterAtomicRequestParams
+	RequestType() *foundation.NSNumber
+	SetRequestType(requestType *foundation.NSNumber)
+	AttributeRequests() *foundation.NSArray[objc.ID]
+	SetAttributeRequests(attributeRequests *foundation.NSArray[objc.ID])
+	Timeout() *foundation.NSNumber
+	SetTimeout(timeout *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRThermostatClusterAtomicRequestParamsable = (*MTRThermostatClusterAtomicRequestParams)(nil)
+

@@ -5,8 +5,11 @@
 package healthkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // WorkoutBuilder wraps [raw.HKWorkoutBuilder] with a fluent Go API.
@@ -24,17 +27,121 @@ func NewWorkoutBuilderWithHealthStoreConfigurationDevice(healthStore *raw.HKHeal
 	return &WorkoutBuilder{inner: raw.HKWorkoutBuilderFromID(_id)}
 }
 
+// BeginCollectionWithStartDateCompletion calls the underlying BeginCollectionWithStartDateCompletion.
+func (x *WorkoutBuilder) BeginCollectionWithStartDateCompletion(startDate *foundation.NSDate, completion func(bool, unsafe.Pointer)) {
+	x.inner.BeginCollectionWithStartDateCompletion(startDate, completion)
+}
+
+// AddSamplesCompletion calls the underlying AddSamplesCompletion.
+func (x *WorkoutBuilder) AddSamplesCompletion(samples *foundation.NSArray[*raw.HKSample], completion func(bool, unsafe.Pointer)) {
+	x.inner.AddSamplesCompletion(samples, completion)
+}
+
+// AddWorkoutEventsCompletion calls the underlying AddWorkoutEventsCompletion.
+func (x *WorkoutBuilder) AddWorkoutEventsCompletion(workoutEvents *foundation.NSArray[*raw.HKWorkoutEvent], completion func(bool, unsafe.Pointer)) {
+	x.inner.AddWorkoutEventsCompletion(workoutEvents, completion)
+}
+
+// AddMetadataCompletion calls the underlying AddMetadataCompletion.
+func (x *WorkoutBuilder) AddMetadataCompletion(metadata *foundation.NSDictionary[*foundation.NSString, objc.ID], completion func(bool, unsafe.Pointer)) {
+	x.inner.AddMetadataCompletion(metadata, completion)
+}
+
+// AddWorkoutActivityCompletion calls the underlying AddWorkoutActivityCompletion.
+func (x *WorkoutBuilder) AddWorkoutActivityCompletion(workoutActivity *raw.HKWorkoutActivity, completion func(bool, unsafe.Pointer)) {
+	x.inner.AddWorkoutActivityCompletion(workoutActivity, completion)
+}
+
+// UpdateActivityWithUUIDEndDateCompletion calls the underlying UpdateActivityWithUUIDEndDateCompletion.
+func (x *WorkoutBuilder) UpdateActivityWithUUIDEndDateCompletion(uUID *foundation.NSUUID, endDate *foundation.NSDate, completion func(bool, unsafe.Pointer)) {
+	x.inner.UpdateActivityWithUUIDEndDateCompletion(uUID, endDate, completion)
+}
+
+// UpdateActivityWithUUIDAddMedatataCompletion calls the underlying UpdateActivityWithUUIDAddMedatataCompletion.
+func (x *WorkoutBuilder) UpdateActivityWithUUIDAddMedatataCompletion(uUID *foundation.NSUUID, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID], completion func(bool, unsafe.Pointer)) {
+	x.inner.UpdateActivityWithUUIDAddMedatataCompletion(uUID, metadata, completion)
+}
+
+// EndCollectionWithEndDateCompletion calls the underlying EndCollectionWithEndDateCompletion.
+func (x *WorkoutBuilder) EndCollectionWithEndDateCompletion(endDate *foundation.NSDate, completion func(bool, unsafe.Pointer)) {
+	x.inner.EndCollectionWithEndDateCompletion(endDate, completion)
+}
+
+// FinishWorkoutWithCompletion calls the underlying FinishWorkoutWithCompletion.
+func (x *WorkoutBuilder) FinishWorkoutWithCompletion(completion func(unsafe.Pointer, unsafe.Pointer)) {
+	x.inner.FinishWorkoutWithCompletion(completion)
+}
+
+// DiscardWorkout calls the underlying DiscardWorkout.
+func (x *WorkoutBuilder) DiscardWorkout() {
+	x.inner.DiscardWorkout()
+}
+
+// ElapsedTimeAtDate calls the underlying ElapsedTimeAtDate.
+func (x *WorkoutBuilder) ElapsedTimeAtDate(date *foundation.NSDate) float64 {
+	return x.inner.ElapsedTimeAtDate(date)
+}
+
+// StatisticsForType calls the underlying StatisticsForType.
+func (x *WorkoutBuilder) StatisticsForType(quantityType *raw.HKQuantityType) *Statistics {
+	_r := x.inner.StatisticsForType(quantityType)
+	if _r == nil {
+		return nil
+	}
+	return &Statistics{inner: _r}
+}
+
+// SeriesBuilderForType calls the underlying SeriesBuilderForType.
+func (x *WorkoutBuilder) SeriesBuilderForType(seriesType *raw.HKSeriesType) *SeriesBuilder {
+	_r := x.inner.SeriesBuilderForType(seriesType)
+	if _r == nil {
+		return nil
+	}
+	return &SeriesBuilder{inner: _r}
+}
+
+// Device calls the underlying Device.
+func (x *WorkoutBuilder) Device() *Device {
+	_r := x.inner.Device()
+	if _r == nil {
+		return nil
+	}
+	return &Device{inner: _r}
+}
+
+// StartDate calls the underlying StartDate.
+func (x *WorkoutBuilder) StartDate() *foundation.NSDate {
+	return x.inner.StartDate()
+}
+
+// EndDate calls the underlying EndDate.
+func (x *WorkoutBuilder) EndDate() *foundation.NSDate {
+	return x.inner.EndDate()
+}
+
+// WorkoutConfiguration calls the underlying WorkoutConfiguration.
+func (x *WorkoutBuilder) WorkoutConfiguration() *WorkoutConfiguration {
+	_r := x.inner.WorkoutConfiguration()
+	if _r == nil {
+		return nil
+	}
+	return &WorkoutConfiguration{inner: _r}
+}
+
+// Metadata calls the underlying Metadata.
+func (x *WorkoutBuilder) Metadata() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.Metadata()
+}
+
 // WorkoutEvents returns the collection as a Go slice.
 func (x *WorkoutBuilder) WorkoutEvents() []*raw.HKWorkoutEvent {
 	arr := x.inner.WorkoutEvents()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.HKWorkoutEvent, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.HKWorkoutEvent {
+		return raw.HKWorkoutEventFromID(purego.Retain(_id))
+	})
 }
 
 // WorkoutActivities returns the collection as a Go slice.
@@ -43,12 +150,43 @@ func (x *WorkoutBuilder) WorkoutActivities() []*raw.HKWorkoutActivity {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.HKWorkoutActivity, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.HKWorkoutActivity {
+		return raw.HKWorkoutActivityFromID(purego.Retain(_id))
+	})
+}
+
+// AllStatistics calls the underlying AllStatistics.
+func (x *WorkoutBuilder) AllStatistics() *foundation.NSDictionary[*raw.HKQuantityType, *raw.HKStatistics] {
+	return x.inner.AllStatistics()
 }
 
 func (x *WorkoutBuilder) asWorkoutBuilder() *raw.HKWorkoutBuilder { return x.inner }
+
+// WorkoutBuilderable is the interface implemented by [WorkoutBuilder], for mocking and DI.
+type WorkoutBuilderable interface {
+	Unwrap() *raw.HKWorkoutBuilder
+	BeginCollectionWithStartDateCompletion(startDate *foundation.NSDate, completion func(bool, unsafe.Pointer))
+	AddSamplesCompletion(samples *foundation.NSArray[*raw.HKSample], completion func(bool, unsafe.Pointer))
+	AddWorkoutEventsCompletion(workoutEvents *foundation.NSArray[*raw.HKWorkoutEvent], completion func(bool, unsafe.Pointer))
+	AddMetadataCompletion(metadata *foundation.NSDictionary[*foundation.NSString, objc.ID], completion func(bool, unsafe.Pointer))
+	AddWorkoutActivityCompletion(workoutActivity *raw.HKWorkoutActivity, completion func(bool, unsafe.Pointer))
+	UpdateActivityWithUUIDEndDateCompletion(uUID *foundation.NSUUID, endDate *foundation.NSDate, completion func(bool, unsafe.Pointer))
+	UpdateActivityWithUUIDAddMedatataCompletion(uUID *foundation.NSUUID, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID], completion func(bool, unsafe.Pointer))
+	EndCollectionWithEndDateCompletion(endDate *foundation.NSDate, completion func(bool, unsafe.Pointer))
+	FinishWorkoutWithCompletion(completion func(unsafe.Pointer, unsafe.Pointer))
+	DiscardWorkout()
+	ElapsedTimeAtDate(date *foundation.NSDate) float64
+	StatisticsForType(quantityType *raw.HKQuantityType) *Statistics
+	SeriesBuilderForType(seriesType *raw.HKSeriesType) *SeriesBuilder
+	Device() *Device
+	StartDate() *foundation.NSDate
+	EndDate() *foundation.NSDate
+	WorkoutConfiguration() *WorkoutConfiguration
+	Metadata() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	WorkoutEvents() []*raw.HKWorkoutEvent
+	WorkoutActivities() []*raw.HKWorkoutActivity
+	AllStatistics() *foundation.NSDictionary[*raw.HKQuantityType, *raw.HKStatistics]
+}
+
+var _ WorkoutBuilderable = (*WorkoutBuilder)(nil)
 

@@ -7,6 +7,7 @@ package intents
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -35,4 +36,63 @@ func (x *File) WithRemovedOnCompletion(removedOnCompletion bool) *File {
 	x.inner.SetRemovedOnCompletion(removedOnCompletion)
 	return x
 }
+
+// Data calls the underlying Data.
+func (x *File) Data() *foundation.NSData {
+	return x.inner.Data()
+}
+
+// Filename calls the underlying Filename.
+func (x *File) Filename() string {
+	_r := x.inner.Filename()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetFilename calls the underlying SetFilename.
+func (x *File) SetFilename(filename string) {
+	x.inner.SetFilename(foundation.NSStringStringWithUTF8String(filename))
+}
+
+// TypeIdentifier calls the underlying TypeIdentifier.
+func (x *File) TypeIdentifier() string {
+	_r := x.inner.TypeIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// FileURL calls the underlying FileURL.
+func (x *File) FileURL() *foundation.NSURL {
+	return x.inner.FileURL()
+}
+
+// RemovedOnCompletion calls the underlying RemovedOnCompletion.
+func (x *File) RemovedOnCompletion() bool {
+	return x.inner.RemovedOnCompletion()
+}
+
+// SetRemovedOnCompletion calls the underlying SetRemovedOnCompletion.
+func (x *File) SetRemovedOnCompletion(removedOnCompletion bool) {
+	x.inner.SetRemovedOnCompletion(removedOnCompletion)
+}
+
+// Fileable is the interface implemented by [File], for mocking and DI.
+type Fileable interface {
+	Unwrap() *raw.INFile
+	WithFilename(filename string) *File
+	WithRemovedOnCompletion(removedOnCompletion bool) *File
+	Data() *foundation.NSData
+	Filename() string
+	SetFilename(filename string)
+	TypeIdentifier() string
+	FileURL() *foundation.NSURL
+	RemovedOnCompletion() bool
+	SetRemovedOnCompletion(removedOnCompletion bool)
+}
+
+var _ Fileable = (*File)(nil)
 

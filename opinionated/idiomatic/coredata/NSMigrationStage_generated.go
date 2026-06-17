@@ -7,6 +7,7 @@ package coredata
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -30,5 +31,29 @@ func (x *MigrationStage) WithLabel(label string) *MigrationStage {
 	return x
 }
 
+// Label calls the underlying Label.
+func (x *MigrationStage) Label() string {
+	_r := x.inner.Label()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLabel calls the underlying SetLabel.
+func (x *MigrationStage) SetLabel(label string) {
+	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+}
+
 func (x *MigrationStage) asMigrationStage() *raw.NSMigrationStage { return x.inner }
+
+// MigrationStageable is the interface implemented by [MigrationStage], for mocking and DI.
+type MigrationStageable interface {
+	Unwrap() *raw.NSMigrationStage
+	WithLabel(label string) *MigrationStage
+	Label() string
+	SetLabel(label string)
+}
+
+var _ MigrationStageable = (*MigrationStage)(nil)
 

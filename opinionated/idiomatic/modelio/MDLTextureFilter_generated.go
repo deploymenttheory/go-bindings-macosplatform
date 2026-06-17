@@ -59,3 +59,88 @@ func (x *TextureFilter) WithMipFilter(mipFilter raw.MDLMaterialMipMapFilterMode)
 	return x
 }
 
+// SWrapMode calls the underlying SWrapMode.
+func (x *TextureFilter) SWrapMode() raw.MDLMaterialTextureWrapMode {
+	return x.inner.SWrapMode()
+}
+
+// SetSWrapMode calls the underlying SetSWrapMode.
+func (x *TextureFilter) SetSWrapMode(sWrapMode raw.MDLMaterialTextureWrapMode) {
+	x.inner.SetSWrapMode(sWrapMode)
+}
+
+// TWrapMode calls the underlying TWrapMode.
+func (x *TextureFilter) TWrapMode() raw.MDLMaterialTextureWrapMode {
+	return x.inner.TWrapMode()
+}
+
+// SetTWrapMode calls the underlying SetTWrapMode.
+func (x *TextureFilter) SetTWrapMode(tWrapMode raw.MDLMaterialTextureWrapMode) {
+	x.inner.SetTWrapMode(tWrapMode)
+}
+
+// RWrapMode calls the underlying RWrapMode.
+func (x *TextureFilter) RWrapMode() raw.MDLMaterialTextureWrapMode {
+	return x.inner.RWrapMode()
+}
+
+// SetRWrapMode calls the underlying SetRWrapMode.
+func (x *TextureFilter) SetRWrapMode(rWrapMode raw.MDLMaterialTextureWrapMode) {
+	x.inner.SetRWrapMode(rWrapMode)
+}
+
+// MinFilter calls the underlying MinFilter.
+func (x *TextureFilter) MinFilter() raw.MDLMaterialTextureFilterMode {
+	return x.inner.MinFilter()
+}
+
+// SetMinFilter calls the underlying SetMinFilter.
+func (x *TextureFilter) SetMinFilter(minFilter raw.MDLMaterialTextureFilterMode) {
+	x.inner.SetMinFilter(minFilter)
+}
+
+// MagFilter calls the underlying MagFilter.
+func (x *TextureFilter) MagFilter() raw.MDLMaterialTextureFilterMode {
+	return x.inner.MagFilter()
+}
+
+// SetMagFilter calls the underlying SetMagFilter.
+func (x *TextureFilter) SetMagFilter(magFilter raw.MDLMaterialTextureFilterMode) {
+	x.inner.SetMagFilter(magFilter)
+}
+
+// MipFilter calls the underlying MipFilter.
+func (x *TextureFilter) MipFilter() raw.MDLMaterialMipMapFilterMode {
+	return x.inner.MipFilter()
+}
+
+// SetMipFilter calls the underlying SetMipFilter.
+func (x *TextureFilter) SetMipFilter(mipFilter raw.MDLMaterialMipMapFilterMode) {
+	x.inner.SetMipFilter(mipFilter)
+}
+
+// TextureFilterable is the interface implemented by [TextureFilter], for mocking and DI.
+type TextureFilterable interface {
+	Unwrap() *raw.MDLTextureFilter
+	WithSWrapMode(sWrapMode raw.MDLMaterialTextureWrapMode) *TextureFilter
+	WithTWrapMode(tWrapMode raw.MDLMaterialTextureWrapMode) *TextureFilter
+	WithRWrapMode(rWrapMode raw.MDLMaterialTextureWrapMode) *TextureFilter
+	WithMinFilter(minFilter raw.MDLMaterialTextureFilterMode) *TextureFilter
+	WithMagFilter(magFilter raw.MDLMaterialTextureFilterMode) *TextureFilter
+	WithMipFilter(mipFilter raw.MDLMaterialMipMapFilterMode) *TextureFilter
+	SWrapMode() raw.MDLMaterialTextureWrapMode
+	SetSWrapMode(sWrapMode raw.MDLMaterialTextureWrapMode)
+	TWrapMode() raw.MDLMaterialTextureWrapMode
+	SetTWrapMode(tWrapMode raw.MDLMaterialTextureWrapMode)
+	RWrapMode() raw.MDLMaterialTextureWrapMode
+	SetRWrapMode(rWrapMode raw.MDLMaterialTextureWrapMode)
+	MinFilter() raw.MDLMaterialTextureFilterMode
+	SetMinFilter(minFilter raw.MDLMaterialTextureFilterMode)
+	MagFilter() raw.MDLMaterialTextureFilterMode
+	SetMagFilter(magFilter raw.MDLMaterialTextureFilterMode)
+	MipFilter() raw.MDLMaterialMipMapFilterMode
+	SetMipFilter(mipFilter raw.MDLMaterialMipMapFilterMode)
+}
+
+var _ TextureFilterable = (*TextureFilter)(nil)
+

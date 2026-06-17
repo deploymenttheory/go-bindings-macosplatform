@@ -25,3 +25,10 @@ func NewVolumeResolutionResult() *VolumeResolutionResult {
 
 func (x *VolumeResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult { return &x.inner.INIntentResolutionResult }
 
+// VolumeResolutionResultable is the interface implemented by [VolumeResolutionResult], for mocking and DI.
+type VolumeResolutionResultable interface {
+	Unwrap() *raw.INVolumeResolutionResult
+}
+
+var _ VolumeResolutionResultable = (*VolumeResolutionResult)(nil)
+

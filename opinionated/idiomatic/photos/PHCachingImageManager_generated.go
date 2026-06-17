@@ -5,6 +5,8 @@
 package photos
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
 	"github.com/ebitengine/purego/objc"
 )
@@ -29,5 +31,43 @@ func (x *CachingImageManager) WithAllowsCachingHighQualityImages(allowsCachingHi
 	return x
 }
 
+// StartCachingImagesForAssetsTargetSizeContentModeOptions calls the underlying StartCachingImagesForAssetsTargetSizeContentModeOptions.
+func (x *CachingImageManager) StartCachingImagesForAssetsTargetSizeContentModeOptions(assets *foundation.NSArray[*raw.PHAsset], targetSize corefoundation.CGSize, contentMode raw.PHImageContentMode, options *raw.PHImageRequestOptions) {
+	x.inner.StartCachingImagesForAssetsTargetSizeContentModeOptions(assets, targetSize, contentMode, options)
+}
+
+// StopCachingImagesForAssetsTargetSizeContentModeOptions calls the underlying StopCachingImagesForAssetsTargetSizeContentModeOptions.
+func (x *CachingImageManager) StopCachingImagesForAssetsTargetSizeContentModeOptions(assets *foundation.NSArray[*raw.PHAsset], targetSize corefoundation.CGSize, contentMode raw.PHImageContentMode, options *raw.PHImageRequestOptions) {
+	x.inner.StopCachingImagesForAssetsTargetSizeContentModeOptions(assets, targetSize, contentMode, options)
+}
+
+// StopCachingImagesForAllAssets calls the underlying StopCachingImagesForAllAssets.
+func (x *CachingImageManager) StopCachingImagesForAllAssets() {
+	x.inner.StopCachingImagesForAllAssets()
+}
+
+// AllowsCachingHighQualityImages calls the underlying AllowsCachingHighQualityImages.
+func (x *CachingImageManager) AllowsCachingHighQualityImages() bool {
+	return x.inner.AllowsCachingHighQualityImages()
+}
+
+// SetAllowsCachingHighQualityImages calls the underlying SetAllowsCachingHighQualityImages.
+func (x *CachingImageManager) SetAllowsCachingHighQualityImages(allowsCachingHighQualityImages bool) {
+	x.inner.SetAllowsCachingHighQualityImages(allowsCachingHighQualityImages)
+}
+
 func (x *CachingImageManager) asImageManager() *raw.PHImageManager { return &x.inner.PHImageManager }
+
+// CachingImageManagerable is the interface implemented by [CachingImageManager], for mocking and DI.
+type CachingImageManagerable interface {
+	Unwrap() *raw.PHCachingImageManager
+	WithAllowsCachingHighQualityImages(allowsCachingHighQualityImages bool) *CachingImageManager
+	StartCachingImagesForAssetsTargetSizeContentModeOptions(assets *foundation.NSArray[*raw.PHAsset], targetSize corefoundation.CGSize, contentMode raw.PHImageContentMode, options *raw.PHImageRequestOptions)
+	StopCachingImagesForAssetsTargetSizeContentModeOptions(assets *foundation.NSArray[*raw.PHAsset], targetSize corefoundation.CGSize, contentMode raw.PHImageContentMode, options *raw.PHImageRequestOptions)
+	StopCachingImagesForAllAssets()
+	AllowsCachingHighQualityImages() bool
+	SetAllowsCachingHighQualityImages(allowsCachingHighQualityImages bool)
+}
+
+var _ CachingImageManagerable = (*CachingImageManager)(nil)
 

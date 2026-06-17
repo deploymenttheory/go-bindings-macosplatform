@@ -5,7 +5,9 @@
 package coreimage
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +25,56 @@ func NewQRCodeFeature() *QRCodeFeature {
 	return &QRCodeFeature{inner: raw.CIQRCodeFeatureFromID(_id)}
 }
 
+// TopLeft calls the underlying TopLeft.
+func (x *QRCodeFeature) TopLeft() corefoundation.CGPoint {
+	return x.inner.TopLeft()
+}
+
+// TopRight calls the underlying TopRight.
+func (x *QRCodeFeature) TopRight() corefoundation.CGPoint {
+	return x.inner.TopRight()
+}
+
+// BottomLeft calls the underlying BottomLeft.
+func (x *QRCodeFeature) BottomLeft() corefoundation.CGPoint {
+	return x.inner.BottomLeft()
+}
+
+// BottomRight calls the underlying BottomRight.
+func (x *QRCodeFeature) BottomRight() corefoundation.CGPoint {
+	return x.inner.BottomRight()
+}
+
+// MessageString calls the underlying MessageString.
+func (x *QRCodeFeature) MessageString() string {
+	_r := x.inner.MessageString()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SymbolDescriptor calls the underlying SymbolDescriptor.
+func (x *QRCodeFeature) SymbolDescriptor() *QRCodeDescriptor {
+	_r := x.inner.SymbolDescriptor()
+	if _r == nil {
+		return nil
+	}
+	return &QRCodeDescriptor{inner: _r}
+}
+
 func (x *QRCodeFeature) asFeature() *raw.CIFeature { return &x.inner.CIFeature }
+
+// QRCodeFeatureable is the interface implemented by [QRCodeFeature], for mocking and DI.
+type QRCodeFeatureable interface {
+	Unwrap() *raw.CIQRCodeFeature
+	TopLeft() corefoundation.CGPoint
+	TopRight() corefoundation.CGPoint
+	BottomLeft() corefoundation.CGPoint
+	BottomRight() corefoundation.CGPoint
+	MessageString() string
+	SymbolDescriptor() *QRCodeDescriptor
+}
+
+var _ QRCodeFeatureable = (*QRCodeFeature)(nil)
 

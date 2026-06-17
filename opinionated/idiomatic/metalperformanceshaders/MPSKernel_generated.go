@@ -9,7 +9,9 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Kernel wraps [raw.MPSKernel] with a fluent Go API.
@@ -52,4 +54,57 @@ func (x *Kernel) WithLabel(label string) *Kernel {
 	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
+
+// CopyWithZoneDevice calls the underlying CopyWithZoneDevice.
+func (x *Kernel) CopyWithZoneDevice(zone unsafe.Pointer, device metal.MTLDevice) *Kernel {
+	_r := x.inner.CopyWithZoneDevice(zone, device)
+	if _r == nil {
+		return nil
+	}
+	return &Kernel{inner: _r}
+}
+
+// Options calls the underlying Options.
+func (x *Kernel) Options() mpscore.MPSKernelOptions {
+	return x.inner.Options()
+}
+
+// SetOptions calls the underlying SetOptions.
+func (x *Kernel) SetOptions(options mpscore.MPSKernelOptions) {
+	x.inner.SetOptions(options)
+}
+
+// Device calls the underlying Device.
+func (x *Kernel) Device() metal.MTLDevice {
+	return x.inner.Device()
+}
+
+// Label calls the underlying Label.
+func (x *Kernel) Label() string {
+	_r := x.inner.Label()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLabel calls the underlying SetLabel.
+func (x *Kernel) SetLabel(label string) {
+	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+}
+
+// Kernelable is the interface implemented by [Kernel], for mocking and DI.
+type Kernelable interface {
+	Unwrap() *raw.MPSKernel
+	WithOptions(options mpscore.MPSKernelOptions) *Kernel
+	WithLabel(label string) *Kernel
+	CopyWithZoneDevice(zone unsafe.Pointer, device metal.MTLDevice) *Kernel
+	Options() mpscore.MPSKernelOptions
+	SetOptions(options mpscore.MPSKernelOptions)
+	Device() metal.MTLDevice
+	Label() string
+	SetLabel(label string)
+}
+
+var _ Kernelable = (*Kernel)(nil)
 

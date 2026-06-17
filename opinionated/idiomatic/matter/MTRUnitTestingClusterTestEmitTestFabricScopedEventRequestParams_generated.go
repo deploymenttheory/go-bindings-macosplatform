@@ -42,5 +42,51 @@ func (x *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams) WithSe
 	return x
 }
 
+// Arg1 calls the underlying Arg1.
+func (x *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams) Arg1() *foundation.NSNumber {
+	return x.inner.Arg1()
+}
+
+// SetArg1 calls the underlying SetArg1.
+func (x *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams) SetArg1(arg1 *foundation.NSNumber) {
+	x.inner.SetArg1(arg1)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
 func (x *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams) asMTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams() *raw.MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams { return x.inner }
+
+// MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParamsable is the interface implemented by [MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams], for mocking and DI.
+type MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParamsable interface {
+	Unwrap() *raw.MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams
+	WithArg1(arg1 *foundation.NSNumber) *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams
+	Arg1() *foundation.NSNumber
+	SetArg1(arg1 *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParamsable = (*MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams)(nil)
 

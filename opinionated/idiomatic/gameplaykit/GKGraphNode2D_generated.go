@@ -25,5 +25,24 @@ func NewGraphNode2DWithPoint(point unsafe.Pointer) *GraphNode2D {
 	return &GraphNode2D{inner: raw.GKGraphNode2DFromID(_id)}
 }
 
+// Position calls the underlying Position.
+func (x *GraphNode2D) Position() unsafe.Pointer {
+	return x.inner.Position()
+}
+
+// SetPosition calls the underlying SetPosition.
+func (x *GraphNode2D) SetPosition(position unsafe.Pointer) {
+	x.inner.SetPosition(position)
+}
+
 func (x *GraphNode2D) asGraphNode() *raw.GKGraphNode { return &x.inner.GKGraphNode }
+
+// GraphNode2Dable is the interface implemented by [GraphNode2D], for mocking and DI.
+type GraphNode2Dable interface {
+	Unwrap() *raw.GKGraphNode2D
+	Position() unsafe.Pointer
+	SetPosition(position unsafe.Pointer)
+}
+
+var _ GraphNode2Dable = (*GraphNode2D)(nil)
 

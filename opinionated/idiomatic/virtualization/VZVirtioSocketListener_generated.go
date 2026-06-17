@@ -29,3 +29,23 @@ func (x *VirtioSocketListener) WithDelegate(delegate raw.VZVirtioSocketListenerD
 	return x
 }
 
+// Delegate calls the underlying Delegate.
+func (x *VirtioSocketListener) Delegate() raw.VZVirtioSocketListenerDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *VirtioSocketListener) SetDelegate(delegate raw.VZVirtioSocketListenerDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// VirtioSocketListenerable is the interface implemented by [VirtioSocketListener], for mocking and DI.
+type VirtioSocketListenerable interface {
+	Unwrap() *raw.VZVirtioSocketListener
+	WithDelegate(delegate raw.VZVirtioSocketListenerDelegate) *VirtioSocketListener
+	Delegate() raw.VZVirtioSocketListenerDelegate
+	SetDelegate(delegate raw.VZVirtioSocketListenerDelegate)
+}
+
+var _ VirtioSocketListenerable = (*VirtioSocketListener)(nil)
+

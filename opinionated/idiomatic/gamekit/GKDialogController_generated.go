@@ -30,3 +30,35 @@ func (x *DialogController) WithParentWindow(parentWindow *appkit.NSWindow) *Dial
 	return x
 }
 
+// PresentViewController calls the underlying PresentViewController.
+func (x *DialogController) PresentViewController(viewController *appkit.NSViewController) bool {
+	return x.inner.PresentViewController(viewController)
+}
+
+// Dismiss calls the underlying Dismiss.
+func (x *DialogController) Dismiss(sender objc.ID) {
+	x.inner.Dismiss(sender)
+}
+
+// ParentWindow calls the underlying ParentWindow.
+func (x *DialogController) ParentWindow() *appkit.NSWindow {
+	return x.inner.ParentWindow()
+}
+
+// SetParentWindow calls the underlying SetParentWindow.
+func (x *DialogController) SetParentWindow(parentWindow *appkit.NSWindow) {
+	x.inner.SetParentWindow(parentWindow)
+}
+
+// DialogControllerable is the interface implemented by [DialogController], for mocking and DI.
+type DialogControllerable interface {
+	Unwrap() *raw.GKDialogController
+	WithParentWindow(parentWindow *appkit.NSWindow) *DialogController
+	PresentViewController(viewController *appkit.NSViewController) bool
+	Dismiss(sender objc.ID)
+	ParentWindow() *appkit.NSWindow
+	SetParentWindow(parentWindow *appkit.NSWindow)
+}
+
+var _ DialogControllerable = (*DialogController)(nil)
+

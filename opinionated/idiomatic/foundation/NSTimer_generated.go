@@ -43,5 +43,72 @@ func (x *Timer) WithTolerance(tolerance float64) *Timer {
 	return x
 }
 
+// Fire calls the underlying Fire.
+func (x *Timer) Fire() {
+	x.inner.Fire()
+}
+
+// Invalidate calls the underlying Invalidate.
+func (x *Timer) Invalidate() {
+	x.inner.Invalidate()
+}
+
+// FireDate calls the underlying FireDate.
+func (x *Timer) FireDate() *Date {
+	_r := x.inner.FireDate()
+	if _r == nil {
+		return nil
+	}
+	return &Date{inner: _r}
+}
+
+// SetFireDate calls the underlying SetFireDate.
+func (x *Timer) SetFireDate(fireDate *raw.NSDate) {
+	x.inner.SetFireDate(fireDate)
+}
+
+// TimeInterval calls the underlying TimeInterval.
+func (x *Timer) TimeInterval() float64 {
+	return x.inner.TimeInterval()
+}
+
+// Tolerance calls the underlying Tolerance.
+func (x *Timer) Tolerance() float64 {
+	return x.inner.Tolerance()
+}
+
+// SetTolerance calls the underlying SetTolerance.
+func (x *Timer) SetTolerance(tolerance float64) {
+	x.inner.SetTolerance(tolerance)
+}
+
+// IsValid calls the underlying IsValid.
+func (x *Timer) IsValid() bool {
+	return x.inner.IsValid()
+}
+
+// UserInfo calls the underlying UserInfo.
+func (x *Timer) UserInfo() objc.ID {
+	return x.inner.UserInfo()
+}
+
 func (x *Timer) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// Timerable is the interface implemented by [Timer], for mocking and DI.
+type Timerable interface {
+	Unwrap() *raw.NSTimer
+	WithFireDate(fireDate DateProvider) *Timer
+	WithTolerance(tolerance float64) *Timer
+	Fire()
+	Invalidate()
+	FireDate() *Date
+	SetFireDate(fireDate *raw.NSDate)
+	TimeInterval() float64
+	Tolerance() float64
+	SetTolerance(tolerance float64)
+	IsValid() bool
+	UserInfo() objc.ID
+}
+
+var _ Timerable = (*Timer)(nil)
 

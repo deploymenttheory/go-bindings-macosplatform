@@ -49,3 +49,49 @@ func (x *MTROperationalCredentialsClusterCSRResponseParams) WithTimedInvokeTimeo
 	return x
 }
 
+// NocsrElements calls the underlying NocsrElements.
+func (x *MTROperationalCredentialsClusterCSRResponseParams) NocsrElements() *foundation.NSData {
+	return x.inner.NocsrElements()
+}
+
+// SetNocsrElements calls the underlying SetNocsrElements.
+func (x *MTROperationalCredentialsClusterCSRResponseParams) SetNocsrElements(nocsrElements *foundation.NSData) {
+	x.inner.SetNocsrElements(nocsrElements)
+}
+
+// AttestationSignature calls the underlying AttestationSignature.
+func (x *MTROperationalCredentialsClusterCSRResponseParams) AttestationSignature() *foundation.NSData {
+	return x.inner.AttestationSignature()
+}
+
+// SetAttestationSignature calls the underlying SetAttestationSignature.
+func (x *MTROperationalCredentialsClusterCSRResponseParams) SetAttestationSignature(attestationSignature *foundation.NSData) {
+	x.inner.SetAttestationSignature(attestationSignature)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTROperationalCredentialsClusterCSRResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTROperationalCredentialsClusterCSRResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// MTROperationalCredentialsClusterCSRResponseParamsable is the interface implemented by [MTROperationalCredentialsClusterCSRResponseParams], for mocking and DI.
+type MTROperationalCredentialsClusterCSRResponseParamsable interface {
+	Unwrap() *raw.MTROperationalCredentialsClusterCSRResponseParams
+	WithNocsrElements(nocsrElements *foundation.NSData) *MTROperationalCredentialsClusterCSRResponseParams
+	WithAttestationSignature(attestationSignature *foundation.NSData) *MTROperationalCredentialsClusterCSRResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTROperationalCredentialsClusterCSRResponseParams
+	NocsrElements() *foundation.NSData
+	SetNocsrElements(nocsrElements *foundation.NSData)
+	AttestationSignature() *foundation.NSData
+	SetAttestationSignature(attestationSignature *foundation.NSData)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+}
+
+var _ MTROperationalCredentialsClusterCSRResponseParamsable = (*MTROperationalCredentialsClusterCSRResponseParams)(nil)
+

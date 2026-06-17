@@ -5,8 +5,10 @@
 package quicklookthumbnailing
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quicklookthumbnailing"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // ThumbnailRepresentation wraps [raw.QLThumbnailRepresentation] with a fluent Go API.
@@ -22,4 +24,29 @@ func NewThumbnailRepresentation() *ThumbnailRepresentation {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("QLThumbnailRepresentation")), objc.RegisterName("new"))
 	return &ThumbnailRepresentation{inner: raw.QLThumbnailRepresentationFromID(_id)}
 }
+
+// Type calls the underlying Type.
+func (x *ThumbnailRepresentation) Type() raw.QLThumbnailRepresentationType {
+	return x.inner.Type()
+}
+
+// CGImage calls the underlying CGImage.
+func (x *ThumbnailRepresentation) CGImage() unsafe.Pointer {
+	return x.inner.CGImage()
+}
+
+// ContentRect calls the underlying ContentRect.
+func (x *ThumbnailRepresentation) ContentRect() corefoundation.CGRect {
+	return x.inner.ContentRect()
+}
+
+// ThumbnailRepresentationable is the interface implemented by [ThumbnailRepresentation], for mocking and DI.
+type ThumbnailRepresentationable interface {
+	Unwrap() *raw.QLThumbnailRepresentation
+	Type() raw.QLThumbnailRepresentationType
+	CGImage() unsafe.Pointer
+	ContentRect() corefoundation.CGRect
+}
+
+var _ ThumbnailRepresentationable = (*ThumbnailRepresentation)(nil)
 

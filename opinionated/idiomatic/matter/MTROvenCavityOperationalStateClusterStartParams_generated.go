@@ -36,3 +36,36 @@ func (x *MTROvenCavityOperationalStateClusterStartParams) WithServerSideProcessi
 	return x
 }
 
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTROvenCavityOperationalStateClusterStartParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTROvenCavityOperationalStateClusterStartParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTROvenCavityOperationalStateClusterStartParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTROvenCavityOperationalStateClusterStartParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTROvenCavityOperationalStateClusterStartParamsable is the interface implemented by [MTROvenCavityOperationalStateClusterStartParams], for mocking and DI.
+type MTROvenCavityOperationalStateClusterStartParamsable interface {
+	Unwrap() *raw.MTROvenCavityOperationalStateClusterStartParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTROvenCavityOperationalStateClusterStartParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTROvenCavityOperationalStateClusterStartParams
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTROvenCavityOperationalStateClusterStartParamsable = (*MTROvenCavityOperationalStateClusterStartParams)(nil)
+

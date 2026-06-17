@@ -25,3 +25,10 @@ func NewVirtioGraphicsScanout() *VirtioGraphicsScanout {
 
 func (x *VirtioGraphicsScanout) asGraphicsDisplay() *raw.VZGraphicsDisplay { return &x.inner.VZGraphicsDisplay }
 
+// VirtioGraphicsScanoutable is the interface implemented by [VirtioGraphicsScanout], for mocking and DI.
+type VirtioGraphicsScanoutable interface {
+	Unwrap() *raw.VZVirtioGraphicsScanout
+}
+
+var _ VirtioGraphicsScanoutable = (*VirtioGraphicsScanout)(nil)
+

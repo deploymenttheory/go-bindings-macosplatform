@@ -31,5 +31,22 @@ func NewToolPickerEraserItemWithEraserTypeWidth(eraserType raw.PKEraserType, wid
 	return &ToolPickerEraserItem{inner: raw.PKToolPickerEraserItemFromID(_id)}
 }
 
+// EraserTool calls the underlying EraserTool.
+func (x *ToolPickerEraserItem) EraserTool() *EraserTool {
+	_r := x.inner.EraserTool()
+	if _r == nil {
+		return nil
+	}
+	return &EraserTool{inner: _r}
+}
+
 func (x *ToolPickerEraserItem) asToolPickerItem() *raw.PKToolPickerItem { return &x.inner.PKToolPickerItem }
+
+// ToolPickerEraserItemable is the interface implemented by [ToolPickerEraserItem], for mocking and DI.
+type ToolPickerEraserItemable interface {
+	Unwrap() *raw.PKToolPickerEraserItem
+	EraserTool() *EraserTool
+}
+
+var _ ToolPickerEraserItemable = (*ToolPickerEraserItem)(nil)
 

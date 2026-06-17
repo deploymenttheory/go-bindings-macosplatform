@@ -7,6 +7,7 @@ package mailkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mailkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,4 +25,31 @@ func NewEmailAddressWithRawString(rawString string) *EmailAddress {
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRawString:"), foundation.NSStringStringWithUTF8String(rawString).Ptr())
 	return &EmailAddress{inner: raw.MEEmailAddressFromID(_id)}
 }
+
+// RawString calls the underlying RawString.
+func (x *EmailAddress) RawString() string {
+	_r := x.inner.RawString()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// AddressString calls the underlying AddressString.
+func (x *EmailAddress) AddressString() string {
+	_r := x.inner.AddressString()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// EmailAddressable is the interface implemented by [EmailAddress], for mocking and DI.
+type EmailAddressable interface {
+	Unwrap() *raw.MEEmailAddress
+	RawString() string
+	AddressString() string
+}
+
+var _ EmailAddressable = (*EmailAddress)(nil)
 

@@ -23,3 +23,10 @@ func NewMeshBufferDataAllocator() *MeshBufferDataAllocator {
 	return &MeshBufferDataAllocator{inner: raw.MDLMeshBufferDataAllocatorFromID(_id)}
 }
 
+// MeshBufferDataAllocatorable is the interface implemented by [MeshBufferDataAllocator], for mocking and DI.
+type MeshBufferDataAllocatorable interface {
+	Unwrap() *raw.MDLMeshBufferDataAllocator
+}
+
+var _ MeshBufferDataAllocatorable = (*MeshBufferDataAllocator)(nil)
+

@@ -30,3 +30,56 @@ func NewHostCIDeviceStateMachineWithInterfaceCommandError(interface_ *raw.IOUSBH
 	return &HostCIDeviceStateMachine{inner: raw.IOUSBHostCIDeviceStateMachineFromID(_id)}, nil
 }
 
+// InspectCommandError calls the underlying InspectCommandError.
+func (x *HostCIDeviceStateMachine) InspectCommandError(command *raw.IOUSBHostCIMessage) (bool, error) {
+	return x.inner.InspectCommandError(command)
+}
+
+// RespondToCommandStatusError calls the underlying RespondToCommandStatusError.
+func (x *HostCIDeviceStateMachine) RespondToCommandStatusError(command *raw.IOUSBHostCIMessage, status raw.IOUSBHostCIMessageStatus) (bool, error) {
+	return x.inner.RespondToCommandStatusError(command, status)
+}
+
+// RespondToCommandStatusDeviceAddressError calls the underlying RespondToCommandStatusDeviceAddressError.
+func (x *HostCIDeviceStateMachine) RespondToCommandStatusDeviceAddressError(command *raw.IOUSBHostCIMessage, status raw.IOUSBHostCIMessageStatus, deviceAddress uint) (bool, error) {
+	return x.inner.RespondToCommandStatusDeviceAddressError(command, status, deviceAddress)
+}
+
+// DeviceState calls the underlying DeviceState.
+func (x *HostCIDeviceStateMachine) DeviceState() raw.IOUSBHostCIDeviceState {
+	return x.inner.DeviceState()
+}
+
+// CompleteRoute calls the underlying CompleteRoute.
+func (x *HostCIDeviceStateMachine) CompleteRoute() uint {
+	return x.inner.CompleteRoute()
+}
+
+// DeviceAddress calls the underlying DeviceAddress.
+func (x *HostCIDeviceStateMachine) DeviceAddress() uint {
+	return x.inner.DeviceAddress()
+}
+
+// ControllerInterface calls the underlying ControllerInterface.
+func (x *HostCIDeviceStateMachine) ControllerInterface() *HostControllerInterface {
+	_r := x.inner.ControllerInterface()
+	if _r == nil {
+		return nil
+	}
+	return &HostControllerInterface{inner: _r}
+}
+
+// HostCIDeviceStateMachineable is the interface implemented by [HostCIDeviceStateMachine], for mocking and DI.
+type HostCIDeviceStateMachineable interface {
+	Unwrap() *raw.IOUSBHostCIDeviceStateMachine
+	InspectCommandError(command *raw.IOUSBHostCIMessage) (bool, error)
+	RespondToCommandStatusError(command *raw.IOUSBHostCIMessage, status raw.IOUSBHostCIMessageStatus) (bool, error)
+	RespondToCommandStatusDeviceAddressError(command *raw.IOUSBHostCIMessage, status raw.IOUSBHostCIMessageStatus, deviceAddress uint) (bool, error)
+	DeviceState() raw.IOUSBHostCIDeviceState
+	CompleteRoute() uint
+	DeviceAddress() uint
+	ControllerInterface() *HostControllerInterface
+}
+
+var _ HostCIDeviceStateMachineable = (*HostCIDeviceStateMachine)(nil)
+

@@ -25,5 +25,18 @@ func NewUnsendMessagesIntentResponseWithCodeUserActivity(code raw.INUnsendMessag
 	return &UnsendMessagesIntentResponse{inner: raw.INUnsendMessagesIntentResponseFromID(_id)}
 }
 
+// Code calls the underlying Code.
+func (x *UnsendMessagesIntentResponse) Code() raw.INUnsendMessagesIntentResponseCode {
+	return x.inner.Code()
+}
+
 func (x *UnsendMessagesIntentResponse) asIntentResponse() *raw.INIntentResponse { return &x.inner.INIntentResponse }
+
+// UnsendMessagesIntentResponseable is the interface implemented by [UnsendMessagesIntentResponse], for mocking and DI.
+type UnsendMessagesIntentResponseable interface {
+	Unwrap() *raw.INUnsendMessagesIntentResponse
+	Code() raw.INUnsendMessagesIntentResponseCode
+}
+
+var _ UnsendMessagesIntentResponseable = (*UnsendMessagesIntentResponse)(nil)
 

@@ -25,3 +25,10 @@ func NewCNNSoftMax() *CNNSoftMax {
 
 func (x *CNNSoftMax) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSCNNKernel }
 
+// CNNSoftMaxable is the interface implemented by [CNNSoftMax], for mocking and DI.
+type CNNSoftMaxable interface {
+	Unwrap() *raw.MPSCNNSoftMax
+}
+
+var _ CNNSoftMaxable = (*CNNSoftMax)(nil)
+

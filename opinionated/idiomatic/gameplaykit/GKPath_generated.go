@@ -52,3 +52,60 @@ func (x *Path) WithCyclical(cyclical bool) *Path {
 	return x
 }
 
+// PointAtIndex calls the underlying PointAtIndex.
+func (x *Path) PointAtIndex(index uint) unsafe.Pointer {
+	return x.inner.PointAtIndex(index)
+}
+
+// Float2AtIndex calls the underlying Float2AtIndex.
+func (x *Path) Float2AtIndex(index uint) unsafe.Pointer {
+	return x.inner.Float2AtIndex(index)
+}
+
+// Float3AtIndex calls the underlying Float3AtIndex.
+func (x *Path) Float3AtIndex(index uint) unsafe.Pointer {
+	return x.inner.Float3AtIndex(index)
+}
+
+// Radius calls the underlying Radius.
+func (x *Path) Radius() float32 {
+	return x.inner.Radius()
+}
+
+// SetRadius calls the underlying SetRadius.
+func (x *Path) SetRadius(radius float32) {
+	x.inner.SetRadius(radius)
+}
+
+// NumPoints calls the underlying NumPoints.
+func (x *Path) NumPoints() uint {
+	return x.inner.NumPoints()
+}
+
+// IsCyclical calls the underlying IsCyclical.
+func (x *Path) IsCyclical() bool {
+	return x.inner.IsCyclical()
+}
+
+// SetCyclical calls the underlying SetCyclical.
+func (x *Path) SetCyclical(cyclical bool) {
+	x.inner.SetCyclical(cyclical)
+}
+
+// Pathable is the interface implemented by [Path], for mocking and DI.
+type Pathable interface {
+	Unwrap() *raw.GKPath
+	WithRadius(radius float32) *Path
+	WithCyclical(cyclical bool) *Path
+	PointAtIndex(index uint) unsafe.Pointer
+	Float2AtIndex(index uint) unsafe.Pointer
+	Float3AtIndex(index uint) unsafe.Pointer
+	Radius() float32
+	SetRadius(radius float32)
+	NumPoints() uint
+	IsCyclical() bool
+	SetCyclical(cyclical bool)
+}
+
+var _ Pathable = (*Path)(nil)
+

@@ -30,5 +30,25 @@ func (x *AVB17221AECPAVCMessage) WithCommandResponse(commandResponse *foundation
 	return x
 }
 
+// CommandResponse calls the underlying CommandResponse.
+func (x *AVB17221AECPAVCMessage) CommandResponse() *foundation.NSData {
+	return x.inner.CommandResponse()
+}
+
+// SetCommandResponse calls the underlying SetCommandResponse.
+func (x *AVB17221AECPAVCMessage) SetCommandResponse(commandResponse *foundation.NSData) {
+	x.inner.SetCommandResponse(commandResponse)
+}
+
 func (x *AVB17221AECPAVCMessage) asAVB17221AECPMessage() *raw.AVB17221AECPMessage { return &x.inner.AVB17221AECPMessage }
+
+// AVB17221AECPAVCMessageable is the interface implemented by [AVB17221AECPAVCMessage], for mocking and DI.
+type AVB17221AECPAVCMessageable interface {
+	Unwrap() *raw.AVB17221AECPAVCMessage
+	WithCommandResponse(commandResponse *foundation.NSData) *AVB17221AECPAVCMessage
+	CommandResponse() *foundation.NSData
+	SetCommandResponse(commandResponse *foundation.NSData)
+}
+
+var _ AVB17221AECPAVCMessageable = (*AVB17221AECPAVCMessage)(nil)
 

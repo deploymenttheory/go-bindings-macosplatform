@@ -25,3 +25,10 @@ func NewSoundEventNodeAsset() *SoundEventNodeAsset {
 
 func (x *SoundEventNodeAsset) asAsset() *raw.PHASEAsset { return &x.inner.PHASEAsset }
 
+// SoundEventNodeAssetable is the interface implemented by [SoundEventNodeAsset], for mocking and DI.
+type SoundEventNodeAssetable interface {
+	Unwrap() *raw.PHASESoundEventNodeAsset
+}
+
+var _ SoundEventNodeAssetable = (*SoundEventNodeAsset)(nil)
+

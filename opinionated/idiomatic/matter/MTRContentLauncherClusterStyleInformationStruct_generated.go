@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -48,5 +49,80 @@ func (x *MTRContentLauncherClusterStyleInformationStruct) WithSize(size MTRConte
 	return x
 }
 
+// ImageURL calls the underlying ImageURL.
+func (x *MTRContentLauncherClusterStyleInformationStruct) ImageURL() string {
+	_r := x.inner.ImageURL()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetImageURL calls the underlying SetImageURL.
+func (x *MTRContentLauncherClusterStyleInformationStruct) SetImageURL(imageURL string) {
+	x.inner.SetImageURL(foundation.NSStringStringWithUTF8String(imageURL))
+}
+
+// ImageUrl calls the underlying ImageUrl.
+func (x *MTRContentLauncherClusterStyleInformationStruct) ImageUrl() string {
+	_r := x.inner.ImageUrl()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetImageUrl calls the underlying SetImageUrl.
+func (x *MTRContentLauncherClusterStyleInformationStruct) SetImageUrl(imageUrl string) {
+	x.inner.SetImageUrl(foundation.NSStringStringWithUTF8String(imageUrl))
+}
+
+// Color calls the underlying Color.
+func (x *MTRContentLauncherClusterStyleInformationStruct) Color() string {
+	_r := x.inner.Color()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetColor calls the underlying SetColor.
+func (x *MTRContentLauncherClusterStyleInformationStruct) SetColor(color string) {
+	x.inner.SetColor(foundation.NSStringStringWithUTF8String(color))
+}
+
+// Size calls the underlying Size.
+func (x *MTRContentLauncherClusterStyleInformationStruct) Size() *MTRContentLauncherClusterDimensionStruct {
+	_r := x.inner.Size()
+	if _r == nil {
+		return nil
+	}
+	return &MTRContentLauncherClusterDimensionStruct{inner: _r}
+}
+
+// SetSize calls the underlying SetSize.
+func (x *MTRContentLauncherClusterStyleInformationStruct) SetSize(size *raw.MTRContentLauncherClusterDimensionStruct) {
+	x.inner.SetSize(size)
+}
+
 func (x *MTRContentLauncherClusterStyleInformationStruct) asMTRContentLauncherClusterStyleInformationStruct() *raw.MTRContentLauncherClusterStyleInformationStruct { return x.inner }
+
+// MTRContentLauncherClusterStyleInformationStructable is the interface implemented by [MTRContentLauncherClusterStyleInformationStruct], for mocking and DI.
+type MTRContentLauncherClusterStyleInformationStructable interface {
+	Unwrap() *raw.MTRContentLauncherClusterStyleInformationStruct
+	WithImageURL(imageURL string) *MTRContentLauncherClusterStyleInformationStruct
+	WithImageUrl(imageUrl string) *MTRContentLauncherClusterStyleInformationStruct
+	WithColor(color string) *MTRContentLauncherClusterStyleInformationStruct
+	WithSize(size MTRContentLauncherClusterDimensionStructProvider) *MTRContentLauncherClusterStyleInformationStruct
+	ImageURL() string
+	SetImageURL(imageURL string)
+	ImageUrl() string
+	SetImageUrl(imageUrl string)
+	Color() string
+	SetColor(color string)
+	Size() *MTRContentLauncherClusterDimensionStruct
+	SetSize(size *raw.MTRContentLauncherClusterDimensionStruct)
+}
+
+var _ MTRContentLauncherClusterStyleInformationStructable = (*MTRContentLauncherClusterStyleInformationStruct)(nil)
 

@@ -33,3 +33,10 @@ func (x *CNNSubtract) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel {
 
 func (x *CNNSubtract) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.MPSKernel }
 
+// CNNSubtractable is the interface implemented by [CNNSubtract], for mocking and DI.
+type CNNSubtractable interface {
+	Unwrap() *raw.MPSCNNSubtract
+}
+
+var _ CNNSubtractable = (*CNNSubtract)(nil)
+

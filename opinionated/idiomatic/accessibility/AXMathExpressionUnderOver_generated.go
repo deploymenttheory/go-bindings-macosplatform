@@ -24,5 +24,42 @@ func NewMathExpressionUnderOverWithBaseExpressionUnderExpressionOverExpression(b
 	return &MathExpressionUnderOver{inner: raw.AXMathExpressionUnderOverFromID(_id)}
 }
 
+// BaseExpression calls the underlying BaseExpression.
+func (x *MathExpressionUnderOver) BaseExpression() *MathExpression {
+	_r := x.inner.BaseExpression()
+	if _r == nil {
+		return nil
+	}
+	return &MathExpression{inner: _r}
+}
+
+// UnderExpression calls the underlying UnderExpression.
+func (x *MathExpressionUnderOver) UnderExpression() *MathExpression {
+	_r := x.inner.UnderExpression()
+	if _r == nil {
+		return nil
+	}
+	return &MathExpression{inner: _r}
+}
+
+// OverExpression calls the underlying OverExpression.
+func (x *MathExpressionUnderOver) OverExpression() *MathExpression {
+	_r := x.inner.OverExpression()
+	if _r == nil {
+		return nil
+	}
+	return &MathExpression{inner: _r}
+}
+
 func (x *MathExpressionUnderOver) asMathExpression() *raw.AXMathExpression { return &x.inner.AXMathExpression }
+
+// MathExpressionUnderOverable is the interface implemented by [MathExpressionUnderOver], for mocking and DI.
+type MathExpressionUnderOverable interface {
+	Unwrap() *raw.AXMathExpressionUnderOver
+	BaseExpression() *MathExpression
+	UnderExpression() *MathExpression
+	OverExpression() *MathExpression
+}
+
+var _ MathExpressionUnderOverable = (*MathExpressionUnderOver)(nil)
 

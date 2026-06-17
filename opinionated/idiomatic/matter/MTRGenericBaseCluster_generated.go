@@ -27,3 +27,10 @@ func (x *MTRGenericBaseCluster) asMTRGenericBaseCluster() *raw.MTRGenericBaseClu
 
 func (x *MTRGenericBaseCluster) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRCluster }
 
+// MTRGenericBaseClusterable is the interface implemented by [MTRGenericBaseCluster], for mocking and DI.
+type MTRGenericBaseClusterable interface {
+	Unwrap() *raw.MTRGenericBaseCluster
+}
+
+var _ MTRGenericBaseClusterable = (*MTRGenericBaseCluster)(nil)
+

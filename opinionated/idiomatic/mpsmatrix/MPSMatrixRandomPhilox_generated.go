@@ -50,3 +50,10 @@ func NewMatrixRandomPhiloxWithCoderDevice(aDecoder *foundation.NSCoder, device m
 
 func (x *MatrixRandomPhilox) asMatrixRandom() *raw.MPSMatrixRandom { return &x.inner.MPSMatrixRandom }
 
+// MatrixRandomPhiloxable is the interface implemented by [MatrixRandomPhilox], for mocking and DI.
+type MatrixRandomPhiloxable interface {
+	Unwrap() *raw.MPSMatrixRandomPhilox
+}
+
+var _ MatrixRandomPhiloxable = (*MatrixRandomPhilox)(nil)
+

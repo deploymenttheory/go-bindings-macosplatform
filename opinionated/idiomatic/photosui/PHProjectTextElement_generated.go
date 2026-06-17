@@ -5,7 +5,9 @@
 package photosui
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photosui"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +25,34 @@ func NewProjectTextElement() *ProjectTextElement {
 	return &ProjectTextElement{inner: raw.PHProjectTextElementFromID(_id)}
 }
 
+// Text calls the underlying Text.
+func (x *ProjectTextElement) Text() string {
+	_r := x.inner.Text()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// AttributedText calls the underlying AttributedText.
+func (x *ProjectTextElement) AttributedText() *foundation.NSAttributedString {
+	return x.inner.AttributedText()
+}
+
+// TextElementType calls the underlying TextElementType.
+func (x *ProjectTextElement) TextElementType() raw.PHProjectTextElementType {
+	return x.inner.TextElementType()
+}
+
 func (x *ProjectTextElement) asProjectElement() *raw.PHProjectElement { return &x.inner.PHProjectElement }
+
+// ProjectTextElementable is the interface implemented by [ProjectTextElement], for mocking and DI.
+type ProjectTextElementable interface {
+	Unwrap() *raw.PHProjectTextElement
+	Text() string
+	AttributedText() *foundation.NSAttributedString
+	TextElementType() raw.PHProjectTextElementType
+}
+
+var _ ProjectTextElementable = (*ProjectTextElement)(nil)
 

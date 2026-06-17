@@ -23,3 +23,10 @@ func NewStoreReviewController() *StoreReviewController {
 	return &StoreReviewController{inner: raw.SKStoreReviewControllerFromID(_id)}
 }
 
+// StoreReviewControllerable is the interface implemented by [StoreReviewController], for mocking and DI.
+type StoreReviewControllerable interface {
+	Unwrap() *raw.SKStoreReviewController
+}
+
+var _ StoreReviewControllerable = (*StoreReviewController)(nil)
+

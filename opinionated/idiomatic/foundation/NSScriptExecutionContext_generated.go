@@ -41,5 +41,51 @@ func (x *ScriptExecutionContext) WithRangeContainerObject(rangeContainerObject o
 	return x
 }
 
+// TopLevelObject calls the underlying TopLevelObject.
+func (x *ScriptExecutionContext) TopLevelObject() objc.ID {
+	return x.inner.TopLevelObject()
+}
+
+// SetTopLevelObject calls the underlying SetTopLevelObject.
+func (x *ScriptExecutionContext) SetTopLevelObject(topLevelObject objc.ID) {
+	x.inner.SetTopLevelObject(topLevelObject)
+}
+
+// ObjectBeingTested calls the underlying ObjectBeingTested.
+func (x *ScriptExecutionContext) ObjectBeingTested() objc.ID {
+	return x.inner.ObjectBeingTested()
+}
+
+// SetObjectBeingTested calls the underlying SetObjectBeingTested.
+func (x *ScriptExecutionContext) SetObjectBeingTested(objectBeingTested objc.ID) {
+	x.inner.SetObjectBeingTested(objectBeingTested)
+}
+
+// RangeContainerObject calls the underlying RangeContainerObject.
+func (x *ScriptExecutionContext) RangeContainerObject() objc.ID {
+	return x.inner.RangeContainerObject()
+}
+
+// SetRangeContainerObject calls the underlying SetRangeContainerObject.
+func (x *ScriptExecutionContext) SetRangeContainerObject(rangeContainerObject objc.ID) {
+	x.inner.SetRangeContainerObject(rangeContainerObject)
+}
+
 func (x *ScriptExecutionContext) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// ScriptExecutionContextable is the interface implemented by [ScriptExecutionContext], for mocking and DI.
+type ScriptExecutionContextable interface {
+	Unwrap() *raw.NSScriptExecutionContext
+	WithTopLevelObject(topLevelObject objc.ID) *ScriptExecutionContext
+	WithObjectBeingTested(objectBeingTested objc.ID) *ScriptExecutionContext
+	WithRangeContainerObject(rangeContainerObject objc.ID) *ScriptExecutionContext
+	TopLevelObject() objc.ID
+	SetTopLevelObject(topLevelObject objc.ID)
+	ObjectBeingTested() objc.ID
+	SetObjectBeingTested(objectBeingTested objc.ID)
+	RangeContainerObject() objc.ID
+	SetRangeContainerObject(rangeContainerObject objc.ID)
+}
+
+var _ ScriptExecutionContextable = (*ScriptExecutionContext)(nil)
 

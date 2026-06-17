@@ -31,3 +31,16 @@ func NewGenericMachineIdentifierWithDataRepresentation(dataRepresentation *found
 	return &GenericMachineIdentifier{inner: raw.VZGenericMachineIdentifierFromID(_id)}
 }
 
+// DataRepresentation calls the underlying DataRepresentation.
+func (x *GenericMachineIdentifier) DataRepresentation() *foundation.NSData {
+	return x.inner.DataRepresentation()
+}
+
+// GenericMachineIdentifierable is the interface implemented by [GenericMachineIdentifier], for mocking and DI.
+type GenericMachineIdentifierable interface {
+	Unwrap() *raw.VZGenericMachineIdentifier
+	DataRepresentation() *foundation.NSData
+}
+
+var _ GenericMachineIdentifierable = (*GenericMachineIdentifier)(nil)
+

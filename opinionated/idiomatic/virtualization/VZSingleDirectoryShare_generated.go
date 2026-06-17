@@ -24,5 +24,22 @@ func NewSingleDirectoryShareWithDirectory(directory *raw.VZSharedDirectory) *Sin
 	return &SingleDirectoryShare{inner: raw.VZSingleDirectoryShareFromID(_id)}
 }
 
+// Directory calls the underlying Directory.
+func (x *SingleDirectoryShare) Directory() *SharedDirectory {
+	_r := x.inner.Directory()
+	if _r == nil {
+		return nil
+	}
+	return &SharedDirectory{inner: _r}
+}
+
 func (x *SingleDirectoryShare) asDirectoryShare() *raw.VZDirectoryShare { return &x.inner.VZDirectoryShare }
+
+// SingleDirectoryShareable is the interface implemented by [SingleDirectoryShare], for mocking and DI.
+type SingleDirectoryShareable interface {
+	Unwrap() *raw.VZSingleDirectoryShare
+	Directory() *SharedDirectory
+}
+
+var _ SingleDirectoryShareable = (*SingleDirectoryShare)(nil)
 

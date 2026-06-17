@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -25,17 +26,20 @@ func NewGradientPolylineRenderer() *GradientPolylineRenderer {
 	return &GradientPolylineRenderer{inner: raw.MKGradientPolylineRendererFromID(_id)}
 }
 
+// SetColorsAtLocations calls the underlying SetColorsAtLocations.
+func (x *GradientPolylineRenderer) SetColorsAtLocations(colors *foundation.NSArray[*appkit.NSColor], locations *foundation.NSArray[*foundation.NSNumber]) {
+	x.inner.SetColorsAtLocations(colors, locations)
+}
+
 // Locations returns the collection as a Go slice.
 func (x *GradientPolylineRenderer) Locations() []*foundation.NSNumber {
 	arr := x.inner.Locations()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
 }
 
 // Colors returns the collection as a Go slice.
@@ -44,11 +48,9 @@ func (x *GradientPolylineRenderer) Colors() []*appkit.NSColor {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*appkit.NSColor, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *appkit.NSColor {
+		return appkit.NSColorFromID(purego.Retain(_id))
+	})
 }
 
 func (x *GradientPolylineRenderer) asPolylineRenderer() *raw.MKPolylineRenderer { return &x.inner.MKPolylineRenderer }
@@ -56,4 +58,14 @@ func (x *GradientPolylineRenderer) asPolylineRenderer() *raw.MKPolylineRenderer 
 func (x *GradientPolylineRenderer) asOverlayPathRenderer() *raw.MKOverlayPathRenderer { return &x.inner.MKPolylineRenderer.MKOverlayPathRenderer }
 
 func (x *GradientPolylineRenderer) asOverlayRenderer() *raw.MKOverlayRenderer { return &x.inner.MKPolylineRenderer.MKOverlayPathRenderer.MKOverlayRenderer }
+
+// GradientPolylineRendererable is the interface implemented by [GradientPolylineRenderer], for mocking and DI.
+type GradientPolylineRendererable interface {
+	Unwrap() *raw.MKGradientPolylineRenderer
+	SetColorsAtLocations(colors *foundation.NSArray[*appkit.NSColor], locations *foundation.NSArray[*foundation.NSNumber])
+	Locations() []*foundation.NSNumber
+	Colors() []*appkit.NSColor
+}
+
+var _ GradientPolylineRendererable = (*GradientPolylineRenderer)(nil)
 

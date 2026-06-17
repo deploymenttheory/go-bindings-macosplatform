@@ -5,7 +5,9 @@
 package webkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,16 +25,94 @@ func NewWKUserContentController() *WKUserContentController {
 	return &WKUserContentController{inner: raw.WKUserContentControllerFromID(_id)}
 }
 
+// AddUserScript calls the underlying AddUserScript.
+func (x *WKUserContentController) AddUserScript(userScript *raw.WKUserScript) {
+	x.inner.AddUserScript(userScript)
+}
+
+// RemoveAllUserScripts calls the underlying RemoveAllUserScripts.
+func (x *WKUserContentController) RemoveAllUserScripts() {
+	x.inner.RemoveAllUserScripts()
+}
+
+// AddScriptMessageHandlerContentWorldName calls the underlying AddScriptMessageHandlerContentWorldName.
+func (x *WKUserContentController) AddScriptMessageHandlerContentWorldName(scriptMessageHandler raw.WKScriptMessageHandler, world *raw.WKContentWorld, name string) {
+	x.inner.AddScriptMessageHandlerContentWorldName(scriptMessageHandler, world, foundation.NSStringStringWithUTF8String(name))
+}
+
+// AddScriptMessageHandlerWithReplyContentWorldName calls the underlying AddScriptMessageHandlerWithReplyContentWorldName.
+func (x *WKUserContentController) AddScriptMessageHandlerWithReplyContentWorldName(scriptMessageHandlerWithReply raw.WKScriptMessageHandlerWithReply, contentWorld *raw.WKContentWorld, name string) {
+	x.inner.AddScriptMessageHandlerWithReplyContentWorldName(scriptMessageHandlerWithReply, contentWorld, foundation.NSStringStringWithUTF8String(name))
+}
+
+// AddScriptMessageHandlerName calls the underlying AddScriptMessageHandlerName.
+func (x *WKUserContentController) AddScriptMessageHandlerName(scriptMessageHandler raw.WKScriptMessageHandler, name string) {
+	x.inner.AddScriptMessageHandlerName(scriptMessageHandler, foundation.NSStringStringWithUTF8String(name))
+}
+
+// RemoveScriptMessageHandlerForNameContentWorld calls the underlying RemoveScriptMessageHandlerForNameContentWorld.
+func (x *WKUserContentController) RemoveScriptMessageHandlerForNameContentWorld(name string, contentWorld *raw.WKContentWorld) {
+	x.inner.RemoveScriptMessageHandlerForNameContentWorld(foundation.NSStringStringWithUTF8String(name), contentWorld)
+}
+
+// RemoveScriptMessageHandlerForName calls the underlying RemoveScriptMessageHandlerForName.
+func (x *WKUserContentController) RemoveScriptMessageHandlerForName(name string) {
+	x.inner.RemoveScriptMessageHandlerForName(foundation.NSStringStringWithUTF8String(name))
+}
+
+// RemoveAllScriptMessageHandlersFromContentWorld calls the underlying RemoveAllScriptMessageHandlersFromContentWorld.
+func (x *WKUserContentController) RemoveAllScriptMessageHandlersFromContentWorld(contentWorld *raw.WKContentWorld) {
+	x.inner.RemoveAllScriptMessageHandlersFromContentWorld(contentWorld)
+}
+
+// RemoveAllScriptMessageHandlers calls the underlying RemoveAllScriptMessageHandlers.
+func (x *WKUserContentController) RemoveAllScriptMessageHandlers() {
+	x.inner.RemoveAllScriptMessageHandlers()
+}
+
+// AddContentRuleList calls the underlying AddContentRuleList.
+func (x *WKUserContentController) AddContentRuleList(contentRuleList *raw.WKContentRuleList) {
+	x.inner.AddContentRuleList(contentRuleList)
+}
+
+// RemoveContentRuleList calls the underlying RemoveContentRuleList.
+func (x *WKUserContentController) RemoveContentRuleList(contentRuleList *raw.WKContentRuleList) {
+	x.inner.RemoveContentRuleList(contentRuleList)
+}
+
+// RemoveAllContentRuleLists calls the underlying RemoveAllContentRuleLists.
+func (x *WKUserContentController) RemoveAllContentRuleLists() {
+	x.inner.RemoveAllContentRuleLists()
+}
+
 // UserScripts returns the collection as a Go slice.
 func (x *WKUserContentController) UserScripts() []*raw.WKUserScript {
 	arr := x.inner.UserScripts()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.WKUserScript, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.WKUserScript {
+		return raw.WKUserScriptFromID(purego.Retain(_id))
+	})
 }
+
+// WKUserContentControllerable is the interface implemented by [WKUserContentController], for mocking and DI.
+type WKUserContentControllerable interface {
+	Unwrap() *raw.WKUserContentController
+	AddUserScript(userScript *raw.WKUserScript)
+	RemoveAllUserScripts()
+	AddScriptMessageHandlerContentWorldName(scriptMessageHandler raw.WKScriptMessageHandler, world *raw.WKContentWorld, name string)
+	AddScriptMessageHandlerWithReplyContentWorldName(scriptMessageHandlerWithReply raw.WKScriptMessageHandlerWithReply, contentWorld *raw.WKContentWorld, name string)
+	AddScriptMessageHandlerName(scriptMessageHandler raw.WKScriptMessageHandler, name string)
+	RemoveScriptMessageHandlerForNameContentWorld(name string, contentWorld *raw.WKContentWorld)
+	RemoveScriptMessageHandlerForName(name string)
+	RemoveAllScriptMessageHandlersFromContentWorld(contentWorld *raw.WKContentWorld)
+	RemoveAllScriptMessageHandlers()
+	AddContentRuleList(contentRuleList *raw.WKContentRuleList)
+	RemoveContentRuleList(contentRuleList *raw.WKContentRuleList)
+	RemoveAllContentRuleLists()
+	UserScripts() []*raw.WKUserScript
+}
+
+var _ WKUserContentControllerable = (*WKUserContentController)(nil)
 

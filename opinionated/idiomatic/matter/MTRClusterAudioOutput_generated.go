@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // MTRClusterAudioOutput wraps [raw.MTRClusterAudioOutput] with a fluent Go API.
@@ -32,7 +33,80 @@ func NewMTRClusterAudioOutputWithDeviceEndpointQueue(device *raw.MTRDevice, endp
 	return &MTRClusterAudioOutput{inner: raw.MTRClusterAudioOutputFromID(_id)}
 }
 
+// SelectOutputWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying SelectOutputWithParamsExpectedValuesExpectedValueIntervalCompletion.
+func (x *MTRClusterAudioOutput) SelectOutputWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRAudioOutputClusterSelectOutputParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.SelectOutputWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+}
+
+// RenameOutputWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying RenameOutputWithParamsExpectedValuesExpectedValueIntervalCompletion.
+func (x *MTRClusterAudioOutput) RenameOutputWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRAudioOutputClusterRenameOutputParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.RenameOutputWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+}
+
+// ReadAttributeOutputListWithParams calls the underlying ReadAttributeOutputListWithParams.
+func (x *MTRClusterAudioOutput) ReadAttributeOutputListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeOutputListWithParams(params)
+}
+
+// ReadAttributeCurrentOutputWithParams calls the underlying ReadAttributeCurrentOutputWithParams.
+func (x *MTRClusterAudioOutput) ReadAttributeCurrentOutputWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeCurrentOutputWithParams(params)
+}
+
+// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
+func (x *MTRClusterAudioOutput) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+}
+
+// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
+func (x *MTRClusterAudioOutput) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
+}
+
+// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
+func (x *MTRClusterAudioOutput) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeAttributeListWithParams(params)
+}
+
+// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
+func (x *MTRClusterAudioOutput) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeFeatureMapWithParams(params)
+}
+
+// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
+func (x *MTRClusterAudioOutput) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeClusterRevisionWithParams(params)
+}
+
+// SelectOutputWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying SelectOutputWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
+func (x *MTRClusterAudioOutput) SelectOutputWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRAudioOutputClusterSelectOutputParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
+	x.inner.SelectOutputWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
+}
+
+// RenameOutputWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying RenameOutputWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
+func (x *MTRClusterAudioOutput) RenameOutputWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRAudioOutputClusterRenameOutputParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
+	x.inner.RenameOutputWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
+}
+
 func (x *MTRClusterAudioOutput) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
 
 func (x *MTRClusterAudioOutput) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+
+// MTRClusterAudioOutputable is the interface implemented by [MTRClusterAudioOutput], for mocking and DI.
+type MTRClusterAudioOutputable interface {
+	Unwrap() *raw.MTRClusterAudioOutput
+	SelectOutputWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRAudioOutputClusterSelectOutputParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
+	RenameOutputWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRAudioOutputClusterRenameOutputParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
+	ReadAttributeOutputListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeCurrentOutputWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	SelectOutputWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRAudioOutputClusterSelectOutputParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
+	RenameOutputWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRAudioOutputClusterRenameOutputParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
+}
+
+var _ MTRClusterAudioOutputable = (*MTRClusterAudioOutput)(nil)
 

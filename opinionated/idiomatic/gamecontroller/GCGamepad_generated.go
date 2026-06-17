@@ -29,7 +29,117 @@ func (x *Gamepad) WithValueChangedHandler(valueChangedHandler func(*raw.GCGamepa
 	return x
 }
 
+// SaveSnapshot calls the underlying SaveSnapshot.
+func (x *Gamepad) SaveSnapshot() *GamepadSnapshot {
+	_r := x.inner.SaveSnapshot()
+	if _r == nil {
+		return nil
+	}
+	return &GamepadSnapshot{inner: _r}
+}
+
+// Controller calls the underlying Controller.
+func (x *Gamepad) Controller() *Controller {
+	_r := x.inner.Controller()
+	if _r == nil {
+		return nil
+	}
+	return &Controller{inner: _r}
+}
+
+// ValueChangedHandler calls the underlying ValueChangedHandler.
+func (x *Gamepad) ValueChangedHandler() objc.Block {
+	return x.inner.ValueChangedHandler()
+}
+
+// SetValueChangedHandler calls the underlying SetValueChangedHandler.
+func (x *Gamepad) SetValueChangedHandler(valueChangedHandler func(*raw.GCGamepad, *raw.GCControllerElement)) {
+	x.inner.SetValueChangedHandler(valueChangedHandler)
+}
+
+// Dpad calls the underlying Dpad.
+func (x *Gamepad) Dpad() *ControllerDirectionPad {
+	_r := x.inner.Dpad()
+	if _r == nil {
+		return nil
+	}
+	return &ControllerDirectionPad{inner: _r}
+}
+
+// ButtonA calls the underlying ButtonA.
+func (x *Gamepad) ButtonA() *ControllerButtonInput {
+	_r := x.inner.ButtonA()
+	if _r == nil {
+		return nil
+	}
+	return &ControllerButtonInput{inner: _r}
+}
+
+// ButtonB calls the underlying ButtonB.
+func (x *Gamepad) ButtonB() *ControllerButtonInput {
+	_r := x.inner.ButtonB()
+	if _r == nil {
+		return nil
+	}
+	return &ControllerButtonInput{inner: _r}
+}
+
+// ButtonX calls the underlying ButtonX.
+func (x *Gamepad) ButtonX() *ControllerButtonInput {
+	_r := x.inner.ButtonX()
+	if _r == nil {
+		return nil
+	}
+	return &ControllerButtonInput{inner: _r}
+}
+
+// ButtonY calls the underlying ButtonY.
+func (x *Gamepad) ButtonY() *ControllerButtonInput {
+	_r := x.inner.ButtonY()
+	if _r == nil {
+		return nil
+	}
+	return &ControllerButtonInput{inner: _r}
+}
+
+// LeftShoulder calls the underlying LeftShoulder.
+func (x *Gamepad) LeftShoulder() *ControllerButtonInput {
+	_r := x.inner.LeftShoulder()
+	if _r == nil {
+		return nil
+	}
+	return &ControllerButtonInput{inner: _r}
+}
+
+// RightShoulder calls the underlying RightShoulder.
+func (x *Gamepad) RightShoulder() *ControllerButtonInput {
+	_r := x.inner.RightShoulder()
+	if _r == nil {
+		return nil
+	}
+	return &ControllerButtonInput{inner: _r}
+}
+
 func (x *Gamepad) asGamepad() *raw.GCGamepad { return x.inner }
 
 func (x *Gamepad) asPhysicalInputProfile() *raw.GCPhysicalInputProfile { return &x.inner.GCPhysicalInputProfile }
+
+// Gamepadable is the interface implemented by [Gamepad], for mocking and DI.
+type Gamepadable interface {
+	Unwrap() *raw.GCGamepad
+	WithValueChangedHandler(valueChangedHandler func(*raw.GCGamepad, *raw.GCControllerElement)) *Gamepad
+	SaveSnapshot() *GamepadSnapshot
+	Controller() *Controller
+	ValueChangedHandler() objc.Block
+	SetValueChangedHandler(valueChangedHandler func(*raw.GCGamepad, *raw.GCControllerElement))
+	Dpad() *ControllerDirectionPad
+	ButtonA() *ControllerButtonInput
+	ButtonB() *ControllerButtonInput
+	ButtonX() *ControllerButtonInput
+	ButtonY() *ControllerButtonInput
+	LeftShoulder() *ControllerButtonInput
+	RightShoulder() *ControllerButtonInput
+}
+
+var _ Gamepadable = (*Gamepad)(nil)
 

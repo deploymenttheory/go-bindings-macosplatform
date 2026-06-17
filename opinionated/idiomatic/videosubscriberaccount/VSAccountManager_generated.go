@@ -29,3 +29,23 @@ func (x *VSAccountManager) WithDelegate(delegate raw.VSAccountManagerDelegate) *
 	return x
 }
 
+// Delegate calls the underlying Delegate.
+func (x *VSAccountManager) Delegate() raw.VSAccountManagerDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *VSAccountManager) SetDelegate(delegate raw.VSAccountManagerDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// VSAccountManagerable is the interface implemented by [VSAccountManager], for mocking and DI.
+type VSAccountManagerable interface {
+	Unwrap() *raw.VSAccountManager
+	WithDelegate(delegate raw.VSAccountManagerDelegate) *VSAccountManager
+	Delegate() raw.VSAccountManagerDelegate
+	SetDelegate(delegate raw.VSAccountManagerDelegate)
+}
+
+var _ VSAccountManagerable = (*VSAccountManager)(nil)
+

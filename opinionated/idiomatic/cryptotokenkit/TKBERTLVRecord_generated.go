@@ -34,3 +34,10 @@ func NewBERTLVRecordWithTagRecords(tag uint64, records *foundation.NSArray[*raw.
 
 func (x *BERTLVRecord) asTLVRecord() *raw.TKTLVRecord { return &x.inner.TKTLVRecord }
 
+// BERTLVRecordable is the interface implemented by [BERTLVRecord], for mocking and DI.
+type BERTLVRecordable interface {
+	Unwrap() *raw.TKBERTLVRecord
+}
+
+var _ BERTLVRecordable = (*BERTLVRecord)(nil)
+

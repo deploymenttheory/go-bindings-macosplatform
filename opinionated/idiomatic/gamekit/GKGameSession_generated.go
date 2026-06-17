@@ -27,15 +27,87 @@ func NewGameSession() *GameSession {
 	return &GameSession{inner: raw.GKGameSessionFromID(_id)}
 }
 
+// GetShareURL blocks until the operation completes or ctx is cancelled.
+func (x *GameSession) GetShareURL(ctx context.Context) (*foundation.NSURL, error) {
+	type _result struct {
+		val *foundation.NSURL
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.GetShareURLWithCompletionHandler(func(_p0 *foundation.NSURL, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSURL
+		return _zero, ctx.Err()
+	}
+}
+
+// LoadData blocks until the operation completes or ctx is cancelled.
+func (x *GameSession) LoadData(ctx context.Context) (*foundation.NSData, error) {
+	type _result struct {
+		val *foundation.NSData
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.LoadDataWithCompletionHandler(func(_p0 *foundation.NSData, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSData
+		return _zero, ctx.Err()
+	}
+}
+
+// SaveData blocks until the operation completes or ctx is cancelled.
+func (x *GameSession) SaveData(ctx context.Context, data *foundation.NSData) (*foundation.NSData, error) {
+	type _result struct {
+		val *foundation.NSData
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SaveDataCompletionHandler(data, func(_p0 *foundation.NSData, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSData
+		return _zero, ctx.Err()
+	}
+}
+
 // SetConnectionState blocks until the operation completes or ctx is cancelled.
 func (x *GameSession) SetConnectionState(ctx context.Context, state raw.GKConnectionState) error {
 	_ch := make(chan error, 1)
 	x.inner.SetConnectionStateCompletionHandler(state, func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -45,15 +117,20 @@ func (x *GameSession) SetConnectionState(ctx context.Context, state raw.GKConnec
 	}
 }
 
+// PlayersWithConnectionState calls the underlying PlayersWithConnectionState.
+func (x *GameSession) PlayersWithConnectionState(state raw.GKConnectionState) *foundation.NSArray[*raw.GKCloudPlayer] {
+	return x.inner.PlayersWithConnectionState(state)
+}
+
 // SendDataWithTransportType blocks until the operation completes or ctx is cancelled.
 func (x *GameSession) SendDataWithTransportType(ctx context.Context, data *foundation.NSData, transport raw.GKTransportType) error {
 	_ch := make(chan error, 1)
 	x.inner.SendDataWithTransportTypeCompletionHandler(data, transport, func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -67,11 +144,11 @@ func (x *GameSession) SendDataWithTransportType(ctx context.Context, data *found
 func (x *GameSession) SendMessageWithLocalizedFormatKeyArgumentsDataToPlayersBadgePlayers(ctx context.Context, key string, arguments *foundation.NSArray[*foundation.NSString], data *foundation.NSData, players *foundation.NSArray[*raw.GKCloudPlayer], badgePlayers bool) error {
 	_ch := make(chan error, 1)
 	x.inner.SendMessageWithLocalizedFormatKeyArgumentsDataToPlayersBadgePlayersCompletionHandler(foundation.NSStringStringWithUTF8String(key), arguments, data, players, badgePlayers, func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -85,11 +162,11 @@ func (x *GameSession) SendMessageWithLocalizedFormatKeyArgumentsDataToPlayersBad
 func (x *GameSession) ClearBadgeForPlayers(ctx context.Context, players *foundation.NSArray[*raw.GKCloudPlayer]) error {
 	_ch := make(chan error, 1)
 	x.inner.ClearBadgeForPlayersCompletionHandler(players, func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -99,17 +176,61 @@ func (x *GameSession) ClearBadgeForPlayers(ctx context.Context, players *foundat
 	}
 }
 
+// Identifier calls the underlying Identifier.
+func (x *GameSession) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Title calls the underlying Title.
+func (x *GameSession) Title() string {
+	_r := x.inner.Title()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Owner calls the underlying Owner.
+func (x *GameSession) Owner() *CloudPlayer {
+	_r := x.inner.Owner()
+	if _r == nil {
+		return nil
+	}
+	return &CloudPlayer{inner: _r}
+}
+
 // Players returns the collection as a Go slice.
 func (x *GameSession) Players() []*raw.GKCloudPlayer {
 	arr := x.inner.Players()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.GKCloudPlayer, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.GKCloudPlayer {
+		return raw.GKCloudPlayerFromID(purego.Retain(_id))
+	})
+}
+
+// LastModifiedDate calls the underlying LastModifiedDate.
+func (x *GameSession) LastModifiedDate() *foundation.NSDate {
+	return x.inner.LastModifiedDate()
+}
+
+// LastModifiedPlayer calls the underlying LastModifiedPlayer.
+func (x *GameSession) LastModifiedPlayer() *CloudPlayer {
+	_r := x.inner.LastModifiedPlayer()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &CloudPlayer{inner: _r}
+}
+
+// MaxNumberOfConnectedPlayers calls the underlying MaxNumberOfConnectedPlayers.
+func (x *GameSession) MaxNumberOfConnectedPlayers() int {
+	return x.inner.MaxNumberOfConnectedPlayers()
 }
 
 // BadgedPlayers returns the collection as a Go slice.
@@ -118,10 +239,31 @@ func (x *GameSession) BadgedPlayers() []*raw.GKCloudPlayer {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.GKCloudPlayer, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.GKCloudPlayer {
+		return raw.GKCloudPlayerFromID(purego.Retain(_id))
+	})
 }
+
+// GameSessionable is the interface implemented by [GameSession], for mocking and DI.
+type GameSessionable interface {
+	Unwrap() *raw.GKGameSession
+	GetShareURL(ctx context.Context) (*foundation.NSURL, error)
+	LoadData(ctx context.Context) (*foundation.NSData, error)
+	SaveData(ctx context.Context, data *foundation.NSData) (*foundation.NSData, error)
+	SetConnectionState(ctx context.Context, state raw.GKConnectionState) error
+	PlayersWithConnectionState(state raw.GKConnectionState) *foundation.NSArray[*raw.GKCloudPlayer]
+	SendDataWithTransportType(ctx context.Context, data *foundation.NSData, transport raw.GKTransportType) error
+	SendMessageWithLocalizedFormatKeyArgumentsDataToPlayersBadgePlayers(ctx context.Context, key string, arguments *foundation.NSArray[*foundation.NSString], data *foundation.NSData, players *foundation.NSArray[*raw.GKCloudPlayer], badgePlayers bool) error
+	ClearBadgeForPlayers(ctx context.Context, players *foundation.NSArray[*raw.GKCloudPlayer]) error
+	Identifier() string
+	Title() string
+	Owner() *CloudPlayer
+	Players() []*raw.GKCloudPlayer
+	LastModifiedDate() *foundation.NSDate
+	LastModifiedPlayer() *CloudPlayer
+	MaxNumberOfConnectedPlayers() int
+	BadgedPlayers() []*raw.GKCloudPlayer
+}
+
+var _ GameSessionable = (*GameSession)(nil)
 

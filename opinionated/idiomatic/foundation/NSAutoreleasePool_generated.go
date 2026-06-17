@@ -23,5 +23,24 @@ func NewAutoreleasePool() *AutoreleasePool {
 	return &AutoreleasePool{inner: raw.NSAutoreleasePoolFromID(_id)}
 }
 
+// AddObject calls the underlying AddObject.
+func (x *AutoreleasePool) AddObject(anObject objc.ID) {
+	x.inner.AddObject(anObject)
+}
+
+// Drain calls the underlying Drain.
+func (x *AutoreleasePool) Drain() {
+	x.inner.Drain()
+}
+
 func (x *AutoreleasePool) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// AutoreleasePoolable is the interface implemented by [AutoreleasePool], for mocking and DI.
+type AutoreleasePoolable interface {
+	Unwrap() *raw.NSAutoreleasePool
+	AddObject(anObject objc.ID)
+	Drain()
+}
+
+var _ AutoreleasePoolable = (*AutoreleasePool)(nil)
 

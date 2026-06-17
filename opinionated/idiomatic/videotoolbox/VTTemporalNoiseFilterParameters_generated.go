@@ -7,6 +7,7 @@ package videotoolbox
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/videotoolbox"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -37,17 +38,24 @@ func (x *TemporalNoiseFilterParameters) WithHasDiscontinuity(hasDiscontinuity bo
 	return x
 }
 
+// SourceFrame calls the underlying SourceFrame.
+func (x *TemporalNoiseFilterParameters) SourceFrame() *FrameProcessorFrame {
+	_r := x.inner.SourceFrame()
+	if _r == nil {
+		return nil
+	}
+	return &FrameProcessorFrame{inner: _r}
+}
+
 // NextFrames returns the collection as a Go slice.
 func (x *TemporalNoiseFilterParameters) NextFrames() []*raw.VTFrameProcessorFrame {
 	arr := x.inner.NextFrames()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.VTFrameProcessorFrame, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.VTFrameProcessorFrame {
+		return raw.VTFrameProcessorFrameFromID(purego.Retain(_id))
+	})
 }
 
 // PreviousFrames returns the collection as a Go slice.
@@ -56,10 +64,54 @@ func (x *TemporalNoiseFilterParameters) PreviousFrames() []*raw.VTFrameProcessor
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.VTFrameProcessorFrame, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.VTFrameProcessorFrame {
+		return raw.VTFrameProcessorFrameFromID(purego.Retain(_id))
+	})
 }
+
+// FilterStrength calls the underlying FilterStrength.
+func (x *TemporalNoiseFilterParameters) FilterStrength() float32 {
+	return x.inner.FilterStrength()
+}
+
+// SetFilterStrength calls the underlying SetFilterStrength.
+func (x *TemporalNoiseFilterParameters) SetFilterStrength(filterStrength float32) {
+	x.inner.SetFilterStrength(filterStrength)
+}
+
+// HasDiscontinuity calls the underlying HasDiscontinuity.
+func (x *TemporalNoiseFilterParameters) HasDiscontinuity() bool {
+	return x.inner.HasDiscontinuity()
+}
+
+// SetHasDiscontinuity calls the underlying SetHasDiscontinuity.
+func (x *TemporalNoiseFilterParameters) SetHasDiscontinuity(hasDiscontinuity bool) {
+	x.inner.SetHasDiscontinuity(hasDiscontinuity)
+}
+
+// DestinationFrame calls the underlying DestinationFrame.
+func (x *TemporalNoiseFilterParameters) DestinationFrame() *FrameProcessorFrame {
+	_r := x.inner.DestinationFrame()
+	if _r == nil {
+		return nil
+	}
+	return &FrameProcessorFrame{inner: _r}
+}
+
+// TemporalNoiseFilterParametersable is the interface implemented by [TemporalNoiseFilterParameters], for mocking and DI.
+type TemporalNoiseFilterParametersable interface {
+	Unwrap() *raw.VTTemporalNoiseFilterParameters
+	WithFilterStrength(filterStrength float32) *TemporalNoiseFilterParameters
+	WithHasDiscontinuity(hasDiscontinuity bool) *TemporalNoiseFilterParameters
+	SourceFrame() *FrameProcessorFrame
+	NextFrames() []*raw.VTFrameProcessorFrame
+	PreviousFrames() []*raw.VTFrameProcessorFrame
+	FilterStrength() float32
+	SetFilterStrength(filterStrength float32)
+	HasDiscontinuity() bool
+	SetHasDiscontinuity(hasDiscontinuity bool)
+	DestinationFrame() *FrameProcessorFrame
+}
+
+var _ TemporalNoiseFilterParametersable = (*TemporalNoiseFilterParameters)(nil)
 

@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -60,5 +61,114 @@ func (x *MTRContentLauncherClusterBrandingInformationStruct) WithWaterMark(water
 	return x
 }
 
+// ProviderName calls the underlying ProviderName.
+func (x *MTRContentLauncherClusterBrandingInformationStruct) ProviderName() string {
+	_r := x.inner.ProviderName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetProviderName calls the underlying SetProviderName.
+func (x *MTRContentLauncherClusterBrandingInformationStruct) SetProviderName(providerName string) {
+	x.inner.SetProviderName(foundation.NSStringStringWithUTF8String(providerName))
+}
+
+// Background calls the underlying Background.
+func (x *MTRContentLauncherClusterBrandingInformationStruct) Background() *MTRContentLauncherClusterStyleInformationStruct {
+	_r := x.inner.Background()
+	if _r == nil {
+		return nil
+	}
+	return &MTRContentLauncherClusterStyleInformationStruct{inner: _r}
+}
+
+// SetBackground calls the underlying SetBackground.
+func (x *MTRContentLauncherClusterBrandingInformationStruct) SetBackground(background *raw.MTRContentLauncherClusterStyleInformationStruct) {
+	x.inner.SetBackground(background)
+}
+
+// Logo calls the underlying Logo.
+func (x *MTRContentLauncherClusterBrandingInformationStruct) Logo() *MTRContentLauncherClusterStyleInformationStruct {
+	_r := x.inner.Logo()
+	if _r == nil {
+		return nil
+	}
+	return &MTRContentLauncherClusterStyleInformationStruct{inner: _r}
+}
+
+// SetLogo calls the underlying SetLogo.
+func (x *MTRContentLauncherClusterBrandingInformationStruct) SetLogo(logo *raw.MTRContentLauncherClusterStyleInformationStruct) {
+	x.inner.SetLogo(logo)
+}
+
+// ProgressBar calls the underlying ProgressBar.
+func (x *MTRContentLauncherClusterBrandingInformationStruct) ProgressBar() *MTRContentLauncherClusterStyleInformationStruct {
+	_r := x.inner.ProgressBar()
+	if _r == nil {
+		return nil
+	}
+	return &MTRContentLauncherClusterStyleInformationStruct{inner: _r}
+}
+
+// SetProgressBar calls the underlying SetProgressBar.
+func (x *MTRContentLauncherClusterBrandingInformationStruct) SetProgressBar(progressBar *raw.MTRContentLauncherClusterStyleInformationStruct) {
+	x.inner.SetProgressBar(progressBar)
+}
+
+// Splash calls the underlying Splash.
+func (x *MTRContentLauncherClusterBrandingInformationStruct) Splash() *MTRContentLauncherClusterStyleInformationStruct {
+	_r := x.inner.Splash()
+	if _r == nil {
+		return nil
+	}
+	return &MTRContentLauncherClusterStyleInformationStruct{inner: _r}
+}
+
+// SetSplash calls the underlying SetSplash.
+func (x *MTRContentLauncherClusterBrandingInformationStruct) SetSplash(splash *raw.MTRContentLauncherClusterStyleInformationStruct) {
+	x.inner.SetSplash(splash)
+}
+
+// WaterMark calls the underlying WaterMark.
+func (x *MTRContentLauncherClusterBrandingInformationStruct) WaterMark() *MTRContentLauncherClusterStyleInformationStruct {
+	_r := x.inner.WaterMark()
+	if _r == nil {
+		return nil
+	}
+	return &MTRContentLauncherClusterStyleInformationStruct{inner: _r}
+}
+
+// SetWaterMark calls the underlying SetWaterMark.
+func (x *MTRContentLauncherClusterBrandingInformationStruct) SetWaterMark(waterMark *raw.MTRContentLauncherClusterStyleInformationStruct) {
+	x.inner.SetWaterMark(waterMark)
+}
+
 func (x *MTRContentLauncherClusterBrandingInformationStruct) asMTRContentLauncherClusterBrandingInformationStruct() *raw.MTRContentLauncherClusterBrandingInformationStruct { return x.inner }
+
+// MTRContentLauncherClusterBrandingInformationStructable is the interface implemented by [MTRContentLauncherClusterBrandingInformationStruct], for mocking and DI.
+type MTRContentLauncherClusterBrandingInformationStructable interface {
+	Unwrap() *raw.MTRContentLauncherClusterBrandingInformationStruct
+	WithProviderName(providerName string) *MTRContentLauncherClusterBrandingInformationStruct
+	WithBackground(background MTRContentLauncherClusterStyleInformationStructProvider) *MTRContentLauncherClusterBrandingInformationStruct
+	WithLogo(logo MTRContentLauncherClusterStyleInformationStructProvider) *MTRContentLauncherClusterBrandingInformationStruct
+	WithProgressBar(progressBar MTRContentLauncherClusterStyleInformationStructProvider) *MTRContentLauncherClusterBrandingInformationStruct
+	WithSplash(splash MTRContentLauncherClusterStyleInformationStructProvider) *MTRContentLauncherClusterBrandingInformationStruct
+	WithWaterMark(waterMark MTRContentLauncherClusterStyleInformationStructProvider) *MTRContentLauncherClusterBrandingInformationStruct
+	ProviderName() string
+	SetProviderName(providerName string)
+	Background() *MTRContentLauncherClusterStyleInformationStruct
+	SetBackground(background *raw.MTRContentLauncherClusterStyleInformationStruct)
+	Logo() *MTRContentLauncherClusterStyleInformationStruct
+	SetLogo(logo *raw.MTRContentLauncherClusterStyleInformationStruct)
+	ProgressBar() *MTRContentLauncherClusterStyleInformationStruct
+	SetProgressBar(progressBar *raw.MTRContentLauncherClusterStyleInformationStruct)
+	Splash() *MTRContentLauncherClusterStyleInformationStruct
+	SetSplash(splash *raw.MTRContentLauncherClusterStyleInformationStruct)
+	WaterMark() *MTRContentLauncherClusterStyleInformationStruct
+	SetWaterMark(waterMark *raw.MTRContentLauncherClusterStyleInformationStruct)
+}
+
+var _ MTRContentLauncherClusterBrandingInformationStructable = (*MTRContentLauncherClusterBrandingInformationStruct)(nil)
 

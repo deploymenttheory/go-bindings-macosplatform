@@ -46,7 +46,81 @@ func (x *NNLossGradientNode) WithPropertyCallBack(propertyCallBack mpsneuralnetw
 	return x
 }
 
+// LossType calls the underlying LossType.
+func (x *NNLossGradientNode) LossType() mpsneuralnetwork.MPSCNNLossType {
+	return x.inner.LossType()
+}
+
+// ReductionType calls the underlying ReductionType.
+func (x *NNLossGradientNode) ReductionType() mpsneuralnetwork.MPSCNNReductionType {
+	return x.inner.ReductionType()
+}
+
+// NumberOfClasses calls the underlying NumberOfClasses.
+func (x *NNLossGradientNode) NumberOfClasses() uint {
+	return x.inner.NumberOfClasses()
+}
+
+// ReduceAcrossBatch calls the underlying ReduceAcrossBatch.
+func (x *NNLossGradientNode) ReduceAcrossBatch() bool {
+	return x.inner.ReduceAcrossBatch()
+}
+
+// Weight calls the underlying Weight.
+func (x *NNLossGradientNode) Weight() float32 {
+	return x.inner.Weight()
+}
+
+// LabelSmoothing calls the underlying LabelSmoothing.
+func (x *NNLossGradientNode) LabelSmoothing() float32 {
+	return x.inner.LabelSmoothing()
+}
+
+// Epsilon calls the underlying Epsilon.
+func (x *NNLossGradientNode) Epsilon() float32 {
+	return x.inner.Epsilon()
+}
+
+// Delta calls the underlying Delta.
+func (x *NNLossGradientNode) Delta() float32 {
+	return x.inner.Delta()
+}
+
+// IsLabelsGradientFilter calls the underlying IsLabelsGradientFilter.
+func (x *NNLossGradientNode) IsLabelsGradientFilter() bool {
+	return x.inner.IsLabelsGradientFilter()
+}
+
+// PropertyCallBack calls the underlying PropertyCallBack.
+func (x *NNLossGradientNode) PropertyCallBack() mpsneuralnetwork.MPSNNLossCallback {
+	return x.inner.PropertyCallBack()
+}
+
+// SetPropertyCallBack calls the underlying SetPropertyCallBack.
+func (x *NNLossGradientNode) SetPropertyCallBack(propertyCallBack mpsneuralnetwork.MPSNNLossCallback) {
+	x.inner.SetPropertyCallBack(propertyCallBack)
+}
+
 func (x *NNLossGradientNode) asNNGradientFilterNode() *mpsneuralnetwork.MPSNNGradientFilterNode { return &x.inner.MPSNNGradientFilterNode }
 
 func (x *NNLossGradientNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNGradientFilterNode.MPSNNFilterNode }
+
+// NNLossGradientNodeable is the interface implemented by [NNLossGradientNode], for mocking and DI.
+type NNLossGradientNodeable interface {
+	Unwrap() *raw.MPSNNLossGradientNode
+	WithPropertyCallBack(propertyCallBack mpsneuralnetwork.MPSNNLossCallback) *NNLossGradientNode
+	LossType() mpsneuralnetwork.MPSCNNLossType
+	ReductionType() mpsneuralnetwork.MPSCNNReductionType
+	NumberOfClasses() uint
+	ReduceAcrossBatch() bool
+	Weight() float32
+	LabelSmoothing() float32
+	Epsilon() float32
+	Delta() float32
+	IsLabelsGradientFilter() bool
+	PropertyCallBack() mpsneuralnetwork.MPSNNLossCallback
+	SetPropertyCallBack(propertyCallBack mpsneuralnetwork.MPSNNLossCallback)
+}
+
+var _ NNLossGradientNodeable = (*NNLossGradientNode)(nil)
 

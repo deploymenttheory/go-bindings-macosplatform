@@ -29,7 +29,27 @@ func (x *DetectFaceLandmarksRequest) WithConstellation(constellation raw.VNReque
 	return x
 }
 
+// Constellation calls the underlying Constellation.
+func (x *DetectFaceLandmarksRequest) Constellation() raw.VNRequestFaceLandmarksConstellation {
+	return x.inner.Constellation()
+}
+
+// SetConstellation calls the underlying SetConstellation.
+func (x *DetectFaceLandmarksRequest) SetConstellation(constellation raw.VNRequestFaceLandmarksConstellation) {
+	x.inner.SetConstellation(constellation)
+}
+
 func (x *DetectFaceLandmarksRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNImageBasedRequest }
 
 func (x *DetectFaceLandmarksRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageBasedRequest.VNRequest }
+
+// DetectFaceLandmarksRequestable is the interface implemented by [DetectFaceLandmarksRequest], for mocking and DI.
+type DetectFaceLandmarksRequestable interface {
+	Unwrap() *raw.VNDetectFaceLandmarksRequest
+	WithConstellation(constellation raw.VNRequestFaceLandmarksConstellation) *DetectFaceLandmarksRequest
+	Constellation() raw.VNRequestFaceLandmarksConstellation
+	SetConstellation(constellation raw.VNRequestFaceLandmarksConstellation)
+}
+
+var _ DetectFaceLandmarksRequestable = (*DetectFaceLandmarksRequest)(nil)
 

@@ -41,3 +41,49 @@ func (x *WKFindConfiguration) WithWraps(wraps bool) *WKFindConfiguration {
 	return x
 }
 
+// Backwards calls the underlying Backwards.
+func (x *WKFindConfiguration) Backwards() bool {
+	return x.inner.Backwards()
+}
+
+// SetBackwards calls the underlying SetBackwards.
+func (x *WKFindConfiguration) SetBackwards(backwards bool) {
+	x.inner.SetBackwards(backwards)
+}
+
+// CaseSensitive calls the underlying CaseSensitive.
+func (x *WKFindConfiguration) CaseSensitive() bool {
+	return x.inner.CaseSensitive()
+}
+
+// SetCaseSensitive calls the underlying SetCaseSensitive.
+func (x *WKFindConfiguration) SetCaseSensitive(caseSensitive bool) {
+	x.inner.SetCaseSensitive(caseSensitive)
+}
+
+// Wraps calls the underlying Wraps.
+func (x *WKFindConfiguration) Wraps() bool {
+	return x.inner.Wraps()
+}
+
+// SetWraps calls the underlying SetWraps.
+func (x *WKFindConfiguration) SetWraps(wraps bool) {
+	x.inner.SetWraps(wraps)
+}
+
+// WKFindConfigurationable is the interface implemented by [WKFindConfiguration], for mocking and DI.
+type WKFindConfigurationable interface {
+	Unwrap() *raw.WKFindConfiguration
+	WithBackwards(backwards bool) *WKFindConfiguration
+	WithCaseSensitive(caseSensitive bool) *WKFindConfiguration
+	WithWraps(wraps bool) *WKFindConfiguration
+	Backwards() bool
+	SetBackwards(backwards bool)
+	CaseSensitive() bool
+	SetCaseSensitive(caseSensitive bool)
+	Wraps() bool
+	SetWraps(wraps bool)
+}
+
+var _ WKFindConfigurationable = (*WKFindConfiguration)(nil)
+

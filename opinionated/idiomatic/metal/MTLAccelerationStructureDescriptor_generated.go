@@ -29,5 +29,25 @@ func (x *AccelerationStructureDescriptor) WithUsage(usage raw.MTLAccelerationStr
 	return x
 }
 
+// Usage calls the underlying Usage.
+func (x *AccelerationStructureDescriptor) Usage() raw.MTLAccelerationStructureUsage {
+	return x.inner.Usage()
+}
+
+// SetUsage calls the underlying SetUsage.
+func (x *AccelerationStructureDescriptor) SetUsage(usage raw.MTLAccelerationStructureUsage) {
+	x.inner.SetUsage(usage)
+}
+
 func (x *AccelerationStructureDescriptor) asAccelerationStructureDescriptor() *raw.MTLAccelerationStructureDescriptor { return x.inner }
+
+// AccelerationStructureDescriptorable is the interface implemented by [AccelerationStructureDescriptor], for mocking and DI.
+type AccelerationStructureDescriptorable interface {
+	Unwrap() *raw.MTLAccelerationStructureDescriptor
+	WithUsage(usage raw.MTLAccelerationStructureUsage) *AccelerationStructureDescriptor
+	Usage() raw.MTLAccelerationStructureUsage
+	SetUsage(usage raw.MTLAccelerationStructureUsage)
+}
+
+var _ AccelerationStructureDescriptorable = (*AccelerationStructureDescriptor)(nil)
 

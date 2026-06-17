@@ -7,6 +7,7 @@ package calendarstore
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/calendarstore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -48,5 +49,140 @@ func (x *CalCalendarItem) WithTitle(title string) *CalCalendarItem {
 	return x
 }
 
+// HasAlarm calls the underlying HasAlarm.
+func (x *CalCalendarItem) HasAlarm() bool {
+	return x.inner.HasAlarm()
+}
+
+// NextAlarmDate calls the underlying NextAlarmDate.
+func (x *CalCalendarItem) NextAlarmDate() *foundation.NSDate {
+	return x.inner.NextAlarmDate()
+}
+
+// AddAlarm calls the underlying AddAlarm.
+func (x *CalCalendarItem) AddAlarm(alarm *raw.CalAlarm) {
+	x.inner.AddAlarm(alarm)
+}
+
+// AddAlarms calls the underlying AddAlarms.
+func (x *CalCalendarItem) AddAlarms(alarms *foundation.NSArray[objc.ID]) {
+	x.inner.AddAlarms(alarms)
+}
+
+// RemoveAlarm calls the underlying RemoveAlarm.
+func (x *CalCalendarItem) RemoveAlarm(alarm *raw.CalAlarm) {
+	x.inner.RemoveAlarm(alarm)
+}
+
+// RemoveAlarms calls the underlying RemoveAlarms.
+func (x *CalCalendarItem) RemoveAlarms(alarms *foundation.NSArray[objc.ID]) {
+	x.inner.RemoveAlarms(alarms)
+}
+
+// Calendar calls the underlying Calendar.
+func (x *CalCalendarItem) Calendar() *CalCalendar {
+	_r := x.inner.Calendar()
+	if _r == nil {
+		return nil
+	}
+	return &CalCalendar{inner: _r}
+}
+
+// SetCalendar calls the underlying SetCalendar.
+func (x *CalCalendarItem) SetCalendar(calendar *raw.CalCalendar) {
+	x.inner.SetCalendar(calendar)
+}
+
+// Notes calls the underlying Notes.
+func (x *CalCalendarItem) Notes() string {
+	_r := x.inner.Notes()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetNotes calls the underlying SetNotes.
+func (x *CalCalendarItem) SetNotes(notes string) {
+	x.inner.SetNotes(foundation.NSStringStringWithUTF8String(notes))
+}
+
+// Url calls the underlying Url.
+func (x *CalCalendarItem) Url() *foundation.NSURL {
+	return x.inner.Url()
+}
+
+// SetUrl calls the underlying SetUrl.
+func (x *CalCalendarItem) SetUrl(url string) {
+	x.inner.SetUrl(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
+}
+
+// Title calls the underlying Title.
+func (x *CalCalendarItem) Title() string {
+	_r := x.inner.Title()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetTitle calls the underlying SetTitle.
+func (x *CalCalendarItem) SetTitle(title string) {
+	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+}
+
+// Uid calls the underlying Uid.
+func (x *CalCalendarItem) Uid() string {
+	_r := x.inner.Uid()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// DateStamp calls the underlying DateStamp.
+func (x *CalCalendarItem) DateStamp() *foundation.NSDate {
+	return x.inner.DateStamp()
+}
+
+// Alarms calls the underlying Alarms.
+func (x *CalCalendarItem) Alarms() *foundation.NSArray[objc.ID] {
+	return x.inner.Alarms()
+}
+
+// SetAlarms calls the underlying SetAlarms.
+func (x *CalCalendarItem) SetAlarms(alarms *foundation.NSArray[objc.ID]) {
+	x.inner.SetAlarms(alarms)
+}
+
 func (x *CalCalendarItem) asCalCalendarItem() *raw.CalCalendarItem { return x.inner }
+
+// CalCalendarItemable is the interface implemented by [CalCalendarItem], for mocking and DI.
+type CalCalendarItemable interface {
+	Unwrap() *raw.CalCalendarItem
+	WithCalendar(calendar *raw.CalCalendar) *CalCalendarItem
+	WithNotes(notes string) *CalCalendarItem
+	WithUrl(url string) *CalCalendarItem
+	WithTitle(title string) *CalCalendarItem
+	HasAlarm() bool
+	NextAlarmDate() *foundation.NSDate
+	AddAlarm(alarm *raw.CalAlarm)
+	AddAlarms(alarms *foundation.NSArray[objc.ID])
+	RemoveAlarm(alarm *raw.CalAlarm)
+	RemoveAlarms(alarms *foundation.NSArray[objc.ID])
+	Calendar() *CalCalendar
+	SetCalendar(calendar *raw.CalCalendar)
+	Notes() string
+	SetNotes(notes string)
+	Url() *foundation.NSURL
+	SetUrl(url string)
+	Title() string
+	SetTitle(title string)
+	Uid() string
+	DateStamp() *foundation.NSDate
+	Alarms() *foundation.NSArray[objc.ID]
+	SetAlarms(alarms *foundation.NSArray[objc.ID])
+}
+
+var _ CalCalendarItemable = (*CalCalendarItem)(nil)
 

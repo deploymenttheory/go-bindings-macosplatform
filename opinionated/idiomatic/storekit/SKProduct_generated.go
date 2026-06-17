@@ -7,7 +7,9 @@ package storekit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/storekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Product wraps [raw.SKProduct] with a fluent Go API.
@@ -24,17 +26,113 @@ func NewProduct() *Product {
 	return &Product{inner: raw.SKProductFromID(_id)}
 }
 
+// LocalizedDescription calls the underlying LocalizedDescription.
+func (x *Product) LocalizedDescription() string {
+	_r := x.inner.LocalizedDescription()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// LocalizedTitle calls the underlying LocalizedTitle.
+func (x *Product) LocalizedTitle() string {
+	_r := x.inner.LocalizedTitle()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Price calls the underlying Price.
+func (x *Product) Price() *foundation.NSDecimalNumber {
+	return x.inner.Price()
+}
+
+// PriceLocale calls the underlying PriceLocale.
+func (x *Product) PriceLocale() *foundation.NSLocale {
+	return x.inner.PriceLocale()
+}
+
+// ProductIdentifier calls the underlying ProductIdentifier.
+func (x *Product) ProductIdentifier() string {
+	_r := x.inner.ProductIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// IsDownloadable calls the underlying IsDownloadable.
+func (x *Product) IsDownloadable() bool {
+	return x.inner.IsDownloadable()
+}
+
+// Downloadable calls the underlying Downloadable.
+func (x *Product) Downloadable() bool {
+	return x.inner.Downloadable()
+}
+
+// IsFamilyShareable calls the underlying IsFamilyShareable.
+func (x *Product) IsFamilyShareable() bool {
+	return x.inner.IsFamilyShareable()
+}
+
+// ContentLengths calls the underlying ContentLengths.
+func (x *Product) ContentLengths() unsafe.Pointer {
+	return x.inner.ContentLengths()
+}
+
 // DownloadContentLengths returns the collection as a Go slice.
 func (x *Product) DownloadContentLengths() []*foundation.NSNumber {
 	arr := x.inner.DownloadContentLengths()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
+}
+
+// ContentVersion calls the underlying ContentVersion.
+func (x *Product) ContentVersion() unsafe.Pointer {
+	return x.inner.ContentVersion()
+}
+
+// DownloadContentVersion calls the underlying DownloadContentVersion.
+func (x *Product) DownloadContentVersion() string {
+	_r := x.inner.DownloadContentVersion()
+	if _r == nil {
+		return ""
 	}
-	return out
+	return purego.GoString(_r.Ptr())
+}
+
+// SubscriptionPeriod calls the underlying SubscriptionPeriod.
+func (x *Product) SubscriptionPeriod() *ProductSubscriptionPeriod {
+	_r := x.inner.SubscriptionPeriod()
+	if _r == nil {
+		return nil
+	}
+	return &ProductSubscriptionPeriod{inner: _r}
+}
+
+// IntroductoryPrice calls the underlying IntroductoryPrice.
+func (x *Product) IntroductoryPrice() *ProductDiscount {
+	_r := x.inner.IntroductoryPrice()
+	if _r == nil {
+		return nil
+	}
+	return &ProductDiscount{inner: _r}
+}
+
+// SubscriptionGroupIdentifier calls the underlying SubscriptionGroupIdentifier.
+func (x *Product) SubscriptionGroupIdentifier() string {
+	_r := x.inner.SubscriptionGroupIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
 }
 
 // Discounts returns the collection as a Go slice.
@@ -43,10 +141,31 @@ func (x *Product) Discounts() []*raw.SKProductDiscount {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.SKProductDiscount, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SKProductDiscount {
+		return raw.SKProductDiscountFromID(purego.Retain(_id))
+	})
 }
+
+// Productable is the interface implemented by [Product], for mocking and DI.
+type Productable interface {
+	Unwrap() *raw.SKProduct
+	LocalizedDescription() string
+	LocalizedTitle() string
+	Price() *foundation.NSDecimalNumber
+	PriceLocale() *foundation.NSLocale
+	ProductIdentifier() string
+	IsDownloadable() bool
+	Downloadable() bool
+	IsFamilyShareable() bool
+	ContentLengths() unsafe.Pointer
+	DownloadContentLengths() []*foundation.NSNumber
+	ContentVersion() unsafe.Pointer
+	DownloadContentVersion() string
+	SubscriptionPeriod() *ProductSubscriptionPeriod
+	IntroductoryPrice() *ProductDiscount
+	SubscriptionGroupIdentifier() string
+	Discounts() []*raw.SKProductDiscount
+}
+
+var _ Productable = (*Product)(nil)
 

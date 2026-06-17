@@ -5,6 +5,8 @@
 package imagecapturecore
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imagecapturecore"
 	"github.com/ebitengine/purego/objc"
 )
@@ -29,5 +31,37 @@ func (x *ScannerFunctionalUnitFlatbed) WithDocumentType(documentType raw.ICScann
 	return x
 }
 
+// SupportedDocumentTypes calls the underlying SupportedDocumentTypes.
+func (x *ScannerFunctionalUnitFlatbed) SupportedDocumentTypes() *foundation.NSIndexSet {
+	return x.inner.SupportedDocumentTypes()
+}
+
+// DocumentType calls the underlying DocumentType.
+func (x *ScannerFunctionalUnitFlatbed) DocumentType() raw.ICScannerDocumentType {
+	return x.inner.DocumentType()
+}
+
+// SetDocumentType calls the underlying SetDocumentType.
+func (x *ScannerFunctionalUnitFlatbed) SetDocumentType(documentType raw.ICScannerDocumentType) {
+	x.inner.SetDocumentType(documentType)
+}
+
+// DocumentSize calls the underlying DocumentSize.
+func (x *ScannerFunctionalUnitFlatbed) DocumentSize() corefoundation.CGSize {
+	return x.inner.DocumentSize()
+}
+
 func (x *ScannerFunctionalUnitFlatbed) asScannerFunctionalUnit() *raw.ICScannerFunctionalUnit { return &x.inner.ICScannerFunctionalUnit }
+
+// ScannerFunctionalUnitFlatbedable is the interface implemented by [ScannerFunctionalUnitFlatbed], for mocking and DI.
+type ScannerFunctionalUnitFlatbedable interface {
+	Unwrap() *raw.ICScannerFunctionalUnitFlatbed
+	WithDocumentType(documentType raw.ICScannerDocumentType) *ScannerFunctionalUnitFlatbed
+	SupportedDocumentTypes() *foundation.NSIndexSet
+	DocumentType() raw.ICScannerDocumentType
+	SetDocumentType(documentType raw.ICScannerDocumentType)
+	DocumentSize() corefoundation.CGSize
+}
+
+var _ ScannerFunctionalUnitFlatbedable = (*ScannerFunctionalUnitFlatbed)(nil)
 

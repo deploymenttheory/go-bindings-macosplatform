@@ -27,3 +27,10 @@ func NewElectrocardiogramQueryWithElectrocardiogramDataHandler(electrocardiogram
 
 func (x *ElectrocardiogramQuery) asQuery() *raw.HKQuery { return &x.inner.HKQuery }
 
+// ElectrocardiogramQueryable is the interface implemented by [ElectrocardiogramQuery], for mocking and DI.
+type ElectrocardiogramQueryable interface {
+	Unwrap() *raw.HKElectrocardiogramQuery
+}
+
+var _ ElectrocardiogramQueryable = (*ElectrocardiogramQuery)(nil)
+

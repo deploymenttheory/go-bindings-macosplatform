@@ -25,3 +25,10 @@ func NewMTRBridgedDeviceBasicClusterStartUpEvent() *MTRBridgedDeviceBasicCluster
 
 func (x *MTRBridgedDeviceBasicClusterStartUpEvent) asMTRBridgedDeviceBasicInformationClusterStartUpEvent() *raw.MTRBridgedDeviceBasicInformationClusterStartUpEvent { return &x.inner.MTRBridgedDeviceBasicInformationClusterStartUpEvent }
 
+// MTRBridgedDeviceBasicClusterStartUpEventable is the interface implemented by [MTRBridgedDeviceBasicClusterStartUpEvent], for mocking and DI.
+type MTRBridgedDeviceBasicClusterStartUpEventable interface {
+	Unwrap() *raw.MTRBridgedDeviceBasicClusterStartUpEvent
+}
+
+var _ MTRBridgedDeviceBasicClusterStartUpEventable = (*MTRBridgedDeviceBasicClusterStartUpEvent)(nil)
+

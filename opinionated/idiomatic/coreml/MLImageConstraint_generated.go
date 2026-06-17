@@ -23,3 +23,38 @@ func NewImageConstraint() *ImageConstraint {
 	return &ImageConstraint{inner: raw.MLImageConstraintFromID(_id)}
 }
 
+// PixelsHigh calls the underlying PixelsHigh.
+func (x *ImageConstraint) PixelsHigh() int {
+	return x.inner.PixelsHigh()
+}
+
+// PixelsWide calls the underlying PixelsWide.
+func (x *ImageConstraint) PixelsWide() int {
+	return x.inner.PixelsWide()
+}
+
+// PixelFormatType calls the underlying PixelFormatType.
+func (x *ImageConstraint) PixelFormatType() uint {
+	return x.inner.PixelFormatType()
+}
+
+// SizeConstraint calls the underlying SizeConstraint.
+func (x *ImageConstraint) SizeConstraint() *ImageSizeConstraint {
+	_r := x.inner.SizeConstraint()
+	if _r == nil {
+		return nil
+	}
+	return &ImageSizeConstraint{inner: _r}
+}
+
+// ImageConstraintable is the interface implemented by [ImageConstraint], for mocking and DI.
+type ImageConstraintable interface {
+	Unwrap() *raw.MLImageConstraint
+	PixelsHigh() int
+	PixelsWide() int
+	PixelFormatType() uint
+	SizeConstraint() *ImageSizeConstraint
+}
+
+var _ ImageConstraintable = (*ImageConstraint)(nil)
+

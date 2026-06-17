@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // SceneSource wraps [raw.SCNSceneSource] with a fluent Go API.
@@ -31,4 +32,70 @@ func NewSceneSourceWithDataOptions(data *foundation.NSData, options *foundation.
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:options:"), data.Ptr(), options.Ptr())
 	return &SceneSource{inner: raw.SCNSceneSourceFromID(_id)}
 }
+
+// SceneWithOptionsStatusHandler calls the underlying SceneWithOptionsStatusHandler.
+func (x *SceneSource) SceneWithOptionsStatusHandler(options *foundation.NSDictionary[*foundation.NSString, objc.ID], statusHandler func(float32, raw.SCNSceneSourceStatus, unsafe.Pointer, *bool)) *Scene {
+	_r := x.inner.SceneWithOptionsStatusHandler(options, statusHandler)
+	if _r == nil {
+		return nil
+	}
+	return &Scene{inner: _r}
+}
+
+// SceneWithOptionsError calls the underlying SceneWithOptionsError.
+func (x *SceneSource) SceneWithOptionsError(options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*Scene, error) {
+	_r, _err := x.inner.SceneWithOptionsError(options)
+	if _err != nil {
+		return nil, _err
+	}
+	if _r == nil {
+		return nil, nil
+	}
+	return &Scene{inner: _r}, nil
+}
+
+// PropertyForKey calls the underlying PropertyForKey.
+func (x *SceneSource) PropertyForKey(key string) objc.ID {
+	return x.inner.PropertyForKey(foundation.NSStringStringWithUTF8String(key))
+}
+
+// EntryWithIdentifierWithClass calls the underlying EntryWithIdentifierWithClass.
+func (x *SceneSource) EntryWithIdentifierWithClass(uid string, entryClass objc.Class) objc.ID {
+	return x.inner.EntryWithIdentifierWithClass(foundation.NSStringStringWithUTF8String(uid), entryClass)
+}
+
+// IdentifiersOfEntriesWithClass calls the underlying IdentifiersOfEntriesWithClass.
+func (x *SceneSource) IdentifiersOfEntriesWithClass(entryClass objc.Class) *foundation.NSArray[*foundation.NSString] {
+	return x.inner.IdentifiersOfEntriesWithClass(entryClass)
+}
+
+// EntriesPassingTest calls the underlying EntriesPassingTest.
+func (x *SceneSource) EntriesPassingTest(predicate func(objc.ID, *foundation.NSString, *bool) bool) *foundation.NSArray[objc.ID] {
+	return x.inner.EntriesPassingTest(predicate)
+}
+
+// Url calls the underlying Url.
+func (x *SceneSource) Url() *foundation.NSURL {
+	return x.inner.Url()
+}
+
+// Data calls the underlying Data.
+func (x *SceneSource) Data() *foundation.NSData {
+	return x.inner.Data()
+}
+
+// SceneSourceable is the interface implemented by [SceneSource], for mocking and DI.
+type SceneSourceable interface {
+	Unwrap() *raw.SCNSceneSource
+	SceneWithOptionsStatusHandler(options *foundation.NSDictionary[*foundation.NSString, objc.ID], statusHandler func(float32, raw.SCNSceneSourceStatus, unsafe.Pointer, *bool)) *Scene
+	SceneWithOptionsError(options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*Scene, error)
+	PropertyForKey(key string) objc.ID
+	EntryWithIdentifierWithClass(uid string, entryClass objc.Class) objc.ID
+	IdentifiersOfEntriesWithClass(entryClass objc.Class) *foundation.NSArray[*foundation.NSString]
+	EntriesPassingTest(predicate func(objc.ID, *foundation.NSString, *bool) bool) *foundation.NSArray[objc.ID]
+	Url() *foundation.NSURL
+	Data() *foundation.NSData
+}
+
+var _ SceneSourceable = (*SceneSource)(nil)
 

@@ -5,6 +5,7 @@
 package metal
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +23,17 @@ func NewMTL4MachineLearningPipelineReflection() *MTL4MachineLearningPipelineRefl
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTL4MachineLearningPipelineReflection")), objc.RegisterName("new"))
 	return &MTL4MachineLearningPipelineReflection{inner: raw.MTL4MachineLearningPipelineReflectionFromID(_id)}
 }
+
+// Bindings calls the underlying Bindings.
+func (x *MTL4MachineLearningPipelineReflection) Bindings() *foundation.NSArray[raw.MTLBinding] {
+	return x.inner.Bindings()
+}
+
+// MTL4MachineLearningPipelineReflectionable is the interface implemented by [MTL4MachineLearningPipelineReflection], for mocking and DI.
+type MTL4MachineLearningPipelineReflectionable interface {
+	Unwrap() *raw.MTL4MachineLearningPipelineReflection
+	Bindings() *foundation.NSArray[raw.MTLBinding]
+}
+
+var _ MTL4MachineLearningPipelineReflectionable = (*MTL4MachineLearningPipelineReflection)(nil)
 

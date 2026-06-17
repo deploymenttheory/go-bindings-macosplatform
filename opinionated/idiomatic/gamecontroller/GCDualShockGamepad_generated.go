@@ -23,7 +23,44 @@ func NewDualShockGamepad() *DualShockGamepad {
 	return &DualShockGamepad{inner: raw.GCDualShockGamepadFromID(_id)}
 }
 
+// TouchpadButton calls the underlying TouchpadButton.
+func (x *DualShockGamepad) TouchpadButton() *ControllerButtonInput {
+	_r := x.inner.TouchpadButton()
+	if _r == nil {
+		return nil
+	}
+	return &ControllerButtonInput{inner: _r}
+}
+
+// TouchpadPrimary calls the underlying TouchpadPrimary.
+func (x *DualShockGamepad) TouchpadPrimary() *ControllerDirectionPad {
+	_r := x.inner.TouchpadPrimary()
+	if _r == nil {
+		return nil
+	}
+	return &ControllerDirectionPad{inner: _r}
+}
+
+// TouchpadSecondary calls the underlying TouchpadSecondary.
+func (x *DualShockGamepad) TouchpadSecondary() *ControllerDirectionPad {
+	_r := x.inner.TouchpadSecondary()
+	if _r == nil {
+		return nil
+	}
+	return &ControllerDirectionPad{inner: _r}
+}
+
 func (x *DualShockGamepad) asExtendedGamepad() *raw.GCExtendedGamepad { return &x.inner.GCExtendedGamepad }
 
 func (x *DualShockGamepad) asPhysicalInputProfile() *raw.GCPhysicalInputProfile { return &x.inner.GCExtendedGamepad.GCPhysicalInputProfile }
+
+// DualShockGamepadable is the interface implemented by [DualShockGamepad], for mocking and DI.
+type DualShockGamepadable interface {
+	Unwrap() *raw.GCDualShockGamepad
+	TouchpadButton() *ControllerButtonInput
+	TouchpadPrimary() *ControllerDirectionPad
+	TouchpadSecondary() *ControllerDirectionPad
+}
+
+var _ DualShockGamepadable = (*DualShockGamepad)(nil)
 

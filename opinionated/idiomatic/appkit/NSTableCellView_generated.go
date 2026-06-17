@@ -6,6 +6,7 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,20 +54,99 @@ func (x *TableCellView) WithRowSizeStyle(rowSizeStyle raw.NSTableViewRowSizeStyl
 	return x
 }
 
+// ObjectValue calls the underlying ObjectValue.
+func (x *TableCellView) ObjectValue() objc.ID {
+	return x.inner.ObjectValue()
+}
+
+// SetObjectValue calls the underlying SetObjectValue.
+func (x *TableCellView) SetObjectValue(objectValue objc.ID) {
+	x.inner.SetObjectValue(objectValue)
+}
+
+// TextField calls the underlying TextField.
+func (x *TableCellView) TextField() *TextField {
+	_r := x.inner.TextField()
+	if _r == nil {
+		return nil
+	}
+	return &TextField{inner: _r}
+}
+
+// SetTextField calls the underlying SetTextField.
+func (x *TableCellView) SetTextField(textField *raw.NSTextField) {
+	x.inner.SetTextField(textField)
+}
+
+// ImageView calls the underlying ImageView.
+func (x *TableCellView) ImageView() *ImageView {
+	_r := x.inner.ImageView()
+	if _r == nil {
+		return nil
+	}
+	return &ImageView{inner: _r}
+}
+
+// SetImageView calls the underlying SetImageView.
+func (x *TableCellView) SetImageView(imageView *raw.NSImageView) {
+	x.inner.SetImageView(imageView)
+}
+
+// BackgroundStyle calls the underlying BackgroundStyle.
+func (x *TableCellView) BackgroundStyle() raw.NSBackgroundStyle {
+	return x.inner.BackgroundStyle()
+}
+
+// SetBackgroundStyle calls the underlying SetBackgroundStyle.
+func (x *TableCellView) SetBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) {
+	x.inner.SetBackgroundStyle(backgroundStyle)
+}
+
+// RowSizeStyle calls the underlying RowSizeStyle.
+func (x *TableCellView) RowSizeStyle() raw.NSTableViewRowSizeStyle {
+	return x.inner.RowSizeStyle()
+}
+
+// SetRowSizeStyle calls the underlying SetRowSizeStyle.
+func (x *TableCellView) SetRowSizeStyle(rowSizeStyle raw.NSTableViewRowSizeStyle) {
+	x.inner.SetRowSizeStyle(rowSizeStyle)
+}
+
 // DraggingImageComponents returns the collection as a Go slice.
 func (x *TableCellView) DraggingImageComponents() []*raw.NSDraggingImageComponent {
 	arr := x.inner.DraggingImageComponents()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSDraggingImageComponent, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSDraggingImageComponent {
+		return raw.NSDraggingImageComponentFromID(purego.Retain(_id))
+	})
 }
 
 func (x *TableCellView) asView() *raw.NSView { return &x.inner.NSView }
 
 func (x *TableCellView) asResponder() *raw.NSResponder { return &x.inner.NSView.NSResponder }
+
+// TableCellViewable is the interface implemented by [TableCellView], for mocking and DI.
+type TableCellViewable interface {
+	Unwrap() *raw.NSTableCellView
+	WithObjectValue(objectValue objc.ID) *TableCellView
+	WithTextField(textField TextFieldProvider) *TableCellView
+	WithImageView(imageView *raw.NSImageView) *TableCellView
+	WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *TableCellView
+	WithRowSizeStyle(rowSizeStyle raw.NSTableViewRowSizeStyle) *TableCellView
+	ObjectValue() objc.ID
+	SetObjectValue(objectValue objc.ID)
+	TextField() *TextField
+	SetTextField(textField *raw.NSTextField)
+	ImageView() *ImageView
+	SetImageView(imageView *raw.NSImageView)
+	BackgroundStyle() raw.NSBackgroundStyle
+	SetBackgroundStyle(backgroundStyle raw.NSBackgroundStyle)
+	RowSizeStyle() raw.NSTableViewRowSizeStyle
+	SetRowSizeStyle(rowSizeStyle raw.NSTableViewRowSizeStyle)
+	DraggingImageComponents() []*raw.NSDraggingImageComponent
+}
+
+var _ TableCellViewable = (*TableCellView)(nil)
 

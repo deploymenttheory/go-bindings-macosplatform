@@ -6,6 +6,7 @@ package corebluetooth
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corebluetooth"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,39 @@ func NewL2CAPChannel() *L2CAPChannel {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CBL2CAPChannel")), objc.RegisterName("new"))
 	return &L2CAPChannel{inner: raw.CBL2CAPChannelFromID(_id)}
 }
+
+// Peer calls the underlying Peer.
+func (x *L2CAPChannel) Peer() *Peer {
+	_r := x.inner.Peer()
+	if _r == nil {
+		return nil
+	}
+	return &Peer{inner: _r}
+}
+
+// InputStream calls the underlying InputStream.
+func (x *L2CAPChannel) InputStream() *foundation.NSInputStream {
+	return x.inner.InputStream()
+}
+
+// OutputStream calls the underlying OutputStream.
+func (x *L2CAPChannel) OutputStream() *foundation.NSOutputStream {
+	return x.inner.OutputStream()
+}
+
+// PSM calls the underlying PSM.
+func (x *L2CAPChannel) PSM() uint16 {
+	return x.inner.PSM()
+}
+
+// L2CAPChannelable is the interface implemented by [L2CAPChannel], for mocking and DI.
+type L2CAPChannelable interface {
+	Unwrap() *raw.CBL2CAPChannel
+	Peer() *Peer
+	InputStream() *foundation.NSInputStream
+	OutputStream() *foundation.NSOutputStream
+	PSM() uint16
+}
+
+var _ L2CAPChannelable = (*L2CAPChannel)(nil)
 

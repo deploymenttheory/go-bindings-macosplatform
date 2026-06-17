@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -35,4 +36,45 @@ func (x *MTRFixedLabelClusterLabelStruct) WithValue(value string) *MTRFixedLabel
 	x.inner.SetValue(foundation.NSStringStringWithUTF8String(value))
 	return x
 }
+
+// Label calls the underlying Label.
+func (x *MTRFixedLabelClusterLabelStruct) Label() string {
+	_r := x.inner.Label()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLabel calls the underlying SetLabel.
+func (x *MTRFixedLabelClusterLabelStruct) SetLabel(label string) {
+	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+}
+
+// Value calls the underlying Value.
+func (x *MTRFixedLabelClusterLabelStruct) Value() string {
+	_r := x.inner.Value()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetValue calls the underlying SetValue.
+func (x *MTRFixedLabelClusterLabelStruct) SetValue(value string) {
+	x.inner.SetValue(foundation.NSStringStringWithUTF8String(value))
+}
+
+// MTRFixedLabelClusterLabelStructable is the interface implemented by [MTRFixedLabelClusterLabelStruct], for mocking and DI.
+type MTRFixedLabelClusterLabelStructable interface {
+	Unwrap() *raw.MTRFixedLabelClusterLabelStruct
+	WithLabel(label string) *MTRFixedLabelClusterLabelStruct
+	WithValue(value string) *MTRFixedLabelClusterLabelStruct
+	Label() string
+	SetLabel(label string)
+	Value() string
+	SetValue(value string)
+}
+
+var _ MTRFixedLabelClusterLabelStructable = (*MTRFixedLabelClusterLabelStruct)(nil)
 

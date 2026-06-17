@@ -25,3 +25,10 @@ func NewAnnotationCircle() *AnnotationCircle {
 
 func (x *AnnotationCircle) asAnnotation() *raw.PDFAnnotation { return &x.inner.PDFAnnotation }
 
+// AnnotationCircleable is the interface implemented by [AnnotationCircle], for mocking and DI.
+type AnnotationCircleable interface {
+	Unwrap() *raw.PDFAnnotationCircle
+}
+
+var _ AnnotationCircleable = (*AnnotationCircle)(nil)
+

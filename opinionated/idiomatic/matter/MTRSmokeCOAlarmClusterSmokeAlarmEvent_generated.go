@@ -30,3 +30,23 @@ func (x *MTRSmokeCOAlarmClusterSmokeAlarmEvent) WithAlarmSeverityLevel(alarmSeve
 	return x
 }
 
+// AlarmSeverityLevel calls the underlying AlarmSeverityLevel.
+func (x *MTRSmokeCOAlarmClusterSmokeAlarmEvent) AlarmSeverityLevel() *foundation.NSNumber {
+	return x.inner.AlarmSeverityLevel()
+}
+
+// SetAlarmSeverityLevel calls the underlying SetAlarmSeverityLevel.
+func (x *MTRSmokeCOAlarmClusterSmokeAlarmEvent) SetAlarmSeverityLevel(alarmSeverityLevel *foundation.NSNumber) {
+	x.inner.SetAlarmSeverityLevel(alarmSeverityLevel)
+}
+
+// MTRSmokeCOAlarmClusterSmokeAlarmEventable is the interface implemented by [MTRSmokeCOAlarmClusterSmokeAlarmEvent], for mocking and DI.
+type MTRSmokeCOAlarmClusterSmokeAlarmEventable interface {
+	Unwrap() *raw.MTRSmokeCOAlarmClusterSmokeAlarmEvent
+	WithAlarmSeverityLevel(alarmSeverityLevel *foundation.NSNumber) *MTRSmokeCOAlarmClusterSmokeAlarmEvent
+	AlarmSeverityLevel() *foundation.NSNumber
+	SetAlarmSeverityLevel(alarmSeverityLevel *foundation.NSNumber)
+}
+
+var _ MTRSmokeCOAlarmClusterSmokeAlarmEventable = (*MTRSmokeCOAlarmClusterSmokeAlarmEvent)(nil)
+

@@ -30,7 +30,27 @@ func (x *AudioUnitGenerator) WithBypass(bypass bool) *AudioUnitGenerator {
 	return x
 }
 
+// Bypass calls the underlying Bypass.
+func (x *AudioUnitGenerator) Bypass() bool {
+	return x.inner.Bypass()
+}
+
+// SetBypass calls the underlying SetBypass.
+func (x *AudioUnitGenerator) SetBypass(bypass bool) {
+	x.inner.SetBypass(bypass)
+}
+
 func (x *AudioUnitGenerator) asAudioUnit() *raw.AVAudioUnit { return &x.inner.AVAudioUnit }
 
 func (x *AudioUnitGenerator) asAudioNode() *raw.AVAudioNode { return &x.inner.AVAudioUnit.AVAudioNode }
+
+// AudioUnitGeneratorable is the interface implemented by [AudioUnitGenerator], for mocking and DI.
+type AudioUnitGeneratorable interface {
+	Unwrap() *raw.AVAudioUnitGenerator
+	WithBypass(bypass bool) *AudioUnitGenerator
+	Bypass() bool
+	SetBypass(bypass bool)
+}
+
+var _ AudioUnitGeneratorable = (*AudioUnitGenerator)(nil)
 

@@ -36,5 +36,38 @@ func (x *MTRModeSelectClusterSemanticTagStruct) WithValue(value *foundation.NSNu
 	return x
 }
 
+// MfgCode calls the underlying MfgCode.
+func (x *MTRModeSelectClusterSemanticTagStruct) MfgCode() *foundation.NSNumber {
+	return x.inner.MfgCode()
+}
+
+// SetMfgCode calls the underlying SetMfgCode.
+func (x *MTRModeSelectClusterSemanticTagStruct) SetMfgCode(mfgCode *foundation.NSNumber) {
+	x.inner.SetMfgCode(mfgCode)
+}
+
+// Value calls the underlying Value.
+func (x *MTRModeSelectClusterSemanticTagStruct) Value() *foundation.NSNumber {
+	return x.inner.Value()
+}
+
+// SetValue calls the underlying SetValue.
+func (x *MTRModeSelectClusterSemanticTagStruct) SetValue(value *foundation.NSNumber) {
+	x.inner.SetValue(value)
+}
+
 func (x *MTRModeSelectClusterSemanticTagStruct) asMTRModeSelectClusterSemanticTagStruct() *raw.MTRModeSelectClusterSemanticTagStruct { return x.inner }
+
+// MTRModeSelectClusterSemanticTagStructable is the interface implemented by [MTRModeSelectClusterSemanticTagStruct], for mocking and DI.
+type MTRModeSelectClusterSemanticTagStructable interface {
+	Unwrap() *raw.MTRModeSelectClusterSemanticTagStruct
+	WithMfgCode(mfgCode *foundation.NSNumber) *MTRModeSelectClusterSemanticTagStruct
+	WithValue(value *foundation.NSNumber) *MTRModeSelectClusterSemanticTagStruct
+	MfgCode() *foundation.NSNumber
+	SetMfgCode(mfgCode *foundation.NSNumber)
+	Value() *foundation.NSNumber
+	SetValue(value *foundation.NSNumber)
+}
+
+var _ MTRModeSelectClusterSemanticTagStructable = (*MTRModeSelectClusterSemanticTagStruct)(nil)
 

@@ -6,8 +6,11 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // PlayerLayer wraps [raw.AVPlayerLayer] with a fluent Go API.
@@ -41,4 +44,88 @@ func (x *PlayerLayer) WithPixelBufferAttributes(pixelBufferAttributes *foundatio
 	x.inner.SetPixelBufferAttributes(pixelBufferAttributes)
 	return x
 }
+
+// CopyDisplayedPixelBuffer calls the underlying CopyDisplayedPixelBuffer.
+func (x *PlayerLayer) CopyDisplayedPixelBuffer() unsafe.Pointer {
+	return x.inner.CopyDisplayedPixelBuffer()
+}
+
+// SetCaptionPreviewProfileIDPositionText calls the underlying SetCaptionPreviewProfileIDPositionText.
+func (x *PlayerLayer) SetCaptionPreviewProfileIDPositionText(profileID string, position corefoundation.CGPoint, text string) {
+	x.inner.SetCaptionPreviewProfileIDPositionText(foundation.NSStringStringWithUTF8String(profileID), position, foundation.NSStringStringWithUTF8String(text))
+}
+
+// StopShowingCaptionPreview calls the underlying StopShowingCaptionPreview.
+func (x *PlayerLayer) StopShowingCaptionPreview() {
+	x.inner.StopShowingCaptionPreview()
+}
+
+// Player calls the underlying Player.
+func (x *PlayerLayer) Player() *Player {
+	_r := x.inner.Player()
+	if _r == nil {
+		return nil
+	}
+	return &Player{inner: _r}
+}
+
+// SetPlayer calls the underlying SetPlayer.
+func (x *PlayerLayer) SetPlayer(player *raw.AVPlayer) {
+	x.inner.SetPlayer(player)
+}
+
+// VideoGravity calls the underlying VideoGravity.
+func (x *PlayerLayer) VideoGravity() string {
+	_r := x.inner.VideoGravity()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetVideoGravity calls the underlying SetVideoGravity.
+func (x *PlayerLayer) SetVideoGravity(videoGravity *foundation.NSString) {
+	x.inner.SetVideoGravity(videoGravity)
+}
+
+// IsReadyForDisplay calls the underlying IsReadyForDisplay.
+func (x *PlayerLayer) IsReadyForDisplay() bool {
+	return x.inner.IsReadyForDisplay()
+}
+
+// VideoRect calls the underlying VideoRect.
+func (x *PlayerLayer) VideoRect() corefoundation.CGRect {
+	return x.inner.VideoRect()
+}
+
+// PixelBufferAttributes calls the underlying PixelBufferAttributes.
+func (x *PlayerLayer) PixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.PixelBufferAttributes()
+}
+
+// SetPixelBufferAttributes calls the underlying SetPixelBufferAttributes.
+func (x *PlayerLayer) SetPixelBufferAttributes(pixelBufferAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
+	x.inner.SetPixelBufferAttributes(pixelBufferAttributes)
+}
+
+// PlayerLayerable is the interface implemented by [PlayerLayer], for mocking and DI.
+type PlayerLayerable interface {
+	Unwrap() *raw.AVPlayerLayer
+	WithPlayer(player PlayerProvider) *PlayerLayer
+	WithVideoGravity(videoGravity *foundation.NSString) *PlayerLayer
+	WithPixelBufferAttributes(pixelBufferAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *PlayerLayer
+	CopyDisplayedPixelBuffer() unsafe.Pointer
+	SetCaptionPreviewProfileIDPositionText(profileID string, position corefoundation.CGPoint, text string)
+	StopShowingCaptionPreview()
+	Player() *Player
+	SetPlayer(player *raw.AVPlayer)
+	VideoGravity() string
+	SetVideoGravity(videoGravity *foundation.NSString)
+	IsReadyForDisplay() bool
+	VideoRect() corefoundation.CGRect
+	PixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	SetPixelBufferAttributes(pixelBufferAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID])
+}
+
+var _ PlayerLayerable = (*PlayerLayer)(nil)
 

@@ -7,6 +7,7 @@ package sharedwithyoucore
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/sharedwithyoucore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -67,4 +68,96 @@ func (x *CollaborationMetadata) WithInitiatorNameComponents(initiatorNameCompone
 	x.inner.SetInitiatorNameComponents(initiatorNameComponents)
 	return x
 }
+
+// CollaborationIdentifier calls the underlying CollaborationIdentifier.
+func (x *CollaborationMetadata) CollaborationIdentifier() string {
+	_r := x.inner.CollaborationIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// LocalIdentifier calls the underlying LocalIdentifier.
+func (x *CollaborationMetadata) LocalIdentifier() string {
+	_r := x.inner.LocalIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Title calls the underlying Title.
+func (x *CollaborationMetadata) Title() string {
+	_r := x.inner.Title()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetTitle calls the underlying SetTitle.
+func (x *CollaborationMetadata) SetTitle(title string) {
+	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+}
+
+// DefaultShareOptions calls the underlying DefaultShareOptions.
+func (x *CollaborationMetadata) DefaultShareOptions() *CollaborationShareOptions {
+	_r := x.inner.DefaultShareOptions()
+	if _r == nil {
+		return nil
+	}
+	return &CollaborationShareOptions{inner: _r}
+}
+
+// SetDefaultShareOptions calls the underlying SetDefaultShareOptions.
+func (x *CollaborationMetadata) SetDefaultShareOptions(defaultShareOptions *raw.SWCollaborationShareOptions) {
+	x.inner.SetDefaultShareOptions(defaultShareOptions)
+}
+
+// UserSelectedShareOptions calls the underlying UserSelectedShareOptions.
+func (x *CollaborationMetadata) UserSelectedShareOptions() *CollaborationShareOptions {
+	_r := x.inner.UserSelectedShareOptions()
+	if _r == nil {
+		return nil
+	}
+	return &CollaborationShareOptions{inner: _r}
+}
+
+// SetUserSelectedShareOptions calls the underlying SetUserSelectedShareOptions.
+func (x *CollaborationMetadata) SetUserSelectedShareOptions(userSelectedShareOptions *raw.SWCollaborationShareOptions) {
+	x.inner.SetUserSelectedShareOptions(userSelectedShareOptions)
+}
+
+// SetInitiatorHandle calls the underlying SetInitiatorHandle.
+func (x *CollaborationMetadata) SetInitiatorHandle(initiatorHandle string) {
+	x.inner.SetInitiatorHandle(foundation.NSStringStringWithUTF8String(initiatorHandle))
+}
+
+// SetInitiatorNameComponents calls the underlying SetInitiatorNameComponents.
+func (x *CollaborationMetadata) SetInitiatorNameComponents(initiatorNameComponents *foundation.NSPersonNameComponents) {
+	x.inner.SetInitiatorNameComponents(initiatorNameComponents)
+}
+
+// CollaborationMetadataable is the interface implemented by [CollaborationMetadata], for mocking and DI.
+type CollaborationMetadataable interface {
+	Unwrap() *raw.SWCollaborationMetadata
+	WithTitle(title string) *CollaborationMetadata
+	WithDefaultShareOptions(defaultShareOptions *raw.SWCollaborationShareOptions) *CollaborationMetadata
+	WithUserSelectedShareOptions(userSelectedShareOptions *raw.SWCollaborationShareOptions) *CollaborationMetadata
+	WithInitiatorHandle(initiatorHandle string) *CollaborationMetadata
+	WithInitiatorNameComponents(initiatorNameComponents *foundation.NSPersonNameComponents) *CollaborationMetadata
+	CollaborationIdentifier() string
+	LocalIdentifier() string
+	Title() string
+	SetTitle(title string)
+	DefaultShareOptions() *CollaborationShareOptions
+	SetDefaultShareOptions(defaultShareOptions *raw.SWCollaborationShareOptions)
+	UserSelectedShareOptions() *CollaborationShareOptions
+	SetUserSelectedShareOptions(userSelectedShareOptions *raw.SWCollaborationShareOptions)
+	SetInitiatorHandle(initiatorHandle string)
+	SetInitiatorNameComponents(initiatorNameComponents *foundation.NSPersonNameComponents)
+}
+
+var _ CollaborationMetadataable = (*CollaborationMetadata)(nil)
 

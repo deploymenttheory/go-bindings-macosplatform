@@ -126,3 +126,243 @@ func (x *MTRDeviceEnergyManagementClusterSlotStruct) WithMaxDurationAdjustment(m
 	return x
 }
 
+// MinDuration calls the underlying MinDuration.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) MinDuration() *foundation.NSNumber {
+	return x.inner.MinDuration()
+}
+
+// SetMinDuration calls the underlying SetMinDuration.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetMinDuration(minDuration *foundation.NSNumber) {
+	x.inner.SetMinDuration(minDuration)
+}
+
+// MaxDuration calls the underlying MaxDuration.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) MaxDuration() *foundation.NSNumber {
+	return x.inner.MaxDuration()
+}
+
+// SetMaxDuration calls the underlying SetMaxDuration.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetMaxDuration(maxDuration *foundation.NSNumber) {
+	x.inner.SetMaxDuration(maxDuration)
+}
+
+// DefaultDuration calls the underlying DefaultDuration.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) DefaultDuration() *foundation.NSNumber {
+	return x.inner.DefaultDuration()
+}
+
+// SetDefaultDuration calls the underlying SetDefaultDuration.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetDefaultDuration(defaultDuration *foundation.NSNumber) {
+	x.inner.SetDefaultDuration(defaultDuration)
+}
+
+// ElapsedSlotTime calls the underlying ElapsedSlotTime.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) ElapsedSlotTime() *foundation.NSNumber {
+	return x.inner.ElapsedSlotTime()
+}
+
+// SetElapsedSlotTime calls the underlying SetElapsedSlotTime.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetElapsedSlotTime(elapsedSlotTime *foundation.NSNumber) {
+	x.inner.SetElapsedSlotTime(elapsedSlotTime)
+}
+
+// RemainingSlotTime calls the underlying RemainingSlotTime.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) RemainingSlotTime() *foundation.NSNumber {
+	return x.inner.RemainingSlotTime()
+}
+
+// SetRemainingSlotTime calls the underlying SetRemainingSlotTime.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetRemainingSlotTime(remainingSlotTime *foundation.NSNumber) {
+	x.inner.SetRemainingSlotTime(remainingSlotTime)
+}
+
+// SlotIsPausable calls the underlying SlotIsPausable.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) SlotIsPausable() *foundation.NSNumber {
+	return x.inner.SlotIsPausable()
+}
+
+// SetSlotIsPausable calls the underlying SetSlotIsPausable.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetSlotIsPausable(slotIsPausable *foundation.NSNumber) {
+	x.inner.SetSlotIsPausable(slotIsPausable)
+}
+
+// MinPauseDuration calls the underlying MinPauseDuration.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) MinPauseDuration() *foundation.NSNumber {
+	return x.inner.MinPauseDuration()
+}
+
+// SetMinPauseDuration calls the underlying SetMinPauseDuration.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetMinPauseDuration(minPauseDuration *foundation.NSNumber) {
+	x.inner.SetMinPauseDuration(minPauseDuration)
+}
+
+// MaxPauseDuration calls the underlying MaxPauseDuration.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) MaxPauseDuration() *foundation.NSNumber {
+	return x.inner.MaxPauseDuration()
+}
+
+// SetMaxPauseDuration calls the underlying SetMaxPauseDuration.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetMaxPauseDuration(maxPauseDuration *foundation.NSNumber) {
+	x.inner.SetMaxPauseDuration(maxPauseDuration)
+}
+
+// ManufacturerESAState calls the underlying ManufacturerESAState.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) ManufacturerESAState() *foundation.NSNumber {
+	return x.inner.ManufacturerESAState()
+}
+
+// SetManufacturerESAState calls the underlying SetManufacturerESAState.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetManufacturerESAState(manufacturerESAState *foundation.NSNumber) {
+	x.inner.SetManufacturerESAState(manufacturerESAState)
+}
+
+// NominalPower calls the underlying NominalPower.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) NominalPower() *foundation.NSNumber {
+	return x.inner.NominalPower()
+}
+
+// SetNominalPower calls the underlying SetNominalPower.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetNominalPower(nominalPower *foundation.NSNumber) {
+	x.inner.SetNominalPower(nominalPower)
+}
+
+// MinPower calls the underlying MinPower.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) MinPower() *foundation.NSNumber {
+	return x.inner.MinPower()
+}
+
+// SetMinPower calls the underlying SetMinPower.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetMinPower(minPower *foundation.NSNumber) {
+	x.inner.SetMinPower(minPower)
+}
+
+// MaxPower calls the underlying MaxPower.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) MaxPower() *foundation.NSNumber {
+	return x.inner.MaxPower()
+}
+
+// SetMaxPower calls the underlying SetMaxPower.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetMaxPower(maxPower *foundation.NSNumber) {
+	x.inner.SetMaxPower(maxPower)
+}
+
+// NominalEnergy calls the underlying NominalEnergy.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) NominalEnergy() *foundation.NSNumber {
+	return x.inner.NominalEnergy()
+}
+
+// SetNominalEnergy calls the underlying SetNominalEnergy.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetNominalEnergy(nominalEnergy *foundation.NSNumber) {
+	x.inner.SetNominalEnergy(nominalEnergy)
+}
+
+// Costs calls the underlying Costs.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) Costs() *foundation.NSArray[objc.ID] {
+	return x.inner.Costs()
+}
+
+// SetCosts calls the underlying SetCosts.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetCosts(costs *foundation.NSArray[objc.ID]) {
+	x.inner.SetCosts(costs)
+}
+
+// MinPowerAdjustment calls the underlying MinPowerAdjustment.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) MinPowerAdjustment() *foundation.NSNumber {
+	return x.inner.MinPowerAdjustment()
+}
+
+// SetMinPowerAdjustment calls the underlying SetMinPowerAdjustment.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetMinPowerAdjustment(minPowerAdjustment *foundation.NSNumber) {
+	x.inner.SetMinPowerAdjustment(minPowerAdjustment)
+}
+
+// MaxPowerAdjustment calls the underlying MaxPowerAdjustment.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) MaxPowerAdjustment() *foundation.NSNumber {
+	return x.inner.MaxPowerAdjustment()
+}
+
+// SetMaxPowerAdjustment calls the underlying SetMaxPowerAdjustment.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetMaxPowerAdjustment(maxPowerAdjustment *foundation.NSNumber) {
+	x.inner.SetMaxPowerAdjustment(maxPowerAdjustment)
+}
+
+// MinDurationAdjustment calls the underlying MinDurationAdjustment.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) MinDurationAdjustment() *foundation.NSNumber {
+	return x.inner.MinDurationAdjustment()
+}
+
+// SetMinDurationAdjustment calls the underlying SetMinDurationAdjustment.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetMinDurationAdjustment(minDurationAdjustment *foundation.NSNumber) {
+	x.inner.SetMinDurationAdjustment(minDurationAdjustment)
+}
+
+// MaxDurationAdjustment calls the underlying MaxDurationAdjustment.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) MaxDurationAdjustment() *foundation.NSNumber {
+	return x.inner.MaxDurationAdjustment()
+}
+
+// SetMaxDurationAdjustment calls the underlying SetMaxDurationAdjustment.
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) SetMaxDurationAdjustment(maxDurationAdjustment *foundation.NSNumber) {
+	x.inner.SetMaxDurationAdjustment(maxDurationAdjustment)
+}
+
+// MTRDeviceEnergyManagementClusterSlotStructable is the interface implemented by [MTRDeviceEnergyManagementClusterSlotStruct], for mocking and DI.
+type MTRDeviceEnergyManagementClusterSlotStructable interface {
+	Unwrap() *raw.MTRDeviceEnergyManagementClusterSlotStruct
+	WithMinDuration(minDuration *foundation.NSNumber) *MTRDeviceEnergyManagementClusterSlotStruct
+	WithMaxDuration(maxDuration *foundation.NSNumber) *MTRDeviceEnergyManagementClusterSlotStruct
+	WithDefaultDuration(defaultDuration *foundation.NSNumber) *MTRDeviceEnergyManagementClusterSlotStruct
+	WithElapsedSlotTime(elapsedSlotTime *foundation.NSNumber) *MTRDeviceEnergyManagementClusterSlotStruct
+	WithRemainingSlotTime(remainingSlotTime *foundation.NSNumber) *MTRDeviceEnergyManagementClusterSlotStruct
+	WithSlotIsPausable(slotIsPausable *foundation.NSNumber) *MTRDeviceEnergyManagementClusterSlotStruct
+	WithMinPauseDuration(minPauseDuration *foundation.NSNumber) *MTRDeviceEnergyManagementClusterSlotStruct
+	WithMaxPauseDuration(maxPauseDuration *foundation.NSNumber) *MTRDeviceEnergyManagementClusterSlotStruct
+	WithManufacturerESAState(manufacturerESAState *foundation.NSNumber) *MTRDeviceEnergyManagementClusterSlotStruct
+	WithNominalPower(nominalPower *foundation.NSNumber) *MTRDeviceEnergyManagementClusterSlotStruct
+	WithMinPower(minPower *foundation.NSNumber) *MTRDeviceEnergyManagementClusterSlotStruct
+	WithMaxPower(maxPower *foundation.NSNumber) *MTRDeviceEnergyManagementClusterSlotStruct
+	WithNominalEnergy(nominalEnergy *foundation.NSNumber) *MTRDeviceEnergyManagementClusterSlotStruct
+	WithMinPowerAdjustment(minPowerAdjustment *foundation.NSNumber) *MTRDeviceEnergyManagementClusterSlotStruct
+	WithMaxPowerAdjustment(maxPowerAdjustment *foundation.NSNumber) *MTRDeviceEnergyManagementClusterSlotStruct
+	WithMinDurationAdjustment(minDurationAdjustment *foundation.NSNumber) *MTRDeviceEnergyManagementClusterSlotStruct
+	WithMaxDurationAdjustment(maxDurationAdjustment *foundation.NSNumber) *MTRDeviceEnergyManagementClusterSlotStruct
+	MinDuration() *foundation.NSNumber
+	SetMinDuration(minDuration *foundation.NSNumber)
+	MaxDuration() *foundation.NSNumber
+	SetMaxDuration(maxDuration *foundation.NSNumber)
+	DefaultDuration() *foundation.NSNumber
+	SetDefaultDuration(defaultDuration *foundation.NSNumber)
+	ElapsedSlotTime() *foundation.NSNumber
+	SetElapsedSlotTime(elapsedSlotTime *foundation.NSNumber)
+	RemainingSlotTime() *foundation.NSNumber
+	SetRemainingSlotTime(remainingSlotTime *foundation.NSNumber)
+	SlotIsPausable() *foundation.NSNumber
+	SetSlotIsPausable(slotIsPausable *foundation.NSNumber)
+	MinPauseDuration() *foundation.NSNumber
+	SetMinPauseDuration(minPauseDuration *foundation.NSNumber)
+	MaxPauseDuration() *foundation.NSNumber
+	SetMaxPauseDuration(maxPauseDuration *foundation.NSNumber)
+	ManufacturerESAState() *foundation.NSNumber
+	SetManufacturerESAState(manufacturerESAState *foundation.NSNumber)
+	NominalPower() *foundation.NSNumber
+	SetNominalPower(nominalPower *foundation.NSNumber)
+	MinPower() *foundation.NSNumber
+	SetMinPower(minPower *foundation.NSNumber)
+	MaxPower() *foundation.NSNumber
+	SetMaxPower(maxPower *foundation.NSNumber)
+	NominalEnergy() *foundation.NSNumber
+	SetNominalEnergy(nominalEnergy *foundation.NSNumber)
+	Costs() *foundation.NSArray[objc.ID]
+	SetCosts(costs *foundation.NSArray[objc.ID])
+	MinPowerAdjustment() *foundation.NSNumber
+	SetMinPowerAdjustment(minPowerAdjustment *foundation.NSNumber)
+	MaxPowerAdjustment() *foundation.NSNumber
+	SetMaxPowerAdjustment(maxPowerAdjustment *foundation.NSNumber)
+	MinDurationAdjustment() *foundation.NSNumber
+	SetMinDurationAdjustment(minDurationAdjustment *foundation.NSNumber)
+	MaxDurationAdjustment() *foundation.NSNumber
+	SetMaxDurationAdjustment(maxDurationAdjustment *foundation.NSNumber)
+}
+
+var _ MTRDeviceEnergyManagementClusterSlotStructable = (*MTRDeviceEnergyManagementClusterSlotStruct)(nil)
+

@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
@@ -25,7 +26,20 @@ func NewCNNDropoutGradientState() *CNNDropoutGradientState {
 	return &CNNDropoutGradientState{inner: raw.MPSCNNDropoutGradientStateFromID(_id)}
 }
 
+// MaskData calls the underlying MaskData.
+func (x *CNNDropoutGradientState) MaskData() *foundation.NSData {
+	return x.inner.MaskData()
+}
+
 func (x *CNNDropoutGradientState) asNNGradientState() *mpsneuralnetwork.MPSNNGradientState { return &x.inner.MPSNNGradientState }
 
 func (x *CNNDropoutGradientState) asState() *mpscore.MPSState { return &x.inner.MPSNNGradientState.MPSState }
+
+// CNNDropoutGradientStateable is the interface implemented by [CNNDropoutGradientState], for mocking and DI.
+type CNNDropoutGradientStateable interface {
+	Unwrap() *raw.MPSCNNDropoutGradientState
+	MaskData() *foundation.NSData
+}
+
+var _ CNNDropoutGradientStateable = (*CNNDropoutGradientState)(nil)
 

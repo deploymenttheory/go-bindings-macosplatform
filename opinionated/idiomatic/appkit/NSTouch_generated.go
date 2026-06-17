@@ -6,6 +6,7 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,65 @@ func NewTouch() *Touch {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTouch")), objc.RegisterName("new"))
 	return &Touch{inner: raw.NSTouchFromID(_id)}
 }
+
+// Identity calls the underlying Identity.
+func (x *Touch) Identity() objc.ID {
+	return x.inner.Identity()
+}
+
+// Phase calls the underlying Phase.
+func (x *Touch) Phase() raw.NSTouchPhase {
+	return x.inner.Phase()
+}
+
+// NormalizedPosition calls the underlying NormalizedPosition.
+func (x *Touch) NormalizedPosition() corefoundation.CGPoint {
+	return x.inner.NormalizedPosition()
+}
+
+// IsResting calls the underlying IsResting.
+func (x *Touch) IsResting() bool {
+	return x.inner.IsResting()
+}
+
+// Device calls the underlying Device.
+func (x *Touch) Device() objc.ID {
+	return x.inner.Device()
+}
+
+// DeviceSize calls the underlying DeviceSize.
+func (x *Touch) DeviceSize() corefoundation.CGSize {
+	return x.inner.DeviceSize()
+}
+
+// LocationInView calls the underlying LocationInView.
+func (x *Touch) LocationInView(view *raw.NSView) corefoundation.CGPoint {
+	return x.inner.LocationInView(view)
+}
+
+// PreviousLocationInView calls the underlying PreviousLocationInView.
+func (x *Touch) PreviousLocationInView(view *raw.NSView) corefoundation.CGPoint {
+	return x.inner.PreviousLocationInView(view)
+}
+
+// Type calls the underlying Type.
+func (x *Touch) Type() raw.NSTouchType {
+	return x.inner.Type()
+}
+
+// Touchable is the interface implemented by [Touch], for mocking and DI.
+type Touchable interface {
+	Unwrap() *raw.NSTouch
+	Identity() objc.ID
+	Phase() raw.NSTouchPhase
+	NormalizedPosition() corefoundation.CGPoint
+	IsResting() bool
+	Device() objc.ID
+	DeviceSize() corefoundation.CGSize
+	LocationInView(view *raw.NSView) corefoundation.CGPoint
+	PreviousLocationInView(view *raw.NSView) corefoundation.CGPoint
+	Type() raw.NSTouchType
+}
+
+var _ Touchable = (*Touch)(nil)
 

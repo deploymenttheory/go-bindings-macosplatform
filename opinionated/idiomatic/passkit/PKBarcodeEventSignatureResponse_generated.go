@@ -31,3 +31,23 @@ func (x *BarcodeEventSignatureResponse) WithSignedData(signedData *foundation.NS
 	return x
 }
 
+// SignedData calls the underlying SignedData.
+func (x *BarcodeEventSignatureResponse) SignedData() *foundation.NSData {
+	return x.inner.SignedData()
+}
+
+// SetSignedData calls the underlying SetSignedData.
+func (x *BarcodeEventSignatureResponse) SetSignedData(signedData *foundation.NSData) {
+	x.inner.SetSignedData(signedData)
+}
+
+// BarcodeEventSignatureResponseable is the interface implemented by [BarcodeEventSignatureResponse], for mocking and DI.
+type BarcodeEventSignatureResponseable interface {
+	Unwrap() *raw.PKBarcodeEventSignatureResponse
+	WithSignedData(signedData *foundation.NSData) *BarcodeEventSignatureResponse
+	SignedData() *foundation.NSData
+	SetSignedData(signedData *foundation.NSData)
+}
+
+var _ BarcodeEventSignatureResponseable = (*BarcodeEventSignatureResponse)(nil)
+

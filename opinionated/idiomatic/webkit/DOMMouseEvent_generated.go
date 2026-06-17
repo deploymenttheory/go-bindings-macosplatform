@@ -32,6 +32,94 @@ func NewDOMMouseEventMouseEvent(type_ string, canBubble bool, cancelable bool, v
 	return &DOMMouseEvent{inner: raw.DOMMouseEventFromID(_id)}
 }
 
+// ScreenX calls the underlying ScreenX.
+func (x *DOMMouseEvent) ScreenX() int {
+	return x.inner.ScreenX()
+}
+
+// ScreenY calls the underlying ScreenY.
+func (x *DOMMouseEvent) ScreenY() int {
+	return x.inner.ScreenY()
+}
+
+// ClientX calls the underlying ClientX.
+func (x *DOMMouseEvent) ClientX() int {
+	return x.inner.ClientX()
+}
+
+// ClientY calls the underlying ClientY.
+func (x *DOMMouseEvent) ClientY() int {
+	return x.inner.ClientY()
+}
+
+// CtrlKey calls the underlying CtrlKey.
+func (x *DOMMouseEvent) CtrlKey() bool {
+	return x.inner.CtrlKey()
+}
+
+// ShiftKey calls the underlying ShiftKey.
+func (x *DOMMouseEvent) ShiftKey() bool {
+	return x.inner.ShiftKey()
+}
+
+// AltKey calls the underlying AltKey.
+func (x *DOMMouseEvent) AltKey() bool {
+	return x.inner.AltKey()
+}
+
+// MetaKey calls the underlying MetaKey.
+func (x *DOMMouseEvent) MetaKey() bool {
+	return x.inner.MetaKey()
+}
+
+// Button calls the underlying Button.
+func (x *DOMMouseEvent) Button() int16 {
+	return x.inner.Button()
+}
+
+// RelatedTarget calls the underlying RelatedTarget.
+func (x *DOMMouseEvent) RelatedTarget() raw.DOMEventTarget {
+	return x.inner.RelatedTarget()
+}
+
+// OffsetX calls the underlying OffsetX.
+func (x *DOMMouseEvent) OffsetX() int {
+	return x.inner.OffsetX()
+}
+
+// OffsetY calls the underlying OffsetY.
+func (x *DOMMouseEvent) OffsetY() int {
+	return x.inner.OffsetY()
+}
+
+// X calls the underlying X.
+func (x *DOMMouseEvent) X() int {
+	return x.inner.X()
+}
+
+// Y calls the underlying Y.
+func (x *DOMMouseEvent) Y() int {
+	return x.inner.Y()
+}
+
+// FromElement calls the underlying FromElement.
+func (x *DOMMouseEvent) FromElement() *DOMNode {
+	_r := x.inner.FromElement()
+	if _r == nil {
+		return nil
+	}
+	return &DOMNode{inner: _r}
+}
+
+// ToElement calls the underlying ToElement.
+func (x *DOMMouseEvent) ToElement() *DOMNode {
+	_r := x.inner.ToElement()
+	if _r == nil {
+		return nil
+	}
+	return &DOMNode{inner: _r}
+}
+
 func (x *DOMMouseEvent) asDOMMouseEvent() *raw.DOMMouseEvent { return x.inner }
 
 func (x *DOMMouseEvent) asDOMUIEvent() *raw.DOMUIEvent { return &x.inner.DOMUIEvent }
@@ -41,4 +129,27 @@ func (x *DOMMouseEvent) asDOMEvent() *raw.DOMEvent { return &x.inner.DOMUIEvent.
 func (x *DOMMouseEvent) asDOMObject() *raw.DOMObject { return &x.inner.DOMUIEvent.DOMEvent.DOMObject }
 
 func (x *DOMMouseEvent) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMUIEvent.DOMEvent.DOMObject.WebScriptObject }
+
+// DOMMouseEventable is the interface implemented by [DOMMouseEvent], for mocking and DI.
+type DOMMouseEventable interface {
+	Unwrap() *raw.DOMMouseEvent
+	ScreenX() int
+	ScreenY() int
+	ClientX() int
+	ClientY() int
+	CtrlKey() bool
+	ShiftKey() bool
+	AltKey() bool
+	MetaKey() bool
+	Button() int16
+	RelatedTarget() raw.DOMEventTarget
+	OffsetX() int
+	OffsetY() int
+	X() int
+	Y() int
+	FromElement() *DOMNode
+	ToElement() *DOMNode
+}
+
+var _ DOMMouseEventable = (*DOMMouseEvent)(nil)
 

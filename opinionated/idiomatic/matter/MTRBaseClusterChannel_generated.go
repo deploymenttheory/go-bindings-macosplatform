@@ -5,9 +5,12 @@
 package matter
 
 import (
+	"context"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // MTRBaseClusterChannel wraps [raw.MTRBaseClusterChannel] with a fluent Go API.
@@ -32,7 +35,670 @@ func NewMTRBaseClusterChannelWithDeviceEndpointQueue(device *raw.MTRBaseDevice, 
 	return &MTRBaseClusterChannel{inner: raw.MTRBaseClusterChannelFromID(_id)}
 }
 
+// ChangeChannelWithParamsCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterChannel) ChangeChannelWithParamsCompletion(ctx context.Context, params *raw.MTRChannelClusterChangeChannelParams) (*MTRChannelClusterChangeChannelResponseParams, error) {
+	type _result struct {
+		val *MTRChannelClusterChangeChannelResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ChangeChannelWithParamsCompletion(params, func(_p0 *raw.MTRChannelClusterChangeChannelResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTRChannelClusterChangeChannelResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTRChannelClusterChangeChannelResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
+// ChangeChannelByNumberWithParamsCompletion calls the underlying ChangeChannelByNumberWithParamsCompletion.
+func (x *MTRBaseClusterChannel) ChangeChannelByNumberWithParamsCompletion(params *raw.MTRChannelClusterChangeChannelByNumberParams, completion func(unsafe.Pointer)) {
+	x.inner.ChangeChannelByNumberWithParamsCompletion(params, completion)
+}
+
+// SkipChannelWithParamsCompletion calls the underlying SkipChannelWithParamsCompletion.
+func (x *MTRBaseClusterChannel) SkipChannelWithParamsCompletion(params *raw.MTRChannelClusterSkipChannelParams, completion func(unsafe.Pointer)) {
+	x.inner.SkipChannelWithParamsCompletion(params, completion)
+}
+
+// GetProgramGuideWithParamsCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterChannel) GetProgramGuideWithParamsCompletion(ctx context.Context, params *raw.MTRChannelClusterGetProgramGuideParams) (*MTRChannelClusterProgramGuideResponseParams, error) {
+	type _result struct {
+		val *MTRChannelClusterProgramGuideResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.GetProgramGuideWithParamsCompletion(params, func(_p0 *raw.MTRChannelClusterProgramGuideResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTRChannelClusterProgramGuideResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTRChannelClusterProgramGuideResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
+// GetProgramGuideWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterChannel) GetProgramGuideWithCompletion(ctx context.Context) (*MTRChannelClusterProgramGuideResponseParams, error) {
+	type _result struct {
+		val *MTRChannelClusterProgramGuideResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.GetProgramGuideWithCompletion(func(_p0 *raw.MTRChannelClusterProgramGuideResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTRChannelClusterProgramGuideResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTRChannelClusterProgramGuideResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
+// RecordProgramWithParamsCompletion calls the underlying RecordProgramWithParamsCompletion.
+func (x *MTRBaseClusterChannel) RecordProgramWithParamsCompletion(params *raw.MTRChannelClusterRecordProgramParams, completion func(unsafe.Pointer)) {
+	x.inner.RecordProgramWithParamsCompletion(params, completion)
+}
+
+// CancelRecordProgramWithParamsCompletion calls the underlying CancelRecordProgramWithParamsCompletion.
+func (x *MTRBaseClusterChannel) CancelRecordProgramWithParamsCompletion(params *raw.MTRChannelClusterCancelRecordProgramParams, completion func(unsafe.Pointer)) {
+	x.inner.CancelRecordProgramWithParamsCompletion(params, completion)
+}
+
+// ReadAttributeChannelListWithCompletion calls the underlying ReadAttributeChannelListWithCompletion.
+func (x *MTRBaseClusterChannel) ReadAttributeChannelListWithCompletion(completion objc.Block) {
+	x.inner.ReadAttributeChannelListWithCompletion(completion)
+}
+
+// SubscribeAttributeChannelListWithParamsSubscriptionEstablishedReportHandler calls the underlying SubscribeAttributeChannelListWithParamsSubscriptionEstablishedReportHandler.
+func (x *MTRBaseClusterChannel) SubscribeAttributeChannelListWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block) {
+	x.inner.SubscribeAttributeChannelListWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, reportHandler)
+}
+
+// ReadAttributeLineupWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterChannel) ReadAttributeLineupWithCompletion(ctx context.Context) (*MTRChannelClusterLineupInfoStruct, error) {
+	type _result struct {
+		val *MTRChannelClusterLineupInfoStruct
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeLineupWithCompletion(func(_p0 *raw.MTRChannelClusterLineupInfoStruct, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTRChannelClusterLineupInfoStruct{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTRChannelClusterLineupInfoStruct
+		return _zero, ctx.Err()
+	}
+}
+
+// SubscribeAttributeLineupWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterChannel) SubscribeAttributeLineupWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*MTRChannelClusterLineupInfoStruct, error) {
+	type _result struct {
+		val *MTRChannelClusterLineupInfoStruct
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeLineupWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *raw.MTRChannelClusterLineupInfoStruct, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTRChannelClusterLineupInfoStruct{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTRChannelClusterLineupInfoStruct
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeCurrentChannelWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterChannel) ReadAttributeCurrentChannelWithCompletion(ctx context.Context) (*MTRChannelClusterChannelInfoStruct, error) {
+	type _result struct {
+		val *MTRChannelClusterChannelInfoStruct
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeCurrentChannelWithCompletion(func(_p0 *raw.MTRChannelClusterChannelInfoStruct, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTRChannelClusterChannelInfoStruct{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTRChannelClusterChannelInfoStruct
+		return _zero, ctx.Err()
+	}
+}
+
+// SubscribeAttributeCurrentChannelWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterChannel) SubscribeAttributeCurrentChannelWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*MTRChannelClusterChannelInfoStruct, error) {
+	type _result struct {
+		val *MTRChannelClusterChannelInfoStruct
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeCurrentChannelWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *raw.MTRChannelClusterChannelInfoStruct, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTRChannelClusterChannelInfoStruct{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTRChannelClusterChannelInfoStruct
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeGeneratedCommandListWithCompletion calls the underlying ReadAttributeGeneratedCommandListWithCompletion.
+func (x *MTRBaseClusterChannel) ReadAttributeGeneratedCommandListWithCompletion(completion objc.Block) {
+	x.inner.ReadAttributeGeneratedCommandListWithCompletion(completion)
+}
+
+// SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler calls the underlying SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler.
+func (x *MTRBaseClusterChannel) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block) {
+	x.inner.SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, reportHandler)
+}
+
+// ReadAttributeAcceptedCommandListWithCompletion calls the underlying ReadAttributeAcceptedCommandListWithCompletion.
+func (x *MTRBaseClusterChannel) ReadAttributeAcceptedCommandListWithCompletion(completion objc.Block) {
+	x.inner.ReadAttributeAcceptedCommandListWithCompletion(completion)
+}
+
+// SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler calls the underlying SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler.
+func (x *MTRBaseClusterChannel) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block) {
+	x.inner.SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, reportHandler)
+}
+
+// ReadAttributeAttributeListWithCompletion calls the underlying ReadAttributeAttributeListWithCompletion.
+func (x *MTRBaseClusterChannel) ReadAttributeAttributeListWithCompletion(completion objc.Block) {
+	x.inner.ReadAttributeAttributeListWithCompletion(completion)
+}
+
+// SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler calls the underlying SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler.
+func (x *MTRBaseClusterChannel) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block) {
+	x.inner.SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, reportHandler)
+}
+
+// ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterChannel) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeFeatureMapWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterChannel) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterChannel) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeClusterRevisionWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterChannel) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ChangeChannelWithParams blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterChannel) ChangeChannelWithParams(ctx context.Context, params *raw.MTRChannelClusterChangeChannelParams) (*MTRChannelClusterChangeChannelResponseParams, error) {
+	type _result struct {
+		val *MTRChannelClusterChangeChannelResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ChangeChannelWithParamsCompletionHandler(params, func(_p0 *raw.MTRChannelClusterChangeChannelResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTRChannelClusterChangeChannelResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTRChannelClusterChangeChannelResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
+// ChangeChannelByNumberWithParamsCompletionHandler calls the underlying ChangeChannelByNumberWithParamsCompletionHandler.
+func (x *MTRBaseClusterChannel) ChangeChannelByNumberWithParamsCompletionHandler(params *raw.MTRChannelClusterChangeChannelByNumberParams, completionHandler func(unsafe.Pointer)) {
+	x.inner.ChangeChannelByNumberWithParamsCompletionHandler(params, completionHandler)
+}
+
+// SkipChannelWithParamsCompletionHandler calls the underlying SkipChannelWithParamsCompletionHandler.
+func (x *MTRBaseClusterChannel) SkipChannelWithParamsCompletionHandler(params *raw.MTRChannelClusterSkipChannelParams, completionHandler func(unsafe.Pointer)) {
+	x.inner.SkipChannelWithParamsCompletionHandler(params, completionHandler)
+}
+
+// ReadAttributeChannelListWithCompletionHandler calls the underlying ReadAttributeChannelListWithCompletionHandler.
+func (x *MTRBaseClusterChannel) ReadAttributeChannelListWithCompletionHandler(completionHandler objc.Block) {
+	x.inner.ReadAttributeChannelListWithCompletionHandler(completionHandler)
+}
+
+// SubscribeAttributeChannelListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler calls the underlying SubscribeAttributeChannelListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler.
+func (x *MTRBaseClusterChannel) SubscribeAttributeChannelListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func(), reportHandler objc.Block) {
+	x.inner.SubscribeAttributeChannelListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, reportHandler)
+}
+
+// ReadAttributeLineup blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterChannel) ReadAttributeLineup(ctx context.Context) (*MTRChannelClusterLineupInfo, error) {
+	type _result struct {
+		val *MTRChannelClusterLineupInfo
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeLineupWithCompletionHandler(func(_p0 *raw.MTRChannelClusterLineupInfo, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTRChannelClusterLineupInfo{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTRChannelClusterLineupInfo
+		return _zero, ctx.Err()
+	}
+}
+
+// SubscribeAttributeLineupWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterChannel) SubscribeAttributeLineupWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*MTRChannelClusterLineupInfo, error) {
+	type _result struct {
+		val *MTRChannelClusterLineupInfo
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeLineupWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *raw.MTRChannelClusterLineupInfo, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTRChannelClusterLineupInfo{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTRChannelClusterLineupInfo
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeCurrentChannel blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterChannel) ReadAttributeCurrentChannel(ctx context.Context) (*MTRChannelClusterChannelInfo, error) {
+	type _result struct {
+		val *MTRChannelClusterChannelInfo
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeCurrentChannelWithCompletionHandler(func(_p0 *raw.MTRChannelClusterChannelInfo, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTRChannelClusterChannelInfo{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTRChannelClusterChannelInfo
+		return _zero, ctx.Err()
+	}
+}
+
+// SubscribeAttributeCurrentChannelWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterChannel) SubscribeAttributeCurrentChannelWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*MTRChannelClusterChannelInfo, error) {
+	type _result struct {
+		val *MTRChannelClusterChannelInfo
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeCurrentChannelWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *raw.MTRChannelClusterChannelInfo, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTRChannelClusterChannelInfo{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTRChannelClusterChannelInfo
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeGeneratedCommandListWithCompletionHandler calls the underlying ReadAttributeGeneratedCommandListWithCompletionHandler.
+func (x *MTRBaseClusterChannel) ReadAttributeGeneratedCommandListWithCompletionHandler(completionHandler objc.Block) {
+	x.inner.ReadAttributeGeneratedCommandListWithCompletionHandler(completionHandler)
+}
+
+// SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler calls the underlying SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler.
+func (x *MTRBaseClusterChannel) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func(), reportHandler objc.Block) {
+	x.inner.SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, reportHandler)
+}
+
+// ReadAttributeAcceptedCommandListWithCompletionHandler calls the underlying ReadAttributeAcceptedCommandListWithCompletionHandler.
+func (x *MTRBaseClusterChannel) ReadAttributeAcceptedCommandListWithCompletionHandler(completionHandler objc.Block) {
+	x.inner.ReadAttributeAcceptedCommandListWithCompletionHandler(completionHandler)
+}
+
+// SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler calls the underlying SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler.
+func (x *MTRBaseClusterChannel) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func(), reportHandler objc.Block) {
+	x.inner.SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, reportHandler)
+}
+
+// ReadAttributeAttributeListWithCompletionHandler calls the underlying ReadAttributeAttributeListWithCompletionHandler.
+func (x *MTRBaseClusterChannel) ReadAttributeAttributeListWithCompletionHandler(completionHandler objc.Block) {
+	x.inner.ReadAttributeAttributeListWithCompletionHandler(completionHandler)
+}
+
+// SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler calls the underlying SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler.
+func (x *MTRBaseClusterChannel) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func(), reportHandler objc.Block) {
+	x.inner.SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, reportHandler)
+}
+
+// ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterChannel) ReadAttributeFeatureMap(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeFeatureMapWithCompletionHandler(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterChannel) SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterChannel) ReadAttributeClusterRevision(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeClusterRevisionWithCompletionHandler(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterChannel) SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
 func (x *MTRBaseClusterChannel) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
 
 func (x *MTRBaseClusterChannel) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+
+// MTRBaseClusterChannelable is the interface implemented by [MTRBaseClusterChannel], for mocking and DI.
+type MTRBaseClusterChannelable interface {
+	Unwrap() *raw.MTRBaseClusterChannel
+	ChangeChannelWithParamsCompletion(ctx context.Context, params *raw.MTRChannelClusterChangeChannelParams) (*MTRChannelClusterChangeChannelResponseParams, error)
+	ChangeChannelByNumberWithParamsCompletion(params *raw.MTRChannelClusterChangeChannelByNumberParams, completion func(unsafe.Pointer))
+	SkipChannelWithParamsCompletion(params *raw.MTRChannelClusterSkipChannelParams, completion func(unsafe.Pointer))
+	GetProgramGuideWithParamsCompletion(ctx context.Context, params *raw.MTRChannelClusterGetProgramGuideParams) (*MTRChannelClusterProgramGuideResponseParams, error)
+	GetProgramGuideWithCompletion(ctx context.Context) (*MTRChannelClusterProgramGuideResponseParams, error)
+	RecordProgramWithParamsCompletion(params *raw.MTRChannelClusterRecordProgramParams, completion func(unsafe.Pointer))
+	CancelRecordProgramWithParamsCompletion(params *raw.MTRChannelClusterCancelRecordProgramParams, completion func(unsafe.Pointer))
+	ReadAttributeChannelListWithCompletion(completion objc.Block)
+	SubscribeAttributeChannelListWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block)
+	ReadAttributeLineupWithCompletion(ctx context.Context) (*MTRChannelClusterLineupInfoStruct, error)
+	SubscribeAttributeLineupWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*MTRChannelClusterLineupInfoStruct, error)
+	ReadAttributeCurrentChannelWithCompletion(ctx context.Context) (*MTRChannelClusterChannelInfoStruct, error)
+	SubscribeAttributeCurrentChannelWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*MTRChannelClusterChannelInfoStruct, error)
+	ReadAttributeGeneratedCommandListWithCompletion(completion objc.Block)
+	SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block)
+	ReadAttributeAcceptedCommandListWithCompletion(completion objc.Block)
+	SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block)
+	ReadAttributeAttributeListWithCompletion(completion objc.Block)
+	SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block)
+	ReadAttributeFeatureMapWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ChangeChannelWithParams(ctx context.Context, params *raw.MTRChannelClusterChangeChannelParams) (*MTRChannelClusterChangeChannelResponseParams, error)
+	ChangeChannelByNumberWithParamsCompletionHandler(params *raw.MTRChannelClusterChangeChannelByNumberParams, completionHandler func(unsafe.Pointer))
+	SkipChannelWithParamsCompletionHandler(params *raw.MTRChannelClusterSkipChannelParams, completionHandler func(unsafe.Pointer))
+	ReadAttributeChannelListWithCompletionHandler(completionHandler objc.Block)
+	SubscribeAttributeChannelListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func(), reportHandler objc.Block)
+	ReadAttributeLineup(ctx context.Context) (*MTRChannelClusterLineupInfo, error)
+	SubscribeAttributeLineupWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*MTRChannelClusterLineupInfo, error)
+	ReadAttributeCurrentChannel(ctx context.Context) (*MTRChannelClusterChannelInfo, error)
+	SubscribeAttributeCurrentChannelWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*MTRChannelClusterChannelInfo, error)
+	ReadAttributeGeneratedCommandListWithCompletionHandler(completionHandler objc.Block)
+	SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func(), reportHandler objc.Block)
+	ReadAttributeAcceptedCommandListWithCompletionHandler(completionHandler objc.Block)
+	SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func(), reportHandler objc.Block)
+	ReadAttributeAttributeListWithCompletionHandler(completionHandler objc.Block)
+	SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func(), reportHandler objc.Block)
+	ReadAttributeFeatureMap(ctx context.Context) (*foundation.NSNumber, error)
+	SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error)
+	ReadAttributeClusterRevision(ctx context.Context) (*foundation.NSNumber, error)
+	SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error)
+}
+
+var _ MTRBaseClusterChannelable = (*MTRBaseClusterChannel)(nil)
 

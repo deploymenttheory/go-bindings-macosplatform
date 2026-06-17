@@ -7,6 +7,7 @@ package spritekit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -71,17 +72,53 @@ func (x *Shader) WithAttributes(items ...*raw.SKAttribute) *Shader {
 	return x
 }
 
+// AddUniform calls the underlying AddUniform.
+func (x *Shader) AddUniform(uniform *raw.SKUniform) {
+	x.inner.AddUniform(uniform)
+}
+
+// UniformNamed calls the underlying UniformNamed.
+func (x *Shader) UniformNamed(name string) *Uniform {
+	_r := x.inner.UniformNamed(foundation.NSStringStringWithUTF8String(name))
+	if _r == nil {
+		return nil
+	}
+	return &Uniform{inner: _r}
+}
+
+// RemoveUniformNamed calls the underlying RemoveUniformNamed.
+func (x *Shader) RemoveUniformNamed(name string) {
+	x.inner.RemoveUniformNamed(foundation.NSStringStringWithUTF8String(name))
+}
+
+// Source calls the underlying Source.
+func (x *Shader) Source() string {
+	_r := x.inner.Source()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetSource calls the underlying SetSource.
+func (x *Shader) SetSource(source string) {
+	x.inner.SetSource(foundation.NSStringStringWithUTF8String(source))
+}
+
 // Uniforms returns the collection as a Go slice.
 func (x *Shader) Uniforms() []*raw.SKUniform {
 	arr := x.inner.Uniforms()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.SKUniform, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SKUniform {
+		return raw.SKUniformFromID(purego.Retain(_id))
+	})
+}
+
+// SetUniforms calls the underlying SetUniforms.
+func (x *Shader) SetUniforms(uniforms *foundation.NSArray[*raw.SKUniform]) {
+	x.inner.SetUniforms(uniforms)
 }
 
 // Attributes returns the collection as a Go slice.
@@ -90,10 +127,32 @@ func (x *Shader) Attributes() []*raw.SKAttribute {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.SKAttribute, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SKAttribute {
+		return raw.SKAttributeFromID(purego.Retain(_id))
+	})
 }
+
+// SetAttributes calls the underlying SetAttributes.
+func (x *Shader) SetAttributes(attributes *foundation.NSArray[*raw.SKAttribute]) {
+	x.inner.SetAttributes(attributes)
+}
+
+// Shaderable is the interface implemented by [Shader], for mocking and DI.
+type Shaderable interface {
+	Unwrap() *raw.SKShader
+	WithSource(source string) *Shader
+	WithUniforms(items ...*raw.SKUniform) *Shader
+	WithAttributes(items ...*raw.SKAttribute) *Shader
+	AddUniform(uniform *raw.SKUniform)
+	UniformNamed(name string) *Uniform
+	RemoveUniformNamed(name string)
+	Source() string
+	SetSource(source string)
+	Uniforms() []*raw.SKUniform
+	SetUniforms(uniforms *foundation.NSArray[*raw.SKUniform])
+	Attributes() []*raw.SKAttribute
+	SetAttributes(attributes *foundation.NSArray[*raw.SKAttribute])
+}
+
+var _ Shaderable = (*Shader)(nil)
 

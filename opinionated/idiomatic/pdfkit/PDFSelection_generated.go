@@ -5,8 +5,12 @@
 package pdfkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/pdfkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Selection wraps [raw.PDFSelection] with a fluent Go API.
@@ -24,17 +28,65 @@ func NewSelectionWithDocument(document *raw.PDFDocument) *Selection {
 	return &Selection{inner: raw.PDFSelectionFromID(_id)}
 }
 
+// BoundsForPage calls the underlying BoundsForPage.
+func (x *Selection) BoundsForPage(page *raw.PDFPage) corefoundation.CGRect {
+	return x.inner.BoundsForPage(page)
+}
+
+// NumberOfTextRangesOnPage calls the underlying NumberOfTextRangesOnPage.
+func (x *Selection) NumberOfTextRangesOnPage(page *raw.PDFPage) uint {
+	return x.inner.NumberOfTextRangesOnPage(page)
+}
+
+// RangeAtIndexOnPage calls the underlying RangeAtIndexOnPage.
+func (x *Selection) RangeAtIndexOnPage(index uint, page *raw.PDFPage) foundation.NSRange {
+	return x.inner.RangeAtIndexOnPage(index, page)
+}
+
 // SelectionsByLine returns the collection as a Go slice.
 func (x *Selection) SelectionsByLine() []*raw.PDFSelection {
 	arr := x.inner.SelectionsByLine()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.PDFSelection, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PDFSelection {
+		return raw.PDFSelectionFromID(purego.Retain(_id))
+	})
+}
+
+// AddSelection calls the underlying AddSelection.
+func (x *Selection) AddSelection(selection *raw.PDFSelection) {
+	x.inner.AddSelection(selection)
+}
+
+// AddSelections calls the underlying AddSelections.
+func (x *Selection) AddSelections(selections *foundation.NSArray[*raw.PDFSelection]) {
+	x.inner.AddSelections(selections)
+}
+
+// ExtendSelectionAtEnd calls the underlying ExtendSelectionAtEnd.
+func (x *Selection) ExtendSelectionAtEnd(succeed int) {
+	x.inner.ExtendSelectionAtEnd(succeed)
+}
+
+// ExtendSelectionAtStart calls the underlying ExtendSelectionAtStart.
+func (x *Selection) ExtendSelectionAtStart(precede int) {
+	x.inner.ExtendSelectionAtStart(precede)
+}
+
+// ExtendSelectionForLineBoundaries calls the underlying ExtendSelectionForLineBoundaries.
+func (x *Selection) ExtendSelectionForLineBoundaries() {
+	x.inner.ExtendSelectionForLineBoundaries()
+}
+
+// DrawForPageActive calls the underlying DrawForPageActive.
+func (x *Selection) DrawForPageActive(page *raw.PDFPage, active bool) {
+	x.inner.DrawForPageActive(page, active)
+}
+
+// DrawForPageWithBoxActive calls the underlying DrawForPageWithBoxActive.
+func (x *Selection) DrawForPageWithBoxActive(page *raw.PDFPage, box raw.PDFDisplayBox, active bool) {
+	x.inner.DrawForPageWithBoxActive(page, box, active)
 }
 
 // Pages returns the collection as a Go slice.
@@ -43,10 +95,55 @@ func (x *Selection) Pages() []*raw.PDFPage {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.PDFPage, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PDFPage {
+		return raw.PDFPageFromID(purego.Retain(_id))
+	})
 }
+
+// Color calls the underlying Color.
+func (x *Selection) Color() unsafe.Pointer {
+	return x.inner.Color()
+}
+
+// SetColor calls the underlying SetColor.
+func (x *Selection) SetColor(color unsafe.Pointer) {
+	x.inner.SetColor(color)
+}
+
+// String calls the underlying String.
+func (x *Selection) String() string {
+	_r := x.inner.String()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// AttributedString calls the underlying AttributedString.
+func (x *Selection) AttributedString() *foundation.NSAttributedString {
+	return x.inner.AttributedString()
+}
+
+// Selectionable is the interface implemented by [Selection], for mocking and DI.
+type Selectionable interface {
+	Unwrap() *raw.PDFSelection
+	BoundsForPage(page *raw.PDFPage) corefoundation.CGRect
+	NumberOfTextRangesOnPage(page *raw.PDFPage) uint
+	RangeAtIndexOnPage(index uint, page *raw.PDFPage) foundation.NSRange
+	SelectionsByLine() []*raw.PDFSelection
+	AddSelection(selection *raw.PDFSelection)
+	AddSelections(selections *foundation.NSArray[*raw.PDFSelection])
+	ExtendSelectionAtEnd(succeed int)
+	ExtendSelectionAtStart(precede int)
+	ExtendSelectionForLineBoundaries()
+	DrawForPageActive(page *raw.PDFPage, active bool)
+	DrawForPageWithBoxActive(page *raw.PDFPage, box raw.PDFDisplayBox, active bool)
+	Pages() []*raw.PDFPage
+	Color() unsafe.Pointer
+	SetColor(color unsafe.Pointer)
+	String() string
+	AttributedString() *foundation.NSAttributedString
+}
+
+var _ Selectionable = (*Selection)(nil)
 

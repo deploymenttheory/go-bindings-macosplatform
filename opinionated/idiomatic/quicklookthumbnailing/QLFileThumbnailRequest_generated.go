@@ -5,6 +5,8 @@
 package quicklookthumbnailing
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quicklookthumbnailing"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +24,35 @@ func NewFileThumbnailRequest() *FileThumbnailRequest {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("QLFileThumbnailRequest")), objc.RegisterName("new"))
 	return &FileThumbnailRequest{inner: raw.QLFileThumbnailRequestFromID(_id)}
 }
+
+// MaximumSize calls the underlying MaximumSize.
+func (x *FileThumbnailRequest) MaximumSize() corefoundation.CGSize {
+	return x.inner.MaximumSize()
+}
+
+// MinimumSize calls the underlying MinimumSize.
+func (x *FileThumbnailRequest) MinimumSize() corefoundation.CGSize {
+	return x.inner.MinimumSize()
+}
+
+// Scale calls the underlying Scale.
+func (x *FileThumbnailRequest) Scale() float64 {
+	return x.inner.Scale()
+}
+
+// FileURL calls the underlying FileURL.
+func (x *FileThumbnailRequest) FileURL() *foundation.NSURL {
+	return x.inner.FileURL()
+}
+
+// FileThumbnailRequestable is the interface implemented by [FileThumbnailRequest], for mocking and DI.
+type FileThumbnailRequestable interface {
+	Unwrap() *raw.QLFileThumbnailRequest
+	MaximumSize() corefoundation.CGSize
+	MinimumSize() corefoundation.CGSize
+	Scale() float64
+	FileURL() *foundation.NSURL
+}
+
+var _ FileThumbnailRequestable = (*FileThumbnailRequest)(nil)
 

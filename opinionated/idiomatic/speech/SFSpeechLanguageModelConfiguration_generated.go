@@ -39,3 +39,28 @@ func NewSpeechLanguageModelConfigurationWithLanguageModelVocabularyWeight(langua
 	return &SpeechLanguageModelConfiguration{inner: raw.SFSpeechLanguageModelConfigurationFromID(_id)}
 }
 
+// LanguageModel calls the underlying LanguageModel.
+func (x *SpeechLanguageModelConfiguration) LanguageModel() *foundation.NSURL {
+	return x.inner.LanguageModel()
+}
+
+// Vocabulary calls the underlying Vocabulary.
+func (x *SpeechLanguageModelConfiguration) Vocabulary() *foundation.NSURL {
+	return x.inner.Vocabulary()
+}
+
+// Weight calls the underlying Weight.
+func (x *SpeechLanguageModelConfiguration) Weight() *foundation.NSNumber {
+	return x.inner.Weight()
+}
+
+// SpeechLanguageModelConfigurationable is the interface implemented by [SpeechLanguageModelConfiguration], for mocking and DI.
+type SpeechLanguageModelConfigurationable interface {
+	Unwrap() *raw.SFSpeechLanguageModelConfiguration
+	LanguageModel() *foundation.NSURL
+	Vocabulary() *foundation.NSURL
+	Weight() *foundation.NSNumber
+}
+
+var _ SpeechLanguageModelConfigurationable = (*SpeechLanguageModelConfiguration)(nil)
+

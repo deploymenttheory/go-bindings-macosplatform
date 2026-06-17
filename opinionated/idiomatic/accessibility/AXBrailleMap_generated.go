@@ -6,7 +6,9 @@ package accessibility
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/accessibility"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // BrailleMap wraps [raw.AXBrailleMap] with a fluent Go API.
@@ -22,4 +24,35 @@ func NewBrailleMap() *BrailleMap {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AXBrailleMap")), objc.RegisterName("new"))
 	return &BrailleMap{inner: raw.AXBrailleMapFromID(_id)}
 }
+
+// SetHeightAtPoint calls the underlying SetHeightAtPoint.
+func (x *BrailleMap) SetHeightAtPoint(status float32, point corefoundation.CGPoint) {
+	x.inner.SetHeightAtPoint(status, point)
+}
+
+// HeightAtPoint calls the underlying HeightAtPoint.
+func (x *BrailleMap) HeightAtPoint(point corefoundation.CGPoint) float32 {
+	return x.inner.HeightAtPoint(point)
+}
+
+// PresentImage calls the underlying PresentImage.
+func (x *BrailleMap) PresentImage(image unsafe.Pointer) {
+	x.inner.PresentImage(image)
+}
+
+// Dimensions calls the underlying Dimensions.
+func (x *BrailleMap) Dimensions() corefoundation.CGSize {
+	return x.inner.Dimensions()
+}
+
+// BrailleMapable is the interface implemented by [BrailleMap], for mocking and DI.
+type BrailleMapable interface {
+	Unwrap() *raw.AXBrailleMap
+	SetHeightAtPoint(status float32, point corefoundation.CGPoint)
+	HeightAtPoint(point corefoundation.CGPoint) float32
+	PresentImage(image unsafe.Pointer)
+	Dimensions() corefoundation.CGSize
+}
+
+var _ BrailleMapable = (*BrailleMap)(nil)
 

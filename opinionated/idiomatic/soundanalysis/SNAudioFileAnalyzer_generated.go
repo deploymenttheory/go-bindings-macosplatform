@@ -31,3 +31,46 @@ func NewAudioFileAnalyzerWithURLError(url string) (*AudioFileAnalyzer, error) {
 	return &AudioFileAnalyzer{inner: raw.SNAudioFileAnalyzerFromID(_id)}, nil
 }
 
+// AddRequestWithObserverError calls the underlying AddRequestWithObserverError.
+func (x *AudioFileAnalyzer) AddRequestWithObserverError(request raw.SNRequest, observer raw.SNResultsObserving) (bool, error) {
+	return x.inner.AddRequestWithObserverError(request, observer)
+}
+
+// RemoveRequest calls the underlying RemoveRequest.
+func (x *AudioFileAnalyzer) RemoveRequest(request raw.SNRequest) {
+	x.inner.RemoveRequest(request)
+}
+
+// RemoveAllRequests calls the underlying RemoveAllRequests.
+func (x *AudioFileAnalyzer) RemoveAllRequests() {
+	x.inner.RemoveAllRequests()
+}
+
+// Analyze calls the underlying Analyze.
+func (x *AudioFileAnalyzer) Analyze() {
+	x.inner.Analyze()
+}
+
+// AnalyzeWithCompletionHandler calls the underlying AnalyzeWithCompletionHandler.
+func (x *AudioFileAnalyzer) AnalyzeWithCompletionHandler(completionHandler func(bool)) {
+	x.inner.AnalyzeWithCompletionHandler(completionHandler)
+}
+
+// CancelAnalysis calls the underlying CancelAnalysis.
+func (x *AudioFileAnalyzer) CancelAnalysis() {
+	x.inner.CancelAnalysis()
+}
+
+// AudioFileAnalyzerable is the interface implemented by [AudioFileAnalyzer], for mocking and DI.
+type AudioFileAnalyzerable interface {
+	Unwrap() *raw.SNAudioFileAnalyzer
+	AddRequestWithObserverError(request raw.SNRequest, observer raw.SNResultsObserving) (bool, error)
+	RemoveRequest(request raw.SNRequest)
+	RemoveAllRequests()
+	Analyze()
+	AnalyzeWithCompletionHandler(completionHandler func(bool))
+	CancelAnalysis()
+}
+
+var _ AudioFileAnalyzerable = (*AudioFileAnalyzer)(nil)
+

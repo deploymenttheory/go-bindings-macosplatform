@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,7 +24,20 @@ func NewComposition() *Composition {
 	return &Composition{inner: raw.AVCompositionFromID(_id)}
 }
 
+// URLAssetInitializationOptions calls the underlying URLAssetInitializationOptions.
+func (x *Composition) URLAssetInitializationOptions() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.URLAssetInitializationOptions()
+}
+
 func (x *Composition) asComposition() *raw.AVComposition { return x.inner }
 
 func (x *Composition) asAsset() *raw.AVAsset { return &x.inner.AVAsset }
+
+// Compositionable is the interface implemented by [Composition], for mocking and DI.
+type Compositionable interface {
+	Unwrap() *raw.AVComposition
+	URLAssetInitializationOptions() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+}
+
+var _ Compositionable = (*Composition)(nil)
 

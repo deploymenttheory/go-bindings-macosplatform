@@ -6,6 +6,8 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +24,189 @@ func NewPlayerItemAccessLogEvent() *PlayerItemAccessLogEvent {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVPlayerItemAccessLogEvent")), objc.RegisterName("new"))
 	return &PlayerItemAccessLogEvent{inner: raw.AVPlayerItemAccessLogEventFromID(_id)}
 }
+
+// NumberOfSegmentsDownloaded calls the underlying NumberOfSegmentsDownloaded.
+func (x *PlayerItemAccessLogEvent) NumberOfSegmentsDownloaded() int {
+	return x.inner.NumberOfSegmentsDownloaded()
+}
+
+// NumberOfMediaRequests calls the underlying NumberOfMediaRequests.
+func (x *PlayerItemAccessLogEvent) NumberOfMediaRequests() int {
+	return x.inner.NumberOfMediaRequests()
+}
+
+// PlaybackStartDate calls the underlying PlaybackStartDate.
+func (x *PlayerItemAccessLogEvent) PlaybackStartDate() *foundation.NSDate {
+	return x.inner.PlaybackStartDate()
+}
+
+// URI calls the underlying URI.
+func (x *PlayerItemAccessLogEvent) URI() string {
+	_r := x.inner.URI()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ServerAddress calls the underlying ServerAddress.
+func (x *PlayerItemAccessLogEvent) ServerAddress() string {
+	_r := x.inner.ServerAddress()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// NumberOfServerAddressChanges calls the underlying NumberOfServerAddressChanges.
+func (x *PlayerItemAccessLogEvent) NumberOfServerAddressChanges() int {
+	return x.inner.NumberOfServerAddressChanges()
+}
+
+// PlaybackSessionID calls the underlying PlaybackSessionID.
+func (x *PlayerItemAccessLogEvent) PlaybackSessionID() string {
+	_r := x.inner.PlaybackSessionID()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// PlaybackStartOffset calls the underlying PlaybackStartOffset.
+func (x *PlayerItemAccessLogEvent) PlaybackStartOffset() float64 {
+	return x.inner.PlaybackStartOffset()
+}
+
+// SegmentsDownloadedDuration calls the underlying SegmentsDownloadedDuration.
+func (x *PlayerItemAccessLogEvent) SegmentsDownloadedDuration() float64 {
+	return x.inner.SegmentsDownloadedDuration()
+}
+
+// DurationWatched calls the underlying DurationWatched.
+func (x *PlayerItemAccessLogEvent) DurationWatched() float64 {
+	return x.inner.DurationWatched()
+}
+
+// NumberOfStalls calls the underlying NumberOfStalls.
+func (x *PlayerItemAccessLogEvent) NumberOfStalls() int {
+	return x.inner.NumberOfStalls()
+}
+
+// NumberOfBytesTransferred calls the underlying NumberOfBytesTransferred.
+func (x *PlayerItemAccessLogEvent) NumberOfBytesTransferred() int64 {
+	return x.inner.NumberOfBytesTransferred()
+}
+
+// TransferDuration calls the underlying TransferDuration.
+func (x *PlayerItemAccessLogEvent) TransferDuration() float64 {
+	return x.inner.TransferDuration()
+}
+
+// ObservedBitrate calls the underlying ObservedBitrate.
+func (x *PlayerItemAccessLogEvent) ObservedBitrate() float64 {
+	return x.inner.ObservedBitrate()
+}
+
+// IndicatedBitrate calls the underlying IndicatedBitrate.
+func (x *PlayerItemAccessLogEvent) IndicatedBitrate() float64 {
+	return x.inner.IndicatedBitrate()
+}
+
+// IndicatedAverageBitrate calls the underlying IndicatedAverageBitrate.
+func (x *PlayerItemAccessLogEvent) IndicatedAverageBitrate() float64 {
+	return x.inner.IndicatedAverageBitrate()
+}
+
+// AverageVideoBitrate calls the underlying AverageVideoBitrate.
+func (x *PlayerItemAccessLogEvent) AverageVideoBitrate() float64 {
+	return x.inner.AverageVideoBitrate()
+}
+
+// AverageAudioBitrate calls the underlying AverageAudioBitrate.
+func (x *PlayerItemAccessLogEvent) AverageAudioBitrate() float64 {
+	return x.inner.AverageAudioBitrate()
+}
+
+// NumberOfDroppedVideoFrames calls the underlying NumberOfDroppedVideoFrames.
+func (x *PlayerItemAccessLogEvent) NumberOfDroppedVideoFrames() int {
+	return x.inner.NumberOfDroppedVideoFrames()
+}
+
+// StartupTime calls the underlying StartupTime.
+func (x *PlayerItemAccessLogEvent) StartupTime() float64 {
+	return x.inner.StartupTime()
+}
+
+// DownloadOverdue calls the underlying DownloadOverdue.
+func (x *PlayerItemAccessLogEvent) DownloadOverdue() int {
+	return x.inner.DownloadOverdue()
+}
+
+// ObservedMaxBitrate calls the underlying ObservedMaxBitrate.
+func (x *PlayerItemAccessLogEvent) ObservedMaxBitrate() float64 {
+	return x.inner.ObservedMaxBitrate()
+}
+
+// ObservedMinBitrate calls the underlying ObservedMinBitrate.
+func (x *PlayerItemAccessLogEvent) ObservedMinBitrate() float64 {
+	return x.inner.ObservedMinBitrate()
+}
+
+// ObservedBitrateStandardDeviation calls the underlying ObservedBitrateStandardDeviation.
+func (x *PlayerItemAccessLogEvent) ObservedBitrateStandardDeviation() float64 {
+	return x.inner.ObservedBitrateStandardDeviation()
+}
+
+// PlaybackType calls the underlying PlaybackType.
+func (x *PlayerItemAccessLogEvent) PlaybackType() string {
+	_r := x.inner.PlaybackType()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// MediaRequestsWWAN calls the underlying MediaRequestsWWAN.
+func (x *PlayerItemAccessLogEvent) MediaRequestsWWAN() int {
+	return x.inner.MediaRequestsWWAN()
+}
+
+// SwitchBitrate calls the underlying SwitchBitrate.
+func (x *PlayerItemAccessLogEvent) SwitchBitrate() float64 {
+	return x.inner.SwitchBitrate()
+}
+
+// PlayerItemAccessLogEventable is the interface implemented by [PlayerItemAccessLogEvent], for mocking and DI.
+type PlayerItemAccessLogEventable interface {
+	Unwrap() *raw.AVPlayerItemAccessLogEvent
+	NumberOfSegmentsDownloaded() int
+	NumberOfMediaRequests() int
+	PlaybackStartDate() *foundation.NSDate
+	URI() string
+	ServerAddress() string
+	NumberOfServerAddressChanges() int
+	PlaybackSessionID() string
+	PlaybackStartOffset() float64
+	SegmentsDownloadedDuration() float64
+	DurationWatched() float64
+	NumberOfStalls() int
+	NumberOfBytesTransferred() int64
+	TransferDuration() float64
+	ObservedBitrate() float64
+	IndicatedBitrate() float64
+	IndicatedAverageBitrate() float64
+	AverageVideoBitrate() float64
+	AverageAudioBitrate() float64
+	NumberOfDroppedVideoFrames() int
+	StartupTime() float64
+	DownloadOverdue() int
+	ObservedMaxBitrate() float64
+	ObservedMinBitrate() float64
+	ObservedBitrateStandardDeviation() float64
+	PlaybackType() string
+	MediaRequestsWWAN() int
+	SwitchBitrate() float64
+}
+
+var _ PlayerItemAccessLogEventable = (*PlayerItemAccessLogEvent)(nil)
 

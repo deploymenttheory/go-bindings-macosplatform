@@ -24,5 +24,24 @@ func NewRNNRecurrentMatrixState() *RNNRecurrentMatrixState {
 	return &RNNRecurrentMatrixState{inner: raw.MPSRNNRecurrentMatrixStateFromID(_id)}
 }
 
+// GetRecurrentOutputMatrixForLayerIndex calls the underlying GetRecurrentOutputMatrixForLayerIndex.
+func (x *RNNRecurrentMatrixState) GetRecurrentOutputMatrixForLayerIndex(layerIndex uint) *mpscore.MPSMatrix {
+	return x.inner.GetRecurrentOutputMatrixForLayerIndex(layerIndex)
+}
+
+// GetMemoryCellMatrixForLayerIndex calls the underlying GetMemoryCellMatrixForLayerIndex.
+func (x *RNNRecurrentMatrixState) GetMemoryCellMatrixForLayerIndex(layerIndex uint) *mpscore.MPSMatrix {
+	return x.inner.GetMemoryCellMatrixForLayerIndex(layerIndex)
+}
+
 func (x *RNNRecurrentMatrixState) asState() *mpscore.MPSState { return &x.inner.MPSState }
+
+// RNNRecurrentMatrixStateable is the interface implemented by [RNNRecurrentMatrixState], for mocking and DI.
+type RNNRecurrentMatrixStateable interface {
+	Unwrap() *raw.MPSRNNRecurrentMatrixState
+	GetRecurrentOutputMatrixForLayerIndex(layerIndex uint) *mpscore.MPSMatrix
+	GetMemoryCellMatrixForLayerIndex(layerIndex uint) *mpscore.MPSMatrix
+}
+
+var _ RNNRecurrentMatrixStateable = (*RNNRecurrentMatrixState)(nil)
 

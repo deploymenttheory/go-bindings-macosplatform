@@ -24,3 +24,34 @@ func NewGroupPresetSettingWithGainRateGainCurveTypeRateCurveType(gain float64, r
 	return &GroupPresetSetting{inner: raw.PHASEGroupPresetSettingFromID(_id)}
 }
 
+// Gain calls the underlying Gain.
+func (x *GroupPresetSetting) Gain() float64 {
+	return x.inner.Gain()
+}
+
+// Rate calls the underlying Rate.
+func (x *GroupPresetSetting) Rate() float64 {
+	return x.inner.Rate()
+}
+
+// GainCurveType calls the underlying GainCurveType.
+func (x *GroupPresetSetting) GainCurveType() raw.PHASECurveType {
+	return x.inner.GainCurveType()
+}
+
+// RateCurveType calls the underlying RateCurveType.
+func (x *GroupPresetSetting) RateCurveType() raw.PHASECurveType {
+	return x.inner.RateCurveType()
+}
+
+// GroupPresetSettingable is the interface implemented by [GroupPresetSetting], for mocking and DI.
+type GroupPresetSettingable interface {
+	Unwrap() *raw.PHASEGroupPresetSetting
+	Gain() float64
+	Rate() float64
+	GainCurveType() raw.PHASECurveType
+	RateCurveType() raw.PHASECurveType
+}
+
+var _ GroupPresetSettingable = (*GroupPresetSetting)(nil)
+

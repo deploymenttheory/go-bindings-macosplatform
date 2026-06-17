@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
@@ -55,7 +56,79 @@ func (x *KeyedArchiver) WithRequiresSecureCoding(requiresSecureCoding bool) *Key
 	return x
 }
 
+// FinishEncoding calls the underlying FinishEncoding.
+func (x *KeyedArchiver) FinishEncoding() {
+	x.inner.FinishEncoding()
+}
+
+// SetClassNameForClass calls the underlying SetClassNameForClass.
+func (x *KeyedArchiver) SetClassNameForClass(codedName string, cls objc.Class) {
+	x.inner.SetClassNameForClass(foundation.NSStringStringWithUTF8String(codedName), cls)
+}
+
+// ClassNameForClass calls the underlying ClassNameForClass.
+func (x *KeyedArchiver) ClassNameForClass(cls objc.Class) *String {
+	_r := x.inner.ClassNameForClass(cls)
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// Delegate calls the underlying Delegate.
+func (x *KeyedArchiver) Delegate() raw.NSKeyedArchiverDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *KeyedArchiver) SetDelegate(delegate raw.NSKeyedArchiverDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// OutputFormat calls the underlying OutputFormat.
+func (x *KeyedArchiver) OutputFormat() raw.NSPropertyListFormat {
+	return x.inner.OutputFormat()
+}
+
+// SetOutputFormat calls the underlying SetOutputFormat.
+func (x *KeyedArchiver) SetOutputFormat(outputFormat raw.NSPropertyListFormat) {
+	x.inner.SetOutputFormat(outputFormat)
+}
+
+// EncodedData calls the underlying EncodedData.
+func (x *KeyedArchiver) EncodedData() *Data {
+	_r := x.inner.EncodedData()
+	if _r == nil {
+		return nil
+	}
+	return &Data{inner: _r}
+}
+
+// SetRequiresSecureCoding calls the underlying SetRequiresSecureCoding.
+func (x *KeyedArchiver) SetRequiresSecureCoding(requiresSecureCoding bool) {
+	x.inner.SetRequiresSecureCoding(requiresSecureCoding)
+}
+
 func (x *KeyedArchiver) asCoder() *raw.NSCoder { return &x.inner.NSCoder }
 
 func (x *KeyedArchiver) asObject() *raw.NSObject { return &x.inner.NSCoder.NSObject }
+
+// KeyedArchiverable is the interface implemented by [KeyedArchiver], for mocking and DI.
+type KeyedArchiverable interface {
+	Unwrap() *raw.NSKeyedArchiver
+	WithDelegate(delegate raw.NSKeyedArchiverDelegate) *KeyedArchiver
+	WithOutputFormat(outputFormat raw.NSPropertyListFormat) *KeyedArchiver
+	WithRequiresSecureCoding(requiresSecureCoding bool) *KeyedArchiver
+	FinishEncoding()
+	SetClassNameForClass(codedName string, cls objc.Class)
+	ClassNameForClass(cls objc.Class) *String
+	Delegate() raw.NSKeyedArchiverDelegate
+	SetDelegate(delegate raw.NSKeyedArchiverDelegate)
+	OutputFormat() raw.NSPropertyListFormat
+	SetOutputFormat(outputFormat raw.NSPropertyListFormat)
+	EncodedData() *Data
+	SetRequiresSecureCoding(requiresSecureCoding bool)
+}
+
+var _ KeyedArchiverable = (*KeyedArchiver)(nil)
 

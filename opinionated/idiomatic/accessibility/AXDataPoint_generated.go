@@ -7,6 +7,7 @@ package accessibility
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/accessibility"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -80,16 +81,93 @@ func (x *DataPoint) WithAttributedLabel(attributedLabel *foundation.NSAttributed
 	return x
 }
 
+// XValue calls the underlying XValue.
+func (x *DataPoint) XValue() *DataPointValue {
+	_r := x.inner.XValue()
+	if _r == nil {
+		return nil
+	}
+	return &DataPointValue{inner: _r}
+}
+
+// SetXValue calls the underlying SetXValue.
+func (x *DataPoint) SetXValue(xValue *raw.AXDataPointValue) {
+	x.inner.SetXValue(xValue)
+}
+
+// YValue calls the underlying YValue.
+func (x *DataPoint) YValue() *DataPointValue {
+	_r := x.inner.YValue()
+	if _r == nil {
+		return nil
+	}
+	return &DataPointValue{inner: _r}
+}
+
+// SetYValue calls the underlying SetYValue.
+func (x *DataPoint) SetYValue(yValue *raw.AXDataPointValue) {
+	x.inner.SetYValue(yValue)
+}
+
 // AdditionalValues returns the collection as a Go slice.
 func (x *DataPoint) AdditionalValues() []*raw.AXDataPointValue {
 	arr := x.inner.AdditionalValues()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AXDataPointValue, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AXDataPointValue {
+		return raw.AXDataPointValueFromID(purego.Retain(_id))
+	})
 }
+
+// SetAdditionalValues calls the underlying SetAdditionalValues.
+func (x *DataPoint) SetAdditionalValues(additionalValues *foundation.NSArray[*raw.AXDataPointValue]) {
+	x.inner.SetAdditionalValues(additionalValues)
+}
+
+// Label calls the underlying Label.
+func (x *DataPoint) Label() string {
+	_r := x.inner.Label()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLabel calls the underlying SetLabel.
+func (x *DataPoint) SetLabel(label string) {
+	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+}
+
+// AttributedLabel calls the underlying AttributedLabel.
+func (x *DataPoint) AttributedLabel() *foundation.NSAttributedString {
+	return x.inner.AttributedLabel()
+}
+
+// SetAttributedLabel calls the underlying SetAttributedLabel.
+func (x *DataPoint) SetAttributedLabel(attributedLabel *foundation.NSAttributedString) {
+	x.inner.SetAttributedLabel(attributedLabel)
+}
+
+// DataPointable is the interface implemented by [DataPoint], for mocking and DI.
+type DataPointable interface {
+	Unwrap() *raw.AXDataPoint
+	WithXValue(xValue *raw.AXDataPointValue) *DataPoint
+	WithYValue(yValue *raw.AXDataPointValue) *DataPoint
+	WithAdditionalValues(items ...*raw.AXDataPointValue) *DataPoint
+	WithLabel(label string) *DataPoint
+	WithAttributedLabel(attributedLabel *foundation.NSAttributedString) *DataPoint
+	XValue() *DataPointValue
+	SetXValue(xValue *raw.AXDataPointValue)
+	YValue() *DataPointValue
+	SetYValue(yValue *raw.AXDataPointValue)
+	AdditionalValues() []*raw.AXDataPointValue
+	SetAdditionalValues(additionalValues *foundation.NSArray[*raw.AXDataPointValue])
+	Label() string
+	SetLabel(label string)
+	AttributedLabel() *foundation.NSAttributedString
+	SetAttributedLabel(attributedLabel *foundation.NSAttributedString)
+}
+
+var _ DataPointable = (*DataPoint)(nil)
 

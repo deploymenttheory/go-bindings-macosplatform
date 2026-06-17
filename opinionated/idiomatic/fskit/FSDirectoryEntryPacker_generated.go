@@ -23,3 +23,16 @@ func NewDirectoryEntryPacker() *DirectoryEntryPacker {
 	return &DirectoryEntryPacker{inner: raw.FSDirectoryEntryPackerFromID(_id)}
 }
 
+// PackEntryWithNameItemTypeItemIDNextCookieAttributes calls the underlying PackEntryWithNameItemTypeItemIDNextCookieAttributes.
+func (x *DirectoryEntryPacker) PackEntryWithNameItemTypeItemIDNextCookieAttributes(name *raw.FSFileName, itemType raw.FSItemType, itemID raw.FSItemID, nextCookie uint64, attributes *raw.FSItemAttributes) bool {
+	return x.inner.PackEntryWithNameItemTypeItemIDNextCookieAttributes(name, itemType, itemID, nextCookie, attributes)
+}
+
+// DirectoryEntryPackerable is the interface implemented by [DirectoryEntryPacker], for mocking and DI.
+type DirectoryEntryPackerable interface {
+	Unwrap() *raw.FSDirectoryEntryPacker
+	PackEntryWithNameItemTypeItemIDNextCookieAttributes(name *raw.FSFileName, itemType raw.FSItemType, itemID raw.FSItemID, nextCookie uint64, attributes *raw.FSItemAttributes) bool
+}
+
+var _ DirectoryEntryPackerable = (*DirectoryEntryPacker)(nil)
+

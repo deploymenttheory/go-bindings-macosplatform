@@ -50,3 +50,95 @@ func (x *PictureInPictureController) WithRequiresLinearPlayback(requiresLinearPl
 	return x
 }
 
+// StartPictureInPicture calls the underlying StartPictureInPicture.
+func (x *PictureInPictureController) StartPictureInPicture() {
+	x.inner.StartPictureInPicture()
+}
+
+// StopPictureInPicture calls the underlying StopPictureInPicture.
+func (x *PictureInPictureController) StopPictureInPicture() {
+	x.inner.StopPictureInPicture()
+}
+
+// ContentSource calls the underlying ContentSource.
+func (x *PictureInPictureController) ContentSource() *PictureInPictureControllerContentSource {
+	_r := x.inner.ContentSource()
+	if _r == nil {
+		return nil
+	}
+	return &PictureInPictureControllerContentSource{inner: _r}
+}
+
+// SetContentSource calls the underlying SetContentSource.
+func (x *PictureInPictureController) SetContentSource(contentSource *raw.AVPictureInPictureControllerContentSource) {
+	x.inner.SetContentSource(contentSource)
+}
+
+// PlayerLayer calls the underlying PlayerLayer.
+func (x *PictureInPictureController) PlayerLayer() *avfoundation.AVPlayerLayer {
+	return x.inner.PlayerLayer()
+}
+
+// Delegate calls the underlying Delegate.
+func (x *PictureInPictureController) Delegate() raw.AVPictureInPictureControllerDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *PictureInPictureController) SetDelegate(delegate raw.AVPictureInPictureControllerDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// IsPictureInPicturePossible calls the underlying IsPictureInPicturePossible.
+func (x *PictureInPictureController) IsPictureInPicturePossible() bool {
+	return x.inner.IsPictureInPicturePossible()
+}
+
+// IsPictureInPictureActive calls the underlying IsPictureInPictureActive.
+func (x *PictureInPictureController) IsPictureInPictureActive() bool {
+	return x.inner.IsPictureInPictureActive()
+}
+
+// IsPictureInPictureSuspended calls the underlying IsPictureInPictureSuspended.
+func (x *PictureInPictureController) IsPictureInPictureSuspended() bool {
+	return x.inner.IsPictureInPictureSuspended()
+}
+
+// RequiresLinearPlayback calls the underlying RequiresLinearPlayback.
+func (x *PictureInPictureController) RequiresLinearPlayback() bool {
+	return x.inner.RequiresLinearPlayback()
+}
+
+// SetRequiresLinearPlayback calls the underlying SetRequiresLinearPlayback.
+func (x *PictureInPictureController) SetRequiresLinearPlayback(requiresLinearPlayback bool) {
+	x.inner.SetRequiresLinearPlayback(requiresLinearPlayback)
+}
+
+// InvalidatePlaybackState calls the underlying InvalidatePlaybackState.
+func (x *PictureInPictureController) InvalidatePlaybackState() {
+	x.inner.InvalidatePlaybackState()
+}
+
+// PictureInPictureControllerable is the interface implemented by [PictureInPictureController], for mocking and DI.
+type PictureInPictureControllerable interface {
+	Unwrap() *raw.AVPictureInPictureController
+	WithContentSource(contentSource *raw.AVPictureInPictureControllerContentSource) *PictureInPictureController
+	WithDelegate(delegate raw.AVPictureInPictureControllerDelegate) *PictureInPictureController
+	WithRequiresLinearPlayback(requiresLinearPlayback bool) *PictureInPictureController
+	StartPictureInPicture()
+	StopPictureInPicture()
+	ContentSource() *PictureInPictureControllerContentSource
+	SetContentSource(contentSource *raw.AVPictureInPictureControllerContentSource)
+	PlayerLayer() *avfoundation.AVPlayerLayer
+	Delegate() raw.AVPictureInPictureControllerDelegate
+	SetDelegate(delegate raw.AVPictureInPictureControllerDelegate)
+	IsPictureInPicturePossible() bool
+	IsPictureInPictureActive() bool
+	IsPictureInPictureSuspended() bool
+	RequiresLinearPlayback() bool
+	SetRequiresLinearPlayback(requiresLinearPlayback bool)
+	InvalidatePlaybackState()
+}
+
+var _ PictureInPictureControllerable = (*PictureInPictureController)(nil)
+

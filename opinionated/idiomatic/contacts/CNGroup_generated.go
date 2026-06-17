@@ -6,6 +6,7 @@ package contacts
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/contacts"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +24,32 @@ func NewGroup() *Group {
 	return &Group{inner: raw.CNGroupFromID(_id)}
 }
 
+// Identifier calls the underlying Identifier.
+func (x *Group) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Name calls the underlying Name.
+func (x *Group) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 func (x *Group) asGroup() *raw.CNGroup { return x.inner }
+
+// Groupable is the interface implemented by [Group], for mocking and DI.
+type Groupable interface {
+	Unwrap() *raw.CNGroup
+	Identifier() string
+	Name() string
+}
+
+var _ Groupable = (*Group)(nil)
 

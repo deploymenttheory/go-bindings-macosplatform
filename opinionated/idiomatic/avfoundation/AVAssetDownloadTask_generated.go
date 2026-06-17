@@ -7,6 +7,7 @@ package avfoundation
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,16 +25,38 @@ func NewAssetDownloadTask() *AssetDownloadTask {
 	return &AssetDownloadTask{inner: raw.AVAssetDownloadTaskFromID(_id)}
 }
 
+// URLAsset calls the underlying URLAsset.
+func (x *AssetDownloadTask) URLAsset() *URLAsset {
+	_r := x.inner.URLAsset()
+	if _r == nil {
+		return nil
+	}
+	return &URLAsset{inner: _r}
+}
+
+// Options calls the underlying Options.
+func (x *AssetDownloadTask) Options() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.Options()
+}
+
 // LoadedTimeRanges returns the collection as a Go slice.
 func (x *AssetDownloadTask) LoadedTimeRanges() []*foundation.NSValue {
 	arr := x.inner.LoadedTimeRanges()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSValue, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSValue {
+		return foundation.NSValueFromID(purego.Retain(_id))
+	})
 }
+
+// AssetDownloadTaskable is the interface implemented by [AssetDownloadTask], for mocking and DI.
+type AssetDownloadTaskable interface {
+	Unwrap() *raw.AVAssetDownloadTask
+	URLAsset() *URLAsset
+	Options() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	LoadedTimeRanges() []*foundation.NSValue
+}
+
+var _ AssetDownloadTaskable = (*AssetDownloadTask)(nil)
 

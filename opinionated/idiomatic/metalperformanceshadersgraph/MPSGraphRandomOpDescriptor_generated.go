@@ -78,5 +78,129 @@ func (x *GraphRandomOpDescriptor) WithSamplingMethod(samplingMethod raw.MPSGraph
 	return x
 }
 
+// Distribution calls the underlying Distribution.
+func (x *GraphRandomOpDescriptor) Distribution() raw.MPSGraphRandomDistribution {
+	return x.inner.Distribution()
+}
+
+// SetDistribution calls the underlying SetDistribution.
+func (x *GraphRandomOpDescriptor) SetDistribution(distribution raw.MPSGraphRandomDistribution) {
+	x.inner.SetDistribution(distribution)
+}
+
+// DataType calls the underlying DataType.
+func (x *GraphRandomOpDescriptor) DataType() mpscore.MPSDataType {
+	return x.inner.DataType()
+}
+
+// SetDataType calls the underlying SetDataType.
+func (x *GraphRandomOpDescriptor) SetDataType(dataType mpscore.MPSDataType) {
+	x.inner.SetDataType(dataType)
+}
+
+// Min calls the underlying Min.
+func (x *GraphRandomOpDescriptor) Min() float32 {
+	return x.inner.Min()
+}
+
+// SetMin calls the underlying SetMin.
+func (x *GraphRandomOpDescriptor) SetMin(min float32) {
+	x.inner.SetMin(min)
+}
+
+// Max calls the underlying Max.
+func (x *GraphRandomOpDescriptor) Max() float32 {
+	return x.inner.Max()
+}
+
+// SetMax calls the underlying SetMax.
+func (x *GraphRandomOpDescriptor) SetMax(max float32) {
+	x.inner.SetMax(max)
+}
+
+// MinInteger calls the underlying MinInteger.
+func (x *GraphRandomOpDescriptor) MinInteger() int {
+	return x.inner.MinInteger()
+}
+
+// SetMinInteger calls the underlying SetMinInteger.
+func (x *GraphRandomOpDescriptor) SetMinInteger(minInteger int) {
+	x.inner.SetMinInteger(minInteger)
+}
+
+// MaxInteger calls the underlying MaxInteger.
+func (x *GraphRandomOpDescriptor) MaxInteger() int {
+	return x.inner.MaxInteger()
+}
+
+// SetMaxInteger calls the underlying SetMaxInteger.
+func (x *GraphRandomOpDescriptor) SetMaxInteger(maxInteger int) {
+	x.inner.SetMaxInteger(maxInteger)
+}
+
+// Mean calls the underlying Mean.
+func (x *GraphRandomOpDescriptor) Mean() float32 {
+	return x.inner.Mean()
+}
+
+// SetMean calls the underlying SetMean.
+func (x *GraphRandomOpDescriptor) SetMean(mean float32) {
+	x.inner.SetMean(mean)
+}
+
+// StandardDeviation calls the underlying StandardDeviation.
+func (x *GraphRandomOpDescriptor) StandardDeviation() float32 {
+	return x.inner.StandardDeviation()
+}
+
+// SetStandardDeviation calls the underlying SetStandardDeviation.
+func (x *GraphRandomOpDescriptor) SetStandardDeviation(standardDeviation float32) {
+	x.inner.SetStandardDeviation(standardDeviation)
+}
+
+// SamplingMethod calls the underlying SamplingMethod.
+func (x *GraphRandomOpDescriptor) SamplingMethod() raw.MPSGraphRandomNormalSamplingMethod {
+	return x.inner.SamplingMethod()
+}
+
+// SetSamplingMethod calls the underlying SetSamplingMethod.
+func (x *GraphRandomOpDescriptor) SetSamplingMethod(samplingMethod raw.MPSGraphRandomNormalSamplingMethod) {
+	x.inner.SetSamplingMethod(samplingMethod)
+}
+
 func (x *GraphRandomOpDescriptor) asGraphObject() *raw.MPSGraphObject { return &x.inner.MPSGraphObject }
+
+// GraphRandomOpDescriptorable is the interface implemented by [GraphRandomOpDescriptor], for mocking and DI.
+type GraphRandomOpDescriptorable interface {
+	Unwrap() *raw.MPSGraphRandomOpDescriptor
+	WithDistribution(distribution raw.MPSGraphRandomDistribution) *GraphRandomOpDescriptor
+	WithDataType(dataType mpscore.MPSDataType) *GraphRandomOpDescriptor
+	WithMin(min float32) *GraphRandomOpDescriptor
+	WithMax(max float32) *GraphRandomOpDescriptor
+	WithMinInteger(minInteger int) *GraphRandomOpDescriptor
+	WithMaxInteger(maxInteger int) *GraphRandomOpDescriptor
+	WithMean(mean float32) *GraphRandomOpDescriptor
+	WithStandardDeviation(standardDeviation float32) *GraphRandomOpDescriptor
+	WithSamplingMethod(samplingMethod raw.MPSGraphRandomNormalSamplingMethod) *GraphRandomOpDescriptor
+	Distribution() raw.MPSGraphRandomDistribution
+	SetDistribution(distribution raw.MPSGraphRandomDistribution)
+	DataType() mpscore.MPSDataType
+	SetDataType(dataType mpscore.MPSDataType)
+	Min() float32
+	SetMin(min float32)
+	Max() float32
+	SetMax(max float32)
+	MinInteger() int
+	SetMinInteger(minInteger int)
+	MaxInteger() int
+	SetMaxInteger(maxInteger int)
+	Mean() float32
+	SetMean(mean float32)
+	StandardDeviation() float32
+	SetStandardDeviation(standardDeviation float32)
+	SamplingMethod() raw.MPSGraphRandomNormalSamplingMethod
+	SetSamplingMethod(samplingMethod raw.MPSGraphRandomNormalSamplingMethod)
+}
+
+var _ GraphRandomOpDescriptorable = (*GraphRandomOpDescriptor)(nil)
 

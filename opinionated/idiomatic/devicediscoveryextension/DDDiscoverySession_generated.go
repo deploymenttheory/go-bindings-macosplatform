@@ -23,3 +23,16 @@ func NewDDDiscoverySession() *DDDiscoverySession {
 	return &DDDiscoverySession{inner: raw.DDDiscoverySessionFromID(_id)}
 }
 
+// ReportEvent calls the underlying ReportEvent.
+func (x *DDDiscoverySession) ReportEvent(inEvent *raw.DDDeviceEvent) {
+	x.inner.ReportEvent(inEvent)
+}
+
+// DDDiscoverySessionable is the interface implemented by [DDDiscoverySession], for mocking and DI.
+type DDDiscoverySessionable interface {
+	Unwrap() *raw.DDDiscoverySession
+	ReportEvent(inEvent *raw.DDDeviceEvent)
+}
+
+var _ DDDiscoverySessionable = (*DDDiscoverySession)(nil)
+

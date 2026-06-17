@@ -5,6 +5,7 @@
 package shazamkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/shazamkit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +23,27 @@ func NewSignatureGenerator() *SignatureGenerator {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SHSignatureGenerator")), objc.RegisterName("new"))
 	return &SignatureGenerator{inner: raw.SHSignatureGeneratorFromID(_id)}
 }
+
+// AppendBufferAtTimeError calls the underlying AppendBufferAtTimeError.
+func (x *SignatureGenerator) AppendBufferAtTimeError(buffer *avfaudio.AVAudioPCMBuffer, time_ *avfaudio.AVAudioTime) (bool, error) {
+	return x.inner.AppendBufferAtTimeError(buffer, time_)
+}
+
+// Signature calls the underlying Signature.
+func (x *SignatureGenerator) Signature() *Signature {
+	_r := x.inner.Signature()
+	if _r == nil {
+		return nil
+	}
+	return &Signature{inner: _r}
+}
+
+// SignatureGeneratorable is the interface implemented by [SignatureGenerator], for mocking and DI.
+type SignatureGeneratorable interface {
+	Unwrap() *raw.SHSignatureGenerator
+	AppendBufferAtTimeError(buffer *avfaudio.AVAudioPCMBuffer, time_ *avfaudio.AVAudioTime) (bool, error)
+	Signature() *Signature
+}
+
+var _ SignatureGeneratorable = (*SignatureGenerator)(nil)
 

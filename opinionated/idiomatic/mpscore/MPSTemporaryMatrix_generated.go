@@ -29,5 +29,25 @@ func (x *TemporaryMatrix) WithReadCount(readCount uint) *TemporaryMatrix {
 	return x
 }
 
+// ReadCount calls the underlying ReadCount.
+func (x *TemporaryMatrix) ReadCount() uint {
+	return x.inner.ReadCount()
+}
+
+// SetReadCount calls the underlying SetReadCount.
+func (x *TemporaryMatrix) SetReadCount(readCount uint) {
+	x.inner.SetReadCount(readCount)
+}
+
 func (x *TemporaryMatrix) asMatrix() *raw.MPSMatrix { return &x.inner.MPSMatrix }
+
+// TemporaryMatrixable is the interface implemented by [TemporaryMatrix], for mocking and DI.
+type TemporaryMatrixable interface {
+	Unwrap() *raw.MPSTemporaryMatrix
+	WithReadCount(readCount uint) *TemporaryMatrix
+	ReadCount() uint
+	SetReadCount(readCount uint)
+}
+
+var _ TemporaryMatrixable = (*TemporaryMatrix)(nil)
 

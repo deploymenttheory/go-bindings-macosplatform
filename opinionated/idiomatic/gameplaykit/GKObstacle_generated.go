@@ -25,3 +25,10 @@ func NewObstacle() *Obstacle {
 
 func (x *Obstacle) asObstacle() *raw.GKObstacle { return x.inner }
 
+// Obstacleable is the interface implemented by [Obstacle], for mocking and DI.
+type Obstacleable interface {
+	Unwrap() *raw.GKObstacle
+}
+
+var _ Obstacleable = (*Obstacle)(nil)
+

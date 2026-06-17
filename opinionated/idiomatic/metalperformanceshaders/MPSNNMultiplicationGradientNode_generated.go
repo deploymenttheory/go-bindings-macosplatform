@@ -30,3 +30,10 @@ func (x *NNMultiplicationGradientNode) asNNGradientFilterNode() *mpsneuralnetwor
 
 func (x *NNMultiplicationGradientNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNArithmeticGradientNode.MPSNNGradientFilterNode.MPSNNFilterNode }
 
+// NNMultiplicationGradientNodeable is the interface implemented by [NNMultiplicationGradientNode], for mocking and DI.
+type NNMultiplicationGradientNodeable interface {
+	Unwrap() *raw.MPSNNMultiplicationGradientNode
+}
+
+var _ NNMultiplicationGradientNodeable = (*NNMultiplicationGradientNode)(nil)
+

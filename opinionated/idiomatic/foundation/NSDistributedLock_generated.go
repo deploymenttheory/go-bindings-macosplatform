@@ -25,5 +25,40 @@ func NewDistributedLockWithPath(path string) *DistributedLock {
 	return &DistributedLock{inner: raw.NSDistributedLockFromID(_id)}
 }
 
+// TryLock calls the underlying TryLock.
+func (x *DistributedLock) TryLock() bool {
+	return x.inner.TryLock()
+}
+
+// Unlock calls the underlying Unlock.
+func (x *DistributedLock) Unlock() {
+	x.inner.Unlock()
+}
+
+// BreakLock calls the underlying BreakLock.
+func (x *DistributedLock) BreakLock() {
+	x.inner.BreakLock()
+}
+
+// LockDate calls the underlying LockDate.
+func (x *DistributedLock) LockDate() *Date {
+	_r := x.inner.LockDate()
+	if _r == nil {
+		return nil
+	}
+	return &Date{inner: _r}
+}
+
 func (x *DistributedLock) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// DistributedLockable is the interface implemented by [DistributedLock], for mocking and DI.
+type DistributedLockable interface {
+	Unwrap() *raw.NSDistributedLock
+	TryLock() bool
+	Unlock()
+	BreakLock()
+	LockDate() *Date
+}
+
+var _ DistributedLockable = (*DistributedLock)(nil)
 

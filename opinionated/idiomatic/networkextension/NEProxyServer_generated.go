@@ -7,6 +7,7 @@ package networkextension
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -42,4 +43,74 @@ func (x *NEProxyServer) WithPassword(password string) *NEProxyServer {
 	x.inner.SetPassword(foundation.NSStringStringWithUTF8String(password))
 	return x
 }
+
+// Address calls the underlying Address.
+func (x *NEProxyServer) Address() string {
+	_r := x.inner.Address()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Port calls the underlying Port.
+func (x *NEProxyServer) Port() int {
+	return x.inner.Port()
+}
+
+// AuthenticationRequired calls the underlying AuthenticationRequired.
+func (x *NEProxyServer) AuthenticationRequired() bool {
+	return x.inner.AuthenticationRequired()
+}
+
+// SetAuthenticationRequired calls the underlying SetAuthenticationRequired.
+func (x *NEProxyServer) SetAuthenticationRequired(authenticationRequired bool) {
+	x.inner.SetAuthenticationRequired(authenticationRequired)
+}
+
+// Username calls the underlying Username.
+func (x *NEProxyServer) Username() string {
+	_r := x.inner.Username()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetUsername calls the underlying SetUsername.
+func (x *NEProxyServer) SetUsername(username string) {
+	x.inner.SetUsername(foundation.NSStringStringWithUTF8String(username))
+}
+
+// Password calls the underlying Password.
+func (x *NEProxyServer) Password() string {
+	_r := x.inner.Password()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetPassword calls the underlying SetPassword.
+func (x *NEProxyServer) SetPassword(password string) {
+	x.inner.SetPassword(foundation.NSStringStringWithUTF8String(password))
+}
+
+// NEProxyServerable is the interface implemented by [NEProxyServer], for mocking and DI.
+type NEProxyServerable interface {
+	Unwrap() *raw.NEProxyServer
+	WithAuthenticationRequired(authenticationRequired bool) *NEProxyServer
+	WithUsername(username string) *NEProxyServer
+	WithPassword(password string) *NEProxyServer
+	Address() string
+	Port() int
+	AuthenticationRequired() bool
+	SetAuthenticationRequired(authenticationRequired bool)
+	Username() string
+	SetUsername(username string)
+	Password() string
+	SetPassword(password string)
+}
+
+var _ NEProxyServerable = (*NEProxyServer)(nil)
 

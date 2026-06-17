@@ -30,3 +30,23 @@ func (x *VertexBufferLayout) WithStride(stride uint) *VertexBufferLayout {
 	return x
 }
 
+// Stride calls the underlying Stride.
+func (x *VertexBufferLayout) Stride() uint {
+	return x.inner.Stride()
+}
+
+// SetStride calls the underlying SetStride.
+func (x *VertexBufferLayout) SetStride(stride uint) {
+	x.inner.SetStride(stride)
+}
+
+// VertexBufferLayoutable is the interface implemented by [VertexBufferLayout], for mocking and DI.
+type VertexBufferLayoutable interface {
+	Unwrap() *raw.MDLVertexBufferLayout
+	WithStride(stride uint) *VertexBufferLayout
+	Stride() uint
+	SetStride(stride uint)
+}
+
+var _ VertexBufferLayoutable = (*VertexBufferLayout)(nil)
+

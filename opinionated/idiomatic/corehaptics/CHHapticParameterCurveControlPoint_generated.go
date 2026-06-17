@@ -36,3 +36,36 @@ func (x *HapticParameterCurveControlPoint) WithValue(value float32) *HapticParam
 	return x
 }
 
+// RelativeTime calls the underlying RelativeTime.
+func (x *HapticParameterCurveControlPoint) RelativeTime() float64 {
+	return x.inner.RelativeTime()
+}
+
+// SetRelativeTime calls the underlying SetRelativeTime.
+func (x *HapticParameterCurveControlPoint) SetRelativeTime(relativeTime float64) {
+	x.inner.SetRelativeTime(relativeTime)
+}
+
+// Value calls the underlying Value.
+func (x *HapticParameterCurveControlPoint) Value() float32 {
+	return x.inner.Value()
+}
+
+// SetValue calls the underlying SetValue.
+func (x *HapticParameterCurveControlPoint) SetValue(value float32) {
+	x.inner.SetValue(value)
+}
+
+// HapticParameterCurveControlPointable is the interface implemented by [HapticParameterCurveControlPoint], for mocking and DI.
+type HapticParameterCurveControlPointable interface {
+	Unwrap() *raw.CHHapticParameterCurveControlPoint
+	WithRelativeTime(relativeTime float64) *HapticParameterCurveControlPoint
+	WithValue(value float32) *HapticParameterCurveControlPoint
+	RelativeTime() float64
+	SetRelativeTime(relativeTime float64)
+	Value() float32
+	SetValue(value float32)
+}
+
+var _ HapticParameterCurveControlPointable = (*HapticParameterCurveControlPoint)(nil)
+

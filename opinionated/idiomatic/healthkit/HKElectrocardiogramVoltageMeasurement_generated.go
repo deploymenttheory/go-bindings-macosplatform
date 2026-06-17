@@ -23,3 +23,26 @@ func NewElectrocardiogramVoltageMeasurement() *ElectrocardiogramVoltageMeasureme
 	return &ElectrocardiogramVoltageMeasurement{inner: raw.HKElectrocardiogramVoltageMeasurementFromID(_id)}
 }
 
+// QuantityForLead calls the underlying QuantityForLead.
+func (x *ElectrocardiogramVoltageMeasurement) QuantityForLead(lead raw.HKElectrocardiogramLead) *Quantity {
+	_r := x.inner.QuantityForLead(lead)
+	if _r == nil {
+		return nil
+	}
+	return &Quantity{inner: _r}
+}
+
+// TimeSinceSampleStart calls the underlying TimeSinceSampleStart.
+func (x *ElectrocardiogramVoltageMeasurement) TimeSinceSampleStart() float64 {
+	return x.inner.TimeSinceSampleStart()
+}
+
+// ElectrocardiogramVoltageMeasurementable is the interface implemented by [ElectrocardiogramVoltageMeasurement], for mocking and DI.
+type ElectrocardiogramVoltageMeasurementable interface {
+	Unwrap() *raw.HKElectrocardiogramVoltageMeasurement
+	QuantityForLead(lead raw.HKElectrocardiogramLead) *Quantity
+	TimeSinceSampleStart() float64
+}
+
+var _ ElectrocardiogramVoltageMeasurementable = (*ElectrocardiogramVoltageMeasurement)(nil)
+

@@ -25,3 +25,10 @@ func NewAnnotationFreeText() *AnnotationFreeText {
 
 func (x *AnnotationFreeText) asAnnotation() *raw.PDFAnnotation { return &x.inner.PDFAnnotation }
 
+// AnnotationFreeTextable is the interface implemented by [AnnotationFreeText], for mocking and DI.
+type AnnotationFreeTextable interface {
+	Unwrap() *raw.PDFAnnotationFreeText
+}
+
+var _ AnnotationFreeTextable = (*AnnotationFreeText)(nil)
+

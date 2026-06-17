@@ -6,7 +6,10 @@ package coredata
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // PersistentCloudKitContainerEvent wraps [raw.NSPersistentCloudKitContainerEvent] with a fluent Go API.
@@ -22,4 +25,57 @@ func NewPersistentCloudKitContainerEvent() *PersistentCloudKitContainerEvent {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPersistentCloudKitContainerEvent")), objc.RegisterName("new"))
 	return &PersistentCloudKitContainerEvent{inner: raw.NSPersistentCloudKitContainerEventFromID(_id)}
 }
+
+// Identifier calls the underlying Identifier.
+func (x *PersistentCloudKitContainerEvent) Identifier() *foundation.NSUUID {
+	return x.inner.Identifier()
+}
+
+// StoreIdentifier calls the underlying StoreIdentifier.
+func (x *PersistentCloudKitContainerEvent) StoreIdentifier() string {
+	_r := x.inner.StoreIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Type calls the underlying Type.
+func (x *PersistentCloudKitContainerEvent) Type() raw.NSPersistentCloudKitContainerEventType {
+	return x.inner.Type()
+}
+
+// StartDate calls the underlying StartDate.
+func (x *PersistentCloudKitContainerEvent) StartDate() *foundation.NSDate {
+	return x.inner.StartDate()
+}
+
+// EndDate calls the underlying EndDate.
+func (x *PersistentCloudKitContainerEvent) EndDate() *foundation.NSDate {
+	return x.inner.EndDate()
+}
+
+// Succeeded calls the underlying Succeeded.
+func (x *PersistentCloudKitContainerEvent) Succeeded() bool {
+	return x.inner.Succeeded()
+}
+
+// Error calls the underlying Error.
+func (x *PersistentCloudKitContainerEvent) Error() unsafe.Pointer {
+	return x.inner.Error()
+}
+
+// PersistentCloudKitContainerEventable is the interface implemented by [PersistentCloudKitContainerEvent], for mocking and DI.
+type PersistentCloudKitContainerEventable interface {
+	Unwrap() *raw.NSPersistentCloudKitContainerEvent
+	Identifier() *foundation.NSUUID
+	StoreIdentifier() string
+	Type() raw.NSPersistentCloudKitContainerEventType
+	StartDate() *foundation.NSDate
+	EndDate() *foundation.NSDate
+	Succeeded() bool
+	Error() unsafe.Pointer
+}
+
+var _ PersistentCloudKitContainerEventable = (*PersistentCloudKitContainerEvent)(nil)
 

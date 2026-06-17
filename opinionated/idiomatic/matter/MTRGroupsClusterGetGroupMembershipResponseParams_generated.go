@@ -43,3 +43,48 @@ func (x *MTRGroupsClusterGetGroupMembershipResponseParams) WithTimedInvokeTimeou
 	return x
 }
 
+// Capacity calls the underlying Capacity.
+func (x *MTRGroupsClusterGetGroupMembershipResponseParams) Capacity() *foundation.NSNumber {
+	return x.inner.Capacity()
+}
+
+// SetCapacity calls the underlying SetCapacity.
+func (x *MTRGroupsClusterGetGroupMembershipResponseParams) SetCapacity(capacity *foundation.NSNumber) {
+	x.inner.SetCapacity(capacity)
+}
+
+// GroupList calls the underlying GroupList.
+func (x *MTRGroupsClusterGetGroupMembershipResponseParams) GroupList() *foundation.NSArray[objc.ID] {
+	return x.inner.GroupList()
+}
+
+// SetGroupList calls the underlying SetGroupList.
+func (x *MTRGroupsClusterGetGroupMembershipResponseParams) SetGroupList(groupList *foundation.NSArray[objc.ID]) {
+	x.inner.SetGroupList(groupList)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRGroupsClusterGetGroupMembershipResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRGroupsClusterGetGroupMembershipResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// MTRGroupsClusterGetGroupMembershipResponseParamsable is the interface implemented by [MTRGroupsClusterGetGroupMembershipResponseParams], for mocking and DI.
+type MTRGroupsClusterGetGroupMembershipResponseParamsable interface {
+	Unwrap() *raw.MTRGroupsClusterGetGroupMembershipResponseParams
+	WithCapacity(capacity *foundation.NSNumber) *MTRGroupsClusterGetGroupMembershipResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRGroupsClusterGetGroupMembershipResponseParams
+	Capacity() *foundation.NSNumber
+	SetCapacity(capacity *foundation.NSNumber)
+	GroupList() *foundation.NSArray[objc.ID]
+	SetGroupList(groupList *foundation.NSArray[objc.ID])
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+}
+
+var _ MTRGroupsClusterGetGroupMembershipResponseParamsable = (*MTRGroupsClusterGetGroupMembershipResponseParams)(nil)
+

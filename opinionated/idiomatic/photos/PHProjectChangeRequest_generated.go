@@ -5,8 +5,10 @@
 package photos
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -37,5 +39,60 @@ func (x *ProjectChangeRequest) WithProjectExtensionData(projectExtensionData *fo
 	return x
 }
 
+// SetKeyAsset calls the underlying SetKeyAsset.
+func (x *ProjectChangeRequest) SetKeyAsset(keyAsset *raw.PHAsset) {
+	x.inner.SetKeyAsset(keyAsset)
+}
+
+// SetProjectPreviewImage calls the underlying SetProjectPreviewImage.
+func (x *ProjectChangeRequest) SetProjectPreviewImage(previewImage *appkit.NSImage) {
+	x.inner.SetProjectPreviewImage(previewImage)
+}
+
+// RemoveAssets calls the underlying RemoveAssets.
+func (x *ProjectChangeRequest) RemoveAssets(assets foundation.NSFastEnumeration) {
+	x.inner.RemoveAssets(assets)
+}
+
+// Title calls the underlying Title.
+func (x *ProjectChangeRequest) Title() string {
+	_r := x.inner.Title()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetTitle calls the underlying SetTitle.
+func (x *ProjectChangeRequest) SetTitle(title string) {
+	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+}
+
+// ProjectExtensionData calls the underlying ProjectExtensionData.
+func (x *ProjectChangeRequest) ProjectExtensionData() *foundation.NSData {
+	return x.inner.ProjectExtensionData()
+}
+
+// SetProjectExtensionData calls the underlying SetProjectExtensionData.
+func (x *ProjectChangeRequest) SetProjectExtensionData(projectExtensionData *foundation.NSData) {
+	x.inner.SetProjectExtensionData(projectExtensionData)
+}
+
 func (x *ProjectChangeRequest) asChangeRequest() *raw.PHChangeRequest { return &x.inner.PHChangeRequest }
+
+// ProjectChangeRequestable is the interface implemented by [ProjectChangeRequest], for mocking and DI.
+type ProjectChangeRequestable interface {
+	Unwrap() *raw.PHProjectChangeRequest
+	WithTitle(title string) *ProjectChangeRequest
+	WithProjectExtensionData(projectExtensionData *foundation.NSData) *ProjectChangeRequest
+	SetKeyAsset(keyAsset *raw.PHAsset)
+	SetProjectPreviewImage(previewImage *appkit.NSImage)
+	RemoveAssets(assets foundation.NSFastEnumeration)
+	Title() string
+	SetTitle(title string)
+	ProjectExtensionData() *foundation.NSData
+	SetProjectExtensionData(projectExtensionData *foundation.NSData)
+}
+
+var _ ProjectChangeRequestable = (*ProjectChangeRequest)(nil)
 

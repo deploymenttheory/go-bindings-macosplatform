@@ -41,5 +41,63 @@ func (x *MacPlatformConfiguration) WithAuxiliaryStorage(auxiliaryStorage *raw.VZ
 	return x
 }
 
+// HardwareModel calls the underlying HardwareModel.
+func (x *MacPlatformConfiguration) HardwareModel() *MacHardwareModel {
+	_r := x.inner.HardwareModel()
+	if _r == nil {
+		return nil
+	}
+	return &MacHardwareModel{inner: _r}
+}
+
+// SetHardwareModel calls the underlying SetHardwareModel.
+func (x *MacPlatformConfiguration) SetHardwareModel(hardwareModel *raw.VZMacHardwareModel) {
+	x.inner.SetHardwareModel(hardwareModel)
+}
+
+// MachineIdentifier calls the underlying MachineIdentifier.
+func (x *MacPlatformConfiguration) MachineIdentifier() *MacMachineIdentifier {
+	_r := x.inner.MachineIdentifier()
+	if _r == nil {
+		return nil
+	}
+	return &MacMachineIdentifier{inner: _r}
+}
+
+// SetMachineIdentifier calls the underlying SetMachineIdentifier.
+func (x *MacPlatformConfiguration) SetMachineIdentifier(machineIdentifier *raw.VZMacMachineIdentifier) {
+	x.inner.SetMachineIdentifier(machineIdentifier)
+}
+
+// AuxiliaryStorage calls the underlying AuxiliaryStorage.
+func (x *MacPlatformConfiguration) AuxiliaryStorage() *MacAuxiliaryStorage {
+	_r := x.inner.AuxiliaryStorage()
+	if _r == nil {
+		return nil
+	}
+	return &MacAuxiliaryStorage{inner: _r}
+}
+
+// SetAuxiliaryStorage calls the underlying SetAuxiliaryStorage.
+func (x *MacPlatformConfiguration) SetAuxiliaryStorage(auxiliaryStorage *raw.VZMacAuxiliaryStorage) {
+	x.inner.SetAuxiliaryStorage(auxiliaryStorage)
+}
+
 func (x *MacPlatformConfiguration) asPlatformConfiguration() *raw.VZPlatformConfiguration { return &x.inner.VZPlatformConfiguration }
+
+// MacPlatformConfigurationable is the interface implemented by [MacPlatformConfiguration], for mocking and DI.
+type MacPlatformConfigurationable interface {
+	Unwrap() *raw.VZMacPlatformConfiguration
+	WithHardwareModel(hardwareModel *raw.VZMacHardwareModel) *MacPlatformConfiguration
+	WithMachineIdentifier(machineIdentifier *raw.VZMacMachineIdentifier) *MacPlatformConfiguration
+	WithAuxiliaryStorage(auxiliaryStorage *raw.VZMacAuxiliaryStorage) *MacPlatformConfiguration
+	HardwareModel() *MacHardwareModel
+	SetHardwareModel(hardwareModel *raw.VZMacHardwareModel)
+	MachineIdentifier() *MacMachineIdentifier
+	SetMachineIdentifier(machineIdentifier *raw.VZMacMachineIdentifier)
+	AuxiliaryStorage() *MacAuxiliaryStorage
+	SetAuxiliaryStorage(auxiliaryStorage *raw.VZMacAuxiliaryStorage)
+}
+
+var _ MacPlatformConfigurationable = (*MacPlatformConfiguration)(nil)
 

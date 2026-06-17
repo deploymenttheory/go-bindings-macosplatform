@@ -7,6 +7,7 @@ package vision
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -82,7 +83,7 @@ func (x *RecognizeTextRequest) WithMinimumTextHeight(minimumTextHeight float32) 
 }
 
 // SupportedRecognitionLanguages returns the collection as a Go slice.
-func (x *RecognizeTextRequest) SupportedRecognitionLanguages() ([]*foundation.NSString, error) {
+func (x *RecognizeTextRequest) SupportedRecognitionLanguages() ([]string, error) {
 	arr, err := x.inner.SupportedRecognitionLanguagesAndReturnError()
 	if err != nil {
 		return nil, err
@@ -90,40 +91,110 @@ func (x *RecognizeTextRequest) SupportedRecognitionLanguages() ([]*foundation.NS
 	if arr == nil {
 		return nil, nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out, nil
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	}), nil
 }
 
 // RecognitionLanguages returns the collection as a Go slice.
-func (x *RecognizeTextRequest) RecognitionLanguages() []*foundation.NSString {
+func (x *RecognizeTextRequest) RecognitionLanguages() []string {
 	arr := x.inner.RecognitionLanguages()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// SetRecognitionLanguages calls the underlying SetRecognitionLanguages.
+func (x *RecognizeTextRequest) SetRecognitionLanguages(recognitionLanguages *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetRecognitionLanguages(recognitionLanguages)
 }
 
 // CustomWords returns the collection as a Go slice.
-func (x *RecognizeTextRequest) CustomWords() []*foundation.NSString {
+func (x *RecognizeTextRequest) CustomWords() []string {
 	arr := x.inner.CustomWords()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// SetCustomWords calls the underlying SetCustomWords.
+func (x *RecognizeTextRequest) SetCustomWords(customWords *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetCustomWords(customWords)
+}
+
+// RecognitionLevel calls the underlying RecognitionLevel.
+func (x *RecognizeTextRequest) RecognitionLevel() raw.VNRequestTextRecognitionLevel {
+	return x.inner.RecognitionLevel()
+}
+
+// SetRecognitionLevel calls the underlying SetRecognitionLevel.
+func (x *RecognizeTextRequest) SetRecognitionLevel(recognitionLevel raw.VNRequestTextRecognitionLevel) {
+	x.inner.SetRecognitionLevel(recognitionLevel)
+}
+
+// UsesLanguageCorrection calls the underlying UsesLanguageCorrection.
+func (x *RecognizeTextRequest) UsesLanguageCorrection() bool {
+	return x.inner.UsesLanguageCorrection()
+}
+
+// SetUsesLanguageCorrection calls the underlying SetUsesLanguageCorrection.
+func (x *RecognizeTextRequest) SetUsesLanguageCorrection(usesLanguageCorrection bool) {
+	x.inner.SetUsesLanguageCorrection(usesLanguageCorrection)
+}
+
+// AutomaticallyDetectsLanguage calls the underlying AutomaticallyDetectsLanguage.
+func (x *RecognizeTextRequest) AutomaticallyDetectsLanguage() bool {
+	return x.inner.AutomaticallyDetectsLanguage()
+}
+
+// SetAutomaticallyDetectsLanguage calls the underlying SetAutomaticallyDetectsLanguage.
+func (x *RecognizeTextRequest) SetAutomaticallyDetectsLanguage(automaticallyDetectsLanguage bool) {
+	x.inner.SetAutomaticallyDetectsLanguage(automaticallyDetectsLanguage)
+}
+
+// MinimumTextHeight calls the underlying MinimumTextHeight.
+func (x *RecognizeTextRequest) MinimumTextHeight() float32 {
+	return x.inner.MinimumTextHeight()
+}
+
+// SetMinimumTextHeight calls the underlying SetMinimumTextHeight.
+func (x *RecognizeTextRequest) SetMinimumTextHeight(minimumTextHeight float32) {
+	x.inner.SetMinimumTextHeight(minimumTextHeight)
 }
 
 func (x *RecognizeTextRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNImageBasedRequest }
 
 func (x *RecognizeTextRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageBasedRequest.VNRequest }
+
+// RecognizeTextRequestable is the interface implemented by [RecognizeTextRequest], for mocking and DI.
+type RecognizeTextRequestable interface {
+	Unwrap() *raw.VNRecognizeTextRequest
+	WithRecognitionLanguages(items ...*foundation.NSString) *RecognizeTextRequest
+	WithCustomWords(items ...*foundation.NSString) *RecognizeTextRequest
+	WithRecognitionLevel(recognitionLevel raw.VNRequestTextRecognitionLevel) *RecognizeTextRequest
+	WithUsesLanguageCorrection(usesLanguageCorrection bool) *RecognizeTextRequest
+	WithAutomaticallyDetectsLanguage(automaticallyDetectsLanguage bool) *RecognizeTextRequest
+	WithMinimumTextHeight(minimumTextHeight float32) *RecognizeTextRequest
+	SupportedRecognitionLanguages() ([]string, error)
+	RecognitionLanguages() []string
+	SetRecognitionLanguages(recognitionLanguages *foundation.NSArray[*foundation.NSString])
+	CustomWords() []string
+	SetCustomWords(customWords *foundation.NSArray[*foundation.NSString])
+	RecognitionLevel() raw.VNRequestTextRecognitionLevel
+	SetRecognitionLevel(recognitionLevel raw.VNRequestTextRecognitionLevel)
+	UsesLanguageCorrection() bool
+	SetUsesLanguageCorrection(usesLanguageCorrection bool)
+	AutomaticallyDetectsLanguage() bool
+	SetAutomaticallyDetectsLanguage(automaticallyDetectsLanguage bool)
+	MinimumTextHeight() float32
+	SetMinimumTextHeight(minimumTextHeight float32)
+}
+
+var _ RecognizeTextRequestable = (*RecognizeTextRequest)(nil)
 

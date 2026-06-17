@@ -7,6 +7,7 @@ package phase
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,4 +25,81 @@ func NewDuckerWithEngineSourceGroupsTargetGroupsGainAttackTimeReleaseTimeAttackC
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEngine:sourceGroups:targetGroups:gain:attackTime:releaseTime:attackCurve:releaseCurve:"), engine.Ptr(), sourceGroups.Ptr(), targetGroups.Ptr(), gain, attackTime, releaseTime, attackCurve, releaseCurve)
 	return &Ducker{inner: raw.PHASEDuckerFromID(_id)}
 }
+
+// Activate calls the underlying Activate.
+func (x *Ducker) Activate() {
+	x.inner.Activate()
+}
+
+// Deactivate calls the underlying Deactivate.
+func (x *Ducker) Deactivate() {
+	x.inner.Deactivate()
+}
+
+// SourceGroups calls the underlying SourceGroups.
+func (x *Ducker) SourceGroups() *foundation.NSSet[*raw.PHASEGroup] {
+	return x.inner.SourceGroups()
+}
+
+// TargetGroups calls the underlying TargetGroups.
+func (x *Ducker) TargetGroups() *foundation.NSSet[*raw.PHASEGroup] {
+	return x.inner.TargetGroups()
+}
+
+// IsActive calls the underlying IsActive.
+func (x *Ducker) IsActive() bool {
+	return x.inner.IsActive()
+}
+
+// Gain calls the underlying Gain.
+func (x *Ducker) Gain() float64 {
+	return x.inner.Gain()
+}
+
+// AttackTime calls the underlying AttackTime.
+func (x *Ducker) AttackTime() float64 {
+	return x.inner.AttackTime()
+}
+
+// ReleaseTime calls the underlying ReleaseTime.
+func (x *Ducker) ReleaseTime() float64 {
+	return x.inner.ReleaseTime()
+}
+
+// AttackCurve calls the underlying AttackCurve.
+func (x *Ducker) AttackCurve() raw.PHASECurveType {
+	return x.inner.AttackCurve()
+}
+
+// ReleaseCurve calls the underlying ReleaseCurve.
+func (x *Ducker) ReleaseCurve() raw.PHASECurveType {
+	return x.inner.ReleaseCurve()
+}
+
+// Identifier calls the underlying Identifier.
+func (x *Ducker) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Duckerable is the interface implemented by [Ducker], for mocking and DI.
+type Duckerable interface {
+	Unwrap() *raw.PHASEDucker
+	Activate()
+	Deactivate()
+	SourceGroups() *foundation.NSSet[*raw.PHASEGroup]
+	TargetGroups() *foundation.NSSet[*raw.PHASEGroup]
+	IsActive() bool
+	Gain() float64
+	AttackTime() float64
+	ReleaseTime() float64
+	AttackCurve() raw.PHASECurveType
+	ReleaseCurve() raw.PHASECurveType
+	Identifier() string
+}
+
+var _ Duckerable = (*Ducker)(nil)
 

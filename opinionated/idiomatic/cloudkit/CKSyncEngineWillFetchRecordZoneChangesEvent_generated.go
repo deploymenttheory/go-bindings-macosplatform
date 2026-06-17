@@ -23,5 +23,22 @@ func NewSyncEngineWillFetchRecordZoneChangesEvent() *SyncEngineWillFetchRecordZo
 	return &SyncEngineWillFetchRecordZoneChangesEvent{inner: raw.CKSyncEngineWillFetchRecordZoneChangesEventFromID(_id)}
 }
 
+// ZoneID calls the underlying ZoneID.
+func (x *SyncEngineWillFetchRecordZoneChangesEvent) ZoneID() *RecordZoneID {
+	_r := x.inner.ZoneID()
+	if _r == nil {
+		return nil
+	}
+	return &RecordZoneID{inner: _r}
+}
+
 func (x *SyncEngineWillFetchRecordZoneChangesEvent) asSyncEngineEvent() *raw.CKSyncEngineEvent { return &x.inner.CKSyncEngineEvent }
+
+// SyncEngineWillFetchRecordZoneChangesEventable is the interface implemented by [SyncEngineWillFetchRecordZoneChangesEvent], for mocking and DI.
+type SyncEngineWillFetchRecordZoneChangesEventable interface {
+	Unwrap() *raw.CKSyncEngineWillFetchRecordZoneChangesEvent
+	ZoneID() *RecordZoneID
+}
+
+var _ SyncEngineWillFetchRecordZoneChangesEventable = (*SyncEngineWillFetchRecordZoneChangesEvent)(nil)
 

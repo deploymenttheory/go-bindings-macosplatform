@@ -54,3 +54,75 @@ func (x *MTRDeviceEnergyManagementClusterConstraintsStruct) WithLoadControl(load
 	return x
 }
 
+// StartTime calls the underlying StartTime.
+func (x *MTRDeviceEnergyManagementClusterConstraintsStruct) StartTime() *foundation.NSNumber {
+	return x.inner.StartTime()
+}
+
+// SetStartTime calls the underlying SetStartTime.
+func (x *MTRDeviceEnergyManagementClusterConstraintsStruct) SetStartTime(startTime *foundation.NSNumber) {
+	x.inner.SetStartTime(startTime)
+}
+
+// Duration calls the underlying Duration.
+func (x *MTRDeviceEnergyManagementClusterConstraintsStruct) Duration() *foundation.NSNumber {
+	return x.inner.Duration()
+}
+
+// SetDuration calls the underlying SetDuration.
+func (x *MTRDeviceEnergyManagementClusterConstraintsStruct) SetDuration(duration *foundation.NSNumber) {
+	x.inner.SetDuration(duration)
+}
+
+// NominalPower calls the underlying NominalPower.
+func (x *MTRDeviceEnergyManagementClusterConstraintsStruct) NominalPower() *foundation.NSNumber {
+	return x.inner.NominalPower()
+}
+
+// SetNominalPower calls the underlying SetNominalPower.
+func (x *MTRDeviceEnergyManagementClusterConstraintsStruct) SetNominalPower(nominalPower *foundation.NSNumber) {
+	x.inner.SetNominalPower(nominalPower)
+}
+
+// MaximumEnergy calls the underlying MaximumEnergy.
+func (x *MTRDeviceEnergyManagementClusterConstraintsStruct) MaximumEnergy() *foundation.NSNumber {
+	return x.inner.MaximumEnergy()
+}
+
+// SetMaximumEnergy calls the underlying SetMaximumEnergy.
+func (x *MTRDeviceEnergyManagementClusterConstraintsStruct) SetMaximumEnergy(maximumEnergy *foundation.NSNumber) {
+	x.inner.SetMaximumEnergy(maximumEnergy)
+}
+
+// LoadControl calls the underlying LoadControl.
+func (x *MTRDeviceEnergyManagementClusterConstraintsStruct) LoadControl() *foundation.NSNumber {
+	return x.inner.LoadControl()
+}
+
+// SetLoadControl calls the underlying SetLoadControl.
+func (x *MTRDeviceEnergyManagementClusterConstraintsStruct) SetLoadControl(loadControl *foundation.NSNumber) {
+	x.inner.SetLoadControl(loadControl)
+}
+
+// MTRDeviceEnergyManagementClusterConstraintsStructable is the interface implemented by [MTRDeviceEnergyManagementClusterConstraintsStruct], for mocking and DI.
+type MTRDeviceEnergyManagementClusterConstraintsStructable interface {
+	Unwrap() *raw.MTRDeviceEnergyManagementClusterConstraintsStruct
+	WithStartTime(startTime *foundation.NSNumber) *MTRDeviceEnergyManagementClusterConstraintsStruct
+	WithDuration(duration *foundation.NSNumber) *MTRDeviceEnergyManagementClusterConstraintsStruct
+	WithNominalPower(nominalPower *foundation.NSNumber) *MTRDeviceEnergyManagementClusterConstraintsStruct
+	WithMaximumEnergy(maximumEnergy *foundation.NSNumber) *MTRDeviceEnergyManagementClusterConstraintsStruct
+	WithLoadControl(loadControl *foundation.NSNumber) *MTRDeviceEnergyManagementClusterConstraintsStruct
+	StartTime() *foundation.NSNumber
+	SetStartTime(startTime *foundation.NSNumber)
+	Duration() *foundation.NSNumber
+	SetDuration(duration *foundation.NSNumber)
+	NominalPower() *foundation.NSNumber
+	SetNominalPower(nominalPower *foundation.NSNumber)
+	MaximumEnergy() *foundation.NSNumber
+	SetMaximumEnergy(maximumEnergy *foundation.NSNumber)
+	LoadControl() *foundation.NSNumber
+	SetLoadControl(loadControl *foundation.NSNumber)
+}
+
+var _ MTRDeviceEnergyManagementClusterConstraintsStructable = (*MTRDeviceEnergyManagementClusterConstraintsStruct)(nil)
+

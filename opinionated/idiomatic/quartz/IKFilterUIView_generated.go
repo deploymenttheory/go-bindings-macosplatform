@@ -5,6 +5,7 @@
 package quartz
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartz"
@@ -25,4 +26,23 @@ func NewIKFilterUIViewWithFrameFilter(frameRect corefoundation.CGRect, inFilter 
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrame:filter:"), frameRect, inFilter.Ptr())
 	return &IKFilterUIView{inner: raw.IKFilterUIViewFromID(_id)}
 }
+
+// Filter calls the underlying Filter.
+func (x *IKFilterUIView) Filter() *coreimage.CIFilter {
+	return x.inner.Filter()
+}
+
+// ObjectController calls the underlying ObjectController.
+func (x *IKFilterUIView) ObjectController() *appkit.NSObjectController {
+	return x.inner.ObjectController()
+}
+
+// IKFilterUIViewable is the interface implemented by [IKFilterUIView], for mocking and DI.
+type IKFilterUIViewable interface {
+	Unwrap() *raw.IKFilterUIView
+	Filter() *coreimage.CIFilter
+	ObjectController() *appkit.NSObjectController
+}
+
+var _ IKFilterUIViewable = (*IKFilterUIView)(nil)
 

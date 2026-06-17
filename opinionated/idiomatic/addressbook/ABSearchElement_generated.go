@@ -23,3 +23,16 @@ func NewSearchElement() *SearchElement {
 	return &SearchElement{inner: raw.ABSearchElementFromID(_id)}
 }
 
+// MatchesRecord calls the underlying MatchesRecord.
+func (x *SearchElement) MatchesRecord(record *raw.ABRecord) bool {
+	return x.inner.MatchesRecord(record)
+}
+
+// SearchElementable is the interface implemented by [SearchElement], for mocking and DI.
+type SearchElementable interface {
+	Unwrap() *raw.ABSearchElement
+	MatchesRecord(record *raw.ABRecord) bool
+}
+
+var _ SearchElementable = (*SearchElement)(nil)
+

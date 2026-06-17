@@ -7,6 +7,7 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,6 +55,82 @@ func (x *DOMHTMLButtonElement) WithValue(value string) *DOMHTMLButtonElement {
 	return x
 }
 
+// Autofocus calls the underlying Autofocus.
+func (x *DOMHTMLButtonElement) Autofocus() bool {
+	return x.inner.Autofocus()
+}
+
+// SetAutofocus calls the underlying SetAutofocus.
+func (x *DOMHTMLButtonElement) SetAutofocus(autofocus bool) {
+	x.inner.SetAutofocus(autofocus)
+}
+
+// Disabled calls the underlying Disabled.
+func (x *DOMHTMLButtonElement) Disabled() bool {
+	return x.inner.Disabled()
+}
+
+// SetDisabled calls the underlying SetDisabled.
+func (x *DOMHTMLButtonElement) SetDisabled(disabled bool) {
+	x.inner.SetDisabled(disabled)
+}
+
+// Form calls the underlying Form.
+func (x *DOMHTMLButtonElement) Form() *DOMHTMLFormElement {
+	_r := x.inner.Form()
+	if _r == nil {
+		return nil
+	}
+	return &DOMHTMLFormElement{inner: _r}
+}
+
+// Type calls the underlying Type.
+func (x *DOMHTMLButtonElement) Type() string {
+	_r := x.inner.Type()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetType calls the underlying SetType.
+func (x *DOMHTMLButtonElement) SetType(type_ string) {
+	x.inner.SetType(foundation.NSStringStringWithUTF8String(type_))
+}
+
+// Name calls the underlying Name.
+func (x *DOMHTMLButtonElement) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetName calls the underlying SetName.
+func (x *DOMHTMLButtonElement) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
+// Value calls the underlying Value.
+func (x *DOMHTMLButtonElement) Value() string {
+	_r := x.inner.Value()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetValue calls the underlying SetValue.
+func (x *DOMHTMLButtonElement) SetValue(value string) {
+	x.inner.SetValue(foundation.NSStringStringWithUTF8String(value))
+}
+
+// WillValidate calls the underlying WillValidate.
+func (x *DOMHTMLButtonElement) WillValidate() bool {
+	return x.inner.WillValidate()
+}
+
 func (x *DOMHTMLButtonElement) asDOMHTMLElement() *raw.DOMHTMLElement { return &x.inner.DOMHTMLElement }
 
 func (x *DOMHTMLButtonElement) asDOMElement() *raw.DOMElement { return &x.inner.DOMHTMLElement.DOMElement }
@@ -63,4 +140,28 @@ func (x *DOMHTMLButtonElement) asDOMNode() *raw.DOMNode { return &x.inner.DOMHTM
 func (x *DOMHTMLButtonElement) asDOMObject() *raw.DOMObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject }
 
 func (x *DOMHTMLButtonElement) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject }
+
+// DOMHTMLButtonElementable is the interface implemented by [DOMHTMLButtonElement], for mocking and DI.
+type DOMHTMLButtonElementable interface {
+	Unwrap() *raw.DOMHTMLButtonElement
+	WithAutofocus(autofocus bool) *DOMHTMLButtonElement
+	WithDisabled(disabled bool) *DOMHTMLButtonElement
+	WithType(type_ string) *DOMHTMLButtonElement
+	WithName(name string) *DOMHTMLButtonElement
+	WithValue(value string) *DOMHTMLButtonElement
+	Autofocus() bool
+	SetAutofocus(autofocus bool)
+	Disabled() bool
+	SetDisabled(disabled bool)
+	Form() *DOMHTMLFormElement
+	Type() string
+	SetType(type_ string)
+	Name() string
+	SetName(name string)
+	Value() string
+	SetValue(value string)
+	WillValidate() bool
+}
+
+var _ DOMHTMLButtonElementable = (*DOMHTMLButtonElement)(nil)
 

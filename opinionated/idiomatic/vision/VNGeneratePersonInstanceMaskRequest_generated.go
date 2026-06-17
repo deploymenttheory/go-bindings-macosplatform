@@ -27,3 +27,10 @@ func (x *GeneratePersonInstanceMaskRequest) asImageBasedRequest() *raw.VNImageBa
 
 func (x *GeneratePersonInstanceMaskRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageBasedRequest.VNRequest }
 
+// GeneratePersonInstanceMaskRequestable is the interface implemented by [GeneratePersonInstanceMaskRequest], for mocking and DI.
+type GeneratePersonInstanceMaskRequestable interface {
+	Unwrap() *raw.VNGeneratePersonInstanceMaskRequest
+}
+
+var _ GeneratePersonInstanceMaskRequestable = (*GeneratePersonInstanceMaskRequest)(nil)
+

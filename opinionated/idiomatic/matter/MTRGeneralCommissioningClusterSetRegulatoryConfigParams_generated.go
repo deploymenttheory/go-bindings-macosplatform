@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,4 +54,80 @@ func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) WithServerSide
 	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
 	return x
 }
+
+// GetNewRegulatoryConfig calls the underlying GetNewRegulatoryConfig.
+func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) GetNewRegulatoryConfig() *foundation.NSNumber {
+	return x.inner.GetNewRegulatoryConfig()
+}
+
+// SetNewRegulatoryConfig calls the underlying SetNewRegulatoryConfig.
+func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) SetNewRegulatoryConfig(newRegulatoryConfig *foundation.NSNumber) {
+	x.inner.SetNewRegulatoryConfig(newRegulatoryConfig)
+}
+
+// CountryCode calls the underlying CountryCode.
+func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) CountryCode() string {
+	_r := x.inner.CountryCode()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetCountryCode calls the underlying SetCountryCode.
+func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) SetCountryCode(countryCode string) {
+	x.inner.SetCountryCode(foundation.NSStringStringWithUTF8String(countryCode))
+}
+
+// Breadcrumb calls the underlying Breadcrumb.
+func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) Breadcrumb() *foundation.NSNumber {
+	return x.inner.Breadcrumb()
+}
+
+// SetBreadcrumb calls the underlying SetBreadcrumb.
+func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) SetBreadcrumb(breadcrumb *foundation.NSNumber) {
+	x.inner.SetBreadcrumb(breadcrumb)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRGeneralCommissioningClusterSetRegulatoryConfigParamsable is the interface implemented by [MTRGeneralCommissioningClusterSetRegulatoryConfigParams], for mocking and DI.
+type MTRGeneralCommissioningClusterSetRegulatoryConfigParamsable interface {
+	Unwrap() *raw.MTRGeneralCommissioningClusterSetRegulatoryConfigParams
+	WithNewRegulatoryConfig(newRegulatoryConfig *foundation.NSNumber) *MTRGeneralCommissioningClusterSetRegulatoryConfigParams
+	WithCountryCode(countryCode string) *MTRGeneralCommissioningClusterSetRegulatoryConfigParams
+	WithBreadcrumb(breadcrumb *foundation.NSNumber) *MTRGeneralCommissioningClusterSetRegulatoryConfigParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRGeneralCommissioningClusterSetRegulatoryConfigParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRGeneralCommissioningClusterSetRegulatoryConfigParams
+	GetNewRegulatoryConfig() *foundation.NSNumber
+	SetNewRegulatoryConfig(newRegulatoryConfig *foundation.NSNumber)
+	CountryCode() string
+	SetCountryCode(countryCode string)
+	Breadcrumb() *foundation.NSNumber
+	SetBreadcrumb(breadcrumb *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRGeneralCommissioningClusterSetRegulatoryConfigParamsable = (*MTRGeneralCommissioningClusterSetRegulatoryConfigParams)(nil)
 

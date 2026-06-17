@@ -5,9 +5,12 @@
 package appkit
 
 import (
+	"context"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // FilePromiseReceiver wraps [raw.NSFilePromiseReceiver] with a fluent Go API.
@@ -24,29 +27,59 @@ func NewFilePromiseReceiver() *FilePromiseReceiver {
 	return &FilePromiseReceiver{inner: raw.NSFilePromiseReceiverFromID(_id)}
 }
 
+// ReceivePromisedFilesAtDestinationOptionsOperationQueueReader blocks until the operation completes or ctx is cancelled.
+func (x *FilePromiseReceiver) ReceivePromisedFilesAtDestinationOptionsOperationQueueReader(ctx context.Context, destinationDir string, options *foundation.NSDictionary[objc.ID, objc.ID], operationQueue *foundation.NSOperationQueue) (*foundation.NSURL, error) {
+	type _result struct {
+		val *foundation.NSURL
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReceivePromisedFilesAtDestinationOptionsOperationQueueReader(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(destinationDir)), options, operationQueue, func(_p0 *foundation.NSURL, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSURL
+		return _zero, ctx.Err()
+	}
+}
+
 // FileTypes returns the collection as a Go slice.
-func (x *FilePromiseReceiver) FileTypes() []*foundation.NSString {
+func (x *FilePromiseReceiver) FileTypes() []string {
 	arr := x.inner.FileTypes()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
 
 // FileNames returns the collection as a Go slice.
-func (x *FilePromiseReceiver) FileNames() []*foundation.NSString {
+func (x *FilePromiseReceiver) FileNames() []string {
 	arr := x.inner.FileNames()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
+
+// FilePromiseReceiverable is the interface implemented by [FilePromiseReceiver], for mocking and DI.
+type FilePromiseReceiverable interface {
+	Unwrap() *raw.NSFilePromiseReceiver
+	ReceivePromisedFilesAtDestinationOptionsOperationQueueReader(ctx context.Context, destinationDir string, options *foundation.NSDictionary[objc.ID, objc.ID], operationQueue *foundation.NSOperationQueue) (*foundation.NSURL, error)
+	FileTypes() []string
+	FileNames() []string
+}
+
+var _ FilePromiseReceiverable = (*FilePromiseReceiver)(nil)
 

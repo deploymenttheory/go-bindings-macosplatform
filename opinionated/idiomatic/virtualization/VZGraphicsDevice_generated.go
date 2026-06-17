@@ -6,6 +6,7 @@ package virtualization
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -29,12 +30,18 @@ func (x *GraphicsDevice) Displays() []*raw.VZGraphicsDisplay {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.VZGraphicsDisplay, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.VZGraphicsDisplay {
+		return raw.VZGraphicsDisplayFromID(purego.Retain(_id))
+	})
 }
 
 func (x *GraphicsDevice) asGraphicsDevice() *raw.VZGraphicsDevice { return x.inner }
+
+// GraphicsDeviceable is the interface implemented by [GraphicsDevice], for mocking and DI.
+type GraphicsDeviceable interface {
+	Unwrap() *raw.VZGraphicsDevice
+	Displays() []*raw.VZGraphicsDisplay
+}
+
+var _ GraphicsDeviceable = (*GraphicsDevice)(nil)
 

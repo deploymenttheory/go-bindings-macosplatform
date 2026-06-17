@@ -23,5 +23,22 @@ func NewActivationLayer() *ActivationLayer {
 	return &ActivationLayer{inner: raw.MLCActivationLayerFromID(_id)}
 }
 
+// Descriptor calls the underlying Descriptor.
+func (x *ActivationLayer) Descriptor() *ActivationDescriptor {
+	_r := x.inner.Descriptor()
+	if _r == nil {
+		return nil
+	}
+	return &ActivationDescriptor{inner: _r}
+}
+
 func (x *ActivationLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
+
+// ActivationLayerable is the interface implemented by [ActivationLayer], for mocking and DI.
+type ActivationLayerable interface {
+	Unwrap() *raw.MLCActivationLayer
+	Descriptor() *ActivationDescriptor
+}
+
+var _ ActivationLayerable = (*ActivationLayer)(nil)
 

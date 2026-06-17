@@ -27,3 +27,10 @@ func (x *FragmentedAsset) asURLAsset() *raw.AVURLAsset { return &x.inner.AVURLAs
 
 func (x *FragmentedAsset) asAsset() *raw.AVAsset { return &x.inner.AVURLAsset.AVAsset }
 
+// FragmentedAssetable is the interface implemented by [FragmentedAsset], for mocking and DI.
+type FragmentedAssetable interface {
+	Unwrap() *raw.AVFragmentedAsset
+}
+
+var _ FragmentedAssetable = (*FragmentedAsset)(nil)
+

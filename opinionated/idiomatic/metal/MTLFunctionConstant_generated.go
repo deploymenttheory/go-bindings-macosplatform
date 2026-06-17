@@ -6,6 +6,7 @@ package metal
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,39 @@ func NewFunctionConstant() *FunctionConstant {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLFunctionConstant")), objc.RegisterName("new"))
 	return &FunctionConstant{inner: raw.MTLFunctionConstantFromID(_id)}
 }
+
+// Name calls the underlying Name.
+func (x *FunctionConstant) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Type calls the underlying Type.
+func (x *FunctionConstant) Type() raw.MTLDataType {
+	return x.inner.Type()
+}
+
+// Index calls the underlying Index.
+func (x *FunctionConstant) Index() uint {
+	return x.inner.Index()
+}
+
+// Required calls the underlying Required.
+func (x *FunctionConstant) Required() bool {
+	return x.inner.Required()
+}
+
+// FunctionConstantable is the interface implemented by [FunctionConstant], for mocking and DI.
+type FunctionConstantable interface {
+	Unwrap() *raw.MTLFunctionConstant
+	Name() string
+	Type() raw.MTLDataType
+	Index() uint
+	Required() bool
+}
+
+var _ FunctionConstantable = (*FunctionConstant)(nil)
 

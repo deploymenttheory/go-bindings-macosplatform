@@ -27,3 +27,10 @@ func (x *NNAdditionNode) asNNBinaryArithmeticNode() *raw.MPSNNBinaryArithmeticNo
 
 func (x *NNAdditionNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNBinaryArithmeticNode.MPSNNFilterNode }
 
+// NNAdditionNodeable is the interface implemented by [NNAdditionNode], for mocking and DI.
+type NNAdditionNodeable interface {
+	Unwrap() *raw.MPSNNAdditionNode
+}
+
+var _ NNAdditionNodeable = (*NNAdditionNode)(nil)
+

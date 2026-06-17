@@ -29,3 +29,10 @@ func (x *CNNNeuronSoftPlus) asCNNNeuron() *raw.MPSCNNNeuron { return &x.inner.MP
 
 func (x *CNNNeuronSoftPlus) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSCNNNeuron.MPSCNNKernel }
 
+// CNNNeuronSoftPlusable is the interface implemented by [CNNNeuronSoftPlus], for mocking and DI.
+type CNNNeuronSoftPlusable interface {
+	Unwrap() *raw.MPSCNNNeuronSoftPlus
+}
+
+var _ CNNNeuronSoftPlusable = (*CNNNeuronSoftPlus)(nil)
+

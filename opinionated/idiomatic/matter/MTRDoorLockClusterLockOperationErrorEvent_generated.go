@@ -60,3 +60,100 @@ func (x *MTRDoorLockClusterLockOperationErrorEvent) WithSourceNode(sourceNode *f
 	return x
 }
 
+// LockOperationType calls the underlying LockOperationType.
+func (x *MTRDoorLockClusterLockOperationErrorEvent) LockOperationType() *foundation.NSNumber {
+	return x.inner.LockOperationType()
+}
+
+// SetLockOperationType calls the underlying SetLockOperationType.
+func (x *MTRDoorLockClusterLockOperationErrorEvent) SetLockOperationType(lockOperationType *foundation.NSNumber) {
+	x.inner.SetLockOperationType(lockOperationType)
+}
+
+// OperationSource calls the underlying OperationSource.
+func (x *MTRDoorLockClusterLockOperationErrorEvent) OperationSource() *foundation.NSNumber {
+	return x.inner.OperationSource()
+}
+
+// SetOperationSource calls the underlying SetOperationSource.
+func (x *MTRDoorLockClusterLockOperationErrorEvent) SetOperationSource(operationSource *foundation.NSNumber) {
+	x.inner.SetOperationSource(operationSource)
+}
+
+// OperationError calls the underlying OperationError.
+func (x *MTRDoorLockClusterLockOperationErrorEvent) OperationError() *foundation.NSNumber {
+	return x.inner.OperationError()
+}
+
+// SetOperationError calls the underlying SetOperationError.
+func (x *MTRDoorLockClusterLockOperationErrorEvent) SetOperationError(operationError *foundation.NSNumber) {
+	x.inner.SetOperationError(operationError)
+}
+
+// UserIndex calls the underlying UserIndex.
+func (x *MTRDoorLockClusterLockOperationErrorEvent) UserIndex() *foundation.NSNumber {
+	return x.inner.UserIndex()
+}
+
+// SetUserIndex calls the underlying SetUserIndex.
+func (x *MTRDoorLockClusterLockOperationErrorEvent) SetUserIndex(userIndex *foundation.NSNumber) {
+	x.inner.SetUserIndex(userIndex)
+}
+
+// FabricIndex calls the underlying FabricIndex.
+func (x *MTRDoorLockClusterLockOperationErrorEvent) FabricIndex() *foundation.NSNumber {
+	return x.inner.FabricIndex()
+}
+
+// SetFabricIndex calls the underlying SetFabricIndex.
+func (x *MTRDoorLockClusterLockOperationErrorEvent) SetFabricIndex(fabricIndex *foundation.NSNumber) {
+	x.inner.SetFabricIndex(fabricIndex)
+}
+
+// SourceNode calls the underlying SourceNode.
+func (x *MTRDoorLockClusterLockOperationErrorEvent) SourceNode() *foundation.NSNumber {
+	return x.inner.SourceNode()
+}
+
+// SetSourceNode calls the underlying SetSourceNode.
+func (x *MTRDoorLockClusterLockOperationErrorEvent) SetSourceNode(sourceNode *foundation.NSNumber) {
+	x.inner.SetSourceNode(sourceNode)
+}
+
+// Credentials calls the underlying Credentials.
+func (x *MTRDoorLockClusterLockOperationErrorEvent) Credentials() *foundation.NSArray[objc.ID] {
+	return x.inner.Credentials()
+}
+
+// SetCredentials calls the underlying SetCredentials.
+func (x *MTRDoorLockClusterLockOperationErrorEvent) SetCredentials(credentials *foundation.NSArray[objc.ID]) {
+	x.inner.SetCredentials(credentials)
+}
+
+// MTRDoorLockClusterLockOperationErrorEventable is the interface implemented by [MTRDoorLockClusterLockOperationErrorEvent], for mocking and DI.
+type MTRDoorLockClusterLockOperationErrorEventable interface {
+	Unwrap() *raw.MTRDoorLockClusterLockOperationErrorEvent
+	WithLockOperationType(lockOperationType *foundation.NSNumber) *MTRDoorLockClusterLockOperationErrorEvent
+	WithOperationSource(operationSource *foundation.NSNumber) *MTRDoorLockClusterLockOperationErrorEvent
+	WithOperationError(operationError *foundation.NSNumber) *MTRDoorLockClusterLockOperationErrorEvent
+	WithUserIndex(userIndex *foundation.NSNumber) *MTRDoorLockClusterLockOperationErrorEvent
+	WithFabricIndex(fabricIndex *foundation.NSNumber) *MTRDoorLockClusterLockOperationErrorEvent
+	WithSourceNode(sourceNode *foundation.NSNumber) *MTRDoorLockClusterLockOperationErrorEvent
+	LockOperationType() *foundation.NSNumber
+	SetLockOperationType(lockOperationType *foundation.NSNumber)
+	OperationSource() *foundation.NSNumber
+	SetOperationSource(operationSource *foundation.NSNumber)
+	OperationError() *foundation.NSNumber
+	SetOperationError(operationError *foundation.NSNumber)
+	UserIndex() *foundation.NSNumber
+	SetUserIndex(userIndex *foundation.NSNumber)
+	FabricIndex() *foundation.NSNumber
+	SetFabricIndex(fabricIndex *foundation.NSNumber)
+	SourceNode() *foundation.NSNumber
+	SetSourceNode(sourceNode *foundation.NSNumber)
+	Credentials() *foundation.NSArray[objc.ID]
+	SetCredentials(credentials *foundation.NSArray[objc.ID])
+}
+
+var _ MTRDoorLockClusterLockOperationErrorEventable = (*MTRDoorLockClusterLockOperationErrorEvent)(nil)
+

@@ -7,6 +7,7 @@ package gamekit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -61,4 +62,108 @@ func (x *MatchmakerViewController) WithDefaultInvitationMessage(defaultInvitatio
 	x.inner.SetDefaultInvitationMessage(foundation.NSStringStringWithUTF8String(defaultInvitationMessage))
 	return x
 }
+
+// AddPlayersToMatch calls the underlying AddPlayersToMatch.
+func (x *MatchmakerViewController) AddPlayersToMatch(match *raw.GKMatch) {
+	x.inner.AddPlayersToMatch(match)
+}
+
+// SetHostedPlayerDidConnect calls the underlying SetHostedPlayerDidConnect.
+func (x *MatchmakerViewController) SetHostedPlayerDidConnect(player *raw.GKPlayer, connected bool) {
+	x.inner.SetHostedPlayerDidConnect(player, connected)
+}
+
+// MatchmakerDelegate calls the underlying MatchmakerDelegate.
+func (x *MatchmakerViewController) MatchmakerDelegate() raw.GKMatchmakerViewControllerDelegate {
+	return x.inner.MatchmakerDelegate()
+}
+
+// SetMatchmakerDelegate calls the underlying SetMatchmakerDelegate.
+func (x *MatchmakerViewController) SetMatchmakerDelegate(matchmakerDelegate raw.GKMatchmakerViewControllerDelegate) {
+	x.inner.SetMatchmakerDelegate(matchmakerDelegate)
+}
+
+// MatchRequest calls the underlying MatchRequest.
+func (x *MatchmakerViewController) MatchRequest() *MatchRequest {
+	_r := x.inner.MatchRequest()
+	if _r == nil {
+		return nil
+	}
+	return &MatchRequest{inner: _r}
+}
+
+// IsHosted calls the underlying IsHosted.
+func (x *MatchmakerViewController) IsHosted() bool {
+	return x.inner.IsHosted()
+}
+
+// SetHosted calls the underlying SetHosted.
+func (x *MatchmakerViewController) SetHosted(hosted bool) {
+	x.inner.SetHosted(hosted)
+}
+
+// MatchmakingMode calls the underlying MatchmakingMode.
+func (x *MatchmakerViewController) MatchmakingMode() raw.GKMatchmakingMode {
+	return x.inner.MatchmakingMode()
+}
+
+// SetMatchmakingMode calls the underlying SetMatchmakingMode.
+func (x *MatchmakerViewController) SetMatchmakingMode(matchmakingMode raw.GKMatchmakingMode) {
+	x.inner.SetMatchmakingMode(matchmakingMode)
+}
+
+// CanStartWithMinimumPlayers calls the underlying CanStartWithMinimumPlayers.
+func (x *MatchmakerViewController) CanStartWithMinimumPlayers() bool {
+	return x.inner.CanStartWithMinimumPlayers()
+}
+
+// SetCanStartWithMinimumPlayers calls the underlying SetCanStartWithMinimumPlayers.
+func (x *MatchmakerViewController) SetCanStartWithMinimumPlayers(canStartWithMinimumPlayers bool) {
+	x.inner.SetCanStartWithMinimumPlayers(canStartWithMinimumPlayers)
+}
+
+// DefaultInvitationMessage calls the underlying DefaultInvitationMessage.
+func (x *MatchmakerViewController) DefaultInvitationMessage() string {
+	_r := x.inner.DefaultInvitationMessage()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetDefaultInvitationMessage calls the underlying SetDefaultInvitationMessage.
+func (x *MatchmakerViewController) SetDefaultInvitationMessage(defaultInvitationMessage string) {
+	x.inner.SetDefaultInvitationMessage(foundation.NSStringStringWithUTF8String(defaultInvitationMessage))
+}
+
+// SetHostedPlayerConnected calls the underlying SetHostedPlayerConnected.
+func (x *MatchmakerViewController) SetHostedPlayerConnected(playerID string, connected bool) {
+	x.inner.SetHostedPlayerConnected(foundation.NSStringStringWithUTF8String(playerID), connected)
+}
+
+// MatchmakerViewControllerable is the interface implemented by [MatchmakerViewController], for mocking and DI.
+type MatchmakerViewControllerable interface {
+	Unwrap() *raw.GKMatchmakerViewController
+	WithMatchmakerDelegate(matchmakerDelegate raw.GKMatchmakerViewControllerDelegate) *MatchmakerViewController
+	WithHosted(hosted bool) *MatchmakerViewController
+	WithMatchmakingMode(matchmakingMode raw.GKMatchmakingMode) *MatchmakerViewController
+	WithCanStartWithMinimumPlayers(canStartWithMinimumPlayers bool) *MatchmakerViewController
+	WithDefaultInvitationMessage(defaultInvitationMessage string) *MatchmakerViewController
+	AddPlayersToMatch(match *raw.GKMatch)
+	SetHostedPlayerDidConnect(player *raw.GKPlayer, connected bool)
+	MatchmakerDelegate() raw.GKMatchmakerViewControllerDelegate
+	SetMatchmakerDelegate(matchmakerDelegate raw.GKMatchmakerViewControllerDelegate)
+	MatchRequest() *MatchRequest
+	IsHosted() bool
+	SetHosted(hosted bool)
+	MatchmakingMode() raw.GKMatchmakingMode
+	SetMatchmakingMode(matchmakingMode raw.GKMatchmakingMode)
+	CanStartWithMinimumPlayers() bool
+	SetCanStartWithMinimumPlayers(canStartWithMinimumPlayers bool)
+	DefaultInvitationMessage() string
+	SetDefaultInvitationMessage(defaultInvitationMessage string)
+	SetHostedPlayerConnected(playerID string, connected bool)
+}
+
+var _ MatchmakerViewControllerable = (*MatchmakerViewController)(nil)
 

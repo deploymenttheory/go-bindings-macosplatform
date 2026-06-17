@@ -7,6 +7,7 @@ package passkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -31,5 +32,39 @@ func (x *ShareablePassMetadataPreview) WithOwnerDisplayName(ownerDisplayName str
 	return x
 }
 
+// OwnerDisplayName calls the underlying OwnerDisplayName.
+func (x *ShareablePassMetadataPreview) OwnerDisplayName() string {
+	_r := x.inner.OwnerDisplayName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetOwnerDisplayName calls the underlying SetOwnerDisplayName.
+func (x *ShareablePassMetadataPreview) SetOwnerDisplayName(ownerDisplayName string) {
+	x.inner.SetOwnerDisplayName(foundation.NSStringStringWithUTF8String(ownerDisplayName))
+}
+
+// ProvisioningTemplateIdentifier calls the underlying ProvisioningTemplateIdentifier.
+func (x *ShareablePassMetadataPreview) ProvisioningTemplateIdentifier() string {
+	_r := x.inner.ProvisioningTemplateIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 func (x *ShareablePassMetadataPreview) asAddPassMetadataPreview() *raw.PKAddPassMetadataPreview { return &x.inner.PKAddPassMetadataPreview }
+
+// ShareablePassMetadataPreviewable is the interface implemented by [ShareablePassMetadataPreview], for mocking and DI.
+type ShareablePassMetadataPreviewable interface {
+	Unwrap() *raw.PKShareablePassMetadataPreview
+	WithOwnerDisplayName(ownerDisplayName string) *ShareablePassMetadataPreview
+	OwnerDisplayName() string
+	SetOwnerDisplayName(ownerDisplayName string)
+	ProvisioningTemplateIdentifier() string
+}
+
+var _ ShareablePassMetadataPreviewable = (*ShareablePassMetadataPreview)(nil)
 

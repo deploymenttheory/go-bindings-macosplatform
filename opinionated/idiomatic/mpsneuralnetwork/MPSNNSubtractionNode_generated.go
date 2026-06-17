@@ -27,3 +27,10 @@ func (x *NNSubtractionNode) asNNBinaryArithmeticNode() *raw.MPSNNBinaryArithmeti
 
 func (x *NNSubtractionNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNBinaryArithmeticNode.MPSNNFilterNode }
 
+// NNSubtractionNodeable is the interface implemented by [NNSubtractionNode], for mocking and DI.
+type NNSubtractionNodeable interface {
+	Unwrap() *raw.MPSNNSubtractionNode
+}
+
+var _ NNSubtractionNodeable = (*NNSubtractionNode)(nil)
+

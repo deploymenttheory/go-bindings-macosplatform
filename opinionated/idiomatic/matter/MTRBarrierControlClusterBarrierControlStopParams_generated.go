@@ -36,3 +36,36 @@ func (x *MTRBarrierControlClusterBarrierControlStopParams) WithServerSideProcess
 	return x
 }
 
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRBarrierControlClusterBarrierControlStopParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRBarrierControlClusterBarrierControlStopParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRBarrierControlClusterBarrierControlStopParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRBarrierControlClusterBarrierControlStopParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRBarrierControlClusterBarrierControlStopParamsable is the interface implemented by [MTRBarrierControlClusterBarrierControlStopParams], for mocking and DI.
+type MTRBarrierControlClusterBarrierControlStopParamsable interface {
+	Unwrap() *raw.MTRBarrierControlClusterBarrierControlStopParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRBarrierControlClusterBarrierControlStopParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRBarrierControlClusterBarrierControlStopParams
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRBarrierControlClusterBarrierControlStopParamsable = (*MTRBarrierControlClusterBarrierControlStopParams)(nil)
+

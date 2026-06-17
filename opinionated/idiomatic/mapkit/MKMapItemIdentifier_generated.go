@@ -7,6 +7,7 @@ package mapkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,4 +25,21 @@ func NewMapItemIdentifierWithIdentifierString(string_ string) *MapItemIdentifier
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifierString:"), foundation.NSStringStringWithUTF8String(string_).Ptr())
 	return &MapItemIdentifier{inner: raw.MKMapItemIdentifierFromID(_id)}
 }
+
+// IdentifierString calls the underlying IdentifierString.
+func (x *MapItemIdentifier) IdentifierString() string {
+	_r := x.inner.IdentifierString()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// MapItemIdentifierable is the interface implemented by [MapItemIdentifier], for mocking and DI.
+type MapItemIdentifierable interface {
+	Unwrap() *raw.MKMapItemIdentifier
+	IdentifierString() string
+}
+
+var _ MapItemIdentifierable = (*MapItemIdentifier)(nil)
 

@@ -25,3 +25,10 @@ func NewBarcodeDescriptor() *BarcodeDescriptor {
 
 func (x *BarcodeDescriptor) asBarcodeDescriptor() *raw.CIBarcodeDescriptor { return x.inner }
 
+// BarcodeDescriptorable is the interface implemented by [BarcodeDescriptor], for mocking and DI.
+type BarcodeDescriptorable interface {
+	Unwrap() *raw.CIBarcodeDescriptor
+}
+
+var _ BarcodeDescriptorable = (*BarcodeDescriptor)(nil)
+

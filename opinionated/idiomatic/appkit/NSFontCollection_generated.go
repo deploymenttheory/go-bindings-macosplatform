@@ -6,6 +6,8 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,17 +25,30 @@ func NewFontCollection() *FontCollection {
 	return &FontCollection{inner: raw.NSFontCollectionFromID(_id)}
 }
 
+// MatchingDescriptorsWithOptions calls the underlying MatchingDescriptorsWithOptions.
+func (x *FontCollection) MatchingDescriptorsWithOptions(options *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber]) *foundation.NSArray[*raw.NSFontDescriptor] {
+	return x.inner.MatchingDescriptorsWithOptions(options)
+}
+
+// MatchingDescriptorsForFamily calls the underlying MatchingDescriptorsForFamily.
+func (x *FontCollection) MatchingDescriptorsForFamily(family string) *foundation.NSArray[*raw.NSFontDescriptor] {
+	return x.inner.MatchingDescriptorsForFamily(foundation.NSStringStringWithUTF8String(family))
+}
+
+// MatchingDescriptorsForFamilyOptions calls the underlying MatchingDescriptorsForFamilyOptions.
+func (x *FontCollection) MatchingDescriptorsForFamilyOptions(family string, options *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber]) *foundation.NSArray[*raw.NSFontDescriptor] {
+	return x.inner.MatchingDescriptorsForFamilyOptions(foundation.NSStringStringWithUTF8String(family), options)
+}
+
 // QueryDescriptors returns the collection as a Go slice.
 func (x *FontCollection) QueryDescriptors() []*raw.NSFontDescriptor {
 	arr := x.inner.QueryDescriptors()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSFontDescriptor, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSFontDescriptor {
+		return raw.NSFontDescriptorFromID(purego.Retain(_id))
+	})
 }
 
 // ExclusionDescriptors returns the collection as a Go slice.
@@ -42,11 +57,9 @@ func (x *FontCollection) ExclusionDescriptors() []*raw.NSFontDescriptor {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSFontDescriptor, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSFontDescriptor {
+		return raw.NSFontDescriptorFromID(purego.Retain(_id))
+	})
 }
 
 // MatchingDescriptors returns the collection as a Go slice.
@@ -55,12 +68,23 @@ func (x *FontCollection) MatchingDescriptors() []*raw.NSFontDescriptor {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSFontDescriptor, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSFontDescriptor {
+		return raw.NSFontDescriptorFromID(purego.Retain(_id))
+	})
 }
 
 func (x *FontCollection) asFontCollection() *raw.NSFontCollection { return x.inner }
+
+// FontCollectionable is the interface implemented by [FontCollection], for mocking and DI.
+type FontCollectionable interface {
+	Unwrap() *raw.NSFontCollection
+	MatchingDescriptorsWithOptions(options *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber]) *foundation.NSArray[*raw.NSFontDescriptor]
+	MatchingDescriptorsForFamily(family string) *foundation.NSArray[*raw.NSFontDescriptor]
+	MatchingDescriptorsForFamilyOptions(family string, options *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber]) *foundation.NSArray[*raw.NSFontDescriptor]
+	QueryDescriptors() []*raw.NSFontDescriptor
+	ExclusionDescriptors() []*raw.NSFontDescriptor
+	MatchingDescriptors() []*raw.NSFontDescriptor
+}
+
+var _ FontCollectionable = (*FontCollection)(nil)
 

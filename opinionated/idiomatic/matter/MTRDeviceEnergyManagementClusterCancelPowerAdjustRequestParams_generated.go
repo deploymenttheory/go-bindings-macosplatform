@@ -36,3 +36,36 @@ func (x *MTRDeviceEnergyManagementClusterCancelPowerAdjustRequestParams) WithSer
 	return x
 }
 
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRDeviceEnergyManagementClusterCancelPowerAdjustRequestParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRDeviceEnergyManagementClusterCancelPowerAdjustRequestParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRDeviceEnergyManagementClusterCancelPowerAdjustRequestParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRDeviceEnergyManagementClusterCancelPowerAdjustRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRDeviceEnergyManagementClusterCancelPowerAdjustRequestParamsable is the interface implemented by [MTRDeviceEnergyManagementClusterCancelPowerAdjustRequestParams], for mocking and DI.
+type MTRDeviceEnergyManagementClusterCancelPowerAdjustRequestParamsable interface {
+	Unwrap() *raw.MTRDeviceEnergyManagementClusterCancelPowerAdjustRequestParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRDeviceEnergyManagementClusterCancelPowerAdjustRequestParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRDeviceEnergyManagementClusterCancelPowerAdjustRequestParams
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRDeviceEnergyManagementClusterCancelPowerAdjustRequestParamsable = (*MTRDeviceEnergyManagementClusterCancelPowerAdjustRequestParams)(nil)
+

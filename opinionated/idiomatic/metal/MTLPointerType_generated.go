@@ -23,5 +23,62 @@ func NewPointerType() *PointerType {
 	return &PointerType{inner: raw.MTLPointerTypeFromID(_id)}
 }
 
+// ElementStructType calls the underlying ElementStructType.
+func (x *PointerType) ElementStructType() *StructType {
+	_r := x.inner.ElementStructType()
+	if _r == nil {
+		return nil
+	}
+	return &StructType{inner: _r}
+}
+
+// ElementArrayType calls the underlying ElementArrayType.
+func (x *PointerType) ElementArrayType() *ArrayType {
+	_r := x.inner.ElementArrayType()
+	if _r == nil {
+		return nil
+	}
+	return &ArrayType{inner: _r}
+}
+
+// ElementType calls the underlying ElementType.
+func (x *PointerType) ElementType() raw.MTLDataType {
+	return x.inner.ElementType()
+}
+
+// Access calls the underlying Access.
+func (x *PointerType) Access() raw.MTLBindingAccess {
+	return x.inner.Access()
+}
+
+// Alignment calls the underlying Alignment.
+func (x *PointerType) Alignment() uint {
+	return x.inner.Alignment()
+}
+
+// DataSize calls the underlying DataSize.
+func (x *PointerType) DataSize() uint {
+	return x.inner.DataSize()
+}
+
+// ElementIsArgumentBuffer calls the underlying ElementIsArgumentBuffer.
+func (x *PointerType) ElementIsArgumentBuffer() bool {
+	return x.inner.ElementIsArgumentBuffer()
+}
+
 func (x *PointerType) asType() *raw.MTLType { return &x.inner.MTLType }
+
+// PointerTypeable is the interface implemented by [PointerType], for mocking and DI.
+type PointerTypeable interface {
+	Unwrap() *raw.MTLPointerType
+	ElementStructType() *StructType
+	ElementArrayType() *ArrayType
+	ElementType() raw.MTLDataType
+	Access() raw.MTLBindingAccess
+	Alignment() uint
+	DataSize() uint
+	ElementIsArgumentBuffer() bool
+}
+
+var _ PointerTypeable = (*PointerType)(nil)
 

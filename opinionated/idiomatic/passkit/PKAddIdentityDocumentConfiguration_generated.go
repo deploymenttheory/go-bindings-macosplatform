@@ -23,5 +23,22 @@ func NewAddIdentityDocumentConfiguration() *AddIdentityDocumentConfiguration {
 	return &AddIdentityDocumentConfiguration{inner: raw.PKAddIdentityDocumentConfigurationFromID(_id)}
 }
 
+// Metadata calls the underlying Metadata.
+func (x *AddIdentityDocumentConfiguration) Metadata() *IdentityDocumentMetadata {
+	_r := x.inner.Metadata()
+	if _r == nil {
+		return nil
+	}
+	return &IdentityDocumentMetadata{inner: _r}
+}
+
 func (x *AddIdentityDocumentConfiguration) asAddSecureElementPassConfiguration() *raw.PKAddSecureElementPassConfiguration { return &x.inner.PKAddSecureElementPassConfiguration }
+
+// AddIdentityDocumentConfigurationable is the interface implemented by [AddIdentityDocumentConfiguration], for mocking and DI.
+type AddIdentityDocumentConfigurationable interface {
+	Unwrap() *raw.PKAddIdentityDocumentConfiguration
+	Metadata() *IdentityDocumentMetadata
+}
+
+var _ AddIdentityDocumentConfigurationable = (*AddIdentityDocumentConfiguration)(nil)
 

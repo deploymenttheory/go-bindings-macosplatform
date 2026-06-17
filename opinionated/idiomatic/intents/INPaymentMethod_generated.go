@@ -7,6 +7,7 @@ package intents
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,4 +25,47 @@ func NewPaymentMethodWithTypeNameIdentificationHintIcon(type_ raw.INPaymentMetho
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:name:identificationHint:icon:"), type_, foundation.NSStringStringWithUTF8String(name).Ptr(), foundation.NSStringStringWithUTF8String(identificationHint).Ptr(), icon.Ptr())
 	return &PaymentMethod{inner: raw.INPaymentMethodFromID(_id)}
 }
+
+// Type calls the underlying Type.
+func (x *PaymentMethod) Type() raw.INPaymentMethodType {
+	return x.inner.Type()
+}
+
+// Name calls the underlying Name.
+func (x *PaymentMethod) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Icon calls the underlying Icon.
+func (x *PaymentMethod) Icon() *Image {
+	_r := x.inner.Icon()
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// IdentificationHint calls the underlying IdentificationHint.
+func (x *PaymentMethod) IdentificationHint() string {
+	_r := x.inner.IdentificationHint()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// PaymentMethodable is the interface implemented by [PaymentMethod], for mocking and DI.
+type PaymentMethodable interface {
+	Unwrap() *raw.INPaymentMethod
+	Type() raw.INPaymentMethodType
+	Name() string
+	Icon() *Image
+	IdentificationHint() string
+}
+
+var _ PaymentMethodable = (*PaymentMethod)(nil)
 

@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +23,29 @@ func NewMTRAccessGrant() *MTRAccessGrant {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRAccessGrant")), objc.RegisterName("new"))
 	return &MTRAccessGrant{inner: raw.MTRAccessGrantFromID(_id)}
 }
+
+// SubjectID calls the underlying SubjectID.
+func (x *MTRAccessGrant) SubjectID() *foundation.NSNumber {
+	return x.inner.SubjectID()
+}
+
+// GrantedPrivilege calls the underlying GrantedPrivilege.
+func (x *MTRAccessGrant) GrantedPrivilege() raw.MTRAccessControlEntryPrivilege {
+	return x.inner.GrantedPrivilege()
+}
+
+// AuthenticationMode calls the underlying AuthenticationMode.
+func (x *MTRAccessGrant) AuthenticationMode() raw.MTRAccessControlEntryAuthMode {
+	return x.inner.AuthenticationMode()
+}
+
+// MTRAccessGrantable is the interface implemented by [MTRAccessGrant], for mocking and DI.
+type MTRAccessGrantable interface {
+	Unwrap() *raw.MTRAccessGrant
+	SubjectID() *foundation.NSNumber
+	GrantedPrivilege() raw.MTRAccessControlEntryPrivilege
+	AuthenticationMode() raw.MTRAccessControlEntryAuthMode
+}
+
+var _ MTRAccessGrantable = (*MTRAccessGrant)(nil)
 

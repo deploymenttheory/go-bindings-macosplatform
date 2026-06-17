@@ -41,3 +41,49 @@ func (x *IssuerProvisioningExtensionStatus) WithRemotePassEntriesAvailable(remot
 	return x
 }
 
+// RequiresAuthentication calls the underlying RequiresAuthentication.
+func (x *IssuerProvisioningExtensionStatus) RequiresAuthentication() bool {
+	return x.inner.RequiresAuthentication()
+}
+
+// SetRequiresAuthentication calls the underlying SetRequiresAuthentication.
+func (x *IssuerProvisioningExtensionStatus) SetRequiresAuthentication(requiresAuthentication bool) {
+	x.inner.SetRequiresAuthentication(requiresAuthentication)
+}
+
+// PassEntriesAvailable calls the underlying PassEntriesAvailable.
+func (x *IssuerProvisioningExtensionStatus) PassEntriesAvailable() bool {
+	return x.inner.PassEntriesAvailable()
+}
+
+// SetPassEntriesAvailable calls the underlying SetPassEntriesAvailable.
+func (x *IssuerProvisioningExtensionStatus) SetPassEntriesAvailable(passEntriesAvailable bool) {
+	x.inner.SetPassEntriesAvailable(passEntriesAvailable)
+}
+
+// RemotePassEntriesAvailable calls the underlying RemotePassEntriesAvailable.
+func (x *IssuerProvisioningExtensionStatus) RemotePassEntriesAvailable() bool {
+	return x.inner.RemotePassEntriesAvailable()
+}
+
+// SetRemotePassEntriesAvailable calls the underlying SetRemotePassEntriesAvailable.
+func (x *IssuerProvisioningExtensionStatus) SetRemotePassEntriesAvailable(remotePassEntriesAvailable bool) {
+	x.inner.SetRemotePassEntriesAvailable(remotePassEntriesAvailable)
+}
+
+// IssuerProvisioningExtensionStatusable is the interface implemented by [IssuerProvisioningExtensionStatus], for mocking and DI.
+type IssuerProvisioningExtensionStatusable interface {
+	Unwrap() *raw.PKIssuerProvisioningExtensionStatus
+	WithRequiresAuthentication(requiresAuthentication bool) *IssuerProvisioningExtensionStatus
+	WithPassEntriesAvailable(passEntriesAvailable bool) *IssuerProvisioningExtensionStatus
+	WithRemotePassEntriesAvailable(remotePassEntriesAvailable bool) *IssuerProvisioningExtensionStatus
+	RequiresAuthentication() bool
+	SetRequiresAuthentication(requiresAuthentication bool)
+	PassEntriesAvailable() bool
+	SetPassEntriesAvailable(passEntriesAvailable bool)
+	RemotePassEntriesAvailable() bool
+	SetRemotePassEntriesAvailable(remotePassEntriesAvailable bool)
+}
+
+var _ IssuerProvisioningExtensionStatusable = (*IssuerProvisioningExtensionStatus)(nil)
+

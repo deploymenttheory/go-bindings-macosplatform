@@ -25,3 +25,10 @@ func NewAnnotationLink() *AnnotationLink {
 
 func (x *AnnotationLink) asAnnotation() *raw.PDFAnnotation { return &x.inner.PDFAnnotation }
 
+// AnnotationLinkable is the interface implemented by [AnnotationLink], for mocking and DI.
+type AnnotationLinkable interface {
+	Unwrap() *raw.PDFAnnotationLink
+}
+
+var _ AnnotationLinkable = (*AnnotationLink)(nil)
+

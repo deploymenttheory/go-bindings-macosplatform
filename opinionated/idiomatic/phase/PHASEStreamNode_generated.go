@@ -5,6 +5,7 @@
 package phase
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,5 +24,48 @@ func NewStreamNode() *StreamNode {
 	return &StreamNode{inner: raw.PHASEStreamNodeFromID(_id)}
 }
 
+// GainMetaParameter calls the underlying GainMetaParameter.
+func (x *StreamNode) GainMetaParameter() *NumberMetaParameter {
+	_r := x.inner.GainMetaParameter()
+	if _r == nil {
+		return nil
+	}
+	return &NumberMetaParameter{inner: _r}
+}
+
+// RateMetaParameter calls the underlying RateMetaParameter.
+func (x *StreamNode) RateMetaParameter() *NumberMetaParameter {
+	_r := x.inner.RateMetaParameter()
+	if _r == nil {
+		return nil
+	}
+	return &NumberMetaParameter{inner: _r}
+}
+
+// Mixer calls the underlying Mixer.
+func (x *StreamNode) Mixer() *Mixer {
+	_r := x.inner.Mixer()
+	if _r == nil {
+		return nil
+	}
+	return &Mixer{inner: _r}
+}
+
+// Format calls the underlying Format.
+func (x *StreamNode) Format() *avfaudio.AVAudioFormat {
+	return x.inner.Format()
+}
+
 func (x *StreamNode) asStreamNode() *raw.PHASEStreamNode { return x.inner }
+
+// StreamNodeable is the interface implemented by [StreamNode], for mocking and DI.
+type StreamNodeable interface {
+	Unwrap() *raw.PHASEStreamNode
+	GainMetaParameter() *NumberMetaParameter
+	RateMetaParameter() *NumberMetaParameter
+	Mixer() *Mixer
+	Format() *avfaudio.AVAudioFormat
+}
+
+var _ StreamNodeable = (*StreamNode)(nil)
 

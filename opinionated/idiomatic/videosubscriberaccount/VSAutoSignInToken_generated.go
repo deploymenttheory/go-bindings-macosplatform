@@ -6,6 +6,7 @@ package videosubscriberaccount
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/videosubscriberaccount"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,27 @@ func NewVSAutoSignInToken() *VSAutoSignInToken {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VSAutoSignInToken")), objc.RegisterName("new"))
 	return &VSAutoSignInToken{inner: raw.VSAutoSignInTokenFromID(_id)}
 }
+
+// Authorization calls the underlying Authorization.
+func (x *VSAutoSignInToken) Authorization() raw.VSAutoSignInAuthorization {
+	return x.inner.Authorization()
+}
+
+// Value calls the underlying Value.
+func (x *VSAutoSignInToken) Value() string {
+	_r := x.inner.Value()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// VSAutoSignInTokenable is the interface implemented by [VSAutoSignInToken], for mocking and DI.
+type VSAutoSignInTokenable interface {
+	Unwrap() *raw.VSAutoSignInToken
+	Authorization() raw.VSAutoSignInAuthorization
+	Value() string
+}
+
+var _ VSAutoSignInTokenable = (*VSAutoSignInToken)(nil)
 

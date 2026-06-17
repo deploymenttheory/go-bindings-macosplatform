@@ -7,6 +7,7 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -30,9 +31,43 @@ func (x *DOMCSSStyleRule) WithSelectorText(selectorText string) *DOMCSSStyleRule
 	return x
 }
 
+// SelectorText calls the underlying SelectorText.
+func (x *DOMCSSStyleRule) SelectorText() string {
+	_r := x.inner.SelectorText()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetSelectorText calls the underlying SetSelectorText.
+func (x *DOMCSSStyleRule) SetSelectorText(selectorText string) {
+	x.inner.SetSelectorText(foundation.NSStringStringWithUTF8String(selectorText))
+}
+
+// Style calls the underlying Style.
+func (x *DOMCSSStyleRule) Style() *DOMCSSStyleDeclaration {
+	_r := x.inner.Style()
+	if _r == nil {
+		return nil
+	}
+	return &DOMCSSStyleDeclaration{inner: _r}
+}
+
 func (x *DOMCSSStyleRule) asDOMCSSRule() *raw.DOMCSSRule { return &x.inner.DOMCSSRule }
 
 func (x *DOMCSSStyleRule) asDOMObject() *raw.DOMObject { return &x.inner.DOMCSSRule.DOMObject }
 
 func (x *DOMCSSStyleRule) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMCSSRule.DOMObject.WebScriptObject }
+
+// DOMCSSStyleRuleable is the interface implemented by [DOMCSSStyleRule], for mocking and DI.
+type DOMCSSStyleRuleable interface {
+	Unwrap() *raw.DOMCSSStyleRule
+	WithSelectorText(selectorText string) *DOMCSSStyleRule
+	SelectorText() string
+	SetSelectorText(selectorText string)
+	Style() *DOMCSSStyleDeclaration
+}
+
+var _ DOMCSSStyleRuleable = (*DOMCSSStyleRule)(nil)
 

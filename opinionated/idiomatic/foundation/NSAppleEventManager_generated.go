@@ -5,8 +5,10 @@
 package foundation
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/ae"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // AppleEventManager wraps [raw.NSAppleEventManager] with a fluent Go API.
@@ -23,5 +25,88 @@ func NewAppleEventManager() *AppleEventManager {
 	return &AppleEventManager{inner: raw.NSAppleEventManagerFromID(_id)}
 }
 
+// SetEventHandlerAndSelectorForEventClassAndEventID calls the underlying SetEventHandlerAndSelectorForEventClassAndEventID.
+func (x *AppleEventManager) SetEventHandlerAndSelectorForEventClassAndEventID(handler objc.ID, handleEventSelector objc.SEL, eventClass uint, eventID uint) {
+	x.inner.SetEventHandlerAndSelectorForEventClassAndEventID(handler, handleEventSelector, eventClass, eventID)
+}
+
+// RemoveEventHandlerForEventClassAndEventID calls the underlying RemoveEventHandlerForEventClassAndEventID.
+func (x *AppleEventManager) RemoveEventHandlerForEventClassAndEventID(eventClass uint, eventID uint) {
+	x.inner.RemoveEventHandlerForEventClassAndEventID(eventClass, eventID)
+}
+
+// DispatchRawAppleEventWithRawReplyHandlerRefCon calls the underlying DispatchRawAppleEventWithRawReplyHandlerRefCon.
+func (x *AppleEventManager) DispatchRawAppleEventWithRawReplyHandlerRefCon(theAppleEvent *ae.AEDesc, theReply *ae.AEDesc, handlerRefCon unsafe.Pointer) int16 {
+	return x.inner.DispatchRawAppleEventWithRawReplyHandlerRefCon(theAppleEvent, theReply, handlerRefCon)
+}
+
+// SuspendCurrentAppleEvent calls the underlying SuspendCurrentAppleEvent.
+func (x *AppleEventManager) SuspendCurrentAppleEvent() unsafe.Pointer {
+	return x.inner.SuspendCurrentAppleEvent()
+}
+
+// AppleEventForSuspensionID calls the underlying AppleEventForSuspensionID.
+func (x *AppleEventManager) AppleEventForSuspensionID(suspensionID unsafe.Pointer) *AppleEventDescriptor {
+	_r := x.inner.AppleEventForSuspensionID(suspensionID)
+	if _r == nil {
+		return nil
+	}
+	return &AppleEventDescriptor{inner: _r}
+}
+
+// ReplyAppleEventForSuspensionID calls the underlying ReplyAppleEventForSuspensionID.
+func (x *AppleEventManager) ReplyAppleEventForSuspensionID(suspensionID unsafe.Pointer) *AppleEventDescriptor {
+	_r := x.inner.ReplyAppleEventForSuspensionID(suspensionID)
+	if _r == nil {
+		return nil
+	}
+	return &AppleEventDescriptor{inner: _r}
+}
+
+// SetCurrentAppleEventAndReplyEventWithSuspensionID calls the underlying SetCurrentAppleEventAndReplyEventWithSuspensionID.
+func (x *AppleEventManager) SetCurrentAppleEventAndReplyEventWithSuspensionID(suspensionID unsafe.Pointer) {
+	x.inner.SetCurrentAppleEventAndReplyEventWithSuspensionID(suspensionID)
+}
+
+// ResumeWithSuspensionID calls the underlying ResumeWithSuspensionID.
+func (x *AppleEventManager) ResumeWithSuspensionID(suspensionID unsafe.Pointer) {
+	x.inner.ResumeWithSuspensionID(suspensionID)
+}
+
+// CurrentAppleEvent calls the underlying CurrentAppleEvent.
+func (x *AppleEventManager) CurrentAppleEvent() *AppleEventDescriptor {
+	_r := x.inner.CurrentAppleEvent()
+	if _r == nil {
+		return nil
+	}
+	return &AppleEventDescriptor{inner: _r}
+}
+
+// CurrentReplyAppleEvent calls the underlying CurrentReplyAppleEvent.
+func (x *AppleEventManager) CurrentReplyAppleEvent() *AppleEventDescriptor {
+	_r := x.inner.CurrentReplyAppleEvent()
+	if _r == nil {
+		return nil
+	}
+	return &AppleEventDescriptor{inner: _r}
+}
+
 func (x *AppleEventManager) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// AppleEventManagerable is the interface implemented by [AppleEventManager], for mocking and DI.
+type AppleEventManagerable interface {
+	Unwrap() *raw.NSAppleEventManager
+	SetEventHandlerAndSelectorForEventClassAndEventID(handler objc.ID, handleEventSelector objc.SEL, eventClass uint, eventID uint)
+	RemoveEventHandlerForEventClassAndEventID(eventClass uint, eventID uint)
+	DispatchRawAppleEventWithRawReplyHandlerRefCon(theAppleEvent *ae.AEDesc, theReply *ae.AEDesc, handlerRefCon unsafe.Pointer) int16
+	SuspendCurrentAppleEvent() unsafe.Pointer
+	AppleEventForSuspensionID(suspensionID unsafe.Pointer) *AppleEventDescriptor
+	ReplyAppleEventForSuspensionID(suspensionID unsafe.Pointer) *AppleEventDescriptor
+	SetCurrentAppleEventAndReplyEventWithSuspensionID(suspensionID unsafe.Pointer)
+	ResumeWithSuspensionID(suspensionID unsafe.Pointer)
+	CurrentAppleEvent() *AppleEventDescriptor
+	CurrentReplyAppleEvent() *AppleEventDescriptor
+}
+
+var _ AppleEventManagerable = (*AppleEventManager)(nil)
 

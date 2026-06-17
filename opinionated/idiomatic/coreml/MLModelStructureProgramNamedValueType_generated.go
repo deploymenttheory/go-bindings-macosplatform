@@ -6,6 +6,7 @@ package coreml
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,31 @@ func NewModelStructureProgramNamedValueType() *ModelStructureProgramNamedValueTy
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLModelStructureProgramNamedValueType")), objc.RegisterName("new"))
 	return &ModelStructureProgramNamedValueType{inner: raw.MLModelStructureProgramNamedValueTypeFromID(_id)}
 }
+
+// Name calls the underlying Name.
+func (x *ModelStructureProgramNamedValueType) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Type calls the underlying Type.
+func (x *ModelStructureProgramNamedValueType) Type() *ModelStructureProgramValueType {
+	_r := x.inner.Type()
+	if _r == nil {
+		return nil
+	}
+	return &ModelStructureProgramValueType{inner: _r}
+}
+
+// ModelStructureProgramNamedValueTypeable is the interface implemented by [ModelStructureProgramNamedValueType], for mocking and DI.
+type ModelStructureProgramNamedValueTypeable interface {
+	Unwrap() *raw.MLModelStructureProgramNamedValueType
+	Name() string
+	Type() *ModelStructureProgramValueType
+}
+
+var _ ModelStructureProgramNamedValueTypeable = (*ModelStructureProgramNamedValueType)(nil)
 

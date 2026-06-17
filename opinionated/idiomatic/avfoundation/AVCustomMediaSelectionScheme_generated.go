@@ -7,6 +7,7 @@ package avfoundation
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,17 +25,25 @@ func NewCustomMediaSelectionScheme() *CustomMediaSelectionScheme {
 	return &CustomMediaSelectionScheme{inner: raw.AVCustomMediaSelectionSchemeFromID(_id)}
 }
 
+// MediaPresentationSettingsForSelectorComplementaryToLanguageSettings calls the underlying MediaPresentationSettingsForSelectorComplementaryToLanguageSettings.
+func (x *CustomMediaSelectionScheme) MediaPresentationSettingsForSelectorComplementaryToLanguageSettings(selector *raw.AVMediaPresentationSelector, language string, settings *foundation.NSArray[*raw.AVMediaPresentationSetting]) *foundation.NSArray[*raw.AVMediaPresentationSetting] {
+	return x.inner.MediaPresentationSettingsForSelectorComplementaryToLanguageSettings(selector, foundation.NSStringStringWithUTF8String(language), settings)
+}
+
+// ShouldOfferLanguageSelection calls the underlying ShouldOfferLanguageSelection.
+func (x *CustomMediaSelectionScheme) ShouldOfferLanguageSelection() bool {
+	return x.inner.ShouldOfferLanguageSelection()
+}
+
 // AvailableLanguages returns the collection as a Go slice.
-func (x *CustomMediaSelectionScheme) AvailableLanguages() []*foundation.NSString {
+func (x *CustomMediaSelectionScheme) AvailableLanguages() []string {
 	arr := x.inner.AvailableLanguages()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
 
 // Selectors returns the collection as a Go slice.
@@ -43,10 +52,19 @@ func (x *CustomMediaSelectionScheme) Selectors() []*raw.AVMediaPresentationSelec
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AVMediaPresentationSelector, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVMediaPresentationSelector {
+		return raw.AVMediaPresentationSelectorFromID(purego.Retain(_id))
+	})
 }
+
+// CustomMediaSelectionSchemeable is the interface implemented by [CustomMediaSelectionScheme], for mocking and DI.
+type CustomMediaSelectionSchemeable interface {
+	Unwrap() *raw.AVCustomMediaSelectionScheme
+	MediaPresentationSettingsForSelectorComplementaryToLanguageSettings(selector *raw.AVMediaPresentationSelector, language string, settings *foundation.NSArray[*raw.AVMediaPresentationSetting]) *foundation.NSArray[*raw.AVMediaPresentationSetting]
+	ShouldOfferLanguageSelection() bool
+	AvailableLanguages() []string
+	Selectors() []*raw.AVMediaPresentationSelector
+}
+
+var _ CustomMediaSelectionSchemeable = (*CustomMediaSelectionScheme)(nil)
 

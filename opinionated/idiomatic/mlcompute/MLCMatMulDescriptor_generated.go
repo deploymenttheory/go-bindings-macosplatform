@@ -23,3 +23,28 @@ func NewMatMulDescriptor() *MatMulDescriptor {
 	return &MatMulDescriptor{inner: raw.MLCMatMulDescriptorFromID(_id)}
 }
 
+// Alpha calls the underlying Alpha.
+func (x *MatMulDescriptor) Alpha() float32 {
+	return x.inner.Alpha()
+}
+
+// TransposesX calls the underlying TransposesX.
+func (x *MatMulDescriptor) TransposesX() bool {
+	return x.inner.TransposesX()
+}
+
+// TransposesY calls the underlying TransposesY.
+func (x *MatMulDescriptor) TransposesY() bool {
+	return x.inner.TransposesY()
+}
+
+// MatMulDescriptorable is the interface implemented by [MatMulDescriptor], for mocking and DI.
+type MatMulDescriptorable interface {
+	Unwrap() *raw.MLCMatMulDescriptor
+	Alpha() float32
+	TransposesX() bool
+	TransposesY() bool
+}
+
+var _ MatMulDescriptorable = (*MatMulDescriptor)(nil)
+

@@ -6,6 +6,7 @@ package photosui
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photosui"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -29,10 +30,32 @@ func (x *ProjectSection) SectionContents() []*raw.PHProjectSectionContent {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.PHProjectSectionContent, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PHProjectSectionContent {
+		return raw.PHProjectSectionContentFromID(purego.Retain(_id))
+	})
 }
+
+// SectionType calls the underlying SectionType.
+func (x *ProjectSection) SectionType() raw.PHProjectSectionType {
+	return x.inner.SectionType()
+}
+
+// Title calls the underlying Title.
+func (x *ProjectSection) Title() string {
+	_r := x.inner.Title()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ProjectSectionable is the interface implemented by [ProjectSection], for mocking and DI.
+type ProjectSectionable interface {
+	Unwrap() *raw.PHProjectSection
+	SectionContents() []*raw.PHProjectSectionContent
+	SectionType() raw.PHProjectSectionType
+	Title() string
+}
+
+var _ ProjectSectionable = (*ProjectSection)(nil)
 

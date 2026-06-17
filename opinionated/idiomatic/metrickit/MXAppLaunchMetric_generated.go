@@ -5,6 +5,7 @@
 package metrickit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metrickit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,5 +24,36 @@ func NewAppLaunchMetric() *AppLaunchMetric {
 	return &AppLaunchMetric{inner: raw.MXAppLaunchMetricFromID(_id)}
 }
 
+// HistogrammedTimeToFirstDraw calls the underlying HistogrammedTimeToFirstDraw.
+func (x *AppLaunchMetric) HistogrammedTimeToFirstDraw() *raw.MXHistogram[*foundation.NSUnitDuration] {
+	return x.inner.HistogrammedTimeToFirstDraw()
+}
+
+// HistogrammedApplicationResumeTime calls the underlying HistogrammedApplicationResumeTime.
+func (x *AppLaunchMetric) HistogrammedApplicationResumeTime() *raw.MXHistogram[*foundation.NSUnitDuration] {
+	return x.inner.HistogrammedApplicationResumeTime()
+}
+
+// HistogrammedOptimizedTimeToFirstDraw calls the underlying HistogrammedOptimizedTimeToFirstDraw.
+func (x *AppLaunchMetric) HistogrammedOptimizedTimeToFirstDraw() *raw.MXHistogram[*foundation.NSUnitDuration] {
+	return x.inner.HistogrammedOptimizedTimeToFirstDraw()
+}
+
+// HistogrammedExtendedLaunch calls the underlying HistogrammedExtendedLaunch.
+func (x *AppLaunchMetric) HistogrammedExtendedLaunch() *raw.MXHistogram[*foundation.NSUnitDuration] {
+	return x.inner.HistogrammedExtendedLaunch()
+}
+
 func (x *AppLaunchMetric) asMetric() *raw.MXMetric { return &x.inner.MXMetric }
+
+// AppLaunchMetricable is the interface implemented by [AppLaunchMetric], for mocking and DI.
+type AppLaunchMetricable interface {
+	Unwrap() *raw.MXAppLaunchMetric
+	HistogrammedTimeToFirstDraw() *raw.MXHistogram[*foundation.NSUnitDuration]
+	HistogrammedApplicationResumeTime() *raw.MXHistogram[*foundation.NSUnitDuration]
+	HistogrammedOptimizedTimeToFirstDraw() *raw.MXHistogram[*foundation.NSUnitDuration]
+	HistogrammedExtendedLaunch() *raw.MXHistogram[*foundation.NSUnitDuration]
+}
+
+var _ AppLaunchMetricable = (*AppLaunchMetric)(nil)
 

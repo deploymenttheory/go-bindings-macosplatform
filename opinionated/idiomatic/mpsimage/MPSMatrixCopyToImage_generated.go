@@ -10,6 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // MatrixCopyToImage wraps [raw.MPSMatrixCopyToImage] with a fluent Go API.
@@ -45,4 +46,55 @@ func (x *MatrixCopyToImage) WithSourceMatrixBatchIndex(sourceMatrixBatchIndex ui
 	x.inner.SetSourceMatrixBatchIndex(sourceMatrixBatchIndex)
 	return x
 }
+
+// EncodeToCommandBufferSourceMatrixDestinationImage calls the underlying EncodeToCommandBufferSourceMatrixDestinationImage.
+func (x *MatrixCopyToImage) EncodeToCommandBufferSourceMatrixDestinationImage(commandBuffer metal.MTLCommandBuffer, sourceMatrix *mpscore.MPSMatrix, destinationImage *mpscore.MPSImage) {
+	x.inner.EncodeToCommandBufferSourceMatrixDestinationImage(commandBuffer, sourceMatrix, destinationImage)
+}
+
+// EncodeBatchToCommandBufferSourceMatrixDestinationImages calls the underlying EncodeBatchToCommandBufferSourceMatrixDestinationImages.
+func (x *MatrixCopyToImage) EncodeBatchToCommandBufferSourceMatrixDestinationImages(commandBuffer metal.MTLCommandBuffer, sourceMatrix *mpscore.MPSMatrix, destinationImages unsafe.Pointer) {
+	x.inner.EncodeBatchToCommandBufferSourceMatrixDestinationImages(commandBuffer, sourceMatrix, destinationImages)
+}
+
+// SourceMatrixOrigin calls the underlying SourceMatrixOrigin.
+func (x *MatrixCopyToImage) SourceMatrixOrigin() metal.MTLOrigin {
+	return x.inner.SourceMatrixOrigin()
+}
+
+// SetSourceMatrixOrigin calls the underlying SetSourceMatrixOrigin.
+func (x *MatrixCopyToImage) SetSourceMatrixOrigin(sourceMatrixOrigin metal.MTLOrigin) {
+	x.inner.SetSourceMatrixOrigin(sourceMatrixOrigin)
+}
+
+// SourceMatrixBatchIndex calls the underlying SourceMatrixBatchIndex.
+func (x *MatrixCopyToImage) SourceMatrixBatchIndex() uint {
+	return x.inner.SourceMatrixBatchIndex()
+}
+
+// SetSourceMatrixBatchIndex calls the underlying SetSourceMatrixBatchIndex.
+func (x *MatrixCopyToImage) SetSourceMatrixBatchIndex(sourceMatrixBatchIndex uint) {
+	x.inner.SetSourceMatrixBatchIndex(sourceMatrixBatchIndex)
+}
+
+// DataLayout calls the underlying DataLayout.
+func (x *MatrixCopyToImage) DataLayout() mpscore.MPSDataLayout {
+	return x.inner.DataLayout()
+}
+
+// MatrixCopyToImageable is the interface implemented by [MatrixCopyToImage], for mocking and DI.
+type MatrixCopyToImageable interface {
+	Unwrap() *raw.MPSMatrixCopyToImage
+	WithSourceMatrixOrigin(sourceMatrixOrigin metal.MTLOrigin) *MatrixCopyToImage
+	WithSourceMatrixBatchIndex(sourceMatrixBatchIndex uint) *MatrixCopyToImage
+	EncodeToCommandBufferSourceMatrixDestinationImage(commandBuffer metal.MTLCommandBuffer, sourceMatrix *mpscore.MPSMatrix, destinationImage *mpscore.MPSImage)
+	EncodeBatchToCommandBufferSourceMatrixDestinationImages(commandBuffer metal.MTLCommandBuffer, sourceMatrix *mpscore.MPSMatrix, destinationImages unsafe.Pointer)
+	SourceMatrixOrigin() metal.MTLOrigin
+	SetSourceMatrixOrigin(sourceMatrixOrigin metal.MTLOrigin)
+	SourceMatrixBatchIndex() uint
+	SetSourceMatrixBatchIndex(sourceMatrixBatchIndex uint)
+	DataLayout() mpscore.MPSDataLayout
+}
+
+var _ MatrixCopyToImageable = (*MatrixCopyToImage)(nil)
 

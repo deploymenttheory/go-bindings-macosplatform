@@ -5,6 +5,7 @@
 package passkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +23,23 @@ func NewPassRelevantDate() *PassRelevantDate {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PKPassRelevantDate")), objc.RegisterName("new"))
 	return &PassRelevantDate{inner: raw.PKPassRelevantDateFromID(_id)}
 }
+
+// Interval calls the underlying Interval.
+func (x *PassRelevantDate) Interval() *foundation.NSDateInterval {
+	return x.inner.Interval()
+}
+
+// Date calls the underlying Date.
+func (x *PassRelevantDate) Date() *foundation.NSDate {
+	return x.inner.Date()
+}
+
+// PassRelevantDateable is the interface implemented by [PassRelevantDate], for mocking and DI.
+type PassRelevantDateable interface {
+	Unwrap() *raw.PKPassRelevantDate
+	Interval() *foundation.NSDateInterval
+	Date() *foundation.NSDate
+}
+
+var _ PassRelevantDateable = (*PassRelevantDate)(nil)
 

@@ -29,3 +29,10 @@ func (x *UnitFuelEfficiency) asUnit() *raw.NSUnit { return &x.inner.NSDimension.
 
 func (x *UnitFuelEfficiency) asObject() *raw.NSObject { return &x.inner.NSDimension.NSUnit.NSObject }
 
+// UnitFuelEfficiencyable is the interface implemented by [UnitFuelEfficiency], for mocking and DI.
+type UnitFuelEfficiencyable interface {
+	Unwrap() *raw.NSUnitFuelEfficiency
+}
+
+var _ UnitFuelEfficiencyable = (*UnitFuelEfficiency)(nil)
+

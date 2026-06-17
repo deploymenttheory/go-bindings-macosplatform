@@ -77,5 +77,129 @@ func (x *GraphGRUDescriptor) WithOutputGateActivation(outputGateActivation raw.M
 	return x
 }
 
+// Reverse calls the underlying Reverse.
+func (x *GraphGRUDescriptor) Reverse() bool {
+	return x.inner.Reverse()
+}
+
+// SetReverse calls the underlying SetReverse.
+func (x *GraphGRUDescriptor) SetReverse(reverse bool) {
+	x.inner.SetReverse(reverse)
+}
+
+// Bidirectional calls the underlying Bidirectional.
+func (x *GraphGRUDescriptor) Bidirectional() bool {
+	return x.inner.Bidirectional()
+}
+
+// SetBidirectional calls the underlying SetBidirectional.
+func (x *GraphGRUDescriptor) SetBidirectional(bidirectional bool) {
+	x.inner.SetBidirectional(bidirectional)
+}
+
+// Training calls the underlying Training.
+func (x *GraphGRUDescriptor) Training() bool {
+	return x.inner.Training()
+}
+
+// SetTraining calls the underlying SetTraining.
+func (x *GraphGRUDescriptor) SetTraining(training bool) {
+	x.inner.SetTraining(training)
+}
+
+// ResetGateFirst calls the underlying ResetGateFirst.
+func (x *GraphGRUDescriptor) ResetGateFirst() bool {
+	return x.inner.ResetGateFirst()
+}
+
+// SetResetGateFirst calls the underlying SetResetGateFirst.
+func (x *GraphGRUDescriptor) SetResetGateFirst(resetGateFirst bool) {
+	x.inner.SetResetGateFirst(resetGateFirst)
+}
+
+// ResetAfter calls the underlying ResetAfter.
+func (x *GraphGRUDescriptor) ResetAfter() bool {
+	return x.inner.ResetAfter()
+}
+
+// SetResetAfter calls the underlying SetResetAfter.
+func (x *GraphGRUDescriptor) SetResetAfter(resetAfter bool) {
+	x.inner.SetResetAfter(resetAfter)
+}
+
+// FlipZ calls the underlying FlipZ.
+func (x *GraphGRUDescriptor) FlipZ() bool {
+	return x.inner.FlipZ()
+}
+
+// SetFlipZ calls the underlying SetFlipZ.
+func (x *GraphGRUDescriptor) SetFlipZ(flipZ bool) {
+	x.inner.SetFlipZ(flipZ)
+}
+
+// UpdateGateActivation calls the underlying UpdateGateActivation.
+func (x *GraphGRUDescriptor) UpdateGateActivation() raw.MPSGraphRNNActivation {
+	return x.inner.UpdateGateActivation()
+}
+
+// SetUpdateGateActivation calls the underlying SetUpdateGateActivation.
+func (x *GraphGRUDescriptor) SetUpdateGateActivation(updateGateActivation raw.MPSGraphRNNActivation) {
+	x.inner.SetUpdateGateActivation(updateGateActivation)
+}
+
+// ResetGateActivation calls the underlying ResetGateActivation.
+func (x *GraphGRUDescriptor) ResetGateActivation() raw.MPSGraphRNNActivation {
+	return x.inner.ResetGateActivation()
+}
+
+// SetResetGateActivation calls the underlying SetResetGateActivation.
+func (x *GraphGRUDescriptor) SetResetGateActivation(resetGateActivation raw.MPSGraphRNNActivation) {
+	x.inner.SetResetGateActivation(resetGateActivation)
+}
+
+// OutputGateActivation calls the underlying OutputGateActivation.
+func (x *GraphGRUDescriptor) OutputGateActivation() raw.MPSGraphRNNActivation {
+	return x.inner.OutputGateActivation()
+}
+
+// SetOutputGateActivation calls the underlying SetOutputGateActivation.
+func (x *GraphGRUDescriptor) SetOutputGateActivation(outputGateActivation raw.MPSGraphRNNActivation) {
+	x.inner.SetOutputGateActivation(outputGateActivation)
+}
+
 func (x *GraphGRUDescriptor) asGraphObject() *raw.MPSGraphObject { return &x.inner.MPSGraphObject }
+
+// GraphGRUDescriptorable is the interface implemented by [GraphGRUDescriptor], for mocking and DI.
+type GraphGRUDescriptorable interface {
+	Unwrap() *raw.MPSGraphGRUDescriptor
+	WithReverse(reverse bool) *GraphGRUDescriptor
+	WithBidirectional(bidirectional bool) *GraphGRUDescriptor
+	WithTraining(training bool) *GraphGRUDescriptor
+	WithResetGateFirst(resetGateFirst bool) *GraphGRUDescriptor
+	WithResetAfter(resetAfter bool) *GraphGRUDescriptor
+	WithFlipZ(flipZ bool) *GraphGRUDescriptor
+	WithUpdateGateActivation(updateGateActivation raw.MPSGraphRNNActivation) *GraphGRUDescriptor
+	WithResetGateActivation(resetGateActivation raw.MPSGraphRNNActivation) *GraphGRUDescriptor
+	WithOutputGateActivation(outputGateActivation raw.MPSGraphRNNActivation) *GraphGRUDescriptor
+	Reverse() bool
+	SetReverse(reverse bool)
+	Bidirectional() bool
+	SetBidirectional(bidirectional bool)
+	Training() bool
+	SetTraining(training bool)
+	ResetGateFirst() bool
+	SetResetGateFirst(resetGateFirst bool)
+	ResetAfter() bool
+	SetResetAfter(resetAfter bool)
+	FlipZ() bool
+	SetFlipZ(flipZ bool)
+	UpdateGateActivation() raw.MPSGraphRNNActivation
+	SetUpdateGateActivation(updateGateActivation raw.MPSGraphRNNActivation)
+	ResetGateActivation() raw.MPSGraphRNNActivation
+	SetResetGateActivation(resetGateActivation raw.MPSGraphRNNActivation)
+	OutputGateActivation() raw.MPSGraphRNNActivation
+	SetOutputGateActivation(outputGateActivation raw.MPSGraphRNNActivation)
+}
+
+var _ GraphGRUDescriptorable = (*GraphGRUDescriptor)(nil)
 

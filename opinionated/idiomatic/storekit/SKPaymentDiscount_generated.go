@@ -7,6 +7,7 @@ package storekit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/storekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,4 +25,53 @@ func NewPaymentDiscountWithIdentifierKeyIdentifierNonceSignatureTimestamp(identi
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:keyIdentifier:nonce:signature:timestamp:"), foundation.NSStringStringWithUTF8String(identifier).Ptr(), foundation.NSStringStringWithUTF8String(keyIdentifier).Ptr(), nonce.Ptr(), foundation.NSStringStringWithUTF8String(signature).Ptr(), timestamp.Ptr())
 	return &PaymentDiscount{inner: raw.SKPaymentDiscountFromID(_id)}
 }
+
+// Identifier calls the underlying Identifier.
+func (x *PaymentDiscount) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// KeyIdentifier calls the underlying KeyIdentifier.
+func (x *PaymentDiscount) KeyIdentifier() string {
+	_r := x.inner.KeyIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Nonce calls the underlying Nonce.
+func (x *PaymentDiscount) Nonce() *foundation.NSUUID {
+	return x.inner.Nonce()
+}
+
+// Signature calls the underlying Signature.
+func (x *PaymentDiscount) Signature() string {
+	_r := x.inner.Signature()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Timestamp calls the underlying Timestamp.
+func (x *PaymentDiscount) Timestamp() *foundation.NSNumber {
+	return x.inner.Timestamp()
+}
+
+// PaymentDiscountable is the interface implemented by [PaymentDiscount], for mocking and DI.
+type PaymentDiscountable interface {
+	Unwrap() *raw.SKPaymentDiscount
+	Identifier() string
+	KeyIdentifier() string
+	Nonce() *foundation.NSUUID
+	Signature() string
+	Timestamp() *foundation.NSNumber
+}
+
+var _ PaymentDiscountable = (*PaymentDiscount)(nil)
 

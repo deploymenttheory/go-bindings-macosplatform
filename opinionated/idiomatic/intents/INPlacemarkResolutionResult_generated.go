@@ -25,3 +25,10 @@ func NewPlacemarkResolutionResult() *PlacemarkResolutionResult {
 
 func (x *PlacemarkResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult { return &x.inner.INIntentResolutionResult }
 
+// PlacemarkResolutionResultable is the interface implemented by [PlacemarkResolutionResult], for mocking and DI.
+type PlacemarkResolutionResultable interface {
+	Unwrap() *raw.INPlacemarkResolutionResult
+}
+
+var _ PlacemarkResolutionResultable = (*PlacemarkResolutionResult)(nil)
+

@@ -73,5 +73,65 @@ func (x *BeaconRegion) WithNotifyEntryStateOnDisplay(notifyEntryStateOnDisplay b
 	return x
 }
 
+// PeripheralDataWithMeasuredPower calls the underlying PeripheralDataWithMeasuredPower.
+func (x *BeaconRegion) PeripheralDataWithMeasuredPower(measuredPower *foundation.NSNumber) *foundation.NSMutableDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.PeripheralDataWithMeasuredPower(measuredPower)
+}
+
+// BeaconIdentityConstraint calls the underlying BeaconIdentityConstraint.
+func (x *BeaconRegion) BeaconIdentityConstraint() *BeaconIdentityConstraint {
+	_r := x.inner.BeaconIdentityConstraint()
+	if _r == nil {
+		return nil
+	}
+	return &BeaconIdentityConstraint{inner: _r}
+}
+
+// UUID calls the underlying UUID.
+func (x *BeaconRegion) UUID() *foundation.NSUUID {
+	return x.inner.UUID()
+}
+
+// ProximityUUID calls the underlying ProximityUUID.
+func (x *BeaconRegion) ProximityUUID() *foundation.NSUUID {
+	return x.inner.ProximityUUID()
+}
+
+// Major calls the underlying Major.
+func (x *BeaconRegion) Major() *foundation.NSNumber {
+	return x.inner.Major()
+}
+
+// Minor calls the underlying Minor.
+func (x *BeaconRegion) Minor() *foundation.NSNumber {
+	return x.inner.Minor()
+}
+
+// NotifyEntryStateOnDisplay calls the underlying NotifyEntryStateOnDisplay.
+func (x *BeaconRegion) NotifyEntryStateOnDisplay() bool {
+	return x.inner.NotifyEntryStateOnDisplay()
+}
+
+// SetNotifyEntryStateOnDisplay calls the underlying SetNotifyEntryStateOnDisplay.
+func (x *BeaconRegion) SetNotifyEntryStateOnDisplay(notifyEntryStateOnDisplay bool) {
+	x.inner.SetNotifyEntryStateOnDisplay(notifyEntryStateOnDisplay)
+}
+
 func (x *BeaconRegion) asRegion() *raw.CLRegion { return &x.inner.CLRegion }
+
+// BeaconRegionable is the interface implemented by [BeaconRegion], for mocking and DI.
+type BeaconRegionable interface {
+	Unwrap() *raw.CLBeaconRegion
+	WithNotifyEntryStateOnDisplay(notifyEntryStateOnDisplay bool) *BeaconRegion
+	PeripheralDataWithMeasuredPower(measuredPower *foundation.NSNumber) *foundation.NSMutableDictionary[*foundation.NSString, objc.ID]
+	BeaconIdentityConstraint() *BeaconIdentityConstraint
+	UUID() *foundation.NSUUID
+	ProximityUUID() *foundation.NSUUID
+	Major() *foundation.NSNumber
+	Minor() *foundation.NSNumber
+	NotifyEntryStateOnDisplay() bool
+	SetNotifyEntryStateOnDisplay(notifyEntryStateOnDisplay bool)
+}
+
+var _ BeaconRegionable = (*BeaconRegion)(nil)
 

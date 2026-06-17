@@ -7,6 +7,7 @@ package mlcompute
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,18 +25,36 @@ func NewSplitLayer() *SplitLayer {
 	return &SplitLayer{inner: raw.MLCSplitLayerFromID(_id)}
 }
 
+// Dimension calls the underlying Dimension.
+func (x *SplitLayer) Dimension() uint {
+	return x.inner.Dimension()
+}
+
+// SplitCount calls the underlying SplitCount.
+func (x *SplitLayer) SplitCount() uint {
+	return x.inner.SplitCount()
+}
+
 // SplitSectionLengths returns the collection as a Go slice.
 func (x *SplitLayer) SplitSectionLengths() []*foundation.NSNumber {
 	arr := x.inner.SplitSectionLengths()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
 }
 
 func (x *SplitLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
+
+// SplitLayerable is the interface implemented by [SplitLayer], for mocking and DI.
+type SplitLayerable interface {
+	Unwrap() *raw.MLCSplitLayer
+	Dimension() uint
+	SplitCount() uint
+	SplitSectionLengths() []*foundation.NSNumber
+}
+
+var _ SplitLayerable = (*SplitLayer)(nil)
 

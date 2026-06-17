@@ -7,6 +7,7 @@ package screencapturekit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/screencapturekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -42,17 +43,53 @@ func (x *RecordingOutputConfiguration) WithOutputFileType(outputFileType *founda
 	return x
 }
 
+// OutputURL calls the underlying OutputURL.
+func (x *RecordingOutputConfiguration) OutputURL() *foundation.NSURL {
+	return x.inner.OutputURL()
+}
+
+// SetOutputURL calls the underlying SetOutputURL.
+func (x *RecordingOutputConfiguration) SetOutputURL(outputURL string) {
+	x.inner.SetOutputURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(outputURL)))
+}
+
+// VideoCodecType calls the underlying VideoCodecType.
+func (x *RecordingOutputConfiguration) VideoCodecType() string {
+	_r := x.inner.VideoCodecType()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetVideoCodecType calls the underlying SetVideoCodecType.
+func (x *RecordingOutputConfiguration) SetVideoCodecType(videoCodecType *foundation.NSString) {
+	x.inner.SetVideoCodecType(videoCodecType)
+}
+
+// OutputFileType calls the underlying OutputFileType.
+func (x *RecordingOutputConfiguration) OutputFileType() string {
+	_r := x.inner.OutputFileType()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetOutputFileType calls the underlying SetOutputFileType.
+func (x *RecordingOutputConfiguration) SetOutputFileType(outputFileType *foundation.NSString) {
+	x.inner.SetOutputFileType(outputFileType)
+}
+
 // AvailableVideoCodecTypes returns the collection as a Go slice.
 func (x *RecordingOutputConfiguration) AvailableVideoCodecTypes() []*foundation.NSString {
 	arr := x.inner.AvailableVideoCodecTypes()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	})
 }
 
 // AvailableOutputFileTypes returns the collection as a Go slice.
@@ -61,10 +98,26 @@ func (x *RecordingOutputConfiguration) AvailableOutputFileTypes() []*foundation.
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	})
 }
+
+// RecordingOutputConfigurationable is the interface implemented by [RecordingOutputConfiguration], for mocking and DI.
+type RecordingOutputConfigurationable interface {
+	Unwrap() *raw.SCRecordingOutputConfiguration
+	WithOutputURL(outputURL string) *RecordingOutputConfiguration
+	WithVideoCodecType(videoCodecType *foundation.NSString) *RecordingOutputConfiguration
+	WithOutputFileType(outputFileType *foundation.NSString) *RecordingOutputConfiguration
+	OutputURL() *foundation.NSURL
+	SetOutputURL(outputURL string)
+	VideoCodecType() string
+	SetVideoCodecType(videoCodecType *foundation.NSString)
+	OutputFileType() string
+	SetOutputFileType(outputFileType *foundation.NSString)
+	AvailableVideoCodecTypes() []*foundation.NSString
+	AvailableOutputFileTypes() []*foundation.NSString
+}
+
+var _ RecordingOutputConfigurationable = (*RecordingOutputConfiguration)(nil)
 

@@ -33,3 +33,10 @@ func (x *NDArrayAffineInt4Dequantize) asNDArrayMultiaryBase() *mpsndarray.MPSNDA
 
 func (x *NDArrayAffineInt4Dequantize) asKernel() *mpscore.MPSKernel { return &x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel }
 
+// NDArrayAffineInt4Dequantizeable is the interface implemented by [NDArrayAffineInt4Dequantize], for mocking and DI.
+type NDArrayAffineInt4Dequantizeable interface {
+	Unwrap() *raw.MPSNDArrayAffineInt4Dequantize
+}
+
+var _ NDArrayAffineInt4Dequantizeable = (*NDArrayAffineInt4Dequantize)(nil)
+

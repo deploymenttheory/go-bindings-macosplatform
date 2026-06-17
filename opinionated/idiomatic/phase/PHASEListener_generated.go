@@ -36,5 +36,38 @@ func (x *Listener) WithAutomaticHeadTrackingFlags(automaticHeadTrackingFlags raw
 	return x
 }
 
+// Gain calls the underlying Gain.
+func (x *Listener) Gain() float64 {
+	return x.inner.Gain()
+}
+
+// SetGain calls the underlying SetGain.
+func (x *Listener) SetGain(gain float64) {
+	x.inner.SetGain(gain)
+}
+
+// AutomaticHeadTrackingFlags calls the underlying AutomaticHeadTrackingFlags.
+func (x *Listener) AutomaticHeadTrackingFlags() raw.PHASEAutomaticHeadTrackingFlags {
+	return x.inner.AutomaticHeadTrackingFlags()
+}
+
+// SetAutomaticHeadTrackingFlags calls the underlying SetAutomaticHeadTrackingFlags.
+func (x *Listener) SetAutomaticHeadTrackingFlags(automaticHeadTrackingFlags raw.PHASEAutomaticHeadTrackingFlags) {
+	x.inner.SetAutomaticHeadTrackingFlags(automaticHeadTrackingFlags)
+}
+
 func (x *Listener) asObject() *raw.PHASEObject { return &x.inner.PHASEObject }
+
+// Listenerable is the interface implemented by [Listener], for mocking and DI.
+type Listenerable interface {
+	Unwrap() *raw.PHASEListener
+	WithGain(gain float64) *Listener
+	WithAutomaticHeadTrackingFlags(automaticHeadTrackingFlags raw.PHASEAutomaticHeadTrackingFlags) *Listener
+	Gain() float64
+	SetGain(gain float64)
+	AutomaticHeadTrackingFlags() raw.PHASEAutomaticHeadTrackingFlags
+	SetAutomaticHeadTrackingFlags(automaticHeadTrackingFlags raw.PHASEAutomaticHeadTrackingFlags)
+}
+
+var _ Listenerable = (*Listener)(nil)
 

@@ -26,5 +26,28 @@ func NewCorrelationQueryWithTypePredicateSamplePredicatesCompletion(correlationT
 	return &CorrelationQuery{inner: raw.HKCorrelationQueryFromID(_id)}
 }
 
+// CorrelationType calls the underlying CorrelationType.
+func (x *CorrelationQuery) CorrelationType() *CorrelationType {
+	_r := x.inner.CorrelationType()
+	if _r == nil {
+		return nil
+	}
+	return &CorrelationType{inner: _r}
+}
+
+// SamplePredicates calls the underlying SamplePredicates.
+func (x *CorrelationQuery) SamplePredicates() *foundation.NSDictionary[*raw.HKSampleType, *foundation.NSPredicate] {
+	return x.inner.SamplePredicates()
+}
+
 func (x *CorrelationQuery) asQuery() *raw.HKQuery { return &x.inner.HKQuery }
+
+// CorrelationQueryable is the interface implemented by [CorrelationQuery], for mocking and DI.
+type CorrelationQueryable interface {
+	Unwrap() *raw.HKCorrelationQuery
+	CorrelationType() *CorrelationType
+	SamplePredicates() *foundation.NSDictionary[*raw.HKSampleType, *foundation.NSPredicate]
+}
+
+var _ CorrelationQueryable = (*CorrelationQuery)(nil)
 

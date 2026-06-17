@@ -38,7 +38,58 @@ func NewComparisonPredicateWithCoder(coder *raw.NSCoder) *ComparisonPredicate {
 	return &ComparisonPredicate{inner: raw.NSComparisonPredicateFromID(_id)}
 }
 
+// PredicateOperatorType calls the underlying PredicateOperatorType.
+func (x *ComparisonPredicate) PredicateOperatorType() raw.NSPredicateOperatorType {
+	return x.inner.PredicateOperatorType()
+}
+
+// ComparisonPredicateModifier calls the underlying ComparisonPredicateModifier.
+func (x *ComparisonPredicate) ComparisonPredicateModifier() raw.NSComparisonPredicateModifier {
+	return x.inner.ComparisonPredicateModifier()
+}
+
+// LeftExpression calls the underlying LeftExpression.
+func (x *ComparisonPredicate) LeftExpression() *Expression {
+	_r := x.inner.LeftExpression()
+	if _r == nil {
+		return nil
+	}
+	return &Expression{inner: _r}
+}
+
+// RightExpression calls the underlying RightExpression.
+func (x *ComparisonPredicate) RightExpression() *Expression {
+	_r := x.inner.RightExpression()
+	if _r == nil {
+		return nil
+	}
+	return &Expression{inner: _r}
+}
+
+// CustomSelector calls the underlying CustomSelector.
+func (x *ComparisonPredicate) CustomSelector() objc.SEL {
+	return x.inner.CustomSelector()
+}
+
+// Options calls the underlying Options.
+func (x *ComparisonPredicate) Options() raw.NSComparisonPredicateOptions {
+	return x.inner.Options()
+}
+
 func (x *ComparisonPredicate) asPredicate() *raw.NSPredicate { return &x.inner.NSPredicate }
 
 func (x *ComparisonPredicate) asObject() *raw.NSObject { return &x.inner.NSPredicate.NSObject }
+
+// ComparisonPredicateable is the interface implemented by [ComparisonPredicate], for mocking and DI.
+type ComparisonPredicateable interface {
+	Unwrap() *raw.NSComparisonPredicate
+	PredicateOperatorType() raw.NSPredicateOperatorType
+	ComparisonPredicateModifier() raw.NSComparisonPredicateModifier
+	LeftExpression() *Expression
+	RightExpression() *Expression
+	CustomSelector() objc.SEL
+	Options() raw.NSComparisonPredicateOptions
+}
+
+var _ ComparisonPredicateable = (*ComparisonPredicate)(nil)
 

@@ -33,3 +33,10 @@ func (x *CNNNeuronSoftSign) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { retur
 
 func (x *CNNNeuronSoftSign) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNNeuron.MPSCNNKernel.MPSKernel }
 
+// CNNNeuronSoftSignable is the interface implemented by [CNNNeuronSoftSign], for mocking and DI.
+type CNNNeuronSoftSignable interface {
+	Unwrap() *raw.MPSCNNNeuronSoftSign
+}
+
+var _ CNNNeuronSoftSignable = (*CNNNeuronSoftSign)(nil)
+

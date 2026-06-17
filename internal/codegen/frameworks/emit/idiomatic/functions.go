@@ -5,6 +5,7 @@ package idiomatic
 import (
 	"bytes"
 	"fmt"
+	"maps"
 	"os"
 	"path/filepath"
 	"strings"
@@ -198,6 +199,181 @@ func emitGenericFunctionWrappers(
 		return fmt.Errorf("write %s: %w", fname, err)
 	}
 	return nil
+}
+
+// emitClassMethodFunctions writes <pkgname>_classmethods_generated.go: one
+// package-level forwarding function per ObjC class (static) method in fw. These
+// are the factory and accessor methods the rest of the idiomatic layer omits —
+// instance methods get receivers and inits become New* constructors, but class
+// methods (e.g. +[VZBridgedNetworkInterface networkInterfaces],
+// +[NSProcessInfo processInfo]) had no idiomatic surface and forced callers to
+// drop to the raw bindings.
+//
+// Each wrapper forwards to the raw package-level function the raw emitter
+// produced for the class method (raw.<Class><Method>), reusing the shared method
+// machinery so array returns become []T slices, NSString returns become Go
+// strings, same-package class returns become wrapped trial types, BoolNSError
+// becomes error and completion handlers become (ctx) … methods.
+//
+// Names prefer a fluent, class-prefix-stripped form (NetworkInterfaces); on any
+// collision — including the wrapper type of the same name — they fall back to a
+// class-qualified form, then skip with a diagnostic. takenNames is updated so the
+// generic C-function pass cannot redeclare a name reserved here.
+func emitClassMethodFunctions(
+	outDir, pkgName, rawPkgAlias, rawPkgPath string,
+	fw *meta.FrameworkMeta,
+	m *typemap.Mapper,
+	trialNames trialNameMap,
+	handFuncs map[string]bool,
+	takenNames map[string]bool,
+) error {
+	candidates := map[string]string{
+		rawPkgAlias:  rawPkgPath,
+		"context":    "context",
+		"unsafe":     "unsafe",
+		"purego":     pureobjcImportPath,
+		"foundation": foundationImportPath,
+		"objc":       objcImportPath,
+	}
+
+	var body bytes.Buffer
+	for _, className := range sortedKeys(fw.Classes) {
+		cls := fw.Classes[className]
+		if cls.Availability.IsUnavailable {
+			continue
+		}
+		ctx := typemap.Context{
+			ClassName:     className,
+			Framework:     fw.Framework,
+			GenericParams: cls.GenericParams,
+		}
+		rawNames := classRawMethodNames(cls, className, fw)
+
+		seenSel := map[string]bool{}
+		for _, method := range cls.Methods {
+			if !method.IsClassMethod || !emit.MethodWillBeEmitted(method) {
+				continue
+			}
+			if seenSel[method.Selector] {
+				continue
+			}
+			seenSel[method.Selector] = true
+
+			rawName := rawNames[method.Selector]
+			if rawName == "" {
+				continue
+			}
+			entry := buildMethod(method, rawName, cls, fw, ctx, m, rawPkgAlias, trialNames)
+			if entry == nil {
+				continue
+			}
+
+			// The emitted function name is independent of the raw symbol it
+			// calls (entry.rawGoName), so pick the most fluent free name.
+			fluent := classFuncShortName(entry.goName, className)
+			if fluent == "" {
+				fluent = entry.goName
+			}
+			qualified := className + fluent
+			var name string
+			switch {
+			case isFreeFuncName(fluent, takenNames, handFuncs):
+				name = fluent
+			case isFreeFuncName(qualified, takenNames, handFuncs):
+				name = qualified
+			default:
+				m.AppendDiagnostic(
+					"%s: idiomatic class-method wrapper for +[%s %s] skipped (names %s/%s already taken)",
+					fw.Framework, className, method.Selector, fluent, qualified,
+				)
+				continue
+			}
+			takenNames[name] = true
+			entry.goName = name
+
+			maps.Copy(candidates, entry.extraImports)
+			writeClassFunc(&body, rawPkgAlias, *entry)
+		}
+	}
+
+	if body.Len() == 0 {
+		return nil
+	}
+
+	var buf bytes.Buffer
+	fmt.Fprint(&buf, generatedHeader+"\n")
+	fmt.Fprint(&buf, buildTag+"\n")
+	fmt.Fprintf(&buf, "package %s\n\n", pkgName)
+	writeImportBlock(&buf, usedImports(body.Bytes(), candidates))
+	buf.Write(body.Bytes())
+
+	fname := pkgName + "_classmethods_generated.go"
+	if err := os.WriteFile(filepath.Join(outDir, fname), buf.Bytes(), 0o600); err != nil {
+		return fmt.Errorf("write %s: %w", fname, err)
+	}
+	return nil
+}
+
+// classRawMethodNames computes, per class-method selector, the exact Go
+// package-level function name the raw emitter produced — the className-prefixed
+// name from emit.ClassMethodGoNameFromMeta plus the numeric suffix the raw
+// emitter appends to disambiguate colliding names. Mirrors instanceRawMethodNames
+// for the class-method namespace, which the raw emitter keeps separate from
+// instance methods (the latter are unprefixed), so a class-only pool reproduces
+// the raw suffixes exactly.
+func classRawMethodNames(cls meta.Class, className string, fw *meta.FrameworkMeta) map[string]string {
+	count := map[string]int{}
+	for _, method := range cls.Methods {
+		if !method.IsClassMethod || !emit.MethodWillBeEmitted(method) {
+			continue
+		}
+		count[emit.ClassMethodGoNameFromMeta(className, method.Selector, fw)]++
+	}
+	seen := map[string]int{}
+	selSeen := map[string]bool{}
+	out := make(map[string]string, len(count))
+	for _, method := range cls.Methods {
+		if !method.IsClassMethod || !emit.MethodWillBeEmitted(method) {
+			continue
+		}
+		if selSeen[method.Selector] {
+			continue
+		}
+		selSeen[method.Selector] = true
+		name := emit.ClassMethodGoNameFromMeta(className, method.Selector, fw)
+		seen[name]++
+		if count[name] > 1 && seen[name] > 1 {
+			name = fmt.Sprintf("%s%d", name, seen[name])
+		}
+		out[method.Selector] = name
+	}
+	return out
+}
+
+// classFuncShortName strips the owning class name prefix from a class-method's
+// derived Go name to produce a fluent package-level name (for class
+// VZBridgedNetworkInterface, "VZBridgedNetworkInterfaceNetworkInterfaces" →
+// "NetworkInterfaces"). Returns "" when there is no prefix to strip or the
+// result would be unexported/start with a digit, signalling the caller to use a
+// qualified fallback.
+func classFuncShortName(goName, className string) string {
+	if !strings.HasPrefix(goName, className) {
+		return ""
+	}
+	s := goName[len(className):]
+	if s == "" {
+		return ""
+	}
+	if c := s[0]; !(c >= 'A' && c <= 'Z') {
+		return ""
+	}
+	return s
+}
+
+// isFreeFuncName reports whether name is a usable, unclaimed package-level
+// identifier (not already emitted/reserved and not hand-authored).
+func isFreeFuncName(name string, takenNames, handFuncs map[string]bool) bool {
+	return name != "" && !takenNames[name] && !handFuncs[name]
 }
 
 // cFunctionNameFor recovers the original C symbol for an exported Go function

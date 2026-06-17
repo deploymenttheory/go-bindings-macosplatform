@@ -6,6 +6,7 @@ package usernotifications
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/usernotifications"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +24,48 @@ func NewNotificationAction() *NotificationAction {
 	return &NotificationAction{inner: raw.UNNotificationActionFromID(_id)}
 }
 
+// Identifier calls the underlying Identifier.
+func (x *NotificationAction) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Title calls the underlying Title.
+func (x *NotificationAction) Title() string {
+	_r := x.inner.Title()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Options calls the underlying Options.
+func (x *NotificationAction) Options() raw.UNNotificationActionOptions {
+	return x.inner.Options()
+}
+
+// Icon calls the underlying Icon.
+func (x *NotificationAction) Icon() *NotificationActionIcon {
+	_r := x.inner.Icon()
+	if _r == nil {
+		return nil
+	}
+	return &NotificationActionIcon{inner: _r}
+}
+
 func (x *NotificationAction) asNotificationAction() *raw.UNNotificationAction { return x.inner }
+
+// NotificationActionable is the interface implemented by [NotificationAction], for mocking and DI.
+type NotificationActionable interface {
+	Unwrap() *raw.UNNotificationAction
+	Identifier() string
+	Title() string
+	Options() raw.UNNotificationActionOptions
+	Icon() *NotificationActionIcon
+}
+
+var _ NotificationActionable = (*NotificationAction)(nil)
 

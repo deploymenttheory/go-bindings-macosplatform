@@ -25,5 +25,24 @@ func NewPaymentRequestShippingContactUpdateWithErrorsPaymentSummaryItemsShipping
 	return &PaymentRequestShippingContactUpdate{inner: raw.PKPaymentRequestShippingContactUpdateFromID(_id)}
 }
 
+// Errors calls the underlying Errors.
+func (x *PaymentRequestShippingContactUpdate) Errors() *foundation.NSArray[objc.ID] {
+	return x.inner.Errors()
+}
+
+// SetErrors calls the underlying SetErrors.
+func (x *PaymentRequestShippingContactUpdate) SetErrors() error {
+	return x.inner.SetErrors()
+}
+
 func (x *PaymentRequestShippingContactUpdate) asPaymentRequestUpdate() *raw.PKPaymentRequestUpdate { return &x.inner.PKPaymentRequestUpdate }
+
+// PaymentRequestShippingContactUpdateable is the interface implemented by [PaymentRequestShippingContactUpdate], for mocking and DI.
+type PaymentRequestShippingContactUpdateable interface {
+	Unwrap() *raw.PKPaymentRequestShippingContactUpdate
+	Errors() *foundation.NSArray[objc.ID]
+	SetErrors() error
+}
+
+var _ PaymentRequestShippingContactUpdateable = (*PaymentRequestShippingContactUpdate)(nil)
 

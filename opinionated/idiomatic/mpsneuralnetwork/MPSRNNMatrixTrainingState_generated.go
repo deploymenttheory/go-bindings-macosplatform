@@ -23,3 +23,10 @@ func NewRNNMatrixTrainingState() *RNNMatrixTrainingState {
 	return &RNNMatrixTrainingState{inner: raw.MPSRNNMatrixTrainingStateFromID(_id)}
 }
 
+// RNNMatrixTrainingStateable is the interface implemented by [RNNMatrixTrainingState], for mocking and DI.
+type RNNMatrixTrainingStateable interface {
+	Unwrap() *raw.MPSRNNMatrixTrainingState
+}
+
+var _ RNNMatrixTrainingStateable = (*RNNMatrixTrainingState)(nil)
+

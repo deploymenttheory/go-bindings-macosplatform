@@ -29,7 +29,27 @@ func (x *GenerateImageFeaturePrintRequest) WithImageCropAndScaleOption(imageCrop
 	return x
 }
 
+// ImageCropAndScaleOption calls the underlying ImageCropAndScaleOption.
+func (x *GenerateImageFeaturePrintRequest) ImageCropAndScaleOption() raw.VNImageCropAndScaleOption {
+	return x.inner.ImageCropAndScaleOption()
+}
+
+// SetImageCropAndScaleOption calls the underlying SetImageCropAndScaleOption.
+func (x *GenerateImageFeaturePrintRequest) SetImageCropAndScaleOption(imageCropAndScaleOption raw.VNImageCropAndScaleOption) {
+	x.inner.SetImageCropAndScaleOption(imageCropAndScaleOption)
+}
+
 func (x *GenerateImageFeaturePrintRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNImageBasedRequest }
 
 func (x *GenerateImageFeaturePrintRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageBasedRequest.VNRequest }
+
+// GenerateImageFeaturePrintRequestable is the interface implemented by [GenerateImageFeaturePrintRequest], for mocking and DI.
+type GenerateImageFeaturePrintRequestable interface {
+	Unwrap() *raw.VNGenerateImageFeaturePrintRequest
+	WithImageCropAndScaleOption(imageCropAndScaleOption raw.VNImageCropAndScaleOption) *GenerateImageFeaturePrintRequest
+	ImageCropAndScaleOption() raw.VNImageCropAndScaleOption
+	SetImageCropAndScaleOption(imageCropAndScaleOption raw.VNImageCropAndScaleOption)
+}
+
+var _ GenerateImageFeaturePrintRequestable = (*GenerateImageFeaturePrintRequest)(nil)
 

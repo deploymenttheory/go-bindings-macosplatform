@@ -23,7 +23,34 @@ func NewDOMXPathExpression() *DOMXPathExpression {
 	return &DOMXPathExpression{inner: raw.DOMXPathExpressionFromID(_id)}
 }
 
+// EvaluateTypeInResult calls the underlying EvaluateTypeInResult.
+func (x *DOMXPathExpression) EvaluateTypeInResult(contextNode *raw.DOMNode, type_ uint16, inResult *raw.DOMXPathResult) *DOMXPathResult {
+	_r := x.inner.EvaluateTypeInResult(contextNode, type_, inResult)
+	if _r == nil {
+		return nil
+	}
+	return &DOMXPathResult{inner: _r}
+}
+
+// Evaluate calls the underlying Evaluate.
+func (x *DOMXPathExpression) Evaluate(contextNode *raw.DOMNode, type_ uint16, inResult *raw.DOMXPathResult) *DOMXPathResult {
+	_r := x.inner.Evaluate(contextNode, type_, inResult)
+	if _r == nil {
+		return nil
+	}
+	return &DOMXPathResult{inner: _r}
+}
+
 func (x *DOMXPathExpression) asDOMObject() *raw.DOMObject { return &x.inner.DOMObject }
 
 func (x *DOMXPathExpression) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMObject.WebScriptObject }
+
+// DOMXPathExpressionable is the interface implemented by [DOMXPathExpression], for mocking and DI.
+type DOMXPathExpressionable interface {
+	Unwrap() *raw.DOMXPathExpression
+	EvaluateTypeInResult(contextNode *raw.DOMNode, type_ uint16, inResult *raw.DOMXPathResult) *DOMXPathResult
+	Evaluate(contextNode *raw.DOMNode, type_ uint16, inResult *raw.DOMXPathResult) *DOMXPathResult
+}
+
+var _ DOMXPathExpressionable = (*DOMXPathExpression)(nil)
 

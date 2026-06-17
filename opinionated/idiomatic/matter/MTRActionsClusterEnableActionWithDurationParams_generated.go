@@ -54,3 +54,75 @@ func (x *MTRActionsClusterEnableActionWithDurationParams) WithServerSideProcessi
 	return x
 }
 
+// ActionID calls the underlying ActionID.
+func (x *MTRActionsClusterEnableActionWithDurationParams) ActionID() *foundation.NSNumber {
+	return x.inner.ActionID()
+}
+
+// SetActionID calls the underlying SetActionID.
+func (x *MTRActionsClusterEnableActionWithDurationParams) SetActionID(actionID *foundation.NSNumber) {
+	x.inner.SetActionID(actionID)
+}
+
+// InvokeID calls the underlying InvokeID.
+func (x *MTRActionsClusterEnableActionWithDurationParams) InvokeID() *foundation.NSNumber {
+	return x.inner.InvokeID()
+}
+
+// SetInvokeID calls the underlying SetInvokeID.
+func (x *MTRActionsClusterEnableActionWithDurationParams) SetInvokeID(invokeID *foundation.NSNumber) {
+	x.inner.SetInvokeID(invokeID)
+}
+
+// Duration calls the underlying Duration.
+func (x *MTRActionsClusterEnableActionWithDurationParams) Duration() *foundation.NSNumber {
+	return x.inner.Duration()
+}
+
+// SetDuration calls the underlying SetDuration.
+func (x *MTRActionsClusterEnableActionWithDurationParams) SetDuration(duration *foundation.NSNumber) {
+	x.inner.SetDuration(duration)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRActionsClusterEnableActionWithDurationParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRActionsClusterEnableActionWithDurationParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRActionsClusterEnableActionWithDurationParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRActionsClusterEnableActionWithDurationParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRActionsClusterEnableActionWithDurationParamsable is the interface implemented by [MTRActionsClusterEnableActionWithDurationParams], for mocking and DI.
+type MTRActionsClusterEnableActionWithDurationParamsable interface {
+	Unwrap() *raw.MTRActionsClusterEnableActionWithDurationParams
+	WithActionID(actionID *foundation.NSNumber) *MTRActionsClusterEnableActionWithDurationParams
+	WithInvokeID(invokeID *foundation.NSNumber) *MTRActionsClusterEnableActionWithDurationParams
+	WithDuration(duration *foundation.NSNumber) *MTRActionsClusterEnableActionWithDurationParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRActionsClusterEnableActionWithDurationParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRActionsClusterEnableActionWithDurationParams
+	ActionID() *foundation.NSNumber
+	SetActionID(actionID *foundation.NSNumber)
+	InvokeID() *foundation.NSNumber
+	SetInvokeID(invokeID *foundation.NSNumber)
+	Duration() *foundation.NSNumber
+	SetDuration(duration *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRActionsClusterEnableActionWithDurationParamsable = (*MTRActionsClusterEnableActionWithDurationParams)(nil)
+

@@ -6,6 +6,7 @@ package cloudkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -29,11 +30,9 @@ func (x *SyncEngineFetchedRecordZoneChangesEvent) Modifications() []*raw.CKRecor
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.CKRecord, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CKRecord {
+		return raw.CKRecordFromID(purego.Retain(_id))
+	})
 }
 
 // Deletions returns the collection as a Go slice.
@@ -42,12 +41,19 @@ func (x *SyncEngineFetchedRecordZoneChangesEvent) Deletions() []*raw.CKSyncEngin
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.CKSyncEngineFetchedRecordDeletion, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CKSyncEngineFetchedRecordDeletion {
+		return raw.CKSyncEngineFetchedRecordDeletionFromID(purego.Retain(_id))
+	})
 }
 
 func (x *SyncEngineFetchedRecordZoneChangesEvent) asSyncEngineEvent() *raw.CKSyncEngineEvent { return &x.inner.CKSyncEngineEvent }
+
+// SyncEngineFetchedRecordZoneChangesEventable is the interface implemented by [SyncEngineFetchedRecordZoneChangesEvent], for mocking and DI.
+type SyncEngineFetchedRecordZoneChangesEventable interface {
+	Unwrap() *raw.CKSyncEngineFetchedRecordZoneChangesEvent
+	Modifications() []*raw.CKRecord
+	Deletions() []*raw.CKSyncEngineFetchedRecordDeletion
+}
+
+var _ SyncEngineFetchedRecordZoneChangesEventable = (*SyncEngineFetchedRecordZoneChangesEvent)(nil)
 

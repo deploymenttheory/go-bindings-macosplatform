@@ -42,3 +42,49 @@ func (x *MTRLevelControlClusterMoveToClosestFrequencyParams) WithServerSideProce
 	return x
 }
 
+// Frequency calls the underlying Frequency.
+func (x *MTRLevelControlClusterMoveToClosestFrequencyParams) Frequency() *foundation.NSNumber {
+	return x.inner.Frequency()
+}
+
+// SetFrequency calls the underlying SetFrequency.
+func (x *MTRLevelControlClusterMoveToClosestFrequencyParams) SetFrequency(frequency *foundation.NSNumber) {
+	x.inner.SetFrequency(frequency)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRLevelControlClusterMoveToClosestFrequencyParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRLevelControlClusterMoveToClosestFrequencyParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRLevelControlClusterMoveToClosestFrequencyParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRLevelControlClusterMoveToClosestFrequencyParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRLevelControlClusterMoveToClosestFrequencyParamsable is the interface implemented by [MTRLevelControlClusterMoveToClosestFrequencyParams], for mocking and DI.
+type MTRLevelControlClusterMoveToClosestFrequencyParamsable interface {
+	Unwrap() *raw.MTRLevelControlClusterMoveToClosestFrequencyParams
+	WithFrequency(frequency *foundation.NSNumber) *MTRLevelControlClusterMoveToClosestFrequencyParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRLevelControlClusterMoveToClosestFrequencyParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRLevelControlClusterMoveToClosestFrequencyParams
+	Frequency() *foundation.NSNumber
+	SetFrequency(frequency *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRLevelControlClusterMoveToClosestFrequencyParamsable = (*MTRLevelControlClusterMoveToClosestFrequencyParams)(nil)
+

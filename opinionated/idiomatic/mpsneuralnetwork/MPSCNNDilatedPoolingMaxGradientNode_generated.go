@@ -24,9 +24,28 @@ func NewCNNDilatedPoolingMaxGradientNodeWithSourceGradientSourceImageGradientSta
 	return &CNNDilatedPoolingMaxGradientNode{inner: raw.MPSCNNDilatedPoolingMaxGradientNodeFromID(_id)}
 }
 
+// DilationRateX calls the underlying DilationRateX.
+func (x *CNNDilatedPoolingMaxGradientNode) DilationRateX() uint {
+	return x.inner.DilationRateX()
+}
+
+// DilationRateY calls the underlying DilationRateY.
+func (x *CNNDilatedPoolingMaxGradientNode) DilationRateY() uint {
+	return x.inner.DilationRateY()
+}
+
 func (x *CNNDilatedPoolingMaxGradientNode) asCNNPoolingGradientNode() *raw.MPSCNNPoolingGradientNode { return &x.inner.MPSCNNPoolingGradientNode }
 
 func (x *CNNDilatedPoolingMaxGradientNode) asNNGradientFilterNode() *raw.MPSNNGradientFilterNode { return &x.inner.MPSCNNPoolingGradientNode.MPSNNGradientFilterNode }
 
 func (x *CNNDilatedPoolingMaxGradientNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSCNNPoolingGradientNode.MPSNNGradientFilterNode.MPSNNFilterNode }
+
+// CNNDilatedPoolingMaxGradientNodeable is the interface implemented by [CNNDilatedPoolingMaxGradientNode], for mocking and DI.
+type CNNDilatedPoolingMaxGradientNodeable interface {
+	Unwrap() *raw.MPSCNNDilatedPoolingMaxGradientNode
+	DilationRateX() uint
+	DilationRateY() uint
+}
+
+var _ CNNDilatedPoolingMaxGradientNodeable = (*CNNDilatedPoolingMaxGradientNode)(nil)
 

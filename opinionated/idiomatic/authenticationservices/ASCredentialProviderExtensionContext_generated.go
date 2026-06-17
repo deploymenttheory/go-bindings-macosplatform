@@ -23,3 +23,40 @@ func NewCredentialProviderExtensionContext() *CredentialProviderExtensionContext
 	return &CredentialProviderExtensionContext{inner: raw.ASCredentialProviderExtensionContextFromID(_id)}
 }
 
+// CompleteRequestWithSelectedCredentialCompletionHandler calls the underlying CompleteRequestWithSelectedCredentialCompletionHandler.
+func (x *CredentialProviderExtensionContext) CompleteRequestWithSelectedCredentialCompletionHandler(credential *raw.ASPasswordCredential, completionHandler func(bool)) {
+	x.inner.CompleteRequestWithSelectedCredentialCompletionHandler(credential, completionHandler)
+}
+
+// CompleteAssertionRequestWithSelectedPasskeyCredentialCompletionHandler calls the underlying CompleteAssertionRequestWithSelectedPasskeyCredentialCompletionHandler.
+func (x *CredentialProviderExtensionContext) CompleteAssertionRequestWithSelectedPasskeyCredentialCompletionHandler(credential *raw.ASPasskeyAssertionCredential, completionHandler func(bool)) {
+	x.inner.CompleteAssertionRequestWithSelectedPasskeyCredentialCompletionHandler(credential, completionHandler)
+}
+
+// CompleteRegistrationRequestWithSelectedPasskeyCredentialCompletionHandler calls the underlying CompleteRegistrationRequestWithSelectedPasskeyCredentialCompletionHandler.
+func (x *CredentialProviderExtensionContext) CompleteRegistrationRequestWithSelectedPasskeyCredentialCompletionHandler(credential *raw.ASPasskeyRegistrationCredential, completionHandler func(bool)) {
+	x.inner.CompleteRegistrationRequestWithSelectedPasskeyCredentialCompletionHandler(credential, completionHandler)
+}
+
+// CompleteOneTimeCodeRequestWithSelectedCredentialCompletionHandler calls the underlying CompleteOneTimeCodeRequestWithSelectedCredentialCompletionHandler.
+func (x *CredentialProviderExtensionContext) CompleteOneTimeCodeRequestWithSelectedCredentialCompletionHandler(credential *raw.ASOneTimeCodeCredential, completionHandler func(bool)) {
+	x.inner.CompleteOneTimeCodeRequestWithSelectedCredentialCompletionHandler(credential, completionHandler)
+}
+
+// CompleteExtensionConfigurationRequest calls the underlying CompleteExtensionConfigurationRequest.
+func (x *CredentialProviderExtensionContext) CompleteExtensionConfigurationRequest() {
+	x.inner.CompleteExtensionConfigurationRequest()
+}
+
+// CredentialProviderExtensionContextable is the interface implemented by [CredentialProviderExtensionContext], for mocking and DI.
+type CredentialProviderExtensionContextable interface {
+	Unwrap() *raw.ASCredentialProviderExtensionContext
+	CompleteRequestWithSelectedCredentialCompletionHandler(credential *raw.ASPasswordCredential, completionHandler func(bool))
+	CompleteAssertionRequestWithSelectedPasskeyCredentialCompletionHandler(credential *raw.ASPasskeyAssertionCredential, completionHandler func(bool))
+	CompleteRegistrationRequestWithSelectedPasskeyCredentialCompletionHandler(credential *raw.ASPasskeyRegistrationCredential, completionHandler func(bool))
+	CompleteOneTimeCodeRequestWithSelectedCredentialCompletionHandler(credential *raw.ASOneTimeCodeCredential, completionHandler func(bool))
+	CompleteExtensionConfigurationRequest()
+}
+
+var _ CredentialProviderExtensionContextable = (*CredentialProviderExtensionContext)(nil)
+

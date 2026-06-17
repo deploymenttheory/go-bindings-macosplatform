@@ -5,8 +5,13 @@
 package sharedwithyou
 
 import (
+	"context"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/sharedwithyou"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/sharedwithyoucore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // HighlightCenter wraps [raw.SWHighlightCenter] with a fluent Go API.
@@ -29,16 +34,139 @@ func (x *HighlightCenter) WithDelegate(delegate raw.SWHighlightCenterDelegate) *
 	return x
 }
 
+// GetHighlightForURL blocks until the operation completes or ctx is cancelled.
+func (x *HighlightCenter) GetHighlightForURL(ctx context.Context, uRL string) (*Highlight, error) {
+	type _result struct {
+		val *Highlight
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.GetHighlightForURLCompletionHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)), func(_p0 *raw.SWHighlight, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &Highlight{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *Highlight
+		return _zero, ctx.Err()
+	}
+}
+
+// CollaborationHighlightForIdentifierError calls the underlying CollaborationHighlightForIdentifierError.
+func (x *HighlightCenter) CollaborationHighlightForIdentifierError(collaborationIdentifier *foundation.NSString) (*CollaborationHighlight, error) {
+	_r, _err := x.inner.CollaborationHighlightForIdentifierError(collaborationIdentifier)
+	if _err != nil {
+		return nil, _err
+	}
+	if _r == nil {
+		return nil, nil
+	}
+	return &CollaborationHighlight{inner: _r}, nil
+}
+
+// GetCollaborationHighlightForURL blocks until the operation completes or ctx is cancelled.
+func (x *HighlightCenter) GetCollaborationHighlightForURL(ctx context.Context, uRL string) (*CollaborationHighlight, error) {
+	type _result struct {
+		val *CollaborationHighlight
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.GetCollaborationHighlightForURLCompletionHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)), func(_p0 *raw.SWCollaborationHighlight, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &CollaborationHighlight{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *CollaborationHighlight
+		return _zero, ctx.Err()
+	}
+}
+
+// PostNoticeForHighlightEvent calls the underlying PostNoticeForHighlightEvent.
+func (x *HighlightCenter) PostNoticeForHighlightEvent(event raw.SWHighlightEvent) {
+	x.inner.PostNoticeForHighlightEvent(event)
+}
+
+// ClearNoticesForHighlight calls the underlying ClearNoticesForHighlight.
+func (x *HighlightCenter) ClearNoticesForHighlight(highlight *raw.SWCollaborationHighlight) {
+	x.inner.ClearNoticesForHighlight(highlight)
+}
+
+// GetSignedIdentityProofForCollaborationHighlightUsingData blocks until the operation completes or ctx is cancelled.
+func (x *HighlightCenter) GetSignedIdentityProofForCollaborationHighlightUsingData(ctx context.Context, collaborationHighlight *raw.SWCollaborationHighlight, data *foundation.NSData) (*sharedwithyoucore.SWSignedPersonIdentityProof, error) {
+	type _result struct {
+		val *sharedwithyoucore.SWSignedPersonIdentityProof
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.GetSignedIdentityProofForCollaborationHighlightUsingDataCompletionHandler(collaborationHighlight, data, func(_p0 *sharedwithyoucore.SWSignedPersonIdentityProof, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *sharedwithyoucore.SWSignedPersonIdentityProof
+		return _zero, ctx.Err()
+	}
+}
+
+// Delegate calls the underlying Delegate.
+func (x *HighlightCenter) Delegate() raw.SWHighlightCenterDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *HighlightCenter) SetDelegate(delegate raw.SWHighlightCenterDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
 // Highlights returns the collection as a Go slice.
 func (x *HighlightCenter) Highlights() []*raw.SWHighlight {
 	arr := x.inner.Highlights()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.SWHighlight, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SWHighlight {
+		return raw.SWHighlightFromID(purego.Retain(_id))
+	})
 }
+
+// HighlightCenterable is the interface implemented by [HighlightCenter], for mocking and DI.
+type HighlightCenterable interface {
+	Unwrap() *raw.SWHighlightCenter
+	WithDelegate(delegate raw.SWHighlightCenterDelegate) *HighlightCenter
+	GetHighlightForURL(ctx context.Context, uRL string) (*Highlight, error)
+	CollaborationHighlightForIdentifierError(collaborationIdentifier *foundation.NSString) (*CollaborationHighlight, error)
+	GetCollaborationHighlightForURL(ctx context.Context, uRL string) (*CollaborationHighlight, error)
+	PostNoticeForHighlightEvent(event raw.SWHighlightEvent)
+	ClearNoticesForHighlight(highlight *raw.SWCollaborationHighlight)
+	GetSignedIdentityProofForCollaborationHighlightUsingData(ctx context.Context, collaborationHighlight *raw.SWCollaborationHighlight, data *foundation.NSData) (*sharedwithyoucore.SWSignedPersonIdentityProof, error)
+	Delegate() raw.SWHighlightCenterDelegate
+	SetDelegate(delegate raw.SWHighlightCenterDelegate)
+	Highlights() []*raw.SWHighlight
+}
+
+var _ HighlightCenterable = (*HighlightCenter)(nil)
 

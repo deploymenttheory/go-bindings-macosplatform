@@ -26,3 +26,34 @@ func NewTrackingAreaWithRectOptionsOwnerUserInfo(rect corefoundation.CGRect, opt
 	return &TrackingArea{inner: raw.NSTrackingAreaFromID(_id)}
 }
 
+// Rect calls the underlying Rect.
+func (x *TrackingArea) Rect() corefoundation.CGRect {
+	return x.inner.Rect()
+}
+
+// Options calls the underlying Options.
+func (x *TrackingArea) Options() raw.NSTrackingAreaOptions {
+	return x.inner.Options()
+}
+
+// Owner calls the underlying Owner.
+func (x *TrackingArea) Owner() objc.ID {
+	return x.inner.Owner()
+}
+
+// UserInfo calls the underlying UserInfo.
+func (x *TrackingArea) UserInfo() *foundation.NSDictionary[objc.ID, objc.ID] {
+	return x.inner.UserInfo()
+}
+
+// TrackingAreaable is the interface implemented by [TrackingArea], for mocking and DI.
+type TrackingAreaable interface {
+	Unwrap() *raw.NSTrackingArea
+	Rect() corefoundation.CGRect
+	Options() raw.NSTrackingAreaOptions
+	Owner() objc.ID
+	UserInfo() *foundation.NSDictionary[objc.ID, objc.ID]
+}
+
+var _ TrackingAreaable = (*TrackingArea)(nil)
+

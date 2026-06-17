@@ -41,3 +41,10 @@ func (x *NNReduceColumnMin) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { retur
 
 func (x *NNReduceColumnMin) asKernel() *mpscore.MPSKernel { return &x.inner.MPSNNReduceUnary.MPSCNNKernel.MPSKernel }
 
+// NNReduceColumnMinable is the interface implemented by [NNReduceColumnMin], for mocking and DI.
+type NNReduceColumnMinable interface {
+	Unwrap() *raw.MPSNNReduceColumnMin
+}
+
+var _ NNReduceColumnMinable = (*NNReduceColumnMin)(nil)
+

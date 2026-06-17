@@ -5,9 +5,12 @@
 package matter
 
 import (
+	"context"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // MTRClusterOtaSoftwareUpdateProvider wraps [raw.MTRClusterOtaSoftwareUpdateProvider] with a fluent Go API.
@@ -25,9 +28,76 @@ func NewMTRClusterOtaSoftwareUpdateProviderWithDeviceEndpointQueue(device *raw.M
 	return &MTRClusterOtaSoftwareUpdateProvider{inner: raw.MTRClusterOtaSoftwareUpdateProviderFromID(_id)}
 }
 
+// QueryImageWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
+func (x *MTRClusterOtaSoftwareUpdateProvider) QueryImageWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTROtaSoftwareUpdateProviderClusterQueryImageParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams, error) {
+	type _result struct {
+		val *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.QueryImageWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
+// ApplyUpdateRequestWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
+func (x *MTRClusterOtaSoftwareUpdateProvider) ApplyUpdateRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams, error) {
+	type _result struct {
+		val *MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ApplyUpdateRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
+// NotifyUpdateAppliedWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying NotifyUpdateAppliedWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
+func (x *MTRClusterOtaSoftwareUpdateProvider) NotifyUpdateAppliedWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTROtaSoftwareUpdateProviderClusterNotifyUpdateAppliedParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
+	x.inner.NotifyUpdateAppliedWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
+}
+
 func (x *MTRClusterOtaSoftwareUpdateProvider) asMTRClusterOTASoftwareUpdateProvider() *raw.MTRClusterOTASoftwareUpdateProvider { return &x.inner.MTRClusterOTASoftwareUpdateProvider }
 
 func (x *MTRClusterOtaSoftwareUpdateProvider) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRClusterOTASoftwareUpdateProvider.MTRGenericCluster }
 
 func (x *MTRClusterOtaSoftwareUpdateProvider) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRClusterOTASoftwareUpdateProvider.MTRGenericCluster.MTRCluster }
+
+// MTRClusterOtaSoftwareUpdateProviderable is the interface implemented by [MTRClusterOtaSoftwareUpdateProvider], for mocking and DI.
+type MTRClusterOtaSoftwareUpdateProviderable interface {
+	Unwrap() *raw.MTRClusterOtaSoftwareUpdateProvider
+	QueryImageWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTROtaSoftwareUpdateProviderClusterQueryImageParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams, error)
+	ApplyUpdateRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams, error)
+	NotifyUpdateAppliedWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTROtaSoftwareUpdateProviderClusterNotifyUpdateAppliedParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
+}
+
+var _ MTRClusterOtaSoftwareUpdateProviderable = (*MTRClusterOtaSoftwareUpdateProvider)(nil)
 

@@ -60,3 +60,88 @@ func (x *MTRColorControlClusterMoveColorParams) WithServerSideProcessingTimeout(
 	return x
 }
 
+// RateX calls the underlying RateX.
+func (x *MTRColorControlClusterMoveColorParams) RateX() *foundation.NSNumber {
+	return x.inner.RateX()
+}
+
+// SetRateX calls the underlying SetRateX.
+func (x *MTRColorControlClusterMoveColorParams) SetRateX(rateX *foundation.NSNumber) {
+	x.inner.SetRateX(rateX)
+}
+
+// RateY calls the underlying RateY.
+func (x *MTRColorControlClusterMoveColorParams) RateY() *foundation.NSNumber {
+	return x.inner.RateY()
+}
+
+// SetRateY calls the underlying SetRateY.
+func (x *MTRColorControlClusterMoveColorParams) SetRateY(rateY *foundation.NSNumber) {
+	x.inner.SetRateY(rateY)
+}
+
+// OptionsMask calls the underlying OptionsMask.
+func (x *MTRColorControlClusterMoveColorParams) OptionsMask() *foundation.NSNumber {
+	return x.inner.OptionsMask()
+}
+
+// SetOptionsMask calls the underlying SetOptionsMask.
+func (x *MTRColorControlClusterMoveColorParams) SetOptionsMask(optionsMask *foundation.NSNumber) {
+	x.inner.SetOptionsMask(optionsMask)
+}
+
+// OptionsOverride calls the underlying OptionsOverride.
+func (x *MTRColorControlClusterMoveColorParams) OptionsOverride() *foundation.NSNumber {
+	return x.inner.OptionsOverride()
+}
+
+// SetOptionsOverride calls the underlying SetOptionsOverride.
+func (x *MTRColorControlClusterMoveColorParams) SetOptionsOverride(optionsOverride *foundation.NSNumber) {
+	x.inner.SetOptionsOverride(optionsOverride)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRColorControlClusterMoveColorParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRColorControlClusterMoveColorParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRColorControlClusterMoveColorParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRColorControlClusterMoveColorParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRColorControlClusterMoveColorParamsable is the interface implemented by [MTRColorControlClusterMoveColorParams], for mocking and DI.
+type MTRColorControlClusterMoveColorParamsable interface {
+	Unwrap() *raw.MTRColorControlClusterMoveColorParams
+	WithRateX(rateX *foundation.NSNumber) *MTRColorControlClusterMoveColorParams
+	WithRateY(rateY *foundation.NSNumber) *MTRColorControlClusterMoveColorParams
+	WithOptionsMask(optionsMask *foundation.NSNumber) *MTRColorControlClusterMoveColorParams
+	WithOptionsOverride(optionsOverride *foundation.NSNumber) *MTRColorControlClusterMoveColorParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRColorControlClusterMoveColorParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRColorControlClusterMoveColorParams
+	RateX() *foundation.NSNumber
+	SetRateX(rateX *foundation.NSNumber)
+	RateY() *foundation.NSNumber
+	SetRateY(rateY *foundation.NSNumber)
+	OptionsMask() *foundation.NSNumber
+	SetOptionsMask(optionsMask *foundation.NSNumber)
+	OptionsOverride() *foundation.NSNumber
+	SetOptionsOverride(optionsOverride *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRColorControlClusterMoveColorParamsable = (*MTRColorControlClusterMoveColorParams)(nil)
+

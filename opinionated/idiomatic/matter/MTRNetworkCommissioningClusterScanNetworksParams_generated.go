@@ -48,3 +48,62 @@ func (x *MTRNetworkCommissioningClusterScanNetworksParams) WithServerSideProcess
 	return x
 }
 
+// Ssid calls the underlying Ssid.
+func (x *MTRNetworkCommissioningClusterScanNetworksParams) Ssid() *foundation.NSData {
+	return x.inner.Ssid()
+}
+
+// SetSsid calls the underlying SetSsid.
+func (x *MTRNetworkCommissioningClusterScanNetworksParams) SetSsid(ssid *foundation.NSData) {
+	x.inner.SetSsid(ssid)
+}
+
+// Breadcrumb calls the underlying Breadcrumb.
+func (x *MTRNetworkCommissioningClusterScanNetworksParams) Breadcrumb() *foundation.NSNumber {
+	return x.inner.Breadcrumb()
+}
+
+// SetBreadcrumb calls the underlying SetBreadcrumb.
+func (x *MTRNetworkCommissioningClusterScanNetworksParams) SetBreadcrumb(breadcrumb *foundation.NSNumber) {
+	x.inner.SetBreadcrumb(breadcrumb)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRNetworkCommissioningClusterScanNetworksParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRNetworkCommissioningClusterScanNetworksParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRNetworkCommissioningClusterScanNetworksParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRNetworkCommissioningClusterScanNetworksParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRNetworkCommissioningClusterScanNetworksParamsable is the interface implemented by [MTRNetworkCommissioningClusterScanNetworksParams], for mocking and DI.
+type MTRNetworkCommissioningClusterScanNetworksParamsable interface {
+	Unwrap() *raw.MTRNetworkCommissioningClusterScanNetworksParams
+	WithSsid(ssid *foundation.NSData) *MTRNetworkCommissioningClusterScanNetworksParams
+	WithBreadcrumb(breadcrumb *foundation.NSNumber) *MTRNetworkCommissioningClusterScanNetworksParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRNetworkCommissioningClusterScanNetworksParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRNetworkCommissioningClusterScanNetworksParams
+	Ssid() *foundation.NSData
+	SetSsid(ssid *foundation.NSData)
+	Breadcrumb() *foundation.NSNumber
+	SetBreadcrumb(breadcrumb *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRNetworkCommissioningClusterScanNetworksParamsable = (*MTRNetworkCommissioningClusterScanNetworksParams)(nil)
+

@@ -25,3 +25,10 @@ func NewIntersectionFunctionDescriptor() *IntersectionFunctionDescriptor {
 
 func (x *IntersectionFunctionDescriptor) asFunctionDescriptor() *raw.MTLFunctionDescriptor { return &x.inner.MTLFunctionDescriptor }
 
+// IntersectionFunctionDescriptorable is the interface implemented by [IntersectionFunctionDescriptor], for mocking and DI.
+type IntersectionFunctionDescriptorable interface {
+	Unwrap() *raw.MTLIntersectionFunctionDescriptor
+}
+
+var _ IntersectionFunctionDescriptorable = (*IntersectionFunctionDescriptor)(nil)
+

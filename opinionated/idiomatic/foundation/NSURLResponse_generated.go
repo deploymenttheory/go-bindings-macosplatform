@@ -25,7 +25,60 @@ func NewURLResponseWithURLMIMETypeExpectedContentLengthTextEncodingName(uRL stri
 	return &URLResponse{inner: raw.NSURLResponseFromID(_id)}
 }
 
+// URL calls the underlying URL.
+func (x *URLResponse) URL() *URL {
+	_r := x.inner.URL()
+	if _r == nil {
+		return nil
+	}
+	return &URL{inner: _r}
+}
+
+// MIMEType calls the underlying MIMEType.
+func (x *URLResponse) MIMEType() *String {
+	_r := x.inner.MIMEType()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// ExpectedContentLength calls the underlying ExpectedContentLength.
+func (x *URLResponse) ExpectedContentLength() int64 {
+	return x.inner.ExpectedContentLength()
+}
+
+// TextEncodingName calls the underlying TextEncodingName.
+func (x *URLResponse) TextEncodingName() *String {
+	_r := x.inner.TextEncodingName()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SuggestedFilename calls the underlying SuggestedFilename.
+func (x *URLResponse) SuggestedFilename() *String {
+	_r := x.inner.SuggestedFilename()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
 func (x *URLResponse) asURLResponse() *raw.NSURLResponse { return x.inner }
 
 func (x *URLResponse) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// URLResponseable is the interface implemented by [URLResponse], for mocking and DI.
+type URLResponseable interface {
+	Unwrap() *raw.NSURLResponse
+	URL() *URL
+	MIMEType() *String
+	ExpectedContentLength() int64
+	TextEncodingName() *String
+	SuggestedFilename() *String
+}
+
+var _ URLResponseable = (*URLResponse)(nil)
 

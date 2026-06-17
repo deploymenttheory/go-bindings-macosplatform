@@ -42,3 +42,91 @@ func (x *ContentSharingPicker) WithActive(active bool) *ContentSharingPicker {
 	return x
 }
 
+// AddObserver calls the underlying AddObserver.
+func (x *ContentSharingPicker) AddObserver(observer raw.SCContentSharingPickerObserver) {
+	x.inner.AddObserver(observer)
+}
+
+// RemoveObserver calls the underlying RemoveObserver.
+func (x *ContentSharingPicker) RemoveObserver(observer raw.SCContentSharingPickerObserver) {
+	x.inner.RemoveObserver(observer)
+}
+
+// SetConfigurationForStream calls the underlying SetConfigurationForStream.
+func (x *ContentSharingPicker) SetConfigurationForStream(pickerConfig *raw.SCContentSharingPickerConfiguration[objc.ID], stream *raw.SCStream) {
+	x.inner.SetConfigurationForStream(pickerConfig, stream)
+}
+
+// Present calls the underlying Present.
+func (x *ContentSharingPicker) Present() {
+	x.inner.Present()
+}
+
+// PresentPickerUsingContentStyle calls the underlying PresentPickerUsingContentStyle.
+func (x *ContentSharingPicker) PresentPickerUsingContentStyle(contentStyle raw.SCShareableContentStyle) {
+	x.inner.PresentPickerUsingContentStyle(contentStyle)
+}
+
+// PresentPickerForStream calls the underlying PresentPickerForStream.
+func (x *ContentSharingPicker) PresentPickerForStream(stream *raw.SCStream) {
+	x.inner.PresentPickerForStream(stream)
+}
+
+// PresentPickerForStreamUsingContentStyle calls the underlying PresentPickerForStreamUsingContentStyle.
+func (x *ContentSharingPicker) PresentPickerForStreamUsingContentStyle(stream *raw.SCStream, contentStyle raw.SCShareableContentStyle) {
+	x.inner.PresentPickerForStreamUsingContentStyle(stream, contentStyle)
+}
+
+// DefaultConfiguration calls the underlying DefaultConfiguration.
+func (x *ContentSharingPicker) DefaultConfiguration() *raw.SCContentSharingPickerConfiguration[objc.ID] {
+	return x.inner.DefaultConfiguration()
+}
+
+// SetDefaultConfiguration calls the underlying SetDefaultConfiguration.
+func (x *ContentSharingPicker) SetDefaultConfiguration(defaultConfiguration *raw.SCContentSharingPickerConfiguration[objc.ID]) {
+	x.inner.SetDefaultConfiguration(defaultConfiguration)
+}
+
+// MaximumStreamCount calls the underlying MaximumStreamCount.
+func (x *ContentSharingPicker) MaximumStreamCount() *foundation.NSNumber {
+	return x.inner.MaximumStreamCount()
+}
+
+// SetMaximumStreamCount calls the underlying SetMaximumStreamCount.
+func (x *ContentSharingPicker) SetMaximumStreamCount(maximumStreamCount *foundation.NSNumber) {
+	x.inner.SetMaximumStreamCount(maximumStreamCount)
+}
+
+// IsActive calls the underlying IsActive.
+func (x *ContentSharingPicker) IsActive() bool {
+	return x.inner.IsActive()
+}
+
+// SetActive calls the underlying SetActive.
+func (x *ContentSharingPicker) SetActive(active bool) {
+	x.inner.SetActive(active)
+}
+
+// ContentSharingPickerable is the interface implemented by [ContentSharingPicker], for mocking and DI.
+type ContentSharingPickerable interface {
+	Unwrap() *raw.SCContentSharingPicker
+	WithDefaultConfiguration(defaultConfiguration *raw.SCContentSharingPickerConfiguration[objc.ID]) *ContentSharingPicker
+	WithMaximumStreamCount(maximumStreamCount *foundation.NSNumber) *ContentSharingPicker
+	WithActive(active bool) *ContentSharingPicker
+	AddObserver(observer raw.SCContentSharingPickerObserver)
+	RemoveObserver(observer raw.SCContentSharingPickerObserver)
+	SetConfigurationForStream(pickerConfig *raw.SCContentSharingPickerConfiguration[objc.ID], stream *raw.SCStream)
+	Present()
+	PresentPickerUsingContentStyle(contentStyle raw.SCShareableContentStyle)
+	PresentPickerForStream(stream *raw.SCStream)
+	PresentPickerForStreamUsingContentStyle(stream *raw.SCStream, contentStyle raw.SCShareableContentStyle)
+	DefaultConfiguration() *raw.SCContentSharingPickerConfiguration[objc.ID]
+	SetDefaultConfiguration(defaultConfiguration *raw.SCContentSharingPickerConfiguration[objc.ID])
+	MaximumStreamCount() *foundation.NSNumber
+	SetMaximumStreamCount(maximumStreamCount *foundation.NSNumber)
+	IsActive() bool
+	SetActive(active bool)
+}
+
+var _ ContentSharingPickerable = (*ContentSharingPicker)(nil)
+

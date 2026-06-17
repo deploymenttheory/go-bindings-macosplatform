@@ -25,3 +25,10 @@ func NewMTRModeSelectClusterSemanticTag() *MTRModeSelectClusterSemanticTag {
 
 func (x *MTRModeSelectClusterSemanticTag) asMTRModeSelectClusterSemanticTagStruct() *raw.MTRModeSelectClusterSemanticTagStruct { return &x.inner.MTRModeSelectClusterSemanticTagStruct }
 
+// MTRModeSelectClusterSemanticTagable is the interface implemented by [MTRModeSelectClusterSemanticTag], for mocking and DI.
+type MTRModeSelectClusterSemanticTagable interface {
+	Unwrap() *raw.MTRModeSelectClusterSemanticTag
+}
+
+var _ MTRModeSelectClusterSemanticTagable = (*MTRModeSelectClusterSemanticTag)(nil)
+

@@ -25,3 +25,10 @@ func NewMTRBridgedDeviceBasicInformationClusterShutDownEvent() *MTRBridgedDevice
 
 func (x *MTRBridgedDeviceBasicInformationClusterShutDownEvent) asMTRBridgedDeviceBasicInformationClusterShutDownEvent() *raw.MTRBridgedDeviceBasicInformationClusterShutDownEvent { return x.inner }
 
+// MTRBridgedDeviceBasicInformationClusterShutDownEventable is the interface implemented by [MTRBridgedDeviceBasicInformationClusterShutDownEvent], for mocking and DI.
+type MTRBridgedDeviceBasicInformationClusterShutDownEventable interface {
+	Unwrap() *raw.MTRBridgedDeviceBasicInformationClusterShutDownEvent
+}
+
+var _ MTRBridgedDeviceBasicInformationClusterShutDownEventable = (*MTRBridgedDeviceBasicInformationClusterShutDownEvent)(nil)
+

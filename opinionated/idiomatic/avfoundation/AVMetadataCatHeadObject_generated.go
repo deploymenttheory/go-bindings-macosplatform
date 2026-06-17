@@ -25,3 +25,10 @@ func NewMetadataCatHeadObject() *MetadataCatHeadObject {
 
 func (x *MetadataCatHeadObject) asMetadataObject() *raw.AVMetadataObject { return &x.inner.AVMetadataObject }
 
+// MetadataCatHeadObjectable is the interface implemented by [MetadataCatHeadObject], for mocking and DI.
+type MetadataCatHeadObjectable interface {
+	Unwrap() *raw.AVMetadataCatHeadObject
+}
+
+var _ MetadataCatHeadObjectable = (*MetadataCatHeadObject)(nil)
+

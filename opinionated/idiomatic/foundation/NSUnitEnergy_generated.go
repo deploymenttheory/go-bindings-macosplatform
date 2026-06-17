@@ -29,3 +29,10 @@ func (x *UnitEnergy) asUnit() *raw.NSUnit { return &x.inner.NSDimension.NSUnit }
 
 func (x *UnitEnergy) asObject() *raw.NSObject { return &x.inner.NSDimension.NSUnit.NSObject }
 
+// UnitEnergyable is the interface implemented by [UnitEnergy], for mocking and DI.
+type UnitEnergyable interface {
+	Unwrap() *raw.NSUnitEnergy
+}
+
+var _ UnitEnergyable = (*UnitEnergy)(nil)
+

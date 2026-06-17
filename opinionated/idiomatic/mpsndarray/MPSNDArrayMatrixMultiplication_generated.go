@@ -35,9 +35,42 @@ func (x *ArrayMatrixMultiplication) WithBeta(beta float64) *ArrayMatrixMultiplic
 	return x
 }
 
+// Alpha calls the underlying Alpha.
+func (x *ArrayMatrixMultiplication) Alpha() float64 {
+	return x.inner.Alpha()
+}
+
+// SetAlpha calls the underlying SetAlpha.
+func (x *ArrayMatrixMultiplication) SetAlpha(alpha float64) {
+	x.inner.SetAlpha(alpha)
+}
+
+// Beta calls the underlying Beta.
+func (x *ArrayMatrixMultiplication) Beta() float64 {
+	return x.inner.Beta()
+}
+
+// SetBeta calls the underlying SetBeta.
+func (x *ArrayMatrixMultiplication) SetBeta(beta float64) {
+	x.inner.SetBeta(beta)
+}
+
 func (x *ArrayMatrixMultiplication) asArrayMatrixMultiplication() *raw.MPSNDArrayMatrixMultiplication { return x.inner }
 
 func (x *ArrayMatrixMultiplication) asArrayMultiaryKernel() *raw.MPSNDArrayMultiaryKernel { return &x.inner.MPSNDArrayMultiaryKernel }
 
 func (x *ArrayMatrixMultiplication) asArrayMultiaryBase() *raw.MPSNDArrayMultiaryBase { return &x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase }
+
+// ArrayMatrixMultiplicationable is the interface implemented by [ArrayMatrixMultiplication], for mocking and DI.
+type ArrayMatrixMultiplicationable interface {
+	Unwrap() *raw.MPSNDArrayMatrixMultiplication
+	WithAlpha(alpha float64) *ArrayMatrixMultiplication
+	WithBeta(beta float64) *ArrayMatrixMultiplication
+	Alpha() float64
+	SetAlpha(alpha float64)
+	Beta() float64
+	SetBeta(beta float64)
+}
+
+var _ ArrayMatrixMultiplicationable = (*ArrayMatrixMultiplication)(nil)
 

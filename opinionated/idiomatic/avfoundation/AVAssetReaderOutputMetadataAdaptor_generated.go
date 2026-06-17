@@ -24,3 +24,30 @@ func NewAssetReaderOutputMetadataAdaptorWithAssetReaderTrackOutput(trackOutput *
 	return &AssetReaderOutputMetadataAdaptor{inner: raw.AVAssetReaderOutputMetadataAdaptorFromID(_id)}
 }
 
+// NextTimedMetadataGroup calls the underlying NextTimedMetadataGroup.
+func (x *AssetReaderOutputMetadataAdaptor) NextTimedMetadataGroup() *TimedMetadataGroup {
+	_r := x.inner.NextTimedMetadataGroup()
+	if _r == nil {
+		return nil
+	}
+	return &TimedMetadataGroup{inner: _r}
+}
+
+// AssetReaderTrackOutput calls the underlying AssetReaderTrackOutput.
+func (x *AssetReaderOutputMetadataAdaptor) AssetReaderTrackOutput() *AssetReaderTrackOutput {
+	_r := x.inner.AssetReaderTrackOutput()
+	if _r == nil {
+		return nil
+	}
+	return &AssetReaderTrackOutput{inner: _r}
+}
+
+// AssetReaderOutputMetadataAdaptorable is the interface implemented by [AssetReaderOutputMetadataAdaptor], for mocking and DI.
+type AssetReaderOutputMetadataAdaptorable interface {
+	Unwrap() *raw.AVAssetReaderOutputMetadataAdaptor
+	NextTimedMetadataGroup() *TimedMetadataGroup
+	AssetReaderTrackOutput() *AssetReaderTrackOutput
+}
+
+var _ AssetReaderOutputMetadataAdaptorable = (*AssetReaderOutputMetadataAdaptor)(nil)
+

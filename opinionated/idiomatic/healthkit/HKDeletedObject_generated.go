@@ -5,6 +5,7 @@
 package healthkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +23,23 @@ func NewDeletedObject() *DeletedObject {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKDeletedObject")), objc.RegisterName("new"))
 	return &DeletedObject{inner: raw.HKDeletedObjectFromID(_id)}
 }
+
+// UUID calls the underlying UUID.
+func (x *DeletedObject) UUID() *foundation.NSUUID {
+	return x.inner.UUID()
+}
+
+// Metadata calls the underlying Metadata.
+func (x *DeletedObject) Metadata() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.Metadata()
+}
+
+// DeletedObjectable is the interface implemented by [DeletedObject], for mocking and DI.
+type DeletedObjectable interface {
+	Unwrap() *raw.HKDeletedObject
+	UUID() *foundation.NSUUID
+	Metadata() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+}
+
+var _ DeletedObjectable = (*DeletedObject)(nil)
 

@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -35,4 +36,45 @@ func (x *MTRChannelClusterProgramCastStruct) WithRole(role string) *MTRChannelCl
 	x.inner.SetRole(foundation.NSStringStringWithUTF8String(role))
 	return x
 }
+
+// Name calls the underlying Name.
+func (x *MTRChannelClusterProgramCastStruct) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetName calls the underlying SetName.
+func (x *MTRChannelClusterProgramCastStruct) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
+// Role calls the underlying Role.
+func (x *MTRChannelClusterProgramCastStruct) Role() string {
+	_r := x.inner.Role()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetRole calls the underlying SetRole.
+func (x *MTRChannelClusterProgramCastStruct) SetRole(role string) {
+	x.inner.SetRole(foundation.NSStringStringWithUTF8String(role))
+}
+
+// MTRChannelClusterProgramCastStructable is the interface implemented by [MTRChannelClusterProgramCastStruct], for mocking and DI.
+type MTRChannelClusterProgramCastStructable interface {
+	Unwrap() *raw.MTRChannelClusterProgramCastStruct
+	WithName(name string) *MTRChannelClusterProgramCastStruct
+	WithRole(role string) *MTRChannelClusterProgramCastStruct
+	Name() string
+	SetName(name string)
+	Role() string
+	SetRole(role string)
+}
+
+var _ MTRChannelClusterProgramCastStructable = (*MTRChannelClusterProgramCastStruct)(nil)
 

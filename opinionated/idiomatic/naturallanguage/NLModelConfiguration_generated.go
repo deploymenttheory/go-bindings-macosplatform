@@ -6,6 +6,7 @@ package naturallanguage
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/naturallanguage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,33 @@ func NewModelConfiguration() *ModelConfiguration {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NLModelConfiguration")), objc.RegisterName("new"))
 	return &ModelConfiguration{inner: raw.NLModelConfigurationFromID(_id)}
 }
+
+// Type calls the underlying Type.
+func (x *ModelConfiguration) Type() raw.NLModelType {
+	return x.inner.Type()
+}
+
+// Language calls the underlying Language.
+func (x *ModelConfiguration) Language() string {
+	_r := x.inner.Language()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Revision calls the underlying Revision.
+func (x *ModelConfiguration) Revision() uint {
+	return x.inner.Revision()
+}
+
+// ModelConfigurationable is the interface implemented by [ModelConfiguration], for mocking and DI.
+type ModelConfigurationable interface {
+	Unwrap() *raw.NLModelConfiguration
+	Type() raw.NLModelType
+	Language() string
+	Revision() uint
+}
+
+var _ ModelConfigurationable = (*ModelConfiguration)(nil)
 

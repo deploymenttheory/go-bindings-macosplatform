@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,5 +24,18 @@ func NewMTRCommandPath() *MTRCommandPath {
 	return &MTRCommandPath{inner: raw.MTRCommandPathFromID(_id)}
 }
 
+// Command calls the underlying Command.
+func (x *MTRCommandPath) Command() *foundation.NSNumber {
+	return x.inner.Command()
+}
+
 func (x *MTRCommandPath) asMTRClusterPath() *raw.MTRClusterPath { return &x.inner.MTRClusterPath }
+
+// MTRCommandPathable is the interface implemented by [MTRCommandPath], for mocking and DI.
+type MTRCommandPathable interface {
+	Unwrap() *raw.MTRCommandPath
+	Command() *foundation.NSNumber
+}
+
+var _ MTRCommandPathable = (*MTRCommandPath)(nil)
 

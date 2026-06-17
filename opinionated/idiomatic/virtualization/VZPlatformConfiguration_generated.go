@@ -25,3 +25,10 @@ func NewPlatformConfiguration() *PlatformConfiguration {
 
 func (x *PlatformConfiguration) asPlatformConfiguration() *raw.VZPlatformConfiguration { return x.inner }
 
+// PlatformConfigurationable is the interface implemented by [PlatformConfiguration], for mocking and DI.
+type PlatformConfigurationable interface {
+	Unwrap() *raw.VZPlatformConfiguration
+}
+
+var _ PlatformConfigurationable = (*PlatformConfiguration)(nil)
+

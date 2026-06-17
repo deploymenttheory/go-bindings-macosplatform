@@ -48,3 +48,62 @@ func (x *MTRBridgedDeviceBasicInformationClusterKeepActiveParams) WithServerSide
 	return x
 }
 
+// StayActiveDuration calls the underlying StayActiveDuration.
+func (x *MTRBridgedDeviceBasicInformationClusterKeepActiveParams) StayActiveDuration() *foundation.NSNumber {
+	return x.inner.StayActiveDuration()
+}
+
+// SetStayActiveDuration calls the underlying SetStayActiveDuration.
+func (x *MTRBridgedDeviceBasicInformationClusterKeepActiveParams) SetStayActiveDuration(stayActiveDuration *foundation.NSNumber) {
+	x.inner.SetStayActiveDuration(stayActiveDuration)
+}
+
+// TimeoutMs calls the underlying TimeoutMs.
+func (x *MTRBridgedDeviceBasicInformationClusterKeepActiveParams) TimeoutMs() *foundation.NSNumber {
+	return x.inner.TimeoutMs()
+}
+
+// SetTimeoutMs calls the underlying SetTimeoutMs.
+func (x *MTRBridgedDeviceBasicInformationClusterKeepActiveParams) SetTimeoutMs(timeoutMs *foundation.NSNumber) {
+	x.inner.SetTimeoutMs(timeoutMs)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRBridgedDeviceBasicInformationClusterKeepActiveParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRBridgedDeviceBasicInformationClusterKeepActiveParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRBridgedDeviceBasicInformationClusterKeepActiveParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRBridgedDeviceBasicInformationClusterKeepActiveParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRBridgedDeviceBasicInformationClusterKeepActiveParamsable is the interface implemented by [MTRBridgedDeviceBasicInformationClusterKeepActiveParams], for mocking and DI.
+type MTRBridgedDeviceBasicInformationClusterKeepActiveParamsable interface {
+	Unwrap() *raw.MTRBridgedDeviceBasicInformationClusterKeepActiveParams
+	WithStayActiveDuration(stayActiveDuration *foundation.NSNumber) *MTRBridgedDeviceBasicInformationClusterKeepActiveParams
+	WithTimeoutMs(timeoutMs *foundation.NSNumber) *MTRBridgedDeviceBasicInformationClusterKeepActiveParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRBridgedDeviceBasicInformationClusterKeepActiveParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRBridgedDeviceBasicInformationClusterKeepActiveParams
+	StayActiveDuration() *foundation.NSNumber
+	SetStayActiveDuration(stayActiveDuration *foundation.NSNumber)
+	TimeoutMs() *foundation.NSNumber
+	SetTimeoutMs(timeoutMs *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRBridgedDeviceBasicInformationClusterKeepActiveParamsable = (*MTRBridgedDeviceBasicInformationClusterKeepActiveParams)(nil)
+

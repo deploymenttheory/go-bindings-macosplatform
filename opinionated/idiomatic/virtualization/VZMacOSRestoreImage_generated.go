@@ -5,7 +5,9 @@
 package virtualization
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +24,39 @@ func NewMacOSRestoreImage() *MacOSRestoreImage {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZMacOSRestoreImage")), objc.RegisterName("new"))
 	return &MacOSRestoreImage{inner: raw.VZMacOSRestoreImageFromID(_id)}
 }
+
+// IsSupported calls the underlying IsSupported.
+func (x *MacOSRestoreImage) IsSupported() bool {
+	return x.inner.IsSupported()
+}
+
+// URL calls the underlying URL.
+func (x *MacOSRestoreImage) URL() *foundation.NSURL {
+	return x.inner.URL()
+}
+
+// BuildVersion calls the underlying BuildVersion.
+func (x *MacOSRestoreImage) BuildVersion() string {
+	_r := x.inner.BuildVersion()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// OperatingSystemVersion calls the underlying OperatingSystemVersion.
+func (x *MacOSRestoreImage) OperatingSystemVersion() foundation.NSOperatingSystemVersion {
+	return x.inner.OperatingSystemVersion()
+}
+
+// MacOSRestoreImageable is the interface implemented by [MacOSRestoreImage], for mocking and DI.
+type MacOSRestoreImageable interface {
+	Unwrap() *raw.VZMacOSRestoreImage
+	IsSupported() bool
+	URL() *foundation.NSURL
+	BuildVersion() string
+	OperatingSystemVersion() foundation.NSOperatingSystemVersion
+}
+
+var _ MacOSRestoreImageable = (*MacOSRestoreImage)(nil)
 

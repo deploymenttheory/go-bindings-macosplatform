@@ -30,5 +30,25 @@ func (x *DeferredPaymentSummaryItem) WithDeferredDate(deferredDate *foundation.N
 	return x
 }
 
+// DeferredDate calls the underlying DeferredDate.
+func (x *DeferredPaymentSummaryItem) DeferredDate() *foundation.NSDate {
+	return x.inner.DeferredDate()
+}
+
+// SetDeferredDate calls the underlying SetDeferredDate.
+func (x *DeferredPaymentSummaryItem) SetDeferredDate(deferredDate *foundation.NSDate) {
+	x.inner.SetDeferredDate(deferredDate)
+}
+
 func (x *DeferredPaymentSummaryItem) asPaymentSummaryItem() *raw.PKPaymentSummaryItem { return &x.inner.PKPaymentSummaryItem }
+
+// DeferredPaymentSummaryItemable is the interface implemented by [DeferredPaymentSummaryItem], for mocking and DI.
+type DeferredPaymentSummaryItemable interface {
+	Unwrap() *raw.PKDeferredPaymentSummaryItem
+	WithDeferredDate(deferredDate *foundation.NSDate) *DeferredPaymentSummaryItem
+	DeferredDate() *foundation.NSDate
+	SetDeferredDate(deferredDate *foundation.NSDate)
+}
+
+var _ DeferredPaymentSummaryItemable = (*DeferredPaymentSummaryItem)(nil)
 

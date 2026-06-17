@@ -25,3 +25,10 @@ func NewFragmentedAssetTrack() *FragmentedAssetTrack {
 
 func (x *FragmentedAssetTrack) asAssetTrack() *raw.AVAssetTrack { return &x.inner.AVAssetTrack }
 
+// FragmentedAssetTrackable is the interface implemented by [FragmentedAssetTrack], for mocking and DI.
+type FragmentedAssetTrackable interface {
+	Unwrap() *raw.AVFragmentedAssetTrack
+}
+
+var _ FragmentedAssetTrackable = (*FragmentedAssetTrack)(nil)
+

@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +23,29 @@ func NewMTRAttributeRequestPath() *MTRAttributeRequestPath {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRAttributeRequestPath")), objc.RegisterName("new"))
 	return &MTRAttributeRequestPath{inner: raw.MTRAttributeRequestPathFromID(_id)}
 }
+
+// Endpoint calls the underlying Endpoint.
+func (x *MTRAttributeRequestPath) Endpoint() *foundation.NSNumber {
+	return x.inner.Endpoint()
+}
+
+// Cluster calls the underlying Cluster.
+func (x *MTRAttributeRequestPath) Cluster() *foundation.NSNumber {
+	return x.inner.Cluster()
+}
+
+// Attribute calls the underlying Attribute.
+func (x *MTRAttributeRequestPath) Attribute() *foundation.NSNumber {
+	return x.inner.Attribute()
+}
+
+// MTRAttributeRequestPathable is the interface implemented by [MTRAttributeRequestPath], for mocking and DI.
+type MTRAttributeRequestPathable interface {
+	Unwrap() *raw.MTRAttributeRequestPath
+	Endpoint() *foundation.NSNumber
+	Cluster() *foundation.NSNumber
+	Attribute() *foundation.NSNumber
+}
+
+var _ MTRAttributeRequestPathable = (*MTRAttributeRequestPath)(nil)
 

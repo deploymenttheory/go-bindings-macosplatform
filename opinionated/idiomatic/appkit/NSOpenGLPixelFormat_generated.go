@@ -40,3 +40,40 @@ func NewOpenGLPixelFormatWithData(attribs *foundation.NSData) *OpenGLPixelFormat
 	return &OpenGLPixelFormat{inner: raw.NSOpenGLPixelFormatFromID(_id)}
 }
 
+// Attributes calls the underlying Attributes.
+func (x *OpenGLPixelFormat) Attributes() *foundation.NSData {
+	return x.inner.Attributes()
+}
+
+// SetAttributes calls the underlying SetAttributes.
+func (x *OpenGLPixelFormat) SetAttributes(attribs *foundation.NSData) {
+	x.inner.SetAttributes(attribs)
+}
+
+// GetValuesForAttributeForVirtualScreen calls the underlying GetValuesForAttributeForVirtualScreen.
+func (x *OpenGLPixelFormat) GetValuesForAttributeForVirtualScreen(vals *int32, attrib uint32, screen int32) {
+	x.inner.GetValuesForAttributeForVirtualScreen(vals, attrib, screen)
+}
+
+// NumberOfVirtualScreens calls the underlying NumberOfVirtualScreens.
+func (x *OpenGLPixelFormat) NumberOfVirtualScreens() int32 {
+	return x.inner.NumberOfVirtualScreens()
+}
+
+// CGLPixelFormatObj calls the underlying CGLPixelFormatObj.
+func (x *OpenGLPixelFormat) CGLPixelFormatObj() unsafe.Pointer {
+	return x.inner.CGLPixelFormatObj()
+}
+
+// OpenGLPixelFormatable is the interface implemented by [OpenGLPixelFormat], for mocking and DI.
+type OpenGLPixelFormatable interface {
+	Unwrap() *raw.NSOpenGLPixelFormat
+	Attributes() *foundation.NSData
+	SetAttributes(attribs *foundation.NSData)
+	GetValuesForAttributeForVirtualScreen(vals *int32, attrib uint32, screen int32)
+	NumberOfVirtualScreens() int32
+	CGLPixelFormatObj() unsafe.Pointer
+}
+
+var _ OpenGLPixelFormatable = (*OpenGLPixelFormat)(nil)
+

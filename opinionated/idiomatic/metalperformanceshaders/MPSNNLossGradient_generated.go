@@ -11,6 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // NNLossGradient wraps [raw.MPSNNLossGradient] with a fluent Go API.
@@ -65,7 +66,115 @@ func (x *NNLossGradient) WithComputeLabelGradients(computeLabelGradients bool) *
 	return x
 }
 
+// EncodeBatchToCommandBufferSourceGradientsSourceImagesLabelsWeightsSourceStates calls the underlying EncodeBatchToCommandBufferSourceGradientsSourceImagesLabelsWeightsSourceStates.
+func (x *NNLossGradient) EncodeBatchToCommandBufferSourceGradientsSourceImagesLabelsWeightsSourceStates(commandBuffer metal.MTLCommandBuffer, sourceGradients unsafe.Pointer, sourceImages unsafe.Pointer, labels unsafe.Pointer, weights unsafe.Pointer, sourceStates unsafe.Pointer) unsafe.Pointer {
+	return x.inner.EncodeBatchToCommandBufferSourceGradientsSourceImagesLabelsWeightsSourceStates(commandBuffer, sourceGradients, sourceImages, labels, weights, sourceStates)
+}
+
+// EncodeBatchToCommandBufferSourceGradientsSourceImagesLabelsWeightsSourceStatesDestinationGradients calls the underlying EncodeBatchToCommandBufferSourceGradientsSourceImagesLabelsWeightsSourceStatesDestinationGradients.
+func (x *NNLossGradient) EncodeBatchToCommandBufferSourceGradientsSourceImagesLabelsWeightsSourceStatesDestinationGradients(commandBuffer metal.MTLCommandBuffer, sourceGradients unsafe.Pointer, sourceImages unsafe.Pointer, labels unsafe.Pointer, weights unsafe.Pointer, sourceStates unsafe.Pointer, destinationGradients unsafe.Pointer) {
+	x.inner.EncodeBatchToCommandBufferSourceGradientsSourceImagesLabelsWeightsSourceStatesDestinationGradients(commandBuffer, sourceGradients, sourceImages, labels, weights, sourceStates, destinationGradients)
+}
+
+// LossType calls the underlying LossType.
+func (x *NNLossGradient) LossType() mpsneuralnetwork.MPSCNNLossType {
+	return x.inner.LossType()
+}
+
+// ReductionType calls the underlying ReductionType.
+func (x *NNLossGradient) ReductionType() mpsneuralnetwork.MPSCNNReductionType {
+	return x.inner.ReductionType()
+}
+
+// ReduceAcrossBatch calls the underlying ReduceAcrossBatch.
+func (x *NNLossGradient) ReduceAcrossBatch() bool {
+	return x.inner.ReduceAcrossBatch()
+}
+
+// NumberOfClasses calls the underlying NumberOfClasses.
+func (x *NNLossGradient) NumberOfClasses() uint {
+	return x.inner.NumberOfClasses()
+}
+
+// Weight calls the underlying Weight.
+func (x *NNLossGradient) Weight() float32 {
+	return x.inner.Weight()
+}
+
+// SetWeight calls the underlying SetWeight.
+func (x *NNLossGradient) SetWeight(weight float32) {
+	x.inner.SetWeight(weight)
+}
+
+// LabelSmoothing calls the underlying LabelSmoothing.
+func (x *NNLossGradient) LabelSmoothing() float32 {
+	return x.inner.LabelSmoothing()
+}
+
+// SetLabelSmoothing calls the underlying SetLabelSmoothing.
+func (x *NNLossGradient) SetLabelSmoothing(labelSmoothing float32) {
+	x.inner.SetLabelSmoothing(labelSmoothing)
+}
+
+// Epsilon calls the underlying Epsilon.
+func (x *NNLossGradient) Epsilon() float32 {
+	return x.inner.Epsilon()
+}
+
+// SetEpsilon calls the underlying SetEpsilon.
+func (x *NNLossGradient) SetEpsilon(epsilon float32) {
+	x.inner.SetEpsilon(epsilon)
+}
+
+// Delta calls the underlying Delta.
+func (x *NNLossGradient) Delta() float32 {
+	return x.inner.Delta()
+}
+
+// SetDelta calls the underlying SetDelta.
+func (x *NNLossGradient) SetDelta(delta float32) {
+	x.inner.SetDelta(delta)
+}
+
+// ComputeLabelGradients calls the underlying ComputeLabelGradients.
+func (x *NNLossGradient) ComputeLabelGradients() bool {
+	return x.inner.ComputeLabelGradients()
+}
+
+// SetComputeLabelGradients calls the underlying SetComputeLabelGradients.
+func (x *NNLossGradient) SetComputeLabelGradients(computeLabelGradients bool) {
+	x.inner.SetComputeLabelGradients(computeLabelGradients)
+}
+
 func (x *NNLossGradient) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel { return &x.inner.MPSCNNBinaryKernel }
 
 func (x *NNLossGradient) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNBinaryKernel.MPSKernel }
+
+// NNLossGradientable is the interface implemented by [NNLossGradient], for mocking and DI.
+type NNLossGradientable interface {
+	Unwrap() *raw.MPSNNLossGradient
+	WithWeight(weight float32) *NNLossGradient
+	WithLabelSmoothing(labelSmoothing float32) *NNLossGradient
+	WithEpsilon(epsilon float32) *NNLossGradient
+	WithDelta(delta float32) *NNLossGradient
+	WithComputeLabelGradients(computeLabelGradients bool) *NNLossGradient
+	EncodeBatchToCommandBufferSourceGradientsSourceImagesLabelsWeightsSourceStates(commandBuffer metal.MTLCommandBuffer, sourceGradients unsafe.Pointer, sourceImages unsafe.Pointer, labels unsafe.Pointer, weights unsafe.Pointer, sourceStates unsafe.Pointer) unsafe.Pointer
+	EncodeBatchToCommandBufferSourceGradientsSourceImagesLabelsWeightsSourceStatesDestinationGradients(commandBuffer metal.MTLCommandBuffer, sourceGradients unsafe.Pointer, sourceImages unsafe.Pointer, labels unsafe.Pointer, weights unsafe.Pointer, sourceStates unsafe.Pointer, destinationGradients unsafe.Pointer)
+	LossType() mpsneuralnetwork.MPSCNNLossType
+	ReductionType() mpsneuralnetwork.MPSCNNReductionType
+	ReduceAcrossBatch() bool
+	NumberOfClasses() uint
+	Weight() float32
+	SetWeight(weight float32)
+	LabelSmoothing() float32
+	SetLabelSmoothing(labelSmoothing float32)
+	Epsilon() float32
+	SetEpsilon(epsilon float32)
+	Delta() float32
+	SetDelta(delta float32)
+	ComputeLabelGradients() bool
+	SetComputeLabelGradients(computeLabelGradients bool)
+}
+
+var _ NNLossGradientable = (*NNLossGradient)(nil)
 

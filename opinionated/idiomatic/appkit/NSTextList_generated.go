@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -44,4 +45,56 @@ func (x *TextList) WithStartingItemNumber(startingItemNumber int) *TextList {
 	x.inner.SetStartingItemNumber(startingItemNumber)
 	return x
 }
+
+// MarkerForItemNumber calls the underlying MarkerForItemNumber.
+func (x *TextList) MarkerForItemNumber(itemNumber int) string {
+	_r := x.inner.MarkerForItemNumber(itemNumber)
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// MarkerFormat calls the underlying MarkerFormat.
+func (x *TextList) MarkerFormat() string {
+	_r := x.inner.MarkerFormat()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ListOptions calls the underlying ListOptions.
+func (x *TextList) ListOptions() raw.NSTextListOptions {
+	return x.inner.ListOptions()
+}
+
+// StartingItemNumber calls the underlying StartingItemNumber.
+func (x *TextList) StartingItemNumber() int {
+	return x.inner.StartingItemNumber()
+}
+
+// SetStartingItemNumber calls the underlying SetStartingItemNumber.
+func (x *TextList) SetStartingItemNumber(startingItemNumber int) {
+	x.inner.SetStartingItemNumber(startingItemNumber)
+}
+
+// IsOrdered calls the underlying IsOrdered.
+func (x *TextList) IsOrdered() bool {
+	return x.inner.IsOrdered()
+}
+
+// TextListable is the interface implemented by [TextList], for mocking and DI.
+type TextListable interface {
+	Unwrap() *raw.NSTextList
+	WithStartingItemNumber(startingItemNumber int) *TextList
+	MarkerForItemNumber(itemNumber int) string
+	MarkerFormat() string
+	ListOptions() raw.NSTextListOptions
+	StartingItemNumber() int
+	SetStartingItemNumber(startingItemNumber int)
+	IsOrdered() bool
+}
+
+var _ TextListable = (*TextList)(nil)
 

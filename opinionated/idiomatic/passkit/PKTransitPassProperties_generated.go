@@ -5,7 +5,9 @@
 package passkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,7 +25,36 @@ func NewTransitPassProperties() *TransitPassProperties {
 	return &TransitPassProperties{inner: raw.PKTransitPassPropertiesFromID(_id)}
 }
 
+// TransitBalance calls the underlying TransitBalance.
+func (x *TransitPassProperties) TransitBalance() *foundation.NSDecimalNumber {
+	return x.inner.TransitBalance()
+}
+
+// TransitBalanceCurrencyCode calls the underlying TransitBalanceCurrencyCode.
+func (x *TransitPassProperties) TransitBalanceCurrencyCode() string {
+	_r := x.inner.TransitBalanceCurrencyCode()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// IsInStation calls the underlying IsInStation.
+func (x *TransitPassProperties) IsInStation() bool {
+	return x.inner.IsInStation()
+}
+
 func (x *TransitPassProperties) asTransitPassProperties() *raw.PKTransitPassProperties { return x.inner }
 
 func (x *TransitPassProperties) asStoredValuePassProperties() *raw.PKStoredValuePassProperties { return &x.inner.PKStoredValuePassProperties }
+
+// TransitPassPropertiesable is the interface implemented by [TransitPassProperties], for mocking and DI.
+type TransitPassPropertiesable interface {
+	Unwrap() *raw.PKTransitPassProperties
+	TransitBalance() *foundation.NSDecimalNumber
+	TransitBalanceCurrencyCode() string
+	IsInStation() bool
+}
+
+var _ TransitPassPropertiesable = (*TransitPassProperties)(nil)
 

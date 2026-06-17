@@ -7,6 +7,7 @@ package intents
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,4 +25,27 @@ func NewCurrencyAmountWithAmountCurrencyCode(amount *foundation.NSDecimalNumber,
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAmount:currencyCode:"), amount.Ptr(), foundation.NSStringStringWithUTF8String(currencyCode).Ptr())
 	return &CurrencyAmount{inner: raw.INCurrencyAmountFromID(_id)}
 }
+
+// Amount calls the underlying Amount.
+func (x *CurrencyAmount) Amount() *foundation.NSDecimalNumber {
+	return x.inner.Amount()
+}
+
+// CurrencyCode calls the underlying CurrencyCode.
+func (x *CurrencyAmount) CurrencyCode() string {
+	_r := x.inner.CurrencyCode()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// CurrencyAmountable is the interface implemented by [CurrencyAmount], for mocking and DI.
+type CurrencyAmountable interface {
+	Unwrap() *raw.INCurrencyAmount
+	Amount() *foundation.NSDecimalNumber
+	CurrencyCode() string
+}
+
+var _ CurrencyAmountable = (*CurrencyAmount)(nil)
 

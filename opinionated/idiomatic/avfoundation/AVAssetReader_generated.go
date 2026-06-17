@@ -37,16 +37,81 @@ func (x *AssetReader) WithTimeRange(timeRange coremedia.CMTimeRange) *AssetReade
 	return x
 }
 
+// CanAddOutput calls the underlying CanAddOutput.
+func (x *AssetReader) CanAddOutput(output *raw.AVAssetReaderOutput) bool {
+	return x.inner.CanAddOutput(output)
+}
+
+// AddOutput calls the underlying AddOutput.
+func (x *AssetReader) AddOutput(output *raw.AVAssetReaderOutput) {
+	x.inner.AddOutput(output)
+}
+
+// StartReading calls the underlying StartReading.
+func (x *AssetReader) StartReading() bool {
+	return x.inner.StartReading()
+}
+
+// CancelReading calls the underlying CancelReading.
+func (x *AssetReader) CancelReading() {
+	x.inner.CancelReading()
+}
+
+// Asset calls the underlying Asset.
+func (x *AssetReader) Asset() *Asset {
+	_r := x.inner.Asset()
+	if _r == nil {
+		return nil
+	}
+	return &Asset{inner: _r}
+}
+
+// Status calls the underlying Status.
+func (x *AssetReader) Status() raw.AVAssetReaderStatus {
+	return x.inner.Status()
+}
+
+// Error calls the underlying Error.
+func (x *AssetReader) Error() unsafe.Pointer {
+	return x.inner.Error()
+}
+
+// TimeRange calls the underlying TimeRange.
+func (x *AssetReader) TimeRange() coremedia.CMTimeRange {
+	return x.inner.TimeRange()
+}
+
+// SetTimeRange calls the underlying SetTimeRange.
+func (x *AssetReader) SetTimeRange(timeRange coremedia.CMTimeRange) {
+	x.inner.SetTimeRange(timeRange)
+}
+
 // Outputs returns the collection as a Go slice.
 func (x *AssetReader) Outputs() []*raw.AVAssetReaderOutput {
 	arr := x.inner.Outputs()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AVAssetReaderOutput, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVAssetReaderOutput {
+		return raw.AVAssetReaderOutputFromID(purego.Retain(_id))
+	})
 }
+
+// AssetReaderable is the interface implemented by [AssetReader], for mocking and DI.
+type AssetReaderable interface {
+	Unwrap() *raw.AVAssetReader
+	WithTimeRange(timeRange coremedia.CMTimeRange) *AssetReader
+	CanAddOutput(output *raw.AVAssetReaderOutput) bool
+	AddOutput(output *raw.AVAssetReaderOutput)
+	StartReading() bool
+	CancelReading()
+	Asset() *Asset
+	Status() raw.AVAssetReaderStatus
+	Error() unsafe.Pointer
+	TimeRange() coremedia.CMTimeRange
+	SetTimeRange(timeRange coremedia.CMTimeRange)
+	Outputs() []*raw.AVAssetReaderOutput
+}
+
+var _ AssetReaderable = (*AssetReader)(nil)
 

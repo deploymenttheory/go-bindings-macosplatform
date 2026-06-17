@@ -6,6 +6,7 @@ package modelio
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,31 @@ func NewTransformOrientOp() *TransformOrientOp {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLTransformOrientOp")), objc.RegisterName("new"))
 	return &TransformOrientOp{inner: raw.MDLTransformOrientOpFromID(_id)}
 }
+
+// Name calls the underlying Name.
+func (x *TransformOrientOp) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// AnimatedValue calls the underlying AnimatedValue.
+func (x *TransformOrientOp) AnimatedValue() *AnimatedQuaternion {
+	_r := x.inner.AnimatedValue()
+	if _r == nil {
+		return nil
+	}
+	return &AnimatedQuaternion{inner: _r}
+}
+
+// TransformOrientOpable is the interface implemented by [TransformOrientOp], for mocking and DI.
+type TransformOrientOpable interface {
+	Unwrap() *raw.MDLTransformOrientOp
+	Name() string
+	AnimatedValue() *AnimatedQuaternion
+}
+
+var _ TransformOrientOpable = (*TransformOrientOp)(nil)
 

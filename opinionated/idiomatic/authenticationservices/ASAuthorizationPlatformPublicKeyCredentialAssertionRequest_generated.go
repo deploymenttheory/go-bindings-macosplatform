@@ -7,6 +7,7 @@ package authenticationservices
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -59,12 +60,59 @@ func (x *AuthorizationPlatformPublicKeyCredentialAssertionRequest) AllowedCreden
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.ASAuthorizationPlatformPublicKeyCredentialDescriptor, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.ASAuthorizationPlatformPublicKeyCredentialDescriptor {
+		return raw.ASAuthorizationPlatformPublicKeyCredentialDescriptorFromID(purego.Retain(_id))
+	})
+}
+
+// SetAllowedCredentials calls the underlying SetAllowedCredentials.
+func (x *AuthorizationPlatformPublicKeyCredentialAssertionRequest) SetAllowedCredentials(allowedCredentials *foundation.NSArray[*raw.ASAuthorizationPlatformPublicKeyCredentialDescriptor]) {
+	x.inner.SetAllowedCredentials(allowedCredentials)
+}
+
+// LargeBlob calls the underlying LargeBlob.
+func (x *AuthorizationPlatformPublicKeyCredentialAssertionRequest) LargeBlob() *AuthorizationPublicKeyCredentialLargeBlobAssertionInput {
+	_r := x.inner.LargeBlob()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &AuthorizationPublicKeyCredentialLargeBlobAssertionInput{inner: _r}
+}
+
+// SetLargeBlob calls the underlying SetLargeBlob.
+func (x *AuthorizationPlatformPublicKeyCredentialAssertionRequest) SetLargeBlob(largeBlob *raw.ASAuthorizationPublicKeyCredentialLargeBlobAssertionInput) {
+	x.inner.SetLargeBlob(largeBlob)
+}
+
+// Prf calls the underlying Prf.
+func (x *AuthorizationPlatformPublicKeyCredentialAssertionRequest) Prf() *AuthorizationPublicKeyCredentialPRFAssertionInput {
+	_r := x.inner.Prf()
+	if _r == nil {
+		return nil
+	}
+	return &AuthorizationPublicKeyCredentialPRFAssertionInput{inner: _r}
+}
+
+// SetPrf calls the underlying SetPrf.
+func (x *AuthorizationPlatformPublicKeyCredentialAssertionRequest) SetPrf(prf *raw.ASAuthorizationPublicKeyCredentialPRFAssertionInput) {
+	x.inner.SetPrf(prf)
 }
 
 func (x *AuthorizationPlatformPublicKeyCredentialAssertionRequest) asAuthorizationRequest() *raw.ASAuthorizationRequest { return &x.inner.ASAuthorizationRequest }
+
+// AuthorizationPlatformPublicKeyCredentialAssertionRequestable is the interface implemented by [AuthorizationPlatformPublicKeyCredentialAssertionRequest], for mocking and DI.
+type AuthorizationPlatformPublicKeyCredentialAssertionRequestable interface {
+	Unwrap() *raw.ASAuthorizationPlatformPublicKeyCredentialAssertionRequest
+	WithAllowedCredentials(items ...*raw.ASAuthorizationPlatformPublicKeyCredentialDescriptor) *AuthorizationPlatformPublicKeyCredentialAssertionRequest
+	WithLargeBlob(largeBlob *raw.ASAuthorizationPublicKeyCredentialLargeBlobAssertionInput) *AuthorizationPlatformPublicKeyCredentialAssertionRequest
+	WithPrf(prf *raw.ASAuthorizationPublicKeyCredentialPRFAssertionInput) *AuthorizationPlatformPublicKeyCredentialAssertionRequest
+	AllowedCredentials() []*raw.ASAuthorizationPlatformPublicKeyCredentialDescriptor
+	SetAllowedCredentials(allowedCredentials *foundation.NSArray[*raw.ASAuthorizationPlatformPublicKeyCredentialDescriptor])
+	LargeBlob() *AuthorizationPublicKeyCredentialLargeBlobAssertionInput
+	SetLargeBlob(largeBlob *raw.ASAuthorizationPublicKeyCredentialLargeBlobAssertionInput)
+	Prf() *AuthorizationPublicKeyCredentialPRFAssertionInput
+	SetPrf(prf *raw.ASAuthorizationPublicKeyCredentialPRFAssertionInput)
+}
+
+var _ AuthorizationPlatformPublicKeyCredentialAssertionRequestable = (*AuthorizationPlatformPublicKeyCredentialAssertionRequest)(nil)
 

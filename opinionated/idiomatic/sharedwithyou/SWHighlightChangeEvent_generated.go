@@ -5,6 +5,7 @@
 package sharedwithyou
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/sharedwithyou"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,4 +24,23 @@ func NewHighlightChangeEventWithHighlightTrigger(highlight *raw.SWHighlight, tri
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHighlight:trigger:"), highlight.Ptr(), trigger)
 	return &HighlightChangeEvent{inner: raw.SWHighlightChangeEventFromID(_id)}
 }
+
+// ChangeEventTrigger calls the underlying ChangeEventTrigger.
+func (x *HighlightChangeEvent) ChangeEventTrigger() raw.SWHighlightChangeEventTrigger {
+	return x.inner.ChangeEventTrigger()
+}
+
+// HighlightURL calls the underlying HighlightURL.
+func (x *HighlightChangeEvent) HighlightURL() *foundation.NSURL {
+	return x.inner.HighlightURL()
+}
+
+// HighlightChangeEventable is the interface implemented by [HighlightChangeEvent], for mocking and DI.
+type HighlightChangeEventable interface {
+	Unwrap() *raw.SWHighlightChangeEvent
+	ChangeEventTrigger() raw.SWHighlightChangeEventTrigger
+	HighlightURL() *foundation.NSURL
+}
+
+var _ HighlightChangeEventable = (*HighlightChangeEvent)(nil)
 

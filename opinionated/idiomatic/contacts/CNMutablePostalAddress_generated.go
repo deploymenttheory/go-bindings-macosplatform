@@ -72,5 +72,68 @@ func (x *MutablePostalAddress) WithISOCountryCode(iSOCountryCode string) *Mutabl
 	return x
 }
 
+// SetStreet calls the underlying SetStreet.
+func (x *MutablePostalAddress) SetStreet(street string) {
+	x.inner.SetStreet(foundation.NSStringStringWithUTF8String(street))
+}
+
+// SetSubLocality calls the underlying SetSubLocality.
+func (x *MutablePostalAddress) SetSubLocality(subLocality string) {
+	x.inner.SetSubLocality(foundation.NSStringStringWithUTF8String(subLocality))
+}
+
+// SetCity calls the underlying SetCity.
+func (x *MutablePostalAddress) SetCity(city string) {
+	x.inner.SetCity(foundation.NSStringStringWithUTF8String(city))
+}
+
+// SetSubAdministrativeArea calls the underlying SetSubAdministrativeArea.
+func (x *MutablePostalAddress) SetSubAdministrativeArea(subAdministrativeArea string) {
+	x.inner.SetSubAdministrativeArea(foundation.NSStringStringWithUTF8String(subAdministrativeArea))
+}
+
+// SetState calls the underlying SetState.
+func (x *MutablePostalAddress) SetState(state string) {
+	x.inner.SetState(foundation.NSStringStringWithUTF8String(state))
+}
+
+// SetPostalCode calls the underlying SetPostalCode.
+func (x *MutablePostalAddress) SetPostalCode(postalCode string) {
+	x.inner.SetPostalCode(foundation.NSStringStringWithUTF8String(postalCode))
+}
+
+// SetCountry calls the underlying SetCountry.
+func (x *MutablePostalAddress) SetCountry(country string) {
+	x.inner.SetCountry(foundation.NSStringStringWithUTF8String(country))
+}
+
+// SetISOCountryCode calls the underlying SetISOCountryCode.
+func (x *MutablePostalAddress) SetISOCountryCode(iSOCountryCode string) {
+	x.inner.SetISOCountryCode(foundation.NSStringStringWithUTF8String(iSOCountryCode))
+}
+
 func (x *MutablePostalAddress) asPostalAddress() *raw.CNPostalAddress { return &x.inner.CNPostalAddress }
+
+// MutablePostalAddressable is the interface implemented by [MutablePostalAddress], for mocking and DI.
+type MutablePostalAddressable interface {
+	Unwrap() *raw.CNMutablePostalAddress
+	WithStreet(street string) *MutablePostalAddress
+	WithSubLocality(subLocality string) *MutablePostalAddress
+	WithCity(city string) *MutablePostalAddress
+	WithSubAdministrativeArea(subAdministrativeArea string) *MutablePostalAddress
+	WithState(state string) *MutablePostalAddress
+	WithPostalCode(postalCode string) *MutablePostalAddress
+	WithCountry(country string) *MutablePostalAddress
+	WithISOCountryCode(iSOCountryCode string) *MutablePostalAddress
+	SetStreet(street string)
+	SetSubLocality(subLocality string)
+	SetCity(city string)
+	SetSubAdministrativeArea(subAdministrativeArea string)
+	SetState(state string)
+	SetPostalCode(postalCode string)
+	SetCountry(country string)
+	SetISOCountryCode(iSOCountryCode string)
+}
+
+var _ MutablePostalAddressable = (*MutablePostalAddress)(nil)
 

@@ -29,6 +29,16 @@ func (x *StatusBarButton) WithAppearsDisabled(appearsDisabled bool) *StatusBarBu
 	return x
 }
 
+// AppearsDisabled calls the underlying AppearsDisabled.
+func (x *StatusBarButton) AppearsDisabled() bool {
+	return x.inner.AppearsDisabled()
+}
+
+// SetAppearsDisabled calls the underlying SetAppearsDisabled.
+func (x *StatusBarButton) SetAppearsDisabled(appearsDisabled bool) {
+	x.inner.SetAppearsDisabled(appearsDisabled)
+}
+
 func (x *StatusBarButton) asButton() *raw.NSButton { return &x.inner.NSButton }
 
 func (x *StatusBarButton) asControl() *raw.NSControl { return &x.inner.NSButton.NSControl }
@@ -36,4 +46,14 @@ func (x *StatusBarButton) asControl() *raw.NSControl { return &x.inner.NSButton.
 func (x *StatusBarButton) asView() *raw.NSView { return &x.inner.NSButton.NSControl.NSView }
 
 func (x *StatusBarButton) asResponder() *raw.NSResponder { return &x.inner.NSButton.NSControl.NSView.NSResponder }
+
+// StatusBarButtonable is the interface implemented by [StatusBarButton], for mocking and DI.
+type StatusBarButtonable interface {
+	Unwrap() *raw.NSStatusBarButton
+	WithAppearsDisabled(appearsDisabled bool) *StatusBarButton
+	AppearsDisabled() bool
+	SetAppearsDisabled(appearsDisabled bool)
+}
+
+var _ StatusBarButtonable = (*StatusBarButton)(nil)
 

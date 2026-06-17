@@ -25,3 +25,10 @@ func NewNETransparentProxyManager() *NETransparentProxyManager {
 
 func (x *NETransparentProxyManager) asNEVPNManager() *raw.NEVPNManager { return &x.inner.NEVPNManager }
 
+// NETransparentProxyManagerable is the interface implemented by [NETransparentProxyManager], for mocking and DI.
+type NETransparentProxyManagerable interface {
+	Unwrap() *raw.NETransparentProxyManager
+}
+
+var _ NETransparentProxyManagerable = (*NETransparentProxyManager)(nil)
+

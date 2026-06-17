@@ -23,3 +23,10 @@ func NewScrollEdgeEffectStyle() *ScrollEdgeEffectStyle {
 	return &ScrollEdgeEffectStyle{inner: raw.NSScrollEdgeEffectStyleFromID(_id)}
 }
 
+// ScrollEdgeEffectStyleable is the interface implemented by [ScrollEdgeEffectStyle], for mocking and DI.
+type ScrollEdgeEffectStyleable interface {
+	Unwrap() *raw.NSScrollEdgeEffectStyle
+}
+
+var _ ScrollEdgeEffectStyleable = (*ScrollEdgeEffectStyle)(nil)
+

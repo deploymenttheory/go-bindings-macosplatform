@@ -7,6 +7,7 @@ package modelio
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // AnimatedVector3Array wraps [raw.MDLAnimatedVector3Array] with a fluent Go API.
@@ -24,5 +25,66 @@ func NewAnimatedVector3ArrayWithElementCount(arrayElementCount uint) *AnimatedVe
 	return &AnimatedVector3Array{inner: raw.MDLAnimatedVector3ArrayFromID(_id)}
 }
 
+// SetFloat3ArrayCountAtTime calls the underlying SetFloat3ArrayCountAtTime.
+func (x *AnimatedVector3Array) SetFloat3ArrayCountAtTime(array unsafe.Pointer, count uint, time_ float64) {
+	x.inner.SetFloat3ArrayCountAtTime(array, count, time_)
+}
+
+// SetDouble3ArrayCountAtTime calls the underlying SetDouble3ArrayCountAtTime.
+func (x *AnimatedVector3Array) SetDouble3ArrayCountAtTime(array unsafe.Pointer, count uint, time_ float64) {
+	x.inner.SetDouble3ArrayCountAtTime(array, count, time_)
+}
+
+// GetFloat3ArrayMaxCountAtTime calls the underlying GetFloat3ArrayMaxCountAtTime.
+func (x *AnimatedVector3Array) GetFloat3ArrayMaxCountAtTime(array unsafe.Pointer, maxCount uint, time_ float64) uint {
+	return x.inner.GetFloat3ArrayMaxCountAtTime(array, maxCount, time_)
+}
+
+// GetDouble3ArrayMaxCountAtTime calls the underlying GetDouble3ArrayMaxCountAtTime.
+func (x *AnimatedVector3Array) GetDouble3ArrayMaxCountAtTime(array unsafe.Pointer, maxCount uint, time_ float64) uint {
+	return x.inner.GetDouble3ArrayMaxCountAtTime(array, maxCount, time_)
+}
+
+// ResetWithFloat3ArrayCountAtTimesCount calls the underlying ResetWithFloat3ArrayCountAtTimesCount.
+func (x *AnimatedVector3Array) ResetWithFloat3ArrayCountAtTimesCount(valuesArray unsafe.Pointer, valuesCount uint, timesArray *float64, timesCount uint) {
+	x.inner.ResetWithFloat3ArrayCountAtTimesCount(valuesArray, valuesCount, timesArray, timesCount)
+}
+
+// ResetWithDouble3ArrayCountAtTimesCount calls the underlying ResetWithDouble3ArrayCountAtTimesCount.
+func (x *AnimatedVector3Array) ResetWithDouble3ArrayCountAtTimesCount(valuesArray unsafe.Pointer, valuesCount uint, timesArray *float64, timesCount uint) {
+	x.inner.ResetWithDouble3ArrayCountAtTimesCount(valuesArray, valuesCount, timesArray, timesCount)
+}
+
+// GetFloat3ArrayMaxCount calls the underlying GetFloat3ArrayMaxCount.
+func (x *AnimatedVector3Array) GetFloat3ArrayMaxCount(valuesArray unsafe.Pointer, maxCount uint) uint {
+	return x.inner.GetFloat3ArrayMaxCount(valuesArray, maxCount)
+}
+
+// GetDouble3ArrayMaxCount calls the underlying GetDouble3ArrayMaxCount.
+func (x *AnimatedVector3Array) GetDouble3ArrayMaxCount(valuesArray unsafe.Pointer, maxCount uint) uint {
+	return x.inner.GetDouble3ArrayMaxCount(valuesArray, maxCount)
+}
+
+// ElementCount calls the underlying ElementCount.
+func (x *AnimatedVector3Array) ElementCount() uint {
+	return x.inner.ElementCount()
+}
+
 func (x *AnimatedVector3Array) asAnimatedValue() *raw.MDLAnimatedValue { return &x.inner.MDLAnimatedValue }
+
+// AnimatedVector3Arrayable is the interface implemented by [AnimatedVector3Array], for mocking and DI.
+type AnimatedVector3Arrayable interface {
+	Unwrap() *raw.MDLAnimatedVector3Array
+	SetFloat3ArrayCountAtTime(array unsafe.Pointer, count uint, time_ float64)
+	SetDouble3ArrayCountAtTime(array unsafe.Pointer, count uint, time_ float64)
+	GetFloat3ArrayMaxCountAtTime(array unsafe.Pointer, maxCount uint, time_ float64) uint
+	GetDouble3ArrayMaxCountAtTime(array unsafe.Pointer, maxCount uint, time_ float64) uint
+	ResetWithFloat3ArrayCountAtTimesCount(valuesArray unsafe.Pointer, valuesCount uint, timesArray *float64, timesCount uint)
+	ResetWithDouble3ArrayCountAtTimesCount(valuesArray unsafe.Pointer, valuesCount uint, timesArray *float64, timesCount uint)
+	GetFloat3ArrayMaxCount(valuesArray unsafe.Pointer, maxCount uint) uint
+	GetDouble3ArrayMaxCount(valuesArray unsafe.Pointer, maxCount uint) uint
+	ElementCount() uint
+}
+
+var _ AnimatedVector3Arrayable = (*AnimatedVector3Array)(nil)
 

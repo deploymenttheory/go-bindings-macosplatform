@@ -6,6 +6,7 @@ package coreimage
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,23 @@ func NewDetector() *Detector {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CIDetector")), objc.RegisterName("new"))
 	return &Detector{inner: raw.CIDetectorFromID(_id)}
 }
+
+// FeaturesInImage calls the underlying FeaturesInImage.
+func (x *Detector) FeaturesInImage(image *raw.CIImage) *foundation.NSArray[*raw.CIFeature] {
+	return x.inner.FeaturesInImage(image)
+}
+
+// FeaturesInImageOptions calls the underlying FeaturesInImageOptions.
+func (x *Detector) FeaturesInImageOptions(image *raw.CIImage, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSArray[*raw.CIFeature] {
+	return x.inner.FeaturesInImageOptions(image, options)
+}
+
+// Detectorable is the interface implemented by [Detector], for mocking and DI.
+type Detectorable interface {
+	Unwrap() *raw.CIDetector
+	FeaturesInImage(image *raw.CIImage) *foundation.NSArray[*raw.CIFeature]
+	FeaturesInImageOptions(image *raw.CIImage, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSArray[*raw.CIFeature]
+}
+
+var _ Detectorable = (*Detector)(nil)
 

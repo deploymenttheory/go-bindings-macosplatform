@@ -24,5 +24,46 @@ func NewTextTableBlockWithTableStartingRowRowSpanStartingColumnColumnSpan(table 
 	return &TextTableBlock{inner: raw.NSTextTableBlockFromID(_id)}
 }
 
+// Table calls the underlying Table.
+func (x *TextTableBlock) Table() *TextTable {
+	_r := x.inner.Table()
+	if _r == nil {
+		return nil
+	}
+	return &TextTable{inner: _r}
+}
+
+// StartingRow calls the underlying StartingRow.
+func (x *TextTableBlock) StartingRow() int {
+	return x.inner.StartingRow()
+}
+
+// RowSpan calls the underlying RowSpan.
+func (x *TextTableBlock) RowSpan() int {
+	return x.inner.RowSpan()
+}
+
+// StartingColumn calls the underlying StartingColumn.
+func (x *TextTableBlock) StartingColumn() int {
+	return x.inner.StartingColumn()
+}
+
+// ColumnSpan calls the underlying ColumnSpan.
+func (x *TextTableBlock) ColumnSpan() int {
+	return x.inner.ColumnSpan()
+}
+
 func (x *TextTableBlock) asTextBlock() *raw.NSTextBlock { return &x.inner.NSTextBlock }
+
+// TextTableBlockable is the interface implemented by [TextTableBlock], for mocking and DI.
+type TextTableBlockable interface {
+	Unwrap() *raw.NSTextTableBlock
+	Table() *TextTable
+	StartingRow() int
+	RowSpan() int
+	StartingColumn() int
+	ColumnSpan() int
+}
+
+var _ TextTableBlockable = (*TextTableBlock)(nil)
 

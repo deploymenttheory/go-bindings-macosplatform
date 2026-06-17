@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -35,4 +36,53 @@ func (x *MTRRVCCleanModeClusterModeOptionStruct) WithMode(mode *foundation.NSNum
 	x.inner.SetMode(mode)
 	return x
 }
+
+// Label calls the underlying Label.
+func (x *MTRRVCCleanModeClusterModeOptionStruct) Label() string {
+	_r := x.inner.Label()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLabel calls the underlying SetLabel.
+func (x *MTRRVCCleanModeClusterModeOptionStruct) SetLabel(label string) {
+	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+}
+
+// Mode calls the underlying Mode.
+func (x *MTRRVCCleanModeClusterModeOptionStruct) Mode() *foundation.NSNumber {
+	return x.inner.Mode()
+}
+
+// SetMode calls the underlying SetMode.
+func (x *MTRRVCCleanModeClusterModeOptionStruct) SetMode(mode *foundation.NSNumber) {
+	x.inner.SetMode(mode)
+}
+
+// ModeTags calls the underlying ModeTags.
+func (x *MTRRVCCleanModeClusterModeOptionStruct) ModeTags() *foundation.NSArray[objc.ID] {
+	return x.inner.ModeTags()
+}
+
+// SetModeTags calls the underlying SetModeTags.
+func (x *MTRRVCCleanModeClusterModeOptionStruct) SetModeTags(modeTags *foundation.NSArray[objc.ID]) {
+	x.inner.SetModeTags(modeTags)
+}
+
+// MTRRVCCleanModeClusterModeOptionStructable is the interface implemented by [MTRRVCCleanModeClusterModeOptionStruct], for mocking and DI.
+type MTRRVCCleanModeClusterModeOptionStructable interface {
+	Unwrap() *raw.MTRRVCCleanModeClusterModeOptionStruct
+	WithLabel(label string) *MTRRVCCleanModeClusterModeOptionStruct
+	WithMode(mode *foundation.NSNumber) *MTRRVCCleanModeClusterModeOptionStruct
+	Label() string
+	SetLabel(label string)
+	Mode() *foundation.NSNumber
+	SetMode(mode *foundation.NSNumber)
+	ModeTags() *foundation.NSArray[objc.ID]
+	SetModeTags(modeTags *foundation.NSArray[objc.ID])
+}
+
+var _ MTRRVCCleanModeClusterModeOptionStructable = (*MTRRVCCleanModeClusterModeOptionStruct)(nil)
 

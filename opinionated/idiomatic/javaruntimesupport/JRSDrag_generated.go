@@ -23,3 +23,10 @@ func NewDrag() *Drag {
 	return &Drag{inner: raw.JRSDragFromID(_id)}
 }
 
+// Dragable is the interface implemented by [Drag], for mocking and DI.
+type Dragable interface {
+	Unwrap() *raw.JRSDrag
+}
+
+var _ Dragable = (*Drag)(nil)
+

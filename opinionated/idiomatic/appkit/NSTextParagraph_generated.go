@@ -25,7 +25,40 @@ func NewTextParagraphWithAttributedString(attributedString *foundation.NSAttribu
 	return &TextParagraph{inner: raw.NSTextParagraphFromID(_id)}
 }
 
+// AttributedString calls the underlying AttributedString.
+func (x *TextParagraph) AttributedString() *foundation.NSAttributedString {
+	return x.inner.AttributedString()
+}
+
+// ParagraphContentRange calls the underlying ParagraphContentRange.
+func (x *TextParagraph) ParagraphContentRange() *TextRange {
+	_r := x.inner.ParagraphContentRange()
+	if _r == nil {
+		return nil
+	}
+	return &TextRange{inner: _r}
+}
+
+// ParagraphSeparatorRange calls the underlying ParagraphSeparatorRange.
+func (x *TextParagraph) ParagraphSeparatorRange() *TextRange {
+	_r := x.inner.ParagraphSeparatorRange()
+	if _r == nil {
+		return nil
+	}
+	return &TextRange{inner: _r}
+}
+
 func (x *TextParagraph) asTextParagraph() *raw.NSTextParagraph { return x.inner }
 
 func (x *TextParagraph) asTextElement() *raw.NSTextElement { return &x.inner.NSTextElement }
+
+// TextParagraphable is the interface implemented by [TextParagraph], for mocking and DI.
+type TextParagraphable interface {
+	Unwrap() *raw.NSTextParagraph
+	AttributedString() *foundation.NSAttributedString
+	ParagraphContentRange() *TextRange
+	ParagraphSeparatorRange() *TextRange
+}
+
+var _ TextParagraphable = (*TextParagraph)(nil)
 

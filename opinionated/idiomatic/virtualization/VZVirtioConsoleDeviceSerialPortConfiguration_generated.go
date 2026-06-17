@@ -25,3 +25,10 @@ func NewVirtioConsoleDeviceSerialPortConfiguration() *VirtioConsoleDeviceSerialP
 
 func (x *VirtioConsoleDeviceSerialPortConfiguration) asSerialPortConfiguration() *raw.VZSerialPortConfiguration { return &x.inner.VZSerialPortConfiguration }
 
+// VirtioConsoleDeviceSerialPortConfigurationable is the interface implemented by [VirtioConsoleDeviceSerialPortConfiguration], for mocking and DI.
+type VirtioConsoleDeviceSerialPortConfigurationable interface {
+	Unwrap() *raw.VZVirtioConsoleDeviceSerialPortConfiguration
+}
+
+var _ VirtioConsoleDeviceSerialPortConfigurationable = (*VirtioConsoleDeviceSerialPortConfiguration)(nil)
+

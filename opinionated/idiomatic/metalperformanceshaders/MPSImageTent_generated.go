@@ -31,3 +31,10 @@ func (x *ImageTent) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel { return 
 
 func (x *ImageTent) asKernel() *mpscore.MPSKernel { return &x.inner.MPSImageBox.MPSUnaryImageKernel.MPSKernel }
 
+// ImageTentable is the interface implemented by [ImageTent], for mocking and DI.
+type ImageTentable interface {
+	Unwrap() *raw.MPSImageTent
+}
+
+var _ ImageTentable = (*ImageTent)(nil)
+

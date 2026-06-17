@@ -23,3 +23,16 @@ func NewVSAccountManagerResult() *VSAccountManagerResult {
 	return &VSAccountManagerResult{inner: raw.VSAccountManagerResultFromID(_id)}
 }
 
+// Cancel calls the underlying Cancel.
+func (x *VSAccountManagerResult) Cancel() {
+	x.inner.Cancel()
+}
+
+// VSAccountManagerResultable is the interface implemented by [VSAccountManagerResult], for mocking and DI.
+type VSAccountManagerResultable interface {
+	Unwrap() *raw.VSAccountManagerResult
+	Cancel()
+}
+
+var _ VSAccountManagerResultable = (*VSAccountManagerResult)(nil)
+

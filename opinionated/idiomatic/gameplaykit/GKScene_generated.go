@@ -5,7 +5,9 @@
 package gameplaykit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -29,16 +31,65 @@ func (x *Scene) WithRootNode(rootNode raw.GKSceneRootNodeType) *Scene {
 	return x
 }
 
+// AddEntity calls the underlying AddEntity.
+func (x *Scene) AddEntity(entity *raw.GKEntity) {
+	x.inner.AddEntity(entity)
+}
+
+// RemoveEntity calls the underlying RemoveEntity.
+func (x *Scene) RemoveEntity(entity *raw.GKEntity) {
+	x.inner.RemoveEntity(entity)
+}
+
+// AddGraphName calls the underlying AddGraphName.
+func (x *Scene) AddGraphName(graph *raw.GKGraph, name string) {
+	x.inner.AddGraphName(graph, foundation.NSStringStringWithUTF8String(name))
+}
+
+// RemoveGraph calls the underlying RemoveGraph.
+func (x *Scene) RemoveGraph(name string) {
+	x.inner.RemoveGraph(foundation.NSStringStringWithUTF8String(name))
+}
+
 // Entities returns the collection as a Go slice.
 func (x *Scene) Entities() []*raw.GKEntity {
 	arr := x.inner.Entities()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.GKEntity, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.GKEntity {
+		return raw.GKEntityFromID(purego.Retain(_id))
+	})
 }
+
+// RootNode calls the underlying RootNode.
+func (x *Scene) RootNode() raw.GKSceneRootNodeType {
+	return x.inner.RootNode()
+}
+
+// SetRootNode calls the underlying SetRootNode.
+func (x *Scene) SetRootNode(rootNode raw.GKSceneRootNodeType) {
+	x.inner.SetRootNode(rootNode)
+}
+
+// Graphs calls the underlying Graphs.
+func (x *Scene) Graphs() *foundation.NSDictionary[*foundation.NSString, *raw.GKGraph] {
+	return x.inner.Graphs()
+}
+
+// Sceneable is the interface implemented by [Scene], for mocking and DI.
+type Sceneable interface {
+	Unwrap() *raw.GKScene
+	WithRootNode(rootNode raw.GKSceneRootNodeType) *Scene
+	AddEntity(entity *raw.GKEntity)
+	RemoveEntity(entity *raw.GKEntity)
+	AddGraphName(graph *raw.GKGraph, name string)
+	RemoveGraph(name string)
+	Entities() []*raw.GKEntity
+	RootNode() raw.GKSceneRootNodeType
+	SetRootNode(rootNode raw.GKSceneRootNodeType)
+	Graphs() *foundation.NSDictionary[*foundation.NSString, *raw.GKGraph]
+}
+
+var _ Sceneable = (*Scene)(nil)
 

@@ -35,3 +35,10 @@ func NewColorSwatchTextureWithColorGradientFromToColorNameTextureDimensions(colo
 
 func (x *ColorSwatchTexture) asTexture() *raw.MDLTexture { return &x.inner.MDLTexture }
 
+// ColorSwatchTextureable is the interface implemented by [ColorSwatchTexture], for mocking and DI.
+type ColorSwatchTextureable interface {
+	Unwrap() *raw.MDLColorSwatchTexture
+}
+
+var _ ColorSwatchTextureable = (*ColorSwatchTexture)(nil)
+

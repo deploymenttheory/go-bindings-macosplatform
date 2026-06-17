@@ -31,3 +31,10 @@ func (x *CNNConvolutionTransposeGradientNode) asNNGradientFilterNode() *mpsneura
 
 func (x *CNNConvolutionTransposeGradientNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSCNNConvolutionGradientNode.MPSNNGradientFilterNode.MPSNNFilterNode }
 
+// CNNConvolutionTransposeGradientNodeable is the interface implemented by [CNNConvolutionTransposeGradientNode], for mocking and DI.
+type CNNConvolutionTransposeGradientNodeable interface {
+	Unwrap() *raw.MPSCNNConvolutionTransposeGradientNode
+}
+
+var _ CNNConvolutionTransposeGradientNodeable = (*CNNConvolutionTransposeGradientNode)(nil)
+

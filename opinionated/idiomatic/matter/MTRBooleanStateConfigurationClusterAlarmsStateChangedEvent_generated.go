@@ -36,3 +36,36 @@ func (x *MTRBooleanStateConfigurationClusterAlarmsStateChangedEvent) WithAlarmsS
 	return x
 }
 
+// AlarmsActive calls the underlying AlarmsActive.
+func (x *MTRBooleanStateConfigurationClusterAlarmsStateChangedEvent) AlarmsActive() *foundation.NSNumber {
+	return x.inner.AlarmsActive()
+}
+
+// SetAlarmsActive calls the underlying SetAlarmsActive.
+func (x *MTRBooleanStateConfigurationClusterAlarmsStateChangedEvent) SetAlarmsActive(alarmsActive *foundation.NSNumber) {
+	x.inner.SetAlarmsActive(alarmsActive)
+}
+
+// AlarmsSuppressed calls the underlying AlarmsSuppressed.
+func (x *MTRBooleanStateConfigurationClusterAlarmsStateChangedEvent) AlarmsSuppressed() *foundation.NSNumber {
+	return x.inner.AlarmsSuppressed()
+}
+
+// SetAlarmsSuppressed calls the underlying SetAlarmsSuppressed.
+func (x *MTRBooleanStateConfigurationClusterAlarmsStateChangedEvent) SetAlarmsSuppressed(alarmsSuppressed *foundation.NSNumber) {
+	x.inner.SetAlarmsSuppressed(alarmsSuppressed)
+}
+
+// MTRBooleanStateConfigurationClusterAlarmsStateChangedEventable is the interface implemented by [MTRBooleanStateConfigurationClusterAlarmsStateChangedEvent], for mocking and DI.
+type MTRBooleanStateConfigurationClusterAlarmsStateChangedEventable interface {
+	Unwrap() *raw.MTRBooleanStateConfigurationClusterAlarmsStateChangedEvent
+	WithAlarmsActive(alarmsActive *foundation.NSNumber) *MTRBooleanStateConfigurationClusterAlarmsStateChangedEvent
+	WithAlarmsSuppressed(alarmsSuppressed *foundation.NSNumber) *MTRBooleanStateConfigurationClusterAlarmsStateChangedEvent
+	AlarmsActive() *foundation.NSNumber
+	SetAlarmsActive(alarmsActive *foundation.NSNumber)
+	AlarmsSuppressed() *foundation.NSNumber
+	SetAlarmsSuppressed(alarmsSuppressed *foundation.NSNumber)
+}
+
+var _ MTRBooleanStateConfigurationClusterAlarmsStateChangedEventable = (*MTRBooleanStateConfigurationClusterAlarmsStateChangedEvent)(nil)
+

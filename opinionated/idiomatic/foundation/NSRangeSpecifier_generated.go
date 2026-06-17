@@ -44,7 +44,48 @@ func (x *RangeSpecifier) WithEndSpecifier(endSpecifier ScriptObjectSpecifierProv
 	return x
 }
 
+// StartSpecifier calls the underlying StartSpecifier.
+func (x *RangeSpecifier) StartSpecifier() *ScriptObjectSpecifier {
+	_r := x.inner.StartSpecifier()
+	if _r == nil {
+		return nil
+	}
+	return &ScriptObjectSpecifier{inner: _r}
+}
+
+// SetStartSpecifier calls the underlying SetStartSpecifier.
+func (x *RangeSpecifier) SetStartSpecifier(startSpecifier *raw.NSScriptObjectSpecifier) {
+	x.inner.SetStartSpecifier(startSpecifier)
+}
+
+// EndSpecifier calls the underlying EndSpecifier.
+func (x *RangeSpecifier) EndSpecifier() *ScriptObjectSpecifier {
+	_r := x.inner.EndSpecifier()
+	if _r == nil {
+		return nil
+	}
+	return &ScriptObjectSpecifier{inner: _r}
+}
+
+// SetEndSpecifier calls the underlying SetEndSpecifier.
+func (x *RangeSpecifier) SetEndSpecifier(endSpecifier *raw.NSScriptObjectSpecifier) {
+	x.inner.SetEndSpecifier(endSpecifier)
+}
+
 func (x *RangeSpecifier) asScriptObjectSpecifier() *raw.NSScriptObjectSpecifier { return &x.inner.NSScriptObjectSpecifier }
 
 func (x *RangeSpecifier) asObject() *raw.NSObject { return &x.inner.NSScriptObjectSpecifier.NSObject }
+
+// RangeSpecifierable is the interface implemented by [RangeSpecifier], for mocking and DI.
+type RangeSpecifierable interface {
+	Unwrap() *raw.NSRangeSpecifier
+	WithStartSpecifier(startSpecifier ScriptObjectSpecifierProvider) *RangeSpecifier
+	WithEndSpecifier(endSpecifier ScriptObjectSpecifierProvider) *RangeSpecifier
+	StartSpecifier() *ScriptObjectSpecifier
+	SetStartSpecifier(startSpecifier *raw.NSScriptObjectSpecifier)
+	EndSpecifier() *ScriptObjectSpecifier
+	SetEndSpecifier(endSpecifier *raw.NSScriptObjectSpecifier)
+}
+
+var _ RangeSpecifierable = (*RangeSpecifier)(nil)
 

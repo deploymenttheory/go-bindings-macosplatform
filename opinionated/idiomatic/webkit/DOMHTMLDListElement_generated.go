@@ -29,6 +29,16 @@ func (x *DOMHTMLDListElement) WithCompact(compact bool) *DOMHTMLDListElement {
 	return x
 }
 
+// Compact calls the underlying Compact.
+func (x *DOMHTMLDListElement) Compact() bool {
+	return x.inner.Compact()
+}
+
+// SetCompact calls the underlying SetCompact.
+func (x *DOMHTMLDListElement) SetCompact(compact bool) {
+	x.inner.SetCompact(compact)
+}
+
 func (x *DOMHTMLDListElement) asDOMHTMLElement() *raw.DOMHTMLElement { return &x.inner.DOMHTMLElement }
 
 func (x *DOMHTMLDListElement) asDOMElement() *raw.DOMElement { return &x.inner.DOMHTMLElement.DOMElement }
@@ -38,4 +48,14 @@ func (x *DOMHTMLDListElement) asDOMNode() *raw.DOMNode { return &x.inner.DOMHTML
 func (x *DOMHTMLDListElement) asDOMObject() *raw.DOMObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject }
 
 func (x *DOMHTMLDListElement) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject }
+
+// DOMHTMLDListElementable is the interface implemented by [DOMHTMLDListElement], for mocking and DI.
+type DOMHTMLDListElementable interface {
+	Unwrap() *raw.DOMHTMLDListElement
+	WithCompact(compact bool) *DOMHTMLDListElement
+	Compact() bool
+	SetCompact(compact bool)
+}
+
+var _ DOMHTMLDListElementable = (*DOMHTMLDListElement)(nil)
 

@@ -42,3 +42,49 @@ func (x *MTRBooleanStateConfigurationClusterSuppressAlarmParams) WithServerSideP
 	return x
 }
 
+// AlarmsToSuppress calls the underlying AlarmsToSuppress.
+func (x *MTRBooleanStateConfigurationClusterSuppressAlarmParams) AlarmsToSuppress() *foundation.NSNumber {
+	return x.inner.AlarmsToSuppress()
+}
+
+// SetAlarmsToSuppress calls the underlying SetAlarmsToSuppress.
+func (x *MTRBooleanStateConfigurationClusterSuppressAlarmParams) SetAlarmsToSuppress(alarmsToSuppress *foundation.NSNumber) {
+	x.inner.SetAlarmsToSuppress(alarmsToSuppress)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRBooleanStateConfigurationClusterSuppressAlarmParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRBooleanStateConfigurationClusterSuppressAlarmParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRBooleanStateConfigurationClusterSuppressAlarmParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRBooleanStateConfigurationClusterSuppressAlarmParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRBooleanStateConfigurationClusterSuppressAlarmParamsable is the interface implemented by [MTRBooleanStateConfigurationClusterSuppressAlarmParams], for mocking and DI.
+type MTRBooleanStateConfigurationClusterSuppressAlarmParamsable interface {
+	Unwrap() *raw.MTRBooleanStateConfigurationClusterSuppressAlarmParams
+	WithAlarmsToSuppress(alarmsToSuppress *foundation.NSNumber) *MTRBooleanStateConfigurationClusterSuppressAlarmParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRBooleanStateConfigurationClusterSuppressAlarmParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRBooleanStateConfigurationClusterSuppressAlarmParams
+	AlarmsToSuppress() *foundation.NSNumber
+	SetAlarmsToSuppress(alarmsToSuppress *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRBooleanStateConfigurationClusterSuppressAlarmParamsable = (*MTRBooleanStateConfigurationClusterSuppressAlarmParams)(nil)
+

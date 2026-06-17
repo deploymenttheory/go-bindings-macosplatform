@@ -66,3 +66,101 @@ func (x *MTROperationalCredentialsClusterAddNOCParams) WithServerSideProcessingT
 	return x
 }
 
+// NocValue calls the underlying NocValue.
+func (x *MTROperationalCredentialsClusterAddNOCParams) NocValue() *foundation.NSData {
+	return x.inner.NocValue()
+}
+
+// SetNocValue calls the underlying SetNocValue.
+func (x *MTROperationalCredentialsClusterAddNOCParams) SetNocValue(nocValue *foundation.NSData) {
+	x.inner.SetNocValue(nocValue)
+}
+
+// IcacValue calls the underlying IcacValue.
+func (x *MTROperationalCredentialsClusterAddNOCParams) IcacValue() *foundation.NSData {
+	return x.inner.IcacValue()
+}
+
+// SetIcacValue calls the underlying SetIcacValue.
+func (x *MTROperationalCredentialsClusterAddNOCParams) SetIcacValue(icacValue *foundation.NSData) {
+	x.inner.SetIcacValue(icacValue)
+}
+
+// IpkValue calls the underlying IpkValue.
+func (x *MTROperationalCredentialsClusterAddNOCParams) IpkValue() *foundation.NSData {
+	return x.inner.IpkValue()
+}
+
+// SetIpkValue calls the underlying SetIpkValue.
+func (x *MTROperationalCredentialsClusterAddNOCParams) SetIpkValue(ipkValue *foundation.NSData) {
+	x.inner.SetIpkValue(ipkValue)
+}
+
+// CaseAdminSubject calls the underlying CaseAdminSubject.
+func (x *MTROperationalCredentialsClusterAddNOCParams) CaseAdminSubject() *foundation.NSNumber {
+	return x.inner.CaseAdminSubject()
+}
+
+// SetCaseAdminSubject calls the underlying SetCaseAdminSubject.
+func (x *MTROperationalCredentialsClusterAddNOCParams) SetCaseAdminSubject(caseAdminSubject *foundation.NSNumber) {
+	x.inner.SetCaseAdminSubject(caseAdminSubject)
+}
+
+// AdminVendorId calls the underlying AdminVendorId.
+func (x *MTROperationalCredentialsClusterAddNOCParams) AdminVendorId() *foundation.NSNumber {
+	return x.inner.AdminVendorId()
+}
+
+// SetAdminVendorId calls the underlying SetAdminVendorId.
+func (x *MTROperationalCredentialsClusterAddNOCParams) SetAdminVendorId(adminVendorId *foundation.NSNumber) {
+	x.inner.SetAdminVendorId(adminVendorId)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTROperationalCredentialsClusterAddNOCParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTROperationalCredentialsClusterAddNOCParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTROperationalCredentialsClusterAddNOCParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTROperationalCredentialsClusterAddNOCParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTROperationalCredentialsClusterAddNOCParamsable is the interface implemented by [MTROperationalCredentialsClusterAddNOCParams], for mocking and DI.
+type MTROperationalCredentialsClusterAddNOCParamsable interface {
+	Unwrap() *raw.MTROperationalCredentialsClusterAddNOCParams
+	WithNocValue(nocValue *foundation.NSData) *MTROperationalCredentialsClusterAddNOCParams
+	WithIcacValue(icacValue *foundation.NSData) *MTROperationalCredentialsClusterAddNOCParams
+	WithIpkValue(ipkValue *foundation.NSData) *MTROperationalCredentialsClusterAddNOCParams
+	WithCaseAdminSubject(caseAdminSubject *foundation.NSNumber) *MTROperationalCredentialsClusterAddNOCParams
+	WithAdminVendorId(adminVendorId *foundation.NSNumber) *MTROperationalCredentialsClusterAddNOCParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTROperationalCredentialsClusterAddNOCParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTROperationalCredentialsClusterAddNOCParams
+	NocValue() *foundation.NSData
+	SetNocValue(nocValue *foundation.NSData)
+	IcacValue() *foundation.NSData
+	SetIcacValue(icacValue *foundation.NSData)
+	IpkValue() *foundation.NSData
+	SetIpkValue(ipkValue *foundation.NSData)
+	CaseAdminSubject() *foundation.NSNumber
+	SetCaseAdminSubject(caseAdminSubject *foundation.NSNumber)
+	AdminVendorId() *foundation.NSNumber
+	SetAdminVendorId(adminVendorId *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTROperationalCredentialsClusterAddNOCParamsable = (*MTROperationalCredentialsClusterAddNOCParams)(nil)
+

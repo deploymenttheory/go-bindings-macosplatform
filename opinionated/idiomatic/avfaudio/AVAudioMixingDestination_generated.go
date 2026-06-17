@@ -23,3 +23,20 @@ func NewAudioMixingDestination() *AudioMixingDestination {
 	return &AudioMixingDestination{inner: raw.AVAudioMixingDestinationFromID(_id)}
 }
 
+// ConnectionPoint calls the underlying ConnectionPoint.
+func (x *AudioMixingDestination) ConnectionPoint() *AudioConnectionPoint {
+	_r := x.inner.ConnectionPoint()
+	if _r == nil {
+		return nil
+	}
+	return &AudioConnectionPoint{inner: _r}
+}
+
+// AudioMixingDestinationable is the interface implemented by [AudioMixingDestination], for mocking and DI.
+type AudioMixingDestinationable interface {
+	Unwrap() *raw.AVAudioMixingDestination
+	ConnectionPoint() *AudioConnectionPoint
+}
+
+var _ AudioMixingDestinationable = (*AudioMixingDestination)(nil)
+

@@ -32,5 +32,54 @@ func NewGridGraphFromGridStartingAtWidthHeightDiagonalsAllowedNodeClass(position
 	return &GridGraph{inner: raw.GKGridGraphFromID[objc.ID](_id)}
 }
 
+// NodeAtGridPosition calls the underlying NodeAtGridPosition.
+func (x *GridGraph) NodeAtGridPosition(position unsafe.Pointer) objc.ID {
+	return x.inner.NodeAtGridPosition(position)
+}
+
+// ConnectNodeToAdjacentNodes calls the underlying ConnectNodeToAdjacentNodes.
+func (x *GridGraph) ConnectNodeToAdjacentNodes(node *raw.GKGridGraphNode) {
+	x.inner.ConnectNodeToAdjacentNodes(node)
+}
+
+// ClassForGenericArgumentAtIndex calls the underlying ClassForGenericArgumentAtIndex.
+func (x *GridGraph) ClassForGenericArgumentAtIndex(index uint) objc.Class {
+	return x.inner.ClassForGenericArgumentAtIndex(index)
+}
+
+// GridOrigin calls the underlying GridOrigin.
+func (x *GridGraph) GridOrigin() unsafe.Pointer {
+	return x.inner.GridOrigin()
+}
+
+// GridWidth calls the underlying GridWidth.
+func (x *GridGraph) GridWidth() uint {
+	return x.inner.GridWidth()
+}
+
+// GridHeight calls the underlying GridHeight.
+func (x *GridGraph) GridHeight() uint {
+	return x.inner.GridHeight()
+}
+
+// DiagonalsAllowed calls the underlying DiagonalsAllowed.
+func (x *GridGraph) DiagonalsAllowed() bool {
+	return x.inner.DiagonalsAllowed()
+}
+
 func (x *GridGraph) asGraph() *raw.GKGraph { return &x.inner.GKGraph }
+
+// GridGraphable is the interface implemented by [GridGraph], for mocking and DI.
+type GridGraphable interface {
+	Unwrap() *raw.GKGridGraph[objc.ID]
+	NodeAtGridPosition(position unsafe.Pointer) objc.ID
+	ConnectNodeToAdjacentNodes(node *raw.GKGridGraphNode)
+	ClassForGenericArgumentAtIndex(index uint) objc.Class
+	GridOrigin() unsafe.Pointer
+	GridWidth() uint
+	GridHeight() uint
+	DiagonalsAllowed() bool
+}
+
+var _ GridGraphable = (*GridGraph)(nil)
 

@@ -71,3 +71,114 @@ func (x *MTRDeviceStorageBehaviorConfiguration) WithDeviceReportingExcessivelyIn
 	return x
 }
 
+// DisableStorageBehaviorOptimization calls the underlying DisableStorageBehaviorOptimization.
+func (x *MTRDeviceStorageBehaviorConfiguration) DisableStorageBehaviorOptimization() bool {
+	return x.inner.DisableStorageBehaviorOptimization()
+}
+
+// SetDisableStorageBehaviorOptimization calls the underlying SetDisableStorageBehaviorOptimization.
+func (x *MTRDeviceStorageBehaviorConfiguration) SetDisableStorageBehaviorOptimization(disableStorageBehaviorOptimization bool) {
+	x.inner.SetDisableStorageBehaviorOptimization(disableStorageBehaviorOptimization)
+}
+
+// ReportToPersistenceDelayTime calls the underlying ReportToPersistenceDelayTime.
+func (x *MTRDeviceStorageBehaviorConfiguration) ReportToPersistenceDelayTime() float64 {
+	return x.inner.ReportToPersistenceDelayTime()
+}
+
+// SetReportToPersistenceDelayTime calls the underlying SetReportToPersistenceDelayTime.
+func (x *MTRDeviceStorageBehaviorConfiguration) SetReportToPersistenceDelayTime(reportToPersistenceDelayTime float64) {
+	x.inner.SetReportToPersistenceDelayTime(reportToPersistenceDelayTime)
+}
+
+// ReportToPersistenceDelayTimeMax calls the underlying ReportToPersistenceDelayTimeMax.
+func (x *MTRDeviceStorageBehaviorConfiguration) ReportToPersistenceDelayTimeMax() float64 {
+	return x.inner.ReportToPersistenceDelayTimeMax()
+}
+
+// SetReportToPersistenceDelayTimeMax calls the underlying SetReportToPersistenceDelayTimeMax.
+func (x *MTRDeviceStorageBehaviorConfiguration) SetReportToPersistenceDelayTimeMax(reportToPersistenceDelayTimeMax float64) {
+	x.inner.SetReportToPersistenceDelayTimeMax(reportToPersistenceDelayTimeMax)
+}
+
+// RecentReportTimesMaxCount calls the underlying RecentReportTimesMaxCount.
+func (x *MTRDeviceStorageBehaviorConfiguration) RecentReportTimesMaxCount() uint {
+	return x.inner.RecentReportTimesMaxCount()
+}
+
+// SetRecentReportTimesMaxCount calls the underlying SetRecentReportTimesMaxCount.
+func (x *MTRDeviceStorageBehaviorConfiguration) SetRecentReportTimesMaxCount(recentReportTimesMaxCount uint) {
+	x.inner.SetRecentReportTimesMaxCount(recentReportTimesMaxCount)
+}
+
+// TimeBetweenReportsTooShortThreshold calls the underlying TimeBetweenReportsTooShortThreshold.
+func (x *MTRDeviceStorageBehaviorConfiguration) TimeBetweenReportsTooShortThreshold() float64 {
+	return x.inner.TimeBetweenReportsTooShortThreshold()
+}
+
+// SetTimeBetweenReportsTooShortThreshold calls the underlying SetTimeBetweenReportsTooShortThreshold.
+func (x *MTRDeviceStorageBehaviorConfiguration) SetTimeBetweenReportsTooShortThreshold(timeBetweenReportsTooShortThreshold float64) {
+	x.inner.SetTimeBetweenReportsTooShortThreshold(timeBetweenReportsTooShortThreshold)
+}
+
+// TimeBetweenReportsTooShortMinThreshold calls the underlying TimeBetweenReportsTooShortMinThreshold.
+func (x *MTRDeviceStorageBehaviorConfiguration) TimeBetweenReportsTooShortMinThreshold() float64 {
+	return x.inner.TimeBetweenReportsTooShortMinThreshold()
+}
+
+// SetTimeBetweenReportsTooShortMinThreshold calls the underlying SetTimeBetweenReportsTooShortMinThreshold.
+func (x *MTRDeviceStorageBehaviorConfiguration) SetTimeBetweenReportsTooShortMinThreshold(timeBetweenReportsTooShortMinThreshold float64) {
+	x.inner.SetTimeBetweenReportsTooShortMinThreshold(timeBetweenReportsTooShortMinThreshold)
+}
+
+// ReportToPersistenceDelayMaxMultiplier calls the underlying ReportToPersistenceDelayMaxMultiplier.
+func (x *MTRDeviceStorageBehaviorConfiguration) ReportToPersistenceDelayMaxMultiplier() float64 {
+	return x.inner.ReportToPersistenceDelayMaxMultiplier()
+}
+
+// SetReportToPersistenceDelayMaxMultiplier calls the underlying SetReportToPersistenceDelayMaxMultiplier.
+func (x *MTRDeviceStorageBehaviorConfiguration) SetReportToPersistenceDelayMaxMultiplier(reportToPersistenceDelayMaxMultiplier float64) {
+	x.inner.SetReportToPersistenceDelayMaxMultiplier(reportToPersistenceDelayMaxMultiplier)
+}
+
+// DeviceReportingExcessivelyIntervalThreshold calls the underlying DeviceReportingExcessivelyIntervalThreshold.
+func (x *MTRDeviceStorageBehaviorConfiguration) DeviceReportingExcessivelyIntervalThreshold() float64 {
+	return x.inner.DeviceReportingExcessivelyIntervalThreshold()
+}
+
+// SetDeviceReportingExcessivelyIntervalThreshold calls the underlying SetDeviceReportingExcessivelyIntervalThreshold.
+func (x *MTRDeviceStorageBehaviorConfiguration) SetDeviceReportingExcessivelyIntervalThreshold(deviceReportingExcessivelyIntervalThreshold float64) {
+	x.inner.SetDeviceReportingExcessivelyIntervalThreshold(deviceReportingExcessivelyIntervalThreshold)
+}
+
+// MTRDeviceStorageBehaviorConfigurationable is the interface implemented by [MTRDeviceStorageBehaviorConfiguration], for mocking and DI.
+type MTRDeviceStorageBehaviorConfigurationable interface {
+	Unwrap() *raw.MTRDeviceStorageBehaviorConfiguration
+	WithDisableStorageBehaviorOptimization(disableStorageBehaviorOptimization bool) *MTRDeviceStorageBehaviorConfiguration
+	WithReportToPersistenceDelayTime(reportToPersistenceDelayTime float64) *MTRDeviceStorageBehaviorConfiguration
+	WithReportToPersistenceDelayTimeMax(reportToPersistenceDelayTimeMax float64) *MTRDeviceStorageBehaviorConfiguration
+	WithRecentReportTimesMaxCount(recentReportTimesMaxCount uint) *MTRDeviceStorageBehaviorConfiguration
+	WithTimeBetweenReportsTooShortThreshold(timeBetweenReportsTooShortThreshold float64) *MTRDeviceStorageBehaviorConfiguration
+	WithTimeBetweenReportsTooShortMinThreshold(timeBetweenReportsTooShortMinThreshold float64) *MTRDeviceStorageBehaviorConfiguration
+	WithReportToPersistenceDelayMaxMultiplier(reportToPersistenceDelayMaxMultiplier float64) *MTRDeviceStorageBehaviorConfiguration
+	WithDeviceReportingExcessivelyIntervalThreshold(deviceReportingExcessivelyIntervalThreshold float64) *MTRDeviceStorageBehaviorConfiguration
+	DisableStorageBehaviorOptimization() bool
+	SetDisableStorageBehaviorOptimization(disableStorageBehaviorOptimization bool)
+	ReportToPersistenceDelayTime() float64
+	SetReportToPersistenceDelayTime(reportToPersistenceDelayTime float64)
+	ReportToPersistenceDelayTimeMax() float64
+	SetReportToPersistenceDelayTimeMax(reportToPersistenceDelayTimeMax float64)
+	RecentReportTimesMaxCount() uint
+	SetRecentReportTimesMaxCount(recentReportTimesMaxCount uint)
+	TimeBetweenReportsTooShortThreshold() float64
+	SetTimeBetweenReportsTooShortThreshold(timeBetweenReportsTooShortThreshold float64)
+	TimeBetweenReportsTooShortMinThreshold() float64
+	SetTimeBetweenReportsTooShortMinThreshold(timeBetweenReportsTooShortMinThreshold float64)
+	ReportToPersistenceDelayMaxMultiplier() float64
+	SetReportToPersistenceDelayMaxMultiplier(reportToPersistenceDelayMaxMultiplier float64)
+	DeviceReportingExcessivelyIntervalThreshold() float64
+	SetDeviceReportingExcessivelyIntervalThreshold(deviceReportingExcessivelyIntervalThreshold float64)
+}
+
+var _ MTRDeviceStorageBehaviorConfigurationable = (*MTRDeviceStorageBehaviorConfiguration)(nil)
+

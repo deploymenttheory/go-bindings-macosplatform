@@ -29,3 +29,10 @@ func (x *CNNPoolingL2NormGradientNode) asNNGradientFilterNode() *raw.MPSNNGradie
 
 func (x *CNNPoolingL2NormGradientNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSCNNPoolingGradientNode.MPSNNGradientFilterNode.MPSNNFilterNode }
 
+// CNNPoolingL2NormGradientNodeable is the interface implemented by [CNNPoolingL2NormGradientNode], for mocking and DI.
+type CNNPoolingL2NormGradientNodeable interface {
+	Unwrap() *raw.MPSCNNPoolingL2NormGradientNode
+}
+
+var _ CNNPoolingL2NormGradientNodeable = (*CNNPoolingL2NormGradientNode)(nil)
+

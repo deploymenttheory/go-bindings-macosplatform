@@ -25,3 +25,10 @@ func NewCallRecordTypeResolutionResult() *CallRecordTypeResolutionResult {
 
 func (x *CallRecordTypeResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult { return &x.inner.INIntentResolutionResult }
 
+// CallRecordTypeResolutionResultable is the interface implemented by [CallRecordTypeResolutionResult], for mocking and DI.
+type CallRecordTypeResolutionResultable interface {
+	Unwrap() *raw.INCallRecordTypeResolutionResult
+}
+
+var _ CallRecordTypeResolutionResultable = (*CallRecordTypeResolutionResult)(nil)
+

@@ -31,5 +31,71 @@ func (x *ConditionLock) WithName(name string) *ConditionLock {
 	return x
 }
 
+// LockWhenCondition calls the underlying LockWhenCondition.
+func (x *ConditionLock) LockWhenCondition(condition int) {
+	x.inner.LockWhenCondition(condition)
+}
+
+// TryLock calls the underlying TryLock.
+func (x *ConditionLock) TryLock() bool {
+	return x.inner.TryLock()
+}
+
+// TryLockWhenCondition calls the underlying TryLockWhenCondition.
+func (x *ConditionLock) TryLockWhenCondition(condition int) bool {
+	return x.inner.TryLockWhenCondition(condition)
+}
+
+// UnlockWithCondition calls the underlying UnlockWithCondition.
+func (x *ConditionLock) UnlockWithCondition(condition int) {
+	x.inner.UnlockWithCondition(condition)
+}
+
+// LockBeforeDate calls the underlying LockBeforeDate.
+func (x *ConditionLock) LockBeforeDate(limit *raw.NSDate) bool {
+	return x.inner.LockBeforeDate(limit)
+}
+
+// LockWhenConditionBeforeDate calls the underlying LockWhenConditionBeforeDate.
+func (x *ConditionLock) LockWhenConditionBeforeDate(condition int, limit *raw.NSDate) bool {
+	return x.inner.LockWhenConditionBeforeDate(condition, limit)
+}
+
+// Condition calls the underlying Condition.
+func (x *ConditionLock) Condition() int {
+	return x.inner.Condition()
+}
+
+// Name calls the underlying Name.
+func (x *ConditionLock) Name() *String {
+	_r := x.inner.Name()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SetName calls the underlying SetName.
+func (x *ConditionLock) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
 func (x *ConditionLock) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// ConditionLockable is the interface implemented by [ConditionLock], for mocking and DI.
+type ConditionLockable interface {
+	Unwrap() *raw.NSConditionLock
+	WithName(name string) *ConditionLock
+	LockWhenCondition(condition int)
+	TryLock() bool
+	TryLockWhenCondition(condition int) bool
+	UnlockWithCondition(condition int)
+	LockBeforeDate(limit *raw.NSDate) bool
+	LockWhenConditionBeforeDate(condition int, limit *raw.NSDate) bool
+	Condition() int
+	Name() *String
+	SetName(name string)
+}
+
+var _ ConditionLockable = (*ConditionLock)(nil)
 

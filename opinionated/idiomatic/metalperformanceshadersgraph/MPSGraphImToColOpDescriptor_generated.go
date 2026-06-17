@@ -89,5 +89,161 @@ func (x *GraphImToColOpDescriptor) WithDataLayout(dataLayout raw.MPSGraphTensorN
 	return x
 }
 
+// SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom calls the underlying SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom.
+func (x *GraphImToColOpDescriptor) SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom(paddingLeft uint, paddingRight uint, paddingTop uint, paddingBottom uint) {
+	x.inner.SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom(paddingLeft, paddingRight, paddingTop, paddingBottom)
+}
+
+// KernelWidth calls the underlying KernelWidth.
+func (x *GraphImToColOpDescriptor) KernelWidth() uint {
+	return x.inner.KernelWidth()
+}
+
+// SetKernelWidth calls the underlying SetKernelWidth.
+func (x *GraphImToColOpDescriptor) SetKernelWidth(kernelWidth uint) {
+	x.inner.SetKernelWidth(kernelWidth)
+}
+
+// KernelHeight calls the underlying KernelHeight.
+func (x *GraphImToColOpDescriptor) KernelHeight() uint {
+	return x.inner.KernelHeight()
+}
+
+// SetKernelHeight calls the underlying SetKernelHeight.
+func (x *GraphImToColOpDescriptor) SetKernelHeight(kernelHeight uint) {
+	x.inner.SetKernelHeight(kernelHeight)
+}
+
+// StrideInX calls the underlying StrideInX.
+func (x *GraphImToColOpDescriptor) StrideInX() uint {
+	return x.inner.StrideInX()
+}
+
+// SetStrideInX calls the underlying SetStrideInX.
+func (x *GraphImToColOpDescriptor) SetStrideInX(strideInX uint) {
+	x.inner.SetStrideInX(strideInX)
+}
+
+// StrideInY calls the underlying StrideInY.
+func (x *GraphImToColOpDescriptor) StrideInY() uint {
+	return x.inner.StrideInY()
+}
+
+// SetStrideInY calls the underlying SetStrideInY.
+func (x *GraphImToColOpDescriptor) SetStrideInY(strideInY uint) {
+	x.inner.SetStrideInY(strideInY)
+}
+
+// DilationRateInX calls the underlying DilationRateInX.
+func (x *GraphImToColOpDescriptor) DilationRateInX() uint {
+	return x.inner.DilationRateInX()
+}
+
+// SetDilationRateInX calls the underlying SetDilationRateInX.
+func (x *GraphImToColOpDescriptor) SetDilationRateInX(dilationRateInX uint) {
+	x.inner.SetDilationRateInX(dilationRateInX)
+}
+
+// DilationRateInY calls the underlying DilationRateInY.
+func (x *GraphImToColOpDescriptor) DilationRateInY() uint {
+	return x.inner.DilationRateInY()
+}
+
+// SetDilationRateInY calls the underlying SetDilationRateInY.
+func (x *GraphImToColOpDescriptor) SetDilationRateInY(dilationRateInY uint) {
+	x.inner.SetDilationRateInY(dilationRateInY)
+}
+
+// PaddingLeft calls the underlying PaddingLeft.
+func (x *GraphImToColOpDescriptor) PaddingLeft() uint {
+	return x.inner.PaddingLeft()
+}
+
+// SetPaddingLeft calls the underlying SetPaddingLeft.
+func (x *GraphImToColOpDescriptor) SetPaddingLeft(paddingLeft uint) {
+	x.inner.SetPaddingLeft(paddingLeft)
+}
+
+// PaddingRight calls the underlying PaddingRight.
+func (x *GraphImToColOpDescriptor) PaddingRight() uint {
+	return x.inner.PaddingRight()
+}
+
+// SetPaddingRight calls the underlying SetPaddingRight.
+func (x *GraphImToColOpDescriptor) SetPaddingRight(paddingRight uint) {
+	x.inner.SetPaddingRight(paddingRight)
+}
+
+// PaddingTop calls the underlying PaddingTop.
+func (x *GraphImToColOpDescriptor) PaddingTop() uint {
+	return x.inner.PaddingTop()
+}
+
+// SetPaddingTop calls the underlying SetPaddingTop.
+func (x *GraphImToColOpDescriptor) SetPaddingTop(paddingTop uint) {
+	x.inner.SetPaddingTop(paddingTop)
+}
+
+// PaddingBottom calls the underlying PaddingBottom.
+func (x *GraphImToColOpDescriptor) PaddingBottom() uint {
+	return x.inner.PaddingBottom()
+}
+
+// SetPaddingBottom calls the underlying SetPaddingBottom.
+func (x *GraphImToColOpDescriptor) SetPaddingBottom(paddingBottom uint) {
+	x.inner.SetPaddingBottom(paddingBottom)
+}
+
+// DataLayout calls the underlying DataLayout.
+func (x *GraphImToColOpDescriptor) DataLayout() raw.MPSGraphTensorNamedDataLayout {
+	return x.inner.DataLayout()
+}
+
+// SetDataLayout calls the underlying SetDataLayout.
+func (x *GraphImToColOpDescriptor) SetDataLayout(dataLayout raw.MPSGraphTensorNamedDataLayout) {
+	x.inner.SetDataLayout(dataLayout)
+}
+
 func (x *GraphImToColOpDescriptor) asGraphObject() *raw.MPSGraphObject { return &x.inner.MPSGraphObject }
+
+// GraphImToColOpDescriptorable is the interface implemented by [GraphImToColOpDescriptor], for mocking and DI.
+type GraphImToColOpDescriptorable interface {
+	Unwrap() *raw.MPSGraphImToColOpDescriptor
+	WithKernelWidth(kernelWidth uint) *GraphImToColOpDescriptor
+	WithKernelHeight(kernelHeight uint) *GraphImToColOpDescriptor
+	WithStrideInX(strideInX uint) *GraphImToColOpDescriptor
+	WithStrideInY(strideInY uint) *GraphImToColOpDescriptor
+	WithDilationRateInX(dilationRateInX uint) *GraphImToColOpDescriptor
+	WithDilationRateInY(dilationRateInY uint) *GraphImToColOpDescriptor
+	WithPaddingLeft(paddingLeft uint) *GraphImToColOpDescriptor
+	WithPaddingRight(paddingRight uint) *GraphImToColOpDescriptor
+	WithPaddingTop(paddingTop uint) *GraphImToColOpDescriptor
+	WithPaddingBottom(paddingBottom uint) *GraphImToColOpDescriptor
+	WithDataLayout(dataLayout raw.MPSGraphTensorNamedDataLayout) *GraphImToColOpDescriptor
+	SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom(paddingLeft uint, paddingRight uint, paddingTop uint, paddingBottom uint)
+	KernelWidth() uint
+	SetKernelWidth(kernelWidth uint)
+	KernelHeight() uint
+	SetKernelHeight(kernelHeight uint)
+	StrideInX() uint
+	SetStrideInX(strideInX uint)
+	StrideInY() uint
+	SetStrideInY(strideInY uint)
+	DilationRateInX() uint
+	SetDilationRateInX(dilationRateInX uint)
+	DilationRateInY() uint
+	SetDilationRateInY(dilationRateInY uint)
+	PaddingLeft() uint
+	SetPaddingLeft(paddingLeft uint)
+	PaddingRight() uint
+	SetPaddingRight(paddingRight uint)
+	PaddingTop() uint
+	SetPaddingTop(paddingTop uint)
+	PaddingBottom() uint
+	SetPaddingBottom(paddingBottom uint)
+	DataLayout() raw.MPSGraphTensorNamedDataLayout
+	SetDataLayout(dataLayout raw.MPSGraphTensorNamedDataLayout)
+}
+
+var _ GraphImToColOpDescriptorable = (*GraphImToColOpDescriptor)(nil)
 

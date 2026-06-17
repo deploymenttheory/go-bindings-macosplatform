@@ -31,3 +31,32 @@ func NewMTRAttributeReportWithResponseValueError(responseValue *foundation.NSDic
 	return &MTRAttributeReport{inner: raw.MTRAttributeReportFromID(_id)}, nil
 }
 
+// Path calls the underlying Path.
+func (x *MTRAttributeReport) Path() *MTRAttributePath {
+	_r := x.inner.Path()
+	if _r == nil {
+		return nil
+	}
+	return &MTRAttributePath{inner: _r}
+}
+
+// Value calls the underlying Value.
+func (x *MTRAttributeReport) Value() objc.ID {
+	return x.inner.Value()
+}
+
+// Error calls the underlying Error.
+func (x *MTRAttributeReport) Error() unsafe.Pointer {
+	return x.inner.Error()
+}
+
+// MTRAttributeReportable is the interface implemented by [MTRAttributeReport], for mocking and DI.
+type MTRAttributeReportable interface {
+	Unwrap() *raw.MTRAttributeReport
+	Path() *MTRAttributePath
+	Value() objc.ID
+	Error() unsafe.Pointer
+}
+
+var _ MTRAttributeReportable = (*MTRAttributeReport)(nil)
+

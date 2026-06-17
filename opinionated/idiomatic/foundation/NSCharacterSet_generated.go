@@ -24,7 +24,58 @@ func NewCharacterSetWithCoder(coder *raw.NSCoder) *CharacterSet {
 	return &CharacterSet{inner: raw.NSCharacterSetFromID(_id)}
 }
 
+// CharacterIsMember calls the underlying CharacterIsMember.
+func (x *CharacterSet) CharacterIsMember(aCharacter uint16) bool {
+	return x.inner.CharacterIsMember(aCharacter)
+}
+
+// LongCharacterIsMember calls the underlying LongCharacterIsMember.
+func (x *CharacterSet) LongCharacterIsMember(theLongChar uint) bool {
+	return x.inner.LongCharacterIsMember(theLongChar)
+}
+
+// IsSupersetOfSet calls the underlying IsSupersetOfSet.
+func (x *CharacterSet) IsSupersetOfSet(theOtherSet *raw.NSCharacterSet) bool {
+	return x.inner.IsSupersetOfSet(theOtherSet)
+}
+
+// HasMemberInPlane calls the underlying HasMemberInPlane.
+func (x *CharacterSet) HasMemberInPlane(thePlane uint8) bool {
+	return x.inner.HasMemberInPlane(thePlane)
+}
+
+// BitmapRepresentation calls the underlying BitmapRepresentation.
+func (x *CharacterSet) BitmapRepresentation() *Data {
+	_r := x.inner.BitmapRepresentation()
+	if _r == nil {
+		return nil
+	}
+	return &Data{inner: _r}
+}
+
+// InvertedSet calls the underlying InvertedSet.
+func (x *CharacterSet) InvertedSet() *CharacterSet {
+	_r := x.inner.InvertedSet()
+	if _r == nil {
+		return nil
+	}
+	return &CharacterSet{inner: _r}
+}
+
 func (x *CharacterSet) asCharacterSet() *raw.NSCharacterSet { return x.inner }
 
 func (x *CharacterSet) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// CharacterSetable is the interface implemented by [CharacterSet], for mocking and DI.
+type CharacterSetable interface {
+	Unwrap() *raw.NSCharacterSet
+	CharacterIsMember(aCharacter uint16) bool
+	LongCharacterIsMember(theLongChar uint) bool
+	IsSupersetOfSet(theOtherSet *raw.NSCharacterSet) bool
+	HasMemberInPlane(thePlane uint8) bool
+	BitmapRepresentation() *Data
+	InvertedSet() *CharacterSet
+}
+
+var _ CharacterSetable = (*CharacterSet)(nil)
 

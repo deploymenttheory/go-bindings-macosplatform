@@ -23,3 +23,26 @@ func NewRasterizationRateLayerArray() *RasterizationRateLayerArray {
 	return &RasterizationRateLayerArray{inner: raw.MTLRasterizationRateLayerArrayFromID(_id)}
 }
 
+// ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
+func (x *RasterizationRateLayerArray) ObjectAtIndexedSubscript(layerIndex uint) *RasterizationRateLayerDescriptor {
+	_r := x.inner.ObjectAtIndexedSubscript(layerIndex)
+	if _r == nil {
+		return nil
+	}
+	return &RasterizationRateLayerDescriptor{inner: _r}
+}
+
+// SetObjectAtIndexedSubscript calls the underlying SetObjectAtIndexedSubscript.
+func (x *RasterizationRateLayerArray) SetObjectAtIndexedSubscript(layer *raw.MTLRasterizationRateLayerDescriptor, layerIndex uint) {
+	x.inner.SetObjectAtIndexedSubscript(layer, layerIndex)
+}
+
+// RasterizationRateLayerArrayable is the interface implemented by [RasterizationRateLayerArray], for mocking and DI.
+type RasterizationRateLayerArrayable interface {
+	Unwrap() *raw.MTLRasterizationRateLayerArray
+	ObjectAtIndexedSubscript(layerIndex uint) *RasterizationRateLayerDescriptor
+	SetObjectAtIndexedSubscript(layer *raw.MTLRasterizationRateLayerDescriptor, layerIndex uint)
+}
+
+var _ RasterizationRateLayerArrayable = (*RasterizationRateLayerArray)(nil)
+

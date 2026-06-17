@@ -31,11 +31,11 @@ func NewMediaLibrary() *MediaLibrary {
 func (x *MediaLibrary) AddMediaItems(ctx context.Context, mediaItems *foundation.NSArray[*raw.SHMediaItem]) error {
 	_ch := make(chan error, 1)
 	x.inner.AddMediaItemsCompletionHandler(mediaItems, func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -44,4 +44,12 @@ func (x *MediaLibrary) AddMediaItems(ctx context.Context, mediaItems *foundation
 		return ctx.Err()
 	}
 }
+
+// MediaLibraryable is the interface implemented by [MediaLibrary], for mocking and DI.
+type MediaLibraryable interface {
+	Unwrap() *raw.SHMediaLibrary
+	AddMediaItems(ctx context.Context, mediaItems *foundation.NSArray[*raw.SHMediaItem]) error
+}
+
+var _ MediaLibraryable = (*MediaLibrary)(nil)
 

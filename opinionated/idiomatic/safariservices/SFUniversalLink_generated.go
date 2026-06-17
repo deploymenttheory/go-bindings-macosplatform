@@ -31,3 +31,35 @@ func (x *UniversalLink) WithEnabled(enabled bool) *UniversalLink {
 	return x
 }
 
+// WebpageURL calls the underlying WebpageURL.
+func (x *UniversalLink) WebpageURL() *foundation.NSURL {
+	return x.inner.WebpageURL()
+}
+
+// ApplicationURL calls the underlying ApplicationURL.
+func (x *UniversalLink) ApplicationURL() *foundation.NSURL {
+	return x.inner.ApplicationURL()
+}
+
+// IsEnabled calls the underlying IsEnabled.
+func (x *UniversalLink) IsEnabled() bool {
+	return x.inner.IsEnabled()
+}
+
+// SetEnabled calls the underlying SetEnabled.
+func (x *UniversalLink) SetEnabled(enabled bool) {
+	x.inner.SetEnabled(enabled)
+}
+
+// UniversalLinkable is the interface implemented by [UniversalLink], for mocking and DI.
+type UniversalLinkable interface {
+	Unwrap() *raw.SFUniversalLink
+	WithEnabled(enabled bool) *UniversalLink
+	WebpageURL() *foundation.NSURL
+	ApplicationURL() *foundation.NSURL
+	IsEnabled() bool
+	SetEnabled(enabled bool)
+}
+
+var _ UniversalLinkable = (*UniversalLink)(nil)
+

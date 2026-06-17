@@ -42,3 +42,53 @@ func (x *MTRTimeSynchronizationClusterSetTrustedTimeSourceParams) WithServerSide
 	return x
 }
 
+// TrustedTimeSource calls the underlying TrustedTimeSource.
+func (x *MTRTimeSynchronizationClusterSetTrustedTimeSourceParams) TrustedTimeSource() *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct {
+	_r := x.inner.TrustedTimeSource()
+	if _r == nil {
+		return nil
+	}
+	return &MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct{inner: _r}
+}
+
+// SetTrustedTimeSource calls the underlying SetTrustedTimeSource.
+func (x *MTRTimeSynchronizationClusterSetTrustedTimeSourceParams) SetTrustedTimeSource(trustedTimeSource *raw.MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct) {
+	x.inner.SetTrustedTimeSource(trustedTimeSource)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRTimeSynchronizationClusterSetTrustedTimeSourceParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRTimeSynchronizationClusterSetTrustedTimeSourceParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRTimeSynchronizationClusterSetTrustedTimeSourceParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRTimeSynchronizationClusterSetTrustedTimeSourceParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRTimeSynchronizationClusterSetTrustedTimeSourceParamsable is the interface implemented by [MTRTimeSynchronizationClusterSetTrustedTimeSourceParams], for mocking and DI.
+type MTRTimeSynchronizationClusterSetTrustedTimeSourceParamsable interface {
+	Unwrap() *raw.MTRTimeSynchronizationClusterSetTrustedTimeSourceParams
+	WithTrustedTimeSource(trustedTimeSource *raw.MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct) *MTRTimeSynchronizationClusterSetTrustedTimeSourceParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTimeSynchronizationClusterSetTrustedTimeSourceParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRTimeSynchronizationClusterSetTrustedTimeSourceParams
+	TrustedTimeSource() *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct
+	SetTrustedTimeSource(trustedTimeSource *raw.MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRTimeSynchronizationClusterSetTrustedTimeSourceParamsable = (*MTRTimeSynchronizationClusterSetTrustedTimeSourceParams)(nil)
+

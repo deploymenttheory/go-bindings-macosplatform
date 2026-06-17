@@ -23,5 +23,32 @@ func NewSymbolRotateEffect() *SymbolRotateEffect {
 	return &SymbolRotateEffect{inner: raw.NSSymbolRotateEffectFromID(_id)}
 }
 
+// EffectWithByLayer calls the underlying EffectWithByLayer.
+func (x *SymbolRotateEffect) EffectWithByLayer() *SymbolRotateEffect {
+	_r := x.inner.EffectWithByLayer()
+	if _r == nil {
+		return nil
+	}
+	return &SymbolRotateEffect{inner: _r}
+}
+
+// EffectWithWholeSymbol calls the underlying EffectWithWholeSymbol.
+func (x *SymbolRotateEffect) EffectWithWholeSymbol() *SymbolRotateEffect {
+	_r := x.inner.EffectWithWholeSymbol()
+	if _r == nil {
+		return nil
+	}
+	return &SymbolRotateEffect{inner: _r}
+}
+
 func (x *SymbolRotateEffect) asSymbolEffect() *raw.NSSymbolEffect { return &x.inner.NSSymbolEffect }
+
+// SymbolRotateEffectable is the interface implemented by [SymbolRotateEffect], for mocking and DI.
+type SymbolRotateEffectable interface {
+	Unwrap() *raw.NSSymbolRotateEffect
+	EffectWithByLayer() *SymbolRotateEffect
+	EffectWithWholeSymbol() *SymbolRotateEffect
+}
+
+var _ SymbolRotateEffectable = (*SymbolRotateEffect)(nil)
 

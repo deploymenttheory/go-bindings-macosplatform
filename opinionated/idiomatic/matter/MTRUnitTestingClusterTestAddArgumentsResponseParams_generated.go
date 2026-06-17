@@ -43,5 +43,38 @@ func (x *MTRUnitTestingClusterTestAddArgumentsResponseParams) WithTimedInvokeTim
 	return x
 }
 
+// ReturnValue calls the underlying ReturnValue.
+func (x *MTRUnitTestingClusterTestAddArgumentsResponseParams) ReturnValue() *foundation.NSNumber {
+	return x.inner.ReturnValue()
+}
+
+// SetReturnValue calls the underlying SetReturnValue.
+func (x *MTRUnitTestingClusterTestAddArgumentsResponseParams) SetReturnValue(returnValue *foundation.NSNumber) {
+	x.inner.SetReturnValue(returnValue)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRUnitTestingClusterTestAddArgumentsResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRUnitTestingClusterTestAddArgumentsResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
 func (x *MTRUnitTestingClusterTestAddArgumentsResponseParams) asMTRUnitTestingClusterTestAddArgumentsResponseParams() *raw.MTRUnitTestingClusterTestAddArgumentsResponseParams { return x.inner }
+
+// MTRUnitTestingClusterTestAddArgumentsResponseParamsable is the interface implemented by [MTRUnitTestingClusterTestAddArgumentsResponseParams], for mocking and DI.
+type MTRUnitTestingClusterTestAddArgumentsResponseParamsable interface {
+	Unwrap() *raw.MTRUnitTestingClusterTestAddArgumentsResponseParams
+	WithReturnValue(returnValue *foundation.NSNumber) *MTRUnitTestingClusterTestAddArgumentsResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRUnitTestingClusterTestAddArgumentsResponseParams
+	ReturnValue() *foundation.NSNumber
+	SetReturnValue(returnValue *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+}
+
+var _ MTRUnitTestingClusterTestAddArgumentsResponseParamsable = (*MTRUnitTestingClusterTestAddArgumentsResponseParams)(nil)
 

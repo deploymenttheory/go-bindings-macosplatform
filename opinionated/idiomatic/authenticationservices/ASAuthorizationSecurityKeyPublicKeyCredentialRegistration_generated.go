@@ -7,6 +7,7 @@ package authenticationservices
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -30,10 +31,26 @@ func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistration) Transports() [
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	})
 }
+
+// Prf calls the underlying Prf.
+func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistration) Prf() *AuthorizationPublicKeyCredentialPRFRegistrationOutput {
+	_r := x.inner.Prf()
+	if _r == nil {
+		return nil
+	}
+	return &AuthorizationPublicKeyCredentialPRFRegistrationOutput{inner: _r}
+}
+
+// AuthorizationSecurityKeyPublicKeyCredentialRegistrationable is the interface implemented by [AuthorizationSecurityKeyPublicKeyCredentialRegistration], for mocking and DI.
+type AuthorizationSecurityKeyPublicKeyCredentialRegistrationable interface {
+	Unwrap() *raw.ASAuthorizationSecurityKeyPublicKeyCredentialRegistration
+	Transports() []*foundation.NSString
+	Prf() *AuthorizationPublicKeyCredentialPRFRegistrationOutput
+}
+
+var _ AuthorizationSecurityKeyPublicKeyCredentialRegistrationable = (*AuthorizationSecurityKeyPublicKeyCredentialRegistration)(nil)
 

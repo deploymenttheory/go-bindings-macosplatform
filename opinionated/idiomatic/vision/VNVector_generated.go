@@ -38,3 +38,46 @@ func NewVectorWithVectorHeadTail(head *raw.VNPoint, tail *raw.VNPoint) *Vector {
 	return &Vector{inner: raw.VNVectorFromID(_id)}
 }
 
+// X calls the underlying X.
+func (x *Vector) X() float64 {
+	return x.inner.X()
+}
+
+// Y calls the underlying Y.
+func (x *Vector) Y() float64 {
+	return x.inner.Y()
+}
+
+// R calls the underlying R.
+func (x *Vector) R() float64 {
+	return x.inner.R()
+}
+
+// Theta calls the underlying Theta.
+func (x *Vector) Theta() float64 {
+	return x.inner.Theta()
+}
+
+// Length calls the underlying Length.
+func (x *Vector) Length() float64 {
+	return x.inner.Length()
+}
+
+// SquaredLength calls the underlying SquaredLength.
+func (x *Vector) SquaredLength() float64 {
+	return x.inner.SquaredLength()
+}
+
+// Vectorable is the interface implemented by [Vector], for mocking and DI.
+type Vectorable interface {
+	Unwrap() *raw.VNVector
+	X() float64
+	Y() float64
+	R() float64
+	Theta() float64
+	Length() float64
+	SquaredLength() float64
+}
+
+var _ Vectorable = (*Vector)(nil)
+

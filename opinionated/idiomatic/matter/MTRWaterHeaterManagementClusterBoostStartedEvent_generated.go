@@ -29,3 +29,27 @@ func (x *MTRWaterHeaterManagementClusterBoostStartedEvent) WithBoostInfo(boostIn
 	return x
 }
 
+// BoostInfo calls the underlying BoostInfo.
+func (x *MTRWaterHeaterManagementClusterBoostStartedEvent) BoostInfo() *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct {
+	_r := x.inner.BoostInfo()
+	if _r == nil {
+		return nil
+	}
+	return &MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct{inner: _r}
+}
+
+// SetBoostInfo calls the underlying SetBoostInfo.
+func (x *MTRWaterHeaterManagementClusterBoostStartedEvent) SetBoostInfo(boostInfo *raw.MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) {
+	x.inner.SetBoostInfo(boostInfo)
+}
+
+// MTRWaterHeaterManagementClusterBoostStartedEventable is the interface implemented by [MTRWaterHeaterManagementClusterBoostStartedEvent], for mocking and DI.
+type MTRWaterHeaterManagementClusterBoostStartedEventable interface {
+	Unwrap() *raw.MTRWaterHeaterManagementClusterBoostStartedEvent
+	WithBoostInfo(boostInfo *raw.MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) *MTRWaterHeaterManagementClusterBoostStartedEvent
+	BoostInfo() *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct
+	SetBoostInfo(boostInfo *raw.MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct)
+}
+
+var _ MTRWaterHeaterManagementClusterBoostStartedEventable = (*MTRWaterHeaterManagementClusterBoostStartedEvent)(nil)
+

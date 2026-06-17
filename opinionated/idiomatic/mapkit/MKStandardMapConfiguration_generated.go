@@ -62,5 +62,55 @@ func (x *StandardMapConfiguration) WithShowsTraffic(showsTraffic bool) *Standard
 	return x
 }
 
+// EmphasisStyle calls the underlying EmphasisStyle.
+func (x *StandardMapConfiguration) EmphasisStyle() raw.MKStandardMapEmphasisStyle {
+	return x.inner.EmphasisStyle()
+}
+
+// SetEmphasisStyle calls the underlying SetEmphasisStyle.
+func (x *StandardMapConfiguration) SetEmphasisStyle(emphasisStyle raw.MKStandardMapEmphasisStyle) {
+	x.inner.SetEmphasisStyle(emphasisStyle)
+}
+
+// PointOfInterestFilter calls the underlying PointOfInterestFilter.
+func (x *StandardMapConfiguration) PointOfInterestFilter() *PointOfInterestFilter {
+	_r := x.inner.PointOfInterestFilter()
+	if _r == nil {
+		return nil
+	}
+	return &PointOfInterestFilter{inner: _r}
+}
+
+// SetPointOfInterestFilter calls the underlying SetPointOfInterestFilter.
+func (x *StandardMapConfiguration) SetPointOfInterestFilter(pointOfInterestFilter *raw.MKPointOfInterestFilter) {
+	x.inner.SetPointOfInterestFilter(pointOfInterestFilter)
+}
+
+// ShowsTraffic calls the underlying ShowsTraffic.
+func (x *StandardMapConfiguration) ShowsTraffic() bool {
+	return x.inner.ShowsTraffic()
+}
+
+// SetShowsTraffic calls the underlying SetShowsTraffic.
+func (x *StandardMapConfiguration) SetShowsTraffic(showsTraffic bool) {
+	x.inner.SetShowsTraffic(showsTraffic)
+}
+
 func (x *StandardMapConfiguration) asMapConfiguration() *raw.MKMapConfiguration { return &x.inner.MKMapConfiguration }
+
+// StandardMapConfigurationable is the interface implemented by [StandardMapConfiguration], for mocking and DI.
+type StandardMapConfigurationable interface {
+	Unwrap() *raw.MKStandardMapConfiguration
+	WithEmphasisStyle(emphasisStyle raw.MKStandardMapEmphasisStyle) *StandardMapConfiguration
+	WithPointOfInterestFilter(pointOfInterestFilter *raw.MKPointOfInterestFilter) *StandardMapConfiguration
+	WithShowsTraffic(showsTraffic bool) *StandardMapConfiguration
+	EmphasisStyle() raw.MKStandardMapEmphasisStyle
+	SetEmphasisStyle(emphasisStyle raw.MKStandardMapEmphasisStyle)
+	PointOfInterestFilter() *PointOfInterestFilter
+	SetPointOfInterestFilter(pointOfInterestFilter *raw.MKPointOfInterestFilter)
+	ShowsTraffic() bool
+	SetShowsTraffic(showsTraffic bool)
+}
+
+var _ StandardMapConfigurationable = (*StandardMapConfiguration)(nil)
 

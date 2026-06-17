@@ -23,7 +23,32 @@ func NewCNNUpsampling() *CNNUpsampling {
 	return &CNNUpsampling{inner: raw.MPSCNNUpsamplingFromID(_id)}
 }
 
+// ScaleFactorX calls the underlying ScaleFactorX.
+func (x *CNNUpsampling) ScaleFactorX() float64 {
+	return x.inner.ScaleFactorX()
+}
+
+// ScaleFactorY calls the underlying ScaleFactorY.
+func (x *CNNUpsampling) ScaleFactorY() float64 {
+	return x.inner.ScaleFactorY()
+}
+
+// AlignCorners calls the underlying AlignCorners.
+func (x *CNNUpsampling) AlignCorners() bool {
+	return x.inner.AlignCorners()
+}
+
 func (x *CNNUpsampling) asCNNUpsampling() *raw.MPSCNNUpsampling { return x.inner }
 
 func (x *CNNUpsampling) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSCNNKernel }
+
+// CNNUpsamplingable is the interface implemented by [CNNUpsampling], for mocking and DI.
+type CNNUpsamplingable interface {
+	Unwrap() *raw.MPSCNNUpsampling
+	ScaleFactorX() float64
+	ScaleFactorY() float64
+	AlignCorners() bool
+}
+
+var _ CNNUpsamplingable = (*CNNUpsampling)(nil)
 

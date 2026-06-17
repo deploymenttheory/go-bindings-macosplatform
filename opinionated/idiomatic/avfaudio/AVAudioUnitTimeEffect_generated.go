@@ -30,9 +30,29 @@ func (x *AudioUnitTimeEffect) WithBypass(bypass bool) *AudioUnitTimeEffect {
 	return x
 }
 
+// Bypass calls the underlying Bypass.
+func (x *AudioUnitTimeEffect) Bypass() bool {
+	return x.inner.Bypass()
+}
+
+// SetBypass calls the underlying SetBypass.
+func (x *AudioUnitTimeEffect) SetBypass(bypass bool) {
+	x.inner.SetBypass(bypass)
+}
+
 func (x *AudioUnitTimeEffect) asAudioUnitTimeEffect() *raw.AVAudioUnitTimeEffect { return x.inner }
 
 func (x *AudioUnitTimeEffect) asAudioUnit() *raw.AVAudioUnit { return &x.inner.AVAudioUnit }
 
 func (x *AudioUnitTimeEffect) asAudioNode() *raw.AVAudioNode { return &x.inner.AVAudioUnit.AVAudioNode }
+
+// AudioUnitTimeEffectable is the interface implemented by [AudioUnitTimeEffect], for mocking and DI.
+type AudioUnitTimeEffectable interface {
+	Unwrap() *raw.AVAudioUnitTimeEffect
+	WithBypass(bypass bool) *AudioUnitTimeEffect
+	Bypass() bool
+	SetBypass(bypass bool)
+}
+
+var _ AudioUnitTimeEffectable = (*AudioUnitTimeEffect)(nil)
 

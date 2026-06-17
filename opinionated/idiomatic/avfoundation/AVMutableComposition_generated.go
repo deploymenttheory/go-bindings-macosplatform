@@ -9,6 +9,7 @@ import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
@@ -34,15 +35,25 @@ func (x *MutableComposition) WithNaturalSize(naturalSize corefoundation.CGSize) 
 	return x
 }
 
+// SetNaturalSize calls the underlying SetNaturalSize.
+func (x *MutableComposition) SetNaturalSize(naturalSize corefoundation.CGSize) {
+	x.inner.SetNaturalSize(naturalSize)
+}
+
+// InsertTimeRangeOfAssetAtTimeError calls the underlying InsertTimeRangeOfAssetAtTimeError.
+func (x *MutableComposition) InsertTimeRangeOfAssetAtTimeError(timeRange coremedia.CMTimeRange, asset *raw.AVAsset, startTime coremedia.CMTime) (bool, error) {
+	return x.inner.InsertTimeRangeOfAssetAtTimeError(timeRange, asset, startTime)
+}
+
 // InsertTimeRangeOfAssetAtTime blocks until the operation completes or ctx is cancelled.
 func (x *MutableComposition) InsertTimeRangeOfAssetAtTime(ctx context.Context, timeRange coremedia.CMTimeRange, asset *raw.AVAsset, startTime coremedia.CMTime) error {
 	_ch := make(chan error, 1)
 	x.inner.InsertTimeRangeOfAssetAtTimeCompletionHandler(timeRange, asset, startTime, func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -52,7 +63,62 @@ func (x *MutableComposition) InsertTimeRangeOfAssetAtTime(ctx context.Context, t
 	}
 }
 
+// InsertEmptyTimeRange calls the underlying InsertEmptyTimeRange.
+func (x *MutableComposition) InsertEmptyTimeRange(timeRange coremedia.CMTimeRange) {
+	x.inner.InsertEmptyTimeRange(timeRange)
+}
+
+// RemoveTimeRange calls the underlying RemoveTimeRange.
+func (x *MutableComposition) RemoveTimeRange(timeRange coremedia.CMTimeRange) {
+	x.inner.RemoveTimeRange(timeRange)
+}
+
+// ScaleTimeRangeToDuration calls the underlying ScaleTimeRangeToDuration.
+func (x *MutableComposition) ScaleTimeRangeToDuration(timeRange coremedia.CMTimeRange, duration coremedia.CMTime) {
+	x.inner.ScaleTimeRangeToDuration(timeRange, duration)
+}
+
+// AddMutableTrackWithMediaTypePreferredTrackID calls the underlying AddMutableTrackWithMediaTypePreferredTrackID.
+func (x *MutableComposition) AddMutableTrackWithMediaTypePreferredTrackID(mediaType *foundation.NSString, preferredTrackID int32) *MutableCompositionTrack {
+	_r := x.inner.AddMutableTrackWithMediaTypePreferredTrackID(mediaType, preferredTrackID)
+	if _r == nil {
+		return nil
+	}
+	return &MutableCompositionTrack{inner: _r}
+}
+
+// RemoveTrack calls the underlying RemoveTrack.
+func (x *MutableComposition) RemoveTrack(track *raw.AVCompositionTrack) {
+	x.inner.RemoveTrack(track)
+}
+
+// MutableTrackCompatibleWithTrack calls the underlying MutableTrackCompatibleWithTrack.
+func (x *MutableComposition) MutableTrackCompatibleWithTrack(track *raw.AVAssetTrack) *MutableCompositionTrack {
+	_r := x.inner.MutableTrackCompatibleWithTrack(track)
+	if _r == nil {
+		return nil
+	}
+	return &MutableCompositionTrack{inner: _r}
+}
+
 func (x *MutableComposition) asComposition() *raw.AVComposition { return &x.inner.AVComposition }
 
 func (x *MutableComposition) asAsset() *raw.AVAsset { return &x.inner.AVComposition.AVAsset }
+
+// MutableCompositionable is the interface implemented by [MutableComposition], for mocking and DI.
+type MutableCompositionable interface {
+	Unwrap() *raw.AVMutableComposition
+	WithNaturalSize(naturalSize corefoundation.CGSize) *MutableComposition
+	SetNaturalSize(naturalSize corefoundation.CGSize)
+	InsertTimeRangeOfAssetAtTimeError(timeRange coremedia.CMTimeRange, asset *raw.AVAsset, startTime coremedia.CMTime) (bool, error)
+	InsertTimeRangeOfAssetAtTime(ctx context.Context, timeRange coremedia.CMTimeRange, asset *raw.AVAsset, startTime coremedia.CMTime) error
+	InsertEmptyTimeRange(timeRange coremedia.CMTimeRange)
+	RemoveTimeRange(timeRange coremedia.CMTimeRange)
+	ScaleTimeRangeToDuration(timeRange coremedia.CMTimeRange, duration coremedia.CMTime)
+	AddMutableTrackWithMediaTypePreferredTrackID(mediaType *foundation.NSString, preferredTrackID int32) *MutableCompositionTrack
+	RemoveTrack(track *raw.AVCompositionTrack)
+	MutableTrackCompatibleWithTrack(track *raw.AVAssetTrack) *MutableCompositionTrack
+}
+
+var _ MutableCompositionable = (*MutableComposition)(nil)
 

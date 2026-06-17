@@ -42,11 +42,11 @@ func (x *AppService) UnregisterAndReturnError() error {
 func (x *AppService) Unregister(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.UnregisterWithCompletionHandler(func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -55,4 +55,20 @@ func (x *AppService) Unregister(ctx context.Context) error {
 		return ctx.Err()
 	}
 }
+
+// Status calls the underlying Status.
+func (x *AppService) Status() raw.SMAppServiceStatus {
+	return x.inner.Status()
+}
+
+// AppServiceable is the interface implemented by [AppService], for mocking and DI.
+type AppServiceable interface {
+	Unwrap() *raw.SMAppService
+	RegisterAndReturnError() error
+	UnregisterAndReturnError() error
+	Unregister(ctx context.Context) error
+	Status() raw.SMAppServiceStatus
+}
+
+var _ AppServiceable = (*AppService)(nil)
 

@@ -25,3 +25,10 @@ func NewMTRGeneralDiagnosticsClusterNetworkInterfaceType() *MTRGeneralDiagnostic
 
 func (x *MTRGeneralDiagnosticsClusterNetworkInterfaceType) asMTRGeneralDiagnosticsClusterNetworkInterface() *raw.MTRGeneralDiagnosticsClusterNetworkInterface { return &x.inner.MTRGeneralDiagnosticsClusterNetworkInterface }
 
+// MTRGeneralDiagnosticsClusterNetworkInterfaceTypeable is the interface implemented by [MTRGeneralDiagnosticsClusterNetworkInterfaceType], for mocking and DI.
+type MTRGeneralDiagnosticsClusterNetworkInterfaceTypeable interface {
+	Unwrap() *raw.MTRGeneralDiagnosticsClusterNetworkInterfaceType
+}
+
+var _ MTRGeneralDiagnosticsClusterNetworkInterfaceTypeable = (*MTRGeneralDiagnosticsClusterNetworkInterfaceType)(nil)
+

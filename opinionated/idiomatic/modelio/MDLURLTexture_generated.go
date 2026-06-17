@@ -31,5 +31,25 @@ func (x *URLTexture) WithURL(uRL string) *URLTexture {
 	return x
 }
 
+// URL calls the underlying URL.
+func (x *URLTexture) URL() *foundation.NSURL {
+	return x.inner.URL()
+}
+
+// SetURL calls the underlying SetURL.
+func (x *URLTexture) SetURL(uRL string) {
+	x.inner.SetURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
+}
+
 func (x *URLTexture) asTexture() *raw.MDLTexture { return &x.inner.MDLTexture }
+
+// URLTextureable is the interface implemented by [URLTexture], for mocking and DI.
+type URLTextureable interface {
+	Unwrap() *raw.MDLURLTexture
+	WithURL(uRL string) *URLTexture
+	URL() *foundation.NSURL
+	SetURL(uRL string)
+}
+
+var _ URLTextureable = (*URLTexture)(nil)
 

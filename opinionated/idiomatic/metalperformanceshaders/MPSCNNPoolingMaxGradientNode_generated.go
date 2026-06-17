@@ -30,3 +30,10 @@ func (x *CNNPoolingMaxGradientNode) asNNGradientFilterNode() *mpsneuralnetwork.M
 
 func (x *CNNPoolingMaxGradientNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSCNNPoolingGradientNode.MPSNNGradientFilterNode.MPSNNFilterNode }
 
+// CNNPoolingMaxGradientNodeable is the interface implemented by [CNNPoolingMaxGradientNode], for mocking and DI.
+type CNNPoolingMaxGradientNodeable interface {
+	Unwrap() *raw.MPSCNNPoolingMaxGradientNode
+}
+
+var _ CNNPoolingMaxGradientNodeable = (*CNNPoolingMaxGradientNode)(nil)
+

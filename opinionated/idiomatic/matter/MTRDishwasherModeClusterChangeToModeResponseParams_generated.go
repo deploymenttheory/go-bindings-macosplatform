@@ -43,3 +43,40 @@ func (x *MTRDishwasherModeClusterChangeToModeResponseParams) WithStatusText(stat
 	return x
 }
 
+// Status calls the underlying Status.
+func (x *MTRDishwasherModeClusterChangeToModeResponseParams) Status() *foundation.NSNumber {
+	return x.inner.Status()
+}
+
+// SetStatus calls the underlying SetStatus.
+func (x *MTRDishwasherModeClusterChangeToModeResponseParams) SetStatus(status *foundation.NSNumber) {
+	x.inner.SetStatus(status)
+}
+
+// StatusText calls the underlying StatusText.
+func (x *MTRDishwasherModeClusterChangeToModeResponseParams) StatusText() string {
+	_r := x.inner.StatusText()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetStatusText calls the underlying SetStatusText.
+func (x *MTRDishwasherModeClusterChangeToModeResponseParams) SetStatusText(statusText string) {
+	x.inner.SetStatusText(foundation.NSStringStringWithUTF8String(statusText))
+}
+
+// MTRDishwasherModeClusterChangeToModeResponseParamsable is the interface implemented by [MTRDishwasherModeClusterChangeToModeResponseParams], for mocking and DI.
+type MTRDishwasherModeClusterChangeToModeResponseParamsable interface {
+	Unwrap() *raw.MTRDishwasherModeClusterChangeToModeResponseParams
+	WithStatus(status *foundation.NSNumber) *MTRDishwasherModeClusterChangeToModeResponseParams
+	WithStatusText(statusText string) *MTRDishwasherModeClusterChangeToModeResponseParams
+	Status() *foundation.NSNumber
+	SetStatus(status *foundation.NSNumber)
+	StatusText() string
+	SetStatusText(statusText string)
+}
+
+var _ MTRDishwasherModeClusterChangeToModeResponseParamsable = (*MTRDishwasherModeClusterChangeToModeResponseParams)(nil)
+

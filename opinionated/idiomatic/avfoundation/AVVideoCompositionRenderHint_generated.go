@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,23 @@ func NewVideoCompositionRenderHint() *VideoCompositionRenderHint {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVVideoCompositionRenderHint")), objc.RegisterName("new"))
 	return &VideoCompositionRenderHint{inner: raw.AVVideoCompositionRenderHintFromID(_id)}
 }
+
+// StartCompositionTime calls the underlying StartCompositionTime.
+func (x *VideoCompositionRenderHint) StartCompositionTime() coremedia.CMTime {
+	return x.inner.StartCompositionTime()
+}
+
+// EndCompositionTime calls the underlying EndCompositionTime.
+func (x *VideoCompositionRenderHint) EndCompositionTime() coremedia.CMTime {
+	return x.inner.EndCompositionTime()
+}
+
+// VideoCompositionRenderHintable is the interface implemented by [VideoCompositionRenderHint], for mocking and DI.
+type VideoCompositionRenderHintable interface {
+	Unwrap() *raw.AVVideoCompositionRenderHint
+	StartCompositionTime() coremedia.CMTime
+	EndCompositionTime() coremedia.CMTime
+}
+
+var _ VideoCompositionRenderHintable = (*VideoCompositionRenderHint)(nil)
 

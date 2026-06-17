@@ -89,5 +89,161 @@ func (x *GraphDepthwiseConvolution2DOpDescriptor) WithWeightsLayout(weightsLayou
 	return x
 }
 
+// SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom calls the underlying SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom.
+func (x *GraphDepthwiseConvolution2DOpDescriptor) SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom(paddingLeft uint, paddingRight uint, paddingTop uint, paddingBottom uint) {
+	x.inner.SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom(paddingLeft, paddingRight, paddingTop, paddingBottom)
+}
+
+// StrideInX calls the underlying StrideInX.
+func (x *GraphDepthwiseConvolution2DOpDescriptor) StrideInX() uint {
+	return x.inner.StrideInX()
+}
+
+// SetStrideInX calls the underlying SetStrideInX.
+func (x *GraphDepthwiseConvolution2DOpDescriptor) SetStrideInX(strideInX uint) {
+	x.inner.SetStrideInX(strideInX)
+}
+
+// StrideInY calls the underlying StrideInY.
+func (x *GraphDepthwiseConvolution2DOpDescriptor) StrideInY() uint {
+	return x.inner.StrideInY()
+}
+
+// SetStrideInY calls the underlying SetStrideInY.
+func (x *GraphDepthwiseConvolution2DOpDescriptor) SetStrideInY(strideInY uint) {
+	x.inner.SetStrideInY(strideInY)
+}
+
+// DilationRateInX calls the underlying DilationRateInX.
+func (x *GraphDepthwiseConvolution2DOpDescriptor) DilationRateInX() uint {
+	return x.inner.DilationRateInX()
+}
+
+// SetDilationRateInX calls the underlying SetDilationRateInX.
+func (x *GraphDepthwiseConvolution2DOpDescriptor) SetDilationRateInX(dilationRateInX uint) {
+	x.inner.SetDilationRateInX(dilationRateInX)
+}
+
+// DilationRateInY calls the underlying DilationRateInY.
+func (x *GraphDepthwiseConvolution2DOpDescriptor) DilationRateInY() uint {
+	return x.inner.DilationRateInY()
+}
+
+// SetDilationRateInY calls the underlying SetDilationRateInY.
+func (x *GraphDepthwiseConvolution2DOpDescriptor) SetDilationRateInY(dilationRateInY uint) {
+	x.inner.SetDilationRateInY(dilationRateInY)
+}
+
+// PaddingLeft calls the underlying PaddingLeft.
+func (x *GraphDepthwiseConvolution2DOpDescriptor) PaddingLeft() uint {
+	return x.inner.PaddingLeft()
+}
+
+// SetPaddingLeft calls the underlying SetPaddingLeft.
+func (x *GraphDepthwiseConvolution2DOpDescriptor) SetPaddingLeft(paddingLeft uint) {
+	x.inner.SetPaddingLeft(paddingLeft)
+}
+
+// PaddingRight calls the underlying PaddingRight.
+func (x *GraphDepthwiseConvolution2DOpDescriptor) PaddingRight() uint {
+	return x.inner.PaddingRight()
+}
+
+// SetPaddingRight calls the underlying SetPaddingRight.
+func (x *GraphDepthwiseConvolution2DOpDescriptor) SetPaddingRight(paddingRight uint) {
+	x.inner.SetPaddingRight(paddingRight)
+}
+
+// PaddingTop calls the underlying PaddingTop.
+func (x *GraphDepthwiseConvolution2DOpDescriptor) PaddingTop() uint {
+	return x.inner.PaddingTop()
+}
+
+// SetPaddingTop calls the underlying SetPaddingTop.
+func (x *GraphDepthwiseConvolution2DOpDescriptor) SetPaddingTop(paddingTop uint) {
+	x.inner.SetPaddingTop(paddingTop)
+}
+
+// PaddingBottom calls the underlying PaddingBottom.
+func (x *GraphDepthwiseConvolution2DOpDescriptor) PaddingBottom() uint {
+	return x.inner.PaddingBottom()
+}
+
+// SetPaddingBottom calls the underlying SetPaddingBottom.
+func (x *GraphDepthwiseConvolution2DOpDescriptor) SetPaddingBottom(paddingBottom uint) {
+	x.inner.SetPaddingBottom(paddingBottom)
+}
+
+// PaddingStyle calls the underlying PaddingStyle.
+func (x *GraphDepthwiseConvolution2DOpDescriptor) PaddingStyle() raw.MPSGraphPaddingStyle {
+	return x.inner.PaddingStyle()
+}
+
+// SetPaddingStyle calls the underlying SetPaddingStyle.
+func (x *GraphDepthwiseConvolution2DOpDescriptor) SetPaddingStyle(paddingStyle raw.MPSGraphPaddingStyle) {
+	x.inner.SetPaddingStyle(paddingStyle)
+}
+
+// DataLayout calls the underlying DataLayout.
+func (x *GraphDepthwiseConvolution2DOpDescriptor) DataLayout() raw.MPSGraphTensorNamedDataLayout {
+	return x.inner.DataLayout()
+}
+
+// SetDataLayout calls the underlying SetDataLayout.
+func (x *GraphDepthwiseConvolution2DOpDescriptor) SetDataLayout(dataLayout raw.MPSGraphTensorNamedDataLayout) {
+	x.inner.SetDataLayout(dataLayout)
+}
+
+// WeightsLayout calls the underlying WeightsLayout.
+func (x *GraphDepthwiseConvolution2DOpDescriptor) WeightsLayout() raw.MPSGraphTensorNamedDataLayout {
+	return x.inner.WeightsLayout()
+}
+
+// SetWeightsLayout calls the underlying SetWeightsLayout.
+func (x *GraphDepthwiseConvolution2DOpDescriptor) SetWeightsLayout(weightsLayout raw.MPSGraphTensorNamedDataLayout) {
+	x.inner.SetWeightsLayout(weightsLayout)
+}
+
 func (x *GraphDepthwiseConvolution2DOpDescriptor) asGraphObject() *raw.MPSGraphObject { return &x.inner.MPSGraphObject }
+
+// GraphDepthwiseConvolution2DOpDescriptorable is the interface implemented by [GraphDepthwiseConvolution2DOpDescriptor], for mocking and DI.
+type GraphDepthwiseConvolution2DOpDescriptorable interface {
+	Unwrap() *raw.MPSGraphDepthwiseConvolution2DOpDescriptor
+	WithStrideInX(strideInX uint) *GraphDepthwiseConvolution2DOpDescriptor
+	WithStrideInY(strideInY uint) *GraphDepthwiseConvolution2DOpDescriptor
+	WithDilationRateInX(dilationRateInX uint) *GraphDepthwiseConvolution2DOpDescriptor
+	WithDilationRateInY(dilationRateInY uint) *GraphDepthwiseConvolution2DOpDescriptor
+	WithPaddingLeft(paddingLeft uint) *GraphDepthwiseConvolution2DOpDescriptor
+	WithPaddingRight(paddingRight uint) *GraphDepthwiseConvolution2DOpDescriptor
+	WithPaddingTop(paddingTop uint) *GraphDepthwiseConvolution2DOpDescriptor
+	WithPaddingBottom(paddingBottom uint) *GraphDepthwiseConvolution2DOpDescriptor
+	WithPaddingStyle(paddingStyle raw.MPSGraphPaddingStyle) *GraphDepthwiseConvolution2DOpDescriptor
+	WithDataLayout(dataLayout raw.MPSGraphTensorNamedDataLayout) *GraphDepthwiseConvolution2DOpDescriptor
+	WithWeightsLayout(weightsLayout raw.MPSGraphTensorNamedDataLayout) *GraphDepthwiseConvolution2DOpDescriptor
+	SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom(paddingLeft uint, paddingRight uint, paddingTop uint, paddingBottom uint)
+	StrideInX() uint
+	SetStrideInX(strideInX uint)
+	StrideInY() uint
+	SetStrideInY(strideInY uint)
+	DilationRateInX() uint
+	SetDilationRateInX(dilationRateInX uint)
+	DilationRateInY() uint
+	SetDilationRateInY(dilationRateInY uint)
+	PaddingLeft() uint
+	SetPaddingLeft(paddingLeft uint)
+	PaddingRight() uint
+	SetPaddingRight(paddingRight uint)
+	PaddingTop() uint
+	SetPaddingTop(paddingTop uint)
+	PaddingBottom() uint
+	SetPaddingBottom(paddingBottom uint)
+	PaddingStyle() raw.MPSGraphPaddingStyle
+	SetPaddingStyle(paddingStyle raw.MPSGraphPaddingStyle)
+	DataLayout() raw.MPSGraphTensorNamedDataLayout
+	SetDataLayout(dataLayout raw.MPSGraphTensorNamedDataLayout)
+	WeightsLayout() raw.MPSGraphTensorNamedDataLayout
+	SetWeightsLayout(weightsLayout raw.MPSGraphTensorNamedDataLayout)
+}
+
+var _ GraphDepthwiseConvolution2DOpDescriptorable = (*GraphDepthwiseConvolution2DOpDescriptor)(nil)
 

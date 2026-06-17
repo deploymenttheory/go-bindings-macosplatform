@@ -7,6 +7,7 @@ package corespotlight
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corespotlight"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,4 +25,21 @@ func NewLocalizedStringWithLocalizedStrings(localizedStrings *foundation.NSDicti
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLocalizedStrings:"), localizedStrings.Ptr())
 	return &LocalizedString{inner: raw.CSLocalizedStringFromID(_id)}
 }
+
+// LocalizedString calls the underlying LocalizedString.
+func (x *LocalizedString) LocalizedString() string {
+	_r := x.inner.LocalizedString()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// LocalizedStringable is the interface implemented by [LocalizedString], for mocking and DI.
+type LocalizedStringable interface {
+	Unwrap() *raw.CSLocalizedString
+	LocalizedString() string
+}
+
+var _ LocalizedStringable = (*LocalizedString)(nil)
 

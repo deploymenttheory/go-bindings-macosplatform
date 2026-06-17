@@ -41,5 +41,51 @@ func (x *NNStateNode) WithSynchronizeResource(synchronizeResource bool) *NNState
 	return x
 }
 
+// Handle calls the underlying Handle.
+func (x *NNStateNode) Handle() raw.MPSHandle {
+	return x.inner.Handle()
+}
+
+// SetHandle calls the underlying SetHandle.
+func (x *NNStateNode) SetHandle(handle raw.MPSHandle) {
+	x.inner.SetHandle(handle)
+}
+
+// ExportFromGraph calls the underlying ExportFromGraph.
+func (x *NNStateNode) ExportFromGraph() bool {
+	return x.inner.ExportFromGraph()
+}
+
+// SetExportFromGraph calls the underlying SetExportFromGraph.
+func (x *NNStateNode) SetExportFromGraph(exportFromGraph bool) {
+	x.inner.SetExportFromGraph(exportFromGraph)
+}
+
+// SynchronizeResource calls the underlying SynchronizeResource.
+func (x *NNStateNode) SynchronizeResource() bool {
+	return x.inner.SynchronizeResource()
+}
+
+// SetSynchronizeResource calls the underlying SetSynchronizeResource.
+func (x *NNStateNode) SetSynchronizeResource(synchronizeResource bool) {
+	x.inner.SetSynchronizeResource(synchronizeResource)
+}
+
 func (x *NNStateNode) asNNStateNode() *raw.MPSNNStateNode { return x.inner }
+
+// NNStateNodeable is the interface implemented by [NNStateNode], for mocking and DI.
+type NNStateNodeable interface {
+	Unwrap() *raw.MPSNNStateNode
+	WithHandle(handle raw.MPSHandle) *NNStateNode
+	WithExportFromGraph(exportFromGraph bool) *NNStateNode
+	WithSynchronizeResource(synchronizeResource bool) *NNStateNode
+	Handle() raw.MPSHandle
+	SetHandle(handle raw.MPSHandle)
+	ExportFromGraph() bool
+	SetExportFromGraph(exportFromGraph bool)
+	SynchronizeResource() bool
+	SetSynchronizeResource(synchronizeResource bool)
+}
+
+var _ NNStateNodeable = (*NNStateNode)(nil)
 

@@ -7,6 +7,7 @@ package modelio
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // AnimatedVector4 wraps [raw.MDLAnimatedVector4] with a fluent Go API.
@@ -23,5 +24,60 @@ func NewAnimatedVector4() *AnimatedVector4 {
 	return &AnimatedVector4{inner: raw.MDLAnimatedVector4FromID(_id)}
 }
 
+// SetFloat4AtTime calls the underlying SetFloat4AtTime.
+func (x *AnimatedVector4) SetFloat4AtTime(value unsafe.Pointer, time_ float64) {
+	x.inner.SetFloat4AtTime(value, time_)
+}
+
+// SetDouble4AtTime calls the underlying SetDouble4AtTime.
+func (x *AnimatedVector4) SetDouble4AtTime(value unsafe.Pointer, time_ float64) {
+	x.inner.SetDouble4AtTime(value, time_)
+}
+
+// Float4AtTime calls the underlying Float4AtTime.
+func (x *AnimatedVector4) Float4AtTime(time_ float64) unsafe.Pointer {
+	return x.inner.Float4AtTime(time_)
+}
+
+// Double4AtTime calls the underlying Double4AtTime.
+func (x *AnimatedVector4) Double4AtTime(time_ float64) unsafe.Pointer {
+	return x.inner.Double4AtTime(time_)
+}
+
+// ResetWithFloat4ArrayAtTimesCount calls the underlying ResetWithFloat4ArrayAtTimesCount.
+func (x *AnimatedVector4) ResetWithFloat4ArrayAtTimesCount(valuesArray unsafe.Pointer, timesArray *float64, count uint) {
+	x.inner.ResetWithFloat4ArrayAtTimesCount(valuesArray, timesArray, count)
+}
+
+// ResetWithDouble4ArrayAtTimesCount calls the underlying ResetWithDouble4ArrayAtTimesCount.
+func (x *AnimatedVector4) ResetWithDouble4ArrayAtTimesCount(valuesArray unsafe.Pointer, timesArray *float64, count uint) {
+	x.inner.ResetWithDouble4ArrayAtTimesCount(valuesArray, timesArray, count)
+}
+
+// GetFloat4ArrayMaxCount calls the underlying GetFloat4ArrayMaxCount.
+func (x *AnimatedVector4) GetFloat4ArrayMaxCount(valuesArray unsafe.Pointer, maxCount uint) uint {
+	return x.inner.GetFloat4ArrayMaxCount(valuesArray, maxCount)
+}
+
+// GetDouble4ArrayMaxCount calls the underlying GetDouble4ArrayMaxCount.
+func (x *AnimatedVector4) GetDouble4ArrayMaxCount(valuesArray unsafe.Pointer, maxCount uint) uint {
+	return x.inner.GetDouble4ArrayMaxCount(valuesArray, maxCount)
+}
+
 func (x *AnimatedVector4) asAnimatedValue() *raw.MDLAnimatedValue { return &x.inner.MDLAnimatedValue }
+
+// AnimatedVector4able is the interface implemented by [AnimatedVector4], for mocking and DI.
+type AnimatedVector4able interface {
+	Unwrap() *raw.MDLAnimatedVector4
+	SetFloat4AtTime(value unsafe.Pointer, time_ float64)
+	SetDouble4AtTime(value unsafe.Pointer, time_ float64)
+	Float4AtTime(time_ float64) unsafe.Pointer
+	Double4AtTime(time_ float64) unsafe.Pointer
+	ResetWithFloat4ArrayAtTimesCount(valuesArray unsafe.Pointer, timesArray *float64, count uint)
+	ResetWithDouble4ArrayAtTimesCount(valuesArray unsafe.Pointer, timesArray *float64, count uint)
+	GetFloat4ArrayMaxCount(valuesArray unsafe.Pointer, maxCount uint) uint
+	GetDouble4ArrayMaxCount(valuesArray unsafe.Pointer, maxCount uint) uint
+}
+
+var _ AnimatedVector4able = (*AnimatedVector4)(nil)
 

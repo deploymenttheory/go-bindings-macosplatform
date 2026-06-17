@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -36,5 +37,42 @@ func (x *MTRTargetNavigatorClusterTargetInfoStruct) WithName(name string) *MTRTa
 	return x
 }
 
+// Identifier calls the underlying Identifier.
+func (x *MTRTargetNavigatorClusterTargetInfoStruct) Identifier() *foundation.NSNumber {
+	return x.inner.Identifier()
+}
+
+// SetIdentifier calls the underlying SetIdentifier.
+func (x *MTRTargetNavigatorClusterTargetInfoStruct) SetIdentifier(identifier *foundation.NSNumber) {
+	x.inner.SetIdentifier(identifier)
+}
+
+// Name calls the underlying Name.
+func (x *MTRTargetNavigatorClusterTargetInfoStruct) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetName calls the underlying SetName.
+func (x *MTRTargetNavigatorClusterTargetInfoStruct) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
 func (x *MTRTargetNavigatorClusterTargetInfoStruct) asMTRTargetNavigatorClusterTargetInfoStruct() *raw.MTRTargetNavigatorClusterTargetInfoStruct { return x.inner }
+
+// MTRTargetNavigatorClusterTargetInfoStructable is the interface implemented by [MTRTargetNavigatorClusterTargetInfoStruct], for mocking and DI.
+type MTRTargetNavigatorClusterTargetInfoStructable interface {
+	Unwrap() *raw.MTRTargetNavigatorClusterTargetInfoStruct
+	WithIdentifier(identifier *foundation.NSNumber) *MTRTargetNavigatorClusterTargetInfoStruct
+	WithName(name string) *MTRTargetNavigatorClusterTargetInfoStruct
+	Identifier() *foundation.NSNumber
+	SetIdentifier(identifier *foundation.NSNumber)
+	Name() string
+	SetName(name string)
+}
+
+var _ MTRTargetNavigatorClusterTargetInfoStructable = (*MTRTargetNavigatorClusterTargetInfoStruct)(nil)
 

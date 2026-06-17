@@ -117,22 +117,118 @@ func (x *FetchRecordZoneChangesOperation) RecordZoneIDs() []*raw.CKRecordZoneID 
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.CKRecordZoneID, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CKRecordZoneID {
+		return raw.CKRecordZoneIDFromID(purego.Retain(_id))
+	})
+}
+
+// SetRecordZoneIDs calls the underlying SetRecordZoneIDs.
+func (x *FetchRecordZoneChangesOperation) SetRecordZoneIDs(recordZoneIDs *foundation.NSArray[*raw.CKRecordZoneID]) {
+	x.inner.SetRecordZoneIDs(recordZoneIDs)
+}
+
+// ConfigurationsByRecordZoneID calls the underlying ConfigurationsByRecordZoneID.
+func (x *FetchRecordZoneChangesOperation) ConfigurationsByRecordZoneID() *foundation.NSDictionary[*raw.CKRecordZoneID, *raw.CKFetchRecordZoneChangesConfiguration] {
+	return x.inner.ConfigurationsByRecordZoneID()
+}
+
+// SetConfigurationsByRecordZoneID calls the underlying SetConfigurationsByRecordZoneID.
+func (x *FetchRecordZoneChangesOperation) SetConfigurationsByRecordZoneID(configurationsByRecordZoneID *foundation.NSDictionary[*raw.CKRecordZoneID, *raw.CKFetchRecordZoneChangesConfiguration]) {
+	x.inner.SetConfigurationsByRecordZoneID(configurationsByRecordZoneID)
+}
+
+// FetchAllChanges calls the underlying FetchAllChanges.
+func (x *FetchRecordZoneChangesOperation) FetchAllChanges() bool {
+	return x.inner.FetchAllChanges()
+}
+
+// SetFetchAllChanges calls the underlying SetFetchAllChanges.
+func (x *FetchRecordZoneChangesOperation) SetFetchAllChanges(fetchAllChanges bool) {
+	x.inner.SetFetchAllChanges(fetchAllChanges)
+}
+
+// RecordChangedBlock calls the underlying RecordChangedBlock.
+func (x *FetchRecordZoneChangesOperation) RecordChangedBlock() objc.Block {
+	return x.inner.RecordChangedBlock()
+}
+
+// SetRecordChangedBlock blocks until the operation completes or ctx is cancelled.
+func (x *FetchRecordZoneChangesOperation) SetRecordChangedBlock(ctx context.Context) (*Record, error) {
+	type _result struct {
+		val *Record
+		err error
 	}
-	return out
+	_ch := make(chan _result, 1)
+	x.inner.SetRecordChangedBlock(func(_p0 *raw.CKRecord) {
+		var _o _result
+		if _p0 != nil {
+			_o.val = &Record{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *Record
+		return _zero, ctx.Err()
+	}
+}
+
+// RecordWasChangedBlock calls the underlying RecordWasChangedBlock.
+func (x *FetchRecordZoneChangesOperation) RecordWasChangedBlock() objc.Block {
+	return x.inner.RecordWasChangedBlock()
+}
+
+// SetRecordWasChangedBlock calls the underlying SetRecordWasChangedBlock.
+func (x *FetchRecordZoneChangesOperation) SetRecordWasChangedBlock(recordWasChangedBlock func(*raw.CKRecordID, *raw.CKRecord, unsafe.Pointer)) {
+	x.inner.SetRecordWasChangedBlock(recordWasChangedBlock)
+}
+
+// RecordWithIDWasDeletedBlock calls the underlying RecordWithIDWasDeletedBlock.
+func (x *FetchRecordZoneChangesOperation) RecordWithIDWasDeletedBlock() objc.Block {
+	return x.inner.RecordWithIDWasDeletedBlock()
+}
+
+// SetRecordWithIDWasDeletedBlock calls the underlying SetRecordWithIDWasDeletedBlock.
+func (x *FetchRecordZoneChangesOperation) SetRecordWithIDWasDeletedBlock(recordWithIDWasDeletedBlock func(*raw.CKRecordID, *foundation.NSString)) {
+	x.inner.SetRecordWithIDWasDeletedBlock(recordWithIDWasDeletedBlock)
+}
+
+// RecordZoneChangeTokensUpdatedBlock calls the underlying RecordZoneChangeTokensUpdatedBlock.
+func (x *FetchRecordZoneChangesOperation) RecordZoneChangeTokensUpdatedBlock() objc.Block {
+	return x.inner.RecordZoneChangeTokensUpdatedBlock()
+}
+
+// SetRecordZoneChangeTokensUpdatedBlock calls the underlying SetRecordZoneChangeTokensUpdatedBlock.
+func (x *FetchRecordZoneChangesOperation) SetRecordZoneChangeTokensUpdatedBlock(recordZoneChangeTokensUpdatedBlock func(*raw.CKRecordZoneID, *raw.CKServerChangeToken, *foundation.NSData)) {
+	x.inner.SetRecordZoneChangeTokensUpdatedBlock(recordZoneChangeTokensUpdatedBlock)
+}
+
+// RecordZoneFetchCompletionBlock calls the underlying RecordZoneFetchCompletionBlock.
+func (x *FetchRecordZoneChangesOperation) RecordZoneFetchCompletionBlock() objc.Block {
+	return x.inner.RecordZoneFetchCompletionBlock()
+}
+
+// SetRecordZoneFetchCompletionBlock calls the underlying SetRecordZoneFetchCompletionBlock.
+func (x *FetchRecordZoneChangesOperation) SetRecordZoneFetchCompletionBlock(recordZoneFetchCompletionBlock func(*raw.CKRecordZoneID, *raw.CKServerChangeToken, *foundation.NSData, bool, unsafe.Pointer)) {
+	x.inner.SetRecordZoneFetchCompletionBlock(recordZoneFetchCompletionBlock)
+}
+
+// FetchRecordZoneChangesCompletionBlock calls the underlying FetchRecordZoneChangesCompletionBlock.
+func (x *FetchRecordZoneChangesOperation) FetchRecordZoneChangesCompletionBlock() objc.Block {
+	return x.inner.FetchRecordZoneChangesCompletionBlock()
 }
 
 // SetFetchRecordZoneChangesCompletionBlock blocks until the operation completes or ctx is cancelled.
 func (x *FetchRecordZoneChangesOperation) SetFetchRecordZoneChangesCompletionBlock(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.SetFetchRecordZoneChangesCompletionBlock(func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -142,7 +238,54 @@ func (x *FetchRecordZoneChangesOperation) SetFetchRecordZoneChangesCompletionBlo
 	}
 }
 
+// OptionsByRecordZoneID calls the underlying OptionsByRecordZoneID.
+func (x *FetchRecordZoneChangesOperation) OptionsByRecordZoneID() *foundation.NSDictionary[*raw.CKRecordZoneID, *raw.CKFetchRecordZoneChangesOptions] {
+	return x.inner.OptionsByRecordZoneID()
+}
+
+// SetOptionsByRecordZoneID calls the underlying SetOptionsByRecordZoneID.
+func (x *FetchRecordZoneChangesOperation) SetOptionsByRecordZoneID(optionsByRecordZoneID *foundation.NSDictionary[*raw.CKRecordZoneID, *raw.CKFetchRecordZoneChangesOptions]) {
+	x.inner.SetOptionsByRecordZoneID(optionsByRecordZoneID)
+}
+
 func (x *FetchRecordZoneChangesOperation) asDatabaseOperation() *raw.CKDatabaseOperation { return &x.inner.CKDatabaseOperation }
 
 func (x *FetchRecordZoneChangesOperation) asOperation() *raw.CKOperation { return &x.inner.CKDatabaseOperation.CKOperation }
+
+// FetchRecordZoneChangesOperationable is the interface implemented by [FetchRecordZoneChangesOperation], for mocking and DI.
+type FetchRecordZoneChangesOperationable interface {
+	Unwrap() *raw.CKFetchRecordZoneChangesOperation
+	WithRecordZoneIDs(items ...*raw.CKRecordZoneID) *FetchRecordZoneChangesOperation
+	WithConfigurationsByRecordZoneID(configurationsByRecordZoneID *foundation.NSDictionary[*raw.CKRecordZoneID, *raw.CKFetchRecordZoneChangesConfiguration]) *FetchRecordZoneChangesOperation
+	WithFetchAllChanges(fetchAllChanges bool) *FetchRecordZoneChangesOperation
+	WithRecordChangedBlock(recordChangedBlock func(*raw.CKRecord)) *FetchRecordZoneChangesOperation
+	WithRecordWasChangedBlock(recordWasChangedBlock func(*raw.CKRecordID, *raw.CKRecord, unsafe.Pointer)) *FetchRecordZoneChangesOperation
+	WithRecordWithIDWasDeletedBlock(recordWithIDWasDeletedBlock func(*raw.CKRecordID, *foundation.NSString)) *FetchRecordZoneChangesOperation
+	WithRecordZoneChangeTokensUpdatedBlock(recordZoneChangeTokensUpdatedBlock func(*raw.CKRecordZoneID, *raw.CKServerChangeToken, *foundation.NSData)) *FetchRecordZoneChangesOperation
+	WithRecordZoneFetchCompletionBlock(recordZoneFetchCompletionBlock func(*raw.CKRecordZoneID, *raw.CKServerChangeToken, *foundation.NSData, bool, unsafe.Pointer)) *FetchRecordZoneChangesOperation
+	WithFetchRecordZoneChangesCompletionBlock(fetchRecordZoneChangesCompletionBlock func(unsafe.Pointer)) *FetchRecordZoneChangesOperation
+	WithOptionsByRecordZoneID(optionsByRecordZoneID *foundation.NSDictionary[*raw.CKRecordZoneID, *raw.CKFetchRecordZoneChangesOptions]) *FetchRecordZoneChangesOperation
+	RecordZoneIDs() []*raw.CKRecordZoneID
+	SetRecordZoneIDs(recordZoneIDs *foundation.NSArray[*raw.CKRecordZoneID])
+	ConfigurationsByRecordZoneID() *foundation.NSDictionary[*raw.CKRecordZoneID, *raw.CKFetchRecordZoneChangesConfiguration]
+	SetConfigurationsByRecordZoneID(configurationsByRecordZoneID *foundation.NSDictionary[*raw.CKRecordZoneID, *raw.CKFetchRecordZoneChangesConfiguration])
+	FetchAllChanges() bool
+	SetFetchAllChanges(fetchAllChanges bool)
+	RecordChangedBlock() objc.Block
+	SetRecordChangedBlock(ctx context.Context) (*Record, error)
+	RecordWasChangedBlock() objc.Block
+	SetRecordWasChangedBlock(recordWasChangedBlock func(*raw.CKRecordID, *raw.CKRecord, unsafe.Pointer))
+	RecordWithIDWasDeletedBlock() objc.Block
+	SetRecordWithIDWasDeletedBlock(recordWithIDWasDeletedBlock func(*raw.CKRecordID, *foundation.NSString))
+	RecordZoneChangeTokensUpdatedBlock() objc.Block
+	SetRecordZoneChangeTokensUpdatedBlock(recordZoneChangeTokensUpdatedBlock func(*raw.CKRecordZoneID, *raw.CKServerChangeToken, *foundation.NSData))
+	RecordZoneFetchCompletionBlock() objc.Block
+	SetRecordZoneFetchCompletionBlock(recordZoneFetchCompletionBlock func(*raw.CKRecordZoneID, *raw.CKServerChangeToken, *foundation.NSData, bool, unsafe.Pointer))
+	FetchRecordZoneChangesCompletionBlock() objc.Block
+	SetFetchRecordZoneChangesCompletionBlock(ctx context.Context) error
+	OptionsByRecordZoneID() *foundation.NSDictionary[*raw.CKRecordZoneID, *raw.CKFetchRecordZoneChangesOptions]
+	SetOptionsByRecordZoneID(optionsByRecordZoneID *foundation.NSDictionary[*raw.CKRecordZoneID, *raw.CKFetchRecordZoneChangesOptions])
+}
+
+var _ FetchRecordZoneChangesOperationable = (*FetchRecordZoneChangesOperation)(nil)
 

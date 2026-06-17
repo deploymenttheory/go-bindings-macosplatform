@@ -23,3 +23,210 @@ func NewRemoteCommandCenter() *RemoteCommandCenter {
 	return &RemoteCommandCenter{inner: raw.MPRemoteCommandCenterFromID(_id)}
 }
 
+// PauseCommand calls the underlying PauseCommand.
+func (x *RemoteCommandCenter) PauseCommand() *RemoteCommand {
+	_r := x.inner.PauseCommand()
+	if _r == nil {
+		return nil
+	}
+	return &RemoteCommand{inner: _r}
+}
+
+// PlayCommand calls the underlying PlayCommand.
+func (x *RemoteCommandCenter) PlayCommand() *RemoteCommand {
+	_r := x.inner.PlayCommand()
+	if _r == nil {
+		return nil
+	}
+	return &RemoteCommand{inner: _r}
+}
+
+// StopCommand calls the underlying StopCommand.
+func (x *RemoteCommandCenter) StopCommand() *RemoteCommand {
+	_r := x.inner.StopCommand()
+	if _r == nil {
+		return nil
+	}
+	return &RemoteCommand{inner: _r}
+}
+
+// TogglePlayPauseCommand calls the underlying TogglePlayPauseCommand.
+func (x *RemoteCommandCenter) TogglePlayPauseCommand() *RemoteCommand {
+	_r := x.inner.TogglePlayPauseCommand()
+	if _r == nil {
+		return nil
+	}
+	return &RemoteCommand{inner: _r}
+}
+
+// EnableLanguageOptionCommand calls the underlying EnableLanguageOptionCommand.
+func (x *RemoteCommandCenter) EnableLanguageOptionCommand() *RemoteCommand {
+	_r := x.inner.EnableLanguageOptionCommand()
+	if _r == nil {
+		return nil
+	}
+	return &RemoteCommand{inner: _r}
+}
+
+// DisableLanguageOptionCommand calls the underlying DisableLanguageOptionCommand.
+func (x *RemoteCommandCenter) DisableLanguageOptionCommand() *RemoteCommand {
+	_r := x.inner.DisableLanguageOptionCommand()
+	if _r == nil {
+		return nil
+	}
+	return &RemoteCommand{inner: _r}
+}
+
+// ChangePlaybackRateCommand calls the underlying ChangePlaybackRateCommand.
+func (x *RemoteCommandCenter) ChangePlaybackRateCommand() *ChangePlaybackRateCommand {
+	_r := x.inner.ChangePlaybackRateCommand()
+	if _r == nil {
+		return nil
+	}
+	return &ChangePlaybackRateCommand{inner: _r}
+}
+
+// ChangeRepeatModeCommand calls the underlying ChangeRepeatModeCommand.
+func (x *RemoteCommandCenter) ChangeRepeatModeCommand() *ChangeRepeatModeCommand {
+	_r := x.inner.ChangeRepeatModeCommand()
+	if _r == nil {
+		return nil
+	}
+	return &ChangeRepeatModeCommand{inner: _r}
+}
+
+// ChangeShuffleModeCommand calls the underlying ChangeShuffleModeCommand.
+func (x *RemoteCommandCenter) ChangeShuffleModeCommand() *ChangeShuffleModeCommand {
+	_r := x.inner.ChangeShuffleModeCommand()
+	if _r == nil {
+		return nil
+	}
+	return &ChangeShuffleModeCommand{inner: _r}
+}
+
+// NextTrackCommand calls the underlying NextTrackCommand.
+func (x *RemoteCommandCenter) NextTrackCommand() *RemoteCommand {
+	_r := x.inner.NextTrackCommand()
+	if _r == nil {
+		return nil
+	}
+	return &RemoteCommand{inner: _r}
+}
+
+// PreviousTrackCommand calls the underlying PreviousTrackCommand.
+func (x *RemoteCommandCenter) PreviousTrackCommand() *RemoteCommand {
+	_r := x.inner.PreviousTrackCommand()
+	if _r == nil {
+		return nil
+	}
+	return &RemoteCommand{inner: _r}
+}
+
+// SkipForwardCommand calls the underlying SkipForwardCommand.
+func (x *RemoteCommandCenter) SkipForwardCommand() *SkipIntervalCommand {
+	_r := x.inner.SkipForwardCommand()
+	if _r == nil {
+		return nil
+	}
+	return &SkipIntervalCommand{inner: _r}
+}
+
+// SkipBackwardCommand calls the underlying SkipBackwardCommand.
+func (x *RemoteCommandCenter) SkipBackwardCommand() *SkipIntervalCommand {
+	_r := x.inner.SkipBackwardCommand()
+	if _r == nil {
+		return nil
+	}
+	return &SkipIntervalCommand{inner: _r}
+}
+
+// SeekForwardCommand calls the underlying SeekForwardCommand.
+func (x *RemoteCommandCenter) SeekForwardCommand() *RemoteCommand {
+	_r := x.inner.SeekForwardCommand()
+	if _r == nil {
+		return nil
+	}
+	return &RemoteCommand{inner: _r}
+}
+
+// SeekBackwardCommand calls the underlying SeekBackwardCommand.
+func (x *RemoteCommandCenter) SeekBackwardCommand() *RemoteCommand {
+	_r := x.inner.SeekBackwardCommand()
+	if _r == nil {
+		return nil
+	}
+	return &RemoteCommand{inner: _r}
+}
+
+// ChangePlaybackPositionCommand calls the underlying ChangePlaybackPositionCommand.
+func (x *RemoteCommandCenter) ChangePlaybackPositionCommand() *ChangePlaybackPositionCommand {
+	_r := x.inner.ChangePlaybackPositionCommand()
+	if _r == nil {
+		return nil
+	}
+	return &ChangePlaybackPositionCommand{inner: _r}
+}
+
+// RatingCommand calls the underlying RatingCommand.
+func (x *RemoteCommandCenter) RatingCommand() *RatingCommand {
+	_r := x.inner.RatingCommand()
+	if _r == nil {
+		return nil
+	}
+	return &RatingCommand{inner: _r}
+}
+
+// LikeCommand calls the underlying LikeCommand.
+func (x *RemoteCommandCenter) LikeCommand() *FeedbackCommand {
+	_r := x.inner.LikeCommand()
+	if _r == nil {
+		return nil
+	}
+	return &FeedbackCommand{inner: _r}
+}
+
+// DislikeCommand calls the underlying DislikeCommand.
+func (x *RemoteCommandCenter) DislikeCommand() *FeedbackCommand {
+	_r := x.inner.DislikeCommand()
+	if _r == nil {
+		return nil
+	}
+	return &FeedbackCommand{inner: _r}
+}
+
+// BookmarkCommand calls the underlying BookmarkCommand.
+func (x *RemoteCommandCenter) BookmarkCommand() *FeedbackCommand {
+	_r := x.inner.BookmarkCommand()
+	if _r == nil {
+		return nil
+	}
+	return &FeedbackCommand{inner: _r}
+}
+
+// RemoteCommandCenterable is the interface implemented by [RemoteCommandCenter], for mocking and DI.
+type RemoteCommandCenterable interface {
+	Unwrap() *raw.MPRemoteCommandCenter
+	PauseCommand() *RemoteCommand
+	PlayCommand() *RemoteCommand
+	StopCommand() *RemoteCommand
+	TogglePlayPauseCommand() *RemoteCommand
+	EnableLanguageOptionCommand() *RemoteCommand
+	DisableLanguageOptionCommand() *RemoteCommand
+	ChangePlaybackRateCommand() *ChangePlaybackRateCommand
+	ChangeRepeatModeCommand() *ChangeRepeatModeCommand
+	ChangeShuffleModeCommand() *ChangeShuffleModeCommand
+	NextTrackCommand() *RemoteCommand
+	PreviousTrackCommand() *RemoteCommand
+	SkipForwardCommand() *SkipIntervalCommand
+	SkipBackwardCommand() *SkipIntervalCommand
+	SeekForwardCommand() *RemoteCommand
+	SeekBackwardCommand() *RemoteCommand
+	ChangePlaybackPositionCommand() *ChangePlaybackPositionCommand
+	RatingCommand() *RatingCommand
+	LikeCommand() *FeedbackCommand
+	DislikeCommand() *FeedbackCommand
+	BookmarkCommand() *FeedbackCommand
+}
+
+var _ RemoteCommandCenterable = (*RemoteCommandCenter)(nil)
+

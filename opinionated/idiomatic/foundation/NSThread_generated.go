@@ -62,5 +62,116 @@ func (x *Thread) WithStackSize(stackSize uint) *Thread {
 	return x
 }
 
+// Cancel calls the underlying Cancel.
+func (x *Thread) Cancel() {
+	x.inner.Cancel()
+}
+
+// Start calls the underlying Start.
+func (x *Thread) Start() {
+	x.inner.Start()
+}
+
+// Main calls the underlying Main.
+func (x *Thread) Main() {
+	x.inner.Main()
+}
+
+// ThreadDictionary calls the underlying ThreadDictionary.
+func (x *Thread) ThreadDictionary() *raw.NSMutableDictionary[objc.ID, objc.ID] {
+	return x.inner.ThreadDictionary()
+}
+
+// ThreadPriority calls the underlying ThreadPriority.
+func (x *Thread) ThreadPriority() float64 {
+	return x.inner.ThreadPriority()
+}
+
+// SetThreadPriority calls the underlying SetThreadPriority.
+func (x *Thread) SetThreadPriority(threadPriority float64) {
+	x.inner.SetThreadPriority(threadPriority)
+}
+
+// QualityOfService calls the underlying QualityOfService.
+func (x *Thread) QualityOfService() raw.NSQualityOfService {
+	return x.inner.QualityOfService()
+}
+
+// SetQualityOfService calls the underlying SetQualityOfService.
+func (x *Thread) SetQualityOfService(qualityOfService raw.NSQualityOfService) {
+	x.inner.SetQualityOfService(qualityOfService)
+}
+
+// Name calls the underlying Name.
+func (x *Thread) Name() *String {
+	_r := x.inner.Name()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SetName calls the underlying SetName.
+func (x *Thread) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
+// StackSize calls the underlying StackSize.
+func (x *Thread) StackSize() uint {
+	return x.inner.StackSize()
+}
+
+// SetStackSize calls the underlying SetStackSize.
+func (x *Thread) SetStackSize(stackSize uint) {
+	x.inner.SetStackSize(stackSize)
+}
+
+// IsMainThread calls the underlying IsMainThread.
+func (x *Thread) IsMainThread() bool {
+	return x.inner.IsMainThread()
+}
+
+// IsExecuting calls the underlying IsExecuting.
+func (x *Thread) IsExecuting() bool {
+	return x.inner.IsExecuting()
+}
+
+// IsFinished calls the underlying IsFinished.
+func (x *Thread) IsFinished() bool {
+	return x.inner.IsFinished()
+}
+
+// IsCancelled calls the underlying IsCancelled.
+func (x *Thread) IsCancelled() bool {
+	return x.inner.IsCancelled()
+}
+
 func (x *Thread) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// Threadable is the interface implemented by [Thread], for mocking and DI.
+type Threadable interface {
+	Unwrap() *raw.NSThread
+	WithThreadPriority(threadPriority float64) *Thread
+	WithQualityOfService(qualityOfService raw.NSQualityOfService) *Thread
+	WithName(name string) *Thread
+	WithStackSize(stackSize uint) *Thread
+	Cancel()
+	Start()
+	Main()
+	ThreadDictionary() *raw.NSMutableDictionary[objc.ID, objc.ID]
+	ThreadPriority() float64
+	SetThreadPriority(threadPriority float64)
+	QualityOfService() raw.NSQualityOfService
+	SetQualityOfService(qualityOfService raw.NSQualityOfService)
+	Name() *String
+	SetName(name string)
+	StackSize() uint
+	SetStackSize(stackSize uint)
+	IsMainThread() bool
+	IsExecuting() bool
+	IsFinished() bool
+	IsCancelled() bool
+}
+
+var _ Threadable = (*Thread)(nil)
 

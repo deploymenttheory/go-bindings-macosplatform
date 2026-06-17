@@ -6,7 +6,9 @@ package coredata
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // PersistentStoreAsynchronousResult wraps [raw.NSPersistentStoreAsynchronousResult] with a fluent Go API.
@@ -23,7 +25,42 @@ func NewPersistentStoreAsynchronousResult() *PersistentStoreAsynchronousResult {
 	return &PersistentStoreAsynchronousResult{inner: raw.NSPersistentStoreAsynchronousResultFromID(_id)}
 }
 
+// Cancel calls the underlying Cancel.
+func (x *PersistentStoreAsynchronousResult) Cancel() {
+	x.inner.Cancel()
+}
+
+// ManagedObjectContext calls the underlying ManagedObjectContext.
+func (x *PersistentStoreAsynchronousResult) ManagedObjectContext() *ManagedObjectContext {
+	_r := x.inner.ManagedObjectContext()
+	if _r == nil {
+		return nil
+	}
+	return &ManagedObjectContext{inner: _r}
+}
+
+// OperationError calls the underlying OperationError.
+func (x *PersistentStoreAsynchronousResult) OperationError() unsafe.Pointer {
+	return x.inner.OperationError()
+}
+
+// Progress calls the underlying Progress.
+func (x *PersistentStoreAsynchronousResult) Progress() *foundation.NSProgress {
+	return x.inner.Progress()
+}
+
 func (x *PersistentStoreAsynchronousResult) asPersistentStoreAsynchronousResult() *raw.NSPersistentStoreAsynchronousResult { return x.inner }
 
 func (x *PersistentStoreAsynchronousResult) asPersistentStoreResult() *raw.NSPersistentStoreResult { return &x.inner.NSPersistentStoreResult }
+
+// PersistentStoreAsynchronousResultable is the interface implemented by [PersistentStoreAsynchronousResult], for mocking and DI.
+type PersistentStoreAsynchronousResultable interface {
+	Unwrap() *raw.NSPersistentStoreAsynchronousResult
+	Cancel()
+	ManagedObjectContext() *ManagedObjectContext
+	OperationError() unsafe.Pointer
+	Progress() *foundation.NSProgress
+}
+
+var _ PersistentStoreAsynchronousResultable = (*PersistentStoreAsynchronousResult)(nil)
 

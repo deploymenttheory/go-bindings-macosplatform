@@ -54,3 +54,75 @@ func (x *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) With
 	return x
 }
 
+// AttributeId calls the underlying AttributeId.
+func (x *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) AttributeId() *foundation.NSNumber {
+	return x.inner.AttributeId()
+}
+
+// SetAttributeId calls the underlying SetAttributeId.
+func (x *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) SetAttributeId(attributeId *foundation.NSNumber) {
+	x.inner.SetAttributeId(attributeId)
+}
+
+// StartTime calls the underlying StartTime.
+func (x *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) StartTime() *foundation.NSNumber {
+	return x.inner.StartTime()
+}
+
+// SetStartTime calls the underlying SetStartTime.
+func (x *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) SetStartTime(startTime *foundation.NSNumber) {
+	x.inner.SetStartTime(startTime)
+}
+
+// NumberOfIntervals calls the underlying NumberOfIntervals.
+func (x *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) NumberOfIntervals() *foundation.NSNumber {
+	return x.inner.NumberOfIntervals()
+}
+
+// SetNumberOfIntervals calls the underlying SetNumberOfIntervals.
+func (x *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) SetNumberOfIntervals(numberOfIntervals *foundation.NSNumber) {
+	x.inner.SetNumberOfIntervals(numberOfIntervals)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRElectricalMeasurementClusterGetMeasurementProfileCommandParamsable is the interface implemented by [MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams], for mocking and DI.
+type MTRElectricalMeasurementClusterGetMeasurementProfileCommandParamsable interface {
+	Unwrap() *raw.MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams
+	WithAttributeId(attributeId *foundation.NSNumber) *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams
+	WithStartTime(startTime *foundation.NSNumber) *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams
+	WithNumberOfIntervals(numberOfIntervals *foundation.NSNumber) *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams
+	AttributeId() *foundation.NSNumber
+	SetAttributeId(attributeId *foundation.NSNumber)
+	StartTime() *foundation.NSNumber
+	SetStartTime(startTime *foundation.NSNumber)
+	NumberOfIntervals() *foundation.NSNumber
+	SetNumberOfIntervals(numberOfIntervals *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRElectricalMeasurementClusterGetMeasurementProfileCommandParamsable = (*MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams)(nil)
+

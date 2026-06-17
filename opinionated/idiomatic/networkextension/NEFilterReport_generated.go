@@ -23,3 +23,44 @@ func NewNEFilterReport() *NEFilterReport {
 	return &NEFilterReport{inner: raw.NEFilterReportFromID(_id)}
 }
 
+// Flow calls the underlying Flow.
+func (x *NEFilterReport) Flow() *NEFilterFlow {
+	_r := x.inner.Flow()
+	if _r == nil {
+		return nil
+	}
+	return &NEFilterFlow{inner: _r}
+}
+
+// Action calls the underlying Action.
+func (x *NEFilterReport) Action() raw.NEFilterAction {
+	return x.inner.Action()
+}
+
+// Event calls the underlying Event.
+func (x *NEFilterReport) Event() raw.NEFilterReportEvent {
+	return x.inner.Event()
+}
+
+// BytesInboundCount calls the underlying BytesInboundCount.
+func (x *NEFilterReport) BytesInboundCount() uint {
+	return x.inner.BytesInboundCount()
+}
+
+// BytesOutboundCount calls the underlying BytesOutboundCount.
+func (x *NEFilterReport) BytesOutboundCount() uint {
+	return x.inner.BytesOutboundCount()
+}
+
+// NEFilterReportable is the interface implemented by [NEFilterReport], for mocking and DI.
+type NEFilterReportable interface {
+	Unwrap() *raw.NEFilterReport
+	Flow() *NEFilterFlow
+	Action() raw.NEFilterAction
+	Event() raw.NEFilterReportEvent
+	BytesInboundCount() uint
+	BytesOutboundCount() uint
+}
+
+var _ NEFilterReportable = (*NEFilterReport)(nil)
+

@@ -7,6 +7,7 @@ package fskit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/fskit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -102,4 +103,190 @@ func (x *StatFSResult) WithFileSystemSubType(fileSystemSubType int) *StatFSResul
 	x.inner.SetFileSystemSubType(fileSystemSubType)
 	return x
 }
+
+// BlockSize calls the underlying BlockSize.
+func (x *StatFSResult) BlockSize() int {
+	return x.inner.BlockSize()
+}
+
+// SetBlockSize calls the underlying SetBlockSize.
+func (x *StatFSResult) SetBlockSize(blockSize int) {
+	x.inner.SetBlockSize(blockSize)
+}
+
+// IoSize calls the underlying IoSize.
+func (x *StatFSResult) IoSize() int {
+	return x.inner.IoSize()
+}
+
+// SetIoSize calls the underlying SetIoSize.
+func (x *StatFSResult) SetIoSize(ioSize int) {
+	x.inner.SetIoSize(ioSize)
+}
+
+// TotalBlocks calls the underlying TotalBlocks.
+func (x *StatFSResult) TotalBlocks() uint64 {
+	return x.inner.TotalBlocks()
+}
+
+// SetTotalBlocks calls the underlying SetTotalBlocks.
+func (x *StatFSResult) SetTotalBlocks(totalBlocks uint64) {
+	x.inner.SetTotalBlocks(totalBlocks)
+}
+
+// AvailableBlocks calls the underlying AvailableBlocks.
+func (x *StatFSResult) AvailableBlocks() uint64 {
+	return x.inner.AvailableBlocks()
+}
+
+// SetAvailableBlocks calls the underlying SetAvailableBlocks.
+func (x *StatFSResult) SetAvailableBlocks(availableBlocks uint64) {
+	x.inner.SetAvailableBlocks(availableBlocks)
+}
+
+// FreeBlocks calls the underlying FreeBlocks.
+func (x *StatFSResult) FreeBlocks() uint64 {
+	return x.inner.FreeBlocks()
+}
+
+// SetFreeBlocks calls the underlying SetFreeBlocks.
+func (x *StatFSResult) SetFreeBlocks(freeBlocks uint64) {
+	x.inner.SetFreeBlocks(freeBlocks)
+}
+
+// UsedBlocks calls the underlying UsedBlocks.
+func (x *StatFSResult) UsedBlocks() uint64 {
+	return x.inner.UsedBlocks()
+}
+
+// SetUsedBlocks calls the underlying SetUsedBlocks.
+func (x *StatFSResult) SetUsedBlocks(usedBlocks uint64) {
+	x.inner.SetUsedBlocks(usedBlocks)
+}
+
+// TotalBytes calls the underlying TotalBytes.
+func (x *StatFSResult) TotalBytes() uint64 {
+	return x.inner.TotalBytes()
+}
+
+// SetTotalBytes calls the underlying SetTotalBytes.
+func (x *StatFSResult) SetTotalBytes(totalBytes uint64) {
+	x.inner.SetTotalBytes(totalBytes)
+}
+
+// AvailableBytes calls the underlying AvailableBytes.
+func (x *StatFSResult) AvailableBytes() uint64 {
+	return x.inner.AvailableBytes()
+}
+
+// SetAvailableBytes calls the underlying SetAvailableBytes.
+func (x *StatFSResult) SetAvailableBytes(availableBytes uint64) {
+	x.inner.SetAvailableBytes(availableBytes)
+}
+
+// FreeBytes calls the underlying FreeBytes.
+func (x *StatFSResult) FreeBytes() uint64 {
+	return x.inner.FreeBytes()
+}
+
+// SetFreeBytes calls the underlying SetFreeBytes.
+func (x *StatFSResult) SetFreeBytes(freeBytes uint64) {
+	x.inner.SetFreeBytes(freeBytes)
+}
+
+// UsedBytes calls the underlying UsedBytes.
+func (x *StatFSResult) UsedBytes() uint64 {
+	return x.inner.UsedBytes()
+}
+
+// SetUsedBytes calls the underlying SetUsedBytes.
+func (x *StatFSResult) SetUsedBytes(usedBytes uint64) {
+	x.inner.SetUsedBytes(usedBytes)
+}
+
+// TotalFiles calls the underlying TotalFiles.
+func (x *StatFSResult) TotalFiles() uint64 {
+	return x.inner.TotalFiles()
+}
+
+// SetTotalFiles calls the underlying SetTotalFiles.
+func (x *StatFSResult) SetTotalFiles(totalFiles uint64) {
+	x.inner.SetTotalFiles(totalFiles)
+}
+
+// FreeFiles calls the underlying FreeFiles.
+func (x *StatFSResult) FreeFiles() uint64 {
+	return x.inner.FreeFiles()
+}
+
+// SetFreeFiles calls the underlying SetFreeFiles.
+func (x *StatFSResult) SetFreeFiles(freeFiles uint64) {
+	x.inner.SetFreeFiles(freeFiles)
+}
+
+// FileSystemSubType calls the underlying FileSystemSubType.
+func (x *StatFSResult) FileSystemSubType() int {
+	return x.inner.FileSystemSubType()
+}
+
+// SetFileSystemSubType calls the underlying SetFileSystemSubType.
+func (x *StatFSResult) SetFileSystemSubType(fileSystemSubType int) {
+	x.inner.SetFileSystemSubType(fileSystemSubType)
+}
+
+// FileSystemTypeName calls the underlying FileSystemTypeName.
+func (x *StatFSResult) FileSystemTypeName() string {
+	_r := x.inner.FileSystemTypeName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// StatFSResultable is the interface implemented by [StatFSResult], for mocking and DI.
+type StatFSResultable interface {
+	Unwrap() *raw.FSStatFSResult
+	WithBlockSize(blockSize int) *StatFSResult
+	WithIoSize(ioSize int) *StatFSResult
+	WithTotalBlocks(totalBlocks uint64) *StatFSResult
+	WithAvailableBlocks(availableBlocks uint64) *StatFSResult
+	WithFreeBlocks(freeBlocks uint64) *StatFSResult
+	WithUsedBlocks(usedBlocks uint64) *StatFSResult
+	WithTotalBytes(totalBytes uint64) *StatFSResult
+	WithAvailableBytes(availableBytes uint64) *StatFSResult
+	WithFreeBytes(freeBytes uint64) *StatFSResult
+	WithUsedBytes(usedBytes uint64) *StatFSResult
+	WithTotalFiles(totalFiles uint64) *StatFSResult
+	WithFreeFiles(freeFiles uint64) *StatFSResult
+	WithFileSystemSubType(fileSystemSubType int) *StatFSResult
+	BlockSize() int
+	SetBlockSize(blockSize int)
+	IoSize() int
+	SetIoSize(ioSize int)
+	TotalBlocks() uint64
+	SetTotalBlocks(totalBlocks uint64)
+	AvailableBlocks() uint64
+	SetAvailableBlocks(availableBlocks uint64)
+	FreeBlocks() uint64
+	SetFreeBlocks(freeBlocks uint64)
+	UsedBlocks() uint64
+	SetUsedBlocks(usedBlocks uint64)
+	TotalBytes() uint64
+	SetTotalBytes(totalBytes uint64)
+	AvailableBytes() uint64
+	SetAvailableBytes(availableBytes uint64)
+	FreeBytes() uint64
+	SetFreeBytes(freeBytes uint64)
+	UsedBytes() uint64
+	SetUsedBytes(usedBytes uint64)
+	TotalFiles() uint64
+	SetTotalFiles(totalFiles uint64)
+	FreeFiles() uint64
+	SetFreeFiles(freeFiles uint64)
+	FileSystemSubType() int
+	SetFileSystemSubType(fileSystemSubType int)
+	FileSystemTypeName() string
+}
+
+var _ StatFSResultable = (*StatFSResult)(nil)
 

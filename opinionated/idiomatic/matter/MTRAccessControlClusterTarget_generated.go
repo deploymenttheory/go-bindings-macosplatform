@@ -25,3 +25,10 @@ func NewMTRAccessControlClusterTarget() *MTRAccessControlClusterTarget {
 
 func (x *MTRAccessControlClusterTarget) asMTRAccessControlClusterAccessControlTargetStruct() *raw.MTRAccessControlClusterAccessControlTargetStruct { return &x.inner.MTRAccessControlClusterAccessControlTargetStruct }
 
+// MTRAccessControlClusterTargetable is the interface implemented by [MTRAccessControlClusterTarget], for mocking and DI.
+type MTRAccessControlClusterTargetable interface {
+	Unwrap() *raw.MTRAccessControlClusterTarget
+}
+
+var _ MTRAccessControlClusterTargetable = (*MTRAccessControlClusterTarget)(nil)
+

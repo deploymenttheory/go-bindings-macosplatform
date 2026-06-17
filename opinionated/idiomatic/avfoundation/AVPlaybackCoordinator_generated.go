@@ -6,7 +6,9 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -47,17 +49,29 @@ func (x *PlaybackCoordinator) WithPauseSnapsToMediaTimeOfOriginator(pauseSnapsTo
 	return x
 }
 
+// BeginSuspensionForReason calls the underlying BeginSuspensionForReason.
+func (x *PlaybackCoordinator) BeginSuspensionForReason(suspensionReason *foundation.NSString) *CoordinatedPlaybackSuspension {
+	_r := x.inner.BeginSuspensionForReason(suspensionReason)
+	if _r == nil {
+		return nil
+	}
+	return &CoordinatedPlaybackSuspension{inner: _r}
+}
+
+// ExpectedItemTimeAtHostTime calls the underlying ExpectedItemTimeAtHostTime.
+func (x *PlaybackCoordinator) ExpectedItemTimeAtHostTime(hostClockTime coremedia.CMTime) coremedia.CMTime {
+	return x.inner.ExpectedItemTimeAtHostTime(hostClockTime)
+}
+
 // OtherParticipants returns the collection as a Go slice.
 func (x *PlaybackCoordinator) OtherParticipants() []*raw.AVCoordinatedPlaybackParticipant {
 	arr := x.inner.OtherParticipants()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AVCoordinatedPlaybackParticipant, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVCoordinatedPlaybackParticipant {
+		return raw.AVCoordinatedPlaybackParticipantFromID(purego.Retain(_id))
+	})
 }
 
 // SuspensionReasons returns the collection as a Go slice.
@@ -66,11 +80,19 @@ func (x *PlaybackCoordinator) SuspensionReasons() []*foundation.NSString {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	})
+}
+
+// SetParticipantLimitForWaitingOutSuspensionsWithReason calls the underlying SetParticipantLimitForWaitingOutSuspensionsWithReason.
+func (x *PlaybackCoordinator) SetParticipantLimitForWaitingOutSuspensionsWithReason(participantLimit int, reason *foundation.NSString) {
+	x.inner.SetParticipantLimitForWaitingOutSuspensionsWithReason(participantLimit, reason)
+}
+
+// ParticipantLimitForWaitingOutSuspensionsWithReason calls the underlying ParticipantLimitForWaitingOutSuspensionsWithReason.
+func (x *PlaybackCoordinator) ParticipantLimitForWaitingOutSuspensionsWithReason(reason *foundation.NSString) int {
+	return x.inner.ParticipantLimitForWaitingOutSuspensionsWithReason(reason)
 }
 
 // SuspensionReasonsThatTriggerWaiting returns the collection as a Go slice.
@@ -79,12 +101,44 @@ func (x *PlaybackCoordinator) SuspensionReasonsThatTriggerWaiting() []*foundatio
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	})
+}
+
+// SetSuspensionReasonsThatTriggerWaiting calls the underlying SetSuspensionReasonsThatTriggerWaiting.
+func (x *PlaybackCoordinator) SetSuspensionReasonsThatTriggerWaiting(suspensionReasonsThatTriggerWaiting *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetSuspensionReasonsThatTriggerWaiting(suspensionReasonsThatTriggerWaiting)
+}
+
+// PauseSnapsToMediaTimeOfOriginator calls the underlying PauseSnapsToMediaTimeOfOriginator.
+func (x *PlaybackCoordinator) PauseSnapsToMediaTimeOfOriginator() bool {
+	return x.inner.PauseSnapsToMediaTimeOfOriginator()
+}
+
+// SetPauseSnapsToMediaTimeOfOriginator calls the underlying SetPauseSnapsToMediaTimeOfOriginator.
+func (x *PlaybackCoordinator) SetPauseSnapsToMediaTimeOfOriginator(pauseSnapsToMediaTimeOfOriginator bool) {
+	x.inner.SetPauseSnapsToMediaTimeOfOriginator(pauseSnapsToMediaTimeOfOriginator)
 }
 
 func (x *PlaybackCoordinator) asPlaybackCoordinator() *raw.AVPlaybackCoordinator { return x.inner }
+
+// PlaybackCoordinatorable is the interface implemented by [PlaybackCoordinator], for mocking and DI.
+type PlaybackCoordinatorable interface {
+	Unwrap() *raw.AVPlaybackCoordinator
+	WithSuspensionReasonsThatTriggerWaiting(items ...*foundation.NSString) *PlaybackCoordinator
+	WithPauseSnapsToMediaTimeOfOriginator(pauseSnapsToMediaTimeOfOriginator bool) *PlaybackCoordinator
+	BeginSuspensionForReason(suspensionReason *foundation.NSString) *CoordinatedPlaybackSuspension
+	ExpectedItemTimeAtHostTime(hostClockTime coremedia.CMTime) coremedia.CMTime
+	OtherParticipants() []*raw.AVCoordinatedPlaybackParticipant
+	SuspensionReasons() []*foundation.NSString
+	SetParticipantLimitForWaitingOutSuspensionsWithReason(participantLimit int, reason *foundation.NSString)
+	ParticipantLimitForWaitingOutSuspensionsWithReason(reason *foundation.NSString) int
+	SuspensionReasonsThatTriggerWaiting() []*foundation.NSString
+	SetSuspensionReasonsThatTriggerWaiting(suspensionReasonsThatTriggerWaiting *foundation.NSArray[*foundation.NSString])
+	PauseSnapsToMediaTimeOfOriginator() bool
+	SetPauseSnapsToMediaTimeOfOriginator(pauseSnapsToMediaTimeOfOriginator bool)
+}
+
+var _ PlaybackCoordinatorable = (*PlaybackCoordinator)(nil)
 

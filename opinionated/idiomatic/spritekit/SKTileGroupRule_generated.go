@@ -7,6 +7,7 @@ package spritekit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -54,16 +55,59 @@ func (x *TileGroupRule) WithName(name string) *TileGroupRule {
 	return x
 }
 
+// Adjacency calls the underlying Adjacency.
+func (x *TileGroupRule) Adjacency() raw.SKTileAdjacencyMask {
+	return x.inner.Adjacency()
+}
+
+// SetAdjacency calls the underlying SetAdjacency.
+func (x *TileGroupRule) SetAdjacency(adjacency raw.SKTileAdjacencyMask) {
+	x.inner.SetAdjacency(adjacency)
+}
+
 // TileDefinitions returns the collection as a Go slice.
 func (x *TileGroupRule) TileDefinitions() []*raw.SKTileDefinition {
 	arr := x.inner.TileDefinitions()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.SKTileDefinition, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SKTileDefinition {
+		return raw.SKTileDefinitionFromID(purego.Retain(_id))
+	})
 }
+
+// SetTileDefinitions calls the underlying SetTileDefinitions.
+func (x *TileGroupRule) SetTileDefinitions(tileDefinitions *foundation.NSArray[*raw.SKTileDefinition]) {
+	x.inner.SetTileDefinitions(tileDefinitions)
+}
+
+// Name calls the underlying Name.
+func (x *TileGroupRule) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetName calls the underlying SetName.
+func (x *TileGroupRule) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
+// TileGroupRuleable is the interface implemented by [TileGroupRule], for mocking and DI.
+type TileGroupRuleable interface {
+	Unwrap() *raw.SKTileGroupRule
+	WithAdjacency(adjacency raw.SKTileAdjacencyMask) *TileGroupRule
+	WithTileDefinitions(items ...*raw.SKTileDefinition) *TileGroupRule
+	WithName(name string) *TileGroupRule
+	Adjacency() raw.SKTileAdjacencyMask
+	SetAdjacency(adjacency raw.SKTileAdjacencyMask)
+	TileDefinitions() []*raw.SKTileDefinition
+	SetTileDefinitions(tileDefinitions *foundation.NSArray[*raw.SKTileDefinition])
+	Name() string
+	SetName(name string)
+}
+
+var _ TileGroupRuleable = (*TileGroupRule)(nil)
 

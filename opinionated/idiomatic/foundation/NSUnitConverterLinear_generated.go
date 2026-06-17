@@ -31,7 +31,26 @@ func NewUnitConverterLinearWithCoefficientConstant(coefficient float64, constant
 	return &UnitConverterLinear{inner: raw.NSUnitConverterLinearFromID(_id)}
 }
 
+// Coefficient calls the underlying Coefficient.
+func (x *UnitConverterLinear) Coefficient() float64 {
+	return x.inner.Coefficient()
+}
+
+// Constant calls the underlying Constant.
+func (x *UnitConverterLinear) Constant() float64 {
+	return x.inner.Constant()
+}
+
 func (x *UnitConverterLinear) asUnitConverter() *raw.NSUnitConverter { return &x.inner.NSUnitConverter }
 
 func (x *UnitConverterLinear) asObject() *raw.NSObject { return &x.inner.NSUnitConverter.NSObject }
+
+// UnitConverterLinearable is the interface implemented by [UnitConverterLinear], for mocking and DI.
+type UnitConverterLinearable interface {
+	Unwrap() *raw.NSUnitConverterLinear
+	Coefficient() float64
+	Constant() float64
+}
+
+var _ UnitConverterLinearable = (*UnitConverterLinear)(nil)
 

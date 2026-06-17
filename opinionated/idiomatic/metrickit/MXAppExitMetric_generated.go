@@ -23,5 +23,32 @@ func NewAppExitMetric() *AppExitMetric {
 	return &AppExitMetric{inner: raw.MXAppExitMetricFromID(_id)}
 }
 
+// ForegroundExitData calls the underlying ForegroundExitData.
+func (x *AppExitMetric) ForegroundExitData() *ForegroundExitData {
+	_r := x.inner.ForegroundExitData()
+	if _r == nil {
+		return nil
+	}
+	return &ForegroundExitData{inner: _r}
+}
+
+// BackgroundExitData calls the underlying BackgroundExitData.
+func (x *AppExitMetric) BackgroundExitData() *BackgroundExitData {
+	_r := x.inner.BackgroundExitData()
+	if _r == nil {
+		return nil
+	}
+	return &BackgroundExitData{inner: _r}
+}
+
 func (x *AppExitMetric) asMetric() *raw.MXMetric { return &x.inner.MXMetric }
+
+// AppExitMetricable is the interface implemented by [AppExitMetric], for mocking and DI.
+type AppExitMetricable interface {
+	Unwrap() *raw.MXAppExitMetric
+	ForegroundExitData() *ForegroundExitData
+	BackgroundExitData() *BackgroundExitData
+}
+
+var _ AppExitMetricable = (*AppExitMetric)(nil)
 

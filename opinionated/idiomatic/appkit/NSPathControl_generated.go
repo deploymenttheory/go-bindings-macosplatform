@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -105,17 +106,98 @@ func (x *PathControl) WithDelegate(delegate raw.NSPathControlDelegate) *PathCont
 	return x
 }
 
+// SetDraggingSourceOperationMaskForLocal calls the underlying SetDraggingSourceOperationMaskForLocal.
+func (x *PathControl) SetDraggingSourceOperationMaskForLocal(mask raw.NSDragOperation, isLocal bool) {
+	x.inner.SetDraggingSourceOperationMaskForLocal(mask, isLocal)
+}
+
+// IsEditable calls the underlying IsEditable.
+func (x *PathControl) IsEditable() bool {
+	return x.inner.IsEditable()
+}
+
+// SetEditable calls the underlying SetEditable.
+func (x *PathControl) SetEditable(editable bool) {
+	x.inner.SetEditable(editable)
+}
+
 // AllowedTypes returns the collection as a Go slice.
-func (x *PathControl) AllowedTypes() []*foundation.NSString {
+func (x *PathControl) AllowedTypes() []string {
 	arr := x.inner.AllowedTypes()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// SetAllowedTypes calls the underlying SetAllowedTypes.
+func (x *PathControl) SetAllowedTypes(allowedTypes *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetAllowedTypes(allowedTypes)
+}
+
+// PlaceholderString calls the underlying PlaceholderString.
+func (x *PathControl) PlaceholderString() string {
+	_r := x.inner.PlaceholderString()
+	if _r == nil {
+		return ""
 	}
-	return out
+	return purego.GoString(_r.Ptr())
+}
+
+// SetPlaceholderString calls the underlying SetPlaceholderString.
+func (x *PathControl) SetPlaceholderString(placeholderString string) {
+	x.inner.SetPlaceholderString(foundation.NSStringStringWithUTF8String(placeholderString))
+}
+
+// PlaceholderAttributedString calls the underlying PlaceholderAttributedString.
+func (x *PathControl) PlaceholderAttributedString() *foundation.NSAttributedString {
+	return x.inner.PlaceholderAttributedString()
+}
+
+// SetPlaceholderAttributedString calls the underlying SetPlaceholderAttributedString.
+func (x *PathControl) SetPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString) {
+	x.inner.SetPlaceholderAttributedString(placeholderAttributedString)
+}
+
+// URL calls the underlying URL.
+func (x *PathControl) URL() *foundation.NSURL {
+	return x.inner.URL()
+}
+
+// SetURL calls the underlying SetURL.
+func (x *PathControl) SetURL(uRL string) {
+	x.inner.SetURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
+}
+
+// DoubleAction calls the underlying DoubleAction.
+func (x *PathControl) DoubleAction() objc.SEL {
+	return x.inner.DoubleAction()
+}
+
+// SetDoubleAction calls the underlying SetDoubleAction.
+func (x *PathControl) SetDoubleAction(doubleAction objc.SEL) {
+	x.inner.SetDoubleAction(doubleAction)
+}
+
+// PathStyle calls the underlying PathStyle.
+func (x *PathControl) PathStyle() raw.NSPathStyle {
+	return x.inner.PathStyle()
+}
+
+// SetPathStyle calls the underlying SetPathStyle.
+func (x *PathControl) SetPathStyle(pathStyle raw.NSPathStyle) {
+	x.inner.SetPathStyle(pathStyle)
+}
+
+// ClickedPathItem calls the underlying ClickedPathItem.
+func (x *PathControl) ClickedPathItem() *PathControlItem {
+	_r := x.inner.ClickedPathItem()
+	if _r == nil {
+		return nil
+	}
+	return &PathControlItem{inner: _r}
 }
 
 // PathItems returns the collection as a Go slice.
@@ -124,11 +206,47 @@ func (x *PathControl) PathItems() []*raw.NSPathControlItem {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSPathControlItem, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSPathControlItem {
+		return raw.NSPathControlItemFromID(purego.Retain(_id))
+	})
+}
+
+// SetPathItems calls the underlying SetPathItems.
+func (x *PathControl) SetPathItems(pathItems *foundation.NSArray[*raw.NSPathControlItem]) {
+	x.inner.SetPathItems(pathItems)
+}
+
+// BackgroundColor calls the underlying BackgroundColor.
+func (x *PathControl) BackgroundColor() *Color {
+	_r := x.inner.BackgroundColor()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &Color{inner: _r}
+}
+
+// SetBackgroundColor calls the underlying SetBackgroundColor.
+func (x *PathControl) SetBackgroundColor(backgroundColor *raw.NSColor) {
+	x.inner.SetBackgroundColor(backgroundColor)
+}
+
+// Delegate calls the underlying Delegate.
+func (x *PathControl) Delegate() raw.NSPathControlDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *PathControl) SetDelegate(delegate raw.NSPathControlDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// ClickedPathComponentCell calls the underlying ClickedPathComponentCell.
+func (x *PathControl) ClickedPathComponentCell() *PathComponentCell {
+	_r := x.inner.ClickedPathComponentCell()
+	if _r == nil {
+		return nil
+	}
+	return &PathComponentCell{inner: _r}
 }
 
 // PathComponentCells returns the collection as a Go slice.
@@ -137,11 +255,14 @@ func (x *PathControl) PathComponentCells() []*raw.NSPathComponentCell {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSPathComponentCell, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSPathComponentCell {
+		return raw.NSPathComponentCellFromID(purego.Retain(_id))
+	})
+}
+
+// SetPathComponentCells calls the underlying SetPathComponentCells.
+func (x *PathControl) SetPathComponentCells(cells *foundation.NSArray[*raw.NSPathComponentCell]) {
+	x.inner.SetPathComponentCells(cells)
 }
 
 func (x *PathControl) asControl() *raw.NSControl { return &x.inner.NSControl }
@@ -149,4 +270,46 @@ func (x *PathControl) asControl() *raw.NSControl { return &x.inner.NSControl }
 func (x *PathControl) asView() *raw.NSView { return &x.inner.NSControl.NSView }
 
 func (x *PathControl) asResponder() *raw.NSResponder { return &x.inner.NSControl.NSView.NSResponder }
+
+// PathControlable is the interface implemented by [PathControl], for mocking and DI.
+type PathControlable interface {
+	Unwrap() *raw.NSPathControl
+	WithEditable(editable bool) *PathControl
+	WithAllowedTypes(items ...*foundation.NSString) *PathControl
+	WithPlaceholderString(placeholderString string) *PathControl
+	WithPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString) *PathControl
+	WithURL(uRL string) *PathControl
+	WithDoubleAction(doubleAction objc.SEL) *PathControl
+	WithPathStyle(pathStyle raw.NSPathStyle) *PathControl
+	WithPathItems(items ...*raw.NSPathControlItem) *PathControl
+	WithBackgroundColor(backgroundColor *raw.NSColor) *PathControl
+	WithDelegate(delegate raw.NSPathControlDelegate) *PathControl
+	SetDraggingSourceOperationMaskForLocal(mask raw.NSDragOperation, isLocal bool)
+	IsEditable() bool
+	SetEditable(editable bool)
+	AllowedTypes() []string
+	SetAllowedTypes(allowedTypes *foundation.NSArray[*foundation.NSString])
+	PlaceholderString() string
+	SetPlaceholderString(placeholderString string)
+	PlaceholderAttributedString() *foundation.NSAttributedString
+	SetPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString)
+	URL() *foundation.NSURL
+	SetURL(uRL string)
+	DoubleAction() objc.SEL
+	SetDoubleAction(doubleAction objc.SEL)
+	PathStyle() raw.NSPathStyle
+	SetPathStyle(pathStyle raw.NSPathStyle)
+	ClickedPathItem() *PathControlItem
+	PathItems() []*raw.NSPathControlItem
+	SetPathItems(pathItems *foundation.NSArray[*raw.NSPathControlItem])
+	BackgroundColor() *Color
+	SetBackgroundColor(backgroundColor *raw.NSColor)
+	Delegate() raw.NSPathControlDelegate
+	SetDelegate(delegate raw.NSPathControlDelegate)
+	ClickedPathComponentCell() *PathComponentCell
+	PathComponentCells() []*raw.NSPathComponentCell
+	SetPathComponentCells(cells *foundation.NSArray[*raw.NSPathComponentCell])
+}
+
+var _ PathControlable = (*PathControl)(nil)
 

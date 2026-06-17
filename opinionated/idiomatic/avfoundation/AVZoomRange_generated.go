@@ -23,3 +23,28 @@ func NewZoomRange() *ZoomRange {
 	return &ZoomRange{inner: raw.AVZoomRangeFromID(_id)}
 }
 
+// ContainsZoomFactor calls the underlying ContainsZoomFactor.
+func (x *ZoomRange) ContainsZoomFactor(zoomFactor float64) bool {
+	return x.inner.ContainsZoomFactor(zoomFactor)
+}
+
+// MinZoomFactor calls the underlying MinZoomFactor.
+func (x *ZoomRange) MinZoomFactor() float64 {
+	return x.inner.MinZoomFactor()
+}
+
+// MaxZoomFactor calls the underlying MaxZoomFactor.
+func (x *ZoomRange) MaxZoomFactor() float64 {
+	return x.inner.MaxZoomFactor()
+}
+
+// ZoomRangeable is the interface implemented by [ZoomRange], for mocking and DI.
+type ZoomRangeable interface {
+	Unwrap() *raw.AVZoomRange
+	ContainsZoomFactor(zoomFactor float64) bool
+	MinZoomFactor() float64
+	MaxZoomFactor() float64
+}
+
+var _ ZoomRangeable = (*ZoomRange)(nil)
+

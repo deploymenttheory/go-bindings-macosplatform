@@ -54,7 +54,79 @@ func (x *Reminder) WithPriority(priority uint) *Reminder {
 	return x
 }
 
+// StartDateComponents calls the underlying StartDateComponents.
+func (x *Reminder) StartDateComponents() *foundation.NSDateComponents {
+	return x.inner.StartDateComponents()
+}
+
+// SetStartDateComponents calls the underlying SetStartDateComponents.
+func (x *Reminder) SetStartDateComponents(startDateComponents *foundation.NSDateComponents) {
+	x.inner.SetStartDateComponents(startDateComponents)
+}
+
+// DueDateComponents calls the underlying DueDateComponents.
+func (x *Reminder) DueDateComponents() *foundation.NSDateComponents {
+	return x.inner.DueDateComponents()
+}
+
+// SetDueDateComponents calls the underlying SetDueDateComponents.
+func (x *Reminder) SetDueDateComponents(dueDateComponents *foundation.NSDateComponents) {
+	x.inner.SetDueDateComponents(dueDateComponents)
+}
+
+// IsCompleted calls the underlying IsCompleted.
+func (x *Reminder) IsCompleted() bool {
+	return x.inner.IsCompleted()
+}
+
+// SetCompleted calls the underlying SetCompleted.
+func (x *Reminder) SetCompleted(completed bool) {
+	x.inner.SetCompleted(completed)
+}
+
+// CompletionDate calls the underlying CompletionDate.
+func (x *Reminder) CompletionDate() *foundation.NSDate {
+	return x.inner.CompletionDate()
+}
+
+// SetCompletionDate calls the underlying SetCompletionDate.
+func (x *Reminder) SetCompletionDate(completionDate *foundation.NSDate) {
+	x.inner.SetCompletionDate(completionDate)
+}
+
+// Priority calls the underlying Priority.
+func (x *Reminder) Priority() uint {
+	return x.inner.Priority()
+}
+
+// SetPriority calls the underlying SetPriority.
+func (x *Reminder) SetPriority(priority uint) {
+	x.inner.SetPriority(priority)
+}
+
 func (x *Reminder) asCalendarItem() *raw.EKCalendarItem { return &x.inner.EKCalendarItem }
 
 func (x *Reminder) asObject() *raw.EKObject { return &x.inner.EKCalendarItem.EKObject }
+
+// Reminderable is the interface implemented by [Reminder], for mocking and DI.
+type Reminderable interface {
+	Unwrap() *raw.EKReminder
+	WithStartDateComponents(startDateComponents *foundation.NSDateComponents) *Reminder
+	WithDueDateComponents(dueDateComponents *foundation.NSDateComponents) *Reminder
+	WithCompleted(completed bool) *Reminder
+	WithCompletionDate(completionDate *foundation.NSDate) *Reminder
+	WithPriority(priority uint) *Reminder
+	StartDateComponents() *foundation.NSDateComponents
+	SetStartDateComponents(startDateComponents *foundation.NSDateComponents)
+	DueDateComponents() *foundation.NSDateComponents
+	SetDueDateComponents(dueDateComponents *foundation.NSDateComponents)
+	IsCompleted() bool
+	SetCompleted(completed bool)
+	CompletionDate() *foundation.NSDate
+	SetCompletionDate(completionDate *foundation.NSDate)
+	Priority() uint
+	SetPriority(priority uint)
+}
+
+var _ Reminderable = (*Reminder)(nil)
 

@@ -6,7 +6,11 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // DelegatingPlaybackCoordinator wraps [raw.AVDelegatingPlaybackCoordinator] with a fluent Go API.
@@ -24,5 +28,52 @@ func NewDelegatingPlaybackCoordinatorWithPlaybackControlDelegate(playbackControl
 	return &DelegatingPlaybackCoordinator{inner: raw.AVDelegatingPlaybackCoordinatorFromID(_id)}
 }
 
+// CoordinateRateChangeToRateOptions calls the underlying CoordinateRateChangeToRateOptions.
+func (x *DelegatingPlaybackCoordinator) CoordinateRateChangeToRateOptions(rate float32, options raw.AVDelegatingPlaybackCoordinatorRateChangeOptions) {
+	x.inner.CoordinateRateChangeToRateOptions(rate, options)
+}
+
+// CoordinateSeekToTimeOptions calls the underlying CoordinateSeekToTimeOptions.
+func (x *DelegatingPlaybackCoordinator) CoordinateSeekToTimeOptions(time_ coremedia.CMTime, options raw.AVDelegatingPlaybackCoordinatorSeekOptions) {
+	x.inner.CoordinateSeekToTimeOptions(time_, options)
+}
+
+// TransitionToItemWithIdentifierProposingInitialTimingBasedOnTimebase calls the underlying TransitionToItemWithIdentifierProposingInitialTimingBasedOnTimebase.
+func (x *DelegatingPlaybackCoordinator) TransitionToItemWithIdentifierProposingInitialTimingBasedOnTimebase(itemIdentifier string, snapshotTimebase unsafe.Pointer) {
+	x.inner.TransitionToItemWithIdentifierProposingInitialTimingBasedOnTimebase(foundation.NSStringStringWithUTF8String(itemIdentifier), snapshotTimebase)
+}
+
+// ReapplyCurrentItemStateToPlaybackControlDelegate calls the underlying ReapplyCurrentItemStateToPlaybackControlDelegate.
+func (x *DelegatingPlaybackCoordinator) ReapplyCurrentItemStateToPlaybackControlDelegate() {
+	x.inner.ReapplyCurrentItemStateToPlaybackControlDelegate()
+}
+
+// PlaybackControlDelegate calls the underlying PlaybackControlDelegate.
+func (x *DelegatingPlaybackCoordinator) PlaybackControlDelegate() raw.AVPlaybackCoordinatorPlaybackControlDelegate {
+	return x.inner.PlaybackControlDelegate()
+}
+
+// CurrentItemIdentifier calls the underlying CurrentItemIdentifier.
+func (x *DelegatingPlaybackCoordinator) CurrentItemIdentifier() string {
+	_r := x.inner.CurrentItemIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 func (x *DelegatingPlaybackCoordinator) asPlaybackCoordinator() *raw.AVPlaybackCoordinator { return &x.inner.AVPlaybackCoordinator }
+
+// DelegatingPlaybackCoordinatorable is the interface implemented by [DelegatingPlaybackCoordinator], for mocking and DI.
+type DelegatingPlaybackCoordinatorable interface {
+	Unwrap() *raw.AVDelegatingPlaybackCoordinator
+	CoordinateRateChangeToRateOptions(rate float32, options raw.AVDelegatingPlaybackCoordinatorRateChangeOptions)
+	CoordinateSeekToTimeOptions(time_ coremedia.CMTime, options raw.AVDelegatingPlaybackCoordinatorSeekOptions)
+	TransitionToItemWithIdentifierProposingInitialTimingBasedOnTimebase(itemIdentifier string, snapshotTimebase unsafe.Pointer)
+	ReapplyCurrentItemStateToPlaybackControlDelegate()
+	PlaybackControlDelegate() raw.AVPlaybackCoordinatorPlaybackControlDelegate
+	CurrentItemIdentifier() string
+}
+
+var _ DelegatingPlaybackCoordinatorable = (*DelegatingPlaybackCoordinator)(nil)
 

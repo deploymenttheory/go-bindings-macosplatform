@@ -6,6 +6,7 @@ package cloudkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,89 @@ func NewShareMetadata() *ShareMetadata {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CKShareMetadata")), objc.RegisterName("new"))
 	return &ShareMetadata{inner: raw.CKShareMetadataFromID(_id)}
 }
+
+// ContainerIdentifier calls the underlying ContainerIdentifier.
+func (x *ShareMetadata) ContainerIdentifier() string {
+	_r := x.inner.ContainerIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Share calls the underlying Share.
+func (x *ShareMetadata) Share() *Share {
+	_r := x.inner.Share()
+	if _r == nil {
+		return nil
+	}
+	return &Share{inner: _r}
+}
+
+// HierarchicalRootRecordID calls the underlying HierarchicalRootRecordID.
+func (x *ShareMetadata) HierarchicalRootRecordID() *RecordID {
+	_r := x.inner.HierarchicalRootRecordID()
+	if _r == nil {
+		return nil
+	}
+	return &RecordID{inner: _r}
+}
+
+// ParticipantRole calls the underlying ParticipantRole.
+func (x *ShareMetadata) ParticipantRole() raw.CKShareParticipantRole {
+	return x.inner.ParticipantRole()
+}
+
+// ParticipantStatus calls the underlying ParticipantStatus.
+func (x *ShareMetadata) ParticipantStatus() raw.CKShareParticipantAcceptanceStatus {
+	return x.inner.ParticipantStatus()
+}
+
+// ParticipantPermission calls the underlying ParticipantPermission.
+func (x *ShareMetadata) ParticipantPermission() raw.CKShareParticipantPermission {
+	return x.inner.ParticipantPermission()
+}
+
+// OwnerIdentity calls the underlying OwnerIdentity.
+func (x *ShareMetadata) OwnerIdentity() *UserIdentity {
+	_r := x.inner.OwnerIdentity()
+	if _r == nil {
+		return nil
+	}
+	return &UserIdentity{inner: _r}
+}
+
+// RootRecord calls the underlying RootRecord.
+func (x *ShareMetadata) RootRecord() *Record {
+	_r := x.inner.RootRecord()
+	if _r == nil {
+		return nil
+	}
+	return &Record{inner: _r}
+}
+
+// RootRecordID calls the underlying RootRecordID.
+func (x *ShareMetadata) RootRecordID() *RecordID {
+	_r := x.inner.RootRecordID()
+	if _r == nil {
+		return nil
+	}
+	return &RecordID{inner: _r}
+}
+
+// ShareMetadataable is the interface implemented by [ShareMetadata], for mocking and DI.
+type ShareMetadataable interface {
+	Unwrap() *raw.CKShareMetadata
+	ContainerIdentifier() string
+	Share() *Share
+	HierarchicalRootRecordID() *RecordID
+	ParticipantRole() raw.CKShareParticipantRole
+	ParticipantStatus() raw.CKShareParticipantAcceptanceStatus
+	ParticipantPermission() raw.CKShareParticipantPermission
+	OwnerIdentity() *UserIdentity
+	RootRecord() *Record
+	RootRecordID() *RecordID
+}
+
+var _ ShareMetadataable = (*ShareMetadata)(nil)
 

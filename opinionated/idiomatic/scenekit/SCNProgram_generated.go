@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -84,4 +85,191 @@ func (x *Program) WithLibrary(library metal.MTLLibrary) *Program {
 	x.inner.SetLibrary(library)
 	return x
 }
+
+// HandleBindingOfBufferNamedFrequencyUsing calls the underlying HandleBindingOfBufferNamedFrequencyUsing.
+func (x *Program) HandleBindingOfBufferNamedFrequencyUsing(name string, frequency raw.SCNBufferFrequency, block func(objc.ID, *raw.SCNNode, objc.ID, *raw.SCNRenderer)) {
+	x.inner.HandleBindingOfBufferNamedFrequencyUsing(foundation.NSStringStringWithUTF8String(name), frequency, block)
+}
+
+// SetSemanticForSymbolOptions calls the underlying SetSemanticForSymbolOptions.
+func (x *Program) SetSemanticForSymbolOptions(semantic string, symbol string, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
+	x.inner.SetSemanticForSymbolOptions(foundation.NSStringStringWithUTF8String(semantic), foundation.NSStringStringWithUTF8String(symbol), options)
+}
+
+// SemanticForSymbol calls the underlying SemanticForSymbol.
+func (x *Program) SemanticForSymbol(symbol string) string {
+	_r := x.inner.SemanticForSymbol(foundation.NSStringStringWithUTF8String(symbol))
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// VertexShader calls the underlying VertexShader.
+func (x *Program) VertexShader() string {
+	_r := x.inner.VertexShader()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetVertexShader calls the underlying SetVertexShader.
+func (x *Program) SetVertexShader(vertexShader string) {
+	x.inner.SetVertexShader(foundation.NSStringStringWithUTF8String(vertexShader))
+}
+
+// FragmentShader calls the underlying FragmentShader.
+func (x *Program) FragmentShader() string {
+	_r := x.inner.FragmentShader()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetFragmentShader calls the underlying SetFragmentShader.
+func (x *Program) SetFragmentShader(fragmentShader string) {
+	x.inner.SetFragmentShader(foundation.NSStringStringWithUTF8String(fragmentShader))
+}
+
+// TessellationControlShader calls the underlying TessellationControlShader.
+func (x *Program) TessellationControlShader() string {
+	_r := x.inner.TessellationControlShader()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetTessellationControlShader calls the underlying SetTessellationControlShader.
+func (x *Program) SetTessellationControlShader(tessellationControlShader string) {
+	x.inner.SetTessellationControlShader(foundation.NSStringStringWithUTF8String(tessellationControlShader))
+}
+
+// TessellationEvaluationShader calls the underlying TessellationEvaluationShader.
+func (x *Program) TessellationEvaluationShader() string {
+	_r := x.inner.TessellationEvaluationShader()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetTessellationEvaluationShader calls the underlying SetTessellationEvaluationShader.
+func (x *Program) SetTessellationEvaluationShader(tessellationEvaluationShader string) {
+	x.inner.SetTessellationEvaluationShader(foundation.NSStringStringWithUTF8String(tessellationEvaluationShader))
+}
+
+// GeometryShader calls the underlying GeometryShader.
+func (x *Program) GeometryShader() string {
+	_r := x.inner.GeometryShader()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetGeometryShader calls the underlying SetGeometryShader.
+func (x *Program) SetGeometryShader(geometryShader string) {
+	x.inner.SetGeometryShader(foundation.NSStringStringWithUTF8String(geometryShader))
+}
+
+// VertexFunctionName calls the underlying VertexFunctionName.
+func (x *Program) VertexFunctionName() string {
+	_r := x.inner.VertexFunctionName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetVertexFunctionName calls the underlying SetVertexFunctionName.
+func (x *Program) SetVertexFunctionName(vertexFunctionName string) {
+	x.inner.SetVertexFunctionName(foundation.NSStringStringWithUTF8String(vertexFunctionName))
+}
+
+// FragmentFunctionName calls the underlying FragmentFunctionName.
+func (x *Program) FragmentFunctionName() string {
+	_r := x.inner.FragmentFunctionName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetFragmentFunctionName calls the underlying SetFragmentFunctionName.
+func (x *Program) SetFragmentFunctionName(fragmentFunctionName string) {
+	x.inner.SetFragmentFunctionName(foundation.NSStringStringWithUTF8String(fragmentFunctionName))
+}
+
+// IsOpaque calls the underlying IsOpaque.
+func (x *Program) IsOpaque() bool {
+	return x.inner.IsOpaque()
+}
+
+// SetOpaque calls the underlying SetOpaque.
+func (x *Program) SetOpaque(opaque bool) {
+	x.inner.SetOpaque(opaque)
+}
+
+// Delegate calls the underlying Delegate.
+func (x *Program) Delegate() raw.SCNProgramDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *Program) SetDelegate(delegate raw.SCNProgramDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// Library calls the underlying Library.
+func (x *Program) Library() metal.MTLLibrary {
+	return x.inner.Library()
+}
+
+// SetLibrary calls the underlying SetLibrary.
+func (x *Program) SetLibrary(library metal.MTLLibrary) {
+	x.inner.SetLibrary(library)
+}
+
+// Programable is the interface implemented by [Program], for mocking and DI.
+type Programable interface {
+	Unwrap() *raw.SCNProgram
+	WithVertexShader(vertexShader string) *Program
+	WithFragmentShader(fragmentShader string) *Program
+	WithTessellationControlShader(tessellationControlShader string) *Program
+	WithTessellationEvaluationShader(tessellationEvaluationShader string) *Program
+	WithGeometryShader(geometryShader string) *Program
+	WithVertexFunctionName(vertexFunctionName string) *Program
+	WithFragmentFunctionName(fragmentFunctionName string) *Program
+	WithOpaque(opaque bool) *Program
+	WithDelegate(delegate raw.SCNProgramDelegate) *Program
+	WithLibrary(library metal.MTLLibrary) *Program
+	HandleBindingOfBufferNamedFrequencyUsing(name string, frequency raw.SCNBufferFrequency, block func(objc.ID, *raw.SCNNode, objc.ID, *raw.SCNRenderer))
+	SetSemanticForSymbolOptions(semantic string, symbol string, options *foundation.NSDictionary[*foundation.NSString, objc.ID])
+	SemanticForSymbol(symbol string) string
+	VertexShader() string
+	SetVertexShader(vertexShader string)
+	FragmentShader() string
+	SetFragmentShader(fragmentShader string)
+	TessellationControlShader() string
+	SetTessellationControlShader(tessellationControlShader string)
+	TessellationEvaluationShader() string
+	SetTessellationEvaluationShader(tessellationEvaluationShader string)
+	GeometryShader() string
+	SetGeometryShader(geometryShader string)
+	VertexFunctionName() string
+	SetVertexFunctionName(vertexFunctionName string)
+	FragmentFunctionName() string
+	SetFragmentFunctionName(fragmentFunctionName string)
+	IsOpaque() bool
+	SetOpaque(opaque bool)
+	Delegate() raw.SCNProgramDelegate
+	SetDelegate(delegate raw.SCNProgramDelegate)
+	Library() metal.MTLLibrary
+	SetLibrary(library metal.MTLLibrary)
+}
+
+var _ Programable = (*Program)(nil)
 

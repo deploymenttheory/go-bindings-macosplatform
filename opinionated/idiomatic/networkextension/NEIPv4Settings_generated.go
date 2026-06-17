@@ -7,6 +7,7 @@ package networkextension
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -65,29 +66,39 @@ func (x *NEIPv4Settings) WithExcludedRoutes(items ...*raw.NEIPv4Route) *NEIPv4Se
 }
 
 // Addresses returns the collection as a Go slice.
-func (x *NEIPv4Settings) Addresses() []*foundation.NSString {
+func (x *NEIPv4Settings) Addresses() []string {
 	arr := x.inner.Addresses()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
 
 // SubnetMasks returns the collection as a Go slice.
-func (x *NEIPv4Settings) SubnetMasks() []*foundation.NSString {
+func (x *NEIPv4Settings) SubnetMasks() []string {
 	arr := x.inner.SubnetMasks()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// Router calls the underlying Router.
+func (x *NEIPv4Settings) Router() string {
+	_r := x.inner.Router()
+	if _r == nil {
+		return ""
 	}
-	return out
+	return purego.GoString(_r.Ptr())
+}
+
+// SetRouter calls the underlying SetRouter.
+func (x *NEIPv4Settings) SetRouter(router string) {
+	x.inner.SetRouter(foundation.NSStringStringWithUTF8String(router))
 }
 
 // IncludedRoutes returns the collection as a Go slice.
@@ -96,11 +107,14 @@ func (x *NEIPv4Settings) IncludedRoutes() []*raw.NEIPv4Route {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NEIPv4Route, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NEIPv4Route {
+		return raw.NEIPv4RouteFromID(purego.Retain(_id))
+	})
+}
+
+// SetIncludedRoutes calls the underlying SetIncludedRoutes.
+func (x *NEIPv4Settings) SetIncludedRoutes(includedRoutes *foundation.NSArray[*raw.NEIPv4Route]) {
+	x.inner.SetIncludedRoutes(includedRoutes)
 }
 
 // ExcludedRoutes returns the collection as a Go slice.
@@ -109,10 +123,31 @@ func (x *NEIPv4Settings) ExcludedRoutes() []*raw.NEIPv4Route {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NEIPv4Route, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NEIPv4Route {
+		return raw.NEIPv4RouteFromID(purego.Retain(_id))
+	})
 }
+
+// SetExcludedRoutes calls the underlying SetExcludedRoutes.
+func (x *NEIPv4Settings) SetExcludedRoutes(excludedRoutes *foundation.NSArray[*raw.NEIPv4Route]) {
+	x.inner.SetExcludedRoutes(excludedRoutes)
+}
+
+// NEIPv4Settingsable is the interface implemented by [NEIPv4Settings], for mocking and DI.
+type NEIPv4Settingsable interface {
+	Unwrap() *raw.NEIPv4Settings
+	WithRouter(router string) *NEIPv4Settings
+	WithIncludedRoutes(items ...*raw.NEIPv4Route) *NEIPv4Settings
+	WithExcludedRoutes(items ...*raw.NEIPv4Route) *NEIPv4Settings
+	Addresses() []string
+	SubnetMasks() []string
+	Router() string
+	SetRouter(router string)
+	IncludedRoutes() []*raw.NEIPv4Route
+	SetIncludedRoutes(includedRoutes *foundation.NSArray[*raw.NEIPv4Route])
+	ExcludedRoutes() []*raw.NEIPv4Route
+	SetExcludedRoutes(excludedRoutes *foundation.NSArray[*raw.NEIPv4Route])
+}
+
+var _ NEIPv4Settingsable = (*NEIPv4Settings)(nil)
 

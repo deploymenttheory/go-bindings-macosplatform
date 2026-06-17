@@ -54,3 +54,142 @@ func (x *AudioRecorder) WithMeteringEnabled(meteringEnabled bool) *AudioRecorder
 	return x
 }
 
+// PrepareToRecord calls the underlying PrepareToRecord.
+func (x *AudioRecorder) PrepareToRecord() bool {
+	return x.inner.PrepareToRecord()
+}
+
+// Record calls the underlying Record.
+func (x *AudioRecorder) Record() bool {
+	return x.inner.Record()
+}
+
+// RecordAtTime calls the underlying RecordAtTime.
+func (x *AudioRecorder) RecordAtTime(time_ float64) bool {
+	return x.inner.RecordAtTime(time_)
+}
+
+// RecordForDuration calls the underlying RecordForDuration.
+func (x *AudioRecorder) RecordForDuration(duration float64) bool {
+	return x.inner.RecordForDuration(duration)
+}
+
+// RecordAtTimeForDuration calls the underlying RecordAtTimeForDuration.
+func (x *AudioRecorder) RecordAtTimeForDuration(time_ float64, duration float64) bool {
+	return x.inner.RecordAtTimeForDuration(time_, duration)
+}
+
+// Pause calls the underlying Pause.
+func (x *AudioRecorder) Pause() {
+	x.inner.Pause()
+}
+
+// Stop calls the underlying Stop.
+func (x *AudioRecorder) Stop() {
+	x.inner.Stop()
+}
+
+// DeleteRecording calls the underlying DeleteRecording.
+func (x *AudioRecorder) DeleteRecording() bool {
+	return x.inner.DeleteRecording()
+}
+
+// UpdateMeters calls the underlying UpdateMeters.
+func (x *AudioRecorder) UpdateMeters() {
+	x.inner.UpdateMeters()
+}
+
+// PeakPowerForChannel calls the underlying PeakPowerForChannel.
+func (x *AudioRecorder) PeakPowerForChannel(channelNumber uint) float32 {
+	return x.inner.PeakPowerForChannel(channelNumber)
+}
+
+// AveragePowerForChannel calls the underlying AveragePowerForChannel.
+func (x *AudioRecorder) AveragePowerForChannel(channelNumber uint) float32 {
+	return x.inner.AveragePowerForChannel(channelNumber)
+}
+
+// IsRecording calls the underlying IsRecording.
+func (x *AudioRecorder) IsRecording() bool {
+	return x.inner.IsRecording()
+}
+
+// Url calls the underlying Url.
+func (x *AudioRecorder) Url() *foundation.NSURL {
+	return x.inner.Url()
+}
+
+// Settings calls the underlying Settings.
+func (x *AudioRecorder) Settings() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.Settings()
+}
+
+// Format calls the underlying Format.
+func (x *AudioRecorder) Format() *AudioFormat {
+	_r := x.inner.Format()
+	if _r == nil {
+		return nil
+	}
+	return &AudioFormat{inner: _r}
+}
+
+// Delegate calls the underlying Delegate.
+func (x *AudioRecorder) Delegate() raw.AVAudioRecorderDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *AudioRecorder) SetDelegate(delegate raw.AVAudioRecorderDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// CurrentTime calls the underlying CurrentTime.
+func (x *AudioRecorder) CurrentTime() float64 {
+	return x.inner.CurrentTime()
+}
+
+// DeviceCurrentTime calls the underlying DeviceCurrentTime.
+func (x *AudioRecorder) DeviceCurrentTime() float64 {
+	return x.inner.DeviceCurrentTime()
+}
+
+// IsMeteringEnabled calls the underlying IsMeteringEnabled.
+func (x *AudioRecorder) IsMeteringEnabled() bool {
+	return x.inner.IsMeteringEnabled()
+}
+
+// SetMeteringEnabled calls the underlying SetMeteringEnabled.
+func (x *AudioRecorder) SetMeteringEnabled(meteringEnabled bool) {
+	x.inner.SetMeteringEnabled(meteringEnabled)
+}
+
+// AudioRecorderable is the interface implemented by [AudioRecorder], for mocking and DI.
+type AudioRecorderable interface {
+	Unwrap() *raw.AVAudioRecorder
+	WithDelegate(delegate raw.AVAudioRecorderDelegate) *AudioRecorder
+	WithMeteringEnabled(meteringEnabled bool) *AudioRecorder
+	PrepareToRecord() bool
+	Record() bool
+	RecordAtTime(time_ float64) bool
+	RecordForDuration(duration float64) bool
+	RecordAtTimeForDuration(time_ float64, duration float64) bool
+	Pause()
+	Stop()
+	DeleteRecording() bool
+	UpdateMeters()
+	PeakPowerForChannel(channelNumber uint) float32
+	AveragePowerForChannel(channelNumber uint) float32
+	IsRecording() bool
+	Url() *foundation.NSURL
+	Settings() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	Format() *AudioFormat
+	Delegate() raw.AVAudioRecorderDelegate
+	SetDelegate(delegate raw.AVAudioRecorderDelegate)
+	CurrentTime() float64
+	DeviceCurrentTime() float64
+	IsMeteringEnabled() bool
+	SetMeteringEnabled(meteringEnabled bool)
+}
+
+var _ AudioRecorderable = (*AudioRecorder)(nil)
+

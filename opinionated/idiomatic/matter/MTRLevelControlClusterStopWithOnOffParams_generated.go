@@ -48,3 +48,62 @@ func (x *MTRLevelControlClusterStopWithOnOffParams) WithServerSideProcessingTime
 	return x
 }
 
+// OptionsMask calls the underlying OptionsMask.
+func (x *MTRLevelControlClusterStopWithOnOffParams) OptionsMask() *foundation.NSNumber {
+	return x.inner.OptionsMask()
+}
+
+// SetOptionsMask calls the underlying SetOptionsMask.
+func (x *MTRLevelControlClusterStopWithOnOffParams) SetOptionsMask(optionsMask *foundation.NSNumber) {
+	x.inner.SetOptionsMask(optionsMask)
+}
+
+// OptionsOverride calls the underlying OptionsOverride.
+func (x *MTRLevelControlClusterStopWithOnOffParams) OptionsOverride() *foundation.NSNumber {
+	return x.inner.OptionsOverride()
+}
+
+// SetOptionsOverride calls the underlying SetOptionsOverride.
+func (x *MTRLevelControlClusterStopWithOnOffParams) SetOptionsOverride(optionsOverride *foundation.NSNumber) {
+	x.inner.SetOptionsOverride(optionsOverride)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRLevelControlClusterStopWithOnOffParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRLevelControlClusterStopWithOnOffParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRLevelControlClusterStopWithOnOffParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRLevelControlClusterStopWithOnOffParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRLevelControlClusterStopWithOnOffParamsable is the interface implemented by [MTRLevelControlClusterStopWithOnOffParams], for mocking and DI.
+type MTRLevelControlClusterStopWithOnOffParamsable interface {
+	Unwrap() *raw.MTRLevelControlClusterStopWithOnOffParams
+	WithOptionsMask(optionsMask *foundation.NSNumber) *MTRLevelControlClusterStopWithOnOffParams
+	WithOptionsOverride(optionsOverride *foundation.NSNumber) *MTRLevelControlClusterStopWithOnOffParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRLevelControlClusterStopWithOnOffParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRLevelControlClusterStopWithOnOffParams
+	OptionsMask() *foundation.NSNumber
+	SetOptionsMask(optionsMask *foundation.NSNumber)
+	OptionsOverride() *foundation.NSNumber
+	SetOptionsOverride(optionsOverride *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRLevelControlClusterStopWithOnOffParamsable = (*MTRLevelControlClusterStopWithOnOffParams)(nil)
+

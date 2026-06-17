@@ -32,5 +32,30 @@ func NewCustomImageRepWithDrawSelectorDelegate(selector objc.SEL, delegate objc.
 	return &CustomImageRep{inner: raw.NSCustomImageRepFromID(_id)}
 }
 
+// DrawingHandler calls the underlying DrawingHandler.
+func (x *CustomImageRep) DrawingHandler() objc.Block {
+	return x.inner.DrawingHandler()
+}
+
+// DrawSelector calls the underlying DrawSelector.
+func (x *CustomImageRep) DrawSelector() objc.SEL {
+	return x.inner.DrawSelector()
+}
+
+// Delegate calls the underlying Delegate.
+func (x *CustomImageRep) Delegate() objc.ID {
+	return x.inner.Delegate()
+}
+
 func (x *CustomImageRep) asImageRep() *raw.NSImageRep { return &x.inner.NSImageRep }
+
+// CustomImageRepable is the interface implemented by [CustomImageRep], for mocking and DI.
+type CustomImageRepable interface {
+	Unwrap() *raw.NSCustomImageRep
+	DrawingHandler() objc.Block
+	DrawSelector() objc.SEL
+	Delegate() objc.ID
+}
+
+var _ CustomImageRepable = (*CustomImageRep)(nil)
 

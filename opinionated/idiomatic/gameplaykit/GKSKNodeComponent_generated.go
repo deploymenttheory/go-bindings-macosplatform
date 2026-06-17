@@ -31,5 +31,25 @@ func (x *SKNodeComponent) WithNode(node *spritekit.SKNode) *SKNodeComponent {
 	return x
 }
 
+// Node calls the underlying Node.
+func (x *SKNodeComponent) Node() *spritekit.SKNode {
+	return x.inner.Node()
+}
+
+// SetNode calls the underlying SetNode.
+func (x *SKNodeComponent) SetNode(node *spritekit.SKNode) {
+	x.inner.SetNode(node)
+}
+
 func (x *SKNodeComponent) asComponent() *raw.GKComponent { return &x.inner.GKComponent }
+
+// SKNodeComponentable is the interface implemented by [SKNodeComponent], for mocking and DI.
+type SKNodeComponentable interface {
+	Unwrap() *raw.GKSKNodeComponent
+	WithNode(node *spritekit.SKNode) *SKNodeComponent
+	Node() *spritekit.SKNode
+	SetNode(node *spritekit.SKNode)
+}
+
+var _ SKNodeComponentable = (*SKNodeComponent)(nil)
 

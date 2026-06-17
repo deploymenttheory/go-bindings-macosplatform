@@ -50,3 +50,40 @@ func NewRendererWithOpenGLContextPixelFormatFile(context_ *appkit.NSOpenGLContex
 	return &Renderer{inner: raw.QCRendererFromID(_id)}
 }
 
+// RenderAtTimeArguments calls the underlying RenderAtTimeArguments.
+func (x *Renderer) RenderAtTimeArguments(time_ float64, arguments *foundation.NSDictionary[objc.ID, objc.ID]) bool {
+	return x.inner.RenderAtTimeArguments(time_, arguments)
+}
+
+// RenderingTimeForTimeArguments calls the underlying RenderingTimeForTimeArguments.
+func (x *Renderer) RenderingTimeForTimeArguments(time_ float64, arguments *foundation.NSDictionary[objc.ID, objc.ID]) float64 {
+	return x.inner.RenderingTimeForTimeArguments(time_, arguments)
+}
+
+// Composition calls the underlying Composition.
+func (x *Renderer) Composition() *quartz.QCComposition {
+	return x.inner.Composition()
+}
+
+// SnapshotImage calls the underlying SnapshotImage.
+func (x *Renderer) SnapshotImage() *appkit.NSImage {
+	return x.inner.SnapshotImage()
+}
+
+// CreateSnapshotImageOfType calls the underlying CreateSnapshotImageOfType.
+func (x *Renderer) CreateSnapshotImageOfType(type_ string) objc.ID {
+	return x.inner.CreateSnapshotImageOfType(foundation.NSStringStringWithUTF8String(type_))
+}
+
+// Rendererable is the interface implemented by [Renderer], for mocking and DI.
+type Rendererable interface {
+	Unwrap() *raw.QCRenderer
+	RenderAtTimeArguments(time_ float64, arguments *foundation.NSDictionary[objc.ID, objc.ID]) bool
+	RenderingTimeForTimeArguments(time_ float64, arguments *foundation.NSDictionary[objc.ID, objc.ID]) float64
+	Composition() *quartz.QCComposition
+	SnapshotImage() *appkit.NSImage
+	CreateSnapshotImageOfType(type_ string) objc.ID
+}
+
+var _ Rendererable = (*Renderer)(nil)
+

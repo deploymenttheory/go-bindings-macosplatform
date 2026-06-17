@@ -6,7 +6,9 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -99,17 +101,74 @@ func (x *PathCell) WithPlaceholderAttributedString(placeholderAttributedString *
 	return x
 }
 
+// RectOfPathComponentCellWithFrameInView calls the underlying RectOfPathComponentCellWithFrameInView.
+func (x *PathCell) RectOfPathComponentCellWithFrameInView(cell *raw.NSPathComponentCell, frame corefoundation.CGRect, view *raw.NSView) corefoundation.CGRect {
+	return x.inner.RectOfPathComponentCellWithFrameInView(cell, frame, view)
+}
+
+// PathComponentCellAtPointWithFrameInView calls the underlying PathComponentCellAtPointWithFrameInView.
+func (x *PathCell) PathComponentCellAtPointWithFrameInView(point corefoundation.CGPoint, frame corefoundation.CGRect, view *raw.NSView) *PathComponentCell {
+	_r := x.inner.PathComponentCellAtPointWithFrameInView(point, frame, view)
+	if _r == nil {
+		return nil
+	}
+	return &PathComponentCell{inner: _r}
+}
+
+// MouseEnteredWithFrameInView calls the underlying MouseEnteredWithFrameInView.
+func (x *PathCell) MouseEnteredWithFrameInView(event *raw.NSEvent, frame corefoundation.CGRect, view *raw.NSView) {
+	x.inner.MouseEnteredWithFrameInView(event, frame, view)
+}
+
+// MouseExitedWithFrameInView calls the underlying MouseExitedWithFrameInView.
+func (x *PathCell) MouseExitedWithFrameInView(event *raw.NSEvent, frame corefoundation.CGRect, view *raw.NSView) {
+	x.inner.MouseExitedWithFrameInView(event, frame, view)
+}
+
+// PathStyle calls the underlying PathStyle.
+func (x *PathCell) PathStyle() raw.NSPathStyle {
+	return x.inner.PathStyle()
+}
+
+// SetPathStyle calls the underlying SetPathStyle.
+func (x *PathCell) SetPathStyle(pathStyle raw.NSPathStyle) {
+	x.inner.SetPathStyle(pathStyle)
+}
+
+// URL calls the underlying URL.
+func (x *PathCell) URL() *foundation.NSURL {
+	return x.inner.URL()
+}
+
+// SetURL calls the underlying SetURL.
+func (x *PathCell) SetURL(uRL string) {
+	x.inner.SetURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
+}
+
 // AllowedTypes returns the collection as a Go slice.
-func (x *PathCell) AllowedTypes() []*foundation.NSString {
+func (x *PathCell) AllowedTypes() []string {
 	arr := x.inner.AllowedTypes()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// SetAllowedTypes calls the underlying SetAllowedTypes.
+func (x *PathCell) SetAllowedTypes(allowedTypes *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetAllowedTypes(allowedTypes)
+}
+
+// Delegate calls the underlying Delegate.
+func (x *PathCell) Delegate() raw.NSPathCellDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *PathCell) SetDelegate(delegate raw.NSPathCellDelegate) {
+	x.inner.SetDelegate(delegate)
 }
 
 // PathComponentCells returns the collection as a Go slice.
@@ -118,14 +177,113 @@ func (x *PathCell) PathComponentCells() []*raw.NSPathComponentCell {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSPathComponentCell, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSPathComponentCell {
+		return raw.NSPathComponentCellFromID(purego.Retain(_id))
+	})
+}
+
+// SetPathComponentCells calls the underlying SetPathComponentCells.
+func (x *PathCell) SetPathComponentCells(pathComponentCells *foundation.NSArray[*raw.NSPathComponentCell]) {
+	x.inner.SetPathComponentCells(pathComponentCells)
+}
+
+// ClickedPathComponentCell calls the underlying ClickedPathComponentCell.
+func (x *PathCell) ClickedPathComponentCell() *PathComponentCell {
+	_r := x.inner.ClickedPathComponentCell()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &PathComponentCell{inner: _r}
+}
+
+// DoubleAction calls the underlying DoubleAction.
+func (x *PathCell) DoubleAction() objc.SEL {
+	return x.inner.DoubleAction()
+}
+
+// SetDoubleAction calls the underlying SetDoubleAction.
+func (x *PathCell) SetDoubleAction(doubleAction objc.SEL) {
+	x.inner.SetDoubleAction(doubleAction)
+}
+
+// BackgroundColor calls the underlying BackgroundColor.
+func (x *PathCell) BackgroundColor() *Color {
+	_r := x.inner.BackgroundColor()
+	if _r == nil {
+		return nil
+	}
+	return &Color{inner: _r}
+}
+
+// SetBackgroundColor calls the underlying SetBackgroundColor.
+func (x *PathCell) SetBackgroundColor(backgroundColor *raw.NSColor) {
+	x.inner.SetBackgroundColor(backgroundColor)
+}
+
+// PlaceholderString calls the underlying PlaceholderString.
+func (x *PathCell) PlaceholderString() string {
+	_r := x.inner.PlaceholderString()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetPlaceholderString calls the underlying SetPlaceholderString.
+func (x *PathCell) SetPlaceholderString(placeholderString string) {
+	x.inner.SetPlaceholderString(foundation.NSStringStringWithUTF8String(placeholderString))
+}
+
+// PlaceholderAttributedString calls the underlying PlaceholderAttributedString.
+func (x *PathCell) PlaceholderAttributedString() *foundation.NSAttributedString {
+	return x.inner.PlaceholderAttributedString()
+}
+
+// SetPlaceholderAttributedString calls the underlying SetPlaceholderAttributedString.
+func (x *PathCell) SetPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString) {
+	x.inner.SetPlaceholderAttributedString(placeholderAttributedString)
 }
 
 func (x *PathCell) asActionCell() *raw.NSActionCell { return &x.inner.NSActionCell }
 
 func (x *PathCell) asCell() *raw.NSCell { return &x.inner.NSActionCell.NSCell }
+
+// PathCellable is the interface implemented by [PathCell], for mocking and DI.
+type PathCellable interface {
+	Unwrap() *raw.NSPathCell
+	WithPathStyle(pathStyle raw.NSPathStyle) *PathCell
+	WithURL(uRL string) *PathCell
+	WithAllowedTypes(items ...*foundation.NSString) *PathCell
+	WithDelegate(delegate raw.NSPathCellDelegate) *PathCell
+	WithPathComponentCells(items ...*raw.NSPathComponentCell) *PathCell
+	WithDoubleAction(doubleAction objc.SEL) *PathCell
+	WithBackgroundColor(backgroundColor *raw.NSColor) *PathCell
+	WithPlaceholderString(placeholderString string) *PathCell
+	WithPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString) *PathCell
+	RectOfPathComponentCellWithFrameInView(cell *raw.NSPathComponentCell, frame corefoundation.CGRect, view *raw.NSView) corefoundation.CGRect
+	PathComponentCellAtPointWithFrameInView(point corefoundation.CGPoint, frame corefoundation.CGRect, view *raw.NSView) *PathComponentCell
+	MouseEnteredWithFrameInView(event *raw.NSEvent, frame corefoundation.CGRect, view *raw.NSView)
+	MouseExitedWithFrameInView(event *raw.NSEvent, frame corefoundation.CGRect, view *raw.NSView)
+	PathStyle() raw.NSPathStyle
+	SetPathStyle(pathStyle raw.NSPathStyle)
+	URL() *foundation.NSURL
+	SetURL(uRL string)
+	AllowedTypes() []string
+	SetAllowedTypes(allowedTypes *foundation.NSArray[*foundation.NSString])
+	Delegate() raw.NSPathCellDelegate
+	SetDelegate(delegate raw.NSPathCellDelegate)
+	PathComponentCells() []*raw.NSPathComponentCell
+	SetPathComponentCells(pathComponentCells *foundation.NSArray[*raw.NSPathComponentCell])
+	ClickedPathComponentCell() *PathComponentCell
+	DoubleAction() objc.SEL
+	SetDoubleAction(doubleAction objc.SEL)
+	BackgroundColor() *Color
+	SetBackgroundColor(backgroundColor *raw.NSColor)
+	PlaceholderString() string
+	SetPlaceholderString(placeholderString string)
+	PlaceholderAttributedString() *foundation.NSAttributedString
+	SetPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString)
+}
+
+var _ PathCellable = (*PathCell)(nil)
 

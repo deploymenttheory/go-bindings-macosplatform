@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/screencapturekit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // ScreenshotOutput wraps [raw.SCScreenshotOutput] with a fluent Go API.
@@ -29,4 +30,48 @@ func (x *ScreenshotOutput) WithFileURL(fileURL string) *ScreenshotOutput {
 	x.inner.SetFileURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)))
 	return x
 }
+
+// SdrImage calls the underlying SdrImage.
+func (x *ScreenshotOutput) SdrImage() unsafe.Pointer {
+	return x.inner.SdrImage()
+}
+
+// SetSdrImage calls the underlying SetSdrImage.
+func (x *ScreenshotOutput) SetSdrImage(sdrImage unsafe.Pointer) {
+	x.inner.SetSdrImage(sdrImage)
+}
+
+// HdrImage calls the underlying HdrImage.
+func (x *ScreenshotOutput) HdrImage() unsafe.Pointer {
+	return x.inner.HdrImage()
+}
+
+// SetHdrImage calls the underlying SetHdrImage.
+func (x *ScreenshotOutput) SetHdrImage(hdrImage unsafe.Pointer) {
+	x.inner.SetHdrImage(hdrImage)
+}
+
+// FileURL calls the underlying FileURL.
+func (x *ScreenshotOutput) FileURL() *foundation.NSURL {
+	return x.inner.FileURL()
+}
+
+// SetFileURL calls the underlying SetFileURL.
+func (x *ScreenshotOutput) SetFileURL(fileURL string) {
+	x.inner.SetFileURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)))
+}
+
+// ScreenshotOutputable is the interface implemented by [ScreenshotOutput], for mocking and DI.
+type ScreenshotOutputable interface {
+	Unwrap() *raw.SCScreenshotOutput
+	WithFileURL(fileURL string) *ScreenshotOutput
+	SdrImage() unsafe.Pointer
+	SetSdrImage(sdrImage unsafe.Pointer)
+	HdrImage() unsafe.Pointer
+	SetHdrImage(hdrImage unsafe.Pointer)
+	FileURL() *foundation.NSURL
+	SetFileURL(fileURL string)
+}
+
+var _ ScreenshotOutputable = (*ScreenshotOutput)(nil)
 

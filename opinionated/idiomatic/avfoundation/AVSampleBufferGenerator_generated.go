@@ -25,3 +25,38 @@ func NewSampleBufferGeneratorWithAssetTimebase(asset *raw.AVAsset, timebase unsa
 	return &SampleBufferGenerator{inner: raw.AVSampleBufferGeneratorFromID(_id)}
 }
 
+// CreateSampleBufferForRequestError calls the underlying CreateSampleBufferForRequestError.
+func (x *SampleBufferGenerator) CreateSampleBufferForRequestError(request *raw.AVSampleBufferRequest) (unsafe.Pointer, error) {
+	return x.inner.CreateSampleBufferForRequestError(request)
+}
+
+// CreateSampleBufferForRequest calls the underlying CreateSampleBufferForRequest.
+func (x *SampleBufferGenerator) CreateSampleBufferForRequest(request *raw.AVSampleBufferRequest) unsafe.Pointer {
+	return x.inner.CreateSampleBufferForRequest(request)
+}
+
+// MakeBatch calls the underlying MakeBatch.
+func (x *SampleBufferGenerator) MakeBatch() *SampleBufferGeneratorBatch {
+	_r := x.inner.MakeBatch()
+	if _r == nil {
+		return nil
+	}
+	return &SampleBufferGeneratorBatch{inner: _r}
+}
+
+// CreateSampleBufferForRequestAddingToBatchError calls the underlying CreateSampleBufferForRequestAddingToBatchError.
+func (x *SampleBufferGenerator) CreateSampleBufferForRequestAddingToBatchError(request *raw.AVSampleBufferRequest, batch *raw.AVSampleBufferGeneratorBatch) (unsafe.Pointer, error) {
+	return x.inner.CreateSampleBufferForRequestAddingToBatchError(request, batch)
+}
+
+// SampleBufferGeneratorable is the interface implemented by [SampleBufferGenerator], for mocking and DI.
+type SampleBufferGeneratorable interface {
+	Unwrap() *raw.AVSampleBufferGenerator
+	CreateSampleBufferForRequestError(request *raw.AVSampleBufferRequest) (unsafe.Pointer, error)
+	CreateSampleBufferForRequest(request *raw.AVSampleBufferRequest) unsafe.Pointer
+	MakeBatch() *SampleBufferGeneratorBatch
+	CreateSampleBufferForRequestAddingToBatchError(request *raw.AVSampleBufferRequest, batch *raw.AVSampleBufferGeneratorBatch) (unsafe.Pointer, error)
+}
+
+var _ SampleBufferGeneratorable = (*SampleBufferGenerator)(nil)
+

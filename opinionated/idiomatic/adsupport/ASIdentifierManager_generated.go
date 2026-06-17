@@ -6,6 +6,7 @@ package adsupport
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/adsupport"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,23 @@ func NewIdentifierManager() *IdentifierManager {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ASIdentifierManager")), objc.RegisterName("new"))
 	return &IdentifierManager{inner: raw.ASIdentifierManagerFromID(_id)}
 }
+
+// AdvertisingIdentifier calls the underlying AdvertisingIdentifier.
+func (x *IdentifierManager) AdvertisingIdentifier() *foundation.NSUUID {
+	return x.inner.AdvertisingIdentifier()
+}
+
+// IsAdvertisingTrackingEnabled calls the underlying IsAdvertisingTrackingEnabled.
+func (x *IdentifierManager) IsAdvertisingTrackingEnabled() bool {
+	return x.inner.IsAdvertisingTrackingEnabled()
+}
+
+// IdentifierManagerable is the interface implemented by [IdentifierManager], for mocking and DI.
+type IdentifierManagerable interface {
+	Unwrap() *raw.ASIdentifierManager
+	AdvertisingIdentifier() *foundation.NSUUID
+	IsAdvertisingTrackingEnabled() bool
+}
+
+var _ IdentifierManagerable = (*IdentifierManager)(nil)
 

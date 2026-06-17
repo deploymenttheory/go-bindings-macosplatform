@@ -23,3 +23,22 @@ func NewChange() *Change {
 	return &Change{inner: raw.PHChangeFromID(_id)}
 }
 
+// ChangeDetailsForObject calls the underlying ChangeDetailsForObject.
+func (x *Change) ChangeDetailsForObject(object *raw.PHObject) *raw.PHObjectChangeDetails[objc.ID] {
+	return x.inner.ChangeDetailsForObject(object)
+}
+
+// ChangeDetailsForFetchResult calls the underlying ChangeDetailsForFetchResult.
+func (x *Change) ChangeDetailsForFetchResult(object *raw.PHFetchResult[objc.ID]) *raw.PHFetchResultChangeDetails[objc.ID] {
+	return x.inner.ChangeDetailsForFetchResult(object)
+}
+
+// Changeable is the interface implemented by [Change], for mocking and DI.
+type Changeable interface {
+	Unwrap() *raw.PHChange
+	ChangeDetailsForObject(object *raw.PHObject) *raw.PHObjectChangeDetails[objc.ID]
+	ChangeDetailsForFetchResult(object *raw.PHFetchResult[objc.ID]) *raw.PHFetchResultChangeDetails[objc.ID]
+}
+
+var _ Changeable = (*Change)(nil)
+

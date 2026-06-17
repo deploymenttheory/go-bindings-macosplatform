@@ -6,10 +6,14 @@ package quartz
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartz"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // IKImageView wraps [raw.IKImageView] with a fluent Go API.
@@ -103,4 +107,334 @@ func (x *IKImageView) WithBackgroundColor(backgroundColor *appkit.NSColor) *IKIm
 	x.inner.SetBackgroundColor(backgroundColor)
 	return x
 }
+
+// SetImageImageProperties calls the underlying SetImageImageProperties.
+func (x *IKImageView) SetImageImageProperties(image unsafe.Pointer, metaData *foundation.NSDictionary[objc.ID, objc.ID]) {
+	x.inner.SetImageImageProperties(image, metaData)
+}
+
+// SetImageWithURL calls the underlying SetImageWithURL.
+func (x *IKImageView) SetImageWithURL(url string) {
+	x.inner.SetImageWithURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
+}
+
+// Image calls the underlying Image.
+func (x *IKImageView) Image() unsafe.Pointer {
+	return x.inner.Image()
+}
+
+// ImageSize calls the underlying ImageSize.
+func (x *IKImageView) ImageSize() corefoundation.CGSize {
+	return x.inner.ImageSize()
+}
+
+// ImageProperties calls the underlying ImageProperties.
+func (x *IKImageView) ImageProperties() *foundation.NSDictionary[objc.ID, objc.ID] {
+	return x.inner.ImageProperties()
+}
+
+// SetRotationAngleCenterPoint calls the underlying SetRotationAngleCenterPoint.
+func (x *IKImageView) SetRotationAngleCenterPoint(rotationAngle float64, centerPoint corefoundation.CGPoint) {
+	x.inner.SetRotationAngleCenterPoint(rotationAngle, centerPoint)
+}
+
+// RotateImageLeft calls the underlying RotateImageLeft.
+func (x *IKImageView) RotateImageLeft(sender objc.ID) {
+	x.inner.RotateImageLeft(sender)
+}
+
+// RotateImageRight calls the underlying RotateImageRight.
+func (x *IKImageView) RotateImageRight(sender objc.ID) {
+	x.inner.RotateImageRight(sender)
+}
+
+// SetImageZoomFactorCenterPoint calls the underlying SetImageZoomFactorCenterPoint.
+func (x *IKImageView) SetImageZoomFactorCenterPoint(zoomFactor float64, centerPoint corefoundation.CGPoint) {
+	x.inner.SetImageZoomFactorCenterPoint(zoomFactor, centerPoint)
+}
+
+// ZoomImageToRect calls the underlying ZoomImageToRect.
+func (x *IKImageView) ZoomImageToRect(rect corefoundation.CGRect) {
+	x.inner.ZoomImageToRect(rect)
+}
+
+// ZoomImageToFit calls the underlying ZoomImageToFit.
+func (x *IKImageView) ZoomImageToFit(sender objc.ID) {
+	x.inner.ZoomImageToFit(sender)
+}
+
+// ZoomImageToActualSize calls the underlying ZoomImageToActualSize.
+func (x *IKImageView) ZoomImageToActualSize(sender objc.ID) {
+	x.inner.ZoomImageToActualSize(sender)
+}
+
+// ZoomIn calls the underlying ZoomIn.
+func (x *IKImageView) ZoomIn(sender objc.ID) {
+	x.inner.ZoomIn(sender)
+}
+
+// ZoomOut calls the underlying ZoomOut.
+func (x *IKImageView) ZoomOut(sender objc.ID) {
+	x.inner.ZoomOut(sender)
+}
+
+// FlipImageHorizontal calls the underlying FlipImageHorizontal.
+func (x *IKImageView) FlipImageHorizontal(sender objc.ID) {
+	x.inner.FlipImageHorizontal(sender)
+}
+
+// FlipImageVertical calls the underlying FlipImageVertical.
+func (x *IKImageView) FlipImageVertical(sender objc.ID) {
+	x.inner.FlipImageVertical(sender)
+}
+
+// Crop calls the underlying Crop.
+func (x *IKImageView) Crop(sender objc.ID) {
+	x.inner.Crop(sender)
+}
+
+// SetOverlayForType calls the underlying SetOverlayForType.
+func (x *IKImageView) SetOverlayForType(layer *quartzcore.CALayer, layerType string) {
+	x.inner.SetOverlayForType(layer, foundation.NSStringStringWithUTF8String(layerType))
+}
+
+// OverlayForType calls the underlying OverlayForType.
+func (x *IKImageView) OverlayForType(layerType string) *quartzcore.CALayer {
+	return x.inner.OverlayForType(foundation.NSStringStringWithUTF8String(layerType))
+}
+
+// ScrollToPoint calls the underlying ScrollToPoint.
+func (x *IKImageView) ScrollToPoint(point corefoundation.CGPoint) {
+	x.inner.ScrollToPoint(point)
+}
+
+// ScrollToRect calls the underlying ScrollToRect.
+func (x *IKImageView) ScrollToRect(rect corefoundation.CGRect) {
+	x.inner.ScrollToRect(rect)
+}
+
+// ConvertViewPointToImagePoint calls the underlying ConvertViewPointToImagePoint.
+func (x *IKImageView) ConvertViewPointToImagePoint(viewPoint corefoundation.CGPoint) corefoundation.CGPoint {
+	return x.inner.ConvertViewPointToImagePoint(viewPoint)
+}
+
+// ConvertViewRectToImageRect calls the underlying ConvertViewRectToImageRect.
+func (x *IKImageView) ConvertViewRectToImageRect(viewRect corefoundation.CGRect) corefoundation.CGRect {
+	return x.inner.ConvertViewRectToImageRect(viewRect)
+}
+
+// ConvertImagePointToViewPoint calls the underlying ConvertImagePointToViewPoint.
+func (x *IKImageView) ConvertImagePointToViewPoint(imagePoint corefoundation.CGPoint) corefoundation.CGPoint {
+	return x.inner.ConvertImagePointToViewPoint(imagePoint)
+}
+
+// ConvertImageRectToViewRect calls the underlying ConvertImageRectToViewRect.
+func (x *IKImageView) ConvertImageRectToViewRect(imageRect corefoundation.CGRect) corefoundation.CGRect {
+	return x.inner.ConvertImageRectToViewRect(imageRect)
+}
+
+// Delegate calls the underlying Delegate.
+func (x *IKImageView) Delegate() objc.ID {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *IKImageView) SetDelegate(delegate objc.ID) {
+	x.inner.SetDelegate(delegate)
+}
+
+// ZoomFactor calls the underlying ZoomFactor.
+func (x *IKImageView) ZoomFactor() float64 {
+	return x.inner.ZoomFactor()
+}
+
+// SetZoomFactor calls the underlying SetZoomFactor.
+func (x *IKImageView) SetZoomFactor(zoomFactor float64) {
+	x.inner.SetZoomFactor(zoomFactor)
+}
+
+// RotationAngle calls the underlying RotationAngle.
+func (x *IKImageView) RotationAngle() float64 {
+	return x.inner.RotationAngle()
+}
+
+// SetRotationAngle calls the underlying SetRotationAngle.
+func (x *IKImageView) SetRotationAngle(rotationAngle float64) {
+	x.inner.SetRotationAngle(rotationAngle)
+}
+
+// CurrentToolMode calls the underlying CurrentToolMode.
+func (x *IKImageView) CurrentToolMode() string {
+	_r := x.inner.CurrentToolMode()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetCurrentToolMode calls the underlying SetCurrentToolMode.
+func (x *IKImageView) SetCurrentToolMode(currentToolMode string) {
+	x.inner.SetCurrentToolMode(foundation.NSStringStringWithUTF8String(currentToolMode))
+}
+
+// Autoresizes calls the underlying Autoresizes.
+func (x *IKImageView) Autoresizes() bool {
+	return x.inner.Autoresizes()
+}
+
+// SetAutoresizes calls the underlying SetAutoresizes.
+func (x *IKImageView) SetAutoresizes(autoresizes bool) {
+	x.inner.SetAutoresizes(autoresizes)
+}
+
+// HasHorizontalScroller calls the underlying HasHorizontalScroller.
+func (x *IKImageView) HasHorizontalScroller() bool {
+	return x.inner.HasHorizontalScroller()
+}
+
+// SetHasHorizontalScroller calls the underlying SetHasHorizontalScroller.
+func (x *IKImageView) SetHasHorizontalScroller(hasHorizontalScroller bool) {
+	x.inner.SetHasHorizontalScroller(hasHorizontalScroller)
+}
+
+// HasVerticalScroller calls the underlying HasVerticalScroller.
+func (x *IKImageView) HasVerticalScroller() bool {
+	return x.inner.HasVerticalScroller()
+}
+
+// SetHasVerticalScroller calls the underlying SetHasVerticalScroller.
+func (x *IKImageView) SetHasVerticalScroller(hasVerticalScroller bool) {
+	x.inner.SetHasVerticalScroller(hasVerticalScroller)
+}
+
+// AutohidesScrollers calls the underlying AutohidesScrollers.
+func (x *IKImageView) AutohidesScrollers() bool {
+	return x.inner.AutohidesScrollers()
+}
+
+// SetAutohidesScrollers calls the underlying SetAutohidesScrollers.
+func (x *IKImageView) SetAutohidesScrollers(autohidesScrollers bool) {
+	x.inner.SetAutohidesScrollers(autohidesScrollers)
+}
+
+// SupportsDragAndDrop calls the underlying SupportsDragAndDrop.
+func (x *IKImageView) SupportsDragAndDrop() bool {
+	return x.inner.SupportsDragAndDrop()
+}
+
+// SetSupportsDragAndDrop calls the underlying SetSupportsDragAndDrop.
+func (x *IKImageView) SetSupportsDragAndDrop(supportsDragAndDrop bool) {
+	x.inner.SetSupportsDragAndDrop(supportsDragAndDrop)
+}
+
+// Editable calls the underlying Editable.
+func (x *IKImageView) Editable() bool {
+	return x.inner.Editable()
+}
+
+// SetEditable calls the underlying SetEditable.
+func (x *IKImageView) SetEditable(editable bool) {
+	x.inner.SetEditable(editable)
+}
+
+// DoubleClickOpensImageEditPanel calls the underlying DoubleClickOpensImageEditPanel.
+func (x *IKImageView) DoubleClickOpensImageEditPanel() bool {
+	return x.inner.DoubleClickOpensImageEditPanel()
+}
+
+// SetDoubleClickOpensImageEditPanel calls the underlying SetDoubleClickOpensImageEditPanel.
+func (x *IKImageView) SetDoubleClickOpensImageEditPanel(doubleClickOpensImageEditPanel bool) {
+	x.inner.SetDoubleClickOpensImageEditPanel(doubleClickOpensImageEditPanel)
+}
+
+// ImageCorrection calls the underlying ImageCorrection.
+func (x *IKImageView) ImageCorrection() *coreimage.CIFilter {
+	return x.inner.ImageCorrection()
+}
+
+// SetImageCorrection calls the underlying SetImageCorrection.
+func (x *IKImageView) SetImageCorrection(imageCorrection *coreimage.CIFilter) {
+	x.inner.SetImageCorrection(imageCorrection)
+}
+
+// BackgroundColor calls the underlying BackgroundColor.
+func (x *IKImageView) BackgroundColor() *appkit.NSColor {
+	return x.inner.BackgroundColor()
+}
+
+// SetBackgroundColor calls the underlying SetBackgroundColor.
+func (x *IKImageView) SetBackgroundColor(backgroundColor *appkit.NSColor) {
+	x.inner.SetBackgroundColor(backgroundColor)
+}
+
+// IKImageViewable is the interface implemented by [IKImageView], for mocking and DI.
+type IKImageViewable interface {
+	Unwrap() *raw.IKImageView
+	WithDelegate(delegate objc.ID) *IKImageView
+	WithZoomFactor(zoomFactor float64) *IKImageView
+	WithRotationAngle(rotationAngle float64) *IKImageView
+	WithCurrentToolMode(currentToolMode string) *IKImageView
+	WithAutoresizes(autoresizes bool) *IKImageView
+	WithHasHorizontalScroller(hasHorizontalScroller bool) *IKImageView
+	WithHasVerticalScroller(hasVerticalScroller bool) *IKImageView
+	WithAutohidesScrollers(autohidesScrollers bool) *IKImageView
+	WithSupportsDragAndDrop(supportsDragAndDrop bool) *IKImageView
+	WithEditable(editable bool) *IKImageView
+	WithDoubleClickOpensImageEditPanel(doubleClickOpensImageEditPanel bool) *IKImageView
+	WithImageCorrection(imageCorrection *coreimage.CIFilter) *IKImageView
+	WithBackgroundColor(backgroundColor *appkit.NSColor) *IKImageView
+	SetImageImageProperties(image unsafe.Pointer, metaData *foundation.NSDictionary[objc.ID, objc.ID])
+	SetImageWithURL(url string)
+	Image() unsafe.Pointer
+	ImageSize() corefoundation.CGSize
+	ImageProperties() *foundation.NSDictionary[objc.ID, objc.ID]
+	SetRotationAngleCenterPoint(rotationAngle float64, centerPoint corefoundation.CGPoint)
+	RotateImageLeft(sender objc.ID)
+	RotateImageRight(sender objc.ID)
+	SetImageZoomFactorCenterPoint(zoomFactor float64, centerPoint corefoundation.CGPoint)
+	ZoomImageToRect(rect corefoundation.CGRect)
+	ZoomImageToFit(sender objc.ID)
+	ZoomImageToActualSize(sender objc.ID)
+	ZoomIn(sender objc.ID)
+	ZoomOut(sender objc.ID)
+	FlipImageHorizontal(sender objc.ID)
+	FlipImageVertical(sender objc.ID)
+	Crop(sender objc.ID)
+	SetOverlayForType(layer *quartzcore.CALayer, layerType string)
+	OverlayForType(layerType string) *quartzcore.CALayer
+	ScrollToPoint(point corefoundation.CGPoint)
+	ScrollToRect(rect corefoundation.CGRect)
+	ConvertViewPointToImagePoint(viewPoint corefoundation.CGPoint) corefoundation.CGPoint
+	ConvertViewRectToImageRect(viewRect corefoundation.CGRect) corefoundation.CGRect
+	ConvertImagePointToViewPoint(imagePoint corefoundation.CGPoint) corefoundation.CGPoint
+	ConvertImageRectToViewRect(imageRect corefoundation.CGRect) corefoundation.CGRect
+	Delegate() objc.ID
+	SetDelegate(delegate objc.ID)
+	ZoomFactor() float64
+	SetZoomFactor(zoomFactor float64)
+	RotationAngle() float64
+	SetRotationAngle(rotationAngle float64)
+	CurrentToolMode() string
+	SetCurrentToolMode(currentToolMode string)
+	Autoresizes() bool
+	SetAutoresizes(autoresizes bool)
+	HasHorizontalScroller() bool
+	SetHasHorizontalScroller(hasHorizontalScroller bool)
+	HasVerticalScroller() bool
+	SetHasVerticalScroller(hasVerticalScroller bool)
+	AutohidesScrollers() bool
+	SetAutohidesScrollers(autohidesScrollers bool)
+	SupportsDragAndDrop() bool
+	SetSupportsDragAndDrop(supportsDragAndDrop bool)
+	Editable() bool
+	SetEditable(editable bool)
+	DoubleClickOpensImageEditPanel() bool
+	SetDoubleClickOpensImageEditPanel(doubleClickOpensImageEditPanel bool)
+	ImageCorrection() *coreimage.CIFilter
+	SetImageCorrection(imageCorrection *coreimage.CIFilter)
+	BackgroundColor() *appkit.NSColor
+	SetBackgroundColor(backgroundColor *appkit.NSColor)
+}
+
+var _ IKImageViewable = (*IKImageView)(nil)
 

@@ -6,6 +6,7 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -72,7 +73,130 @@ func (x *LevelIndicatorCell) WithNumberOfMajorTickMarks(numberOfMajorTickMarks i
 	return x
 }
 
+// RectOfTickMarkAtIndex calls the underlying RectOfTickMarkAtIndex.
+func (x *LevelIndicatorCell) RectOfTickMarkAtIndex(index int) corefoundation.CGRect {
+	return x.inner.RectOfTickMarkAtIndex(index)
+}
+
+// TickMarkValueAtIndex calls the underlying TickMarkValueAtIndex.
+func (x *LevelIndicatorCell) TickMarkValueAtIndex(index int) float64 {
+	return x.inner.TickMarkValueAtIndex(index)
+}
+
+// LevelIndicatorStyle calls the underlying LevelIndicatorStyle.
+func (x *LevelIndicatorCell) LevelIndicatorStyle() raw.NSLevelIndicatorStyle {
+	return x.inner.LevelIndicatorStyle()
+}
+
+// SetLevelIndicatorStyle calls the underlying SetLevelIndicatorStyle.
+func (x *LevelIndicatorCell) SetLevelIndicatorStyle(levelIndicatorStyle raw.NSLevelIndicatorStyle) {
+	x.inner.SetLevelIndicatorStyle(levelIndicatorStyle)
+}
+
+// MinValue calls the underlying MinValue.
+func (x *LevelIndicatorCell) MinValue() float64 {
+	return x.inner.MinValue()
+}
+
+// SetMinValue calls the underlying SetMinValue.
+func (x *LevelIndicatorCell) SetMinValue(minValue float64) {
+	x.inner.SetMinValue(minValue)
+}
+
+// MaxValue calls the underlying MaxValue.
+func (x *LevelIndicatorCell) MaxValue() float64 {
+	return x.inner.MaxValue()
+}
+
+// SetMaxValue calls the underlying SetMaxValue.
+func (x *LevelIndicatorCell) SetMaxValue(maxValue float64) {
+	x.inner.SetMaxValue(maxValue)
+}
+
+// WarningValue calls the underlying WarningValue.
+func (x *LevelIndicatorCell) WarningValue() float64 {
+	return x.inner.WarningValue()
+}
+
+// SetWarningValue calls the underlying SetWarningValue.
+func (x *LevelIndicatorCell) SetWarningValue(warningValue float64) {
+	x.inner.SetWarningValue(warningValue)
+}
+
+// CriticalValue calls the underlying CriticalValue.
+func (x *LevelIndicatorCell) CriticalValue() float64 {
+	return x.inner.CriticalValue()
+}
+
+// SetCriticalValue calls the underlying SetCriticalValue.
+func (x *LevelIndicatorCell) SetCriticalValue(criticalValue float64) {
+	x.inner.SetCriticalValue(criticalValue)
+}
+
+// TickMarkPosition calls the underlying TickMarkPosition.
+func (x *LevelIndicatorCell) TickMarkPosition() raw.NSTickMarkPosition {
+	return x.inner.TickMarkPosition()
+}
+
+// SetTickMarkPosition calls the underlying SetTickMarkPosition.
+func (x *LevelIndicatorCell) SetTickMarkPosition(tickMarkPosition raw.NSTickMarkPosition) {
+	x.inner.SetTickMarkPosition(tickMarkPosition)
+}
+
+// NumberOfTickMarks calls the underlying NumberOfTickMarks.
+func (x *LevelIndicatorCell) NumberOfTickMarks() int {
+	return x.inner.NumberOfTickMarks()
+}
+
+// SetNumberOfTickMarks calls the underlying SetNumberOfTickMarks.
+func (x *LevelIndicatorCell) SetNumberOfTickMarks(numberOfTickMarks int) {
+	x.inner.SetNumberOfTickMarks(numberOfTickMarks)
+}
+
+// NumberOfMajorTickMarks calls the underlying NumberOfMajorTickMarks.
+func (x *LevelIndicatorCell) NumberOfMajorTickMarks() int {
+	return x.inner.NumberOfMajorTickMarks()
+}
+
+// SetNumberOfMajorTickMarks calls the underlying SetNumberOfMajorTickMarks.
+func (x *LevelIndicatorCell) SetNumberOfMajorTickMarks(numberOfMajorTickMarks int) {
+	x.inner.SetNumberOfMajorTickMarks(numberOfMajorTickMarks)
+}
+
 func (x *LevelIndicatorCell) asActionCell() *raw.NSActionCell { return &x.inner.NSActionCell }
 
 func (x *LevelIndicatorCell) asCell() *raw.NSCell { return &x.inner.NSActionCell.NSCell }
+
+// LevelIndicatorCellable is the interface implemented by [LevelIndicatorCell], for mocking and DI.
+type LevelIndicatorCellable interface {
+	Unwrap() *raw.NSLevelIndicatorCell
+	WithLevelIndicatorStyle(levelIndicatorStyle raw.NSLevelIndicatorStyle) *LevelIndicatorCell
+	WithMinValue(minValue float64) *LevelIndicatorCell
+	WithMaxValue(maxValue float64) *LevelIndicatorCell
+	WithWarningValue(warningValue float64) *LevelIndicatorCell
+	WithCriticalValue(criticalValue float64) *LevelIndicatorCell
+	WithTickMarkPosition(tickMarkPosition raw.NSTickMarkPosition) *LevelIndicatorCell
+	WithNumberOfTickMarks(numberOfTickMarks int) *LevelIndicatorCell
+	WithNumberOfMajorTickMarks(numberOfMajorTickMarks int) *LevelIndicatorCell
+	RectOfTickMarkAtIndex(index int) corefoundation.CGRect
+	TickMarkValueAtIndex(index int) float64
+	LevelIndicatorStyle() raw.NSLevelIndicatorStyle
+	SetLevelIndicatorStyle(levelIndicatorStyle raw.NSLevelIndicatorStyle)
+	MinValue() float64
+	SetMinValue(minValue float64)
+	MaxValue() float64
+	SetMaxValue(maxValue float64)
+	WarningValue() float64
+	SetWarningValue(warningValue float64)
+	CriticalValue() float64
+	SetCriticalValue(criticalValue float64)
+	TickMarkPosition() raw.NSTickMarkPosition
+	SetTickMarkPosition(tickMarkPosition raw.NSTickMarkPosition)
+	NumberOfTickMarks() int
+	SetNumberOfTickMarks(numberOfTickMarks int)
+	NumberOfMajorTickMarks() int
+	SetNumberOfMajorTickMarks(numberOfMajorTickMarks int)
+}
+
+var _ LevelIndicatorCellable = (*LevelIndicatorCell)(nil)
 

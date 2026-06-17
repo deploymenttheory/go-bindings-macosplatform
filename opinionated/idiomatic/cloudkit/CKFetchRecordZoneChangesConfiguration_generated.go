@@ -7,6 +7,7 @@ package cloudkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -53,16 +54,59 @@ func (x *FetchRecordZoneChangesConfiguration) WithDesiredKeys(items ...*foundati
 	return x
 }
 
+// PreviousServerChangeToken calls the underlying PreviousServerChangeToken.
+func (x *FetchRecordZoneChangesConfiguration) PreviousServerChangeToken() *ServerChangeToken {
+	_r := x.inner.PreviousServerChangeToken()
+	if _r == nil {
+		return nil
+	}
+	return &ServerChangeToken{inner: _r}
+}
+
+// SetPreviousServerChangeToken calls the underlying SetPreviousServerChangeToken.
+func (x *FetchRecordZoneChangesConfiguration) SetPreviousServerChangeToken(previousServerChangeToken *raw.CKServerChangeToken) {
+	x.inner.SetPreviousServerChangeToken(previousServerChangeToken)
+}
+
+// ResultsLimit calls the underlying ResultsLimit.
+func (x *FetchRecordZoneChangesConfiguration) ResultsLimit() uint {
+	return x.inner.ResultsLimit()
+}
+
+// SetResultsLimit calls the underlying SetResultsLimit.
+func (x *FetchRecordZoneChangesConfiguration) SetResultsLimit(resultsLimit uint) {
+	x.inner.SetResultsLimit(resultsLimit)
+}
+
 // DesiredKeys returns the collection as a Go slice.
 func (x *FetchRecordZoneChangesConfiguration) DesiredKeys() []*foundation.NSString {
 	arr := x.inner.DesiredKeys()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	})
 }
+
+// SetDesiredKeys calls the underlying SetDesiredKeys.
+func (x *FetchRecordZoneChangesConfiguration) SetDesiredKeys(desiredKeys *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetDesiredKeys(desiredKeys)
+}
+
+// FetchRecordZoneChangesConfigurationable is the interface implemented by [FetchRecordZoneChangesConfiguration], for mocking and DI.
+type FetchRecordZoneChangesConfigurationable interface {
+	Unwrap() *raw.CKFetchRecordZoneChangesConfiguration
+	WithPreviousServerChangeToken(previousServerChangeToken *raw.CKServerChangeToken) *FetchRecordZoneChangesConfiguration
+	WithResultsLimit(resultsLimit uint) *FetchRecordZoneChangesConfiguration
+	WithDesiredKeys(items ...*foundation.NSString) *FetchRecordZoneChangesConfiguration
+	PreviousServerChangeToken() *ServerChangeToken
+	SetPreviousServerChangeToken(previousServerChangeToken *raw.CKServerChangeToken)
+	ResultsLimit() uint
+	SetResultsLimit(resultsLimit uint)
+	DesiredKeys() []*foundation.NSString
+	SetDesiredKeys(desiredKeys *foundation.NSArray[*foundation.NSString])
+}
+
+var _ FetchRecordZoneChangesConfigurationable = (*FetchRecordZoneChangesConfiguration)(nil)
 

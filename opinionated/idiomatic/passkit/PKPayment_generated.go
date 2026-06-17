@@ -23,3 +23,50 @@ func NewPayment() *Payment {
 	return &Payment{inner: raw.PKPaymentFromID(_id)}
 }
 
+// Token calls the underlying Token.
+func (x *Payment) Token() *PaymentToken {
+	_r := x.inner.Token()
+	if _r == nil {
+		return nil
+	}
+	return &PaymentToken{inner: _r}
+}
+
+// BillingContact calls the underlying BillingContact.
+func (x *Payment) BillingContact() *Contact {
+	_r := x.inner.BillingContact()
+	if _r == nil {
+		return nil
+	}
+	return &Contact{inner: _r}
+}
+
+// ShippingContact calls the underlying ShippingContact.
+func (x *Payment) ShippingContact() *Contact {
+	_r := x.inner.ShippingContact()
+	if _r == nil {
+		return nil
+	}
+	return &Contact{inner: _r}
+}
+
+// ShippingMethod calls the underlying ShippingMethod.
+func (x *Payment) ShippingMethod() *ShippingMethod {
+	_r := x.inner.ShippingMethod()
+	if _r == nil {
+		return nil
+	}
+	return &ShippingMethod{inner: _r}
+}
+
+// Paymentable is the interface implemented by [Payment], for mocking and DI.
+type Paymentable interface {
+	Unwrap() *raw.PKPayment
+	Token() *PaymentToken
+	BillingContact() *Contact
+	ShippingContact() *Contact
+	ShippingMethod() *ShippingMethod
+}
+
+var _ Paymentable = (*Payment)(nil)
+

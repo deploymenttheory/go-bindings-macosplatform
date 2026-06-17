@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -81,4 +82,75 @@ func NewVectorWithString(representation string) *Vector {
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:"), foundation.NSStringStringWithUTF8String(representation).Ptr())
 	return &Vector{inner: raw.CIVectorFromID(_id)}
 }
+
+// ValueAtIndex calls the underlying ValueAtIndex.
+func (x *Vector) ValueAtIndex(index uint) float64 {
+	return x.inner.ValueAtIndex(index)
+}
+
+// Count calls the underlying Count.
+func (x *Vector) Count() uint {
+	return x.inner.Count()
+}
+
+// X calls the underlying X.
+func (x *Vector) X() float64 {
+	return x.inner.X()
+}
+
+// Y calls the underlying Y.
+func (x *Vector) Y() float64 {
+	return x.inner.Y()
+}
+
+// Z calls the underlying Z.
+func (x *Vector) Z() float64 {
+	return x.inner.Z()
+}
+
+// W calls the underlying W.
+func (x *Vector) W() float64 {
+	return x.inner.W()
+}
+
+// CGPointValue calls the underlying CGPointValue.
+func (x *Vector) CGPointValue() corefoundation.CGPoint {
+	return x.inner.CGPointValue()
+}
+
+// CGRectValue calls the underlying CGRectValue.
+func (x *Vector) CGRectValue() corefoundation.CGRect {
+	return x.inner.CGRectValue()
+}
+
+// CGAffineTransformValue calls the underlying CGAffineTransformValue.
+func (x *Vector) CGAffineTransformValue() corefoundation.CGAffineTransform {
+	return x.inner.CGAffineTransformValue()
+}
+
+// StringRepresentation calls the underlying StringRepresentation.
+func (x *Vector) StringRepresentation() string {
+	_r := x.inner.StringRepresentation()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Vectorable is the interface implemented by [Vector], for mocking and DI.
+type Vectorable interface {
+	Unwrap() *raw.CIVector
+	ValueAtIndex(index uint) float64
+	Count() uint
+	X() float64
+	Y() float64
+	Z() float64
+	W() float64
+	CGPointValue() corefoundation.CGPoint
+	CGRectValue() corefoundation.CGRect
+	CGAffineTransformValue() corefoundation.CGAffineTransform
+	StringRepresentation() string
+}
+
+var _ Vectorable = (*Vector)(nil)
 

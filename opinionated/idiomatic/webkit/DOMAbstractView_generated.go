@@ -23,7 +23,24 @@ func NewDOMAbstractView() *DOMAbstractView {
 	return &DOMAbstractView{inner: raw.DOMAbstractViewFromID(_id)}
 }
 
+// Document calls the underlying Document.
+func (x *DOMAbstractView) Document() *DOMDocument {
+	_r := x.inner.Document()
+	if _r == nil {
+		return nil
+	}
+	return &DOMDocument{inner: _r}
+}
+
 func (x *DOMAbstractView) asDOMObject() *raw.DOMObject { return &x.inner.DOMObject }
 
 func (x *DOMAbstractView) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMObject.WebScriptObject }
+
+// DOMAbstractViewable is the interface implemented by [DOMAbstractView], for mocking and DI.
+type DOMAbstractViewable interface {
+	Unwrap() *raw.DOMAbstractView
+	Document() *DOMDocument
+}
+
+var _ DOMAbstractViewable = (*DOMAbstractView)(nil)
 

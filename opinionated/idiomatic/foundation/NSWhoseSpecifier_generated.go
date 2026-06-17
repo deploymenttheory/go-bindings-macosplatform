@@ -62,7 +62,83 @@ func (x *WhoseSpecifier) WithEndSubelementIndex(endSubelementIndex int) *WhoseSp
 	return x
 }
 
+// Test calls the underlying Test.
+func (x *WhoseSpecifier) Test() *ScriptWhoseTest {
+	_r := x.inner.Test()
+	if _r == nil {
+		return nil
+	}
+	return &ScriptWhoseTest{inner: _r}
+}
+
+// SetTest calls the underlying SetTest.
+func (x *WhoseSpecifier) SetTest(test *raw.NSScriptWhoseTest) {
+	x.inner.SetTest(test)
+}
+
+// StartSubelementIdentifier calls the underlying StartSubelementIdentifier.
+func (x *WhoseSpecifier) StartSubelementIdentifier() raw.NSWhoseSubelementIdentifier {
+	return x.inner.StartSubelementIdentifier()
+}
+
+// SetStartSubelementIdentifier calls the underlying SetStartSubelementIdentifier.
+func (x *WhoseSpecifier) SetStartSubelementIdentifier(startSubelementIdentifier raw.NSWhoseSubelementIdentifier) {
+	x.inner.SetStartSubelementIdentifier(startSubelementIdentifier)
+}
+
+// StartSubelementIndex calls the underlying StartSubelementIndex.
+func (x *WhoseSpecifier) StartSubelementIndex() int {
+	return x.inner.StartSubelementIndex()
+}
+
+// SetStartSubelementIndex calls the underlying SetStartSubelementIndex.
+func (x *WhoseSpecifier) SetStartSubelementIndex(startSubelementIndex int) {
+	x.inner.SetStartSubelementIndex(startSubelementIndex)
+}
+
+// EndSubelementIdentifier calls the underlying EndSubelementIdentifier.
+func (x *WhoseSpecifier) EndSubelementIdentifier() raw.NSWhoseSubelementIdentifier {
+	return x.inner.EndSubelementIdentifier()
+}
+
+// SetEndSubelementIdentifier calls the underlying SetEndSubelementIdentifier.
+func (x *WhoseSpecifier) SetEndSubelementIdentifier(endSubelementIdentifier raw.NSWhoseSubelementIdentifier) {
+	x.inner.SetEndSubelementIdentifier(endSubelementIdentifier)
+}
+
+// EndSubelementIndex calls the underlying EndSubelementIndex.
+func (x *WhoseSpecifier) EndSubelementIndex() int {
+	return x.inner.EndSubelementIndex()
+}
+
+// SetEndSubelementIndex calls the underlying SetEndSubelementIndex.
+func (x *WhoseSpecifier) SetEndSubelementIndex(endSubelementIndex int) {
+	x.inner.SetEndSubelementIndex(endSubelementIndex)
+}
+
 func (x *WhoseSpecifier) asScriptObjectSpecifier() *raw.NSScriptObjectSpecifier { return &x.inner.NSScriptObjectSpecifier }
 
 func (x *WhoseSpecifier) asObject() *raw.NSObject { return &x.inner.NSScriptObjectSpecifier.NSObject }
+
+// WhoseSpecifierable is the interface implemented by [WhoseSpecifier], for mocking and DI.
+type WhoseSpecifierable interface {
+	Unwrap() *raw.NSWhoseSpecifier
+	WithTest(test ScriptWhoseTestProvider) *WhoseSpecifier
+	WithStartSubelementIdentifier(startSubelementIdentifier raw.NSWhoseSubelementIdentifier) *WhoseSpecifier
+	WithStartSubelementIndex(startSubelementIndex int) *WhoseSpecifier
+	WithEndSubelementIdentifier(endSubelementIdentifier raw.NSWhoseSubelementIdentifier) *WhoseSpecifier
+	WithEndSubelementIndex(endSubelementIndex int) *WhoseSpecifier
+	Test() *ScriptWhoseTest
+	SetTest(test *raw.NSScriptWhoseTest)
+	StartSubelementIdentifier() raw.NSWhoseSubelementIdentifier
+	SetStartSubelementIdentifier(startSubelementIdentifier raw.NSWhoseSubelementIdentifier)
+	StartSubelementIndex() int
+	SetStartSubelementIndex(startSubelementIndex int)
+	EndSubelementIdentifier() raw.NSWhoseSubelementIdentifier
+	SetEndSubelementIdentifier(endSubelementIdentifier raw.NSWhoseSubelementIdentifier)
+	EndSubelementIndex() int
+	SetEndSubelementIndex(endSubelementIndex int)
+}
+
+var _ WhoseSpecifierable = (*WhoseSpecifier)(nil)
 

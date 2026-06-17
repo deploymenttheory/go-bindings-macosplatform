@@ -6,6 +6,7 @@ package videosubscriberaccount
 
 import (
 	"context"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/videosubscriberaccount"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
@@ -30,11 +31,11 @@ func NewVSUserAccountManager() *VSUserAccountManager {
 func (x *VSUserAccountManager) UpdateUserAccountCompletion(ctx context.Context, account *raw.VSUserAccount) error {
 	_ch := make(chan error, 1)
 	x.inner.UpdateUserAccountCompletion(account, func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -44,15 +45,65 @@ func (x *VSUserAccountManager) UpdateUserAccountCompletion(ctx context.Context, 
 	}
 }
 
+// QueryUserAccountsWithOptionsCompletion blocks until the operation completes or ctx is cancelled.
+func (x *VSUserAccountManager) QueryUserAccountsWithOptionsCompletion(ctx context.Context, options raw.VSUserAccountQueryOptions) (*foundation.NSArray[*raw.VSUserAccount], error) {
+	type _result struct {
+		val *foundation.NSArray[*raw.VSUserAccount]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.QueryUserAccountsWithOptionsCompletion(options, func(_p0 *foundation.NSArray[*raw.VSUserAccount], _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[*raw.VSUserAccount]
+		return _zero, ctx.Err()
+	}
+}
+
+// QueryAutoSignInToken blocks until the operation completes or ctx is cancelled.
+func (x *VSUserAccountManager) QueryAutoSignInToken(ctx context.Context) (*VSAutoSignInToken, error) {
+	type _result struct {
+		val *VSAutoSignInToken
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.QueryAutoSignInTokenWithCompletionHandler(func(_p0 *raw.VSAutoSignInToken, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &VSAutoSignInToken{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *VSAutoSignInToken
+		return _zero, ctx.Err()
+	}
+}
+
 // DeleteAutoSignInToken blocks until the operation completes or ctx is cancelled.
 func (x *VSUserAccountManager) DeleteAutoSignInToken(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.DeleteAutoSignInTokenWithCompletionHandler(func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -61,4 +112,15 @@ func (x *VSUserAccountManager) DeleteAutoSignInToken(ctx context.Context) error 
 		return ctx.Err()
 	}
 }
+
+// VSUserAccountManagerable is the interface implemented by [VSUserAccountManager], for mocking and DI.
+type VSUserAccountManagerable interface {
+	Unwrap() *raw.VSUserAccountManager
+	UpdateUserAccountCompletion(ctx context.Context, account *raw.VSUserAccount) error
+	QueryUserAccountsWithOptionsCompletion(ctx context.Context, options raw.VSUserAccountQueryOptions) (*foundation.NSArray[*raw.VSUserAccount], error)
+	QueryAutoSignInToken(ctx context.Context) (*VSAutoSignInToken, error)
+	DeleteAutoSignInToken(ctx context.Context) error
+}
+
+var _ VSUserAccountManagerable = (*VSUserAccountManager)(nil)
 

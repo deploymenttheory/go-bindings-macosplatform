@@ -5,8 +5,10 @@
 package mediaaccessibility
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mediaaccessibility"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // FlashingLightsProcessor wraps [raw.MAFlashingLightsProcessor] with a fluent Go API.
@@ -22,4 +24,27 @@ func NewFlashingLightsProcessor() *FlashingLightsProcessor {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MAFlashingLightsProcessor")), objc.RegisterName("new"))
 	return &FlashingLightsProcessor{inner: raw.MAFlashingLightsProcessorFromID(_id)}
 }
+
+// CanProcessSurface calls the underlying CanProcessSurface.
+func (x *FlashingLightsProcessor) CanProcessSurface(surface unsafe.Pointer) bool {
+	return x.inner.CanProcessSurface(surface)
+}
+
+// ProcessSurfaceOutSurfaceTimestampOptions calls the underlying ProcessSurfaceOutSurfaceTimestampOptions.
+func (x *FlashingLightsProcessor) ProcessSurfaceOutSurfaceTimestampOptions(inSurface unsafe.Pointer, outSurface unsafe.Pointer, timestamp float64, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *FlashingLightsProcessorResult {
+	_r := x.inner.ProcessSurfaceOutSurfaceTimestampOptions(inSurface, outSurface, timestamp, options)
+	if _r == nil {
+		return nil
+	}
+	return &FlashingLightsProcessorResult{inner: _r}
+}
+
+// FlashingLightsProcessorable is the interface implemented by [FlashingLightsProcessor], for mocking and DI.
+type FlashingLightsProcessorable interface {
+	Unwrap() *raw.MAFlashingLightsProcessor
+	CanProcessSurface(surface unsafe.Pointer) bool
+	ProcessSurfaceOutSurfaceTimestampOptions(inSurface unsafe.Pointer, outSurface unsafe.Pointer, timestamp float64, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *FlashingLightsProcessorResult
+}
+
+var _ FlashingLightsProcessorable = (*FlashingLightsProcessor)(nil)
 

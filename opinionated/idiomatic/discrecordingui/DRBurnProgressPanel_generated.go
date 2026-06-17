@@ -5,7 +5,10 @@
 package discrecordingui
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/discrecording"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/discrecordingui"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +25,47 @@ func NewBurnProgressPanel() *BurnProgressPanel {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DRBurnProgressPanel")), objc.RegisterName("new"))
 	return &BurnProgressPanel{inner: raw.DRBurnProgressPanelFromID(_id)}
 }
+
+// BeginProgressSheetForBurnLayoutModalForWindow calls the underlying BeginProgressSheetForBurnLayoutModalForWindow.
+func (x *BurnProgressPanel) BeginProgressSheetForBurnLayoutModalForWindow(burn *discrecording.DRBurn, layout objc.ID, docWindow *appkit.NSWindow) {
+	x.inner.BeginProgressSheetForBurnLayoutModalForWindow(burn, layout, docWindow)
+}
+
+// BeginProgressPanelForBurnLayout calls the underlying BeginProgressPanelForBurnLayout.
+func (x *BurnProgressPanel) BeginProgressPanelForBurnLayout(burn *discrecording.DRBurn, layout objc.ID) {
+	x.inner.BeginProgressPanelForBurnLayout(burn, layout)
+}
+
+// SetDescription calls the underlying SetDescription.
+func (x *BurnProgressPanel) SetDescription(description string) {
+	x.inner.SetDescription(foundation.NSStringStringWithUTF8String(description))
+}
+
+// SetVerboseProgressStatus calls the underlying SetVerboseProgressStatus.
+func (x *BurnProgressPanel) SetVerboseProgressStatus(verbose bool) {
+	x.inner.SetVerboseProgressStatus(verbose)
+}
+
+// VerboseProgressStatus calls the underlying VerboseProgressStatus.
+func (x *BurnProgressPanel) VerboseProgressStatus() bool {
+	return x.inner.VerboseProgressStatus()
+}
+
+// StopBurn calls the underlying StopBurn.
+func (x *BurnProgressPanel) StopBurn(sender objc.ID) {
+	x.inner.StopBurn(sender)
+}
+
+// BurnProgressPanelable is the interface implemented by [BurnProgressPanel], for mocking and DI.
+type BurnProgressPanelable interface {
+	Unwrap() *raw.DRBurnProgressPanel
+	BeginProgressSheetForBurnLayoutModalForWindow(burn *discrecording.DRBurn, layout objc.ID, docWindow *appkit.NSWindow)
+	BeginProgressPanelForBurnLayout(burn *discrecording.DRBurn, layout objc.ID)
+	SetDescription(description string)
+	SetVerboseProgressStatus(verbose bool)
+	VerboseProgressStatus() bool
+	StopBurn(sender objc.ID)
+}
+
+var _ BurnProgressPanelable = (*BurnProgressPanel)(nil)
 

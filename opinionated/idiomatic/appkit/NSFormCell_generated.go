@@ -6,7 +6,9 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -80,7 +82,132 @@ func (x *FormCell) WithAttributedTitle(attributedTitle *foundation.NSAttributedS
 	return x
 }
 
+// TitleWidth calls the underlying TitleWidth.
+func (x *FormCell) TitleWidth(size corefoundation.CGSize) float64 {
+	return x.inner.TitleWidth(size)
+}
+
+// TitleWidth2 calls the underlying TitleWidth2.
+func (x *FormCell) TitleWidth2() float64 {
+	return x.inner.TitleWidth2()
+}
+
+// SetTitleWidth calls the underlying SetTitleWidth.
+func (x *FormCell) SetTitleWidth(titleWidth float64) {
+	x.inner.SetTitleWidth(titleWidth)
+}
+
+// TitleFont calls the underlying TitleFont.
+func (x *FormCell) TitleFont() *Font {
+	_r := x.inner.TitleFont()
+	if _r == nil {
+		return nil
+	}
+	return &Font{inner: _r}
+}
+
+// SetTitleFont calls the underlying SetTitleFont.
+func (x *FormCell) SetTitleFont(titleFont *raw.NSFont) {
+	x.inner.SetTitleFont(titleFont)
+}
+
+// PlaceholderString calls the underlying PlaceholderString.
+func (x *FormCell) PlaceholderString() string {
+	_r := x.inner.PlaceholderString()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetPlaceholderString calls the underlying SetPlaceholderString.
+func (x *FormCell) SetPlaceholderString(placeholderString string) {
+	x.inner.SetPlaceholderString(foundation.NSStringStringWithUTF8String(placeholderString))
+}
+
+// PlaceholderAttributedString calls the underlying PlaceholderAttributedString.
+func (x *FormCell) PlaceholderAttributedString() *foundation.NSAttributedString {
+	return x.inner.PlaceholderAttributedString()
+}
+
+// SetPlaceholderAttributedString calls the underlying SetPlaceholderAttributedString.
+func (x *FormCell) SetPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString) {
+	x.inner.SetPlaceholderAttributedString(placeholderAttributedString)
+}
+
+// TitleAlignment calls the underlying TitleAlignment.
+func (x *FormCell) TitleAlignment() raw.NSTextAlignment {
+	return x.inner.TitleAlignment()
+}
+
+// SetTitleAlignment calls the underlying SetTitleAlignment.
+func (x *FormCell) SetTitleAlignment(titleAlignment raw.NSTextAlignment) {
+	x.inner.SetTitleAlignment(titleAlignment)
+}
+
+// TitleBaseWritingDirection calls the underlying TitleBaseWritingDirection.
+func (x *FormCell) TitleBaseWritingDirection() raw.NSWritingDirection {
+	return x.inner.TitleBaseWritingDirection()
+}
+
+// SetTitleBaseWritingDirection calls the underlying SetTitleBaseWritingDirection.
+func (x *FormCell) SetTitleBaseWritingDirection(titleBaseWritingDirection raw.NSWritingDirection) {
+	x.inner.SetTitleBaseWritingDirection(titleBaseWritingDirection)
+}
+
+// PreferredTextFieldWidth calls the underlying PreferredTextFieldWidth.
+func (x *FormCell) PreferredTextFieldWidth() float64 {
+	return x.inner.PreferredTextFieldWidth()
+}
+
+// SetPreferredTextFieldWidth calls the underlying SetPreferredTextFieldWidth.
+func (x *FormCell) SetPreferredTextFieldWidth(preferredTextFieldWidth float64) {
+	x.inner.SetPreferredTextFieldWidth(preferredTextFieldWidth)
+}
+
+// AttributedTitle calls the underlying AttributedTitle.
+func (x *FormCell) AttributedTitle() *foundation.NSAttributedString {
+	return x.inner.AttributedTitle()
+}
+
+// SetAttributedTitle calls the underlying SetAttributedTitle.
+func (x *FormCell) SetAttributedTitle(attributedTitle *foundation.NSAttributedString) {
+	x.inner.SetAttributedTitle(attributedTitle)
+}
+
 func (x *FormCell) asActionCell() *raw.NSActionCell { return &x.inner.NSActionCell }
 
 func (x *FormCell) asCell() *raw.NSCell { return &x.inner.NSActionCell.NSCell }
+
+// FormCellable is the interface implemented by [FormCell], for mocking and DI.
+type FormCellable interface {
+	Unwrap() *raw.NSFormCell
+	WithTitleWidth(titleWidth float64) *FormCell
+	WithTitleFont(titleFont *raw.NSFont) *FormCell
+	WithPlaceholderString(placeholderString string) *FormCell
+	WithPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString) *FormCell
+	WithTitleAlignment(titleAlignment raw.NSTextAlignment) *FormCell
+	WithTitleBaseWritingDirection(titleBaseWritingDirection raw.NSWritingDirection) *FormCell
+	WithPreferredTextFieldWidth(preferredTextFieldWidth float64) *FormCell
+	WithAttributedTitle(attributedTitle *foundation.NSAttributedString) *FormCell
+	TitleWidth(size corefoundation.CGSize) float64
+	TitleWidth2() float64
+	SetTitleWidth(titleWidth float64)
+	TitleFont() *Font
+	SetTitleFont(titleFont *raw.NSFont)
+	PlaceholderString() string
+	SetPlaceholderString(placeholderString string)
+	PlaceholderAttributedString() *foundation.NSAttributedString
+	SetPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString)
+	TitleAlignment() raw.NSTextAlignment
+	SetTitleAlignment(titleAlignment raw.NSTextAlignment)
+	TitleBaseWritingDirection() raw.NSWritingDirection
+	SetTitleBaseWritingDirection(titleBaseWritingDirection raw.NSWritingDirection)
+	PreferredTextFieldWidth() float64
+	SetPreferredTextFieldWidth(preferredTextFieldWidth float64)
+	AttributedTitle() *foundation.NSAttributedString
+	SetAttributedTitle(attributedTitle *foundation.NSAttributedString)
+}
+
+var _ FormCellable = (*FormCell)(nil)
 

@@ -41,9 +41,55 @@ func (x *AudioUnitTimePitch) WithOverlap(overlap float32) *AudioUnitTimePitch {
 	return x
 }
 
+// Rate calls the underlying Rate.
+func (x *AudioUnitTimePitch) Rate() float32 {
+	return x.inner.Rate()
+}
+
+// SetRate calls the underlying SetRate.
+func (x *AudioUnitTimePitch) SetRate(rate float32) {
+	x.inner.SetRate(rate)
+}
+
+// Pitch calls the underlying Pitch.
+func (x *AudioUnitTimePitch) Pitch() float32 {
+	return x.inner.Pitch()
+}
+
+// SetPitch calls the underlying SetPitch.
+func (x *AudioUnitTimePitch) SetPitch(pitch float32) {
+	x.inner.SetPitch(pitch)
+}
+
+// Overlap calls the underlying Overlap.
+func (x *AudioUnitTimePitch) Overlap() float32 {
+	return x.inner.Overlap()
+}
+
+// SetOverlap calls the underlying SetOverlap.
+func (x *AudioUnitTimePitch) SetOverlap(overlap float32) {
+	x.inner.SetOverlap(overlap)
+}
+
 func (x *AudioUnitTimePitch) asAudioUnitTimeEffect() *raw.AVAudioUnitTimeEffect { return &x.inner.AVAudioUnitTimeEffect }
 
 func (x *AudioUnitTimePitch) asAudioUnit() *raw.AVAudioUnit { return &x.inner.AVAudioUnitTimeEffect.AVAudioUnit }
 
 func (x *AudioUnitTimePitch) asAudioNode() *raw.AVAudioNode { return &x.inner.AVAudioUnitTimeEffect.AVAudioUnit.AVAudioNode }
+
+// AudioUnitTimePitchable is the interface implemented by [AudioUnitTimePitch], for mocking and DI.
+type AudioUnitTimePitchable interface {
+	Unwrap() *raw.AVAudioUnitTimePitch
+	WithRate(rate float32) *AudioUnitTimePitch
+	WithPitch(pitch float32) *AudioUnitTimePitch
+	WithOverlap(overlap float32) *AudioUnitTimePitch
+	Rate() float32
+	SetRate(rate float32)
+	Pitch() float32
+	SetPitch(pitch float32)
+	Overlap() float32
+	SetOverlap(overlap float32)
+}
+
+var _ AudioUnitTimePitchable = (*AudioUnitTimePitch)(nil)
 

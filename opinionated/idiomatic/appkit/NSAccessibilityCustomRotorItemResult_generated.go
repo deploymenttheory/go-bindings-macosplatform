@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -43,4 +44,53 @@ func (x *AccessibilityCustomRotorItemResult) WithCustomLabel(customLabel string)
 	x.inner.SetCustomLabel(foundation.NSStringStringWithUTF8String(customLabel))
 	return x
 }
+
+// TargetElement calls the underlying TargetElement.
+func (x *AccessibilityCustomRotorItemResult) TargetElement() raw.NSAccessibilityElementProtocol {
+	return x.inner.TargetElement()
+}
+
+// ItemLoadingToken calls the underlying ItemLoadingToken.
+func (x *AccessibilityCustomRotorItemResult) ItemLoadingToken() objc.ID {
+	return x.inner.ItemLoadingToken()
+}
+
+// TargetRange calls the underlying TargetRange.
+func (x *AccessibilityCustomRotorItemResult) TargetRange() foundation.NSRange {
+	return x.inner.TargetRange()
+}
+
+// SetTargetRange calls the underlying SetTargetRange.
+func (x *AccessibilityCustomRotorItemResult) SetTargetRange(targetRange foundation.NSRange) {
+	x.inner.SetTargetRange(targetRange)
+}
+
+// CustomLabel calls the underlying CustomLabel.
+func (x *AccessibilityCustomRotorItemResult) CustomLabel() string {
+	_r := x.inner.CustomLabel()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetCustomLabel calls the underlying SetCustomLabel.
+func (x *AccessibilityCustomRotorItemResult) SetCustomLabel(customLabel string) {
+	x.inner.SetCustomLabel(foundation.NSStringStringWithUTF8String(customLabel))
+}
+
+// AccessibilityCustomRotorItemResultable is the interface implemented by [AccessibilityCustomRotorItemResult], for mocking and DI.
+type AccessibilityCustomRotorItemResultable interface {
+	Unwrap() *raw.NSAccessibilityCustomRotorItemResult
+	WithTargetRange(targetRange foundation.NSRange) *AccessibilityCustomRotorItemResult
+	WithCustomLabel(customLabel string) *AccessibilityCustomRotorItemResult
+	TargetElement() raw.NSAccessibilityElementProtocol
+	ItemLoadingToken() objc.ID
+	TargetRange() foundation.NSRange
+	SetTargetRange(targetRange foundation.NSRange)
+	CustomLabel() string
+	SetCustomLabel(customLabel string)
+}
+
+var _ AccessibilityCustomRotorItemResultable = (*AccessibilityCustomRotorItemResult)(nil)
 

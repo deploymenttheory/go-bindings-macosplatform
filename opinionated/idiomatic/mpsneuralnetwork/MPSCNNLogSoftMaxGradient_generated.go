@@ -37,3 +37,10 @@ func (x *CNNLogSoftMaxGradient) asCNNGradientKernel() *raw.MPSCNNGradientKernel 
 
 func (x *CNNLogSoftMaxGradient) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel { return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel }
 
+// CNNLogSoftMaxGradientable is the interface implemented by [CNNLogSoftMaxGradient], for mocking and DI.
+type CNNLogSoftMaxGradientable interface {
+	Unwrap() *raw.MPSCNNLogSoftMaxGradient
+}
+
+var _ CNNLogSoftMaxGradientable = (*CNNLogSoftMaxGradient)(nil)
+

@@ -7,6 +7,7 @@ package networkextension
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,7 +55,87 @@ func (x *NEVPNProtocolIPSec) WithRemoteIdentifier(remoteIdentifier string) *NEVP
 	return x
 }
 
+// AuthenticationMethod calls the underlying AuthenticationMethod.
+func (x *NEVPNProtocolIPSec) AuthenticationMethod() raw.NEVPNIKEAuthenticationMethod {
+	return x.inner.AuthenticationMethod()
+}
+
+// SetAuthenticationMethod calls the underlying SetAuthenticationMethod.
+func (x *NEVPNProtocolIPSec) SetAuthenticationMethod(authenticationMethod raw.NEVPNIKEAuthenticationMethod) {
+	x.inner.SetAuthenticationMethod(authenticationMethod)
+}
+
+// UseExtendedAuthentication calls the underlying UseExtendedAuthentication.
+func (x *NEVPNProtocolIPSec) UseExtendedAuthentication() bool {
+	return x.inner.UseExtendedAuthentication()
+}
+
+// SetUseExtendedAuthentication calls the underlying SetUseExtendedAuthentication.
+func (x *NEVPNProtocolIPSec) SetUseExtendedAuthentication(useExtendedAuthentication bool) {
+	x.inner.SetUseExtendedAuthentication(useExtendedAuthentication)
+}
+
+// SharedSecretReference calls the underlying SharedSecretReference.
+func (x *NEVPNProtocolIPSec) SharedSecretReference() *foundation.NSData {
+	return x.inner.SharedSecretReference()
+}
+
+// SetSharedSecretReference calls the underlying SetSharedSecretReference.
+func (x *NEVPNProtocolIPSec) SetSharedSecretReference(sharedSecretReference *foundation.NSData) {
+	x.inner.SetSharedSecretReference(sharedSecretReference)
+}
+
+// LocalIdentifier calls the underlying LocalIdentifier.
+func (x *NEVPNProtocolIPSec) LocalIdentifier() string {
+	_r := x.inner.LocalIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLocalIdentifier calls the underlying SetLocalIdentifier.
+func (x *NEVPNProtocolIPSec) SetLocalIdentifier(localIdentifier string) {
+	x.inner.SetLocalIdentifier(foundation.NSStringStringWithUTF8String(localIdentifier))
+}
+
+// RemoteIdentifier calls the underlying RemoteIdentifier.
+func (x *NEVPNProtocolIPSec) RemoteIdentifier() string {
+	_r := x.inner.RemoteIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetRemoteIdentifier calls the underlying SetRemoteIdentifier.
+func (x *NEVPNProtocolIPSec) SetRemoteIdentifier(remoteIdentifier string) {
+	x.inner.SetRemoteIdentifier(foundation.NSStringStringWithUTF8String(remoteIdentifier))
+}
+
 func (x *NEVPNProtocolIPSec) asNEVPNProtocolIPSec() *raw.NEVPNProtocolIPSec { return x.inner }
 
 func (x *NEVPNProtocolIPSec) asNEVPNProtocol() *raw.NEVPNProtocol { return &x.inner.NEVPNProtocol }
+
+// NEVPNProtocolIPSecable is the interface implemented by [NEVPNProtocolIPSec], for mocking and DI.
+type NEVPNProtocolIPSecable interface {
+	Unwrap() *raw.NEVPNProtocolIPSec
+	WithAuthenticationMethod(authenticationMethod raw.NEVPNIKEAuthenticationMethod) *NEVPNProtocolIPSec
+	WithUseExtendedAuthentication(useExtendedAuthentication bool) *NEVPNProtocolIPSec
+	WithSharedSecretReference(sharedSecretReference *foundation.NSData) *NEVPNProtocolIPSec
+	WithLocalIdentifier(localIdentifier string) *NEVPNProtocolIPSec
+	WithRemoteIdentifier(remoteIdentifier string) *NEVPNProtocolIPSec
+	AuthenticationMethod() raw.NEVPNIKEAuthenticationMethod
+	SetAuthenticationMethod(authenticationMethod raw.NEVPNIKEAuthenticationMethod)
+	UseExtendedAuthentication() bool
+	SetUseExtendedAuthentication(useExtendedAuthentication bool)
+	SharedSecretReference() *foundation.NSData
+	SetSharedSecretReference(sharedSecretReference *foundation.NSData)
+	LocalIdentifier() string
+	SetLocalIdentifier(localIdentifier string)
+	RemoteIdentifier() string
+	SetRemoteIdentifier(remoteIdentifier string)
+}
+
+var _ NEVPNProtocolIPSecable = (*NEVPNProtocolIPSec)(nil)
 

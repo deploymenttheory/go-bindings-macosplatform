@@ -5,7 +5,9 @@
 package safariservices
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/safariservices"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +24,39 @@ func NewSafariPageProperties() *SafariPageProperties {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SFSafariPageProperties")), objc.RegisterName("new"))
 	return &SafariPageProperties{inner: raw.SFSafariPagePropertiesFromID(_id)}
 }
+
+// Url calls the underlying Url.
+func (x *SafariPageProperties) Url() *foundation.NSURL {
+	return x.inner.Url()
+}
+
+// Title calls the underlying Title.
+func (x *SafariPageProperties) Title() string {
+	_r := x.inner.Title()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// UsesPrivateBrowsing calls the underlying UsesPrivateBrowsing.
+func (x *SafariPageProperties) UsesPrivateBrowsing() bool {
+	return x.inner.UsesPrivateBrowsing()
+}
+
+// IsActive calls the underlying IsActive.
+func (x *SafariPageProperties) IsActive() bool {
+	return x.inner.IsActive()
+}
+
+// SafariPagePropertiesable is the interface implemented by [SafariPageProperties], for mocking and DI.
+type SafariPagePropertiesable interface {
+	Unwrap() *raw.SFSafariPageProperties
+	Url() *foundation.NSURL
+	Title() string
+	UsesPrivateBrowsing() bool
+	IsActive() bool
+}
+
+var _ SafariPagePropertiesable = (*SafariPageProperties)(nil)
 

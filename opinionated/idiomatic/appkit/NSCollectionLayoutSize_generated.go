@@ -23,3 +23,30 @@ func NewCollectionLayoutSize() *CollectionLayoutSize {
 	return &CollectionLayoutSize{inner: raw.NSCollectionLayoutSizeFromID(_id)}
 }
 
+// WidthDimension calls the underlying WidthDimension.
+func (x *CollectionLayoutSize) WidthDimension() *CollectionLayoutDimension {
+	_r := x.inner.WidthDimension()
+	if _r == nil {
+		return nil
+	}
+	return &CollectionLayoutDimension{inner: _r}
+}
+
+// HeightDimension calls the underlying HeightDimension.
+func (x *CollectionLayoutSize) HeightDimension() *CollectionLayoutDimension {
+	_r := x.inner.HeightDimension()
+	if _r == nil {
+		return nil
+	}
+	return &CollectionLayoutDimension{inner: _r}
+}
+
+// CollectionLayoutSizeable is the interface implemented by [CollectionLayoutSize], for mocking and DI.
+type CollectionLayoutSizeable interface {
+	Unwrap() *raw.NSCollectionLayoutSize
+	WidthDimension() *CollectionLayoutDimension
+	HeightDimension() *CollectionLayoutDimension
+}
+
+var _ CollectionLayoutSizeable = (*CollectionLayoutSize)(nil)
+

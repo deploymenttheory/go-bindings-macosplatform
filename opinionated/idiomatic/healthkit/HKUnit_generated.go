@@ -6,6 +6,7 @@ package healthkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,67 @@ func NewUnit() *Unit {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKUnit")), objc.RegisterName("new"))
 	return &Unit{inner: raw.HKUnitFromID(_id)}
 }
+
+// IsNull calls the underlying IsNull.
+func (x *Unit) IsNull() bool {
+	return x.inner.IsNull()
+}
+
+// UnitString calls the underlying UnitString.
+func (x *Unit) UnitString() string {
+	_r := x.inner.UnitString()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// UnitMultipliedByUnit calls the underlying UnitMultipliedByUnit.
+func (x *Unit) UnitMultipliedByUnit(unit *raw.HKUnit) *Unit {
+	_r := x.inner.UnitMultipliedByUnit(unit)
+	if _r == nil {
+		return nil
+	}
+	return &Unit{inner: _r}
+}
+
+// UnitDividedByUnit calls the underlying UnitDividedByUnit.
+func (x *Unit) UnitDividedByUnit(unit *raw.HKUnit) *Unit {
+	_r := x.inner.UnitDividedByUnit(unit)
+	if _r == nil {
+		return nil
+	}
+	return &Unit{inner: _r}
+}
+
+// UnitRaisedToPower calls the underlying UnitRaisedToPower.
+func (x *Unit) UnitRaisedToPower(power int) *Unit {
+	_r := x.inner.UnitRaisedToPower(power)
+	if _r == nil {
+		return nil
+	}
+	return &Unit{inner: _r}
+}
+
+// ReciprocalUnit calls the underlying ReciprocalUnit.
+func (x *Unit) ReciprocalUnit() *Unit {
+	_r := x.inner.ReciprocalUnit()
+	if _r == nil {
+		return nil
+	}
+	return &Unit{inner: _r}
+}
+
+// Unitable is the interface implemented by [Unit], for mocking and DI.
+type Unitable interface {
+	Unwrap() *raw.HKUnit
+	IsNull() bool
+	UnitString() string
+	UnitMultipliedByUnit(unit *raw.HKUnit) *Unit
+	UnitDividedByUnit(unit *raw.HKUnit) *Unit
+	UnitRaisedToPower(power int) *Unit
+	ReciprocalUnit() *Unit
+}
+
+var _ Unitable = (*Unit)(nil)
 

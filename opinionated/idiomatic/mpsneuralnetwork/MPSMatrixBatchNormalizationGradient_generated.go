@@ -7,6 +7,7 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -50,4 +51,86 @@ func (x *MatrixBatchNormalizationGradient) WithEpsilon(epsilon float32) *MatrixB
 	x.inner.SetEpsilon(epsilon)
 	return x
 }
+
+// SetNeuronTypeParameterAParameterBParameterC calls the underlying SetNeuronTypeParameterAParameterBParameterC.
+func (x *MatrixBatchNormalizationGradient) SetNeuronTypeParameterAParameterBParameterC(neuronType raw.MPSCNNNeuronType, parameterA float32, parameterB float32, parameterC float32) {
+	x.inner.SetNeuronTypeParameterAParameterBParameterC(neuronType, parameterA, parameterB, parameterC)
+}
+
+// NeuronType calls the underlying NeuronType.
+func (x *MatrixBatchNormalizationGradient) NeuronType() raw.MPSCNNNeuronType {
+	return x.inner.NeuronType()
+}
+
+// NeuronParameterA calls the underlying NeuronParameterA.
+func (x *MatrixBatchNormalizationGradient) NeuronParameterA() float32 {
+	return x.inner.NeuronParameterA()
+}
+
+// NeuronParameterB calls the underlying NeuronParameterB.
+func (x *MatrixBatchNormalizationGradient) NeuronParameterB() float32 {
+	return x.inner.NeuronParameterB()
+}
+
+// NeuronParameterC calls the underlying NeuronParameterC.
+func (x *MatrixBatchNormalizationGradient) NeuronParameterC() float32 {
+	return x.inner.NeuronParameterC()
+}
+
+// EncodeToCommandBufferGradientMatrixInputMatrixMeanVectorVarianceVectorGammaVectorBetaVectorResultGradientForDataMatrixResultGradientForGammaVectorResultGradientForBetaVector calls the underlying EncodeToCommandBufferGradientMatrixInputMatrixMeanVectorVarianceVectorGammaVectorBetaVectorResultGradientForDataMatrixResultGradientForGammaVectorResultGradientForBetaVector.
+func (x *MatrixBatchNormalizationGradient) EncodeToCommandBufferGradientMatrixInputMatrixMeanVectorVarianceVectorGammaVectorBetaVectorResultGradientForDataMatrixResultGradientForGammaVectorResultGradientForBetaVector(commandBuffer metal.MTLCommandBuffer, gradientMatrix *mpscore.MPSMatrix, inputMatrix *mpscore.MPSMatrix, meanVector *mpscore.MPSVector, varianceVector *mpscore.MPSVector, gammaVector *mpscore.MPSVector, betaVector *mpscore.MPSVector, resultGradientForDataMatrix *mpscore.MPSMatrix, resultGradientForGammaVector *mpscore.MPSVector, resultGradientForBetaVector *mpscore.MPSVector) {
+	x.inner.EncodeToCommandBufferGradientMatrixInputMatrixMeanVectorVarianceVectorGammaVectorBetaVectorResultGradientForDataMatrixResultGradientForGammaVectorResultGradientForBetaVector(commandBuffer, gradientMatrix, inputMatrix, meanVector, varianceVector, gammaVector, betaVector, resultGradientForDataMatrix, resultGradientForGammaVector, resultGradientForBetaVector)
+}
+
+// SourceNumberOfFeatureVectors calls the underlying SourceNumberOfFeatureVectors.
+func (x *MatrixBatchNormalizationGradient) SourceNumberOfFeatureVectors() uint {
+	return x.inner.SourceNumberOfFeatureVectors()
+}
+
+// SetSourceNumberOfFeatureVectors calls the underlying SetSourceNumberOfFeatureVectors.
+func (x *MatrixBatchNormalizationGradient) SetSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors uint) {
+	x.inner.SetSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors)
+}
+
+// SourceInputFeatureChannels calls the underlying SourceInputFeatureChannels.
+func (x *MatrixBatchNormalizationGradient) SourceInputFeatureChannels() uint {
+	return x.inner.SourceInputFeatureChannels()
+}
+
+// SetSourceInputFeatureChannels calls the underlying SetSourceInputFeatureChannels.
+func (x *MatrixBatchNormalizationGradient) SetSourceInputFeatureChannels(sourceInputFeatureChannels uint) {
+	x.inner.SetSourceInputFeatureChannels(sourceInputFeatureChannels)
+}
+
+// Epsilon calls the underlying Epsilon.
+func (x *MatrixBatchNormalizationGradient) Epsilon() float32 {
+	return x.inner.Epsilon()
+}
+
+// SetEpsilon calls the underlying SetEpsilon.
+func (x *MatrixBatchNormalizationGradient) SetEpsilon(epsilon float32) {
+	x.inner.SetEpsilon(epsilon)
+}
+
+// MatrixBatchNormalizationGradientable is the interface implemented by [MatrixBatchNormalizationGradient], for mocking and DI.
+type MatrixBatchNormalizationGradientable interface {
+	Unwrap() *raw.MPSMatrixBatchNormalizationGradient
+	WithSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors uint) *MatrixBatchNormalizationGradient
+	WithSourceInputFeatureChannels(sourceInputFeatureChannels uint) *MatrixBatchNormalizationGradient
+	WithEpsilon(epsilon float32) *MatrixBatchNormalizationGradient
+	SetNeuronTypeParameterAParameterBParameterC(neuronType raw.MPSCNNNeuronType, parameterA float32, parameterB float32, parameterC float32)
+	NeuronType() raw.MPSCNNNeuronType
+	NeuronParameterA() float32
+	NeuronParameterB() float32
+	NeuronParameterC() float32
+	EncodeToCommandBufferGradientMatrixInputMatrixMeanVectorVarianceVectorGammaVectorBetaVectorResultGradientForDataMatrixResultGradientForGammaVectorResultGradientForBetaVector(commandBuffer metal.MTLCommandBuffer, gradientMatrix *mpscore.MPSMatrix, inputMatrix *mpscore.MPSMatrix, meanVector *mpscore.MPSVector, varianceVector *mpscore.MPSVector, gammaVector *mpscore.MPSVector, betaVector *mpscore.MPSVector, resultGradientForDataMatrix *mpscore.MPSMatrix, resultGradientForGammaVector *mpscore.MPSVector, resultGradientForBetaVector *mpscore.MPSVector)
+	SourceNumberOfFeatureVectors() uint
+	SetSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors uint)
+	SourceInputFeatureChannels() uint
+	SetSourceInputFeatureChannels(sourceInputFeatureChannels uint)
+	Epsilon() float32
+	SetEpsilon(epsilon float32)
+}
+
+var _ MatrixBatchNormalizationGradientable = (*MatrixBatchNormalizationGradient)(nil)
 

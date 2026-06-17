@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,5 +55,81 @@ func (x *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) WithStackSize(stackSi
 	return x
 }
 
+// Id calls the underlying Id.
+func (x *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) Id() *foundation.NSNumber {
+	return x.inner.Id()
+}
+
+// SetId calls the underlying SetId.
+func (x *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) SetId(id_ *foundation.NSNumber) {
+	x.inner.SetId(id_)
+}
+
+// Name calls the underlying Name.
+func (x *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetName calls the underlying SetName.
+func (x *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
+// StackFreeCurrent calls the underlying StackFreeCurrent.
+func (x *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) StackFreeCurrent() *foundation.NSNumber {
+	return x.inner.StackFreeCurrent()
+}
+
+// SetStackFreeCurrent calls the underlying SetStackFreeCurrent.
+func (x *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) SetStackFreeCurrent(stackFreeCurrent *foundation.NSNumber) {
+	x.inner.SetStackFreeCurrent(stackFreeCurrent)
+}
+
+// StackFreeMinimum calls the underlying StackFreeMinimum.
+func (x *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) StackFreeMinimum() *foundation.NSNumber {
+	return x.inner.StackFreeMinimum()
+}
+
+// SetStackFreeMinimum calls the underlying SetStackFreeMinimum.
+func (x *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) SetStackFreeMinimum(stackFreeMinimum *foundation.NSNumber) {
+	x.inner.SetStackFreeMinimum(stackFreeMinimum)
+}
+
+// StackSize calls the underlying StackSize.
+func (x *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) StackSize() *foundation.NSNumber {
+	return x.inner.StackSize()
+}
+
+// SetStackSize calls the underlying SetStackSize.
+func (x *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) SetStackSize(stackSize *foundation.NSNumber) {
+	x.inner.SetStackSize(stackSize)
+}
+
 func (x *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) asMTRSoftwareDiagnosticsClusterThreadMetricsStruct() *raw.MTRSoftwareDiagnosticsClusterThreadMetricsStruct { return x.inner }
+
+// MTRSoftwareDiagnosticsClusterThreadMetricsStructable is the interface implemented by [MTRSoftwareDiagnosticsClusterThreadMetricsStruct], for mocking and DI.
+type MTRSoftwareDiagnosticsClusterThreadMetricsStructable interface {
+	Unwrap() *raw.MTRSoftwareDiagnosticsClusterThreadMetricsStruct
+	WithId(id_ *foundation.NSNumber) *MTRSoftwareDiagnosticsClusterThreadMetricsStruct
+	WithName(name string) *MTRSoftwareDiagnosticsClusterThreadMetricsStruct
+	WithStackFreeCurrent(stackFreeCurrent *foundation.NSNumber) *MTRSoftwareDiagnosticsClusterThreadMetricsStruct
+	WithStackFreeMinimum(stackFreeMinimum *foundation.NSNumber) *MTRSoftwareDiagnosticsClusterThreadMetricsStruct
+	WithStackSize(stackSize *foundation.NSNumber) *MTRSoftwareDiagnosticsClusterThreadMetricsStruct
+	Id() *foundation.NSNumber
+	SetId(id_ *foundation.NSNumber)
+	Name() string
+	SetName(name string)
+	StackFreeCurrent() *foundation.NSNumber
+	SetStackFreeCurrent(stackFreeCurrent *foundation.NSNumber)
+	StackFreeMinimum() *foundation.NSNumber
+	SetStackFreeMinimum(stackFreeMinimum *foundation.NSNumber)
+	StackSize() *foundation.NSNumber
+	SetStackSize(stackSize *foundation.NSNumber)
+}
+
+var _ MTRSoftwareDiagnosticsClusterThreadMetricsStructable = (*MTRSoftwareDiagnosticsClusterThreadMetricsStruct)(nil)
 

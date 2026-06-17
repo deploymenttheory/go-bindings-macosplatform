@@ -37,3 +37,23 @@ func (x *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams) WithO
 	return x
 }
 
+// OperationalDataset calls the underlying OperationalDataset.
+func (x *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams) OperationalDataset() *foundation.NSData {
+	return x.inner.OperationalDataset()
+}
+
+// SetOperationalDataset calls the underlying SetOperationalDataset.
+func (x *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams) SetOperationalDataset(operationalDataset *foundation.NSData) {
+	x.inner.SetOperationalDataset(operationalDataset)
+}
+
+// MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParamsable is the interface implemented by [MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams], for mocking and DI.
+type MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParamsable interface {
+	Unwrap() *raw.MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams
+	WithOperationalDataset(operationalDataset *foundation.NSData) *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams
+	OperationalDataset() *foundation.NSData
+	SetOperationalDataset(operationalDataset *foundation.NSData)
+}
+
+var _ MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParamsable = (*MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams)(nil)
+

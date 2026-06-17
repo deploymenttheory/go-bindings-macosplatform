@@ -5,6 +5,7 @@
 package automator
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/automator"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
@@ -30,7 +31,51 @@ func (x *BundleAction) WithParameters(parameters *foundation.NSMutableDictionary
 	return x
 }
 
+// AwakeFromBundle calls the underlying AwakeFromBundle.
+func (x *BundleAction) AwakeFromBundle() {
+	x.inner.AwakeFromBundle()
+}
+
+// HasView calls the underlying HasView.
+func (x *BundleAction) HasView() bool {
+	return x.inner.HasView()
+}
+
+// View calls the underlying View.
+func (x *BundleAction) View() *appkit.NSView {
+	return x.inner.View()
+}
+
+// Bundle calls the underlying Bundle.
+func (x *BundleAction) Bundle() *foundation.NSBundle {
+	return x.inner.Bundle()
+}
+
+// Parameters calls the underlying Parameters.
+func (x *BundleAction) Parameters() *foundation.NSMutableDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.Parameters()
+}
+
+// SetParameters calls the underlying SetParameters.
+func (x *BundleAction) SetParameters(parameters *foundation.NSMutableDictionary[*foundation.NSString, objc.ID]) {
+	x.inner.SetParameters(parameters)
+}
+
 func (x *BundleAction) asBundleAction() *raw.AMBundleAction { return x.inner }
 
 func (x *BundleAction) asAction() *raw.AMAction { return &x.inner.AMAction }
+
+// BundleActionable is the interface implemented by [BundleAction], for mocking and DI.
+type BundleActionable interface {
+	Unwrap() *raw.AMBundleAction
+	WithParameters(parameters *foundation.NSMutableDictionary[*foundation.NSString, objc.ID]) *BundleAction
+	AwakeFromBundle()
+	HasView() bool
+	View() *appkit.NSView
+	Bundle() *foundation.NSBundle
+	Parameters() *foundation.NSMutableDictionary[*foundation.NSString, objc.ID]
+	SetParameters(parameters *foundation.NSMutableDictionary[*foundation.NSString, objc.ID])
+}
+
+var _ BundleActionable = (*BundleAction)(nil)
 

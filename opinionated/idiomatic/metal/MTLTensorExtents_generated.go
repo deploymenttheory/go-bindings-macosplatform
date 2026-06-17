@@ -24,3 +24,22 @@ func NewTensorExtentsWithRankValues(rank uint, values *int64) *TensorExtents {
 	return &TensorExtents{inner: raw.MTLTensorExtentsFromID(_id)}
 }
 
+// ExtentAtDimensionIndex calls the underlying ExtentAtDimensionIndex.
+func (x *TensorExtents) ExtentAtDimensionIndex(dimensionIndex uint) int {
+	return x.inner.ExtentAtDimensionIndex(dimensionIndex)
+}
+
+// Rank calls the underlying Rank.
+func (x *TensorExtents) Rank() uint {
+	return x.inner.Rank()
+}
+
+// TensorExtentsable is the interface implemented by [TensorExtents], for mocking and DI.
+type TensorExtentsable interface {
+	Unwrap() *raw.MTLTensorExtents
+	ExtentAtDimensionIndex(dimensionIndex uint) int
+	Rank() uint
+}
+
+var _ TensorExtentsable = (*TensorExtents)(nil)
+

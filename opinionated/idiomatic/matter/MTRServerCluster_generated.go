@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -25,17 +26,40 @@ func NewMTRServerClusterWithClusterIDRevision(clusterID *foundation.NSNumber, re
 	return &MTRServerCluster{inner: raw.MTRServerClusterFromID(_id)}
 }
 
+// AddAccessGrant calls the underlying AddAccessGrant.
+func (x *MTRServerCluster) AddAccessGrant(accessGrant *raw.MTRAccessGrant) {
+	x.inner.AddAccessGrant(accessGrant)
+}
+
+// RemoveAccessGrant calls the underlying RemoveAccessGrant.
+func (x *MTRServerCluster) RemoveAccessGrant(accessGrant *raw.MTRAccessGrant) {
+	x.inner.RemoveAccessGrant(accessGrant)
+}
+
+// AddAttribute calls the underlying AddAttribute.
+func (x *MTRServerCluster) AddAttribute(attribute *raw.MTRServerAttribute) bool {
+	return x.inner.AddAttribute(attribute)
+}
+
+// ClusterID calls the underlying ClusterID.
+func (x *MTRServerCluster) ClusterID() *foundation.NSNumber {
+	return x.inner.ClusterID()
+}
+
+// ClusterRevision calls the underlying ClusterRevision.
+func (x *MTRServerCluster) ClusterRevision() *foundation.NSNumber {
+	return x.inner.ClusterRevision()
+}
+
 // AccessGrants returns the collection as a Go slice.
 func (x *MTRServerCluster) AccessGrants() []*raw.MTRAccessGrant {
 	arr := x.inner.AccessGrants()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MTRAccessGrant, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MTRAccessGrant {
+		return raw.MTRAccessGrantFromID(purego.Retain(_id))
+	})
 }
 
 // Attributes returns the collection as a Go slice.
@@ -44,10 +68,22 @@ func (x *MTRServerCluster) Attributes() []*raw.MTRServerAttribute {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MTRServerAttribute, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MTRServerAttribute {
+		return raw.MTRServerAttributeFromID(purego.Retain(_id))
+	})
 }
+
+// MTRServerClusterable is the interface implemented by [MTRServerCluster], for mocking and DI.
+type MTRServerClusterable interface {
+	Unwrap() *raw.MTRServerCluster
+	AddAccessGrant(accessGrant *raw.MTRAccessGrant)
+	RemoveAccessGrant(accessGrant *raw.MTRAccessGrant)
+	AddAttribute(attribute *raw.MTRServerAttribute) bool
+	ClusterID() *foundation.NSNumber
+	ClusterRevision() *foundation.NSNumber
+	AccessGrants() []*raw.MTRAccessGrant
+	Attributes() []*raw.MTRServerAttribute
+}
+
+var _ MTRServerClusterable = (*MTRServerCluster)(nil)
 

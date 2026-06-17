@@ -35,9 +35,68 @@ func (x *FontPanel) WithEnabled(enabled bool) *FontPanel {
 	return x
 }
 
+// SetPanelFontIsMultiple calls the underlying SetPanelFontIsMultiple.
+func (x *FontPanel) SetPanelFontIsMultiple(fontObj *raw.NSFont, flag bool) {
+	x.inner.SetPanelFontIsMultiple(fontObj, flag)
+}
+
+// PanelConvertFont calls the underlying PanelConvertFont.
+func (x *FontPanel) PanelConvertFont(fontObj *raw.NSFont) *Font {
+	_r := x.inner.PanelConvertFont(fontObj)
+	if _r == nil {
+		return nil
+	}
+	return &Font{inner: _r}
+}
+
+// ReloadDefaultFontFamilies calls the underlying ReloadDefaultFontFamilies.
+func (x *FontPanel) ReloadDefaultFontFamilies() {
+	x.inner.ReloadDefaultFontFamilies()
+}
+
+// AccessoryView calls the underlying AccessoryView.
+func (x *FontPanel) AccessoryView() *View {
+	_r := x.inner.AccessoryView()
+	if _r == nil {
+		return nil
+	}
+	return &View{inner: _r}
+}
+
+// SetAccessoryView calls the underlying SetAccessoryView.
+func (x *FontPanel) SetAccessoryView(accessoryView *raw.NSView) {
+	x.inner.SetAccessoryView(accessoryView)
+}
+
+// IsEnabled calls the underlying IsEnabled.
+func (x *FontPanel) IsEnabled() bool {
+	return x.inner.IsEnabled()
+}
+
+// SetEnabled calls the underlying SetEnabled.
+func (x *FontPanel) SetEnabled(enabled bool) {
+	x.inner.SetEnabled(enabled)
+}
+
 func (x *FontPanel) asPanel() *raw.NSPanel { return &x.inner.NSPanel }
 
 func (x *FontPanel) asWindow() *raw.NSWindow { return &x.inner.NSPanel.NSWindow }
 
 func (x *FontPanel) asResponder() *raw.NSResponder { return &x.inner.NSPanel.NSWindow.NSResponder }
+
+// FontPanelable is the interface implemented by [FontPanel], for mocking and DI.
+type FontPanelable interface {
+	Unwrap() *raw.NSFontPanel
+	WithAccessoryView(accessoryView ViewProvider) *FontPanel
+	WithEnabled(enabled bool) *FontPanel
+	SetPanelFontIsMultiple(fontObj *raw.NSFont, flag bool)
+	PanelConvertFont(fontObj *raw.NSFont) *Font
+	ReloadDefaultFontFamilies()
+	AccessoryView() *View
+	SetAccessoryView(accessoryView *raw.NSView)
+	IsEnabled() bool
+	SetEnabled(enabled bool)
+}
+
+var _ FontPanelable = (*FontPanel)(nil)
 

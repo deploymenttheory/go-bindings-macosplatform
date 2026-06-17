@@ -23,5 +23,38 @@ func NewMediaSelection() *MediaSelection {
 	return &MediaSelection{inner: raw.AVMediaSelectionFromID(_id)}
 }
 
+// SelectedMediaOptionInMediaSelectionGroup calls the underlying SelectedMediaOptionInMediaSelectionGroup.
+func (x *MediaSelection) SelectedMediaOptionInMediaSelectionGroup(mediaSelectionGroup *raw.AVMediaSelectionGroup) *MediaSelectionOption {
+	_r := x.inner.SelectedMediaOptionInMediaSelectionGroup(mediaSelectionGroup)
+	if _r == nil {
+		return nil
+	}
+	return &MediaSelectionOption{inner: _r}
+}
+
+// MediaSelectionCriteriaCanBeAppliedAutomaticallyToMediaSelectionGroup calls the underlying MediaSelectionCriteriaCanBeAppliedAutomaticallyToMediaSelectionGroup.
+func (x *MediaSelection) MediaSelectionCriteriaCanBeAppliedAutomaticallyToMediaSelectionGroup(mediaSelectionGroup *raw.AVMediaSelectionGroup) bool {
+	return x.inner.MediaSelectionCriteriaCanBeAppliedAutomaticallyToMediaSelectionGroup(mediaSelectionGroup)
+}
+
+// Asset calls the underlying Asset.
+func (x *MediaSelection) Asset() *Asset {
+	_r := x.inner.Asset()
+	if _r == nil {
+		return nil
+	}
+	return &Asset{inner: _r}
+}
+
 func (x *MediaSelection) asMediaSelection() *raw.AVMediaSelection { return x.inner }
+
+// MediaSelectionable is the interface implemented by [MediaSelection], for mocking and DI.
+type MediaSelectionable interface {
+	Unwrap() *raw.AVMediaSelection
+	SelectedMediaOptionInMediaSelectionGroup(mediaSelectionGroup *raw.AVMediaSelectionGroup) *MediaSelectionOption
+	MediaSelectionCriteriaCanBeAppliedAutomaticallyToMediaSelectionGroup(mediaSelectionGroup *raw.AVMediaSelectionGroup) bool
+	Asset() *Asset
+}
+
+var _ MediaSelectionable = (*MediaSelection)(nil)
 

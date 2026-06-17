@@ -7,6 +7,7 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -30,6 +31,29 @@ func (x *DOMHTMLLegendElement) WithAlign(align string) *DOMHTMLLegendElement {
 	return x
 }
 
+// Form calls the underlying Form.
+func (x *DOMHTMLLegendElement) Form() *DOMHTMLFormElement {
+	_r := x.inner.Form()
+	if _r == nil {
+		return nil
+	}
+	return &DOMHTMLFormElement{inner: _r}
+}
+
+// Align calls the underlying Align.
+func (x *DOMHTMLLegendElement) Align() string {
+	_r := x.inner.Align()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetAlign calls the underlying SetAlign.
+func (x *DOMHTMLLegendElement) SetAlign(align string) {
+	x.inner.SetAlign(foundation.NSStringStringWithUTF8String(align))
+}
+
 func (x *DOMHTMLLegendElement) asDOMHTMLElement() *raw.DOMHTMLElement { return &x.inner.DOMHTMLElement }
 
 func (x *DOMHTMLLegendElement) asDOMElement() *raw.DOMElement { return &x.inner.DOMHTMLElement.DOMElement }
@@ -39,4 +63,15 @@ func (x *DOMHTMLLegendElement) asDOMNode() *raw.DOMNode { return &x.inner.DOMHTM
 func (x *DOMHTMLLegendElement) asDOMObject() *raw.DOMObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject }
 
 func (x *DOMHTMLLegendElement) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject }
+
+// DOMHTMLLegendElementable is the interface implemented by [DOMHTMLLegendElement], for mocking and DI.
+type DOMHTMLLegendElementable interface {
+	Unwrap() *raw.DOMHTMLLegendElement
+	WithAlign(align string) *DOMHTMLLegendElement
+	Form() *DOMHTMLFormElement
+	Align() string
+	SetAlign(align string)
+}
+
+var _ DOMHTMLLegendElementable = (*DOMHTMLLegendElement)(nil)
 

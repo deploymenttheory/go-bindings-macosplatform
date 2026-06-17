@@ -36,3 +36,36 @@ func (x *MTRLaundryWasherModeClusterModeTagStruct) WithValue(value *foundation.N
 	return x
 }
 
+// MfgCode calls the underlying MfgCode.
+func (x *MTRLaundryWasherModeClusterModeTagStruct) MfgCode() *foundation.NSNumber {
+	return x.inner.MfgCode()
+}
+
+// SetMfgCode calls the underlying SetMfgCode.
+func (x *MTRLaundryWasherModeClusterModeTagStruct) SetMfgCode(mfgCode *foundation.NSNumber) {
+	x.inner.SetMfgCode(mfgCode)
+}
+
+// Value calls the underlying Value.
+func (x *MTRLaundryWasherModeClusterModeTagStruct) Value() *foundation.NSNumber {
+	return x.inner.Value()
+}
+
+// SetValue calls the underlying SetValue.
+func (x *MTRLaundryWasherModeClusterModeTagStruct) SetValue(value *foundation.NSNumber) {
+	x.inner.SetValue(value)
+}
+
+// MTRLaundryWasherModeClusterModeTagStructable is the interface implemented by [MTRLaundryWasherModeClusterModeTagStruct], for mocking and DI.
+type MTRLaundryWasherModeClusterModeTagStructable interface {
+	Unwrap() *raw.MTRLaundryWasherModeClusterModeTagStruct
+	WithMfgCode(mfgCode *foundation.NSNumber) *MTRLaundryWasherModeClusterModeTagStruct
+	WithValue(value *foundation.NSNumber) *MTRLaundryWasherModeClusterModeTagStruct
+	MfgCode() *foundation.NSNumber
+	SetMfgCode(mfgCode *foundation.NSNumber)
+	Value() *foundation.NSNumber
+	SetValue(value *foundation.NSNumber)
+}
+
+var _ MTRLaundryWasherModeClusterModeTagStructable = (*MTRLaundryWasherModeClusterModeTagStruct)(nil)
+

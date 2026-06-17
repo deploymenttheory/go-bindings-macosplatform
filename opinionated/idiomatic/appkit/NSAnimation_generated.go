@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -85,17 +86,130 @@ func (x *Animation) WithProgressMarks(items ...*foundation.NSNumber) *Animation 
 	return x
 }
 
+// StartAnimation calls the underlying StartAnimation.
+func (x *Animation) StartAnimation() {
+	x.inner.StartAnimation()
+}
+
+// StopAnimation calls the underlying StopAnimation.
+func (x *Animation) StopAnimation() {
+	x.inner.StopAnimation()
+}
+
+// AddProgressMark calls the underlying AddProgressMark.
+func (x *Animation) AddProgressMark(progressMark float32) {
+	x.inner.AddProgressMark(progressMark)
+}
+
+// RemoveProgressMark calls the underlying RemoveProgressMark.
+func (x *Animation) RemoveProgressMark(progressMark float32) {
+	x.inner.RemoveProgressMark(progressMark)
+}
+
+// StartWhenAnimationReachesProgress calls the underlying StartWhenAnimationReachesProgress.
+func (x *Animation) StartWhenAnimationReachesProgress(animation *raw.NSAnimation, startProgress float32) {
+	x.inner.StartWhenAnimationReachesProgress(animation, startProgress)
+}
+
+// StopWhenAnimationReachesProgress calls the underlying StopWhenAnimationReachesProgress.
+func (x *Animation) StopWhenAnimationReachesProgress(animation *raw.NSAnimation, stopProgress float32) {
+	x.inner.StopWhenAnimationReachesProgress(animation, stopProgress)
+}
+
+// ClearStartAnimation calls the underlying ClearStartAnimation.
+func (x *Animation) ClearStartAnimation() {
+	x.inner.ClearStartAnimation()
+}
+
+// ClearStopAnimation calls the underlying ClearStopAnimation.
+func (x *Animation) ClearStopAnimation() {
+	x.inner.ClearStopAnimation()
+}
+
+// IsAnimating calls the underlying IsAnimating.
+func (x *Animation) IsAnimating() bool {
+	return x.inner.IsAnimating()
+}
+
+// CurrentProgress calls the underlying CurrentProgress.
+func (x *Animation) CurrentProgress() float32 {
+	return x.inner.CurrentProgress()
+}
+
+// SetCurrentProgress calls the underlying SetCurrentProgress.
+func (x *Animation) SetCurrentProgress(currentProgress float32) {
+	x.inner.SetCurrentProgress(currentProgress)
+}
+
+// Duration calls the underlying Duration.
+func (x *Animation) Duration() float64 {
+	return x.inner.Duration()
+}
+
+// SetDuration calls the underlying SetDuration.
+func (x *Animation) SetDuration(duration float64) {
+	x.inner.SetDuration(duration)
+}
+
+// AnimationBlockingMode calls the underlying AnimationBlockingMode.
+func (x *Animation) AnimationBlockingMode() raw.NSAnimationBlockingMode {
+	return x.inner.AnimationBlockingMode()
+}
+
+// SetAnimationBlockingMode calls the underlying SetAnimationBlockingMode.
+func (x *Animation) SetAnimationBlockingMode(animationBlockingMode raw.NSAnimationBlockingMode) {
+	x.inner.SetAnimationBlockingMode(animationBlockingMode)
+}
+
+// FrameRate calls the underlying FrameRate.
+func (x *Animation) FrameRate() float32 {
+	return x.inner.FrameRate()
+}
+
+// SetFrameRate calls the underlying SetFrameRate.
+func (x *Animation) SetFrameRate(frameRate float32) {
+	x.inner.SetFrameRate(frameRate)
+}
+
+// AnimationCurve calls the underlying AnimationCurve.
+func (x *Animation) AnimationCurve() raw.NSAnimationCurve {
+	return x.inner.AnimationCurve()
+}
+
+// SetAnimationCurve calls the underlying SetAnimationCurve.
+func (x *Animation) SetAnimationCurve(animationCurve raw.NSAnimationCurve) {
+	x.inner.SetAnimationCurve(animationCurve)
+}
+
+// CurrentValue calls the underlying CurrentValue.
+func (x *Animation) CurrentValue() float32 {
+	return x.inner.CurrentValue()
+}
+
+// Delegate calls the underlying Delegate.
+func (x *Animation) Delegate() raw.NSAnimationDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *Animation) SetDelegate(delegate raw.NSAnimationDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
 // ProgressMarks returns the collection as a Go slice.
 func (x *Animation) ProgressMarks() []*foundation.NSNumber {
 	arr := x.inner.ProgressMarks()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
+}
+
+// SetProgressMarks calls the underlying SetProgressMarks.
+func (x *Animation) SetProgressMarks(progressMarks *foundation.NSArray[*foundation.NSNumber]) {
+	x.inner.SetProgressMarks(progressMarks)
 }
 
 // RunLoopModesForAnimating returns the collection as a Go slice.
@@ -104,12 +218,49 @@ func (x *Animation) RunLoopModesForAnimating() []*foundation.NSString {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	})
 }
 
 func (x *Animation) asAnimation() *raw.NSAnimation { return x.inner }
+
+// Animationable is the interface implemented by [Animation], for mocking and DI.
+type Animationable interface {
+	Unwrap() *raw.NSAnimation
+	WithCurrentProgress(currentProgress float32) *Animation
+	WithDuration(duration float64) *Animation
+	WithAnimationBlockingMode(animationBlockingMode raw.NSAnimationBlockingMode) *Animation
+	WithFrameRate(frameRate float32) *Animation
+	WithAnimationCurve(animationCurve raw.NSAnimationCurve) *Animation
+	WithDelegate(delegate raw.NSAnimationDelegate) *Animation
+	WithProgressMarks(items ...*foundation.NSNumber) *Animation
+	StartAnimation()
+	StopAnimation()
+	AddProgressMark(progressMark float32)
+	RemoveProgressMark(progressMark float32)
+	StartWhenAnimationReachesProgress(animation *raw.NSAnimation, startProgress float32)
+	StopWhenAnimationReachesProgress(animation *raw.NSAnimation, stopProgress float32)
+	ClearStartAnimation()
+	ClearStopAnimation()
+	IsAnimating() bool
+	CurrentProgress() float32
+	SetCurrentProgress(currentProgress float32)
+	Duration() float64
+	SetDuration(duration float64)
+	AnimationBlockingMode() raw.NSAnimationBlockingMode
+	SetAnimationBlockingMode(animationBlockingMode raw.NSAnimationBlockingMode)
+	FrameRate() float32
+	SetFrameRate(frameRate float32)
+	AnimationCurve() raw.NSAnimationCurve
+	SetAnimationCurve(animationCurve raw.NSAnimationCurve)
+	CurrentValue() float32
+	Delegate() raw.NSAnimationDelegate
+	SetDelegate(delegate raw.NSAnimationDelegate)
+	ProgressMarks() []*foundation.NSNumber
+	SetProgressMarks(progressMarks *foundation.NSArray[*foundation.NSNumber])
+	RunLoopModesForAnimating() []*foundation.NSString
+}
+
+var _ Animationable = (*Animation)(nil)
 

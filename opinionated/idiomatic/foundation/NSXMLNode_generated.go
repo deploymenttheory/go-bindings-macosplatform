@@ -7,6 +7,7 @@ package foundation
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -62,20 +63,274 @@ func (x *XMLNode) WithURI(uRI string) *XMLNode {
 	return x
 }
 
+// SetStringValueResolvingEntities calls the underlying SetStringValueResolvingEntities.
+func (x *XMLNode) SetStringValueResolvingEntities(string_ string, resolve bool) {
+	x.inner.SetStringValueResolvingEntities(foundation.NSStringStringWithUTF8String(string_), resolve)
+}
+
+// ChildAtIndex calls the underlying ChildAtIndex.
+func (x *XMLNode) ChildAtIndex(index uint) *XMLNode {
+	_r := x.inner.ChildAtIndex(index)
+	if _r == nil {
+		return nil
+	}
+	return &XMLNode{inner: _r}
+}
+
+// Detach calls the underlying Detach.
+func (x *XMLNode) Detach() {
+	x.inner.Detach()
+}
+
+// XMLStringWithOptions calls the underlying XMLStringWithOptions.
+func (x *XMLNode) XMLStringWithOptions(options raw.NSXMLNodeOptions) *String {
+	_r := x.inner.XMLStringWithOptions(options)
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// CanonicalXMLStringPreservingComments calls the underlying CanonicalXMLStringPreservingComments.
+func (x *XMLNode) CanonicalXMLStringPreservingComments(comments bool) *String {
+	_r := x.inner.CanonicalXMLStringPreservingComments(comments)
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// NodesForXPathError calls the underlying NodesForXPathError.
+func (x *XMLNode) NodesForXPathError(xpath string) (*raw.NSArray[*raw.NSXMLNode], error) {
+	return x.inner.NodesForXPathError(foundation.NSStringStringWithUTF8String(xpath))
+}
+
+// ObjectsForXQueryConstantsError calls the underlying ObjectsForXQueryConstantsError.
+func (x *XMLNode) ObjectsForXQueryConstantsError(xquery string, constants *raw.NSDictionary[*raw.NSString, objc.ID]) (*raw.NSArray[objc.ID], error) {
+	return x.inner.ObjectsForXQueryConstantsError(foundation.NSStringStringWithUTF8String(xquery), constants)
+}
+
+// ObjectsForXQueryError calls the underlying ObjectsForXQueryError.
+func (x *XMLNode) ObjectsForXQueryError(xquery string) (*raw.NSArray[objc.ID], error) {
+	return x.inner.ObjectsForXQueryError(foundation.NSStringStringWithUTF8String(xquery))
+}
+
+// Kind calls the underlying Kind.
+func (x *XMLNode) Kind() raw.NSXMLNodeKind {
+	return x.inner.Kind()
+}
+
+// Name calls the underlying Name.
+func (x *XMLNode) Name() *String {
+	_r := x.inner.Name()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SetName calls the underlying SetName.
+func (x *XMLNode) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
+// ObjectValue calls the underlying ObjectValue.
+func (x *XMLNode) ObjectValue() objc.ID {
+	return x.inner.ObjectValue()
+}
+
+// SetObjectValue calls the underlying SetObjectValue.
+func (x *XMLNode) SetObjectValue(objectValue objc.ID) {
+	x.inner.SetObjectValue(objectValue)
+}
+
+// StringValue calls the underlying StringValue.
+func (x *XMLNode) StringValue() *String {
+	_r := x.inner.StringValue()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SetStringValue calls the underlying SetStringValue.
+func (x *XMLNode) SetStringValue(stringValue string) {
+	x.inner.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+}
+
+// Index calls the underlying Index.
+func (x *XMLNode) Index() uint {
+	return x.inner.Index()
+}
+
+// Level calls the underlying Level.
+func (x *XMLNode) Level() uint {
+	return x.inner.Level()
+}
+
+// RootDocument calls the underlying RootDocument.
+func (x *XMLNode) RootDocument() *XMLDocument {
+	_r := x.inner.RootDocument()
+	if _r == nil {
+		return nil
+	}
+	return &XMLDocument{inner: _r}
+}
+
+// Parent calls the underlying Parent.
+func (x *XMLNode) Parent() *XMLNode {
+	_r := x.inner.Parent()
+	if _r == nil {
+		return nil
+	}
+	return &XMLNode{inner: _r}
+}
+
+// ChildCount calls the underlying ChildCount.
+func (x *XMLNode) ChildCount() uint {
+	return x.inner.ChildCount()
+}
+
 // Children returns the collection as a Go slice.
 func (x *XMLNode) Children() []*raw.NSXMLNode {
 	arr := x.inner.Children()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSXMLNode, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSXMLNode {
+		return raw.NSXMLNodeFromID(purego.Retain(_id))
+	})
+}
+
+// PreviousSibling calls the underlying PreviousSibling.
+func (x *XMLNode) PreviousSibling() *XMLNode {
+	_r := x.inner.PreviousSibling()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &XMLNode{inner: _r}
+}
+
+// NextSibling calls the underlying NextSibling.
+func (x *XMLNode) NextSibling() *XMLNode {
+	_r := x.inner.NextSibling()
+	if _r == nil {
+		return nil
+	}
+	return &XMLNode{inner: _r}
+}
+
+// PreviousNode calls the underlying PreviousNode.
+func (x *XMLNode) PreviousNode() *XMLNode {
+	_r := x.inner.PreviousNode()
+	if _r == nil {
+		return nil
+	}
+	return &XMLNode{inner: _r}
+}
+
+// NextNode calls the underlying NextNode.
+func (x *XMLNode) NextNode() *XMLNode {
+	_r := x.inner.NextNode()
+	if _r == nil {
+		return nil
+	}
+	return &XMLNode{inner: _r}
+}
+
+// XPath calls the underlying XPath.
+func (x *XMLNode) XPath() *String {
+	_r := x.inner.XPath()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// LocalName calls the underlying LocalName.
+func (x *XMLNode) LocalName() *String {
+	_r := x.inner.LocalName()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// Prefix calls the underlying Prefix.
+func (x *XMLNode) Prefix() *String {
+	_r := x.inner.Prefix()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// URI calls the underlying URI.
+func (x *XMLNode) URI() *String {
+	_r := x.inner.URI()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SetURI calls the underlying SetURI.
+func (x *XMLNode) SetURI(uRI string) {
+	x.inner.SetURI(foundation.NSStringStringWithUTF8String(uRI))
+}
+
+// XMLString calls the underlying XMLString.
+func (x *XMLNode) XMLString() *String {
+	_r := x.inner.XMLString()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
 }
 
 func (x *XMLNode) asXMLNode() *raw.NSXMLNode { return x.inner }
 
 func (x *XMLNode) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// XMLNodeable is the interface implemented by [XMLNode], for mocking and DI.
+type XMLNodeable interface {
+	Unwrap() *raw.NSXMLNode
+	WithName(name string) *XMLNode
+	WithObjectValue(objectValue objc.ID) *XMLNode
+	WithStringValue(stringValue string) *XMLNode
+	WithURI(uRI string) *XMLNode
+	SetStringValueResolvingEntities(string_ string, resolve bool)
+	ChildAtIndex(index uint) *XMLNode
+	Detach()
+	XMLStringWithOptions(options raw.NSXMLNodeOptions) *String
+	CanonicalXMLStringPreservingComments(comments bool) *String
+	NodesForXPathError(xpath string) (*raw.NSArray[*raw.NSXMLNode], error)
+	ObjectsForXQueryConstantsError(xquery string, constants *raw.NSDictionary[*raw.NSString, objc.ID]) (*raw.NSArray[objc.ID], error)
+	ObjectsForXQueryError(xquery string) (*raw.NSArray[objc.ID], error)
+	Kind() raw.NSXMLNodeKind
+	Name() *String
+	SetName(name string)
+	ObjectValue() objc.ID
+	SetObjectValue(objectValue objc.ID)
+	StringValue() *String
+	SetStringValue(stringValue string)
+	Index() uint
+	Level() uint
+	RootDocument() *XMLDocument
+	Parent() *XMLNode
+	ChildCount() uint
+	Children() []*raw.NSXMLNode
+	PreviousSibling() *XMLNode
+	NextSibling() *XMLNode
+	PreviousNode() *XMLNode
+	NextNode() *XMLNode
+	XPath() *String
+	LocalName() *String
+	Prefix() *String
+	URI() *String
+	SetURI(uRI string)
+	XMLString() *String
+}
+
+var _ XMLNodeable = (*XMLNode)(nil)
 

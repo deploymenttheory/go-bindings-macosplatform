@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -41,4 +42,68 @@ func (x *TableViewRowAction) WithImage(image *raw.NSImage) *TableViewRowAction {
 	x.inner.SetImage(image)
 	return x
 }
+
+// Style calls the underlying Style.
+func (x *TableViewRowAction) Style() raw.NSTableViewRowActionStyle {
+	return x.inner.Style()
+}
+
+// Title calls the underlying Title.
+func (x *TableViewRowAction) Title() string {
+	_r := x.inner.Title()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetTitle calls the underlying SetTitle.
+func (x *TableViewRowAction) SetTitle(title string) {
+	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+}
+
+// BackgroundColor calls the underlying BackgroundColor.
+func (x *TableViewRowAction) BackgroundColor() *Color {
+	_r := x.inner.BackgroundColor()
+	if _r == nil {
+		return nil
+	}
+	return &Color{inner: _r}
+}
+
+// SetBackgroundColor calls the underlying SetBackgroundColor.
+func (x *TableViewRowAction) SetBackgroundColor(backgroundColor *raw.NSColor) {
+	x.inner.SetBackgroundColor(backgroundColor)
+}
+
+// Image calls the underlying Image.
+func (x *TableViewRowAction) Image() *Image {
+	_r := x.inner.Image()
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// SetImage calls the underlying SetImage.
+func (x *TableViewRowAction) SetImage(image *raw.NSImage) {
+	x.inner.SetImage(image)
+}
+
+// TableViewRowActionable is the interface implemented by [TableViewRowAction], for mocking and DI.
+type TableViewRowActionable interface {
+	Unwrap() *raw.NSTableViewRowAction
+	WithTitle(title string) *TableViewRowAction
+	WithBackgroundColor(backgroundColor *raw.NSColor) *TableViewRowAction
+	WithImage(image *raw.NSImage) *TableViewRowAction
+	Style() raw.NSTableViewRowActionStyle
+	Title() string
+	SetTitle(title string)
+	BackgroundColor() *Color
+	SetBackgroundColor(backgroundColor *raw.NSColor)
+	Image() *Image
+	SetImage(image *raw.NSImage)
+}
+
+var _ TableViewRowActionable = (*TableViewRowAction)(nil)
 

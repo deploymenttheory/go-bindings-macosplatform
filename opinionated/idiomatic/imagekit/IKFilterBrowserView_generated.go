@@ -6,6 +6,7 @@ package imagekit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imagekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,27 @@ func NewFilterBrowserView() *FilterBrowserView {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("IKFilterBrowserView")), objc.RegisterName("new"))
 	return &FilterBrowserView{inner: raw.IKFilterBrowserViewFromID(_id)}
 }
+
+// SetPreviewState calls the underlying SetPreviewState.
+func (x *FilterBrowserView) SetPreviewState(inState bool) {
+	x.inner.SetPreviewState(inState)
+}
+
+// FilterName calls the underlying FilterName.
+func (x *FilterBrowserView) FilterName() string {
+	_r := x.inner.FilterName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// FilterBrowserViewable is the interface implemented by [FilterBrowserView], for mocking and DI.
+type FilterBrowserViewable interface {
+	Unwrap() *raw.IKFilterBrowserView
+	SetPreviewState(inState bool)
+	FilterName() string
+}
+
+var _ FilterBrowserViewable = (*FilterBrowserView)(nil)
 

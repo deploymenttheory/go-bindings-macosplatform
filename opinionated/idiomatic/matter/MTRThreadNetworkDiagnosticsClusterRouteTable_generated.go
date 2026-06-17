@@ -25,3 +25,10 @@ func NewMTRThreadNetworkDiagnosticsClusterRouteTable() *MTRThreadNetworkDiagnost
 
 func (x *MTRThreadNetworkDiagnosticsClusterRouteTable) asMTRThreadNetworkDiagnosticsClusterRouteTableStruct() *raw.MTRThreadNetworkDiagnosticsClusterRouteTableStruct { return &x.inner.MTRThreadNetworkDiagnosticsClusterRouteTableStruct }
 
+// MTRThreadNetworkDiagnosticsClusterRouteTableable is the interface implemented by [MTRThreadNetworkDiagnosticsClusterRouteTable], for mocking and DI.
+type MTRThreadNetworkDiagnosticsClusterRouteTableable interface {
+	Unwrap() *raw.MTRThreadNetworkDiagnosticsClusterRouteTable
+}
+
+var _ MTRThreadNetworkDiagnosticsClusterRouteTableable = (*MTRThreadNetworkDiagnosticsClusterRouteTable)(nil)
+

@@ -32,5 +32,32 @@ func NewTrainReservationWithItemReferenceReservationNumberBookingTimeReservation
 	return &TrainReservation{inner: raw.INTrainReservationFromID(_id)}
 }
 
+// ReservedSeat calls the underlying ReservedSeat.
+func (x *TrainReservation) ReservedSeat() *Seat {
+	_r := x.inner.ReservedSeat()
+	if _r == nil {
+		return nil
+	}
+	return &Seat{inner: _r}
+}
+
+// TrainTrip calls the underlying TrainTrip.
+func (x *TrainReservation) TrainTrip() *TrainTrip {
+	_r := x.inner.TrainTrip()
+	if _r == nil {
+		return nil
+	}
+	return &TrainTrip{inner: _r}
+}
+
 func (x *TrainReservation) asReservation() *raw.INReservation { return &x.inner.INReservation }
+
+// TrainReservationable is the interface implemented by [TrainReservation], for mocking and DI.
+type TrainReservationable interface {
+	Unwrap() *raw.INTrainReservation
+	ReservedSeat() *Seat
+	TrainTrip() *TrainTrip
+}
+
+var _ TrainReservationable = (*TrainReservation)(nil)
 

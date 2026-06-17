@@ -5,6 +5,7 @@
 package imagekit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imagekit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -28,4 +29,54 @@ func (x *Slideshow) WithAutoPlayDelay(autoPlayDelay float64) *Slideshow {
 	x.inner.SetAutoPlayDelay(autoPlayDelay)
 	return x
 }
+
+// RunSlideshowWithDataSourceInModeOptions calls the underlying RunSlideshowWithDataSourceInModeOptions.
+func (x *Slideshow) RunSlideshowWithDataSourceInModeOptions(dataSource raw.IKSlideshowDataSource, slideshowMode string, slideshowOptions *foundation.NSDictionary[objc.ID, objc.ID]) {
+	x.inner.RunSlideshowWithDataSourceInModeOptions(dataSource, foundation.NSStringStringWithUTF8String(slideshowMode), slideshowOptions)
+}
+
+// StopSlideshow calls the underlying StopSlideshow.
+func (x *Slideshow) StopSlideshow(sender objc.ID) {
+	x.inner.StopSlideshow(sender)
+}
+
+// ReloadData calls the underlying ReloadData.
+func (x *Slideshow) ReloadData() {
+	x.inner.ReloadData()
+}
+
+// ReloadSlideshowItemAtIndex calls the underlying ReloadSlideshowItemAtIndex.
+func (x *Slideshow) ReloadSlideshowItemAtIndex(index uint) {
+	x.inner.ReloadSlideshowItemAtIndex(index)
+}
+
+// IndexOfCurrentSlideshowItem calls the underlying IndexOfCurrentSlideshowItem.
+func (x *Slideshow) IndexOfCurrentSlideshowItem() uint {
+	return x.inner.IndexOfCurrentSlideshowItem()
+}
+
+// AutoPlayDelay calls the underlying AutoPlayDelay.
+func (x *Slideshow) AutoPlayDelay() float64 {
+	return x.inner.AutoPlayDelay()
+}
+
+// SetAutoPlayDelay calls the underlying SetAutoPlayDelay.
+func (x *Slideshow) SetAutoPlayDelay(autoPlayDelay float64) {
+	x.inner.SetAutoPlayDelay(autoPlayDelay)
+}
+
+// Slideshowable is the interface implemented by [Slideshow], for mocking and DI.
+type Slideshowable interface {
+	Unwrap() *raw.IKSlideshow
+	WithAutoPlayDelay(autoPlayDelay float64) *Slideshow
+	RunSlideshowWithDataSourceInModeOptions(dataSource raw.IKSlideshowDataSource, slideshowMode string, slideshowOptions *foundation.NSDictionary[objc.ID, objc.ID])
+	StopSlideshow(sender objc.ID)
+	ReloadData()
+	ReloadSlideshowItemAtIndex(index uint)
+	IndexOfCurrentSlideshowItem() uint
+	AutoPlayDelay() float64
+	SetAutoPlayDelay(autoPlayDelay float64)
+}
+
+var _ Slideshowable = (*Slideshow)(nil)
 

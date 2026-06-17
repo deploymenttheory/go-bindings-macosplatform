@@ -6,6 +6,7 @@ package discrecording
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/discrecording"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,23 @@ func NewNotificationCenter() *NotificationCenter {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DRNotificationCenter")), objc.RegisterName("new"))
 	return &NotificationCenter{inner: raw.DRNotificationCenterFromID(_id)}
 }
+
+// AddObserverSelectorNameObject calls the underlying AddObserverSelectorNameObject.
+func (x *NotificationCenter) AddObserverSelectorNameObject(observer objc.ID, aSelector objc.SEL, notificationName string, anObject objc.ID) {
+	x.inner.AddObserverSelectorNameObject(observer, aSelector, foundation.NSStringStringWithUTF8String(notificationName), anObject)
+}
+
+// RemoveObserverNameObject calls the underlying RemoveObserverNameObject.
+func (x *NotificationCenter) RemoveObserverNameObject(observer objc.ID, aName string, anObject objc.ID) {
+	x.inner.RemoveObserverNameObject(observer, foundation.NSStringStringWithUTF8String(aName), anObject)
+}
+
+// NotificationCenterable is the interface implemented by [NotificationCenter], for mocking and DI.
+type NotificationCenterable interface {
+	Unwrap() *raw.DRNotificationCenter
+	AddObserverSelectorNameObject(observer objc.ID, aSelector objc.SEL, notificationName string, anObject objc.ID)
+	RemoveObserverNameObject(observer objc.ID, aName string, anObject objc.ID)
+}
+
+var _ NotificationCenterable = (*NotificationCenter)(nil)
 

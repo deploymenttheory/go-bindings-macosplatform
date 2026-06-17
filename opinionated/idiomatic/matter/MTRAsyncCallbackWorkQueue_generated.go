@@ -25,3 +25,22 @@ func NewMTRAsyncCallbackWorkQueueWithContextQueue(context_ objc.ID, queue *found
 	return &MTRAsyncCallbackWorkQueue{inner: raw.MTRAsyncCallbackWorkQueueFromID(_id)}
 }
 
+// Invalidate calls the underlying Invalidate.
+func (x *MTRAsyncCallbackWorkQueue) Invalidate() {
+	x.inner.Invalidate()
+}
+
+// EnqueueWorkItem calls the underlying EnqueueWorkItem.
+func (x *MTRAsyncCallbackWorkQueue) EnqueueWorkItem(item *raw.MTRAsyncCallbackQueueWorkItem) {
+	x.inner.EnqueueWorkItem(item)
+}
+
+// MTRAsyncCallbackWorkQueueable is the interface implemented by [MTRAsyncCallbackWorkQueue], for mocking and DI.
+type MTRAsyncCallbackWorkQueueable interface {
+	Unwrap() *raw.MTRAsyncCallbackWorkQueue
+	Invalidate()
+	EnqueueWorkItem(item *raw.MTRAsyncCallbackQueueWorkItem)
+}
+
+var _ MTRAsyncCallbackWorkQueueable = (*MTRAsyncCallbackWorkQueue)(nil)
+

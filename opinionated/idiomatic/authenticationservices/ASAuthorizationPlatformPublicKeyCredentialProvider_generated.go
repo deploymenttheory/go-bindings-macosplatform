@@ -7,6 +7,7 @@ package authenticationservices
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,4 +25,51 @@ func NewAuthorizationPlatformPublicKeyCredentialProviderWithRelyingPartyIdentifi
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRelyingPartyIdentifier:"), foundation.NSStringStringWithUTF8String(relyingPartyIdentifier).Ptr())
 	return &AuthorizationPlatformPublicKeyCredentialProvider{inner: raw.ASAuthorizationPlatformPublicKeyCredentialProviderFromID(_id)}
 }
+
+// CreateCredentialRegistrationRequestWithChallengeNameUserID calls the underlying CreateCredentialRegistrationRequestWithChallengeNameUserID.
+func (x *AuthorizationPlatformPublicKeyCredentialProvider) CreateCredentialRegistrationRequestWithChallengeNameUserID(challenge *foundation.NSData, name string, userID *foundation.NSData) *AuthorizationPlatformPublicKeyCredentialRegistrationRequest {
+	_r := x.inner.CreateCredentialRegistrationRequestWithChallengeNameUserID(challenge, foundation.NSStringStringWithUTF8String(name), userID)
+	if _r == nil {
+		return nil
+	}
+	return &AuthorizationPlatformPublicKeyCredentialRegistrationRequest{inner: _r}
+}
+
+// CreateCredentialRegistrationRequestWithChallengeNameUserIDRequestStyle calls the underlying CreateCredentialRegistrationRequestWithChallengeNameUserIDRequestStyle.
+func (x *AuthorizationPlatformPublicKeyCredentialProvider) CreateCredentialRegistrationRequestWithChallengeNameUserIDRequestStyle(challenge *foundation.NSData, name string, userID *foundation.NSData, requestStyle raw.ASAuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle) *AuthorizationPlatformPublicKeyCredentialRegistrationRequest {
+	_r := x.inner.CreateCredentialRegistrationRequestWithChallengeNameUserIDRequestStyle(challenge, foundation.NSStringStringWithUTF8String(name), userID, requestStyle)
+	if _r == nil {
+		return nil
+	}
+	return &AuthorizationPlatformPublicKeyCredentialRegistrationRequest{inner: _r}
+}
+
+// CreateCredentialAssertionRequestWithChallenge calls the underlying CreateCredentialAssertionRequestWithChallenge.
+func (x *AuthorizationPlatformPublicKeyCredentialProvider) CreateCredentialAssertionRequestWithChallenge(challenge *foundation.NSData) *AuthorizationPlatformPublicKeyCredentialAssertionRequest {
+	_r := x.inner.CreateCredentialAssertionRequestWithChallenge(challenge)
+	if _r == nil {
+		return nil
+	}
+	return &AuthorizationPlatformPublicKeyCredentialAssertionRequest{inner: _r}
+}
+
+// RelyingPartyIdentifier calls the underlying RelyingPartyIdentifier.
+func (x *AuthorizationPlatformPublicKeyCredentialProvider) RelyingPartyIdentifier() string {
+	_r := x.inner.RelyingPartyIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// AuthorizationPlatformPublicKeyCredentialProviderable is the interface implemented by [AuthorizationPlatformPublicKeyCredentialProvider], for mocking and DI.
+type AuthorizationPlatformPublicKeyCredentialProviderable interface {
+	Unwrap() *raw.ASAuthorizationPlatformPublicKeyCredentialProvider
+	CreateCredentialRegistrationRequestWithChallengeNameUserID(challenge *foundation.NSData, name string, userID *foundation.NSData) *AuthorizationPlatformPublicKeyCredentialRegistrationRequest
+	CreateCredentialRegistrationRequestWithChallengeNameUserIDRequestStyle(challenge *foundation.NSData, name string, userID *foundation.NSData, requestStyle raw.ASAuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle) *AuthorizationPlatformPublicKeyCredentialRegistrationRequest
+	CreateCredentialAssertionRequestWithChallenge(challenge *foundation.NSData) *AuthorizationPlatformPublicKeyCredentialAssertionRequest
+	RelyingPartyIdentifier() string
+}
+
+var _ AuthorizationPlatformPublicKeyCredentialProviderable = (*AuthorizationPlatformPublicKeyCredentialProvider)(nil)
 

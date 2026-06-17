@@ -32,3 +32,16 @@ func NewMeshBufferDataWithTypeData(type_ raw.MDLMeshBufferType, data *foundation
 	return &MeshBufferData{inner: raw.MDLMeshBufferDataFromID(_id)}
 }
 
+// Data calls the underlying Data.
+func (x *MeshBufferData) Data() *foundation.NSData {
+	return x.inner.Data()
+}
+
+// MeshBufferDataable is the interface implemented by [MeshBufferData], for mocking and DI.
+type MeshBufferDataable interface {
+	Unwrap() *raw.MDLMeshBufferData
+	Data() *foundation.NSData
+}
+
+var _ MeshBufferDataable = (*MeshBufferData)(nil)
+

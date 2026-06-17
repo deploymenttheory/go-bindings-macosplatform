@@ -6,8 +6,10 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // MutableAudioMixInputParameters wraps [raw.AVMutableAudioMixInputParameters] with a fluent Go API.
@@ -36,5 +38,44 @@ func (x *MutableAudioMixInputParameters) WithAudioTimePitchAlgorithm(audioTimePi
 	return x
 }
 
+// SetVolumeRampFromStartVolumeToEndVolumeTimeRange calls the underlying SetVolumeRampFromStartVolumeToEndVolumeTimeRange.
+func (x *MutableAudioMixInputParameters) SetVolumeRampFromStartVolumeToEndVolumeTimeRange(startVolume float32, endVolume float32, timeRange coremedia.CMTimeRange) {
+	x.inner.SetVolumeRampFromStartVolumeToEndVolumeTimeRange(startVolume, endVolume, timeRange)
+}
+
+// SetVolumeAtTime calls the underlying SetVolumeAtTime.
+func (x *MutableAudioMixInputParameters) SetVolumeAtTime(volume float32, time_ coremedia.CMTime) {
+	x.inner.SetVolumeAtTime(volume, time_)
+}
+
+// SetTrackID calls the underlying SetTrackID.
+func (x *MutableAudioMixInputParameters) SetTrackID(trackID int32) {
+	x.inner.SetTrackID(trackID)
+}
+
+// SetAudioTimePitchAlgorithm calls the underlying SetAudioTimePitchAlgorithm.
+func (x *MutableAudioMixInputParameters) SetAudioTimePitchAlgorithm(audioTimePitchAlgorithm *foundation.NSString) {
+	x.inner.SetAudioTimePitchAlgorithm(audioTimePitchAlgorithm)
+}
+
+// SetAudioTapProcessor calls the underlying SetAudioTapProcessor.
+func (x *MutableAudioMixInputParameters) SetAudioTapProcessor(audioTapProcessor unsafe.Pointer) {
+	x.inner.SetAudioTapProcessor(audioTapProcessor)
+}
+
 func (x *MutableAudioMixInputParameters) asAudioMixInputParameters() *raw.AVAudioMixInputParameters { return &x.inner.AVAudioMixInputParameters }
+
+// MutableAudioMixInputParametersable is the interface implemented by [MutableAudioMixInputParameters], for mocking and DI.
+type MutableAudioMixInputParametersable interface {
+	Unwrap() *raw.AVMutableAudioMixInputParameters
+	WithTrackID(trackID int32) *MutableAudioMixInputParameters
+	WithAudioTimePitchAlgorithm(audioTimePitchAlgorithm *foundation.NSString) *MutableAudioMixInputParameters
+	SetVolumeRampFromStartVolumeToEndVolumeTimeRange(startVolume float32, endVolume float32, timeRange coremedia.CMTimeRange)
+	SetVolumeAtTime(volume float32, time_ coremedia.CMTime)
+	SetTrackID(trackID int32)
+	SetAudioTimePitchAlgorithm(audioTimePitchAlgorithm *foundation.NSString)
+	SetAudioTapProcessor(audioTapProcessor unsafe.Pointer)
+}
+
+var _ MutableAudioMixInputParametersable = (*MutableAudioMixInputParameters)(nil)
 

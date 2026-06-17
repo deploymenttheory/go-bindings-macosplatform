@@ -23,5 +23,22 @@ func NewAttribute() *Attribute {
 	return &Attribute{inner: raw.CBAttributeFromID(_id)}
 }
 
+// UUID calls the underlying UUID.
+func (x *Attribute) UUID() *UUID {
+	_r := x.inner.UUID()
+	if _r == nil {
+		return nil
+	}
+	return &UUID{inner: _r}
+}
+
 func (x *Attribute) asAttribute() *raw.CBAttribute { return x.inner }
+
+// Attributeable is the interface implemented by [Attribute], for mocking and DI.
+type Attributeable interface {
+	Unwrap() *raw.CBAttribute
+	UUID() *UUID
+}
+
+var _ Attributeable = (*Attribute)(nil)
 

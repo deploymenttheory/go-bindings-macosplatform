@@ -41,5 +41,67 @@ func (x *SearchToolbarItem) WithPreferredWidthForSearchField(preferredWidthForSe
 	return x
 }
 
+// BeginSearchInteraction calls the underlying BeginSearchInteraction.
+func (x *SearchToolbarItem) BeginSearchInteraction() {
+	x.inner.BeginSearchInteraction()
+}
+
+// EndSearchInteraction calls the underlying EndSearchInteraction.
+func (x *SearchToolbarItem) EndSearchInteraction() {
+	x.inner.EndSearchInteraction()
+}
+
+// SearchField calls the underlying SearchField.
+func (x *SearchToolbarItem) SearchField() *SearchField {
+	_r := x.inner.SearchField()
+	if _r == nil {
+		return nil
+	}
+	return &SearchField{inner: _r}
+}
+
+// SetSearchField calls the underlying SetSearchField.
+func (x *SearchToolbarItem) SetSearchField(searchField *raw.NSSearchField) {
+	x.inner.SetSearchField(searchField)
+}
+
+// ResignsFirstResponderWithCancel calls the underlying ResignsFirstResponderWithCancel.
+func (x *SearchToolbarItem) ResignsFirstResponderWithCancel() bool {
+	return x.inner.ResignsFirstResponderWithCancel()
+}
+
+// SetResignsFirstResponderWithCancel calls the underlying SetResignsFirstResponderWithCancel.
+func (x *SearchToolbarItem) SetResignsFirstResponderWithCancel(resignsFirstResponderWithCancel bool) {
+	x.inner.SetResignsFirstResponderWithCancel(resignsFirstResponderWithCancel)
+}
+
+// PreferredWidthForSearchField calls the underlying PreferredWidthForSearchField.
+func (x *SearchToolbarItem) PreferredWidthForSearchField() float64 {
+	return x.inner.PreferredWidthForSearchField()
+}
+
+// SetPreferredWidthForSearchField calls the underlying SetPreferredWidthForSearchField.
+func (x *SearchToolbarItem) SetPreferredWidthForSearchField(preferredWidthForSearchField float64) {
+	x.inner.SetPreferredWidthForSearchField(preferredWidthForSearchField)
+}
+
 func (x *SearchToolbarItem) asToolbarItem() *raw.NSToolbarItem { return &x.inner.NSToolbarItem }
+
+// SearchToolbarItemable is the interface implemented by [SearchToolbarItem], for mocking and DI.
+type SearchToolbarItemable interface {
+	Unwrap() *raw.NSSearchToolbarItem
+	WithSearchField(searchField *raw.NSSearchField) *SearchToolbarItem
+	WithResignsFirstResponderWithCancel(resignsFirstResponderWithCancel bool) *SearchToolbarItem
+	WithPreferredWidthForSearchField(preferredWidthForSearchField float64) *SearchToolbarItem
+	BeginSearchInteraction()
+	EndSearchInteraction()
+	SearchField() *SearchField
+	SetSearchField(searchField *raw.NSSearchField)
+	ResignsFirstResponderWithCancel() bool
+	SetResignsFirstResponderWithCancel(resignsFirstResponderWithCancel bool)
+	PreferredWidthForSearchField() float64
+	SetPreferredWidthForSearchField(preferredWidthForSearchField float64)
+}
+
+var _ SearchToolbarItemable = (*SearchToolbarItem)(nil)
 

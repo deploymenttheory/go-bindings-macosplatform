@@ -7,6 +7,7 @@ package cryptotokenkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cryptotokenkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -47,16 +48,78 @@ func (x *TokenConfiguration) WithKeychainItems(items ...TokenKeychainItemProvide
 	return x
 }
 
+// KeyForObjectIDError calls the underlying KeyForObjectIDError.
+func (x *TokenConfiguration) KeyForObjectIDError(objectID objc.ID) (*TokenKeychainKey, error) {
+	_r, _err := x.inner.KeyForObjectIDError(objectID)
+	if _err != nil {
+		return nil, _err
+	}
+	if _r == nil {
+		return nil, nil
+	}
+	return &TokenKeychainKey{inner: _r}, nil
+}
+
+// CertificateForObjectIDError calls the underlying CertificateForObjectIDError.
+func (x *TokenConfiguration) CertificateForObjectIDError(objectID objc.ID) (*TokenKeychainCertificate, error) {
+	_r, _err := x.inner.CertificateForObjectIDError(objectID)
+	if _err != nil {
+		return nil, _err
+	}
+	if _r == nil {
+		return nil, nil
+	}
+	return &TokenKeychainCertificate{inner: _r}, nil
+}
+
+// InstanceID calls the underlying InstanceID.
+func (x *TokenConfiguration) InstanceID() string {
+	_r := x.inner.InstanceID()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ConfigurationData calls the underlying ConfigurationData.
+func (x *TokenConfiguration) ConfigurationData() *foundation.NSData {
+	return x.inner.ConfigurationData()
+}
+
+// SetConfigurationData calls the underlying SetConfigurationData.
+func (x *TokenConfiguration) SetConfigurationData(configurationData *foundation.NSData) {
+	x.inner.SetConfigurationData(configurationData)
+}
+
 // KeychainItems returns the collection as a Go slice.
 func (x *TokenConfiguration) KeychainItems() []*raw.TKTokenKeychainItem {
 	arr := x.inner.KeychainItems()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.TKTokenKeychainItem, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.TKTokenKeychainItem {
+		return raw.TKTokenKeychainItemFromID(purego.Retain(_id))
+	})
 }
+
+// SetKeychainItems calls the underlying SetKeychainItems.
+func (x *TokenConfiguration) SetKeychainItems(keychainItems *foundation.NSArray[*raw.TKTokenKeychainItem]) {
+	x.inner.SetKeychainItems(keychainItems)
+}
+
+// TokenConfigurationable is the interface implemented by [TokenConfiguration], for mocking and DI.
+type TokenConfigurationable interface {
+	Unwrap() *raw.TKTokenConfiguration
+	WithConfigurationData(configurationData *foundation.NSData) *TokenConfiguration
+	WithKeychainItems(items ...TokenKeychainItemProvider) *TokenConfiguration
+	KeyForObjectIDError(objectID objc.ID) (*TokenKeychainKey, error)
+	CertificateForObjectIDError(objectID objc.ID) (*TokenKeychainCertificate, error)
+	InstanceID() string
+	ConfigurationData() *foundation.NSData
+	SetConfigurationData(configurationData *foundation.NSData)
+	KeychainItems() []*raw.TKTokenKeychainItem
+	SetKeychainItems(keychainItems *foundation.NSArray[*raw.TKTokenKeychainItem])
+}
+
+var _ TokenConfigurationable = (*TokenConfiguration)(nil)
 

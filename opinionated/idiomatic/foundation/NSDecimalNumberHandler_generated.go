@@ -26,3 +26,10 @@ func NewDecimalNumberHandlerWithRoundingModeScaleRaiseOnExactnessRaiseOnOverflow
 
 func (x *DecimalNumberHandler) asObject() *raw.NSObject { return &x.inner.NSObject }
 
+// DecimalNumberHandlerable is the interface implemented by [DecimalNumberHandler], for mocking and DI.
+type DecimalNumberHandlerable interface {
+	Unwrap() *raw.NSDecimalNumberHandler
+}
+
+var _ DecimalNumberHandlerable = (*DecimalNumberHandler)(nil)
+

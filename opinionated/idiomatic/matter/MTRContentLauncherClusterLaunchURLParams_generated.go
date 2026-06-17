@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,4 +54,88 @@ func (x *MTRContentLauncherClusterLaunchURLParams) WithServerSideProcessingTimeo
 	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
 	return x
 }
+
+// ContentURL calls the underlying ContentURL.
+func (x *MTRContentLauncherClusterLaunchURLParams) ContentURL() string {
+	_r := x.inner.ContentURL()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetContentURL calls the underlying SetContentURL.
+func (x *MTRContentLauncherClusterLaunchURLParams) SetContentURL(contentURL string) {
+	x.inner.SetContentURL(foundation.NSStringStringWithUTF8String(contentURL))
+}
+
+// DisplayString calls the underlying DisplayString.
+func (x *MTRContentLauncherClusterLaunchURLParams) DisplayString() string {
+	_r := x.inner.DisplayString()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetDisplayString calls the underlying SetDisplayString.
+func (x *MTRContentLauncherClusterLaunchURLParams) SetDisplayString(displayString string) {
+	x.inner.SetDisplayString(foundation.NSStringStringWithUTF8String(displayString))
+}
+
+// BrandingInformation calls the underlying BrandingInformation.
+func (x *MTRContentLauncherClusterLaunchURLParams) BrandingInformation() *MTRContentLauncherClusterBrandingInformationStruct {
+	_r := x.inner.BrandingInformation()
+	if _r == nil {
+		return nil
+	}
+	return &MTRContentLauncherClusterBrandingInformationStruct{inner: _r}
+}
+
+// SetBrandingInformation calls the underlying SetBrandingInformation.
+func (x *MTRContentLauncherClusterLaunchURLParams) SetBrandingInformation(brandingInformation *raw.MTRContentLauncherClusterBrandingInformationStruct) {
+	x.inner.SetBrandingInformation(brandingInformation)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRContentLauncherClusterLaunchURLParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRContentLauncherClusterLaunchURLParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRContentLauncherClusterLaunchURLParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRContentLauncherClusterLaunchURLParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRContentLauncherClusterLaunchURLParamsable is the interface implemented by [MTRContentLauncherClusterLaunchURLParams], for mocking and DI.
+type MTRContentLauncherClusterLaunchURLParamsable interface {
+	Unwrap() *raw.MTRContentLauncherClusterLaunchURLParams
+	WithContentURL(contentURL string) *MTRContentLauncherClusterLaunchURLParams
+	WithDisplayString(displayString string) *MTRContentLauncherClusterLaunchURLParams
+	WithBrandingInformation(brandingInformation MTRContentLauncherClusterBrandingInformationStructProvider) *MTRContentLauncherClusterLaunchURLParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRContentLauncherClusterLaunchURLParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRContentLauncherClusterLaunchURLParams
+	ContentURL() string
+	SetContentURL(contentURL string)
+	DisplayString() string
+	SetDisplayString(displayString string)
+	BrandingInformation() *MTRContentLauncherClusterBrandingInformationStruct
+	SetBrandingInformation(brandingInformation *raw.MTRContentLauncherClusterBrandingInformationStruct)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRContentLauncherClusterLaunchURLParamsable = (*MTRContentLauncherClusterLaunchURLParams)(nil)
 

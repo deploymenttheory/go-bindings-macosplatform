@@ -5,6 +5,7 @@
 package metal
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +23,23 @@ func NewRasterizationRateSampleArray() *RasterizationRateSampleArray {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLRasterizationRateSampleArray")), objc.RegisterName("new"))
 	return &RasterizationRateSampleArray{inner: raw.MTLRasterizationRateSampleArrayFromID(_id)}
 }
+
+// ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
+func (x *RasterizationRateSampleArray) ObjectAtIndexedSubscript(index uint) *foundation.NSNumber {
+	return x.inner.ObjectAtIndexedSubscript(index)
+}
+
+// SetObjectAtIndexedSubscript calls the underlying SetObjectAtIndexedSubscript.
+func (x *RasterizationRateSampleArray) SetObjectAtIndexedSubscript(value *foundation.NSNumber, index uint) {
+	x.inner.SetObjectAtIndexedSubscript(value, index)
+}
+
+// RasterizationRateSampleArrayable is the interface implemented by [RasterizationRateSampleArray], for mocking and DI.
+type RasterizationRateSampleArrayable interface {
+	Unwrap() *raw.MTLRasterizationRateSampleArray
+	ObjectAtIndexedSubscript(index uint) *foundation.NSNumber
+	SetObjectAtIndexedSubscript(value *foundation.NSNumber, index uint)
+}
+
+var _ RasterizationRateSampleArrayable = (*RasterizationRateSampleArray)(nil)
 

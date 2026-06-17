@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -41,4 +42,64 @@ func (x *PathControlItem) WithImage(image *raw.NSImage) *PathControlItem {
 	x.inner.SetImage(image)
 	return x
 }
+
+// Title calls the underlying Title.
+func (x *PathControlItem) Title() string {
+	_r := x.inner.Title()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetTitle calls the underlying SetTitle.
+func (x *PathControlItem) SetTitle(title string) {
+	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+}
+
+// AttributedTitle calls the underlying AttributedTitle.
+func (x *PathControlItem) AttributedTitle() *foundation.NSAttributedString {
+	return x.inner.AttributedTitle()
+}
+
+// SetAttributedTitle calls the underlying SetAttributedTitle.
+func (x *PathControlItem) SetAttributedTitle(attributedTitle *foundation.NSAttributedString) {
+	x.inner.SetAttributedTitle(attributedTitle)
+}
+
+// Image calls the underlying Image.
+func (x *PathControlItem) Image() *Image {
+	_r := x.inner.Image()
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// SetImage calls the underlying SetImage.
+func (x *PathControlItem) SetImage(image *raw.NSImage) {
+	x.inner.SetImage(image)
+}
+
+// URL calls the underlying URL.
+func (x *PathControlItem) URL() *foundation.NSURL {
+	return x.inner.URL()
+}
+
+// PathControlItemable is the interface implemented by [PathControlItem], for mocking and DI.
+type PathControlItemable interface {
+	Unwrap() *raw.NSPathControlItem
+	WithTitle(title string) *PathControlItem
+	WithAttributedTitle(attributedTitle *foundation.NSAttributedString) *PathControlItem
+	WithImage(image *raw.NSImage) *PathControlItem
+	Title() string
+	SetTitle(title string)
+	AttributedTitle() *foundation.NSAttributedString
+	SetAttributedTitle(attributedTitle *foundation.NSAttributedString)
+	Image() *Image
+	SetImage(image *raw.NSImage)
+	URL() *foundation.NSURL
+}
+
+var _ PathControlItemable = (*PathControlItem)(nil)
 

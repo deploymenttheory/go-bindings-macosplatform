@@ -23,5 +23,40 @@ func NewComponent() *Component {
 	return &Component{inner: raw.GKComponentFromID(_id)}
 }
 
+// UpdateWithDeltaTime calls the underlying UpdateWithDeltaTime.
+func (x *Component) UpdateWithDeltaTime(seconds float64) {
+	x.inner.UpdateWithDeltaTime(seconds)
+}
+
+// DidAddToEntity calls the underlying DidAddToEntity.
+func (x *Component) DidAddToEntity() {
+	x.inner.DidAddToEntity()
+}
+
+// WillRemoveFromEntity calls the underlying WillRemoveFromEntity.
+func (x *Component) WillRemoveFromEntity() {
+	x.inner.WillRemoveFromEntity()
+}
+
+// Entity calls the underlying Entity.
+func (x *Component) Entity() *Entity {
+	_r := x.inner.Entity()
+	if _r == nil {
+		return nil
+	}
+	return &Entity{inner: _r}
+}
+
 func (x *Component) asComponent() *raw.GKComponent { return x.inner }
+
+// Componentable is the interface implemented by [Component], for mocking and DI.
+type Componentable interface {
+	Unwrap() *raw.GKComponent
+	UpdateWithDeltaTime(seconds float64)
+	DidAddToEntity()
+	WillRemoveFromEntity()
+	Entity() *Entity
+}
+
+var _ Componentable = (*Component)(nil)
 

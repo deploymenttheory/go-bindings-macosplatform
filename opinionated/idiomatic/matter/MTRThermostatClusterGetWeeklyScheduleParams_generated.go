@@ -48,3 +48,62 @@ func (x *MTRThermostatClusterGetWeeklyScheduleParams) WithServerSideProcessingTi
 	return x
 }
 
+// DaysToReturn calls the underlying DaysToReturn.
+func (x *MTRThermostatClusterGetWeeklyScheduleParams) DaysToReturn() *foundation.NSNumber {
+	return x.inner.DaysToReturn()
+}
+
+// SetDaysToReturn calls the underlying SetDaysToReturn.
+func (x *MTRThermostatClusterGetWeeklyScheduleParams) SetDaysToReturn(daysToReturn *foundation.NSNumber) {
+	x.inner.SetDaysToReturn(daysToReturn)
+}
+
+// ModeToReturn calls the underlying ModeToReturn.
+func (x *MTRThermostatClusterGetWeeklyScheduleParams) ModeToReturn() *foundation.NSNumber {
+	return x.inner.ModeToReturn()
+}
+
+// SetModeToReturn calls the underlying SetModeToReturn.
+func (x *MTRThermostatClusterGetWeeklyScheduleParams) SetModeToReturn(modeToReturn *foundation.NSNumber) {
+	x.inner.SetModeToReturn(modeToReturn)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRThermostatClusterGetWeeklyScheduleParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRThermostatClusterGetWeeklyScheduleParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRThermostatClusterGetWeeklyScheduleParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRThermostatClusterGetWeeklyScheduleParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRThermostatClusterGetWeeklyScheduleParamsable is the interface implemented by [MTRThermostatClusterGetWeeklyScheduleParams], for mocking and DI.
+type MTRThermostatClusterGetWeeklyScheduleParamsable interface {
+	Unwrap() *raw.MTRThermostatClusterGetWeeklyScheduleParams
+	WithDaysToReturn(daysToReturn *foundation.NSNumber) *MTRThermostatClusterGetWeeklyScheduleParams
+	WithModeToReturn(modeToReturn *foundation.NSNumber) *MTRThermostatClusterGetWeeklyScheduleParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRThermostatClusterGetWeeklyScheduleParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRThermostatClusterGetWeeklyScheduleParams
+	DaysToReturn() *foundation.NSNumber
+	SetDaysToReturn(daysToReturn *foundation.NSNumber)
+	ModeToReturn() *foundation.NSNumber
+	SetModeToReturn(modeToReturn *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRThermostatClusterGetWeeklyScheduleParamsable = (*MTRThermostatClusterGetWeeklyScheduleParams)(nil)
+

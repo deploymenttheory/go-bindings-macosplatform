@@ -7,6 +7,7 @@ package mediaplayer
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mediaplayer"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -47,12 +48,25 @@ func (x *ChangePlaybackRateCommand) SupportedPlaybackRates() []*foundation.NSNum
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
+}
+
+// SetSupportedPlaybackRates calls the underlying SetSupportedPlaybackRates.
+func (x *ChangePlaybackRateCommand) SetSupportedPlaybackRates(supportedPlaybackRates *foundation.NSArray[*foundation.NSNumber]) {
+	x.inner.SetSupportedPlaybackRates(supportedPlaybackRates)
 }
 
 func (x *ChangePlaybackRateCommand) asRemoteCommand() *raw.MPRemoteCommand { return &x.inner.MPRemoteCommand }
+
+// ChangePlaybackRateCommandable is the interface implemented by [ChangePlaybackRateCommand], for mocking and DI.
+type ChangePlaybackRateCommandable interface {
+	Unwrap() *raw.MPChangePlaybackRateCommand
+	WithSupportedPlaybackRates(items ...*foundation.NSNumber) *ChangePlaybackRateCommand
+	SupportedPlaybackRates() []*foundation.NSNumber
+	SetSupportedPlaybackRates(supportedPlaybackRates *foundation.NSArray[*foundation.NSNumber])
+}
+
+var _ ChangePlaybackRateCommandable = (*ChangePlaybackRateCommand)(nil)
 

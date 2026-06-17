@@ -25,3 +25,10 @@ func NewWarpGeometry() *WarpGeometry {
 
 func (x *WarpGeometry) asWarpGeometry() *raw.SKWarpGeometry { return x.inner }
 
+// WarpGeometryable is the interface implemented by [WarpGeometry], for mocking and DI.
+type WarpGeometryable interface {
+	Unwrap() *raw.SKWarpGeometry
+}
+
+var _ WarpGeometryable = (*WarpGeometry)(nil)
+

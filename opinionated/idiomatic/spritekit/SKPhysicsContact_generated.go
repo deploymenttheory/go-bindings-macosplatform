@@ -5,6 +5,7 @@
 package spritekit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +23,49 @@ func NewPhysicsContact() *PhysicsContact {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SKPhysicsContact")), objc.RegisterName("new"))
 	return &PhysicsContact{inner: raw.SKPhysicsContactFromID(_id)}
 }
+
+// BodyA calls the underlying BodyA.
+func (x *PhysicsContact) BodyA() *PhysicsBody {
+	_r := x.inner.BodyA()
+	if _r == nil {
+		return nil
+	}
+	return &PhysicsBody{inner: _r}
+}
+
+// BodyB calls the underlying BodyB.
+func (x *PhysicsContact) BodyB() *PhysicsBody {
+	_r := x.inner.BodyB()
+	if _r == nil {
+		return nil
+	}
+	return &PhysicsBody{inner: _r}
+}
+
+// ContactPoint calls the underlying ContactPoint.
+func (x *PhysicsContact) ContactPoint() corefoundation.CGPoint {
+	return x.inner.ContactPoint()
+}
+
+// ContactNormal calls the underlying ContactNormal.
+func (x *PhysicsContact) ContactNormal() corefoundation.CGVector {
+	return x.inner.ContactNormal()
+}
+
+// CollisionImpulse calls the underlying CollisionImpulse.
+func (x *PhysicsContact) CollisionImpulse() float64 {
+	return x.inner.CollisionImpulse()
+}
+
+// PhysicsContactable is the interface implemented by [PhysicsContact], for mocking and DI.
+type PhysicsContactable interface {
+	Unwrap() *raw.SKPhysicsContact
+	BodyA() *PhysicsBody
+	BodyB() *PhysicsBody
+	ContactPoint() corefoundation.CGPoint
+	ContactNormal() corefoundation.CGVector
+	CollisionImpulse() float64
+}
+
+var _ PhysicsContactable = (*PhysicsContact)(nil)
 

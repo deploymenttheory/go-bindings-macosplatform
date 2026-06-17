@@ -25,3 +25,16 @@ func NewMeshBufferMapWithBytesDeallocator(bytes_ unsafe.Pointer, deallocator fun
 	return &MeshBufferMap{inner: raw.MDLMeshBufferMapFromID(_id)}
 }
 
+// Bytes calls the underlying Bytes.
+func (x *MeshBufferMap) Bytes() unsafe.Pointer {
+	return x.inner.Bytes()
+}
+
+// MeshBufferMapable is the interface implemented by [MeshBufferMap], for mocking and DI.
+type MeshBufferMapable interface {
+	Unwrap() *raw.MDLMeshBufferMap
+	Bytes() unsafe.Pointer
+}
+
+var _ MeshBufferMapable = (*MeshBufferMap)(nil)
+

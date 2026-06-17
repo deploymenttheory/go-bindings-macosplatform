@@ -23,3 +23,28 @@ func NewMetalDisplayLinkUpdate() *MetalDisplayLinkUpdate {
 	return &MetalDisplayLinkUpdate{inner: raw.CAMetalDisplayLinkUpdateFromID(_id)}
 }
 
+// Drawable calls the underlying Drawable.
+func (x *MetalDisplayLinkUpdate) Drawable() raw.CAMetalDrawable {
+	return x.inner.Drawable()
+}
+
+// TargetTimestamp calls the underlying TargetTimestamp.
+func (x *MetalDisplayLinkUpdate) TargetTimestamp() float64 {
+	return x.inner.TargetTimestamp()
+}
+
+// TargetPresentationTimestamp calls the underlying TargetPresentationTimestamp.
+func (x *MetalDisplayLinkUpdate) TargetPresentationTimestamp() float64 {
+	return x.inner.TargetPresentationTimestamp()
+}
+
+// MetalDisplayLinkUpdateable is the interface implemented by [MetalDisplayLinkUpdate], for mocking and DI.
+type MetalDisplayLinkUpdateable interface {
+	Unwrap() *raw.CAMetalDisplayLinkUpdate
+	Drawable() raw.CAMetalDrawable
+	TargetTimestamp() float64
+	TargetPresentationTimestamp() float64
+}
+
+var _ MetalDisplayLinkUpdateable = (*MetalDisplayLinkUpdate)(nil)
+

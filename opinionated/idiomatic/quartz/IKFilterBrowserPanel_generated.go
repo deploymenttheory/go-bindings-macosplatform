@@ -6,6 +6,7 @@ package quartz
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartz"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,21 @@ func NewIKFilterBrowserPanel() *IKFilterBrowserPanel {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("IKFilterBrowserPanel")), objc.RegisterName("new"))
 	return &IKFilterBrowserPanel{inner: raw.IKFilterBrowserPanelFromID(_id)}
 }
+
+// FilterName calls the underlying FilterName.
+func (x *IKFilterBrowserPanel) FilterName() string {
+	_r := x.inner.FilterName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// IKFilterBrowserPanelable is the interface implemented by [IKFilterBrowserPanel], for mocking and DI.
+type IKFilterBrowserPanelable interface {
+	Unwrap() *raw.IKFilterBrowserPanel
+	FilterName() string
+}
+
+var _ IKFilterBrowserPanelable = (*IKFilterBrowserPanel)(nil)
 

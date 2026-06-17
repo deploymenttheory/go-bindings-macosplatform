@@ -41,3 +41,49 @@ func (x *VideoRequestOptions) WithProgressHandler(progressHandler objc.Block) *V
 	return x
 }
 
+// IsNetworkAccessAllowed calls the underlying IsNetworkAccessAllowed.
+func (x *VideoRequestOptions) IsNetworkAccessAllowed() bool {
+	return x.inner.IsNetworkAccessAllowed()
+}
+
+// SetNetworkAccessAllowed calls the underlying SetNetworkAccessAllowed.
+func (x *VideoRequestOptions) SetNetworkAccessAllowed(networkAccessAllowed bool) {
+	x.inner.SetNetworkAccessAllowed(networkAccessAllowed)
+}
+
+// DeliveryMode calls the underlying DeliveryMode.
+func (x *VideoRequestOptions) DeliveryMode() raw.PHVideoRequestOptionsDeliveryMode {
+	return x.inner.DeliveryMode()
+}
+
+// SetDeliveryMode calls the underlying SetDeliveryMode.
+func (x *VideoRequestOptions) SetDeliveryMode(deliveryMode raw.PHVideoRequestOptionsDeliveryMode) {
+	x.inner.SetDeliveryMode(deliveryMode)
+}
+
+// ProgressHandler calls the underlying ProgressHandler.
+func (x *VideoRequestOptions) ProgressHandler() objc.Block {
+	return x.inner.ProgressHandler()
+}
+
+// SetProgressHandler calls the underlying SetProgressHandler.
+func (x *VideoRequestOptions) SetProgressHandler(progressHandler objc.Block) {
+	x.inner.SetProgressHandler(progressHandler)
+}
+
+// VideoRequestOptionsable is the interface implemented by [VideoRequestOptions], for mocking and DI.
+type VideoRequestOptionsable interface {
+	Unwrap() *raw.PHVideoRequestOptions
+	WithNetworkAccessAllowed(networkAccessAllowed bool) *VideoRequestOptions
+	WithDeliveryMode(deliveryMode raw.PHVideoRequestOptionsDeliveryMode) *VideoRequestOptions
+	WithProgressHandler(progressHandler objc.Block) *VideoRequestOptions
+	IsNetworkAccessAllowed() bool
+	SetNetworkAccessAllowed(networkAccessAllowed bool)
+	DeliveryMode() raw.PHVideoRequestOptionsDeliveryMode
+	SetDeliveryMode(deliveryMode raw.PHVideoRequestOptionsDeliveryMode)
+	ProgressHandler() objc.Block
+	SetProgressHandler(progressHandler objc.Block)
+}
+
+var _ VideoRequestOptionsable = (*VideoRequestOptions)(nil)
+

@@ -23,3 +23,10 @@ func NewBiometryFallbackRequirement() *BiometryFallbackRequirement {
 	return &BiometryFallbackRequirement{inner: raw.LABiometryFallbackRequirementFromID(_id)}
 }
 
+// BiometryFallbackRequirementable is the interface implemented by [BiometryFallbackRequirement], for mocking and DI.
+type BiometryFallbackRequirementable interface {
+	Unwrap() *raw.LABiometryFallbackRequirement
+}
+
+var _ BiometryFallbackRequirementable = (*BiometryFallbackRequirement)(nil)
+

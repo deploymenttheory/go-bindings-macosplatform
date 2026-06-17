@@ -6,6 +6,8 @@ package addressbook
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/addressbook"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +25,78 @@ func NewMultiValue() *MultiValue {
 	return &MultiValue{inner: raw.ABMultiValueFromID(_id)}
 }
 
+// Count calls the underlying Count.
+func (x *MultiValue) Count() uint {
+	return x.inner.Count()
+}
+
+// ValueAtIndex calls the underlying ValueAtIndex.
+func (x *MultiValue) ValueAtIndex(index uint) objc.ID {
+	return x.inner.ValueAtIndex(index)
+}
+
+// LabelAtIndex calls the underlying LabelAtIndex.
+func (x *MultiValue) LabelAtIndex(index uint) string {
+	_r := x.inner.LabelAtIndex(index)
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// IdentifierAtIndex calls the underlying IdentifierAtIndex.
+func (x *MultiValue) IdentifierAtIndex(index uint) string {
+	_r := x.inner.IdentifierAtIndex(index)
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// IndexForIdentifier calls the underlying IndexForIdentifier.
+func (x *MultiValue) IndexForIdentifier(identifier string) uint {
+	return x.inner.IndexForIdentifier(foundation.NSStringStringWithUTF8String(identifier))
+}
+
+// PrimaryIdentifier calls the underlying PrimaryIdentifier.
+func (x *MultiValue) PrimaryIdentifier() string {
+	_r := x.inner.PrimaryIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// PropertyType calls the underlying PropertyType.
+func (x *MultiValue) PropertyType() int {
+	return x.inner.PropertyType()
+}
+
+// ValueForIdentifier calls the underlying ValueForIdentifier.
+func (x *MultiValue) ValueForIdentifier(identifier string) objc.ID {
+	return x.inner.ValueForIdentifier(foundation.NSStringStringWithUTF8String(identifier))
+}
+
+// LabelForIdentifier calls the underlying LabelForIdentifier.
+func (x *MultiValue) LabelForIdentifier(identifier string) objc.ID {
+	return x.inner.LabelForIdentifier(foundation.NSStringStringWithUTF8String(identifier))
+}
+
 func (x *MultiValue) asMultiValue() *raw.ABMultiValue { return x.inner }
+
+// MultiValueable is the interface implemented by [MultiValue], for mocking and DI.
+type MultiValueable interface {
+	Unwrap() *raw.ABMultiValue
+	Count() uint
+	ValueAtIndex(index uint) objc.ID
+	LabelAtIndex(index uint) string
+	IdentifierAtIndex(index uint) string
+	IndexForIdentifier(identifier string) uint
+	PrimaryIdentifier() string
+	PropertyType() int
+	ValueForIdentifier(identifier string) objc.ID
+	LabelForIdentifier(identifier string) objc.ID
+}
+
+var _ MultiValueable = (*MultiValue)(nil)
 

@@ -25,3 +25,22 @@ func NewWebAppManifestWithJSONDataManifestURL(jsonData *foundation.NSData, manif
 	return &WebAppManifest{inner: raw.BEWebAppManifestFromID(_id)}
 }
 
+// JsonData calls the underlying JsonData.
+func (x *WebAppManifest) JsonData() *foundation.NSData {
+	return x.inner.JsonData()
+}
+
+// ManifestURL calls the underlying ManifestURL.
+func (x *WebAppManifest) ManifestURL() *foundation.NSURL {
+	return x.inner.ManifestURL()
+}
+
+// WebAppManifestable is the interface implemented by [WebAppManifest], for mocking and DI.
+type WebAppManifestable interface {
+	Unwrap() *raw.BEWebAppManifest
+	JsonData() *foundation.NSData
+	ManifestURL() *foundation.NSURL
+}
+
+var _ WebAppManifestable = (*WebAppManifest)(nil)
+

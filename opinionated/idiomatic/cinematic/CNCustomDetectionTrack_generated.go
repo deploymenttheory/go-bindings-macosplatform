@@ -7,6 +7,7 @@ package cinematic
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cinematic"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -31,12 +32,18 @@ func (x *CustomDetectionTrack) AllDetections() []*raw.CNDetection {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.CNDetection, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CNDetection {
+		return raw.CNDetectionFromID(purego.Retain(_id))
+	})
 }
 
 func (x *CustomDetectionTrack) asDetectionTrack() *raw.CNDetectionTrack { return &x.inner.CNDetectionTrack }
+
+// CustomDetectionTrackable is the interface implemented by [CustomDetectionTrack], for mocking and DI.
+type CustomDetectionTrackable interface {
+	Unwrap() *raw.CNCustomDetectionTrack
+	AllDetections() []*raw.CNDetection
+}
+
+var _ CustomDetectionTrackable = (*CustomDetectionTrack)(nil)
 

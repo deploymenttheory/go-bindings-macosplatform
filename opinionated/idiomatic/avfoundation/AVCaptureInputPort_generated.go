@@ -6,7 +6,9 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // CaptureInputPort wraps [raw.AVCaptureInputPort] with a fluent Go API.
@@ -28,4 +30,56 @@ func (x *CaptureInputPort) WithEnabled(enabled bool) *CaptureInputPort {
 	x.inner.SetEnabled(enabled)
 	return x
 }
+
+// Input calls the underlying Input.
+func (x *CaptureInputPort) Input() *CaptureInput {
+	_r := x.inner.Input()
+	if _r == nil {
+		return nil
+	}
+	return &CaptureInput{inner: _r}
+}
+
+// MediaType calls the underlying MediaType.
+func (x *CaptureInputPort) MediaType() string {
+	_r := x.inner.MediaType()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// FormatDescription calls the underlying FormatDescription.
+func (x *CaptureInputPort) FormatDescription() unsafe.Pointer {
+	return x.inner.FormatDescription()
+}
+
+// IsEnabled calls the underlying IsEnabled.
+func (x *CaptureInputPort) IsEnabled() bool {
+	return x.inner.IsEnabled()
+}
+
+// SetEnabled calls the underlying SetEnabled.
+func (x *CaptureInputPort) SetEnabled(enabled bool) {
+	x.inner.SetEnabled(enabled)
+}
+
+// Clock calls the underlying Clock.
+func (x *CaptureInputPort) Clock() unsafe.Pointer {
+	return x.inner.Clock()
+}
+
+// CaptureInputPortable is the interface implemented by [CaptureInputPort], for mocking and DI.
+type CaptureInputPortable interface {
+	Unwrap() *raw.AVCaptureInputPort
+	WithEnabled(enabled bool) *CaptureInputPort
+	Input() *CaptureInput
+	MediaType() string
+	FormatDescription() unsafe.Pointer
+	IsEnabled() bool
+	SetEnabled(enabled bool)
+	Clock() unsafe.Pointer
+}
+
+var _ CaptureInputPortable = (*CaptureInputPort)(nil)
 

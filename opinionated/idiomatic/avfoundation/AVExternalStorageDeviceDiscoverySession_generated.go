@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -29,10 +30,16 @@ func (x *ExternalStorageDeviceDiscoverySession) ExternalStorageDevices() []*raw.
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AVExternalStorageDevice, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVExternalStorageDevice {
+		return raw.AVExternalStorageDeviceFromID(purego.Retain(_id))
+	})
 }
+
+// ExternalStorageDeviceDiscoverySessionable is the interface implemented by [ExternalStorageDeviceDiscoverySession], for mocking and DI.
+type ExternalStorageDeviceDiscoverySessionable interface {
+	Unwrap() *raw.AVExternalStorageDeviceDiscoverySession
+	ExternalStorageDevices() []*raw.AVExternalStorageDevice
+}
+
+var _ ExternalStorageDeviceDiscoverySessionable = (*ExternalStorageDeviceDiscoverySession)(nil)
 

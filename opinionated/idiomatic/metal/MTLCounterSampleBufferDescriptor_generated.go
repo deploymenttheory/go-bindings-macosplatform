@@ -7,6 +7,7 @@ package metal
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -47,4 +48,67 @@ func (x *CounterSampleBufferDescriptor) WithSampleCount(sampleCount uint) *Count
 	x.inner.SetSampleCount(sampleCount)
 	return x
 }
+
+// CounterSet calls the underlying CounterSet.
+func (x *CounterSampleBufferDescriptor) CounterSet() raw.MTLCounterSet {
+	return x.inner.CounterSet()
+}
+
+// SetCounterSet calls the underlying SetCounterSet.
+func (x *CounterSampleBufferDescriptor) SetCounterSet(counterSet raw.MTLCounterSet) {
+	x.inner.SetCounterSet(counterSet)
+}
+
+// Label calls the underlying Label.
+func (x *CounterSampleBufferDescriptor) Label() string {
+	_r := x.inner.Label()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLabel calls the underlying SetLabel.
+func (x *CounterSampleBufferDescriptor) SetLabel(label string) {
+	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+}
+
+// StorageMode calls the underlying StorageMode.
+func (x *CounterSampleBufferDescriptor) StorageMode() raw.MTLStorageMode {
+	return x.inner.StorageMode()
+}
+
+// SetStorageMode calls the underlying SetStorageMode.
+func (x *CounterSampleBufferDescriptor) SetStorageMode(storageMode raw.MTLStorageMode) {
+	x.inner.SetStorageMode(storageMode)
+}
+
+// SampleCount calls the underlying SampleCount.
+func (x *CounterSampleBufferDescriptor) SampleCount() uint {
+	return x.inner.SampleCount()
+}
+
+// SetSampleCount calls the underlying SetSampleCount.
+func (x *CounterSampleBufferDescriptor) SetSampleCount(sampleCount uint) {
+	x.inner.SetSampleCount(sampleCount)
+}
+
+// CounterSampleBufferDescriptorable is the interface implemented by [CounterSampleBufferDescriptor], for mocking and DI.
+type CounterSampleBufferDescriptorable interface {
+	Unwrap() *raw.MTLCounterSampleBufferDescriptor
+	WithCounterSet(counterSet raw.MTLCounterSet) *CounterSampleBufferDescriptor
+	WithLabel(label string) *CounterSampleBufferDescriptor
+	WithStorageMode(storageMode raw.MTLStorageMode) *CounterSampleBufferDescriptor
+	WithSampleCount(sampleCount uint) *CounterSampleBufferDescriptor
+	CounterSet() raw.MTLCounterSet
+	SetCounterSet(counterSet raw.MTLCounterSet)
+	Label() string
+	SetLabel(label string)
+	StorageMode() raw.MTLStorageMode
+	SetStorageMode(storageMode raw.MTLStorageMode)
+	SampleCount() uint
+	SetSampleCount(sampleCount uint)
+}
+
+var _ CounterSampleBufferDescriptorable = (*CounterSampleBufferDescriptor)(nil)
 

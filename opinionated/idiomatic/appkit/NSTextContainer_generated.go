@@ -8,6 +8,7 @@ import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -111,16 +112,194 @@ func (x *TextContainer) WithContainerSize(containerSize corefoundation.CGSize) *
 	return x
 }
 
+// LineFragmentRectForProposedRectAtIndexWritingDirectionRemainingRect calls the underlying LineFragmentRectForProposedRectAtIndexWritingDirectionRemainingRect.
+func (x *TextContainer) LineFragmentRectForProposedRectAtIndexWritingDirectionRemainingRect(proposedRect corefoundation.CGRect, characterIndex uint, baseWritingDirection raw.NSWritingDirection, remainingRect *corefoundation.CGRect) corefoundation.CGRect {
+	return x.inner.LineFragmentRectForProposedRectAtIndexWritingDirectionRemainingRect(proposedRect, characterIndex, baseWritingDirection, remainingRect)
+}
+
+// TextLayoutManager calls the underlying TextLayoutManager.
+func (x *TextContainer) TextLayoutManager() *TextLayoutManager {
+	_r := x.inner.TextLayoutManager()
+	if _r == nil {
+		return nil
+	}
+	return &TextLayoutManager{inner: _r}
+}
+
+// Size calls the underlying Size.
+func (x *TextContainer) Size() corefoundation.CGSize {
+	return x.inner.Size()
+}
+
+// SetSize calls the underlying SetSize.
+func (x *TextContainer) SetSize(size corefoundation.CGSize) {
+	x.inner.SetSize(size)
+}
+
+// LineBreakMode calls the underlying LineBreakMode.
+func (x *TextContainer) LineBreakMode() raw.NSLineBreakMode {
+	return x.inner.LineBreakMode()
+}
+
+// SetLineBreakMode calls the underlying SetLineBreakMode.
+func (x *TextContainer) SetLineBreakMode(lineBreakMode raw.NSLineBreakMode) {
+	x.inner.SetLineBreakMode(lineBreakMode)
+}
+
+// LineFragmentPadding calls the underlying LineFragmentPadding.
+func (x *TextContainer) LineFragmentPadding() float64 {
+	return x.inner.LineFragmentPadding()
+}
+
+// SetLineFragmentPadding calls the underlying SetLineFragmentPadding.
+func (x *TextContainer) SetLineFragmentPadding(lineFragmentPadding float64) {
+	x.inner.SetLineFragmentPadding(lineFragmentPadding)
+}
+
+// MaximumNumberOfLines calls the underlying MaximumNumberOfLines.
+func (x *TextContainer) MaximumNumberOfLines() uint {
+	return x.inner.MaximumNumberOfLines()
+}
+
+// SetMaximumNumberOfLines calls the underlying SetMaximumNumberOfLines.
+func (x *TextContainer) SetMaximumNumberOfLines(maximumNumberOfLines uint) {
+	x.inner.SetMaximumNumberOfLines(maximumNumberOfLines)
+}
+
+// IsSimpleRectangularTextContainer calls the underlying IsSimpleRectangularTextContainer.
+func (x *TextContainer) IsSimpleRectangularTextContainer() bool {
+	return x.inner.IsSimpleRectangularTextContainer()
+}
+
+// WidthTracksTextView calls the underlying WidthTracksTextView.
+func (x *TextContainer) WidthTracksTextView() bool {
+	return x.inner.WidthTracksTextView()
+}
+
+// SetWidthTracksTextView calls the underlying SetWidthTracksTextView.
+func (x *TextContainer) SetWidthTracksTextView(widthTracksTextView bool) {
+	x.inner.SetWidthTracksTextView(widthTracksTextView)
+}
+
+// HeightTracksTextView calls the underlying HeightTracksTextView.
+func (x *TextContainer) HeightTracksTextView() bool {
+	return x.inner.HeightTracksTextView()
+}
+
+// SetHeightTracksTextView calls the underlying SetHeightTracksTextView.
+func (x *TextContainer) SetHeightTracksTextView(heightTracksTextView bool) {
+	x.inner.SetHeightTracksTextView(heightTracksTextView)
+}
+
+// LayoutManager calls the underlying LayoutManager.
+func (x *TextContainer) LayoutManager() *LayoutManager {
+	_r := x.inner.LayoutManager()
+	if _r == nil {
+		return nil
+	}
+	return &LayoutManager{inner: _r}
+}
+
+// SetLayoutManager calls the underlying SetLayoutManager.
+func (x *TextContainer) SetLayoutManager(layoutManager *raw.NSLayoutManager) {
+	x.inner.SetLayoutManager(layoutManager)
+}
+
+// ReplaceLayoutManager calls the underlying ReplaceLayoutManager.
+func (x *TextContainer) ReplaceLayoutManager(newLayoutManager *raw.NSLayoutManager) {
+	x.inner.ReplaceLayoutManager(newLayoutManager)
+}
+
 // ExclusionPaths returns the collection as a Go slice.
 func (x *TextContainer) ExclusionPaths() []*raw.NSBezierPath {
 	arr := x.inner.ExclusionPaths()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSBezierPath, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSBezierPath {
+		return raw.NSBezierPathFromID(purego.Retain(_id))
+	})
 }
+
+// SetExclusionPaths calls the underlying SetExclusionPaths.
+func (x *TextContainer) SetExclusionPaths(exclusionPaths *foundation.NSArray[*raw.NSBezierPath]) {
+	x.inner.SetExclusionPaths(exclusionPaths)
+}
+
+// TextView calls the underlying TextView.
+func (x *TextContainer) TextView() *TextView {
+	_r := x.inner.TextView()
+	if _r == nil {
+		return nil
+	}
+	return &TextView{inner: _r}
+}
+
+// SetTextView calls the underlying SetTextView.
+func (x *TextContainer) SetTextView(textView *raw.NSTextView) {
+	x.inner.SetTextView(textView)
+}
+
+// LineFragmentRectForProposedRectSweepDirectionMovementDirectionRemainingRect calls the underlying LineFragmentRectForProposedRectSweepDirectionMovementDirectionRemainingRect.
+func (x *TextContainer) LineFragmentRectForProposedRectSweepDirectionMovementDirectionRemainingRect(proposedRect corefoundation.CGRect, sweepDirection raw.NSLineSweepDirection, movementDirection raw.NSLineMovementDirection, remainingRect *corefoundation.CGRect) corefoundation.CGRect {
+	return x.inner.LineFragmentRectForProposedRectSweepDirectionMovementDirectionRemainingRect(proposedRect, sweepDirection, movementDirection, remainingRect)
+}
+
+// ContainsPoint calls the underlying ContainsPoint.
+func (x *TextContainer) ContainsPoint(point corefoundation.CGPoint) bool {
+	return x.inner.ContainsPoint(point)
+}
+
+// ContainerSize calls the underlying ContainerSize.
+func (x *TextContainer) ContainerSize() corefoundation.CGSize {
+	return x.inner.ContainerSize()
+}
+
+// SetContainerSize calls the underlying SetContainerSize.
+func (x *TextContainer) SetContainerSize(containerSize corefoundation.CGSize) {
+	x.inner.SetContainerSize(containerSize)
+}
+
+// TextContainerable is the interface implemented by [TextContainer], for mocking and DI.
+type TextContainerable interface {
+	Unwrap() *raw.NSTextContainer
+	WithSize(size corefoundation.CGSize) *TextContainer
+	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *TextContainer
+	WithLineFragmentPadding(lineFragmentPadding float64) *TextContainer
+	WithMaximumNumberOfLines(maximumNumberOfLines uint) *TextContainer
+	WithWidthTracksTextView(widthTracksTextView bool) *TextContainer
+	WithHeightTracksTextView(heightTracksTextView bool) *TextContainer
+	WithLayoutManager(layoutManager *raw.NSLayoutManager) *TextContainer
+	WithExclusionPaths(items ...*raw.NSBezierPath) *TextContainer
+	WithTextView(textView *raw.NSTextView) *TextContainer
+	WithContainerSize(containerSize corefoundation.CGSize) *TextContainer
+	LineFragmentRectForProposedRectAtIndexWritingDirectionRemainingRect(proposedRect corefoundation.CGRect, characterIndex uint, baseWritingDirection raw.NSWritingDirection, remainingRect *corefoundation.CGRect) corefoundation.CGRect
+	TextLayoutManager() *TextLayoutManager
+	Size() corefoundation.CGSize
+	SetSize(size corefoundation.CGSize)
+	LineBreakMode() raw.NSLineBreakMode
+	SetLineBreakMode(lineBreakMode raw.NSLineBreakMode)
+	LineFragmentPadding() float64
+	SetLineFragmentPadding(lineFragmentPadding float64)
+	MaximumNumberOfLines() uint
+	SetMaximumNumberOfLines(maximumNumberOfLines uint)
+	IsSimpleRectangularTextContainer() bool
+	WidthTracksTextView() bool
+	SetWidthTracksTextView(widthTracksTextView bool)
+	HeightTracksTextView() bool
+	SetHeightTracksTextView(heightTracksTextView bool)
+	LayoutManager() *LayoutManager
+	SetLayoutManager(layoutManager *raw.NSLayoutManager)
+	ReplaceLayoutManager(newLayoutManager *raw.NSLayoutManager)
+	ExclusionPaths() []*raw.NSBezierPath
+	SetExclusionPaths(exclusionPaths *foundation.NSArray[*raw.NSBezierPath])
+	TextView() *TextView
+	SetTextView(textView *raw.NSTextView)
+	LineFragmentRectForProposedRectSweepDirectionMovementDirectionRemainingRect(proposedRect corefoundation.CGRect, sweepDirection raw.NSLineSweepDirection, movementDirection raw.NSLineMovementDirection, remainingRect *corefoundation.CGRect) corefoundation.CGRect
+	ContainsPoint(point corefoundation.CGPoint) bool
+	ContainerSize() corefoundation.CGSize
+	SetContainerSize(containerSize corefoundation.CGSize)
+}
+
+var _ TextContainerable = (*TextContainer)(nil)
 

@@ -32,7 +32,68 @@ func NewMTRClusterLocalizationConfigurationWithDeviceEndpointQueue(device *raw.M
 	return &MTRClusterLocalizationConfiguration{inner: raw.MTRClusterLocalizationConfigurationFromID(_id)}
 }
 
+// ReadAttributeActiveLocaleWithParams calls the underlying ReadAttributeActiveLocaleWithParams.
+func (x *MTRClusterLocalizationConfiguration) ReadAttributeActiveLocaleWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeActiveLocaleWithParams(params)
+}
+
+// WriteAttributeActiveLocaleWithValueExpectedValueInterval calls the underlying WriteAttributeActiveLocaleWithValueExpectedValueInterval.
+func (x *MTRClusterLocalizationConfiguration) WriteAttributeActiveLocaleWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
+	x.inner.WriteAttributeActiveLocaleWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+}
+
+// WriteAttributeActiveLocaleWithValueExpectedValueIntervalParams calls the underlying WriteAttributeActiveLocaleWithValueExpectedValueIntervalParams.
+func (x *MTRClusterLocalizationConfiguration) WriteAttributeActiveLocaleWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
+	x.inner.WriteAttributeActiveLocaleWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+}
+
+// ReadAttributeSupportedLocalesWithParams calls the underlying ReadAttributeSupportedLocalesWithParams.
+func (x *MTRClusterLocalizationConfiguration) ReadAttributeSupportedLocalesWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeSupportedLocalesWithParams(params)
+}
+
+// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
+func (x *MTRClusterLocalizationConfiguration) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+}
+
+// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
+func (x *MTRClusterLocalizationConfiguration) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
+}
+
+// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
+func (x *MTRClusterLocalizationConfiguration) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeAttributeListWithParams(params)
+}
+
+// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
+func (x *MTRClusterLocalizationConfiguration) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeFeatureMapWithParams(params)
+}
+
+// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
+func (x *MTRClusterLocalizationConfiguration) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeClusterRevisionWithParams(params)
+}
+
 func (x *MTRClusterLocalizationConfiguration) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
 
 func (x *MTRClusterLocalizationConfiguration) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+
+// MTRClusterLocalizationConfigurationable is the interface implemented by [MTRClusterLocalizationConfiguration], for mocking and DI.
+type MTRClusterLocalizationConfigurationable interface {
+	Unwrap() *raw.MTRClusterLocalizationConfiguration
+	ReadAttributeActiveLocaleWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	WriteAttributeActiveLocaleWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
+	WriteAttributeActiveLocaleWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
+	ReadAttributeSupportedLocalesWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+}
+
+var _ MTRClusterLocalizationConfigurationable = (*MTRClusterLocalizationConfiguration)(nil)
 

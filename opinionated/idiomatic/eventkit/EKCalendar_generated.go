@@ -8,7 +8,9 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/eventkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Calendar wraps [raw.EKCalendar] with a fluent Go API.
@@ -43,5 +45,117 @@ func (x *Calendar) WithColor(color *appkit.NSColor) *Calendar {
 	return x
 }
 
+// Source calls the underlying Source.
+func (x *Calendar) Source() *Source {
+	_r := x.inner.Source()
+	if _r == nil {
+		return nil
+	}
+	return &Source{inner: _r}
+}
+
+// SetSource calls the underlying SetSource.
+func (x *Calendar) SetSource(source *raw.EKSource) {
+	x.inner.SetSource(source)
+}
+
+// CalendarIdentifier calls the underlying CalendarIdentifier.
+func (x *Calendar) CalendarIdentifier() string {
+	_r := x.inner.CalendarIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Title calls the underlying Title.
+func (x *Calendar) Title() string {
+	_r := x.inner.Title()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetTitle calls the underlying SetTitle.
+func (x *Calendar) SetTitle(title string) {
+	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+}
+
+// Type calls the underlying Type.
+func (x *Calendar) Type() raw.EKCalendarType {
+	return x.inner.Type()
+}
+
+// AllowsContentModifications calls the underlying AllowsContentModifications.
+func (x *Calendar) AllowsContentModifications() bool {
+	return x.inner.AllowsContentModifications()
+}
+
+// IsSubscribed calls the underlying IsSubscribed.
+func (x *Calendar) IsSubscribed() bool {
+	return x.inner.IsSubscribed()
+}
+
+// IsImmutable calls the underlying IsImmutable.
+func (x *Calendar) IsImmutable() bool {
+	return x.inner.IsImmutable()
+}
+
+// CGColor calls the underlying CGColor.
+func (x *Calendar) CGColor() unsafe.Pointer {
+	return x.inner.CGColor()
+}
+
+// SetCGColor calls the underlying SetCGColor.
+func (x *Calendar) SetCGColor(cGColor unsafe.Pointer) {
+	x.inner.SetCGColor(cGColor)
+}
+
+// Color calls the underlying Color.
+func (x *Calendar) Color() *appkit.NSColor {
+	return x.inner.Color()
+}
+
+// SetColor calls the underlying SetColor.
+func (x *Calendar) SetColor(color *appkit.NSColor) {
+	x.inner.SetColor(color)
+}
+
+// SupportedEventAvailabilities calls the underlying SupportedEventAvailabilities.
+func (x *Calendar) SupportedEventAvailabilities() raw.EKCalendarEventAvailabilityMask {
+	return x.inner.SupportedEventAvailabilities()
+}
+
+// AllowedEntityTypes calls the underlying AllowedEntityTypes.
+func (x *Calendar) AllowedEntityTypes() raw.EKEntityMask {
+	return x.inner.AllowedEntityTypes()
+}
+
 func (x *Calendar) asObject() *raw.EKObject { return &x.inner.EKObject }
+
+// Calendarable is the interface implemented by [Calendar], for mocking and DI.
+type Calendarable interface {
+	Unwrap() *raw.EKCalendar
+	WithSource(source *raw.EKSource) *Calendar
+	WithTitle(title string) *Calendar
+	WithColor(color *appkit.NSColor) *Calendar
+	Source() *Source
+	SetSource(source *raw.EKSource)
+	CalendarIdentifier() string
+	Title() string
+	SetTitle(title string)
+	Type() raw.EKCalendarType
+	AllowsContentModifications() bool
+	IsSubscribed() bool
+	IsImmutable() bool
+	CGColor() unsafe.Pointer
+	SetCGColor(cGColor unsafe.Pointer)
+	Color() *appkit.NSColor
+	SetColor(color *appkit.NSColor)
+	SupportedEventAvailabilities() raw.EKCalendarEventAvailabilityMask
+	AllowedEntityTypes() raw.EKEntityMask
+}
+
+var _ Calendarable = (*Calendar)(nil)
 

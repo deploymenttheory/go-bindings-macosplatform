@@ -6,6 +6,8 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,4 +25,77 @@ func NewColorPickerWithPickerMaskColorPanel(mask uint, owningColorPanel *raw.NSC
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPickerMask:colorPanel:"), mask, owningColorPanel.Ptr())
 	return &ColorPicker{inner: raw.NSColorPickerFromID(_id)}
 }
+
+// InsertNewButtonImageIn calls the underlying InsertNewButtonImageIn.
+func (x *ColorPicker) InsertNewButtonImageIn(newButtonImage *raw.NSImage, buttonCell *raw.NSButtonCell) {
+	x.inner.InsertNewButtonImageIn(newButtonImage, buttonCell)
+}
+
+// ViewSizeChanged calls the underlying ViewSizeChanged.
+func (x *ColorPicker) ViewSizeChanged(sender objc.ID) {
+	x.inner.ViewSizeChanged(sender)
+}
+
+// AttachColorList calls the underlying AttachColorList.
+func (x *ColorPicker) AttachColorList(colorList *raw.NSColorList) {
+	x.inner.AttachColorList(colorList)
+}
+
+// DetachColorList calls the underlying DetachColorList.
+func (x *ColorPicker) DetachColorList(colorList *raw.NSColorList) {
+	x.inner.DetachColorList(colorList)
+}
+
+// SetMode calls the underlying SetMode.
+func (x *ColorPicker) SetMode(mode raw.NSColorPanelMode) {
+	x.inner.SetMode(mode)
+}
+
+// ColorPanel calls the underlying ColorPanel.
+func (x *ColorPicker) ColorPanel() *ColorPanel {
+	_r := x.inner.ColorPanel()
+	if _r == nil {
+		return nil
+	}
+	return &ColorPanel{inner: _r}
+}
+
+// ProvideNewButtonImage calls the underlying ProvideNewButtonImage.
+func (x *ColorPicker) ProvideNewButtonImage() *Image {
+	_r := x.inner.ProvideNewButtonImage()
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// ButtonToolTip calls the underlying ButtonToolTip.
+func (x *ColorPicker) ButtonToolTip() string {
+	_r := x.inner.ButtonToolTip()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// MinContentSize calls the underlying MinContentSize.
+func (x *ColorPicker) MinContentSize() corefoundation.CGSize {
+	return x.inner.MinContentSize()
+}
+
+// ColorPickerable is the interface implemented by [ColorPicker], for mocking and DI.
+type ColorPickerable interface {
+	Unwrap() *raw.NSColorPicker
+	InsertNewButtonImageIn(newButtonImage *raw.NSImage, buttonCell *raw.NSButtonCell)
+	ViewSizeChanged(sender objc.ID)
+	AttachColorList(colorList *raw.NSColorList)
+	DetachColorList(colorList *raw.NSColorList)
+	SetMode(mode raw.NSColorPanelMode)
+	ColorPanel() *ColorPanel
+	ProvideNewButtonImage() *Image
+	ButtonToolTip() string
+	MinContentSize() corefoundation.CGSize
+}
+
+var _ ColorPickerable = (*ColorPicker)(nil)
 

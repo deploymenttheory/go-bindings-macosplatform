@@ -53,5 +53,77 @@ func (x *Cone) WithHeightSegmentCount(heightSegmentCount int) *Cone {
 	return x
 }
 
+// TopRadius calls the underlying TopRadius.
+func (x *Cone) TopRadius() float64 {
+	return x.inner.TopRadius()
+}
+
+// SetTopRadius calls the underlying SetTopRadius.
+func (x *Cone) SetTopRadius(topRadius float64) {
+	x.inner.SetTopRadius(topRadius)
+}
+
+// BottomRadius calls the underlying BottomRadius.
+func (x *Cone) BottomRadius() float64 {
+	return x.inner.BottomRadius()
+}
+
+// SetBottomRadius calls the underlying SetBottomRadius.
+func (x *Cone) SetBottomRadius(bottomRadius float64) {
+	x.inner.SetBottomRadius(bottomRadius)
+}
+
+// Height calls the underlying Height.
+func (x *Cone) Height() float64 {
+	return x.inner.Height()
+}
+
+// SetHeight calls the underlying SetHeight.
+func (x *Cone) SetHeight(height float64) {
+	x.inner.SetHeight(height)
+}
+
+// RadialSegmentCount calls the underlying RadialSegmentCount.
+func (x *Cone) RadialSegmentCount() int {
+	return x.inner.RadialSegmentCount()
+}
+
+// SetRadialSegmentCount calls the underlying SetRadialSegmentCount.
+func (x *Cone) SetRadialSegmentCount(radialSegmentCount int) {
+	x.inner.SetRadialSegmentCount(radialSegmentCount)
+}
+
+// HeightSegmentCount calls the underlying HeightSegmentCount.
+func (x *Cone) HeightSegmentCount() int {
+	return x.inner.HeightSegmentCount()
+}
+
+// SetHeightSegmentCount calls the underlying SetHeightSegmentCount.
+func (x *Cone) SetHeightSegmentCount(heightSegmentCount int) {
+	x.inner.SetHeightSegmentCount(heightSegmentCount)
+}
+
 func (x *Cone) asGeometry() *raw.SCNGeometry { return &x.inner.SCNGeometry }
+
+// Coneable is the interface implemented by [Cone], for mocking and DI.
+type Coneable interface {
+	Unwrap() *raw.SCNCone
+	WithTopRadius(topRadius float64) *Cone
+	WithBottomRadius(bottomRadius float64) *Cone
+	WithHeight(height float64) *Cone
+	WithRadialSegmentCount(radialSegmentCount int) *Cone
+	WithHeightSegmentCount(heightSegmentCount int) *Cone
+	TopRadius() float64
+	SetTopRadius(topRadius float64)
+	BottomRadius() float64
+	SetBottomRadius(bottomRadius float64)
+	Height() float64
+	SetHeight(height float64)
+	RadialSegmentCount() int
+	SetRadialSegmentCount(radialSegmentCount int)
+	HeightSegmentCount() int
+	SetHeightSegmentCount(heightSegmentCount int)
+}
+
+var _ Coneable = (*Cone)(nil)
 

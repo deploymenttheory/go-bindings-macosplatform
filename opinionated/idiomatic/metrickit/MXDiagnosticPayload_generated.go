@@ -5,7 +5,9 @@
 package metrickit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metrickit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,17 +25,25 @@ func NewDiagnosticPayload() *DiagnosticPayload {
 	return &DiagnosticPayload{inner: raw.MXDiagnosticPayloadFromID(_id)}
 }
 
+// JSONRepresentation calls the underlying JSONRepresentation.
+func (x *DiagnosticPayload) JSONRepresentation() *foundation.NSData {
+	return x.inner.JSONRepresentation()
+}
+
+// DictionaryRepresentation calls the underlying DictionaryRepresentation.
+func (x *DiagnosticPayload) DictionaryRepresentation() *foundation.NSDictionary[objc.ID, objc.ID] {
+	return x.inner.DictionaryRepresentation()
+}
+
 // CpuExceptionDiagnostics returns the collection as a Go slice.
 func (x *DiagnosticPayload) CpuExceptionDiagnostics() []*raw.MXCPUExceptionDiagnostic {
 	arr := x.inner.CpuExceptionDiagnostics()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MXCPUExceptionDiagnostic, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MXCPUExceptionDiagnostic {
+		return raw.MXCPUExceptionDiagnosticFromID(purego.Retain(_id))
+	})
 }
 
 // DiskWriteExceptionDiagnostics returns the collection as a Go slice.
@@ -42,11 +52,9 @@ func (x *DiagnosticPayload) DiskWriteExceptionDiagnostics() []*raw.MXDiskWriteEx
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MXDiskWriteExceptionDiagnostic, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MXDiskWriteExceptionDiagnostic {
+		return raw.MXDiskWriteExceptionDiagnosticFromID(purego.Retain(_id))
+	})
 }
 
 // HangDiagnostics returns the collection as a Go slice.
@@ -55,11 +63,9 @@ func (x *DiagnosticPayload) HangDiagnostics() []*raw.MXHangDiagnostic {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MXHangDiagnostic, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MXHangDiagnostic {
+		return raw.MXHangDiagnosticFromID(purego.Retain(_id))
+	})
 }
 
 // CrashDiagnostics returns the collection as a Go slice.
@@ -68,10 +74,33 @@ func (x *DiagnosticPayload) CrashDiagnostics() []*raw.MXCrashDiagnostic {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MXCrashDiagnostic, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MXCrashDiagnostic {
+		return raw.MXCrashDiagnosticFromID(purego.Retain(_id))
+	})
 }
+
+// TimeStampBegin calls the underlying TimeStampBegin.
+func (x *DiagnosticPayload) TimeStampBegin() *foundation.NSDate {
+	return x.inner.TimeStampBegin()
+}
+
+// TimeStampEnd calls the underlying TimeStampEnd.
+func (x *DiagnosticPayload) TimeStampEnd() *foundation.NSDate {
+	return x.inner.TimeStampEnd()
+}
+
+// DiagnosticPayloadable is the interface implemented by [DiagnosticPayload], for mocking and DI.
+type DiagnosticPayloadable interface {
+	Unwrap() *raw.MXDiagnosticPayload
+	JSONRepresentation() *foundation.NSData
+	DictionaryRepresentation() *foundation.NSDictionary[objc.ID, objc.ID]
+	CpuExceptionDiagnostics() []*raw.MXCPUExceptionDiagnostic
+	DiskWriteExceptionDiagnostics() []*raw.MXDiskWriteExceptionDiagnostic
+	HangDiagnostics() []*raw.MXHangDiagnostic
+	CrashDiagnostics() []*raw.MXCrashDiagnostic
+	TimeStampBegin() *foundation.NSDate
+	TimeStampEnd() *foundation.NSDate
+}
+
+var _ DiagnosticPayloadable = (*DiagnosticPayload)(nil)
 

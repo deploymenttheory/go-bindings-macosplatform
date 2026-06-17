@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photosui"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,16 +55,70 @@ func NewProjectTypeDescriptionWithProjectTypeTitleAttributedDescriptionImageCanP
 	return &ProjectTypeDescription{inner: raw.PHProjectTypeDescriptionFromID(_id)}
 }
 
+// ProjectType calls the underlying ProjectType.
+func (x *ProjectTypeDescription) ProjectType() string {
+	_r := x.inner.ProjectType()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// LocalizedTitle calls the underlying LocalizedTitle.
+func (x *ProjectTypeDescription) LocalizedTitle() string {
+	_r := x.inner.LocalizedTitle()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// LocalizedDescription calls the underlying LocalizedDescription.
+func (x *ProjectTypeDescription) LocalizedDescription() string {
+	_r := x.inner.LocalizedDescription()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// LocalizedAttributedDescription calls the underlying LocalizedAttributedDescription.
+func (x *ProjectTypeDescription) LocalizedAttributedDescription() *foundation.NSAttributedString {
+	return x.inner.LocalizedAttributedDescription()
+}
+
+// Image calls the underlying Image.
+func (x *ProjectTypeDescription) Image() *appkit.NSImage {
+	return x.inner.Image()
+}
+
 // SubtypeDescriptions returns the collection as a Go slice.
 func (x *ProjectTypeDescription) SubtypeDescriptions() []*raw.PHProjectTypeDescription {
 	arr := x.inner.SubtypeDescriptions()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.PHProjectTypeDescription, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PHProjectTypeDescription {
+		return raw.PHProjectTypeDescriptionFromID(purego.Retain(_id))
+	})
 }
+
+// CanProvideSubtypes calls the underlying CanProvideSubtypes.
+func (x *ProjectTypeDescription) CanProvideSubtypes() bool {
+	return x.inner.CanProvideSubtypes()
+}
+
+// ProjectTypeDescriptionable is the interface implemented by [ProjectTypeDescription], for mocking and DI.
+type ProjectTypeDescriptionable interface {
+	Unwrap() *raw.PHProjectTypeDescription
+	ProjectType() string
+	LocalizedTitle() string
+	LocalizedDescription() string
+	LocalizedAttributedDescription() *foundation.NSAttributedString
+	Image() *appkit.NSImage
+	SubtypeDescriptions() []*raw.PHProjectTypeDescription
+	CanProvideSubtypes() bool
+}
+
+var _ ProjectTypeDescriptionable = (*ProjectTypeDescription)(nil)
 

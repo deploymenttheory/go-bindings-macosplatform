@@ -7,6 +7,7 @@ package accessibility
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/accessibility"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -25,17 +26,24 @@ func NewMathExpressionSubSuperscriptWithBaseExpressionSubscriptExpressionsSupers
 	return &MathExpressionSubSuperscript{inner: raw.AXMathExpressionSubSuperscriptFromID(_id)}
 }
 
+// BaseExpression calls the underlying BaseExpression.
+func (x *MathExpressionSubSuperscript) BaseExpression() *MathExpression {
+	_r := x.inner.BaseExpression()
+	if _r == nil {
+		return nil
+	}
+	return &MathExpression{inner: _r}
+}
+
 // SubscriptExpressions returns the collection as a Go slice.
 func (x *MathExpressionSubSuperscript) SubscriptExpressions() []*raw.AXMathExpression {
 	arr := x.inner.SubscriptExpressions()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AXMathExpression, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AXMathExpression {
+		return raw.AXMathExpressionFromID(purego.Retain(_id))
+	})
 }
 
 // SuperscriptExpressions returns the collection as a Go slice.
@@ -44,12 +52,20 @@ func (x *MathExpressionSubSuperscript) SuperscriptExpressions() []*raw.AXMathExp
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AXMathExpression, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AXMathExpression {
+		return raw.AXMathExpressionFromID(purego.Retain(_id))
+	})
 }
 
 func (x *MathExpressionSubSuperscript) asMathExpression() *raw.AXMathExpression { return &x.inner.AXMathExpression }
+
+// MathExpressionSubSuperscriptable is the interface implemented by [MathExpressionSubSuperscript], for mocking and DI.
+type MathExpressionSubSuperscriptable interface {
+	Unwrap() *raw.AXMathExpressionSubSuperscript
+	BaseExpression() *MathExpression
+	SubscriptExpressions() []*raw.AXMathExpression
+	SuperscriptExpressions() []*raw.AXMathExpression
+}
+
+var _ MathExpressionSubSuperscriptable = (*MathExpressionSubSuperscript)(nil)
 

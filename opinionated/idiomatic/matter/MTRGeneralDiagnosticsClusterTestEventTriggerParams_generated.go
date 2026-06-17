@@ -48,3 +48,62 @@ func (x *MTRGeneralDiagnosticsClusterTestEventTriggerParams) WithServerSideProce
 	return x
 }
 
+// EnableKey calls the underlying EnableKey.
+func (x *MTRGeneralDiagnosticsClusterTestEventTriggerParams) EnableKey() *foundation.NSData {
+	return x.inner.EnableKey()
+}
+
+// SetEnableKey calls the underlying SetEnableKey.
+func (x *MTRGeneralDiagnosticsClusterTestEventTriggerParams) SetEnableKey(enableKey *foundation.NSData) {
+	x.inner.SetEnableKey(enableKey)
+}
+
+// EventTrigger calls the underlying EventTrigger.
+func (x *MTRGeneralDiagnosticsClusterTestEventTriggerParams) EventTrigger() *foundation.NSNumber {
+	return x.inner.EventTrigger()
+}
+
+// SetEventTrigger calls the underlying SetEventTrigger.
+func (x *MTRGeneralDiagnosticsClusterTestEventTriggerParams) SetEventTrigger(eventTrigger *foundation.NSNumber) {
+	x.inner.SetEventTrigger(eventTrigger)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRGeneralDiagnosticsClusterTestEventTriggerParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRGeneralDiagnosticsClusterTestEventTriggerParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRGeneralDiagnosticsClusterTestEventTriggerParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRGeneralDiagnosticsClusterTestEventTriggerParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRGeneralDiagnosticsClusterTestEventTriggerParamsable is the interface implemented by [MTRGeneralDiagnosticsClusterTestEventTriggerParams], for mocking and DI.
+type MTRGeneralDiagnosticsClusterTestEventTriggerParamsable interface {
+	Unwrap() *raw.MTRGeneralDiagnosticsClusterTestEventTriggerParams
+	WithEnableKey(enableKey *foundation.NSData) *MTRGeneralDiagnosticsClusterTestEventTriggerParams
+	WithEventTrigger(eventTrigger *foundation.NSNumber) *MTRGeneralDiagnosticsClusterTestEventTriggerParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRGeneralDiagnosticsClusterTestEventTriggerParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRGeneralDiagnosticsClusterTestEventTriggerParams
+	EnableKey() *foundation.NSData
+	SetEnableKey(enableKey *foundation.NSData)
+	EventTrigger() *foundation.NSNumber
+	SetEventTrigger(eventTrigger *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRGeneralDiagnosticsClusterTestEventTriggerParamsable = (*MTRGeneralDiagnosticsClusterTestEventTriggerParams)(nil)
+

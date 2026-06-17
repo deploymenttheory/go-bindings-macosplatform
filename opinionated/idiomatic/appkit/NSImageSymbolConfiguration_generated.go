@@ -23,3 +23,20 @@ func NewImageSymbolConfiguration() *ImageSymbolConfiguration {
 	return &ImageSymbolConfiguration{inner: raw.NSImageSymbolConfigurationFromID(_id)}
 }
 
+// ConfigurationByApplyingConfiguration calls the underlying ConfigurationByApplyingConfiguration.
+func (x *ImageSymbolConfiguration) ConfigurationByApplyingConfiguration(configuration *raw.NSImageSymbolConfiguration) *ImageSymbolConfiguration {
+	_r := x.inner.ConfigurationByApplyingConfiguration(configuration)
+	if _r == nil {
+		return nil
+	}
+	return &ImageSymbolConfiguration{inner: _r}
+}
+
+// ImageSymbolConfigurationable is the interface implemented by [ImageSymbolConfiguration], for mocking and DI.
+type ImageSymbolConfigurationable interface {
+	Unwrap() *raw.NSImageSymbolConfiguration
+	ConfigurationByApplyingConfiguration(configuration *raw.NSImageSymbolConfiguration) *ImageSymbolConfiguration
+}
+
+var _ ImageSymbolConfigurationable = (*ImageSymbolConfiguration)(nil)
+

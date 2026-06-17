@@ -7,6 +7,7 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -42,6 +43,48 @@ func (x *DOMHTMLBaseFontElement) WithSize(size string) *DOMHTMLBaseFontElement {
 	return x
 }
 
+// Color calls the underlying Color.
+func (x *DOMHTMLBaseFontElement) Color() string {
+	_r := x.inner.Color()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetColor calls the underlying SetColor.
+func (x *DOMHTMLBaseFontElement) SetColor(color string) {
+	x.inner.SetColor(foundation.NSStringStringWithUTF8String(color))
+}
+
+// Face calls the underlying Face.
+func (x *DOMHTMLBaseFontElement) Face() string {
+	_r := x.inner.Face()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetFace calls the underlying SetFace.
+func (x *DOMHTMLBaseFontElement) SetFace(face string) {
+	x.inner.SetFace(foundation.NSStringStringWithUTF8String(face))
+}
+
+// Size calls the underlying Size.
+func (x *DOMHTMLBaseFontElement) Size() string {
+	_r := x.inner.Size()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetSize calls the underlying SetSize.
+func (x *DOMHTMLBaseFontElement) SetSize(size string) {
+	x.inner.SetSize(foundation.NSStringStringWithUTF8String(size))
+}
+
 func (x *DOMHTMLBaseFontElement) asDOMHTMLElement() *raw.DOMHTMLElement { return &x.inner.DOMHTMLElement }
 
 func (x *DOMHTMLBaseFontElement) asDOMElement() *raw.DOMElement { return &x.inner.DOMHTMLElement.DOMElement }
@@ -51,4 +94,20 @@ func (x *DOMHTMLBaseFontElement) asDOMNode() *raw.DOMNode { return &x.inner.DOMH
 func (x *DOMHTMLBaseFontElement) asDOMObject() *raw.DOMObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject }
 
 func (x *DOMHTMLBaseFontElement) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject }
+
+// DOMHTMLBaseFontElementable is the interface implemented by [DOMHTMLBaseFontElement], for mocking and DI.
+type DOMHTMLBaseFontElementable interface {
+	Unwrap() *raw.DOMHTMLBaseFontElement
+	WithColor(color string) *DOMHTMLBaseFontElement
+	WithFace(face string) *DOMHTMLBaseFontElement
+	WithSize(size string) *DOMHTMLBaseFontElement
+	Color() string
+	SetColor(color string)
+	Face() string
+	SetFace(face string)
+	Size() string
+	SetSize(size string)
+}
+
+var _ DOMHTMLBaseFontElementable = (*DOMHTMLBaseFontElement)(nil)
 

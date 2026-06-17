@@ -6,6 +6,7 @@ package cryptotokenkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cryptotokenkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,41 @@ func NewTokenWatcherTokenInfo() *TokenWatcherTokenInfo {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("TKTokenWatcherTokenInfo")), objc.RegisterName("new"))
 	return &TokenWatcherTokenInfo{inner: raw.TKTokenWatcherTokenInfoFromID(_id)}
 }
+
+// TokenID calls the underlying TokenID.
+func (x *TokenWatcherTokenInfo) TokenID() string {
+	_r := x.inner.TokenID()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SlotName calls the underlying SlotName.
+func (x *TokenWatcherTokenInfo) SlotName() string {
+	_r := x.inner.SlotName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// DriverName calls the underlying DriverName.
+func (x *TokenWatcherTokenInfo) DriverName() string {
+	_r := x.inner.DriverName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// TokenWatcherTokenInfoable is the interface implemented by [TokenWatcherTokenInfo], for mocking and DI.
+type TokenWatcherTokenInfoable interface {
+	Unwrap() *raw.TKTokenWatcherTokenInfo
+	TokenID() string
+	SlotName() string
+	DriverName() string
+}
+
+var _ TokenWatcherTokenInfoable = (*TokenWatcherTokenInfo)(nil)
 

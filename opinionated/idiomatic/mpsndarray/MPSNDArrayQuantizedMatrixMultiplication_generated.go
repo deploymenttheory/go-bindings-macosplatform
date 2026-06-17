@@ -31,3 +31,10 @@ func (x *ArrayQuantizedMatrixMultiplication) asArrayMultiaryKernel() *raw.MPSNDA
 
 func (x *ArrayQuantizedMatrixMultiplication) asArrayMultiaryBase() *raw.MPSNDArrayMultiaryBase { return &x.inner.MPSNDArrayMatrixMultiplication.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase }
 
+// ArrayQuantizedMatrixMultiplicationable is the interface implemented by [ArrayQuantizedMatrixMultiplication], for mocking and DI.
+type ArrayQuantizedMatrixMultiplicationable interface {
+	Unwrap() *raw.MPSNDArrayQuantizedMatrixMultiplication
+}
+
+var _ ArrayQuantizedMatrixMultiplicationable = (*ArrayQuantizedMatrixMultiplication)(nil)
+

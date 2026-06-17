@@ -6,6 +6,7 @@ package foundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -58,18 +59,78 @@ func (x *ExtensionItem) WithUserInfo(userInfo *raw.NSDictionary[objc.ID, objc.ID
 	return x
 }
 
+// AttributedTitle calls the underlying AttributedTitle.
+func (x *ExtensionItem) AttributedTitle() *AttributedString {
+	_r := x.inner.AttributedTitle()
+	if _r == nil {
+		return nil
+	}
+	return &AttributedString{inner: _r}
+}
+
+// SetAttributedTitle calls the underlying SetAttributedTitle.
+func (x *ExtensionItem) SetAttributedTitle(attributedTitle *raw.NSAttributedString) {
+	x.inner.SetAttributedTitle(attributedTitle)
+}
+
+// AttributedContentText calls the underlying AttributedContentText.
+func (x *ExtensionItem) AttributedContentText() *AttributedString {
+	_r := x.inner.AttributedContentText()
+	if _r == nil {
+		return nil
+	}
+	return &AttributedString{inner: _r}
+}
+
+// SetAttributedContentText calls the underlying SetAttributedContentText.
+func (x *ExtensionItem) SetAttributedContentText(attributedContentText *raw.NSAttributedString) {
+	x.inner.SetAttributedContentText(attributedContentText)
+}
+
 // Attachments returns the collection as a Go slice.
 func (x *ExtensionItem) Attachments() []*raw.NSItemProvider {
 	arr := x.inner.Attachments()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSItemProvider, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSItemProvider {
+		return raw.NSItemProviderFromID(purego.Retain(_id))
+	})
+}
+
+// SetAttachments calls the underlying SetAttachments.
+func (x *ExtensionItem) SetAttachments(attachments *raw.NSArray[*raw.NSItemProvider]) {
+	x.inner.SetAttachments(attachments)
+}
+
+// UserInfo calls the underlying UserInfo.
+func (x *ExtensionItem) UserInfo() *raw.NSDictionary[objc.ID, objc.ID] {
+	return x.inner.UserInfo()
+}
+
+// SetUserInfo calls the underlying SetUserInfo.
+func (x *ExtensionItem) SetUserInfo(userInfo *raw.NSDictionary[objc.ID, objc.ID]) {
+	x.inner.SetUserInfo(userInfo)
 }
 
 func (x *ExtensionItem) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// ExtensionItemable is the interface implemented by [ExtensionItem], for mocking and DI.
+type ExtensionItemable interface {
+	Unwrap() *raw.NSExtensionItem
+	WithAttributedTitle(attributedTitle AttributedStringProvider) *ExtensionItem
+	WithAttributedContentText(attributedContentText AttributedStringProvider) *ExtensionItem
+	WithAttachments(items ...*raw.NSItemProvider) *ExtensionItem
+	WithUserInfo(userInfo *raw.NSDictionary[objc.ID, objc.ID]) *ExtensionItem
+	AttributedTitle() *AttributedString
+	SetAttributedTitle(attributedTitle *raw.NSAttributedString)
+	AttributedContentText() *AttributedString
+	SetAttributedContentText(attributedContentText *raw.NSAttributedString)
+	Attachments() []*raw.NSItemProvider
+	SetAttachments(attachments *raw.NSArray[*raw.NSItemProvider])
+	UserInfo() *raw.NSDictionary[objc.ID, objc.ID]
+	SetUserInfo(userInfo *raw.NSDictionary[objc.ID, objc.ID])
+}
+
+var _ ExtensionItemable = (*ExtensionItem)(nil)
 

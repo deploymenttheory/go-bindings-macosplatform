@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -39,10 +40,16 @@ func (x *Shape) Elements() []*raw.PHASEShapeElement {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.PHASEShapeElement, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PHASEShapeElement {
+		return raw.PHASEShapeElementFromID(purego.Retain(_id))
+	})
 }
+
+// Shapeable is the interface implemented by [Shape], for mocking and DI.
+type Shapeable interface {
+	Unwrap() *raw.PHASEShape
+	Elements() []*raw.PHASEShapeElement
+}
+
+var _ Shapeable = (*Shape)(nil)
 

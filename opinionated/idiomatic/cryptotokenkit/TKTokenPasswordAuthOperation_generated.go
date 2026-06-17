@@ -7,6 +7,7 @@ package cryptotokenkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cryptotokenkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -30,5 +31,29 @@ func (x *TokenPasswordAuthOperation) WithPassword(password string) *TokenPasswor
 	return x
 }
 
+// Password calls the underlying Password.
+func (x *TokenPasswordAuthOperation) Password() string {
+	_r := x.inner.Password()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetPassword calls the underlying SetPassword.
+func (x *TokenPasswordAuthOperation) SetPassword(password string) {
+	x.inner.SetPassword(foundation.NSStringStringWithUTF8String(password))
+}
+
 func (x *TokenPasswordAuthOperation) asTokenAuthOperation() *raw.TKTokenAuthOperation { return &x.inner.TKTokenAuthOperation }
+
+// TokenPasswordAuthOperationable is the interface implemented by [TokenPasswordAuthOperation], for mocking and DI.
+type TokenPasswordAuthOperationable interface {
+	Unwrap() *raw.TKTokenPasswordAuthOperation
+	WithPassword(password string) *TokenPasswordAuthOperation
+	Password() string
+	SetPassword(password string)
+}
+
+var _ TokenPasswordAuthOperationable = (*TokenPasswordAuthOperation)(nil)
 

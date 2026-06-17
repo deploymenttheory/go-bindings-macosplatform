@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -42,5 +43,55 @@ func (x *MTRTimeSynchronizationClusterTimeZoneStruct) WithName(name string) *MTR
 	return x
 }
 
+// Offset calls the underlying Offset.
+func (x *MTRTimeSynchronizationClusterTimeZoneStruct) Offset() *foundation.NSNumber {
+	return x.inner.Offset()
+}
+
+// SetOffset calls the underlying SetOffset.
+func (x *MTRTimeSynchronizationClusterTimeZoneStruct) SetOffset(offset *foundation.NSNumber) {
+	x.inner.SetOffset(offset)
+}
+
+// ValidAt calls the underlying ValidAt.
+func (x *MTRTimeSynchronizationClusterTimeZoneStruct) ValidAt() *foundation.NSNumber {
+	return x.inner.ValidAt()
+}
+
+// SetValidAt calls the underlying SetValidAt.
+func (x *MTRTimeSynchronizationClusterTimeZoneStruct) SetValidAt(validAt *foundation.NSNumber) {
+	x.inner.SetValidAt(validAt)
+}
+
+// Name calls the underlying Name.
+func (x *MTRTimeSynchronizationClusterTimeZoneStruct) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetName calls the underlying SetName.
+func (x *MTRTimeSynchronizationClusterTimeZoneStruct) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
 func (x *MTRTimeSynchronizationClusterTimeZoneStruct) asMTRTimeSynchronizationClusterTimeZoneStruct() *raw.MTRTimeSynchronizationClusterTimeZoneStruct { return x.inner }
+
+// MTRTimeSynchronizationClusterTimeZoneStructable is the interface implemented by [MTRTimeSynchronizationClusterTimeZoneStruct], for mocking and DI.
+type MTRTimeSynchronizationClusterTimeZoneStructable interface {
+	Unwrap() *raw.MTRTimeSynchronizationClusterTimeZoneStruct
+	WithOffset(offset *foundation.NSNumber) *MTRTimeSynchronizationClusterTimeZoneStruct
+	WithValidAt(validAt *foundation.NSNumber) *MTRTimeSynchronizationClusterTimeZoneStruct
+	WithName(name string) *MTRTimeSynchronizationClusterTimeZoneStruct
+	Offset() *foundation.NSNumber
+	SetOffset(offset *foundation.NSNumber)
+	ValidAt() *foundation.NSNumber
+	SetValidAt(validAt *foundation.NSNumber)
+	Name() string
+	SetName(name string)
+}
+
+var _ MTRTimeSynchronizationClusterTimeZoneStructable = (*MTRTimeSynchronizationClusterTimeZoneStruct)(nil)
 

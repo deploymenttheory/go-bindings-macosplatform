@@ -54,3 +54,75 @@ func (x *TextureViewDescriptor) WithSwizzle(swizzle raw.MTLTextureSwizzleChannel
 	return x
 }
 
+// PixelFormat calls the underlying PixelFormat.
+func (x *TextureViewDescriptor) PixelFormat() raw.MTLPixelFormat {
+	return x.inner.PixelFormat()
+}
+
+// SetPixelFormat calls the underlying SetPixelFormat.
+func (x *TextureViewDescriptor) SetPixelFormat(pixelFormat raw.MTLPixelFormat) {
+	x.inner.SetPixelFormat(pixelFormat)
+}
+
+// TextureType calls the underlying TextureType.
+func (x *TextureViewDescriptor) TextureType() raw.MTLTextureType {
+	return x.inner.TextureType()
+}
+
+// SetTextureType calls the underlying SetTextureType.
+func (x *TextureViewDescriptor) SetTextureType(textureType raw.MTLTextureType) {
+	x.inner.SetTextureType(textureType)
+}
+
+// LevelRange calls the underlying LevelRange.
+func (x *TextureViewDescriptor) LevelRange() foundation.NSRange {
+	return x.inner.LevelRange()
+}
+
+// SetLevelRange calls the underlying SetLevelRange.
+func (x *TextureViewDescriptor) SetLevelRange(levelRange foundation.NSRange) {
+	x.inner.SetLevelRange(levelRange)
+}
+
+// SliceRange calls the underlying SliceRange.
+func (x *TextureViewDescriptor) SliceRange() foundation.NSRange {
+	return x.inner.SliceRange()
+}
+
+// SetSliceRange calls the underlying SetSliceRange.
+func (x *TextureViewDescriptor) SetSliceRange(sliceRange foundation.NSRange) {
+	x.inner.SetSliceRange(sliceRange)
+}
+
+// Swizzle calls the underlying Swizzle.
+func (x *TextureViewDescriptor) Swizzle() raw.MTLTextureSwizzleChannels {
+	return x.inner.Swizzle()
+}
+
+// SetSwizzle calls the underlying SetSwizzle.
+func (x *TextureViewDescriptor) SetSwizzle(swizzle raw.MTLTextureSwizzleChannels) {
+	x.inner.SetSwizzle(swizzle)
+}
+
+// TextureViewDescriptorable is the interface implemented by [TextureViewDescriptor], for mocking and DI.
+type TextureViewDescriptorable interface {
+	Unwrap() *raw.MTLTextureViewDescriptor
+	WithPixelFormat(pixelFormat raw.MTLPixelFormat) *TextureViewDescriptor
+	WithTextureType(textureType raw.MTLTextureType) *TextureViewDescriptor
+	WithLevelRange(levelRange foundation.NSRange) *TextureViewDescriptor
+	WithSliceRange(sliceRange foundation.NSRange) *TextureViewDescriptor
+	WithSwizzle(swizzle raw.MTLTextureSwizzleChannels) *TextureViewDescriptor
+	PixelFormat() raw.MTLPixelFormat
+	SetPixelFormat(pixelFormat raw.MTLPixelFormat)
+	TextureType() raw.MTLTextureType
+	SetTextureType(textureType raw.MTLTextureType)
+	LevelRange() foundation.NSRange
+	SetLevelRange(levelRange foundation.NSRange)
+	SliceRange() foundation.NSRange
+	SetSliceRange(sliceRange foundation.NSRange)
+	Swizzle() raw.MTLTextureSwizzleChannels
+	SetSwizzle(swizzle raw.MTLTextureSwizzleChannels)
+}
+
+var _ TextureViewDescriptorable = (*TextureViewDescriptor)(nil)
+

@@ -7,6 +7,7 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -50,4 +51,92 @@ func (x *MatrixNeuronGradient) WithAlpha(alpha float64) *MatrixNeuronGradient {
 	x.inner.SetAlpha(alpha)
 	return x
 }
+
+// SetNeuronTypeParameterAParameterBParameterC calls the underlying SetNeuronTypeParameterAParameterBParameterC.
+func (x *MatrixNeuronGradient) SetNeuronTypeParameterAParameterBParameterC(neuronType raw.MPSCNNNeuronType, parameterA float32, parameterB float32, parameterC float32) {
+	x.inner.SetNeuronTypeParameterAParameterBParameterC(neuronType, parameterA, parameterB, parameterC)
+}
+
+// NeuronType calls the underlying NeuronType.
+func (x *MatrixNeuronGradient) NeuronType() raw.MPSCNNNeuronType {
+	return x.inner.NeuronType()
+}
+
+// NeuronParameterA calls the underlying NeuronParameterA.
+func (x *MatrixNeuronGradient) NeuronParameterA() float32 {
+	return x.inner.NeuronParameterA()
+}
+
+// NeuronParameterB calls the underlying NeuronParameterB.
+func (x *MatrixNeuronGradient) NeuronParameterB() float32 {
+	return x.inner.NeuronParameterB()
+}
+
+// NeuronParameterC calls the underlying NeuronParameterC.
+func (x *MatrixNeuronGradient) NeuronParameterC() float32 {
+	return x.inner.NeuronParameterC()
+}
+
+// SetNeuronToPReLUWithParametersA calls the underlying SetNeuronToPReLUWithParametersA.
+func (x *MatrixNeuronGradient) SetNeuronToPReLUWithParametersA(a *foundation.NSData) {
+	x.inner.SetNeuronToPReLUWithParametersA(a)
+}
+
+// EncodeToCommandBufferGradientMatrixInputMatrixBiasVectorResultGradientForDataMatrixResultGradientForBiasVector calls the underlying EncodeToCommandBufferGradientMatrixInputMatrixBiasVectorResultGradientForDataMatrixResultGradientForBiasVector.
+func (x *MatrixNeuronGradient) EncodeToCommandBufferGradientMatrixInputMatrixBiasVectorResultGradientForDataMatrixResultGradientForBiasVector(commandBuffer metal.MTLCommandBuffer, gradientMatrix *mpscore.MPSMatrix, inputMatrix *mpscore.MPSMatrix, biasVector *mpscore.MPSVector, resultGradientForDataMatrix *mpscore.MPSMatrix, resultGradientForBiasVector *mpscore.MPSVector) {
+	x.inner.EncodeToCommandBufferGradientMatrixInputMatrixBiasVectorResultGradientForDataMatrixResultGradientForBiasVector(commandBuffer, gradientMatrix, inputMatrix, biasVector, resultGradientForDataMatrix, resultGradientForBiasVector)
+}
+
+// SourceNumberOfFeatureVectors calls the underlying SourceNumberOfFeatureVectors.
+func (x *MatrixNeuronGradient) SourceNumberOfFeatureVectors() uint {
+	return x.inner.SourceNumberOfFeatureVectors()
+}
+
+// SetSourceNumberOfFeatureVectors calls the underlying SetSourceNumberOfFeatureVectors.
+func (x *MatrixNeuronGradient) SetSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors uint) {
+	x.inner.SetSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors)
+}
+
+// SourceInputFeatureChannels calls the underlying SourceInputFeatureChannels.
+func (x *MatrixNeuronGradient) SourceInputFeatureChannels() uint {
+	return x.inner.SourceInputFeatureChannels()
+}
+
+// SetSourceInputFeatureChannels calls the underlying SetSourceInputFeatureChannels.
+func (x *MatrixNeuronGradient) SetSourceInputFeatureChannels(sourceInputFeatureChannels uint) {
+	x.inner.SetSourceInputFeatureChannels(sourceInputFeatureChannels)
+}
+
+// Alpha calls the underlying Alpha.
+func (x *MatrixNeuronGradient) Alpha() float64 {
+	return x.inner.Alpha()
+}
+
+// SetAlpha calls the underlying SetAlpha.
+func (x *MatrixNeuronGradient) SetAlpha(alpha float64) {
+	x.inner.SetAlpha(alpha)
+}
+
+// MatrixNeuronGradientable is the interface implemented by [MatrixNeuronGradient], for mocking and DI.
+type MatrixNeuronGradientable interface {
+	Unwrap() *raw.MPSMatrixNeuronGradient
+	WithSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors uint) *MatrixNeuronGradient
+	WithSourceInputFeatureChannels(sourceInputFeatureChannels uint) *MatrixNeuronGradient
+	WithAlpha(alpha float64) *MatrixNeuronGradient
+	SetNeuronTypeParameterAParameterBParameterC(neuronType raw.MPSCNNNeuronType, parameterA float32, parameterB float32, parameterC float32)
+	NeuronType() raw.MPSCNNNeuronType
+	NeuronParameterA() float32
+	NeuronParameterB() float32
+	NeuronParameterC() float32
+	SetNeuronToPReLUWithParametersA(a *foundation.NSData)
+	EncodeToCommandBufferGradientMatrixInputMatrixBiasVectorResultGradientForDataMatrixResultGradientForBiasVector(commandBuffer metal.MTLCommandBuffer, gradientMatrix *mpscore.MPSMatrix, inputMatrix *mpscore.MPSMatrix, biasVector *mpscore.MPSVector, resultGradientForDataMatrix *mpscore.MPSMatrix, resultGradientForBiasVector *mpscore.MPSVector)
+	SourceNumberOfFeatureVectors() uint
+	SetSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors uint)
+	SourceInputFeatureChannels() uint
+	SetSourceInputFeatureChannels(sourceInputFeatureChannels uint)
+	Alpha() float64
+	SetAlpha(alpha float64)
+}
+
+var _ MatrixNeuronGradientable = (*MatrixNeuronGradient)(nil)
 

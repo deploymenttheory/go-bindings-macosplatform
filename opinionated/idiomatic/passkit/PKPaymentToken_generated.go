@@ -5,7 +5,9 @@
 package passkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +24,57 @@ func NewPaymentToken() *PaymentToken {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PKPaymentToken")), objc.RegisterName("new"))
 	return &PaymentToken{inner: raw.PKPaymentTokenFromID(_id)}
 }
+
+// PaymentMethod calls the underlying PaymentMethod.
+func (x *PaymentToken) PaymentMethod() *PaymentMethod {
+	_r := x.inner.PaymentMethod()
+	if _r == nil {
+		return nil
+	}
+	return &PaymentMethod{inner: _r}
+}
+
+// PaymentInstrumentName calls the underlying PaymentInstrumentName.
+func (x *PaymentToken) PaymentInstrumentName() string {
+	_r := x.inner.PaymentInstrumentName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// PaymentNetwork calls the underlying PaymentNetwork.
+func (x *PaymentToken) PaymentNetwork() string {
+	_r := x.inner.PaymentNetwork()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// TransactionIdentifier calls the underlying TransactionIdentifier.
+func (x *PaymentToken) TransactionIdentifier() string {
+	_r := x.inner.TransactionIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// PaymentData calls the underlying PaymentData.
+func (x *PaymentToken) PaymentData() *foundation.NSData {
+	return x.inner.PaymentData()
+}
+
+// PaymentTokenable is the interface implemented by [PaymentToken], for mocking and DI.
+type PaymentTokenable interface {
+	Unwrap() *raw.PKPaymentToken
+	PaymentMethod() *PaymentMethod
+	PaymentInstrumentName() string
+	PaymentNetwork() string
+	TransactionIdentifier() string
+	PaymentData() *foundation.NSData
+}
+
+var _ PaymentTokenable = (*PaymentToken)(nil)
 

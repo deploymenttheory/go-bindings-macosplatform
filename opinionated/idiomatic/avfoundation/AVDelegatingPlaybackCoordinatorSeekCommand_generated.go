@@ -6,6 +6,8 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +25,36 @@ func NewDelegatingPlaybackCoordinatorSeekCommand() *DelegatingPlaybackCoordinato
 	return &DelegatingPlaybackCoordinatorSeekCommand{inner: raw.AVDelegatingPlaybackCoordinatorSeekCommandFromID(_id)}
 }
 
+// ItemTime calls the underlying ItemTime.
+func (x *DelegatingPlaybackCoordinatorSeekCommand) ItemTime() coremedia.CMTime {
+	return x.inner.ItemTime()
+}
+
+// ShouldBufferInAnticipationOfPlayback calls the underlying ShouldBufferInAnticipationOfPlayback.
+func (x *DelegatingPlaybackCoordinatorSeekCommand) ShouldBufferInAnticipationOfPlayback() bool {
+	return x.inner.ShouldBufferInAnticipationOfPlayback()
+}
+
+// AnticipatedPlaybackRate calls the underlying AnticipatedPlaybackRate.
+func (x *DelegatingPlaybackCoordinatorSeekCommand) AnticipatedPlaybackRate() float32 {
+	return x.inner.AnticipatedPlaybackRate()
+}
+
+// CompletionDueDate calls the underlying CompletionDueDate.
+func (x *DelegatingPlaybackCoordinatorSeekCommand) CompletionDueDate() *foundation.NSDate {
+	return x.inner.CompletionDueDate()
+}
+
 func (x *DelegatingPlaybackCoordinatorSeekCommand) asDelegatingPlaybackCoordinatorPlaybackControlCommand() *raw.AVDelegatingPlaybackCoordinatorPlaybackControlCommand { return &x.inner.AVDelegatingPlaybackCoordinatorPlaybackControlCommand }
+
+// DelegatingPlaybackCoordinatorSeekCommandable is the interface implemented by [DelegatingPlaybackCoordinatorSeekCommand], for mocking and DI.
+type DelegatingPlaybackCoordinatorSeekCommandable interface {
+	Unwrap() *raw.AVDelegatingPlaybackCoordinatorSeekCommand
+	ItemTime() coremedia.CMTime
+	ShouldBufferInAnticipationOfPlayback() bool
+	AnticipatedPlaybackRate() float32
+	CompletionDueDate() *foundation.NSDate
+}
+
+var _ DelegatingPlaybackCoordinatorSeekCommandable = (*DelegatingPlaybackCoordinatorSeekCommand)(nil)
 

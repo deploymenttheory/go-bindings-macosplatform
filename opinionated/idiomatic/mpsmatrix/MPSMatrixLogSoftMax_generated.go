@@ -27,3 +27,10 @@ func (x *MatrixLogSoftMax) asMatrixSoftMax() *raw.MPSMatrixSoftMax { return &x.i
 
 func (x *MatrixLogSoftMax) asMatrixUnaryKernel() *raw.MPSMatrixUnaryKernel { return &x.inner.MPSMatrixSoftMax.MPSMatrixUnaryKernel }
 
+// MatrixLogSoftMaxable is the interface implemented by [MatrixLogSoftMax], for mocking and DI.
+type MatrixLogSoftMaxable interface {
+	Unwrap() *raw.MPSMatrixLogSoftMax
+}
+
+var _ MatrixLogSoftMaxable = (*MatrixLogSoftMax)(nil)
+

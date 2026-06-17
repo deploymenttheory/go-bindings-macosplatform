@@ -24,3 +24,16 @@ func NewHighlightPersistenceEventWithHighlightTrigger(highlight *raw.SWHighlight
 	return &HighlightPersistenceEvent{inner: raw.SWHighlightPersistenceEventFromID(_id)}
 }
 
+// PersistenceEventTrigger calls the underlying PersistenceEventTrigger.
+func (x *HighlightPersistenceEvent) PersistenceEventTrigger() raw.SWHighlightPersistenceEventTrigger {
+	return x.inner.PersistenceEventTrigger()
+}
+
+// HighlightPersistenceEventable is the interface implemented by [HighlightPersistenceEvent], for mocking and DI.
+type HighlightPersistenceEventable interface {
+	Unwrap() *raw.SWHighlightPersistenceEvent
+	PersistenceEventTrigger() raw.SWHighlightPersistenceEventTrigger
+}
+
+var _ HighlightPersistenceEventable = (*HighlightPersistenceEvent)(nil)
+

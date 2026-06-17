@@ -53,7 +53,79 @@ func (x *StepperCell) WithAutorepeat(autorepeat bool) *StepperCell {
 	return x
 }
 
+// MinValue calls the underlying MinValue.
+func (x *StepperCell) MinValue() float64 {
+	return x.inner.MinValue()
+}
+
+// SetMinValue calls the underlying SetMinValue.
+func (x *StepperCell) SetMinValue(minValue float64) {
+	x.inner.SetMinValue(minValue)
+}
+
+// MaxValue calls the underlying MaxValue.
+func (x *StepperCell) MaxValue() float64 {
+	return x.inner.MaxValue()
+}
+
+// SetMaxValue calls the underlying SetMaxValue.
+func (x *StepperCell) SetMaxValue(maxValue float64) {
+	x.inner.SetMaxValue(maxValue)
+}
+
+// Increment calls the underlying Increment.
+func (x *StepperCell) Increment() float64 {
+	return x.inner.Increment()
+}
+
+// SetIncrement calls the underlying SetIncrement.
+func (x *StepperCell) SetIncrement(increment float64) {
+	x.inner.SetIncrement(increment)
+}
+
+// ValueWraps calls the underlying ValueWraps.
+func (x *StepperCell) ValueWraps() bool {
+	return x.inner.ValueWraps()
+}
+
+// SetValueWraps calls the underlying SetValueWraps.
+func (x *StepperCell) SetValueWraps(valueWraps bool) {
+	x.inner.SetValueWraps(valueWraps)
+}
+
+// Autorepeat calls the underlying Autorepeat.
+func (x *StepperCell) Autorepeat() bool {
+	return x.inner.Autorepeat()
+}
+
+// SetAutorepeat calls the underlying SetAutorepeat.
+func (x *StepperCell) SetAutorepeat(autorepeat bool) {
+	x.inner.SetAutorepeat(autorepeat)
+}
+
 func (x *StepperCell) asActionCell() *raw.NSActionCell { return &x.inner.NSActionCell }
 
 func (x *StepperCell) asCell() *raw.NSCell { return &x.inner.NSActionCell.NSCell }
+
+// StepperCellable is the interface implemented by [StepperCell], for mocking and DI.
+type StepperCellable interface {
+	Unwrap() *raw.NSStepperCell
+	WithMinValue(minValue float64) *StepperCell
+	WithMaxValue(maxValue float64) *StepperCell
+	WithIncrement(increment float64) *StepperCell
+	WithValueWraps(valueWraps bool) *StepperCell
+	WithAutorepeat(autorepeat bool) *StepperCell
+	MinValue() float64
+	SetMinValue(minValue float64)
+	MaxValue() float64
+	SetMaxValue(maxValue float64)
+	Increment() float64
+	SetIncrement(increment float64)
+	ValueWraps() bool
+	SetValueWraps(valueWraps bool)
+	Autorepeat() bool
+	SetAutorepeat(autorepeat bool)
+}
+
+var _ StepperCellable = (*StepperCell)(nil)
 

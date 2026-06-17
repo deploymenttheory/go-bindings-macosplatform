@@ -6,6 +6,7 @@ package authenticationservices
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,29 @@ func NewAuthorizationPublicKeyCredentialPRFRegistrationOutput() *AuthorizationPu
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ASAuthorizationPublicKeyCredentialPRFRegistrationOutput")), objc.RegisterName("new"))
 	return &AuthorizationPublicKeyCredentialPRFRegistrationOutput{inner: raw.ASAuthorizationPublicKeyCredentialPRFRegistrationOutputFromID(_id)}
 }
+
+// IsSupported calls the underlying IsSupported.
+func (x *AuthorizationPublicKeyCredentialPRFRegistrationOutput) IsSupported() bool {
+	return x.inner.IsSupported()
+}
+
+// First calls the underlying First.
+func (x *AuthorizationPublicKeyCredentialPRFRegistrationOutput) First() *foundation.NSData {
+	return x.inner.First()
+}
+
+// Second calls the underlying Second.
+func (x *AuthorizationPublicKeyCredentialPRFRegistrationOutput) Second() *foundation.NSData {
+	return x.inner.Second()
+}
+
+// AuthorizationPublicKeyCredentialPRFRegistrationOutputable is the interface implemented by [AuthorizationPublicKeyCredentialPRFRegistrationOutput], for mocking and DI.
+type AuthorizationPublicKeyCredentialPRFRegistrationOutputable interface {
+	Unwrap() *raw.ASAuthorizationPublicKeyCredentialPRFRegistrationOutput
+	IsSupported() bool
+	First() *foundation.NSData
+	Second() *foundation.NSData
+}
+
+var _ AuthorizationPublicKeyCredentialPRFRegistrationOutputable = (*AuthorizationPublicKeyCredentialPRFRegistrationOutput)(nil)
 

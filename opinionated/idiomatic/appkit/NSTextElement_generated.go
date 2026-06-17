@@ -6,6 +6,7 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -36,18 +37,74 @@ func (x *TextElement) WithElementRange(elementRange *raw.NSTextRange) *TextEleme
 	return x
 }
 
+// TextContentManager calls the underlying TextContentManager.
+func (x *TextElement) TextContentManager() *TextContentManager {
+	_r := x.inner.TextContentManager()
+	if _r == nil {
+		return nil
+	}
+	return &TextContentManager{inner: _r}
+}
+
+// SetTextContentManager calls the underlying SetTextContentManager.
+func (x *TextElement) SetTextContentManager(textContentManager *raw.NSTextContentManager) {
+	x.inner.SetTextContentManager(textContentManager)
+}
+
+// ElementRange calls the underlying ElementRange.
+func (x *TextElement) ElementRange() *TextRange {
+	_r := x.inner.ElementRange()
+	if _r == nil {
+		return nil
+	}
+	return &TextRange{inner: _r}
+}
+
+// SetElementRange calls the underlying SetElementRange.
+func (x *TextElement) SetElementRange(elementRange *raw.NSTextRange) {
+	x.inner.SetElementRange(elementRange)
+}
+
 // ChildElements returns the collection as a Go slice.
 func (x *TextElement) ChildElements() []*raw.NSTextElement {
 	arr := x.inner.ChildElements()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSTextElement, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSTextElement {
+		return raw.NSTextElementFromID(purego.Retain(_id))
+	})
+}
+
+// ParentElement calls the underlying ParentElement.
+func (x *TextElement) ParentElement() *TextElement {
+	_r := x.inner.ParentElement()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &TextElement{inner: _r}
+}
+
+// IsRepresentedElement calls the underlying IsRepresentedElement.
+func (x *TextElement) IsRepresentedElement() bool {
+	return x.inner.IsRepresentedElement()
 }
 
 func (x *TextElement) asTextElement() *raw.NSTextElement { return x.inner }
+
+// TextElementable is the interface implemented by [TextElement], for mocking and DI.
+type TextElementable interface {
+	Unwrap() *raw.NSTextElement
+	WithTextContentManager(textContentManager TextContentManagerProvider) *TextElement
+	WithElementRange(elementRange *raw.NSTextRange) *TextElement
+	TextContentManager() *TextContentManager
+	SetTextContentManager(textContentManager *raw.NSTextContentManager)
+	ElementRange() *TextRange
+	SetElementRange(elementRange *raw.NSTextRange)
+	ChildElements() []*raw.NSTextElement
+	ParentElement() *TextElement
+	IsRepresentedElement() bool
+}
+
+var _ TextElementable = (*TextElement)(nil)
 

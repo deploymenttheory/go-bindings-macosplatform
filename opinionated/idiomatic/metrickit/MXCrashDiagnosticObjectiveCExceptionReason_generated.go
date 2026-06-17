@@ -7,6 +7,7 @@ package metrickit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metrickit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,16 +25,74 @@ func NewCrashDiagnosticObjectiveCExceptionReason() *CrashDiagnosticObjectiveCExc
 	return &CrashDiagnosticObjectiveCExceptionReason{inner: raw.MXCrashDiagnosticObjectiveCExceptionReasonFromID(_id)}
 }
 
+// JSONRepresentation calls the underlying JSONRepresentation.
+func (x *CrashDiagnosticObjectiveCExceptionReason) JSONRepresentation() *foundation.NSData {
+	return x.inner.JSONRepresentation()
+}
+
+// DictionaryRepresentation calls the underlying DictionaryRepresentation.
+func (x *CrashDiagnosticObjectiveCExceptionReason) DictionaryRepresentation() *foundation.NSDictionary[objc.ID, objc.ID] {
+	return x.inner.DictionaryRepresentation()
+}
+
+// ComposedMessage calls the underlying ComposedMessage.
+func (x *CrashDiagnosticObjectiveCExceptionReason) ComposedMessage() string {
+	_r := x.inner.ComposedMessage()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// FormatString calls the underlying FormatString.
+func (x *CrashDiagnosticObjectiveCExceptionReason) FormatString() string {
+	_r := x.inner.FormatString()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 // Arguments returns the collection as a Go slice.
-func (x *CrashDiagnosticObjectiveCExceptionReason) Arguments() []*foundation.NSString {
+func (x *CrashDiagnosticObjectiveCExceptionReason) Arguments() []string {
 	arr := x.inner.Arguments()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
+
+// ExceptionType calls the underlying ExceptionType.
+func (x *CrashDiagnosticObjectiveCExceptionReason) ExceptionType() string {
+	_r := x.inner.ExceptionType()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ExceptionName calls the underlying ExceptionName.
+func (x *CrashDiagnosticObjectiveCExceptionReason) ExceptionName() string {
+	_r := x.inner.ExceptionName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// CrashDiagnosticObjectiveCExceptionReasonable is the interface implemented by [CrashDiagnosticObjectiveCExceptionReason], for mocking and DI.
+type CrashDiagnosticObjectiveCExceptionReasonable interface {
+	Unwrap() *raw.MXCrashDiagnosticObjectiveCExceptionReason
+	JSONRepresentation() *foundation.NSData
+	DictionaryRepresentation() *foundation.NSDictionary[objc.ID, objc.ID]
+	ComposedMessage() string
+	FormatString() string
+	Arguments() []string
+	ExceptionType() string
+	ExceptionName() string
+}
+
+var _ CrashDiagnosticObjectiveCExceptionReasonable = (*CrashDiagnosticObjectiveCExceptionReason)(nil)
 

@@ -7,6 +7,7 @@ package avfaudio
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -43,29 +44,93 @@ func (x *SpeechSynthesisProviderVoice) WithAge(age int) *SpeechSynthesisProvider
 	return x
 }
 
+// Name calls the underlying Name.
+func (x *SpeechSynthesisProviderVoice) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Identifier calls the underlying Identifier.
+func (x *SpeechSynthesisProviderVoice) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 // PrimaryLanguages returns the collection as a Go slice.
-func (x *SpeechSynthesisProviderVoice) PrimaryLanguages() []*foundation.NSString {
+func (x *SpeechSynthesisProviderVoice) PrimaryLanguages() []string {
 	arr := x.inner.PrimaryLanguages()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
 
 // SupportedLanguages returns the collection as a Go slice.
-func (x *SpeechSynthesisProviderVoice) SupportedLanguages() []*foundation.NSString {
+func (x *SpeechSynthesisProviderVoice) SupportedLanguages() []string {
 	arr := x.inner.SupportedLanguages()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
+
+// VoiceSize calls the underlying VoiceSize.
+func (x *SpeechSynthesisProviderVoice) VoiceSize() int64 {
+	return x.inner.VoiceSize()
+}
+
+// SetVoiceSize calls the underlying SetVoiceSize.
+func (x *SpeechSynthesisProviderVoice) SetVoiceSize(voiceSize int64) {
+	x.inner.SetVoiceSize(voiceSize)
+}
+
+// Gender calls the underlying Gender.
+func (x *SpeechSynthesisProviderVoice) Gender() raw.AVSpeechSynthesisVoiceGender {
+	return x.inner.Gender()
+}
+
+// SetGender calls the underlying SetGender.
+func (x *SpeechSynthesisProviderVoice) SetGender(gender raw.AVSpeechSynthesisVoiceGender) {
+	x.inner.SetGender(gender)
+}
+
+// Age calls the underlying Age.
+func (x *SpeechSynthesisProviderVoice) Age() int {
+	return x.inner.Age()
+}
+
+// SetAge calls the underlying SetAge.
+func (x *SpeechSynthesisProviderVoice) SetAge(age int) {
+	x.inner.SetAge(age)
+}
+
+// SpeechSynthesisProviderVoiceable is the interface implemented by [SpeechSynthesisProviderVoice], for mocking and DI.
+type SpeechSynthesisProviderVoiceable interface {
+	Unwrap() *raw.AVSpeechSynthesisProviderVoice
+	WithVoiceSize(voiceSize int64) *SpeechSynthesisProviderVoice
+	WithGender(gender raw.AVSpeechSynthesisVoiceGender) *SpeechSynthesisProviderVoice
+	WithAge(age int) *SpeechSynthesisProviderVoice
+	Name() string
+	Identifier() string
+	PrimaryLanguages() []string
+	SupportedLanguages() []string
+	VoiceSize() int64
+	SetVoiceSize(voiceSize int64)
+	Gender() raw.AVSpeechSynthesisVoiceGender
+	SetGender(gender raw.AVSpeechSynthesisVoiceGender)
+	Age() int
+	SetAge(age int)
+}
+
+var _ SpeechSynthesisProviderVoiceable = (*SpeechSynthesisProviderVoice)(nil)
 

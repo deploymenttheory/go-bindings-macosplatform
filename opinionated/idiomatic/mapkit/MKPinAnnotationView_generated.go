@@ -42,5 +42,51 @@ func (x *PinAnnotationView) WithPinColor(pinColor raw.MKPinAnnotationColor) *Pin
 	return x
 }
 
+// PinTintColor calls the underlying PinTintColor.
+func (x *PinAnnotationView) PinTintColor() *appkit.NSColor {
+	return x.inner.PinTintColor()
+}
+
+// SetPinTintColor calls the underlying SetPinTintColor.
+func (x *PinAnnotationView) SetPinTintColor(pinTintColor *appkit.NSColor) {
+	x.inner.SetPinTintColor(pinTintColor)
+}
+
+// AnimatesDrop calls the underlying AnimatesDrop.
+func (x *PinAnnotationView) AnimatesDrop() bool {
+	return x.inner.AnimatesDrop()
+}
+
+// SetAnimatesDrop calls the underlying SetAnimatesDrop.
+func (x *PinAnnotationView) SetAnimatesDrop(animatesDrop bool) {
+	x.inner.SetAnimatesDrop(animatesDrop)
+}
+
+// PinColor calls the underlying PinColor.
+func (x *PinAnnotationView) PinColor() raw.MKPinAnnotationColor {
+	return x.inner.PinColor()
+}
+
+// SetPinColor calls the underlying SetPinColor.
+func (x *PinAnnotationView) SetPinColor(pinColor raw.MKPinAnnotationColor) {
+	x.inner.SetPinColor(pinColor)
+}
+
 func (x *PinAnnotationView) asAnnotationView() *raw.MKAnnotationView { return &x.inner.MKAnnotationView }
+
+// PinAnnotationViewable is the interface implemented by [PinAnnotationView], for mocking and DI.
+type PinAnnotationViewable interface {
+	Unwrap() *raw.MKPinAnnotationView
+	WithPinTintColor(pinTintColor *appkit.NSColor) *PinAnnotationView
+	WithAnimatesDrop(animatesDrop bool) *PinAnnotationView
+	WithPinColor(pinColor raw.MKPinAnnotationColor) *PinAnnotationView
+	PinTintColor() *appkit.NSColor
+	SetPinTintColor(pinTintColor *appkit.NSColor)
+	AnimatesDrop() bool
+	SetAnimatesDrop(animatesDrop bool)
+	PinColor() raw.MKPinAnnotationColor
+	SetPinColor(pinColor raw.MKPinAnnotationColor)
+}
+
+var _ PinAnnotationViewable = (*PinAnnotationView)(nil)
 

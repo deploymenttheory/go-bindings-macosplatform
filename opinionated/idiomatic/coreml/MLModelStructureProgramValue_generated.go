@@ -23,3 +23,10 @@ func NewModelStructureProgramValue() *ModelStructureProgramValue {
 	return &ModelStructureProgramValue{inner: raw.MLModelStructureProgramValueFromID(_id)}
 }
 
+// ModelStructureProgramValueable is the interface implemented by [ModelStructureProgramValue], for mocking and DI.
+type ModelStructureProgramValueable interface {
+	Unwrap() *raw.MLModelStructureProgramValue
+}
+
+var _ ModelStructureProgramValueable = (*ModelStructureProgramValue)(nil)
+

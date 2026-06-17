@@ -53,3 +53,75 @@ func (x *MatrixRandomDistributionDescriptor) WithStandardDeviation(standardDevia
 	return x
 }
 
+// DistributionType calls the underlying DistributionType.
+func (x *MatrixRandomDistributionDescriptor) DistributionType() raw.MPSMatrixRandomDistribution {
+	return x.inner.DistributionType()
+}
+
+// SetDistributionType calls the underlying SetDistributionType.
+func (x *MatrixRandomDistributionDescriptor) SetDistributionType(distributionType raw.MPSMatrixRandomDistribution) {
+	x.inner.SetDistributionType(distributionType)
+}
+
+// Minimum calls the underlying Minimum.
+func (x *MatrixRandomDistributionDescriptor) Minimum() float32 {
+	return x.inner.Minimum()
+}
+
+// SetMinimum calls the underlying SetMinimum.
+func (x *MatrixRandomDistributionDescriptor) SetMinimum(minimum float32) {
+	x.inner.SetMinimum(minimum)
+}
+
+// Maximum calls the underlying Maximum.
+func (x *MatrixRandomDistributionDescriptor) Maximum() float32 {
+	return x.inner.Maximum()
+}
+
+// SetMaximum calls the underlying SetMaximum.
+func (x *MatrixRandomDistributionDescriptor) SetMaximum(maximum float32) {
+	x.inner.SetMaximum(maximum)
+}
+
+// Mean calls the underlying Mean.
+func (x *MatrixRandomDistributionDescriptor) Mean() float32 {
+	return x.inner.Mean()
+}
+
+// SetMean calls the underlying SetMean.
+func (x *MatrixRandomDistributionDescriptor) SetMean(mean float32) {
+	x.inner.SetMean(mean)
+}
+
+// StandardDeviation calls the underlying StandardDeviation.
+func (x *MatrixRandomDistributionDescriptor) StandardDeviation() float32 {
+	return x.inner.StandardDeviation()
+}
+
+// SetStandardDeviation calls the underlying SetStandardDeviation.
+func (x *MatrixRandomDistributionDescriptor) SetStandardDeviation(standardDeviation float32) {
+	x.inner.SetStandardDeviation(standardDeviation)
+}
+
+// MatrixRandomDistributionDescriptorable is the interface implemented by [MatrixRandomDistributionDescriptor], for mocking and DI.
+type MatrixRandomDistributionDescriptorable interface {
+	Unwrap() *raw.MPSMatrixRandomDistributionDescriptor
+	WithDistributionType(distributionType raw.MPSMatrixRandomDistribution) *MatrixRandomDistributionDescriptor
+	WithMinimum(minimum float32) *MatrixRandomDistributionDescriptor
+	WithMaximum(maximum float32) *MatrixRandomDistributionDescriptor
+	WithMean(mean float32) *MatrixRandomDistributionDescriptor
+	WithStandardDeviation(standardDeviation float32) *MatrixRandomDistributionDescriptor
+	DistributionType() raw.MPSMatrixRandomDistribution
+	SetDistributionType(distributionType raw.MPSMatrixRandomDistribution)
+	Minimum() float32
+	SetMinimum(minimum float32)
+	Maximum() float32
+	SetMaximum(maximum float32)
+	Mean() float32
+	SetMean(mean float32)
+	StandardDeviation() float32
+	SetStandardDeviation(standardDeviation float32)
+}
+
+var _ MatrixRandomDistributionDescriptorable = (*MatrixRandomDistributionDescriptor)(nil)
+

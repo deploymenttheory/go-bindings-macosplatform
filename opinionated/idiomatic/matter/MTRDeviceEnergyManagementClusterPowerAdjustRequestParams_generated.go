@@ -54,3 +54,75 @@ func (x *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) WithServerSid
 	return x
 }
 
+// Power calls the underlying Power.
+func (x *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) Power() *foundation.NSNumber {
+	return x.inner.Power()
+}
+
+// SetPower calls the underlying SetPower.
+func (x *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) SetPower(power *foundation.NSNumber) {
+	x.inner.SetPower(power)
+}
+
+// Duration calls the underlying Duration.
+func (x *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) Duration() *foundation.NSNumber {
+	return x.inner.Duration()
+}
+
+// SetDuration calls the underlying SetDuration.
+func (x *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) SetDuration(duration *foundation.NSNumber) {
+	x.inner.SetDuration(duration)
+}
+
+// Cause calls the underlying Cause.
+func (x *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) Cause() *foundation.NSNumber {
+	return x.inner.Cause()
+}
+
+// SetCause calls the underlying SetCause.
+func (x *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) SetCause(cause *foundation.NSNumber) {
+	x.inner.SetCause(cause)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRDeviceEnergyManagementClusterPowerAdjustRequestParamsable is the interface implemented by [MTRDeviceEnergyManagementClusterPowerAdjustRequestParams], for mocking and DI.
+type MTRDeviceEnergyManagementClusterPowerAdjustRequestParamsable interface {
+	Unwrap() *raw.MTRDeviceEnergyManagementClusterPowerAdjustRequestParams
+	WithPower(power *foundation.NSNumber) *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams
+	WithDuration(duration *foundation.NSNumber) *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams
+	WithCause(cause *foundation.NSNumber) *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams
+	Power() *foundation.NSNumber
+	SetPower(power *foundation.NSNumber)
+	Duration() *foundation.NSNumber
+	SetDuration(duration *foundation.NSNumber)
+	Cause() *foundation.NSNumber
+	SetCause(cause *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRDeviceEnergyManagementClusterPowerAdjustRequestParamsable = (*MTRDeviceEnergyManagementClusterPowerAdjustRequestParams)(nil)
+

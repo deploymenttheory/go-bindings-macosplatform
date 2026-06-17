@@ -98,5 +98,215 @@ func (x *FileWrapper) WithFileAttributes(fileAttributes *raw.NSDictionary[*raw.N
 	return x
 }
 
+// MatchesContentsOfURL calls the underlying MatchesContentsOfURL.
+func (x *FileWrapper) MatchesContentsOfURL(url string) bool {
+	return x.inner.MatchesContentsOfURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
+}
+
+// ReadFromURLOptionsError calls the underlying ReadFromURLOptionsError.
+func (x *FileWrapper) ReadFromURLOptionsError(url string, options raw.NSFileWrapperReadingOptions) (bool, error) {
+	return x.inner.ReadFromURLOptionsError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), options)
+}
+
+// WriteToURLOptionsOriginalContentsURLError calls the underlying WriteToURLOptionsOriginalContentsURLError.
+func (x *FileWrapper) WriteToURLOptionsOriginalContentsURLError(url string, options raw.NSFileWrapperWritingOptions, originalContentsURL string) (bool, error) {
+	return x.inner.WriteToURLOptionsOriginalContentsURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), options, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(originalContentsURL)))
+}
+
+// AddFileWrapper calls the underlying AddFileWrapper.
+func (x *FileWrapper) AddFileWrapper(child *raw.NSFileWrapper) *String {
+	_r := x.inner.AddFileWrapper(child)
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// AddRegularFileWithContentsPreferredFilename calls the underlying AddRegularFileWithContentsPreferredFilename.
+func (x *FileWrapper) AddRegularFileWithContentsPreferredFilename(data *raw.NSData, fileName string) *String {
+	_r := x.inner.AddRegularFileWithContentsPreferredFilename(data, foundation.NSStringStringWithUTF8String(fileName))
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// RemoveFileWrapper calls the underlying RemoveFileWrapper.
+func (x *FileWrapper) RemoveFileWrapper(child *raw.NSFileWrapper) {
+	x.inner.RemoveFileWrapper(child)
+}
+
+// KeyForFileWrapper calls the underlying KeyForFileWrapper.
+func (x *FileWrapper) KeyForFileWrapper(child *raw.NSFileWrapper) *String {
+	_r := x.inner.KeyForFileWrapper(child)
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// IsDirectory calls the underlying IsDirectory.
+func (x *FileWrapper) IsDirectory() bool {
+	return x.inner.IsDirectory()
+}
+
+// IsRegularFile calls the underlying IsRegularFile.
+func (x *FileWrapper) IsRegularFile() bool {
+	return x.inner.IsRegularFile()
+}
+
+// IsSymbolicLink calls the underlying IsSymbolicLink.
+func (x *FileWrapper) IsSymbolicLink() bool {
+	return x.inner.IsSymbolicLink()
+}
+
+// PreferredFilename calls the underlying PreferredFilename.
+func (x *FileWrapper) PreferredFilename() *String {
+	_r := x.inner.PreferredFilename()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SetPreferredFilename calls the underlying SetPreferredFilename.
+func (x *FileWrapper) SetPreferredFilename(preferredFilename string) {
+	x.inner.SetPreferredFilename(foundation.NSStringStringWithUTF8String(preferredFilename))
+}
+
+// Filename calls the underlying Filename.
+func (x *FileWrapper) Filename() *String {
+	_r := x.inner.Filename()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SetFilename calls the underlying SetFilename.
+func (x *FileWrapper) SetFilename(filename string) {
+	x.inner.SetFilename(foundation.NSStringStringWithUTF8String(filename))
+}
+
+// FileAttributes calls the underlying FileAttributes.
+func (x *FileWrapper) FileAttributes() *raw.NSDictionary[*raw.NSString, objc.ID] {
+	return x.inner.FileAttributes()
+}
+
+// SetFileAttributes calls the underlying SetFileAttributes.
+func (x *FileWrapper) SetFileAttributes(fileAttributes *raw.NSDictionary[*raw.NSString, objc.ID]) {
+	x.inner.SetFileAttributes(fileAttributes)
+}
+
+// SerializedRepresentation calls the underlying SerializedRepresentation.
+func (x *FileWrapper) SerializedRepresentation() *Data {
+	_r := x.inner.SerializedRepresentation()
+	if _r == nil {
+		return nil
+	}
+	return &Data{inner: _r}
+}
+
+// FileWrappers calls the underlying FileWrappers.
+func (x *FileWrapper) FileWrappers() *raw.NSDictionary[*raw.NSString, *raw.NSFileWrapper] {
+	return x.inner.FileWrappers()
+}
+
+// RegularFileContents calls the underlying RegularFileContents.
+func (x *FileWrapper) RegularFileContents() *Data {
+	_r := x.inner.RegularFileContents()
+	if _r == nil {
+		return nil
+	}
+	return &Data{inner: _r}
+}
+
+// SymbolicLinkDestinationURL calls the underlying SymbolicLinkDestinationURL.
+func (x *FileWrapper) SymbolicLinkDestinationURL() *URL {
+	_r := x.inner.SymbolicLinkDestinationURL()
+	if _r == nil {
+		return nil
+	}
+	return &URL{inner: _r}
+}
+
+// NeedsToBeUpdatedFromPath calls the underlying NeedsToBeUpdatedFromPath.
+func (x *FileWrapper) NeedsToBeUpdatedFromPath(path string) bool {
+	return x.inner.NeedsToBeUpdatedFromPath(foundation.NSStringStringWithUTF8String(path))
+}
+
+// UpdateFromPath calls the underlying UpdateFromPath.
+func (x *FileWrapper) UpdateFromPath(path string) bool {
+	return x.inner.UpdateFromPath(foundation.NSStringStringWithUTF8String(path))
+}
+
+// WriteToFileAtomicallyUpdateFilenames calls the underlying WriteToFileAtomicallyUpdateFilenames.
+func (x *FileWrapper) WriteToFileAtomicallyUpdateFilenames(path string, atomicFlag bool, updateFilenamesFlag bool) bool {
+	return x.inner.WriteToFileAtomicallyUpdateFilenames(foundation.NSStringStringWithUTF8String(path), atomicFlag, updateFilenamesFlag)
+}
+
+// AddFileWithPath calls the underlying AddFileWithPath.
+func (x *FileWrapper) AddFileWithPath(path string) *String {
+	_r := x.inner.AddFileWithPath(foundation.NSStringStringWithUTF8String(path))
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// AddSymbolicLinkWithDestinationPreferredFilename calls the underlying AddSymbolicLinkWithDestinationPreferredFilename.
+func (x *FileWrapper) AddSymbolicLinkWithDestinationPreferredFilename(path string, filename string) *String {
+	_r := x.inner.AddSymbolicLinkWithDestinationPreferredFilename(foundation.NSStringStringWithUTF8String(path), foundation.NSStringStringWithUTF8String(filename))
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SymbolicLinkDestination calls the underlying SymbolicLinkDestination.
+func (x *FileWrapper) SymbolicLinkDestination() *String {
+	_r := x.inner.SymbolicLinkDestination()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
 func (x *FileWrapper) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// FileWrapperable is the interface implemented by [FileWrapper], for mocking and DI.
+type FileWrapperable interface {
+	Unwrap() *raw.NSFileWrapper
+	WithPreferredFilename(preferredFilename string) *FileWrapper
+	WithFilename(filename string) *FileWrapper
+	WithFileAttributes(fileAttributes *raw.NSDictionary[*raw.NSString, objc.ID]) *FileWrapper
+	MatchesContentsOfURL(url string) bool
+	ReadFromURLOptionsError(url string, options raw.NSFileWrapperReadingOptions) (bool, error)
+	WriteToURLOptionsOriginalContentsURLError(url string, options raw.NSFileWrapperWritingOptions, originalContentsURL string) (bool, error)
+	AddFileWrapper(child *raw.NSFileWrapper) *String
+	AddRegularFileWithContentsPreferredFilename(data *raw.NSData, fileName string) *String
+	RemoveFileWrapper(child *raw.NSFileWrapper)
+	KeyForFileWrapper(child *raw.NSFileWrapper) *String
+	IsDirectory() bool
+	IsRegularFile() bool
+	IsSymbolicLink() bool
+	PreferredFilename() *String
+	SetPreferredFilename(preferredFilename string)
+	Filename() *String
+	SetFilename(filename string)
+	FileAttributes() *raw.NSDictionary[*raw.NSString, objc.ID]
+	SetFileAttributes(fileAttributes *raw.NSDictionary[*raw.NSString, objc.ID])
+	SerializedRepresentation() *Data
+	FileWrappers() *raw.NSDictionary[*raw.NSString, *raw.NSFileWrapper]
+	RegularFileContents() *Data
+	SymbolicLinkDestinationURL() *URL
+	NeedsToBeUpdatedFromPath(path string) bool
+	UpdateFromPath(path string) bool
+	WriteToFileAtomicallyUpdateFilenames(path string, atomicFlag bool, updateFilenamesFlag bool) bool
+	AddFileWithPath(path string) *String
+	AddSymbolicLinkWithDestinationPreferredFilename(path string, filename string) *String
+	SymbolicLinkDestination() *String
+}
+
+var _ FileWrapperable = (*FileWrapper)(nil)
 

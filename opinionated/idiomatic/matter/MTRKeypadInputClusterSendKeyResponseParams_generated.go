@@ -43,3 +43,36 @@ func (x *MTRKeypadInputClusterSendKeyResponseParams) WithTimedInvokeTimeoutMs(ti
 	return x
 }
 
+// Status calls the underlying Status.
+func (x *MTRKeypadInputClusterSendKeyResponseParams) Status() *foundation.NSNumber {
+	return x.inner.Status()
+}
+
+// SetStatus calls the underlying SetStatus.
+func (x *MTRKeypadInputClusterSendKeyResponseParams) SetStatus(status *foundation.NSNumber) {
+	x.inner.SetStatus(status)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRKeypadInputClusterSendKeyResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRKeypadInputClusterSendKeyResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// MTRKeypadInputClusterSendKeyResponseParamsable is the interface implemented by [MTRKeypadInputClusterSendKeyResponseParams], for mocking and DI.
+type MTRKeypadInputClusterSendKeyResponseParamsable interface {
+	Unwrap() *raw.MTRKeypadInputClusterSendKeyResponseParams
+	WithStatus(status *foundation.NSNumber) *MTRKeypadInputClusterSendKeyResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRKeypadInputClusterSendKeyResponseParams
+	Status() *foundation.NSNumber
+	SetStatus(status *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+}
+
+var _ MTRKeypadInputClusterSendKeyResponseParamsable = (*MTRKeypadInputClusterSendKeyResponseParams)(nil)
+

@@ -72,3 +72,114 @@ func (x *MTRElectricalPowerMeasurementClusterMeasurementAccuracyRangeStruct) Wit
 	return x
 }
 
+// RangeMin calls the underlying RangeMin.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementAccuracyRangeStruct) RangeMin() *foundation.NSNumber {
+	return x.inner.RangeMin()
+}
+
+// SetRangeMin calls the underlying SetRangeMin.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementAccuracyRangeStruct) SetRangeMin(rangeMin *foundation.NSNumber) {
+	x.inner.SetRangeMin(rangeMin)
+}
+
+// RangeMax calls the underlying RangeMax.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementAccuracyRangeStruct) RangeMax() *foundation.NSNumber {
+	return x.inner.RangeMax()
+}
+
+// SetRangeMax calls the underlying SetRangeMax.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementAccuracyRangeStruct) SetRangeMax(rangeMax *foundation.NSNumber) {
+	x.inner.SetRangeMax(rangeMax)
+}
+
+// PercentMax calls the underlying PercentMax.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementAccuracyRangeStruct) PercentMax() *foundation.NSNumber {
+	return x.inner.PercentMax()
+}
+
+// SetPercentMax calls the underlying SetPercentMax.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementAccuracyRangeStruct) SetPercentMax(percentMax *foundation.NSNumber) {
+	x.inner.SetPercentMax(percentMax)
+}
+
+// PercentMin calls the underlying PercentMin.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementAccuracyRangeStruct) PercentMin() *foundation.NSNumber {
+	return x.inner.PercentMin()
+}
+
+// SetPercentMin calls the underlying SetPercentMin.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementAccuracyRangeStruct) SetPercentMin(percentMin *foundation.NSNumber) {
+	x.inner.SetPercentMin(percentMin)
+}
+
+// PercentTypical calls the underlying PercentTypical.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementAccuracyRangeStruct) PercentTypical() *foundation.NSNumber {
+	return x.inner.PercentTypical()
+}
+
+// SetPercentTypical calls the underlying SetPercentTypical.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementAccuracyRangeStruct) SetPercentTypical(percentTypical *foundation.NSNumber) {
+	x.inner.SetPercentTypical(percentTypical)
+}
+
+// FixedMax calls the underlying FixedMax.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementAccuracyRangeStruct) FixedMax() *foundation.NSNumber {
+	return x.inner.FixedMax()
+}
+
+// SetFixedMax calls the underlying SetFixedMax.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementAccuracyRangeStruct) SetFixedMax(fixedMax *foundation.NSNumber) {
+	x.inner.SetFixedMax(fixedMax)
+}
+
+// FixedMin calls the underlying FixedMin.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementAccuracyRangeStruct) FixedMin() *foundation.NSNumber {
+	return x.inner.FixedMin()
+}
+
+// SetFixedMin calls the underlying SetFixedMin.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementAccuracyRangeStruct) SetFixedMin(fixedMin *foundation.NSNumber) {
+	x.inner.SetFixedMin(fixedMin)
+}
+
+// FixedTypical calls the underlying FixedTypical.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementAccuracyRangeStruct) FixedTypical() *foundation.NSNumber {
+	return x.inner.FixedTypical()
+}
+
+// SetFixedTypical calls the underlying SetFixedTypical.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementAccuracyRangeStruct) SetFixedTypical(fixedTypical *foundation.NSNumber) {
+	x.inner.SetFixedTypical(fixedTypical)
+}
+
+// MTRElectricalPowerMeasurementClusterMeasurementAccuracyRangeStructable is the interface implemented by [MTRElectricalPowerMeasurementClusterMeasurementAccuracyRangeStruct], for mocking and DI.
+type MTRElectricalPowerMeasurementClusterMeasurementAccuracyRangeStructable interface {
+	Unwrap() *raw.MTRElectricalPowerMeasurementClusterMeasurementAccuracyRangeStruct
+	WithRangeMin(rangeMin *foundation.NSNumber) *MTRElectricalPowerMeasurementClusterMeasurementAccuracyRangeStruct
+	WithRangeMax(rangeMax *foundation.NSNumber) *MTRElectricalPowerMeasurementClusterMeasurementAccuracyRangeStruct
+	WithPercentMax(percentMax *foundation.NSNumber) *MTRElectricalPowerMeasurementClusterMeasurementAccuracyRangeStruct
+	WithPercentMin(percentMin *foundation.NSNumber) *MTRElectricalPowerMeasurementClusterMeasurementAccuracyRangeStruct
+	WithPercentTypical(percentTypical *foundation.NSNumber) *MTRElectricalPowerMeasurementClusterMeasurementAccuracyRangeStruct
+	WithFixedMax(fixedMax *foundation.NSNumber) *MTRElectricalPowerMeasurementClusterMeasurementAccuracyRangeStruct
+	WithFixedMin(fixedMin *foundation.NSNumber) *MTRElectricalPowerMeasurementClusterMeasurementAccuracyRangeStruct
+	WithFixedTypical(fixedTypical *foundation.NSNumber) *MTRElectricalPowerMeasurementClusterMeasurementAccuracyRangeStruct
+	RangeMin() *foundation.NSNumber
+	SetRangeMin(rangeMin *foundation.NSNumber)
+	RangeMax() *foundation.NSNumber
+	SetRangeMax(rangeMax *foundation.NSNumber)
+	PercentMax() *foundation.NSNumber
+	SetPercentMax(percentMax *foundation.NSNumber)
+	PercentMin() *foundation.NSNumber
+	SetPercentMin(percentMin *foundation.NSNumber)
+	PercentTypical() *foundation.NSNumber
+	SetPercentTypical(percentTypical *foundation.NSNumber)
+	FixedMax() *foundation.NSNumber
+	SetFixedMax(fixedMax *foundation.NSNumber)
+	FixedMin() *foundation.NSNumber
+	SetFixedMin(fixedMin *foundation.NSNumber)
+	FixedTypical() *foundation.NSNumber
+	SetFixedTypical(fixedTypical *foundation.NSNumber)
+}
+
+var _ MTRElectricalPowerMeasurementClusterMeasurementAccuracyRangeStructable = (*MTRElectricalPowerMeasurementClusterMeasurementAccuracyRangeStruct)(nil)
+

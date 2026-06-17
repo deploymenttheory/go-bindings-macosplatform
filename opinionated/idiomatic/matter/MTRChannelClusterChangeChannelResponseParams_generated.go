@@ -49,3 +49,53 @@ func (x *MTRChannelClusterChangeChannelResponseParams) WithTimedInvokeTimeoutMs(
 	return x
 }
 
+// Status calls the underlying Status.
+func (x *MTRChannelClusterChangeChannelResponseParams) Status() *foundation.NSNumber {
+	return x.inner.Status()
+}
+
+// SetStatus calls the underlying SetStatus.
+func (x *MTRChannelClusterChangeChannelResponseParams) SetStatus(status *foundation.NSNumber) {
+	x.inner.SetStatus(status)
+}
+
+// Data calls the underlying Data.
+func (x *MTRChannelClusterChangeChannelResponseParams) Data() string {
+	_r := x.inner.Data()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetData calls the underlying SetData.
+func (x *MTRChannelClusterChangeChannelResponseParams) SetData(data string) {
+	x.inner.SetData(foundation.NSStringStringWithUTF8String(data))
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRChannelClusterChangeChannelResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRChannelClusterChangeChannelResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// MTRChannelClusterChangeChannelResponseParamsable is the interface implemented by [MTRChannelClusterChangeChannelResponseParams], for mocking and DI.
+type MTRChannelClusterChangeChannelResponseParamsable interface {
+	Unwrap() *raw.MTRChannelClusterChangeChannelResponseParams
+	WithStatus(status *foundation.NSNumber) *MTRChannelClusterChangeChannelResponseParams
+	WithData(data string) *MTRChannelClusterChangeChannelResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRChannelClusterChangeChannelResponseParams
+	Status() *foundation.NSNumber
+	SetStatus(status *foundation.NSNumber)
+	Data() string
+	SetData(data string)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+}
+
+var _ MTRChannelClusterChangeChannelResponseParamsable = (*MTRChannelClusterChangeChannelResponseParams)(nil)
+

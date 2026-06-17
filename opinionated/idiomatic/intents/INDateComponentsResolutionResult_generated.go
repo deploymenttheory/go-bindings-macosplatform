@@ -25,3 +25,10 @@ func NewDateComponentsResolutionResult() *DateComponentsResolutionResult {
 
 func (x *DateComponentsResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult { return &x.inner.INIntentResolutionResult }
 
+// DateComponentsResolutionResultable is the interface implemented by [DateComponentsResolutionResult], for mocking and DI.
+type DateComponentsResolutionResultable interface {
+	Unwrap() *raw.INDateComponentsResolutionResult
+}
+
+var _ DateComponentsResolutionResultable = (*DateComponentsResolutionResult)(nil)
+

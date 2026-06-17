@@ -5,6 +5,7 @@
 package metal
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +23,77 @@ func NewMTL4RenderPipelineBinaryFunctionsDescriptor() *MTL4RenderPipelineBinaryF
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTL4RenderPipelineBinaryFunctionsDescriptor")), objc.RegisterName("new"))
 	return &MTL4RenderPipelineBinaryFunctionsDescriptor{inner: raw.MTL4RenderPipelineBinaryFunctionsDescriptorFromID(_id)}
 }
+
+// Reset calls the underlying Reset.
+func (x *MTL4RenderPipelineBinaryFunctionsDescriptor) Reset() {
+	x.inner.Reset()
+}
+
+// VertexAdditionalBinaryFunctions calls the underlying VertexAdditionalBinaryFunctions.
+func (x *MTL4RenderPipelineBinaryFunctionsDescriptor) VertexAdditionalBinaryFunctions() *foundation.NSArray[raw.MTL4BinaryFunction] {
+	return x.inner.VertexAdditionalBinaryFunctions()
+}
+
+// SetVertexAdditionalBinaryFunctions calls the underlying SetVertexAdditionalBinaryFunctions.
+func (x *MTL4RenderPipelineBinaryFunctionsDescriptor) SetVertexAdditionalBinaryFunctions(vertexAdditionalBinaryFunctions *foundation.NSArray[raw.MTL4BinaryFunction]) {
+	x.inner.SetVertexAdditionalBinaryFunctions(vertexAdditionalBinaryFunctions)
+}
+
+// FragmentAdditionalBinaryFunctions calls the underlying FragmentAdditionalBinaryFunctions.
+func (x *MTL4RenderPipelineBinaryFunctionsDescriptor) FragmentAdditionalBinaryFunctions() *foundation.NSArray[raw.MTL4BinaryFunction] {
+	return x.inner.FragmentAdditionalBinaryFunctions()
+}
+
+// SetFragmentAdditionalBinaryFunctions calls the underlying SetFragmentAdditionalBinaryFunctions.
+func (x *MTL4RenderPipelineBinaryFunctionsDescriptor) SetFragmentAdditionalBinaryFunctions(fragmentAdditionalBinaryFunctions *foundation.NSArray[raw.MTL4BinaryFunction]) {
+	x.inner.SetFragmentAdditionalBinaryFunctions(fragmentAdditionalBinaryFunctions)
+}
+
+// TileAdditionalBinaryFunctions calls the underlying TileAdditionalBinaryFunctions.
+func (x *MTL4RenderPipelineBinaryFunctionsDescriptor) TileAdditionalBinaryFunctions() *foundation.NSArray[raw.MTL4BinaryFunction] {
+	return x.inner.TileAdditionalBinaryFunctions()
+}
+
+// SetTileAdditionalBinaryFunctions calls the underlying SetTileAdditionalBinaryFunctions.
+func (x *MTL4RenderPipelineBinaryFunctionsDescriptor) SetTileAdditionalBinaryFunctions(tileAdditionalBinaryFunctions *foundation.NSArray[raw.MTL4BinaryFunction]) {
+	x.inner.SetTileAdditionalBinaryFunctions(tileAdditionalBinaryFunctions)
+}
+
+// ObjectAdditionalBinaryFunctions calls the underlying ObjectAdditionalBinaryFunctions.
+func (x *MTL4RenderPipelineBinaryFunctionsDescriptor) ObjectAdditionalBinaryFunctions() *foundation.NSArray[raw.MTL4BinaryFunction] {
+	return x.inner.ObjectAdditionalBinaryFunctions()
+}
+
+// SetObjectAdditionalBinaryFunctions calls the underlying SetObjectAdditionalBinaryFunctions.
+func (x *MTL4RenderPipelineBinaryFunctionsDescriptor) SetObjectAdditionalBinaryFunctions(objectAdditionalBinaryFunctions *foundation.NSArray[raw.MTL4BinaryFunction]) {
+	x.inner.SetObjectAdditionalBinaryFunctions(objectAdditionalBinaryFunctions)
+}
+
+// MeshAdditionalBinaryFunctions calls the underlying MeshAdditionalBinaryFunctions.
+func (x *MTL4RenderPipelineBinaryFunctionsDescriptor) MeshAdditionalBinaryFunctions() *foundation.NSArray[raw.MTL4BinaryFunction] {
+	return x.inner.MeshAdditionalBinaryFunctions()
+}
+
+// SetMeshAdditionalBinaryFunctions calls the underlying SetMeshAdditionalBinaryFunctions.
+func (x *MTL4RenderPipelineBinaryFunctionsDescriptor) SetMeshAdditionalBinaryFunctions(meshAdditionalBinaryFunctions *foundation.NSArray[raw.MTL4BinaryFunction]) {
+	x.inner.SetMeshAdditionalBinaryFunctions(meshAdditionalBinaryFunctions)
+}
+
+// MTL4RenderPipelineBinaryFunctionsDescriptorable is the interface implemented by [MTL4RenderPipelineBinaryFunctionsDescriptor], for mocking and DI.
+type MTL4RenderPipelineBinaryFunctionsDescriptorable interface {
+	Unwrap() *raw.MTL4RenderPipelineBinaryFunctionsDescriptor
+	Reset()
+	VertexAdditionalBinaryFunctions() *foundation.NSArray[raw.MTL4BinaryFunction]
+	SetVertexAdditionalBinaryFunctions(vertexAdditionalBinaryFunctions *foundation.NSArray[raw.MTL4BinaryFunction])
+	FragmentAdditionalBinaryFunctions() *foundation.NSArray[raw.MTL4BinaryFunction]
+	SetFragmentAdditionalBinaryFunctions(fragmentAdditionalBinaryFunctions *foundation.NSArray[raw.MTL4BinaryFunction])
+	TileAdditionalBinaryFunctions() *foundation.NSArray[raw.MTL4BinaryFunction]
+	SetTileAdditionalBinaryFunctions(tileAdditionalBinaryFunctions *foundation.NSArray[raw.MTL4BinaryFunction])
+	ObjectAdditionalBinaryFunctions() *foundation.NSArray[raw.MTL4BinaryFunction]
+	SetObjectAdditionalBinaryFunctions(objectAdditionalBinaryFunctions *foundation.NSArray[raw.MTL4BinaryFunction])
+	MeshAdditionalBinaryFunctions() *foundation.NSArray[raw.MTL4BinaryFunction]
+	SetMeshAdditionalBinaryFunctions(meshAdditionalBinaryFunctions *foundation.NSArray[raw.MTL4BinaryFunction])
+}
+
+var _ MTL4RenderPipelineBinaryFunctionsDescriptorable = (*MTL4RenderPipelineBinaryFunctionsDescriptor)(nil)
 

@@ -23,5 +23,32 @@ func NewSymbolAppearEffect() *SymbolAppearEffect {
 	return &SymbolAppearEffect{inner: raw.NSSymbolAppearEffectFromID(_id)}
 }
 
+// EffectWithByLayer calls the underlying EffectWithByLayer.
+func (x *SymbolAppearEffect) EffectWithByLayer() *SymbolAppearEffect {
+	_r := x.inner.EffectWithByLayer()
+	if _r == nil {
+		return nil
+	}
+	return &SymbolAppearEffect{inner: _r}
+}
+
+// EffectWithWholeSymbol calls the underlying EffectWithWholeSymbol.
+func (x *SymbolAppearEffect) EffectWithWholeSymbol() *SymbolAppearEffect {
+	_r := x.inner.EffectWithWholeSymbol()
+	if _r == nil {
+		return nil
+	}
+	return &SymbolAppearEffect{inner: _r}
+}
+
 func (x *SymbolAppearEffect) asSymbolEffect() *raw.NSSymbolEffect { return &x.inner.NSSymbolEffect }
+
+// SymbolAppearEffectable is the interface implemented by [SymbolAppearEffect], for mocking and DI.
+type SymbolAppearEffectable interface {
+	Unwrap() *raw.NSSymbolAppearEffect
+	EffectWithByLayer() *SymbolAppearEffect
+	EffectWithWholeSymbol() *SymbolAppearEffect
+}
+
+var _ SymbolAppearEffectable = (*SymbolAppearEffect)(nil)
 

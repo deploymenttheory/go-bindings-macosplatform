@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
@@ -36,5 +37,85 @@ func (x *AffineTransform) WithTransformStruct(transformStruct raw.NSAffineTransf
 	return x
 }
 
+// TranslateXByYBy calls the underlying TranslateXByYBy.
+func (x *AffineTransform) TranslateXByYBy(deltaX float64, deltaY float64) {
+	x.inner.TranslateXByYBy(deltaX, deltaY)
+}
+
+// RotateByDegrees calls the underlying RotateByDegrees.
+func (x *AffineTransform) RotateByDegrees(angle float64) {
+	x.inner.RotateByDegrees(angle)
+}
+
+// RotateByRadians calls the underlying RotateByRadians.
+func (x *AffineTransform) RotateByRadians(angle float64) {
+	x.inner.RotateByRadians(angle)
+}
+
+// ScaleBy calls the underlying ScaleBy.
+func (x *AffineTransform) ScaleBy(scale float64) {
+	x.inner.ScaleBy(scale)
+}
+
+// ScaleXByYBy calls the underlying ScaleXByYBy.
+func (x *AffineTransform) ScaleXByYBy(scaleX float64, scaleY float64) {
+	x.inner.ScaleXByYBy(scaleX, scaleY)
+}
+
+// Invert calls the underlying Invert.
+func (x *AffineTransform) Invert() {
+	x.inner.Invert()
+}
+
+// AppendTransform calls the underlying AppendTransform.
+func (x *AffineTransform) AppendTransform(transform *raw.NSAffineTransform) {
+	x.inner.AppendTransform(transform)
+}
+
+// PrependTransform calls the underlying PrependTransform.
+func (x *AffineTransform) PrependTransform(transform *raw.NSAffineTransform) {
+	x.inner.PrependTransform(transform)
+}
+
+// TransformPoint calls the underlying TransformPoint.
+func (x *AffineTransform) TransformPoint(aPoint corefoundation.CGPoint) corefoundation.CGPoint {
+	return x.inner.TransformPoint(aPoint)
+}
+
+// TransformSize calls the underlying TransformSize.
+func (x *AffineTransform) TransformSize(aSize corefoundation.CGSize) corefoundation.CGSize {
+	return x.inner.TransformSize(aSize)
+}
+
+// TransformStruct calls the underlying TransformStruct.
+func (x *AffineTransform) TransformStruct() raw.NSAffineTransformStruct {
+	return x.inner.TransformStruct()
+}
+
+// SetTransformStruct calls the underlying SetTransformStruct.
+func (x *AffineTransform) SetTransformStruct(transformStruct raw.NSAffineTransformStruct) {
+	x.inner.SetTransformStruct(transformStruct)
+}
+
 func (x *AffineTransform) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// AffineTransformable is the interface implemented by [AffineTransform], for mocking and DI.
+type AffineTransformable interface {
+	Unwrap() *raw.NSAffineTransform
+	WithTransformStruct(transformStruct raw.NSAffineTransformStruct) *AffineTransform
+	TranslateXByYBy(deltaX float64, deltaY float64)
+	RotateByDegrees(angle float64)
+	RotateByRadians(angle float64)
+	ScaleBy(scale float64)
+	ScaleXByYBy(scaleX float64, scaleY float64)
+	Invert()
+	AppendTransform(transform *raw.NSAffineTransform)
+	PrependTransform(transform *raw.NSAffineTransform)
+	TransformPoint(aPoint corefoundation.CGPoint) corefoundation.CGPoint
+	TransformSize(aSize corefoundation.CGSize) corefoundation.CGSize
+	TransformStruct() raw.NSAffineTransformStruct
+	SetTransformStruct(transformStruct raw.NSAffineTransformStruct)
+}
+
+var _ AffineTransformable = (*AffineTransform)(nil)
 

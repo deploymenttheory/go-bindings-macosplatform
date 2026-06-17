@@ -27,9 +27,28 @@ func NewNDArrayUnaryGradientKernelWithDevice(device metal.MTLDevice) *NDArrayUna
 	return &NDArrayUnaryGradientKernel{inner: raw.MPSNDArrayUnaryGradientKernelFromID(_id)}
 }
 
+// EncodeToCommandBufferSourceArraySourceGradientGradientState calls the underlying EncodeToCommandBufferSourceArraySourceGradientGradientState.
+func (x *NDArrayUnaryGradientKernel) EncodeToCommandBufferSourceArraySourceGradientGradientState(cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray, gradient *mpscore.MPSNDArray, state *mpscore.MPSState) *mpscore.MPSNDArray {
+	return x.inner.EncodeToCommandBufferSourceArraySourceGradientGradientState(cmdBuf, sourceArray, gradient, state)
+}
+
+// EncodeToCommandBufferSourceArraySourceGradientGradientStateDestinationArray calls the underlying EncodeToCommandBufferSourceArraySourceGradientGradientStateDestinationArray.
+func (x *NDArrayUnaryGradientKernel) EncodeToCommandBufferSourceArraySourceGradientGradientStateDestinationArray(cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray, gradient *mpscore.MPSNDArray, state *mpscore.MPSState, destination *mpscore.MPSNDArray) {
+	x.inner.EncodeToCommandBufferSourceArraySourceGradientGradientStateDestinationArray(cmdBuf, sourceArray, gradient, state, destination)
+}
+
 func (x *NDArrayUnaryGradientKernel) asNDArrayMultiaryGradientKernel() *mpsndarray.MPSNDArrayMultiaryGradientKernel { return &x.inner.MPSNDArrayMultiaryGradientKernel }
 
 func (x *NDArrayUnaryGradientKernel) asNDArrayMultiaryBase() *mpsndarray.MPSNDArrayMultiaryBase { return &x.inner.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase }
 
 func (x *NDArrayUnaryGradientKernel) asKernel() *mpscore.MPSKernel { return &x.inner.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase.MPSKernel }
+
+// NDArrayUnaryGradientKernelable is the interface implemented by [NDArrayUnaryGradientKernel], for mocking and DI.
+type NDArrayUnaryGradientKernelable interface {
+	Unwrap() *raw.MPSNDArrayUnaryGradientKernel
+	EncodeToCommandBufferSourceArraySourceGradientGradientState(cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray, gradient *mpscore.MPSNDArray, state *mpscore.MPSState) *mpscore.MPSNDArray
+	EncodeToCommandBufferSourceArraySourceGradientGradientStateDestinationArray(cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray, gradient *mpscore.MPSNDArray, state *mpscore.MPSState, destination *mpscore.MPSNDArray)
+}
+
+var _ NDArrayUnaryGradientKernelable = (*NDArrayUnaryGradientKernel)(nil)
 

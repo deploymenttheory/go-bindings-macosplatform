@@ -5,6 +5,7 @@
 package localauthentication
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/localauthentication"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,5 +24,24 @@ func NewEnvironmentMechanismCompanion() *EnvironmentMechanismCompanion {
 	return &EnvironmentMechanismCompanion{inner: raw.LAEnvironmentMechanismCompanionFromID(_id)}
 }
 
+// Type calls the underlying Type.
+func (x *EnvironmentMechanismCompanion) Type() raw.LACompanionType {
+	return x.inner.Type()
+}
+
+// StateHash calls the underlying StateHash.
+func (x *EnvironmentMechanismCompanion) StateHash() *foundation.NSData {
+	return x.inner.StateHash()
+}
+
 func (x *EnvironmentMechanismCompanion) asEnvironmentMechanism() *raw.LAEnvironmentMechanism { return &x.inner.LAEnvironmentMechanism }
+
+// EnvironmentMechanismCompanionable is the interface implemented by [EnvironmentMechanismCompanion], for mocking and DI.
+type EnvironmentMechanismCompanionable interface {
+	Unwrap() *raw.LAEnvironmentMechanismCompanion
+	Type() raw.LACompanionType
+	StateHash() *foundation.NSData
+}
+
+var _ EnvironmentMechanismCompanionable = (*EnvironmentMechanismCompanion)(nil)
 

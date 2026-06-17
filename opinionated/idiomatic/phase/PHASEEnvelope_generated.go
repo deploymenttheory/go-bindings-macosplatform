@@ -7,6 +7,7 @@ package phase
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -26,16 +27,54 @@ func NewEnvelopeWithStartPointSegments(startPoint unsafe.Pointer, segments *foun
 	return &Envelope{inner: raw.PHASEEnvelopeFromID(_id)}
 }
 
+// EvaluateForValue calls the underlying EvaluateForValue.
+func (x *Envelope) EvaluateForValue(x_ float64) float64 {
+	return x.inner.EvaluateForValue(x_)
+}
+
+// StartPoint calls the underlying StartPoint.
+func (x *Envelope) StartPoint() unsafe.Pointer {
+	return x.inner.StartPoint()
+}
+
 // Segments returns the collection as a Go slice.
 func (x *Envelope) Segments() []*raw.PHASEEnvelopeSegment {
 	arr := x.inner.Segments()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.PHASEEnvelopeSegment, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PHASEEnvelopeSegment {
+		return raw.PHASEEnvelopeSegmentFromID(purego.Retain(_id))
+	})
 }
+
+// Domain calls the underlying Domain.
+func (x *Envelope) Domain() *NumericPair {
+	_r := x.inner.Domain()
+	if _r == nil {
+		return nil
+	}
+	return &NumericPair{inner: _r}
+}
+
+// Range calls the underlying Range.
+func (x *Envelope) Range() *NumericPair {
+	_r := x.inner.Range()
+	if _r == nil {
+		return nil
+	}
+	return &NumericPair{inner: _r}
+}
+
+// Envelopeable is the interface implemented by [Envelope], for mocking and DI.
+type Envelopeable interface {
+	Unwrap() *raw.PHASEEnvelope
+	EvaluateForValue(x_ float64) float64
+	StartPoint() unsafe.Pointer
+	Segments() []*raw.PHASEEnvelopeSegment
+	Domain() *NumericPair
+	Range() *NumericPair
+}
+
+var _ Envelopeable = (*Envelope)(nil)
 

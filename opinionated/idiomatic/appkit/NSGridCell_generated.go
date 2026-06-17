@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -65,16 +66,105 @@ func (x *GridCell) WithCustomPlacementConstraints(items ...*raw.NSLayoutConstrai
 	return x
 }
 
+// ContentView calls the underlying ContentView.
+func (x *GridCell) ContentView() *View {
+	_r := x.inner.ContentView()
+	if _r == nil {
+		return nil
+	}
+	return &View{inner: _r}
+}
+
+// SetContentView calls the underlying SetContentView.
+func (x *GridCell) SetContentView(contentView *raw.NSView) {
+	x.inner.SetContentView(contentView)
+}
+
+// Row calls the underlying Row.
+func (x *GridCell) Row() *GridRow {
+	_r := x.inner.Row()
+	if _r == nil {
+		return nil
+	}
+	return &GridRow{inner: _r}
+}
+
+// Column calls the underlying Column.
+func (x *GridCell) Column() *GridColumn {
+	_r := x.inner.Column()
+	if _r == nil {
+		return nil
+	}
+	return &GridColumn{inner: _r}
+}
+
+// XPlacement calls the underlying XPlacement.
+func (x *GridCell) XPlacement() raw.NSGridCellPlacement {
+	return x.inner.XPlacement()
+}
+
+// SetXPlacement calls the underlying SetXPlacement.
+func (x *GridCell) SetXPlacement(xPlacement raw.NSGridCellPlacement) {
+	x.inner.SetXPlacement(xPlacement)
+}
+
+// YPlacement calls the underlying YPlacement.
+func (x *GridCell) YPlacement() raw.NSGridCellPlacement {
+	return x.inner.YPlacement()
+}
+
+// SetYPlacement calls the underlying SetYPlacement.
+func (x *GridCell) SetYPlacement(yPlacement raw.NSGridCellPlacement) {
+	x.inner.SetYPlacement(yPlacement)
+}
+
+// RowAlignment calls the underlying RowAlignment.
+func (x *GridCell) RowAlignment() raw.NSGridRowAlignment {
+	return x.inner.RowAlignment()
+}
+
+// SetRowAlignment calls the underlying SetRowAlignment.
+func (x *GridCell) SetRowAlignment(rowAlignment raw.NSGridRowAlignment) {
+	x.inner.SetRowAlignment(rowAlignment)
+}
+
 // CustomPlacementConstraints returns the collection as a Go slice.
 func (x *GridCell) CustomPlacementConstraints() []*raw.NSLayoutConstraint {
 	arr := x.inner.CustomPlacementConstraints()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSLayoutConstraint, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSLayoutConstraint {
+		return raw.NSLayoutConstraintFromID(purego.Retain(_id))
+	})
 }
+
+// SetCustomPlacementConstraints calls the underlying SetCustomPlacementConstraints.
+func (x *GridCell) SetCustomPlacementConstraints(customPlacementConstraints *foundation.NSArray[*raw.NSLayoutConstraint]) {
+	x.inner.SetCustomPlacementConstraints(customPlacementConstraints)
+}
+
+// GridCellable is the interface implemented by [GridCell], for mocking and DI.
+type GridCellable interface {
+	Unwrap() *raw.NSGridCell
+	WithContentView(contentView ViewProvider) *GridCell
+	WithXPlacement(xPlacement raw.NSGridCellPlacement) *GridCell
+	WithYPlacement(yPlacement raw.NSGridCellPlacement) *GridCell
+	WithRowAlignment(rowAlignment raw.NSGridRowAlignment) *GridCell
+	WithCustomPlacementConstraints(items ...*raw.NSLayoutConstraint) *GridCell
+	ContentView() *View
+	SetContentView(contentView *raw.NSView)
+	Row() *GridRow
+	Column() *GridColumn
+	XPlacement() raw.NSGridCellPlacement
+	SetXPlacement(xPlacement raw.NSGridCellPlacement)
+	YPlacement() raw.NSGridCellPlacement
+	SetYPlacement(yPlacement raw.NSGridCellPlacement)
+	RowAlignment() raw.NSGridRowAlignment
+	SetRowAlignment(rowAlignment raw.NSGridRowAlignment)
+	CustomPlacementConstraints() []*raw.NSLayoutConstraint
+	SetCustomPlacementConstraints(customPlacementConstraints *foundation.NSArray[*raw.NSLayoutConstraint])
+}
+
+var _ GridCellable = (*GridCell)(nil)
 

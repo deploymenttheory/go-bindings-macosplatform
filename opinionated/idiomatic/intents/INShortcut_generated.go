@@ -32,3 +32,26 @@ func NewShortcutWithUserActivity(userActivity *foundation.NSUserActivity) *Short
 	return &Shortcut{inner: raw.INShortcutFromID(_id)}
 }
 
+// Intent calls the underlying Intent.
+func (x *Shortcut) Intent() *Intent {
+	_r := x.inner.Intent()
+	if _r == nil {
+		return nil
+	}
+	return &Intent{inner: _r}
+}
+
+// UserActivity calls the underlying UserActivity.
+func (x *Shortcut) UserActivity() *foundation.NSUserActivity {
+	return x.inner.UserActivity()
+}
+
+// Shortcutable is the interface implemented by [Shortcut], for mocking and DI.
+type Shortcutable interface {
+	Unwrap() *raw.INShortcut
+	Intent() *Intent
+	UserActivity() *foundation.NSUserActivity
+}
+
+var _ Shortcutable = (*Shortcut)(nil)
+

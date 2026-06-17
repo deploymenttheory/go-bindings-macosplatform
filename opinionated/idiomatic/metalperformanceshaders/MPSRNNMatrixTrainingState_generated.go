@@ -26,3 +26,10 @@ func NewRNNMatrixTrainingState() *RNNMatrixTrainingState {
 
 func (x *RNNMatrixTrainingState) asState() *mpscore.MPSState { return &x.inner.MPSState }
 
+// RNNMatrixTrainingStateable is the interface implemented by [RNNMatrixTrainingState], for mocking and DI.
+type RNNMatrixTrainingStateable interface {
+	Unwrap() *raw.MPSRNNMatrixTrainingState
+}
+
+var _ RNNMatrixTrainingStateable = (*RNNMatrixTrainingState)(nil)
+

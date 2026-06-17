@@ -32,5 +32,124 @@ func NewTimeZoneWithNameData(tzName string, aData *raw.NSData) *TimeZone {
 	return &TimeZone{inner: raw.NSTimeZoneFromID(_id)}
 }
 
+// SecondsFromGMTForDate calls the underlying SecondsFromGMTForDate.
+func (x *TimeZone) SecondsFromGMTForDate(aDate *raw.NSDate) int {
+	return x.inner.SecondsFromGMTForDate(aDate)
+}
+
+// AbbreviationForDate calls the underlying AbbreviationForDate.
+func (x *TimeZone) AbbreviationForDate(aDate *raw.NSDate) *String {
+	_r := x.inner.AbbreviationForDate(aDate)
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// IsDaylightSavingTimeForDate calls the underlying IsDaylightSavingTimeForDate.
+func (x *TimeZone) IsDaylightSavingTimeForDate(aDate *raw.NSDate) bool {
+	return x.inner.IsDaylightSavingTimeForDate(aDate)
+}
+
+// DaylightSavingTimeOffsetForDate calls the underlying DaylightSavingTimeOffsetForDate.
+func (x *TimeZone) DaylightSavingTimeOffsetForDate(aDate *raw.NSDate) float64 {
+	return x.inner.DaylightSavingTimeOffsetForDate(aDate)
+}
+
+// NextDaylightSavingTimeTransitionAfterDate calls the underlying NextDaylightSavingTimeTransitionAfterDate.
+func (x *TimeZone) NextDaylightSavingTimeTransitionAfterDate(aDate *raw.NSDate) *Date {
+	_r := x.inner.NextDaylightSavingTimeTransitionAfterDate(aDate)
+	if _r == nil {
+		return nil
+	}
+	return &Date{inner: _r}
+}
+
+// Name calls the underlying Name.
+func (x *TimeZone) Name() *String {
+	_r := x.inner.Name()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// Data calls the underlying Data.
+func (x *TimeZone) Data() *Data {
+	_r := x.inner.Data()
+	if _r == nil {
+		return nil
+	}
+	return &Data{inner: _r}
+}
+
+// IsEqualToTimeZone calls the underlying IsEqualToTimeZone.
+func (x *TimeZone) IsEqualToTimeZone(aTimeZone *raw.NSTimeZone) bool {
+	return x.inner.IsEqualToTimeZone(aTimeZone)
+}
+
+// LocalizedNameLocale calls the underlying LocalizedNameLocale.
+func (x *TimeZone) LocalizedNameLocale(style raw.NSTimeZoneNameStyle, locale *raw.NSLocale) *String {
+	_r := x.inner.LocalizedNameLocale(style, locale)
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SecondsFromGMT calls the underlying SecondsFromGMT.
+func (x *TimeZone) SecondsFromGMT() int {
+	return x.inner.SecondsFromGMT()
+}
+
+// Abbreviation calls the underlying Abbreviation.
+func (x *TimeZone) Abbreviation() *String {
+	_r := x.inner.Abbreviation()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// IsDaylightSavingTime calls the underlying IsDaylightSavingTime.
+func (x *TimeZone) IsDaylightSavingTime() bool {
+	return x.inner.IsDaylightSavingTime()
+}
+
+// DaylightSavingTimeOffset calls the underlying DaylightSavingTimeOffset.
+func (x *TimeZone) DaylightSavingTimeOffset() float64 {
+	return x.inner.DaylightSavingTimeOffset()
+}
+
+// NextDaylightSavingTimeTransition calls the underlying NextDaylightSavingTimeTransition.
+func (x *TimeZone) NextDaylightSavingTimeTransition() *Date {
+	_r := x.inner.NextDaylightSavingTimeTransition()
+	if _r == nil {
+		return nil
+	}
+	return &Date{inner: _r}
+}
+
 func (x *TimeZone) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// TimeZoneable is the interface implemented by [TimeZone], for mocking and DI.
+type TimeZoneable interface {
+	Unwrap() *raw.NSTimeZone
+	SecondsFromGMTForDate(aDate *raw.NSDate) int
+	AbbreviationForDate(aDate *raw.NSDate) *String
+	IsDaylightSavingTimeForDate(aDate *raw.NSDate) bool
+	DaylightSavingTimeOffsetForDate(aDate *raw.NSDate) float64
+	NextDaylightSavingTimeTransitionAfterDate(aDate *raw.NSDate) *Date
+	Name() *String
+	Data() *Data
+	IsEqualToTimeZone(aTimeZone *raw.NSTimeZone) bool
+	LocalizedNameLocale(style raw.NSTimeZoneNameStyle, locale *raw.NSLocale) *String
+	SecondsFromGMT() int
+	Abbreviation() *String
+	IsDaylightSavingTime() bool
+	DaylightSavingTimeOffset() float64
+	NextDaylightSavingTimeTransition() *Date
+}
+
+var _ TimeZoneable = (*TimeZone)(nil)
 

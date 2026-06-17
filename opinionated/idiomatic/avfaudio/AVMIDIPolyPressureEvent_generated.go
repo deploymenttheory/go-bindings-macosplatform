@@ -36,7 +36,40 @@ func (x *MIDIPolyPressureEvent) WithPressure(pressure uint) *MIDIPolyPressureEve
 	return x
 }
 
+// Key calls the underlying Key.
+func (x *MIDIPolyPressureEvent) Key() uint {
+	return x.inner.Key()
+}
+
+// SetKey calls the underlying SetKey.
+func (x *MIDIPolyPressureEvent) SetKey(key uint) {
+	x.inner.SetKey(key)
+}
+
+// Pressure calls the underlying Pressure.
+func (x *MIDIPolyPressureEvent) Pressure() uint {
+	return x.inner.Pressure()
+}
+
+// SetPressure calls the underlying SetPressure.
+func (x *MIDIPolyPressureEvent) SetPressure(pressure uint) {
+	x.inner.SetPressure(pressure)
+}
+
 func (x *MIDIPolyPressureEvent) asMIDIChannelEvent() *raw.AVMIDIChannelEvent { return &x.inner.AVMIDIChannelEvent }
 
 func (x *MIDIPolyPressureEvent) asMusicEvent() *raw.AVMusicEvent { return &x.inner.AVMIDIChannelEvent.AVMusicEvent }
+
+// MIDIPolyPressureEventable is the interface implemented by [MIDIPolyPressureEvent], for mocking and DI.
+type MIDIPolyPressureEventable interface {
+	Unwrap() *raw.AVMIDIPolyPressureEvent
+	WithKey(key uint) *MIDIPolyPressureEvent
+	WithPressure(pressure uint) *MIDIPolyPressureEvent
+	Key() uint
+	SetKey(key uint)
+	Pressure() uint
+	SetPressure(pressure uint)
+}
+
+var _ MIDIPolyPressureEventable = (*MIDIPolyPressureEvent)(nil)
 

@@ -5,7 +5,9 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +24,45 @@ func NewMTRCommissionableBrowserResult() *MTRCommissionableBrowserResult {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRCommissionableBrowserResult")), objc.RegisterName("new"))
 	return &MTRCommissionableBrowserResult{inner: raw.MTRCommissionableBrowserResultFromID(_id)}
 }
+
+// InstanceName calls the underlying InstanceName.
+func (x *MTRCommissionableBrowserResult) InstanceName() string {
+	_r := x.inner.InstanceName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// VendorID calls the underlying VendorID.
+func (x *MTRCommissionableBrowserResult) VendorID() *foundation.NSNumber {
+	return x.inner.VendorID()
+}
+
+// ProductID calls the underlying ProductID.
+func (x *MTRCommissionableBrowserResult) ProductID() *foundation.NSNumber {
+	return x.inner.ProductID()
+}
+
+// Discriminator calls the underlying Discriminator.
+func (x *MTRCommissionableBrowserResult) Discriminator() *foundation.NSNumber {
+	return x.inner.Discriminator()
+}
+
+// CommissioningMode calls the underlying CommissioningMode.
+func (x *MTRCommissionableBrowserResult) CommissioningMode() bool {
+	return x.inner.CommissioningMode()
+}
+
+// MTRCommissionableBrowserResultable is the interface implemented by [MTRCommissionableBrowserResult], for mocking and DI.
+type MTRCommissionableBrowserResultable interface {
+	Unwrap() *raw.MTRCommissionableBrowserResult
+	InstanceName() string
+	VendorID() *foundation.NSNumber
+	ProductID() *foundation.NSNumber
+	Discriminator() *foundation.NSNumber
+	CommissioningMode() bool
+}
+
+var _ MTRCommissionableBrowserResultable = (*MTRCommissionableBrowserResult)(nil)
 

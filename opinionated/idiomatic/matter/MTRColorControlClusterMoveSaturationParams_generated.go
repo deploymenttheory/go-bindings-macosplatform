@@ -60,3 +60,88 @@ func (x *MTRColorControlClusterMoveSaturationParams) WithServerSideProcessingTim
 	return x
 }
 
+// MoveMode calls the underlying MoveMode.
+func (x *MTRColorControlClusterMoveSaturationParams) MoveMode() *foundation.NSNumber {
+	return x.inner.MoveMode()
+}
+
+// SetMoveMode calls the underlying SetMoveMode.
+func (x *MTRColorControlClusterMoveSaturationParams) SetMoveMode(moveMode *foundation.NSNumber) {
+	x.inner.SetMoveMode(moveMode)
+}
+
+// Rate calls the underlying Rate.
+func (x *MTRColorControlClusterMoveSaturationParams) Rate() *foundation.NSNumber {
+	return x.inner.Rate()
+}
+
+// SetRate calls the underlying SetRate.
+func (x *MTRColorControlClusterMoveSaturationParams) SetRate(rate *foundation.NSNumber) {
+	x.inner.SetRate(rate)
+}
+
+// OptionsMask calls the underlying OptionsMask.
+func (x *MTRColorControlClusterMoveSaturationParams) OptionsMask() *foundation.NSNumber {
+	return x.inner.OptionsMask()
+}
+
+// SetOptionsMask calls the underlying SetOptionsMask.
+func (x *MTRColorControlClusterMoveSaturationParams) SetOptionsMask(optionsMask *foundation.NSNumber) {
+	x.inner.SetOptionsMask(optionsMask)
+}
+
+// OptionsOverride calls the underlying OptionsOverride.
+func (x *MTRColorControlClusterMoveSaturationParams) OptionsOverride() *foundation.NSNumber {
+	return x.inner.OptionsOverride()
+}
+
+// SetOptionsOverride calls the underlying SetOptionsOverride.
+func (x *MTRColorControlClusterMoveSaturationParams) SetOptionsOverride(optionsOverride *foundation.NSNumber) {
+	x.inner.SetOptionsOverride(optionsOverride)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRColorControlClusterMoveSaturationParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRColorControlClusterMoveSaturationParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRColorControlClusterMoveSaturationParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRColorControlClusterMoveSaturationParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRColorControlClusterMoveSaturationParamsable is the interface implemented by [MTRColorControlClusterMoveSaturationParams], for mocking and DI.
+type MTRColorControlClusterMoveSaturationParamsable interface {
+	Unwrap() *raw.MTRColorControlClusterMoveSaturationParams
+	WithMoveMode(moveMode *foundation.NSNumber) *MTRColorControlClusterMoveSaturationParams
+	WithRate(rate *foundation.NSNumber) *MTRColorControlClusterMoveSaturationParams
+	WithOptionsMask(optionsMask *foundation.NSNumber) *MTRColorControlClusterMoveSaturationParams
+	WithOptionsOverride(optionsOverride *foundation.NSNumber) *MTRColorControlClusterMoveSaturationParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRColorControlClusterMoveSaturationParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRColorControlClusterMoveSaturationParams
+	MoveMode() *foundation.NSNumber
+	SetMoveMode(moveMode *foundation.NSNumber)
+	Rate() *foundation.NSNumber
+	SetRate(rate *foundation.NSNumber)
+	OptionsMask() *foundation.NSNumber
+	SetOptionsMask(optionsMask *foundation.NSNumber)
+	OptionsOverride() *foundation.NSNumber
+	SetOptionsOverride(optionsOverride *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRColorControlClusterMoveSaturationParamsable = (*MTRColorControlClusterMoveSaturationParams)(nil)
+

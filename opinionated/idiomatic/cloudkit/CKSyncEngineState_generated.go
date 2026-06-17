@@ -6,6 +6,8 @@ package cloudkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -29,17 +31,35 @@ func (x *SyncEngineState) WithHasPendingUntrackedChanges(hasPendingUntrackedChan
 	return x
 }
 
+// AddPendingRecordZoneChanges calls the underlying AddPendingRecordZoneChanges.
+func (x *SyncEngineState) AddPendingRecordZoneChanges(changes *foundation.NSArray[*raw.CKSyncEnginePendingRecordZoneChange]) {
+	x.inner.AddPendingRecordZoneChanges(changes)
+}
+
+// RemovePendingRecordZoneChanges calls the underlying RemovePendingRecordZoneChanges.
+func (x *SyncEngineState) RemovePendingRecordZoneChanges(changes *foundation.NSArray[*raw.CKSyncEnginePendingRecordZoneChange]) {
+	x.inner.RemovePendingRecordZoneChanges(changes)
+}
+
+// AddPendingDatabaseChanges calls the underlying AddPendingDatabaseChanges.
+func (x *SyncEngineState) AddPendingDatabaseChanges(changes *foundation.NSArray[*raw.CKSyncEnginePendingDatabaseChange]) {
+	x.inner.AddPendingDatabaseChanges(changes)
+}
+
+// RemovePendingDatabaseChanges calls the underlying RemovePendingDatabaseChanges.
+func (x *SyncEngineState) RemovePendingDatabaseChanges(changes *foundation.NSArray[*raw.CKSyncEnginePendingDatabaseChange]) {
+	x.inner.RemovePendingDatabaseChanges(changes)
+}
+
 // PendingRecordZoneChanges returns the collection as a Go slice.
 func (x *SyncEngineState) PendingRecordZoneChanges() []*raw.CKSyncEnginePendingRecordZoneChange {
 	arr := x.inner.PendingRecordZoneChanges()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.CKSyncEnginePendingRecordZoneChange, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CKSyncEnginePendingRecordZoneChange {
+		return raw.CKSyncEnginePendingRecordZoneChangeFromID(purego.Retain(_id))
+	})
 }
 
 // PendingDatabaseChanges returns the collection as a Go slice.
@@ -48,11 +68,19 @@ func (x *SyncEngineState) PendingDatabaseChanges() []*raw.CKSyncEnginePendingDat
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.CKSyncEnginePendingDatabaseChange, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CKSyncEnginePendingDatabaseChange {
+		return raw.CKSyncEnginePendingDatabaseChangeFromID(purego.Retain(_id))
+	})
+}
+
+// HasPendingUntrackedChanges calls the underlying HasPendingUntrackedChanges.
+func (x *SyncEngineState) HasPendingUntrackedChanges() bool {
+	return x.inner.HasPendingUntrackedChanges()
+}
+
+// SetHasPendingUntrackedChanges calls the underlying SetHasPendingUntrackedChanges.
+func (x *SyncEngineState) SetHasPendingUntrackedChanges(hasPendingUntrackedChanges bool) {
+	x.inner.SetHasPendingUntrackedChanges(hasPendingUntrackedChanges)
 }
 
 // ZoneIDsWithUnfetchedServerChanges returns the collection as a Go slice.
@@ -61,10 +89,25 @@ func (x *SyncEngineState) ZoneIDsWithUnfetchedServerChanges() []*raw.CKRecordZon
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.CKRecordZoneID, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CKRecordZoneID {
+		return raw.CKRecordZoneIDFromID(purego.Retain(_id))
+	})
 }
+
+// SyncEngineStateable is the interface implemented by [SyncEngineState], for mocking and DI.
+type SyncEngineStateable interface {
+	Unwrap() *raw.CKSyncEngineState
+	WithHasPendingUntrackedChanges(hasPendingUntrackedChanges bool) *SyncEngineState
+	AddPendingRecordZoneChanges(changes *foundation.NSArray[*raw.CKSyncEnginePendingRecordZoneChange])
+	RemovePendingRecordZoneChanges(changes *foundation.NSArray[*raw.CKSyncEnginePendingRecordZoneChange])
+	AddPendingDatabaseChanges(changes *foundation.NSArray[*raw.CKSyncEnginePendingDatabaseChange])
+	RemovePendingDatabaseChanges(changes *foundation.NSArray[*raw.CKSyncEnginePendingDatabaseChange])
+	PendingRecordZoneChanges() []*raw.CKSyncEnginePendingRecordZoneChange
+	PendingDatabaseChanges() []*raw.CKSyncEnginePendingDatabaseChange
+	HasPendingUntrackedChanges() bool
+	SetHasPendingUntrackedChanges(hasPendingUntrackedChanges bool)
+	ZoneIDsWithUnfetchedServerChanges() []*raw.CKRecordZoneID
+}
+
+var _ SyncEngineStateable = (*SyncEngineState)(nil)
 

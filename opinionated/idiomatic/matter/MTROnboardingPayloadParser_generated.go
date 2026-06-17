@@ -23,3 +23,10 @@ func NewMTROnboardingPayloadParser() *MTROnboardingPayloadParser {
 	return &MTROnboardingPayloadParser{inner: raw.MTROnboardingPayloadParserFromID(_id)}
 }
 
+// MTROnboardingPayloadParserable is the interface implemented by [MTROnboardingPayloadParser], for mocking and DI.
+type MTROnboardingPayloadParserable interface {
+	Unwrap() *raw.MTROnboardingPayloadParser
+}
+
+var _ MTROnboardingPayloadParserable = (*MTROnboardingPayloadParser)(nil)
+

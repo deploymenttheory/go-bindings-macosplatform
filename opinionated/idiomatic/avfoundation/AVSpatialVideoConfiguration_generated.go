@@ -66,16 +66,62 @@ func (x *SpatialVideoConfiguration) WithDisparityAdjustment(disparityAdjustment 
 	return x
 }
 
-// CameraCalibrationDataLensCollection returns the collection as a Go slice.
-func (x *SpatialVideoConfiguration) CameraCalibrationDataLensCollection() []*foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	arr := x.inner.CameraCalibrationDataLensCollection()
-	if arr == nil {
-		return nil
-	}
-	out := make([]*foundation.NSDictionary[*foundation.NSString, objc.ID], arr.Count())
-	for i := range out {
-		out[i] = foundation.NSDictionaryFromID[*foundation.NSString, objc.ID](arr.ObjectAtIndex(uint(i)))
-	}
-	return out
+// CameraCalibrationDataLensCollection calls the underlying CameraCalibrationDataLensCollection.
+func (x *SpatialVideoConfiguration) CameraCalibrationDataLensCollection() *foundation.NSArray[objc.ID] {
+	return x.inner.CameraCalibrationDataLensCollection()
 }
+
+// SetCameraCalibrationDataLensCollection calls the underlying SetCameraCalibrationDataLensCollection.
+func (x *SpatialVideoConfiguration) SetCameraCalibrationDataLensCollection(cameraCalibrationDataLensCollection *foundation.NSArray[objc.ID]) {
+	x.inner.SetCameraCalibrationDataLensCollection(cameraCalibrationDataLensCollection)
+}
+
+// HorizontalFieldOfView calls the underlying HorizontalFieldOfView.
+func (x *SpatialVideoConfiguration) HorizontalFieldOfView() *foundation.NSNumber {
+	return x.inner.HorizontalFieldOfView()
+}
+
+// SetHorizontalFieldOfView calls the underlying SetHorizontalFieldOfView.
+func (x *SpatialVideoConfiguration) SetHorizontalFieldOfView(horizontalFieldOfView *foundation.NSNumber) {
+	x.inner.SetHorizontalFieldOfView(horizontalFieldOfView)
+}
+
+// CameraSystemBaseline calls the underlying CameraSystemBaseline.
+func (x *SpatialVideoConfiguration) CameraSystemBaseline() *foundation.NSNumber {
+	return x.inner.CameraSystemBaseline()
+}
+
+// SetCameraSystemBaseline calls the underlying SetCameraSystemBaseline.
+func (x *SpatialVideoConfiguration) SetCameraSystemBaseline(cameraSystemBaseline *foundation.NSNumber) {
+	x.inner.SetCameraSystemBaseline(cameraSystemBaseline)
+}
+
+// DisparityAdjustment calls the underlying DisparityAdjustment.
+func (x *SpatialVideoConfiguration) DisparityAdjustment() *foundation.NSNumber {
+	return x.inner.DisparityAdjustment()
+}
+
+// SetDisparityAdjustment calls the underlying SetDisparityAdjustment.
+func (x *SpatialVideoConfiguration) SetDisparityAdjustment(disparityAdjustment *foundation.NSNumber) {
+	x.inner.SetDisparityAdjustment(disparityAdjustment)
+}
+
+// SpatialVideoConfigurationable is the interface implemented by [SpatialVideoConfiguration], for mocking and DI.
+type SpatialVideoConfigurationable interface {
+	Unwrap() *raw.AVSpatialVideoConfiguration
+	WithCameraCalibrationDataLensCollection(items ...*foundation.NSDictionary[*foundation.NSString, objc.ID]) *SpatialVideoConfiguration
+	WithHorizontalFieldOfView(horizontalFieldOfView *foundation.NSNumber) *SpatialVideoConfiguration
+	WithCameraSystemBaseline(cameraSystemBaseline *foundation.NSNumber) *SpatialVideoConfiguration
+	WithDisparityAdjustment(disparityAdjustment *foundation.NSNumber) *SpatialVideoConfiguration
+	CameraCalibrationDataLensCollection() *foundation.NSArray[objc.ID]
+	SetCameraCalibrationDataLensCollection(cameraCalibrationDataLensCollection *foundation.NSArray[objc.ID])
+	HorizontalFieldOfView() *foundation.NSNumber
+	SetHorizontalFieldOfView(horizontalFieldOfView *foundation.NSNumber)
+	CameraSystemBaseline() *foundation.NSNumber
+	SetCameraSystemBaseline(cameraSystemBaseline *foundation.NSNumber)
+	DisparityAdjustment() *foundation.NSNumber
+	SetDisparityAdjustment(disparityAdjustment *foundation.NSNumber)
+}
+
+var _ SpatialVideoConfigurationable = (*SpatialVideoConfiguration)(nil)
 

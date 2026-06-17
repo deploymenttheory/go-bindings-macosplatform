@@ -7,6 +7,7 @@ package opendirectory
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/opendirectory"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/securityfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
@@ -30,4 +31,63 @@ func NewSessionWithOptionsError(inOptions *foundation.NSDictionary[objc.ID, objc
 	}
 	return &Session{inner: raw.ODSessionFromID(_id)}, nil
 }
+
+// NodeNamesAndReturnError calls the underlying NodeNamesAndReturnError.
+func (x *Session) NodeNamesAndReturnError() (*foundation.NSArray[objc.ID], error) {
+	return x.inner.NodeNamesAndReturnError()
+}
+
+// ConfigurationAuthorizationAllowingUserInteractionError calls the underlying ConfigurationAuthorizationAllowingUserInteractionError.
+func (x *Session) ConfigurationAuthorizationAllowingUserInteractionError(allowInteraction bool) (*securityfoundation.SFAuthorization, error) {
+	return x.inner.ConfigurationAuthorizationAllowingUserInteractionError(allowInteraction)
+}
+
+// ConfigurationForNodename calls the underlying ConfigurationForNodename.
+func (x *Session) ConfigurationForNodename(nodename string) *Configuration {
+	_r := x.inner.ConfigurationForNodename(foundation.NSStringStringWithUTF8String(nodename))
+	if _r == nil {
+		return nil
+	}
+	return &Configuration{inner: _r}
+}
+
+// AddConfigurationAuthorizationError calls the underlying AddConfigurationAuthorizationError.
+func (x *Session) AddConfigurationAuthorizationError(configuration *raw.ODConfiguration, authorization *securityfoundation.SFAuthorization) (bool, error) {
+	return x.inner.AddConfigurationAuthorizationError(configuration, authorization)
+}
+
+// DeleteConfigurationAuthorizationError calls the underlying DeleteConfigurationAuthorizationError.
+func (x *Session) DeleteConfigurationAuthorizationError(configuration *raw.ODConfiguration, authorization *securityfoundation.SFAuthorization) (bool, error) {
+	return x.inner.DeleteConfigurationAuthorizationError(configuration, authorization)
+}
+
+// DeleteConfigurationWithNodenameAuthorizationError calls the underlying DeleteConfigurationWithNodenameAuthorizationError.
+func (x *Session) DeleteConfigurationWithNodenameAuthorizationError(nodename string, authorization *securityfoundation.SFAuthorization) (bool, error) {
+	return x.inner.DeleteConfigurationWithNodenameAuthorizationError(foundation.NSStringStringWithUTF8String(nodename), authorization)
+}
+
+// ConfigurationTemplateNames calls the underlying ConfigurationTemplateNames.
+func (x *Session) ConfigurationTemplateNames() *foundation.NSArray[objc.ID] {
+	return x.inner.ConfigurationTemplateNames()
+}
+
+// MappingTemplateNames calls the underlying MappingTemplateNames.
+func (x *Session) MappingTemplateNames() *foundation.NSArray[objc.ID] {
+	return x.inner.MappingTemplateNames()
+}
+
+// Sessionable is the interface implemented by [Session], for mocking and DI.
+type Sessionable interface {
+	Unwrap() *raw.ODSession
+	NodeNamesAndReturnError() (*foundation.NSArray[objc.ID], error)
+	ConfigurationAuthorizationAllowingUserInteractionError(allowInteraction bool) (*securityfoundation.SFAuthorization, error)
+	ConfigurationForNodename(nodename string) *Configuration
+	AddConfigurationAuthorizationError(configuration *raw.ODConfiguration, authorization *securityfoundation.SFAuthorization) (bool, error)
+	DeleteConfigurationAuthorizationError(configuration *raw.ODConfiguration, authorization *securityfoundation.SFAuthorization) (bool, error)
+	DeleteConfigurationWithNodenameAuthorizationError(nodename string, authorization *securityfoundation.SFAuthorization) (bool, error)
+	ConfigurationTemplateNames() *foundation.NSArray[objc.ID]
+	MappingTemplateNames() *foundation.NSArray[objc.ID]
+}
+
+var _ Sessionable = (*Session)(nil)
 

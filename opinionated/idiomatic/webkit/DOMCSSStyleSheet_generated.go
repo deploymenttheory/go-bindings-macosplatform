@@ -5,6 +5,7 @@
 package webkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,9 +24,76 @@ func NewDOMCSSStyleSheet() *DOMCSSStyleSheet {
 	return &DOMCSSStyleSheet{inner: raw.DOMCSSStyleSheetFromID(_id)}
 }
 
+// InsertRuleIndex calls the underlying InsertRuleIndex.
+func (x *DOMCSSStyleSheet) InsertRuleIndex(rule string, index uint) uint {
+	return x.inner.InsertRuleIndex(foundation.NSStringStringWithUTF8String(rule), index)
+}
+
+// DeleteRule calls the underlying DeleteRule.
+func (x *DOMCSSStyleSheet) DeleteRule(index uint) {
+	x.inner.DeleteRule(index)
+}
+
+// AddRuleStyleIndex calls the underlying AddRuleStyleIndex.
+func (x *DOMCSSStyleSheet) AddRuleStyleIndex(selector string, style string, index uint) int {
+	return x.inner.AddRuleStyleIndex(foundation.NSStringStringWithUTF8String(selector), foundation.NSStringStringWithUTF8String(style), index)
+}
+
+// RemoveRule calls the underlying RemoveRule.
+func (x *DOMCSSStyleSheet) RemoveRule(index uint) {
+	x.inner.RemoveRule(index)
+}
+
+// OwnerRule calls the underlying OwnerRule.
+func (x *DOMCSSStyleSheet) OwnerRule() *DOMCSSRule {
+	_r := x.inner.OwnerRule()
+	if _r == nil {
+		return nil
+	}
+	return &DOMCSSRule{inner: _r}
+}
+
+// CssRules calls the underlying CssRules.
+func (x *DOMCSSStyleSheet) CssRules() *DOMCSSRuleList {
+	_r := x.inner.CssRules()
+	if _r == nil {
+		return nil
+	}
+	return &DOMCSSRuleList{inner: _r}
+}
+
+// Rules calls the underlying Rules.
+func (x *DOMCSSStyleSheet) Rules() *DOMCSSRuleList {
+	_r := x.inner.Rules()
+	if _r == nil {
+		return nil
+	}
+	return &DOMCSSRuleList{inner: _r}
+}
+
+// InsertRule calls the underlying InsertRule.
+func (x *DOMCSSStyleSheet) InsertRule(rule string, index uint) uint {
+	return x.inner.InsertRule(foundation.NSStringStringWithUTF8String(rule), index)
+}
+
 func (x *DOMCSSStyleSheet) asDOMStyleSheet() *raw.DOMStyleSheet { return &x.inner.DOMStyleSheet }
 
 func (x *DOMCSSStyleSheet) asDOMObject() *raw.DOMObject { return &x.inner.DOMStyleSheet.DOMObject }
 
 func (x *DOMCSSStyleSheet) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMStyleSheet.DOMObject.WebScriptObject }
+
+// DOMCSSStyleSheetable is the interface implemented by [DOMCSSStyleSheet], for mocking and DI.
+type DOMCSSStyleSheetable interface {
+	Unwrap() *raw.DOMCSSStyleSheet
+	InsertRuleIndex(rule string, index uint) uint
+	DeleteRule(index uint)
+	AddRuleStyleIndex(selector string, style string, index uint) int
+	RemoveRule(index uint)
+	OwnerRule() *DOMCSSRule
+	CssRules() *DOMCSSRuleList
+	Rules() *DOMCSSRuleList
+	InsertRule(rule string, index uint) uint
+}
+
+var _ DOMCSSStyleSheetable = (*DOMCSSStyleSheet)(nil)
 

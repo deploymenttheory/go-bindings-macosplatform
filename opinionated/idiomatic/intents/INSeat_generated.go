@@ -7,6 +7,7 @@ package intents
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,4 +25,51 @@ func NewSeatWithSeatSectionSeatRowSeatNumberSeatingType(seatSection string, seat
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSeatSection:seatRow:seatNumber:seatingType:"), foundation.NSStringStringWithUTF8String(seatSection).Ptr(), foundation.NSStringStringWithUTF8String(seatRow).Ptr(), foundation.NSStringStringWithUTF8String(seatNumber).Ptr(), foundation.NSStringStringWithUTF8String(seatingType).Ptr())
 	return &Seat{inner: raw.INSeatFromID(_id)}
 }
+
+// SeatSection calls the underlying SeatSection.
+func (x *Seat) SeatSection() string {
+	_r := x.inner.SeatSection()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SeatRow calls the underlying SeatRow.
+func (x *Seat) SeatRow() string {
+	_r := x.inner.SeatRow()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SeatNumber calls the underlying SeatNumber.
+func (x *Seat) SeatNumber() string {
+	_r := x.inner.SeatNumber()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SeatingType calls the underlying SeatingType.
+func (x *Seat) SeatingType() string {
+	_r := x.inner.SeatingType()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Seatable is the interface implemented by [Seat], for mocking and DI.
+type Seatable interface {
+	Unwrap() *raw.INSeat
+	SeatSection() string
+	SeatRow() string
+	SeatNumber() string
+	SeatingType() string
+}
+
+var _ Seatable = (*Seat)(nil)
 

@@ -5,7 +5,9 @@
 package foundation
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,31 +25,158 @@ func NewTextCheckingResult() *TextCheckingResult {
 	return &TextCheckingResult{inner: raw.NSTextCheckingResultFromID(_id)}
 }
 
-// GrammarDetails returns the collection as a Go slice.
-func (x *TextCheckingResult) GrammarDetails() []*raw.NSDictionary[*raw.NSString, objc.ID] {
-	arr := x.inner.GrammarDetails()
-	if arr == nil {
+// ResultType calls the underlying ResultType.
+func (x *TextCheckingResult) ResultType() raw.NSTextCheckingType {
+	return x.inner.ResultType()
+}
+
+// Range calls the underlying Range.
+func (x *TextCheckingResult) Range() raw.NSRange {
+	return x.inner.Range()
+}
+
+// RangeAtIndex calls the underlying RangeAtIndex.
+func (x *TextCheckingResult) RangeAtIndex(idx uint) raw.NSRange {
+	return x.inner.RangeAtIndex(idx)
+}
+
+// RangeWithName calls the underlying RangeWithName.
+func (x *TextCheckingResult) RangeWithName(name string) raw.NSRange {
+	return x.inner.RangeWithName(foundation.NSStringStringWithUTF8String(name))
+}
+
+// ResultByAdjustingRangesWithOffset calls the underlying ResultByAdjustingRangesWithOffset.
+func (x *TextCheckingResult) ResultByAdjustingRangesWithOffset(offset int) *TextCheckingResult {
+	_r := x.inner.ResultByAdjustingRangesWithOffset(offset)
+	if _r == nil {
 		return nil
 	}
-	out := make([]*raw.NSDictionary[*raw.NSString, objc.ID], arr.Count())
-	for i := range out {
-		out[i] = raw.NSDictionaryFromID[*raw.NSString, objc.ID](arr.ObjectAtIndex(uint(i)))
+	return &TextCheckingResult{inner: _r}
+}
+
+// Orthography calls the underlying Orthography.
+func (x *TextCheckingResult) Orthography() *Orthography {
+	_r := x.inner.Orthography()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &Orthography{inner: _r}
+}
+
+// GrammarDetails calls the underlying GrammarDetails.
+func (x *TextCheckingResult) GrammarDetails() *raw.NSArray[objc.ID] {
+	return x.inner.GrammarDetails()
+}
+
+// Date calls the underlying Date.
+func (x *TextCheckingResult) Date() *Date {
+	_r := x.inner.Date()
+	if _r == nil {
+		return nil
+	}
+	return &Date{inner: _r}
+}
+
+// TimeZone calls the underlying TimeZone.
+func (x *TextCheckingResult) TimeZone() *TimeZone {
+	_r := x.inner.TimeZone()
+	if _r == nil {
+		return nil
+	}
+	return &TimeZone{inner: _r}
+}
+
+// Duration calls the underlying Duration.
+func (x *TextCheckingResult) Duration() float64 {
+	return x.inner.Duration()
+}
+
+// Components calls the underlying Components.
+func (x *TextCheckingResult) Components() *raw.NSDictionary[*raw.NSString, *raw.NSString] {
+	return x.inner.Components()
+}
+
+// URL calls the underlying URL.
+func (x *TextCheckingResult) URL() *URL {
+	_r := x.inner.URL()
+	if _r == nil {
+		return nil
+	}
+	return &URL{inner: _r}
+}
+
+// ReplacementString calls the underlying ReplacementString.
+func (x *TextCheckingResult) ReplacementString() *String {
+	_r := x.inner.ReplacementString()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
 }
 
 // AlternativeStrings returns the collection as a Go slice.
-func (x *TextCheckingResult) AlternativeStrings() []*raw.NSString {
+func (x *TextCheckingResult) AlternativeStrings() []string {
 	arr := x.inner.AlternativeStrings()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// RegularExpression calls the underlying RegularExpression.
+func (x *TextCheckingResult) RegularExpression() *RegularExpression {
+	_r := x.inner.RegularExpression()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &RegularExpression{inner: _r}
+}
+
+// PhoneNumber calls the underlying PhoneNumber.
+func (x *TextCheckingResult) PhoneNumber() *String {
+	_r := x.inner.PhoneNumber()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// NumberOfRanges calls the underlying NumberOfRanges.
+func (x *TextCheckingResult) NumberOfRanges() uint {
+	return x.inner.NumberOfRanges()
+}
+
+// AddressComponents calls the underlying AddressComponents.
+func (x *TextCheckingResult) AddressComponents() *raw.NSDictionary[*raw.NSString, *raw.NSString] {
+	return x.inner.AddressComponents()
 }
 
 func (x *TextCheckingResult) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// TextCheckingResultable is the interface implemented by [TextCheckingResult], for mocking and DI.
+type TextCheckingResultable interface {
+	Unwrap() *raw.NSTextCheckingResult
+	ResultType() raw.NSTextCheckingType
+	Range() raw.NSRange
+	RangeAtIndex(idx uint) raw.NSRange
+	RangeWithName(name string) raw.NSRange
+	ResultByAdjustingRangesWithOffset(offset int) *TextCheckingResult
+	Orthography() *Orthography
+	GrammarDetails() *raw.NSArray[objc.ID]
+	Date() *Date
+	TimeZone() *TimeZone
+	Duration() float64
+	Components() *raw.NSDictionary[*raw.NSString, *raw.NSString]
+	URL() *URL
+	ReplacementString() *String
+	AlternativeStrings() []string
+	RegularExpression() *RegularExpression
+	PhoneNumber() *String
+	NumberOfRanges() uint
+	AddressComponents() *raw.NSDictionary[*raw.NSString, *raw.NSString]
+}
+
+var _ TextCheckingResultable = (*TextCheckingResult)(nil)
 

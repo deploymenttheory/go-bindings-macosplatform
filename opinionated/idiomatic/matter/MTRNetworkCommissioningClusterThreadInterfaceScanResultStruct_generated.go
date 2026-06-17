@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -66,5 +67,107 @@ func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) WithLqi(
 	return x
 }
 
+// PanId calls the underlying PanId.
+func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) PanId() *foundation.NSNumber {
+	return x.inner.PanId()
+}
+
+// SetPanId calls the underlying SetPanId.
+func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) SetPanId(panId *foundation.NSNumber) {
+	x.inner.SetPanId(panId)
+}
+
+// ExtendedPanId calls the underlying ExtendedPanId.
+func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) ExtendedPanId() *foundation.NSNumber {
+	return x.inner.ExtendedPanId()
+}
+
+// SetExtendedPanId calls the underlying SetExtendedPanId.
+func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) SetExtendedPanId(extendedPanId *foundation.NSNumber) {
+	x.inner.SetExtendedPanId(extendedPanId)
+}
+
+// NetworkName calls the underlying NetworkName.
+func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) NetworkName() string {
+	_r := x.inner.NetworkName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetNetworkName calls the underlying SetNetworkName.
+func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) SetNetworkName(networkName string) {
+	x.inner.SetNetworkName(foundation.NSStringStringWithUTF8String(networkName))
+}
+
+// Channel calls the underlying Channel.
+func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) Channel() *foundation.NSNumber {
+	return x.inner.Channel()
+}
+
+// SetChannel calls the underlying SetChannel.
+func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) SetChannel(channel *foundation.NSNumber) {
+	x.inner.SetChannel(channel)
+}
+
+// ExtendedAddress calls the underlying ExtendedAddress.
+func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) ExtendedAddress() *foundation.NSData {
+	return x.inner.ExtendedAddress()
+}
+
+// SetExtendedAddress calls the underlying SetExtendedAddress.
+func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) SetExtendedAddress(extendedAddress *foundation.NSData) {
+	x.inner.SetExtendedAddress(extendedAddress)
+}
+
+// Rssi calls the underlying Rssi.
+func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) Rssi() *foundation.NSNumber {
+	return x.inner.Rssi()
+}
+
+// SetRssi calls the underlying SetRssi.
+func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) SetRssi(rssi *foundation.NSNumber) {
+	x.inner.SetRssi(rssi)
+}
+
+// Lqi calls the underlying Lqi.
+func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) Lqi() *foundation.NSNumber {
+	return x.inner.Lqi()
+}
+
+// SetLqi calls the underlying SetLqi.
+func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) SetLqi(lqi *foundation.NSNumber) {
+	x.inner.SetLqi(lqi)
+}
+
 func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) asMTRNetworkCommissioningClusterThreadInterfaceScanResultStruct() *raw.MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct { return x.inner }
+
+// MTRNetworkCommissioningClusterThreadInterfaceScanResultStructable is the interface implemented by [MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct], for mocking and DI.
+type MTRNetworkCommissioningClusterThreadInterfaceScanResultStructable interface {
+	Unwrap() *raw.MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct
+	WithPanId(panId *foundation.NSNumber) *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct
+	WithExtendedPanId(extendedPanId *foundation.NSNumber) *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct
+	WithNetworkName(networkName string) *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct
+	WithChannel(channel *foundation.NSNumber) *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct
+	WithExtendedAddress(extendedAddress *foundation.NSData) *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct
+	WithRssi(rssi *foundation.NSNumber) *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct
+	WithLqi(lqi *foundation.NSNumber) *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct
+	PanId() *foundation.NSNumber
+	SetPanId(panId *foundation.NSNumber)
+	ExtendedPanId() *foundation.NSNumber
+	SetExtendedPanId(extendedPanId *foundation.NSNumber)
+	NetworkName() string
+	SetNetworkName(networkName string)
+	Channel() *foundation.NSNumber
+	SetChannel(channel *foundation.NSNumber)
+	ExtendedAddress() *foundation.NSData
+	SetExtendedAddress(extendedAddress *foundation.NSData)
+	Rssi() *foundation.NSNumber
+	SetRssi(rssi *foundation.NSNumber)
+	Lqi() *foundation.NSNumber
+	SetLqi(lqi *foundation.NSNumber)
+}
+
+var _ MTRNetworkCommissioningClusterThreadInterfaceScanResultStructable = (*MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct)(nil)
 

@@ -7,6 +7,7 @@ package networkextension
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -143,63 +144,78 @@ func (x *NETunnelProviderManager) CopyAppRules() []*raw.NEAppRule {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NEAppRule, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NEAppRule {
+		return raw.NEAppRuleFromID(purego.Retain(_id))
+	})
+}
+
+// RoutingMethod calls the underlying RoutingMethod.
+func (x *NETunnelProviderManager) RoutingMethod() raw.NETunnelProviderRoutingMethod {
+	return x.inner.RoutingMethod()
 }
 
 // SafariDomains returns the collection as a Go slice.
-func (x *NETunnelProviderManager) SafariDomains() []*foundation.NSString {
+func (x *NETunnelProviderManager) SafariDomains() []string {
 	arr := x.inner.SafariDomains()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// SetSafariDomains calls the underlying SetSafariDomains.
+func (x *NETunnelProviderManager) SetSafariDomains(safariDomains *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetSafariDomains(safariDomains)
 }
 
 // MailDomains returns the collection as a Go slice.
-func (x *NETunnelProviderManager) MailDomains() []*foundation.NSString {
+func (x *NETunnelProviderManager) MailDomains() []string {
 	arr := x.inner.MailDomains()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// SetMailDomains calls the underlying SetMailDomains.
+func (x *NETunnelProviderManager) SetMailDomains(mailDomains *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetMailDomains(mailDomains)
 }
 
 // CalendarDomains returns the collection as a Go slice.
-func (x *NETunnelProviderManager) CalendarDomains() []*foundation.NSString {
+func (x *NETunnelProviderManager) CalendarDomains() []string {
 	arr := x.inner.CalendarDomains()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// SetCalendarDomains calls the underlying SetCalendarDomains.
+func (x *NETunnelProviderManager) SetCalendarDomains(calendarDomains *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetCalendarDomains(calendarDomains)
 }
 
 // ContactsDomains returns the collection as a Go slice.
-func (x *NETunnelProviderManager) ContactsDomains() []*foundation.NSString {
+func (x *NETunnelProviderManager) ContactsDomains() []string {
 	arr := x.inner.ContactsDomains()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// SetContactsDomains calls the underlying SetContactsDomains.
+func (x *NETunnelProviderManager) SetContactsDomains(contactsDomains *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetContactsDomains(contactsDomains)
 }
 
 // AppRules returns the collection as a Go slice.
@@ -208,40 +224,79 @@ func (x *NETunnelProviderManager) AppRules() []*raw.NEAppRule {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NEAppRule, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NEAppRule {
+		return raw.NEAppRuleFromID(purego.Retain(_id))
+	})
+}
+
+// SetAppRules calls the underlying SetAppRules.
+func (x *NETunnelProviderManager) SetAppRules(appRules *foundation.NSArray[*raw.NEAppRule]) {
+	x.inner.SetAppRules(appRules)
 }
 
 // ExcludedDomains returns the collection as a Go slice.
-func (x *NETunnelProviderManager) ExcludedDomains() []*foundation.NSString {
+func (x *NETunnelProviderManager) ExcludedDomains() []string {
 	arr := x.inner.ExcludedDomains()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// SetExcludedDomains calls the underlying SetExcludedDomains.
+func (x *NETunnelProviderManager) SetExcludedDomains(excludedDomains *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetExcludedDomains(excludedDomains)
 }
 
 // AssociatedDomains returns the collection as a Go slice.
-func (x *NETunnelProviderManager) AssociatedDomains() []*foundation.NSString {
+func (x *NETunnelProviderManager) AssociatedDomains() []string {
 	arr := x.inner.AssociatedDomains()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// SetAssociatedDomains calls the underlying SetAssociatedDomains.
+func (x *NETunnelProviderManager) SetAssociatedDomains(associatedDomains *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetAssociatedDomains(associatedDomains)
 }
 
 func (x *NETunnelProviderManager) asNETunnelProviderManager() *raw.NETunnelProviderManager { return x.inner }
 
 func (x *NETunnelProviderManager) asNEVPNManager() *raw.NEVPNManager { return &x.inner.NEVPNManager }
+
+// NETunnelProviderManagerable is the interface implemented by [NETunnelProviderManager], for mocking and DI.
+type NETunnelProviderManagerable interface {
+	Unwrap() *raw.NETunnelProviderManager
+	WithSafariDomains(items ...*foundation.NSString) *NETunnelProviderManager
+	WithMailDomains(items ...*foundation.NSString) *NETunnelProviderManager
+	WithCalendarDomains(items ...*foundation.NSString) *NETunnelProviderManager
+	WithContactsDomains(items ...*foundation.NSString) *NETunnelProviderManager
+	WithAppRules(items ...*raw.NEAppRule) *NETunnelProviderManager
+	WithExcludedDomains(items ...*foundation.NSString) *NETunnelProviderManager
+	WithAssociatedDomains(items ...*foundation.NSString) *NETunnelProviderManager
+	CopyAppRules() []*raw.NEAppRule
+	RoutingMethod() raw.NETunnelProviderRoutingMethod
+	SafariDomains() []string
+	SetSafariDomains(safariDomains *foundation.NSArray[*foundation.NSString])
+	MailDomains() []string
+	SetMailDomains(mailDomains *foundation.NSArray[*foundation.NSString])
+	CalendarDomains() []string
+	SetCalendarDomains(calendarDomains *foundation.NSArray[*foundation.NSString])
+	ContactsDomains() []string
+	SetContactsDomains(contactsDomains *foundation.NSArray[*foundation.NSString])
+	AppRules() []*raw.NEAppRule
+	SetAppRules(appRules *foundation.NSArray[*raw.NEAppRule])
+	ExcludedDomains() []string
+	SetExcludedDomains(excludedDomains *foundation.NSArray[*foundation.NSString])
+	AssociatedDomains() []string
+	SetAssociatedDomains(associatedDomains *foundation.NSArray[*foundation.NSString])
+}
+
+var _ NETunnelProviderManagerable = (*NETunnelProviderManager)(nil)
 

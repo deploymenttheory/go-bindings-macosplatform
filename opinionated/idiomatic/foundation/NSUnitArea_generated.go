@@ -29,3 +29,10 @@ func (x *UnitArea) asUnit() *raw.NSUnit { return &x.inner.NSDimension.NSUnit }
 
 func (x *UnitArea) asObject() *raw.NSObject { return &x.inner.NSDimension.NSUnit.NSObject }
 
+// UnitAreaable is the interface implemented by [UnitArea], for mocking and DI.
+type UnitAreaable interface {
+	Unwrap() *raw.NSUnitArea
+}
+
+var _ UnitAreaable = (*UnitArea)(nil)
+

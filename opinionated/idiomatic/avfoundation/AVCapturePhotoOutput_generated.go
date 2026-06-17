@@ -8,6 +8,7 @@ import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -79,17 +80,30 @@ func (x *CapturePhotoOutput) WithConstantColorEnabled(constantColorEnabled bool)
 	return x
 }
 
+// CapturePhotoWithSettingsDelegate calls the underlying CapturePhotoWithSettingsDelegate.
+func (x *CapturePhotoOutput) CapturePhotoWithSettingsDelegate(settings *raw.AVCapturePhotoSettings, delegate raw.AVCapturePhotoCaptureDelegate) {
+	x.inner.CapturePhotoWithSettingsDelegate(settings, delegate)
+}
+
+// SupportedPhotoPixelFormatTypesForFileType calls the underlying SupportedPhotoPixelFormatTypesForFileType.
+func (x *CapturePhotoOutput) SupportedPhotoPixelFormatTypesForFileType(fileType *foundation.NSString) *foundation.NSArray[*foundation.NSNumber] {
+	return x.inner.SupportedPhotoPixelFormatTypesForFileType(fileType)
+}
+
+// SupportedPhotoCodecTypesForFileType calls the underlying SupportedPhotoCodecTypesForFileType.
+func (x *CapturePhotoOutput) SupportedPhotoCodecTypesForFileType(fileType *foundation.NSString) *foundation.NSArray[*foundation.NSString] {
+	return x.inner.SupportedPhotoCodecTypesForFileType(fileType)
+}
+
 // AvailablePhotoPixelFormatTypes returns the collection as a Go slice.
 func (x *CapturePhotoOutput) AvailablePhotoPixelFormatTypes() []*foundation.NSNumber {
 	arr := x.inner.AvailablePhotoPixelFormatTypes()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
 }
 
 // AvailablePhotoCodecTypes returns the collection as a Go slice.
@@ -98,11 +112,9 @@ func (x *CapturePhotoOutput) AvailablePhotoCodecTypes() []*foundation.NSString {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	})
 }
 
 // AvailablePhotoFileTypes returns the collection as a Go slice.
@@ -111,11 +123,39 @@ func (x *CapturePhotoOutput) AvailablePhotoFileTypes() []*foundation.NSString {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	})
+}
+
+// MaxPhotoQualityPrioritization calls the underlying MaxPhotoQualityPrioritization.
+func (x *CapturePhotoOutput) MaxPhotoQualityPrioritization() raw.AVCapturePhotoQualityPrioritization {
+	return x.inner.MaxPhotoQualityPrioritization()
+}
+
+// SetMaxPhotoQualityPrioritization calls the underlying SetMaxPhotoQualityPrioritization.
+func (x *CapturePhotoOutput) SetMaxPhotoQualityPrioritization(maxPhotoQualityPrioritization raw.AVCapturePhotoQualityPrioritization) {
+	x.inner.SetMaxPhotoQualityPrioritization(maxPhotoQualityPrioritization)
+}
+
+// IsFastCapturePrioritizationSupported calls the underlying IsFastCapturePrioritizationSupported.
+func (x *CapturePhotoOutput) IsFastCapturePrioritizationSupported() bool {
+	return x.inner.IsFastCapturePrioritizationSupported()
+}
+
+// SetFastCapturePrioritizationSupported calls the underlying SetFastCapturePrioritizationSupported.
+func (x *CapturePhotoOutput) SetFastCapturePrioritizationSupported(fastCapturePrioritizationSupported bool) {
+	x.inner.SetFastCapturePrioritizationSupported(fastCapturePrioritizationSupported)
+}
+
+// IsFastCapturePrioritizationEnabled calls the underlying IsFastCapturePrioritizationEnabled.
+func (x *CapturePhotoOutput) IsFastCapturePrioritizationEnabled() bool {
+	return x.inner.IsFastCapturePrioritizationEnabled()
+}
+
+// SetFastCapturePrioritizationEnabled calls the underlying SetFastCapturePrioritizationEnabled.
+func (x *CapturePhotoOutput) SetFastCapturePrioritizationEnabled(fastCapturePrioritizationEnabled bool) {
+	x.inner.SetFastCapturePrioritizationEnabled(fastCapturePrioritizationEnabled)
 }
 
 // SupportedFlashModes returns the collection as a Go slice.
@@ -124,12 +164,141 @@ func (x *CapturePhotoOutput) SupportedFlashModes() []*foundation.NSNumber {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
+}
+
+// IsHighResolutionCaptureEnabled calls the underlying IsHighResolutionCaptureEnabled.
+func (x *CapturePhotoOutput) IsHighResolutionCaptureEnabled() bool {
+	return x.inner.IsHighResolutionCaptureEnabled()
+}
+
+// SetHighResolutionCaptureEnabled calls the underlying SetHighResolutionCaptureEnabled.
+func (x *CapturePhotoOutput) SetHighResolutionCaptureEnabled(highResolutionCaptureEnabled bool) {
+	x.inner.SetHighResolutionCaptureEnabled(highResolutionCaptureEnabled)
+}
+
+// MaxPhotoDimensions calls the underlying MaxPhotoDimensions.
+func (x *CapturePhotoOutput) MaxPhotoDimensions() coremedia.CMVideoDimensions {
+	return x.inner.MaxPhotoDimensions()
+}
+
+// SetMaxPhotoDimensions calls the underlying SetMaxPhotoDimensions.
+func (x *CapturePhotoOutput) SetMaxPhotoDimensions(maxPhotoDimensions coremedia.CMVideoDimensions) {
+	x.inner.SetMaxPhotoDimensions(maxPhotoDimensions)
+}
+
+// PreservesLivePhotoCaptureSuspendedOnSessionStop calls the underlying PreservesLivePhotoCaptureSuspendedOnSessionStop.
+func (x *CapturePhotoOutput) PreservesLivePhotoCaptureSuspendedOnSessionStop() bool {
+	return x.inner.PreservesLivePhotoCaptureSuspendedOnSessionStop()
+}
+
+// SetPreservesLivePhotoCaptureSuspendedOnSessionStop calls the underlying SetPreservesLivePhotoCaptureSuspendedOnSessionStop.
+func (x *CapturePhotoOutput) SetPreservesLivePhotoCaptureSuspendedOnSessionStop(preservesLivePhotoCaptureSuspendedOnSessionStop bool) {
+	x.inner.SetPreservesLivePhotoCaptureSuspendedOnSessionStop(preservesLivePhotoCaptureSuspendedOnSessionStop)
+}
+
+// IsZeroShutterLagSupported calls the underlying IsZeroShutterLagSupported.
+func (x *CapturePhotoOutput) IsZeroShutterLagSupported() bool {
+	return x.inner.IsZeroShutterLagSupported()
+}
+
+// IsZeroShutterLagEnabled calls the underlying IsZeroShutterLagEnabled.
+func (x *CapturePhotoOutput) IsZeroShutterLagEnabled() bool {
+	return x.inner.IsZeroShutterLagEnabled()
+}
+
+// SetZeroShutterLagEnabled calls the underlying SetZeroShutterLagEnabled.
+func (x *CapturePhotoOutput) SetZeroShutterLagEnabled(zeroShutterLagEnabled bool) {
+	x.inner.SetZeroShutterLagEnabled(zeroShutterLagEnabled)
+}
+
+// IsResponsiveCaptureSupported calls the underlying IsResponsiveCaptureSupported.
+func (x *CapturePhotoOutput) IsResponsiveCaptureSupported() bool {
+	return x.inner.IsResponsiveCaptureSupported()
+}
+
+// IsResponsiveCaptureEnabled calls the underlying IsResponsiveCaptureEnabled.
+func (x *CapturePhotoOutput) IsResponsiveCaptureEnabled() bool {
+	return x.inner.IsResponsiveCaptureEnabled()
+}
+
+// SetResponsiveCaptureEnabled calls the underlying SetResponsiveCaptureEnabled.
+func (x *CapturePhotoOutput) SetResponsiveCaptureEnabled(responsiveCaptureEnabled bool) {
+	x.inner.SetResponsiveCaptureEnabled(responsiveCaptureEnabled)
+}
+
+// CaptureReadiness calls the underlying CaptureReadiness.
+func (x *CapturePhotoOutput) CaptureReadiness() raw.AVCapturePhotoOutputCaptureReadiness {
+	return x.inner.CaptureReadiness()
+}
+
+// IsConstantColorSupported calls the underlying IsConstantColorSupported.
+func (x *CapturePhotoOutput) IsConstantColorSupported() bool {
+	return x.inner.IsConstantColorSupported()
+}
+
+// IsConstantColorEnabled calls the underlying IsConstantColorEnabled.
+func (x *CapturePhotoOutput) IsConstantColorEnabled() bool {
+	return x.inner.IsConstantColorEnabled()
+}
+
+// SetConstantColorEnabled calls the underlying SetConstantColorEnabled.
+func (x *CapturePhotoOutput) SetConstantColorEnabled(constantColorEnabled bool) {
+	x.inner.SetConstantColorEnabled(constantColorEnabled)
+}
+
+// IsShutterSoundSuppressionSupported calls the underlying IsShutterSoundSuppressionSupported.
+func (x *CapturePhotoOutput) IsShutterSoundSuppressionSupported() bool {
+	return x.inner.IsShutterSoundSuppressionSupported()
 }
 
 func (x *CapturePhotoOutput) asCaptureOutput() *raw.AVCaptureOutput { return &x.inner.AVCaptureOutput }
+
+// CapturePhotoOutputable is the interface implemented by [CapturePhotoOutput], for mocking and DI.
+type CapturePhotoOutputable interface {
+	Unwrap() *raw.AVCapturePhotoOutput
+	WithMaxPhotoQualityPrioritization(maxPhotoQualityPrioritization raw.AVCapturePhotoQualityPrioritization) *CapturePhotoOutput
+	WithFastCapturePrioritizationSupported(fastCapturePrioritizationSupported bool) *CapturePhotoOutput
+	WithFastCapturePrioritizationEnabled(fastCapturePrioritizationEnabled bool) *CapturePhotoOutput
+	WithHighResolutionCaptureEnabled(highResolutionCaptureEnabled bool) *CapturePhotoOutput
+	WithMaxPhotoDimensions(maxPhotoDimensions coremedia.CMVideoDimensions) *CapturePhotoOutput
+	WithPreservesLivePhotoCaptureSuspendedOnSessionStop(preservesLivePhotoCaptureSuspendedOnSessionStop bool) *CapturePhotoOutput
+	WithZeroShutterLagEnabled(zeroShutterLagEnabled bool) *CapturePhotoOutput
+	WithResponsiveCaptureEnabled(responsiveCaptureEnabled bool) *CapturePhotoOutput
+	WithConstantColorEnabled(constantColorEnabled bool) *CapturePhotoOutput
+	CapturePhotoWithSettingsDelegate(settings *raw.AVCapturePhotoSettings, delegate raw.AVCapturePhotoCaptureDelegate)
+	SupportedPhotoPixelFormatTypesForFileType(fileType *foundation.NSString) *foundation.NSArray[*foundation.NSNumber]
+	SupportedPhotoCodecTypesForFileType(fileType *foundation.NSString) *foundation.NSArray[*foundation.NSString]
+	AvailablePhotoPixelFormatTypes() []*foundation.NSNumber
+	AvailablePhotoCodecTypes() []*foundation.NSString
+	AvailablePhotoFileTypes() []*foundation.NSString
+	MaxPhotoQualityPrioritization() raw.AVCapturePhotoQualityPrioritization
+	SetMaxPhotoQualityPrioritization(maxPhotoQualityPrioritization raw.AVCapturePhotoQualityPrioritization)
+	IsFastCapturePrioritizationSupported() bool
+	SetFastCapturePrioritizationSupported(fastCapturePrioritizationSupported bool)
+	IsFastCapturePrioritizationEnabled() bool
+	SetFastCapturePrioritizationEnabled(fastCapturePrioritizationEnabled bool)
+	SupportedFlashModes() []*foundation.NSNumber
+	IsHighResolutionCaptureEnabled() bool
+	SetHighResolutionCaptureEnabled(highResolutionCaptureEnabled bool)
+	MaxPhotoDimensions() coremedia.CMVideoDimensions
+	SetMaxPhotoDimensions(maxPhotoDimensions coremedia.CMVideoDimensions)
+	PreservesLivePhotoCaptureSuspendedOnSessionStop() bool
+	SetPreservesLivePhotoCaptureSuspendedOnSessionStop(preservesLivePhotoCaptureSuspendedOnSessionStop bool)
+	IsZeroShutterLagSupported() bool
+	IsZeroShutterLagEnabled() bool
+	SetZeroShutterLagEnabled(zeroShutterLagEnabled bool)
+	IsResponsiveCaptureSupported() bool
+	IsResponsiveCaptureEnabled() bool
+	SetResponsiveCaptureEnabled(responsiveCaptureEnabled bool)
+	CaptureReadiness() raw.AVCapturePhotoOutputCaptureReadiness
+	IsConstantColorSupported() bool
+	IsConstantColorEnabled() bool
+	SetConstantColorEnabled(constantColorEnabled bool)
+	IsShutterSoundSuppressionSupported() bool
+}
+
+var _ CapturePhotoOutputable = (*CapturePhotoOutput)(nil)
 

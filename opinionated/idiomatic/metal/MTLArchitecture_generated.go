@@ -6,6 +6,7 @@ package metal
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,21 @@ func NewArchitecture() *Architecture {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLArchitecture")), objc.RegisterName("new"))
 	return &Architecture{inner: raw.MTLArchitectureFromID(_id)}
 }
+
+// Name calls the underlying Name.
+func (x *Architecture) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Architectureable is the interface implemented by [Architecture], for mocking and DI.
+type Architectureable interface {
+	Unwrap() *raw.MTLArchitecture
+	Name() string
+}
+
+var _ Architectureable = (*Architecture)(nil)
 

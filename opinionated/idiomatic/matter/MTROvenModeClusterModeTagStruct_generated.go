@@ -36,3 +36,36 @@ func (x *MTROvenModeClusterModeTagStruct) WithValue(value *foundation.NSNumber) 
 	return x
 }
 
+// MfgCode calls the underlying MfgCode.
+func (x *MTROvenModeClusterModeTagStruct) MfgCode() *foundation.NSNumber {
+	return x.inner.MfgCode()
+}
+
+// SetMfgCode calls the underlying SetMfgCode.
+func (x *MTROvenModeClusterModeTagStruct) SetMfgCode(mfgCode *foundation.NSNumber) {
+	x.inner.SetMfgCode(mfgCode)
+}
+
+// Value calls the underlying Value.
+func (x *MTROvenModeClusterModeTagStruct) Value() *foundation.NSNumber {
+	return x.inner.Value()
+}
+
+// SetValue calls the underlying SetValue.
+func (x *MTROvenModeClusterModeTagStruct) SetValue(value *foundation.NSNumber) {
+	x.inner.SetValue(value)
+}
+
+// MTROvenModeClusterModeTagStructable is the interface implemented by [MTROvenModeClusterModeTagStruct], for mocking and DI.
+type MTROvenModeClusterModeTagStructable interface {
+	Unwrap() *raw.MTROvenModeClusterModeTagStruct
+	WithMfgCode(mfgCode *foundation.NSNumber) *MTROvenModeClusterModeTagStruct
+	WithValue(value *foundation.NSNumber) *MTROvenModeClusterModeTagStruct
+	MfgCode() *foundation.NSNumber
+	SetMfgCode(mfgCode *foundation.NSNumber)
+	Value() *foundation.NSNumber
+	SetValue(value *foundation.NSNumber)
+}
+
+var _ MTROvenModeClusterModeTagStructable = (*MTROvenModeClusterModeTagStruct)(nil)
+

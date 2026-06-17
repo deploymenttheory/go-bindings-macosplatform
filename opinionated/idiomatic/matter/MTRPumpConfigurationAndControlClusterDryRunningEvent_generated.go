@@ -23,3 +23,10 @@ func NewMTRPumpConfigurationAndControlClusterDryRunningEvent() *MTRPumpConfigura
 	return &MTRPumpConfigurationAndControlClusterDryRunningEvent{inner: raw.MTRPumpConfigurationAndControlClusterDryRunningEventFromID(_id)}
 }
 
+// MTRPumpConfigurationAndControlClusterDryRunningEventable is the interface implemented by [MTRPumpConfigurationAndControlClusterDryRunningEvent], for mocking and DI.
+type MTRPumpConfigurationAndControlClusterDryRunningEventable interface {
+	Unwrap() *raw.MTRPumpConfigurationAndControlClusterDryRunningEvent
+}
+
+var _ MTRPumpConfigurationAndControlClusterDryRunningEventable = (*MTRPumpConfigurationAndControlClusterDryRunningEvent)(nil)
+

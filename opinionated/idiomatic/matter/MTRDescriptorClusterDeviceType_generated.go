@@ -25,3 +25,10 @@ func NewMTRDescriptorClusterDeviceType() *MTRDescriptorClusterDeviceType {
 
 func (x *MTRDescriptorClusterDeviceType) asMTRDescriptorClusterDeviceTypeStruct() *raw.MTRDescriptorClusterDeviceTypeStruct { return &x.inner.MTRDescriptorClusterDeviceTypeStruct }
 
+// MTRDescriptorClusterDeviceTypeable is the interface implemented by [MTRDescriptorClusterDeviceType], for mocking and DI.
+type MTRDescriptorClusterDeviceTypeable interface {
+	Unwrap() *raw.MTRDescriptorClusterDeviceType
+}
+
+var _ MTRDescriptorClusterDeviceTypeable = (*MTRDescriptorClusterDeviceType)(nil)
+

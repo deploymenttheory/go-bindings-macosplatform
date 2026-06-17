@@ -36,7 +36,40 @@ func (x *NNReduceBinary) WithSecondarySourceClipRect(secondarySourceClipRect met
 	return x
 }
 
+// PrimarySourceClipRect calls the underlying PrimarySourceClipRect.
+func (x *NNReduceBinary) PrimarySourceClipRect() metal.MTLRegion {
+	return x.inner.PrimarySourceClipRect()
+}
+
+// SetPrimarySourceClipRect calls the underlying SetPrimarySourceClipRect.
+func (x *NNReduceBinary) SetPrimarySourceClipRect(primarySourceClipRect metal.MTLRegion) {
+	x.inner.SetPrimarySourceClipRect(primarySourceClipRect)
+}
+
+// SecondarySourceClipRect calls the underlying SecondarySourceClipRect.
+func (x *NNReduceBinary) SecondarySourceClipRect() metal.MTLRegion {
+	return x.inner.SecondarySourceClipRect()
+}
+
+// SetSecondarySourceClipRect calls the underlying SetSecondarySourceClipRect.
+func (x *NNReduceBinary) SetSecondarySourceClipRect(secondarySourceClipRect metal.MTLRegion) {
+	x.inner.SetSecondarySourceClipRect(secondarySourceClipRect)
+}
+
 func (x *NNReduceBinary) asNNReduceBinary() *raw.MPSNNReduceBinary { return x.inner }
 
 func (x *NNReduceBinary) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel { return &x.inner.MPSCNNBinaryKernel }
+
+// NNReduceBinaryable is the interface implemented by [NNReduceBinary], for mocking and DI.
+type NNReduceBinaryable interface {
+	Unwrap() *raw.MPSNNReduceBinary
+	WithPrimarySourceClipRect(primarySourceClipRect metal.MTLRegion) *NNReduceBinary
+	WithSecondarySourceClipRect(secondarySourceClipRect metal.MTLRegion) *NNReduceBinary
+	PrimarySourceClipRect() metal.MTLRegion
+	SetPrimarySourceClipRect(primarySourceClipRect metal.MTLRegion)
+	SecondarySourceClipRect() metal.MTLRegion
+	SetSecondarySourceClipRect(secondarySourceClipRect metal.MTLRegion)
+}
+
+var _ NNReduceBinaryable = (*NNReduceBinary)(nil)
 

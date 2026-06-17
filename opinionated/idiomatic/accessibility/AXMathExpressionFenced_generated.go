@@ -7,6 +7,7 @@ package accessibility
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/accessibility"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -31,12 +32,38 @@ func (x *MathExpressionFenced) Expressions() []*raw.AXMathExpression {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AXMathExpression, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AXMathExpression {
+		return raw.AXMathExpressionFromID(purego.Retain(_id))
+	})
+}
+
+// OpenString calls the underlying OpenString.
+func (x *MathExpressionFenced) OpenString() string {
+	_r := x.inner.OpenString()
+	if _r == nil {
+		return ""
 	}
-	return out
+	return purego.GoString(_r.Ptr())
+}
+
+// CloseString calls the underlying CloseString.
+func (x *MathExpressionFenced) CloseString() string {
+	_r := x.inner.CloseString()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
 }
 
 func (x *MathExpressionFenced) asMathExpression() *raw.AXMathExpression { return &x.inner.AXMathExpression }
+
+// MathExpressionFencedable is the interface implemented by [MathExpressionFenced], for mocking and DI.
+type MathExpressionFencedable interface {
+	Unwrap() *raw.AXMathExpressionFenced
+	Expressions() []*raw.AXMathExpression
+	OpenString() string
+	CloseString() string
+}
+
+var _ MathExpressionFencedable = (*MathExpressionFenced)(nil)
 

@@ -29,3 +29,27 @@ func (x *PitchControl) WithMapView(mapView *raw.MKMapView) *PitchControl {
 	return x
 }
 
+// MapView calls the underlying MapView.
+func (x *PitchControl) MapView() *MapView {
+	_r := x.inner.MapView()
+	if _r == nil {
+		return nil
+	}
+	return &MapView{inner: _r}
+}
+
+// SetMapView calls the underlying SetMapView.
+func (x *PitchControl) SetMapView(mapView *raw.MKMapView) {
+	x.inner.SetMapView(mapView)
+}
+
+// PitchControlable is the interface implemented by [PitchControl], for mocking and DI.
+type PitchControlable interface {
+	Unwrap() *raw.MKPitchControl
+	WithMapView(mapView *raw.MKMapView) *PitchControl
+	MapView() *MapView
+	SetMapView(mapView *raw.MKMapView)
+}
+
+var _ PitchControlable = (*PitchControl)(nil)
+

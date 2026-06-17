@@ -25,3 +25,10 @@ func NewJSONSerialization() *JSONSerialization {
 
 func (x *JSONSerialization) asObject() *raw.NSObject { return &x.inner.NSObject }
 
+// JSONSerializationable is the interface implemented by [JSONSerialization], for mocking and DI.
+type JSONSerializationable interface {
+	Unwrap() *raw.NSJSONSerialization
+}
+
+var _ JSONSerializationable = (*JSONSerialization)(nil)
+

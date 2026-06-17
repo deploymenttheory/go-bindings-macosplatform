@@ -107,5 +107,225 @@ func (x *TileMapNode) WithEnableAutomapping(enableAutomapping bool) *TileMapNode
 	return x
 }
 
+// FillWithTileGroup calls the underlying FillWithTileGroup.
+func (x *TileMapNode) FillWithTileGroup(tileGroup *raw.SKTileGroup) {
+	x.inner.FillWithTileGroup(tileGroup)
+}
+
+// TileDefinitionAtColumnRow calls the underlying TileDefinitionAtColumnRow.
+func (x *TileMapNode) TileDefinitionAtColumnRow(column uint, row uint) *TileDefinition {
+	_r := x.inner.TileDefinitionAtColumnRow(column, row)
+	if _r == nil {
+		return nil
+	}
+	return &TileDefinition{inner: _r}
+}
+
+// TileGroupAtColumnRow calls the underlying TileGroupAtColumnRow.
+func (x *TileMapNode) TileGroupAtColumnRow(column uint, row uint) *TileGroup {
+	_r := x.inner.TileGroupAtColumnRow(column, row)
+	if _r == nil {
+		return nil
+	}
+	return &TileGroup{inner: _r}
+}
+
+// SetTileGroupForColumnRow calls the underlying SetTileGroupForColumnRow.
+func (x *TileMapNode) SetTileGroupForColumnRow(tileGroup *raw.SKTileGroup, column uint, row uint) {
+	x.inner.SetTileGroupForColumnRow(tileGroup, column, row)
+}
+
+// SetTileGroupAndTileDefinitionForColumnRow calls the underlying SetTileGroupAndTileDefinitionForColumnRow.
+func (x *TileMapNode) SetTileGroupAndTileDefinitionForColumnRow(tileGroup *raw.SKTileGroup, tileDefinition *raw.SKTileDefinition, column uint, row uint) {
+	x.inner.SetTileGroupAndTileDefinitionForColumnRow(tileGroup, tileDefinition, column, row)
+}
+
+// TileColumnIndexFromPosition calls the underlying TileColumnIndexFromPosition.
+func (x *TileMapNode) TileColumnIndexFromPosition(position corefoundation.CGPoint) uint {
+	return x.inner.TileColumnIndexFromPosition(position)
+}
+
+// TileRowIndexFromPosition calls the underlying TileRowIndexFromPosition.
+func (x *TileMapNode) TileRowIndexFromPosition(position corefoundation.CGPoint) uint {
+	return x.inner.TileRowIndexFromPosition(position)
+}
+
+// CenterOfTileAtColumnRow calls the underlying CenterOfTileAtColumnRow.
+func (x *TileMapNode) CenterOfTileAtColumnRow(column uint, row uint) corefoundation.CGPoint {
+	return x.inner.CenterOfTileAtColumnRow(column, row)
+}
+
+// NumberOfColumns calls the underlying NumberOfColumns.
+func (x *TileMapNode) NumberOfColumns() uint {
+	return x.inner.NumberOfColumns()
+}
+
+// SetNumberOfColumns calls the underlying SetNumberOfColumns.
+func (x *TileMapNode) SetNumberOfColumns(numberOfColumns uint) {
+	x.inner.SetNumberOfColumns(numberOfColumns)
+}
+
+// NumberOfRows calls the underlying NumberOfRows.
+func (x *TileMapNode) NumberOfRows() uint {
+	return x.inner.NumberOfRows()
+}
+
+// SetNumberOfRows calls the underlying SetNumberOfRows.
+func (x *TileMapNode) SetNumberOfRows(numberOfRows uint) {
+	x.inner.SetNumberOfRows(numberOfRows)
+}
+
+// TileSize calls the underlying TileSize.
+func (x *TileMapNode) TileSize() corefoundation.CGSize {
+	return x.inner.TileSize()
+}
+
+// SetTileSize calls the underlying SetTileSize.
+func (x *TileMapNode) SetTileSize(tileSize corefoundation.CGSize) {
+	x.inner.SetTileSize(tileSize)
+}
+
+// MapSize calls the underlying MapSize.
+func (x *TileMapNode) MapSize() corefoundation.CGSize {
+	return x.inner.MapSize()
+}
+
+// TileSet calls the underlying TileSet.
+func (x *TileMapNode) TileSet() *TileSet {
+	_r := x.inner.TileSet()
+	if _r == nil {
+		return nil
+	}
+	return &TileSet{inner: _r}
+}
+
+// SetTileSet calls the underlying SetTileSet.
+func (x *TileMapNode) SetTileSet(tileSet *raw.SKTileSet) {
+	x.inner.SetTileSet(tileSet)
+}
+
+// ColorBlendFactor calls the underlying ColorBlendFactor.
+func (x *TileMapNode) ColorBlendFactor() float64 {
+	return x.inner.ColorBlendFactor()
+}
+
+// SetColorBlendFactor calls the underlying SetColorBlendFactor.
+func (x *TileMapNode) SetColorBlendFactor(colorBlendFactor float64) {
+	x.inner.SetColorBlendFactor(colorBlendFactor)
+}
+
+// Color calls the underlying Color.
+func (x *TileMapNode) Color() *appkit.NSColor {
+	return x.inner.Color()
+}
+
+// SetColor calls the underlying SetColor.
+func (x *TileMapNode) SetColor(color *appkit.NSColor) {
+	x.inner.SetColor(color)
+}
+
+// BlendMode calls the underlying BlendMode.
+func (x *TileMapNode) BlendMode() raw.SKBlendMode {
+	return x.inner.BlendMode()
+}
+
+// SetBlendMode calls the underlying SetBlendMode.
+func (x *TileMapNode) SetBlendMode(blendMode raw.SKBlendMode) {
+	x.inner.SetBlendMode(blendMode)
+}
+
+// AnchorPoint calls the underlying AnchorPoint.
+func (x *TileMapNode) AnchorPoint() corefoundation.CGPoint {
+	return x.inner.AnchorPoint()
+}
+
+// SetAnchorPoint calls the underlying SetAnchorPoint.
+func (x *TileMapNode) SetAnchorPoint(anchorPoint corefoundation.CGPoint) {
+	x.inner.SetAnchorPoint(anchorPoint)
+}
+
+// Shader calls the underlying Shader.
+func (x *TileMapNode) Shader() *Shader {
+	_r := x.inner.Shader()
+	if _r == nil {
+		return nil
+	}
+	return &Shader{inner: _r}
+}
+
+// SetShader calls the underlying SetShader.
+func (x *TileMapNode) SetShader(shader *raw.SKShader) {
+	x.inner.SetShader(shader)
+}
+
+// LightingBitMask calls the underlying LightingBitMask.
+func (x *TileMapNode) LightingBitMask() uint32 {
+	return x.inner.LightingBitMask()
+}
+
+// SetLightingBitMask calls the underlying SetLightingBitMask.
+func (x *TileMapNode) SetLightingBitMask(lightingBitMask uint32) {
+	x.inner.SetLightingBitMask(lightingBitMask)
+}
+
+// EnableAutomapping calls the underlying EnableAutomapping.
+func (x *TileMapNode) EnableAutomapping() bool {
+	return x.inner.EnableAutomapping()
+}
+
+// SetEnableAutomapping calls the underlying SetEnableAutomapping.
+func (x *TileMapNode) SetEnableAutomapping(enableAutomapping bool) {
+	x.inner.SetEnableAutomapping(enableAutomapping)
+}
+
 func (x *TileMapNode) asNode() *raw.SKNode { return &x.inner.SKNode }
+
+// TileMapNodeable is the interface implemented by [TileMapNode], for mocking and DI.
+type TileMapNodeable interface {
+	Unwrap() *raw.SKTileMapNode
+	WithNumberOfColumns(numberOfColumns uint) *TileMapNode
+	WithNumberOfRows(numberOfRows uint) *TileMapNode
+	WithTileSize(tileSize corefoundation.CGSize) *TileMapNode
+	WithTileSet(tileSet *raw.SKTileSet) *TileMapNode
+	WithColorBlendFactor(colorBlendFactor float64) *TileMapNode
+	WithColor(color *appkit.NSColor) *TileMapNode
+	WithBlendMode(blendMode raw.SKBlendMode) *TileMapNode
+	WithAnchorPoint(anchorPoint corefoundation.CGPoint) *TileMapNode
+	WithShader(shader *raw.SKShader) *TileMapNode
+	WithLightingBitMask(lightingBitMask uint32) *TileMapNode
+	WithEnableAutomapping(enableAutomapping bool) *TileMapNode
+	FillWithTileGroup(tileGroup *raw.SKTileGroup)
+	TileDefinitionAtColumnRow(column uint, row uint) *TileDefinition
+	TileGroupAtColumnRow(column uint, row uint) *TileGroup
+	SetTileGroupForColumnRow(tileGroup *raw.SKTileGroup, column uint, row uint)
+	SetTileGroupAndTileDefinitionForColumnRow(tileGroup *raw.SKTileGroup, tileDefinition *raw.SKTileDefinition, column uint, row uint)
+	TileColumnIndexFromPosition(position corefoundation.CGPoint) uint
+	TileRowIndexFromPosition(position corefoundation.CGPoint) uint
+	CenterOfTileAtColumnRow(column uint, row uint) corefoundation.CGPoint
+	NumberOfColumns() uint
+	SetNumberOfColumns(numberOfColumns uint)
+	NumberOfRows() uint
+	SetNumberOfRows(numberOfRows uint)
+	TileSize() corefoundation.CGSize
+	SetTileSize(tileSize corefoundation.CGSize)
+	MapSize() corefoundation.CGSize
+	TileSet() *TileSet
+	SetTileSet(tileSet *raw.SKTileSet)
+	ColorBlendFactor() float64
+	SetColorBlendFactor(colorBlendFactor float64)
+	Color() *appkit.NSColor
+	SetColor(color *appkit.NSColor)
+	BlendMode() raw.SKBlendMode
+	SetBlendMode(blendMode raw.SKBlendMode)
+	AnchorPoint() corefoundation.CGPoint
+	SetAnchorPoint(anchorPoint corefoundation.CGPoint)
+	Shader() *Shader
+	SetShader(shader *raw.SKShader)
+	LightingBitMask() uint32
+	SetLightingBitMask(lightingBitMask uint32)
+	EnableAutomapping() bool
+	SetEnableAutomapping(enableAutomapping bool)
+}
+
+var _ TileMapNodeable = (*TileMapNode)(nil)
 

@@ -23,7 +23,44 @@ func NewSampleType() *SampleType {
 	return &SampleType{inner: raw.HKSampleTypeFromID(_id)}
 }
 
+// IsMaximumDurationRestricted calls the underlying IsMaximumDurationRestricted.
+func (x *SampleType) IsMaximumDurationRestricted() bool {
+	return x.inner.IsMaximumDurationRestricted()
+}
+
+// MaximumAllowedDuration calls the underlying MaximumAllowedDuration.
+func (x *SampleType) MaximumAllowedDuration() float64 {
+	return x.inner.MaximumAllowedDuration()
+}
+
+// IsMinimumDurationRestricted calls the underlying IsMinimumDurationRestricted.
+func (x *SampleType) IsMinimumDurationRestricted() bool {
+	return x.inner.IsMinimumDurationRestricted()
+}
+
+// MinimumAllowedDuration calls the underlying MinimumAllowedDuration.
+func (x *SampleType) MinimumAllowedDuration() float64 {
+	return x.inner.MinimumAllowedDuration()
+}
+
+// AllowsRecalibrationForEstimates calls the underlying AllowsRecalibrationForEstimates.
+func (x *SampleType) AllowsRecalibrationForEstimates() bool {
+	return x.inner.AllowsRecalibrationForEstimates()
+}
+
 func (x *SampleType) asSampleType() *raw.HKSampleType { return x.inner }
 
 func (x *SampleType) asObjectType() *raw.HKObjectType { return &x.inner.HKObjectType }
+
+// SampleTypeable is the interface implemented by [SampleType], for mocking and DI.
+type SampleTypeable interface {
+	Unwrap() *raw.HKSampleType
+	IsMaximumDurationRestricted() bool
+	MaximumAllowedDuration() float64
+	IsMinimumDurationRestricted() bool
+	MinimumAllowedDuration() float64
+	AllowsRecalibrationForEstimates() bool
+}
+
+var _ SampleTypeable = (*SampleType)(nil)
 

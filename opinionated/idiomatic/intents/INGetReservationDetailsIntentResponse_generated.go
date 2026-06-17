@@ -7,6 +7,7 @@ package intents
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -42,18 +43,37 @@ func (x *GetReservationDetailsIntentResponse) WithReservations(items ...Reservat
 	return x
 }
 
+// Code calls the underlying Code.
+func (x *GetReservationDetailsIntentResponse) Code() raw.INGetReservationDetailsIntentResponseCode {
+	return x.inner.Code()
+}
+
 // Reservations returns the collection as a Go slice.
 func (x *GetReservationDetailsIntentResponse) Reservations() []*raw.INReservation {
 	arr := x.inner.Reservations()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.INReservation, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.INReservation {
+		return raw.INReservationFromID(purego.Retain(_id))
+	})
+}
+
+// SetReservations calls the underlying SetReservations.
+func (x *GetReservationDetailsIntentResponse) SetReservations(reservations *foundation.NSArray[*raw.INReservation]) {
+	x.inner.SetReservations(reservations)
 }
 
 func (x *GetReservationDetailsIntentResponse) asIntentResponse() *raw.INIntentResponse { return &x.inner.INIntentResponse }
+
+// GetReservationDetailsIntentResponseable is the interface implemented by [GetReservationDetailsIntentResponse], for mocking and DI.
+type GetReservationDetailsIntentResponseable interface {
+	Unwrap() *raw.INGetReservationDetailsIntentResponse
+	WithReservations(items ...ReservationProvider) *GetReservationDetailsIntentResponse
+	Code() raw.INGetReservationDetailsIntentResponseCode
+	Reservations() []*raw.INReservation
+	SetReservations(reservations *foundation.NSArray[*raw.INReservation])
+}
+
+var _ GetReservationDetailsIntentResponseable = (*GetReservationDetailsIntentResponse)(nil)
 

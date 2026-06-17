@@ -35,3 +35,62 @@ func (x *StageInputOutputDescriptor) WithIndexBufferIndex(indexBufferIndex uint)
 	return x
 }
 
+// Reset calls the underlying Reset.
+func (x *StageInputOutputDescriptor) Reset() {
+	x.inner.Reset()
+}
+
+// Layouts calls the underlying Layouts.
+func (x *StageInputOutputDescriptor) Layouts() *BufferLayoutDescriptorArray {
+	_r := x.inner.Layouts()
+	if _r == nil {
+		return nil
+	}
+	return &BufferLayoutDescriptorArray{inner: _r}
+}
+
+// Attributes calls the underlying Attributes.
+func (x *StageInputOutputDescriptor) Attributes() *AttributeDescriptorArray {
+	_r := x.inner.Attributes()
+	if _r == nil {
+		return nil
+	}
+	return &AttributeDescriptorArray{inner: _r}
+}
+
+// IndexType calls the underlying IndexType.
+func (x *StageInputOutputDescriptor) IndexType() raw.MTLIndexType {
+	return x.inner.IndexType()
+}
+
+// SetIndexType calls the underlying SetIndexType.
+func (x *StageInputOutputDescriptor) SetIndexType(indexType raw.MTLIndexType) {
+	x.inner.SetIndexType(indexType)
+}
+
+// IndexBufferIndex calls the underlying IndexBufferIndex.
+func (x *StageInputOutputDescriptor) IndexBufferIndex() uint {
+	return x.inner.IndexBufferIndex()
+}
+
+// SetIndexBufferIndex calls the underlying SetIndexBufferIndex.
+func (x *StageInputOutputDescriptor) SetIndexBufferIndex(indexBufferIndex uint) {
+	x.inner.SetIndexBufferIndex(indexBufferIndex)
+}
+
+// StageInputOutputDescriptorable is the interface implemented by [StageInputOutputDescriptor], for mocking and DI.
+type StageInputOutputDescriptorable interface {
+	Unwrap() *raw.MTLStageInputOutputDescriptor
+	WithIndexType(indexType raw.MTLIndexType) *StageInputOutputDescriptor
+	WithIndexBufferIndex(indexBufferIndex uint) *StageInputOutputDescriptor
+	Reset()
+	Layouts() *BufferLayoutDescriptorArray
+	Attributes() *AttributeDescriptorArray
+	IndexType() raw.MTLIndexType
+	SetIndexType(indexType raw.MTLIndexType)
+	IndexBufferIndex() uint
+	SetIndexBufferIndex(indexBufferIndex uint)
+}
+
+var _ StageInputOutputDescriptorable = (*StageInputOutputDescriptor)(nil)
+

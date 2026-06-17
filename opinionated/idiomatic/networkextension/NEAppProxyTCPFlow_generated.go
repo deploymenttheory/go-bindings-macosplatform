@@ -27,15 +27,39 @@ func NewNEAppProxyTCPFlow() *NEAppProxyTCPFlow {
 	return &NEAppProxyTCPFlow{inner: raw.NEAppProxyTCPFlowFromID(_id)}
 }
 
+// ReadData blocks until the operation completes or ctx is cancelled.
+func (x *NEAppProxyTCPFlow) ReadData(ctx context.Context) (*foundation.NSData, error) {
+	type _result struct {
+		val *foundation.NSData
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadDataWithCompletionHandler(func(_p0 *foundation.NSData, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSData
+		return _zero, ctx.Err()
+	}
+}
+
 // WriteData blocks until the operation completes or ctx is cancelled.
 func (x *NEAppProxyTCPFlow) WriteData(ctx context.Context, data *foundation.NSData) error {
 	_ch := make(chan error, 1)
 	x.inner.WriteDataWithCompletionHandler(data, func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -45,5 +69,26 @@ func (x *NEAppProxyTCPFlow) WriteData(ctx context.Context, data *foundation.NSDa
 	}
 }
 
+// RemoteFlowEndpoint calls the underlying RemoteFlowEndpoint.
+func (x *NEAppProxyTCPFlow) RemoteFlowEndpoint() *foundation.NSObject {
+	return x.inner.RemoteFlowEndpoint()
+}
+
+// RemoteEndpoint calls the underlying RemoteEndpoint.
+func (x *NEAppProxyTCPFlow) RemoteEndpoint() unsafe.Pointer {
+	return x.inner.RemoteEndpoint()
+}
+
 func (x *NEAppProxyTCPFlow) asNEAppProxyFlow() *raw.NEAppProxyFlow { return &x.inner.NEAppProxyFlow }
+
+// NEAppProxyTCPFlowable is the interface implemented by [NEAppProxyTCPFlow], for mocking and DI.
+type NEAppProxyTCPFlowable interface {
+	Unwrap() *raw.NEAppProxyTCPFlow
+	ReadData(ctx context.Context) (*foundation.NSData, error)
+	WriteData(ctx context.Context, data *foundation.NSData) error
+	RemoteFlowEndpoint() *foundation.NSObject
+	RemoteEndpoint() unsafe.Pointer
+}
+
+var _ NEAppProxyTCPFlowable = (*NEAppProxyTCPFlow)(nil)
 

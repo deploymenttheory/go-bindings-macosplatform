@@ -7,6 +7,7 @@ package gamekit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -90,5 +91,85 @@ func (x *GameCenterViewController) WithLeaderboardCategory(leaderboardCategory s
 	return x
 }
 
+// GameCenterDelegate calls the underlying GameCenterDelegate.
+func (x *GameCenterViewController) GameCenterDelegate() raw.GKGameCenterControllerDelegate {
+	return x.inner.GameCenterDelegate()
+}
+
+// SetGameCenterDelegate calls the underlying SetGameCenterDelegate.
+func (x *GameCenterViewController) SetGameCenterDelegate(gameCenterDelegate raw.GKGameCenterControllerDelegate) {
+	x.inner.SetGameCenterDelegate(gameCenterDelegate)
+}
+
+// ViewState calls the underlying ViewState.
+func (x *GameCenterViewController) ViewState() raw.GKGameCenterViewControllerState {
+	return x.inner.ViewState()
+}
+
+// SetViewState calls the underlying SetViewState.
+func (x *GameCenterViewController) SetViewState(viewState raw.GKGameCenterViewControllerState) {
+	x.inner.SetViewState(viewState)
+}
+
+// LeaderboardTimeScope calls the underlying LeaderboardTimeScope.
+func (x *GameCenterViewController) LeaderboardTimeScope() raw.GKLeaderboardTimeScope {
+	return x.inner.LeaderboardTimeScope()
+}
+
+// SetLeaderboardTimeScope calls the underlying SetLeaderboardTimeScope.
+func (x *GameCenterViewController) SetLeaderboardTimeScope(leaderboardTimeScope raw.GKLeaderboardTimeScope) {
+	x.inner.SetLeaderboardTimeScope(leaderboardTimeScope)
+}
+
+// LeaderboardIdentifier calls the underlying LeaderboardIdentifier.
+func (x *GameCenterViewController) LeaderboardIdentifier() string {
+	_r := x.inner.LeaderboardIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLeaderboardIdentifier calls the underlying SetLeaderboardIdentifier.
+func (x *GameCenterViewController) SetLeaderboardIdentifier(leaderboardIdentifier string) {
+	x.inner.SetLeaderboardIdentifier(foundation.NSStringStringWithUTF8String(leaderboardIdentifier))
+}
+
+// LeaderboardCategory calls the underlying LeaderboardCategory.
+func (x *GameCenterViewController) LeaderboardCategory() string {
+	_r := x.inner.LeaderboardCategory()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLeaderboardCategory calls the underlying SetLeaderboardCategory.
+func (x *GameCenterViewController) SetLeaderboardCategory(leaderboardCategory string) {
+	x.inner.SetLeaderboardCategory(foundation.NSStringStringWithUTF8String(leaderboardCategory))
+}
+
 func (x *GameCenterViewController) asGameCenterViewController() *raw.GKGameCenterViewController { return x.inner }
+
+// GameCenterViewControllerable is the interface implemented by [GameCenterViewController], for mocking and DI.
+type GameCenterViewControllerable interface {
+	Unwrap() *raw.GKGameCenterViewController
+	WithGameCenterDelegate(gameCenterDelegate raw.GKGameCenterControllerDelegate) *GameCenterViewController
+	WithViewState(viewState raw.GKGameCenterViewControllerState) *GameCenterViewController
+	WithLeaderboardTimeScope(leaderboardTimeScope raw.GKLeaderboardTimeScope) *GameCenterViewController
+	WithLeaderboardIdentifier(leaderboardIdentifier string) *GameCenterViewController
+	WithLeaderboardCategory(leaderboardCategory string) *GameCenterViewController
+	GameCenterDelegate() raw.GKGameCenterControllerDelegate
+	SetGameCenterDelegate(gameCenterDelegate raw.GKGameCenterControllerDelegate)
+	ViewState() raw.GKGameCenterViewControllerState
+	SetViewState(viewState raw.GKGameCenterViewControllerState)
+	LeaderboardTimeScope() raw.GKLeaderboardTimeScope
+	SetLeaderboardTimeScope(leaderboardTimeScope raw.GKLeaderboardTimeScope)
+	LeaderboardIdentifier() string
+	SetLeaderboardIdentifier(leaderboardIdentifier string)
+	LeaderboardCategory() string
+	SetLeaderboardCategory(leaderboardCategory string)
+}
+
+var _ GameCenterViewControllerable = (*GameCenterViewController)(nil)
 

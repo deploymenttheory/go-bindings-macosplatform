@@ -30,3 +30,23 @@ func (x *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput) WithSupport
 	return x
 }
 
+// SupportRequirement calls the underlying SupportRequirement.
+func (x *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput) SupportRequirement() raw.ASAuthorizationPublicKeyCredentialLargeBlobSupportRequirement {
+	return x.inner.SupportRequirement()
+}
+
+// SetSupportRequirement calls the underlying SetSupportRequirement.
+func (x *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput) SetSupportRequirement(supportRequirement raw.ASAuthorizationPublicKeyCredentialLargeBlobSupportRequirement) {
+	x.inner.SetSupportRequirement(supportRequirement)
+}
+
+// AuthorizationPublicKeyCredentialLargeBlobRegistrationInputable is the interface implemented by [AuthorizationPublicKeyCredentialLargeBlobRegistrationInput], for mocking and DI.
+type AuthorizationPublicKeyCredentialLargeBlobRegistrationInputable interface {
+	Unwrap() *raw.ASAuthorizationPublicKeyCredentialLargeBlobRegistrationInput
+	WithSupportRequirement(supportRequirement raw.ASAuthorizationPublicKeyCredentialLargeBlobSupportRequirement) *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput
+	SupportRequirement() raw.ASAuthorizationPublicKeyCredentialLargeBlobSupportRequirement
+	SetSupportRequirement(supportRequirement raw.ASAuthorizationPublicKeyCredentialLargeBlobSupportRequirement)
+}
+
+var _ AuthorizationPublicKeyCredentialLargeBlobRegistrationInputable = (*AuthorizationPublicKeyCredentialLargeBlobRegistrationInput)(nil)
+

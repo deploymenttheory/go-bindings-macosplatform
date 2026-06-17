@@ -30,3 +30,23 @@ func (x *MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent) WithReasonCode(reas
 	return x
 }
 
+// ReasonCode calls the underlying ReasonCode.
+func (x *MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent) ReasonCode() *foundation.NSNumber {
+	return x.inner.ReasonCode()
+}
+
+// SetReasonCode calls the underlying SetReasonCode.
+func (x *MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent) SetReasonCode(reasonCode *foundation.NSNumber) {
+	x.inner.SetReasonCode(reasonCode)
+}
+
+// MTRWiFiNetworkDiagnosticsClusterDisconnectionEventable is the interface implemented by [MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent], for mocking and DI.
+type MTRWiFiNetworkDiagnosticsClusterDisconnectionEventable interface {
+	Unwrap() *raw.MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent
+	WithReasonCode(reasonCode *foundation.NSNumber) *MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent
+	ReasonCode() *foundation.NSNumber
+	SetReasonCode(reasonCode *foundation.NSNumber)
+}
+
+var _ MTRWiFiNetworkDiagnosticsClusterDisconnectionEventable = (*MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent)(nil)
+

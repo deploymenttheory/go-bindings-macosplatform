@@ -49,3 +49,62 @@ func (x *MTROperationalCertificateChain) WithAdminSubject(adminSubject *foundati
 	return x
 }
 
+// OperationalCertificate calls the underlying OperationalCertificate.
+func (x *MTROperationalCertificateChain) OperationalCertificate() *foundation.NSData {
+	return x.inner.OperationalCertificate()
+}
+
+// SetOperationalCertificate calls the underlying SetOperationalCertificate.
+func (x *MTROperationalCertificateChain) SetOperationalCertificate(operationalCertificate *foundation.NSData) {
+	x.inner.SetOperationalCertificate(operationalCertificate)
+}
+
+// IntermediateCertificate calls the underlying IntermediateCertificate.
+func (x *MTROperationalCertificateChain) IntermediateCertificate() *foundation.NSData {
+	return x.inner.IntermediateCertificate()
+}
+
+// SetIntermediateCertificate calls the underlying SetIntermediateCertificate.
+func (x *MTROperationalCertificateChain) SetIntermediateCertificate(intermediateCertificate *foundation.NSData) {
+	x.inner.SetIntermediateCertificate(intermediateCertificate)
+}
+
+// RootCertificate calls the underlying RootCertificate.
+func (x *MTROperationalCertificateChain) RootCertificate() *foundation.NSData {
+	return x.inner.RootCertificate()
+}
+
+// SetRootCertificate calls the underlying SetRootCertificate.
+func (x *MTROperationalCertificateChain) SetRootCertificate(rootCertificate *foundation.NSData) {
+	x.inner.SetRootCertificate(rootCertificate)
+}
+
+// AdminSubject calls the underlying AdminSubject.
+func (x *MTROperationalCertificateChain) AdminSubject() *foundation.NSNumber {
+	return x.inner.AdminSubject()
+}
+
+// SetAdminSubject calls the underlying SetAdminSubject.
+func (x *MTROperationalCertificateChain) SetAdminSubject(adminSubject *foundation.NSNumber) {
+	x.inner.SetAdminSubject(adminSubject)
+}
+
+// MTROperationalCertificateChainable is the interface implemented by [MTROperationalCertificateChain], for mocking and DI.
+type MTROperationalCertificateChainable interface {
+	Unwrap() *raw.MTROperationalCertificateChain
+	WithOperationalCertificate(operationalCertificate *foundation.NSData) *MTROperationalCertificateChain
+	WithIntermediateCertificate(intermediateCertificate *foundation.NSData) *MTROperationalCertificateChain
+	WithRootCertificate(rootCertificate *foundation.NSData) *MTROperationalCertificateChain
+	WithAdminSubject(adminSubject *foundation.NSNumber) *MTROperationalCertificateChain
+	OperationalCertificate() *foundation.NSData
+	SetOperationalCertificate(operationalCertificate *foundation.NSData)
+	IntermediateCertificate() *foundation.NSData
+	SetIntermediateCertificate(intermediateCertificate *foundation.NSData)
+	RootCertificate() *foundation.NSData
+	SetRootCertificate(rootCertificate *foundation.NSData)
+	AdminSubject() *foundation.NSNumber
+	SetAdminSubject(adminSubject *foundation.NSNumber)
+}
+
+var _ MTROperationalCertificateChainable = (*MTROperationalCertificateChain)(nil)
+

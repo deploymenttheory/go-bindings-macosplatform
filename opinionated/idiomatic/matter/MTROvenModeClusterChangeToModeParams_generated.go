@@ -42,3 +42,49 @@ func (x *MTROvenModeClusterChangeToModeParams) WithServerSideProcessingTimeout(s
 	return x
 }
 
+// GetNewMode calls the underlying GetNewMode.
+func (x *MTROvenModeClusterChangeToModeParams) GetNewMode() *foundation.NSNumber {
+	return x.inner.GetNewMode()
+}
+
+// SetNewMode calls the underlying SetNewMode.
+func (x *MTROvenModeClusterChangeToModeParams) SetNewMode(newMode *foundation.NSNumber) {
+	x.inner.SetNewMode(newMode)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTROvenModeClusterChangeToModeParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTROvenModeClusterChangeToModeParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTROvenModeClusterChangeToModeParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTROvenModeClusterChangeToModeParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTROvenModeClusterChangeToModeParamsable is the interface implemented by [MTROvenModeClusterChangeToModeParams], for mocking and DI.
+type MTROvenModeClusterChangeToModeParamsable interface {
+	Unwrap() *raw.MTROvenModeClusterChangeToModeParams
+	WithNewMode(newMode *foundation.NSNumber) *MTROvenModeClusterChangeToModeParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTROvenModeClusterChangeToModeParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTROvenModeClusterChangeToModeParams
+	GetNewMode() *foundation.NSNumber
+	SetNewMode(newMode *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTROvenModeClusterChangeToModeParamsable = (*MTROvenModeClusterChangeToModeParams)(nil)
+

@@ -33,3 +33,10 @@ func NewCaptureSystemZoomSliderWithDeviceAction(device *raw.AVCaptureDevice, act
 
 func (x *CaptureSystemZoomSlider) asCaptureControl() *raw.AVCaptureControl { return &x.inner.AVCaptureControl }
 
+// CaptureSystemZoomSliderable is the interface implemented by [CaptureSystemZoomSlider], for mocking and DI.
+type CaptureSystemZoomSliderable interface {
+	Unwrap() *raw.AVCaptureSystemZoomSlider
+}
+
+var _ CaptureSystemZoomSliderable = (*CaptureSystemZoomSlider)(nil)
+

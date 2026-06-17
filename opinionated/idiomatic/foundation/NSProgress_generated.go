@@ -122,6 +122,11 @@ func (x *Progress) WithFileCompletedCount(fileCompletedCount NumberProvider) *Pr
 	return x
 }
 
+// BecomeCurrentWithPendingUnitCount calls the underlying BecomeCurrentWithPendingUnitCount.
+func (x *Progress) BecomeCurrentWithPendingUnitCount(unitCount int64) {
+	x.inner.BecomeCurrentWithPendingUnitCount(unitCount)
+}
+
 // PerformAsCurrentWithPendingUnitCountUsing blocks until the operation completes or ctx is cancelled.
 func (x *Progress) PerformAsCurrentWithPendingUnitCountUsing(ctx context.Context, unitCount int64) error {
 	_ch := make(chan error, 1)
@@ -134,6 +139,129 @@ func (x *Progress) PerformAsCurrentWithPendingUnitCountUsing(ctx context.Context
 	case <-ctx.Done():
 		return ctx.Err()
 	}
+}
+
+// ResignCurrent calls the underlying ResignCurrent.
+func (x *Progress) ResignCurrent() {
+	x.inner.ResignCurrent()
+}
+
+// AddChildWithPendingUnitCount calls the underlying AddChildWithPendingUnitCount.
+func (x *Progress) AddChildWithPendingUnitCount(child *raw.NSProgress, inUnitCount int64) {
+	x.inner.AddChildWithPendingUnitCount(child, inUnitCount)
+}
+
+// SetUserInfoObjectForKey calls the underlying SetUserInfoObjectForKey.
+func (x *Progress) SetUserInfoObjectForKey(objectOrNil objc.ID, key *raw.NSString) {
+	x.inner.SetUserInfoObjectForKey(objectOrNil, key)
+}
+
+// Cancel calls the underlying Cancel.
+func (x *Progress) Cancel() {
+	x.inner.Cancel()
+}
+
+// Pause calls the underlying Pause.
+func (x *Progress) Pause() {
+	x.inner.Pause()
+}
+
+// Resume calls the underlying Resume.
+func (x *Progress) Resume() {
+	x.inner.Resume()
+}
+
+// Publish calls the underlying Publish.
+func (x *Progress) Publish() {
+	x.inner.Publish()
+}
+
+// Unpublish calls the underlying Unpublish.
+func (x *Progress) Unpublish() {
+	x.inner.Unpublish()
+}
+
+// TotalUnitCount calls the underlying TotalUnitCount.
+func (x *Progress) TotalUnitCount() int64 {
+	return x.inner.TotalUnitCount()
+}
+
+// SetTotalUnitCount calls the underlying SetTotalUnitCount.
+func (x *Progress) SetTotalUnitCount(totalUnitCount int64) {
+	x.inner.SetTotalUnitCount(totalUnitCount)
+}
+
+// CompletedUnitCount calls the underlying CompletedUnitCount.
+func (x *Progress) CompletedUnitCount() int64 {
+	return x.inner.CompletedUnitCount()
+}
+
+// SetCompletedUnitCount calls the underlying SetCompletedUnitCount.
+func (x *Progress) SetCompletedUnitCount(completedUnitCount int64) {
+	x.inner.SetCompletedUnitCount(completedUnitCount)
+}
+
+// LocalizedDescription calls the underlying LocalizedDescription.
+func (x *Progress) LocalizedDescription() *String {
+	_r := x.inner.LocalizedDescription()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SetLocalizedDescription calls the underlying SetLocalizedDescription.
+func (x *Progress) SetLocalizedDescription(localizedDescription string) {
+	x.inner.SetLocalizedDescription(foundation.NSStringStringWithUTF8String(localizedDescription))
+}
+
+// LocalizedAdditionalDescription calls the underlying LocalizedAdditionalDescription.
+func (x *Progress) LocalizedAdditionalDescription() *String {
+	_r := x.inner.LocalizedAdditionalDescription()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SetLocalizedAdditionalDescription calls the underlying SetLocalizedAdditionalDescription.
+func (x *Progress) SetLocalizedAdditionalDescription(localizedAdditionalDescription string) {
+	x.inner.SetLocalizedAdditionalDescription(foundation.NSStringStringWithUTF8String(localizedAdditionalDescription))
+}
+
+// IsCancellable calls the underlying IsCancellable.
+func (x *Progress) IsCancellable() bool {
+	return x.inner.IsCancellable()
+}
+
+// SetCancellable calls the underlying SetCancellable.
+func (x *Progress) SetCancellable(cancellable bool) {
+	x.inner.SetCancellable(cancellable)
+}
+
+// IsPausable calls the underlying IsPausable.
+func (x *Progress) IsPausable() bool {
+	return x.inner.IsPausable()
+}
+
+// SetPausable calls the underlying SetPausable.
+func (x *Progress) SetPausable(pausable bool) {
+	x.inner.SetPausable(pausable)
+}
+
+// IsCancelled calls the underlying IsCancelled.
+func (x *Progress) IsCancelled() bool {
+	return x.inner.IsCancelled()
+}
+
+// IsPaused calls the underlying IsPaused.
+func (x *Progress) IsPaused() bool {
+	return x.inner.IsPaused()
+}
+
+// CancellationHandler calls the underlying CancellationHandler.
+func (x *Progress) CancellationHandler() objc.Block {
+	return x.inner.CancellationHandler()
 }
 
 // SetCancellationHandler blocks until the operation completes or ctx is cancelled.
@@ -150,6 +278,11 @@ func (x *Progress) SetCancellationHandler(ctx context.Context) error {
 	}
 }
 
+// PausingHandler calls the underlying PausingHandler.
+func (x *Progress) PausingHandler() objc.Block {
+	return x.inner.PausingHandler()
+}
+
 // SetPausingHandler blocks until the operation completes or ctx is cancelled.
 func (x *Progress) SetPausingHandler(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -162,6 +295,11 @@ func (x *Progress) SetPausingHandler(ctx context.Context) error {
 	case <-ctx.Done():
 		return ctx.Err()
 	}
+}
+
+// ResumingHandler calls the underlying ResumingHandler.
+func (x *Progress) ResumingHandler() objc.Block {
+	return x.inner.ResumingHandler()
 }
 
 // SetResumingHandler blocks until the operation completes or ctx is cancelled.
@@ -178,5 +316,200 @@ func (x *Progress) SetResumingHandler(ctx context.Context) error {
 	}
 }
 
+// IsIndeterminate calls the underlying IsIndeterminate.
+func (x *Progress) IsIndeterminate() bool {
+	return x.inner.IsIndeterminate()
+}
+
+// FractionCompleted calls the underlying FractionCompleted.
+func (x *Progress) FractionCompleted() float64 {
+	return x.inner.FractionCompleted()
+}
+
+// IsFinished calls the underlying IsFinished.
+func (x *Progress) IsFinished() bool {
+	return x.inner.IsFinished()
+}
+
+// UserInfo calls the underlying UserInfo.
+func (x *Progress) UserInfo() *raw.NSDictionary[*raw.NSString, objc.ID] {
+	return x.inner.UserInfo()
+}
+
+// Kind calls the underlying Kind.
+func (x *Progress) Kind() *String {
+	_r := x.inner.Kind()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SetKind calls the underlying SetKind.
+func (x *Progress) SetKind(kind *raw.NSString) {
+	x.inner.SetKind(kind)
+}
+
+// EstimatedTimeRemaining calls the underlying EstimatedTimeRemaining.
+func (x *Progress) EstimatedTimeRemaining() *Number {
+	_r := x.inner.EstimatedTimeRemaining()
+	if _r == nil {
+		return nil
+	}
+	return &Number{inner: _r}
+}
+
+// SetEstimatedTimeRemaining calls the underlying SetEstimatedTimeRemaining.
+func (x *Progress) SetEstimatedTimeRemaining(estimatedTimeRemaining *raw.NSNumber) {
+	x.inner.SetEstimatedTimeRemaining(estimatedTimeRemaining)
+}
+
+// Throughput calls the underlying Throughput.
+func (x *Progress) Throughput() *Number {
+	_r := x.inner.Throughput()
+	if _r == nil {
+		return nil
+	}
+	return &Number{inner: _r}
+}
+
+// SetThroughput calls the underlying SetThroughput.
+func (x *Progress) SetThroughput(throughput *raw.NSNumber) {
+	x.inner.SetThroughput(throughput)
+}
+
+// FileOperationKind calls the underlying FileOperationKind.
+func (x *Progress) FileOperationKind() *String {
+	_r := x.inner.FileOperationKind()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SetFileOperationKind calls the underlying SetFileOperationKind.
+func (x *Progress) SetFileOperationKind(fileOperationKind *raw.NSString) {
+	x.inner.SetFileOperationKind(fileOperationKind)
+}
+
+// FileURL calls the underlying FileURL.
+func (x *Progress) FileURL() *URL {
+	_r := x.inner.FileURL()
+	if _r == nil {
+		return nil
+	}
+	return &URL{inner: _r}
+}
+
+// SetFileURL calls the underlying SetFileURL.
+func (x *Progress) SetFileURL(fileURL string) {
+	x.inner.SetFileURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)))
+}
+
+// FileTotalCount calls the underlying FileTotalCount.
+func (x *Progress) FileTotalCount() *Number {
+	_r := x.inner.FileTotalCount()
+	if _r == nil {
+		return nil
+	}
+	return &Number{inner: _r}
+}
+
+// SetFileTotalCount calls the underlying SetFileTotalCount.
+func (x *Progress) SetFileTotalCount(fileTotalCount *raw.NSNumber) {
+	x.inner.SetFileTotalCount(fileTotalCount)
+}
+
+// FileCompletedCount calls the underlying FileCompletedCount.
+func (x *Progress) FileCompletedCount() *Number {
+	_r := x.inner.FileCompletedCount()
+	if _r == nil {
+		return nil
+	}
+	return &Number{inner: _r}
+}
+
+// SetFileCompletedCount calls the underlying SetFileCompletedCount.
+func (x *Progress) SetFileCompletedCount(fileCompletedCount *raw.NSNumber) {
+	x.inner.SetFileCompletedCount(fileCompletedCount)
+}
+
+// IsOld calls the underlying IsOld.
+func (x *Progress) IsOld() bool {
+	return x.inner.IsOld()
+}
+
 func (x *Progress) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// Progressable is the interface implemented by [Progress], for mocking and DI.
+type Progressable interface {
+	Unwrap() *raw.NSProgress
+	WithTotalUnitCount(totalUnitCount int64) *Progress
+	WithCompletedUnitCount(completedUnitCount int64) *Progress
+	WithLocalizedDescription(localizedDescription string) *Progress
+	WithLocalizedAdditionalDescription(localizedAdditionalDescription string) *Progress
+	WithCancellable(cancellable bool) *Progress
+	WithPausable(pausable bool) *Progress
+	WithCancellationHandler(cancellationHandler func()) *Progress
+	WithPausingHandler(pausingHandler func()) *Progress
+	WithResumingHandler(resumingHandler func()) *Progress
+	WithKind(kind StringProvider) *Progress
+	WithEstimatedTimeRemaining(estimatedTimeRemaining NumberProvider) *Progress
+	WithThroughput(throughput NumberProvider) *Progress
+	WithFileOperationKind(fileOperationKind StringProvider) *Progress
+	WithFileURL(fileURL string) *Progress
+	WithFileTotalCount(fileTotalCount NumberProvider) *Progress
+	WithFileCompletedCount(fileCompletedCount NumberProvider) *Progress
+	BecomeCurrentWithPendingUnitCount(unitCount int64)
+	PerformAsCurrentWithPendingUnitCountUsing(ctx context.Context, unitCount int64) error
+	ResignCurrent()
+	AddChildWithPendingUnitCount(child *raw.NSProgress, inUnitCount int64)
+	SetUserInfoObjectForKey(objectOrNil objc.ID, key *raw.NSString)
+	Cancel()
+	Pause()
+	Resume()
+	Publish()
+	Unpublish()
+	TotalUnitCount() int64
+	SetTotalUnitCount(totalUnitCount int64)
+	CompletedUnitCount() int64
+	SetCompletedUnitCount(completedUnitCount int64)
+	LocalizedDescription() *String
+	SetLocalizedDescription(localizedDescription string)
+	LocalizedAdditionalDescription() *String
+	SetLocalizedAdditionalDescription(localizedAdditionalDescription string)
+	IsCancellable() bool
+	SetCancellable(cancellable bool)
+	IsPausable() bool
+	SetPausable(pausable bool)
+	IsCancelled() bool
+	IsPaused() bool
+	CancellationHandler() objc.Block
+	SetCancellationHandler(ctx context.Context) error
+	PausingHandler() objc.Block
+	SetPausingHandler(ctx context.Context) error
+	ResumingHandler() objc.Block
+	SetResumingHandler(ctx context.Context) error
+	IsIndeterminate() bool
+	FractionCompleted() float64
+	IsFinished() bool
+	UserInfo() *raw.NSDictionary[*raw.NSString, objc.ID]
+	Kind() *String
+	SetKind(kind *raw.NSString)
+	EstimatedTimeRemaining() *Number
+	SetEstimatedTimeRemaining(estimatedTimeRemaining *raw.NSNumber)
+	Throughput() *Number
+	SetThroughput(throughput *raw.NSNumber)
+	FileOperationKind() *String
+	SetFileOperationKind(fileOperationKind *raw.NSString)
+	FileURL() *URL
+	SetFileURL(fileURL string)
+	FileTotalCount() *Number
+	SetFileTotalCount(fileTotalCount *raw.NSNumber)
+	FileCompletedCount() *Number
+	SetFileCompletedCount(fileCompletedCount *raw.NSNumber)
+	IsOld() bool
+}
+
+var _ Progressable = (*Progress)(nil)
 

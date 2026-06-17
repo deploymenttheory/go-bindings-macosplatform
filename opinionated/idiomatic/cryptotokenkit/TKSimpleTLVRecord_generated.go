@@ -27,3 +27,10 @@ func NewSimpleTLVRecordWithTagValue(tag uint8, value *foundation.NSData) *Simple
 
 func (x *SimpleTLVRecord) asTLVRecord() *raw.TKTLVRecord { return &x.inner.TKTLVRecord }
 
+// SimpleTLVRecordable is the interface implemented by [SimpleTLVRecord], for mocking and DI.
+type SimpleTLVRecordable interface {
+	Unwrap() *raw.TKSimpleTLVRecord
+}
+
+var _ SimpleTLVRecordable = (*SimpleTLVRecord)(nil)
+

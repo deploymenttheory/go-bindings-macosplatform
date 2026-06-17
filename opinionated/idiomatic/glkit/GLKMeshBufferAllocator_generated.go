@@ -23,3 +23,10 @@ func NewMeshBufferAllocator() *MeshBufferAllocator {
 	return &MeshBufferAllocator{inner: raw.GLKMeshBufferAllocatorFromID(_id)}
 }
 
+// MeshBufferAllocatorable is the interface implemented by [MeshBufferAllocator], for mocking and DI.
+type MeshBufferAllocatorable interface {
+	Unwrap() *raw.GLKMeshBufferAllocator
+}
+
+var _ MeshBufferAllocatorable = (*MeshBufferAllocator)(nil)
+

@@ -5,6 +5,8 @@
 package notificationcenter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/notificationcenter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -52,4 +54,100 @@ func (x *WidgetListViewController) WithShowsAddButtonWhenEditing(showsAddButtonW
 	x.inner.SetShowsAddButtonWhenEditing(showsAddButtonWhenEditing)
 	return x
 }
+
+// ViewControllerAtRowMakeIfNecessary calls the underlying ViewControllerAtRowMakeIfNecessary.
+func (x *WidgetListViewController) ViewControllerAtRowMakeIfNecessary(row uint, makeIfNecesary bool) *appkit.NSViewController {
+	return x.inner.ViewControllerAtRowMakeIfNecessary(row, makeIfNecesary)
+}
+
+// RowForViewController calls the underlying RowForViewController.
+func (x *WidgetListViewController) RowForViewController(viewController *appkit.NSViewController) uint {
+	return x.inner.RowForViewController(viewController)
+}
+
+// Delegate calls the underlying Delegate.
+func (x *WidgetListViewController) Delegate() raw.NCWidgetListViewDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *WidgetListViewController) SetDelegate(delegate raw.NCWidgetListViewDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// Contents calls the underlying Contents.
+func (x *WidgetListViewController) Contents() *foundation.NSArray[objc.ID] {
+	return x.inner.Contents()
+}
+
+// SetContents calls the underlying SetContents.
+func (x *WidgetListViewController) SetContents(contents *foundation.NSArray[objc.ID]) {
+	x.inner.SetContents(contents)
+}
+
+// MinimumVisibleRowCount calls the underlying MinimumVisibleRowCount.
+func (x *WidgetListViewController) MinimumVisibleRowCount() uint {
+	return x.inner.MinimumVisibleRowCount()
+}
+
+// SetMinimumVisibleRowCount calls the underlying SetMinimumVisibleRowCount.
+func (x *WidgetListViewController) SetMinimumVisibleRowCount(minimumVisibleRowCount uint) {
+	x.inner.SetMinimumVisibleRowCount(minimumVisibleRowCount)
+}
+
+// HasDividerLines calls the underlying HasDividerLines.
+func (x *WidgetListViewController) HasDividerLines() bool {
+	return x.inner.HasDividerLines()
+}
+
+// SetHasDividerLines calls the underlying SetHasDividerLines.
+func (x *WidgetListViewController) SetHasDividerLines(hasDividerLines bool) {
+	x.inner.SetHasDividerLines(hasDividerLines)
+}
+
+// Editing calls the underlying Editing.
+func (x *WidgetListViewController) Editing() bool {
+	return x.inner.Editing()
+}
+
+// SetEditing calls the underlying SetEditing.
+func (x *WidgetListViewController) SetEditing(editing bool) {
+	x.inner.SetEditing(editing)
+}
+
+// ShowsAddButtonWhenEditing calls the underlying ShowsAddButtonWhenEditing.
+func (x *WidgetListViewController) ShowsAddButtonWhenEditing() bool {
+	return x.inner.ShowsAddButtonWhenEditing()
+}
+
+// SetShowsAddButtonWhenEditing calls the underlying SetShowsAddButtonWhenEditing.
+func (x *WidgetListViewController) SetShowsAddButtonWhenEditing(showsAddButtonWhenEditing bool) {
+	x.inner.SetShowsAddButtonWhenEditing(showsAddButtonWhenEditing)
+}
+
+// WidgetListViewControllerable is the interface implemented by [WidgetListViewController], for mocking and DI.
+type WidgetListViewControllerable interface {
+	Unwrap() *raw.NCWidgetListViewController
+	WithDelegate(delegate raw.NCWidgetListViewDelegate) *WidgetListViewController
+	WithMinimumVisibleRowCount(minimumVisibleRowCount uint) *WidgetListViewController
+	WithHasDividerLines(hasDividerLines bool) *WidgetListViewController
+	WithEditing(editing bool) *WidgetListViewController
+	WithShowsAddButtonWhenEditing(showsAddButtonWhenEditing bool) *WidgetListViewController
+	ViewControllerAtRowMakeIfNecessary(row uint, makeIfNecesary bool) *appkit.NSViewController
+	RowForViewController(viewController *appkit.NSViewController) uint
+	Delegate() raw.NCWidgetListViewDelegate
+	SetDelegate(delegate raw.NCWidgetListViewDelegate)
+	Contents() *foundation.NSArray[objc.ID]
+	SetContents(contents *foundation.NSArray[objc.ID])
+	MinimumVisibleRowCount() uint
+	SetMinimumVisibleRowCount(minimumVisibleRowCount uint)
+	HasDividerLines() bool
+	SetHasDividerLines(hasDividerLines bool)
+	Editing() bool
+	SetEditing(editing bool)
+	ShowsAddButtonWhenEditing() bool
+	SetShowsAddButtonWhenEditing(showsAddButtonWhenEditing bool)
+}
+
+var _ WidgetListViewControllerable = (*WidgetListViewController)(nil)
 

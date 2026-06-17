@@ -25,3 +25,10 @@ func NewSocketDeviceConfiguration() *SocketDeviceConfiguration {
 
 func (x *SocketDeviceConfiguration) asSocketDeviceConfiguration() *raw.VZSocketDeviceConfiguration { return x.inner }
 
+// SocketDeviceConfigurationable is the interface implemented by [SocketDeviceConfiguration], for mocking and DI.
+type SocketDeviceConfigurationable interface {
+	Unwrap() *raw.VZSocketDeviceConfiguration
+}
+
+var _ SocketDeviceConfigurationable = (*SocketDeviceConfiguration)(nil)
+

@@ -75,3 +75,96 @@ func (x *LookAroundViewController) WithBadgePosition(badgePosition raw.MKLookAro
 	return x
 }
 
+// Delegate calls the underlying Delegate.
+func (x *LookAroundViewController) Delegate() raw.MKLookAroundViewControllerDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *LookAroundViewController) SetDelegate(delegate raw.MKLookAroundViewControllerDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// Scene calls the underlying Scene.
+func (x *LookAroundViewController) Scene() *LookAroundScene {
+	_r := x.inner.Scene()
+	if _r == nil {
+		return nil
+	}
+	return &LookAroundScene{inner: _r}
+}
+
+// SetScene calls the underlying SetScene.
+func (x *LookAroundViewController) SetScene(scene *raw.MKLookAroundScene) {
+	x.inner.SetScene(scene)
+}
+
+// IsNavigationEnabled calls the underlying IsNavigationEnabled.
+func (x *LookAroundViewController) IsNavigationEnabled() bool {
+	return x.inner.IsNavigationEnabled()
+}
+
+// SetNavigationEnabled calls the underlying SetNavigationEnabled.
+func (x *LookAroundViewController) SetNavigationEnabled(navigationEnabled bool) {
+	x.inner.SetNavigationEnabled(navigationEnabled)
+}
+
+// ShowsRoadLabels calls the underlying ShowsRoadLabels.
+func (x *LookAroundViewController) ShowsRoadLabels() bool {
+	return x.inner.ShowsRoadLabels()
+}
+
+// SetShowsRoadLabels calls the underlying SetShowsRoadLabels.
+func (x *LookAroundViewController) SetShowsRoadLabels(showsRoadLabels bool) {
+	x.inner.SetShowsRoadLabels(showsRoadLabels)
+}
+
+// PointOfInterestFilter calls the underlying PointOfInterestFilter.
+func (x *LookAroundViewController) PointOfInterestFilter() *PointOfInterestFilter {
+	_r := x.inner.PointOfInterestFilter()
+	if _r == nil {
+		return nil
+	}
+	return &PointOfInterestFilter{inner: _r}
+}
+
+// SetPointOfInterestFilter calls the underlying SetPointOfInterestFilter.
+func (x *LookAroundViewController) SetPointOfInterestFilter(pointOfInterestFilter *raw.MKPointOfInterestFilter) {
+	x.inner.SetPointOfInterestFilter(pointOfInterestFilter)
+}
+
+// BadgePosition calls the underlying BadgePosition.
+func (x *LookAroundViewController) BadgePosition() raw.MKLookAroundBadgePosition {
+	return x.inner.BadgePosition()
+}
+
+// SetBadgePosition calls the underlying SetBadgePosition.
+func (x *LookAroundViewController) SetBadgePosition(badgePosition raw.MKLookAroundBadgePosition) {
+	x.inner.SetBadgePosition(badgePosition)
+}
+
+// LookAroundViewControllerable is the interface implemented by [LookAroundViewController], for mocking and DI.
+type LookAroundViewControllerable interface {
+	Unwrap() *raw.MKLookAroundViewController
+	WithDelegate(delegate raw.MKLookAroundViewControllerDelegate) *LookAroundViewController
+	WithScene(scene *raw.MKLookAroundScene) *LookAroundViewController
+	WithNavigationEnabled(navigationEnabled bool) *LookAroundViewController
+	WithShowsRoadLabels(showsRoadLabels bool) *LookAroundViewController
+	WithPointOfInterestFilter(pointOfInterestFilter *raw.MKPointOfInterestFilter) *LookAroundViewController
+	WithBadgePosition(badgePosition raw.MKLookAroundBadgePosition) *LookAroundViewController
+	Delegate() raw.MKLookAroundViewControllerDelegate
+	SetDelegate(delegate raw.MKLookAroundViewControllerDelegate)
+	Scene() *LookAroundScene
+	SetScene(scene *raw.MKLookAroundScene)
+	IsNavigationEnabled() bool
+	SetNavigationEnabled(navigationEnabled bool)
+	ShowsRoadLabels() bool
+	SetShowsRoadLabels(showsRoadLabels bool)
+	PointOfInterestFilter() *PointOfInterestFilter
+	SetPointOfInterestFilter(pointOfInterestFilter *raw.MKPointOfInterestFilter)
+	BadgePosition() raw.MKLookAroundBadgePosition
+	SetBadgePosition(badgePosition raw.MKLookAroundBadgePosition)
+}
+
+var _ LookAroundViewControllerable = (*LookAroundViewController)(nil)
+

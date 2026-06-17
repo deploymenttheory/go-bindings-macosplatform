@@ -60,3 +60,92 @@ func (x *OperationConfiguration) WithTimeoutIntervalForResource(timeoutIntervalF
 	return x
 }
 
+// Container calls the underlying Container.
+func (x *OperationConfiguration) Container() *Container {
+	_r := x.inner.Container()
+	if _r == nil {
+		return nil
+	}
+	return &Container{inner: _r}
+}
+
+// SetContainer calls the underlying SetContainer.
+func (x *OperationConfiguration) SetContainer(container *raw.CKContainer) {
+	x.inner.SetContainer(container)
+}
+
+// QualityOfService calls the underlying QualityOfService.
+func (x *OperationConfiguration) QualityOfService() foundation.NSQualityOfService {
+	return x.inner.QualityOfService()
+}
+
+// SetQualityOfService calls the underlying SetQualityOfService.
+func (x *OperationConfiguration) SetQualityOfService(qualityOfService foundation.NSQualityOfService) {
+	x.inner.SetQualityOfService(qualityOfService)
+}
+
+// AllowsCellularAccess calls the underlying AllowsCellularAccess.
+func (x *OperationConfiguration) AllowsCellularAccess() bool {
+	return x.inner.AllowsCellularAccess()
+}
+
+// SetAllowsCellularAccess calls the underlying SetAllowsCellularAccess.
+func (x *OperationConfiguration) SetAllowsCellularAccess(allowsCellularAccess bool) {
+	x.inner.SetAllowsCellularAccess(allowsCellularAccess)
+}
+
+// IsLongLived calls the underlying IsLongLived.
+func (x *OperationConfiguration) IsLongLived() bool {
+	return x.inner.IsLongLived()
+}
+
+// SetLongLived calls the underlying SetLongLived.
+func (x *OperationConfiguration) SetLongLived(longLived bool) {
+	x.inner.SetLongLived(longLived)
+}
+
+// TimeoutIntervalForRequest calls the underlying TimeoutIntervalForRequest.
+func (x *OperationConfiguration) TimeoutIntervalForRequest() float64 {
+	return x.inner.TimeoutIntervalForRequest()
+}
+
+// SetTimeoutIntervalForRequest calls the underlying SetTimeoutIntervalForRequest.
+func (x *OperationConfiguration) SetTimeoutIntervalForRequest(timeoutIntervalForRequest float64) {
+	x.inner.SetTimeoutIntervalForRequest(timeoutIntervalForRequest)
+}
+
+// TimeoutIntervalForResource calls the underlying TimeoutIntervalForResource.
+func (x *OperationConfiguration) TimeoutIntervalForResource() float64 {
+	return x.inner.TimeoutIntervalForResource()
+}
+
+// SetTimeoutIntervalForResource calls the underlying SetTimeoutIntervalForResource.
+func (x *OperationConfiguration) SetTimeoutIntervalForResource(timeoutIntervalForResource float64) {
+	x.inner.SetTimeoutIntervalForResource(timeoutIntervalForResource)
+}
+
+// OperationConfigurationable is the interface implemented by [OperationConfiguration], for mocking and DI.
+type OperationConfigurationable interface {
+	Unwrap() *raw.CKOperationConfiguration
+	WithContainer(container *raw.CKContainer) *OperationConfiguration
+	WithQualityOfService(qualityOfService foundation.NSQualityOfService) *OperationConfiguration
+	WithAllowsCellularAccess(allowsCellularAccess bool) *OperationConfiguration
+	WithLongLived(longLived bool) *OperationConfiguration
+	WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *OperationConfiguration
+	WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *OperationConfiguration
+	Container() *Container
+	SetContainer(container *raw.CKContainer)
+	QualityOfService() foundation.NSQualityOfService
+	SetQualityOfService(qualityOfService foundation.NSQualityOfService)
+	AllowsCellularAccess() bool
+	SetAllowsCellularAccess(allowsCellularAccess bool)
+	IsLongLived() bool
+	SetLongLived(longLived bool)
+	TimeoutIntervalForRequest() float64
+	SetTimeoutIntervalForRequest(timeoutIntervalForRequest float64)
+	TimeoutIntervalForResource() float64
+	SetTimeoutIntervalForResource(timeoutIntervalForResource float64)
+}
+
+var _ OperationConfigurationable = (*OperationConfiguration)(nil)
+

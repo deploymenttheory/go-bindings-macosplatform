@@ -42,3 +42,49 @@ func (x *MTRGroupKeyManagementClusterKeySetRemoveParams) WithServerSideProcessin
 	return x
 }
 
+// GroupKeySetID calls the underlying GroupKeySetID.
+func (x *MTRGroupKeyManagementClusterKeySetRemoveParams) GroupKeySetID() *foundation.NSNumber {
+	return x.inner.GroupKeySetID()
+}
+
+// SetGroupKeySetID calls the underlying SetGroupKeySetID.
+func (x *MTRGroupKeyManagementClusterKeySetRemoveParams) SetGroupKeySetID(groupKeySetID *foundation.NSNumber) {
+	x.inner.SetGroupKeySetID(groupKeySetID)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRGroupKeyManagementClusterKeySetRemoveParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRGroupKeyManagementClusterKeySetRemoveParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRGroupKeyManagementClusterKeySetRemoveParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRGroupKeyManagementClusterKeySetRemoveParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRGroupKeyManagementClusterKeySetRemoveParamsable is the interface implemented by [MTRGroupKeyManagementClusterKeySetRemoveParams], for mocking and DI.
+type MTRGroupKeyManagementClusterKeySetRemoveParamsable interface {
+	Unwrap() *raw.MTRGroupKeyManagementClusterKeySetRemoveParams
+	WithGroupKeySetID(groupKeySetID *foundation.NSNumber) *MTRGroupKeyManagementClusterKeySetRemoveParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRGroupKeyManagementClusterKeySetRemoveParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRGroupKeyManagementClusterKeySetRemoveParams
+	GroupKeySetID() *foundation.NSNumber
+	SetGroupKeySetID(groupKeySetID *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRGroupKeyManagementClusterKeySetRemoveParamsable = (*MTRGroupKeyManagementClusterKeySetRemoveParams)(nil)
+

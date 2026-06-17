@@ -25,3 +25,10 @@ func NewMTRTestClusterClusterTestUnknownCommandParams() *MTRTestClusterClusterTe
 
 func (x *MTRTestClusterClusterTestUnknownCommandParams) asMTRUnitTestingClusterTestUnknownCommandParams() *raw.MTRUnitTestingClusterTestUnknownCommandParams { return &x.inner.MTRUnitTestingClusterTestUnknownCommandParams }
 
+// MTRTestClusterClusterTestUnknownCommandParamsable is the interface implemented by [MTRTestClusterClusterTestUnknownCommandParams], for mocking and DI.
+type MTRTestClusterClusterTestUnknownCommandParamsable interface {
+	Unwrap() *raw.MTRTestClusterClusterTestUnknownCommandParams
+}
+
+var _ MTRTestClusterClusterTestUnknownCommandParamsable = (*MTRTestClusterClusterTestUnknownCommandParams)(nil)
+

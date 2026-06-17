@@ -32,3 +32,46 @@ func NewDecisionWithTimeDetectionGroupIDStrong(time_ coremedia.CMTime, detection
 	return &Decision{inner: raw.CNDecisionFromID(_id)}
 }
 
+// Time calls the underlying Time.
+func (x *Decision) Time() coremedia.CMTime {
+	return x.inner.Time()
+}
+
+// DetectionID calls the underlying DetectionID.
+func (x *Decision) DetectionID() int64 {
+	return x.inner.DetectionID()
+}
+
+// DetectionGroupID calls the underlying DetectionGroupID.
+func (x *Decision) DetectionGroupID() int64 {
+	return x.inner.DetectionGroupID()
+}
+
+// IsUserDecision calls the underlying IsUserDecision.
+func (x *Decision) IsUserDecision() bool {
+	return x.inner.IsUserDecision()
+}
+
+// IsGroupDecision calls the underlying IsGroupDecision.
+func (x *Decision) IsGroupDecision() bool {
+	return x.inner.IsGroupDecision()
+}
+
+// IsStrongDecision calls the underlying IsStrongDecision.
+func (x *Decision) IsStrongDecision() bool {
+	return x.inner.IsStrongDecision()
+}
+
+// Decisionable is the interface implemented by [Decision], for mocking and DI.
+type Decisionable interface {
+	Unwrap() *raw.CNDecision
+	Time() coremedia.CMTime
+	DetectionID() int64
+	DetectionGroupID() int64
+	IsUserDecision() bool
+	IsGroupDecision() bool
+	IsStrongDecision() bool
+}
+
+var _ Decisionable = (*Decision)(nil)
+

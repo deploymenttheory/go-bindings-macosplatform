@@ -41,7 +41,119 @@ func (x *MicroGamepad) WithAllowsRotation(allowsRotation bool) *MicroGamepad {
 	return x
 }
 
+// SaveSnapshot calls the underlying SaveSnapshot.
+func (x *MicroGamepad) SaveSnapshot() *MicroGamepadSnapshot {
+	_r := x.inner.SaveSnapshot()
+	if _r == nil {
+		return nil
+	}
+	return &MicroGamepadSnapshot{inner: _r}
+}
+
+// SetStateFromMicroGamepad calls the underlying SetStateFromMicroGamepad.
+func (x *MicroGamepad) SetStateFromMicroGamepad(microGamepad *raw.GCMicroGamepad) {
+	x.inner.SetStateFromMicroGamepad(microGamepad)
+}
+
+// Controller calls the underlying Controller.
+func (x *MicroGamepad) Controller() *Controller {
+	_r := x.inner.Controller()
+	if _r == nil {
+		return nil
+	}
+	return &Controller{inner: _r}
+}
+
+// ValueChangedHandler calls the underlying ValueChangedHandler.
+func (x *MicroGamepad) ValueChangedHandler() objc.Block {
+	return x.inner.ValueChangedHandler()
+}
+
+// SetValueChangedHandler calls the underlying SetValueChangedHandler.
+func (x *MicroGamepad) SetValueChangedHandler(valueChangedHandler func(*raw.GCMicroGamepad, *raw.GCControllerElement)) {
+	x.inner.SetValueChangedHandler(valueChangedHandler)
+}
+
+// Dpad calls the underlying Dpad.
+func (x *MicroGamepad) Dpad() *ControllerDirectionPad {
+	_r := x.inner.Dpad()
+	if _r == nil {
+		return nil
+	}
+	return &ControllerDirectionPad{inner: _r}
+}
+
+// ButtonA calls the underlying ButtonA.
+func (x *MicroGamepad) ButtonA() *ControllerButtonInput {
+	_r := x.inner.ButtonA()
+	if _r == nil {
+		return nil
+	}
+	return &ControllerButtonInput{inner: _r}
+}
+
+// ButtonX calls the underlying ButtonX.
+func (x *MicroGamepad) ButtonX() *ControllerButtonInput {
+	_r := x.inner.ButtonX()
+	if _r == nil {
+		return nil
+	}
+	return &ControllerButtonInput{inner: _r}
+}
+
+// ButtonMenu calls the underlying ButtonMenu.
+func (x *MicroGamepad) ButtonMenu() *ControllerButtonInput {
+	_r := x.inner.ButtonMenu()
+	if _r == nil {
+		return nil
+	}
+	return &ControllerButtonInput{inner: _r}
+}
+
+// ReportsAbsoluteDpadValues calls the underlying ReportsAbsoluteDpadValues.
+func (x *MicroGamepad) ReportsAbsoluteDpadValues() bool {
+	return x.inner.ReportsAbsoluteDpadValues()
+}
+
+// SetReportsAbsoluteDpadValues calls the underlying SetReportsAbsoluteDpadValues.
+func (x *MicroGamepad) SetReportsAbsoluteDpadValues(reportsAbsoluteDpadValues bool) {
+	x.inner.SetReportsAbsoluteDpadValues(reportsAbsoluteDpadValues)
+}
+
+// AllowsRotation calls the underlying AllowsRotation.
+func (x *MicroGamepad) AllowsRotation() bool {
+	return x.inner.AllowsRotation()
+}
+
+// SetAllowsRotation calls the underlying SetAllowsRotation.
+func (x *MicroGamepad) SetAllowsRotation(allowsRotation bool) {
+	x.inner.SetAllowsRotation(allowsRotation)
+}
+
 func (x *MicroGamepad) asMicroGamepad() *raw.GCMicroGamepad { return x.inner }
 
 func (x *MicroGamepad) asPhysicalInputProfile() *raw.GCPhysicalInputProfile { return &x.inner.GCPhysicalInputProfile }
+
+// MicroGamepadable is the interface implemented by [MicroGamepad], for mocking and DI.
+type MicroGamepadable interface {
+	Unwrap() *raw.GCMicroGamepad
+	WithValueChangedHandler(valueChangedHandler func(*raw.GCMicroGamepad, *raw.GCControllerElement)) *MicroGamepad
+	WithReportsAbsoluteDpadValues(reportsAbsoluteDpadValues bool) *MicroGamepad
+	WithAllowsRotation(allowsRotation bool) *MicroGamepad
+	SaveSnapshot() *MicroGamepadSnapshot
+	SetStateFromMicroGamepad(microGamepad *raw.GCMicroGamepad)
+	Controller() *Controller
+	ValueChangedHandler() objc.Block
+	SetValueChangedHandler(valueChangedHandler func(*raw.GCMicroGamepad, *raw.GCControllerElement))
+	Dpad() *ControllerDirectionPad
+	ButtonA() *ControllerButtonInput
+	ButtonX() *ControllerButtonInput
+	ButtonMenu() *ControllerButtonInput
+	ReportsAbsoluteDpadValues() bool
+	SetReportsAbsoluteDpadValues(reportsAbsoluteDpadValues bool)
+	AllowsRotation() bool
+	SetAllowsRotation(allowsRotation bool)
+}
+
+var _ MicroGamepadable = (*MicroGamepad)(nil)
 

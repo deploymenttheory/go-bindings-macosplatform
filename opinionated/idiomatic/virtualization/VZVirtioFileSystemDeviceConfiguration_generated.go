@@ -7,6 +7,7 @@ package virtualization
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -37,5 +38,46 @@ func (x *VirtioFileSystemDeviceConfiguration) WithShare(share DirectoryShareProv
 	return x
 }
 
+// Tag calls the underlying Tag.
+func (x *VirtioFileSystemDeviceConfiguration) Tag() string {
+	_r := x.inner.Tag()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetTag calls the underlying SetTag.
+func (x *VirtioFileSystemDeviceConfiguration) SetTag(tag string) {
+	x.inner.SetTag(foundation.NSStringStringWithUTF8String(tag))
+}
+
+// Share calls the underlying Share.
+func (x *VirtioFileSystemDeviceConfiguration) Share() *DirectoryShare {
+	_r := x.inner.Share()
+	if _r == nil {
+		return nil
+	}
+	return &DirectoryShare{inner: _r}
+}
+
+// SetShare calls the underlying SetShare.
+func (x *VirtioFileSystemDeviceConfiguration) SetShare(share *raw.VZDirectoryShare) {
+	x.inner.SetShare(share)
+}
+
 func (x *VirtioFileSystemDeviceConfiguration) asDirectorySharingDeviceConfiguration() *raw.VZDirectorySharingDeviceConfiguration { return &x.inner.VZDirectorySharingDeviceConfiguration }
+
+// VirtioFileSystemDeviceConfigurationable is the interface implemented by [VirtioFileSystemDeviceConfiguration], for mocking and DI.
+type VirtioFileSystemDeviceConfigurationable interface {
+	Unwrap() *raw.VZVirtioFileSystemDeviceConfiguration
+	WithTag(tag string) *VirtioFileSystemDeviceConfiguration
+	WithShare(share DirectoryShareProvider) *VirtioFileSystemDeviceConfiguration
+	Tag() string
+	SetTag(tag string)
+	Share() *DirectoryShare
+	SetShare(share *raw.VZDirectoryShare)
+}
+
+var _ VirtioFileSystemDeviceConfigurationable = (*VirtioFileSystemDeviceConfiguration)(nil)
 

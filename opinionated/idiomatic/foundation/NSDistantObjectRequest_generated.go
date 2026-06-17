@@ -23,5 +23,44 @@ func NewDistantObjectRequest() *DistantObjectRequest {
 	return &DistantObjectRequest{inner: raw.NSDistantObjectRequestFromID(_id)}
 }
 
+// ReplyWithException calls the underlying ReplyWithException.
+func (x *DistantObjectRequest) ReplyWithException(exception *raw.NSException) {
+	x.inner.ReplyWithException(exception)
+}
+
+// Invocation calls the underlying Invocation.
+func (x *DistantObjectRequest) Invocation() *Invocation {
+	_r := x.inner.Invocation()
+	if _r == nil {
+		return nil
+	}
+	return &Invocation{inner: _r}
+}
+
+// Connection calls the underlying Connection.
+func (x *DistantObjectRequest) Connection() *Connection {
+	_r := x.inner.Connection()
+	if _r == nil {
+		return nil
+	}
+	return &Connection{inner: _r}
+}
+
+// Conversation calls the underlying Conversation.
+func (x *DistantObjectRequest) Conversation() objc.ID {
+	return x.inner.Conversation()
+}
+
 func (x *DistantObjectRequest) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// DistantObjectRequestable is the interface implemented by [DistantObjectRequest], for mocking and DI.
+type DistantObjectRequestable interface {
+	Unwrap() *raw.NSDistantObjectRequest
+	ReplyWithException(exception *raw.NSException)
+	Invocation() *Invocation
+	Connection() *Connection
+	Conversation() objc.ID
+}
+
+var _ DistantObjectRequestable = (*DistantObjectRequest)(nil)
 

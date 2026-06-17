@@ -36,3 +36,36 @@ func (x *MTROnOffClusterOnWithRecallGlobalSceneParams) WithServerSideProcessingT
 	return x
 }
 
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTROnOffClusterOnWithRecallGlobalSceneParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTROnOffClusterOnWithRecallGlobalSceneParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTROnOffClusterOnWithRecallGlobalSceneParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTROnOffClusterOnWithRecallGlobalSceneParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTROnOffClusterOnWithRecallGlobalSceneParamsable is the interface implemented by [MTROnOffClusterOnWithRecallGlobalSceneParams], for mocking and DI.
+type MTROnOffClusterOnWithRecallGlobalSceneParamsable interface {
+	Unwrap() *raw.MTROnOffClusterOnWithRecallGlobalSceneParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTROnOffClusterOnWithRecallGlobalSceneParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTROnOffClusterOnWithRecallGlobalSceneParams
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTROnOffClusterOnWithRecallGlobalSceneParamsable = (*MTROnOffClusterOnWithRecallGlobalSceneParams)(nil)
+

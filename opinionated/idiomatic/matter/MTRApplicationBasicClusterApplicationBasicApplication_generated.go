@@ -25,3 +25,10 @@ func NewMTRApplicationBasicClusterApplicationBasicApplication() *MTRApplicationB
 
 func (x *MTRApplicationBasicClusterApplicationBasicApplication) asMTRApplicationBasicClusterApplicationStruct() *raw.MTRApplicationBasicClusterApplicationStruct { return &x.inner.MTRApplicationBasicClusterApplicationStruct }
 
+// MTRApplicationBasicClusterApplicationBasicApplicationable is the interface implemented by [MTRApplicationBasicClusterApplicationBasicApplication], for mocking and DI.
+type MTRApplicationBasicClusterApplicationBasicApplicationable interface {
+	Unwrap() *raw.MTRApplicationBasicClusterApplicationBasicApplication
+}
+
+var _ MTRApplicationBasicClusterApplicationBasicApplicationable = (*MTRApplicationBasicClusterApplicationBasicApplication)(nil)
+

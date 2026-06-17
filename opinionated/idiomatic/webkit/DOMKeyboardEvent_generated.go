@@ -7,6 +7,7 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -46,6 +47,55 @@ func NewDOMKeyboardEventKeyboardEventCanBubbleCancelableViewKeyIdentifierKeyLoca
 	return &DOMKeyboardEvent{inner: raw.DOMKeyboardEventFromID(_id)}
 }
 
+// GetModifierState calls the underlying GetModifierState.
+func (x *DOMKeyboardEvent) GetModifierState(keyIdentifierArg string) bool {
+	return x.inner.GetModifierState(foundation.NSStringStringWithUTF8String(keyIdentifierArg))
+}
+
+// KeyIdentifier calls the underlying KeyIdentifier.
+func (x *DOMKeyboardEvent) KeyIdentifier() string {
+	_r := x.inner.KeyIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Location calls the underlying Location.
+func (x *DOMKeyboardEvent) Location() uint {
+	return x.inner.Location()
+}
+
+// KeyLocation calls the underlying KeyLocation.
+func (x *DOMKeyboardEvent) KeyLocation() uint {
+	return x.inner.KeyLocation()
+}
+
+// CtrlKey calls the underlying CtrlKey.
+func (x *DOMKeyboardEvent) CtrlKey() bool {
+	return x.inner.CtrlKey()
+}
+
+// ShiftKey calls the underlying ShiftKey.
+func (x *DOMKeyboardEvent) ShiftKey() bool {
+	return x.inner.ShiftKey()
+}
+
+// AltKey calls the underlying AltKey.
+func (x *DOMKeyboardEvent) AltKey() bool {
+	return x.inner.AltKey()
+}
+
+// MetaKey calls the underlying MetaKey.
+func (x *DOMKeyboardEvent) MetaKey() bool {
+	return x.inner.MetaKey()
+}
+
+// AltGraphKey calls the underlying AltGraphKey.
+func (x *DOMKeyboardEvent) AltGraphKey() bool {
+	return x.inner.AltGraphKey()
+}
+
 func (x *DOMKeyboardEvent) asDOMUIEvent() *raw.DOMUIEvent { return &x.inner.DOMUIEvent }
 
 func (x *DOMKeyboardEvent) asDOMEvent() *raw.DOMEvent { return &x.inner.DOMUIEvent.DOMEvent }
@@ -53,4 +103,20 @@ func (x *DOMKeyboardEvent) asDOMEvent() *raw.DOMEvent { return &x.inner.DOMUIEve
 func (x *DOMKeyboardEvent) asDOMObject() *raw.DOMObject { return &x.inner.DOMUIEvent.DOMEvent.DOMObject }
 
 func (x *DOMKeyboardEvent) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMUIEvent.DOMEvent.DOMObject.WebScriptObject }
+
+// DOMKeyboardEventable is the interface implemented by [DOMKeyboardEvent], for mocking and DI.
+type DOMKeyboardEventable interface {
+	Unwrap() *raw.DOMKeyboardEvent
+	GetModifierState(keyIdentifierArg string) bool
+	KeyIdentifier() string
+	Location() uint
+	KeyLocation() uint
+	CtrlKey() bool
+	ShiftKey() bool
+	AltKey() bool
+	MetaKey() bool
+	AltGraphKey() bool
+}
+
+var _ DOMKeyboardEventable = (*DOMKeyboardEvent)(nil)
 

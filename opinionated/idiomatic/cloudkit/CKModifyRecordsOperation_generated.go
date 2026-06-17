@@ -5,8 +5,10 @@
 package cloudkit
 
 import (
+	"context"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -118,11 +120,14 @@ func (x *ModifyRecordsOperation) RecordsToSave() []*raw.CKRecord {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.CKRecord, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CKRecord {
+		return raw.CKRecordFromID(purego.Retain(_id))
+	})
+}
+
+// SetRecordsToSave calls the underlying SetRecordsToSave.
+func (x *ModifyRecordsOperation) SetRecordsToSave(recordsToSave *foundation.NSArray[*raw.CKRecord]) {
+	x.inner.SetRecordsToSave(recordsToSave)
 }
 
 // RecordIDsToDelete returns the collection as a Go slice.
@@ -131,14 +136,176 @@ func (x *ModifyRecordsOperation) RecordIDsToDelete() []*raw.CKRecordID {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.CKRecordID, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CKRecordID {
+		return raw.CKRecordIDFromID(purego.Retain(_id))
+	})
+}
+
+// SetRecordIDsToDelete calls the underlying SetRecordIDsToDelete.
+func (x *ModifyRecordsOperation) SetRecordIDsToDelete(recordIDsToDelete *foundation.NSArray[*raw.CKRecordID]) {
+	x.inner.SetRecordIDsToDelete(recordIDsToDelete)
+}
+
+// SavePolicy calls the underlying SavePolicy.
+func (x *ModifyRecordsOperation) SavePolicy() raw.CKRecordSavePolicy {
+	return x.inner.SavePolicy()
+}
+
+// SetSavePolicy calls the underlying SetSavePolicy.
+func (x *ModifyRecordsOperation) SetSavePolicy(savePolicy raw.CKRecordSavePolicy) {
+	x.inner.SetSavePolicy(savePolicy)
+}
+
+// ClientChangeTokenData calls the underlying ClientChangeTokenData.
+func (x *ModifyRecordsOperation) ClientChangeTokenData() *foundation.NSData {
+	return x.inner.ClientChangeTokenData()
+}
+
+// SetClientChangeTokenData calls the underlying SetClientChangeTokenData.
+func (x *ModifyRecordsOperation) SetClientChangeTokenData(clientChangeTokenData *foundation.NSData) {
+	x.inner.SetClientChangeTokenData(clientChangeTokenData)
+}
+
+// Atomic calls the underlying Atomic.
+func (x *ModifyRecordsOperation) Atomic() bool {
+	return x.inner.Atomic()
+}
+
+// SetAtomic calls the underlying SetAtomic.
+func (x *ModifyRecordsOperation) SetAtomic(atomic bool) {
+	x.inner.SetAtomic(atomic)
+}
+
+// PerRecordProgressBlock calls the underlying PerRecordProgressBlock.
+func (x *ModifyRecordsOperation) PerRecordProgressBlock() objc.Block {
+	return x.inner.PerRecordProgressBlock()
+}
+
+// SetPerRecordProgressBlock calls the underlying SetPerRecordProgressBlock.
+func (x *ModifyRecordsOperation) SetPerRecordProgressBlock(perRecordProgressBlock func(*raw.CKRecord, float64)) {
+	x.inner.SetPerRecordProgressBlock(perRecordProgressBlock)
+}
+
+// PerRecordCompletionBlock calls the underlying PerRecordCompletionBlock.
+func (x *ModifyRecordsOperation) PerRecordCompletionBlock() objc.Block {
+	return x.inner.PerRecordCompletionBlock()
+}
+
+// SetPerRecordCompletionBlock blocks until the operation completes or ctx is cancelled.
+func (x *ModifyRecordsOperation) SetPerRecordCompletionBlock(ctx context.Context) (*Record, error) {
+	type _result struct {
+		val *Record
+		err error
 	}
-	return out
+	_ch := make(chan _result, 1)
+	x.inner.SetPerRecordCompletionBlock(func(_p0 *raw.CKRecord, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &Record{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *Record
+		return _zero, ctx.Err()
+	}
+}
+
+// PerRecordSaveBlock calls the underlying PerRecordSaveBlock.
+func (x *ModifyRecordsOperation) PerRecordSaveBlock() objc.Block {
+	return x.inner.PerRecordSaveBlock()
+}
+
+// SetPerRecordSaveBlock calls the underlying SetPerRecordSaveBlock.
+func (x *ModifyRecordsOperation) SetPerRecordSaveBlock(perRecordSaveBlock func(*raw.CKRecordID, *raw.CKRecord, unsafe.Pointer)) {
+	x.inner.SetPerRecordSaveBlock(perRecordSaveBlock)
+}
+
+// PerRecordDeleteBlock calls the underlying PerRecordDeleteBlock.
+func (x *ModifyRecordsOperation) PerRecordDeleteBlock() objc.Block {
+	return x.inner.PerRecordDeleteBlock()
+}
+
+// SetPerRecordDeleteBlock blocks until the operation completes or ctx is cancelled.
+func (x *ModifyRecordsOperation) SetPerRecordDeleteBlock(ctx context.Context) (*RecordID, error) {
+	type _result struct {
+		val *RecordID
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SetPerRecordDeleteBlock(func(_p0 *raw.CKRecordID, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &RecordID{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *RecordID
+		return _zero, ctx.Err()
+	}
+}
+
+// ModifyRecordsCompletionBlock calls the underlying ModifyRecordsCompletionBlock.
+func (x *ModifyRecordsOperation) ModifyRecordsCompletionBlock() objc.Block {
+	return x.inner.ModifyRecordsCompletionBlock()
+}
+
+// SetModifyRecordsCompletionBlock calls the underlying SetModifyRecordsCompletionBlock.
+func (x *ModifyRecordsOperation) SetModifyRecordsCompletionBlock(modifyRecordsCompletionBlock func(*foundation.NSArray[*raw.CKRecord], *foundation.NSArray[*raw.CKRecordID], unsafe.Pointer)) {
+	x.inner.SetModifyRecordsCompletionBlock(modifyRecordsCompletionBlock)
 }
 
 func (x *ModifyRecordsOperation) asDatabaseOperation() *raw.CKDatabaseOperation { return &x.inner.CKDatabaseOperation }
 
 func (x *ModifyRecordsOperation) asOperation() *raw.CKOperation { return &x.inner.CKDatabaseOperation.CKOperation }
+
+// ModifyRecordsOperationable is the interface implemented by [ModifyRecordsOperation], for mocking and DI.
+type ModifyRecordsOperationable interface {
+	Unwrap() *raw.CKModifyRecordsOperation
+	WithRecordsToSave(items ...RecordProvider) *ModifyRecordsOperation
+	WithRecordIDsToDelete(items ...*raw.CKRecordID) *ModifyRecordsOperation
+	WithSavePolicy(savePolicy raw.CKRecordSavePolicy) *ModifyRecordsOperation
+	WithClientChangeTokenData(clientChangeTokenData *foundation.NSData) *ModifyRecordsOperation
+	WithAtomic(atomic bool) *ModifyRecordsOperation
+	WithPerRecordProgressBlock(perRecordProgressBlock func(*raw.CKRecord, float64)) *ModifyRecordsOperation
+	WithPerRecordCompletionBlock(perRecordCompletionBlock func(*raw.CKRecord, unsafe.Pointer)) *ModifyRecordsOperation
+	WithPerRecordSaveBlock(perRecordSaveBlock func(*raw.CKRecordID, *raw.CKRecord, unsafe.Pointer)) *ModifyRecordsOperation
+	WithPerRecordDeleteBlock(perRecordDeleteBlock func(*raw.CKRecordID, unsafe.Pointer)) *ModifyRecordsOperation
+	WithModifyRecordsCompletionBlock(modifyRecordsCompletionBlock func(*foundation.NSArray[*raw.CKRecord], *foundation.NSArray[*raw.CKRecordID], unsafe.Pointer)) *ModifyRecordsOperation
+	RecordsToSave() []*raw.CKRecord
+	SetRecordsToSave(recordsToSave *foundation.NSArray[*raw.CKRecord])
+	RecordIDsToDelete() []*raw.CKRecordID
+	SetRecordIDsToDelete(recordIDsToDelete *foundation.NSArray[*raw.CKRecordID])
+	SavePolicy() raw.CKRecordSavePolicy
+	SetSavePolicy(savePolicy raw.CKRecordSavePolicy)
+	ClientChangeTokenData() *foundation.NSData
+	SetClientChangeTokenData(clientChangeTokenData *foundation.NSData)
+	Atomic() bool
+	SetAtomic(atomic bool)
+	PerRecordProgressBlock() objc.Block
+	SetPerRecordProgressBlock(perRecordProgressBlock func(*raw.CKRecord, float64))
+	PerRecordCompletionBlock() objc.Block
+	SetPerRecordCompletionBlock(ctx context.Context) (*Record, error)
+	PerRecordSaveBlock() objc.Block
+	SetPerRecordSaveBlock(perRecordSaveBlock func(*raw.CKRecordID, *raw.CKRecord, unsafe.Pointer))
+	PerRecordDeleteBlock() objc.Block
+	SetPerRecordDeleteBlock(ctx context.Context) (*RecordID, error)
+	ModifyRecordsCompletionBlock() objc.Block
+	SetModifyRecordsCompletionBlock(modifyRecordsCompletionBlock func(*foundation.NSArray[*raw.CKRecord], *foundation.NSArray[*raw.CKRecordID], unsafe.Pointer))
+}
+
+var _ ModifyRecordsOperationable = (*ModifyRecordsOperation)(nil)
 

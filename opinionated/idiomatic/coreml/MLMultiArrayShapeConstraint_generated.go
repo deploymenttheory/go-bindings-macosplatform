@@ -7,6 +7,7 @@ package coreml
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,29 +25,34 @@ func NewMultiArrayShapeConstraint() *MultiArrayShapeConstraint {
 	return &MultiArrayShapeConstraint{inner: raw.MLMultiArrayShapeConstraintFromID(_id)}
 }
 
+// Type calls the underlying Type.
+func (x *MultiArrayShapeConstraint) Type() raw.MLMultiArrayShapeConstraintType {
+	return x.inner.Type()
+}
+
 // SizeRangeForDimension returns the collection as a Go slice.
 func (x *MultiArrayShapeConstraint) SizeRangeForDimension() []*foundation.NSValue {
 	arr := x.inner.SizeRangeForDimension()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSValue, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSValue {
+		return foundation.NSValueFromID(purego.Retain(_id))
+	})
 }
 
-// EnumeratedShapes returns the collection as a Go slice.
-func (x *MultiArrayShapeConstraint) EnumeratedShapes() []*foundation.NSArray[*foundation.NSNumber] {
-	arr := x.inner.EnumeratedShapes()
-	if arr == nil {
-		return nil
-	}
-	out := make([]*foundation.NSArray[*foundation.NSNumber], arr.Count())
-	for i := range out {
-		out[i] = foundation.NSArrayFromID[*foundation.NSNumber](arr.ObjectAtIndex(uint(i)))
-	}
-	return out
+// EnumeratedShapes calls the underlying EnumeratedShapes.
+func (x *MultiArrayShapeConstraint) EnumeratedShapes() *foundation.NSArray[objc.ID] {
+	return x.inner.EnumeratedShapes()
 }
+
+// MultiArrayShapeConstraintable is the interface implemented by [MultiArrayShapeConstraint], for mocking and DI.
+type MultiArrayShapeConstraintable interface {
+	Unwrap() *raw.MLMultiArrayShapeConstraint
+	Type() raw.MLMultiArrayShapeConstraintType
+	SizeRangeForDimension() []*foundation.NSValue
+	EnumeratedShapes() *foundation.NSArray[objc.ID]
+}
+
+var _ MultiArrayShapeConstraintable = (*MultiArrayShapeConstraint)(nil)
 

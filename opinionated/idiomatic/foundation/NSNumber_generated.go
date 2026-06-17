@@ -129,9 +129,144 @@ func NewNumberWithUnsignedInteger(value uint) *Number {
 	return &Number{inner: raw.NSNumberFromID(_id)}
 }
 
+// Compare calls the underlying Compare.
+func (x *Number) Compare(otherNumber *raw.NSNumber) raw.NSComparisonResult {
+	return x.inner.Compare(otherNumber)
+}
+
+// IsEqualToNumber calls the underlying IsEqualToNumber.
+func (x *Number) IsEqualToNumber(number *raw.NSNumber) bool {
+	return x.inner.IsEqualToNumber(number)
+}
+
+// DescriptionWithLocale calls the underlying DescriptionWithLocale.
+func (x *Number) DescriptionWithLocale(locale objc.ID) *String {
+	_r := x.inner.DescriptionWithLocale(locale)
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// CharValue calls the underlying CharValue.
+func (x *Number) CharValue() int8 {
+	return x.inner.CharValue()
+}
+
+// UnsignedCharValue calls the underlying UnsignedCharValue.
+func (x *Number) UnsignedCharValue() uint8 {
+	return x.inner.UnsignedCharValue()
+}
+
+// ShortValue calls the underlying ShortValue.
+func (x *Number) ShortValue() int16 {
+	return x.inner.ShortValue()
+}
+
+// UnsignedShortValue calls the underlying UnsignedShortValue.
+func (x *Number) UnsignedShortValue() uint16 {
+	return x.inner.UnsignedShortValue()
+}
+
+// IntValue calls the underlying IntValue.
+func (x *Number) IntValue() int {
+	return x.inner.IntValue()
+}
+
+// UnsignedIntValue calls the underlying UnsignedIntValue.
+func (x *Number) UnsignedIntValue() uint {
+	return x.inner.UnsignedIntValue()
+}
+
+// LongValue calls the underlying LongValue.
+func (x *Number) LongValue() int {
+	return x.inner.LongValue()
+}
+
+// UnsignedLongValue calls the underlying UnsignedLongValue.
+func (x *Number) UnsignedLongValue() uint {
+	return x.inner.UnsignedLongValue()
+}
+
+// LongLongValue calls the underlying LongLongValue.
+func (x *Number) LongLongValue() int64 {
+	return x.inner.LongLongValue()
+}
+
+// UnsignedLongLongValue calls the underlying UnsignedLongLongValue.
+func (x *Number) UnsignedLongLongValue() uint64 {
+	return x.inner.UnsignedLongLongValue()
+}
+
+// FloatValue calls the underlying FloatValue.
+func (x *Number) FloatValue() float32 {
+	return x.inner.FloatValue()
+}
+
+// DoubleValue calls the underlying DoubleValue.
+func (x *Number) DoubleValue() float64 {
+	return x.inner.DoubleValue()
+}
+
+// BoolValue calls the underlying BoolValue.
+func (x *Number) BoolValue() bool {
+	return x.inner.BoolValue()
+}
+
+// IntegerValue calls the underlying IntegerValue.
+func (x *Number) IntegerValue() int {
+	return x.inner.IntegerValue()
+}
+
+// UnsignedIntegerValue calls the underlying UnsignedIntegerValue.
+func (x *Number) UnsignedIntegerValue() uint {
+	return x.inner.UnsignedIntegerValue()
+}
+
+// StringValue calls the underlying StringValue.
+func (x *Number) StringValue() *String {
+	_r := x.inner.StringValue()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// DecimalValue calls the underlying DecimalValue.
+func (x *Number) DecimalValue() raw.NSDecimal {
+	return x.inner.DecimalValue()
+}
+
 func (x *Number) asNumber() *raw.NSNumber { return x.inner }
 
 func (x *Number) asValue() *raw.NSValue { return &x.inner.NSValue }
 
 func (x *Number) asObject() *raw.NSObject { return &x.inner.NSValue.NSObject }
+
+// Numberable is the interface implemented by [Number], for mocking and DI.
+type Numberable interface {
+	Unwrap() *raw.NSNumber
+	Compare(otherNumber *raw.NSNumber) raw.NSComparisonResult
+	IsEqualToNumber(number *raw.NSNumber) bool
+	DescriptionWithLocale(locale objc.ID) *String
+	CharValue() int8
+	UnsignedCharValue() uint8
+	ShortValue() int16
+	UnsignedShortValue() uint16
+	IntValue() int
+	UnsignedIntValue() uint
+	LongValue() int
+	UnsignedLongValue() uint
+	LongLongValue() int64
+	UnsignedLongLongValue() uint64
+	FloatValue() float32
+	DoubleValue() float64
+	BoolValue() bool
+	IntegerValue() int
+	UnsignedIntegerValue() uint
+	StringValue() *String
+	DecimalValue() raw.NSDecimal
+}
+
+var _ Numberable = (*Number)(nil)
 

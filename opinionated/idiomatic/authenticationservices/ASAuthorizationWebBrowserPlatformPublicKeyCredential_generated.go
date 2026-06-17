@@ -6,6 +6,8 @@ package authenticationservices
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +24,63 @@ func NewAuthorizationWebBrowserPlatformPublicKeyCredential() *AuthorizationWebBr
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ASAuthorizationWebBrowserPlatformPublicKeyCredential")), objc.RegisterName("new"))
 	return &AuthorizationWebBrowserPlatformPublicKeyCredential{inner: raw.ASAuthorizationWebBrowserPlatformPublicKeyCredentialFromID(_id)}
 }
+
+// Name calls the underlying Name.
+func (x *AuthorizationWebBrowserPlatformPublicKeyCredential) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// CustomTitle calls the underlying CustomTitle.
+func (x *AuthorizationWebBrowserPlatformPublicKeyCredential) CustomTitle() string {
+	_r := x.inner.CustomTitle()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// RelyingParty calls the underlying RelyingParty.
+func (x *AuthorizationWebBrowserPlatformPublicKeyCredential) RelyingParty() string {
+	_r := x.inner.RelyingParty()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// CredentialID calls the underlying CredentialID.
+func (x *AuthorizationWebBrowserPlatformPublicKeyCredential) CredentialID() *foundation.NSData {
+	return x.inner.CredentialID()
+}
+
+// UserHandle calls the underlying UserHandle.
+func (x *AuthorizationWebBrowserPlatformPublicKeyCredential) UserHandle() *foundation.NSData {
+	return x.inner.UserHandle()
+}
+
+// ProviderName calls the underlying ProviderName.
+func (x *AuthorizationWebBrowserPlatformPublicKeyCredential) ProviderName() string {
+	_r := x.inner.ProviderName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// AuthorizationWebBrowserPlatformPublicKeyCredentialable is the interface implemented by [AuthorizationWebBrowserPlatformPublicKeyCredential], for mocking and DI.
+type AuthorizationWebBrowserPlatformPublicKeyCredentialable interface {
+	Unwrap() *raw.ASAuthorizationWebBrowserPlatformPublicKeyCredential
+	Name() string
+	CustomTitle() string
+	RelyingParty() string
+	CredentialID() *foundation.NSData
+	UserHandle() *foundation.NSData
+	ProviderName() string
+}
+
+var _ AuthorizationWebBrowserPlatformPublicKeyCredentialable = (*AuthorizationWebBrowserPlatformPublicKeyCredential)(nil)
 

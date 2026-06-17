@@ -5,6 +5,7 @@
 package localauthentication
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/localauthentication"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,5 +24,42 @@ func NewEnvironmentMechanismBiometry() *EnvironmentMechanismBiometry {
 	return &EnvironmentMechanismBiometry{inner: raw.LAEnvironmentMechanismBiometryFromID(_id)}
 }
 
+// BiometryType calls the underlying BiometryType.
+func (x *EnvironmentMechanismBiometry) BiometryType() raw.LABiometryType {
+	return x.inner.BiometryType()
+}
+
+// IsEnrolled calls the underlying IsEnrolled.
+func (x *EnvironmentMechanismBiometry) IsEnrolled() bool {
+	return x.inner.IsEnrolled()
+}
+
+// IsLockedOut calls the underlying IsLockedOut.
+func (x *EnvironmentMechanismBiometry) IsLockedOut() bool {
+	return x.inner.IsLockedOut()
+}
+
+// StateHash calls the underlying StateHash.
+func (x *EnvironmentMechanismBiometry) StateHash() *foundation.NSData {
+	return x.inner.StateHash()
+}
+
+// BuiltInSensorInaccessible calls the underlying BuiltInSensorInaccessible.
+func (x *EnvironmentMechanismBiometry) BuiltInSensorInaccessible() bool {
+	return x.inner.BuiltInSensorInaccessible()
+}
+
 func (x *EnvironmentMechanismBiometry) asEnvironmentMechanism() *raw.LAEnvironmentMechanism { return &x.inner.LAEnvironmentMechanism }
+
+// EnvironmentMechanismBiometryable is the interface implemented by [EnvironmentMechanismBiometry], for mocking and DI.
+type EnvironmentMechanismBiometryable interface {
+	Unwrap() *raw.LAEnvironmentMechanismBiometry
+	BiometryType() raw.LABiometryType
+	IsEnrolled() bool
+	IsLockedOut() bool
+	StateHash() *foundation.NSData
+	BuiltInSensorInaccessible() bool
+}
+
+var _ EnvironmentMechanismBiometryable = (*EnvironmentMechanismBiometry)(nil)
 

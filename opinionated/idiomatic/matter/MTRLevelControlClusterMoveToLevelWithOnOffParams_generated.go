@@ -60,3 +60,88 @@ func (x *MTRLevelControlClusterMoveToLevelWithOnOffParams) WithServerSideProcess
 	return x
 }
 
+// Level calls the underlying Level.
+func (x *MTRLevelControlClusterMoveToLevelWithOnOffParams) Level() *foundation.NSNumber {
+	return x.inner.Level()
+}
+
+// SetLevel calls the underlying SetLevel.
+func (x *MTRLevelControlClusterMoveToLevelWithOnOffParams) SetLevel(level *foundation.NSNumber) {
+	x.inner.SetLevel(level)
+}
+
+// TransitionTime calls the underlying TransitionTime.
+func (x *MTRLevelControlClusterMoveToLevelWithOnOffParams) TransitionTime() *foundation.NSNumber {
+	return x.inner.TransitionTime()
+}
+
+// SetTransitionTime calls the underlying SetTransitionTime.
+func (x *MTRLevelControlClusterMoveToLevelWithOnOffParams) SetTransitionTime(transitionTime *foundation.NSNumber) {
+	x.inner.SetTransitionTime(transitionTime)
+}
+
+// OptionsMask calls the underlying OptionsMask.
+func (x *MTRLevelControlClusterMoveToLevelWithOnOffParams) OptionsMask() *foundation.NSNumber {
+	return x.inner.OptionsMask()
+}
+
+// SetOptionsMask calls the underlying SetOptionsMask.
+func (x *MTRLevelControlClusterMoveToLevelWithOnOffParams) SetOptionsMask(optionsMask *foundation.NSNumber) {
+	x.inner.SetOptionsMask(optionsMask)
+}
+
+// OptionsOverride calls the underlying OptionsOverride.
+func (x *MTRLevelControlClusterMoveToLevelWithOnOffParams) OptionsOverride() *foundation.NSNumber {
+	return x.inner.OptionsOverride()
+}
+
+// SetOptionsOverride calls the underlying SetOptionsOverride.
+func (x *MTRLevelControlClusterMoveToLevelWithOnOffParams) SetOptionsOverride(optionsOverride *foundation.NSNumber) {
+	x.inner.SetOptionsOverride(optionsOverride)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRLevelControlClusterMoveToLevelWithOnOffParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRLevelControlClusterMoveToLevelWithOnOffParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRLevelControlClusterMoveToLevelWithOnOffParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRLevelControlClusterMoveToLevelWithOnOffParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRLevelControlClusterMoveToLevelWithOnOffParamsable is the interface implemented by [MTRLevelControlClusterMoveToLevelWithOnOffParams], for mocking and DI.
+type MTRLevelControlClusterMoveToLevelWithOnOffParamsable interface {
+	Unwrap() *raw.MTRLevelControlClusterMoveToLevelWithOnOffParams
+	WithLevel(level *foundation.NSNumber) *MTRLevelControlClusterMoveToLevelWithOnOffParams
+	WithTransitionTime(transitionTime *foundation.NSNumber) *MTRLevelControlClusterMoveToLevelWithOnOffParams
+	WithOptionsMask(optionsMask *foundation.NSNumber) *MTRLevelControlClusterMoveToLevelWithOnOffParams
+	WithOptionsOverride(optionsOverride *foundation.NSNumber) *MTRLevelControlClusterMoveToLevelWithOnOffParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRLevelControlClusterMoveToLevelWithOnOffParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRLevelControlClusterMoveToLevelWithOnOffParams
+	Level() *foundation.NSNumber
+	SetLevel(level *foundation.NSNumber)
+	TransitionTime() *foundation.NSNumber
+	SetTransitionTime(transitionTime *foundation.NSNumber)
+	OptionsMask() *foundation.NSNumber
+	SetOptionsMask(optionsMask *foundation.NSNumber)
+	OptionsOverride() *foundation.NSNumber
+	SetOptionsOverride(optionsOverride *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRLevelControlClusterMoveToLevelWithOnOffParamsable = (*MTRLevelControlClusterMoveToLevelWithOnOffParams)(nil)
+

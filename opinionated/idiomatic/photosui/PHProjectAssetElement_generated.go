@@ -5,7 +5,10 @@
 package photosui
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photosui"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,18 +26,58 @@ func NewProjectAssetElement() *ProjectAssetElement {
 	return &ProjectAssetElement{inner: raw.PHProjectAssetElementFromID(_id)}
 }
 
+// CloudAssetIdentifier calls the underlying CloudAssetIdentifier.
+func (x *ProjectAssetElement) CloudAssetIdentifier() *photos.PHCloudIdentifier {
+	return x.inner.CloudAssetIdentifier()
+}
+
+// Annotation calls the underlying Annotation.
+func (x *ProjectAssetElement) Annotation() string {
+	_r := x.inner.Annotation()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// CropRect calls the underlying CropRect.
+func (x *ProjectAssetElement) CropRect() corefoundation.CGRect {
+	return x.inner.CropRect()
+}
+
 // RegionsOfInterest returns the collection as a Go slice.
 func (x *ProjectAssetElement) RegionsOfInterest() []*raw.PHProjectRegionOfInterest {
 	arr := x.inner.RegionsOfInterest()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.PHProjectRegionOfInterest, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PHProjectRegionOfInterest {
+		return raw.PHProjectRegionOfInterestFromID(purego.Retain(_id))
+	})
+}
+
+// HorizontallyFlipped calls the underlying HorizontallyFlipped.
+func (x *ProjectAssetElement) HorizontallyFlipped() bool {
+	return x.inner.HorizontallyFlipped()
+}
+
+// VerticallyFlipped calls the underlying VerticallyFlipped.
+func (x *ProjectAssetElement) VerticallyFlipped() bool {
+	return x.inner.VerticallyFlipped()
 }
 
 func (x *ProjectAssetElement) asProjectElement() *raw.PHProjectElement { return &x.inner.PHProjectElement }
+
+// ProjectAssetElementable is the interface implemented by [ProjectAssetElement], for mocking and DI.
+type ProjectAssetElementable interface {
+	Unwrap() *raw.PHProjectAssetElement
+	CloudAssetIdentifier() *photos.PHCloudIdentifier
+	Annotation() string
+	CropRect() corefoundation.CGRect
+	RegionsOfInterest() []*raw.PHProjectRegionOfInterest
+	HorizontallyFlipped() bool
+	VerticallyFlipped() bool
+}
+
+var _ ProjectAssetElementable = (*ProjectAssetElement)(nil)
 

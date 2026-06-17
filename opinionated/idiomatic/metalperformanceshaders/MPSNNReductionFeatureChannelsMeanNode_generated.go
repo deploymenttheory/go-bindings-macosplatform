@@ -28,3 +28,10 @@ func (x *NNReductionFeatureChannelsMeanNode) asNNUnaryReductionNode() *mpsneural
 
 func (x *NNReductionFeatureChannelsMeanNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode }
 
+// NNReductionFeatureChannelsMeanNodeable is the interface implemented by [NNReductionFeatureChannelsMeanNode], for mocking and DI.
+type NNReductionFeatureChannelsMeanNodeable interface {
+	Unwrap() *raw.MPSNNReductionFeatureChannelsMeanNode
+}
+
+var _ NNReductionFeatureChannelsMeanNodeable = (*NNReductionFeatureChannelsMeanNode)(nil)
+

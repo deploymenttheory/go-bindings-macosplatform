@@ -6,6 +6,7 @@ package contacts
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/contacts"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +24,22 @@ func NewChangeHistoryDeleteContactEvent() *ChangeHistoryDeleteContactEvent {
 	return &ChangeHistoryDeleteContactEvent{inner: raw.CNChangeHistoryDeleteContactEventFromID(_id)}
 }
 
+// ContactIdentifier calls the underlying ContactIdentifier.
+func (x *ChangeHistoryDeleteContactEvent) ContactIdentifier() string {
+	_r := x.inner.ContactIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 func (x *ChangeHistoryDeleteContactEvent) asChangeHistoryEvent() *raw.CNChangeHistoryEvent { return &x.inner.CNChangeHistoryEvent }
+
+// ChangeHistoryDeleteContactEventable is the interface implemented by [ChangeHistoryDeleteContactEvent], for mocking and DI.
+type ChangeHistoryDeleteContactEventable interface {
+	Unwrap() *raw.CNChangeHistoryDeleteContactEvent
+	ContactIdentifier() string
+}
+
+var _ ChangeHistoryDeleteContactEventable = (*ChangeHistoryDeleteContactEvent)(nil)
 

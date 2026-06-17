@@ -66,7 +66,116 @@ func NewDateWithString(description string) *Date {
 	return &Date{inner: raw.NSDateFromID(_id)}
 }
 
+// TimeIntervalSinceReferenceDate calls the underlying TimeIntervalSinceReferenceDate.
+func (x *Date) TimeIntervalSinceReferenceDate() float64 {
+	return x.inner.TimeIntervalSinceReferenceDate()
+}
+
+// TimeIntervalSinceDate calls the underlying TimeIntervalSinceDate.
+func (x *Date) TimeIntervalSinceDate(anotherDate *raw.NSDate) float64 {
+	return x.inner.TimeIntervalSinceDate(anotherDate)
+}
+
+// AddTimeInterval calls the underlying AddTimeInterval.
+func (x *Date) AddTimeInterval(seconds float64) objc.ID {
+	return x.inner.AddTimeInterval(seconds)
+}
+
+// DateByAddingTimeInterval calls the underlying DateByAddingTimeInterval.
+func (x *Date) DateByAddingTimeInterval(ti float64) *Date {
+	_r := x.inner.DateByAddingTimeInterval(ti)
+	if _r == nil {
+		return nil
+	}
+	return &Date{inner: _r}
+}
+
+// EarlierDate calls the underlying EarlierDate.
+func (x *Date) EarlierDate(anotherDate *raw.NSDate) *Date {
+	_r := x.inner.EarlierDate(anotherDate)
+	if _r == nil {
+		return nil
+	}
+	return &Date{inner: _r}
+}
+
+// LaterDate calls the underlying LaterDate.
+func (x *Date) LaterDate(anotherDate *raw.NSDate) *Date {
+	_r := x.inner.LaterDate(anotherDate)
+	if _r == nil {
+		return nil
+	}
+	return &Date{inner: _r}
+}
+
+// Compare calls the underlying Compare.
+func (x *Date) Compare(other *raw.NSDate) raw.NSComparisonResult {
+	return x.inner.Compare(other)
+}
+
+// IsEqualToDate calls the underlying IsEqualToDate.
+func (x *Date) IsEqualToDate(otherDate *raw.NSDate) bool {
+	return x.inner.IsEqualToDate(otherDate)
+}
+
+// DescriptionWithLocale calls the underlying DescriptionWithLocale.
+func (x *Date) DescriptionWithLocale(locale objc.ID) *String {
+	_r := x.inner.DescriptionWithLocale(locale)
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// TimeIntervalSinceNow calls the underlying TimeIntervalSinceNow.
+func (x *Date) TimeIntervalSinceNow() float64 {
+	return x.inner.TimeIntervalSinceNow()
+}
+
+// TimeIntervalSince1970 calls the underlying TimeIntervalSince1970.
+func (x *Date) TimeIntervalSince1970() float64 {
+	return x.inner.TimeIntervalSince1970()
+}
+
+// DateWithCalendarFormatTimeZone calls the underlying DateWithCalendarFormatTimeZone.
+func (x *Date) DateWithCalendarFormatTimeZone(format string, aTimeZone *raw.NSTimeZone) *CalendarDate {
+	_r := x.inner.DateWithCalendarFormatTimeZone(foundation.NSStringStringWithUTF8String(format), aTimeZone)
+	if _r == nil {
+		return nil
+	}
+	return &CalendarDate{inner: _r}
+}
+
+// DescriptionWithCalendarFormatTimeZoneLocale calls the underlying DescriptionWithCalendarFormatTimeZoneLocale.
+func (x *Date) DescriptionWithCalendarFormatTimeZoneLocale(format string, aTimeZone *raw.NSTimeZone, locale objc.ID) *String {
+	_r := x.inner.DescriptionWithCalendarFormatTimeZoneLocale(foundation.NSStringStringWithUTF8String(format), aTimeZone, locale)
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
 func (x *Date) asDate() *raw.NSDate { return x.inner }
 
 func (x *Date) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// Dateable is the interface implemented by [Date], for mocking and DI.
+type Dateable interface {
+	Unwrap() *raw.NSDate
+	TimeIntervalSinceReferenceDate() float64
+	TimeIntervalSinceDate(anotherDate *raw.NSDate) float64
+	AddTimeInterval(seconds float64) objc.ID
+	DateByAddingTimeInterval(ti float64) *Date
+	EarlierDate(anotherDate *raw.NSDate) *Date
+	LaterDate(anotherDate *raw.NSDate) *Date
+	Compare(other *raw.NSDate) raw.NSComparisonResult
+	IsEqualToDate(otherDate *raw.NSDate) bool
+	DescriptionWithLocale(locale objc.ID) *String
+	TimeIntervalSinceNow() float64
+	TimeIntervalSince1970() float64
+	DateWithCalendarFormatTimeZone(format string, aTimeZone *raw.NSTimeZone) *CalendarDate
+	DescriptionWithCalendarFormatTimeZoneLocale(format string, aTimeZone *raw.NSTimeZone, locale objc.ID) *String
+}
+
+var _ Dateable = (*Date)(nil)
 

@@ -7,6 +7,7 @@ package coredata
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -54,16 +55,69 @@ func (x *FetchIndexDescription) WithPartialIndexPredicate(partialIndexPredicate 
 	return x
 }
 
+// Name calls the underlying Name.
+func (x *FetchIndexDescription) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetName calls the underlying SetName.
+func (x *FetchIndexDescription) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
 // Elements returns the collection as a Go slice.
 func (x *FetchIndexDescription) Elements() []*raw.NSFetchIndexElementDescription {
 	arr := x.inner.Elements()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSFetchIndexElementDescription, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSFetchIndexElementDescription {
+		return raw.NSFetchIndexElementDescriptionFromID(purego.Retain(_id))
+	})
 }
+
+// SetElements calls the underlying SetElements.
+func (x *FetchIndexDescription) SetElements(elements *foundation.NSArray[*raw.NSFetchIndexElementDescription]) {
+	x.inner.SetElements(elements)
+}
+
+// Entity calls the underlying Entity.
+func (x *FetchIndexDescription) Entity() *EntityDescription {
+	_r := x.inner.Entity()
+	if _r == nil {
+		return nil
+	}
+	return &EntityDescription{inner: _r}
+}
+
+// PartialIndexPredicate calls the underlying PartialIndexPredicate.
+func (x *FetchIndexDescription) PartialIndexPredicate() *foundation.NSPredicate {
+	return x.inner.PartialIndexPredicate()
+}
+
+// SetPartialIndexPredicate calls the underlying SetPartialIndexPredicate.
+func (x *FetchIndexDescription) SetPartialIndexPredicate(partialIndexPredicate *foundation.NSPredicate) {
+	x.inner.SetPartialIndexPredicate(partialIndexPredicate)
+}
+
+// FetchIndexDescriptionable is the interface implemented by [FetchIndexDescription], for mocking and DI.
+type FetchIndexDescriptionable interface {
+	Unwrap() *raw.NSFetchIndexDescription
+	WithName(name string) *FetchIndexDescription
+	WithElements(items ...*raw.NSFetchIndexElementDescription) *FetchIndexDescription
+	WithPartialIndexPredicate(partialIndexPredicate *foundation.NSPredicate) *FetchIndexDescription
+	Name() string
+	SetName(name string)
+	Elements() []*raw.NSFetchIndexElementDescription
+	SetElements(elements *foundation.NSArray[*raw.NSFetchIndexElementDescription])
+	Entity() *EntityDescription
+	PartialIndexPredicate() *foundation.NSPredicate
+	SetPartialIndexPredicate(partialIndexPredicate *foundation.NSPredicate)
+}
+
+var _ FetchIndexDescriptionable = (*FetchIndexDescription)(nil)
 

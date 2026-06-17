@@ -5,7 +5,10 @@
 package soundanalysis
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/soundanalysis"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,16 +26,38 @@ func NewClassificationResult() *ClassificationResult {
 	return &ClassificationResult{inner: raw.SNClassificationResultFromID(_id)}
 }
 
+// ClassificationForIdentifier calls the underlying ClassificationForIdentifier.
+func (x *ClassificationResult) ClassificationForIdentifier(identifier string) *Classification {
+	_r := x.inner.ClassificationForIdentifier(foundation.NSStringStringWithUTF8String(identifier))
+	if _r == nil {
+		return nil
+	}
+	return &Classification{inner: _r}
+}
+
 // Classifications returns the collection as a Go slice.
 func (x *ClassificationResult) Classifications() []*raw.SNClassification {
 	arr := x.inner.Classifications()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.SNClassification, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SNClassification {
+		return raw.SNClassificationFromID(purego.Retain(_id))
+	})
 }
+
+// TimeRange calls the underlying TimeRange.
+func (x *ClassificationResult) TimeRange() coremedia.CMTimeRange {
+	return x.inner.TimeRange()
+}
+
+// ClassificationResultable is the interface implemented by [ClassificationResult], for mocking and DI.
+type ClassificationResultable interface {
+	Unwrap() *raw.SNClassificationResult
+	ClassificationForIdentifier(identifier string) *Classification
+	Classifications() []*raw.SNClassification
+	TimeRange() coremedia.CMTimeRange
+}
+
+var _ ClassificationResultable = (*ClassificationResult)(nil)
 

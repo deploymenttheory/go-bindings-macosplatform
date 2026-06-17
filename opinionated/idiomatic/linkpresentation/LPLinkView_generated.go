@@ -38,3 +38,27 @@ func (x *LinkView) WithMetadata(metadata *raw.LPLinkMetadata) *LinkView {
 	return x
 }
 
+// Metadata calls the underlying Metadata.
+func (x *LinkView) Metadata() *LinkMetadata {
+	_r := x.inner.Metadata()
+	if _r == nil {
+		return nil
+	}
+	return &LinkMetadata{inner: _r}
+}
+
+// SetMetadata calls the underlying SetMetadata.
+func (x *LinkView) SetMetadata(metadata *raw.LPLinkMetadata) {
+	x.inner.SetMetadata(metadata)
+}
+
+// LinkViewable is the interface implemented by [LinkView], for mocking and DI.
+type LinkViewable interface {
+	Unwrap() *raw.LPLinkView
+	WithMetadata(metadata *raw.LPLinkMetadata) *LinkView
+	Metadata() *LinkMetadata
+	SetMetadata(metadata *raw.LPLinkMetadata)
+}
+
+var _ LinkViewable = (*LinkView)(nil)
+

@@ -7,6 +7,7 @@ package sharedwithyoucore
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/sharedwithyoucore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -54,18 +55,75 @@ func (x *CollaborationOptionsGroup) WithOptions(items ...*raw.SWCollaborationOpt
 	return x
 }
 
+// Title calls the underlying Title.
+func (x *CollaborationOptionsGroup) Title() string {
+	_r := x.inner.Title()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetTitle calls the underlying SetTitle.
+func (x *CollaborationOptionsGroup) SetTitle(title string) {
+	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+}
+
+// Identifier calls the underlying Identifier.
+func (x *CollaborationOptionsGroup) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Footer calls the underlying Footer.
+func (x *CollaborationOptionsGroup) Footer() string {
+	_r := x.inner.Footer()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetFooter calls the underlying SetFooter.
+func (x *CollaborationOptionsGroup) SetFooter(footer string) {
+	x.inner.SetFooter(foundation.NSStringStringWithUTF8String(footer))
+}
+
 // Options returns the collection as a Go slice.
 func (x *CollaborationOptionsGroup) Options() []*raw.SWCollaborationOption {
 	arr := x.inner.Options()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.SWCollaborationOption, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SWCollaborationOption {
+		return raw.SWCollaborationOptionFromID(purego.Retain(_id))
+	})
+}
+
+// SetOptions calls the underlying SetOptions.
+func (x *CollaborationOptionsGroup) SetOptions(options *foundation.NSArray[*raw.SWCollaborationOption]) {
+	x.inner.SetOptions(options)
 }
 
 func (x *CollaborationOptionsGroup) asCollaborationOptionsGroup() *raw.SWCollaborationOptionsGroup { return x.inner }
+
+// CollaborationOptionsGroupable is the interface implemented by [CollaborationOptionsGroup], for mocking and DI.
+type CollaborationOptionsGroupable interface {
+	Unwrap() *raw.SWCollaborationOptionsGroup
+	WithTitle(title string) *CollaborationOptionsGroup
+	WithFooter(footer string) *CollaborationOptionsGroup
+	WithOptions(items ...*raw.SWCollaborationOption) *CollaborationOptionsGroup
+	Title() string
+	SetTitle(title string)
+	Identifier() string
+	Footer() string
+	SetFooter(footer string)
+	Options() []*raw.SWCollaborationOption
+	SetOptions(options *foundation.NSArray[*raw.SWCollaborationOption])
+}
+
+var _ CollaborationOptionsGroupable = (*CollaborationOptionsGroup)(nil)
 

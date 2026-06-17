@@ -41,3 +41,49 @@ func (x *VertexAttributeDescriptor) WithBufferIndex(bufferIndex uint) *VertexAtt
 	return x
 }
 
+// Format calls the underlying Format.
+func (x *VertexAttributeDescriptor) Format() raw.MTLVertexFormat {
+	return x.inner.Format()
+}
+
+// SetFormat calls the underlying SetFormat.
+func (x *VertexAttributeDescriptor) SetFormat(format raw.MTLVertexFormat) {
+	x.inner.SetFormat(format)
+}
+
+// Offset calls the underlying Offset.
+func (x *VertexAttributeDescriptor) Offset() uint {
+	return x.inner.Offset()
+}
+
+// SetOffset calls the underlying SetOffset.
+func (x *VertexAttributeDescriptor) SetOffset(offset uint) {
+	x.inner.SetOffset(offset)
+}
+
+// BufferIndex calls the underlying BufferIndex.
+func (x *VertexAttributeDescriptor) BufferIndex() uint {
+	return x.inner.BufferIndex()
+}
+
+// SetBufferIndex calls the underlying SetBufferIndex.
+func (x *VertexAttributeDescriptor) SetBufferIndex(bufferIndex uint) {
+	x.inner.SetBufferIndex(bufferIndex)
+}
+
+// VertexAttributeDescriptorable is the interface implemented by [VertexAttributeDescriptor], for mocking and DI.
+type VertexAttributeDescriptorable interface {
+	Unwrap() *raw.MTLVertexAttributeDescriptor
+	WithFormat(format raw.MTLVertexFormat) *VertexAttributeDescriptor
+	WithOffset(offset uint) *VertexAttributeDescriptor
+	WithBufferIndex(bufferIndex uint) *VertexAttributeDescriptor
+	Format() raw.MTLVertexFormat
+	SetFormat(format raw.MTLVertexFormat)
+	Offset() uint
+	SetOffset(offset uint)
+	BufferIndex() uint
+	SetBufferIndex(bufferIndex uint)
+}
+
+var _ VertexAttributeDescriptorable = (*VertexAttributeDescriptor)(nil)
+

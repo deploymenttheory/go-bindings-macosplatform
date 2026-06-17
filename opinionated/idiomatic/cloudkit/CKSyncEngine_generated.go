@@ -31,11 +31,11 @@ func NewSyncEngineWithConfiguration(configuration *raw.CKSyncEngineConfiguration
 func (x *SyncEngine) FetchChanges(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.FetchChangesWithCompletionHandler(func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -49,11 +49,11 @@ func (x *SyncEngine) FetchChanges(ctx context.Context) error {
 func (x *SyncEngine) FetchChangesWithOptions(ctx context.Context, options *raw.CKSyncEngineFetchChangesOptions) error {
 	_ch := make(chan error, 1)
 	x.inner.FetchChangesWithOptionsCompletionHandler(options, func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -67,11 +67,11 @@ func (x *SyncEngine) FetchChangesWithOptions(ctx context.Context, options *raw.C
 func (x *SyncEngine) SendChanges(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.SendChangesWithCompletionHandler(func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -85,11 +85,11 @@ func (x *SyncEngine) SendChanges(ctx context.Context) error {
 func (x *SyncEngine) SendChangesWithOptions(ctx context.Context, options *raw.CKSyncEngineSendChangesOptions) error {
 	_ch := make(chan error, 1)
 	x.inner.SendChangesWithOptionsCompletionHandler(options, func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -112,4 +112,36 @@ func (x *SyncEngine) CancelOperations(ctx context.Context) error {
 		return ctx.Err()
 	}
 }
+
+// Database calls the underlying Database.
+func (x *SyncEngine) Database() *Database {
+	_r := x.inner.Database()
+	if _r == nil {
+		return nil
+	}
+	return &Database{inner: _r}
+}
+
+// State calls the underlying State.
+func (x *SyncEngine) State() *SyncEngineState {
+	_r := x.inner.State()
+	if _r == nil {
+		return nil
+	}
+	return &SyncEngineState{inner: _r}
+}
+
+// SyncEngineable is the interface implemented by [SyncEngine], for mocking and DI.
+type SyncEngineable interface {
+	Unwrap() *raw.CKSyncEngine
+	FetchChanges(ctx context.Context) error
+	FetchChangesWithOptions(ctx context.Context, options *raw.CKSyncEngineFetchChangesOptions) error
+	SendChanges(ctx context.Context) error
+	SendChangesWithOptions(ctx context.Context, options *raw.CKSyncEngineSendChangesOptions) error
+	CancelOperations(ctx context.Context) error
+	Database() *Database
+	State() *SyncEngineState
+}
+
+var _ SyncEngineable = (*SyncEngine)(nil)
 

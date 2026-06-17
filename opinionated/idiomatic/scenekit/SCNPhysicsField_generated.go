@@ -89,3 +89,153 @@ func (x *PhysicsField) WithCategoryBitMask(categoryBitMask uint) *PhysicsField {
 	return x
 }
 
+// Strength calls the underlying Strength.
+func (x *PhysicsField) Strength() float64 {
+	return x.inner.Strength()
+}
+
+// SetStrength calls the underlying SetStrength.
+func (x *PhysicsField) SetStrength(strength float64) {
+	x.inner.SetStrength(strength)
+}
+
+// FalloffExponent calls the underlying FalloffExponent.
+func (x *PhysicsField) FalloffExponent() float64 {
+	return x.inner.FalloffExponent()
+}
+
+// SetFalloffExponent calls the underlying SetFalloffExponent.
+func (x *PhysicsField) SetFalloffExponent(falloffExponent float64) {
+	x.inner.SetFalloffExponent(falloffExponent)
+}
+
+// MinimumDistance calls the underlying MinimumDistance.
+func (x *PhysicsField) MinimumDistance() float64 {
+	return x.inner.MinimumDistance()
+}
+
+// SetMinimumDistance calls the underlying SetMinimumDistance.
+func (x *PhysicsField) SetMinimumDistance(minimumDistance float64) {
+	x.inner.SetMinimumDistance(minimumDistance)
+}
+
+// IsActive calls the underlying IsActive.
+func (x *PhysicsField) IsActive() bool {
+	return x.inner.IsActive()
+}
+
+// SetActive calls the underlying SetActive.
+func (x *PhysicsField) SetActive(active bool) {
+	x.inner.SetActive(active)
+}
+
+// IsExclusive calls the underlying IsExclusive.
+func (x *PhysicsField) IsExclusive() bool {
+	return x.inner.IsExclusive()
+}
+
+// SetExclusive calls the underlying SetExclusive.
+func (x *PhysicsField) SetExclusive(exclusive bool) {
+	x.inner.SetExclusive(exclusive)
+}
+
+// HalfExtent calls the underlying HalfExtent.
+func (x *PhysicsField) HalfExtent() raw.SCNVector3 {
+	return x.inner.HalfExtent()
+}
+
+// SetHalfExtent calls the underlying SetHalfExtent.
+func (x *PhysicsField) SetHalfExtent(halfExtent raw.SCNVector3) {
+	x.inner.SetHalfExtent(halfExtent)
+}
+
+// UsesEllipsoidalExtent calls the underlying UsesEllipsoidalExtent.
+func (x *PhysicsField) UsesEllipsoidalExtent() bool {
+	return x.inner.UsesEllipsoidalExtent()
+}
+
+// SetUsesEllipsoidalExtent calls the underlying SetUsesEllipsoidalExtent.
+func (x *PhysicsField) SetUsesEllipsoidalExtent(usesEllipsoidalExtent bool) {
+	x.inner.SetUsesEllipsoidalExtent(usesEllipsoidalExtent)
+}
+
+// Scope calls the underlying Scope.
+func (x *PhysicsField) Scope() raw.SCNPhysicsFieldScope {
+	return x.inner.Scope()
+}
+
+// SetScope calls the underlying SetScope.
+func (x *PhysicsField) SetScope(scope raw.SCNPhysicsFieldScope) {
+	x.inner.SetScope(scope)
+}
+
+// Offset calls the underlying Offset.
+func (x *PhysicsField) Offset() raw.SCNVector3 {
+	return x.inner.Offset()
+}
+
+// SetOffset calls the underlying SetOffset.
+func (x *PhysicsField) SetOffset(offset raw.SCNVector3) {
+	x.inner.SetOffset(offset)
+}
+
+// Direction calls the underlying Direction.
+func (x *PhysicsField) Direction() raw.SCNVector3 {
+	return x.inner.Direction()
+}
+
+// SetDirection calls the underlying SetDirection.
+func (x *PhysicsField) SetDirection(direction raw.SCNVector3) {
+	x.inner.SetDirection(direction)
+}
+
+// CategoryBitMask calls the underlying CategoryBitMask.
+func (x *PhysicsField) CategoryBitMask() uint {
+	return x.inner.CategoryBitMask()
+}
+
+// SetCategoryBitMask calls the underlying SetCategoryBitMask.
+func (x *PhysicsField) SetCategoryBitMask(categoryBitMask uint) {
+	x.inner.SetCategoryBitMask(categoryBitMask)
+}
+
+// PhysicsFieldable is the interface implemented by [PhysicsField], for mocking and DI.
+type PhysicsFieldable interface {
+	Unwrap() *raw.SCNPhysicsField
+	WithStrength(strength float64) *PhysicsField
+	WithFalloffExponent(falloffExponent float64) *PhysicsField
+	WithMinimumDistance(minimumDistance float64) *PhysicsField
+	WithActive(active bool) *PhysicsField
+	WithExclusive(exclusive bool) *PhysicsField
+	WithHalfExtent(halfExtent raw.SCNVector3) *PhysicsField
+	WithUsesEllipsoidalExtent(usesEllipsoidalExtent bool) *PhysicsField
+	WithScope(scope raw.SCNPhysicsFieldScope) *PhysicsField
+	WithOffset(offset raw.SCNVector3) *PhysicsField
+	WithDirection(direction raw.SCNVector3) *PhysicsField
+	WithCategoryBitMask(categoryBitMask uint) *PhysicsField
+	Strength() float64
+	SetStrength(strength float64)
+	FalloffExponent() float64
+	SetFalloffExponent(falloffExponent float64)
+	MinimumDistance() float64
+	SetMinimumDistance(minimumDistance float64)
+	IsActive() bool
+	SetActive(active bool)
+	IsExclusive() bool
+	SetExclusive(exclusive bool)
+	HalfExtent() raw.SCNVector3
+	SetHalfExtent(halfExtent raw.SCNVector3)
+	UsesEllipsoidalExtent() bool
+	SetUsesEllipsoidalExtent(usesEllipsoidalExtent bool)
+	Scope() raw.SCNPhysicsFieldScope
+	SetScope(scope raw.SCNPhysicsFieldScope)
+	Offset() raw.SCNVector3
+	SetOffset(offset raw.SCNVector3)
+	Direction() raw.SCNVector3
+	SetDirection(direction raw.SCNVector3)
+	CategoryBitMask() uint
+	SetCategoryBitMask(categoryBitMask uint)
+}
+
+var _ PhysicsFieldable = (*PhysicsField)(nil)
+

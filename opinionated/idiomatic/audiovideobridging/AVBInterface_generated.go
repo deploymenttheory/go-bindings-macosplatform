@@ -7,6 +7,7 @@ package audiovideobridging
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/audiovideobridging"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -25,5 +26,52 @@ func NewInterfaceWithInterfaceName(anInterfaceName string) *Interface {
 	return &Interface{inner: raw.AVBInterfaceFromID(_id)}
 }
 
+// InterfaceName calls the underlying InterfaceName.
+func (x *Interface) InterfaceName() string {
+	_r := x.inner.InterfaceName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// EntityDiscovery calls the underlying EntityDiscovery.
+func (x *Interface) EntityDiscovery() *AVB17221EntityDiscovery {
+	_r := x.inner.EntityDiscovery()
+	if _r == nil {
+		return nil
+	}
+	return &AVB17221EntityDiscovery{inner: _r}
+}
+
+// Aecp calls the underlying Aecp.
+func (x *Interface) Aecp() *AVB17221AECPInterface {
+	_r := x.inner.Aecp()
+	if _r == nil {
+		return nil
+	}
+	return &AVB17221AECPInterface{inner: _r}
+}
+
+// Acmp calls the underlying Acmp.
+func (x *Interface) Acmp() *AVB17221ACMPInterface {
+	_r := x.inner.Acmp()
+	if _r == nil {
+		return nil
+	}
+	return &AVB17221ACMPInterface{inner: _r}
+}
+
 func (x *Interface) asInterface() *raw.AVBInterface { return x.inner }
+
+// Interfaceable is the interface implemented by [Interface], for mocking and DI.
+type Interfaceable interface {
+	Unwrap() *raw.AVBInterface
+	InterfaceName() string
+	EntityDiscovery() *AVB17221EntityDiscovery
+	Aecp() *AVB17221AECPInterface
+	Acmp() *AVB17221ACMPInterface
+}
+
+var _ Interfaceable = (*Interface)(nil)
 

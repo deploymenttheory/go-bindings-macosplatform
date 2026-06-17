@@ -23,3 +23,10 @@ func NewNotificationID() *NotificationID {
 	return &NotificationID{inner: raw.CKNotificationIDFromID(_id)}
 }
 
+// NotificationIDable is the interface implemented by [NotificationID], for mocking and DI.
+type NotificationIDable interface {
+	Unwrap() *raw.CKNotificationID
+}
+
+var _ NotificationIDable = (*NotificationID)(nil)
+

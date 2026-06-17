@@ -25,3 +25,10 @@ func NewMacTrackpadConfiguration() *MacTrackpadConfiguration {
 
 func (x *MacTrackpadConfiguration) asPointingDeviceConfiguration() *raw.VZPointingDeviceConfiguration { return &x.inner.VZPointingDeviceConfiguration }
 
+// MacTrackpadConfigurationable is the interface implemented by [MacTrackpadConfiguration], for mocking and DI.
+type MacTrackpadConfigurationable interface {
+	Unwrap() *raw.VZMacTrackpadConfiguration
+}
+
+var _ MacTrackpadConfigurationable = (*MacTrackpadConfiguration)(nil)
+

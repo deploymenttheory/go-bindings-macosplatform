@@ -42,5 +42,55 @@ func (x *MTRUnitTestingClusterTestNestedStructListArgumentRequestParams) WithSer
 	return x
 }
 
+// Arg1 calls the underlying Arg1.
+func (x *MTRUnitTestingClusterTestNestedStructListArgumentRequestParams) Arg1() *MTRUnitTestingClusterNestedStructList {
+	_r := x.inner.Arg1()
+	if _r == nil {
+		return nil
+	}
+	return &MTRUnitTestingClusterNestedStructList{inner: _r}
+}
+
+// SetArg1 calls the underlying SetArg1.
+func (x *MTRUnitTestingClusterTestNestedStructListArgumentRequestParams) SetArg1(arg1 *raw.MTRUnitTestingClusterNestedStructList) {
+	x.inner.SetArg1(arg1)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRUnitTestingClusterTestNestedStructListArgumentRequestParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRUnitTestingClusterTestNestedStructListArgumentRequestParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRUnitTestingClusterTestNestedStructListArgumentRequestParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRUnitTestingClusterTestNestedStructListArgumentRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
 func (x *MTRUnitTestingClusterTestNestedStructListArgumentRequestParams) asMTRUnitTestingClusterTestNestedStructListArgumentRequestParams() *raw.MTRUnitTestingClusterTestNestedStructListArgumentRequestParams { return x.inner }
+
+// MTRUnitTestingClusterTestNestedStructListArgumentRequestParamsable is the interface implemented by [MTRUnitTestingClusterTestNestedStructListArgumentRequestParams], for mocking and DI.
+type MTRUnitTestingClusterTestNestedStructListArgumentRequestParamsable interface {
+	Unwrap() *raw.MTRUnitTestingClusterTestNestedStructListArgumentRequestParams
+	WithArg1(arg1 MTRUnitTestingClusterNestedStructListProvider) *MTRUnitTestingClusterTestNestedStructListArgumentRequestParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRUnitTestingClusterTestNestedStructListArgumentRequestParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRUnitTestingClusterTestNestedStructListArgumentRequestParams
+	Arg1() *MTRUnitTestingClusterNestedStructList
+	SetArg1(arg1 *raw.MTRUnitTestingClusterNestedStructList)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRUnitTestingClusterTestNestedStructListArgumentRequestParamsable = (*MTRUnitTestingClusterTestNestedStructListArgumentRequestParams)(nil)
 

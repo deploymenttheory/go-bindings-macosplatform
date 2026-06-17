@@ -5,6 +5,7 @@
 package localauthentication
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/localauthentication"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +23,23 @@ func NewDomainStateBiometry() *DomainStateBiometry {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("LADomainStateBiometry")), objc.RegisterName("new"))
 	return &DomainStateBiometry{inner: raw.LADomainStateBiometryFromID(_id)}
 }
+
+// BiometryType calls the underlying BiometryType.
+func (x *DomainStateBiometry) BiometryType() raw.LABiometryType {
+	return x.inner.BiometryType()
+}
+
+// StateHash calls the underlying StateHash.
+func (x *DomainStateBiometry) StateHash() *foundation.NSData {
+	return x.inner.StateHash()
+}
+
+// DomainStateBiometryable is the interface implemented by [DomainStateBiometry], for mocking and DI.
+type DomainStateBiometryable interface {
+	Unwrap() *raw.LADomainStateBiometry
+	BiometryType() raw.LABiometryType
+	StateHash() *foundation.NSData
+}
+
+var _ DomainStateBiometryable = (*DomainStateBiometry)(nil)
 

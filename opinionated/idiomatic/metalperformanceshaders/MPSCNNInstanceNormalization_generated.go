@@ -41,7 +41,63 @@ func (x *CNNInstanceNormalization) WithEpsilon(epsilon float32) *CNNInstanceNorm
 	return x
 }
 
+// ReloadDataSource calls the underlying ReloadDataSource.
+func (x *CNNInstanceNormalization) ReloadDataSource(dataSource mpsneuralnetwork.MPSCNNInstanceNormalizationDataSource) {
+	x.inner.ReloadDataSource(dataSource)
+}
+
+// ReloadGammaAndBetaFromDataSource calls the underlying ReloadGammaAndBetaFromDataSource.
+func (x *CNNInstanceNormalization) ReloadGammaAndBetaFromDataSource() {
+	x.inner.ReloadGammaAndBetaFromDataSource()
+}
+
+// ReloadGammaAndBetaWithCommandBufferGammaAndBetaState calls the underlying ReloadGammaAndBetaWithCommandBufferGammaAndBetaState.
+func (x *CNNInstanceNormalization) ReloadGammaAndBetaWithCommandBufferGammaAndBetaState(commandBuffer metal.MTLCommandBuffer, gammaAndBetaState *mpsneuralnetwork.MPSCNNNormalizationGammaAndBetaState) {
+	x.inner.ReloadGammaAndBetaWithCommandBufferGammaAndBetaState(commandBuffer, gammaAndBetaState)
+}
+
+// ResultStateForSourceImageSourceStatesDestinationImage calls the underlying ResultStateForSourceImageSourceStatesDestinationImage.
+func (x *CNNInstanceNormalization) ResultStateForSourceImageSourceStatesDestinationImage(sourceImage *mpscore.MPSImage, sourceStates *foundation.NSArray[*mpscore.MPSState], destinationImage *mpscore.MPSImage) *mpsneuralnetwork.MPSCNNInstanceNormalizationGradientState {
+	return x.inner.ResultStateForSourceImageSourceStatesDestinationImage(sourceImage, sourceStates, destinationImage)
+}
+
+// TemporaryResultStateForCommandBufferSourceImageSourceStatesDestinationImage calls the underlying TemporaryResultStateForCommandBufferSourceImageSourceStatesDestinationImage.
+func (x *CNNInstanceNormalization) TemporaryResultStateForCommandBufferSourceImageSourceStatesDestinationImage(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, sourceStates *foundation.NSArray[*mpscore.MPSState], destinationImage *mpscore.MPSImage) *mpsneuralnetwork.MPSCNNInstanceNormalizationGradientState {
+	return x.inner.TemporaryResultStateForCommandBufferSourceImageSourceStatesDestinationImage(commandBuffer, sourceImage, sourceStates, destinationImage)
+}
+
+// Epsilon calls the underlying Epsilon.
+func (x *CNNInstanceNormalization) Epsilon() float32 {
+	return x.inner.Epsilon()
+}
+
+// SetEpsilon calls the underlying SetEpsilon.
+func (x *CNNInstanceNormalization) SetEpsilon(epsilon float32) {
+	x.inner.SetEpsilon(epsilon)
+}
+
+// DataSource calls the underlying DataSource.
+func (x *CNNInstanceNormalization) DataSource() mpsneuralnetwork.MPSCNNInstanceNormalizationDataSource {
+	return x.inner.DataSource()
+}
+
 func (x *CNNInstanceNormalization) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSCNNKernel }
 
 func (x *CNNInstanceNormalization) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNKernel.MPSKernel }
+
+// CNNInstanceNormalizationable is the interface implemented by [CNNInstanceNormalization], for mocking and DI.
+type CNNInstanceNormalizationable interface {
+	Unwrap() *raw.MPSCNNInstanceNormalization
+	WithEpsilon(epsilon float32) *CNNInstanceNormalization
+	ReloadDataSource(dataSource mpsneuralnetwork.MPSCNNInstanceNormalizationDataSource)
+	ReloadGammaAndBetaFromDataSource()
+	ReloadGammaAndBetaWithCommandBufferGammaAndBetaState(commandBuffer metal.MTLCommandBuffer, gammaAndBetaState *mpsneuralnetwork.MPSCNNNormalizationGammaAndBetaState)
+	ResultStateForSourceImageSourceStatesDestinationImage(sourceImage *mpscore.MPSImage, sourceStates *foundation.NSArray[*mpscore.MPSState], destinationImage *mpscore.MPSImage) *mpsneuralnetwork.MPSCNNInstanceNormalizationGradientState
+	TemporaryResultStateForCommandBufferSourceImageSourceStatesDestinationImage(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, sourceStates *foundation.NSArray[*mpscore.MPSState], destinationImage *mpscore.MPSImage) *mpsneuralnetwork.MPSCNNInstanceNormalizationGradientState
+	Epsilon() float32
+	SetEpsilon(epsilon float32)
+	DataSource() mpsneuralnetwork.MPSCNNInstanceNormalizationDataSource
+}
+
+var _ CNNInstanceNormalizationable = (*CNNInstanceNormalization)(nil)
 

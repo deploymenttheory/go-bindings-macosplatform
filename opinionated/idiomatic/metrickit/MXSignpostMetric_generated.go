@@ -6,6 +6,7 @@ package metrickit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metrickit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +24,48 @@ func NewSignpostMetric() *SignpostMetric {
 	return &SignpostMetric{inner: raw.MXSignpostMetricFromID(_id)}
 }
 
+// SignpostName calls the underlying SignpostName.
+func (x *SignpostMetric) SignpostName() string {
+	_r := x.inner.SignpostName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SignpostCategory calls the underlying SignpostCategory.
+func (x *SignpostMetric) SignpostCategory() string {
+	_r := x.inner.SignpostCategory()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SignpostIntervalData calls the underlying SignpostIntervalData.
+func (x *SignpostMetric) SignpostIntervalData() *SignpostIntervalData {
+	_r := x.inner.SignpostIntervalData()
+	if _r == nil {
+		return nil
+	}
+	return &SignpostIntervalData{inner: _r}
+}
+
+// TotalCount calls the underlying TotalCount.
+func (x *SignpostMetric) TotalCount() uint {
+	return x.inner.TotalCount()
+}
+
 func (x *SignpostMetric) asMetric() *raw.MXMetric { return &x.inner.MXMetric }
+
+// SignpostMetricable is the interface implemented by [SignpostMetric], for mocking and DI.
+type SignpostMetricable interface {
+	Unwrap() *raw.MXSignpostMetric
+	SignpostName() string
+	SignpostCategory() string
+	SignpostIntervalData() *SignpostIntervalData
+	TotalCount() uint
+}
+
+var _ SignpostMetricable = (*SignpostMetric)(nil)
 

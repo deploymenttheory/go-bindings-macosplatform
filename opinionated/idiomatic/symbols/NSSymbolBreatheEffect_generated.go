@@ -23,5 +23,32 @@ func NewSymbolBreatheEffect() *SymbolBreatheEffect {
 	return &SymbolBreatheEffect{inner: raw.NSSymbolBreatheEffectFromID(_id)}
 }
 
+// EffectWithByLayer calls the underlying EffectWithByLayer.
+func (x *SymbolBreatheEffect) EffectWithByLayer() *SymbolBreatheEffect {
+	_r := x.inner.EffectWithByLayer()
+	if _r == nil {
+		return nil
+	}
+	return &SymbolBreatheEffect{inner: _r}
+}
+
+// EffectWithWholeSymbol calls the underlying EffectWithWholeSymbol.
+func (x *SymbolBreatheEffect) EffectWithWholeSymbol() *SymbolBreatheEffect {
+	_r := x.inner.EffectWithWholeSymbol()
+	if _r == nil {
+		return nil
+	}
+	return &SymbolBreatheEffect{inner: _r}
+}
+
 func (x *SymbolBreatheEffect) asSymbolEffect() *raw.NSSymbolEffect { return &x.inner.NSSymbolEffect }
+
+// SymbolBreatheEffectable is the interface implemented by [SymbolBreatheEffect], for mocking and DI.
+type SymbolBreatheEffectable interface {
+	Unwrap() *raw.NSSymbolBreatheEffect
+	EffectWithByLayer() *SymbolBreatheEffect
+	EffectWithWholeSymbol() *SymbolBreatheEffect
+}
+
+var _ SymbolBreatheEffectable = (*SymbolBreatheEffect)(nil)
 

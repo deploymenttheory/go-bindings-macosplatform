@@ -7,6 +7,7 @@ package fskit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/fskit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // MutableFileDataBuffer wraps [raw.FSMutableFileDataBuffer] with a fluent Go API.
@@ -22,4 +23,23 @@ func NewMutableFileDataBuffer() *MutableFileDataBuffer {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("FSMutableFileDataBuffer")), objc.RegisterName("new"))
 	return &MutableFileDataBuffer{inner: raw.FSMutableFileDataBufferFromID(_id)}
 }
+
+// MutableBytes calls the underlying MutableBytes.
+func (x *MutableFileDataBuffer) MutableBytes() unsafe.Pointer {
+	return x.inner.MutableBytes()
+}
+
+// Length calls the underlying Length.
+func (x *MutableFileDataBuffer) Length() uint {
+	return x.inner.Length()
+}
+
+// MutableFileDataBufferable is the interface implemented by [MutableFileDataBuffer], for mocking and DI.
+type MutableFileDataBufferable interface {
+	Unwrap() *raw.FSMutableFileDataBuffer
+	MutableBytes() unsafe.Pointer
+	Length() uint
+}
+
+var _ MutableFileDataBufferable = (*MutableFileDataBuffer)(nil)
 

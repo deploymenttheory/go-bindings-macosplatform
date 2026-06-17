@@ -5,8 +5,10 @@
 package cloudkit
 
 import (
+	"context"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -88,11 +90,14 @@ func (x *ModifySubscriptionsOperation) SubscriptionsToSave() []*raw.CKSubscripti
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.CKSubscription, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CKSubscription {
+		return raw.CKSubscriptionFromID(purego.Retain(_id))
+	})
+}
+
+// SetSubscriptionsToSave calls the underlying SetSubscriptionsToSave.
+func (x *ModifySubscriptionsOperation) SetSubscriptionsToSave(subscriptionsToSave *foundation.NSArray[*raw.CKSubscription]) {
+	x.inner.SetSubscriptionsToSave(subscriptionsToSave)
 }
 
 // SubscriptionIDsToDelete returns the collection as a Go slice.
@@ -101,14 +106,90 @@ func (x *ModifySubscriptionsOperation) SubscriptionIDsToDelete() []*foundation.N
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	})
+}
+
+// SetSubscriptionIDsToDelete calls the underlying SetSubscriptionIDsToDelete.
+func (x *ModifySubscriptionsOperation) SetSubscriptionIDsToDelete(subscriptionIDsToDelete *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetSubscriptionIDsToDelete(subscriptionIDsToDelete)
+}
+
+// PerSubscriptionSaveBlock calls the underlying PerSubscriptionSaveBlock.
+func (x *ModifySubscriptionsOperation) PerSubscriptionSaveBlock() objc.Block {
+	return x.inner.PerSubscriptionSaveBlock()
+}
+
+// SetPerSubscriptionSaveBlock calls the underlying SetPerSubscriptionSaveBlock.
+func (x *ModifySubscriptionsOperation) SetPerSubscriptionSaveBlock(perSubscriptionSaveBlock func(*foundation.NSString, *raw.CKSubscription, unsafe.Pointer)) {
+	x.inner.SetPerSubscriptionSaveBlock(perSubscriptionSaveBlock)
+}
+
+// PerSubscriptionDeleteBlock calls the underlying PerSubscriptionDeleteBlock.
+func (x *ModifySubscriptionsOperation) PerSubscriptionDeleteBlock() objc.Block {
+	return x.inner.PerSubscriptionDeleteBlock()
+}
+
+// SetPerSubscriptionDeleteBlock blocks until the operation completes or ctx is cancelled.
+func (x *ModifySubscriptionsOperation) SetPerSubscriptionDeleteBlock(ctx context.Context) (string, error) {
+	type _result struct {
+		val string
+		err error
 	}
-	return out
+	_ch := make(chan _result, 1)
+	x.inner.SetPerSubscriptionDeleteBlock(func(_p0 *foundation.NSString, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = purego.GoString(_p0.Ptr())
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero string
+		return _zero, ctx.Err()
+	}
+}
+
+// ModifySubscriptionsCompletionBlock calls the underlying ModifySubscriptionsCompletionBlock.
+func (x *ModifySubscriptionsOperation) ModifySubscriptionsCompletionBlock() objc.Block {
+	return x.inner.ModifySubscriptionsCompletionBlock()
+}
+
+// SetModifySubscriptionsCompletionBlock calls the underlying SetModifySubscriptionsCompletionBlock.
+func (x *ModifySubscriptionsOperation) SetModifySubscriptionsCompletionBlock(modifySubscriptionsCompletionBlock objc.Block) {
+	x.inner.SetModifySubscriptionsCompletionBlock(modifySubscriptionsCompletionBlock)
 }
 
 func (x *ModifySubscriptionsOperation) asDatabaseOperation() *raw.CKDatabaseOperation { return &x.inner.CKDatabaseOperation }
 
 func (x *ModifySubscriptionsOperation) asOperation() *raw.CKOperation { return &x.inner.CKDatabaseOperation.CKOperation }
+
+// ModifySubscriptionsOperationable is the interface implemented by [ModifySubscriptionsOperation], for mocking and DI.
+type ModifySubscriptionsOperationable interface {
+	Unwrap() *raw.CKModifySubscriptionsOperation
+	WithSubscriptionsToSave(items ...SubscriptionProvider) *ModifySubscriptionsOperation
+	WithSubscriptionIDsToDelete(items ...*foundation.NSString) *ModifySubscriptionsOperation
+	WithPerSubscriptionSaveBlock(perSubscriptionSaveBlock func(*foundation.NSString, *raw.CKSubscription, unsafe.Pointer)) *ModifySubscriptionsOperation
+	WithPerSubscriptionDeleteBlock(perSubscriptionDeleteBlock func(*foundation.NSString, unsafe.Pointer)) *ModifySubscriptionsOperation
+	WithModifySubscriptionsCompletionBlock(modifySubscriptionsCompletionBlock objc.Block) *ModifySubscriptionsOperation
+	SubscriptionsToSave() []*raw.CKSubscription
+	SetSubscriptionsToSave(subscriptionsToSave *foundation.NSArray[*raw.CKSubscription])
+	SubscriptionIDsToDelete() []*foundation.NSString
+	SetSubscriptionIDsToDelete(subscriptionIDsToDelete *foundation.NSArray[*foundation.NSString])
+	PerSubscriptionSaveBlock() objc.Block
+	SetPerSubscriptionSaveBlock(perSubscriptionSaveBlock func(*foundation.NSString, *raw.CKSubscription, unsafe.Pointer))
+	PerSubscriptionDeleteBlock() objc.Block
+	SetPerSubscriptionDeleteBlock(ctx context.Context) (string, error)
+	ModifySubscriptionsCompletionBlock() objc.Block
+	SetModifySubscriptionsCompletionBlock(modifySubscriptionsCompletionBlock objc.Block)
+}
+
+var _ ModifySubscriptionsOperationable = (*ModifySubscriptionsOperation)(nil)
 

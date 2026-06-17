@@ -25,5 +25,18 @@ func NewHangUpCallIntentResponseWithCodeUserActivity(code raw.INHangUpCallIntent
 	return &HangUpCallIntentResponse{inner: raw.INHangUpCallIntentResponseFromID(_id)}
 }
 
+// Code calls the underlying Code.
+func (x *HangUpCallIntentResponse) Code() raw.INHangUpCallIntentResponseCode {
+	return x.inner.Code()
+}
+
 func (x *HangUpCallIntentResponse) asIntentResponse() *raw.INIntentResponse { return &x.inner.INIntentResponse }
+
+// HangUpCallIntentResponseable is the interface implemented by [HangUpCallIntentResponse], for mocking and DI.
+type HangUpCallIntentResponseable interface {
+	Unwrap() *raw.INHangUpCallIntentResponse
+	Code() raw.INHangUpCallIntentResponseCode
+}
+
+var _ HangUpCallIntentResponseable = (*HangUpCallIntentResponse)(nil)
 

@@ -6,6 +6,7 @@ package imagecapturecore
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imagecapturecore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -29,12 +30,18 @@ func (x *CameraFolder) Contents() []*raw.ICCameraItem {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.ICCameraItem, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.ICCameraItem {
+		return raw.ICCameraItemFromID(purego.Retain(_id))
+	})
 }
 
 func (x *CameraFolder) asCameraItem() *raw.ICCameraItem { return &x.inner.ICCameraItem }
+
+// CameraFolderable is the interface implemented by [CameraFolder], for mocking and DI.
+type CameraFolderable interface {
+	Unwrap() *raw.ICCameraFolder
+	Contents() []*raw.ICCameraItem
+}
+
+var _ CameraFolderable = (*CameraFolder)(nil)
 

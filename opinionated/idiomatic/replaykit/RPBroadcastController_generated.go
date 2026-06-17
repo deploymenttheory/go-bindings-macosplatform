@@ -6,6 +6,7 @@ package replaykit
 
 import (
 	"context"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/replaykit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
@@ -32,15 +33,25 @@ func (x *BroadcastController) WithDelegate(delegate raw.RPBroadcastControllerDel
 	return x
 }
 
+// PauseBroadcast calls the underlying PauseBroadcast.
+func (x *BroadcastController) PauseBroadcast() {
+	x.inner.PauseBroadcast()
+}
+
+// ResumeBroadcast calls the underlying ResumeBroadcast.
+func (x *BroadcastController) ResumeBroadcast() {
+	x.inner.ResumeBroadcast()
+}
+
 // FinishBroadcastWithHandler blocks until the operation completes or ctx is cancelled.
 func (x *BroadcastController) FinishBroadcastWithHandler(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.FinishBroadcastWithHandler(func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -49,4 +60,51 @@ func (x *BroadcastController) FinishBroadcastWithHandler(ctx context.Context) er
 		return ctx.Err()
 	}
 }
+
+// IsBroadcasting calls the underlying IsBroadcasting.
+func (x *BroadcastController) IsBroadcasting() bool {
+	return x.inner.IsBroadcasting()
+}
+
+// IsPaused calls the underlying IsPaused.
+func (x *BroadcastController) IsPaused() bool {
+	return x.inner.IsPaused()
+}
+
+// BroadcastURL calls the underlying BroadcastURL.
+func (x *BroadcastController) BroadcastURL() *foundation.NSURL {
+	return x.inner.BroadcastURL()
+}
+
+// ServiceInfo calls the underlying ServiceInfo.
+func (x *BroadcastController) ServiceInfo() *foundation.NSDictionary[*foundation.NSString, *foundation.NSObject] {
+	return x.inner.ServiceInfo()
+}
+
+// Delegate calls the underlying Delegate.
+func (x *BroadcastController) Delegate() raw.RPBroadcastControllerDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *BroadcastController) SetDelegate(delegate raw.RPBroadcastControllerDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// BroadcastControllerable is the interface implemented by [BroadcastController], for mocking and DI.
+type BroadcastControllerable interface {
+	Unwrap() *raw.RPBroadcastController
+	WithDelegate(delegate raw.RPBroadcastControllerDelegate) *BroadcastController
+	PauseBroadcast()
+	ResumeBroadcast()
+	FinishBroadcastWithHandler(ctx context.Context) error
+	IsBroadcasting() bool
+	IsPaused() bool
+	BroadcastURL() *foundation.NSURL
+	ServiceInfo() *foundation.NSDictionary[*foundation.NSString, *foundation.NSObject]
+	Delegate() raw.RPBroadcastControllerDelegate
+	SetDelegate(delegate raw.RPBroadcastControllerDelegate)
+}
+
+var _ BroadcastControllerable = (*BroadcastController)(nil)
 

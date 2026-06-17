@@ -49,3 +49,49 @@ func (x *MTRApplicationLauncherClusterLauncherResponseParams) WithTimedInvokeTim
 	return x
 }
 
+// Status calls the underlying Status.
+func (x *MTRApplicationLauncherClusterLauncherResponseParams) Status() *foundation.NSNumber {
+	return x.inner.Status()
+}
+
+// SetStatus calls the underlying SetStatus.
+func (x *MTRApplicationLauncherClusterLauncherResponseParams) SetStatus(status *foundation.NSNumber) {
+	x.inner.SetStatus(status)
+}
+
+// Data calls the underlying Data.
+func (x *MTRApplicationLauncherClusterLauncherResponseParams) Data() *foundation.NSData {
+	return x.inner.Data()
+}
+
+// SetData calls the underlying SetData.
+func (x *MTRApplicationLauncherClusterLauncherResponseParams) SetData(data *foundation.NSData) {
+	x.inner.SetData(data)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRApplicationLauncherClusterLauncherResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRApplicationLauncherClusterLauncherResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// MTRApplicationLauncherClusterLauncherResponseParamsable is the interface implemented by [MTRApplicationLauncherClusterLauncherResponseParams], for mocking and DI.
+type MTRApplicationLauncherClusterLauncherResponseParamsable interface {
+	Unwrap() *raw.MTRApplicationLauncherClusterLauncherResponseParams
+	WithStatus(status *foundation.NSNumber) *MTRApplicationLauncherClusterLauncherResponseParams
+	WithData(data *foundation.NSData) *MTRApplicationLauncherClusterLauncherResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRApplicationLauncherClusterLauncherResponseParams
+	Status() *foundation.NSNumber
+	SetStatus(status *foundation.NSNumber)
+	Data() *foundation.NSData
+	SetData(data *foundation.NSData)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+}
+
+var _ MTRApplicationLauncherClusterLauncherResponseParamsable = (*MTRApplicationLauncherClusterLauncherResponseParams)(nil)
+

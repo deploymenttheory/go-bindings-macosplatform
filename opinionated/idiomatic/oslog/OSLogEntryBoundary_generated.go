@@ -25,3 +25,10 @@ func NewLogEntryBoundary() *LogEntryBoundary {
 
 func (x *LogEntryBoundary) asLogEntry() *raw.OSLogEntry { return &x.inner.OSLogEntry }
 
+// LogEntryBoundaryable is the interface implemented by [LogEntryBoundary], for mocking and DI.
+type LogEntryBoundaryable interface {
+	Unwrap() *raw.OSLogEntryBoundary
+}
+
+var _ LogEntryBoundaryable = (*LogEntryBoundary)(nil)
+

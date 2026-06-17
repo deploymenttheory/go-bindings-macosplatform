@@ -7,6 +7,7 @@ package foundation
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // UserUnixTask wraps [raw.NSUserUnixTask] with a fluent Go API.
@@ -41,7 +42,71 @@ func (x *UserUnixTask) WithStandardError(standardError *raw.NSFileHandle) *UserU
 	return x
 }
 
+// ExecuteWithArgumentsCompletionHandler calls the underlying ExecuteWithArgumentsCompletionHandler.
+func (x *UserUnixTask) ExecuteWithArgumentsCompletionHandler(arguments *raw.NSArray[*raw.NSString], handler func(unsafe.Pointer)) {
+	x.inner.ExecuteWithArgumentsCompletionHandler(arguments, handler)
+}
+
+// StandardInput calls the underlying StandardInput.
+func (x *UserUnixTask) StandardInput() *FileHandle {
+	_r := x.inner.StandardInput()
+	if _r == nil {
+		return nil
+	}
+	return &FileHandle{inner: _r}
+}
+
+// SetStandardInput calls the underlying SetStandardInput.
+func (x *UserUnixTask) SetStandardInput(standardInput *raw.NSFileHandle) {
+	x.inner.SetStandardInput(standardInput)
+}
+
+// StandardOutput calls the underlying StandardOutput.
+func (x *UserUnixTask) StandardOutput() *FileHandle {
+	_r := x.inner.StandardOutput()
+	if _r == nil {
+		return nil
+	}
+	return &FileHandle{inner: _r}
+}
+
+// SetStandardOutput calls the underlying SetStandardOutput.
+func (x *UserUnixTask) SetStandardOutput(standardOutput *raw.NSFileHandle) {
+	x.inner.SetStandardOutput(standardOutput)
+}
+
+// StandardError calls the underlying StandardError.
+func (x *UserUnixTask) StandardError() *FileHandle {
+	_r := x.inner.StandardError()
+	if _r == nil {
+		return nil
+	}
+	return &FileHandle{inner: _r}
+}
+
+// SetStandardError calls the underlying SetStandardError.
+func (x *UserUnixTask) SetStandardError(standardError *raw.NSFileHandle) {
+	x.inner.SetStandardError(standardError)
+}
+
 func (x *UserUnixTask) asUserScriptTask() *raw.NSUserScriptTask { return &x.inner.NSUserScriptTask }
 
 func (x *UserUnixTask) asObject() *raw.NSObject { return &x.inner.NSUserScriptTask.NSObject }
+
+// UserUnixTaskable is the interface implemented by [UserUnixTask], for mocking and DI.
+type UserUnixTaskable interface {
+	Unwrap() *raw.NSUserUnixTask
+	WithStandardInput(standardInput *raw.NSFileHandle) *UserUnixTask
+	WithStandardOutput(standardOutput *raw.NSFileHandle) *UserUnixTask
+	WithStandardError(standardError *raw.NSFileHandle) *UserUnixTask
+	ExecuteWithArgumentsCompletionHandler(arguments *raw.NSArray[*raw.NSString], handler func(unsafe.Pointer))
+	StandardInput() *FileHandle
+	SetStandardInput(standardInput *raw.NSFileHandle)
+	StandardOutput() *FileHandle
+	SetStandardOutput(standardOutput *raw.NSFileHandle)
+	StandardError() *FileHandle
+	SetStandardError(standardError *raw.NSFileHandle)
+}
+
+var _ UserUnixTaskable = (*UserUnixTask)(nil)
 

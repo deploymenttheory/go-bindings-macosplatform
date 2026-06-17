@@ -36,3 +36,36 @@ func (x *MTRValveConfigurationAndControlClusterValveStateChangedEvent) WithValve
 	return x
 }
 
+// ValveState calls the underlying ValveState.
+func (x *MTRValveConfigurationAndControlClusterValveStateChangedEvent) ValveState() *foundation.NSNumber {
+	return x.inner.ValveState()
+}
+
+// SetValveState calls the underlying SetValveState.
+func (x *MTRValveConfigurationAndControlClusterValveStateChangedEvent) SetValveState(valveState *foundation.NSNumber) {
+	x.inner.SetValveState(valveState)
+}
+
+// ValveLevel calls the underlying ValveLevel.
+func (x *MTRValveConfigurationAndControlClusterValveStateChangedEvent) ValveLevel() *foundation.NSNumber {
+	return x.inner.ValveLevel()
+}
+
+// SetValveLevel calls the underlying SetValveLevel.
+func (x *MTRValveConfigurationAndControlClusterValveStateChangedEvent) SetValveLevel(valveLevel *foundation.NSNumber) {
+	x.inner.SetValveLevel(valveLevel)
+}
+
+// MTRValveConfigurationAndControlClusterValveStateChangedEventable is the interface implemented by [MTRValveConfigurationAndControlClusterValveStateChangedEvent], for mocking and DI.
+type MTRValveConfigurationAndControlClusterValveStateChangedEventable interface {
+	Unwrap() *raw.MTRValveConfigurationAndControlClusterValveStateChangedEvent
+	WithValveState(valveState *foundation.NSNumber) *MTRValveConfigurationAndControlClusterValveStateChangedEvent
+	WithValveLevel(valveLevel *foundation.NSNumber) *MTRValveConfigurationAndControlClusterValveStateChangedEvent
+	ValveState() *foundation.NSNumber
+	SetValveState(valveState *foundation.NSNumber)
+	ValveLevel() *foundation.NSNumber
+	SetValveLevel(valveLevel *foundation.NSNumber)
+}
+
+var _ MTRValveConfigurationAndControlClusterValveStateChangedEventable = (*MTRValveConfigurationAndControlClusterValveStateChangedEvent)(nil)
+

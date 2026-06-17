@@ -54,3 +54,75 @@ func (x *MTRNetworkCommissioningClusterReorderNetworkParams) WithServerSideProce
 	return x
 }
 
+// NetworkID calls the underlying NetworkID.
+func (x *MTRNetworkCommissioningClusterReorderNetworkParams) NetworkID() *foundation.NSData {
+	return x.inner.NetworkID()
+}
+
+// SetNetworkID calls the underlying SetNetworkID.
+func (x *MTRNetworkCommissioningClusterReorderNetworkParams) SetNetworkID(networkID *foundation.NSData) {
+	x.inner.SetNetworkID(networkID)
+}
+
+// NetworkIndex calls the underlying NetworkIndex.
+func (x *MTRNetworkCommissioningClusterReorderNetworkParams) NetworkIndex() *foundation.NSNumber {
+	return x.inner.NetworkIndex()
+}
+
+// SetNetworkIndex calls the underlying SetNetworkIndex.
+func (x *MTRNetworkCommissioningClusterReorderNetworkParams) SetNetworkIndex(networkIndex *foundation.NSNumber) {
+	x.inner.SetNetworkIndex(networkIndex)
+}
+
+// Breadcrumb calls the underlying Breadcrumb.
+func (x *MTRNetworkCommissioningClusterReorderNetworkParams) Breadcrumb() *foundation.NSNumber {
+	return x.inner.Breadcrumb()
+}
+
+// SetBreadcrumb calls the underlying SetBreadcrumb.
+func (x *MTRNetworkCommissioningClusterReorderNetworkParams) SetBreadcrumb(breadcrumb *foundation.NSNumber) {
+	x.inner.SetBreadcrumb(breadcrumb)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRNetworkCommissioningClusterReorderNetworkParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRNetworkCommissioningClusterReorderNetworkParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRNetworkCommissioningClusterReorderNetworkParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRNetworkCommissioningClusterReorderNetworkParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRNetworkCommissioningClusterReorderNetworkParamsable is the interface implemented by [MTRNetworkCommissioningClusterReorderNetworkParams], for mocking and DI.
+type MTRNetworkCommissioningClusterReorderNetworkParamsable interface {
+	Unwrap() *raw.MTRNetworkCommissioningClusterReorderNetworkParams
+	WithNetworkID(networkID *foundation.NSData) *MTRNetworkCommissioningClusterReorderNetworkParams
+	WithNetworkIndex(networkIndex *foundation.NSNumber) *MTRNetworkCommissioningClusterReorderNetworkParams
+	WithBreadcrumb(breadcrumb *foundation.NSNumber) *MTRNetworkCommissioningClusterReorderNetworkParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRNetworkCommissioningClusterReorderNetworkParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRNetworkCommissioningClusterReorderNetworkParams
+	NetworkID() *foundation.NSData
+	SetNetworkID(networkID *foundation.NSData)
+	NetworkIndex() *foundation.NSNumber
+	SetNetworkIndex(networkIndex *foundation.NSNumber)
+	Breadcrumb() *foundation.NSNumber
+	SetBreadcrumb(breadcrumb *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRNetworkCommissioningClusterReorderNetworkParamsable = (*MTRNetworkCommissioningClusterReorderNetworkParams)(nil)
+

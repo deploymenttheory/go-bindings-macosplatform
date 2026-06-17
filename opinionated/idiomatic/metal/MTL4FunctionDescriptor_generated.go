@@ -25,3 +25,10 @@ func NewMTL4FunctionDescriptor() *MTL4FunctionDescriptor {
 
 func (x *MTL4FunctionDescriptor) asMTL4FunctionDescriptor() *raw.MTL4FunctionDescriptor { return x.inner }
 
+// MTL4FunctionDescriptorable is the interface implemented by [MTL4FunctionDescriptor], for mocking and DI.
+type MTL4FunctionDescriptorable interface {
+	Unwrap() *raw.MTL4FunctionDescriptor
+}
+
+var _ MTL4FunctionDescriptorable = (*MTL4FunctionDescriptor)(nil)
+

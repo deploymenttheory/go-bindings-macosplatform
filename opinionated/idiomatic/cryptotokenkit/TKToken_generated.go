@@ -31,5 +31,55 @@ func (x *Token) WithDelegate(delegate raw.TKTokenDelegate) *Token {
 	return x
 }
 
+// TokenDriver calls the underlying TokenDriver.
+func (x *Token) TokenDriver() *TokenDriver {
+	_r := x.inner.TokenDriver()
+	if _r == nil {
+		return nil
+	}
+	return &TokenDriver{inner: _r}
+}
+
+// Delegate calls the underlying Delegate.
+func (x *Token) Delegate() raw.TKTokenDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *Token) SetDelegate(delegate raw.TKTokenDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// Configuration calls the underlying Configuration.
+func (x *Token) Configuration() *TokenConfiguration {
+	_r := x.inner.Configuration()
+	if _r == nil {
+		return nil
+	}
+	return &TokenConfiguration{inner: _r}
+}
+
+// KeychainContents calls the underlying KeychainContents.
+func (x *Token) KeychainContents() *TokenKeychainContents {
+	_r := x.inner.KeychainContents()
+	if _r == nil {
+		return nil
+	}
+	return &TokenKeychainContents{inner: _r}
+}
+
 func (x *Token) asToken() *raw.TKToken { return x.inner }
+
+// Tokenable is the interface implemented by [Token], for mocking and DI.
+type Tokenable interface {
+	Unwrap() *raw.TKToken
+	WithDelegate(delegate raw.TKTokenDelegate) *Token
+	TokenDriver() *TokenDriver
+	Delegate() raw.TKTokenDelegate
+	SetDelegate(delegate raw.TKTokenDelegate)
+	Configuration() *TokenConfiguration
+	KeychainContents() *TokenKeychainContents
+}
+
+var _ Tokenable = (*Token)(nil)
 

@@ -48,5 +48,64 @@ func (x *CalTask) WithCompletedDate(completedDate *foundation.NSDate) *CalTask {
 	return x
 }
 
+// DueDate calls the underlying DueDate.
+func (x *CalTask) DueDate() *foundation.NSDate {
+	return x.inner.DueDate()
+}
+
+// SetDueDate calls the underlying SetDueDate.
+func (x *CalTask) SetDueDate(dueDate *foundation.NSDate) {
+	x.inner.SetDueDate(dueDate)
+}
+
+// Priority calls the underlying Priority.
+func (x *CalTask) Priority() uint {
+	return x.inner.Priority()
+}
+
+// SetPriority calls the underlying SetPriority.
+func (x *CalTask) SetPriority(priority uint) {
+	x.inner.SetPriority(priority)
+}
+
+// IsCompleted calls the underlying IsCompleted.
+func (x *CalTask) IsCompleted() bool {
+	return x.inner.IsCompleted()
+}
+
+// SetIsCompleted calls the underlying SetIsCompleted.
+func (x *CalTask) SetIsCompleted(isCompleted bool) {
+	x.inner.SetIsCompleted(isCompleted)
+}
+
+// CompletedDate calls the underlying CompletedDate.
+func (x *CalTask) CompletedDate() *foundation.NSDate {
+	return x.inner.CompletedDate()
+}
+
+// SetCompletedDate calls the underlying SetCompletedDate.
+func (x *CalTask) SetCompletedDate(completedDate *foundation.NSDate) {
+	x.inner.SetCompletedDate(completedDate)
+}
+
 func (x *CalTask) asCalCalendarItem() *raw.CalCalendarItem { return &x.inner.CalCalendarItem }
+
+// CalTaskable is the interface implemented by [CalTask], for mocking and DI.
+type CalTaskable interface {
+	Unwrap() *raw.CalTask
+	WithDueDate(dueDate *foundation.NSDate) *CalTask
+	WithPriority(priority uint) *CalTask
+	WithIsCompleted(isCompleted bool) *CalTask
+	WithCompletedDate(completedDate *foundation.NSDate) *CalTask
+	DueDate() *foundation.NSDate
+	SetDueDate(dueDate *foundation.NSDate)
+	Priority() uint
+	SetPriority(priority uint)
+	IsCompleted() bool
+	SetIsCompleted(isCompleted bool)
+	CompletedDate() *foundation.NSDate
+	SetCompletedDate(completedDate *foundation.NSDate)
+}
+
+var _ CalTaskable = (*CalTask)(nil)
 

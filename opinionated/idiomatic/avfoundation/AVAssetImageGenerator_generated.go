@@ -9,7 +9,9 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // AssetImageGenerator wraps [raw.AVAssetImageGenerator] with a fluent Go API.
@@ -68,4 +70,154 @@ func (x *AssetImageGenerator) WithRequestedTimeToleranceAfter(requestedTimeToler
 	x.inner.SetRequestedTimeToleranceAfter(requestedTimeToleranceAfter)
 	return x
 }
+
+// CopyCGImageAtTimeActualTimeError calls the underlying CopyCGImageAtTimeActualTimeError.
+func (x *AssetImageGenerator) CopyCGImageAtTimeActualTimeError(requestedTime coremedia.CMTime, actualTime *coremedia.CMTime) (unsafe.Pointer, error) {
+	return x.inner.CopyCGImageAtTimeActualTimeError(requestedTime, actualTime)
+}
+
+// GenerateCGImagesAsynchronouslyForTimesCompletionHandler calls the underlying GenerateCGImagesAsynchronouslyForTimesCompletionHandler.
+func (x *AssetImageGenerator) GenerateCGImagesAsynchronouslyForTimesCompletionHandler(requestedTimes *foundation.NSArray[*foundation.NSValue], handler objc.Block) {
+	x.inner.GenerateCGImagesAsynchronouslyForTimesCompletionHandler(requestedTimes, handler)
+}
+
+// GenerateCGImageAsynchronouslyForTimeCompletionHandler calls the underlying GenerateCGImageAsynchronouslyForTimeCompletionHandler.
+func (x *AssetImageGenerator) GenerateCGImageAsynchronouslyForTimeCompletionHandler(requestedTime coremedia.CMTime, handler objc.Block) {
+	x.inner.GenerateCGImageAsynchronouslyForTimeCompletionHandler(requestedTime, handler)
+}
+
+// CancelAllCGImageGeneration calls the underlying CancelAllCGImageGeneration.
+func (x *AssetImageGenerator) CancelAllCGImageGeneration() {
+	x.inner.CancelAllCGImageGeneration()
+}
+
+// Asset calls the underlying Asset.
+func (x *AssetImageGenerator) Asset() *Asset {
+	_r := x.inner.Asset()
+	if _r == nil {
+		return nil
+	}
+	return &Asset{inner: _r}
+}
+
+// AppliesPreferredTrackTransform calls the underlying AppliesPreferredTrackTransform.
+func (x *AssetImageGenerator) AppliesPreferredTrackTransform() bool {
+	return x.inner.AppliesPreferredTrackTransform()
+}
+
+// SetAppliesPreferredTrackTransform calls the underlying SetAppliesPreferredTrackTransform.
+func (x *AssetImageGenerator) SetAppliesPreferredTrackTransform(appliesPreferredTrackTransform bool) {
+	x.inner.SetAppliesPreferredTrackTransform(appliesPreferredTrackTransform)
+}
+
+// MaximumSize calls the underlying MaximumSize.
+func (x *AssetImageGenerator) MaximumSize() corefoundation.CGSize {
+	return x.inner.MaximumSize()
+}
+
+// SetMaximumSize calls the underlying SetMaximumSize.
+func (x *AssetImageGenerator) SetMaximumSize(maximumSize corefoundation.CGSize) {
+	x.inner.SetMaximumSize(maximumSize)
+}
+
+// ApertureMode calls the underlying ApertureMode.
+func (x *AssetImageGenerator) ApertureMode() string {
+	_r := x.inner.ApertureMode()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetApertureMode calls the underlying SetApertureMode.
+func (x *AssetImageGenerator) SetApertureMode(apertureMode *foundation.NSString) {
+	x.inner.SetApertureMode(apertureMode)
+}
+
+// DynamicRangePolicy calls the underlying DynamicRangePolicy.
+func (x *AssetImageGenerator) DynamicRangePolicy() string {
+	_r := x.inner.DynamicRangePolicy()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetDynamicRangePolicy calls the underlying SetDynamicRangePolicy.
+func (x *AssetImageGenerator) SetDynamicRangePolicy(dynamicRangePolicy *foundation.NSString) {
+	x.inner.SetDynamicRangePolicy(dynamicRangePolicy)
+}
+
+// VideoComposition calls the underlying VideoComposition.
+func (x *AssetImageGenerator) VideoComposition() *VideoComposition {
+	_r := x.inner.VideoComposition()
+	if _r == nil {
+		return nil
+	}
+	return &VideoComposition{inner: _r}
+}
+
+// SetVideoComposition calls the underlying SetVideoComposition.
+func (x *AssetImageGenerator) SetVideoComposition(videoComposition *raw.AVVideoComposition) {
+	x.inner.SetVideoComposition(videoComposition)
+}
+
+// CustomVideoCompositor calls the underlying CustomVideoCompositor.
+func (x *AssetImageGenerator) CustomVideoCompositor() raw.AVVideoCompositing {
+	return x.inner.CustomVideoCompositor()
+}
+
+// RequestedTimeToleranceBefore calls the underlying RequestedTimeToleranceBefore.
+func (x *AssetImageGenerator) RequestedTimeToleranceBefore() coremedia.CMTime {
+	return x.inner.RequestedTimeToleranceBefore()
+}
+
+// SetRequestedTimeToleranceBefore calls the underlying SetRequestedTimeToleranceBefore.
+func (x *AssetImageGenerator) SetRequestedTimeToleranceBefore(requestedTimeToleranceBefore coremedia.CMTime) {
+	x.inner.SetRequestedTimeToleranceBefore(requestedTimeToleranceBefore)
+}
+
+// RequestedTimeToleranceAfter calls the underlying RequestedTimeToleranceAfter.
+func (x *AssetImageGenerator) RequestedTimeToleranceAfter() coremedia.CMTime {
+	return x.inner.RequestedTimeToleranceAfter()
+}
+
+// SetRequestedTimeToleranceAfter calls the underlying SetRequestedTimeToleranceAfter.
+func (x *AssetImageGenerator) SetRequestedTimeToleranceAfter(requestedTimeToleranceAfter coremedia.CMTime) {
+	x.inner.SetRequestedTimeToleranceAfter(requestedTimeToleranceAfter)
+}
+
+// AssetImageGeneratorable is the interface implemented by [AssetImageGenerator], for mocking and DI.
+type AssetImageGeneratorable interface {
+	Unwrap() *raw.AVAssetImageGenerator
+	WithAppliesPreferredTrackTransform(appliesPreferredTrackTransform bool) *AssetImageGenerator
+	WithMaximumSize(maximumSize corefoundation.CGSize) *AssetImageGenerator
+	WithApertureMode(apertureMode *foundation.NSString) *AssetImageGenerator
+	WithDynamicRangePolicy(dynamicRangePolicy *foundation.NSString) *AssetImageGenerator
+	WithVideoComposition(videoComposition VideoCompositionProvider) *AssetImageGenerator
+	WithRequestedTimeToleranceBefore(requestedTimeToleranceBefore coremedia.CMTime) *AssetImageGenerator
+	WithRequestedTimeToleranceAfter(requestedTimeToleranceAfter coremedia.CMTime) *AssetImageGenerator
+	CopyCGImageAtTimeActualTimeError(requestedTime coremedia.CMTime, actualTime *coremedia.CMTime) (unsafe.Pointer, error)
+	GenerateCGImagesAsynchronouslyForTimesCompletionHandler(requestedTimes *foundation.NSArray[*foundation.NSValue], handler objc.Block)
+	GenerateCGImageAsynchronouslyForTimeCompletionHandler(requestedTime coremedia.CMTime, handler objc.Block)
+	CancelAllCGImageGeneration()
+	Asset() *Asset
+	AppliesPreferredTrackTransform() bool
+	SetAppliesPreferredTrackTransform(appliesPreferredTrackTransform bool)
+	MaximumSize() corefoundation.CGSize
+	SetMaximumSize(maximumSize corefoundation.CGSize)
+	ApertureMode() string
+	SetApertureMode(apertureMode *foundation.NSString)
+	DynamicRangePolicy() string
+	SetDynamicRangePolicy(dynamicRangePolicy *foundation.NSString)
+	VideoComposition() *VideoComposition
+	SetVideoComposition(videoComposition *raw.AVVideoComposition)
+	CustomVideoCompositor() raw.AVVideoCompositing
+	RequestedTimeToleranceBefore() coremedia.CMTime
+	SetRequestedTimeToleranceBefore(requestedTimeToleranceBefore coremedia.CMTime)
+	RequestedTimeToleranceAfter() coremedia.CMTime
+	SetRequestedTimeToleranceAfter(requestedTimeToleranceAfter coremedia.CMTime)
+}
+
+var _ AssetImageGeneratorable = (*AssetImageGenerator)(nil)
 

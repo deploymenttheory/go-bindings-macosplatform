@@ -36,3 +36,36 @@ func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeTagStruct)
 	return x
 }
 
+// MfgCode calls the underlying MfgCode.
+func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeTagStruct) MfgCode() *foundation.NSNumber {
+	return x.inner.MfgCode()
+}
+
+// SetMfgCode calls the underlying SetMfgCode.
+func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeTagStruct) SetMfgCode(mfgCode *foundation.NSNumber) {
+	x.inner.SetMfgCode(mfgCode)
+}
+
+// Value calls the underlying Value.
+func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeTagStruct) Value() *foundation.NSNumber {
+	return x.inner.Value()
+}
+
+// SetValue calls the underlying SetValue.
+func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeTagStruct) SetValue(value *foundation.NSNumber) {
+	x.inner.SetValue(value)
+}
+
+// MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeTagStructable is the interface implemented by [MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeTagStruct], for mocking and DI.
+type MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeTagStructable interface {
+	Unwrap() *raw.MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeTagStruct
+	WithMfgCode(mfgCode *foundation.NSNumber) *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeTagStruct
+	WithValue(value *foundation.NSNumber) *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeTagStruct
+	MfgCode() *foundation.NSNumber
+	SetMfgCode(mfgCode *foundation.NSNumber)
+	Value() *foundation.NSNumber
+	SetValue(value *foundation.NSNumber)
+}
+
+var _ MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeTagStructable = (*MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeTagStruct)(nil)
+

@@ -25,3 +25,10 @@ func NewStringMetaParameter() *StringMetaParameter {
 
 func (x *StringMetaParameter) asMetaParameter() *raw.PHASEMetaParameter { return &x.inner.PHASEMetaParameter }
 
+// StringMetaParameterable is the interface implemented by [StringMetaParameter], for mocking and DI.
+type StringMetaParameterable interface {
+	Unwrap() *raw.PHASEStringMetaParameter
+}
+
+var _ StringMetaParameterable = (*StringMetaParameter)(nil)
+

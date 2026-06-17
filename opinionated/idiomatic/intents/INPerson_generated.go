@@ -7,6 +7,7 @@ package intents
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -81,16 +82,116 @@ func NewPersonWithHandleNameComponentsDisplayNameImageContactIdentifier(handle s
 	return &Person{inner: raw.INPersonFromID(_id)}
 }
 
+// PersonHandle calls the underlying PersonHandle.
+func (x *Person) PersonHandle() *PersonHandle {
+	_r := x.inner.PersonHandle()
+	if _r == nil {
+		return nil
+	}
+	return &PersonHandle{inner: _r}
+}
+
+// NameComponents calls the underlying NameComponents.
+func (x *Person) NameComponents() *foundation.NSPersonNameComponents {
+	return x.inner.NameComponents()
+}
+
+// DisplayName calls the underlying DisplayName.
+func (x *Person) DisplayName() string {
+	_r := x.inner.DisplayName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Image calls the underlying Image.
+func (x *Person) Image() *Image {
+	_r := x.inner.Image()
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// ContactIdentifier calls the underlying ContactIdentifier.
+func (x *Person) ContactIdentifier() string {
+	_r := x.inner.ContactIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// CustomIdentifier calls the underlying CustomIdentifier.
+func (x *Person) CustomIdentifier() string {
+	_r := x.inner.CustomIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Relationship calls the underlying Relationship.
+func (x *Person) Relationship() string {
+	_r := x.inner.Relationship()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// IsContactSuggestion calls the underlying IsContactSuggestion.
+func (x *Person) IsContactSuggestion() bool {
+	return x.inner.IsContactSuggestion()
+}
+
 // Aliases returns the collection as a Go slice.
 func (x *Person) Aliases() []*raw.INPersonHandle {
 	arr := x.inner.Aliases()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.INPersonHandle, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.INPersonHandle {
+		return raw.INPersonHandleFromID(purego.Retain(_id))
+	})
 }
+
+// SuggestionType calls the underlying SuggestionType.
+func (x *Person) SuggestionType() raw.INPersonSuggestionType {
+	return x.inner.SuggestionType()
+}
+
+// IsMe calls the underlying IsMe.
+func (x *Person) IsMe() bool {
+	return x.inner.IsMe()
+}
+
+// Handle calls the underlying Handle.
+func (x *Person) Handle() string {
+	_r := x.inner.Handle()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Personable is the interface implemented by [Person], for mocking and DI.
+type Personable interface {
+	Unwrap() *raw.INPerson
+	PersonHandle() *PersonHandle
+	NameComponents() *foundation.NSPersonNameComponents
+	DisplayName() string
+	Image() *Image
+	ContactIdentifier() string
+	CustomIdentifier() string
+	Relationship() string
+	IsContactSuggestion() bool
+	Aliases() []*raw.INPersonHandle
+	SuggestionType() raw.INPersonSuggestionType
+	IsMe() bool
+	Handle() string
+}
+
+var _ Personable = (*Person)(nil)
 

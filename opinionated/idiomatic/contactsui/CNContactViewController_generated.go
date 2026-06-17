@@ -30,3 +30,23 @@ func (x *ContactViewController) WithContact(contact *contacts.CNContact) *Contac
 	return x
 }
 
+// Contact calls the underlying Contact.
+func (x *ContactViewController) Contact() *contacts.CNContact {
+	return x.inner.Contact()
+}
+
+// SetContact calls the underlying SetContact.
+func (x *ContactViewController) SetContact(contact *contacts.CNContact) {
+	x.inner.SetContact(contact)
+}
+
+// ContactViewControllerable is the interface implemented by [ContactViewController], for mocking and DI.
+type ContactViewControllerable interface {
+	Unwrap() *raw.CNContactViewController
+	WithContact(contact *contacts.CNContact) *ContactViewController
+	Contact() *contacts.CNContact
+	SetContact(contact *contacts.CNContact)
+}
+
+var _ ContactViewControllerable = (*ContactViewController)(nil)
+

@@ -35,5 +35,38 @@ func (x *RatingCommand) WithMaximumRating(maximumRating float32) *RatingCommand 
 	return x
 }
 
+// MinimumRating calls the underlying MinimumRating.
+func (x *RatingCommand) MinimumRating() float32 {
+	return x.inner.MinimumRating()
+}
+
+// SetMinimumRating calls the underlying SetMinimumRating.
+func (x *RatingCommand) SetMinimumRating(minimumRating float32) {
+	x.inner.SetMinimumRating(minimumRating)
+}
+
+// MaximumRating calls the underlying MaximumRating.
+func (x *RatingCommand) MaximumRating() float32 {
+	return x.inner.MaximumRating()
+}
+
+// SetMaximumRating calls the underlying SetMaximumRating.
+func (x *RatingCommand) SetMaximumRating(maximumRating float32) {
+	x.inner.SetMaximumRating(maximumRating)
+}
+
 func (x *RatingCommand) asRemoteCommand() *raw.MPRemoteCommand { return &x.inner.MPRemoteCommand }
+
+// RatingCommandable is the interface implemented by [RatingCommand], for mocking and DI.
+type RatingCommandable interface {
+	Unwrap() *raw.MPRatingCommand
+	WithMinimumRating(minimumRating float32) *RatingCommand
+	WithMaximumRating(maximumRating float32) *RatingCommand
+	MinimumRating() float32
+	SetMinimumRating(minimumRating float32)
+	MaximumRating() float32
+	SetMaximumRating(maximumRating float32)
+}
+
+var _ RatingCommandable = (*RatingCommand)(nil)
 

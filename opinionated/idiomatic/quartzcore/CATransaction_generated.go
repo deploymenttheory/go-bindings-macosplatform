@@ -23,3 +23,10 @@ func NewTransaction() *Transaction {
 	return &Transaction{inner: raw.CATransactionFromID(_id)}
 }
 
+// Transactionable is the interface implemented by [Transaction], for mocking and DI.
+type Transactionable interface {
+	Unwrap() *raw.CATransaction
+}
+
+var _ Transactionable = (*Transaction)(nil)
+

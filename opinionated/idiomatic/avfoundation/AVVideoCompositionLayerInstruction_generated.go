@@ -6,6 +6,8 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +25,30 @@ func NewVideoCompositionLayerInstruction() *VideoCompositionLayerInstruction {
 	return &VideoCompositionLayerInstruction{inner: raw.AVVideoCompositionLayerInstructionFromID(_id)}
 }
 
+// GetTransformRampForTimeStartTransformEndTransformTimeRange calls the underlying GetTransformRampForTimeStartTransformEndTransformTimeRange.
+func (x *VideoCompositionLayerInstruction) GetTransformRampForTimeStartTransformEndTransformTimeRange(time_ coremedia.CMTime, startTransform *corefoundation.CGAffineTransform, endTransform *corefoundation.CGAffineTransform, timeRange *coremedia.CMTimeRange) bool {
+	return x.inner.GetTransformRampForTimeStartTransformEndTransformTimeRange(time_, startTransform, endTransform, timeRange)
+}
+
+// GetOpacityRampForTimeStartOpacityEndOpacityTimeRange calls the underlying GetOpacityRampForTimeStartOpacityEndOpacityTimeRange.
+func (x *VideoCompositionLayerInstruction) GetOpacityRampForTimeStartOpacityEndOpacityTimeRange(time_ coremedia.CMTime, startOpacity *float32, endOpacity *float32, timeRange *coremedia.CMTimeRange) bool {
+	return x.inner.GetOpacityRampForTimeStartOpacityEndOpacityTimeRange(time_, startOpacity, endOpacity, timeRange)
+}
+
+// GetCropRectangleRampForTimeStartCropRectangleEndCropRectangleTimeRange calls the underlying GetCropRectangleRampForTimeStartCropRectangleEndCropRectangleTimeRange.
+func (x *VideoCompositionLayerInstruction) GetCropRectangleRampForTimeStartCropRectangleEndCropRectangleTimeRange(time_ coremedia.CMTime, startCropRectangle *corefoundation.CGRect, endCropRectangle *corefoundation.CGRect, timeRange *coremedia.CMTimeRange) bool {
+	return x.inner.GetCropRectangleRampForTimeStartCropRectangleEndCropRectangleTimeRange(time_, startCropRectangle, endCropRectangle, timeRange)
+}
+
 func (x *VideoCompositionLayerInstruction) asVideoCompositionLayerInstruction() *raw.AVVideoCompositionLayerInstruction { return x.inner }
+
+// VideoCompositionLayerInstructionable is the interface implemented by [VideoCompositionLayerInstruction], for mocking and DI.
+type VideoCompositionLayerInstructionable interface {
+	Unwrap() *raw.AVVideoCompositionLayerInstruction
+	GetTransformRampForTimeStartTransformEndTransformTimeRange(time_ coremedia.CMTime, startTransform *corefoundation.CGAffineTransform, endTransform *corefoundation.CGAffineTransform, timeRange *coremedia.CMTimeRange) bool
+	GetOpacityRampForTimeStartOpacityEndOpacityTimeRange(time_ coremedia.CMTime, startOpacity *float32, endOpacity *float32, timeRange *coremedia.CMTimeRange) bool
+	GetCropRectangleRampForTimeStartCropRectangleEndCropRectangleTimeRange(time_ coremedia.CMTime, startCropRectangle *corefoundation.CGRect, endCropRectangle *corefoundation.CGRect, timeRange *coremedia.CMTimeRange) bool
+}
+
+var _ VideoCompositionLayerInstructionable = (*VideoCompositionLayerInstruction)(nil)
 

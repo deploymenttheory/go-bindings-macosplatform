@@ -7,6 +7,7 @@ package accounts
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/accounts"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -37,4 +38,28 @@ func (x *AccountCredential) WithOauthToken(oauthToken string) *AccountCredential
 	x.inner.SetOauthToken(foundation.NSStringStringWithUTF8String(oauthToken))
 	return x
 }
+
+// OauthToken calls the underlying OauthToken.
+func (x *AccountCredential) OauthToken() string {
+	_r := x.inner.OauthToken()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetOauthToken calls the underlying SetOauthToken.
+func (x *AccountCredential) SetOauthToken(oauthToken string) {
+	x.inner.SetOauthToken(foundation.NSStringStringWithUTF8String(oauthToken))
+}
+
+// AccountCredentialable is the interface implemented by [AccountCredential], for mocking and DI.
+type AccountCredentialable interface {
+	Unwrap() *raw.ACAccountCredential
+	WithOauthToken(oauthToken string) *AccountCredential
+	OauthToken() string
+	SetOauthToken(oauthToken string)
+}
+
+var _ AccountCredentialable = (*AccountCredential)(nil)
 

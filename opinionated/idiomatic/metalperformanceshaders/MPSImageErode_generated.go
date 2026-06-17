@@ -31,3 +31,10 @@ func (x *ImageErode) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel { return
 
 func (x *ImageErode) asKernel() *mpscore.MPSKernel { return &x.inner.MPSImageDilate.MPSUnaryImageKernel.MPSKernel }
 
+// ImageErodeable is the interface implemented by [ImageErode], for mocking and DI.
+type ImageErodeable interface {
+	Unwrap() *raw.MPSImageErode
+}
+
+var _ ImageErodeable = (*ImageErode)(nil)
+

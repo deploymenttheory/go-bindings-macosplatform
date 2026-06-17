@@ -7,7 +7,9 @@ package avfoundation
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -48,16 +50,54 @@ func (x *CaptionRenderer) WithBounds(bounds corefoundation.CGRect) *CaptionRende
 	return x
 }
 
+// CaptionSceneChangesInRange calls the underlying CaptionSceneChangesInRange.
+func (x *CaptionRenderer) CaptionSceneChangesInRange(consideredTimeRange coremedia.CMTimeRange) *foundation.NSArray[*raw.AVCaptionRendererScene] {
+	return x.inner.CaptionSceneChangesInRange(consideredTimeRange)
+}
+
+// RenderInContextForTime calls the underlying RenderInContextForTime.
+func (x *CaptionRenderer) RenderInContextForTime(ctx unsafe.Pointer, time_ coremedia.CMTime) {
+	x.inner.RenderInContextForTime(ctx, time_)
+}
+
 // Captions returns the collection as a Go slice.
 func (x *CaptionRenderer) Captions() []*raw.AVCaption {
 	arr := x.inner.Captions()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AVCaption, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVCaption {
+		return raw.AVCaptionFromID(purego.Retain(_id))
+	})
 }
+
+// SetCaptions calls the underlying SetCaptions.
+func (x *CaptionRenderer) SetCaptions(captions *foundation.NSArray[*raw.AVCaption]) {
+	x.inner.SetCaptions(captions)
+}
+
+// Bounds calls the underlying Bounds.
+func (x *CaptionRenderer) Bounds() corefoundation.CGRect {
+	return x.inner.Bounds()
+}
+
+// SetBounds calls the underlying SetBounds.
+func (x *CaptionRenderer) SetBounds(bounds corefoundation.CGRect) {
+	x.inner.SetBounds(bounds)
+}
+
+// CaptionRendererable is the interface implemented by [CaptionRenderer], for mocking and DI.
+type CaptionRendererable interface {
+	Unwrap() *raw.AVCaptionRenderer
+	WithCaptions(items ...CaptionProvider) *CaptionRenderer
+	WithBounds(bounds corefoundation.CGRect) *CaptionRenderer
+	CaptionSceneChangesInRange(consideredTimeRange coremedia.CMTimeRange) *foundation.NSArray[*raw.AVCaptionRendererScene]
+	RenderInContextForTime(ctx unsafe.Pointer, time_ coremedia.CMTime)
+	Captions() []*raw.AVCaption
+	SetCaptions(captions *foundation.NSArray[*raw.AVCaption])
+	Bounds() corefoundation.CGRect
+	SetBounds(bounds corefoundation.CGRect)
+}
+
+var _ CaptionRendererable = (*CaptionRenderer)(nil)
 

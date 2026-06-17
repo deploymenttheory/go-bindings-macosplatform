@@ -23,7 +23,24 @@ func NewYOLOLossLayer() *YOLOLossLayer {
 	return &YOLOLossLayer{inner: raw.MLCYOLOLossLayerFromID(_id)}
 }
 
+// YoloLossDescriptor calls the underlying YoloLossDescriptor.
+func (x *YOLOLossLayer) YoloLossDescriptor() *YOLOLossDescriptor {
+	_r := x.inner.YoloLossDescriptor()
+	if _r == nil {
+		return nil
+	}
+	return &YOLOLossDescriptor{inner: _r}
+}
+
 func (x *YOLOLossLayer) asLossLayer() *raw.MLCLossLayer { return &x.inner.MLCLossLayer }
 
 func (x *YOLOLossLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLossLayer.MLCLayer }
+
+// YOLOLossLayerable is the interface implemented by [YOLOLossLayer], for mocking and DI.
+type YOLOLossLayerable interface {
+	Unwrap() *raw.MLCYOLOLossLayer
+	YoloLossDescriptor() *YOLOLossDescriptor
+}
+
+var _ YOLOLossLayerable = (*YOLOLossLayer)(nil)
 

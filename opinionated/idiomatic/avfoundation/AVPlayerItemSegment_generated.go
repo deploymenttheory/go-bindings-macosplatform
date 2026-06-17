@@ -6,7 +6,9 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,16 +26,50 @@ func NewPlayerItemSegment() *PlayerItemSegment {
 	return &PlayerItemSegment{inner: raw.AVPlayerItemSegmentFromID(_id)}
 }
 
+// SegmentType calls the underlying SegmentType.
+func (x *PlayerItemSegment) SegmentType() raw.AVPlayerItemSegmentType {
+	return x.inner.SegmentType()
+}
+
+// TimeMapping calls the underlying TimeMapping.
+func (x *PlayerItemSegment) TimeMapping() coremedia.CMTimeMapping {
+	return x.inner.TimeMapping()
+}
+
 // LoadedTimeRanges returns the collection as a Go slice.
 func (x *PlayerItemSegment) LoadedTimeRanges() []*foundation.NSValue {
 	arr := x.inner.LoadedTimeRanges()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSValue, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSValue {
+		return foundation.NSValueFromID(purego.Retain(_id))
+	})
 }
+
+// StartDate calls the underlying StartDate.
+func (x *PlayerItemSegment) StartDate() *foundation.NSDate {
+	return x.inner.StartDate()
+}
+
+// InterstitialEvent calls the underlying InterstitialEvent.
+func (x *PlayerItemSegment) InterstitialEvent() *PlayerInterstitialEvent {
+	_r := x.inner.InterstitialEvent()
+	if _r == nil {
+		return nil
+	}
+	return &PlayerInterstitialEvent{inner: _r}
+}
+
+// PlayerItemSegmentable is the interface implemented by [PlayerItemSegment], for mocking and DI.
+type PlayerItemSegmentable interface {
+	Unwrap() *raw.AVPlayerItemSegment
+	SegmentType() raw.AVPlayerItemSegmentType
+	TimeMapping() coremedia.CMTimeMapping
+	LoadedTimeRanges() []*foundation.NSValue
+	StartDate() *foundation.NSDate
+	InterstitialEvent() *PlayerInterstitialEvent
+}
+
+var _ PlayerItemSegmentable = (*PlayerItemSegment)(nil)
 

@@ -5,7 +5,9 @@
 package coreimage
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +25,22 @@ func NewWarpKernel() *WarpKernel {
 	return &WarpKernel{inner: raw.CIWarpKernelFromID(_id)}
 }
 
+// ApplyWithExtentRoiCallbackInputImageArguments calls the underlying ApplyWithExtentRoiCallbackInputImageArguments.
+func (x *WarpKernel) ApplyWithExtentRoiCallbackInputImageArguments(extent corefoundation.CGRect, callback objc.Block, image *raw.CIImage, args *foundation.NSArray[objc.ID]) *Image {
+	_r := x.inner.ApplyWithExtentRoiCallbackInputImageArguments(extent, callback, image, args)
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
 func (x *WarpKernel) asKernel() *raw.CIKernel { return &x.inner.CIKernel }
+
+// WarpKernelable is the interface implemented by [WarpKernel], for mocking and DI.
+type WarpKernelable interface {
+	Unwrap() *raw.CIWarpKernel
+	ApplyWithExtentRoiCallbackInputImageArguments(extent corefoundation.CGRect, callback objc.Block, image *raw.CIImage, args *foundation.NSArray[objc.ID]) *Image
+}
+
+var _ WarpKernelable = (*WarpKernel)(nil)
 

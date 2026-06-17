@@ -32,3 +32,46 @@ func NewOpenGLPixelBufferWithCGLPBufferObj(pbuffer unsafe.Pointer) *OpenGLPixelB
 	return &OpenGLPixelBuffer{inner: raw.NSOpenGLPixelBufferFromID(_id)}
 }
 
+// CGLPBufferObj calls the underlying CGLPBufferObj.
+func (x *OpenGLPixelBuffer) CGLPBufferObj() unsafe.Pointer {
+	return x.inner.CGLPBufferObj()
+}
+
+// PixelsWide calls the underlying PixelsWide.
+func (x *OpenGLPixelBuffer) PixelsWide() int32 {
+	return x.inner.PixelsWide()
+}
+
+// PixelsHigh calls the underlying PixelsHigh.
+func (x *OpenGLPixelBuffer) PixelsHigh() int32 {
+	return x.inner.PixelsHigh()
+}
+
+// TextureTarget calls the underlying TextureTarget.
+func (x *OpenGLPixelBuffer) TextureTarget() uint32 {
+	return x.inner.TextureTarget()
+}
+
+// TextureInternalFormat calls the underlying TextureInternalFormat.
+func (x *OpenGLPixelBuffer) TextureInternalFormat() uint32 {
+	return x.inner.TextureInternalFormat()
+}
+
+// TextureMaxMipMapLevel calls the underlying TextureMaxMipMapLevel.
+func (x *OpenGLPixelBuffer) TextureMaxMipMapLevel() int32 {
+	return x.inner.TextureMaxMipMapLevel()
+}
+
+// OpenGLPixelBufferable is the interface implemented by [OpenGLPixelBuffer], for mocking and DI.
+type OpenGLPixelBufferable interface {
+	Unwrap() *raw.NSOpenGLPixelBuffer
+	CGLPBufferObj() unsafe.Pointer
+	PixelsWide() int32
+	PixelsHigh() int32
+	TextureTarget() uint32
+	TextureInternalFormat() uint32
+	TextureMaxMipMapLevel() int32
+}
+
+var _ OpenGLPixelBufferable = (*OpenGLPixelBuffer)(nil)
+

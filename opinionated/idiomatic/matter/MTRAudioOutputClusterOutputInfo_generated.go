@@ -25,3 +25,10 @@ func NewMTRAudioOutputClusterOutputInfo() *MTRAudioOutputClusterOutputInfo {
 
 func (x *MTRAudioOutputClusterOutputInfo) asMTRAudioOutputClusterOutputInfoStruct() *raw.MTRAudioOutputClusterOutputInfoStruct { return &x.inner.MTRAudioOutputClusterOutputInfoStruct }
 
+// MTRAudioOutputClusterOutputInfoable is the interface implemented by [MTRAudioOutputClusterOutputInfo], for mocking and DI.
+type MTRAudioOutputClusterOutputInfoable interface {
+	Unwrap() *raw.MTRAudioOutputClusterOutputInfo
+}
+
+var _ MTRAudioOutputClusterOutputInfoable = (*MTRAudioOutputClusterOutputInfo)(nil)
+

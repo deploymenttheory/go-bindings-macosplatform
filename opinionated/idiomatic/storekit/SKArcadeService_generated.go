@@ -23,3 +23,10 @@ func NewArcadeService() *ArcadeService {
 	return &ArcadeService{inner: raw.SKArcadeServiceFromID(_id)}
 }
 
+// ArcadeServiceable is the interface implemented by [ArcadeService], for mocking and DI.
+type ArcadeServiceable interface {
+	Unwrap() *raw.SKArcadeService
+}
+
+var _ ArcadeServiceable = (*ArcadeService)(nil)
+

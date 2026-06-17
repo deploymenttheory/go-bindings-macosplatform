@@ -39,3 +39,22 @@ func NewMapCameraZoomRangeWithMaxCenterCoordinateDistance(maxDistance unsafe.Poi
 	return &MapCameraZoomRange{inner: raw.MKMapCameraZoomRangeFromID(_id)}
 }
 
+// MinCenterCoordinateDistance calls the underlying MinCenterCoordinateDistance.
+func (x *MapCameraZoomRange) MinCenterCoordinateDistance() unsafe.Pointer {
+	return x.inner.MinCenterCoordinateDistance()
+}
+
+// MaxCenterCoordinateDistance calls the underlying MaxCenterCoordinateDistance.
+func (x *MapCameraZoomRange) MaxCenterCoordinateDistance() unsafe.Pointer {
+	return x.inner.MaxCenterCoordinateDistance()
+}
+
+// MapCameraZoomRangeable is the interface implemented by [MapCameraZoomRange], for mocking and DI.
+type MapCameraZoomRangeable interface {
+	Unwrap() *raw.MKMapCameraZoomRange
+	MinCenterCoordinateDistance() unsafe.Pointer
+	MaxCenterCoordinateDistance() unsafe.Pointer
+}
+
+var _ MapCameraZoomRangeable = (*MapCameraZoomRange)(nil)
+

@@ -7,6 +7,7 @@ package networkextension
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -89,4 +90,174 @@ func (x *NEFilterProviderConfiguration) WithFilterPacketProviderBundleIdentifier
 	x.inner.SetFilterPacketProviderBundleIdentifier(foundation.NSStringStringWithUTF8String(filterPacketProviderBundleIdentifier))
 	return x
 }
+
+// FilterBrowsers calls the underlying FilterBrowsers.
+func (x *NEFilterProviderConfiguration) FilterBrowsers() bool {
+	return x.inner.FilterBrowsers()
+}
+
+// SetFilterBrowsers calls the underlying SetFilterBrowsers.
+func (x *NEFilterProviderConfiguration) SetFilterBrowsers(filterBrowsers bool) {
+	x.inner.SetFilterBrowsers(filterBrowsers)
+}
+
+// FilterSockets calls the underlying FilterSockets.
+func (x *NEFilterProviderConfiguration) FilterSockets() bool {
+	return x.inner.FilterSockets()
+}
+
+// SetFilterSockets calls the underlying SetFilterSockets.
+func (x *NEFilterProviderConfiguration) SetFilterSockets(filterSockets bool) {
+	x.inner.SetFilterSockets(filterSockets)
+}
+
+// FilterPackets calls the underlying FilterPackets.
+func (x *NEFilterProviderConfiguration) FilterPackets() bool {
+	return x.inner.FilterPackets()
+}
+
+// SetFilterPackets calls the underlying SetFilterPackets.
+func (x *NEFilterProviderConfiguration) SetFilterPackets(filterPackets bool) {
+	x.inner.SetFilterPackets(filterPackets)
+}
+
+// VendorConfiguration calls the underlying VendorConfiguration.
+func (x *NEFilterProviderConfiguration) VendorConfiguration() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.VendorConfiguration()
+}
+
+// SetVendorConfiguration calls the underlying SetVendorConfiguration.
+func (x *NEFilterProviderConfiguration) SetVendorConfiguration(vendorConfiguration *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
+	x.inner.SetVendorConfiguration(vendorConfiguration)
+}
+
+// ServerAddress calls the underlying ServerAddress.
+func (x *NEFilterProviderConfiguration) ServerAddress() string {
+	_r := x.inner.ServerAddress()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetServerAddress calls the underlying SetServerAddress.
+func (x *NEFilterProviderConfiguration) SetServerAddress(serverAddress string) {
+	x.inner.SetServerAddress(foundation.NSStringStringWithUTF8String(serverAddress))
+}
+
+// Username calls the underlying Username.
+func (x *NEFilterProviderConfiguration) Username() string {
+	_r := x.inner.Username()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetUsername calls the underlying SetUsername.
+func (x *NEFilterProviderConfiguration) SetUsername(username string) {
+	x.inner.SetUsername(foundation.NSStringStringWithUTF8String(username))
+}
+
+// Organization calls the underlying Organization.
+func (x *NEFilterProviderConfiguration) Organization() string {
+	_r := x.inner.Organization()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetOrganization calls the underlying SetOrganization.
+func (x *NEFilterProviderConfiguration) SetOrganization(organization string) {
+	x.inner.SetOrganization(foundation.NSStringStringWithUTF8String(organization))
+}
+
+// PasswordReference calls the underlying PasswordReference.
+func (x *NEFilterProviderConfiguration) PasswordReference() *foundation.NSData {
+	return x.inner.PasswordReference()
+}
+
+// SetPasswordReference calls the underlying SetPasswordReference.
+func (x *NEFilterProviderConfiguration) SetPasswordReference(passwordReference *foundation.NSData) {
+	x.inner.SetPasswordReference(passwordReference)
+}
+
+// IdentityReference calls the underlying IdentityReference.
+func (x *NEFilterProviderConfiguration) IdentityReference() *foundation.NSData {
+	return x.inner.IdentityReference()
+}
+
+// SetIdentityReference calls the underlying SetIdentityReference.
+func (x *NEFilterProviderConfiguration) SetIdentityReference(identityReference *foundation.NSData) {
+	x.inner.SetIdentityReference(identityReference)
+}
+
+// FilterDataProviderBundleIdentifier calls the underlying FilterDataProviderBundleIdentifier.
+func (x *NEFilterProviderConfiguration) FilterDataProviderBundleIdentifier() string {
+	_r := x.inner.FilterDataProviderBundleIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetFilterDataProviderBundleIdentifier calls the underlying SetFilterDataProviderBundleIdentifier.
+func (x *NEFilterProviderConfiguration) SetFilterDataProviderBundleIdentifier(filterDataProviderBundleIdentifier string) {
+	x.inner.SetFilterDataProviderBundleIdentifier(foundation.NSStringStringWithUTF8String(filterDataProviderBundleIdentifier))
+}
+
+// FilterPacketProviderBundleIdentifier calls the underlying FilterPacketProviderBundleIdentifier.
+func (x *NEFilterProviderConfiguration) FilterPacketProviderBundleIdentifier() string {
+	_r := x.inner.FilterPacketProviderBundleIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetFilterPacketProviderBundleIdentifier calls the underlying SetFilterPacketProviderBundleIdentifier.
+func (x *NEFilterProviderConfiguration) SetFilterPacketProviderBundleIdentifier(filterPacketProviderBundleIdentifier string) {
+	x.inner.SetFilterPacketProviderBundleIdentifier(foundation.NSStringStringWithUTF8String(filterPacketProviderBundleIdentifier))
+}
+
+// NEFilterProviderConfigurationable is the interface implemented by [NEFilterProviderConfiguration], for mocking and DI.
+type NEFilterProviderConfigurationable interface {
+	Unwrap() *raw.NEFilterProviderConfiguration
+	WithFilterBrowsers(filterBrowsers bool) *NEFilterProviderConfiguration
+	WithFilterSockets(filterSockets bool) *NEFilterProviderConfiguration
+	WithFilterPackets(filterPackets bool) *NEFilterProviderConfiguration
+	WithVendorConfiguration(vendorConfiguration *foundation.NSDictionary[*foundation.NSString, objc.ID]) *NEFilterProviderConfiguration
+	WithServerAddress(serverAddress string) *NEFilterProviderConfiguration
+	WithUsername(username string) *NEFilterProviderConfiguration
+	WithOrganization(organization string) *NEFilterProviderConfiguration
+	WithPasswordReference(passwordReference *foundation.NSData) *NEFilterProviderConfiguration
+	WithIdentityReference(identityReference *foundation.NSData) *NEFilterProviderConfiguration
+	WithFilterDataProviderBundleIdentifier(filterDataProviderBundleIdentifier string) *NEFilterProviderConfiguration
+	WithFilterPacketProviderBundleIdentifier(filterPacketProviderBundleIdentifier string) *NEFilterProviderConfiguration
+	FilterBrowsers() bool
+	SetFilterBrowsers(filterBrowsers bool)
+	FilterSockets() bool
+	SetFilterSockets(filterSockets bool)
+	FilterPackets() bool
+	SetFilterPackets(filterPackets bool)
+	VendorConfiguration() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	SetVendorConfiguration(vendorConfiguration *foundation.NSDictionary[*foundation.NSString, objc.ID])
+	ServerAddress() string
+	SetServerAddress(serverAddress string)
+	Username() string
+	SetUsername(username string)
+	Organization() string
+	SetOrganization(organization string)
+	PasswordReference() *foundation.NSData
+	SetPasswordReference(passwordReference *foundation.NSData)
+	IdentityReference() *foundation.NSData
+	SetIdentityReference(identityReference *foundation.NSData)
+	FilterDataProviderBundleIdentifier() string
+	SetFilterDataProviderBundleIdentifier(filterDataProviderBundleIdentifier string)
+	FilterPacketProviderBundleIdentifier() string
+	SetFilterPacketProviderBundleIdentifier(filterPacketProviderBundleIdentifier string)
+}
+
+var _ NEFilterProviderConfigurationable = (*NEFilterProviderConfiguration)(nil)
 

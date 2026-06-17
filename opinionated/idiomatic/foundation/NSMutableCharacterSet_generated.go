@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,7 +24,56 @@ func NewMutableCharacterSet() *MutableCharacterSet {
 	return &MutableCharacterSet{inner: raw.NSMutableCharacterSetFromID(_id)}
 }
 
+// AddCharactersInRange calls the underlying AddCharactersInRange.
+func (x *MutableCharacterSet) AddCharactersInRange(aRange raw.NSRange) {
+	x.inner.AddCharactersInRange(aRange)
+}
+
+// RemoveCharactersInRange calls the underlying RemoveCharactersInRange.
+func (x *MutableCharacterSet) RemoveCharactersInRange(aRange raw.NSRange) {
+	x.inner.RemoveCharactersInRange(aRange)
+}
+
+// AddCharactersInString calls the underlying AddCharactersInString.
+func (x *MutableCharacterSet) AddCharactersInString(aString string) {
+	x.inner.AddCharactersInString(foundation.NSStringStringWithUTF8String(aString))
+}
+
+// RemoveCharactersInString calls the underlying RemoveCharactersInString.
+func (x *MutableCharacterSet) RemoveCharactersInString(aString string) {
+	x.inner.RemoveCharactersInString(foundation.NSStringStringWithUTF8String(aString))
+}
+
+// FormUnionWithCharacterSet calls the underlying FormUnionWithCharacterSet.
+func (x *MutableCharacterSet) FormUnionWithCharacterSet(otherSet *raw.NSCharacterSet) {
+	x.inner.FormUnionWithCharacterSet(otherSet)
+}
+
+// FormIntersectionWithCharacterSet calls the underlying FormIntersectionWithCharacterSet.
+func (x *MutableCharacterSet) FormIntersectionWithCharacterSet(otherSet *raw.NSCharacterSet) {
+	x.inner.FormIntersectionWithCharacterSet(otherSet)
+}
+
+// Invert calls the underlying Invert.
+func (x *MutableCharacterSet) Invert() {
+	x.inner.Invert()
+}
+
 func (x *MutableCharacterSet) asCharacterSet() *raw.NSCharacterSet { return &x.inner.NSCharacterSet }
 
 func (x *MutableCharacterSet) asObject() *raw.NSObject { return &x.inner.NSCharacterSet.NSObject }
+
+// MutableCharacterSetable is the interface implemented by [MutableCharacterSet], for mocking and DI.
+type MutableCharacterSetable interface {
+	Unwrap() *raw.NSMutableCharacterSet
+	AddCharactersInRange(aRange raw.NSRange)
+	RemoveCharactersInRange(aRange raw.NSRange)
+	AddCharactersInString(aString string)
+	RemoveCharactersInString(aString string)
+	FormUnionWithCharacterSet(otherSet *raw.NSCharacterSet)
+	FormIntersectionWithCharacterSet(otherSet *raw.NSCharacterSet)
+	Invert()
+}
+
+var _ MutableCharacterSetable = (*MutableCharacterSet)(nil)
 

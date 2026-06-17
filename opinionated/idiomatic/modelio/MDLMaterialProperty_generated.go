@@ -7,6 +7,7 @@ package modelio
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -136,4 +137,193 @@ func (x *MaterialProperty) WithLuminance(luminance float32) *MaterialProperty {
 	x.inner.SetLuminance(luminance)
 	return x
 }
+
+// SetProperties calls the underlying SetProperties.
+func (x *MaterialProperty) SetProperties(property *raw.MDLMaterialProperty) {
+	x.inner.SetProperties(property)
+}
+
+// Semantic calls the underlying Semantic.
+func (x *MaterialProperty) Semantic() raw.MDLMaterialSemantic {
+	return x.inner.Semantic()
+}
+
+// SetSemantic calls the underlying SetSemantic.
+func (x *MaterialProperty) SetSemantic(semantic raw.MDLMaterialSemantic) {
+	x.inner.SetSemantic(semantic)
+}
+
+// Type calls the underlying Type.
+func (x *MaterialProperty) Type() raw.MDLMaterialPropertyType {
+	return x.inner.Type()
+}
+
+// SetType calls the underlying SetType.
+func (x *MaterialProperty) SetType(type_ raw.MDLMaterialPropertyType) {
+	x.inner.SetType(type_)
+}
+
+// Name calls the underlying Name.
+func (x *MaterialProperty) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetName calls the underlying SetName.
+func (x *MaterialProperty) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
+// StringValue calls the underlying StringValue.
+func (x *MaterialProperty) StringValue() string {
+	_r := x.inner.StringValue()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetStringValue calls the underlying SetStringValue.
+func (x *MaterialProperty) SetStringValue(stringValue string) {
+	x.inner.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+}
+
+// URLValue calls the underlying URLValue.
+func (x *MaterialProperty) URLValue() *foundation.NSURL {
+	return x.inner.URLValue()
+}
+
+// SetURLValue calls the underlying SetURLValue.
+func (x *MaterialProperty) SetURLValue(uRLValue string) {
+	x.inner.SetURLValue(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRLValue)))
+}
+
+// TextureSamplerValue calls the underlying TextureSamplerValue.
+func (x *MaterialProperty) TextureSamplerValue() *TextureSampler {
+	_r := x.inner.TextureSamplerValue()
+	if _r == nil {
+		return nil
+	}
+	return &TextureSampler{inner: _r}
+}
+
+// SetTextureSamplerValue calls the underlying SetTextureSamplerValue.
+func (x *MaterialProperty) SetTextureSamplerValue(textureSamplerValue *raw.MDLTextureSampler) {
+	x.inner.SetTextureSamplerValue(textureSamplerValue)
+}
+
+// Color calls the underlying Color.
+func (x *MaterialProperty) Color() unsafe.Pointer {
+	return x.inner.Color()
+}
+
+// SetColor calls the underlying SetColor.
+func (x *MaterialProperty) SetColor(color unsafe.Pointer) {
+	x.inner.SetColor(color)
+}
+
+// FloatValue calls the underlying FloatValue.
+func (x *MaterialProperty) FloatValue() float32 {
+	return x.inner.FloatValue()
+}
+
+// SetFloatValue calls the underlying SetFloatValue.
+func (x *MaterialProperty) SetFloatValue(floatValue float32) {
+	x.inner.SetFloatValue(floatValue)
+}
+
+// Float2Value calls the underlying Float2Value.
+func (x *MaterialProperty) Float2Value() unsafe.Pointer {
+	return x.inner.Float2Value()
+}
+
+// SetFloat2Value calls the underlying SetFloat2Value.
+func (x *MaterialProperty) SetFloat2Value(float2Value unsafe.Pointer) {
+	x.inner.SetFloat2Value(float2Value)
+}
+
+// Float3Value calls the underlying Float3Value.
+func (x *MaterialProperty) Float3Value() unsafe.Pointer {
+	return x.inner.Float3Value()
+}
+
+// SetFloat3Value calls the underlying SetFloat3Value.
+func (x *MaterialProperty) SetFloat3Value(float3Value unsafe.Pointer) {
+	x.inner.SetFloat3Value(float3Value)
+}
+
+// Float4Value calls the underlying Float4Value.
+func (x *MaterialProperty) Float4Value() unsafe.Pointer {
+	return x.inner.Float4Value()
+}
+
+// SetFloat4Value calls the underlying SetFloat4Value.
+func (x *MaterialProperty) SetFloat4Value(float4Value unsafe.Pointer) {
+	x.inner.SetFloat4Value(float4Value)
+}
+
+// Matrix4x4 calls the underlying Matrix4x4.
+func (x *MaterialProperty) Matrix4x4() unsafe.Pointer {
+	return x.inner.Matrix4x4()
+}
+
+// SetMatrix4x4 calls the underlying SetMatrix4x4.
+func (x *MaterialProperty) SetMatrix4x4(matrix4x4 unsafe.Pointer) {
+	x.inner.SetMatrix4x4(matrix4x4)
+}
+
+// Luminance calls the underlying Luminance.
+func (x *MaterialProperty) Luminance() float32 {
+	return x.inner.Luminance()
+}
+
+// SetLuminance calls the underlying SetLuminance.
+func (x *MaterialProperty) SetLuminance(luminance float32) {
+	x.inner.SetLuminance(luminance)
+}
+
+// MaterialPropertyable is the interface implemented by [MaterialProperty], for mocking and DI.
+type MaterialPropertyable interface {
+	Unwrap() *raw.MDLMaterialProperty
+	WithSemantic(semantic raw.MDLMaterialSemantic) *MaterialProperty
+	WithType(type_ raw.MDLMaterialPropertyType) *MaterialProperty
+	WithName(name string) *MaterialProperty
+	WithStringValue(stringValue string) *MaterialProperty
+	WithURLValue(uRLValue string) *MaterialProperty
+	WithTextureSamplerValue(textureSamplerValue *raw.MDLTextureSampler) *MaterialProperty
+	WithFloatValue(floatValue float32) *MaterialProperty
+	WithLuminance(luminance float32) *MaterialProperty
+	SetProperties(property *raw.MDLMaterialProperty)
+	Semantic() raw.MDLMaterialSemantic
+	SetSemantic(semantic raw.MDLMaterialSemantic)
+	Type() raw.MDLMaterialPropertyType
+	SetType(type_ raw.MDLMaterialPropertyType)
+	Name() string
+	SetName(name string)
+	StringValue() string
+	SetStringValue(stringValue string)
+	URLValue() *foundation.NSURL
+	SetURLValue(uRLValue string)
+	TextureSamplerValue() *TextureSampler
+	SetTextureSamplerValue(textureSamplerValue *raw.MDLTextureSampler)
+	Color() unsafe.Pointer
+	SetColor(color unsafe.Pointer)
+	FloatValue() float32
+	SetFloatValue(floatValue float32)
+	Float2Value() unsafe.Pointer
+	SetFloat2Value(float2Value unsafe.Pointer)
+	Float3Value() unsafe.Pointer
+	SetFloat3Value(float3Value unsafe.Pointer)
+	Float4Value() unsafe.Pointer
+	SetFloat4Value(float4Value unsafe.Pointer)
+	Matrix4x4() unsafe.Pointer
+	SetMatrix4x4(matrix4x4 unsafe.Pointer)
+	Luminance() float32
+	SetLuminance(luminance float32)
+}
+
+var _ MaterialPropertyable = (*MaterialProperty)(nil)
 

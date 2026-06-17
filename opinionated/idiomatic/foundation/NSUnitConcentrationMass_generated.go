@@ -29,3 +29,10 @@ func (x *UnitConcentrationMass) asUnit() *raw.NSUnit { return &x.inner.NSDimensi
 
 func (x *UnitConcentrationMass) asObject() *raw.NSObject { return &x.inner.NSDimension.NSUnit.NSObject }
 
+// UnitConcentrationMassable is the interface implemented by [UnitConcentrationMass], for mocking and DI.
+type UnitConcentrationMassable interface {
+	Unwrap() *raw.NSUnitConcentrationMass
+}
+
+var _ UnitConcentrationMassable = (*UnitConcentrationMass)(nil)
+

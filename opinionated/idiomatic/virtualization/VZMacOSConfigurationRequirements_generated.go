@@ -23,3 +23,10 @@ func NewMacOSConfigurationRequirements() *MacOSConfigurationRequirements {
 	return &MacOSConfigurationRequirements{inner: raw.VZMacOSConfigurationRequirementsFromID(_id)}
 }
 
+// MacOSConfigurationRequirementsable is the interface implemented by [MacOSConfigurationRequirements], for mocking and DI.
+type MacOSConfigurationRequirementsable interface {
+	Unwrap() *raw.VZMacOSConfigurationRequirements
+}
+
+var _ MacOSConfigurationRequirementsable = (*MacOSConfigurationRequirements)(nil)
+

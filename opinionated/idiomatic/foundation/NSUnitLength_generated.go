@@ -29,3 +29,10 @@ func (x *UnitLength) asUnit() *raw.NSUnit { return &x.inner.NSDimension.NSUnit }
 
 func (x *UnitLength) asObject() *raw.NSObject { return &x.inner.NSDimension.NSUnit.NSObject }
 
+// UnitLengthable is the interface implemented by [UnitLength], for mocking and DI.
+type UnitLengthable interface {
+	Unwrap() *raw.NSUnitLength
+}
+
+var _ UnitLengthable = (*UnitLength)(nil)
+

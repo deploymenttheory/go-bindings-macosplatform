@@ -6,6 +6,8 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corevideo"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -29,5 +31,43 @@ func (x *PlayerItemOutput) WithSuppressesPlayerRendering(suppressesPlayerRenderi
 	return x
 }
 
+// ItemTimeForHostTime calls the underlying ItemTimeForHostTime.
+func (x *PlayerItemOutput) ItemTimeForHostTime(hostTimeInSeconds float64) coremedia.CMTime {
+	return x.inner.ItemTimeForHostTime(hostTimeInSeconds)
+}
+
+// ItemTimeForMachAbsoluteTime calls the underlying ItemTimeForMachAbsoluteTime.
+func (x *PlayerItemOutput) ItemTimeForMachAbsoluteTime(machAbsoluteTime int64) coremedia.CMTime {
+	return x.inner.ItemTimeForMachAbsoluteTime(machAbsoluteTime)
+}
+
+// ItemTimeForCVTimeStamp calls the underlying ItemTimeForCVTimeStamp.
+func (x *PlayerItemOutput) ItemTimeForCVTimeStamp(timestamp corevideo.CVTimeStamp) coremedia.CMTime {
+	return x.inner.ItemTimeForCVTimeStamp(timestamp)
+}
+
+// SuppressesPlayerRendering calls the underlying SuppressesPlayerRendering.
+func (x *PlayerItemOutput) SuppressesPlayerRendering() bool {
+	return x.inner.SuppressesPlayerRendering()
+}
+
+// SetSuppressesPlayerRendering calls the underlying SetSuppressesPlayerRendering.
+func (x *PlayerItemOutput) SetSuppressesPlayerRendering(suppressesPlayerRendering bool) {
+	x.inner.SetSuppressesPlayerRendering(suppressesPlayerRendering)
+}
+
 func (x *PlayerItemOutput) asPlayerItemOutput() *raw.AVPlayerItemOutput { return x.inner }
+
+// PlayerItemOutputable is the interface implemented by [PlayerItemOutput], for mocking and DI.
+type PlayerItemOutputable interface {
+	Unwrap() *raw.AVPlayerItemOutput
+	WithSuppressesPlayerRendering(suppressesPlayerRendering bool) *PlayerItemOutput
+	ItemTimeForHostTime(hostTimeInSeconds float64) coremedia.CMTime
+	ItemTimeForMachAbsoluteTime(machAbsoluteTime int64) coremedia.CMTime
+	ItemTimeForCVTimeStamp(timestamp corevideo.CVTimeStamp) coremedia.CMTime
+	SuppressesPlayerRendering() bool
+	SetSuppressesPlayerRendering(suppressesPlayerRendering bool)
+}
+
+var _ PlayerItemOutputable = (*PlayerItemOutput)(nil)
 

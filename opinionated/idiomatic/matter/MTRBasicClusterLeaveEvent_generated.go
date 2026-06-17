@@ -25,3 +25,10 @@ func NewMTRBasicClusterLeaveEvent() *MTRBasicClusterLeaveEvent {
 
 func (x *MTRBasicClusterLeaveEvent) asMTRBasicInformationClusterLeaveEvent() *raw.MTRBasicInformationClusterLeaveEvent { return &x.inner.MTRBasicInformationClusterLeaveEvent }
 
+// MTRBasicClusterLeaveEventable is the interface implemented by [MTRBasicClusterLeaveEvent], for mocking and DI.
+type MTRBasicClusterLeaveEventable interface {
+	Unwrap() *raw.MTRBasicClusterLeaveEvent
+}
+
+var _ MTRBasicClusterLeaveEventable = (*MTRBasicClusterLeaveEvent)(nil)
+

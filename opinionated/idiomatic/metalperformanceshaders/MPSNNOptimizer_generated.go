@@ -7,6 +7,7 @@ package metalperformanceshaders
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -36,5 +37,68 @@ func (x *NNOptimizer) WithApplyGradientClipping(applyGradientClipping bool) *NNO
 	return x
 }
 
+// SetLearningRate calls the underlying SetLearningRate.
+func (x *NNOptimizer) SetLearningRate(newLearningRate float32) {
+	x.inner.SetLearningRate(newLearningRate)
+}
+
+// LearningRate calls the underlying LearningRate.
+func (x *NNOptimizer) LearningRate() float32 {
+	return x.inner.LearningRate()
+}
+
+// GradientRescale calls the underlying GradientRescale.
+func (x *NNOptimizer) GradientRescale() float32 {
+	return x.inner.GradientRescale()
+}
+
+// ApplyGradientClipping calls the underlying ApplyGradientClipping.
+func (x *NNOptimizer) ApplyGradientClipping() bool {
+	return x.inner.ApplyGradientClipping()
+}
+
+// SetApplyGradientClipping calls the underlying SetApplyGradientClipping.
+func (x *NNOptimizer) SetApplyGradientClipping(applyGradientClipping bool) {
+	x.inner.SetApplyGradientClipping(applyGradientClipping)
+}
+
+// GradientClipMax calls the underlying GradientClipMax.
+func (x *NNOptimizer) GradientClipMax() float32 {
+	return x.inner.GradientClipMax()
+}
+
+// GradientClipMin calls the underlying GradientClipMin.
+func (x *NNOptimizer) GradientClipMin() float32 {
+	return x.inner.GradientClipMin()
+}
+
+// RegularizationScale calls the underlying RegularizationScale.
+func (x *NNOptimizer) RegularizationScale() float32 {
+	return x.inner.RegularizationScale()
+}
+
+// RegularizationType calls the underlying RegularizationType.
+func (x *NNOptimizer) RegularizationType() mpsneuralnetwork.MPSNNRegularizationType {
+	return x.inner.RegularizationType()
+}
+
 func (x *NNOptimizer) asKernel() *mpscore.MPSKernel { return &x.inner.MPSKernel }
+
+// NNOptimizerable is the interface implemented by [NNOptimizer], for mocking and DI.
+type NNOptimizerable interface {
+	Unwrap() *raw.MPSNNOptimizer
+	WithLearningRate(learningRate float32) *NNOptimizer
+	WithApplyGradientClipping(applyGradientClipping bool) *NNOptimizer
+	SetLearningRate(newLearningRate float32)
+	LearningRate() float32
+	GradientRescale() float32
+	ApplyGradientClipping() bool
+	SetApplyGradientClipping(applyGradientClipping bool)
+	GradientClipMax() float32
+	GradientClipMin() float32
+	RegularizationScale() float32
+	RegularizationType() mpsneuralnetwork.MPSNNRegularizationType
+}
+
+var _ NNOptimizerable = (*NNOptimizer)(nil)
 

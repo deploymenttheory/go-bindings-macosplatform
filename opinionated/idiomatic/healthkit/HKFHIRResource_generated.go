@@ -5,7 +5,9 @@
 package healthkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +24,53 @@ func NewFHIRResource() *FHIRResource {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKFHIRResource")), objc.RegisterName("new"))
 	return &FHIRResource{inner: raw.HKFHIRResourceFromID(_id)}
 }
+
+// FHIRVersion calls the underlying FHIRVersion.
+func (x *FHIRResource) FHIRVersion() *FHIRVersion {
+	_r := x.inner.FHIRVersion()
+	if _r == nil {
+		return nil
+	}
+	return &FHIRVersion{inner: _r}
+}
+
+// ResourceType calls the underlying ResourceType.
+func (x *FHIRResource) ResourceType() string {
+	_r := x.inner.ResourceType()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Identifier calls the underlying Identifier.
+func (x *FHIRResource) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Data calls the underlying Data.
+func (x *FHIRResource) Data() *foundation.NSData {
+	return x.inner.Data()
+}
+
+// SourceURL calls the underlying SourceURL.
+func (x *FHIRResource) SourceURL() *foundation.NSURL {
+	return x.inner.SourceURL()
+}
+
+// FHIRResourceable is the interface implemented by [FHIRResource], for mocking and DI.
+type FHIRResourceable interface {
+	Unwrap() *raw.HKFHIRResource
+	FHIRVersion() *FHIRVersion
+	ResourceType() string
+	Identifier() string
+	Data() *foundation.NSData
+	SourceURL() *foundation.NSURL
+}
+
+var _ FHIRResourceable = (*FHIRResource)(nil)
 

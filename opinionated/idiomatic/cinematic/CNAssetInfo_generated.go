@@ -7,7 +7,10 @@ package cinematic
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cinematic"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -25,17 +28,60 @@ func NewAssetInfo() *AssetInfo {
 	return &AssetInfo{inner: raw.CNAssetInfoFromID(_id)}
 }
 
+// Asset calls the underlying Asset.
+func (x *AssetInfo) Asset() *avfoundation.AVAsset {
+	return x.inner.Asset()
+}
+
 // AllCinematicTracks returns the collection as a Go slice.
 func (x *AssetInfo) AllCinematicTracks() []*avfoundation.AVAssetTrack {
 	arr := x.inner.AllCinematicTracks()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*avfoundation.AVAssetTrack, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *avfoundation.AVAssetTrack {
+		return avfoundation.AVAssetTrackFromID(purego.Retain(_id))
+	})
+}
+
+// CinematicVideoTrack calls the underlying CinematicVideoTrack.
+func (x *AssetInfo) CinematicVideoTrack() *avfoundation.AVAssetTrack {
+	return x.inner.CinematicVideoTrack()
+}
+
+// CinematicDisparityTrack calls the underlying CinematicDisparityTrack.
+func (x *AssetInfo) CinematicDisparityTrack() *avfoundation.AVAssetTrack {
+	return x.inner.CinematicDisparityTrack()
+}
+
+// CinematicMetadataTrack calls the underlying CinematicMetadataTrack.
+func (x *AssetInfo) CinematicMetadataTrack() *avfoundation.AVAssetTrack {
+	return x.inner.CinematicMetadataTrack()
+}
+
+// TimeRange calls the underlying TimeRange.
+func (x *AssetInfo) TimeRange() coremedia.CMTimeRange {
+	return x.inner.TimeRange()
+}
+
+// NaturalSize calls the underlying NaturalSize.
+func (x *AssetInfo) NaturalSize() corefoundation.CGSize {
+	return x.inner.NaturalSize()
+}
+
+// PreferredSize calls the underlying PreferredSize.
+func (x *AssetInfo) PreferredSize() corefoundation.CGSize {
+	return x.inner.PreferredSize()
+}
+
+// PreferredTransform calls the underlying PreferredTransform.
+func (x *AssetInfo) PreferredTransform() corefoundation.CGAffineTransform {
+	return x.inner.PreferredTransform()
+}
+
+// FrameTimingTrack calls the underlying FrameTimingTrack.
+func (x *AssetInfo) FrameTimingTrack() *avfoundation.AVAssetTrack {
+	return x.inner.FrameTimingTrack()
 }
 
 // VideoCompositionTracks returns the collection as a Go slice.
@@ -44,11 +90,9 @@ func (x *AssetInfo) VideoCompositionTracks() []*avfoundation.AVAssetTrack {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*avfoundation.AVAssetTrack, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *avfoundation.AVAssetTrack {
+		return avfoundation.AVAssetTrackFromID(purego.Retain(_id))
+	})
 }
 
 // VideoCompositionTrackIDs returns the collection as a Go slice.
@@ -57,11 +101,9 @@ func (x *AssetInfo) VideoCompositionTrackIDs() []*foundation.NSNumber {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
 }
 
 // SampleDataTrackIDs returns the collection as a Go slice.
@@ -70,12 +112,30 @@ func (x *AssetInfo) SampleDataTrackIDs() []*foundation.NSNumber {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
 }
 
 func (x *AssetInfo) asAssetInfo() *raw.CNAssetInfo { return x.inner }
+
+// AssetInfoable is the interface implemented by [AssetInfo], for mocking and DI.
+type AssetInfoable interface {
+	Unwrap() *raw.CNAssetInfo
+	Asset() *avfoundation.AVAsset
+	AllCinematicTracks() []*avfoundation.AVAssetTrack
+	CinematicVideoTrack() *avfoundation.AVAssetTrack
+	CinematicDisparityTrack() *avfoundation.AVAssetTrack
+	CinematicMetadataTrack() *avfoundation.AVAssetTrack
+	TimeRange() coremedia.CMTimeRange
+	NaturalSize() corefoundation.CGSize
+	PreferredSize() corefoundation.CGSize
+	PreferredTransform() corefoundation.CGAffineTransform
+	FrameTimingTrack() *avfoundation.AVAssetTrack
+	VideoCompositionTracks() []*avfoundation.AVAssetTrack
+	VideoCompositionTrackIDs() []*foundation.NSNumber
+	SampleDataTrackIDs() []*foundation.NSNumber
+}
+
+var _ AssetInfoable = (*AssetInfo)(nil)
 

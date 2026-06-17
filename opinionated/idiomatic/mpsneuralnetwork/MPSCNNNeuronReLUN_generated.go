@@ -29,3 +29,10 @@ func (x *CNNNeuronReLUN) asCNNNeuron() *raw.MPSCNNNeuron { return &x.inner.MPSCN
 
 func (x *CNNNeuronReLUN) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSCNNNeuron.MPSCNNKernel }
 
+// CNNNeuronReLUNable is the interface implemented by [CNNNeuronReLUN], for mocking and DI.
+type CNNNeuronReLUNable interface {
+	Unwrap() *raw.MPSCNNNeuronReLUN
+}
+
+var _ CNNNeuronReLUNable = (*CNNNeuronReLUN)(nil)
+

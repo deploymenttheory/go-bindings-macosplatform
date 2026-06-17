@@ -30,3 +30,68 @@ func NewHostCIEndpointStateMachineWithInterfaceCommandError(interface_ *raw.IOUS
 	return &HostCIEndpointStateMachine{inner: raw.IOUSBHostCIEndpointStateMachineFromID(_id)}, nil
 }
 
+// InspectCommandError calls the underlying InspectCommandError.
+func (x *HostCIEndpointStateMachine) InspectCommandError(command *raw.IOUSBHostCIMessage) (bool, error) {
+	return x.inner.InspectCommandError(command)
+}
+
+// RespondToCommandStatusError calls the underlying RespondToCommandStatusError.
+func (x *HostCIEndpointStateMachine) RespondToCommandStatusError(command *raw.IOUSBHostCIMessage, status raw.IOUSBHostCIMessageStatus) (bool, error) {
+	return x.inner.RespondToCommandStatusError(command, status)
+}
+
+// ProcessDoorbellError calls the underlying ProcessDoorbellError.
+func (x *HostCIEndpointStateMachine) ProcessDoorbellError(doorbell uint32) (bool, error) {
+	return x.inner.ProcessDoorbellError(doorbell)
+}
+
+// EnqueueTransferCompletionForMessageStatusTransferLengthError calls the underlying EnqueueTransferCompletionForMessageStatusTransferLengthError.
+func (x *HostCIEndpointStateMachine) EnqueueTransferCompletionForMessageStatusTransferLengthError(message *raw.IOUSBHostCIMessage, status raw.IOUSBHostCIMessageStatus, transferLength uint) (bool, error) {
+	return x.inner.EnqueueTransferCompletionForMessageStatusTransferLengthError(message, status, transferLength)
+}
+
+// EndpointState calls the underlying EndpointState.
+func (x *HostCIEndpointStateMachine) EndpointState() raw.IOUSBHostCIEndpointState {
+	return x.inner.EndpointState()
+}
+
+// DeviceAddress calls the underlying DeviceAddress.
+func (x *HostCIEndpointStateMachine) DeviceAddress() uint {
+	return x.inner.DeviceAddress()
+}
+
+// EndpointAddress calls the underlying EndpointAddress.
+func (x *HostCIEndpointStateMachine) EndpointAddress() uint {
+	return x.inner.EndpointAddress()
+}
+
+// CurrentTransferMessage calls the underlying CurrentTransferMessage.
+func (x *HostCIEndpointStateMachine) CurrentTransferMessage() *raw.IOUSBHostCIMessage {
+	return x.inner.CurrentTransferMessage()
+}
+
+// ControllerInterface calls the underlying ControllerInterface.
+func (x *HostCIEndpointStateMachine) ControllerInterface() *HostControllerInterface {
+	_r := x.inner.ControllerInterface()
+	if _r == nil {
+		return nil
+	}
+	return &HostControllerInterface{inner: _r}
+}
+
+// HostCIEndpointStateMachineable is the interface implemented by [HostCIEndpointStateMachine], for mocking and DI.
+type HostCIEndpointStateMachineable interface {
+	Unwrap() *raw.IOUSBHostCIEndpointStateMachine
+	InspectCommandError(command *raw.IOUSBHostCIMessage) (bool, error)
+	RespondToCommandStatusError(command *raw.IOUSBHostCIMessage, status raw.IOUSBHostCIMessageStatus) (bool, error)
+	ProcessDoorbellError(doorbell uint32) (bool, error)
+	EnqueueTransferCompletionForMessageStatusTransferLengthError(message *raw.IOUSBHostCIMessage, status raw.IOUSBHostCIMessageStatus, transferLength uint) (bool, error)
+	EndpointState() raw.IOUSBHostCIEndpointState
+	DeviceAddress() uint
+	EndpointAddress() uint
+	CurrentTransferMessage() *raw.IOUSBHostCIMessage
+	ControllerInterface() *HostControllerInterface
+}
+
+var _ HostCIEndpointStateMachineable = (*HostCIEndpointStateMachine)(nil)
+

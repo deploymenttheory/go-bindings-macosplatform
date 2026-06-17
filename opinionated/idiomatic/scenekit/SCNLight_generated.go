@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -246,16 +247,577 @@ func (x *Light) WithCategoryBitMask(categoryBitMask uint) *Light {
 	return x
 }
 
+// Type calls the underlying Type.
+func (x *Light) Type() string {
+	_r := x.inner.Type()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetType calls the underlying SetType.
+func (x *Light) SetType(type_ *foundation.NSString) {
+	x.inner.SetType(type_)
+}
+
+// Color calls the underlying Color.
+func (x *Light) Color() objc.ID {
+	return x.inner.Color()
+}
+
+// SetColor calls the underlying SetColor.
+func (x *Light) SetColor(color objc.ID) {
+	x.inner.SetColor(color)
+}
+
+// Temperature calls the underlying Temperature.
+func (x *Light) Temperature() float64 {
+	return x.inner.Temperature()
+}
+
+// SetTemperature calls the underlying SetTemperature.
+func (x *Light) SetTemperature(temperature float64) {
+	x.inner.SetTemperature(temperature)
+}
+
+// Intensity calls the underlying Intensity.
+func (x *Light) Intensity() float64 {
+	return x.inner.Intensity()
+}
+
+// SetIntensity calls the underlying SetIntensity.
+func (x *Light) SetIntensity(intensity float64) {
+	x.inner.SetIntensity(intensity)
+}
+
+// Name calls the underlying Name.
+func (x *Light) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetName calls the underlying SetName.
+func (x *Light) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
+// CastsShadow calls the underlying CastsShadow.
+func (x *Light) CastsShadow() bool {
+	return x.inner.CastsShadow()
+}
+
+// SetCastsShadow calls the underlying SetCastsShadow.
+func (x *Light) SetCastsShadow(castsShadow bool) {
+	x.inner.SetCastsShadow(castsShadow)
+}
+
+// ShadowColor calls the underlying ShadowColor.
+func (x *Light) ShadowColor() objc.ID {
+	return x.inner.ShadowColor()
+}
+
+// SetShadowColor calls the underlying SetShadowColor.
+func (x *Light) SetShadowColor(shadowColor objc.ID) {
+	x.inner.SetShadowColor(shadowColor)
+}
+
+// ShadowRadius calls the underlying ShadowRadius.
+func (x *Light) ShadowRadius() float64 {
+	return x.inner.ShadowRadius()
+}
+
+// SetShadowRadius calls the underlying SetShadowRadius.
+func (x *Light) SetShadowRadius(shadowRadius float64) {
+	x.inner.SetShadowRadius(shadowRadius)
+}
+
+// ShadowMapSize calls the underlying ShadowMapSize.
+func (x *Light) ShadowMapSize() corefoundation.CGSize {
+	return x.inner.ShadowMapSize()
+}
+
+// SetShadowMapSize calls the underlying SetShadowMapSize.
+func (x *Light) SetShadowMapSize(shadowMapSize corefoundation.CGSize) {
+	x.inner.SetShadowMapSize(shadowMapSize)
+}
+
+// ShadowSampleCount calls the underlying ShadowSampleCount.
+func (x *Light) ShadowSampleCount() uint {
+	return x.inner.ShadowSampleCount()
+}
+
+// SetShadowSampleCount calls the underlying SetShadowSampleCount.
+func (x *Light) SetShadowSampleCount(shadowSampleCount uint) {
+	x.inner.SetShadowSampleCount(shadowSampleCount)
+}
+
+// ShadowMode calls the underlying ShadowMode.
+func (x *Light) ShadowMode() raw.SCNShadowMode {
+	return x.inner.ShadowMode()
+}
+
+// SetShadowMode calls the underlying SetShadowMode.
+func (x *Light) SetShadowMode(shadowMode raw.SCNShadowMode) {
+	x.inner.SetShadowMode(shadowMode)
+}
+
+// ShadowBias calls the underlying ShadowBias.
+func (x *Light) ShadowBias() float64 {
+	return x.inner.ShadowBias()
+}
+
+// SetShadowBias calls the underlying SetShadowBias.
+func (x *Light) SetShadowBias(shadowBias float64) {
+	x.inner.SetShadowBias(shadowBias)
+}
+
+// AutomaticallyAdjustsShadowProjection calls the underlying AutomaticallyAdjustsShadowProjection.
+func (x *Light) AutomaticallyAdjustsShadowProjection() bool {
+	return x.inner.AutomaticallyAdjustsShadowProjection()
+}
+
+// SetAutomaticallyAdjustsShadowProjection calls the underlying SetAutomaticallyAdjustsShadowProjection.
+func (x *Light) SetAutomaticallyAdjustsShadowProjection(automaticallyAdjustsShadowProjection bool) {
+	x.inner.SetAutomaticallyAdjustsShadowProjection(automaticallyAdjustsShadowProjection)
+}
+
+// MaximumShadowDistance calls the underlying MaximumShadowDistance.
+func (x *Light) MaximumShadowDistance() float64 {
+	return x.inner.MaximumShadowDistance()
+}
+
+// SetMaximumShadowDistance calls the underlying SetMaximumShadowDistance.
+func (x *Light) SetMaximumShadowDistance(maximumShadowDistance float64) {
+	x.inner.SetMaximumShadowDistance(maximumShadowDistance)
+}
+
+// ForcesBackFaceCasters calls the underlying ForcesBackFaceCasters.
+func (x *Light) ForcesBackFaceCasters() bool {
+	return x.inner.ForcesBackFaceCasters()
+}
+
+// SetForcesBackFaceCasters calls the underlying SetForcesBackFaceCasters.
+func (x *Light) SetForcesBackFaceCasters(forcesBackFaceCasters bool) {
+	x.inner.SetForcesBackFaceCasters(forcesBackFaceCasters)
+}
+
+// SampleDistributedShadowMaps calls the underlying SampleDistributedShadowMaps.
+func (x *Light) SampleDistributedShadowMaps() bool {
+	return x.inner.SampleDistributedShadowMaps()
+}
+
+// SetSampleDistributedShadowMaps calls the underlying SetSampleDistributedShadowMaps.
+func (x *Light) SetSampleDistributedShadowMaps(sampleDistributedShadowMaps bool) {
+	x.inner.SetSampleDistributedShadowMaps(sampleDistributedShadowMaps)
+}
+
+// ShadowCascadeCount calls the underlying ShadowCascadeCount.
+func (x *Light) ShadowCascadeCount() uint {
+	return x.inner.ShadowCascadeCount()
+}
+
+// SetShadowCascadeCount calls the underlying SetShadowCascadeCount.
+func (x *Light) SetShadowCascadeCount(shadowCascadeCount uint) {
+	x.inner.SetShadowCascadeCount(shadowCascadeCount)
+}
+
+// ShadowCascadeSplittingFactor calls the underlying ShadowCascadeSplittingFactor.
+func (x *Light) ShadowCascadeSplittingFactor() float64 {
+	return x.inner.ShadowCascadeSplittingFactor()
+}
+
+// SetShadowCascadeSplittingFactor calls the underlying SetShadowCascadeSplittingFactor.
+func (x *Light) SetShadowCascadeSplittingFactor(shadowCascadeSplittingFactor float64) {
+	x.inner.SetShadowCascadeSplittingFactor(shadowCascadeSplittingFactor)
+}
+
+// OrthographicScale calls the underlying OrthographicScale.
+func (x *Light) OrthographicScale() float64 {
+	return x.inner.OrthographicScale()
+}
+
+// SetOrthographicScale calls the underlying SetOrthographicScale.
+func (x *Light) SetOrthographicScale(orthographicScale float64) {
+	x.inner.SetOrthographicScale(orthographicScale)
+}
+
+// ZNear calls the underlying ZNear.
+func (x *Light) ZNear() float64 {
+	return x.inner.ZNear()
+}
+
+// SetZNear calls the underlying SetZNear.
+func (x *Light) SetZNear(zNear float64) {
+	x.inner.SetZNear(zNear)
+}
+
+// ZFar calls the underlying ZFar.
+func (x *Light) ZFar() float64 {
+	return x.inner.ZFar()
+}
+
+// SetZFar calls the underlying SetZFar.
+func (x *Light) SetZFar(zFar float64) {
+	x.inner.SetZFar(zFar)
+}
+
+// AttenuationStartDistance calls the underlying AttenuationStartDistance.
+func (x *Light) AttenuationStartDistance() float64 {
+	return x.inner.AttenuationStartDistance()
+}
+
+// SetAttenuationStartDistance calls the underlying SetAttenuationStartDistance.
+func (x *Light) SetAttenuationStartDistance(attenuationStartDistance float64) {
+	x.inner.SetAttenuationStartDistance(attenuationStartDistance)
+}
+
+// AttenuationEndDistance calls the underlying AttenuationEndDistance.
+func (x *Light) AttenuationEndDistance() float64 {
+	return x.inner.AttenuationEndDistance()
+}
+
+// SetAttenuationEndDistance calls the underlying SetAttenuationEndDistance.
+func (x *Light) SetAttenuationEndDistance(attenuationEndDistance float64) {
+	x.inner.SetAttenuationEndDistance(attenuationEndDistance)
+}
+
+// AttenuationFalloffExponent calls the underlying AttenuationFalloffExponent.
+func (x *Light) AttenuationFalloffExponent() float64 {
+	return x.inner.AttenuationFalloffExponent()
+}
+
+// SetAttenuationFalloffExponent calls the underlying SetAttenuationFalloffExponent.
+func (x *Light) SetAttenuationFalloffExponent(attenuationFalloffExponent float64) {
+	x.inner.SetAttenuationFalloffExponent(attenuationFalloffExponent)
+}
+
+// SpotInnerAngle calls the underlying SpotInnerAngle.
+func (x *Light) SpotInnerAngle() float64 {
+	return x.inner.SpotInnerAngle()
+}
+
+// SetSpotInnerAngle calls the underlying SetSpotInnerAngle.
+func (x *Light) SetSpotInnerAngle(spotInnerAngle float64) {
+	x.inner.SetSpotInnerAngle(spotInnerAngle)
+}
+
+// SpotOuterAngle calls the underlying SpotOuterAngle.
+func (x *Light) SpotOuterAngle() float64 {
+	return x.inner.SpotOuterAngle()
+}
+
+// SetSpotOuterAngle calls the underlying SetSpotOuterAngle.
+func (x *Light) SetSpotOuterAngle(spotOuterAngle float64) {
+	x.inner.SetSpotOuterAngle(spotOuterAngle)
+}
+
+// IESProfileURL calls the underlying IESProfileURL.
+func (x *Light) IESProfileURL() *foundation.NSURL {
+	return x.inner.IESProfileURL()
+}
+
+// SetIESProfileURL calls the underlying SetIESProfileURL.
+func (x *Light) SetIESProfileURL(iESProfileURL string) {
+	x.inner.SetIESProfileURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(iESProfileURL)))
+}
+
+// SphericalHarmonicsCoefficients calls the underlying SphericalHarmonicsCoefficients.
+func (x *Light) SphericalHarmonicsCoefficients() *foundation.NSData {
+	return x.inner.SphericalHarmonicsCoefficients()
+}
+
+// ProbeType calls the underlying ProbeType.
+func (x *Light) ProbeType() raw.SCNLightProbeType {
+	return x.inner.ProbeType()
+}
+
+// SetProbeType calls the underlying SetProbeType.
+func (x *Light) SetProbeType(probeType raw.SCNLightProbeType) {
+	x.inner.SetProbeType(probeType)
+}
+
+// ProbeUpdateType calls the underlying ProbeUpdateType.
+func (x *Light) ProbeUpdateType() raw.SCNLightProbeUpdateType {
+	return x.inner.ProbeUpdateType()
+}
+
+// SetProbeUpdateType calls the underlying SetProbeUpdateType.
+func (x *Light) SetProbeUpdateType(probeUpdateType raw.SCNLightProbeUpdateType) {
+	x.inner.SetProbeUpdateType(probeUpdateType)
+}
+
+// ProbeExtents calls the underlying ProbeExtents.
+func (x *Light) ProbeExtents() unsafe.Pointer {
+	return x.inner.ProbeExtents()
+}
+
+// SetProbeExtents calls the underlying SetProbeExtents.
+func (x *Light) SetProbeExtents(probeExtents unsafe.Pointer) {
+	x.inner.SetProbeExtents(probeExtents)
+}
+
+// ProbeOffset calls the underlying ProbeOffset.
+func (x *Light) ProbeOffset() unsafe.Pointer {
+	return x.inner.ProbeOffset()
+}
+
+// SetProbeOffset calls the underlying SetProbeOffset.
+func (x *Light) SetProbeOffset(probeOffset unsafe.Pointer) {
+	x.inner.SetProbeOffset(probeOffset)
+}
+
+// ParallaxCorrectionEnabled calls the underlying ParallaxCorrectionEnabled.
+func (x *Light) ParallaxCorrectionEnabled() bool {
+	return x.inner.ParallaxCorrectionEnabled()
+}
+
+// SetParallaxCorrectionEnabled calls the underlying SetParallaxCorrectionEnabled.
+func (x *Light) SetParallaxCorrectionEnabled(parallaxCorrectionEnabled bool) {
+	x.inner.SetParallaxCorrectionEnabled(parallaxCorrectionEnabled)
+}
+
+// ParallaxExtentsFactor calls the underlying ParallaxExtentsFactor.
+func (x *Light) ParallaxExtentsFactor() unsafe.Pointer {
+	return x.inner.ParallaxExtentsFactor()
+}
+
+// SetParallaxExtentsFactor calls the underlying SetParallaxExtentsFactor.
+func (x *Light) SetParallaxExtentsFactor(parallaxExtentsFactor unsafe.Pointer) {
+	x.inner.SetParallaxExtentsFactor(parallaxExtentsFactor)
+}
+
+// ParallaxCenterOffset calls the underlying ParallaxCenterOffset.
+func (x *Light) ParallaxCenterOffset() unsafe.Pointer {
+	return x.inner.ParallaxCenterOffset()
+}
+
+// SetParallaxCenterOffset calls the underlying SetParallaxCenterOffset.
+func (x *Light) SetParallaxCenterOffset(parallaxCenterOffset unsafe.Pointer) {
+	x.inner.SetParallaxCenterOffset(parallaxCenterOffset)
+}
+
+// ProbeEnvironment calls the underlying ProbeEnvironment.
+func (x *Light) ProbeEnvironment() *MaterialProperty {
+	_r := x.inner.ProbeEnvironment()
+	if _r == nil {
+		return nil
+	}
+	return &MaterialProperty{inner: _r}
+}
+
+// AreaType calls the underlying AreaType.
+func (x *Light) AreaType() raw.SCNLightAreaType {
+	return x.inner.AreaType()
+}
+
+// SetAreaType calls the underlying SetAreaType.
+func (x *Light) SetAreaType(areaType raw.SCNLightAreaType) {
+	x.inner.SetAreaType(areaType)
+}
+
+// AreaExtents calls the underlying AreaExtents.
+func (x *Light) AreaExtents() unsafe.Pointer {
+	return x.inner.AreaExtents()
+}
+
+// SetAreaExtents calls the underlying SetAreaExtents.
+func (x *Light) SetAreaExtents(areaExtents unsafe.Pointer) {
+	x.inner.SetAreaExtents(areaExtents)
+}
+
 // AreaPolygonVertices returns the collection as a Go slice.
 func (x *Light) AreaPolygonVertices() []*foundation.NSValue {
 	arr := x.inner.AreaPolygonVertices()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSValue, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSValue {
+		return foundation.NSValueFromID(purego.Retain(_id))
+	})
 }
+
+// SetAreaPolygonVertices calls the underlying SetAreaPolygonVertices.
+func (x *Light) SetAreaPolygonVertices(areaPolygonVertices *foundation.NSArray[*foundation.NSValue]) {
+	x.inner.SetAreaPolygonVertices(areaPolygonVertices)
+}
+
+// DrawsArea calls the underlying DrawsArea.
+func (x *Light) DrawsArea() bool {
+	return x.inner.DrawsArea()
+}
+
+// SetDrawsArea calls the underlying SetDrawsArea.
+func (x *Light) SetDrawsArea(drawsArea bool) {
+	x.inner.SetDrawsArea(drawsArea)
+}
+
+// DoubleSided calls the underlying DoubleSided.
+func (x *Light) DoubleSided() bool {
+	return x.inner.DoubleSided()
+}
+
+// SetDoubleSided calls the underlying SetDoubleSided.
+func (x *Light) SetDoubleSided(doubleSided bool) {
+	x.inner.SetDoubleSided(doubleSided)
+}
+
+// Gobo calls the underlying Gobo.
+func (x *Light) Gobo() *MaterialProperty {
+	_r := x.inner.Gobo()
+	if _r == nil {
+		return nil
+	}
+	return &MaterialProperty{inner: _r}
+}
+
+// CategoryBitMask calls the underlying CategoryBitMask.
+func (x *Light) CategoryBitMask() uint {
+	return x.inner.CategoryBitMask()
+}
+
+// SetCategoryBitMask calls the underlying SetCategoryBitMask.
+func (x *Light) SetCategoryBitMask(categoryBitMask uint) {
+	x.inner.SetCategoryBitMask(categoryBitMask)
+}
+
+// AttributeForKey calls the underlying AttributeForKey.
+func (x *Light) AttributeForKey(key string) objc.ID {
+	return x.inner.AttributeForKey(foundation.NSStringStringWithUTF8String(key))
+}
+
+// SetAttributeForKey calls the underlying SetAttributeForKey.
+func (x *Light) SetAttributeForKey(attribute objc.ID, key string) {
+	x.inner.SetAttributeForKey(attribute, foundation.NSStringStringWithUTF8String(key))
+}
+
+// Lightable is the interface implemented by [Light], for mocking and DI.
+type Lightable interface {
+	Unwrap() *raw.SCNLight
+	WithType(type_ *foundation.NSString) *Light
+	WithColor(color objc.ID) *Light
+	WithTemperature(temperature float64) *Light
+	WithIntensity(intensity float64) *Light
+	WithName(name string) *Light
+	WithCastsShadow(castsShadow bool) *Light
+	WithShadowColor(shadowColor objc.ID) *Light
+	WithShadowRadius(shadowRadius float64) *Light
+	WithShadowMapSize(shadowMapSize corefoundation.CGSize) *Light
+	WithShadowSampleCount(shadowSampleCount uint) *Light
+	WithShadowMode(shadowMode raw.SCNShadowMode) *Light
+	WithShadowBias(shadowBias float64) *Light
+	WithAutomaticallyAdjustsShadowProjection(automaticallyAdjustsShadowProjection bool) *Light
+	WithMaximumShadowDistance(maximumShadowDistance float64) *Light
+	WithForcesBackFaceCasters(forcesBackFaceCasters bool) *Light
+	WithSampleDistributedShadowMaps(sampleDistributedShadowMaps bool) *Light
+	WithShadowCascadeCount(shadowCascadeCount uint) *Light
+	WithShadowCascadeSplittingFactor(shadowCascadeSplittingFactor float64) *Light
+	WithOrthographicScale(orthographicScale float64) *Light
+	WithZNear(zNear float64) *Light
+	WithZFar(zFar float64) *Light
+	WithAttenuationStartDistance(attenuationStartDistance float64) *Light
+	WithAttenuationEndDistance(attenuationEndDistance float64) *Light
+	WithAttenuationFalloffExponent(attenuationFalloffExponent float64) *Light
+	WithSpotInnerAngle(spotInnerAngle float64) *Light
+	WithSpotOuterAngle(spotOuterAngle float64) *Light
+	WithIESProfileURL(iESProfileURL string) *Light
+	WithProbeType(probeType raw.SCNLightProbeType) *Light
+	WithProbeUpdateType(probeUpdateType raw.SCNLightProbeUpdateType) *Light
+	WithParallaxCorrectionEnabled(parallaxCorrectionEnabled bool) *Light
+	WithAreaType(areaType raw.SCNLightAreaType) *Light
+	WithAreaPolygonVertices(items ...*foundation.NSValue) *Light
+	WithDrawsArea(drawsArea bool) *Light
+	WithDoubleSided(doubleSided bool) *Light
+	WithCategoryBitMask(categoryBitMask uint) *Light
+	Type() string
+	SetType(type_ *foundation.NSString)
+	Color() objc.ID
+	SetColor(color objc.ID)
+	Temperature() float64
+	SetTemperature(temperature float64)
+	Intensity() float64
+	SetIntensity(intensity float64)
+	Name() string
+	SetName(name string)
+	CastsShadow() bool
+	SetCastsShadow(castsShadow bool)
+	ShadowColor() objc.ID
+	SetShadowColor(shadowColor objc.ID)
+	ShadowRadius() float64
+	SetShadowRadius(shadowRadius float64)
+	ShadowMapSize() corefoundation.CGSize
+	SetShadowMapSize(shadowMapSize corefoundation.CGSize)
+	ShadowSampleCount() uint
+	SetShadowSampleCount(shadowSampleCount uint)
+	ShadowMode() raw.SCNShadowMode
+	SetShadowMode(shadowMode raw.SCNShadowMode)
+	ShadowBias() float64
+	SetShadowBias(shadowBias float64)
+	AutomaticallyAdjustsShadowProjection() bool
+	SetAutomaticallyAdjustsShadowProjection(automaticallyAdjustsShadowProjection bool)
+	MaximumShadowDistance() float64
+	SetMaximumShadowDistance(maximumShadowDistance float64)
+	ForcesBackFaceCasters() bool
+	SetForcesBackFaceCasters(forcesBackFaceCasters bool)
+	SampleDistributedShadowMaps() bool
+	SetSampleDistributedShadowMaps(sampleDistributedShadowMaps bool)
+	ShadowCascadeCount() uint
+	SetShadowCascadeCount(shadowCascadeCount uint)
+	ShadowCascadeSplittingFactor() float64
+	SetShadowCascadeSplittingFactor(shadowCascadeSplittingFactor float64)
+	OrthographicScale() float64
+	SetOrthographicScale(orthographicScale float64)
+	ZNear() float64
+	SetZNear(zNear float64)
+	ZFar() float64
+	SetZFar(zFar float64)
+	AttenuationStartDistance() float64
+	SetAttenuationStartDistance(attenuationStartDistance float64)
+	AttenuationEndDistance() float64
+	SetAttenuationEndDistance(attenuationEndDistance float64)
+	AttenuationFalloffExponent() float64
+	SetAttenuationFalloffExponent(attenuationFalloffExponent float64)
+	SpotInnerAngle() float64
+	SetSpotInnerAngle(spotInnerAngle float64)
+	SpotOuterAngle() float64
+	SetSpotOuterAngle(spotOuterAngle float64)
+	IESProfileURL() *foundation.NSURL
+	SetIESProfileURL(iESProfileURL string)
+	SphericalHarmonicsCoefficients() *foundation.NSData
+	ProbeType() raw.SCNLightProbeType
+	SetProbeType(probeType raw.SCNLightProbeType)
+	ProbeUpdateType() raw.SCNLightProbeUpdateType
+	SetProbeUpdateType(probeUpdateType raw.SCNLightProbeUpdateType)
+	ProbeExtents() unsafe.Pointer
+	SetProbeExtents(probeExtents unsafe.Pointer)
+	ProbeOffset() unsafe.Pointer
+	SetProbeOffset(probeOffset unsafe.Pointer)
+	ParallaxCorrectionEnabled() bool
+	SetParallaxCorrectionEnabled(parallaxCorrectionEnabled bool)
+	ParallaxExtentsFactor() unsafe.Pointer
+	SetParallaxExtentsFactor(parallaxExtentsFactor unsafe.Pointer)
+	ParallaxCenterOffset() unsafe.Pointer
+	SetParallaxCenterOffset(parallaxCenterOffset unsafe.Pointer)
+	ProbeEnvironment() *MaterialProperty
+	AreaType() raw.SCNLightAreaType
+	SetAreaType(areaType raw.SCNLightAreaType)
+	AreaExtents() unsafe.Pointer
+	SetAreaExtents(areaExtents unsafe.Pointer)
+	AreaPolygonVertices() []*foundation.NSValue
+	SetAreaPolygonVertices(areaPolygonVertices *foundation.NSArray[*foundation.NSValue])
+	DrawsArea() bool
+	SetDrawsArea(drawsArea bool)
+	DoubleSided() bool
+	SetDoubleSided(doubleSided bool)
+	Gobo() *MaterialProperty
+	CategoryBitMask() uint
+	SetCategoryBitMask(categoryBitMask uint)
+	AttributeForKey(key string) objc.ID
+	SetAttributeForKey(attribute objc.ID, key string)
+}
+
+var _ Lightable = (*Light)(nil)
 

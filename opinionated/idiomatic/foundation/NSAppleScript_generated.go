@@ -32,5 +32,54 @@ func NewAppleScriptWithSource(source string) *AppleScript {
 	return &AppleScript{inner: raw.NSAppleScriptFromID(_id)}
 }
 
+// CompileAndReturnError calls the underlying CompileAndReturnError.
+func (x *AppleScript) CompileAndReturnError(errorInfo *raw.NSDictionary[*raw.NSString, objc.ID]) bool {
+	return x.inner.CompileAndReturnError(errorInfo)
+}
+
+// ExecuteAndReturnError calls the underlying ExecuteAndReturnError.
+func (x *AppleScript) ExecuteAndReturnError(errorInfo *raw.NSDictionary[*raw.NSString, objc.ID]) *AppleEventDescriptor {
+	_r := x.inner.ExecuteAndReturnError(errorInfo)
+	if _r == nil {
+		return nil
+	}
+	return &AppleEventDescriptor{inner: _r}
+}
+
+// ExecuteAppleEventError calls the underlying ExecuteAppleEventError.
+func (x *AppleScript) ExecuteAppleEventError(event *raw.NSAppleEventDescriptor, errorInfo *raw.NSDictionary[*raw.NSString, objc.ID]) *AppleEventDescriptor {
+	_r := x.inner.ExecuteAppleEventError(event, errorInfo)
+	if _r == nil {
+		return nil
+	}
+	return &AppleEventDescriptor{inner: _r}
+}
+
+// Source calls the underlying Source.
+func (x *AppleScript) Source() *String {
+	_r := x.inner.Source()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// IsCompiled calls the underlying IsCompiled.
+func (x *AppleScript) IsCompiled() bool {
+	return x.inner.IsCompiled()
+}
+
 func (x *AppleScript) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// AppleScriptable is the interface implemented by [AppleScript], for mocking and DI.
+type AppleScriptable interface {
+	Unwrap() *raw.NSAppleScript
+	CompileAndReturnError(errorInfo *raw.NSDictionary[*raw.NSString, objc.ID]) bool
+	ExecuteAndReturnError(errorInfo *raw.NSDictionary[*raw.NSString, objc.ID]) *AppleEventDescriptor
+	ExecuteAppleEventError(event *raw.NSAppleEventDescriptor, errorInfo *raw.NSDictionary[*raw.NSString, objc.ID]) *AppleEventDescriptor
+	Source() *String
+	IsCompiled() bool
+}
+
+var _ AppleScriptable = (*AppleScript)(nil)
 

@@ -29,5 +29,25 @@ func (x *RenderPassColorAttachmentDescriptor) WithClearColor(clearColor raw.MTLC
 	return x
 }
 
+// ClearColor calls the underlying ClearColor.
+func (x *RenderPassColorAttachmentDescriptor) ClearColor() raw.MTLClearColor {
+	return x.inner.ClearColor()
+}
+
+// SetClearColor calls the underlying SetClearColor.
+func (x *RenderPassColorAttachmentDescriptor) SetClearColor(clearColor raw.MTLClearColor) {
+	x.inner.SetClearColor(clearColor)
+}
+
 func (x *RenderPassColorAttachmentDescriptor) asRenderPassAttachmentDescriptor() *raw.MTLRenderPassAttachmentDescriptor { return &x.inner.MTLRenderPassAttachmentDescriptor }
+
+// RenderPassColorAttachmentDescriptorable is the interface implemented by [RenderPassColorAttachmentDescriptor], for mocking and DI.
+type RenderPassColorAttachmentDescriptorable interface {
+	Unwrap() *raw.MTLRenderPassColorAttachmentDescriptor
+	WithClearColor(clearColor raw.MTLClearColor) *RenderPassColorAttachmentDescriptor
+	ClearColor() raw.MTLClearColor
+	SetClearColor(clearColor raw.MTLClearColor)
+}
+
+var _ RenderPassColorAttachmentDescriptorable = (*RenderPassColorAttachmentDescriptor)(nil)
 

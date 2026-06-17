@@ -28,3 +28,10 @@ func NewCircularRegionWithCenterRadiusIdentifier(center unsafe.Pointer, radius u
 
 func (x *CircularRegion) asRegion() *raw.CLRegion { return &x.inner.CLRegion }
 
+// CircularRegionable is the interface implemented by [CircularRegion], for mocking and DI.
+type CircularRegionable interface {
+	Unwrap() *raw.CLCircularRegion
+}
+
+var _ CircularRegionable = (*CircularRegion)(nil)
+

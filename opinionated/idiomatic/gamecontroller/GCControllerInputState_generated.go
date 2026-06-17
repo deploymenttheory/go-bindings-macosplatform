@@ -25,3 +25,10 @@ func NewControllerInputState() *ControllerInputState {
 
 func (x *ControllerInputState) asControllerInputState() *raw.GCControllerInputState { return x.inner }
 
+// ControllerInputStateable is the interface implemented by [ControllerInputState], for mocking and DI.
+type ControllerInputStateable interface {
+	Unwrap() *raw.GCControllerInputState
+}
+
+var _ ControllerInputStateable = (*ControllerInputState)(nil)
+

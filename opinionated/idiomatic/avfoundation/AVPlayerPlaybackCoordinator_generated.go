@@ -29,5 +29,51 @@ func (x *PlayerPlaybackCoordinator) WithDelegate(delegate raw.AVPlayerPlaybackCo
 	return x
 }
 
+// Player calls the underlying Player.
+func (x *PlayerPlaybackCoordinator) Player() *Player {
+	_r := x.inner.Player()
+	if _r == nil {
+		return nil
+	}
+	return &Player{inner: _r}
+}
+
+// Delegate calls the underlying Delegate.
+func (x *PlayerPlaybackCoordinator) Delegate() raw.AVPlayerPlaybackCoordinatorDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *PlayerPlaybackCoordinator) SetDelegate(delegate raw.AVPlayerPlaybackCoordinatorDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// CoordinateUsingCoordinationMediumError calls the underlying CoordinateUsingCoordinationMediumError.
+func (x *PlayerPlaybackCoordinator) CoordinateUsingCoordinationMediumError(coordinationMedium *raw.AVPlaybackCoordinationMedium) (bool, error) {
+	return x.inner.CoordinateUsingCoordinationMediumError(coordinationMedium)
+}
+
+// PlaybackCoordinationMedium calls the underlying PlaybackCoordinationMedium.
+func (x *PlayerPlaybackCoordinator) PlaybackCoordinationMedium() *PlaybackCoordinationMedium {
+	_r := x.inner.PlaybackCoordinationMedium()
+	if _r == nil {
+		return nil
+	}
+	return &PlaybackCoordinationMedium{inner: _r}
+}
+
 func (x *PlayerPlaybackCoordinator) asPlaybackCoordinator() *raw.AVPlaybackCoordinator { return &x.inner.AVPlaybackCoordinator }
+
+// PlayerPlaybackCoordinatorable is the interface implemented by [PlayerPlaybackCoordinator], for mocking and DI.
+type PlayerPlaybackCoordinatorable interface {
+	Unwrap() *raw.AVPlayerPlaybackCoordinator
+	WithDelegate(delegate raw.AVPlayerPlaybackCoordinatorDelegate) *PlayerPlaybackCoordinator
+	Player() *Player
+	Delegate() raw.AVPlayerPlaybackCoordinatorDelegate
+	SetDelegate(delegate raw.AVPlayerPlaybackCoordinatorDelegate)
+	CoordinateUsingCoordinationMediumError(coordinationMedium *raw.AVPlaybackCoordinationMedium) (bool, error)
+	PlaybackCoordinationMedium() *PlaybackCoordinationMedium
+}
+
+var _ PlayerPlaybackCoordinatorable = (*PlayerPlaybackCoordinator)(nil)
 

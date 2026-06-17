@@ -7,6 +7,7 @@ package quartzcore
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -117,17 +118,40 @@ func (x *KeyframeAnimation) WithRotationMode(rotationMode *foundation.NSString) 
 	return x
 }
 
+// Values calls the underlying Values.
+func (x *KeyframeAnimation) Values() *foundation.NSArray[objc.ID] {
+	return x.inner.Values()
+}
+
+// SetValues calls the underlying SetValues.
+func (x *KeyframeAnimation) SetValues(values *foundation.NSArray[objc.ID]) {
+	x.inner.SetValues(values)
+}
+
+// Path calls the underlying Path.
+func (x *KeyframeAnimation) Path() unsafe.Pointer {
+	return x.inner.Path()
+}
+
+// SetPath calls the underlying SetPath.
+func (x *KeyframeAnimation) SetPath(path unsafe.Pointer) {
+	x.inner.SetPath(path)
+}
+
 // KeyTimes returns the collection as a Go slice.
 func (x *KeyframeAnimation) KeyTimes() []*foundation.NSNumber {
 	arr := x.inner.KeyTimes()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
+}
+
+// SetKeyTimes calls the underlying SetKeyTimes.
+func (x *KeyframeAnimation) SetKeyTimes(keyTimes *foundation.NSArray[*foundation.NSNumber]) {
+	x.inner.SetKeyTimes(keyTimes)
 }
 
 // TimingFunctions returns the collection as a Go slice.
@@ -136,11 +160,28 @@ func (x *KeyframeAnimation) TimingFunctions() []*raw.CAMediaTimingFunction {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.CAMediaTimingFunction, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CAMediaTimingFunction {
+		return raw.CAMediaTimingFunctionFromID(purego.Retain(_id))
+	})
+}
+
+// SetTimingFunctions calls the underlying SetTimingFunctions.
+func (x *KeyframeAnimation) SetTimingFunctions(timingFunctions *foundation.NSArray[*raw.CAMediaTimingFunction]) {
+	x.inner.SetTimingFunctions(timingFunctions)
+}
+
+// CalculationMode calls the underlying CalculationMode.
+func (x *KeyframeAnimation) CalculationMode() string {
+	_r := x.inner.CalculationMode()
+	if _r == nil {
+		return ""
 	}
-	return out
+	return purego.GoString(_r.Ptr())
+}
+
+// SetCalculationMode calls the underlying SetCalculationMode.
+func (x *KeyframeAnimation) SetCalculationMode(calculationMode *foundation.NSString) {
+	x.inner.SetCalculationMode(calculationMode)
 }
 
 // TensionValues returns the collection as a Go slice.
@@ -149,11 +190,14 @@ func (x *KeyframeAnimation) TensionValues() []*foundation.NSNumber {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
+}
+
+// SetTensionValues calls the underlying SetTensionValues.
+func (x *KeyframeAnimation) SetTensionValues(tensionValues *foundation.NSArray[*foundation.NSNumber]) {
+	x.inner.SetTensionValues(tensionValues)
 }
 
 // ContinuityValues returns the collection as a Go slice.
@@ -162,11 +206,14 @@ func (x *KeyframeAnimation) ContinuityValues() []*foundation.NSNumber {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
+}
+
+// SetContinuityValues calls the underlying SetContinuityValues.
+func (x *KeyframeAnimation) SetContinuityValues(continuityValues *foundation.NSArray[*foundation.NSNumber]) {
+	x.inner.SetContinuityValues(continuityValues)
 }
 
 // BiasValues returns the collection as a Go slice.
@@ -175,14 +222,63 @@ func (x *KeyframeAnimation) BiasValues() []*foundation.NSNumber {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
+}
+
+// SetBiasValues calls the underlying SetBiasValues.
+func (x *KeyframeAnimation) SetBiasValues(biasValues *foundation.NSArray[*foundation.NSNumber]) {
+	x.inner.SetBiasValues(biasValues)
+}
+
+// RotationMode calls the underlying RotationMode.
+func (x *KeyframeAnimation) RotationMode() string {
+	_r := x.inner.RotationMode()
+	if _r == nil {
+		return ""
 	}
-	return out
+	return purego.GoString(_r.Ptr())
+}
+
+// SetRotationMode calls the underlying SetRotationMode.
+func (x *KeyframeAnimation) SetRotationMode(rotationMode *foundation.NSString) {
+	x.inner.SetRotationMode(rotationMode)
 }
 
 func (x *KeyframeAnimation) asPropertyAnimation() *raw.CAPropertyAnimation { return &x.inner.CAPropertyAnimation }
 
 func (x *KeyframeAnimation) asAnimation() *raw.CAAnimation { return &x.inner.CAPropertyAnimation.CAAnimation }
+
+// KeyframeAnimationable is the interface implemented by [KeyframeAnimation], for mocking and DI.
+type KeyframeAnimationable interface {
+	Unwrap() *raw.CAKeyframeAnimation
+	WithKeyTimes(items ...*foundation.NSNumber) *KeyframeAnimation
+	WithTimingFunctions(items ...*raw.CAMediaTimingFunction) *KeyframeAnimation
+	WithCalculationMode(calculationMode *foundation.NSString) *KeyframeAnimation
+	WithTensionValues(items ...*foundation.NSNumber) *KeyframeAnimation
+	WithContinuityValues(items ...*foundation.NSNumber) *KeyframeAnimation
+	WithBiasValues(items ...*foundation.NSNumber) *KeyframeAnimation
+	WithRotationMode(rotationMode *foundation.NSString) *KeyframeAnimation
+	Values() *foundation.NSArray[objc.ID]
+	SetValues(values *foundation.NSArray[objc.ID])
+	Path() unsafe.Pointer
+	SetPath(path unsafe.Pointer)
+	KeyTimes() []*foundation.NSNumber
+	SetKeyTimes(keyTimes *foundation.NSArray[*foundation.NSNumber])
+	TimingFunctions() []*raw.CAMediaTimingFunction
+	SetTimingFunctions(timingFunctions *foundation.NSArray[*raw.CAMediaTimingFunction])
+	CalculationMode() string
+	SetCalculationMode(calculationMode *foundation.NSString)
+	TensionValues() []*foundation.NSNumber
+	SetTensionValues(tensionValues *foundation.NSArray[*foundation.NSNumber])
+	ContinuityValues() []*foundation.NSNumber
+	SetContinuityValues(continuityValues *foundation.NSArray[*foundation.NSNumber])
+	BiasValues() []*foundation.NSNumber
+	SetBiasValues(biasValues *foundation.NSArray[*foundation.NSNumber])
+	RotationMode() string
+	SetRotationMode(rotationMode *foundation.NSString)
+}
+
+var _ KeyframeAnimationable = (*KeyframeAnimation)(nil)
 

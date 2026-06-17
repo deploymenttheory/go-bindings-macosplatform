@@ -89,5 +89,155 @@ func (x *RenderPassAttachmentDescriptor) WithStoreActionOptions(storeActionOptio
 	return x
 }
 
+// Texture calls the underlying Texture.
+func (x *RenderPassAttachmentDescriptor) Texture() raw.MTLTexture {
+	return x.inner.Texture()
+}
+
+// SetTexture calls the underlying SetTexture.
+func (x *RenderPassAttachmentDescriptor) SetTexture(texture raw.MTLTexture) {
+	x.inner.SetTexture(texture)
+}
+
+// Level calls the underlying Level.
+func (x *RenderPassAttachmentDescriptor) Level() uint {
+	return x.inner.Level()
+}
+
+// SetLevel calls the underlying SetLevel.
+func (x *RenderPassAttachmentDescriptor) SetLevel(level uint) {
+	x.inner.SetLevel(level)
+}
+
+// Slice calls the underlying Slice.
+func (x *RenderPassAttachmentDescriptor) Slice() uint {
+	return x.inner.Slice()
+}
+
+// SetSlice calls the underlying SetSlice.
+func (x *RenderPassAttachmentDescriptor) SetSlice(slice uint) {
+	x.inner.SetSlice(slice)
+}
+
+// DepthPlane calls the underlying DepthPlane.
+func (x *RenderPassAttachmentDescriptor) DepthPlane() uint {
+	return x.inner.DepthPlane()
+}
+
+// SetDepthPlane calls the underlying SetDepthPlane.
+func (x *RenderPassAttachmentDescriptor) SetDepthPlane(depthPlane uint) {
+	x.inner.SetDepthPlane(depthPlane)
+}
+
+// ResolveTexture calls the underlying ResolveTexture.
+func (x *RenderPassAttachmentDescriptor) ResolveTexture() raw.MTLTexture {
+	return x.inner.ResolveTexture()
+}
+
+// SetResolveTexture calls the underlying SetResolveTexture.
+func (x *RenderPassAttachmentDescriptor) SetResolveTexture(resolveTexture raw.MTLTexture) {
+	x.inner.SetResolveTexture(resolveTexture)
+}
+
+// ResolveLevel calls the underlying ResolveLevel.
+func (x *RenderPassAttachmentDescriptor) ResolveLevel() uint {
+	return x.inner.ResolveLevel()
+}
+
+// SetResolveLevel calls the underlying SetResolveLevel.
+func (x *RenderPassAttachmentDescriptor) SetResolveLevel(resolveLevel uint) {
+	x.inner.SetResolveLevel(resolveLevel)
+}
+
+// ResolveSlice calls the underlying ResolveSlice.
+func (x *RenderPassAttachmentDescriptor) ResolveSlice() uint {
+	return x.inner.ResolveSlice()
+}
+
+// SetResolveSlice calls the underlying SetResolveSlice.
+func (x *RenderPassAttachmentDescriptor) SetResolveSlice(resolveSlice uint) {
+	x.inner.SetResolveSlice(resolveSlice)
+}
+
+// ResolveDepthPlane calls the underlying ResolveDepthPlane.
+func (x *RenderPassAttachmentDescriptor) ResolveDepthPlane() uint {
+	return x.inner.ResolveDepthPlane()
+}
+
+// SetResolveDepthPlane calls the underlying SetResolveDepthPlane.
+func (x *RenderPassAttachmentDescriptor) SetResolveDepthPlane(resolveDepthPlane uint) {
+	x.inner.SetResolveDepthPlane(resolveDepthPlane)
+}
+
+// LoadAction calls the underlying LoadAction.
+func (x *RenderPassAttachmentDescriptor) LoadAction() raw.MTLLoadAction {
+	return x.inner.LoadAction()
+}
+
+// SetLoadAction calls the underlying SetLoadAction.
+func (x *RenderPassAttachmentDescriptor) SetLoadAction(loadAction raw.MTLLoadAction) {
+	x.inner.SetLoadAction(loadAction)
+}
+
+// StoreAction calls the underlying StoreAction.
+func (x *RenderPassAttachmentDescriptor) StoreAction() raw.MTLStoreAction {
+	return x.inner.StoreAction()
+}
+
+// SetStoreAction calls the underlying SetStoreAction.
+func (x *RenderPassAttachmentDescriptor) SetStoreAction(storeAction raw.MTLStoreAction) {
+	x.inner.SetStoreAction(storeAction)
+}
+
+// StoreActionOptions calls the underlying StoreActionOptions.
+func (x *RenderPassAttachmentDescriptor) StoreActionOptions() raw.MTLStoreActionOptions {
+	return x.inner.StoreActionOptions()
+}
+
+// SetStoreActionOptions calls the underlying SetStoreActionOptions.
+func (x *RenderPassAttachmentDescriptor) SetStoreActionOptions(storeActionOptions raw.MTLStoreActionOptions) {
+	x.inner.SetStoreActionOptions(storeActionOptions)
+}
+
 func (x *RenderPassAttachmentDescriptor) asRenderPassAttachmentDescriptor() *raw.MTLRenderPassAttachmentDescriptor { return x.inner }
+
+// RenderPassAttachmentDescriptorable is the interface implemented by [RenderPassAttachmentDescriptor], for mocking and DI.
+type RenderPassAttachmentDescriptorable interface {
+	Unwrap() *raw.MTLRenderPassAttachmentDescriptor
+	WithTexture(texture raw.MTLTexture) *RenderPassAttachmentDescriptor
+	WithLevel(level uint) *RenderPassAttachmentDescriptor
+	WithSlice(slice uint) *RenderPassAttachmentDescriptor
+	WithDepthPlane(depthPlane uint) *RenderPassAttachmentDescriptor
+	WithResolveTexture(resolveTexture raw.MTLTexture) *RenderPassAttachmentDescriptor
+	WithResolveLevel(resolveLevel uint) *RenderPassAttachmentDescriptor
+	WithResolveSlice(resolveSlice uint) *RenderPassAttachmentDescriptor
+	WithResolveDepthPlane(resolveDepthPlane uint) *RenderPassAttachmentDescriptor
+	WithLoadAction(loadAction raw.MTLLoadAction) *RenderPassAttachmentDescriptor
+	WithStoreAction(storeAction raw.MTLStoreAction) *RenderPassAttachmentDescriptor
+	WithStoreActionOptions(storeActionOptions raw.MTLStoreActionOptions) *RenderPassAttachmentDescriptor
+	Texture() raw.MTLTexture
+	SetTexture(texture raw.MTLTexture)
+	Level() uint
+	SetLevel(level uint)
+	Slice() uint
+	SetSlice(slice uint)
+	DepthPlane() uint
+	SetDepthPlane(depthPlane uint)
+	ResolveTexture() raw.MTLTexture
+	SetResolveTexture(resolveTexture raw.MTLTexture)
+	ResolveLevel() uint
+	SetResolveLevel(resolveLevel uint)
+	ResolveSlice() uint
+	SetResolveSlice(resolveSlice uint)
+	ResolveDepthPlane() uint
+	SetResolveDepthPlane(resolveDepthPlane uint)
+	LoadAction() raw.MTLLoadAction
+	SetLoadAction(loadAction raw.MTLLoadAction)
+	StoreAction() raw.MTLStoreAction
+	SetStoreAction(storeAction raw.MTLStoreAction)
+	StoreActionOptions() raw.MTLStoreActionOptions
+	SetStoreActionOptions(storeActionOptions raw.MTLStoreActionOptions)
+}
+
+var _ RenderPassAttachmentDescriptorable = (*RenderPassAttachmentDescriptor)(nil)
 

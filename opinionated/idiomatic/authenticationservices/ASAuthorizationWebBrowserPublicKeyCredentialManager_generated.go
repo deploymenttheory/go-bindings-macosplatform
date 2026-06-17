@@ -5,7 +5,9 @@
 package authenticationservices
 
 import (
+	"context"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +24,45 @@ func NewAuthorizationWebBrowserPublicKeyCredentialManager() *AuthorizationWebBro
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ASAuthorizationWebBrowserPublicKeyCredentialManager")), objc.RegisterName("new"))
 	return &AuthorizationWebBrowserPublicKeyCredentialManager{inner: raw.ASAuthorizationWebBrowserPublicKeyCredentialManagerFromID(_id)}
 }
+
+// RequestAuthorizationForPublicKeyCredentials calls the underlying RequestAuthorizationForPublicKeyCredentials.
+func (x *AuthorizationWebBrowserPublicKeyCredentialManager) RequestAuthorizationForPublicKeyCredentials(completionHandler func(raw.ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState)) {
+	x.inner.RequestAuthorizationForPublicKeyCredentials(completionHandler)
+}
+
+// PlatformCredentialsForRelyingParty blocks until the operation completes or ctx is cancelled.
+func (x *AuthorizationWebBrowserPublicKeyCredentialManager) PlatformCredentialsForRelyingParty(ctx context.Context, relyingParty string) (*foundation.NSArray[*raw.ASAuthorizationWebBrowserPlatformPublicKeyCredential], error) {
+	type _result struct {
+		val *foundation.NSArray[*raw.ASAuthorizationWebBrowserPlatformPublicKeyCredential]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.PlatformCredentialsForRelyingPartyCompletionHandler(foundation.NSStringStringWithUTF8String(relyingParty), func(_p0 *foundation.NSArray[*raw.ASAuthorizationWebBrowserPlatformPublicKeyCredential]) {
+		var _o _result
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[*raw.ASAuthorizationWebBrowserPlatformPublicKeyCredential]
+		return _zero, ctx.Err()
+	}
+}
+
+// AuthorizationStateForPlatformCredentials calls the underlying AuthorizationStateForPlatformCredentials.
+func (x *AuthorizationWebBrowserPublicKeyCredentialManager) AuthorizationStateForPlatformCredentials() raw.ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState {
+	return x.inner.AuthorizationStateForPlatformCredentials()
+}
+
+// AuthorizationWebBrowserPublicKeyCredentialManagerable is the interface implemented by [AuthorizationWebBrowserPublicKeyCredentialManager], for mocking and DI.
+type AuthorizationWebBrowserPublicKeyCredentialManagerable interface {
+	Unwrap() *raw.ASAuthorizationWebBrowserPublicKeyCredentialManager
+	RequestAuthorizationForPublicKeyCredentials(completionHandler func(raw.ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState))
+	PlatformCredentialsForRelyingParty(ctx context.Context, relyingParty string) (*foundation.NSArray[*raw.ASAuthorizationWebBrowserPlatformPublicKeyCredential], error)
+	AuthorizationStateForPlatformCredentials() raw.ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState
+}
+
+var _ AuthorizationWebBrowserPublicKeyCredentialManagerable = (*AuthorizationWebBrowserPublicKeyCredentialManager)(nil)
 

@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +23,23 @@ func NewMTRAttributeValueWaiter() *MTRAttributeValueWaiter {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRAttributeValueWaiter")), objc.RegisterName("new"))
 	return &MTRAttributeValueWaiter{inner: raw.MTRAttributeValueWaiterFromID(_id)}
 }
+
+// Cancel calls the underlying Cancel.
+func (x *MTRAttributeValueWaiter) Cancel() {
+	x.inner.Cancel()
+}
+
+// UUID calls the underlying UUID.
+func (x *MTRAttributeValueWaiter) UUID() *foundation.NSUUID {
+	return x.inner.UUID()
+}
+
+// MTRAttributeValueWaiterable is the interface implemented by [MTRAttributeValueWaiter], for mocking and DI.
+type MTRAttributeValueWaiterable interface {
+	Unwrap() *raw.MTRAttributeValueWaiter
+	Cancel()
+	UUID() *foundation.NSUUID
+}
+
+var _ MTRAttributeValueWaiterable = (*MTRAttributeValueWaiter)(nil)
 

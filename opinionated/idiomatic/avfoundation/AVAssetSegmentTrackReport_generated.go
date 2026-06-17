@@ -6,6 +6,8 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +24,49 @@ func NewAssetSegmentTrackReport() *AssetSegmentTrackReport {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAssetSegmentTrackReport")), objc.RegisterName("new"))
 	return &AssetSegmentTrackReport{inner: raw.AVAssetSegmentTrackReportFromID(_id)}
 }
+
+// TrackID calls the underlying TrackID.
+func (x *AssetSegmentTrackReport) TrackID() int32 {
+	return x.inner.TrackID()
+}
+
+// MediaType calls the underlying MediaType.
+func (x *AssetSegmentTrackReport) MediaType() string {
+	_r := x.inner.MediaType()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// EarliestPresentationTimeStamp calls the underlying EarliestPresentationTimeStamp.
+func (x *AssetSegmentTrackReport) EarliestPresentationTimeStamp() coremedia.CMTime {
+	return x.inner.EarliestPresentationTimeStamp()
+}
+
+// Duration calls the underlying Duration.
+func (x *AssetSegmentTrackReport) Duration() coremedia.CMTime {
+	return x.inner.Duration()
+}
+
+// FirstVideoSampleInformation calls the underlying FirstVideoSampleInformation.
+func (x *AssetSegmentTrackReport) FirstVideoSampleInformation() *AssetSegmentReportSampleInformation {
+	_r := x.inner.FirstVideoSampleInformation()
+	if _r == nil {
+		return nil
+	}
+	return &AssetSegmentReportSampleInformation{inner: _r}
+}
+
+// AssetSegmentTrackReportable is the interface implemented by [AssetSegmentTrackReport], for mocking and DI.
+type AssetSegmentTrackReportable interface {
+	Unwrap() *raw.AVAssetSegmentTrackReport
+	TrackID() int32
+	MediaType() string
+	EarliestPresentationTimeStamp() coremedia.CMTime
+	Duration() coremedia.CMTime
+	FirstVideoSampleInformation() *AssetSegmentReportSampleInformation
+}
+
+var _ AssetSegmentTrackReportable = (*AssetSegmentTrackReport)(nil)
 

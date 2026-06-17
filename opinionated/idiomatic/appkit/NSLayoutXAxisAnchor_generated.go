@@ -23,5 +23,52 @@ func NewLayoutXAxisAnchor() *LayoutXAxisAnchor {
 	return &LayoutXAxisAnchor{inner: raw.NSLayoutXAxisAnchorFromID(_id)}
 }
 
+// AnchorWithOffsetToAnchor calls the underlying AnchorWithOffsetToAnchor.
+func (x *LayoutXAxisAnchor) AnchorWithOffsetToAnchor(otherAnchor *raw.NSLayoutXAxisAnchor) *LayoutDimension {
+	_r := x.inner.AnchorWithOffsetToAnchor(otherAnchor)
+	if _r == nil {
+		return nil
+	}
+	return &LayoutDimension{inner: _r}
+}
+
+// ConstraintEqualToSystemSpacingAfterAnchorMultiplier calls the underlying ConstraintEqualToSystemSpacingAfterAnchorMultiplier.
+func (x *LayoutXAxisAnchor) ConstraintEqualToSystemSpacingAfterAnchorMultiplier(anchor *raw.NSLayoutXAxisAnchor, multiplier float64) *LayoutConstraint {
+	_r := x.inner.ConstraintEqualToSystemSpacingAfterAnchorMultiplier(anchor, multiplier)
+	if _r == nil {
+		return nil
+	}
+	return &LayoutConstraint{inner: _r}
+}
+
+// ConstraintGreaterThanOrEqualToSystemSpacingAfterAnchorMultiplier calls the underlying ConstraintGreaterThanOrEqualToSystemSpacingAfterAnchorMultiplier.
+func (x *LayoutXAxisAnchor) ConstraintGreaterThanOrEqualToSystemSpacingAfterAnchorMultiplier(anchor *raw.NSLayoutXAxisAnchor, multiplier float64) *LayoutConstraint {
+	_r := x.inner.ConstraintGreaterThanOrEqualToSystemSpacingAfterAnchorMultiplier(anchor, multiplier)
+	if _r == nil {
+		return nil
+	}
+	return &LayoutConstraint{inner: _r}
+}
+
+// ConstraintLessThanOrEqualToSystemSpacingAfterAnchorMultiplier calls the underlying ConstraintLessThanOrEqualToSystemSpacingAfterAnchorMultiplier.
+func (x *LayoutXAxisAnchor) ConstraintLessThanOrEqualToSystemSpacingAfterAnchorMultiplier(anchor *raw.NSLayoutXAxisAnchor, multiplier float64) *LayoutConstraint {
+	_r := x.inner.ConstraintLessThanOrEqualToSystemSpacingAfterAnchorMultiplier(anchor, multiplier)
+	if _r == nil {
+		return nil
+	}
+	return &LayoutConstraint{inner: _r}
+}
+
 func (x *LayoutXAxisAnchor) asLayoutAnchor() *raw.NSLayoutAnchor[objc.ID] { return &x.inner.NSLayoutAnchor }
+
+// LayoutXAxisAnchorable is the interface implemented by [LayoutXAxisAnchor], for mocking and DI.
+type LayoutXAxisAnchorable interface {
+	Unwrap() *raw.NSLayoutXAxisAnchor
+	AnchorWithOffsetToAnchor(otherAnchor *raw.NSLayoutXAxisAnchor) *LayoutDimension
+	ConstraintEqualToSystemSpacingAfterAnchorMultiplier(anchor *raw.NSLayoutXAxisAnchor, multiplier float64) *LayoutConstraint
+	ConstraintGreaterThanOrEqualToSystemSpacingAfterAnchorMultiplier(anchor *raw.NSLayoutXAxisAnchor, multiplier float64) *LayoutConstraint
+	ConstraintLessThanOrEqualToSystemSpacingAfterAnchorMultiplier(anchor *raw.NSLayoutXAxisAnchor, multiplier float64) *LayoutConstraint
+}
+
+var _ LayoutXAxisAnchorable = (*LayoutXAxisAnchor)(nil)
 

@@ -41,3 +41,10 @@ func (x *NNReduceRowSum) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &
 
 func (x *NNReduceRowSum) asKernel() *mpscore.MPSKernel { return &x.inner.MPSNNReduceUnary.MPSCNNKernel.MPSKernel }
 
+// NNReduceRowSumable is the interface implemented by [NNReduceRowSum], for mocking and DI.
+type NNReduceRowSumable interface {
+	Unwrap() *raw.MPSNNReduceRowSum
+}
+
+var _ NNReduceRowSumable = (*NNReduceRowSum)(nil)
+

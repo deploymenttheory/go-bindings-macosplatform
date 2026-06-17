@@ -48,3 +48,74 @@ func (x *MTRElectricalPowerMeasurementClusterMeasurementAccuracyStruct) WithMaxM
 	return x
 }
 
+// MeasurementType calls the underlying MeasurementType.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementAccuracyStruct) MeasurementType() *foundation.NSNumber {
+	return x.inner.MeasurementType()
+}
+
+// SetMeasurementType calls the underlying SetMeasurementType.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementAccuracyStruct) SetMeasurementType(measurementType *foundation.NSNumber) {
+	x.inner.SetMeasurementType(measurementType)
+}
+
+// Measured calls the underlying Measured.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementAccuracyStruct) Measured() *foundation.NSNumber {
+	return x.inner.Measured()
+}
+
+// SetMeasured calls the underlying SetMeasured.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementAccuracyStruct) SetMeasured(measured *foundation.NSNumber) {
+	x.inner.SetMeasured(measured)
+}
+
+// MinMeasuredValue calls the underlying MinMeasuredValue.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementAccuracyStruct) MinMeasuredValue() *foundation.NSNumber {
+	return x.inner.MinMeasuredValue()
+}
+
+// SetMinMeasuredValue calls the underlying SetMinMeasuredValue.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementAccuracyStruct) SetMinMeasuredValue(minMeasuredValue *foundation.NSNumber) {
+	x.inner.SetMinMeasuredValue(minMeasuredValue)
+}
+
+// MaxMeasuredValue calls the underlying MaxMeasuredValue.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementAccuracyStruct) MaxMeasuredValue() *foundation.NSNumber {
+	return x.inner.MaxMeasuredValue()
+}
+
+// SetMaxMeasuredValue calls the underlying SetMaxMeasuredValue.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementAccuracyStruct) SetMaxMeasuredValue(maxMeasuredValue *foundation.NSNumber) {
+	x.inner.SetMaxMeasuredValue(maxMeasuredValue)
+}
+
+// AccuracyRanges calls the underlying AccuracyRanges.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementAccuracyStruct) AccuracyRanges() *foundation.NSArray[objc.ID] {
+	return x.inner.AccuracyRanges()
+}
+
+// SetAccuracyRanges calls the underlying SetAccuracyRanges.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementAccuracyStruct) SetAccuracyRanges(accuracyRanges *foundation.NSArray[objc.ID]) {
+	x.inner.SetAccuracyRanges(accuracyRanges)
+}
+
+// MTRElectricalPowerMeasurementClusterMeasurementAccuracyStructable is the interface implemented by [MTRElectricalPowerMeasurementClusterMeasurementAccuracyStruct], for mocking and DI.
+type MTRElectricalPowerMeasurementClusterMeasurementAccuracyStructable interface {
+	Unwrap() *raw.MTRElectricalPowerMeasurementClusterMeasurementAccuracyStruct
+	WithMeasurementType(measurementType *foundation.NSNumber) *MTRElectricalPowerMeasurementClusterMeasurementAccuracyStruct
+	WithMeasured(measured *foundation.NSNumber) *MTRElectricalPowerMeasurementClusterMeasurementAccuracyStruct
+	WithMinMeasuredValue(minMeasuredValue *foundation.NSNumber) *MTRElectricalPowerMeasurementClusterMeasurementAccuracyStruct
+	WithMaxMeasuredValue(maxMeasuredValue *foundation.NSNumber) *MTRElectricalPowerMeasurementClusterMeasurementAccuracyStruct
+	MeasurementType() *foundation.NSNumber
+	SetMeasurementType(measurementType *foundation.NSNumber)
+	Measured() *foundation.NSNumber
+	SetMeasured(measured *foundation.NSNumber)
+	MinMeasuredValue() *foundation.NSNumber
+	SetMinMeasuredValue(minMeasuredValue *foundation.NSNumber)
+	MaxMeasuredValue() *foundation.NSNumber
+	SetMaxMeasuredValue(maxMeasuredValue *foundation.NSNumber)
+	AccuracyRanges() *foundation.NSArray[objc.ID]
+	SetAccuracyRanges(accuracyRanges *foundation.NSArray[objc.ID])
+}
+
+var _ MTRElectricalPowerMeasurementClusterMeasurementAccuracyStructable = (*MTRElectricalPowerMeasurementClusterMeasurementAccuracyStruct)(nil)
+

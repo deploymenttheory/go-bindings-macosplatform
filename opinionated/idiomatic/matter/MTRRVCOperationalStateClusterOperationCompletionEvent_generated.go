@@ -42,3 +42,49 @@ func (x *MTRRVCOperationalStateClusterOperationCompletionEvent) WithPausedTime(p
 	return x
 }
 
+// CompletionErrorCode calls the underlying CompletionErrorCode.
+func (x *MTRRVCOperationalStateClusterOperationCompletionEvent) CompletionErrorCode() *foundation.NSNumber {
+	return x.inner.CompletionErrorCode()
+}
+
+// SetCompletionErrorCode calls the underlying SetCompletionErrorCode.
+func (x *MTRRVCOperationalStateClusterOperationCompletionEvent) SetCompletionErrorCode(completionErrorCode *foundation.NSNumber) {
+	x.inner.SetCompletionErrorCode(completionErrorCode)
+}
+
+// TotalOperationalTime calls the underlying TotalOperationalTime.
+func (x *MTRRVCOperationalStateClusterOperationCompletionEvent) TotalOperationalTime() *foundation.NSNumber {
+	return x.inner.TotalOperationalTime()
+}
+
+// SetTotalOperationalTime calls the underlying SetTotalOperationalTime.
+func (x *MTRRVCOperationalStateClusterOperationCompletionEvent) SetTotalOperationalTime(totalOperationalTime *foundation.NSNumber) {
+	x.inner.SetTotalOperationalTime(totalOperationalTime)
+}
+
+// PausedTime calls the underlying PausedTime.
+func (x *MTRRVCOperationalStateClusterOperationCompletionEvent) PausedTime() *foundation.NSNumber {
+	return x.inner.PausedTime()
+}
+
+// SetPausedTime calls the underlying SetPausedTime.
+func (x *MTRRVCOperationalStateClusterOperationCompletionEvent) SetPausedTime(pausedTime *foundation.NSNumber) {
+	x.inner.SetPausedTime(pausedTime)
+}
+
+// MTRRVCOperationalStateClusterOperationCompletionEventable is the interface implemented by [MTRRVCOperationalStateClusterOperationCompletionEvent], for mocking and DI.
+type MTRRVCOperationalStateClusterOperationCompletionEventable interface {
+	Unwrap() *raw.MTRRVCOperationalStateClusterOperationCompletionEvent
+	WithCompletionErrorCode(completionErrorCode *foundation.NSNumber) *MTRRVCOperationalStateClusterOperationCompletionEvent
+	WithTotalOperationalTime(totalOperationalTime *foundation.NSNumber) *MTRRVCOperationalStateClusterOperationCompletionEvent
+	WithPausedTime(pausedTime *foundation.NSNumber) *MTRRVCOperationalStateClusterOperationCompletionEvent
+	CompletionErrorCode() *foundation.NSNumber
+	SetCompletionErrorCode(completionErrorCode *foundation.NSNumber)
+	TotalOperationalTime() *foundation.NSNumber
+	SetTotalOperationalTime(totalOperationalTime *foundation.NSNumber)
+	PausedTime() *foundation.NSNumber
+	SetPausedTime(pausedTime *foundation.NSNumber)
+}
+
+var _ MTRRVCOperationalStateClusterOperationCompletionEventable = (*MTRRVCOperationalStateClusterOperationCompletionEvent)(nil)
+

@@ -31,7 +31,26 @@ func NewCompoundPredicateWithCoder(coder *raw.NSCoder) *CompoundPredicate {
 	return &CompoundPredicate{inner: raw.NSCompoundPredicateFromID(_id)}
 }
 
+// CompoundPredicateType calls the underlying CompoundPredicateType.
+func (x *CompoundPredicate) CompoundPredicateType() raw.NSCompoundPredicateType {
+	return x.inner.CompoundPredicateType()
+}
+
+// Subpredicates calls the underlying Subpredicates.
+func (x *CompoundPredicate) Subpredicates() *raw.NSArray[objc.ID] {
+	return x.inner.Subpredicates()
+}
+
 func (x *CompoundPredicate) asPredicate() *raw.NSPredicate { return &x.inner.NSPredicate }
 
 func (x *CompoundPredicate) asObject() *raw.NSObject { return &x.inner.NSPredicate.NSObject }
+
+// CompoundPredicateable is the interface implemented by [CompoundPredicate], for mocking and DI.
+type CompoundPredicateable interface {
+	Unwrap() *raw.NSCompoundPredicate
+	CompoundPredicateType() raw.NSCompoundPredicateType
+	Subpredicates() *raw.NSArray[objc.ID]
+}
+
+var _ CompoundPredicateable = (*CompoundPredicate)(nil)
 

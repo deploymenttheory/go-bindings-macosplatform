@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +23,35 @@ func NewMTRGeneralDiagnosticsClusterRadioFaultChangeEvent() *MTRGeneralDiagnosti
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRGeneralDiagnosticsClusterRadioFaultChangeEvent")), objc.RegisterName("new"))
 	return &MTRGeneralDiagnosticsClusterRadioFaultChangeEvent{inner: raw.MTRGeneralDiagnosticsClusterRadioFaultChangeEventFromID(_id)}
 }
+
+// Current calls the underlying Current.
+func (x *MTRGeneralDiagnosticsClusterRadioFaultChangeEvent) Current() *foundation.NSArray[objc.ID] {
+	return x.inner.Current()
+}
+
+// SetCurrent calls the underlying SetCurrent.
+func (x *MTRGeneralDiagnosticsClusterRadioFaultChangeEvent) SetCurrent(current *foundation.NSArray[objc.ID]) {
+	x.inner.SetCurrent(current)
+}
+
+// Previous calls the underlying Previous.
+func (x *MTRGeneralDiagnosticsClusterRadioFaultChangeEvent) Previous() *foundation.NSArray[objc.ID] {
+	return x.inner.Previous()
+}
+
+// SetPrevious calls the underlying SetPrevious.
+func (x *MTRGeneralDiagnosticsClusterRadioFaultChangeEvent) SetPrevious(previous *foundation.NSArray[objc.ID]) {
+	x.inner.SetPrevious(previous)
+}
+
+// MTRGeneralDiagnosticsClusterRadioFaultChangeEventable is the interface implemented by [MTRGeneralDiagnosticsClusterRadioFaultChangeEvent], for mocking and DI.
+type MTRGeneralDiagnosticsClusterRadioFaultChangeEventable interface {
+	Unwrap() *raw.MTRGeneralDiagnosticsClusterRadioFaultChangeEvent
+	Current() *foundation.NSArray[objc.ID]
+	SetCurrent(current *foundation.NSArray[objc.ID])
+	Previous() *foundation.NSArray[objc.ID]
+	SetPrevious(previous *foundation.NSArray[objc.ID])
+}
+
+var _ MTRGeneralDiagnosticsClusterRadioFaultChangeEventable = (*MTRGeneralDiagnosticsClusterRadioFaultChangeEvent)(nil)
 

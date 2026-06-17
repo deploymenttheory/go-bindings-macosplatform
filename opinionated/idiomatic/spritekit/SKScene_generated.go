@@ -6,6 +6,7 @@ package spritekit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
 	"github.com/ebitengine/purego/objc"
@@ -68,7 +69,205 @@ func (x *Scene) WithAnchorPoint(anchorPoint corefoundation.CGPoint) *Scene {
 	return x
 }
 
+// SceneDidLoad calls the underlying SceneDidLoad.
+func (x *Scene) SceneDidLoad() {
+	x.inner.SceneDidLoad()
+}
+
+// ConvertPointFromView calls the underlying ConvertPointFromView.
+func (x *Scene) ConvertPointFromView(point corefoundation.CGPoint) corefoundation.CGPoint {
+	return x.inner.ConvertPointFromView(point)
+}
+
+// ConvertPointToView calls the underlying ConvertPointToView.
+func (x *Scene) ConvertPointToView(point corefoundation.CGPoint) corefoundation.CGPoint {
+	return x.inner.ConvertPointToView(point)
+}
+
+// Update calls the underlying Update.
+func (x *Scene) Update(currentTime float64) {
+	x.inner.Update(currentTime)
+}
+
+// DidEvaluateActions calls the underlying DidEvaluateActions.
+func (x *Scene) DidEvaluateActions() {
+	x.inner.DidEvaluateActions()
+}
+
+// DidSimulatePhysics calls the underlying DidSimulatePhysics.
+func (x *Scene) DidSimulatePhysics() {
+	x.inner.DidSimulatePhysics()
+}
+
+// DidApplyConstraints calls the underlying DidApplyConstraints.
+func (x *Scene) DidApplyConstraints() {
+	x.inner.DidApplyConstraints()
+}
+
+// DidFinishUpdate calls the underlying DidFinishUpdate.
+func (x *Scene) DidFinishUpdate() {
+	x.inner.DidFinishUpdate()
+}
+
+// DidMoveToView calls the underlying DidMoveToView.
+func (x *Scene) DidMoveToView(view *raw.SKView) {
+	x.inner.DidMoveToView(view)
+}
+
+// WillMoveFromView calls the underlying WillMoveFromView.
+func (x *Scene) WillMoveFromView(view *raw.SKView) {
+	x.inner.WillMoveFromView(view)
+}
+
+// DidChangeSize calls the underlying DidChangeSize.
+func (x *Scene) DidChangeSize(oldSize corefoundation.CGSize) {
+	x.inner.DidChangeSize(oldSize)
+}
+
+// Size calls the underlying Size.
+func (x *Scene) Size() corefoundation.CGSize {
+	return x.inner.Size()
+}
+
+// SetSize calls the underlying SetSize.
+func (x *Scene) SetSize(size corefoundation.CGSize) {
+	x.inner.SetSize(size)
+}
+
+// ScaleMode calls the underlying ScaleMode.
+func (x *Scene) ScaleMode() raw.SKSceneScaleMode {
+	return x.inner.ScaleMode()
+}
+
+// SetScaleMode calls the underlying SetScaleMode.
+func (x *Scene) SetScaleMode(scaleMode raw.SKSceneScaleMode) {
+	x.inner.SetScaleMode(scaleMode)
+}
+
+// Camera calls the underlying Camera.
+func (x *Scene) Camera() *CameraNode {
+	_r := x.inner.Camera()
+	if _r == nil {
+		return nil
+	}
+	return &CameraNode{inner: _r}
+}
+
+// SetCamera calls the underlying SetCamera.
+func (x *Scene) SetCamera(camera *raw.SKCameraNode) {
+	x.inner.SetCamera(camera)
+}
+
+// Listener calls the underlying Listener.
+func (x *Scene) Listener() *Node {
+	_r := x.inner.Listener()
+	if _r == nil {
+		return nil
+	}
+	return &Node{inner: _r}
+}
+
+// SetListener calls the underlying SetListener.
+func (x *Scene) SetListener(listener *raw.SKNode) {
+	x.inner.SetListener(listener)
+}
+
+// AudioEngine calls the underlying AudioEngine.
+func (x *Scene) AudioEngine() *avfaudio.AVAudioEngine {
+	return x.inner.AudioEngine()
+}
+
+// BackgroundColor calls the underlying BackgroundColor.
+func (x *Scene) BackgroundColor() *appkit.NSColor {
+	return x.inner.BackgroundColor()
+}
+
+// SetBackgroundColor calls the underlying SetBackgroundColor.
+func (x *Scene) SetBackgroundColor(backgroundColor *appkit.NSColor) {
+	x.inner.SetBackgroundColor(backgroundColor)
+}
+
+// Delegate calls the underlying Delegate.
+func (x *Scene) Delegate() raw.SKSceneDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *Scene) SetDelegate(delegate raw.SKSceneDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// AnchorPoint calls the underlying AnchorPoint.
+func (x *Scene) AnchorPoint() corefoundation.CGPoint {
+	return x.inner.AnchorPoint()
+}
+
+// SetAnchorPoint calls the underlying SetAnchorPoint.
+func (x *Scene) SetAnchorPoint(anchorPoint corefoundation.CGPoint) {
+	x.inner.SetAnchorPoint(anchorPoint)
+}
+
+// PhysicsWorld calls the underlying PhysicsWorld.
+func (x *Scene) PhysicsWorld() *PhysicsWorld {
+	_r := x.inner.PhysicsWorld()
+	if _r == nil {
+		return nil
+	}
+	return &PhysicsWorld{inner: _r}
+}
+
+// View calls the underlying View.
+func (x *Scene) View() *View {
+	_r := x.inner.View()
+	if _r == nil {
+		return nil
+	}
+	return &View{inner: _r}
+}
+
 func (x *Scene) asEffectNode() *raw.SKEffectNode { return &x.inner.SKEffectNode }
 
 func (x *Scene) asNode() *raw.SKNode { return &x.inner.SKEffectNode.SKNode }
+
+// Sceneable is the interface implemented by [Scene], for mocking and DI.
+type Sceneable interface {
+	Unwrap() *raw.SKScene
+	WithSize(size corefoundation.CGSize) *Scene
+	WithScaleMode(scaleMode raw.SKSceneScaleMode) *Scene
+	WithCamera(camera *raw.SKCameraNode) *Scene
+	WithListener(listener NodeProvider) *Scene
+	WithBackgroundColor(backgroundColor *appkit.NSColor) *Scene
+	WithDelegate(delegate raw.SKSceneDelegate) *Scene
+	WithAnchorPoint(anchorPoint corefoundation.CGPoint) *Scene
+	SceneDidLoad()
+	ConvertPointFromView(point corefoundation.CGPoint) corefoundation.CGPoint
+	ConvertPointToView(point corefoundation.CGPoint) corefoundation.CGPoint
+	Update(currentTime float64)
+	DidEvaluateActions()
+	DidSimulatePhysics()
+	DidApplyConstraints()
+	DidFinishUpdate()
+	DidMoveToView(view *raw.SKView)
+	WillMoveFromView(view *raw.SKView)
+	DidChangeSize(oldSize corefoundation.CGSize)
+	Size() corefoundation.CGSize
+	SetSize(size corefoundation.CGSize)
+	ScaleMode() raw.SKSceneScaleMode
+	SetScaleMode(scaleMode raw.SKSceneScaleMode)
+	Camera() *CameraNode
+	SetCamera(camera *raw.SKCameraNode)
+	Listener() *Node
+	SetListener(listener *raw.SKNode)
+	AudioEngine() *avfaudio.AVAudioEngine
+	BackgroundColor() *appkit.NSColor
+	SetBackgroundColor(backgroundColor *appkit.NSColor)
+	Delegate() raw.SKSceneDelegate
+	SetDelegate(delegate raw.SKSceneDelegate)
+	AnchorPoint() corefoundation.CGPoint
+	SetAnchorPoint(anchorPoint corefoundation.CGPoint)
+	PhysicsWorld() *PhysicsWorld
+	View() *View
+}
+
+var _ Sceneable = (*Scene)(nil)
 

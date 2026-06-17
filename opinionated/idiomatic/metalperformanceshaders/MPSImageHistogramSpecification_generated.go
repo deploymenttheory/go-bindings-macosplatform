@@ -35,7 +35,26 @@ func NewImageHistogramSpecificationWithCoderDevice(aDecoder *foundation.NSCoder,
 	return &ImageHistogramSpecification{inner: raw.MPSImageHistogramSpecificationFromID(_id)}
 }
 
+// EncodeTransformToCommandBufferSourceTextureSourceHistogramSourceHistogramOffsetDesiredHistogramDesiredHistogramOffset calls the underlying EncodeTransformToCommandBufferSourceTextureSourceHistogramSourceHistogramOffsetDesiredHistogramDesiredHistogramOffset.
+func (x *ImageHistogramSpecification) EncodeTransformToCommandBufferSourceTextureSourceHistogramSourceHistogramOffsetDesiredHistogramDesiredHistogramOffset(commandBuffer metal.MTLCommandBuffer, source metal.MTLTexture, sourceHistogram metal.MTLBuffer, sourceHistogramOffset uint, desiredHistogram metal.MTLBuffer, desiredHistogramOffset uint) {
+	x.inner.EncodeTransformToCommandBufferSourceTextureSourceHistogramSourceHistogramOffsetDesiredHistogramDesiredHistogramOffset(commandBuffer, source, sourceHistogram, sourceHistogramOffset, desiredHistogram, desiredHistogramOffset)
+}
+
+// HistogramInfo calls the underlying HistogramInfo.
+func (x *ImageHistogramSpecification) HistogramInfo() mpsimage.MPSImageHistogramInfo {
+	return x.inner.HistogramInfo()
+}
+
 func (x *ImageHistogramSpecification) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel { return &x.inner.MPSUnaryImageKernel }
 
 func (x *ImageHistogramSpecification) asKernel() *mpscore.MPSKernel { return &x.inner.MPSUnaryImageKernel.MPSKernel }
+
+// ImageHistogramSpecificationable is the interface implemented by [ImageHistogramSpecification], for mocking and DI.
+type ImageHistogramSpecificationable interface {
+	Unwrap() *raw.MPSImageHistogramSpecification
+	EncodeTransformToCommandBufferSourceTextureSourceHistogramSourceHistogramOffsetDesiredHistogramDesiredHistogramOffset(commandBuffer metal.MTLCommandBuffer, source metal.MTLTexture, sourceHistogram metal.MTLBuffer, sourceHistogramOffset uint, desiredHistogram metal.MTLBuffer, desiredHistogramOffset uint)
+	HistogramInfo() mpsimage.MPSImageHistogramInfo
+}
+
+var _ ImageHistogramSpecificationable = (*ImageHistogramSpecification)(nil)
 

@@ -6,6 +6,7 @@ package oslog
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/oslog"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +24,34 @@ func NewLogEntrySignpost() *LogEntrySignpost {
 	return &LogEntrySignpost{inner: raw.OSLogEntrySignpostFromID(_id)}
 }
 
+// SignpostIdentifier calls the underlying SignpostIdentifier.
+func (x *LogEntrySignpost) SignpostIdentifier() uint64 {
+	return x.inner.SignpostIdentifier()
+}
+
+// SignpostName calls the underlying SignpostName.
+func (x *LogEntrySignpost) SignpostName() string {
+	_r := x.inner.SignpostName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SignpostType calls the underlying SignpostType.
+func (x *LogEntrySignpost) SignpostType() raw.OSLogEntrySignpostType {
+	return x.inner.SignpostType()
+}
+
 func (x *LogEntrySignpost) asLogEntry() *raw.OSLogEntry { return &x.inner.OSLogEntry }
+
+// LogEntrySignpostable is the interface implemented by [LogEntrySignpost], for mocking and DI.
+type LogEntrySignpostable interface {
+	Unwrap() *raw.OSLogEntrySignpost
+	SignpostIdentifier() uint64
+	SignpostName() string
+	SignpostType() raw.OSLogEntrySignpostType
+}
+
+var _ LogEntrySignpostable = (*LogEntrySignpost)(nil)
 

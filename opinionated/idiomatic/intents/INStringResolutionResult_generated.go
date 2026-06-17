@@ -25,3 +25,10 @@ func NewStringResolutionResult() *StringResolutionResult {
 
 func (x *StringResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult { return &x.inner.INIntentResolutionResult }
 
+// StringResolutionResultable is the interface implemented by [StringResolutionResult], for mocking and DI.
+type StringResolutionResultable interface {
+	Unwrap() *raw.INStringResolutionResult
+}
+
+var _ StringResolutionResultable = (*StringResolutionResult)(nil)
+

@@ -36,3 +36,36 @@ func (x *CaptureDeskViewApplicationLaunchConfiguration) WithRequiresSetUpModeCom
 	return x
 }
 
+// MainWindowFrame calls the underlying MainWindowFrame.
+func (x *CaptureDeskViewApplicationLaunchConfiguration) MainWindowFrame() corefoundation.CGRect {
+	return x.inner.MainWindowFrame()
+}
+
+// SetMainWindowFrame calls the underlying SetMainWindowFrame.
+func (x *CaptureDeskViewApplicationLaunchConfiguration) SetMainWindowFrame(mainWindowFrame corefoundation.CGRect) {
+	x.inner.SetMainWindowFrame(mainWindowFrame)
+}
+
+// RequiresSetUpModeCompletion calls the underlying RequiresSetUpModeCompletion.
+func (x *CaptureDeskViewApplicationLaunchConfiguration) RequiresSetUpModeCompletion() bool {
+	return x.inner.RequiresSetUpModeCompletion()
+}
+
+// SetRequiresSetUpModeCompletion calls the underlying SetRequiresSetUpModeCompletion.
+func (x *CaptureDeskViewApplicationLaunchConfiguration) SetRequiresSetUpModeCompletion(requiresSetUpModeCompletion bool) {
+	x.inner.SetRequiresSetUpModeCompletion(requiresSetUpModeCompletion)
+}
+
+// CaptureDeskViewApplicationLaunchConfigurationable is the interface implemented by [CaptureDeskViewApplicationLaunchConfiguration], for mocking and DI.
+type CaptureDeskViewApplicationLaunchConfigurationable interface {
+	Unwrap() *raw.AVCaptureDeskViewApplicationLaunchConfiguration
+	WithMainWindowFrame(mainWindowFrame corefoundation.CGRect) *CaptureDeskViewApplicationLaunchConfiguration
+	WithRequiresSetUpModeCompletion(requiresSetUpModeCompletion bool) *CaptureDeskViewApplicationLaunchConfiguration
+	MainWindowFrame() corefoundation.CGRect
+	SetMainWindowFrame(mainWindowFrame corefoundation.CGRect)
+	RequiresSetUpModeCompletion() bool
+	SetRequiresSetUpModeCompletion(requiresSetUpModeCompletion bool)
+}
+
+var _ CaptureDeskViewApplicationLaunchConfigurationable = (*CaptureDeskViewApplicationLaunchConfiguration)(nil)
+

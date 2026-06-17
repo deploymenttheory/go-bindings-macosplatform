@@ -6,6 +6,7 @@ package networkextension
 
 import (
 	"context"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
@@ -26,15 +27,60 @@ func NewNEFilterDataProvider() *NEFilterDataProvider {
 	return &NEFilterDataProvider{inner: raw.NEFilterDataProviderFromID(_id)}
 }
 
+// HandleNewFlow calls the underlying HandleNewFlow.
+func (x *NEFilterDataProvider) HandleNewFlow(flow *raw.NEFilterFlow) *NEFilterNewFlowVerdict {
+	_r := x.inner.HandleNewFlow(flow)
+	if _r == nil {
+		return nil
+	}
+	return &NEFilterNewFlowVerdict{inner: _r}
+}
+
+// HandleInboundDataFromFlowReadBytesStartOffsetReadBytes calls the underlying HandleInboundDataFromFlowReadBytesStartOffsetReadBytes.
+func (x *NEFilterDataProvider) HandleInboundDataFromFlowReadBytesStartOffsetReadBytes(flow *raw.NEFilterFlow, offset uint, readBytes *foundation.NSData) *NEFilterDataVerdict {
+	_r := x.inner.HandleInboundDataFromFlowReadBytesStartOffsetReadBytes(flow, offset, readBytes)
+	if _r == nil {
+		return nil
+	}
+	return &NEFilterDataVerdict{inner: _r}
+}
+
+// HandleOutboundDataFromFlowReadBytesStartOffsetReadBytes calls the underlying HandleOutboundDataFromFlowReadBytesStartOffsetReadBytes.
+func (x *NEFilterDataProvider) HandleOutboundDataFromFlowReadBytesStartOffsetReadBytes(flow *raw.NEFilterFlow, offset uint, readBytes *foundation.NSData) *NEFilterDataVerdict {
+	_r := x.inner.HandleOutboundDataFromFlowReadBytesStartOffsetReadBytes(flow, offset, readBytes)
+	if _r == nil {
+		return nil
+	}
+	return &NEFilterDataVerdict{inner: _r}
+}
+
+// HandleInboundDataCompleteForFlow calls the underlying HandleInboundDataCompleteForFlow.
+func (x *NEFilterDataProvider) HandleInboundDataCompleteForFlow(flow *raw.NEFilterFlow) *NEFilterDataVerdict {
+	_r := x.inner.HandleInboundDataCompleteForFlow(flow)
+	if _r == nil {
+		return nil
+	}
+	return &NEFilterDataVerdict{inner: _r}
+}
+
+// HandleOutboundDataCompleteForFlow calls the underlying HandleOutboundDataCompleteForFlow.
+func (x *NEFilterDataProvider) HandleOutboundDataCompleteForFlow(flow *raw.NEFilterFlow) *NEFilterDataVerdict {
+	_r := x.inner.HandleOutboundDataCompleteForFlow(flow)
+	if _r == nil {
+		return nil
+	}
+	return &NEFilterDataVerdict{inner: _r}
+}
+
 // ApplySettings blocks until the operation completes or ctx is cancelled.
 func (x *NEFilterDataProvider) ApplySettings(ctx context.Context, settings *raw.NEFilterSettings) error {
 	_ch := make(chan error, 1)
 	x.inner.ApplySettingsCompletionHandler(settings, func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -44,7 +90,32 @@ func (x *NEFilterDataProvider) ApplySettings(ctx context.Context, settings *raw.
 	}
 }
 
+// ResumeFlowWithVerdict calls the underlying ResumeFlowWithVerdict.
+func (x *NEFilterDataProvider) ResumeFlowWithVerdict(flow *raw.NEFilterFlow, verdict *raw.NEFilterVerdict) {
+	x.inner.ResumeFlowWithVerdict(flow, verdict)
+}
+
+// UpdateFlowUsingVerdictForDirection calls the underlying UpdateFlowUsingVerdictForDirection.
+func (x *NEFilterDataProvider) UpdateFlowUsingVerdictForDirection(flow *raw.NEFilterSocketFlow, verdict *raw.NEFilterDataVerdict, direction raw.NETrafficDirection) {
+	x.inner.UpdateFlowUsingVerdictForDirection(flow, verdict, direction)
+}
+
 func (x *NEFilterDataProvider) asNEFilterProvider() *raw.NEFilterProvider { return &x.inner.NEFilterProvider }
 
 func (x *NEFilterDataProvider) asNEProvider() *raw.NEProvider { return &x.inner.NEFilterProvider.NEProvider }
+
+// NEFilterDataProviderable is the interface implemented by [NEFilterDataProvider], for mocking and DI.
+type NEFilterDataProviderable interface {
+	Unwrap() *raw.NEFilterDataProvider
+	HandleNewFlow(flow *raw.NEFilterFlow) *NEFilterNewFlowVerdict
+	HandleInboundDataFromFlowReadBytesStartOffsetReadBytes(flow *raw.NEFilterFlow, offset uint, readBytes *foundation.NSData) *NEFilterDataVerdict
+	HandleOutboundDataFromFlowReadBytesStartOffsetReadBytes(flow *raw.NEFilterFlow, offset uint, readBytes *foundation.NSData) *NEFilterDataVerdict
+	HandleInboundDataCompleteForFlow(flow *raw.NEFilterFlow) *NEFilterDataVerdict
+	HandleOutboundDataCompleteForFlow(flow *raw.NEFilterFlow) *NEFilterDataVerdict
+	ApplySettings(ctx context.Context, settings *raw.NEFilterSettings) error
+	ResumeFlowWithVerdict(flow *raw.NEFilterFlow, verdict *raw.NEFilterVerdict)
+	UpdateFlowUsingVerdictForDirection(flow *raw.NEFilterSocketFlow, verdict *raw.NEFilterDataVerdict, direction raw.NETrafficDirection)
+}
+
+var _ NEFilterDataProviderable = (*NEFilterDataProvider)(nil)
 

@@ -23,3 +23,26 @@ func NewVertexBufferLayoutDescriptorArray() *VertexBufferLayoutDescriptorArray {
 	return &VertexBufferLayoutDescriptorArray{inner: raw.MTLVertexBufferLayoutDescriptorArrayFromID(_id)}
 }
 
+// ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
+func (x *VertexBufferLayoutDescriptorArray) ObjectAtIndexedSubscript(index uint) *VertexBufferLayoutDescriptor {
+	_r := x.inner.ObjectAtIndexedSubscript(index)
+	if _r == nil {
+		return nil
+	}
+	return &VertexBufferLayoutDescriptor{inner: _r}
+}
+
+// SetObjectAtIndexedSubscript calls the underlying SetObjectAtIndexedSubscript.
+func (x *VertexBufferLayoutDescriptorArray) SetObjectAtIndexedSubscript(bufferDesc *raw.MTLVertexBufferLayoutDescriptor, index uint) {
+	x.inner.SetObjectAtIndexedSubscript(bufferDesc, index)
+}
+
+// VertexBufferLayoutDescriptorArrayable is the interface implemented by [VertexBufferLayoutDescriptorArray], for mocking and DI.
+type VertexBufferLayoutDescriptorArrayable interface {
+	Unwrap() *raw.MTLVertexBufferLayoutDescriptorArray
+	ObjectAtIndexedSubscript(index uint) *VertexBufferLayoutDescriptor
+	SetObjectAtIndexedSubscript(bufferDesc *raw.MTLVertexBufferLayoutDescriptor, index uint)
+}
+
+var _ VertexBufferLayoutDescriptorArrayable = (*VertexBufferLayoutDescriptorArray)(nil)
+

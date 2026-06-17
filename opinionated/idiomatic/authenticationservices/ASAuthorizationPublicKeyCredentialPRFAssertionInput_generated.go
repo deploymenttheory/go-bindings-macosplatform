@@ -25,3 +25,26 @@ func NewAuthorizationPublicKeyCredentialPRFAssertionInputWithInputValuesPerCrede
 	return &AuthorizationPublicKeyCredentialPRFAssertionInput{inner: raw.ASAuthorizationPublicKeyCredentialPRFAssertionInputFromID(_id)}
 }
 
+// InputValues calls the underlying InputValues.
+func (x *AuthorizationPublicKeyCredentialPRFAssertionInput) InputValues() *AuthorizationPublicKeyCredentialPRFAssertionInputValues {
+	_r := x.inner.InputValues()
+	if _r == nil {
+		return nil
+	}
+	return &AuthorizationPublicKeyCredentialPRFAssertionInputValues{inner: _r}
+}
+
+// PerCredentialInputValues calls the underlying PerCredentialInputValues.
+func (x *AuthorizationPublicKeyCredentialPRFAssertionInput) PerCredentialInputValues() *foundation.NSDictionary[*foundation.NSData, *raw.ASAuthorizationPublicKeyCredentialPRFAssertionInputValues] {
+	return x.inner.PerCredentialInputValues()
+}
+
+// AuthorizationPublicKeyCredentialPRFAssertionInputable is the interface implemented by [AuthorizationPublicKeyCredentialPRFAssertionInput], for mocking and DI.
+type AuthorizationPublicKeyCredentialPRFAssertionInputable interface {
+	Unwrap() *raw.ASAuthorizationPublicKeyCredentialPRFAssertionInput
+	InputValues() *AuthorizationPublicKeyCredentialPRFAssertionInputValues
+	PerCredentialInputValues() *foundation.NSDictionary[*foundation.NSData, *raw.ASAuthorizationPublicKeyCredentialPRFAssertionInputValues]
+}
+
+var _ AuthorizationPublicKeyCredentialPRFAssertionInputable = (*AuthorizationPublicKeyCredentialPRFAssertionInput)(nil)
+

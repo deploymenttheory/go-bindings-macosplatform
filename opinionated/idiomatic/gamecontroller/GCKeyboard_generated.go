@@ -23,3 +23,20 @@ func NewKeyboard() *Keyboard {
 	return &Keyboard{inner: raw.GCKeyboardFromID(_id)}
 }
 
+// KeyboardInput calls the underlying KeyboardInput.
+func (x *Keyboard) KeyboardInput() *KeyboardInput {
+	_r := x.inner.KeyboardInput()
+	if _r == nil {
+		return nil
+	}
+	return &KeyboardInput{inner: _r}
+}
+
+// Keyboardable is the interface implemented by [Keyboard], for mocking and DI.
+type Keyboardable interface {
+	Unwrap() *raw.GCKeyboard
+	KeyboardInput() *KeyboardInput
+}
+
+var _ Keyboardable = (*Keyboard)(nil)
+

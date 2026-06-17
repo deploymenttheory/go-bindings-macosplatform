@@ -6,6 +6,7 @@ package usernotifications
 
 import (
 	"context"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/usernotifications"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
@@ -32,15 +33,69 @@ func (x *UserNotificationCenter) WithDelegate(delegate raw.UNUserNotificationCen
 	return x
 }
 
+// RequestAuthorizationWithOptionsCompletionHandler calls the underlying RequestAuthorizationWithOptionsCompletionHandler.
+func (x *UserNotificationCenter) RequestAuthorizationWithOptionsCompletionHandler(options raw.UNAuthorizationOptions, completionHandler func(bool, unsafe.Pointer)) {
+	x.inner.RequestAuthorizationWithOptionsCompletionHandler(options, completionHandler)
+}
+
+// SetNotificationCategories calls the underlying SetNotificationCategories.
+func (x *UserNotificationCenter) SetNotificationCategories(categories *foundation.NSSet[*raw.UNNotificationCategory]) {
+	x.inner.SetNotificationCategories(categories)
+}
+
+// GetNotificationCategories blocks until the operation completes or ctx is cancelled.
+func (x *UserNotificationCenter) GetNotificationCategories(ctx context.Context) (*foundation.NSSet[*raw.UNNotificationCategory], error) {
+	type _result struct {
+		val *foundation.NSSet[*raw.UNNotificationCategory]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.GetNotificationCategoriesWithCompletionHandler(func(_p0 *foundation.NSSet[*raw.UNNotificationCategory]) {
+		var _o _result
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSSet[*raw.UNNotificationCategory]
+		return _zero, ctx.Err()
+	}
+}
+
+// GetNotificationSettings blocks until the operation completes or ctx is cancelled.
+func (x *UserNotificationCenter) GetNotificationSettings(ctx context.Context) (*NotificationSettings, error) {
+	type _result struct {
+		val *NotificationSettings
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.GetNotificationSettingsWithCompletionHandler(func(_p0 *raw.UNNotificationSettings) {
+		var _o _result
+		if _p0 != nil {
+			_o.val = &NotificationSettings{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *NotificationSettings
+		return _zero, ctx.Err()
+	}
+}
+
 // AddNotificationRequest blocks until the operation completes or ctx is cancelled.
 func (x *UserNotificationCenter) AddNotificationRequest(ctx context.Context, request *raw.UNNotificationRequest) error {
 	_ch := make(chan error, 1)
 	x.inner.AddNotificationRequestWithCompletionHandler(request, func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -50,15 +105,77 @@ func (x *UserNotificationCenter) AddNotificationRequest(ctx context.Context, req
 	}
 }
 
+// GetPendingNotificationRequests blocks until the operation completes or ctx is cancelled.
+func (x *UserNotificationCenter) GetPendingNotificationRequests(ctx context.Context) (*foundation.NSArray[*raw.UNNotificationRequest], error) {
+	type _result struct {
+		val *foundation.NSArray[*raw.UNNotificationRequest]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.GetPendingNotificationRequestsWithCompletionHandler(func(_p0 *foundation.NSArray[*raw.UNNotificationRequest]) {
+		var _o _result
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[*raw.UNNotificationRequest]
+		return _zero, ctx.Err()
+	}
+}
+
+// RemovePendingNotificationRequestsWithIdentifiers calls the underlying RemovePendingNotificationRequestsWithIdentifiers.
+func (x *UserNotificationCenter) RemovePendingNotificationRequestsWithIdentifiers(identifiers *foundation.NSArray[*foundation.NSString]) {
+	x.inner.RemovePendingNotificationRequestsWithIdentifiers(identifiers)
+}
+
+// RemoveAllPendingNotificationRequests calls the underlying RemoveAllPendingNotificationRequests.
+func (x *UserNotificationCenter) RemoveAllPendingNotificationRequests() {
+	x.inner.RemoveAllPendingNotificationRequests()
+}
+
+// GetDeliveredNotifications blocks until the operation completes or ctx is cancelled.
+func (x *UserNotificationCenter) GetDeliveredNotifications(ctx context.Context) (*foundation.NSArray[*raw.UNNotification], error) {
+	type _result struct {
+		val *foundation.NSArray[*raw.UNNotification]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.GetDeliveredNotificationsWithCompletionHandler(func(_p0 *foundation.NSArray[*raw.UNNotification]) {
+		var _o _result
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[*raw.UNNotification]
+		return _zero, ctx.Err()
+	}
+}
+
+// RemoveDeliveredNotificationsWithIdentifiers calls the underlying RemoveDeliveredNotificationsWithIdentifiers.
+func (x *UserNotificationCenter) RemoveDeliveredNotificationsWithIdentifiers(identifiers *foundation.NSArray[*foundation.NSString]) {
+	x.inner.RemoveDeliveredNotificationsWithIdentifiers(identifiers)
+}
+
+// RemoveAllDeliveredNotifications calls the underlying RemoveAllDeliveredNotifications.
+func (x *UserNotificationCenter) RemoveAllDeliveredNotifications() {
+	x.inner.RemoveAllDeliveredNotifications()
+}
+
 // SetBadgeCount blocks until the operation completes or ctx is cancelled.
 func (x *UserNotificationCenter) SetBadgeCount(ctx context.Context, newBadgeCount int) error {
 	_ch := make(chan error, 1)
 	x.inner.SetBadgeCountWithCompletionHandler(newBadgeCount, func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -67,4 +184,42 @@ func (x *UserNotificationCenter) SetBadgeCount(ctx context.Context, newBadgeCoun
 		return ctx.Err()
 	}
 }
+
+// Delegate calls the underlying Delegate.
+func (x *UserNotificationCenter) Delegate() raw.UNUserNotificationCenterDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *UserNotificationCenter) SetDelegate(delegate raw.UNUserNotificationCenterDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// SupportsContentExtensions calls the underlying SupportsContentExtensions.
+func (x *UserNotificationCenter) SupportsContentExtensions() bool {
+	return x.inner.SupportsContentExtensions()
+}
+
+// UserNotificationCenterable is the interface implemented by [UserNotificationCenter], for mocking and DI.
+type UserNotificationCenterable interface {
+	Unwrap() *raw.UNUserNotificationCenter
+	WithDelegate(delegate raw.UNUserNotificationCenterDelegate) *UserNotificationCenter
+	RequestAuthorizationWithOptionsCompletionHandler(options raw.UNAuthorizationOptions, completionHandler func(bool, unsafe.Pointer))
+	SetNotificationCategories(categories *foundation.NSSet[*raw.UNNotificationCategory])
+	GetNotificationCategories(ctx context.Context) (*foundation.NSSet[*raw.UNNotificationCategory], error)
+	GetNotificationSettings(ctx context.Context) (*NotificationSettings, error)
+	AddNotificationRequest(ctx context.Context, request *raw.UNNotificationRequest) error
+	GetPendingNotificationRequests(ctx context.Context) (*foundation.NSArray[*raw.UNNotificationRequest], error)
+	RemovePendingNotificationRequestsWithIdentifiers(identifiers *foundation.NSArray[*foundation.NSString])
+	RemoveAllPendingNotificationRequests()
+	GetDeliveredNotifications(ctx context.Context) (*foundation.NSArray[*raw.UNNotification], error)
+	RemoveDeliveredNotificationsWithIdentifiers(identifiers *foundation.NSArray[*foundation.NSString])
+	RemoveAllDeliveredNotifications()
+	SetBadgeCount(ctx context.Context, newBadgeCount int) error
+	Delegate() raw.UNUserNotificationCenterDelegate
+	SetDelegate(delegate raw.UNUserNotificationCenterDelegate)
+	SupportsContentExtensions() bool
+}
+
+var _ UserNotificationCenterable = (*UserNotificationCenter)(nil)
 

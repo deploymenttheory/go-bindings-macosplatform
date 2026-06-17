@@ -24,3 +24,32 @@ func NewAssetWriterInputCaptionAdaptorWithAssetWriterInput(input *raw.AVAssetWri
 	return &AssetWriterInputCaptionAdaptor{inner: raw.AVAssetWriterInputCaptionAdaptorFromID(_id)}
 }
 
+// AppendCaption calls the underlying AppendCaption.
+func (x *AssetWriterInputCaptionAdaptor) AppendCaption(caption *raw.AVCaption) bool {
+	return x.inner.AppendCaption(caption)
+}
+
+// AppendCaptionGroup calls the underlying AppendCaptionGroup.
+func (x *AssetWriterInputCaptionAdaptor) AppendCaptionGroup(captionGroup *raw.AVCaptionGroup) bool {
+	return x.inner.AppendCaptionGroup(captionGroup)
+}
+
+// AssetWriterInput calls the underlying AssetWriterInput.
+func (x *AssetWriterInputCaptionAdaptor) AssetWriterInput() *AssetWriterInput {
+	_r := x.inner.AssetWriterInput()
+	if _r == nil {
+		return nil
+	}
+	return &AssetWriterInput{inner: _r}
+}
+
+// AssetWriterInputCaptionAdaptorable is the interface implemented by [AssetWriterInputCaptionAdaptor], for mocking and DI.
+type AssetWriterInputCaptionAdaptorable interface {
+	Unwrap() *raw.AVAssetWriterInputCaptionAdaptor
+	AppendCaption(caption *raw.AVCaption) bool
+	AppendCaptionGroup(captionGroup *raw.AVCaptionGroup) bool
+	AssetWriterInput() *AssetWriterInput
+}
+
+var _ AssetWriterInputCaptionAdaptorable = (*AssetWriterInputCaptionAdaptor)(nil)
+

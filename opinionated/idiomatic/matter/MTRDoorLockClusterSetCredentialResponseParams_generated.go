@@ -55,3 +55,62 @@ func (x *MTRDoorLockClusterSetCredentialResponseParams) WithTimedInvokeTimeoutMs
 	return x
 }
 
+// Status calls the underlying Status.
+func (x *MTRDoorLockClusterSetCredentialResponseParams) Status() *foundation.NSNumber {
+	return x.inner.Status()
+}
+
+// SetStatus calls the underlying SetStatus.
+func (x *MTRDoorLockClusterSetCredentialResponseParams) SetStatus(status *foundation.NSNumber) {
+	x.inner.SetStatus(status)
+}
+
+// UserIndex calls the underlying UserIndex.
+func (x *MTRDoorLockClusterSetCredentialResponseParams) UserIndex() *foundation.NSNumber {
+	return x.inner.UserIndex()
+}
+
+// SetUserIndex calls the underlying SetUserIndex.
+func (x *MTRDoorLockClusterSetCredentialResponseParams) SetUserIndex(userIndex *foundation.NSNumber) {
+	x.inner.SetUserIndex(userIndex)
+}
+
+// NextCredentialIndex calls the underlying NextCredentialIndex.
+func (x *MTRDoorLockClusterSetCredentialResponseParams) NextCredentialIndex() *foundation.NSNumber {
+	return x.inner.NextCredentialIndex()
+}
+
+// SetNextCredentialIndex calls the underlying SetNextCredentialIndex.
+func (x *MTRDoorLockClusterSetCredentialResponseParams) SetNextCredentialIndex(nextCredentialIndex *foundation.NSNumber) {
+	x.inner.SetNextCredentialIndex(nextCredentialIndex)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRDoorLockClusterSetCredentialResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRDoorLockClusterSetCredentialResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// MTRDoorLockClusterSetCredentialResponseParamsable is the interface implemented by [MTRDoorLockClusterSetCredentialResponseParams], for mocking and DI.
+type MTRDoorLockClusterSetCredentialResponseParamsable interface {
+	Unwrap() *raw.MTRDoorLockClusterSetCredentialResponseParams
+	WithStatus(status *foundation.NSNumber) *MTRDoorLockClusterSetCredentialResponseParams
+	WithUserIndex(userIndex *foundation.NSNumber) *MTRDoorLockClusterSetCredentialResponseParams
+	WithNextCredentialIndex(nextCredentialIndex *foundation.NSNumber) *MTRDoorLockClusterSetCredentialResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRDoorLockClusterSetCredentialResponseParams
+	Status() *foundation.NSNumber
+	SetStatus(status *foundation.NSNumber)
+	UserIndex() *foundation.NSNumber
+	SetUserIndex(userIndex *foundation.NSNumber)
+	NextCredentialIndex() *foundation.NSNumber
+	SetNextCredentialIndex(nextCredentialIndex *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+}
+
+var _ MTRDoorLockClusterSetCredentialResponseParamsable = (*MTRDoorLockClusterSetCredentialResponseParams)(nil)
+

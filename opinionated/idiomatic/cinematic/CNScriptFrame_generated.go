@@ -6,6 +6,8 @@ package cinematic
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cinematic"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,16 +25,64 @@ func NewScriptFrame() *ScriptFrame {
 	return &ScriptFrame{inner: raw.CNScriptFrameFromID(_id)}
 }
 
+// Time calls the underlying Time.
+func (x *ScriptFrame) Time() coremedia.CMTime {
+	return x.inner.Time()
+}
+
+// FocusDisparity calls the underlying FocusDisparity.
+func (x *ScriptFrame) FocusDisparity() float32 {
+	return x.inner.FocusDisparity()
+}
+
+// FocusDetection calls the underlying FocusDetection.
+func (x *ScriptFrame) FocusDetection() *Detection {
+	_r := x.inner.FocusDetection()
+	if _r == nil {
+		return nil
+	}
+	return &Detection{inner: _r}
+}
+
 // AllDetections returns the collection as a Go slice.
 func (x *ScriptFrame) AllDetections() []*raw.CNDetection {
 	arr := x.inner.AllDetections()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.CNDetection, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CNDetection {
+		return raw.CNDetectionFromID(purego.Retain(_id))
+	})
 }
+
+// DetectionForID calls the underlying DetectionForID.
+func (x *ScriptFrame) DetectionForID(detectionID int64) *Detection {
+	_r := x.inner.DetectionForID(detectionID)
+	if _r == nil {
+		return nil
+	}
+	return &Detection{inner: _r}
+}
+
+// BestDetectionForGroupID calls the underlying BestDetectionForGroupID.
+func (x *ScriptFrame) BestDetectionForGroupID(detectionGroupID int64) *Detection {
+	_r := x.inner.BestDetectionForGroupID(detectionGroupID)
+	if _r == nil {
+		return nil
+	}
+	return &Detection{inner: _r}
+}
+
+// ScriptFrameable is the interface implemented by [ScriptFrame], for mocking and DI.
+type ScriptFrameable interface {
+	Unwrap() *raw.CNScriptFrame
+	Time() coremedia.CMTime
+	FocusDisparity() float32
+	FocusDetection() *Detection
+	AllDetections() []*raw.CNDetection
+	DetectionForID(detectionID int64) *Detection
+	BestDetectionForGroupID(detectionGroupID int64) *Detection
+}
+
+var _ ScriptFrameable = (*ScriptFrame)(nil)
 

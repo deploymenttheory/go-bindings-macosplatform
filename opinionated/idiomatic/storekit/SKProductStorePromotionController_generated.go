@@ -27,15 +27,20 @@ func NewProductStorePromotionController() *ProductStorePromotionController {
 	return &ProductStorePromotionController{inner: raw.SKProductStorePromotionControllerFromID(_id)}
 }
 
+// FetchStorePromotionVisibilityForProductCompletionHandler calls the underlying FetchStorePromotionVisibilityForProductCompletionHandler.
+func (x *ProductStorePromotionController) FetchStorePromotionVisibilityForProductCompletionHandler(product *raw.SKProduct, completionHandler func(raw.SKProductStorePromotionVisibility, unsafe.Pointer)) {
+	x.inner.FetchStorePromotionVisibilityForProductCompletionHandler(product, completionHandler)
+}
+
 // UpdateStorePromotionVisibilityForProduct blocks until the operation completes or ctx is cancelled.
 func (x *ProductStorePromotionController) UpdateStorePromotionVisibilityForProduct(ctx context.Context, promotionVisibility raw.SKProductStorePromotionVisibility, product *raw.SKProduct) error {
 	_ch := make(chan error, 1)
 	x.inner.UpdateStorePromotionVisibilityForProductCompletionHandler(promotionVisibility, product, func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -45,15 +50,39 @@ func (x *ProductStorePromotionController) UpdateStorePromotionVisibilityForProdu
 	}
 }
 
+// FetchStorePromotionOrder blocks until the operation completes or ctx is cancelled.
+func (x *ProductStorePromotionController) FetchStorePromotionOrder(ctx context.Context) (*foundation.NSArray[*raw.SKProduct], error) {
+	type _result struct {
+		val *foundation.NSArray[*raw.SKProduct]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.FetchStorePromotionOrderWithCompletionHandler(func(_p0 *foundation.NSArray[*raw.SKProduct], _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[*raw.SKProduct]
+		return _zero, ctx.Err()
+	}
+}
+
 // UpdateStorePromotionOrder blocks until the operation completes or ctx is cancelled.
 func (x *ProductStorePromotionController) UpdateStorePromotionOrder(ctx context.Context, promotionOrder *foundation.NSArray[*raw.SKProduct]) error {
 	_ch := make(chan error, 1)
 	x.inner.UpdateStorePromotionOrderCompletionHandler(promotionOrder, func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -62,4 +91,15 @@ func (x *ProductStorePromotionController) UpdateStorePromotionOrder(ctx context.
 		return ctx.Err()
 	}
 }
+
+// ProductStorePromotionControllerable is the interface implemented by [ProductStorePromotionController], for mocking and DI.
+type ProductStorePromotionControllerable interface {
+	Unwrap() *raw.SKProductStorePromotionController
+	FetchStorePromotionVisibilityForProductCompletionHandler(product *raw.SKProduct, completionHandler func(raw.SKProductStorePromotionVisibility, unsafe.Pointer))
+	UpdateStorePromotionVisibilityForProduct(ctx context.Context, promotionVisibility raw.SKProductStorePromotionVisibility, product *raw.SKProduct) error
+	FetchStorePromotionOrder(ctx context.Context) (*foundation.NSArray[*raw.SKProduct], error)
+	UpdateStorePromotionOrder(ctx context.Context, promotionOrder *foundation.NSArray[*raw.SKProduct]) error
+}
+
+var _ ProductStorePromotionControllerable = (*ProductStorePromotionController)(nil)
 

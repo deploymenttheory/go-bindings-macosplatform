@@ -8,6 +8,7 @@ import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -150,16 +151,295 @@ func (x *PlayerInterstitialEvent) WithPlannedDuration(plannedDuration coremedia.
 	return x
 }
 
+// PrimaryItem calls the underlying PrimaryItem.
+func (x *PlayerInterstitialEvent) PrimaryItem() *PlayerItem {
+	_r := x.inner.PrimaryItem()
+	if _r == nil {
+		return nil
+	}
+	return &PlayerItem{inner: _r}
+}
+
+// Identifier calls the underlying Identifier.
+func (x *PlayerInterstitialEvent) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Time calls the underlying Time.
+func (x *PlayerInterstitialEvent) Time() coremedia.CMTime {
+	return x.inner.Time()
+}
+
+// Date calls the underlying Date.
+func (x *PlayerInterstitialEvent) Date() *foundation.NSDate {
+	return x.inner.Date()
+}
+
 // TemplateItems returns the collection as a Go slice.
 func (x *PlayerInterstitialEvent) TemplateItems() []*raw.AVPlayerItem {
 	arr := x.inner.TemplateItems()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AVPlayerItem, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVPlayerItem {
+		return raw.AVPlayerItemFromID(purego.Retain(_id))
+	})
 }
+
+// Restrictions calls the underlying Restrictions.
+func (x *PlayerInterstitialEvent) Restrictions() raw.AVPlayerInterstitialEventRestrictions {
+	return x.inner.Restrictions()
+}
+
+// ResumptionOffset calls the underlying ResumptionOffset.
+func (x *PlayerInterstitialEvent) ResumptionOffset() coremedia.CMTime {
+	return x.inner.ResumptionOffset()
+}
+
+// PlayoutLimit calls the underlying PlayoutLimit.
+func (x *PlayerInterstitialEvent) PlayoutLimit() coremedia.CMTime {
+	return x.inner.PlayoutLimit()
+}
+
+// AlignsStartWithPrimarySegmentBoundary calls the underlying AlignsStartWithPrimarySegmentBoundary.
+func (x *PlayerInterstitialEvent) AlignsStartWithPrimarySegmentBoundary() bool {
+	return x.inner.AlignsStartWithPrimarySegmentBoundary()
+}
+
+// AlignsResumptionWithPrimarySegmentBoundary calls the underlying AlignsResumptionWithPrimarySegmentBoundary.
+func (x *PlayerInterstitialEvent) AlignsResumptionWithPrimarySegmentBoundary() bool {
+	return x.inner.AlignsResumptionWithPrimarySegmentBoundary()
+}
+
+// Cue calls the underlying Cue.
+func (x *PlayerInterstitialEvent) Cue() string {
+	_r := x.inner.Cue()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// WillPlayOnce calls the underlying WillPlayOnce.
+func (x *PlayerInterstitialEvent) WillPlayOnce() bool {
+	return x.inner.WillPlayOnce()
+}
+
+// UserDefinedAttributes calls the underlying UserDefinedAttributes.
+func (x *PlayerInterstitialEvent) UserDefinedAttributes() *foundation.NSDictionary[objc.ID, objc.ID] {
+	return x.inner.UserDefinedAttributes()
+}
+
+// AssetListResponse calls the underlying AssetListResponse.
+func (x *PlayerInterstitialEvent) AssetListResponse() *foundation.NSDictionary[objc.ID, objc.ID] {
+	return x.inner.AssetListResponse()
+}
+
+// ScheduleIdentifier calls the underlying ScheduleIdentifier.
+func (x *PlayerInterstitialEvent) ScheduleIdentifier() string {
+	_r := x.inner.ScheduleIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// TimelineOccupancy calls the underlying TimelineOccupancy.
+func (x *PlayerInterstitialEvent) TimelineOccupancy() raw.AVPlayerInterstitialEventTimelineOccupancy {
+	return x.inner.TimelineOccupancy()
+}
+
+// SupplementsPrimaryContent calls the underlying SupplementsPrimaryContent.
+func (x *PlayerInterstitialEvent) SupplementsPrimaryContent() bool {
+	return x.inner.SupplementsPrimaryContent()
+}
+
+// ContentMayVary calls the underlying ContentMayVary.
+func (x *PlayerInterstitialEvent) ContentMayVary() bool {
+	return x.inner.ContentMayVary()
+}
+
+// SkipControlTimeRange calls the underlying SkipControlTimeRange.
+func (x *PlayerInterstitialEvent) SkipControlTimeRange() coremedia.CMTimeRange {
+	return x.inner.SkipControlTimeRange()
+}
+
+// SkipControlLocalizedLabelBundleKey calls the underlying SkipControlLocalizedLabelBundleKey.
+func (x *PlayerInterstitialEvent) SkipControlLocalizedLabelBundleKey() string {
+	_r := x.inner.SkipControlLocalizedLabelBundleKey()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetPrimaryItem calls the underlying SetPrimaryItem.
+func (x *PlayerInterstitialEvent) SetPrimaryItem(primaryItem *raw.AVPlayerItem) {
+	x.inner.SetPrimaryItem(primaryItem)
+}
+
+// SetIdentifier calls the underlying SetIdentifier.
+func (x *PlayerInterstitialEvent) SetIdentifier(identifier string) {
+	x.inner.SetIdentifier(foundation.NSStringStringWithUTF8String(identifier))
+}
+
+// SetTime calls the underlying SetTime.
+func (x *PlayerInterstitialEvent) SetTime(time_ coremedia.CMTime) {
+	x.inner.SetTime(time_)
+}
+
+// SetDate calls the underlying SetDate.
+func (x *PlayerInterstitialEvent) SetDate(date *foundation.NSDate) {
+	x.inner.SetDate(date)
+}
+
+// SetTemplateItems calls the underlying SetTemplateItems.
+func (x *PlayerInterstitialEvent) SetTemplateItems(templateItems *foundation.NSArray[*raw.AVPlayerItem]) {
+	x.inner.SetTemplateItems(templateItems)
+}
+
+// SetRestrictions calls the underlying SetRestrictions.
+func (x *PlayerInterstitialEvent) SetRestrictions(restrictions raw.AVPlayerInterstitialEventRestrictions) {
+	x.inner.SetRestrictions(restrictions)
+}
+
+// SetResumptionOffset calls the underlying SetResumptionOffset.
+func (x *PlayerInterstitialEvent) SetResumptionOffset(resumptionOffset coremedia.CMTime) {
+	x.inner.SetResumptionOffset(resumptionOffset)
+}
+
+// SetPlayoutLimit calls the underlying SetPlayoutLimit.
+func (x *PlayerInterstitialEvent) SetPlayoutLimit(playoutLimit coremedia.CMTime) {
+	x.inner.SetPlayoutLimit(playoutLimit)
+}
+
+// SetAlignsStartWithPrimarySegmentBoundary calls the underlying SetAlignsStartWithPrimarySegmentBoundary.
+func (x *PlayerInterstitialEvent) SetAlignsStartWithPrimarySegmentBoundary(alignsStartWithPrimarySegmentBoundary bool) {
+	x.inner.SetAlignsStartWithPrimarySegmentBoundary(alignsStartWithPrimarySegmentBoundary)
+}
+
+// SetAlignsResumptionWithPrimarySegmentBoundary calls the underlying SetAlignsResumptionWithPrimarySegmentBoundary.
+func (x *PlayerInterstitialEvent) SetAlignsResumptionWithPrimarySegmentBoundary(alignsResumptionWithPrimarySegmentBoundary bool) {
+	x.inner.SetAlignsResumptionWithPrimarySegmentBoundary(alignsResumptionWithPrimarySegmentBoundary)
+}
+
+// SetCue calls the underlying SetCue.
+func (x *PlayerInterstitialEvent) SetCue(cue *foundation.NSString) {
+	x.inner.SetCue(cue)
+}
+
+// SetWillPlayOnce calls the underlying SetWillPlayOnce.
+func (x *PlayerInterstitialEvent) SetWillPlayOnce(willPlayOnce bool) {
+	x.inner.SetWillPlayOnce(willPlayOnce)
+}
+
+// SetUserDefinedAttributes calls the underlying SetUserDefinedAttributes.
+func (x *PlayerInterstitialEvent) SetUserDefinedAttributes(userDefinedAttributes *foundation.NSDictionary[objc.ID, objc.ID]) {
+	x.inner.SetUserDefinedAttributes(userDefinedAttributes)
+}
+
+// SetTimelineOccupancy calls the underlying SetTimelineOccupancy.
+func (x *PlayerInterstitialEvent) SetTimelineOccupancy(timelineOccupancy raw.AVPlayerInterstitialEventTimelineOccupancy) {
+	x.inner.SetTimelineOccupancy(timelineOccupancy)
+}
+
+// SetSupplementsPrimaryContent calls the underlying SetSupplementsPrimaryContent.
+func (x *PlayerInterstitialEvent) SetSupplementsPrimaryContent(supplementsPrimaryContent bool) {
+	x.inner.SetSupplementsPrimaryContent(supplementsPrimaryContent)
+}
+
+// SetContentMayVary calls the underlying SetContentMayVary.
+func (x *PlayerInterstitialEvent) SetContentMayVary(contentMayVary bool) {
+	x.inner.SetContentMayVary(contentMayVary)
+}
+
+// PlannedDuration calls the underlying PlannedDuration.
+func (x *PlayerInterstitialEvent) PlannedDuration() coremedia.CMTime {
+	return x.inner.PlannedDuration()
+}
+
+// SetPlannedDuration calls the underlying SetPlannedDuration.
+func (x *PlayerInterstitialEvent) SetPlannedDuration(plannedDuration coremedia.CMTime) {
+	x.inner.SetPlannedDuration(plannedDuration)
+}
+
+// SetSkipControlTimeRange calls the underlying SetSkipControlTimeRange.
+func (x *PlayerInterstitialEvent) SetSkipControlTimeRange(skipControlTimeRange coremedia.CMTimeRange) {
+	x.inner.SetSkipControlTimeRange(skipControlTimeRange)
+}
+
+// SetSkipControlLocalizedLabelBundleKey calls the underlying SetSkipControlLocalizedLabelBundleKey.
+func (x *PlayerInterstitialEvent) SetSkipControlLocalizedLabelBundleKey(skipControlLocalizedLabelBundleKey string) {
+	x.inner.SetSkipControlLocalizedLabelBundleKey(foundation.NSStringStringWithUTF8String(skipControlLocalizedLabelBundleKey))
+}
+
+// PlayerInterstitialEventable is the interface implemented by [PlayerInterstitialEvent], for mocking and DI.
+type PlayerInterstitialEventable interface {
+	Unwrap() *raw.AVPlayerInterstitialEvent
+	WithPrimaryItem(primaryItem *raw.AVPlayerItem) *PlayerInterstitialEvent
+	WithIdentifier(identifier string) *PlayerInterstitialEvent
+	WithTime(time_ coremedia.CMTime) *PlayerInterstitialEvent
+	WithDate(date *foundation.NSDate) *PlayerInterstitialEvent
+	WithTemplateItems(items ...*raw.AVPlayerItem) *PlayerInterstitialEvent
+	WithRestrictions(restrictions raw.AVPlayerInterstitialEventRestrictions) *PlayerInterstitialEvent
+	WithResumptionOffset(resumptionOffset coremedia.CMTime) *PlayerInterstitialEvent
+	WithPlayoutLimit(playoutLimit coremedia.CMTime) *PlayerInterstitialEvent
+	WithAlignsStartWithPrimarySegmentBoundary(alignsStartWithPrimarySegmentBoundary bool) *PlayerInterstitialEvent
+	WithAlignsResumptionWithPrimarySegmentBoundary(alignsResumptionWithPrimarySegmentBoundary bool) *PlayerInterstitialEvent
+	WithCue(cue *foundation.NSString) *PlayerInterstitialEvent
+	WithWillPlayOnce(willPlayOnce bool) *PlayerInterstitialEvent
+	WithUserDefinedAttributes(userDefinedAttributes *foundation.NSDictionary[objc.ID, objc.ID]) *PlayerInterstitialEvent
+	WithTimelineOccupancy(timelineOccupancy raw.AVPlayerInterstitialEventTimelineOccupancy) *PlayerInterstitialEvent
+	WithSupplementsPrimaryContent(supplementsPrimaryContent bool) *PlayerInterstitialEvent
+	WithContentMayVary(contentMayVary bool) *PlayerInterstitialEvent
+	WithSkipControlTimeRange(skipControlTimeRange coremedia.CMTimeRange) *PlayerInterstitialEvent
+	WithSkipControlLocalizedLabelBundleKey(skipControlLocalizedLabelBundleKey string) *PlayerInterstitialEvent
+	WithPlannedDuration(plannedDuration coremedia.CMTime) *PlayerInterstitialEvent
+	PrimaryItem() *PlayerItem
+	Identifier() string
+	Time() coremedia.CMTime
+	Date() *foundation.NSDate
+	TemplateItems() []*raw.AVPlayerItem
+	Restrictions() raw.AVPlayerInterstitialEventRestrictions
+	ResumptionOffset() coremedia.CMTime
+	PlayoutLimit() coremedia.CMTime
+	AlignsStartWithPrimarySegmentBoundary() bool
+	AlignsResumptionWithPrimarySegmentBoundary() bool
+	Cue() string
+	WillPlayOnce() bool
+	UserDefinedAttributes() *foundation.NSDictionary[objc.ID, objc.ID]
+	AssetListResponse() *foundation.NSDictionary[objc.ID, objc.ID]
+	ScheduleIdentifier() string
+	TimelineOccupancy() raw.AVPlayerInterstitialEventTimelineOccupancy
+	SupplementsPrimaryContent() bool
+	ContentMayVary() bool
+	SkipControlTimeRange() coremedia.CMTimeRange
+	SkipControlLocalizedLabelBundleKey() string
+	SetPrimaryItem(primaryItem *raw.AVPlayerItem)
+	SetIdentifier(identifier string)
+	SetTime(time_ coremedia.CMTime)
+	SetDate(date *foundation.NSDate)
+	SetTemplateItems(templateItems *foundation.NSArray[*raw.AVPlayerItem])
+	SetRestrictions(restrictions raw.AVPlayerInterstitialEventRestrictions)
+	SetResumptionOffset(resumptionOffset coremedia.CMTime)
+	SetPlayoutLimit(playoutLimit coremedia.CMTime)
+	SetAlignsStartWithPrimarySegmentBoundary(alignsStartWithPrimarySegmentBoundary bool)
+	SetAlignsResumptionWithPrimarySegmentBoundary(alignsResumptionWithPrimarySegmentBoundary bool)
+	SetCue(cue *foundation.NSString)
+	SetWillPlayOnce(willPlayOnce bool)
+	SetUserDefinedAttributes(userDefinedAttributes *foundation.NSDictionary[objc.ID, objc.ID])
+	SetTimelineOccupancy(timelineOccupancy raw.AVPlayerInterstitialEventTimelineOccupancy)
+	SetSupplementsPrimaryContent(supplementsPrimaryContent bool)
+	SetContentMayVary(contentMayVary bool)
+	PlannedDuration() coremedia.CMTime
+	SetPlannedDuration(plannedDuration coremedia.CMTime)
+	SetSkipControlTimeRange(skipControlTimeRange coremedia.CMTimeRange)
+	SetSkipControlLocalizedLabelBundleKey(skipControlLocalizedLabelBundleKey string)
+}
+
+var _ PlayerInterstitialEventable = (*PlayerInterstitialEvent)(nil)
 

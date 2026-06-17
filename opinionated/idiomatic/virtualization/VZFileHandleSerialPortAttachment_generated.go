@@ -25,5 +25,24 @@ func NewFileHandleSerialPortAttachmentWithFileHandleForReadingFileHandleForWriti
 	return &FileHandleSerialPortAttachment{inner: raw.VZFileHandleSerialPortAttachmentFromID(_id)}
 }
 
+// FileHandleForReading calls the underlying FileHandleForReading.
+func (x *FileHandleSerialPortAttachment) FileHandleForReading() *foundation.NSFileHandle {
+	return x.inner.FileHandleForReading()
+}
+
+// FileHandleForWriting calls the underlying FileHandleForWriting.
+func (x *FileHandleSerialPortAttachment) FileHandleForWriting() *foundation.NSFileHandle {
+	return x.inner.FileHandleForWriting()
+}
+
 func (x *FileHandleSerialPortAttachment) asSerialPortAttachment() *raw.VZSerialPortAttachment { return &x.inner.VZSerialPortAttachment }
+
+// FileHandleSerialPortAttachmentable is the interface implemented by [FileHandleSerialPortAttachment], for mocking and DI.
+type FileHandleSerialPortAttachmentable interface {
+	Unwrap() *raw.VZFileHandleSerialPortAttachment
+	FileHandleForReading() *foundation.NSFileHandle
+	FileHandleForWriting() *foundation.NSFileHandle
+}
+
+var _ FileHandleSerialPortAttachmentable = (*FileHandleSerialPortAttachment)(nil)
 

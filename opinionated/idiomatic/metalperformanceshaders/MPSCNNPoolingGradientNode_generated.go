@@ -25,7 +25,38 @@ func NewCNNPoolingGradientNodeWithSourceGradientSourceImageGradientStateKernelWi
 	return &CNNPoolingGradientNode{inner: raw.MPSCNNPoolingGradientNodeFromID(_id)}
 }
 
+// KernelWidth calls the underlying KernelWidth.
+func (x *CNNPoolingGradientNode) KernelWidth() uint {
+	return x.inner.KernelWidth()
+}
+
+// KernelHeight calls the underlying KernelHeight.
+func (x *CNNPoolingGradientNode) KernelHeight() uint {
+	return x.inner.KernelHeight()
+}
+
+// StrideInPixelsX calls the underlying StrideInPixelsX.
+func (x *CNNPoolingGradientNode) StrideInPixelsX() uint {
+	return x.inner.StrideInPixelsX()
+}
+
+// StrideInPixelsY calls the underlying StrideInPixelsY.
+func (x *CNNPoolingGradientNode) StrideInPixelsY() uint {
+	return x.inner.StrideInPixelsY()
+}
+
 func (x *CNNPoolingGradientNode) asNNGradientFilterNode() *mpsneuralnetwork.MPSNNGradientFilterNode { return &x.inner.MPSNNGradientFilterNode }
 
 func (x *CNNPoolingGradientNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNGradientFilterNode.MPSNNFilterNode }
+
+// CNNPoolingGradientNodeable is the interface implemented by [CNNPoolingGradientNode], for mocking and DI.
+type CNNPoolingGradientNodeable interface {
+	Unwrap() *raw.MPSCNNPoolingGradientNode
+	KernelWidth() uint
+	KernelHeight() uint
+	StrideInPixelsX() uint
+	StrideInPixelsY() uint
+}
+
+var _ CNNPoolingGradientNodeable = (*CNNPoolingGradientNode)(nil)
 

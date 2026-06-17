@@ -37,3 +37,10 @@ func (x *ImageLanczosScale) asImageScale() *raw.MPSImageScale { return &x.inner.
 
 func (x *ImageLanczosScale) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.inner.MPSImageScale.MPSUnaryImageKernel }
 
+// ImageLanczosScaleable is the interface implemented by [ImageLanczosScale], for mocking and DI.
+type ImageLanczosScaleable interface {
+	Unwrap() *raw.MPSImageLanczosScale
+}
+
+var _ ImageLanczosScaleable = (*ImageLanczosScale)(nil)
+

@@ -38,3 +38,52 @@ func NewNoiseMapWithNoiseSizeOriginSampleCountSeamless(noise *raw.GKNoise, size 
 	return &NoiseMap{inner: raw.GKNoiseMapFromID(_id)}
 }
 
+// ValueAtPosition calls the underlying ValueAtPosition.
+func (x *NoiseMap) ValueAtPosition(position unsafe.Pointer) float32 {
+	return x.inner.ValueAtPosition(position)
+}
+
+// InterpolatedValueAtPosition calls the underlying InterpolatedValueAtPosition.
+func (x *NoiseMap) InterpolatedValueAtPosition(position unsafe.Pointer) float32 {
+	return x.inner.InterpolatedValueAtPosition(position)
+}
+
+// SetValueAtPosition calls the underlying SetValueAtPosition.
+func (x *NoiseMap) SetValueAtPosition(value float32, position unsafe.Pointer) {
+	x.inner.SetValueAtPosition(value, position)
+}
+
+// Size calls the underlying Size.
+func (x *NoiseMap) Size() unsafe.Pointer {
+	return x.inner.Size()
+}
+
+// Origin calls the underlying Origin.
+func (x *NoiseMap) Origin() unsafe.Pointer {
+	return x.inner.Origin()
+}
+
+// SampleCount calls the underlying SampleCount.
+func (x *NoiseMap) SampleCount() unsafe.Pointer {
+	return x.inner.SampleCount()
+}
+
+// IsSeamless calls the underlying IsSeamless.
+func (x *NoiseMap) IsSeamless() bool {
+	return x.inner.IsSeamless()
+}
+
+// NoiseMapable is the interface implemented by [NoiseMap], for mocking and DI.
+type NoiseMapable interface {
+	Unwrap() *raw.GKNoiseMap
+	ValueAtPosition(position unsafe.Pointer) float32
+	InterpolatedValueAtPosition(position unsafe.Pointer) float32
+	SetValueAtPosition(value float32, position unsafe.Pointer)
+	Size() unsafe.Pointer
+	Origin() unsafe.Pointer
+	SampleCount() unsafe.Pointer
+	IsSeamless() bool
+}
+
+var _ NoiseMapable = (*NoiseMap)(nil)
+

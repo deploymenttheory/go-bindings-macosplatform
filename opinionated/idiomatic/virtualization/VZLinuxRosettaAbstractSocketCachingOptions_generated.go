@@ -31,5 +31,22 @@ func NewLinuxRosettaAbstractSocketCachingOptionsWithNameError(name string) (*Lin
 	return &LinuxRosettaAbstractSocketCachingOptions{inner: raw.VZLinuxRosettaAbstractSocketCachingOptionsFromID(_id)}, nil
 }
 
+// Name calls the underlying Name.
+func (x *LinuxRosettaAbstractSocketCachingOptions) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 func (x *LinuxRosettaAbstractSocketCachingOptions) asLinuxRosettaCachingOptions() *raw.VZLinuxRosettaCachingOptions { return &x.inner.VZLinuxRosettaCachingOptions }
+
+// LinuxRosettaAbstractSocketCachingOptionsable is the interface implemented by [LinuxRosettaAbstractSocketCachingOptions], for mocking and DI.
+type LinuxRosettaAbstractSocketCachingOptionsable interface {
+	Unwrap() *raw.VZLinuxRosettaAbstractSocketCachingOptions
+	Name() string
+}
+
+var _ LinuxRosettaAbstractSocketCachingOptionsable = (*LinuxRosettaAbstractSocketCachingOptions)(nil)
 

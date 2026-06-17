@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -187,4 +188,451 @@ func (x *MenuItem) WithBadge(badge *raw.NSMenuItemBadge) *MenuItem {
 	x.inner.SetBadge(badge)
 	return x
 }
+
+// Menu calls the underlying Menu.
+func (x *MenuItem) Menu() *Menu {
+	_r := x.inner.Menu()
+	if _r == nil {
+		return nil
+	}
+	return &Menu{inner: _r}
+}
+
+// SetMenu calls the underlying SetMenu.
+func (x *MenuItem) SetMenu(menu *raw.NSMenu) {
+	x.inner.SetMenu(menu)
+}
+
+// HasSubmenu calls the underlying HasSubmenu.
+func (x *MenuItem) HasSubmenu() bool {
+	return x.inner.HasSubmenu()
+}
+
+// Submenu calls the underlying Submenu.
+func (x *MenuItem) Submenu() *Menu {
+	_r := x.inner.Submenu()
+	if _r == nil {
+		return nil
+	}
+	return &Menu{inner: _r}
+}
+
+// SetSubmenu calls the underlying SetSubmenu.
+func (x *MenuItem) SetSubmenu(submenu *raw.NSMenu) {
+	x.inner.SetSubmenu(submenu)
+}
+
+// ParentItem calls the underlying ParentItem.
+func (x *MenuItem) ParentItem() *MenuItem {
+	_r := x.inner.ParentItem()
+	if _r == nil {
+		return nil
+	}
+	return &MenuItem{inner: _r}
+}
+
+// Title calls the underlying Title.
+func (x *MenuItem) Title() string {
+	_r := x.inner.Title()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetTitle calls the underlying SetTitle.
+func (x *MenuItem) SetTitle(title string) {
+	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+}
+
+// AttributedTitle calls the underlying AttributedTitle.
+func (x *MenuItem) AttributedTitle() *foundation.NSAttributedString {
+	return x.inner.AttributedTitle()
+}
+
+// SetAttributedTitle calls the underlying SetAttributedTitle.
+func (x *MenuItem) SetAttributedTitle(attributedTitle *foundation.NSAttributedString) {
+	x.inner.SetAttributedTitle(attributedTitle)
+}
+
+// Subtitle calls the underlying Subtitle.
+func (x *MenuItem) Subtitle() string {
+	_r := x.inner.Subtitle()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetSubtitle calls the underlying SetSubtitle.
+func (x *MenuItem) SetSubtitle(subtitle string) {
+	x.inner.SetSubtitle(foundation.NSStringStringWithUTF8String(subtitle))
+}
+
+// IsSeparatorItem calls the underlying IsSeparatorItem.
+func (x *MenuItem) IsSeparatorItem() bool {
+	return x.inner.IsSeparatorItem()
+}
+
+// IsSectionHeader calls the underlying IsSectionHeader.
+func (x *MenuItem) IsSectionHeader() bool {
+	return x.inner.IsSectionHeader()
+}
+
+// KeyEquivalent calls the underlying KeyEquivalent.
+func (x *MenuItem) KeyEquivalent() string {
+	_r := x.inner.KeyEquivalent()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// KeyEquivalentModifierMask calls the underlying KeyEquivalentModifierMask.
+func (x *MenuItem) KeyEquivalentModifierMask() raw.NSEventModifierFlags {
+	return x.inner.KeyEquivalentModifierMask()
+}
+
+// SetKeyEquivalentModifierMask calls the underlying SetKeyEquivalentModifierMask.
+func (x *MenuItem) SetKeyEquivalentModifierMask(keyEquivalentModifierMask raw.NSEventModifierFlags) {
+	x.inner.SetKeyEquivalentModifierMask(keyEquivalentModifierMask)
+}
+
+// UserKeyEquivalent calls the underlying UserKeyEquivalent.
+func (x *MenuItem) UserKeyEquivalent() string {
+	_r := x.inner.UserKeyEquivalent()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// AllowsKeyEquivalentWhenHidden calls the underlying AllowsKeyEquivalentWhenHidden.
+func (x *MenuItem) AllowsKeyEquivalentWhenHidden() bool {
+	return x.inner.AllowsKeyEquivalentWhenHidden()
+}
+
+// SetAllowsKeyEquivalentWhenHidden calls the underlying SetAllowsKeyEquivalentWhenHidden.
+func (x *MenuItem) SetAllowsKeyEquivalentWhenHidden(allowsKeyEquivalentWhenHidden bool) {
+	x.inner.SetAllowsKeyEquivalentWhenHidden(allowsKeyEquivalentWhenHidden)
+}
+
+// AllowsAutomaticKeyEquivalentLocalization calls the underlying AllowsAutomaticKeyEquivalentLocalization.
+func (x *MenuItem) AllowsAutomaticKeyEquivalentLocalization() bool {
+	return x.inner.AllowsAutomaticKeyEquivalentLocalization()
+}
+
+// SetAllowsAutomaticKeyEquivalentLocalization calls the underlying SetAllowsAutomaticKeyEquivalentLocalization.
+func (x *MenuItem) SetAllowsAutomaticKeyEquivalentLocalization(allowsAutomaticKeyEquivalentLocalization bool) {
+	x.inner.SetAllowsAutomaticKeyEquivalentLocalization(allowsAutomaticKeyEquivalentLocalization)
+}
+
+// AllowsAutomaticKeyEquivalentMirroring calls the underlying AllowsAutomaticKeyEquivalentMirroring.
+func (x *MenuItem) AllowsAutomaticKeyEquivalentMirroring() bool {
+	return x.inner.AllowsAutomaticKeyEquivalentMirroring()
+}
+
+// SetAllowsAutomaticKeyEquivalentMirroring calls the underlying SetAllowsAutomaticKeyEquivalentMirroring.
+func (x *MenuItem) SetAllowsAutomaticKeyEquivalentMirroring(allowsAutomaticKeyEquivalentMirroring bool) {
+	x.inner.SetAllowsAutomaticKeyEquivalentMirroring(allowsAutomaticKeyEquivalentMirroring)
+}
+
+// Image calls the underlying Image.
+func (x *MenuItem) Image() *Image {
+	_r := x.inner.Image()
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// SetImage calls the underlying SetImage.
+func (x *MenuItem) SetImage(image *raw.NSImage) {
+	x.inner.SetImage(image)
+}
+
+// State calls the underlying State.
+func (x *MenuItem) State() int {
+	return x.inner.State()
+}
+
+// SetState calls the underlying SetState.
+func (x *MenuItem) SetState(state int) {
+	x.inner.SetState(state)
+}
+
+// OnStateImage calls the underlying OnStateImage.
+func (x *MenuItem) OnStateImage() *Image {
+	_r := x.inner.OnStateImage()
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// SetOnStateImage calls the underlying SetOnStateImage.
+func (x *MenuItem) SetOnStateImage(onStateImage *raw.NSImage) {
+	x.inner.SetOnStateImage(onStateImage)
+}
+
+// OffStateImage calls the underlying OffStateImage.
+func (x *MenuItem) OffStateImage() *Image {
+	_r := x.inner.OffStateImage()
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// SetOffStateImage calls the underlying SetOffStateImage.
+func (x *MenuItem) SetOffStateImage(offStateImage *raw.NSImage) {
+	x.inner.SetOffStateImage(offStateImage)
+}
+
+// MixedStateImage calls the underlying MixedStateImage.
+func (x *MenuItem) MixedStateImage() *Image {
+	_r := x.inner.MixedStateImage()
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// SetMixedStateImage calls the underlying SetMixedStateImage.
+func (x *MenuItem) SetMixedStateImage(mixedStateImage *raw.NSImage) {
+	x.inner.SetMixedStateImage(mixedStateImage)
+}
+
+// IsEnabled calls the underlying IsEnabled.
+func (x *MenuItem) IsEnabled() bool {
+	return x.inner.IsEnabled()
+}
+
+// IsAlternate calls the underlying IsAlternate.
+func (x *MenuItem) IsAlternate() bool {
+	return x.inner.IsAlternate()
+}
+
+// SetAlternate calls the underlying SetAlternate.
+func (x *MenuItem) SetAlternate(alternate bool) {
+	x.inner.SetAlternate(alternate)
+}
+
+// IndentationLevel calls the underlying IndentationLevel.
+func (x *MenuItem) IndentationLevel() int {
+	return x.inner.IndentationLevel()
+}
+
+// SetIndentationLevel calls the underlying SetIndentationLevel.
+func (x *MenuItem) SetIndentationLevel(indentationLevel int) {
+	x.inner.SetIndentationLevel(indentationLevel)
+}
+
+// Target calls the underlying Target.
+func (x *MenuItem) Target() objc.ID {
+	return x.inner.Target()
+}
+
+// Action calls the underlying Action.
+func (x *MenuItem) Action() objc.SEL {
+	return x.inner.Action()
+}
+
+// Tag calls the underlying Tag.
+func (x *MenuItem) Tag() int {
+	return x.inner.Tag()
+}
+
+// SetTag calls the underlying SetTag.
+func (x *MenuItem) SetTag(tag int) {
+	x.inner.SetTag(tag)
+}
+
+// RepresentedObject calls the underlying RepresentedObject.
+func (x *MenuItem) RepresentedObject() objc.ID {
+	return x.inner.RepresentedObject()
+}
+
+// SetRepresentedObject calls the underlying SetRepresentedObject.
+func (x *MenuItem) SetRepresentedObject(representedObject objc.ID) {
+	x.inner.SetRepresentedObject(representedObject)
+}
+
+// View calls the underlying View.
+func (x *MenuItem) View() *View {
+	_r := x.inner.View()
+	if _r == nil {
+		return nil
+	}
+	return &View{inner: _r}
+}
+
+// SetView calls the underlying SetView.
+func (x *MenuItem) SetView(view *raw.NSView) {
+	x.inner.SetView(view)
+}
+
+// IsHighlighted calls the underlying IsHighlighted.
+func (x *MenuItem) IsHighlighted() bool {
+	return x.inner.IsHighlighted()
+}
+
+// IsHidden calls the underlying IsHidden.
+func (x *MenuItem) IsHidden() bool {
+	return x.inner.IsHidden()
+}
+
+// SetHidden calls the underlying SetHidden.
+func (x *MenuItem) SetHidden(hidden bool) {
+	x.inner.SetHidden(hidden)
+}
+
+// IsHiddenOrHasHiddenAncestor calls the underlying IsHiddenOrHasHiddenAncestor.
+func (x *MenuItem) IsHiddenOrHasHiddenAncestor() bool {
+	return x.inner.IsHiddenOrHasHiddenAncestor()
+}
+
+// ToolTip calls the underlying ToolTip.
+func (x *MenuItem) ToolTip() string {
+	_r := x.inner.ToolTip()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetToolTip calls the underlying SetToolTip.
+func (x *MenuItem) SetToolTip(toolTip string) {
+	x.inner.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
+}
+
+// Badge calls the underlying Badge.
+func (x *MenuItem) Badge() *MenuItemBadge {
+	_r := x.inner.Badge()
+	if _r == nil {
+		return nil
+	}
+	return &MenuItemBadge{inner: _r}
+}
+
+// SetBadge calls the underlying SetBadge.
+func (x *MenuItem) SetBadge(badge *raw.NSMenuItemBadge) {
+	x.inner.SetBadge(badge)
+}
+
+// SetMnemonicLocation calls the underlying SetMnemonicLocation.
+func (x *MenuItem) SetMnemonicLocation(location uint) {
+	x.inner.SetMnemonicLocation(location)
+}
+
+// MnemonicLocation calls the underlying MnemonicLocation.
+func (x *MenuItem) MnemonicLocation() uint {
+	return x.inner.MnemonicLocation()
+}
+
+// Mnemonic calls the underlying Mnemonic.
+func (x *MenuItem) Mnemonic() string {
+	_r := x.inner.Mnemonic()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetTitleWithMnemonic calls the underlying SetTitleWithMnemonic.
+func (x *MenuItem) SetTitleWithMnemonic(stringWithAmpersand string) {
+	x.inner.SetTitleWithMnemonic(foundation.NSStringStringWithUTF8String(stringWithAmpersand))
+}
+
+// MenuItemable is the interface implemented by [MenuItem], for mocking and DI.
+type MenuItemable interface {
+	Unwrap() *raw.NSMenuItem
+	WithMenu(menu *raw.NSMenu) *MenuItem
+	WithSubmenu(submenu *raw.NSMenu) *MenuItem
+	WithTitle(title string) *MenuItem
+	WithAttributedTitle(attributedTitle *foundation.NSAttributedString) *MenuItem
+	WithSubtitle(subtitle string) *MenuItem
+	WithKeyEquivalent(keyEquivalent string) *MenuItem
+	WithKeyEquivalentModifierMask(keyEquivalentModifierMask raw.NSEventModifierFlags) *MenuItem
+	WithAllowsKeyEquivalentWhenHidden(allowsKeyEquivalentWhenHidden bool) *MenuItem
+	WithAllowsAutomaticKeyEquivalentLocalization(allowsAutomaticKeyEquivalentLocalization bool) *MenuItem
+	WithAllowsAutomaticKeyEquivalentMirroring(allowsAutomaticKeyEquivalentMirroring bool) *MenuItem
+	WithImage(image *raw.NSImage) *MenuItem
+	WithState(state int) *MenuItem
+	WithOnStateImage(onStateImage *raw.NSImage) *MenuItem
+	WithOffStateImage(offStateImage *raw.NSImage) *MenuItem
+	WithMixedStateImage(mixedStateImage *raw.NSImage) *MenuItem
+	WithEnabled(enabled bool) *MenuItem
+	WithAlternate(alternate bool) *MenuItem
+	WithIndentationLevel(indentationLevel int) *MenuItem
+	WithTarget(target objc.ID) *MenuItem
+	WithAction(action objc.SEL) *MenuItem
+	WithTag(tag int) *MenuItem
+	WithRepresentedObject(representedObject objc.ID) *MenuItem
+	WithView(view ViewProvider) *MenuItem
+	WithHidden(hidden bool) *MenuItem
+	WithToolTip(toolTip string) *MenuItem
+	WithBadge(badge *raw.NSMenuItemBadge) *MenuItem
+	Menu() *Menu
+	SetMenu(menu *raw.NSMenu)
+	HasSubmenu() bool
+	Submenu() *Menu
+	SetSubmenu(submenu *raw.NSMenu)
+	ParentItem() *MenuItem
+	Title() string
+	SetTitle(title string)
+	AttributedTitle() *foundation.NSAttributedString
+	SetAttributedTitle(attributedTitle *foundation.NSAttributedString)
+	Subtitle() string
+	SetSubtitle(subtitle string)
+	IsSeparatorItem() bool
+	IsSectionHeader() bool
+	KeyEquivalent() string
+	KeyEquivalentModifierMask() raw.NSEventModifierFlags
+	SetKeyEquivalentModifierMask(keyEquivalentModifierMask raw.NSEventModifierFlags)
+	UserKeyEquivalent() string
+	AllowsKeyEquivalentWhenHidden() bool
+	SetAllowsKeyEquivalentWhenHidden(allowsKeyEquivalentWhenHidden bool)
+	AllowsAutomaticKeyEquivalentLocalization() bool
+	SetAllowsAutomaticKeyEquivalentLocalization(allowsAutomaticKeyEquivalentLocalization bool)
+	AllowsAutomaticKeyEquivalentMirroring() bool
+	SetAllowsAutomaticKeyEquivalentMirroring(allowsAutomaticKeyEquivalentMirroring bool)
+	Image() *Image
+	SetImage(image *raw.NSImage)
+	State() int
+	SetState(state int)
+	OnStateImage() *Image
+	SetOnStateImage(onStateImage *raw.NSImage)
+	OffStateImage() *Image
+	SetOffStateImage(offStateImage *raw.NSImage)
+	MixedStateImage() *Image
+	SetMixedStateImage(mixedStateImage *raw.NSImage)
+	IsEnabled() bool
+	IsAlternate() bool
+	SetAlternate(alternate bool)
+	IndentationLevel() int
+	SetIndentationLevel(indentationLevel int)
+	Target() objc.ID
+	Action() objc.SEL
+	Tag() int
+	SetTag(tag int)
+	RepresentedObject() objc.ID
+	SetRepresentedObject(representedObject objc.ID)
+	View() *View
+	SetView(view *raw.NSView)
+	IsHighlighted() bool
+	IsHidden() bool
+	SetHidden(hidden bool)
+	IsHiddenOrHasHiddenAncestor() bool
+	ToolTip() string
+	SetToolTip(toolTip string)
+	Badge() *MenuItemBadge
+	SetBadge(badge *raw.NSMenuItemBadge)
+	SetMnemonicLocation(location uint)
+	MnemonicLocation() uint
+	Mnemonic() string
+	SetTitleWithMnemonic(stringWithAmpersand string)
+}
+
+var _ MenuItemable = (*MenuItem)(nil)
 

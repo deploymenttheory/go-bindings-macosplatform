@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -90,5 +91,215 @@ func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) WithServ
 	return x
 }
 
+// NullableInt calls the underlying NullableInt.
+func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) NullableInt() *foundation.NSNumber {
+	return x.inner.NullableInt()
+}
+
+// SetNullableInt calls the underlying SetNullableInt.
+func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) SetNullableInt(nullableInt *foundation.NSNumber) {
+	x.inner.SetNullableInt(nullableInt)
+}
+
+// OptionalInt calls the underlying OptionalInt.
+func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) OptionalInt() *foundation.NSNumber {
+	return x.inner.OptionalInt()
+}
+
+// SetOptionalInt calls the underlying SetOptionalInt.
+func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) SetOptionalInt(optionalInt *foundation.NSNumber) {
+	x.inner.SetOptionalInt(optionalInt)
+}
+
+// NullableOptionalInt calls the underlying NullableOptionalInt.
+func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) NullableOptionalInt() *foundation.NSNumber {
+	return x.inner.NullableOptionalInt()
+}
+
+// SetNullableOptionalInt calls the underlying SetNullableOptionalInt.
+func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) SetNullableOptionalInt(nullableOptionalInt *foundation.NSNumber) {
+	x.inner.SetNullableOptionalInt(nullableOptionalInt)
+}
+
+// NullableString calls the underlying NullableString.
+func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) NullableString() string {
+	_r := x.inner.NullableString()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetNullableString calls the underlying SetNullableString.
+func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) SetNullableString(nullableString string) {
+	x.inner.SetNullableString(foundation.NSStringStringWithUTF8String(nullableString))
+}
+
+// OptionalString calls the underlying OptionalString.
+func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) OptionalString() string {
+	_r := x.inner.OptionalString()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetOptionalString calls the underlying SetOptionalString.
+func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) SetOptionalString(optionalString string) {
+	x.inner.SetOptionalString(foundation.NSStringStringWithUTF8String(optionalString))
+}
+
+// NullableOptionalString calls the underlying NullableOptionalString.
+func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) NullableOptionalString() string {
+	_r := x.inner.NullableOptionalString()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetNullableOptionalString calls the underlying SetNullableOptionalString.
+func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) SetNullableOptionalString(nullableOptionalString string) {
+	x.inner.SetNullableOptionalString(foundation.NSStringStringWithUTF8String(nullableOptionalString))
+}
+
+// NullableStruct calls the underlying NullableStruct.
+func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) NullableStruct() *MTRUnitTestingClusterSimpleStruct {
+	_r := x.inner.NullableStruct()
+	if _r == nil {
+		return nil
+	}
+	return &MTRUnitTestingClusterSimpleStruct{inner: _r}
+}
+
+// SetNullableStruct calls the underlying SetNullableStruct.
+func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) SetNullableStruct(nullableStruct *raw.MTRUnitTestingClusterSimpleStruct) {
+	x.inner.SetNullableStruct(nullableStruct)
+}
+
+// OptionalStruct calls the underlying OptionalStruct.
+func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) OptionalStruct() *MTRUnitTestingClusterSimpleStruct {
+	_r := x.inner.OptionalStruct()
+	if _r == nil {
+		return nil
+	}
+	return &MTRUnitTestingClusterSimpleStruct{inner: _r}
+}
+
+// SetOptionalStruct calls the underlying SetOptionalStruct.
+func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) SetOptionalStruct(optionalStruct *raw.MTRUnitTestingClusterSimpleStruct) {
+	x.inner.SetOptionalStruct(optionalStruct)
+}
+
+// NullableOptionalStruct calls the underlying NullableOptionalStruct.
+func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) NullableOptionalStruct() *MTRUnitTestingClusterSimpleStruct {
+	_r := x.inner.NullableOptionalStruct()
+	if _r == nil {
+		return nil
+	}
+	return &MTRUnitTestingClusterSimpleStruct{inner: _r}
+}
+
+// SetNullableOptionalStruct calls the underlying SetNullableOptionalStruct.
+func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) SetNullableOptionalStruct(nullableOptionalStruct *raw.MTRUnitTestingClusterSimpleStruct) {
+	x.inner.SetNullableOptionalStruct(nullableOptionalStruct)
+}
+
+// NullableList calls the underlying NullableList.
+func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) NullableList() *foundation.NSArray[objc.ID] {
+	return x.inner.NullableList()
+}
+
+// SetNullableList calls the underlying SetNullableList.
+func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) SetNullableList(nullableList *foundation.NSArray[objc.ID]) {
+	x.inner.SetNullableList(nullableList)
+}
+
+// OptionalList calls the underlying OptionalList.
+func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) OptionalList() *foundation.NSArray[objc.ID] {
+	return x.inner.OptionalList()
+}
+
+// SetOptionalList calls the underlying SetOptionalList.
+func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) SetOptionalList(optionalList *foundation.NSArray[objc.ID]) {
+	x.inner.SetOptionalList(optionalList)
+}
+
+// NullableOptionalList calls the underlying NullableOptionalList.
+func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) NullableOptionalList() *foundation.NSArray[objc.ID] {
+	return x.inner.NullableOptionalList()
+}
+
+// SetNullableOptionalList calls the underlying SetNullableOptionalList.
+func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) SetNullableOptionalList(nullableOptionalList *foundation.NSArray[objc.ID]) {
+	x.inner.SetNullableOptionalList(nullableOptionalList)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
 func (x *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) asMTRUnitTestingClusterTestComplexNullableOptionalRequestParams() *raw.MTRUnitTestingClusterTestComplexNullableOptionalRequestParams { return x.inner }
+
+// MTRUnitTestingClusterTestComplexNullableOptionalRequestParamsable is the interface implemented by [MTRUnitTestingClusterTestComplexNullableOptionalRequestParams], for mocking and DI.
+type MTRUnitTestingClusterTestComplexNullableOptionalRequestParamsable interface {
+	Unwrap() *raw.MTRUnitTestingClusterTestComplexNullableOptionalRequestParams
+	WithNullableInt(nullableInt *foundation.NSNumber) *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams
+	WithOptionalInt(optionalInt *foundation.NSNumber) *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams
+	WithNullableOptionalInt(nullableOptionalInt *foundation.NSNumber) *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams
+	WithNullableString(nullableString string) *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams
+	WithOptionalString(optionalString string) *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams
+	WithNullableOptionalString(nullableOptionalString string) *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams
+	WithNullableStruct(nullableStruct MTRUnitTestingClusterSimpleStructProvider) *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams
+	WithOptionalStruct(optionalStruct MTRUnitTestingClusterSimpleStructProvider) *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams
+	WithNullableOptionalStruct(nullableOptionalStruct MTRUnitTestingClusterSimpleStructProvider) *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams
+	NullableInt() *foundation.NSNumber
+	SetNullableInt(nullableInt *foundation.NSNumber)
+	OptionalInt() *foundation.NSNumber
+	SetOptionalInt(optionalInt *foundation.NSNumber)
+	NullableOptionalInt() *foundation.NSNumber
+	SetNullableOptionalInt(nullableOptionalInt *foundation.NSNumber)
+	NullableString() string
+	SetNullableString(nullableString string)
+	OptionalString() string
+	SetOptionalString(optionalString string)
+	NullableOptionalString() string
+	SetNullableOptionalString(nullableOptionalString string)
+	NullableStruct() *MTRUnitTestingClusterSimpleStruct
+	SetNullableStruct(nullableStruct *raw.MTRUnitTestingClusterSimpleStruct)
+	OptionalStruct() *MTRUnitTestingClusterSimpleStruct
+	SetOptionalStruct(optionalStruct *raw.MTRUnitTestingClusterSimpleStruct)
+	NullableOptionalStruct() *MTRUnitTestingClusterSimpleStruct
+	SetNullableOptionalStruct(nullableOptionalStruct *raw.MTRUnitTestingClusterSimpleStruct)
+	NullableList() *foundation.NSArray[objc.ID]
+	SetNullableList(nullableList *foundation.NSArray[objc.ID])
+	OptionalList() *foundation.NSArray[objc.ID]
+	SetOptionalList(optionalList *foundation.NSArray[objc.ID])
+	NullableOptionalList() *foundation.NSArray[objc.ID]
+	SetNullableOptionalList(nullableOptionalList *foundation.NSArray[objc.ID])
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRUnitTestingClusterTestComplexNullableOptionalRequestParamsable = (*MTRUnitTestingClusterTestComplexNullableOptionalRequestParams)(nil)
 

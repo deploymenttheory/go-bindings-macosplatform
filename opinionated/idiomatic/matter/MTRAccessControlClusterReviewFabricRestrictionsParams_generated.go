@@ -36,3 +36,48 @@ func (x *MTRAccessControlClusterReviewFabricRestrictionsParams) WithServerSidePr
 	return x
 }
 
+// Arl calls the underlying Arl.
+func (x *MTRAccessControlClusterReviewFabricRestrictionsParams) Arl() *foundation.NSArray[objc.ID] {
+	return x.inner.Arl()
+}
+
+// SetArl calls the underlying SetArl.
+func (x *MTRAccessControlClusterReviewFabricRestrictionsParams) SetArl(arl *foundation.NSArray[objc.ID]) {
+	x.inner.SetArl(arl)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRAccessControlClusterReviewFabricRestrictionsParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRAccessControlClusterReviewFabricRestrictionsParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRAccessControlClusterReviewFabricRestrictionsParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRAccessControlClusterReviewFabricRestrictionsParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRAccessControlClusterReviewFabricRestrictionsParamsable is the interface implemented by [MTRAccessControlClusterReviewFabricRestrictionsParams], for mocking and DI.
+type MTRAccessControlClusterReviewFabricRestrictionsParamsable interface {
+	Unwrap() *raw.MTRAccessControlClusterReviewFabricRestrictionsParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRAccessControlClusterReviewFabricRestrictionsParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRAccessControlClusterReviewFabricRestrictionsParams
+	Arl() *foundation.NSArray[objc.ID]
+	SetArl(arl *foundation.NSArray[objc.ID])
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRAccessControlClusterReviewFabricRestrictionsParamsable = (*MTRAccessControlClusterReviewFabricRestrictionsParams)(nil)
+

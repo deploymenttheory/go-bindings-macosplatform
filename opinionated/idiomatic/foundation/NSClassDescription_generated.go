@@ -27,3 +27,10 @@ func (x *ClassDescription) asClassDescription() *raw.NSClassDescription { return
 
 func (x *ClassDescription) asObject() *raw.NSObject { return &x.inner.NSObject }
 
+// ClassDescriptionable is the interface implemented by [ClassDescription], for mocking and DI.
+type ClassDescriptionable interface {
+	Unwrap() *raw.NSClassDescription
+}
+
+var _ ClassDescriptionable = (*ClassDescription)(nil)
+

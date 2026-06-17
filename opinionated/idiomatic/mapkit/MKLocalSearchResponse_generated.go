@@ -6,6 +6,7 @@ package mapkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -29,10 +30,22 @@ func (x *LocalSearchResponse) MapItems() []*raw.MKMapItem {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MKMapItem, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MKMapItem {
+		return raw.MKMapItemFromID(purego.Retain(_id))
+	})
 }
+
+// BoundingRegion calls the underlying BoundingRegion.
+func (x *LocalSearchResponse) BoundingRegion() raw.MKCoordinateRegion {
+	return x.inner.BoundingRegion()
+}
+
+// LocalSearchResponseable is the interface implemented by [LocalSearchResponse], for mocking and DI.
+type LocalSearchResponseable interface {
+	Unwrap() *raw.MKLocalSearchResponse
+	MapItems() []*raw.MKMapItem
+	BoundingRegion() raw.MKCoordinateRegion
+}
+
+var _ LocalSearchResponseable = (*LocalSearchResponse)(nil)
 

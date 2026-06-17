@@ -53,5 +53,77 @@ func (x *RNNDescriptor) WithLayerSequenceDirection(layerSequenceDirection raw.MP
 	return x
 }
 
+// InputFeatureChannels calls the underlying InputFeatureChannels.
+func (x *RNNDescriptor) InputFeatureChannels() uint {
+	return x.inner.InputFeatureChannels()
+}
+
+// SetInputFeatureChannels calls the underlying SetInputFeatureChannels.
+func (x *RNNDescriptor) SetInputFeatureChannels(inputFeatureChannels uint) {
+	x.inner.SetInputFeatureChannels(inputFeatureChannels)
+}
+
+// OutputFeatureChannels calls the underlying OutputFeatureChannels.
+func (x *RNNDescriptor) OutputFeatureChannels() uint {
+	return x.inner.OutputFeatureChannels()
+}
+
+// SetOutputFeatureChannels calls the underlying SetOutputFeatureChannels.
+func (x *RNNDescriptor) SetOutputFeatureChannels(outputFeatureChannels uint) {
+	x.inner.SetOutputFeatureChannels(outputFeatureChannels)
+}
+
+// UseLayerInputUnitTransformMode calls the underlying UseLayerInputUnitTransformMode.
+func (x *RNNDescriptor) UseLayerInputUnitTransformMode() bool {
+	return x.inner.UseLayerInputUnitTransformMode()
+}
+
+// SetUseLayerInputUnitTransformMode calls the underlying SetUseLayerInputUnitTransformMode.
+func (x *RNNDescriptor) SetUseLayerInputUnitTransformMode(useLayerInputUnitTransformMode bool) {
+	x.inner.SetUseLayerInputUnitTransformMode(useLayerInputUnitTransformMode)
+}
+
+// UseFloat32Weights calls the underlying UseFloat32Weights.
+func (x *RNNDescriptor) UseFloat32Weights() bool {
+	return x.inner.UseFloat32Weights()
+}
+
+// SetUseFloat32Weights calls the underlying SetUseFloat32Weights.
+func (x *RNNDescriptor) SetUseFloat32Weights(useFloat32Weights bool) {
+	x.inner.SetUseFloat32Weights(useFloat32Weights)
+}
+
+// LayerSequenceDirection calls the underlying LayerSequenceDirection.
+func (x *RNNDescriptor) LayerSequenceDirection() raw.MPSRNNSequenceDirection {
+	return x.inner.LayerSequenceDirection()
+}
+
+// SetLayerSequenceDirection calls the underlying SetLayerSequenceDirection.
+func (x *RNNDescriptor) SetLayerSequenceDirection(layerSequenceDirection raw.MPSRNNSequenceDirection) {
+	x.inner.SetLayerSequenceDirection(layerSequenceDirection)
+}
+
 func (x *RNNDescriptor) asRNNDescriptor() *raw.MPSRNNDescriptor { return x.inner }
+
+// RNNDescriptorable is the interface implemented by [RNNDescriptor], for mocking and DI.
+type RNNDescriptorable interface {
+	Unwrap() *raw.MPSRNNDescriptor
+	WithInputFeatureChannels(inputFeatureChannels uint) *RNNDescriptor
+	WithOutputFeatureChannels(outputFeatureChannels uint) *RNNDescriptor
+	WithUseLayerInputUnitTransformMode(useLayerInputUnitTransformMode bool) *RNNDescriptor
+	WithUseFloat32Weights(useFloat32Weights bool) *RNNDescriptor
+	WithLayerSequenceDirection(layerSequenceDirection raw.MPSRNNSequenceDirection) *RNNDescriptor
+	InputFeatureChannels() uint
+	SetInputFeatureChannels(inputFeatureChannels uint)
+	OutputFeatureChannels() uint
+	SetOutputFeatureChannels(outputFeatureChannels uint)
+	UseLayerInputUnitTransformMode() bool
+	SetUseLayerInputUnitTransformMode(useLayerInputUnitTransformMode bool)
+	UseFloat32Weights() bool
+	SetUseFloat32Weights(useFloat32Weights bool)
+	LayerSequenceDirection() raw.MPSRNNSequenceDirection
+	SetLayerSequenceDirection(layerSequenceDirection raw.MPSRNNSequenceDirection)
+}
+
+var _ RNNDescriptorable = (*RNNDescriptor)(nil)
 

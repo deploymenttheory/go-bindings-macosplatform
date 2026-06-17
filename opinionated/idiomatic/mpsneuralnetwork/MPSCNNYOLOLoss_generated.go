@@ -7,8 +7,10 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // CNNYOLOLoss wraps [raw.MPSCNNYOLOLoss] with a fluent Go API.
@@ -33,5 +35,142 @@ func NewCNNYOLOLossWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MT
 	return &CNNYOLOLoss{inner: raw.MPSCNNYOLOLossFromID(_id)}
 }
 
+// EncodeToCommandBufferSourceImageLabelsDestinationImage calls the underlying EncodeToCommandBufferSourceImageLabelsDestinationImage.
+func (x *CNNYOLOLoss) EncodeToCommandBufferSourceImageLabelsDestinationImage(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, labels *raw.MPSCNNLossLabels, destinationImage *mpscore.MPSImage) {
+	x.inner.EncodeToCommandBufferSourceImageLabelsDestinationImage(commandBuffer, sourceImage, labels, destinationImage)
+}
+
+// EncodeToCommandBufferSourceImageLabels calls the underlying EncodeToCommandBufferSourceImageLabels.
+func (x *CNNYOLOLoss) EncodeToCommandBufferSourceImageLabels(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, labels *raw.MPSCNNLossLabels) *mpscore.MPSImage {
+	return x.inner.EncodeToCommandBufferSourceImageLabels(commandBuffer, sourceImage, labels)
+}
+
+// EncodeBatchToCommandBufferSourceImagesLabelsDestinationImages calls the underlying EncodeBatchToCommandBufferSourceImagesLabelsDestinationImages.
+func (x *CNNYOLOLoss) EncodeBatchToCommandBufferSourceImagesLabelsDestinationImages(commandBuffer metal.MTLCommandBuffer, sourceImage unsafe.Pointer, labels unsafe.Pointer, destinationImage unsafe.Pointer) {
+	x.inner.EncodeBatchToCommandBufferSourceImagesLabelsDestinationImages(commandBuffer, sourceImage, labels, destinationImage)
+}
+
+// EncodeBatchToCommandBufferSourceImagesLabels calls the underlying EncodeBatchToCommandBufferSourceImagesLabels.
+func (x *CNNYOLOLoss) EncodeBatchToCommandBufferSourceImagesLabels(commandBuffer metal.MTLCommandBuffer, sourceImage unsafe.Pointer, labels unsafe.Pointer) unsafe.Pointer {
+	return x.inner.EncodeBatchToCommandBufferSourceImagesLabels(commandBuffer, sourceImage, labels)
+}
+
+// LossXY calls the underlying LossXY.
+func (x *CNNYOLOLoss) LossXY() *CNNLoss {
+	_r := x.inner.LossXY()
+	if _r == nil {
+		return nil
+	}
+	return &CNNLoss{inner: _r}
+}
+
+// LossWH calls the underlying LossWH.
+func (x *CNNYOLOLoss) LossWH() *CNNLoss {
+	_r := x.inner.LossWH()
+	if _r == nil {
+		return nil
+	}
+	return &CNNLoss{inner: _r}
+}
+
+// LossConfidence calls the underlying LossConfidence.
+func (x *CNNYOLOLoss) LossConfidence() *CNNLoss {
+	_r := x.inner.LossConfidence()
+	if _r == nil {
+		return nil
+	}
+	return &CNNLoss{inner: _r}
+}
+
+// LossClasses calls the underlying LossClasses.
+func (x *CNNYOLOLoss) LossClasses() *CNNLoss {
+	_r := x.inner.LossClasses()
+	if _r == nil {
+		return nil
+	}
+	return &CNNLoss{inner: _r}
+}
+
+// ScaleXY calls the underlying ScaleXY.
+func (x *CNNYOLOLoss) ScaleXY() float32 {
+	return x.inner.ScaleXY()
+}
+
+// ScaleWH calls the underlying ScaleWH.
+func (x *CNNYOLOLoss) ScaleWH() float32 {
+	return x.inner.ScaleWH()
+}
+
+// ScaleNoObject calls the underlying ScaleNoObject.
+func (x *CNNYOLOLoss) ScaleNoObject() float32 {
+	return x.inner.ScaleNoObject()
+}
+
+// ScaleObject calls the underlying ScaleObject.
+func (x *CNNYOLOLoss) ScaleObject() float32 {
+	return x.inner.ScaleObject()
+}
+
+// ScaleClass calls the underlying ScaleClass.
+func (x *CNNYOLOLoss) ScaleClass() float32 {
+	return x.inner.ScaleClass()
+}
+
+// MinIOUForObjectPresence calls the underlying MinIOUForObjectPresence.
+func (x *CNNYOLOLoss) MinIOUForObjectPresence() float32 {
+	return x.inner.MinIOUForObjectPresence()
+}
+
+// MaxIOUForObjectAbsence calls the underlying MaxIOUForObjectAbsence.
+func (x *CNNYOLOLoss) MaxIOUForObjectAbsence() float32 {
+	return x.inner.MaxIOUForObjectAbsence()
+}
+
+// ReductionType calls the underlying ReductionType.
+func (x *CNNYOLOLoss) ReductionType() raw.MPSCNNReductionType {
+	return x.inner.ReductionType()
+}
+
+// NumberOfAnchorBoxes calls the underlying NumberOfAnchorBoxes.
+func (x *CNNYOLOLoss) NumberOfAnchorBoxes() uint {
+	return x.inner.NumberOfAnchorBoxes()
+}
+
+// AnchorBoxes calls the underlying AnchorBoxes.
+func (x *CNNYOLOLoss) AnchorBoxes() *foundation.NSData {
+	return x.inner.AnchorBoxes()
+}
+
+// ReduceAcrossBatch calls the underlying ReduceAcrossBatch.
+func (x *CNNYOLOLoss) ReduceAcrossBatch() bool {
+	return x.inner.ReduceAcrossBatch()
+}
+
 func (x *CNNYOLOLoss) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSCNNKernel }
+
+// CNNYOLOLossable is the interface implemented by [CNNYOLOLoss], for mocking and DI.
+type CNNYOLOLossable interface {
+	Unwrap() *raw.MPSCNNYOLOLoss
+	EncodeToCommandBufferSourceImageLabelsDestinationImage(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, labels *raw.MPSCNNLossLabels, destinationImage *mpscore.MPSImage)
+	EncodeToCommandBufferSourceImageLabels(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, labels *raw.MPSCNNLossLabels) *mpscore.MPSImage
+	EncodeBatchToCommandBufferSourceImagesLabelsDestinationImages(commandBuffer metal.MTLCommandBuffer, sourceImage unsafe.Pointer, labels unsafe.Pointer, destinationImage unsafe.Pointer)
+	EncodeBatchToCommandBufferSourceImagesLabels(commandBuffer metal.MTLCommandBuffer, sourceImage unsafe.Pointer, labels unsafe.Pointer) unsafe.Pointer
+	LossXY() *CNNLoss
+	LossWH() *CNNLoss
+	LossConfidence() *CNNLoss
+	LossClasses() *CNNLoss
+	ScaleXY() float32
+	ScaleWH() float32
+	ScaleNoObject() float32
+	ScaleObject() float32
+	ScaleClass() float32
+	MinIOUForObjectPresence() float32
+	MaxIOUForObjectAbsence() float32
+	ReductionType() raw.MPSCNNReductionType
+	NumberOfAnchorBoxes() uint
+	AnchorBoxes() *foundation.NSData
+	ReduceAcrossBatch() bool
+}
+
+var _ CNNYOLOLossable = (*CNNYOLOLoss)(nil)
 

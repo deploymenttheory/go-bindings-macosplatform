@@ -7,7 +7,9 @@ package avfoundation
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // CaptureStillImageOutput wraps [raw.AVCaptureStillImageOutput] with a fluent Go API.
@@ -36,17 +38,30 @@ func (x *CaptureStillImageOutput) WithHighResolutionStillImageOutputEnabled(high
 	return x
 }
 
+// CaptureStillImageAsynchronouslyFromConnectionCompletionHandler calls the underlying CaptureStillImageAsynchronouslyFromConnectionCompletionHandler.
+func (x *CaptureStillImageOutput) CaptureStillImageAsynchronouslyFromConnectionCompletionHandler(connection *raw.AVCaptureConnection, handler func(unsafe.Pointer, unsafe.Pointer)) {
+	x.inner.CaptureStillImageAsynchronouslyFromConnectionCompletionHandler(connection, handler)
+}
+
+// OutputSettings calls the underlying OutputSettings.
+func (x *CaptureStillImageOutput) OutputSettings() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.OutputSettings()
+}
+
+// SetOutputSettings calls the underlying SetOutputSettings.
+func (x *CaptureStillImageOutput) SetOutputSettings(outputSettings *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
+	x.inner.SetOutputSettings(outputSettings)
+}
+
 // AvailableImageDataCVPixelFormatTypes returns the collection as a Go slice.
 func (x *CaptureStillImageOutput) AvailableImageDataCVPixelFormatTypes() []*foundation.NSNumber {
 	arr := x.inner.AvailableImageDataCVPixelFormatTypes()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
 }
 
 // AvailableImageDataCodecTypes returns the collection as a Go slice.
@@ -55,12 +70,42 @@ func (x *CaptureStillImageOutput) AvailableImageDataCodecTypes() []*foundation.N
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	})
+}
+
+// IsHighResolutionStillImageOutputEnabled calls the underlying IsHighResolutionStillImageOutputEnabled.
+func (x *CaptureStillImageOutput) IsHighResolutionStillImageOutputEnabled() bool {
+	return x.inner.IsHighResolutionStillImageOutputEnabled()
+}
+
+// SetHighResolutionStillImageOutputEnabled calls the underlying SetHighResolutionStillImageOutputEnabled.
+func (x *CaptureStillImageOutput) SetHighResolutionStillImageOutputEnabled(highResolutionStillImageOutputEnabled bool) {
+	x.inner.SetHighResolutionStillImageOutputEnabled(highResolutionStillImageOutputEnabled)
+}
+
+// IsCapturingStillImage calls the underlying IsCapturingStillImage.
+func (x *CaptureStillImageOutput) IsCapturingStillImage() bool {
+	return x.inner.IsCapturingStillImage()
 }
 
 func (x *CaptureStillImageOutput) asCaptureOutput() *raw.AVCaptureOutput { return &x.inner.AVCaptureOutput }
+
+// CaptureStillImageOutputable is the interface implemented by [CaptureStillImageOutput], for mocking and DI.
+type CaptureStillImageOutputable interface {
+	Unwrap() *raw.AVCaptureStillImageOutput
+	WithOutputSettings(outputSettings *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CaptureStillImageOutput
+	WithHighResolutionStillImageOutputEnabled(highResolutionStillImageOutputEnabled bool) *CaptureStillImageOutput
+	CaptureStillImageAsynchronouslyFromConnectionCompletionHandler(connection *raw.AVCaptureConnection, handler func(unsafe.Pointer, unsafe.Pointer))
+	OutputSettings() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	SetOutputSettings(outputSettings *foundation.NSDictionary[*foundation.NSString, objc.ID])
+	AvailableImageDataCVPixelFormatTypes() []*foundation.NSNumber
+	AvailableImageDataCodecTypes() []*foundation.NSString
+	IsHighResolutionStillImageOutputEnabled() bool
+	SetHighResolutionStillImageOutputEnabled(highResolutionStillImageOutputEnabled bool)
+	IsCapturingStillImage() bool
+}
+
+var _ CaptureStillImageOutputable = (*CaptureStillImageOutput)(nil)
 

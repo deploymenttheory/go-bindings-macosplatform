@@ -6,6 +6,8 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,16 +25,34 @@ func NewPlayerItemErrorLog() *PlayerItemErrorLog {
 	return &PlayerItemErrorLog{inner: raw.AVPlayerItemErrorLogFromID(_id)}
 }
 
+// ExtendedLogData calls the underlying ExtendedLogData.
+func (x *PlayerItemErrorLog) ExtendedLogData() *foundation.NSData {
+	return x.inner.ExtendedLogData()
+}
+
+// ExtendedLogDataStringEncoding calls the underlying ExtendedLogDataStringEncoding.
+func (x *PlayerItemErrorLog) ExtendedLogDataStringEncoding() uint {
+	return x.inner.ExtendedLogDataStringEncoding()
+}
+
 // Events returns the collection as a Go slice.
 func (x *PlayerItemErrorLog) Events() []*raw.AVPlayerItemErrorLogEvent {
 	arr := x.inner.Events()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AVPlayerItemErrorLogEvent, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVPlayerItemErrorLogEvent {
+		return raw.AVPlayerItemErrorLogEventFromID(purego.Retain(_id))
+	})
 }
+
+// PlayerItemErrorLogable is the interface implemented by [PlayerItemErrorLog], for mocking and DI.
+type PlayerItemErrorLogable interface {
+	Unwrap() *raw.AVPlayerItemErrorLog
+	ExtendedLogData() *foundation.NSData
+	ExtendedLogDataStringEncoding() uint
+	Events() []*raw.AVPlayerItemErrorLogEvent
+}
+
+var _ PlayerItemErrorLogable = (*PlayerItemErrorLog)(nil)
 

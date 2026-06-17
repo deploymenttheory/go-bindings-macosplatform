@@ -5,7 +5,9 @@
 package storekit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/storekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +25,50 @@ func NewPayment() *Payment {
 	return &Payment{inner: raw.SKPaymentFromID(_id)}
 }
 
+// RequestData calls the underlying RequestData.
+func (x *Payment) RequestData() *foundation.NSData {
+	return x.inner.RequestData()
+}
+
+// Quantity calls the underlying Quantity.
+func (x *Payment) Quantity() int {
+	return x.inner.Quantity()
+}
+
+// ApplicationUsername calls the underlying ApplicationUsername.
+func (x *Payment) ApplicationUsername() string {
+	_r := x.inner.ApplicationUsername()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SimulatesAskToBuyInSandbox calls the underlying SimulatesAskToBuyInSandbox.
+func (x *Payment) SimulatesAskToBuyInSandbox() bool {
+	return x.inner.SimulatesAskToBuyInSandbox()
+}
+
+// PaymentDiscount calls the underlying PaymentDiscount.
+func (x *Payment) PaymentDiscount() *PaymentDiscount {
+	_r := x.inner.PaymentDiscount()
+	if _r == nil {
+		return nil
+	}
+	return &PaymentDiscount{inner: _r}
+}
+
 func (x *Payment) asPayment() *raw.SKPayment { return x.inner }
+
+// Paymentable is the interface implemented by [Payment], for mocking and DI.
+type Paymentable interface {
+	Unwrap() *raw.SKPayment
+	RequestData() *foundation.NSData
+	Quantity() int
+	ApplicationUsername() string
+	SimulatesAskToBuyInSandbox() bool
+	PaymentDiscount() *PaymentDiscount
+}
+
+var _ Paymentable = (*Payment)(nil)
 

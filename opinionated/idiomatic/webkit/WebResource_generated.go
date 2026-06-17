@@ -7,6 +7,7 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,4 +25,53 @@ func NewWebResourceWithDataURLMIMETypeTextEncodingNameFrameName(data *foundation
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:URL:MIMEType:textEncodingName:frameName:"), data.Ptr(), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)).Ptr(), foundation.NSStringStringWithUTF8String(mIMEType).Ptr(), foundation.NSStringStringWithUTF8String(textEncodingName).Ptr(), foundation.NSStringStringWithUTF8String(frameName).Ptr())
 	return &WebResource{inner: raw.WebResourceFromID(_id)}
 }
+
+// Data calls the underlying Data.
+func (x *WebResource) Data() *foundation.NSData {
+	return x.inner.Data()
+}
+
+// URL calls the underlying URL.
+func (x *WebResource) URL() *foundation.NSURL {
+	return x.inner.URL()
+}
+
+// MIMEType calls the underlying MIMEType.
+func (x *WebResource) MIMEType() string {
+	_r := x.inner.MIMEType()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// TextEncodingName calls the underlying TextEncodingName.
+func (x *WebResource) TextEncodingName() string {
+	_r := x.inner.TextEncodingName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// FrameName calls the underlying FrameName.
+func (x *WebResource) FrameName() string {
+	_r := x.inner.FrameName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// WebResourceable is the interface implemented by [WebResource], for mocking and DI.
+type WebResourceable interface {
+	Unwrap() *raw.WebResource
+	Data() *foundation.NSData
+	URL() *foundation.NSURL
+	MIMEType() string
+	TextEncodingName() string
+	FrameName() string
+}
+
+var _ WebResourceable = (*WebResource)(nil)
 

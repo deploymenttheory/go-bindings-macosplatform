@@ -25,3 +25,10 @@ func NewMTRContentLauncherClusterDimension() *MTRContentLauncherClusterDimension
 
 func (x *MTRContentLauncherClusterDimension) asMTRContentLauncherClusterDimensionStruct() *raw.MTRContentLauncherClusterDimensionStruct { return &x.inner.MTRContentLauncherClusterDimensionStruct }
 
+// MTRContentLauncherClusterDimensionable is the interface implemented by [MTRContentLauncherClusterDimension], for mocking and DI.
+type MTRContentLauncherClusterDimensionable interface {
+	Unwrap() *raw.MTRContentLauncherClusterDimension
+}
+
+var _ MTRContentLauncherClusterDimensionable = (*MTRContentLauncherClusterDimension)(nil)
+

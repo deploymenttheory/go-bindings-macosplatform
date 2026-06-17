@@ -7,6 +7,7 @@ package gameplaykit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Agent3D wraps [raw.GKAgent3D] with a fluent Go API.
@@ -29,7 +30,57 @@ func (x *Agent3D) WithRightHanded(rightHanded bool) *Agent3D {
 	return x
 }
 
+// Position calls the underlying Position.
+func (x *Agent3D) Position() unsafe.Pointer {
+	return x.inner.Position()
+}
+
+// SetPosition calls the underlying SetPosition.
+func (x *Agent3D) SetPosition(position unsafe.Pointer) {
+	x.inner.SetPosition(position)
+}
+
+// Velocity calls the underlying Velocity.
+func (x *Agent3D) Velocity() unsafe.Pointer {
+	return x.inner.Velocity()
+}
+
+// RightHanded calls the underlying RightHanded.
+func (x *Agent3D) RightHanded() bool {
+	return x.inner.RightHanded()
+}
+
+// SetRightHanded calls the underlying SetRightHanded.
+func (x *Agent3D) SetRightHanded(rightHanded bool) {
+	x.inner.SetRightHanded(rightHanded)
+}
+
+// Rotation calls the underlying Rotation.
+func (x *Agent3D) Rotation() unsafe.Pointer {
+	return x.inner.Rotation()
+}
+
+// SetRotation calls the underlying SetRotation.
+func (x *Agent3D) SetRotation(rotation unsafe.Pointer) {
+	x.inner.SetRotation(rotation)
+}
+
 func (x *Agent3D) asAgent() *raw.GKAgent { return &x.inner.GKAgent }
 
 func (x *Agent3D) asComponent() *raw.GKComponent { return &x.inner.GKAgent.GKComponent }
+
+// Agent3Dable is the interface implemented by [Agent3D], for mocking and DI.
+type Agent3Dable interface {
+	Unwrap() *raw.GKAgent3D
+	WithRightHanded(rightHanded bool) *Agent3D
+	Position() unsafe.Pointer
+	SetPosition(position unsafe.Pointer)
+	Velocity() unsafe.Pointer
+	RightHanded() bool
+	SetRightHanded(rightHanded bool)
+	Rotation() unsafe.Pointer
+	SetRotation(rotation unsafe.Pointer)
+}
+
+var _ Agent3Dable = (*Agent3D)(nil)
 

@@ -5,8 +5,10 @@
 package cryptotokenkit
 
 import (
+	"context"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cryptotokenkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -31,16 +33,62 @@ func NewTokenWatcherWithInsertionHandler(insertionHandler func(*foundation.NSStr
 	return &TokenWatcher{inner: raw.TKTokenWatcherFromID(_id)}
 }
 
+// SetInsertionHandler blocks until the operation completes or ctx is cancelled.
+func (x *TokenWatcher) SetInsertionHandler(ctx context.Context) (string, error) {
+	type _result struct {
+		val string
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SetInsertionHandler(func(_p0 *foundation.NSString) {
+		var _o _result
+		if _p0 != nil {
+			_o.val = purego.GoString(_p0.Ptr())
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero string
+		return _zero, ctx.Err()
+	}
+}
+
+// AddRemovalHandlerForTokenID calls the underlying AddRemovalHandlerForTokenID.
+func (x *TokenWatcher) AddRemovalHandlerForTokenID(removalHandler func(*foundation.NSString), tokenID string) {
+	x.inner.AddRemovalHandlerForTokenID(removalHandler, foundation.NSStringStringWithUTF8String(tokenID))
+}
+
+// TokenInfoForTokenID calls the underlying TokenInfoForTokenID.
+func (x *TokenWatcher) TokenInfoForTokenID(tokenID string) *TokenWatcherTokenInfo {
+	_r := x.inner.TokenInfoForTokenID(foundation.NSStringStringWithUTF8String(tokenID))
+	if _r == nil {
+		return nil
+	}
+	return &TokenWatcherTokenInfo{inner: _r}
+}
+
 // TokenIDs returns the collection as a Go slice.
-func (x *TokenWatcher) TokenIDs() []*foundation.NSString {
+func (x *TokenWatcher) TokenIDs() []string {
 	arr := x.inner.TokenIDs()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
+
+// TokenWatcherable is the interface implemented by [TokenWatcher], for mocking and DI.
+type TokenWatcherable interface {
+	Unwrap() *raw.TKTokenWatcher
+	SetInsertionHandler(ctx context.Context) (string, error)
+	AddRemovalHandlerForTokenID(removalHandler func(*foundation.NSString), tokenID string)
+	TokenInfoForTokenID(tokenID string) *TokenWatcherTokenInfo
+	TokenIDs() []string
+}
+
+var _ TokenWatcherable = (*TokenWatcher)(nil)
 

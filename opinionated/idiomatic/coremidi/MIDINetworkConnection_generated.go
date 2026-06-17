@@ -23,3 +23,20 @@ func NewNetworkConnection() *NetworkConnection {
 	return &NetworkConnection{inner: raw.MIDINetworkConnectionFromID(_id)}
 }
 
+// Host calls the underlying Host.
+func (x *NetworkConnection) Host() *NetworkHost {
+	_r := x.inner.Host()
+	if _r == nil {
+		return nil
+	}
+	return &NetworkHost{inner: _r}
+}
+
+// NetworkConnectionable is the interface implemented by [NetworkConnection], for mocking and DI.
+type NetworkConnectionable interface {
+	Unwrap() *raw.MIDINetworkConnection
+	Host() *NetworkHost
+}
+
+var _ NetworkConnectionable = (*NetworkConnection)(nil)
+

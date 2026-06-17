@@ -25,3 +25,10 @@ func NewCallDestinationTypeResolutionResult() *CallDestinationTypeResolutionResu
 
 func (x *CallDestinationTypeResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult { return &x.inner.INIntentResolutionResult }
 
+// CallDestinationTypeResolutionResultable is the interface implemented by [CallDestinationTypeResolutionResult], for mocking and DI.
+type CallDestinationTypeResolutionResultable interface {
+	Unwrap() *raw.INCallDestinationTypeResolutionResult
+}
+
+var _ CallDestinationTypeResolutionResultable = (*CallDestinationTypeResolutionResult)(nil)
+

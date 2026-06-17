@@ -25,5 +25,18 @@ func NewEditMessageIntentResponseWithCodeUserActivity(code raw.INEditMessageInte
 	return &EditMessageIntentResponse{inner: raw.INEditMessageIntentResponseFromID(_id)}
 }
 
+// Code calls the underlying Code.
+func (x *EditMessageIntentResponse) Code() raw.INEditMessageIntentResponseCode {
+	return x.inner.Code()
+}
+
 func (x *EditMessageIntentResponse) asIntentResponse() *raw.INIntentResponse { return &x.inner.INIntentResponse }
+
+// EditMessageIntentResponseable is the interface implemented by [EditMessageIntentResponse], for mocking and DI.
+type EditMessageIntentResponseable interface {
+	Unwrap() *raw.INEditMessageIntentResponse
+	Code() raw.INEditMessageIntentResponseCode
+}
+
+var _ EditMessageIntentResponseable = (*EditMessageIntentResponse)(nil)
 

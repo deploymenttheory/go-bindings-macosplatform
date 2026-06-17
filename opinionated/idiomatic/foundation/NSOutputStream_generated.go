@@ -45,7 +45,26 @@ func NewOutputStreamToFileAtPathAppend(path string, shouldAppend bool) *OutputSt
 	return &OutputStream{inner: raw.NSOutputStreamFromID(_id)}
 }
 
+// WriteMaxLength calls the underlying WriteMaxLength.
+func (x *OutputStream) WriteMaxLength(buffer *uint8, len_ uint) int {
+	return x.inner.WriteMaxLength(buffer, len_)
+}
+
+// HasSpaceAvailable calls the underlying HasSpaceAvailable.
+func (x *OutputStream) HasSpaceAvailable() bool {
+	return x.inner.HasSpaceAvailable()
+}
+
 func (x *OutputStream) asStream() *raw.NSStream { return &x.inner.NSStream }
 
 func (x *OutputStream) asObject() *raw.NSObject { return &x.inner.NSStream.NSObject }
+
+// OutputStreamable is the interface implemented by [OutputStream], for mocking and DI.
+type OutputStreamable interface {
+	Unwrap() *raw.NSOutputStream
+	WriteMaxLength(buffer *uint8, len_ uint) int
+	HasSpaceAvailable() bool
+}
+
+var _ OutputStreamable = (*OutputStream)(nil)
 

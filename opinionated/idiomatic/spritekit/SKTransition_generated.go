@@ -35,3 +35,36 @@ func (x *Transition) WithPausesOutgoingScene(pausesOutgoingScene bool) *Transiti
 	return x
 }
 
+// PausesIncomingScene calls the underlying PausesIncomingScene.
+func (x *Transition) PausesIncomingScene() bool {
+	return x.inner.PausesIncomingScene()
+}
+
+// SetPausesIncomingScene calls the underlying SetPausesIncomingScene.
+func (x *Transition) SetPausesIncomingScene(pausesIncomingScene bool) {
+	x.inner.SetPausesIncomingScene(pausesIncomingScene)
+}
+
+// PausesOutgoingScene calls the underlying PausesOutgoingScene.
+func (x *Transition) PausesOutgoingScene() bool {
+	return x.inner.PausesOutgoingScene()
+}
+
+// SetPausesOutgoingScene calls the underlying SetPausesOutgoingScene.
+func (x *Transition) SetPausesOutgoingScene(pausesOutgoingScene bool) {
+	x.inner.SetPausesOutgoingScene(pausesOutgoingScene)
+}
+
+// Transitionable is the interface implemented by [Transition], for mocking and DI.
+type Transitionable interface {
+	Unwrap() *raw.SKTransition
+	WithPausesIncomingScene(pausesIncomingScene bool) *Transition
+	WithPausesOutgoingScene(pausesOutgoingScene bool) *Transition
+	PausesIncomingScene() bool
+	SetPausesIncomingScene(pausesIncomingScene bool)
+	PausesOutgoingScene() bool
+	SetPausesOutgoingScene(pausesOutgoingScene bool)
+}
+
+var _ Transitionable = (*Transition)(nil)
+

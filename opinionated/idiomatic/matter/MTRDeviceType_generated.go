@@ -5,7 +5,9 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +24,33 @@ func NewMTRDeviceType() *MTRDeviceType {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRDeviceType")), objc.RegisterName("new"))
 	return &MTRDeviceType{inner: raw.MTRDeviceTypeFromID(_id)}
 }
+
+// Id calls the underlying Id.
+func (x *MTRDeviceType) Id() *foundation.NSNumber {
+	return x.inner.Id()
+}
+
+// Name calls the underlying Name.
+func (x *MTRDeviceType) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// IsUtility calls the underlying IsUtility.
+func (x *MTRDeviceType) IsUtility() bool {
+	return x.inner.IsUtility()
+}
+
+// MTRDeviceTypeable is the interface implemented by [MTRDeviceType], for mocking and DI.
+type MTRDeviceTypeable interface {
+	Unwrap() *raw.MTRDeviceType
+	Id() *foundation.NSNumber
+	Name() string
+	IsUtility() bool
+}
+
+var _ MTRDeviceTypeable = (*MTRDeviceType)(nil)
 

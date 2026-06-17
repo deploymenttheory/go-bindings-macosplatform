@@ -23,3 +23,10 @@ func NewConstraintLayoutManager() *ConstraintLayoutManager {
 	return &ConstraintLayoutManager{inner: raw.CAConstraintLayoutManagerFromID(_id)}
 }
 
+// ConstraintLayoutManagerable is the interface implemented by [ConstraintLayoutManager], for mocking and DI.
+type ConstraintLayoutManagerable interface {
+	Unwrap() *raw.CAConstraintLayoutManager
+}
+
+var _ ConstraintLayoutManagerable = (*ConstraintLayoutManager)(nil)
+

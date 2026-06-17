@@ -37,5 +37,31 @@ func (x *ARC4RandomSource) WithSeed(seed *foundation.NSData) *ARC4RandomSource {
 	return x
 }
 
+// DropValuesWithCount calls the underlying DropValuesWithCount.
+func (x *ARC4RandomSource) DropValuesWithCount(count uint) {
+	x.inner.DropValuesWithCount(count)
+}
+
+// Seed calls the underlying Seed.
+func (x *ARC4RandomSource) Seed() *foundation.NSData {
+	return x.inner.Seed()
+}
+
+// SetSeed calls the underlying SetSeed.
+func (x *ARC4RandomSource) SetSeed(seed *foundation.NSData) {
+	x.inner.SetSeed(seed)
+}
+
 func (x *ARC4RandomSource) asRandomSource() *raw.GKRandomSource { return &x.inner.GKRandomSource }
+
+// ARC4RandomSourceable is the interface implemented by [ARC4RandomSource], for mocking and DI.
+type ARC4RandomSourceable interface {
+	Unwrap() *raw.GKARC4RandomSource
+	WithSeed(seed *foundation.NSData) *ARC4RandomSource
+	DropValuesWithCount(count uint)
+	Seed() *foundation.NSData
+	SetSeed(seed *foundation.NSData)
+}
+
+var _ ARC4RandomSourceable = (*ARC4RandomSource)(nil)
 

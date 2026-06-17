@@ -60,3 +60,88 @@ func (x *MTRLevelControlClusterMoveWithOnOffParams) WithServerSideProcessingTime
 	return x
 }
 
+// MoveMode calls the underlying MoveMode.
+func (x *MTRLevelControlClusterMoveWithOnOffParams) MoveMode() *foundation.NSNumber {
+	return x.inner.MoveMode()
+}
+
+// SetMoveMode calls the underlying SetMoveMode.
+func (x *MTRLevelControlClusterMoveWithOnOffParams) SetMoveMode(moveMode *foundation.NSNumber) {
+	x.inner.SetMoveMode(moveMode)
+}
+
+// Rate calls the underlying Rate.
+func (x *MTRLevelControlClusterMoveWithOnOffParams) Rate() *foundation.NSNumber {
+	return x.inner.Rate()
+}
+
+// SetRate calls the underlying SetRate.
+func (x *MTRLevelControlClusterMoveWithOnOffParams) SetRate(rate *foundation.NSNumber) {
+	x.inner.SetRate(rate)
+}
+
+// OptionsMask calls the underlying OptionsMask.
+func (x *MTRLevelControlClusterMoveWithOnOffParams) OptionsMask() *foundation.NSNumber {
+	return x.inner.OptionsMask()
+}
+
+// SetOptionsMask calls the underlying SetOptionsMask.
+func (x *MTRLevelControlClusterMoveWithOnOffParams) SetOptionsMask(optionsMask *foundation.NSNumber) {
+	x.inner.SetOptionsMask(optionsMask)
+}
+
+// OptionsOverride calls the underlying OptionsOverride.
+func (x *MTRLevelControlClusterMoveWithOnOffParams) OptionsOverride() *foundation.NSNumber {
+	return x.inner.OptionsOverride()
+}
+
+// SetOptionsOverride calls the underlying SetOptionsOverride.
+func (x *MTRLevelControlClusterMoveWithOnOffParams) SetOptionsOverride(optionsOverride *foundation.NSNumber) {
+	x.inner.SetOptionsOverride(optionsOverride)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRLevelControlClusterMoveWithOnOffParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRLevelControlClusterMoveWithOnOffParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRLevelControlClusterMoveWithOnOffParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRLevelControlClusterMoveWithOnOffParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRLevelControlClusterMoveWithOnOffParamsable is the interface implemented by [MTRLevelControlClusterMoveWithOnOffParams], for mocking and DI.
+type MTRLevelControlClusterMoveWithOnOffParamsable interface {
+	Unwrap() *raw.MTRLevelControlClusterMoveWithOnOffParams
+	WithMoveMode(moveMode *foundation.NSNumber) *MTRLevelControlClusterMoveWithOnOffParams
+	WithRate(rate *foundation.NSNumber) *MTRLevelControlClusterMoveWithOnOffParams
+	WithOptionsMask(optionsMask *foundation.NSNumber) *MTRLevelControlClusterMoveWithOnOffParams
+	WithOptionsOverride(optionsOverride *foundation.NSNumber) *MTRLevelControlClusterMoveWithOnOffParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRLevelControlClusterMoveWithOnOffParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRLevelControlClusterMoveWithOnOffParams
+	MoveMode() *foundation.NSNumber
+	SetMoveMode(moveMode *foundation.NSNumber)
+	Rate() *foundation.NSNumber
+	SetRate(rate *foundation.NSNumber)
+	OptionsMask() *foundation.NSNumber
+	SetOptionsMask(optionsMask *foundation.NSNumber)
+	OptionsOverride() *foundation.NSNumber
+	SetOptionsOverride(optionsOverride *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRLevelControlClusterMoveWithOnOffParamsable = (*MTRLevelControlClusterMoveWithOnOffParams)(nil)
+

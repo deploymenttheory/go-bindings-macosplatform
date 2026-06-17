@@ -38,11 +38,11 @@ func (x *FileCoordinator) WithPurposeIdentifier(purposeIdentifier string) *FileC
 func (x *FileCoordinator) CoordinateAccessWithIntentsQueueByAccessor(ctx context.Context, intents *raw.NSArray[*raw.NSFileAccessIntent], queue *raw.NSOperationQueue) error {
 	_ch := make(chan error, 1)
 	x.inner.CoordinateAccessWithIntentsQueueByAccessor(intents, queue, func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -52,5 +52,120 @@ func (x *FileCoordinator) CoordinateAccessWithIntentsQueueByAccessor(ctx context
 	}
 }
 
+// CoordinateReadingItemAtURLOptionsErrorByAccessor blocks until the operation completes or ctx is cancelled.
+func (x *FileCoordinator) CoordinateReadingItemAtURLOptionsErrorByAccessor(ctx context.Context, url string, options raw.NSFileCoordinatorReadingOptions, outError unsafe.Pointer) (*URL, error) {
+	type _result struct {
+		val *URL
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.CoordinateReadingItemAtURLOptionsErrorByAccessor(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), options, outError, func(_p0 *raw.NSURL) {
+		var _o _result
+		if _p0 != nil {
+			_o.val = &URL{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *URL
+		return _zero, ctx.Err()
+	}
+}
+
+// CoordinateWritingItemAtURLOptionsErrorByAccessor blocks until the operation completes or ctx is cancelled.
+func (x *FileCoordinator) CoordinateWritingItemAtURLOptionsErrorByAccessor(ctx context.Context, url string, options raw.NSFileCoordinatorWritingOptions, outError unsafe.Pointer) (*URL, error) {
+	type _result struct {
+		val *URL
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.CoordinateWritingItemAtURLOptionsErrorByAccessor(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), options, outError, func(_p0 *raw.NSURL) {
+		var _o _result
+		if _p0 != nil {
+			_o.val = &URL{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *URL
+		return _zero, ctx.Err()
+	}
+}
+
+// CoordinateReadingItemAtURLOptionsWritingItemAtURLOptionsErrorByAccessor calls the underlying CoordinateReadingItemAtURLOptionsWritingItemAtURLOptionsErrorByAccessor.
+func (x *FileCoordinator) CoordinateReadingItemAtURLOptionsWritingItemAtURLOptionsErrorByAccessor(readingURL string, readingOptions raw.NSFileCoordinatorReadingOptions, writingURL string, writingOptions raw.NSFileCoordinatorWritingOptions, outError unsafe.Pointer, readerWriter func(*raw.NSURL, *raw.NSURL)) {
+	x.inner.CoordinateReadingItemAtURLOptionsWritingItemAtURLOptionsErrorByAccessor(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(readingURL)), readingOptions, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(writingURL)), writingOptions, outError, readerWriter)
+}
+
+// CoordinateWritingItemAtURLOptionsWritingItemAtURLOptionsErrorByAccessor calls the underlying CoordinateWritingItemAtURLOptionsWritingItemAtURLOptionsErrorByAccessor.
+func (x *FileCoordinator) CoordinateWritingItemAtURLOptionsWritingItemAtURLOptionsErrorByAccessor(url1 string, options1 raw.NSFileCoordinatorWritingOptions, url2 string, options2 raw.NSFileCoordinatorWritingOptions, outError unsafe.Pointer, writer func(*raw.NSURL, *raw.NSURL)) {
+	x.inner.CoordinateWritingItemAtURLOptionsWritingItemAtURLOptionsErrorByAccessor(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url1)), options1, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url2)), options2, outError, writer)
+}
+
+// PrepareForReadingItemsAtURLsOptionsWritingItemsAtURLsOptionsErrorByAccessor calls the underlying PrepareForReadingItemsAtURLsOptionsWritingItemsAtURLsOptionsErrorByAccessor.
+func (x *FileCoordinator) PrepareForReadingItemsAtURLsOptionsWritingItemsAtURLsOptionsErrorByAccessor(readingURLs *raw.NSArray[*raw.NSURL], readingOptions raw.NSFileCoordinatorReadingOptions, writingURLs *raw.NSArray[*raw.NSURL], writingOptions raw.NSFileCoordinatorWritingOptions, outError unsafe.Pointer, batchAccessor func(objc.Block)) {
+	x.inner.PrepareForReadingItemsAtURLsOptionsWritingItemsAtURLsOptionsErrorByAccessor(readingURLs, readingOptions, writingURLs, writingOptions, outError, batchAccessor)
+}
+
+// ItemAtURLWillMoveToURL calls the underlying ItemAtURLWillMoveToURL.
+func (x *FileCoordinator) ItemAtURLWillMoveToURL(oldURL string, newURL string) {
+	x.inner.ItemAtURLWillMoveToURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(oldURL)), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(newURL)))
+}
+
+// ItemAtURLDidMoveToURL calls the underlying ItemAtURLDidMoveToURL.
+func (x *FileCoordinator) ItemAtURLDidMoveToURL(oldURL string, newURL string) {
+	x.inner.ItemAtURLDidMoveToURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(oldURL)), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(newURL)))
+}
+
+// ItemAtURLDidChangeUbiquityAttributes calls the underlying ItemAtURLDidChangeUbiquityAttributes.
+func (x *FileCoordinator) ItemAtURLDidChangeUbiquityAttributes(url string, attributes *raw.NSSet[*raw.NSString]) {
+	x.inner.ItemAtURLDidChangeUbiquityAttributes(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), attributes)
+}
+
+// Cancel calls the underlying Cancel.
+func (x *FileCoordinator) Cancel() {
+	x.inner.Cancel()
+}
+
+// PurposeIdentifier calls the underlying PurposeIdentifier.
+func (x *FileCoordinator) PurposeIdentifier() *String {
+	_r := x.inner.PurposeIdentifier()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SetPurposeIdentifier calls the underlying SetPurposeIdentifier.
+func (x *FileCoordinator) SetPurposeIdentifier(purposeIdentifier string) {
+	x.inner.SetPurposeIdentifier(foundation.NSStringStringWithUTF8String(purposeIdentifier))
+}
+
 func (x *FileCoordinator) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// FileCoordinatorable is the interface implemented by [FileCoordinator], for mocking and DI.
+type FileCoordinatorable interface {
+	Unwrap() *raw.NSFileCoordinator
+	WithPurposeIdentifier(purposeIdentifier string) *FileCoordinator
+	CoordinateAccessWithIntentsQueueByAccessor(ctx context.Context, intents *raw.NSArray[*raw.NSFileAccessIntent], queue *raw.NSOperationQueue) error
+	CoordinateReadingItemAtURLOptionsErrorByAccessor(ctx context.Context, url string, options raw.NSFileCoordinatorReadingOptions, outError unsafe.Pointer) (*URL, error)
+	CoordinateWritingItemAtURLOptionsErrorByAccessor(ctx context.Context, url string, options raw.NSFileCoordinatorWritingOptions, outError unsafe.Pointer) (*URL, error)
+	CoordinateReadingItemAtURLOptionsWritingItemAtURLOptionsErrorByAccessor(readingURL string, readingOptions raw.NSFileCoordinatorReadingOptions, writingURL string, writingOptions raw.NSFileCoordinatorWritingOptions, outError unsafe.Pointer, readerWriter func(*raw.NSURL, *raw.NSURL))
+	CoordinateWritingItemAtURLOptionsWritingItemAtURLOptionsErrorByAccessor(url1 string, options1 raw.NSFileCoordinatorWritingOptions, url2 string, options2 raw.NSFileCoordinatorWritingOptions, outError unsafe.Pointer, writer func(*raw.NSURL, *raw.NSURL))
+	PrepareForReadingItemsAtURLsOptionsWritingItemsAtURLsOptionsErrorByAccessor(readingURLs *raw.NSArray[*raw.NSURL], readingOptions raw.NSFileCoordinatorReadingOptions, writingURLs *raw.NSArray[*raw.NSURL], writingOptions raw.NSFileCoordinatorWritingOptions, outError unsafe.Pointer, batchAccessor func(objc.Block))
+	ItemAtURLWillMoveToURL(oldURL string, newURL string)
+	ItemAtURLDidMoveToURL(oldURL string, newURL string)
+	ItemAtURLDidChangeUbiquityAttributes(url string, attributes *raw.NSSet[*raw.NSString])
+	Cancel()
+	PurposeIdentifier() *String
+	SetPurposeIdentifier(purposeIdentifier string)
+}
+
+var _ FileCoordinatorable = (*FileCoordinator)(nil)
 

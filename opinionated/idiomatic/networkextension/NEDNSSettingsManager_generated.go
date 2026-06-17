@@ -59,11 +59,11 @@ func (x *NEDNSSettingsManager) WithOnDemandRules(items ...NEOnDemandRuleProvider
 func (x *NEDNSSettingsManager) LoadFromPreferences(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.LoadFromPreferencesWithCompletionHandler(func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -77,11 +77,11 @@ func (x *NEDNSSettingsManager) LoadFromPreferences(ctx context.Context) error {
 func (x *NEDNSSettingsManager) RemoveFromPreferences(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.RemoveFromPreferencesWithCompletionHandler(func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -95,11 +95,11 @@ func (x *NEDNSSettingsManager) RemoveFromPreferences(ctx context.Context) error 
 func (x *NEDNSSettingsManager) SaveToPreferences(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.SaveToPreferencesWithCompletionHandler(func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -109,16 +109,72 @@ func (x *NEDNSSettingsManager) SaveToPreferences(ctx context.Context) error {
 	}
 }
 
+// LocalizedDescription calls the underlying LocalizedDescription.
+func (x *NEDNSSettingsManager) LocalizedDescription() string {
+	_r := x.inner.LocalizedDescription()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLocalizedDescription calls the underlying SetLocalizedDescription.
+func (x *NEDNSSettingsManager) SetLocalizedDescription(localizedDescription string) {
+	x.inner.SetLocalizedDescription(foundation.NSStringStringWithUTF8String(localizedDescription))
+}
+
+// DnsSettings calls the underlying DnsSettings.
+func (x *NEDNSSettingsManager) DnsSettings() *NEDNSSettings {
+	_r := x.inner.DnsSettings()
+	if _r == nil {
+		return nil
+	}
+	return &NEDNSSettings{inner: _r}
+}
+
+// SetDnsSettings calls the underlying SetDnsSettings.
+func (x *NEDNSSettingsManager) SetDnsSettings(dnsSettings *raw.NEDNSSettings) {
+	x.inner.SetDnsSettings(dnsSettings)
+}
+
 // OnDemandRules returns the collection as a Go slice.
 func (x *NEDNSSettingsManager) OnDemandRules() []*raw.NEOnDemandRule {
 	arr := x.inner.OnDemandRules()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NEOnDemandRule, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NEOnDemandRule {
+		return raw.NEOnDemandRuleFromID(purego.Retain(_id))
+	})
 }
+
+// SetOnDemandRules calls the underlying SetOnDemandRules.
+func (x *NEDNSSettingsManager) SetOnDemandRules(onDemandRules *foundation.NSArray[*raw.NEOnDemandRule]) {
+	x.inner.SetOnDemandRules(onDemandRules)
+}
+
+// IsEnabled calls the underlying IsEnabled.
+func (x *NEDNSSettingsManager) IsEnabled() bool {
+	return x.inner.IsEnabled()
+}
+
+// NEDNSSettingsManagerable is the interface implemented by [NEDNSSettingsManager], for mocking and DI.
+type NEDNSSettingsManagerable interface {
+	Unwrap() *raw.NEDNSSettingsManager
+	WithLocalizedDescription(localizedDescription string) *NEDNSSettingsManager
+	WithDnsSettings(dnsSettings NEDNSSettingsProvider) *NEDNSSettingsManager
+	WithOnDemandRules(items ...NEOnDemandRuleProvider) *NEDNSSettingsManager
+	LoadFromPreferences(ctx context.Context) error
+	RemoveFromPreferences(ctx context.Context) error
+	SaveToPreferences(ctx context.Context) error
+	LocalizedDescription() string
+	SetLocalizedDescription(localizedDescription string)
+	DnsSettings() *NEDNSSettings
+	SetDnsSettings(dnsSettings *raw.NEDNSSettings)
+	OnDemandRules() []*raw.NEOnDemandRule
+	SetOnDemandRules(onDemandRules *foundation.NSArray[*raw.NEOnDemandRule])
+	IsEnabled() bool
+}
+
+var _ NEDNSSettingsManagerable = (*NEDNSSettingsManager)(nil)
 

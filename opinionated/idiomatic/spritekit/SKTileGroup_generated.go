@@ -7,6 +7,7 @@ package spritekit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -61,10 +62,40 @@ func (x *TileGroup) Rules() []*raw.SKTileGroupRule {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.SKTileGroupRule, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SKTileGroupRule {
+		return raw.SKTileGroupRuleFromID(purego.Retain(_id))
+	})
 }
+
+// SetRules calls the underlying SetRules.
+func (x *TileGroup) SetRules(rules *foundation.NSArray[*raw.SKTileGroupRule]) {
+	x.inner.SetRules(rules)
+}
+
+// Name calls the underlying Name.
+func (x *TileGroup) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetName calls the underlying SetName.
+func (x *TileGroup) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
+// TileGroupable is the interface implemented by [TileGroup], for mocking and DI.
+type TileGroupable interface {
+	Unwrap() *raw.SKTileGroup
+	WithRules(items ...*raw.SKTileGroupRule) *TileGroup
+	WithName(name string) *TileGroup
+	Rules() []*raw.SKTileGroupRule
+	SetRules(rules *foundation.NSArray[*raw.SKTileGroupRule])
+	Name() string
+	SetName(name string)
+}
+
+var _ TileGroupable = (*TileGroup)(nil)
 

@@ -41,7 +41,39 @@ func (x *ImageConvolution) WithBias(bias float32) *ImageConvolution {
 	return x
 }
 
+// KernelHeight calls the underlying KernelHeight.
+func (x *ImageConvolution) KernelHeight() uint {
+	return x.inner.KernelHeight()
+}
+
+// KernelWidth calls the underlying KernelWidth.
+func (x *ImageConvolution) KernelWidth() uint {
+	return x.inner.KernelWidth()
+}
+
+// Bias calls the underlying Bias.
+func (x *ImageConvolution) Bias() float32 {
+	return x.inner.Bias()
+}
+
+// SetBias calls the underlying SetBias.
+func (x *ImageConvolution) SetBias(bias float32) {
+	x.inner.SetBias(bias)
+}
+
 func (x *ImageConvolution) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel { return &x.inner.MPSUnaryImageKernel }
 
 func (x *ImageConvolution) asKernel() *mpscore.MPSKernel { return &x.inner.MPSUnaryImageKernel.MPSKernel }
+
+// ImageConvolutionable is the interface implemented by [ImageConvolution], for mocking and DI.
+type ImageConvolutionable interface {
+	Unwrap() *raw.MPSImageConvolution
+	WithBias(bias float32) *ImageConvolution
+	KernelHeight() uint
+	KernelWidth() uint
+	Bias() float32
+	SetBias(bias float32)
+}
+
+var _ ImageConvolutionable = (*ImageConvolution)(nil)
 

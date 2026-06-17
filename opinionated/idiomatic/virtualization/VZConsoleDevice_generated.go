@@ -25,3 +25,10 @@ func NewConsoleDevice() *ConsoleDevice {
 
 func (x *ConsoleDevice) asConsoleDevice() *raw.VZConsoleDevice { return x.inner }
 
+// ConsoleDeviceable is the interface implemented by [ConsoleDevice], for mocking and DI.
+type ConsoleDeviceable interface {
+	Unwrap() *raw.VZConsoleDevice
+}
+
+var _ ConsoleDeviceable = (*ConsoleDevice)(nil)
+

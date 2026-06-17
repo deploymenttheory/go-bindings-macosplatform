@@ -42,3 +42,49 @@ func (x *MTROccupancySensingClusterHoldTimeLimitsStruct) WithHoldTimeDefault(hol
 	return x
 }
 
+// HoldTimeMin calls the underlying HoldTimeMin.
+func (x *MTROccupancySensingClusterHoldTimeLimitsStruct) HoldTimeMin() *foundation.NSNumber {
+	return x.inner.HoldTimeMin()
+}
+
+// SetHoldTimeMin calls the underlying SetHoldTimeMin.
+func (x *MTROccupancySensingClusterHoldTimeLimitsStruct) SetHoldTimeMin(holdTimeMin *foundation.NSNumber) {
+	x.inner.SetHoldTimeMin(holdTimeMin)
+}
+
+// HoldTimeMax calls the underlying HoldTimeMax.
+func (x *MTROccupancySensingClusterHoldTimeLimitsStruct) HoldTimeMax() *foundation.NSNumber {
+	return x.inner.HoldTimeMax()
+}
+
+// SetHoldTimeMax calls the underlying SetHoldTimeMax.
+func (x *MTROccupancySensingClusterHoldTimeLimitsStruct) SetHoldTimeMax(holdTimeMax *foundation.NSNumber) {
+	x.inner.SetHoldTimeMax(holdTimeMax)
+}
+
+// HoldTimeDefault calls the underlying HoldTimeDefault.
+func (x *MTROccupancySensingClusterHoldTimeLimitsStruct) HoldTimeDefault() *foundation.NSNumber {
+	return x.inner.HoldTimeDefault()
+}
+
+// SetHoldTimeDefault calls the underlying SetHoldTimeDefault.
+func (x *MTROccupancySensingClusterHoldTimeLimitsStruct) SetHoldTimeDefault(holdTimeDefault *foundation.NSNumber) {
+	x.inner.SetHoldTimeDefault(holdTimeDefault)
+}
+
+// MTROccupancySensingClusterHoldTimeLimitsStructable is the interface implemented by [MTROccupancySensingClusterHoldTimeLimitsStruct], for mocking and DI.
+type MTROccupancySensingClusterHoldTimeLimitsStructable interface {
+	Unwrap() *raw.MTROccupancySensingClusterHoldTimeLimitsStruct
+	WithHoldTimeMin(holdTimeMin *foundation.NSNumber) *MTROccupancySensingClusterHoldTimeLimitsStruct
+	WithHoldTimeMax(holdTimeMax *foundation.NSNumber) *MTROccupancySensingClusterHoldTimeLimitsStruct
+	WithHoldTimeDefault(holdTimeDefault *foundation.NSNumber) *MTROccupancySensingClusterHoldTimeLimitsStruct
+	HoldTimeMin() *foundation.NSNumber
+	SetHoldTimeMin(holdTimeMin *foundation.NSNumber)
+	HoldTimeMax() *foundation.NSNumber
+	SetHoldTimeMax(holdTimeMax *foundation.NSNumber)
+	HoldTimeDefault() *foundation.NSNumber
+	SetHoldTimeDefault(holdTimeDefault *foundation.NSNumber)
+}
+
+var _ MTROccupancySensingClusterHoldTimeLimitsStructable = (*MTROccupancySensingClusterHoldTimeLimitsStruct)(nil)
+

@@ -35,7 +35,20 @@ func NewImageMedianWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MT
 	return &ImageMedian{inner: raw.MPSImageMedianFromID(_id)}
 }
 
+// KernelDiameter calls the underlying KernelDiameter.
+func (x *ImageMedian) KernelDiameter() uint {
+	return x.inner.KernelDiameter()
+}
+
 func (x *ImageMedian) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel { return &x.inner.MPSUnaryImageKernel }
 
 func (x *ImageMedian) asKernel() *mpscore.MPSKernel { return &x.inner.MPSUnaryImageKernel.MPSKernel }
+
+// ImageMedianable is the interface implemented by [ImageMedian], for mocking and DI.
+type ImageMedianable interface {
+	Unwrap() *raw.MPSImageMedian
+	KernelDiameter() uint
+}
+
+var _ ImageMedianable = (*ImageMedian)(nil)
 

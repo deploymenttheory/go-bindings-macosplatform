@@ -6,7 +6,9 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -49,4 +51,114 @@ func (x *CaptureVideoPreviewLayer) WithDeferredStartEnabled(deferredStartEnabled
 	x.inner.SetDeferredStartEnabled(deferredStartEnabled)
 	return x
 }
+
+// SetSessionWithNoConnection calls the underlying SetSessionWithNoConnection.
+func (x *CaptureVideoPreviewLayer) SetSessionWithNoConnection(session *raw.AVCaptureSession) {
+	x.inner.SetSessionWithNoConnection(session)
+}
+
+// CaptureDevicePointOfInterestForPoint calls the underlying CaptureDevicePointOfInterestForPoint.
+func (x *CaptureVideoPreviewLayer) CaptureDevicePointOfInterestForPoint(pointInLayer corefoundation.CGPoint) corefoundation.CGPoint {
+	return x.inner.CaptureDevicePointOfInterestForPoint(pointInLayer)
+}
+
+// PointForCaptureDevicePointOfInterest calls the underlying PointForCaptureDevicePointOfInterest.
+func (x *CaptureVideoPreviewLayer) PointForCaptureDevicePointOfInterest(captureDevicePointOfInterest corefoundation.CGPoint) corefoundation.CGPoint {
+	return x.inner.PointForCaptureDevicePointOfInterest(captureDevicePointOfInterest)
+}
+
+// MetadataOutputRectOfInterestForRect calls the underlying MetadataOutputRectOfInterestForRect.
+func (x *CaptureVideoPreviewLayer) MetadataOutputRectOfInterestForRect(rectInLayerCoordinates corefoundation.CGRect) corefoundation.CGRect {
+	return x.inner.MetadataOutputRectOfInterestForRect(rectInLayerCoordinates)
+}
+
+// RectForMetadataOutputRectOfInterest calls the underlying RectForMetadataOutputRectOfInterest.
+func (x *CaptureVideoPreviewLayer) RectForMetadataOutputRectOfInterest(rectInMetadataOutputCoordinates corefoundation.CGRect) corefoundation.CGRect {
+	return x.inner.RectForMetadataOutputRectOfInterest(rectInMetadataOutputCoordinates)
+}
+
+// TransformedMetadataObjectForMetadataObject calls the underlying TransformedMetadataObjectForMetadataObject.
+func (x *CaptureVideoPreviewLayer) TransformedMetadataObjectForMetadataObject(metadataObject *raw.AVMetadataObject) *MetadataObject {
+	_r := x.inner.TransformedMetadataObjectForMetadataObject(metadataObject)
+	if _r == nil {
+		return nil
+	}
+	return &MetadataObject{inner: _r}
+}
+
+// Session calls the underlying Session.
+func (x *CaptureVideoPreviewLayer) Session() *CaptureSession {
+	_r := x.inner.Session()
+	if _r == nil {
+		return nil
+	}
+	return &CaptureSession{inner: _r}
+}
+
+// SetSession calls the underlying SetSession.
+func (x *CaptureVideoPreviewLayer) SetSession(session *raw.AVCaptureSession) {
+	x.inner.SetSession(session)
+}
+
+// Connection calls the underlying Connection.
+func (x *CaptureVideoPreviewLayer) Connection() *CaptureConnection {
+	_r := x.inner.Connection()
+	if _r == nil {
+		return nil
+	}
+	return &CaptureConnection{inner: _r}
+}
+
+// VideoGravity calls the underlying VideoGravity.
+func (x *CaptureVideoPreviewLayer) VideoGravity() string {
+	_r := x.inner.VideoGravity()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetVideoGravity calls the underlying SetVideoGravity.
+func (x *CaptureVideoPreviewLayer) SetVideoGravity(videoGravity *foundation.NSString) {
+	x.inner.SetVideoGravity(videoGravity)
+}
+
+// IsDeferredStartSupported calls the underlying IsDeferredStartSupported.
+func (x *CaptureVideoPreviewLayer) IsDeferredStartSupported() bool {
+	return x.inner.IsDeferredStartSupported()
+}
+
+// IsDeferredStartEnabled calls the underlying IsDeferredStartEnabled.
+func (x *CaptureVideoPreviewLayer) IsDeferredStartEnabled() bool {
+	return x.inner.IsDeferredStartEnabled()
+}
+
+// SetDeferredStartEnabled calls the underlying SetDeferredStartEnabled.
+func (x *CaptureVideoPreviewLayer) SetDeferredStartEnabled(deferredStartEnabled bool) {
+	x.inner.SetDeferredStartEnabled(deferredStartEnabled)
+}
+
+// CaptureVideoPreviewLayerable is the interface implemented by [CaptureVideoPreviewLayer], for mocking and DI.
+type CaptureVideoPreviewLayerable interface {
+	Unwrap() *raw.AVCaptureVideoPreviewLayer
+	WithSession(session *raw.AVCaptureSession) *CaptureVideoPreviewLayer
+	WithVideoGravity(videoGravity *foundation.NSString) *CaptureVideoPreviewLayer
+	WithDeferredStartEnabled(deferredStartEnabled bool) *CaptureVideoPreviewLayer
+	SetSessionWithNoConnection(session *raw.AVCaptureSession)
+	CaptureDevicePointOfInterestForPoint(pointInLayer corefoundation.CGPoint) corefoundation.CGPoint
+	PointForCaptureDevicePointOfInterest(captureDevicePointOfInterest corefoundation.CGPoint) corefoundation.CGPoint
+	MetadataOutputRectOfInterestForRect(rectInLayerCoordinates corefoundation.CGRect) corefoundation.CGRect
+	RectForMetadataOutputRectOfInterest(rectInMetadataOutputCoordinates corefoundation.CGRect) corefoundation.CGRect
+	TransformedMetadataObjectForMetadataObject(metadataObject *raw.AVMetadataObject) *MetadataObject
+	Session() *CaptureSession
+	SetSession(session *raw.AVCaptureSession)
+	Connection() *CaptureConnection
+	VideoGravity() string
+	SetVideoGravity(videoGravity *foundation.NSString)
+	IsDeferredStartSupported() bool
+	IsDeferredStartEnabled() bool
+	SetDeferredStartEnabled(deferredStartEnabled bool)
+}
+
+var _ CaptureVideoPreviewLayerable = (*CaptureVideoPreviewLayer)(nil)
 

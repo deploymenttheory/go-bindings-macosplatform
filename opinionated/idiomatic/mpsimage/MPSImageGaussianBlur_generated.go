@@ -33,5 +33,18 @@ func NewImageGaussianBlurWithCoderDevice(aDecoder *foundation.NSCoder, device me
 	return &ImageGaussianBlur{inner: raw.MPSImageGaussianBlurFromID(_id)}
 }
 
+// Sigma calls the underlying Sigma.
+func (x *ImageGaussianBlur) Sigma() float32 {
+	return x.inner.Sigma()
+}
+
 func (x *ImageGaussianBlur) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.inner.MPSUnaryImageKernel }
+
+// ImageGaussianBlurable is the interface implemented by [ImageGaussianBlur], for mocking and DI.
+type ImageGaussianBlurable interface {
+	Unwrap() *raw.MPSImageGaussianBlur
+	Sigma() float32
+}
+
+var _ ImageGaussianBlurable = (*ImageGaussianBlur)(nil)
 

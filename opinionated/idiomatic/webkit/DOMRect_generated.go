@@ -23,7 +23,54 @@ func NewDOMRect() *DOMRect {
 	return &DOMRect{inner: raw.DOMRectFromID(_id)}
 }
 
+// Top calls the underlying Top.
+func (x *DOMRect) Top() *DOMCSSPrimitiveValue {
+	_r := x.inner.Top()
+	if _r == nil {
+		return nil
+	}
+	return &DOMCSSPrimitiveValue{inner: _r}
+}
+
+// Right calls the underlying Right.
+func (x *DOMRect) Right() *DOMCSSPrimitiveValue {
+	_r := x.inner.Right()
+	if _r == nil {
+		return nil
+	}
+	return &DOMCSSPrimitiveValue{inner: _r}
+}
+
+// Bottom calls the underlying Bottom.
+func (x *DOMRect) Bottom() *DOMCSSPrimitiveValue {
+	_r := x.inner.Bottom()
+	if _r == nil {
+		return nil
+	}
+	return &DOMCSSPrimitiveValue{inner: _r}
+}
+
+// Left calls the underlying Left.
+func (x *DOMRect) Left() *DOMCSSPrimitiveValue {
+	_r := x.inner.Left()
+	if _r == nil {
+		return nil
+	}
+	return &DOMCSSPrimitiveValue{inner: _r}
+}
+
 func (x *DOMRect) asDOMObject() *raw.DOMObject { return &x.inner.DOMObject }
 
 func (x *DOMRect) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMObject.WebScriptObject }
+
+// DOMRectable is the interface implemented by [DOMRect], for mocking and DI.
+type DOMRectable interface {
+	Unwrap() *raw.DOMRect
+	Top() *DOMCSSPrimitiveValue
+	Right() *DOMCSSPrimitiveValue
+	Bottom() *DOMCSSPrimitiveValue
+	Left() *DOMCSSPrimitiveValue
+}
+
+var _ DOMRectable = (*DOMRect)(nil)
 

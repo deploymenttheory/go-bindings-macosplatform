@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -47,4 +48,67 @@ func (x *MTRAudioOutputClusterRenameOutputParams) WithServerSideProcessingTimeou
 	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
 	return x
 }
+
+// Index calls the underlying Index.
+func (x *MTRAudioOutputClusterRenameOutputParams) Index() *foundation.NSNumber {
+	return x.inner.Index()
+}
+
+// SetIndex calls the underlying SetIndex.
+func (x *MTRAudioOutputClusterRenameOutputParams) SetIndex(index *foundation.NSNumber) {
+	x.inner.SetIndex(index)
+}
+
+// Name calls the underlying Name.
+func (x *MTRAudioOutputClusterRenameOutputParams) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetName calls the underlying SetName.
+func (x *MTRAudioOutputClusterRenameOutputParams) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRAudioOutputClusterRenameOutputParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRAudioOutputClusterRenameOutputParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRAudioOutputClusterRenameOutputParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRAudioOutputClusterRenameOutputParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRAudioOutputClusterRenameOutputParamsable is the interface implemented by [MTRAudioOutputClusterRenameOutputParams], for mocking and DI.
+type MTRAudioOutputClusterRenameOutputParamsable interface {
+	Unwrap() *raw.MTRAudioOutputClusterRenameOutputParams
+	WithIndex(index *foundation.NSNumber) *MTRAudioOutputClusterRenameOutputParams
+	WithName(name string) *MTRAudioOutputClusterRenameOutputParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRAudioOutputClusterRenameOutputParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRAudioOutputClusterRenameOutputParams
+	Index() *foundation.NSNumber
+	SetIndex(index *foundation.NSNumber)
+	Name() string
+	SetName(name string)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRAudioOutputClusterRenameOutputParamsable = (*MTRAudioOutputClusterRenameOutputParams)(nil)
 

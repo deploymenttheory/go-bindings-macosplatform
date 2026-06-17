@@ -6,6 +6,7 @@ package automator
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/automator"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,17 @@ func NewWorkspace() *Workspace {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AMWorkspace")), objc.RegisterName("new"))
 	return &Workspace{inner: raw.AMWorkspaceFromID(_id)}
 }
+
+// RunWorkflowAtPathWithInputError calls the underlying RunWorkflowAtPathWithInputError.
+func (x *Workspace) RunWorkflowAtPathWithInputError(path string, input objc.ID) (objc.ID, error) {
+	return x.inner.RunWorkflowAtPathWithInputError(foundation.NSStringStringWithUTF8String(path), input)
+}
+
+// Workspaceable is the interface implemented by [Workspace], for mocking and DI.
+type Workspaceable interface {
+	Unwrap() *raw.AMWorkspace
+	RunWorkflowAtPathWithInputError(path string, input objc.ID) (objc.ID, error)
+}
+
+var _ Workspaceable = (*Workspace)(nil)
 

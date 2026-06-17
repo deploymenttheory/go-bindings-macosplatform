@@ -6,6 +6,7 @@ package quartz
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartz"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,27 @@ func NewIKFilterBrowserView() *IKFilterBrowserView {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("IKFilterBrowserView")), objc.RegisterName("new"))
 	return &IKFilterBrowserView{inner: raw.IKFilterBrowserViewFromID(_id)}
 }
+
+// SetPreviewState calls the underlying SetPreviewState.
+func (x *IKFilterBrowserView) SetPreviewState(inState bool) {
+	x.inner.SetPreviewState(inState)
+}
+
+// FilterName calls the underlying FilterName.
+func (x *IKFilterBrowserView) FilterName() string {
+	_r := x.inner.FilterName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// IKFilterBrowserViewable is the interface implemented by [IKFilterBrowserView], for mocking and DI.
+type IKFilterBrowserViewable interface {
+	Unwrap() *raw.IKFilterBrowserView
+	SetPreviewState(inState bool)
+	FilterName() string
+}
+
+var _ IKFilterBrowserViewable = (*IKFilterBrowserView)(nil)
 

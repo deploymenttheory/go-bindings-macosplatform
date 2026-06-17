@@ -42,3 +42,49 @@ func (x *MTROperationalCredentialsClusterCertificateChainRequestParams) WithServ
 	return x
 }
 
+// CertificateType calls the underlying CertificateType.
+func (x *MTROperationalCredentialsClusterCertificateChainRequestParams) CertificateType() *foundation.NSNumber {
+	return x.inner.CertificateType()
+}
+
+// SetCertificateType calls the underlying SetCertificateType.
+func (x *MTROperationalCredentialsClusterCertificateChainRequestParams) SetCertificateType(certificateType *foundation.NSNumber) {
+	x.inner.SetCertificateType(certificateType)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTROperationalCredentialsClusterCertificateChainRequestParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTROperationalCredentialsClusterCertificateChainRequestParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTROperationalCredentialsClusterCertificateChainRequestParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTROperationalCredentialsClusterCertificateChainRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTROperationalCredentialsClusterCertificateChainRequestParamsable is the interface implemented by [MTROperationalCredentialsClusterCertificateChainRequestParams], for mocking and DI.
+type MTROperationalCredentialsClusterCertificateChainRequestParamsable interface {
+	Unwrap() *raw.MTROperationalCredentialsClusterCertificateChainRequestParams
+	WithCertificateType(certificateType *foundation.NSNumber) *MTROperationalCredentialsClusterCertificateChainRequestParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTROperationalCredentialsClusterCertificateChainRequestParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTROperationalCredentialsClusterCertificateChainRequestParams
+	CertificateType() *foundation.NSNumber
+	SetCertificateType(certificateType *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTROperationalCredentialsClusterCertificateChainRequestParamsable = (*MTROperationalCredentialsClusterCertificateChainRequestParams)(nil)
+

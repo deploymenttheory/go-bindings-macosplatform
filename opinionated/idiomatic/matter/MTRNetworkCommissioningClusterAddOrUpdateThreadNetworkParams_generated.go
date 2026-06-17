@@ -48,3 +48,62 @@ func (x *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams) WithServe
 	return x
 }
 
+// OperationalDataset calls the underlying OperationalDataset.
+func (x *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams) OperationalDataset() *foundation.NSData {
+	return x.inner.OperationalDataset()
+}
+
+// SetOperationalDataset calls the underlying SetOperationalDataset.
+func (x *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams) SetOperationalDataset(operationalDataset *foundation.NSData) {
+	x.inner.SetOperationalDataset(operationalDataset)
+}
+
+// Breadcrumb calls the underlying Breadcrumb.
+func (x *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams) Breadcrumb() *foundation.NSNumber {
+	return x.inner.Breadcrumb()
+}
+
+// SetBreadcrumb calls the underlying SetBreadcrumb.
+func (x *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams) SetBreadcrumb(breadcrumb *foundation.NSNumber) {
+	x.inner.SetBreadcrumb(breadcrumb)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParamsable is the interface implemented by [MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams], for mocking and DI.
+type MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParamsable interface {
+	Unwrap() *raw.MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams
+	WithOperationalDataset(operationalDataset *foundation.NSData) *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams
+	WithBreadcrumb(breadcrumb *foundation.NSNumber) *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams
+	OperationalDataset() *foundation.NSData
+	SetOperationalDataset(operationalDataset *foundation.NSData)
+	Breadcrumb() *foundation.NSNumber
+	SetBreadcrumb(breadcrumb *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParamsable = (*MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams)(nil)
+

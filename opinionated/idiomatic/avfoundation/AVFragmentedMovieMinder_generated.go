@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,18 +25,36 @@ func NewFragmentedMovieMinderWithMovieMindingInterval(movie *raw.AVFragmentedMov
 	return &FragmentedMovieMinder{inner: raw.AVFragmentedMovieMinderFromID(_id)}
 }
 
+// AddFragmentedMovie calls the underlying AddFragmentedMovie.
+func (x *FragmentedMovieMinder) AddFragmentedMovie(movie *raw.AVFragmentedMovie) {
+	x.inner.AddFragmentedMovie(movie)
+}
+
+// RemoveFragmentedMovie calls the underlying RemoveFragmentedMovie.
+func (x *FragmentedMovieMinder) RemoveFragmentedMovie(movie *raw.AVFragmentedMovie) {
+	x.inner.RemoveFragmentedMovie(movie)
+}
+
 // Movies returns the collection as a Go slice.
 func (x *FragmentedMovieMinder) Movies() []*raw.AVFragmentedMovie {
 	arr := x.inner.Movies()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AVFragmentedMovie, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVFragmentedMovie {
+		return raw.AVFragmentedMovieFromID(purego.Retain(_id))
+	})
 }
 
 func (x *FragmentedMovieMinder) asFragmentedAssetMinder() *raw.AVFragmentedAssetMinder { return &x.inner.AVFragmentedAssetMinder }
+
+// FragmentedMovieMinderable is the interface implemented by [FragmentedMovieMinder], for mocking and DI.
+type FragmentedMovieMinderable interface {
+	Unwrap() *raw.AVFragmentedMovieMinder
+	AddFragmentedMovie(movie *raw.AVFragmentedMovie)
+	RemoveFragmentedMovie(movie *raw.AVFragmentedMovie)
+	Movies() []*raw.AVFragmentedMovie
+}
+
+var _ FragmentedMovieMinderable = (*FragmentedMovieMinder)(nil)
 

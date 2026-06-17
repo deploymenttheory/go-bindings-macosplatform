@@ -7,6 +7,7 @@ package corespotlight
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corespotlight"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -31,16 +32,59 @@ func (x *Person) WithContactIdentifier(contactIdentifier string) *Person {
 	return x
 }
 
+// DisplayName calls the underlying DisplayName.
+func (x *Person) DisplayName() string {
+	_r := x.inner.DisplayName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 // Handles returns the collection as a Go slice.
-func (x *Person) Handles() []*foundation.NSString {
+func (x *Person) Handles() []string {
 	arr := x.inner.Handles()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
+
+// HandleIdentifier calls the underlying HandleIdentifier.
+func (x *Person) HandleIdentifier() string {
+	_r := x.inner.HandleIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ContactIdentifier calls the underlying ContactIdentifier.
+func (x *Person) ContactIdentifier() string {
+	_r := x.inner.ContactIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetContactIdentifier calls the underlying SetContactIdentifier.
+func (x *Person) SetContactIdentifier(contactIdentifier string) {
+	x.inner.SetContactIdentifier(foundation.NSStringStringWithUTF8String(contactIdentifier))
+}
+
+// Personable is the interface implemented by [Person], for mocking and DI.
+type Personable interface {
+	Unwrap() *raw.CSPerson
+	WithContactIdentifier(contactIdentifier string) *Person
+	DisplayName() string
+	Handles() []string
+	HandleIdentifier() string
+	ContactIdentifier() string
+	SetContactIdentifier(contactIdentifier string)
+}
+
+var _ Personable = (*Person)(nil)
 

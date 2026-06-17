@@ -48,3 +48,62 @@ func (x *MTRDoorLockClusterClearWeekDayScheduleParams) WithServerSideProcessingT
 	return x
 }
 
+// WeekDayIndex calls the underlying WeekDayIndex.
+func (x *MTRDoorLockClusterClearWeekDayScheduleParams) WeekDayIndex() *foundation.NSNumber {
+	return x.inner.WeekDayIndex()
+}
+
+// SetWeekDayIndex calls the underlying SetWeekDayIndex.
+func (x *MTRDoorLockClusterClearWeekDayScheduleParams) SetWeekDayIndex(weekDayIndex *foundation.NSNumber) {
+	x.inner.SetWeekDayIndex(weekDayIndex)
+}
+
+// UserIndex calls the underlying UserIndex.
+func (x *MTRDoorLockClusterClearWeekDayScheduleParams) UserIndex() *foundation.NSNumber {
+	return x.inner.UserIndex()
+}
+
+// SetUserIndex calls the underlying SetUserIndex.
+func (x *MTRDoorLockClusterClearWeekDayScheduleParams) SetUserIndex(userIndex *foundation.NSNumber) {
+	x.inner.SetUserIndex(userIndex)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRDoorLockClusterClearWeekDayScheduleParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRDoorLockClusterClearWeekDayScheduleParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRDoorLockClusterClearWeekDayScheduleParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRDoorLockClusterClearWeekDayScheduleParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRDoorLockClusterClearWeekDayScheduleParamsable is the interface implemented by [MTRDoorLockClusterClearWeekDayScheduleParams], for mocking and DI.
+type MTRDoorLockClusterClearWeekDayScheduleParamsable interface {
+	Unwrap() *raw.MTRDoorLockClusterClearWeekDayScheduleParams
+	WithWeekDayIndex(weekDayIndex *foundation.NSNumber) *MTRDoorLockClusterClearWeekDayScheduleParams
+	WithUserIndex(userIndex *foundation.NSNumber) *MTRDoorLockClusterClearWeekDayScheduleParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRDoorLockClusterClearWeekDayScheduleParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRDoorLockClusterClearWeekDayScheduleParams
+	WeekDayIndex() *foundation.NSNumber
+	SetWeekDayIndex(weekDayIndex *foundation.NSNumber)
+	UserIndex() *foundation.NSNumber
+	SetUserIndex(userIndex *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRDoorLockClusterClearWeekDayScheduleParamsable = (*MTRDoorLockClusterClearWeekDayScheduleParams)(nil)
+

@@ -23,3 +23,10 @@ func NewNotificationSound() *NotificationSound {
 	return &NotificationSound{inner: raw.UNNotificationSoundFromID(_id)}
 }
 
+// NotificationSoundable is the interface implemented by [NotificationSound], for mocking and DI.
+type NotificationSoundable interface {
+	Unwrap() *raw.UNNotificationSound
+}
+
+var _ NotificationSoundable = (*NotificationSound)(nil)
+

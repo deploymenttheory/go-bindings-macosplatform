@@ -7,6 +7,7 @@ package photos
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -30,5 +31,75 @@ func (x *AssetCollectionChangeRequest) WithTitle(title string) *AssetCollectionC
 	return x
 }
 
+// AddAssets calls the underlying AddAssets.
+func (x *AssetCollectionChangeRequest) AddAssets(assets foundation.NSFastEnumeration) {
+	x.inner.AddAssets(assets)
+}
+
+// InsertAssetsAtIndexes calls the underlying InsertAssetsAtIndexes.
+func (x *AssetCollectionChangeRequest) InsertAssetsAtIndexes(assets foundation.NSFastEnumeration, indexes *foundation.NSIndexSet) {
+	x.inner.InsertAssetsAtIndexes(assets, indexes)
+}
+
+// RemoveAssets calls the underlying RemoveAssets.
+func (x *AssetCollectionChangeRequest) RemoveAssets(assets foundation.NSFastEnumeration) {
+	x.inner.RemoveAssets(assets)
+}
+
+// RemoveAssetsAtIndexes calls the underlying RemoveAssetsAtIndexes.
+func (x *AssetCollectionChangeRequest) RemoveAssetsAtIndexes(indexes *foundation.NSIndexSet) {
+	x.inner.RemoveAssetsAtIndexes(indexes)
+}
+
+// ReplaceAssetsAtIndexesWithAssets calls the underlying ReplaceAssetsAtIndexesWithAssets.
+func (x *AssetCollectionChangeRequest) ReplaceAssetsAtIndexesWithAssets(indexes *foundation.NSIndexSet, assets foundation.NSFastEnumeration) {
+	x.inner.ReplaceAssetsAtIndexesWithAssets(indexes, assets)
+}
+
+// MoveAssetsAtIndexesToIndex calls the underlying MoveAssetsAtIndexesToIndex.
+func (x *AssetCollectionChangeRequest) MoveAssetsAtIndexesToIndex(fromIndexes *foundation.NSIndexSet, toIndex uint) {
+	x.inner.MoveAssetsAtIndexesToIndex(fromIndexes, toIndex)
+}
+
+// PlaceholderForCreatedAssetCollection calls the underlying PlaceholderForCreatedAssetCollection.
+func (x *AssetCollectionChangeRequest) PlaceholderForCreatedAssetCollection() *ObjectPlaceholder {
+	_r := x.inner.PlaceholderForCreatedAssetCollection()
+	if _r == nil {
+		return nil
+	}
+	return &ObjectPlaceholder{inner: _r}
+}
+
+// Title calls the underlying Title.
+func (x *AssetCollectionChangeRequest) Title() string {
+	_r := x.inner.Title()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetTitle calls the underlying SetTitle.
+func (x *AssetCollectionChangeRequest) SetTitle(title string) {
+	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+}
+
 func (x *AssetCollectionChangeRequest) asChangeRequest() *raw.PHChangeRequest { return &x.inner.PHChangeRequest }
+
+// AssetCollectionChangeRequestable is the interface implemented by [AssetCollectionChangeRequest], for mocking and DI.
+type AssetCollectionChangeRequestable interface {
+	Unwrap() *raw.PHAssetCollectionChangeRequest
+	WithTitle(title string) *AssetCollectionChangeRequest
+	AddAssets(assets foundation.NSFastEnumeration)
+	InsertAssetsAtIndexes(assets foundation.NSFastEnumeration, indexes *foundation.NSIndexSet)
+	RemoveAssets(assets foundation.NSFastEnumeration)
+	RemoveAssetsAtIndexes(indexes *foundation.NSIndexSet)
+	ReplaceAssetsAtIndexesWithAssets(indexes *foundation.NSIndexSet, assets foundation.NSFastEnumeration)
+	MoveAssetsAtIndexesToIndex(fromIndexes *foundation.NSIndexSet, toIndex uint)
+	PlaceholderForCreatedAssetCollection() *ObjectPlaceholder
+	Title() string
+	SetTitle(title string)
+}
+
+var _ AssetCollectionChangeRequestable = (*AssetCollectionChangeRequest)(nil)
 

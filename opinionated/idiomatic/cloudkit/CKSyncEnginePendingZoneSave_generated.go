@@ -24,5 +24,22 @@ func NewSyncEnginePendingZoneSaveWithZone(zone *raw.CKRecordZone) *SyncEnginePen
 	return &SyncEnginePendingZoneSave{inner: raw.CKSyncEnginePendingZoneSaveFromID(_id)}
 }
 
+// Zone calls the underlying Zone.
+func (x *SyncEnginePendingZoneSave) Zone() *RecordZone {
+	_r := x.inner.Zone()
+	if _r == nil {
+		return nil
+	}
+	return &RecordZone{inner: _r}
+}
+
 func (x *SyncEnginePendingZoneSave) asSyncEnginePendingDatabaseChange() *raw.CKSyncEnginePendingDatabaseChange { return &x.inner.CKSyncEnginePendingDatabaseChange }
+
+// SyncEnginePendingZoneSaveable is the interface implemented by [SyncEnginePendingZoneSave], for mocking and DI.
+type SyncEnginePendingZoneSaveable interface {
+	Unwrap() *raw.CKSyncEnginePendingZoneSave
+	Zone() *RecordZone
+}
+
+var _ SyncEnginePendingZoneSaveable = (*SyncEnginePendingZoneSave)(nil)
 

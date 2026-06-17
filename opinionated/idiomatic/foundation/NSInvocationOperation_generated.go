@@ -31,7 +31,30 @@ func NewInvocationOperationWithInvocation(inv *raw.NSInvocation) *InvocationOper
 	return &InvocationOperation{inner: raw.NSInvocationOperationFromID(_id)}
 }
 
+// Invocation calls the underlying Invocation.
+func (x *InvocationOperation) Invocation() *Invocation {
+	_r := x.inner.Invocation()
+	if _r == nil {
+		return nil
+	}
+	return &Invocation{inner: _r}
+}
+
+// Result calls the underlying Result.
+func (x *InvocationOperation) Result() objc.ID {
+	return x.inner.Result()
+}
+
 func (x *InvocationOperation) asOperation() *raw.NSOperation { return &x.inner.NSOperation }
 
 func (x *InvocationOperation) asObject() *raw.NSObject { return &x.inner.NSOperation.NSObject }
+
+// InvocationOperationable is the interface implemented by [InvocationOperation], for mocking and DI.
+type InvocationOperationable interface {
+	Unwrap() *raw.NSInvocationOperation
+	Invocation() *Invocation
+	Result() objc.ID
+}
+
+var _ InvocationOperationable = (*InvocationOperation)(nil)
 

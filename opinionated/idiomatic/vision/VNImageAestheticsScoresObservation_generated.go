@@ -23,5 +23,24 @@ func NewImageAestheticsScoresObservation() *ImageAestheticsScoresObservation {
 	return &ImageAestheticsScoresObservation{inner: raw.VNImageAestheticsScoresObservationFromID(_id)}
 }
 
+// IsUtility calls the underlying IsUtility.
+func (x *ImageAestheticsScoresObservation) IsUtility() bool {
+	return x.inner.IsUtility()
+}
+
+// OverallScore calls the underlying OverallScore.
+func (x *ImageAestheticsScoresObservation) OverallScore() float32 {
+	return x.inner.OverallScore()
+}
+
 func (x *ImageAestheticsScoresObservation) asObservation() *raw.VNObservation { return &x.inner.VNObservation }
+
+// ImageAestheticsScoresObservationable is the interface implemented by [ImageAestheticsScoresObservation], for mocking and DI.
+type ImageAestheticsScoresObservationable interface {
+	Unwrap() *raw.VNImageAestheticsScoresObservation
+	IsUtility() bool
+	OverallScore() float32
+}
+
+var _ ImageAestheticsScoresObservationable = (*ImageAestheticsScoresObservation)(nil)
 

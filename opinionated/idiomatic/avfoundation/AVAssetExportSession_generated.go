@@ -9,6 +9,7 @@ import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -136,17 +137,142 @@ func (x *AssetExportSession) ExportAsynchronously(ctx context.Context) error {
 	}
 }
 
+// CancelExport calls the underlying CancelExport.
+func (x *AssetExportSession) CancelExport() {
+	x.inner.CancelExport()
+}
+
+// PresetName calls the underlying PresetName.
+func (x *AssetExportSession) PresetName() string {
+	_r := x.inner.PresetName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Asset calls the underlying Asset.
+func (x *AssetExportSession) Asset() *Asset {
+	_r := x.inner.Asset()
+	if _r == nil {
+		return nil
+	}
+	return &Asset{inner: _r}
+}
+
+// OutputFileType calls the underlying OutputFileType.
+func (x *AssetExportSession) OutputFileType() string {
+	_r := x.inner.OutputFileType()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetOutputFileType calls the underlying SetOutputFileType.
+func (x *AssetExportSession) SetOutputFileType(outputFileType *foundation.NSString) {
+	x.inner.SetOutputFileType(outputFileType)
+}
+
+// OutputURL calls the underlying OutputURL.
+func (x *AssetExportSession) OutputURL() *foundation.NSURL {
+	return x.inner.OutputURL()
+}
+
+// SetOutputURL calls the underlying SetOutputURL.
+func (x *AssetExportSession) SetOutputURL(outputURL string) {
+	x.inner.SetOutputURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(outputURL)))
+}
+
+// ShouldOptimizeForNetworkUse calls the underlying ShouldOptimizeForNetworkUse.
+func (x *AssetExportSession) ShouldOptimizeForNetworkUse() bool {
+	return x.inner.ShouldOptimizeForNetworkUse()
+}
+
+// SetShouldOptimizeForNetworkUse calls the underlying SetShouldOptimizeForNetworkUse.
+func (x *AssetExportSession) SetShouldOptimizeForNetworkUse(shouldOptimizeForNetworkUse bool) {
+	x.inner.SetShouldOptimizeForNetworkUse(shouldOptimizeForNetworkUse)
+}
+
+// AllowsParallelizedExport calls the underlying AllowsParallelizedExport.
+func (x *AssetExportSession) AllowsParallelizedExport() bool {
+	return x.inner.AllowsParallelizedExport()
+}
+
+// SetAllowsParallelizedExport calls the underlying SetAllowsParallelizedExport.
+func (x *AssetExportSession) SetAllowsParallelizedExport(allowsParallelizedExport bool) {
+	x.inner.SetAllowsParallelizedExport(allowsParallelizedExport)
+}
+
+// Status calls the underlying Status.
+func (x *AssetExportSession) Status() raw.AVAssetExportSessionStatus {
+	return x.inner.Status()
+}
+
+// Error calls the underlying Error.
+func (x *AssetExportSession) Error() unsafe.Pointer {
+	return x.inner.Error()
+}
+
+// Progress calls the underlying Progress.
+func (x *AssetExportSession) Progress() float32 {
+	return x.inner.Progress()
+}
+
+// DetermineCompatibleFileTypesWithCompletionHandler calls the underlying DetermineCompatibleFileTypesWithCompletionHandler.
+func (x *AssetExportSession) DetermineCompatibleFileTypesWithCompletionHandler(handler objc.Block) {
+	x.inner.DetermineCompatibleFileTypesWithCompletionHandler(handler)
+}
+
 // SupportedFileTypes returns the collection as a Go slice.
 func (x *AssetExportSession) SupportedFileTypes() []*foundation.NSString {
 	arr := x.inner.SupportedFileTypes()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	})
+}
+
+// EstimateMaximumDurationWithCompletionHandler calls the underlying EstimateMaximumDurationWithCompletionHandler.
+func (x *AssetExportSession) EstimateMaximumDurationWithCompletionHandler(handler objc.Block) {
+	x.inner.EstimateMaximumDurationWithCompletionHandler(handler)
+}
+
+// EstimateOutputFileLengthWithCompletionHandler calls the underlying EstimateOutputFileLengthWithCompletionHandler.
+func (x *AssetExportSession) EstimateOutputFileLengthWithCompletionHandler(handler func(int64, unsafe.Pointer)) {
+	x.inner.EstimateOutputFileLengthWithCompletionHandler(handler)
+}
+
+// TimeRange calls the underlying TimeRange.
+func (x *AssetExportSession) TimeRange() coremedia.CMTimeRange {
+	return x.inner.TimeRange()
+}
+
+// SetTimeRange calls the underlying SetTimeRange.
+func (x *AssetExportSession) SetTimeRange(timeRange coremedia.CMTimeRange) {
+	x.inner.SetTimeRange(timeRange)
+}
+
+// MaxDuration calls the underlying MaxDuration.
+func (x *AssetExportSession) MaxDuration() coremedia.CMTime {
+	return x.inner.MaxDuration()
+}
+
+// EstimatedOutputFileLength calls the underlying EstimatedOutputFileLength.
+func (x *AssetExportSession) EstimatedOutputFileLength() int64 {
+	return x.inner.EstimatedOutputFileLength()
+}
+
+// FileLengthLimit calls the underlying FileLengthLimit.
+func (x *AssetExportSession) FileLengthLimit() int64 {
+	return x.inner.FileLengthLimit()
+}
+
+// SetFileLengthLimit calls the underlying SetFileLengthLimit.
+func (x *AssetExportSession) SetFileLengthLimit(fileLengthLimit int64) {
+	x.inner.SetFileLengthLimit(fileLengthLimit)
 }
 
 // Metadata returns the collection as a Go slice.
@@ -155,10 +281,167 @@ func (x *AssetExportSession) Metadata() []*raw.AVMetadataItem {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AVMetadataItem, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVMetadataItem {
+		return raw.AVMetadataItemFromID(purego.Retain(_id))
+	})
 }
+
+// SetMetadata calls the underlying SetMetadata.
+func (x *AssetExportSession) SetMetadata(metadata *foundation.NSArray[*raw.AVMetadataItem]) {
+	x.inner.SetMetadata(metadata)
+}
+
+// MetadataItemFilter calls the underlying MetadataItemFilter.
+func (x *AssetExportSession) MetadataItemFilter() *MetadataItemFilter {
+	_r := x.inner.MetadataItemFilter()
+	if _r == nil {
+		return nil
+	}
+	return &MetadataItemFilter{inner: _r}
+}
+
+// SetMetadataItemFilter calls the underlying SetMetadataItemFilter.
+func (x *AssetExportSession) SetMetadataItemFilter(metadataItemFilter *raw.AVMetadataItemFilter) {
+	x.inner.SetMetadataItemFilter(metadataItemFilter)
+}
+
+// AudioTimePitchAlgorithm calls the underlying AudioTimePitchAlgorithm.
+func (x *AssetExportSession) AudioTimePitchAlgorithm() string {
+	_r := x.inner.AudioTimePitchAlgorithm()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetAudioTimePitchAlgorithm calls the underlying SetAudioTimePitchAlgorithm.
+func (x *AssetExportSession) SetAudioTimePitchAlgorithm(audioTimePitchAlgorithm *foundation.NSString) {
+	x.inner.SetAudioTimePitchAlgorithm(audioTimePitchAlgorithm)
+}
+
+// AudioMix calls the underlying AudioMix.
+func (x *AssetExportSession) AudioMix() *AudioMix {
+	_r := x.inner.AudioMix()
+	if _r == nil {
+		return nil
+	}
+	return &AudioMix{inner: _r}
+}
+
+// SetAudioMix calls the underlying SetAudioMix.
+func (x *AssetExportSession) SetAudioMix(audioMix *raw.AVAudioMix) {
+	x.inner.SetAudioMix(audioMix)
+}
+
+// VideoComposition calls the underlying VideoComposition.
+func (x *AssetExportSession) VideoComposition() *VideoComposition {
+	_r := x.inner.VideoComposition()
+	if _r == nil {
+		return nil
+	}
+	return &VideoComposition{inner: _r}
+}
+
+// SetVideoComposition calls the underlying SetVideoComposition.
+func (x *AssetExportSession) SetVideoComposition(videoComposition *raw.AVVideoComposition) {
+	x.inner.SetVideoComposition(videoComposition)
+}
+
+// CustomVideoCompositor calls the underlying CustomVideoCompositor.
+func (x *AssetExportSession) CustomVideoCompositor() raw.AVVideoCompositing {
+	return x.inner.CustomVideoCompositor()
+}
+
+// AudioTrackGroupHandling calls the underlying AudioTrackGroupHandling.
+func (x *AssetExportSession) AudioTrackGroupHandling() raw.AVAssetTrackGroupOutputHandling {
+	return x.inner.AudioTrackGroupHandling()
+}
+
+// SetAudioTrackGroupHandling calls the underlying SetAudioTrackGroupHandling.
+func (x *AssetExportSession) SetAudioTrackGroupHandling(audioTrackGroupHandling raw.AVAssetTrackGroupOutputHandling) {
+	x.inner.SetAudioTrackGroupHandling(audioTrackGroupHandling)
+}
+
+// CanPerformMultiplePassesOverSourceMediaData calls the underlying CanPerformMultiplePassesOverSourceMediaData.
+func (x *AssetExportSession) CanPerformMultiplePassesOverSourceMediaData() bool {
+	return x.inner.CanPerformMultiplePassesOverSourceMediaData()
+}
+
+// SetCanPerformMultiplePassesOverSourceMediaData calls the underlying SetCanPerformMultiplePassesOverSourceMediaData.
+func (x *AssetExportSession) SetCanPerformMultiplePassesOverSourceMediaData(canPerformMultiplePassesOverSourceMediaData bool) {
+	x.inner.SetCanPerformMultiplePassesOverSourceMediaData(canPerformMultiplePassesOverSourceMediaData)
+}
+
+// DirectoryForTemporaryFiles calls the underlying DirectoryForTemporaryFiles.
+func (x *AssetExportSession) DirectoryForTemporaryFiles() *foundation.NSURL {
+	return x.inner.DirectoryForTemporaryFiles()
+}
+
+// SetDirectoryForTemporaryFiles calls the underlying SetDirectoryForTemporaryFiles.
+func (x *AssetExportSession) SetDirectoryForTemporaryFiles(directoryForTemporaryFiles string) {
+	x.inner.SetDirectoryForTemporaryFiles(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(directoryForTemporaryFiles)))
+}
+
+// AssetExportSessionable is the interface implemented by [AssetExportSession], for mocking and DI.
+type AssetExportSessionable interface {
+	Unwrap() *raw.AVAssetExportSession
+	WithOutputFileType(outputFileType *foundation.NSString) *AssetExportSession
+	WithOutputURL(outputURL string) *AssetExportSession
+	WithShouldOptimizeForNetworkUse(shouldOptimizeForNetworkUse bool) *AssetExportSession
+	WithAllowsParallelizedExport(allowsParallelizedExport bool) *AssetExportSession
+	WithTimeRange(timeRange coremedia.CMTimeRange) *AssetExportSession
+	WithFileLengthLimit(fileLengthLimit int64) *AssetExportSession
+	WithMetadata(items ...MetadataItemProvider) *AssetExportSession
+	WithMetadataItemFilter(metadataItemFilter *raw.AVMetadataItemFilter) *AssetExportSession
+	WithAudioTimePitchAlgorithm(audioTimePitchAlgorithm *foundation.NSString) *AssetExportSession
+	WithAudioMix(audioMix AudioMixProvider) *AssetExportSession
+	WithVideoComposition(videoComposition VideoCompositionProvider) *AssetExportSession
+	WithAudioTrackGroupHandling(audioTrackGroupHandling raw.AVAssetTrackGroupOutputHandling) *AssetExportSession
+	WithCanPerformMultiplePassesOverSourceMediaData(canPerformMultiplePassesOverSourceMediaData bool) *AssetExportSession
+	WithDirectoryForTemporaryFiles(directoryForTemporaryFiles string) *AssetExportSession
+	ExportAsynchronously(ctx context.Context) error
+	CancelExport()
+	PresetName() string
+	Asset() *Asset
+	OutputFileType() string
+	SetOutputFileType(outputFileType *foundation.NSString)
+	OutputURL() *foundation.NSURL
+	SetOutputURL(outputURL string)
+	ShouldOptimizeForNetworkUse() bool
+	SetShouldOptimizeForNetworkUse(shouldOptimizeForNetworkUse bool)
+	AllowsParallelizedExport() bool
+	SetAllowsParallelizedExport(allowsParallelizedExport bool)
+	Status() raw.AVAssetExportSessionStatus
+	Error() unsafe.Pointer
+	Progress() float32
+	DetermineCompatibleFileTypesWithCompletionHandler(handler objc.Block)
+	SupportedFileTypes() []*foundation.NSString
+	EstimateMaximumDurationWithCompletionHandler(handler objc.Block)
+	EstimateOutputFileLengthWithCompletionHandler(handler func(int64, unsafe.Pointer))
+	TimeRange() coremedia.CMTimeRange
+	SetTimeRange(timeRange coremedia.CMTimeRange)
+	MaxDuration() coremedia.CMTime
+	EstimatedOutputFileLength() int64
+	FileLengthLimit() int64
+	SetFileLengthLimit(fileLengthLimit int64)
+	Metadata() []*raw.AVMetadataItem
+	SetMetadata(metadata *foundation.NSArray[*raw.AVMetadataItem])
+	MetadataItemFilter() *MetadataItemFilter
+	SetMetadataItemFilter(metadataItemFilter *raw.AVMetadataItemFilter)
+	AudioTimePitchAlgorithm() string
+	SetAudioTimePitchAlgorithm(audioTimePitchAlgorithm *foundation.NSString)
+	AudioMix() *AudioMix
+	SetAudioMix(audioMix *raw.AVAudioMix)
+	VideoComposition() *VideoComposition
+	SetVideoComposition(videoComposition *raw.AVVideoComposition)
+	CustomVideoCompositor() raw.AVVideoCompositing
+	AudioTrackGroupHandling() raw.AVAssetTrackGroupOutputHandling
+	SetAudioTrackGroupHandling(audioTrackGroupHandling raw.AVAssetTrackGroupOutputHandling)
+	CanPerformMultiplePassesOverSourceMediaData() bool
+	SetCanPerformMultiplePassesOverSourceMediaData(canPerformMultiplePassesOverSourceMediaData bool)
+	DirectoryForTemporaryFiles() *foundation.NSURL
+	SetDirectoryForTemporaryFiles(directoryForTemporaryFiles string)
+}
+
+var _ AssetExportSessionable = (*AssetExportSession)(nil)
 

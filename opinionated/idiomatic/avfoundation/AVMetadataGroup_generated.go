@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -29,12 +30,38 @@ func (x *MetadataGroup) Items() []*raw.AVMetadataItem {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AVMetadataItem, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVMetadataItem {
+		return raw.AVMetadataItemFromID(purego.Retain(_id))
+	})
+}
+
+// ClassifyingLabel calls the underlying ClassifyingLabel.
+func (x *MetadataGroup) ClassifyingLabel() string {
+	_r := x.inner.ClassifyingLabel()
+	if _r == nil {
+		return ""
 	}
-	return out
+	return purego.GoString(_r.Ptr())
+}
+
+// UniqueID calls the underlying UniqueID.
+func (x *MetadataGroup) UniqueID() string {
+	_r := x.inner.UniqueID()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
 }
 
 func (x *MetadataGroup) asMetadataGroup() *raw.AVMetadataGroup { return x.inner }
+
+// MetadataGroupable is the interface implemented by [MetadataGroup], for mocking and DI.
+type MetadataGroupable interface {
+	Unwrap() *raw.AVMetadataGroup
+	Items() []*raw.AVMetadataItem
+	ClassifyingLabel() string
+	UniqueID() string
+}
+
+var _ MetadataGroupable = (*MetadataGroup)(nil)
 

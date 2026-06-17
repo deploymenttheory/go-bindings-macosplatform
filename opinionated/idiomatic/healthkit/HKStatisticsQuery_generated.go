@@ -28,3 +28,10 @@ func NewStatisticsQueryWithQuantityTypeQuantitySamplePredicateOptionsCompletionH
 
 func (x *StatisticsQuery) asQuery() *raw.HKQuery { return &x.inner.HKQuery }
 
+// StatisticsQueryable is the interface implemented by [StatisticsQuery], for mocking and DI.
+type StatisticsQueryable interface {
+	Unwrap() *raw.HKStatisticsQuery
+}
+
+var _ StatisticsQueryable = (*StatisticsQuery)(nil)
+

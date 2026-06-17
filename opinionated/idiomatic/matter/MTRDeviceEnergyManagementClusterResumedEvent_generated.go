@@ -30,3 +30,23 @@ func (x *MTRDeviceEnergyManagementClusterResumedEvent) WithCause(cause *foundati
 	return x
 }
 
+// Cause calls the underlying Cause.
+func (x *MTRDeviceEnergyManagementClusterResumedEvent) Cause() *foundation.NSNumber {
+	return x.inner.Cause()
+}
+
+// SetCause calls the underlying SetCause.
+func (x *MTRDeviceEnergyManagementClusterResumedEvent) SetCause(cause *foundation.NSNumber) {
+	x.inner.SetCause(cause)
+}
+
+// MTRDeviceEnergyManagementClusterResumedEventable is the interface implemented by [MTRDeviceEnergyManagementClusterResumedEvent], for mocking and DI.
+type MTRDeviceEnergyManagementClusterResumedEventable interface {
+	Unwrap() *raw.MTRDeviceEnergyManagementClusterResumedEvent
+	WithCause(cause *foundation.NSNumber) *MTRDeviceEnergyManagementClusterResumedEvent
+	Cause() *foundation.NSNumber
+	SetCause(cause *foundation.NSNumber)
+}
+
+var _ MTRDeviceEnergyManagementClusterResumedEventable = (*MTRDeviceEnergyManagementClusterResumedEvent)(nil)
+

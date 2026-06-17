@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -47,4 +48,67 @@ func (x *MTRTargetNavigatorClusterNavigateTargetParams) WithServerSideProcessing
 	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
 	return x
 }
+
+// Target calls the underlying Target.
+func (x *MTRTargetNavigatorClusterNavigateTargetParams) Target() *foundation.NSNumber {
+	return x.inner.Target()
+}
+
+// SetTarget calls the underlying SetTarget.
+func (x *MTRTargetNavigatorClusterNavigateTargetParams) SetTarget(target *foundation.NSNumber) {
+	x.inner.SetTarget(target)
+}
+
+// Data calls the underlying Data.
+func (x *MTRTargetNavigatorClusterNavigateTargetParams) Data() string {
+	_r := x.inner.Data()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetData calls the underlying SetData.
+func (x *MTRTargetNavigatorClusterNavigateTargetParams) SetData(data string) {
+	x.inner.SetData(foundation.NSStringStringWithUTF8String(data))
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRTargetNavigatorClusterNavigateTargetParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRTargetNavigatorClusterNavigateTargetParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRTargetNavigatorClusterNavigateTargetParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRTargetNavigatorClusterNavigateTargetParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRTargetNavigatorClusterNavigateTargetParamsable is the interface implemented by [MTRTargetNavigatorClusterNavigateTargetParams], for mocking and DI.
+type MTRTargetNavigatorClusterNavigateTargetParamsable interface {
+	Unwrap() *raw.MTRTargetNavigatorClusterNavigateTargetParams
+	WithTarget(target *foundation.NSNumber) *MTRTargetNavigatorClusterNavigateTargetParams
+	WithData(data string) *MTRTargetNavigatorClusterNavigateTargetParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTargetNavigatorClusterNavigateTargetParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRTargetNavigatorClusterNavigateTargetParams
+	Target() *foundation.NSNumber
+	SetTarget(target *foundation.NSNumber)
+	Data() string
+	SetData(data string)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRTargetNavigatorClusterNavigateTargetParamsable = (*MTRTargetNavigatorClusterNavigateTargetParams)(nil)
 

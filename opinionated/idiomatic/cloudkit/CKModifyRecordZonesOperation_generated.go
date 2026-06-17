@@ -5,8 +5,10 @@
 package cloudkit
 
 import (
+	"context"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -88,11 +90,14 @@ func (x *ModifyRecordZonesOperation) RecordZonesToSave() []*raw.CKRecordZone {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.CKRecordZone, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CKRecordZone {
+		return raw.CKRecordZoneFromID(purego.Retain(_id))
+	})
+}
+
+// SetRecordZonesToSave calls the underlying SetRecordZonesToSave.
+func (x *ModifyRecordZonesOperation) SetRecordZonesToSave(recordZonesToSave *foundation.NSArray[*raw.CKRecordZone]) {
+	x.inner.SetRecordZonesToSave(recordZonesToSave)
 }
 
 // RecordZoneIDsToDelete returns the collection as a Go slice.
@@ -101,14 +106,90 @@ func (x *ModifyRecordZonesOperation) RecordZoneIDsToDelete() []*raw.CKRecordZone
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.CKRecordZoneID, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CKRecordZoneID {
+		return raw.CKRecordZoneIDFromID(purego.Retain(_id))
+	})
+}
+
+// SetRecordZoneIDsToDelete calls the underlying SetRecordZoneIDsToDelete.
+func (x *ModifyRecordZonesOperation) SetRecordZoneIDsToDelete(recordZoneIDsToDelete *foundation.NSArray[*raw.CKRecordZoneID]) {
+	x.inner.SetRecordZoneIDsToDelete(recordZoneIDsToDelete)
+}
+
+// PerRecordZoneSaveBlock calls the underlying PerRecordZoneSaveBlock.
+func (x *ModifyRecordZonesOperation) PerRecordZoneSaveBlock() objc.Block {
+	return x.inner.PerRecordZoneSaveBlock()
+}
+
+// SetPerRecordZoneSaveBlock calls the underlying SetPerRecordZoneSaveBlock.
+func (x *ModifyRecordZonesOperation) SetPerRecordZoneSaveBlock(perRecordZoneSaveBlock func(*raw.CKRecordZoneID, *raw.CKRecordZone, unsafe.Pointer)) {
+	x.inner.SetPerRecordZoneSaveBlock(perRecordZoneSaveBlock)
+}
+
+// PerRecordZoneDeleteBlock calls the underlying PerRecordZoneDeleteBlock.
+func (x *ModifyRecordZonesOperation) PerRecordZoneDeleteBlock() objc.Block {
+	return x.inner.PerRecordZoneDeleteBlock()
+}
+
+// SetPerRecordZoneDeleteBlock blocks until the operation completes or ctx is cancelled.
+func (x *ModifyRecordZonesOperation) SetPerRecordZoneDeleteBlock(ctx context.Context) (*RecordZoneID, error) {
+	type _result struct {
+		val *RecordZoneID
+		err error
 	}
-	return out
+	_ch := make(chan _result, 1)
+	x.inner.SetPerRecordZoneDeleteBlock(func(_p0 *raw.CKRecordZoneID, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &RecordZoneID{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *RecordZoneID
+		return _zero, ctx.Err()
+	}
+}
+
+// ModifyRecordZonesCompletionBlock calls the underlying ModifyRecordZonesCompletionBlock.
+func (x *ModifyRecordZonesOperation) ModifyRecordZonesCompletionBlock() objc.Block {
+	return x.inner.ModifyRecordZonesCompletionBlock()
+}
+
+// SetModifyRecordZonesCompletionBlock calls the underlying SetModifyRecordZonesCompletionBlock.
+func (x *ModifyRecordZonesOperation) SetModifyRecordZonesCompletionBlock(modifyRecordZonesCompletionBlock func(*foundation.NSArray[*raw.CKRecordZone], *foundation.NSArray[*raw.CKRecordZoneID], unsafe.Pointer)) {
+	x.inner.SetModifyRecordZonesCompletionBlock(modifyRecordZonesCompletionBlock)
 }
 
 func (x *ModifyRecordZonesOperation) asDatabaseOperation() *raw.CKDatabaseOperation { return &x.inner.CKDatabaseOperation }
 
 func (x *ModifyRecordZonesOperation) asOperation() *raw.CKOperation { return &x.inner.CKDatabaseOperation.CKOperation }
+
+// ModifyRecordZonesOperationable is the interface implemented by [ModifyRecordZonesOperation], for mocking and DI.
+type ModifyRecordZonesOperationable interface {
+	Unwrap() *raw.CKModifyRecordZonesOperation
+	WithRecordZonesToSave(items ...*raw.CKRecordZone) *ModifyRecordZonesOperation
+	WithRecordZoneIDsToDelete(items ...*raw.CKRecordZoneID) *ModifyRecordZonesOperation
+	WithPerRecordZoneSaveBlock(perRecordZoneSaveBlock func(*raw.CKRecordZoneID, *raw.CKRecordZone, unsafe.Pointer)) *ModifyRecordZonesOperation
+	WithPerRecordZoneDeleteBlock(perRecordZoneDeleteBlock func(*raw.CKRecordZoneID, unsafe.Pointer)) *ModifyRecordZonesOperation
+	WithModifyRecordZonesCompletionBlock(modifyRecordZonesCompletionBlock func(*foundation.NSArray[*raw.CKRecordZone], *foundation.NSArray[*raw.CKRecordZoneID], unsafe.Pointer)) *ModifyRecordZonesOperation
+	RecordZonesToSave() []*raw.CKRecordZone
+	SetRecordZonesToSave(recordZonesToSave *foundation.NSArray[*raw.CKRecordZone])
+	RecordZoneIDsToDelete() []*raw.CKRecordZoneID
+	SetRecordZoneIDsToDelete(recordZoneIDsToDelete *foundation.NSArray[*raw.CKRecordZoneID])
+	PerRecordZoneSaveBlock() objc.Block
+	SetPerRecordZoneSaveBlock(perRecordZoneSaveBlock func(*raw.CKRecordZoneID, *raw.CKRecordZone, unsafe.Pointer))
+	PerRecordZoneDeleteBlock() objc.Block
+	SetPerRecordZoneDeleteBlock(ctx context.Context) (*RecordZoneID, error)
+	ModifyRecordZonesCompletionBlock() objc.Block
+	SetModifyRecordZonesCompletionBlock(modifyRecordZonesCompletionBlock func(*foundation.NSArray[*raw.CKRecordZone], *foundation.NSArray[*raw.CKRecordZoneID], unsafe.Pointer))
+}
+
+var _ ModifyRecordZonesOperationable = (*ModifyRecordZonesOperation)(nil)
 

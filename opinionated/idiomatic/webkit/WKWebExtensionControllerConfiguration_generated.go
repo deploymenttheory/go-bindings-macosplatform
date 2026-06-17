@@ -5,6 +5,7 @@
 package webkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -34,4 +35,57 @@ func (x *WKWebExtensionControllerConfiguration) WithDefaultWebsiteDataStore(defa
 	x.inner.SetDefaultWebsiteDataStore(defaultWebsiteDataStore)
 	return x
 }
+
+// IsPersistent calls the underlying IsPersistent.
+func (x *WKWebExtensionControllerConfiguration) IsPersistent() bool {
+	return x.inner.IsPersistent()
+}
+
+// Identifier calls the underlying Identifier.
+func (x *WKWebExtensionControllerConfiguration) Identifier() *foundation.NSUUID {
+	return x.inner.Identifier()
+}
+
+// WebViewConfiguration calls the underlying WebViewConfiguration.
+func (x *WKWebExtensionControllerConfiguration) WebViewConfiguration() *WKWebViewConfiguration {
+	_r := x.inner.WebViewConfiguration()
+	if _r == nil {
+		return nil
+	}
+	return &WKWebViewConfiguration{inner: _r}
+}
+
+// SetWebViewConfiguration calls the underlying SetWebViewConfiguration.
+func (x *WKWebExtensionControllerConfiguration) SetWebViewConfiguration(webViewConfiguration *raw.WKWebViewConfiguration) {
+	x.inner.SetWebViewConfiguration(webViewConfiguration)
+}
+
+// DefaultWebsiteDataStore calls the underlying DefaultWebsiteDataStore.
+func (x *WKWebExtensionControllerConfiguration) DefaultWebsiteDataStore() *WKWebsiteDataStore {
+	_r := x.inner.DefaultWebsiteDataStore()
+	if _r == nil {
+		return nil
+	}
+	return &WKWebsiteDataStore{inner: _r}
+}
+
+// SetDefaultWebsiteDataStore calls the underlying SetDefaultWebsiteDataStore.
+func (x *WKWebExtensionControllerConfiguration) SetDefaultWebsiteDataStore(defaultWebsiteDataStore *raw.WKWebsiteDataStore) {
+	x.inner.SetDefaultWebsiteDataStore(defaultWebsiteDataStore)
+}
+
+// WKWebExtensionControllerConfigurationable is the interface implemented by [WKWebExtensionControllerConfiguration], for mocking and DI.
+type WKWebExtensionControllerConfigurationable interface {
+	Unwrap() *raw.WKWebExtensionControllerConfiguration
+	WithWebViewConfiguration(webViewConfiguration *raw.WKWebViewConfiguration) *WKWebExtensionControllerConfiguration
+	WithDefaultWebsiteDataStore(defaultWebsiteDataStore *raw.WKWebsiteDataStore) *WKWebExtensionControllerConfiguration
+	IsPersistent() bool
+	Identifier() *foundation.NSUUID
+	WebViewConfiguration() *WKWebViewConfiguration
+	SetWebViewConfiguration(webViewConfiguration *raw.WKWebViewConfiguration)
+	DefaultWebsiteDataStore() *WKWebsiteDataStore
+	SetDefaultWebsiteDataStore(defaultWebsiteDataStore *raw.WKWebsiteDataStore)
+}
+
+var _ WKWebExtensionControllerConfigurationable = (*WKWebExtensionControllerConfiguration)(nil)
 

@@ -27,3 +27,10 @@ func (x *BeaconIdentityConstraint) asBeaconIdentityCondition() *raw.CLBeaconIden
 
 func (x *BeaconIdentityConstraint) asCondition() *raw.CLCondition { return &x.inner.CLBeaconIdentityCondition.CLCondition }
 
+// BeaconIdentityConstraintable is the interface implemented by [BeaconIdentityConstraint], for mocking and DI.
+type BeaconIdentityConstraintable interface {
+	Unwrap() *raw.CLBeaconIdentityConstraint
+}
+
+var _ BeaconIdentityConstraintable = (*BeaconIdentityConstraint)(nil)
+

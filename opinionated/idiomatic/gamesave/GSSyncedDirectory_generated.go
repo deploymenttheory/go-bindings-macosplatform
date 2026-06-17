@@ -24,6 +24,21 @@ func NewSyncedDirectory() *SyncedDirectory {
 	return &SyncedDirectory{inner: raw.GSSyncedDirectoryFromID(_id)}
 }
 
+// Close calls the underlying Close.
+func (x *SyncedDirectory) Close() {
+	x.inner.Close()
+}
+
+// TriggerPendingUploadWithCompletionHandler calls the underlying TriggerPendingUploadWithCompletionHandler.
+func (x *SyncedDirectory) TriggerPendingUploadWithCompletionHandler(completion func(bool)) {
+	x.inner.TriggerPendingUploadWithCompletionHandler(completion)
+}
+
+// ResolveConflictsWithVersion calls the underlying ResolveConflictsWithVersion.
+func (x *SyncedDirectory) ResolveConflictsWithVersion(version *raw.GSSyncedDirectoryVersion) {
+	x.inner.ResolveConflictsWithVersion(version)
+}
+
 // FinishSyncing blocks until the operation completes or ctx is cancelled.
 func (x *SyncedDirectory) FinishSyncing(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -37,4 +52,25 @@ func (x *SyncedDirectory) FinishSyncing(ctx context.Context) error {
 		return ctx.Err()
 	}
 }
+
+// DirectoryState calls the underlying DirectoryState.
+func (x *SyncedDirectory) DirectoryState() *SyncedDirectoryState {
+	_r := x.inner.DirectoryState()
+	if _r == nil {
+		return nil
+	}
+	return &SyncedDirectoryState{inner: _r}
+}
+
+// SyncedDirectoryable is the interface implemented by [SyncedDirectory], for mocking and DI.
+type SyncedDirectoryable interface {
+	Unwrap() *raw.GSSyncedDirectory
+	Close()
+	TriggerPendingUploadWithCompletionHandler(completion func(bool))
+	ResolveConflictsWithVersion(version *raw.GSSyncedDirectoryVersion)
+	FinishSyncing(ctx context.Context) error
+	DirectoryState() *SyncedDirectoryState
+}
+
+var _ SyncedDirectoryable = (*SyncedDirectory)(nil)
 

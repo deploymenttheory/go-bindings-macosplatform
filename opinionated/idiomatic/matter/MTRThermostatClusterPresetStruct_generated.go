@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -59,4 +60,93 @@ func (x *MTRThermostatClusterPresetStruct) WithBuiltIn(builtIn *foundation.NSNum
 	x.inner.SetBuiltIn(builtIn)
 	return x
 }
+
+// PresetHandle calls the underlying PresetHandle.
+func (x *MTRThermostatClusterPresetStruct) PresetHandle() *foundation.NSData {
+	return x.inner.PresetHandle()
+}
+
+// SetPresetHandle calls the underlying SetPresetHandle.
+func (x *MTRThermostatClusterPresetStruct) SetPresetHandle(presetHandle *foundation.NSData) {
+	x.inner.SetPresetHandle(presetHandle)
+}
+
+// PresetScenario calls the underlying PresetScenario.
+func (x *MTRThermostatClusterPresetStruct) PresetScenario() *foundation.NSNumber {
+	return x.inner.PresetScenario()
+}
+
+// SetPresetScenario calls the underlying SetPresetScenario.
+func (x *MTRThermostatClusterPresetStruct) SetPresetScenario(presetScenario *foundation.NSNumber) {
+	x.inner.SetPresetScenario(presetScenario)
+}
+
+// Name calls the underlying Name.
+func (x *MTRThermostatClusterPresetStruct) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetName calls the underlying SetName.
+func (x *MTRThermostatClusterPresetStruct) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
+// CoolingSetpoint calls the underlying CoolingSetpoint.
+func (x *MTRThermostatClusterPresetStruct) CoolingSetpoint() *foundation.NSNumber {
+	return x.inner.CoolingSetpoint()
+}
+
+// SetCoolingSetpoint calls the underlying SetCoolingSetpoint.
+func (x *MTRThermostatClusterPresetStruct) SetCoolingSetpoint(coolingSetpoint *foundation.NSNumber) {
+	x.inner.SetCoolingSetpoint(coolingSetpoint)
+}
+
+// HeatingSetpoint calls the underlying HeatingSetpoint.
+func (x *MTRThermostatClusterPresetStruct) HeatingSetpoint() *foundation.NSNumber {
+	return x.inner.HeatingSetpoint()
+}
+
+// SetHeatingSetpoint calls the underlying SetHeatingSetpoint.
+func (x *MTRThermostatClusterPresetStruct) SetHeatingSetpoint(heatingSetpoint *foundation.NSNumber) {
+	x.inner.SetHeatingSetpoint(heatingSetpoint)
+}
+
+// BuiltIn calls the underlying BuiltIn.
+func (x *MTRThermostatClusterPresetStruct) BuiltIn() *foundation.NSNumber {
+	return x.inner.BuiltIn()
+}
+
+// SetBuiltIn calls the underlying SetBuiltIn.
+func (x *MTRThermostatClusterPresetStruct) SetBuiltIn(builtIn *foundation.NSNumber) {
+	x.inner.SetBuiltIn(builtIn)
+}
+
+// MTRThermostatClusterPresetStructable is the interface implemented by [MTRThermostatClusterPresetStruct], for mocking and DI.
+type MTRThermostatClusterPresetStructable interface {
+	Unwrap() *raw.MTRThermostatClusterPresetStruct
+	WithPresetHandle(presetHandle *foundation.NSData) *MTRThermostatClusterPresetStruct
+	WithPresetScenario(presetScenario *foundation.NSNumber) *MTRThermostatClusterPresetStruct
+	WithName(name string) *MTRThermostatClusterPresetStruct
+	WithCoolingSetpoint(coolingSetpoint *foundation.NSNumber) *MTRThermostatClusterPresetStruct
+	WithHeatingSetpoint(heatingSetpoint *foundation.NSNumber) *MTRThermostatClusterPresetStruct
+	WithBuiltIn(builtIn *foundation.NSNumber) *MTRThermostatClusterPresetStruct
+	PresetHandle() *foundation.NSData
+	SetPresetHandle(presetHandle *foundation.NSData)
+	PresetScenario() *foundation.NSNumber
+	SetPresetScenario(presetScenario *foundation.NSNumber)
+	Name() string
+	SetName(name string)
+	CoolingSetpoint() *foundation.NSNumber
+	SetCoolingSetpoint(coolingSetpoint *foundation.NSNumber)
+	HeatingSetpoint() *foundation.NSNumber
+	SetHeatingSetpoint(heatingSetpoint *foundation.NSNumber)
+	BuiltIn() *foundation.NSNumber
+	SetBuiltIn(builtIn *foundation.NSNumber)
+}
+
+var _ MTRThermostatClusterPresetStructable = (*MTRThermostatClusterPresetStruct)(nil)
 

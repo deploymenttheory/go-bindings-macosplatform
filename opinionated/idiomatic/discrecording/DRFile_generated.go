@@ -48,3 +48,10 @@ func NewFileWithLinkTypePointingToInFilesystem(linkType string, original *raw.DR
 
 func (x *File) asFSObject() *raw.DRFSObject { return &x.inner.DRFSObject }
 
+// Fileable is the interface implemented by [File], for mocking and DI.
+type Fileable interface {
+	Unwrap() *raw.DRFile
+}
+
+var _ Fileable = (*File)(nil)
+

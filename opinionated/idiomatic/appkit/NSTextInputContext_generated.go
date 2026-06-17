@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -54,17 +55,80 @@ func (x *TextInputContext) WithSelectedKeyboardInputSource(selectedKeyboardInput
 	return x
 }
 
+// Activate calls the underlying Activate.
+func (x *TextInputContext) Activate() {
+	x.inner.Activate()
+}
+
+// Deactivate calls the underlying Deactivate.
+func (x *TextInputContext) Deactivate() {
+	x.inner.Deactivate()
+}
+
+// HandleEvent calls the underlying HandleEvent.
+func (x *TextInputContext) HandleEvent(event *raw.NSEvent) bool {
+	return x.inner.HandleEvent(event)
+}
+
+// DiscardMarkedText calls the underlying DiscardMarkedText.
+func (x *TextInputContext) DiscardMarkedText() {
+	x.inner.DiscardMarkedText()
+}
+
+// InvalidateCharacterCoordinates calls the underlying InvalidateCharacterCoordinates.
+func (x *TextInputContext) InvalidateCharacterCoordinates() {
+	x.inner.InvalidateCharacterCoordinates()
+}
+
+// TextInputClientWillStartScrollingOrZooming calls the underlying TextInputClientWillStartScrollingOrZooming.
+func (x *TextInputContext) TextInputClientWillStartScrollingOrZooming() {
+	x.inner.TextInputClientWillStartScrollingOrZooming()
+}
+
+// TextInputClientDidEndScrollingOrZooming calls the underlying TextInputClientDidEndScrollingOrZooming.
+func (x *TextInputContext) TextInputClientDidEndScrollingOrZooming() {
+	x.inner.TextInputClientDidEndScrollingOrZooming()
+}
+
+// TextInputClientDidUpdateSelection calls the underlying TextInputClientDidUpdateSelection.
+func (x *TextInputContext) TextInputClientDidUpdateSelection() {
+	x.inner.TextInputClientDidUpdateSelection()
+}
+
+// TextInputClientDidScroll calls the underlying TextInputClientDidScroll.
+func (x *TextInputContext) TextInputClientDidScroll() {
+	x.inner.TextInputClientDidScroll()
+}
+
+// Client calls the underlying Client.
+func (x *TextInputContext) Client() raw.NSTextInputClient {
+	return x.inner.Client()
+}
+
+// AcceptsGlyphInfo calls the underlying AcceptsGlyphInfo.
+func (x *TextInputContext) AcceptsGlyphInfo() bool {
+	return x.inner.AcceptsGlyphInfo()
+}
+
+// SetAcceptsGlyphInfo calls the underlying SetAcceptsGlyphInfo.
+func (x *TextInputContext) SetAcceptsGlyphInfo(acceptsGlyphInfo bool) {
+	x.inner.SetAcceptsGlyphInfo(acceptsGlyphInfo)
+}
+
 // AllowedInputSourceLocales returns the collection as a Go slice.
-func (x *TextInputContext) AllowedInputSourceLocales() []*foundation.NSString {
+func (x *TextInputContext) AllowedInputSourceLocales() []string {
 	arr := x.inner.AllowedInputSourceLocales()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// SetAllowedInputSourceLocales calls the underlying SetAllowedInputSourceLocales.
+func (x *TextInputContext) SetAllowedInputSourceLocales(allowedInputSourceLocales *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetAllowedInputSourceLocales(allowedInputSourceLocales)
 }
 
 // KeyboardInputSources returns the collection as a Go slice.
@@ -73,10 +137,49 @@ func (x *TextInputContext) KeyboardInputSources() []*foundation.NSString {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	})
 }
+
+// SelectedKeyboardInputSource calls the underlying SelectedKeyboardInputSource.
+func (x *TextInputContext) SelectedKeyboardInputSource() string {
+	_r := x.inner.SelectedKeyboardInputSource()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetSelectedKeyboardInputSource calls the underlying SetSelectedKeyboardInputSource.
+func (x *TextInputContext) SetSelectedKeyboardInputSource(selectedKeyboardInputSource *foundation.NSString) {
+	x.inner.SetSelectedKeyboardInputSource(selectedKeyboardInputSource)
+}
+
+// TextInputContextable is the interface implemented by [TextInputContext], for mocking and DI.
+type TextInputContextable interface {
+	Unwrap() *raw.NSTextInputContext
+	WithAcceptsGlyphInfo(acceptsGlyphInfo bool) *TextInputContext
+	WithAllowedInputSourceLocales(items ...*foundation.NSString) *TextInputContext
+	WithSelectedKeyboardInputSource(selectedKeyboardInputSource *foundation.NSString) *TextInputContext
+	Activate()
+	Deactivate()
+	HandleEvent(event *raw.NSEvent) bool
+	DiscardMarkedText()
+	InvalidateCharacterCoordinates()
+	TextInputClientWillStartScrollingOrZooming()
+	TextInputClientDidEndScrollingOrZooming()
+	TextInputClientDidUpdateSelection()
+	TextInputClientDidScroll()
+	Client() raw.NSTextInputClient
+	AcceptsGlyphInfo() bool
+	SetAcceptsGlyphInfo(acceptsGlyphInfo bool)
+	AllowedInputSourceLocales() []string
+	SetAllowedInputSourceLocales(allowedInputSourceLocales *foundation.NSArray[*foundation.NSString])
+	KeyboardInputSources() []*foundation.NSString
+	SelectedKeyboardInputSource() string
+	SetSelectedKeyboardInputSource(selectedKeyboardInputSource *foundation.NSString)
+}
+
+var _ TextInputContextable = (*TextInputContext)(nil)
 

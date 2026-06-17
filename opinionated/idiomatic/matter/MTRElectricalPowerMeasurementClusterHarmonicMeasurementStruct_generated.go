@@ -36,3 +36,36 @@ func (x *MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct) WithMeas
 	return x
 }
 
+// Order calls the underlying Order.
+func (x *MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct) Order() *foundation.NSNumber {
+	return x.inner.Order()
+}
+
+// SetOrder calls the underlying SetOrder.
+func (x *MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct) SetOrder(order *foundation.NSNumber) {
+	x.inner.SetOrder(order)
+}
+
+// Measurement calls the underlying Measurement.
+func (x *MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct) Measurement() *foundation.NSNumber {
+	return x.inner.Measurement()
+}
+
+// SetMeasurement calls the underlying SetMeasurement.
+func (x *MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct) SetMeasurement(measurement *foundation.NSNumber) {
+	x.inner.SetMeasurement(measurement)
+}
+
+// MTRElectricalPowerMeasurementClusterHarmonicMeasurementStructable is the interface implemented by [MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct], for mocking and DI.
+type MTRElectricalPowerMeasurementClusterHarmonicMeasurementStructable interface {
+	Unwrap() *raw.MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct
+	WithOrder(order *foundation.NSNumber) *MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct
+	WithMeasurement(measurement *foundation.NSNumber) *MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct
+	Order() *foundation.NSNumber
+	SetOrder(order *foundation.NSNumber)
+	Measurement() *foundation.NSNumber
+	SetMeasurement(measurement *foundation.NSNumber)
+}
+
+var _ MTRElectricalPowerMeasurementClusterHarmonicMeasurementStructable = (*MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct)(nil)
+

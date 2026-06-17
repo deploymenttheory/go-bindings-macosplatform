@@ -6,6 +6,8 @@ package corelocation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corelocation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +24,33 @@ func NewMonitorConfiguration() *MonitorConfiguration {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CLMonitorConfiguration")), objc.RegisterName("new"))
 	return &MonitorConfiguration{inner: raw.CLMonitorConfigurationFromID(_id)}
 }
+
+// Name calls the underlying Name.
+func (x *MonitorConfiguration) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Queue calls the underlying Queue.
+func (x *MonitorConfiguration) Queue() *foundation.NSObject {
+	return x.inner.Queue()
+}
+
+// EventHandler calls the underlying EventHandler.
+func (x *MonitorConfiguration) EventHandler() objc.Block {
+	return x.inner.EventHandler()
+}
+
+// MonitorConfigurationable is the interface implemented by [MonitorConfiguration], for mocking and DI.
+type MonitorConfigurationable interface {
+	Unwrap() *raw.CLMonitorConfiguration
+	Name() string
+	Queue() *foundation.NSObject
+	EventHandler() objc.Block
+}
+
+var _ MonitorConfigurationable = (*MonitorConfiguration)(nil)
 

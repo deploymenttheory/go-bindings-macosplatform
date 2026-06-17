@@ -7,6 +7,7 @@ package networkextension
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -105,29 +106,164 @@ func (x *NEProxySettings) WithMatchDomains(items ...*foundation.NSString) *NEPro
 	return x
 }
 
+// AutoProxyConfigurationEnabled calls the underlying AutoProxyConfigurationEnabled.
+func (x *NEProxySettings) AutoProxyConfigurationEnabled() bool {
+	return x.inner.AutoProxyConfigurationEnabled()
+}
+
+// SetAutoProxyConfigurationEnabled calls the underlying SetAutoProxyConfigurationEnabled.
+func (x *NEProxySettings) SetAutoProxyConfigurationEnabled(autoProxyConfigurationEnabled bool) {
+	x.inner.SetAutoProxyConfigurationEnabled(autoProxyConfigurationEnabled)
+}
+
+// ProxyAutoConfigurationURL calls the underlying ProxyAutoConfigurationURL.
+func (x *NEProxySettings) ProxyAutoConfigurationURL() *foundation.NSURL {
+	return x.inner.ProxyAutoConfigurationURL()
+}
+
+// SetProxyAutoConfigurationURL calls the underlying SetProxyAutoConfigurationURL.
+func (x *NEProxySettings) SetProxyAutoConfigurationURL(proxyAutoConfigurationURL string) {
+	x.inner.SetProxyAutoConfigurationURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(proxyAutoConfigurationURL)))
+}
+
+// ProxyAutoConfigurationJavaScript calls the underlying ProxyAutoConfigurationJavaScript.
+func (x *NEProxySettings) ProxyAutoConfigurationJavaScript() string {
+	_r := x.inner.ProxyAutoConfigurationJavaScript()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetProxyAutoConfigurationJavaScript calls the underlying SetProxyAutoConfigurationJavaScript.
+func (x *NEProxySettings) SetProxyAutoConfigurationJavaScript(proxyAutoConfigurationJavaScript string) {
+	x.inner.SetProxyAutoConfigurationJavaScript(foundation.NSStringStringWithUTF8String(proxyAutoConfigurationJavaScript))
+}
+
+// HTTPEnabled calls the underlying HTTPEnabled.
+func (x *NEProxySettings) HTTPEnabled() bool {
+	return x.inner.HTTPEnabled()
+}
+
+// SetHTTPEnabled calls the underlying SetHTTPEnabled.
+func (x *NEProxySettings) SetHTTPEnabled(hTTPEnabled bool) {
+	x.inner.SetHTTPEnabled(hTTPEnabled)
+}
+
+// HTTPServer calls the underlying HTTPServer.
+func (x *NEProxySettings) HTTPServer() *NEProxyServer {
+	_r := x.inner.HTTPServer()
+	if _r == nil {
+		return nil
+	}
+	return &NEProxyServer{inner: _r}
+}
+
+// SetHTTPServer calls the underlying SetHTTPServer.
+func (x *NEProxySettings) SetHTTPServer(hTTPServer *raw.NEProxyServer) {
+	x.inner.SetHTTPServer(hTTPServer)
+}
+
+// HTTPSEnabled calls the underlying HTTPSEnabled.
+func (x *NEProxySettings) HTTPSEnabled() bool {
+	return x.inner.HTTPSEnabled()
+}
+
+// SetHTTPSEnabled calls the underlying SetHTTPSEnabled.
+func (x *NEProxySettings) SetHTTPSEnabled(hTTPSEnabled bool) {
+	x.inner.SetHTTPSEnabled(hTTPSEnabled)
+}
+
+// HTTPSServer calls the underlying HTTPSServer.
+func (x *NEProxySettings) HTTPSServer() *NEProxyServer {
+	_r := x.inner.HTTPSServer()
+	if _r == nil {
+		return nil
+	}
+	return &NEProxyServer{inner: _r}
+}
+
+// SetHTTPSServer calls the underlying SetHTTPSServer.
+func (x *NEProxySettings) SetHTTPSServer(hTTPSServer *raw.NEProxyServer) {
+	x.inner.SetHTTPSServer(hTTPSServer)
+}
+
+// ExcludeSimpleHostnames calls the underlying ExcludeSimpleHostnames.
+func (x *NEProxySettings) ExcludeSimpleHostnames() bool {
+	return x.inner.ExcludeSimpleHostnames()
+}
+
+// SetExcludeSimpleHostnames calls the underlying SetExcludeSimpleHostnames.
+func (x *NEProxySettings) SetExcludeSimpleHostnames(excludeSimpleHostnames bool) {
+	x.inner.SetExcludeSimpleHostnames(excludeSimpleHostnames)
+}
+
 // ExceptionList returns the collection as a Go slice.
-func (x *NEProxySettings) ExceptionList() []*foundation.NSString {
+func (x *NEProxySettings) ExceptionList() []string {
 	arr := x.inner.ExceptionList()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// SetExceptionList calls the underlying SetExceptionList.
+func (x *NEProxySettings) SetExceptionList(exceptionList *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetExceptionList(exceptionList)
 }
 
 // MatchDomains returns the collection as a Go slice.
-func (x *NEProxySettings) MatchDomains() []*foundation.NSString {
+func (x *NEProxySettings) MatchDomains() []string {
 	arr := x.inner.MatchDomains()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
+
+// SetMatchDomains calls the underlying SetMatchDomains.
+func (x *NEProxySettings) SetMatchDomains(matchDomains *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetMatchDomains(matchDomains)
+}
+
+// NEProxySettingsable is the interface implemented by [NEProxySettings], for mocking and DI.
+type NEProxySettingsable interface {
+	Unwrap() *raw.NEProxySettings
+	WithAutoProxyConfigurationEnabled(autoProxyConfigurationEnabled bool) *NEProxySettings
+	WithProxyAutoConfigurationURL(proxyAutoConfigurationURL string) *NEProxySettings
+	WithProxyAutoConfigurationJavaScript(proxyAutoConfigurationJavaScript string) *NEProxySettings
+	WithHTTPEnabled(hTTPEnabled bool) *NEProxySettings
+	WithHTTPServer(hTTPServer *raw.NEProxyServer) *NEProxySettings
+	WithHTTPSEnabled(hTTPSEnabled bool) *NEProxySettings
+	WithHTTPSServer(hTTPSServer *raw.NEProxyServer) *NEProxySettings
+	WithExcludeSimpleHostnames(excludeSimpleHostnames bool) *NEProxySettings
+	WithExceptionList(items ...*foundation.NSString) *NEProxySettings
+	WithMatchDomains(items ...*foundation.NSString) *NEProxySettings
+	AutoProxyConfigurationEnabled() bool
+	SetAutoProxyConfigurationEnabled(autoProxyConfigurationEnabled bool)
+	ProxyAutoConfigurationURL() *foundation.NSURL
+	SetProxyAutoConfigurationURL(proxyAutoConfigurationURL string)
+	ProxyAutoConfigurationJavaScript() string
+	SetProxyAutoConfigurationJavaScript(proxyAutoConfigurationJavaScript string)
+	HTTPEnabled() bool
+	SetHTTPEnabled(hTTPEnabled bool)
+	HTTPServer() *NEProxyServer
+	SetHTTPServer(hTTPServer *raw.NEProxyServer)
+	HTTPSEnabled() bool
+	SetHTTPSEnabled(hTTPSEnabled bool)
+	HTTPSServer() *NEProxyServer
+	SetHTTPSServer(hTTPSServer *raw.NEProxyServer)
+	ExcludeSimpleHostnames() bool
+	SetExcludeSimpleHostnames(excludeSimpleHostnames bool)
+	ExceptionList() []string
+	SetExceptionList(exceptionList *foundation.NSArray[*foundation.NSString])
+	MatchDomains() []string
+	SetMatchDomains(matchDomains *foundation.NSArray[*foundation.NSString])
+}
+
+var _ NEProxySettingsable = (*NEProxySettings)(nil)
 

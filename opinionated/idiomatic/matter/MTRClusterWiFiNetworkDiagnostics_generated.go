@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // MTRClusterWiFiNetworkDiagnostics wraps [raw.MTRClusterWiFiNetworkDiagnostics] with a fluent Go API.
@@ -32,7 +33,158 @@ func NewMTRClusterWiFiNetworkDiagnosticsWithDeviceEndpointQueue(device *raw.MTRD
 	return &MTRClusterWiFiNetworkDiagnostics{inner: raw.MTRClusterWiFiNetworkDiagnosticsFromID(_id)}
 }
 
+// ResetCountsWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying ResetCountsWithParamsExpectedValuesExpectedValueIntervalCompletion.
+func (x *MTRClusterWiFiNetworkDiagnostics) ResetCountsWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRWiFiNetworkDiagnosticsClusterResetCountsParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.ResetCountsWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+}
+
+// ResetCountsWithExpectedValuesExpectedValueIntervalCompletion calls the underlying ResetCountsWithExpectedValuesExpectedValueIntervalCompletion.
+func (x *MTRClusterWiFiNetworkDiagnostics) ResetCountsWithExpectedValuesExpectedValueIntervalCompletion(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.ResetCountsWithExpectedValuesExpectedValueIntervalCompletion(expectedValues, expectedValueIntervalMs, completion)
+}
+
+// ReadAttributeBSSIDWithParams calls the underlying ReadAttributeBSSIDWithParams.
+func (x *MTRClusterWiFiNetworkDiagnostics) ReadAttributeBSSIDWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeBSSIDWithParams(params)
+}
+
+// ReadAttributeSecurityTypeWithParams calls the underlying ReadAttributeSecurityTypeWithParams.
+func (x *MTRClusterWiFiNetworkDiagnostics) ReadAttributeSecurityTypeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeSecurityTypeWithParams(params)
+}
+
+// ReadAttributeWiFiVersionWithParams calls the underlying ReadAttributeWiFiVersionWithParams.
+func (x *MTRClusterWiFiNetworkDiagnostics) ReadAttributeWiFiVersionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeWiFiVersionWithParams(params)
+}
+
+// ReadAttributeChannelNumberWithParams calls the underlying ReadAttributeChannelNumberWithParams.
+func (x *MTRClusterWiFiNetworkDiagnostics) ReadAttributeChannelNumberWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeChannelNumberWithParams(params)
+}
+
+// ReadAttributeRSSIWithParams calls the underlying ReadAttributeRSSIWithParams.
+func (x *MTRClusterWiFiNetworkDiagnostics) ReadAttributeRSSIWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeRSSIWithParams(params)
+}
+
+// ReadAttributeBeaconLostCountWithParams calls the underlying ReadAttributeBeaconLostCountWithParams.
+func (x *MTRClusterWiFiNetworkDiagnostics) ReadAttributeBeaconLostCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeBeaconLostCountWithParams(params)
+}
+
+// ReadAttributeBeaconRxCountWithParams calls the underlying ReadAttributeBeaconRxCountWithParams.
+func (x *MTRClusterWiFiNetworkDiagnostics) ReadAttributeBeaconRxCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeBeaconRxCountWithParams(params)
+}
+
+// ReadAttributePacketMulticastRxCountWithParams calls the underlying ReadAttributePacketMulticastRxCountWithParams.
+func (x *MTRClusterWiFiNetworkDiagnostics) ReadAttributePacketMulticastRxCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributePacketMulticastRxCountWithParams(params)
+}
+
+// ReadAttributePacketMulticastTxCountWithParams calls the underlying ReadAttributePacketMulticastTxCountWithParams.
+func (x *MTRClusterWiFiNetworkDiagnostics) ReadAttributePacketMulticastTxCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributePacketMulticastTxCountWithParams(params)
+}
+
+// ReadAttributePacketUnicastRxCountWithParams calls the underlying ReadAttributePacketUnicastRxCountWithParams.
+func (x *MTRClusterWiFiNetworkDiagnostics) ReadAttributePacketUnicastRxCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributePacketUnicastRxCountWithParams(params)
+}
+
+// ReadAttributePacketUnicastTxCountWithParams calls the underlying ReadAttributePacketUnicastTxCountWithParams.
+func (x *MTRClusterWiFiNetworkDiagnostics) ReadAttributePacketUnicastTxCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributePacketUnicastTxCountWithParams(params)
+}
+
+// ReadAttributeCurrentMaxRateWithParams calls the underlying ReadAttributeCurrentMaxRateWithParams.
+func (x *MTRClusterWiFiNetworkDiagnostics) ReadAttributeCurrentMaxRateWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeCurrentMaxRateWithParams(params)
+}
+
+// ReadAttributeOverrunCountWithParams calls the underlying ReadAttributeOverrunCountWithParams.
+func (x *MTRClusterWiFiNetworkDiagnostics) ReadAttributeOverrunCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeOverrunCountWithParams(params)
+}
+
+// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
+func (x *MTRClusterWiFiNetworkDiagnostics) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+}
+
+// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
+func (x *MTRClusterWiFiNetworkDiagnostics) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
+}
+
+// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
+func (x *MTRClusterWiFiNetworkDiagnostics) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeAttributeListWithParams(params)
+}
+
+// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
+func (x *MTRClusterWiFiNetworkDiagnostics) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeFeatureMapWithParams(params)
+}
+
+// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
+func (x *MTRClusterWiFiNetworkDiagnostics) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeClusterRevisionWithParams(params)
+}
+
+// ResetCountsWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying ResetCountsWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
+func (x *MTRClusterWiFiNetworkDiagnostics) ResetCountsWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRWiFiNetworkDiagnosticsClusterResetCountsParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
+	x.inner.ResetCountsWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
+}
+
+// ResetCountsWithExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying ResetCountsWithExpectedValuesExpectedValueIntervalCompletionHandler.
+func (x *MTRClusterWiFiNetworkDiagnostics) ResetCountsWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
+	x.inner.ResetCountsWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues, expectedValueIntervalMs, completionHandler)
+}
+
+// ReadAttributeBssidWithParams calls the underlying ReadAttributeBssidWithParams.
+func (x *MTRClusterWiFiNetworkDiagnostics) ReadAttributeBssidWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeBssidWithParams(params)
+}
+
+// ReadAttributeRssiWithParams calls the underlying ReadAttributeRssiWithParams.
+func (x *MTRClusterWiFiNetworkDiagnostics) ReadAttributeRssiWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeRssiWithParams(params)
+}
+
 func (x *MTRClusterWiFiNetworkDiagnostics) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
 
 func (x *MTRClusterWiFiNetworkDiagnostics) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+
+// MTRClusterWiFiNetworkDiagnosticsable is the interface implemented by [MTRClusterWiFiNetworkDiagnostics], for mocking and DI.
+type MTRClusterWiFiNetworkDiagnosticsable interface {
+	Unwrap() *raw.MTRClusterWiFiNetworkDiagnostics
+	ResetCountsWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRWiFiNetworkDiagnosticsClusterResetCountsParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
+	ResetCountsWithExpectedValuesExpectedValueIntervalCompletion(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
+	ReadAttributeBSSIDWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeSecurityTypeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeWiFiVersionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeChannelNumberWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeRSSIWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeBeaconLostCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeBeaconRxCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributePacketMulticastRxCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributePacketMulticastTxCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributePacketUnicastRxCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributePacketUnicastTxCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeCurrentMaxRateWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeOverrunCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ResetCountsWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRWiFiNetworkDiagnosticsClusterResetCountsParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
+	ResetCountsWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
+	ReadAttributeBssidWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeRssiWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+}
+
+var _ MTRClusterWiFiNetworkDiagnosticsable = (*MTRClusterWiFiNetworkDiagnostics)(nil)
 

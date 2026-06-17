@@ -35,5 +35,42 @@ func (x *MenuToolbarItem) WithShowsIndicator(showsIndicator bool) *MenuToolbarIt
 	return x
 }
 
+// Menu calls the underlying Menu.
+func (x *MenuToolbarItem) Menu() *Menu {
+	_r := x.inner.Menu()
+	if _r == nil {
+		return nil
+	}
+	return &Menu{inner: _r}
+}
+
+// SetMenu calls the underlying SetMenu.
+func (x *MenuToolbarItem) SetMenu(menu *raw.NSMenu) {
+	x.inner.SetMenu(menu)
+}
+
+// ShowsIndicator calls the underlying ShowsIndicator.
+func (x *MenuToolbarItem) ShowsIndicator() bool {
+	return x.inner.ShowsIndicator()
+}
+
+// SetShowsIndicator calls the underlying SetShowsIndicator.
+func (x *MenuToolbarItem) SetShowsIndicator(showsIndicator bool) {
+	x.inner.SetShowsIndicator(showsIndicator)
+}
+
 func (x *MenuToolbarItem) asToolbarItem() *raw.NSToolbarItem { return &x.inner.NSToolbarItem }
+
+// MenuToolbarItemable is the interface implemented by [MenuToolbarItem], for mocking and DI.
+type MenuToolbarItemable interface {
+	Unwrap() *raw.NSMenuToolbarItem
+	WithMenu(menu *raw.NSMenu) *MenuToolbarItem
+	WithShowsIndicator(showsIndicator bool) *MenuToolbarItem
+	Menu() *Menu
+	SetMenu(menu *raw.NSMenu)
+	ShowsIndicator() bool
+	SetShowsIndicator(showsIndicator bool)
+}
+
+var _ MenuToolbarItemable = (*MenuToolbarItem)(nil)
 

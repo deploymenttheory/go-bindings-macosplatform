@@ -36,3 +36,48 @@ func (x *MTRTimeSynchronizationClusterSetTimeZoneParams) WithServerSideProcessin
 	return x
 }
 
+// TimeZone calls the underlying TimeZone.
+func (x *MTRTimeSynchronizationClusterSetTimeZoneParams) TimeZone() *foundation.NSArray[objc.ID] {
+	return x.inner.TimeZone()
+}
+
+// SetTimeZone calls the underlying SetTimeZone.
+func (x *MTRTimeSynchronizationClusterSetTimeZoneParams) SetTimeZone(timeZone *foundation.NSArray[objc.ID]) {
+	x.inner.SetTimeZone(timeZone)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRTimeSynchronizationClusterSetTimeZoneParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRTimeSynchronizationClusterSetTimeZoneParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRTimeSynchronizationClusterSetTimeZoneParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRTimeSynchronizationClusterSetTimeZoneParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRTimeSynchronizationClusterSetTimeZoneParamsable is the interface implemented by [MTRTimeSynchronizationClusterSetTimeZoneParams], for mocking and DI.
+type MTRTimeSynchronizationClusterSetTimeZoneParamsable interface {
+	Unwrap() *raw.MTRTimeSynchronizationClusterSetTimeZoneParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTimeSynchronizationClusterSetTimeZoneParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRTimeSynchronizationClusterSetTimeZoneParams
+	TimeZone() *foundation.NSArray[objc.ID]
+	SetTimeZone(timeZone *foundation.NSArray[objc.ID])
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRTimeSynchronizationClusterSetTimeZoneParamsable = (*MTRTimeSynchronizationClusterSetTimeZoneParams)(nil)
+

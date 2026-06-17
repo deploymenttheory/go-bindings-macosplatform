@@ -29,7 +29,93 @@ func (x *ControllerDirectionPad) WithValueChangedHandler(valueChangedHandler fun
 	return x
 }
 
+// SetValueForXAxisYAxis calls the underlying SetValueForXAxisYAxis.
+func (x *ControllerDirectionPad) SetValueForXAxisYAxis(xAxis float32, yAxis float32) {
+	x.inner.SetValueForXAxisYAxis(xAxis, yAxis)
+}
+
+// ValueChangedHandler calls the underlying ValueChangedHandler.
+func (x *ControllerDirectionPad) ValueChangedHandler() objc.Block {
+	return x.inner.ValueChangedHandler()
+}
+
+// SetValueChangedHandler calls the underlying SetValueChangedHandler.
+func (x *ControllerDirectionPad) SetValueChangedHandler(valueChangedHandler func(*raw.GCControllerDirectionPad, float32, float32)) {
+	x.inner.SetValueChangedHandler(valueChangedHandler)
+}
+
+// XAxis calls the underlying XAxis.
+func (x *ControllerDirectionPad) XAxis() *ControllerAxisInput {
+	_r := x.inner.XAxis()
+	if _r == nil {
+		return nil
+	}
+	return &ControllerAxisInput{inner: _r}
+}
+
+// YAxis calls the underlying YAxis.
+func (x *ControllerDirectionPad) YAxis() *ControllerAxisInput {
+	_r := x.inner.YAxis()
+	if _r == nil {
+		return nil
+	}
+	return &ControllerAxisInput{inner: _r}
+}
+
+// Up calls the underlying Up.
+func (x *ControllerDirectionPad) Up() *ControllerButtonInput {
+	_r := x.inner.Up()
+	if _r == nil {
+		return nil
+	}
+	return &ControllerButtonInput{inner: _r}
+}
+
+// Down calls the underlying Down.
+func (x *ControllerDirectionPad) Down() *ControllerButtonInput {
+	_r := x.inner.Down()
+	if _r == nil {
+		return nil
+	}
+	return &ControllerButtonInput{inner: _r}
+}
+
+// Left calls the underlying Left.
+func (x *ControllerDirectionPad) Left() *ControllerButtonInput {
+	_r := x.inner.Left()
+	if _r == nil {
+		return nil
+	}
+	return &ControllerButtonInput{inner: _r}
+}
+
+// Right calls the underlying Right.
+func (x *ControllerDirectionPad) Right() *ControllerButtonInput {
+	_r := x.inner.Right()
+	if _r == nil {
+		return nil
+	}
+	return &ControllerButtonInput{inner: _r}
+}
+
 func (x *ControllerDirectionPad) asControllerDirectionPad() *raw.GCControllerDirectionPad { return x.inner }
 
 func (x *ControllerDirectionPad) asControllerElement() *raw.GCControllerElement { return &x.inner.GCControllerElement }
+
+// ControllerDirectionPadable is the interface implemented by [ControllerDirectionPad], for mocking and DI.
+type ControllerDirectionPadable interface {
+	Unwrap() *raw.GCControllerDirectionPad
+	WithValueChangedHandler(valueChangedHandler func(*raw.GCControllerDirectionPad, float32, float32)) *ControllerDirectionPad
+	SetValueForXAxisYAxis(xAxis float32, yAxis float32)
+	ValueChangedHandler() objc.Block
+	SetValueChangedHandler(valueChangedHandler func(*raw.GCControllerDirectionPad, float32, float32))
+	XAxis() *ControllerAxisInput
+	YAxis() *ControllerAxisInput
+	Up() *ControllerButtonInput
+	Down() *ControllerButtonInput
+	Left() *ControllerButtonInput
+	Right() *ControllerButtonInput
+}
+
+var _ ControllerDirectionPadable = (*ControllerDirectionPad)(nil)
 

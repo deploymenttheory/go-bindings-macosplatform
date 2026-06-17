@@ -42,3 +42,49 @@ func (x *MTRWindowCoveringClusterGoToLiftValueParams) WithServerSideProcessingTi
 	return x
 }
 
+// LiftValue calls the underlying LiftValue.
+func (x *MTRWindowCoveringClusterGoToLiftValueParams) LiftValue() *foundation.NSNumber {
+	return x.inner.LiftValue()
+}
+
+// SetLiftValue calls the underlying SetLiftValue.
+func (x *MTRWindowCoveringClusterGoToLiftValueParams) SetLiftValue(liftValue *foundation.NSNumber) {
+	x.inner.SetLiftValue(liftValue)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRWindowCoveringClusterGoToLiftValueParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRWindowCoveringClusterGoToLiftValueParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRWindowCoveringClusterGoToLiftValueParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRWindowCoveringClusterGoToLiftValueParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRWindowCoveringClusterGoToLiftValueParamsable is the interface implemented by [MTRWindowCoveringClusterGoToLiftValueParams], for mocking and DI.
+type MTRWindowCoveringClusterGoToLiftValueParamsable interface {
+	Unwrap() *raw.MTRWindowCoveringClusterGoToLiftValueParams
+	WithLiftValue(liftValue *foundation.NSNumber) *MTRWindowCoveringClusterGoToLiftValueParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRWindowCoveringClusterGoToLiftValueParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRWindowCoveringClusterGoToLiftValueParams
+	LiftValue() *foundation.NSNumber
+	SetLiftValue(liftValue *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRWindowCoveringClusterGoToLiftValueParamsable = (*MTRWindowCoveringClusterGoToLiftValueParams)(nil)
+

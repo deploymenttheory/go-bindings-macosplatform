@@ -29,3 +29,10 @@ func (x *UnitIlluminance) asUnit() *raw.NSUnit { return &x.inner.NSDimension.NSU
 
 func (x *UnitIlluminance) asObject() *raw.NSObject { return &x.inner.NSDimension.NSUnit.NSObject }
 
+// UnitIlluminanceable is the interface implemented by [UnitIlluminance], for mocking and DI.
+type UnitIlluminanceable interface {
+	Unwrap() *raw.NSUnitIlluminance
+}
+
+var _ UnitIlluminanceable = (*UnitIlluminance)(nil)
+

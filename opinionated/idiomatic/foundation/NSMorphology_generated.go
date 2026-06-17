@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
@@ -71,5 +72,138 @@ func (x *Morphology) WithDefiniteness(definiteness raw.NSGrammaticalDefiniteness
 	return x
 }
 
+// GrammaticalGender calls the underlying GrammaticalGender.
+func (x *Morphology) GrammaticalGender() raw.NSGrammaticalGender {
+	return x.inner.GrammaticalGender()
+}
+
+// SetGrammaticalGender calls the underlying SetGrammaticalGender.
+func (x *Morphology) SetGrammaticalGender(grammaticalGender raw.NSGrammaticalGender) {
+	x.inner.SetGrammaticalGender(grammaticalGender)
+}
+
+// PartOfSpeech calls the underlying PartOfSpeech.
+func (x *Morphology) PartOfSpeech() raw.NSGrammaticalPartOfSpeech {
+	return x.inner.PartOfSpeech()
+}
+
+// SetPartOfSpeech calls the underlying SetPartOfSpeech.
+func (x *Morphology) SetPartOfSpeech(partOfSpeech raw.NSGrammaticalPartOfSpeech) {
+	x.inner.SetPartOfSpeech(partOfSpeech)
+}
+
+// Number calls the underlying Number.
+func (x *Morphology) Number() raw.NSGrammaticalNumber {
+	return x.inner.Number()
+}
+
+// SetNumber calls the underlying SetNumber.
+func (x *Morphology) SetNumber(number raw.NSGrammaticalNumber) {
+	x.inner.SetNumber(number)
+}
+
+// GrammaticalCase calls the underlying GrammaticalCase.
+func (x *Morphology) GrammaticalCase() raw.NSGrammaticalCase {
+	return x.inner.GrammaticalCase()
+}
+
+// SetGrammaticalCase calls the underlying SetGrammaticalCase.
+func (x *Morphology) SetGrammaticalCase(grammaticalCase raw.NSGrammaticalCase) {
+	x.inner.SetGrammaticalCase(grammaticalCase)
+}
+
+// Determination calls the underlying Determination.
+func (x *Morphology) Determination() raw.NSGrammaticalDetermination {
+	return x.inner.Determination()
+}
+
+// SetDetermination calls the underlying SetDetermination.
+func (x *Morphology) SetDetermination(determination raw.NSGrammaticalDetermination) {
+	x.inner.SetDetermination(determination)
+}
+
+// GrammaticalPerson calls the underlying GrammaticalPerson.
+func (x *Morphology) GrammaticalPerson() raw.NSGrammaticalPerson {
+	return x.inner.GrammaticalPerson()
+}
+
+// SetGrammaticalPerson calls the underlying SetGrammaticalPerson.
+func (x *Morphology) SetGrammaticalPerson(grammaticalPerson raw.NSGrammaticalPerson) {
+	x.inner.SetGrammaticalPerson(grammaticalPerson)
+}
+
+// PronounType calls the underlying PronounType.
+func (x *Morphology) PronounType() raw.NSGrammaticalPronounType {
+	return x.inner.PronounType()
+}
+
+// SetPronounType calls the underlying SetPronounType.
+func (x *Morphology) SetPronounType(pronounType raw.NSGrammaticalPronounType) {
+	x.inner.SetPronounType(pronounType)
+}
+
+// Definiteness calls the underlying Definiteness.
+func (x *Morphology) Definiteness() raw.NSGrammaticalDefiniteness {
+	return x.inner.Definiteness()
+}
+
+// SetDefiniteness calls the underlying SetDefiniteness.
+func (x *Morphology) SetDefiniteness(definiteness raw.NSGrammaticalDefiniteness) {
+	x.inner.SetDefiniteness(definiteness)
+}
+
+// CustomPronounForLanguage calls the underlying CustomPronounForLanguage.
+func (x *Morphology) CustomPronounForLanguage(language string) *MorphologyCustomPronoun {
+	_r := x.inner.CustomPronounForLanguage(foundation.NSStringStringWithUTF8String(language))
+	if _r == nil {
+		return nil
+	}
+	return &MorphologyCustomPronoun{inner: _r}
+}
+
+// SetCustomPronounForLanguageError calls the underlying SetCustomPronounForLanguageError.
+func (x *Morphology) SetCustomPronounForLanguageError(features *raw.NSMorphologyCustomPronoun, language string) (bool, error) {
+	return x.inner.SetCustomPronounForLanguageError(features, foundation.NSStringStringWithUTF8String(language))
+}
+
+// IsUnspecified calls the underlying IsUnspecified.
+func (x *Morphology) IsUnspecified() bool {
+	return x.inner.IsUnspecified()
+}
+
 func (x *Morphology) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// Morphologyable is the interface implemented by [Morphology], for mocking and DI.
+type Morphologyable interface {
+	Unwrap() *raw.NSMorphology
+	WithGrammaticalGender(grammaticalGender raw.NSGrammaticalGender) *Morphology
+	WithPartOfSpeech(partOfSpeech raw.NSGrammaticalPartOfSpeech) *Morphology
+	WithNumber(number raw.NSGrammaticalNumber) *Morphology
+	WithGrammaticalCase(grammaticalCase raw.NSGrammaticalCase) *Morphology
+	WithDetermination(determination raw.NSGrammaticalDetermination) *Morphology
+	WithGrammaticalPerson(grammaticalPerson raw.NSGrammaticalPerson) *Morphology
+	WithPronounType(pronounType raw.NSGrammaticalPronounType) *Morphology
+	WithDefiniteness(definiteness raw.NSGrammaticalDefiniteness) *Morphology
+	GrammaticalGender() raw.NSGrammaticalGender
+	SetGrammaticalGender(grammaticalGender raw.NSGrammaticalGender)
+	PartOfSpeech() raw.NSGrammaticalPartOfSpeech
+	SetPartOfSpeech(partOfSpeech raw.NSGrammaticalPartOfSpeech)
+	Number() raw.NSGrammaticalNumber
+	SetNumber(number raw.NSGrammaticalNumber)
+	GrammaticalCase() raw.NSGrammaticalCase
+	SetGrammaticalCase(grammaticalCase raw.NSGrammaticalCase)
+	Determination() raw.NSGrammaticalDetermination
+	SetDetermination(determination raw.NSGrammaticalDetermination)
+	GrammaticalPerson() raw.NSGrammaticalPerson
+	SetGrammaticalPerson(grammaticalPerson raw.NSGrammaticalPerson)
+	PronounType() raw.NSGrammaticalPronounType
+	SetPronounType(pronounType raw.NSGrammaticalPronounType)
+	Definiteness() raw.NSGrammaticalDefiniteness
+	SetDefiniteness(definiteness raw.NSGrammaticalDefiniteness)
+	CustomPronounForLanguage(language string) *MorphologyCustomPronoun
+	SetCustomPronounForLanguageError(features *raw.NSMorphologyCustomPronoun, language string) (bool, error)
+	IsUnspecified() bool
+}
+
+var _ Morphologyable = (*Morphology)(nil)
 

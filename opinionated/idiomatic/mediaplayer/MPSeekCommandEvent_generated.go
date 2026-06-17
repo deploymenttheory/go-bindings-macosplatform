@@ -23,5 +23,18 @@ func NewSeekCommandEvent() *SeekCommandEvent {
 	return &SeekCommandEvent{inner: raw.MPSeekCommandEventFromID(_id)}
 }
 
+// Type calls the underlying Type.
+func (x *SeekCommandEvent) Type() raw.MPSeekCommandEventType {
+	return x.inner.Type()
+}
+
 func (x *SeekCommandEvent) asRemoteCommandEvent() *raw.MPRemoteCommandEvent { return &x.inner.MPRemoteCommandEvent }
+
+// SeekCommandEventable is the interface implemented by [SeekCommandEvent], for mocking and DI.
+type SeekCommandEventable interface {
+	Unwrap() *raw.MPSeekCommandEvent
+	Type() raw.MPSeekCommandEventType
+}
+
+var _ SeekCommandEventable = (*SeekCommandEvent)(nil)
 

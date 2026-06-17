@@ -41,3 +41,49 @@ func (x *BlitPassSampleBufferAttachmentDescriptor) WithEndOfEncoderSampleIndex(e
 	return x
 }
 
+// SampleBuffer calls the underlying SampleBuffer.
+func (x *BlitPassSampleBufferAttachmentDescriptor) SampleBuffer() raw.MTLCounterSampleBuffer {
+	return x.inner.SampleBuffer()
+}
+
+// SetSampleBuffer calls the underlying SetSampleBuffer.
+func (x *BlitPassSampleBufferAttachmentDescriptor) SetSampleBuffer(sampleBuffer raw.MTLCounterSampleBuffer) {
+	x.inner.SetSampleBuffer(sampleBuffer)
+}
+
+// StartOfEncoderSampleIndex calls the underlying StartOfEncoderSampleIndex.
+func (x *BlitPassSampleBufferAttachmentDescriptor) StartOfEncoderSampleIndex() uint {
+	return x.inner.StartOfEncoderSampleIndex()
+}
+
+// SetStartOfEncoderSampleIndex calls the underlying SetStartOfEncoderSampleIndex.
+func (x *BlitPassSampleBufferAttachmentDescriptor) SetStartOfEncoderSampleIndex(startOfEncoderSampleIndex uint) {
+	x.inner.SetStartOfEncoderSampleIndex(startOfEncoderSampleIndex)
+}
+
+// EndOfEncoderSampleIndex calls the underlying EndOfEncoderSampleIndex.
+func (x *BlitPassSampleBufferAttachmentDescriptor) EndOfEncoderSampleIndex() uint {
+	return x.inner.EndOfEncoderSampleIndex()
+}
+
+// SetEndOfEncoderSampleIndex calls the underlying SetEndOfEncoderSampleIndex.
+func (x *BlitPassSampleBufferAttachmentDescriptor) SetEndOfEncoderSampleIndex(endOfEncoderSampleIndex uint) {
+	x.inner.SetEndOfEncoderSampleIndex(endOfEncoderSampleIndex)
+}
+
+// BlitPassSampleBufferAttachmentDescriptorable is the interface implemented by [BlitPassSampleBufferAttachmentDescriptor], for mocking and DI.
+type BlitPassSampleBufferAttachmentDescriptorable interface {
+	Unwrap() *raw.MTLBlitPassSampleBufferAttachmentDescriptor
+	WithSampleBuffer(sampleBuffer raw.MTLCounterSampleBuffer) *BlitPassSampleBufferAttachmentDescriptor
+	WithStartOfEncoderSampleIndex(startOfEncoderSampleIndex uint) *BlitPassSampleBufferAttachmentDescriptor
+	WithEndOfEncoderSampleIndex(endOfEncoderSampleIndex uint) *BlitPassSampleBufferAttachmentDescriptor
+	SampleBuffer() raw.MTLCounterSampleBuffer
+	SetSampleBuffer(sampleBuffer raw.MTLCounterSampleBuffer)
+	StartOfEncoderSampleIndex() uint
+	SetStartOfEncoderSampleIndex(startOfEncoderSampleIndex uint)
+	EndOfEncoderSampleIndex() uint
+	SetEndOfEncoderSampleIndex(endOfEncoderSampleIndex uint)
+}
+
+var _ BlitPassSampleBufferAttachmentDescriptorable = (*BlitPassSampleBufferAttachmentDescriptor)(nil)
+

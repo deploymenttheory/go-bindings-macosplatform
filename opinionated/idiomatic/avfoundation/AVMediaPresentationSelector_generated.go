@@ -6,6 +6,8 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,16 +25,42 @@ func NewMediaPresentationSelector() *MediaPresentationSelector {
 	return &MediaPresentationSelector{inner: raw.AVMediaPresentationSelectorFromID(_id)}
 }
 
+// DisplayNameForLocaleIdentifier calls the underlying DisplayNameForLocaleIdentifier.
+func (x *MediaPresentationSelector) DisplayNameForLocaleIdentifier(localeIdentifier string) string {
+	_r := x.inner.DisplayNameForLocaleIdentifier(foundation.NSStringStringWithUTF8String(localeIdentifier))
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Identifier calls the underlying Identifier.
+func (x *MediaPresentationSelector) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 // Settings returns the collection as a Go slice.
 func (x *MediaPresentationSelector) Settings() []*raw.AVMediaPresentationSetting {
 	arr := x.inner.Settings()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AVMediaPresentationSetting, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVMediaPresentationSetting {
+		return raw.AVMediaPresentationSettingFromID(purego.Retain(_id))
+	})
 }
+
+// MediaPresentationSelectorable is the interface implemented by [MediaPresentationSelector], for mocking and DI.
+type MediaPresentationSelectorable interface {
+	Unwrap() *raw.AVMediaPresentationSelector
+	DisplayNameForLocaleIdentifier(localeIdentifier string) string
+	Identifier() string
+	Settings() []*raw.AVMediaPresentationSetting
+}
+
+var _ MediaPresentationSelectorable = (*MediaPresentationSelector)(nil)
 

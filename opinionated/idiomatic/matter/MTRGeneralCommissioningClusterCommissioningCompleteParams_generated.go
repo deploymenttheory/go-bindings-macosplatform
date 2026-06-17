@@ -36,3 +36,36 @@ func (x *MTRGeneralCommissioningClusterCommissioningCompleteParams) WithServerSi
 	return x
 }
 
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRGeneralCommissioningClusterCommissioningCompleteParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRGeneralCommissioningClusterCommissioningCompleteParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRGeneralCommissioningClusterCommissioningCompleteParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRGeneralCommissioningClusterCommissioningCompleteParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRGeneralCommissioningClusterCommissioningCompleteParamsable is the interface implemented by [MTRGeneralCommissioningClusterCommissioningCompleteParams], for mocking and DI.
+type MTRGeneralCommissioningClusterCommissioningCompleteParamsable interface {
+	Unwrap() *raw.MTRGeneralCommissioningClusterCommissioningCompleteParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRGeneralCommissioningClusterCommissioningCompleteParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRGeneralCommissioningClusterCommissioningCompleteParams
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRGeneralCommissioningClusterCommissioningCompleteParamsable = (*MTRGeneralCommissioningClusterCommissioningCompleteParams)(nil)
+

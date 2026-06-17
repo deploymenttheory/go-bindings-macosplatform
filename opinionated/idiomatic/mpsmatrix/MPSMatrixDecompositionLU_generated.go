@@ -6,6 +6,7 @@ package mpsmatrix
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsmatrix"
 	"github.com/ebitengine/purego/objc"
 )
@@ -25,5 +26,18 @@ func NewMatrixDecompositionLUWithDeviceRowsColumns(device metal.MTLDevice, rows 
 	return &MatrixDecompositionLU{inner: raw.MPSMatrixDecompositionLUFromID(_id)}
 }
 
+// EncodeToCommandBufferSourceMatrixResultMatrixPivotIndicesStatus calls the underlying EncodeToCommandBufferSourceMatrixResultMatrixPivotIndicesStatus.
+func (x *MatrixDecompositionLU) EncodeToCommandBufferSourceMatrixResultMatrixPivotIndicesStatus(commandBuffer metal.MTLCommandBuffer, sourceMatrix *mpscore.MPSMatrix, resultMatrix *mpscore.MPSMatrix, pivotIndices *mpscore.MPSMatrix, status metal.MTLBuffer) {
+	x.inner.EncodeToCommandBufferSourceMatrixResultMatrixPivotIndicesStatus(commandBuffer, sourceMatrix, resultMatrix, pivotIndices, status)
+}
+
 func (x *MatrixDecompositionLU) asMatrixUnaryKernel() *raw.MPSMatrixUnaryKernel { return &x.inner.MPSMatrixUnaryKernel }
+
+// MatrixDecompositionLUable is the interface implemented by [MatrixDecompositionLU], for mocking and DI.
+type MatrixDecompositionLUable interface {
+	Unwrap() *raw.MPSMatrixDecompositionLU
+	EncodeToCommandBufferSourceMatrixResultMatrixPivotIndicesStatus(commandBuffer metal.MTLCommandBuffer, sourceMatrix *mpscore.MPSMatrix, resultMatrix *mpscore.MPSMatrix, pivotIndices *mpscore.MPSMatrix, status metal.MTLBuffer)
+}
+
+var _ MatrixDecompositionLUable = (*MatrixDecompositionLU)(nil)
 

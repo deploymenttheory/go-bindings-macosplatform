@@ -23,3 +23,34 @@ func NewChannel() *Channel {
 	return &Channel{inner: raw.CWChannelFromID(_id)}
 }
 
+// IsEqualToChannel calls the underlying IsEqualToChannel.
+func (x *Channel) IsEqualToChannel(channel *raw.CWChannel) bool {
+	return x.inner.IsEqualToChannel(channel)
+}
+
+// ChannelNumber calls the underlying ChannelNumber.
+func (x *Channel) ChannelNumber() int {
+	return x.inner.ChannelNumber()
+}
+
+// ChannelWidth calls the underlying ChannelWidth.
+func (x *Channel) ChannelWidth() raw.CWChannelWidth {
+	return x.inner.ChannelWidth()
+}
+
+// ChannelBand calls the underlying ChannelBand.
+func (x *Channel) ChannelBand() raw.CWChannelBand {
+	return x.inner.ChannelBand()
+}
+
+// Channelable is the interface implemented by [Channel], for mocking and DI.
+type Channelable interface {
+	Unwrap() *raw.CWChannel
+	IsEqualToChannel(channel *raw.CWChannel) bool
+	ChannelNumber() int
+	ChannelWidth() raw.CWChannelWidth
+	ChannelBand() raw.CWChannelBand
+}
+
+var _ Channelable = (*Channel)(nil)
+

@@ -5,9 +5,11 @@
 package avfoundation
 
 import (
+	"context"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -26,17 +28,53 @@ func NewCaptionConversionValidatorWithCaptionsTimeRangeConversionSettings(captio
 	return &CaptionConversionValidator{inner: raw.AVCaptionConversionValidatorFromID(_id)}
 }
 
+// ValidateCaptionConversionWithWarningHandler blocks until the operation completes or ctx is cancelled.
+func (x *CaptionConversionValidator) ValidateCaptionConversionWithWarningHandler(ctx context.Context) (*CaptionConversionWarning, error) {
+	type _result struct {
+		val *CaptionConversionWarning
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ValidateCaptionConversionWithWarningHandler(func(_p0 *raw.AVCaptionConversionWarning) {
+		var _o _result
+		if _p0 != nil {
+			_o.val = &CaptionConversionWarning{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *CaptionConversionWarning
+		return _zero, ctx.Err()
+	}
+}
+
+// StopValidating calls the underlying StopValidating.
+func (x *CaptionConversionValidator) StopValidating() {
+	x.inner.StopValidating()
+}
+
+// Status calls the underlying Status.
+func (x *CaptionConversionValidator) Status() raw.AVCaptionConversionValidatorStatus {
+	return x.inner.Status()
+}
+
 // Captions returns the collection as a Go slice.
 func (x *CaptionConversionValidator) Captions() []*raw.AVCaption {
 	arr := x.inner.Captions()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AVCaption, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVCaption {
+		return raw.AVCaptionFromID(purego.Retain(_id))
+	})
+}
+
+// TimeRange calls the underlying TimeRange.
+func (x *CaptionConversionValidator) TimeRange() coremedia.CMTimeRange {
+	return x.inner.TimeRange()
 }
 
 // Warnings returns the collection as a Go slice.
@@ -45,10 +83,21 @@ func (x *CaptionConversionValidator) Warnings() []*raw.AVCaptionConversionWarnin
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AVCaptionConversionWarning, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVCaptionConversionWarning {
+		return raw.AVCaptionConversionWarningFromID(purego.Retain(_id))
+	})
 }
+
+// CaptionConversionValidatorable is the interface implemented by [CaptionConversionValidator], for mocking and DI.
+type CaptionConversionValidatorable interface {
+	Unwrap() *raw.AVCaptionConversionValidator
+	ValidateCaptionConversionWithWarningHandler(ctx context.Context) (*CaptionConversionWarning, error)
+	StopValidating()
+	Status() raw.AVCaptionConversionValidatorStatus
+	Captions() []*raw.AVCaption
+	TimeRange() coremedia.CMTimeRange
+	Warnings() []*raw.AVCaptionConversionWarning
+}
+
+var _ CaptionConversionValidatorable = (*CaptionConversionValidator)(nil)
 

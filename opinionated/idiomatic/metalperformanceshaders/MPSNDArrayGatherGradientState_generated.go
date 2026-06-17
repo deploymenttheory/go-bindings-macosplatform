@@ -29,3 +29,10 @@ func (x *NDArrayGatherGradientState) asNDArrayGradientState() *mpsndarray.MPSNDA
 
 func (x *NDArrayGatherGradientState) asState() *mpscore.MPSState { return &x.inner.MPSNDArrayGradientState.MPSState }
 
+// NDArrayGatherGradientStateable is the interface implemented by [NDArrayGatherGradientState], for mocking and DI.
+type NDArrayGatherGradientStateable interface {
+	Unwrap() *raw.MPSNDArrayGatherGradientState
+}
+
+var _ NDArrayGatherGradientStateable = (*NDArrayGatherGradientState)(nil)
+

@@ -40,5 +40,18 @@ func NewImageSobelWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTL
 	return &ImageSobel{inner: raw.MPSImageSobelFromID(_id)}
 }
 
+// ColorTransform calls the underlying ColorTransform.
+func (x *ImageSobel) ColorTransform() *float32 {
+	return x.inner.ColorTransform()
+}
+
 func (x *ImageSobel) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.inner.MPSUnaryImageKernel }
+
+// ImageSobelable is the interface implemented by [ImageSobel], for mocking and DI.
+type ImageSobelable interface {
+	Unwrap() *raw.MPSImageSobel
+	ColorTransform() *float32
+}
+
+var _ ImageSobelable = (*ImageSobel)(nil)
 

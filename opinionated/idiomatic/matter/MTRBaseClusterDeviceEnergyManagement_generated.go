@@ -5,9 +5,12 @@
 package matter
 
 import (
+	"context"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // MTRBaseClusterDeviceEnergyManagement wraps [raw.MTRBaseClusterDeviceEnergyManagement] with a fluent Go API.
@@ -25,7 +28,624 @@ func NewMTRBaseClusterDeviceEnergyManagementWithDeviceEndpointIDQueue(device *ra
 	return &MTRBaseClusterDeviceEnergyManagement{inner: raw.MTRBaseClusterDeviceEnergyManagementFromID(_id)}
 }
 
+// PowerAdjustRequestWithParamsCompletion calls the underlying PowerAdjustRequestWithParamsCompletion.
+func (x *MTRBaseClusterDeviceEnergyManagement) PowerAdjustRequestWithParamsCompletion(params *raw.MTRDeviceEnergyManagementClusterPowerAdjustRequestParams, completion func(unsafe.Pointer)) {
+	x.inner.PowerAdjustRequestWithParamsCompletion(params, completion)
+}
+
+// CancelPowerAdjustRequestWithParamsCompletion calls the underlying CancelPowerAdjustRequestWithParamsCompletion.
+func (x *MTRBaseClusterDeviceEnergyManagement) CancelPowerAdjustRequestWithParamsCompletion(params *raw.MTRDeviceEnergyManagementClusterCancelPowerAdjustRequestParams, completion func(unsafe.Pointer)) {
+	x.inner.CancelPowerAdjustRequestWithParamsCompletion(params, completion)
+}
+
+// CancelPowerAdjustRequestWithCompletion calls the underlying CancelPowerAdjustRequestWithCompletion.
+func (x *MTRBaseClusterDeviceEnergyManagement) CancelPowerAdjustRequestWithCompletion(completion func(unsafe.Pointer)) {
+	x.inner.CancelPowerAdjustRequestWithCompletion(completion)
+}
+
+// StartTimeAdjustRequestWithParamsCompletion calls the underlying StartTimeAdjustRequestWithParamsCompletion.
+func (x *MTRBaseClusterDeviceEnergyManagement) StartTimeAdjustRequestWithParamsCompletion(params *raw.MTRDeviceEnergyManagementClusterStartTimeAdjustRequestParams, completion func(unsafe.Pointer)) {
+	x.inner.StartTimeAdjustRequestWithParamsCompletion(params, completion)
+}
+
+// PauseRequestWithParamsCompletion calls the underlying PauseRequestWithParamsCompletion.
+func (x *MTRBaseClusterDeviceEnergyManagement) PauseRequestWithParamsCompletion(params *raw.MTRDeviceEnergyManagementClusterPauseRequestParams, completion func(unsafe.Pointer)) {
+	x.inner.PauseRequestWithParamsCompletion(params, completion)
+}
+
+// ResumeRequestWithParamsCompletion calls the underlying ResumeRequestWithParamsCompletion.
+func (x *MTRBaseClusterDeviceEnergyManagement) ResumeRequestWithParamsCompletion(params *raw.MTRDeviceEnergyManagementClusterResumeRequestParams, completion func(unsafe.Pointer)) {
+	x.inner.ResumeRequestWithParamsCompletion(params, completion)
+}
+
+// ResumeRequestWithCompletion calls the underlying ResumeRequestWithCompletion.
+func (x *MTRBaseClusterDeviceEnergyManagement) ResumeRequestWithCompletion(completion func(unsafe.Pointer)) {
+	x.inner.ResumeRequestWithCompletion(completion)
+}
+
+// ModifyForecastRequestWithParamsCompletion calls the underlying ModifyForecastRequestWithParamsCompletion.
+func (x *MTRBaseClusterDeviceEnergyManagement) ModifyForecastRequestWithParamsCompletion(params *raw.MTRDeviceEnergyManagementClusterModifyForecastRequestParams, completion func(unsafe.Pointer)) {
+	x.inner.ModifyForecastRequestWithParamsCompletion(params, completion)
+}
+
+// RequestConstraintBasedForecastWithParamsCompletion calls the underlying RequestConstraintBasedForecastWithParamsCompletion.
+func (x *MTRBaseClusterDeviceEnergyManagement) RequestConstraintBasedForecastWithParamsCompletion(params *raw.MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams, completion func(unsafe.Pointer)) {
+	x.inner.RequestConstraintBasedForecastWithParamsCompletion(params, completion)
+}
+
+// CancelRequestWithParamsCompletion calls the underlying CancelRequestWithParamsCompletion.
+func (x *MTRBaseClusterDeviceEnergyManagement) CancelRequestWithParamsCompletion(params *raw.MTRDeviceEnergyManagementClusterCancelRequestParams, completion func(unsafe.Pointer)) {
+	x.inner.CancelRequestWithParamsCompletion(params, completion)
+}
+
+// CancelRequestWithCompletion calls the underlying CancelRequestWithCompletion.
+func (x *MTRBaseClusterDeviceEnergyManagement) CancelRequestWithCompletion(completion func(unsafe.Pointer)) {
+	x.inner.CancelRequestWithCompletion(completion)
+}
+
+// ReadAttributeESATypeWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterDeviceEnergyManagement) ReadAttributeESATypeWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeESATypeWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// SubscribeAttributeESATypeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeESATypeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeESATypeWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeESACanGenerateWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterDeviceEnergyManagement) ReadAttributeESACanGenerateWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeESACanGenerateWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// SubscribeAttributeESACanGenerateWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeESACanGenerateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeESACanGenerateWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeESAStateWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterDeviceEnergyManagement) ReadAttributeESAStateWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeESAStateWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// SubscribeAttributeESAStateWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeESAStateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeESAStateWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeAbsMinPowerWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterDeviceEnergyManagement) ReadAttributeAbsMinPowerWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeAbsMinPowerWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// SubscribeAttributeAbsMinPowerWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeAbsMinPowerWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeAbsMinPowerWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeAbsMaxPowerWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterDeviceEnergyManagement) ReadAttributeAbsMaxPowerWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeAbsMaxPowerWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// SubscribeAttributeAbsMaxPowerWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeAbsMaxPowerWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeAbsMaxPowerWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributePowerAdjustmentCapabilityWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterDeviceEnergyManagement) ReadAttributePowerAdjustmentCapabilityWithCompletion(ctx context.Context) (*MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct, error) {
+	type _result struct {
+		val *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributePowerAdjustmentCapabilityWithCompletion(func(_p0 *raw.MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct
+		return _zero, ctx.Err()
+	}
+}
+
+// SubscribeAttributePowerAdjustmentCapabilityWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributePowerAdjustmentCapabilityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct, error) {
+	type _result struct {
+		val *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributePowerAdjustmentCapabilityWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *raw.MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeForecastWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterDeviceEnergyManagement) ReadAttributeForecastWithCompletion(ctx context.Context) (*MTRDeviceEnergyManagementClusterForecastStruct, error) {
+	type _result struct {
+		val *MTRDeviceEnergyManagementClusterForecastStruct
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeForecastWithCompletion(func(_p0 *raw.MTRDeviceEnergyManagementClusterForecastStruct, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTRDeviceEnergyManagementClusterForecastStruct{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTRDeviceEnergyManagementClusterForecastStruct
+		return _zero, ctx.Err()
+	}
+}
+
+// SubscribeAttributeForecastWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeForecastWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*MTRDeviceEnergyManagementClusterForecastStruct, error) {
+	type _result struct {
+		val *MTRDeviceEnergyManagementClusterForecastStruct
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeForecastWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *raw.MTRDeviceEnergyManagementClusterForecastStruct, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTRDeviceEnergyManagementClusterForecastStruct{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTRDeviceEnergyManagementClusterForecastStruct
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeOptOutStateWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterDeviceEnergyManagement) ReadAttributeOptOutStateWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeOptOutStateWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// SubscribeAttributeOptOutStateWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeOptOutStateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeOptOutStateWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeGeneratedCommandListWithCompletion calls the underlying ReadAttributeGeneratedCommandListWithCompletion.
+func (x *MTRBaseClusterDeviceEnergyManagement) ReadAttributeGeneratedCommandListWithCompletion(completion objc.Block) {
+	x.inner.ReadAttributeGeneratedCommandListWithCompletion(completion)
+}
+
+// SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler calls the underlying SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler.
+func (x *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block) {
+	x.inner.SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, reportHandler)
+}
+
+// ReadAttributeAcceptedCommandListWithCompletion calls the underlying ReadAttributeAcceptedCommandListWithCompletion.
+func (x *MTRBaseClusterDeviceEnergyManagement) ReadAttributeAcceptedCommandListWithCompletion(completion objc.Block) {
+	x.inner.ReadAttributeAcceptedCommandListWithCompletion(completion)
+}
+
+// SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler calls the underlying SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler.
+func (x *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block) {
+	x.inner.SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, reportHandler)
+}
+
+// ReadAttributeAttributeListWithCompletion calls the underlying ReadAttributeAttributeListWithCompletion.
+func (x *MTRBaseClusterDeviceEnergyManagement) ReadAttributeAttributeListWithCompletion(completion objc.Block) {
+	x.inner.ReadAttributeAttributeListWithCompletion(completion)
+}
+
+// SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler calls the underlying SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler.
+func (x *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block) {
+	x.inner.SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, reportHandler)
+}
+
+// ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterDeviceEnergyManagement) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeFeatureMapWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterDeviceEnergyManagement) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeClusterRevisionWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
 func (x *MTRBaseClusterDeviceEnergyManagement) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
 
 func (x *MTRBaseClusterDeviceEnergyManagement) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+
+// MTRBaseClusterDeviceEnergyManagementable is the interface implemented by [MTRBaseClusterDeviceEnergyManagement], for mocking and DI.
+type MTRBaseClusterDeviceEnergyManagementable interface {
+	Unwrap() *raw.MTRBaseClusterDeviceEnergyManagement
+	PowerAdjustRequestWithParamsCompletion(params *raw.MTRDeviceEnergyManagementClusterPowerAdjustRequestParams, completion func(unsafe.Pointer))
+	CancelPowerAdjustRequestWithParamsCompletion(params *raw.MTRDeviceEnergyManagementClusterCancelPowerAdjustRequestParams, completion func(unsafe.Pointer))
+	CancelPowerAdjustRequestWithCompletion(completion func(unsafe.Pointer))
+	StartTimeAdjustRequestWithParamsCompletion(params *raw.MTRDeviceEnergyManagementClusterStartTimeAdjustRequestParams, completion func(unsafe.Pointer))
+	PauseRequestWithParamsCompletion(params *raw.MTRDeviceEnergyManagementClusterPauseRequestParams, completion func(unsafe.Pointer))
+	ResumeRequestWithParamsCompletion(params *raw.MTRDeviceEnergyManagementClusterResumeRequestParams, completion func(unsafe.Pointer))
+	ResumeRequestWithCompletion(completion func(unsafe.Pointer))
+	ModifyForecastRequestWithParamsCompletion(params *raw.MTRDeviceEnergyManagementClusterModifyForecastRequestParams, completion func(unsafe.Pointer))
+	RequestConstraintBasedForecastWithParamsCompletion(params *raw.MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams, completion func(unsafe.Pointer))
+	CancelRequestWithParamsCompletion(params *raw.MTRDeviceEnergyManagementClusterCancelRequestParams, completion func(unsafe.Pointer))
+	CancelRequestWithCompletion(completion func(unsafe.Pointer))
+	ReadAttributeESATypeWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	SubscribeAttributeESATypeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeESACanGenerateWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	SubscribeAttributeESACanGenerateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeESAStateWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	SubscribeAttributeESAStateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeAbsMinPowerWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	SubscribeAttributeAbsMinPowerWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeAbsMaxPowerWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	SubscribeAttributeAbsMaxPowerWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributePowerAdjustmentCapabilityWithCompletion(ctx context.Context) (*MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct, error)
+	SubscribeAttributePowerAdjustmentCapabilityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct, error)
+	ReadAttributeForecastWithCompletion(ctx context.Context) (*MTRDeviceEnergyManagementClusterForecastStruct, error)
+	SubscribeAttributeForecastWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*MTRDeviceEnergyManagementClusterForecastStruct, error)
+	ReadAttributeOptOutStateWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	SubscribeAttributeOptOutStateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeGeneratedCommandListWithCompletion(completion objc.Block)
+	SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block)
+	ReadAttributeAcceptedCommandListWithCompletion(completion objc.Block)
+	SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block)
+	ReadAttributeAttributeListWithCompletion(completion objc.Block)
+	SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block)
+	ReadAttributeFeatureMapWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+}
+
+var _ MTRBaseClusterDeviceEnergyManagementable = (*MTRBaseClusterDeviceEnergyManagement)(nil)
 

@@ -101,3 +101,121 @@ func (x *Script) WithLanguage(language *raw.OSALanguage) *Script {
 	return x
 }
 
+// CompileAndReturnError calls the underlying CompileAndReturnError.
+func (x *Script) CompileAndReturnError(errorInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) bool {
+	return x.inner.CompileAndReturnError(errorInfo)
+}
+
+// ExecuteAndReturnError calls the underlying ExecuteAndReturnError.
+func (x *Script) ExecuteAndReturnError(errorInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSAppleEventDescriptor {
+	return x.inner.ExecuteAndReturnError(errorInfo)
+}
+
+// ExecuteAppleEventError calls the underlying ExecuteAppleEventError.
+func (x *Script) ExecuteAppleEventError(event *foundation.NSAppleEventDescriptor, errorInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSAppleEventDescriptor {
+	return x.inner.ExecuteAppleEventError(event, errorInfo)
+}
+
+// ExecuteAndReturnDisplayValueError calls the underlying ExecuteAndReturnDisplayValueError.
+func (x *Script) ExecuteAndReturnDisplayValueError(displayValue *foundation.NSAttributedString, errorInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSAppleEventDescriptor {
+	return x.inner.ExecuteAndReturnDisplayValueError(displayValue, errorInfo)
+}
+
+// ExecuteHandlerWithNameArgumentsError calls the underlying ExecuteHandlerWithNameArgumentsError.
+func (x *Script) ExecuteHandlerWithNameArgumentsError(name string, arguments *foundation.NSArray[objc.ID], errorInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSAppleEventDescriptor {
+	return x.inner.ExecuteHandlerWithNameArgumentsError(foundation.NSStringStringWithUTF8String(name), arguments, errorInfo)
+}
+
+// RichTextFromDescriptor calls the underlying RichTextFromDescriptor.
+func (x *Script) RichTextFromDescriptor(descriptor *foundation.NSAppleEventDescriptor) *foundation.NSAttributedString {
+	return x.inner.RichTextFromDescriptor(descriptor)
+}
+
+// WriteToURLOfTypeError calls the underlying WriteToURLOfTypeError.
+func (x *Script) WriteToURLOfTypeError(url string, type_ string, errorInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) bool {
+	return x.inner.WriteToURLOfTypeError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), foundation.NSStringStringWithUTF8String(type_), errorInfo)
+}
+
+// WriteToURLOfTypeUsingStorageOptionsError calls the underlying WriteToURLOfTypeUsingStorageOptionsError.
+func (x *Script) WriteToURLOfTypeUsingStorageOptionsError(url string, type_ string, storageOptions raw.OSAStorageOptions, errorInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) bool {
+	return x.inner.WriteToURLOfTypeUsingStorageOptionsError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), foundation.NSStringStringWithUTF8String(type_), storageOptions, errorInfo)
+}
+
+// CompiledDataForTypeUsingStorageOptionsError calls the underlying CompiledDataForTypeUsingStorageOptionsError.
+func (x *Script) CompiledDataForTypeUsingStorageOptionsError(type_ string, storageOptions raw.OSAStorageOptions, errorInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSData {
+	return x.inner.CompiledDataForTypeUsingStorageOptionsError(foundation.NSStringStringWithUTF8String(type_), storageOptions, errorInfo)
+}
+
+// Source calls the underlying Source.
+func (x *Script) Source() string {
+	_r := x.inner.Source()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Url calls the underlying Url.
+func (x *Script) Url() *foundation.NSURL {
+	return x.inner.Url()
+}
+
+// Language calls the underlying Language.
+func (x *Script) Language() *Language {
+	_r := x.inner.Language()
+	if _r == nil {
+		return nil
+	}
+	return &Language{inner: _r}
+}
+
+// SetLanguage calls the underlying SetLanguage.
+func (x *Script) SetLanguage(language *raw.OSALanguage) {
+	x.inner.SetLanguage(language)
+}
+
+// LanguageInstance calls the underlying LanguageInstance.
+func (x *Script) LanguageInstance() unsafe.Pointer {
+	return x.inner.LanguageInstance()
+}
+
+// SetLanguageInstance calls the underlying SetLanguageInstance.
+func (x *Script) SetLanguageInstance(languageInstance unsafe.Pointer) {
+	x.inner.SetLanguageInstance(languageInstance)
+}
+
+// IsCompiled calls the underlying IsCompiled.
+func (x *Script) IsCompiled() bool {
+	return x.inner.IsCompiled()
+}
+
+// RichTextSource calls the underlying RichTextSource.
+func (x *Script) RichTextSource() *foundation.NSAttributedString {
+	return x.inner.RichTextSource()
+}
+
+// Scriptable is the interface implemented by [Script], for mocking and DI.
+type Scriptable interface {
+	Unwrap() *raw.OSAScript
+	WithLanguage(language *raw.OSALanguage) *Script
+	CompileAndReturnError(errorInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) bool
+	ExecuteAndReturnError(errorInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSAppleEventDescriptor
+	ExecuteAppleEventError(event *foundation.NSAppleEventDescriptor, errorInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSAppleEventDescriptor
+	ExecuteAndReturnDisplayValueError(displayValue *foundation.NSAttributedString, errorInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSAppleEventDescriptor
+	ExecuteHandlerWithNameArgumentsError(name string, arguments *foundation.NSArray[objc.ID], errorInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSAppleEventDescriptor
+	RichTextFromDescriptor(descriptor *foundation.NSAppleEventDescriptor) *foundation.NSAttributedString
+	WriteToURLOfTypeError(url string, type_ string, errorInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) bool
+	WriteToURLOfTypeUsingStorageOptionsError(url string, type_ string, storageOptions raw.OSAStorageOptions, errorInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) bool
+	CompiledDataForTypeUsingStorageOptionsError(type_ string, storageOptions raw.OSAStorageOptions, errorInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSData
+	Source() string
+	Url() *foundation.NSURL
+	Language() *Language
+	SetLanguage(language *raw.OSALanguage)
+	LanguageInstance() unsafe.Pointer
+	SetLanguageInstance(languageInstance unsafe.Pointer)
+	IsCompiled() bool
+	RichTextSource() *foundation.NSAttributedString
+}
+
+var _ Scriptable = (*Script)(nil)
+

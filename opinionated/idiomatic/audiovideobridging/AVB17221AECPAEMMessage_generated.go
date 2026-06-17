@@ -48,5 +48,64 @@ func (x *AVB17221AECPAEMMessage) WithCommandSpecificData(commandSpecificData *fo
 	return x
 }
 
+// CommandType calls the underlying CommandType.
+func (x *AVB17221AECPAEMMessage) CommandType() raw.AVB17221AEMCommandType {
+	return x.inner.CommandType()
+}
+
+// SetCommandType calls the underlying SetCommandType.
+func (x *AVB17221AECPAEMMessage) SetCommandType(commandType raw.AVB17221AEMCommandType) {
+	x.inner.SetCommandType(commandType)
+}
+
+// IsUnsolicited calls the underlying IsUnsolicited.
+func (x *AVB17221AECPAEMMessage) IsUnsolicited() bool {
+	return x.inner.IsUnsolicited()
+}
+
+// SetUnsolicited calls the underlying SetUnsolicited.
+func (x *AVB17221AECPAEMMessage) SetUnsolicited(unsolicited bool) {
+	x.inner.SetUnsolicited(unsolicited)
+}
+
+// IsControllerRequest calls the underlying IsControllerRequest.
+func (x *AVB17221AECPAEMMessage) IsControllerRequest() bool {
+	return x.inner.IsControllerRequest()
+}
+
+// SetControllerRequest calls the underlying SetControllerRequest.
+func (x *AVB17221AECPAEMMessage) SetControllerRequest(controllerRequest bool) {
+	x.inner.SetControllerRequest(controllerRequest)
+}
+
+// CommandSpecificData calls the underlying CommandSpecificData.
+func (x *AVB17221AECPAEMMessage) CommandSpecificData() *foundation.NSData {
+	return x.inner.CommandSpecificData()
+}
+
+// SetCommandSpecificData calls the underlying SetCommandSpecificData.
+func (x *AVB17221AECPAEMMessage) SetCommandSpecificData(commandSpecificData *foundation.NSData) {
+	x.inner.SetCommandSpecificData(commandSpecificData)
+}
+
 func (x *AVB17221AECPAEMMessage) asAVB17221AECPMessage() *raw.AVB17221AECPMessage { return &x.inner.AVB17221AECPMessage }
+
+// AVB17221AECPAEMMessageable is the interface implemented by [AVB17221AECPAEMMessage], for mocking and DI.
+type AVB17221AECPAEMMessageable interface {
+	Unwrap() *raw.AVB17221AECPAEMMessage
+	WithCommandType(commandType raw.AVB17221AEMCommandType) *AVB17221AECPAEMMessage
+	WithUnsolicited(unsolicited bool) *AVB17221AECPAEMMessage
+	WithControllerRequest(controllerRequest bool) *AVB17221AECPAEMMessage
+	WithCommandSpecificData(commandSpecificData *foundation.NSData) *AVB17221AECPAEMMessage
+	CommandType() raw.AVB17221AEMCommandType
+	SetCommandType(commandType raw.AVB17221AEMCommandType)
+	IsUnsolicited() bool
+	SetUnsolicited(unsolicited bool)
+	IsControllerRequest() bool
+	SetControllerRequest(controllerRequest bool)
+	CommandSpecificData() *foundation.NSData
+	SetCommandSpecificData(commandSpecificData *foundation.NSData)
+}
+
+var _ AVB17221AECPAEMMessageable = (*AVB17221AECPAEMMessage)(nil)
 

@@ -74,3 +74,101 @@ func (x *NNOptimizerDescriptor) WithRegularizationType(regularizationType mpsneu
 	return x
 }
 
+// LearningRate calls the underlying LearningRate.
+func (x *NNOptimizerDescriptor) LearningRate() float32 {
+	return x.inner.LearningRate()
+}
+
+// SetLearningRate calls the underlying SetLearningRate.
+func (x *NNOptimizerDescriptor) SetLearningRate(learningRate float32) {
+	x.inner.SetLearningRate(learningRate)
+}
+
+// GradientRescale calls the underlying GradientRescale.
+func (x *NNOptimizerDescriptor) GradientRescale() float32 {
+	return x.inner.GradientRescale()
+}
+
+// SetGradientRescale calls the underlying SetGradientRescale.
+func (x *NNOptimizerDescriptor) SetGradientRescale(gradientRescale float32) {
+	x.inner.SetGradientRescale(gradientRescale)
+}
+
+// ApplyGradientClipping calls the underlying ApplyGradientClipping.
+func (x *NNOptimizerDescriptor) ApplyGradientClipping() bool {
+	return x.inner.ApplyGradientClipping()
+}
+
+// SetApplyGradientClipping calls the underlying SetApplyGradientClipping.
+func (x *NNOptimizerDescriptor) SetApplyGradientClipping(applyGradientClipping bool) {
+	x.inner.SetApplyGradientClipping(applyGradientClipping)
+}
+
+// GradientClipMax calls the underlying GradientClipMax.
+func (x *NNOptimizerDescriptor) GradientClipMax() float32 {
+	return x.inner.GradientClipMax()
+}
+
+// SetGradientClipMax calls the underlying SetGradientClipMax.
+func (x *NNOptimizerDescriptor) SetGradientClipMax(gradientClipMax float32) {
+	x.inner.SetGradientClipMax(gradientClipMax)
+}
+
+// GradientClipMin calls the underlying GradientClipMin.
+func (x *NNOptimizerDescriptor) GradientClipMin() float32 {
+	return x.inner.GradientClipMin()
+}
+
+// SetGradientClipMin calls the underlying SetGradientClipMin.
+func (x *NNOptimizerDescriptor) SetGradientClipMin(gradientClipMin float32) {
+	x.inner.SetGradientClipMin(gradientClipMin)
+}
+
+// RegularizationScale calls the underlying RegularizationScale.
+func (x *NNOptimizerDescriptor) RegularizationScale() float32 {
+	return x.inner.RegularizationScale()
+}
+
+// SetRegularizationScale calls the underlying SetRegularizationScale.
+func (x *NNOptimizerDescriptor) SetRegularizationScale(regularizationScale float32) {
+	x.inner.SetRegularizationScale(regularizationScale)
+}
+
+// RegularizationType calls the underlying RegularizationType.
+func (x *NNOptimizerDescriptor) RegularizationType() mpsneuralnetwork.MPSNNRegularizationType {
+	return x.inner.RegularizationType()
+}
+
+// SetRegularizationType calls the underlying SetRegularizationType.
+func (x *NNOptimizerDescriptor) SetRegularizationType(regularizationType mpsneuralnetwork.MPSNNRegularizationType) {
+	x.inner.SetRegularizationType(regularizationType)
+}
+
+// NNOptimizerDescriptorable is the interface implemented by [NNOptimizerDescriptor], for mocking and DI.
+type NNOptimizerDescriptorable interface {
+	Unwrap() *raw.MPSNNOptimizerDescriptor
+	WithLearningRate(learningRate float32) *NNOptimizerDescriptor
+	WithGradientRescale(gradientRescale float32) *NNOptimizerDescriptor
+	WithApplyGradientClipping(applyGradientClipping bool) *NNOptimizerDescriptor
+	WithGradientClipMax(gradientClipMax float32) *NNOptimizerDescriptor
+	WithGradientClipMin(gradientClipMin float32) *NNOptimizerDescriptor
+	WithRegularizationScale(regularizationScale float32) *NNOptimizerDescriptor
+	WithRegularizationType(regularizationType mpsneuralnetwork.MPSNNRegularizationType) *NNOptimizerDescriptor
+	LearningRate() float32
+	SetLearningRate(learningRate float32)
+	GradientRescale() float32
+	SetGradientRescale(gradientRescale float32)
+	ApplyGradientClipping() bool
+	SetApplyGradientClipping(applyGradientClipping bool)
+	GradientClipMax() float32
+	SetGradientClipMax(gradientClipMax float32)
+	GradientClipMin() float32
+	SetGradientClipMin(gradientClipMin float32)
+	RegularizationScale() float32
+	SetRegularizationScale(regularizationScale float32)
+	RegularizationType() mpsneuralnetwork.MPSNNRegularizationType
+	SetRegularizationType(regularizationType mpsneuralnetwork.MPSNNRegularizationType)
+}
+
+var _ NNOptimizerDescriptorable = (*NNOptimizerDescriptor)(nil)
+

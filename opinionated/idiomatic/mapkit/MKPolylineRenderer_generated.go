@@ -36,9 +36,52 @@ func (x *PolylineRenderer) WithStrokeEnd(strokeEnd float64) *PolylineRenderer {
 	return x
 }
 
+// Polyline calls the underlying Polyline.
+func (x *PolylineRenderer) Polyline() *Polyline {
+	_r := x.inner.Polyline()
+	if _r == nil {
+		return nil
+	}
+	return &Polyline{inner: _r}
+}
+
+// StrokeStart calls the underlying StrokeStart.
+func (x *PolylineRenderer) StrokeStart() float64 {
+	return x.inner.StrokeStart()
+}
+
+// SetStrokeStart calls the underlying SetStrokeStart.
+func (x *PolylineRenderer) SetStrokeStart(strokeStart float64) {
+	x.inner.SetStrokeStart(strokeStart)
+}
+
+// StrokeEnd calls the underlying StrokeEnd.
+func (x *PolylineRenderer) StrokeEnd() float64 {
+	return x.inner.StrokeEnd()
+}
+
+// SetStrokeEnd calls the underlying SetStrokeEnd.
+func (x *PolylineRenderer) SetStrokeEnd(strokeEnd float64) {
+	x.inner.SetStrokeEnd(strokeEnd)
+}
+
 func (x *PolylineRenderer) asPolylineRenderer() *raw.MKPolylineRenderer { return x.inner }
 
 func (x *PolylineRenderer) asOverlayPathRenderer() *raw.MKOverlayPathRenderer { return &x.inner.MKOverlayPathRenderer }
 
 func (x *PolylineRenderer) asOverlayRenderer() *raw.MKOverlayRenderer { return &x.inner.MKOverlayPathRenderer.MKOverlayRenderer }
+
+// PolylineRendererable is the interface implemented by [PolylineRenderer], for mocking and DI.
+type PolylineRendererable interface {
+	Unwrap() *raw.MKPolylineRenderer
+	WithStrokeStart(strokeStart float64) *PolylineRenderer
+	WithStrokeEnd(strokeEnd float64) *PolylineRenderer
+	Polyline() *Polyline
+	StrokeStart() float64
+	SetStrokeStart(strokeStart float64)
+	StrokeEnd() float64
+	SetStrokeEnd(strokeEnd float64)
+}
+
+var _ PolylineRendererable = (*PolylineRenderer)(nil)
 

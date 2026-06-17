@@ -59,5 +59,90 @@ func (x *Plane) WithCornerSegmentCount(cornerSegmentCount int) *Plane {
 	return x
 }
 
+// Width calls the underlying Width.
+func (x *Plane) Width() float64 {
+	return x.inner.Width()
+}
+
+// SetWidth calls the underlying SetWidth.
+func (x *Plane) SetWidth(width float64) {
+	x.inner.SetWidth(width)
+}
+
+// Height calls the underlying Height.
+func (x *Plane) Height() float64 {
+	return x.inner.Height()
+}
+
+// SetHeight calls the underlying SetHeight.
+func (x *Plane) SetHeight(height float64) {
+	x.inner.SetHeight(height)
+}
+
+// WidthSegmentCount calls the underlying WidthSegmentCount.
+func (x *Plane) WidthSegmentCount() int {
+	return x.inner.WidthSegmentCount()
+}
+
+// SetWidthSegmentCount calls the underlying SetWidthSegmentCount.
+func (x *Plane) SetWidthSegmentCount(widthSegmentCount int) {
+	x.inner.SetWidthSegmentCount(widthSegmentCount)
+}
+
+// HeightSegmentCount calls the underlying HeightSegmentCount.
+func (x *Plane) HeightSegmentCount() int {
+	return x.inner.HeightSegmentCount()
+}
+
+// SetHeightSegmentCount calls the underlying SetHeightSegmentCount.
+func (x *Plane) SetHeightSegmentCount(heightSegmentCount int) {
+	x.inner.SetHeightSegmentCount(heightSegmentCount)
+}
+
+// CornerRadius calls the underlying CornerRadius.
+func (x *Plane) CornerRadius() float64 {
+	return x.inner.CornerRadius()
+}
+
+// SetCornerRadius calls the underlying SetCornerRadius.
+func (x *Plane) SetCornerRadius(cornerRadius float64) {
+	x.inner.SetCornerRadius(cornerRadius)
+}
+
+// CornerSegmentCount calls the underlying CornerSegmentCount.
+func (x *Plane) CornerSegmentCount() int {
+	return x.inner.CornerSegmentCount()
+}
+
+// SetCornerSegmentCount calls the underlying SetCornerSegmentCount.
+func (x *Plane) SetCornerSegmentCount(cornerSegmentCount int) {
+	x.inner.SetCornerSegmentCount(cornerSegmentCount)
+}
+
 func (x *Plane) asGeometry() *raw.SCNGeometry { return &x.inner.SCNGeometry }
+
+// Planeable is the interface implemented by [Plane], for mocking and DI.
+type Planeable interface {
+	Unwrap() *raw.SCNPlane
+	WithWidth(width float64) *Plane
+	WithHeight(height float64) *Plane
+	WithWidthSegmentCount(widthSegmentCount int) *Plane
+	WithHeightSegmentCount(heightSegmentCount int) *Plane
+	WithCornerRadius(cornerRadius float64) *Plane
+	WithCornerSegmentCount(cornerSegmentCount int) *Plane
+	Width() float64
+	SetWidth(width float64)
+	Height() float64
+	SetHeight(height float64)
+	WidthSegmentCount() int
+	SetWidthSegmentCount(widthSegmentCount int)
+	HeightSegmentCount() int
+	SetHeightSegmentCount(heightSegmentCount int)
+	CornerRadius() float64
+	SetCornerRadius(cornerRadius float64)
+	CornerSegmentCount() int
+	SetCornerSegmentCount(cornerSegmentCount int)
+}
+
+var _ Planeable = (*Plane)(nil)
 

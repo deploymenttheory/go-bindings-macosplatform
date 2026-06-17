@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // MTRClusterBasic wraps [raw.MTRClusterBasic] with a fluent Go API.
@@ -25,9 +26,28 @@ func NewMTRClusterBasicWithDeviceEndpointQueue(device *raw.MTRDevice, endpoint u
 	return &MTRClusterBasic{inner: raw.MTRClusterBasicFromID(_id)}
 }
 
+// MfgSpecificPingWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying MfgSpecificPingWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
+func (x *MTRClusterBasic) MfgSpecificPingWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRBasicClusterMfgSpecificPingParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
+	x.inner.MfgSpecificPingWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
+}
+
+// MfgSpecificPingWithExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying MfgSpecificPingWithExpectedValuesExpectedValueIntervalCompletionHandler.
+func (x *MTRClusterBasic) MfgSpecificPingWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
+	x.inner.MfgSpecificPingWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues, expectedValueIntervalMs, completionHandler)
+}
+
 func (x *MTRClusterBasic) asMTRClusterBasicInformation() *raw.MTRClusterBasicInformation { return &x.inner.MTRClusterBasicInformation }
 
 func (x *MTRClusterBasic) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRClusterBasicInformation.MTRGenericCluster }
 
 func (x *MTRClusterBasic) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRClusterBasicInformation.MTRGenericCluster.MTRCluster }
+
+// MTRClusterBasicable is the interface implemented by [MTRClusterBasic], for mocking and DI.
+type MTRClusterBasicable interface {
+	Unwrap() *raw.MTRClusterBasic
+	MfgSpecificPingWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRBasicClusterMfgSpecificPingParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
+	MfgSpecificPingWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
+}
+
+var _ MTRClusterBasicable = (*MTRClusterBasic)(nil)
 

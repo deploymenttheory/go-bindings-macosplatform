@@ -23,7 +23,26 @@ func NewQuantityType() *QuantityType {
 	return &QuantityType{inner: raw.HKQuantityTypeFromID(_id)}
 }
 
+// IsCompatibleWithUnit calls the underlying IsCompatibleWithUnit.
+func (x *QuantityType) IsCompatibleWithUnit(unit *raw.HKUnit) bool {
+	return x.inner.IsCompatibleWithUnit(unit)
+}
+
+// AggregationStyle calls the underlying AggregationStyle.
+func (x *QuantityType) AggregationStyle() raw.HKQuantityAggregationStyle {
+	return x.inner.AggregationStyle()
+}
+
 func (x *QuantityType) asSampleType() *raw.HKSampleType { return &x.inner.HKSampleType }
 
 func (x *QuantityType) asObjectType() *raw.HKObjectType { return &x.inner.HKSampleType.HKObjectType }
+
+// QuantityTypeable is the interface implemented by [QuantityType], for mocking and DI.
+type QuantityTypeable interface {
+	Unwrap() *raw.HKQuantityType
+	IsCompatibleWithUnit(unit *raw.HKUnit) bool
+	AggregationStyle() raw.HKQuantityAggregationStyle
+}
+
+var _ QuantityTypeable = (*QuantityType)(nil)
 

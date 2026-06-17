@@ -29,5 +29,25 @@ func (x *NEFilterVerdict) WithShouldReport(shouldReport bool) *NEFilterVerdict {
 	return x
 }
 
+// ShouldReport calls the underlying ShouldReport.
+func (x *NEFilterVerdict) ShouldReport() bool {
+	return x.inner.ShouldReport()
+}
+
+// SetShouldReport calls the underlying SetShouldReport.
+func (x *NEFilterVerdict) SetShouldReport(shouldReport bool) {
+	x.inner.SetShouldReport(shouldReport)
+}
+
 func (x *NEFilterVerdict) asNEFilterVerdict() *raw.NEFilterVerdict { return x.inner }
+
+// NEFilterVerdictable is the interface implemented by [NEFilterVerdict], for mocking and DI.
+type NEFilterVerdictable interface {
+	Unwrap() *raw.NEFilterVerdict
+	WithShouldReport(shouldReport bool) *NEFilterVerdict
+	ShouldReport() bool
+	SetShouldReport(shouldReport bool)
+}
+
+var _ NEFilterVerdictable = (*NEFilterVerdict)(nil)
 

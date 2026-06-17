@@ -53,7 +53,89 @@ func (x *VisualEffectView) WithEmphasized(emphasized bool) *VisualEffectView {
 	return x
 }
 
+// Material calls the underlying Material.
+func (x *VisualEffectView) Material() raw.NSVisualEffectMaterial {
+	return x.inner.Material()
+}
+
+// SetMaterial calls the underlying SetMaterial.
+func (x *VisualEffectView) SetMaterial(material raw.NSVisualEffectMaterial) {
+	x.inner.SetMaterial(material)
+}
+
+// InteriorBackgroundStyle calls the underlying InteriorBackgroundStyle.
+func (x *VisualEffectView) InteriorBackgroundStyle() raw.NSBackgroundStyle {
+	return x.inner.InteriorBackgroundStyle()
+}
+
+// BlendingMode calls the underlying BlendingMode.
+func (x *VisualEffectView) BlendingMode() raw.NSVisualEffectBlendingMode {
+	return x.inner.BlendingMode()
+}
+
+// SetBlendingMode calls the underlying SetBlendingMode.
+func (x *VisualEffectView) SetBlendingMode(blendingMode raw.NSVisualEffectBlendingMode) {
+	x.inner.SetBlendingMode(blendingMode)
+}
+
+// State calls the underlying State.
+func (x *VisualEffectView) State() raw.NSVisualEffectState {
+	return x.inner.State()
+}
+
+// SetState calls the underlying SetState.
+func (x *VisualEffectView) SetState(state raw.NSVisualEffectState) {
+	x.inner.SetState(state)
+}
+
+// MaskImage calls the underlying MaskImage.
+func (x *VisualEffectView) MaskImage() *Image {
+	_r := x.inner.MaskImage()
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// SetMaskImage calls the underlying SetMaskImage.
+func (x *VisualEffectView) SetMaskImage(maskImage *raw.NSImage) {
+	x.inner.SetMaskImage(maskImage)
+}
+
+// IsEmphasized calls the underlying IsEmphasized.
+func (x *VisualEffectView) IsEmphasized() bool {
+	return x.inner.IsEmphasized()
+}
+
+// SetEmphasized calls the underlying SetEmphasized.
+func (x *VisualEffectView) SetEmphasized(emphasized bool) {
+	x.inner.SetEmphasized(emphasized)
+}
+
 func (x *VisualEffectView) asView() *raw.NSView { return &x.inner.NSView }
 
 func (x *VisualEffectView) asResponder() *raw.NSResponder { return &x.inner.NSView.NSResponder }
+
+// VisualEffectViewable is the interface implemented by [VisualEffectView], for mocking and DI.
+type VisualEffectViewable interface {
+	Unwrap() *raw.NSVisualEffectView
+	WithMaterial(material raw.NSVisualEffectMaterial) *VisualEffectView
+	WithBlendingMode(blendingMode raw.NSVisualEffectBlendingMode) *VisualEffectView
+	WithState(state raw.NSVisualEffectState) *VisualEffectView
+	WithMaskImage(maskImage *raw.NSImage) *VisualEffectView
+	WithEmphasized(emphasized bool) *VisualEffectView
+	Material() raw.NSVisualEffectMaterial
+	SetMaterial(material raw.NSVisualEffectMaterial)
+	InteriorBackgroundStyle() raw.NSBackgroundStyle
+	BlendingMode() raw.NSVisualEffectBlendingMode
+	SetBlendingMode(blendingMode raw.NSVisualEffectBlendingMode)
+	State() raw.NSVisualEffectState
+	SetState(state raw.NSVisualEffectState)
+	MaskImage() *Image
+	SetMaskImage(maskImage *raw.NSImage)
+	IsEmphasized() bool
+	SetEmphasized(emphasized bool)
+}
+
+var _ VisualEffectViewable = (*VisualEffectView)(nil)
 

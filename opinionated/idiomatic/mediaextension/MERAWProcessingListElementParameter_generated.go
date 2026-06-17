@@ -25,5 +25,18 @@ func NewRAWProcessingListElementParameterWithNameDescriptionElementID(name strin
 	return &RAWProcessingListElementParameter{inner: raw.MERAWProcessingListElementParameterFromID(_id)}
 }
 
+// ListElementID calls the underlying ListElementID.
+func (x *RAWProcessingListElementParameter) ListElementID() int {
+	return x.inner.ListElementID()
+}
+
 func (x *RAWProcessingListElementParameter) asRAWProcessingParameter() *raw.MERAWProcessingParameter { return &x.inner.MERAWProcessingParameter }
+
+// RAWProcessingListElementParameterable is the interface implemented by [RAWProcessingListElementParameter], for mocking and DI.
+type RAWProcessingListElementParameterable interface {
+	Unwrap() *raw.MERAWProcessingListElementParameter
+	ListElementID() int
+}
+
+var _ RAWProcessingListElementParameterable = (*RAWProcessingListElementParameter)(nil)
 

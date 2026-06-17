@@ -73,3 +73,122 @@ func (x *DirectionsRequest) WithHighwayPreference(highwayPreference raw.MKDirect
 	return x
 }
 
+// SetSource calls the underlying SetSource.
+func (x *DirectionsRequest) SetSource(source *raw.MKMapItem) {
+	x.inner.SetSource(source)
+}
+
+// SetDestination calls the underlying SetDestination.
+func (x *DirectionsRequest) SetDestination(destination *raw.MKMapItem) {
+	x.inner.SetDestination(destination)
+}
+
+// Source calls the underlying Source.
+func (x *DirectionsRequest) Source() *MapItem {
+	_r := x.inner.Source()
+	if _r == nil {
+		return nil
+	}
+	return &MapItem{inner: _r}
+}
+
+// Destination calls the underlying Destination.
+func (x *DirectionsRequest) Destination() *MapItem {
+	_r := x.inner.Destination()
+	if _r == nil {
+		return nil
+	}
+	return &MapItem{inner: _r}
+}
+
+// TransportType calls the underlying TransportType.
+func (x *DirectionsRequest) TransportType() raw.MKDirectionsTransportType {
+	return x.inner.TransportType()
+}
+
+// SetTransportType calls the underlying SetTransportType.
+func (x *DirectionsRequest) SetTransportType(transportType raw.MKDirectionsTransportType) {
+	x.inner.SetTransportType(transportType)
+}
+
+// RequestsAlternateRoutes calls the underlying RequestsAlternateRoutes.
+func (x *DirectionsRequest) RequestsAlternateRoutes() bool {
+	return x.inner.RequestsAlternateRoutes()
+}
+
+// SetRequestsAlternateRoutes calls the underlying SetRequestsAlternateRoutes.
+func (x *DirectionsRequest) SetRequestsAlternateRoutes(requestsAlternateRoutes bool) {
+	x.inner.SetRequestsAlternateRoutes(requestsAlternateRoutes)
+}
+
+// DepartureDate calls the underlying DepartureDate.
+func (x *DirectionsRequest) DepartureDate() *foundation.NSDate {
+	return x.inner.DepartureDate()
+}
+
+// SetDepartureDate calls the underlying SetDepartureDate.
+func (x *DirectionsRequest) SetDepartureDate(departureDate *foundation.NSDate) {
+	x.inner.SetDepartureDate(departureDate)
+}
+
+// ArrivalDate calls the underlying ArrivalDate.
+func (x *DirectionsRequest) ArrivalDate() *foundation.NSDate {
+	return x.inner.ArrivalDate()
+}
+
+// SetArrivalDate calls the underlying SetArrivalDate.
+func (x *DirectionsRequest) SetArrivalDate(arrivalDate *foundation.NSDate) {
+	x.inner.SetArrivalDate(arrivalDate)
+}
+
+// TollPreference calls the underlying TollPreference.
+func (x *DirectionsRequest) TollPreference() raw.MKDirectionsRoutePreference {
+	return x.inner.TollPreference()
+}
+
+// SetTollPreference calls the underlying SetTollPreference.
+func (x *DirectionsRequest) SetTollPreference(tollPreference raw.MKDirectionsRoutePreference) {
+	x.inner.SetTollPreference(tollPreference)
+}
+
+// HighwayPreference calls the underlying HighwayPreference.
+func (x *DirectionsRequest) HighwayPreference() raw.MKDirectionsRoutePreference {
+	return x.inner.HighwayPreference()
+}
+
+// SetHighwayPreference calls the underlying SetHighwayPreference.
+func (x *DirectionsRequest) SetHighwayPreference(highwayPreference raw.MKDirectionsRoutePreference) {
+	x.inner.SetHighwayPreference(highwayPreference)
+}
+
+// DirectionsRequestable is the interface implemented by [DirectionsRequest], for mocking and DI.
+type DirectionsRequestable interface {
+	Unwrap() *raw.MKDirectionsRequest
+	WithSource(source *raw.MKMapItem) *DirectionsRequest
+	WithDestination(destination *raw.MKMapItem) *DirectionsRequest
+	WithTransportType(transportType raw.MKDirectionsTransportType) *DirectionsRequest
+	WithRequestsAlternateRoutes(requestsAlternateRoutes bool) *DirectionsRequest
+	WithDepartureDate(departureDate *foundation.NSDate) *DirectionsRequest
+	WithArrivalDate(arrivalDate *foundation.NSDate) *DirectionsRequest
+	WithTollPreference(tollPreference raw.MKDirectionsRoutePreference) *DirectionsRequest
+	WithHighwayPreference(highwayPreference raw.MKDirectionsRoutePreference) *DirectionsRequest
+	SetSource(source *raw.MKMapItem)
+	SetDestination(destination *raw.MKMapItem)
+	Source() *MapItem
+	Destination() *MapItem
+	TransportType() raw.MKDirectionsTransportType
+	SetTransportType(transportType raw.MKDirectionsTransportType)
+	RequestsAlternateRoutes() bool
+	SetRequestsAlternateRoutes(requestsAlternateRoutes bool)
+	DepartureDate() *foundation.NSDate
+	SetDepartureDate(departureDate *foundation.NSDate)
+	ArrivalDate() *foundation.NSDate
+	SetArrivalDate(arrivalDate *foundation.NSDate)
+	TollPreference() raw.MKDirectionsRoutePreference
+	SetTollPreference(tollPreference raw.MKDirectionsRoutePreference)
+	HighwayPreference() raw.MKDirectionsRoutePreference
+	SetHighwayPreference(highwayPreference raw.MKDirectionsRoutePreference)
+}
+
+var _ DirectionsRequestable = (*DirectionsRequest)(nil)
+

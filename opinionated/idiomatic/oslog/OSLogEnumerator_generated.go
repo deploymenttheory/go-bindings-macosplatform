@@ -23,3 +23,10 @@ func NewLogEnumerator() *LogEnumerator {
 	return &LogEnumerator{inner: raw.OSLogEnumeratorFromID(_id)}
 }
 
+// LogEnumeratorable is the interface implemented by [LogEnumerator], for mocking and DI.
+type LogEnumeratorable interface {
+	Unwrap() *raw.OSLogEnumerator
+}
+
+var _ LogEnumeratorable = (*LogEnumerator)(nil)
+

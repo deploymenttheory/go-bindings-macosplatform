@@ -23,5 +23,18 @@ func NewDisplayMetric() *DisplayMetric {
 	return &DisplayMetric{inner: raw.MXDisplayMetricFromID(_id)}
 }
 
+// AveragePixelLuminance calls the underlying AveragePixelLuminance.
+func (x *DisplayMetric) AveragePixelLuminance() *raw.MXAverage[*raw.MXUnitAveragePixelLuminance] {
+	return x.inner.AveragePixelLuminance()
+}
+
 func (x *DisplayMetric) asMetric() *raw.MXMetric { return &x.inner.MXMetric }
+
+// DisplayMetricable is the interface implemented by [DisplayMetric], for mocking and DI.
+type DisplayMetricable interface {
+	Unwrap() *raw.MXDisplayMetric
+	AveragePixelLuminance() *raw.MXAverage[*raw.MXUnitAveragePixelLuminance]
+}
+
+var _ DisplayMetricable = (*DisplayMetric)(nil)
 

@@ -6,6 +6,7 @@ package coreml
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,17 @@ func NewModelStructureProgram() *ModelStructureProgram {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLModelStructureProgram")), objc.RegisterName("new"))
 	return &ModelStructureProgram{inner: raw.MLModelStructureProgramFromID(_id)}
 }
+
+// Functions calls the underlying Functions.
+func (x *ModelStructureProgram) Functions() *foundation.NSDictionary[*foundation.NSString, *raw.MLModelStructureProgramFunction] {
+	return x.inner.Functions()
+}
+
+// ModelStructureProgramable is the interface implemented by [ModelStructureProgram], for mocking and DI.
+type ModelStructureProgramable interface {
+	Unwrap() *raw.MLModelStructureProgram
+	Functions() *foundation.NSDictionary[*foundation.NSString, *raw.MLModelStructureProgramFunction]
+}
+
+var _ ModelStructureProgramable = (*ModelStructureProgram)(nil)
 

@@ -6,7 +6,9 @@ package passkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // IssuerProvisioningExtensionPassEntry wraps [raw.PKIssuerProvisioningExtensionPassEntry] with a fluent Go API.
@@ -23,5 +25,38 @@ func NewIssuerProvisioningExtensionPassEntry() *IssuerProvisioningExtensionPassE
 	return &IssuerProvisioningExtensionPassEntry{inner: raw.PKIssuerProvisioningExtensionPassEntryFromID(_id)}
 }
 
+// Identifier calls the underlying Identifier.
+func (x *IssuerProvisioningExtensionPassEntry) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Title calls the underlying Title.
+func (x *IssuerProvisioningExtensionPassEntry) Title() string {
+	_r := x.inner.Title()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Art calls the underlying Art.
+func (x *IssuerProvisioningExtensionPassEntry) Art() unsafe.Pointer {
+	return x.inner.Art()
+}
+
 func (x *IssuerProvisioningExtensionPassEntry) asIssuerProvisioningExtensionPassEntry() *raw.PKIssuerProvisioningExtensionPassEntry { return x.inner }
+
+// IssuerProvisioningExtensionPassEntryable is the interface implemented by [IssuerProvisioningExtensionPassEntry], for mocking and DI.
+type IssuerProvisioningExtensionPassEntryable interface {
+	Unwrap() *raw.PKIssuerProvisioningExtensionPassEntry
+	Identifier() string
+	Title() string
+	Art() unsafe.Pointer
+}
+
+var _ IssuerProvisioningExtensionPassEntryable = (*IssuerProvisioningExtensionPassEntry)(nil)
 

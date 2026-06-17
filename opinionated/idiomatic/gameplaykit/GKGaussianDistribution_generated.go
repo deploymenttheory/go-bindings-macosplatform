@@ -31,5 +31,24 @@ func NewGaussianDistributionWithRandomSourceMeanDeviation(source raw.GKRandom, m
 	return &GaussianDistribution{inner: raw.GKGaussianDistributionFromID(_id)}
 }
 
+// Mean calls the underlying Mean.
+func (x *GaussianDistribution) Mean() float32 {
+	return x.inner.Mean()
+}
+
+// Deviation calls the underlying Deviation.
+func (x *GaussianDistribution) Deviation() float32 {
+	return x.inner.Deviation()
+}
+
 func (x *GaussianDistribution) asRandomDistribution() *raw.GKRandomDistribution { return &x.inner.GKRandomDistribution }
+
+// GaussianDistributionable is the interface implemented by [GaussianDistribution], for mocking and DI.
+type GaussianDistributionable interface {
+	Unwrap() *raw.GKGaussianDistribution
+	Mean() float32
+	Deviation() float32
+}
+
+var _ GaussianDistributionable = (*GaussianDistribution)(nil)
 

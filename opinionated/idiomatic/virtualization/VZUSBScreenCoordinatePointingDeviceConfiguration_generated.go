@@ -25,3 +25,10 @@ func NewUSBScreenCoordinatePointingDeviceConfiguration() *USBScreenCoordinatePoi
 
 func (x *USBScreenCoordinatePointingDeviceConfiguration) asPointingDeviceConfiguration() *raw.VZPointingDeviceConfiguration { return &x.inner.VZPointingDeviceConfiguration }
 
+// USBScreenCoordinatePointingDeviceConfigurationable is the interface implemented by [USBScreenCoordinatePointingDeviceConfiguration], for mocking and DI.
+type USBScreenCoordinatePointingDeviceConfigurationable interface {
+	Unwrap() *raw.VZUSBScreenCoordinatePointingDeviceConfiguration
+}
+
+var _ USBScreenCoordinatePointingDeviceConfigurationable = (*USBScreenCoordinatePointingDeviceConfiguration)(nil)
+

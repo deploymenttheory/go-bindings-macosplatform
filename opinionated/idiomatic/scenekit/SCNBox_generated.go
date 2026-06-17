@@ -71,5 +71,116 @@ func (x *Box) WithChamferSegmentCount(chamferSegmentCount int) *Box {
 	return x
 }
 
+// Width calls the underlying Width.
+func (x *Box) Width() float64 {
+	return x.inner.Width()
+}
+
+// SetWidth calls the underlying SetWidth.
+func (x *Box) SetWidth(width float64) {
+	x.inner.SetWidth(width)
+}
+
+// Height calls the underlying Height.
+func (x *Box) Height() float64 {
+	return x.inner.Height()
+}
+
+// SetHeight calls the underlying SetHeight.
+func (x *Box) SetHeight(height float64) {
+	x.inner.SetHeight(height)
+}
+
+// Length calls the underlying Length.
+func (x *Box) Length() float64 {
+	return x.inner.Length()
+}
+
+// SetLength calls the underlying SetLength.
+func (x *Box) SetLength(length float64) {
+	x.inner.SetLength(length)
+}
+
+// ChamferRadius calls the underlying ChamferRadius.
+func (x *Box) ChamferRadius() float64 {
+	return x.inner.ChamferRadius()
+}
+
+// SetChamferRadius calls the underlying SetChamferRadius.
+func (x *Box) SetChamferRadius(chamferRadius float64) {
+	x.inner.SetChamferRadius(chamferRadius)
+}
+
+// WidthSegmentCount calls the underlying WidthSegmentCount.
+func (x *Box) WidthSegmentCount() int {
+	return x.inner.WidthSegmentCount()
+}
+
+// SetWidthSegmentCount calls the underlying SetWidthSegmentCount.
+func (x *Box) SetWidthSegmentCount(widthSegmentCount int) {
+	x.inner.SetWidthSegmentCount(widthSegmentCount)
+}
+
+// HeightSegmentCount calls the underlying HeightSegmentCount.
+func (x *Box) HeightSegmentCount() int {
+	return x.inner.HeightSegmentCount()
+}
+
+// SetHeightSegmentCount calls the underlying SetHeightSegmentCount.
+func (x *Box) SetHeightSegmentCount(heightSegmentCount int) {
+	x.inner.SetHeightSegmentCount(heightSegmentCount)
+}
+
+// LengthSegmentCount calls the underlying LengthSegmentCount.
+func (x *Box) LengthSegmentCount() int {
+	return x.inner.LengthSegmentCount()
+}
+
+// SetLengthSegmentCount calls the underlying SetLengthSegmentCount.
+func (x *Box) SetLengthSegmentCount(lengthSegmentCount int) {
+	x.inner.SetLengthSegmentCount(lengthSegmentCount)
+}
+
+// ChamferSegmentCount calls the underlying ChamferSegmentCount.
+func (x *Box) ChamferSegmentCount() int {
+	return x.inner.ChamferSegmentCount()
+}
+
+// SetChamferSegmentCount calls the underlying SetChamferSegmentCount.
+func (x *Box) SetChamferSegmentCount(chamferSegmentCount int) {
+	x.inner.SetChamferSegmentCount(chamferSegmentCount)
+}
+
 func (x *Box) asGeometry() *raw.SCNGeometry { return &x.inner.SCNGeometry }
+
+// Boxable is the interface implemented by [Box], for mocking and DI.
+type Boxable interface {
+	Unwrap() *raw.SCNBox
+	WithWidth(width float64) *Box
+	WithHeight(height float64) *Box
+	WithLength(length float64) *Box
+	WithChamferRadius(chamferRadius float64) *Box
+	WithWidthSegmentCount(widthSegmentCount int) *Box
+	WithHeightSegmentCount(heightSegmentCount int) *Box
+	WithLengthSegmentCount(lengthSegmentCount int) *Box
+	WithChamferSegmentCount(chamferSegmentCount int) *Box
+	Width() float64
+	SetWidth(width float64)
+	Height() float64
+	SetHeight(height float64)
+	Length() float64
+	SetLength(length float64)
+	ChamferRadius() float64
+	SetChamferRadius(chamferRadius float64)
+	WidthSegmentCount() int
+	SetWidthSegmentCount(widthSegmentCount int)
+	HeightSegmentCount() int
+	SetHeightSegmentCount(heightSegmentCount int)
+	LengthSegmentCount() int
+	SetLengthSegmentCount(lengthSegmentCount int)
+	ChamferSegmentCount() int
+	SetChamferSegmentCount(chamferSegmentCount int)
+}
+
+var _ Boxable = (*Box)(nil)
 

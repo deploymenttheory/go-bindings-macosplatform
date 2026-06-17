@@ -32,5 +32,30 @@ func NewCNNUpsamplingBilinearNodeWithSourceIntegerScaleFactorXIntegerScaleFactor
 	return &CNNUpsamplingBilinearNode{inner: raw.MPSCNNUpsamplingBilinearNodeFromID(_id)}
 }
 
+// ScaleFactorX calls the underlying ScaleFactorX.
+func (x *CNNUpsamplingBilinearNode) ScaleFactorX() float64 {
+	return x.inner.ScaleFactorX()
+}
+
+// ScaleFactorY calls the underlying ScaleFactorY.
+func (x *CNNUpsamplingBilinearNode) ScaleFactorY() float64 {
+	return x.inner.ScaleFactorY()
+}
+
+// AlignCorners calls the underlying AlignCorners.
+func (x *CNNUpsamplingBilinearNode) AlignCorners() bool {
+	return x.inner.AlignCorners()
+}
+
 func (x *CNNUpsamplingBilinearNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNFilterNode }
+
+// CNNUpsamplingBilinearNodeable is the interface implemented by [CNNUpsamplingBilinearNode], for mocking and DI.
+type CNNUpsamplingBilinearNodeable interface {
+	Unwrap() *raw.MPSCNNUpsamplingBilinearNode
+	ScaleFactorX() float64
+	ScaleFactorY() float64
+	AlignCorners() bool
+}
+
+var _ CNNUpsamplingBilinearNodeable = (*CNNUpsamplingBilinearNode)(nil)
 

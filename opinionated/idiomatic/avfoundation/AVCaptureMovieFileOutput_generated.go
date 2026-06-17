@@ -8,6 +8,7 @@ import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -60,20 +61,108 @@ func (x *CaptureMovieFileOutput) WithSpatialVideoCaptureEnabled(spatialVideoCapt
 	return x
 }
 
+// OutputSettingsForConnection calls the underlying OutputSettingsForConnection.
+func (x *CaptureMovieFileOutput) OutputSettingsForConnection(connection *raw.AVCaptureConnection) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.OutputSettingsForConnection(connection)
+}
+
+// SetOutputSettingsForConnection calls the underlying SetOutputSettingsForConnection.
+func (x *CaptureMovieFileOutput) SetOutputSettingsForConnection(outputSettings *foundation.NSDictionary[*foundation.NSString, objc.ID], connection *raw.AVCaptureConnection) {
+	x.inner.SetOutputSettingsForConnection(outputSettings, connection)
+}
+
+// SetPrimaryConstituentDeviceSwitchingBehaviorForRecordingRestrictedSwitchingBehaviorConditions calls the underlying SetPrimaryConstituentDeviceSwitchingBehaviorForRecordingRestrictedSwitchingBehaviorConditions.
+func (x *CaptureMovieFileOutput) SetPrimaryConstituentDeviceSwitchingBehaviorForRecordingRestrictedSwitchingBehaviorConditions(switchingBehavior raw.AVCapturePrimaryConstituentDeviceSwitchingBehavior, restrictedSwitchingBehaviorConditions raw.AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions) {
+	x.inner.SetPrimaryConstituentDeviceSwitchingBehaviorForRecordingRestrictedSwitchingBehaviorConditions(switchingBehavior, restrictedSwitchingBehaviorConditions)
+}
+
+// MovieFragmentInterval calls the underlying MovieFragmentInterval.
+func (x *CaptureMovieFileOutput) MovieFragmentInterval() coremedia.CMTime {
+	return x.inner.MovieFragmentInterval()
+}
+
+// SetMovieFragmentInterval calls the underlying SetMovieFragmentInterval.
+func (x *CaptureMovieFileOutput) SetMovieFragmentInterval(movieFragmentInterval coremedia.CMTime) {
+	x.inner.SetMovieFragmentInterval(movieFragmentInterval)
+}
+
 // Metadata returns the collection as a Go slice.
 func (x *CaptureMovieFileOutput) Metadata() []*raw.AVMetadataItem {
 	arr := x.inner.Metadata()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AVMetadataItem, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVMetadataItem {
+		return raw.AVMetadataItemFromID(purego.Retain(_id))
+	})
+}
+
+// SetMetadata calls the underlying SetMetadata.
+func (x *CaptureMovieFileOutput) SetMetadata(metadata *foundation.NSArray[*raw.AVMetadataItem]) {
+	x.inner.SetMetadata(metadata)
+}
+
+// IsPrimaryConstituentDeviceSwitchingBehaviorForRecordingEnabled calls the underlying IsPrimaryConstituentDeviceSwitchingBehaviorForRecordingEnabled.
+func (x *CaptureMovieFileOutput) IsPrimaryConstituentDeviceSwitchingBehaviorForRecordingEnabled() bool {
+	return x.inner.IsPrimaryConstituentDeviceSwitchingBehaviorForRecordingEnabled()
+}
+
+// SetPrimaryConstituentDeviceSwitchingBehaviorForRecordingEnabled calls the underlying SetPrimaryConstituentDeviceSwitchingBehaviorForRecordingEnabled.
+func (x *CaptureMovieFileOutput) SetPrimaryConstituentDeviceSwitchingBehaviorForRecordingEnabled(primaryConstituentDeviceSwitchingBehaviorForRecordingEnabled bool) {
+	x.inner.SetPrimaryConstituentDeviceSwitchingBehaviorForRecordingEnabled(primaryConstituentDeviceSwitchingBehaviorForRecordingEnabled)
+}
+
+// PrimaryConstituentDeviceSwitchingBehaviorForRecording calls the underlying PrimaryConstituentDeviceSwitchingBehaviorForRecording.
+func (x *CaptureMovieFileOutput) PrimaryConstituentDeviceSwitchingBehaviorForRecording() raw.AVCapturePrimaryConstituentDeviceSwitchingBehavior {
+	return x.inner.PrimaryConstituentDeviceSwitchingBehaviorForRecording()
+}
+
+// PrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionsForRecording calls the underlying PrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionsForRecording.
+func (x *CaptureMovieFileOutput) PrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionsForRecording() raw.AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions {
+	return x.inner.PrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionsForRecording()
+}
+
+// IsSpatialVideoCaptureSupported calls the underlying IsSpatialVideoCaptureSupported.
+func (x *CaptureMovieFileOutput) IsSpatialVideoCaptureSupported() bool {
+	return x.inner.IsSpatialVideoCaptureSupported()
+}
+
+// IsSpatialVideoCaptureEnabled calls the underlying IsSpatialVideoCaptureEnabled.
+func (x *CaptureMovieFileOutput) IsSpatialVideoCaptureEnabled() bool {
+	return x.inner.IsSpatialVideoCaptureEnabled()
+}
+
+// SetSpatialVideoCaptureEnabled calls the underlying SetSpatialVideoCaptureEnabled.
+func (x *CaptureMovieFileOutput) SetSpatialVideoCaptureEnabled(spatialVideoCaptureEnabled bool) {
+	x.inner.SetSpatialVideoCaptureEnabled(spatialVideoCaptureEnabled)
 }
 
 func (x *CaptureMovieFileOutput) asCaptureFileOutput() *raw.AVCaptureFileOutput { return &x.inner.AVCaptureFileOutput }
 
 func (x *CaptureMovieFileOutput) asCaptureOutput() *raw.AVCaptureOutput { return &x.inner.AVCaptureFileOutput.AVCaptureOutput }
+
+// CaptureMovieFileOutputable is the interface implemented by [CaptureMovieFileOutput], for mocking and DI.
+type CaptureMovieFileOutputable interface {
+	Unwrap() *raw.AVCaptureMovieFileOutput
+	WithMovieFragmentInterval(movieFragmentInterval coremedia.CMTime) *CaptureMovieFileOutput
+	WithMetadata(items ...MetadataItemProvider) *CaptureMovieFileOutput
+	WithPrimaryConstituentDeviceSwitchingBehaviorForRecordingEnabled(primaryConstituentDeviceSwitchingBehaviorForRecordingEnabled bool) *CaptureMovieFileOutput
+	WithSpatialVideoCaptureEnabled(spatialVideoCaptureEnabled bool) *CaptureMovieFileOutput
+	OutputSettingsForConnection(connection *raw.AVCaptureConnection) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	SetOutputSettingsForConnection(outputSettings *foundation.NSDictionary[*foundation.NSString, objc.ID], connection *raw.AVCaptureConnection)
+	SetPrimaryConstituentDeviceSwitchingBehaviorForRecordingRestrictedSwitchingBehaviorConditions(switchingBehavior raw.AVCapturePrimaryConstituentDeviceSwitchingBehavior, restrictedSwitchingBehaviorConditions raw.AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions)
+	MovieFragmentInterval() coremedia.CMTime
+	SetMovieFragmentInterval(movieFragmentInterval coremedia.CMTime)
+	Metadata() []*raw.AVMetadataItem
+	SetMetadata(metadata *foundation.NSArray[*raw.AVMetadataItem])
+	IsPrimaryConstituentDeviceSwitchingBehaviorForRecordingEnabled() bool
+	SetPrimaryConstituentDeviceSwitchingBehaviorForRecordingEnabled(primaryConstituentDeviceSwitchingBehaviorForRecordingEnabled bool)
+	PrimaryConstituentDeviceSwitchingBehaviorForRecording() raw.AVCapturePrimaryConstituentDeviceSwitchingBehavior
+	PrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionsForRecording() raw.AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions
+	IsSpatialVideoCaptureSupported() bool
+	IsSpatialVideoCaptureEnabled() bool
+	SetSpatialVideoCaptureEnabled(spatialVideoCaptureEnabled bool)
+}
+
+var _ CaptureMovieFileOutputable = (*CaptureMovieFileOutput)(nil)
 

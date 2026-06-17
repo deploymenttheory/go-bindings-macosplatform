@@ -30,9 +30,29 @@ func (x *PathComponentCell) WithURL(uRL string) *PathComponentCell {
 	return x
 }
 
+// URL calls the underlying URL.
+func (x *PathComponentCell) URL() *foundation.NSURL {
+	return x.inner.URL()
+}
+
+// SetURL calls the underlying SetURL.
+func (x *PathComponentCell) SetURL(uRL string) {
+	x.inner.SetURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
+}
+
 func (x *PathComponentCell) asTextFieldCell() *raw.NSTextFieldCell { return &x.inner.NSTextFieldCell }
 
 func (x *PathComponentCell) asActionCell() *raw.NSActionCell { return &x.inner.NSTextFieldCell.NSActionCell }
 
 func (x *PathComponentCell) asCell() *raw.NSCell { return &x.inner.NSTextFieldCell.NSActionCell.NSCell }
+
+// PathComponentCellable is the interface implemented by [PathComponentCell], for mocking and DI.
+type PathComponentCellable interface {
+	Unwrap() *raw.NSPathComponentCell
+	WithURL(uRL string) *PathComponentCell
+	URL() *foundation.NSURL
+	SetURL(uRL string)
+}
+
+var _ PathComponentCellable = (*PathComponentCell)(nil)
 

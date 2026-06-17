@@ -25,5 +25,30 @@ func NewSendMessageIntentResponseWithCodeUserActivity(code raw.INSendMessageInte
 	return &SendMessageIntentResponse{inner: raw.INSendMessageIntentResponseFromID(_id)}
 }
 
+// Code calls the underlying Code.
+func (x *SendMessageIntentResponse) Code() raw.INSendMessageIntentResponseCode {
+	return x.inner.Code()
+}
+
+// SentMessages calls the underlying SentMessages.
+func (x *SendMessageIntentResponse) SentMessages() *foundation.NSArray[objc.ID] {
+	return x.inner.SentMessages()
+}
+
+// SetSentMessages calls the underlying SetSentMessages.
+func (x *SendMessageIntentResponse) SetSentMessages(sentMessages *foundation.NSArray[objc.ID]) {
+	x.inner.SetSentMessages(sentMessages)
+}
+
 func (x *SendMessageIntentResponse) asIntentResponse() *raw.INIntentResponse { return &x.inner.INIntentResponse }
+
+// SendMessageIntentResponseable is the interface implemented by [SendMessageIntentResponse], for mocking and DI.
+type SendMessageIntentResponseable interface {
+	Unwrap() *raw.INSendMessageIntentResponse
+	Code() raw.INSendMessageIntentResponseCode
+	SentMessages() *foundation.NSArray[objc.ID]
+	SetSentMessages(sentMessages *foundation.NSArray[objc.ID])
+}
+
+var _ SendMessageIntentResponseable = (*SendMessageIntentResponse)(nil)
 

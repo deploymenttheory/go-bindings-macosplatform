@@ -72,3 +72,114 @@ func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) WithEpochStartTime2(epoc
 	return x
 }
 
+// GroupKeySetID calls the underlying GroupKeySetID.
+func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) GroupKeySetID() *foundation.NSNumber {
+	return x.inner.GroupKeySetID()
+}
+
+// SetGroupKeySetID calls the underlying SetGroupKeySetID.
+func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) SetGroupKeySetID(groupKeySetID *foundation.NSNumber) {
+	x.inner.SetGroupKeySetID(groupKeySetID)
+}
+
+// GroupKeySecurityPolicy calls the underlying GroupKeySecurityPolicy.
+func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) GroupKeySecurityPolicy() *foundation.NSNumber {
+	return x.inner.GroupKeySecurityPolicy()
+}
+
+// SetGroupKeySecurityPolicy calls the underlying SetGroupKeySecurityPolicy.
+func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) SetGroupKeySecurityPolicy(groupKeySecurityPolicy *foundation.NSNumber) {
+	x.inner.SetGroupKeySecurityPolicy(groupKeySecurityPolicy)
+}
+
+// EpochKey0 calls the underlying EpochKey0.
+func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) EpochKey0() *foundation.NSData {
+	return x.inner.EpochKey0()
+}
+
+// SetEpochKey0 calls the underlying SetEpochKey0.
+func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) SetEpochKey0(epochKey0 *foundation.NSData) {
+	x.inner.SetEpochKey0(epochKey0)
+}
+
+// EpochStartTime0 calls the underlying EpochStartTime0.
+func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) EpochStartTime0() *foundation.NSNumber {
+	return x.inner.EpochStartTime0()
+}
+
+// SetEpochStartTime0 calls the underlying SetEpochStartTime0.
+func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) SetEpochStartTime0(epochStartTime0 *foundation.NSNumber) {
+	x.inner.SetEpochStartTime0(epochStartTime0)
+}
+
+// EpochKey1 calls the underlying EpochKey1.
+func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) EpochKey1() *foundation.NSData {
+	return x.inner.EpochKey1()
+}
+
+// SetEpochKey1 calls the underlying SetEpochKey1.
+func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) SetEpochKey1(epochKey1 *foundation.NSData) {
+	x.inner.SetEpochKey1(epochKey1)
+}
+
+// EpochStartTime1 calls the underlying EpochStartTime1.
+func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) EpochStartTime1() *foundation.NSNumber {
+	return x.inner.EpochStartTime1()
+}
+
+// SetEpochStartTime1 calls the underlying SetEpochStartTime1.
+func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) SetEpochStartTime1(epochStartTime1 *foundation.NSNumber) {
+	x.inner.SetEpochStartTime1(epochStartTime1)
+}
+
+// EpochKey2 calls the underlying EpochKey2.
+func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) EpochKey2() *foundation.NSData {
+	return x.inner.EpochKey2()
+}
+
+// SetEpochKey2 calls the underlying SetEpochKey2.
+func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) SetEpochKey2(epochKey2 *foundation.NSData) {
+	x.inner.SetEpochKey2(epochKey2)
+}
+
+// EpochStartTime2 calls the underlying EpochStartTime2.
+func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) EpochStartTime2() *foundation.NSNumber {
+	return x.inner.EpochStartTime2()
+}
+
+// SetEpochStartTime2 calls the underlying SetEpochStartTime2.
+func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) SetEpochStartTime2(epochStartTime2 *foundation.NSNumber) {
+	x.inner.SetEpochStartTime2(epochStartTime2)
+}
+
+// MTRGroupKeyManagementClusterGroupKeySetStructable is the interface implemented by [MTRGroupKeyManagementClusterGroupKeySetStruct], for mocking and DI.
+type MTRGroupKeyManagementClusterGroupKeySetStructable interface {
+	Unwrap() *raw.MTRGroupKeyManagementClusterGroupKeySetStruct
+	WithGroupKeySetID(groupKeySetID *foundation.NSNumber) *MTRGroupKeyManagementClusterGroupKeySetStruct
+	WithGroupKeySecurityPolicy(groupKeySecurityPolicy *foundation.NSNumber) *MTRGroupKeyManagementClusterGroupKeySetStruct
+	WithEpochKey0(epochKey0 *foundation.NSData) *MTRGroupKeyManagementClusterGroupKeySetStruct
+	WithEpochStartTime0(epochStartTime0 *foundation.NSNumber) *MTRGroupKeyManagementClusterGroupKeySetStruct
+	WithEpochKey1(epochKey1 *foundation.NSData) *MTRGroupKeyManagementClusterGroupKeySetStruct
+	WithEpochStartTime1(epochStartTime1 *foundation.NSNumber) *MTRGroupKeyManagementClusterGroupKeySetStruct
+	WithEpochKey2(epochKey2 *foundation.NSData) *MTRGroupKeyManagementClusterGroupKeySetStruct
+	WithEpochStartTime2(epochStartTime2 *foundation.NSNumber) *MTRGroupKeyManagementClusterGroupKeySetStruct
+	GroupKeySetID() *foundation.NSNumber
+	SetGroupKeySetID(groupKeySetID *foundation.NSNumber)
+	GroupKeySecurityPolicy() *foundation.NSNumber
+	SetGroupKeySecurityPolicy(groupKeySecurityPolicy *foundation.NSNumber)
+	EpochKey0() *foundation.NSData
+	SetEpochKey0(epochKey0 *foundation.NSData)
+	EpochStartTime0() *foundation.NSNumber
+	SetEpochStartTime0(epochStartTime0 *foundation.NSNumber)
+	EpochKey1() *foundation.NSData
+	SetEpochKey1(epochKey1 *foundation.NSData)
+	EpochStartTime1() *foundation.NSNumber
+	SetEpochStartTime1(epochStartTime1 *foundation.NSNumber)
+	EpochKey2() *foundation.NSData
+	SetEpochKey2(epochKey2 *foundation.NSData)
+	EpochStartTime2() *foundation.NSNumber
+	SetEpochStartTime2(epochStartTime2 *foundation.NSNumber)
+}
+
+var _ MTRGroupKeyManagementClusterGroupKeySetStructable = (*MTRGroupKeyManagementClusterGroupKeySetStruct)(nil)
+

@@ -5,9 +5,12 @@
 package matter
 
 import (
+	"context"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // MTRBaseClusterOperationalState wraps [raw.MTRBaseClusterOperationalState] with a fluent Go API.
@@ -25,7 +28,594 @@ func NewMTRBaseClusterOperationalStateWithDeviceEndpointIDQueue(device *raw.MTRB
 	return &MTRBaseClusterOperationalState{inner: raw.MTRBaseClusterOperationalStateFromID(_id)}
 }
 
+// PauseWithParamsCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterOperationalState) PauseWithParamsCompletion(ctx context.Context, params *raw.MTROperationalStateClusterPauseParams) (*MTROperationalStateClusterOperationalCommandResponseParams, error) {
+	type _result struct {
+		val *MTROperationalStateClusterOperationalCommandResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.PauseWithParamsCompletion(params, func(_p0 *raw.MTROperationalStateClusterOperationalCommandResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTROperationalStateClusterOperationalCommandResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTROperationalStateClusterOperationalCommandResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
+// PauseWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterOperationalState) PauseWithCompletion(ctx context.Context) (*MTROperationalStateClusterOperationalCommandResponseParams, error) {
+	type _result struct {
+		val *MTROperationalStateClusterOperationalCommandResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.PauseWithCompletion(func(_p0 *raw.MTROperationalStateClusterOperationalCommandResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTROperationalStateClusterOperationalCommandResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTROperationalStateClusterOperationalCommandResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
+// StopWithParamsCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterOperationalState) StopWithParamsCompletion(ctx context.Context, params *raw.MTROperationalStateClusterStopParams) (*MTROperationalStateClusterOperationalCommandResponseParams, error) {
+	type _result struct {
+		val *MTROperationalStateClusterOperationalCommandResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.StopWithParamsCompletion(params, func(_p0 *raw.MTROperationalStateClusterOperationalCommandResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTROperationalStateClusterOperationalCommandResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTROperationalStateClusterOperationalCommandResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
+// StopWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterOperationalState) StopWithCompletion(ctx context.Context) (*MTROperationalStateClusterOperationalCommandResponseParams, error) {
+	type _result struct {
+		val *MTROperationalStateClusterOperationalCommandResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.StopWithCompletion(func(_p0 *raw.MTROperationalStateClusterOperationalCommandResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTROperationalStateClusterOperationalCommandResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTROperationalStateClusterOperationalCommandResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
+// StartWithParamsCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterOperationalState) StartWithParamsCompletion(ctx context.Context, params *raw.MTROperationalStateClusterStartParams) (*MTROperationalStateClusterOperationalCommandResponseParams, error) {
+	type _result struct {
+		val *MTROperationalStateClusterOperationalCommandResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.StartWithParamsCompletion(params, func(_p0 *raw.MTROperationalStateClusterOperationalCommandResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTROperationalStateClusterOperationalCommandResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTROperationalStateClusterOperationalCommandResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
+// StartWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterOperationalState) StartWithCompletion(ctx context.Context) (*MTROperationalStateClusterOperationalCommandResponseParams, error) {
+	type _result struct {
+		val *MTROperationalStateClusterOperationalCommandResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.StartWithCompletion(func(_p0 *raw.MTROperationalStateClusterOperationalCommandResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTROperationalStateClusterOperationalCommandResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTROperationalStateClusterOperationalCommandResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
+// ResumeWithParamsCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterOperationalState) ResumeWithParamsCompletion(ctx context.Context, params *raw.MTROperationalStateClusterResumeParams) (*MTROperationalStateClusterOperationalCommandResponseParams, error) {
+	type _result struct {
+		val *MTROperationalStateClusterOperationalCommandResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ResumeWithParamsCompletion(params, func(_p0 *raw.MTROperationalStateClusterOperationalCommandResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTROperationalStateClusterOperationalCommandResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTROperationalStateClusterOperationalCommandResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
+// ResumeWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterOperationalState) ResumeWithCompletion(ctx context.Context) (*MTROperationalStateClusterOperationalCommandResponseParams, error) {
+	type _result struct {
+		val *MTROperationalStateClusterOperationalCommandResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ResumeWithCompletion(func(_p0 *raw.MTROperationalStateClusterOperationalCommandResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTROperationalStateClusterOperationalCommandResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTROperationalStateClusterOperationalCommandResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributePhaseListWithCompletion calls the underlying ReadAttributePhaseListWithCompletion.
+func (x *MTRBaseClusterOperationalState) ReadAttributePhaseListWithCompletion(completion objc.Block) {
+	x.inner.ReadAttributePhaseListWithCompletion(completion)
+}
+
+// SubscribeAttributePhaseListWithParamsSubscriptionEstablishedReportHandler calls the underlying SubscribeAttributePhaseListWithParamsSubscriptionEstablishedReportHandler.
+func (x *MTRBaseClusterOperationalState) SubscribeAttributePhaseListWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block) {
+	x.inner.SubscribeAttributePhaseListWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, reportHandler)
+}
+
+// ReadAttributeCurrentPhaseWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterOperationalState) ReadAttributeCurrentPhaseWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeCurrentPhaseWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// SubscribeAttributeCurrentPhaseWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterOperationalState) SubscribeAttributeCurrentPhaseWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeCurrentPhaseWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeCountdownTimeWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterOperationalState) ReadAttributeCountdownTimeWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeCountdownTimeWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// SubscribeAttributeCountdownTimeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterOperationalState) SubscribeAttributeCountdownTimeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeCountdownTimeWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeOperationalStateListWithCompletion calls the underlying ReadAttributeOperationalStateListWithCompletion.
+func (x *MTRBaseClusterOperationalState) ReadAttributeOperationalStateListWithCompletion(completion objc.Block) {
+	x.inner.ReadAttributeOperationalStateListWithCompletion(completion)
+}
+
+// SubscribeAttributeOperationalStateListWithParamsSubscriptionEstablishedReportHandler calls the underlying SubscribeAttributeOperationalStateListWithParamsSubscriptionEstablishedReportHandler.
+func (x *MTRBaseClusterOperationalState) SubscribeAttributeOperationalStateListWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block) {
+	x.inner.SubscribeAttributeOperationalStateListWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, reportHandler)
+}
+
+// ReadAttributeOperationalStateWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterOperationalState) ReadAttributeOperationalStateWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeOperationalStateWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// SubscribeAttributeOperationalStateWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterOperationalState) SubscribeAttributeOperationalStateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeOperationalStateWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeOperationalErrorWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterOperationalState) ReadAttributeOperationalErrorWithCompletion(ctx context.Context) (*MTROperationalStateClusterErrorStateStruct, error) {
+	type _result struct {
+		val *MTROperationalStateClusterErrorStateStruct
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeOperationalErrorWithCompletion(func(_p0 *raw.MTROperationalStateClusterErrorStateStruct, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTROperationalStateClusterErrorStateStruct{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTROperationalStateClusterErrorStateStruct
+		return _zero, ctx.Err()
+	}
+}
+
+// SubscribeAttributeOperationalErrorWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterOperationalState) SubscribeAttributeOperationalErrorWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*MTROperationalStateClusterErrorStateStruct, error) {
+	type _result struct {
+		val *MTROperationalStateClusterErrorStateStruct
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeOperationalErrorWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *raw.MTROperationalStateClusterErrorStateStruct, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTROperationalStateClusterErrorStateStruct{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTROperationalStateClusterErrorStateStruct
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeGeneratedCommandListWithCompletion calls the underlying ReadAttributeGeneratedCommandListWithCompletion.
+func (x *MTRBaseClusterOperationalState) ReadAttributeGeneratedCommandListWithCompletion(completion objc.Block) {
+	x.inner.ReadAttributeGeneratedCommandListWithCompletion(completion)
+}
+
+// SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler calls the underlying SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler.
+func (x *MTRBaseClusterOperationalState) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block) {
+	x.inner.SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, reportHandler)
+}
+
+// ReadAttributeAcceptedCommandListWithCompletion calls the underlying ReadAttributeAcceptedCommandListWithCompletion.
+func (x *MTRBaseClusterOperationalState) ReadAttributeAcceptedCommandListWithCompletion(completion objc.Block) {
+	x.inner.ReadAttributeAcceptedCommandListWithCompletion(completion)
+}
+
+// SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler calls the underlying SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler.
+func (x *MTRBaseClusterOperationalState) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block) {
+	x.inner.SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, reportHandler)
+}
+
+// ReadAttributeAttributeListWithCompletion calls the underlying ReadAttributeAttributeListWithCompletion.
+func (x *MTRBaseClusterOperationalState) ReadAttributeAttributeListWithCompletion(completion objc.Block) {
+	x.inner.ReadAttributeAttributeListWithCompletion(completion)
+}
+
+// SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler calls the underlying SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler.
+func (x *MTRBaseClusterOperationalState) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block) {
+	x.inner.SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, reportHandler)
+}
+
+// ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterOperationalState) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeFeatureMapWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterOperationalState) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterOperationalState) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeClusterRevisionWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterOperationalState) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
 func (x *MTRBaseClusterOperationalState) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
 
 func (x *MTRBaseClusterOperationalState) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+
+// MTRBaseClusterOperationalStateable is the interface implemented by [MTRBaseClusterOperationalState], for mocking and DI.
+type MTRBaseClusterOperationalStateable interface {
+	Unwrap() *raw.MTRBaseClusterOperationalState
+	PauseWithParamsCompletion(ctx context.Context, params *raw.MTROperationalStateClusterPauseParams) (*MTROperationalStateClusterOperationalCommandResponseParams, error)
+	PauseWithCompletion(ctx context.Context) (*MTROperationalStateClusterOperationalCommandResponseParams, error)
+	StopWithParamsCompletion(ctx context.Context, params *raw.MTROperationalStateClusterStopParams) (*MTROperationalStateClusterOperationalCommandResponseParams, error)
+	StopWithCompletion(ctx context.Context) (*MTROperationalStateClusterOperationalCommandResponseParams, error)
+	StartWithParamsCompletion(ctx context.Context, params *raw.MTROperationalStateClusterStartParams) (*MTROperationalStateClusterOperationalCommandResponseParams, error)
+	StartWithCompletion(ctx context.Context) (*MTROperationalStateClusterOperationalCommandResponseParams, error)
+	ResumeWithParamsCompletion(ctx context.Context, params *raw.MTROperationalStateClusterResumeParams) (*MTROperationalStateClusterOperationalCommandResponseParams, error)
+	ResumeWithCompletion(ctx context.Context) (*MTROperationalStateClusterOperationalCommandResponseParams, error)
+	ReadAttributePhaseListWithCompletion(completion objc.Block)
+	SubscribeAttributePhaseListWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block)
+	ReadAttributeCurrentPhaseWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	SubscribeAttributeCurrentPhaseWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeCountdownTimeWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	SubscribeAttributeCountdownTimeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeOperationalStateListWithCompletion(completion objc.Block)
+	SubscribeAttributeOperationalStateListWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block)
+	ReadAttributeOperationalStateWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	SubscribeAttributeOperationalStateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeOperationalErrorWithCompletion(ctx context.Context) (*MTROperationalStateClusterErrorStateStruct, error)
+	SubscribeAttributeOperationalErrorWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*MTROperationalStateClusterErrorStateStruct, error)
+	ReadAttributeGeneratedCommandListWithCompletion(completion objc.Block)
+	SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block)
+	ReadAttributeAcceptedCommandListWithCompletion(completion objc.Block)
+	SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block)
+	ReadAttributeAttributeListWithCompletion(completion objc.Block)
+	SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block)
+	ReadAttributeFeatureMapWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+}
+
+var _ MTRBaseClusterOperationalStateable = (*MTRBaseClusterOperationalState)(nil)
 

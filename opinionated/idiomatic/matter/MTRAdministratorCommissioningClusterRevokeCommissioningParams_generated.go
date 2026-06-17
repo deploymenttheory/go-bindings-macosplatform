@@ -36,3 +36,36 @@ func (x *MTRAdministratorCommissioningClusterRevokeCommissioningParams) WithServ
 	return x
 }
 
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRAdministratorCommissioningClusterRevokeCommissioningParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRAdministratorCommissioningClusterRevokeCommissioningParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRAdministratorCommissioningClusterRevokeCommissioningParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRAdministratorCommissioningClusterRevokeCommissioningParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRAdministratorCommissioningClusterRevokeCommissioningParamsable is the interface implemented by [MTRAdministratorCommissioningClusterRevokeCommissioningParams], for mocking and DI.
+type MTRAdministratorCommissioningClusterRevokeCommissioningParamsable interface {
+	Unwrap() *raw.MTRAdministratorCommissioningClusterRevokeCommissioningParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRAdministratorCommissioningClusterRevokeCommissioningParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRAdministratorCommissioningClusterRevokeCommissioningParams
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRAdministratorCommissioningClusterRevokeCommissioningParamsable = (*MTRAdministratorCommissioningClusterRevokeCommissioningParams)(nil)
+

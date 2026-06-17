@@ -25,3 +25,10 @@ func NewAssetResourceRenewalRequest() *AssetResourceRenewalRequest {
 
 func (x *AssetResourceRenewalRequest) asAssetResourceLoadingRequest() *raw.AVAssetResourceLoadingRequest { return &x.inner.AVAssetResourceLoadingRequest }
 
+// AssetResourceRenewalRequestable is the interface implemented by [AssetResourceRenewalRequest], for mocking and DI.
+type AssetResourceRenewalRequestable interface {
+	Unwrap() *raw.AVAssetResourceRenewalRequest
+}
+
+var _ AssetResourceRenewalRequestable = (*AssetResourceRenewalRequest)(nil)
+

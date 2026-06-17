@@ -29,5 +29,25 @@ func (x *GeometricSpreadingDistanceModelParameters) WithRolloffFactor(rolloffFac
 	return x
 }
 
+// RolloffFactor calls the underlying RolloffFactor.
+func (x *GeometricSpreadingDistanceModelParameters) RolloffFactor() float64 {
+	return x.inner.RolloffFactor()
+}
+
+// SetRolloffFactor calls the underlying SetRolloffFactor.
+func (x *GeometricSpreadingDistanceModelParameters) SetRolloffFactor(rolloffFactor float64) {
+	x.inner.SetRolloffFactor(rolloffFactor)
+}
+
 func (x *GeometricSpreadingDistanceModelParameters) asDistanceModelParameters() *raw.PHASEDistanceModelParameters { return &x.inner.PHASEDistanceModelParameters }
+
+// GeometricSpreadingDistanceModelParametersable is the interface implemented by [GeometricSpreadingDistanceModelParameters], for mocking and DI.
+type GeometricSpreadingDistanceModelParametersable interface {
+	Unwrap() *raw.PHASEGeometricSpreadingDistanceModelParameters
+	WithRolloffFactor(rolloffFactor float64) *GeometricSpreadingDistanceModelParameters
+	RolloffFactor() float64
+	SetRolloffFactor(rolloffFactor float64)
+}
+
+var _ GeometricSpreadingDistanceModelParametersable = (*GeometricSpreadingDistanceModelParameters)(nil)
 

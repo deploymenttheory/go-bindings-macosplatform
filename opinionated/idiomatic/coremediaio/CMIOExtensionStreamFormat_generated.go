@@ -27,16 +27,34 @@ func NewExtensionStreamFormatWithFormatDescriptionMaxFrameDurationMinFrameDurati
 	return &ExtensionStreamFormat{inner: raw.CMIOExtensionStreamFormatFromID(_id)}
 }
 
-// ValidFrameDurations returns the collection as a Go slice.
-func (x *ExtensionStreamFormat) ValidFrameDurations() []*foundation.NSDictionary[objc.ID, objc.ID] {
-	arr := x.inner.ValidFrameDurations()
-	if arr == nil {
-		return nil
-	}
-	out := make([]*foundation.NSDictionary[objc.ID, objc.ID], arr.Count())
-	for i := range out {
-		out[i] = foundation.NSDictionaryFromID[objc.ID, objc.ID](arr.ObjectAtIndex(uint(i)))
-	}
-	return out
+// FormatDescription calls the underlying FormatDescription.
+func (x *ExtensionStreamFormat) FormatDescription() unsafe.Pointer {
+	return x.inner.FormatDescription()
 }
+
+// MinFrameDuration calls the underlying MinFrameDuration.
+func (x *ExtensionStreamFormat) MinFrameDuration() coremedia.CMTime {
+	return x.inner.MinFrameDuration()
+}
+
+// MaxFrameDuration calls the underlying MaxFrameDuration.
+func (x *ExtensionStreamFormat) MaxFrameDuration() coremedia.CMTime {
+	return x.inner.MaxFrameDuration()
+}
+
+// ValidFrameDurations calls the underlying ValidFrameDurations.
+func (x *ExtensionStreamFormat) ValidFrameDurations() *foundation.NSArray[objc.ID] {
+	return x.inner.ValidFrameDurations()
+}
+
+// ExtensionStreamFormatable is the interface implemented by [ExtensionStreamFormat], for mocking and DI.
+type ExtensionStreamFormatable interface {
+	Unwrap() *raw.CMIOExtensionStreamFormat
+	FormatDescription() unsafe.Pointer
+	MinFrameDuration() coremedia.CMTime
+	MaxFrameDuration() coremedia.CMTime
+	ValidFrameDurations() *foundation.NSArray[objc.ID]
+}
+
+var _ ExtensionStreamFormatable = (*ExtensionStreamFormat)(nil)
 

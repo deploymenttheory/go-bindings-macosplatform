@@ -25,3 +25,10 @@ func NewPhysicsBehavior() *PhysicsBehavior {
 
 func (x *PhysicsBehavior) asPhysicsBehavior() *raw.SCNPhysicsBehavior { return x.inner }
 
+// PhysicsBehaviorable is the interface implemented by [PhysicsBehavior], for mocking and DI.
+type PhysicsBehaviorable interface {
+	Unwrap() *raw.SCNPhysicsBehavior
+}
+
+var _ PhysicsBehaviorable = (*PhysicsBehavior)(nil)
+

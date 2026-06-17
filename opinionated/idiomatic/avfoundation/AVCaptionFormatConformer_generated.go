@@ -31,3 +31,36 @@ func (x *CaptionFormatConformer) WithConformsCaptionsToTimeRange(conformsCaption
 	return x
 }
 
+// ConformedCaptionForCaptionError calls the underlying ConformedCaptionForCaptionError.
+func (x *CaptionFormatConformer) ConformedCaptionForCaptionError(caption *raw.AVCaption) (*Caption, error) {
+	_r, _err := x.inner.ConformedCaptionForCaptionError(caption)
+	if _err != nil {
+		return nil, _err
+	}
+	if _r == nil {
+		return nil, nil
+	}
+	return &Caption{inner: _r}, nil
+}
+
+// ConformsCaptionsToTimeRange calls the underlying ConformsCaptionsToTimeRange.
+func (x *CaptionFormatConformer) ConformsCaptionsToTimeRange() bool {
+	return x.inner.ConformsCaptionsToTimeRange()
+}
+
+// SetConformsCaptionsToTimeRange calls the underlying SetConformsCaptionsToTimeRange.
+func (x *CaptionFormatConformer) SetConformsCaptionsToTimeRange(conformsCaptionsToTimeRange bool) {
+	x.inner.SetConformsCaptionsToTimeRange(conformsCaptionsToTimeRange)
+}
+
+// CaptionFormatConformerable is the interface implemented by [CaptionFormatConformer], for mocking and DI.
+type CaptionFormatConformerable interface {
+	Unwrap() *raw.AVCaptionFormatConformer
+	WithConformsCaptionsToTimeRange(conformsCaptionsToTimeRange bool) *CaptionFormatConformer
+	ConformedCaptionForCaptionError(caption *raw.AVCaption) (*Caption, error)
+	ConformsCaptionsToTimeRange() bool
+	SetConformsCaptionsToTimeRange(conformsCaptionsToTimeRange bool)
+}
+
+var _ CaptionFormatConformerable = (*CaptionFormatConformer)(nil)
+

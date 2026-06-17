@@ -29,5 +29,49 @@ func (x *ScannerFeatureRange) WithCurrentValue(currentValue float64) *ScannerFea
 	return x
 }
 
+// CurrentValue calls the underlying CurrentValue.
+func (x *ScannerFeatureRange) CurrentValue() float64 {
+	return x.inner.CurrentValue()
+}
+
+// SetCurrentValue calls the underlying SetCurrentValue.
+func (x *ScannerFeatureRange) SetCurrentValue(currentValue float64) {
+	x.inner.SetCurrentValue(currentValue)
+}
+
+// DefaultValue calls the underlying DefaultValue.
+func (x *ScannerFeatureRange) DefaultValue() float64 {
+	return x.inner.DefaultValue()
+}
+
+// MinValue calls the underlying MinValue.
+func (x *ScannerFeatureRange) MinValue() float64 {
+	return x.inner.MinValue()
+}
+
+// MaxValue calls the underlying MaxValue.
+func (x *ScannerFeatureRange) MaxValue() float64 {
+	return x.inner.MaxValue()
+}
+
+// StepSize calls the underlying StepSize.
+func (x *ScannerFeatureRange) StepSize() float64 {
+	return x.inner.StepSize()
+}
+
 func (x *ScannerFeatureRange) asScannerFeature() *raw.ICScannerFeature { return &x.inner.ICScannerFeature }
+
+// ScannerFeatureRangeable is the interface implemented by [ScannerFeatureRange], for mocking and DI.
+type ScannerFeatureRangeable interface {
+	Unwrap() *raw.ICScannerFeatureRange
+	WithCurrentValue(currentValue float64) *ScannerFeatureRange
+	CurrentValue() float64
+	SetCurrentValue(currentValue float64)
+	DefaultValue() float64
+	MinValue() float64
+	MaxValue() float64
+	StepSize() float64
+}
+
+var _ ScannerFeatureRangeable = (*ScannerFeatureRange)(nil)
 

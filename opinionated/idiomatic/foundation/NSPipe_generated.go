@@ -23,5 +23,32 @@ func NewPipe() *Pipe {
 	return &Pipe{inner: raw.NSPipeFromID(_id)}
 }
 
+// FileHandleForReading calls the underlying FileHandleForReading.
+func (x *Pipe) FileHandleForReading() *FileHandle {
+	_r := x.inner.FileHandleForReading()
+	if _r == nil {
+		return nil
+	}
+	return &FileHandle{inner: _r}
+}
+
+// FileHandleForWriting calls the underlying FileHandleForWriting.
+func (x *Pipe) FileHandleForWriting() *FileHandle {
+	_r := x.inner.FileHandleForWriting()
+	if _r == nil {
+		return nil
+	}
+	return &FileHandle{inner: _r}
+}
+
 func (x *Pipe) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// Pipeable is the interface implemented by [Pipe], for mocking and DI.
+type Pipeable interface {
+	Unwrap() *raw.NSPipe
+	FileHandleForReading() *FileHandle
+	FileHandleForWriting() *FileHandle
+}
+
+var _ Pipeable = (*Pipe)(nil)
 

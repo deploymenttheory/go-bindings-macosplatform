@@ -7,6 +7,7 @@ package healthkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,17 +25,30 @@ func NewStateOfMind() *StateOfMind {
 	return &StateOfMind{inner: raw.HKStateOfMindFromID(_id)}
 }
 
+// Kind calls the underlying Kind.
+func (x *StateOfMind) Kind() raw.HKStateOfMindKind {
+	return x.inner.Kind()
+}
+
+// Valence calls the underlying Valence.
+func (x *StateOfMind) Valence() float64 {
+	return x.inner.Valence()
+}
+
+// ValenceClassification calls the underlying ValenceClassification.
+func (x *StateOfMind) ValenceClassification() raw.HKStateOfMindValenceClassification {
+	return x.inner.ValenceClassification()
+}
+
 // Labels returns the collection as a Go slice.
 func (x *StateOfMind) Labels() []*foundation.NSNumber {
 	arr := x.inner.Labels()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
 }
 
 // Associations returns the collection as a Go slice.
@@ -43,14 +57,24 @@ func (x *StateOfMind) Associations() []*foundation.NSNumber {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
 }
 
 func (x *StateOfMind) asSample() *raw.HKSample { return &x.inner.HKSample }
 
 func (x *StateOfMind) asObject() *raw.HKObject { return &x.inner.HKSample.HKObject }
+
+// StateOfMindable is the interface implemented by [StateOfMind], for mocking and DI.
+type StateOfMindable interface {
+	Unwrap() *raw.HKStateOfMind
+	Kind() raw.HKStateOfMindKind
+	Valence() float64
+	ValenceClassification() raw.HKStateOfMindValenceClassification
+	Labels() []*foundation.NSNumber
+	Associations() []*foundation.NSNumber
+}
+
+var _ StateOfMindable = (*StateOfMind)(nil)
 

@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -48,5 +49,76 @@ func (x *MTRChannelClusterLineupInfoStruct) WithLineupInfoType(lineupInfoType *f
 	return x
 }
 
+// OperatorName calls the underlying OperatorName.
+func (x *MTRChannelClusterLineupInfoStruct) OperatorName() string {
+	_r := x.inner.OperatorName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetOperatorName calls the underlying SetOperatorName.
+func (x *MTRChannelClusterLineupInfoStruct) SetOperatorName(operatorName string) {
+	x.inner.SetOperatorName(foundation.NSStringStringWithUTF8String(operatorName))
+}
+
+// LineupName calls the underlying LineupName.
+func (x *MTRChannelClusterLineupInfoStruct) LineupName() string {
+	_r := x.inner.LineupName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLineupName calls the underlying SetLineupName.
+func (x *MTRChannelClusterLineupInfoStruct) SetLineupName(lineupName string) {
+	x.inner.SetLineupName(foundation.NSStringStringWithUTF8String(lineupName))
+}
+
+// PostalCode calls the underlying PostalCode.
+func (x *MTRChannelClusterLineupInfoStruct) PostalCode() string {
+	_r := x.inner.PostalCode()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetPostalCode calls the underlying SetPostalCode.
+func (x *MTRChannelClusterLineupInfoStruct) SetPostalCode(postalCode string) {
+	x.inner.SetPostalCode(foundation.NSStringStringWithUTF8String(postalCode))
+}
+
+// LineupInfoType calls the underlying LineupInfoType.
+func (x *MTRChannelClusterLineupInfoStruct) LineupInfoType() *foundation.NSNumber {
+	return x.inner.LineupInfoType()
+}
+
+// SetLineupInfoType calls the underlying SetLineupInfoType.
+func (x *MTRChannelClusterLineupInfoStruct) SetLineupInfoType(lineupInfoType *foundation.NSNumber) {
+	x.inner.SetLineupInfoType(lineupInfoType)
+}
+
 func (x *MTRChannelClusterLineupInfoStruct) asMTRChannelClusterLineupInfoStruct() *raw.MTRChannelClusterLineupInfoStruct { return x.inner }
+
+// MTRChannelClusterLineupInfoStructable is the interface implemented by [MTRChannelClusterLineupInfoStruct], for mocking and DI.
+type MTRChannelClusterLineupInfoStructable interface {
+	Unwrap() *raw.MTRChannelClusterLineupInfoStruct
+	WithOperatorName(operatorName string) *MTRChannelClusterLineupInfoStruct
+	WithLineupName(lineupName string) *MTRChannelClusterLineupInfoStruct
+	WithPostalCode(postalCode string) *MTRChannelClusterLineupInfoStruct
+	WithLineupInfoType(lineupInfoType *foundation.NSNumber) *MTRChannelClusterLineupInfoStruct
+	OperatorName() string
+	SetOperatorName(operatorName string)
+	LineupName() string
+	SetLineupName(lineupName string)
+	PostalCode() string
+	SetPostalCode(postalCode string)
+	LineupInfoType() *foundation.NSNumber
+	SetLineupInfoType(lineupInfoType *foundation.NSNumber)
+}
+
+var _ MTRChannelClusterLineupInfoStructable = (*MTRChannelClusterLineupInfoStruct)(nil)
 

@@ -6,7 +6,9 @@ package collaboration
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/collaboration"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // UserIdentity wraps [raw.CBUserIdentity] with a fluent Go API.
@@ -23,5 +25,36 @@ func NewUserIdentity() *UserIdentity {
 	return &UserIdentity{inner: raw.CBUserIdentityFromID(_id)}
 }
 
+// AuthenticateWithPassword calls the underlying AuthenticateWithPassword.
+func (x *UserIdentity) AuthenticateWithPassword(password string) bool {
+	return x.inner.AuthenticateWithPassword(foundation.NSStringStringWithUTF8String(password))
+}
+
+// PosixUID calls the underlying PosixUID.
+func (x *UserIdentity) PosixUID() uint {
+	return x.inner.PosixUID()
+}
+
+// Certificate calls the underlying Certificate.
+func (x *UserIdentity) Certificate() unsafe.Pointer {
+	return x.inner.Certificate()
+}
+
+// IsEnabled calls the underlying IsEnabled.
+func (x *UserIdentity) IsEnabled() bool {
+	return x.inner.IsEnabled()
+}
+
 func (x *UserIdentity) asIdentity() *raw.CBIdentity { return &x.inner.CBIdentity }
+
+// UserIdentityable is the interface implemented by [UserIdentity], for mocking and DI.
+type UserIdentityable interface {
+	Unwrap() *raw.CBUserIdentity
+	AuthenticateWithPassword(password string) bool
+	PosixUID() uint
+	Certificate() unsafe.Pointer
+	IsEnabled() bool
+}
+
+var _ UserIdentityable = (*UserIdentity)(nil)
 

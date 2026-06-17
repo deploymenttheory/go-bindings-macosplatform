@@ -5,6 +5,7 @@
 package metrickit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metrickit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,5 +24,24 @@ func NewMetric() *Metric {
 	return &Metric{inner: raw.MXMetricFromID(_id)}
 }
 
+// JSONRepresentation calls the underlying JSONRepresentation.
+func (x *Metric) JSONRepresentation() *foundation.NSData {
+	return x.inner.JSONRepresentation()
+}
+
+// DictionaryRepresentation calls the underlying DictionaryRepresentation.
+func (x *Metric) DictionaryRepresentation() *foundation.NSDictionary[objc.ID, objc.ID] {
+	return x.inner.DictionaryRepresentation()
+}
+
 func (x *Metric) asMetric() *raw.MXMetric { return x.inner }
+
+// Metricable is the interface implemented by [Metric], for mocking and DI.
+type Metricable interface {
+	Unwrap() *raw.MXMetric
+	JSONRepresentation() *foundation.NSData
+	DictionaryRepresentation() *foundation.NSDictionary[objc.ID, objc.ID]
+}
+
+var _ Metricable = (*Metric)(nil)
 

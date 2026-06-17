@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -83,4 +84,145 @@ func (x *MTRDoorLockClusterSetUserParams) WithUserUniqueId(userUniqueId *foundat
 	x.inner.SetUserUniqueId(userUniqueId)
 	return x
 }
+
+// OperationType calls the underlying OperationType.
+func (x *MTRDoorLockClusterSetUserParams) OperationType() *foundation.NSNumber {
+	return x.inner.OperationType()
+}
+
+// SetOperationType calls the underlying SetOperationType.
+func (x *MTRDoorLockClusterSetUserParams) SetOperationType(operationType *foundation.NSNumber) {
+	x.inner.SetOperationType(operationType)
+}
+
+// UserIndex calls the underlying UserIndex.
+func (x *MTRDoorLockClusterSetUserParams) UserIndex() *foundation.NSNumber {
+	return x.inner.UserIndex()
+}
+
+// SetUserIndex calls the underlying SetUserIndex.
+func (x *MTRDoorLockClusterSetUserParams) SetUserIndex(userIndex *foundation.NSNumber) {
+	x.inner.SetUserIndex(userIndex)
+}
+
+// UserName calls the underlying UserName.
+func (x *MTRDoorLockClusterSetUserParams) UserName() string {
+	_r := x.inner.UserName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetUserName calls the underlying SetUserName.
+func (x *MTRDoorLockClusterSetUserParams) SetUserName(userName string) {
+	x.inner.SetUserName(foundation.NSStringStringWithUTF8String(userName))
+}
+
+// UserUniqueID calls the underlying UserUniqueID.
+func (x *MTRDoorLockClusterSetUserParams) UserUniqueID() *foundation.NSNumber {
+	return x.inner.UserUniqueID()
+}
+
+// SetUserUniqueID calls the underlying SetUserUniqueID.
+func (x *MTRDoorLockClusterSetUserParams) SetUserUniqueID(userUniqueID *foundation.NSNumber) {
+	x.inner.SetUserUniqueID(userUniqueID)
+}
+
+// UserStatus calls the underlying UserStatus.
+func (x *MTRDoorLockClusterSetUserParams) UserStatus() *foundation.NSNumber {
+	return x.inner.UserStatus()
+}
+
+// SetUserStatus calls the underlying SetUserStatus.
+func (x *MTRDoorLockClusterSetUserParams) SetUserStatus(userStatus *foundation.NSNumber) {
+	x.inner.SetUserStatus(userStatus)
+}
+
+// UserType calls the underlying UserType.
+func (x *MTRDoorLockClusterSetUserParams) UserType() *foundation.NSNumber {
+	return x.inner.UserType()
+}
+
+// SetUserType calls the underlying SetUserType.
+func (x *MTRDoorLockClusterSetUserParams) SetUserType(userType *foundation.NSNumber) {
+	x.inner.SetUserType(userType)
+}
+
+// CredentialRule calls the underlying CredentialRule.
+func (x *MTRDoorLockClusterSetUserParams) CredentialRule() *foundation.NSNumber {
+	return x.inner.CredentialRule()
+}
+
+// SetCredentialRule calls the underlying SetCredentialRule.
+func (x *MTRDoorLockClusterSetUserParams) SetCredentialRule(credentialRule *foundation.NSNumber) {
+	x.inner.SetCredentialRule(credentialRule)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRDoorLockClusterSetUserParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRDoorLockClusterSetUserParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRDoorLockClusterSetUserParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRDoorLockClusterSetUserParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// UserUniqueId calls the underlying UserUniqueId.
+func (x *MTRDoorLockClusterSetUserParams) UserUniqueId() *foundation.NSNumber {
+	return x.inner.UserUniqueId()
+}
+
+// SetUserUniqueId calls the underlying SetUserUniqueId.
+func (x *MTRDoorLockClusterSetUserParams) SetUserUniqueId(userUniqueId *foundation.NSNumber) {
+	x.inner.SetUserUniqueId(userUniqueId)
+}
+
+// MTRDoorLockClusterSetUserParamsable is the interface implemented by [MTRDoorLockClusterSetUserParams], for mocking and DI.
+type MTRDoorLockClusterSetUserParamsable interface {
+	Unwrap() *raw.MTRDoorLockClusterSetUserParams
+	WithOperationType(operationType *foundation.NSNumber) *MTRDoorLockClusterSetUserParams
+	WithUserIndex(userIndex *foundation.NSNumber) *MTRDoorLockClusterSetUserParams
+	WithUserName(userName string) *MTRDoorLockClusterSetUserParams
+	WithUserUniqueID(userUniqueID *foundation.NSNumber) *MTRDoorLockClusterSetUserParams
+	WithUserStatus(userStatus *foundation.NSNumber) *MTRDoorLockClusterSetUserParams
+	WithUserType(userType *foundation.NSNumber) *MTRDoorLockClusterSetUserParams
+	WithCredentialRule(credentialRule *foundation.NSNumber) *MTRDoorLockClusterSetUserParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRDoorLockClusterSetUserParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRDoorLockClusterSetUserParams
+	WithUserUniqueId(userUniqueId *foundation.NSNumber) *MTRDoorLockClusterSetUserParams
+	OperationType() *foundation.NSNumber
+	SetOperationType(operationType *foundation.NSNumber)
+	UserIndex() *foundation.NSNumber
+	SetUserIndex(userIndex *foundation.NSNumber)
+	UserName() string
+	SetUserName(userName string)
+	UserUniqueID() *foundation.NSNumber
+	SetUserUniqueID(userUniqueID *foundation.NSNumber)
+	UserStatus() *foundation.NSNumber
+	SetUserStatus(userStatus *foundation.NSNumber)
+	UserType() *foundation.NSNumber
+	SetUserType(userType *foundation.NSNumber)
+	CredentialRule() *foundation.NSNumber
+	SetCredentialRule(credentialRule *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+	UserUniqueId() *foundation.NSNumber
+	SetUserUniqueId(userUniqueId *foundation.NSNumber)
+}
+
+var _ MTRDoorLockClusterSetUserParamsable = (*MTRDoorLockClusterSetUserParams)(nil)
 

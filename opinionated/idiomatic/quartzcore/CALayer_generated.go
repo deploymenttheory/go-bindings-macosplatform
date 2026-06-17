@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -359,17 +360,335 @@ func (x *Layer) WithConstraints(items ...*raw.CAConstraint) *Layer {
 	return x
 }
 
+// PresentationLayer calls the underlying PresentationLayer.
+func (x *Layer) PresentationLayer() *Layer {
+	_r := x.inner.PresentationLayer()
+	if _r == nil {
+		return nil
+	}
+	return &Layer{inner: _r}
+}
+
+// ModelLayer calls the underlying ModelLayer.
+func (x *Layer) ModelLayer() *Layer {
+	_r := x.inner.ModelLayer()
+	if _r == nil {
+		return nil
+	}
+	return &Layer{inner: _r}
+}
+
+// ShouldArchiveValueForKey calls the underlying ShouldArchiveValueForKey.
+func (x *Layer) ShouldArchiveValueForKey(key string) bool {
+	return x.inner.ShouldArchiveValueForKey(foundation.NSStringStringWithUTF8String(key))
+}
+
+// AffineTransform calls the underlying AffineTransform.
+func (x *Layer) AffineTransform() corefoundation.CGAffineTransform {
+	return x.inner.AffineTransform()
+}
+
+// SetAffineTransform calls the underlying SetAffineTransform.
+func (x *Layer) SetAffineTransform(m corefoundation.CGAffineTransform) {
+	x.inner.SetAffineTransform(m)
+}
+
+// ContentsAreFlipped calls the underlying ContentsAreFlipped.
+func (x *Layer) ContentsAreFlipped() bool {
+	return x.inner.ContentsAreFlipped()
+}
+
+// RemoveFromSuperlayer calls the underlying RemoveFromSuperlayer.
+func (x *Layer) RemoveFromSuperlayer() {
+	x.inner.RemoveFromSuperlayer()
+}
+
+// AddSublayer calls the underlying AddSublayer.
+func (x *Layer) AddSublayer(layer *raw.CALayer) {
+	x.inner.AddSublayer(layer)
+}
+
+// InsertSublayerAtIndex calls the underlying InsertSublayerAtIndex.
+func (x *Layer) InsertSublayerAtIndex(layer *raw.CALayer, idx uint) {
+	x.inner.InsertSublayerAtIndex(layer, idx)
+}
+
+// InsertSublayerBelow calls the underlying InsertSublayerBelow.
+func (x *Layer) InsertSublayerBelow(layer *raw.CALayer, sibling *raw.CALayer) {
+	x.inner.InsertSublayerBelow(layer, sibling)
+}
+
+// InsertSublayerAbove calls the underlying InsertSublayerAbove.
+func (x *Layer) InsertSublayerAbove(layer *raw.CALayer, sibling *raw.CALayer) {
+	x.inner.InsertSublayerAbove(layer, sibling)
+}
+
+// ReplaceSublayerWith calls the underlying ReplaceSublayerWith.
+func (x *Layer) ReplaceSublayerWith(oldLayer *raw.CALayer, newLayer *raw.CALayer) {
+	x.inner.ReplaceSublayerWith(oldLayer, newLayer)
+}
+
+// ConvertPointFromLayer calls the underlying ConvertPointFromLayer.
+func (x *Layer) ConvertPointFromLayer(p corefoundation.CGPoint, l *raw.CALayer) corefoundation.CGPoint {
+	return x.inner.ConvertPointFromLayer(p, l)
+}
+
+// ConvertPointToLayer calls the underlying ConvertPointToLayer.
+func (x *Layer) ConvertPointToLayer(p corefoundation.CGPoint, l *raw.CALayer) corefoundation.CGPoint {
+	return x.inner.ConvertPointToLayer(p, l)
+}
+
+// ConvertRectFromLayer calls the underlying ConvertRectFromLayer.
+func (x *Layer) ConvertRectFromLayer(r corefoundation.CGRect, l *raw.CALayer) corefoundation.CGRect {
+	return x.inner.ConvertRectFromLayer(r, l)
+}
+
+// ConvertRectToLayer calls the underlying ConvertRectToLayer.
+func (x *Layer) ConvertRectToLayer(r corefoundation.CGRect, l *raw.CALayer) corefoundation.CGRect {
+	return x.inner.ConvertRectToLayer(r, l)
+}
+
+// ConvertTimeFromLayer calls the underlying ConvertTimeFromLayer.
+func (x *Layer) ConvertTimeFromLayer(t float64, l *raw.CALayer) float64 {
+	return x.inner.ConvertTimeFromLayer(t, l)
+}
+
+// ConvertTimeToLayer calls the underlying ConvertTimeToLayer.
+func (x *Layer) ConvertTimeToLayer(t float64, l *raw.CALayer) float64 {
+	return x.inner.ConvertTimeToLayer(t, l)
+}
+
+// HitTest calls the underlying HitTest.
+func (x *Layer) HitTest(p corefoundation.CGPoint) *Layer {
+	_r := x.inner.HitTest(p)
+	if _r == nil {
+		return nil
+	}
+	return &Layer{inner: _r}
+}
+
+// ContainsPoint calls the underlying ContainsPoint.
+func (x *Layer) ContainsPoint(p corefoundation.CGPoint) bool {
+	return x.inner.ContainsPoint(p)
+}
+
+// Display calls the underlying Display.
+func (x *Layer) Display() {
+	x.inner.Display()
+}
+
+// SetNeedsDisplay calls the underlying SetNeedsDisplay.
+func (x *Layer) SetNeedsDisplay() {
+	x.inner.SetNeedsDisplay()
+}
+
+// SetNeedsDisplayInRect calls the underlying SetNeedsDisplayInRect.
+func (x *Layer) SetNeedsDisplayInRect(r corefoundation.CGRect) {
+	x.inner.SetNeedsDisplayInRect(r)
+}
+
+// NeedsDisplay calls the underlying NeedsDisplay.
+func (x *Layer) NeedsDisplay() bool {
+	return x.inner.NeedsDisplay()
+}
+
+// DisplayIfNeeded calls the underlying DisplayIfNeeded.
+func (x *Layer) DisplayIfNeeded() {
+	x.inner.DisplayIfNeeded()
+}
+
+// DrawInContext calls the underlying DrawInContext.
+func (x *Layer) DrawInContext(ctx unsafe.Pointer) {
+	x.inner.DrawInContext(ctx)
+}
+
+// RenderInContext calls the underlying RenderInContext.
+func (x *Layer) RenderInContext(ctx unsafe.Pointer) {
+	x.inner.RenderInContext(ctx)
+}
+
+// PreferredFrameSize calls the underlying PreferredFrameSize.
+func (x *Layer) PreferredFrameSize() corefoundation.CGSize {
+	return x.inner.PreferredFrameSize()
+}
+
+// SetNeedsLayout calls the underlying SetNeedsLayout.
+func (x *Layer) SetNeedsLayout() {
+	x.inner.SetNeedsLayout()
+}
+
+// NeedsLayout calls the underlying NeedsLayout.
+func (x *Layer) NeedsLayout() bool {
+	return x.inner.NeedsLayout()
+}
+
+// LayoutIfNeeded calls the underlying LayoutIfNeeded.
+func (x *Layer) LayoutIfNeeded() {
+	x.inner.LayoutIfNeeded()
+}
+
+// LayoutSublayers calls the underlying LayoutSublayers.
+func (x *Layer) LayoutSublayers() {
+	x.inner.LayoutSublayers()
+}
+
+// ResizeSublayersWithOldSize calls the underlying ResizeSublayersWithOldSize.
+func (x *Layer) ResizeSublayersWithOldSize(size corefoundation.CGSize) {
+	x.inner.ResizeSublayersWithOldSize(size)
+}
+
+// ResizeWithOldSuperlayerSize calls the underlying ResizeWithOldSuperlayerSize.
+func (x *Layer) ResizeWithOldSuperlayerSize(size corefoundation.CGSize) {
+	x.inner.ResizeWithOldSuperlayerSize(size)
+}
+
+// ActionForKey calls the underlying ActionForKey.
+func (x *Layer) ActionForKey(event string) raw.CAAction {
+	return x.inner.ActionForKey(foundation.NSStringStringWithUTF8String(event))
+}
+
+// AddAnimationForKey calls the underlying AddAnimationForKey.
+func (x *Layer) AddAnimationForKey(anim *raw.CAAnimation, key string) {
+	x.inner.AddAnimationForKey(anim, foundation.NSStringStringWithUTF8String(key))
+}
+
+// RemoveAllAnimations calls the underlying RemoveAllAnimations.
+func (x *Layer) RemoveAllAnimations() {
+	x.inner.RemoveAllAnimations()
+}
+
+// RemoveAnimationForKey calls the underlying RemoveAnimationForKey.
+func (x *Layer) RemoveAnimationForKey(key string) {
+	x.inner.RemoveAnimationForKey(foundation.NSStringStringWithUTF8String(key))
+}
+
 // AnimationKeys returns the collection as a Go slice.
-func (x *Layer) AnimationKeys() []*foundation.NSString {
+func (x *Layer) AnimationKeys() []string {
 	arr := x.inner.AnimationKeys()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// AnimationForKey calls the underlying AnimationForKey.
+func (x *Layer) AnimationForKey(key string) *Animation {
+	_r := x.inner.AnimationForKey(foundation.NSStringStringWithUTF8String(key))
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &Animation{inner: _r}
+}
+
+// Bounds calls the underlying Bounds.
+func (x *Layer) Bounds() corefoundation.CGRect {
+	return x.inner.Bounds()
+}
+
+// SetBounds calls the underlying SetBounds.
+func (x *Layer) SetBounds(bounds corefoundation.CGRect) {
+	x.inner.SetBounds(bounds)
+}
+
+// Position calls the underlying Position.
+func (x *Layer) Position() corefoundation.CGPoint {
+	return x.inner.Position()
+}
+
+// SetPosition calls the underlying SetPosition.
+func (x *Layer) SetPosition(position corefoundation.CGPoint) {
+	x.inner.SetPosition(position)
+}
+
+// ZPosition calls the underlying ZPosition.
+func (x *Layer) ZPosition() float64 {
+	return x.inner.ZPosition()
+}
+
+// SetZPosition calls the underlying SetZPosition.
+func (x *Layer) SetZPosition(zPosition float64) {
+	x.inner.SetZPosition(zPosition)
+}
+
+// AnchorPoint calls the underlying AnchorPoint.
+func (x *Layer) AnchorPoint() corefoundation.CGPoint {
+	return x.inner.AnchorPoint()
+}
+
+// SetAnchorPoint calls the underlying SetAnchorPoint.
+func (x *Layer) SetAnchorPoint(anchorPoint corefoundation.CGPoint) {
+	x.inner.SetAnchorPoint(anchorPoint)
+}
+
+// AnchorPointZ calls the underlying AnchorPointZ.
+func (x *Layer) AnchorPointZ() float64 {
+	return x.inner.AnchorPointZ()
+}
+
+// SetAnchorPointZ calls the underlying SetAnchorPointZ.
+func (x *Layer) SetAnchorPointZ(anchorPointZ float64) {
+	x.inner.SetAnchorPointZ(anchorPointZ)
+}
+
+// Transform calls the underlying Transform.
+func (x *Layer) Transform() raw.CATransform3D {
+	return x.inner.Transform()
+}
+
+// SetTransform calls the underlying SetTransform.
+func (x *Layer) SetTransform(transform raw.CATransform3D) {
+	x.inner.SetTransform(transform)
+}
+
+// Frame calls the underlying Frame.
+func (x *Layer) Frame() corefoundation.CGRect {
+	return x.inner.Frame()
+}
+
+// SetFrame calls the underlying SetFrame.
+func (x *Layer) SetFrame(frame corefoundation.CGRect) {
+	x.inner.SetFrame(frame)
+}
+
+// IsHidden calls the underlying IsHidden.
+func (x *Layer) IsHidden() bool {
+	return x.inner.IsHidden()
+}
+
+// SetHidden calls the underlying SetHidden.
+func (x *Layer) SetHidden(hidden bool) {
+	x.inner.SetHidden(hidden)
+}
+
+// IsDoubleSided calls the underlying IsDoubleSided.
+func (x *Layer) IsDoubleSided() bool {
+	return x.inner.IsDoubleSided()
+}
+
+// SetDoubleSided calls the underlying SetDoubleSided.
+func (x *Layer) SetDoubleSided(doubleSided bool) {
+	x.inner.SetDoubleSided(doubleSided)
+}
+
+// IsGeometryFlipped calls the underlying IsGeometryFlipped.
+func (x *Layer) IsGeometryFlipped() bool {
+	return x.inner.IsGeometryFlipped()
+}
+
+// SetGeometryFlipped calls the underlying SetGeometryFlipped.
+func (x *Layer) SetGeometryFlipped(geometryFlipped bool) {
+	x.inner.SetGeometryFlipped(geometryFlipped)
+}
+
+// Superlayer calls the underlying Superlayer.
+func (x *Layer) Superlayer() *Layer {
+	_r := x.inner.Superlayer()
+	if _r == nil {
+		return nil
+	}
+	return &Layer{inner: _r}
 }
 
 // Sublayers returns the collection as a Go slice.
@@ -378,11 +697,505 @@ func (x *Layer) Sublayers() []*raw.CALayer {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.CALayer, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CALayer {
+		return raw.CALayerFromID(purego.Retain(_id))
+	})
+}
+
+// SetSublayers calls the underlying SetSublayers.
+func (x *Layer) SetSublayers(sublayers *foundation.NSArray[*raw.CALayer]) {
+	x.inner.SetSublayers(sublayers)
+}
+
+// SublayerTransform calls the underlying SublayerTransform.
+func (x *Layer) SublayerTransform() raw.CATransform3D {
+	return x.inner.SublayerTransform()
+}
+
+// SetSublayerTransform calls the underlying SetSublayerTransform.
+func (x *Layer) SetSublayerTransform(sublayerTransform raw.CATransform3D) {
+	x.inner.SetSublayerTransform(sublayerTransform)
+}
+
+// Mask calls the underlying Mask.
+func (x *Layer) Mask() *Layer {
+	_r := x.inner.Mask()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &Layer{inner: _r}
+}
+
+// SetMask calls the underlying SetMask.
+func (x *Layer) SetMask(mask *raw.CALayer) {
+	x.inner.SetMask(mask)
+}
+
+// MasksToBounds calls the underlying MasksToBounds.
+func (x *Layer) MasksToBounds() bool {
+	return x.inner.MasksToBounds()
+}
+
+// SetMasksToBounds calls the underlying SetMasksToBounds.
+func (x *Layer) SetMasksToBounds(masksToBounds bool) {
+	x.inner.SetMasksToBounds(masksToBounds)
+}
+
+// Contents calls the underlying Contents.
+func (x *Layer) Contents() objc.ID {
+	return x.inner.Contents()
+}
+
+// SetContents calls the underlying SetContents.
+func (x *Layer) SetContents(contents objc.ID) {
+	x.inner.SetContents(contents)
+}
+
+// ContentsRect calls the underlying ContentsRect.
+func (x *Layer) ContentsRect() corefoundation.CGRect {
+	return x.inner.ContentsRect()
+}
+
+// SetContentsRect calls the underlying SetContentsRect.
+func (x *Layer) SetContentsRect(contentsRect corefoundation.CGRect) {
+	x.inner.SetContentsRect(contentsRect)
+}
+
+// ContentsGravity calls the underlying ContentsGravity.
+func (x *Layer) ContentsGravity() string {
+	_r := x.inner.ContentsGravity()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetContentsGravity calls the underlying SetContentsGravity.
+func (x *Layer) SetContentsGravity(contentsGravity *foundation.NSString) {
+	x.inner.SetContentsGravity(contentsGravity)
+}
+
+// ContentsScale calls the underlying ContentsScale.
+func (x *Layer) ContentsScale() float64 {
+	return x.inner.ContentsScale()
+}
+
+// SetContentsScale calls the underlying SetContentsScale.
+func (x *Layer) SetContentsScale(contentsScale float64) {
+	x.inner.SetContentsScale(contentsScale)
+}
+
+// ContentsCenter calls the underlying ContentsCenter.
+func (x *Layer) ContentsCenter() corefoundation.CGRect {
+	return x.inner.ContentsCenter()
+}
+
+// SetContentsCenter calls the underlying SetContentsCenter.
+func (x *Layer) SetContentsCenter(contentsCenter corefoundation.CGRect) {
+	x.inner.SetContentsCenter(contentsCenter)
+}
+
+// ContentsFormat calls the underlying ContentsFormat.
+func (x *Layer) ContentsFormat() string {
+	_r := x.inner.ContentsFormat()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetContentsFormat calls the underlying SetContentsFormat.
+func (x *Layer) SetContentsFormat(contentsFormat *foundation.NSString) {
+	x.inner.SetContentsFormat(contentsFormat)
+}
+
+// WantsExtendedDynamicRangeContent calls the underlying WantsExtendedDynamicRangeContent.
+func (x *Layer) WantsExtendedDynamicRangeContent() bool {
+	return x.inner.WantsExtendedDynamicRangeContent()
+}
+
+// SetWantsExtendedDynamicRangeContent calls the underlying SetWantsExtendedDynamicRangeContent.
+func (x *Layer) SetWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent bool) {
+	x.inner.SetWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent)
+}
+
+// ToneMapMode calls the underlying ToneMapMode.
+func (x *Layer) ToneMapMode() string {
+	_r := x.inner.ToneMapMode()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetToneMapMode calls the underlying SetToneMapMode.
+func (x *Layer) SetToneMapMode(toneMapMode *foundation.NSString) {
+	x.inner.SetToneMapMode(toneMapMode)
+}
+
+// PreferredDynamicRange calls the underlying PreferredDynamicRange.
+func (x *Layer) PreferredDynamicRange() string {
+	_r := x.inner.PreferredDynamicRange()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetPreferredDynamicRange calls the underlying SetPreferredDynamicRange.
+func (x *Layer) SetPreferredDynamicRange(preferredDynamicRange *foundation.NSString) {
+	x.inner.SetPreferredDynamicRange(preferredDynamicRange)
+}
+
+// ContentsHeadroom calls the underlying ContentsHeadroom.
+func (x *Layer) ContentsHeadroom() float64 {
+	return x.inner.ContentsHeadroom()
+}
+
+// SetContentsHeadroom calls the underlying SetContentsHeadroom.
+func (x *Layer) SetContentsHeadroom(contentsHeadroom float64) {
+	x.inner.SetContentsHeadroom(contentsHeadroom)
+}
+
+// MinificationFilter calls the underlying MinificationFilter.
+func (x *Layer) MinificationFilter() string {
+	_r := x.inner.MinificationFilter()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetMinificationFilter calls the underlying SetMinificationFilter.
+func (x *Layer) SetMinificationFilter(minificationFilter *foundation.NSString) {
+	x.inner.SetMinificationFilter(minificationFilter)
+}
+
+// MagnificationFilter calls the underlying MagnificationFilter.
+func (x *Layer) MagnificationFilter() string {
+	_r := x.inner.MagnificationFilter()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetMagnificationFilter calls the underlying SetMagnificationFilter.
+func (x *Layer) SetMagnificationFilter(magnificationFilter *foundation.NSString) {
+	x.inner.SetMagnificationFilter(magnificationFilter)
+}
+
+// MinificationFilterBias calls the underlying MinificationFilterBias.
+func (x *Layer) MinificationFilterBias() float32 {
+	return x.inner.MinificationFilterBias()
+}
+
+// SetMinificationFilterBias calls the underlying SetMinificationFilterBias.
+func (x *Layer) SetMinificationFilterBias(minificationFilterBias float32) {
+	x.inner.SetMinificationFilterBias(minificationFilterBias)
+}
+
+// IsOpaque calls the underlying IsOpaque.
+func (x *Layer) IsOpaque() bool {
+	return x.inner.IsOpaque()
+}
+
+// SetOpaque calls the underlying SetOpaque.
+func (x *Layer) SetOpaque(opaque bool) {
+	x.inner.SetOpaque(opaque)
+}
+
+// NeedsDisplayOnBoundsChange calls the underlying NeedsDisplayOnBoundsChange.
+func (x *Layer) NeedsDisplayOnBoundsChange() bool {
+	return x.inner.NeedsDisplayOnBoundsChange()
+}
+
+// SetNeedsDisplayOnBoundsChange calls the underlying SetNeedsDisplayOnBoundsChange.
+func (x *Layer) SetNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange bool) {
+	x.inner.SetNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange)
+}
+
+// DrawsAsynchronously calls the underlying DrawsAsynchronously.
+func (x *Layer) DrawsAsynchronously() bool {
+	return x.inner.DrawsAsynchronously()
+}
+
+// SetDrawsAsynchronously calls the underlying SetDrawsAsynchronously.
+func (x *Layer) SetDrawsAsynchronously(drawsAsynchronously bool) {
+	x.inner.SetDrawsAsynchronously(drawsAsynchronously)
+}
+
+// EdgeAntialiasingMask calls the underlying EdgeAntialiasingMask.
+func (x *Layer) EdgeAntialiasingMask() raw.CAEdgeAntialiasingMask {
+	return x.inner.EdgeAntialiasingMask()
+}
+
+// SetEdgeAntialiasingMask calls the underlying SetEdgeAntialiasingMask.
+func (x *Layer) SetEdgeAntialiasingMask(edgeAntialiasingMask raw.CAEdgeAntialiasingMask) {
+	x.inner.SetEdgeAntialiasingMask(edgeAntialiasingMask)
+}
+
+// AllowsEdgeAntialiasing calls the underlying AllowsEdgeAntialiasing.
+func (x *Layer) AllowsEdgeAntialiasing() bool {
+	return x.inner.AllowsEdgeAntialiasing()
+}
+
+// SetAllowsEdgeAntialiasing calls the underlying SetAllowsEdgeAntialiasing.
+func (x *Layer) SetAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) {
+	x.inner.SetAllowsEdgeAntialiasing(allowsEdgeAntialiasing)
+}
+
+// BackgroundColor calls the underlying BackgroundColor.
+func (x *Layer) BackgroundColor() unsafe.Pointer {
+	return x.inner.BackgroundColor()
+}
+
+// SetBackgroundColor calls the underlying SetBackgroundColor.
+func (x *Layer) SetBackgroundColor(backgroundColor unsafe.Pointer) {
+	x.inner.SetBackgroundColor(backgroundColor)
+}
+
+// CornerRadius calls the underlying CornerRadius.
+func (x *Layer) CornerRadius() float64 {
+	return x.inner.CornerRadius()
+}
+
+// SetCornerRadius calls the underlying SetCornerRadius.
+func (x *Layer) SetCornerRadius(cornerRadius float64) {
+	x.inner.SetCornerRadius(cornerRadius)
+}
+
+// MaskedCorners calls the underlying MaskedCorners.
+func (x *Layer) MaskedCorners() raw.CACornerMask {
+	return x.inner.MaskedCorners()
+}
+
+// SetMaskedCorners calls the underlying SetMaskedCorners.
+func (x *Layer) SetMaskedCorners(maskedCorners raw.CACornerMask) {
+	x.inner.SetMaskedCorners(maskedCorners)
+}
+
+// CornerCurve calls the underlying CornerCurve.
+func (x *Layer) CornerCurve() string {
+	_r := x.inner.CornerCurve()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetCornerCurve calls the underlying SetCornerCurve.
+func (x *Layer) SetCornerCurve(cornerCurve *foundation.NSString) {
+	x.inner.SetCornerCurve(cornerCurve)
+}
+
+// BorderWidth calls the underlying BorderWidth.
+func (x *Layer) BorderWidth() float64 {
+	return x.inner.BorderWidth()
+}
+
+// SetBorderWidth calls the underlying SetBorderWidth.
+func (x *Layer) SetBorderWidth(borderWidth float64) {
+	x.inner.SetBorderWidth(borderWidth)
+}
+
+// BorderColor calls the underlying BorderColor.
+func (x *Layer) BorderColor() unsafe.Pointer {
+	return x.inner.BorderColor()
+}
+
+// SetBorderColor calls the underlying SetBorderColor.
+func (x *Layer) SetBorderColor(borderColor unsafe.Pointer) {
+	x.inner.SetBorderColor(borderColor)
+}
+
+// Opacity calls the underlying Opacity.
+func (x *Layer) Opacity() float32 {
+	return x.inner.Opacity()
+}
+
+// SetOpacity calls the underlying SetOpacity.
+func (x *Layer) SetOpacity(opacity float32) {
+	x.inner.SetOpacity(opacity)
+}
+
+// AllowsGroupOpacity calls the underlying AllowsGroupOpacity.
+func (x *Layer) AllowsGroupOpacity() bool {
+	return x.inner.AllowsGroupOpacity()
+}
+
+// SetAllowsGroupOpacity calls the underlying SetAllowsGroupOpacity.
+func (x *Layer) SetAllowsGroupOpacity(allowsGroupOpacity bool) {
+	x.inner.SetAllowsGroupOpacity(allowsGroupOpacity)
+}
+
+// CompositingFilter calls the underlying CompositingFilter.
+func (x *Layer) CompositingFilter() objc.ID {
+	return x.inner.CompositingFilter()
+}
+
+// SetCompositingFilter calls the underlying SetCompositingFilter.
+func (x *Layer) SetCompositingFilter(compositingFilter objc.ID) {
+	x.inner.SetCompositingFilter(compositingFilter)
+}
+
+// Filters calls the underlying Filters.
+func (x *Layer) Filters() *foundation.NSArray[objc.ID] {
+	return x.inner.Filters()
+}
+
+// SetFilters calls the underlying SetFilters.
+func (x *Layer) SetFilters(filters *foundation.NSArray[objc.ID]) {
+	x.inner.SetFilters(filters)
+}
+
+// BackgroundFilters calls the underlying BackgroundFilters.
+func (x *Layer) BackgroundFilters() *foundation.NSArray[objc.ID] {
+	return x.inner.BackgroundFilters()
+}
+
+// SetBackgroundFilters calls the underlying SetBackgroundFilters.
+func (x *Layer) SetBackgroundFilters(backgroundFilters *foundation.NSArray[objc.ID]) {
+	x.inner.SetBackgroundFilters(backgroundFilters)
+}
+
+// ShouldRasterize calls the underlying ShouldRasterize.
+func (x *Layer) ShouldRasterize() bool {
+	return x.inner.ShouldRasterize()
+}
+
+// SetShouldRasterize calls the underlying SetShouldRasterize.
+func (x *Layer) SetShouldRasterize(shouldRasterize bool) {
+	x.inner.SetShouldRasterize(shouldRasterize)
+}
+
+// RasterizationScale calls the underlying RasterizationScale.
+func (x *Layer) RasterizationScale() float64 {
+	return x.inner.RasterizationScale()
+}
+
+// SetRasterizationScale calls the underlying SetRasterizationScale.
+func (x *Layer) SetRasterizationScale(rasterizationScale float64) {
+	x.inner.SetRasterizationScale(rasterizationScale)
+}
+
+// ShadowColor calls the underlying ShadowColor.
+func (x *Layer) ShadowColor() unsafe.Pointer {
+	return x.inner.ShadowColor()
+}
+
+// SetShadowColor calls the underlying SetShadowColor.
+func (x *Layer) SetShadowColor(shadowColor unsafe.Pointer) {
+	x.inner.SetShadowColor(shadowColor)
+}
+
+// ShadowOpacity calls the underlying ShadowOpacity.
+func (x *Layer) ShadowOpacity() float32 {
+	return x.inner.ShadowOpacity()
+}
+
+// SetShadowOpacity calls the underlying SetShadowOpacity.
+func (x *Layer) SetShadowOpacity(shadowOpacity float32) {
+	x.inner.SetShadowOpacity(shadowOpacity)
+}
+
+// ShadowOffset calls the underlying ShadowOffset.
+func (x *Layer) ShadowOffset() corefoundation.CGSize {
+	return x.inner.ShadowOffset()
+}
+
+// SetShadowOffset calls the underlying SetShadowOffset.
+func (x *Layer) SetShadowOffset(shadowOffset corefoundation.CGSize) {
+	x.inner.SetShadowOffset(shadowOffset)
+}
+
+// ShadowRadius calls the underlying ShadowRadius.
+func (x *Layer) ShadowRadius() float64 {
+	return x.inner.ShadowRadius()
+}
+
+// SetShadowRadius calls the underlying SetShadowRadius.
+func (x *Layer) SetShadowRadius(shadowRadius float64) {
+	x.inner.SetShadowRadius(shadowRadius)
+}
+
+// ShadowPath calls the underlying ShadowPath.
+func (x *Layer) ShadowPath() unsafe.Pointer {
+	return x.inner.ShadowPath()
+}
+
+// SetShadowPath calls the underlying SetShadowPath.
+func (x *Layer) SetShadowPath(shadowPath unsafe.Pointer) {
+	x.inner.SetShadowPath(shadowPath)
+}
+
+// AutoresizingMask calls the underlying AutoresizingMask.
+func (x *Layer) AutoresizingMask() raw.CAAutoresizingMask {
+	return x.inner.AutoresizingMask()
+}
+
+// SetAutoresizingMask calls the underlying SetAutoresizingMask.
+func (x *Layer) SetAutoresizingMask(autoresizingMask raw.CAAutoresizingMask) {
+	x.inner.SetAutoresizingMask(autoresizingMask)
+}
+
+// LayoutManager calls the underlying LayoutManager.
+func (x *Layer) LayoutManager() raw.CALayoutManager {
+	return x.inner.LayoutManager()
+}
+
+// SetLayoutManager calls the underlying SetLayoutManager.
+func (x *Layer) SetLayoutManager(layoutManager raw.CALayoutManager) {
+	x.inner.SetLayoutManager(layoutManager)
+}
+
+// Actions calls the underlying Actions.
+func (x *Layer) Actions() *foundation.NSDictionary[*foundation.NSString, raw.CAAction] {
+	return x.inner.Actions()
+}
+
+// SetActions calls the underlying SetActions.
+func (x *Layer) SetActions(actions *foundation.NSDictionary[*foundation.NSString, raw.CAAction]) {
+	x.inner.SetActions(actions)
+}
+
+// Name calls the underlying Name.
+func (x *Layer) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetName calls the underlying SetName.
+func (x *Layer) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
+// Delegate calls the underlying Delegate.
+func (x *Layer) Delegate() raw.CALayerDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *Layer) SetDelegate(delegate raw.CALayerDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// Style calls the underlying Style.
+func (x *Layer) Style() *foundation.NSDictionary[objc.ID, objc.ID] {
+	return x.inner.Style()
+}
+
+// SetStyle calls the underlying SetStyle.
+func (x *Layer) SetStyle(style *foundation.NSDictionary[objc.ID, objc.ID]) {
+	x.inner.SetStyle(style)
+}
+
+// AddConstraint calls the underlying AddConstraint.
+func (x *Layer) AddConstraint(c *raw.CAConstraint) {
+	x.inner.AddConstraint(c)
 }
 
 // Constraints returns the collection as a Go slice.
@@ -391,12 +1204,247 @@ func (x *Layer) Constraints() []*raw.CAConstraint {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.CAConstraint, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CAConstraint {
+		return raw.CAConstraintFromID(purego.Retain(_id))
+	})
+}
+
+// SetConstraints calls the underlying SetConstraints.
+func (x *Layer) SetConstraints(constraints *foundation.NSArray[*raw.CAConstraint]) {
+	x.inner.SetConstraints(constraints)
+}
+
+// ScrollPoint calls the underlying ScrollPoint.
+func (x *Layer) ScrollPoint(p corefoundation.CGPoint) {
+	x.inner.ScrollPoint(p)
+}
+
+// ScrollRectToVisible calls the underlying ScrollRectToVisible.
+func (x *Layer) ScrollRectToVisible(r corefoundation.CGRect) {
+	x.inner.ScrollRectToVisible(r)
+}
+
+// VisibleRect calls the underlying VisibleRect.
+func (x *Layer) VisibleRect() corefoundation.CGRect {
+	return x.inner.VisibleRect()
 }
 
 func (x *Layer) asLayer() *raw.CALayer { return x.inner }
+
+// Layerable is the interface implemented by [Layer], for mocking and DI.
+type Layerable interface {
+	Unwrap() *raw.CALayer
+	WithBounds(bounds corefoundation.CGRect) *Layer
+	WithPosition(position corefoundation.CGPoint) *Layer
+	WithZPosition(zPosition float64) *Layer
+	WithAnchorPoint(anchorPoint corefoundation.CGPoint) *Layer
+	WithAnchorPointZ(anchorPointZ float64) *Layer
+	WithTransform(transform raw.CATransform3D) *Layer
+	WithFrame(frame corefoundation.CGRect) *Layer
+	WithHidden(hidden bool) *Layer
+	WithDoubleSided(doubleSided bool) *Layer
+	WithGeometryFlipped(geometryFlipped bool) *Layer
+	WithSublayers(items ...LayerProvider) *Layer
+	WithSublayerTransform(sublayerTransform raw.CATransform3D) *Layer
+	WithMask(mask LayerProvider) *Layer
+	WithMasksToBounds(masksToBounds bool) *Layer
+	WithContents(contents objc.ID) *Layer
+	WithContentsRect(contentsRect corefoundation.CGRect) *Layer
+	WithContentsGravity(contentsGravity *foundation.NSString) *Layer
+	WithContentsScale(contentsScale float64) *Layer
+	WithContentsCenter(contentsCenter corefoundation.CGRect) *Layer
+	WithContentsFormat(contentsFormat *foundation.NSString) *Layer
+	WithWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent bool) *Layer
+	WithToneMapMode(toneMapMode *foundation.NSString) *Layer
+	WithPreferredDynamicRange(preferredDynamicRange *foundation.NSString) *Layer
+	WithContentsHeadroom(contentsHeadroom float64) *Layer
+	WithMinificationFilter(minificationFilter *foundation.NSString) *Layer
+	WithMagnificationFilter(magnificationFilter *foundation.NSString) *Layer
+	WithMinificationFilterBias(minificationFilterBias float32) *Layer
+	WithOpaque(opaque bool) *Layer
+	WithNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange bool) *Layer
+	WithDrawsAsynchronously(drawsAsynchronously bool) *Layer
+	WithEdgeAntialiasingMask(edgeAntialiasingMask raw.CAEdgeAntialiasingMask) *Layer
+	WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *Layer
+	WithCornerRadius(cornerRadius float64) *Layer
+	WithMaskedCorners(maskedCorners raw.CACornerMask) *Layer
+	WithCornerCurve(cornerCurve *foundation.NSString) *Layer
+	WithBorderWidth(borderWidth float64) *Layer
+	WithOpacity(opacity float32) *Layer
+	WithAllowsGroupOpacity(allowsGroupOpacity bool) *Layer
+	WithCompositingFilter(compositingFilter objc.ID) *Layer
+	WithShouldRasterize(shouldRasterize bool) *Layer
+	WithRasterizationScale(rasterizationScale float64) *Layer
+	WithShadowOpacity(shadowOpacity float32) *Layer
+	WithShadowOffset(shadowOffset corefoundation.CGSize) *Layer
+	WithShadowRadius(shadowRadius float64) *Layer
+	WithAutoresizingMask(autoresizingMask raw.CAAutoresizingMask) *Layer
+	WithLayoutManager(layoutManager raw.CALayoutManager) *Layer
+	WithActions(actions *foundation.NSDictionary[*foundation.NSString, raw.CAAction]) *Layer
+	WithName(name string) *Layer
+	WithDelegate(delegate raw.CALayerDelegate) *Layer
+	WithStyle(style *foundation.NSDictionary[objc.ID, objc.ID]) *Layer
+	WithConstraints(items ...*raw.CAConstraint) *Layer
+	PresentationLayer() *Layer
+	ModelLayer() *Layer
+	ShouldArchiveValueForKey(key string) bool
+	AffineTransform() corefoundation.CGAffineTransform
+	SetAffineTransform(m corefoundation.CGAffineTransform)
+	ContentsAreFlipped() bool
+	RemoveFromSuperlayer()
+	AddSublayer(layer *raw.CALayer)
+	InsertSublayerAtIndex(layer *raw.CALayer, idx uint)
+	InsertSublayerBelow(layer *raw.CALayer, sibling *raw.CALayer)
+	InsertSublayerAbove(layer *raw.CALayer, sibling *raw.CALayer)
+	ReplaceSublayerWith(oldLayer *raw.CALayer, newLayer *raw.CALayer)
+	ConvertPointFromLayer(p corefoundation.CGPoint, l *raw.CALayer) corefoundation.CGPoint
+	ConvertPointToLayer(p corefoundation.CGPoint, l *raw.CALayer) corefoundation.CGPoint
+	ConvertRectFromLayer(r corefoundation.CGRect, l *raw.CALayer) corefoundation.CGRect
+	ConvertRectToLayer(r corefoundation.CGRect, l *raw.CALayer) corefoundation.CGRect
+	ConvertTimeFromLayer(t float64, l *raw.CALayer) float64
+	ConvertTimeToLayer(t float64, l *raw.CALayer) float64
+	HitTest(p corefoundation.CGPoint) *Layer
+	ContainsPoint(p corefoundation.CGPoint) bool
+	Display()
+	SetNeedsDisplay()
+	SetNeedsDisplayInRect(r corefoundation.CGRect)
+	NeedsDisplay() bool
+	DisplayIfNeeded()
+	DrawInContext(ctx unsafe.Pointer)
+	RenderInContext(ctx unsafe.Pointer)
+	PreferredFrameSize() corefoundation.CGSize
+	SetNeedsLayout()
+	NeedsLayout() bool
+	LayoutIfNeeded()
+	LayoutSublayers()
+	ResizeSublayersWithOldSize(size corefoundation.CGSize)
+	ResizeWithOldSuperlayerSize(size corefoundation.CGSize)
+	ActionForKey(event string) raw.CAAction
+	AddAnimationForKey(anim *raw.CAAnimation, key string)
+	RemoveAllAnimations()
+	RemoveAnimationForKey(key string)
+	AnimationKeys() []string
+	AnimationForKey(key string) *Animation
+	Bounds() corefoundation.CGRect
+	SetBounds(bounds corefoundation.CGRect)
+	Position() corefoundation.CGPoint
+	SetPosition(position corefoundation.CGPoint)
+	ZPosition() float64
+	SetZPosition(zPosition float64)
+	AnchorPoint() corefoundation.CGPoint
+	SetAnchorPoint(anchorPoint corefoundation.CGPoint)
+	AnchorPointZ() float64
+	SetAnchorPointZ(anchorPointZ float64)
+	Transform() raw.CATransform3D
+	SetTransform(transform raw.CATransform3D)
+	Frame() corefoundation.CGRect
+	SetFrame(frame corefoundation.CGRect)
+	IsHidden() bool
+	SetHidden(hidden bool)
+	IsDoubleSided() bool
+	SetDoubleSided(doubleSided bool)
+	IsGeometryFlipped() bool
+	SetGeometryFlipped(geometryFlipped bool)
+	Superlayer() *Layer
+	Sublayers() []*raw.CALayer
+	SetSublayers(sublayers *foundation.NSArray[*raw.CALayer])
+	SublayerTransform() raw.CATransform3D
+	SetSublayerTransform(sublayerTransform raw.CATransform3D)
+	Mask() *Layer
+	SetMask(mask *raw.CALayer)
+	MasksToBounds() bool
+	SetMasksToBounds(masksToBounds bool)
+	Contents() objc.ID
+	SetContents(contents objc.ID)
+	ContentsRect() corefoundation.CGRect
+	SetContentsRect(contentsRect corefoundation.CGRect)
+	ContentsGravity() string
+	SetContentsGravity(contentsGravity *foundation.NSString)
+	ContentsScale() float64
+	SetContentsScale(contentsScale float64)
+	ContentsCenter() corefoundation.CGRect
+	SetContentsCenter(contentsCenter corefoundation.CGRect)
+	ContentsFormat() string
+	SetContentsFormat(contentsFormat *foundation.NSString)
+	WantsExtendedDynamicRangeContent() bool
+	SetWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent bool)
+	ToneMapMode() string
+	SetToneMapMode(toneMapMode *foundation.NSString)
+	PreferredDynamicRange() string
+	SetPreferredDynamicRange(preferredDynamicRange *foundation.NSString)
+	ContentsHeadroom() float64
+	SetContentsHeadroom(contentsHeadroom float64)
+	MinificationFilter() string
+	SetMinificationFilter(minificationFilter *foundation.NSString)
+	MagnificationFilter() string
+	SetMagnificationFilter(magnificationFilter *foundation.NSString)
+	MinificationFilterBias() float32
+	SetMinificationFilterBias(minificationFilterBias float32)
+	IsOpaque() bool
+	SetOpaque(opaque bool)
+	NeedsDisplayOnBoundsChange() bool
+	SetNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange bool)
+	DrawsAsynchronously() bool
+	SetDrawsAsynchronously(drawsAsynchronously bool)
+	EdgeAntialiasingMask() raw.CAEdgeAntialiasingMask
+	SetEdgeAntialiasingMask(edgeAntialiasingMask raw.CAEdgeAntialiasingMask)
+	AllowsEdgeAntialiasing() bool
+	SetAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool)
+	BackgroundColor() unsafe.Pointer
+	SetBackgroundColor(backgroundColor unsafe.Pointer)
+	CornerRadius() float64
+	SetCornerRadius(cornerRadius float64)
+	MaskedCorners() raw.CACornerMask
+	SetMaskedCorners(maskedCorners raw.CACornerMask)
+	CornerCurve() string
+	SetCornerCurve(cornerCurve *foundation.NSString)
+	BorderWidth() float64
+	SetBorderWidth(borderWidth float64)
+	BorderColor() unsafe.Pointer
+	SetBorderColor(borderColor unsafe.Pointer)
+	Opacity() float32
+	SetOpacity(opacity float32)
+	AllowsGroupOpacity() bool
+	SetAllowsGroupOpacity(allowsGroupOpacity bool)
+	CompositingFilter() objc.ID
+	SetCompositingFilter(compositingFilter objc.ID)
+	Filters() *foundation.NSArray[objc.ID]
+	SetFilters(filters *foundation.NSArray[objc.ID])
+	BackgroundFilters() *foundation.NSArray[objc.ID]
+	SetBackgroundFilters(backgroundFilters *foundation.NSArray[objc.ID])
+	ShouldRasterize() bool
+	SetShouldRasterize(shouldRasterize bool)
+	RasterizationScale() float64
+	SetRasterizationScale(rasterizationScale float64)
+	ShadowColor() unsafe.Pointer
+	SetShadowColor(shadowColor unsafe.Pointer)
+	ShadowOpacity() float32
+	SetShadowOpacity(shadowOpacity float32)
+	ShadowOffset() corefoundation.CGSize
+	SetShadowOffset(shadowOffset corefoundation.CGSize)
+	ShadowRadius() float64
+	SetShadowRadius(shadowRadius float64)
+	ShadowPath() unsafe.Pointer
+	SetShadowPath(shadowPath unsafe.Pointer)
+	AutoresizingMask() raw.CAAutoresizingMask
+	SetAutoresizingMask(autoresizingMask raw.CAAutoresizingMask)
+	LayoutManager() raw.CALayoutManager
+	SetLayoutManager(layoutManager raw.CALayoutManager)
+	Actions() *foundation.NSDictionary[*foundation.NSString, raw.CAAction]
+	SetActions(actions *foundation.NSDictionary[*foundation.NSString, raw.CAAction])
+	Name() string
+	SetName(name string)
+	Delegate() raw.CALayerDelegate
+	SetDelegate(delegate raw.CALayerDelegate)
+	Style() *foundation.NSDictionary[objc.ID, objc.ID]
+	SetStyle(style *foundation.NSDictionary[objc.ID, objc.ID])
+	AddConstraint(c *raw.CAConstraint)
+	Constraints() []*raw.CAConstraint
+	SetConstraints(constraints *foundation.NSArray[*raw.CAConstraint])
+	ScrollPoint(p corefoundation.CGPoint)
+	ScrollRectToVisible(r corefoundation.CGRect)
+	VisibleRect() corefoundation.CGRect
+}
+
+var _ Layerable = (*Layer)(nil)
 

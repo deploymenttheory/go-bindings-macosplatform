@@ -40,3 +40,28 @@ func NewCNNLossLabelsWithDeviceLossImageSizeLabelsImageWeightsImage(device metal
 	return &CNNLossLabels{inner: raw.MPSCNNLossLabelsFromID(_id)}
 }
 
+// LossImage calls the underlying LossImage.
+func (x *CNNLossLabels) LossImage() *mpscore.MPSImage {
+	return x.inner.LossImage()
+}
+
+// LabelsImage calls the underlying LabelsImage.
+func (x *CNNLossLabels) LabelsImage() *mpscore.MPSImage {
+	return x.inner.LabelsImage()
+}
+
+// WeightsImage calls the underlying WeightsImage.
+func (x *CNNLossLabels) WeightsImage() *mpscore.MPSImage {
+	return x.inner.WeightsImage()
+}
+
+// CNNLossLabelsable is the interface implemented by [CNNLossLabels], for mocking and DI.
+type CNNLossLabelsable interface {
+	Unwrap() *raw.MPSCNNLossLabels
+	LossImage() *mpscore.MPSImage
+	LabelsImage() *mpscore.MPSImage
+	WeightsImage() *mpscore.MPSImage
+}
+
+var _ CNNLossLabelsable = (*CNNLossLabels)(nil)
+

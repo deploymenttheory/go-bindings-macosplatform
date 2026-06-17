@@ -25,3 +25,10 @@ func NewAssertionHandler() *AssertionHandler {
 
 func (x *AssertionHandler) asObject() *raw.NSObject { return &x.inner.NSObject }
 
+// AssertionHandlerable is the interface implemented by [AssertionHandler], for mocking and DI.
+type AssertionHandlerable interface {
+	Unwrap() *raw.NSAssertionHandler
+}
+
+var _ AssertionHandlerable = (*AssertionHandler)(nil)
+

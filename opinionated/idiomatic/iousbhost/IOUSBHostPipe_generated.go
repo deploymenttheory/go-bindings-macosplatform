@@ -5,8 +5,10 @@
 package iousbhost
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/iousbhost"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // HostPipe wraps [raw.IOUSBHostPipe] with a fluent Go API.
@@ -23,16 +25,91 @@ func NewHostPipe() *HostPipe {
 	return &HostPipe{inner: raw.IOUSBHostPipeFromID(_id)}
 }
 
+// AdjustPipeWithDescriptorsError calls the underlying AdjustPipeWithDescriptorsError.
+func (x *HostPipe) AdjustPipeWithDescriptorsError(descriptors *raw.IOUSBHostIOSourceDescriptors) (bool, error) {
+	return x.inner.AdjustPipeWithDescriptorsError(descriptors)
+}
+
+// SetIdleTimeoutError calls the underlying SetIdleTimeoutError.
+func (x *HostPipe) SetIdleTimeoutError(idleTimeout float64) (bool, error) {
+	return x.inner.SetIdleTimeoutError(idleTimeout)
+}
+
 // ClearStall returns any validation error.
 func (x *HostPipe) ClearStall() error {
 	_, err := x.inner.ClearStallWithError()
 	return err
 }
 
+// SendControlRequestDataBytesTransferredCompletionTimeoutError calls the underlying SendControlRequestDataBytesTransferredCompletionTimeoutError.
+func (x *HostPipe) SendControlRequestDataBytesTransferredCompletionTimeoutError(request unsafe.Pointer, data *foundation.NSMutableData, bytesTransferred *uint, completionTimeout float64) (bool, error) {
+	return x.inner.SendControlRequestDataBytesTransferredCompletionTimeoutError(request, data, bytesTransferred, completionTimeout)
+}
+
+// SendControlRequestDataBytesTransferredError calls the underlying SendControlRequestDataBytesTransferredError.
+func (x *HostPipe) SendControlRequestDataBytesTransferredError(request unsafe.Pointer, data *foundation.NSMutableData, bytesTransferred *uint) (bool, error) {
+	return x.inner.SendControlRequestDataBytesTransferredError(request, data, bytesTransferred)
+}
+
+// SendControlRequestError calls the underlying SendControlRequestError.
+func (x *HostPipe) SendControlRequestError(request unsafe.Pointer) (bool, error) {
+	return x.inner.SendControlRequestError(request)
+}
+
+// EnqueueControlRequestDataCompletionTimeoutErrorCompletionHandler calls the underlying EnqueueControlRequestDataCompletionTimeoutErrorCompletionHandler.
+func (x *HostPipe) EnqueueControlRequestDataCompletionTimeoutErrorCompletionHandler(request unsafe.Pointer, data *foundation.NSMutableData, completionTimeout float64, error_ unsafe.Pointer, completionHandler func(int, uint)) bool {
+	return x.inner.EnqueueControlRequestDataCompletionTimeoutErrorCompletionHandler(request, data, completionTimeout, error_, completionHandler)
+}
+
+// EnqueueControlRequestDataErrorCompletionHandler calls the underlying EnqueueControlRequestDataErrorCompletionHandler.
+func (x *HostPipe) EnqueueControlRequestDataErrorCompletionHandler(request unsafe.Pointer, data *foundation.NSMutableData, error_ unsafe.Pointer, completionHandler func(int, uint)) bool {
+	return x.inner.EnqueueControlRequestDataErrorCompletionHandler(request, data, error_, completionHandler)
+}
+
+// EnqueueControlRequestErrorCompletionHandler calls the underlying EnqueueControlRequestErrorCompletionHandler.
+func (x *HostPipe) EnqueueControlRequestErrorCompletionHandler(request unsafe.Pointer, error_ unsafe.Pointer, completionHandler func(int, uint)) bool {
+	return x.inner.EnqueueControlRequestErrorCompletionHandler(request, error_, completionHandler)
+}
+
+// AbortWithOptionError calls the underlying AbortWithOptionError.
+func (x *HostPipe) AbortWithOptionError(option raw.IOUSBHostAbortOption) (bool, error) {
+	return x.inner.AbortWithOptionError(option)
+}
+
 // Abort returns any validation error.
 func (x *HostPipe) Abort() error {
 	_, err := x.inner.AbortWithError()
 	return err
+}
+
+// SendIORequestWithDataBytesTransferredCompletionTimeoutError calls the underlying SendIORequestWithDataBytesTransferredCompletionTimeoutError.
+func (x *HostPipe) SendIORequestWithDataBytesTransferredCompletionTimeoutError(data *foundation.NSMutableData, bytesTransferred *uint, completionTimeout float64) (bool, error) {
+	return x.inner.SendIORequestWithDataBytesTransferredCompletionTimeoutError(data, bytesTransferred, completionTimeout)
+}
+
+// EnqueueIORequestWithDataCompletionTimeoutErrorCompletionHandler calls the underlying EnqueueIORequestWithDataCompletionTimeoutErrorCompletionHandler.
+func (x *HostPipe) EnqueueIORequestWithDataCompletionTimeoutErrorCompletionHandler(data *foundation.NSMutableData, completionTimeout float64, error_ unsafe.Pointer, completionHandler func(int, uint)) bool {
+	return x.inner.EnqueueIORequestWithDataCompletionTimeoutErrorCompletionHandler(data, completionTimeout, error_, completionHandler)
+}
+
+// SendIORequestWithDataFrameListFrameListCountFirstFrameNumberError calls the underlying SendIORequestWithDataFrameListFrameListCountFirstFrameNumberError.
+func (x *HostPipe) SendIORequestWithDataFrameListFrameListCountFirstFrameNumberError(data *foundation.NSMutableData, frameList *raw.IOUSBHostIsochronousFrame, frameListCount uint, firstFrameNumber uint64) (bool, error) {
+	return x.inner.SendIORequestWithDataFrameListFrameListCountFirstFrameNumberError(data, frameList, frameListCount, firstFrameNumber)
+}
+
+// EnqueueIORequestWithDataFrameListFrameListCountFirstFrameNumberErrorCompletionHandler calls the underlying EnqueueIORequestWithDataFrameListFrameListCountFirstFrameNumberErrorCompletionHandler.
+func (x *HostPipe) EnqueueIORequestWithDataFrameListFrameListCountFirstFrameNumberErrorCompletionHandler(data *foundation.NSMutableData, frameList *raw.IOUSBHostIsochronousFrame, frameListCount uint, firstFrameNumber uint64, error_ unsafe.Pointer, completionHandler func(int, *raw.IOUSBHostIsochronousFrame)) bool {
+	return x.inner.EnqueueIORequestWithDataFrameListFrameListCountFirstFrameNumberErrorCompletionHandler(data, frameList, frameListCount, firstFrameNumber, error_, completionHandler)
+}
+
+// SendIORequestWithDataTransactionListTransactionListCountFirstFrameNumberOptionsError calls the underlying SendIORequestWithDataTransactionListTransactionListCountFirstFrameNumberOptionsError.
+func (x *HostPipe) SendIORequestWithDataTransactionListTransactionListCountFirstFrameNumberOptionsError(data *foundation.NSMutableData, transactionList *raw.IOUSBHostIsochronousTransaction, transactionListCount uint, firstFrameNumber uint64, options raw.IOUSBHostIsochronousTransferOptions) (bool, error) {
+	return x.inner.SendIORequestWithDataTransactionListTransactionListCountFirstFrameNumberOptionsError(data, transactionList, transactionListCount, firstFrameNumber, options)
+}
+
+// EnqueueIORequestWithDataTransactionListTransactionListCountFirstFrameNumberOptionsErrorCompletionHandler calls the underlying EnqueueIORequestWithDataTransactionListTransactionListCountFirstFrameNumberOptionsErrorCompletionHandler.
+func (x *HostPipe) EnqueueIORequestWithDataTransactionListTransactionListCountFirstFrameNumberOptionsErrorCompletionHandler(data *foundation.NSMutableData, transactionList *raw.IOUSBHostIsochronousTransaction, transactionListCount uint, firstFrameNumber uint64, options raw.IOUSBHostIsochronousTransferOptions, error_ unsafe.Pointer, completionHandler func(int, *raw.IOUSBHostIsochronousTransaction)) bool {
+	return x.inner.EnqueueIORequestWithDataTransactionListTransactionListCountFirstFrameNumberOptionsErrorCompletionHandler(data, transactionList, transactionListCount, firstFrameNumber, options, error_, completionHandler)
 }
 
 // EnableStreams returns any validation error.
@@ -47,5 +124,62 @@ func (x *HostPipe) DisableStreams() error {
 	return err
 }
 
+// CopyStreamWithStreamIDError calls the underlying CopyStreamWithStreamIDError.
+func (x *HostPipe) CopyStreamWithStreamIDError(streamID uint) (*HostStream, error) {
+	_r, _err := x.inner.CopyStreamWithStreamIDError(streamID)
+	if _err != nil {
+		return nil, _err
+	}
+	if _r == nil {
+		return nil, nil
+	}
+	return &HostStream{inner: _r}, nil
+}
+
+// OriginalDescriptors calls the underlying OriginalDescriptors.
+func (x *HostPipe) OriginalDescriptors() *raw.IOUSBHostIOSourceDescriptors {
+	return x.inner.OriginalDescriptors()
+}
+
+// Descriptors calls the underlying Descriptors.
+func (x *HostPipe) Descriptors() *raw.IOUSBHostIOSourceDescriptors {
+	return x.inner.Descriptors()
+}
+
+// IdleTimeout calls the underlying IdleTimeout.
+func (x *HostPipe) IdleTimeout() float64 {
+	return x.inner.IdleTimeout()
+}
+
 func (x *HostPipe) asHostIOSource() *raw.IOUSBHostIOSource { return &x.inner.IOUSBHostIOSource }
+
+// HostPipeable is the interface implemented by [HostPipe], for mocking and DI.
+type HostPipeable interface {
+	Unwrap() *raw.IOUSBHostPipe
+	AdjustPipeWithDescriptorsError(descriptors *raw.IOUSBHostIOSourceDescriptors) (bool, error)
+	SetIdleTimeoutError(idleTimeout float64) (bool, error)
+	ClearStall() error
+	SendControlRequestDataBytesTransferredCompletionTimeoutError(request unsafe.Pointer, data *foundation.NSMutableData, bytesTransferred *uint, completionTimeout float64) (bool, error)
+	SendControlRequestDataBytesTransferredError(request unsafe.Pointer, data *foundation.NSMutableData, bytesTransferred *uint) (bool, error)
+	SendControlRequestError(request unsafe.Pointer) (bool, error)
+	EnqueueControlRequestDataCompletionTimeoutErrorCompletionHandler(request unsafe.Pointer, data *foundation.NSMutableData, completionTimeout float64, error_ unsafe.Pointer, completionHandler func(int, uint)) bool
+	EnqueueControlRequestDataErrorCompletionHandler(request unsafe.Pointer, data *foundation.NSMutableData, error_ unsafe.Pointer, completionHandler func(int, uint)) bool
+	EnqueueControlRequestErrorCompletionHandler(request unsafe.Pointer, error_ unsafe.Pointer, completionHandler func(int, uint)) bool
+	AbortWithOptionError(option raw.IOUSBHostAbortOption) (bool, error)
+	Abort() error
+	SendIORequestWithDataBytesTransferredCompletionTimeoutError(data *foundation.NSMutableData, bytesTransferred *uint, completionTimeout float64) (bool, error)
+	EnqueueIORequestWithDataCompletionTimeoutErrorCompletionHandler(data *foundation.NSMutableData, completionTimeout float64, error_ unsafe.Pointer, completionHandler func(int, uint)) bool
+	SendIORequestWithDataFrameListFrameListCountFirstFrameNumberError(data *foundation.NSMutableData, frameList *raw.IOUSBHostIsochronousFrame, frameListCount uint, firstFrameNumber uint64) (bool, error)
+	EnqueueIORequestWithDataFrameListFrameListCountFirstFrameNumberErrorCompletionHandler(data *foundation.NSMutableData, frameList *raw.IOUSBHostIsochronousFrame, frameListCount uint, firstFrameNumber uint64, error_ unsafe.Pointer, completionHandler func(int, *raw.IOUSBHostIsochronousFrame)) bool
+	SendIORequestWithDataTransactionListTransactionListCountFirstFrameNumberOptionsError(data *foundation.NSMutableData, transactionList *raw.IOUSBHostIsochronousTransaction, transactionListCount uint, firstFrameNumber uint64, options raw.IOUSBHostIsochronousTransferOptions) (bool, error)
+	EnqueueIORequestWithDataTransactionListTransactionListCountFirstFrameNumberOptionsErrorCompletionHandler(data *foundation.NSMutableData, transactionList *raw.IOUSBHostIsochronousTransaction, transactionListCount uint, firstFrameNumber uint64, options raw.IOUSBHostIsochronousTransferOptions, error_ unsafe.Pointer, completionHandler func(int, *raw.IOUSBHostIsochronousTransaction)) bool
+	EnableStreams() error
+	DisableStreams() error
+	CopyStreamWithStreamIDError(streamID uint) (*HostStream, error)
+	OriginalDescriptors() *raw.IOUSBHostIOSourceDescriptors
+	Descriptors() *raw.IOUSBHostIOSourceDescriptors
+	IdleTimeout() float64
+}
+
+var _ HostPipeable = (*HostPipe)(nil)
 

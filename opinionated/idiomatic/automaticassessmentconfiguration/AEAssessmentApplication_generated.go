@@ -7,6 +7,7 @@ package automaticassessmentconfiguration
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/automaticassessmentconfiguration"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -37,4 +38,44 @@ func (x *AssessmentApplication) WithRequiresSignatureValidation(requiresSignatur
 	x.inner.SetRequiresSignatureValidation(requiresSignatureValidation)
 	return x
 }
+
+// BundleIdentifier calls the underlying BundleIdentifier.
+func (x *AssessmentApplication) BundleIdentifier() string {
+	_r := x.inner.BundleIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// TeamIdentifier calls the underlying TeamIdentifier.
+func (x *AssessmentApplication) TeamIdentifier() string {
+	_r := x.inner.TeamIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// RequiresSignatureValidation calls the underlying RequiresSignatureValidation.
+func (x *AssessmentApplication) RequiresSignatureValidation() bool {
+	return x.inner.RequiresSignatureValidation()
+}
+
+// SetRequiresSignatureValidation calls the underlying SetRequiresSignatureValidation.
+func (x *AssessmentApplication) SetRequiresSignatureValidation(requiresSignatureValidation bool) {
+	x.inner.SetRequiresSignatureValidation(requiresSignatureValidation)
+}
+
+// AssessmentApplicationable is the interface implemented by [AssessmentApplication], for mocking and DI.
+type AssessmentApplicationable interface {
+	Unwrap() *raw.AEAssessmentApplication
+	WithRequiresSignatureValidation(requiresSignatureValidation bool) *AssessmentApplication
+	BundleIdentifier() string
+	TeamIdentifier() string
+	RequiresSignatureValidation() bool
+	SetRequiresSignatureValidation(requiresSignatureValidation bool)
+}
+
+var _ AssessmentApplicationable = (*AssessmentApplication)(nil)
 

@@ -31,3 +31,10 @@ func (x *MTRClusterWakeOnLan) asMTRGenericCluster() *raw.MTRGenericCluster { ret
 
 func (x *MTRClusterWakeOnLan) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRClusterWakeOnLAN.MTRGenericCluster.MTRCluster }
 
+// MTRClusterWakeOnLanable is the interface implemented by [MTRClusterWakeOnLan], for mocking and DI.
+type MTRClusterWakeOnLanable interface {
+	Unwrap() *raw.MTRClusterWakeOnLan
+}
+
+var _ MTRClusterWakeOnLanable = (*MTRClusterWakeOnLan)(nil)
+

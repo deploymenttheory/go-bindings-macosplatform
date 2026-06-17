@@ -23,3 +23,10 @@ func NewPlugIn() *PlugIn {
 	return &PlugIn{inner: raw.CIPlugInFromID(_id)}
 }
 
+// PlugInable is the interface implemented by [PlugIn], for mocking and DI.
+type PlugInable interface {
+	Unwrap() *raw.CIPlugIn
+}
+
+var _ PlugInable = (*PlugIn)(nil)
+

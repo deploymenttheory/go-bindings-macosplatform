@@ -27,3 +27,10 @@ func (x *DirectionalGamepad) asMicroGamepad() *raw.GCMicroGamepad { return &x.in
 
 func (x *DirectionalGamepad) asPhysicalInputProfile() *raw.GCPhysicalInputProfile { return &x.inner.GCMicroGamepad.GCPhysicalInputProfile }
 
+// DirectionalGamepadable is the interface implemented by [DirectionalGamepad], for mocking and DI.
+type DirectionalGamepadable interface {
+	Unwrap() *raw.GCDirectionalGamepad
+}
+
+var _ DirectionalGamepadable = (*DirectionalGamepad)(nil)
+

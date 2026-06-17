@@ -23,5 +23,32 @@ func NewRacingWheelInput() *RacingWheelInput {
 	return &RacingWheelInput{inner: raw.GCRacingWheelInputFromID(_id)}
 }
 
+// Capture calls the underlying Capture.
+func (x *RacingWheelInput) Capture() *RacingWheelInputState {
+	_r := x.inner.Capture()
+	if _r == nil {
+		return nil
+	}
+	return &RacingWheelInputState{inner: _r}
+}
+
+// NextInputState calls the underlying NextInputState.
+func (x *RacingWheelInput) NextInputState() *RacingWheelInputState {
+	_r := x.inner.NextInputState()
+	if _r == nil {
+		return nil
+	}
+	return &RacingWheelInputState{inner: _r}
+}
+
 func (x *RacingWheelInput) asRacingWheelInputState() *raw.GCRacingWheelInputState { return &x.inner.GCRacingWheelInputState }
+
+// RacingWheelInputable is the interface implemented by [RacingWheelInput], for mocking and DI.
+type RacingWheelInputable interface {
+	Unwrap() *raw.GCRacingWheelInput
+	Capture() *RacingWheelInputState
+	NextInputState() *RacingWheelInputState
+}
+
+var _ RacingWheelInputable = (*RacingWheelInput)(nil)
 

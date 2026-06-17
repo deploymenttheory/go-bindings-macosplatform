@@ -29,3 +29,10 @@ func (x *NNSubtractionGradientNode) asNNGradientFilterNode() *raw.MPSNNGradientF
 
 func (x *NNSubtractionGradientNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNArithmeticGradientNode.MPSNNGradientFilterNode.MPSNNFilterNode }
 
+// NNSubtractionGradientNodeable is the interface implemented by [NNSubtractionGradientNode], for mocking and DI.
+type NNSubtractionGradientNodeable interface {
+	Unwrap() *raw.MPSNNSubtractionGradientNode
+}
+
+var _ NNSubtractionGradientNodeable = (*NNSubtractionGradientNode)(nil)
+

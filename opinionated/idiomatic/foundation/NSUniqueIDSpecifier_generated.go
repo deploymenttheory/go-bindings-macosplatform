@@ -38,7 +38,27 @@ func (x *UniqueIDSpecifier) WithUniqueID(uniqueID objc.ID) *UniqueIDSpecifier {
 	return x
 }
 
+// UniqueID calls the underlying UniqueID.
+func (x *UniqueIDSpecifier) UniqueID() objc.ID {
+	return x.inner.UniqueID()
+}
+
+// SetUniqueID calls the underlying SetUniqueID.
+func (x *UniqueIDSpecifier) SetUniqueID(uniqueID objc.ID) {
+	x.inner.SetUniqueID(uniqueID)
+}
+
 func (x *UniqueIDSpecifier) asScriptObjectSpecifier() *raw.NSScriptObjectSpecifier { return &x.inner.NSScriptObjectSpecifier }
 
 func (x *UniqueIDSpecifier) asObject() *raw.NSObject { return &x.inner.NSScriptObjectSpecifier.NSObject }
+
+// UniqueIDSpecifierable is the interface implemented by [UniqueIDSpecifier], for mocking and DI.
+type UniqueIDSpecifierable interface {
+	Unwrap() *raw.NSUniqueIDSpecifier
+	WithUniqueID(uniqueID objc.ID) *UniqueIDSpecifier
+	UniqueID() objc.ID
+	SetUniqueID(uniqueID objc.ID)
+}
+
+var _ UniqueIDSpecifierable = (*UniqueIDSpecifier)(nil)
 

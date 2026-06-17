@@ -6,6 +6,8 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +24,31 @@ func NewMediaPresentationSetting() *MediaPresentationSetting {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMediaPresentationSetting")), objc.RegisterName("new"))
 	return &MediaPresentationSetting{inner: raw.AVMediaPresentationSettingFromID(_id)}
 }
+
+// DisplayNameForLocaleIdentifier calls the underlying DisplayNameForLocaleIdentifier.
+func (x *MediaPresentationSetting) DisplayNameForLocaleIdentifier(localeIdentifier string) string {
+	_r := x.inner.DisplayNameForLocaleIdentifier(foundation.NSStringStringWithUTF8String(localeIdentifier))
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// MediaCharacteristic calls the underlying MediaCharacteristic.
+func (x *MediaPresentationSetting) MediaCharacteristic() string {
+	_r := x.inner.MediaCharacteristic()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// MediaPresentationSettingable is the interface implemented by [MediaPresentationSetting], for mocking and DI.
+type MediaPresentationSettingable interface {
+	Unwrap() *raw.AVMediaPresentationSetting
+	DisplayNameForLocaleIdentifier(localeIdentifier string) string
+	MediaCharacteristic() string
+}
+
+var _ MediaPresentationSettingable = (*MediaPresentationSetting)(nil)
 

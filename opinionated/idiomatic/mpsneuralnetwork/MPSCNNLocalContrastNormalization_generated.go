@@ -69,5 +69,90 @@ func (x *CNNLocalContrastNormalization) WithPs(ps float32) *CNNLocalContrastNorm
 	return x
 }
 
+// Alpha calls the underlying Alpha.
+func (x *CNNLocalContrastNormalization) Alpha() float32 {
+	return x.inner.Alpha()
+}
+
+// SetAlpha calls the underlying SetAlpha.
+func (x *CNNLocalContrastNormalization) SetAlpha(alpha float32) {
+	x.inner.SetAlpha(alpha)
+}
+
+// Beta calls the underlying Beta.
+func (x *CNNLocalContrastNormalization) Beta() float32 {
+	return x.inner.Beta()
+}
+
+// SetBeta calls the underlying SetBeta.
+func (x *CNNLocalContrastNormalization) SetBeta(beta float32) {
+	x.inner.SetBeta(beta)
+}
+
+// Delta calls the underlying Delta.
+func (x *CNNLocalContrastNormalization) Delta() float32 {
+	return x.inner.Delta()
+}
+
+// SetDelta calls the underlying SetDelta.
+func (x *CNNLocalContrastNormalization) SetDelta(delta float32) {
+	x.inner.SetDelta(delta)
+}
+
+// P0 calls the underlying P0.
+func (x *CNNLocalContrastNormalization) P0() float32 {
+	return x.inner.P0()
+}
+
+// SetP0 calls the underlying SetP0.
+func (x *CNNLocalContrastNormalization) SetP0(p0 float32) {
+	x.inner.SetP0(p0)
+}
+
+// Pm calls the underlying Pm.
+func (x *CNNLocalContrastNormalization) Pm() float32 {
+	return x.inner.Pm()
+}
+
+// SetPm calls the underlying SetPm.
+func (x *CNNLocalContrastNormalization) SetPm(pm float32) {
+	x.inner.SetPm(pm)
+}
+
+// Ps calls the underlying Ps.
+func (x *CNNLocalContrastNormalization) Ps() float32 {
+	return x.inner.Ps()
+}
+
+// SetPs calls the underlying SetPs.
+func (x *CNNLocalContrastNormalization) SetPs(ps float32) {
+	x.inner.SetPs(ps)
+}
+
 func (x *CNNLocalContrastNormalization) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSCNNKernel }
+
+// CNNLocalContrastNormalizationable is the interface implemented by [CNNLocalContrastNormalization], for mocking and DI.
+type CNNLocalContrastNormalizationable interface {
+	Unwrap() *raw.MPSCNNLocalContrastNormalization
+	WithAlpha(alpha float32) *CNNLocalContrastNormalization
+	WithBeta(beta float32) *CNNLocalContrastNormalization
+	WithDelta(delta float32) *CNNLocalContrastNormalization
+	WithP0(p0 float32) *CNNLocalContrastNormalization
+	WithPm(pm float32) *CNNLocalContrastNormalization
+	WithPs(ps float32) *CNNLocalContrastNormalization
+	Alpha() float32
+	SetAlpha(alpha float32)
+	Beta() float32
+	SetBeta(beta float32)
+	Delta() float32
+	SetDelta(delta float32)
+	P0() float32
+	SetP0(p0 float32)
+	Pm() float32
+	SetPm(pm float32)
+	Ps() float32
+	SetPs(ps float32)
+}
+
+var _ CNNLocalContrastNormalizationable = (*CNNLocalContrastNormalization)(nil)
 

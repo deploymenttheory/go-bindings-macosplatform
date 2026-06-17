@@ -28,3 +28,10 @@ func (x *NNPadGradientNode) asNNGradientFilterNode() *raw.MPSNNGradientFilterNod
 
 func (x *NNPadGradientNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNGradientFilterNode.MPSNNFilterNode }
 
+// NNPadGradientNodeable is the interface implemented by [NNPadGradientNode], for mocking and DI.
+type NNPadGradientNodeable interface {
+	Unwrap() *raw.MPSNNPadGradientNode
+}
+
+var _ NNPadGradientNodeable = (*NNPadGradientNode)(nil)
+

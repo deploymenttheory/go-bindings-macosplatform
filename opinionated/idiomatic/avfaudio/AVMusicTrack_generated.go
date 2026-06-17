@@ -89,3 +89,205 @@ func (x *MusicTrack) WithUsesAutomatedParameters(usesAutomatedParameters bool) *
 	return x
 }
 
+// DestinationAudioUnit calls the underlying DestinationAudioUnit.
+func (x *MusicTrack) DestinationAudioUnit() *AudioUnit {
+	_r := x.inner.DestinationAudioUnit()
+	if _r == nil {
+		return nil
+	}
+	return &AudioUnit{inner: _r}
+}
+
+// SetDestinationAudioUnit calls the underlying SetDestinationAudioUnit.
+func (x *MusicTrack) SetDestinationAudioUnit(destinationAudioUnit *raw.AVAudioUnit) {
+	x.inner.SetDestinationAudioUnit(destinationAudioUnit)
+}
+
+// DestinationMIDIEndpoint calls the underlying DestinationMIDIEndpoint.
+func (x *MusicTrack) DestinationMIDIEndpoint() uint {
+	return x.inner.DestinationMIDIEndpoint()
+}
+
+// SetDestinationMIDIEndpoint calls the underlying SetDestinationMIDIEndpoint.
+func (x *MusicTrack) SetDestinationMIDIEndpoint(destinationMIDIEndpoint uint) {
+	x.inner.SetDestinationMIDIEndpoint(destinationMIDIEndpoint)
+}
+
+// LoopRange calls the underlying LoopRange.
+func (x *MusicTrack) LoopRange() raw.AVBeatRange {
+	return x.inner.LoopRange()
+}
+
+// SetLoopRange calls the underlying SetLoopRange.
+func (x *MusicTrack) SetLoopRange(loopRange raw.AVBeatRange) {
+	x.inner.SetLoopRange(loopRange)
+}
+
+// IsLoopingEnabled calls the underlying IsLoopingEnabled.
+func (x *MusicTrack) IsLoopingEnabled() bool {
+	return x.inner.IsLoopingEnabled()
+}
+
+// SetLoopingEnabled calls the underlying SetLoopingEnabled.
+func (x *MusicTrack) SetLoopingEnabled(loopingEnabled bool) {
+	x.inner.SetLoopingEnabled(loopingEnabled)
+}
+
+// NumberOfLoops calls the underlying NumberOfLoops.
+func (x *MusicTrack) NumberOfLoops() int {
+	return x.inner.NumberOfLoops()
+}
+
+// SetNumberOfLoops calls the underlying SetNumberOfLoops.
+func (x *MusicTrack) SetNumberOfLoops(numberOfLoops int) {
+	x.inner.SetNumberOfLoops(numberOfLoops)
+}
+
+// OffsetTime calls the underlying OffsetTime.
+func (x *MusicTrack) OffsetTime() float64 {
+	return x.inner.OffsetTime()
+}
+
+// SetOffsetTime calls the underlying SetOffsetTime.
+func (x *MusicTrack) SetOffsetTime(offsetTime float64) {
+	x.inner.SetOffsetTime(offsetTime)
+}
+
+// IsMuted calls the underlying IsMuted.
+func (x *MusicTrack) IsMuted() bool {
+	return x.inner.IsMuted()
+}
+
+// SetMuted calls the underlying SetMuted.
+func (x *MusicTrack) SetMuted(muted bool) {
+	x.inner.SetMuted(muted)
+}
+
+// IsSoloed calls the underlying IsSoloed.
+func (x *MusicTrack) IsSoloed() bool {
+	return x.inner.IsSoloed()
+}
+
+// SetSoloed calls the underlying SetSoloed.
+func (x *MusicTrack) SetSoloed(soloed bool) {
+	x.inner.SetSoloed(soloed)
+}
+
+// LengthInBeats calls the underlying LengthInBeats.
+func (x *MusicTrack) LengthInBeats() float64 {
+	return x.inner.LengthInBeats()
+}
+
+// SetLengthInBeats calls the underlying SetLengthInBeats.
+func (x *MusicTrack) SetLengthInBeats(lengthInBeats float64) {
+	x.inner.SetLengthInBeats(lengthInBeats)
+}
+
+// LengthInSeconds calls the underlying LengthInSeconds.
+func (x *MusicTrack) LengthInSeconds() float64 {
+	return x.inner.LengthInSeconds()
+}
+
+// SetLengthInSeconds calls the underlying SetLengthInSeconds.
+func (x *MusicTrack) SetLengthInSeconds(lengthInSeconds float64) {
+	x.inner.SetLengthInSeconds(lengthInSeconds)
+}
+
+// TimeResolution calls the underlying TimeResolution.
+func (x *MusicTrack) TimeResolution() uint {
+	return x.inner.TimeResolution()
+}
+
+// AddEventAtBeat calls the underlying AddEventAtBeat.
+func (x *MusicTrack) AddEventAtBeat(event *raw.AVMusicEvent, beat float64) {
+	x.inner.AddEventAtBeat(event, beat)
+}
+
+// MoveEventsInRangeByAmount calls the underlying MoveEventsInRangeByAmount.
+func (x *MusicTrack) MoveEventsInRangeByAmount(range_ raw.AVBeatRange, beatAmount float64) {
+	x.inner.MoveEventsInRangeByAmount(range_, beatAmount)
+}
+
+// ClearEventsInRange calls the underlying ClearEventsInRange.
+func (x *MusicTrack) ClearEventsInRange(range_ raw.AVBeatRange) {
+	x.inner.ClearEventsInRange(range_)
+}
+
+// CutEventsInRange calls the underlying CutEventsInRange.
+func (x *MusicTrack) CutEventsInRange(range_ raw.AVBeatRange) {
+	x.inner.CutEventsInRange(range_)
+}
+
+// CopyEventsInRangeFromTrackInsertAtBeat calls the underlying CopyEventsInRangeFromTrackInsertAtBeat.
+func (x *MusicTrack) CopyEventsInRangeFromTrackInsertAtBeat(range_ raw.AVBeatRange, sourceTrack *raw.AVMusicTrack, insertStartBeat float64) {
+	x.inner.CopyEventsInRangeFromTrackInsertAtBeat(range_, sourceTrack, insertStartBeat)
+}
+
+// CopyAndMergeEventsInRangeFromTrackMergeAtBeat calls the underlying CopyAndMergeEventsInRangeFromTrackMergeAtBeat.
+func (x *MusicTrack) CopyAndMergeEventsInRangeFromTrackMergeAtBeat(range_ raw.AVBeatRange, sourceTrack *raw.AVMusicTrack, mergeStartBeat float64) {
+	x.inner.CopyAndMergeEventsInRangeFromTrackMergeAtBeat(range_, sourceTrack, mergeStartBeat)
+}
+
+// EnumerateEventsInRangeUsing calls the underlying EnumerateEventsInRangeUsing.
+func (x *MusicTrack) EnumerateEventsInRangeUsing(range_ raw.AVBeatRange, block func(*raw.AVMusicEvent, *float64, *bool)) {
+	x.inner.EnumerateEventsInRangeUsing(range_, block)
+}
+
+// UsesAutomatedParameters calls the underlying UsesAutomatedParameters.
+func (x *MusicTrack) UsesAutomatedParameters() bool {
+	return x.inner.UsesAutomatedParameters()
+}
+
+// SetUsesAutomatedParameters calls the underlying SetUsesAutomatedParameters.
+func (x *MusicTrack) SetUsesAutomatedParameters(usesAutomatedParameters bool) {
+	x.inner.SetUsesAutomatedParameters(usesAutomatedParameters)
+}
+
+// MusicTrackable is the interface implemented by [MusicTrack], for mocking and DI.
+type MusicTrackable interface {
+	Unwrap() *raw.AVMusicTrack
+	WithDestinationAudioUnit(destinationAudioUnit AudioUnitProvider) *MusicTrack
+	WithDestinationMIDIEndpoint(destinationMIDIEndpoint uint) *MusicTrack
+	WithLoopRange(loopRange raw.AVBeatRange) *MusicTrack
+	WithLoopingEnabled(loopingEnabled bool) *MusicTrack
+	WithNumberOfLoops(numberOfLoops int) *MusicTrack
+	WithOffsetTime(offsetTime float64) *MusicTrack
+	WithMuted(muted bool) *MusicTrack
+	WithSoloed(soloed bool) *MusicTrack
+	WithLengthInBeats(lengthInBeats float64) *MusicTrack
+	WithLengthInSeconds(lengthInSeconds float64) *MusicTrack
+	WithUsesAutomatedParameters(usesAutomatedParameters bool) *MusicTrack
+	DestinationAudioUnit() *AudioUnit
+	SetDestinationAudioUnit(destinationAudioUnit *raw.AVAudioUnit)
+	DestinationMIDIEndpoint() uint
+	SetDestinationMIDIEndpoint(destinationMIDIEndpoint uint)
+	LoopRange() raw.AVBeatRange
+	SetLoopRange(loopRange raw.AVBeatRange)
+	IsLoopingEnabled() bool
+	SetLoopingEnabled(loopingEnabled bool)
+	NumberOfLoops() int
+	SetNumberOfLoops(numberOfLoops int)
+	OffsetTime() float64
+	SetOffsetTime(offsetTime float64)
+	IsMuted() bool
+	SetMuted(muted bool)
+	IsSoloed() bool
+	SetSoloed(soloed bool)
+	LengthInBeats() float64
+	SetLengthInBeats(lengthInBeats float64)
+	LengthInSeconds() float64
+	SetLengthInSeconds(lengthInSeconds float64)
+	TimeResolution() uint
+	AddEventAtBeat(event *raw.AVMusicEvent, beat float64)
+	MoveEventsInRangeByAmount(range_ raw.AVBeatRange, beatAmount float64)
+	ClearEventsInRange(range_ raw.AVBeatRange)
+	CutEventsInRange(range_ raw.AVBeatRange)
+	CopyEventsInRangeFromTrackInsertAtBeat(range_ raw.AVBeatRange, sourceTrack *raw.AVMusicTrack, insertStartBeat float64)
+	CopyAndMergeEventsInRangeFromTrackMergeAtBeat(range_ raw.AVBeatRange, sourceTrack *raw.AVMusicTrack, mergeStartBeat float64)
+	EnumerateEventsInRangeUsing(range_ raw.AVBeatRange, block func(*raw.AVMusicEvent, *float64, *bool))
+	UsesAutomatedParameters() bool
+	SetUsesAutomatedParameters(usesAutomatedParameters bool)
+}
+
+var _ MusicTrackable = (*MusicTrack)(nil)
+

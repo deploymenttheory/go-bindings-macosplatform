@@ -25,3 +25,10 @@ func NewChangeRequest() *ChangeRequest {
 
 func (x *ChangeRequest) asChangeRequest() *raw.PHChangeRequest { return x.inner }
 
+// ChangeRequestable is the interface implemented by [ChangeRequest], for mocking and DI.
+type ChangeRequestable interface {
+	Unwrap() *raw.PHChangeRequest
+}
+
+var _ ChangeRequestable = (*ChangeRequest)(nil)
+

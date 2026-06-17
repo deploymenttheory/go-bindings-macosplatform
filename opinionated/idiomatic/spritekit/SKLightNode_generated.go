@@ -60,5 +60,90 @@ func (x *LightNode) WithCategoryBitMask(categoryBitMask uint32) *LightNode {
 	return x
 }
 
+// IsEnabled calls the underlying IsEnabled.
+func (x *LightNode) IsEnabled() bool {
+	return x.inner.IsEnabled()
+}
+
+// SetEnabled calls the underlying SetEnabled.
+func (x *LightNode) SetEnabled(enabled bool) {
+	x.inner.SetEnabled(enabled)
+}
+
+// LightColor calls the underlying LightColor.
+func (x *LightNode) LightColor() *appkit.NSColor {
+	return x.inner.LightColor()
+}
+
+// SetLightColor calls the underlying SetLightColor.
+func (x *LightNode) SetLightColor(lightColor *appkit.NSColor) {
+	x.inner.SetLightColor(lightColor)
+}
+
+// AmbientColor calls the underlying AmbientColor.
+func (x *LightNode) AmbientColor() *appkit.NSColor {
+	return x.inner.AmbientColor()
+}
+
+// SetAmbientColor calls the underlying SetAmbientColor.
+func (x *LightNode) SetAmbientColor(ambientColor *appkit.NSColor) {
+	x.inner.SetAmbientColor(ambientColor)
+}
+
+// ShadowColor calls the underlying ShadowColor.
+func (x *LightNode) ShadowColor() *appkit.NSColor {
+	return x.inner.ShadowColor()
+}
+
+// SetShadowColor calls the underlying SetShadowColor.
+func (x *LightNode) SetShadowColor(shadowColor *appkit.NSColor) {
+	x.inner.SetShadowColor(shadowColor)
+}
+
+// Falloff calls the underlying Falloff.
+func (x *LightNode) Falloff() float64 {
+	return x.inner.Falloff()
+}
+
+// SetFalloff calls the underlying SetFalloff.
+func (x *LightNode) SetFalloff(falloff float64) {
+	x.inner.SetFalloff(falloff)
+}
+
+// CategoryBitMask calls the underlying CategoryBitMask.
+func (x *LightNode) CategoryBitMask() uint32 {
+	return x.inner.CategoryBitMask()
+}
+
+// SetCategoryBitMask calls the underlying SetCategoryBitMask.
+func (x *LightNode) SetCategoryBitMask(categoryBitMask uint32) {
+	x.inner.SetCategoryBitMask(categoryBitMask)
+}
+
 func (x *LightNode) asNode() *raw.SKNode { return &x.inner.SKNode }
+
+// LightNodeable is the interface implemented by [LightNode], for mocking and DI.
+type LightNodeable interface {
+	Unwrap() *raw.SKLightNode
+	WithEnabled(enabled bool) *LightNode
+	WithLightColor(lightColor *appkit.NSColor) *LightNode
+	WithAmbientColor(ambientColor *appkit.NSColor) *LightNode
+	WithShadowColor(shadowColor *appkit.NSColor) *LightNode
+	WithFalloff(falloff float64) *LightNode
+	WithCategoryBitMask(categoryBitMask uint32) *LightNode
+	IsEnabled() bool
+	SetEnabled(enabled bool)
+	LightColor() *appkit.NSColor
+	SetLightColor(lightColor *appkit.NSColor)
+	AmbientColor() *appkit.NSColor
+	SetAmbientColor(ambientColor *appkit.NSColor)
+	ShadowColor() *appkit.NSColor
+	SetShadowColor(shadowColor *appkit.NSColor)
+	Falloff() float64
+	SetFalloff(falloff float64)
+	CategoryBitMask() uint32
+	SetCategoryBitMask(categoryBitMask uint32)
+}
+
+var _ LightNodeable = (*LightNode)(nil)
 

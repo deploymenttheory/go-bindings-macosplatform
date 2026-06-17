@@ -48,3 +48,62 @@ func (x *MTRNetworkCommissioningClusterConnectNetworkParams) WithServerSideProce
 	return x
 }
 
+// NetworkID calls the underlying NetworkID.
+func (x *MTRNetworkCommissioningClusterConnectNetworkParams) NetworkID() *foundation.NSData {
+	return x.inner.NetworkID()
+}
+
+// SetNetworkID calls the underlying SetNetworkID.
+func (x *MTRNetworkCommissioningClusterConnectNetworkParams) SetNetworkID(networkID *foundation.NSData) {
+	x.inner.SetNetworkID(networkID)
+}
+
+// Breadcrumb calls the underlying Breadcrumb.
+func (x *MTRNetworkCommissioningClusterConnectNetworkParams) Breadcrumb() *foundation.NSNumber {
+	return x.inner.Breadcrumb()
+}
+
+// SetBreadcrumb calls the underlying SetBreadcrumb.
+func (x *MTRNetworkCommissioningClusterConnectNetworkParams) SetBreadcrumb(breadcrumb *foundation.NSNumber) {
+	x.inner.SetBreadcrumb(breadcrumb)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRNetworkCommissioningClusterConnectNetworkParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRNetworkCommissioningClusterConnectNetworkParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRNetworkCommissioningClusterConnectNetworkParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRNetworkCommissioningClusterConnectNetworkParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRNetworkCommissioningClusterConnectNetworkParamsable is the interface implemented by [MTRNetworkCommissioningClusterConnectNetworkParams], for mocking and DI.
+type MTRNetworkCommissioningClusterConnectNetworkParamsable interface {
+	Unwrap() *raw.MTRNetworkCommissioningClusterConnectNetworkParams
+	WithNetworkID(networkID *foundation.NSData) *MTRNetworkCommissioningClusterConnectNetworkParams
+	WithBreadcrumb(breadcrumb *foundation.NSNumber) *MTRNetworkCommissioningClusterConnectNetworkParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRNetworkCommissioningClusterConnectNetworkParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRNetworkCommissioningClusterConnectNetworkParams
+	NetworkID() *foundation.NSData
+	SetNetworkID(networkID *foundation.NSData)
+	Breadcrumb() *foundation.NSNumber
+	SetBreadcrumb(breadcrumb *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRNetworkCommissioningClusterConnectNetworkParamsable = (*MTRNetworkCommissioningClusterConnectNetworkParams)(nil)
+

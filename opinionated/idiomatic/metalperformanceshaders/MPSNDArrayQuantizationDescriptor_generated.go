@@ -6,6 +6,8 @@ package metalperformanceshaders
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsndarray"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +24,23 @@ func NewNDArrayQuantizationDescriptor() *NDArrayQuantizationDescriptor {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNDArrayQuantizationDescriptor")), objc.RegisterName("new"))
 	return &NDArrayQuantizationDescriptor{inner: raw.MPSNDArrayQuantizationDescriptorFromID(_id)}
 }
+
+// QuantizationDataType calls the underlying QuantizationDataType.
+func (x *NDArrayQuantizationDescriptor) QuantizationDataType() mpscore.MPSDataType {
+	return x.inner.QuantizationDataType()
+}
+
+// QuantizationScheme calls the underlying QuantizationScheme.
+func (x *NDArrayQuantizationDescriptor) QuantizationScheme() mpsndarray.MPSNDArrayQuantizationScheme {
+	return x.inner.QuantizationScheme()
+}
+
+// NDArrayQuantizationDescriptorable is the interface implemented by [NDArrayQuantizationDescriptor], for mocking and DI.
+type NDArrayQuantizationDescriptorable interface {
+	Unwrap() *raw.MPSNDArrayQuantizationDescriptor
+	QuantizationDataType() mpscore.MPSDataType
+	QuantizationScheme() mpsndarray.MPSNDArrayQuantizationScheme
+}
+
+var _ NDArrayQuantizationDescriptorable = (*NDArrayQuantizationDescriptor)(nil)
 

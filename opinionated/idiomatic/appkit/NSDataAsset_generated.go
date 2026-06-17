@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -31,4 +32,37 @@ func NewDataAssetWithNameBundle(name *foundation.NSString, bundle *foundation.NS
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:bundle:"), name.Ptr(), bundle.Ptr())
 	return &DataAsset{inner: raw.NSDataAssetFromID(_id)}
 }
+
+// Name calls the underlying Name.
+func (x *DataAsset) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Data calls the underlying Data.
+func (x *DataAsset) Data() *foundation.NSData {
+	return x.inner.Data()
+}
+
+// TypeIdentifier calls the underlying TypeIdentifier.
+func (x *DataAsset) TypeIdentifier() string {
+	_r := x.inner.TypeIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// DataAssetable is the interface implemented by [DataAsset], for mocking and DI.
+type DataAssetable interface {
+	Unwrap() *raw.NSDataAsset
+	Name() string
+	Data() *foundation.NSData
+	TypeIdentifier() string
+}
+
+var _ DataAssetable = (*DataAsset)(nil)
 

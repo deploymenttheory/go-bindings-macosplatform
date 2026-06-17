@@ -36,7 +36,50 @@ func (x *CNNConvolutionNode) WithAccumulatorPrecision(accumulatorPrecision raw.M
 	return x
 }
 
+// TrainingStyle calls the underlying TrainingStyle.
+func (x *CNNConvolutionNode) TrainingStyle() raw.MPSNNTrainingStyle {
+	return x.inner.TrainingStyle()
+}
+
+// SetTrainingStyle calls the underlying SetTrainingStyle.
+func (x *CNNConvolutionNode) SetTrainingStyle(trainingStyle raw.MPSNNTrainingStyle) {
+	x.inner.SetTrainingStyle(trainingStyle)
+}
+
+// AccumulatorPrecision calls the underlying AccumulatorPrecision.
+func (x *CNNConvolutionNode) AccumulatorPrecision() raw.MPSNNConvolutionAccumulatorPrecisionOption {
+	return x.inner.AccumulatorPrecision()
+}
+
+// SetAccumulatorPrecision calls the underlying SetAccumulatorPrecision.
+func (x *CNNConvolutionNode) SetAccumulatorPrecision(accumulatorPrecision raw.MPSNNConvolutionAccumulatorPrecisionOption) {
+	x.inner.SetAccumulatorPrecision(accumulatorPrecision)
+}
+
+// ConvolutionGradientState calls the underlying ConvolutionGradientState.
+func (x *CNNConvolutionNode) ConvolutionGradientState() *CNNConvolutionGradientStateNode {
+	_r := x.inner.ConvolutionGradientState()
+	if _r == nil {
+		return nil
+	}
+	return &CNNConvolutionGradientStateNode{inner: _r}
+}
+
 func (x *CNNConvolutionNode) asCNNConvolutionNode() *raw.MPSCNNConvolutionNode { return x.inner }
 
 func (x *CNNConvolutionNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNFilterNode }
+
+// CNNConvolutionNodeable is the interface implemented by [CNNConvolutionNode], for mocking and DI.
+type CNNConvolutionNodeable interface {
+	Unwrap() *raw.MPSCNNConvolutionNode
+	WithTrainingStyle(trainingStyle raw.MPSNNTrainingStyle) *CNNConvolutionNode
+	WithAccumulatorPrecision(accumulatorPrecision raw.MPSNNConvolutionAccumulatorPrecisionOption) *CNNConvolutionNode
+	TrainingStyle() raw.MPSNNTrainingStyle
+	SetTrainingStyle(trainingStyle raw.MPSNNTrainingStyle)
+	AccumulatorPrecision() raw.MPSNNConvolutionAccumulatorPrecisionOption
+	SetAccumulatorPrecision(accumulatorPrecision raw.MPSNNConvolutionAccumulatorPrecisionOption)
+	ConvolutionGradientState() *CNNConvolutionGradientStateNode
+}
+
+var _ CNNConvolutionNodeable = (*CNNConvolutionNode)(nil)
 

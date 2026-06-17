@@ -29,5 +29,29 @@ func (x *DistanceModelParameters) WithFadeOutParameters(fadeOutParameters *raw.P
 	return x
 }
 
+// FadeOutParameters calls the underlying FadeOutParameters.
+func (x *DistanceModelParameters) FadeOutParameters() *DistanceModelFadeOutParameters {
+	_r := x.inner.FadeOutParameters()
+	if _r == nil {
+		return nil
+	}
+	return &DistanceModelFadeOutParameters{inner: _r}
+}
+
+// SetFadeOutParameters calls the underlying SetFadeOutParameters.
+func (x *DistanceModelParameters) SetFadeOutParameters(fadeOutParameters *raw.PHASEDistanceModelFadeOutParameters) {
+	x.inner.SetFadeOutParameters(fadeOutParameters)
+}
+
 func (x *DistanceModelParameters) asDistanceModelParameters() *raw.PHASEDistanceModelParameters { return x.inner }
+
+// DistanceModelParametersable is the interface implemented by [DistanceModelParameters], for mocking and DI.
+type DistanceModelParametersable interface {
+	Unwrap() *raw.PHASEDistanceModelParameters
+	WithFadeOutParameters(fadeOutParameters *raw.PHASEDistanceModelFadeOutParameters) *DistanceModelParameters
+	FadeOutParameters() *DistanceModelFadeOutParameters
+	SetFadeOutParameters(fadeOutParameters *raw.PHASEDistanceModelFadeOutParameters)
+}
+
+var _ DistanceModelParametersable = (*DistanceModelParameters)(nil)
 

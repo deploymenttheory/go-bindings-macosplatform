@@ -46,9 +46,146 @@ func NewDecimalNumberWithStringLocale(numberValue string, locale objc.ID) *Decim
 	return &DecimalNumber{inner: raw.NSDecimalNumberFromID(_id)}
 }
 
+// DecimalNumberByAdding calls the underlying DecimalNumberByAdding.
+func (x *DecimalNumber) DecimalNumberByAdding(decimalNumber *raw.NSDecimalNumber) *DecimalNumber {
+	_r := x.inner.DecimalNumberByAdding(decimalNumber)
+	if _r == nil {
+		return nil
+	}
+	return &DecimalNumber{inner: _r}
+}
+
+// DecimalNumberByAddingWithBehavior calls the underlying DecimalNumberByAddingWithBehavior.
+func (x *DecimalNumber) DecimalNumberByAddingWithBehavior(decimalNumber *raw.NSDecimalNumber, behavior raw.NSDecimalNumberBehaviors) *DecimalNumber {
+	_r := x.inner.DecimalNumberByAddingWithBehavior(decimalNumber, behavior)
+	if _r == nil {
+		return nil
+	}
+	return &DecimalNumber{inner: _r}
+}
+
+// DecimalNumberBySubtracting calls the underlying DecimalNumberBySubtracting.
+func (x *DecimalNumber) DecimalNumberBySubtracting(decimalNumber *raw.NSDecimalNumber) *DecimalNumber {
+	_r := x.inner.DecimalNumberBySubtracting(decimalNumber)
+	if _r == nil {
+		return nil
+	}
+	return &DecimalNumber{inner: _r}
+}
+
+// DecimalNumberBySubtractingWithBehavior calls the underlying DecimalNumberBySubtractingWithBehavior.
+func (x *DecimalNumber) DecimalNumberBySubtractingWithBehavior(decimalNumber *raw.NSDecimalNumber, behavior raw.NSDecimalNumberBehaviors) *DecimalNumber {
+	_r := x.inner.DecimalNumberBySubtractingWithBehavior(decimalNumber, behavior)
+	if _r == nil {
+		return nil
+	}
+	return &DecimalNumber{inner: _r}
+}
+
+// DecimalNumberByMultiplyingBy calls the underlying DecimalNumberByMultiplyingBy.
+func (x *DecimalNumber) DecimalNumberByMultiplyingBy(decimalNumber *raw.NSDecimalNumber) *DecimalNumber {
+	_r := x.inner.DecimalNumberByMultiplyingBy(decimalNumber)
+	if _r == nil {
+		return nil
+	}
+	return &DecimalNumber{inner: _r}
+}
+
+// DecimalNumberByMultiplyingByWithBehavior calls the underlying DecimalNumberByMultiplyingByWithBehavior.
+func (x *DecimalNumber) DecimalNumberByMultiplyingByWithBehavior(decimalNumber *raw.NSDecimalNumber, behavior raw.NSDecimalNumberBehaviors) *DecimalNumber {
+	_r := x.inner.DecimalNumberByMultiplyingByWithBehavior(decimalNumber, behavior)
+	if _r == nil {
+		return nil
+	}
+	return &DecimalNumber{inner: _r}
+}
+
+// DecimalNumberByDividingBy calls the underlying DecimalNumberByDividingBy.
+func (x *DecimalNumber) DecimalNumberByDividingBy(decimalNumber *raw.NSDecimalNumber) *DecimalNumber {
+	_r := x.inner.DecimalNumberByDividingBy(decimalNumber)
+	if _r == nil {
+		return nil
+	}
+	return &DecimalNumber{inner: _r}
+}
+
+// DecimalNumberByDividingByWithBehavior calls the underlying DecimalNumberByDividingByWithBehavior.
+func (x *DecimalNumber) DecimalNumberByDividingByWithBehavior(decimalNumber *raw.NSDecimalNumber, behavior raw.NSDecimalNumberBehaviors) *DecimalNumber {
+	_r := x.inner.DecimalNumberByDividingByWithBehavior(decimalNumber, behavior)
+	if _r == nil {
+		return nil
+	}
+	return &DecimalNumber{inner: _r}
+}
+
+// DecimalNumberByRaisingToPower calls the underlying DecimalNumberByRaisingToPower.
+func (x *DecimalNumber) DecimalNumberByRaisingToPower(power uint) *DecimalNumber {
+	_r := x.inner.DecimalNumberByRaisingToPower(power)
+	if _r == nil {
+		return nil
+	}
+	return &DecimalNumber{inner: _r}
+}
+
+// DecimalNumberByRaisingToPowerWithBehavior calls the underlying DecimalNumberByRaisingToPowerWithBehavior.
+func (x *DecimalNumber) DecimalNumberByRaisingToPowerWithBehavior(power uint, behavior raw.NSDecimalNumberBehaviors) *DecimalNumber {
+	_r := x.inner.DecimalNumberByRaisingToPowerWithBehavior(power, behavior)
+	if _r == nil {
+		return nil
+	}
+	return &DecimalNumber{inner: _r}
+}
+
+// DecimalNumberByMultiplyingByPowerOf10 calls the underlying DecimalNumberByMultiplyingByPowerOf10.
+func (x *DecimalNumber) DecimalNumberByMultiplyingByPowerOf10(power int16) *DecimalNumber {
+	_r := x.inner.DecimalNumberByMultiplyingByPowerOf10(power)
+	if _r == nil {
+		return nil
+	}
+	return &DecimalNumber{inner: _r}
+}
+
+// DecimalNumberByMultiplyingByPowerOf10WithBehavior calls the underlying DecimalNumberByMultiplyingByPowerOf10WithBehavior.
+func (x *DecimalNumber) DecimalNumberByMultiplyingByPowerOf10WithBehavior(power int16, behavior raw.NSDecimalNumberBehaviors) *DecimalNumber {
+	_r := x.inner.DecimalNumberByMultiplyingByPowerOf10WithBehavior(power, behavior)
+	if _r == nil {
+		return nil
+	}
+	return &DecimalNumber{inner: _r}
+}
+
+// DecimalNumberByRoundingAccordingToBehavior calls the underlying DecimalNumberByRoundingAccordingToBehavior.
+func (x *DecimalNumber) DecimalNumberByRoundingAccordingToBehavior(behavior raw.NSDecimalNumberBehaviors) *DecimalNumber {
+	_r := x.inner.DecimalNumberByRoundingAccordingToBehavior(behavior)
+	if _r == nil {
+		return nil
+	}
+	return &DecimalNumber{inner: _r}
+}
+
 func (x *DecimalNumber) asNumber() *raw.NSNumber { return &x.inner.NSNumber }
 
 func (x *DecimalNumber) asValue() *raw.NSValue { return &x.inner.NSNumber.NSValue }
 
 func (x *DecimalNumber) asObject() *raw.NSObject { return &x.inner.NSNumber.NSValue.NSObject }
+
+// DecimalNumberable is the interface implemented by [DecimalNumber], for mocking and DI.
+type DecimalNumberable interface {
+	Unwrap() *raw.NSDecimalNumber
+	DecimalNumberByAdding(decimalNumber *raw.NSDecimalNumber) *DecimalNumber
+	DecimalNumberByAddingWithBehavior(decimalNumber *raw.NSDecimalNumber, behavior raw.NSDecimalNumberBehaviors) *DecimalNumber
+	DecimalNumberBySubtracting(decimalNumber *raw.NSDecimalNumber) *DecimalNumber
+	DecimalNumberBySubtractingWithBehavior(decimalNumber *raw.NSDecimalNumber, behavior raw.NSDecimalNumberBehaviors) *DecimalNumber
+	DecimalNumberByMultiplyingBy(decimalNumber *raw.NSDecimalNumber) *DecimalNumber
+	DecimalNumberByMultiplyingByWithBehavior(decimalNumber *raw.NSDecimalNumber, behavior raw.NSDecimalNumberBehaviors) *DecimalNumber
+	DecimalNumberByDividingBy(decimalNumber *raw.NSDecimalNumber) *DecimalNumber
+	DecimalNumberByDividingByWithBehavior(decimalNumber *raw.NSDecimalNumber, behavior raw.NSDecimalNumberBehaviors) *DecimalNumber
+	DecimalNumberByRaisingToPower(power uint) *DecimalNumber
+	DecimalNumberByRaisingToPowerWithBehavior(power uint, behavior raw.NSDecimalNumberBehaviors) *DecimalNumber
+	DecimalNumberByMultiplyingByPowerOf10(power int16) *DecimalNumber
+	DecimalNumberByMultiplyingByPowerOf10WithBehavior(power int16, behavior raw.NSDecimalNumberBehaviors) *DecimalNumber
+	DecimalNumberByRoundingAccordingToBehavior(behavior raw.NSDecimalNumberBehaviors) *DecimalNumber
+}
+
+var _ DecimalNumberable = (*DecimalNumber)(nil)
 

@@ -267,5 +267,201 @@ func (x *MutableContact) WithDates(items ...*raw.CNLabeledValue[*foundation.NSDa
 	return x
 }
 
+// SetContactType calls the underlying SetContactType.
+func (x *MutableContact) SetContactType(contactType raw.CNContactType) {
+	x.inner.SetContactType(contactType)
+}
+
+// SetNamePrefix calls the underlying SetNamePrefix.
+func (x *MutableContact) SetNamePrefix(namePrefix string) {
+	x.inner.SetNamePrefix(foundation.NSStringStringWithUTF8String(namePrefix))
+}
+
+// SetGivenName calls the underlying SetGivenName.
+func (x *MutableContact) SetGivenName(givenName string) {
+	x.inner.SetGivenName(foundation.NSStringStringWithUTF8String(givenName))
+}
+
+// SetMiddleName calls the underlying SetMiddleName.
+func (x *MutableContact) SetMiddleName(middleName string) {
+	x.inner.SetMiddleName(foundation.NSStringStringWithUTF8String(middleName))
+}
+
+// SetFamilyName calls the underlying SetFamilyName.
+func (x *MutableContact) SetFamilyName(familyName string) {
+	x.inner.SetFamilyName(foundation.NSStringStringWithUTF8String(familyName))
+}
+
+// SetPreviousFamilyName calls the underlying SetPreviousFamilyName.
+func (x *MutableContact) SetPreviousFamilyName(previousFamilyName string) {
+	x.inner.SetPreviousFamilyName(foundation.NSStringStringWithUTF8String(previousFamilyName))
+}
+
+// SetNameSuffix calls the underlying SetNameSuffix.
+func (x *MutableContact) SetNameSuffix(nameSuffix string) {
+	x.inner.SetNameSuffix(foundation.NSStringStringWithUTF8String(nameSuffix))
+}
+
+// SetNickname calls the underlying SetNickname.
+func (x *MutableContact) SetNickname(nickname string) {
+	x.inner.SetNickname(foundation.NSStringStringWithUTF8String(nickname))
+}
+
+// SetOrganizationName calls the underlying SetOrganizationName.
+func (x *MutableContact) SetOrganizationName(organizationName string) {
+	x.inner.SetOrganizationName(foundation.NSStringStringWithUTF8String(organizationName))
+}
+
+// SetDepartmentName calls the underlying SetDepartmentName.
+func (x *MutableContact) SetDepartmentName(departmentName string) {
+	x.inner.SetDepartmentName(foundation.NSStringStringWithUTF8String(departmentName))
+}
+
+// SetJobTitle calls the underlying SetJobTitle.
+func (x *MutableContact) SetJobTitle(jobTitle string) {
+	x.inner.SetJobTitle(foundation.NSStringStringWithUTF8String(jobTitle))
+}
+
+// SetPhoneticGivenName calls the underlying SetPhoneticGivenName.
+func (x *MutableContact) SetPhoneticGivenName(phoneticGivenName string) {
+	x.inner.SetPhoneticGivenName(foundation.NSStringStringWithUTF8String(phoneticGivenName))
+}
+
+// SetPhoneticMiddleName calls the underlying SetPhoneticMiddleName.
+func (x *MutableContact) SetPhoneticMiddleName(phoneticMiddleName string) {
+	x.inner.SetPhoneticMiddleName(foundation.NSStringStringWithUTF8String(phoneticMiddleName))
+}
+
+// SetPhoneticFamilyName calls the underlying SetPhoneticFamilyName.
+func (x *MutableContact) SetPhoneticFamilyName(phoneticFamilyName string) {
+	x.inner.SetPhoneticFamilyName(foundation.NSStringStringWithUTF8String(phoneticFamilyName))
+}
+
+// SetPhoneticOrganizationName calls the underlying SetPhoneticOrganizationName.
+func (x *MutableContact) SetPhoneticOrganizationName(phoneticOrganizationName string) {
+	x.inner.SetPhoneticOrganizationName(foundation.NSStringStringWithUTF8String(phoneticOrganizationName))
+}
+
+// SetNote calls the underlying SetNote.
+func (x *MutableContact) SetNote(note string) {
+	x.inner.SetNote(foundation.NSStringStringWithUTF8String(note))
+}
+
+// SetImageData calls the underlying SetImageData.
+func (x *MutableContact) SetImageData(imageData *foundation.NSData) {
+	x.inner.SetImageData(imageData)
+}
+
+// SetPhoneNumbers calls the underlying SetPhoneNumbers.
+func (x *MutableContact) SetPhoneNumbers(phoneNumbers *foundation.NSArray[objc.ID]) {
+	x.inner.SetPhoneNumbers(phoneNumbers)
+}
+
+// SetEmailAddresses calls the underlying SetEmailAddresses.
+func (x *MutableContact) SetEmailAddresses(emailAddresses *foundation.NSArray[objc.ID]) {
+	x.inner.SetEmailAddresses(emailAddresses)
+}
+
+// SetPostalAddresses calls the underlying SetPostalAddresses.
+func (x *MutableContact) SetPostalAddresses(postalAddresses *foundation.NSArray[objc.ID]) {
+	x.inner.SetPostalAddresses(postalAddresses)
+}
+
+// SetUrlAddresses calls the underlying SetUrlAddresses.
+func (x *MutableContact) SetUrlAddresses(urlAddresses *foundation.NSArray[objc.ID]) {
+	x.inner.SetUrlAddresses(urlAddresses)
+}
+
+// SetContactRelations calls the underlying SetContactRelations.
+func (x *MutableContact) SetContactRelations(contactRelations *foundation.NSArray[objc.ID]) {
+	x.inner.SetContactRelations(contactRelations)
+}
+
+// SetSocialProfiles calls the underlying SetSocialProfiles.
+func (x *MutableContact) SetSocialProfiles(socialProfiles *foundation.NSArray[objc.ID]) {
+	x.inner.SetSocialProfiles(socialProfiles)
+}
+
+// SetInstantMessageAddresses calls the underlying SetInstantMessageAddresses.
+func (x *MutableContact) SetInstantMessageAddresses(instantMessageAddresses *foundation.NSArray[objc.ID]) {
+	x.inner.SetInstantMessageAddresses(instantMessageAddresses)
+}
+
+// SetBirthday calls the underlying SetBirthday.
+func (x *MutableContact) SetBirthday(birthday *foundation.NSDateComponents) {
+	x.inner.SetBirthday(birthday)
+}
+
+// SetNonGregorianBirthday calls the underlying SetNonGregorianBirthday.
+func (x *MutableContact) SetNonGregorianBirthday(nonGregorianBirthday *foundation.NSDateComponents) {
+	x.inner.SetNonGregorianBirthday(nonGregorianBirthday)
+}
+
+// SetDates calls the underlying SetDates.
+func (x *MutableContact) SetDates(dates *foundation.NSArray[objc.ID]) {
+	x.inner.SetDates(dates)
+}
+
 func (x *MutableContact) asContact() *raw.CNContact { return &x.inner.CNContact }
+
+// MutableContactable is the interface implemented by [MutableContact], for mocking and DI.
+type MutableContactable interface {
+	Unwrap() *raw.CNMutableContact
+	WithContactType(contactType raw.CNContactType) *MutableContact
+	WithNamePrefix(namePrefix string) *MutableContact
+	WithGivenName(givenName string) *MutableContact
+	WithMiddleName(middleName string) *MutableContact
+	WithFamilyName(familyName string) *MutableContact
+	WithPreviousFamilyName(previousFamilyName string) *MutableContact
+	WithNameSuffix(nameSuffix string) *MutableContact
+	WithNickname(nickname string) *MutableContact
+	WithOrganizationName(organizationName string) *MutableContact
+	WithDepartmentName(departmentName string) *MutableContact
+	WithJobTitle(jobTitle string) *MutableContact
+	WithPhoneticGivenName(phoneticGivenName string) *MutableContact
+	WithPhoneticMiddleName(phoneticMiddleName string) *MutableContact
+	WithPhoneticFamilyName(phoneticFamilyName string) *MutableContact
+	WithPhoneticOrganizationName(phoneticOrganizationName string) *MutableContact
+	WithNote(note string) *MutableContact
+	WithImageData(imageData *foundation.NSData) *MutableContact
+	WithPhoneNumbers(items ...*raw.CNLabeledValue[*raw.CNPhoneNumber]) *MutableContact
+	WithEmailAddresses(items ...*raw.CNLabeledValue[*foundation.NSString]) *MutableContact
+	WithPostalAddresses(items ...*raw.CNLabeledValue[*raw.CNPostalAddress]) *MutableContact
+	WithUrlAddresses(items ...*raw.CNLabeledValue[*foundation.NSString]) *MutableContact
+	WithContactRelations(items ...*raw.CNLabeledValue[*raw.CNContactRelation]) *MutableContact
+	WithSocialProfiles(items ...*raw.CNLabeledValue[*raw.CNSocialProfile]) *MutableContact
+	WithInstantMessageAddresses(items ...*raw.CNLabeledValue[*raw.CNInstantMessageAddress]) *MutableContact
+	WithBirthday(birthday *foundation.NSDateComponents) *MutableContact
+	WithNonGregorianBirthday(nonGregorianBirthday *foundation.NSDateComponents) *MutableContact
+	WithDates(items ...*raw.CNLabeledValue[*foundation.NSDateComponents]) *MutableContact
+	SetContactType(contactType raw.CNContactType)
+	SetNamePrefix(namePrefix string)
+	SetGivenName(givenName string)
+	SetMiddleName(middleName string)
+	SetFamilyName(familyName string)
+	SetPreviousFamilyName(previousFamilyName string)
+	SetNameSuffix(nameSuffix string)
+	SetNickname(nickname string)
+	SetOrganizationName(organizationName string)
+	SetDepartmentName(departmentName string)
+	SetJobTitle(jobTitle string)
+	SetPhoneticGivenName(phoneticGivenName string)
+	SetPhoneticMiddleName(phoneticMiddleName string)
+	SetPhoneticFamilyName(phoneticFamilyName string)
+	SetPhoneticOrganizationName(phoneticOrganizationName string)
+	SetNote(note string)
+	SetImageData(imageData *foundation.NSData)
+	SetPhoneNumbers(phoneNumbers *foundation.NSArray[objc.ID])
+	SetEmailAddresses(emailAddresses *foundation.NSArray[objc.ID])
+	SetPostalAddresses(postalAddresses *foundation.NSArray[objc.ID])
+	SetUrlAddresses(urlAddresses *foundation.NSArray[objc.ID])
+	SetContactRelations(contactRelations *foundation.NSArray[objc.ID])
+	SetSocialProfiles(socialProfiles *foundation.NSArray[objc.ID])
+	SetInstantMessageAddresses(instantMessageAddresses *foundation.NSArray[objc.ID])
+	SetBirthday(birthday *foundation.NSDateComponents)
+	SetNonGregorianBirthday(nonGregorianBirthday *foundation.NSDateComponents)
+	SetDates(dates *foundation.NSArray[objc.ID])
+}
+
+var _ MutableContactable = (*MutableContact)(nil)
 

@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -66,5 +67,119 @@ func (x *MTRChannelClusterChannelInfoStruct) WithType(type_ *foundation.NSNumber
 	return x
 }
 
+// MajorNumber calls the underlying MajorNumber.
+func (x *MTRChannelClusterChannelInfoStruct) MajorNumber() *foundation.NSNumber {
+	return x.inner.MajorNumber()
+}
+
+// SetMajorNumber calls the underlying SetMajorNumber.
+func (x *MTRChannelClusterChannelInfoStruct) SetMajorNumber(majorNumber *foundation.NSNumber) {
+	x.inner.SetMajorNumber(majorNumber)
+}
+
+// MinorNumber calls the underlying MinorNumber.
+func (x *MTRChannelClusterChannelInfoStruct) MinorNumber() *foundation.NSNumber {
+	return x.inner.MinorNumber()
+}
+
+// SetMinorNumber calls the underlying SetMinorNumber.
+func (x *MTRChannelClusterChannelInfoStruct) SetMinorNumber(minorNumber *foundation.NSNumber) {
+	x.inner.SetMinorNumber(minorNumber)
+}
+
+// Name calls the underlying Name.
+func (x *MTRChannelClusterChannelInfoStruct) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetName calls the underlying SetName.
+func (x *MTRChannelClusterChannelInfoStruct) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
+// CallSign calls the underlying CallSign.
+func (x *MTRChannelClusterChannelInfoStruct) CallSign() string {
+	_r := x.inner.CallSign()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetCallSign calls the underlying SetCallSign.
+func (x *MTRChannelClusterChannelInfoStruct) SetCallSign(callSign string) {
+	x.inner.SetCallSign(foundation.NSStringStringWithUTF8String(callSign))
+}
+
+// AffiliateCallSign calls the underlying AffiliateCallSign.
+func (x *MTRChannelClusterChannelInfoStruct) AffiliateCallSign() string {
+	_r := x.inner.AffiliateCallSign()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetAffiliateCallSign calls the underlying SetAffiliateCallSign.
+func (x *MTRChannelClusterChannelInfoStruct) SetAffiliateCallSign(affiliateCallSign string) {
+	x.inner.SetAffiliateCallSign(foundation.NSStringStringWithUTF8String(affiliateCallSign))
+}
+
+// Identifier calls the underlying Identifier.
+func (x *MTRChannelClusterChannelInfoStruct) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetIdentifier calls the underlying SetIdentifier.
+func (x *MTRChannelClusterChannelInfoStruct) SetIdentifier(identifier string) {
+	x.inner.SetIdentifier(foundation.NSStringStringWithUTF8String(identifier))
+}
+
+// Type calls the underlying Type.
+func (x *MTRChannelClusterChannelInfoStruct) Type() *foundation.NSNumber {
+	return x.inner.Type()
+}
+
+// SetType calls the underlying SetType.
+func (x *MTRChannelClusterChannelInfoStruct) SetType(type_ *foundation.NSNumber) {
+	x.inner.SetType(type_)
+}
+
 func (x *MTRChannelClusterChannelInfoStruct) asMTRChannelClusterChannelInfoStruct() *raw.MTRChannelClusterChannelInfoStruct { return x.inner }
+
+// MTRChannelClusterChannelInfoStructable is the interface implemented by [MTRChannelClusterChannelInfoStruct], for mocking and DI.
+type MTRChannelClusterChannelInfoStructable interface {
+	Unwrap() *raw.MTRChannelClusterChannelInfoStruct
+	WithMajorNumber(majorNumber *foundation.NSNumber) *MTRChannelClusterChannelInfoStruct
+	WithMinorNumber(minorNumber *foundation.NSNumber) *MTRChannelClusterChannelInfoStruct
+	WithName(name string) *MTRChannelClusterChannelInfoStruct
+	WithCallSign(callSign string) *MTRChannelClusterChannelInfoStruct
+	WithAffiliateCallSign(affiliateCallSign string) *MTRChannelClusterChannelInfoStruct
+	WithIdentifier(identifier string) *MTRChannelClusterChannelInfoStruct
+	WithType(type_ *foundation.NSNumber) *MTRChannelClusterChannelInfoStruct
+	MajorNumber() *foundation.NSNumber
+	SetMajorNumber(majorNumber *foundation.NSNumber)
+	MinorNumber() *foundation.NSNumber
+	SetMinorNumber(minorNumber *foundation.NSNumber)
+	Name() string
+	SetName(name string)
+	CallSign() string
+	SetCallSign(callSign string)
+	AffiliateCallSign() string
+	SetAffiliateCallSign(affiliateCallSign string)
+	Identifier() string
+	SetIdentifier(identifier string)
+	Type() *foundation.NSNumber
+	SetType(type_ *foundation.NSNumber)
+}
+
+var _ MTRChannelClusterChannelInfoStructable = (*MTRChannelClusterChannelInfoStruct)(nil)
 

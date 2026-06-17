@@ -23,3 +23,10 @@ func NewNotificationAttributedMessageContext() *NotificationAttributedMessageCon
 	return &NotificationAttributedMessageContext{inner: raw.UNNotificationAttributedMessageContextFromID(_id)}
 }
 
+// NotificationAttributedMessageContextable is the interface implemented by [NotificationAttributedMessageContext], for mocking and DI.
+type NotificationAttributedMessageContextable interface {
+	Unwrap() *raw.UNNotificationAttributedMessageContext
+}
+
+var _ NotificationAttributedMessageContextable = (*NotificationAttributedMessageContext)(nil)
+

@@ -5,7 +5,9 @@
 package gameplaykit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -38,18 +40,85 @@ func (x *MeshGraph) WithTriangulationMode(triangulationMode raw.GKMeshGraphTrian
 	return x
 }
 
+// AddObstacles calls the underlying AddObstacles.
+func (x *MeshGraph) AddObstacles(obstacles *foundation.NSArray[*raw.GKPolygonObstacle]) {
+	x.inner.AddObstacles(obstacles)
+}
+
+// RemoveObstacles calls the underlying RemoveObstacles.
+func (x *MeshGraph) RemoveObstacles(obstacles *foundation.NSArray[*raw.GKPolygonObstacle]) {
+	x.inner.RemoveObstacles(obstacles)
+}
+
+// ConnectNodeUsingObstacles calls the underlying ConnectNodeUsingObstacles.
+func (x *MeshGraph) ConnectNodeUsingObstacles(node objc.ID) {
+	x.inner.ConnectNodeUsingObstacles(node)
+}
+
+// Triangulate calls the underlying Triangulate.
+func (x *MeshGraph) Triangulate() {
+	x.inner.Triangulate()
+}
+
+// TriangleAtIndex calls the underlying TriangleAtIndex.
+func (x *MeshGraph) TriangleAtIndex(index uint) raw.GKTriangle {
+	return x.inner.TriangleAtIndex(index)
+}
+
+// ClassForGenericArgumentAtIndex calls the underlying ClassForGenericArgumentAtIndex.
+func (x *MeshGraph) ClassForGenericArgumentAtIndex(index uint) objc.Class {
+	return x.inner.ClassForGenericArgumentAtIndex(index)
+}
+
 // Obstacles returns the collection as a Go slice.
 func (x *MeshGraph) Obstacles() []*raw.GKPolygonObstacle {
 	arr := x.inner.Obstacles()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.GKPolygonObstacle, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.GKPolygonObstacle {
+		return raw.GKPolygonObstacleFromID(purego.Retain(_id))
+	})
+}
+
+// BufferRadius calls the underlying BufferRadius.
+func (x *MeshGraph) BufferRadius() float32 {
+	return x.inner.BufferRadius()
+}
+
+// TriangulationMode calls the underlying TriangulationMode.
+func (x *MeshGraph) TriangulationMode() raw.GKMeshGraphTriangulationMode {
+	return x.inner.TriangulationMode()
+}
+
+// SetTriangulationMode calls the underlying SetTriangulationMode.
+func (x *MeshGraph) SetTriangulationMode(triangulationMode raw.GKMeshGraphTriangulationMode) {
+	x.inner.SetTriangulationMode(triangulationMode)
+}
+
+// TriangleCount calls the underlying TriangleCount.
+func (x *MeshGraph) TriangleCount() uint {
+	return x.inner.TriangleCount()
 }
 
 func (x *MeshGraph) asGraph() *raw.GKGraph { return &x.inner.GKGraph }
+
+// MeshGraphable is the interface implemented by [MeshGraph], for mocking and DI.
+type MeshGraphable interface {
+	Unwrap() *raw.GKMeshGraph[objc.ID]
+	WithTriangulationMode(triangulationMode raw.GKMeshGraphTriangulationMode) *MeshGraph
+	AddObstacles(obstacles *foundation.NSArray[*raw.GKPolygonObstacle])
+	RemoveObstacles(obstacles *foundation.NSArray[*raw.GKPolygonObstacle])
+	ConnectNodeUsingObstacles(node objc.ID)
+	Triangulate()
+	TriangleAtIndex(index uint) raw.GKTriangle
+	ClassForGenericArgumentAtIndex(index uint) objc.Class
+	Obstacles() []*raw.GKPolygonObstacle
+	BufferRadius() float32
+	TriangulationMode() raw.GKMeshGraphTriangulationMode
+	SetTriangulationMode(triangulationMode raw.GKMeshGraphTriangulationMode)
+	TriangleCount() uint
+}
+
+var _ MeshGraphable = (*MeshGraph)(nil)
 

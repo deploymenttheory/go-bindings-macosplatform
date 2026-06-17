@@ -23,5 +23,18 @@ func NewArithmeticLayer() *ArithmeticLayer {
 	return &ArithmeticLayer{inner: raw.MLCArithmeticLayerFromID(_id)}
 }
 
+// Operation calls the underlying Operation.
+func (x *ArithmeticLayer) Operation() raw.MLCArithmeticOperation {
+	return x.inner.Operation()
+}
+
 func (x *ArithmeticLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
+
+// ArithmeticLayerable is the interface implemented by [ArithmeticLayer], for mocking and DI.
+type ArithmeticLayerable interface {
+	Unwrap() *raw.MLCArithmeticLayer
+	Operation() raw.MLCArithmeticOperation
+}
+
+var _ ArithmeticLayerable = (*ArithmeticLayer)(nil)
 

@@ -23,3 +23,46 @@ func NewForegroundExitData() *ForegroundExitData {
 	return &ForegroundExitData{inner: raw.MXForegroundExitDataFromID(_id)}
 }
 
+// CumulativeNormalAppExitCount calls the underlying CumulativeNormalAppExitCount.
+func (x *ForegroundExitData) CumulativeNormalAppExitCount() uint {
+	return x.inner.CumulativeNormalAppExitCount()
+}
+
+// CumulativeMemoryResourceLimitExitCount calls the underlying CumulativeMemoryResourceLimitExitCount.
+func (x *ForegroundExitData) CumulativeMemoryResourceLimitExitCount() uint {
+	return x.inner.CumulativeMemoryResourceLimitExitCount()
+}
+
+// CumulativeBadAccessExitCount calls the underlying CumulativeBadAccessExitCount.
+func (x *ForegroundExitData) CumulativeBadAccessExitCount() uint {
+	return x.inner.CumulativeBadAccessExitCount()
+}
+
+// CumulativeAbnormalExitCount calls the underlying CumulativeAbnormalExitCount.
+func (x *ForegroundExitData) CumulativeAbnormalExitCount() uint {
+	return x.inner.CumulativeAbnormalExitCount()
+}
+
+// CumulativeIllegalInstructionExitCount calls the underlying CumulativeIllegalInstructionExitCount.
+func (x *ForegroundExitData) CumulativeIllegalInstructionExitCount() uint {
+	return x.inner.CumulativeIllegalInstructionExitCount()
+}
+
+// CumulativeAppWatchdogExitCount calls the underlying CumulativeAppWatchdogExitCount.
+func (x *ForegroundExitData) CumulativeAppWatchdogExitCount() uint {
+	return x.inner.CumulativeAppWatchdogExitCount()
+}
+
+// ForegroundExitDataable is the interface implemented by [ForegroundExitData], for mocking and DI.
+type ForegroundExitDataable interface {
+	Unwrap() *raw.MXForegroundExitData
+	CumulativeNormalAppExitCount() uint
+	CumulativeMemoryResourceLimitExitCount() uint
+	CumulativeBadAccessExitCount() uint
+	CumulativeAbnormalExitCount() uint
+	CumulativeIllegalInstructionExitCount() uint
+	CumulativeAppWatchdogExitCount() uint
+}
+
+var _ ForegroundExitDataable = (*ForegroundExitData)(nil)
+

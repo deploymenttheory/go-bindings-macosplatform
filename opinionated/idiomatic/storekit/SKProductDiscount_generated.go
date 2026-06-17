@@ -5,7 +5,9 @@
 package storekit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/storekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +24,61 @@ func NewProductDiscount() *ProductDiscount {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SKProductDiscount")), objc.RegisterName("new"))
 	return &ProductDiscount{inner: raw.SKProductDiscountFromID(_id)}
 }
+
+// Price calls the underlying Price.
+func (x *ProductDiscount) Price() *foundation.NSDecimalNumber {
+	return x.inner.Price()
+}
+
+// PriceLocale calls the underlying PriceLocale.
+func (x *ProductDiscount) PriceLocale() *foundation.NSLocale {
+	return x.inner.PriceLocale()
+}
+
+// Identifier calls the underlying Identifier.
+func (x *ProductDiscount) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SubscriptionPeriod calls the underlying SubscriptionPeriod.
+func (x *ProductDiscount) SubscriptionPeriod() *ProductSubscriptionPeriod {
+	_r := x.inner.SubscriptionPeriod()
+	if _r == nil {
+		return nil
+	}
+	return &ProductSubscriptionPeriod{inner: _r}
+}
+
+// NumberOfPeriods calls the underlying NumberOfPeriods.
+func (x *ProductDiscount) NumberOfPeriods() uint {
+	return x.inner.NumberOfPeriods()
+}
+
+// PaymentMode calls the underlying PaymentMode.
+func (x *ProductDiscount) PaymentMode() raw.SKProductDiscountPaymentMode {
+	return x.inner.PaymentMode()
+}
+
+// Type calls the underlying Type.
+func (x *ProductDiscount) Type() raw.SKProductDiscountType {
+	return x.inner.Type()
+}
+
+// ProductDiscountable is the interface implemented by [ProductDiscount], for mocking and DI.
+type ProductDiscountable interface {
+	Unwrap() *raw.SKProductDiscount
+	Price() *foundation.NSDecimalNumber
+	PriceLocale() *foundation.NSLocale
+	Identifier() string
+	SubscriptionPeriod() *ProductSubscriptionPeriod
+	NumberOfPeriods() uint
+	PaymentMode() raw.SKProductDiscountPaymentMode
+	Type() raw.SKProductDiscountType
+}
+
+var _ ProductDiscountable = (*ProductDiscount)(nil)
 

@@ -7,6 +7,7 @@ package glkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/glkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -71,18 +72,210 @@ func (x *BaseEffect) WithLabel(label string) *BaseEffect {
 	return x
 }
 
+// PrepareToDraw calls the underlying PrepareToDraw.
+func (x *BaseEffect) PrepareToDraw() {
+	x.inner.PrepareToDraw()
+}
+
+// ColorMaterialEnabled calls the underlying ColorMaterialEnabled.
+func (x *BaseEffect) ColorMaterialEnabled() uint8 {
+	return x.inner.ColorMaterialEnabled()
+}
+
+// SetColorMaterialEnabled calls the underlying SetColorMaterialEnabled.
+func (x *BaseEffect) SetColorMaterialEnabled(colorMaterialEnabled uint8) {
+	x.inner.SetColorMaterialEnabled(colorMaterialEnabled)
+}
+
+// LightModelTwoSided calls the underlying LightModelTwoSided.
+func (x *BaseEffect) LightModelTwoSided() uint8 {
+	return x.inner.LightModelTwoSided()
+}
+
+// SetLightModelTwoSided calls the underlying SetLightModelTwoSided.
+func (x *BaseEffect) SetLightModelTwoSided(lightModelTwoSided uint8) {
+	x.inner.SetLightModelTwoSided(lightModelTwoSided)
+}
+
+// UseConstantColor calls the underlying UseConstantColor.
+func (x *BaseEffect) UseConstantColor() uint8 {
+	return x.inner.UseConstantColor()
+}
+
+// SetUseConstantColor calls the underlying SetUseConstantColor.
+func (x *BaseEffect) SetUseConstantColor(useConstantColor uint8) {
+	x.inner.SetUseConstantColor(useConstantColor)
+}
+
+// Transform calls the underlying Transform.
+func (x *BaseEffect) Transform() *EffectPropertyTransform {
+	_r := x.inner.Transform()
+	if _r == nil {
+		return nil
+	}
+	return &EffectPropertyTransform{inner: _r}
+}
+
+// Light0 calls the underlying Light0.
+func (x *BaseEffect) Light0() *EffectPropertyLight {
+	_r := x.inner.Light0()
+	if _r == nil {
+		return nil
+	}
+	return &EffectPropertyLight{inner: _r}
+}
+
+// Light1 calls the underlying Light1.
+func (x *BaseEffect) Light1() *EffectPropertyLight {
+	_r := x.inner.Light1()
+	if _r == nil {
+		return nil
+	}
+	return &EffectPropertyLight{inner: _r}
+}
+
+// Light2 calls the underlying Light2.
+func (x *BaseEffect) Light2() *EffectPropertyLight {
+	_r := x.inner.Light2()
+	if _r == nil {
+		return nil
+	}
+	return &EffectPropertyLight{inner: _r}
+}
+
+// LightingType calls the underlying LightingType.
+func (x *BaseEffect) LightingType() raw.GLKLightingType {
+	return x.inner.LightingType()
+}
+
+// SetLightingType calls the underlying SetLightingType.
+func (x *BaseEffect) SetLightingType(lightingType raw.GLKLightingType) {
+	x.inner.SetLightingType(lightingType)
+}
+
+// LightModelAmbientColor calls the underlying LightModelAmbientColor.
+func (x *BaseEffect) LightModelAmbientColor() unsafe.Pointer {
+	return x.inner.LightModelAmbientColor()
+}
+
+// SetLightModelAmbientColor calls the underlying SetLightModelAmbientColor.
+func (x *BaseEffect) SetLightModelAmbientColor(lightModelAmbientColor unsafe.Pointer) {
+	x.inner.SetLightModelAmbientColor(lightModelAmbientColor)
+}
+
+// Material calls the underlying Material.
+func (x *BaseEffect) Material() *EffectPropertyMaterial {
+	_r := x.inner.Material()
+	if _r == nil {
+		return nil
+	}
+	return &EffectPropertyMaterial{inner: _r}
+}
+
+// Texture2d0 calls the underlying Texture2d0.
+func (x *BaseEffect) Texture2d0() *EffectPropertyTexture {
+	_r := x.inner.Texture2d0()
+	if _r == nil {
+		return nil
+	}
+	return &EffectPropertyTexture{inner: _r}
+}
+
+// Texture2d1 calls the underlying Texture2d1.
+func (x *BaseEffect) Texture2d1() *EffectPropertyTexture {
+	_r := x.inner.Texture2d1()
+	if _r == nil {
+		return nil
+	}
+	return &EffectPropertyTexture{inner: _r}
+}
+
 // TextureOrder returns the collection as a Go slice.
 func (x *BaseEffect) TextureOrder() []*raw.GLKEffectPropertyTexture {
 	arr := x.inner.TextureOrder()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.GLKEffectPropertyTexture, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.GLKEffectPropertyTexture {
+		return raw.GLKEffectPropertyTextureFromID(purego.Retain(_id))
+	})
+}
+
+// SetTextureOrder calls the underlying SetTextureOrder.
+func (x *BaseEffect) SetTextureOrder(textureOrder *foundation.NSArray[*raw.GLKEffectPropertyTexture]) {
+	x.inner.SetTextureOrder(textureOrder)
+}
+
+// ConstantColor calls the underlying ConstantColor.
+func (x *BaseEffect) ConstantColor() unsafe.Pointer {
+	return x.inner.ConstantColor()
+}
+
+// SetConstantColor calls the underlying SetConstantColor.
+func (x *BaseEffect) SetConstantColor(constantColor unsafe.Pointer) {
+	x.inner.SetConstantColor(constantColor)
+}
+
+// Fog calls the underlying Fog.
+func (x *BaseEffect) Fog() *EffectPropertyFog {
+	_r := x.inner.Fog()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &EffectPropertyFog{inner: _r}
+}
+
+// Label calls the underlying Label.
+func (x *BaseEffect) Label() string {
+	_r := x.inner.Label()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLabel calls the underlying SetLabel.
+func (x *BaseEffect) SetLabel(label string) {
+	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
 }
 
 func (x *BaseEffect) asBaseEffect() *raw.GLKBaseEffect { return x.inner }
+
+// BaseEffectable is the interface implemented by [BaseEffect], for mocking and DI.
+type BaseEffectable interface {
+	Unwrap() *raw.GLKBaseEffect
+	WithColorMaterialEnabled(colorMaterialEnabled uint8) *BaseEffect
+	WithLightModelTwoSided(lightModelTwoSided uint8) *BaseEffect
+	WithUseConstantColor(useConstantColor uint8) *BaseEffect
+	WithLightingType(lightingType raw.GLKLightingType) *BaseEffect
+	WithTextureOrder(items ...*raw.GLKEffectPropertyTexture) *BaseEffect
+	WithLabel(label string) *BaseEffect
+	PrepareToDraw()
+	ColorMaterialEnabled() uint8
+	SetColorMaterialEnabled(colorMaterialEnabled uint8)
+	LightModelTwoSided() uint8
+	SetLightModelTwoSided(lightModelTwoSided uint8)
+	UseConstantColor() uint8
+	SetUseConstantColor(useConstantColor uint8)
+	Transform() *EffectPropertyTransform
+	Light0() *EffectPropertyLight
+	Light1() *EffectPropertyLight
+	Light2() *EffectPropertyLight
+	LightingType() raw.GLKLightingType
+	SetLightingType(lightingType raw.GLKLightingType)
+	LightModelAmbientColor() unsafe.Pointer
+	SetLightModelAmbientColor(lightModelAmbientColor unsafe.Pointer)
+	Material() *EffectPropertyMaterial
+	Texture2d0() *EffectPropertyTexture
+	Texture2d1() *EffectPropertyTexture
+	TextureOrder() []*raw.GLKEffectPropertyTexture
+	SetTextureOrder(textureOrder *foundation.NSArray[*raw.GLKEffectPropertyTexture])
+	ConstantColor() unsafe.Pointer
+	SetConstantColor(constantColor unsafe.Pointer)
+	Fog() *EffectPropertyFog
+	Label() string
+	SetLabel(label string)
+}
+
+var _ BaseEffectable = (*BaseEffect)(nil)
 

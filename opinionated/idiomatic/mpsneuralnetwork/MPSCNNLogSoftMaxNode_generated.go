@@ -26,3 +26,10 @@ func NewCNNLogSoftMaxNodeWithSource(sourceNode *raw.MPSNNImageNode) *CNNLogSoftM
 
 func (x *CNNLogSoftMaxNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNFilterNode }
 
+// CNNLogSoftMaxNodeable is the interface implemented by [CNNLogSoftMaxNode], for mocking and DI.
+type CNNLogSoftMaxNodeable interface {
+	Unwrap() *raw.MPSCNNLogSoftMaxNode
+}
+
+var _ CNNLogSoftMaxNodeable = (*CNNLogSoftMaxNode)(nil)
+

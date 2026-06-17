@@ -25,3 +25,10 @@ func NewSelectionLayer() *SelectionLayer {
 
 func (x *SelectionLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
 
+// SelectionLayerable is the interface implemented by [SelectionLayer], for mocking and DI.
+type SelectionLayerable interface {
+	Unwrap() *raw.MLCSelectionLayer
+}
+
+var _ SelectionLayerable = (*SelectionLayer)(nil)
+

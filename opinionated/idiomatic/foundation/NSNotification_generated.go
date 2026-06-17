@@ -31,5 +31,34 @@ func NewNotificationWithCoder(coder *raw.NSCoder) *Notification {
 	return &Notification{inner: raw.NSNotificationFromID(_id)}
 }
 
+// Name calls the underlying Name.
+func (x *Notification) Name() *String {
+	_r := x.inner.Name()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// Object calls the underlying Object.
+func (x *Notification) Object() objc.ID {
+	return x.inner.Object()
+}
+
+// UserInfo calls the underlying UserInfo.
+func (x *Notification) UserInfo() *raw.NSDictionary[objc.ID, objc.ID] {
+	return x.inner.UserInfo()
+}
+
 func (x *Notification) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// Notificationable is the interface implemented by [Notification], for mocking and DI.
+type Notificationable interface {
+	Unwrap() *raw.NSNotification
+	Name() *String
+	Object() objc.ID
+	UserInfo() *raw.NSDictionary[objc.ID, objc.ID]
+}
+
+var _ Notificationable = (*Notification)(nil)
 

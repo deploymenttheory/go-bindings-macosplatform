@@ -29,3 +29,63 @@ func (x *IOBluetoothDevicePair) WithDelegate(delegate objc.ID) *IOBluetoothDevic
 	return x
 }
 
+// Start calls the underlying Start.
+func (x *IOBluetoothDevicePair) Start() int {
+	return x.inner.Start()
+}
+
+// Stop calls the underlying Stop.
+func (x *IOBluetoothDevicePair) Stop() {
+	x.inner.Stop()
+}
+
+// Device calls the underlying Device.
+func (x *IOBluetoothDevicePair) Device() *IOBluetoothDevice {
+	_r := x.inner.Device()
+	if _r == nil {
+		return nil
+	}
+	return &IOBluetoothDevice{inner: _r}
+}
+
+// SetDevice calls the underlying SetDevice.
+func (x *IOBluetoothDevicePair) SetDevice(inDevice *raw.IOBluetoothDevice) {
+	x.inner.SetDevice(inDevice)
+}
+
+// ReplyPINCodePINCode calls the underlying ReplyPINCodePINCode.
+func (x *IOBluetoothDevicePair) ReplyPINCodePINCode(pINCodeSize uint, pINCode *raw.BluetoothPINCode) {
+	x.inner.ReplyPINCodePINCode(pINCodeSize, pINCode)
+}
+
+// ReplyUserConfirmation calls the underlying ReplyUserConfirmation.
+func (x *IOBluetoothDevicePair) ReplyUserConfirmation(reply bool) {
+	x.inner.ReplyUserConfirmation(reply)
+}
+
+// Delegate calls the underlying Delegate.
+func (x *IOBluetoothDevicePair) Delegate() objc.ID {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *IOBluetoothDevicePair) SetDelegate(delegate objc.ID) {
+	x.inner.SetDelegate(delegate)
+}
+
+// IOBluetoothDevicePairable is the interface implemented by [IOBluetoothDevicePair], for mocking and DI.
+type IOBluetoothDevicePairable interface {
+	Unwrap() *raw.IOBluetoothDevicePair
+	WithDelegate(delegate objc.ID) *IOBluetoothDevicePair
+	Start() int
+	Stop()
+	Device() *IOBluetoothDevice
+	SetDevice(inDevice *raw.IOBluetoothDevice)
+	ReplyPINCodePINCode(pINCodeSize uint, pINCode *raw.BluetoothPINCode)
+	ReplyUserConfirmation(reply bool)
+	Delegate() objc.ID
+	SetDelegate(delegate objc.ID)
+}
+
+var _ IOBluetoothDevicePairable = (*IOBluetoothDevicePair)(nil)
+

@@ -31,3 +31,35 @@ func (x *EnvelopeSegment) WithCurveType(curveType raw.PHASECurveType) *EnvelopeS
 	return x
 }
 
+// EndPoint calls the underlying EndPoint.
+func (x *EnvelopeSegment) EndPoint() unsafe.Pointer {
+	return x.inner.EndPoint()
+}
+
+// SetEndPoint calls the underlying SetEndPoint.
+func (x *EnvelopeSegment) SetEndPoint(endPoint unsafe.Pointer) {
+	x.inner.SetEndPoint(endPoint)
+}
+
+// CurveType calls the underlying CurveType.
+func (x *EnvelopeSegment) CurveType() raw.PHASECurveType {
+	return x.inner.CurveType()
+}
+
+// SetCurveType calls the underlying SetCurveType.
+func (x *EnvelopeSegment) SetCurveType(curveType raw.PHASECurveType) {
+	x.inner.SetCurveType(curveType)
+}
+
+// EnvelopeSegmentable is the interface implemented by [EnvelopeSegment], for mocking and DI.
+type EnvelopeSegmentable interface {
+	Unwrap() *raw.PHASEEnvelopeSegment
+	WithCurveType(curveType raw.PHASECurveType) *EnvelopeSegment
+	EndPoint() unsafe.Pointer
+	SetEndPoint(endPoint unsafe.Pointer)
+	CurveType() raw.PHASECurveType
+	SetCurveType(curveType raw.PHASECurveType)
+}
+
+var _ EnvelopeSegmentable = (*EnvelopeSegment)(nil)
+

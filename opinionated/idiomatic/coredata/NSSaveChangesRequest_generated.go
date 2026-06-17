@@ -25,5 +25,36 @@ func NewSaveChangesRequestWithInsertedObjectsUpdatedObjectsDeletedObjectsLockedO
 	return &SaveChangesRequest{inner: raw.NSSaveChangesRequestFromID(_id)}
 }
 
+// InsertedObjects calls the underlying InsertedObjects.
+func (x *SaveChangesRequest) InsertedObjects() *foundation.NSSet[*raw.NSManagedObject] {
+	return x.inner.InsertedObjects()
+}
+
+// UpdatedObjects calls the underlying UpdatedObjects.
+func (x *SaveChangesRequest) UpdatedObjects() *foundation.NSSet[*raw.NSManagedObject] {
+	return x.inner.UpdatedObjects()
+}
+
+// DeletedObjects calls the underlying DeletedObjects.
+func (x *SaveChangesRequest) DeletedObjects() *foundation.NSSet[*raw.NSManagedObject] {
+	return x.inner.DeletedObjects()
+}
+
+// LockedObjects calls the underlying LockedObjects.
+func (x *SaveChangesRequest) LockedObjects() *foundation.NSSet[*raw.NSManagedObject] {
+	return x.inner.LockedObjects()
+}
+
 func (x *SaveChangesRequest) asPersistentStoreRequest() *raw.NSPersistentStoreRequest { return &x.inner.NSPersistentStoreRequest }
+
+// SaveChangesRequestable is the interface implemented by [SaveChangesRequest], for mocking and DI.
+type SaveChangesRequestable interface {
+	Unwrap() *raw.NSSaveChangesRequest
+	InsertedObjects() *foundation.NSSet[*raw.NSManagedObject]
+	UpdatedObjects() *foundation.NSSet[*raw.NSManagedObject]
+	DeletedObjects() *foundation.NSSet[*raw.NSManagedObject]
+	LockedObjects() *foundation.NSSet[*raw.NSManagedObject]
+}
+
+var _ SaveChangesRequestable = (*SaveChangesRequest)(nil)
 

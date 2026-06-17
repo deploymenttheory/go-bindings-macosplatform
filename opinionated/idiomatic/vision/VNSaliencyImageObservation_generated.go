@@ -6,6 +6,7 @@ package vision
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -29,14 +30,20 @@ func (x *SaliencyImageObservation) SalientObjects() []*raw.VNRectangleObservatio
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.VNRectangleObservation, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.VNRectangleObservation {
+		return raw.VNRectangleObservationFromID(purego.Retain(_id))
+	})
 }
 
 func (x *SaliencyImageObservation) asPixelBufferObservation() *raw.VNPixelBufferObservation { return &x.inner.VNPixelBufferObservation }
 
 func (x *SaliencyImageObservation) asObservation() *raw.VNObservation { return &x.inner.VNPixelBufferObservation.VNObservation }
+
+// SaliencyImageObservationable is the interface implemented by [SaliencyImageObservation], for mocking and DI.
+type SaliencyImageObservationable interface {
+	Unwrap() *raw.VNSaliencyImageObservation
+	SalientObjects() []*raw.VNRectangleObservation
+}
+
+var _ SaliencyImageObservationable = (*SaliencyImageObservation)(nil)
 

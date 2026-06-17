@@ -7,6 +7,7 @@ package cloudkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -44,11 +45,9 @@ func (x *SyncEngineRecordZoneChangeBatch) RecordsToSave() []*raw.CKRecord {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.CKRecord, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CKRecord {
+		return raw.CKRecordFromID(purego.Retain(_id))
+	})
 }
 
 // RecordIDsToDelete returns the collection as a Go slice.
@@ -57,10 +56,30 @@ func (x *SyncEngineRecordZoneChangeBatch) RecordIDsToDelete() []*raw.CKRecordID 
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.CKRecordID, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CKRecordID {
+		return raw.CKRecordIDFromID(purego.Retain(_id))
+	})
 }
+
+// AtomicByZone calls the underlying AtomicByZone.
+func (x *SyncEngineRecordZoneChangeBatch) AtomicByZone() bool {
+	return x.inner.AtomicByZone()
+}
+
+// SetAtomicByZone calls the underlying SetAtomicByZone.
+func (x *SyncEngineRecordZoneChangeBatch) SetAtomicByZone(atomicByZone bool) {
+	x.inner.SetAtomicByZone(atomicByZone)
+}
+
+// SyncEngineRecordZoneChangeBatchable is the interface implemented by [SyncEngineRecordZoneChangeBatch], for mocking and DI.
+type SyncEngineRecordZoneChangeBatchable interface {
+	Unwrap() *raw.CKSyncEngineRecordZoneChangeBatch
+	WithAtomicByZone(atomicByZone bool) *SyncEngineRecordZoneChangeBatch
+	RecordsToSave() []*raw.CKRecord
+	RecordIDsToDelete() []*raw.CKRecordID
+	AtomicByZone() bool
+	SetAtomicByZone(atomicByZone bool)
+}
+
+var _ SyncEngineRecordZoneChangeBatchable = (*SyncEngineRecordZoneChangeBatch)(nil)
 

@@ -23,9 +23,42 @@ func NewQuantitySample() *QuantitySample {
 	return &QuantitySample{inner: raw.HKQuantitySampleFromID(_id)}
 }
 
+// QuantityType calls the underlying QuantityType.
+func (x *QuantitySample) QuantityType() *QuantityType {
+	_r := x.inner.QuantityType()
+	if _r == nil {
+		return nil
+	}
+	return &QuantityType{inner: _r}
+}
+
+// Quantity calls the underlying Quantity.
+func (x *QuantitySample) Quantity() *Quantity {
+	_r := x.inner.Quantity()
+	if _r == nil {
+		return nil
+	}
+	return &Quantity{inner: _r}
+}
+
+// Count calls the underlying Count.
+func (x *QuantitySample) Count() int {
+	return x.inner.Count()
+}
+
 func (x *QuantitySample) asQuantitySample() *raw.HKQuantitySample { return x.inner }
 
 func (x *QuantitySample) asSample() *raw.HKSample { return &x.inner.HKSample }
 
 func (x *QuantitySample) asObject() *raw.HKObject { return &x.inner.HKSample.HKObject }
+
+// QuantitySampleable is the interface implemented by [QuantitySample], for mocking and DI.
+type QuantitySampleable interface {
+	Unwrap() *raw.HKQuantitySample
+	QuantityType() *QuantityType
+	Quantity() *Quantity
+	Count() int
+}
+
+var _ QuantitySampleable = (*QuantitySample)(nil)
 

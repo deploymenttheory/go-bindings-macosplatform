@@ -7,6 +7,7 @@ package gamekit
 import (
 	"context"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamekit"
 	"github.com/ebitengine/purego/objc"
@@ -231,4 +232,82 @@ func (x *AccessPoint) TriggerAccessPointForArcadeWithHandler(ctx context.Context
 		return ctx.Err()
 	}
 }
+
+// IsActive calls the underlying IsActive.
+func (x *AccessPoint) IsActive() bool {
+	return x.inner.IsActive()
+}
+
+// SetActive calls the underlying SetActive.
+func (x *AccessPoint) SetActive(active bool) {
+	x.inner.SetActive(active)
+}
+
+// ShowHighlights calls the underlying ShowHighlights.
+func (x *AccessPoint) ShowHighlights() bool {
+	return x.inner.ShowHighlights()
+}
+
+// SetShowHighlights calls the underlying SetShowHighlights.
+func (x *AccessPoint) SetShowHighlights(showHighlights bool) {
+	x.inner.SetShowHighlights(showHighlights)
+}
+
+// Location calls the underlying Location.
+func (x *AccessPoint) Location() raw.GKAccessPointLocation {
+	return x.inner.Location()
+}
+
+// SetLocation calls the underlying SetLocation.
+func (x *AccessPoint) SetLocation(location raw.GKAccessPointLocation) {
+	x.inner.SetLocation(location)
+}
+
+// FrameInScreenCoordinates calls the underlying FrameInScreenCoordinates.
+func (x *AccessPoint) FrameInScreenCoordinates() corefoundation.CGRect {
+	return x.inner.FrameInScreenCoordinates()
+}
+
+// ParentWindow calls the underlying ParentWindow.
+func (x *AccessPoint) ParentWindow() *appkit.NSWindow {
+	return x.inner.ParentWindow()
+}
+
+// SetParentWindow calls the underlying SetParentWindow.
+func (x *AccessPoint) SetParentWindow(parentWindow *appkit.NSWindow) {
+	x.inner.SetParentWindow(parentWindow)
+}
+
+// AccessPointable is the interface implemented by [AccessPoint], for mocking and DI.
+type AccessPointable interface {
+	Unwrap() *raw.GKAccessPoint
+	WithActive(active bool) *AccessPoint
+	WithShowHighlights(showHighlights bool) *AccessPoint
+	WithLocation(location raw.GKAccessPointLocation) *AccessPoint
+	WithParentWindow(parentWindow *appkit.NSWindow) *AccessPoint
+	TriggerAccessPointWithHandler(ctx context.Context) error
+	TriggerAccessPointWithStateHandler(ctx context.Context, state raw.GKGameCenterViewControllerState) error
+	TriggerAccessPointWithAchievementIDHandler(ctx context.Context, achievementID string) error
+	TriggerAccessPointWithLeaderboardSetIDHandler(ctx context.Context, leaderboardSetID string) error
+	TriggerAccessPointWithLeaderboardIDPlayerScopeTimeScopeHandler(ctx context.Context, leaderboardID string, playerScope raw.GKLeaderboardPlayerScope, timeScope raw.GKLeaderboardTimeScope) error
+	TriggerAccessPointWithPlayerHandler(ctx context.Context, player *raw.GKPlayer) error
+	TriggerAccessPointForPlayTogetherWithHandler(ctx context.Context) error
+	TriggerAccessPointForChallengesWithHandler(ctx context.Context) error
+	TriggerAccessPointWithChallengeDefinitionIDHandler(ctx context.Context, challengeDefinitionID string) error
+	TriggerAccessPointWithGameActivityDefinitionIDHandler(ctx context.Context, gameActivityDefinitionID string) error
+	TriggerAccessPointWithGameActivityHandler(ctx context.Context, gameActivity *raw.GKGameActivity) error
+	TriggerAccessPointForFriendingWithHandler(ctx context.Context) error
+	TriggerAccessPointForArcadeWithHandler(ctx context.Context) error
+	IsActive() bool
+	SetActive(active bool)
+	ShowHighlights() bool
+	SetShowHighlights(showHighlights bool)
+	Location() raw.GKAccessPointLocation
+	SetLocation(location raw.GKAccessPointLocation)
+	FrameInScreenCoordinates() corefoundation.CGRect
+	ParentWindow() *appkit.NSWindow
+	SetParentWindow(parentWindow *appkit.NSWindow)
+}
+
+var _ AccessPointable = (*AccessPoint)(nil)
 

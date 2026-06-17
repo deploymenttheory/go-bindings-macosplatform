@@ -27,3 +27,10 @@ func (x *WorkoutType) asSampleType() *raw.HKSampleType { return &x.inner.HKSampl
 
 func (x *WorkoutType) asObjectType() *raw.HKObjectType { return &x.inner.HKSampleType.HKObjectType }
 
+// WorkoutTypeable is the interface implemented by [WorkoutType], for mocking and DI.
+type WorkoutTypeable interface {
+	Unwrap() *raw.HKWorkoutType
+}
+
+var _ WorkoutTypeable = (*WorkoutType)(nil)
+

@@ -6,6 +6,7 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,49 @@ func NewGlyphInfo() *GlyphInfo {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSGlyphInfo")), objc.RegisterName("new"))
 	return &GlyphInfo{inner: raw.NSGlyphInfoFromID(_id)}
 }
+
+// GlyphID calls the underlying GlyphID.
+func (x *GlyphInfo) GlyphID() uint16 {
+	return x.inner.GlyphID()
+}
+
+// BaseString calls the underlying BaseString.
+func (x *GlyphInfo) BaseString() string {
+	_r := x.inner.BaseString()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// GlyphName calls the underlying GlyphName.
+func (x *GlyphInfo) GlyphName() string {
+	_r := x.inner.GlyphName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// CharacterIdentifier calls the underlying CharacterIdentifier.
+func (x *GlyphInfo) CharacterIdentifier() uint {
+	return x.inner.CharacterIdentifier()
+}
+
+// CharacterCollection calls the underlying CharacterCollection.
+func (x *GlyphInfo) CharacterCollection() raw.NSCharacterCollection {
+	return x.inner.CharacterCollection()
+}
+
+// GlyphInfoable is the interface implemented by [GlyphInfo], for mocking and DI.
+type GlyphInfoable interface {
+	Unwrap() *raw.NSGlyphInfo
+	GlyphID() uint16
+	BaseString() string
+	GlyphName() string
+	CharacterIdentifier() uint
+	CharacterCollection() raw.NSCharacterCollection
+}
+
+var _ GlyphInfoable = (*GlyphInfo)(nil)
 

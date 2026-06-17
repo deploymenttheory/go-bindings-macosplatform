@@ -25,3 +25,10 @@ func NewAuthorizationPlatformPublicKeyCredentialDescriptorWithCredentialID(crede
 	return &AuthorizationPlatformPublicKeyCredentialDescriptor{inner: raw.ASAuthorizationPlatformPublicKeyCredentialDescriptorFromID(_id)}
 }
 
+// AuthorizationPlatformPublicKeyCredentialDescriptorable is the interface implemented by [AuthorizationPlatformPublicKeyCredentialDescriptor], for mocking and DI.
+type AuthorizationPlatformPublicKeyCredentialDescriptorable interface {
+	Unwrap() *raw.ASAuthorizationPlatformPublicKeyCredentialDescriptor
+}
+
+var _ AuthorizationPlatformPublicKeyCredentialDescriptorable = (*AuthorizationPlatformPublicKeyCredentialDescriptor)(nil)
+

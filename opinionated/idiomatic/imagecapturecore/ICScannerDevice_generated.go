@@ -5,8 +5,10 @@
 package imagecapturecore
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imagecapturecore"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // ScannerDevice wraps [raw.ICScannerDevice] with a fluent Go API.
@@ -35,5 +37,128 @@ func (x *ScannerDevice) WithMaxMemoryBandSize(maxMemoryBandSize uint) *ScannerDe
 	return x
 }
 
+// RequestOpenSessionWithCredentialsPassword calls the underlying RequestOpenSessionWithCredentialsPassword.
+func (x *ScannerDevice) RequestOpenSessionWithCredentialsPassword(username string, password string) {
+	x.inner.RequestOpenSessionWithCredentialsPassword(foundation.NSStringStringWithUTF8String(username), foundation.NSStringStringWithUTF8String(password))
+}
+
+// RequestSelectFunctionalUnit calls the underlying RequestSelectFunctionalUnit.
+func (x *ScannerDevice) RequestSelectFunctionalUnit(type_ raw.ICScannerFunctionalUnitType) {
+	x.inner.RequestSelectFunctionalUnit(type_)
+}
+
+// RequestOverviewScan calls the underlying RequestOverviewScan.
+func (x *ScannerDevice) RequestOverviewScan() {
+	x.inner.RequestOverviewScan()
+}
+
+// RequestScan calls the underlying RequestScan.
+func (x *ScannerDevice) RequestScan() {
+	x.inner.RequestScan()
+}
+
+// CancelScan calls the underlying CancelScan.
+func (x *ScannerDevice) CancelScan() {
+	x.inner.CancelScan()
+}
+
+// AvailableFunctionalUnitTypes calls the underlying AvailableFunctionalUnitTypes.
+func (x *ScannerDevice) AvailableFunctionalUnitTypes() unsafe.Pointer {
+	return x.inner.AvailableFunctionalUnitTypes()
+}
+
+// SelectedFunctionalUnit calls the underlying SelectedFunctionalUnit.
+func (x *ScannerDevice) SelectedFunctionalUnit() unsafe.Pointer {
+	return x.inner.SelectedFunctionalUnit()
+}
+
+// TransferMode calls the underlying TransferMode.
+func (x *ScannerDevice) TransferMode() raw.ICScannerTransferMode {
+	return x.inner.TransferMode()
+}
+
+// SetTransferMode calls the underlying SetTransferMode.
+func (x *ScannerDevice) SetTransferMode(transferMode raw.ICScannerTransferMode) {
+	x.inner.SetTransferMode(transferMode)
+}
+
+// MaxMemoryBandSize calls the underlying MaxMemoryBandSize.
+func (x *ScannerDevice) MaxMemoryBandSize() uint {
+	return x.inner.MaxMemoryBandSize()
+}
+
+// SetMaxMemoryBandSize calls the underlying SetMaxMemoryBandSize.
+func (x *ScannerDevice) SetMaxMemoryBandSize(maxMemoryBandSize uint) {
+	x.inner.SetMaxMemoryBandSize(maxMemoryBandSize)
+}
+
+// DownloadsDirectory calls the underlying DownloadsDirectory.
+func (x *ScannerDevice) DownloadsDirectory() unsafe.Pointer {
+	return x.inner.DownloadsDirectory()
+}
+
+// SetDownloadsDirectory calls the underlying SetDownloadsDirectory.
+func (x *ScannerDevice) SetDownloadsDirectory(downloadsDirectory unsafe.Pointer) {
+	x.inner.SetDownloadsDirectory(downloadsDirectory)
+}
+
+// DocumentName calls the underlying DocumentName.
+func (x *ScannerDevice) DocumentName() unsafe.Pointer {
+	return x.inner.DocumentName()
+}
+
+// SetDocumentName calls the underlying SetDocumentName.
+func (x *ScannerDevice) SetDocumentName(documentName unsafe.Pointer) {
+	x.inner.SetDocumentName(documentName)
+}
+
+// DocumentUTI calls the underlying DocumentUTI.
+func (x *ScannerDevice) DocumentUTI() unsafe.Pointer {
+	return x.inner.DocumentUTI()
+}
+
+// SetDocumentUTI calls the underlying SetDocumentUTI.
+func (x *ScannerDevice) SetDocumentUTI(documentUTI unsafe.Pointer) {
+	x.inner.SetDocumentUTI(documentUTI)
+}
+
+// DefaultUsername calls the underlying DefaultUsername.
+func (x *ScannerDevice) DefaultUsername() unsafe.Pointer {
+	return x.inner.DefaultUsername()
+}
+
+// SetDefaultUsername calls the underlying SetDefaultUsername.
+func (x *ScannerDevice) SetDefaultUsername(defaultUsername unsafe.Pointer) {
+	x.inner.SetDefaultUsername(defaultUsername)
+}
+
 func (x *ScannerDevice) asDevice() *raw.ICDevice { return &x.inner.ICDevice }
+
+// ScannerDeviceable is the interface implemented by [ScannerDevice], for mocking and DI.
+type ScannerDeviceable interface {
+	Unwrap() *raw.ICScannerDevice
+	WithTransferMode(transferMode raw.ICScannerTransferMode) *ScannerDevice
+	WithMaxMemoryBandSize(maxMemoryBandSize uint) *ScannerDevice
+	RequestOpenSessionWithCredentialsPassword(username string, password string)
+	RequestSelectFunctionalUnit(type_ raw.ICScannerFunctionalUnitType)
+	RequestOverviewScan()
+	RequestScan()
+	CancelScan()
+	AvailableFunctionalUnitTypes() unsafe.Pointer
+	SelectedFunctionalUnit() unsafe.Pointer
+	TransferMode() raw.ICScannerTransferMode
+	SetTransferMode(transferMode raw.ICScannerTransferMode)
+	MaxMemoryBandSize() uint
+	SetMaxMemoryBandSize(maxMemoryBandSize uint)
+	DownloadsDirectory() unsafe.Pointer
+	SetDownloadsDirectory(downloadsDirectory unsafe.Pointer)
+	DocumentName() unsafe.Pointer
+	SetDocumentName(documentName unsafe.Pointer)
+	DocumentUTI() unsafe.Pointer
+	SetDocumentUTI(documentUTI unsafe.Pointer)
+	DefaultUsername() unsafe.Pointer
+	SetDefaultUsername(defaultUsername unsafe.Pointer)
+}
+
+var _ ScannerDeviceable = (*ScannerDevice)(nil)
 

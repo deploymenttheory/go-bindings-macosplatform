@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -65,16 +66,97 @@ func (x *SpeechRecognizer) WithBlocksOtherRecognizers(blocksOtherRecognizers boo
 	return x
 }
 
+// StartListening calls the underlying StartListening.
+func (x *SpeechRecognizer) StartListening() {
+	x.inner.StartListening()
+}
+
+// StopListening calls the underlying StopListening.
+func (x *SpeechRecognizer) StopListening() {
+	x.inner.StopListening()
+}
+
+// Delegate calls the underlying Delegate.
+func (x *SpeechRecognizer) Delegate() raw.NSSpeechRecognizerDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *SpeechRecognizer) SetDelegate(delegate raw.NSSpeechRecognizerDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
 // Commands returns the collection as a Go slice.
-func (x *SpeechRecognizer) Commands() []*foundation.NSString {
+func (x *SpeechRecognizer) Commands() []string {
 	arr := x.inner.Commands()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
+
+// SetCommands calls the underlying SetCommands.
+func (x *SpeechRecognizer) SetCommands(commands *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetCommands(commands)
+}
+
+// DisplayedCommandsTitle calls the underlying DisplayedCommandsTitle.
+func (x *SpeechRecognizer) DisplayedCommandsTitle() string {
+	_r := x.inner.DisplayedCommandsTitle()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetDisplayedCommandsTitle calls the underlying SetDisplayedCommandsTitle.
+func (x *SpeechRecognizer) SetDisplayedCommandsTitle(displayedCommandsTitle string) {
+	x.inner.SetDisplayedCommandsTitle(foundation.NSStringStringWithUTF8String(displayedCommandsTitle))
+}
+
+// ListensInForegroundOnly calls the underlying ListensInForegroundOnly.
+func (x *SpeechRecognizer) ListensInForegroundOnly() bool {
+	return x.inner.ListensInForegroundOnly()
+}
+
+// SetListensInForegroundOnly calls the underlying SetListensInForegroundOnly.
+func (x *SpeechRecognizer) SetListensInForegroundOnly(listensInForegroundOnly bool) {
+	x.inner.SetListensInForegroundOnly(listensInForegroundOnly)
+}
+
+// BlocksOtherRecognizers calls the underlying BlocksOtherRecognizers.
+func (x *SpeechRecognizer) BlocksOtherRecognizers() bool {
+	return x.inner.BlocksOtherRecognizers()
+}
+
+// SetBlocksOtherRecognizers calls the underlying SetBlocksOtherRecognizers.
+func (x *SpeechRecognizer) SetBlocksOtherRecognizers(blocksOtherRecognizers bool) {
+	x.inner.SetBlocksOtherRecognizers(blocksOtherRecognizers)
+}
+
+// SpeechRecognizerable is the interface implemented by [SpeechRecognizer], for mocking and DI.
+type SpeechRecognizerable interface {
+	Unwrap() *raw.NSSpeechRecognizer
+	WithDelegate(delegate raw.NSSpeechRecognizerDelegate) *SpeechRecognizer
+	WithCommands(items ...*foundation.NSString) *SpeechRecognizer
+	WithDisplayedCommandsTitle(displayedCommandsTitle string) *SpeechRecognizer
+	WithListensInForegroundOnly(listensInForegroundOnly bool) *SpeechRecognizer
+	WithBlocksOtherRecognizers(blocksOtherRecognizers bool) *SpeechRecognizer
+	StartListening()
+	StopListening()
+	Delegate() raw.NSSpeechRecognizerDelegate
+	SetDelegate(delegate raw.NSSpeechRecognizerDelegate)
+	Commands() []string
+	SetCommands(commands *foundation.NSArray[*foundation.NSString])
+	DisplayedCommandsTitle() string
+	SetDisplayedCommandsTitle(displayedCommandsTitle string)
+	ListensInForegroundOnly() bool
+	SetListensInForegroundOnly(listensInForegroundOnly bool)
+	BlocksOtherRecognizers() bool
+	SetBlocksOtherRecognizers(blocksOtherRecognizers bool)
+}
+
+var _ SpeechRecognizerable = (*SpeechRecognizer)(nil)
 

@@ -23,5 +23,18 @@ func NewComparisonLayer() *ComparisonLayer {
 	return &ComparisonLayer{inner: raw.MLCComparisonLayerFromID(_id)}
 }
 
+// Operation calls the underlying Operation.
+func (x *ComparisonLayer) Operation() raw.MLCComparisonOperation {
+	return x.inner.Operation()
+}
+
 func (x *ComparisonLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
+
+// ComparisonLayerable is the interface implemented by [ComparisonLayer], for mocking and DI.
+type ComparisonLayerable interface {
+	Unwrap() *raw.MLCComparisonLayer
+	Operation() raw.MLCComparisonOperation
+}
+
+var _ ComparisonLayerable = (*ComparisonLayer)(nil)
 

@@ -7,6 +7,7 @@ package gamecontroller
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamecontroller"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,5 +55,121 @@ func (x *ControllerElement) WithUnmappedLocalizedName(unmappedLocalizedName stri
 	return x
 }
 
+// Collection calls the underlying Collection.
+func (x *ControllerElement) Collection() *ControllerElement {
+	_r := x.inner.Collection()
+	if _r == nil {
+		return nil
+	}
+	return &ControllerElement{inner: _r}
+}
+
+// IsAnalog calls the underlying IsAnalog.
+func (x *ControllerElement) IsAnalog() bool {
+	return x.inner.IsAnalog()
+}
+
+// IsBoundToSystemGesture calls the underlying IsBoundToSystemGesture.
+func (x *ControllerElement) IsBoundToSystemGesture() bool {
+	return x.inner.IsBoundToSystemGesture()
+}
+
+// PreferredSystemGestureState calls the underlying PreferredSystemGestureState.
+func (x *ControllerElement) PreferredSystemGestureState() raw.GCSystemGestureState {
+	return x.inner.PreferredSystemGestureState()
+}
+
+// SetPreferredSystemGestureState calls the underlying SetPreferredSystemGestureState.
+func (x *ControllerElement) SetPreferredSystemGestureState(preferredSystemGestureState raw.GCSystemGestureState) {
+	x.inner.SetPreferredSystemGestureState(preferredSystemGestureState)
+}
+
+// SfSymbolsName calls the underlying SfSymbolsName.
+func (x *ControllerElement) SfSymbolsName() string {
+	_r := x.inner.SfSymbolsName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetSfSymbolsName calls the underlying SetSfSymbolsName.
+func (x *ControllerElement) SetSfSymbolsName(sfSymbolsName string) {
+	x.inner.SetSfSymbolsName(foundation.NSStringStringWithUTF8String(sfSymbolsName))
+}
+
+// LocalizedName calls the underlying LocalizedName.
+func (x *ControllerElement) LocalizedName() string {
+	_r := x.inner.LocalizedName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLocalizedName calls the underlying SetLocalizedName.
+func (x *ControllerElement) SetLocalizedName(localizedName string) {
+	x.inner.SetLocalizedName(foundation.NSStringStringWithUTF8String(localizedName))
+}
+
+// UnmappedSfSymbolsName calls the underlying UnmappedSfSymbolsName.
+func (x *ControllerElement) UnmappedSfSymbolsName() string {
+	_r := x.inner.UnmappedSfSymbolsName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetUnmappedSfSymbolsName calls the underlying SetUnmappedSfSymbolsName.
+func (x *ControllerElement) SetUnmappedSfSymbolsName(unmappedSfSymbolsName string) {
+	x.inner.SetUnmappedSfSymbolsName(foundation.NSStringStringWithUTF8String(unmappedSfSymbolsName))
+}
+
+// UnmappedLocalizedName calls the underlying UnmappedLocalizedName.
+func (x *ControllerElement) UnmappedLocalizedName() string {
+	_r := x.inner.UnmappedLocalizedName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetUnmappedLocalizedName calls the underlying SetUnmappedLocalizedName.
+func (x *ControllerElement) SetUnmappedLocalizedName(unmappedLocalizedName string) {
+	x.inner.SetUnmappedLocalizedName(foundation.NSStringStringWithUTF8String(unmappedLocalizedName))
+}
+
+// Aliases calls the underlying Aliases.
+func (x *ControllerElement) Aliases() *foundation.NSSet[*foundation.NSString] {
+	return x.inner.Aliases()
+}
+
 func (x *ControllerElement) asControllerElement() *raw.GCControllerElement { return x.inner }
+
+// ControllerElementable is the interface implemented by [ControllerElement], for mocking and DI.
+type ControllerElementable interface {
+	Unwrap() *raw.GCControllerElement
+	WithPreferredSystemGestureState(preferredSystemGestureState raw.GCSystemGestureState) *ControllerElement
+	WithSfSymbolsName(sfSymbolsName string) *ControllerElement
+	WithLocalizedName(localizedName string) *ControllerElement
+	WithUnmappedSfSymbolsName(unmappedSfSymbolsName string) *ControllerElement
+	WithUnmappedLocalizedName(unmappedLocalizedName string) *ControllerElement
+	Collection() *ControllerElement
+	IsAnalog() bool
+	IsBoundToSystemGesture() bool
+	PreferredSystemGestureState() raw.GCSystemGestureState
+	SetPreferredSystemGestureState(preferredSystemGestureState raw.GCSystemGestureState)
+	SfSymbolsName() string
+	SetSfSymbolsName(sfSymbolsName string)
+	LocalizedName() string
+	SetLocalizedName(localizedName string)
+	UnmappedSfSymbolsName() string
+	SetUnmappedSfSymbolsName(unmappedSfSymbolsName string)
+	UnmappedLocalizedName() string
+	SetUnmappedLocalizedName(unmappedLocalizedName string)
+	Aliases() *foundation.NSSet[*foundation.NSString]
+}
+
+var _ ControllerElementable = (*ControllerElement)(nil)
 

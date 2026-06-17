@@ -32,5 +32,25 @@ func (x *ActivitySummaryQuery) WithUpdateHandler(updateHandler func(*raw.HKActiv
 	return x
 }
 
+// UpdateHandler calls the underlying UpdateHandler.
+func (x *ActivitySummaryQuery) UpdateHandler() objc.Block {
+	return x.inner.UpdateHandler()
+}
+
+// SetUpdateHandler calls the underlying SetUpdateHandler.
+func (x *ActivitySummaryQuery) SetUpdateHandler(updateHandler func(*raw.HKActivitySummaryQuery, *foundation.NSArray[*raw.HKActivitySummary], unsafe.Pointer)) {
+	x.inner.SetUpdateHandler(updateHandler)
+}
+
 func (x *ActivitySummaryQuery) asQuery() *raw.HKQuery { return &x.inner.HKQuery }
+
+// ActivitySummaryQueryable is the interface implemented by [ActivitySummaryQuery], for mocking and DI.
+type ActivitySummaryQueryable interface {
+	Unwrap() *raw.HKActivitySummaryQuery
+	WithUpdateHandler(updateHandler func(*raw.HKActivitySummaryQuery, *foundation.NSArray[*raw.HKActivitySummary], unsafe.Pointer)) *ActivitySummaryQuery
+	UpdateHandler() objc.Block
+	SetUpdateHandler(updateHandler func(*raw.HKActivitySummaryQuery, *foundation.NSArray[*raw.HKActivitySummary], unsafe.Pointer))
+}
+
+var _ ActivitySummaryQueryable = (*ActivitySummaryQuery)(nil)
 

@@ -5,7 +5,9 @@
 package photosui
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photosui"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +24,39 @@ func NewProjectRegionOfInterest() *ProjectRegionOfInterest {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHProjectRegionOfInterest")), objc.RegisterName("new"))
 	return &ProjectRegionOfInterest{inner: raw.PHProjectRegionOfInterestFromID(_id)}
 }
+
+// Rect calls the underlying Rect.
+func (x *ProjectRegionOfInterest) Rect() corefoundation.CGRect {
+	return x.inner.Rect()
+}
+
+// Weight calls the underlying Weight.
+func (x *ProjectRegionOfInterest) Weight() float64 {
+	return x.inner.Weight()
+}
+
+// Quality calls the underlying Quality.
+func (x *ProjectRegionOfInterest) Quality() float64 {
+	return x.inner.Quality()
+}
+
+// Identifier calls the underlying Identifier.
+func (x *ProjectRegionOfInterest) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ProjectRegionOfInterestable is the interface implemented by [ProjectRegionOfInterest], for mocking and DI.
+type ProjectRegionOfInterestable interface {
+	Unwrap() *raw.PHProjectRegionOfInterest
+	Rect() corefoundation.CGRect
+	Weight() float64
+	Quality() float64
+	Identifier() string
+}
+
+var _ ProjectRegionOfInterestable = (*ProjectRegionOfInterest)(nil)
 

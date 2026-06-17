@@ -23,3 +23,26 @@ func NewBlitPassSampleBufferAttachmentDescriptorArray() *BlitPassSampleBufferAtt
 	return &BlitPassSampleBufferAttachmentDescriptorArray{inner: raw.MTLBlitPassSampleBufferAttachmentDescriptorArrayFromID(_id)}
 }
 
+// ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
+func (x *BlitPassSampleBufferAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex uint) *BlitPassSampleBufferAttachmentDescriptor {
+	_r := x.inner.ObjectAtIndexedSubscript(attachmentIndex)
+	if _r == nil {
+		return nil
+	}
+	return &BlitPassSampleBufferAttachmentDescriptor{inner: _r}
+}
+
+// SetObjectAtIndexedSubscript calls the underlying SetObjectAtIndexedSubscript.
+func (x *BlitPassSampleBufferAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *raw.MTLBlitPassSampleBufferAttachmentDescriptor, attachmentIndex uint) {
+	x.inner.SetObjectAtIndexedSubscript(attachment, attachmentIndex)
+}
+
+// BlitPassSampleBufferAttachmentDescriptorArrayable is the interface implemented by [BlitPassSampleBufferAttachmentDescriptorArray], for mocking and DI.
+type BlitPassSampleBufferAttachmentDescriptorArrayable interface {
+	Unwrap() *raw.MTLBlitPassSampleBufferAttachmentDescriptorArray
+	ObjectAtIndexedSubscript(attachmentIndex uint) *BlitPassSampleBufferAttachmentDescriptor
+	SetObjectAtIndexedSubscript(attachment *raw.MTLBlitPassSampleBufferAttachmentDescriptor, attachmentIndex uint)
+}
+
+var _ BlitPassSampleBufferAttachmentDescriptorArrayable = (*BlitPassSampleBufferAttachmentDescriptorArray)(nil)
+

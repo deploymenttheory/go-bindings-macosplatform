@@ -7,6 +7,7 @@ package healthkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -34,16 +35,14 @@ func NewVerifiableClinicalRecordQueryWithRecordTypesSourceTypesPredicateResultsH
 }
 
 // RecordTypes returns the collection as a Go slice.
-func (x *VerifiableClinicalRecordQuery) RecordTypes() []*foundation.NSString {
+func (x *VerifiableClinicalRecordQuery) RecordTypes() []string {
 	arr := x.inner.RecordTypes()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
 
 // SourceTypes returns the collection as a Go slice.
@@ -52,12 +51,19 @@ func (x *VerifiableClinicalRecordQuery) SourceTypes() []*foundation.NSString {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	})
 }
 
 func (x *VerifiableClinicalRecordQuery) asQuery() *raw.HKQuery { return &x.inner.HKQuery }
+
+// VerifiableClinicalRecordQueryable is the interface implemented by [VerifiableClinicalRecordQuery], for mocking and DI.
+type VerifiableClinicalRecordQueryable interface {
+	Unwrap() *raw.HKVerifiableClinicalRecordQuery
+	RecordTypes() []string
+	SourceTypes() []*foundation.NSString
+}
+
+var _ VerifiableClinicalRecordQueryable = (*VerifiableClinicalRecordQuery)(nil)
 

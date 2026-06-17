@@ -41,9 +41,55 @@ func (x *GenerateOpticalFlowRequest) WithKeepNetworkOutput(keepNetworkOutput boo
 	return x
 }
 
+// ComputationAccuracy calls the underlying ComputationAccuracy.
+func (x *GenerateOpticalFlowRequest) ComputationAccuracy() raw.VNGenerateOpticalFlowRequestComputationAccuracy {
+	return x.inner.ComputationAccuracy()
+}
+
+// SetComputationAccuracy calls the underlying SetComputationAccuracy.
+func (x *GenerateOpticalFlowRequest) SetComputationAccuracy(computationAccuracy raw.VNGenerateOpticalFlowRequestComputationAccuracy) {
+	x.inner.SetComputationAccuracy(computationAccuracy)
+}
+
+// OutputPixelFormat calls the underlying OutputPixelFormat.
+func (x *GenerateOpticalFlowRequest) OutputPixelFormat() uint {
+	return x.inner.OutputPixelFormat()
+}
+
+// SetOutputPixelFormat calls the underlying SetOutputPixelFormat.
+func (x *GenerateOpticalFlowRequest) SetOutputPixelFormat(outputPixelFormat uint) {
+	x.inner.SetOutputPixelFormat(outputPixelFormat)
+}
+
+// KeepNetworkOutput calls the underlying KeepNetworkOutput.
+func (x *GenerateOpticalFlowRequest) KeepNetworkOutput() bool {
+	return x.inner.KeepNetworkOutput()
+}
+
+// SetKeepNetworkOutput calls the underlying SetKeepNetworkOutput.
+func (x *GenerateOpticalFlowRequest) SetKeepNetworkOutput(keepNetworkOutput bool) {
+	x.inner.SetKeepNetworkOutput(keepNetworkOutput)
+}
+
 func (x *GenerateOpticalFlowRequest) asTargetedImageRequest() *raw.VNTargetedImageRequest { return &x.inner.VNTargetedImageRequest }
 
 func (x *GenerateOpticalFlowRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNTargetedImageRequest.VNImageBasedRequest }
 
 func (x *GenerateOpticalFlowRequest) asRequest() *raw.VNRequest { return &x.inner.VNTargetedImageRequest.VNImageBasedRequest.VNRequest }
+
+// GenerateOpticalFlowRequestable is the interface implemented by [GenerateOpticalFlowRequest], for mocking and DI.
+type GenerateOpticalFlowRequestable interface {
+	Unwrap() *raw.VNGenerateOpticalFlowRequest
+	WithComputationAccuracy(computationAccuracy raw.VNGenerateOpticalFlowRequestComputationAccuracy) *GenerateOpticalFlowRequest
+	WithOutputPixelFormat(outputPixelFormat uint) *GenerateOpticalFlowRequest
+	WithKeepNetworkOutput(keepNetworkOutput bool) *GenerateOpticalFlowRequest
+	ComputationAccuracy() raw.VNGenerateOpticalFlowRequestComputationAccuracy
+	SetComputationAccuracy(computationAccuracy raw.VNGenerateOpticalFlowRequestComputationAccuracy)
+	OutputPixelFormat() uint
+	SetOutputPixelFormat(outputPixelFormat uint)
+	KeepNetworkOutput() bool
+	SetKeepNetworkOutput(keepNetworkOutput bool)
+}
+
+var _ GenerateOpticalFlowRequestable = (*GenerateOpticalFlowRequest)(nil)
 

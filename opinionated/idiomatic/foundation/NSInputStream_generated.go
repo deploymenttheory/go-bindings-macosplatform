@@ -39,7 +39,32 @@ func NewInputStreamWithFileAtPath(path string) *InputStream {
 	return &InputStream{inner: raw.NSInputStreamFromID(_id)}
 }
 
+// ReadMaxLength calls the underlying ReadMaxLength.
+func (x *InputStream) ReadMaxLength(buffer *uint8, len_ uint) int {
+	return x.inner.ReadMaxLength(buffer, len_)
+}
+
+// GetBufferLength calls the underlying GetBufferLength.
+func (x *InputStream) GetBufferLength(buffer *uint8, len_ *uint) bool {
+	return x.inner.GetBufferLength(buffer, len_)
+}
+
+// HasBytesAvailable calls the underlying HasBytesAvailable.
+func (x *InputStream) HasBytesAvailable() bool {
+	return x.inner.HasBytesAvailable()
+}
+
 func (x *InputStream) asStream() *raw.NSStream { return &x.inner.NSStream }
 
 func (x *InputStream) asObject() *raw.NSObject { return &x.inner.NSStream.NSObject }
+
+// InputStreamable is the interface implemented by [InputStream], for mocking and DI.
+type InputStreamable interface {
+	Unwrap() *raw.NSInputStream
+	ReadMaxLength(buffer *uint8, len_ uint) int
+	GetBufferLength(buffer *uint8, len_ *uint) bool
+	HasBytesAvailable() bool
+}
+
+var _ InputStreamable = (*InputStream)(nil)
 

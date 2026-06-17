@@ -23,5 +23,22 @@ func NewMatMulLayer() *MatMulLayer {
 	return &MatMulLayer{inner: raw.MLCMatMulLayerFromID(_id)}
 }
 
+// Descriptor calls the underlying Descriptor.
+func (x *MatMulLayer) Descriptor() *MatMulDescriptor {
+	_r := x.inner.Descriptor()
+	if _r == nil {
+		return nil
+	}
+	return &MatMulDescriptor{inner: _r}
+}
+
 func (x *MatMulLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
+
+// MatMulLayerable is the interface implemented by [MatMulLayer], for mocking and DI.
+type MatMulLayerable interface {
+	Unwrap() *raw.MLCMatMulLayer
+	Descriptor() *MatMulDescriptor
+}
+
+var _ MatMulLayerable = (*MatMulLayer)(nil)
 

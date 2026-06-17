@@ -35,3 +35,40 @@ func (x *WorkflowView) WithWorkflowController(workflowController *raw.AMWorkflow
 	return x
 }
 
+// IsEditable calls the underlying IsEditable.
+func (x *WorkflowView) IsEditable() bool {
+	return x.inner.IsEditable()
+}
+
+// SetEditable calls the underlying SetEditable.
+func (x *WorkflowView) SetEditable(editable bool) {
+	x.inner.SetEditable(editable)
+}
+
+// WorkflowController calls the underlying WorkflowController.
+func (x *WorkflowView) WorkflowController() *WorkflowController {
+	_r := x.inner.WorkflowController()
+	if _r == nil {
+		return nil
+	}
+	return &WorkflowController{inner: _r}
+}
+
+// SetWorkflowController calls the underlying SetWorkflowController.
+func (x *WorkflowView) SetWorkflowController(workflowController *raw.AMWorkflowController) {
+	x.inner.SetWorkflowController(workflowController)
+}
+
+// WorkflowViewable is the interface implemented by [WorkflowView], for mocking and DI.
+type WorkflowViewable interface {
+	Unwrap() *raw.AMWorkflowView
+	WithEditable(editable bool) *WorkflowView
+	WithWorkflowController(workflowController *raw.AMWorkflowController) *WorkflowView
+	IsEditable() bool
+	SetEditable(editable bool)
+	WorkflowController() *WorkflowController
+	SetWorkflowController(workflowController *raw.AMWorkflowController)
+}
+
+var _ WorkflowViewable = (*WorkflowView)(nil)
+

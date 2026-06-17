@@ -5,6 +5,8 @@
 package imagecapturecore
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imagecapturecore"
 	"github.com/ebitengine/purego/objc"
 )
@@ -29,5 +31,37 @@ func (x *ScannerFunctionalUnitPositiveTransparency) WithDocumentType(documentTyp
 	return x
 }
 
+// SupportedDocumentTypes calls the underlying SupportedDocumentTypes.
+func (x *ScannerFunctionalUnitPositiveTransparency) SupportedDocumentTypes() *foundation.NSIndexSet {
+	return x.inner.SupportedDocumentTypes()
+}
+
+// DocumentType calls the underlying DocumentType.
+func (x *ScannerFunctionalUnitPositiveTransparency) DocumentType() raw.ICScannerDocumentType {
+	return x.inner.DocumentType()
+}
+
+// SetDocumentType calls the underlying SetDocumentType.
+func (x *ScannerFunctionalUnitPositiveTransparency) SetDocumentType(documentType raw.ICScannerDocumentType) {
+	x.inner.SetDocumentType(documentType)
+}
+
+// DocumentSize calls the underlying DocumentSize.
+func (x *ScannerFunctionalUnitPositiveTransparency) DocumentSize() corefoundation.CGSize {
+	return x.inner.DocumentSize()
+}
+
 func (x *ScannerFunctionalUnitPositiveTransparency) asScannerFunctionalUnit() *raw.ICScannerFunctionalUnit { return &x.inner.ICScannerFunctionalUnit }
+
+// ScannerFunctionalUnitPositiveTransparencyable is the interface implemented by [ScannerFunctionalUnitPositiveTransparency], for mocking and DI.
+type ScannerFunctionalUnitPositiveTransparencyable interface {
+	Unwrap() *raw.ICScannerFunctionalUnitPositiveTransparency
+	WithDocumentType(documentType raw.ICScannerDocumentType) *ScannerFunctionalUnitPositiveTransparency
+	SupportedDocumentTypes() *foundation.NSIndexSet
+	DocumentType() raw.ICScannerDocumentType
+	SetDocumentType(documentType raw.ICScannerDocumentType)
+	DocumentSize() corefoundation.CGSize
+}
+
+var _ ScannerFunctionalUnitPositiveTransparencyable = (*ScannerFunctionalUnitPositiveTransparency)(nil)
 

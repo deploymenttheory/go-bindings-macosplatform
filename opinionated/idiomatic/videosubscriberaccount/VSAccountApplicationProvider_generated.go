@@ -7,6 +7,7 @@ package videosubscriberaccount
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/videosubscriberaccount"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,4 +25,31 @@ func NewVSAccountApplicationProviderWithLocalizedDisplayNameIdentifier(localized
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLocalizedDisplayName:identifier:"), foundation.NSStringStringWithUTF8String(localizedDisplayName).Ptr(), foundation.NSStringStringWithUTF8String(identifier).Ptr())
 	return &VSAccountApplicationProvider{inner: raw.VSAccountApplicationProviderFromID(_id)}
 }
+
+// LocalizedDisplayName calls the underlying LocalizedDisplayName.
+func (x *VSAccountApplicationProvider) LocalizedDisplayName() string {
+	_r := x.inner.LocalizedDisplayName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Identifier calls the underlying Identifier.
+func (x *VSAccountApplicationProvider) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// VSAccountApplicationProviderable is the interface implemented by [VSAccountApplicationProvider], for mocking and DI.
+type VSAccountApplicationProviderable interface {
+	Unwrap() *raw.VSAccountApplicationProvider
+	LocalizedDisplayName() string
+	Identifier() string
+}
+
+var _ VSAccountApplicationProviderable = (*VSAccountApplicationProvider)(nil)
 

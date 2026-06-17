@@ -23,3 +23,60 @@ func NewPhysicsContact() *PhysicsContact {
 	return &PhysicsContact{inner: raw.SCNPhysicsContactFromID(_id)}
 }
 
+// NodeA calls the underlying NodeA.
+func (x *PhysicsContact) NodeA() *Node {
+	_r := x.inner.NodeA()
+	if _r == nil {
+		return nil
+	}
+	return &Node{inner: _r}
+}
+
+// NodeB calls the underlying NodeB.
+func (x *PhysicsContact) NodeB() *Node {
+	_r := x.inner.NodeB()
+	if _r == nil {
+		return nil
+	}
+	return &Node{inner: _r}
+}
+
+// ContactPoint calls the underlying ContactPoint.
+func (x *PhysicsContact) ContactPoint() raw.SCNVector3 {
+	return x.inner.ContactPoint()
+}
+
+// ContactNormal calls the underlying ContactNormal.
+func (x *PhysicsContact) ContactNormal() raw.SCNVector3 {
+	return x.inner.ContactNormal()
+}
+
+// CollisionImpulse calls the underlying CollisionImpulse.
+func (x *PhysicsContact) CollisionImpulse() float64 {
+	return x.inner.CollisionImpulse()
+}
+
+// PenetrationDistance calls the underlying PenetrationDistance.
+func (x *PhysicsContact) PenetrationDistance() float64 {
+	return x.inner.PenetrationDistance()
+}
+
+// SweepTestFraction calls the underlying SweepTestFraction.
+func (x *PhysicsContact) SweepTestFraction() float64 {
+	return x.inner.SweepTestFraction()
+}
+
+// PhysicsContactable is the interface implemented by [PhysicsContact], for mocking and DI.
+type PhysicsContactable interface {
+	Unwrap() *raw.SCNPhysicsContact
+	NodeA() *Node
+	NodeB() *Node
+	ContactPoint() raw.SCNVector3
+	ContactNormal() raw.SCNVector3
+	CollisionImpulse() float64
+	PenetrationDistance() float64
+	SweepTestFraction() float64
+}
+
+var _ PhysicsContactable = (*PhysicsContact)(nil)
+

@@ -36,3 +36,36 @@ func (x *MTRServiceAreaClusterLandmarkInfoStruct) WithRelativePositionTag(relati
 	return x
 }
 
+// LandmarkTag calls the underlying LandmarkTag.
+func (x *MTRServiceAreaClusterLandmarkInfoStruct) LandmarkTag() *foundation.NSNumber {
+	return x.inner.LandmarkTag()
+}
+
+// SetLandmarkTag calls the underlying SetLandmarkTag.
+func (x *MTRServiceAreaClusterLandmarkInfoStruct) SetLandmarkTag(landmarkTag *foundation.NSNumber) {
+	x.inner.SetLandmarkTag(landmarkTag)
+}
+
+// RelativePositionTag calls the underlying RelativePositionTag.
+func (x *MTRServiceAreaClusterLandmarkInfoStruct) RelativePositionTag() *foundation.NSNumber {
+	return x.inner.RelativePositionTag()
+}
+
+// SetRelativePositionTag calls the underlying SetRelativePositionTag.
+func (x *MTRServiceAreaClusterLandmarkInfoStruct) SetRelativePositionTag(relativePositionTag *foundation.NSNumber) {
+	x.inner.SetRelativePositionTag(relativePositionTag)
+}
+
+// MTRServiceAreaClusterLandmarkInfoStructable is the interface implemented by [MTRServiceAreaClusterLandmarkInfoStruct], for mocking and DI.
+type MTRServiceAreaClusterLandmarkInfoStructable interface {
+	Unwrap() *raw.MTRServiceAreaClusterLandmarkInfoStruct
+	WithLandmarkTag(landmarkTag *foundation.NSNumber) *MTRServiceAreaClusterLandmarkInfoStruct
+	WithRelativePositionTag(relativePositionTag *foundation.NSNumber) *MTRServiceAreaClusterLandmarkInfoStruct
+	LandmarkTag() *foundation.NSNumber
+	SetLandmarkTag(landmarkTag *foundation.NSNumber)
+	RelativePositionTag() *foundation.NSNumber
+	SetRelativePositionTag(relativePositionTag *foundation.NSNumber)
+}
+
+var _ MTRServiceAreaClusterLandmarkInfoStructable = (*MTRServiceAreaClusterLandmarkInfoStruct)(nil)
+

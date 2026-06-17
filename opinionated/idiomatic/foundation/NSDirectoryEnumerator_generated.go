@@ -23,7 +23,50 @@ func NewDirectoryEnumerator() *DirectoryEnumerator {
 	return &DirectoryEnumerator{inner: raw.NSDirectoryEnumeratorFromID[objc.ID](_id)}
 }
 
+// SkipDescendents calls the underlying SkipDescendents.
+func (x *DirectoryEnumerator) SkipDescendents() {
+	x.inner.SkipDescendents()
+}
+
+// SkipDescendants calls the underlying SkipDescendants.
+func (x *DirectoryEnumerator) SkipDescendants() {
+	x.inner.SkipDescendants()
+}
+
+// FileAttributes calls the underlying FileAttributes.
+func (x *DirectoryEnumerator) FileAttributes() *raw.NSDictionary[*raw.NSString, objc.ID] {
+	return x.inner.FileAttributes()
+}
+
+// DirectoryAttributes calls the underlying DirectoryAttributes.
+func (x *DirectoryEnumerator) DirectoryAttributes() *raw.NSDictionary[*raw.NSString, objc.ID] {
+	return x.inner.DirectoryAttributes()
+}
+
+// IsEnumeratingDirectoryPostOrder calls the underlying IsEnumeratingDirectoryPostOrder.
+func (x *DirectoryEnumerator) IsEnumeratingDirectoryPostOrder() bool {
+	return x.inner.IsEnumeratingDirectoryPostOrder()
+}
+
+// Level calls the underlying Level.
+func (x *DirectoryEnumerator) Level() uint {
+	return x.inner.Level()
+}
+
 func (x *DirectoryEnumerator) asEnumerator() *raw.NSEnumerator[objc.ID] { return &x.inner.NSEnumerator }
 
 func (x *DirectoryEnumerator) asObject() *raw.NSObject { return &x.inner.NSEnumerator.NSObject }
+
+// DirectoryEnumeratorable is the interface implemented by [DirectoryEnumerator], for mocking and DI.
+type DirectoryEnumeratorable interface {
+	Unwrap() *raw.NSDirectoryEnumerator[objc.ID]
+	SkipDescendents()
+	SkipDescendants()
+	FileAttributes() *raw.NSDictionary[*raw.NSString, objc.ID]
+	DirectoryAttributes() *raw.NSDictionary[*raw.NSString, objc.ID]
+	IsEnumeratingDirectoryPostOrder() bool
+	Level() uint
+}
+
+var _ DirectoryEnumeratorable = (*DirectoryEnumerator)(nil)
 

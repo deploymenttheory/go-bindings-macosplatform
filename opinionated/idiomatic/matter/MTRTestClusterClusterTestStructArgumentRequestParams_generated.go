@@ -25,3 +25,10 @@ func NewMTRTestClusterClusterTestStructArgumentRequestParams() *MTRTestClusterCl
 
 func (x *MTRTestClusterClusterTestStructArgumentRequestParams) asMTRUnitTestingClusterTestStructArgumentRequestParams() *raw.MTRUnitTestingClusterTestStructArgumentRequestParams { return &x.inner.MTRUnitTestingClusterTestStructArgumentRequestParams }
 
+// MTRTestClusterClusterTestStructArgumentRequestParamsable is the interface implemented by [MTRTestClusterClusterTestStructArgumentRequestParams], for mocking and DI.
+type MTRTestClusterClusterTestStructArgumentRequestParamsable interface {
+	Unwrap() *raw.MTRTestClusterClusterTestStructArgumentRequestParams
+}
+
+var _ MTRTestClusterClusterTestStructArgumentRequestParamsable = (*MTRTestClusterClusterTestStructArgumentRequestParams)(nil)
+

@@ -25,3 +25,10 @@ func NewMTRNetworkCommissioningClusterWiFiInterfaceScanResult() *MTRNetworkCommi
 
 func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResult) asMTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct() *raw.MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct { return &x.inner.MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct }
 
+// MTRNetworkCommissioningClusterWiFiInterfaceScanResultable is the interface implemented by [MTRNetworkCommissioningClusterWiFiInterfaceScanResult], for mocking and DI.
+type MTRNetworkCommissioningClusterWiFiInterfaceScanResultable interface {
+	Unwrap() *raw.MTRNetworkCommissioningClusterWiFiInterfaceScanResult
+}
+
+var _ MTRNetworkCommissioningClusterWiFiInterfaceScanResultable = (*MTRNetworkCommissioningClusterWiFiInterfaceScanResult)(nil)
+

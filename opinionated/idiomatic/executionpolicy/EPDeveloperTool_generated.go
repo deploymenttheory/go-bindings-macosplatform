@@ -23,3 +23,22 @@ func NewDeveloperTool() *DeveloperTool {
 	return &DeveloperTool{inner: raw.EPDeveloperToolFromID(_id)}
 }
 
+// RequestDeveloperToolAccessWithCompletionHandler calls the underlying RequestDeveloperToolAccessWithCompletionHandler.
+func (x *DeveloperTool) RequestDeveloperToolAccessWithCompletionHandler(handler func(bool)) {
+	x.inner.RequestDeveloperToolAccessWithCompletionHandler(handler)
+}
+
+// AuthorizationStatus calls the underlying AuthorizationStatus.
+func (x *DeveloperTool) AuthorizationStatus() raw.EPDeveloperToolStatus {
+	return x.inner.AuthorizationStatus()
+}
+
+// DeveloperToolable is the interface implemented by [DeveloperTool], for mocking and DI.
+type DeveloperToolable interface {
+	Unwrap() *raw.EPDeveloperTool
+	RequestDeveloperToolAccessWithCompletionHandler(handler func(bool))
+	AuthorizationStatus() raw.EPDeveloperToolStatus
+}
+
+var _ DeveloperToolable = (*DeveloperTool)(nil)
+

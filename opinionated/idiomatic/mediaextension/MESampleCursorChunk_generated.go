@@ -25,3 +25,38 @@ func NewSampleCursorChunkWithByteSourceChunkStorageRangeChunkInfoSampleIndexWith
 	return &SampleCursorChunk{inner: raw.MESampleCursorChunkFromID(_id)}
 }
 
+// ByteSource calls the underlying ByteSource.
+func (x *SampleCursorChunk) ByteSource() *ByteSource {
+	_r := x.inner.ByteSource()
+	if _r == nil {
+		return nil
+	}
+	return &ByteSource{inner: _r}
+}
+
+// ChunkStorageRange calls the underlying ChunkStorageRange.
+func (x *SampleCursorChunk) ChunkStorageRange() avfoundation.AVSampleCursorStorageRange {
+	return x.inner.ChunkStorageRange()
+}
+
+// ChunkInfo calls the underlying ChunkInfo.
+func (x *SampleCursorChunk) ChunkInfo() avfoundation.AVSampleCursorChunkInfo {
+	return x.inner.ChunkInfo()
+}
+
+// SampleIndexWithinChunk calls the underlying SampleIndexWithinChunk.
+func (x *SampleCursorChunk) SampleIndexWithinChunk() int {
+	return x.inner.SampleIndexWithinChunk()
+}
+
+// SampleCursorChunkable is the interface implemented by [SampleCursorChunk], for mocking and DI.
+type SampleCursorChunkable interface {
+	Unwrap() *raw.MESampleCursorChunk
+	ByteSource() *ByteSource
+	ChunkStorageRange() avfoundation.AVSampleCursorStorageRange
+	ChunkInfo() avfoundation.AVSampleCursorChunkInfo
+	SampleIndexWithinChunk() int
+}
+
+var _ SampleCursorChunkable = (*SampleCursorChunk)(nil)
+

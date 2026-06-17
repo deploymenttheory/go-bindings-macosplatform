@@ -6,6 +6,8 @@ package photos
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/uniformtypeidentifiers"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +24,65 @@ func NewAssetResource() *AssetResource {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHAssetResource")), objc.RegisterName("new"))
 	return &AssetResource{inner: raw.PHAssetResourceFromID(_id)}
 }
+
+// Type calls the underlying Type.
+func (x *AssetResource) Type() raw.PHAssetResourceType {
+	return x.inner.Type()
+}
+
+// AssetLocalIdentifier calls the underlying AssetLocalIdentifier.
+func (x *AssetResource) AssetLocalIdentifier() string {
+	_r := x.inner.AssetLocalIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// OriginalFilename calls the underlying OriginalFilename.
+func (x *AssetResource) OriginalFilename() string {
+	_r := x.inner.OriginalFilename()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ContentType calls the underlying ContentType.
+func (x *AssetResource) ContentType() *uniformtypeidentifiers.UTType {
+	return x.inner.ContentType()
+}
+
+// UniformTypeIdentifier calls the underlying UniformTypeIdentifier.
+func (x *AssetResource) UniformTypeIdentifier() string {
+	_r := x.inner.UniformTypeIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// PixelWidth calls the underlying PixelWidth.
+func (x *AssetResource) PixelWidth() int {
+	return x.inner.PixelWidth()
+}
+
+// PixelHeight calls the underlying PixelHeight.
+func (x *AssetResource) PixelHeight() int {
+	return x.inner.PixelHeight()
+}
+
+// AssetResourceable is the interface implemented by [AssetResource], for mocking and DI.
+type AssetResourceable interface {
+	Unwrap() *raw.PHAssetResource
+	Type() raw.PHAssetResourceType
+	AssetLocalIdentifier() string
+	OriginalFilename() string
+	ContentType() *uniformtypeidentifiers.UTType
+	UniformTypeIdentifier() string
+	PixelWidth() int
+	PixelHeight() int
+}
+
+var _ AssetResourceable = (*AssetResource)(nil)
 

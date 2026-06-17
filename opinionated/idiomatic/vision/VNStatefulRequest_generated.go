@@ -26,9 +26,28 @@ func NewStatefulRequestWithFrameAnalysisSpacingCompletionHandler(frameAnalysisSp
 	return &StatefulRequest{inner: raw.VNStatefulRequestFromID(_id)}
 }
 
+// MinimumLatencyFrameCount calls the underlying MinimumLatencyFrameCount.
+func (x *StatefulRequest) MinimumLatencyFrameCount() int {
+	return x.inner.MinimumLatencyFrameCount()
+}
+
+// FrameAnalysisSpacing calls the underlying FrameAnalysisSpacing.
+func (x *StatefulRequest) FrameAnalysisSpacing() coremedia.CMTime {
+	return x.inner.FrameAnalysisSpacing()
+}
+
 func (x *StatefulRequest) asStatefulRequest() *raw.VNStatefulRequest { return x.inner }
 
 func (x *StatefulRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNImageBasedRequest }
 
 func (x *StatefulRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageBasedRequest.VNRequest }
+
+// StatefulRequestable is the interface implemented by [StatefulRequest], for mocking and DI.
+type StatefulRequestable interface {
+	Unwrap() *raw.VNStatefulRequest
+	MinimumLatencyFrameCount() int
+	FrameAnalysisSpacing() coremedia.CMTime
+}
+
+var _ StatefulRequestable = (*StatefulRequest)(nil)
 

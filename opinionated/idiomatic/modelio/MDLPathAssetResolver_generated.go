@@ -7,6 +7,7 @@ package modelio
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -30,4 +31,28 @@ func (x *PathAssetResolver) WithPath(path string) *PathAssetResolver {
 	x.inner.SetPath(foundation.NSStringStringWithUTF8String(path))
 	return x
 }
+
+// Path calls the underlying Path.
+func (x *PathAssetResolver) Path() string {
+	_r := x.inner.Path()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetPath calls the underlying SetPath.
+func (x *PathAssetResolver) SetPath(path string) {
+	x.inner.SetPath(foundation.NSStringStringWithUTF8String(path))
+}
+
+// PathAssetResolverable is the interface implemented by [PathAssetResolver], for mocking and DI.
+type PathAssetResolverable interface {
+	Unwrap() *raw.MDLPathAssetResolver
+	WithPath(path string) *PathAssetResolver
+	Path() string
+	SetPath(path string)
+}
+
+var _ PathAssetResolverable = (*PathAssetResolver)(nil)
 

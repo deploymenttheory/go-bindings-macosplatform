@@ -7,6 +7,7 @@ package intents
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,4 +25,41 @@ func NewAirportGateWithAirportTerminalGate(airport *raw.INAirport, terminal stri
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAirport:terminal:gate:"), airport.Ptr(), foundation.NSStringStringWithUTF8String(terminal).Ptr(), foundation.NSStringStringWithUTF8String(gate).Ptr())
 	return &AirportGate{inner: raw.INAirportGateFromID(_id)}
 }
+
+// Airport calls the underlying Airport.
+func (x *AirportGate) Airport() *Airport {
+	_r := x.inner.Airport()
+	if _r == nil {
+		return nil
+	}
+	return &Airport{inner: _r}
+}
+
+// Terminal calls the underlying Terminal.
+func (x *AirportGate) Terminal() string {
+	_r := x.inner.Terminal()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Gate calls the underlying Gate.
+func (x *AirportGate) Gate() string {
+	_r := x.inner.Gate()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// AirportGateable is the interface implemented by [AirportGate], for mocking and DI.
+type AirportGateable interface {
+	Unwrap() *raw.INAirportGate
+	Airport() *Airport
+	Terminal() string
+	Gate() string
+}
+
+var _ AirportGateable = (*AirportGate)(nil)
 

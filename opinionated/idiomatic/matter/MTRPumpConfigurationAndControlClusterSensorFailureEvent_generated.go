@@ -23,3 +23,10 @@ func NewMTRPumpConfigurationAndControlClusterSensorFailureEvent() *MTRPumpConfig
 	return &MTRPumpConfigurationAndControlClusterSensorFailureEvent{inner: raw.MTRPumpConfigurationAndControlClusterSensorFailureEventFromID(_id)}
 }
 
+// MTRPumpConfigurationAndControlClusterSensorFailureEventable is the interface implemented by [MTRPumpConfigurationAndControlClusterSensorFailureEvent], for mocking and DI.
+type MTRPumpConfigurationAndControlClusterSensorFailureEventable interface {
+	Unwrap() *raw.MTRPumpConfigurationAndControlClusterSensorFailureEvent
+}
+
+var _ MTRPumpConfigurationAndControlClusterSensorFailureEventable = (*MTRPumpConfigurationAndControlClusterSensorFailureEvent)(nil)
+

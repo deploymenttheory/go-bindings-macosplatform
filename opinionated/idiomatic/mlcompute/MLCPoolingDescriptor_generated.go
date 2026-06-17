@@ -23,3 +23,76 @@ func NewPoolingDescriptor() *PoolingDescriptor {
 	return &PoolingDescriptor{inner: raw.MLCPoolingDescriptorFromID(_id)}
 }
 
+// PoolingType calls the underlying PoolingType.
+func (x *PoolingDescriptor) PoolingType() raw.MLCPoolingType {
+	return x.inner.PoolingType()
+}
+
+// KernelWidth calls the underlying KernelWidth.
+func (x *PoolingDescriptor) KernelWidth() uint {
+	return x.inner.KernelWidth()
+}
+
+// KernelHeight calls the underlying KernelHeight.
+func (x *PoolingDescriptor) KernelHeight() uint {
+	return x.inner.KernelHeight()
+}
+
+// StrideInX calls the underlying StrideInX.
+func (x *PoolingDescriptor) StrideInX() uint {
+	return x.inner.StrideInX()
+}
+
+// StrideInY calls the underlying StrideInY.
+func (x *PoolingDescriptor) StrideInY() uint {
+	return x.inner.StrideInY()
+}
+
+// DilationRateInX calls the underlying DilationRateInX.
+func (x *PoolingDescriptor) DilationRateInX() uint {
+	return x.inner.DilationRateInX()
+}
+
+// DilationRateInY calls the underlying DilationRateInY.
+func (x *PoolingDescriptor) DilationRateInY() uint {
+	return x.inner.DilationRateInY()
+}
+
+// PaddingPolicy calls the underlying PaddingPolicy.
+func (x *PoolingDescriptor) PaddingPolicy() raw.MLCPaddingPolicy {
+	return x.inner.PaddingPolicy()
+}
+
+// PaddingSizeInX calls the underlying PaddingSizeInX.
+func (x *PoolingDescriptor) PaddingSizeInX() uint {
+	return x.inner.PaddingSizeInX()
+}
+
+// PaddingSizeInY calls the underlying PaddingSizeInY.
+func (x *PoolingDescriptor) PaddingSizeInY() uint {
+	return x.inner.PaddingSizeInY()
+}
+
+// CountIncludesPadding calls the underlying CountIncludesPadding.
+func (x *PoolingDescriptor) CountIncludesPadding() bool {
+	return x.inner.CountIncludesPadding()
+}
+
+// PoolingDescriptorable is the interface implemented by [PoolingDescriptor], for mocking and DI.
+type PoolingDescriptorable interface {
+	Unwrap() *raw.MLCPoolingDescriptor
+	PoolingType() raw.MLCPoolingType
+	KernelWidth() uint
+	KernelHeight() uint
+	StrideInX() uint
+	StrideInY() uint
+	DilationRateInX() uint
+	DilationRateInY() uint
+	PaddingPolicy() raw.MLCPaddingPolicy
+	PaddingSizeInX() uint
+	PaddingSizeInY() uint
+	CountIncludesPadding() bool
+}
+
+var _ PoolingDescriptorable = (*PoolingDescriptor)(nil)
+

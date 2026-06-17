@@ -27,3 +27,10 @@ func (x *AudioOutputNode) asAudioIONode() *raw.AVAudioIONode { return &x.inner.A
 
 func (x *AudioOutputNode) asAudioNode() *raw.AVAudioNode { return &x.inner.AVAudioIONode.AVAudioNode }
 
+// AudioOutputNodeable is the interface implemented by [AudioOutputNode], for mocking and DI.
+type AudioOutputNodeable interface {
+	Unwrap() *raw.AVAudioOutputNode
+}
+
+var _ AudioOutputNodeable = (*AudioOutputNode)(nil)
+

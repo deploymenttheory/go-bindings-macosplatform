@@ -25,3 +25,10 @@ func NewArrayGatherGradientState() *ArrayGatherGradientState {
 
 func (x *ArrayGatherGradientState) asArrayGradientState() *raw.MPSNDArrayGradientState { return &x.inner.MPSNDArrayGradientState }
 
+// ArrayGatherGradientStateable is the interface implemented by [ArrayGatherGradientState], for mocking and DI.
+type ArrayGatherGradientStateable interface {
+	Unwrap() *raw.MPSNDArrayGatherGradientState
+}
+
+var _ ArrayGatherGradientStateable = (*ArrayGatherGradientState)(nil)
+

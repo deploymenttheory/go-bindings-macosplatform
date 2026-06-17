@@ -7,6 +7,7 @@ package coremediaio
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremediaio"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -25,17 +26,40 @@ func NewExtensionProviderWithSourceClientQueue(source raw.CMIOExtensionProviderS
 	return &ExtensionProvider{inner: raw.CMIOExtensionProviderFromID(_id)}
 }
 
+// AddDeviceError calls the underlying AddDeviceError.
+func (x *ExtensionProvider) AddDeviceError(device *raw.CMIOExtensionDevice) (bool, error) {
+	return x.inner.AddDeviceError(device)
+}
+
+// RemoveDeviceError calls the underlying RemoveDeviceError.
+func (x *ExtensionProvider) RemoveDeviceError(device *raw.CMIOExtensionDevice) (bool, error) {
+	return x.inner.RemoveDeviceError(device)
+}
+
+// NotifyPropertiesChanged calls the underlying NotifyPropertiesChanged.
+func (x *ExtensionProvider) NotifyPropertiesChanged(propertyStates *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
+	x.inner.NotifyPropertiesChanged(propertyStates)
+}
+
+// Source calls the underlying Source.
+func (x *ExtensionProvider) Source() raw.CMIOExtensionProviderSource {
+	return x.inner.Source()
+}
+
+// ClientQueue calls the underlying ClientQueue.
+func (x *ExtensionProvider) ClientQueue() *foundation.NSObject {
+	return x.inner.ClientQueue()
+}
+
 // ConnectedClients returns the collection as a Go slice.
 func (x *ExtensionProvider) ConnectedClients() []*raw.CMIOExtensionClient {
 	arr := x.inner.ConnectedClients()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.CMIOExtensionClient, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CMIOExtensionClient {
+		return raw.CMIOExtensionClientFromID(purego.Retain(_id))
+	})
 }
 
 // Devices returns the collection as a Go slice.
@@ -44,10 +68,22 @@ func (x *ExtensionProvider) Devices() []*raw.CMIOExtensionDevice {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.CMIOExtensionDevice, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CMIOExtensionDevice {
+		return raw.CMIOExtensionDeviceFromID(purego.Retain(_id))
+	})
 }
+
+// ExtensionProviderable is the interface implemented by [ExtensionProvider], for mocking and DI.
+type ExtensionProviderable interface {
+	Unwrap() *raw.CMIOExtensionProvider
+	AddDeviceError(device *raw.CMIOExtensionDevice) (bool, error)
+	RemoveDeviceError(device *raw.CMIOExtensionDevice) (bool, error)
+	NotifyPropertiesChanged(propertyStates *foundation.NSDictionary[*foundation.NSString, objc.ID])
+	Source() raw.CMIOExtensionProviderSource
+	ClientQueue() *foundation.NSObject
+	ConnectedClients() []*raw.CMIOExtensionClient
+	Devices() []*raw.CMIOExtensionDevice
+}
+
+var _ ExtensionProviderable = (*ExtensionProvider)(nil)
 

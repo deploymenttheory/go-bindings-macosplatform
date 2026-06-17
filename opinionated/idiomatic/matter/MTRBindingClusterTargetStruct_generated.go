@@ -54,3 +54,75 @@ func (x *MTRBindingClusterTargetStruct) WithFabricIndex(fabricIndex *foundation.
 	return x
 }
 
+// Node calls the underlying Node.
+func (x *MTRBindingClusterTargetStruct) Node() *foundation.NSNumber {
+	return x.inner.Node()
+}
+
+// SetNode calls the underlying SetNode.
+func (x *MTRBindingClusterTargetStruct) SetNode(node *foundation.NSNumber) {
+	x.inner.SetNode(node)
+}
+
+// Group calls the underlying Group.
+func (x *MTRBindingClusterTargetStruct) Group() *foundation.NSNumber {
+	return x.inner.Group()
+}
+
+// SetGroup calls the underlying SetGroup.
+func (x *MTRBindingClusterTargetStruct) SetGroup(group *foundation.NSNumber) {
+	x.inner.SetGroup(group)
+}
+
+// Endpoint calls the underlying Endpoint.
+func (x *MTRBindingClusterTargetStruct) Endpoint() *foundation.NSNumber {
+	return x.inner.Endpoint()
+}
+
+// SetEndpoint calls the underlying SetEndpoint.
+func (x *MTRBindingClusterTargetStruct) SetEndpoint(endpoint *foundation.NSNumber) {
+	x.inner.SetEndpoint(endpoint)
+}
+
+// Cluster calls the underlying Cluster.
+func (x *MTRBindingClusterTargetStruct) Cluster() *foundation.NSNumber {
+	return x.inner.Cluster()
+}
+
+// SetCluster calls the underlying SetCluster.
+func (x *MTRBindingClusterTargetStruct) SetCluster(cluster *foundation.NSNumber) {
+	x.inner.SetCluster(cluster)
+}
+
+// FabricIndex calls the underlying FabricIndex.
+func (x *MTRBindingClusterTargetStruct) FabricIndex() *foundation.NSNumber {
+	return x.inner.FabricIndex()
+}
+
+// SetFabricIndex calls the underlying SetFabricIndex.
+func (x *MTRBindingClusterTargetStruct) SetFabricIndex(fabricIndex *foundation.NSNumber) {
+	x.inner.SetFabricIndex(fabricIndex)
+}
+
+// MTRBindingClusterTargetStructable is the interface implemented by [MTRBindingClusterTargetStruct], for mocking and DI.
+type MTRBindingClusterTargetStructable interface {
+	Unwrap() *raw.MTRBindingClusterTargetStruct
+	WithNode(node *foundation.NSNumber) *MTRBindingClusterTargetStruct
+	WithGroup(group *foundation.NSNumber) *MTRBindingClusterTargetStruct
+	WithEndpoint(endpoint *foundation.NSNumber) *MTRBindingClusterTargetStruct
+	WithCluster(cluster *foundation.NSNumber) *MTRBindingClusterTargetStruct
+	WithFabricIndex(fabricIndex *foundation.NSNumber) *MTRBindingClusterTargetStruct
+	Node() *foundation.NSNumber
+	SetNode(node *foundation.NSNumber)
+	Group() *foundation.NSNumber
+	SetGroup(group *foundation.NSNumber)
+	Endpoint() *foundation.NSNumber
+	SetEndpoint(endpoint *foundation.NSNumber)
+	Cluster() *foundation.NSNumber
+	SetCluster(cluster *foundation.NSNumber)
+	FabricIndex() *foundation.NSNumber
+	SetFabricIndex(fabricIndex *foundation.NSNumber)
+}
+
+var _ MTRBindingClusterTargetStructable = (*MTRBindingClusterTargetStruct)(nil)
+

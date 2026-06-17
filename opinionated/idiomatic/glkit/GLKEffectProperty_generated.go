@@ -25,3 +25,10 @@ func NewEffectProperty() *EffectProperty {
 
 func (x *EffectProperty) asEffectProperty() *raw.GLKEffectProperty { return x.inner }
 
+// EffectPropertyable is the interface implemented by [EffectProperty], for mocking and DI.
+type EffectPropertyable interface {
+	Unwrap() *raw.GLKEffectProperty
+}
+
+var _ EffectPropertyable = (*EffectProperty)(nil)
+

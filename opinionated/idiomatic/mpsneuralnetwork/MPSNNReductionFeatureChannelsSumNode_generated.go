@@ -29,7 +29,27 @@ func (x *NNReductionFeatureChannelsSumNode) WithWeight(weight float32) *NNReduct
 	return x
 }
 
+// Weight calls the underlying Weight.
+func (x *NNReductionFeatureChannelsSumNode) Weight() float32 {
+	return x.inner.Weight()
+}
+
+// SetWeight calls the underlying SetWeight.
+func (x *NNReductionFeatureChannelsSumNode) SetWeight(weight float32) {
+	x.inner.SetWeight(weight)
+}
+
 func (x *NNReductionFeatureChannelsSumNode) asNNUnaryReductionNode() *raw.MPSNNUnaryReductionNode { return &x.inner.MPSNNUnaryReductionNode }
 
 func (x *NNReductionFeatureChannelsSumNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode }
+
+// NNReductionFeatureChannelsSumNodeable is the interface implemented by [NNReductionFeatureChannelsSumNode], for mocking and DI.
+type NNReductionFeatureChannelsSumNodeable interface {
+	Unwrap() *raw.MPSNNReductionFeatureChannelsSumNode
+	WithWeight(weight float32) *NNReductionFeatureChannelsSumNode
+	Weight() float32
+	SetWeight(weight float32)
+}
+
+var _ NNReductionFeatureChannelsSumNodeable = (*NNReductionFeatureChannelsSumNode)(nil)
 

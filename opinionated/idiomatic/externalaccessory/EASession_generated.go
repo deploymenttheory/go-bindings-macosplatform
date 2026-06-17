@@ -8,6 +8,7 @@ import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/externalaccessory"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Session wraps [raw.EASession] with a fluent Go API.
@@ -24,4 +25,35 @@ func NewSessionWithAccessoryForProtocol(accessory *raw.EAAccessory, protocolStri
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAccessory:forProtocol:"), accessory.Ptr(), foundation.NSStringStringWithUTF8String(protocolString).Ptr())
 	return &Session{inner: raw.EASessionFromID(_id)}
 }
+
+// Accessory calls the underlying Accessory.
+func (x *Session) Accessory() unsafe.Pointer {
+	return x.inner.Accessory()
+}
+
+// ProtocolString calls the underlying ProtocolString.
+func (x *Session) ProtocolString() unsafe.Pointer {
+	return x.inner.ProtocolString()
+}
+
+// InputStream calls the underlying InputStream.
+func (x *Session) InputStream() unsafe.Pointer {
+	return x.inner.InputStream()
+}
+
+// OutputStream calls the underlying OutputStream.
+func (x *Session) OutputStream() unsafe.Pointer {
+	return x.inner.OutputStream()
+}
+
+// Sessionable is the interface implemented by [Session], for mocking and DI.
+type Sessionable interface {
+	Unwrap() *raw.EASession
+	Accessory() unsafe.Pointer
+	ProtocolString() unsafe.Pointer
+	InputStream() unsafe.Pointer
+	OutputStream() unsafe.Pointer
+}
+
+var _ Sessionable = (*Session)(nil)
 

@@ -5,6 +5,7 @@
 package avkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avkit"
 	"github.com/ebitengine/purego/objc"
@@ -41,4 +42,62 @@ func (x *RoutePickerView) WithRoutePickerButtonBordered(routePickerButtonBordere
 	x.inner.SetRoutePickerButtonBordered(routePickerButtonBordered)
 	return x
 }
+
+// RoutePickerButtonColorForState calls the underlying RoutePickerButtonColorForState.
+func (x *RoutePickerView) RoutePickerButtonColorForState(state raw.AVRoutePickerViewButtonState) *appkit.NSColor {
+	return x.inner.RoutePickerButtonColorForState(state)
+}
+
+// SetRoutePickerButtonColorForState calls the underlying SetRoutePickerButtonColorForState.
+func (x *RoutePickerView) SetRoutePickerButtonColorForState(color *appkit.NSColor, state raw.AVRoutePickerViewButtonState) {
+	x.inner.SetRoutePickerButtonColorForState(color, state)
+}
+
+// Delegate calls the underlying Delegate.
+func (x *RoutePickerView) Delegate() raw.AVRoutePickerViewDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *RoutePickerView) SetDelegate(delegate raw.AVRoutePickerViewDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// Player calls the underlying Player.
+func (x *RoutePickerView) Player() *avfoundation.AVPlayer {
+	return x.inner.Player()
+}
+
+// SetPlayer calls the underlying SetPlayer.
+func (x *RoutePickerView) SetPlayer(player *avfoundation.AVPlayer) {
+	x.inner.SetPlayer(player)
+}
+
+// IsRoutePickerButtonBordered calls the underlying IsRoutePickerButtonBordered.
+func (x *RoutePickerView) IsRoutePickerButtonBordered() bool {
+	return x.inner.IsRoutePickerButtonBordered()
+}
+
+// SetRoutePickerButtonBordered calls the underlying SetRoutePickerButtonBordered.
+func (x *RoutePickerView) SetRoutePickerButtonBordered(routePickerButtonBordered bool) {
+	x.inner.SetRoutePickerButtonBordered(routePickerButtonBordered)
+}
+
+// RoutePickerViewable is the interface implemented by [RoutePickerView], for mocking and DI.
+type RoutePickerViewable interface {
+	Unwrap() *raw.AVRoutePickerView
+	WithDelegate(delegate raw.AVRoutePickerViewDelegate) *RoutePickerView
+	WithPlayer(player *avfoundation.AVPlayer) *RoutePickerView
+	WithRoutePickerButtonBordered(routePickerButtonBordered bool) *RoutePickerView
+	RoutePickerButtonColorForState(state raw.AVRoutePickerViewButtonState) *appkit.NSColor
+	SetRoutePickerButtonColorForState(color *appkit.NSColor, state raw.AVRoutePickerViewButtonState)
+	Delegate() raw.AVRoutePickerViewDelegate
+	SetDelegate(delegate raw.AVRoutePickerViewDelegate)
+	Player() *avfoundation.AVPlayer
+	SetPlayer(player *avfoundation.AVPlayer)
+	IsRoutePickerButtonBordered() bool
+	SetRoutePickerButtonBordered(routePickerButtonBordered bool)
+}
+
+var _ RoutePickerViewable = (*RoutePickerView)(nil)
 

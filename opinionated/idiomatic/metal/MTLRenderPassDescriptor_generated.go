@@ -107,3 +107,232 @@ func (x *RenderPassDescriptor) WithSupportColorAttachmentMapping(supportColorAtt
 	return x
 }
 
+// SetSamplePositionsCount calls the underlying SetSamplePositionsCount.
+func (x *RenderPassDescriptor) SetSamplePositionsCount(positions *raw.MTLSamplePosition, count uint) {
+	x.inner.SetSamplePositionsCount(positions, count)
+}
+
+// GetSamplePositionsCount calls the underlying GetSamplePositionsCount.
+func (x *RenderPassDescriptor) GetSamplePositionsCount(positions *raw.MTLSamplePosition, count uint) uint {
+	return x.inner.GetSamplePositionsCount(positions, count)
+}
+
+// ColorAttachments calls the underlying ColorAttachments.
+func (x *RenderPassDescriptor) ColorAttachments() *RenderPassColorAttachmentDescriptorArray {
+	_r := x.inner.ColorAttachments()
+	if _r == nil {
+		return nil
+	}
+	return &RenderPassColorAttachmentDescriptorArray{inner: _r}
+}
+
+// DepthAttachment calls the underlying DepthAttachment.
+func (x *RenderPassDescriptor) DepthAttachment() *RenderPassDepthAttachmentDescriptor {
+	_r := x.inner.DepthAttachment()
+	if _r == nil {
+		return nil
+	}
+	return &RenderPassDepthAttachmentDescriptor{inner: _r}
+}
+
+// SetDepthAttachment calls the underlying SetDepthAttachment.
+func (x *RenderPassDescriptor) SetDepthAttachment(depthAttachment *raw.MTLRenderPassDepthAttachmentDescriptor) {
+	x.inner.SetDepthAttachment(depthAttachment)
+}
+
+// StencilAttachment calls the underlying StencilAttachment.
+func (x *RenderPassDescriptor) StencilAttachment() *RenderPassStencilAttachmentDescriptor {
+	_r := x.inner.StencilAttachment()
+	if _r == nil {
+		return nil
+	}
+	return &RenderPassStencilAttachmentDescriptor{inner: _r}
+}
+
+// SetStencilAttachment calls the underlying SetStencilAttachment.
+func (x *RenderPassDescriptor) SetStencilAttachment(stencilAttachment *raw.MTLRenderPassStencilAttachmentDescriptor) {
+	x.inner.SetStencilAttachment(stencilAttachment)
+}
+
+// VisibilityResultBuffer calls the underlying VisibilityResultBuffer.
+func (x *RenderPassDescriptor) VisibilityResultBuffer() raw.MTLBuffer {
+	return x.inner.VisibilityResultBuffer()
+}
+
+// SetVisibilityResultBuffer calls the underlying SetVisibilityResultBuffer.
+func (x *RenderPassDescriptor) SetVisibilityResultBuffer(visibilityResultBuffer raw.MTLBuffer) {
+	x.inner.SetVisibilityResultBuffer(visibilityResultBuffer)
+}
+
+// RenderTargetArrayLength calls the underlying RenderTargetArrayLength.
+func (x *RenderPassDescriptor) RenderTargetArrayLength() uint {
+	return x.inner.RenderTargetArrayLength()
+}
+
+// SetRenderTargetArrayLength calls the underlying SetRenderTargetArrayLength.
+func (x *RenderPassDescriptor) SetRenderTargetArrayLength(renderTargetArrayLength uint) {
+	x.inner.SetRenderTargetArrayLength(renderTargetArrayLength)
+}
+
+// ImageblockSampleLength calls the underlying ImageblockSampleLength.
+func (x *RenderPassDescriptor) ImageblockSampleLength() uint {
+	return x.inner.ImageblockSampleLength()
+}
+
+// SetImageblockSampleLength calls the underlying SetImageblockSampleLength.
+func (x *RenderPassDescriptor) SetImageblockSampleLength(imageblockSampleLength uint) {
+	x.inner.SetImageblockSampleLength(imageblockSampleLength)
+}
+
+// ThreadgroupMemoryLength calls the underlying ThreadgroupMemoryLength.
+func (x *RenderPassDescriptor) ThreadgroupMemoryLength() uint {
+	return x.inner.ThreadgroupMemoryLength()
+}
+
+// SetThreadgroupMemoryLength calls the underlying SetThreadgroupMemoryLength.
+func (x *RenderPassDescriptor) SetThreadgroupMemoryLength(threadgroupMemoryLength uint) {
+	x.inner.SetThreadgroupMemoryLength(threadgroupMemoryLength)
+}
+
+// TileWidth calls the underlying TileWidth.
+func (x *RenderPassDescriptor) TileWidth() uint {
+	return x.inner.TileWidth()
+}
+
+// SetTileWidth calls the underlying SetTileWidth.
+func (x *RenderPassDescriptor) SetTileWidth(tileWidth uint) {
+	x.inner.SetTileWidth(tileWidth)
+}
+
+// TileHeight calls the underlying TileHeight.
+func (x *RenderPassDescriptor) TileHeight() uint {
+	return x.inner.TileHeight()
+}
+
+// SetTileHeight calls the underlying SetTileHeight.
+func (x *RenderPassDescriptor) SetTileHeight(tileHeight uint) {
+	x.inner.SetTileHeight(tileHeight)
+}
+
+// DefaultRasterSampleCount calls the underlying DefaultRasterSampleCount.
+func (x *RenderPassDescriptor) DefaultRasterSampleCount() uint {
+	return x.inner.DefaultRasterSampleCount()
+}
+
+// SetDefaultRasterSampleCount calls the underlying SetDefaultRasterSampleCount.
+func (x *RenderPassDescriptor) SetDefaultRasterSampleCount(defaultRasterSampleCount uint) {
+	x.inner.SetDefaultRasterSampleCount(defaultRasterSampleCount)
+}
+
+// RenderTargetWidth calls the underlying RenderTargetWidth.
+func (x *RenderPassDescriptor) RenderTargetWidth() uint {
+	return x.inner.RenderTargetWidth()
+}
+
+// SetRenderTargetWidth calls the underlying SetRenderTargetWidth.
+func (x *RenderPassDescriptor) SetRenderTargetWidth(renderTargetWidth uint) {
+	x.inner.SetRenderTargetWidth(renderTargetWidth)
+}
+
+// RenderTargetHeight calls the underlying RenderTargetHeight.
+func (x *RenderPassDescriptor) RenderTargetHeight() uint {
+	return x.inner.RenderTargetHeight()
+}
+
+// SetRenderTargetHeight calls the underlying SetRenderTargetHeight.
+func (x *RenderPassDescriptor) SetRenderTargetHeight(renderTargetHeight uint) {
+	x.inner.SetRenderTargetHeight(renderTargetHeight)
+}
+
+// RasterizationRateMap calls the underlying RasterizationRateMap.
+func (x *RenderPassDescriptor) RasterizationRateMap() raw.MTLRasterizationRateMap {
+	return x.inner.RasterizationRateMap()
+}
+
+// SetRasterizationRateMap calls the underlying SetRasterizationRateMap.
+func (x *RenderPassDescriptor) SetRasterizationRateMap(rasterizationRateMap raw.MTLRasterizationRateMap) {
+	x.inner.SetRasterizationRateMap(rasterizationRateMap)
+}
+
+// SampleBufferAttachments calls the underlying SampleBufferAttachments.
+func (x *RenderPassDescriptor) SampleBufferAttachments() *RenderPassSampleBufferAttachmentDescriptorArray {
+	_r := x.inner.SampleBufferAttachments()
+	if _r == nil {
+		return nil
+	}
+	return &RenderPassSampleBufferAttachmentDescriptorArray{inner: _r}
+}
+
+// VisibilityResultType calls the underlying VisibilityResultType.
+func (x *RenderPassDescriptor) VisibilityResultType() raw.MTLVisibilityResultType {
+	return x.inner.VisibilityResultType()
+}
+
+// SetVisibilityResultType calls the underlying SetVisibilityResultType.
+func (x *RenderPassDescriptor) SetVisibilityResultType(visibilityResultType raw.MTLVisibilityResultType) {
+	x.inner.SetVisibilityResultType(visibilityResultType)
+}
+
+// SupportColorAttachmentMapping calls the underlying SupportColorAttachmentMapping.
+func (x *RenderPassDescriptor) SupportColorAttachmentMapping() bool {
+	return x.inner.SupportColorAttachmentMapping()
+}
+
+// SetSupportColorAttachmentMapping calls the underlying SetSupportColorAttachmentMapping.
+func (x *RenderPassDescriptor) SetSupportColorAttachmentMapping(supportColorAttachmentMapping bool) {
+	x.inner.SetSupportColorAttachmentMapping(supportColorAttachmentMapping)
+}
+
+// RenderPassDescriptorable is the interface implemented by [RenderPassDescriptor], for mocking and DI.
+type RenderPassDescriptorable interface {
+	Unwrap() *raw.MTLRenderPassDescriptor
+	WithDepthAttachment(depthAttachment *raw.MTLRenderPassDepthAttachmentDescriptor) *RenderPassDescriptor
+	WithStencilAttachment(stencilAttachment *raw.MTLRenderPassStencilAttachmentDescriptor) *RenderPassDescriptor
+	WithVisibilityResultBuffer(visibilityResultBuffer raw.MTLBuffer) *RenderPassDescriptor
+	WithRenderTargetArrayLength(renderTargetArrayLength uint) *RenderPassDescriptor
+	WithImageblockSampleLength(imageblockSampleLength uint) *RenderPassDescriptor
+	WithThreadgroupMemoryLength(threadgroupMemoryLength uint) *RenderPassDescriptor
+	WithTileWidth(tileWidth uint) *RenderPassDescriptor
+	WithTileHeight(tileHeight uint) *RenderPassDescriptor
+	WithDefaultRasterSampleCount(defaultRasterSampleCount uint) *RenderPassDescriptor
+	WithRenderTargetWidth(renderTargetWidth uint) *RenderPassDescriptor
+	WithRenderTargetHeight(renderTargetHeight uint) *RenderPassDescriptor
+	WithRasterizationRateMap(rasterizationRateMap raw.MTLRasterizationRateMap) *RenderPassDescriptor
+	WithVisibilityResultType(visibilityResultType raw.MTLVisibilityResultType) *RenderPassDescriptor
+	WithSupportColorAttachmentMapping(supportColorAttachmentMapping bool) *RenderPassDescriptor
+	SetSamplePositionsCount(positions *raw.MTLSamplePosition, count uint)
+	GetSamplePositionsCount(positions *raw.MTLSamplePosition, count uint) uint
+	ColorAttachments() *RenderPassColorAttachmentDescriptorArray
+	DepthAttachment() *RenderPassDepthAttachmentDescriptor
+	SetDepthAttachment(depthAttachment *raw.MTLRenderPassDepthAttachmentDescriptor)
+	StencilAttachment() *RenderPassStencilAttachmentDescriptor
+	SetStencilAttachment(stencilAttachment *raw.MTLRenderPassStencilAttachmentDescriptor)
+	VisibilityResultBuffer() raw.MTLBuffer
+	SetVisibilityResultBuffer(visibilityResultBuffer raw.MTLBuffer)
+	RenderTargetArrayLength() uint
+	SetRenderTargetArrayLength(renderTargetArrayLength uint)
+	ImageblockSampleLength() uint
+	SetImageblockSampleLength(imageblockSampleLength uint)
+	ThreadgroupMemoryLength() uint
+	SetThreadgroupMemoryLength(threadgroupMemoryLength uint)
+	TileWidth() uint
+	SetTileWidth(tileWidth uint)
+	TileHeight() uint
+	SetTileHeight(tileHeight uint)
+	DefaultRasterSampleCount() uint
+	SetDefaultRasterSampleCount(defaultRasterSampleCount uint)
+	RenderTargetWidth() uint
+	SetRenderTargetWidth(renderTargetWidth uint)
+	RenderTargetHeight() uint
+	SetRenderTargetHeight(renderTargetHeight uint)
+	RasterizationRateMap() raw.MTLRasterizationRateMap
+	SetRasterizationRateMap(rasterizationRateMap raw.MTLRasterizationRateMap)
+	SampleBufferAttachments() *RenderPassSampleBufferAttachmentDescriptorArray
+	VisibilityResultType() raw.MTLVisibilityResultType
+	SetVisibilityResultType(visibilityResultType raw.MTLVisibilityResultType)
+	SupportColorAttachmentMapping() bool
+	SetSupportColorAttachmentMapping(supportColorAttachmentMapping bool)
+}
+
+var _ RenderPassDescriptorable = (*RenderPassDescriptor)(nil)
+

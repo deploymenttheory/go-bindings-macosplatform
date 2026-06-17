@@ -33,5 +33,62 @@ func NewWarpGeometryGridWithColumnsRowsSourcePositionsDestPositions(cols int, ro
 	return &WarpGeometryGrid{inner: raw.SKWarpGeometryGridFromID(_id)}
 }
 
+// SourcePositionAtIndex calls the underlying SourcePositionAtIndex.
+func (x *WarpGeometryGrid) SourcePositionAtIndex(index int) unsafe.Pointer {
+	return x.inner.SourcePositionAtIndex(index)
+}
+
+// DestPositionAtIndex calls the underlying DestPositionAtIndex.
+func (x *WarpGeometryGrid) DestPositionAtIndex(index int) unsafe.Pointer {
+	return x.inner.DestPositionAtIndex(index)
+}
+
+// GridByReplacingSourcePositions calls the underlying GridByReplacingSourcePositions.
+func (x *WarpGeometryGrid) GridByReplacingSourcePositions(sourcePositions unsafe.Pointer) *WarpGeometryGrid {
+	_r := x.inner.GridByReplacingSourcePositions(sourcePositions)
+	if _r == nil {
+		return nil
+	}
+	return &WarpGeometryGrid{inner: _r}
+}
+
+// GridByReplacingDestPositions calls the underlying GridByReplacingDestPositions.
+func (x *WarpGeometryGrid) GridByReplacingDestPositions(destPositions unsafe.Pointer) *WarpGeometryGrid {
+	_r := x.inner.GridByReplacingDestPositions(destPositions)
+	if _r == nil {
+		return nil
+	}
+	return &WarpGeometryGrid{inner: _r}
+}
+
+// NumberOfColumns calls the underlying NumberOfColumns.
+func (x *WarpGeometryGrid) NumberOfColumns() int {
+	return x.inner.NumberOfColumns()
+}
+
+// NumberOfRows calls the underlying NumberOfRows.
+func (x *WarpGeometryGrid) NumberOfRows() int {
+	return x.inner.NumberOfRows()
+}
+
+// VertexCount calls the underlying VertexCount.
+func (x *WarpGeometryGrid) VertexCount() int {
+	return x.inner.VertexCount()
+}
+
 func (x *WarpGeometryGrid) asWarpGeometry() *raw.SKWarpGeometry { return &x.inner.SKWarpGeometry }
+
+// WarpGeometryGridable is the interface implemented by [WarpGeometryGrid], for mocking and DI.
+type WarpGeometryGridable interface {
+	Unwrap() *raw.SKWarpGeometryGrid
+	SourcePositionAtIndex(index int) unsafe.Pointer
+	DestPositionAtIndex(index int) unsafe.Pointer
+	GridByReplacingSourcePositions(sourcePositions unsafe.Pointer) *WarpGeometryGrid
+	GridByReplacingDestPositions(destPositions unsafe.Pointer) *WarpGeometryGrid
+	NumberOfColumns() int
+	NumberOfRows() int
+	VertexCount() int
+}
+
+var _ WarpGeometryGridable = (*WarpGeometryGrid)(nil)
 

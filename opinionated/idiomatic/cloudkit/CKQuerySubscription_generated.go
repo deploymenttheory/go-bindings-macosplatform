@@ -7,6 +7,7 @@ package cloudkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -45,5 +46,51 @@ func (x *QuerySubscription) WithZoneID(zoneID *raw.CKRecordZoneID) *QuerySubscri
 	return x
 }
 
+// RecordType calls the underlying RecordType.
+func (x *QuerySubscription) RecordType() string {
+	_r := x.inner.RecordType()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Predicate calls the underlying Predicate.
+func (x *QuerySubscription) Predicate() *foundation.NSPredicate {
+	return x.inner.Predicate()
+}
+
+// ZoneID calls the underlying ZoneID.
+func (x *QuerySubscription) ZoneID() *RecordZoneID {
+	_r := x.inner.ZoneID()
+	if _r == nil {
+		return nil
+	}
+	return &RecordZoneID{inner: _r}
+}
+
+// SetZoneID calls the underlying SetZoneID.
+func (x *QuerySubscription) SetZoneID(zoneID *raw.CKRecordZoneID) {
+	x.inner.SetZoneID(zoneID)
+}
+
+// QuerySubscriptionOptions calls the underlying QuerySubscriptionOptions.
+func (x *QuerySubscription) QuerySubscriptionOptions() raw.CKQuerySubscriptionOptions {
+	return x.inner.QuerySubscriptionOptions()
+}
+
 func (x *QuerySubscription) asSubscription() *raw.CKSubscription { return &x.inner.CKSubscription }
+
+// QuerySubscriptionable is the interface implemented by [QuerySubscription], for mocking and DI.
+type QuerySubscriptionable interface {
+	Unwrap() *raw.CKQuerySubscription
+	WithZoneID(zoneID *raw.CKRecordZoneID) *QuerySubscription
+	RecordType() string
+	Predicate() *foundation.NSPredicate
+	ZoneID() *RecordZoneID
+	SetZoneID(zoneID *raw.CKRecordZoneID)
+	QuerySubscriptionOptions() raw.CKQuerySubscriptionOptions
+}
+
+var _ QuerySubscriptionable = (*QuerySubscription)(nil)
 

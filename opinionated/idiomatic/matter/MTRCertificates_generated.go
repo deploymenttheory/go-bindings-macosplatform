@@ -23,3 +23,10 @@ func NewMTRCertificates() *MTRCertificates {
 	return &MTRCertificates{inner: raw.MTRCertificatesFromID(_id)}
 }
 
+// MTRCertificatesable is the interface implemented by [MTRCertificates], for mocking and DI.
+type MTRCertificatesable interface {
+	Unwrap() *raw.MTRCertificates
+}
+
+var _ MTRCertificatesable = (*MTRCertificates)(nil)
+

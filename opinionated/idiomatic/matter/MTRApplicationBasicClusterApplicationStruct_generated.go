@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -48,5 +49,72 @@ func (x *MTRApplicationBasicClusterApplicationStruct) WithApplicationId(applicat
 	return x
 }
 
+// CatalogVendorID calls the underlying CatalogVendorID.
+func (x *MTRApplicationBasicClusterApplicationStruct) CatalogVendorID() *foundation.NSNumber {
+	return x.inner.CatalogVendorID()
+}
+
+// SetCatalogVendorID calls the underlying SetCatalogVendorID.
+func (x *MTRApplicationBasicClusterApplicationStruct) SetCatalogVendorID(catalogVendorID *foundation.NSNumber) {
+	x.inner.SetCatalogVendorID(catalogVendorID)
+}
+
+// CatalogVendorId calls the underlying CatalogVendorId.
+func (x *MTRApplicationBasicClusterApplicationStruct) CatalogVendorId() *foundation.NSNumber {
+	return x.inner.CatalogVendorId()
+}
+
+// SetCatalogVendorId calls the underlying SetCatalogVendorId.
+func (x *MTRApplicationBasicClusterApplicationStruct) SetCatalogVendorId(catalogVendorId *foundation.NSNumber) {
+	x.inner.SetCatalogVendorId(catalogVendorId)
+}
+
+// ApplicationID calls the underlying ApplicationID.
+func (x *MTRApplicationBasicClusterApplicationStruct) ApplicationID() string {
+	_r := x.inner.ApplicationID()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetApplicationID calls the underlying SetApplicationID.
+func (x *MTRApplicationBasicClusterApplicationStruct) SetApplicationID(applicationID string) {
+	x.inner.SetApplicationID(foundation.NSStringStringWithUTF8String(applicationID))
+}
+
+// ApplicationId calls the underlying ApplicationId.
+func (x *MTRApplicationBasicClusterApplicationStruct) ApplicationId() string {
+	_r := x.inner.ApplicationId()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetApplicationId calls the underlying SetApplicationId.
+func (x *MTRApplicationBasicClusterApplicationStruct) SetApplicationId(applicationId string) {
+	x.inner.SetApplicationId(foundation.NSStringStringWithUTF8String(applicationId))
+}
+
 func (x *MTRApplicationBasicClusterApplicationStruct) asMTRApplicationBasicClusterApplicationStruct() *raw.MTRApplicationBasicClusterApplicationStruct { return x.inner }
+
+// MTRApplicationBasicClusterApplicationStructable is the interface implemented by [MTRApplicationBasicClusterApplicationStruct], for mocking and DI.
+type MTRApplicationBasicClusterApplicationStructable interface {
+	Unwrap() *raw.MTRApplicationBasicClusterApplicationStruct
+	WithCatalogVendorID(catalogVendorID *foundation.NSNumber) *MTRApplicationBasicClusterApplicationStruct
+	WithCatalogVendorId(catalogVendorId *foundation.NSNumber) *MTRApplicationBasicClusterApplicationStruct
+	WithApplicationID(applicationID string) *MTRApplicationBasicClusterApplicationStruct
+	WithApplicationId(applicationId string) *MTRApplicationBasicClusterApplicationStruct
+	CatalogVendorID() *foundation.NSNumber
+	SetCatalogVendorID(catalogVendorID *foundation.NSNumber)
+	CatalogVendorId() *foundation.NSNumber
+	SetCatalogVendorId(catalogVendorId *foundation.NSNumber)
+	ApplicationID() string
+	SetApplicationID(applicationID string)
+	ApplicationId() string
+	SetApplicationId(applicationId string)
+}
+
+var _ MTRApplicationBasicClusterApplicationStructable = (*MTRApplicationBasicClusterApplicationStruct)(nil)
 

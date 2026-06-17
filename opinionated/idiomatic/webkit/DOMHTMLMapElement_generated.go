@@ -7,6 +7,7 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -30,6 +31,29 @@ func (x *DOMHTMLMapElement) WithName(name string) *DOMHTMLMapElement {
 	return x
 }
 
+// Areas calls the underlying Areas.
+func (x *DOMHTMLMapElement) Areas() *DOMHTMLCollection {
+	_r := x.inner.Areas()
+	if _r == nil {
+		return nil
+	}
+	return &DOMHTMLCollection{inner: _r}
+}
+
+// Name calls the underlying Name.
+func (x *DOMHTMLMapElement) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetName calls the underlying SetName.
+func (x *DOMHTMLMapElement) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
 func (x *DOMHTMLMapElement) asDOMHTMLElement() *raw.DOMHTMLElement { return &x.inner.DOMHTMLElement }
 
 func (x *DOMHTMLMapElement) asDOMElement() *raw.DOMElement { return &x.inner.DOMHTMLElement.DOMElement }
@@ -39,4 +63,15 @@ func (x *DOMHTMLMapElement) asDOMNode() *raw.DOMNode { return &x.inner.DOMHTMLEl
 func (x *DOMHTMLMapElement) asDOMObject() *raw.DOMObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject }
 
 func (x *DOMHTMLMapElement) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject }
+
+// DOMHTMLMapElementable is the interface implemented by [DOMHTMLMapElement], for mocking and DI.
+type DOMHTMLMapElementable interface {
+	Unwrap() *raw.DOMHTMLMapElement
+	WithName(name string) *DOMHTMLMapElement
+	Areas() *DOMHTMLCollection
+	Name() string
+	SetName(name string)
+}
+
+var _ DOMHTMLMapElementable = (*DOMHTMLMapElement)(nil)
 

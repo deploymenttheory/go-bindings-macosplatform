@@ -36,3 +36,44 @@ func (x *SyncEngineSendChangesOptions) WithOperationGroup(operationGroup *raw.CK
 	return x
 }
 
+// Scope calls the underlying Scope.
+func (x *SyncEngineSendChangesOptions) Scope() *SyncEngineSendChangesScope {
+	_r := x.inner.Scope()
+	if _r == nil {
+		return nil
+	}
+	return &SyncEngineSendChangesScope{inner: _r}
+}
+
+// SetScope calls the underlying SetScope.
+func (x *SyncEngineSendChangesOptions) SetScope(scope *raw.CKSyncEngineSendChangesScope) {
+	x.inner.SetScope(scope)
+}
+
+// OperationGroup calls the underlying OperationGroup.
+func (x *SyncEngineSendChangesOptions) OperationGroup() *OperationGroup {
+	_r := x.inner.OperationGroup()
+	if _r == nil {
+		return nil
+	}
+	return &OperationGroup{inner: _r}
+}
+
+// SetOperationGroup calls the underlying SetOperationGroup.
+func (x *SyncEngineSendChangesOptions) SetOperationGroup(operationGroup *raw.CKOperationGroup) {
+	x.inner.SetOperationGroup(operationGroup)
+}
+
+// SyncEngineSendChangesOptionsable is the interface implemented by [SyncEngineSendChangesOptions], for mocking and DI.
+type SyncEngineSendChangesOptionsable interface {
+	Unwrap() *raw.CKSyncEngineSendChangesOptions
+	WithScope(scope *raw.CKSyncEngineSendChangesScope) *SyncEngineSendChangesOptions
+	WithOperationGroup(operationGroup *raw.CKOperationGroup) *SyncEngineSendChangesOptions
+	Scope() *SyncEngineSendChangesScope
+	SetScope(scope *raw.CKSyncEngineSendChangesScope)
+	OperationGroup() *OperationGroup
+	SetOperationGroup(operationGroup *raw.CKOperationGroup)
+}
+
+var _ SyncEngineSendChangesOptionsable = (*SyncEngineSendChangesOptions)(nil)
+

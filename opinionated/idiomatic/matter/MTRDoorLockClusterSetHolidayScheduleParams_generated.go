@@ -60,3 +60,88 @@ func (x *MTRDoorLockClusterSetHolidayScheduleParams) WithServerSideProcessingTim
 	return x
 }
 
+// HolidayIndex calls the underlying HolidayIndex.
+func (x *MTRDoorLockClusterSetHolidayScheduleParams) HolidayIndex() *foundation.NSNumber {
+	return x.inner.HolidayIndex()
+}
+
+// SetHolidayIndex calls the underlying SetHolidayIndex.
+func (x *MTRDoorLockClusterSetHolidayScheduleParams) SetHolidayIndex(holidayIndex *foundation.NSNumber) {
+	x.inner.SetHolidayIndex(holidayIndex)
+}
+
+// LocalStartTime calls the underlying LocalStartTime.
+func (x *MTRDoorLockClusterSetHolidayScheduleParams) LocalStartTime() *foundation.NSNumber {
+	return x.inner.LocalStartTime()
+}
+
+// SetLocalStartTime calls the underlying SetLocalStartTime.
+func (x *MTRDoorLockClusterSetHolidayScheduleParams) SetLocalStartTime(localStartTime *foundation.NSNumber) {
+	x.inner.SetLocalStartTime(localStartTime)
+}
+
+// LocalEndTime calls the underlying LocalEndTime.
+func (x *MTRDoorLockClusterSetHolidayScheduleParams) LocalEndTime() *foundation.NSNumber {
+	return x.inner.LocalEndTime()
+}
+
+// SetLocalEndTime calls the underlying SetLocalEndTime.
+func (x *MTRDoorLockClusterSetHolidayScheduleParams) SetLocalEndTime(localEndTime *foundation.NSNumber) {
+	x.inner.SetLocalEndTime(localEndTime)
+}
+
+// OperatingMode calls the underlying OperatingMode.
+func (x *MTRDoorLockClusterSetHolidayScheduleParams) OperatingMode() *foundation.NSNumber {
+	return x.inner.OperatingMode()
+}
+
+// SetOperatingMode calls the underlying SetOperatingMode.
+func (x *MTRDoorLockClusterSetHolidayScheduleParams) SetOperatingMode(operatingMode *foundation.NSNumber) {
+	x.inner.SetOperatingMode(operatingMode)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRDoorLockClusterSetHolidayScheduleParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRDoorLockClusterSetHolidayScheduleParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRDoorLockClusterSetHolidayScheduleParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRDoorLockClusterSetHolidayScheduleParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRDoorLockClusterSetHolidayScheduleParamsable is the interface implemented by [MTRDoorLockClusterSetHolidayScheduleParams], for mocking and DI.
+type MTRDoorLockClusterSetHolidayScheduleParamsable interface {
+	Unwrap() *raw.MTRDoorLockClusterSetHolidayScheduleParams
+	WithHolidayIndex(holidayIndex *foundation.NSNumber) *MTRDoorLockClusterSetHolidayScheduleParams
+	WithLocalStartTime(localStartTime *foundation.NSNumber) *MTRDoorLockClusterSetHolidayScheduleParams
+	WithLocalEndTime(localEndTime *foundation.NSNumber) *MTRDoorLockClusterSetHolidayScheduleParams
+	WithOperatingMode(operatingMode *foundation.NSNumber) *MTRDoorLockClusterSetHolidayScheduleParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRDoorLockClusterSetHolidayScheduleParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRDoorLockClusterSetHolidayScheduleParams
+	HolidayIndex() *foundation.NSNumber
+	SetHolidayIndex(holidayIndex *foundation.NSNumber)
+	LocalStartTime() *foundation.NSNumber
+	SetLocalStartTime(localStartTime *foundation.NSNumber)
+	LocalEndTime() *foundation.NSNumber
+	SetLocalEndTime(localEndTime *foundation.NSNumber)
+	OperatingMode() *foundation.NSNumber
+	SetOperatingMode(operatingMode *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRDoorLockClusterSetHolidayScheduleParamsable = (*MTRDoorLockClusterSetHolidayScheduleParams)(nil)
+

@@ -7,6 +7,7 @@ package metal
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -167,4 +168,397 @@ func (x *MeshRenderPipelineDescriptor) WithRequiredThreadsPerMeshThreadgroup(req
 	x.inner.SetRequiredThreadsPerMeshThreadgroup(requiredThreadsPerMeshThreadgroup)
 	return x
 }
+
+// Reset calls the underlying Reset.
+func (x *MeshRenderPipelineDescriptor) Reset() {
+	x.inner.Reset()
+}
+
+// Label calls the underlying Label.
+func (x *MeshRenderPipelineDescriptor) Label() string {
+	_r := x.inner.Label()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLabel calls the underlying SetLabel.
+func (x *MeshRenderPipelineDescriptor) SetLabel(label string) {
+	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+}
+
+// ObjectFunction calls the underlying ObjectFunction.
+func (x *MeshRenderPipelineDescriptor) ObjectFunction() raw.MTLFunction {
+	return x.inner.ObjectFunction()
+}
+
+// SetObjectFunction calls the underlying SetObjectFunction.
+func (x *MeshRenderPipelineDescriptor) SetObjectFunction(objectFunction raw.MTLFunction) {
+	x.inner.SetObjectFunction(objectFunction)
+}
+
+// MeshFunction calls the underlying MeshFunction.
+func (x *MeshRenderPipelineDescriptor) MeshFunction() raw.MTLFunction {
+	return x.inner.MeshFunction()
+}
+
+// SetMeshFunction calls the underlying SetMeshFunction.
+func (x *MeshRenderPipelineDescriptor) SetMeshFunction(meshFunction raw.MTLFunction) {
+	x.inner.SetMeshFunction(meshFunction)
+}
+
+// FragmentFunction calls the underlying FragmentFunction.
+func (x *MeshRenderPipelineDescriptor) FragmentFunction() raw.MTLFunction {
+	return x.inner.FragmentFunction()
+}
+
+// SetFragmentFunction calls the underlying SetFragmentFunction.
+func (x *MeshRenderPipelineDescriptor) SetFragmentFunction(fragmentFunction raw.MTLFunction) {
+	x.inner.SetFragmentFunction(fragmentFunction)
+}
+
+// MaxTotalThreadsPerObjectThreadgroup calls the underlying MaxTotalThreadsPerObjectThreadgroup.
+func (x *MeshRenderPipelineDescriptor) MaxTotalThreadsPerObjectThreadgroup() uint {
+	return x.inner.MaxTotalThreadsPerObjectThreadgroup()
+}
+
+// SetMaxTotalThreadsPerObjectThreadgroup calls the underlying SetMaxTotalThreadsPerObjectThreadgroup.
+func (x *MeshRenderPipelineDescriptor) SetMaxTotalThreadsPerObjectThreadgroup(maxTotalThreadsPerObjectThreadgroup uint) {
+	x.inner.SetMaxTotalThreadsPerObjectThreadgroup(maxTotalThreadsPerObjectThreadgroup)
+}
+
+// MaxTotalThreadsPerMeshThreadgroup calls the underlying MaxTotalThreadsPerMeshThreadgroup.
+func (x *MeshRenderPipelineDescriptor) MaxTotalThreadsPerMeshThreadgroup() uint {
+	return x.inner.MaxTotalThreadsPerMeshThreadgroup()
+}
+
+// SetMaxTotalThreadsPerMeshThreadgroup calls the underlying SetMaxTotalThreadsPerMeshThreadgroup.
+func (x *MeshRenderPipelineDescriptor) SetMaxTotalThreadsPerMeshThreadgroup(maxTotalThreadsPerMeshThreadgroup uint) {
+	x.inner.SetMaxTotalThreadsPerMeshThreadgroup(maxTotalThreadsPerMeshThreadgroup)
+}
+
+// ObjectThreadgroupSizeIsMultipleOfThreadExecutionWidth calls the underlying ObjectThreadgroupSizeIsMultipleOfThreadExecutionWidth.
+func (x *MeshRenderPipelineDescriptor) ObjectThreadgroupSizeIsMultipleOfThreadExecutionWidth() bool {
+	return x.inner.ObjectThreadgroupSizeIsMultipleOfThreadExecutionWidth()
+}
+
+// SetObjectThreadgroupSizeIsMultipleOfThreadExecutionWidth calls the underlying SetObjectThreadgroupSizeIsMultipleOfThreadExecutionWidth.
+func (x *MeshRenderPipelineDescriptor) SetObjectThreadgroupSizeIsMultipleOfThreadExecutionWidth(objectThreadgroupSizeIsMultipleOfThreadExecutionWidth bool) {
+	x.inner.SetObjectThreadgroupSizeIsMultipleOfThreadExecutionWidth(objectThreadgroupSizeIsMultipleOfThreadExecutionWidth)
+}
+
+// MeshThreadgroupSizeIsMultipleOfThreadExecutionWidth calls the underlying MeshThreadgroupSizeIsMultipleOfThreadExecutionWidth.
+func (x *MeshRenderPipelineDescriptor) MeshThreadgroupSizeIsMultipleOfThreadExecutionWidth() bool {
+	return x.inner.MeshThreadgroupSizeIsMultipleOfThreadExecutionWidth()
+}
+
+// SetMeshThreadgroupSizeIsMultipleOfThreadExecutionWidth calls the underlying SetMeshThreadgroupSizeIsMultipleOfThreadExecutionWidth.
+func (x *MeshRenderPipelineDescriptor) SetMeshThreadgroupSizeIsMultipleOfThreadExecutionWidth(meshThreadgroupSizeIsMultipleOfThreadExecutionWidth bool) {
+	x.inner.SetMeshThreadgroupSizeIsMultipleOfThreadExecutionWidth(meshThreadgroupSizeIsMultipleOfThreadExecutionWidth)
+}
+
+// PayloadMemoryLength calls the underlying PayloadMemoryLength.
+func (x *MeshRenderPipelineDescriptor) PayloadMemoryLength() uint {
+	return x.inner.PayloadMemoryLength()
+}
+
+// SetPayloadMemoryLength calls the underlying SetPayloadMemoryLength.
+func (x *MeshRenderPipelineDescriptor) SetPayloadMemoryLength(payloadMemoryLength uint) {
+	x.inner.SetPayloadMemoryLength(payloadMemoryLength)
+}
+
+// MaxTotalThreadgroupsPerMeshGrid calls the underlying MaxTotalThreadgroupsPerMeshGrid.
+func (x *MeshRenderPipelineDescriptor) MaxTotalThreadgroupsPerMeshGrid() uint {
+	return x.inner.MaxTotalThreadgroupsPerMeshGrid()
+}
+
+// SetMaxTotalThreadgroupsPerMeshGrid calls the underlying SetMaxTotalThreadgroupsPerMeshGrid.
+func (x *MeshRenderPipelineDescriptor) SetMaxTotalThreadgroupsPerMeshGrid(maxTotalThreadgroupsPerMeshGrid uint) {
+	x.inner.SetMaxTotalThreadgroupsPerMeshGrid(maxTotalThreadgroupsPerMeshGrid)
+}
+
+// ObjectBuffers calls the underlying ObjectBuffers.
+func (x *MeshRenderPipelineDescriptor) ObjectBuffers() *PipelineBufferDescriptorArray {
+	_r := x.inner.ObjectBuffers()
+	if _r == nil {
+		return nil
+	}
+	return &PipelineBufferDescriptorArray{inner: _r}
+}
+
+// MeshBuffers calls the underlying MeshBuffers.
+func (x *MeshRenderPipelineDescriptor) MeshBuffers() *PipelineBufferDescriptorArray {
+	_r := x.inner.MeshBuffers()
+	if _r == nil {
+		return nil
+	}
+	return &PipelineBufferDescriptorArray{inner: _r}
+}
+
+// FragmentBuffers calls the underlying FragmentBuffers.
+func (x *MeshRenderPipelineDescriptor) FragmentBuffers() *PipelineBufferDescriptorArray {
+	_r := x.inner.FragmentBuffers()
+	if _r == nil {
+		return nil
+	}
+	return &PipelineBufferDescriptorArray{inner: _r}
+}
+
+// RasterSampleCount calls the underlying RasterSampleCount.
+func (x *MeshRenderPipelineDescriptor) RasterSampleCount() uint {
+	return x.inner.RasterSampleCount()
+}
+
+// SetRasterSampleCount calls the underlying SetRasterSampleCount.
+func (x *MeshRenderPipelineDescriptor) SetRasterSampleCount(rasterSampleCount uint) {
+	x.inner.SetRasterSampleCount(rasterSampleCount)
+}
+
+// IsAlphaToCoverageEnabled calls the underlying IsAlphaToCoverageEnabled.
+func (x *MeshRenderPipelineDescriptor) IsAlphaToCoverageEnabled() bool {
+	return x.inner.IsAlphaToCoverageEnabled()
+}
+
+// SetAlphaToCoverageEnabled calls the underlying SetAlphaToCoverageEnabled.
+func (x *MeshRenderPipelineDescriptor) SetAlphaToCoverageEnabled(alphaToCoverageEnabled bool) {
+	x.inner.SetAlphaToCoverageEnabled(alphaToCoverageEnabled)
+}
+
+// IsAlphaToOneEnabled calls the underlying IsAlphaToOneEnabled.
+func (x *MeshRenderPipelineDescriptor) IsAlphaToOneEnabled() bool {
+	return x.inner.IsAlphaToOneEnabled()
+}
+
+// SetAlphaToOneEnabled calls the underlying SetAlphaToOneEnabled.
+func (x *MeshRenderPipelineDescriptor) SetAlphaToOneEnabled(alphaToOneEnabled bool) {
+	x.inner.SetAlphaToOneEnabled(alphaToOneEnabled)
+}
+
+// IsRasterizationEnabled calls the underlying IsRasterizationEnabled.
+func (x *MeshRenderPipelineDescriptor) IsRasterizationEnabled() bool {
+	return x.inner.IsRasterizationEnabled()
+}
+
+// SetRasterizationEnabled calls the underlying SetRasterizationEnabled.
+func (x *MeshRenderPipelineDescriptor) SetRasterizationEnabled(rasterizationEnabled bool) {
+	x.inner.SetRasterizationEnabled(rasterizationEnabled)
+}
+
+// MaxVertexAmplificationCount calls the underlying MaxVertexAmplificationCount.
+func (x *MeshRenderPipelineDescriptor) MaxVertexAmplificationCount() uint {
+	return x.inner.MaxVertexAmplificationCount()
+}
+
+// SetMaxVertexAmplificationCount calls the underlying SetMaxVertexAmplificationCount.
+func (x *MeshRenderPipelineDescriptor) SetMaxVertexAmplificationCount(maxVertexAmplificationCount uint) {
+	x.inner.SetMaxVertexAmplificationCount(maxVertexAmplificationCount)
+}
+
+// ColorAttachments calls the underlying ColorAttachments.
+func (x *MeshRenderPipelineDescriptor) ColorAttachments() *RenderPipelineColorAttachmentDescriptorArray {
+	_r := x.inner.ColorAttachments()
+	if _r == nil {
+		return nil
+	}
+	return &RenderPipelineColorAttachmentDescriptorArray{inner: _r}
+}
+
+// DepthAttachmentPixelFormat calls the underlying DepthAttachmentPixelFormat.
+func (x *MeshRenderPipelineDescriptor) DepthAttachmentPixelFormat() raw.MTLPixelFormat {
+	return x.inner.DepthAttachmentPixelFormat()
+}
+
+// SetDepthAttachmentPixelFormat calls the underlying SetDepthAttachmentPixelFormat.
+func (x *MeshRenderPipelineDescriptor) SetDepthAttachmentPixelFormat(depthAttachmentPixelFormat raw.MTLPixelFormat) {
+	x.inner.SetDepthAttachmentPixelFormat(depthAttachmentPixelFormat)
+}
+
+// StencilAttachmentPixelFormat calls the underlying StencilAttachmentPixelFormat.
+func (x *MeshRenderPipelineDescriptor) StencilAttachmentPixelFormat() raw.MTLPixelFormat {
+	return x.inner.StencilAttachmentPixelFormat()
+}
+
+// SetStencilAttachmentPixelFormat calls the underlying SetStencilAttachmentPixelFormat.
+func (x *MeshRenderPipelineDescriptor) SetStencilAttachmentPixelFormat(stencilAttachmentPixelFormat raw.MTLPixelFormat) {
+	x.inner.SetStencilAttachmentPixelFormat(stencilAttachmentPixelFormat)
+}
+
+// SupportIndirectCommandBuffers calls the underlying SupportIndirectCommandBuffers.
+func (x *MeshRenderPipelineDescriptor) SupportIndirectCommandBuffers() bool {
+	return x.inner.SupportIndirectCommandBuffers()
+}
+
+// SetSupportIndirectCommandBuffers calls the underlying SetSupportIndirectCommandBuffers.
+func (x *MeshRenderPipelineDescriptor) SetSupportIndirectCommandBuffers(supportIndirectCommandBuffers bool) {
+	x.inner.SetSupportIndirectCommandBuffers(supportIndirectCommandBuffers)
+}
+
+// BinaryArchives calls the underlying BinaryArchives.
+func (x *MeshRenderPipelineDescriptor) BinaryArchives() *foundation.NSArray[raw.MTLBinaryArchive] {
+	return x.inner.BinaryArchives()
+}
+
+// SetBinaryArchives calls the underlying SetBinaryArchives.
+func (x *MeshRenderPipelineDescriptor) SetBinaryArchives(binaryArchives *foundation.NSArray[raw.MTLBinaryArchive]) {
+	x.inner.SetBinaryArchives(binaryArchives)
+}
+
+// ObjectLinkedFunctions calls the underlying ObjectLinkedFunctions.
+func (x *MeshRenderPipelineDescriptor) ObjectLinkedFunctions() *LinkedFunctions {
+	_r := x.inner.ObjectLinkedFunctions()
+	if _r == nil {
+		return nil
+	}
+	return &LinkedFunctions{inner: _r}
+}
+
+// SetObjectLinkedFunctions calls the underlying SetObjectLinkedFunctions.
+func (x *MeshRenderPipelineDescriptor) SetObjectLinkedFunctions(objectLinkedFunctions *raw.MTLLinkedFunctions) {
+	x.inner.SetObjectLinkedFunctions(objectLinkedFunctions)
+}
+
+// MeshLinkedFunctions calls the underlying MeshLinkedFunctions.
+func (x *MeshRenderPipelineDescriptor) MeshLinkedFunctions() *LinkedFunctions {
+	_r := x.inner.MeshLinkedFunctions()
+	if _r == nil {
+		return nil
+	}
+	return &LinkedFunctions{inner: _r}
+}
+
+// SetMeshLinkedFunctions calls the underlying SetMeshLinkedFunctions.
+func (x *MeshRenderPipelineDescriptor) SetMeshLinkedFunctions(meshLinkedFunctions *raw.MTLLinkedFunctions) {
+	x.inner.SetMeshLinkedFunctions(meshLinkedFunctions)
+}
+
+// FragmentLinkedFunctions calls the underlying FragmentLinkedFunctions.
+func (x *MeshRenderPipelineDescriptor) FragmentLinkedFunctions() *LinkedFunctions {
+	_r := x.inner.FragmentLinkedFunctions()
+	if _r == nil {
+		return nil
+	}
+	return &LinkedFunctions{inner: _r}
+}
+
+// SetFragmentLinkedFunctions calls the underlying SetFragmentLinkedFunctions.
+func (x *MeshRenderPipelineDescriptor) SetFragmentLinkedFunctions(fragmentLinkedFunctions *raw.MTLLinkedFunctions) {
+	x.inner.SetFragmentLinkedFunctions(fragmentLinkedFunctions)
+}
+
+// ShaderValidation calls the underlying ShaderValidation.
+func (x *MeshRenderPipelineDescriptor) ShaderValidation() raw.MTLShaderValidation {
+	return x.inner.ShaderValidation()
+}
+
+// SetShaderValidation calls the underlying SetShaderValidation.
+func (x *MeshRenderPipelineDescriptor) SetShaderValidation(shaderValidation raw.MTLShaderValidation) {
+	x.inner.SetShaderValidation(shaderValidation)
+}
+
+// RequiredThreadsPerObjectThreadgroup calls the underlying RequiredThreadsPerObjectThreadgroup.
+func (x *MeshRenderPipelineDescriptor) RequiredThreadsPerObjectThreadgroup() raw.MTLSize {
+	return x.inner.RequiredThreadsPerObjectThreadgroup()
+}
+
+// SetRequiredThreadsPerObjectThreadgroup calls the underlying SetRequiredThreadsPerObjectThreadgroup.
+func (x *MeshRenderPipelineDescriptor) SetRequiredThreadsPerObjectThreadgroup(requiredThreadsPerObjectThreadgroup raw.MTLSize) {
+	x.inner.SetRequiredThreadsPerObjectThreadgroup(requiredThreadsPerObjectThreadgroup)
+}
+
+// RequiredThreadsPerMeshThreadgroup calls the underlying RequiredThreadsPerMeshThreadgroup.
+func (x *MeshRenderPipelineDescriptor) RequiredThreadsPerMeshThreadgroup() raw.MTLSize {
+	return x.inner.RequiredThreadsPerMeshThreadgroup()
+}
+
+// SetRequiredThreadsPerMeshThreadgroup calls the underlying SetRequiredThreadsPerMeshThreadgroup.
+func (x *MeshRenderPipelineDescriptor) SetRequiredThreadsPerMeshThreadgroup(requiredThreadsPerMeshThreadgroup raw.MTLSize) {
+	x.inner.SetRequiredThreadsPerMeshThreadgroup(requiredThreadsPerMeshThreadgroup)
+}
+
+// MeshRenderPipelineDescriptorable is the interface implemented by [MeshRenderPipelineDescriptor], for mocking and DI.
+type MeshRenderPipelineDescriptorable interface {
+	Unwrap() *raw.MTLMeshRenderPipelineDescriptor
+	WithLabel(label string) *MeshRenderPipelineDescriptor
+	WithObjectFunction(objectFunction raw.MTLFunction) *MeshRenderPipelineDescriptor
+	WithMeshFunction(meshFunction raw.MTLFunction) *MeshRenderPipelineDescriptor
+	WithFragmentFunction(fragmentFunction raw.MTLFunction) *MeshRenderPipelineDescriptor
+	WithMaxTotalThreadsPerObjectThreadgroup(maxTotalThreadsPerObjectThreadgroup uint) *MeshRenderPipelineDescriptor
+	WithMaxTotalThreadsPerMeshThreadgroup(maxTotalThreadsPerMeshThreadgroup uint) *MeshRenderPipelineDescriptor
+	WithObjectThreadgroupSizeIsMultipleOfThreadExecutionWidth(objectThreadgroupSizeIsMultipleOfThreadExecutionWidth bool) *MeshRenderPipelineDescriptor
+	WithMeshThreadgroupSizeIsMultipleOfThreadExecutionWidth(meshThreadgroupSizeIsMultipleOfThreadExecutionWidth bool) *MeshRenderPipelineDescriptor
+	WithPayloadMemoryLength(payloadMemoryLength uint) *MeshRenderPipelineDescriptor
+	WithMaxTotalThreadgroupsPerMeshGrid(maxTotalThreadgroupsPerMeshGrid uint) *MeshRenderPipelineDescriptor
+	WithRasterSampleCount(rasterSampleCount uint) *MeshRenderPipelineDescriptor
+	WithAlphaToCoverageEnabled(alphaToCoverageEnabled bool) *MeshRenderPipelineDescriptor
+	WithAlphaToOneEnabled(alphaToOneEnabled bool) *MeshRenderPipelineDescriptor
+	WithRasterizationEnabled(rasterizationEnabled bool) *MeshRenderPipelineDescriptor
+	WithMaxVertexAmplificationCount(maxVertexAmplificationCount uint) *MeshRenderPipelineDescriptor
+	WithDepthAttachmentPixelFormat(depthAttachmentPixelFormat raw.MTLPixelFormat) *MeshRenderPipelineDescriptor
+	WithStencilAttachmentPixelFormat(stencilAttachmentPixelFormat raw.MTLPixelFormat) *MeshRenderPipelineDescriptor
+	WithSupportIndirectCommandBuffers(supportIndirectCommandBuffers bool) *MeshRenderPipelineDescriptor
+	WithObjectLinkedFunctions(objectLinkedFunctions *raw.MTLLinkedFunctions) *MeshRenderPipelineDescriptor
+	WithMeshLinkedFunctions(meshLinkedFunctions *raw.MTLLinkedFunctions) *MeshRenderPipelineDescriptor
+	WithFragmentLinkedFunctions(fragmentLinkedFunctions *raw.MTLLinkedFunctions) *MeshRenderPipelineDescriptor
+	WithShaderValidation(shaderValidation raw.MTLShaderValidation) *MeshRenderPipelineDescriptor
+	WithRequiredThreadsPerObjectThreadgroup(requiredThreadsPerObjectThreadgroup raw.MTLSize) *MeshRenderPipelineDescriptor
+	WithRequiredThreadsPerMeshThreadgroup(requiredThreadsPerMeshThreadgroup raw.MTLSize) *MeshRenderPipelineDescriptor
+	Reset()
+	Label() string
+	SetLabel(label string)
+	ObjectFunction() raw.MTLFunction
+	SetObjectFunction(objectFunction raw.MTLFunction)
+	MeshFunction() raw.MTLFunction
+	SetMeshFunction(meshFunction raw.MTLFunction)
+	FragmentFunction() raw.MTLFunction
+	SetFragmentFunction(fragmentFunction raw.MTLFunction)
+	MaxTotalThreadsPerObjectThreadgroup() uint
+	SetMaxTotalThreadsPerObjectThreadgroup(maxTotalThreadsPerObjectThreadgroup uint)
+	MaxTotalThreadsPerMeshThreadgroup() uint
+	SetMaxTotalThreadsPerMeshThreadgroup(maxTotalThreadsPerMeshThreadgroup uint)
+	ObjectThreadgroupSizeIsMultipleOfThreadExecutionWidth() bool
+	SetObjectThreadgroupSizeIsMultipleOfThreadExecutionWidth(objectThreadgroupSizeIsMultipleOfThreadExecutionWidth bool)
+	MeshThreadgroupSizeIsMultipleOfThreadExecutionWidth() bool
+	SetMeshThreadgroupSizeIsMultipleOfThreadExecutionWidth(meshThreadgroupSizeIsMultipleOfThreadExecutionWidth bool)
+	PayloadMemoryLength() uint
+	SetPayloadMemoryLength(payloadMemoryLength uint)
+	MaxTotalThreadgroupsPerMeshGrid() uint
+	SetMaxTotalThreadgroupsPerMeshGrid(maxTotalThreadgroupsPerMeshGrid uint)
+	ObjectBuffers() *PipelineBufferDescriptorArray
+	MeshBuffers() *PipelineBufferDescriptorArray
+	FragmentBuffers() *PipelineBufferDescriptorArray
+	RasterSampleCount() uint
+	SetRasterSampleCount(rasterSampleCount uint)
+	IsAlphaToCoverageEnabled() bool
+	SetAlphaToCoverageEnabled(alphaToCoverageEnabled bool)
+	IsAlphaToOneEnabled() bool
+	SetAlphaToOneEnabled(alphaToOneEnabled bool)
+	IsRasterizationEnabled() bool
+	SetRasterizationEnabled(rasterizationEnabled bool)
+	MaxVertexAmplificationCount() uint
+	SetMaxVertexAmplificationCount(maxVertexAmplificationCount uint)
+	ColorAttachments() *RenderPipelineColorAttachmentDescriptorArray
+	DepthAttachmentPixelFormat() raw.MTLPixelFormat
+	SetDepthAttachmentPixelFormat(depthAttachmentPixelFormat raw.MTLPixelFormat)
+	StencilAttachmentPixelFormat() raw.MTLPixelFormat
+	SetStencilAttachmentPixelFormat(stencilAttachmentPixelFormat raw.MTLPixelFormat)
+	SupportIndirectCommandBuffers() bool
+	SetSupportIndirectCommandBuffers(supportIndirectCommandBuffers bool)
+	BinaryArchives() *foundation.NSArray[raw.MTLBinaryArchive]
+	SetBinaryArchives(binaryArchives *foundation.NSArray[raw.MTLBinaryArchive])
+	ObjectLinkedFunctions() *LinkedFunctions
+	SetObjectLinkedFunctions(objectLinkedFunctions *raw.MTLLinkedFunctions)
+	MeshLinkedFunctions() *LinkedFunctions
+	SetMeshLinkedFunctions(meshLinkedFunctions *raw.MTLLinkedFunctions)
+	FragmentLinkedFunctions() *LinkedFunctions
+	SetFragmentLinkedFunctions(fragmentLinkedFunctions *raw.MTLLinkedFunctions)
+	ShaderValidation() raw.MTLShaderValidation
+	SetShaderValidation(shaderValidation raw.MTLShaderValidation)
+	RequiredThreadsPerObjectThreadgroup() raw.MTLSize
+	SetRequiredThreadsPerObjectThreadgroup(requiredThreadsPerObjectThreadgroup raw.MTLSize)
+	RequiredThreadsPerMeshThreadgroup() raw.MTLSize
+	SetRequiredThreadsPerMeshThreadgroup(requiredThreadsPerMeshThreadgroup raw.MTLSize)
+}
+
+var _ MeshRenderPipelineDescriptorable = (*MeshRenderPipelineDescriptor)(nil)
 

@@ -6,6 +6,7 @@ package speech
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/speech"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,16 +24,44 @@ func NewTranscription() *Transcription {
 	return &Transcription{inner: raw.SFTranscriptionFromID(_id)}
 }
 
+// FormattedString calls the underlying FormattedString.
+func (x *Transcription) FormattedString() string {
+	_r := x.inner.FormattedString()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 // Segments returns the collection as a Go slice.
 func (x *Transcription) Segments() []*raw.SFTranscriptionSegment {
 	arr := x.inner.Segments()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.SFTranscriptionSegment, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SFTranscriptionSegment {
+		return raw.SFTranscriptionSegmentFromID(purego.Retain(_id))
+	})
 }
+
+// SpeakingRate calls the underlying SpeakingRate.
+func (x *Transcription) SpeakingRate() float64 {
+	return x.inner.SpeakingRate()
+}
+
+// AveragePauseDuration calls the underlying AveragePauseDuration.
+func (x *Transcription) AveragePauseDuration() float64 {
+	return x.inner.AveragePauseDuration()
+}
+
+// Transcriptionable is the interface implemented by [Transcription], for mocking and DI.
+type Transcriptionable interface {
+	Unwrap() *raw.SFTranscription
+	FormattedString() string
+	Segments() []*raw.SFTranscriptionSegment
+	SpeakingRate() float64
+	AveragePauseDuration() float64
+}
+
+var _ Transcriptionable = (*Transcription)(nil)
 

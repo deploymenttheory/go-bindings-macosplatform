@@ -25,3 +25,10 @@ func NewPlayerItemMediaDataCollector() *PlayerItemMediaDataCollector {
 
 func (x *PlayerItemMediaDataCollector) asPlayerItemMediaDataCollector() *raw.AVPlayerItemMediaDataCollector { return x.inner }
 
+// PlayerItemMediaDataCollectorable is the interface implemented by [PlayerItemMediaDataCollector], for mocking and DI.
+type PlayerItemMediaDataCollectorable interface {
+	Unwrap() *raw.AVPlayerItemMediaDataCollector
+}
+
+var _ PlayerItemMediaDataCollectorable = (*PlayerItemMediaDataCollector)(nil)
+

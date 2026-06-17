@@ -26,3 +26,10 @@ func NewNNBinaryGradientStateNode() *NNBinaryGradientStateNode {
 
 func (x *NNBinaryGradientStateNode) asNNStateNode() *mpsneuralnetwork.MPSNNStateNode { return &x.inner.MPSNNStateNode }
 
+// NNBinaryGradientStateNodeable is the interface implemented by [NNBinaryGradientStateNode], for mocking and DI.
+type NNBinaryGradientStateNodeable interface {
+	Unwrap() *raw.MPSNNBinaryGradientStateNode
+}
+
+var _ NNBinaryGradientStateNodeable = (*NNBinaryGradientStateNode)(nil)
+

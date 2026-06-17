@@ -7,6 +7,7 @@ package vision
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -39,11 +40,9 @@ func (x *DetectHumanHandPoseRequest) SupportedJointNames() ([]*foundation.NSStri
 	if arr == nil {
 		return nil, nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out, nil
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	}), nil
 }
 
 // SupportedJointsGroupNames returns the collection as a Go slice.
@@ -55,14 +54,34 @@ func (x *DetectHumanHandPoseRequest) SupportedJointsGroupNames() ([]*foundation.
 	if arr == nil {
 		return nil, nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out, nil
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	}), nil
+}
+
+// MaximumHandCount calls the underlying MaximumHandCount.
+func (x *DetectHumanHandPoseRequest) MaximumHandCount() uint {
+	return x.inner.MaximumHandCount()
+}
+
+// SetMaximumHandCount calls the underlying SetMaximumHandCount.
+func (x *DetectHumanHandPoseRequest) SetMaximumHandCount(maximumHandCount uint) {
+	x.inner.SetMaximumHandCount(maximumHandCount)
 }
 
 func (x *DetectHumanHandPoseRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNImageBasedRequest }
 
 func (x *DetectHumanHandPoseRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageBasedRequest.VNRequest }
+
+// DetectHumanHandPoseRequestable is the interface implemented by [DetectHumanHandPoseRequest], for mocking and DI.
+type DetectHumanHandPoseRequestable interface {
+	Unwrap() *raw.VNDetectHumanHandPoseRequest
+	WithMaximumHandCount(maximumHandCount uint) *DetectHumanHandPoseRequest
+	SupportedJointNames() ([]*foundation.NSString, error)
+	SupportedJointsGroupNames() ([]*foundation.NSString, error)
+	MaximumHandCount() uint
+	SetMaximumHandCount(maximumHandCount uint)
+}
+
+var _ DetectHumanHandPoseRequestable = (*DetectHumanHandPoseRequest)(nil)
 

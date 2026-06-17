@@ -55,3 +55,66 @@ func (x *MTRNetworkCommissioningClusterNetworkConfigResponseParams) WithTimedInv
 	return x
 }
 
+// NetworkingStatus calls the underlying NetworkingStatus.
+func (x *MTRNetworkCommissioningClusterNetworkConfigResponseParams) NetworkingStatus() *foundation.NSNumber {
+	return x.inner.NetworkingStatus()
+}
+
+// SetNetworkingStatus calls the underlying SetNetworkingStatus.
+func (x *MTRNetworkCommissioningClusterNetworkConfigResponseParams) SetNetworkingStatus(networkingStatus *foundation.NSNumber) {
+	x.inner.SetNetworkingStatus(networkingStatus)
+}
+
+// DebugText calls the underlying DebugText.
+func (x *MTRNetworkCommissioningClusterNetworkConfigResponseParams) DebugText() string {
+	_r := x.inner.DebugText()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetDebugText calls the underlying SetDebugText.
+func (x *MTRNetworkCommissioningClusterNetworkConfigResponseParams) SetDebugText(debugText string) {
+	x.inner.SetDebugText(foundation.NSStringStringWithUTF8String(debugText))
+}
+
+// NetworkIndex calls the underlying NetworkIndex.
+func (x *MTRNetworkCommissioningClusterNetworkConfigResponseParams) NetworkIndex() *foundation.NSNumber {
+	return x.inner.NetworkIndex()
+}
+
+// SetNetworkIndex calls the underlying SetNetworkIndex.
+func (x *MTRNetworkCommissioningClusterNetworkConfigResponseParams) SetNetworkIndex(networkIndex *foundation.NSNumber) {
+	x.inner.SetNetworkIndex(networkIndex)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRNetworkCommissioningClusterNetworkConfigResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRNetworkCommissioningClusterNetworkConfigResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// MTRNetworkCommissioningClusterNetworkConfigResponseParamsable is the interface implemented by [MTRNetworkCommissioningClusterNetworkConfigResponseParams], for mocking and DI.
+type MTRNetworkCommissioningClusterNetworkConfigResponseParamsable interface {
+	Unwrap() *raw.MTRNetworkCommissioningClusterNetworkConfigResponseParams
+	WithNetworkingStatus(networkingStatus *foundation.NSNumber) *MTRNetworkCommissioningClusterNetworkConfigResponseParams
+	WithDebugText(debugText string) *MTRNetworkCommissioningClusterNetworkConfigResponseParams
+	WithNetworkIndex(networkIndex *foundation.NSNumber) *MTRNetworkCommissioningClusterNetworkConfigResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRNetworkCommissioningClusterNetworkConfigResponseParams
+	NetworkingStatus() *foundation.NSNumber
+	SetNetworkingStatus(networkingStatus *foundation.NSNumber)
+	DebugText() string
+	SetDebugText(debugText string)
+	NetworkIndex() *foundation.NSNumber
+	SetNetworkIndex(networkIndex *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+}
+
+var _ MTRNetworkCommissioningClusterNetworkConfigResponseParamsable = (*MTRNetworkCommissioningClusterNetworkConfigResponseParams)(nil)
+

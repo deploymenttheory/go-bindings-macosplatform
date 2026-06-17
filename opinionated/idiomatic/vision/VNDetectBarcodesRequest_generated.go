@@ -7,6 +7,7 @@ package vision
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -56,11 +57,9 @@ func (x *DetectBarcodesRequest) SupportedSymbologies() ([]*foundation.NSString, 
 	if arr == nil {
 		return nil, nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out, nil
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	}), nil
 }
 
 // Symbologies returns the collection as a Go slice.
@@ -69,14 +68,41 @@ func (x *DetectBarcodesRequest) Symbologies() []*foundation.NSString {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	})
+}
+
+// SetSymbologies calls the underlying SetSymbologies.
+func (x *DetectBarcodesRequest) SetSymbologies(symbologies *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetSymbologies(symbologies)
+}
+
+// CoalesceCompositeSymbologies calls the underlying CoalesceCompositeSymbologies.
+func (x *DetectBarcodesRequest) CoalesceCompositeSymbologies() bool {
+	return x.inner.CoalesceCompositeSymbologies()
+}
+
+// SetCoalesceCompositeSymbologies calls the underlying SetCoalesceCompositeSymbologies.
+func (x *DetectBarcodesRequest) SetCoalesceCompositeSymbologies(coalesceCompositeSymbologies bool) {
+	x.inner.SetCoalesceCompositeSymbologies(coalesceCompositeSymbologies)
 }
 
 func (x *DetectBarcodesRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNImageBasedRequest }
 
 func (x *DetectBarcodesRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageBasedRequest.VNRequest }
+
+// DetectBarcodesRequestable is the interface implemented by [DetectBarcodesRequest], for mocking and DI.
+type DetectBarcodesRequestable interface {
+	Unwrap() *raw.VNDetectBarcodesRequest
+	WithSymbologies(items ...*foundation.NSString) *DetectBarcodesRequest
+	WithCoalesceCompositeSymbologies(coalesceCompositeSymbologies bool) *DetectBarcodesRequest
+	SupportedSymbologies() ([]*foundation.NSString, error)
+	Symbologies() []*foundation.NSString
+	SetSymbologies(symbologies *foundation.NSArray[*foundation.NSString])
+	CoalesceCompositeSymbologies() bool
+	SetCoalesceCompositeSymbologies(coalesceCompositeSymbologies bool)
+}
+
+var _ DetectBarcodesRequestable = (*DetectBarcodesRequest)(nil)
 

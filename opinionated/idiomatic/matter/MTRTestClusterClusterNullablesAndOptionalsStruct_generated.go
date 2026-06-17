@@ -25,3 +25,10 @@ func NewMTRTestClusterClusterNullablesAndOptionalsStruct() *MTRTestClusterCluste
 
 func (x *MTRTestClusterClusterNullablesAndOptionalsStruct) asMTRUnitTestingClusterNullablesAndOptionalsStruct() *raw.MTRUnitTestingClusterNullablesAndOptionalsStruct { return &x.inner.MTRUnitTestingClusterNullablesAndOptionalsStruct }
 
+// MTRTestClusterClusterNullablesAndOptionalsStructable is the interface implemented by [MTRTestClusterClusterNullablesAndOptionalsStruct], for mocking and DI.
+type MTRTestClusterClusterNullablesAndOptionalsStructable interface {
+	Unwrap() *raw.MTRTestClusterClusterNullablesAndOptionalsStruct
+}
+
+var _ MTRTestClusterClusterNullablesAndOptionalsStructable = (*MTRTestClusterClusterNullablesAndOptionalsStruct)(nil)
+

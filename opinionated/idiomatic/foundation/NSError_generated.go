@@ -6,6 +6,7 @@ package foundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,18 +25,98 @@ func NewErrorWithDomainCodeUserInfo(domain *raw.NSString, code int, dict *raw.NS
 	return &Error{inner: raw.NSErrorFromID(_id)}
 }
 
+// Domain calls the underlying Domain.
+func (x *Error) Domain() *String {
+	_r := x.inner.Domain()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// Code calls the underlying Code.
+func (x *Error) Code() int {
+	return x.inner.Code()
+}
+
+// UserInfo calls the underlying UserInfo.
+func (x *Error) UserInfo() *raw.NSDictionary[*raw.NSString, objc.ID] {
+	return x.inner.UserInfo()
+}
+
+// LocalizedDescription calls the underlying LocalizedDescription.
+func (x *Error) LocalizedDescription() *String {
+	_r := x.inner.LocalizedDescription()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// LocalizedFailureReason calls the underlying LocalizedFailureReason.
+func (x *Error) LocalizedFailureReason() *String {
+	_r := x.inner.LocalizedFailureReason()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// LocalizedRecoverySuggestion calls the underlying LocalizedRecoverySuggestion.
+func (x *Error) LocalizedRecoverySuggestion() *String {
+	_r := x.inner.LocalizedRecoverySuggestion()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
 // LocalizedRecoveryOptions returns the collection as a Go slice.
-func (x *Error) LocalizedRecoveryOptions() []*raw.NSString {
+func (x *Error) LocalizedRecoveryOptions() []string {
 	arr := x.inner.LocalizedRecoveryOptions()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// RecoveryAttempter calls the underlying RecoveryAttempter.
+func (x *Error) RecoveryAttempter() objc.ID {
+	return x.inner.RecoveryAttempter()
+}
+
+// HelpAnchor calls the underlying HelpAnchor.
+func (x *Error) HelpAnchor() *String {
+	_r := x.inner.HelpAnchor()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &String{inner: _r}
+}
+
+// UnderlyingErrors calls the underlying UnderlyingErrors.
+func (x *Error) UnderlyingErrors() *raw.NSArray[objc.ID] {
+	return x.inner.UnderlyingErrors()
 }
 
 func (x *Error) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// Errorable is the interface implemented by [Error], for mocking and DI.
+type Errorable interface {
+	Unwrap() *raw.NSError
+	Domain() *String
+	Code() int
+	UserInfo() *raw.NSDictionary[*raw.NSString, objc.ID]
+	LocalizedDescription() *String
+	LocalizedFailureReason() *String
+	LocalizedRecoverySuggestion() *String
+	LocalizedRecoveryOptions() []string
+	RecoveryAttempter() objc.ID
+	HelpAnchor() *String
+	UnderlyingErrors() *raw.NSArray[objc.ID]
+}
+
+var _ Errorable = (*Error)(nil)
 

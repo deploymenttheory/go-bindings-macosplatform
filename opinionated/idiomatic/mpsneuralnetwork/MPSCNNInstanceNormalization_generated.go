@@ -39,5 +39,49 @@ func (x *CNNInstanceNormalization) WithEpsilon(epsilon float32) *CNNInstanceNorm
 	return x
 }
 
+// ReloadDataSource calls the underlying ReloadDataSource.
+func (x *CNNInstanceNormalization) ReloadDataSource(dataSource raw.MPSCNNInstanceNormalizationDataSource) {
+	x.inner.ReloadDataSource(dataSource)
+}
+
+// ReloadGammaAndBetaFromDataSource calls the underlying ReloadGammaAndBetaFromDataSource.
+func (x *CNNInstanceNormalization) ReloadGammaAndBetaFromDataSource() {
+	x.inner.ReloadGammaAndBetaFromDataSource()
+}
+
+// ReloadGammaAndBetaWithCommandBufferGammaAndBetaState calls the underlying ReloadGammaAndBetaWithCommandBufferGammaAndBetaState.
+func (x *CNNInstanceNormalization) ReloadGammaAndBetaWithCommandBufferGammaAndBetaState(commandBuffer metal.MTLCommandBuffer, gammaAndBetaState *raw.MPSCNNNormalizationGammaAndBetaState) {
+	x.inner.ReloadGammaAndBetaWithCommandBufferGammaAndBetaState(commandBuffer, gammaAndBetaState)
+}
+
+// Epsilon calls the underlying Epsilon.
+func (x *CNNInstanceNormalization) Epsilon() float32 {
+	return x.inner.Epsilon()
+}
+
+// SetEpsilon calls the underlying SetEpsilon.
+func (x *CNNInstanceNormalization) SetEpsilon(epsilon float32) {
+	x.inner.SetEpsilon(epsilon)
+}
+
+// DataSource calls the underlying DataSource.
+func (x *CNNInstanceNormalization) DataSource() raw.MPSCNNInstanceNormalizationDataSource {
+	return x.inner.DataSource()
+}
+
 func (x *CNNInstanceNormalization) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSCNNKernel }
+
+// CNNInstanceNormalizationable is the interface implemented by [CNNInstanceNormalization], for mocking and DI.
+type CNNInstanceNormalizationable interface {
+	Unwrap() *raw.MPSCNNInstanceNormalization
+	WithEpsilon(epsilon float32) *CNNInstanceNormalization
+	ReloadDataSource(dataSource raw.MPSCNNInstanceNormalizationDataSource)
+	ReloadGammaAndBetaFromDataSource()
+	ReloadGammaAndBetaWithCommandBufferGammaAndBetaState(commandBuffer metal.MTLCommandBuffer, gammaAndBetaState *raw.MPSCNNNormalizationGammaAndBetaState)
+	Epsilon() float32
+	SetEpsilon(epsilon float32)
+	DataSource() raw.MPSCNNInstanceNormalizationDataSource
+}
+
+var _ CNNInstanceNormalizationable = (*CNNInstanceNormalization)(nil)
 

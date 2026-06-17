@@ -7,6 +7,7 @@ package modelio
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -30,5 +31,109 @@ func (x *ScatteringFunction) WithName(name string) *ScatteringFunction {
 	return x
 }
 
+// Name calls the underlying Name.
+func (x *ScatteringFunction) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetName calls the underlying SetName.
+func (x *ScatteringFunction) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
+// BaseColor calls the underlying BaseColor.
+func (x *ScatteringFunction) BaseColor() *MaterialProperty {
+	_r := x.inner.BaseColor()
+	if _r == nil {
+		return nil
+	}
+	return &MaterialProperty{inner: _r}
+}
+
+// Emission calls the underlying Emission.
+func (x *ScatteringFunction) Emission() *MaterialProperty {
+	_r := x.inner.Emission()
+	if _r == nil {
+		return nil
+	}
+	return &MaterialProperty{inner: _r}
+}
+
+// Specular calls the underlying Specular.
+func (x *ScatteringFunction) Specular() *MaterialProperty {
+	_r := x.inner.Specular()
+	if _r == nil {
+		return nil
+	}
+	return &MaterialProperty{inner: _r}
+}
+
+// MaterialIndexOfRefraction calls the underlying MaterialIndexOfRefraction.
+func (x *ScatteringFunction) MaterialIndexOfRefraction() *MaterialProperty {
+	_r := x.inner.MaterialIndexOfRefraction()
+	if _r == nil {
+		return nil
+	}
+	return &MaterialProperty{inner: _r}
+}
+
+// InterfaceIndexOfRefraction calls the underlying InterfaceIndexOfRefraction.
+func (x *ScatteringFunction) InterfaceIndexOfRefraction() *MaterialProperty {
+	_r := x.inner.InterfaceIndexOfRefraction()
+	if _r == nil {
+		return nil
+	}
+	return &MaterialProperty{inner: _r}
+}
+
+// Normal calls the underlying Normal.
+func (x *ScatteringFunction) Normal() *MaterialProperty {
+	_r := x.inner.Normal()
+	if _r == nil {
+		return nil
+	}
+	return &MaterialProperty{inner: _r}
+}
+
+// AmbientOcclusion calls the underlying AmbientOcclusion.
+func (x *ScatteringFunction) AmbientOcclusion() *MaterialProperty {
+	_r := x.inner.AmbientOcclusion()
+	if _r == nil {
+		return nil
+	}
+	return &MaterialProperty{inner: _r}
+}
+
+// AmbientOcclusionScale calls the underlying AmbientOcclusionScale.
+func (x *ScatteringFunction) AmbientOcclusionScale() *MaterialProperty {
+	_r := x.inner.AmbientOcclusionScale()
+	if _r == nil {
+		return nil
+	}
+	return &MaterialProperty{inner: _r}
+}
+
 func (x *ScatteringFunction) asScatteringFunction() *raw.MDLScatteringFunction { return x.inner }
+
+// ScatteringFunctionable is the interface implemented by [ScatteringFunction], for mocking and DI.
+type ScatteringFunctionable interface {
+	Unwrap() *raw.MDLScatteringFunction
+	WithName(name string) *ScatteringFunction
+	Name() string
+	SetName(name string)
+	BaseColor() *MaterialProperty
+	Emission() *MaterialProperty
+	Specular() *MaterialProperty
+	MaterialIndexOfRefraction() *MaterialProperty
+	InterfaceIndexOfRefraction() *MaterialProperty
+	Normal() *MaterialProperty
+	AmbientOcclusion() *MaterialProperty
+	AmbientOcclusionScale() *MaterialProperty
+}
+
+var _ ScatteringFunctionable = (*ScatteringFunction)(nil)
 

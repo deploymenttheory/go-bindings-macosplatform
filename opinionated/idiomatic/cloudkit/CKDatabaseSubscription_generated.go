@@ -7,6 +7,7 @@ package cloudkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -44,5 +45,29 @@ func (x *DatabaseSubscription) WithRecordType(recordType *foundation.NSString) *
 	return x
 }
 
+// RecordType calls the underlying RecordType.
+func (x *DatabaseSubscription) RecordType() string {
+	_r := x.inner.RecordType()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetRecordType calls the underlying SetRecordType.
+func (x *DatabaseSubscription) SetRecordType(recordType *foundation.NSString) {
+	x.inner.SetRecordType(recordType)
+}
+
 func (x *DatabaseSubscription) asSubscription() *raw.CKSubscription { return &x.inner.CKSubscription }
+
+// DatabaseSubscriptionable is the interface implemented by [DatabaseSubscription], for mocking and DI.
+type DatabaseSubscriptionable interface {
+	Unwrap() *raw.CKDatabaseSubscription
+	WithRecordType(recordType *foundation.NSString) *DatabaseSubscription
+	RecordType() string
+	SetRecordType(recordType *foundation.NSString)
+}
+
+var _ DatabaseSubscriptionable = (*DatabaseSubscription)(nil)
 

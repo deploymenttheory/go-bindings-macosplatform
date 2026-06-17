@@ -35,7 +35,58 @@ func (x *ListFormatter) WithItemFormatter(itemFormatter FormatterProvider) *List
 	return x
 }
 
+// StringFromItems calls the underlying StringFromItems.
+func (x *ListFormatter) StringFromItems(items *raw.NSArray[objc.ID]) *String {
+	_r := x.inner.StringFromItems(items)
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// Locale calls the underlying Locale.
+func (x *ListFormatter) Locale() *Locale {
+	_r := x.inner.Locale()
+	if _r == nil {
+		return nil
+	}
+	return &Locale{inner: _r}
+}
+
+// SetLocale calls the underlying SetLocale.
+func (x *ListFormatter) SetLocale(locale *raw.NSLocale) {
+	x.inner.SetLocale(locale)
+}
+
+// ItemFormatter calls the underlying ItemFormatter.
+func (x *ListFormatter) ItemFormatter() *Formatter {
+	_r := x.inner.ItemFormatter()
+	if _r == nil {
+		return nil
+	}
+	return &Formatter{inner: _r}
+}
+
+// SetItemFormatter calls the underlying SetItemFormatter.
+func (x *ListFormatter) SetItemFormatter(itemFormatter *raw.NSFormatter) {
+	x.inner.SetItemFormatter(itemFormatter)
+}
+
 func (x *ListFormatter) asFormatter() *raw.NSFormatter { return &x.inner.NSFormatter }
 
 func (x *ListFormatter) asObject() *raw.NSObject { return &x.inner.NSFormatter.NSObject }
+
+// ListFormatterable is the interface implemented by [ListFormatter], for mocking and DI.
+type ListFormatterable interface {
+	Unwrap() *raw.NSListFormatter
+	WithLocale(locale *raw.NSLocale) *ListFormatter
+	WithItemFormatter(itemFormatter FormatterProvider) *ListFormatter
+	StringFromItems(items *raw.NSArray[objc.ID]) *String
+	Locale() *Locale
+	SetLocale(locale *raw.NSLocale)
+	ItemFormatter() *Formatter
+	SetItemFormatter(itemFormatter *raw.NSFormatter)
+}
+
+var _ ListFormatterable = (*ListFormatter)(nil)
 

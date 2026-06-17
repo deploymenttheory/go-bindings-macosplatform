@@ -7,6 +7,7 @@ package authenticationservices
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -48,10 +49,23 @@ func (x *AuthorizationSecurityKeyPublicKeyCredentialDescriptor) Transports() []*
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	})
 }
+
+// SetTransports calls the underlying SetTransports.
+func (x *AuthorizationSecurityKeyPublicKeyCredentialDescriptor) SetTransports(transports *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetTransports(transports)
+}
+
+// AuthorizationSecurityKeyPublicKeyCredentialDescriptorable is the interface implemented by [AuthorizationSecurityKeyPublicKeyCredentialDescriptor], for mocking and DI.
+type AuthorizationSecurityKeyPublicKeyCredentialDescriptorable interface {
+	Unwrap() *raw.ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor
+	WithTransports(items ...*foundation.NSString) *AuthorizationSecurityKeyPublicKeyCredentialDescriptor
+	Transports() []*foundation.NSString
+	SetTransports(transports *foundation.NSArray[*foundation.NSString])
+}
+
+var _ AuthorizationSecurityKeyPublicKeyCredentialDescriptorable = (*AuthorizationSecurityKeyPublicKeyCredentialDescriptor)(nil)
 

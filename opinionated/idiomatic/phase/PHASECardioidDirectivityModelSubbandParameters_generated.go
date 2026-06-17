@@ -41,3 +41,49 @@ func (x *CardioidDirectivityModelSubbandParameters) WithSharpness(sharpness floa
 	return x
 }
 
+// Frequency calls the underlying Frequency.
+func (x *CardioidDirectivityModelSubbandParameters) Frequency() float64 {
+	return x.inner.Frequency()
+}
+
+// SetFrequency calls the underlying SetFrequency.
+func (x *CardioidDirectivityModelSubbandParameters) SetFrequency(frequency float64) {
+	x.inner.SetFrequency(frequency)
+}
+
+// Pattern calls the underlying Pattern.
+func (x *CardioidDirectivityModelSubbandParameters) Pattern() float64 {
+	return x.inner.Pattern()
+}
+
+// SetPattern calls the underlying SetPattern.
+func (x *CardioidDirectivityModelSubbandParameters) SetPattern(pattern float64) {
+	x.inner.SetPattern(pattern)
+}
+
+// Sharpness calls the underlying Sharpness.
+func (x *CardioidDirectivityModelSubbandParameters) Sharpness() float64 {
+	return x.inner.Sharpness()
+}
+
+// SetSharpness calls the underlying SetSharpness.
+func (x *CardioidDirectivityModelSubbandParameters) SetSharpness(sharpness float64) {
+	x.inner.SetSharpness(sharpness)
+}
+
+// CardioidDirectivityModelSubbandParametersable is the interface implemented by [CardioidDirectivityModelSubbandParameters], for mocking and DI.
+type CardioidDirectivityModelSubbandParametersable interface {
+	Unwrap() *raw.PHASECardioidDirectivityModelSubbandParameters
+	WithFrequency(frequency float64) *CardioidDirectivityModelSubbandParameters
+	WithPattern(pattern float64) *CardioidDirectivityModelSubbandParameters
+	WithSharpness(sharpness float64) *CardioidDirectivityModelSubbandParameters
+	Frequency() float64
+	SetFrequency(frequency float64)
+	Pattern() float64
+	SetPattern(pattern float64)
+	Sharpness() float64
+	SetSharpness(sharpness float64)
+}
+
+var _ CardioidDirectivityModelSubbandParametersable = (*CardioidDirectivityModelSubbandParameters)(nil)
+

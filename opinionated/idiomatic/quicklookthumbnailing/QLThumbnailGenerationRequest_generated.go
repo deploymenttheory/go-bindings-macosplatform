@@ -45,3 +45,67 @@ func (x *ThumbnailGenerationRequest) WithIconMode(iconMode bool) *ThumbnailGener
 	return x
 }
 
+// ContentType calls the underlying ContentType.
+func (x *ThumbnailGenerationRequest) ContentType() *uniformtypeidentifiers.UTType {
+	return x.inner.ContentType()
+}
+
+// SetContentType calls the underlying SetContentType.
+func (x *ThumbnailGenerationRequest) SetContentType(contentType *uniformtypeidentifiers.UTType) {
+	x.inner.SetContentType(contentType)
+}
+
+// MinimumDimension calls the underlying MinimumDimension.
+func (x *ThumbnailGenerationRequest) MinimumDimension() float64 {
+	return x.inner.MinimumDimension()
+}
+
+// SetMinimumDimension calls the underlying SetMinimumDimension.
+func (x *ThumbnailGenerationRequest) SetMinimumDimension(minimumDimension float64) {
+	x.inner.SetMinimumDimension(minimumDimension)
+}
+
+// IconMode calls the underlying IconMode.
+func (x *ThumbnailGenerationRequest) IconMode() bool {
+	return x.inner.IconMode()
+}
+
+// SetIconMode calls the underlying SetIconMode.
+func (x *ThumbnailGenerationRequest) SetIconMode(iconMode bool) {
+	x.inner.SetIconMode(iconMode)
+}
+
+// Size calls the underlying Size.
+func (x *ThumbnailGenerationRequest) Size() corefoundation.CGSize {
+	return x.inner.Size()
+}
+
+// Scale calls the underlying Scale.
+func (x *ThumbnailGenerationRequest) Scale() float64 {
+	return x.inner.Scale()
+}
+
+// RepresentationTypes calls the underlying RepresentationTypes.
+func (x *ThumbnailGenerationRequest) RepresentationTypes() raw.QLThumbnailGenerationRequestRepresentationTypes {
+	return x.inner.RepresentationTypes()
+}
+
+// ThumbnailGenerationRequestable is the interface implemented by [ThumbnailGenerationRequest], for mocking and DI.
+type ThumbnailGenerationRequestable interface {
+	Unwrap() *raw.QLThumbnailGenerationRequest
+	WithContentType(contentType *uniformtypeidentifiers.UTType) *ThumbnailGenerationRequest
+	WithMinimumDimension(minimumDimension float64) *ThumbnailGenerationRequest
+	WithIconMode(iconMode bool) *ThumbnailGenerationRequest
+	ContentType() *uniformtypeidentifiers.UTType
+	SetContentType(contentType *uniformtypeidentifiers.UTType)
+	MinimumDimension() float64
+	SetMinimumDimension(minimumDimension float64)
+	IconMode() bool
+	SetIconMode(iconMode bool)
+	Size() corefoundation.CGSize
+	Scale() float64
+	RepresentationTypes() raw.QLThumbnailGenerationRequestRepresentationTypes
+}
+
+var _ ThumbnailGenerationRequestable = (*ThumbnailGenerationRequest)(nil)
+

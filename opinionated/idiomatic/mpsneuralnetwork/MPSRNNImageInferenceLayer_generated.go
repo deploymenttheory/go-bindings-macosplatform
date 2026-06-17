@@ -7,6 +7,7 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -58,5 +59,81 @@ func (x *RNNImageInferenceLayer) WithBidirectionalCombineMode(bidirectionalCombi
 	return x
 }
 
+// EncodeSequenceToCommandBufferSourceImagesDestinationImagesRecurrentInputStateRecurrentOutputStates calls the underlying EncodeSequenceToCommandBufferSourceImagesDestinationImagesRecurrentInputStateRecurrentOutputStates.
+func (x *RNNImageInferenceLayer) EncodeSequenceToCommandBufferSourceImagesDestinationImagesRecurrentInputStateRecurrentOutputStates(commandBuffer metal.MTLCommandBuffer, sourceImages *foundation.NSArray[*mpscore.MPSImage], destinationImages *foundation.NSArray[*mpscore.MPSImage], recurrentInputState *raw.MPSRNNRecurrentImageState, recurrentOutputStates *foundation.NSMutableArray[*raw.MPSRNNRecurrentImageState]) {
+	x.inner.EncodeSequenceToCommandBufferSourceImagesDestinationImagesRecurrentInputStateRecurrentOutputStates(commandBuffer, sourceImages, destinationImages, recurrentInputState, recurrentOutputStates)
+}
+
+// EncodeBidirectionalSequenceToCommandBufferSourceSequenceDestinationForwardImagesDestinationBackwardImages calls the underlying EncodeBidirectionalSequenceToCommandBufferSourceSequenceDestinationForwardImagesDestinationBackwardImages.
+func (x *RNNImageInferenceLayer) EncodeBidirectionalSequenceToCommandBufferSourceSequenceDestinationForwardImagesDestinationBackwardImages(commandBuffer metal.MTLCommandBuffer, sourceSequence *foundation.NSArray[*mpscore.MPSImage], destinationForwardImages *foundation.NSArray[*mpscore.MPSImage], destinationBackwardImages *foundation.NSArray[*mpscore.MPSImage]) {
+	x.inner.EncodeBidirectionalSequenceToCommandBufferSourceSequenceDestinationForwardImagesDestinationBackwardImages(commandBuffer, sourceSequence, destinationForwardImages, destinationBackwardImages)
+}
+
+// InputFeatureChannels calls the underlying InputFeatureChannels.
+func (x *RNNImageInferenceLayer) InputFeatureChannels() uint {
+	return x.inner.InputFeatureChannels()
+}
+
+// OutputFeatureChannels calls the underlying OutputFeatureChannels.
+func (x *RNNImageInferenceLayer) OutputFeatureChannels() uint {
+	return x.inner.OutputFeatureChannels()
+}
+
+// NumberOfLayers calls the underlying NumberOfLayers.
+func (x *RNNImageInferenceLayer) NumberOfLayers() uint {
+	return x.inner.NumberOfLayers()
+}
+
+// RecurrentOutputIsTemporary calls the underlying RecurrentOutputIsTemporary.
+func (x *RNNImageInferenceLayer) RecurrentOutputIsTemporary() bool {
+	return x.inner.RecurrentOutputIsTemporary()
+}
+
+// SetRecurrentOutputIsTemporary calls the underlying SetRecurrentOutputIsTemporary.
+func (x *RNNImageInferenceLayer) SetRecurrentOutputIsTemporary(recurrentOutputIsTemporary bool) {
+	x.inner.SetRecurrentOutputIsTemporary(recurrentOutputIsTemporary)
+}
+
+// StoreAllIntermediateStates calls the underlying StoreAllIntermediateStates.
+func (x *RNNImageInferenceLayer) StoreAllIntermediateStates() bool {
+	return x.inner.StoreAllIntermediateStates()
+}
+
+// SetStoreAllIntermediateStates calls the underlying SetStoreAllIntermediateStates.
+func (x *RNNImageInferenceLayer) SetStoreAllIntermediateStates(storeAllIntermediateStates bool) {
+	x.inner.SetStoreAllIntermediateStates(storeAllIntermediateStates)
+}
+
+// BidirectionalCombineMode calls the underlying BidirectionalCombineMode.
+func (x *RNNImageInferenceLayer) BidirectionalCombineMode() raw.MPSRNNBidirectionalCombineMode {
+	return x.inner.BidirectionalCombineMode()
+}
+
+// SetBidirectionalCombineMode calls the underlying SetBidirectionalCombineMode.
+func (x *RNNImageInferenceLayer) SetBidirectionalCombineMode(bidirectionalCombineMode raw.MPSRNNBidirectionalCombineMode) {
+	x.inner.SetBidirectionalCombineMode(bidirectionalCombineMode)
+}
+
 func (x *RNNImageInferenceLayer) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSCNNKernel }
+
+// RNNImageInferenceLayerable is the interface implemented by [RNNImageInferenceLayer], for mocking and DI.
+type RNNImageInferenceLayerable interface {
+	Unwrap() *raw.MPSRNNImageInferenceLayer
+	WithRecurrentOutputIsTemporary(recurrentOutputIsTemporary bool) *RNNImageInferenceLayer
+	WithStoreAllIntermediateStates(storeAllIntermediateStates bool) *RNNImageInferenceLayer
+	WithBidirectionalCombineMode(bidirectionalCombineMode raw.MPSRNNBidirectionalCombineMode) *RNNImageInferenceLayer
+	EncodeSequenceToCommandBufferSourceImagesDestinationImagesRecurrentInputStateRecurrentOutputStates(commandBuffer metal.MTLCommandBuffer, sourceImages *foundation.NSArray[*mpscore.MPSImage], destinationImages *foundation.NSArray[*mpscore.MPSImage], recurrentInputState *raw.MPSRNNRecurrentImageState, recurrentOutputStates *foundation.NSMutableArray[*raw.MPSRNNRecurrentImageState])
+	EncodeBidirectionalSequenceToCommandBufferSourceSequenceDestinationForwardImagesDestinationBackwardImages(commandBuffer metal.MTLCommandBuffer, sourceSequence *foundation.NSArray[*mpscore.MPSImage], destinationForwardImages *foundation.NSArray[*mpscore.MPSImage], destinationBackwardImages *foundation.NSArray[*mpscore.MPSImage])
+	InputFeatureChannels() uint
+	OutputFeatureChannels() uint
+	NumberOfLayers() uint
+	RecurrentOutputIsTemporary() bool
+	SetRecurrentOutputIsTemporary(recurrentOutputIsTemporary bool)
+	StoreAllIntermediateStates() bool
+	SetStoreAllIntermediateStates(storeAllIntermediateStates bool)
+	BidirectionalCombineMode() raw.MPSRNNBidirectionalCombineMode
+	SetBidirectionalCombineMode(bidirectionalCombineMode raw.MPSRNNBidirectionalCombineMode)
+}
+
+var _ RNNImageInferenceLayerable = (*RNNImageInferenceLayer)(nil)
 

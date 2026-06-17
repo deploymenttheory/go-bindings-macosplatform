@@ -68,22 +68,40 @@ func (x *AcceptSharesOperation) ShareMetadatas() []*raw.CKShareMetadata {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.CKShareMetadata, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CKShareMetadata {
+		return raw.CKShareMetadataFromID(purego.Retain(_id))
+	})
+}
+
+// SetShareMetadatas calls the underlying SetShareMetadatas.
+func (x *AcceptSharesOperation) SetShareMetadatas(shareMetadatas *foundation.NSArray[*raw.CKShareMetadata]) {
+	x.inner.SetShareMetadatas(shareMetadatas)
+}
+
+// PerShareCompletionBlock calls the underlying PerShareCompletionBlock.
+func (x *AcceptSharesOperation) PerShareCompletionBlock() objc.Block {
+	return x.inner.PerShareCompletionBlock()
+}
+
+// SetPerShareCompletionBlock calls the underlying SetPerShareCompletionBlock.
+func (x *AcceptSharesOperation) SetPerShareCompletionBlock(perShareCompletionBlock func(*raw.CKShareMetadata, *raw.CKShare, unsafe.Pointer)) {
+	x.inner.SetPerShareCompletionBlock(perShareCompletionBlock)
+}
+
+// AcceptSharesCompletionBlock calls the underlying AcceptSharesCompletionBlock.
+func (x *AcceptSharesOperation) AcceptSharesCompletionBlock() objc.Block {
+	return x.inner.AcceptSharesCompletionBlock()
 }
 
 // SetAcceptSharesCompletionBlock blocks until the operation completes or ctx is cancelled.
 func (x *AcceptSharesOperation) SetAcceptSharesCompletionBlock(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.SetAcceptSharesCompletionBlock(func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -94,4 +112,20 @@ func (x *AcceptSharesOperation) SetAcceptSharesCompletionBlock(ctx context.Conte
 }
 
 func (x *AcceptSharesOperation) asOperation() *raw.CKOperation { return &x.inner.CKOperation }
+
+// AcceptSharesOperationable is the interface implemented by [AcceptSharesOperation], for mocking and DI.
+type AcceptSharesOperationable interface {
+	Unwrap() *raw.CKAcceptSharesOperation
+	WithShareMetadatas(items ...*raw.CKShareMetadata) *AcceptSharesOperation
+	WithPerShareCompletionBlock(perShareCompletionBlock func(*raw.CKShareMetadata, *raw.CKShare, unsafe.Pointer)) *AcceptSharesOperation
+	WithAcceptSharesCompletionBlock(acceptSharesCompletionBlock func(unsafe.Pointer)) *AcceptSharesOperation
+	ShareMetadatas() []*raw.CKShareMetadata
+	SetShareMetadatas(shareMetadatas *foundation.NSArray[*raw.CKShareMetadata])
+	PerShareCompletionBlock() objc.Block
+	SetPerShareCompletionBlock(perShareCompletionBlock func(*raw.CKShareMetadata, *raw.CKShare, unsafe.Pointer))
+	AcceptSharesCompletionBlock() objc.Block
+	SetAcceptSharesCompletionBlock(ctx context.Context) error
+}
+
+var _ AcceptSharesOperationable = (*AcceptSharesOperation)(nil)
 

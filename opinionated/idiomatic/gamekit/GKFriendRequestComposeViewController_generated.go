@@ -5,6 +5,7 @@
 package gamekit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamekit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -28,4 +29,48 @@ func (x *FriendRequestComposeViewController) WithComposeViewDelegate(composeView
 	x.inner.SetComposeViewDelegate(composeViewDelegate)
 	return x
 }
+
+// SetMessage calls the underlying SetMessage.
+func (x *FriendRequestComposeViewController) SetMessage(message string) {
+	x.inner.SetMessage(foundation.NSStringStringWithUTF8String(message))
+}
+
+// AddRecipientPlayers calls the underlying AddRecipientPlayers.
+func (x *FriendRequestComposeViewController) AddRecipientPlayers(players *foundation.NSArray[*raw.GKPlayer]) {
+	x.inner.AddRecipientPlayers(players)
+}
+
+// AddRecipientsWithPlayerIDs calls the underlying AddRecipientsWithPlayerIDs.
+func (x *FriendRequestComposeViewController) AddRecipientsWithPlayerIDs(playerIDs *foundation.NSArray[*foundation.NSString]) {
+	x.inner.AddRecipientsWithPlayerIDs(playerIDs)
+}
+
+// AddRecipientsWithEmailAddresses calls the underlying AddRecipientsWithEmailAddresses.
+func (x *FriendRequestComposeViewController) AddRecipientsWithEmailAddresses(emailAddresses *foundation.NSArray[*foundation.NSString]) {
+	x.inner.AddRecipientsWithEmailAddresses(emailAddresses)
+}
+
+// ComposeViewDelegate calls the underlying ComposeViewDelegate.
+func (x *FriendRequestComposeViewController) ComposeViewDelegate() raw.GKFriendRequestComposeViewControllerDelegate {
+	return x.inner.ComposeViewDelegate()
+}
+
+// SetComposeViewDelegate calls the underlying SetComposeViewDelegate.
+func (x *FriendRequestComposeViewController) SetComposeViewDelegate(composeViewDelegate raw.GKFriendRequestComposeViewControllerDelegate) {
+	x.inner.SetComposeViewDelegate(composeViewDelegate)
+}
+
+// FriendRequestComposeViewControllerable is the interface implemented by [FriendRequestComposeViewController], for mocking and DI.
+type FriendRequestComposeViewControllerable interface {
+	Unwrap() *raw.GKFriendRequestComposeViewController
+	WithComposeViewDelegate(composeViewDelegate raw.GKFriendRequestComposeViewControllerDelegate) *FriendRequestComposeViewController
+	SetMessage(message string)
+	AddRecipientPlayers(players *foundation.NSArray[*raw.GKPlayer])
+	AddRecipientsWithPlayerIDs(playerIDs *foundation.NSArray[*foundation.NSString])
+	AddRecipientsWithEmailAddresses(emailAddresses *foundation.NSArray[*foundation.NSString])
+	ComposeViewDelegate() raw.GKFriendRequestComposeViewControllerDelegate
+	SetComposeViewDelegate(composeViewDelegate raw.GKFriendRequestComposeViewControllerDelegate)
+}
+
+var _ FriendRequestComposeViewControllerable = (*FriendRequestComposeViewController)(nil)
 

@@ -42,3 +42,49 @@ func (x *MTRDoorLockClusterClearHolidayScheduleParams) WithServerSideProcessingT
 	return x
 }
 
+// HolidayIndex calls the underlying HolidayIndex.
+func (x *MTRDoorLockClusterClearHolidayScheduleParams) HolidayIndex() *foundation.NSNumber {
+	return x.inner.HolidayIndex()
+}
+
+// SetHolidayIndex calls the underlying SetHolidayIndex.
+func (x *MTRDoorLockClusterClearHolidayScheduleParams) SetHolidayIndex(holidayIndex *foundation.NSNumber) {
+	x.inner.SetHolidayIndex(holidayIndex)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRDoorLockClusterClearHolidayScheduleParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRDoorLockClusterClearHolidayScheduleParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRDoorLockClusterClearHolidayScheduleParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRDoorLockClusterClearHolidayScheduleParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRDoorLockClusterClearHolidayScheduleParamsable is the interface implemented by [MTRDoorLockClusterClearHolidayScheduleParams], for mocking and DI.
+type MTRDoorLockClusterClearHolidayScheduleParamsable interface {
+	Unwrap() *raw.MTRDoorLockClusterClearHolidayScheduleParams
+	WithHolidayIndex(holidayIndex *foundation.NSNumber) *MTRDoorLockClusterClearHolidayScheduleParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRDoorLockClusterClearHolidayScheduleParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRDoorLockClusterClearHolidayScheduleParams
+	HolidayIndex() *foundation.NSNumber
+	SetHolidayIndex(holidayIndex *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRDoorLockClusterClearHolidayScheduleParamsable = (*MTRDoorLockClusterClearHolidayScheduleParams)(nil)
+

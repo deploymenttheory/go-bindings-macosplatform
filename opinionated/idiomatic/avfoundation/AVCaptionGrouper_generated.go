@@ -6,6 +6,8 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +24,23 @@ func NewCaptionGrouper() *CaptionGrouper {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptionGrouper")), objc.RegisterName("new"))
 	return &CaptionGrouper{inner: raw.AVCaptionGrouperFromID(_id)}
 }
+
+// AddCaption calls the underlying AddCaption.
+func (x *CaptionGrouper) AddCaption(input *raw.AVCaption) {
+	x.inner.AddCaption(input)
+}
+
+// FlushAddedCaptionsIntoGroupsUpToTime calls the underlying FlushAddedCaptionsIntoGroupsUpToTime.
+func (x *CaptionGrouper) FlushAddedCaptionsIntoGroupsUpToTime(upToTime coremedia.CMTime) *foundation.NSArray[*raw.AVCaptionGroup] {
+	return x.inner.FlushAddedCaptionsIntoGroupsUpToTime(upToTime)
+}
+
+// CaptionGrouperable is the interface implemented by [CaptionGrouper], for mocking and DI.
+type CaptionGrouperable interface {
+	Unwrap() *raw.AVCaptionGrouper
+	AddCaption(input *raw.AVCaption)
+	FlushAddedCaptionsIntoGroupsUpToTime(upToTime coremedia.CMTime) *foundation.NSArray[*raw.AVCaptionGroup]
+}
+
+var _ CaptionGrouperable = (*CaptionGrouper)(nil)
 

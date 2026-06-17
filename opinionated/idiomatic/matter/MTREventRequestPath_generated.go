@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +23,29 @@ func NewMTREventRequestPath() *MTREventRequestPath {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTREventRequestPath")), objc.RegisterName("new"))
 	return &MTREventRequestPath{inner: raw.MTREventRequestPathFromID(_id)}
 }
+
+// Endpoint calls the underlying Endpoint.
+func (x *MTREventRequestPath) Endpoint() *foundation.NSNumber {
+	return x.inner.Endpoint()
+}
+
+// Cluster calls the underlying Cluster.
+func (x *MTREventRequestPath) Cluster() *foundation.NSNumber {
+	return x.inner.Cluster()
+}
+
+// Event calls the underlying Event.
+func (x *MTREventRequestPath) Event() *foundation.NSNumber {
+	return x.inner.Event()
+}
+
+// MTREventRequestPathable is the interface implemented by [MTREventRequestPath], for mocking and DI.
+type MTREventRequestPathable interface {
+	Unwrap() *raw.MTREventRequestPath
+	Endpoint() *foundation.NSNumber
+	Cluster() *foundation.NSNumber
+	Event() *foundation.NSNumber
+}
+
+var _ MTREventRequestPathable = (*MTREventRequestPath)(nil)
 

@@ -23,3 +23,22 @@ func NewSystemExtensionsWorkspace() *SystemExtensionsWorkspace {
 	return &SystemExtensionsWorkspace{inner: raw.OSSystemExtensionsWorkspaceFromID(_id)}
 }
 
+// AddObserverError calls the underlying AddObserverError.
+func (x *SystemExtensionsWorkspace) AddObserverError(observer raw.OSSystemExtensionsWorkspaceObserver) (bool, error) {
+	return x.inner.AddObserverError(observer)
+}
+
+// RemoveObserver calls the underlying RemoveObserver.
+func (x *SystemExtensionsWorkspace) RemoveObserver(observer raw.OSSystemExtensionsWorkspaceObserver) {
+	x.inner.RemoveObserver(observer)
+}
+
+// SystemExtensionsWorkspaceable is the interface implemented by [SystemExtensionsWorkspace], for mocking and DI.
+type SystemExtensionsWorkspaceable interface {
+	Unwrap() *raw.OSSystemExtensionsWorkspace
+	AddObserverError(observer raw.OSSystemExtensionsWorkspaceObserver) (bool, error)
+	RemoveObserver(observer raw.OSSystemExtensionsWorkspaceObserver)
+}
+
+var _ SystemExtensionsWorkspaceable = (*SystemExtensionsWorkspace)(nil)
+

@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -83,18 +84,124 @@ func (x *ColorPickerTouchBarItem) WithEnabled(enabled bool) *ColorPickerTouchBar
 	return x
 }
 
+// Color calls the underlying Color.
+func (x *ColorPickerTouchBarItem) Color() *Color {
+	_r := x.inner.Color()
+	if _r == nil {
+		return nil
+	}
+	return &Color{inner: _r}
+}
+
+// SetColor calls the underlying SetColor.
+func (x *ColorPickerTouchBarItem) SetColor(color *raw.NSColor) {
+	x.inner.SetColor(color)
+}
+
+// ShowsAlpha calls the underlying ShowsAlpha.
+func (x *ColorPickerTouchBarItem) ShowsAlpha() bool {
+	return x.inner.ShowsAlpha()
+}
+
+// SetShowsAlpha calls the underlying SetShowsAlpha.
+func (x *ColorPickerTouchBarItem) SetShowsAlpha(showsAlpha bool) {
+	x.inner.SetShowsAlpha(showsAlpha)
+}
+
 // AllowedColorSpaces returns the collection as a Go slice.
 func (x *ColorPickerTouchBarItem) AllowedColorSpaces() []*raw.NSColorSpace {
 	arr := x.inner.AllowedColorSpaces()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSColorSpace, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSColorSpace {
+		return raw.NSColorSpaceFromID(purego.Retain(_id))
+	})
+}
+
+// SetAllowedColorSpaces calls the underlying SetAllowedColorSpaces.
+func (x *ColorPickerTouchBarItem) SetAllowedColorSpaces(allowedColorSpaces *foundation.NSArray[*raw.NSColorSpace]) {
+	x.inner.SetAllowedColorSpaces(allowedColorSpaces)
+}
+
+// ColorList calls the underlying ColorList.
+func (x *ColorPickerTouchBarItem) ColorList() *ColorList {
+	_r := x.inner.ColorList()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &ColorList{inner: _r}
+}
+
+// SetColorList calls the underlying SetColorList.
+func (x *ColorPickerTouchBarItem) SetColorList(colorList *raw.NSColorList) {
+	x.inner.SetColorList(colorList)
+}
+
+// SetCustomizationLabel calls the underlying SetCustomizationLabel.
+func (x *ColorPickerTouchBarItem) SetCustomizationLabel(customizationLabel string) {
+	x.inner.SetCustomizationLabel(foundation.NSStringStringWithUTF8String(customizationLabel))
+}
+
+// Target calls the underlying Target.
+func (x *ColorPickerTouchBarItem) Target() objc.ID {
+	return x.inner.Target()
+}
+
+// SetTarget calls the underlying SetTarget.
+func (x *ColorPickerTouchBarItem) SetTarget(target objc.ID) {
+	x.inner.SetTarget(target)
+}
+
+// Action calls the underlying Action.
+func (x *ColorPickerTouchBarItem) Action() objc.SEL {
+	return x.inner.Action()
+}
+
+// SetAction calls the underlying SetAction.
+func (x *ColorPickerTouchBarItem) SetAction(action objc.SEL) {
+	x.inner.SetAction(action)
+}
+
+// IsEnabled calls the underlying IsEnabled.
+func (x *ColorPickerTouchBarItem) IsEnabled() bool {
+	return x.inner.IsEnabled()
+}
+
+// SetEnabled calls the underlying SetEnabled.
+func (x *ColorPickerTouchBarItem) SetEnabled(enabled bool) {
+	x.inner.SetEnabled(enabled)
 }
 
 func (x *ColorPickerTouchBarItem) asTouchBarItem() *raw.NSTouchBarItem { return &x.inner.NSTouchBarItem }
+
+// ColorPickerTouchBarItemable is the interface implemented by [ColorPickerTouchBarItem], for mocking and DI.
+type ColorPickerTouchBarItemable interface {
+	Unwrap() *raw.NSColorPickerTouchBarItem
+	WithColor(color *raw.NSColor) *ColorPickerTouchBarItem
+	WithShowsAlpha(showsAlpha bool) *ColorPickerTouchBarItem
+	WithAllowedColorSpaces(items ...*raw.NSColorSpace) *ColorPickerTouchBarItem
+	WithColorList(colorList *raw.NSColorList) *ColorPickerTouchBarItem
+	WithCustomizationLabel(customizationLabel string) *ColorPickerTouchBarItem
+	WithTarget(target objc.ID) *ColorPickerTouchBarItem
+	WithAction(action objc.SEL) *ColorPickerTouchBarItem
+	WithEnabled(enabled bool) *ColorPickerTouchBarItem
+	Color() *Color
+	SetColor(color *raw.NSColor)
+	ShowsAlpha() bool
+	SetShowsAlpha(showsAlpha bool)
+	AllowedColorSpaces() []*raw.NSColorSpace
+	SetAllowedColorSpaces(allowedColorSpaces *foundation.NSArray[*raw.NSColorSpace])
+	ColorList() *ColorList
+	SetColorList(colorList *raw.NSColorList)
+	SetCustomizationLabel(customizationLabel string)
+	Target() objc.ID
+	SetTarget(target objc.ID)
+	Action() objc.SEL
+	SetAction(action objc.SEL)
+	IsEnabled() bool
+	SetEnabled(enabled bool)
+}
+
+var _ ColorPickerTouchBarItemable = (*ColorPickerTouchBarItem)(nil)
 

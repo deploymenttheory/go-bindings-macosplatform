@@ -7,6 +7,7 @@ package intents
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -25,18 +26,34 @@ func NewGetReservationDetailsIntentWithReservationContainerReferenceReservationI
 	return &GetReservationDetailsIntent{inner: raw.INGetReservationDetailsIntentFromID(_id)}
 }
 
+// ReservationContainerReference calls the underlying ReservationContainerReference.
+func (x *GetReservationDetailsIntent) ReservationContainerReference() *SpeakableString {
+	_r := x.inner.ReservationContainerReference()
+	if _r == nil {
+		return nil
+	}
+	return &SpeakableString{inner: _r}
+}
+
 // ReservationItemReferences returns the collection as a Go slice.
 func (x *GetReservationDetailsIntent) ReservationItemReferences() []*raw.INSpeakableString {
 	arr := x.inner.ReservationItemReferences()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.INSpeakableString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.INSpeakableString {
+		return raw.INSpeakableStringFromID(purego.Retain(_id))
+	})
 }
 
 func (x *GetReservationDetailsIntent) asIntent() *raw.INIntent { return &x.inner.INIntent }
+
+// GetReservationDetailsIntentable is the interface implemented by [GetReservationDetailsIntent], for mocking and DI.
+type GetReservationDetailsIntentable interface {
+	Unwrap() *raw.INGetReservationDetailsIntent
+	ReservationContainerReference() *SpeakableString
+	ReservationItemReferences() []*raw.INSpeakableString
+}
+
+var _ GetReservationDetailsIntentable = (*GetReservationDetailsIntent)(nil)
 

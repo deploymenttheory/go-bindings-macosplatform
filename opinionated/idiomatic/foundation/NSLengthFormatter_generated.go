@@ -41,7 +41,97 @@ func (x *LengthFormatter) WithForPersonHeightUse(forPersonHeightUse bool) *Lengt
 	return x
 }
 
+// StringFromValueUnit calls the underlying StringFromValueUnit.
+func (x *LengthFormatter) StringFromValueUnit(value float64, unit raw.NSLengthFormatterUnit) *String {
+	_r := x.inner.StringFromValueUnit(value, unit)
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// StringFromMeters calls the underlying StringFromMeters.
+func (x *LengthFormatter) StringFromMeters(numberInMeters float64) *String {
+	_r := x.inner.StringFromMeters(numberInMeters)
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// UnitStringFromValueUnit calls the underlying UnitStringFromValueUnit.
+func (x *LengthFormatter) UnitStringFromValueUnit(value float64, unit raw.NSLengthFormatterUnit) *String {
+	_r := x.inner.UnitStringFromValueUnit(value, unit)
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// UnitStringFromMetersUsedUnit calls the underlying UnitStringFromMetersUsedUnit.
+func (x *LengthFormatter) UnitStringFromMetersUsedUnit(numberInMeters float64, unitp *raw.NSLengthFormatterUnit) *String {
+	_r := x.inner.UnitStringFromMetersUsedUnit(numberInMeters, unitp)
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// NumberFormatter calls the underlying NumberFormatter.
+func (x *LengthFormatter) NumberFormatter() *NumberFormatter {
+	_r := x.inner.NumberFormatter()
+	if _r == nil {
+		return nil
+	}
+	return &NumberFormatter{inner: _r}
+}
+
+// SetNumberFormatter calls the underlying SetNumberFormatter.
+func (x *LengthFormatter) SetNumberFormatter(numberFormatter *raw.NSNumberFormatter) {
+	x.inner.SetNumberFormatter(numberFormatter)
+}
+
+// UnitStyle calls the underlying UnitStyle.
+func (x *LengthFormatter) UnitStyle() raw.NSFormattingUnitStyle {
+	return x.inner.UnitStyle()
+}
+
+// SetUnitStyle calls the underlying SetUnitStyle.
+func (x *LengthFormatter) SetUnitStyle(unitStyle raw.NSFormattingUnitStyle) {
+	x.inner.SetUnitStyle(unitStyle)
+}
+
+// IsForPersonHeightUse calls the underlying IsForPersonHeightUse.
+func (x *LengthFormatter) IsForPersonHeightUse() bool {
+	return x.inner.IsForPersonHeightUse()
+}
+
+// SetForPersonHeightUse calls the underlying SetForPersonHeightUse.
+func (x *LengthFormatter) SetForPersonHeightUse(forPersonHeightUse bool) {
+	x.inner.SetForPersonHeightUse(forPersonHeightUse)
+}
+
 func (x *LengthFormatter) asFormatter() *raw.NSFormatter { return &x.inner.NSFormatter }
 
 func (x *LengthFormatter) asObject() *raw.NSObject { return &x.inner.NSFormatter.NSObject }
+
+// LengthFormatterable is the interface implemented by [LengthFormatter], for mocking and DI.
+type LengthFormatterable interface {
+	Unwrap() *raw.NSLengthFormatter
+	WithNumberFormatter(numberFormatter *raw.NSNumberFormatter) *LengthFormatter
+	WithUnitStyle(unitStyle raw.NSFormattingUnitStyle) *LengthFormatter
+	WithForPersonHeightUse(forPersonHeightUse bool) *LengthFormatter
+	StringFromValueUnit(value float64, unit raw.NSLengthFormatterUnit) *String
+	StringFromMeters(numberInMeters float64) *String
+	UnitStringFromValueUnit(value float64, unit raw.NSLengthFormatterUnit) *String
+	UnitStringFromMetersUsedUnit(numberInMeters float64, unitp *raw.NSLengthFormatterUnit) *String
+	NumberFormatter() *NumberFormatter
+	SetNumberFormatter(numberFormatter *raw.NSNumberFormatter)
+	UnitStyle() raw.NSFormattingUnitStyle
+	SetUnitStyle(unitStyle raw.NSFormattingUnitStyle)
+	IsForPersonHeightUse() bool
+	SetForPersonHeightUse(forPersonHeightUse bool)
+}
+
+var _ LengthFormatterable = (*LengthFormatter)(nil)
 

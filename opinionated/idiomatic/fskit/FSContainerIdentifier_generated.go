@@ -23,5 +23,22 @@ func NewContainerIdentifier() *ContainerIdentifier {
 	return &ContainerIdentifier{inner: raw.FSContainerIdentifierFromID(_id)}
 }
 
+// VolumeIdentifier calls the underlying VolumeIdentifier.
+func (x *ContainerIdentifier) VolumeIdentifier() *VolumeIdentifier {
+	_r := x.inner.VolumeIdentifier()
+	if _r == nil {
+		return nil
+	}
+	return &VolumeIdentifier{inner: _r}
+}
+
 func (x *ContainerIdentifier) asEntityIdentifier() *raw.FSEntityIdentifier { return &x.inner.FSEntityIdentifier }
+
+// ContainerIdentifierable is the interface implemented by [ContainerIdentifier], for mocking and DI.
+type ContainerIdentifierable interface {
+	Unwrap() *raw.FSContainerIdentifier
+	VolumeIdentifier() *VolumeIdentifier
+}
+
+var _ ContainerIdentifierable = (*ContainerIdentifier)(nil)
 

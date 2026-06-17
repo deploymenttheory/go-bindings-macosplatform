@@ -5,7 +5,9 @@
 package gamekit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -28,4 +30,62 @@ func (x *TurnBasedParticipant) WithMatchOutcome(matchOutcome raw.GKTurnBasedMatc
 	x.inner.SetMatchOutcome(matchOutcome)
 	return x
 }
+
+// Player calls the underlying Player.
+func (x *TurnBasedParticipant) Player() *Player {
+	_r := x.inner.Player()
+	if _r == nil {
+		return nil
+	}
+	return &Player{inner: _r}
+}
+
+// LastTurnDate calls the underlying LastTurnDate.
+func (x *TurnBasedParticipant) LastTurnDate() *foundation.NSDate {
+	return x.inner.LastTurnDate()
+}
+
+// Status calls the underlying Status.
+func (x *TurnBasedParticipant) Status() raw.GKTurnBasedParticipantStatus {
+	return x.inner.Status()
+}
+
+// MatchOutcome calls the underlying MatchOutcome.
+func (x *TurnBasedParticipant) MatchOutcome() raw.GKTurnBasedMatchOutcome {
+	return x.inner.MatchOutcome()
+}
+
+// SetMatchOutcome calls the underlying SetMatchOutcome.
+func (x *TurnBasedParticipant) SetMatchOutcome(matchOutcome raw.GKTurnBasedMatchOutcome) {
+	x.inner.SetMatchOutcome(matchOutcome)
+}
+
+// TimeoutDate calls the underlying TimeoutDate.
+func (x *TurnBasedParticipant) TimeoutDate() *foundation.NSDate {
+	return x.inner.TimeoutDate()
+}
+
+// PlayerID calls the underlying PlayerID.
+func (x *TurnBasedParticipant) PlayerID() string {
+	_r := x.inner.PlayerID()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// TurnBasedParticipantable is the interface implemented by [TurnBasedParticipant], for mocking and DI.
+type TurnBasedParticipantable interface {
+	Unwrap() *raw.GKTurnBasedParticipant
+	WithMatchOutcome(matchOutcome raw.GKTurnBasedMatchOutcome) *TurnBasedParticipant
+	Player() *Player
+	LastTurnDate() *foundation.NSDate
+	Status() raw.GKTurnBasedParticipantStatus
+	MatchOutcome() raw.GKTurnBasedMatchOutcome
+	SetMatchOutcome(matchOutcome raw.GKTurnBasedMatchOutcome)
+	TimeoutDate() *foundation.NSDate
+	PlayerID() string
+}
+
+var _ TurnBasedParticipantable = (*TurnBasedParticipant)(nil)
 

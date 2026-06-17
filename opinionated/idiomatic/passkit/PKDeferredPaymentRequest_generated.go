@@ -7,6 +7,7 @@ package passkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -66,4 +67,114 @@ func (x *DeferredPaymentRequest) WithFreeCancellationDateTimeZone(freeCancellati
 	x.inner.SetFreeCancellationDateTimeZone(freeCancellationDateTimeZone)
 	return x
 }
+
+// PaymentDescription calls the underlying PaymentDescription.
+func (x *DeferredPaymentRequest) PaymentDescription() string {
+	_r := x.inner.PaymentDescription()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetPaymentDescription calls the underlying SetPaymentDescription.
+func (x *DeferredPaymentRequest) SetPaymentDescription(paymentDescription string) {
+	x.inner.SetPaymentDescription(foundation.NSStringStringWithUTF8String(paymentDescription))
+}
+
+// DeferredBilling calls the underlying DeferredBilling.
+func (x *DeferredPaymentRequest) DeferredBilling() *DeferredPaymentSummaryItem {
+	_r := x.inner.DeferredBilling()
+	if _r == nil {
+		return nil
+	}
+	return &DeferredPaymentSummaryItem{inner: _r}
+}
+
+// SetDeferredBilling calls the underlying SetDeferredBilling.
+func (x *DeferredPaymentRequest) SetDeferredBilling(deferredBilling *raw.PKDeferredPaymentSummaryItem) {
+	x.inner.SetDeferredBilling(deferredBilling)
+}
+
+// BillingAgreement calls the underlying BillingAgreement.
+func (x *DeferredPaymentRequest) BillingAgreement() string {
+	_r := x.inner.BillingAgreement()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetBillingAgreement calls the underlying SetBillingAgreement.
+func (x *DeferredPaymentRequest) SetBillingAgreement(billingAgreement string) {
+	x.inner.SetBillingAgreement(foundation.NSStringStringWithUTF8String(billingAgreement))
+}
+
+// ManagementURL calls the underlying ManagementURL.
+func (x *DeferredPaymentRequest) ManagementURL() *foundation.NSURL {
+	return x.inner.ManagementURL()
+}
+
+// SetManagementURL calls the underlying SetManagementURL.
+func (x *DeferredPaymentRequest) SetManagementURL(managementURL string) {
+	x.inner.SetManagementURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(managementURL)))
+}
+
+// TokenNotificationURL calls the underlying TokenNotificationURL.
+func (x *DeferredPaymentRequest) TokenNotificationURL() *foundation.NSURL {
+	return x.inner.TokenNotificationURL()
+}
+
+// SetTokenNotificationURL calls the underlying SetTokenNotificationURL.
+func (x *DeferredPaymentRequest) SetTokenNotificationURL(tokenNotificationURL string) {
+	x.inner.SetTokenNotificationURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(tokenNotificationURL)))
+}
+
+// FreeCancellationDate calls the underlying FreeCancellationDate.
+func (x *DeferredPaymentRequest) FreeCancellationDate() *foundation.NSDate {
+	return x.inner.FreeCancellationDate()
+}
+
+// SetFreeCancellationDate calls the underlying SetFreeCancellationDate.
+func (x *DeferredPaymentRequest) SetFreeCancellationDate(freeCancellationDate *foundation.NSDate) {
+	x.inner.SetFreeCancellationDate(freeCancellationDate)
+}
+
+// FreeCancellationDateTimeZone calls the underlying FreeCancellationDateTimeZone.
+func (x *DeferredPaymentRequest) FreeCancellationDateTimeZone() *foundation.NSTimeZone {
+	return x.inner.FreeCancellationDateTimeZone()
+}
+
+// SetFreeCancellationDateTimeZone calls the underlying SetFreeCancellationDateTimeZone.
+func (x *DeferredPaymentRequest) SetFreeCancellationDateTimeZone(freeCancellationDateTimeZone *foundation.NSTimeZone) {
+	x.inner.SetFreeCancellationDateTimeZone(freeCancellationDateTimeZone)
+}
+
+// DeferredPaymentRequestable is the interface implemented by [DeferredPaymentRequest], for mocking and DI.
+type DeferredPaymentRequestable interface {
+	Unwrap() *raw.PKDeferredPaymentRequest
+	WithPaymentDescription(paymentDescription string) *DeferredPaymentRequest
+	WithDeferredBilling(deferredBilling *raw.PKDeferredPaymentSummaryItem) *DeferredPaymentRequest
+	WithBillingAgreement(billingAgreement string) *DeferredPaymentRequest
+	WithManagementURL(managementURL string) *DeferredPaymentRequest
+	WithTokenNotificationURL(tokenNotificationURL string) *DeferredPaymentRequest
+	WithFreeCancellationDate(freeCancellationDate *foundation.NSDate) *DeferredPaymentRequest
+	WithFreeCancellationDateTimeZone(freeCancellationDateTimeZone *foundation.NSTimeZone) *DeferredPaymentRequest
+	PaymentDescription() string
+	SetPaymentDescription(paymentDescription string)
+	DeferredBilling() *DeferredPaymentSummaryItem
+	SetDeferredBilling(deferredBilling *raw.PKDeferredPaymentSummaryItem)
+	BillingAgreement() string
+	SetBillingAgreement(billingAgreement string)
+	ManagementURL() *foundation.NSURL
+	SetManagementURL(managementURL string)
+	TokenNotificationURL() *foundation.NSURL
+	SetTokenNotificationURL(tokenNotificationURL string)
+	FreeCancellationDate() *foundation.NSDate
+	SetFreeCancellationDate(freeCancellationDate *foundation.NSDate)
+	FreeCancellationDateTimeZone() *foundation.NSTimeZone
+	SetFreeCancellationDateTimeZone(freeCancellationDateTimeZone *foundation.NSTimeZone)
+}
+
+var _ DeferredPaymentRequestable = (*DeferredPaymentRequest)(nil)
 

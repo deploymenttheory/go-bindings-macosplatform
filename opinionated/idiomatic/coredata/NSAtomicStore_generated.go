@@ -37,5 +37,80 @@ func (x *AtomicStore) Save() error {
 	return err
 }
 
+// NewCacheNodeForManagedObject calls the underlying NewCacheNodeForManagedObject.
+func (x *AtomicStore) NewCacheNodeForManagedObject(managedObject *raw.NSManagedObject) *AtomicStoreCacheNode {
+	_r := x.inner.NewCacheNodeForManagedObject(managedObject)
+	if _r == nil {
+		return nil
+	}
+	return &AtomicStoreCacheNode{inner: _r}
+}
+
+// UpdateCacheNodeFromManagedObject calls the underlying UpdateCacheNodeFromManagedObject.
+func (x *AtomicStore) UpdateCacheNodeFromManagedObject(node *raw.NSAtomicStoreCacheNode, managedObject *raw.NSManagedObject) {
+	x.inner.UpdateCacheNodeFromManagedObject(node, managedObject)
+}
+
+// CacheNodes calls the underlying CacheNodes.
+func (x *AtomicStore) CacheNodes() *foundation.NSSet[*raw.NSAtomicStoreCacheNode] {
+	return x.inner.CacheNodes()
+}
+
+// AddCacheNodes calls the underlying AddCacheNodes.
+func (x *AtomicStore) AddCacheNodes(cacheNodes *foundation.NSSet[*raw.NSAtomicStoreCacheNode]) {
+	x.inner.AddCacheNodes(cacheNodes)
+}
+
+// WillRemoveCacheNodes calls the underlying WillRemoveCacheNodes.
+func (x *AtomicStore) WillRemoveCacheNodes(cacheNodes *foundation.NSSet[*raw.NSAtomicStoreCacheNode]) {
+	x.inner.WillRemoveCacheNodes(cacheNodes)
+}
+
+// CacheNodeForObjectID calls the underlying CacheNodeForObjectID.
+func (x *AtomicStore) CacheNodeForObjectID(objectID *raw.NSManagedObjectID) *AtomicStoreCacheNode {
+	_r := x.inner.CacheNodeForObjectID(objectID)
+	if _r == nil {
+		return nil
+	}
+	return &AtomicStoreCacheNode{inner: _r}
+}
+
+// ObjectIDForEntityReferenceObject calls the underlying ObjectIDForEntityReferenceObject.
+func (x *AtomicStore) ObjectIDForEntityReferenceObject(entity *raw.NSEntityDescription, data objc.ID) *ManagedObjectID {
+	_r := x.inner.ObjectIDForEntityReferenceObject(entity, data)
+	if _r == nil {
+		return nil
+	}
+	return &ManagedObjectID{inner: _r}
+}
+
+// NewReferenceObjectForManagedObject calls the underlying NewReferenceObjectForManagedObject.
+func (x *AtomicStore) NewReferenceObjectForManagedObject(managedObject *raw.NSManagedObject) objc.ID {
+	return x.inner.NewReferenceObjectForManagedObject(managedObject)
+}
+
+// ReferenceObjectForObjectID calls the underlying ReferenceObjectForObjectID.
+func (x *AtomicStore) ReferenceObjectForObjectID(objectID *raw.NSManagedObjectID) objc.ID {
+	return x.inner.ReferenceObjectForObjectID(objectID)
+}
+
 func (x *AtomicStore) asPersistentStore() *raw.NSPersistentStore { return &x.inner.NSPersistentStore }
+
+// AtomicStoreable is the interface implemented by [AtomicStore], for mocking and DI.
+type AtomicStoreable interface {
+	Unwrap() *raw.NSAtomicStore
+	Load() error
+	Save() error
+	NewCacheNodeForManagedObject(managedObject *raw.NSManagedObject) *AtomicStoreCacheNode
+	UpdateCacheNodeFromManagedObject(node *raw.NSAtomicStoreCacheNode, managedObject *raw.NSManagedObject)
+	CacheNodes() *foundation.NSSet[*raw.NSAtomicStoreCacheNode]
+	AddCacheNodes(cacheNodes *foundation.NSSet[*raw.NSAtomicStoreCacheNode])
+	WillRemoveCacheNodes(cacheNodes *foundation.NSSet[*raw.NSAtomicStoreCacheNode])
+	CacheNodeForObjectID(objectID *raw.NSManagedObjectID) *AtomicStoreCacheNode
+	ObjectIDForEntityReferenceObject(entity *raw.NSEntityDescription, data objc.ID) *ManagedObjectID
+	NewReferenceObjectForManagedObject(managedObject *raw.NSManagedObject) objc.ID
+	ReferenceObjectForObjectID(objectID *raw.NSManagedObjectID) objc.ID
+}
+
+var _ AtomicStoreable = (*AtomicStore)(nil)
 

@@ -7,6 +7,7 @@ package avfoundation
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -31,4 +32,33 @@ func NewCaptionRubyWithTextPositionAlignment(text string, position raw.AVCaption
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithText:position:alignment:"), foundation.NSStringStringWithUTF8String(text).Ptr(), position, alignment)
 	return &CaptionRuby{inner: raw.AVCaptionRubyFromID(_id)}
 }
+
+// Text calls the underlying Text.
+func (x *CaptionRuby) Text() string {
+	_r := x.inner.Text()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Position calls the underlying Position.
+func (x *CaptionRuby) Position() raw.AVCaptionRubyPosition {
+	return x.inner.Position()
+}
+
+// Alignment calls the underlying Alignment.
+func (x *CaptionRuby) Alignment() raw.AVCaptionRubyAlignment {
+	return x.inner.Alignment()
+}
+
+// CaptionRubyable is the interface implemented by [CaptionRuby], for mocking and DI.
+type CaptionRubyable interface {
+	Unwrap() *raw.AVCaptionRuby
+	Text() string
+	Position() raw.AVCaptionRubyPosition
+	Alignment() raw.AVCaptionRubyAlignment
+}
+
+var _ CaptionRubyable = (*CaptionRuby)(nil)
 

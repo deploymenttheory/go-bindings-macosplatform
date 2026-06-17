@@ -36,5 +36,38 @@ func (x *NEDNSOverHTTPSSettings) WithIdentityReference(identityReference *founda
 	return x
 }
 
+// ServerURL calls the underlying ServerURL.
+func (x *NEDNSOverHTTPSSettings) ServerURL() *foundation.NSURL {
+	return x.inner.ServerURL()
+}
+
+// SetServerURL calls the underlying SetServerURL.
+func (x *NEDNSOverHTTPSSettings) SetServerURL(serverURL string) {
+	x.inner.SetServerURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(serverURL)))
+}
+
+// IdentityReference calls the underlying IdentityReference.
+func (x *NEDNSOverHTTPSSettings) IdentityReference() *foundation.NSData {
+	return x.inner.IdentityReference()
+}
+
+// SetIdentityReference calls the underlying SetIdentityReference.
+func (x *NEDNSOverHTTPSSettings) SetIdentityReference(identityReference *foundation.NSData) {
+	x.inner.SetIdentityReference(identityReference)
+}
+
 func (x *NEDNSOverHTTPSSettings) asNEDNSSettings() *raw.NEDNSSettings { return &x.inner.NEDNSSettings }
+
+// NEDNSOverHTTPSSettingsable is the interface implemented by [NEDNSOverHTTPSSettings], for mocking and DI.
+type NEDNSOverHTTPSSettingsable interface {
+	Unwrap() *raw.NEDNSOverHTTPSSettings
+	WithServerURL(serverURL string) *NEDNSOverHTTPSSettings
+	WithIdentityReference(identityReference *foundation.NSData) *NEDNSOverHTTPSSettings
+	ServerURL() *foundation.NSURL
+	SetServerURL(serverURL string)
+	IdentityReference() *foundation.NSData
+	SetIdentityReference(identityReference *foundation.NSData)
+}
+
+var _ NEDNSOverHTTPSSettingsable = (*NEDNSOverHTTPSSettings)(nil)
 

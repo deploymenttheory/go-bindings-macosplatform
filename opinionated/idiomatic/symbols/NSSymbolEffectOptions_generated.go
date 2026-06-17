@@ -23,3 +23,60 @@ func NewSymbolEffectOptions() *SymbolEffectOptions {
 	return &SymbolEffectOptions{inner: raw.NSSymbolEffectOptionsFromID(_id)}
 }
 
+// OptionsWithRepeating calls the underlying OptionsWithRepeating.
+func (x *SymbolEffectOptions) OptionsWithRepeating() *SymbolEffectOptions {
+	_r := x.inner.OptionsWithRepeating()
+	if _r == nil {
+		return nil
+	}
+	return &SymbolEffectOptions{inner: _r}
+}
+
+// OptionsWithNonRepeating calls the underlying OptionsWithNonRepeating.
+func (x *SymbolEffectOptions) OptionsWithNonRepeating() *SymbolEffectOptions {
+	_r := x.inner.OptionsWithNonRepeating()
+	if _r == nil {
+		return nil
+	}
+	return &SymbolEffectOptions{inner: _r}
+}
+
+// OptionsWithRepeatCount calls the underlying OptionsWithRepeatCount.
+func (x *SymbolEffectOptions) OptionsWithRepeatCount(count int) *SymbolEffectOptions {
+	_r := x.inner.OptionsWithRepeatCount(count)
+	if _r == nil {
+		return nil
+	}
+	return &SymbolEffectOptions{inner: _r}
+}
+
+// OptionsWithSpeed calls the underlying OptionsWithSpeed.
+func (x *SymbolEffectOptions) OptionsWithSpeed(speed float64) *SymbolEffectOptions {
+	_r := x.inner.OptionsWithSpeed(speed)
+	if _r == nil {
+		return nil
+	}
+	return &SymbolEffectOptions{inner: _r}
+}
+
+// OptionsWithRepeatBehavior calls the underlying OptionsWithRepeatBehavior.
+func (x *SymbolEffectOptions) OptionsWithRepeatBehavior(behavior *raw.NSSymbolEffectOptionsRepeatBehavior) *SymbolEffectOptions {
+	_r := x.inner.OptionsWithRepeatBehavior(behavior)
+	if _r == nil {
+		return nil
+	}
+	return &SymbolEffectOptions{inner: _r}
+}
+
+// SymbolEffectOptionsable is the interface implemented by [SymbolEffectOptions], for mocking and DI.
+type SymbolEffectOptionsable interface {
+	Unwrap() *raw.NSSymbolEffectOptions
+	OptionsWithRepeating() *SymbolEffectOptions
+	OptionsWithNonRepeating() *SymbolEffectOptions
+	OptionsWithRepeatCount(count int) *SymbolEffectOptions
+	OptionsWithSpeed(speed float64) *SymbolEffectOptions
+	OptionsWithRepeatBehavior(behavior *raw.NSSymbolEffectOptionsRepeatBehavior) *SymbolEffectOptions
+}
+
+var _ SymbolEffectOptionsable = (*SymbolEffectOptions)(nil)
+

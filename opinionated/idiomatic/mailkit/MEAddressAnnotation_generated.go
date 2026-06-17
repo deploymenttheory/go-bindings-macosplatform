@@ -23,3 +23,10 @@ func NewAddressAnnotation() *AddressAnnotation {
 	return &AddressAnnotation{inner: raw.MEAddressAnnotationFromID(_id)}
 }
 
+// AddressAnnotationable is the interface implemented by [AddressAnnotation], for mocking and DI.
+type AddressAnnotationable interface {
+	Unwrap() *raw.MEAddressAnnotation
+}
+
+var _ AddressAnnotationable = (*AddressAnnotation)(nil)
+

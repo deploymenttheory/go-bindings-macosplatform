@@ -5,6 +5,8 @@
 package spritekit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -70,4 +72,137 @@ func (x *Renderer) WithShowsFields(showsFields bool) *Renderer {
 	x.inner.SetShowsFields(showsFields)
 	return x
 }
+
+// RenderWithViewportCommandBufferRenderPassDescriptor calls the underlying RenderWithViewportCommandBufferRenderPassDescriptor.
+func (x *Renderer) RenderWithViewportCommandBufferRenderPassDescriptor(viewport corefoundation.CGRect, commandBuffer metal.MTLCommandBuffer, renderPassDescriptor *metal.MTLRenderPassDescriptor) {
+	x.inner.RenderWithViewportCommandBufferRenderPassDescriptor(viewport, commandBuffer, renderPassDescriptor)
+}
+
+// RenderWithViewportRenderCommandEncoderRenderPassDescriptorCommandQueue calls the underlying RenderWithViewportRenderCommandEncoderRenderPassDescriptorCommandQueue.
+func (x *Renderer) RenderWithViewportRenderCommandEncoderRenderPassDescriptorCommandQueue(viewport corefoundation.CGRect, renderCommandEncoder metal.MTLRenderCommandEncoder, renderPassDescriptor *metal.MTLRenderPassDescriptor, commandQueue metal.MTLCommandQueue) {
+	x.inner.RenderWithViewportRenderCommandEncoderRenderPassDescriptorCommandQueue(viewport, renderCommandEncoder, renderPassDescriptor, commandQueue)
+}
+
+// UpdateAtTime calls the underlying UpdateAtTime.
+func (x *Renderer) UpdateAtTime(currentTime float64) {
+	x.inner.UpdateAtTime(currentTime)
+}
+
+// Scene calls the underlying Scene.
+func (x *Renderer) Scene() *Scene {
+	_r := x.inner.Scene()
+	if _r == nil {
+		return nil
+	}
+	return &Scene{inner: _r}
+}
+
+// SetScene calls the underlying SetScene.
+func (x *Renderer) SetScene(scene *raw.SKScene) {
+	x.inner.SetScene(scene)
+}
+
+// IgnoresSiblingOrder calls the underlying IgnoresSiblingOrder.
+func (x *Renderer) IgnoresSiblingOrder() bool {
+	return x.inner.IgnoresSiblingOrder()
+}
+
+// SetIgnoresSiblingOrder calls the underlying SetIgnoresSiblingOrder.
+func (x *Renderer) SetIgnoresSiblingOrder(ignoresSiblingOrder bool) {
+	x.inner.SetIgnoresSiblingOrder(ignoresSiblingOrder)
+}
+
+// ShouldCullNonVisibleNodes calls the underlying ShouldCullNonVisibleNodes.
+func (x *Renderer) ShouldCullNonVisibleNodes() bool {
+	return x.inner.ShouldCullNonVisibleNodes()
+}
+
+// SetShouldCullNonVisibleNodes calls the underlying SetShouldCullNonVisibleNodes.
+func (x *Renderer) SetShouldCullNonVisibleNodes(shouldCullNonVisibleNodes bool) {
+	x.inner.SetShouldCullNonVisibleNodes(shouldCullNonVisibleNodes)
+}
+
+// ShowsDrawCount calls the underlying ShowsDrawCount.
+func (x *Renderer) ShowsDrawCount() bool {
+	return x.inner.ShowsDrawCount()
+}
+
+// SetShowsDrawCount calls the underlying SetShowsDrawCount.
+func (x *Renderer) SetShowsDrawCount(showsDrawCount bool) {
+	x.inner.SetShowsDrawCount(showsDrawCount)
+}
+
+// ShowsNodeCount calls the underlying ShowsNodeCount.
+func (x *Renderer) ShowsNodeCount() bool {
+	return x.inner.ShowsNodeCount()
+}
+
+// SetShowsNodeCount calls the underlying SetShowsNodeCount.
+func (x *Renderer) SetShowsNodeCount(showsNodeCount bool) {
+	x.inner.SetShowsNodeCount(showsNodeCount)
+}
+
+// ShowsQuadCount calls the underlying ShowsQuadCount.
+func (x *Renderer) ShowsQuadCount() bool {
+	return x.inner.ShowsQuadCount()
+}
+
+// SetShowsQuadCount calls the underlying SetShowsQuadCount.
+func (x *Renderer) SetShowsQuadCount(showsQuadCount bool) {
+	x.inner.SetShowsQuadCount(showsQuadCount)
+}
+
+// ShowsPhysics calls the underlying ShowsPhysics.
+func (x *Renderer) ShowsPhysics() bool {
+	return x.inner.ShowsPhysics()
+}
+
+// SetShowsPhysics calls the underlying SetShowsPhysics.
+func (x *Renderer) SetShowsPhysics(showsPhysics bool) {
+	x.inner.SetShowsPhysics(showsPhysics)
+}
+
+// ShowsFields calls the underlying ShowsFields.
+func (x *Renderer) ShowsFields() bool {
+	return x.inner.ShowsFields()
+}
+
+// SetShowsFields calls the underlying SetShowsFields.
+func (x *Renderer) SetShowsFields(showsFields bool) {
+	x.inner.SetShowsFields(showsFields)
+}
+
+// Rendererable is the interface implemented by [Renderer], for mocking and DI.
+type Rendererable interface {
+	Unwrap() *raw.SKRenderer
+	WithScene(scene *raw.SKScene) *Renderer
+	WithIgnoresSiblingOrder(ignoresSiblingOrder bool) *Renderer
+	WithShouldCullNonVisibleNodes(shouldCullNonVisibleNodes bool) *Renderer
+	WithShowsDrawCount(showsDrawCount bool) *Renderer
+	WithShowsNodeCount(showsNodeCount bool) *Renderer
+	WithShowsQuadCount(showsQuadCount bool) *Renderer
+	WithShowsPhysics(showsPhysics bool) *Renderer
+	WithShowsFields(showsFields bool) *Renderer
+	RenderWithViewportCommandBufferRenderPassDescriptor(viewport corefoundation.CGRect, commandBuffer metal.MTLCommandBuffer, renderPassDescriptor *metal.MTLRenderPassDescriptor)
+	RenderWithViewportRenderCommandEncoderRenderPassDescriptorCommandQueue(viewport corefoundation.CGRect, renderCommandEncoder metal.MTLRenderCommandEncoder, renderPassDescriptor *metal.MTLRenderPassDescriptor, commandQueue metal.MTLCommandQueue)
+	UpdateAtTime(currentTime float64)
+	Scene() *Scene
+	SetScene(scene *raw.SKScene)
+	IgnoresSiblingOrder() bool
+	SetIgnoresSiblingOrder(ignoresSiblingOrder bool)
+	ShouldCullNonVisibleNodes() bool
+	SetShouldCullNonVisibleNodes(shouldCullNonVisibleNodes bool)
+	ShowsDrawCount() bool
+	SetShowsDrawCount(showsDrawCount bool)
+	ShowsNodeCount() bool
+	SetShowsNodeCount(showsNodeCount bool)
+	ShowsQuadCount() bool
+	SetShowsQuadCount(showsQuadCount bool)
+	ShowsPhysics() bool
+	SetShowsPhysics(showsPhysics bool)
+	ShowsFields() bool
+	SetShowsFields(showsFields bool)
+}
+
+var _ Rendererable = (*Renderer)(nil)
 

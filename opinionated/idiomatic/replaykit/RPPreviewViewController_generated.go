@@ -29,3 +29,23 @@ func (x *PreviewViewController) WithPreviewControllerDelegate(previewControllerD
 	return x
 }
 
+// PreviewControllerDelegate calls the underlying PreviewControllerDelegate.
+func (x *PreviewViewController) PreviewControllerDelegate() raw.RPPreviewViewControllerDelegate {
+	return x.inner.PreviewControllerDelegate()
+}
+
+// SetPreviewControllerDelegate calls the underlying SetPreviewControllerDelegate.
+func (x *PreviewViewController) SetPreviewControllerDelegate(previewControllerDelegate raw.RPPreviewViewControllerDelegate) {
+	x.inner.SetPreviewControllerDelegate(previewControllerDelegate)
+}
+
+// PreviewViewControllerable is the interface implemented by [PreviewViewController], for mocking and DI.
+type PreviewViewControllerable interface {
+	Unwrap() *raw.RPPreviewViewController
+	WithPreviewControllerDelegate(previewControllerDelegate raw.RPPreviewViewControllerDelegate) *PreviewViewController
+	PreviewControllerDelegate() raw.RPPreviewViewControllerDelegate
+	SetPreviewControllerDelegate(previewControllerDelegate raw.RPPreviewViewControllerDelegate)
+}
+
+var _ PreviewViewControllerable = (*PreviewViewController)(nil)
+

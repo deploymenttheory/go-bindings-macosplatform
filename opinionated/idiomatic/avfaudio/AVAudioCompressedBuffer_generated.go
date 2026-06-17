@@ -6,7 +6,9 @@ package avfaudio
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreaudiotypes"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // AudioCompressedBuffer wraps [raw.AVAudioCompressedBuffer] with a fluent Go API.
@@ -43,5 +45,74 @@ func (x *AudioCompressedBuffer) WithByteLength(byteLength uint32) *AudioCompress
 	return x
 }
 
+// PacketCapacity calls the underlying PacketCapacity.
+func (x *AudioCompressedBuffer) PacketCapacity() uint32 {
+	return x.inner.PacketCapacity()
+}
+
+// PacketCount calls the underlying PacketCount.
+func (x *AudioCompressedBuffer) PacketCount() uint32 {
+	return x.inner.PacketCount()
+}
+
+// SetPacketCount calls the underlying SetPacketCount.
+func (x *AudioCompressedBuffer) SetPacketCount(packetCount uint32) {
+	x.inner.SetPacketCount(packetCount)
+}
+
+// MaximumPacketSize calls the underlying MaximumPacketSize.
+func (x *AudioCompressedBuffer) MaximumPacketSize() int {
+	return x.inner.MaximumPacketSize()
+}
+
+// Data calls the underlying Data.
+func (x *AudioCompressedBuffer) Data() unsafe.Pointer {
+	return x.inner.Data()
+}
+
+// ByteCapacity calls the underlying ByteCapacity.
+func (x *AudioCompressedBuffer) ByteCapacity() uint32 {
+	return x.inner.ByteCapacity()
+}
+
+// ByteLength calls the underlying ByteLength.
+func (x *AudioCompressedBuffer) ByteLength() uint32 {
+	return x.inner.ByteLength()
+}
+
+// SetByteLength calls the underlying SetByteLength.
+func (x *AudioCompressedBuffer) SetByteLength(byteLength uint32) {
+	x.inner.SetByteLength(byteLength)
+}
+
+// PacketDescriptions calls the underlying PacketDescriptions.
+func (x *AudioCompressedBuffer) PacketDescriptions() *coreaudiotypes.AudioStreamPacketDescription {
+	return x.inner.PacketDescriptions()
+}
+
+// PacketDependencies calls the underlying PacketDependencies.
+func (x *AudioCompressedBuffer) PacketDependencies() *coreaudiotypes.AudioStreamPacketDependencyDescription {
+	return x.inner.PacketDependencies()
+}
+
 func (x *AudioCompressedBuffer) asAudioBuffer() *raw.AVAudioBuffer { return &x.inner.AVAudioBuffer }
+
+// AudioCompressedBufferable is the interface implemented by [AudioCompressedBuffer], for mocking and DI.
+type AudioCompressedBufferable interface {
+	Unwrap() *raw.AVAudioCompressedBuffer
+	WithPacketCount(packetCount uint32) *AudioCompressedBuffer
+	WithByteLength(byteLength uint32) *AudioCompressedBuffer
+	PacketCapacity() uint32
+	PacketCount() uint32
+	SetPacketCount(packetCount uint32)
+	MaximumPacketSize() int
+	Data() unsafe.Pointer
+	ByteCapacity() uint32
+	ByteLength() uint32
+	SetByteLength(byteLength uint32)
+	PacketDescriptions() *coreaudiotypes.AudioStreamPacketDescription
+	PacketDependencies() *coreaudiotypes.AudioStreamPacketDependencyDescription
+}
+
+var _ AudioCompressedBufferable = (*AudioCompressedBuffer)(nil)
 

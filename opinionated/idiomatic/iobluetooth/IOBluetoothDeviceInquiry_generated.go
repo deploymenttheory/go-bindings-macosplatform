@@ -5,6 +5,7 @@
 package iobluetooth
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/iobluetooth"
 	"github.com/ebitengine/purego/objc"
 )
@@ -47,4 +48,93 @@ func (x *IOBluetoothDeviceInquiry) WithUpdateNewDeviceNames(updateNewDeviceNames
 	x.inner.SetUpdateNewDeviceNames(updateNewDeviceNames)
 	return x
 }
+
+// Start calls the underlying Start.
+func (x *IOBluetoothDeviceInquiry) Start() int {
+	return x.inner.Start()
+}
+
+// Stop calls the underlying Stop.
+func (x *IOBluetoothDeviceInquiry) Stop() int {
+	return x.inner.Stop()
+}
+
+// FoundDevices calls the underlying FoundDevices.
+func (x *IOBluetoothDeviceInquiry) FoundDevices() *foundation.NSArray[objc.ID] {
+	return x.inner.FoundDevices()
+}
+
+// ClearFoundDevices calls the underlying ClearFoundDevices.
+func (x *IOBluetoothDeviceInquiry) ClearFoundDevices() {
+	x.inner.ClearFoundDevices()
+}
+
+// SetSearchCriteriaMajorDeviceClassMinorDeviceClass calls the underlying SetSearchCriteriaMajorDeviceClassMinorDeviceClass.
+func (x *IOBluetoothDeviceInquiry) SetSearchCriteriaMajorDeviceClassMinorDeviceClass(inServiceClassMajor uint32, inMajorDeviceClass uint32, inMinorDeviceClass uint32) {
+	x.inner.SetSearchCriteriaMajorDeviceClassMinorDeviceClass(inServiceClassMajor, inMajorDeviceClass, inMinorDeviceClass)
+}
+
+// Delegate calls the underlying Delegate.
+func (x *IOBluetoothDeviceInquiry) Delegate() objc.ID {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *IOBluetoothDeviceInquiry) SetDelegate(delegate objc.ID) {
+	x.inner.SetDelegate(delegate)
+}
+
+// InquiryLength calls the underlying InquiryLength.
+func (x *IOBluetoothDeviceInquiry) InquiryLength() uint8 {
+	return x.inner.InquiryLength()
+}
+
+// SetInquiryLength calls the underlying SetInquiryLength.
+func (x *IOBluetoothDeviceInquiry) SetInquiryLength(inquiryLength uint8) {
+	x.inner.SetInquiryLength(inquiryLength)
+}
+
+// SearchType calls the underlying SearchType.
+func (x *IOBluetoothDeviceInquiry) SearchType() uint {
+	return x.inner.SearchType()
+}
+
+// SetSearchType calls the underlying SetSearchType.
+func (x *IOBluetoothDeviceInquiry) SetSearchType(searchType uint) {
+	x.inner.SetSearchType(searchType)
+}
+
+// UpdateNewDeviceNames calls the underlying UpdateNewDeviceNames.
+func (x *IOBluetoothDeviceInquiry) UpdateNewDeviceNames() bool {
+	return x.inner.UpdateNewDeviceNames()
+}
+
+// SetUpdateNewDeviceNames calls the underlying SetUpdateNewDeviceNames.
+func (x *IOBluetoothDeviceInquiry) SetUpdateNewDeviceNames(updateNewDeviceNames bool) {
+	x.inner.SetUpdateNewDeviceNames(updateNewDeviceNames)
+}
+
+// IOBluetoothDeviceInquiryable is the interface implemented by [IOBluetoothDeviceInquiry], for mocking and DI.
+type IOBluetoothDeviceInquiryable interface {
+	Unwrap() *raw.IOBluetoothDeviceInquiry
+	WithDelegate(delegate objc.ID) *IOBluetoothDeviceInquiry
+	WithInquiryLength(inquiryLength uint8) *IOBluetoothDeviceInquiry
+	WithSearchType(searchType uint) *IOBluetoothDeviceInquiry
+	WithUpdateNewDeviceNames(updateNewDeviceNames bool) *IOBluetoothDeviceInquiry
+	Start() int
+	Stop() int
+	FoundDevices() *foundation.NSArray[objc.ID]
+	ClearFoundDevices()
+	SetSearchCriteriaMajorDeviceClassMinorDeviceClass(inServiceClassMajor uint32, inMajorDeviceClass uint32, inMinorDeviceClass uint32)
+	Delegate() objc.ID
+	SetDelegate(delegate objc.ID)
+	InquiryLength() uint8
+	SetInquiryLength(inquiryLength uint8)
+	SearchType() uint
+	SetSearchType(searchType uint)
+	UpdateNewDeviceNames() bool
+	SetUpdateNewDeviceNames(updateNewDeviceNames bool)
+}
+
+var _ IOBluetoothDeviceInquiryable = (*IOBluetoothDeviceInquiry)(nil)
 

@@ -35,3 +35,10 @@ func NewNNScaleNodeWithSourceTransformProviderOutputSize(sourceNode *mpsneuralne
 
 func (x *NNScaleNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNFilterNode }
 
+// NNScaleNodeable is the interface implemented by [NNScaleNode], for mocking and DI.
+type NNScaleNodeable interface {
+	Unwrap() *raw.MPSNNScaleNode
+}
+
+var _ NNScaleNodeable = (*NNScaleNode)(nil)
+

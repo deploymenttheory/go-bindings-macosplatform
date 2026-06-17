@@ -7,8 +7,10 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // NNReshape wraps [raw.MPSNNReshape] with a fluent Go API.
@@ -33,5 +35,36 @@ func NewNNReshapeWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLD
 	return &NNReshape{inner: raw.MPSNNReshapeFromID(_id)}
 }
 
+// EncodeToCommandBufferSourceImageReshapedWidthReshapedHeightReshapedFeatureChannels calls the underlying EncodeToCommandBufferSourceImageReshapedWidthReshapedHeightReshapedFeatureChannels.
+func (x *NNReshape) EncodeToCommandBufferSourceImageReshapedWidthReshapedHeightReshapedFeatureChannels(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, reshapedWidth uint, reshapedHeight uint, reshapedFeatureChannels uint) *mpscore.MPSImage {
+	return x.inner.EncodeToCommandBufferSourceImageReshapedWidthReshapedHeightReshapedFeatureChannels(commandBuffer, sourceImage, reshapedWidth, reshapedHeight, reshapedFeatureChannels)
+}
+
+// EncodeToCommandBufferSourceImageDestinationStateDestinationStateIsTemporaryReshapedWidthReshapedHeightReshapedFeatureChannels calls the underlying EncodeToCommandBufferSourceImageDestinationStateDestinationStateIsTemporaryReshapedWidthReshapedHeightReshapedFeatureChannels.
+func (x *NNReshape) EncodeToCommandBufferSourceImageDestinationStateDestinationStateIsTemporaryReshapedWidthReshapedHeightReshapedFeatureChannels(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, outState *mpscore.MPSState, isTemporary bool, reshapedWidth uint, reshapedHeight uint, reshapedFeatureChannels uint) *mpscore.MPSImage {
+	return x.inner.EncodeToCommandBufferSourceImageDestinationStateDestinationStateIsTemporaryReshapedWidthReshapedHeightReshapedFeatureChannels(commandBuffer, sourceImage, outState, isTemporary, reshapedWidth, reshapedHeight, reshapedFeatureChannels)
+}
+
+// EncodeBatchToCommandBufferSourceImagesReshapedWidthReshapedHeightReshapedFeatureChannels calls the underlying EncodeBatchToCommandBufferSourceImagesReshapedWidthReshapedHeightReshapedFeatureChannels.
+func (x *NNReshape) EncodeBatchToCommandBufferSourceImagesReshapedWidthReshapedHeightReshapedFeatureChannels(commandBuffer metal.MTLCommandBuffer, sourceImages unsafe.Pointer, reshapedWidth uint, reshapedHeight uint, reshapedFeatureChannels uint) unsafe.Pointer {
+	return x.inner.EncodeBatchToCommandBufferSourceImagesReshapedWidthReshapedHeightReshapedFeatureChannels(commandBuffer, sourceImages, reshapedWidth, reshapedHeight, reshapedFeatureChannels)
+}
+
+// EncodeBatchToCommandBufferSourceImagesDestinationStatesDestinationStateIsTemporaryReshapedWidthReshapedHeightReshapedFeatureChannels calls the underlying EncodeBatchToCommandBufferSourceImagesDestinationStatesDestinationStateIsTemporaryReshapedWidthReshapedHeightReshapedFeatureChannels.
+func (x *NNReshape) EncodeBatchToCommandBufferSourceImagesDestinationStatesDestinationStateIsTemporaryReshapedWidthReshapedHeightReshapedFeatureChannels(commandBuffer metal.MTLCommandBuffer, sourceImages unsafe.Pointer, outStates unsafe.Pointer, isTemporary bool, reshapedWidth uint, reshapedHeight uint, reshapedFeatureChannels uint) unsafe.Pointer {
+	return x.inner.EncodeBatchToCommandBufferSourceImagesDestinationStatesDestinationStateIsTemporaryReshapedWidthReshapedHeightReshapedFeatureChannels(commandBuffer, sourceImages, outStates, isTemporary, reshapedWidth, reshapedHeight, reshapedFeatureChannels)
+}
+
 func (x *NNReshape) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSCNNKernel }
+
+// NNReshapeable is the interface implemented by [NNReshape], for mocking and DI.
+type NNReshapeable interface {
+	Unwrap() *raw.MPSNNReshape
+	EncodeToCommandBufferSourceImageReshapedWidthReshapedHeightReshapedFeatureChannels(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, reshapedWidth uint, reshapedHeight uint, reshapedFeatureChannels uint) *mpscore.MPSImage
+	EncodeToCommandBufferSourceImageDestinationStateDestinationStateIsTemporaryReshapedWidthReshapedHeightReshapedFeatureChannels(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, outState *mpscore.MPSState, isTemporary bool, reshapedWidth uint, reshapedHeight uint, reshapedFeatureChannels uint) *mpscore.MPSImage
+	EncodeBatchToCommandBufferSourceImagesReshapedWidthReshapedHeightReshapedFeatureChannels(commandBuffer metal.MTLCommandBuffer, sourceImages unsafe.Pointer, reshapedWidth uint, reshapedHeight uint, reshapedFeatureChannels uint) unsafe.Pointer
+	EncodeBatchToCommandBufferSourceImagesDestinationStatesDestinationStateIsTemporaryReshapedWidthReshapedHeightReshapedFeatureChannels(commandBuffer metal.MTLCommandBuffer, sourceImages unsafe.Pointer, outStates unsafe.Pointer, isTemporary bool, reshapedWidth uint, reshapedHeight uint, reshapedFeatureChannels uint) unsafe.Pointer
+}
+
+var _ NNReshapeable = (*NNReshape)(nil)
 

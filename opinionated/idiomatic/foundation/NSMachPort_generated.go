@@ -31,7 +31,20 @@ func NewMachPortWithMachPortOptions(machPort uint32, f raw.NSMachPortOptions) *M
 	return &MachPort{inner: raw.NSMachPortFromID(_id)}
 }
 
+// MachPort calls the underlying MachPort.
+func (x *MachPort) MachPort() uint32 {
+	return x.inner.MachPort()
+}
+
 func (x *MachPort) asPort() *raw.NSPort { return &x.inner.NSPort }
 
 func (x *MachPort) asObject() *raw.NSObject { return &x.inner.NSPort.NSObject }
+
+// MachPortable is the interface implemented by [MachPort], for mocking and DI.
+type MachPortable interface {
+	Unwrap() *raw.NSMachPort
+	MachPort() uint32
+}
+
+var _ MachPortable = (*MachPort)(nil)
 

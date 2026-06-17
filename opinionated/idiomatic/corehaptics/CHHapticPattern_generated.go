@@ -64,3 +64,22 @@ func NewHapticPatternWithContentsOfURLError(ahapURL string) (*HapticPattern, err
 	return &HapticPattern{inner: raw.CHHapticPatternFromID(_id)}, nil
 }
 
+// ExportDictionaryAndReturnError calls the underlying ExportDictionaryAndReturnError.
+func (x *HapticPattern) ExportDictionaryAndReturnError() (*foundation.NSDictionary[*foundation.NSString, objc.ID], error) {
+	return x.inner.ExportDictionaryAndReturnError()
+}
+
+// Duration calls the underlying Duration.
+func (x *HapticPattern) Duration() float64 {
+	return x.inner.Duration()
+}
+
+// HapticPatternable is the interface implemented by [HapticPattern], for mocking and DI.
+type HapticPatternable interface {
+	Unwrap() *raw.CHHapticPattern
+	ExportDictionaryAndReturnError() (*foundation.NSDictionary[*foundation.NSString, objc.ID], error)
+	Duration() float64
+}
+
+var _ HapticPatternable = (*HapticPattern)(nil)
+

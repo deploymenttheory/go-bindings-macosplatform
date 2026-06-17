@@ -7,6 +7,7 @@ package foundation
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // GarbageCollector wraps [raw.NSGarbageCollector] with a fluent Go API.
@@ -23,5 +24,66 @@ func NewGarbageCollector() *GarbageCollector {
 	return &GarbageCollector{inner: raw.NSGarbageCollectorFromID(_id)}
 }
 
+// IsCollecting calls the underlying IsCollecting.
+func (x *GarbageCollector) IsCollecting() bool {
+	return x.inner.IsCollecting()
+}
+
+// Disable calls the underlying Disable.
+func (x *GarbageCollector) Disable() {
+	x.inner.Disable()
+}
+
+// Enable calls the underlying Enable.
+func (x *GarbageCollector) Enable() {
+	x.inner.Enable()
+}
+
+// IsEnabled calls the underlying IsEnabled.
+func (x *GarbageCollector) IsEnabled() bool {
+	return x.inner.IsEnabled()
+}
+
+// CollectIfNeeded calls the underlying CollectIfNeeded.
+func (x *GarbageCollector) CollectIfNeeded() {
+	x.inner.CollectIfNeeded()
+}
+
+// CollectExhaustively calls the underlying CollectExhaustively.
+func (x *GarbageCollector) CollectExhaustively() {
+	x.inner.CollectExhaustively()
+}
+
+// DisableCollectorForPointer calls the underlying DisableCollectorForPointer.
+func (x *GarbageCollector) DisableCollectorForPointer(ptr unsafe.Pointer) {
+	x.inner.DisableCollectorForPointer(ptr)
+}
+
+// EnableCollectorForPointer calls the underlying EnableCollectorForPointer.
+func (x *GarbageCollector) EnableCollectorForPointer(ptr unsafe.Pointer) {
+	x.inner.EnableCollectorForPointer(ptr)
+}
+
+// Zone calls the underlying Zone.
+func (x *GarbageCollector) Zone() unsafe.Pointer {
+	return x.inner.Zone()
+}
+
 func (x *GarbageCollector) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// GarbageCollectorable is the interface implemented by [GarbageCollector], for mocking and DI.
+type GarbageCollectorable interface {
+	Unwrap() *raw.NSGarbageCollector
+	IsCollecting() bool
+	Disable()
+	Enable()
+	IsEnabled() bool
+	CollectIfNeeded()
+	CollectExhaustively()
+	DisableCollectorForPointer(ptr unsafe.Pointer)
+	EnableCollectorForPointer(ptr unsafe.Pointer)
+	Zone() unsafe.Pointer
+}
+
+var _ GarbageCollectorable = (*GarbageCollector)(nil)
 

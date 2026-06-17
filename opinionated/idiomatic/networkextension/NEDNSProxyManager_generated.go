@@ -49,11 +49,11 @@ func (x *NEDNSProxyManager) WithEnabled(enabled bool) *NEDNSProxyManager {
 func (x *NEDNSProxyManager) LoadFromPreferences(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.LoadFromPreferencesWithCompletionHandler(func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -67,11 +67,11 @@ func (x *NEDNSProxyManager) LoadFromPreferences(ctx context.Context) error {
 func (x *NEDNSProxyManager) RemoveFromPreferences(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.RemoveFromPreferencesWithCompletionHandler(func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -85,11 +85,11 @@ func (x *NEDNSProxyManager) RemoveFromPreferences(ctx context.Context) error {
 func (x *NEDNSProxyManager) SaveToPreferences(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.SaveToPreferencesWithCompletionHandler(func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -98,4 +98,61 @@ func (x *NEDNSProxyManager) SaveToPreferences(ctx context.Context) error {
 		return ctx.Err()
 	}
 }
+
+// LocalizedDescription calls the underlying LocalizedDescription.
+func (x *NEDNSProxyManager) LocalizedDescription() string {
+	_r := x.inner.LocalizedDescription()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLocalizedDescription calls the underlying SetLocalizedDescription.
+func (x *NEDNSProxyManager) SetLocalizedDescription(localizedDescription string) {
+	x.inner.SetLocalizedDescription(foundation.NSStringStringWithUTF8String(localizedDescription))
+}
+
+// ProviderProtocol calls the underlying ProviderProtocol.
+func (x *NEDNSProxyManager) ProviderProtocol() *NEDNSProxyProviderProtocol {
+	_r := x.inner.ProviderProtocol()
+	if _r == nil {
+		return nil
+	}
+	return &NEDNSProxyProviderProtocol{inner: _r}
+}
+
+// SetProviderProtocol calls the underlying SetProviderProtocol.
+func (x *NEDNSProxyManager) SetProviderProtocol(providerProtocol *raw.NEDNSProxyProviderProtocol) {
+	x.inner.SetProviderProtocol(providerProtocol)
+}
+
+// IsEnabled calls the underlying IsEnabled.
+func (x *NEDNSProxyManager) IsEnabled() bool {
+	return x.inner.IsEnabled()
+}
+
+// SetEnabled calls the underlying SetEnabled.
+func (x *NEDNSProxyManager) SetEnabled(enabled bool) {
+	x.inner.SetEnabled(enabled)
+}
+
+// NEDNSProxyManagerable is the interface implemented by [NEDNSProxyManager], for mocking and DI.
+type NEDNSProxyManagerable interface {
+	Unwrap() *raw.NEDNSProxyManager
+	WithLocalizedDescription(localizedDescription string) *NEDNSProxyManager
+	WithProviderProtocol(providerProtocol *raw.NEDNSProxyProviderProtocol) *NEDNSProxyManager
+	WithEnabled(enabled bool) *NEDNSProxyManager
+	LoadFromPreferences(ctx context.Context) error
+	RemoveFromPreferences(ctx context.Context) error
+	SaveToPreferences(ctx context.Context) error
+	LocalizedDescription() string
+	SetLocalizedDescription(localizedDescription string)
+	ProviderProtocol() *NEDNSProxyProviderProtocol
+	SetProviderProtocol(providerProtocol *raw.NEDNSProxyProviderProtocol)
+	IsEnabled() bool
+	SetEnabled(enabled bool)
+}
+
+var _ NEDNSProxyManagerable = (*NEDNSProxyManager)(nil)
 

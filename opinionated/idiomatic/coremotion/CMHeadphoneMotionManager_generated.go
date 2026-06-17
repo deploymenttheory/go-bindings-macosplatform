@@ -6,7 +6,9 @@ package coremotion
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremotion"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // HeadphoneMotionManager wraps [raw.CMHeadphoneMotionManager] with a fluent Go API.
@@ -28,4 +30,82 @@ func (x *HeadphoneMotionManager) WithDelegate(delegate raw.CMHeadphoneMotionMana
 	x.inner.SetDelegate(delegate)
 	return x
 }
+
+// StartDeviceMotionUpdates calls the underlying StartDeviceMotionUpdates.
+func (x *HeadphoneMotionManager) StartDeviceMotionUpdates() {
+	x.inner.StartDeviceMotionUpdates()
+}
+
+// StartDeviceMotionUpdatesToQueueWithHandler calls the underlying StartDeviceMotionUpdatesToQueueWithHandler.
+func (x *HeadphoneMotionManager) StartDeviceMotionUpdatesToQueueWithHandler(queue *foundation.NSOperationQueue, handler func(*raw.CMDeviceMotion, unsafe.Pointer)) {
+	x.inner.StartDeviceMotionUpdatesToQueueWithHandler(queue, handler)
+}
+
+// StopDeviceMotionUpdates calls the underlying StopDeviceMotionUpdates.
+func (x *HeadphoneMotionManager) StopDeviceMotionUpdates() {
+	x.inner.StopDeviceMotionUpdates()
+}
+
+// StartConnectionStatusUpdates calls the underlying StartConnectionStatusUpdates.
+func (x *HeadphoneMotionManager) StartConnectionStatusUpdates() {
+	x.inner.StartConnectionStatusUpdates()
+}
+
+// StopConnectionStatusUpdates calls the underlying StopConnectionStatusUpdates.
+func (x *HeadphoneMotionManager) StopConnectionStatusUpdates() {
+	x.inner.StopConnectionStatusUpdates()
+}
+
+// Delegate calls the underlying Delegate.
+func (x *HeadphoneMotionManager) Delegate() raw.CMHeadphoneMotionManagerDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *HeadphoneMotionManager) SetDelegate(delegate raw.CMHeadphoneMotionManagerDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// IsConnectionStatusActive calls the underlying IsConnectionStatusActive.
+func (x *HeadphoneMotionManager) IsConnectionStatusActive() bool {
+	return x.inner.IsConnectionStatusActive()
+}
+
+// IsDeviceMotionAvailable calls the underlying IsDeviceMotionAvailable.
+func (x *HeadphoneMotionManager) IsDeviceMotionAvailable() bool {
+	return x.inner.IsDeviceMotionAvailable()
+}
+
+// IsDeviceMotionActive calls the underlying IsDeviceMotionActive.
+func (x *HeadphoneMotionManager) IsDeviceMotionActive() bool {
+	return x.inner.IsDeviceMotionActive()
+}
+
+// DeviceMotion calls the underlying DeviceMotion.
+func (x *HeadphoneMotionManager) DeviceMotion() *DeviceMotion {
+	_r := x.inner.DeviceMotion()
+	if _r == nil {
+		return nil
+	}
+	return &DeviceMotion{inner: _r}
+}
+
+// HeadphoneMotionManagerable is the interface implemented by [HeadphoneMotionManager], for mocking and DI.
+type HeadphoneMotionManagerable interface {
+	Unwrap() *raw.CMHeadphoneMotionManager
+	WithDelegate(delegate raw.CMHeadphoneMotionManagerDelegate) *HeadphoneMotionManager
+	StartDeviceMotionUpdates()
+	StartDeviceMotionUpdatesToQueueWithHandler(queue *foundation.NSOperationQueue, handler func(*raw.CMDeviceMotion, unsafe.Pointer))
+	StopDeviceMotionUpdates()
+	StartConnectionStatusUpdates()
+	StopConnectionStatusUpdates()
+	Delegate() raw.CMHeadphoneMotionManagerDelegate
+	SetDelegate(delegate raw.CMHeadphoneMotionManagerDelegate)
+	IsConnectionStatusActive() bool
+	IsDeviceMotionAvailable() bool
+	IsDeviceMotionActive() bool
+	DeviceMotion() *DeviceMotion
+}
+
+var _ HeadphoneMotionManagerable = (*HeadphoneMotionManager)(nil)
 

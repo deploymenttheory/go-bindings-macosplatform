@@ -27,3 +27,10 @@ func (x *DetectDocumentSegmentationRequest) asImageBasedRequest() *raw.VNImageBa
 
 func (x *DetectDocumentSegmentationRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageBasedRequest.VNRequest }
 
+// DetectDocumentSegmentationRequestable is the interface implemented by [DetectDocumentSegmentationRequest], for mocking and DI.
+type DetectDocumentSegmentationRequestable interface {
+	Unwrap() *raw.VNDetectDocumentSegmentationRequest
+}
+
+var _ DetectDocumentSegmentationRequestable = (*DetectDocumentSegmentationRequest)(nil)
+

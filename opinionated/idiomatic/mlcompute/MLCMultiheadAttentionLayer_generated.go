@@ -6,6 +6,7 @@ package mlcompute
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,17 +24,24 @@ func NewMultiheadAttentionLayer() *MultiheadAttentionLayer {
 	return &MultiheadAttentionLayer{inner: raw.MLCMultiheadAttentionLayerFromID(_id)}
 }
 
+// Descriptor calls the underlying Descriptor.
+func (x *MultiheadAttentionLayer) Descriptor() *MultiheadAttentionDescriptor {
+	_r := x.inner.Descriptor()
+	if _r == nil {
+		return nil
+	}
+	return &MultiheadAttentionDescriptor{inner: _r}
+}
+
 // Weights returns the collection as a Go slice.
 func (x *MultiheadAttentionLayer) Weights() []*raw.MLCTensor {
 	arr := x.inner.Weights()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MLCTensor, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MLCTensor {
+		return raw.MLCTensorFromID(purego.Retain(_id))
+	})
 }
 
 // Biases returns the collection as a Go slice.
@@ -42,11 +50,9 @@ func (x *MultiheadAttentionLayer) Biases() []*raw.MLCTensor {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MLCTensor, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MLCTensor {
+		return raw.MLCTensorFromID(purego.Retain(_id))
+	})
 }
 
 // AttentionBiases returns the collection as a Go slice.
@@ -55,11 +61,9 @@ func (x *MultiheadAttentionLayer) AttentionBiases() []*raw.MLCTensor {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MLCTensor, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MLCTensor {
+		return raw.MLCTensorFromID(purego.Retain(_id))
+	})
 }
 
 // WeightsParameters returns the collection as a Go slice.
@@ -68,11 +72,9 @@ func (x *MultiheadAttentionLayer) WeightsParameters() []*raw.MLCTensorParameter 
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MLCTensorParameter, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MLCTensorParameter {
+		return raw.MLCTensorParameterFromID(purego.Retain(_id))
+	})
 }
 
 // BiasesParameters returns the collection as a Go slice.
@@ -81,12 +83,23 @@ func (x *MultiheadAttentionLayer) BiasesParameters() []*raw.MLCTensorParameter {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MLCTensorParameter, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MLCTensorParameter {
+		return raw.MLCTensorParameterFromID(purego.Retain(_id))
+	})
 }
 
 func (x *MultiheadAttentionLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
+
+// MultiheadAttentionLayerable is the interface implemented by [MultiheadAttentionLayer], for mocking and DI.
+type MultiheadAttentionLayerable interface {
+	Unwrap() *raw.MLCMultiheadAttentionLayer
+	Descriptor() *MultiheadAttentionDescriptor
+	Weights() []*raw.MLCTensor
+	Biases() []*raw.MLCTensor
+	AttentionBiases() []*raw.MLCTensor
+	WeightsParameters() []*raw.MLCTensorParameter
+	BiasesParameters() []*raw.MLCTensorParameter
+}
+
+var _ MultiheadAttentionLayerable = (*MultiheadAttentionLayer)(nil)
 

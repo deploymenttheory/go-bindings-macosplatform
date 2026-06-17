@@ -25,3 +25,10 @@ func NewMTROtaSoftwareUpdateRequestorClusterStateTransitionEvent() *MTROtaSoftwa
 
 func (x *MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent) asMTROTASoftwareUpdateRequestorClusterStateTransitionEvent() *raw.MTROTASoftwareUpdateRequestorClusterStateTransitionEvent { return &x.inner.MTROTASoftwareUpdateRequestorClusterStateTransitionEvent }
 
+// MTROtaSoftwareUpdateRequestorClusterStateTransitionEventable is the interface implemented by [MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent], for mocking and DI.
+type MTROtaSoftwareUpdateRequestorClusterStateTransitionEventable interface {
+	Unwrap() *raw.MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent
+}
+
+var _ MTROtaSoftwareUpdateRequestorClusterStateTransitionEventable = (*MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent)(nil)
+

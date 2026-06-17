@@ -42,3 +42,49 @@ func (x *MTRMediaPlaybackClusterSeekParams) WithServerSideProcessingTimeout(serv
 	return x
 }
 
+// Position calls the underlying Position.
+func (x *MTRMediaPlaybackClusterSeekParams) Position() *foundation.NSNumber {
+	return x.inner.Position()
+}
+
+// SetPosition calls the underlying SetPosition.
+func (x *MTRMediaPlaybackClusterSeekParams) SetPosition(position *foundation.NSNumber) {
+	x.inner.SetPosition(position)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRMediaPlaybackClusterSeekParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRMediaPlaybackClusterSeekParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRMediaPlaybackClusterSeekParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRMediaPlaybackClusterSeekParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRMediaPlaybackClusterSeekParamsable is the interface implemented by [MTRMediaPlaybackClusterSeekParams], for mocking and DI.
+type MTRMediaPlaybackClusterSeekParamsable interface {
+	Unwrap() *raw.MTRMediaPlaybackClusterSeekParams
+	WithPosition(position *foundation.NSNumber) *MTRMediaPlaybackClusterSeekParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRMediaPlaybackClusterSeekParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRMediaPlaybackClusterSeekParams
+	Position() *foundation.NSNumber
+	SetPosition(position *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRMediaPlaybackClusterSeekParamsable = (*MTRMediaPlaybackClusterSeekParams)(nil)
+

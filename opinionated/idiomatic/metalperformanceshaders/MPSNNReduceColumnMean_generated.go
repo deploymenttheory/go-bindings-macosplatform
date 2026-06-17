@@ -41,3 +41,10 @@ func (x *NNReduceColumnMean) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { retu
 
 func (x *NNReduceColumnMean) asKernel() *mpscore.MPSKernel { return &x.inner.MPSNNReduceUnary.MPSCNNKernel.MPSKernel }
 
+// NNReduceColumnMeanable is the interface implemented by [NNReduceColumnMean], for mocking and DI.
+type NNReduceColumnMeanable interface {
+	Unwrap() *raw.MPSNNReduceColumnMean
+}
+
+var _ NNReduceColumnMeanable = (*NNReduceColumnMean)(nil)
+

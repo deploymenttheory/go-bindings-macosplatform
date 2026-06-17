@@ -32,3 +32,10 @@ func NewPreviewRepresentingActivityItemWithItemTitleImageProviderIconProvider(it
 	return &PreviewRepresentingActivityItem{inner: raw.NSPreviewRepresentingActivityItemFromID(_id)}
 }
 
+// PreviewRepresentingActivityItemable is the interface implemented by [PreviewRepresentingActivityItem], for mocking and DI.
+type PreviewRepresentingActivityItemable interface {
+	Unwrap() *raw.NSPreviewRepresentingActivityItem
+}
+
+var _ PreviewRepresentingActivityItemable = (*PreviewRepresentingActivityItem)(nil)
+

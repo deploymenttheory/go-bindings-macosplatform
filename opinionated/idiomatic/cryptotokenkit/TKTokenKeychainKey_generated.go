@@ -7,6 +7,7 @@ package cryptotokenkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cryptotokenkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -80,5 +81,133 @@ func (x *TokenKeychainKey) WithSuitableForLogin(suitableForLogin bool) *TokenKey
 	return x
 }
 
+// KeyType calls the underlying KeyType.
+func (x *TokenKeychainKey) KeyType() string {
+	_r := x.inner.KeyType()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetKeyType calls the underlying SetKeyType.
+func (x *TokenKeychainKey) SetKeyType(keyType string) {
+	x.inner.SetKeyType(foundation.NSStringStringWithUTF8String(keyType))
+}
+
+// ApplicationTag calls the underlying ApplicationTag.
+func (x *TokenKeychainKey) ApplicationTag() *foundation.NSData {
+	return x.inner.ApplicationTag()
+}
+
+// SetApplicationTag calls the underlying SetApplicationTag.
+func (x *TokenKeychainKey) SetApplicationTag(applicationTag *foundation.NSData) {
+	x.inner.SetApplicationTag(applicationTag)
+}
+
+// KeySizeInBits calls the underlying KeySizeInBits.
+func (x *TokenKeychainKey) KeySizeInBits() int {
+	return x.inner.KeySizeInBits()
+}
+
+// SetKeySizeInBits calls the underlying SetKeySizeInBits.
+func (x *TokenKeychainKey) SetKeySizeInBits(keySizeInBits int) {
+	x.inner.SetKeySizeInBits(keySizeInBits)
+}
+
+// PublicKeyData calls the underlying PublicKeyData.
+func (x *TokenKeychainKey) PublicKeyData() *foundation.NSData {
+	return x.inner.PublicKeyData()
+}
+
+// SetPublicKeyData calls the underlying SetPublicKeyData.
+func (x *TokenKeychainKey) SetPublicKeyData(publicKeyData *foundation.NSData) {
+	x.inner.SetPublicKeyData(publicKeyData)
+}
+
+// PublicKeyHash calls the underlying PublicKeyHash.
+func (x *TokenKeychainKey) PublicKeyHash() *foundation.NSData {
+	return x.inner.PublicKeyHash()
+}
+
+// SetPublicKeyHash calls the underlying SetPublicKeyHash.
+func (x *TokenKeychainKey) SetPublicKeyHash(publicKeyHash *foundation.NSData) {
+	x.inner.SetPublicKeyHash(publicKeyHash)
+}
+
+// CanDecrypt calls the underlying CanDecrypt.
+func (x *TokenKeychainKey) CanDecrypt() bool {
+	return x.inner.CanDecrypt()
+}
+
+// SetCanDecrypt calls the underlying SetCanDecrypt.
+func (x *TokenKeychainKey) SetCanDecrypt(canDecrypt bool) {
+	x.inner.SetCanDecrypt(canDecrypt)
+}
+
+// CanSign calls the underlying CanSign.
+func (x *TokenKeychainKey) CanSign() bool {
+	return x.inner.CanSign()
+}
+
+// SetCanSign calls the underlying SetCanSign.
+func (x *TokenKeychainKey) SetCanSign(canSign bool) {
+	x.inner.SetCanSign(canSign)
+}
+
+// CanPerformKeyExchange calls the underlying CanPerformKeyExchange.
+func (x *TokenKeychainKey) CanPerformKeyExchange() bool {
+	return x.inner.CanPerformKeyExchange()
+}
+
+// SetCanPerformKeyExchange calls the underlying SetCanPerformKeyExchange.
+func (x *TokenKeychainKey) SetCanPerformKeyExchange(canPerformKeyExchange bool) {
+	x.inner.SetCanPerformKeyExchange(canPerformKeyExchange)
+}
+
+// IsSuitableForLogin calls the underlying IsSuitableForLogin.
+func (x *TokenKeychainKey) IsSuitableForLogin() bool {
+	return x.inner.IsSuitableForLogin()
+}
+
+// SetSuitableForLogin calls the underlying SetSuitableForLogin.
+func (x *TokenKeychainKey) SetSuitableForLogin(suitableForLogin bool) {
+	x.inner.SetSuitableForLogin(suitableForLogin)
+}
+
 func (x *TokenKeychainKey) asTokenKeychainItem() *raw.TKTokenKeychainItem { return &x.inner.TKTokenKeychainItem }
+
+// TokenKeychainKeyable is the interface implemented by [TokenKeychainKey], for mocking and DI.
+type TokenKeychainKeyable interface {
+	Unwrap() *raw.TKTokenKeychainKey
+	WithKeyType(keyType string) *TokenKeychainKey
+	WithApplicationTag(applicationTag *foundation.NSData) *TokenKeychainKey
+	WithKeySizeInBits(keySizeInBits int) *TokenKeychainKey
+	WithPublicKeyData(publicKeyData *foundation.NSData) *TokenKeychainKey
+	WithPublicKeyHash(publicKeyHash *foundation.NSData) *TokenKeychainKey
+	WithCanDecrypt(canDecrypt bool) *TokenKeychainKey
+	WithCanSign(canSign bool) *TokenKeychainKey
+	WithCanPerformKeyExchange(canPerformKeyExchange bool) *TokenKeychainKey
+	WithSuitableForLogin(suitableForLogin bool) *TokenKeychainKey
+	KeyType() string
+	SetKeyType(keyType string)
+	ApplicationTag() *foundation.NSData
+	SetApplicationTag(applicationTag *foundation.NSData)
+	KeySizeInBits() int
+	SetKeySizeInBits(keySizeInBits int)
+	PublicKeyData() *foundation.NSData
+	SetPublicKeyData(publicKeyData *foundation.NSData)
+	PublicKeyHash() *foundation.NSData
+	SetPublicKeyHash(publicKeyHash *foundation.NSData)
+	CanDecrypt() bool
+	SetCanDecrypt(canDecrypt bool)
+	CanSign() bool
+	SetCanSign(canSign bool)
+	CanPerformKeyExchange() bool
+	SetCanPerformKeyExchange(canPerformKeyExchange bool)
+	IsSuitableForLogin() bool
+	SetSuitableForLogin(suitableForLogin bool)
+}
+
+var _ TokenKeychainKeyable = (*TokenKeychainKey)(nil)
 

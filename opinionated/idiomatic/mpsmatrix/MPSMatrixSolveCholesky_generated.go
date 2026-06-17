@@ -6,6 +6,7 @@ package mpsmatrix
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsmatrix"
 	"github.com/ebitengine/purego/objc"
 )
@@ -25,5 +26,18 @@ func NewMatrixSolveCholeskyWithDeviceUpperOrderNumberOfRightHandSides(device met
 	return &MatrixSolveCholesky{inner: raw.MPSMatrixSolveCholeskyFromID(_id)}
 }
 
+// EncodeToCommandBufferSourceMatrixRightHandSideMatrixSolutionMatrix calls the underlying EncodeToCommandBufferSourceMatrixRightHandSideMatrixSolutionMatrix.
+func (x *MatrixSolveCholesky) EncodeToCommandBufferSourceMatrixRightHandSideMatrixSolutionMatrix(commandBuffer metal.MTLCommandBuffer, sourceMatrix *mpscore.MPSMatrix, rightHandSideMatrix *mpscore.MPSMatrix, solutionMatrix *mpscore.MPSMatrix) {
+	x.inner.EncodeToCommandBufferSourceMatrixRightHandSideMatrixSolutionMatrix(commandBuffer, sourceMatrix, rightHandSideMatrix, solutionMatrix)
+}
+
 func (x *MatrixSolveCholesky) asMatrixBinaryKernel() *raw.MPSMatrixBinaryKernel { return &x.inner.MPSMatrixBinaryKernel }
+
+// MatrixSolveCholeskyable is the interface implemented by [MatrixSolveCholesky], for mocking and DI.
+type MatrixSolveCholeskyable interface {
+	Unwrap() *raw.MPSMatrixSolveCholesky
+	EncodeToCommandBufferSourceMatrixRightHandSideMatrixSolutionMatrix(commandBuffer metal.MTLCommandBuffer, sourceMatrix *mpscore.MPSMatrix, rightHandSideMatrix *mpscore.MPSMatrix, solutionMatrix *mpscore.MPSMatrix)
+}
+
+var _ MatrixSolveCholeskyable = (*MatrixSolveCholesky)(nil)
 

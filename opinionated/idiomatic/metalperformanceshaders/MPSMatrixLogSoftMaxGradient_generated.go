@@ -31,3 +31,10 @@ func (x *MatrixLogSoftMaxGradient) asMatrixBinaryKernel() *mpsmatrix.MPSMatrixBi
 
 func (x *MatrixLogSoftMaxGradient) asKernel() *mpscore.MPSKernel { return &x.inner.MPSMatrixSoftMaxGradient.MPSMatrixBinaryKernel.MPSKernel }
 
+// MatrixLogSoftMaxGradientable is the interface implemented by [MatrixLogSoftMaxGradient], for mocking and DI.
+type MatrixLogSoftMaxGradientable interface {
+	Unwrap() *raw.MPSMatrixLogSoftMaxGradient
+}
+
+var _ MatrixLogSoftMaxGradientable = (*MatrixLogSoftMaxGradient)(nil)
+

@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -41,4 +42,58 @@ func (x *MTROvenCavityOperationalStateClusterErrorStateStruct) WithErrorStateDet
 	x.inner.SetErrorStateDetails(foundation.NSStringStringWithUTF8String(errorStateDetails))
 	return x
 }
+
+// ErrorStateID calls the underlying ErrorStateID.
+func (x *MTROvenCavityOperationalStateClusterErrorStateStruct) ErrorStateID() *foundation.NSNumber {
+	return x.inner.ErrorStateID()
+}
+
+// SetErrorStateID calls the underlying SetErrorStateID.
+func (x *MTROvenCavityOperationalStateClusterErrorStateStruct) SetErrorStateID(errorStateID *foundation.NSNumber) {
+	x.inner.SetErrorStateID(errorStateID)
+}
+
+// ErrorStateLabel calls the underlying ErrorStateLabel.
+func (x *MTROvenCavityOperationalStateClusterErrorStateStruct) ErrorStateLabel() string {
+	_r := x.inner.ErrorStateLabel()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetErrorStateLabel calls the underlying SetErrorStateLabel.
+func (x *MTROvenCavityOperationalStateClusterErrorStateStruct) SetErrorStateLabel(errorStateLabel string) {
+	x.inner.SetErrorStateLabel(foundation.NSStringStringWithUTF8String(errorStateLabel))
+}
+
+// ErrorStateDetails calls the underlying ErrorStateDetails.
+func (x *MTROvenCavityOperationalStateClusterErrorStateStruct) ErrorStateDetails() string {
+	_r := x.inner.ErrorStateDetails()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetErrorStateDetails calls the underlying SetErrorStateDetails.
+func (x *MTROvenCavityOperationalStateClusterErrorStateStruct) SetErrorStateDetails(errorStateDetails string) {
+	x.inner.SetErrorStateDetails(foundation.NSStringStringWithUTF8String(errorStateDetails))
+}
+
+// MTROvenCavityOperationalStateClusterErrorStateStructable is the interface implemented by [MTROvenCavityOperationalStateClusterErrorStateStruct], for mocking and DI.
+type MTROvenCavityOperationalStateClusterErrorStateStructable interface {
+	Unwrap() *raw.MTROvenCavityOperationalStateClusterErrorStateStruct
+	WithErrorStateID(errorStateID *foundation.NSNumber) *MTROvenCavityOperationalStateClusterErrorStateStruct
+	WithErrorStateLabel(errorStateLabel string) *MTROvenCavityOperationalStateClusterErrorStateStruct
+	WithErrorStateDetails(errorStateDetails string) *MTROvenCavityOperationalStateClusterErrorStateStruct
+	ErrorStateID() *foundation.NSNumber
+	SetErrorStateID(errorStateID *foundation.NSNumber)
+	ErrorStateLabel() string
+	SetErrorStateLabel(errorStateLabel string)
+	ErrorStateDetails() string
+	SetErrorStateDetails(errorStateDetails string)
+}
+
+var _ MTROvenCavityOperationalStateClusterErrorStateStructable = (*MTROvenCavityOperationalStateClusterErrorStateStruct)(nil)
 

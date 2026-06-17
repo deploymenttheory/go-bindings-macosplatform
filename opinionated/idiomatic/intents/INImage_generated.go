@@ -23,3 +23,10 @@ func NewImage() *Image {
 	return &Image{inner: raw.INImageFromID(_id)}
 }
 
+// Imageable is the interface implemented by [Image], for mocking and DI.
+type Imageable interface {
+	Unwrap() *raw.INImage
+}
+
+var _ Imageable = (*Image)(nil)
+

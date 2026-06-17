@@ -35,5 +35,48 @@ func (x *PersistentHistoryChangeRequest) WithFetchRequest(fetchRequest *raw.NSFe
 	return x
 }
 
+// ResultType calls the underlying ResultType.
+func (x *PersistentHistoryChangeRequest) ResultType() raw.NSPersistentHistoryResultType {
+	return x.inner.ResultType()
+}
+
+// SetResultType calls the underlying SetResultType.
+func (x *PersistentHistoryChangeRequest) SetResultType(resultType raw.NSPersistentHistoryResultType) {
+	x.inner.SetResultType(resultType)
+}
+
+// Token calls the underlying Token.
+func (x *PersistentHistoryChangeRequest) Token() *PersistentHistoryToken {
+	_r := x.inner.Token()
+	if _r == nil {
+		return nil
+	}
+	return &PersistentHistoryToken{inner: _r}
+}
+
+// FetchRequest calls the underlying FetchRequest.
+func (x *PersistentHistoryChangeRequest) FetchRequest() *raw.NSFetchRequest[objc.ID] {
+	return x.inner.FetchRequest()
+}
+
+// SetFetchRequest calls the underlying SetFetchRequest.
+func (x *PersistentHistoryChangeRequest) SetFetchRequest(fetchRequest *raw.NSFetchRequest[objc.ID]) {
+	x.inner.SetFetchRequest(fetchRequest)
+}
+
 func (x *PersistentHistoryChangeRequest) asPersistentStoreRequest() *raw.NSPersistentStoreRequest { return &x.inner.NSPersistentStoreRequest }
+
+// PersistentHistoryChangeRequestable is the interface implemented by [PersistentHistoryChangeRequest], for mocking and DI.
+type PersistentHistoryChangeRequestable interface {
+	Unwrap() *raw.NSPersistentHistoryChangeRequest
+	WithResultType(resultType raw.NSPersistentHistoryResultType) *PersistentHistoryChangeRequest
+	WithFetchRequest(fetchRequest *raw.NSFetchRequest[objc.ID]) *PersistentHistoryChangeRequest
+	ResultType() raw.NSPersistentHistoryResultType
+	SetResultType(resultType raw.NSPersistentHistoryResultType)
+	Token() *PersistentHistoryToken
+	FetchRequest() *raw.NSFetchRequest[objc.ID]
+	SetFetchRequest(fetchRequest *raw.NSFetchRequest[objc.ID])
+}
+
+var _ PersistentHistoryChangeRequestable = (*PersistentHistoryChangeRequest)(nil)
 

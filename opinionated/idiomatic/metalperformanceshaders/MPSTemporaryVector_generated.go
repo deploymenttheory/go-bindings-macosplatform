@@ -30,5 +30,25 @@ func (x *TemporaryVector) WithReadCount(readCount uint) *TemporaryVector {
 	return x
 }
 
+// ReadCount calls the underlying ReadCount.
+func (x *TemporaryVector) ReadCount() uint {
+	return x.inner.ReadCount()
+}
+
+// SetReadCount calls the underlying SetReadCount.
+func (x *TemporaryVector) SetReadCount(readCount uint) {
+	x.inner.SetReadCount(readCount)
+}
+
 func (x *TemporaryVector) asVector() *mpscore.MPSVector { return &x.inner.MPSVector }
+
+// TemporaryVectorable is the interface implemented by [TemporaryVector], for mocking and DI.
+type TemporaryVectorable interface {
+	Unwrap() *raw.MPSTemporaryVector
+	WithReadCount(readCount uint) *TemporaryVector
+	ReadCount() uint
+	SetReadCount(readCount uint)
+}
+
+var _ TemporaryVectorable = (*TemporaryVector)(nil)
 

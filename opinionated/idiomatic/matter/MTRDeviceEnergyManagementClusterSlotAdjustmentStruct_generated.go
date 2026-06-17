@@ -42,3 +42,49 @@ func (x *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) WithDuration(dura
 	return x
 }
 
+// SlotIndex calls the underlying SlotIndex.
+func (x *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) SlotIndex() *foundation.NSNumber {
+	return x.inner.SlotIndex()
+}
+
+// SetSlotIndex calls the underlying SetSlotIndex.
+func (x *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) SetSlotIndex(slotIndex *foundation.NSNumber) {
+	x.inner.SetSlotIndex(slotIndex)
+}
+
+// NominalPower calls the underlying NominalPower.
+func (x *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) NominalPower() *foundation.NSNumber {
+	return x.inner.NominalPower()
+}
+
+// SetNominalPower calls the underlying SetNominalPower.
+func (x *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) SetNominalPower(nominalPower *foundation.NSNumber) {
+	x.inner.SetNominalPower(nominalPower)
+}
+
+// Duration calls the underlying Duration.
+func (x *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) Duration() *foundation.NSNumber {
+	return x.inner.Duration()
+}
+
+// SetDuration calls the underlying SetDuration.
+func (x *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) SetDuration(duration *foundation.NSNumber) {
+	x.inner.SetDuration(duration)
+}
+
+// MTRDeviceEnergyManagementClusterSlotAdjustmentStructable is the interface implemented by [MTRDeviceEnergyManagementClusterSlotAdjustmentStruct], for mocking and DI.
+type MTRDeviceEnergyManagementClusterSlotAdjustmentStructable interface {
+	Unwrap() *raw.MTRDeviceEnergyManagementClusterSlotAdjustmentStruct
+	WithSlotIndex(slotIndex *foundation.NSNumber) *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct
+	WithNominalPower(nominalPower *foundation.NSNumber) *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct
+	WithDuration(duration *foundation.NSNumber) *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct
+	SlotIndex() *foundation.NSNumber
+	SetSlotIndex(slotIndex *foundation.NSNumber)
+	NominalPower() *foundation.NSNumber
+	SetNominalPower(nominalPower *foundation.NSNumber)
+	Duration() *foundation.NSNumber
+	SetDuration(duration *foundation.NSNumber)
+}
+
+var _ MTRDeviceEnergyManagementClusterSlotAdjustmentStructable = (*MTRDeviceEnergyManagementClusterSlotAdjustmentStruct)(nil)
+

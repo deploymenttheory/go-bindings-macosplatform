@@ -7,6 +7,7 @@ package healthkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,4 +25,31 @@ func NewClinicalCodingWithSystemVersionCode(system string, version string, code 
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSystem:version:code:"), foundation.NSStringStringWithUTF8String(system).Ptr(), foundation.NSStringStringWithUTF8String(version).Ptr(), foundation.NSStringStringWithUTF8String(code).Ptr())
 	return &ClinicalCoding{inner: raw.HKClinicalCodingFromID(_id)}
 }
+
+// System calls the underlying System.
+func (x *ClinicalCoding) System() string {
+	_r := x.inner.System()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Code calls the underlying Code.
+func (x *ClinicalCoding) Code() string {
+	_r := x.inner.Code()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ClinicalCodingable is the interface implemented by [ClinicalCoding], for mocking and DI.
+type ClinicalCodingable interface {
+	Unwrap() *raw.HKClinicalCoding
+	System() string
+	Code() string
+}
+
+var _ ClinicalCodingable = (*ClinicalCoding)(nil)
 

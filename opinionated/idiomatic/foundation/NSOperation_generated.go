@@ -8,6 +8,7 @@ import (
 	"context"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -55,17 +56,90 @@ func (x *Operation) WithName(name string) *Operation {
 	return x
 }
 
+// Start calls the underlying Start.
+func (x *Operation) Start() {
+	x.inner.Start()
+}
+
+// Main calls the underlying Main.
+func (x *Operation) Main() {
+	x.inner.Main()
+}
+
+// Cancel calls the underlying Cancel.
+func (x *Operation) Cancel() {
+	x.inner.Cancel()
+}
+
+// AddDependency calls the underlying AddDependency.
+func (x *Operation) AddDependency(op *raw.NSOperation) {
+	x.inner.AddDependency(op)
+}
+
+// RemoveDependency calls the underlying RemoveDependency.
+func (x *Operation) RemoveDependency(op *raw.NSOperation) {
+	x.inner.RemoveDependency(op)
+}
+
+// WaitUntilFinished calls the underlying WaitUntilFinished.
+func (x *Operation) WaitUntilFinished() {
+	x.inner.WaitUntilFinished()
+}
+
+// IsCancelled calls the underlying IsCancelled.
+func (x *Operation) IsCancelled() bool {
+	return x.inner.IsCancelled()
+}
+
+// IsExecuting calls the underlying IsExecuting.
+func (x *Operation) IsExecuting() bool {
+	return x.inner.IsExecuting()
+}
+
+// IsFinished calls the underlying IsFinished.
+func (x *Operation) IsFinished() bool {
+	return x.inner.IsFinished()
+}
+
+// IsConcurrent calls the underlying IsConcurrent.
+func (x *Operation) IsConcurrent() bool {
+	return x.inner.IsConcurrent()
+}
+
+// IsAsynchronous calls the underlying IsAsynchronous.
+func (x *Operation) IsAsynchronous() bool {
+	return x.inner.IsAsynchronous()
+}
+
+// IsReady calls the underlying IsReady.
+func (x *Operation) IsReady() bool {
+	return x.inner.IsReady()
+}
+
 // Dependencies returns the collection as a Go slice.
 func (x *Operation) Dependencies() []*raw.NSOperation {
 	arr := x.inner.Dependencies()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSOperation, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSOperation {
+		return raw.NSOperationFromID(purego.Retain(_id))
+	})
+}
+
+// QueuePriority calls the underlying QueuePriority.
+func (x *Operation) QueuePriority() raw.NSOperationQueuePriority {
+	return x.inner.QueuePriority()
+}
+
+// SetQueuePriority calls the underlying SetQueuePriority.
+func (x *Operation) SetQueuePriority(queuePriority raw.NSOperationQueuePriority) {
+	x.inner.SetQueuePriority(queuePriority)
+}
+
+// CompletionBlock calls the underlying CompletionBlock.
+func (x *Operation) CompletionBlock() objc.Block {
+	return x.inner.CompletionBlock()
 }
 
 // SetCompletionBlock blocks until the operation completes or ctx is cancelled.
@@ -82,7 +156,76 @@ func (x *Operation) SetCompletionBlock(ctx context.Context) error {
 	}
 }
 
+// ThreadPriority calls the underlying ThreadPriority.
+func (x *Operation) ThreadPriority() float64 {
+	return x.inner.ThreadPriority()
+}
+
+// SetThreadPriority calls the underlying SetThreadPriority.
+func (x *Operation) SetThreadPriority(threadPriority float64) {
+	x.inner.SetThreadPriority(threadPriority)
+}
+
+// QualityOfService calls the underlying QualityOfService.
+func (x *Operation) QualityOfService() raw.NSQualityOfService {
+	return x.inner.QualityOfService()
+}
+
+// SetQualityOfService calls the underlying SetQualityOfService.
+func (x *Operation) SetQualityOfService(qualityOfService raw.NSQualityOfService) {
+	x.inner.SetQualityOfService(qualityOfService)
+}
+
+// Name calls the underlying Name.
+func (x *Operation) Name() *String {
+	_r := x.inner.Name()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SetName calls the underlying SetName.
+func (x *Operation) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
 func (x *Operation) asOperation() *raw.NSOperation { return x.inner }
 
 func (x *Operation) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// Operationable is the interface implemented by [Operation], for mocking and DI.
+type Operationable interface {
+	Unwrap() *raw.NSOperation
+	WithQueuePriority(queuePriority raw.NSOperationQueuePriority) *Operation
+	WithCompletionBlock(completionBlock func()) *Operation
+	WithThreadPriority(threadPriority float64) *Operation
+	WithQualityOfService(qualityOfService raw.NSQualityOfService) *Operation
+	WithName(name string) *Operation
+	Start()
+	Main()
+	Cancel()
+	AddDependency(op *raw.NSOperation)
+	RemoveDependency(op *raw.NSOperation)
+	WaitUntilFinished()
+	IsCancelled() bool
+	IsExecuting() bool
+	IsFinished() bool
+	IsConcurrent() bool
+	IsAsynchronous() bool
+	IsReady() bool
+	Dependencies() []*raw.NSOperation
+	QueuePriority() raw.NSOperationQueuePriority
+	SetQueuePriority(queuePriority raw.NSOperationQueuePriority)
+	CompletionBlock() objc.Block
+	SetCompletionBlock(ctx context.Context) error
+	ThreadPriority() float64
+	SetThreadPriority(threadPriority float64)
+	QualityOfService() raw.NSQualityOfService
+	SetQualityOfService(qualityOfService raw.NSQualityOfService)
+	Name() *String
+	SetName(name string)
+}
+
+var _ Operationable = (*Operation)(nil)
 

@@ -65,5 +65,51 @@ func (x *AudioNode) WithPositional(positional bool) *AudioNode {
 	return x
 }
 
+// AvAudioNode calls the underlying AvAudioNode.
+func (x *AudioNode) AvAudioNode() *avfaudio.AVAudioNode {
+	return x.inner.AvAudioNode()
+}
+
+// SetAvAudioNode calls the underlying SetAvAudioNode.
+func (x *AudioNode) SetAvAudioNode(avAudioNode *avfaudio.AVAudioNode) {
+	x.inner.SetAvAudioNode(avAudioNode)
+}
+
+// AutoplayLooped calls the underlying AutoplayLooped.
+func (x *AudioNode) AutoplayLooped() bool {
+	return x.inner.AutoplayLooped()
+}
+
+// SetAutoplayLooped calls the underlying SetAutoplayLooped.
+func (x *AudioNode) SetAutoplayLooped(autoplayLooped bool) {
+	x.inner.SetAutoplayLooped(autoplayLooped)
+}
+
+// IsPositional calls the underlying IsPositional.
+func (x *AudioNode) IsPositional() bool {
+	return x.inner.IsPositional()
+}
+
+// SetPositional calls the underlying SetPositional.
+func (x *AudioNode) SetPositional(positional bool) {
+	x.inner.SetPositional(positional)
+}
+
 func (x *AudioNode) asNode() *raw.SKNode { return &x.inner.SKNode }
+
+// AudioNodeable is the interface implemented by [AudioNode], for mocking and DI.
+type AudioNodeable interface {
+	Unwrap() *raw.SKAudioNode
+	WithAvAudioNode(avAudioNode *avfaudio.AVAudioNode) *AudioNode
+	WithAutoplayLooped(autoplayLooped bool) *AudioNode
+	WithPositional(positional bool) *AudioNode
+	AvAudioNode() *avfaudio.AVAudioNode
+	SetAvAudioNode(avAudioNode *avfaudio.AVAudioNode)
+	AutoplayLooped() bool
+	SetAutoplayLooped(autoplayLooped bool)
+	IsPositional() bool
+	SetPositional(positional bool)
+}
+
+var _ AudioNodeable = (*AudioNode)(nil)
 

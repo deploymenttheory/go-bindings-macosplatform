@@ -61,5 +61,77 @@ func (x *MTRUnitTestingClusterTestNullableOptionalResponseParams) WithTimedInvok
 	return x
 }
 
+// WasPresent calls the underlying WasPresent.
+func (x *MTRUnitTestingClusterTestNullableOptionalResponseParams) WasPresent() *foundation.NSNumber {
+	return x.inner.WasPresent()
+}
+
+// SetWasPresent calls the underlying SetWasPresent.
+func (x *MTRUnitTestingClusterTestNullableOptionalResponseParams) SetWasPresent(wasPresent *foundation.NSNumber) {
+	x.inner.SetWasPresent(wasPresent)
+}
+
+// WasNull calls the underlying WasNull.
+func (x *MTRUnitTestingClusterTestNullableOptionalResponseParams) WasNull() *foundation.NSNumber {
+	return x.inner.WasNull()
+}
+
+// SetWasNull calls the underlying SetWasNull.
+func (x *MTRUnitTestingClusterTestNullableOptionalResponseParams) SetWasNull(wasNull *foundation.NSNumber) {
+	x.inner.SetWasNull(wasNull)
+}
+
+// Value calls the underlying Value.
+func (x *MTRUnitTestingClusterTestNullableOptionalResponseParams) Value() *foundation.NSNumber {
+	return x.inner.Value()
+}
+
+// SetValue calls the underlying SetValue.
+func (x *MTRUnitTestingClusterTestNullableOptionalResponseParams) SetValue(value *foundation.NSNumber) {
+	x.inner.SetValue(value)
+}
+
+// OriginalValue calls the underlying OriginalValue.
+func (x *MTRUnitTestingClusterTestNullableOptionalResponseParams) OriginalValue() *foundation.NSNumber {
+	return x.inner.OriginalValue()
+}
+
+// SetOriginalValue calls the underlying SetOriginalValue.
+func (x *MTRUnitTestingClusterTestNullableOptionalResponseParams) SetOriginalValue(originalValue *foundation.NSNumber) {
+	x.inner.SetOriginalValue(originalValue)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRUnitTestingClusterTestNullableOptionalResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRUnitTestingClusterTestNullableOptionalResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
 func (x *MTRUnitTestingClusterTestNullableOptionalResponseParams) asMTRUnitTestingClusterTestNullableOptionalResponseParams() *raw.MTRUnitTestingClusterTestNullableOptionalResponseParams { return x.inner }
+
+// MTRUnitTestingClusterTestNullableOptionalResponseParamsable is the interface implemented by [MTRUnitTestingClusterTestNullableOptionalResponseParams], for mocking and DI.
+type MTRUnitTestingClusterTestNullableOptionalResponseParamsable interface {
+	Unwrap() *raw.MTRUnitTestingClusterTestNullableOptionalResponseParams
+	WithWasPresent(wasPresent *foundation.NSNumber) *MTRUnitTestingClusterTestNullableOptionalResponseParams
+	WithWasNull(wasNull *foundation.NSNumber) *MTRUnitTestingClusterTestNullableOptionalResponseParams
+	WithValue(value *foundation.NSNumber) *MTRUnitTestingClusterTestNullableOptionalResponseParams
+	WithOriginalValue(originalValue *foundation.NSNumber) *MTRUnitTestingClusterTestNullableOptionalResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRUnitTestingClusterTestNullableOptionalResponseParams
+	WasPresent() *foundation.NSNumber
+	SetWasPresent(wasPresent *foundation.NSNumber)
+	WasNull() *foundation.NSNumber
+	SetWasNull(wasNull *foundation.NSNumber)
+	Value() *foundation.NSNumber
+	SetValue(value *foundation.NSNumber)
+	OriginalValue() *foundation.NSNumber
+	SetOriginalValue(originalValue *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+}
+
+var _ MTRUnitTestingClusterTestNullableOptionalResponseParamsable = (*MTRUnitTestingClusterTestNullableOptionalResponseParams)(nil)
 

@@ -29,5 +29,29 @@ func (x *CropNode) WithMaskNode(maskNode NodeProvider) *CropNode {
 	return x
 }
 
+// MaskNode calls the underlying MaskNode.
+func (x *CropNode) MaskNode() *Node {
+	_r := x.inner.MaskNode()
+	if _r == nil {
+		return nil
+	}
+	return &Node{inner: _r}
+}
+
+// SetMaskNode calls the underlying SetMaskNode.
+func (x *CropNode) SetMaskNode(maskNode *raw.SKNode) {
+	x.inner.SetMaskNode(maskNode)
+}
+
 func (x *CropNode) asNode() *raw.SKNode { return &x.inner.SKNode }
+
+// CropNodeable is the interface implemented by [CropNode], for mocking and DI.
+type CropNodeable interface {
+	Unwrap() *raw.SKCropNode
+	WithMaskNode(maskNode NodeProvider) *CropNode
+	MaskNode() *Node
+	SetMaskNode(maskNode *raw.SKNode)
+}
+
+var _ CropNodeable = (*CropNode)(nil)
 

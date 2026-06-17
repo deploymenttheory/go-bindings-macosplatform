@@ -33,3 +33,16 @@ func NewLocationSortDescriptorWithCoder(aDecoder *foundation.NSCoder) *LocationS
 	return &LocationSortDescriptor{inner: raw.CKLocationSortDescriptorFromID(_id)}
 }
 
+// RelativeLocation calls the underlying RelativeLocation.
+func (x *LocationSortDescriptor) RelativeLocation() unsafe.Pointer {
+	return x.inner.RelativeLocation()
+}
+
+// LocationSortDescriptorable is the interface implemented by [LocationSortDescriptor], for mocking and DI.
+type LocationSortDescriptorable interface {
+	Unwrap() *raw.CKLocationSortDescriptor
+	RelativeLocation() unsafe.Pointer
+}
+
+var _ LocationSortDescriptorable = (*LocationSortDescriptor)(nil)
+

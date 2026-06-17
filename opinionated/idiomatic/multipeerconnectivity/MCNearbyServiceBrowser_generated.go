@@ -7,6 +7,7 @@ package multipeerconnectivity
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/multipeerconnectivity"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -30,4 +31,62 @@ func (x *NearbyServiceBrowser) WithDelegate(delegate raw.MCNearbyServiceBrowserD
 	x.inner.SetDelegate(delegate)
 	return x
 }
+
+// StartBrowsingForPeers calls the underlying StartBrowsingForPeers.
+func (x *NearbyServiceBrowser) StartBrowsingForPeers() {
+	x.inner.StartBrowsingForPeers()
+}
+
+// StopBrowsingForPeers calls the underlying StopBrowsingForPeers.
+func (x *NearbyServiceBrowser) StopBrowsingForPeers() {
+	x.inner.StopBrowsingForPeers()
+}
+
+// InvitePeerToSessionWithContextTimeout calls the underlying InvitePeerToSessionWithContextTimeout.
+func (x *NearbyServiceBrowser) InvitePeerToSessionWithContextTimeout(peerID *raw.MCPeerID, session *raw.MCSession, context_ *foundation.NSData, timeout float64) {
+	x.inner.InvitePeerToSessionWithContextTimeout(peerID, session, context_, timeout)
+}
+
+// Delegate calls the underlying Delegate.
+func (x *NearbyServiceBrowser) Delegate() raw.MCNearbyServiceBrowserDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *NearbyServiceBrowser) SetDelegate(delegate raw.MCNearbyServiceBrowserDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// MyPeerID calls the underlying MyPeerID.
+func (x *NearbyServiceBrowser) MyPeerID() *PeerID {
+	_r := x.inner.MyPeerID()
+	if _r == nil {
+		return nil
+	}
+	return &PeerID{inner: _r}
+}
+
+// ServiceType calls the underlying ServiceType.
+func (x *NearbyServiceBrowser) ServiceType() string {
+	_r := x.inner.ServiceType()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// NearbyServiceBrowserable is the interface implemented by [NearbyServiceBrowser], for mocking and DI.
+type NearbyServiceBrowserable interface {
+	Unwrap() *raw.MCNearbyServiceBrowser
+	WithDelegate(delegate raw.MCNearbyServiceBrowserDelegate) *NearbyServiceBrowser
+	StartBrowsingForPeers()
+	StopBrowsingForPeers()
+	InvitePeerToSessionWithContextTimeout(peerID *raw.MCPeerID, session *raw.MCSession, context_ *foundation.NSData, timeout float64)
+	Delegate() raw.MCNearbyServiceBrowserDelegate
+	SetDelegate(delegate raw.MCNearbyServiceBrowserDelegate)
+	MyPeerID() *PeerID
+	ServiceType() string
+}
+
+var _ NearbyServiceBrowserable = (*NearbyServiceBrowser)(nil)
 

@@ -41,5 +41,51 @@ func (x *Sphere) WithSegmentCount(segmentCount int) *Sphere {
 	return x
 }
 
+// Radius calls the underlying Radius.
+func (x *Sphere) Radius() float64 {
+	return x.inner.Radius()
+}
+
+// SetRadius calls the underlying SetRadius.
+func (x *Sphere) SetRadius(radius float64) {
+	x.inner.SetRadius(radius)
+}
+
+// IsGeodesic calls the underlying IsGeodesic.
+func (x *Sphere) IsGeodesic() bool {
+	return x.inner.IsGeodesic()
+}
+
+// SetGeodesic calls the underlying SetGeodesic.
+func (x *Sphere) SetGeodesic(geodesic bool) {
+	x.inner.SetGeodesic(geodesic)
+}
+
+// SegmentCount calls the underlying SegmentCount.
+func (x *Sphere) SegmentCount() int {
+	return x.inner.SegmentCount()
+}
+
+// SetSegmentCount calls the underlying SetSegmentCount.
+func (x *Sphere) SetSegmentCount(segmentCount int) {
+	x.inner.SetSegmentCount(segmentCount)
+}
+
 func (x *Sphere) asGeometry() *raw.SCNGeometry { return &x.inner.SCNGeometry }
+
+// Sphereable is the interface implemented by [Sphere], for mocking and DI.
+type Sphereable interface {
+	Unwrap() *raw.SCNSphere
+	WithRadius(radius float64) *Sphere
+	WithGeodesic(geodesic bool) *Sphere
+	WithSegmentCount(segmentCount int) *Sphere
+	Radius() float64
+	SetRadius(radius float64)
+	IsGeodesic() bool
+	SetGeodesic(geodesic bool)
+	SegmentCount() int
+	SetSegmentCount(segmentCount int)
+}
+
+var _ Sphereable = (*Sphere)(nil)
 

@@ -78,3 +78,127 @@ func (x *MTRColorControlClusterColorLoopSetParams) WithServerSideProcessingTimeo
 	return x
 }
 
+// UpdateFlags calls the underlying UpdateFlags.
+func (x *MTRColorControlClusterColorLoopSetParams) UpdateFlags() *foundation.NSNumber {
+	return x.inner.UpdateFlags()
+}
+
+// SetUpdateFlags calls the underlying SetUpdateFlags.
+func (x *MTRColorControlClusterColorLoopSetParams) SetUpdateFlags(updateFlags *foundation.NSNumber) {
+	x.inner.SetUpdateFlags(updateFlags)
+}
+
+// Action calls the underlying Action.
+func (x *MTRColorControlClusterColorLoopSetParams) Action() *foundation.NSNumber {
+	return x.inner.Action()
+}
+
+// SetAction calls the underlying SetAction.
+func (x *MTRColorControlClusterColorLoopSetParams) SetAction(action *foundation.NSNumber) {
+	x.inner.SetAction(action)
+}
+
+// Direction calls the underlying Direction.
+func (x *MTRColorControlClusterColorLoopSetParams) Direction() *foundation.NSNumber {
+	return x.inner.Direction()
+}
+
+// SetDirection calls the underlying SetDirection.
+func (x *MTRColorControlClusterColorLoopSetParams) SetDirection(direction *foundation.NSNumber) {
+	x.inner.SetDirection(direction)
+}
+
+// Time calls the underlying Time.
+func (x *MTRColorControlClusterColorLoopSetParams) Time() *foundation.NSNumber {
+	return x.inner.Time()
+}
+
+// SetTime calls the underlying SetTime.
+func (x *MTRColorControlClusterColorLoopSetParams) SetTime(time_ *foundation.NSNumber) {
+	x.inner.SetTime(time_)
+}
+
+// StartHue calls the underlying StartHue.
+func (x *MTRColorControlClusterColorLoopSetParams) StartHue() *foundation.NSNumber {
+	return x.inner.StartHue()
+}
+
+// SetStartHue calls the underlying SetStartHue.
+func (x *MTRColorControlClusterColorLoopSetParams) SetStartHue(startHue *foundation.NSNumber) {
+	x.inner.SetStartHue(startHue)
+}
+
+// OptionsMask calls the underlying OptionsMask.
+func (x *MTRColorControlClusterColorLoopSetParams) OptionsMask() *foundation.NSNumber {
+	return x.inner.OptionsMask()
+}
+
+// SetOptionsMask calls the underlying SetOptionsMask.
+func (x *MTRColorControlClusterColorLoopSetParams) SetOptionsMask(optionsMask *foundation.NSNumber) {
+	x.inner.SetOptionsMask(optionsMask)
+}
+
+// OptionsOverride calls the underlying OptionsOverride.
+func (x *MTRColorControlClusterColorLoopSetParams) OptionsOverride() *foundation.NSNumber {
+	return x.inner.OptionsOverride()
+}
+
+// SetOptionsOverride calls the underlying SetOptionsOverride.
+func (x *MTRColorControlClusterColorLoopSetParams) SetOptionsOverride(optionsOverride *foundation.NSNumber) {
+	x.inner.SetOptionsOverride(optionsOverride)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRColorControlClusterColorLoopSetParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRColorControlClusterColorLoopSetParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRColorControlClusterColorLoopSetParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRColorControlClusterColorLoopSetParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRColorControlClusterColorLoopSetParamsable is the interface implemented by [MTRColorControlClusterColorLoopSetParams], for mocking and DI.
+type MTRColorControlClusterColorLoopSetParamsable interface {
+	Unwrap() *raw.MTRColorControlClusterColorLoopSetParams
+	WithUpdateFlags(updateFlags *foundation.NSNumber) *MTRColorControlClusterColorLoopSetParams
+	WithAction(action *foundation.NSNumber) *MTRColorControlClusterColorLoopSetParams
+	WithDirection(direction *foundation.NSNumber) *MTRColorControlClusterColorLoopSetParams
+	WithTime(time_ *foundation.NSNumber) *MTRColorControlClusterColorLoopSetParams
+	WithStartHue(startHue *foundation.NSNumber) *MTRColorControlClusterColorLoopSetParams
+	WithOptionsMask(optionsMask *foundation.NSNumber) *MTRColorControlClusterColorLoopSetParams
+	WithOptionsOverride(optionsOverride *foundation.NSNumber) *MTRColorControlClusterColorLoopSetParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRColorControlClusterColorLoopSetParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRColorControlClusterColorLoopSetParams
+	UpdateFlags() *foundation.NSNumber
+	SetUpdateFlags(updateFlags *foundation.NSNumber)
+	Action() *foundation.NSNumber
+	SetAction(action *foundation.NSNumber)
+	Direction() *foundation.NSNumber
+	SetDirection(direction *foundation.NSNumber)
+	Time() *foundation.NSNumber
+	SetTime(time_ *foundation.NSNumber)
+	StartHue() *foundation.NSNumber
+	SetStartHue(startHue *foundation.NSNumber)
+	OptionsMask() *foundation.NSNumber
+	SetOptionsMask(optionsMask *foundation.NSNumber)
+	OptionsOverride() *foundation.NSNumber
+	SetOptionsOverride(optionsOverride *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRColorControlClusterColorLoopSetParamsable = (*MTRColorControlClusterColorLoopSetParams)(nil)
+

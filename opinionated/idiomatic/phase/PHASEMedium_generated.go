@@ -24,3 +24,10 @@ func NewMediumWithEnginePreset(engine *raw.PHASEEngine, preset raw.PHASEMediumPr
 	return &Medium{inner: raw.PHASEMediumFromID(_id)}
 }
 
+// Mediumable is the interface implemented by [Medium], for mocking and DI.
+type Mediumable interface {
+	Unwrap() *raw.PHASEMedium
+}
+
+var _ Mediumable = (*Medium)(nil)
+

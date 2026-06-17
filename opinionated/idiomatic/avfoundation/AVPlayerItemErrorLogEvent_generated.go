@@ -6,6 +6,8 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +24,79 @@ func NewPlayerItemErrorLogEvent() *PlayerItemErrorLogEvent {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVPlayerItemErrorLogEvent")), objc.RegisterName("new"))
 	return &PlayerItemErrorLogEvent{inner: raw.AVPlayerItemErrorLogEventFromID(_id)}
 }
+
+// Date calls the underlying Date.
+func (x *PlayerItemErrorLogEvent) Date() *foundation.NSDate {
+	return x.inner.Date()
+}
+
+// URI calls the underlying URI.
+func (x *PlayerItemErrorLogEvent) URI() string {
+	_r := x.inner.URI()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ServerAddress calls the underlying ServerAddress.
+func (x *PlayerItemErrorLogEvent) ServerAddress() string {
+	_r := x.inner.ServerAddress()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// PlaybackSessionID calls the underlying PlaybackSessionID.
+func (x *PlayerItemErrorLogEvent) PlaybackSessionID() string {
+	_r := x.inner.PlaybackSessionID()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ErrorStatusCode calls the underlying ErrorStatusCode.
+func (x *PlayerItemErrorLogEvent) ErrorStatusCode() int {
+	return x.inner.ErrorStatusCode()
+}
+
+// ErrorDomain calls the underlying ErrorDomain.
+func (x *PlayerItemErrorLogEvent) ErrorDomain() string {
+	_r := x.inner.ErrorDomain()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ErrorComment calls the underlying ErrorComment.
+func (x *PlayerItemErrorLogEvent) ErrorComment() string {
+	_r := x.inner.ErrorComment()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// AllHTTPResponseHeaderFields calls the underlying AllHTTPResponseHeaderFields.
+func (x *PlayerItemErrorLogEvent) AllHTTPResponseHeaderFields() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString] {
+	return x.inner.AllHTTPResponseHeaderFields()
+}
+
+// PlayerItemErrorLogEventable is the interface implemented by [PlayerItemErrorLogEvent], for mocking and DI.
+type PlayerItemErrorLogEventable interface {
+	Unwrap() *raw.AVPlayerItemErrorLogEvent
+	Date() *foundation.NSDate
+	URI() string
+	ServerAddress() string
+	PlaybackSessionID() string
+	ErrorStatusCode() int
+	ErrorDomain() string
+	ErrorComment() string
+	AllHTTPResponseHeaderFields() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]
+}
+
+var _ PlayerItemErrorLogEventable = (*PlayerItemErrorLogEvent)(nil)
 

@@ -8,7 +8,9 @@ import (
 	"context"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // SampleBufferDisplayLayer wraps [raw.AVSampleBufferDisplayLayer] with a fluent Go API.
@@ -43,6 +45,50 @@ func (x *SampleBufferDisplayLayer) WithPreventsDisplaySleepDuringVideoPlayback(p
 	return x
 }
 
+// ControlTimebase calls the underlying ControlTimebase.
+func (x *SampleBufferDisplayLayer) ControlTimebase() unsafe.Pointer {
+	return x.inner.ControlTimebase()
+}
+
+// SetControlTimebase calls the underlying SetControlTimebase.
+func (x *SampleBufferDisplayLayer) SetControlTimebase(controlTimebase unsafe.Pointer) {
+	x.inner.SetControlTimebase(controlTimebase)
+}
+
+// VideoGravity calls the underlying VideoGravity.
+func (x *SampleBufferDisplayLayer) VideoGravity() string {
+	_r := x.inner.VideoGravity()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetVideoGravity calls the underlying SetVideoGravity.
+func (x *SampleBufferDisplayLayer) SetVideoGravity(videoGravity *foundation.NSString) {
+	x.inner.SetVideoGravity(videoGravity)
+}
+
+// IsReadyForDisplay calls the underlying IsReadyForDisplay.
+func (x *SampleBufferDisplayLayer) IsReadyForDisplay() bool {
+	return x.inner.IsReadyForDisplay()
+}
+
+// EnqueueSampleBuffer calls the underlying EnqueueSampleBuffer.
+func (x *SampleBufferDisplayLayer) EnqueueSampleBuffer(sampleBuffer unsafe.Pointer) {
+	x.inner.EnqueueSampleBuffer(sampleBuffer)
+}
+
+// Flush calls the underlying Flush.
+func (x *SampleBufferDisplayLayer) Flush() {
+	x.inner.Flush()
+}
+
+// FlushAndRemoveImage calls the underlying FlushAndRemoveImage.
+func (x *SampleBufferDisplayLayer) FlushAndRemoveImage() {
+	x.inner.FlushAndRemoveImage()
+}
+
 // RequestMediaDataWhenReadyOnQueueUsing blocks until the operation completes or ctx is cancelled.
 func (x *SampleBufferDisplayLayer) RequestMediaDataWhenReadyOnQueueUsing(ctx context.Context, queue *foundation.NSObject) error {
 	_ch := make(chan error, 1)
@@ -56,4 +102,105 @@ func (x *SampleBufferDisplayLayer) RequestMediaDataWhenReadyOnQueueUsing(ctx con
 		return ctx.Err()
 	}
 }
+
+// StopRequestingMediaData calls the underlying StopRequestingMediaData.
+func (x *SampleBufferDisplayLayer) StopRequestingMediaData() {
+	x.inner.StopRequestingMediaData()
+}
+
+// Timebase calls the underlying Timebase.
+func (x *SampleBufferDisplayLayer) Timebase() unsafe.Pointer {
+	return x.inner.Timebase()
+}
+
+// Status calls the underlying Status.
+func (x *SampleBufferDisplayLayer) Status() raw.AVQueuedSampleBufferRenderingStatus {
+	return x.inner.Status()
+}
+
+// Error calls the underlying Error.
+func (x *SampleBufferDisplayLayer) Error() unsafe.Pointer {
+	return x.inner.Error()
+}
+
+// RequiresFlushToResumeDecoding calls the underlying RequiresFlushToResumeDecoding.
+func (x *SampleBufferDisplayLayer) RequiresFlushToResumeDecoding() bool {
+	return x.inner.RequiresFlushToResumeDecoding()
+}
+
+// IsReadyForMoreMediaData calls the underlying IsReadyForMoreMediaData.
+func (x *SampleBufferDisplayLayer) IsReadyForMoreMediaData() bool {
+	return x.inner.IsReadyForMoreMediaData()
+}
+
+// HasSufficientMediaDataForReliablePlaybackStart calls the underlying HasSufficientMediaDataForReliablePlaybackStart.
+func (x *SampleBufferDisplayLayer) HasSufficientMediaDataForReliablePlaybackStart() bool {
+	return x.inner.HasSufficientMediaDataForReliablePlaybackStart()
+}
+
+// PreventsCapture calls the underlying PreventsCapture.
+func (x *SampleBufferDisplayLayer) PreventsCapture() bool {
+	return x.inner.PreventsCapture()
+}
+
+// SetPreventsCapture calls the underlying SetPreventsCapture.
+func (x *SampleBufferDisplayLayer) SetPreventsCapture(preventsCapture bool) {
+	x.inner.SetPreventsCapture(preventsCapture)
+}
+
+// PreventsDisplaySleepDuringVideoPlayback calls the underlying PreventsDisplaySleepDuringVideoPlayback.
+func (x *SampleBufferDisplayLayer) PreventsDisplaySleepDuringVideoPlayback() bool {
+	return x.inner.PreventsDisplaySleepDuringVideoPlayback()
+}
+
+// SetPreventsDisplaySleepDuringVideoPlayback calls the underlying SetPreventsDisplaySleepDuringVideoPlayback.
+func (x *SampleBufferDisplayLayer) SetPreventsDisplaySleepDuringVideoPlayback(preventsDisplaySleepDuringVideoPlayback bool) {
+	x.inner.SetPreventsDisplaySleepDuringVideoPlayback(preventsDisplaySleepDuringVideoPlayback)
+}
+
+// OutputObscuredDueToInsufficientExternalProtection calls the underlying OutputObscuredDueToInsufficientExternalProtection.
+func (x *SampleBufferDisplayLayer) OutputObscuredDueToInsufficientExternalProtection() bool {
+	return x.inner.OutputObscuredDueToInsufficientExternalProtection()
+}
+
+// SampleBufferRenderer calls the underlying SampleBufferRenderer.
+func (x *SampleBufferDisplayLayer) SampleBufferRenderer() *SampleBufferVideoRenderer {
+	_r := x.inner.SampleBufferRenderer()
+	if _r == nil {
+		return nil
+	}
+	return &SampleBufferVideoRenderer{inner: _r}
+}
+
+// SampleBufferDisplayLayerable is the interface implemented by [SampleBufferDisplayLayer], for mocking and DI.
+type SampleBufferDisplayLayerable interface {
+	Unwrap() *raw.AVSampleBufferDisplayLayer
+	WithVideoGravity(videoGravity *foundation.NSString) *SampleBufferDisplayLayer
+	WithPreventsCapture(preventsCapture bool) *SampleBufferDisplayLayer
+	WithPreventsDisplaySleepDuringVideoPlayback(preventsDisplaySleepDuringVideoPlayback bool) *SampleBufferDisplayLayer
+	ControlTimebase() unsafe.Pointer
+	SetControlTimebase(controlTimebase unsafe.Pointer)
+	VideoGravity() string
+	SetVideoGravity(videoGravity *foundation.NSString)
+	IsReadyForDisplay() bool
+	EnqueueSampleBuffer(sampleBuffer unsafe.Pointer)
+	Flush()
+	FlushAndRemoveImage()
+	RequestMediaDataWhenReadyOnQueueUsing(ctx context.Context, queue *foundation.NSObject) error
+	StopRequestingMediaData()
+	Timebase() unsafe.Pointer
+	Status() raw.AVQueuedSampleBufferRenderingStatus
+	Error() unsafe.Pointer
+	RequiresFlushToResumeDecoding() bool
+	IsReadyForMoreMediaData() bool
+	HasSufficientMediaDataForReliablePlaybackStart() bool
+	PreventsCapture() bool
+	SetPreventsCapture(preventsCapture bool)
+	PreventsDisplaySleepDuringVideoPlayback() bool
+	SetPreventsDisplaySleepDuringVideoPlayback(preventsDisplaySleepDuringVideoPlayback bool)
+	OutputObscuredDueToInsufficientExternalProtection() bool
+	SampleBufferRenderer() *SampleBufferVideoRenderer
+}
+
+var _ SampleBufferDisplayLayerable = (*SampleBufferDisplayLayer)(nil)
 

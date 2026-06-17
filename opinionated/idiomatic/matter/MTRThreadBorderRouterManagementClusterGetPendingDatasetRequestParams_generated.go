@@ -36,3 +36,36 @@ func (x *MTRThreadBorderRouterManagementClusterGetPendingDatasetRequestParams) W
 	return x
 }
 
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRThreadBorderRouterManagementClusterGetPendingDatasetRequestParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRThreadBorderRouterManagementClusterGetPendingDatasetRequestParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRThreadBorderRouterManagementClusterGetPendingDatasetRequestParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRThreadBorderRouterManagementClusterGetPendingDatasetRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRThreadBorderRouterManagementClusterGetPendingDatasetRequestParamsable is the interface implemented by [MTRThreadBorderRouterManagementClusterGetPendingDatasetRequestParams], for mocking and DI.
+type MTRThreadBorderRouterManagementClusterGetPendingDatasetRequestParamsable interface {
+	Unwrap() *raw.MTRThreadBorderRouterManagementClusterGetPendingDatasetRequestParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRThreadBorderRouterManagementClusterGetPendingDatasetRequestParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRThreadBorderRouterManagementClusterGetPendingDatasetRequestParams
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRThreadBorderRouterManagementClusterGetPendingDatasetRequestParamsable = (*MTRThreadBorderRouterManagementClusterGetPendingDatasetRequestParams)(nil)
+

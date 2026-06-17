@@ -6,8 +6,11 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Color wraps [raw.NSColor] with a fluent Go API.
@@ -30,4 +33,347 @@ func NewColorWithCoder(coder *foundation.NSCoder) *Color {
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), coder.Ptr())
 	return &Color{inner: raw.NSColorFromID(_id)}
 }
+
+// ColorUsingType calls the underlying ColorUsingType.
+func (x *Color) ColorUsingType(type_ raw.NSColorType) *Color {
+	_r := x.inner.ColorUsingType(type_)
+	if _r == nil {
+		return nil
+	}
+	return &Color{inner: _r}
+}
+
+// ColorUsingColorSpace calls the underlying ColorUsingColorSpace.
+func (x *Color) ColorUsingColorSpace(space *raw.NSColorSpace) *Color {
+	_r := x.inner.ColorUsingColorSpace(space)
+	if _r == nil {
+		return nil
+	}
+	return &Color{inner: _r}
+}
+
+// ColorByApplyingContentHeadroom calls the underlying ColorByApplyingContentHeadroom.
+func (x *Color) ColorByApplyingContentHeadroom(contentHeadroom float64) *Color {
+	_r := x.inner.ColorByApplyingContentHeadroom(contentHeadroom)
+	if _r == nil {
+		return nil
+	}
+	return &Color{inner: _r}
+}
+
+// HighlightWithLevel calls the underlying HighlightWithLevel.
+func (x *Color) HighlightWithLevel(val float64) *Color {
+	_r := x.inner.HighlightWithLevel(val)
+	if _r == nil {
+		return nil
+	}
+	return &Color{inner: _r}
+}
+
+// ShadowWithLevel calls the underlying ShadowWithLevel.
+func (x *Color) ShadowWithLevel(val float64) *Color {
+	_r := x.inner.ShadowWithLevel(val)
+	if _r == nil {
+		return nil
+	}
+	return &Color{inner: _r}
+}
+
+// ColorWithSystemEffect calls the underlying ColorWithSystemEffect.
+func (x *Color) ColorWithSystemEffect(systemEffect raw.NSColorSystemEffect) *Color {
+	_r := x.inner.ColorWithSystemEffect(systemEffect)
+	if _r == nil {
+		return nil
+	}
+	return &Color{inner: _r}
+}
+
+// Set calls the underlying Set.
+func (x *Color) Set() {
+	x.inner.Set()
+}
+
+// SetFill calls the underlying SetFill.
+func (x *Color) SetFill() {
+	x.inner.SetFill()
+}
+
+// SetStroke calls the underlying SetStroke.
+func (x *Color) SetStroke() {
+	x.inner.SetStroke()
+}
+
+// BlendedColorWithFractionOfColor calls the underlying BlendedColorWithFractionOfColor.
+func (x *Color) BlendedColorWithFractionOfColor(fraction float64, color *raw.NSColor) *Color {
+	_r := x.inner.BlendedColorWithFractionOfColor(fraction, color)
+	if _r == nil {
+		return nil
+	}
+	return &Color{inner: _r}
+}
+
+// ColorWithAlphaComponent calls the underlying ColorWithAlphaComponent.
+func (x *Color) ColorWithAlphaComponent(alpha float64) *Color {
+	_r := x.inner.ColorWithAlphaComponent(alpha)
+	if _r == nil {
+		return nil
+	}
+	return &Color{inner: _r}
+}
+
+// GetRedGreenBlueAlpha calls the underlying GetRedGreenBlueAlpha.
+func (x *Color) GetRedGreenBlueAlpha(red *float64, green *float64, blue *float64, alpha *float64) {
+	x.inner.GetRedGreenBlueAlpha(red, green, blue, alpha)
+}
+
+// GetHueSaturationBrightnessAlpha calls the underlying GetHueSaturationBrightnessAlpha.
+func (x *Color) GetHueSaturationBrightnessAlpha(hue *float64, saturation *float64, brightness *float64, alpha *float64) {
+	x.inner.GetHueSaturationBrightnessAlpha(hue, saturation, brightness, alpha)
+}
+
+// GetWhiteAlpha calls the underlying GetWhiteAlpha.
+func (x *Color) GetWhiteAlpha(white *float64, alpha *float64) {
+	x.inner.GetWhiteAlpha(white, alpha)
+}
+
+// GetCyanMagentaYellowBlackAlpha calls the underlying GetCyanMagentaYellowBlackAlpha.
+func (x *Color) GetCyanMagentaYellowBlackAlpha(cyan *float64, magenta *float64, yellow *float64, black *float64, alpha *float64) {
+	x.inner.GetCyanMagentaYellowBlackAlpha(cyan, magenta, yellow, black, alpha)
+}
+
+// GetComponents calls the underlying GetComponents.
+func (x *Color) GetComponents(components *float64) {
+	x.inner.GetComponents(components)
+}
+
+// WriteToPasteboard calls the underlying WriteToPasteboard.
+func (x *Color) WriteToPasteboard(pasteBoard *raw.NSPasteboard) {
+	x.inner.WriteToPasteboard(pasteBoard)
+}
+
+// DrawSwatchInRect calls the underlying DrawSwatchInRect.
+func (x *Color) DrawSwatchInRect(rect corefoundation.CGRect) {
+	x.inner.DrawSwatchInRect(rect)
+}
+
+// Type calls the underlying Type.
+func (x *Color) Type() raw.NSColorType {
+	return x.inner.Type()
+}
+
+// StandardDynamicRangeColor calls the underlying StandardDynamicRangeColor.
+func (x *Color) StandardDynamicRangeColor() *Color {
+	_r := x.inner.StandardDynamicRangeColor()
+	if _r == nil {
+		return nil
+	}
+	return &Color{inner: _r}
+}
+
+// CatalogNameComponent calls the underlying CatalogNameComponent.
+func (x *Color) CatalogNameComponent() string {
+	_r := x.inner.CatalogNameComponent()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ColorNameComponent calls the underlying ColorNameComponent.
+func (x *Color) ColorNameComponent() string {
+	_r := x.inner.ColorNameComponent()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// LocalizedCatalogNameComponent calls the underlying LocalizedCatalogNameComponent.
+func (x *Color) LocalizedCatalogNameComponent() string {
+	_r := x.inner.LocalizedCatalogNameComponent()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// LocalizedColorNameComponent calls the underlying LocalizedColorNameComponent.
+func (x *Color) LocalizedColorNameComponent() string {
+	_r := x.inner.LocalizedColorNameComponent()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// RedComponent calls the underlying RedComponent.
+func (x *Color) RedComponent() float64 {
+	return x.inner.RedComponent()
+}
+
+// GreenComponent calls the underlying GreenComponent.
+func (x *Color) GreenComponent() float64 {
+	return x.inner.GreenComponent()
+}
+
+// BlueComponent calls the underlying BlueComponent.
+func (x *Color) BlueComponent() float64 {
+	return x.inner.BlueComponent()
+}
+
+// HueComponent calls the underlying HueComponent.
+func (x *Color) HueComponent() float64 {
+	return x.inner.HueComponent()
+}
+
+// SaturationComponent calls the underlying SaturationComponent.
+func (x *Color) SaturationComponent() float64 {
+	return x.inner.SaturationComponent()
+}
+
+// BrightnessComponent calls the underlying BrightnessComponent.
+func (x *Color) BrightnessComponent() float64 {
+	return x.inner.BrightnessComponent()
+}
+
+// WhiteComponent calls the underlying WhiteComponent.
+func (x *Color) WhiteComponent() float64 {
+	return x.inner.WhiteComponent()
+}
+
+// CyanComponent calls the underlying CyanComponent.
+func (x *Color) CyanComponent() float64 {
+	return x.inner.CyanComponent()
+}
+
+// MagentaComponent calls the underlying MagentaComponent.
+func (x *Color) MagentaComponent() float64 {
+	return x.inner.MagentaComponent()
+}
+
+// YellowComponent calls the underlying YellowComponent.
+func (x *Color) YellowComponent() float64 {
+	return x.inner.YellowComponent()
+}
+
+// BlackComponent calls the underlying BlackComponent.
+func (x *Color) BlackComponent() float64 {
+	return x.inner.BlackComponent()
+}
+
+// ColorSpace calls the underlying ColorSpace.
+func (x *Color) ColorSpace() *ColorSpace {
+	_r := x.inner.ColorSpace()
+	if _r == nil {
+		return nil
+	}
+	return &ColorSpace{inner: _r}
+}
+
+// NumberOfComponents calls the underlying NumberOfComponents.
+func (x *Color) NumberOfComponents() int {
+	return x.inner.NumberOfComponents()
+}
+
+// PatternImage calls the underlying PatternImage.
+func (x *Color) PatternImage() *Image {
+	_r := x.inner.PatternImage()
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// AlphaComponent calls the underlying AlphaComponent.
+func (x *Color) AlphaComponent() float64 {
+	return x.inner.AlphaComponent()
+}
+
+// LinearExposure calls the underlying LinearExposure.
+func (x *Color) LinearExposure() float64 {
+	return x.inner.LinearExposure()
+}
+
+// CGColor calls the underlying CGColor.
+func (x *Color) CGColor() unsafe.Pointer {
+	return x.inner.CGColor()
+}
+
+// ColorUsingColorSpaceNameDevice calls the underlying ColorUsingColorSpaceNameDevice.
+func (x *Color) ColorUsingColorSpaceNameDevice(name *foundation.NSString, deviceDescription *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Color {
+	_r := x.inner.ColorUsingColorSpaceNameDevice(name, deviceDescription)
+	if _r == nil {
+		return nil
+	}
+	return &Color{inner: _r}
+}
+
+// ColorUsingColorSpaceName calls the underlying ColorUsingColorSpaceName.
+func (x *Color) ColorUsingColorSpaceName(name *foundation.NSString) *Color {
+	_r := x.inner.ColorUsingColorSpaceName(name)
+	if _r == nil {
+		return nil
+	}
+	return &Color{inner: _r}
+}
+
+// ColorSpaceName calls the underlying ColorSpaceName.
+func (x *Color) ColorSpaceName() string {
+	_r := x.inner.ColorSpaceName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Colorable is the interface implemented by [Color], for mocking and DI.
+type Colorable interface {
+	Unwrap() *raw.NSColor
+	ColorUsingType(type_ raw.NSColorType) *Color
+	ColorUsingColorSpace(space *raw.NSColorSpace) *Color
+	ColorByApplyingContentHeadroom(contentHeadroom float64) *Color
+	HighlightWithLevel(val float64) *Color
+	ShadowWithLevel(val float64) *Color
+	ColorWithSystemEffect(systemEffect raw.NSColorSystemEffect) *Color
+	Set()
+	SetFill()
+	SetStroke()
+	BlendedColorWithFractionOfColor(fraction float64, color *raw.NSColor) *Color
+	ColorWithAlphaComponent(alpha float64) *Color
+	GetRedGreenBlueAlpha(red *float64, green *float64, blue *float64, alpha *float64)
+	GetHueSaturationBrightnessAlpha(hue *float64, saturation *float64, brightness *float64, alpha *float64)
+	GetWhiteAlpha(white *float64, alpha *float64)
+	GetCyanMagentaYellowBlackAlpha(cyan *float64, magenta *float64, yellow *float64, black *float64, alpha *float64)
+	GetComponents(components *float64)
+	WriteToPasteboard(pasteBoard *raw.NSPasteboard)
+	DrawSwatchInRect(rect corefoundation.CGRect)
+	Type() raw.NSColorType
+	StandardDynamicRangeColor() *Color
+	CatalogNameComponent() string
+	ColorNameComponent() string
+	LocalizedCatalogNameComponent() string
+	LocalizedColorNameComponent() string
+	RedComponent() float64
+	GreenComponent() float64
+	BlueComponent() float64
+	HueComponent() float64
+	SaturationComponent() float64
+	BrightnessComponent() float64
+	WhiteComponent() float64
+	CyanComponent() float64
+	MagentaComponent() float64
+	YellowComponent() float64
+	BlackComponent() float64
+	ColorSpace() *ColorSpace
+	NumberOfComponents() int
+	PatternImage() *Image
+	AlphaComponent() float64
+	LinearExposure() float64
+	CGColor() unsafe.Pointer
+	ColorUsingColorSpaceNameDevice(name *foundation.NSString, deviceDescription *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Color
+	ColorUsingColorSpaceName(name *foundation.NSString) *Color
+	ColorSpaceName() string
+}
+
+var _ Colorable = (*Color)(nil)
 

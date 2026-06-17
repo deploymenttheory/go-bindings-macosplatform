@@ -41,3 +41,61 @@ func (x *TextureSampler) WithTransform(transform *raw.MDLTransform) *TextureSamp
 	return x
 }
 
+// Texture calls the underlying Texture.
+func (x *TextureSampler) Texture() *Texture {
+	_r := x.inner.Texture()
+	if _r == nil {
+		return nil
+	}
+	return &Texture{inner: _r}
+}
+
+// SetTexture calls the underlying SetTexture.
+func (x *TextureSampler) SetTexture(texture *raw.MDLTexture) {
+	x.inner.SetTexture(texture)
+}
+
+// HardwareFilter calls the underlying HardwareFilter.
+func (x *TextureSampler) HardwareFilter() *TextureFilter {
+	_r := x.inner.HardwareFilter()
+	if _r == nil {
+		return nil
+	}
+	return &TextureFilter{inner: _r}
+}
+
+// SetHardwareFilter calls the underlying SetHardwareFilter.
+func (x *TextureSampler) SetHardwareFilter(hardwareFilter *raw.MDLTextureFilter) {
+	x.inner.SetHardwareFilter(hardwareFilter)
+}
+
+// Transform calls the underlying Transform.
+func (x *TextureSampler) Transform() *Transform {
+	_r := x.inner.Transform()
+	if _r == nil {
+		return nil
+	}
+	return &Transform{inner: _r}
+}
+
+// SetTransform calls the underlying SetTransform.
+func (x *TextureSampler) SetTransform(transform *raw.MDLTransform) {
+	x.inner.SetTransform(transform)
+}
+
+// TextureSamplerable is the interface implemented by [TextureSampler], for mocking and DI.
+type TextureSamplerable interface {
+	Unwrap() *raw.MDLTextureSampler
+	WithTexture(texture TextureProvider) *TextureSampler
+	WithHardwareFilter(hardwareFilter *raw.MDLTextureFilter) *TextureSampler
+	WithTransform(transform *raw.MDLTransform) *TextureSampler
+	Texture() *Texture
+	SetTexture(texture *raw.MDLTexture)
+	HardwareFilter() *TextureFilter
+	SetHardwareFilter(hardwareFilter *raw.MDLTextureFilter)
+	Transform() *Transform
+	SetTransform(transform *raw.MDLTransform)
+}
+
+var _ TextureSamplerable = (*TextureSampler)(nil)
+

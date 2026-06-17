@@ -23,3 +23,26 @@ func NewRenderPassColorAttachmentDescriptorArray() *RenderPassColorAttachmentDes
 	return &RenderPassColorAttachmentDescriptorArray{inner: raw.MTLRenderPassColorAttachmentDescriptorArrayFromID(_id)}
 }
 
+// ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
+func (x *RenderPassColorAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex uint) *RenderPassColorAttachmentDescriptor {
+	_r := x.inner.ObjectAtIndexedSubscript(attachmentIndex)
+	if _r == nil {
+		return nil
+	}
+	return &RenderPassColorAttachmentDescriptor{inner: _r}
+}
+
+// SetObjectAtIndexedSubscript calls the underlying SetObjectAtIndexedSubscript.
+func (x *RenderPassColorAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *raw.MTLRenderPassColorAttachmentDescriptor, attachmentIndex uint) {
+	x.inner.SetObjectAtIndexedSubscript(attachment, attachmentIndex)
+}
+
+// RenderPassColorAttachmentDescriptorArrayable is the interface implemented by [RenderPassColorAttachmentDescriptorArray], for mocking and DI.
+type RenderPassColorAttachmentDescriptorArrayable interface {
+	Unwrap() *raw.MTLRenderPassColorAttachmentDescriptorArray
+	ObjectAtIndexedSubscript(attachmentIndex uint) *RenderPassColorAttachmentDescriptor
+	SetObjectAtIndexedSubscript(attachment *raw.MTLRenderPassColorAttachmentDescriptor, attachmentIndex uint)
+}
+
+var _ RenderPassColorAttachmentDescriptorArrayable = (*RenderPassColorAttachmentDescriptorArray)(nil)
+

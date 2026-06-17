@@ -32,7 +32,66 @@ func NewMovieWithDataOptions(data *foundation.NSData, options *foundation.NSDict
 	return &Movie{inner: raw.AVMovieFromID(_id)}
 }
 
+// URL calls the underlying URL.
+func (x *Movie) URL() *foundation.NSURL {
+	return x.inner.URL()
+}
+
+// Data calls the underlying Data.
+func (x *Movie) Data() *foundation.NSData {
+	return x.inner.Data()
+}
+
+// DefaultMediaDataStorage calls the underlying DefaultMediaDataStorage.
+func (x *Movie) DefaultMediaDataStorage() *MediaDataStorage {
+	_r := x.inner.DefaultMediaDataStorage()
+	if _r == nil {
+		return nil
+	}
+	return &MediaDataStorage{inner: _r}
+}
+
+// CanContainMovieFragments calls the underlying CanContainMovieFragments.
+func (x *Movie) CanContainMovieFragments() bool {
+	return x.inner.CanContainMovieFragments()
+}
+
+// ContainsMovieFragments calls the underlying ContainsMovieFragments.
+func (x *Movie) ContainsMovieFragments() bool {
+	return x.inner.ContainsMovieFragments()
+}
+
+// MovieHeaderWithFileTypeError calls the underlying MovieHeaderWithFileTypeError.
+func (x *Movie) MovieHeaderWithFileTypeError(fileType *foundation.NSString) (*foundation.NSData, error) {
+	return x.inner.MovieHeaderWithFileTypeError(fileType)
+}
+
+// WriteMovieHeaderToURLFileTypeOptionsError calls the underlying WriteMovieHeaderToURLFileTypeOptionsError.
+func (x *Movie) WriteMovieHeaderToURLFileTypeOptionsError(uRL string, fileType *foundation.NSString, options raw.AVMovieWritingOptions) (bool, error) {
+	return x.inner.WriteMovieHeaderToURLFileTypeOptionsError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)), fileType, options)
+}
+
+// IsCompatibleWithFileType calls the underlying IsCompatibleWithFileType.
+func (x *Movie) IsCompatibleWithFileType(fileType *foundation.NSString) bool {
+	return x.inner.IsCompatibleWithFileType(fileType)
+}
+
 func (x *Movie) asMovie() *raw.AVMovie { return x.inner }
 
 func (x *Movie) asAsset() *raw.AVAsset { return &x.inner.AVAsset }
+
+// Movieable is the interface implemented by [Movie], for mocking and DI.
+type Movieable interface {
+	Unwrap() *raw.AVMovie
+	URL() *foundation.NSURL
+	Data() *foundation.NSData
+	DefaultMediaDataStorage() *MediaDataStorage
+	CanContainMovieFragments() bool
+	ContainsMovieFragments() bool
+	MovieHeaderWithFileTypeError(fileType *foundation.NSString) (*foundation.NSData, error)
+	WriteMovieHeaderToURLFileTypeOptionsError(uRL string, fileType *foundation.NSString, options raw.AVMovieWritingOptions) (bool, error)
+	IsCompatibleWithFileType(fileType *foundation.NSString) bool
+}
+
+var _ Movieable = (*Movie)(nil)
 

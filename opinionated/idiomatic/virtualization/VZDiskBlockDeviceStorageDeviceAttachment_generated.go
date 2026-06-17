@@ -31,5 +31,30 @@ func NewDiskBlockDeviceStorageDeviceAttachmentWithFileHandleReadOnlySynchronizat
 	return &DiskBlockDeviceStorageDeviceAttachment{inner: raw.VZDiskBlockDeviceStorageDeviceAttachmentFromID(_id)}, nil
 }
 
+// FileHandle calls the underlying FileHandle.
+func (x *DiskBlockDeviceStorageDeviceAttachment) FileHandle() *foundation.NSFileHandle {
+	return x.inner.FileHandle()
+}
+
+// IsReadOnly calls the underlying IsReadOnly.
+func (x *DiskBlockDeviceStorageDeviceAttachment) IsReadOnly() bool {
+	return x.inner.IsReadOnly()
+}
+
+// SynchronizationMode calls the underlying SynchronizationMode.
+func (x *DiskBlockDeviceStorageDeviceAttachment) SynchronizationMode() raw.VZDiskSynchronizationMode {
+	return x.inner.SynchronizationMode()
+}
+
 func (x *DiskBlockDeviceStorageDeviceAttachment) asStorageDeviceAttachment() *raw.VZStorageDeviceAttachment { return &x.inner.VZStorageDeviceAttachment }
+
+// DiskBlockDeviceStorageDeviceAttachmentable is the interface implemented by [DiskBlockDeviceStorageDeviceAttachment], for mocking and DI.
+type DiskBlockDeviceStorageDeviceAttachmentable interface {
+	Unwrap() *raw.VZDiskBlockDeviceStorageDeviceAttachment
+	FileHandle() *foundation.NSFileHandle
+	IsReadOnly() bool
+	SynchronizationMode() raw.VZDiskSynchronizationMode
+}
+
+var _ DiskBlockDeviceStorageDeviceAttachmentable = (*DiskBlockDeviceStorageDeviceAttachment)(nil)
 

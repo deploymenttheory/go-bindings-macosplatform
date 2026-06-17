@@ -30,3 +30,23 @@ func (x *MTRDoorLockClusterDoorLockAlarmEvent) WithAlarmCode(alarmCode *foundati
 	return x
 }
 
+// AlarmCode calls the underlying AlarmCode.
+func (x *MTRDoorLockClusterDoorLockAlarmEvent) AlarmCode() *foundation.NSNumber {
+	return x.inner.AlarmCode()
+}
+
+// SetAlarmCode calls the underlying SetAlarmCode.
+func (x *MTRDoorLockClusterDoorLockAlarmEvent) SetAlarmCode(alarmCode *foundation.NSNumber) {
+	x.inner.SetAlarmCode(alarmCode)
+}
+
+// MTRDoorLockClusterDoorLockAlarmEventable is the interface implemented by [MTRDoorLockClusterDoorLockAlarmEvent], for mocking and DI.
+type MTRDoorLockClusterDoorLockAlarmEventable interface {
+	Unwrap() *raw.MTRDoorLockClusterDoorLockAlarmEvent
+	WithAlarmCode(alarmCode *foundation.NSNumber) *MTRDoorLockClusterDoorLockAlarmEvent
+	AlarmCode() *foundation.NSNumber
+	SetAlarmCode(alarmCode *foundation.NSNumber)
+}
+
+var _ MTRDoorLockClusterDoorLockAlarmEventable = (*MTRDoorLockClusterDoorLockAlarmEvent)(nil)
+

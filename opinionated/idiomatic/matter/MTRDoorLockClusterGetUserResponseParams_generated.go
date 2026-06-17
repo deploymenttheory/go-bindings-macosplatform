@@ -97,3 +97,169 @@ func (x *MTRDoorLockClusterGetUserResponseParams) WithUserUniqueId(userUniqueId 
 	return x
 }
 
+// UserIndex calls the underlying UserIndex.
+func (x *MTRDoorLockClusterGetUserResponseParams) UserIndex() *foundation.NSNumber {
+	return x.inner.UserIndex()
+}
+
+// SetUserIndex calls the underlying SetUserIndex.
+func (x *MTRDoorLockClusterGetUserResponseParams) SetUserIndex(userIndex *foundation.NSNumber) {
+	x.inner.SetUserIndex(userIndex)
+}
+
+// UserName calls the underlying UserName.
+func (x *MTRDoorLockClusterGetUserResponseParams) UserName() string {
+	_r := x.inner.UserName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetUserName calls the underlying SetUserName.
+func (x *MTRDoorLockClusterGetUserResponseParams) SetUserName(userName string) {
+	x.inner.SetUserName(foundation.NSStringStringWithUTF8String(userName))
+}
+
+// UserUniqueID calls the underlying UserUniqueID.
+func (x *MTRDoorLockClusterGetUserResponseParams) UserUniqueID() *foundation.NSNumber {
+	return x.inner.UserUniqueID()
+}
+
+// SetUserUniqueID calls the underlying SetUserUniqueID.
+func (x *MTRDoorLockClusterGetUserResponseParams) SetUserUniqueID(userUniqueID *foundation.NSNumber) {
+	x.inner.SetUserUniqueID(userUniqueID)
+}
+
+// UserStatus calls the underlying UserStatus.
+func (x *MTRDoorLockClusterGetUserResponseParams) UserStatus() *foundation.NSNumber {
+	return x.inner.UserStatus()
+}
+
+// SetUserStatus calls the underlying SetUserStatus.
+func (x *MTRDoorLockClusterGetUserResponseParams) SetUserStatus(userStatus *foundation.NSNumber) {
+	x.inner.SetUserStatus(userStatus)
+}
+
+// UserType calls the underlying UserType.
+func (x *MTRDoorLockClusterGetUserResponseParams) UserType() *foundation.NSNumber {
+	return x.inner.UserType()
+}
+
+// SetUserType calls the underlying SetUserType.
+func (x *MTRDoorLockClusterGetUserResponseParams) SetUserType(userType *foundation.NSNumber) {
+	x.inner.SetUserType(userType)
+}
+
+// CredentialRule calls the underlying CredentialRule.
+func (x *MTRDoorLockClusterGetUserResponseParams) CredentialRule() *foundation.NSNumber {
+	return x.inner.CredentialRule()
+}
+
+// SetCredentialRule calls the underlying SetCredentialRule.
+func (x *MTRDoorLockClusterGetUserResponseParams) SetCredentialRule(credentialRule *foundation.NSNumber) {
+	x.inner.SetCredentialRule(credentialRule)
+}
+
+// Credentials calls the underlying Credentials.
+func (x *MTRDoorLockClusterGetUserResponseParams) Credentials() *foundation.NSArray[objc.ID] {
+	return x.inner.Credentials()
+}
+
+// SetCredentials calls the underlying SetCredentials.
+func (x *MTRDoorLockClusterGetUserResponseParams) SetCredentials(credentials *foundation.NSArray[objc.ID]) {
+	x.inner.SetCredentials(credentials)
+}
+
+// CreatorFabricIndex calls the underlying CreatorFabricIndex.
+func (x *MTRDoorLockClusterGetUserResponseParams) CreatorFabricIndex() *foundation.NSNumber {
+	return x.inner.CreatorFabricIndex()
+}
+
+// SetCreatorFabricIndex calls the underlying SetCreatorFabricIndex.
+func (x *MTRDoorLockClusterGetUserResponseParams) SetCreatorFabricIndex(creatorFabricIndex *foundation.NSNumber) {
+	x.inner.SetCreatorFabricIndex(creatorFabricIndex)
+}
+
+// LastModifiedFabricIndex calls the underlying LastModifiedFabricIndex.
+func (x *MTRDoorLockClusterGetUserResponseParams) LastModifiedFabricIndex() *foundation.NSNumber {
+	return x.inner.LastModifiedFabricIndex()
+}
+
+// SetLastModifiedFabricIndex calls the underlying SetLastModifiedFabricIndex.
+func (x *MTRDoorLockClusterGetUserResponseParams) SetLastModifiedFabricIndex(lastModifiedFabricIndex *foundation.NSNumber) {
+	x.inner.SetLastModifiedFabricIndex(lastModifiedFabricIndex)
+}
+
+// NextUserIndex calls the underlying NextUserIndex.
+func (x *MTRDoorLockClusterGetUserResponseParams) NextUserIndex() *foundation.NSNumber {
+	return x.inner.NextUserIndex()
+}
+
+// SetNextUserIndex calls the underlying SetNextUserIndex.
+func (x *MTRDoorLockClusterGetUserResponseParams) SetNextUserIndex(nextUserIndex *foundation.NSNumber) {
+	x.inner.SetNextUserIndex(nextUserIndex)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRDoorLockClusterGetUserResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRDoorLockClusterGetUserResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// UserUniqueId calls the underlying UserUniqueId.
+func (x *MTRDoorLockClusterGetUserResponseParams) UserUniqueId() *foundation.NSNumber {
+	return x.inner.UserUniqueId()
+}
+
+// SetUserUniqueId calls the underlying SetUserUniqueId.
+func (x *MTRDoorLockClusterGetUserResponseParams) SetUserUniqueId(userUniqueId *foundation.NSNumber) {
+	x.inner.SetUserUniqueId(userUniqueId)
+}
+
+// MTRDoorLockClusterGetUserResponseParamsable is the interface implemented by [MTRDoorLockClusterGetUserResponseParams], for mocking and DI.
+type MTRDoorLockClusterGetUserResponseParamsable interface {
+	Unwrap() *raw.MTRDoorLockClusterGetUserResponseParams
+	WithUserIndex(userIndex *foundation.NSNumber) *MTRDoorLockClusterGetUserResponseParams
+	WithUserName(userName string) *MTRDoorLockClusterGetUserResponseParams
+	WithUserUniqueID(userUniqueID *foundation.NSNumber) *MTRDoorLockClusterGetUserResponseParams
+	WithUserStatus(userStatus *foundation.NSNumber) *MTRDoorLockClusterGetUserResponseParams
+	WithUserType(userType *foundation.NSNumber) *MTRDoorLockClusterGetUserResponseParams
+	WithCredentialRule(credentialRule *foundation.NSNumber) *MTRDoorLockClusterGetUserResponseParams
+	WithCreatorFabricIndex(creatorFabricIndex *foundation.NSNumber) *MTRDoorLockClusterGetUserResponseParams
+	WithLastModifiedFabricIndex(lastModifiedFabricIndex *foundation.NSNumber) *MTRDoorLockClusterGetUserResponseParams
+	WithNextUserIndex(nextUserIndex *foundation.NSNumber) *MTRDoorLockClusterGetUserResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRDoorLockClusterGetUserResponseParams
+	WithUserUniqueId(userUniqueId *foundation.NSNumber) *MTRDoorLockClusterGetUserResponseParams
+	UserIndex() *foundation.NSNumber
+	SetUserIndex(userIndex *foundation.NSNumber)
+	UserName() string
+	SetUserName(userName string)
+	UserUniqueID() *foundation.NSNumber
+	SetUserUniqueID(userUniqueID *foundation.NSNumber)
+	UserStatus() *foundation.NSNumber
+	SetUserStatus(userStatus *foundation.NSNumber)
+	UserType() *foundation.NSNumber
+	SetUserType(userType *foundation.NSNumber)
+	CredentialRule() *foundation.NSNumber
+	SetCredentialRule(credentialRule *foundation.NSNumber)
+	Credentials() *foundation.NSArray[objc.ID]
+	SetCredentials(credentials *foundation.NSArray[objc.ID])
+	CreatorFabricIndex() *foundation.NSNumber
+	SetCreatorFabricIndex(creatorFabricIndex *foundation.NSNumber)
+	LastModifiedFabricIndex() *foundation.NSNumber
+	SetLastModifiedFabricIndex(lastModifiedFabricIndex *foundation.NSNumber)
+	NextUserIndex() *foundation.NSNumber
+	SetNextUserIndex(nextUserIndex *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	UserUniqueId() *foundation.NSNumber
+	SetUserUniqueId(userUniqueId *foundation.NSNumber)
+}
+
+var _ MTRDoorLockClusterGetUserResponseParamsable = (*MTRDoorLockClusterGetUserResponseParams)(nil)
+

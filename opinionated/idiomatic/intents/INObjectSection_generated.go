@@ -7,6 +7,7 @@ package intents
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,4 +25,27 @@ func NewObjectSectionWithTitleItems(title string, items *foundation.NSArray[objc
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTitle:items:"), foundation.NSStringStringWithUTF8String(title).Ptr(), items.Ptr())
 	return &ObjectSection{inner: raw.INObjectSectionFromID[objc.ID](_id)}
 }
+
+// Title calls the underlying Title.
+func (x *ObjectSection) Title() string {
+	_r := x.inner.Title()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Items calls the underlying Items.
+func (x *ObjectSection) Items() *foundation.NSArray[objc.ID] {
+	return x.inner.Items()
+}
+
+// ObjectSectionable is the interface implemented by [ObjectSection], for mocking and DI.
+type ObjectSectionable interface {
+	Unwrap() *raw.INObjectSection[objc.ID]
+	Title() string
+	Items() *foundation.NSArray[objc.ID]
+}
+
+var _ ObjectSectionable = (*ObjectSection)(nil)
 

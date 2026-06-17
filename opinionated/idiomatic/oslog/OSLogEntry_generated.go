@@ -5,7 +5,9 @@
 package oslog
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/oslog"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +25,34 @@ func NewLogEntry() *LogEntry {
 	return &LogEntry{inner: raw.OSLogEntryFromID(_id)}
 }
 
+// ComposedMessage calls the underlying ComposedMessage.
+func (x *LogEntry) ComposedMessage() string {
+	_r := x.inner.ComposedMessage()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Date calls the underlying Date.
+func (x *LogEntry) Date() *foundation.NSDate {
+	return x.inner.Date()
+}
+
+// StoreCategory calls the underlying StoreCategory.
+func (x *LogEntry) StoreCategory() raw.OSLogEntryStoreCategory {
+	return x.inner.StoreCategory()
+}
+
 func (x *LogEntry) asLogEntry() *raw.OSLogEntry { return x.inner }
+
+// LogEntryable is the interface implemented by [LogEntry], for mocking and DI.
+type LogEntryable interface {
+	Unwrap() *raw.OSLogEntry
+	ComposedMessage() string
+	Date() *foundation.NSDate
+	StoreCategory() raw.OSLogEntryStoreCategory
+}
+
+var _ LogEntryable = (*LogEntry)(nil)
 

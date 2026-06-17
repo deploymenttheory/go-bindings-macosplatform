@@ -23,3 +23,10 @@ func NewMetadataItemFilter() *MetadataItemFilter {
 	return &MetadataItemFilter{inner: raw.AVMetadataItemFilterFromID(_id)}
 }
 
+// MetadataItemFilterable is the interface implemented by [MetadataItemFilter], for mocking and DI.
+type MetadataItemFilterable interface {
+	Unwrap() *raw.AVMetadataItemFilter
+}
+
+var _ MetadataItemFilterable = (*MetadataItemFilter)(nil)
+

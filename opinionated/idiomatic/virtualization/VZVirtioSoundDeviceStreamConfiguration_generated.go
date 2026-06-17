@@ -25,3 +25,10 @@ func NewVirtioSoundDeviceStreamConfiguration() *VirtioSoundDeviceStreamConfigura
 
 func (x *VirtioSoundDeviceStreamConfiguration) asVirtioSoundDeviceStreamConfiguration() *raw.VZVirtioSoundDeviceStreamConfiguration { return x.inner }
 
+// VirtioSoundDeviceStreamConfigurationable is the interface implemented by [VirtioSoundDeviceStreamConfiguration], for mocking and DI.
+type VirtioSoundDeviceStreamConfigurationable interface {
+	Unwrap() *raw.VZVirtioSoundDeviceStreamConfiguration
+}
+
+var _ VirtioSoundDeviceStreamConfigurationable = (*VirtioSoundDeviceStreamConfiguration)(nil)
+

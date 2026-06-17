@@ -25,3 +25,10 @@ func NewSmartCardTokenDriver() *SmartCardTokenDriver {
 
 func (x *SmartCardTokenDriver) asTokenDriver() *raw.TKTokenDriver { return &x.inner.TKTokenDriver }
 
+// SmartCardTokenDriverable is the interface implemented by [SmartCardTokenDriver], for mocking and DI.
+type SmartCardTokenDriverable interface {
+	Unwrap() *raw.TKSmartCardTokenDriver
+}
+
+var _ SmartCardTokenDriverable = (*SmartCardTokenDriver)(nil)
+

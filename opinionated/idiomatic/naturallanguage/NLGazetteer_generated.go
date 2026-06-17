@@ -53,3 +53,36 @@ func NewGazetteerWithDictionaryLanguageError(dictionary *foundation.NSDictionary
 	return &Gazetteer{inner: raw.NLGazetteerFromID(_id)}, nil
 }
 
+// LabelForString calls the underlying LabelForString.
+func (x *Gazetteer) LabelForString(string_ string) string {
+	_r := x.inner.LabelForString(foundation.NSStringStringWithUTF8String(string_))
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Language calls the underlying Language.
+func (x *Gazetteer) Language() string {
+	_r := x.inner.Language()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Data calls the underlying Data.
+func (x *Gazetteer) Data() *foundation.NSData {
+	return x.inner.Data()
+}
+
+// Gazetteerable is the interface implemented by [Gazetteer], for mocking and DI.
+type Gazetteerable interface {
+	Unwrap() *raw.NLGazetteer
+	LabelForString(string_ string) string
+	Language() string
+	Data() *foundation.NSData
+}
+
+var _ Gazetteerable = (*Gazetteer)(nil)
+

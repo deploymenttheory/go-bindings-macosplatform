@@ -42,3 +42,49 @@ func (x *MTRKeypadInputClusterSendKeyParams) WithServerSideProcessingTimeout(ser
 	return x
 }
 
+// KeyCode calls the underlying KeyCode.
+func (x *MTRKeypadInputClusterSendKeyParams) KeyCode() *foundation.NSNumber {
+	return x.inner.KeyCode()
+}
+
+// SetKeyCode calls the underlying SetKeyCode.
+func (x *MTRKeypadInputClusterSendKeyParams) SetKeyCode(keyCode *foundation.NSNumber) {
+	x.inner.SetKeyCode(keyCode)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRKeypadInputClusterSendKeyParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRKeypadInputClusterSendKeyParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRKeypadInputClusterSendKeyParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRKeypadInputClusterSendKeyParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRKeypadInputClusterSendKeyParamsable is the interface implemented by [MTRKeypadInputClusterSendKeyParams], for mocking and DI.
+type MTRKeypadInputClusterSendKeyParamsable interface {
+	Unwrap() *raw.MTRKeypadInputClusterSendKeyParams
+	WithKeyCode(keyCode *foundation.NSNumber) *MTRKeypadInputClusterSendKeyParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRKeypadInputClusterSendKeyParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRKeypadInputClusterSendKeyParams
+	KeyCode() *foundation.NSNumber
+	SetKeyCode(keyCode *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRKeypadInputClusterSendKeyParamsable = (*MTRKeypadInputClusterSendKeyParams)(nil)
+

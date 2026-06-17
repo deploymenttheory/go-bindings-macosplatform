@@ -7,6 +7,7 @@ package modelio
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -26,17 +27,53 @@ func NewPackedJointAnimationWithNameJointPaths(name string, jointPaths *foundati
 }
 
 // JointPaths returns the collection as a Go slice.
-func (x *PackedJointAnimation) JointPaths() []*foundation.NSString {
+func (x *PackedJointAnimation) JointPaths() []string {
 	arr := x.inner.JointPaths()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// Translations calls the underlying Translations.
+func (x *PackedJointAnimation) Translations() *AnimatedVector3Array {
+	_r := x.inner.Translations()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &AnimatedVector3Array{inner: _r}
+}
+
+// Rotations calls the underlying Rotations.
+func (x *PackedJointAnimation) Rotations() *AnimatedQuaternionArray {
+	_r := x.inner.Rotations()
+	if _r == nil {
+		return nil
+	}
+	return &AnimatedQuaternionArray{inner: _r}
+}
+
+// Scales calls the underlying Scales.
+func (x *PackedJointAnimation) Scales() *AnimatedVector3Array {
+	_r := x.inner.Scales()
+	if _r == nil {
+		return nil
+	}
+	return &AnimatedVector3Array{inner: _r}
 }
 
 func (x *PackedJointAnimation) asObject() *raw.MDLObject { return &x.inner.MDLObject }
+
+// PackedJointAnimationable is the interface implemented by [PackedJointAnimation], for mocking and DI.
+type PackedJointAnimationable interface {
+	Unwrap() *raw.MDLPackedJointAnimation
+	JointPaths() []string
+	Translations() *AnimatedVector3Array
+	Rotations() *AnimatedQuaternionArray
+	Scales() *AnimatedVector3Array
+}
+
+var _ PackedJointAnimationable = (*PackedJointAnimation)(nil)
 

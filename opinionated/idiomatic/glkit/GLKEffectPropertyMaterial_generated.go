@@ -7,6 +7,7 @@ package glkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/glkit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // EffectPropertyMaterial wraps [raw.GLKEffectPropertyMaterial] with a fluent Go API.
@@ -29,5 +30,73 @@ func (x *EffectPropertyMaterial) WithShininess(shininess float32) *EffectPropert
 	return x
 }
 
+// AmbientColor calls the underlying AmbientColor.
+func (x *EffectPropertyMaterial) AmbientColor() unsafe.Pointer {
+	return x.inner.AmbientColor()
+}
+
+// SetAmbientColor calls the underlying SetAmbientColor.
+func (x *EffectPropertyMaterial) SetAmbientColor(ambientColor unsafe.Pointer) {
+	x.inner.SetAmbientColor(ambientColor)
+}
+
+// DiffuseColor calls the underlying DiffuseColor.
+func (x *EffectPropertyMaterial) DiffuseColor() unsafe.Pointer {
+	return x.inner.DiffuseColor()
+}
+
+// SetDiffuseColor calls the underlying SetDiffuseColor.
+func (x *EffectPropertyMaterial) SetDiffuseColor(diffuseColor unsafe.Pointer) {
+	x.inner.SetDiffuseColor(diffuseColor)
+}
+
+// SpecularColor calls the underlying SpecularColor.
+func (x *EffectPropertyMaterial) SpecularColor() unsafe.Pointer {
+	return x.inner.SpecularColor()
+}
+
+// SetSpecularColor calls the underlying SetSpecularColor.
+func (x *EffectPropertyMaterial) SetSpecularColor(specularColor unsafe.Pointer) {
+	x.inner.SetSpecularColor(specularColor)
+}
+
+// EmissiveColor calls the underlying EmissiveColor.
+func (x *EffectPropertyMaterial) EmissiveColor() unsafe.Pointer {
+	return x.inner.EmissiveColor()
+}
+
+// SetEmissiveColor calls the underlying SetEmissiveColor.
+func (x *EffectPropertyMaterial) SetEmissiveColor(emissiveColor unsafe.Pointer) {
+	x.inner.SetEmissiveColor(emissiveColor)
+}
+
+// Shininess calls the underlying Shininess.
+func (x *EffectPropertyMaterial) Shininess() float32 {
+	return x.inner.Shininess()
+}
+
+// SetShininess calls the underlying SetShininess.
+func (x *EffectPropertyMaterial) SetShininess(shininess float32) {
+	x.inner.SetShininess(shininess)
+}
+
 func (x *EffectPropertyMaterial) asEffectProperty() *raw.GLKEffectProperty { return &x.inner.GLKEffectProperty }
+
+// EffectPropertyMaterialable is the interface implemented by [EffectPropertyMaterial], for mocking and DI.
+type EffectPropertyMaterialable interface {
+	Unwrap() *raw.GLKEffectPropertyMaterial
+	WithShininess(shininess float32) *EffectPropertyMaterial
+	AmbientColor() unsafe.Pointer
+	SetAmbientColor(ambientColor unsafe.Pointer)
+	DiffuseColor() unsafe.Pointer
+	SetDiffuseColor(diffuseColor unsafe.Pointer)
+	SpecularColor() unsafe.Pointer
+	SetSpecularColor(specularColor unsafe.Pointer)
+	EmissiveColor() unsafe.Pointer
+	SetEmissiveColor(emissiveColor unsafe.Pointer)
+	Shininess() float32
+	SetShininess(shininess float32)
+}
+
+var _ EffectPropertyMaterialable = (*EffectPropertyMaterial)(nil)
 

@@ -25,3 +25,10 @@ func NewDirectorySharingDevice() *DirectorySharingDevice {
 
 func (x *DirectorySharingDevice) asDirectorySharingDevice() *raw.VZDirectorySharingDevice { return x.inner }
 
+// DirectorySharingDeviceable is the interface implemented by [DirectorySharingDevice], for mocking and DI.
+type DirectorySharingDeviceable interface {
+	Unwrap() *raw.VZDirectorySharingDevice
+}
+
+var _ DirectorySharingDeviceable = (*DirectorySharingDevice)(nil)
+

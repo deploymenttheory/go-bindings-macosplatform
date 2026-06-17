@@ -7,6 +7,7 @@ package scenekit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -69,17 +70,40 @@ func (x *Morpher) WithUnifiesNormals(unifiesNormals bool) *Morpher {
 	return x
 }
 
+// SetWeightForTargetAtIndex calls the underlying SetWeightForTargetAtIndex.
+func (x *Morpher) SetWeightForTargetAtIndex(weight float64, targetIndex uint) {
+	x.inner.SetWeightForTargetAtIndex(weight, targetIndex)
+}
+
+// WeightForTargetAtIndex calls the underlying WeightForTargetAtIndex.
+func (x *Morpher) WeightForTargetAtIndex(targetIndex uint) float64 {
+	return x.inner.WeightForTargetAtIndex(targetIndex)
+}
+
+// SetWeightForTargetNamed calls the underlying SetWeightForTargetNamed.
+func (x *Morpher) SetWeightForTargetNamed(weight float64, targetName string) {
+	x.inner.SetWeightForTargetNamed(weight, foundation.NSStringStringWithUTF8String(targetName))
+}
+
+// WeightForTargetNamed calls the underlying WeightForTargetNamed.
+func (x *Morpher) WeightForTargetNamed(targetName string) float64 {
+	return x.inner.WeightForTargetNamed(foundation.NSStringStringWithUTF8String(targetName))
+}
+
 // Targets returns the collection as a Go slice.
 func (x *Morpher) Targets() []*raw.SCNGeometry {
 	arr := x.inner.Targets()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.SCNGeometry, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SCNGeometry {
+		return raw.SCNGeometryFromID(purego.Retain(_id))
+	})
+}
+
+// SetTargets calls the underlying SetTargets.
+func (x *Morpher) SetTargets(targets *foundation.NSArray[*raw.SCNGeometry]) {
+	x.inner.SetTargets(targets)
 }
 
 // Weights returns the collection as a Go slice.
@@ -88,10 +112,56 @@ func (x *Morpher) Weights() []*foundation.NSNumber {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
 }
+
+// SetWeights calls the underlying SetWeights.
+func (x *Morpher) SetWeights(weights *foundation.NSArray[*foundation.NSNumber]) {
+	x.inner.SetWeights(weights)
+}
+
+// CalculationMode calls the underlying CalculationMode.
+func (x *Morpher) CalculationMode() raw.SCNMorpherCalculationMode {
+	return x.inner.CalculationMode()
+}
+
+// SetCalculationMode calls the underlying SetCalculationMode.
+func (x *Morpher) SetCalculationMode(calculationMode raw.SCNMorpherCalculationMode) {
+	x.inner.SetCalculationMode(calculationMode)
+}
+
+// UnifiesNormals calls the underlying UnifiesNormals.
+func (x *Morpher) UnifiesNormals() bool {
+	return x.inner.UnifiesNormals()
+}
+
+// SetUnifiesNormals calls the underlying SetUnifiesNormals.
+func (x *Morpher) SetUnifiesNormals(unifiesNormals bool) {
+	x.inner.SetUnifiesNormals(unifiesNormals)
+}
+
+// Morpherable is the interface implemented by [Morpher], for mocking and DI.
+type Morpherable interface {
+	Unwrap() *raw.SCNMorpher
+	WithTargets(items ...GeometryProvider) *Morpher
+	WithWeights(items ...*foundation.NSNumber) *Morpher
+	WithCalculationMode(calculationMode raw.SCNMorpherCalculationMode) *Morpher
+	WithUnifiesNormals(unifiesNormals bool) *Morpher
+	SetWeightForTargetAtIndex(weight float64, targetIndex uint)
+	WeightForTargetAtIndex(targetIndex uint) float64
+	SetWeightForTargetNamed(weight float64, targetName string)
+	WeightForTargetNamed(targetName string) float64
+	Targets() []*raw.SCNGeometry
+	SetTargets(targets *foundation.NSArray[*raw.SCNGeometry])
+	Weights() []*foundation.NSNumber
+	SetWeights(weights *foundation.NSArray[*foundation.NSNumber])
+	CalculationMode() raw.SCNMorpherCalculationMode
+	SetCalculationMode(calculationMode raw.SCNMorpherCalculationMode)
+	UnifiesNormals() bool
+	SetUnifiesNormals(unifiesNormals bool)
+}
+
+var _ Morpherable = (*Morpher)(nil)
 

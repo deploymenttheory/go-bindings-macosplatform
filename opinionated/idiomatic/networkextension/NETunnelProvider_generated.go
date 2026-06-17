@@ -6,6 +6,7 @@ package networkextension
 
 import (
 	"context"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
@@ -32,15 +33,36 @@ func (x *NETunnelProvider) WithReasserting(reasserting bool) *NETunnelProvider {
 	return x
 }
 
+// HandleAppMessage blocks until the operation completes or ctx is cancelled.
+func (x *NETunnelProvider) HandleAppMessage(ctx context.Context, messageData *foundation.NSData) (*foundation.NSData, error) {
+	type _result struct {
+		val *foundation.NSData
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.HandleAppMessageCompletionHandler(messageData, func(_p0 *foundation.NSData) {
+		var _o _result
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSData
+		return _zero, ctx.Err()
+	}
+}
+
 // SetTunnelNetworkSettings blocks until the operation completes or ctx is cancelled.
 func (x *NETunnelProvider) SetTunnelNetworkSettings(ctx context.Context, tunnelNetworkSettings *raw.NETunnelNetworkSettings) error {
 	_ch := make(chan error, 1)
 	x.inner.SetTunnelNetworkSettingsCompletionHandler(tunnelNetworkSettings, func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -50,20 +72,57 @@ func (x *NETunnelProvider) SetTunnelNetworkSettings(ctx context.Context, tunnelN
 	}
 }
 
+// ProtocolConfiguration calls the underlying ProtocolConfiguration.
+func (x *NETunnelProvider) ProtocolConfiguration() *NEVPNProtocol {
+	_r := x.inner.ProtocolConfiguration()
+	if _r == nil {
+		return nil
+	}
+	return &NEVPNProtocol{inner: _r}
+}
+
 // AppRules returns the collection as a Go slice.
 func (x *NETunnelProvider) AppRules() []*raw.NEAppRule {
 	arr := x.inner.AppRules()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NEAppRule, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NEAppRule {
+		return raw.NEAppRuleFromID(purego.Retain(_id))
+	})
+}
+
+// RoutingMethod calls the underlying RoutingMethod.
+func (x *NETunnelProvider) RoutingMethod() raw.NETunnelProviderRoutingMethod {
+	return x.inner.RoutingMethod()
+}
+
+// Reasserting calls the underlying Reasserting.
+func (x *NETunnelProvider) Reasserting() bool {
+	return x.inner.Reasserting()
+}
+
+// SetReasserting calls the underlying SetReasserting.
+func (x *NETunnelProvider) SetReasserting(reasserting bool) {
+	x.inner.SetReasserting(reasserting)
 }
 
 func (x *NETunnelProvider) asNETunnelProvider() *raw.NETunnelProvider { return x.inner }
 
 func (x *NETunnelProvider) asNEProvider() *raw.NEProvider { return &x.inner.NEProvider }
+
+// NETunnelProviderable is the interface implemented by [NETunnelProvider], for mocking and DI.
+type NETunnelProviderable interface {
+	Unwrap() *raw.NETunnelProvider
+	WithReasserting(reasserting bool) *NETunnelProvider
+	HandleAppMessage(ctx context.Context, messageData *foundation.NSData) (*foundation.NSData, error)
+	SetTunnelNetworkSettings(ctx context.Context, tunnelNetworkSettings *raw.NETunnelNetworkSettings) error
+	ProtocolConfiguration() *NEVPNProtocol
+	AppRules() []*raw.NEAppRule
+	RoutingMethod() raw.NETunnelProviderRoutingMethod
+	Reasserting() bool
+	SetReasserting(reasserting bool)
+}
+
+var _ NETunnelProviderable = (*NETunnelProvider)(nil)
 

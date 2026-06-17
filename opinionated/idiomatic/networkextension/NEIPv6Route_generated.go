@@ -7,6 +7,7 @@ package networkextension
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -30,4 +31,44 @@ func (x *NEIPv6Route) WithGatewayAddress(gatewayAddress string) *NEIPv6Route {
 	x.inner.SetGatewayAddress(foundation.NSStringStringWithUTF8String(gatewayAddress))
 	return x
 }
+
+// DestinationAddress calls the underlying DestinationAddress.
+func (x *NEIPv6Route) DestinationAddress() string {
+	_r := x.inner.DestinationAddress()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// DestinationNetworkPrefixLength calls the underlying DestinationNetworkPrefixLength.
+func (x *NEIPv6Route) DestinationNetworkPrefixLength() *foundation.NSNumber {
+	return x.inner.DestinationNetworkPrefixLength()
+}
+
+// GatewayAddress calls the underlying GatewayAddress.
+func (x *NEIPv6Route) GatewayAddress() string {
+	_r := x.inner.GatewayAddress()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetGatewayAddress calls the underlying SetGatewayAddress.
+func (x *NEIPv6Route) SetGatewayAddress(gatewayAddress string) {
+	x.inner.SetGatewayAddress(foundation.NSStringStringWithUTF8String(gatewayAddress))
+}
+
+// NEIPv6Routeable is the interface implemented by [NEIPv6Route], for mocking and DI.
+type NEIPv6Routeable interface {
+	Unwrap() *raw.NEIPv6Route
+	WithGatewayAddress(gatewayAddress string) *NEIPv6Route
+	DestinationAddress() string
+	DestinationNetworkPrefixLength() *foundation.NSNumber
+	GatewayAddress() string
+	SetGatewayAddress(gatewayAddress string)
+}
+
+var _ NEIPv6Routeable = (*NEIPv6Route)(nil)
 

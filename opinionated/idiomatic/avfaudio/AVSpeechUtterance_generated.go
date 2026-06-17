@@ -7,6 +7,7 @@ package avfaudio
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -80,4 +81,122 @@ func (x *SpeechUtterance) WithPostUtteranceDelay(postUtteranceDelay float64) *Sp
 	x.inner.SetPostUtteranceDelay(postUtteranceDelay)
 	return x
 }
+
+// Voice calls the underlying Voice.
+func (x *SpeechUtterance) Voice() *SpeechSynthesisVoice {
+	_r := x.inner.Voice()
+	if _r == nil {
+		return nil
+	}
+	return &SpeechSynthesisVoice{inner: _r}
+}
+
+// SetVoice calls the underlying SetVoice.
+func (x *SpeechUtterance) SetVoice(voice *raw.AVSpeechSynthesisVoice) {
+	x.inner.SetVoice(voice)
+}
+
+// SpeechString calls the underlying SpeechString.
+func (x *SpeechUtterance) SpeechString() string {
+	_r := x.inner.SpeechString()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// AttributedSpeechString calls the underlying AttributedSpeechString.
+func (x *SpeechUtterance) AttributedSpeechString() *foundation.NSAttributedString {
+	return x.inner.AttributedSpeechString()
+}
+
+// Rate calls the underlying Rate.
+func (x *SpeechUtterance) Rate() float32 {
+	return x.inner.Rate()
+}
+
+// SetRate calls the underlying SetRate.
+func (x *SpeechUtterance) SetRate(rate float32) {
+	x.inner.SetRate(rate)
+}
+
+// PitchMultiplier calls the underlying PitchMultiplier.
+func (x *SpeechUtterance) PitchMultiplier() float32 {
+	return x.inner.PitchMultiplier()
+}
+
+// SetPitchMultiplier calls the underlying SetPitchMultiplier.
+func (x *SpeechUtterance) SetPitchMultiplier(pitchMultiplier float32) {
+	x.inner.SetPitchMultiplier(pitchMultiplier)
+}
+
+// Volume calls the underlying Volume.
+func (x *SpeechUtterance) Volume() float32 {
+	return x.inner.Volume()
+}
+
+// SetVolume calls the underlying SetVolume.
+func (x *SpeechUtterance) SetVolume(volume float32) {
+	x.inner.SetVolume(volume)
+}
+
+// PrefersAssistiveTechnologySettings calls the underlying PrefersAssistiveTechnologySettings.
+func (x *SpeechUtterance) PrefersAssistiveTechnologySettings() bool {
+	return x.inner.PrefersAssistiveTechnologySettings()
+}
+
+// SetPrefersAssistiveTechnologySettings calls the underlying SetPrefersAssistiveTechnologySettings.
+func (x *SpeechUtterance) SetPrefersAssistiveTechnologySettings(prefersAssistiveTechnologySettings bool) {
+	x.inner.SetPrefersAssistiveTechnologySettings(prefersAssistiveTechnologySettings)
+}
+
+// PreUtteranceDelay calls the underlying PreUtteranceDelay.
+func (x *SpeechUtterance) PreUtteranceDelay() float64 {
+	return x.inner.PreUtteranceDelay()
+}
+
+// SetPreUtteranceDelay calls the underlying SetPreUtteranceDelay.
+func (x *SpeechUtterance) SetPreUtteranceDelay(preUtteranceDelay float64) {
+	x.inner.SetPreUtteranceDelay(preUtteranceDelay)
+}
+
+// PostUtteranceDelay calls the underlying PostUtteranceDelay.
+func (x *SpeechUtterance) PostUtteranceDelay() float64 {
+	return x.inner.PostUtteranceDelay()
+}
+
+// SetPostUtteranceDelay calls the underlying SetPostUtteranceDelay.
+func (x *SpeechUtterance) SetPostUtteranceDelay(postUtteranceDelay float64) {
+	x.inner.SetPostUtteranceDelay(postUtteranceDelay)
+}
+
+// SpeechUtteranceable is the interface implemented by [SpeechUtterance], for mocking and DI.
+type SpeechUtteranceable interface {
+	Unwrap() *raw.AVSpeechUtterance
+	WithVoice(voice *raw.AVSpeechSynthesisVoice) *SpeechUtterance
+	WithRate(rate float32) *SpeechUtterance
+	WithPitchMultiplier(pitchMultiplier float32) *SpeechUtterance
+	WithVolume(volume float32) *SpeechUtterance
+	WithPrefersAssistiveTechnologySettings(prefersAssistiveTechnologySettings bool) *SpeechUtterance
+	WithPreUtteranceDelay(preUtteranceDelay float64) *SpeechUtterance
+	WithPostUtteranceDelay(postUtteranceDelay float64) *SpeechUtterance
+	Voice() *SpeechSynthesisVoice
+	SetVoice(voice *raw.AVSpeechSynthesisVoice)
+	SpeechString() string
+	AttributedSpeechString() *foundation.NSAttributedString
+	Rate() float32
+	SetRate(rate float32)
+	PitchMultiplier() float32
+	SetPitchMultiplier(pitchMultiplier float32)
+	Volume() float32
+	SetVolume(volume float32)
+	PrefersAssistiveTechnologySettings() bool
+	SetPrefersAssistiveTechnologySettings(prefersAssistiveTechnologySettings bool)
+	PreUtteranceDelay() float64
+	SetPreUtteranceDelay(preUtteranceDelay float64)
+	PostUtteranceDelay() float64
+	SetPostUtteranceDelay(postUtteranceDelay float64)
+}
+
+var _ SpeechUtteranceable = (*SpeechUtterance)(nil)
 

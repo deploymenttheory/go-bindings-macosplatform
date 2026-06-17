@@ -5,6 +5,7 @@
 package sharedwithyou
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/sharedwithyou"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,5 +24,24 @@ func NewHighlight() *Highlight {
 	return &Highlight{inner: raw.SWHighlightFromID(_id)}
 }
 
+// Identifier calls the underlying Identifier.
+func (x *Highlight) Identifier() objc.ID {
+	return x.inner.Identifier()
+}
+
+// URL calls the underlying URL.
+func (x *Highlight) URL() *foundation.NSURL {
+	return x.inner.URL()
+}
+
 func (x *Highlight) asHighlight() *raw.SWHighlight { return x.inner }
+
+// Highlightable is the interface implemented by [Highlight], for mocking and DI.
+type Highlightable interface {
+	Unwrap() *raw.SWHighlight
+	Identifier() objc.ID
+	URL() *foundation.NSURL
+}
+
+var _ Highlightable = (*Highlight)(nil)
 

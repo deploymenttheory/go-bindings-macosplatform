@@ -34,7 +34,26 @@ func NewAmbientMixerDefinitionWithChannelLayoutOrientation(layout *avfaudio.AVAu
 	return &AmbientMixerDefinition{inner: raw.PHASEAmbientMixerDefinitionFromID(_id)}
 }
 
+// Orientation calls the underlying Orientation.
+func (x *AmbientMixerDefinition) Orientation() unsafe.Pointer {
+	return x.inner.Orientation()
+}
+
+// InputChannelLayout calls the underlying InputChannelLayout.
+func (x *AmbientMixerDefinition) InputChannelLayout() *avfaudio.AVAudioChannelLayout {
+	return x.inner.InputChannelLayout()
+}
+
 func (x *AmbientMixerDefinition) asMixerDefinition() *raw.PHASEMixerDefinition { return &x.inner.PHASEMixerDefinition }
 
 func (x *AmbientMixerDefinition) asDefinition() *raw.PHASEDefinition { return &x.inner.PHASEMixerDefinition.PHASEDefinition }
+
+// AmbientMixerDefinitionable is the interface implemented by [AmbientMixerDefinition], for mocking and DI.
+type AmbientMixerDefinitionable interface {
+	Unwrap() *raw.PHASEAmbientMixerDefinition
+	Orientation() unsafe.Pointer
+	InputChannelLayout() *avfaudio.AVAudioChannelLayout
+}
+
+var _ AmbientMixerDefinitionable = (*AmbientMixerDefinition)(nil)
 

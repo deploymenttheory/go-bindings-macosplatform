@@ -5,6 +5,7 @@
 package photos
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +23,77 @@ func NewFetchResultChangeDetails() *FetchResultChangeDetails {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHFetchResultChangeDetails")), objc.RegisterName("new"))
 	return &FetchResultChangeDetails{inner: raw.PHFetchResultChangeDetailsFromID[objc.ID](_id)}
 }
+
+// EnumerateMovesWith calls the underlying EnumerateMovesWith.
+func (x *FetchResultChangeDetails) EnumerateMovesWith(handler func(uint, uint)) {
+	x.inner.EnumerateMovesWith(handler)
+}
+
+// FetchResultBeforeChanges calls the underlying FetchResultBeforeChanges.
+func (x *FetchResultChangeDetails) FetchResultBeforeChanges() *raw.PHFetchResult[objc.ID] {
+	return x.inner.FetchResultBeforeChanges()
+}
+
+// FetchResultAfterChanges calls the underlying FetchResultAfterChanges.
+func (x *FetchResultChangeDetails) FetchResultAfterChanges() *raw.PHFetchResult[objc.ID] {
+	return x.inner.FetchResultAfterChanges()
+}
+
+// HasIncrementalChanges calls the underlying HasIncrementalChanges.
+func (x *FetchResultChangeDetails) HasIncrementalChanges() bool {
+	return x.inner.HasIncrementalChanges()
+}
+
+// RemovedIndexes calls the underlying RemovedIndexes.
+func (x *FetchResultChangeDetails) RemovedIndexes() *foundation.NSIndexSet {
+	return x.inner.RemovedIndexes()
+}
+
+// RemovedObjects calls the underlying RemovedObjects.
+func (x *FetchResultChangeDetails) RemovedObjects() *foundation.NSArray[objc.ID] {
+	return x.inner.RemovedObjects()
+}
+
+// InsertedIndexes calls the underlying InsertedIndexes.
+func (x *FetchResultChangeDetails) InsertedIndexes() *foundation.NSIndexSet {
+	return x.inner.InsertedIndexes()
+}
+
+// InsertedObjects calls the underlying InsertedObjects.
+func (x *FetchResultChangeDetails) InsertedObjects() *foundation.NSArray[objc.ID] {
+	return x.inner.InsertedObjects()
+}
+
+// ChangedIndexes calls the underlying ChangedIndexes.
+func (x *FetchResultChangeDetails) ChangedIndexes() *foundation.NSIndexSet {
+	return x.inner.ChangedIndexes()
+}
+
+// ChangedObjects calls the underlying ChangedObjects.
+func (x *FetchResultChangeDetails) ChangedObjects() *foundation.NSArray[objc.ID] {
+	return x.inner.ChangedObjects()
+}
+
+// HasMoves calls the underlying HasMoves.
+func (x *FetchResultChangeDetails) HasMoves() bool {
+	return x.inner.HasMoves()
+}
+
+// FetchResultChangeDetailsable is the interface implemented by [FetchResultChangeDetails], for mocking and DI.
+type FetchResultChangeDetailsable interface {
+	Unwrap() *raw.PHFetchResultChangeDetails[objc.ID]
+	EnumerateMovesWith(handler func(uint, uint))
+	FetchResultBeforeChanges() *raw.PHFetchResult[objc.ID]
+	FetchResultAfterChanges() *raw.PHFetchResult[objc.ID]
+	HasIncrementalChanges() bool
+	RemovedIndexes() *foundation.NSIndexSet
+	RemovedObjects() *foundation.NSArray[objc.ID]
+	InsertedIndexes() *foundation.NSIndexSet
+	InsertedObjects() *foundation.NSArray[objc.ID]
+	ChangedIndexes() *foundation.NSIndexSet
+	ChangedObjects() *foundation.NSArray[objc.ID]
+	HasMoves() bool
+}
+
+var _ FetchResultChangeDetailsable = (*FetchResultChangeDetails)(nil)
 

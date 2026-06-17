@@ -31,3 +31,23 @@ func (x *BarcodeEventMetadataResponse) WithPaymentInformation(paymentInformation
 	return x
 }
 
+// PaymentInformation calls the underlying PaymentInformation.
+func (x *BarcodeEventMetadataResponse) PaymentInformation() *foundation.NSData {
+	return x.inner.PaymentInformation()
+}
+
+// SetPaymentInformation calls the underlying SetPaymentInformation.
+func (x *BarcodeEventMetadataResponse) SetPaymentInformation(paymentInformation *foundation.NSData) {
+	x.inner.SetPaymentInformation(paymentInformation)
+}
+
+// BarcodeEventMetadataResponseable is the interface implemented by [BarcodeEventMetadataResponse], for mocking and DI.
+type BarcodeEventMetadataResponseable interface {
+	Unwrap() *raw.PKBarcodeEventMetadataResponse
+	WithPaymentInformation(paymentInformation *foundation.NSData) *BarcodeEventMetadataResponse
+	PaymentInformation() *foundation.NSData
+	SetPaymentInformation(paymentInformation *foundation.NSData)
+}
+
+var _ BarcodeEventMetadataResponseable = (*BarcodeEventMetadataResponse)(nil)
+

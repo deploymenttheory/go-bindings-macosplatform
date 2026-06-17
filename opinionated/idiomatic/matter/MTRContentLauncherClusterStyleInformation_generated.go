@@ -25,3 +25,10 @@ func NewMTRContentLauncherClusterStyleInformation() *MTRContentLauncherClusterSt
 
 func (x *MTRContentLauncherClusterStyleInformation) asMTRContentLauncherClusterStyleInformationStruct() *raw.MTRContentLauncherClusterStyleInformationStruct { return &x.inner.MTRContentLauncherClusterStyleInformationStruct }
 
+// MTRContentLauncherClusterStyleInformationable is the interface implemented by [MTRContentLauncherClusterStyleInformation], for mocking and DI.
+type MTRContentLauncherClusterStyleInformationable interface {
+	Unwrap() *raw.MTRContentLauncherClusterStyleInformation
+}
+
+var _ MTRContentLauncherClusterStyleInformationable = (*MTRContentLauncherClusterStyleInformation)(nil)
+

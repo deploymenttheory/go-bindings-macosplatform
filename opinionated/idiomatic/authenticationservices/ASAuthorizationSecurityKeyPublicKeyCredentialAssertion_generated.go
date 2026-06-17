@@ -23,3 +23,26 @@ func NewAuthorizationSecurityKeyPublicKeyCredentialAssertion() *AuthorizationSec
 	return &AuthorizationSecurityKeyPublicKeyCredentialAssertion{inner: raw.ASAuthorizationSecurityKeyPublicKeyCredentialAssertionFromID(_id)}
 }
 
+// AppID calls the underlying AppID.
+func (x *AuthorizationSecurityKeyPublicKeyCredentialAssertion) AppID() bool {
+	return x.inner.AppID()
+}
+
+// Prf calls the underlying Prf.
+func (x *AuthorizationSecurityKeyPublicKeyCredentialAssertion) Prf() *AuthorizationPublicKeyCredentialPRFAssertionOutput {
+	_r := x.inner.Prf()
+	if _r == nil {
+		return nil
+	}
+	return &AuthorizationPublicKeyCredentialPRFAssertionOutput{inner: _r}
+}
+
+// AuthorizationSecurityKeyPublicKeyCredentialAssertionable is the interface implemented by [AuthorizationSecurityKeyPublicKeyCredentialAssertion], for mocking and DI.
+type AuthorizationSecurityKeyPublicKeyCredentialAssertionable interface {
+	Unwrap() *raw.ASAuthorizationSecurityKeyPublicKeyCredentialAssertion
+	AppID() bool
+	Prf() *AuthorizationPublicKeyCredentialPRFAssertionOutput
+}
+
+var _ AuthorizationSecurityKeyPublicKeyCredentialAssertionable = (*AuthorizationSecurityKeyPublicKeyCredentialAssertion)(nil)
+

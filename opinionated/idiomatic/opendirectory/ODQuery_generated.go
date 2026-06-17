@@ -43,3 +43,60 @@ func (x *Query) WithOperationQueue(operationQueue *foundation.NSOperationQueue) 
 	return x
 }
 
+// ResultsAllowingPartialError calls the underlying ResultsAllowingPartialError.
+func (x *Query) ResultsAllowingPartialError(inAllowPartialResults bool) (*foundation.NSArray[objc.ID], error) {
+	return x.inner.ResultsAllowingPartialError(inAllowPartialResults)
+}
+
+// ScheduleInRunLoopForMode calls the underlying ScheduleInRunLoopForMode.
+func (x *Query) ScheduleInRunLoopForMode(inRunLoop *foundation.NSRunLoop, inMode string) {
+	x.inner.ScheduleInRunLoopForMode(inRunLoop, foundation.NSStringStringWithUTF8String(inMode))
+}
+
+// RemoveFromRunLoopForMode calls the underlying RemoveFromRunLoopForMode.
+func (x *Query) RemoveFromRunLoopForMode(inRunLoop *foundation.NSRunLoop, inMode string) {
+	x.inner.RemoveFromRunLoopForMode(inRunLoop, foundation.NSStringStringWithUTF8String(inMode))
+}
+
+// Synchronize calls the underlying Synchronize.
+func (x *Query) Synchronize() {
+	x.inner.Synchronize()
+}
+
+// Delegate calls the underlying Delegate.
+func (x *Query) Delegate() raw.ODQueryDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *Query) SetDelegate(delegate raw.ODQueryDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// OperationQueue calls the underlying OperationQueue.
+func (x *Query) OperationQueue() *foundation.NSOperationQueue {
+	return x.inner.OperationQueue()
+}
+
+// SetOperationQueue calls the underlying SetOperationQueue.
+func (x *Query) SetOperationQueue(operationQueue *foundation.NSOperationQueue) {
+	x.inner.SetOperationQueue(operationQueue)
+}
+
+// Queryable is the interface implemented by [Query], for mocking and DI.
+type Queryable interface {
+	Unwrap() *raw.ODQuery
+	WithDelegate(delegate raw.ODQueryDelegate) *Query
+	WithOperationQueue(operationQueue *foundation.NSOperationQueue) *Query
+	ResultsAllowingPartialError(inAllowPartialResults bool) (*foundation.NSArray[objc.ID], error)
+	ScheduleInRunLoopForMode(inRunLoop *foundation.NSRunLoop, inMode string)
+	RemoveFromRunLoopForMode(inRunLoop *foundation.NSRunLoop, inMode string)
+	Synchronize()
+	Delegate() raw.ODQueryDelegate
+	SetDelegate(delegate raw.ODQueryDelegate)
+	OperationQueue() *foundation.NSOperationQueue
+	SetOperationQueue(operationQueue *foundation.NSOperationQueue)
+}
+
+var _ Queryable = (*Query)(nil)
+

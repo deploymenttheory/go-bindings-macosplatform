@@ -25,5 +25,30 @@ func NewPlayerItemMetadataCollectorWithIdentifiersClassifyingLabels(identifiers 
 	return &PlayerItemMetadataCollector{inner: raw.AVPlayerItemMetadataCollectorFromID(_id)}
 }
 
+// SetDelegateQueue calls the underlying SetDelegateQueue.
+func (x *PlayerItemMetadataCollector) SetDelegateQueue(delegate raw.AVPlayerItemMetadataCollectorPushDelegate, delegateQueue *foundation.NSObject) {
+	x.inner.SetDelegateQueue(delegate, delegateQueue)
+}
+
+// Delegate calls the underlying Delegate.
+func (x *PlayerItemMetadataCollector) Delegate() raw.AVPlayerItemMetadataCollectorPushDelegate {
+	return x.inner.Delegate()
+}
+
+// DelegateQueue calls the underlying DelegateQueue.
+func (x *PlayerItemMetadataCollector) DelegateQueue() *foundation.NSObject {
+	return x.inner.DelegateQueue()
+}
+
 func (x *PlayerItemMetadataCollector) asPlayerItemMediaDataCollector() *raw.AVPlayerItemMediaDataCollector { return &x.inner.AVPlayerItemMediaDataCollector }
+
+// PlayerItemMetadataCollectorable is the interface implemented by [PlayerItemMetadataCollector], for mocking and DI.
+type PlayerItemMetadataCollectorable interface {
+	Unwrap() *raw.AVPlayerItemMetadataCollector
+	SetDelegateQueue(delegate raw.AVPlayerItemMetadataCollectorPushDelegate, delegateQueue *foundation.NSObject)
+	Delegate() raw.AVPlayerItemMetadataCollectorPushDelegate
+	DelegateQueue() *foundation.NSObject
+}
+
+var _ PlayerItemMetadataCollectorable = (*PlayerItemMetadataCollector)(nil)
 

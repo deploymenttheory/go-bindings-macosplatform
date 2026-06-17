@@ -5,6 +5,7 @@
 package metrickit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metrickit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,5 +24,18 @@ func NewAppResponsivenessMetric() *AppResponsivenessMetric {
 	return &AppResponsivenessMetric{inner: raw.MXAppResponsivenessMetricFromID(_id)}
 }
 
+// HistogrammedApplicationHangTime calls the underlying HistogrammedApplicationHangTime.
+func (x *AppResponsivenessMetric) HistogrammedApplicationHangTime() *raw.MXHistogram[*foundation.NSUnitDuration] {
+	return x.inner.HistogrammedApplicationHangTime()
+}
+
 func (x *AppResponsivenessMetric) asMetric() *raw.MXMetric { return &x.inner.MXMetric }
+
+// AppResponsivenessMetricable is the interface implemented by [AppResponsivenessMetric], for mocking and DI.
+type AppResponsivenessMetricable interface {
+	Unwrap() *raw.MXAppResponsivenessMetric
+	HistogrammedApplicationHangTime() *raw.MXHistogram[*foundation.NSUnitDuration]
+}
+
+var _ AppResponsivenessMetricable = (*AppResponsivenessMetric)(nil)
 

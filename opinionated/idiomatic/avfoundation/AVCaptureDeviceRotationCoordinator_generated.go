@@ -25,3 +25,38 @@ func NewCaptureDeviceRotationCoordinatorWithDevicePreviewLayer(device *raw.AVCap
 	return &CaptureDeviceRotationCoordinator{inner: raw.AVCaptureDeviceRotationCoordinatorFromID(_id)}
 }
 
+// Device calls the underlying Device.
+func (x *CaptureDeviceRotationCoordinator) Device() *CaptureDevice {
+	_r := x.inner.Device()
+	if _r == nil {
+		return nil
+	}
+	return &CaptureDevice{inner: _r}
+}
+
+// PreviewLayer calls the underlying PreviewLayer.
+func (x *CaptureDeviceRotationCoordinator) PreviewLayer() *quartzcore.CALayer {
+	return x.inner.PreviewLayer()
+}
+
+// VideoRotationAngleForHorizonLevelPreview calls the underlying VideoRotationAngleForHorizonLevelPreview.
+func (x *CaptureDeviceRotationCoordinator) VideoRotationAngleForHorizonLevelPreview() float64 {
+	return x.inner.VideoRotationAngleForHorizonLevelPreview()
+}
+
+// VideoRotationAngleForHorizonLevelCapture calls the underlying VideoRotationAngleForHorizonLevelCapture.
+func (x *CaptureDeviceRotationCoordinator) VideoRotationAngleForHorizonLevelCapture() float64 {
+	return x.inner.VideoRotationAngleForHorizonLevelCapture()
+}
+
+// CaptureDeviceRotationCoordinatorable is the interface implemented by [CaptureDeviceRotationCoordinator], for mocking and DI.
+type CaptureDeviceRotationCoordinatorable interface {
+	Unwrap() *raw.AVCaptureDeviceRotationCoordinator
+	Device() *CaptureDevice
+	PreviewLayer() *quartzcore.CALayer
+	VideoRotationAngleForHorizonLevelPreview() float64
+	VideoRotationAngleForHorizonLevelCapture() float64
+}
+
+var _ CaptureDeviceRotationCoordinatorable = (*CaptureDeviceRotationCoordinator)(nil)
+

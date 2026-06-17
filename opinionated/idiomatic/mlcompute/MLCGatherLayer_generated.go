@@ -23,5 +23,18 @@ func NewGatherLayer() *GatherLayer {
 	return &GatherLayer{inner: raw.MLCGatherLayerFromID(_id)}
 }
 
+// Dimension calls the underlying Dimension.
+func (x *GatherLayer) Dimension() uint {
+	return x.inner.Dimension()
+}
+
 func (x *GatherLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
+
+// GatherLayerable is the interface implemented by [GatherLayer], for mocking and DI.
+type GatherLayerable interface {
+	Unwrap() *raw.MLCGatherLayer
+	Dimension() uint
+}
+
+var _ GatherLayerable = (*GatherLayer)(nil)
 

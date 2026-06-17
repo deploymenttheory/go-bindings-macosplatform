@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -35,4 +36,41 @@ func (x *MTRHEPAFilterMonitoringClusterReplacementProductStruct) WithProductIden
 	x.inner.SetProductIdentifierValue(foundation.NSStringStringWithUTF8String(productIdentifierValue))
 	return x
 }
+
+// ProductIdentifierType calls the underlying ProductIdentifierType.
+func (x *MTRHEPAFilterMonitoringClusterReplacementProductStruct) ProductIdentifierType() *foundation.NSNumber {
+	return x.inner.ProductIdentifierType()
+}
+
+// SetProductIdentifierType calls the underlying SetProductIdentifierType.
+func (x *MTRHEPAFilterMonitoringClusterReplacementProductStruct) SetProductIdentifierType(productIdentifierType *foundation.NSNumber) {
+	x.inner.SetProductIdentifierType(productIdentifierType)
+}
+
+// ProductIdentifierValue calls the underlying ProductIdentifierValue.
+func (x *MTRHEPAFilterMonitoringClusterReplacementProductStruct) ProductIdentifierValue() string {
+	_r := x.inner.ProductIdentifierValue()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetProductIdentifierValue calls the underlying SetProductIdentifierValue.
+func (x *MTRHEPAFilterMonitoringClusterReplacementProductStruct) SetProductIdentifierValue(productIdentifierValue string) {
+	x.inner.SetProductIdentifierValue(foundation.NSStringStringWithUTF8String(productIdentifierValue))
+}
+
+// MTRHEPAFilterMonitoringClusterReplacementProductStructable is the interface implemented by [MTRHEPAFilterMonitoringClusterReplacementProductStruct], for mocking and DI.
+type MTRHEPAFilterMonitoringClusterReplacementProductStructable interface {
+	Unwrap() *raw.MTRHEPAFilterMonitoringClusterReplacementProductStruct
+	WithProductIdentifierType(productIdentifierType *foundation.NSNumber) *MTRHEPAFilterMonitoringClusterReplacementProductStruct
+	WithProductIdentifierValue(productIdentifierValue string) *MTRHEPAFilterMonitoringClusterReplacementProductStruct
+	ProductIdentifierType() *foundation.NSNumber
+	SetProductIdentifierType(productIdentifierType *foundation.NSNumber)
+	ProductIdentifierValue() string
+	SetProductIdentifierValue(productIdentifierValue string)
+}
+
+var _ MTRHEPAFilterMonitoringClusterReplacementProductStructable = (*MTRHEPAFilterMonitoringClusterReplacementProductStruct)(nil)
 

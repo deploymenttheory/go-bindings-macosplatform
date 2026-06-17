@@ -5,6 +5,7 @@
 package oslog
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/oslog"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +23,67 @@ func NewLogStore() *LogStore {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("OSLogStore")), objc.RegisterName("new"))
 	return &LogStore{inner: raw.OSLogStoreFromID(_id)}
 }
+
+// EntriesEnumeratorWithOptionsPositionPredicateError calls the underlying EntriesEnumeratorWithOptionsPositionPredicateError.
+func (x *LogStore) EntriesEnumeratorWithOptionsPositionPredicateError(options raw.OSLogEnumeratorOptions, position *raw.OSLogPosition, predicate *foundation.NSPredicate) (*LogEnumerator, error) {
+	_r, _err := x.inner.EntriesEnumeratorWithOptionsPositionPredicateError(options, position, predicate)
+	if _err != nil {
+		return nil, _err
+	}
+	if _r == nil {
+		return nil, nil
+	}
+	return &LogEnumerator{inner: _r}, nil
+}
+
+// EntriesEnumeratorAndReturnError calls the underlying EntriesEnumeratorAndReturnError.
+func (x *LogStore) EntriesEnumeratorAndReturnError() (*LogEnumerator, error) {
+	_r, _err := x.inner.EntriesEnumeratorAndReturnError()
+	if _err != nil {
+		return nil, _err
+	}
+	if _r == nil {
+		return nil, nil
+	}
+	return &LogEnumerator{inner: _r}, nil
+}
+
+// PositionWithDate calls the underlying PositionWithDate.
+func (x *LogStore) PositionWithDate(date *foundation.NSDate) *LogPosition {
+	_r := x.inner.PositionWithDate(date)
+	if _r == nil {
+		return nil
+	}
+	return &LogPosition{inner: _r}
+}
+
+// PositionWithTimeIntervalSinceEnd calls the underlying PositionWithTimeIntervalSinceEnd.
+func (x *LogStore) PositionWithTimeIntervalSinceEnd(seconds float64) *LogPosition {
+	_r := x.inner.PositionWithTimeIntervalSinceEnd(seconds)
+	if _r == nil {
+		return nil
+	}
+	return &LogPosition{inner: _r}
+}
+
+// PositionWithTimeIntervalSinceLatestBoot calls the underlying PositionWithTimeIntervalSinceLatestBoot.
+func (x *LogStore) PositionWithTimeIntervalSinceLatestBoot(seconds float64) *LogPosition {
+	_r := x.inner.PositionWithTimeIntervalSinceLatestBoot(seconds)
+	if _r == nil {
+		return nil
+	}
+	return &LogPosition{inner: _r}
+}
+
+// LogStoreable is the interface implemented by [LogStore], for mocking and DI.
+type LogStoreable interface {
+	Unwrap() *raw.OSLogStore
+	EntriesEnumeratorWithOptionsPositionPredicateError(options raw.OSLogEnumeratorOptions, position *raw.OSLogPosition, predicate *foundation.NSPredicate) (*LogEnumerator, error)
+	EntriesEnumeratorAndReturnError() (*LogEnumerator, error)
+	PositionWithDate(date *foundation.NSDate) *LogPosition
+	PositionWithTimeIntervalSinceEnd(seconds float64) *LogPosition
+	PositionWithTimeIntervalSinceLatestBoot(seconds float64) *LogPosition
+}
+
+var _ LogStoreable = (*LogStore)(nil)
 

@@ -27,3 +27,10 @@ func (x *NNReductionRowMinNode) asNNUnaryReductionNode() *raw.MPSNNUnaryReductio
 
 func (x *NNReductionRowMinNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode }
 
+// NNReductionRowMinNodeable is the interface implemented by [NNReductionRowMinNode], for mocking and DI.
+type NNReductionRowMinNodeable interface {
+	Unwrap() *raw.MPSNNReductionRowMinNode
+}
+
+var _ NNReductionRowMinNodeable = (*NNReductionRowMinNode)(nil)
+

@@ -5,6 +5,9 @@
 package safariservices
 
 import (
+	"context"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/safariservices"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +25,93 @@ func NewSafariPage() *SafariPage {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SFSafariPage")), objc.RegisterName("new"))
 	return &SafariPage{inner: raw.SFSafariPageFromID(_id)}
 }
+
+// DispatchMessageToScriptWithNameUserInfo calls the underlying DispatchMessageToScriptWithNameUserInfo.
+func (x *SafariPage) DispatchMessageToScriptWithNameUserInfo(messageName string, userInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
+	x.inner.DispatchMessageToScriptWithNameUserInfo(foundation.NSStringStringWithUTF8String(messageName), userInfo)
+}
+
+// Reload calls the underlying Reload.
+func (x *SafariPage) Reload() {
+	x.inner.Reload()
+}
+
+// GetPageProperties blocks until the operation completes or ctx is cancelled.
+func (x *SafariPage) GetPageProperties(ctx context.Context) (*SafariPageProperties, error) {
+	type _result struct {
+		val *SafariPageProperties
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.GetPagePropertiesWithCompletionHandler(func(_p0 *raw.SFSafariPageProperties) {
+		var _o _result
+		if _p0 != nil {
+			_o.val = &SafariPageProperties{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *SafariPageProperties
+		return _zero, ctx.Err()
+	}
+}
+
+// GetContainingTab blocks until the operation completes or ctx is cancelled.
+func (x *SafariPage) GetContainingTab(ctx context.Context) (*SafariTab, error) {
+	type _result struct {
+		val *SafariTab
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.GetContainingTabWithCompletionHandler(func(_p0 *raw.SFSafariTab) {
+		var _o _result
+		if _p0 != nil {
+			_o.val = &SafariTab{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *SafariTab
+		return _zero, ctx.Err()
+	}
+}
+
+// GetScreenshotOfVisibleArea blocks until the operation completes or ctx is cancelled.
+func (x *SafariPage) GetScreenshotOfVisibleArea(ctx context.Context) (*appkit.NSImage, error) {
+	type _result struct {
+		val *appkit.NSImage
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.GetScreenshotOfVisibleAreaWithCompletionHandler(func(_p0 *appkit.NSImage) {
+		var _o _result
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *appkit.NSImage
+		return _zero, ctx.Err()
+	}
+}
+
+// SafariPageable is the interface implemented by [SafariPage], for mocking and DI.
+type SafariPageable interface {
+	Unwrap() *raw.SFSafariPage
+	DispatchMessageToScriptWithNameUserInfo(messageName string, userInfo *foundation.NSDictionary[*foundation.NSString, objc.ID])
+	Reload()
+	GetPageProperties(ctx context.Context) (*SafariPageProperties, error)
+	GetContainingTab(ctx context.Context) (*SafariTab, error)
+	GetScreenshotOfVisibleArea(ctx context.Context) (*appkit.NSImage, error)
+}
+
+var _ SafariPageable = (*SafariPage)(nil)
 

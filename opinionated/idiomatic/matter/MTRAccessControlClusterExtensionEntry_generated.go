@@ -25,3 +25,10 @@ func NewMTRAccessControlClusterExtensionEntry() *MTRAccessControlClusterExtensio
 
 func (x *MTRAccessControlClusterExtensionEntry) asMTRAccessControlClusterAccessControlExtensionStruct() *raw.MTRAccessControlClusterAccessControlExtensionStruct { return &x.inner.MTRAccessControlClusterAccessControlExtensionStruct }
 
+// MTRAccessControlClusterExtensionEntryable is the interface implemented by [MTRAccessControlClusterExtensionEntry], for mocking and DI.
+type MTRAccessControlClusterExtensionEntryable interface {
+	Unwrap() *raw.MTRAccessControlClusterExtensionEntry
+}
+
+var _ MTRAccessControlClusterExtensionEntryable = (*MTRAccessControlClusterExtensionEntry)(nil)
+

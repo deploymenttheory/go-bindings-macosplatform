@@ -6,6 +6,7 @@ package corespotlight
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corespotlight"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,35 @@ func NewSuggestion() *Suggestion {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CSSuggestion")), objc.RegisterName("new"))
 	return &Suggestion{inner: raw.CSSuggestionFromID(_id)}
 }
+
+// CompareByRank calls the underlying CompareByRank.
+func (x *Suggestion) CompareByRank(other *raw.CSSuggestion) foundation.NSComparisonResult {
+	return x.inner.CompareByRank(other)
+}
+
+// Compare calls the underlying Compare.
+func (x *Suggestion) Compare(other *raw.CSSuggestion) foundation.NSComparisonResult {
+	return x.inner.Compare(other)
+}
+
+// LocalizedAttributedSuggestion calls the underlying LocalizedAttributedSuggestion.
+func (x *Suggestion) LocalizedAttributedSuggestion() *foundation.NSAttributedString {
+	return x.inner.LocalizedAttributedSuggestion()
+}
+
+// SuggestionKind calls the underlying SuggestionKind.
+func (x *Suggestion) SuggestionKind() raw.CSSuggestionKind {
+	return x.inner.SuggestionKind()
+}
+
+// Suggestionable is the interface implemented by [Suggestion], for mocking and DI.
+type Suggestionable interface {
+	Unwrap() *raw.CSSuggestion
+	CompareByRank(other *raw.CSSuggestion) foundation.NSComparisonResult
+	Compare(other *raw.CSSuggestion) foundation.NSComparisonResult
+	LocalizedAttributedSuggestion() *foundation.NSAttributedString
+	SuggestionKind() raw.CSSuggestionKind
+}
+
+var _ Suggestionable = (*Suggestion)(nil)
 

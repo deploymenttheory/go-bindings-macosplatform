@@ -6,7 +6,9 @@ package browserenginekit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/browserenginekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // RenderingProcess wraps [raw.BERenderingProcess] with a fluent Go API.
@@ -22,4 +24,35 @@ func NewRenderingProcess() *RenderingProcess {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("BERenderingProcess")), objc.RegisterName("new"))
 	return &RenderingProcess{inner: raw.BERenderingProcessFromID(_id)}
 }
+
+// Invalidate calls the underlying Invalidate.
+func (x *RenderingProcess) Invalidate() {
+	x.inner.Invalidate()
+}
+
+// MakeLibXPCConnectionError calls the underlying MakeLibXPCConnectionError.
+func (x *RenderingProcess) MakeLibXPCConnectionError() (*foundation.NSObject, error) {
+	return x.inner.MakeLibXPCConnectionError()
+}
+
+// GrantCapabilityError calls the underlying GrantCapabilityError.
+func (x *RenderingProcess) GrantCapabilityError(capability *raw.BEProcessCapability) (raw.BEProcessCapabilityGrant, error) {
+	return x.inner.GrantCapabilityError(capability)
+}
+
+// GrantCapabilityErrorInvalidationHandler calls the underlying GrantCapabilityErrorInvalidationHandler.
+func (x *RenderingProcess) GrantCapabilityErrorInvalidationHandler(capability *raw.BEProcessCapability, error_ unsafe.Pointer, invalidationHandler func()) raw.BEProcessCapabilityGrant {
+	return x.inner.GrantCapabilityErrorInvalidationHandler(capability, error_, invalidationHandler)
+}
+
+// RenderingProcessable is the interface implemented by [RenderingProcess], for mocking and DI.
+type RenderingProcessable interface {
+	Unwrap() *raw.BERenderingProcess
+	Invalidate()
+	MakeLibXPCConnectionError() (*foundation.NSObject, error)
+	GrantCapabilityError(capability *raw.BEProcessCapability) (raw.BEProcessCapabilityGrant, error)
+	GrantCapabilityErrorInvalidationHandler(capability *raw.BEProcessCapability, error_ unsafe.Pointer, invalidationHandler func()) raw.BEProcessCapabilityGrant
+}
+
+var _ RenderingProcessable = (*RenderingProcess)(nil)
 

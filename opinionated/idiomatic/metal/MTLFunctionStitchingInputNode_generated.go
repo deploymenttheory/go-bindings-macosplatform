@@ -30,3 +30,23 @@ func (x *FunctionStitchingInputNode) WithArgumentIndex(argumentIndex uint) *Func
 	return x
 }
 
+// ArgumentIndex calls the underlying ArgumentIndex.
+func (x *FunctionStitchingInputNode) ArgumentIndex() uint {
+	return x.inner.ArgumentIndex()
+}
+
+// SetArgumentIndex calls the underlying SetArgumentIndex.
+func (x *FunctionStitchingInputNode) SetArgumentIndex(argumentIndex uint) {
+	x.inner.SetArgumentIndex(argumentIndex)
+}
+
+// FunctionStitchingInputNodeable is the interface implemented by [FunctionStitchingInputNode], for mocking and DI.
+type FunctionStitchingInputNodeable interface {
+	Unwrap() *raw.MTLFunctionStitchingInputNode
+	WithArgumentIndex(argumentIndex uint) *FunctionStitchingInputNode
+	ArgumentIndex() uint
+	SetArgumentIndex(argumentIndex uint)
+}
+
+var _ FunctionStitchingInputNodeable = (*FunctionStitchingInputNode)(nil)
+

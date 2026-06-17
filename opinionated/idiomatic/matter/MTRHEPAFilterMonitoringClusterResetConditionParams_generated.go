@@ -36,3 +36,36 @@ func (x *MTRHEPAFilterMonitoringClusterResetConditionParams) WithServerSideProce
 	return x
 }
 
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRHEPAFilterMonitoringClusterResetConditionParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRHEPAFilterMonitoringClusterResetConditionParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRHEPAFilterMonitoringClusterResetConditionParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRHEPAFilterMonitoringClusterResetConditionParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRHEPAFilterMonitoringClusterResetConditionParamsable is the interface implemented by [MTRHEPAFilterMonitoringClusterResetConditionParams], for mocking and DI.
+type MTRHEPAFilterMonitoringClusterResetConditionParamsable interface {
+	Unwrap() *raw.MTRHEPAFilterMonitoringClusterResetConditionParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRHEPAFilterMonitoringClusterResetConditionParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRHEPAFilterMonitoringClusterResetConditionParams
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRHEPAFilterMonitoringClusterResetConditionParamsable = (*MTRHEPAFilterMonitoringClusterResetConditionParams)(nil)
+

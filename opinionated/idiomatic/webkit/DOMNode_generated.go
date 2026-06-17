@@ -5,8 +5,10 @@
 package webkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -42,9 +44,381 @@ func (x *DOMNode) WithTextContent(textContent string) *DOMNode {
 	return x
 }
 
+// InsertBeforeRefChild calls the underlying InsertBeforeRefChild.
+func (x *DOMNode) InsertBeforeRefChild(newChild *raw.DOMNode, refChild *raw.DOMNode) *DOMNode {
+	_r := x.inner.InsertBeforeRefChild(newChild, refChild)
+	if _r == nil {
+		return nil
+	}
+	return &DOMNode{inner: _r}
+}
+
+// ReplaceChildOldChild calls the underlying ReplaceChildOldChild.
+func (x *DOMNode) ReplaceChildOldChild(newChild *raw.DOMNode, oldChild *raw.DOMNode) *DOMNode {
+	_r := x.inner.ReplaceChildOldChild(newChild, oldChild)
+	if _r == nil {
+		return nil
+	}
+	return &DOMNode{inner: _r}
+}
+
+// RemoveChild calls the underlying RemoveChild.
+func (x *DOMNode) RemoveChild(oldChild *raw.DOMNode) *DOMNode {
+	_r := x.inner.RemoveChild(oldChild)
+	if _r == nil {
+		return nil
+	}
+	return &DOMNode{inner: _r}
+}
+
+// AppendChild calls the underlying AppendChild.
+func (x *DOMNode) AppendChild(newChild *raw.DOMNode) *DOMNode {
+	_r := x.inner.AppendChild(newChild)
+	if _r == nil {
+		return nil
+	}
+	return &DOMNode{inner: _r}
+}
+
+// HasChildNodes calls the underlying HasChildNodes.
+func (x *DOMNode) HasChildNodes() bool {
+	return x.inner.HasChildNodes()
+}
+
+// CloneNode calls the underlying CloneNode.
+func (x *DOMNode) CloneNode(deep bool) *DOMNode {
+	_r := x.inner.CloneNode(deep)
+	if _r == nil {
+		return nil
+	}
+	return &DOMNode{inner: _r}
+}
+
+// Normalize calls the underlying Normalize.
+func (x *DOMNode) Normalize() {
+	x.inner.Normalize()
+}
+
+// IsSupportedVersion calls the underlying IsSupportedVersion.
+func (x *DOMNode) IsSupportedVersion(feature string, version string) bool {
+	return x.inner.IsSupportedVersion(foundation.NSStringStringWithUTF8String(feature), foundation.NSStringStringWithUTF8String(version))
+}
+
+// HasAttributes calls the underlying HasAttributes.
+func (x *DOMNode) HasAttributes() bool {
+	return x.inner.HasAttributes()
+}
+
+// IsSameNode calls the underlying IsSameNode.
+func (x *DOMNode) IsSameNode(other *raw.DOMNode) bool {
+	return x.inner.IsSameNode(other)
+}
+
+// IsEqualNode calls the underlying IsEqualNode.
+func (x *DOMNode) IsEqualNode(other *raw.DOMNode) bool {
+	return x.inner.IsEqualNode(other)
+}
+
+// LookupPrefix calls the underlying LookupPrefix.
+func (x *DOMNode) LookupPrefix(namespaceURI string) string {
+	_r := x.inner.LookupPrefix(foundation.NSStringStringWithUTF8String(namespaceURI))
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// LookupNamespaceURI calls the underlying LookupNamespaceURI.
+func (x *DOMNode) LookupNamespaceURI(prefix string) string {
+	_r := x.inner.LookupNamespaceURI(foundation.NSStringStringWithUTF8String(prefix))
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// IsDefaultNamespace calls the underlying IsDefaultNamespace.
+func (x *DOMNode) IsDefaultNamespace(namespaceURI string) bool {
+	return x.inner.IsDefaultNamespace(foundation.NSStringStringWithUTF8String(namespaceURI))
+}
+
+// CompareDocumentPosition calls the underlying CompareDocumentPosition.
+func (x *DOMNode) CompareDocumentPosition(other *raw.DOMNode) uint16 {
+	return x.inner.CompareDocumentPosition(other)
+}
+
+// Contains calls the underlying Contains.
+func (x *DOMNode) Contains(other *raw.DOMNode) bool {
+	return x.inner.Contains(other)
+}
+
+// NodeName calls the underlying NodeName.
+func (x *DOMNode) NodeName() string {
+	_r := x.inner.NodeName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// NodeValue calls the underlying NodeValue.
+func (x *DOMNode) NodeValue() string {
+	_r := x.inner.NodeValue()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetNodeValue calls the underlying SetNodeValue.
+func (x *DOMNode) SetNodeValue(nodeValue string) {
+	x.inner.SetNodeValue(foundation.NSStringStringWithUTF8String(nodeValue))
+}
+
+// NodeType calls the underlying NodeType.
+func (x *DOMNode) NodeType() uint16 {
+	return x.inner.NodeType()
+}
+
+// ParentNode calls the underlying ParentNode.
+func (x *DOMNode) ParentNode() *DOMNode {
+	_r := x.inner.ParentNode()
+	if _r == nil {
+		return nil
+	}
+	return &DOMNode{inner: _r}
+}
+
+// ChildNodes calls the underlying ChildNodes.
+func (x *DOMNode) ChildNodes() *DOMNodeList {
+	_r := x.inner.ChildNodes()
+	if _r == nil {
+		return nil
+	}
+	return &DOMNodeList{inner: _r}
+}
+
+// FirstChild calls the underlying FirstChild.
+func (x *DOMNode) FirstChild() *DOMNode {
+	_r := x.inner.FirstChild()
+	if _r == nil {
+		return nil
+	}
+	return &DOMNode{inner: _r}
+}
+
+// LastChild calls the underlying LastChild.
+func (x *DOMNode) LastChild() *DOMNode {
+	_r := x.inner.LastChild()
+	if _r == nil {
+		return nil
+	}
+	return &DOMNode{inner: _r}
+}
+
+// PreviousSibling calls the underlying PreviousSibling.
+func (x *DOMNode) PreviousSibling() *DOMNode {
+	_r := x.inner.PreviousSibling()
+	if _r == nil {
+		return nil
+	}
+	return &DOMNode{inner: _r}
+}
+
+// NextSibling calls the underlying NextSibling.
+func (x *DOMNode) NextSibling() *DOMNode {
+	_r := x.inner.NextSibling()
+	if _r == nil {
+		return nil
+	}
+	return &DOMNode{inner: _r}
+}
+
+// OwnerDocument calls the underlying OwnerDocument.
+func (x *DOMNode) OwnerDocument() *DOMDocument {
+	_r := x.inner.OwnerDocument()
+	if _r == nil {
+		return nil
+	}
+	return &DOMDocument{inner: _r}
+}
+
+// NamespaceURI calls the underlying NamespaceURI.
+func (x *DOMNode) NamespaceURI() string {
+	_r := x.inner.NamespaceURI()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Prefix calls the underlying Prefix.
+func (x *DOMNode) Prefix() string {
+	_r := x.inner.Prefix()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetPrefix calls the underlying SetPrefix.
+func (x *DOMNode) SetPrefix(prefix string) {
+	x.inner.SetPrefix(foundation.NSStringStringWithUTF8String(prefix))
+}
+
+// LocalName calls the underlying LocalName.
+func (x *DOMNode) LocalName() string {
+	_r := x.inner.LocalName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Attributes calls the underlying Attributes.
+func (x *DOMNode) Attributes() *DOMNamedNodeMap {
+	_r := x.inner.Attributes()
+	if _r == nil {
+		return nil
+	}
+	return &DOMNamedNodeMap{inner: _r}
+}
+
+// BaseURI calls the underlying BaseURI.
+func (x *DOMNode) BaseURI() string {
+	_r := x.inner.BaseURI()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// TextContent calls the underlying TextContent.
+func (x *DOMNode) TextContent() string {
+	_r := x.inner.TextContent()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetTextContent calls the underlying SetTextContent.
+func (x *DOMNode) SetTextContent(textContent string) {
+	x.inner.SetTextContent(foundation.NSStringStringWithUTF8String(textContent))
+}
+
+// ParentElement calls the underlying ParentElement.
+func (x *DOMNode) ParentElement() *DOMElement {
+	_r := x.inner.ParentElement()
+	if _r == nil {
+		return nil
+	}
+	return &DOMElement{inner: _r}
+}
+
+// IsContentEditable calls the underlying IsContentEditable.
+func (x *DOMNode) IsContentEditable() bool {
+	return x.inner.IsContentEditable()
+}
+
+// InsertBefore calls the underlying InsertBefore.
+func (x *DOMNode) InsertBefore(newChild *raw.DOMNode, refChild *raw.DOMNode) *DOMNode {
+	_r := x.inner.InsertBefore(newChild, refChild)
+	if _r == nil {
+		return nil
+	}
+	return &DOMNode{inner: _r}
+}
+
+// ReplaceChild calls the underlying ReplaceChild.
+func (x *DOMNode) ReplaceChild(newChild *raw.DOMNode, oldChild *raw.DOMNode) *DOMNode {
+	_r := x.inner.ReplaceChild(newChild, oldChild)
+	if _r == nil {
+		return nil
+	}
+	return &DOMNode{inner: _r}
+}
+
+// IsSupported calls the underlying IsSupported.
+func (x *DOMNode) IsSupported(feature string, version string) bool {
+	return x.inner.IsSupported(foundation.NSStringStringWithUTF8String(feature), foundation.NSStringStringWithUTF8String(version))
+}
+
+// BoundingBox calls the underlying BoundingBox.
+func (x *DOMNode) BoundingBox() corefoundation.CGRect {
+	return x.inner.BoundingBox()
+}
+
+// LineBoxRects calls the underlying LineBoxRects.
+func (x *DOMNode) LineBoxRects() *foundation.NSArray[objc.ID] {
+	return x.inner.LineBoxRects()
+}
+
+// WebArchive calls the underlying WebArchive.
+func (x *DOMNode) WebArchive() *WebArchive {
+	_r := x.inner.WebArchive()
+	if _r == nil {
+		return nil
+	}
+	return &WebArchive{inner: _r}
+}
+
 func (x *DOMNode) asDOMNode() *raw.DOMNode { return x.inner }
 
 func (x *DOMNode) asDOMObject() *raw.DOMObject { return &x.inner.DOMObject }
 
 func (x *DOMNode) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMObject.WebScriptObject }
+
+// DOMNodeable is the interface implemented by [DOMNode], for mocking and DI.
+type DOMNodeable interface {
+	Unwrap() *raw.DOMNode
+	WithNodeValue(nodeValue string) *DOMNode
+	WithPrefix(prefix string) *DOMNode
+	WithTextContent(textContent string) *DOMNode
+	InsertBeforeRefChild(newChild *raw.DOMNode, refChild *raw.DOMNode) *DOMNode
+	ReplaceChildOldChild(newChild *raw.DOMNode, oldChild *raw.DOMNode) *DOMNode
+	RemoveChild(oldChild *raw.DOMNode) *DOMNode
+	AppendChild(newChild *raw.DOMNode) *DOMNode
+	HasChildNodes() bool
+	CloneNode(deep bool) *DOMNode
+	Normalize()
+	IsSupportedVersion(feature string, version string) bool
+	HasAttributes() bool
+	IsSameNode(other *raw.DOMNode) bool
+	IsEqualNode(other *raw.DOMNode) bool
+	LookupPrefix(namespaceURI string) string
+	LookupNamespaceURI(prefix string) string
+	IsDefaultNamespace(namespaceURI string) bool
+	CompareDocumentPosition(other *raw.DOMNode) uint16
+	Contains(other *raw.DOMNode) bool
+	NodeName() string
+	NodeValue() string
+	SetNodeValue(nodeValue string)
+	NodeType() uint16
+	ParentNode() *DOMNode
+	ChildNodes() *DOMNodeList
+	FirstChild() *DOMNode
+	LastChild() *DOMNode
+	PreviousSibling() *DOMNode
+	NextSibling() *DOMNode
+	OwnerDocument() *DOMDocument
+	NamespaceURI() string
+	Prefix() string
+	SetPrefix(prefix string)
+	LocalName() string
+	Attributes() *DOMNamedNodeMap
+	BaseURI() string
+	TextContent() string
+	SetTextContent(textContent string)
+	ParentElement() *DOMElement
+	IsContentEditable() bool
+	InsertBefore(newChild *raw.DOMNode, refChild *raw.DOMNode) *DOMNode
+	ReplaceChild(newChild *raw.DOMNode, oldChild *raw.DOMNode) *DOMNode
+	IsSupported(feature string, version string) bool
+	BoundingBox() corefoundation.CGRect
+	LineBoxRects() *foundation.NSArray[objc.ID]
+	WebArchive() *WebArchive
+}
+
+var _ DOMNodeable = (*DOMNode)(nil)
 

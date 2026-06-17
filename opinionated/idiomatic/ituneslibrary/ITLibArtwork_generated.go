@@ -5,6 +5,8 @@
 package ituneslibrary
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/ituneslibrary"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +24,29 @@ func NewLibArtwork() *LibArtwork {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ITLibArtwork")), objc.RegisterName("new"))
 	return &LibArtwork{inner: raw.ITLibArtworkFromID(_id)}
 }
+
+// Image calls the underlying Image.
+func (x *LibArtwork) Image() *appkit.NSImage {
+	return x.inner.Image()
+}
+
+// ImageData calls the underlying ImageData.
+func (x *LibArtwork) ImageData() *foundation.NSData {
+	return x.inner.ImageData()
+}
+
+// ImageDataFormat calls the underlying ImageDataFormat.
+func (x *LibArtwork) ImageDataFormat() raw.ITLibArtworkFormat {
+	return x.inner.ImageDataFormat()
+}
+
+// LibArtworkable is the interface implemented by [LibArtwork], for mocking and DI.
+type LibArtworkable interface {
+	Unwrap() *raw.ITLibArtwork
+	Image() *appkit.NSImage
+	ImageData() *foundation.NSData
+	ImageDataFormat() raw.ITLibArtworkFormat
+}
+
+var _ LibArtworkable = (*LibArtwork)(nil)
 

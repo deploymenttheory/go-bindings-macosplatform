@@ -7,6 +7,7 @@ package audiovideobridging
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/audiovideobridging"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -36,4 +37,87 @@ func (x *AVB17221EntityDiscovery) WithDiscoveryDelegate(discoveryDelegate raw.AV
 	x.inner.SetDiscoveryDelegate(discoveryDelegate)
 	return x
 }
+
+// PrimeIterators calls the underlying PrimeIterators.
+func (x *AVB17221EntityDiscovery) PrimeIterators() {
+	x.inner.PrimeIterators()
+}
+
+// DiscoverEntities calls the underlying DiscoverEntities.
+func (x *AVB17221EntityDiscovery) DiscoverEntities() bool {
+	return x.inner.DiscoverEntities()
+}
+
+// DiscoverEntity calls the underlying DiscoverEntity.
+func (x *AVB17221EntityDiscovery) DiscoverEntity(entityID uint64) bool {
+	return x.inner.DiscoverEntity(entityID)
+}
+
+// AddLocalEntityError calls the underlying AddLocalEntityError.
+func (x *AVB17221EntityDiscovery) AddLocalEntityError(anEntity *raw.AVB17221Entity) (bool, error) {
+	return x.inner.AddLocalEntityError(anEntity)
+}
+
+// RemoveLocalEntityError calls the underlying RemoveLocalEntityError.
+func (x *AVB17221EntityDiscovery) RemoveLocalEntityError(guid uint64) (bool, error) {
+	return x.inner.RemoveLocalEntityError(guid)
+}
+
+// ChangeEntityWithEntityIDToNewGPTPGrandmasterIDError calls the underlying ChangeEntityWithEntityIDToNewGPTPGrandmasterIDError.
+func (x *AVB17221EntityDiscovery) ChangeEntityWithEntityIDToNewGPTPGrandmasterIDError(entityID uint64, gPTPGrandmasterID uint64) (bool, error) {
+	return x.inner.ChangeEntityWithEntityIDToNewGPTPGrandmasterIDError(entityID, gPTPGrandmasterID)
+}
+
+// InterfaceName calls the underlying InterfaceName.
+func (x *AVB17221EntityDiscovery) InterfaceName() string {
+	_r := x.inner.InterfaceName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetInterfaceName calls the underlying SetInterfaceName.
+func (x *AVB17221EntityDiscovery) SetInterfaceName(interfaceName string) {
+	x.inner.SetInterfaceName(foundation.NSStringStringWithUTF8String(interfaceName))
+}
+
+// Interface calls the underlying Interface.
+func (x *AVB17221EntityDiscovery) Interface() *Interface {
+	_r := x.inner.Interface()
+	if _r == nil {
+		return nil
+	}
+	return &Interface{inner: _r}
+}
+
+// DiscoveryDelegate calls the underlying DiscoveryDelegate.
+func (x *AVB17221EntityDiscovery) DiscoveryDelegate() raw.AVB17221EntityDiscoveryDelegate {
+	return x.inner.DiscoveryDelegate()
+}
+
+// SetDiscoveryDelegate calls the underlying SetDiscoveryDelegate.
+func (x *AVB17221EntityDiscovery) SetDiscoveryDelegate(discoveryDelegate raw.AVB17221EntityDiscoveryDelegate) {
+	x.inner.SetDiscoveryDelegate(discoveryDelegate)
+}
+
+// AVB17221EntityDiscoveryable is the interface implemented by [AVB17221EntityDiscovery], for mocking and DI.
+type AVB17221EntityDiscoveryable interface {
+	Unwrap() *raw.AVB17221EntityDiscovery
+	WithInterfaceName(interfaceName string) *AVB17221EntityDiscovery
+	WithDiscoveryDelegate(discoveryDelegate raw.AVB17221EntityDiscoveryDelegate) *AVB17221EntityDiscovery
+	PrimeIterators()
+	DiscoverEntities() bool
+	DiscoverEntity(entityID uint64) bool
+	AddLocalEntityError(anEntity *raw.AVB17221Entity) (bool, error)
+	RemoveLocalEntityError(guid uint64) (bool, error)
+	ChangeEntityWithEntityIDToNewGPTPGrandmasterIDError(entityID uint64, gPTPGrandmasterID uint64) (bool, error)
+	InterfaceName() string
+	SetInterfaceName(interfaceName string)
+	Interface() *Interface
+	DiscoveryDelegate() raw.AVB17221EntityDiscoveryDelegate
+	SetDiscoveryDelegate(discoveryDelegate raw.AVB17221EntityDiscoveryDelegate)
+}
+
+var _ AVB17221EntityDiscoveryable = (*AVB17221EntityDiscovery)(nil)
 

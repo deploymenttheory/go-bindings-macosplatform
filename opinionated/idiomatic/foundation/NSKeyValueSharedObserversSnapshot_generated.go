@@ -25,3 +25,10 @@ func NewKeyValueSharedObserversSnapshot() *KeyValueSharedObserversSnapshot {
 
 func (x *KeyValueSharedObserversSnapshot) asObject() *raw.NSObject { return &x.inner.NSObject }
 
+// KeyValueSharedObserversSnapshotable is the interface implemented by [KeyValueSharedObserversSnapshot], for mocking and DI.
+type KeyValueSharedObserversSnapshotable interface {
+	Unwrap() *raw.NSKeyValueSharedObserversSnapshot
+}
+
+var _ KeyValueSharedObserversSnapshotable = (*KeyValueSharedObserversSnapshot)(nil)
+

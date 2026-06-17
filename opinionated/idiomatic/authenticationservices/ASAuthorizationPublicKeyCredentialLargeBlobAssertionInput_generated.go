@@ -31,3 +31,29 @@ func (x *AuthorizationPublicKeyCredentialLargeBlobAssertionInput) WithDataToWrit
 	return x
 }
 
+// Operation calls the underlying Operation.
+func (x *AuthorizationPublicKeyCredentialLargeBlobAssertionInput) Operation() raw.ASAuthorizationPublicKeyCredentialLargeBlobAssertionOperation {
+	return x.inner.Operation()
+}
+
+// DataToWrite calls the underlying DataToWrite.
+func (x *AuthorizationPublicKeyCredentialLargeBlobAssertionInput) DataToWrite() *foundation.NSData {
+	return x.inner.DataToWrite()
+}
+
+// SetDataToWrite calls the underlying SetDataToWrite.
+func (x *AuthorizationPublicKeyCredentialLargeBlobAssertionInput) SetDataToWrite(dataToWrite *foundation.NSData) {
+	x.inner.SetDataToWrite(dataToWrite)
+}
+
+// AuthorizationPublicKeyCredentialLargeBlobAssertionInputable is the interface implemented by [AuthorizationPublicKeyCredentialLargeBlobAssertionInput], for mocking and DI.
+type AuthorizationPublicKeyCredentialLargeBlobAssertionInputable interface {
+	Unwrap() *raw.ASAuthorizationPublicKeyCredentialLargeBlobAssertionInput
+	WithDataToWrite(dataToWrite *foundation.NSData) *AuthorizationPublicKeyCredentialLargeBlobAssertionInput
+	Operation() raw.ASAuthorizationPublicKeyCredentialLargeBlobAssertionOperation
+	DataToWrite() *foundation.NSData
+	SetDataToWrite(dataToWrite *foundation.NSData)
+}
+
+var _ AuthorizationPublicKeyCredentialLargeBlobAssertionInputable = (*AuthorizationPublicKeyCredentialLargeBlobAssertionInput)(nil)
+

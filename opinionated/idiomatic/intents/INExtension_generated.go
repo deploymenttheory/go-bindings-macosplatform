@@ -23,3 +23,10 @@ func NewExtension() *Extension {
 	return &Extension{inner: raw.INExtensionFromID(_id)}
 }
 
+// Extensionable is the interface implemented by [Extension], for mocking and DI.
+type Extensionable interface {
+	Unwrap() *raw.INExtension
+}
+
+var _ Extensionable = (*Extension)(nil)
+

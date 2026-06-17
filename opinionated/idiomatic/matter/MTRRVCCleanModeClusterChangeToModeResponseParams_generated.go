@@ -43,3 +43,40 @@ func (x *MTRRVCCleanModeClusterChangeToModeResponseParams) WithStatusText(status
 	return x
 }
 
+// Status calls the underlying Status.
+func (x *MTRRVCCleanModeClusterChangeToModeResponseParams) Status() *foundation.NSNumber {
+	return x.inner.Status()
+}
+
+// SetStatus calls the underlying SetStatus.
+func (x *MTRRVCCleanModeClusterChangeToModeResponseParams) SetStatus(status *foundation.NSNumber) {
+	x.inner.SetStatus(status)
+}
+
+// StatusText calls the underlying StatusText.
+func (x *MTRRVCCleanModeClusterChangeToModeResponseParams) StatusText() string {
+	_r := x.inner.StatusText()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetStatusText calls the underlying SetStatusText.
+func (x *MTRRVCCleanModeClusterChangeToModeResponseParams) SetStatusText(statusText string) {
+	x.inner.SetStatusText(foundation.NSStringStringWithUTF8String(statusText))
+}
+
+// MTRRVCCleanModeClusterChangeToModeResponseParamsable is the interface implemented by [MTRRVCCleanModeClusterChangeToModeResponseParams], for mocking and DI.
+type MTRRVCCleanModeClusterChangeToModeResponseParamsable interface {
+	Unwrap() *raw.MTRRVCCleanModeClusterChangeToModeResponseParams
+	WithStatus(status *foundation.NSNumber) *MTRRVCCleanModeClusterChangeToModeResponseParams
+	WithStatusText(statusText string) *MTRRVCCleanModeClusterChangeToModeResponseParams
+	Status() *foundation.NSNumber
+	SetStatus(status *foundation.NSNumber)
+	StatusText() string
+	SetStatusText(statusText string)
+}
+
+var _ MTRRVCCleanModeClusterChangeToModeResponseParamsable = (*MTRRVCCleanModeClusterChangeToModeResponseParams)(nil)
+

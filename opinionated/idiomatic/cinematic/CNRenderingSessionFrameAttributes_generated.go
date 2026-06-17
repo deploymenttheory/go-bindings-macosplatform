@@ -45,3 +45,36 @@ func (x *RenderingSessionFrameAttributes) WithFNumber(fNumber float32) *Renderin
 	return x
 }
 
+// FocusDisparity calls the underlying FocusDisparity.
+func (x *RenderingSessionFrameAttributes) FocusDisparity() float32 {
+	return x.inner.FocusDisparity()
+}
+
+// SetFocusDisparity calls the underlying SetFocusDisparity.
+func (x *RenderingSessionFrameAttributes) SetFocusDisparity(focusDisparity float32) {
+	x.inner.SetFocusDisparity(focusDisparity)
+}
+
+// FNumber calls the underlying FNumber.
+func (x *RenderingSessionFrameAttributes) FNumber() float32 {
+	return x.inner.FNumber()
+}
+
+// SetFNumber calls the underlying SetFNumber.
+func (x *RenderingSessionFrameAttributes) SetFNumber(fNumber float32) {
+	x.inner.SetFNumber(fNumber)
+}
+
+// RenderingSessionFrameAttributesable is the interface implemented by [RenderingSessionFrameAttributes], for mocking and DI.
+type RenderingSessionFrameAttributesable interface {
+	Unwrap() *raw.CNRenderingSessionFrameAttributes
+	WithFocusDisparity(focusDisparity float32) *RenderingSessionFrameAttributes
+	WithFNumber(fNumber float32) *RenderingSessionFrameAttributes
+	FocusDisparity() float32
+	SetFocusDisparity(focusDisparity float32)
+	FNumber() float32
+	SetFNumber(fNumber float32)
+}
+
+var _ RenderingSessionFrameAttributesable = (*RenderingSessionFrameAttributes)(nil)
+

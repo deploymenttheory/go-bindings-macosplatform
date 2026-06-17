@@ -29,5 +29,37 @@ func (x *Request) WithDelegate(delegate raw.SKRequestDelegate) *Request {
 	return x
 }
 
+// Cancel calls the underlying Cancel.
+func (x *Request) Cancel() {
+	x.inner.Cancel()
+}
+
+// Start calls the underlying Start.
+func (x *Request) Start() {
+	x.inner.Start()
+}
+
+// Delegate calls the underlying Delegate.
+func (x *Request) Delegate() raw.SKRequestDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *Request) SetDelegate(delegate raw.SKRequestDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
 func (x *Request) asRequest() *raw.SKRequest { return x.inner }
+
+// Requestable is the interface implemented by [Request], for mocking and DI.
+type Requestable interface {
+	Unwrap() *raw.SKRequest
+	WithDelegate(delegate raw.SKRequestDelegate) *Request
+	Cancel()
+	Start()
+	Delegate() raw.SKRequestDelegate
+	SetDelegate(delegate raw.SKRequestDelegate)
+}
+
+var _ Requestable = (*Request)(nil)
 

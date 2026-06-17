@@ -35,3 +35,10 @@ func (x *CNNMultiplyGradient) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinary
 
 func (x *CNNMultiplyGradient) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNArithmeticGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel }
 
+// CNNMultiplyGradientable is the interface implemented by [CNNMultiplyGradient], for mocking and DI.
+type CNNMultiplyGradientable interface {
+	Unwrap() *raw.MPSCNNMultiplyGradient
+}
+
+var _ CNNMultiplyGradientable = (*CNNMultiplyGradient)(nil)
+

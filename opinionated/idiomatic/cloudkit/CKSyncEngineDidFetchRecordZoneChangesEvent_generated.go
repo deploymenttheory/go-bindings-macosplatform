@@ -7,6 +7,7 @@ package cloudkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // SyncEngineDidFetchRecordZoneChangesEvent wraps [raw.CKSyncEngineDidFetchRecordZoneChangesEvent] with a fluent Go API.
@@ -23,5 +24,28 @@ func NewSyncEngineDidFetchRecordZoneChangesEvent() *SyncEngineDidFetchRecordZone
 	return &SyncEngineDidFetchRecordZoneChangesEvent{inner: raw.CKSyncEngineDidFetchRecordZoneChangesEventFromID(_id)}
 }
 
+// ZoneID calls the underlying ZoneID.
+func (x *SyncEngineDidFetchRecordZoneChangesEvent) ZoneID() *RecordZoneID {
+	_r := x.inner.ZoneID()
+	if _r == nil {
+		return nil
+	}
+	return &RecordZoneID{inner: _r}
+}
+
+// Error calls the underlying Error.
+func (x *SyncEngineDidFetchRecordZoneChangesEvent) Error() unsafe.Pointer {
+	return x.inner.Error()
+}
+
 func (x *SyncEngineDidFetchRecordZoneChangesEvent) asSyncEngineEvent() *raw.CKSyncEngineEvent { return &x.inner.CKSyncEngineEvent }
+
+// SyncEngineDidFetchRecordZoneChangesEventable is the interface implemented by [SyncEngineDidFetchRecordZoneChangesEvent], for mocking and DI.
+type SyncEngineDidFetchRecordZoneChangesEventable interface {
+	Unwrap() *raw.CKSyncEngineDidFetchRecordZoneChangesEvent
+	ZoneID() *RecordZoneID
+	Error() unsafe.Pointer
+}
+
+var _ SyncEngineDidFetchRecordZoneChangesEventable = (*SyncEngineDidFetchRecordZoneChangesEvent)(nil)
 

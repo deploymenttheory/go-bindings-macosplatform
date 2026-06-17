@@ -23,3 +23,10 @@ func NewAUViewController() *AUViewController {
 	return &AUViewController{inner: raw.AUViewControllerFromID(_id)}
 }
 
+// AUViewControllerable is the interface implemented by [AUViewController], for mocking and DI.
+type AUViewControllerable interface {
+	Unwrap() *raw.AUViewController
+}
+
+var _ AUViewControllerable = (*AUViewController)(nil)
+

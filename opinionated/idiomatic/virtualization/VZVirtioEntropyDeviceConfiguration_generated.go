@@ -25,3 +25,10 @@ func NewVirtioEntropyDeviceConfiguration() *VirtioEntropyDeviceConfiguration {
 
 func (x *VirtioEntropyDeviceConfiguration) asEntropyDeviceConfiguration() *raw.VZEntropyDeviceConfiguration { return &x.inner.VZEntropyDeviceConfiguration }
 
+// VirtioEntropyDeviceConfigurationable is the interface implemented by [VirtioEntropyDeviceConfiguration], for mocking and DI.
+type VirtioEntropyDeviceConfigurationable interface {
+	Unwrap() *raw.VZVirtioEntropyDeviceConfiguration
+}
+
+var _ VirtioEntropyDeviceConfigurationable = (*VirtioEntropyDeviceConfiguration)(nil)
+

@@ -6,6 +6,7 @@ package contacts
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/contacts"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,37 @@ func NewContainer() *Container {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CNContainer")), objc.RegisterName("new"))
 	return &Container{inner: raw.CNContainerFromID(_id)}
 }
+
+// Identifier calls the underlying Identifier.
+func (x *Container) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Name calls the underlying Name.
+func (x *Container) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Type calls the underlying Type.
+func (x *Container) Type() raw.CNContainerType {
+	return x.inner.Type()
+}
+
+// Containerable is the interface implemented by [Container], for mocking and DI.
+type Containerable interface {
+	Unwrap() *raw.CNContainer
+	Identifier() string
+	Name() string
+	Type() raw.CNContainerType
+}
+
+var _ Containerable = (*Container)(nil)
 

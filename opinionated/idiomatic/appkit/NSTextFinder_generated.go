@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -61,16 +62,111 @@ func (x *TextFinder) WithIncrementalSearchingShouldDimContentView(incrementalSea
 	return x
 }
 
+// PerformAction calls the underlying PerformAction.
+func (x *TextFinder) PerformAction(op raw.NSTextFinderAction) {
+	x.inner.PerformAction(op)
+}
+
+// ValidateAction calls the underlying ValidateAction.
+func (x *TextFinder) ValidateAction(op raw.NSTextFinderAction) bool {
+	return x.inner.ValidateAction(op)
+}
+
+// CancelFindIndicator calls the underlying CancelFindIndicator.
+func (x *TextFinder) CancelFindIndicator() {
+	x.inner.CancelFindIndicator()
+}
+
+// NoteClientStringWillChange calls the underlying NoteClientStringWillChange.
+func (x *TextFinder) NoteClientStringWillChange() {
+	x.inner.NoteClientStringWillChange()
+}
+
+// Client calls the underlying Client.
+func (x *TextFinder) Client() raw.NSTextFinderClient {
+	return x.inner.Client()
+}
+
+// SetClient calls the underlying SetClient.
+func (x *TextFinder) SetClient(client raw.NSTextFinderClient) {
+	x.inner.SetClient(client)
+}
+
+// FindBarContainer calls the underlying FindBarContainer.
+func (x *TextFinder) FindBarContainer() raw.NSTextFinderBarContainer {
+	return x.inner.FindBarContainer()
+}
+
+// SetFindBarContainer calls the underlying SetFindBarContainer.
+func (x *TextFinder) SetFindBarContainer(findBarContainer raw.NSTextFinderBarContainer) {
+	x.inner.SetFindBarContainer(findBarContainer)
+}
+
+// FindIndicatorNeedsUpdate calls the underlying FindIndicatorNeedsUpdate.
+func (x *TextFinder) FindIndicatorNeedsUpdate() bool {
+	return x.inner.FindIndicatorNeedsUpdate()
+}
+
+// SetFindIndicatorNeedsUpdate calls the underlying SetFindIndicatorNeedsUpdate.
+func (x *TextFinder) SetFindIndicatorNeedsUpdate(findIndicatorNeedsUpdate bool) {
+	x.inner.SetFindIndicatorNeedsUpdate(findIndicatorNeedsUpdate)
+}
+
+// IsIncrementalSearchingEnabled calls the underlying IsIncrementalSearchingEnabled.
+func (x *TextFinder) IsIncrementalSearchingEnabled() bool {
+	return x.inner.IsIncrementalSearchingEnabled()
+}
+
+// SetIncrementalSearchingEnabled calls the underlying SetIncrementalSearchingEnabled.
+func (x *TextFinder) SetIncrementalSearchingEnabled(incrementalSearchingEnabled bool) {
+	x.inner.SetIncrementalSearchingEnabled(incrementalSearchingEnabled)
+}
+
+// IncrementalSearchingShouldDimContentView calls the underlying IncrementalSearchingShouldDimContentView.
+func (x *TextFinder) IncrementalSearchingShouldDimContentView() bool {
+	return x.inner.IncrementalSearchingShouldDimContentView()
+}
+
+// SetIncrementalSearchingShouldDimContentView calls the underlying SetIncrementalSearchingShouldDimContentView.
+func (x *TextFinder) SetIncrementalSearchingShouldDimContentView(incrementalSearchingShouldDimContentView bool) {
+	x.inner.SetIncrementalSearchingShouldDimContentView(incrementalSearchingShouldDimContentView)
+}
+
 // IncrementalMatchRanges returns the collection as a Go slice.
 func (x *TextFinder) IncrementalMatchRanges() []*foundation.NSValue {
 	arr := x.inner.IncrementalMatchRanges()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSValue, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSValue {
+		return foundation.NSValueFromID(purego.Retain(_id))
+	})
 }
+
+// TextFinderable is the interface implemented by [TextFinder], for mocking and DI.
+type TextFinderable interface {
+	Unwrap() *raw.NSTextFinder
+	WithClient(client raw.NSTextFinderClient) *TextFinder
+	WithFindBarContainer(findBarContainer raw.NSTextFinderBarContainer) *TextFinder
+	WithFindIndicatorNeedsUpdate(findIndicatorNeedsUpdate bool) *TextFinder
+	WithIncrementalSearchingEnabled(incrementalSearchingEnabled bool) *TextFinder
+	WithIncrementalSearchingShouldDimContentView(incrementalSearchingShouldDimContentView bool) *TextFinder
+	PerformAction(op raw.NSTextFinderAction)
+	ValidateAction(op raw.NSTextFinderAction) bool
+	CancelFindIndicator()
+	NoteClientStringWillChange()
+	Client() raw.NSTextFinderClient
+	SetClient(client raw.NSTextFinderClient)
+	FindBarContainer() raw.NSTextFinderBarContainer
+	SetFindBarContainer(findBarContainer raw.NSTextFinderBarContainer)
+	FindIndicatorNeedsUpdate() bool
+	SetFindIndicatorNeedsUpdate(findIndicatorNeedsUpdate bool)
+	IsIncrementalSearchingEnabled() bool
+	SetIncrementalSearchingEnabled(incrementalSearchingEnabled bool)
+	IncrementalSearchingShouldDimContentView() bool
+	SetIncrementalSearchingShouldDimContentView(incrementalSearchingShouldDimContentView bool)
+	IncrementalMatchRanges() []*foundation.NSValue
+}
+
+var _ TextFinderable = (*TextFinder)(nil)
 

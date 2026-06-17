@@ -5,8 +5,10 @@
 package healthkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Object wraps [raw.HKObject] with a fluent Go API.
@@ -23,5 +25,50 @@ func NewObject() *Object {
 	return &Object{inner: raw.HKObjectFromID(_id)}
 }
 
+// UUID calls the underlying UUID.
+func (x *Object) UUID() *foundation.NSUUID {
+	return x.inner.UUID()
+}
+
+// Source calls the underlying Source.
+func (x *Object) Source() unsafe.Pointer {
+	return x.inner.Source()
+}
+
+// SourceRevision calls the underlying SourceRevision.
+func (x *Object) SourceRevision() *SourceRevision {
+	_r := x.inner.SourceRevision()
+	if _r == nil {
+		return nil
+	}
+	return &SourceRevision{inner: _r}
+}
+
+// Device calls the underlying Device.
+func (x *Object) Device() *Device {
+	_r := x.inner.Device()
+	if _r == nil {
+		return nil
+	}
+	return &Device{inner: _r}
+}
+
+// Metadata calls the underlying Metadata.
+func (x *Object) Metadata() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.Metadata()
+}
+
 func (x *Object) asObject() *raw.HKObject { return x.inner }
+
+// Objectable is the interface implemented by [Object], for mocking and DI.
+type Objectable interface {
+	Unwrap() *raw.HKObject
+	UUID() *foundation.NSUUID
+	Source() unsafe.Pointer
+	SourceRevision() *SourceRevision
+	Device() *Device
+	Metadata() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+}
+
+var _ Objectable = (*Object)(nil)
 

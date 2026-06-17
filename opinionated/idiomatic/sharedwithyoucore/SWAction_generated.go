@@ -5,6 +5,7 @@
 package sharedwithyoucore
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/sharedwithyoucore"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,5 +24,36 @@ func NewAction() *Action {
 	return &Action{inner: raw.SWActionFromID(_id)}
 }
 
+// Fulfill calls the underlying Fulfill.
+func (x *Action) Fulfill() {
+	x.inner.Fulfill()
+}
+
+// Fail calls the underlying Fail.
+func (x *Action) Fail() {
+	x.inner.Fail()
+}
+
+// Uuid calls the underlying Uuid.
+func (x *Action) Uuid() *foundation.NSUUID {
+	return x.inner.Uuid()
+}
+
+// IsComplete calls the underlying IsComplete.
+func (x *Action) IsComplete() bool {
+	return x.inner.IsComplete()
+}
+
 func (x *Action) asAction() *raw.SWAction { return x.inner }
+
+// Actionable is the interface implemented by [Action], for mocking and DI.
+type Actionable interface {
+	Unwrap() *raw.SWAction
+	Fulfill()
+	Fail()
+	Uuid() *foundation.NSUUID
+	IsComplete() bool
+}
+
+var _ Actionable = (*Action)(nil)
 

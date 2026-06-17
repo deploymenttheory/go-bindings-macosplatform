@@ -26,3 +26,22 @@ func NewPreviewReplyAttachmentWithDataContentType(data *foundation.NSData, conte
 	return &PreviewReplyAttachment{inner: raw.QLPreviewReplyAttachmentFromID(_id)}
 }
 
+// Data calls the underlying Data.
+func (x *PreviewReplyAttachment) Data() *foundation.NSData {
+	return x.inner.Data()
+}
+
+// ContentType calls the underlying ContentType.
+func (x *PreviewReplyAttachment) ContentType() *uniformtypeidentifiers.UTType {
+	return x.inner.ContentType()
+}
+
+// PreviewReplyAttachmentable is the interface implemented by [PreviewReplyAttachment], for mocking and DI.
+type PreviewReplyAttachmentable interface {
+	Unwrap() *raw.QLPreviewReplyAttachment
+	Data() *foundation.NSData
+	ContentType() *uniformtypeidentifiers.UTType
+}
+
+var _ PreviewReplyAttachmentable = (*PreviewReplyAttachment)(nil)
+

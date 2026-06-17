@@ -7,6 +7,7 @@ package metal
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -53,10 +54,60 @@ func (x *StitchedLibraryDescriptor) FunctionGraphs() []*raw.MTLFunctionStitching
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MTLFunctionStitchingGraph, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MTLFunctionStitchingGraph {
+		return raw.MTLFunctionStitchingGraphFromID(purego.Retain(_id))
+	})
 }
+
+// SetFunctionGraphs calls the underlying SetFunctionGraphs.
+func (x *StitchedLibraryDescriptor) SetFunctionGraphs(functionGraphs *foundation.NSArray[*raw.MTLFunctionStitchingGraph]) {
+	x.inner.SetFunctionGraphs(functionGraphs)
+}
+
+// Functions calls the underlying Functions.
+func (x *StitchedLibraryDescriptor) Functions() *foundation.NSArray[raw.MTLFunction] {
+	return x.inner.Functions()
+}
+
+// SetFunctions calls the underlying SetFunctions.
+func (x *StitchedLibraryDescriptor) SetFunctions(functions *foundation.NSArray[raw.MTLFunction]) {
+	x.inner.SetFunctions(functions)
+}
+
+// BinaryArchives calls the underlying BinaryArchives.
+func (x *StitchedLibraryDescriptor) BinaryArchives() *foundation.NSArray[raw.MTLBinaryArchive] {
+	return x.inner.BinaryArchives()
+}
+
+// SetBinaryArchives calls the underlying SetBinaryArchives.
+func (x *StitchedLibraryDescriptor) SetBinaryArchives(binaryArchives *foundation.NSArray[raw.MTLBinaryArchive]) {
+	x.inner.SetBinaryArchives(binaryArchives)
+}
+
+// Options calls the underlying Options.
+func (x *StitchedLibraryDescriptor) Options() raw.MTLStitchedLibraryOptions {
+	return x.inner.Options()
+}
+
+// SetOptions calls the underlying SetOptions.
+func (x *StitchedLibraryDescriptor) SetOptions(options raw.MTLStitchedLibraryOptions) {
+	x.inner.SetOptions(options)
+}
+
+// StitchedLibraryDescriptorable is the interface implemented by [StitchedLibraryDescriptor], for mocking and DI.
+type StitchedLibraryDescriptorable interface {
+	Unwrap() *raw.MTLStitchedLibraryDescriptor
+	WithFunctionGraphs(items ...*raw.MTLFunctionStitchingGraph) *StitchedLibraryDescriptor
+	WithOptions(options raw.MTLStitchedLibraryOptions) *StitchedLibraryDescriptor
+	FunctionGraphs() []*raw.MTLFunctionStitchingGraph
+	SetFunctionGraphs(functionGraphs *foundation.NSArray[*raw.MTLFunctionStitchingGraph])
+	Functions() *foundation.NSArray[raw.MTLFunction]
+	SetFunctions(functions *foundation.NSArray[raw.MTLFunction])
+	BinaryArchives() *foundation.NSArray[raw.MTLBinaryArchive]
+	SetBinaryArchives(binaryArchives *foundation.NSArray[raw.MTLBinaryArchive])
+	Options() raw.MTLStitchedLibraryOptions
+	SetOptions(options raw.MTLStitchedLibraryOptions)
+}
+
+var _ StitchedLibraryDescriptorable = (*StitchedLibraryDescriptor)(nil)
 

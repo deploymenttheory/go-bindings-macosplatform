@@ -6,6 +6,8 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +25,44 @@ func NewMetricHLSPlaylistRequestEvent() *MetricHLSPlaylistRequestEvent {
 	return &MetricHLSPlaylistRequestEvent{inner: raw.AVMetricHLSPlaylistRequestEventFromID(_id)}
 }
 
+// Url calls the underlying Url.
+func (x *MetricHLSPlaylistRequestEvent) Url() *foundation.NSURL {
+	return x.inner.Url()
+}
+
+// IsMultivariantPlaylist calls the underlying IsMultivariantPlaylist.
+func (x *MetricHLSPlaylistRequestEvent) IsMultivariantPlaylist() bool {
+	return x.inner.IsMultivariantPlaylist()
+}
+
+// MediaType calls the underlying MediaType.
+func (x *MetricHLSPlaylistRequestEvent) MediaType() string {
+	_r := x.inner.MediaType()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// MediaResourceRequestEvent calls the underlying MediaResourceRequestEvent.
+func (x *MetricHLSPlaylistRequestEvent) MediaResourceRequestEvent() *MetricMediaResourceRequestEvent {
+	_r := x.inner.MediaResourceRequestEvent()
+	if _r == nil {
+		return nil
+	}
+	return &MetricMediaResourceRequestEvent{inner: _r}
+}
+
 func (x *MetricHLSPlaylistRequestEvent) asMetricEvent() *raw.AVMetricEvent { return &x.inner.AVMetricEvent }
+
+// MetricHLSPlaylistRequestEventable is the interface implemented by [MetricHLSPlaylistRequestEvent], for mocking and DI.
+type MetricHLSPlaylistRequestEventable interface {
+	Unwrap() *raw.AVMetricHLSPlaylistRequestEvent
+	Url() *foundation.NSURL
+	IsMultivariantPlaylist() bool
+	MediaType() string
+	MediaResourceRequestEvent() *MetricMediaResourceRequestEvent
+}
+
+var _ MetricHLSPlaylistRequestEventable = (*MetricHLSPlaylistRequestEvent)(nil)
 

@@ -6,6 +6,7 @@ package shazamkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/shazamkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -29,10 +30,26 @@ func (x *Match) MediaItems() []*raw.SHMatchedMediaItem {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.SHMatchedMediaItem, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SHMatchedMediaItem {
+		return raw.SHMatchedMediaItemFromID(purego.Retain(_id))
+	})
 }
+
+// QuerySignature calls the underlying QuerySignature.
+func (x *Match) QuerySignature() *Signature {
+	_r := x.inner.QuerySignature()
+	if _r == nil {
+		return nil
+	}
+	return &Signature{inner: _r}
+}
+
+// Matchable is the interface implemented by [Match], for mocking and DI.
+type Matchable interface {
+	Unwrap() *raw.SHMatch
+	MediaItems() []*raw.SHMatchedMediaItem
+	QuerySignature() *Signature
+}
+
+var _ Matchable = (*Match)(nil)
 

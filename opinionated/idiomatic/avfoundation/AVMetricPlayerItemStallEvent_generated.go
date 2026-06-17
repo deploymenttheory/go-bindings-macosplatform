@@ -27,3 +27,10 @@ func (x *MetricPlayerItemStallEvent) asMetricPlayerItemRateChangeEvent() *raw.AV
 
 func (x *MetricPlayerItemStallEvent) asMetricEvent() *raw.AVMetricEvent { return &x.inner.AVMetricPlayerItemRateChangeEvent.AVMetricEvent }
 
+// MetricPlayerItemStallEventable is the interface implemented by [MetricPlayerItemStallEvent], for mocking and DI.
+type MetricPlayerItemStallEventable interface {
+	Unwrap() *raw.AVMetricPlayerItemStallEvent
+}
+
+var _ MetricPlayerItemStallEventable = (*MetricPlayerItemStallEvent)(nil)
+

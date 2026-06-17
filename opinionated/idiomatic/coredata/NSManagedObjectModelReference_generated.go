@@ -7,6 +7,7 @@ package coredata
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -45,4 +46,31 @@ func NewManagedObjectModelReferenceWithNameInBundleVersionChecksum(modelName str
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:inBundle:versionChecksum:"), foundation.NSStringStringWithUTF8String(modelName).Ptr(), bundle.Ptr(), foundation.NSStringStringWithUTF8String(versionChecksum).Ptr())
 	return &ManagedObjectModelReference{inner: raw.NSManagedObjectModelReferenceFromID(_id)}
 }
+
+// ResolvedModel calls the underlying ResolvedModel.
+func (x *ManagedObjectModelReference) ResolvedModel() *ManagedObjectModel {
+	_r := x.inner.ResolvedModel()
+	if _r == nil {
+		return nil
+	}
+	return &ManagedObjectModel{inner: _r}
+}
+
+// VersionChecksum calls the underlying VersionChecksum.
+func (x *ManagedObjectModelReference) VersionChecksum() string {
+	_r := x.inner.VersionChecksum()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ManagedObjectModelReferenceable is the interface implemented by [ManagedObjectModelReference], for mocking and DI.
+type ManagedObjectModelReferenceable interface {
+	Unwrap() *raw.NSManagedObjectModelReference
+	ResolvedModel() *ManagedObjectModel
+	VersionChecksum() string
+}
+
+var _ ManagedObjectModelReferenceable = (*ManagedObjectModelReference)(nil)
 

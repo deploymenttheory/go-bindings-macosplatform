@@ -5,8 +5,10 @@
 package foundation
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // KeyValueSharedObservers wraps [raw.NSKeyValueSharedObservers] with a fluent Go API.
@@ -24,5 +26,28 @@ func NewKeyValueSharedObserversWithObservableClass(observableClass objc.Class) *
 	return &KeyValueSharedObservers{inner: raw.NSKeyValueSharedObserversFromID(_id)}
 }
 
+// AddSharedObserverForKeyOptionsContext calls the underlying AddSharedObserverForKeyOptionsContext.
+func (x *KeyValueSharedObservers) AddSharedObserverForKeyOptionsContext(observer *raw.NSObject, key string, options raw.NSKeyValueObservingOptions, context_ unsafe.Pointer) {
+	x.inner.AddSharedObserverForKeyOptionsContext(observer, foundation.NSStringStringWithUTF8String(key), options, context_)
+}
+
+// Snapshot calls the underlying Snapshot.
+func (x *KeyValueSharedObservers) Snapshot() *KeyValueSharedObserversSnapshot {
+	_r := x.inner.Snapshot()
+	if _r == nil {
+		return nil
+	}
+	return &KeyValueSharedObserversSnapshot{inner: _r}
+}
+
 func (x *KeyValueSharedObservers) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// KeyValueSharedObserversable is the interface implemented by [KeyValueSharedObservers], for mocking and DI.
+type KeyValueSharedObserversable interface {
+	Unwrap() *raw.NSKeyValueSharedObservers
+	AddSharedObserverForKeyOptionsContext(observer *raw.NSObject, key string, options raw.NSKeyValueObservingOptions, context_ unsafe.Pointer)
+	Snapshot() *KeyValueSharedObserversSnapshot
+}
+
+var _ KeyValueSharedObserversable = (*KeyValueSharedObservers)(nil)
 

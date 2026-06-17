@@ -30,7 +30,27 @@ func (x *PerlinNoiseSource) WithPersistence(persistence float64) *PerlinNoiseSou
 	return x
 }
 
+// Persistence calls the underlying Persistence.
+func (x *PerlinNoiseSource) Persistence() float64 {
+	return x.inner.Persistence()
+}
+
+// SetPersistence calls the underlying SetPersistence.
+func (x *PerlinNoiseSource) SetPersistence(persistence float64) {
+	x.inner.SetPersistence(persistence)
+}
+
 func (x *PerlinNoiseSource) asCoherentNoiseSource() *raw.GKCoherentNoiseSource { return &x.inner.GKCoherentNoiseSource }
 
 func (x *PerlinNoiseSource) asNoiseSource() *raw.GKNoiseSource { return &x.inner.GKCoherentNoiseSource.GKNoiseSource }
+
+// PerlinNoiseSourceable is the interface implemented by [PerlinNoiseSource], for mocking and DI.
+type PerlinNoiseSourceable interface {
+	Unwrap() *raw.GKPerlinNoiseSource
+	WithPersistence(persistence float64) *PerlinNoiseSource
+	Persistence() float64
+	SetPersistence(persistence float64)
+}
+
+var _ PerlinNoiseSourceable = (*PerlinNoiseSource)(nil)
 

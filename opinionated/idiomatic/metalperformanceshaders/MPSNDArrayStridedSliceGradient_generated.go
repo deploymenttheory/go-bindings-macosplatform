@@ -33,3 +33,10 @@ func (x *NDArrayStridedSliceGradient) asNDArrayMultiaryBase() *mpsndarray.MPSNDA
 
 func (x *NDArrayStridedSliceGradient) asKernel() *mpscore.MPSKernel { return &x.inner.MPSNDArrayUnaryGradientKernel.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase.MPSKernel }
 
+// NDArrayStridedSliceGradientable is the interface implemented by [NDArrayStridedSliceGradient], for mocking and DI.
+type NDArrayStridedSliceGradientable interface {
+	Unwrap() *raw.MPSNDArrayStridedSliceGradient
+}
+
+var _ NDArrayStridedSliceGradientable = (*NDArrayStridedSliceGradient)(nil)
+

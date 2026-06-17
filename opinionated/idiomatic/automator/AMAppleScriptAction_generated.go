@@ -30,7 +30,27 @@ func (x *AppleScriptAction) WithScript(script *osakit.OSAScript) *AppleScriptAct
 	return x
 }
 
+// Script calls the underlying Script.
+func (x *AppleScriptAction) Script() *osakit.OSAScript {
+	return x.inner.Script()
+}
+
+// SetScript calls the underlying SetScript.
+func (x *AppleScriptAction) SetScript(script *osakit.OSAScript) {
+	x.inner.SetScript(script)
+}
+
 func (x *AppleScriptAction) asBundleAction() *raw.AMBundleAction { return &x.inner.AMBundleAction }
 
 func (x *AppleScriptAction) asAction() *raw.AMAction { return &x.inner.AMBundleAction.AMAction }
+
+// AppleScriptActionable is the interface implemented by [AppleScriptAction], for mocking and DI.
+type AppleScriptActionable interface {
+	Unwrap() *raw.AMAppleScriptAction
+	WithScript(script *osakit.OSAScript) *AppleScriptAction
+	Script() *osakit.OSAScript
+	SetScript(script *osakit.OSAScript)
+}
+
+var _ AppleScriptActionable = (*AppleScriptAction)(nil)
 

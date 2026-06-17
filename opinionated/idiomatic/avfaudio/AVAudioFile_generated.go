@@ -76,3 +76,85 @@ func (x *AudioFile) WithFramePosition(framePosition int64) *AudioFile {
 	return x
 }
 
+// Close calls the underlying Close.
+func (x *AudioFile) Close() {
+	x.inner.Close()
+}
+
+// ReadIntoBufferError calls the underlying ReadIntoBufferError.
+func (x *AudioFile) ReadIntoBufferError(buffer *raw.AVAudioPCMBuffer) (bool, error) {
+	return x.inner.ReadIntoBufferError(buffer)
+}
+
+// ReadIntoBufferFrameCountError calls the underlying ReadIntoBufferFrameCountError.
+func (x *AudioFile) ReadIntoBufferFrameCountError(buffer *raw.AVAudioPCMBuffer, frames uint32) (bool, error) {
+	return x.inner.ReadIntoBufferFrameCountError(buffer, frames)
+}
+
+// WriteFromBufferError calls the underlying WriteFromBufferError.
+func (x *AudioFile) WriteFromBufferError(buffer *raw.AVAudioPCMBuffer) (bool, error) {
+	return x.inner.WriteFromBufferError(buffer)
+}
+
+// IsOpen calls the underlying IsOpen.
+func (x *AudioFile) IsOpen() bool {
+	return x.inner.IsOpen()
+}
+
+// Url calls the underlying Url.
+func (x *AudioFile) Url() *foundation.NSURL {
+	return x.inner.Url()
+}
+
+// FileFormat calls the underlying FileFormat.
+func (x *AudioFile) FileFormat() *AudioFormat {
+	_r := x.inner.FileFormat()
+	if _r == nil {
+		return nil
+	}
+	return &AudioFormat{inner: _r}
+}
+
+// ProcessingFormat calls the underlying ProcessingFormat.
+func (x *AudioFile) ProcessingFormat() *AudioFormat {
+	_r := x.inner.ProcessingFormat()
+	if _r == nil {
+		return nil
+	}
+	return &AudioFormat{inner: _r}
+}
+
+// Length calls the underlying Length.
+func (x *AudioFile) Length() int64 {
+	return x.inner.Length()
+}
+
+// FramePosition calls the underlying FramePosition.
+func (x *AudioFile) FramePosition() int64 {
+	return x.inner.FramePosition()
+}
+
+// SetFramePosition calls the underlying SetFramePosition.
+func (x *AudioFile) SetFramePosition(framePosition int64) {
+	x.inner.SetFramePosition(framePosition)
+}
+
+// AudioFileable is the interface implemented by [AudioFile], for mocking and DI.
+type AudioFileable interface {
+	Unwrap() *raw.AVAudioFile
+	WithFramePosition(framePosition int64) *AudioFile
+	Close()
+	ReadIntoBufferError(buffer *raw.AVAudioPCMBuffer) (bool, error)
+	ReadIntoBufferFrameCountError(buffer *raw.AVAudioPCMBuffer, frames uint32) (bool, error)
+	WriteFromBufferError(buffer *raw.AVAudioPCMBuffer) (bool, error)
+	IsOpen() bool
+	Url() *foundation.NSURL
+	FileFormat() *AudioFormat
+	ProcessingFormat() *AudioFormat
+	Length() int64
+	FramePosition() int64
+	SetFramePosition(framePosition int64)
+}
+
+var _ AudioFileable = (*AudioFile)(nil)
+

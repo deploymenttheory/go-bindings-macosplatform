@@ -9,6 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -92,5 +93,169 @@ func (x *Text) WithFlatness(flatness float64) *Text {
 	return x
 }
 
+// ExtrusionDepth calls the underlying ExtrusionDepth.
+func (x *Text) ExtrusionDepth() float64 {
+	return x.inner.ExtrusionDepth()
+}
+
+// SetExtrusionDepth calls the underlying SetExtrusionDepth.
+func (x *Text) SetExtrusionDepth(extrusionDepth float64) {
+	x.inner.SetExtrusionDepth(extrusionDepth)
+}
+
+// String calls the underlying String.
+func (x *Text) String() objc.ID {
+	return x.inner.String()
+}
+
+// SetString calls the underlying SetString.
+func (x *Text) SetString(string_ objc.ID) {
+	x.inner.SetString(string_)
+}
+
+// Font calls the underlying Font.
+func (x *Text) Font() *appkit.NSFont {
+	return x.inner.Font()
+}
+
+// SetFont calls the underlying SetFont.
+func (x *Text) SetFont(font *appkit.NSFont) {
+	x.inner.SetFont(font)
+}
+
+// IsWrapped calls the underlying IsWrapped.
+func (x *Text) IsWrapped() bool {
+	return x.inner.IsWrapped()
+}
+
+// SetWrapped calls the underlying SetWrapped.
+func (x *Text) SetWrapped(wrapped bool) {
+	x.inner.SetWrapped(wrapped)
+}
+
+// ContainerFrame calls the underlying ContainerFrame.
+func (x *Text) ContainerFrame() corefoundation.CGRect {
+	return x.inner.ContainerFrame()
+}
+
+// SetContainerFrame calls the underlying SetContainerFrame.
+func (x *Text) SetContainerFrame(containerFrame corefoundation.CGRect) {
+	x.inner.SetContainerFrame(containerFrame)
+}
+
+// TextSize calls the underlying TextSize.
+func (x *Text) TextSize() corefoundation.CGSize {
+	return x.inner.TextSize()
+}
+
+// TruncationMode calls the underlying TruncationMode.
+func (x *Text) TruncationMode() string {
+	_r := x.inner.TruncationMode()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetTruncationMode calls the underlying SetTruncationMode.
+func (x *Text) SetTruncationMode(truncationMode string) {
+	x.inner.SetTruncationMode(foundation.NSStringStringWithUTF8String(truncationMode))
+}
+
+// AlignmentMode calls the underlying AlignmentMode.
+func (x *Text) AlignmentMode() string {
+	_r := x.inner.AlignmentMode()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetAlignmentMode calls the underlying SetAlignmentMode.
+func (x *Text) SetAlignmentMode(alignmentMode string) {
+	x.inner.SetAlignmentMode(foundation.NSStringStringWithUTF8String(alignmentMode))
+}
+
+// ChamferRadius calls the underlying ChamferRadius.
+func (x *Text) ChamferRadius() float64 {
+	return x.inner.ChamferRadius()
+}
+
+// SetChamferRadius calls the underlying SetChamferRadius.
+func (x *Text) SetChamferRadius(chamferRadius float64) {
+	x.inner.SetChamferRadius(chamferRadius)
+}
+
+// ChamferSegmentCount calls the underlying ChamferSegmentCount.
+func (x *Text) ChamferSegmentCount() int {
+	return x.inner.ChamferSegmentCount()
+}
+
+// SetChamferSegmentCount calls the underlying SetChamferSegmentCount.
+func (x *Text) SetChamferSegmentCount(chamferSegmentCount int) {
+	x.inner.SetChamferSegmentCount(chamferSegmentCount)
+}
+
+// ChamferProfile calls the underlying ChamferProfile.
+func (x *Text) ChamferProfile() *appkit.NSBezierPath {
+	return x.inner.ChamferProfile()
+}
+
+// SetChamferProfile calls the underlying SetChamferProfile.
+func (x *Text) SetChamferProfile(chamferProfile *appkit.NSBezierPath) {
+	x.inner.SetChamferProfile(chamferProfile)
+}
+
+// Flatness calls the underlying Flatness.
+func (x *Text) Flatness() float64 {
+	return x.inner.Flatness()
+}
+
+// SetFlatness calls the underlying SetFlatness.
+func (x *Text) SetFlatness(flatness float64) {
+	x.inner.SetFlatness(flatness)
+}
+
 func (x *Text) asGeometry() *raw.SCNGeometry { return &x.inner.SCNGeometry }
+
+// Textable is the interface implemented by [Text], for mocking and DI.
+type Textable interface {
+	Unwrap() *raw.SCNText
+	WithExtrusionDepth(extrusionDepth float64) *Text
+	WithString(string_ objc.ID) *Text
+	WithFont(font *appkit.NSFont) *Text
+	WithWrapped(wrapped bool) *Text
+	WithContainerFrame(containerFrame corefoundation.CGRect) *Text
+	WithTruncationMode(truncationMode string) *Text
+	WithAlignmentMode(alignmentMode string) *Text
+	WithChamferRadius(chamferRadius float64) *Text
+	WithChamferSegmentCount(chamferSegmentCount int) *Text
+	WithChamferProfile(chamferProfile *appkit.NSBezierPath) *Text
+	WithFlatness(flatness float64) *Text
+	ExtrusionDepth() float64
+	SetExtrusionDepth(extrusionDepth float64)
+	String() objc.ID
+	SetString(string_ objc.ID)
+	Font() *appkit.NSFont
+	SetFont(font *appkit.NSFont)
+	IsWrapped() bool
+	SetWrapped(wrapped bool)
+	ContainerFrame() corefoundation.CGRect
+	SetContainerFrame(containerFrame corefoundation.CGRect)
+	TextSize() corefoundation.CGSize
+	TruncationMode() string
+	SetTruncationMode(truncationMode string)
+	AlignmentMode() string
+	SetAlignmentMode(alignmentMode string)
+	ChamferRadius() float64
+	SetChamferRadius(chamferRadius float64)
+	ChamferSegmentCount() int
+	SetChamferSegmentCount(chamferSegmentCount int)
+	ChamferProfile() *appkit.NSBezierPath
+	SetChamferProfile(chamferProfile *appkit.NSBezierPath)
+	Flatness() float64
+	SetFlatness(flatness float64)
+}
+
+var _ Textable = (*Text)(nil)
 

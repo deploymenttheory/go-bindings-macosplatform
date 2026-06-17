@@ -5,6 +5,7 @@
 package screensaver
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/screensaver"
 	"github.com/ebitengine/purego/objc"
@@ -30,4 +31,66 @@ func (x *ScreenSaverView) WithAnimationTimeInterval(animationTimeInterval float6
 	x.inner.SetAnimationTimeInterval(animationTimeInterval)
 	return x
 }
+
+// StartAnimation calls the underlying StartAnimation.
+func (x *ScreenSaverView) StartAnimation() {
+	x.inner.StartAnimation()
+}
+
+// StopAnimation calls the underlying StopAnimation.
+func (x *ScreenSaverView) StopAnimation() {
+	x.inner.StopAnimation()
+}
+
+// AnimateOneFrame calls the underlying AnimateOneFrame.
+func (x *ScreenSaverView) AnimateOneFrame() {
+	x.inner.AnimateOneFrame()
+}
+
+// AnimationTimeInterval calls the underlying AnimationTimeInterval.
+func (x *ScreenSaverView) AnimationTimeInterval() float64 {
+	return x.inner.AnimationTimeInterval()
+}
+
+// SetAnimationTimeInterval calls the underlying SetAnimationTimeInterval.
+func (x *ScreenSaverView) SetAnimationTimeInterval(animationTimeInterval float64) {
+	x.inner.SetAnimationTimeInterval(animationTimeInterval)
+}
+
+// IsAnimating calls the underlying IsAnimating.
+func (x *ScreenSaverView) IsAnimating() bool {
+	return x.inner.IsAnimating()
+}
+
+// HasConfigureSheet calls the underlying HasConfigureSheet.
+func (x *ScreenSaverView) HasConfigureSheet() bool {
+	return x.inner.HasConfigureSheet()
+}
+
+// ConfigureSheet calls the underlying ConfigureSheet.
+func (x *ScreenSaverView) ConfigureSheet() *appkit.NSWindow {
+	return x.inner.ConfigureSheet()
+}
+
+// IsPreview calls the underlying IsPreview.
+func (x *ScreenSaverView) IsPreview() bool {
+	return x.inner.IsPreview()
+}
+
+// ScreenSaverViewable is the interface implemented by [ScreenSaverView], for mocking and DI.
+type ScreenSaverViewable interface {
+	Unwrap() *raw.ScreenSaverView
+	WithAnimationTimeInterval(animationTimeInterval float64) *ScreenSaverView
+	StartAnimation()
+	StopAnimation()
+	AnimateOneFrame()
+	AnimationTimeInterval() float64
+	SetAnimationTimeInterval(animationTimeInterval float64)
+	IsAnimating() bool
+	HasConfigureSheet() bool
+	ConfigureSheet() *appkit.NSWindow
+	IsPreview() bool
+}
+
+var _ ScreenSaverViewable = (*ScreenSaverView)(nil)
 

@@ -25,3 +25,10 @@ func NewFileResolutionResult() *FileResolutionResult {
 
 func (x *FileResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult { return &x.inner.INIntentResolutionResult }
 
+// FileResolutionResultable is the interface implemented by [FileResolutionResult], for mocking and DI.
+type FileResolutionResultable interface {
+	Unwrap() *raw.INFileResolutionResult
+}
+
+var _ FileResolutionResultable = (*FileResolutionResult)(nil)
+

@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -90,5 +91,205 @@ func (x *PickerTouchBarItem) WithCustomizationLabel(customizationLabel string) *
 	return x
 }
 
+// SetImageAtIndex calls the underlying SetImageAtIndex.
+func (x *PickerTouchBarItem) SetImageAtIndex(image *raw.NSImage, index int) {
+	x.inner.SetImageAtIndex(image, index)
+}
+
+// ImageAtIndex calls the underlying ImageAtIndex.
+func (x *PickerTouchBarItem) ImageAtIndex(index int) *Image {
+	_r := x.inner.ImageAtIndex(index)
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// SetLabelAtIndex calls the underlying SetLabelAtIndex.
+func (x *PickerTouchBarItem) SetLabelAtIndex(label string, index int) {
+	x.inner.SetLabelAtIndex(foundation.NSStringStringWithUTF8String(label), index)
+}
+
+// LabelAtIndex calls the underlying LabelAtIndex.
+func (x *PickerTouchBarItem) LabelAtIndex(index int) string {
+	_r := x.inner.LabelAtIndex(index)
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetEnabledAtIndex calls the underlying SetEnabledAtIndex.
+func (x *PickerTouchBarItem) SetEnabledAtIndex(enabled bool, index int) {
+	x.inner.SetEnabledAtIndex(enabled, index)
+}
+
+// IsEnabledAtIndex calls the underlying IsEnabledAtIndex.
+func (x *PickerTouchBarItem) IsEnabledAtIndex(index int) bool {
+	return x.inner.IsEnabledAtIndex(index)
+}
+
+// ControlRepresentation calls the underlying ControlRepresentation.
+func (x *PickerTouchBarItem) ControlRepresentation() raw.NSPickerTouchBarItemControlRepresentation {
+	return x.inner.ControlRepresentation()
+}
+
+// SetControlRepresentation calls the underlying SetControlRepresentation.
+func (x *PickerTouchBarItem) SetControlRepresentation(controlRepresentation raw.NSPickerTouchBarItemControlRepresentation) {
+	x.inner.SetControlRepresentation(controlRepresentation)
+}
+
+// CollapsedRepresentationLabel calls the underlying CollapsedRepresentationLabel.
+func (x *PickerTouchBarItem) CollapsedRepresentationLabel() string {
+	_r := x.inner.CollapsedRepresentationLabel()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetCollapsedRepresentationLabel calls the underlying SetCollapsedRepresentationLabel.
+func (x *PickerTouchBarItem) SetCollapsedRepresentationLabel(collapsedRepresentationLabel string) {
+	x.inner.SetCollapsedRepresentationLabel(foundation.NSStringStringWithUTF8String(collapsedRepresentationLabel))
+}
+
+// CollapsedRepresentationImage calls the underlying CollapsedRepresentationImage.
+func (x *PickerTouchBarItem) CollapsedRepresentationImage() *Image {
+	_r := x.inner.CollapsedRepresentationImage()
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// SetCollapsedRepresentationImage calls the underlying SetCollapsedRepresentationImage.
+func (x *PickerTouchBarItem) SetCollapsedRepresentationImage(collapsedRepresentationImage *raw.NSImage) {
+	x.inner.SetCollapsedRepresentationImage(collapsedRepresentationImage)
+}
+
+// SelectedIndex calls the underlying SelectedIndex.
+func (x *PickerTouchBarItem) SelectedIndex() int {
+	return x.inner.SelectedIndex()
+}
+
+// SetSelectedIndex calls the underlying SetSelectedIndex.
+func (x *PickerTouchBarItem) SetSelectedIndex(selectedIndex int) {
+	x.inner.SetSelectedIndex(selectedIndex)
+}
+
+// SelectionColor calls the underlying SelectionColor.
+func (x *PickerTouchBarItem) SelectionColor() *Color {
+	_r := x.inner.SelectionColor()
+	if _r == nil {
+		return nil
+	}
+	return &Color{inner: _r}
+}
+
+// SetSelectionColor calls the underlying SetSelectionColor.
+func (x *PickerTouchBarItem) SetSelectionColor(selectionColor *raw.NSColor) {
+	x.inner.SetSelectionColor(selectionColor)
+}
+
+// SelectionMode calls the underlying SelectionMode.
+func (x *PickerTouchBarItem) SelectionMode() raw.NSPickerTouchBarItemSelectionMode {
+	return x.inner.SelectionMode()
+}
+
+// SetSelectionMode calls the underlying SetSelectionMode.
+func (x *PickerTouchBarItem) SetSelectionMode(selectionMode raw.NSPickerTouchBarItemSelectionMode) {
+	x.inner.SetSelectionMode(selectionMode)
+}
+
+// NumberOfOptions calls the underlying NumberOfOptions.
+func (x *PickerTouchBarItem) NumberOfOptions() int {
+	return x.inner.NumberOfOptions()
+}
+
+// SetNumberOfOptions calls the underlying SetNumberOfOptions.
+func (x *PickerTouchBarItem) SetNumberOfOptions(numberOfOptions int) {
+	x.inner.SetNumberOfOptions(numberOfOptions)
+}
+
+// Target calls the underlying Target.
+func (x *PickerTouchBarItem) Target() objc.ID {
+	return x.inner.Target()
+}
+
+// SetTarget calls the underlying SetTarget.
+func (x *PickerTouchBarItem) SetTarget(target objc.ID) {
+	x.inner.SetTarget(target)
+}
+
+// Action calls the underlying Action.
+func (x *PickerTouchBarItem) Action() objc.SEL {
+	return x.inner.Action()
+}
+
+// SetAction calls the underlying SetAction.
+func (x *PickerTouchBarItem) SetAction(action objc.SEL) {
+	x.inner.SetAction(action)
+}
+
+// IsEnabled calls the underlying IsEnabled.
+func (x *PickerTouchBarItem) IsEnabled() bool {
+	return x.inner.IsEnabled()
+}
+
+// SetEnabled calls the underlying SetEnabled.
+func (x *PickerTouchBarItem) SetEnabled(enabled bool) {
+	x.inner.SetEnabled(enabled)
+}
+
+// SetCustomizationLabel calls the underlying SetCustomizationLabel.
+func (x *PickerTouchBarItem) SetCustomizationLabel(customizationLabel string) {
+	x.inner.SetCustomizationLabel(foundation.NSStringStringWithUTF8String(customizationLabel))
+}
+
 func (x *PickerTouchBarItem) asTouchBarItem() *raw.NSTouchBarItem { return &x.inner.NSTouchBarItem }
+
+// PickerTouchBarItemable is the interface implemented by [PickerTouchBarItem], for mocking and DI.
+type PickerTouchBarItemable interface {
+	Unwrap() *raw.NSPickerTouchBarItem
+	WithControlRepresentation(controlRepresentation raw.NSPickerTouchBarItemControlRepresentation) *PickerTouchBarItem
+	WithCollapsedRepresentationLabel(collapsedRepresentationLabel string) *PickerTouchBarItem
+	WithCollapsedRepresentationImage(collapsedRepresentationImage *raw.NSImage) *PickerTouchBarItem
+	WithSelectedIndex(selectedIndex int) *PickerTouchBarItem
+	WithSelectionColor(selectionColor *raw.NSColor) *PickerTouchBarItem
+	WithSelectionMode(selectionMode raw.NSPickerTouchBarItemSelectionMode) *PickerTouchBarItem
+	WithNumberOfOptions(numberOfOptions int) *PickerTouchBarItem
+	WithTarget(target objc.ID) *PickerTouchBarItem
+	WithAction(action objc.SEL) *PickerTouchBarItem
+	WithEnabled(enabled bool) *PickerTouchBarItem
+	WithCustomizationLabel(customizationLabel string) *PickerTouchBarItem
+	SetImageAtIndex(image *raw.NSImage, index int)
+	ImageAtIndex(index int) *Image
+	SetLabelAtIndex(label string, index int)
+	LabelAtIndex(index int) string
+	SetEnabledAtIndex(enabled bool, index int)
+	IsEnabledAtIndex(index int) bool
+	ControlRepresentation() raw.NSPickerTouchBarItemControlRepresentation
+	SetControlRepresentation(controlRepresentation raw.NSPickerTouchBarItemControlRepresentation)
+	CollapsedRepresentationLabel() string
+	SetCollapsedRepresentationLabel(collapsedRepresentationLabel string)
+	CollapsedRepresentationImage() *Image
+	SetCollapsedRepresentationImage(collapsedRepresentationImage *raw.NSImage)
+	SelectedIndex() int
+	SetSelectedIndex(selectedIndex int)
+	SelectionColor() *Color
+	SetSelectionColor(selectionColor *raw.NSColor)
+	SelectionMode() raw.NSPickerTouchBarItemSelectionMode
+	SetSelectionMode(selectionMode raw.NSPickerTouchBarItemSelectionMode)
+	NumberOfOptions() int
+	SetNumberOfOptions(numberOfOptions int)
+	Target() objc.ID
+	SetTarget(target objc.ID)
+	Action() objc.SEL
+	SetAction(action objc.SEL)
+	IsEnabled() bool
+	SetEnabled(enabled bool)
+	SetCustomizationLabel(customizationLabel string)
+}
+
+var _ PickerTouchBarItemable = (*PickerTouchBarItem)(nil)
 

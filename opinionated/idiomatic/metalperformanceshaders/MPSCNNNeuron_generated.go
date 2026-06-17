@@ -35,7 +35,44 @@ func NewCNNNeuronWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLD
 	return &CNNNeuron{inner: raw.MPSCNNNeuronFromID(_id)}
 }
 
+// NeuronType calls the underlying NeuronType.
+func (x *CNNNeuron) NeuronType() mpsneuralnetwork.MPSCNNNeuronType {
+	return x.inner.NeuronType()
+}
+
+// A calls the underlying A.
+func (x *CNNNeuron) A() float32 {
+	return x.inner.A()
+}
+
+// B calls the underlying B.
+func (x *CNNNeuron) B() float32 {
+	return x.inner.B()
+}
+
+// C calls the underlying C.
+func (x *CNNNeuron) C() float32 {
+	return x.inner.C()
+}
+
+// Data calls the underlying Data.
+func (x *CNNNeuron) Data() *foundation.NSData {
+	return x.inner.Data()
+}
+
 func (x *CNNNeuron) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSCNNKernel }
 
 func (x *CNNNeuron) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNKernel.MPSKernel }
+
+// CNNNeuronable is the interface implemented by [CNNNeuron], for mocking and DI.
+type CNNNeuronable interface {
+	Unwrap() *raw.MPSCNNNeuron
+	NeuronType() mpsneuralnetwork.MPSCNNNeuronType
+	A() float32
+	B() float32
+	C() float32
+	Data() *foundation.NSData
+}
+
+var _ CNNNeuronable = (*CNNNeuron)(nil)
 

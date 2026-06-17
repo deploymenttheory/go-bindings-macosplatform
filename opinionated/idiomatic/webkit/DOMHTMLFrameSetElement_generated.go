@@ -7,6 +7,7 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -36,6 +37,34 @@ func (x *DOMHTMLFrameSetElement) WithRows(rows string) *DOMHTMLFrameSetElement {
 	return x
 }
 
+// Cols calls the underlying Cols.
+func (x *DOMHTMLFrameSetElement) Cols() string {
+	_r := x.inner.Cols()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetCols calls the underlying SetCols.
+func (x *DOMHTMLFrameSetElement) SetCols(cols string) {
+	x.inner.SetCols(foundation.NSStringStringWithUTF8String(cols))
+}
+
+// Rows calls the underlying Rows.
+func (x *DOMHTMLFrameSetElement) Rows() string {
+	_r := x.inner.Rows()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetRows calls the underlying SetRows.
+func (x *DOMHTMLFrameSetElement) SetRows(rows string) {
+	x.inner.SetRows(foundation.NSStringStringWithUTF8String(rows))
+}
+
 func (x *DOMHTMLFrameSetElement) asDOMHTMLElement() *raw.DOMHTMLElement { return &x.inner.DOMHTMLElement }
 
 func (x *DOMHTMLFrameSetElement) asDOMElement() *raw.DOMElement { return &x.inner.DOMHTMLElement.DOMElement }
@@ -45,4 +74,17 @@ func (x *DOMHTMLFrameSetElement) asDOMNode() *raw.DOMNode { return &x.inner.DOMH
 func (x *DOMHTMLFrameSetElement) asDOMObject() *raw.DOMObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject }
 
 func (x *DOMHTMLFrameSetElement) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject }
+
+// DOMHTMLFrameSetElementable is the interface implemented by [DOMHTMLFrameSetElement], for mocking and DI.
+type DOMHTMLFrameSetElementable interface {
+	Unwrap() *raw.DOMHTMLFrameSetElement
+	WithCols(cols string) *DOMHTMLFrameSetElement
+	WithRows(rows string) *DOMHTMLFrameSetElement
+	Cols() string
+	SetCols(cols string)
+	Rows() string
+	SetRows(rows string)
+}
+
+var _ DOMHTMLFrameSetElementable = (*DOMHTMLFrameSetElement)(nil)
 

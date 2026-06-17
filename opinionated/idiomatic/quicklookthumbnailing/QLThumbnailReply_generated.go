@@ -7,6 +7,7 @@ package quicklookthumbnailing
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quicklookthumbnailing"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -29,4 +30,28 @@ func (x *ThumbnailReply) WithExtensionBadge(extensionBadge string) *ThumbnailRep
 	x.inner.SetExtensionBadge(foundation.NSStringStringWithUTF8String(extensionBadge))
 	return x
 }
+
+// ExtensionBadge calls the underlying ExtensionBadge.
+func (x *ThumbnailReply) ExtensionBadge() string {
+	_r := x.inner.ExtensionBadge()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetExtensionBadge calls the underlying SetExtensionBadge.
+func (x *ThumbnailReply) SetExtensionBadge(extensionBadge string) {
+	x.inner.SetExtensionBadge(foundation.NSStringStringWithUTF8String(extensionBadge))
+}
+
+// ThumbnailReplyable is the interface implemented by [ThumbnailReply], for mocking and DI.
+type ThumbnailReplyable interface {
+	Unwrap() *raw.QLThumbnailReply
+	WithExtensionBadge(extensionBadge string) *ThumbnailReply
+	ExtensionBadge() string
+	SetExtensionBadge(extensionBadge string)
+}
+
+var _ ThumbnailReplyable = (*ThumbnailReply)(nil)
 

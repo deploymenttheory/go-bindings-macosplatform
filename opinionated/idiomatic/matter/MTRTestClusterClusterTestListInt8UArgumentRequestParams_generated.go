@@ -25,3 +25,10 @@ func NewMTRTestClusterClusterTestListInt8UArgumentRequestParams() *MTRTestCluste
 
 func (x *MTRTestClusterClusterTestListInt8UArgumentRequestParams) asMTRUnitTestingClusterTestListInt8UArgumentRequestParams() *raw.MTRUnitTestingClusterTestListInt8UArgumentRequestParams { return &x.inner.MTRUnitTestingClusterTestListInt8UArgumentRequestParams }
 
+// MTRTestClusterClusterTestListInt8UArgumentRequestParamsable is the interface implemented by [MTRTestClusterClusterTestListInt8UArgumentRequestParams], for mocking and DI.
+type MTRTestClusterClusterTestListInt8UArgumentRequestParamsable interface {
+	Unwrap() *raw.MTRTestClusterClusterTestListInt8UArgumentRequestParams
+}
+
+var _ MTRTestClusterClusterTestListInt8UArgumentRequestParamsable = (*MTRTestClusterClusterTestListInt8UArgumentRequestParams)(nil)
+

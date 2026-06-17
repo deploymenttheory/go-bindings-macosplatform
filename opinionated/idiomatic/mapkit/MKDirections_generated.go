@@ -7,6 +7,7 @@ package mapkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Directions wraps [raw.MKDirections] with a fluent Go API.
@@ -23,4 +24,35 @@ func NewDirectionsWithRequest(request *raw.MKDirectionsRequest) *Directions {
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRequest:"), request.Ptr())
 	return &Directions{inner: raw.MKDirectionsFromID(_id)}
 }
+
+// CalculateDirectionsWithCompletionHandler calls the underlying CalculateDirectionsWithCompletionHandler.
+func (x *Directions) CalculateDirectionsWithCompletionHandler(completionHandler func(*raw.MKDirectionsResponse, unsafe.Pointer)) {
+	x.inner.CalculateDirectionsWithCompletionHandler(completionHandler)
+}
+
+// CalculateETAWithCompletionHandler calls the underlying CalculateETAWithCompletionHandler.
+func (x *Directions) CalculateETAWithCompletionHandler(completionHandler func(*raw.MKETAResponse, unsafe.Pointer)) {
+	x.inner.CalculateETAWithCompletionHandler(completionHandler)
+}
+
+// Cancel calls the underlying Cancel.
+func (x *Directions) Cancel() {
+	x.inner.Cancel()
+}
+
+// IsCalculating calls the underlying IsCalculating.
+func (x *Directions) IsCalculating() bool {
+	return x.inner.IsCalculating()
+}
+
+// Directionsable is the interface implemented by [Directions], for mocking and DI.
+type Directionsable interface {
+	Unwrap() *raw.MKDirections
+	CalculateDirectionsWithCompletionHandler(completionHandler func(*raw.MKDirectionsResponse, unsafe.Pointer))
+	CalculateETAWithCompletionHandler(completionHandler func(*raw.MKETAResponse, unsafe.Pointer))
+	Cancel()
+	IsCalculating() bool
+}
+
+var _ Directionsable = (*Directions)(nil)
 

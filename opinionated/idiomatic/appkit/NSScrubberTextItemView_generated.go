@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -30,6 +31,29 @@ func (x *ScrubberTextItemView) WithTitle(title string) *ScrubberTextItemView {
 	return x
 }
 
+// TextField calls the underlying TextField.
+func (x *ScrubberTextItemView) TextField() *TextField {
+	_r := x.inner.TextField()
+	if _r == nil {
+		return nil
+	}
+	return &TextField{inner: _r}
+}
+
+// Title calls the underlying Title.
+func (x *ScrubberTextItemView) Title() string {
+	_r := x.inner.Title()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetTitle calls the underlying SetTitle.
+func (x *ScrubberTextItemView) SetTitle(title string) {
+	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+}
+
 func (x *ScrubberTextItemView) asScrubberItemView() *raw.NSScrubberItemView { return &x.inner.NSScrubberItemView }
 
 func (x *ScrubberTextItemView) asScrubberArrangedView() *raw.NSScrubberArrangedView { return &x.inner.NSScrubberItemView.NSScrubberArrangedView }
@@ -37,4 +61,15 @@ func (x *ScrubberTextItemView) asScrubberArrangedView() *raw.NSScrubberArrangedV
 func (x *ScrubberTextItemView) asView() *raw.NSView { return &x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView }
 
 func (x *ScrubberTextItemView) asResponder() *raw.NSResponder { return &x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.NSResponder }
+
+// ScrubberTextItemViewable is the interface implemented by [ScrubberTextItemView], for mocking and DI.
+type ScrubberTextItemViewable interface {
+	Unwrap() *raw.NSScrubberTextItemView
+	WithTitle(title string) *ScrubberTextItemView
+	TextField() *TextField
+	Title() string
+	SetTitle(title string)
+}
+
+var _ ScrubberTextItemViewable = (*ScrubberTextItemView)(nil)
 

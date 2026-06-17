@@ -23,3 +23,10 @@ func NewDiffableDataSourceSnapshot() *DiffableDataSourceSnapshot {
 	return &DiffableDataSourceSnapshot{inner: raw.NSDiffableDataSourceSnapshotFromID[objc.ID, objc.ID](_id)}
 }
 
+// DiffableDataSourceSnapshotable is the interface implemented by [DiffableDataSourceSnapshot], for mocking and DI.
+type DiffableDataSourceSnapshotable interface {
+	Unwrap() *raw.NSDiffableDataSourceSnapshot[objc.ID, objc.ID]
+}
+
+var _ DiffableDataSourceSnapshotable = (*DiffableDataSourceSnapshot)(nil)
+

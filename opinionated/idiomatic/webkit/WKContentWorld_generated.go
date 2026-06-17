@@ -6,6 +6,7 @@ package webkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,21 @@ func NewWKContentWorld() *WKContentWorld {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("WKContentWorld")), objc.RegisterName("new"))
 	return &WKContentWorld{inner: raw.WKContentWorldFromID(_id)}
 }
+
+// Name calls the underlying Name.
+func (x *WKContentWorld) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// WKContentWorldable is the interface implemented by [WKContentWorld], for mocking and DI.
+type WKContentWorldable interface {
+	Unwrap() *raw.WKContentWorld
+	Name() string
+}
+
+var _ WKContentWorldable = (*WKContentWorld)(nil)
 

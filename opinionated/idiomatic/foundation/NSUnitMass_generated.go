@@ -29,3 +29,10 @@ func (x *UnitMass) asUnit() *raw.NSUnit { return &x.inner.NSDimension.NSUnit }
 
 func (x *UnitMass) asObject() *raw.NSObject { return &x.inner.NSDimension.NSUnit.NSObject }
 
+// UnitMassable is the interface implemented by [UnitMass], for mocking and DI.
+type UnitMassable interface {
+	Unwrap() *raw.NSUnitMass
+}
+
+var _ UnitMassable = (*UnitMass)(nil)
+

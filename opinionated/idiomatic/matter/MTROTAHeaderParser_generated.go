@@ -23,3 +23,10 @@ func NewMTROTAHeaderParser() *MTROTAHeaderParser {
 	return &MTROTAHeaderParser{inner: raw.MTROTAHeaderParserFromID(_id)}
 }
 
+// MTROTAHeaderParserable is the interface implemented by [MTROTAHeaderParser], for mocking and DI.
+type MTROTAHeaderParserable interface {
+	Unwrap() *raw.MTROTAHeaderParser
+}
+
+var _ MTROTAHeaderParserable = (*MTROTAHeaderParser)(nil)
+

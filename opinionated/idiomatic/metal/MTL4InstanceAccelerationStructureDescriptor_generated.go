@@ -77,7 +77,131 @@ func (x *MTL4InstanceAccelerationStructureDescriptor) WithMotionTransformStride(
 	return x
 }
 
+// InstanceDescriptorBuffer calls the underlying InstanceDescriptorBuffer.
+func (x *MTL4InstanceAccelerationStructureDescriptor) InstanceDescriptorBuffer() raw.MTL4BufferRange {
+	return x.inner.InstanceDescriptorBuffer()
+}
+
+// SetInstanceDescriptorBuffer calls the underlying SetInstanceDescriptorBuffer.
+func (x *MTL4InstanceAccelerationStructureDescriptor) SetInstanceDescriptorBuffer(instanceDescriptorBuffer raw.MTL4BufferRange) {
+	x.inner.SetInstanceDescriptorBuffer(instanceDescriptorBuffer)
+}
+
+// InstanceDescriptorStride calls the underlying InstanceDescriptorStride.
+func (x *MTL4InstanceAccelerationStructureDescriptor) InstanceDescriptorStride() uint {
+	return x.inner.InstanceDescriptorStride()
+}
+
+// SetInstanceDescriptorStride calls the underlying SetInstanceDescriptorStride.
+func (x *MTL4InstanceAccelerationStructureDescriptor) SetInstanceDescriptorStride(instanceDescriptorStride uint) {
+	x.inner.SetInstanceDescriptorStride(instanceDescriptorStride)
+}
+
+// InstanceCount calls the underlying InstanceCount.
+func (x *MTL4InstanceAccelerationStructureDescriptor) InstanceCount() uint {
+	return x.inner.InstanceCount()
+}
+
+// SetInstanceCount calls the underlying SetInstanceCount.
+func (x *MTL4InstanceAccelerationStructureDescriptor) SetInstanceCount(instanceCount uint) {
+	x.inner.SetInstanceCount(instanceCount)
+}
+
+// InstanceDescriptorType calls the underlying InstanceDescriptorType.
+func (x *MTL4InstanceAccelerationStructureDescriptor) InstanceDescriptorType() raw.MTLAccelerationStructureInstanceDescriptorType {
+	return x.inner.InstanceDescriptorType()
+}
+
+// SetInstanceDescriptorType calls the underlying SetInstanceDescriptorType.
+func (x *MTL4InstanceAccelerationStructureDescriptor) SetInstanceDescriptorType(instanceDescriptorType raw.MTLAccelerationStructureInstanceDescriptorType) {
+	x.inner.SetInstanceDescriptorType(instanceDescriptorType)
+}
+
+// MotionTransformBuffer calls the underlying MotionTransformBuffer.
+func (x *MTL4InstanceAccelerationStructureDescriptor) MotionTransformBuffer() raw.MTL4BufferRange {
+	return x.inner.MotionTransformBuffer()
+}
+
+// SetMotionTransformBuffer calls the underlying SetMotionTransformBuffer.
+func (x *MTL4InstanceAccelerationStructureDescriptor) SetMotionTransformBuffer(motionTransformBuffer raw.MTL4BufferRange) {
+	x.inner.SetMotionTransformBuffer(motionTransformBuffer)
+}
+
+// MotionTransformCount calls the underlying MotionTransformCount.
+func (x *MTL4InstanceAccelerationStructureDescriptor) MotionTransformCount() uint {
+	return x.inner.MotionTransformCount()
+}
+
+// SetMotionTransformCount calls the underlying SetMotionTransformCount.
+func (x *MTL4InstanceAccelerationStructureDescriptor) SetMotionTransformCount(motionTransformCount uint) {
+	x.inner.SetMotionTransformCount(motionTransformCount)
+}
+
+// InstanceTransformationMatrixLayout calls the underlying InstanceTransformationMatrixLayout.
+func (x *MTL4InstanceAccelerationStructureDescriptor) InstanceTransformationMatrixLayout() raw.MTLMatrixLayout {
+	return x.inner.InstanceTransformationMatrixLayout()
+}
+
+// SetInstanceTransformationMatrixLayout calls the underlying SetInstanceTransformationMatrixLayout.
+func (x *MTL4InstanceAccelerationStructureDescriptor) SetInstanceTransformationMatrixLayout(instanceTransformationMatrixLayout raw.MTLMatrixLayout) {
+	x.inner.SetInstanceTransformationMatrixLayout(instanceTransformationMatrixLayout)
+}
+
+// MotionTransformType calls the underlying MotionTransformType.
+func (x *MTL4InstanceAccelerationStructureDescriptor) MotionTransformType() raw.MTLTransformType {
+	return x.inner.MotionTransformType()
+}
+
+// SetMotionTransformType calls the underlying SetMotionTransformType.
+func (x *MTL4InstanceAccelerationStructureDescriptor) SetMotionTransformType(motionTransformType raw.MTLTransformType) {
+	x.inner.SetMotionTransformType(motionTransformType)
+}
+
+// MotionTransformStride calls the underlying MotionTransformStride.
+func (x *MTL4InstanceAccelerationStructureDescriptor) MotionTransformStride() uint {
+	return x.inner.MotionTransformStride()
+}
+
+// SetMotionTransformStride calls the underlying SetMotionTransformStride.
+func (x *MTL4InstanceAccelerationStructureDescriptor) SetMotionTransformStride(motionTransformStride uint) {
+	x.inner.SetMotionTransformStride(motionTransformStride)
+}
+
 func (x *MTL4InstanceAccelerationStructureDescriptor) asMTL4AccelerationStructureDescriptor() *raw.MTL4AccelerationStructureDescriptor { return &x.inner.MTL4AccelerationStructureDescriptor }
 
 func (x *MTL4InstanceAccelerationStructureDescriptor) asAccelerationStructureDescriptor() *raw.MTLAccelerationStructureDescriptor { return &x.inner.MTL4AccelerationStructureDescriptor.MTLAccelerationStructureDescriptor }
+
+// MTL4InstanceAccelerationStructureDescriptorable is the interface implemented by [MTL4InstanceAccelerationStructureDescriptor], for mocking and DI.
+type MTL4InstanceAccelerationStructureDescriptorable interface {
+	Unwrap() *raw.MTL4InstanceAccelerationStructureDescriptor
+	WithInstanceDescriptorBuffer(instanceDescriptorBuffer raw.MTL4BufferRange) *MTL4InstanceAccelerationStructureDescriptor
+	WithInstanceDescriptorStride(instanceDescriptorStride uint) *MTL4InstanceAccelerationStructureDescriptor
+	WithInstanceCount(instanceCount uint) *MTL4InstanceAccelerationStructureDescriptor
+	WithInstanceDescriptorType(instanceDescriptorType raw.MTLAccelerationStructureInstanceDescriptorType) *MTL4InstanceAccelerationStructureDescriptor
+	WithMotionTransformBuffer(motionTransformBuffer raw.MTL4BufferRange) *MTL4InstanceAccelerationStructureDescriptor
+	WithMotionTransformCount(motionTransformCount uint) *MTL4InstanceAccelerationStructureDescriptor
+	WithInstanceTransformationMatrixLayout(instanceTransformationMatrixLayout raw.MTLMatrixLayout) *MTL4InstanceAccelerationStructureDescriptor
+	WithMotionTransformType(motionTransformType raw.MTLTransformType) *MTL4InstanceAccelerationStructureDescriptor
+	WithMotionTransformStride(motionTransformStride uint) *MTL4InstanceAccelerationStructureDescriptor
+	InstanceDescriptorBuffer() raw.MTL4BufferRange
+	SetInstanceDescriptorBuffer(instanceDescriptorBuffer raw.MTL4BufferRange)
+	InstanceDescriptorStride() uint
+	SetInstanceDescriptorStride(instanceDescriptorStride uint)
+	InstanceCount() uint
+	SetInstanceCount(instanceCount uint)
+	InstanceDescriptorType() raw.MTLAccelerationStructureInstanceDescriptorType
+	SetInstanceDescriptorType(instanceDescriptorType raw.MTLAccelerationStructureInstanceDescriptorType)
+	MotionTransformBuffer() raw.MTL4BufferRange
+	SetMotionTransformBuffer(motionTransformBuffer raw.MTL4BufferRange)
+	MotionTransformCount() uint
+	SetMotionTransformCount(motionTransformCount uint)
+	InstanceTransformationMatrixLayout() raw.MTLMatrixLayout
+	SetInstanceTransformationMatrixLayout(instanceTransformationMatrixLayout raw.MTLMatrixLayout)
+	MotionTransformType() raw.MTLTransformType
+	SetMotionTransformType(motionTransformType raw.MTLTransformType)
+	MotionTransformStride() uint
+	SetMotionTransformStride(motionTransformStride uint)
+}
+
+var _ MTL4InstanceAccelerationStructureDescriptorable = (*MTL4InstanceAccelerationStructureDescriptor)(nil)
 

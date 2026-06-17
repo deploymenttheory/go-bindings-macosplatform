@@ -25,3 +25,10 @@ func NewMTRTestClusterClusterTestListStructOctet() *MTRTestClusterClusterTestLis
 
 func (x *MTRTestClusterClusterTestListStructOctet) asMTRUnitTestingClusterTestListStructOctet() *raw.MTRUnitTestingClusterTestListStructOctet { return &x.inner.MTRUnitTestingClusterTestListStructOctet }
 
+// MTRTestClusterClusterTestListStructOctetable is the interface implemented by [MTRTestClusterClusterTestListStructOctet], for mocking and DI.
+type MTRTestClusterClusterTestListStructOctetable interface {
+	Unwrap() *raw.MTRTestClusterClusterTestListStructOctet
+}
+
+var _ MTRTestClusterClusterTestListStructOctetable = (*MTRTestClusterClusterTestListStructOctet)(nil)
+

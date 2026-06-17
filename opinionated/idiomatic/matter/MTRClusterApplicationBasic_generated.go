@@ -32,7 +32,92 @@ func NewMTRClusterApplicationBasicWithDeviceEndpointQueue(device *raw.MTRDevice,
 	return &MTRClusterApplicationBasic{inner: raw.MTRClusterApplicationBasicFromID(_id)}
 }
 
+// ReadAttributeVendorNameWithParams calls the underlying ReadAttributeVendorNameWithParams.
+func (x *MTRClusterApplicationBasic) ReadAttributeVendorNameWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeVendorNameWithParams(params)
+}
+
+// ReadAttributeVendorIDWithParams calls the underlying ReadAttributeVendorIDWithParams.
+func (x *MTRClusterApplicationBasic) ReadAttributeVendorIDWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeVendorIDWithParams(params)
+}
+
+// ReadAttributeApplicationNameWithParams calls the underlying ReadAttributeApplicationNameWithParams.
+func (x *MTRClusterApplicationBasic) ReadAttributeApplicationNameWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeApplicationNameWithParams(params)
+}
+
+// ReadAttributeProductIDWithParams calls the underlying ReadAttributeProductIDWithParams.
+func (x *MTRClusterApplicationBasic) ReadAttributeProductIDWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeProductIDWithParams(params)
+}
+
+// ReadAttributeApplicationWithParams calls the underlying ReadAttributeApplicationWithParams.
+func (x *MTRClusterApplicationBasic) ReadAttributeApplicationWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeApplicationWithParams(params)
+}
+
+// ReadAttributeStatusWithParams calls the underlying ReadAttributeStatusWithParams.
+func (x *MTRClusterApplicationBasic) ReadAttributeStatusWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeStatusWithParams(params)
+}
+
+// ReadAttributeApplicationVersionWithParams calls the underlying ReadAttributeApplicationVersionWithParams.
+func (x *MTRClusterApplicationBasic) ReadAttributeApplicationVersionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeApplicationVersionWithParams(params)
+}
+
+// ReadAttributeAllowedVendorListWithParams calls the underlying ReadAttributeAllowedVendorListWithParams.
+func (x *MTRClusterApplicationBasic) ReadAttributeAllowedVendorListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeAllowedVendorListWithParams(params)
+}
+
+// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
+func (x *MTRClusterApplicationBasic) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+}
+
+// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
+func (x *MTRClusterApplicationBasic) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
+}
+
+// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
+func (x *MTRClusterApplicationBasic) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeAttributeListWithParams(params)
+}
+
+// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
+func (x *MTRClusterApplicationBasic) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeFeatureMapWithParams(params)
+}
+
+// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
+func (x *MTRClusterApplicationBasic) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeClusterRevisionWithParams(params)
+}
+
 func (x *MTRClusterApplicationBasic) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
 
 func (x *MTRClusterApplicationBasic) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+
+// MTRClusterApplicationBasicable is the interface implemented by [MTRClusterApplicationBasic], for mocking and DI.
+type MTRClusterApplicationBasicable interface {
+	Unwrap() *raw.MTRClusterApplicationBasic
+	ReadAttributeVendorNameWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeVendorIDWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeApplicationNameWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeProductIDWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeApplicationWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeStatusWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeApplicationVersionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeAllowedVendorListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+}
+
+var _ MTRClusterApplicationBasicable = (*MTRClusterApplicationBasic)(nil)
 

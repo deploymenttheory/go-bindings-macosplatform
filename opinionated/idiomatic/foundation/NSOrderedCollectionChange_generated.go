@@ -31,5 +31,36 @@ func NewOrderedCollectionChangeWithObjectTypeIndexAssociatedIndex(anObject objc.
 	return &OrderedCollectionChange{inner: raw.NSOrderedCollectionChangeFromID[objc.ID](_id)}
 }
 
+// Object calls the underlying Object.
+func (x *OrderedCollectionChange) Object() objc.ID {
+	return x.inner.Object()
+}
+
+// ChangeType calls the underlying ChangeType.
+func (x *OrderedCollectionChange) ChangeType() raw.NSCollectionChangeType {
+	return x.inner.ChangeType()
+}
+
+// Index calls the underlying Index.
+func (x *OrderedCollectionChange) Index() uint {
+	return x.inner.Index()
+}
+
+// AssociatedIndex calls the underlying AssociatedIndex.
+func (x *OrderedCollectionChange) AssociatedIndex() uint {
+	return x.inner.AssociatedIndex()
+}
+
 func (x *OrderedCollectionChange) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// OrderedCollectionChangeable is the interface implemented by [OrderedCollectionChange], for mocking and DI.
+type OrderedCollectionChangeable interface {
+	Unwrap() *raw.NSOrderedCollectionChange[objc.ID]
+	Object() objc.ID
+	ChangeType() raw.NSCollectionChangeType
+	Index() uint
+	AssociatedIndex() uint
+}
+
+var _ OrderedCollectionChangeable = (*OrderedCollectionChange)(nil)
 

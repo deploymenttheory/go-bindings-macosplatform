@@ -5,7 +5,9 @@
 package passkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +24,33 @@ func NewBarcodeEventConfigurationRequest() *BarcodeEventConfigurationRequest {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PKBarcodeEventConfigurationRequest")), objc.RegisterName("new"))
 	return &BarcodeEventConfigurationRequest{inner: raw.PKBarcodeEventConfigurationRequestFromID(_id)}
 }
+
+// DeviceAccountIdentifier calls the underlying DeviceAccountIdentifier.
+func (x *BarcodeEventConfigurationRequest) DeviceAccountIdentifier() string {
+	_r := x.inner.DeviceAccountIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ConfigurationData calls the underlying ConfigurationData.
+func (x *BarcodeEventConfigurationRequest) ConfigurationData() *foundation.NSData {
+	return x.inner.ConfigurationData()
+}
+
+// ConfigurationDataType calls the underlying ConfigurationDataType.
+func (x *BarcodeEventConfigurationRequest) ConfigurationDataType() raw.PKBarcodeEventConfigurationDataType {
+	return x.inner.ConfigurationDataType()
+}
+
+// BarcodeEventConfigurationRequestable is the interface implemented by [BarcodeEventConfigurationRequest], for mocking and DI.
+type BarcodeEventConfigurationRequestable interface {
+	Unwrap() *raw.PKBarcodeEventConfigurationRequest
+	DeviceAccountIdentifier() string
+	ConfigurationData() *foundation.NSData
+	ConfigurationDataType() raw.PKBarcodeEventConfigurationDataType
+}
+
+var _ BarcodeEventConfigurationRequestable = (*BarcodeEventConfigurationRequest)(nil)
 

@@ -7,6 +7,7 @@ package coredata
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -26,17 +27,23 @@ func NewLightweightMigrationStageWithVersionChecksums(versionChecksums *foundati
 }
 
 // VersionChecksums returns the collection as a Go slice.
-func (x *LightweightMigrationStage) VersionChecksums() []*foundation.NSString {
+func (x *LightweightMigrationStage) VersionChecksums() []string {
 	arr := x.inner.VersionChecksums()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
 
 func (x *LightweightMigrationStage) asMigrationStage() *raw.NSMigrationStage { return &x.inner.NSMigrationStage }
+
+// LightweightMigrationStageable is the interface implemented by [LightweightMigrationStage], for mocking and DI.
+type LightweightMigrationStageable interface {
+	Unwrap() *raw.NSLightweightMigrationStage
+	VersionChecksums() []string
+}
+
+var _ LightweightMigrationStageable = (*LightweightMigrationStage)(nil)
 

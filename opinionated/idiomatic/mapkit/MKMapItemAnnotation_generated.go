@@ -24,3 +24,20 @@ func NewMapItemAnnotationWithMapItem(mapItem *raw.MKMapItem) *MapItemAnnotation 
 	return &MapItemAnnotation{inner: raw.MKMapItemAnnotationFromID(_id)}
 }
 
+// MapItem calls the underlying MapItem.
+func (x *MapItemAnnotation) MapItem() *MapItem {
+	_r := x.inner.MapItem()
+	if _r == nil {
+		return nil
+	}
+	return &MapItem{inner: _r}
+}
+
+// MapItemAnnotationable is the interface implemented by [MapItemAnnotation], for mocking and DI.
+type MapItemAnnotationable interface {
+	Unwrap() *raw.MKMapItemAnnotation
+	MapItem() *MapItem
+}
+
+var _ MapItemAnnotationable = (*MapItemAnnotation)(nil)
+

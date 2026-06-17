@@ -48,3 +48,110 @@ func (x *ScriptController) WithLanguage(language *raw.OSALanguage) *ScriptContro
 	return x
 }
 
+// CompileScript calls the underlying CompileScript.
+func (x *ScriptController) CompileScript(sender objc.ID) {
+	x.inner.CompileScript(sender)
+}
+
+// RecordScript calls the underlying RecordScript.
+func (x *ScriptController) RecordScript(sender objc.ID) {
+	x.inner.RecordScript(sender)
+}
+
+// RunScript calls the underlying RunScript.
+func (x *ScriptController) RunScript(sender objc.ID) {
+	x.inner.RunScript(sender)
+}
+
+// StopScript calls the underlying StopScript.
+func (x *ScriptController) StopScript(sender objc.ID) {
+	x.inner.StopScript(sender)
+}
+
+// ScriptView calls the underlying ScriptView.
+func (x *ScriptController) ScriptView() *ScriptView {
+	_r := x.inner.ScriptView()
+	if _r == nil {
+		return nil
+	}
+	return &ScriptView{inner: _r}
+}
+
+// SetScriptView calls the underlying SetScriptView.
+func (x *ScriptController) SetScriptView(scriptView *raw.OSAScriptView) {
+	x.inner.SetScriptView(scriptView)
+}
+
+// ResultView calls the underlying ResultView.
+func (x *ScriptController) ResultView() *appkit.NSTextView {
+	return x.inner.ResultView()
+}
+
+// SetResultView calls the underlying SetResultView.
+func (x *ScriptController) SetResultView(resultView *appkit.NSTextView) {
+	x.inner.SetResultView(resultView)
+}
+
+// Script calls the underlying Script.
+func (x *ScriptController) Script() *Script {
+	_r := x.inner.Script()
+	if _r == nil {
+		return nil
+	}
+	return &Script{inner: _r}
+}
+
+// SetScript calls the underlying SetScript.
+func (x *ScriptController) SetScript(script *raw.OSAScript) {
+	x.inner.SetScript(script)
+}
+
+// Language calls the underlying Language.
+func (x *ScriptController) Language() *Language {
+	_r := x.inner.Language()
+	if _r == nil {
+		return nil
+	}
+	return &Language{inner: _r}
+}
+
+// SetLanguage calls the underlying SetLanguage.
+func (x *ScriptController) SetLanguage(language *raw.OSALanguage) {
+	x.inner.SetLanguage(language)
+}
+
+// ScriptState calls the underlying ScriptState.
+func (x *ScriptController) ScriptState() raw.OSAScriptState {
+	return x.inner.ScriptState()
+}
+
+// IsCompiling calls the underlying IsCompiling.
+func (x *ScriptController) IsCompiling() bool {
+	return x.inner.IsCompiling()
+}
+
+// ScriptControllerable is the interface implemented by [ScriptController], for mocking and DI.
+type ScriptControllerable interface {
+	Unwrap() *raw.OSAScriptController
+	WithScriptView(scriptView *raw.OSAScriptView) *ScriptController
+	WithResultView(resultView *appkit.NSTextView) *ScriptController
+	WithScript(script *raw.OSAScript) *ScriptController
+	WithLanguage(language *raw.OSALanguage) *ScriptController
+	CompileScript(sender objc.ID)
+	RecordScript(sender objc.ID)
+	RunScript(sender objc.ID)
+	StopScript(sender objc.ID)
+	ScriptView() *ScriptView
+	SetScriptView(scriptView *raw.OSAScriptView)
+	ResultView() *appkit.NSTextView
+	SetResultView(resultView *appkit.NSTextView)
+	Script() *Script
+	SetScript(script *raw.OSAScript)
+	Language() *Language
+	SetLanguage(language *raw.OSALanguage)
+	ScriptState() raw.OSAScriptState
+	IsCompiling() bool
+}
+
+var _ ScriptControllerable = (*ScriptController)(nil)
+

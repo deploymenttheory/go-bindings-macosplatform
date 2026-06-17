@@ -5,6 +5,8 @@
 package gamecontroller
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corehaptics"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamecontroller"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +24,23 @@ func NewDeviceHaptics() *DeviceHaptics {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GCDeviceHaptics")), objc.RegisterName("new"))
 	return &DeviceHaptics{inner: raw.GCDeviceHapticsFromID(_id)}
 }
+
+// CreateEngineWithLocality calls the underlying CreateEngineWithLocality.
+func (x *DeviceHaptics) CreateEngineWithLocality(locality *foundation.NSString) *corehaptics.CHHapticEngine {
+	return x.inner.CreateEngineWithLocality(locality)
+}
+
+// SupportedLocalities calls the underlying SupportedLocalities.
+func (x *DeviceHaptics) SupportedLocalities() *foundation.NSSet[*foundation.NSString] {
+	return x.inner.SupportedLocalities()
+}
+
+// DeviceHapticsable is the interface implemented by [DeviceHaptics], for mocking and DI.
+type DeviceHapticsable interface {
+	Unwrap() *raw.GCDeviceHaptics
+	CreateEngineWithLocality(locality *foundation.NSString) *corehaptics.CHHapticEngine
+	SupportedLocalities() *foundation.NSSet[*foundation.NSString]
+}
+
+var _ DeviceHapticsable = (*DeviceHaptics)(nil)
 

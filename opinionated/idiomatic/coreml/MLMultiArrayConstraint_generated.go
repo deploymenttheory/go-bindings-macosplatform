@@ -7,6 +7,7 @@ package coreml
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -30,10 +31,32 @@ func (x *MultiArrayConstraint) Shape() []*foundation.NSNumber {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
 }
+
+// DataType calls the underlying DataType.
+func (x *MultiArrayConstraint) DataType() raw.MLMultiArrayDataType {
+	return x.inner.DataType()
+}
+
+// ShapeConstraint calls the underlying ShapeConstraint.
+func (x *MultiArrayConstraint) ShapeConstraint() *MultiArrayShapeConstraint {
+	_r := x.inner.ShapeConstraint()
+	if _r == nil {
+		return nil
+	}
+	return &MultiArrayShapeConstraint{inner: _r}
+}
+
+// MultiArrayConstraintable is the interface implemented by [MultiArrayConstraint], for mocking and DI.
+type MultiArrayConstraintable interface {
+	Unwrap() *raw.MLMultiArrayConstraint
+	Shape() []*foundation.NSNumber
+	DataType() raw.MLMultiArrayDataType
+	ShapeConstraint() *MultiArrayShapeConstraint
+}
+
+var _ MultiArrayConstraintable = (*MultiArrayConstraint)(nil)
 

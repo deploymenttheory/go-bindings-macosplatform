@@ -151,7 +151,267 @@ func (x *MutableMovieTrack) WithMetadata(items ...MetadataItemProvider) *Mutable
 	return x
 }
 
+// SetMediaDataStorage calls the underlying SetMediaDataStorage.
+func (x *MutableMovieTrack) SetMediaDataStorage(mediaDataStorage *raw.AVMediaDataStorage) {
+	x.inner.SetMediaDataStorage(mediaDataStorage)
+}
+
+// SampleReferenceBaseURL calls the underlying SampleReferenceBaseURL.
+func (x *MutableMovieTrack) SampleReferenceBaseURL() *foundation.NSURL {
+	return x.inner.SampleReferenceBaseURL()
+}
+
+// SetSampleReferenceBaseURL calls the underlying SetSampleReferenceBaseURL.
+func (x *MutableMovieTrack) SetSampleReferenceBaseURL(sampleReferenceBaseURL string) {
+	x.inner.SetSampleReferenceBaseURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(sampleReferenceBaseURL)))
+}
+
+// SetEnabled calls the underlying SetEnabled.
+func (x *MutableMovieTrack) SetEnabled(enabled bool) {
+	x.inner.SetEnabled(enabled)
+}
+
+// SetAlternateGroupID calls the underlying SetAlternateGroupID.
+func (x *MutableMovieTrack) SetAlternateGroupID(alternateGroupID int) {
+	x.inner.SetAlternateGroupID(alternateGroupID)
+}
+
+// IsModified calls the underlying IsModified.
+func (x *MutableMovieTrack) IsModified() bool {
+	return x.inner.IsModified()
+}
+
+// SetModified calls the underlying SetModified.
+func (x *MutableMovieTrack) SetModified(modified bool) {
+	x.inner.SetModified(modified)
+}
+
+// HasProtectedContent calls the underlying HasProtectedContent.
+func (x *MutableMovieTrack) HasProtectedContent() bool {
+	return x.inner.HasProtectedContent()
+}
+
+// Timescale calls the underlying Timescale.
+func (x *MutableMovieTrack) Timescale() int32 {
+	return x.inner.Timescale()
+}
+
+// SetTimescale calls the underlying SetTimescale.
+func (x *MutableMovieTrack) SetTimescale(timescale int32) {
+	x.inner.SetTimescale(timescale)
+}
+
+// SetLanguageCode calls the underlying SetLanguageCode.
+func (x *MutableMovieTrack) SetLanguageCode(languageCode string) {
+	x.inner.SetLanguageCode(foundation.NSStringStringWithUTF8String(languageCode))
+}
+
+// SetExtendedLanguageTag calls the underlying SetExtendedLanguageTag.
+func (x *MutableMovieTrack) SetExtendedLanguageTag(extendedLanguageTag string) {
+	x.inner.SetExtendedLanguageTag(foundation.NSStringStringWithUTF8String(extendedLanguageTag))
+}
+
+// SetNaturalSize calls the underlying SetNaturalSize.
+func (x *MutableMovieTrack) SetNaturalSize(naturalSize corefoundation.CGSize) {
+	x.inner.SetNaturalSize(naturalSize)
+}
+
+// SetPreferredTransform calls the underlying SetPreferredTransform.
+func (x *MutableMovieTrack) SetPreferredTransform(preferredTransform corefoundation.CGAffineTransform) {
+	x.inner.SetPreferredTransform(preferredTransform)
+}
+
+// Layer calls the underlying Layer.
+func (x *MutableMovieTrack) Layer() int {
+	return x.inner.Layer()
+}
+
+// SetLayer calls the underlying SetLayer.
+func (x *MutableMovieTrack) SetLayer(layer int) {
+	x.inner.SetLayer(layer)
+}
+
+// CleanApertureDimensions calls the underlying CleanApertureDimensions.
+func (x *MutableMovieTrack) CleanApertureDimensions() corefoundation.CGSize {
+	return x.inner.CleanApertureDimensions()
+}
+
+// SetCleanApertureDimensions calls the underlying SetCleanApertureDimensions.
+func (x *MutableMovieTrack) SetCleanApertureDimensions(cleanApertureDimensions corefoundation.CGSize) {
+	x.inner.SetCleanApertureDimensions(cleanApertureDimensions)
+}
+
+// ProductionApertureDimensions calls the underlying ProductionApertureDimensions.
+func (x *MutableMovieTrack) ProductionApertureDimensions() corefoundation.CGSize {
+	return x.inner.ProductionApertureDimensions()
+}
+
+// SetProductionApertureDimensions calls the underlying SetProductionApertureDimensions.
+func (x *MutableMovieTrack) SetProductionApertureDimensions(productionApertureDimensions corefoundation.CGSize) {
+	x.inner.SetProductionApertureDimensions(productionApertureDimensions)
+}
+
+// EncodedPixelsDimensions calls the underlying EncodedPixelsDimensions.
+func (x *MutableMovieTrack) EncodedPixelsDimensions() corefoundation.CGSize {
+	return x.inner.EncodedPixelsDimensions()
+}
+
+// SetEncodedPixelsDimensions calls the underlying SetEncodedPixelsDimensions.
+func (x *MutableMovieTrack) SetEncodedPixelsDimensions(encodedPixelsDimensions corefoundation.CGSize) {
+	x.inner.SetEncodedPixelsDimensions(encodedPixelsDimensions)
+}
+
+// SetPreferredVolume calls the underlying SetPreferredVolume.
+func (x *MutableMovieTrack) SetPreferredVolume(preferredVolume float32) {
+	x.inner.SetPreferredVolume(preferredVolume)
+}
+
+// PreferredMediaChunkSize calls the underlying PreferredMediaChunkSize.
+func (x *MutableMovieTrack) PreferredMediaChunkSize() int {
+	return x.inner.PreferredMediaChunkSize()
+}
+
+// SetPreferredMediaChunkSize calls the underlying SetPreferredMediaChunkSize.
+func (x *MutableMovieTrack) SetPreferredMediaChunkSize(preferredMediaChunkSize int) {
+	x.inner.SetPreferredMediaChunkSize(preferredMediaChunkSize)
+}
+
+// PreferredMediaChunkDuration calls the underlying PreferredMediaChunkDuration.
+func (x *MutableMovieTrack) PreferredMediaChunkDuration() coremedia.CMTime {
+	return x.inner.PreferredMediaChunkDuration()
+}
+
+// SetPreferredMediaChunkDuration calls the underlying SetPreferredMediaChunkDuration.
+func (x *MutableMovieTrack) SetPreferredMediaChunkDuration(preferredMediaChunkDuration coremedia.CMTime) {
+	x.inner.SetPreferredMediaChunkDuration(preferredMediaChunkDuration)
+}
+
+// PreferredMediaChunkAlignment calls the underlying PreferredMediaChunkAlignment.
+func (x *MutableMovieTrack) PreferredMediaChunkAlignment() int {
+	return x.inner.PreferredMediaChunkAlignment()
+}
+
+// SetPreferredMediaChunkAlignment calls the underlying SetPreferredMediaChunkAlignment.
+func (x *MutableMovieTrack) SetPreferredMediaChunkAlignment(preferredMediaChunkAlignment int) {
+	x.inner.SetPreferredMediaChunkAlignment(preferredMediaChunkAlignment)
+}
+
+// InsertTimeRangeOfTrackAtTimeCopySampleDataError calls the underlying InsertTimeRangeOfTrackAtTimeCopySampleDataError.
+func (x *MutableMovieTrack) InsertTimeRangeOfTrackAtTimeCopySampleDataError(timeRange coremedia.CMTimeRange, track *raw.AVAssetTrack, startTime coremedia.CMTime, copySampleData bool) (bool, error) {
+	return x.inner.InsertTimeRangeOfTrackAtTimeCopySampleDataError(timeRange, track, startTime, copySampleData)
+}
+
+// InsertEmptyTimeRange calls the underlying InsertEmptyTimeRange.
+func (x *MutableMovieTrack) InsertEmptyTimeRange(timeRange coremedia.CMTimeRange) {
+	x.inner.InsertEmptyTimeRange(timeRange)
+}
+
+// RemoveTimeRange calls the underlying RemoveTimeRange.
+func (x *MutableMovieTrack) RemoveTimeRange(timeRange coremedia.CMTimeRange) {
+	x.inner.RemoveTimeRange(timeRange)
+}
+
+// ScaleTimeRangeToDuration calls the underlying ScaleTimeRangeToDuration.
+func (x *MutableMovieTrack) ScaleTimeRangeToDuration(timeRange coremedia.CMTimeRange, duration coremedia.CMTime) {
+	x.inner.ScaleTimeRangeToDuration(timeRange, duration)
+}
+
+// SetMetadata calls the underlying SetMetadata.
+func (x *MutableMovieTrack) SetMetadata(metadata *foundation.NSArray[*raw.AVMetadataItem]) {
+	x.inner.SetMetadata(metadata)
+}
+
+// AddTrackAssociationToTrackType calls the underlying AddTrackAssociationToTrackType.
+func (x *MutableMovieTrack) AddTrackAssociationToTrackType(movieTrack *raw.AVMovieTrack, trackAssociationType *foundation.NSString) {
+	x.inner.AddTrackAssociationToTrackType(movieTrack, trackAssociationType)
+}
+
+// RemoveTrackAssociationToTrackType calls the underlying RemoveTrackAssociationToTrackType.
+func (x *MutableMovieTrack) RemoveTrackAssociationToTrackType(movieTrack *raw.AVMovieTrack, trackAssociationType *foundation.NSString) {
+	x.inner.RemoveTrackAssociationToTrackType(movieTrack, trackAssociationType)
+}
+
+// ReplaceFormatDescriptionWithFormatDescription calls the underlying ReplaceFormatDescriptionWithFormatDescription.
+func (x *MutableMovieTrack) ReplaceFormatDescriptionWithFormatDescription(formatDescription unsafe.Pointer, newFormatDescription unsafe.Pointer) {
+	x.inner.ReplaceFormatDescriptionWithFormatDescription(formatDescription, newFormatDescription)
+}
+
+// AppendSampleBufferDecodeTimePresentationTimeError calls the underlying AppendSampleBufferDecodeTimePresentationTimeError.
+func (x *MutableMovieTrack) AppendSampleBufferDecodeTimePresentationTimeError(sampleBuffer unsafe.Pointer, outDecodeTime *coremedia.CMTime, outPresentationTime *coremedia.CMTime) (bool, error) {
+	return x.inner.AppendSampleBufferDecodeTimePresentationTimeError(sampleBuffer, outDecodeTime, outPresentationTime)
+}
+
+// InsertMediaTimeRangeIntoTimeRange calls the underlying InsertMediaTimeRangeIntoTimeRange.
+func (x *MutableMovieTrack) InsertMediaTimeRangeIntoTimeRange(mediaTimeRange coremedia.CMTimeRange, trackTimeRange coremedia.CMTimeRange) bool {
+	return x.inner.InsertMediaTimeRangeIntoTimeRange(mediaTimeRange, trackTimeRange)
+}
+
 func (x *MutableMovieTrack) asMovieTrack() *raw.AVMovieTrack { return &x.inner.AVMovieTrack }
 
 func (x *MutableMovieTrack) asAssetTrack() *raw.AVAssetTrack { return &x.inner.AVMovieTrack.AVAssetTrack }
+
+// MutableMovieTrackable is the interface implemented by [MutableMovieTrack], for mocking and DI.
+type MutableMovieTrackable interface {
+	Unwrap() *raw.AVMutableMovieTrack
+	WithMediaDataStorage(mediaDataStorage *raw.AVMediaDataStorage) *MutableMovieTrack
+	WithSampleReferenceBaseURL(sampleReferenceBaseURL string) *MutableMovieTrack
+	WithEnabled(enabled bool) *MutableMovieTrack
+	WithAlternateGroupID(alternateGroupID int) *MutableMovieTrack
+	WithModified(modified bool) *MutableMovieTrack
+	WithTimescale(timescale int32) *MutableMovieTrack
+	WithLanguageCode(languageCode string) *MutableMovieTrack
+	WithExtendedLanguageTag(extendedLanguageTag string) *MutableMovieTrack
+	WithNaturalSize(naturalSize corefoundation.CGSize) *MutableMovieTrack
+	WithPreferredTransform(preferredTransform corefoundation.CGAffineTransform) *MutableMovieTrack
+	WithLayer(layer int) *MutableMovieTrack
+	WithCleanApertureDimensions(cleanApertureDimensions corefoundation.CGSize) *MutableMovieTrack
+	WithProductionApertureDimensions(productionApertureDimensions corefoundation.CGSize) *MutableMovieTrack
+	WithEncodedPixelsDimensions(encodedPixelsDimensions corefoundation.CGSize) *MutableMovieTrack
+	WithPreferredVolume(preferredVolume float32) *MutableMovieTrack
+	WithPreferredMediaChunkSize(preferredMediaChunkSize int) *MutableMovieTrack
+	WithPreferredMediaChunkDuration(preferredMediaChunkDuration coremedia.CMTime) *MutableMovieTrack
+	WithPreferredMediaChunkAlignment(preferredMediaChunkAlignment int) *MutableMovieTrack
+	WithMetadata(items ...MetadataItemProvider) *MutableMovieTrack
+	SetMediaDataStorage(mediaDataStorage *raw.AVMediaDataStorage)
+	SampleReferenceBaseURL() *foundation.NSURL
+	SetSampleReferenceBaseURL(sampleReferenceBaseURL string)
+	SetEnabled(enabled bool)
+	SetAlternateGroupID(alternateGroupID int)
+	IsModified() bool
+	SetModified(modified bool)
+	HasProtectedContent() bool
+	Timescale() int32
+	SetTimescale(timescale int32)
+	SetLanguageCode(languageCode string)
+	SetExtendedLanguageTag(extendedLanguageTag string)
+	SetNaturalSize(naturalSize corefoundation.CGSize)
+	SetPreferredTransform(preferredTransform corefoundation.CGAffineTransform)
+	Layer() int
+	SetLayer(layer int)
+	CleanApertureDimensions() corefoundation.CGSize
+	SetCleanApertureDimensions(cleanApertureDimensions corefoundation.CGSize)
+	ProductionApertureDimensions() corefoundation.CGSize
+	SetProductionApertureDimensions(productionApertureDimensions corefoundation.CGSize)
+	EncodedPixelsDimensions() corefoundation.CGSize
+	SetEncodedPixelsDimensions(encodedPixelsDimensions corefoundation.CGSize)
+	SetPreferredVolume(preferredVolume float32)
+	PreferredMediaChunkSize() int
+	SetPreferredMediaChunkSize(preferredMediaChunkSize int)
+	PreferredMediaChunkDuration() coremedia.CMTime
+	SetPreferredMediaChunkDuration(preferredMediaChunkDuration coremedia.CMTime)
+	PreferredMediaChunkAlignment() int
+	SetPreferredMediaChunkAlignment(preferredMediaChunkAlignment int)
+	InsertTimeRangeOfTrackAtTimeCopySampleDataError(timeRange coremedia.CMTimeRange, track *raw.AVAssetTrack, startTime coremedia.CMTime, copySampleData bool) (bool, error)
+	InsertEmptyTimeRange(timeRange coremedia.CMTimeRange)
+	RemoveTimeRange(timeRange coremedia.CMTimeRange)
+	ScaleTimeRangeToDuration(timeRange coremedia.CMTimeRange, duration coremedia.CMTime)
+	SetMetadata(metadata *foundation.NSArray[*raw.AVMetadataItem])
+	AddTrackAssociationToTrackType(movieTrack *raw.AVMovieTrack, trackAssociationType *foundation.NSString)
+	RemoveTrackAssociationToTrackType(movieTrack *raw.AVMovieTrack, trackAssociationType *foundation.NSString)
+	ReplaceFormatDescriptionWithFormatDescription(formatDescription unsafe.Pointer, newFormatDescription unsafe.Pointer)
+	AppendSampleBufferDecodeTimePresentationTimeError(sampleBuffer unsafe.Pointer, outDecodeTime *coremedia.CMTime, outPresentationTime *coremedia.CMTime) (bool, error)
+	InsertMediaTimeRangeIntoTimeRange(mediaTimeRange coremedia.CMTimeRange, trackTimeRange coremedia.CMTimeRange) bool
+}
+
+var _ MutableMovieTrackable = (*MutableMovieTrack)(nil)
 

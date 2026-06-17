@@ -29,5 +29,29 @@ func (x *VirtioSoundDeviceOutputStreamConfiguration) WithSink(sink AudioOutputSt
 	return x
 }
 
+// Sink calls the underlying Sink.
+func (x *VirtioSoundDeviceOutputStreamConfiguration) Sink() *AudioOutputStreamSink {
+	_r := x.inner.Sink()
+	if _r == nil {
+		return nil
+	}
+	return &AudioOutputStreamSink{inner: _r}
+}
+
+// SetSink calls the underlying SetSink.
+func (x *VirtioSoundDeviceOutputStreamConfiguration) SetSink(sink *raw.VZAudioOutputStreamSink) {
+	x.inner.SetSink(sink)
+}
+
 func (x *VirtioSoundDeviceOutputStreamConfiguration) asVirtioSoundDeviceStreamConfiguration() *raw.VZVirtioSoundDeviceStreamConfiguration { return &x.inner.VZVirtioSoundDeviceStreamConfiguration }
+
+// VirtioSoundDeviceOutputStreamConfigurationable is the interface implemented by [VirtioSoundDeviceOutputStreamConfiguration], for mocking and DI.
+type VirtioSoundDeviceOutputStreamConfigurationable interface {
+	Unwrap() *raw.VZVirtioSoundDeviceOutputStreamConfiguration
+	WithSink(sink AudioOutputStreamSinkProvider) *VirtioSoundDeviceOutputStreamConfiguration
+	Sink() *AudioOutputStreamSink
+	SetSink(sink *raw.VZAudioOutputStreamSink)
+}
+
+var _ VirtioSoundDeviceOutputStreamConfigurationable = (*VirtioSoundDeviceOutputStreamConfiguration)(nil)
 

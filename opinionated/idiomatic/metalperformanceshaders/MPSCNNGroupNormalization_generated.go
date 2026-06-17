@@ -41,7 +41,57 @@ func (x *CNNGroupNormalization) WithEpsilon(epsilon float32) *CNNGroupNormalizat
 	return x
 }
 
+// ReloadGammaAndBetaFromDataSource calls the underlying ReloadGammaAndBetaFromDataSource.
+func (x *CNNGroupNormalization) ReloadGammaAndBetaFromDataSource() {
+	x.inner.ReloadGammaAndBetaFromDataSource()
+}
+
+// ReloadGammaAndBetaWithCommandBufferGammaAndBetaState calls the underlying ReloadGammaAndBetaWithCommandBufferGammaAndBetaState.
+func (x *CNNGroupNormalization) ReloadGammaAndBetaWithCommandBufferGammaAndBetaState(commandBuffer metal.MTLCommandBuffer, gammaAndBetaState *mpsneuralnetwork.MPSCNNNormalizationGammaAndBetaState) {
+	x.inner.ReloadGammaAndBetaWithCommandBufferGammaAndBetaState(commandBuffer, gammaAndBetaState)
+}
+
+// ResultStateForSourceImageSourceStatesDestinationImage calls the underlying ResultStateForSourceImageSourceStatesDestinationImage.
+func (x *CNNGroupNormalization) ResultStateForSourceImageSourceStatesDestinationImage(sourceImage *mpscore.MPSImage, sourceStates *foundation.NSArray[*mpscore.MPSState], destinationImage *mpscore.MPSImage) *mpsneuralnetwork.MPSCNNGroupNormalizationGradientState {
+	return x.inner.ResultStateForSourceImageSourceStatesDestinationImage(sourceImage, sourceStates, destinationImage)
+}
+
+// TemporaryResultStateForCommandBufferSourceImageSourceStatesDestinationImage calls the underlying TemporaryResultStateForCommandBufferSourceImageSourceStatesDestinationImage.
+func (x *CNNGroupNormalization) TemporaryResultStateForCommandBufferSourceImageSourceStatesDestinationImage(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, sourceStates *foundation.NSArray[*mpscore.MPSState], destinationImage *mpscore.MPSImage) *mpsneuralnetwork.MPSCNNGroupNormalizationGradientState {
+	return x.inner.TemporaryResultStateForCommandBufferSourceImageSourceStatesDestinationImage(commandBuffer, sourceImage, sourceStates, destinationImage)
+}
+
+// Epsilon calls the underlying Epsilon.
+func (x *CNNGroupNormalization) Epsilon() float32 {
+	return x.inner.Epsilon()
+}
+
+// SetEpsilon calls the underlying SetEpsilon.
+func (x *CNNGroupNormalization) SetEpsilon(epsilon float32) {
+	x.inner.SetEpsilon(epsilon)
+}
+
+// DataSource calls the underlying DataSource.
+func (x *CNNGroupNormalization) DataSource() mpsneuralnetwork.MPSCNNGroupNormalizationDataSource {
+	return x.inner.DataSource()
+}
+
 func (x *CNNGroupNormalization) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSCNNKernel }
 
 func (x *CNNGroupNormalization) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNKernel.MPSKernel }
+
+// CNNGroupNormalizationable is the interface implemented by [CNNGroupNormalization], for mocking and DI.
+type CNNGroupNormalizationable interface {
+	Unwrap() *raw.MPSCNNGroupNormalization
+	WithEpsilon(epsilon float32) *CNNGroupNormalization
+	ReloadGammaAndBetaFromDataSource()
+	ReloadGammaAndBetaWithCommandBufferGammaAndBetaState(commandBuffer metal.MTLCommandBuffer, gammaAndBetaState *mpsneuralnetwork.MPSCNNNormalizationGammaAndBetaState)
+	ResultStateForSourceImageSourceStatesDestinationImage(sourceImage *mpscore.MPSImage, sourceStates *foundation.NSArray[*mpscore.MPSState], destinationImage *mpscore.MPSImage) *mpsneuralnetwork.MPSCNNGroupNormalizationGradientState
+	TemporaryResultStateForCommandBufferSourceImageSourceStatesDestinationImage(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, sourceStates *foundation.NSArray[*mpscore.MPSState], destinationImage *mpscore.MPSImage) *mpsneuralnetwork.MPSCNNGroupNormalizationGradientState
+	Epsilon() float32
+	SetEpsilon(epsilon float32)
+	DataSource() mpsneuralnetwork.MPSCNNGroupNormalizationDataSource
+}
+
+var _ CNNGroupNormalizationable = (*CNNGroupNormalization)(nil)
 

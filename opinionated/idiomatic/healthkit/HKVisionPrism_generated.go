@@ -31,3 +31,68 @@ func NewVisionPrismWithVerticalAmountVerticalBaseHorizontalAmountHorizontalBaseE
 	return &VisionPrism{inner: raw.HKVisionPrismFromID(_id)}
 }
 
+// Amount calls the underlying Amount.
+func (x *VisionPrism) Amount() *Quantity {
+	_r := x.inner.Amount()
+	if _r == nil {
+		return nil
+	}
+	return &Quantity{inner: _r}
+}
+
+// Angle calls the underlying Angle.
+func (x *VisionPrism) Angle() *Quantity {
+	_r := x.inner.Angle()
+	if _r == nil {
+		return nil
+	}
+	return &Quantity{inner: _r}
+}
+
+// VerticalAmount calls the underlying VerticalAmount.
+func (x *VisionPrism) VerticalAmount() *Quantity {
+	_r := x.inner.VerticalAmount()
+	if _r == nil {
+		return nil
+	}
+	return &Quantity{inner: _r}
+}
+
+// HorizontalAmount calls the underlying HorizontalAmount.
+func (x *VisionPrism) HorizontalAmount() *Quantity {
+	_r := x.inner.HorizontalAmount()
+	if _r == nil {
+		return nil
+	}
+	return &Quantity{inner: _r}
+}
+
+// VerticalBase calls the underlying VerticalBase.
+func (x *VisionPrism) VerticalBase() raw.HKPrismBase {
+	return x.inner.VerticalBase()
+}
+
+// HorizontalBase calls the underlying HorizontalBase.
+func (x *VisionPrism) HorizontalBase() raw.HKPrismBase {
+	return x.inner.HorizontalBase()
+}
+
+// Eye calls the underlying Eye.
+func (x *VisionPrism) Eye() raw.HKVisionEye {
+	return x.inner.Eye()
+}
+
+// VisionPrismable is the interface implemented by [VisionPrism], for mocking and DI.
+type VisionPrismable interface {
+	Unwrap() *raw.HKVisionPrism
+	Amount() *Quantity
+	Angle() *Quantity
+	VerticalAmount() *Quantity
+	HorizontalAmount() *Quantity
+	VerticalBase() raw.HKPrismBase
+	HorizontalBase() raw.HKPrismBase
+	Eye() raw.HKVisionEye
+}
+
+var _ VisionPrismable = (*VisionPrism)(nil)
+

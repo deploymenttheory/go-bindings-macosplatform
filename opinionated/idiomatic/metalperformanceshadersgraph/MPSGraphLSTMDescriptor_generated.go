@@ -83,5 +83,142 @@ func (x *GraphLSTMDescriptor) WithActivation(activation raw.MPSGraphRNNActivatio
 	return x
 }
 
+// Reverse calls the underlying Reverse.
+func (x *GraphLSTMDescriptor) Reverse() bool {
+	return x.inner.Reverse()
+}
+
+// SetReverse calls the underlying SetReverse.
+func (x *GraphLSTMDescriptor) SetReverse(reverse bool) {
+	x.inner.SetReverse(reverse)
+}
+
+// Bidirectional calls the underlying Bidirectional.
+func (x *GraphLSTMDescriptor) Bidirectional() bool {
+	return x.inner.Bidirectional()
+}
+
+// SetBidirectional calls the underlying SetBidirectional.
+func (x *GraphLSTMDescriptor) SetBidirectional(bidirectional bool) {
+	x.inner.SetBidirectional(bidirectional)
+}
+
+// ProduceCell calls the underlying ProduceCell.
+func (x *GraphLSTMDescriptor) ProduceCell() bool {
+	return x.inner.ProduceCell()
+}
+
+// SetProduceCell calls the underlying SetProduceCell.
+func (x *GraphLSTMDescriptor) SetProduceCell(produceCell bool) {
+	x.inner.SetProduceCell(produceCell)
+}
+
+// Training calls the underlying Training.
+func (x *GraphLSTMDescriptor) Training() bool {
+	return x.inner.Training()
+}
+
+// SetTraining calls the underlying SetTraining.
+func (x *GraphLSTMDescriptor) SetTraining(training bool) {
+	x.inner.SetTraining(training)
+}
+
+// ForgetGateLast calls the underlying ForgetGateLast.
+func (x *GraphLSTMDescriptor) ForgetGateLast() bool {
+	return x.inner.ForgetGateLast()
+}
+
+// SetForgetGateLast calls the underlying SetForgetGateLast.
+func (x *GraphLSTMDescriptor) SetForgetGateLast(forgetGateLast bool) {
+	x.inner.SetForgetGateLast(forgetGateLast)
+}
+
+// InputGateActivation calls the underlying InputGateActivation.
+func (x *GraphLSTMDescriptor) InputGateActivation() raw.MPSGraphRNNActivation {
+	return x.inner.InputGateActivation()
+}
+
+// SetInputGateActivation calls the underlying SetInputGateActivation.
+func (x *GraphLSTMDescriptor) SetInputGateActivation(inputGateActivation raw.MPSGraphRNNActivation) {
+	x.inner.SetInputGateActivation(inputGateActivation)
+}
+
+// ForgetGateActivation calls the underlying ForgetGateActivation.
+func (x *GraphLSTMDescriptor) ForgetGateActivation() raw.MPSGraphRNNActivation {
+	return x.inner.ForgetGateActivation()
+}
+
+// SetForgetGateActivation calls the underlying SetForgetGateActivation.
+func (x *GraphLSTMDescriptor) SetForgetGateActivation(forgetGateActivation raw.MPSGraphRNNActivation) {
+	x.inner.SetForgetGateActivation(forgetGateActivation)
+}
+
+// CellGateActivation calls the underlying CellGateActivation.
+func (x *GraphLSTMDescriptor) CellGateActivation() raw.MPSGraphRNNActivation {
+	return x.inner.CellGateActivation()
+}
+
+// SetCellGateActivation calls the underlying SetCellGateActivation.
+func (x *GraphLSTMDescriptor) SetCellGateActivation(cellGateActivation raw.MPSGraphRNNActivation) {
+	x.inner.SetCellGateActivation(cellGateActivation)
+}
+
+// OutputGateActivation calls the underlying OutputGateActivation.
+func (x *GraphLSTMDescriptor) OutputGateActivation() raw.MPSGraphRNNActivation {
+	return x.inner.OutputGateActivation()
+}
+
+// SetOutputGateActivation calls the underlying SetOutputGateActivation.
+func (x *GraphLSTMDescriptor) SetOutputGateActivation(outputGateActivation raw.MPSGraphRNNActivation) {
+	x.inner.SetOutputGateActivation(outputGateActivation)
+}
+
+// Activation calls the underlying Activation.
+func (x *GraphLSTMDescriptor) Activation() raw.MPSGraphRNNActivation {
+	return x.inner.Activation()
+}
+
+// SetActivation calls the underlying SetActivation.
+func (x *GraphLSTMDescriptor) SetActivation(activation raw.MPSGraphRNNActivation) {
+	x.inner.SetActivation(activation)
+}
+
 func (x *GraphLSTMDescriptor) asGraphObject() *raw.MPSGraphObject { return &x.inner.MPSGraphObject }
+
+// GraphLSTMDescriptorable is the interface implemented by [GraphLSTMDescriptor], for mocking and DI.
+type GraphLSTMDescriptorable interface {
+	Unwrap() *raw.MPSGraphLSTMDescriptor
+	WithReverse(reverse bool) *GraphLSTMDescriptor
+	WithBidirectional(bidirectional bool) *GraphLSTMDescriptor
+	WithProduceCell(produceCell bool) *GraphLSTMDescriptor
+	WithTraining(training bool) *GraphLSTMDescriptor
+	WithForgetGateLast(forgetGateLast bool) *GraphLSTMDescriptor
+	WithInputGateActivation(inputGateActivation raw.MPSGraphRNNActivation) *GraphLSTMDescriptor
+	WithForgetGateActivation(forgetGateActivation raw.MPSGraphRNNActivation) *GraphLSTMDescriptor
+	WithCellGateActivation(cellGateActivation raw.MPSGraphRNNActivation) *GraphLSTMDescriptor
+	WithOutputGateActivation(outputGateActivation raw.MPSGraphRNNActivation) *GraphLSTMDescriptor
+	WithActivation(activation raw.MPSGraphRNNActivation) *GraphLSTMDescriptor
+	Reverse() bool
+	SetReverse(reverse bool)
+	Bidirectional() bool
+	SetBidirectional(bidirectional bool)
+	ProduceCell() bool
+	SetProduceCell(produceCell bool)
+	Training() bool
+	SetTraining(training bool)
+	ForgetGateLast() bool
+	SetForgetGateLast(forgetGateLast bool)
+	InputGateActivation() raw.MPSGraphRNNActivation
+	SetInputGateActivation(inputGateActivation raw.MPSGraphRNNActivation)
+	ForgetGateActivation() raw.MPSGraphRNNActivation
+	SetForgetGateActivation(forgetGateActivation raw.MPSGraphRNNActivation)
+	CellGateActivation() raw.MPSGraphRNNActivation
+	SetCellGateActivation(cellGateActivation raw.MPSGraphRNNActivation)
+	OutputGateActivation() raw.MPSGraphRNNActivation
+	SetOutputGateActivation(outputGateActivation raw.MPSGraphRNNActivation)
+	Activation() raw.MPSGraphRNNActivation
+	SetActivation(activation raw.MPSGraphRNNActivation)
+}
+
+var _ GraphLSTMDescriptorable = (*GraphLSTMDescriptor)(nil)
 

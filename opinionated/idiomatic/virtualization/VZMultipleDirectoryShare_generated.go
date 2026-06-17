@@ -31,5 +31,18 @@ func NewMultipleDirectoryShareWithDirectories(directories *foundation.NSDictiona
 	return &MultipleDirectoryShare{inner: raw.VZMultipleDirectoryShareFromID(_id)}
 }
 
+// Directories calls the underlying Directories.
+func (x *MultipleDirectoryShare) Directories() *foundation.NSDictionary[*foundation.NSString, *raw.VZSharedDirectory] {
+	return x.inner.Directories()
+}
+
 func (x *MultipleDirectoryShare) asDirectoryShare() *raw.VZDirectoryShare { return &x.inner.VZDirectoryShare }
+
+// MultipleDirectoryShareable is the interface implemented by [MultipleDirectoryShare], for mocking and DI.
+type MultipleDirectoryShareable interface {
+	Unwrap() *raw.VZMultipleDirectoryShare
+	Directories() *foundation.NSDictionary[*foundation.NSString, *raw.VZSharedDirectory]
+}
+
+var _ MultipleDirectoryShareable = (*MultipleDirectoryShare)(nil)
 

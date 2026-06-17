@@ -33,5 +33,24 @@ func NewImageHistogramEqualizationWithCoderDevice(aDecoder *foundation.NSCoder, 
 	return &ImageHistogramEqualization{inner: raw.MPSImageHistogramEqualizationFromID(_id)}
 }
 
+// EncodeTransformToCommandBufferSourceTextureHistogramHistogramOffset calls the underlying EncodeTransformToCommandBufferSourceTextureHistogramHistogramOffset.
+func (x *ImageHistogramEqualization) EncodeTransformToCommandBufferSourceTextureHistogramHistogramOffset(commandBuffer metal.MTLCommandBuffer, source metal.MTLTexture, histogram metal.MTLBuffer, histogramOffset uint) {
+	x.inner.EncodeTransformToCommandBufferSourceTextureHistogramHistogramOffset(commandBuffer, source, histogram, histogramOffset)
+}
+
+// HistogramInfo calls the underlying HistogramInfo.
+func (x *ImageHistogramEqualization) HistogramInfo() raw.MPSImageHistogramInfo {
+	return x.inner.HistogramInfo()
+}
+
 func (x *ImageHistogramEqualization) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.inner.MPSUnaryImageKernel }
+
+// ImageHistogramEqualizationable is the interface implemented by [ImageHistogramEqualization], for mocking and DI.
+type ImageHistogramEqualizationable interface {
+	Unwrap() *raw.MPSImageHistogramEqualization
+	EncodeTransformToCommandBufferSourceTextureHistogramHistogramOffset(commandBuffer metal.MTLCommandBuffer, source metal.MTLTexture, histogram metal.MTLBuffer, histogramOffset uint)
+	HistogramInfo() raw.MPSImageHistogramInfo
+}
+
+var _ ImageHistogramEqualizationable = (*ImageHistogramEqualization)(nil)
 

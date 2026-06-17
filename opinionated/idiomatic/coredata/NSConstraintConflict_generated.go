@@ -7,6 +7,7 @@ package coredata
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -26,16 +27,33 @@ func NewConstraintConflictWithConstraintDatabaseObjectDatabaseSnapshotConflictin
 }
 
 // Constraint returns the collection as a Go slice.
-func (x *ConstraintConflict) Constraint() []*foundation.NSString {
+func (x *ConstraintConflict) Constraint() []string {
 	arr := x.inner.Constraint()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// ConstraintValues calls the underlying ConstraintValues.
+func (x *ConstraintConflict) ConstraintValues() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ConstraintValues()
+}
+
+// DatabaseObject calls the underlying DatabaseObject.
+func (x *ConstraintConflict) DatabaseObject() *ManagedObject {
+	_r := x.inner.DatabaseObject()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &ManagedObject{inner: _r}
+}
+
+// DatabaseSnapshot calls the underlying DatabaseSnapshot.
+func (x *ConstraintConflict) DatabaseSnapshot() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.DatabaseSnapshot()
 }
 
 // ConflictingObjects returns the collection as a Go slice.
@@ -44,23 +62,26 @@ func (x *ConstraintConflict) ConflictingObjects() []*raw.NSManagedObject {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSManagedObject, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSManagedObject {
+		return raw.NSManagedObjectFromID(purego.Retain(_id))
+	})
 }
 
-// ConflictingSnapshots returns the collection as a Go slice.
-func (x *ConstraintConflict) ConflictingSnapshots() []*foundation.NSDictionary[objc.ID, objc.ID] {
-	arr := x.inner.ConflictingSnapshots()
-	if arr == nil {
-		return nil
-	}
-	out := make([]*foundation.NSDictionary[objc.ID, objc.ID], arr.Count())
-	for i := range out {
-		out[i] = foundation.NSDictionaryFromID[objc.ID, objc.ID](arr.ObjectAtIndex(uint(i)))
-	}
-	return out
+// ConflictingSnapshots calls the underlying ConflictingSnapshots.
+func (x *ConstraintConflict) ConflictingSnapshots() *foundation.NSArray[objc.ID] {
+	return x.inner.ConflictingSnapshots()
 }
+
+// ConstraintConflictable is the interface implemented by [ConstraintConflict], for mocking and DI.
+type ConstraintConflictable interface {
+	Unwrap() *raw.NSConstraintConflict
+	Constraint() []string
+	ConstraintValues() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	DatabaseObject() *ManagedObject
+	DatabaseSnapshot() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ConflictingObjects() []*raw.NSManagedObject
+	ConflictingSnapshots() *foundation.NSArray[objc.ID]
+}
+
+var _ ConstraintConflictable = (*ConstraintConflict)(nil)
 

@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +24,24 @@ func NewDelegatingPlaybackCoordinatorBufferingCommand() *DelegatingPlaybackCoord
 	return &DelegatingPlaybackCoordinatorBufferingCommand{inner: raw.AVDelegatingPlaybackCoordinatorBufferingCommandFromID(_id)}
 }
 
+// AnticipatedPlaybackRate calls the underlying AnticipatedPlaybackRate.
+func (x *DelegatingPlaybackCoordinatorBufferingCommand) AnticipatedPlaybackRate() float32 {
+	return x.inner.AnticipatedPlaybackRate()
+}
+
+// CompletionDueDate calls the underlying CompletionDueDate.
+func (x *DelegatingPlaybackCoordinatorBufferingCommand) CompletionDueDate() *foundation.NSDate {
+	return x.inner.CompletionDueDate()
+}
+
 func (x *DelegatingPlaybackCoordinatorBufferingCommand) asDelegatingPlaybackCoordinatorPlaybackControlCommand() *raw.AVDelegatingPlaybackCoordinatorPlaybackControlCommand { return &x.inner.AVDelegatingPlaybackCoordinatorPlaybackControlCommand }
+
+// DelegatingPlaybackCoordinatorBufferingCommandable is the interface implemented by [DelegatingPlaybackCoordinatorBufferingCommand], for mocking and DI.
+type DelegatingPlaybackCoordinatorBufferingCommandable interface {
+	Unwrap() *raw.AVDelegatingPlaybackCoordinatorBufferingCommand
+	AnticipatedPlaybackRate() float32
+	CompletionDueDate() *foundation.NSDate
+}
+
+var _ DelegatingPlaybackCoordinatorBufferingCommandable = (*DelegatingPlaybackCoordinatorBufferingCommand)(nil)
 

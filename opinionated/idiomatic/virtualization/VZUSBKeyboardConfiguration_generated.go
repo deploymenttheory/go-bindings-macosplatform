@@ -25,3 +25,10 @@ func NewUSBKeyboardConfiguration() *USBKeyboardConfiguration {
 
 func (x *USBKeyboardConfiguration) asKeyboardConfiguration() *raw.VZKeyboardConfiguration { return &x.inner.VZKeyboardConfiguration }
 
+// USBKeyboardConfigurationable is the interface implemented by [USBKeyboardConfiguration], for mocking and DI.
+type USBKeyboardConfigurationable interface {
+	Unwrap() *raw.VZUSBKeyboardConfiguration
+}
+
+var _ USBKeyboardConfigurationable = (*USBKeyboardConfiguration)(nil)
+

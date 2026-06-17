@@ -29,3 +29,10 @@ func (x *ArrayStridedSliceGradient) asArrayMultiaryGradientKernel() *raw.MPSNDAr
 
 func (x *ArrayStridedSliceGradient) asArrayMultiaryBase() *raw.MPSNDArrayMultiaryBase { return &x.inner.MPSNDArrayUnaryGradientKernel.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase }
 
+// ArrayStridedSliceGradientable is the interface implemented by [ArrayStridedSliceGradient], for mocking and DI.
+type ArrayStridedSliceGradientable interface {
+	Unwrap() *raw.MPSNDArrayStridedSliceGradient
+}
+
+var _ ArrayStridedSliceGradientable = (*ArrayStridedSliceGradient)(nil)
+

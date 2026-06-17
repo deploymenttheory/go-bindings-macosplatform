@@ -27,3 +27,10 @@ func (x *MessagePort) asPort() *raw.NSPort { return &x.inner.NSPort }
 
 func (x *MessagePort) asObject() *raw.NSObject { return &x.inner.NSPort.NSObject }
 
+// MessagePortable is the interface implemented by [MessagePort], for mocking and DI.
+type MessagePortable interface {
+	Unwrap() *raw.NSMessagePort
+}
+
+var _ MessagePortable = (*MessagePort)(nil)
+

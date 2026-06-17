@@ -41,3 +41,49 @@ func (x *LivePhotoRequestOptions) WithProgressHandler(progressHandler objc.Block
 	return x
 }
 
+// DeliveryMode calls the underlying DeliveryMode.
+func (x *LivePhotoRequestOptions) DeliveryMode() raw.PHImageRequestOptionsDeliveryMode {
+	return x.inner.DeliveryMode()
+}
+
+// SetDeliveryMode calls the underlying SetDeliveryMode.
+func (x *LivePhotoRequestOptions) SetDeliveryMode(deliveryMode raw.PHImageRequestOptionsDeliveryMode) {
+	x.inner.SetDeliveryMode(deliveryMode)
+}
+
+// IsNetworkAccessAllowed calls the underlying IsNetworkAccessAllowed.
+func (x *LivePhotoRequestOptions) IsNetworkAccessAllowed() bool {
+	return x.inner.IsNetworkAccessAllowed()
+}
+
+// SetNetworkAccessAllowed calls the underlying SetNetworkAccessAllowed.
+func (x *LivePhotoRequestOptions) SetNetworkAccessAllowed(networkAccessAllowed bool) {
+	x.inner.SetNetworkAccessAllowed(networkAccessAllowed)
+}
+
+// ProgressHandler calls the underlying ProgressHandler.
+func (x *LivePhotoRequestOptions) ProgressHandler() objc.Block {
+	return x.inner.ProgressHandler()
+}
+
+// SetProgressHandler calls the underlying SetProgressHandler.
+func (x *LivePhotoRequestOptions) SetProgressHandler(progressHandler objc.Block) {
+	x.inner.SetProgressHandler(progressHandler)
+}
+
+// LivePhotoRequestOptionsable is the interface implemented by [LivePhotoRequestOptions], for mocking and DI.
+type LivePhotoRequestOptionsable interface {
+	Unwrap() *raw.PHLivePhotoRequestOptions
+	WithDeliveryMode(deliveryMode raw.PHImageRequestOptionsDeliveryMode) *LivePhotoRequestOptions
+	WithNetworkAccessAllowed(networkAccessAllowed bool) *LivePhotoRequestOptions
+	WithProgressHandler(progressHandler objc.Block) *LivePhotoRequestOptions
+	DeliveryMode() raw.PHImageRequestOptionsDeliveryMode
+	SetDeliveryMode(deliveryMode raw.PHImageRequestOptionsDeliveryMode)
+	IsNetworkAccessAllowed() bool
+	SetNetworkAccessAllowed(networkAccessAllowed bool)
+	ProgressHandler() objc.Block
+	SetProgressHandler(progressHandler objc.Block)
+}
+
+var _ LivePhotoRequestOptionsable = (*LivePhotoRequestOptions)(nil)
+

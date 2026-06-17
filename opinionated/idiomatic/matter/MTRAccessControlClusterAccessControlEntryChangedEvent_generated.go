@@ -54,3 +54,79 @@ func (x *MTRAccessControlClusterAccessControlEntryChangedEvent) WithFabricIndex(
 	return x
 }
 
+// AdminNodeID calls the underlying AdminNodeID.
+func (x *MTRAccessControlClusterAccessControlEntryChangedEvent) AdminNodeID() *foundation.NSNumber {
+	return x.inner.AdminNodeID()
+}
+
+// SetAdminNodeID calls the underlying SetAdminNodeID.
+func (x *MTRAccessControlClusterAccessControlEntryChangedEvent) SetAdminNodeID(adminNodeID *foundation.NSNumber) {
+	x.inner.SetAdminNodeID(adminNodeID)
+}
+
+// AdminPasscodeID calls the underlying AdminPasscodeID.
+func (x *MTRAccessControlClusterAccessControlEntryChangedEvent) AdminPasscodeID() *foundation.NSNumber {
+	return x.inner.AdminPasscodeID()
+}
+
+// SetAdminPasscodeID calls the underlying SetAdminPasscodeID.
+func (x *MTRAccessControlClusterAccessControlEntryChangedEvent) SetAdminPasscodeID(adminPasscodeID *foundation.NSNumber) {
+	x.inner.SetAdminPasscodeID(adminPasscodeID)
+}
+
+// ChangeType calls the underlying ChangeType.
+func (x *MTRAccessControlClusterAccessControlEntryChangedEvent) ChangeType() *foundation.NSNumber {
+	return x.inner.ChangeType()
+}
+
+// SetChangeType calls the underlying SetChangeType.
+func (x *MTRAccessControlClusterAccessControlEntryChangedEvent) SetChangeType(changeType *foundation.NSNumber) {
+	x.inner.SetChangeType(changeType)
+}
+
+// LatestValue calls the underlying LatestValue.
+func (x *MTRAccessControlClusterAccessControlEntryChangedEvent) LatestValue() *MTRAccessControlClusterAccessControlEntryStruct {
+	_r := x.inner.LatestValue()
+	if _r == nil {
+		return nil
+	}
+	return &MTRAccessControlClusterAccessControlEntryStruct{inner: _r}
+}
+
+// SetLatestValue calls the underlying SetLatestValue.
+func (x *MTRAccessControlClusterAccessControlEntryChangedEvent) SetLatestValue(latestValue *raw.MTRAccessControlClusterAccessControlEntryStruct) {
+	x.inner.SetLatestValue(latestValue)
+}
+
+// FabricIndex calls the underlying FabricIndex.
+func (x *MTRAccessControlClusterAccessControlEntryChangedEvent) FabricIndex() *foundation.NSNumber {
+	return x.inner.FabricIndex()
+}
+
+// SetFabricIndex calls the underlying SetFabricIndex.
+func (x *MTRAccessControlClusterAccessControlEntryChangedEvent) SetFabricIndex(fabricIndex *foundation.NSNumber) {
+	x.inner.SetFabricIndex(fabricIndex)
+}
+
+// MTRAccessControlClusterAccessControlEntryChangedEventable is the interface implemented by [MTRAccessControlClusterAccessControlEntryChangedEvent], for mocking and DI.
+type MTRAccessControlClusterAccessControlEntryChangedEventable interface {
+	Unwrap() *raw.MTRAccessControlClusterAccessControlEntryChangedEvent
+	WithAdminNodeID(adminNodeID *foundation.NSNumber) *MTRAccessControlClusterAccessControlEntryChangedEvent
+	WithAdminPasscodeID(adminPasscodeID *foundation.NSNumber) *MTRAccessControlClusterAccessControlEntryChangedEvent
+	WithChangeType(changeType *foundation.NSNumber) *MTRAccessControlClusterAccessControlEntryChangedEvent
+	WithLatestValue(latestValue MTRAccessControlClusterAccessControlEntryStructProvider) *MTRAccessControlClusterAccessControlEntryChangedEvent
+	WithFabricIndex(fabricIndex *foundation.NSNumber) *MTRAccessControlClusterAccessControlEntryChangedEvent
+	AdminNodeID() *foundation.NSNumber
+	SetAdminNodeID(adminNodeID *foundation.NSNumber)
+	AdminPasscodeID() *foundation.NSNumber
+	SetAdminPasscodeID(adminPasscodeID *foundation.NSNumber)
+	ChangeType() *foundation.NSNumber
+	SetChangeType(changeType *foundation.NSNumber)
+	LatestValue() *MTRAccessControlClusterAccessControlEntryStruct
+	SetLatestValue(latestValue *raw.MTRAccessControlClusterAccessControlEntryStruct)
+	FabricIndex() *foundation.NSNumber
+	SetFabricIndex(fabricIndex *foundation.NSNumber)
+}
+
+var _ MTRAccessControlClusterAccessControlEntryChangedEventable = (*MTRAccessControlClusterAccessControlEntryChangedEvent)(nil)
+

@@ -23,5 +23,24 @@ func NewSGDOptimizer() *SGDOptimizer {
 	return &SGDOptimizer{inner: raw.MLCSGDOptimizerFromID(_id)}
 }
 
+// MomentumScale calls the underlying MomentumScale.
+func (x *SGDOptimizer) MomentumScale() float32 {
+	return x.inner.MomentumScale()
+}
+
+// UsesNesterovMomentum calls the underlying UsesNesterovMomentum.
+func (x *SGDOptimizer) UsesNesterovMomentum() bool {
+	return x.inner.UsesNesterovMomentum()
+}
+
 func (x *SGDOptimizer) asOptimizer() *raw.MLCOptimizer { return &x.inner.MLCOptimizer }
+
+// SGDOptimizerable is the interface implemented by [SGDOptimizer], for mocking and DI.
+type SGDOptimizerable interface {
+	Unwrap() *raw.MLCSGDOptimizer
+	MomentumScale() float32
+	UsesNesterovMomentum() bool
+}
+
+var _ SGDOptimizerable = (*SGDOptimizer)(nil)
 

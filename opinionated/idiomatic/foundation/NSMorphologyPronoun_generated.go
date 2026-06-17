@@ -25,5 +25,42 @@ func NewMorphologyPronounWithPronounMorphologyDependentMorphology(pronoun string
 	return &MorphologyPronoun{inner: raw.NSMorphologyPronounFromID(_id)}
 }
 
+// Pronoun calls the underlying Pronoun.
+func (x *MorphologyPronoun) Pronoun() *String {
+	_r := x.inner.Pronoun()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// Morphology calls the underlying Morphology.
+func (x *MorphologyPronoun) Morphology() *Morphology {
+	_r := x.inner.Morphology()
+	if _r == nil {
+		return nil
+	}
+	return &Morphology{inner: _r}
+}
+
+// DependentMorphology calls the underlying DependentMorphology.
+func (x *MorphologyPronoun) DependentMorphology() *Morphology {
+	_r := x.inner.DependentMorphology()
+	if _r == nil {
+		return nil
+	}
+	return &Morphology{inner: _r}
+}
+
 func (x *MorphologyPronoun) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// MorphologyPronounable is the interface implemented by [MorphologyPronoun], for mocking and DI.
+type MorphologyPronounable interface {
+	Unwrap() *raw.NSMorphologyPronoun
+	Pronoun() *String
+	Morphology() *Morphology
+	DependentMorphology() *Morphology
+}
+
+var _ MorphologyPronounable = (*MorphologyPronoun)(nil)
 

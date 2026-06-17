@@ -66,3 +66,101 @@ func (x *MTRICDManagementClusterRegisterClientParams) WithServerSideProcessingTi
 	return x
 }
 
+// CheckInNodeID calls the underlying CheckInNodeID.
+func (x *MTRICDManagementClusterRegisterClientParams) CheckInNodeID() *foundation.NSNumber {
+	return x.inner.CheckInNodeID()
+}
+
+// SetCheckInNodeID calls the underlying SetCheckInNodeID.
+func (x *MTRICDManagementClusterRegisterClientParams) SetCheckInNodeID(checkInNodeID *foundation.NSNumber) {
+	x.inner.SetCheckInNodeID(checkInNodeID)
+}
+
+// MonitoredSubject calls the underlying MonitoredSubject.
+func (x *MTRICDManagementClusterRegisterClientParams) MonitoredSubject() *foundation.NSNumber {
+	return x.inner.MonitoredSubject()
+}
+
+// SetMonitoredSubject calls the underlying SetMonitoredSubject.
+func (x *MTRICDManagementClusterRegisterClientParams) SetMonitoredSubject(monitoredSubject *foundation.NSNumber) {
+	x.inner.SetMonitoredSubject(monitoredSubject)
+}
+
+// Key calls the underlying Key.
+func (x *MTRICDManagementClusterRegisterClientParams) Key() *foundation.NSData {
+	return x.inner.Key()
+}
+
+// SetKey calls the underlying SetKey.
+func (x *MTRICDManagementClusterRegisterClientParams) SetKey(key *foundation.NSData) {
+	x.inner.SetKey(key)
+}
+
+// VerificationKey calls the underlying VerificationKey.
+func (x *MTRICDManagementClusterRegisterClientParams) VerificationKey() *foundation.NSData {
+	return x.inner.VerificationKey()
+}
+
+// SetVerificationKey calls the underlying SetVerificationKey.
+func (x *MTRICDManagementClusterRegisterClientParams) SetVerificationKey(verificationKey *foundation.NSData) {
+	x.inner.SetVerificationKey(verificationKey)
+}
+
+// ClientType calls the underlying ClientType.
+func (x *MTRICDManagementClusterRegisterClientParams) ClientType() *foundation.NSNumber {
+	return x.inner.ClientType()
+}
+
+// SetClientType calls the underlying SetClientType.
+func (x *MTRICDManagementClusterRegisterClientParams) SetClientType(clientType *foundation.NSNumber) {
+	x.inner.SetClientType(clientType)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRICDManagementClusterRegisterClientParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRICDManagementClusterRegisterClientParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRICDManagementClusterRegisterClientParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRICDManagementClusterRegisterClientParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRICDManagementClusterRegisterClientParamsable is the interface implemented by [MTRICDManagementClusterRegisterClientParams], for mocking and DI.
+type MTRICDManagementClusterRegisterClientParamsable interface {
+	Unwrap() *raw.MTRICDManagementClusterRegisterClientParams
+	WithCheckInNodeID(checkInNodeID *foundation.NSNumber) *MTRICDManagementClusterRegisterClientParams
+	WithMonitoredSubject(monitoredSubject *foundation.NSNumber) *MTRICDManagementClusterRegisterClientParams
+	WithKey(key *foundation.NSData) *MTRICDManagementClusterRegisterClientParams
+	WithVerificationKey(verificationKey *foundation.NSData) *MTRICDManagementClusterRegisterClientParams
+	WithClientType(clientType *foundation.NSNumber) *MTRICDManagementClusterRegisterClientParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRICDManagementClusterRegisterClientParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRICDManagementClusterRegisterClientParams
+	CheckInNodeID() *foundation.NSNumber
+	SetCheckInNodeID(checkInNodeID *foundation.NSNumber)
+	MonitoredSubject() *foundation.NSNumber
+	SetMonitoredSubject(monitoredSubject *foundation.NSNumber)
+	Key() *foundation.NSData
+	SetKey(key *foundation.NSData)
+	VerificationKey() *foundation.NSData
+	SetVerificationKey(verificationKey *foundation.NSData)
+	ClientType() *foundation.NSNumber
+	SetClientType(clientType *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRICDManagementClusterRegisterClientParamsable = (*MTRICDManagementClusterRegisterClientParams)(nil)
+

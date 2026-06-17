@@ -29,5 +29,31 @@ func (x *AudioMixerNode) WithOutputVolume(outputVolume float32) *AudioMixerNode 
 	return x
 }
 
+// OutputVolume calls the underlying OutputVolume.
+func (x *AudioMixerNode) OutputVolume() float32 {
+	return x.inner.OutputVolume()
+}
+
+// SetOutputVolume calls the underlying SetOutputVolume.
+func (x *AudioMixerNode) SetOutputVolume(outputVolume float32) {
+	x.inner.SetOutputVolume(outputVolume)
+}
+
+// NextAvailableInputBus calls the underlying NextAvailableInputBus.
+func (x *AudioMixerNode) NextAvailableInputBus() uint {
+	return x.inner.NextAvailableInputBus()
+}
+
 func (x *AudioMixerNode) asAudioNode() *raw.AVAudioNode { return &x.inner.AVAudioNode }
+
+// AudioMixerNodeable is the interface implemented by [AudioMixerNode], for mocking and DI.
+type AudioMixerNodeable interface {
+	Unwrap() *raw.AVAudioMixerNode
+	WithOutputVolume(outputVolume float32) *AudioMixerNode
+	OutputVolume() float32
+	SetOutputVolume(outputVolume float32)
+	NextAvailableInputBus() uint
+}
+
+var _ AudioMixerNodeable = (*AudioMixerNode)(nil)
 

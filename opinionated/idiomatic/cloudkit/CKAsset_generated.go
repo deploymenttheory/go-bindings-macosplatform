@@ -25,3 +25,16 @@ func NewAssetWithFileURL(fileURL string) *Asset {
 	return &Asset{inner: raw.CKAssetFromID(_id)}
 }
 
+// FileURL calls the underlying FileURL.
+func (x *Asset) FileURL() *foundation.NSURL {
+	return x.inner.FileURL()
+}
+
+// Assetable is the interface implemented by [Asset], for mocking and DI.
+type Assetable interface {
+	Unwrap() *raw.CKAsset
+	FileURL() *foundation.NSURL
+}
+
+var _ Assetable = (*Asset)(nil)
+

@@ -25,3 +25,22 @@ func NewCNNNormalizationGammaAndBetaStateWithGammaBeta(gamma metal.MTLBuffer, be
 	return &CNNNormalizationGammaAndBetaState{inner: raw.MPSCNNNormalizationGammaAndBetaStateFromID(_id)}
 }
 
+// Gamma calls the underlying Gamma.
+func (x *CNNNormalizationGammaAndBetaState) Gamma() metal.MTLBuffer {
+	return x.inner.Gamma()
+}
+
+// Beta calls the underlying Beta.
+func (x *CNNNormalizationGammaAndBetaState) Beta() metal.MTLBuffer {
+	return x.inner.Beta()
+}
+
+// CNNNormalizationGammaAndBetaStateable is the interface implemented by [CNNNormalizationGammaAndBetaState], for mocking and DI.
+type CNNNormalizationGammaAndBetaStateable interface {
+	Unwrap() *raw.MPSCNNNormalizationGammaAndBetaState
+	Gamma() metal.MTLBuffer
+	Beta() metal.MTLBuffer
+}
+
+var _ CNNNormalizationGammaAndBetaStateable = (*CNNNormalizationGammaAndBetaState)(nil)
+

@@ -41,3 +41,49 @@ func (x *ResourceStatePassSampleBufferAttachmentDescriptor) WithEndOfEncoderSamp
 	return x
 }
 
+// SampleBuffer calls the underlying SampleBuffer.
+func (x *ResourceStatePassSampleBufferAttachmentDescriptor) SampleBuffer() raw.MTLCounterSampleBuffer {
+	return x.inner.SampleBuffer()
+}
+
+// SetSampleBuffer calls the underlying SetSampleBuffer.
+func (x *ResourceStatePassSampleBufferAttachmentDescriptor) SetSampleBuffer(sampleBuffer raw.MTLCounterSampleBuffer) {
+	x.inner.SetSampleBuffer(sampleBuffer)
+}
+
+// StartOfEncoderSampleIndex calls the underlying StartOfEncoderSampleIndex.
+func (x *ResourceStatePassSampleBufferAttachmentDescriptor) StartOfEncoderSampleIndex() uint {
+	return x.inner.StartOfEncoderSampleIndex()
+}
+
+// SetStartOfEncoderSampleIndex calls the underlying SetStartOfEncoderSampleIndex.
+func (x *ResourceStatePassSampleBufferAttachmentDescriptor) SetStartOfEncoderSampleIndex(startOfEncoderSampleIndex uint) {
+	x.inner.SetStartOfEncoderSampleIndex(startOfEncoderSampleIndex)
+}
+
+// EndOfEncoderSampleIndex calls the underlying EndOfEncoderSampleIndex.
+func (x *ResourceStatePassSampleBufferAttachmentDescriptor) EndOfEncoderSampleIndex() uint {
+	return x.inner.EndOfEncoderSampleIndex()
+}
+
+// SetEndOfEncoderSampleIndex calls the underlying SetEndOfEncoderSampleIndex.
+func (x *ResourceStatePassSampleBufferAttachmentDescriptor) SetEndOfEncoderSampleIndex(endOfEncoderSampleIndex uint) {
+	x.inner.SetEndOfEncoderSampleIndex(endOfEncoderSampleIndex)
+}
+
+// ResourceStatePassSampleBufferAttachmentDescriptorable is the interface implemented by [ResourceStatePassSampleBufferAttachmentDescriptor], for mocking and DI.
+type ResourceStatePassSampleBufferAttachmentDescriptorable interface {
+	Unwrap() *raw.MTLResourceStatePassSampleBufferAttachmentDescriptor
+	WithSampleBuffer(sampleBuffer raw.MTLCounterSampleBuffer) *ResourceStatePassSampleBufferAttachmentDescriptor
+	WithStartOfEncoderSampleIndex(startOfEncoderSampleIndex uint) *ResourceStatePassSampleBufferAttachmentDescriptor
+	WithEndOfEncoderSampleIndex(endOfEncoderSampleIndex uint) *ResourceStatePassSampleBufferAttachmentDescriptor
+	SampleBuffer() raw.MTLCounterSampleBuffer
+	SetSampleBuffer(sampleBuffer raw.MTLCounterSampleBuffer)
+	StartOfEncoderSampleIndex() uint
+	SetStartOfEncoderSampleIndex(startOfEncoderSampleIndex uint)
+	EndOfEncoderSampleIndex() uint
+	SetEndOfEncoderSampleIndex(endOfEncoderSampleIndex uint)
+}
+
+var _ ResourceStatePassSampleBufferAttachmentDescriptorable = (*ResourceStatePassSampleBufferAttachmentDescriptor)(nil)
+

@@ -30,5 +30,25 @@ func (x *MTRBridgedDeviceBasicInformationClusterReachableChangedEvent) WithReach
 	return x
 }
 
+// ReachableNewValue calls the underlying ReachableNewValue.
+func (x *MTRBridgedDeviceBasicInformationClusterReachableChangedEvent) ReachableNewValue() *foundation.NSNumber {
+	return x.inner.ReachableNewValue()
+}
+
+// SetReachableNewValue calls the underlying SetReachableNewValue.
+func (x *MTRBridgedDeviceBasicInformationClusterReachableChangedEvent) SetReachableNewValue(reachableNewValue *foundation.NSNumber) {
+	x.inner.SetReachableNewValue(reachableNewValue)
+}
+
 func (x *MTRBridgedDeviceBasicInformationClusterReachableChangedEvent) asMTRBridgedDeviceBasicInformationClusterReachableChangedEvent() *raw.MTRBridgedDeviceBasicInformationClusterReachableChangedEvent { return x.inner }
+
+// MTRBridgedDeviceBasicInformationClusterReachableChangedEventable is the interface implemented by [MTRBridgedDeviceBasicInformationClusterReachableChangedEvent], for mocking and DI.
+type MTRBridgedDeviceBasicInformationClusterReachableChangedEventable interface {
+	Unwrap() *raw.MTRBridgedDeviceBasicInformationClusterReachableChangedEvent
+	WithReachableNewValue(reachableNewValue *foundation.NSNumber) *MTRBridgedDeviceBasicInformationClusterReachableChangedEvent
+	ReachableNewValue() *foundation.NSNumber
+	SetReachableNewValue(reachableNewValue *foundation.NSNumber)
+}
+
+var _ MTRBridgedDeviceBasicInformationClusterReachableChangedEventable = (*MTRBridgedDeviceBasicInformationClusterReachableChangedEvent)(nil)
 

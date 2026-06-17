@@ -23,3 +23,10 @@ func NewSafariExtensionManager() *SafariExtensionManager {
 	return &SafariExtensionManager{inner: raw.SFSafariExtensionManagerFromID(_id)}
 }
 
+// SafariExtensionManagerable is the interface implemented by [SafariExtensionManager], for mocking and DI.
+type SafariExtensionManagerable interface {
+	Unwrap() *raw.SFSafariExtensionManager
+}
+
+var _ SafariExtensionManagerable = (*SafariExtensionManager)(nil)
+

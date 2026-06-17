@@ -29,3 +29,10 @@ func (x *UnitAcceleration) asUnit() *raw.NSUnit { return &x.inner.NSDimension.NS
 
 func (x *UnitAcceleration) asObject() *raw.NSObject { return &x.inner.NSDimension.NSUnit.NSObject }
 
+// UnitAccelerationable is the interface implemented by [UnitAcceleration], for mocking and DI.
+type UnitAccelerationable interface {
+	Unwrap() *raw.NSUnitAcceleration
+}
+
+var _ UnitAccelerationable = (*UnitAcceleration)(nil)
+

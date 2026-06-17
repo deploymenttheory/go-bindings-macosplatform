@@ -30,3 +30,23 @@ func (x *MTRDoorLockClusterDoorStateChangeEvent) WithDoorState(doorState *founda
 	return x
 }
 
+// DoorState calls the underlying DoorState.
+func (x *MTRDoorLockClusterDoorStateChangeEvent) DoorState() *foundation.NSNumber {
+	return x.inner.DoorState()
+}
+
+// SetDoorState calls the underlying SetDoorState.
+func (x *MTRDoorLockClusterDoorStateChangeEvent) SetDoorState(doorState *foundation.NSNumber) {
+	x.inner.SetDoorState(doorState)
+}
+
+// MTRDoorLockClusterDoorStateChangeEventable is the interface implemented by [MTRDoorLockClusterDoorStateChangeEvent], for mocking and DI.
+type MTRDoorLockClusterDoorStateChangeEventable interface {
+	Unwrap() *raw.MTRDoorLockClusterDoorStateChangeEvent
+	WithDoorState(doorState *foundation.NSNumber) *MTRDoorLockClusterDoorStateChangeEvent
+	DoorState() *foundation.NSNumber
+	SetDoorState(doorState *foundation.NSNumber)
+}
+
+var _ MTRDoorLockClusterDoorStateChangeEventable = (*MTRDoorLockClusterDoorStateChangeEvent)(nil)
+

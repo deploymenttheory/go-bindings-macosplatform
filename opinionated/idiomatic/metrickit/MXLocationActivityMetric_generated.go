@@ -5,6 +5,7 @@
 package metrickit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metrickit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,5 +24,48 @@ func NewLocationActivityMetric() *LocationActivityMetric {
 	return &LocationActivityMetric{inner: raw.MXLocationActivityMetricFromID(_id)}
 }
 
+// CumulativeBestAccuracyTime calls the underlying CumulativeBestAccuracyTime.
+func (x *LocationActivityMetric) CumulativeBestAccuracyTime() *foundation.NSMeasurement[*foundation.NSUnitDuration] {
+	return x.inner.CumulativeBestAccuracyTime()
+}
+
+// CumulativeBestAccuracyForNavigationTime calls the underlying CumulativeBestAccuracyForNavigationTime.
+func (x *LocationActivityMetric) CumulativeBestAccuracyForNavigationTime() *foundation.NSMeasurement[*foundation.NSUnitDuration] {
+	return x.inner.CumulativeBestAccuracyForNavigationTime()
+}
+
+// CumulativeNearestTenMetersAccuracyTime calls the underlying CumulativeNearestTenMetersAccuracyTime.
+func (x *LocationActivityMetric) CumulativeNearestTenMetersAccuracyTime() *foundation.NSMeasurement[*foundation.NSUnitDuration] {
+	return x.inner.CumulativeNearestTenMetersAccuracyTime()
+}
+
+// CumulativeHundredMetersAccuracyTime calls the underlying CumulativeHundredMetersAccuracyTime.
+func (x *LocationActivityMetric) CumulativeHundredMetersAccuracyTime() *foundation.NSMeasurement[*foundation.NSUnitDuration] {
+	return x.inner.CumulativeHundredMetersAccuracyTime()
+}
+
+// CumulativeKilometerAccuracyTime calls the underlying CumulativeKilometerAccuracyTime.
+func (x *LocationActivityMetric) CumulativeKilometerAccuracyTime() *foundation.NSMeasurement[*foundation.NSUnitDuration] {
+	return x.inner.CumulativeKilometerAccuracyTime()
+}
+
+// CumulativeThreeKilometersAccuracyTime calls the underlying CumulativeThreeKilometersAccuracyTime.
+func (x *LocationActivityMetric) CumulativeThreeKilometersAccuracyTime() *foundation.NSMeasurement[*foundation.NSUnitDuration] {
+	return x.inner.CumulativeThreeKilometersAccuracyTime()
+}
+
 func (x *LocationActivityMetric) asMetric() *raw.MXMetric { return &x.inner.MXMetric }
+
+// LocationActivityMetricable is the interface implemented by [LocationActivityMetric], for mocking and DI.
+type LocationActivityMetricable interface {
+	Unwrap() *raw.MXLocationActivityMetric
+	CumulativeBestAccuracyTime() *foundation.NSMeasurement[*foundation.NSUnitDuration]
+	CumulativeBestAccuracyForNavigationTime() *foundation.NSMeasurement[*foundation.NSUnitDuration]
+	CumulativeNearestTenMetersAccuracyTime() *foundation.NSMeasurement[*foundation.NSUnitDuration]
+	CumulativeHundredMetersAccuracyTime() *foundation.NSMeasurement[*foundation.NSUnitDuration]
+	CumulativeKilometerAccuracyTime() *foundation.NSMeasurement[*foundation.NSUnitDuration]
+	CumulativeThreeKilometersAccuracyTime() *foundation.NSMeasurement[*foundation.NSUnitDuration]
+}
+
+var _ LocationActivityMetricable = (*LocationActivityMetric)(nil)
 

@@ -6,6 +6,8 @@ package collaboration
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/collaboration"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,18 +25,36 @@ func NewGroupIdentity() *GroupIdentity {
 	return &GroupIdentity{inner: raw.CBGroupIdentityFromID(_id)}
 }
 
+// PosixGID calls the underlying PosixGID.
+func (x *GroupIdentity) PosixGID() uint {
+	return x.inner.PosixGID()
+}
+
+// Members calls the underlying Members.
+func (x *GroupIdentity) Members() *foundation.NSArray[objc.ID] {
+	return x.inner.Members()
+}
+
 // MemberIdentities returns the collection as a Go slice.
 func (x *GroupIdentity) MemberIdentities() []*raw.CBIdentity {
 	arr := x.inner.MemberIdentities()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.CBIdentity, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CBIdentity {
+		return raw.CBIdentityFromID(purego.Retain(_id))
+	})
 }
 
 func (x *GroupIdentity) asIdentity() *raw.CBIdentity { return &x.inner.CBIdentity }
+
+// GroupIdentityable is the interface implemented by [GroupIdentity], for mocking and DI.
+type GroupIdentityable interface {
+	Unwrap() *raw.CBGroupIdentity
+	PosixGID() uint
+	Members() *foundation.NSArray[objc.ID]
+	MemberIdentities() []*raw.CBIdentity
+}
+
+var _ GroupIdentityable = (*GroupIdentity)(nil)
 

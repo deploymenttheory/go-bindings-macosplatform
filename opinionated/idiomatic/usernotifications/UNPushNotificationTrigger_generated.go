@@ -25,3 +25,10 @@ func NewPushNotificationTrigger() *PushNotificationTrigger {
 
 func (x *PushNotificationTrigger) asNotificationTrigger() *raw.UNNotificationTrigger { return &x.inner.UNNotificationTrigger }
 
+// PushNotificationTriggerable is the interface implemented by [PushNotificationTrigger], for mocking and DI.
+type PushNotificationTriggerable interface {
+	Unwrap() *raw.UNPushNotificationTrigger
+}
+
+var _ PushNotificationTriggerable = (*PushNotificationTrigger)(nil)
+

@@ -41,9 +41,65 @@ func (x *CNNConvolutionTransposeGradient) WithGradientOption(gradientOption mpsn
 	return x
 }
 
+// ReloadWeightsAndBiasesFromDataSource calls the underlying ReloadWeightsAndBiasesFromDataSource.
+func (x *CNNConvolutionTransposeGradient) ReloadWeightsAndBiasesFromDataSource() {
+	x.inner.ReloadWeightsAndBiasesFromDataSource()
+}
+
+// ReloadWeightsAndBiasesWithCommandBufferState calls the underlying ReloadWeightsAndBiasesWithCommandBufferState.
+func (x *CNNConvolutionTransposeGradient) ReloadWeightsAndBiasesWithCommandBufferState(commandBuffer metal.MTLCommandBuffer, state *mpsneuralnetwork.MPSCNNConvolutionWeightsAndBiasesState) {
+	x.inner.ReloadWeightsAndBiasesWithCommandBufferState(commandBuffer, state)
+}
+
+// SourceGradientFeatureChannels calls the underlying SourceGradientFeatureChannels.
+func (x *CNNConvolutionTransposeGradient) SourceGradientFeatureChannels() uint {
+	return x.inner.SourceGradientFeatureChannels()
+}
+
+// SourceImageFeatureChannels calls the underlying SourceImageFeatureChannels.
+func (x *CNNConvolutionTransposeGradient) SourceImageFeatureChannels() uint {
+	return x.inner.SourceImageFeatureChannels()
+}
+
+// Groups calls the underlying Groups.
+func (x *CNNConvolutionTransposeGradient) Groups() uint {
+	return x.inner.Groups()
+}
+
+// DataSource calls the underlying DataSource.
+func (x *CNNConvolutionTransposeGradient) DataSource() mpsneuralnetwork.MPSCNNConvolutionDataSource {
+	return x.inner.DataSource()
+}
+
+// GradientOption calls the underlying GradientOption.
+func (x *CNNConvolutionTransposeGradient) GradientOption() mpsneuralnetwork.MPSCNNConvolutionGradientOption {
+	return x.inner.GradientOption()
+}
+
+// SetGradientOption calls the underlying SetGradientOption.
+func (x *CNNConvolutionTransposeGradient) SetGradientOption(gradientOption mpsneuralnetwork.MPSCNNConvolutionGradientOption) {
+	x.inner.SetGradientOption(gradientOption)
+}
+
 func (x *CNNConvolutionTransposeGradient) asCNNGradientKernel() *mpsneuralnetwork.MPSCNNGradientKernel { return &x.inner.MPSCNNGradientKernel }
 
 func (x *CNNConvolutionTransposeGradient) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel { return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel }
 
 func (x *CNNConvolutionTransposeGradient) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel }
+
+// CNNConvolutionTransposeGradientable is the interface implemented by [CNNConvolutionTransposeGradient], for mocking and DI.
+type CNNConvolutionTransposeGradientable interface {
+	Unwrap() *raw.MPSCNNConvolutionTransposeGradient
+	WithGradientOption(gradientOption mpsneuralnetwork.MPSCNNConvolutionGradientOption) *CNNConvolutionTransposeGradient
+	ReloadWeightsAndBiasesFromDataSource()
+	ReloadWeightsAndBiasesWithCommandBufferState(commandBuffer metal.MTLCommandBuffer, state *mpsneuralnetwork.MPSCNNConvolutionWeightsAndBiasesState)
+	SourceGradientFeatureChannels() uint
+	SourceImageFeatureChannels() uint
+	Groups() uint
+	DataSource() mpsneuralnetwork.MPSCNNConvolutionDataSource
+	GradientOption() mpsneuralnetwork.MPSCNNConvolutionGradientOption
+	SetGradientOption(gradientOption mpsneuralnetwork.MPSCNNConvolutionGradientOption)
+}
+
+var _ CNNConvolutionTransposeGradientable = (*CNNConvolutionTransposeGradient)(nil)
 

@@ -24,3 +24,22 @@ func NewExtensionScheduledOutputWithSequenceNumberHostTimeInNanoseconds(sequence
 	return &ExtensionScheduledOutput{inner: raw.CMIOExtensionScheduledOutputFromID(_id)}
 }
 
+// SequenceNumber calls the underlying SequenceNumber.
+func (x *ExtensionScheduledOutput) SequenceNumber() uint64 {
+	return x.inner.SequenceNumber()
+}
+
+// HostTimeInNanoseconds calls the underlying HostTimeInNanoseconds.
+func (x *ExtensionScheduledOutput) HostTimeInNanoseconds() uint64 {
+	return x.inner.HostTimeInNanoseconds()
+}
+
+// ExtensionScheduledOutputable is the interface implemented by [ExtensionScheduledOutput], for mocking and DI.
+type ExtensionScheduledOutputable interface {
+	Unwrap() *raw.CMIOExtensionScheduledOutput
+	SequenceNumber() uint64
+	HostTimeInNanoseconds() uint64
+}
+
+var _ ExtensionScheduledOutputable = (*ExtensionScheduledOutput)(nil)
+

@@ -7,6 +7,7 @@ package mapkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -80,4 +81,101 @@ func (x *LocalSearchRequest) WithAddressFilter(addressFilter *raw.MKAddressFilte
 	x.inner.SetAddressFilter(addressFilter)
 	return x
 }
+
+// NaturalLanguageQuery calls the underlying NaturalLanguageQuery.
+func (x *LocalSearchRequest) NaturalLanguageQuery() string {
+	_r := x.inner.NaturalLanguageQuery()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetNaturalLanguageQuery calls the underlying SetNaturalLanguageQuery.
+func (x *LocalSearchRequest) SetNaturalLanguageQuery(naturalLanguageQuery string) {
+	x.inner.SetNaturalLanguageQuery(foundation.NSStringStringWithUTF8String(naturalLanguageQuery))
+}
+
+// Region calls the underlying Region.
+func (x *LocalSearchRequest) Region() raw.MKCoordinateRegion {
+	return x.inner.Region()
+}
+
+// SetRegion calls the underlying SetRegion.
+func (x *LocalSearchRequest) SetRegion(region raw.MKCoordinateRegion) {
+	x.inner.SetRegion(region)
+}
+
+// RegionPriority calls the underlying RegionPriority.
+func (x *LocalSearchRequest) RegionPriority() raw.MKLocalSearchRegionPriority {
+	return x.inner.RegionPriority()
+}
+
+// SetRegionPriority calls the underlying SetRegionPriority.
+func (x *LocalSearchRequest) SetRegionPriority(regionPriority raw.MKLocalSearchRegionPriority) {
+	x.inner.SetRegionPriority(regionPriority)
+}
+
+// ResultTypes calls the underlying ResultTypes.
+func (x *LocalSearchRequest) ResultTypes() raw.MKLocalSearchResultType {
+	return x.inner.ResultTypes()
+}
+
+// SetResultTypes calls the underlying SetResultTypes.
+func (x *LocalSearchRequest) SetResultTypes(resultTypes raw.MKLocalSearchResultType) {
+	x.inner.SetResultTypes(resultTypes)
+}
+
+// PointOfInterestFilter calls the underlying PointOfInterestFilter.
+func (x *LocalSearchRequest) PointOfInterestFilter() *PointOfInterestFilter {
+	_r := x.inner.PointOfInterestFilter()
+	if _r == nil {
+		return nil
+	}
+	return &PointOfInterestFilter{inner: _r}
+}
+
+// SetPointOfInterestFilter calls the underlying SetPointOfInterestFilter.
+func (x *LocalSearchRequest) SetPointOfInterestFilter(pointOfInterestFilter *raw.MKPointOfInterestFilter) {
+	x.inner.SetPointOfInterestFilter(pointOfInterestFilter)
+}
+
+// AddressFilter calls the underlying AddressFilter.
+func (x *LocalSearchRequest) AddressFilter() *AddressFilter {
+	_r := x.inner.AddressFilter()
+	if _r == nil {
+		return nil
+	}
+	return &AddressFilter{inner: _r}
+}
+
+// SetAddressFilter calls the underlying SetAddressFilter.
+func (x *LocalSearchRequest) SetAddressFilter(addressFilter *raw.MKAddressFilter) {
+	x.inner.SetAddressFilter(addressFilter)
+}
+
+// LocalSearchRequestable is the interface implemented by [LocalSearchRequest], for mocking and DI.
+type LocalSearchRequestable interface {
+	Unwrap() *raw.MKLocalSearchRequest
+	WithNaturalLanguageQuery(naturalLanguageQuery string) *LocalSearchRequest
+	WithRegion(region raw.MKCoordinateRegion) *LocalSearchRequest
+	WithRegionPriority(regionPriority raw.MKLocalSearchRegionPriority) *LocalSearchRequest
+	WithResultTypes(resultTypes raw.MKLocalSearchResultType) *LocalSearchRequest
+	WithPointOfInterestFilter(pointOfInterestFilter *raw.MKPointOfInterestFilter) *LocalSearchRequest
+	WithAddressFilter(addressFilter *raw.MKAddressFilter) *LocalSearchRequest
+	NaturalLanguageQuery() string
+	SetNaturalLanguageQuery(naturalLanguageQuery string)
+	Region() raw.MKCoordinateRegion
+	SetRegion(region raw.MKCoordinateRegion)
+	RegionPriority() raw.MKLocalSearchRegionPriority
+	SetRegionPriority(regionPriority raw.MKLocalSearchRegionPriority)
+	ResultTypes() raw.MKLocalSearchResultType
+	SetResultTypes(resultTypes raw.MKLocalSearchResultType)
+	PointOfInterestFilter() *PointOfInterestFilter
+	SetPointOfInterestFilter(pointOfInterestFilter *raw.MKPointOfInterestFilter)
+	AddressFilter() *AddressFilter
+	SetAddressFilter(addressFilter *raw.MKAddressFilter)
+}
+
+var _ LocalSearchRequestable = (*LocalSearchRequest)(nil)
 

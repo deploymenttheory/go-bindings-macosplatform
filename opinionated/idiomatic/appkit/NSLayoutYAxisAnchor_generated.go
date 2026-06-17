@@ -23,5 +23,52 @@ func NewLayoutYAxisAnchor() *LayoutYAxisAnchor {
 	return &LayoutYAxisAnchor{inner: raw.NSLayoutYAxisAnchorFromID(_id)}
 }
 
+// AnchorWithOffsetToAnchor calls the underlying AnchorWithOffsetToAnchor.
+func (x *LayoutYAxisAnchor) AnchorWithOffsetToAnchor(otherAnchor *raw.NSLayoutYAxisAnchor) *LayoutDimension {
+	_r := x.inner.AnchorWithOffsetToAnchor(otherAnchor)
+	if _r == nil {
+		return nil
+	}
+	return &LayoutDimension{inner: _r}
+}
+
+// ConstraintEqualToSystemSpacingBelowAnchorMultiplier calls the underlying ConstraintEqualToSystemSpacingBelowAnchorMultiplier.
+func (x *LayoutYAxisAnchor) ConstraintEqualToSystemSpacingBelowAnchorMultiplier(anchor *raw.NSLayoutYAxisAnchor, multiplier float64) *LayoutConstraint {
+	_r := x.inner.ConstraintEqualToSystemSpacingBelowAnchorMultiplier(anchor, multiplier)
+	if _r == nil {
+		return nil
+	}
+	return &LayoutConstraint{inner: _r}
+}
+
+// ConstraintGreaterThanOrEqualToSystemSpacingBelowAnchorMultiplier calls the underlying ConstraintGreaterThanOrEqualToSystemSpacingBelowAnchorMultiplier.
+func (x *LayoutYAxisAnchor) ConstraintGreaterThanOrEqualToSystemSpacingBelowAnchorMultiplier(anchor *raw.NSLayoutYAxisAnchor, multiplier float64) *LayoutConstraint {
+	_r := x.inner.ConstraintGreaterThanOrEqualToSystemSpacingBelowAnchorMultiplier(anchor, multiplier)
+	if _r == nil {
+		return nil
+	}
+	return &LayoutConstraint{inner: _r}
+}
+
+// ConstraintLessThanOrEqualToSystemSpacingBelowAnchorMultiplier calls the underlying ConstraintLessThanOrEqualToSystemSpacingBelowAnchorMultiplier.
+func (x *LayoutYAxisAnchor) ConstraintLessThanOrEqualToSystemSpacingBelowAnchorMultiplier(anchor *raw.NSLayoutYAxisAnchor, multiplier float64) *LayoutConstraint {
+	_r := x.inner.ConstraintLessThanOrEqualToSystemSpacingBelowAnchorMultiplier(anchor, multiplier)
+	if _r == nil {
+		return nil
+	}
+	return &LayoutConstraint{inner: _r}
+}
+
 func (x *LayoutYAxisAnchor) asLayoutAnchor() *raw.NSLayoutAnchor[objc.ID] { return &x.inner.NSLayoutAnchor }
+
+// LayoutYAxisAnchorable is the interface implemented by [LayoutYAxisAnchor], for mocking and DI.
+type LayoutYAxisAnchorable interface {
+	Unwrap() *raw.NSLayoutYAxisAnchor
+	AnchorWithOffsetToAnchor(otherAnchor *raw.NSLayoutYAxisAnchor) *LayoutDimension
+	ConstraintEqualToSystemSpacingBelowAnchorMultiplier(anchor *raw.NSLayoutYAxisAnchor, multiplier float64) *LayoutConstraint
+	ConstraintGreaterThanOrEqualToSystemSpacingBelowAnchorMultiplier(anchor *raw.NSLayoutYAxisAnchor, multiplier float64) *LayoutConstraint
+	ConstraintLessThanOrEqualToSystemSpacingBelowAnchorMultiplier(anchor *raw.NSLayoutYAxisAnchor, multiplier float64) *LayoutConstraint
+}
+
+var _ LayoutYAxisAnchorable = (*LayoutYAxisAnchor)(nil)
 

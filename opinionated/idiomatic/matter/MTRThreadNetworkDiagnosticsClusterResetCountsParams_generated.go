@@ -36,3 +36,36 @@ func (x *MTRThreadNetworkDiagnosticsClusterResetCountsParams) WithServerSideProc
 	return x
 }
 
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRThreadNetworkDiagnosticsClusterResetCountsParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRThreadNetworkDiagnosticsClusterResetCountsParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRThreadNetworkDiagnosticsClusterResetCountsParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRThreadNetworkDiagnosticsClusterResetCountsParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRThreadNetworkDiagnosticsClusterResetCountsParamsable is the interface implemented by [MTRThreadNetworkDiagnosticsClusterResetCountsParams], for mocking and DI.
+type MTRThreadNetworkDiagnosticsClusterResetCountsParamsable interface {
+	Unwrap() *raw.MTRThreadNetworkDiagnosticsClusterResetCountsParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterResetCountsParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterResetCountsParams
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRThreadNetworkDiagnosticsClusterResetCountsParamsable = (*MTRThreadNetworkDiagnosticsClusterResetCountsParams)(nil)
+

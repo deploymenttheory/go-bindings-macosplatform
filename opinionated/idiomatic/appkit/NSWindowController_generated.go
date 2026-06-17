@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -89,5 +90,214 @@ func (x *WindowController) WithWindow(window WindowProvider) *WindowController {
 	return x
 }
 
+// SetDocumentEdited calls the underlying SetDocumentEdited.
+func (x *WindowController) SetDocumentEdited(dirtyFlag bool) {
+	x.inner.SetDocumentEdited(dirtyFlag)
+}
+
+// SynchronizeWindowTitleWithDocumentName calls the underlying SynchronizeWindowTitleWithDocumentName.
+func (x *WindowController) SynchronizeWindowTitleWithDocumentName() {
+	x.inner.SynchronizeWindowTitleWithDocumentName()
+}
+
+// WindowTitleForDocumentDisplayName calls the underlying WindowTitleForDocumentDisplayName.
+func (x *WindowController) WindowTitleForDocumentDisplayName(displayName string) string {
+	_r := x.inner.WindowTitleForDocumentDisplayName(foundation.NSStringStringWithUTF8String(displayName))
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// WindowWillLoad calls the underlying WindowWillLoad.
+func (x *WindowController) WindowWillLoad() {
+	x.inner.WindowWillLoad()
+}
+
+// WindowDidLoad calls the underlying WindowDidLoad.
+func (x *WindowController) WindowDidLoad() {
+	x.inner.WindowDidLoad()
+}
+
+// LoadWindow calls the underlying LoadWindow.
+func (x *WindowController) LoadWindow() {
+	x.inner.LoadWindow()
+}
+
+// Close calls the underlying Close.
+func (x *WindowController) Close() {
+	x.inner.Close()
+}
+
+// ShowWindow calls the underlying ShowWindow.
+func (x *WindowController) ShowWindow(sender objc.ID) {
+	x.inner.ShowWindow(sender)
+}
+
+// WindowNibName calls the underlying WindowNibName.
+func (x *WindowController) WindowNibName() string {
+	_r := x.inner.WindowNibName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// WindowNibPath calls the underlying WindowNibPath.
+func (x *WindowController) WindowNibPath() string {
+	_r := x.inner.WindowNibPath()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Owner calls the underlying Owner.
+func (x *WindowController) Owner() objc.ID {
+	return x.inner.Owner()
+}
+
+// WindowFrameAutosaveName calls the underlying WindowFrameAutosaveName.
+func (x *WindowController) WindowFrameAutosaveName() string {
+	_r := x.inner.WindowFrameAutosaveName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetWindowFrameAutosaveName calls the underlying SetWindowFrameAutosaveName.
+func (x *WindowController) SetWindowFrameAutosaveName(windowFrameAutosaveName *foundation.NSString) {
+	x.inner.SetWindowFrameAutosaveName(windowFrameAutosaveName)
+}
+
+// ShouldCascadeWindows calls the underlying ShouldCascadeWindows.
+func (x *WindowController) ShouldCascadeWindows() bool {
+	return x.inner.ShouldCascadeWindows()
+}
+
+// SetShouldCascadeWindows calls the underlying SetShouldCascadeWindows.
+func (x *WindowController) SetShouldCascadeWindows(shouldCascadeWindows bool) {
+	x.inner.SetShouldCascadeWindows(shouldCascadeWindows)
+}
+
+// PreviewRepresentableActivityItems calls the underlying PreviewRepresentableActivityItems.
+func (x *WindowController) PreviewRepresentableActivityItems() *foundation.NSArray[raw.NSPreviewRepresentableActivityItem] {
+	return x.inner.PreviewRepresentableActivityItems()
+}
+
+// SetPreviewRepresentableActivityItems calls the underlying SetPreviewRepresentableActivityItems.
+func (x *WindowController) SetPreviewRepresentableActivityItems(previewRepresentableActivityItems *foundation.NSArray[raw.NSPreviewRepresentableActivityItem]) {
+	x.inner.SetPreviewRepresentableActivityItems(previewRepresentableActivityItems)
+}
+
+// Document calls the underlying Document.
+func (x *WindowController) Document() objc.ID {
+	return x.inner.Document()
+}
+
+// SetDocument calls the underlying SetDocument.
+func (x *WindowController) SetDocument(document objc.ID) {
+	x.inner.SetDocument(document)
+}
+
+// ShouldCloseDocument calls the underlying ShouldCloseDocument.
+func (x *WindowController) ShouldCloseDocument() bool {
+	return x.inner.ShouldCloseDocument()
+}
+
+// SetShouldCloseDocument calls the underlying SetShouldCloseDocument.
+func (x *WindowController) SetShouldCloseDocument(shouldCloseDocument bool) {
+	x.inner.SetShouldCloseDocument(shouldCloseDocument)
+}
+
+// ContentViewController calls the underlying ContentViewController.
+func (x *WindowController) ContentViewController() *ViewController {
+	_r := x.inner.ContentViewController()
+	if _r == nil {
+		return nil
+	}
+	return &ViewController{inner: _r}
+}
+
+// SetContentViewController calls the underlying SetContentViewController.
+func (x *WindowController) SetContentViewController(contentViewController *raw.NSViewController) {
+	x.inner.SetContentViewController(contentViewController)
+}
+
+// Window calls the underlying Window.
+func (x *WindowController) Window() *Window {
+	_r := x.inner.Window()
+	if _r == nil {
+		return nil
+	}
+	return &Window{inner: _r}
+}
+
+// SetWindow calls the underlying SetWindow.
+func (x *WindowController) SetWindow(window *raw.NSWindow) {
+	x.inner.SetWindow(window)
+}
+
+// IsWindowLoaded calls the underlying IsWindowLoaded.
+func (x *WindowController) IsWindowLoaded() bool {
+	return x.inner.IsWindowLoaded()
+}
+
+// Storyboard calls the underlying Storyboard.
+func (x *WindowController) Storyboard() *Storyboard {
+	_r := x.inner.Storyboard()
+	if _r == nil {
+		return nil
+	}
+	return &Storyboard{inner: _r}
+}
+
+// DismissController calls the underlying DismissController.
+func (x *WindowController) DismissController(sender objc.ID) {
+	x.inner.DismissController(sender)
+}
+
 func (x *WindowController) asResponder() *raw.NSResponder { return &x.inner.NSResponder }
+
+// WindowControllerable is the interface implemented by [WindowController], for mocking and DI.
+type WindowControllerable interface {
+	Unwrap() *raw.NSWindowController
+	WithWindowFrameAutosaveName(windowFrameAutosaveName *foundation.NSString) *WindowController
+	WithShouldCascadeWindows(shouldCascadeWindows bool) *WindowController
+	WithDocument(document objc.ID) *WindowController
+	WithShouldCloseDocument(shouldCloseDocument bool) *WindowController
+	WithContentViewController(contentViewController ViewControllerProvider) *WindowController
+	WithWindow(window WindowProvider) *WindowController
+	SetDocumentEdited(dirtyFlag bool)
+	SynchronizeWindowTitleWithDocumentName()
+	WindowTitleForDocumentDisplayName(displayName string) string
+	WindowWillLoad()
+	WindowDidLoad()
+	LoadWindow()
+	Close()
+	ShowWindow(sender objc.ID)
+	WindowNibName() string
+	WindowNibPath() string
+	Owner() objc.ID
+	WindowFrameAutosaveName() string
+	SetWindowFrameAutosaveName(windowFrameAutosaveName *foundation.NSString)
+	ShouldCascadeWindows() bool
+	SetShouldCascadeWindows(shouldCascadeWindows bool)
+	PreviewRepresentableActivityItems() *foundation.NSArray[raw.NSPreviewRepresentableActivityItem]
+	SetPreviewRepresentableActivityItems(previewRepresentableActivityItems *foundation.NSArray[raw.NSPreviewRepresentableActivityItem])
+	Document() objc.ID
+	SetDocument(document objc.ID)
+	ShouldCloseDocument() bool
+	SetShouldCloseDocument(shouldCloseDocument bool)
+	ContentViewController() *ViewController
+	SetContentViewController(contentViewController *raw.NSViewController)
+	Window() *Window
+	SetWindow(window *raw.NSWindow)
+	IsWindowLoaded() bool
+	Storyboard() *Storyboard
+	DismissController(sender objc.ID)
+}
+
+var _ WindowControllerable = (*WindowController)(nil)
 

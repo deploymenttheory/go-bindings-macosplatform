@@ -25,3 +25,10 @@ func NewPointingDeviceConfiguration() *PointingDeviceConfiguration {
 
 func (x *PointingDeviceConfiguration) asPointingDeviceConfiguration() *raw.VZPointingDeviceConfiguration { return x.inner }
 
+// PointingDeviceConfigurationable is the interface implemented by [PointingDeviceConfiguration], for mocking and DI.
+type PointingDeviceConfigurationable interface {
+	Unwrap() *raw.VZPointingDeviceConfiguration
+}
+
+var _ PointingDeviceConfigurationable = (*PointingDeviceConfiguration)(nil)
+

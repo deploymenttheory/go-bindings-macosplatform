@@ -23,5 +23,36 @@ func NewRMSPropOptimizer() *RMSPropOptimizer {
 	return &RMSPropOptimizer{inner: raw.MLCRMSPropOptimizerFromID(_id)}
 }
 
+// MomentumScale calls the underlying MomentumScale.
+func (x *RMSPropOptimizer) MomentumScale() float32 {
+	return x.inner.MomentumScale()
+}
+
+// Alpha calls the underlying Alpha.
+func (x *RMSPropOptimizer) Alpha() float32 {
+	return x.inner.Alpha()
+}
+
+// Epsilon calls the underlying Epsilon.
+func (x *RMSPropOptimizer) Epsilon() float32 {
+	return x.inner.Epsilon()
+}
+
+// IsCentered calls the underlying IsCentered.
+func (x *RMSPropOptimizer) IsCentered() bool {
+	return x.inner.IsCentered()
+}
+
 func (x *RMSPropOptimizer) asOptimizer() *raw.MLCOptimizer { return &x.inner.MLCOptimizer }
+
+// RMSPropOptimizerable is the interface implemented by [RMSPropOptimizer], for mocking and DI.
+type RMSPropOptimizerable interface {
+	Unwrap() *raw.MLCRMSPropOptimizer
+	MomentumScale() float32
+	Alpha() float32
+	Epsilon() float32
+	IsCentered() bool
+}
+
+var _ RMSPropOptimizerable = (*RMSPropOptimizer)(nil)
 

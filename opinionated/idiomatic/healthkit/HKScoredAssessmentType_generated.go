@@ -27,3 +27,10 @@ func (x *ScoredAssessmentType) asSampleType() *raw.HKSampleType { return &x.inne
 
 func (x *ScoredAssessmentType) asObjectType() *raw.HKObjectType { return &x.inner.HKSampleType.HKObjectType }
 
+// ScoredAssessmentTypeable is the interface implemented by [ScoredAssessmentType], for mocking and DI.
+type ScoredAssessmentTypeable interface {
+	Unwrap() *raw.HKScoredAssessmentType
+}
+
+var _ ScoredAssessmentTypeable = (*ScoredAssessmentType)(nil)
+

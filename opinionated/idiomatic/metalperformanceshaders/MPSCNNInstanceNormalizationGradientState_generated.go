@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
@@ -25,7 +26,44 @@ func NewCNNInstanceNormalizationGradientState() *CNNInstanceNormalizationGradien
 	return &CNNInstanceNormalizationGradientState{inner: raw.MPSCNNInstanceNormalizationGradientStateFromID(_id)}
 }
 
+// InstanceNormalization calls the underlying InstanceNormalization.
+func (x *CNNInstanceNormalizationGradientState) InstanceNormalization() *mpsneuralnetwork.MPSCNNInstanceNormalization {
+	return x.inner.InstanceNormalization()
+}
+
+// Gamma calls the underlying Gamma.
+func (x *CNNInstanceNormalizationGradientState) Gamma() metal.MTLBuffer {
+	return x.inner.Gamma()
+}
+
+// Beta calls the underlying Beta.
+func (x *CNNInstanceNormalizationGradientState) Beta() metal.MTLBuffer {
+	return x.inner.Beta()
+}
+
+// GradientForGamma calls the underlying GradientForGamma.
+func (x *CNNInstanceNormalizationGradientState) GradientForGamma() metal.MTLBuffer {
+	return x.inner.GradientForGamma()
+}
+
+// GradientForBeta calls the underlying GradientForBeta.
+func (x *CNNInstanceNormalizationGradientState) GradientForBeta() metal.MTLBuffer {
+	return x.inner.GradientForBeta()
+}
+
 func (x *CNNInstanceNormalizationGradientState) asNNGradientState() *mpsneuralnetwork.MPSNNGradientState { return &x.inner.MPSNNGradientState }
 
 func (x *CNNInstanceNormalizationGradientState) asState() *mpscore.MPSState { return &x.inner.MPSNNGradientState.MPSState }
+
+// CNNInstanceNormalizationGradientStateable is the interface implemented by [CNNInstanceNormalizationGradientState], for mocking and DI.
+type CNNInstanceNormalizationGradientStateable interface {
+	Unwrap() *raw.MPSCNNInstanceNormalizationGradientState
+	InstanceNormalization() *mpsneuralnetwork.MPSCNNInstanceNormalization
+	Gamma() metal.MTLBuffer
+	Beta() metal.MTLBuffer
+	GradientForGamma() metal.MTLBuffer
+	GradientForBeta() metal.MTLBuffer
+}
+
+var _ CNNInstanceNormalizationGradientStateable = (*CNNInstanceNormalizationGradientState)(nil)
 

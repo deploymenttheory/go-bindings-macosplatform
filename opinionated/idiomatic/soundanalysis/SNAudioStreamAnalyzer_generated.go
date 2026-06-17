@@ -25,3 +25,40 @@ func NewAudioStreamAnalyzerWithFormat(format *avfaudio.AVAudioFormat) *AudioStre
 	return &AudioStreamAnalyzer{inner: raw.SNAudioStreamAnalyzerFromID(_id)}
 }
 
+// AddRequestWithObserverError calls the underlying AddRequestWithObserverError.
+func (x *AudioStreamAnalyzer) AddRequestWithObserverError(request raw.SNRequest, observer raw.SNResultsObserving) (bool, error) {
+	return x.inner.AddRequestWithObserverError(request, observer)
+}
+
+// RemoveRequest calls the underlying RemoveRequest.
+func (x *AudioStreamAnalyzer) RemoveRequest(request raw.SNRequest) {
+	x.inner.RemoveRequest(request)
+}
+
+// RemoveAllRequests calls the underlying RemoveAllRequests.
+func (x *AudioStreamAnalyzer) RemoveAllRequests() {
+	x.inner.RemoveAllRequests()
+}
+
+// AnalyzeAudioBufferAtAudioFramePosition calls the underlying AnalyzeAudioBufferAtAudioFramePosition.
+func (x *AudioStreamAnalyzer) AnalyzeAudioBufferAtAudioFramePosition(audioBuffer *avfaudio.AVAudioBuffer, audioFramePosition int64) {
+	x.inner.AnalyzeAudioBufferAtAudioFramePosition(audioBuffer, audioFramePosition)
+}
+
+// CompleteAnalysis calls the underlying CompleteAnalysis.
+func (x *AudioStreamAnalyzer) CompleteAnalysis() {
+	x.inner.CompleteAnalysis()
+}
+
+// AudioStreamAnalyzerable is the interface implemented by [AudioStreamAnalyzer], for mocking and DI.
+type AudioStreamAnalyzerable interface {
+	Unwrap() *raw.SNAudioStreamAnalyzer
+	AddRequestWithObserverError(request raw.SNRequest, observer raw.SNResultsObserving) (bool, error)
+	RemoveRequest(request raw.SNRequest)
+	RemoveAllRequests()
+	AnalyzeAudioBufferAtAudioFramePosition(audioBuffer *avfaudio.AVAudioBuffer, audioFramePosition int64)
+	CompleteAnalysis()
+}
+
+var _ AudioStreamAnalyzerable = (*AudioStreamAnalyzer)(nil)
+

@@ -7,6 +7,7 @@ package coredata
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -37,16 +38,112 @@ func (x *FetchedResultsController) PerformFetch() error {
 	return err
 }
 
+// ObjectAtIndexPath calls the underlying ObjectAtIndexPath.
+func (x *FetchedResultsController) ObjectAtIndexPath(indexPath *foundation.NSIndexPath) objc.ID {
+	return x.inner.ObjectAtIndexPath(indexPath)
+}
+
+// IndexPathForObject calls the underlying IndexPathForObject.
+func (x *FetchedResultsController) IndexPathForObject(object objc.ID) *foundation.NSIndexPath {
+	return x.inner.IndexPathForObject(object)
+}
+
+// SectionIndexTitleForSectionName calls the underlying SectionIndexTitleForSectionName.
+func (x *FetchedResultsController) SectionIndexTitleForSectionName(sectionName string) string {
+	_r := x.inner.SectionIndexTitleForSectionName(foundation.NSStringStringWithUTF8String(sectionName))
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SectionForSectionIndexTitleAtIndex calls the underlying SectionForSectionIndexTitleAtIndex.
+func (x *FetchedResultsController) SectionForSectionIndexTitleAtIndex(title string, sectionIndex int) int {
+	return x.inner.SectionForSectionIndexTitleAtIndex(foundation.NSStringStringWithUTF8String(title), sectionIndex)
+}
+
+// FetchRequest calls the underlying FetchRequest.
+func (x *FetchedResultsController) FetchRequest() *raw.NSFetchRequest[objc.ID] {
+	return x.inner.FetchRequest()
+}
+
+// ManagedObjectContext calls the underlying ManagedObjectContext.
+func (x *FetchedResultsController) ManagedObjectContext() *ManagedObjectContext {
+	_r := x.inner.ManagedObjectContext()
+	if _r == nil {
+		return nil
+	}
+	return &ManagedObjectContext{inner: _r}
+}
+
+// SectionNameKeyPath calls the underlying SectionNameKeyPath.
+func (x *FetchedResultsController) SectionNameKeyPath() string {
+	_r := x.inner.SectionNameKeyPath()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// CacheName calls the underlying CacheName.
+func (x *FetchedResultsController) CacheName() string {
+	_r := x.inner.CacheName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Delegate calls the underlying Delegate.
+func (x *FetchedResultsController) Delegate() raw.NSFetchedResultsControllerDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *FetchedResultsController) SetDelegate(delegate raw.NSFetchedResultsControllerDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// FetchedObjects calls the underlying FetchedObjects.
+func (x *FetchedResultsController) FetchedObjects() *foundation.NSArray[objc.ID] {
+	return x.inner.FetchedObjects()
+}
+
 // SectionIndexTitles returns the collection as a Go slice.
-func (x *FetchedResultsController) SectionIndexTitles() []*foundation.NSString {
+func (x *FetchedResultsController) SectionIndexTitles() []string {
 	arr := x.inner.SectionIndexTitles()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
+
+// Sections calls the underlying Sections.
+func (x *FetchedResultsController) Sections() *foundation.NSArray[raw.NSFetchedResultsSectionInfo] {
+	return x.inner.Sections()
+}
+
+// FetchedResultsControllerable is the interface implemented by [FetchedResultsController], for mocking and DI.
+type FetchedResultsControllerable interface {
+	Unwrap() *raw.NSFetchedResultsController[objc.ID]
+	WithDelegate(delegate raw.NSFetchedResultsControllerDelegate) *FetchedResultsController
+	PerformFetch() error
+	ObjectAtIndexPath(indexPath *foundation.NSIndexPath) objc.ID
+	IndexPathForObject(object objc.ID) *foundation.NSIndexPath
+	SectionIndexTitleForSectionName(sectionName string) string
+	SectionForSectionIndexTitleAtIndex(title string, sectionIndex int) int
+	FetchRequest() *raw.NSFetchRequest[objc.ID]
+	ManagedObjectContext() *ManagedObjectContext
+	SectionNameKeyPath() string
+	CacheName() string
+	Delegate() raw.NSFetchedResultsControllerDelegate
+	SetDelegate(delegate raw.NSFetchedResultsControllerDelegate)
+	FetchedObjects() *foundation.NSArray[objc.ID]
+	SectionIndexTitles() []string
+	Sections() *foundation.NSArray[raw.NSFetchedResultsSectionInfo]
+}
+
+var _ FetchedResultsControllerable = (*FetchedResultsController)(nil)
 

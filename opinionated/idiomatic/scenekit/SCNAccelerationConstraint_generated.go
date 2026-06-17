@@ -47,5 +47,64 @@ func (x *AccelerationConstraint) WithDamping(damping float64) *AccelerationConst
 	return x
 }
 
+// MaximumLinearAcceleration calls the underlying MaximumLinearAcceleration.
+func (x *AccelerationConstraint) MaximumLinearAcceleration() float64 {
+	return x.inner.MaximumLinearAcceleration()
+}
+
+// SetMaximumLinearAcceleration calls the underlying SetMaximumLinearAcceleration.
+func (x *AccelerationConstraint) SetMaximumLinearAcceleration(maximumLinearAcceleration float64) {
+	x.inner.SetMaximumLinearAcceleration(maximumLinearAcceleration)
+}
+
+// MaximumLinearVelocity calls the underlying MaximumLinearVelocity.
+func (x *AccelerationConstraint) MaximumLinearVelocity() float64 {
+	return x.inner.MaximumLinearVelocity()
+}
+
+// SetMaximumLinearVelocity calls the underlying SetMaximumLinearVelocity.
+func (x *AccelerationConstraint) SetMaximumLinearVelocity(maximumLinearVelocity float64) {
+	x.inner.SetMaximumLinearVelocity(maximumLinearVelocity)
+}
+
+// DecelerationDistance calls the underlying DecelerationDistance.
+func (x *AccelerationConstraint) DecelerationDistance() float64 {
+	return x.inner.DecelerationDistance()
+}
+
+// SetDecelerationDistance calls the underlying SetDecelerationDistance.
+func (x *AccelerationConstraint) SetDecelerationDistance(decelerationDistance float64) {
+	x.inner.SetDecelerationDistance(decelerationDistance)
+}
+
+// Damping calls the underlying Damping.
+func (x *AccelerationConstraint) Damping() float64 {
+	return x.inner.Damping()
+}
+
+// SetDamping calls the underlying SetDamping.
+func (x *AccelerationConstraint) SetDamping(damping float64) {
+	x.inner.SetDamping(damping)
+}
+
 func (x *AccelerationConstraint) asConstraint() *raw.SCNConstraint { return &x.inner.SCNConstraint }
+
+// AccelerationConstraintable is the interface implemented by [AccelerationConstraint], for mocking and DI.
+type AccelerationConstraintable interface {
+	Unwrap() *raw.SCNAccelerationConstraint
+	WithMaximumLinearAcceleration(maximumLinearAcceleration float64) *AccelerationConstraint
+	WithMaximumLinearVelocity(maximumLinearVelocity float64) *AccelerationConstraint
+	WithDecelerationDistance(decelerationDistance float64) *AccelerationConstraint
+	WithDamping(damping float64) *AccelerationConstraint
+	MaximumLinearAcceleration() float64
+	SetMaximumLinearAcceleration(maximumLinearAcceleration float64)
+	MaximumLinearVelocity() float64
+	SetMaximumLinearVelocity(maximumLinearVelocity float64)
+	DecelerationDistance() float64
+	SetDecelerationDistance(decelerationDistance float64)
+	Damping() float64
+	SetDamping(damping float64)
+}
+
+var _ AccelerationConstraintable = (*AccelerationConstraint)(nil)
 

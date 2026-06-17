@@ -46,9 +46,28 @@ func NewNumberMetaParameterDefinitionWithValueMinimumMaximum(value float64, mini
 	return &NumberMetaParameterDefinition{inner: raw.PHASENumberMetaParameterDefinitionFromID(_id)}
 }
 
+// Minimum calls the underlying Minimum.
+func (x *NumberMetaParameterDefinition) Minimum() float64 {
+	return x.inner.Minimum()
+}
+
+// Maximum calls the underlying Maximum.
+func (x *NumberMetaParameterDefinition) Maximum() float64 {
+	return x.inner.Maximum()
+}
+
 func (x *NumberMetaParameterDefinition) asNumberMetaParameterDefinition() *raw.PHASENumberMetaParameterDefinition { return x.inner }
 
 func (x *NumberMetaParameterDefinition) asMetaParameterDefinition() *raw.PHASEMetaParameterDefinition { return &x.inner.PHASEMetaParameterDefinition }
 
 func (x *NumberMetaParameterDefinition) asDefinition() *raw.PHASEDefinition { return &x.inner.PHASEMetaParameterDefinition.PHASEDefinition }
+
+// NumberMetaParameterDefinitionable is the interface implemented by [NumberMetaParameterDefinition], for mocking and DI.
+type NumberMetaParameterDefinitionable interface {
+	Unwrap() *raw.PHASENumberMetaParameterDefinition
+	Minimum() float64
+	Maximum() float64
+}
+
+var _ NumberMetaParameterDefinitionable = (*NumberMetaParameterDefinition)(nil)
 

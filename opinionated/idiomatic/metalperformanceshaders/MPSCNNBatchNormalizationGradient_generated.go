@@ -11,6 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // CNNBatchNormalizationGradient wraps [raw.MPSCNNBatchNormalizationGradient] with a fluent Go API.
@@ -35,9 +36,40 @@ func NewCNNBatchNormalizationGradientWithCoderDevice(aDecoder *foundation.NSCode
 	return &CNNBatchNormalizationGradient{inner: raw.MPSCNNBatchNormalizationGradientFromID(_id)}
 }
 
+// EncodeToCommandBufferSourceGradientSourceImageBatchNormalizationStateDestinationGradient calls the underlying EncodeToCommandBufferSourceGradientSourceImageBatchNormalizationStateDestinationGradient.
+func (x *CNNBatchNormalizationGradient) EncodeToCommandBufferSourceGradientSourceImageBatchNormalizationStateDestinationGradient(commandBuffer metal.MTLCommandBuffer, sourceGradient *mpscore.MPSImage, sourceImage *mpscore.MPSImage, batchNormalizationState *mpsneuralnetwork.MPSCNNBatchNormalizationState, destinationGradient *mpscore.MPSImage) {
+	x.inner.EncodeToCommandBufferSourceGradientSourceImageBatchNormalizationStateDestinationGradient(commandBuffer, sourceGradient, sourceImage, batchNormalizationState, destinationGradient)
+}
+
+// EncodeBatchToCommandBufferSourceGradientsSourceImagesBatchNormalizationStateDestinationGradients calls the underlying EncodeBatchToCommandBufferSourceGradientsSourceImagesBatchNormalizationStateDestinationGradients.
+func (x *CNNBatchNormalizationGradient) EncodeBatchToCommandBufferSourceGradientsSourceImagesBatchNormalizationStateDestinationGradients(commandBuffer metal.MTLCommandBuffer, sourceGradients unsafe.Pointer, sourceImages unsafe.Pointer, batchNormalizationState *mpsneuralnetwork.MPSCNNBatchNormalizationState, destinationGradients unsafe.Pointer) {
+	x.inner.EncodeBatchToCommandBufferSourceGradientsSourceImagesBatchNormalizationStateDestinationGradients(commandBuffer, sourceGradients, sourceImages, batchNormalizationState, destinationGradients)
+}
+
+// EncodeToCommandBufferSourceGradientSourceImageBatchNormalizationState calls the underlying EncodeToCommandBufferSourceGradientSourceImageBatchNormalizationState.
+func (x *CNNBatchNormalizationGradient) EncodeToCommandBufferSourceGradientSourceImageBatchNormalizationState(commandBuffer metal.MTLCommandBuffer, sourceGradient *mpscore.MPSImage, sourceImage *mpscore.MPSImage, batchNormalizationState *mpsneuralnetwork.MPSCNNBatchNormalizationState) *mpscore.MPSImage {
+	return x.inner.EncodeToCommandBufferSourceGradientSourceImageBatchNormalizationState(commandBuffer, sourceGradient, sourceImage, batchNormalizationState)
+}
+
+// EncodeBatchToCommandBufferSourceGradientsSourceImagesBatchNormalizationState calls the underlying EncodeBatchToCommandBufferSourceGradientsSourceImagesBatchNormalizationState.
+func (x *CNNBatchNormalizationGradient) EncodeBatchToCommandBufferSourceGradientsSourceImagesBatchNormalizationState(commandBuffer metal.MTLCommandBuffer, sourceGradients unsafe.Pointer, sourceImages unsafe.Pointer, batchNormalizationState *mpsneuralnetwork.MPSCNNBatchNormalizationState) unsafe.Pointer {
+	return x.inner.EncodeBatchToCommandBufferSourceGradientsSourceImagesBatchNormalizationState(commandBuffer, sourceGradients, sourceImages, batchNormalizationState)
+}
+
 func (x *CNNBatchNormalizationGradient) asCNNGradientKernel() *mpsneuralnetwork.MPSCNNGradientKernel { return &x.inner.MPSCNNGradientKernel }
 
 func (x *CNNBatchNormalizationGradient) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel { return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel }
 
 func (x *CNNBatchNormalizationGradient) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel }
+
+// CNNBatchNormalizationGradientable is the interface implemented by [CNNBatchNormalizationGradient], for mocking and DI.
+type CNNBatchNormalizationGradientable interface {
+	Unwrap() *raw.MPSCNNBatchNormalizationGradient
+	EncodeToCommandBufferSourceGradientSourceImageBatchNormalizationStateDestinationGradient(commandBuffer metal.MTLCommandBuffer, sourceGradient *mpscore.MPSImage, sourceImage *mpscore.MPSImage, batchNormalizationState *mpsneuralnetwork.MPSCNNBatchNormalizationState, destinationGradient *mpscore.MPSImage)
+	EncodeBatchToCommandBufferSourceGradientsSourceImagesBatchNormalizationStateDestinationGradients(commandBuffer metal.MTLCommandBuffer, sourceGradients unsafe.Pointer, sourceImages unsafe.Pointer, batchNormalizationState *mpsneuralnetwork.MPSCNNBatchNormalizationState, destinationGradients unsafe.Pointer)
+	EncodeToCommandBufferSourceGradientSourceImageBatchNormalizationState(commandBuffer metal.MTLCommandBuffer, sourceGradient *mpscore.MPSImage, sourceImage *mpscore.MPSImage, batchNormalizationState *mpsneuralnetwork.MPSCNNBatchNormalizationState) *mpscore.MPSImage
+	EncodeBatchToCommandBufferSourceGradientsSourceImagesBatchNormalizationState(commandBuffer metal.MTLCommandBuffer, sourceGradients unsafe.Pointer, sourceImages unsafe.Pointer, batchNormalizationState *mpsneuralnetwork.MPSCNNBatchNormalizationState) unsafe.Pointer
+}
+
+var _ CNNBatchNormalizationGradientable = (*CNNBatchNormalizationGradient)(nil)
 

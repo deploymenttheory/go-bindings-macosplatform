@@ -47,3 +47,72 @@ func (x *Action) WithSpeed(speed float64) *Action {
 	return x
 }
 
+// ReversedAction calls the underlying ReversedAction.
+func (x *Action) ReversedAction() *Action {
+	_r := x.inner.ReversedAction()
+	if _r == nil {
+		return nil
+	}
+	return &Action{inner: _r}
+}
+
+// Duration calls the underlying Duration.
+func (x *Action) Duration() float64 {
+	return x.inner.Duration()
+}
+
+// SetDuration calls the underlying SetDuration.
+func (x *Action) SetDuration(duration float64) {
+	x.inner.SetDuration(duration)
+}
+
+// TimingMode calls the underlying TimingMode.
+func (x *Action) TimingMode() raw.SKActionTimingMode {
+	return x.inner.TimingMode()
+}
+
+// SetTimingMode calls the underlying SetTimingMode.
+func (x *Action) SetTimingMode(timingMode raw.SKActionTimingMode) {
+	x.inner.SetTimingMode(timingMode)
+}
+
+// TimingFunction calls the underlying TimingFunction.
+func (x *Action) TimingFunction() objc.Block {
+	return x.inner.TimingFunction()
+}
+
+// SetTimingFunction calls the underlying SetTimingFunction.
+func (x *Action) SetTimingFunction(timingFunction objc.Block) {
+	x.inner.SetTimingFunction(timingFunction)
+}
+
+// Speed calls the underlying Speed.
+func (x *Action) Speed() float64 {
+	return x.inner.Speed()
+}
+
+// SetSpeed calls the underlying SetSpeed.
+func (x *Action) SetSpeed(speed float64) {
+	x.inner.SetSpeed(speed)
+}
+
+// Actionable is the interface implemented by [Action], for mocking and DI.
+type Actionable interface {
+	Unwrap() *raw.SKAction
+	WithDuration(duration float64) *Action
+	WithTimingMode(timingMode raw.SKActionTimingMode) *Action
+	WithTimingFunction(timingFunction objc.Block) *Action
+	WithSpeed(speed float64) *Action
+	ReversedAction() *Action
+	Duration() float64
+	SetDuration(duration float64)
+	TimingMode() raw.SKActionTimingMode
+	SetTimingMode(timingMode raw.SKActionTimingMode)
+	TimingFunction() objc.Block
+	SetTimingFunction(timingFunction objc.Block)
+	Speed() float64
+	SetSpeed(speed float64)
+}
+
+var _ Actionable = (*Action)(nil)
+

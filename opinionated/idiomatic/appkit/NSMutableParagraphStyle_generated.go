@@ -187,5 +187,184 @@ func (x *MutableParagraphStyle) WithHeaderLevel(headerLevel int) *MutableParagra
 	return x
 }
 
+// AddTabStop calls the underlying AddTabStop.
+func (x *MutableParagraphStyle) AddTabStop(anObject *raw.NSTextTab) {
+	x.inner.AddTabStop(anObject)
+}
+
+// RemoveTabStop calls the underlying RemoveTabStop.
+func (x *MutableParagraphStyle) RemoveTabStop(anObject *raw.NSTextTab) {
+	x.inner.RemoveTabStop(anObject)
+}
+
+// SetParagraphStyle calls the underlying SetParagraphStyle.
+func (x *MutableParagraphStyle) SetParagraphStyle(obj *raw.NSParagraphStyle) {
+	x.inner.SetParagraphStyle(obj)
+}
+
+// SetLineSpacing calls the underlying SetLineSpacing.
+func (x *MutableParagraphStyle) SetLineSpacing(lineSpacing float64) {
+	x.inner.SetLineSpacing(lineSpacing)
+}
+
+// SetParagraphSpacing calls the underlying SetParagraphSpacing.
+func (x *MutableParagraphStyle) SetParagraphSpacing(paragraphSpacing float64) {
+	x.inner.SetParagraphSpacing(paragraphSpacing)
+}
+
+// SetFirstLineHeadIndent calls the underlying SetFirstLineHeadIndent.
+func (x *MutableParagraphStyle) SetFirstLineHeadIndent(firstLineHeadIndent float64) {
+	x.inner.SetFirstLineHeadIndent(firstLineHeadIndent)
+}
+
+// SetHeadIndent calls the underlying SetHeadIndent.
+func (x *MutableParagraphStyle) SetHeadIndent(headIndent float64) {
+	x.inner.SetHeadIndent(headIndent)
+}
+
+// SetTailIndent calls the underlying SetTailIndent.
+func (x *MutableParagraphStyle) SetTailIndent(tailIndent float64) {
+	x.inner.SetTailIndent(tailIndent)
+}
+
+// SetLineBreakMode calls the underlying SetLineBreakMode.
+func (x *MutableParagraphStyle) SetLineBreakMode(lineBreakMode raw.NSLineBreakMode) {
+	x.inner.SetLineBreakMode(lineBreakMode)
+}
+
+// SetMinimumLineHeight calls the underlying SetMinimumLineHeight.
+func (x *MutableParagraphStyle) SetMinimumLineHeight(minimumLineHeight float64) {
+	x.inner.SetMinimumLineHeight(minimumLineHeight)
+}
+
+// SetMaximumLineHeight calls the underlying SetMaximumLineHeight.
+func (x *MutableParagraphStyle) SetMaximumLineHeight(maximumLineHeight float64) {
+	x.inner.SetMaximumLineHeight(maximumLineHeight)
+}
+
+// SetBaseWritingDirection calls the underlying SetBaseWritingDirection.
+func (x *MutableParagraphStyle) SetBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) {
+	x.inner.SetBaseWritingDirection(baseWritingDirection)
+}
+
+// SetLineHeightMultiple calls the underlying SetLineHeightMultiple.
+func (x *MutableParagraphStyle) SetLineHeightMultiple(lineHeightMultiple float64) {
+	x.inner.SetLineHeightMultiple(lineHeightMultiple)
+}
+
+// SetParagraphSpacingBefore calls the underlying SetParagraphSpacingBefore.
+func (x *MutableParagraphStyle) SetParagraphSpacingBefore(paragraphSpacingBefore float64) {
+	x.inner.SetParagraphSpacingBefore(paragraphSpacingBefore)
+}
+
+// SetHyphenationFactor calls the underlying SetHyphenationFactor.
+func (x *MutableParagraphStyle) SetHyphenationFactor(hyphenationFactor float32) {
+	x.inner.SetHyphenationFactor(hyphenationFactor)
+}
+
+// SetUsesDefaultHyphenation calls the underlying SetUsesDefaultHyphenation.
+func (x *MutableParagraphStyle) SetUsesDefaultHyphenation(usesDefaultHyphenation bool) {
+	x.inner.SetUsesDefaultHyphenation(usesDefaultHyphenation)
+}
+
+// SetTabStops calls the underlying SetTabStops.
+func (x *MutableParagraphStyle) SetTabStops(tabStops *foundation.NSArray[*raw.NSTextTab]) {
+	x.inner.SetTabStops(tabStops)
+}
+
+// SetDefaultTabInterval calls the underlying SetDefaultTabInterval.
+func (x *MutableParagraphStyle) SetDefaultTabInterval(defaultTabInterval float64) {
+	x.inner.SetDefaultTabInterval(defaultTabInterval)
+}
+
+// SetAllowsDefaultTighteningForTruncation calls the underlying SetAllowsDefaultTighteningForTruncation.
+func (x *MutableParagraphStyle) SetAllowsDefaultTighteningForTruncation(allowsDefaultTighteningForTruncation bool) {
+	x.inner.SetAllowsDefaultTighteningForTruncation(allowsDefaultTighteningForTruncation)
+}
+
+// SetLineBreakStrategy calls the underlying SetLineBreakStrategy.
+func (x *MutableParagraphStyle) SetLineBreakStrategy(lineBreakStrategy raw.NSLineBreakStrategy) {
+	x.inner.SetLineBreakStrategy(lineBreakStrategy)
+}
+
+// SetTextLists calls the underlying SetTextLists.
+func (x *MutableParagraphStyle) SetTextLists(textLists *foundation.NSArray[*raw.NSTextList]) {
+	x.inner.SetTextLists(textLists)
+}
+
+// SetAlignment calls the underlying SetAlignment.
+func (x *MutableParagraphStyle) SetAlignment(alignment raw.NSTextAlignment) {
+	x.inner.SetAlignment(alignment)
+}
+
+// SetTighteningFactorForTruncation calls the underlying SetTighteningFactorForTruncation.
+func (x *MutableParagraphStyle) SetTighteningFactorForTruncation(tighteningFactorForTruncation float32) {
+	x.inner.SetTighteningFactorForTruncation(tighteningFactorForTruncation)
+}
+
+// SetTextBlocks calls the underlying SetTextBlocks.
+func (x *MutableParagraphStyle) SetTextBlocks(textBlocks *foundation.NSArray[*raw.NSTextBlock]) {
+	x.inner.SetTextBlocks(textBlocks)
+}
+
+// SetHeaderLevel calls the underlying SetHeaderLevel.
+func (x *MutableParagraphStyle) SetHeaderLevel(headerLevel int) {
+	x.inner.SetHeaderLevel(headerLevel)
+}
+
 func (x *MutableParagraphStyle) asParagraphStyle() *raw.NSParagraphStyle { return &x.inner.NSParagraphStyle }
+
+// MutableParagraphStyleable is the interface implemented by [MutableParagraphStyle], for mocking and DI.
+type MutableParagraphStyleable interface {
+	Unwrap() *raw.NSMutableParagraphStyle
+	WithLineSpacing(lineSpacing float64) *MutableParagraphStyle
+	WithParagraphSpacing(paragraphSpacing float64) *MutableParagraphStyle
+	WithFirstLineHeadIndent(firstLineHeadIndent float64) *MutableParagraphStyle
+	WithHeadIndent(headIndent float64) *MutableParagraphStyle
+	WithTailIndent(tailIndent float64) *MutableParagraphStyle
+	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *MutableParagraphStyle
+	WithMinimumLineHeight(minimumLineHeight float64) *MutableParagraphStyle
+	WithMaximumLineHeight(maximumLineHeight float64) *MutableParagraphStyle
+	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *MutableParagraphStyle
+	WithLineHeightMultiple(lineHeightMultiple float64) *MutableParagraphStyle
+	WithParagraphSpacingBefore(paragraphSpacingBefore float64) *MutableParagraphStyle
+	WithHyphenationFactor(hyphenationFactor float32) *MutableParagraphStyle
+	WithUsesDefaultHyphenation(usesDefaultHyphenation bool) *MutableParagraphStyle
+	WithTabStops(items ...*raw.NSTextTab) *MutableParagraphStyle
+	WithDefaultTabInterval(defaultTabInterval float64) *MutableParagraphStyle
+	WithAllowsDefaultTighteningForTruncation(allowsDefaultTighteningForTruncation bool) *MutableParagraphStyle
+	WithLineBreakStrategy(lineBreakStrategy raw.NSLineBreakStrategy) *MutableParagraphStyle
+	WithTextLists(items ...*raw.NSTextList) *MutableParagraphStyle
+	WithAlignment(alignment raw.NSTextAlignment) *MutableParagraphStyle
+	WithTighteningFactorForTruncation(tighteningFactorForTruncation float32) *MutableParagraphStyle
+	WithTextBlocks(items ...TextBlockProvider) *MutableParagraphStyle
+	WithHeaderLevel(headerLevel int) *MutableParagraphStyle
+	AddTabStop(anObject *raw.NSTextTab)
+	RemoveTabStop(anObject *raw.NSTextTab)
+	SetParagraphStyle(obj *raw.NSParagraphStyle)
+	SetLineSpacing(lineSpacing float64)
+	SetParagraphSpacing(paragraphSpacing float64)
+	SetFirstLineHeadIndent(firstLineHeadIndent float64)
+	SetHeadIndent(headIndent float64)
+	SetTailIndent(tailIndent float64)
+	SetLineBreakMode(lineBreakMode raw.NSLineBreakMode)
+	SetMinimumLineHeight(minimumLineHeight float64)
+	SetMaximumLineHeight(maximumLineHeight float64)
+	SetBaseWritingDirection(baseWritingDirection raw.NSWritingDirection)
+	SetLineHeightMultiple(lineHeightMultiple float64)
+	SetParagraphSpacingBefore(paragraphSpacingBefore float64)
+	SetHyphenationFactor(hyphenationFactor float32)
+	SetUsesDefaultHyphenation(usesDefaultHyphenation bool)
+	SetTabStops(tabStops *foundation.NSArray[*raw.NSTextTab])
+	SetDefaultTabInterval(defaultTabInterval float64)
+	SetAllowsDefaultTighteningForTruncation(allowsDefaultTighteningForTruncation bool)
+	SetLineBreakStrategy(lineBreakStrategy raw.NSLineBreakStrategy)
+	SetTextLists(textLists *foundation.NSArray[*raw.NSTextList])
+	SetAlignment(alignment raw.NSTextAlignment)
+	SetTighteningFactorForTruncation(tighteningFactorForTruncation float32)
+	SetTextBlocks(textBlocks *foundation.NSArray[*raw.NSTextBlock])
+	SetHeaderLevel(headerLevel int)
+}
+
+var _ MutableParagraphStyleable = (*MutableParagraphStyle)(nil)
 

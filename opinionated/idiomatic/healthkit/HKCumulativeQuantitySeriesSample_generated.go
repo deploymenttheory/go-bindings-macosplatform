@@ -23,6 +23,15 @@ func NewCumulativeQuantitySeriesSample() *CumulativeQuantitySeriesSample {
 	return &CumulativeQuantitySeriesSample{inner: raw.HKCumulativeQuantitySeriesSampleFromID(_id)}
 }
 
+// Sum calls the underlying Sum.
+func (x *CumulativeQuantitySeriesSample) Sum() *Quantity {
+	_r := x.inner.Sum()
+	if _r == nil {
+		return nil
+	}
+	return &Quantity{inner: _r}
+}
+
 func (x *CumulativeQuantitySeriesSample) asCumulativeQuantitySample() *raw.HKCumulativeQuantitySample { return &x.inner.HKCumulativeQuantitySample }
 
 func (x *CumulativeQuantitySeriesSample) asQuantitySample() *raw.HKQuantitySample { return &x.inner.HKCumulativeQuantitySample.HKQuantitySample }
@@ -30,4 +39,12 @@ func (x *CumulativeQuantitySeriesSample) asQuantitySample() *raw.HKQuantitySampl
 func (x *CumulativeQuantitySeriesSample) asSample() *raw.HKSample { return &x.inner.HKCumulativeQuantitySample.HKQuantitySample.HKSample }
 
 func (x *CumulativeQuantitySeriesSample) asObject() *raw.HKObject { return &x.inner.HKCumulativeQuantitySample.HKQuantitySample.HKSample.HKObject }
+
+// CumulativeQuantitySeriesSampleable is the interface implemented by [CumulativeQuantitySeriesSample], for mocking and DI.
+type CumulativeQuantitySeriesSampleable interface {
+	Unwrap() *raw.HKCumulativeQuantitySeriesSample
+	Sum() *Quantity
+}
+
+var _ CumulativeQuantitySeriesSampleable = (*CumulativeQuantitySeriesSample)(nil)
 

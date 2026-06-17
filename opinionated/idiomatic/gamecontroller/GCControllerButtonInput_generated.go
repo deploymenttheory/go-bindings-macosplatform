@@ -47,7 +47,78 @@ func (x *ControllerButtonInput) WithValue(value float32) *ControllerButtonInput 
 	return x
 }
 
+// SetValue calls the underlying SetValue.
+func (x *ControllerButtonInput) SetValue(value float32) {
+	x.inner.SetValue(value)
+}
+
+// ValueChangedHandler calls the underlying ValueChangedHandler.
+func (x *ControllerButtonInput) ValueChangedHandler() objc.Block {
+	return x.inner.ValueChangedHandler()
+}
+
+// SetValueChangedHandler calls the underlying SetValueChangedHandler.
+func (x *ControllerButtonInput) SetValueChangedHandler(valueChangedHandler func(*raw.GCControllerButtonInput, float32, bool)) {
+	x.inner.SetValueChangedHandler(valueChangedHandler)
+}
+
+// PressedChangedHandler calls the underlying PressedChangedHandler.
+func (x *ControllerButtonInput) PressedChangedHandler() objc.Block {
+	return x.inner.PressedChangedHandler()
+}
+
+// SetPressedChangedHandler calls the underlying SetPressedChangedHandler.
+func (x *ControllerButtonInput) SetPressedChangedHandler(pressedChangedHandler func(*raw.GCControllerButtonInput, float32, bool)) {
+	x.inner.SetPressedChangedHandler(pressedChangedHandler)
+}
+
+// TouchedChangedHandler calls the underlying TouchedChangedHandler.
+func (x *ControllerButtonInput) TouchedChangedHandler() objc.Block {
+	return x.inner.TouchedChangedHandler()
+}
+
+// SetTouchedChangedHandler calls the underlying SetTouchedChangedHandler.
+func (x *ControllerButtonInput) SetTouchedChangedHandler(touchedChangedHandler func(*raw.GCControllerButtonInput, float32, bool, bool)) {
+	x.inner.SetTouchedChangedHandler(touchedChangedHandler)
+}
+
+// Value calls the underlying Value.
+func (x *ControllerButtonInput) Value() float32 {
+	return x.inner.Value()
+}
+
+// IsPressed calls the underlying IsPressed.
+func (x *ControllerButtonInput) IsPressed() bool {
+	return x.inner.IsPressed()
+}
+
+// IsTouched calls the underlying IsTouched.
+func (x *ControllerButtonInput) IsTouched() bool {
+	return x.inner.IsTouched()
+}
+
 func (x *ControllerButtonInput) asControllerButtonInput() *raw.GCControllerButtonInput { return x.inner }
 
 func (x *ControllerButtonInput) asControllerElement() *raw.GCControllerElement { return &x.inner.GCControllerElement }
+
+// ControllerButtonInputable is the interface implemented by [ControllerButtonInput], for mocking and DI.
+type ControllerButtonInputable interface {
+	Unwrap() *raw.GCControllerButtonInput
+	WithValueChangedHandler(valueChangedHandler func(*raw.GCControllerButtonInput, float32, bool)) *ControllerButtonInput
+	WithPressedChangedHandler(pressedChangedHandler func(*raw.GCControllerButtonInput, float32, bool)) *ControllerButtonInput
+	WithTouchedChangedHandler(touchedChangedHandler func(*raw.GCControllerButtonInput, float32, bool, bool)) *ControllerButtonInput
+	WithValue(value float32) *ControllerButtonInput
+	SetValue(value float32)
+	ValueChangedHandler() objc.Block
+	SetValueChangedHandler(valueChangedHandler func(*raw.GCControllerButtonInput, float32, bool))
+	PressedChangedHandler() objc.Block
+	SetPressedChangedHandler(pressedChangedHandler func(*raw.GCControllerButtonInput, float32, bool))
+	TouchedChangedHandler() objc.Block
+	SetTouchedChangedHandler(touchedChangedHandler func(*raw.GCControllerButtonInput, float32, bool, bool))
+	Value() float32
+	IsPressed() bool
+	IsTouched() bool
+}
+
+var _ ControllerButtonInputable = (*ControllerButtonInput)(nil)
 

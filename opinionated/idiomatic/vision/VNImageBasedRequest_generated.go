@@ -30,7 +30,27 @@ func (x *ImageBasedRequest) WithRegionOfInterest(regionOfInterest corefoundation
 	return x
 }
 
+// RegionOfInterest calls the underlying RegionOfInterest.
+func (x *ImageBasedRequest) RegionOfInterest() corefoundation.CGRect {
+	return x.inner.RegionOfInterest()
+}
+
+// SetRegionOfInterest calls the underlying SetRegionOfInterest.
+func (x *ImageBasedRequest) SetRegionOfInterest(regionOfInterest corefoundation.CGRect) {
+	x.inner.SetRegionOfInterest(regionOfInterest)
+}
+
 func (x *ImageBasedRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return x.inner }
 
 func (x *ImageBasedRequest) asRequest() *raw.VNRequest { return &x.inner.VNRequest }
+
+// ImageBasedRequestable is the interface implemented by [ImageBasedRequest], for mocking and DI.
+type ImageBasedRequestable interface {
+	Unwrap() *raw.VNImageBasedRequest
+	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *ImageBasedRequest
+	RegionOfInterest() corefoundation.CGRect
+	SetRegionOfInterest(regionOfInterest corefoundation.CGRect)
+}
+
+var _ ImageBasedRequestable = (*ImageBasedRequest)(nil)
 

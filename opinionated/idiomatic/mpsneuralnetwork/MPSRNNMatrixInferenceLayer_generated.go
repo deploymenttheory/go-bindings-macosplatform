@@ -7,6 +7,7 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -57,4 +58,86 @@ func (x *RNNMatrixInferenceLayer) WithBidirectionalCombineMode(bidirectionalComb
 	x.inner.SetBidirectionalCombineMode(bidirectionalCombineMode)
 	return x
 }
+
+// EncodeSequenceToCommandBufferSourceMatricesSourceOffsetsDestinationMatricesDestinationOffsetsRecurrentInputStateRecurrentOutputStates calls the underlying EncodeSequenceToCommandBufferSourceMatricesSourceOffsetsDestinationMatricesDestinationOffsetsRecurrentInputStateRecurrentOutputStates.
+func (x *RNNMatrixInferenceLayer) EncodeSequenceToCommandBufferSourceMatricesSourceOffsetsDestinationMatricesDestinationOffsetsRecurrentInputStateRecurrentOutputStates(commandBuffer metal.MTLCommandBuffer, sourceMatrices *foundation.NSArray[*mpscore.MPSMatrix], sourceOffsets *uint, destinationMatrices *foundation.NSArray[*mpscore.MPSMatrix], destinationOffsets *uint, recurrentInputState *raw.MPSRNNRecurrentMatrixState, recurrentOutputStates *foundation.NSMutableArray[*raw.MPSRNNRecurrentMatrixState]) {
+	x.inner.EncodeSequenceToCommandBufferSourceMatricesSourceOffsetsDestinationMatricesDestinationOffsetsRecurrentInputStateRecurrentOutputStates(commandBuffer, sourceMatrices, sourceOffsets, destinationMatrices, destinationOffsets, recurrentInputState, recurrentOutputStates)
+}
+
+// EncodeSequenceToCommandBufferSourceMatricesDestinationMatricesRecurrentInputStateRecurrentOutputStates calls the underlying EncodeSequenceToCommandBufferSourceMatricesDestinationMatricesRecurrentInputStateRecurrentOutputStates.
+func (x *RNNMatrixInferenceLayer) EncodeSequenceToCommandBufferSourceMatricesDestinationMatricesRecurrentInputStateRecurrentOutputStates(commandBuffer metal.MTLCommandBuffer, sourceMatrices *foundation.NSArray[*mpscore.MPSMatrix], destinationMatrices *foundation.NSArray[*mpscore.MPSMatrix], recurrentInputState *raw.MPSRNNRecurrentMatrixState, recurrentOutputStates *foundation.NSMutableArray[*raw.MPSRNNRecurrentMatrixState]) {
+	x.inner.EncodeSequenceToCommandBufferSourceMatricesDestinationMatricesRecurrentInputStateRecurrentOutputStates(commandBuffer, sourceMatrices, destinationMatrices, recurrentInputState, recurrentOutputStates)
+}
+
+// EncodeBidirectionalSequenceToCommandBufferSourceSequenceDestinationForwardMatricesDestinationBackwardMatrices calls the underlying EncodeBidirectionalSequenceToCommandBufferSourceSequenceDestinationForwardMatricesDestinationBackwardMatrices.
+func (x *RNNMatrixInferenceLayer) EncodeBidirectionalSequenceToCommandBufferSourceSequenceDestinationForwardMatricesDestinationBackwardMatrices(commandBuffer metal.MTLCommandBuffer, sourceSequence *foundation.NSArray[*mpscore.MPSMatrix], destinationForwardMatrices *foundation.NSArray[*mpscore.MPSMatrix], destinationBackwardMatrices *foundation.NSArray[*mpscore.MPSMatrix]) {
+	x.inner.EncodeBidirectionalSequenceToCommandBufferSourceSequenceDestinationForwardMatricesDestinationBackwardMatrices(commandBuffer, sourceSequence, destinationForwardMatrices, destinationBackwardMatrices)
+}
+
+// InputFeatureChannels calls the underlying InputFeatureChannels.
+func (x *RNNMatrixInferenceLayer) InputFeatureChannels() uint {
+	return x.inner.InputFeatureChannels()
+}
+
+// OutputFeatureChannels calls the underlying OutputFeatureChannels.
+func (x *RNNMatrixInferenceLayer) OutputFeatureChannels() uint {
+	return x.inner.OutputFeatureChannels()
+}
+
+// NumberOfLayers calls the underlying NumberOfLayers.
+func (x *RNNMatrixInferenceLayer) NumberOfLayers() uint {
+	return x.inner.NumberOfLayers()
+}
+
+// RecurrentOutputIsTemporary calls the underlying RecurrentOutputIsTemporary.
+func (x *RNNMatrixInferenceLayer) RecurrentOutputIsTemporary() bool {
+	return x.inner.RecurrentOutputIsTemporary()
+}
+
+// SetRecurrentOutputIsTemporary calls the underlying SetRecurrentOutputIsTemporary.
+func (x *RNNMatrixInferenceLayer) SetRecurrentOutputIsTemporary(recurrentOutputIsTemporary bool) {
+	x.inner.SetRecurrentOutputIsTemporary(recurrentOutputIsTemporary)
+}
+
+// StoreAllIntermediateStates calls the underlying StoreAllIntermediateStates.
+func (x *RNNMatrixInferenceLayer) StoreAllIntermediateStates() bool {
+	return x.inner.StoreAllIntermediateStates()
+}
+
+// SetStoreAllIntermediateStates calls the underlying SetStoreAllIntermediateStates.
+func (x *RNNMatrixInferenceLayer) SetStoreAllIntermediateStates(storeAllIntermediateStates bool) {
+	x.inner.SetStoreAllIntermediateStates(storeAllIntermediateStates)
+}
+
+// BidirectionalCombineMode calls the underlying BidirectionalCombineMode.
+func (x *RNNMatrixInferenceLayer) BidirectionalCombineMode() raw.MPSRNNBidirectionalCombineMode {
+	return x.inner.BidirectionalCombineMode()
+}
+
+// SetBidirectionalCombineMode calls the underlying SetBidirectionalCombineMode.
+func (x *RNNMatrixInferenceLayer) SetBidirectionalCombineMode(bidirectionalCombineMode raw.MPSRNNBidirectionalCombineMode) {
+	x.inner.SetBidirectionalCombineMode(bidirectionalCombineMode)
+}
+
+// RNNMatrixInferenceLayerable is the interface implemented by [RNNMatrixInferenceLayer], for mocking and DI.
+type RNNMatrixInferenceLayerable interface {
+	Unwrap() *raw.MPSRNNMatrixInferenceLayer
+	WithRecurrentOutputIsTemporary(recurrentOutputIsTemporary bool) *RNNMatrixInferenceLayer
+	WithStoreAllIntermediateStates(storeAllIntermediateStates bool) *RNNMatrixInferenceLayer
+	WithBidirectionalCombineMode(bidirectionalCombineMode raw.MPSRNNBidirectionalCombineMode) *RNNMatrixInferenceLayer
+	EncodeSequenceToCommandBufferSourceMatricesSourceOffsetsDestinationMatricesDestinationOffsetsRecurrentInputStateRecurrentOutputStates(commandBuffer metal.MTLCommandBuffer, sourceMatrices *foundation.NSArray[*mpscore.MPSMatrix], sourceOffsets *uint, destinationMatrices *foundation.NSArray[*mpscore.MPSMatrix], destinationOffsets *uint, recurrentInputState *raw.MPSRNNRecurrentMatrixState, recurrentOutputStates *foundation.NSMutableArray[*raw.MPSRNNRecurrentMatrixState])
+	EncodeSequenceToCommandBufferSourceMatricesDestinationMatricesRecurrentInputStateRecurrentOutputStates(commandBuffer metal.MTLCommandBuffer, sourceMatrices *foundation.NSArray[*mpscore.MPSMatrix], destinationMatrices *foundation.NSArray[*mpscore.MPSMatrix], recurrentInputState *raw.MPSRNNRecurrentMatrixState, recurrentOutputStates *foundation.NSMutableArray[*raw.MPSRNNRecurrentMatrixState])
+	EncodeBidirectionalSequenceToCommandBufferSourceSequenceDestinationForwardMatricesDestinationBackwardMatrices(commandBuffer metal.MTLCommandBuffer, sourceSequence *foundation.NSArray[*mpscore.MPSMatrix], destinationForwardMatrices *foundation.NSArray[*mpscore.MPSMatrix], destinationBackwardMatrices *foundation.NSArray[*mpscore.MPSMatrix])
+	InputFeatureChannels() uint
+	OutputFeatureChannels() uint
+	NumberOfLayers() uint
+	RecurrentOutputIsTemporary() bool
+	SetRecurrentOutputIsTemporary(recurrentOutputIsTemporary bool)
+	StoreAllIntermediateStates() bool
+	SetStoreAllIntermediateStates(storeAllIntermediateStates bool)
+	BidirectionalCombineMode() raw.MPSRNNBidirectionalCombineMode
+	SetBidirectionalCombineMode(bidirectionalCombineMode raw.MPSRNNBidirectionalCombineMode)
+}
+
+var _ RNNMatrixInferenceLayerable = (*RNNMatrixInferenceLayer)(nil)
 

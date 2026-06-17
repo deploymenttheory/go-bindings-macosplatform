@@ -7,6 +7,7 @@ package authenticationservices
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -330,17 +331,284 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) WithHpkePreSharedKeyI
 	return x
 }
 
+// SetCustomAssertionRequestHeaderClaimsReturningError calls the underlying SetCustomAssertionRequestHeaderClaimsReturningError.
+func (x *AuthorizationProviderExtensionLoginConfiguration) SetCustomAssertionRequestHeaderClaimsReturningError(claims *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
+	return x.inner.SetCustomAssertionRequestHeaderClaimsReturningError(claims)
+}
+
+// SetCustomAssertionRequestBodyClaimsReturningError calls the underlying SetCustomAssertionRequestBodyClaimsReturningError.
+func (x *AuthorizationProviderExtensionLoginConfiguration) SetCustomAssertionRequestBodyClaimsReturningError(claims *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
+	return x.inner.SetCustomAssertionRequestBodyClaimsReturningError(claims)
+}
+
+// SetCustomLoginRequestHeaderClaimsReturningError calls the underlying SetCustomLoginRequestHeaderClaimsReturningError.
+func (x *AuthorizationProviderExtensionLoginConfiguration) SetCustomLoginRequestHeaderClaimsReturningError(claims *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
+	return x.inner.SetCustomLoginRequestHeaderClaimsReturningError(claims)
+}
+
+// SetCustomLoginRequestBodyClaimsReturningError calls the underlying SetCustomLoginRequestBodyClaimsReturningError.
+func (x *AuthorizationProviderExtensionLoginConfiguration) SetCustomLoginRequestBodyClaimsReturningError(claims *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
+	return x.inner.SetCustomLoginRequestBodyClaimsReturningError(claims)
+}
+
+// SetCustomRefreshRequestHeaderClaimsReturningError calls the underlying SetCustomRefreshRequestHeaderClaimsReturningError.
+func (x *AuthorizationProviderExtensionLoginConfiguration) SetCustomRefreshRequestHeaderClaimsReturningError(claims *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
+	return x.inner.SetCustomRefreshRequestHeaderClaimsReturningError(claims)
+}
+
+// SetCustomRefreshRequestBodyClaimsReturningError calls the underlying SetCustomRefreshRequestBodyClaimsReturningError.
+func (x *AuthorizationProviderExtensionLoginConfiguration) SetCustomRefreshRequestBodyClaimsReturningError(claims *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
+	return x.inner.SetCustomRefreshRequestBodyClaimsReturningError(claims)
+}
+
+// SetCustomKeyExchangeRequestHeaderClaimsReturningError calls the underlying SetCustomKeyExchangeRequestHeaderClaimsReturningError.
+func (x *AuthorizationProviderExtensionLoginConfiguration) SetCustomKeyExchangeRequestHeaderClaimsReturningError(claims *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
+	return x.inner.SetCustomKeyExchangeRequestHeaderClaimsReturningError(claims)
+}
+
+// SetCustomKeyExchangeRequestBodyClaimsReturningError calls the underlying SetCustomKeyExchangeRequestBodyClaimsReturningError.
+func (x *AuthorizationProviderExtensionLoginConfiguration) SetCustomKeyExchangeRequestBodyClaimsReturningError(claims *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
+	return x.inner.SetCustomKeyExchangeRequestBodyClaimsReturningError(claims)
+}
+
+// SetCustomKeyRequestHeaderClaimsReturningError calls the underlying SetCustomKeyRequestHeaderClaimsReturningError.
+func (x *AuthorizationProviderExtensionLoginConfiguration) SetCustomKeyRequestHeaderClaimsReturningError(claims *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
+	return x.inner.SetCustomKeyRequestHeaderClaimsReturningError(claims)
+}
+
+// SetCustomKeyRequestBodyClaimsReturningError calls the underlying SetCustomKeyRequestBodyClaimsReturningError.
+func (x *AuthorizationProviderExtensionLoginConfiguration) SetCustomKeyRequestBodyClaimsReturningError(claims *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
+	return x.inner.SetCustomKeyRequestBodyClaimsReturningError(claims)
+}
+
+// InvalidCredentialPredicate calls the underlying InvalidCredentialPredicate.
+func (x *AuthorizationProviderExtensionLoginConfiguration) InvalidCredentialPredicate() string {
+	_r := x.inner.InvalidCredentialPredicate()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetInvalidCredentialPredicate calls the underlying SetInvalidCredentialPredicate.
+func (x *AuthorizationProviderExtensionLoginConfiguration) SetInvalidCredentialPredicate(invalidCredentialPredicate string) {
+	x.inner.SetInvalidCredentialPredicate(foundation.NSStringStringWithUTF8String(invalidCredentialPredicate))
+}
+
+// AccountDisplayName calls the underlying AccountDisplayName.
+func (x *AuthorizationProviderExtensionLoginConfiguration) AccountDisplayName() string {
+	_r := x.inner.AccountDisplayName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetAccountDisplayName calls the underlying SetAccountDisplayName.
+func (x *AuthorizationProviderExtensionLoginConfiguration) SetAccountDisplayName(accountDisplayName string) {
+	x.inner.SetAccountDisplayName(foundation.NSStringStringWithUTF8String(accountDisplayName))
+}
+
+// ClientID calls the underlying ClientID.
+func (x *AuthorizationProviderExtensionLoginConfiguration) ClientID() string {
+	_r := x.inner.ClientID()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Issuer calls the underlying Issuer.
+func (x *AuthorizationProviderExtensionLoginConfiguration) Issuer() string {
+	_r := x.inner.Issuer()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Audience calls the underlying Audience.
+func (x *AuthorizationProviderExtensionLoginConfiguration) Audience() string {
+	_r := x.inner.Audience()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetAudience calls the underlying SetAudience.
+func (x *AuthorizationProviderExtensionLoginConfiguration) SetAudience(audience string) {
+	x.inner.SetAudience(foundation.NSStringStringWithUTF8String(audience))
+}
+
+// TokenEndpointURL calls the underlying TokenEndpointURL.
+func (x *AuthorizationProviderExtensionLoginConfiguration) TokenEndpointURL() *foundation.NSURL {
+	return x.inner.TokenEndpointURL()
+}
+
+// SetTokenEndpointURL calls the underlying SetTokenEndpointURL.
+func (x *AuthorizationProviderExtensionLoginConfiguration) SetTokenEndpointURL(tokenEndpointURL string) {
+	x.inner.SetTokenEndpointURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(tokenEndpointURL)))
+}
+
+// JwksEndpointURL calls the underlying JwksEndpointURL.
+func (x *AuthorizationProviderExtensionLoginConfiguration) JwksEndpointURL() *foundation.NSURL {
+	return x.inner.JwksEndpointURL()
+}
+
+// SetJwksEndpointURL calls the underlying SetJwksEndpointURL.
+func (x *AuthorizationProviderExtensionLoginConfiguration) SetJwksEndpointURL(jwksEndpointURL string) {
+	x.inner.SetJwksEndpointURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(jwksEndpointURL)))
+}
+
+// JwksTrustedRootCertificates calls the underlying JwksTrustedRootCertificates.
+func (x *AuthorizationProviderExtensionLoginConfiguration) JwksTrustedRootCertificates() *foundation.NSArray[objc.ID] {
+	return x.inner.JwksTrustedRootCertificates()
+}
+
+// SetJwksTrustedRootCertificates calls the underlying SetJwksTrustedRootCertificates.
+func (x *AuthorizationProviderExtensionLoginConfiguration) SetJwksTrustedRootCertificates(jwksTrustedRootCertificates *foundation.NSArray[objc.ID]) {
+	x.inner.SetJwksTrustedRootCertificates(jwksTrustedRootCertificates)
+}
+
+// DeviceContext calls the underlying DeviceContext.
+func (x *AuthorizationProviderExtensionLoginConfiguration) DeviceContext() *foundation.NSData {
+	return x.inner.DeviceContext()
+}
+
+// SetDeviceContext calls the underlying SetDeviceContext.
+func (x *AuthorizationProviderExtensionLoginConfiguration) SetDeviceContext(deviceContext *foundation.NSData) {
+	x.inner.SetDeviceContext(deviceContext)
+}
+
+// UserSecureEnclaveKeyBiometricPolicy calls the underlying UserSecureEnclaveKeyBiometricPolicy.
+func (x *AuthorizationProviderExtensionLoginConfiguration) UserSecureEnclaveKeyBiometricPolicy() raw.ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicy {
+	return x.inner.UserSecureEnclaveKeyBiometricPolicy()
+}
+
+// SetUserSecureEnclaveKeyBiometricPolicy calls the underlying SetUserSecureEnclaveKeyBiometricPolicy.
+func (x *AuthorizationProviderExtensionLoginConfiguration) SetUserSecureEnclaveKeyBiometricPolicy(userSecureEnclaveKeyBiometricPolicy raw.ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicy) {
+	x.inner.SetUserSecureEnclaveKeyBiometricPolicy(userSecureEnclaveKeyBiometricPolicy)
+}
+
+// NonceEndpointURL calls the underlying NonceEndpointURL.
+func (x *AuthorizationProviderExtensionLoginConfiguration) NonceEndpointURL() *foundation.NSURL {
+	return x.inner.NonceEndpointURL()
+}
+
+// SetNonceEndpointURL calls the underlying SetNonceEndpointURL.
+func (x *AuthorizationProviderExtensionLoginConfiguration) SetNonceEndpointURL(nonceEndpointURL string) {
+	x.inner.SetNonceEndpointURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(nonceEndpointURL)))
+}
+
+// NonceResponseKeypath calls the underlying NonceResponseKeypath.
+func (x *AuthorizationProviderExtensionLoginConfiguration) NonceResponseKeypath() string {
+	_r := x.inner.NonceResponseKeypath()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetNonceResponseKeypath calls the underlying SetNonceResponseKeypath.
+func (x *AuthorizationProviderExtensionLoginConfiguration) SetNonceResponseKeypath(nonceResponseKeypath string) {
+	x.inner.SetNonceResponseKeypath(foundation.NSStringStringWithUTF8String(nonceResponseKeypath))
+}
+
+// ServerNonceClaimName calls the underlying ServerNonceClaimName.
+func (x *AuthorizationProviderExtensionLoginConfiguration) ServerNonceClaimName() string {
+	_r := x.inner.ServerNonceClaimName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetServerNonceClaimName calls the underlying SetServerNonceClaimName.
+func (x *AuthorizationProviderExtensionLoginConfiguration) SetServerNonceClaimName(serverNonceClaimName string) {
+	x.inner.SetServerNonceClaimName(foundation.NSStringStringWithUTF8String(serverNonceClaimName))
+}
+
 // CustomNonceRequestValues returns the collection as a Go slice.
 func (x *AuthorizationProviderExtensionLoginConfiguration) CustomNonceRequestValues() []*foundation.NSURLQueryItem {
 	arr := x.inner.CustomNonceRequestValues()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSURLQueryItem, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSURLQueryItem {
+		return foundation.NSURLQueryItemFromID(purego.Retain(_id))
+	})
+}
+
+// SetCustomNonceRequestValues calls the underlying SetCustomNonceRequestValues.
+func (x *AuthorizationProviderExtensionLoginConfiguration) SetCustomNonceRequestValues(customNonceRequestValues *foundation.NSArray[*foundation.NSURLQueryItem]) {
+	x.inner.SetCustomNonceRequestValues(customNonceRequestValues)
+}
+
+// AdditionalScopes calls the underlying AdditionalScopes.
+func (x *AuthorizationProviderExtensionLoginConfiguration) AdditionalScopes() string {
+	_r := x.inner.AdditionalScopes()
+	if _r == nil {
+		return ""
 	}
-	return out
+	return purego.GoString(_r.Ptr())
+}
+
+// SetAdditionalScopes calls the underlying SetAdditionalScopes.
+func (x *AuthorizationProviderExtensionLoginConfiguration) SetAdditionalScopes(additionalScopes string) {
+	x.inner.SetAdditionalScopes(foundation.NSStringStringWithUTF8String(additionalScopes))
+}
+
+// AdditionalAuthorizationScopes calls the underlying AdditionalAuthorizationScopes.
+func (x *AuthorizationProviderExtensionLoginConfiguration) AdditionalAuthorizationScopes() string {
+	_r := x.inner.AdditionalAuthorizationScopes()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetAdditionalAuthorizationScopes calls the underlying SetAdditionalAuthorizationScopes.
+func (x *AuthorizationProviderExtensionLoginConfiguration) SetAdditionalAuthorizationScopes(additionalAuthorizationScopes string) {
+	x.inner.SetAdditionalAuthorizationScopes(foundation.NSStringStringWithUTF8String(additionalAuthorizationScopes))
+}
+
+// IncludePreviousRefreshTokenInLoginRequest calls the underlying IncludePreviousRefreshTokenInLoginRequest.
+func (x *AuthorizationProviderExtensionLoginConfiguration) IncludePreviousRefreshTokenInLoginRequest() bool {
+	return x.inner.IncludePreviousRefreshTokenInLoginRequest()
+}
+
+// SetIncludePreviousRefreshTokenInLoginRequest calls the underlying SetIncludePreviousRefreshTokenInLoginRequest.
+func (x *AuthorizationProviderExtensionLoginConfiguration) SetIncludePreviousRefreshTokenInLoginRequest(includePreviousRefreshTokenInLoginRequest bool) {
+	x.inner.SetIncludePreviousRefreshTokenInLoginRequest(includePreviousRefreshTokenInLoginRequest)
+}
+
+// PreviousRefreshTokenClaimName calls the underlying PreviousRefreshTokenClaimName.
+func (x *AuthorizationProviderExtensionLoginConfiguration) PreviousRefreshTokenClaimName() string {
+	_r := x.inner.PreviousRefreshTokenClaimName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetPreviousRefreshTokenClaimName calls the underlying SetPreviousRefreshTokenClaimName.
+func (x *AuthorizationProviderExtensionLoginConfiguration) SetPreviousRefreshTokenClaimName(previousRefreshTokenClaimName string) {
+	x.inner.SetPreviousRefreshTokenClaimName(foundation.NSStringStringWithUTF8String(previousRefreshTokenClaimName))
+}
+
+// CustomRequestJWTParameterName calls the underlying CustomRequestJWTParameterName.
+func (x *AuthorizationProviderExtensionLoginConfiguration) CustomRequestJWTParameterName() string {
+	_r := x.inner.CustomRequestJWTParameterName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetCustomRequestJWTParameterName calls the underlying SetCustomRequestJWTParameterName.
+func (x *AuthorizationProviderExtensionLoginConfiguration) SetCustomRequestJWTParameterName(customRequestJWTParameterName string) {
+	x.inner.SetCustomRequestJWTParameterName(foundation.NSStringStringWithUTF8String(customRequestJWTParameterName))
 }
 
 // CustomLoginRequestValues returns the collection as a Go slice.
@@ -349,11 +617,56 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) CustomLoginRequestVal
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSURLQueryItem, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSURLQueryItem {
+		return foundation.NSURLQueryItemFromID(purego.Retain(_id))
+	})
+}
+
+// SetCustomLoginRequestValues calls the underlying SetCustomLoginRequestValues.
+func (x *AuthorizationProviderExtensionLoginConfiguration) SetCustomLoginRequestValues(customLoginRequestValues *foundation.NSArray[*foundation.NSURLQueryItem]) {
+	x.inner.SetCustomLoginRequestValues(customLoginRequestValues)
+}
+
+// UniqueIdentifierClaimName calls the underlying UniqueIdentifierClaimName.
+func (x *AuthorizationProviderExtensionLoginConfiguration) UniqueIdentifierClaimName() string {
+	_r := x.inner.UniqueIdentifierClaimName()
+	if _r == nil {
+		return ""
 	}
-	return out
+	return purego.GoString(_r.Ptr())
+}
+
+// SetUniqueIdentifierClaimName calls the underlying SetUniqueIdentifierClaimName.
+func (x *AuthorizationProviderExtensionLoginConfiguration) SetUniqueIdentifierClaimName(uniqueIdentifierClaimName string) {
+	x.inner.SetUniqueIdentifierClaimName(foundation.NSStringStringWithUTF8String(uniqueIdentifierClaimName))
+}
+
+// GroupRequestClaimName calls the underlying GroupRequestClaimName.
+func (x *AuthorizationProviderExtensionLoginConfiguration) GroupRequestClaimName() string {
+	_r := x.inner.GroupRequestClaimName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetGroupRequestClaimName calls the underlying SetGroupRequestClaimName.
+func (x *AuthorizationProviderExtensionLoginConfiguration) SetGroupRequestClaimName(groupRequestClaimName string) {
+	x.inner.SetGroupRequestClaimName(foundation.NSStringStringWithUTF8String(groupRequestClaimName))
+}
+
+// GroupResponseClaimName calls the underlying GroupResponseClaimName.
+func (x *AuthorizationProviderExtensionLoginConfiguration) GroupResponseClaimName() string {
+	_r := x.inner.GroupResponseClaimName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetGroupResponseClaimName calls the underlying SetGroupResponseClaimName.
+func (x *AuthorizationProviderExtensionLoginConfiguration) SetGroupResponseClaimName(groupResponseClaimName string) {
+	x.inner.SetGroupResponseClaimName(foundation.NSStringStringWithUTF8String(groupResponseClaimName))
 }
 
 // KerberosTicketMappings returns the collection as a Go slice.
@@ -362,11 +675,24 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) KerberosTicketMapping
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.ASAuthorizationProviderExtensionKerberosMapping, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.ASAuthorizationProviderExtensionKerberosMapping {
+		return raw.ASAuthorizationProviderExtensionKerberosMappingFromID(purego.Retain(_id))
+	})
+}
+
+// SetKerberosTicketMappings calls the underlying SetKerberosTicketMappings.
+func (x *AuthorizationProviderExtensionLoginConfiguration) SetKerberosTicketMappings(kerberosTicketMappings *foundation.NSArray[*raw.ASAuthorizationProviderExtensionKerberosMapping]) {
+	x.inner.SetKerberosTicketMappings(kerberosTicketMappings)
+}
+
+// RefreshEndpointURL calls the underlying RefreshEndpointURL.
+func (x *AuthorizationProviderExtensionLoginConfiguration) RefreshEndpointURL() *foundation.NSURL {
+	return x.inner.RefreshEndpointURL()
+}
+
+// SetRefreshEndpointURL calls the underlying SetRefreshEndpointURL.
+func (x *AuthorizationProviderExtensionLoginConfiguration) SetRefreshEndpointURL(refreshEndpointURL string) {
+	x.inner.SetRefreshEndpointURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(refreshEndpointURL)))
 }
 
 // CustomRefreshRequestValues returns the collection as a Go slice.
@@ -375,11 +701,86 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) CustomRefreshRequestV
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSURLQueryItem, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSURLQueryItem {
+		return foundation.NSURLQueryItemFromID(purego.Retain(_id))
+	})
+}
+
+// SetCustomRefreshRequestValues calls the underlying SetCustomRefreshRequestValues.
+func (x *AuthorizationProviderExtensionLoginConfiguration) SetCustomRefreshRequestValues(customRefreshRequestValues *foundation.NSArray[*foundation.NSURLQueryItem]) {
+	x.inner.SetCustomRefreshRequestValues(customRefreshRequestValues)
+}
+
+// FederationType calls the underlying FederationType.
+func (x *AuthorizationProviderExtensionLoginConfiguration) FederationType() raw.ASAuthorizationProviderExtensionFederationType {
+	return x.inner.FederationType()
+}
+
+// SetFederationType calls the underlying SetFederationType.
+func (x *AuthorizationProviderExtensionLoginConfiguration) SetFederationType(federationType raw.ASAuthorizationProviderExtensionFederationType) {
+	x.inner.SetFederationType(federationType)
+}
+
+// FederationRequestURN calls the underlying FederationRequestURN.
+func (x *AuthorizationProviderExtensionLoginConfiguration) FederationRequestURN() string {
+	_r := x.inner.FederationRequestURN()
+	if _r == nil {
+		return ""
 	}
-	return out
+	return purego.GoString(_r.Ptr())
+}
+
+// SetFederationRequestURN calls the underlying SetFederationRequestURN.
+func (x *AuthorizationProviderExtensionLoginConfiguration) SetFederationRequestURN(federationRequestURN string) {
+	x.inner.SetFederationRequestURN(foundation.NSStringStringWithUTF8String(federationRequestURN))
+}
+
+// FederationMEXURL calls the underlying FederationMEXURL.
+func (x *AuthorizationProviderExtensionLoginConfiguration) FederationMEXURL() *foundation.NSURL {
+	return x.inner.FederationMEXURL()
+}
+
+// SetFederationMEXURL calls the underlying SetFederationMEXURL.
+func (x *AuthorizationProviderExtensionLoginConfiguration) SetFederationMEXURL(federationMEXURL string) {
+	x.inner.SetFederationMEXURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(federationMEXURL)))
+}
+
+// FederationUserPreauthenticationURL calls the underlying FederationUserPreauthenticationURL.
+func (x *AuthorizationProviderExtensionLoginConfiguration) FederationUserPreauthenticationURL() *foundation.NSURL {
+	return x.inner.FederationUserPreauthenticationURL()
+}
+
+// SetFederationUserPreauthenticationURL calls the underlying SetFederationUserPreauthenticationURL.
+func (x *AuthorizationProviderExtensionLoginConfiguration) SetFederationUserPreauthenticationURL(federationUserPreauthenticationURL string) {
+	x.inner.SetFederationUserPreauthenticationURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(federationUserPreauthenticationURL)))
+}
+
+// FederationMEXURLKeypath calls the underlying FederationMEXURLKeypath.
+func (x *AuthorizationProviderExtensionLoginConfiguration) FederationMEXURLKeypath() string {
+	_r := x.inner.FederationMEXURLKeypath()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetFederationMEXURLKeypath calls the underlying SetFederationMEXURLKeypath.
+func (x *AuthorizationProviderExtensionLoginConfiguration) SetFederationMEXURLKeypath(federationMEXURLKeypath string) {
+	x.inner.SetFederationMEXURLKeypath(foundation.NSStringStringWithUTF8String(federationMEXURLKeypath))
+}
+
+// FederationPredicate calls the underlying FederationPredicate.
+func (x *AuthorizationProviderExtensionLoginConfiguration) FederationPredicate() string {
+	_r := x.inner.FederationPredicate()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetFederationPredicate calls the underlying SetFederationPredicate.
+func (x *AuthorizationProviderExtensionLoginConfiguration) SetFederationPredicate(federationPredicate string) {
+	x.inner.SetFederationPredicate(foundation.NSStringStringWithUTF8String(federationPredicate))
 }
 
 // CustomFederationUserPreauthenticationRequestValues returns the collection as a Go slice.
@@ -388,11 +789,74 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) CustomFederationUserP
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSURLQueryItem, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSURLQueryItem {
+		return foundation.NSURLQueryItemFromID(purego.Retain(_id))
+	})
+}
+
+// SetCustomFederationUserPreauthenticationRequestValues calls the underlying SetCustomFederationUserPreauthenticationRequestValues.
+func (x *AuthorizationProviderExtensionLoginConfiguration) SetCustomFederationUserPreauthenticationRequestValues(customFederationUserPreauthenticationRequestValues *foundation.NSArray[*foundation.NSURLQueryItem]) {
+	x.inner.SetCustomFederationUserPreauthenticationRequestValues(customFederationUserPreauthenticationRequestValues)
+}
+
+// LoginRequestEncryptionPublicKey calls the underlying LoginRequestEncryptionPublicKey.
+func (x *AuthorizationProviderExtensionLoginConfiguration) LoginRequestEncryptionPublicKey() unsafe.Pointer {
+	return x.inner.LoginRequestEncryptionPublicKey()
+}
+
+// SetLoginRequestEncryptionPublicKey calls the underlying SetLoginRequestEncryptionPublicKey.
+func (x *AuthorizationProviderExtensionLoginConfiguration) SetLoginRequestEncryptionPublicKey(loginRequestEncryptionPublicKey unsafe.Pointer) {
+	x.inner.SetLoginRequestEncryptionPublicKey(loginRequestEncryptionPublicKey)
+}
+
+// LoginRequestEncryptionAPVPrefix calls the underlying LoginRequestEncryptionAPVPrefix.
+func (x *AuthorizationProviderExtensionLoginConfiguration) LoginRequestEncryptionAPVPrefix() *foundation.NSData {
+	return x.inner.LoginRequestEncryptionAPVPrefix()
+}
+
+// SetLoginRequestEncryptionAPVPrefix calls the underlying SetLoginRequestEncryptionAPVPrefix.
+func (x *AuthorizationProviderExtensionLoginConfiguration) SetLoginRequestEncryptionAPVPrefix(loginRequestEncryptionAPVPrefix *foundation.NSData) {
+	x.inner.SetLoginRequestEncryptionAPVPrefix(loginRequestEncryptionAPVPrefix)
+}
+
+// LoginRequestEncryptionAlgorithm calls the underlying LoginRequestEncryptionAlgorithm.
+func (x *AuthorizationProviderExtensionLoginConfiguration) LoginRequestEncryptionAlgorithm() *foundation.NSNumber {
+	return x.inner.LoginRequestEncryptionAlgorithm()
+}
+
+// SetLoginRequestEncryptionAlgorithm calls the underlying SetLoginRequestEncryptionAlgorithm.
+func (x *AuthorizationProviderExtensionLoginConfiguration) SetLoginRequestEncryptionAlgorithm(loginRequestEncryptionAlgorithm *foundation.NSNumber) {
+	x.inner.SetLoginRequestEncryptionAlgorithm(loginRequestEncryptionAlgorithm)
+}
+
+// LoginRequestHPKEPreSharedKey calls the underlying LoginRequestHPKEPreSharedKey.
+func (x *AuthorizationProviderExtensionLoginConfiguration) LoginRequestHPKEPreSharedKey() *foundation.NSData {
+	return x.inner.LoginRequestHPKEPreSharedKey()
+}
+
+// SetLoginRequestHPKEPreSharedKey calls the underlying SetLoginRequestHPKEPreSharedKey.
+func (x *AuthorizationProviderExtensionLoginConfiguration) SetLoginRequestHPKEPreSharedKey(loginRequestHPKEPreSharedKey *foundation.NSData) {
+	x.inner.SetLoginRequestHPKEPreSharedKey(loginRequestHPKEPreSharedKey)
+}
+
+// LoginRequestHPKEPreSharedKeyID calls the underlying LoginRequestHPKEPreSharedKeyID.
+func (x *AuthorizationProviderExtensionLoginConfiguration) LoginRequestHPKEPreSharedKeyID() *foundation.NSData {
+	return x.inner.LoginRequestHPKEPreSharedKeyID()
+}
+
+// SetLoginRequestHPKEPreSharedKeyID calls the underlying SetLoginRequestHPKEPreSharedKeyID.
+func (x *AuthorizationProviderExtensionLoginConfiguration) SetLoginRequestHPKEPreSharedKeyID(loginRequestHPKEPreSharedKeyID *foundation.NSData) {
+	x.inner.SetLoginRequestHPKEPreSharedKeyID(loginRequestHPKEPreSharedKeyID)
+}
+
+// KeyEndpointURL calls the underlying KeyEndpointURL.
+func (x *AuthorizationProviderExtensionLoginConfiguration) KeyEndpointURL() *foundation.NSURL {
+	return x.inner.KeyEndpointURL()
+}
+
+// SetKeyEndpointURL calls the underlying SetKeyEndpointURL.
+func (x *AuthorizationProviderExtensionLoginConfiguration) SetKeyEndpointURL(keyEndpointURL string) {
+	x.inner.SetKeyEndpointURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(keyEndpointURL)))
 }
 
 // CustomKeyExchangeRequestValues returns the collection as a Go slice.
@@ -401,11 +865,14 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) CustomKeyExchangeRequ
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSURLQueryItem, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSURLQueryItem {
+		return foundation.NSURLQueryItemFromID(purego.Retain(_id))
+	})
+}
+
+// SetCustomKeyExchangeRequestValues calls the underlying SetCustomKeyExchangeRequestValues.
+func (x *AuthorizationProviderExtensionLoginConfiguration) SetCustomKeyExchangeRequestValues(customKeyExchangeRequestValues *foundation.NSArray[*foundation.NSURLQueryItem]) {
+	x.inner.SetCustomKeyExchangeRequestValues(customKeyExchangeRequestValues)
 }
 
 // CustomKeyRequestValues returns the collection as a Go slice.
@@ -414,10 +881,185 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) CustomKeyRequestValue
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSURLQueryItem, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSURLQueryItem {
+		return foundation.NSURLQueryItemFromID(purego.Retain(_id))
+	})
 }
+
+// SetCustomKeyRequestValues calls the underlying SetCustomKeyRequestValues.
+func (x *AuthorizationProviderExtensionLoginConfiguration) SetCustomKeyRequestValues(customKeyRequestValues *foundation.NSArray[*foundation.NSURLQueryItem]) {
+	x.inner.SetCustomKeyRequestValues(customKeyRequestValues)
+}
+
+// HpkePreSharedKey calls the underlying HpkePreSharedKey.
+func (x *AuthorizationProviderExtensionLoginConfiguration) HpkePreSharedKey() *foundation.NSData {
+	return x.inner.HpkePreSharedKey()
+}
+
+// SetHpkePreSharedKey calls the underlying SetHpkePreSharedKey.
+func (x *AuthorizationProviderExtensionLoginConfiguration) SetHpkePreSharedKey(hpkePreSharedKey *foundation.NSData) {
+	x.inner.SetHpkePreSharedKey(hpkePreSharedKey)
+}
+
+// HpkePreSharedKeyID calls the underlying HpkePreSharedKeyID.
+func (x *AuthorizationProviderExtensionLoginConfiguration) HpkePreSharedKeyID() *foundation.NSData {
+	return x.inner.HpkePreSharedKeyID()
+}
+
+// SetHpkePreSharedKeyID calls the underlying SetHpkePreSharedKeyID.
+func (x *AuthorizationProviderExtensionLoginConfiguration) SetHpkePreSharedKeyID(hpkePreSharedKeyID *foundation.NSData) {
+	x.inner.SetHpkePreSharedKeyID(hpkePreSharedKeyID)
+}
+
+// HpkeAuthPublicKey calls the underlying HpkeAuthPublicKey.
+func (x *AuthorizationProviderExtensionLoginConfiguration) HpkeAuthPublicKey() unsafe.Pointer {
+	return x.inner.HpkeAuthPublicKey()
+}
+
+// SetHpkeAuthPublicKey calls the underlying SetHpkeAuthPublicKey.
+func (x *AuthorizationProviderExtensionLoginConfiguration) SetHpkeAuthPublicKey(hpkeAuthPublicKey unsafe.Pointer) {
+	x.inner.SetHpkeAuthPublicKey(hpkeAuthPublicKey)
+}
+
+// AuthorizationProviderExtensionLoginConfigurationable is the interface implemented by [AuthorizationProviderExtensionLoginConfiguration], for mocking and DI.
+type AuthorizationProviderExtensionLoginConfigurationable interface {
+	Unwrap() *raw.ASAuthorizationProviderExtensionLoginConfiguration
+	WithInvalidCredentialPredicate(invalidCredentialPredicate string) *AuthorizationProviderExtensionLoginConfiguration
+	WithAccountDisplayName(accountDisplayName string) *AuthorizationProviderExtensionLoginConfiguration
+	WithAudience(audience string) *AuthorizationProviderExtensionLoginConfiguration
+	WithTokenEndpointURL(tokenEndpointURL string) *AuthorizationProviderExtensionLoginConfiguration
+	WithJwksEndpointURL(jwksEndpointURL string) *AuthorizationProviderExtensionLoginConfiguration
+	WithDeviceContext(deviceContext *foundation.NSData) *AuthorizationProviderExtensionLoginConfiguration
+	WithUserSecureEnclaveKeyBiometricPolicy(userSecureEnclaveKeyBiometricPolicy raw.ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicy) *AuthorizationProviderExtensionLoginConfiguration
+	WithNonceEndpointURL(nonceEndpointURL string) *AuthorizationProviderExtensionLoginConfiguration
+	WithNonceResponseKeypath(nonceResponseKeypath string) *AuthorizationProviderExtensionLoginConfiguration
+	WithServerNonceClaimName(serverNonceClaimName string) *AuthorizationProviderExtensionLoginConfiguration
+	WithCustomNonceRequestValues(items ...*foundation.NSURLQueryItem) *AuthorizationProviderExtensionLoginConfiguration
+	WithAdditionalScopes(additionalScopes string) *AuthorizationProviderExtensionLoginConfiguration
+	WithAdditionalAuthorizationScopes(additionalAuthorizationScopes string) *AuthorizationProviderExtensionLoginConfiguration
+	WithIncludePreviousRefreshTokenInLoginRequest(includePreviousRefreshTokenInLoginRequest bool) *AuthorizationProviderExtensionLoginConfiguration
+	WithPreviousRefreshTokenClaimName(previousRefreshTokenClaimName string) *AuthorizationProviderExtensionLoginConfiguration
+	WithCustomRequestJWTParameterName(customRequestJWTParameterName string) *AuthorizationProviderExtensionLoginConfiguration
+	WithCustomLoginRequestValues(items ...*foundation.NSURLQueryItem) *AuthorizationProviderExtensionLoginConfiguration
+	WithUniqueIdentifierClaimName(uniqueIdentifierClaimName string) *AuthorizationProviderExtensionLoginConfiguration
+	WithGroupRequestClaimName(groupRequestClaimName string) *AuthorizationProviderExtensionLoginConfiguration
+	WithGroupResponseClaimName(groupResponseClaimName string) *AuthorizationProviderExtensionLoginConfiguration
+	WithKerberosTicketMappings(items ...*raw.ASAuthorizationProviderExtensionKerberosMapping) *AuthorizationProviderExtensionLoginConfiguration
+	WithRefreshEndpointURL(refreshEndpointURL string) *AuthorizationProviderExtensionLoginConfiguration
+	WithCustomRefreshRequestValues(items ...*foundation.NSURLQueryItem) *AuthorizationProviderExtensionLoginConfiguration
+	WithFederationType(federationType raw.ASAuthorizationProviderExtensionFederationType) *AuthorizationProviderExtensionLoginConfiguration
+	WithFederationRequestURN(federationRequestURN string) *AuthorizationProviderExtensionLoginConfiguration
+	WithFederationMEXURL(federationMEXURL string) *AuthorizationProviderExtensionLoginConfiguration
+	WithFederationUserPreauthenticationURL(federationUserPreauthenticationURL string) *AuthorizationProviderExtensionLoginConfiguration
+	WithFederationMEXURLKeypath(federationMEXURLKeypath string) *AuthorizationProviderExtensionLoginConfiguration
+	WithFederationPredicate(federationPredicate string) *AuthorizationProviderExtensionLoginConfiguration
+	WithCustomFederationUserPreauthenticationRequestValues(items ...*foundation.NSURLQueryItem) *AuthorizationProviderExtensionLoginConfiguration
+	WithLoginRequestEncryptionAPVPrefix(loginRequestEncryptionAPVPrefix *foundation.NSData) *AuthorizationProviderExtensionLoginConfiguration
+	WithLoginRequestEncryptionAlgorithm(loginRequestEncryptionAlgorithm *foundation.NSNumber) *AuthorizationProviderExtensionLoginConfiguration
+	WithLoginRequestHPKEPreSharedKey(loginRequestHPKEPreSharedKey *foundation.NSData) *AuthorizationProviderExtensionLoginConfiguration
+	WithLoginRequestHPKEPreSharedKeyID(loginRequestHPKEPreSharedKeyID *foundation.NSData) *AuthorizationProviderExtensionLoginConfiguration
+	WithKeyEndpointURL(keyEndpointURL string) *AuthorizationProviderExtensionLoginConfiguration
+	WithCustomKeyExchangeRequestValues(items ...*foundation.NSURLQueryItem) *AuthorizationProviderExtensionLoginConfiguration
+	WithCustomKeyRequestValues(items ...*foundation.NSURLQueryItem) *AuthorizationProviderExtensionLoginConfiguration
+	WithHpkePreSharedKey(hpkePreSharedKey *foundation.NSData) *AuthorizationProviderExtensionLoginConfiguration
+	WithHpkePreSharedKeyID(hpkePreSharedKeyID *foundation.NSData) *AuthorizationProviderExtensionLoginConfiguration
+	SetCustomAssertionRequestHeaderClaimsReturningError(claims *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error)
+	SetCustomAssertionRequestBodyClaimsReturningError(claims *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error)
+	SetCustomLoginRequestHeaderClaimsReturningError(claims *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error)
+	SetCustomLoginRequestBodyClaimsReturningError(claims *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error)
+	SetCustomRefreshRequestHeaderClaimsReturningError(claims *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error)
+	SetCustomRefreshRequestBodyClaimsReturningError(claims *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error)
+	SetCustomKeyExchangeRequestHeaderClaimsReturningError(claims *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error)
+	SetCustomKeyExchangeRequestBodyClaimsReturningError(claims *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error)
+	SetCustomKeyRequestHeaderClaimsReturningError(claims *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error)
+	SetCustomKeyRequestBodyClaimsReturningError(claims *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error)
+	InvalidCredentialPredicate() string
+	SetInvalidCredentialPredicate(invalidCredentialPredicate string)
+	AccountDisplayName() string
+	SetAccountDisplayName(accountDisplayName string)
+	ClientID() string
+	Issuer() string
+	Audience() string
+	SetAudience(audience string)
+	TokenEndpointURL() *foundation.NSURL
+	SetTokenEndpointURL(tokenEndpointURL string)
+	JwksEndpointURL() *foundation.NSURL
+	SetJwksEndpointURL(jwksEndpointURL string)
+	JwksTrustedRootCertificates() *foundation.NSArray[objc.ID]
+	SetJwksTrustedRootCertificates(jwksTrustedRootCertificates *foundation.NSArray[objc.ID])
+	DeviceContext() *foundation.NSData
+	SetDeviceContext(deviceContext *foundation.NSData)
+	UserSecureEnclaveKeyBiometricPolicy() raw.ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicy
+	SetUserSecureEnclaveKeyBiometricPolicy(userSecureEnclaveKeyBiometricPolicy raw.ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicy)
+	NonceEndpointURL() *foundation.NSURL
+	SetNonceEndpointURL(nonceEndpointURL string)
+	NonceResponseKeypath() string
+	SetNonceResponseKeypath(nonceResponseKeypath string)
+	ServerNonceClaimName() string
+	SetServerNonceClaimName(serverNonceClaimName string)
+	CustomNonceRequestValues() []*foundation.NSURLQueryItem
+	SetCustomNonceRequestValues(customNonceRequestValues *foundation.NSArray[*foundation.NSURLQueryItem])
+	AdditionalScopes() string
+	SetAdditionalScopes(additionalScopes string)
+	AdditionalAuthorizationScopes() string
+	SetAdditionalAuthorizationScopes(additionalAuthorizationScopes string)
+	IncludePreviousRefreshTokenInLoginRequest() bool
+	SetIncludePreviousRefreshTokenInLoginRequest(includePreviousRefreshTokenInLoginRequest bool)
+	PreviousRefreshTokenClaimName() string
+	SetPreviousRefreshTokenClaimName(previousRefreshTokenClaimName string)
+	CustomRequestJWTParameterName() string
+	SetCustomRequestJWTParameterName(customRequestJWTParameterName string)
+	CustomLoginRequestValues() []*foundation.NSURLQueryItem
+	SetCustomLoginRequestValues(customLoginRequestValues *foundation.NSArray[*foundation.NSURLQueryItem])
+	UniqueIdentifierClaimName() string
+	SetUniqueIdentifierClaimName(uniqueIdentifierClaimName string)
+	GroupRequestClaimName() string
+	SetGroupRequestClaimName(groupRequestClaimName string)
+	GroupResponseClaimName() string
+	SetGroupResponseClaimName(groupResponseClaimName string)
+	KerberosTicketMappings() []*raw.ASAuthorizationProviderExtensionKerberosMapping
+	SetKerberosTicketMappings(kerberosTicketMappings *foundation.NSArray[*raw.ASAuthorizationProviderExtensionKerberosMapping])
+	RefreshEndpointURL() *foundation.NSURL
+	SetRefreshEndpointURL(refreshEndpointURL string)
+	CustomRefreshRequestValues() []*foundation.NSURLQueryItem
+	SetCustomRefreshRequestValues(customRefreshRequestValues *foundation.NSArray[*foundation.NSURLQueryItem])
+	FederationType() raw.ASAuthorizationProviderExtensionFederationType
+	SetFederationType(federationType raw.ASAuthorizationProviderExtensionFederationType)
+	FederationRequestURN() string
+	SetFederationRequestURN(federationRequestURN string)
+	FederationMEXURL() *foundation.NSURL
+	SetFederationMEXURL(federationMEXURL string)
+	FederationUserPreauthenticationURL() *foundation.NSURL
+	SetFederationUserPreauthenticationURL(federationUserPreauthenticationURL string)
+	FederationMEXURLKeypath() string
+	SetFederationMEXURLKeypath(federationMEXURLKeypath string)
+	FederationPredicate() string
+	SetFederationPredicate(federationPredicate string)
+	CustomFederationUserPreauthenticationRequestValues() []*foundation.NSURLQueryItem
+	SetCustomFederationUserPreauthenticationRequestValues(customFederationUserPreauthenticationRequestValues *foundation.NSArray[*foundation.NSURLQueryItem])
+	LoginRequestEncryptionPublicKey() unsafe.Pointer
+	SetLoginRequestEncryptionPublicKey(loginRequestEncryptionPublicKey unsafe.Pointer)
+	LoginRequestEncryptionAPVPrefix() *foundation.NSData
+	SetLoginRequestEncryptionAPVPrefix(loginRequestEncryptionAPVPrefix *foundation.NSData)
+	LoginRequestEncryptionAlgorithm() *foundation.NSNumber
+	SetLoginRequestEncryptionAlgorithm(loginRequestEncryptionAlgorithm *foundation.NSNumber)
+	LoginRequestHPKEPreSharedKey() *foundation.NSData
+	SetLoginRequestHPKEPreSharedKey(loginRequestHPKEPreSharedKey *foundation.NSData)
+	LoginRequestHPKEPreSharedKeyID() *foundation.NSData
+	SetLoginRequestHPKEPreSharedKeyID(loginRequestHPKEPreSharedKeyID *foundation.NSData)
+	KeyEndpointURL() *foundation.NSURL
+	SetKeyEndpointURL(keyEndpointURL string)
+	CustomKeyExchangeRequestValues() []*foundation.NSURLQueryItem
+	SetCustomKeyExchangeRequestValues(customKeyExchangeRequestValues *foundation.NSArray[*foundation.NSURLQueryItem])
+	CustomKeyRequestValues() []*foundation.NSURLQueryItem
+	SetCustomKeyRequestValues(customKeyRequestValues *foundation.NSArray[*foundation.NSURLQueryItem])
+	HpkePreSharedKey() *foundation.NSData
+	SetHpkePreSharedKey(hpkePreSharedKey *foundation.NSData)
+	HpkePreSharedKeyID() *foundation.NSData
+	SetHpkePreSharedKeyID(hpkePreSharedKeyID *foundation.NSData)
+	HpkeAuthPublicKey() unsafe.Pointer
+	SetHpkeAuthPublicKey(hpkeAuthPublicKey unsafe.Pointer)
+}
+
+var _ AuthorizationProviderExtensionLoginConfigurationable = (*AuthorizationProviderExtensionLoginConfiguration)(nil)
 

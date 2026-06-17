@@ -6,6 +6,8 @@ package eventkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/eventkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +25,50 @@ func NewSource() *Source {
 	return &Source{inner: raw.EKSourceFromID(_id)}
 }
 
+// CalendarsForEntityType calls the underlying CalendarsForEntityType.
+func (x *Source) CalendarsForEntityType(entityType raw.EKEntityType) *foundation.NSSet[*raw.EKCalendar] {
+	return x.inner.CalendarsForEntityType(entityType)
+}
+
+// SourceIdentifier calls the underlying SourceIdentifier.
+func (x *Source) SourceIdentifier() string {
+	_r := x.inner.SourceIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SourceType calls the underlying SourceType.
+func (x *Source) SourceType() raw.EKSourceType {
+	return x.inner.SourceType()
+}
+
+// Title calls the underlying Title.
+func (x *Source) Title() string {
+	_r := x.inner.Title()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// IsDelegate calls the underlying IsDelegate.
+func (x *Source) IsDelegate() bool {
+	return x.inner.IsDelegate()
+}
+
 func (x *Source) asObject() *raw.EKObject { return &x.inner.EKObject }
+
+// Sourceable is the interface implemented by [Source], for mocking and DI.
+type Sourceable interface {
+	Unwrap() *raw.EKSource
+	CalendarsForEntityType(entityType raw.EKEntityType) *foundation.NSSet[*raw.EKCalendar]
+	SourceIdentifier() string
+	SourceType() raw.EKSourceType
+	Title() string
+	IsDelegate() bool
+}
+
+var _ Sourceable = (*Source)(nil)
 

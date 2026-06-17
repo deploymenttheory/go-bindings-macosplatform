@@ -6,6 +6,7 @@ package mapkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -29,14 +30,20 @@ func (x *Polygon) InteriorPolygons() []*raw.MKPolygon {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MKPolygon, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MKPolygon {
+		return raw.MKPolygonFromID(purego.Retain(_id))
+	})
 }
 
 func (x *Polygon) asMultiPoint() *raw.MKMultiPoint { return &x.inner.MKMultiPoint }
 
 func (x *Polygon) asShape() *raw.MKShape { return &x.inner.MKMultiPoint.MKShape }
+
+// Polygonable is the interface implemented by [Polygon], for mocking and DI.
+type Polygonable interface {
+	Unwrap() *raw.MKPolygon
+	InteriorPolygons() []*raw.MKPolygon
+}
+
+var _ Polygonable = (*Polygon)(nil)
 

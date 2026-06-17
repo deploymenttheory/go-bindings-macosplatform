@@ -5,6 +5,8 @@
 package safariservices
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/safariservices"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +24,47 @@ func NewSafariToolbarItem() *SafariToolbarItem {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SFSafariToolbarItem")), objc.RegisterName("new"))
 	return &SafariToolbarItem{inner: raw.SFSafariToolbarItemFromID(_id)}
 }
+
+// SetEnabledWithBadgeText calls the underlying SetEnabledWithBadgeText.
+func (x *SafariToolbarItem) SetEnabledWithBadgeText(enabled bool, badgeText string) {
+	x.inner.SetEnabledWithBadgeText(enabled, foundation.NSStringStringWithUTF8String(badgeText))
+}
+
+// SetEnabled calls the underlying SetEnabled.
+func (x *SafariToolbarItem) SetEnabled(enabled bool) {
+	x.inner.SetEnabled(enabled)
+}
+
+// SetBadgeText calls the underlying SetBadgeText.
+func (x *SafariToolbarItem) SetBadgeText(badgeText string) {
+	x.inner.SetBadgeText(foundation.NSStringStringWithUTF8String(badgeText))
+}
+
+// SetImage calls the underlying SetImage.
+func (x *SafariToolbarItem) SetImage(image *appkit.NSImage) {
+	x.inner.SetImage(image)
+}
+
+// SetLabel calls the underlying SetLabel.
+func (x *SafariToolbarItem) SetLabel(label string) {
+	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+}
+
+// ShowPopover calls the underlying ShowPopover.
+func (x *SafariToolbarItem) ShowPopover() {
+	x.inner.ShowPopover()
+}
+
+// SafariToolbarItemable is the interface implemented by [SafariToolbarItem], for mocking and DI.
+type SafariToolbarItemable interface {
+	Unwrap() *raw.SFSafariToolbarItem
+	SetEnabledWithBadgeText(enabled bool, badgeText string)
+	SetEnabled(enabled bool)
+	SetBadgeText(badgeText string)
+	SetImage(image *appkit.NSImage)
+	SetLabel(label string)
+	ShowPopover()
+}
+
+var _ SafariToolbarItemable = (*SafariToolbarItem)(nil)
 

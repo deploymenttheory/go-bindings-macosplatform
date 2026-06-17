@@ -23,3 +23,10 @@ func NewSettingsHelper() *SettingsHelper {
 	return &SettingsHelper{inner: raw.ASSettingsHelperFromID(_id)}
 }
 
+// SettingsHelperable is the interface implemented by [SettingsHelper], for mocking and DI.
+type SettingsHelperable interface {
+	Unwrap() *raw.ASSettingsHelper
+}
+
+var _ SettingsHelperable = (*SettingsHelper)(nil)
+

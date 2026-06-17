@@ -8,6 +8,7 @@ import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -81,17 +82,53 @@ func (x *CaptureConnection) WithVideoMaxFrameDuration(videoMaxFrameDuration core
 	return x
 }
 
+// IsVideoRotationAngleSupported calls the underlying IsVideoRotationAngleSupported.
+func (x *CaptureConnection) IsVideoRotationAngleSupported(videoRotationAngle float64) bool {
+	return x.inner.IsVideoRotationAngleSupported(videoRotationAngle)
+}
+
 // InputPorts returns the collection as a Go slice.
 func (x *CaptureConnection) InputPorts() []*raw.AVCaptureInputPort {
 	arr := x.inner.InputPorts()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AVCaptureInputPort, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVCaptureInputPort {
+		return raw.AVCaptureInputPortFromID(purego.Retain(_id))
+	})
+}
+
+// Output calls the underlying Output.
+func (x *CaptureConnection) Output() *CaptureOutput {
+	_r := x.inner.Output()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &CaptureOutput{inner: _r}
+}
+
+// VideoPreviewLayer calls the underlying VideoPreviewLayer.
+func (x *CaptureConnection) VideoPreviewLayer() *CaptureVideoPreviewLayer {
+	_r := x.inner.VideoPreviewLayer()
+	if _r == nil {
+		return nil
+	}
+	return &CaptureVideoPreviewLayer{inner: _r}
+}
+
+// IsEnabled calls the underlying IsEnabled.
+func (x *CaptureConnection) IsEnabled() bool {
+	return x.inner.IsEnabled()
+}
+
+// SetEnabled calls the underlying SetEnabled.
+func (x *CaptureConnection) SetEnabled(enabled bool) {
+	x.inner.SetEnabled(enabled)
+}
+
+// IsActive calls the underlying IsActive.
+func (x *CaptureConnection) IsActive() bool {
+	return x.inner.IsActive()
 }
 
 // AudioChannels returns the collection as a Go slice.
@@ -100,10 +137,145 @@ func (x *CaptureConnection) AudioChannels() []*raw.AVCaptureAudioChannel {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AVCaptureAudioChannel, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVCaptureAudioChannel {
+		return raw.AVCaptureAudioChannelFromID(purego.Retain(_id))
+	})
 }
+
+// IsVideoMirroringSupported calls the underlying IsVideoMirroringSupported.
+func (x *CaptureConnection) IsVideoMirroringSupported() bool {
+	return x.inner.IsVideoMirroringSupported()
+}
+
+// IsVideoMirrored calls the underlying IsVideoMirrored.
+func (x *CaptureConnection) IsVideoMirrored() bool {
+	return x.inner.IsVideoMirrored()
+}
+
+// SetVideoMirrored calls the underlying SetVideoMirrored.
+func (x *CaptureConnection) SetVideoMirrored(videoMirrored bool) {
+	x.inner.SetVideoMirrored(videoMirrored)
+}
+
+// AutomaticallyAdjustsVideoMirroring calls the underlying AutomaticallyAdjustsVideoMirroring.
+func (x *CaptureConnection) AutomaticallyAdjustsVideoMirroring() bool {
+	return x.inner.AutomaticallyAdjustsVideoMirroring()
+}
+
+// SetAutomaticallyAdjustsVideoMirroring calls the underlying SetAutomaticallyAdjustsVideoMirroring.
+func (x *CaptureConnection) SetAutomaticallyAdjustsVideoMirroring(automaticallyAdjustsVideoMirroring bool) {
+	x.inner.SetAutomaticallyAdjustsVideoMirroring(automaticallyAdjustsVideoMirroring)
+}
+
+// VideoRotationAngle calls the underlying VideoRotationAngle.
+func (x *CaptureConnection) VideoRotationAngle() float64 {
+	return x.inner.VideoRotationAngle()
+}
+
+// SetVideoRotationAngle calls the underlying SetVideoRotationAngle.
+func (x *CaptureConnection) SetVideoRotationAngle(videoRotationAngle float64) {
+	x.inner.SetVideoRotationAngle(videoRotationAngle)
+}
+
+// IsVideoOrientationSupported calls the underlying IsVideoOrientationSupported.
+func (x *CaptureConnection) IsVideoOrientationSupported() bool {
+	return x.inner.IsVideoOrientationSupported()
+}
+
+// VideoOrientation calls the underlying VideoOrientation.
+func (x *CaptureConnection) VideoOrientation() raw.AVCaptureVideoOrientation {
+	return x.inner.VideoOrientation()
+}
+
+// SetVideoOrientation calls the underlying SetVideoOrientation.
+func (x *CaptureConnection) SetVideoOrientation(videoOrientation raw.AVCaptureVideoOrientation) {
+	x.inner.SetVideoOrientation(videoOrientation)
+}
+
+// IsVideoFieldModeSupported calls the underlying IsVideoFieldModeSupported.
+func (x *CaptureConnection) IsVideoFieldModeSupported() bool {
+	return x.inner.IsVideoFieldModeSupported()
+}
+
+// VideoFieldMode calls the underlying VideoFieldMode.
+func (x *CaptureConnection) VideoFieldMode() raw.AVVideoFieldMode {
+	return x.inner.VideoFieldMode()
+}
+
+// SetVideoFieldMode calls the underlying SetVideoFieldMode.
+func (x *CaptureConnection) SetVideoFieldMode(videoFieldMode raw.AVVideoFieldMode) {
+	x.inner.SetVideoFieldMode(videoFieldMode)
+}
+
+// IsVideoMinFrameDurationSupported calls the underlying IsVideoMinFrameDurationSupported.
+func (x *CaptureConnection) IsVideoMinFrameDurationSupported() bool {
+	return x.inner.IsVideoMinFrameDurationSupported()
+}
+
+// VideoMinFrameDuration calls the underlying VideoMinFrameDuration.
+func (x *CaptureConnection) VideoMinFrameDuration() coremedia.CMTime {
+	return x.inner.VideoMinFrameDuration()
+}
+
+// SetVideoMinFrameDuration calls the underlying SetVideoMinFrameDuration.
+func (x *CaptureConnection) SetVideoMinFrameDuration(videoMinFrameDuration coremedia.CMTime) {
+	x.inner.SetVideoMinFrameDuration(videoMinFrameDuration)
+}
+
+// IsVideoMaxFrameDurationSupported calls the underlying IsVideoMaxFrameDurationSupported.
+func (x *CaptureConnection) IsVideoMaxFrameDurationSupported() bool {
+	return x.inner.IsVideoMaxFrameDurationSupported()
+}
+
+// VideoMaxFrameDuration calls the underlying VideoMaxFrameDuration.
+func (x *CaptureConnection) VideoMaxFrameDuration() coremedia.CMTime {
+	return x.inner.VideoMaxFrameDuration()
+}
+
+// SetVideoMaxFrameDuration calls the underlying SetVideoMaxFrameDuration.
+func (x *CaptureConnection) SetVideoMaxFrameDuration(videoMaxFrameDuration coremedia.CMTime) {
+	x.inner.SetVideoMaxFrameDuration(videoMaxFrameDuration)
+}
+
+// CaptureConnectionable is the interface implemented by [CaptureConnection], for mocking and DI.
+type CaptureConnectionable interface {
+	Unwrap() *raw.AVCaptureConnection
+	WithEnabled(enabled bool) *CaptureConnection
+	WithVideoMirrored(videoMirrored bool) *CaptureConnection
+	WithAutomaticallyAdjustsVideoMirroring(automaticallyAdjustsVideoMirroring bool) *CaptureConnection
+	WithVideoRotationAngle(videoRotationAngle float64) *CaptureConnection
+	WithVideoOrientation(videoOrientation raw.AVCaptureVideoOrientation) *CaptureConnection
+	WithVideoFieldMode(videoFieldMode raw.AVVideoFieldMode) *CaptureConnection
+	WithVideoMinFrameDuration(videoMinFrameDuration coremedia.CMTime) *CaptureConnection
+	WithVideoMaxFrameDuration(videoMaxFrameDuration coremedia.CMTime) *CaptureConnection
+	IsVideoRotationAngleSupported(videoRotationAngle float64) bool
+	InputPorts() []*raw.AVCaptureInputPort
+	Output() *CaptureOutput
+	VideoPreviewLayer() *CaptureVideoPreviewLayer
+	IsEnabled() bool
+	SetEnabled(enabled bool)
+	IsActive() bool
+	AudioChannels() []*raw.AVCaptureAudioChannel
+	IsVideoMirroringSupported() bool
+	IsVideoMirrored() bool
+	SetVideoMirrored(videoMirrored bool)
+	AutomaticallyAdjustsVideoMirroring() bool
+	SetAutomaticallyAdjustsVideoMirroring(automaticallyAdjustsVideoMirroring bool)
+	VideoRotationAngle() float64
+	SetVideoRotationAngle(videoRotationAngle float64)
+	IsVideoOrientationSupported() bool
+	VideoOrientation() raw.AVCaptureVideoOrientation
+	SetVideoOrientation(videoOrientation raw.AVCaptureVideoOrientation)
+	IsVideoFieldModeSupported() bool
+	VideoFieldMode() raw.AVVideoFieldMode
+	SetVideoFieldMode(videoFieldMode raw.AVVideoFieldMode)
+	IsVideoMinFrameDurationSupported() bool
+	VideoMinFrameDuration() coremedia.CMTime
+	SetVideoMinFrameDuration(videoMinFrameDuration coremedia.CMTime)
+	IsVideoMaxFrameDurationSupported() bool
+	VideoMaxFrameDuration() coremedia.CMTime
+	SetVideoMaxFrameDuration(videoMaxFrameDuration coremedia.CMTime)
+}
+
+var _ CaptureConnectionable = (*CaptureConnection)(nil)
 

@@ -7,6 +7,7 @@ package phase
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -38,18 +39,37 @@ func (x *Source) WithGain(gain float64) *Source {
 	return x
 }
 
+// Gain calls the underlying Gain.
+func (x *Source) Gain() float64 {
+	return x.inner.Gain()
+}
+
+// SetGain calls the underlying SetGain.
+func (x *Source) SetGain(gain float64) {
+	x.inner.SetGain(gain)
+}
+
 // Shapes returns the collection as a Go slice.
 func (x *Source) Shapes() []*raw.PHASEShape {
 	arr := x.inner.Shapes()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.PHASEShape, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PHASEShape {
+		return raw.PHASEShapeFromID(purego.Retain(_id))
+	})
 }
 
 func (x *Source) asObject() *raw.PHASEObject { return &x.inner.PHASEObject }
+
+// Sourceable is the interface implemented by [Source], for mocking and DI.
+type Sourceable interface {
+	Unwrap() *raw.PHASESource
+	WithGain(gain float64) *Source
+	Gain() float64
+	SetGain(gain float64)
+	Shapes() []*raw.PHASEShape
+}
+
+var _ Sourceable = (*Source)(nil)
 

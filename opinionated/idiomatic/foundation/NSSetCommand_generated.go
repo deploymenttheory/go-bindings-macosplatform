@@ -23,7 +23,24 @@ func NewSetCommand() *SetCommand {
 	return &SetCommand{inner: raw.NSSetCommandFromID(_id)}
 }
 
+// KeySpecifier calls the underlying KeySpecifier.
+func (x *SetCommand) KeySpecifier() *ScriptObjectSpecifier {
+	_r := x.inner.KeySpecifier()
+	if _r == nil {
+		return nil
+	}
+	return &ScriptObjectSpecifier{inner: _r}
+}
+
 func (x *SetCommand) asScriptCommand() *raw.NSScriptCommand { return &x.inner.NSScriptCommand }
 
 func (x *SetCommand) asObject() *raw.NSObject { return &x.inner.NSScriptCommand.NSObject }
+
+// SetCommandable is the interface implemented by [SetCommand], for mocking and DI.
+type SetCommandable interface {
+	Unwrap() *raw.NSSetCommand
+	KeySpecifier() *ScriptObjectSpecifier
+}
+
+var _ SetCommandable = (*SetCommand)(nil)
 

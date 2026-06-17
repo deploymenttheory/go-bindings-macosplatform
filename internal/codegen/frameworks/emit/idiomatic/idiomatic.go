@@ -19,6 +19,9 @@ package idiomatic
 import (
 	"bytes"
 	"fmt"
+	"go/ast"
+	"go/parser"
+	"go/token"
 	"io"
 	"maps"
 	"os"
@@ -58,6 +61,14 @@ func EmitFrameworkWrappers(
 	// Build abstract base index for provider interface generation.
 	abstractBases := buildAbstractBaseIndex(fw, prefix)
 
+	// Scan hand-authored (non-generated) files in this package so the generator
+	// never emits a method or constructor that a human has already written — the
+	// hand-crafted refinement always wins.
+	handMethods, handFuncs, err := scanHandAuthored(outDir)
+	if err != nil {
+		return fmt.Errorf("scan hand-authored files: %w", err)
+	}
+
 	for _, className := range sortedKeys(fw.Classes) {
 		cls := fw.Classes[className]
 		if cls.Availability.IsUnavailable {
@@ -67,7 +78,8 @@ func EmitFrameworkWrappers(
 
 		var buf bytes.Buffer
 		if err := emitClassFile(&buf, pkgName, rawPkgAlias, rawPkgPath,
-			className, goTypeName, cls, fw, m, trialNames, prefix, abstractBases); err != nil {
+			className, goTypeName, cls, fw, m, trialNames, prefix, abstractBases,
+			handFuncs, handMethods[goTypeName]); err != nil {
 			return fmt.Errorf("emit %s: %w", className, err)
 		}
 		if buf.Len() == 0 {
@@ -102,6 +114,11 @@ func EmitFrameworkWrappers(
 		return fmt.Errorf("emit function wrappers: %w", err)
 	}
 	takenNames := buildTakenNames(fw, trialNames, abstractBases, cfErrorWrapperNames)
+	if err := emitClassMethodFunctions(
+		outDir, pkgName, rawPkgAlias, rawPkgPath, fw, m, trialNames, handFuncs, takenNames,
+	); err != nil {
+		return fmt.Errorf("emit class method functions: %w", err)
+	}
 	if err := emitGenericFunctionWrappers(
 		outDir, pkgName, rawPkgAlias, rawPkgPath, fw, m, takenNames,
 	); err != nil {
@@ -256,6 +273,68 @@ func providerRawType(
 
 // ── File emission ──────────────────────────────────────────────────────────────
 
+// scanHandAuthored parses every non-generated .go file already present in the
+// package directory and returns the methods (keyed by receiver type name) and
+// the package-level function names a human has written by hand. The emitter
+// uses these to avoid colliding with hand-crafted refinements.
+func scanHandAuthored(outDir string) (map[string]map[string]bool, map[string]bool, error) {
+	methods := map[string]map[string]bool{}
+	funcs := map[string]bool{}
+	entries, err := os.ReadDir(outDir)
+	if err != nil {
+		if os.IsNotExist(err) {
+			return methods, funcs, nil
+		}
+		return nil, nil, err
+	}
+	fset := token.NewFileSet()
+	for _, e := range entries {
+		name := e.Name()
+		if e.IsDir() || !strings.HasSuffix(name, ".go") ||
+			strings.HasSuffix(name, "_generated.go") {
+			continue
+		}
+		f, perr := parser.ParseFile(fset, filepath.Join(outDir, name), nil, parser.SkipObjectResolution)
+		if perr != nil {
+			// A stale or half-written file must not abort generation; skip it.
+			continue
+		}
+		for _, decl := range f.Decls {
+			fn, ok := decl.(*ast.FuncDecl)
+			if !ok {
+				continue
+			}
+			if fn.Recv == nil {
+				funcs[fn.Name.Name] = true
+				continue
+			}
+			recv := receiverTypeName(fn.Recv)
+			if recv == "" {
+				continue
+			}
+			if methods[recv] == nil {
+				methods[recv] = map[string]bool{}
+			}
+			methods[recv][fn.Name.Name] = true
+		}
+	}
+	return methods, funcs, nil
+}
+
+func receiverTypeName(recv *ast.FieldList) string {
+	if recv == nil || len(recv.List) == 0 {
+		return ""
+	}
+	t := recv.List[0].Type
+	if star, ok := t.(*ast.StarExpr); ok {
+		t = star.X
+	}
+	if id, ok := t.(*ast.Ident); ok {
+		return id.Name
+	}
+	return ""
+}
+
 func emitClassFile(
 	w io.Writer,
 	pkgName, rawPkgAlias, rawPkgPath string,
@@ -266,6 +345,8 @@ func emitClassFile(
 	trialNames trialNameMap,
 	prefix string,
 	abstractBases abstractBaseIndex,
+	handFuncs map[string]bool,
+	handMethods map[string]bool,
 ) error {
 	ctx := typemap.Context{
 		ClassName:     className,
@@ -285,17 +366,31 @@ func emitClassFile(
 		prefix,
 		abstractBases,
 	)
-	methods := buildMethods(cls, fw, ctx, m, rawPkgAlias)
+	methods := buildMethods(cls, fw, ctx, m, rawPkgAlias, trialNames)
 	providerMethods, providerImports := buildProviderMethods(
 		cls, className, goTypeName, fw, m, rawPkgAlias, abstractBases)
+
+	// Drop anything a hand-authored file in this package already declares, so the
+	// human's version wins (no duplicate-method compile error).
+	if len(handFuncs) > 0 {
+		ctors = slices.DeleteFunc(ctors, func(c ctorEntry) bool { return handFuncs[c.goName] })
+	}
+	if len(handMethods) > 0 {
+		withMethods = slices.DeleteFunc(withMethods, func(e withEntry) bool { return handMethods[e.goName] })
+		methods = slices.DeleteFunc(methods, func(e methodEntry) bool { return handMethods[e.goName] })
+		providerMethods = slices.DeleteFunc(providerMethods, func(e providerMethodEntry) bool { return handMethods[e.methodName] })
+	}
 
 	// Ensure a +new constructor exists for provider-only classes (no other content).
 	if len(ctors) == 0 && len(providerMethods) > 0 {
 		ctors = []ctorEntry{buildNewConstructor(className, goTypeName, rawPkgAlias)}
 	}
 
-	// Skip classes that have nothing useful to emit.
-	if len(ctors) == 0 && len(withMethods) == 0 && len(methods) == 0 && len(providerMethods) == 0 {
+	// Skip classes that have nothing useful to emit. When a hand-authored file
+	// declares methods on this type, still emit the wrapper struct so those files
+	// have a type to hang from.
+	if len(ctors) == 0 && len(withMethods) == 0 && len(methods) == 0 &&
+		len(providerMethods) == 0 && len(handMethods) == 0 {
 		return nil
 	}
 
@@ -345,6 +440,11 @@ func emitClassFile(
 			pm.bodyExpr,
 		)
 	}
+
+	// Mockable interface: lists Unwrap plus every generated exported method so
+	// callers can accept the interface and supply test doubles. The compile-time
+	// assertion guarantees the wrapper keeps satisfying it.
+	writeMockInterface(&body, goTypeName, rawType, withMethods, methods)
 
 	candidates := map[string]string{
 		rawPkgAlias:  rawPkgPath,
@@ -465,22 +565,30 @@ func buildWithSetters(
 	return withMethods
 }
 
-// buildMethods assembles the instance method entries (async, slice getters,
-// BoolNSError) for a class, deduplicated by Go method name.
+// buildMethods assembles the instance method entries for a class: the special
+// shapes (async, slice getters, BoolNSError) plus a plain pass-through wrapper
+// for every other bridgeable instance method (including property accessors,
+// which Clang synthesises into cls.Methods). Deduplicated by Go method name.
 func buildMethods(
 	cls meta.Class,
 	fw *meta.FrameworkMeta,
 	ctx typemap.Context,
 	m *typemap.Mapper,
 	rawPkgAlias string,
+	trialNames trialNameMap,
 ) []methodEntry {
+	rawNames := instanceRawMethodNames(cls)
 	var methods []methodEntry
 	seenMethod := map[string]bool{}
 	for _, method := range cls.Methods {
-		if method.Availability.IsUnavailable || method.IsClassMethod || method.IsInit {
+		if method.IsClassMethod || method.IsInit || !instanceBridgeable(method) {
 			continue
 		}
-		e := buildMethod(method, "", cls, fw, ctx, m, rawPkgAlias)
+		rawGoName := rawNames[method.Selector]
+		if rawGoName == "" {
+			rawGoName = naming.MethodName(method.Selector)
+		}
+		e := buildMethod(method, rawGoName, cls, fw, ctx, m, rawPkgAlias, trialNames)
 		if e == nil || seenMethod[e.goName] {
 			continue
 		}
@@ -488,6 +596,62 @@ func buildMethods(
 		methods = append(methods, *e)
 	}
 	return methods
+}
+
+// instanceBridgeable mirrors the raw emitter's isMethodBridgeable for instance
+// methods: skip unavailable methods and non-format variadics (which the raw
+// layer does not emit, so a wrapper calling them would not compile).
+func instanceBridgeable(method meta.Method) bool {
+	if method.Availability.IsUnavailable {
+		return false
+	}
+	if method.IsVariadic && !isSelectorFormatVariadic(method.Selector) {
+		return false
+	}
+	return true
+}
+
+func isSelectorFormatVariadic(selector string) bool {
+	for part := range strings.SplitSeq(selector, ":") {
+		if strings.Contains(strings.ToLower(part), "format") {
+			return true
+		}
+	}
+	return false
+}
+
+// instanceRawMethodNames computes, per instance-method selector, the exact Go
+// method name the raw emitter produced — including the numeric suffix the raw
+// emitter appends to disambiguate colliding names (Foo, Foo2, …). The wrapper
+// must call x.inner.<that name>. Class methods are name-prefixed by the raw
+// emitter and never collide with instance names, so they are excluded here.
+func instanceRawMethodNames(cls meta.Class) map[string]string {
+	count := map[string]int{}
+	for _, method := range cls.Methods {
+		if method.IsClassMethod || !instanceBridgeable(method) {
+			continue
+		}
+		count[naming.MethodName(method.Selector)]++
+	}
+	seen := map[string]int{}
+	selSeen := map[string]bool{}
+	out := make(map[string]string, len(count))
+	for _, method := range cls.Methods {
+		if method.IsClassMethod || !instanceBridgeable(method) {
+			continue
+		}
+		if selSeen[method.Selector] {
+			continue
+		}
+		selSeen[method.Selector] = true
+		name := naming.MethodName(method.Selector)
+		seen[name]++
+		if count[name] > 1 && seen[name] > 1 {
+			name = fmt.Sprintf("%s%d", name, seen[name])
+		}
+		out[method.Selector] = name
+	}
+	return out
 }
 
 // buildProviderMethods assembles the provider interface implementations for a
@@ -1018,7 +1182,27 @@ const (
 	kindAsync       methodKind = iota
 	kindBoolNSError            // (bool, error) → error
 	kindSlice                  // NSArray return → []T
+	kindPlain                  // pass-through wrapper for any other instance method
 )
+
+// plainRetMode controls how a plain pass-through method converts the result of
+// the underlying raw call at the Go boundary.
+type plainRetMode int
+
+const (
+	plainRetVoid      plainRetMode = iota // no return value
+	plainRetRaw                           // return the raw value unchanged
+	plainRetString                        // *foundation.NSString → Go string
+	plainRetTrialWrap                     // *raw.<Class> → *<Trial> (this package)
+)
+
+// plainParam is one parameter of a plain pass-through method: the Go signature
+// type the caller supplies, and the expression handed to the raw method.
+type plainParam struct {
+	goName  string
+	goType  string
+	rawExpr string
+}
 
 type methodEntry struct {
 	kind         methodKind
@@ -1029,10 +1213,22 @@ type methodEntry struct {
 	blockObjCParams     []string
 	blockGoParamTypes   []string // Go types of the raw completion block's params
 	asyncNonBlockParams []asyncParam
+	// Typed-result completion: when the block carries exactly one non-error
+	// param, the wrapper returns (R, error) instead of plain error.
+	asyncResultIdx     int          // index into blockGoParamTypes of the result param; -1 = error-only
+	asyncResultGoType  string       // wrapped Go return type R ("" = error-only)
+	asyncResultMode    plainRetMode // plainRetRaw | plainRetString | plainRetTrialWrap
+	asyncResultTrial   string       // trial type name for plainRetTrialWrap
 
 	sliceElemGoType string
-	sliceFromID     string // FromID call converting objc.ID elements; "" = direct assignment
+	sliceConvFmt    string // fmt template (one %s) converting an objc.ID element to sliceElemGoType
 	sliceHasError   bool   // raw getter returns (NSArray, error)
+
+	plainParams    []plainParam
+	plainRetType   string // Go value return type ("" = void); error is added separately
+	plainRetMode   plainRetMode
+	plainTrialType string // trial type name for plainRetTrialWrap
+	plainHasError  bool   // raw method returns a trailing error (IsNSError)
 }
 
 type asyncParam struct {
@@ -1042,9 +1238,12 @@ type asyncParam struct {
 	needsFoundation bool
 }
 
-// buildAsyncMethod assembles the entry for a completion-handler method whose
-// block only reports an optional NSError. The generated wrapper blocks on a
-// channel and converts the NSError to a Go error.
+// buildAsyncMethod assembles the entry for a completion-handler method. When the
+// block only reports an optional NSError the wrapper returns error; when it also
+// carries exactly one non-error result the wrapper returns (R, error), where R is
+// the same-package trial type (when one exists), a Go string (for NSString), or
+// the raw pointer. The generated wrapper blocks on a channel until completion or
+// ctx cancellation.
 func buildAsyncMethod(
 	method meta.Method,
 	rawGoName string,
@@ -1052,16 +1251,10 @@ func buildAsyncMethod(
 	ctx typemap.Context,
 	m *typemap.Mapper,
 	rawPkgAlias string,
+	trialNames trialNameMap,
 ) *methodEntry {
 	lastParam := method.Params[len(method.Params)-1]
 	blockParams := parseBlockObjCParams(lastParam.ObjCType)
-	// Skip blocks with non-NSError result params — typed result channels
-	// require knowing the raw closure signature.
-	for _, bp := range blockParams {
-		if !isNSErrorType(normaliseObjC(bp)) {
-			return nil
-		}
-	}
 	// Resolve the block's Go signature exactly as the raw emitter did, so the
 	// generated closure matches the raw method's parameter type. Degraded
 	// blocks come back as objc.Block and are rejected below.
@@ -1087,10 +1280,47 @@ func buildAsyncMethod(
 	if len(blockGoParamTypes) != len(blockParams) {
 		return nil
 	}
-	for _, t := range blockGoParamTypes {
-		// The NSError param must be expressible as an objc.ID for conversion.
-		if t != "unsafe.Pointer" && t != "objc.ID" && !strings.HasPrefix(t, "*") {
+
+	// Classify block params into error params and at most one result param.
+	resultIdx := -1
+	resultMode := plainRetVoid
+	resultGoType := ""
+	resultTrial := ""
+	resultImports := map[string]string{}
+	for i, bp := range blockParams {
+		if isNSErrorType(normaliseObjC(bp)) {
+			// The NSError param must be expressible as an objc.ID for conversion.
+			t := blockGoParamTypes[i]
+			if t != "unsafe.Pointer" && t != "objc.ID" && !strings.HasPrefix(t, "*") {
+				return nil
+			}
+			continue
+		}
+		// A non-error param: we support exactly one, and only as a typed pointer
+		// (the raw block adapter already retained + wrapped it). Anything else
+		// (a second result, or an objc.ID/unsafe.Pointer degraded param) falls
+		// through to the plain wrapper.
+		if resultIdx >= 0 {
 			return nil
+		}
+		t := blockGoParamTypes[i]
+		if !strings.HasPrefix(t, "*") {
+			return nil
+		}
+		resultIdx = i
+		switch {
+		case t == "*foundation.NSString":
+			resultImports["purego"] = pureobjcImportPath
+			resultMode, resultGoType = plainRetString, "string"
+		default:
+			if base, ok := trialWrapClass(t, rawPkgAlias); ok {
+				if tt, has := trialNames[base]; has {
+					resultMode, resultGoType, resultTrial = plainRetTrialWrap, "*"+tt, tt
+				}
+			}
+			if resultMode != plainRetTrialWrap {
+				resultMode, resultGoType = plainRetRaw, t
+			}
 		}
 	}
 
@@ -1138,6 +1368,7 @@ func buildAsyncMethod(
 		extraImports["foundation"] = foundationImportPath
 	}
 	maps.Copy(extraImports, blockImpSet)
+	maps.Copy(extraImports, resultImports)
 	return &methodEntry{
 		kind:                kindAsync,
 		goName:              asyncGoMethodName(method.Selector),
@@ -1145,24 +1376,30 @@ func buildAsyncMethod(
 		blockObjCParams:     blockParams,
 		blockGoParamTypes:   blockGoParamTypes,
 		asyncNonBlockParams: nonBlockParams,
+		asyncResultIdx:      resultIdx,
+		asyncResultGoType:   resultGoType,
+		asyncResultMode:     resultMode,
+		asyncResultTrial:    resultTrial,
 		extraImports:        extraImports,
 	}
 }
 
 func buildMethod(
 	method meta.Method,
-	_ string,
+	rawGoName string,
 	_ meta.Class,
 	fw *meta.FrameworkMeta,
 	ctx typemap.Context,
 	m *typemap.Mapper,
 	rawPkgAlias string,
+	trialNames trialNameMap,
 ) *methodEntry {
-	rawGoName := naming.MethodName(method.Selector)
-
-	// Async completion.
+	// Async completion → (ctx) error. Fall through to a plain wrapper when the
+	// block shape can't be expressed idiomatically (non-NSError result params).
 	if isAsyncCompletion(method) {
-		return buildAsyncMethod(method, rawGoName, fw, ctx, m, rawPkgAlias)
+		if e := buildAsyncMethod(method, rawGoName, fw, ctx, m, rawPkgAlias, trialNames); e != nil {
+			return e
+		}
 	}
 
 	// BoolNSError — only when no explicit non-error params.
@@ -1175,78 +1412,378 @@ func buildMethod(
 		}
 	}
 
-	// NSArray → slice (no params, getter only).
+	// NSArray → slice (no params, getter only). Fall through to a plain wrapper
+	// when the element type can't be resolved.
 	if looksLikeNSArray(method.Return.ObjCType) && len(method.Params) == 0 {
-		elemObjC := extractNSArrayElem(method.Return.ObjCType)
-		if elemObjC == "" {
-			return nil
+		if e := buildSliceMethod(method, rawGoName, fw, ctx, m, rawPkgAlias); e != nil {
+			return e
 		}
+	}
+
+	// Everything else: a plain pass-through wrapper so the method is callable on
+	// the idiomatic type without dropping to .Unwrap().
+	return buildPlainMethod(method, rawGoName, fw, ctx, m, rawPkgAlias, trialNames)
+}
+
+// buildSliceMethod builds an NSArray-getter → []T entry, or nil when the element
+// type can't be resolved to a typed pointer.
+func buildSliceMethod(
+	method meta.Method,
+	rawGoName string,
+	fw *meta.FrameworkMeta,
+	ctx typemap.Context,
+	m *typemap.Mapper,
+	rawPkgAlias string,
+) *methodEntry {
+	elemObjC := extractNSArrayElem(method.Return.ObjCType)
+	if elemObjC == "" {
+		return nil
+	}
+
+	extraImports := map[string]string{}
+	var elemGoType, convFmt string
+	if isNSStringType(normaliseObjC(elemObjC)) {
+		// NSString elements → Go string, read directly from the element id.
+		elemGoType, convFmt = "string", "purego.GoString(%s)"
+	} else {
 		impSet := make(typemap.ImportSet)
 		goElem := m.GoType(elemObjC, ctx, impSet)
 		if goElem == "" || goElem == "unsafe.Pointer" {
 			return nil
 		}
 		goElem = qualifyRaw(goElem, fw, rawPkgAlias, ctx.GenericParams)
-		if !isPointerType(goElem) {
+		if !isPointerType(goElem) || strings.Contains(goElem, "[") {
+			// Only flat typed-pointer elements; nested generics fall through to
+			// the plain wrapper (which hands back the raw NSArray unchanged).
 			return nil
 		}
-		// Resolve the raw getter's actual return type — nested generics may have
-		// been degraded there (e.g. NSArray[objc.ID]) — and convert elements back
-		// to the typed form via FromID when needed.
-		rawRet := qualifyRaw(
-			m.GoReturnType(method.Return.ObjCType, ctx, impSet),
-			fw,
-			rawPkgAlias,
-			ctx.GenericParams,
-		)
-		_, _, rawElem, ok := parseArrayGoType(rawRet)
-		if !ok {
+		fromID := fromIDCallPrefix(goElem)
+		if fromID == "" {
 			return nil
 		}
-		sliceFromID := ""
-		switch rawElem {
-		case goElem:
-			// element types already match; assign directly
-		case "objc.ID":
-			sliceFromID = fromIDCallPrefix(goElem)
-			if sliceFromID == "" {
+		// Elements are +0 inside the array; retain so the wrapper's finalizer
+		// owns its own reference (FromID installs the finalizer but does not
+		// retain). Mirrors the hand-written iteration consumers used to write.
+		maps.Copy(extraImports, impSet)
+		elemGoType, convFmt = goElem, fromID+"(purego.Retain(%s))"
+	}
+	// The conversion closure reads objc.ID elements via the purego collections
+	// helper, which sidesteps the ABI-unsafe typed-NSArray element accessor.
+	extraImports["purego"] = pureobjcImportPath
+	extraImports["objc"] = objcImportPath
+
+	goName := rawGoName
+	if method.IsNSError {
+		goName = strings.TrimSuffix(goName, "AndReturnError")
+	}
+	return &methodEntry{
+		kind:            kindSlice,
+		goName:          goName,
+		rawGoName:       rawGoName,
+		sliceElemGoType: elemGoType,
+		sliceConvFmt:    convFmt,
+		sliceHasError:   method.IsNSError,
+		extraImports:    extraImports,
+	}
+}
+
+// buildPlainMethod builds a pass-through wrapper for an instance method: it
+// converts NSString/NSURL parameters to Go string at the boundary, forwards
+// everything else as the raw type, and converts the result back to a Go string
+// or a same-package trial type where possible (raw type otherwise). The wrapper
+// inherits memory/dispatch correctness from the raw method it calls.
+func buildPlainMethod(
+	method meta.Method,
+	rawGoName string,
+	fw *meta.FrameworkMeta,
+	ctx typemap.Context,
+	m *typemap.Mapper,
+	rawPkgAlias string,
+	trialNames trialNameMap,
+) *methodEntry {
+	extraImports := map[string]string{}
+	params := make([]plainParam, 0, len(method.Params))
+	usedParamNames := map[string]int{}
+	for i, p := range method.Params {
+		pName := naming.ParamName(p.Name)
+		if pName == "" {
+			pName = fmt.Sprintf("arg%d", i)
+		}
+		if pName == "x" { // collides with the receiver variable
+			pName = "x_"
+		}
+		// Disambiguate duplicate parameter names (e.g. two "recordId" labels),
+		// matching the raw emitter: first keeps the name, later ones get a suffix.
+		usedParamNames[pName]++
+		if usedParamNames[pName] > 1 {
+			pName = fmt.Sprintf("%s%d", pName, usedParamNames[pName])
+		}
+		norm := normaliseObjC(p.ObjCType)
+		switch {
+		case isNSStringType(norm):
+			extraImports["foundation"] = foundationImportPath
+			params = append(params, plainParam{
+				goName:  pName,
+				goType:  "string",
+				rawExpr: fmt.Sprintf("foundation.NSStringStringWithUTF8String(%s)", pName),
+			})
+		case isNSURLType(norm):
+			extraImports["foundation"] = foundationImportPath
+			params = append(params, plainParam{
+				goName: pName,
+				goType: "string",
+				rawExpr: fmt.Sprintf(
+					"foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(%s))",
+					pName,
+				),
+			})
+		default:
+			impSet := make(typemap.ImportSet)
+			resolved := rawParamGoType(p.ObjCType, ctx, m, impSet)
+			goType := qualifyRaw(resolved, fw, rawPkgAlias, ctx.GenericParams)
+			if goType == "" {
 				return nil
 			}
-		default:
-			goElem = rawElem // trust the raw signature
-		}
-		goName := rawGoName
-		if method.IsNSError {
-			goName = strings.TrimSuffix(goName, "AndReturnError")
-		}
-		extraImports := map[string]string{}
-		maps.Copy(extraImports, impSet)
-		return &methodEntry{
-			kind:            kindSlice,
-			goName:          goName,
-			rawGoName:       rawGoName,
-			sliceElemGoType: goElem,
-			sliceFromID:     sliceFromID,
-			sliceHasError:   method.IsNSError,
-			extraImports:    extraImports,
+			maps.Copy(extraImports, impSet)
+			params = append(params, plainParam{goName: pName, goType: goType, rawExpr: pName})
 		}
 	}
 
-	return nil
+	retMode := plainRetVoid
+	retType := ""
+	trialType := ""
+	if retObjC := strings.TrimSpace(method.Return.ObjCType); retObjC != "" && retObjC != "void" {
+		// Block-typed returns (literal blocks and block typedefs like
+		// NSComparator) are degraded to objc.Block by the raw emitter — it can't
+		// hand back a typed Go closure — so match that exactly. Arrays that merely
+		// contain blocks are not blocks themselves and fall through below.
+		if _, isBlock := m.ResolveBlockSignature(retObjC); isBlock {
+			extraImports["objc"] = objcImportPath
+			return &methodEntry{
+				kind:          kindPlain,
+				goName:        rawGoName,
+				rawGoName:     rawGoName,
+				extraImports:  extraImports,
+				plainParams:   params,
+				plainRetType:  "objc.Block",
+				plainRetMode:  plainRetRaw,
+				plainHasError: method.IsNSError,
+			}
+		}
+		impSet := make(typemap.ImportSet)
+		rawRet := qualifyRaw(
+			m.GoReturnType(method.Return.ObjCType, ctx, impSet),
+			fw, rawPkgAlias, ctx.GenericParams,
+		)
+		if rawRet == "" {
+			rawRet = "unsafe.Pointer"
+		}
+		switch rawRet {
+		case "*foundation.NSString":
+			extraImports["foundation"] = foundationImportPath
+			extraImports["purego"] = pureobjcImportPath
+			retMode, retType = plainRetString, "string"
+		default:
+			if base, ok := trialWrapClass(rawRet, rawPkgAlias); ok {
+				if tt, has := trialNames[base]; has {
+					retMode, retType, trialType = plainRetTrialWrap, "*"+tt, tt
+				}
+			}
+			if retMode != plainRetTrialWrap {
+				maps.Copy(extraImports, impSet)
+				retMode, retType = plainRetRaw, rawRet
+			}
+		}
+	}
+
+	return &methodEntry{
+		kind:           kindPlain,
+		goName:         rawGoName,
+		rawGoName:      rawGoName,
+		extraImports:   extraImports,
+		plainParams:    params,
+		plainRetType:   retType,
+		plainRetMode:   retMode,
+		plainTrialType: trialType,
+		plainHasError:  method.IsNSError,
+	}
+}
+
+// trialWrapClass reports the bare class name when rawRet is a non-generic single
+// pointer into this package's raw alias (e.g. "*raw.NSWindow" → "NSWindow", ok).
+// Generic instantiations, slices, double pointers and cross-package types return
+// ("", false) so the wrapper keeps the raw return type.
+func trialWrapClass(rawRet, rawPkgAlias string) (string, bool) {
+	prefix := "*" + rawPkgAlias + "."
+	if !strings.HasPrefix(rawRet, prefix) {
+		return "", false
+	}
+	base := strings.TrimPrefix(rawRet, prefix)
+	if strings.ContainsAny(base, "[].* ") {
+		return "", false
+	}
+	return base, true
 }
 
 func writeMethod(w io.Writer, typeName string, me methodEntry) {
+	writeMethodAs(w, fmt.Sprintf("(x *%s) ", typeName), "x.inner", me)
+}
+
+// writeClassFunc renders a class (static) method as a package-level function
+// that forwards to the raw class function rawPkgAlias.<rawGoName>, applying the
+// same idiomatic conversions as the instance-method writers.
+func writeClassFunc(w io.Writer, rawPkgAlias string, me methodEntry) {
+	writeMethodAs(w, "", rawPkgAlias, me)
+}
+
+// writeMethodAs renders a method entry either as an instance method (recv
+// "(x *Type) ", target "x.inner") or a package-level function (recv "", target
+// the raw package alias). Sharing one renderer keeps instance and class-method
+// output byte-for-byte consistent.
+func writeMethodAs(w io.Writer, recv, target string, me methodEntry) {
 	switch me.kind {
 	case kindAsync:
-		writeAsyncMethod(w, typeName, me)
+		writeAsyncMethod(w, recv, target, me)
 	case kindBoolNSError:
-		writeBoolNSErrorMethod(w, typeName, me)
+		writeBoolNSErrorMethod(w, recv, target, me)
 	case kindSlice:
-		writeSliceMethod(w, typeName, me)
+		writeSliceMethod(w, recv, target, me)
+	case kindPlain:
+		writePlainMethod(w, recv, target, me)
 	}
 }
 
-func writeAsyncMethod(w io.Writer, typeName string, me methodEntry) {
+// writePlainMethod renders a pass-through wrapper that forwards to the raw
+// method, converting NSString/NSURL params from Go strings and the result back
+// to a Go string or same-package trial type where applicable.
+func writePlainMethod(w io.Writer, recv, target string, me methodEntry) {
+	paramParts := make([]string, 0, len(me.plainParams))
+	rawArgs := make([]string, 0, len(me.plainParams))
+	for _, p := range me.plainParams {
+		paramParts = append(paramParts, p.goName+" "+p.goType)
+		rawArgs = append(rawArgs, p.rawExpr)
+	}
+	call := fmt.Sprintf("%s.%s(%s)", target, me.rawGoName, strings.Join(rawArgs, ", "))
+
+	retSig := plainRetSig(me)
+
+	fmt.Fprintf(w, "// %s calls the underlying %s.\n", me.goName, me.rawGoName)
+	fmt.Fprintf(w, "func %s%s(%s)%s {\n", recv, me.goName, strings.Join(paramParts, ", "), retSig)
+
+	if me.plainHasError {
+		switch me.plainRetMode {
+		case plainRetVoid, plainRetRaw:
+			// raw returns `error` (void) or `(value, error)` — forward directly.
+			fmt.Fprintf(w, "\treturn %s\n", call)
+		case plainRetString:
+			fmt.Fprintf(w, "\t_r, _err := %s\n", call)
+			fmt.Fprintf(w, "\tif _err != nil {\n\t\treturn \"\", _err\n\t}\n")
+			fmt.Fprintf(w, "\tif _r == nil {\n\t\treturn \"\", nil\n\t}\n")
+			fmt.Fprintf(w, "\treturn purego.GoString(_r.Ptr()), nil\n")
+		case plainRetTrialWrap:
+			fmt.Fprintf(w, "\t_r, _err := %s\n", call)
+			fmt.Fprintf(w, "\tif _err != nil {\n\t\treturn nil, _err\n\t}\n")
+			fmt.Fprintf(w, "\tif _r == nil {\n\t\treturn nil, nil\n\t}\n")
+			fmt.Fprintf(w, "\treturn &%s{inner: _r}, nil\n", me.plainTrialType)
+		}
+		fmt.Fprintf(w, "}\n\n")
+		return
+	}
+
+	switch me.plainRetMode {
+	case plainRetVoid:
+		fmt.Fprintf(w, "\t%s\n", call)
+	case plainRetRaw:
+		fmt.Fprintf(w, "\treturn %s\n", call)
+	case plainRetString:
+		fmt.Fprintf(w, "\t_r := %s\n", call)
+		fmt.Fprintf(w, "\tif _r == nil {\n\t\treturn \"\"\n\t}\n")
+		fmt.Fprintf(w, "\treturn purego.GoString(_r.Ptr())\n")
+	case plainRetTrialWrap:
+		fmt.Fprintf(w, "\t_r := %s\n", call)
+		fmt.Fprintf(w, "\tif _r == nil {\n\t\treturn nil\n\t}\n")
+		fmt.Fprintf(w, "\treturn &%s{inner: _r}\n", me.plainTrialType)
+	}
+	fmt.Fprintf(w, "}\n\n")
+}
+
+// plainRetSig is the return clause for a plain method, shared by the writer and
+// the mockable-interface builder so their signatures match exactly:
+// " (value, error)" | " error" | " value" | "".
+func plainRetSig(me methodEntry) string {
+	switch {
+	case me.plainHasError && me.plainRetType == "":
+		return " error"
+	case me.plainHasError:
+		return " (" + me.plainRetType + ", error)"
+	case me.plainRetType != "":
+		return " " + me.plainRetType
+	}
+	return ""
+}
+
+// writeMockInterface emits an exported <Type>able interface listing Unwrap and
+// every generated method, plus a compile-time assertion that the wrapper
+// implements it. Consumers accept the interface for dependency injection/mocking.
+func writeMockInterface(
+	w io.Writer,
+	typeName, rawType string,
+	withMethods []withEntry,
+	methods []methodEntry,
+) {
+	ifaceName := typeName + "able"
+	fmt.Fprintf(w, "// %s is the interface implemented by [%s], for mocking and DI.\n", ifaceName, typeName)
+	fmt.Fprintf(w, "type %s interface {\n", ifaceName)
+	fmt.Fprintf(w, "\tUnwrap() *%s\n", rawType)
+	for _, we := range withMethods {
+		fmt.Fprintf(w, "\t%s\n", interfaceWithLine(we, typeName))
+	}
+	for _, me := range methods {
+		fmt.Fprintf(w, "\t%s\n", interfaceMethodLine(me))
+	}
+	fmt.Fprintf(w, "}\n\n")
+	fmt.Fprintf(w, "var _ %s = (*%s)(nil)\n\n", ifaceName, typeName)
+}
+
+// interfaceWithLine renders the With-setter signature for the mockable interface.
+func interfaceWithLine(we withEntry, typeName string) string {
+	if we.isNSArray {
+		return fmt.Sprintf("%s(items ...%s) *%s", we.goName, we.sliceElemType, typeName)
+	}
+	return fmt.Sprintf("%s(%s %s) *%s", we.goName, we.param.goName, we.param.goType, typeName)
+}
+
+// interfaceMethodLine renders the method signature for the mockable interface,
+// mirroring the writeMethod variants exactly.
+func interfaceMethodLine(me methodEntry) string {
+	switch me.kind {
+	case kindAsync:
+		parts := []string{"ctx context.Context"}
+		for _, p := range me.asyncNonBlockParams {
+			parts = append(parts, p.goName+" "+p.goType)
+		}
+		if me.asyncResultGoType != "" {
+			return fmt.Sprintf("%s(%s) (%s, error)", me.goName, strings.Join(parts, ", "), me.asyncResultGoType)
+		}
+		return fmt.Sprintf("%s(%s) error", me.goName, strings.Join(parts, ", "))
+	case kindBoolNSError:
+		return fmt.Sprintf("%s() error", me.goName)
+	case kindSlice:
+		if me.sliceHasError {
+			return fmt.Sprintf("%s() ([]%s, error)", me.goName, me.sliceElemGoType)
+		}
+		return fmt.Sprintf("%s() []%s", me.goName, me.sliceElemGoType)
+	case kindPlain:
+		parts := make([]string, 0, len(me.plainParams))
+		for _, p := range me.plainParams {
+			parts = append(parts, p.goName+" "+p.goType)
+		}
+		return fmt.Sprintf("%s(%s)%s", me.goName, strings.Join(parts, ", "), plainRetSig(me))
+	}
+	return ""
+}
+
+func writeAsyncMethod(w io.Writer, recv, target string, me methodEntry) {
 	paramParts := make([]string, 0, 1+len(me.asyncNonBlockParams))
 	paramParts = append(paramParts, "ctx context.Context")
 	for _, p := range me.asyncNonBlockParams {
@@ -1272,72 +1809,96 @@ func writeAsyncMethod(w io.Writer, typeName string, me methodEntry) {
 		}
 	}
 
-	closureBody := "\t\t_ch <- nil\n"
-	switch {
-	case errIdx < 0:
-		// no error param — completion only signals
-	case errGoType == "unsafe.Pointer":
-		closureBody = fmt.Sprintf("\t\tif uintptr(_p%d) != 0 {\n", errIdx) +
-			fmt.Sprintf("\t\t\t_ch <- purego.NSErrorToError(objc.ID(uintptr(_p%d)))\n", errIdx) +
-			"\t\t} else {\n\t\t\t_ch <- nil\n\t\t}\n"
-	case errGoType == "objc.ID":
-		closureBody = fmt.Sprintf("\t\tif _p%d != 0 {\n", errIdx) +
-			fmt.Sprintf("\t\t\t_ch <- purego.NSErrorToError(_p%d)\n", errIdx) +
-			"\t\t} else {\n\t\t\t_ch <- nil\n\t\t}\n"
-	default: // *foundation.NSError or similar object pointer
-		closureBody = fmt.Sprintf("\t\tif _p%d != nil {\n", errIdx) +
-			fmt.Sprintf("\t\t\t_ch <- purego.NSErrorToError(_p%d.Ptr())\n", errIdx) +
-			"\t\t} else {\n\t\t\t_ch <- nil\n\t\t}\n"
+	// errExpr renders the NSError-param → Go error conversion for the closure.
+	errExpr := func(target string) string {
+		switch {
+		case errIdx < 0:
+			return ""
+		case errGoType == "unsafe.Pointer":
+			return fmt.Sprintf("\t\tif uintptr(_p%d) != 0 {\n", errIdx) +
+				fmt.Sprintf("\t\t\t%s = purego.NSErrorToError(objc.ID(uintptr(_p%d)))\n", target, errIdx) +
+				"\t\t}\n"
+		case errGoType == "objc.ID":
+			return fmt.Sprintf("\t\tif _p%d != 0 {\n", errIdx) +
+				fmt.Sprintf("\t\t\t%s = purego.NSErrorToError(_p%d)\n", target, errIdx) +
+				"\t\t}\n"
+		default: // *foundation.NSError or similar object pointer
+			return fmt.Sprintf("\t\tif _p%d != nil {\n", errIdx) +
+				fmt.Sprintf("\t\t\t%s = purego.NSErrorToError(_p%d.Ptr())\n", target, errIdx) +
+				"\t\t}\n"
+		}
 	}
 
-	fmt.Fprintf(w, "// %s blocks until the operation completes or ctx is cancelled.\n", me.goName)
-	fmt.Fprintf(w, "func (x *%s) %s(%s) error {\n", typeName, me.goName, paramStr)
-	fmt.Fprintf(w, "\t_ch := make(chan error, 1)\n")
+	// Error-only completion: returns plain error.
+	if me.asyncResultGoType == "" {
+		closureBody := "\t\t_ch <- nil\n"
+		if errIdx >= 0 {
+			closureBody = "\t\tvar _err error\n" + errExpr("_err") + "\t\t_ch <- _err\n"
+		}
+		fmt.Fprintf(w, "// %s blocks until the operation completes or ctx is cancelled.\n", me.goName)
+		fmt.Fprintf(w, "func %s%s(%s) error {\n", recv, me.goName, paramStr)
+		fmt.Fprintf(w, "\t_ch := make(chan error, 1)\n")
+		rawArgs = append(rawArgs, "func("+strings.Join(closureParams, ", ")+") {\n"+closureBody+"\t}")
+		fmt.Fprintf(w, "\t%s.%s(%s)\n", target, me.rawGoName, strings.Join(rawArgs, ", "))
+		fmt.Fprintf(w, "\tselect {\n")
+		fmt.Fprintf(w, "\tcase err := <-_ch:\n\t\treturn err\n")
+		fmt.Fprintf(w, "\tcase <-ctx.Done():\n\t\treturn ctx.Err()\n")
+		fmt.Fprintf(w, "\t}\n}\n\n")
+		return
+	}
 
+	// Typed-result completion: returns (R, error). The result block param was
+	// already retained and wrapped by the raw block adapter.
+	ri := me.asyncResultIdx
+	var resultConv string
+	switch me.asyncResultMode {
+	case plainRetString:
+		resultConv = fmt.Sprintf("\t\tif _p%d != nil {\n\t\t\t_o.val = purego.GoString(_p%d.Ptr())\n\t\t}\n", ri, ri)
+	case plainRetTrialWrap:
+		resultConv = fmt.Sprintf("\t\tif _p%d != nil {\n\t\t\t_o.val = &%s{inner: _p%d}\n\t\t}\n", ri, me.asyncResultTrial, ri)
+	default: // plainRetRaw
+		resultConv = fmt.Sprintf("\t\t_o.val = _p%d\n", ri)
+	}
+	closureBody := "\t\tvar _o _result\n" + errExpr("_o.err") + resultConv + "\t\t_ch <- _o\n"
+
+	fmt.Fprintf(w, "// %s blocks until the operation completes or ctx is cancelled.\n", me.goName)
+	fmt.Fprintf(w, "func %s%s(%s) (%s, error) {\n", recv, me.goName, paramStr, me.asyncResultGoType)
+	fmt.Fprintf(w, "\ttype _result struct {\n\t\tval %s\n\t\terr error\n\t}\n", me.asyncResultGoType)
+	fmt.Fprintf(w, "\t_ch := make(chan _result, 1)\n")
 	rawArgs = append(rawArgs, "func("+strings.Join(closureParams, ", ")+") {\n"+closureBody+"\t}")
-	fmt.Fprintf(w, "\tx.inner.%s(%s)\n", me.rawGoName, strings.Join(rawArgs, ", "))
+	fmt.Fprintf(w, "\t%s.%s(%s)\n", target, me.rawGoName, strings.Join(rawArgs, ", "))
 	fmt.Fprintf(w, "\tselect {\n")
-	fmt.Fprintf(w, "\tcase err := <-_ch:\n\t\treturn err\n")
-	fmt.Fprintf(w, "\tcase <-ctx.Done():\n\t\treturn ctx.Err()\n")
+	fmt.Fprintf(w, "\tcase _o := <-_ch:\n\t\treturn _o.val, _o.err\n")
+	fmt.Fprintf(w, "\tcase <-ctx.Done():\n\t\tvar _zero %s\n\t\treturn _zero, ctx.Err()\n", me.asyncResultGoType)
 	fmt.Fprintf(w, "\t}\n}\n\n")
 }
 
-func writeBoolNSErrorMethod(w io.Writer, typeName string, me methodEntry) {
+func writeBoolNSErrorMethod(w io.Writer, recv, target string, me methodEntry) {
 	fmt.Fprintf(w, "// %s returns any validation error.\n", me.goName)
-	fmt.Fprintf(w, "func (x *%s) %s() error {\n", typeName, me.goName)
-	fmt.Fprintf(w, "\t_, err := x.inner.%s()\n", me.rawGoName)
+	fmt.Fprintf(w, "func %s%s() error {\n", recv, me.goName)
+	fmt.Fprintf(w, "\t_, err := %s.%s()\n", target, me.rawGoName)
 	fmt.Fprintf(w, "\treturn err\n}\n\n")
 }
 
-func writeSliceMethod(w io.Writer, typeName string, me methodEntry) {
-	elemExpr := "arr.ObjectAtIndex(uint(i))"
-	if me.sliceFromID != "" {
-		elemExpr = me.sliceFromID + "(" + elemExpr + ")"
-	}
+func writeSliceMethod(w io.Writer, recv, target string, me methodEntry) {
+	// Iterate via the purego collections helper off the array id, avoiding the
+	// typed-NSArray element accessor whose returned wrapper is not ABI-safe.
+	conv := fmt.Sprintf(me.sliceConvFmt, "_id")
+	convClosure := fmt.Sprintf("func(_id objc.ID) %s {\n\t\treturn %s\n\t}", me.sliceElemGoType, conv)
 
 	fmt.Fprintf(w, "// %s returns the collection as a Go slice.\n", me.goName)
 	if me.sliceHasError {
-		fmt.Fprintf(
-			w,
-			"func (x *%s) %s() ([]%s, error) {\n",
-			typeName,
-			me.goName,
-			me.sliceElemGoType,
-		)
-		fmt.Fprintf(w, "\tarr, err := x.inner.%s()\n", me.rawGoName)
+		fmt.Fprintf(w, "func %s%s() ([]%s, error) {\n", recv, me.goName, me.sliceElemGoType)
+		fmt.Fprintf(w, "\tarr, err := %s.%s()\n", target, me.rawGoName)
 		fmt.Fprintf(w, "\tif err != nil {\n\t\treturn nil, err\n\t}\n")
 		fmt.Fprintf(w, "\tif arr == nil {\n\t\treturn nil, nil\n\t}\n")
-		fmt.Fprintf(w, "\tout := make([]%s, arr.Count())\n", me.sliceElemGoType)
-		fmt.Fprintf(w, "\tfor i := range out {\n\t\tout[i] = %s\n\t}\n", elemExpr)
-		fmt.Fprintf(w, "\treturn out, nil\n}\n\n")
+		fmt.Fprintf(w, "\treturn purego.NSArrayToSlice(arr.Ptr(), %s), nil\n}\n\n", convClosure)
 		return
 	}
-	fmt.Fprintf(w, "func (x *%s) %s() []%s {\n", typeName, me.goName, me.sliceElemGoType)
-	fmt.Fprintf(w, "\tarr := x.inner.%s()\n", me.rawGoName)
+	fmt.Fprintf(w, "func %s%s() []%s {\n", recv, me.goName, me.sliceElemGoType)
+	fmt.Fprintf(w, "\tarr := %s.%s()\n", target, me.rawGoName)
 	fmt.Fprintf(w, "\tif arr == nil {\n\t\treturn nil\n\t}\n")
-	fmt.Fprintf(w, "\tout := make([]%s, arr.Count())\n", me.sliceElemGoType)
-	fmt.Fprintf(w, "\tfor i := range out {\n\t\tout[i] = %s\n\t}\n", elemExpr)
-	fmt.Fprintf(w, "\treturn out\n}\n\n")
+	fmt.Fprintf(w, "\treturn purego.NSArrayToSlice(arr.Ptr(), %s)\n}\n\n", convClosure)
 }
 
 // rawParamGoType resolves a raw method/function parameter type exactly as the
@@ -1492,7 +2053,17 @@ func isNSStringType(objcType string) bool {
 		return false // block or C function pointer returning NSString, not an NSString value
 	}
 	t := normaliseObjC(objcType)
-	return strings.HasPrefix(t, "NSString") && strings.Contains(t, "*")
+	rest, ok := strings.CutPrefix(t, "NSString")
+	if !ok {
+		return false
+	}
+	// Require a type boundary after "NSString" so longer identifiers such as
+	// NSStringEncoding (a uint out-param) or NSStringDrawingContext are not
+	// mistaken for an NSString and converted to a Go string.
+	if rest != "" && isIdentByte(rest[0], false) {
+		return false
+	}
+	return strings.Contains(t, "*")
 }
 
 func isPointerType(goType string) bool {

@@ -23,3 +23,10 @@ func NewNotificationBanner() *NotificationBanner {
 	return &NotificationBanner{inner: raw.GKNotificationBannerFromID(_id)}
 }
 
+// NotificationBannerable is the interface implemented by [NotificationBanner], for mocking and DI.
+type NotificationBannerable interface {
+	Unwrap() *raw.GKNotificationBanner
+}
+
+var _ NotificationBannerable = (*NotificationBanner)(nil)
+

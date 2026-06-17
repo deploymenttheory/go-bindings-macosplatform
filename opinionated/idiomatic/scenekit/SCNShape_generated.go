@@ -54,5 +54,77 @@ func (x *Shape) WithChamferProfile(chamferProfile *appkit.NSBezierPath) *Shape {
 	return x
 }
 
+// Path calls the underlying Path.
+func (x *Shape) Path() *appkit.NSBezierPath {
+	return x.inner.Path()
+}
+
+// SetPath calls the underlying SetPath.
+func (x *Shape) SetPath(path *appkit.NSBezierPath) {
+	x.inner.SetPath(path)
+}
+
+// ExtrusionDepth calls the underlying ExtrusionDepth.
+func (x *Shape) ExtrusionDepth() float64 {
+	return x.inner.ExtrusionDepth()
+}
+
+// SetExtrusionDepth calls the underlying SetExtrusionDepth.
+func (x *Shape) SetExtrusionDepth(extrusionDepth float64) {
+	x.inner.SetExtrusionDepth(extrusionDepth)
+}
+
+// ChamferMode calls the underlying ChamferMode.
+func (x *Shape) ChamferMode() raw.SCNChamferMode {
+	return x.inner.ChamferMode()
+}
+
+// SetChamferMode calls the underlying SetChamferMode.
+func (x *Shape) SetChamferMode(chamferMode raw.SCNChamferMode) {
+	x.inner.SetChamferMode(chamferMode)
+}
+
+// ChamferRadius calls the underlying ChamferRadius.
+func (x *Shape) ChamferRadius() float64 {
+	return x.inner.ChamferRadius()
+}
+
+// SetChamferRadius calls the underlying SetChamferRadius.
+func (x *Shape) SetChamferRadius(chamferRadius float64) {
+	x.inner.SetChamferRadius(chamferRadius)
+}
+
+// ChamferProfile calls the underlying ChamferProfile.
+func (x *Shape) ChamferProfile() *appkit.NSBezierPath {
+	return x.inner.ChamferProfile()
+}
+
+// SetChamferProfile calls the underlying SetChamferProfile.
+func (x *Shape) SetChamferProfile(chamferProfile *appkit.NSBezierPath) {
+	x.inner.SetChamferProfile(chamferProfile)
+}
+
 func (x *Shape) asGeometry() *raw.SCNGeometry { return &x.inner.SCNGeometry }
+
+// Shapeable is the interface implemented by [Shape], for mocking and DI.
+type Shapeable interface {
+	Unwrap() *raw.SCNShape
+	WithPath(path *appkit.NSBezierPath) *Shape
+	WithExtrusionDepth(extrusionDepth float64) *Shape
+	WithChamferMode(chamferMode raw.SCNChamferMode) *Shape
+	WithChamferRadius(chamferRadius float64) *Shape
+	WithChamferProfile(chamferProfile *appkit.NSBezierPath) *Shape
+	Path() *appkit.NSBezierPath
+	SetPath(path *appkit.NSBezierPath)
+	ExtrusionDepth() float64
+	SetExtrusionDepth(extrusionDepth float64)
+	ChamferMode() raw.SCNChamferMode
+	SetChamferMode(chamferMode raw.SCNChamferMode)
+	ChamferRadius() float64
+	SetChamferRadius(chamferRadius float64)
+	ChamferProfile() *appkit.NSBezierPath
+	SetChamferProfile(chamferProfile *appkit.NSBezierPath)
+}
+
+var _ Shapeable = (*Shape)(nil)
 

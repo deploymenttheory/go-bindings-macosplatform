@@ -35,9 +35,48 @@ func (x *AudioUnitDistortion) WithWetDryMix(wetDryMix float32) *AudioUnitDistort
 	return x
 }
 
+// LoadFactoryPreset calls the underlying LoadFactoryPreset.
+func (x *AudioUnitDistortion) LoadFactoryPreset(preset raw.AVAudioUnitDistortionPreset) {
+	x.inner.LoadFactoryPreset(preset)
+}
+
+// PreGain calls the underlying PreGain.
+func (x *AudioUnitDistortion) PreGain() float32 {
+	return x.inner.PreGain()
+}
+
+// SetPreGain calls the underlying SetPreGain.
+func (x *AudioUnitDistortion) SetPreGain(preGain float32) {
+	x.inner.SetPreGain(preGain)
+}
+
+// WetDryMix calls the underlying WetDryMix.
+func (x *AudioUnitDistortion) WetDryMix() float32 {
+	return x.inner.WetDryMix()
+}
+
+// SetWetDryMix calls the underlying SetWetDryMix.
+func (x *AudioUnitDistortion) SetWetDryMix(wetDryMix float32) {
+	x.inner.SetWetDryMix(wetDryMix)
+}
+
 func (x *AudioUnitDistortion) asAudioUnitEffect() *raw.AVAudioUnitEffect { return &x.inner.AVAudioUnitEffect }
 
 func (x *AudioUnitDistortion) asAudioUnit() *raw.AVAudioUnit { return &x.inner.AVAudioUnitEffect.AVAudioUnit }
 
 func (x *AudioUnitDistortion) asAudioNode() *raw.AVAudioNode { return &x.inner.AVAudioUnitEffect.AVAudioUnit.AVAudioNode }
+
+// AudioUnitDistortionable is the interface implemented by [AudioUnitDistortion], for mocking and DI.
+type AudioUnitDistortionable interface {
+	Unwrap() *raw.AVAudioUnitDistortion
+	WithPreGain(preGain float32) *AudioUnitDistortion
+	WithWetDryMix(wetDryMix float32) *AudioUnitDistortion
+	LoadFactoryPreset(preset raw.AVAudioUnitDistortionPreset)
+	PreGain() float32
+	SetPreGain(preGain float32)
+	WetDryMix() float32
+	SetWetDryMix(wetDryMix float32)
+}
+
+var _ AudioUnitDistortionable = (*AudioUnitDistortion)(nil)
 

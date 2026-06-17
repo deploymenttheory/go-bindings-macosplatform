@@ -7,6 +7,7 @@ package naturallanguage
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/naturallanguage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -47,16 +48,70 @@ func (x *LanguageRecognizer) WithLanguageConstraints(items ...*foundation.NSStri
 	return x
 }
 
+// ProcessString calls the underlying ProcessString.
+func (x *LanguageRecognizer) ProcessString(string_ string) {
+	x.inner.ProcessString(foundation.NSStringStringWithUTF8String(string_))
+}
+
+// Reset calls the underlying Reset.
+func (x *LanguageRecognizer) Reset() {
+	x.inner.Reset()
+}
+
+// LanguageHypothesesWithMaximum calls the underlying LanguageHypothesesWithMaximum.
+func (x *LanguageRecognizer) LanguageHypothesesWithMaximum(maxHypotheses uint) *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber] {
+	return x.inner.LanguageHypothesesWithMaximum(maxHypotheses)
+}
+
+// DominantLanguage calls the underlying DominantLanguage.
+func (x *LanguageRecognizer) DominantLanguage() string {
+	_r := x.inner.DominantLanguage()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// LanguageHints calls the underlying LanguageHints.
+func (x *LanguageRecognizer) LanguageHints() *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber] {
+	return x.inner.LanguageHints()
+}
+
+// SetLanguageHints calls the underlying SetLanguageHints.
+func (x *LanguageRecognizer) SetLanguageHints(languageHints *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber]) {
+	x.inner.SetLanguageHints(languageHints)
+}
+
 // LanguageConstraints returns the collection as a Go slice.
 func (x *LanguageRecognizer) LanguageConstraints() []*foundation.NSString {
 	arr := x.inner.LanguageConstraints()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	})
 }
+
+// SetLanguageConstraints calls the underlying SetLanguageConstraints.
+func (x *LanguageRecognizer) SetLanguageConstraints(languageConstraints *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetLanguageConstraints(languageConstraints)
+}
+
+// LanguageRecognizerable is the interface implemented by [LanguageRecognizer], for mocking and DI.
+type LanguageRecognizerable interface {
+	Unwrap() *raw.NLLanguageRecognizer
+	WithLanguageHints(languageHints *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber]) *LanguageRecognizer
+	WithLanguageConstraints(items ...*foundation.NSString) *LanguageRecognizer
+	ProcessString(string_ string)
+	Reset()
+	LanguageHypothesesWithMaximum(maxHypotheses uint) *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber]
+	DominantLanguage() string
+	LanguageHints() *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber]
+	SetLanguageHints(languageHints *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber])
+	LanguageConstraints() []*foundation.NSString
+	SetLanguageConstraints(languageConstraints *foundation.NSArray[*foundation.NSString])
+}
+
+var _ LanguageRecognizerable = (*LanguageRecognizer)(nil)
 

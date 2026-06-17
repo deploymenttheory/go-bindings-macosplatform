@@ -104,3 +104,129 @@ func (x *RenderDestination) WithCaptureTraceURL(captureTraceURL string) *RenderD
 	return x
 }
 
+// Width calls the underlying Width.
+func (x *RenderDestination) Width() uint {
+	return x.inner.Width()
+}
+
+// Height calls the underlying Height.
+func (x *RenderDestination) Height() uint {
+	return x.inner.Height()
+}
+
+// AlphaMode calls the underlying AlphaMode.
+func (x *RenderDestination) AlphaMode() raw.CIRenderDestinationAlphaMode {
+	return x.inner.AlphaMode()
+}
+
+// SetAlphaMode calls the underlying SetAlphaMode.
+func (x *RenderDestination) SetAlphaMode(alphaMode raw.CIRenderDestinationAlphaMode) {
+	x.inner.SetAlphaMode(alphaMode)
+}
+
+// IsFlipped calls the underlying IsFlipped.
+func (x *RenderDestination) IsFlipped() bool {
+	return x.inner.IsFlipped()
+}
+
+// SetFlipped calls the underlying SetFlipped.
+func (x *RenderDestination) SetFlipped(flipped bool) {
+	x.inner.SetFlipped(flipped)
+}
+
+// IsDithered calls the underlying IsDithered.
+func (x *RenderDestination) IsDithered() bool {
+	return x.inner.IsDithered()
+}
+
+// SetDithered calls the underlying SetDithered.
+func (x *RenderDestination) SetDithered(dithered bool) {
+	x.inner.SetDithered(dithered)
+}
+
+// IsClamped calls the underlying IsClamped.
+func (x *RenderDestination) IsClamped() bool {
+	return x.inner.IsClamped()
+}
+
+// SetClamped calls the underlying SetClamped.
+func (x *RenderDestination) SetClamped(clamped bool) {
+	x.inner.SetClamped(clamped)
+}
+
+// ColorSpace calls the underlying ColorSpace.
+func (x *RenderDestination) ColorSpace() unsafe.Pointer {
+	return x.inner.ColorSpace()
+}
+
+// SetColorSpace calls the underlying SetColorSpace.
+func (x *RenderDestination) SetColorSpace(colorSpace unsafe.Pointer) {
+	x.inner.SetColorSpace(colorSpace)
+}
+
+// BlendKernel calls the underlying BlendKernel.
+func (x *RenderDestination) BlendKernel() *BlendKernel {
+	_r := x.inner.BlendKernel()
+	if _r == nil {
+		return nil
+	}
+	return &BlendKernel{inner: _r}
+}
+
+// SetBlendKernel calls the underlying SetBlendKernel.
+func (x *RenderDestination) SetBlendKernel(blendKernel *raw.CIBlendKernel) {
+	x.inner.SetBlendKernel(blendKernel)
+}
+
+// BlendsInDestinationColorSpace calls the underlying BlendsInDestinationColorSpace.
+func (x *RenderDestination) BlendsInDestinationColorSpace() bool {
+	return x.inner.BlendsInDestinationColorSpace()
+}
+
+// SetBlendsInDestinationColorSpace calls the underlying SetBlendsInDestinationColorSpace.
+func (x *RenderDestination) SetBlendsInDestinationColorSpace(blendsInDestinationColorSpace bool) {
+	x.inner.SetBlendsInDestinationColorSpace(blendsInDestinationColorSpace)
+}
+
+// CaptureTraceURL calls the underlying CaptureTraceURL.
+func (x *RenderDestination) CaptureTraceURL() *foundation.NSURL {
+	return x.inner.CaptureTraceURL()
+}
+
+// SetCaptureTraceURL calls the underlying SetCaptureTraceURL.
+func (x *RenderDestination) SetCaptureTraceURL(captureTraceURL string) {
+	x.inner.SetCaptureTraceURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(captureTraceURL)))
+}
+
+// RenderDestinationable is the interface implemented by [RenderDestination], for mocking and DI.
+type RenderDestinationable interface {
+	Unwrap() *raw.CIRenderDestination
+	WithAlphaMode(alphaMode raw.CIRenderDestinationAlphaMode) *RenderDestination
+	WithFlipped(flipped bool) *RenderDestination
+	WithDithered(dithered bool) *RenderDestination
+	WithClamped(clamped bool) *RenderDestination
+	WithBlendKernel(blendKernel *raw.CIBlendKernel) *RenderDestination
+	WithBlendsInDestinationColorSpace(blendsInDestinationColorSpace bool) *RenderDestination
+	WithCaptureTraceURL(captureTraceURL string) *RenderDestination
+	Width() uint
+	Height() uint
+	AlphaMode() raw.CIRenderDestinationAlphaMode
+	SetAlphaMode(alphaMode raw.CIRenderDestinationAlphaMode)
+	IsFlipped() bool
+	SetFlipped(flipped bool)
+	IsDithered() bool
+	SetDithered(dithered bool)
+	IsClamped() bool
+	SetClamped(clamped bool)
+	ColorSpace() unsafe.Pointer
+	SetColorSpace(colorSpace unsafe.Pointer)
+	BlendKernel() *BlendKernel
+	SetBlendKernel(blendKernel *raw.CIBlendKernel)
+	BlendsInDestinationColorSpace() bool
+	SetBlendsInDestinationColorSpace(blendsInDestinationColorSpace bool)
+	CaptureTraceURL() *foundation.NSURL
+	SetCaptureTraceURL(captureTraceURL string)
+}
+
+var _ RenderDestinationable = (*RenderDestination)(nil)
+

@@ -24,5 +24,32 @@ func NewMathExpressionFractionWithNumeratorExpressionDenimonatorExpression(numer
 	return &MathExpressionFraction{inner: raw.AXMathExpressionFractionFromID(_id)}
 }
 
+// NumeratorExpression calls the underlying NumeratorExpression.
+func (x *MathExpressionFraction) NumeratorExpression() *MathExpression {
+	_r := x.inner.NumeratorExpression()
+	if _r == nil {
+		return nil
+	}
+	return &MathExpression{inner: _r}
+}
+
+// DenimonatorExpression calls the underlying DenimonatorExpression.
+func (x *MathExpressionFraction) DenimonatorExpression() *MathExpression {
+	_r := x.inner.DenimonatorExpression()
+	if _r == nil {
+		return nil
+	}
+	return &MathExpression{inner: _r}
+}
+
 func (x *MathExpressionFraction) asMathExpression() *raw.AXMathExpression { return &x.inner.AXMathExpression }
+
+// MathExpressionFractionable is the interface implemented by [MathExpressionFraction], for mocking and DI.
+type MathExpressionFractionable interface {
+	Unwrap() *raw.AXMathExpressionFraction
+	NumeratorExpression() *MathExpression
+	DenimonatorExpression() *MathExpression
+}
+
+var _ MathExpressionFractionable = (*MathExpressionFraction)(nil)
 

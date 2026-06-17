@@ -5,6 +5,7 @@
 package webkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,7 +24,60 @@ func NewDOMRGBColor() *DOMRGBColor {
 	return &DOMRGBColor{inner: raw.DOMRGBColorFromID(_id)}
 }
 
+// Red calls the underlying Red.
+func (x *DOMRGBColor) Red() *DOMCSSPrimitiveValue {
+	_r := x.inner.Red()
+	if _r == nil {
+		return nil
+	}
+	return &DOMCSSPrimitiveValue{inner: _r}
+}
+
+// Green calls the underlying Green.
+func (x *DOMRGBColor) Green() *DOMCSSPrimitiveValue {
+	_r := x.inner.Green()
+	if _r == nil {
+		return nil
+	}
+	return &DOMCSSPrimitiveValue{inner: _r}
+}
+
+// Blue calls the underlying Blue.
+func (x *DOMRGBColor) Blue() *DOMCSSPrimitiveValue {
+	_r := x.inner.Blue()
+	if _r == nil {
+		return nil
+	}
+	return &DOMCSSPrimitiveValue{inner: _r}
+}
+
+// Alpha calls the underlying Alpha.
+func (x *DOMRGBColor) Alpha() *DOMCSSPrimitiveValue {
+	_r := x.inner.Alpha()
+	if _r == nil {
+		return nil
+	}
+	return &DOMCSSPrimitiveValue{inner: _r}
+}
+
+// Color calls the underlying Color.
+func (x *DOMRGBColor) Color() *appkit.NSColor {
+	return x.inner.Color()
+}
+
 func (x *DOMRGBColor) asDOMObject() *raw.DOMObject { return &x.inner.DOMObject }
 
 func (x *DOMRGBColor) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMObject.WebScriptObject }
+
+// DOMRGBColorable is the interface implemented by [DOMRGBColor], for mocking and DI.
+type DOMRGBColorable interface {
+	Unwrap() *raw.DOMRGBColor
+	Red() *DOMCSSPrimitiveValue
+	Green() *DOMCSSPrimitiveValue
+	Blue() *DOMCSSPrimitiveValue
+	Alpha() *DOMCSSPrimitiveValue
+	Color() *appkit.NSColor
+}
+
+var _ DOMRGBColorable = (*DOMRGBColor)(nil)
 

@@ -198,10 +198,10 @@ func NewStringWithContentsOfFileEncodingError(path string, enc uint) (*String, e
 }
 
 // NewStringWithContentsOfURLUsedEncodingError creates a new [String].
-func NewStringWithContentsOfURLUsedEncodingError(url string, enc string) (*String, error) {
+func NewStringWithContentsOfURLUsedEncodingError(url string, enc *uint) (*String, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSString")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:usedEncoding:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr(), foundation.NSStringStringWithUTF8String(enc).Ptr(), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:usedEncoding:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr(), enc, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -209,10 +209,10 @@ func NewStringWithContentsOfURLUsedEncodingError(url string, enc string) (*Strin
 }
 
 // NewStringWithContentsOfFileUsedEncodingError creates a new [String].
-func NewStringWithContentsOfFileUsedEncodingError(path string, enc string) (*String, error) {
+func NewStringWithContentsOfFileUsedEncodingError(path string, enc *uint) (*String, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSString")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfFile:usedEncoding:error:"), foundation.NSStringStringWithUTF8String(path).Ptr(), foundation.NSStringStringWithUTF8String(enc).Ptr(), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfFile:usedEncoding:error:"), foundation.NSStringStringWithUTF8String(path).Ptr(), enc, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -254,20 +254,876 @@ func NewStringWithCString(bytes_ string) *String {
 	return &String{inner: raw.NSStringFromID(_id)}
 }
 
+// CharacterAtIndex calls the underlying CharacterAtIndex.
+func (x *String) CharacterAtIndex(index uint) uint16 {
+	return x.inner.CharacterAtIndex(index)
+}
+
+// Length calls the underlying Length.
+func (x *String) Length() uint {
+	return x.inner.Length()
+}
+
+// SubstringFromIndex calls the underlying SubstringFromIndex.
+func (x *String) SubstringFromIndex(from uint) *String {
+	_r := x.inner.SubstringFromIndex(from)
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SubstringToIndex calls the underlying SubstringToIndex.
+func (x *String) SubstringToIndex(to uint) *String {
+	_r := x.inner.SubstringToIndex(to)
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SubstringWithRange calls the underlying SubstringWithRange.
+func (x *String) SubstringWithRange(range_ raw.NSRange) *String {
+	_r := x.inner.SubstringWithRange(range_)
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// GetCharactersRange calls the underlying GetCharactersRange.
+func (x *String) GetCharactersRange(buffer *uint16, range_ raw.NSRange) {
+	x.inner.GetCharactersRange(buffer, range_)
+}
+
+// Compare calls the underlying Compare.
+func (x *String) Compare(string_ string) raw.NSComparisonResult {
+	return x.inner.Compare(foundation.NSStringStringWithUTF8String(string_))
+}
+
+// CompareOptions calls the underlying CompareOptions.
+func (x *String) CompareOptions(string_ string, mask raw.NSStringCompareOptions) raw.NSComparisonResult {
+	return x.inner.CompareOptions(foundation.NSStringStringWithUTF8String(string_), mask)
+}
+
+// CompareOptionsRange calls the underlying CompareOptionsRange.
+func (x *String) CompareOptionsRange(string_ string, mask raw.NSStringCompareOptions, rangeOfReceiverToCompare raw.NSRange) raw.NSComparisonResult {
+	return x.inner.CompareOptionsRange(foundation.NSStringStringWithUTF8String(string_), mask, rangeOfReceiverToCompare)
+}
+
+// CompareOptionsRangeLocale calls the underlying CompareOptionsRangeLocale.
+func (x *String) CompareOptionsRangeLocale(string_ string, mask raw.NSStringCompareOptions, rangeOfReceiverToCompare raw.NSRange, locale objc.ID) raw.NSComparisonResult {
+	return x.inner.CompareOptionsRangeLocale(foundation.NSStringStringWithUTF8String(string_), mask, rangeOfReceiverToCompare, locale)
+}
+
+// CaseInsensitiveCompare calls the underlying CaseInsensitiveCompare.
+func (x *String) CaseInsensitiveCompare(string_ string) raw.NSComparisonResult {
+	return x.inner.CaseInsensitiveCompare(foundation.NSStringStringWithUTF8String(string_))
+}
+
+// LocalizedCompare calls the underlying LocalizedCompare.
+func (x *String) LocalizedCompare(string_ string) raw.NSComparisonResult {
+	return x.inner.LocalizedCompare(foundation.NSStringStringWithUTF8String(string_))
+}
+
+// LocalizedCaseInsensitiveCompare calls the underlying LocalizedCaseInsensitiveCompare.
+func (x *String) LocalizedCaseInsensitiveCompare(string_ string) raw.NSComparisonResult {
+	return x.inner.LocalizedCaseInsensitiveCompare(foundation.NSStringStringWithUTF8String(string_))
+}
+
+// LocalizedStandardCompare calls the underlying LocalizedStandardCompare.
+func (x *String) LocalizedStandardCompare(string_ string) raw.NSComparisonResult {
+	return x.inner.LocalizedStandardCompare(foundation.NSStringStringWithUTF8String(string_))
+}
+
+// IsEqualToString calls the underlying IsEqualToString.
+func (x *String) IsEqualToString(aString string) bool {
+	return x.inner.IsEqualToString(foundation.NSStringStringWithUTF8String(aString))
+}
+
+// HasPrefix calls the underlying HasPrefix.
+func (x *String) HasPrefix(str string) bool {
+	return x.inner.HasPrefix(foundation.NSStringStringWithUTF8String(str))
+}
+
+// HasSuffix calls the underlying HasSuffix.
+func (x *String) HasSuffix(str string) bool {
+	return x.inner.HasSuffix(foundation.NSStringStringWithUTF8String(str))
+}
+
+// CommonPrefixWithStringOptions calls the underlying CommonPrefixWithStringOptions.
+func (x *String) CommonPrefixWithStringOptions(str string, mask raw.NSStringCompareOptions) *String {
+	_r := x.inner.CommonPrefixWithStringOptions(foundation.NSStringStringWithUTF8String(str), mask)
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// ContainsString calls the underlying ContainsString.
+func (x *String) ContainsString(str string) bool {
+	return x.inner.ContainsString(foundation.NSStringStringWithUTF8String(str))
+}
+
+// LocalizedCaseInsensitiveContainsString calls the underlying LocalizedCaseInsensitiveContainsString.
+func (x *String) LocalizedCaseInsensitiveContainsString(str string) bool {
+	return x.inner.LocalizedCaseInsensitiveContainsString(foundation.NSStringStringWithUTF8String(str))
+}
+
+// LocalizedStandardContainsString calls the underlying LocalizedStandardContainsString.
+func (x *String) LocalizedStandardContainsString(str string) bool {
+	return x.inner.LocalizedStandardContainsString(foundation.NSStringStringWithUTF8String(str))
+}
+
+// LocalizedStandardRangeOfString calls the underlying LocalizedStandardRangeOfString.
+func (x *String) LocalizedStandardRangeOfString(str string) raw.NSRange {
+	return x.inner.LocalizedStandardRangeOfString(foundation.NSStringStringWithUTF8String(str))
+}
+
+// RangeOfString calls the underlying RangeOfString.
+func (x *String) RangeOfString(searchString string) raw.NSRange {
+	return x.inner.RangeOfString(foundation.NSStringStringWithUTF8String(searchString))
+}
+
+// RangeOfStringOptions calls the underlying RangeOfStringOptions.
+func (x *String) RangeOfStringOptions(searchString string, mask raw.NSStringCompareOptions) raw.NSRange {
+	return x.inner.RangeOfStringOptions(foundation.NSStringStringWithUTF8String(searchString), mask)
+}
+
+// RangeOfStringOptionsRange calls the underlying RangeOfStringOptionsRange.
+func (x *String) RangeOfStringOptionsRange(searchString string, mask raw.NSStringCompareOptions, rangeOfReceiverToSearch raw.NSRange) raw.NSRange {
+	return x.inner.RangeOfStringOptionsRange(foundation.NSStringStringWithUTF8String(searchString), mask, rangeOfReceiverToSearch)
+}
+
+// RangeOfStringOptionsRangeLocale calls the underlying RangeOfStringOptionsRangeLocale.
+func (x *String) RangeOfStringOptionsRangeLocale(searchString string, mask raw.NSStringCompareOptions, rangeOfReceiverToSearch raw.NSRange, locale *raw.NSLocale) raw.NSRange {
+	return x.inner.RangeOfStringOptionsRangeLocale(foundation.NSStringStringWithUTF8String(searchString), mask, rangeOfReceiverToSearch, locale)
+}
+
+// RangeOfCharacterFromSet calls the underlying RangeOfCharacterFromSet.
+func (x *String) RangeOfCharacterFromSet(searchSet *raw.NSCharacterSet) raw.NSRange {
+	return x.inner.RangeOfCharacterFromSet(searchSet)
+}
+
+// RangeOfCharacterFromSetOptions calls the underlying RangeOfCharacterFromSetOptions.
+func (x *String) RangeOfCharacterFromSetOptions(searchSet *raw.NSCharacterSet, mask raw.NSStringCompareOptions) raw.NSRange {
+	return x.inner.RangeOfCharacterFromSetOptions(searchSet, mask)
+}
+
+// RangeOfCharacterFromSetOptionsRange calls the underlying RangeOfCharacterFromSetOptionsRange.
+func (x *String) RangeOfCharacterFromSetOptionsRange(searchSet *raw.NSCharacterSet, mask raw.NSStringCompareOptions, rangeOfReceiverToSearch raw.NSRange) raw.NSRange {
+	return x.inner.RangeOfCharacterFromSetOptionsRange(searchSet, mask, rangeOfReceiverToSearch)
+}
+
+// RangeOfComposedCharacterSequenceAtIndex calls the underlying RangeOfComposedCharacterSequenceAtIndex.
+func (x *String) RangeOfComposedCharacterSequenceAtIndex(index uint) raw.NSRange {
+	return x.inner.RangeOfComposedCharacterSequenceAtIndex(index)
+}
+
+// RangeOfComposedCharacterSequencesForRange calls the underlying RangeOfComposedCharacterSequencesForRange.
+func (x *String) RangeOfComposedCharacterSequencesForRange(range_ raw.NSRange) raw.NSRange {
+	return x.inner.RangeOfComposedCharacterSequencesForRange(range_)
+}
+
+// StringByAppendingString calls the underlying StringByAppendingString.
+func (x *String) StringByAppendingString(aString string) *String {
+	_r := x.inner.StringByAppendingString(foundation.NSStringStringWithUTF8String(aString))
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// StringByAppendingFormat calls the underlying StringByAppendingFormat.
+func (x *String) StringByAppendingFormat(format string) *String {
+	_r := x.inner.StringByAppendingFormat(foundation.NSStringStringWithUTF8String(format))
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// UppercaseStringWithLocale calls the underlying UppercaseStringWithLocale.
+func (x *String) UppercaseStringWithLocale(locale *raw.NSLocale) *String {
+	_r := x.inner.UppercaseStringWithLocale(locale)
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// LowercaseStringWithLocale calls the underlying LowercaseStringWithLocale.
+func (x *String) LowercaseStringWithLocale(locale *raw.NSLocale) *String {
+	_r := x.inner.LowercaseStringWithLocale(locale)
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// CapitalizedStringWithLocale calls the underlying CapitalizedStringWithLocale.
+func (x *String) CapitalizedStringWithLocale(locale *raw.NSLocale) *String {
+	_r := x.inner.CapitalizedStringWithLocale(locale)
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// GetLineStartEndContentsEndForRange calls the underlying GetLineStartEndContentsEndForRange.
+func (x *String) GetLineStartEndContentsEndForRange(startPtr *uint, lineEndPtr *uint, contentsEndPtr *uint, range_ raw.NSRange) {
+	x.inner.GetLineStartEndContentsEndForRange(startPtr, lineEndPtr, contentsEndPtr, range_)
+}
+
+// LineRangeForRange calls the underlying LineRangeForRange.
+func (x *String) LineRangeForRange(range_ raw.NSRange) raw.NSRange {
+	return x.inner.LineRangeForRange(range_)
+}
+
+// GetParagraphStartEndContentsEndForRange calls the underlying GetParagraphStartEndContentsEndForRange.
+func (x *String) GetParagraphStartEndContentsEndForRange(startPtr *uint, parEndPtr *uint, contentsEndPtr *uint, range_ raw.NSRange) {
+	x.inner.GetParagraphStartEndContentsEndForRange(startPtr, parEndPtr, contentsEndPtr, range_)
+}
+
+// ParagraphRangeForRange calls the underlying ParagraphRangeForRange.
+func (x *String) ParagraphRangeForRange(range_ raw.NSRange) raw.NSRange {
+	return x.inner.ParagraphRangeForRange(range_)
+}
+
+// EnumerateSubstringsInRangeOptionsUsing calls the underlying EnumerateSubstringsInRangeOptionsUsing.
+func (x *String) EnumerateSubstringsInRangeOptionsUsing(range_ raw.NSRange, opts raw.NSStringEnumerationOptions, block objc.Block) {
+	x.inner.EnumerateSubstringsInRangeOptionsUsing(range_, opts, block)
+}
+
+// EnumerateLinesUsing calls the underlying EnumerateLinesUsing.
+func (x *String) EnumerateLinesUsing(block func(*raw.NSString, *bool)) {
+	x.inner.EnumerateLinesUsing(block)
+}
+
+// DataUsingEncodingAllowLossyConversion calls the underlying DataUsingEncodingAllowLossyConversion.
+func (x *String) DataUsingEncodingAllowLossyConversion(encoding uint, lossy bool) *Data {
+	_r := x.inner.DataUsingEncodingAllowLossyConversion(encoding, lossy)
+	if _r == nil {
+		return nil
+	}
+	return &Data{inner: _r}
+}
+
+// DataUsingEncoding calls the underlying DataUsingEncoding.
+func (x *String) DataUsingEncoding(encoding uint) *Data {
+	_r := x.inner.DataUsingEncoding(encoding)
+	if _r == nil {
+		return nil
+	}
+	return &Data{inner: _r}
+}
+
+// CanBeConvertedToEncoding calls the underlying CanBeConvertedToEncoding.
+func (x *String) CanBeConvertedToEncoding(encoding uint) bool {
+	return x.inner.CanBeConvertedToEncoding(encoding)
+}
+
+// CStringUsingEncoding calls the underlying CStringUsingEncoding.
+func (x *String) CStringUsingEncoding(encoding uint) string {
+	return x.inner.CStringUsingEncoding(encoding)
+}
+
+// GetCStringMaxLengthEncoding calls the underlying GetCStringMaxLengthEncoding.
+func (x *String) GetCStringMaxLengthEncoding(buffer string, maxBufferCount uint, encoding uint) bool {
+	return x.inner.GetCStringMaxLengthEncoding(buffer, maxBufferCount, encoding)
+}
+
+// GetBytesMaxLengthUsedLengthEncodingOptionsRangeRemainingRange calls the underlying GetBytesMaxLengthUsedLengthEncodingOptionsRangeRemainingRange.
+func (x *String) GetBytesMaxLengthUsedLengthEncodingOptionsRangeRemainingRange(buffer unsafe.Pointer, maxBufferCount uint, usedBufferCount *uint, encoding uint, options raw.NSStringEncodingConversionOptions, range_ raw.NSRange, leftover *raw.NSRange) bool {
+	return x.inner.GetBytesMaxLengthUsedLengthEncodingOptionsRangeRemainingRange(buffer, maxBufferCount, usedBufferCount, encoding, options, range_, leftover)
+}
+
+// MaximumLengthOfBytesUsingEncoding calls the underlying MaximumLengthOfBytesUsingEncoding.
+func (x *String) MaximumLengthOfBytesUsingEncoding(enc uint) uint {
+	return x.inner.MaximumLengthOfBytesUsingEncoding(enc)
+}
+
+// LengthOfBytesUsingEncoding calls the underlying LengthOfBytesUsingEncoding.
+func (x *String) LengthOfBytesUsingEncoding(enc uint) uint {
+	return x.inner.LengthOfBytesUsingEncoding(enc)
+}
+
+// ComponentsSeparatedByString calls the underlying ComponentsSeparatedByString.
+func (x *String) ComponentsSeparatedByString(separator string) *raw.NSArray[*raw.NSString] {
+	return x.inner.ComponentsSeparatedByString(foundation.NSStringStringWithUTF8String(separator))
+}
+
+// ComponentsSeparatedByCharactersInSet calls the underlying ComponentsSeparatedByCharactersInSet.
+func (x *String) ComponentsSeparatedByCharactersInSet(separator *raw.NSCharacterSet) *raw.NSArray[*raw.NSString] {
+	return x.inner.ComponentsSeparatedByCharactersInSet(separator)
+}
+
+// StringByTrimmingCharactersInSet calls the underlying StringByTrimmingCharactersInSet.
+func (x *String) StringByTrimmingCharactersInSet(set *raw.NSCharacterSet) *String {
+	_r := x.inner.StringByTrimmingCharactersInSet(set)
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// StringByPaddingToLengthWithStringStartingAtIndex calls the underlying StringByPaddingToLengthWithStringStartingAtIndex.
+func (x *String) StringByPaddingToLengthWithStringStartingAtIndex(newLength uint, padString string, padIndex uint) *String {
+	_r := x.inner.StringByPaddingToLengthWithStringStartingAtIndex(newLength, foundation.NSStringStringWithUTF8String(padString), padIndex)
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// StringByFoldingWithOptionsLocale calls the underlying StringByFoldingWithOptionsLocale.
+func (x *String) StringByFoldingWithOptionsLocale(options raw.NSStringCompareOptions, locale *raw.NSLocale) *String {
+	_r := x.inner.StringByFoldingWithOptionsLocale(options, locale)
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// StringByReplacingOccurrencesOfStringWithStringOptionsRange calls the underlying StringByReplacingOccurrencesOfStringWithStringOptionsRange.
+func (x *String) StringByReplacingOccurrencesOfStringWithStringOptionsRange(target string, replacement string, options raw.NSStringCompareOptions, searchRange raw.NSRange) *String {
+	_r := x.inner.StringByReplacingOccurrencesOfStringWithStringOptionsRange(foundation.NSStringStringWithUTF8String(target), foundation.NSStringStringWithUTF8String(replacement), options, searchRange)
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// StringByReplacingOccurrencesOfStringWithString calls the underlying StringByReplacingOccurrencesOfStringWithString.
+func (x *String) StringByReplacingOccurrencesOfStringWithString(target string, replacement string) *String {
+	_r := x.inner.StringByReplacingOccurrencesOfStringWithString(foundation.NSStringStringWithUTF8String(target), foundation.NSStringStringWithUTF8String(replacement))
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// StringByReplacingCharactersInRangeWithString calls the underlying StringByReplacingCharactersInRangeWithString.
+func (x *String) StringByReplacingCharactersInRangeWithString(range_ raw.NSRange, replacement string) *String {
+	_r := x.inner.StringByReplacingCharactersInRangeWithString(range_, foundation.NSStringStringWithUTF8String(replacement))
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// StringByApplyingTransformReverse calls the underlying StringByApplyingTransformReverse.
+func (x *String) StringByApplyingTransformReverse(transform *raw.NSString, reverse bool) *String {
+	_r := x.inner.StringByApplyingTransformReverse(transform, reverse)
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// WriteToURLAtomicallyEncodingError calls the underlying WriteToURLAtomicallyEncodingError.
+func (x *String) WriteToURLAtomicallyEncodingError(url string, useAuxiliaryFile bool, enc uint) (bool, error) {
+	return x.inner.WriteToURLAtomicallyEncodingError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), useAuxiliaryFile, enc)
+}
+
+// WriteToFileAtomicallyEncodingError calls the underlying WriteToFileAtomicallyEncodingError.
+func (x *String) WriteToFileAtomicallyEncodingError(path string, useAuxiliaryFile bool, enc uint) (bool, error) {
+	return x.inner.WriteToFileAtomicallyEncodingError(foundation.NSStringStringWithUTF8String(path), useAuxiliaryFile, enc)
+}
+
+// DoubleValue calls the underlying DoubleValue.
+func (x *String) DoubleValue() float64 {
+	return x.inner.DoubleValue()
+}
+
+// FloatValue calls the underlying FloatValue.
+func (x *String) FloatValue() float32 {
+	return x.inner.FloatValue()
+}
+
+// IntValue calls the underlying IntValue.
+func (x *String) IntValue() int {
+	return x.inner.IntValue()
+}
+
+// IntegerValue calls the underlying IntegerValue.
+func (x *String) IntegerValue() int {
+	return x.inner.IntegerValue()
+}
+
+// LongLongValue calls the underlying LongLongValue.
+func (x *String) LongLongValue() int64 {
+	return x.inner.LongLongValue()
+}
+
+// BoolValue calls the underlying BoolValue.
+func (x *String) BoolValue() bool {
+	return x.inner.BoolValue()
+}
+
+// UppercaseString calls the underlying UppercaseString.
+func (x *String) UppercaseString() *String {
+	_r := x.inner.UppercaseString()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// LowercaseString calls the underlying LowercaseString.
+func (x *String) LowercaseString() *String {
+	_r := x.inner.LowercaseString()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// CapitalizedString calls the underlying CapitalizedString.
+func (x *String) CapitalizedString() *String {
+	_r := x.inner.CapitalizedString()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// LocalizedUppercaseString calls the underlying LocalizedUppercaseString.
+func (x *String) LocalizedUppercaseString() *String {
+	_r := x.inner.LocalizedUppercaseString()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// LocalizedLowercaseString calls the underlying LocalizedLowercaseString.
+func (x *String) LocalizedLowercaseString() *String {
+	_r := x.inner.LocalizedLowercaseString()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// LocalizedCapitalizedString calls the underlying LocalizedCapitalizedString.
+func (x *String) LocalizedCapitalizedString() *String {
+	_r := x.inner.LocalizedCapitalizedString()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// UTF8String calls the underlying UTF8String.
+func (x *String) UTF8String() unsafe.Pointer {
+	return x.inner.UTF8String()
+}
+
+// FastestEncoding calls the underlying FastestEncoding.
+func (x *String) FastestEncoding() uint {
+	return x.inner.FastestEncoding()
+}
+
+// SmallestEncoding calls the underlying SmallestEncoding.
+func (x *String) SmallestEncoding() uint {
+	return x.inner.SmallestEncoding()
+}
+
+// DecomposedStringWithCanonicalMapping calls the underlying DecomposedStringWithCanonicalMapping.
+func (x *String) DecomposedStringWithCanonicalMapping() *String {
+	_r := x.inner.DecomposedStringWithCanonicalMapping()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// PrecomposedStringWithCanonicalMapping calls the underlying PrecomposedStringWithCanonicalMapping.
+func (x *String) PrecomposedStringWithCanonicalMapping() *String {
+	_r := x.inner.PrecomposedStringWithCanonicalMapping()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// DecomposedStringWithCompatibilityMapping calls the underlying DecomposedStringWithCompatibilityMapping.
+func (x *String) DecomposedStringWithCompatibilityMapping() *String {
+	_r := x.inner.DecomposedStringWithCompatibilityMapping()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// PrecomposedStringWithCompatibilityMapping calls the underlying PrecomposedStringWithCompatibilityMapping.
+func (x *String) PrecomposedStringWithCompatibilityMapping() *String {
+	_r := x.inner.PrecomposedStringWithCompatibilityMapping()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// PropertyList calls the underlying PropertyList.
+func (x *String) PropertyList() objc.ID {
+	return x.inner.PropertyList()
+}
+
+// PropertyListFromStringsFileFormat calls the underlying PropertyListFromStringsFileFormat.
+func (x *String) PropertyListFromStringsFileFormat() *raw.NSDictionary[objc.ID, objc.ID] {
+	return x.inner.PropertyListFromStringsFileFormat()
+}
+
+// CString calls the underlying CString.
+func (x *String) CString() string {
+	return x.inner.CString()
+}
+
+// LossyCString calls the underlying LossyCString.
+func (x *String) LossyCString() string {
+	return x.inner.LossyCString()
+}
+
+// CStringLength calls the underlying CStringLength.
+func (x *String) CStringLength() uint {
+	return x.inner.CStringLength()
+}
+
+// GetCString calls the underlying GetCString.
+func (x *String) GetCString(bytes_ string) {
+	x.inner.GetCString(bytes_)
+}
+
+// GetCStringMaxLength calls the underlying GetCStringMaxLength.
+func (x *String) GetCStringMaxLength(bytes_ string, maxLength uint) {
+	x.inner.GetCStringMaxLength(bytes_, maxLength)
+}
+
+// GetCStringMaxLengthRangeRemainingRange calls the underlying GetCStringMaxLengthRangeRemainingRange.
+func (x *String) GetCStringMaxLengthRangeRemainingRange(bytes_ string, maxLength uint, aRange raw.NSRange, leftoverRange *raw.NSRange) {
+	x.inner.GetCStringMaxLengthRangeRemainingRange(bytes_, maxLength, aRange, leftoverRange)
+}
+
+// WriteToFileAtomically calls the underlying WriteToFileAtomically.
+func (x *String) WriteToFileAtomically(path string, useAuxiliaryFile bool) bool {
+	return x.inner.WriteToFileAtomically(foundation.NSStringStringWithUTF8String(path), useAuxiliaryFile)
+}
+
+// WriteToURLAtomically calls the underlying WriteToURLAtomically.
+func (x *String) WriteToURLAtomically(url string, atomically bool) bool {
+	return x.inner.WriteToURLAtomically(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), atomically)
+}
+
+// GetCharacters calls the underlying GetCharacters.
+func (x *String) GetCharacters(buffer *uint16) {
+	x.inner.GetCharacters(buffer)
+}
+
+// VariantFittingPresentationWidth calls the underlying VariantFittingPresentationWidth.
+func (x *String) VariantFittingPresentationWidth(width int) *String {
+	_r := x.inner.VariantFittingPresentationWidth(width)
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// StringByAppendingPathComponent calls the underlying StringByAppendingPathComponent.
+func (x *String) StringByAppendingPathComponent(str string) *String {
+	_r := x.inner.StringByAppendingPathComponent(foundation.NSStringStringWithUTF8String(str))
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// StringByAppendingPathExtension calls the underlying StringByAppendingPathExtension.
+func (x *String) StringByAppendingPathExtension(str string) *String {
+	_r := x.inner.StringByAppendingPathExtension(foundation.NSStringStringWithUTF8String(str))
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// StringsByAppendingPaths calls the underlying StringsByAppendingPaths.
+func (x *String) StringsByAppendingPaths(paths *raw.NSArray[*raw.NSString]) *raw.NSArray[*raw.NSString] {
+	return x.inner.StringsByAppendingPaths(paths)
+}
+
+// CompletePathIntoStringCaseSensitiveMatchesIntoArrayFilterTypes calls the underlying CompletePathIntoStringCaseSensitiveMatchesIntoArrayFilterTypes.
+func (x *String) CompletePathIntoStringCaseSensitiveMatchesIntoArrayFilterTypes(outputName string, flag bool, outputArray *raw.NSArray[*raw.NSString], filterTypes *raw.NSArray[*raw.NSString]) uint {
+	return x.inner.CompletePathIntoStringCaseSensitiveMatchesIntoArrayFilterTypes(foundation.NSStringStringWithUTF8String(outputName), flag, outputArray, filterTypes)
+}
+
+// GetFileSystemRepresentationMaxLength calls the underlying GetFileSystemRepresentationMaxLength.
+func (x *String) GetFileSystemRepresentationMaxLength(cname string, max uint) bool {
+	return x.inner.GetFileSystemRepresentationMaxLength(cname, max)
+}
+
 // PathComponents returns the collection as a Go slice.
-func (x *String) PathComponents() []*raw.NSString {
+func (x *String) PathComponents() []string {
 	arr := x.inner.PathComponents()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// IsAbsolutePath calls the underlying IsAbsolutePath.
+func (x *String) IsAbsolutePath() bool {
+	return x.inner.IsAbsolutePath()
+}
+
+// LastPathComponent calls the underlying LastPathComponent.
+func (x *String) LastPathComponent() *String {
+	_r := x.inner.LastPathComponent()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &String{inner: _r}
+}
+
+// StringByDeletingLastPathComponent calls the underlying StringByDeletingLastPathComponent.
+func (x *String) StringByDeletingLastPathComponent() *String {
+	_r := x.inner.StringByDeletingLastPathComponent()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// PathExtension calls the underlying PathExtension.
+func (x *String) PathExtension() *String {
+	_r := x.inner.PathExtension()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// StringByDeletingPathExtension calls the underlying StringByDeletingPathExtension.
+func (x *String) StringByDeletingPathExtension() *String {
+	_r := x.inner.StringByDeletingPathExtension()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// StringByAbbreviatingWithTildeInPath calls the underlying StringByAbbreviatingWithTildeInPath.
+func (x *String) StringByAbbreviatingWithTildeInPath() *String {
+	_r := x.inner.StringByAbbreviatingWithTildeInPath()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// StringByExpandingTildeInPath calls the underlying StringByExpandingTildeInPath.
+func (x *String) StringByExpandingTildeInPath() *String {
+	_r := x.inner.StringByExpandingTildeInPath()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// StringByStandardizingPath calls the underlying StringByStandardizingPath.
+func (x *String) StringByStandardizingPath() *String {
+	_r := x.inner.StringByStandardizingPath()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// StringByResolvingSymlinksInPath calls the underlying StringByResolvingSymlinksInPath.
+func (x *String) StringByResolvingSymlinksInPath() *String {
+	_r := x.inner.StringByResolvingSymlinksInPath()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// FileSystemRepresentation calls the underlying FileSystemRepresentation.
+func (x *String) FileSystemRepresentation() unsafe.Pointer {
+	return x.inner.FileSystemRepresentation()
+}
+
+// StringByAddingPercentEncodingWithAllowedCharacters calls the underlying StringByAddingPercentEncodingWithAllowedCharacters.
+func (x *String) StringByAddingPercentEncodingWithAllowedCharacters(allowedCharacters *raw.NSCharacterSet) *String {
+	_r := x.inner.StringByAddingPercentEncodingWithAllowedCharacters(allowedCharacters)
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// StringByAddingPercentEscapesUsingEncoding calls the underlying StringByAddingPercentEscapesUsingEncoding.
+func (x *String) StringByAddingPercentEscapesUsingEncoding(enc uint) *String {
+	_r := x.inner.StringByAddingPercentEscapesUsingEncoding(enc)
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// StringByReplacingPercentEscapesUsingEncoding calls the underlying StringByReplacingPercentEscapesUsingEncoding.
+func (x *String) StringByReplacingPercentEscapesUsingEncoding(enc uint) *String {
+	_r := x.inner.StringByReplacingPercentEscapesUsingEncoding(enc)
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// StringByRemovingPercentEncoding calls the underlying StringByRemovingPercentEncoding.
+func (x *String) StringByRemovingPercentEncoding() *String {
+	_r := x.inner.StringByRemovingPercentEncoding()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// LinguisticTagsInRangeSchemeOptionsOrthographyTokenRanges calls the underlying LinguisticTagsInRangeSchemeOptionsOrthographyTokenRanges.
+func (x *String) LinguisticTagsInRangeSchemeOptionsOrthographyTokenRanges(range_ raw.NSRange, scheme *raw.NSString, options raw.NSLinguisticTaggerOptions, orthography *raw.NSOrthography, tokenRanges *raw.NSArray[*raw.NSValue]) *raw.NSArray[*raw.NSString] {
+	return x.inner.LinguisticTagsInRangeSchemeOptionsOrthographyTokenRanges(range_, scheme, options, orthography, tokenRanges)
+}
+
+// EnumerateLinguisticTagsInRangeSchemeOptionsOrthographyUsing calls the underlying EnumerateLinguisticTagsInRangeSchemeOptionsOrthographyUsing.
+func (x *String) EnumerateLinguisticTagsInRangeSchemeOptionsOrthographyUsing(range_ raw.NSRange, scheme *raw.NSString, options raw.NSLinguisticTaggerOptions, orthography *raw.NSOrthography, block objc.Block) {
+	x.inner.EnumerateLinguisticTagsInRangeSchemeOptionsOrthographyUsing(range_, scheme, options, orthography, block)
 }
 
 func (x *String) asString() *raw.NSString { return x.inner }
 
 func (x *String) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// Stringable is the interface implemented by [String], for mocking and DI.
+type Stringable interface {
+	Unwrap() *raw.NSString
+	CharacterAtIndex(index uint) uint16
+	Length() uint
+	SubstringFromIndex(from uint) *String
+	SubstringToIndex(to uint) *String
+	SubstringWithRange(range_ raw.NSRange) *String
+	GetCharactersRange(buffer *uint16, range_ raw.NSRange)
+	Compare(string_ string) raw.NSComparisonResult
+	CompareOptions(string_ string, mask raw.NSStringCompareOptions) raw.NSComparisonResult
+	CompareOptionsRange(string_ string, mask raw.NSStringCompareOptions, rangeOfReceiverToCompare raw.NSRange) raw.NSComparisonResult
+	CompareOptionsRangeLocale(string_ string, mask raw.NSStringCompareOptions, rangeOfReceiverToCompare raw.NSRange, locale objc.ID) raw.NSComparisonResult
+	CaseInsensitiveCompare(string_ string) raw.NSComparisonResult
+	LocalizedCompare(string_ string) raw.NSComparisonResult
+	LocalizedCaseInsensitiveCompare(string_ string) raw.NSComparisonResult
+	LocalizedStandardCompare(string_ string) raw.NSComparisonResult
+	IsEqualToString(aString string) bool
+	HasPrefix(str string) bool
+	HasSuffix(str string) bool
+	CommonPrefixWithStringOptions(str string, mask raw.NSStringCompareOptions) *String
+	ContainsString(str string) bool
+	LocalizedCaseInsensitiveContainsString(str string) bool
+	LocalizedStandardContainsString(str string) bool
+	LocalizedStandardRangeOfString(str string) raw.NSRange
+	RangeOfString(searchString string) raw.NSRange
+	RangeOfStringOptions(searchString string, mask raw.NSStringCompareOptions) raw.NSRange
+	RangeOfStringOptionsRange(searchString string, mask raw.NSStringCompareOptions, rangeOfReceiverToSearch raw.NSRange) raw.NSRange
+	RangeOfStringOptionsRangeLocale(searchString string, mask raw.NSStringCompareOptions, rangeOfReceiverToSearch raw.NSRange, locale *raw.NSLocale) raw.NSRange
+	RangeOfCharacterFromSet(searchSet *raw.NSCharacterSet) raw.NSRange
+	RangeOfCharacterFromSetOptions(searchSet *raw.NSCharacterSet, mask raw.NSStringCompareOptions) raw.NSRange
+	RangeOfCharacterFromSetOptionsRange(searchSet *raw.NSCharacterSet, mask raw.NSStringCompareOptions, rangeOfReceiverToSearch raw.NSRange) raw.NSRange
+	RangeOfComposedCharacterSequenceAtIndex(index uint) raw.NSRange
+	RangeOfComposedCharacterSequencesForRange(range_ raw.NSRange) raw.NSRange
+	StringByAppendingString(aString string) *String
+	StringByAppendingFormat(format string) *String
+	UppercaseStringWithLocale(locale *raw.NSLocale) *String
+	LowercaseStringWithLocale(locale *raw.NSLocale) *String
+	CapitalizedStringWithLocale(locale *raw.NSLocale) *String
+	GetLineStartEndContentsEndForRange(startPtr *uint, lineEndPtr *uint, contentsEndPtr *uint, range_ raw.NSRange)
+	LineRangeForRange(range_ raw.NSRange) raw.NSRange
+	GetParagraphStartEndContentsEndForRange(startPtr *uint, parEndPtr *uint, contentsEndPtr *uint, range_ raw.NSRange)
+	ParagraphRangeForRange(range_ raw.NSRange) raw.NSRange
+	EnumerateSubstringsInRangeOptionsUsing(range_ raw.NSRange, opts raw.NSStringEnumerationOptions, block objc.Block)
+	EnumerateLinesUsing(block func(*raw.NSString, *bool))
+	DataUsingEncodingAllowLossyConversion(encoding uint, lossy bool) *Data
+	DataUsingEncoding(encoding uint) *Data
+	CanBeConvertedToEncoding(encoding uint) bool
+	CStringUsingEncoding(encoding uint) string
+	GetCStringMaxLengthEncoding(buffer string, maxBufferCount uint, encoding uint) bool
+	GetBytesMaxLengthUsedLengthEncodingOptionsRangeRemainingRange(buffer unsafe.Pointer, maxBufferCount uint, usedBufferCount *uint, encoding uint, options raw.NSStringEncodingConversionOptions, range_ raw.NSRange, leftover *raw.NSRange) bool
+	MaximumLengthOfBytesUsingEncoding(enc uint) uint
+	LengthOfBytesUsingEncoding(enc uint) uint
+	ComponentsSeparatedByString(separator string) *raw.NSArray[*raw.NSString]
+	ComponentsSeparatedByCharactersInSet(separator *raw.NSCharacterSet) *raw.NSArray[*raw.NSString]
+	StringByTrimmingCharactersInSet(set *raw.NSCharacterSet) *String
+	StringByPaddingToLengthWithStringStartingAtIndex(newLength uint, padString string, padIndex uint) *String
+	StringByFoldingWithOptionsLocale(options raw.NSStringCompareOptions, locale *raw.NSLocale) *String
+	StringByReplacingOccurrencesOfStringWithStringOptionsRange(target string, replacement string, options raw.NSStringCompareOptions, searchRange raw.NSRange) *String
+	StringByReplacingOccurrencesOfStringWithString(target string, replacement string) *String
+	StringByReplacingCharactersInRangeWithString(range_ raw.NSRange, replacement string) *String
+	StringByApplyingTransformReverse(transform *raw.NSString, reverse bool) *String
+	WriteToURLAtomicallyEncodingError(url string, useAuxiliaryFile bool, enc uint) (bool, error)
+	WriteToFileAtomicallyEncodingError(path string, useAuxiliaryFile bool, enc uint) (bool, error)
+	DoubleValue() float64
+	FloatValue() float32
+	IntValue() int
+	IntegerValue() int
+	LongLongValue() int64
+	BoolValue() bool
+	UppercaseString() *String
+	LowercaseString() *String
+	CapitalizedString() *String
+	LocalizedUppercaseString() *String
+	LocalizedLowercaseString() *String
+	LocalizedCapitalizedString() *String
+	UTF8String() unsafe.Pointer
+	FastestEncoding() uint
+	SmallestEncoding() uint
+	DecomposedStringWithCanonicalMapping() *String
+	PrecomposedStringWithCanonicalMapping() *String
+	DecomposedStringWithCompatibilityMapping() *String
+	PrecomposedStringWithCompatibilityMapping() *String
+	PropertyList() objc.ID
+	PropertyListFromStringsFileFormat() *raw.NSDictionary[objc.ID, objc.ID]
+	CString() string
+	LossyCString() string
+	CStringLength() uint
+	GetCString(bytes_ string)
+	GetCStringMaxLength(bytes_ string, maxLength uint)
+	GetCStringMaxLengthRangeRemainingRange(bytes_ string, maxLength uint, aRange raw.NSRange, leftoverRange *raw.NSRange)
+	WriteToFileAtomically(path string, useAuxiliaryFile bool) bool
+	WriteToURLAtomically(url string, atomically bool) bool
+	GetCharacters(buffer *uint16)
+	VariantFittingPresentationWidth(width int) *String
+	StringByAppendingPathComponent(str string) *String
+	StringByAppendingPathExtension(str string) *String
+	StringsByAppendingPaths(paths *raw.NSArray[*raw.NSString]) *raw.NSArray[*raw.NSString]
+	CompletePathIntoStringCaseSensitiveMatchesIntoArrayFilterTypes(outputName string, flag bool, outputArray *raw.NSArray[*raw.NSString], filterTypes *raw.NSArray[*raw.NSString]) uint
+	GetFileSystemRepresentationMaxLength(cname string, max uint) bool
+	PathComponents() []string
+	IsAbsolutePath() bool
+	LastPathComponent() *String
+	StringByDeletingLastPathComponent() *String
+	PathExtension() *String
+	StringByDeletingPathExtension() *String
+	StringByAbbreviatingWithTildeInPath() *String
+	StringByExpandingTildeInPath() *String
+	StringByStandardizingPath() *String
+	StringByResolvingSymlinksInPath() *String
+	FileSystemRepresentation() unsafe.Pointer
+	StringByAddingPercentEncodingWithAllowedCharacters(allowedCharacters *raw.NSCharacterSet) *String
+	StringByAddingPercentEscapesUsingEncoding(enc uint) *String
+	StringByReplacingPercentEscapesUsingEncoding(enc uint) *String
+	StringByRemovingPercentEncoding() *String
+	LinguisticTagsInRangeSchemeOptionsOrthographyTokenRanges(range_ raw.NSRange, scheme *raw.NSString, options raw.NSLinguisticTaggerOptions, orthography *raw.NSOrthography, tokenRanges *raw.NSArray[*raw.NSValue]) *raw.NSArray[*raw.NSString]
+	EnumerateLinguisticTagsInRangeSchemeOptionsOrthographyUsing(range_ raw.NSRange, scheme *raw.NSString, options raw.NSLinguisticTaggerOptions, orthography *raw.NSOrthography, block objc.Block)
+}
+
+var _ Stringable = (*String)(nil)
 

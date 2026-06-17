@@ -28,3 +28,10 @@ func (x *NNDivisionNode) asNNBinaryArithmeticNode() *mpsneuralnetwork.MPSNNBinar
 
 func (x *NNDivisionNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNBinaryArithmeticNode.MPSNNFilterNode }
 
+// NNDivisionNodeable is the interface implemented by [NNDivisionNode], for mocking and DI.
+type NNDivisionNodeable interface {
+	Unwrap() *raw.MPSNNDivisionNode
+}
+
+var _ NNDivisionNodeable = (*NNDivisionNode)(nil)
+

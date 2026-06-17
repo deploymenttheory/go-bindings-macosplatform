@@ -48,3 +48,62 @@ func (x *MTRChannelClusterChangeChannelByNumberParams) WithServerSideProcessingT
 	return x
 }
 
+// MajorNumber calls the underlying MajorNumber.
+func (x *MTRChannelClusterChangeChannelByNumberParams) MajorNumber() *foundation.NSNumber {
+	return x.inner.MajorNumber()
+}
+
+// SetMajorNumber calls the underlying SetMajorNumber.
+func (x *MTRChannelClusterChangeChannelByNumberParams) SetMajorNumber(majorNumber *foundation.NSNumber) {
+	x.inner.SetMajorNumber(majorNumber)
+}
+
+// MinorNumber calls the underlying MinorNumber.
+func (x *MTRChannelClusterChangeChannelByNumberParams) MinorNumber() *foundation.NSNumber {
+	return x.inner.MinorNumber()
+}
+
+// SetMinorNumber calls the underlying SetMinorNumber.
+func (x *MTRChannelClusterChangeChannelByNumberParams) SetMinorNumber(minorNumber *foundation.NSNumber) {
+	x.inner.SetMinorNumber(minorNumber)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRChannelClusterChangeChannelByNumberParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRChannelClusterChangeChannelByNumberParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRChannelClusterChangeChannelByNumberParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRChannelClusterChangeChannelByNumberParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRChannelClusterChangeChannelByNumberParamsable is the interface implemented by [MTRChannelClusterChangeChannelByNumberParams], for mocking and DI.
+type MTRChannelClusterChangeChannelByNumberParamsable interface {
+	Unwrap() *raw.MTRChannelClusterChangeChannelByNumberParams
+	WithMajorNumber(majorNumber *foundation.NSNumber) *MTRChannelClusterChangeChannelByNumberParams
+	WithMinorNumber(minorNumber *foundation.NSNumber) *MTRChannelClusterChangeChannelByNumberParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRChannelClusterChangeChannelByNumberParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRChannelClusterChangeChannelByNumberParams
+	MajorNumber() *foundation.NSNumber
+	SetMajorNumber(majorNumber *foundation.NSNumber)
+	MinorNumber() *foundation.NSNumber
+	SetMinorNumber(minorNumber *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRChannelClusterChangeChannelByNumberParamsable = (*MTRChannelClusterChangeChannelByNumberParams)(nil)
+

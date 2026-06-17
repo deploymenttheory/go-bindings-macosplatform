@@ -7,6 +7,7 @@ package metalperformanceshadersgraph
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshadersgraph"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -42,5 +43,55 @@ func (x *GraphExecutableSerializationDescriptor) WithMinimumDeploymentTarget(min
 	return x
 }
 
+// Append calls the underlying Append.
+func (x *GraphExecutableSerializationDescriptor) Append() bool {
+	return x.inner.Append()
+}
+
+// SetAppend calls the underlying SetAppend.
+func (x *GraphExecutableSerializationDescriptor) SetAppend(append_ bool) {
+	x.inner.SetAppend(append_)
+}
+
+// DeploymentPlatform calls the underlying DeploymentPlatform.
+func (x *GraphExecutableSerializationDescriptor) DeploymentPlatform() raw.MPSGraphDeploymentPlatform {
+	return x.inner.DeploymentPlatform()
+}
+
+// SetDeploymentPlatform calls the underlying SetDeploymentPlatform.
+func (x *GraphExecutableSerializationDescriptor) SetDeploymentPlatform(deploymentPlatform raw.MPSGraphDeploymentPlatform) {
+	x.inner.SetDeploymentPlatform(deploymentPlatform)
+}
+
+// MinimumDeploymentTarget calls the underlying MinimumDeploymentTarget.
+func (x *GraphExecutableSerializationDescriptor) MinimumDeploymentTarget() string {
+	_r := x.inner.MinimumDeploymentTarget()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetMinimumDeploymentTarget calls the underlying SetMinimumDeploymentTarget.
+func (x *GraphExecutableSerializationDescriptor) SetMinimumDeploymentTarget(minimumDeploymentTarget string) {
+	x.inner.SetMinimumDeploymentTarget(foundation.NSStringStringWithUTF8String(minimumDeploymentTarget))
+}
+
 func (x *GraphExecutableSerializationDescriptor) asGraphObject() *raw.MPSGraphObject { return &x.inner.MPSGraphObject }
+
+// GraphExecutableSerializationDescriptorable is the interface implemented by [GraphExecutableSerializationDescriptor], for mocking and DI.
+type GraphExecutableSerializationDescriptorable interface {
+	Unwrap() *raw.MPSGraphExecutableSerializationDescriptor
+	WithAppend(append_ bool) *GraphExecutableSerializationDescriptor
+	WithDeploymentPlatform(deploymentPlatform raw.MPSGraphDeploymentPlatform) *GraphExecutableSerializationDescriptor
+	WithMinimumDeploymentTarget(minimumDeploymentTarget string) *GraphExecutableSerializationDescriptor
+	Append() bool
+	SetAppend(append_ bool)
+	DeploymentPlatform() raw.MPSGraphDeploymentPlatform
+	SetDeploymentPlatform(deploymentPlatform raw.MPSGraphDeploymentPlatform)
+	MinimumDeploymentTarget() string
+	SetMinimumDeploymentTarget(minimumDeploymentTarget string)
+}
+
+var _ GraphExecutableSerializationDescriptorable = (*GraphExecutableSerializationDescriptor)(nil)
 

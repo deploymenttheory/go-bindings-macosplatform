@@ -6,7 +6,9 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -60,18 +62,386 @@ func (x *Typesetter) WithAttributedString(attributedString *foundation.NSAttribu
 	return x
 }
 
+// SubstituteFontForFont calls the underlying SubstituteFontForFont.
+func (x *Typesetter) SubstituteFontForFont(originalFont *raw.NSFont) *Font {
+	_r := x.inner.SubstituteFontForFont(originalFont)
+	if _r == nil {
+		return nil
+	}
+	return &Font{inner: _r}
+}
+
+// TextTabForGlyphLocationWritingDirectionMaxLocation calls the underlying TextTabForGlyphLocationWritingDirectionMaxLocation.
+func (x *Typesetter) TextTabForGlyphLocationWritingDirectionMaxLocation(glyphLocation float64, direction raw.NSWritingDirection, maxLocation float64) *TextTab {
+	_r := x.inner.TextTabForGlyphLocationWritingDirectionMaxLocation(glyphLocation, direction, maxLocation)
+	if _r == nil {
+		return nil
+	}
+	return &TextTab{inner: _r}
+}
+
+// SetParagraphGlyphRangeSeparatorGlyphRange calls the underlying SetParagraphGlyphRangeSeparatorGlyphRange.
+func (x *Typesetter) SetParagraphGlyphRangeSeparatorGlyphRange(paragraphRange foundation.NSRange, paragraphSeparatorRange foundation.NSRange) {
+	x.inner.SetParagraphGlyphRangeSeparatorGlyphRange(paragraphRange, paragraphSeparatorRange)
+}
+
+// LayoutParagraphAtPoint calls the underlying LayoutParagraphAtPoint.
+func (x *Typesetter) LayoutParagraphAtPoint(lineFragmentOrigin *corefoundation.CGPoint) uint {
+	return x.inner.LayoutParagraphAtPoint(lineFragmentOrigin)
+}
+
+// BeginParagraph calls the underlying BeginParagraph.
+func (x *Typesetter) BeginParagraph() {
+	x.inner.BeginParagraph()
+}
+
+// EndParagraph calls the underlying EndParagraph.
+func (x *Typesetter) EndParagraph() {
+	x.inner.EndParagraph()
+}
+
+// BeginLineWithGlyphAtIndex calls the underlying BeginLineWithGlyphAtIndex.
+func (x *Typesetter) BeginLineWithGlyphAtIndex(glyphIndex uint) {
+	x.inner.BeginLineWithGlyphAtIndex(glyphIndex)
+}
+
+// EndLineWithGlyphRange calls the underlying EndLineWithGlyphRange.
+func (x *Typesetter) EndLineWithGlyphRange(lineGlyphRange foundation.NSRange) {
+	x.inner.EndLineWithGlyphRange(lineGlyphRange)
+}
+
+// LineSpacingAfterGlyphAtIndexWithProposedLineFragmentRect calls the underlying LineSpacingAfterGlyphAtIndexWithProposedLineFragmentRect.
+func (x *Typesetter) LineSpacingAfterGlyphAtIndexWithProposedLineFragmentRect(glyphIndex uint, rect corefoundation.CGRect) float64 {
+	return x.inner.LineSpacingAfterGlyphAtIndexWithProposedLineFragmentRect(glyphIndex, rect)
+}
+
+// ParagraphSpacingBeforeGlyphAtIndexWithProposedLineFragmentRect calls the underlying ParagraphSpacingBeforeGlyphAtIndexWithProposedLineFragmentRect.
+func (x *Typesetter) ParagraphSpacingBeforeGlyphAtIndexWithProposedLineFragmentRect(glyphIndex uint, rect corefoundation.CGRect) float64 {
+	return x.inner.ParagraphSpacingBeforeGlyphAtIndexWithProposedLineFragmentRect(glyphIndex, rect)
+}
+
+// ParagraphSpacingAfterGlyphAtIndexWithProposedLineFragmentRect calls the underlying ParagraphSpacingAfterGlyphAtIndexWithProposedLineFragmentRect.
+func (x *Typesetter) ParagraphSpacingAfterGlyphAtIndexWithProposedLineFragmentRect(glyphIndex uint, rect corefoundation.CGRect) float64 {
+	return x.inner.ParagraphSpacingAfterGlyphAtIndexWithProposedLineFragmentRect(glyphIndex, rect)
+}
+
+// GetLineFragmentRectUsedRectForParagraphSeparatorGlyphRangeAtProposedOrigin calls the underlying GetLineFragmentRectUsedRectForParagraphSeparatorGlyphRangeAtProposedOrigin.
+func (x *Typesetter) GetLineFragmentRectUsedRectForParagraphSeparatorGlyphRangeAtProposedOrigin(lineFragmentRect *corefoundation.CGRect, lineFragmentUsedRect *corefoundation.CGRect, paragraphSeparatorGlyphRange foundation.NSRange, lineOrigin corefoundation.CGPoint) {
+	x.inner.GetLineFragmentRectUsedRectForParagraphSeparatorGlyphRangeAtProposedOrigin(lineFragmentRect, lineFragmentUsedRect, paragraphSeparatorGlyphRange, lineOrigin)
+}
+
+// SetHardInvalidationForGlyphRange calls the underlying SetHardInvalidationForGlyphRange.
+func (x *Typesetter) SetHardInvalidationForGlyphRange(flag bool, glyphRange foundation.NSRange) {
+	x.inner.SetHardInvalidationForGlyphRange(flag, glyphRange)
+}
+
+// LayoutGlyphsInLayoutManagerStartingAtGlyphIndexMaxNumberOfLineFragmentsNextGlyphIndex calls the underlying LayoutGlyphsInLayoutManagerStartingAtGlyphIndexMaxNumberOfLineFragmentsNextGlyphIndex.
+func (x *Typesetter) LayoutGlyphsInLayoutManagerStartingAtGlyphIndexMaxNumberOfLineFragmentsNextGlyphIndex(layoutManager *raw.NSLayoutManager, startGlyphIndex uint, maxNumLines uint, nextGlyph *uint) {
+	x.inner.LayoutGlyphsInLayoutManagerStartingAtGlyphIndexMaxNumberOfLineFragmentsNextGlyphIndex(layoutManager, startGlyphIndex, maxNumLines, nextGlyph)
+}
+
+// LayoutCharactersInRangeForLayoutManagerMaximumNumberOfLineFragments calls the underlying LayoutCharactersInRangeForLayoutManagerMaximumNumberOfLineFragments.
+func (x *Typesetter) LayoutCharactersInRangeForLayoutManagerMaximumNumberOfLineFragments(characterRange foundation.NSRange, layoutManager *raw.NSLayoutManager, maxNumLines uint) foundation.NSRange {
+	return x.inner.LayoutCharactersInRangeForLayoutManagerMaximumNumberOfLineFragments(characterRange, layoutManager, maxNumLines)
+}
+
+// BaselineOffsetInLayoutManagerGlyphIndex calls the underlying BaselineOffsetInLayoutManagerGlyphIndex.
+func (x *Typesetter) BaselineOffsetInLayoutManagerGlyphIndex(layoutMgr *raw.NSLayoutManager, glyphIndex uint) float64 {
+	return x.inner.BaselineOffsetInLayoutManagerGlyphIndex(layoutMgr, glyphIndex)
+}
+
+// UsesFontLeading calls the underlying UsesFontLeading.
+func (x *Typesetter) UsesFontLeading() bool {
+	return x.inner.UsesFontLeading()
+}
+
+// SetUsesFontLeading calls the underlying SetUsesFontLeading.
+func (x *Typesetter) SetUsesFontLeading(usesFontLeading bool) {
+	x.inner.SetUsesFontLeading(usesFontLeading)
+}
+
+// TypesetterBehavior calls the underlying TypesetterBehavior.
+func (x *Typesetter) TypesetterBehavior() raw.NSTypesetterBehavior {
+	return x.inner.TypesetterBehavior()
+}
+
+// SetTypesetterBehavior calls the underlying SetTypesetterBehavior.
+func (x *Typesetter) SetTypesetterBehavior(typesetterBehavior raw.NSTypesetterBehavior) {
+	x.inner.SetTypesetterBehavior(typesetterBehavior)
+}
+
+// HyphenationFactor calls the underlying HyphenationFactor.
+func (x *Typesetter) HyphenationFactor() float32 {
+	return x.inner.HyphenationFactor()
+}
+
+// SetHyphenationFactor calls the underlying SetHyphenationFactor.
+func (x *Typesetter) SetHyphenationFactor(hyphenationFactor float32) {
+	x.inner.SetHyphenationFactor(hyphenationFactor)
+}
+
+// LineFragmentPadding calls the underlying LineFragmentPadding.
+func (x *Typesetter) LineFragmentPadding() float64 {
+	return x.inner.LineFragmentPadding()
+}
+
+// SetLineFragmentPadding calls the underlying SetLineFragmentPadding.
+func (x *Typesetter) SetLineFragmentPadding(lineFragmentPadding float64) {
+	x.inner.SetLineFragmentPadding(lineFragmentPadding)
+}
+
+// BidiProcessingEnabled calls the underlying BidiProcessingEnabled.
+func (x *Typesetter) BidiProcessingEnabled() bool {
+	return x.inner.BidiProcessingEnabled()
+}
+
+// SetBidiProcessingEnabled calls the underlying SetBidiProcessingEnabled.
+func (x *Typesetter) SetBidiProcessingEnabled(bidiProcessingEnabled bool) {
+	x.inner.SetBidiProcessingEnabled(bidiProcessingEnabled)
+}
+
+// AttributedString calls the underlying AttributedString.
+func (x *Typesetter) AttributedString() *foundation.NSAttributedString {
+	return x.inner.AttributedString()
+}
+
+// SetAttributedString calls the underlying SetAttributedString.
+func (x *Typesetter) SetAttributedString(attributedString *foundation.NSAttributedString) {
+	x.inner.SetAttributedString(attributedString)
+}
+
+// ParagraphGlyphRange calls the underlying ParagraphGlyphRange.
+func (x *Typesetter) ParagraphGlyphRange() foundation.NSRange {
+	return x.inner.ParagraphGlyphRange()
+}
+
+// ParagraphSeparatorGlyphRange calls the underlying ParagraphSeparatorGlyphRange.
+func (x *Typesetter) ParagraphSeparatorGlyphRange() foundation.NSRange {
+	return x.inner.ParagraphSeparatorGlyphRange()
+}
+
+// ParagraphCharacterRange calls the underlying ParagraphCharacterRange.
+func (x *Typesetter) ParagraphCharacterRange() foundation.NSRange {
+	return x.inner.ParagraphCharacterRange()
+}
+
+// ParagraphSeparatorCharacterRange calls the underlying ParagraphSeparatorCharacterRange.
+func (x *Typesetter) ParagraphSeparatorCharacterRange() foundation.NSRange {
+	return x.inner.ParagraphSeparatorCharacterRange()
+}
+
+// AttributesForExtraLineFragment calls the underlying AttributesForExtraLineFragment.
+func (x *Typesetter) AttributesForExtraLineFragment() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.AttributesForExtraLineFragment()
+}
+
+// LayoutManager calls the underlying LayoutManager.
+func (x *Typesetter) LayoutManager() *LayoutManager {
+	_r := x.inner.LayoutManager()
+	if _r == nil {
+		return nil
+	}
+	return &LayoutManager{inner: _r}
+}
+
 // TextContainers returns the collection as a Go slice.
 func (x *Typesetter) TextContainers() []*raw.NSTextContainer {
 	arr := x.inner.TextContainers()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSTextContainer, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSTextContainer {
+		return raw.NSTextContainerFromID(purego.Retain(_id))
+	})
+}
+
+// CurrentTextContainer calls the underlying CurrentTextContainer.
+func (x *Typesetter) CurrentTextContainer() *TextContainer {
+	_r := x.inner.CurrentTextContainer()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &TextContainer{inner: _r}
+}
+
+// CurrentParagraphStyle calls the underlying CurrentParagraphStyle.
+func (x *Typesetter) CurrentParagraphStyle() *ParagraphStyle {
+	_r := x.inner.CurrentParagraphStyle()
+	if _r == nil {
+		return nil
+	}
+	return &ParagraphStyle{inner: _r}
+}
+
+// WillSetLineFragmentRectForGlyphRangeUsedRectBaselineOffset calls the underlying WillSetLineFragmentRectForGlyphRangeUsedRectBaselineOffset.
+func (x *Typesetter) WillSetLineFragmentRectForGlyphRangeUsedRectBaselineOffset(lineRect *corefoundation.CGRect, glyphRange foundation.NSRange, usedRect *corefoundation.CGRect, baselineOffset *float64) {
+	x.inner.WillSetLineFragmentRectForGlyphRangeUsedRectBaselineOffset(lineRect, glyphRange, usedRect, baselineOffset)
+}
+
+// ShouldBreakLineByWordBeforeCharacterAtIndex calls the underlying ShouldBreakLineByWordBeforeCharacterAtIndex.
+func (x *Typesetter) ShouldBreakLineByWordBeforeCharacterAtIndex(charIndex uint) bool {
+	return x.inner.ShouldBreakLineByWordBeforeCharacterAtIndex(charIndex)
+}
+
+// ShouldBreakLineByHyphenatingBeforeCharacterAtIndex calls the underlying ShouldBreakLineByHyphenatingBeforeCharacterAtIndex.
+func (x *Typesetter) ShouldBreakLineByHyphenatingBeforeCharacterAtIndex(charIndex uint) bool {
+	return x.inner.ShouldBreakLineByHyphenatingBeforeCharacterAtIndex(charIndex)
+}
+
+// HyphenationFactorForGlyphAtIndex calls the underlying HyphenationFactorForGlyphAtIndex.
+func (x *Typesetter) HyphenationFactorForGlyphAtIndex(glyphIndex uint) float32 {
+	return x.inner.HyphenationFactorForGlyphAtIndex(glyphIndex)
+}
+
+// HyphenCharacterForGlyphAtIndex calls the underlying HyphenCharacterForGlyphAtIndex.
+func (x *Typesetter) HyphenCharacterForGlyphAtIndex(glyphIndex uint) uint {
+	return x.inner.HyphenCharacterForGlyphAtIndex(glyphIndex)
+}
+
+// BoundingBoxForControlGlyphAtIndexForTextContainerProposedLineFragmentGlyphPositionCharacterIndex calls the underlying BoundingBoxForControlGlyphAtIndexForTextContainerProposedLineFragmentGlyphPositionCharacterIndex.
+func (x *Typesetter) BoundingBoxForControlGlyphAtIndexForTextContainerProposedLineFragmentGlyphPositionCharacterIndex(glyphIndex uint, textContainer *raw.NSTextContainer, proposedRect corefoundation.CGRect, glyphPosition corefoundation.CGPoint, charIndex uint) corefoundation.CGRect {
+	return x.inner.BoundingBoxForControlGlyphAtIndexForTextContainerProposedLineFragmentGlyphPositionCharacterIndex(glyphIndex, textContainer, proposedRect, glyphPosition, charIndex)
+}
+
+// CharacterRangeForGlyphRangeActualGlyphRange calls the underlying CharacterRangeForGlyphRangeActualGlyphRange.
+func (x *Typesetter) CharacterRangeForGlyphRangeActualGlyphRange(glyphRange foundation.NSRange, actualGlyphRange *foundation.NSRange) foundation.NSRange {
+	return x.inner.CharacterRangeForGlyphRangeActualGlyphRange(glyphRange, actualGlyphRange)
+}
+
+// GlyphRangeForCharacterRangeActualCharacterRange calls the underlying GlyphRangeForCharacterRangeActualCharacterRange.
+func (x *Typesetter) GlyphRangeForCharacterRangeActualCharacterRange(charRange foundation.NSRange, actualCharRange *foundation.NSRange) foundation.NSRange {
+	return x.inner.GlyphRangeForCharacterRangeActualCharacterRange(charRange, actualCharRange)
+}
+
+// GetLineFragmentRectUsedRectRemainingRectForStartingGlyphAtIndexProposedRectLineSpacingParagraphSpacingBeforeParagraphSpacingAfter calls the underlying GetLineFragmentRectUsedRectRemainingRectForStartingGlyphAtIndexProposedRectLineSpacingParagraphSpacingBeforeParagraphSpacingAfter.
+func (x *Typesetter) GetLineFragmentRectUsedRectRemainingRectForStartingGlyphAtIndexProposedRectLineSpacingParagraphSpacingBeforeParagraphSpacingAfter(lineFragmentRect *corefoundation.CGRect, lineFragmentUsedRect *corefoundation.CGRect, remainingRect *corefoundation.CGRect, startingGlyphIndex uint, proposedRect corefoundation.CGRect, lineSpacing float64, paragraphSpacingBefore float64, paragraphSpacingAfter float64) {
+	x.inner.GetLineFragmentRectUsedRectRemainingRectForStartingGlyphAtIndexProposedRectLineSpacingParagraphSpacingBeforeParagraphSpacingAfter(lineFragmentRect, lineFragmentUsedRect, remainingRect, startingGlyphIndex, proposedRect, lineSpacing, paragraphSpacingBefore, paragraphSpacingAfter)
+}
+
+// SetLineFragmentRectForGlyphRangeUsedRectBaselineOffset calls the underlying SetLineFragmentRectForGlyphRangeUsedRectBaselineOffset.
+func (x *Typesetter) SetLineFragmentRectForGlyphRangeUsedRectBaselineOffset(fragmentRect corefoundation.CGRect, glyphRange foundation.NSRange, usedRect corefoundation.CGRect, baselineOffset float64) {
+	x.inner.SetLineFragmentRectForGlyphRangeUsedRectBaselineOffset(fragmentRect, glyphRange, usedRect, baselineOffset)
+}
+
+// SetNotShownAttributeForGlyphRange calls the underlying SetNotShownAttributeForGlyphRange.
+func (x *Typesetter) SetNotShownAttributeForGlyphRange(flag bool, glyphRange foundation.NSRange) {
+	x.inner.SetNotShownAttributeForGlyphRange(flag, glyphRange)
+}
+
+// SetDrawsOutsideLineFragmentForGlyphRange calls the underlying SetDrawsOutsideLineFragmentForGlyphRange.
+func (x *Typesetter) SetDrawsOutsideLineFragmentForGlyphRange(flag bool, glyphRange foundation.NSRange) {
+	x.inner.SetDrawsOutsideLineFragmentForGlyphRange(flag, glyphRange)
+}
+
+// SetLocationWithAdvancementsForStartOfGlyphRange calls the underlying SetLocationWithAdvancementsForStartOfGlyphRange.
+func (x *Typesetter) SetLocationWithAdvancementsForStartOfGlyphRange(location corefoundation.CGPoint, advancements *float64, glyphRange foundation.NSRange) {
+	x.inner.SetLocationWithAdvancementsForStartOfGlyphRange(location, advancements, glyphRange)
+}
+
+// SetAttachmentSizeForGlyphRange calls the underlying SetAttachmentSizeForGlyphRange.
+func (x *Typesetter) SetAttachmentSizeForGlyphRange(attachmentSize corefoundation.CGSize, glyphRange foundation.NSRange) {
+	x.inner.SetAttachmentSizeForGlyphRange(attachmentSize, glyphRange)
+}
+
+// SetBidiLevelsForGlyphRange calls the underlying SetBidiLevelsForGlyphRange.
+func (x *Typesetter) SetBidiLevelsForGlyphRange(levels *uint8, glyphRange foundation.NSRange) {
+	x.inner.SetBidiLevelsForGlyphRange(levels, glyphRange)
+}
+
+// ActionForControlCharacterAtIndex calls the underlying ActionForControlCharacterAtIndex.
+func (x *Typesetter) ActionForControlCharacterAtIndex(charIndex uint) raw.NSTypesetterControlCharacterAction {
+	return x.inner.ActionForControlCharacterAtIndex(charIndex)
+}
+
+// GetGlyphsInRangeGlyphsCharacterIndexesGlyphInscriptionsElasticBitsBidiLevels calls the underlying GetGlyphsInRangeGlyphsCharacterIndexesGlyphInscriptionsElasticBitsBidiLevels.
+func (x *Typesetter) GetGlyphsInRangeGlyphsCharacterIndexesGlyphInscriptionsElasticBitsBidiLevels(glyphsRange foundation.NSRange, glyphBuffer *uint, charIndexBuffer *uint, inscribeBuffer *raw.NSGlyphInscription, elasticBuffer *bool, bidiLevelBuffer *uint8) uint {
+	return x.inner.GetGlyphsInRangeGlyphsCharacterIndexesGlyphInscriptionsElasticBitsBidiLevels(glyphsRange, glyphBuffer, charIndexBuffer, inscribeBuffer, elasticBuffer, bidiLevelBuffer)
+}
+
+// SubstituteGlyphsInRangeWithGlyphs calls the underlying SubstituteGlyphsInRangeWithGlyphs.
+func (x *Typesetter) SubstituteGlyphsInRangeWithGlyphs(glyphRange foundation.NSRange, glyphs *uint) {
+	x.inner.SubstituteGlyphsInRangeWithGlyphs(glyphRange, glyphs)
+}
+
+// InsertGlyphAtGlyphIndexCharacterIndex calls the underlying InsertGlyphAtGlyphIndexCharacterIndex.
+func (x *Typesetter) InsertGlyphAtGlyphIndexCharacterIndex(glyph uint, glyphIndex uint, characterIndex uint) {
+	x.inner.InsertGlyphAtGlyphIndexCharacterIndex(glyph, glyphIndex, characterIndex)
+}
+
+// DeleteGlyphsInRange calls the underlying DeleteGlyphsInRange.
+func (x *Typesetter) DeleteGlyphsInRange(glyphRange foundation.NSRange) {
+	x.inner.DeleteGlyphsInRange(glyphRange)
 }
 
 func (x *Typesetter) asTypesetter() *raw.NSTypesetter { return x.inner }
+
+// Typesetterable is the interface implemented by [Typesetter], for mocking and DI.
+type Typesetterable interface {
+	Unwrap() *raw.NSTypesetter
+	WithUsesFontLeading(usesFontLeading bool) *Typesetter
+	WithTypesetterBehavior(typesetterBehavior raw.NSTypesetterBehavior) *Typesetter
+	WithHyphenationFactor(hyphenationFactor float32) *Typesetter
+	WithLineFragmentPadding(lineFragmentPadding float64) *Typesetter
+	WithBidiProcessingEnabled(bidiProcessingEnabled bool) *Typesetter
+	WithAttributedString(attributedString *foundation.NSAttributedString) *Typesetter
+	SubstituteFontForFont(originalFont *raw.NSFont) *Font
+	TextTabForGlyphLocationWritingDirectionMaxLocation(glyphLocation float64, direction raw.NSWritingDirection, maxLocation float64) *TextTab
+	SetParagraphGlyphRangeSeparatorGlyphRange(paragraphRange foundation.NSRange, paragraphSeparatorRange foundation.NSRange)
+	LayoutParagraphAtPoint(lineFragmentOrigin *corefoundation.CGPoint) uint
+	BeginParagraph()
+	EndParagraph()
+	BeginLineWithGlyphAtIndex(glyphIndex uint)
+	EndLineWithGlyphRange(lineGlyphRange foundation.NSRange)
+	LineSpacingAfterGlyphAtIndexWithProposedLineFragmentRect(glyphIndex uint, rect corefoundation.CGRect) float64
+	ParagraphSpacingBeforeGlyphAtIndexWithProposedLineFragmentRect(glyphIndex uint, rect corefoundation.CGRect) float64
+	ParagraphSpacingAfterGlyphAtIndexWithProposedLineFragmentRect(glyphIndex uint, rect corefoundation.CGRect) float64
+	GetLineFragmentRectUsedRectForParagraphSeparatorGlyphRangeAtProposedOrigin(lineFragmentRect *corefoundation.CGRect, lineFragmentUsedRect *corefoundation.CGRect, paragraphSeparatorGlyphRange foundation.NSRange, lineOrigin corefoundation.CGPoint)
+	SetHardInvalidationForGlyphRange(flag bool, glyphRange foundation.NSRange)
+	LayoutGlyphsInLayoutManagerStartingAtGlyphIndexMaxNumberOfLineFragmentsNextGlyphIndex(layoutManager *raw.NSLayoutManager, startGlyphIndex uint, maxNumLines uint, nextGlyph *uint)
+	LayoutCharactersInRangeForLayoutManagerMaximumNumberOfLineFragments(characterRange foundation.NSRange, layoutManager *raw.NSLayoutManager, maxNumLines uint) foundation.NSRange
+	BaselineOffsetInLayoutManagerGlyphIndex(layoutMgr *raw.NSLayoutManager, glyphIndex uint) float64
+	UsesFontLeading() bool
+	SetUsesFontLeading(usesFontLeading bool)
+	TypesetterBehavior() raw.NSTypesetterBehavior
+	SetTypesetterBehavior(typesetterBehavior raw.NSTypesetterBehavior)
+	HyphenationFactor() float32
+	SetHyphenationFactor(hyphenationFactor float32)
+	LineFragmentPadding() float64
+	SetLineFragmentPadding(lineFragmentPadding float64)
+	BidiProcessingEnabled() bool
+	SetBidiProcessingEnabled(bidiProcessingEnabled bool)
+	AttributedString() *foundation.NSAttributedString
+	SetAttributedString(attributedString *foundation.NSAttributedString)
+	ParagraphGlyphRange() foundation.NSRange
+	ParagraphSeparatorGlyphRange() foundation.NSRange
+	ParagraphCharacterRange() foundation.NSRange
+	ParagraphSeparatorCharacterRange() foundation.NSRange
+	AttributesForExtraLineFragment() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	LayoutManager() *LayoutManager
+	TextContainers() []*raw.NSTextContainer
+	CurrentTextContainer() *TextContainer
+	CurrentParagraphStyle() *ParagraphStyle
+	WillSetLineFragmentRectForGlyphRangeUsedRectBaselineOffset(lineRect *corefoundation.CGRect, glyphRange foundation.NSRange, usedRect *corefoundation.CGRect, baselineOffset *float64)
+	ShouldBreakLineByWordBeforeCharacterAtIndex(charIndex uint) bool
+	ShouldBreakLineByHyphenatingBeforeCharacterAtIndex(charIndex uint) bool
+	HyphenationFactorForGlyphAtIndex(glyphIndex uint) float32
+	HyphenCharacterForGlyphAtIndex(glyphIndex uint) uint
+	BoundingBoxForControlGlyphAtIndexForTextContainerProposedLineFragmentGlyphPositionCharacterIndex(glyphIndex uint, textContainer *raw.NSTextContainer, proposedRect corefoundation.CGRect, glyphPosition corefoundation.CGPoint, charIndex uint) corefoundation.CGRect
+	CharacterRangeForGlyphRangeActualGlyphRange(glyphRange foundation.NSRange, actualGlyphRange *foundation.NSRange) foundation.NSRange
+	GlyphRangeForCharacterRangeActualCharacterRange(charRange foundation.NSRange, actualCharRange *foundation.NSRange) foundation.NSRange
+	GetLineFragmentRectUsedRectRemainingRectForStartingGlyphAtIndexProposedRectLineSpacingParagraphSpacingBeforeParagraphSpacingAfter(lineFragmentRect *corefoundation.CGRect, lineFragmentUsedRect *corefoundation.CGRect, remainingRect *corefoundation.CGRect, startingGlyphIndex uint, proposedRect corefoundation.CGRect, lineSpacing float64, paragraphSpacingBefore float64, paragraphSpacingAfter float64)
+	SetLineFragmentRectForGlyphRangeUsedRectBaselineOffset(fragmentRect corefoundation.CGRect, glyphRange foundation.NSRange, usedRect corefoundation.CGRect, baselineOffset float64)
+	SetNotShownAttributeForGlyphRange(flag bool, glyphRange foundation.NSRange)
+	SetDrawsOutsideLineFragmentForGlyphRange(flag bool, glyphRange foundation.NSRange)
+	SetLocationWithAdvancementsForStartOfGlyphRange(location corefoundation.CGPoint, advancements *float64, glyphRange foundation.NSRange)
+	SetAttachmentSizeForGlyphRange(attachmentSize corefoundation.CGSize, glyphRange foundation.NSRange)
+	SetBidiLevelsForGlyphRange(levels *uint8, glyphRange foundation.NSRange)
+	ActionForControlCharacterAtIndex(charIndex uint) raw.NSTypesetterControlCharacterAction
+	GetGlyphsInRangeGlyphsCharacterIndexesGlyphInscriptionsElasticBitsBidiLevels(glyphsRange foundation.NSRange, glyphBuffer *uint, charIndexBuffer *uint, inscribeBuffer *raw.NSGlyphInscription, elasticBuffer *bool, bidiLevelBuffer *uint8) uint
+	SubstituteGlyphsInRangeWithGlyphs(glyphRange foundation.NSRange, glyphs *uint)
+	InsertGlyphAtGlyphIndexCharacterIndex(glyph uint, glyphIndex uint, characterIndex uint)
+	DeleteGlyphsInRange(glyphRange foundation.NSRange)
+}
+
+var _ Typesetterable = (*Typesetter)(nil)
 

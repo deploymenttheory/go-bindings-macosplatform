@@ -6,7 +6,9 @@ package coremotion
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremotion"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Pedometer wraps [raw.CMPedometer] with a fluent Go API.
@@ -22,4 +24,29 @@ func NewPedometer() *Pedometer {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CMPedometer")), objc.RegisterName("new"))
 	return &Pedometer{inner: raw.CMPedometerFromID(_id)}
 }
+
+// QueryPedometerDataFromDateToDateWithHandler calls the underlying QueryPedometerDataFromDateToDateWithHandler.
+func (x *Pedometer) QueryPedometerDataFromDateToDateWithHandler(start *foundation.NSDate, end *foundation.NSDate, handler func(*raw.CMPedometerData, unsafe.Pointer)) {
+	x.inner.QueryPedometerDataFromDateToDateWithHandler(start, end, handler)
+}
+
+// StartPedometerUpdatesFromDateWithHandler calls the underlying StartPedometerUpdatesFromDateWithHandler.
+func (x *Pedometer) StartPedometerUpdatesFromDateWithHandler(start *foundation.NSDate, handler func(*raw.CMPedometerData, unsafe.Pointer)) {
+	x.inner.StartPedometerUpdatesFromDateWithHandler(start, handler)
+}
+
+// StopPedometerUpdates calls the underlying StopPedometerUpdates.
+func (x *Pedometer) StopPedometerUpdates() {
+	x.inner.StopPedometerUpdates()
+}
+
+// Pedometerable is the interface implemented by [Pedometer], for mocking and DI.
+type Pedometerable interface {
+	Unwrap() *raw.CMPedometer
+	QueryPedometerDataFromDateToDateWithHandler(start *foundation.NSDate, end *foundation.NSDate, handler func(*raw.CMPedometerData, unsafe.Pointer))
+	StartPedometerUpdatesFromDateWithHandler(start *foundation.NSDate, handler func(*raw.CMPedometerData, unsafe.Pointer))
+	StopPedometerUpdates()
+}
+
+var _ Pedometerable = (*Pedometer)(nil)
 

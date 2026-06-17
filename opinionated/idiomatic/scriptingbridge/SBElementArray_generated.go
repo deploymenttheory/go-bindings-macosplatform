@@ -5,6 +5,7 @@
 package scriptingbridge
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scriptingbridge"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +23,47 @@ func NewElementArray() *ElementArray {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SBElementArray")), objc.RegisterName("new"))
 	return &ElementArray{inner: raw.SBElementArrayFromID[objc.ID](_id)}
 }
+
+// ObjectWithName calls the underlying ObjectWithName.
+func (x *ElementArray) ObjectWithName(name string) objc.ID {
+	return x.inner.ObjectWithName(foundation.NSStringStringWithUTF8String(name))
+}
+
+// ObjectWithID calls the underlying ObjectWithID.
+func (x *ElementArray) ObjectWithID(identifier objc.ID) objc.ID {
+	return x.inner.ObjectWithID(identifier)
+}
+
+// ObjectAtLocation calls the underlying ObjectAtLocation.
+func (x *ElementArray) ObjectAtLocation(location objc.ID) objc.ID {
+	return x.inner.ObjectAtLocation(location)
+}
+
+// ArrayByApplyingSelector calls the underlying ArrayByApplyingSelector.
+func (x *ElementArray) ArrayByApplyingSelector(selector objc.SEL) *foundation.NSArray[objc.ID] {
+	return x.inner.ArrayByApplyingSelector(selector)
+}
+
+// ArrayByApplyingSelectorWithObject calls the underlying ArrayByApplyingSelectorWithObject.
+func (x *ElementArray) ArrayByApplyingSelectorWithObject(aSelector objc.SEL, argument objc.ID) *foundation.NSArray[objc.ID] {
+	return x.inner.ArrayByApplyingSelectorWithObject(aSelector, argument)
+}
+
+// Get calls the underlying Get.
+func (x *ElementArray) Get() *foundation.NSArray[objc.ID] {
+	return x.inner.Get()
+}
+
+// ElementArrayable is the interface implemented by [ElementArray], for mocking and DI.
+type ElementArrayable interface {
+	Unwrap() *raw.SBElementArray[objc.ID]
+	ObjectWithName(name string) objc.ID
+	ObjectWithID(identifier objc.ID) objc.ID
+	ObjectAtLocation(location objc.ID) objc.ID
+	ArrayByApplyingSelector(selector objc.SEL) *foundation.NSArray[objc.ID]
+	ArrayByApplyingSelectorWithObject(aSelector objc.SEL, argument objc.ID) *foundation.NSArray[objc.ID]
+	Get() *foundation.NSArray[objc.ID]
+}
+
+var _ ElementArrayable = (*ElementArray)(nil)
 

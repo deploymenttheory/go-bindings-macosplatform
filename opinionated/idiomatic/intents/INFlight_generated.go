@@ -7,6 +7,7 @@ package intents
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,4 +25,71 @@ func NewFlightWithAirlineFlightNumberBoardingTimeFlightDurationDepartureAirportG
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAirline:flightNumber:boardingTime:flightDuration:departureAirportGate:arrivalAirportGate:"), airline.Ptr(), foundation.NSStringStringWithUTF8String(flightNumber).Ptr(), boardingTime.Ptr(), flightDuration.Ptr(), departureAirportGate.Ptr(), arrivalAirportGate.Ptr())
 	return &Flight{inner: raw.INFlightFromID(_id)}
 }
+
+// Airline calls the underlying Airline.
+func (x *Flight) Airline() *Airline {
+	_r := x.inner.Airline()
+	if _r == nil {
+		return nil
+	}
+	return &Airline{inner: _r}
+}
+
+// FlightNumber calls the underlying FlightNumber.
+func (x *Flight) FlightNumber() string {
+	_r := x.inner.FlightNumber()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// BoardingTime calls the underlying BoardingTime.
+func (x *Flight) BoardingTime() *DateComponentsRange {
+	_r := x.inner.BoardingTime()
+	if _r == nil {
+		return nil
+	}
+	return &DateComponentsRange{inner: _r}
+}
+
+// FlightDuration calls the underlying FlightDuration.
+func (x *Flight) FlightDuration() *DateComponentsRange {
+	_r := x.inner.FlightDuration()
+	if _r == nil {
+		return nil
+	}
+	return &DateComponentsRange{inner: _r}
+}
+
+// DepartureAirportGate calls the underlying DepartureAirportGate.
+func (x *Flight) DepartureAirportGate() *AirportGate {
+	_r := x.inner.DepartureAirportGate()
+	if _r == nil {
+		return nil
+	}
+	return &AirportGate{inner: _r}
+}
+
+// ArrivalAirportGate calls the underlying ArrivalAirportGate.
+func (x *Flight) ArrivalAirportGate() *AirportGate {
+	_r := x.inner.ArrivalAirportGate()
+	if _r == nil {
+		return nil
+	}
+	return &AirportGate{inner: _r}
+}
+
+// Flightable is the interface implemented by [Flight], for mocking and DI.
+type Flightable interface {
+	Unwrap() *raw.INFlight
+	Airline() *Airline
+	FlightNumber() string
+	BoardingTime() *DateComponentsRange
+	FlightDuration() *DateComponentsRange
+	DepartureAirportGate() *AirportGate
+	ArrivalAirportGate() *AirportGate
+}
+
+var _ Flightable = (*Flight)(nil)
 

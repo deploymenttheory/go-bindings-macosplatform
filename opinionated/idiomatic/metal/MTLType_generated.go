@@ -23,5 +23,18 @@ func NewType() *Type {
 	return &Type{inner: raw.MTLTypeFromID(_id)}
 }
 
+// DataType calls the underlying DataType.
+func (x *Type) DataType() raw.MTLDataType {
+	return x.inner.DataType()
+}
+
 func (x *Type) asType() *raw.MTLType { return x.inner }
+
+// Typeable is the interface implemented by [Type], for mocking and DI.
+type Typeable interface {
+	Unwrap() *raw.MTLType
+	DataType() raw.MTLDataType
+}
+
+var _ Typeable = (*Type)(nil)
 

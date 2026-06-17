@@ -36,3 +36,36 @@ func (x *MTRBasicInformationClusterProductAppearanceStruct) WithPrimaryColor(pri
 	return x
 }
 
+// Finish calls the underlying Finish.
+func (x *MTRBasicInformationClusterProductAppearanceStruct) Finish() *foundation.NSNumber {
+	return x.inner.Finish()
+}
+
+// SetFinish calls the underlying SetFinish.
+func (x *MTRBasicInformationClusterProductAppearanceStruct) SetFinish(finish *foundation.NSNumber) {
+	x.inner.SetFinish(finish)
+}
+
+// PrimaryColor calls the underlying PrimaryColor.
+func (x *MTRBasicInformationClusterProductAppearanceStruct) PrimaryColor() *foundation.NSNumber {
+	return x.inner.PrimaryColor()
+}
+
+// SetPrimaryColor calls the underlying SetPrimaryColor.
+func (x *MTRBasicInformationClusterProductAppearanceStruct) SetPrimaryColor(primaryColor *foundation.NSNumber) {
+	x.inner.SetPrimaryColor(primaryColor)
+}
+
+// MTRBasicInformationClusterProductAppearanceStructable is the interface implemented by [MTRBasicInformationClusterProductAppearanceStruct], for mocking and DI.
+type MTRBasicInformationClusterProductAppearanceStructable interface {
+	Unwrap() *raw.MTRBasicInformationClusterProductAppearanceStruct
+	WithFinish(finish *foundation.NSNumber) *MTRBasicInformationClusterProductAppearanceStruct
+	WithPrimaryColor(primaryColor *foundation.NSNumber) *MTRBasicInformationClusterProductAppearanceStruct
+	Finish() *foundation.NSNumber
+	SetFinish(finish *foundation.NSNumber)
+	PrimaryColor() *foundation.NSNumber
+	SetPrimaryColor(primaryColor *foundation.NSNumber)
+}
+
+var _ MTRBasicInformationClusterProductAppearanceStructable = (*MTRBasicInformationClusterProductAppearanceStruct)(nil)
+

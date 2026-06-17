@@ -23,3 +23,10 @@ func NewHapticFeedbackManager() *HapticFeedbackManager {
 	return &HapticFeedbackManager{inner: raw.NSHapticFeedbackManagerFromID(_id)}
 }
 
+// HapticFeedbackManagerable is the interface implemented by [HapticFeedbackManager], for mocking and DI.
+type HapticFeedbackManagerable interface {
+	Unwrap() *raw.NSHapticFeedbackManager
+}
+
+var _ HapticFeedbackManagerable = (*HapticFeedbackManager)(nil)
+

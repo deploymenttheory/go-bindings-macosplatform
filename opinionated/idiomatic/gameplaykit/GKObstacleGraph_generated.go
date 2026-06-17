@@ -7,6 +7,7 @@ package gameplaykit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -32,18 +33,96 @@ func NewObstacleGraphWithObstaclesBufferRadiusNodeClass(obstacles *foundation.NS
 	return &ObstacleGraph{inner: raw.GKObstacleGraphFromID[objc.ID](_id)}
 }
 
+// ConnectNodeUsingObstacles calls the underlying ConnectNodeUsingObstacles.
+func (x *ObstacleGraph) ConnectNodeUsingObstacles(node objc.ID) {
+	x.inner.ConnectNodeUsingObstacles(node)
+}
+
+// ConnectNodeUsingObstaclesIgnoringObstacles calls the underlying ConnectNodeUsingObstaclesIgnoringObstacles.
+func (x *ObstacleGraph) ConnectNodeUsingObstaclesIgnoringObstacles(node objc.ID, obstaclesToIgnore *foundation.NSArray[*raw.GKPolygonObstacle]) {
+	x.inner.ConnectNodeUsingObstaclesIgnoringObstacles(node, obstaclesToIgnore)
+}
+
+// ConnectNodeUsingObstaclesIgnoringBufferRadiusOfObstacles calls the underlying ConnectNodeUsingObstaclesIgnoringBufferRadiusOfObstacles.
+func (x *ObstacleGraph) ConnectNodeUsingObstaclesIgnoringBufferRadiusOfObstacles(node objc.ID, obstaclesBufferRadiusToIgnore *foundation.NSArray[*raw.GKPolygonObstacle]) {
+	x.inner.ConnectNodeUsingObstaclesIgnoringBufferRadiusOfObstacles(node, obstaclesBufferRadiusToIgnore)
+}
+
+// AddObstacles calls the underlying AddObstacles.
+func (x *ObstacleGraph) AddObstacles(obstacles *foundation.NSArray[*raw.GKPolygonObstacle]) {
+	x.inner.AddObstacles(obstacles)
+}
+
+// RemoveObstacles calls the underlying RemoveObstacles.
+func (x *ObstacleGraph) RemoveObstacles(obstacles *foundation.NSArray[*raw.GKPolygonObstacle]) {
+	x.inner.RemoveObstacles(obstacles)
+}
+
+// RemoveAllObstacles calls the underlying RemoveAllObstacles.
+func (x *ObstacleGraph) RemoveAllObstacles() {
+	x.inner.RemoveAllObstacles()
+}
+
+// NodesForObstacle calls the underlying NodesForObstacle.
+func (x *ObstacleGraph) NodesForObstacle(obstacle *raw.GKPolygonObstacle) *foundation.NSArray[objc.ID] {
+	return x.inner.NodesForObstacle(obstacle)
+}
+
+// LockConnectionFromNodeToNode calls the underlying LockConnectionFromNodeToNode.
+func (x *ObstacleGraph) LockConnectionFromNodeToNode(startNode objc.ID, endNode objc.ID) {
+	x.inner.LockConnectionFromNodeToNode(startNode, endNode)
+}
+
+// UnlockConnectionFromNodeToNode calls the underlying UnlockConnectionFromNodeToNode.
+func (x *ObstacleGraph) UnlockConnectionFromNodeToNode(startNode objc.ID, endNode objc.ID) {
+	x.inner.UnlockConnectionFromNodeToNode(startNode, endNode)
+}
+
+// IsConnectionLockedFromNodeToNode calls the underlying IsConnectionLockedFromNodeToNode.
+func (x *ObstacleGraph) IsConnectionLockedFromNodeToNode(startNode objc.ID, endNode objc.ID) bool {
+	return x.inner.IsConnectionLockedFromNodeToNode(startNode, endNode)
+}
+
+// ClassForGenericArgumentAtIndex calls the underlying ClassForGenericArgumentAtIndex.
+func (x *ObstacleGraph) ClassForGenericArgumentAtIndex(index uint) objc.Class {
+	return x.inner.ClassForGenericArgumentAtIndex(index)
+}
+
 // Obstacles returns the collection as a Go slice.
 func (x *ObstacleGraph) Obstacles() []*raw.GKPolygonObstacle {
 	arr := x.inner.Obstacles()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.GKPolygonObstacle, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.GKPolygonObstacle {
+		return raw.GKPolygonObstacleFromID(purego.Retain(_id))
+	})
+}
+
+// BufferRadius calls the underlying BufferRadius.
+func (x *ObstacleGraph) BufferRadius() float32 {
+	return x.inner.BufferRadius()
 }
 
 func (x *ObstacleGraph) asGraph() *raw.GKGraph { return &x.inner.GKGraph }
+
+// ObstacleGraphable is the interface implemented by [ObstacleGraph], for mocking and DI.
+type ObstacleGraphable interface {
+	Unwrap() *raw.GKObstacleGraph[objc.ID]
+	ConnectNodeUsingObstacles(node objc.ID)
+	ConnectNodeUsingObstaclesIgnoringObstacles(node objc.ID, obstaclesToIgnore *foundation.NSArray[*raw.GKPolygonObstacle])
+	ConnectNodeUsingObstaclesIgnoringBufferRadiusOfObstacles(node objc.ID, obstaclesBufferRadiusToIgnore *foundation.NSArray[*raw.GKPolygonObstacle])
+	AddObstacles(obstacles *foundation.NSArray[*raw.GKPolygonObstacle])
+	RemoveObstacles(obstacles *foundation.NSArray[*raw.GKPolygonObstacle])
+	RemoveAllObstacles()
+	NodesForObstacle(obstacle *raw.GKPolygonObstacle) *foundation.NSArray[objc.ID]
+	LockConnectionFromNodeToNode(startNode objc.ID, endNode objc.ID)
+	UnlockConnectionFromNodeToNode(startNode objc.ID, endNode objc.ID)
+	IsConnectionLockedFromNodeToNode(startNode objc.ID, endNode objc.ID) bool
+	ClassForGenericArgumentAtIndex(index uint) objc.Class
+	Obstacles() []*raw.GKPolygonObstacle
+	BufferRadius() float32
+}
+
+var _ ObstacleGraphable = (*ObstacleGraph)(nil)
 

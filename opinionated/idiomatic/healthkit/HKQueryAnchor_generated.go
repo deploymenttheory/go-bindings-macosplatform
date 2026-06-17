@@ -23,3 +23,10 @@ func NewQueryAnchor() *QueryAnchor {
 	return &QueryAnchor{inner: raw.HKQueryAnchorFromID(_id)}
 }
 
+// QueryAnchorable is the interface implemented by [QueryAnchor], for mocking and DI.
+type QueryAnchorable interface {
+	Unwrap() *raw.HKQueryAnchor
+}
+
+var _ QueryAnchorable = (*QueryAnchor)(nil)
+

@@ -29,3 +29,10 @@ func (x *ImageLaplacianPyramidSubtract) asImagePyramid() *raw.MPSImagePyramid { 
 
 func (x *ImageLaplacianPyramidSubtract) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.inner.MPSImageLaplacianPyramid.MPSImagePyramid.MPSUnaryImageKernel }
 
+// ImageLaplacianPyramidSubtractable is the interface implemented by [ImageLaplacianPyramidSubtract], for mocking and DI.
+type ImageLaplacianPyramidSubtractable interface {
+	Unwrap() *raw.MPSImageLaplacianPyramidSubtract
+}
+
+var _ ImageLaplacianPyramidSubtractable = (*ImageLaplacianPyramidSubtract)(nil)
+

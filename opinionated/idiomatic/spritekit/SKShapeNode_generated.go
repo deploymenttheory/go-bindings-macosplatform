@@ -9,6 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // ShapeNode wraps [raw.SKShapeNode] with a fluent Go API.
@@ -103,5 +104,215 @@ func (x *ShapeNode) WithStrokeShader(strokeShader *raw.SKShader) *ShapeNode {
 	return x
 }
 
+// Path calls the underlying Path.
+func (x *ShapeNode) Path() unsafe.Pointer {
+	return x.inner.Path()
+}
+
+// SetPath calls the underlying SetPath.
+func (x *ShapeNode) SetPath(path unsafe.Pointer) {
+	x.inner.SetPath(path)
+}
+
+// StrokeColor calls the underlying StrokeColor.
+func (x *ShapeNode) StrokeColor() *appkit.NSColor {
+	return x.inner.StrokeColor()
+}
+
+// SetStrokeColor calls the underlying SetStrokeColor.
+func (x *ShapeNode) SetStrokeColor(strokeColor *appkit.NSColor) {
+	x.inner.SetStrokeColor(strokeColor)
+}
+
+// FillColor calls the underlying FillColor.
+func (x *ShapeNode) FillColor() *appkit.NSColor {
+	return x.inner.FillColor()
+}
+
+// SetFillColor calls the underlying SetFillColor.
+func (x *ShapeNode) SetFillColor(fillColor *appkit.NSColor) {
+	x.inner.SetFillColor(fillColor)
+}
+
+// BlendMode calls the underlying BlendMode.
+func (x *ShapeNode) BlendMode() raw.SKBlendMode {
+	return x.inner.BlendMode()
+}
+
+// SetBlendMode calls the underlying SetBlendMode.
+func (x *ShapeNode) SetBlendMode(blendMode raw.SKBlendMode) {
+	x.inner.SetBlendMode(blendMode)
+}
+
+// IsAntialiased calls the underlying IsAntialiased.
+func (x *ShapeNode) IsAntialiased() bool {
+	return x.inner.IsAntialiased()
+}
+
+// SetAntialiased calls the underlying SetAntialiased.
+func (x *ShapeNode) SetAntialiased(antialiased bool) {
+	x.inner.SetAntialiased(antialiased)
+}
+
+// LineWidth calls the underlying LineWidth.
+func (x *ShapeNode) LineWidth() float64 {
+	return x.inner.LineWidth()
+}
+
+// SetLineWidth calls the underlying SetLineWidth.
+func (x *ShapeNode) SetLineWidth(lineWidth float64) {
+	x.inner.SetLineWidth(lineWidth)
+}
+
+// GlowWidth calls the underlying GlowWidth.
+func (x *ShapeNode) GlowWidth() float64 {
+	return x.inner.GlowWidth()
+}
+
+// SetGlowWidth calls the underlying SetGlowWidth.
+func (x *ShapeNode) SetGlowWidth(glowWidth float64) {
+	x.inner.SetGlowWidth(glowWidth)
+}
+
+// LineCap calls the underlying LineCap.
+func (x *ShapeNode) LineCap() coregraphics.CGLineCap {
+	return x.inner.LineCap()
+}
+
+// SetLineCap calls the underlying SetLineCap.
+func (x *ShapeNode) SetLineCap(lineCap coregraphics.CGLineCap) {
+	x.inner.SetLineCap(lineCap)
+}
+
+// LineJoin calls the underlying LineJoin.
+func (x *ShapeNode) LineJoin() coregraphics.CGLineJoin {
+	return x.inner.LineJoin()
+}
+
+// SetLineJoin calls the underlying SetLineJoin.
+func (x *ShapeNode) SetLineJoin(lineJoin coregraphics.CGLineJoin) {
+	x.inner.SetLineJoin(lineJoin)
+}
+
+// MiterLimit calls the underlying MiterLimit.
+func (x *ShapeNode) MiterLimit() float64 {
+	return x.inner.MiterLimit()
+}
+
+// SetMiterLimit calls the underlying SetMiterLimit.
+func (x *ShapeNode) SetMiterLimit(miterLimit float64) {
+	x.inner.SetMiterLimit(miterLimit)
+}
+
+// LineLength calls the underlying LineLength.
+func (x *ShapeNode) LineLength() float64 {
+	return x.inner.LineLength()
+}
+
+// FillTexture calls the underlying FillTexture.
+func (x *ShapeNode) FillTexture() *Texture {
+	_r := x.inner.FillTexture()
+	if _r == nil {
+		return nil
+	}
+	return &Texture{inner: _r}
+}
+
+// SetFillTexture calls the underlying SetFillTexture.
+func (x *ShapeNode) SetFillTexture(fillTexture *raw.SKTexture) {
+	x.inner.SetFillTexture(fillTexture)
+}
+
+// FillShader calls the underlying FillShader.
+func (x *ShapeNode) FillShader() *Shader {
+	_r := x.inner.FillShader()
+	if _r == nil {
+		return nil
+	}
+	return &Shader{inner: _r}
+}
+
+// SetFillShader calls the underlying SetFillShader.
+func (x *ShapeNode) SetFillShader(fillShader *raw.SKShader) {
+	x.inner.SetFillShader(fillShader)
+}
+
+// StrokeTexture calls the underlying StrokeTexture.
+func (x *ShapeNode) StrokeTexture() *Texture {
+	_r := x.inner.StrokeTexture()
+	if _r == nil {
+		return nil
+	}
+	return &Texture{inner: _r}
+}
+
+// SetStrokeTexture calls the underlying SetStrokeTexture.
+func (x *ShapeNode) SetStrokeTexture(strokeTexture *raw.SKTexture) {
+	x.inner.SetStrokeTexture(strokeTexture)
+}
+
+// StrokeShader calls the underlying StrokeShader.
+func (x *ShapeNode) StrokeShader() *Shader {
+	_r := x.inner.StrokeShader()
+	if _r == nil {
+		return nil
+	}
+	return &Shader{inner: _r}
+}
+
+// SetStrokeShader calls the underlying SetStrokeShader.
+func (x *ShapeNode) SetStrokeShader(strokeShader *raw.SKShader) {
+	x.inner.SetStrokeShader(strokeShader)
+}
+
 func (x *ShapeNode) asNode() *raw.SKNode { return &x.inner.SKNode }
+
+// ShapeNodeable is the interface implemented by [ShapeNode], for mocking and DI.
+type ShapeNodeable interface {
+	Unwrap() *raw.SKShapeNode
+	WithStrokeColor(strokeColor *appkit.NSColor) *ShapeNode
+	WithFillColor(fillColor *appkit.NSColor) *ShapeNode
+	WithBlendMode(blendMode raw.SKBlendMode) *ShapeNode
+	WithAntialiased(antialiased bool) *ShapeNode
+	WithLineWidth(lineWidth float64) *ShapeNode
+	WithGlowWidth(glowWidth float64) *ShapeNode
+	WithLineCap(lineCap coregraphics.CGLineCap) *ShapeNode
+	WithLineJoin(lineJoin coregraphics.CGLineJoin) *ShapeNode
+	WithMiterLimit(miterLimit float64) *ShapeNode
+	WithFillTexture(fillTexture TextureProvider) *ShapeNode
+	WithFillShader(fillShader *raw.SKShader) *ShapeNode
+	WithStrokeTexture(strokeTexture TextureProvider) *ShapeNode
+	WithStrokeShader(strokeShader *raw.SKShader) *ShapeNode
+	Path() unsafe.Pointer
+	SetPath(path unsafe.Pointer)
+	StrokeColor() *appkit.NSColor
+	SetStrokeColor(strokeColor *appkit.NSColor)
+	FillColor() *appkit.NSColor
+	SetFillColor(fillColor *appkit.NSColor)
+	BlendMode() raw.SKBlendMode
+	SetBlendMode(blendMode raw.SKBlendMode)
+	IsAntialiased() bool
+	SetAntialiased(antialiased bool)
+	LineWidth() float64
+	SetLineWidth(lineWidth float64)
+	GlowWidth() float64
+	SetGlowWidth(glowWidth float64)
+	LineCap() coregraphics.CGLineCap
+	SetLineCap(lineCap coregraphics.CGLineCap)
+	LineJoin() coregraphics.CGLineJoin
+	SetLineJoin(lineJoin coregraphics.CGLineJoin)
+	MiterLimit() float64
+	SetMiterLimit(miterLimit float64)
+	LineLength() float64
+	FillTexture() *Texture
+	SetFillTexture(fillTexture *raw.SKTexture)
+	FillShader() *Shader
+	SetFillShader(fillShader *raw.SKShader)
+	StrokeTexture() *Texture
+	SetStrokeTexture(strokeTexture *raw.SKTexture)
+	StrokeShader() *Shader
+	SetStrokeShader(strokeShader *raw.SKShader)
+}
+
+var _ ShapeNodeable = (*ShapeNode)(nil)
 

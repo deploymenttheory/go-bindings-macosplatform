@@ -6,7 +6,10 @@ package backgroundassets
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/backgroundassets"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // DownloadManager wraps [raw.BADownloadManager] with a fluent Go API.
@@ -38,10 +41,59 @@ func (x *DownloadManager) FetchCurrentDownloads() ([]*raw.BADownload, error) {
 	if arr == nil {
 		return nil, nil
 	}
-	out := make([]*raw.BADownload, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out, nil
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.BADownload {
+		return raw.BADownloadFromID(purego.Retain(_id))
+	}), nil
 }
+
+// ScheduleDownloadError calls the underlying ScheduleDownloadError.
+func (x *DownloadManager) ScheduleDownloadError(download *raw.BADownload) (bool, error) {
+	return x.inner.ScheduleDownloadError(download)
+}
+
+// PerformWithExclusiveControl calls the underlying PerformWithExclusiveControl.
+func (x *DownloadManager) PerformWithExclusiveControl(performHandler func(bool, unsafe.Pointer)) {
+	x.inner.PerformWithExclusiveControl(performHandler)
+}
+
+// PerformWithExclusiveControlBeforeDatePerformHandler calls the underlying PerformWithExclusiveControlBeforeDatePerformHandler.
+func (x *DownloadManager) PerformWithExclusiveControlBeforeDatePerformHandler(date *foundation.NSDate, performHandler func(bool, unsafe.Pointer)) {
+	x.inner.PerformWithExclusiveControlBeforeDatePerformHandler(date, performHandler)
+}
+
+// StartForegroundDownloadError calls the underlying StartForegroundDownloadError.
+func (x *DownloadManager) StartForegroundDownloadError(download *raw.BADownload) (bool, error) {
+	return x.inner.StartForegroundDownloadError(download)
+}
+
+// CancelDownloadError calls the underlying CancelDownloadError.
+func (x *DownloadManager) CancelDownloadError(download *raw.BADownload) (bool, error) {
+	return x.inner.CancelDownloadError(download)
+}
+
+// Delegate calls the underlying Delegate.
+func (x *DownloadManager) Delegate() raw.BADownloadManagerDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *DownloadManager) SetDelegate(delegate raw.BADownloadManagerDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// DownloadManagerable is the interface implemented by [DownloadManager], for mocking and DI.
+type DownloadManagerable interface {
+	Unwrap() *raw.BADownloadManager
+	WithDelegate(delegate raw.BADownloadManagerDelegate) *DownloadManager
+	FetchCurrentDownloads() ([]*raw.BADownload, error)
+	ScheduleDownloadError(download *raw.BADownload) (bool, error)
+	PerformWithExclusiveControl(performHandler func(bool, unsafe.Pointer))
+	PerformWithExclusiveControlBeforeDatePerformHandler(date *foundation.NSDate, performHandler func(bool, unsafe.Pointer))
+	StartForegroundDownloadError(download *raw.BADownload) (bool, error)
+	CancelDownloadError(download *raw.BADownload) (bool, error)
+	Delegate() raw.BADownloadManagerDelegate
+	SetDelegate(delegate raw.BADownloadManagerDelegate)
+}
+
+var _ DownloadManagerable = (*DownloadManager)(nil)
 

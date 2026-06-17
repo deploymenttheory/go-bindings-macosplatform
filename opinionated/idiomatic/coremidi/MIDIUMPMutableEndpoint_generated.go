@@ -7,6 +7,7 @@ package coremidi
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremidi"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -42,18 +43,55 @@ func (x *UMPMutableEndpoint) WithMutableFunctionBlocks(items ...*raw.MIDIUMPMuta
 	return x
 }
 
+// SetNameError calls the underlying SetNameError.
+func (x *UMPMutableEndpoint) SetNameError(name string) (bool, error) {
+	return x.inner.SetNameError(foundation.NSStringStringWithUTF8String(name))
+}
+
+// RegisterFunctionBlocksMarkAsStaticError calls the underlying RegisterFunctionBlocksMarkAsStaticError.
+func (x *UMPMutableEndpoint) RegisterFunctionBlocksMarkAsStaticError(functionBlocks *foundation.NSArray[*raw.MIDIUMPMutableFunctionBlock], markAsStatic bool) (bool, error) {
+	return x.inner.RegisterFunctionBlocksMarkAsStaticError(functionBlocks, markAsStatic)
+}
+
+// SetEnabledError calls the underlying SetEnabledError.
+func (x *UMPMutableEndpoint) SetEnabledError(isEnabled bool) (bool, error) {
+	return x.inner.SetEnabledError(isEnabled)
+}
+
 // MutableFunctionBlocks returns the collection as a Go slice.
 func (x *UMPMutableEndpoint) MutableFunctionBlocks() []*raw.MIDIUMPMutableFunctionBlock {
 	arr := x.inner.MutableFunctionBlocks()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MIDIUMPMutableFunctionBlock, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MIDIUMPMutableFunctionBlock {
+		return raw.MIDIUMPMutableFunctionBlockFromID(purego.Retain(_id))
+	})
+}
+
+// SetMutableFunctionBlocks calls the underlying SetMutableFunctionBlocks.
+func (x *UMPMutableEndpoint) SetMutableFunctionBlocks(mutableFunctionBlocks *foundation.NSArray[*raw.MIDIUMPMutableFunctionBlock]) {
+	x.inner.SetMutableFunctionBlocks(mutableFunctionBlocks)
+}
+
+// IsEnabled calls the underlying IsEnabled.
+func (x *UMPMutableEndpoint) IsEnabled() bool {
+	return x.inner.IsEnabled()
 }
 
 func (x *UMPMutableEndpoint) asUMPEndpoint() *raw.MIDIUMPEndpoint { return &x.inner.MIDIUMPEndpoint }
+
+// UMPMutableEndpointable is the interface implemented by [UMPMutableEndpoint], for mocking and DI.
+type UMPMutableEndpointable interface {
+	Unwrap() *raw.MIDIUMPMutableEndpoint
+	WithMutableFunctionBlocks(items ...*raw.MIDIUMPMutableFunctionBlock) *UMPMutableEndpoint
+	SetNameError(name string) (bool, error)
+	RegisterFunctionBlocksMarkAsStaticError(functionBlocks *foundation.NSArray[*raw.MIDIUMPMutableFunctionBlock], markAsStatic bool) (bool, error)
+	SetEnabledError(isEnabled bool) (bool, error)
+	MutableFunctionBlocks() []*raw.MIDIUMPMutableFunctionBlock
+	SetMutableFunctionBlocks(mutableFunctionBlocks *foundation.NSArray[*raw.MIDIUMPMutableFunctionBlock])
+	IsEnabled() bool
+}
+
+var _ UMPMutableEndpointable = (*UMPMutableEndpoint)(nil)
 

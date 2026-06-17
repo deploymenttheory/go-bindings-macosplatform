@@ -49,3 +49,44 @@ func NewQCRendererWithOpenGLContextPixelFormatFile(context_ *appkit.NSOpenGLCont
 	return &QCRenderer{inner: raw.QCRendererFromID(_id)}
 }
 
+// RenderAtTimeArguments calls the underlying RenderAtTimeArguments.
+func (x *QCRenderer) RenderAtTimeArguments(time_ float64, arguments *foundation.NSDictionary[objc.ID, objc.ID]) bool {
+	return x.inner.RenderAtTimeArguments(time_, arguments)
+}
+
+// RenderingTimeForTimeArguments calls the underlying RenderingTimeForTimeArguments.
+func (x *QCRenderer) RenderingTimeForTimeArguments(time_ float64, arguments *foundation.NSDictionary[objc.ID, objc.ID]) float64 {
+	return x.inner.RenderingTimeForTimeArguments(time_, arguments)
+}
+
+// Composition calls the underlying Composition.
+func (x *QCRenderer) Composition() *QCComposition {
+	_r := x.inner.Composition()
+	if _r == nil {
+		return nil
+	}
+	return &QCComposition{inner: _r}
+}
+
+// SnapshotImage calls the underlying SnapshotImage.
+func (x *QCRenderer) SnapshotImage() *appkit.NSImage {
+	return x.inner.SnapshotImage()
+}
+
+// CreateSnapshotImageOfType calls the underlying CreateSnapshotImageOfType.
+func (x *QCRenderer) CreateSnapshotImageOfType(type_ string) objc.ID {
+	return x.inner.CreateSnapshotImageOfType(foundation.NSStringStringWithUTF8String(type_))
+}
+
+// QCRendererable is the interface implemented by [QCRenderer], for mocking and DI.
+type QCRendererable interface {
+	Unwrap() *raw.QCRenderer
+	RenderAtTimeArguments(time_ float64, arguments *foundation.NSDictionary[objc.ID, objc.ID]) bool
+	RenderingTimeForTimeArguments(time_ float64, arguments *foundation.NSDictionary[objc.ID, objc.ID]) float64
+	Composition() *QCComposition
+	SnapshotImage() *appkit.NSImage
+	CreateSnapshotImageOfType(type_ string) objc.ID
+}
+
+var _ QCRendererable = (*QCRenderer)(nil)
+

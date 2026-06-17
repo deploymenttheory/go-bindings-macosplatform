@@ -6,6 +6,7 @@ package pdfkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/pdfkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +24,22 @@ func NewAction() *Action {
 	return &Action{inner: raw.PDFActionFromID(_id)}
 }
 
+// Type calls the underlying Type.
+func (x *Action) Type() string {
+	_r := x.inner.Type()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 func (x *Action) asAction() *raw.PDFAction { return x.inner }
+
+// Actionable is the interface implemented by [Action], for mocking and DI.
+type Actionable interface {
+	Unwrap() *raw.PDFAction
+	Type() string
+}
+
+var _ Actionable = (*Action)(nil)
 

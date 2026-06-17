@@ -36,5 +36,42 @@ func (x *MTRApplicationLauncherClusterApplicationEPStruct) WithEndpoint(endpoint
 	return x
 }
 
+// Application calls the underlying Application.
+func (x *MTRApplicationLauncherClusterApplicationEPStruct) Application() *MTRApplicationLauncherClusterApplicationStruct {
+	_r := x.inner.Application()
+	if _r == nil {
+		return nil
+	}
+	return &MTRApplicationLauncherClusterApplicationStruct{inner: _r}
+}
+
+// SetApplication calls the underlying SetApplication.
+func (x *MTRApplicationLauncherClusterApplicationEPStruct) SetApplication(application *raw.MTRApplicationLauncherClusterApplicationStruct) {
+	x.inner.SetApplication(application)
+}
+
+// Endpoint calls the underlying Endpoint.
+func (x *MTRApplicationLauncherClusterApplicationEPStruct) Endpoint() *foundation.NSNumber {
+	return x.inner.Endpoint()
+}
+
+// SetEndpoint calls the underlying SetEndpoint.
+func (x *MTRApplicationLauncherClusterApplicationEPStruct) SetEndpoint(endpoint *foundation.NSNumber) {
+	x.inner.SetEndpoint(endpoint)
+}
+
 func (x *MTRApplicationLauncherClusterApplicationEPStruct) asMTRApplicationLauncherClusterApplicationEPStruct() *raw.MTRApplicationLauncherClusterApplicationEPStruct { return x.inner }
+
+// MTRApplicationLauncherClusterApplicationEPStructable is the interface implemented by [MTRApplicationLauncherClusterApplicationEPStruct], for mocking and DI.
+type MTRApplicationLauncherClusterApplicationEPStructable interface {
+	Unwrap() *raw.MTRApplicationLauncherClusterApplicationEPStruct
+	WithApplication(application MTRApplicationLauncherClusterApplicationStructProvider) *MTRApplicationLauncherClusterApplicationEPStruct
+	WithEndpoint(endpoint *foundation.NSNumber) *MTRApplicationLauncherClusterApplicationEPStruct
+	Application() *MTRApplicationLauncherClusterApplicationStruct
+	SetApplication(application *raw.MTRApplicationLauncherClusterApplicationStruct)
+	Endpoint() *foundation.NSNumber
+	SetEndpoint(endpoint *foundation.NSNumber)
+}
+
+var _ MTRApplicationLauncherClusterApplicationEPStructable = (*MTRApplicationLauncherClusterApplicationEPStruct)(nil)
 

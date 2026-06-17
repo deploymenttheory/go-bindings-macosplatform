@@ -6,6 +6,7 @@ package coredata
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,4 +24,35 @@ func NewMergePolicyWithMergeType(ty raw.NSMergePolicyType) *MergePolicy {
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMergeType:"), ty)
 	return &MergePolicy{inner: raw.NSMergePolicyFromID(_id)}
 }
+
+// ResolveConflictsError calls the underlying ResolveConflictsError.
+func (x *MergePolicy) ResolveConflictsError(list *foundation.NSArray[objc.ID]) (bool, error) {
+	return x.inner.ResolveConflictsError(list)
+}
+
+// ResolveOptimisticLockingVersionConflictsError calls the underlying ResolveOptimisticLockingVersionConflictsError.
+func (x *MergePolicy) ResolveOptimisticLockingVersionConflictsError(list *foundation.NSArray[*raw.NSMergeConflict]) (bool, error) {
+	return x.inner.ResolveOptimisticLockingVersionConflictsError(list)
+}
+
+// ResolveConstraintConflictsError calls the underlying ResolveConstraintConflictsError.
+func (x *MergePolicy) ResolveConstraintConflictsError(list *foundation.NSArray[*raw.NSConstraintConflict]) (bool, error) {
+	return x.inner.ResolveConstraintConflictsError(list)
+}
+
+// MergeType calls the underlying MergeType.
+func (x *MergePolicy) MergeType() raw.NSMergePolicyType {
+	return x.inner.MergeType()
+}
+
+// MergePolicyable is the interface implemented by [MergePolicy], for mocking and DI.
+type MergePolicyable interface {
+	Unwrap() *raw.NSMergePolicy
+	ResolveConflictsError(list *foundation.NSArray[objc.ID]) (bool, error)
+	ResolveOptimisticLockingVersionConflictsError(list *foundation.NSArray[*raw.NSMergeConflict]) (bool, error)
+	ResolveConstraintConflictsError(list *foundation.NSArray[*raw.NSConstraintConflict]) (bool, error)
+	MergeType() raw.NSMergePolicyType
+}
+
+var _ MergePolicyable = (*MergePolicy)(nil)
 

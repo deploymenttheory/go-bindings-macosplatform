@@ -43,3 +43,40 @@ func (x *MTRServiceAreaClusterSelectAreasResponseParams) WithStatusText(statusTe
 	return x
 }
 
+// Status calls the underlying Status.
+func (x *MTRServiceAreaClusterSelectAreasResponseParams) Status() *foundation.NSNumber {
+	return x.inner.Status()
+}
+
+// SetStatus calls the underlying SetStatus.
+func (x *MTRServiceAreaClusterSelectAreasResponseParams) SetStatus(status *foundation.NSNumber) {
+	x.inner.SetStatus(status)
+}
+
+// StatusText calls the underlying StatusText.
+func (x *MTRServiceAreaClusterSelectAreasResponseParams) StatusText() string {
+	_r := x.inner.StatusText()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetStatusText calls the underlying SetStatusText.
+func (x *MTRServiceAreaClusterSelectAreasResponseParams) SetStatusText(statusText string) {
+	x.inner.SetStatusText(foundation.NSStringStringWithUTF8String(statusText))
+}
+
+// MTRServiceAreaClusterSelectAreasResponseParamsable is the interface implemented by [MTRServiceAreaClusterSelectAreasResponseParams], for mocking and DI.
+type MTRServiceAreaClusterSelectAreasResponseParamsable interface {
+	Unwrap() *raw.MTRServiceAreaClusterSelectAreasResponseParams
+	WithStatus(status *foundation.NSNumber) *MTRServiceAreaClusterSelectAreasResponseParams
+	WithStatusText(statusText string) *MTRServiceAreaClusterSelectAreasResponseParams
+	Status() *foundation.NSNumber
+	SetStatus(status *foundation.NSNumber)
+	StatusText() string
+	SetStatusText(statusText string)
+}
+
+var _ MTRServiceAreaClusterSelectAreasResponseParamsable = (*MTRServiceAreaClusterSelectAreasResponseParams)(nil)
+

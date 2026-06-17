@@ -7,6 +7,7 @@ package accounts
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/accounts"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -48,4 +49,89 @@ func (x *Account) WithCredential(credential *raw.ACAccountCredential) *Account {
 	x.inner.SetCredential(credential)
 	return x
 }
+
+// Identifier calls the underlying Identifier.
+func (x *Account) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// AccountType calls the underlying AccountType.
+func (x *Account) AccountType() *AccountType {
+	_r := x.inner.AccountType()
+	if _r == nil {
+		return nil
+	}
+	return &AccountType{inner: _r}
+}
+
+// SetAccountType calls the underlying SetAccountType.
+func (x *Account) SetAccountType(accountType *raw.ACAccountType) {
+	x.inner.SetAccountType(accountType)
+}
+
+// AccountDescription calls the underlying AccountDescription.
+func (x *Account) AccountDescription() string {
+	_r := x.inner.AccountDescription()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetAccountDescription calls the underlying SetAccountDescription.
+func (x *Account) SetAccountDescription(accountDescription string) {
+	x.inner.SetAccountDescription(foundation.NSStringStringWithUTF8String(accountDescription))
+}
+
+// Username calls the underlying Username.
+func (x *Account) Username() string {
+	_r := x.inner.Username()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetUsername calls the underlying SetUsername.
+func (x *Account) SetUsername(username string) {
+	x.inner.SetUsername(foundation.NSStringStringWithUTF8String(username))
+}
+
+// Credential calls the underlying Credential.
+func (x *Account) Credential() *AccountCredential {
+	_r := x.inner.Credential()
+	if _r == nil {
+		return nil
+	}
+	return &AccountCredential{inner: _r}
+}
+
+// SetCredential calls the underlying SetCredential.
+func (x *Account) SetCredential(credential *raw.ACAccountCredential) {
+	x.inner.SetCredential(credential)
+}
+
+// Accountable is the interface implemented by [Account], for mocking and DI.
+type Accountable interface {
+	Unwrap() *raw.ACAccount
+	WithAccountType(accountType *raw.ACAccountType) *Account
+	WithAccountDescription(accountDescription string) *Account
+	WithUsername(username string) *Account
+	WithCredential(credential *raw.ACAccountCredential) *Account
+	Identifier() string
+	AccountType() *AccountType
+	SetAccountType(accountType *raw.ACAccountType)
+	AccountDescription() string
+	SetAccountDescription(accountDescription string)
+	Username() string
+	SetUsername(username string)
+	Credential() *AccountCredential
+	SetCredential(credential *raw.ACAccountCredential)
+}
+
+var _ Accountable = (*Account)(nil)
 

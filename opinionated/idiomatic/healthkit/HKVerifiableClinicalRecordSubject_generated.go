@@ -5,7 +5,9 @@
 package healthkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +24,27 @@ func NewVerifiableClinicalRecordSubject() *VerifiableClinicalRecordSubject {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKVerifiableClinicalRecordSubject")), objc.RegisterName("new"))
 	return &VerifiableClinicalRecordSubject{inner: raw.HKVerifiableClinicalRecordSubjectFromID(_id)}
 }
+
+// FullName calls the underlying FullName.
+func (x *VerifiableClinicalRecordSubject) FullName() string {
+	_r := x.inner.FullName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// DateOfBirthComponents calls the underlying DateOfBirthComponents.
+func (x *VerifiableClinicalRecordSubject) DateOfBirthComponents() *foundation.NSDateComponents {
+	return x.inner.DateOfBirthComponents()
+}
+
+// VerifiableClinicalRecordSubjectable is the interface implemented by [VerifiableClinicalRecordSubject], for mocking and DI.
+type VerifiableClinicalRecordSubjectable interface {
+	Unwrap() *raw.HKVerifiableClinicalRecordSubject
+	FullName() string
+	DateOfBirthComponents() *foundation.NSDateComponents
+}
+
+var _ VerifiableClinicalRecordSubjectable = (*VerifiableClinicalRecordSubject)(nil)
 

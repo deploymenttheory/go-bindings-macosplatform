@@ -7,6 +7,7 @@ package healthkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -40,18 +41,30 @@ func NewSampleQueryWithQueryDescriptorsLimitSortDescriptorsResultsHandler(queryD
 	return &SampleQuery{inner: raw.HKSampleQueryFromID(_id)}
 }
 
+// Limit calls the underlying Limit.
+func (x *SampleQuery) Limit() uint {
+	return x.inner.Limit()
+}
+
 // SortDescriptors returns the collection as a Go slice.
 func (x *SampleQuery) SortDescriptors() []*foundation.NSSortDescriptor {
 	arr := x.inner.SortDescriptors()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSSortDescriptor, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSSortDescriptor {
+		return foundation.NSSortDescriptorFromID(purego.Retain(_id))
+	})
 }
 
 func (x *SampleQuery) asQuery() *raw.HKQuery { return &x.inner.HKQuery }
+
+// SampleQueryable is the interface implemented by [SampleQuery], for mocking and DI.
+type SampleQueryable interface {
+	Unwrap() *raw.HKSampleQuery
+	Limit() uint
+	SortDescriptors() []*foundation.NSSortDescriptor
+}
+
+var _ SampleQueryable = (*SampleQuery)(nil)
 

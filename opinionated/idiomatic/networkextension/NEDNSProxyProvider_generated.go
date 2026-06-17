@@ -31,11 +31,11 @@ func NewNEDNSProxyProvider() *NEDNSProxyProvider {
 func (x *NEDNSProxyProvider) StartProxyWithOptions(ctx context.Context, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) error {
 	_ch := make(chan error, 1)
 	x.inner.StartProxyWithOptionsCompletionHandler(options, func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -59,18 +59,50 @@ func (x *NEDNSProxyProvider) StopProxyWithReason(ctx context.Context, reason raw
 	}
 }
 
+// CancelProxyWithError calls the underlying CancelProxyWithError.
+func (x *NEDNSProxyProvider) CancelProxyWithError(error_ unsafe.Pointer) {
+	x.inner.CancelProxyWithError(error_)
+}
+
+// HandleNewFlow calls the underlying HandleNewFlow.
+func (x *NEDNSProxyProvider) HandleNewFlow(flow *raw.NEAppProxyFlow) bool {
+	return x.inner.HandleNewFlow(flow)
+}
+
+// HandleNewUDPFlowInitialRemoteFlowEndpoint calls the underlying HandleNewUDPFlowInitialRemoteFlowEndpoint.
+func (x *NEDNSProxyProvider) HandleNewUDPFlowInitialRemoteFlowEndpoint(flow *raw.NEAppProxyUDPFlow, remoteEndpoint *foundation.NSObject) bool {
+	return x.inner.HandleNewUDPFlowInitialRemoteFlowEndpoint(flow, remoteEndpoint)
+}
+
+// HandleNewUDPFlowInitialRemoteEndpoint calls the underlying HandleNewUDPFlowInitialRemoteEndpoint.
+func (x *NEDNSProxyProvider) HandleNewUDPFlowInitialRemoteEndpoint(flow *raw.NEAppProxyUDPFlow, remoteEndpoint unsafe.Pointer) bool {
+	return x.inner.HandleNewUDPFlowInitialRemoteEndpoint(flow, remoteEndpoint)
+}
+
 // SystemDNSSettings returns the collection as a Go slice.
 func (x *NEDNSProxyProvider) SystemDNSSettings() []*raw.NEDNSSettings {
 	arr := x.inner.SystemDNSSettings()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NEDNSSettings, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NEDNSSettings {
+		return raw.NEDNSSettingsFromID(purego.Retain(_id))
+	})
 }
 
 func (x *NEDNSProxyProvider) asNEProvider() *raw.NEProvider { return &x.inner.NEProvider }
+
+// NEDNSProxyProviderable is the interface implemented by [NEDNSProxyProvider], for mocking and DI.
+type NEDNSProxyProviderable interface {
+	Unwrap() *raw.NEDNSProxyProvider
+	StartProxyWithOptions(ctx context.Context, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) error
+	StopProxyWithReason(ctx context.Context, reason raw.NEProviderStopReason) error
+	CancelProxyWithError(error_ unsafe.Pointer)
+	HandleNewFlow(flow *raw.NEAppProxyFlow) bool
+	HandleNewUDPFlowInitialRemoteFlowEndpoint(flow *raw.NEAppProxyUDPFlow, remoteEndpoint *foundation.NSObject) bool
+	HandleNewUDPFlowInitialRemoteEndpoint(flow *raw.NEAppProxyUDPFlow, remoteEndpoint unsafe.Pointer) bool
+	SystemDNSSettings() []*raw.NEDNSSettings
+}
+
+var _ NEDNSProxyProviderable = (*NEDNSProxyProvider)(nil)
 

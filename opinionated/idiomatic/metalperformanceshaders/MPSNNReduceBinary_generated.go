@@ -50,7 +50,66 @@ func (x *NNReduceBinary) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) 
 	return x
 }
 
+// PrimarySourceClipRect calls the underlying PrimarySourceClipRect.
+func (x *NNReduceBinary) PrimarySourceClipRect() metal.MTLRegion {
+	return x.inner.PrimarySourceClipRect()
+}
+
+// SetPrimarySourceClipRect calls the underlying SetPrimarySourceClipRect.
+func (x *NNReduceBinary) SetPrimarySourceClipRect(primarySourceClipRect metal.MTLRegion) {
+	x.inner.SetPrimarySourceClipRect(primarySourceClipRect)
+}
+
+// SecondarySourceClipRect calls the underlying SecondarySourceClipRect.
+func (x *NNReduceBinary) SecondarySourceClipRect() metal.MTLRegion {
+	return x.inner.SecondarySourceClipRect()
+}
+
+// SetSecondarySourceClipRect calls the underlying SetSecondarySourceClipRect.
+func (x *NNReduceBinary) SetSecondarySourceClipRect(secondarySourceClipRect metal.MTLRegion) {
+	x.inner.SetSecondarySourceClipRect(secondarySourceClipRect)
+}
+
+// PrimaryOffset calls the underlying PrimaryOffset.
+func (x *NNReduceBinary) PrimaryOffset() mpscore.MPSOffset {
+	return x.inner.PrimaryOffset()
+}
+
+// SetPrimaryOffset calls the underlying SetPrimaryOffset.
+func (x *NNReduceBinary) SetPrimaryOffset(primaryOffset mpscore.MPSOffset) {
+	x.inner.SetPrimaryOffset(primaryOffset)
+}
+
+// SecondaryOffset calls the underlying SecondaryOffset.
+func (x *NNReduceBinary) SecondaryOffset() mpscore.MPSOffset {
+	return x.inner.SecondaryOffset()
+}
+
+// SetSecondaryOffset calls the underlying SetSecondaryOffset.
+func (x *NNReduceBinary) SetSecondaryOffset(secondaryOffset mpscore.MPSOffset) {
+	x.inner.SetSecondaryOffset(secondaryOffset)
+}
+
 func (x *NNReduceBinary) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel { return &x.inner.MPSCNNBinaryKernel }
 
 func (x *NNReduceBinary) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNBinaryKernel.MPSKernel }
+
+// NNReduceBinaryable is the interface implemented by [NNReduceBinary], for mocking and DI.
+type NNReduceBinaryable interface {
+	Unwrap() *raw.MPSNNReduceBinary
+	WithPrimarySourceClipRect(primarySourceClipRect metal.MTLRegion) *NNReduceBinary
+	WithSecondarySourceClipRect(secondarySourceClipRect metal.MTLRegion) *NNReduceBinary
+	WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *NNReduceBinary
+	WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *NNReduceBinary
+	PrimarySourceClipRect() metal.MTLRegion
+	SetPrimarySourceClipRect(primarySourceClipRect metal.MTLRegion)
+	SecondarySourceClipRect() metal.MTLRegion
+	SetSecondarySourceClipRect(secondarySourceClipRect metal.MTLRegion)
+	PrimaryOffset() mpscore.MPSOffset
+	SetPrimaryOffset(primaryOffset mpscore.MPSOffset)
+	SecondaryOffset() mpscore.MPSOffset
+	SetSecondaryOffset(secondaryOffset mpscore.MPSOffset)
+}
+
+var _ NNReduceBinaryable = (*NNReduceBinary)(nil)
 

@@ -7,6 +7,7 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -36,6 +37,30 @@ func (x *DOMHTMLOptGroupElement) WithLabel(label string) *DOMHTMLOptGroupElement
 	return x
 }
 
+// Disabled calls the underlying Disabled.
+func (x *DOMHTMLOptGroupElement) Disabled() bool {
+	return x.inner.Disabled()
+}
+
+// SetDisabled calls the underlying SetDisabled.
+func (x *DOMHTMLOptGroupElement) SetDisabled(disabled bool) {
+	x.inner.SetDisabled(disabled)
+}
+
+// Label calls the underlying Label.
+func (x *DOMHTMLOptGroupElement) Label() string {
+	_r := x.inner.Label()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLabel calls the underlying SetLabel.
+func (x *DOMHTMLOptGroupElement) SetLabel(label string) {
+	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+}
+
 func (x *DOMHTMLOptGroupElement) asDOMHTMLElement() *raw.DOMHTMLElement { return &x.inner.DOMHTMLElement }
 
 func (x *DOMHTMLOptGroupElement) asDOMElement() *raw.DOMElement { return &x.inner.DOMHTMLElement.DOMElement }
@@ -45,4 +70,17 @@ func (x *DOMHTMLOptGroupElement) asDOMNode() *raw.DOMNode { return &x.inner.DOMH
 func (x *DOMHTMLOptGroupElement) asDOMObject() *raw.DOMObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject }
 
 func (x *DOMHTMLOptGroupElement) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject }
+
+// DOMHTMLOptGroupElementable is the interface implemented by [DOMHTMLOptGroupElement], for mocking and DI.
+type DOMHTMLOptGroupElementable interface {
+	Unwrap() *raw.DOMHTMLOptGroupElement
+	WithDisabled(disabled bool) *DOMHTMLOptGroupElement
+	WithLabel(label string) *DOMHTMLOptGroupElement
+	Disabled() bool
+	SetDisabled(disabled bool)
+	Label() string
+	SetLabel(label string)
+}
+
+var _ DOMHTMLOptGroupElementable = (*DOMHTMLOptGroupElement)(nil)
 

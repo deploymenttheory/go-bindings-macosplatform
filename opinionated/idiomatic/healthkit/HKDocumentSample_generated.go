@@ -23,9 +23,26 @@ func NewDocumentSample() *DocumentSample {
 	return &DocumentSample{inner: raw.HKDocumentSampleFromID(_id)}
 }
 
+// DocumentType calls the underlying DocumentType.
+func (x *DocumentSample) DocumentType() *DocumentType {
+	_r := x.inner.DocumentType()
+	if _r == nil {
+		return nil
+	}
+	return &DocumentType{inner: _r}
+}
+
 func (x *DocumentSample) asDocumentSample() *raw.HKDocumentSample { return x.inner }
 
 func (x *DocumentSample) asSample() *raw.HKSample { return &x.inner.HKSample }
 
 func (x *DocumentSample) asObject() *raw.HKObject { return &x.inner.HKSample.HKObject }
+
+// DocumentSampleable is the interface implemented by [DocumentSample], for mocking and DI.
+type DocumentSampleable interface {
+	Unwrap() *raw.HKDocumentSample
+	DocumentType() *DocumentType
+}
+
+var _ DocumentSampleable = (*DocumentSample)(nil)
 

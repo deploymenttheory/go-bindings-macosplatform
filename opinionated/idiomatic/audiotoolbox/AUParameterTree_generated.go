@@ -23,7 +23,34 @@ func NewParameterTree() *ParameterTree {
 	return &ParameterTree{inner: raw.AUParameterTreeFromID(_id)}
 }
 
+// ParameterWithAddress calls the underlying ParameterWithAddress.
+func (x *ParameterTree) ParameterWithAddress(address uint64) *Parameter {
+	_r := x.inner.ParameterWithAddress(address)
+	if _r == nil {
+		return nil
+	}
+	return &Parameter{inner: _r}
+}
+
+// ParameterWithIDScopeElement calls the underlying ParameterWithIDScopeElement.
+func (x *ParameterTree) ParameterWithIDScopeElement(paramID uint, scope uint, element uint) *Parameter {
+	_r := x.inner.ParameterWithIDScopeElement(paramID, scope, element)
+	if _r == nil {
+		return nil
+	}
+	return &Parameter{inner: _r}
+}
+
 func (x *ParameterTree) asParameterGroup() *raw.AUParameterGroup { return &x.inner.AUParameterGroup }
 
 func (x *ParameterTree) asParameterNode() *raw.AUParameterNode { return &x.inner.AUParameterGroup.AUParameterNode }
+
+// ParameterTreeable is the interface implemented by [ParameterTree], for mocking and DI.
+type ParameterTreeable interface {
+	Unwrap() *raw.AUParameterTree
+	ParameterWithAddress(address uint64) *Parameter
+	ParameterWithIDScopeElement(paramID uint, scope uint, element uint) *Parameter
+}
+
+var _ ParameterTreeable = (*ParameterTree)(nil)
 

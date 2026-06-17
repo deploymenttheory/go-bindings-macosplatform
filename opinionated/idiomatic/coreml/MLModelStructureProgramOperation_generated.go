@@ -6,6 +6,8 @@ package coreml
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,17 +25,29 @@ func NewModelStructureProgramOperation() *ModelStructureProgramOperation {
 	return &ModelStructureProgramOperation{inner: raw.MLModelStructureProgramOperationFromID(_id)}
 }
 
+// OperatorName calls the underlying OperatorName.
+func (x *ModelStructureProgramOperation) OperatorName() string {
+	_r := x.inner.OperatorName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Inputs calls the underlying Inputs.
+func (x *ModelStructureProgramOperation) Inputs() *foundation.NSDictionary[*foundation.NSString, *raw.MLModelStructureProgramArgument] {
+	return x.inner.Inputs()
+}
+
 // Outputs returns the collection as a Go slice.
 func (x *ModelStructureProgramOperation) Outputs() []*raw.MLModelStructureProgramNamedValueType {
 	arr := x.inner.Outputs()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MLModelStructureProgramNamedValueType, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MLModelStructureProgramNamedValueType {
+		return raw.MLModelStructureProgramNamedValueTypeFromID(purego.Retain(_id))
+	})
 }
 
 // Blocks returns the collection as a Go slice.
@@ -42,10 +56,19 @@ func (x *ModelStructureProgramOperation) Blocks() []*raw.MLModelStructureProgram
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MLModelStructureProgramBlock, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MLModelStructureProgramBlock {
+		return raw.MLModelStructureProgramBlockFromID(purego.Retain(_id))
+	})
 }
+
+// ModelStructureProgramOperationable is the interface implemented by [ModelStructureProgramOperation], for mocking and DI.
+type ModelStructureProgramOperationable interface {
+	Unwrap() *raw.MLModelStructureProgramOperation
+	OperatorName() string
+	Inputs() *foundation.NSDictionary[*foundation.NSString, *raw.MLModelStructureProgramArgument]
+	Outputs() []*raw.MLModelStructureProgramNamedValueType
+	Blocks() []*raw.MLModelStructureProgramBlock
+}
+
+var _ ModelStructureProgramOperationable = (*ModelStructureProgramOperation)(nil)
 

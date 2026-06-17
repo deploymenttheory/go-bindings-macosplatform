@@ -6,7 +6,9 @@ package imagecapturecore
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imagecapturecore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // DeviceBrowser wraps [raw.ICDeviceBrowser] with a fluent Go API.
@@ -35,16 +37,72 @@ func (x *DeviceBrowser) WithBrowsedDeviceTypeMask(browsedDeviceTypeMask raw.ICDe
 	return x
 }
 
+// Start calls the underlying Start.
+func (x *DeviceBrowser) Start() {
+	x.inner.Start()
+}
+
+// Stop calls the underlying Stop.
+func (x *DeviceBrowser) Stop() {
+	x.inner.Stop()
+}
+
+// Delegate calls the underlying Delegate.
+func (x *DeviceBrowser) Delegate() raw.ICDeviceBrowserDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *DeviceBrowser) SetDelegate(delegate raw.ICDeviceBrowserDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// IsBrowsing calls the underlying IsBrowsing.
+func (x *DeviceBrowser) IsBrowsing() bool {
+	return x.inner.IsBrowsing()
+}
+
+// BrowsedDeviceTypeMask calls the underlying BrowsedDeviceTypeMask.
+func (x *DeviceBrowser) BrowsedDeviceTypeMask() raw.ICDeviceTypeMask {
+	return x.inner.BrowsedDeviceTypeMask()
+}
+
+// SetBrowsedDeviceTypeMask calls the underlying SetBrowsedDeviceTypeMask.
+func (x *DeviceBrowser) SetBrowsedDeviceTypeMask(browsedDeviceTypeMask raw.ICDeviceTypeMask) {
+	x.inner.SetBrowsedDeviceTypeMask(browsedDeviceTypeMask)
+}
+
 // Devices returns the collection as a Go slice.
 func (x *DeviceBrowser) Devices() []*raw.ICDevice {
 	arr := x.inner.Devices()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.ICDevice, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.ICDevice {
+		return raw.ICDeviceFromID(purego.Retain(_id))
+	})
 }
+
+// PreferredDevice calls the underlying PreferredDevice.
+func (x *DeviceBrowser) PreferredDevice() unsafe.Pointer {
+	return x.inner.PreferredDevice()
+}
+
+// DeviceBrowserable is the interface implemented by [DeviceBrowser], for mocking and DI.
+type DeviceBrowserable interface {
+	Unwrap() *raw.ICDeviceBrowser
+	WithDelegate(delegate raw.ICDeviceBrowserDelegate) *DeviceBrowser
+	WithBrowsedDeviceTypeMask(browsedDeviceTypeMask raw.ICDeviceTypeMask) *DeviceBrowser
+	Start()
+	Stop()
+	Delegate() raw.ICDeviceBrowserDelegate
+	SetDelegate(delegate raw.ICDeviceBrowserDelegate)
+	IsBrowsing() bool
+	BrowsedDeviceTypeMask() raw.ICDeviceTypeMask
+	SetBrowsedDeviceTypeMask(browsedDeviceTypeMask raw.ICDeviceTypeMask)
+	Devices() []*raw.ICDevice
+	PreferredDevice() unsafe.Pointer
+}
+
+var _ DeviceBrowserable = (*DeviceBrowser)(nil)
 

@@ -25,3 +25,10 @@ func NewLengthResolutionResult() *LengthResolutionResult {
 
 func (x *LengthResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult { return &x.inner.INIntentResolutionResult }
 
+// LengthResolutionResultable is the interface implemented by [LengthResolutionResult], for mocking and DI.
+type LengthResolutionResultable interface {
+	Unwrap() *raw.INLengthResolutionResult
+}
+
+var _ LengthResolutionResultable = (*LengthResolutionResult)(nil)
+

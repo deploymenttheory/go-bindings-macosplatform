@@ -23,5 +23,22 @@ func NewChangeHistoryUpdateGroupEvent() *ChangeHistoryUpdateGroupEvent {
 	return &ChangeHistoryUpdateGroupEvent{inner: raw.CNChangeHistoryUpdateGroupEventFromID(_id)}
 }
 
+// Group calls the underlying Group.
+func (x *ChangeHistoryUpdateGroupEvent) Group() *Group {
+	_r := x.inner.Group()
+	if _r == nil {
+		return nil
+	}
+	return &Group{inner: _r}
+}
+
 func (x *ChangeHistoryUpdateGroupEvent) asChangeHistoryEvent() *raw.CNChangeHistoryEvent { return &x.inner.CNChangeHistoryEvent }
+
+// ChangeHistoryUpdateGroupEventable is the interface implemented by [ChangeHistoryUpdateGroupEvent], for mocking and DI.
+type ChangeHistoryUpdateGroupEventable interface {
+	Unwrap() *raw.CNChangeHistoryUpdateGroupEvent
+	Group() *Group
+}
+
+var _ ChangeHistoryUpdateGroupEventable = (*ChangeHistoryUpdateGroupEvent)(nil)
 

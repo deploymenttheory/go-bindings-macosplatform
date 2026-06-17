@@ -5,6 +5,7 @@
 package usernotifications
 
 import (
+	"context"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/usernotifications"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +23,41 @@ func NewNotificationServiceExtension() *NotificationServiceExtension {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("UNNotificationServiceExtension")), objc.RegisterName("new"))
 	return &NotificationServiceExtension{inner: raw.UNNotificationServiceExtensionFromID(_id)}
 }
+
+// DidReceiveNotificationRequestWithContentHandler blocks until the operation completes or ctx is cancelled.
+func (x *NotificationServiceExtension) DidReceiveNotificationRequestWithContentHandler(ctx context.Context, request *raw.UNNotificationRequest) (*NotificationContent, error) {
+	type _result struct {
+		val *NotificationContent
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.DidReceiveNotificationRequestWithContentHandler(request, func(_p0 *raw.UNNotificationContent) {
+		var _o _result
+		if _p0 != nil {
+			_o.val = &NotificationContent{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *NotificationContent
+		return _zero, ctx.Err()
+	}
+}
+
+// ServiceExtensionTimeWillExpire calls the underlying ServiceExtensionTimeWillExpire.
+func (x *NotificationServiceExtension) ServiceExtensionTimeWillExpire() {
+	x.inner.ServiceExtensionTimeWillExpire()
+}
+
+// NotificationServiceExtensionable is the interface implemented by [NotificationServiceExtension], for mocking and DI.
+type NotificationServiceExtensionable interface {
+	Unwrap() *raw.UNNotificationServiceExtension
+	DidReceiveNotificationRequestWithContentHandler(ctx context.Context, request *raw.UNNotificationRequest) (*NotificationContent, error)
+	ServiceExtensionTimeWillExpire()
+}
+
+var _ NotificationServiceExtensionable = (*NotificationServiceExtension)(nil)
 

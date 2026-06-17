@@ -8,6 +8,7 @@ import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -43,4 +44,54 @@ func (x *DraggingImageComponent) WithFrame(frame corefoundation.CGRect) *Draggin
 	x.inner.SetFrame(frame)
 	return x
 }
+
+// Key calls the underlying Key.
+func (x *DraggingImageComponent) Key() string {
+	_r := x.inner.Key()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetKey calls the underlying SetKey.
+func (x *DraggingImageComponent) SetKey(key *foundation.NSString) {
+	x.inner.SetKey(key)
+}
+
+// Contents calls the underlying Contents.
+func (x *DraggingImageComponent) Contents() objc.ID {
+	return x.inner.Contents()
+}
+
+// SetContents calls the underlying SetContents.
+func (x *DraggingImageComponent) SetContents(contents objc.ID) {
+	x.inner.SetContents(contents)
+}
+
+// Frame calls the underlying Frame.
+func (x *DraggingImageComponent) Frame() corefoundation.CGRect {
+	return x.inner.Frame()
+}
+
+// SetFrame calls the underlying SetFrame.
+func (x *DraggingImageComponent) SetFrame(frame corefoundation.CGRect) {
+	x.inner.SetFrame(frame)
+}
+
+// DraggingImageComponentable is the interface implemented by [DraggingImageComponent], for mocking and DI.
+type DraggingImageComponentable interface {
+	Unwrap() *raw.NSDraggingImageComponent
+	WithKey(key *foundation.NSString) *DraggingImageComponent
+	WithContents(contents objc.ID) *DraggingImageComponent
+	WithFrame(frame corefoundation.CGRect) *DraggingImageComponent
+	Key() string
+	SetKey(key *foundation.NSString)
+	Contents() objc.ID
+	SetContents(contents objc.ID)
+	Frame() corefoundation.CGRect
+	SetFrame(frame corefoundation.CGRect)
+}
+
+var _ DraggingImageComponentable = (*DraggingImageComponent)(nil)
 

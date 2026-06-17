@@ -6,6 +6,8 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +25,80 @@ func NewMetricMediaResourceRequestEvent() *MetricMediaResourceRequestEvent {
 	return &MetricMediaResourceRequestEvent{inner: raw.AVMetricMediaResourceRequestEventFromID(_id)}
 }
 
+// Url calls the underlying Url.
+func (x *MetricMediaResourceRequestEvent) Url() *foundation.NSURL {
+	return x.inner.Url()
+}
+
+// ServerAddress calls the underlying ServerAddress.
+func (x *MetricMediaResourceRequestEvent) ServerAddress() string {
+	_r := x.inner.ServerAddress()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// RequestStartTime calls the underlying RequestStartTime.
+func (x *MetricMediaResourceRequestEvent) RequestStartTime() *foundation.NSDate {
+	return x.inner.RequestStartTime()
+}
+
+// RequestEndTime calls the underlying RequestEndTime.
+func (x *MetricMediaResourceRequestEvent) RequestEndTime() *foundation.NSDate {
+	return x.inner.RequestEndTime()
+}
+
+// ResponseStartTime calls the underlying ResponseStartTime.
+func (x *MetricMediaResourceRequestEvent) ResponseStartTime() *foundation.NSDate {
+	return x.inner.ResponseStartTime()
+}
+
+// ResponseEndTime calls the underlying ResponseEndTime.
+func (x *MetricMediaResourceRequestEvent) ResponseEndTime() *foundation.NSDate {
+	return x.inner.ResponseEndTime()
+}
+
+// ByteRange calls the underlying ByteRange.
+func (x *MetricMediaResourceRequestEvent) ByteRange() foundation.NSRange {
+	return x.inner.ByteRange()
+}
+
+// WasReadFromCache calls the underlying WasReadFromCache.
+func (x *MetricMediaResourceRequestEvent) WasReadFromCache() bool {
+	return x.inner.WasReadFromCache()
+}
+
+// ErrorEvent calls the underlying ErrorEvent.
+func (x *MetricMediaResourceRequestEvent) ErrorEvent() *MetricErrorEvent {
+	_r := x.inner.ErrorEvent()
+	if _r == nil {
+		return nil
+	}
+	return &MetricErrorEvent{inner: _r}
+}
+
+// NetworkTransactionMetrics calls the underlying NetworkTransactionMetrics.
+func (x *MetricMediaResourceRequestEvent) NetworkTransactionMetrics() *foundation.NSURLSessionTaskMetrics {
+	return x.inner.NetworkTransactionMetrics()
+}
+
 func (x *MetricMediaResourceRequestEvent) asMetricEvent() *raw.AVMetricEvent { return &x.inner.AVMetricEvent }
+
+// MetricMediaResourceRequestEventable is the interface implemented by [MetricMediaResourceRequestEvent], for mocking and DI.
+type MetricMediaResourceRequestEventable interface {
+	Unwrap() *raw.AVMetricMediaResourceRequestEvent
+	Url() *foundation.NSURL
+	ServerAddress() string
+	RequestStartTime() *foundation.NSDate
+	RequestEndTime() *foundation.NSDate
+	ResponseStartTime() *foundation.NSDate
+	ResponseEndTime() *foundation.NSDate
+	ByteRange() foundation.NSRange
+	WasReadFromCache() bool
+	ErrorEvent() *MetricErrorEvent
+	NetworkTransactionMetrics() *foundation.NSURLSessionTaskMetrics
+}
+
+var _ MetricMediaResourceRequestEventable = (*MetricMediaResourceRequestEvent)(nil)
 

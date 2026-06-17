@@ -8,6 +8,7 @@ import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // AssetResourceLoadingRequest wraps [raw.AVAssetResourceLoadingRequest] with a fluent Go API.
@@ -36,5 +37,116 @@ func (x *AssetResourceLoadingRequest) WithRedirect(redirect *foundation.NSURLReq
 	return x
 }
 
+// FinishLoading calls the underlying FinishLoading.
+func (x *AssetResourceLoadingRequest) FinishLoading() {
+	x.inner.FinishLoading()
+}
+
+// FinishLoadingWithError calls the underlying FinishLoadingWithError.
+func (x *AssetResourceLoadingRequest) FinishLoadingWithError(error_ unsafe.Pointer) {
+	x.inner.FinishLoadingWithError(error_)
+}
+
+// Request calls the underlying Request.
+func (x *AssetResourceLoadingRequest) Request() *foundation.NSURLRequest {
+	return x.inner.Request()
+}
+
+// IsFinished calls the underlying IsFinished.
+func (x *AssetResourceLoadingRequest) IsFinished() bool {
+	return x.inner.IsFinished()
+}
+
+// IsCancelled calls the underlying IsCancelled.
+func (x *AssetResourceLoadingRequest) IsCancelled() bool {
+	return x.inner.IsCancelled()
+}
+
+// ContentInformationRequest calls the underlying ContentInformationRequest.
+func (x *AssetResourceLoadingRequest) ContentInformationRequest() *AssetResourceLoadingContentInformationRequest {
+	_r := x.inner.ContentInformationRequest()
+	if _r == nil {
+		return nil
+	}
+	return &AssetResourceLoadingContentInformationRequest{inner: _r}
+}
+
+// DataRequest calls the underlying DataRequest.
+func (x *AssetResourceLoadingRequest) DataRequest() *AssetResourceLoadingDataRequest {
+	_r := x.inner.DataRequest()
+	if _r == nil {
+		return nil
+	}
+	return &AssetResourceLoadingDataRequest{inner: _r}
+}
+
+// Response calls the underlying Response.
+func (x *AssetResourceLoadingRequest) Response() *foundation.NSURLResponse {
+	return x.inner.Response()
+}
+
+// SetResponse calls the underlying SetResponse.
+func (x *AssetResourceLoadingRequest) SetResponse(response *foundation.NSURLResponse) {
+	x.inner.SetResponse(response)
+}
+
+// Redirect calls the underlying Redirect.
+func (x *AssetResourceLoadingRequest) Redirect() *foundation.NSURLRequest {
+	return x.inner.Redirect()
+}
+
+// SetRedirect calls the underlying SetRedirect.
+func (x *AssetResourceLoadingRequest) SetRedirect(redirect *foundation.NSURLRequest) {
+	x.inner.SetRedirect(redirect)
+}
+
+// Requestor calls the underlying Requestor.
+func (x *AssetResourceLoadingRequest) Requestor() *AssetResourceLoadingRequestor {
+	_r := x.inner.Requestor()
+	if _r == nil {
+		return nil
+	}
+	return &AssetResourceLoadingRequestor{inner: _r}
+}
+
+// StreamingContentKeyRequestDataForAppContentIdentifierOptionsError calls the underlying StreamingContentKeyRequestDataForAppContentIdentifierOptionsError.
+func (x *AssetResourceLoadingRequest) StreamingContentKeyRequestDataForAppContentIdentifierOptionsError(appIdentifier *foundation.NSData, contentIdentifier *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*foundation.NSData, error) {
+	return x.inner.StreamingContentKeyRequestDataForAppContentIdentifierOptionsError(appIdentifier, contentIdentifier, options)
+}
+
+// PersistentContentKeyFromKeyVendorResponseOptionsError calls the underlying PersistentContentKeyFromKeyVendorResponseOptionsError.
+func (x *AssetResourceLoadingRequest) PersistentContentKeyFromKeyVendorResponseOptionsError(keyVendorResponse *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*foundation.NSData, error) {
+	return x.inner.PersistentContentKeyFromKeyVendorResponseOptionsError(keyVendorResponse, options)
+}
+
+// FinishLoadingWithResponseDataRedirect calls the underlying FinishLoadingWithResponseDataRedirect.
+func (x *AssetResourceLoadingRequest) FinishLoadingWithResponseDataRedirect(response *foundation.NSURLResponse, data *foundation.NSData, redirect *foundation.NSURLRequest) {
+	x.inner.FinishLoadingWithResponseDataRedirect(response, data, redirect)
+}
+
 func (x *AssetResourceLoadingRequest) asAssetResourceLoadingRequest() *raw.AVAssetResourceLoadingRequest { return x.inner }
+
+// AssetResourceLoadingRequestable is the interface implemented by [AssetResourceLoadingRequest], for mocking and DI.
+type AssetResourceLoadingRequestable interface {
+	Unwrap() *raw.AVAssetResourceLoadingRequest
+	WithResponse(response *foundation.NSURLResponse) *AssetResourceLoadingRequest
+	WithRedirect(redirect *foundation.NSURLRequest) *AssetResourceLoadingRequest
+	FinishLoading()
+	FinishLoadingWithError(error_ unsafe.Pointer)
+	Request() *foundation.NSURLRequest
+	IsFinished() bool
+	IsCancelled() bool
+	ContentInformationRequest() *AssetResourceLoadingContentInformationRequest
+	DataRequest() *AssetResourceLoadingDataRequest
+	Response() *foundation.NSURLResponse
+	SetResponse(response *foundation.NSURLResponse)
+	Redirect() *foundation.NSURLRequest
+	SetRedirect(redirect *foundation.NSURLRequest)
+	Requestor() *AssetResourceLoadingRequestor
+	StreamingContentKeyRequestDataForAppContentIdentifierOptionsError(appIdentifier *foundation.NSData, contentIdentifier *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*foundation.NSData, error)
+	PersistentContentKeyFromKeyVendorResponseOptionsError(keyVendorResponse *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*foundation.NSData, error)
+	FinishLoadingWithResponseDataRedirect(response *foundation.NSURLResponse, data *foundation.NSData, redirect *foundation.NSURLRequest)
+}
+
+var _ AssetResourceLoadingRequestable = (*AssetResourceLoadingRequest)(nil)
 

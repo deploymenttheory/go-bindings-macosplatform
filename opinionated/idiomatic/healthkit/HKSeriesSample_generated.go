@@ -23,9 +23,22 @@ func NewSeriesSample() *SeriesSample {
 	return &SeriesSample{inner: raw.HKSeriesSampleFromID(_id)}
 }
 
+// Count calls the underlying Count.
+func (x *SeriesSample) Count() uint {
+	return x.inner.Count()
+}
+
 func (x *SeriesSample) asSeriesSample() *raw.HKSeriesSample { return x.inner }
 
 func (x *SeriesSample) asSample() *raw.HKSample { return &x.inner.HKSample }
 
 func (x *SeriesSample) asObject() *raw.HKObject { return &x.inner.HKSample.HKObject }
+
+// SeriesSampleable is the interface implemented by [SeriesSample], for mocking and DI.
+type SeriesSampleable interface {
+	Unwrap() *raw.HKSeriesSample
+	Count() uint
+}
+
+var _ SeriesSampleable = (*SeriesSample)(nil)
 

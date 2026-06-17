@@ -7,6 +7,7 @@ package avfoundation
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -35,4 +36,57 @@ func (x *PlayerItemTrack) WithVideoFieldMode(videoFieldMode string) *PlayerItemT
 	x.inner.SetVideoFieldMode(foundation.NSStringStringWithUTF8String(videoFieldMode))
 	return x
 }
+
+// AssetTrack calls the underlying AssetTrack.
+func (x *PlayerItemTrack) AssetTrack() *AssetTrack {
+	_r := x.inner.AssetTrack()
+	if _r == nil {
+		return nil
+	}
+	return &AssetTrack{inner: _r}
+}
+
+// IsEnabled calls the underlying IsEnabled.
+func (x *PlayerItemTrack) IsEnabled() bool {
+	return x.inner.IsEnabled()
+}
+
+// SetEnabled calls the underlying SetEnabled.
+func (x *PlayerItemTrack) SetEnabled(enabled bool) {
+	x.inner.SetEnabled(enabled)
+}
+
+// CurrentVideoFrameRate calls the underlying CurrentVideoFrameRate.
+func (x *PlayerItemTrack) CurrentVideoFrameRate() float32 {
+	return x.inner.CurrentVideoFrameRate()
+}
+
+// VideoFieldMode calls the underlying VideoFieldMode.
+func (x *PlayerItemTrack) VideoFieldMode() string {
+	_r := x.inner.VideoFieldMode()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetVideoFieldMode calls the underlying SetVideoFieldMode.
+func (x *PlayerItemTrack) SetVideoFieldMode(videoFieldMode string) {
+	x.inner.SetVideoFieldMode(foundation.NSStringStringWithUTF8String(videoFieldMode))
+}
+
+// PlayerItemTrackable is the interface implemented by [PlayerItemTrack], for mocking and DI.
+type PlayerItemTrackable interface {
+	Unwrap() *raw.AVPlayerItemTrack
+	WithEnabled(enabled bool) *PlayerItemTrack
+	WithVideoFieldMode(videoFieldMode string) *PlayerItemTrack
+	AssetTrack() *AssetTrack
+	IsEnabled() bool
+	SetEnabled(enabled bool)
+	CurrentVideoFrameRate() float32
+	VideoFieldMode() string
+	SetVideoFieldMode(videoFieldMode string)
+}
+
+var _ PlayerItemTrackable = (*PlayerItemTrack)(nil)
 

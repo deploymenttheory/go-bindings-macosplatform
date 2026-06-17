@@ -29,5 +29,25 @@ func (x *TokenDriver) WithDelegate(delegate raw.TKTokenDriverDelegate) *TokenDri
 	return x
 }
 
+// Delegate calls the underlying Delegate.
+func (x *TokenDriver) Delegate() raw.TKTokenDriverDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *TokenDriver) SetDelegate(delegate raw.TKTokenDriverDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
 func (x *TokenDriver) asTokenDriver() *raw.TKTokenDriver { return x.inner }
+
+// TokenDriverable is the interface implemented by [TokenDriver], for mocking and DI.
+type TokenDriverable interface {
+	Unwrap() *raw.TKTokenDriver
+	WithDelegate(delegate raw.TKTokenDriverDelegate) *TokenDriver
+	Delegate() raw.TKTokenDriverDelegate
+	SetDelegate(delegate raw.TKTokenDriverDelegate)
+}
+
+var _ TokenDriverable = (*TokenDriver)(nil)
 

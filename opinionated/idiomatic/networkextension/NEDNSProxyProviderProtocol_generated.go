@@ -7,6 +7,7 @@ package networkextension
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -36,5 +37,42 @@ func (x *NEDNSProxyProviderProtocol) WithProviderBundleIdentifier(providerBundle
 	return x
 }
 
+// ProviderConfiguration calls the underlying ProviderConfiguration.
+func (x *NEDNSProxyProviderProtocol) ProviderConfiguration() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ProviderConfiguration()
+}
+
+// SetProviderConfiguration calls the underlying SetProviderConfiguration.
+func (x *NEDNSProxyProviderProtocol) SetProviderConfiguration(providerConfiguration *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
+	x.inner.SetProviderConfiguration(providerConfiguration)
+}
+
+// ProviderBundleIdentifier calls the underlying ProviderBundleIdentifier.
+func (x *NEDNSProxyProviderProtocol) ProviderBundleIdentifier() string {
+	_r := x.inner.ProviderBundleIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetProviderBundleIdentifier calls the underlying SetProviderBundleIdentifier.
+func (x *NEDNSProxyProviderProtocol) SetProviderBundleIdentifier(providerBundleIdentifier string) {
+	x.inner.SetProviderBundleIdentifier(foundation.NSStringStringWithUTF8String(providerBundleIdentifier))
+}
+
 func (x *NEDNSProxyProviderProtocol) asNEVPNProtocol() *raw.NEVPNProtocol { return &x.inner.NEVPNProtocol }
+
+// NEDNSProxyProviderProtocolable is the interface implemented by [NEDNSProxyProviderProtocol], for mocking and DI.
+type NEDNSProxyProviderProtocolable interface {
+	Unwrap() *raw.NEDNSProxyProviderProtocol
+	WithProviderConfiguration(providerConfiguration *foundation.NSDictionary[*foundation.NSString, objc.ID]) *NEDNSProxyProviderProtocol
+	WithProviderBundleIdentifier(providerBundleIdentifier string) *NEDNSProxyProviderProtocol
+	ProviderConfiguration() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	SetProviderConfiguration(providerConfiguration *foundation.NSDictionary[*foundation.NSString, objc.ID])
+	ProviderBundleIdentifier() string
+	SetProviderBundleIdentifier(providerBundleIdentifier string)
+}
+
+var _ NEDNSProxyProviderProtocolable = (*NEDNSProxyProviderProtocol)(nil)
 

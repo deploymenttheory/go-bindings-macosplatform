@@ -25,3 +25,44 @@ func NewCaptureExternalDisplayConfiguratorWithDevicePreviewLayerConfiguration(de
 	return &CaptureExternalDisplayConfigurator{inner: raw.AVCaptureExternalDisplayConfiguratorFromID(_id)}
 }
 
+// Stop calls the underlying Stop.
+func (x *CaptureExternalDisplayConfigurator) Stop() {
+	x.inner.Stop()
+}
+
+// Device calls the underlying Device.
+func (x *CaptureExternalDisplayConfigurator) Device() *CaptureDevice {
+	_r := x.inner.Device()
+	if _r == nil {
+		return nil
+	}
+	return &CaptureDevice{inner: _r}
+}
+
+// PreviewLayer calls the underlying PreviewLayer.
+func (x *CaptureExternalDisplayConfigurator) PreviewLayer() *quartzcore.CALayer {
+	return x.inner.PreviewLayer()
+}
+
+// IsActive calls the underlying IsActive.
+func (x *CaptureExternalDisplayConfigurator) IsActive() bool {
+	return x.inner.IsActive()
+}
+
+// ActiveExternalDisplayFrameRate calls the underlying ActiveExternalDisplayFrameRate.
+func (x *CaptureExternalDisplayConfigurator) ActiveExternalDisplayFrameRate() float64 {
+	return x.inner.ActiveExternalDisplayFrameRate()
+}
+
+// CaptureExternalDisplayConfiguratorable is the interface implemented by [CaptureExternalDisplayConfigurator], for mocking and DI.
+type CaptureExternalDisplayConfiguratorable interface {
+	Unwrap() *raw.AVCaptureExternalDisplayConfigurator
+	Stop()
+	Device() *CaptureDevice
+	PreviewLayer() *quartzcore.CALayer
+	IsActive() bool
+	ActiveExternalDisplayFrameRate() float64
+}
+
+var _ CaptureExternalDisplayConfiguratorable = (*CaptureExternalDisplayConfigurator)(nil)
+

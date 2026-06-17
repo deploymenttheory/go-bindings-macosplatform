@@ -23,3 +23,22 @@ func NewAuthorization() *Authorization {
 	return &Authorization{inner: raw.ASAuthorizationFromID(_id)}
 }
 
+// Provider calls the underlying Provider.
+func (x *Authorization) Provider() raw.ASAuthorizationProvider {
+	return x.inner.Provider()
+}
+
+// Credential calls the underlying Credential.
+func (x *Authorization) Credential() raw.ASAuthorizationCredential {
+	return x.inner.Credential()
+}
+
+// Authorizationable is the interface implemented by [Authorization], for mocking and DI.
+type Authorizationable interface {
+	Unwrap() *raw.ASAuthorization
+	Provider() raw.ASAuthorizationProvider
+	Credential() raw.ASAuthorizationCredential
+}
+
+var _ Authorizationable = (*Authorization)(nil)
+

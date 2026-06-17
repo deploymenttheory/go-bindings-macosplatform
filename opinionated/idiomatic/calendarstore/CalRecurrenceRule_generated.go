@@ -81,3 +81,62 @@ func NewCalRecurrenceRuleYearlyRecurrenceWithIntervalForDayOfTheWeekForWeekOfThe
 	return &CalRecurrenceRule{inner: raw.CalRecurrenceRuleFromID(_id)}
 }
 
+// RecurrenceEnd calls the underlying RecurrenceEnd.
+func (x *CalRecurrenceRule) RecurrenceEnd() *CalRecurrenceEnd {
+	_r := x.inner.RecurrenceEnd()
+	if _r == nil {
+		return nil
+	}
+	return &CalRecurrenceEnd{inner: _r}
+}
+
+// RecurrenceType calls the underlying RecurrenceType.
+func (x *CalRecurrenceRule) RecurrenceType() raw.CalRecurrenceType {
+	return x.inner.RecurrenceType()
+}
+
+// RecurrenceInterval calls the underlying RecurrenceInterval.
+func (x *CalRecurrenceRule) RecurrenceInterval() uint {
+	return x.inner.RecurrenceInterval()
+}
+
+// FirstDayOfTheWeek calls the underlying FirstDayOfTheWeek.
+func (x *CalRecurrenceRule) FirstDayOfTheWeek() uint {
+	return x.inner.FirstDayOfTheWeek()
+}
+
+// DaysOfTheWeek calls the underlying DaysOfTheWeek.
+func (x *CalRecurrenceRule) DaysOfTheWeek() *foundation.NSArray[objc.ID] {
+	return x.inner.DaysOfTheWeek()
+}
+
+// DaysOfTheMonth calls the underlying DaysOfTheMonth.
+func (x *CalRecurrenceRule) DaysOfTheMonth() *foundation.NSArray[objc.ID] {
+	return x.inner.DaysOfTheMonth()
+}
+
+// NthWeekDaysOfTheMonth calls the underlying NthWeekDaysOfTheMonth.
+func (x *CalRecurrenceRule) NthWeekDaysOfTheMonth() *foundation.NSArray[objc.ID] {
+	return x.inner.NthWeekDaysOfTheMonth()
+}
+
+// MonthsOfTheYear calls the underlying MonthsOfTheYear.
+func (x *CalRecurrenceRule) MonthsOfTheYear() *foundation.NSArray[objc.ID] {
+	return x.inner.MonthsOfTheYear()
+}
+
+// CalRecurrenceRuleable is the interface implemented by [CalRecurrenceRule], for mocking and DI.
+type CalRecurrenceRuleable interface {
+	Unwrap() *raw.CalRecurrenceRule
+	RecurrenceEnd() *CalRecurrenceEnd
+	RecurrenceType() raw.CalRecurrenceType
+	RecurrenceInterval() uint
+	FirstDayOfTheWeek() uint
+	DaysOfTheWeek() *foundation.NSArray[objc.ID]
+	DaysOfTheMonth() *foundation.NSArray[objc.ID]
+	NthWeekDaysOfTheMonth() *foundation.NSArray[objc.ID]
+	MonthsOfTheYear() *foundation.NSArray[objc.ID]
+}
+
+var _ CalRecurrenceRuleable = (*CalRecurrenceRule)(nil)
+

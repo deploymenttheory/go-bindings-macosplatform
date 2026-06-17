@@ -35,5 +35,42 @@ func (x *GenericPlatformConfiguration) WithNestedVirtualizationEnabled(nestedVir
 	return x
 }
 
+// MachineIdentifier calls the underlying MachineIdentifier.
+func (x *GenericPlatformConfiguration) MachineIdentifier() *GenericMachineIdentifier {
+	_r := x.inner.MachineIdentifier()
+	if _r == nil {
+		return nil
+	}
+	return &GenericMachineIdentifier{inner: _r}
+}
+
+// SetMachineIdentifier calls the underlying SetMachineIdentifier.
+func (x *GenericPlatformConfiguration) SetMachineIdentifier(machineIdentifier *raw.VZGenericMachineIdentifier) {
+	x.inner.SetMachineIdentifier(machineIdentifier)
+}
+
+// IsNestedVirtualizationEnabled calls the underlying IsNestedVirtualizationEnabled.
+func (x *GenericPlatformConfiguration) IsNestedVirtualizationEnabled() bool {
+	return x.inner.IsNestedVirtualizationEnabled()
+}
+
+// SetNestedVirtualizationEnabled calls the underlying SetNestedVirtualizationEnabled.
+func (x *GenericPlatformConfiguration) SetNestedVirtualizationEnabled(nestedVirtualizationEnabled bool) {
+	x.inner.SetNestedVirtualizationEnabled(nestedVirtualizationEnabled)
+}
+
 func (x *GenericPlatformConfiguration) asPlatformConfiguration() *raw.VZPlatformConfiguration { return &x.inner.VZPlatformConfiguration }
+
+// GenericPlatformConfigurationable is the interface implemented by [GenericPlatformConfiguration], for mocking and DI.
+type GenericPlatformConfigurationable interface {
+	Unwrap() *raw.VZGenericPlatformConfiguration
+	WithMachineIdentifier(machineIdentifier *raw.VZGenericMachineIdentifier) *GenericPlatformConfiguration
+	WithNestedVirtualizationEnabled(nestedVirtualizationEnabled bool) *GenericPlatformConfiguration
+	MachineIdentifier() *GenericMachineIdentifier
+	SetMachineIdentifier(machineIdentifier *raw.VZGenericMachineIdentifier)
+	IsNestedVirtualizationEnabled() bool
+	SetNestedVirtualizationEnabled(nestedVirtualizationEnabled bool)
+}
+
+var _ GenericPlatformConfigurationable = (*GenericPlatformConfiguration)(nil)
 

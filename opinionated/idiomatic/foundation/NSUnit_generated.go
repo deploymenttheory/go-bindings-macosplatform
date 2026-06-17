@@ -23,7 +23,24 @@ func NewUnit() *Unit {
 	return &Unit{inner: raw.NSUnitFromID(_id)}
 }
 
+// Symbol calls the underlying Symbol.
+func (x *Unit) Symbol() *String {
+	_r := x.inner.Symbol()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
 func (x *Unit) asUnit() *raw.NSUnit { return x.inner }
 
 func (x *Unit) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// Unitable is the interface implemented by [Unit], for mocking and DI.
+type Unitable interface {
+	Unwrap() *raw.NSUnit
+	Symbol() *String
+}
+
+var _ Unitable = (*Unit)(nil)
 

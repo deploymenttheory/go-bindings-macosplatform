@@ -29,3 +29,10 @@ func (x *UnitDuration) asUnit() *raw.NSUnit { return &x.inner.NSDimension.NSUnit
 
 func (x *UnitDuration) asObject() *raw.NSObject { return &x.inner.NSDimension.NSUnit.NSObject }
 
+// UnitDurationable is the interface implemented by [UnitDuration], for mocking and DI.
+type UnitDurationable interface {
+	Unwrap() *raw.NSUnitDuration
+}
+
+var _ UnitDurationable = (*UnitDuration)(nil)
+

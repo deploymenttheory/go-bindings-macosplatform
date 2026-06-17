@@ -25,3 +25,10 @@ func NewMTRTargetNavigatorClusterTargetInfo() *MTRTargetNavigatorClusterTargetIn
 
 func (x *MTRTargetNavigatorClusterTargetInfo) asMTRTargetNavigatorClusterTargetInfoStruct() *raw.MTRTargetNavigatorClusterTargetInfoStruct { return &x.inner.MTRTargetNavigatorClusterTargetInfoStruct }
 
+// MTRTargetNavigatorClusterTargetInfoable is the interface implemented by [MTRTargetNavigatorClusterTargetInfo], for mocking and DI.
+type MTRTargetNavigatorClusterTargetInfoable interface {
+	Unwrap() *raw.MTRTargetNavigatorClusterTargetInfo
+}
+
+var _ MTRTargetNavigatorClusterTargetInfoable = (*MTRTargetNavigatorClusterTargetInfo)(nil)
+

@@ -72,3 +72,118 @@ func (x *MTRDoorLockClusterSetCredentialParams) WithServerSideProcessingTimeout(
 	return x
 }
 
+// OperationType calls the underlying OperationType.
+func (x *MTRDoorLockClusterSetCredentialParams) OperationType() *foundation.NSNumber {
+	return x.inner.OperationType()
+}
+
+// SetOperationType calls the underlying SetOperationType.
+func (x *MTRDoorLockClusterSetCredentialParams) SetOperationType(operationType *foundation.NSNumber) {
+	x.inner.SetOperationType(operationType)
+}
+
+// Credential calls the underlying Credential.
+func (x *MTRDoorLockClusterSetCredentialParams) Credential() *MTRDoorLockClusterCredentialStruct {
+	_r := x.inner.Credential()
+	if _r == nil {
+		return nil
+	}
+	return &MTRDoorLockClusterCredentialStruct{inner: _r}
+}
+
+// SetCredential calls the underlying SetCredential.
+func (x *MTRDoorLockClusterSetCredentialParams) SetCredential(credential *raw.MTRDoorLockClusterCredentialStruct) {
+	x.inner.SetCredential(credential)
+}
+
+// CredentialData calls the underlying CredentialData.
+func (x *MTRDoorLockClusterSetCredentialParams) CredentialData() *foundation.NSData {
+	return x.inner.CredentialData()
+}
+
+// SetCredentialData calls the underlying SetCredentialData.
+func (x *MTRDoorLockClusterSetCredentialParams) SetCredentialData(credentialData *foundation.NSData) {
+	x.inner.SetCredentialData(credentialData)
+}
+
+// UserIndex calls the underlying UserIndex.
+func (x *MTRDoorLockClusterSetCredentialParams) UserIndex() *foundation.NSNumber {
+	return x.inner.UserIndex()
+}
+
+// SetUserIndex calls the underlying SetUserIndex.
+func (x *MTRDoorLockClusterSetCredentialParams) SetUserIndex(userIndex *foundation.NSNumber) {
+	x.inner.SetUserIndex(userIndex)
+}
+
+// UserStatus calls the underlying UserStatus.
+func (x *MTRDoorLockClusterSetCredentialParams) UserStatus() *foundation.NSNumber {
+	return x.inner.UserStatus()
+}
+
+// SetUserStatus calls the underlying SetUserStatus.
+func (x *MTRDoorLockClusterSetCredentialParams) SetUserStatus(userStatus *foundation.NSNumber) {
+	x.inner.SetUserStatus(userStatus)
+}
+
+// UserType calls the underlying UserType.
+func (x *MTRDoorLockClusterSetCredentialParams) UserType() *foundation.NSNumber {
+	return x.inner.UserType()
+}
+
+// SetUserType calls the underlying SetUserType.
+func (x *MTRDoorLockClusterSetCredentialParams) SetUserType(userType *foundation.NSNumber) {
+	x.inner.SetUserType(userType)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRDoorLockClusterSetCredentialParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRDoorLockClusterSetCredentialParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRDoorLockClusterSetCredentialParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRDoorLockClusterSetCredentialParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRDoorLockClusterSetCredentialParamsable is the interface implemented by [MTRDoorLockClusterSetCredentialParams], for mocking and DI.
+type MTRDoorLockClusterSetCredentialParamsable interface {
+	Unwrap() *raw.MTRDoorLockClusterSetCredentialParams
+	WithOperationType(operationType *foundation.NSNumber) *MTRDoorLockClusterSetCredentialParams
+	WithCredential(credential MTRDoorLockClusterCredentialStructProvider) *MTRDoorLockClusterSetCredentialParams
+	WithCredentialData(credentialData *foundation.NSData) *MTRDoorLockClusterSetCredentialParams
+	WithUserIndex(userIndex *foundation.NSNumber) *MTRDoorLockClusterSetCredentialParams
+	WithUserStatus(userStatus *foundation.NSNumber) *MTRDoorLockClusterSetCredentialParams
+	WithUserType(userType *foundation.NSNumber) *MTRDoorLockClusterSetCredentialParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRDoorLockClusterSetCredentialParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRDoorLockClusterSetCredentialParams
+	OperationType() *foundation.NSNumber
+	SetOperationType(operationType *foundation.NSNumber)
+	Credential() *MTRDoorLockClusterCredentialStruct
+	SetCredential(credential *raw.MTRDoorLockClusterCredentialStruct)
+	CredentialData() *foundation.NSData
+	SetCredentialData(credentialData *foundation.NSData)
+	UserIndex() *foundation.NSNumber
+	SetUserIndex(userIndex *foundation.NSNumber)
+	UserStatus() *foundation.NSNumber
+	SetUserStatus(userStatus *foundation.NSNumber)
+	UserType() *foundation.NSNumber
+	SetUserType(userType *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRDoorLockClusterSetCredentialParamsable = (*MTRDoorLockClusterSetCredentialParams)(nil)
+

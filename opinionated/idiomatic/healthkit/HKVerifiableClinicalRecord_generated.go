@@ -7,7 +7,9 @@ package healthkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // VerifiableClinicalRecord wraps [raw.HKVerifiableClinicalRecord] with a fluent Go API.
@@ -25,32 +27,97 @@ func NewVerifiableClinicalRecord() *VerifiableClinicalRecord {
 }
 
 // RecordTypes returns the collection as a Go slice.
-func (x *VerifiableClinicalRecord) RecordTypes() []*foundation.NSString {
+func (x *VerifiableClinicalRecord) RecordTypes() []string {
 	arr := x.inner.RecordTypes()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// IssuerIdentifier calls the underlying IssuerIdentifier.
+func (x *VerifiableClinicalRecord) IssuerIdentifier() string {
+	_r := x.inner.IssuerIdentifier()
+	if _r == nil {
+		return ""
 	}
-	return out
+	return purego.GoString(_r.Ptr())
+}
+
+// Subject calls the underlying Subject.
+func (x *VerifiableClinicalRecord) Subject() *VerifiableClinicalRecordSubject {
+	_r := x.inner.Subject()
+	if _r == nil {
+		return nil
+	}
+	return &VerifiableClinicalRecordSubject{inner: _r}
+}
+
+// IssuedDate calls the underlying IssuedDate.
+func (x *VerifiableClinicalRecord) IssuedDate() *foundation.NSDate {
+	return x.inner.IssuedDate()
+}
+
+// RelevantDate calls the underlying RelevantDate.
+func (x *VerifiableClinicalRecord) RelevantDate() *foundation.NSDate {
+	return x.inner.RelevantDate()
+}
+
+// ExpirationDate calls the underlying ExpirationDate.
+func (x *VerifiableClinicalRecord) ExpirationDate() *foundation.NSDate {
+	return x.inner.ExpirationDate()
 }
 
 // ItemNames returns the collection as a Go slice.
-func (x *VerifiableClinicalRecord) ItemNames() []*foundation.NSString {
+func (x *VerifiableClinicalRecord) ItemNames() []string {
 	arr := x.inner.ItemNames()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// SourceType calls the underlying SourceType.
+func (x *VerifiableClinicalRecord) SourceType() string {
+	_r := x.inner.SourceType()
+	if _r == nil {
+		return ""
 	}
-	return out
+	return purego.GoString(_r.Ptr())
+}
+
+// DataRepresentation calls the underlying DataRepresentation.
+func (x *VerifiableClinicalRecord) DataRepresentation() *foundation.NSData {
+	return x.inner.DataRepresentation()
+}
+
+// JWSRepresentation calls the underlying JWSRepresentation.
+func (x *VerifiableClinicalRecord) JWSRepresentation() unsafe.Pointer {
+	return x.inner.JWSRepresentation()
 }
 
 func (x *VerifiableClinicalRecord) asSample() *raw.HKSample { return &x.inner.HKSample }
 
 func (x *VerifiableClinicalRecord) asObject() *raw.HKObject { return &x.inner.HKSample.HKObject }
+
+// VerifiableClinicalRecordable is the interface implemented by [VerifiableClinicalRecord], for mocking and DI.
+type VerifiableClinicalRecordable interface {
+	Unwrap() *raw.HKVerifiableClinicalRecord
+	RecordTypes() []string
+	IssuerIdentifier() string
+	Subject() *VerifiableClinicalRecordSubject
+	IssuedDate() *foundation.NSDate
+	RelevantDate() *foundation.NSDate
+	ExpirationDate() *foundation.NSDate
+	ItemNames() []string
+	SourceType() string
+	DataRepresentation() *foundation.NSData
+	JWSRepresentation() unsafe.Pointer
+}
+
+var _ VerifiableClinicalRecordable = (*VerifiableClinicalRecord)(nil)
 

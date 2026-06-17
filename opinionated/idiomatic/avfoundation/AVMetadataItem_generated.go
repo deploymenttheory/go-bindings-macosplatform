@@ -7,7 +7,9 @@ package avfoundation
 import (
 	"context"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -25,6 +27,92 @@ func NewMetadataItem() *MetadataItem {
 	return &MetadataItem{inner: raw.AVMetadataItemFromID(_id)}
 }
 
+// Identifier calls the underlying Identifier.
+func (x *MetadataItem) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ExtendedLanguageTag calls the underlying ExtendedLanguageTag.
+func (x *MetadataItem) ExtendedLanguageTag() string {
+	_r := x.inner.ExtendedLanguageTag()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Locale calls the underlying Locale.
+func (x *MetadataItem) Locale() *foundation.NSLocale {
+	return x.inner.Locale()
+}
+
+// Time calls the underlying Time.
+func (x *MetadataItem) Time() coremedia.CMTime {
+	return x.inner.Time()
+}
+
+// Duration calls the underlying Duration.
+func (x *MetadataItem) Duration() coremedia.CMTime {
+	return x.inner.Duration()
+}
+
+// DataType calls the underlying DataType.
+func (x *MetadataItem) DataType() string {
+	_r := x.inner.DataType()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Value calls the underlying Value.
+func (x *MetadataItem) Value() objc.ID {
+	return x.inner.Value()
+}
+
+// ExtraAttributes calls the underlying ExtraAttributes.
+func (x *MetadataItem) ExtraAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ExtraAttributes()
+}
+
+// StartDate calls the underlying StartDate.
+func (x *MetadataItem) StartDate() *foundation.NSDate {
+	return x.inner.StartDate()
+}
+
+// StringValue calls the underlying StringValue.
+func (x *MetadataItem) StringValue() string {
+	_r := x.inner.StringValue()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// NumberValue calls the underlying NumberValue.
+func (x *MetadataItem) NumberValue() *foundation.NSNumber {
+	return x.inner.NumberValue()
+}
+
+// DateValue calls the underlying DateValue.
+func (x *MetadataItem) DateValue() *foundation.NSDate {
+	return x.inner.DateValue()
+}
+
+// DataValue calls the underlying DataValue.
+func (x *MetadataItem) DataValue() *foundation.NSData {
+	return x.inner.DataValue()
+}
+
+// StatusOfValueForKeyError calls the underlying StatusOfValueForKeyError.
+func (x *MetadataItem) StatusOfValueForKeyError(key string) (raw.AVKeyValueStatus, error) {
+	return x.inner.StatusOfValueForKeyError(foundation.NSStringStringWithUTF8String(key))
+}
+
 // LoadValuesAsynchronouslyForKeys blocks until the operation completes or ctx is cancelled.
 func (x *MetadataItem) LoadValuesAsynchronouslyForKeys(ctx context.Context, keys *foundation.NSArray[*foundation.NSString]) error {
 	_ch := make(chan error, 1)
@@ -39,5 +127,53 @@ func (x *MetadataItem) LoadValuesAsynchronouslyForKeys(ctx context.Context, keys
 	}
 }
 
+// Key calls the underlying Key.
+func (x *MetadataItem) Key() objc.ID {
+	return x.inner.Key()
+}
+
+// CommonKey calls the underlying CommonKey.
+func (x *MetadataItem) CommonKey() string {
+	_r := x.inner.CommonKey()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// KeySpace calls the underlying KeySpace.
+func (x *MetadataItem) KeySpace() string {
+	_r := x.inner.KeySpace()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 func (x *MetadataItem) asMetadataItem() *raw.AVMetadataItem { return x.inner }
+
+// MetadataItemable is the interface implemented by [MetadataItem], for mocking and DI.
+type MetadataItemable interface {
+	Unwrap() *raw.AVMetadataItem
+	Identifier() string
+	ExtendedLanguageTag() string
+	Locale() *foundation.NSLocale
+	Time() coremedia.CMTime
+	Duration() coremedia.CMTime
+	DataType() string
+	Value() objc.ID
+	ExtraAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	StartDate() *foundation.NSDate
+	StringValue() string
+	NumberValue() *foundation.NSNumber
+	DateValue() *foundation.NSDate
+	DataValue() *foundation.NSData
+	StatusOfValueForKeyError(key string) (raw.AVKeyValueStatus, error)
+	LoadValuesAsynchronouslyForKeys(ctx context.Context, keys *foundation.NSArray[*foundation.NSString]) error
+	Key() objc.ID
+	CommonKey() string
+	KeySpace() string
+}
+
+var _ MetadataItemable = (*MetadataItem)(nil)
 

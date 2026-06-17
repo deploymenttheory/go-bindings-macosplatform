@@ -51,5 +51,51 @@ func (x *MacGraphicsDisplayConfiguration) WithPixelsPerInch(pixelsPerInch int) *
 	return x
 }
 
+// WidthInPixels calls the underlying WidthInPixels.
+func (x *MacGraphicsDisplayConfiguration) WidthInPixels() int {
+	return x.inner.WidthInPixels()
+}
+
+// SetWidthInPixels calls the underlying SetWidthInPixels.
+func (x *MacGraphicsDisplayConfiguration) SetWidthInPixels(widthInPixels int) {
+	x.inner.SetWidthInPixels(widthInPixels)
+}
+
+// HeightInPixels calls the underlying HeightInPixels.
+func (x *MacGraphicsDisplayConfiguration) HeightInPixels() int {
+	return x.inner.HeightInPixels()
+}
+
+// SetHeightInPixels calls the underlying SetHeightInPixels.
+func (x *MacGraphicsDisplayConfiguration) SetHeightInPixels(heightInPixels int) {
+	x.inner.SetHeightInPixels(heightInPixels)
+}
+
+// PixelsPerInch calls the underlying PixelsPerInch.
+func (x *MacGraphicsDisplayConfiguration) PixelsPerInch() int {
+	return x.inner.PixelsPerInch()
+}
+
+// SetPixelsPerInch calls the underlying SetPixelsPerInch.
+func (x *MacGraphicsDisplayConfiguration) SetPixelsPerInch(pixelsPerInch int) {
+	x.inner.SetPixelsPerInch(pixelsPerInch)
+}
+
 func (x *MacGraphicsDisplayConfiguration) asGraphicsDisplayConfiguration() *raw.VZGraphicsDisplayConfiguration { return &x.inner.VZGraphicsDisplayConfiguration }
+
+// MacGraphicsDisplayConfigurationable is the interface implemented by [MacGraphicsDisplayConfiguration], for mocking and DI.
+type MacGraphicsDisplayConfigurationable interface {
+	Unwrap() *raw.VZMacGraphicsDisplayConfiguration
+	WithWidthInPixels(widthInPixels int) *MacGraphicsDisplayConfiguration
+	WithHeightInPixels(heightInPixels int) *MacGraphicsDisplayConfiguration
+	WithPixelsPerInch(pixelsPerInch int) *MacGraphicsDisplayConfiguration
+	WidthInPixels() int
+	SetWidthInPixels(widthInPixels int)
+	HeightInPixels() int
+	SetHeightInPixels(heightInPixels int)
+	PixelsPerInch() int
+	SetPixelsPerInch(pixelsPerInch int)
+}
+
+var _ MacGraphicsDisplayConfigurationable = (*MacGraphicsDisplayConfiguration)(nil)
 

@@ -6,6 +6,7 @@ package cloudkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +24,40 @@ func NewQueryNotification() *QueryNotification {
 	return &QueryNotification{inner: raw.CKQueryNotificationFromID(_id)}
 }
 
+// QueryNotificationReason calls the underlying QueryNotificationReason.
+func (x *QueryNotification) QueryNotificationReason() raw.CKQueryNotificationReason {
+	return x.inner.QueryNotificationReason()
+}
+
+// RecordFields calls the underlying RecordFields.
+func (x *QueryNotification) RecordFields() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.RecordFields()
+}
+
+// RecordID calls the underlying RecordID.
+func (x *QueryNotification) RecordID() *RecordID {
+	_r := x.inner.RecordID()
+	if _r == nil {
+		return nil
+	}
+	return &RecordID{inner: _r}
+}
+
+// DatabaseScope calls the underlying DatabaseScope.
+func (x *QueryNotification) DatabaseScope() raw.CKDatabaseScope {
+	return x.inner.DatabaseScope()
+}
+
 func (x *QueryNotification) asNotification() *raw.CKNotification { return &x.inner.CKNotification }
+
+// QueryNotificationable is the interface implemented by [QueryNotification], for mocking and DI.
+type QueryNotificationable interface {
+	Unwrap() *raw.CKQueryNotification
+	QueryNotificationReason() raw.CKQueryNotificationReason
+	RecordFields() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	RecordID() *RecordID
+	DatabaseScope() raw.CKDatabaseScope
+}
+
+var _ QueryNotificationable = (*QueryNotification)(nil)
 

@@ -7,6 +7,7 @@ package corespotlight
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corespotlight"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -60,4 +61,107 @@ func (x *SearchableItem) WithUpdateListenerOptions(updateListenerOptions raw.CSS
 	x.inner.SetUpdateListenerOptions(updateListenerOptions)
 	return x
 }
+
+// CompareByRank calls the underlying CompareByRank.
+func (x *SearchableItem) CompareByRank(other *raw.CSSearchableItem) foundation.NSComparisonResult {
+	return x.inner.CompareByRank(other)
+}
+
+// UniqueIdentifier calls the underlying UniqueIdentifier.
+func (x *SearchableItem) UniqueIdentifier() string {
+	_r := x.inner.UniqueIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetUniqueIdentifier calls the underlying SetUniqueIdentifier.
+func (x *SearchableItem) SetUniqueIdentifier(uniqueIdentifier string) {
+	x.inner.SetUniqueIdentifier(foundation.NSStringStringWithUTF8String(uniqueIdentifier))
+}
+
+// DomainIdentifier calls the underlying DomainIdentifier.
+func (x *SearchableItem) DomainIdentifier() string {
+	_r := x.inner.DomainIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetDomainIdentifier calls the underlying SetDomainIdentifier.
+func (x *SearchableItem) SetDomainIdentifier(domainIdentifier string) {
+	x.inner.SetDomainIdentifier(foundation.NSStringStringWithUTF8String(domainIdentifier))
+}
+
+// ExpirationDate calls the underlying ExpirationDate.
+func (x *SearchableItem) ExpirationDate() *foundation.NSDate {
+	return x.inner.ExpirationDate()
+}
+
+// SetExpirationDate calls the underlying SetExpirationDate.
+func (x *SearchableItem) SetExpirationDate(expirationDate *foundation.NSDate) {
+	x.inner.SetExpirationDate(expirationDate)
+}
+
+// AttributeSet calls the underlying AttributeSet.
+func (x *SearchableItem) AttributeSet() *SearchableItemAttributeSet {
+	_r := x.inner.AttributeSet()
+	if _r == nil {
+		return nil
+	}
+	return &SearchableItemAttributeSet{inner: _r}
+}
+
+// SetAttributeSet calls the underlying SetAttributeSet.
+func (x *SearchableItem) SetAttributeSet(attributeSet *raw.CSSearchableItemAttributeSet) {
+	x.inner.SetAttributeSet(attributeSet)
+}
+
+// IsUpdate calls the underlying IsUpdate.
+func (x *SearchableItem) IsUpdate() bool {
+	return x.inner.IsUpdate()
+}
+
+// SetIsUpdate calls the underlying SetIsUpdate.
+func (x *SearchableItem) SetIsUpdate(isUpdate bool) {
+	x.inner.SetIsUpdate(isUpdate)
+}
+
+// UpdateListenerOptions calls the underlying UpdateListenerOptions.
+func (x *SearchableItem) UpdateListenerOptions() raw.CSSearchableItemUpdateListenerOptions {
+	return x.inner.UpdateListenerOptions()
+}
+
+// SetUpdateListenerOptions calls the underlying SetUpdateListenerOptions.
+func (x *SearchableItem) SetUpdateListenerOptions(updateListenerOptions raw.CSSearchableItemUpdateListenerOptions) {
+	x.inner.SetUpdateListenerOptions(updateListenerOptions)
+}
+
+// SearchableItemable is the interface implemented by [SearchableItem], for mocking and DI.
+type SearchableItemable interface {
+	Unwrap() *raw.CSSearchableItem
+	WithUniqueIdentifier(uniqueIdentifier string) *SearchableItem
+	WithDomainIdentifier(domainIdentifier string) *SearchableItem
+	WithExpirationDate(expirationDate *foundation.NSDate) *SearchableItem
+	WithAttributeSet(attributeSet *raw.CSSearchableItemAttributeSet) *SearchableItem
+	WithIsUpdate(isUpdate bool) *SearchableItem
+	WithUpdateListenerOptions(updateListenerOptions raw.CSSearchableItemUpdateListenerOptions) *SearchableItem
+	CompareByRank(other *raw.CSSearchableItem) foundation.NSComparisonResult
+	UniqueIdentifier() string
+	SetUniqueIdentifier(uniqueIdentifier string)
+	DomainIdentifier() string
+	SetDomainIdentifier(domainIdentifier string)
+	ExpirationDate() *foundation.NSDate
+	SetExpirationDate(expirationDate *foundation.NSDate)
+	AttributeSet() *SearchableItemAttributeSet
+	SetAttributeSet(attributeSet *raw.CSSearchableItemAttributeSet)
+	IsUpdate() bool
+	SetIsUpdate(isUpdate bool)
+	UpdateListenerOptions() raw.CSSearchableItemUpdateListenerOptions
+	SetUpdateListenerOptions(updateListenerOptions raw.CSSearchableItemUpdateListenerOptions)
+}
+
+var _ SearchableItemable = (*SearchableItem)(nil)
 

@@ -23,7 +23,64 @@ func NewXboxGamepad() *XboxGamepad {
 	return &XboxGamepad{inner: raw.GCXboxGamepadFromID(_id)}
 }
 
+// PaddleButton1 calls the underlying PaddleButton1.
+func (x *XboxGamepad) PaddleButton1() *ControllerButtonInput {
+	_r := x.inner.PaddleButton1()
+	if _r == nil {
+		return nil
+	}
+	return &ControllerButtonInput{inner: _r}
+}
+
+// PaddleButton2 calls the underlying PaddleButton2.
+func (x *XboxGamepad) PaddleButton2() *ControllerButtonInput {
+	_r := x.inner.PaddleButton2()
+	if _r == nil {
+		return nil
+	}
+	return &ControllerButtonInput{inner: _r}
+}
+
+// PaddleButton3 calls the underlying PaddleButton3.
+func (x *XboxGamepad) PaddleButton3() *ControllerButtonInput {
+	_r := x.inner.PaddleButton3()
+	if _r == nil {
+		return nil
+	}
+	return &ControllerButtonInput{inner: _r}
+}
+
+// PaddleButton4 calls the underlying PaddleButton4.
+func (x *XboxGamepad) PaddleButton4() *ControllerButtonInput {
+	_r := x.inner.PaddleButton4()
+	if _r == nil {
+		return nil
+	}
+	return &ControllerButtonInput{inner: _r}
+}
+
+// ButtonShare calls the underlying ButtonShare.
+func (x *XboxGamepad) ButtonShare() *ControllerButtonInput {
+	_r := x.inner.ButtonShare()
+	if _r == nil {
+		return nil
+	}
+	return &ControllerButtonInput{inner: _r}
+}
+
 func (x *XboxGamepad) asExtendedGamepad() *raw.GCExtendedGamepad { return &x.inner.GCExtendedGamepad }
 
 func (x *XboxGamepad) asPhysicalInputProfile() *raw.GCPhysicalInputProfile { return &x.inner.GCExtendedGamepad.GCPhysicalInputProfile }
+
+// XboxGamepadable is the interface implemented by [XboxGamepad], for mocking and DI.
+type XboxGamepadable interface {
+	Unwrap() *raw.GCXboxGamepad
+	PaddleButton1() *ControllerButtonInput
+	PaddleButton2() *ControllerButtonInput
+	PaddleButton3() *ControllerButtonInput
+	PaddleButton4() *ControllerButtonInput
+	ButtonShare() *ControllerButtonInput
+}
+
+var _ XboxGamepadable = (*XboxGamepad)(nil)
 

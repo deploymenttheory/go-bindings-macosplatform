@@ -25,3 +25,22 @@ func NewFrameProcessorOpticalFlowWithForwardFlowBackwardFlow(forwardFlow unsafe.
 	return &FrameProcessorOpticalFlow{inner: raw.VTFrameProcessorOpticalFlowFromID(_id)}
 }
 
+// ForwardFlow calls the underlying ForwardFlow.
+func (x *FrameProcessorOpticalFlow) ForwardFlow() unsafe.Pointer {
+	return x.inner.ForwardFlow()
+}
+
+// BackwardFlow calls the underlying BackwardFlow.
+func (x *FrameProcessorOpticalFlow) BackwardFlow() unsafe.Pointer {
+	return x.inner.BackwardFlow()
+}
+
+// FrameProcessorOpticalFlowable is the interface implemented by [FrameProcessorOpticalFlow], for mocking and DI.
+type FrameProcessorOpticalFlowable interface {
+	Unwrap() *raw.VTFrameProcessorOpticalFlow
+	ForwardFlow() unsafe.Pointer
+	BackwardFlow() unsafe.Pointer
+}
+
+var _ FrameProcessorOpticalFlowable = (*FrameProcessorOpticalFlow)(nil)
+

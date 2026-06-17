@@ -52,7 +52,56 @@ func NewMutableDictionaryWithContentsOfURL(url string) *MutableDictionary {
 	return &MutableDictionary{inner: raw.NSMutableDictionaryFromID[objc.ID, objc.ID](_id)}
 }
 
+// RemoveObjectForKey calls the underlying RemoveObjectForKey.
+func (x *MutableDictionary) RemoveObjectForKey(aKey objc.ID) {
+	x.inner.RemoveObjectForKey(aKey)
+}
+
+// SetObjectForKey calls the underlying SetObjectForKey.
+func (x *MutableDictionary) SetObjectForKey(anObject objc.ID, aKey raw.NSCopying) {
+	x.inner.SetObjectForKey(anObject, aKey)
+}
+
+// AddEntriesFromDictionary calls the underlying AddEntriesFromDictionary.
+func (x *MutableDictionary) AddEntriesFromDictionary(otherDictionary *raw.NSDictionary[objc.ID, objc.ID]) {
+	x.inner.AddEntriesFromDictionary(otherDictionary)
+}
+
+// RemoveAllObjects calls the underlying RemoveAllObjects.
+func (x *MutableDictionary) RemoveAllObjects() {
+	x.inner.RemoveAllObjects()
+}
+
+// RemoveObjectsForKeys calls the underlying RemoveObjectsForKeys.
+func (x *MutableDictionary) RemoveObjectsForKeys(keyArray *raw.NSArray[objc.ID]) {
+	x.inner.RemoveObjectsForKeys(keyArray)
+}
+
+// SetDictionary calls the underlying SetDictionary.
+func (x *MutableDictionary) SetDictionary(otherDictionary *raw.NSDictionary[objc.ID, objc.ID]) {
+	x.inner.SetDictionary(otherDictionary)
+}
+
+// SetObjectForKeyedSubscript calls the underlying SetObjectForKeyedSubscript.
+func (x *MutableDictionary) SetObjectForKeyedSubscript(obj objc.ID, key raw.NSCopying) {
+	x.inner.SetObjectForKeyedSubscript(obj, key)
+}
+
 func (x *MutableDictionary) asDictionary() *raw.NSDictionary[objc.ID, objc.ID] { return &x.inner.NSDictionary }
 
 func (x *MutableDictionary) asObject() *raw.NSObject { return &x.inner.NSDictionary.NSObject }
+
+// MutableDictionaryable is the interface implemented by [MutableDictionary], for mocking and DI.
+type MutableDictionaryable interface {
+	Unwrap() *raw.NSMutableDictionary[objc.ID, objc.ID]
+	RemoveObjectForKey(aKey objc.ID)
+	SetObjectForKey(anObject objc.ID, aKey raw.NSCopying)
+	AddEntriesFromDictionary(otherDictionary *raw.NSDictionary[objc.ID, objc.ID])
+	RemoveAllObjects()
+	RemoveObjectsForKeys(keyArray *raw.NSArray[objc.ID])
+	SetDictionary(otherDictionary *raw.NSDictionary[objc.ID, objc.ID])
+	SetObjectForKeyedSubscript(obj objc.ID, key raw.NSCopying)
+}
+
+var _ MutableDictionaryable = (*MutableDictionary)(nil)
 

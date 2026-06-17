@@ -42,5 +42,33 @@ func (x *CustomTouchBarItem) WithCustomizationLabel(customizationLabel string) *
 	return x
 }
 
+// SetView calls the underlying SetView.
+func (x *CustomTouchBarItem) SetView(view *raw.NSView) {
+	x.inner.SetView(view)
+}
+
+// SetViewController calls the underlying SetViewController.
+func (x *CustomTouchBarItem) SetViewController(viewController *raw.NSViewController) {
+	x.inner.SetViewController(viewController)
+}
+
+// SetCustomizationLabel calls the underlying SetCustomizationLabel.
+func (x *CustomTouchBarItem) SetCustomizationLabel(customizationLabel string) {
+	x.inner.SetCustomizationLabel(foundation.NSStringStringWithUTF8String(customizationLabel))
+}
+
 func (x *CustomTouchBarItem) asTouchBarItem() *raw.NSTouchBarItem { return &x.inner.NSTouchBarItem }
+
+// CustomTouchBarItemable is the interface implemented by [CustomTouchBarItem], for mocking and DI.
+type CustomTouchBarItemable interface {
+	Unwrap() *raw.NSCustomTouchBarItem
+	WithView(view ViewProvider) *CustomTouchBarItem
+	WithViewController(viewController ViewControllerProvider) *CustomTouchBarItem
+	WithCustomizationLabel(customizationLabel string) *CustomTouchBarItem
+	SetView(view *raw.NSView)
+	SetViewController(viewController *raw.NSViewController)
+	SetCustomizationLabel(customizationLabel string)
+}
+
+var _ CustomTouchBarItemable = (*CustomTouchBarItem)(nil)
 

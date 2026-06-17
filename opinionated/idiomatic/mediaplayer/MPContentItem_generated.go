@@ -7,6 +7,7 @@ package mediaplayer
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mediaplayer"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -72,4 +73,137 @@ func (x *ContentItem) WithPlayable(playable bool) *ContentItem {
 	x.inner.SetPlayable(playable)
 	return x
 }
+
+// Identifier calls the underlying Identifier.
+func (x *ContentItem) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Title calls the underlying Title.
+func (x *ContentItem) Title() string {
+	_r := x.inner.Title()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetTitle calls the underlying SetTitle.
+func (x *ContentItem) SetTitle(title string) {
+	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+}
+
+// Subtitle calls the underlying Subtitle.
+func (x *ContentItem) Subtitle() string {
+	_r := x.inner.Subtitle()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetSubtitle calls the underlying SetSubtitle.
+func (x *ContentItem) SetSubtitle(subtitle string) {
+	x.inner.SetSubtitle(foundation.NSStringStringWithUTF8String(subtitle))
+}
+
+// Artwork calls the underlying Artwork.
+func (x *ContentItem) Artwork() *MediaItemArtwork {
+	_r := x.inner.Artwork()
+	if _r == nil {
+		return nil
+	}
+	return &MediaItemArtwork{inner: _r}
+}
+
+// SetArtwork calls the underlying SetArtwork.
+func (x *ContentItem) SetArtwork(artwork *raw.MPMediaItemArtwork) {
+	x.inner.SetArtwork(artwork)
+}
+
+// PlaybackProgress calls the underlying PlaybackProgress.
+func (x *ContentItem) PlaybackProgress() float32 {
+	return x.inner.PlaybackProgress()
+}
+
+// SetPlaybackProgress calls the underlying SetPlaybackProgress.
+func (x *ContentItem) SetPlaybackProgress(playbackProgress float32) {
+	x.inner.SetPlaybackProgress(playbackProgress)
+}
+
+// IsStreamingContent calls the underlying IsStreamingContent.
+func (x *ContentItem) IsStreamingContent() bool {
+	return x.inner.IsStreamingContent()
+}
+
+// SetStreamingContent calls the underlying SetStreamingContent.
+func (x *ContentItem) SetStreamingContent(streamingContent bool) {
+	x.inner.SetStreamingContent(streamingContent)
+}
+
+// IsExplicitContent calls the underlying IsExplicitContent.
+func (x *ContentItem) IsExplicitContent() bool {
+	return x.inner.IsExplicitContent()
+}
+
+// SetExplicitContent calls the underlying SetExplicitContent.
+func (x *ContentItem) SetExplicitContent(explicitContent bool) {
+	x.inner.SetExplicitContent(explicitContent)
+}
+
+// IsContainer calls the underlying IsContainer.
+func (x *ContentItem) IsContainer() bool {
+	return x.inner.IsContainer()
+}
+
+// SetContainer calls the underlying SetContainer.
+func (x *ContentItem) SetContainer(container bool) {
+	x.inner.SetContainer(container)
+}
+
+// IsPlayable calls the underlying IsPlayable.
+func (x *ContentItem) IsPlayable() bool {
+	return x.inner.IsPlayable()
+}
+
+// SetPlayable calls the underlying SetPlayable.
+func (x *ContentItem) SetPlayable(playable bool) {
+	x.inner.SetPlayable(playable)
+}
+
+// ContentItemable is the interface implemented by [ContentItem], for mocking and DI.
+type ContentItemable interface {
+	Unwrap() *raw.MPContentItem
+	WithTitle(title string) *ContentItem
+	WithSubtitle(subtitle string) *ContentItem
+	WithArtwork(artwork *raw.MPMediaItemArtwork) *ContentItem
+	WithPlaybackProgress(playbackProgress float32) *ContentItem
+	WithStreamingContent(streamingContent bool) *ContentItem
+	WithExplicitContent(explicitContent bool) *ContentItem
+	WithContainer(container bool) *ContentItem
+	WithPlayable(playable bool) *ContentItem
+	Identifier() string
+	Title() string
+	SetTitle(title string)
+	Subtitle() string
+	SetSubtitle(subtitle string)
+	Artwork() *MediaItemArtwork
+	SetArtwork(artwork *raw.MPMediaItemArtwork)
+	PlaybackProgress() float32
+	SetPlaybackProgress(playbackProgress float32)
+	IsStreamingContent() bool
+	SetStreamingContent(streamingContent bool)
+	IsExplicitContent() bool
+	SetExplicitContent(explicitContent bool)
+	IsContainer() bool
+	SetContainer(container bool)
+	IsPlayable() bool
+	SetPlayable(playable bool)
+}
+
+var _ ContentItemable = (*ContentItem)(nil)
 

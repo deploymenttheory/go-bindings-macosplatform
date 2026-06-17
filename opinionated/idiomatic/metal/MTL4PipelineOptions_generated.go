@@ -35,3 +35,36 @@ func (x *MTL4PipelineOptions) WithShaderReflection(shaderReflection raw.MTL4Shad
 	return x
 }
 
+// ShaderValidation calls the underlying ShaderValidation.
+func (x *MTL4PipelineOptions) ShaderValidation() raw.MTLShaderValidation {
+	return x.inner.ShaderValidation()
+}
+
+// SetShaderValidation calls the underlying SetShaderValidation.
+func (x *MTL4PipelineOptions) SetShaderValidation(shaderValidation raw.MTLShaderValidation) {
+	x.inner.SetShaderValidation(shaderValidation)
+}
+
+// ShaderReflection calls the underlying ShaderReflection.
+func (x *MTL4PipelineOptions) ShaderReflection() raw.MTL4ShaderReflection {
+	return x.inner.ShaderReflection()
+}
+
+// SetShaderReflection calls the underlying SetShaderReflection.
+func (x *MTL4PipelineOptions) SetShaderReflection(shaderReflection raw.MTL4ShaderReflection) {
+	x.inner.SetShaderReflection(shaderReflection)
+}
+
+// MTL4PipelineOptionsable is the interface implemented by [MTL4PipelineOptions], for mocking and DI.
+type MTL4PipelineOptionsable interface {
+	Unwrap() *raw.MTL4PipelineOptions
+	WithShaderValidation(shaderValidation raw.MTLShaderValidation) *MTL4PipelineOptions
+	WithShaderReflection(shaderReflection raw.MTL4ShaderReflection) *MTL4PipelineOptions
+	ShaderValidation() raw.MTLShaderValidation
+	SetShaderValidation(shaderValidation raw.MTLShaderValidation)
+	ShaderReflection() raw.MTL4ShaderReflection
+	SetShaderReflection(shaderReflection raw.MTL4ShaderReflection)
+}
+
+var _ MTL4PipelineOptionsable = (*MTL4PipelineOptions)(nil)
+

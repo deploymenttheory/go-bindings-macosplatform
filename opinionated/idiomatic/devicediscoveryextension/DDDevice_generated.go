@@ -8,6 +8,7 @@ import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/devicediscoveryextension"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/uniformtypeidentifiers"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -151,4 +152,320 @@ func (x *DDDevice) WithWifiAwareVendorName(wifiAwareVendorName string) *DDDevice
 	x.inner.SetWifiAwareVendorName(foundation.NSStringStringWithUTF8String(wifiAwareVendorName))
 	return x
 }
+
+// DeviceSupports calls the underlying DeviceSupports.
+func (x *DDDevice) DeviceSupports() raw.DDDeviceSupports {
+	return x.inner.DeviceSupports()
+}
+
+// SetDeviceSupports calls the underlying SetDeviceSupports.
+func (x *DDDevice) SetDeviceSupports(deviceSupports raw.DDDeviceSupports) {
+	x.inner.SetDeviceSupports(deviceSupports)
+}
+
+// BluetoothIdentifier calls the underlying BluetoothIdentifier.
+func (x *DDDevice) BluetoothIdentifier() *foundation.NSUUID {
+	return x.inner.BluetoothIdentifier()
+}
+
+// SetBluetoothIdentifier calls the underlying SetBluetoothIdentifier.
+func (x *DDDevice) SetBluetoothIdentifier(bluetoothIdentifier *foundation.NSUUID) {
+	x.inner.SetBluetoothIdentifier(bluetoothIdentifier)
+}
+
+// Category calls the underlying Category.
+func (x *DDDevice) Category() raw.DDDeviceCategory {
+	return x.inner.Category()
+}
+
+// SetCategory calls the underlying SetCategory.
+func (x *DDDevice) SetCategory(category raw.DDDeviceCategory) {
+	x.inner.SetCategory(category)
+}
+
+// DisplayImageName calls the underlying DisplayImageName.
+func (x *DDDevice) DisplayImageName() string {
+	_r := x.inner.DisplayImageName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetDisplayImageName calls the underlying SetDisplayImageName.
+func (x *DDDevice) SetDisplayImageName(displayImageName string) {
+	x.inner.SetDisplayImageName(foundation.NSStringStringWithUTF8String(displayImageName))
+}
+
+// DisplayName calls the underlying DisplayName.
+func (x *DDDevice) DisplayName() string {
+	_r := x.inner.DisplayName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetDisplayName calls the underlying SetDisplayName.
+func (x *DDDevice) SetDisplayName(displayName string) {
+	x.inner.SetDisplayName(foundation.NSStringStringWithUTF8String(displayName))
+}
+
+// Identifier calls the underlying Identifier.
+func (x *DDDevice) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetIdentifier calls the underlying SetIdentifier.
+func (x *DDDevice) SetIdentifier(identifier string) {
+	x.inner.SetIdentifier(foundation.NSStringStringWithUTF8String(identifier))
+}
+
+// MediaPlaybackState calls the underlying MediaPlaybackState.
+func (x *DDDevice) MediaPlaybackState() raw.DDDeviceMediaPlaybackState {
+	return x.inner.MediaPlaybackState()
+}
+
+// SetMediaPlaybackState calls the underlying SetMediaPlaybackState.
+func (x *DDDevice) SetMediaPlaybackState(mediaPlaybackState raw.DDDeviceMediaPlaybackState) {
+	x.inner.SetMediaPlaybackState(mediaPlaybackState)
+}
+
+// MediaContentTitle calls the underlying MediaContentTitle.
+func (x *DDDevice) MediaContentTitle() string {
+	_r := x.inner.MediaContentTitle()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetMediaContentTitle calls the underlying SetMediaContentTitle.
+func (x *DDDevice) SetMediaContentTitle(mediaContentTitle string) {
+	x.inner.SetMediaContentTitle(foundation.NSStringStringWithUTF8String(mediaContentTitle))
+}
+
+// MediaContentSubtitle calls the underlying MediaContentSubtitle.
+func (x *DDDevice) MediaContentSubtitle() string {
+	_r := x.inner.MediaContentSubtitle()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetMediaContentSubtitle calls the underlying SetMediaContentSubtitle.
+func (x *DDDevice) SetMediaContentSubtitle(mediaContentSubtitle string) {
+	x.inner.SetMediaContentSubtitle(foundation.NSStringStringWithUTF8String(mediaContentSubtitle))
+}
+
+// NetworkEndpoint calls the underlying NetworkEndpoint.
+func (x *DDDevice) NetworkEndpoint() *foundation.NSObject {
+	return x.inner.NetworkEndpoint()
+}
+
+// SetNetworkEndpoint calls the underlying SetNetworkEndpoint.
+func (x *DDDevice) SetNetworkEndpoint(networkEndpoint *foundation.NSObject) {
+	x.inner.SetNetworkEndpoint(networkEndpoint)
+}
+
+// Protocol calls the underlying Protocol.
+func (x *DDDevice) Protocol() raw.DDDeviceProtocol {
+	return x.inner.Protocol()
+}
+
+// SetProtocol calls the underlying SetProtocol.
+func (x *DDDevice) SetProtocol(protocol raw.DDDeviceProtocol) {
+	x.inner.SetProtocol(protocol)
+}
+
+// ProtocolType calls the underlying ProtocolType.
+func (x *DDDevice) ProtocolType() *uniformtypeidentifiers.UTType {
+	return x.inner.ProtocolType()
+}
+
+// SetProtocolType calls the underlying SetProtocolType.
+func (x *DDDevice) SetProtocolType(protocolType *uniformtypeidentifiers.UTType) {
+	x.inner.SetProtocolType(protocolType)
+}
+
+// State calls the underlying State.
+func (x *DDDevice) State() raw.DDDeviceState {
+	return x.inner.State()
+}
+
+// SetState calls the underlying SetState.
+func (x *DDDevice) SetState(state raw.DDDeviceState) {
+	x.inner.SetState(state)
+}
+
+// SSID calls the underlying SSID.
+func (x *DDDevice) SSID() string {
+	_r := x.inner.SSID()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetSSID calls the underlying SetSSID.
+func (x *DDDevice) SetSSID(sSID string) {
+	x.inner.SetSSID(foundation.NSStringStringWithUTF8String(sSID))
+}
+
+// SupportsGrouping calls the underlying SupportsGrouping.
+func (x *DDDevice) SupportsGrouping() bool {
+	return x.inner.SupportsGrouping()
+}
+
+// SetSupportsGrouping calls the underlying SetSupportsGrouping.
+func (x *DDDevice) SetSupportsGrouping(supportsGrouping bool) {
+	x.inner.SetSupportsGrouping(supportsGrouping)
+}
+
+// TxtRecordData calls the underlying TxtRecordData.
+func (x *DDDevice) TxtRecordData() *foundation.NSData {
+	return x.inner.TxtRecordData()
+}
+
+// SetTxtRecordData calls the underlying SetTxtRecordData.
+func (x *DDDevice) SetTxtRecordData(txtRecordData *foundation.NSData) {
+	x.inner.SetTxtRecordData(txtRecordData)
+}
+
+// Url calls the underlying Url.
+func (x *DDDevice) Url() *foundation.NSURL {
+	return x.inner.Url()
+}
+
+// SetUrl calls the underlying SetUrl.
+func (x *DDDevice) SetUrl(url string) {
+	x.inner.SetUrl(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
+}
+
+// WifiAwareServiceName calls the underlying WifiAwareServiceName.
+func (x *DDDevice) WifiAwareServiceName() string {
+	_r := x.inner.WifiAwareServiceName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetWifiAwareServiceName calls the underlying SetWifiAwareServiceName.
+func (x *DDDevice) SetWifiAwareServiceName(wifiAwareServiceName string) {
+	x.inner.SetWifiAwareServiceName(foundation.NSStringStringWithUTF8String(wifiAwareServiceName))
+}
+
+// WifiAwareServiceRole calls the underlying WifiAwareServiceRole.
+func (x *DDDevice) WifiAwareServiceRole() raw.DDDeviceWiFiAwareServiceRole {
+	return x.inner.WifiAwareServiceRole()
+}
+
+// SetWifiAwareServiceRole calls the underlying SetWifiAwareServiceRole.
+func (x *DDDevice) SetWifiAwareServiceRole(wifiAwareServiceRole raw.DDDeviceWiFiAwareServiceRole) {
+	x.inner.SetWifiAwareServiceRole(wifiAwareServiceRole)
+}
+
+// WifiAwareModelName calls the underlying WifiAwareModelName.
+func (x *DDDevice) WifiAwareModelName() string {
+	_r := x.inner.WifiAwareModelName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetWifiAwareModelName calls the underlying SetWifiAwareModelName.
+func (x *DDDevice) SetWifiAwareModelName(wifiAwareModelName string) {
+	x.inner.SetWifiAwareModelName(foundation.NSStringStringWithUTF8String(wifiAwareModelName))
+}
+
+// WifiAwareVendorName calls the underlying WifiAwareVendorName.
+func (x *DDDevice) WifiAwareVendorName() string {
+	_r := x.inner.WifiAwareVendorName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetWifiAwareVendorName calls the underlying SetWifiAwareVendorName.
+func (x *DDDevice) SetWifiAwareVendorName(wifiAwareVendorName string) {
+	x.inner.SetWifiAwareVendorName(foundation.NSStringStringWithUTF8String(wifiAwareVendorName))
+}
+
+// DDDeviceable is the interface implemented by [DDDevice], for mocking and DI.
+type DDDeviceable interface {
+	Unwrap() *raw.DDDevice
+	WithDeviceSupports(deviceSupports raw.DDDeviceSupports) *DDDevice
+	WithBluetoothIdentifier(bluetoothIdentifier *foundation.NSUUID) *DDDevice
+	WithCategory(category raw.DDDeviceCategory) *DDDevice
+	WithDisplayImageName(displayImageName string) *DDDevice
+	WithDisplayName(displayName string) *DDDevice
+	WithIdentifier(identifier string) *DDDevice
+	WithMediaPlaybackState(mediaPlaybackState raw.DDDeviceMediaPlaybackState) *DDDevice
+	WithMediaContentTitle(mediaContentTitle string) *DDDevice
+	WithMediaContentSubtitle(mediaContentSubtitle string) *DDDevice
+	WithNetworkEndpoint(networkEndpoint *foundation.NSObject) *DDDevice
+	WithProtocol(protocol raw.DDDeviceProtocol) *DDDevice
+	WithProtocolType(protocolType *uniformtypeidentifiers.UTType) *DDDevice
+	WithState(state raw.DDDeviceState) *DDDevice
+	WithSSID(sSID string) *DDDevice
+	WithSupportsGrouping(supportsGrouping bool) *DDDevice
+	WithTxtRecordData(txtRecordData *foundation.NSData) *DDDevice
+	WithUrl(url string) *DDDevice
+	WithWifiAwareServiceName(wifiAwareServiceName string) *DDDevice
+	WithWifiAwareServiceRole(wifiAwareServiceRole raw.DDDeviceWiFiAwareServiceRole) *DDDevice
+	WithWifiAwareModelName(wifiAwareModelName string) *DDDevice
+	WithWifiAwareVendorName(wifiAwareVendorName string) *DDDevice
+	DeviceSupports() raw.DDDeviceSupports
+	SetDeviceSupports(deviceSupports raw.DDDeviceSupports)
+	BluetoothIdentifier() *foundation.NSUUID
+	SetBluetoothIdentifier(bluetoothIdentifier *foundation.NSUUID)
+	Category() raw.DDDeviceCategory
+	SetCategory(category raw.DDDeviceCategory)
+	DisplayImageName() string
+	SetDisplayImageName(displayImageName string)
+	DisplayName() string
+	SetDisplayName(displayName string)
+	Identifier() string
+	SetIdentifier(identifier string)
+	MediaPlaybackState() raw.DDDeviceMediaPlaybackState
+	SetMediaPlaybackState(mediaPlaybackState raw.DDDeviceMediaPlaybackState)
+	MediaContentTitle() string
+	SetMediaContentTitle(mediaContentTitle string)
+	MediaContentSubtitle() string
+	SetMediaContentSubtitle(mediaContentSubtitle string)
+	NetworkEndpoint() *foundation.NSObject
+	SetNetworkEndpoint(networkEndpoint *foundation.NSObject)
+	Protocol() raw.DDDeviceProtocol
+	SetProtocol(protocol raw.DDDeviceProtocol)
+	ProtocolType() *uniformtypeidentifiers.UTType
+	SetProtocolType(protocolType *uniformtypeidentifiers.UTType)
+	State() raw.DDDeviceState
+	SetState(state raw.DDDeviceState)
+	SSID() string
+	SetSSID(sSID string)
+	SupportsGrouping() bool
+	SetSupportsGrouping(supportsGrouping bool)
+	TxtRecordData() *foundation.NSData
+	SetTxtRecordData(txtRecordData *foundation.NSData)
+	Url() *foundation.NSURL
+	SetUrl(url string)
+	WifiAwareServiceName() string
+	SetWifiAwareServiceName(wifiAwareServiceName string)
+	WifiAwareServiceRole() raw.DDDeviceWiFiAwareServiceRole
+	SetWifiAwareServiceRole(wifiAwareServiceRole raw.DDDeviceWiFiAwareServiceRole)
+	WifiAwareModelName() string
+	SetWifiAwareModelName(wifiAwareModelName string)
+	WifiAwareVendorName() string
+	SetWifiAwareVendorName(wifiAwareVendorName string)
+}
+
+var _ DDDeviceable = (*DDDevice)(nil)
 

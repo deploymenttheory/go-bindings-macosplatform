@@ -6,6 +6,7 @@ package gamecontroller
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamecontroller"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -29,18 +30,77 @@ func (x *MouseInput) WithMouseMovedHandler(mouseMovedHandler func(*raw.GCMouseIn
 	return x
 }
 
+// MouseMovedHandler calls the underlying MouseMovedHandler.
+func (x *MouseInput) MouseMovedHandler() objc.Block {
+	return x.inner.MouseMovedHandler()
+}
+
+// SetMouseMovedHandler calls the underlying SetMouseMovedHandler.
+func (x *MouseInput) SetMouseMovedHandler(mouseMovedHandler func(*raw.GCMouseInput, float32, float32)) {
+	x.inner.SetMouseMovedHandler(mouseMovedHandler)
+}
+
+// Scroll calls the underlying Scroll.
+func (x *MouseInput) Scroll() *DeviceCursor {
+	_r := x.inner.Scroll()
+	if _r == nil {
+		return nil
+	}
+	return &DeviceCursor{inner: _r}
+}
+
+// LeftButton calls the underlying LeftButton.
+func (x *MouseInput) LeftButton() *ControllerButtonInput {
+	_r := x.inner.LeftButton()
+	if _r == nil {
+		return nil
+	}
+	return &ControllerButtonInput{inner: _r}
+}
+
+// RightButton calls the underlying RightButton.
+func (x *MouseInput) RightButton() *ControllerButtonInput {
+	_r := x.inner.RightButton()
+	if _r == nil {
+		return nil
+	}
+	return &ControllerButtonInput{inner: _r}
+}
+
+// MiddleButton calls the underlying MiddleButton.
+func (x *MouseInput) MiddleButton() *ControllerButtonInput {
+	_r := x.inner.MiddleButton()
+	if _r == nil {
+		return nil
+	}
+	return &ControllerButtonInput{inner: _r}
+}
+
 // AuxiliaryButtons returns the collection as a Go slice.
 func (x *MouseInput) AuxiliaryButtons() []*raw.GCControllerButtonInput {
 	arr := x.inner.AuxiliaryButtons()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.GCControllerButtonInput, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.GCControllerButtonInput {
+		return raw.GCControllerButtonInputFromID(purego.Retain(_id))
+	})
 }
 
 func (x *MouseInput) asPhysicalInputProfile() *raw.GCPhysicalInputProfile { return &x.inner.GCPhysicalInputProfile }
+
+// MouseInputable is the interface implemented by [MouseInput], for mocking and DI.
+type MouseInputable interface {
+	Unwrap() *raw.GCMouseInput
+	WithMouseMovedHandler(mouseMovedHandler func(*raw.GCMouseInput, float32, float32)) *MouseInput
+	MouseMovedHandler() objc.Block
+	SetMouseMovedHandler(mouseMovedHandler func(*raw.GCMouseInput, float32, float32))
+	Scroll() *DeviceCursor
+	LeftButton() *ControllerButtonInput
+	RightButton() *ControllerButtonInput
+	MiddleButton() *ControllerButtonInput
+	AuxiliaryButtons() []*raw.GCControllerButtonInput
+}
+
+var _ MouseInputable = (*MouseInput)(nil)
 

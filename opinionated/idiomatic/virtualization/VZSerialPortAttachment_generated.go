@@ -25,3 +25,10 @@ func NewSerialPortAttachment() *SerialPortAttachment {
 
 func (x *SerialPortAttachment) asSerialPortAttachment() *raw.VZSerialPortAttachment { return x.inner }
 
+// SerialPortAttachmentable is the interface implemented by [SerialPortAttachment], for mocking and DI.
+type SerialPortAttachmentable interface {
+	Unwrap() *raw.VZSerialPortAttachment
+}
+
+var _ SerialPortAttachmentable = (*SerialPortAttachment)(nil)
+

@@ -23,5 +23,18 @@ func NewSkipIntervalCommandEvent() *SkipIntervalCommandEvent {
 	return &SkipIntervalCommandEvent{inner: raw.MPSkipIntervalCommandEventFromID(_id)}
 }
 
+// Interval calls the underlying Interval.
+func (x *SkipIntervalCommandEvent) Interval() float64 {
+	return x.inner.Interval()
+}
+
 func (x *SkipIntervalCommandEvent) asRemoteCommandEvent() *raw.MPRemoteCommandEvent { return &x.inner.MPRemoteCommandEvent }
+
+// SkipIntervalCommandEventable is the interface implemented by [SkipIntervalCommandEvent], for mocking and DI.
+type SkipIntervalCommandEventable interface {
+	Unwrap() *raw.MPSkipIntervalCommandEvent
+	Interval() float64
+}
+
+var _ SkipIntervalCommandEventable = (*SkipIntervalCommandEvent)(nil)
 

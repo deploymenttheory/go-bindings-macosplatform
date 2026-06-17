@@ -74,5 +74,50 @@ func (x *VideoNode) WithAnchorPoint(anchorPoint corefoundation.CGPoint) *VideoNo
 	return x
 }
 
+// Play calls the underlying Play.
+func (x *VideoNode) Play() {
+	x.inner.Play()
+}
+
+// Pause calls the underlying Pause.
+func (x *VideoNode) Pause() {
+	x.inner.Pause()
+}
+
+// Size calls the underlying Size.
+func (x *VideoNode) Size() corefoundation.CGSize {
+	return x.inner.Size()
+}
+
+// SetSize calls the underlying SetSize.
+func (x *VideoNode) SetSize(size corefoundation.CGSize) {
+	x.inner.SetSize(size)
+}
+
+// AnchorPoint calls the underlying AnchorPoint.
+func (x *VideoNode) AnchorPoint() corefoundation.CGPoint {
+	return x.inner.AnchorPoint()
+}
+
+// SetAnchorPoint calls the underlying SetAnchorPoint.
+func (x *VideoNode) SetAnchorPoint(anchorPoint corefoundation.CGPoint) {
+	x.inner.SetAnchorPoint(anchorPoint)
+}
+
 func (x *VideoNode) asNode() *raw.SKNode { return &x.inner.SKNode }
+
+// VideoNodeable is the interface implemented by [VideoNode], for mocking and DI.
+type VideoNodeable interface {
+	Unwrap() *raw.SKVideoNode
+	WithSize(size corefoundation.CGSize) *VideoNode
+	WithAnchorPoint(anchorPoint corefoundation.CGPoint) *VideoNode
+	Play()
+	Pause()
+	Size() corefoundation.CGSize
+	SetSize(size corefoundation.CGSize)
+	AnchorPoint() corefoundation.CGPoint
+	SetAnchorPoint(anchorPoint corefoundation.CGPoint)
+}
+
+var _ VideoNodeable = (*VideoNode)(nil)
 

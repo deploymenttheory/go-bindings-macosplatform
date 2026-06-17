@@ -7,6 +7,7 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -30,6 +31,20 @@ func (x *DOMHTMLHeadElement) WithProfile(profile string) *DOMHTMLHeadElement {
 	return x
 }
 
+// Profile calls the underlying Profile.
+func (x *DOMHTMLHeadElement) Profile() string {
+	_r := x.inner.Profile()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetProfile calls the underlying SetProfile.
+func (x *DOMHTMLHeadElement) SetProfile(profile string) {
+	x.inner.SetProfile(foundation.NSStringStringWithUTF8String(profile))
+}
+
 func (x *DOMHTMLHeadElement) asDOMHTMLElement() *raw.DOMHTMLElement { return &x.inner.DOMHTMLElement }
 
 func (x *DOMHTMLHeadElement) asDOMElement() *raw.DOMElement { return &x.inner.DOMHTMLElement.DOMElement }
@@ -39,4 +54,14 @@ func (x *DOMHTMLHeadElement) asDOMNode() *raw.DOMNode { return &x.inner.DOMHTMLE
 func (x *DOMHTMLHeadElement) asDOMObject() *raw.DOMObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject }
 
 func (x *DOMHTMLHeadElement) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject }
+
+// DOMHTMLHeadElementable is the interface implemented by [DOMHTMLHeadElement], for mocking and DI.
+type DOMHTMLHeadElementable interface {
+	Unwrap() *raw.DOMHTMLHeadElement
+	WithProfile(profile string) *DOMHTMLHeadElement
+	Profile() string
+	SetProfile(profile string)
+}
+
+var _ DOMHTMLHeadElementable = (*DOMHTMLHeadElement)(nil)
 

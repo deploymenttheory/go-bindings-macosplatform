@@ -6,7 +6,10 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // CameraCalibrationData wraps [raw.AVCameraCalibrationData] with a fluent Go API.
@@ -22,4 +25,53 @@ func NewCameraCalibrationData() *CameraCalibrationData {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCameraCalibrationData")), objc.RegisterName("new"))
 	return &CameraCalibrationData{inner: raw.AVCameraCalibrationDataFromID(_id)}
 }
+
+// IntrinsicMatrix calls the underlying IntrinsicMatrix.
+func (x *CameraCalibrationData) IntrinsicMatrix() unsafe.Pointer {
+	return x.inner.IntrinsicMatrix()
+}
+
+// IntrinsicMatrixReferenceDimensions calls the underlying IntrinsicMatrixReferenceDimensions.
+func (x *CameraCalibrationData) IntrinsicMatrixReferenceDimensions() corefoundation.CGSize {
+	return x.inner.IntrinsicMatrixReferenceDimensions()
+}
+
+// ExtrinsicMatrix calls the underlying ExtrinsicMatrix.
+func (x *CameraCalibrationData) ExtrinsicMatrix() unsafe.Pointer {
+	return x.inner.ExtrinsicMatrix()
+}
+
+// PixelSize calls the underlying PixelSize.
+func (x *CameraCalibrationData) PixelSize() float32 {
+	return x.inner.PixelSize()
+}
+
+// LensDistortionLookupTable calls the underlying LensDistortionLookupTable.
+func (x *CameraCalibrationData) LensDistortionLookupTable() *foundation.NSData {
+	return x.inner.LensDistortionLookupTable()
+}
+
+// InverseLensDistortionLookupTable calls the underlying InverseLensDistortionLookupTable.
+func (x *CameraCalibrationData) InverseLensDistortionLookupTable() *foundation.NSData {
+	return x.inner.InverseLensDistortionLookupTable()
+}
+
+// LensDistortionCenter calls the underlying LensDistortionCenter.
+func (x *CameraCalibrationData) LensDistortionCenter() corefoundation.CGPoint {
+	return x.inner.LensDistortionCenter()
+}
+
+// CameraCalibrationDataable is the interface implemented by [CameraCalibrationData], for mocking and DI.
+type CameraCalibrationDataable interface {
+	Unwrap() *raw.AVCameraCalibrationData
+	IntrinsicMatrix() unsafe.Pointer
+	IntrinsicMatrixReferenceDimensions() corefoundation.CGSize
+	ExtrinsicMatrix() unsafe.Pointer
+	PixelSize() float32
+	LensDistortionLookupTable() *foundation.NSData
+	InverseLensDistortionLookupTable() *foundation.NSData
+	LensDistortionCenter() corefoundation.CGPoint
+}
+
+var _ CameraCalibrationDataable = (*CameraCalibrationData)(nil)
 

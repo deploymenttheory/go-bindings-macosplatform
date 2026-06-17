@@ -5,7 +5,9 @@
 package uniformtypeidentifiers
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/uniformtypeidentifiers"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +24,105 @@ func NewType() *Type {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("UTType")), objc.RegisterName("new"))
 	return &Type{inner: raw.UTTypeFromID(_id)}
 }
+
+// Identifier calls the underlying Identifier.
+func (x *Type) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// PreferredFilenameExtension calls the underlying PreferredFilenameExtension.
+func (x *Type) PreferredFilenameExtension() string {
+	_r := x.inner.PreferredFilenameExtension()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// PreferredMIMEType calls the underlying PreferredMIMEType.
+func (x *Type) PreferredMIMEType() string {
+	_r := x.inner.PreferredMIMEType()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// LocalizedDescription calls the underlying LocalizedDescription.
+func (x *Type) LocalizedDescription() string {
+	_r := x.inner.LocalizedDescription()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ReferenceURL calls the underlying ReferenceURL.
+func (x *Type) ReferenceURL() *foundation.NSURL {
+	return x.inner.ReferenceURL()
+}
+
+// IsDynamic calls the underlying IsDynamic.
+func (x *Type) IsDynamic() bool {
+	return x.inner.IsDynamic()
+}
+
+// IsDeclared calls the underlying IsDeclared.
+func (x *Type) IsDeclared() bool {
+	return x.inner.IsDeclared()
+}
+
+// IsPublicType calls the underlying IsPublicType.
+func (x *Type) IsPublicType() bool {
+	return x.inner.IsPublicType()
+}
+
+// ConformsToType calls the underlying ConformsToType.
+func (x *Type) ConformsToType(type_ *raw.UTType) bool {
+	return x.inner.ConformsToType(type_)
+}
+
+// IsSupertypeOfType calls the underlying IsSupertypeOfType.
+func (x *Type) IsSupertypeOfType(type_ *raw.UTType) bool {
+	return x.inner.IsSupertypeOfType(type_)
+}
+
+// IsSubtypeOfType calls the underlying IsSubtypeOfType.
+func (x *Type) IsSubtypeOfType(type_ *raw.UTType) bool {
+	return x.inner.IsSubtypeOfType(type_)
+}
+
+// Supertypes calls the underlying Supertypes.
+func (x *Type) Supertypes() *foundation.NSSet[*raw.UTType] {
+	return x.inner.Supertypes()
+}
+
+// Tags calls the underlying Tags.
+func (x *Type) Tags() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.Tags()
+}
+
+// Typeable is the interface implemented by [Type], for mocking and DI.
+type Typeable interface {
+	Unwrap() *raw.UTType
+	Identifier() string
+	PreferredFilenameExtension() string
+	PreferredMIMEType() string
+	LocalizedDescription() string
+	ReferenceURL() *foundation.NSURL
+	IsDynamic() bool
+	IsDeclared() bool
+	IsPublicType() bool
+	ConformsToType(type_ *raw.UTType) bool
+	IsSupertypeOfType(type_ *raw.UTType) bool
+	IsSubtypeOfType(type_ *raw.UTType) bool
+	Supertypes() *foundation.NSSet[*raw.UTType]
+	Tags() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+}
+
+var _ Typeable = (*Type)(nil)
 

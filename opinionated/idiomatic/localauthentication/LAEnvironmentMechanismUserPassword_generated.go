@@ -23,5 +23,18 @@ func NewEnvironmentMechanismUserPassword() *EnvironmentMechanismUserPassword {
 	return &EnvironmentMechanismUserPassword{inner: raw.LAEnvironmentMechanismUserPasswordFromID(_id)}
 }
 
+// IsSet calls the underlying IsSet.
+func (x *EnvironmentMechanismUserPassword) IsSet() bool {
+	return x.inner.IsSet()
+}
+
 func (x *EnvironmentMechanismUserPassword) asEnvironmentMechanism() *raw.LAEnvironmentMechanism { return &x.inner.LAEnvironmentMechanism }
+
+// EnvironmentMechanismUserPasswordable is the interface implemented by [EnvironmentMechanismUserPassword], for mocking and DI.
+type EnvironmentMechanismUserPasswordable interface {
+	Unwrap() *raw.LAEnvironmentMechanismUserPassword
+	IsSet() bool
+}
+
+var _ EnvironmentMechanismUserPasswordable = (*EnvironmentMechanismUserPassword)(nil)
 

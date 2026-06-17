@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -87,17 +88,70 @@ func (x *CollectionLayoutSection) WithDecorationItems(items ...*raw.NSCollection
 	return x
 }
 
+// ContentInsets calls the underlying ContentInsets.
+func (x *CollectionLayoutSection) ContentInsets() raw.NSDirectionalEdgeInsets {
+	return x.inner.ContentInsets()
+}
+
+// SetContentInsets calls the underlying SetContentInsets.
+func (x *CollectionLayoutSection) SetContentInsets(contentInsets raw.NSDirectionalEdgeInsets) {
+	x.inner.SetContentInsets(contentInsets)
+}
+
+// InterGroupSpacing calls the underlying InterGroupSpacing.
+func (x *CollectionLayoutSection) InterGroupSpacing() float64 {
+	return x.inner.InterGroupSpacing()
+}
+
+// SetInterGroupSpacing calls the underlying SetInterGroupSpacing.
+func (x *CollectionLayoutSection) SetInterGroupSpacing(interGroupSpacing float64) {
+	x.inner.SetInterGroupSpacing(interGroupSpacing)
+}
+
+// OrthogonalScrollingBehavior calls the underlying OrthogonalScrollingBehavior.
+func (x *CollectionLayoutSection) OrthogonalScrollingBehavior() raw.NSCollectionLayoutSectionOrthogonalScrollingBehavior {
+	return x.inner.OrthogonalScrollingBehavior()
+}
+
+// SetOrthogonalScrollingBehavior calls the underlying SetOrthogonalScrollingBehavior.
+func (x *CollectionLayoutSection) SetOrthogonalScrollingBehavior(orthogonalScrollingBehavior raw.NSCollectionLayoutSectionOrthogonalScrollingBehavior) {
+	x.inner.SetOrthogonalScrollingBehavior(orthogonalScrollingBehavior)
+}
+
 // BoundarySupplementaryItems returns the collection as a Go slice.
 func (x *CollectionLayoutSection) BoundarySupplementaryItems() []*raw.NSCollectionLayoutBoundarySupplementaryItem {
 	arr := x.inner.BoundarySupplementaryItems()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSCollectionLayoutBoundarySupplementaryItem, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSCollectionLayoutBoundarySupplementaryItem {
+		return raw.NSCollectionLayoutBoundarySupplementaryItemFromID(purego.Retain(_id))
+	})
+}
+
+// SetBoundarySupplementaryItems calls the underlying SetBoundarySupplementaryItems.
+func (x *CollectionLayoutSection) SetBoundarySupplementaryItems(boundarySupplementaryItems *foundation.NSArray[*raw.NSCollectionLayoutBoundarySupplementaryItem]) {
+	x.inner.SetBoundarySupplementaryItems(boundarySupplementaryItems)
+}
+
+// SupplementariesFollowContentInsets calls the underlying SupplementariesFollowContentInsets.
+func (x *CollectionLayoutSection) SupplementariesFollowContentInsets() bool {
+	return x.inner.SupplementariesFollowContentInsets()
+}
+
+// SetSupplementariesFollowContentInsets calls the underlying SetSupplementariesFollowContentInsets.
+func (x *CollectionLayoutSection) SetSupplementariesFollowContentInsets(supplementariesFollowContentInsets bool) {
+	x.inner.SetSupplementariesFollowContentInsets(supplementariesFollowContentInsets)
+}
+
+// VisibleItemsInvalidationHandler calls the underlying VisibleItemsInvalidationHandler.
+func (x *CollectionLayoutSection) VisibleItemsInvalidationHandler() objc.Block {
+	return x.inner.VisibleItemsInvalidationHandler()
+}
+
+// SetVisibleItemsInvalidationHandler calls the underlying SetVisibleItemsInvalidationHandler.
+func (x *CollectionLayoutSection) SetVisibleItemsInvalidationHandler(visibleItemsInvalidationHandler objc.Block) {
+	x.inner.SetVisibleItemsInvalidationHandler(visibleItemsInvalidationHandler)
 }
 
 // DecorationItems returns the collection as a Go slice.
@@ -106,10 +160,41 @@ func (x *CollectionLayoutSection) DecorationItems() []*raw.NSCollectionLayoutDec
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSCollectionLayoutDecorationItem, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSCollectionLayoutDecorationItem {
+		return raw.NSCollectionLayoutDecorationItemFromID(purego.Retain(_id))
+	})
 }
+
+// SetDecorationItems calls the underlying SetDecorationItems.
+func (x *CollectionLayoutSection) SetDecorationItems(decorationItems *foundation.NSArray[*raw.NSCollectionLayoutDecorationItem]) {
+	x.inner.SetDecorationItems(decorationItems)
+}
+
+// CollectionLayoutSectionable is the interface implemented by [CollectionLayoutSection], for mocking and DI.
+type CollectionLayoutSectionable interface {
+	Unwrap() *raw.NSCollectionLayoutSection
+	WithContentInsets(contentInsets raw.NSDirectionalEdgeInsets) *CollectionLayoutSection
+	WithInterGroupSpacing(interGroupSpacing float64) *CollectionLayoutSection
+	WithOrthogonalScrollingBehavior(orthogonalScrollingBehavior raw.NSCollectionLayoutSectionOrthogonalScrollingBehavior) *CollectionLayoutSection
+	WithBoundarySupplementaryItems(items ...*raw.NSCollectionLayoutBoundarySupplementaryItem) *CollectionLayoutSection
+	WithSupplementariesFollowContentInsets(supplementariesFollowContentInsets bool) *CollectionLayoutSection
+	WithVisibleItemsInvalidationHandler(visibleItemsInvalidationHandler objc.Block) *CollectionLayoutSection
+	WithDecorationItems(items ...*raw.NSCollectionLayoutDecorationItem) *CollectionLayoutSection
+	ContentInsets() raw.NSDirectionalEdgeInsets
+	SetContentInsets(contentInsets raw.NSDirectionalEdgeInsets)
+	InterGroupSpacing() float64
+	SetInterGroupSpacing(interGroupSpacing float64)
+	OrthogonalScrollingBehavior() raw.NSCollectionLayoutSectionOrthogonalScrollingBehavior
+	SetOrthogonalScrollingBehavior(orthogonalScrollingBehavior raw.NSCollectionLayoutSectionOrthogonalScrollingBehavior)
+	BoundarySupplementaryItems() []*raw.NSCollectionLayoutBoundarySupplementaryItem
+	SetBoundarySupplementaryItems(boundarySupplementaryItems *foundation.NSArray[*raw.NSCollectionLayoutBoundarySupplementaryItem])
+	SupplementariesFollowContentInsets() bool
+	SetSupplementariesFollowContentInsets(supplementariesFollowContentInsets bool)
+	VisibleItemsInvalidationHandler() objc.Block
+	SetVisibleItemsInvalidationHandler(visibleItemsInvalidationHandler objc.Block)
+	DecorationItems() []*raw.NSCollectionLayoutDecorationItem
+	SetDecorationItems(decorationItems *foundation.NSArray[*raw.NSCollectionLayoutDecorationItem])
+}
+
+var _ CollectionLayoutSectionable = (*CollectionLayoutSection)(nil)
 

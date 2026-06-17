@@ -7,6 +7,7 @@ package passkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -26,5 +27,28 @@ func NewAddPassMetadataPreviewWithPassThumbnailLocalizedDescription(passThumbnai
 	return &AddPassMetadataPreview{inner: raw.PKAddPassMetadataPreviewFromID(_id)}
 }
 
+// PassThumbnailImage calls the underlying PassThumbnailImage.
+func (x *AddPassMetadataPreview) PassThumbnailImage() unsafe.Pointer {
+	return x.inner.PassThumbnailImage()
+}
+
+// LocalizedDescription calls the underlying LocalizedDescription.
+func (x *AddPassMetadataPreview) LocalizedDescription() string {
+	_r := x.inner.LocalizedDescription()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 func (x *AddPassMetadataPreview) asAddPassMetadataPreview() *raw.PKAddPassMetadataPreview { return x.inner }
+
+// AddPassMetadataPreviewable is the interface implemented by [AddPassMetadataPreview], for mocking and DI.
+type AddPassMetadataPreviewable interface {
+	Unwrap() *raw.PKAddPassMetadataPreview
+	PassThumbnailImage() unsafe.Pointer
+	LocalizedDescription() string
+}
+
+var _ AddPassMetadataPreviewable = (*AddPassMetadataPreview)(nil)
 

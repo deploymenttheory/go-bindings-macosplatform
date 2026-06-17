@@ -23,9 +23,36 @@ func NewGlassesPrescription() *GlassesPrescription {
 	return &GlassesPrescription{inner: raw.HKGlassesPrescriptionFromID(_id)}
 }
 
+// RightEye calls the underlying RightEye.
+func (x *GlassesPrescription) RightEye() *GlassesLensSpecification {
+	_r := x.inner.RightEye()
+	if _r == nil {
+		return nil
+	}
+	return &GlassesLensSpecification{inner: _r}
+}
+
+// LeftEye calls the underlying LeftEye.
+func (x *GlassesPrescription) LeftEye() *GlassesLensSpecification {
+	_r := x.inner.LeftEye()
+	if _r == nil {
+		return nil
+	}
+	return &GlassesLensSpecification{inner: _r}
+}
+
 func (x *GlassesPrescription) asVisionPrescription() *raw.HKVisionPrescription { return &x.inner.HKVisionPrescription }
 
 func (x *GlassesPrescription) asSample() *raw.HKSample { return &x.inner.HKVisionPrescription.HKSample }
 
 func (x *GlassesPrescription) asObject() *raw.HKObject { return &x.inner.HKVisionPrescription.HKSample.HKObject }
+
+// GlassesPrescriptionable is the interface implemented by [GlassesPrescription], for mocking and DI.
+type GlassesPrescriptionable interface {
+	Unwrap() *raw.HKGlassesPrescription
+	RightEye() *GlassesLensSpecification
+	LeftEye() *GlassesLensSpecification
+}
+
+var _ GlassesPrescriptionable = (*GlassesPrescription)(nil)
 

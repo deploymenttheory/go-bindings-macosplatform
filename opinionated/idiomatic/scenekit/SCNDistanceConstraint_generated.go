@@ -41,5 +41,55 @@ func (x *DistanceConstraint) WithMaximumDistance(maximumDistance float64) *Dista
 	return x
 }
 
+// Target calls the underlying Target.
+func (x *DistanceConstraint) Target() *Node {
+	_r := x.inner.Target()
+	if _r == nil {
+		return nil
+	}
+	return &Node{inner: _r}
+}
+
+// SetTarget calls the underlying SetTarget.
+func (x *DistanceConstraint) SetTarget(target *raw.SCNNode) {
+	x.inner.SetTarget(target)
+}
+
+// MinimumDistance calls the underlying MinimumDistance.
+func (x *DistanceConstraint) MinimumDistance() float64 {
+	return x.inner.MinimumDistance()
+}
+
+// SetMinimumDistance calls the underlying SetMinimumDistance.
+func (x *DistanceConstraint) SetMinimumDistance(minimumDistance float64) {
+	x.inner.SetMinimumDistance(minimumDistance)
+}
+
+// MaximumDistance calls the underlying MaximumDistance.
+func (x *DistanceConstraint) MaximumDistance() float64 {
+	return x.inner.MaximumDistance()
+}
+
+// SetMaximumDistance calls the underlying SetMaximumDistance.
+func (x *DistanceConstraint) SetMaximumDistance(maximumDistance float64) {
+	x.inner.SetMaximumDistance(maximumDistance)
+}
+
 func (x *DistanceConstraint) asConstraint() *raw.SCNConstraint { return &x.inner.SCNConstraint }
+
+// DistanceConstraintable is the interface implemented by [DistanceConstraint], for mocking and DI.
+type DistanceConstraintable interface {
+	Unwrap() *raw.SCNDistanceConstraint
+	WithTarget(target NodeProvider) *DistanceConstraint
+	WithMinimumDistance(minimumDistance float64) *DistanceConstraint
+	WithMaximumDistance(maximumDistance float64) *DistanceConstraint
+	Target() *Node
+	SetTarget(target *raw.SCNNode)
+	MinimumDistance() float64
+	SetMinimumDistance(minimumDistance float64)
+	MaximumDistance() float64
+	SetMaximumDistance(maximumDistance float64)
+}
+
+var _ DistanceConstraintable = (*DistanceConstraint)(nil)
 

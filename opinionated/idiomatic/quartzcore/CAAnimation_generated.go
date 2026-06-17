@@ -5,6 +5,7 @@
 package quartzcore
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	"github.com/ebitengine/purego/objc"
 )
@@ -47,5 +48,74 @@ func (x *Animation) WithPreferredFrameRateRange(preferredFrameRateRange raw.CAFr
 	return x
 }
 
+// ShouldArchiveValueForKey calls the underlying ShouldArchiveValueForKey.
+func (x *Animation) ShouldArchiveValueForKey(key string) bool {
+	return x.inner.ShouldArchiveValueForKey(foundation.NSStringStringWithUTF8String(key))
+}
+
+// TimingFunction calls the underlying TimingFunction.
+func (x *Animation) TimingFunction() *MediaTimingFunction {
+	_r := x.inner.TimingFunction()
+	if _r == nil {
+		return nil
+	}
+	return &MediaTimingFunction{inner: _r}
+}
+
+// SetTimingFunction calls the underlying SetTimingFunction.
+func (x *Animation) SetTimingFunction(timingFunction *raw.CAMediaTimingFunction) {
+	x.inner.SetTimingFunction(timingFunction)
+}
+
+// Delegate calls the underlying Delegate.
+func (x *Animation) Delegate() raw.CAAnimationDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *Animation) SetDelegate(delegate raw.CAAnimationDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// IsRemovedOnCompletion calls the underlying IsRemovedOnCompletion.
+func (x *Animation) IsRemovedOnCompletion() bool {
+	return x.inner.IsRemovedOnCompletion()
+}
+
+// SetRemovedOnCompletion calls the underlying SetRemovedOnCompletion.
+func (x *Animation) SetRemovedOnCompletion(removedOnCompletion bool) {
+	x.inner.SetRemovedOnCompletion(removedOnCompletion)
+}
+
+// PreferredFrameRateRange calls the underlying PreferredFrameRateRange.
+func (x *Animation) PreferredFrameRateRange() raw.CAFrameRateRange {
+	return x.inner.PreferredFrameRateRange()
+}
+
+// SetPreferredFrameRateRange calls the underlying SetPreferredFrameRateRange.
+func (x *Animation) SetPreferredFrameRateRange(preferredFrameRateRange raw.CAFrameRateRange) {
+	x.inner.SetPreferredFrameRateRange(preferredFrameRateRange)
+}
+
 func (x *Animation) asAnimation() *raw.CAAnimation { return x.inner }
+
+// Animationable is the interface implemented by [Animation], for mocking and DI.
+type Animationable interface {
+	Unwrap() *raw.CAAnimation
+	WithTimingFunction(timingFunction *raw.CAMediaTimingFunction) *Animation
+	WithDelegate(delegate raw.CAAnimationDelegate) *Animation
+	WithRemovedOnCompletion(removedOnCompletion bool) *Animation
+	WithPreferredFrameRateRange(preferredFrameRateRange raw.CAFrameRateRange) *Animation
+	ShouldArchiveValueForKey(key string) bool
+	TimingFunction() *MediaTimingFunction
+	SetTimingFunction(timingFunction *raw.CAMediaTimingFunction)
+	Delegate() raw.CAAnimationDelegate
+	SetDelegate(delegate raw.CAAnimationDelegate)
+	IsRemovedOnCompletion() bool
+	SetRemovedOnCompletion(removedOnCompletion bool)
+	PreferredFrameRateRange() raw.CAFrameRateRange
+	SetPreferredFrameRateRange(preferredFrameRateRange raw.CAFrameRateRange)
+}
+
+var _ Animationable = (*Animation)(nil)
 

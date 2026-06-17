@@ -31,5 +31,24 @@ func NewEraserToolWithEraserTypeWidth(eraserType raw.PKEraserType, width float64
 	return &EraserTool{inner: raw.PKEraserToolFromID(_id)}
 }
 
+// EraserType calls the underlying EraserType.
+func (x *EraserTool) EraserType() raw.PKEraserType {
+	return x.inner.EraserType()
+}
+
+// Width calls the underlying Width.
+func (x *EraserTool) Width() float64 {
+	return x.inner.Width()
+}
+
 func (x *EraserTool) asTool() *raw.PKTool { return &x.inner.PKTool }
+
+// EraserToolable is the interface implemented by [EraserTool], for mocking and DI.
+type EraserToolable interface {
+	Unwrap() *raw.PKEraserTool
+	EraserType() raw.PKEraserType
+	Width() float64
+}
+
+var _ EraserToolable = (*EraserTool)(nil)
 

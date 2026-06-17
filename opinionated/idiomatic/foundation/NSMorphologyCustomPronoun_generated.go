@@ -54,5 +54,97 @@ func (x *MorphologyCustomPronoun) WithReflexiveForm(reflexiveForm string) *Morph
 	return x
 }
 
+// SubjectForm calls the underlying SubjectForm.
+func (x *MorphologyCustomPronoun) SubjectForm() *String {
+	_r := x.inner.SubjectForm()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SetSubjectForm calls the underlying SetSubjectForm.
+func (x *MorphologyCustomPronoun) SetSubjectForm(subjectForm string) {
+	x.inner.SetSubjectForm(foundation.NSStringStringWithUTF8String(subjectForm))
+}
+
+// ObjectForm calls the underlying ObjectForm.
+func (x *MorphologyCustomPronoun) ObjectForm() *String {
+	_r := x.inner.ObjectForm()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SetObjectForm calls the underlying SetObjectForm.
+func (x *MorphologyCustomPronoun) SetObjectForm(objectForm string) {
+	x.inner.SetObjectForm(foundation.NSStringStringWithUTF8String(objectForm))
+}
+
+// PossessiveForm calls the underlying PossessiveForm.
+func (x *MorphologyCustomPronoun) PossessiveForm() *String {
+	_r := x.inner.PossessiveForm()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SetPossessiveForm calls the underlying SetPossessiveForm.
+func (x *MorphologyCustomPronoun) SetPossessiveForm(possessiveForm string) {
+	x.inner.SetPossessiveForm(foundation.NSStringStringWithUTF8String(possessiveForm))
+}
+
+// PossessiveAdjectiveForm calls the underlying PossessiveAdjectiveForm.
+func (x *MorphologyCustomPronoun) PossessiveAdjectiveForm() *String {
+	_r := x.inner.PossessiveAdjectiveForm()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SetPossessiveAdjectiveForm calls the underlying SetPossessiveAdjectiveForm.
+func (x *MorphologyCustomPronoun) SetPossessiveAdjectiveForm(possessiveAdjectiveForm string) {
+	x.inner.SetPossessiveAdjectiveForm(foundation.NSStringStringWithUTF8String(possessiveAdjectiveForm))
+}
+
+// ReflexiveForm calls the underlying ReflexiveForm.
+func (x *MorphologyCustomPronoun) ReflexiveForm() *String {
+	_r := x.inner.ReflexiveForm()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SetReflexiveForm calls the underlying SetReflexiveForm.
+func (x *MorphologyCustomPronoun) SetReflexiveForm(reflexiveForm string) {
+	x.inner.SetReflexiveForm(foundation.NSStringStringWithUTF8String(reflexiveForm))
+}
+
 func (x *MorphologyCustomPronoun) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// MorphologyCustomPronounable is the interface implemented by [MorphologyCustomPronoun], for mocking and DI.
+type MorphologyCustomPronounable interface {
+	Unwrap() *raw.NSMorphologyCustomPronoun
+	WithSubjectForm(subjectForm string) *MorphologyCustomPronoun
+	WithObjectForm(objectForm string) *MorphologyCustomPronoun
+	WithPossessiveForm(possessiveForm string) *MorphologyCustomPronoun
+	WithPossessiveAdjectiveForm(possessiveAdjectiveForm string) *MorphologyCustomPronoun
+	WithReflexiveForm(reflexiveForm string) *MorphologyCustomPronoun
+	SubjectForm() *String
+	SetSubjectForm(subjectForm string)
+	ObjectForm() *String
+	SetObjectForm(objectForm string)
+	PossessiveForm() *String
+	SetPossessiveForm(possessiveForm string)
+	PossessiveAdjectiveForm() *String
+	SetPossessiveAdjectiveForm(possessiveAdjectiveForm string)
+	ReflexiveForm() *String
+	SetReflexiveForm(reflexiveForm string)
+}
+
+var _ MorphologyCustomPronounable = (*MorphologyCustomPronoun)(nil)
 

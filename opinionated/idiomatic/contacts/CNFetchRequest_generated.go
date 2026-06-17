@@ -25,3 +25,10 @@ func NewFetchRequest() *FetchRequest {
 
 func (x *FetchRequest) asFetchRequest() *raw.CNFetchRequest { return x.inner }
 
+// FetchRequestable is the interface implemented by [FetchRequest], for mocking and DI.
+type FetchRequestable interface {
+	Unwrap() *raw.CNFetchRequest
+}
+
+var _ FetchRequestable = (*FetchRequest)(nil)
+

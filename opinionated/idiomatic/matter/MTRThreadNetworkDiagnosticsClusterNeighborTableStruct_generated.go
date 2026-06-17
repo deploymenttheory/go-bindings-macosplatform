@@ -108,5 +108,194 @@ func (x *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct) WithIsChild(isCh
 	return x
 }
 
+// ExtAddress calls the underlying ExtAddress.
+func (x *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct) ExtAddress() *foundation.NSNumber {
+	return x.inner.ExtAddress()
+}
+
+// SetExtAddress calls the underlying SetExtAddress.
+func (x *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct) SetExtAddress(extAddress *foundation.NSNumber) {
+	x.inner.SetExtAddress(extAddress)
+}
+
+// Age calls the underlying Age.
+func (x *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct) Age() *foundation.NSNumber {
+	return x.inner.Age()
+}
+
+// SetAge calls the underlying SetAge.
+func (x *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct) SetAge(age *foundation.NSNumber) {
+	x.inner.SetAge(age)
+}
+
+// Rloc16 calls the underlying Rloc16.
+func (x *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct) Rloc16() *foundation.NSNumber {
+	return x.inner.Rloc16()
+}
+
+// SetRloc16 calls the underlying SetRloc16.
+func (x *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct) SetRloc16(rloc16 *foundation.NSNumber) {
+	x.inner.SetRloc16(rloc16)
+}
+
+// LinkFrameCounter calls the underlying LinkFrameCounter.
+func (x *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct) LinkFrameCounter() *foundation.NSNumber {
+	return x.inner.LinkFrameCounter()
+}
+
+// SetLinkFrameCounter calls the underlying SetLinkFrameCounter.
+func (x *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct) SetLinkFrameCounter(linkFrameCounter *foundation.NSNumber) {
+	x.inner.SetLinkFrameCounter(linkFrameCounter)
+}
+
+// MleFrameCounter calls the underlying MleFrameCounter.
+func (x *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct) MleFrameCounter() *foundation.NSNumber {
+	return x.inner.MleFrameCounter()
+}
+
+// SetMleFrameCounter calls the underlying SetMleFrameCounter.
+func (x *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct) SetMleFrameCounter(mleFrameCounter *foundation.NSNumber) {
+	x.inner.SetMleFrameCounter(mleFrameCounter)
+}
+
+// Lqi calls the underlying Lqi.
+func (x *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct) Lqi() *foundation.NSNumber {
+	return x.inner.Lqi()
+}
+
+// SetLqi calls the underlying SetLqi.
+func (x *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct) SetLqi(lqi *foundation.NSNumber) {
+	x.inner.SetLqi(lqi)
+}
+
+// AverageRssi calls the underlying AverageRssi.
+func (x *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct) AverageRssi() *foundation.NSNumber {
+	return x.inner.AverageRssi()
+}
+
+// SetAverageRssi calls the underlying SetAverageRssi.
+func (x *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct) SetAverageRssi(averageRssi *foundation.NSNumber) {
+	x.inner.SetAverageRssi(averageRssi)
+}
+
+// LastRssi calls the underlying LastRssi.
+func (x *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct) LastRssi() *foundation.NSNumber {
+	return x.inner.LastRssi()
+}
+
+// SetLastRssi calls the underlying SetLastRssi.
+func (x *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct) SetLastRssi(lastRssi *foundation.NSNumber) {
+	x.inner.SetLastRssi(lastRssi)
+}
+
+// FrameErrorRate calls the underlying FrameErrorRate.
+func (x *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct) FrameErrorRate() *foundation.NSNumber {
+	return x.inner.FrameErrorRate()
+}
+
+// SetFrameErrorRate calls the underlying SetFrameErrorRate.
+func (x *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct) SetFrameErrorRate(frameErrorRate *foundation.NSNumber) {
+	x.inner.SetFrameErrorRate(frameErrorRate)
+}
+
+// MessageErrorRate calls the underlying MessageErrorRate.
+func (x *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct) MessageErrorRate() *foundation.NSNumber {
+	return x.inner.MessageErrorRate()
+}
+
+// SetMessageErrorRate calls the underlying SetMessageErrorRate.
+func (x *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct) SetMessageErrorRate(messageErrorRate *foundation.NSNumber) {
+	x.inner.SetMessageErrorRate(messageErrorRate)
+}
+
+// RxOnWhenIdle calls the underlying RxOnWhenIdle.
+func (x *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct) RxOnWhenIdle() *foundation.NSNumber {
+	return x.inner.RxOnWhenIdle()
+}
+
+// SetRxOnWhenIdle calls the underlying SetRxOnWhenIdle.
+func (x *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct) SetRxOnWhenIdle(rxOnWhenIdle *foundation.NSNumber) {
+	x.inner.SetRxOnWhenIdle(rxOnWhenIdle)
+}
+
+// FullThreadDevice calls the underlying FullThreadDevice.
+func (x *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct) FullThreadDevice() *foundation.NSNumber {
+	return x.inner.FullThreadDevice()
+}
+
+// SetFullThreadDevice calls the underlying SetFullThreadDevice.
+func (x *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct) SetFullThreadDevice(fullThreadDevice *foundation.NSNumber) {
+	x.inner.SetFullThreadDevice(fullThreadDevice)
+}
+
+// FullNetworkData calls the underlying FullNetworkData.
+func (x *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct) FullNetworkData() *foundation.NSNumber {
+	return x.inner.FullNetworkData()
+}
+
+// SetFullNetworkData calls the underlying SetFullNetworkData.
+func (x *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct) SetFullNetworkData(fullNetworkData *foundation.NSNumber) {
+	x.inner.SetFullNetworkData(fullNetworkData)
+}
+
+// IsChild calls the underlying IsChild.
+func (x *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct) IsChild() *foundation.NSNumber {
+	return x.inner.IsChild()
+}
+
+// SetIsChild calls the underlying SetIsChild.
+func (x *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct) SetIsChild(isChild *foundation.NSNumber) {
+	x.inner.SetIsChild(isChild)
+}
+
 func (x *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct) asMTRThreadNetworkDiagnosticsClusterNeighborTableStruct() *raw.MTRThreadNetworkDiagnosticsClusterNeighborTableStruct { return x.inner }
+
+// MTRThreadNetworkDiagnosticsClusterNeighborTableStructable is the interface implemented by [MTRThreadNetworkDiagnosticsClusterNeighborTableStruct], for mocking and DI.
+type MTRThreadNetworkDiagnosticsClusterNeighborTableStructable interface {
+	Unwrap() *raw.MTRThreadNetworkDiagnosticsClusterNeighborTableStruct
+	WithExtAddress(extAddress *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct
+	WithAge(age *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct
+	WithRloc16(rloc16 *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct
+	WithLinkFrameCounter(linkFrameCounter *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct
+	WithMleFrameCounter(mleFrameCounter *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct
+	WithLqi(lqi *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct
+	WithAverageRssi(averageRssi *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct
+	WithLastRssi(lastRssi *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct
+	WithFrameErrorRate(frameErrorRate *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct
+	WithMessageErrorRate(messageErrorRate *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct
+	WithRxOnWhenIdle(rxOnWhenIdle *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct
+	WithFullThreadDevice(fullThreadDevice *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct
+	WithFullNetworkData(fullNetworkData *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct
+	WithIsChild(isChild *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct
+	ExtAddress() *foundation.NSNumber
+	SetExtAddress(extAddress *foundation.NSNumber)
+	Age() *foundation.NSNumber
+	SetAge(age *foundation.NSNumber)
+	Rloc16() *foundation.NSNumber
+	SetRloc16(rloc16 *foundation.NSNumber)
+	LinkFrameCounter() *foundation.NSNumber
+	SetLinkFrameCounter(linkFrameCounter *foundation.NSNumber)
+	MleFrameCounter() *foundation.NSNumber
+	SetMleFrameCounter(mleFrameCounter *foundation.NSNumber)
+	Lqi() *foundation.NSNumber
+	SetLqi(lqi *foundation.NSNumber)
+	AverageRssi() *foundation.NSNumber
+	SetAverageRssi(averageRssi *foundation.NSNumber)
+	LastRssi() *foundation.NSNumber
+	SetLastRssi(lastRssi *foundation.NSNumber)
+	FrameErrorRate() *foundation.NSNumber
+	SetFrameErrorRate(frameErrorRate *foundation.NSNumber)
+	MessageErrorRate() *foundation.NSNumber
+	SetMessageErrorRate(messageErrorRate *foundation.NSNumber)
+	RxOnWhenIdle() *foundation.NSNumber
+	SetRxOnWhenIdle(rxOnWhenIdle *foundation.NSNumber)
+	FullThreadDevice() *foundation.NSNumber
+	SetFullThreadDevice(fullThreadDevice *foundation.NSNumber)
+	FullNetworkData() *foundation.NSNumber
+	SetFullNetworkData(fullNetworkData *foundation.NSNumber)
+	IsChild() *foundation.NSNumber
+	SetIsChild(isChild *foundation.NSNumber)
+}
+
+var _ MTRThreadNetworkDiagnosticsClusterNeighborTableStructable = (*MTRThreadNetworkDiagnosticsClusterNeighborTableStruct)(nil)
 

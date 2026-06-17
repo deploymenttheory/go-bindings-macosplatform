@@ -38,5 +38,25 @@ func (x *ScrubberProportionalLayout) WithNumberOfVisibleItems(numberOfVisibleIte
 	return x
 }
 
+// NumberOfVisibleItems calls the underlying NumberOfVisibleItems.
+func (x *ScrubberProportionalLayout) NumberOfVisibleItems() int {
+	return x.inner.NumberOfVisibleItems()
+}
+
+// SetNumberOfVisibleItems calls the underlying SetNumberOfVisibleItems.
+func (x *ScrubberProportionalLayout) SetNumberOfVisibleItems(numberOfVisibleItems int) {
+	x.inner.SetNumberOfVisibleItems(numberOfVisibleItems)
+}
+
 func (x *ScrubberProportionalLayout) asScrubberLayout() *raw.NSScrubberLayout { return &x.inner.NSScrubberLayout }
+
+// ScrubberProportionalLayoutable is the interface implemented by [ScrubberProportionalLayout], for mocking and DI.
+type ScrubberProportionalLayoutable interface {
+	Unwrap() *raw.NSScrubberProportionalLayout
+	WithNumberOfVisibleItems(numberOfVisibleItems int) *ScrubberProportionalLayout
+	NumberOfVisibleItems() int
+	SetNumberOfVisibleItems(numberOfVisibleItems int)
+}
+
+var _ ScrubberProportionalLayoutable = (*ScrubberProportionalLayout)(nil)
 

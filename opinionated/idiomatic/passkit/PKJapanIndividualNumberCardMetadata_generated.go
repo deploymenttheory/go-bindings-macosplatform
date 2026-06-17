@@ -7,6 +7,7 @@ package passkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -50,5 +51,63 @@ func (x *JapanIndividualNumberCardMetadata) WithPreview(preview AddPassMetadataP
 	return x
 }
 
+// AuthenticationPassword calls the underlying AuthenticationPassword.
+func (x *JapanIndividualNumberCardMetadata) AuthenticationPassword() string {
+	_r := x.inner.AuthenticationPassword()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetAuthenticationPassword calls the underlying SetAuthenticationPassword.
+func (x *JapanIndividualNumberCardMetadata) SetAuthenticationPassword(authenticationPassword string) {
+	x.inner.SetAuthenticationPassword(foundation.NSStringStringWithUTF8String(authenticationPassword))
+}
+
+// SigningPassword calls the underlying SigningPassword.
+func (x *JapanIndividualNumberCardMetadata) SigningPassword() string {
+	_r := x.inner.SigningPassword()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetSigningPassword calls the underlying SetSigningPassword.
+func (x *JapanIndividualNumberCardMetadata) SetSigningPassword(signingPassword string) {
+	x.inner.SetSigningPassword(foundation.NSStringStringWithUTF8String(signingPassword))
+}
+
+// Preview calls the underlying Preview.
+func (x *JapanIndividualNumberCardMetadata) Preview() *AddPassMetadataPreview {
+	_r := x.inner.Preview()
+	if _r == nil {
+		return nil
+	}
+	return &AddPassMetadataPreview{inner: _r}
+}
+
+// SetPreview calls the underlying SetPreview.
+func (x *JapanIndividualNumberCardMetadata) SetPreview(preview *raw.PKAddPassMetadataPreview) {
+	x.inner.SetPreview(preview)
+}
+
 func (x *JapanIndividualNumberCardMetadata) asIdentityDocumentMetadata() *raw.PKIdentityDocumentMetadata { return &x.inner.PKIdentityDocumentMetadata }
+
+// JapanIndividualNumberCardMetadataable is the interface implemented by [JapanIndividualNumberCardMetadata], for mocking and DI.
+type JapanIndividualNumberCardMetadataable interface {
+	Unwrap() *raw.PKJapanIndividualNumberCardMetadata
+	WithAuthenticationPassword(authenticationPassword string) *JapanIndividualNumberCardMetadata
+	WithSigningPassword(signingPassword string) *JapanIndividualNumberCardMetadata
+	WithPreview(preview AddPassMetadataPreviewProvider) *JapanIndividualNumberCardMetadata
+	AuthenticationPassword() string
+	SetAuthenticationPassword(authenticationPassword string)
+	SigningPassword() string
+	SetSigningPassword(signingPassword string)
+	Preview() *AddPassMetadataPreview
+	SetPreview(preview *raw.PKAddPassMetadataPreview)
+}
+
+var _ JapanIndividualNumberCardMetadataable = (*JapanIndividualNumberCardMetadata)(nil)
 

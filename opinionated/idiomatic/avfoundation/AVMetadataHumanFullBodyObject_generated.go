@@ -27,3 +27,10 @@ func (x *MetadataHumanFullBodyObject) asMetadataBodyObject() *raw.AVMetadataBody
 
 func (x *MetadataHumanFullBodyObject) asMetadataObject() *raw.AVMetadataObject { return &x.inner.AVMetadataBodyObject.AVMetadataObject }
 
+// MetadataHumanFullBodyObjectable is the interface implemented by [MetadataHumanFullBodyObject], for mocking and DI.
+type MetadataHumanFullBodyObjectable interface {
+	Unwrap() *raw.AVMetadataHumanFullBodyObject
+}
+
+var _ MetadataHumanFullBodyObjectable = (*MetadataHumanFullBodyObject)(nil)
+

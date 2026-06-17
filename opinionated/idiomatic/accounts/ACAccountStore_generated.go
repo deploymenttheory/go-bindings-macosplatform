@@ -6,7 +6,9 @@ package accounts
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/accounts"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // AccountStore wraps [raw.ACAccountStore] with a fluent Go API.
@@ -22,4 +24,67 @@ func NewAccountStore() *AccountStore {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ACAccountStore")), objc.RegisterName("new"))
 	return &AccountStore{inner: raw.ACAccountStoreFromID(_id)}
 }
+
+// AccountWithIdentifier calls the underlying AccountWithIdentifier.
+func (x *AccountStore) AccountWithIdentifier(identifier string) *Account {
+	_r := x.inner.AccountWithIdentifier(foundation.NSStringStringWithUTF8String(identifier))
+	if _r == nil {
+		return nil
+	}
+	return &Account{inner: _r}
+}
+
+// AccountTypeWithAccountTypeIdentifier calls the underlying AccountTypeWithAccountTypeIdentifier.
+func (x *AccountStore) AccountTypeWithAccountTypeIdentifier(typeIdentifier string) *AccountType {
+	_r := x.inner.AccountTypeWithAccountTypeIdentifier(foundation.NSStringStringWithUTF8String(typeIdentifier))
+	if _r == nil {
+		return nil
+	}
+	return &AccountType{inner: _r}
+}
+
+// AccountsWithAccountType calls the underlying AccountsWithAccountType.
+func (x *AccountStore) AccountsWithAccountType(accountType *raw.ACAccountType) *foundation.NSArray[objc.ID] {
+	return x.inner.AccountsWithAccountType(accountType)
+}
+
+// SaveAccountWithCompletionHandler calls the underlying SaveAccountWithCompletionHandler.
+func (x *AccountStore) SaveAccountWithCompletionHandler(account *raw.ACAccount, completionHandler func(bool, unsafe.Pointer)) {
+	x.inner.SaveAccountWithCompletionHandler(account, completionHandler)
+}
+
+// RequestAccessToAccountsWithTypeOptionsCompletion calls the underlying RequestAccessToAccountsWithTypeOptionsCompletion.
+func (x *AccountStore) RequestAccessToAccountsWithTypeOptionsCompletion(accountType *raw.ACAccountType, options *foundation.NSDictionary[objc.ID, objc.ID], completion func(bool, unsafe.Pointer)) {
+	x.inner.RequestAccessToAccountsWithTypeOptionsCompletion(accountType, options, completion)
+}
+
+// RenewCredentialsForAccountCompletion calls the underlying RenewCredentialsForAccountCompletion.
+func (x *AccountStore) RenewCredentialsForAccountCompletion(account *raw.ACAccount, completionHandler func(raw.ACAccountCredentialRenewResult, unsafe.Pointer)) {
+	x.inner.RenewCredentialsForAccountCompletion(account, completionHandler)
+}
+
+// RemoveAccountWithCompletionHandler calls the underlying RemoveAccountWithCompletionHandler.
+func (x *AccountStore) RemoveAccountWithCompletionHandler(account *raw.ACAccount, completionHandler func(bool, unsafe.Pointer)) {
+	x.inner.RemoveAccountWithCompletionHandler(account, completionHandler)
+}
+
+// Accounts calls the underlying Accounts.
+func (x *AccountStore) Accounts() *foundation.NSArray[objc.ID] {
+	return x.inner.Accounts()
+}
+
+// AccountStoreable is the interface implemented by [AccountStore], for mocking and DI.
+type AccountStoreable interface {
+	Unwrap() *raw.ACAccountStore
+	AccountWithIdentifier(identifier string) *Account
+	AccountTypeWithAccountTypeIdentifier(typeIdentifier string) *AccountType
+	AccountsWithAccountType(accountType *raw.ACAccountType) *foundation.NSArray[objc.ID]
+	SaveAccountWithCompletionHandler(account *raw.ACAccount, completionHandler func(bool, unsafe.Pointer))
+	RequestAccessToAccountsWithTypeOptionsCompletion(accountType *raw.ACAccountType, options *foundation.NSDictionary[objc.ID, objc.ID], completion func(bool, unsafe.Pointer))
+	RenewCredentialsForAccountCompletion(account *raw.ACAccount, completionHandler func(raw.ACAccountCredentialRenewResult, unsafe.Pointer))
+	RemoveAccountWithCompletionHandler(account *raw.ACAccount, completionHandler func(bool, unsafe.Pointer))
+	Accounts() *foundation.NSArray[objc.ID]
+}
+
+var _ AccountStoreable = (*AccountStore)(nil)
 

@@ -6,6 +6,7 @@ package sharedwithyoucore
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/sharedwithyoucore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,17 +24,24 @@ func NewUpdateCollaborationParticipantsAction() *UpdateCollaborationParticipants
 	return &UpdateCollaborationParticipantsAction{inner: raw.SWUpdateCollaborationParticipantsActionFromID(_id)}
 }
 
+// CollaborationMetadata calls the underlying CollaborationMetadata.
+func (x *UpdateCollaborationParticipantsAction) CollaborationMetadata() *CollaborationMetadata {
+	_r := x.inner.CollaborationMetadata()
+	if _r == nil {
+		return nil
+	}
+	return &CollaborationMetadata{inner: _r}
+}
+
 // AddedIdentities returns the collection as a Go slice.
 func (x *UpdateCollaborationParticipantsAction) AddedIdentities() []*raw.SWPersonIdentity {
 	arr := x.inner.AddedIdentities()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.SWPersonIdentity, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SWPersonIdentity {
+		return raw.SWPersonIdentityFromID(purego.Retain(_id))
+	})
 }
 
 // RemovedIdentities returns the collection as a Go slice.
@@ -42,12 +50,20 @@ func (x *UpdateCollaborationParticipantsAction) RemovedIdentities() []*raw.SWPer
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.SWPersonIdentity, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SWPersonIdentity {
+		return raw.SWPersonIdentityFromID(purego.Retain(_id))
+	})
 }
 
 func (x *UpdateCollaborationParticipantsAction) asAction() *raw.SWAction { return &x.inner.SWAction }
+
+// UpdateCollaborationParticipantsActionable is the interface implemented by [UpdateCollaborationParticipantsAction], for mocking and DI.
+type UpdateCollaborationParticipantsActionable interface {
+	Unwrap() *raw.SWUpdateCollaborationParticipantsAction
+	CollaborationMetadata() *CollaborationMetadata
+	AddedIdentities() []*raw.SWPersonIdentity
+	RemovedIdentities() []*raw.SWPersonIdentity
+}
+
+var _ UpdateCollaborationParticipantsActionable = (*UpdateCollaborationParticipantsAction)(nil)
 

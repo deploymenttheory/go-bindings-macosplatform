@@ -39,3 +39,22 @@ func NewMapCameraBoundaryWithCoder(coder *foundation.NSCoder) *MapCameraBoundary
 	return &MapCameraBoundary{inner: raw.MKMapCameraBoundaryFromID(_id)}
 }
 
+// MapRect calls the underlying MapRect.
+func (x *MapCameraBoundary) MapRect() raw.MKMapRect {
+	return x.inner.MapRect()
+}
+
+// Region calls the underlying Region.
+func (x *MapCameraBoundary) Region() raw.MKCoordinateRegion {
+	return x.inner.Region()
+}
+
+// MapCameraBoundaryable is the interface implemented by [MapCameraBoundary], for mocking and DI.
+type MapCameraBoundaryable interface {
+	Unwrap() *raw.MKMapCameraBoundary
+	MapRect() raw.MKMapRect
+	Region() raw.MKCoordinateRegion
+}
+
+var _ MapCameraBoundaryable = (*MapCameraBoundary)(nil)
+

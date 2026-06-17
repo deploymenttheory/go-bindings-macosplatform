@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -25,17 +26,35 @@ func NewMTRServerEndpointWithEndpointIDDeviceTypes(endpointID *foundation.NSNumb
 	return &MTRServerEndpoint{inner: raw.MTRServerEndpointFromID(_id)}
 }
 
+// AddAccessGrant calls the underlying AddAccessGrant.
+func (x *MTRServerEndpoint) AddAccessGrant(accessGrant *raw.MTRAccessGrant) {
+	x.inner.AddAccessGrant(accessGrant)
+}
+
+// RemoveAccessGrant calls the underlying RemoveAccessGrant.
+func (x *MTRServerEndpoint) RemoveAccessGrant(accessGrant *raw.MTRAccessGrant) {
+	x.inner.RemoveAccessGrant(accessGrant)
+}
+
+// AddServerCluster calls the underlying AddServerCluster.
+func (x *MTRServerEndpoint) AddServerCluster(serverCluster *raw.MTRServerCluster) bool {
+	return x.inner.AddServerCluster(serverCluster)
+}
+
+// EndpointID calls the underlying EndpointID.
+func (x *MTRServerEndpoint) EndpointID() *foundation.NSNumber {
+	return x.inner.EndpointID()
+}
+
 // DeviceTypes returns the collection as a Go slice.
 func (x *MTRServerEndpoint) DeviceTypes() []*raw.MTRDeviceTypeRevision {
 	arr := x.inner.DeviceTypes()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MTRDeviceTypeRevision, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MTRDeviceTypeRevision {
+		return raw.MTRDeviceTypeRevisionFromID(purego.Retain(_id))
+	})
 }
 
 // AccessGrants returns the collection as a Go slice.
@@ -44,11 +63,9 @@ func (x *MTRServerEndpoint) AccessGrants() []*raw.MTRAccessGrant {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MTRAccessGrant, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MTRAccessGrant {
+		return raw.MTRAccessGrantFromID(purego.Retain(_id))
+	})
 }
 
 // ServerClusters returns the collection as a Go slice.
@@ -57,10 +74,22 @@ func (x *MTRServerEndpoint) ServerClusters() []*raw.MTRServerCluster {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MTRServerCluster, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MTRServerCluster {
+		return raw.MTRServerClusterFromID(purego.Retain(_id))
+	})
 }
+
+// MTRServerEndpointable is the interface implemented by [MTRServerEndpoint], for mocking and DI.
+type MTRServerEndpointable interface {
+	Unwrap() *raw.MTRServerEndpoint
+	AddAccessGrant(accessGrant *raw.MTRAccessGrant)
+	RemoveAccessGrant(accessGrant *raw.MTRAccessGrant)
+	AddServerCluster(serverCluster *raw.MTRServerCluster) bool
+	EndpointID() *foundation.NSNumber
+	DeviceTypes() []*raw.MTRDeviceTypeRevision
+	AccessGrants() []*raw.MTRAccessGrant
+	ServerClusters() []*raw.MTRServerCluster
+}
+
+var _ MTRServerEndpointable = (*MTRServerEndpoint)(nil)
 

@@ -23,3 +23,26 @@ func NewPipelineBufferDescriptorArray() *PipelineBufferDescriptorArray {
 	return &PipelineBufferDescriptorArray{inner: raw.MTLPipelineBufferDescriptorArrayFromID(_id)}
 }
 
+// ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
+func (x *PipelineBufferDescriptorArray) ObjectAtIndexedSubscript(bufferIndex uint) *PipelineBufferDescriptor {
+	_r := x.inner.ObjectAtIndexedSubscript(bufferIndex)
+	if _r == nil {
+		return nil
+	}
+	return &PipelineBufferDescriptor{inner: _r}
+}
+
+// SetObjectAtIndexedSubscript calls the underlying SetObjectAtIndexedSubscript.
+func (x *PipelineBufferDescriptorArray) SetObjectAtIndexedSubscript(buffer *raw.MTLPipelineBufferDescriptor, bufferIndex uint) {
+	x.inner.SetObjectAtIndexedSubscript(buffer, bufferIndex)
+}
+
+// PipelineBufferDescriptorArrayable is the interface implemented by [PipelineBufferDescriptorArray], for mocking and DI.
+type PipelineBufferDescriptorArrayable interface {
+	Unwrap() *raw.MTLPipelineBufferDescriptorArray
+	ObjectAtIndexedSubscript(bufferIndex uint) *PipelineBufferDescriptor
+	SetObjectAtIndexedSubscript(buffer *raw.MTLPipelineBufferDescriptor, bufferIndex uint)
+}
+
+var _ PipelineBufferDescriptorArrayable = (*PipelineBufferDescriptorArray)(nil)
+

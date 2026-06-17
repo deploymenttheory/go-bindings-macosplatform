@@ -5,9 +5,12 @@
 package matter
 
 import (
+	"context"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // MTRClusterKeypadInput wraps [raw.MTRClusterKeypadInput] with a fluent Go API.
@@ -32,7 +35,98 @@ func NewMTRClusterKeypadInputWithDeviceEndpointQueue(device *raw.MTRDevice, endp
 	return &MTRClusterKeypadInput{inner: raw.MTRClusterKeypadInputFromID(_id)}
 }
 
+// SendKeyWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRClusterKeypadInput) SendKeyWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRKeypadInputClusterSendKeyParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRKeypadInputClusterSendKeyResponseParams, error) {
+	type _result struct {
+		val *MTRKeypadInputClusterSendKeyResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SendKeyWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTRKeypadInputClusterSendKeyResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTRKeypadInputClusterSendKeyResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTRKeypadInputClusterSendKeyResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
+func (x *MTRClusterKeypadInput) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+}
+
+// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
+func (x *MTRClusterKeypadInput) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
+}
+
+// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
+func (x *MTRClusterKeypadInput) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeAttributeListWithParams(params)
+}
+
+// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
+func (x *MTRClusterKeypadInput) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeFeatureMapWithParams(params)
+}
+
+// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
+func (x *MTRClusterKeypadInput) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeClusterRevisionWithParams(params)
+}
+
+// SendKeyWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
+func (x *MTRClusterKeypadInput) SendKeyWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTRKeypadInputClusterSendKeyParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRKeypadInputClusterSendKeyResponseParams, error) {
+	type _result struct {
+		val *MTRKeypadInputClusterSendKeyResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SendKeyWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTRKeypadInputClusterSendKeyResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTRKeypadInputClusterSendKeyResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTRKeypadInputClusterSendKeyResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
 func (x *MTRClusterKeypadInput) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
 
 func (x *MTRClusterKeypadInput) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+
+// MTRClusterKeypadInputable is the interface implemented by [MTRClusterKeypadInput], for mocking and DI.
+type MTRClusterKeypadInputable interface {
+	Unwrap() *raw.MTRClusterKeypadInput
+	SendKeyWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRKeypadInputClusterSendKeyParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRKeypadInputClusterSendKeyResponseParams, error)
+	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	SendKeyWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTRKeypadInputClusterSendKeyParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRKeypadInputClusterSendKeyResponseParams, error)
+}
+
+var _ MTRClusterKeypadInputable = (*MTRClusterKeypadInput)(nil)
 

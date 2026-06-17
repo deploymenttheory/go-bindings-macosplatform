@@ -36,3 +36,10 @@ func (x *StringMetaParameterDefinition) asMetaParameterDefinition() *raw.PHASEMe
 
 func (x *StringMetaParameterDefinition) asDefinition() *raw.PHASEDefinition { return &x.inner.PHASEMetaParameterDefinition.PHASEDefinition }
 
+// StringMetaParameterDefinitionable is the interface implemented by [StringMetaParameterDefinition], for mocking and DI.
+type StringMetaParameterDefinitionable interface {
+	Unwrap() *raw.PHASEStringMetaParameterDefinition
+}
+
+var _ StringMetaParameterDefinitionable = (*StringMetaParameterDefinition)(nil)
+

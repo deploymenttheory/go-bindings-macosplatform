@@ -41,3 +41,49 @@ func (x *BufferLayoutDescriptor) WithStepRate(stepRate uint) *BufferLayoutDescri
 	return x
 }
 
+// Stride calls the underlying Stride.
+func (x *BufferLayoutDescriptor) Stride() uint {
+	return x.inner.Stride()
+}
+
+// SetStride calls the underlying SetStride.
+func (x *BufferLayoutDescriptor) SetStride(stride uint) {
+	x.inner.SetStride(stride)
+}
+
+// StepFunction calls the underlying StepFunction.
+func (x *BufferLayoutDescriptor) StepFunction() raw.MTLStepFunction {
+	return x.inner.StepFunction()
+}
+
+// SetStepFunction calls the underlying SetStepFunction.
+func (x *BufferLayoutDescriptor) SetStepFunction(stepFunction raw.MTLStepFunction) {
+	x.inner.SetStepFunction(stepFunction)
+}
+
+// StepRate calls the underlying StepRate.
+func (x *BufferLayoutDescriptor) StepRate() uint {
+	return x.inner.StepRate()
+}
+
+// SetStepRate calls the underlying SetStepRate.
+func (x *BufferLayoutDescriptor) SetStepRate(stepRate uint) {
+	x.inner.SetStepRate(stepRate)
+}
+
+// BufferLayoutDescriptorable is the interface implemented by [BufferLayoutDescriptor], for mocking and DI.
+type BufferLayoutDescriptorable interface {
+	Unwrap() *raw.MTLBufferLayoutDescriptor
+	WithStride(stride uint) *BufferLayoutDescriptor
+	WithStepFunction(stepFunction raw.MTLStepFunction) *BufferLayoutDescriptor
+	WithStepRate(stepRate uint) *BufferLayoutDescriptor
+	Stride() uint
+	SetStride(stride uint)
+	StepFunction() raw.MTLStepFunction
+	SetStepFunction(stepFunction raw.MTLStepFunction)
+	StepRate() uint
+	SetStepRate(stepRate uint)
+}
+
+var _ BufferLayoutDescriptorable = (*BufferLayoutDescriptor)(nil)
+

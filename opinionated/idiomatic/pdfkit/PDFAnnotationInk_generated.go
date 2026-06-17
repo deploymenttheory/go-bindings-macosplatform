@@ -25,3 +25,10 @@ func NewAnnotationInk() *AnnotationInk {
 
 func (x *AnnotationInk) asAnnotation() *raw.PDFAnnotation { return &x.inner.PDFAnnotation }
 
+// AnnotationInkable is the interface implemented by [AnnotationInk], for mocking and DI.
+type AnnotationInkable interface {
+	Unwrap() *raw.PDFAnnotationInk
+}
+
+var _ AnnotationInkable = (*AnnotationInk)(nil)
+

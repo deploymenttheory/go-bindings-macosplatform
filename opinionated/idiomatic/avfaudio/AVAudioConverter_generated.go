@@ -7,6 +7,7 @@ package avfaudio
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -114,17 +115,186 @@ func (x *AudioConverter) WithBitRateStrategy(bitRateStrategy string) *AudioConve
 	return x
 }
 
+// Reset calls the underlying Reset.
+func (x *AudioConverter) Reset() {
+	x.inner.Reset()
+}
+
+// ConvertToBufferFromBufferError calls the underlying ConvertToBufferFromBufferError.
+func (x *AudioConverter) ConvertToBufferFromBufferError(outputBuffer *raw.AVAudioPCMBuffer, inputBuffer *raw.AVAudioPCMBuffer) (bool, error) {
+	return x.inner.ConvertToBufferFromBufferError(outputBuffer, inputBuffer)
+}
+
+// ConvertToBufferErrorWithInputFromBlock calls the underlying ConvertToBufferErrorWithInputFromBlock.
+func (x *AudioConverter) ConvertToBufferErrorWithInputFromBlock(outputBuffer *raw.AVAudioBuffer, outError unsafe.Pointer, inputBlock objc.Block) raw.AVAudioConverterOutputStatus {
+	return x.inner.ConvertToBufferErrorWithInputFromBlock(outputBuffer, outError, inputBlock)
+}
+
+// InputFormat calls the underlying InputFormat.
+func (x *AudioConverter) InputFormat() *AudioFormat {
+	_r := x.inner.InputFormat()
+	if _r == nil {
+		return nil
+	}
+	return &AudioFormat{inner: _r}
+}
+
+// OutputFormat calls the underlying OutputFormat.
+func (x *AudioConverter) OutputFormat() *AudioFormat {
+	_r := x.inner.OutputFormat()
+	if _r == nil {
+		return nil
+	}
+	return &AudioFormat{inner: _r}
+}
+
 // ChannelMap returns the collection as a Go slice.
 func (x *AudioConverter) ChannelMap() []*foundation.NSNumber {
 	arr := x.inner.ChannelMap()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
+}
+
+// SetChannelMap calls the underlying SetChannelMap.
+func (x *AudioConverter) SetChannelMap(channelMap *foundation.NSArray[*foundation.NSNumber]) {
+	x.inner.SetChannelMap(channelMap)
+}
+
+// MagicCookie calls the underlying MagicCookie.
+func (x *AudioConverter) MagicCookie() *foundation.NSData {
+	return x.inner.MagicCookie()
+}
+
+// SetMagicCookie calls the underlying SetMagicCookie.
+func (x *AudioConverter) SetMagicCookie(magicCookie *foundation.NSData) {
+	x.inner.SetMagicCookie(magicCookie)
+}
+
+// Downmix calls the underlying Downmix.
+func (x *AudioConverter) Downmix() bool {
+	return x.inner.Downmix()
+}
+
+// SetDownmix calls the underlying SetDownmix.
+func (x *AudioConverter) SetDownmix(downmix bool) {
+	x.inner.SetDownmix(downmix)
+}
+
+// Dither calls the underlying Dither.
+func (x *AudioConverter) Dither() bool {
+	return x.inner.Dither()
+}
+
+// SetDither calls the underlying SetDither.
+func (x *AudioConverter) SetDither(dither bool) {
+	x.inner.SetDither(dither)
+}
+
+// SampleRateConverterQuality calls the underlying SampleRateConverterQuality.
+func (x *AudioConverter) SampleRateConverterQuality() int {
+	return x.inner.SampleRateConverterQuality()
+}
+
+// SetSampleRateConverterQuality calls the underlying SetSampleRateConverterQuality.
+func (x *AudioConverter) SetSampleRateConverterQuality(sampleRateConverterQuality int) {
+	x.inner.SetSampleRateConverterQuality(sampleRateConverterQuality)
+}
+
+// SampleRateConverterAlgorithm calls the underlying SampleRateConverterAlgorithm.
+func (x *AudioConverter) SampleRateConverterAlgorithm() string {
+	_r := x.inner.SampleRateConverterAlgorithm()
+	if _r == nil {
+		return ""
 	}
-	return out
+	return purego.GoString(_r.Ptr())
+}
+
+// SetSampleRateConverterAlgorithm calls the underlying SetSampleRateConverterAlgorithm.
+func (x *AudioConverter) SetSampleRateConverterAlgorithm(sampleRateConverterAlgorithm string) {
+	x.inner.SetSampleRateConverterAlgorithm(foundation.NSStringStringWithUTF8String(sampleRateConverterAlgorithm))
+}
+
+// PrimeMethod calls the underlying PrimeMethod.
+func (x *AudioConverter) PrimeMethod() raw.AVAudioConverterPrimeMethod {
+	return x.inner.PrimeMethod()
+}
+
+// SetPrimeMethod calls the underlying SetPrimeMethod.
+func (x *AudioConverter) SetPrimeMethod(primeMethod raw.AVAudioConverterPrimeMethod) {
+	x.inner.SetPrimeMethod(primeMethod)
+}
+
+// PrimeInfo calls the underlying PrimeInfo.
+func (x *AudioConverter) PrimeInfo() raw.AVAudioConverterPrimeInfo {
+	return x.inner.PrimeInfo()
+}
+
+// SetPrimeInfo calls the underlying SetPrimeInfo.
+func (x *AudioConverter) SetPrimeInfo(primeInfo raw.AVAudioConverterPrimeInfo) {
+	x.inner.SetPrimeInfo(primeInfo)
+}
+
+// AudioSyncPacketFrequency calls the underlying AudioSyncPacketFrequency.
+func (x *AudioConverter) AudioSyncPacketFrequency() int {
+	return x.inner.AudioSyncPacketFrequency()
+}
+
+// SetAudioSyncPacketFrequency calls the underlying SetAudioSyncPacketFrequency.
+func (x *AudioConverter) SetAudioSyncPacketFrequency(audioSyncPacketFrequency int) {
+	x.inner.SetAudioSyncPacketFrequency(audioSyncPacketFrequency)
+}
+
+// ContentSource calls the underlying ContentSource.
+func (x *AudioConverter) ContentSource() raw.AVAudioContentSource {
+	return x.inner.ContentSource()
+}
+
+// SetContentSource calls the underlying SetContentSource.
+func (x *AudioConverter) SetContentSource(contentSource raw.AVAudioContentSource) {
+	x.inner.SetContentSource(contentSource)
+}
+
+// DynamicRangeControlConfiguration calls the underlying DynamicRangeControlConfiguration.
+func (x *AudioConverter) DynamicRangeControlConfiguration() raw.AVAudioDynamicRangeControlConfiguration {
+	return x.inner.DynamicRangeControlConfiguration()
+}
+
+// SetDynamicRangeControlConfiguration calls the underlying SetDynamicRangeControlConfiguration.
+func (x *AudioConverter) SetDynamicRangeControlConfiguration(dynamicRangeControlConfiguration raw.AVAudioDynamicRangeControlConfiguration) {
+	x.inner.SetDynamicRangeControlConfiguration(dynamicRangeControlConfiguration)
+}
+
+// BitRate calls the underlying BitRate.
+func (x *AudioConverter) BitRate() int {
+	return x.inner.BitRate()
+}
+
+// SetBitRate calls the underlying SetBitRate.
+func (x *AudioConverter) SetBitRate(bitRate int) {
+	x.inner.SetBitRate(bitRate)
+}
+
+// BitRateStrategy calls the underlying BitRateStrategy.
+func (x *AudioConverter) BitRateStrategy() string {
+	_r := x.inner.BitRateStrategy()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetBitRateStrategy calls the underlying SetBitRateStrategy.
+func (x *AudioConverter) SetBitRateStrategy(bitRateStrategy string) {
+	x.inner.SetBitRateStrategy(foundation.NSStringStringWithUTF8String(bitRateStrategy))
+}
+
+// MaximumOutputPacketSize calls the underlying MaximumOutputPacketSize.
+func (x *AudioConverter) MaximumOutputPacketSize() int {
+	return x.inner.MaximumOutputPacketSize()
 }
 
 // AvailableEncodeBitRates returns the collection as a Go slice.
@@ -133,11 +303,9 @@ func (x *AudioConverter) AvailableEncodeBitRates() []*foundation.NSNumber {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
 }
 
 // ApplicableEncodeBitRates returns the collection as a Go slice.
@@ -146,11 +314,9 @@ func (x *AudioConverter) ApplicableEncodeBitRates() []*foundation.NSNumber {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
 }
 
 // AvailableEncodeSampleRates returns the collection as a Go slice.
@@ -159,11 +325,9 @@ func (x *AudioConverter) AvailableEncodeSampleRates() []*foundation.NSNumber {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
 }
 
 // ApplicableEncodeSampleRates returns the collection as a Go slice.
@@ -172,11 +336,9 @@ func (x *AudioConverter) ApplicableEncodeSampleRates() []*foundation.NSNumber {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
 }
 
 // AvailableEncodeChannelLayoutTags returns the collection as a Go slice.
@@ -185,10 +347,65 @@ func (x *AudioConverter) AvailableEncodeChannelLayoutTags() []*foundation.NSNumb
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
 }
+
+// AudioConverterable is the interface implemented by [AudioConverter], for mocking and DI.
+type AudioConverterable interface {
+	Unwrap() *raw.AVAudioConverter
+	WithChannelMap(items ...*foundation.NSNumber) *AudioConverter
+	WithMagicCookie(magicCookie *foundation.NSData) *AudioConverter
+	WithDownmix(downmix bool) *AudioConverter
+	WithDither(dither bool) *AudioConverter
+	WithSampleRateConverterQuality(sampleRateConverterQuality int) *AudioConverter
+	WithSampleRateConverterAlgorithm(sampleRateConverterAlgorithm string) *AudioConverter
+	WithPrimeMethod(primeMethod raw.AVAudioConverterPrimeMethod) *AudioConverter
+	WithPrimeInfo(primeInfo raw.AVAudioConverterPrimeInfo) *AudioConverter
+	WithAudioSyncPacketFrequency(audioSyncPacketFrequency int) *AudioConverter
+	WithContentSource(contentSource raw.AVAudioContentSource) *AudioConverter
+	WithDynamicRangeControlConfiguration(dynamicRangeControlConfiguration raw.AVAudioDynamicRangeControlConfiguration) *AudioConverter
+	WithBitRate(bitRate int) *AudioConverter
+	WithBitRateStrategy(bitRateStrategy string) *AudioConverter
+	Reset()
+	ConvertToBufferFromBufferError(outputBuffer *raw.AVAudioPCMBuffer, inputBuffer *raw.AVAudioPCMBuffer) (bool, error)
+	ConvertToBufferErrorWithInputFromBlock(outputBuffer *raw.AVAudioBuffer, outError unsafe.Pointer, inputBlock objc.Block) raw.AVAudioConverterOutputStatus
+	InputFormat() *AudioFormat
+	OutputFormat() *AudioFormat
+	ChannelMap() []*foundation.NSNumber
+	SetChannelMap(channelMap *foundation.NSArray[*foundation.NSNumber])
+	MagicCookie() *foundation.NSData
+	SetMagicCookie(magicCookie *foundation.NSData)
+	Downmix() bool
+	SetDownmix(downmix bool)
+	Dither() bool
+	SetDither(dither bool)
+	SampleRateConverterQuality() int
+	SetSampleRateConverterQuality(sampleRateConverterQuality int)
+	SampleRateConverterAlgorithm() string
+	SetSampleRateConverterAlgorithm(sampleRateConverterAlgorithm string)
+	PrimeMethod() raw.AVAudioConverterPrimeMethod
+	SetPrimeMethod(primeMethod raw.AVAudioConverterPrimeMethod)
+	PrimeInfo() raw.AVAudioConverterPrimeInfo
+	SetPrimeInfo(primeInfo raw.AVAudioConverterPrimeInfo)
+	AudioSyncPacketFrequency() int
+	SetAudioSyncPacketFrequency(audioSyncPacketFrequency int)
+	ContentSource() raw.AVAudioContentSource
+	SetContentSource(contentSource raw.AVAudioContentSource)
+	DynamicRangeControlConfiguration() raw.AVAudioDynamicRangeControlConfiguration
+	SetDynamicRangeControlConfiguration(dynamicRangeControlConfiguration raw.AVAudioDynamicRangeControlConfiguration)
+	BitRate() int
+	SetBitRate(bitRate int)
+	BitRateStrategy() string
+	SetBitRateStrategy(bitRateStrategy string)
+	MaximumOutputPacketSize() int
+	AvailableEncodeBitRates() []*foundation.NSNumber
+	ApplicableEncodeBitRates() []*foundation.NSNumber
+	AvailableEncodeSampleRates() []*foundation.NSNumber
+	ApplicableEncodeSampleRates() []*foundation.NSNumber
+	AvailableEncodeChannelLayoutTags() []*foundation.NSNumber
+}
+
+var _ AudioConverterable = (*AudioConverter)(nil)
 

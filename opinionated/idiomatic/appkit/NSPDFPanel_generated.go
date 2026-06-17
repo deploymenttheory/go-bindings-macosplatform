@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -41,4 +42,64 @@ func (x *PDFPanel) WithDefaultFileName(defaultFileName string) *PDFPanel {
 	x.inner.SetDefaultFileName(foundation.NSStringStringWithUTF8String(defaultFileName))
 	return x
 }
+
+// BeginSheetWithPDFInfoModalForWindowCompletionHandler calls the underlying BeginSheetWithPDFInfoModalForWindowCompletionHandler.
+func (x *PDFPanel) BeginSheetWithPDFInfoModalForWindowCompletionHandler(pdfInfo *raw.NSPDFInfo, docWindow *raw.NSWindow, completionHandler func(int)) {
+	x.inner.BeginSheetWithPDFInfoModalForWindowCompletionHandler(pdfInfo, docWindow, completionHandler)
+}
+
+// AccessoryController calls the underlying AccessoryController.
+func (x *PDFPanel) AccessoryController() *ViewController {
+	_r := x.inner.AccessoryController()
+	if _r == nil {
+		return nil
+	}
+	return &ViewController{inner: _r}
+}
+
+// SetAccessoryController calls the underlying SetAccessoryController.
+func (x *PDFPanel) SetAccessoryController(accessoryController *raw.NSViewController) {
+	x.inner.SetAccessoryController(accessoryController)
+}
+
+// Options calls the underlying Options.
+func (x *PDFPanel) Options() raw.NSPDFPanelOptions {
+	return x.inner.Options()
+}
+
+// SetOptions calls the underlying SetOptions.
+func (x *PDFPanel) SetOptions(options raw.NSPDFPanelOptions) {
+	x.inner.SetOptions(options)
+}
+
+// DefaultFileName calls the underlying DefaultFileName.
+func (x *PDFPanel) DefaultFileName() string {
+	_r := x.inner.DefaultFileName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetDefaultFileName calls the underlying SetDefaultFileName.
+func (x *PDFPanel) SetDefaultFileName(defaultFileName string) {
+	x.inner.SetDefaultFileName(foundation.NSStringStringWithUTF8String(defaultFileName))
+}
+
+// PDFPanelable is the interface implemented by [PDFPanel], for mocking and DI.
+type PDFPanelable interface {
+	Unwrap() *raw.NSPDFPanel
+	WithAccessoryController(accessoryController ViewControllerProvider) *PDFPanel
+	WithOptions(options raw.NSPDFPanelOptions) *PDFPanel
+	WithDefaultFileName(defaultFileName string) *PDFPanel
+	BeginSheetWithPDFInfoModalForWindowCompletionHandler(pdfInfo *raw.NSPDFInfo, docWindow *raw.NSWindow, completionHandler func(int))
+	AccessoryController() *ViewController
+	SetAccessoryController(accessoryController *raw.NSViewController)
+	Options() raw.NSPDFPanelOptions
+	SetOptions(options raw.NSPDFPanelOptions)
+	DefaultFileName() string
+	SetDefaultFileName(defaultFileName string)
+}
+
+var _ PDFPanelable = (*PDFPanel)(nil)
 

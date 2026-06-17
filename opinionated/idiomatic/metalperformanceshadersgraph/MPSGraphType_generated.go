@@ -27,3 +27,10 @@ func (x *GraphType) asGraphType() *raw.MPSGraphType { return x.inner }
 
 func (x *GraphType) asGraphObject() *raw.MPSGraphObject { return &x.inner.MPSGraphObject }
 
+// GraphTypeable is the interface implemented by [GraphType], for mocking and DI.
+type GraphTypeable interface {
+	Unwrap() *raw.MPSGraphType
+}
+
+var _ GraphTypeable = (*GraphType)(nil)
+

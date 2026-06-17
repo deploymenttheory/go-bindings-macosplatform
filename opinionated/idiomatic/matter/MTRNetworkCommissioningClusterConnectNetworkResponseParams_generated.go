@@ -55,3 +55,66 @@ func (x *MTRNetworkCommissioningClusterConnectNetworkResponseParams) WithTimedIn
 	return x
 }
 
+// NetworkingStatus calls the underlying NetworkingStatus.
+func (x *MTRNetworkCommissioningClusterConnectNetworkResponseParams) NetworkingStatus() *foundation.NSNumber {
+	return x.inner.NetworkingStatus()
+}
+
+// SetNetworkingStatus calls the underlying SetNetworkingStatus.
+func (x *MTRNetworkCommissioningClusterConnectNetworkResponseParams) SetNetworkingStatus(networkingStatus *foundation.NSNumber) {
+	x.inner.SetNetworkingStatus(networkingStatus)
+}
+
+// DebugText calls the underlying DebugText.
+func (x *MTRNetworkCommissioningClusterConnectNetworkResponseParams) DebugText() string {
+	_r := x.inner.DebugText()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetDebugText calls the underlying SetDebugText.
+func (x *MTRNetworkCommissioningClusterConnectNetworkResponseParams) SetDebugText(debugText string) {
+	x.inner.SetDebugText(foundation.NSStringStringWithUTF8String(debugText))
+}
+
+// ErrorValue calls the underlying ErrorValue.
+func (x *MTRNetworkCommissioningClusterConnectNetworkResponseParams) ErrorValue() *foundation.NSNumber {
+	return x.inner.ErrorValue()
+}
+
+// SetErrorValue calls the underlying SetErrorValue.
+func (x *MTRNetworkCommissioningClusterConnectNetworkResponseParams) SetErrorValue(errorValue *foundation.NSNumber) {
+	x.inner.SetErrorValue(errorValue)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRNetworkCommissioningClusterConnectNetworkResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRNetworkCommissioningClusterConnectNetworkResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// MTRNetworkCommissioningClusterConnectNetworkResponseParamsable is the interface implemented by [MTRNetworkCommissioningClusterConnectNetworkResponseParams], for mocking and DI.
+type MTRNetworkCommissioningClusterConnectNetworkResponseParamsable interface {
+	Unwrap() *raw.MTRNetworkCommissioningClusterConnectNetworkResponseParams
+	WithNetworkingStatus(networkingStatus *foundation.NSNumber) *MTRNetworkCommissioningClusterConnectNetworkResponseParams
+	WithDebugText(debugText string) *MTRNetworkCommissioningClusterConnectNetworkResponseParams
+	WithErrorValue(errorValue *foundation.NSNumber) *MTRNetworkCommissioningClusterConnectNetworkResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRNetworkCommissioningClusterConnectNetworkResponseParams
+	NetworkingStatus() *foundation.NSNumber
+	SetNetworkingStatus(networkingStatus *foundation.NSNumber)
+	DebugText() string
+	SetDebugText(debugText string)
+	ErrorValue() *foundation.NSNumber
+	SetErrorValue(errorValue *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+}
+
+var _ MTRNetworkCommissioningClusterConnectNetworkResponseParamsable = (*MTRNetworkCommissioningClusterConnectNetworkResponseParams)(nil)
+

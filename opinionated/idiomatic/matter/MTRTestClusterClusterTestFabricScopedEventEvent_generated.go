@@ -25,3 +25,10 @@ func NewMTRTestClusterClusterTestFabricScopedEventEvent() *MTRTestClusterCluster
 
 func (x *MTRTestClusterClusterTestFabricScopedEventEvent) asMTRUnitTestingClusterTestFabricScopedEventEvent() *raw.MTRUnitTestingClusterTestFabricScopedEventEvent { return &x.inner.MTRUnitTestingClusterTestFabricScopedEventEvent }
 
+// MTRTestClusterClusterTestFabricScopedEventEventable is the interface implemented by [MTRTestClusterClusterTestFabricScopedEventEvent], for mocking and DI.
+type MTRTestClusterClusterTestFabricScopedEventEventable interface {
+	Unwrap() *raw.MTRTestClusterClusterTestFabricScopedEventEvent
+}
+
+var _ MTRTestClusterClusterTestFabricScopedEventEventable = (*MTRTestClusterClusterTestFabricScopedEventEvent)(nil)
+

@@ -7,6 +7,7 @@ package vision
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -41,11 +42,9 @@ func (x *DetectHumanBodyPose3DRequest) SupportedJointNames() ([]*foundation.NSSt
 	if arr == nil {
 		return nil, nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out, nil
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	}), nil
 }
 
 // SupportedJointsGroupNames returns the collection as a Go slice.
@@ -57,11 +56,9 @@ func (x *DetectHumanBodyPose3DRequest) SupportedJointsGroupNames() ([]*foundatio
 	if arr == nil {
 		return nil, nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out, nil
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	}), nil
 }
 
 func (x *DetectHumanBodyPose3DRequest) asStatefulRequest() *raw.VNStatefulRequest { return &x.inner.VNStatefulRequest }
@@ -69,4 +66,13 @@ func (x *DetectHumanBodyPose3DRequest) asStatefulRequest() *raw.VNStatefulReques
 func (x *DetectHumanBodyPose3DRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNStatefulRequest.VNImageBasedRequest }
 
 func (x *DetectHumanBodyPose3DRequest) asRequest() *raw.VNRequest { return &x.inner.VNStatefulRequest.VNImageBasedRequest.VNRequest }
+
+// DetectHumanBodyPose3DRequestable is the interface implemented by [DetectHumanBodyPose3DRequest], for mocking and DI.
+type DetectHumanBodyPose3DRequestable interface {
+	Unwrap() *raw.VNDetectHumanBodyPose3DRequest
+	SupportedJointNames() ([]*foundation.NSString, error)
+	SupportedJointsGroupNames() ([]*foundation.NSString, error)
+}
+
+var _ DetectHumanBodyPose3DRequestable = (*DetectHumanBodyPose3DRequest)(nil)
 

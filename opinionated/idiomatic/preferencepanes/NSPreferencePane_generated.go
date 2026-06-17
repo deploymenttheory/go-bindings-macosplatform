@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/preferencepanes"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -55,4 +56,145 @@ func (x *PreferencePane) WithLastKeyView(lastKeyView *appkit.NSView) *Preference
 	x.inner.SetLastKeyView(lastKeyView)
 	return x
 }
+
+// LoadMainView calls the underlying LoadMainView.
+func (x *PreferencePane) LoadMainView() *appkit.NSView {
+	return x.inner.LoadMainView()
+}
+
+// MainViewDidLoad calls the underlying MainViewDidLoad.
+func (x *PreferencePane) MainViewDidLoad() {
+	x.inner.MainViewDidLoad()
+}
+
+// AssignMainView calls the underlying AssignMainView.
+func (x *PreferencePane) AssignMainView() {
+	x.inner.AssignMainView()
+}
+
+// WillSelect calls the underlying WillSelect.
+func (x *PreferencePane) WillSelect() {
+	x.inner.WillSelect()
+}
+
+// DidSelect calls the underlying DidSelect.
+func (x *PreferencePane) DidSelect() {
+	x.inner.DidSelect()
+}
+
+// ReplyToShouldUnselect calls the underlying ReplyToShouldUnselect.
+func (x *PreferencePane) ReplyToShouldUnselect(shouldUnselect bool) {
+	x.inner.ReplyToShouldUnselect(shouldUnselect)
+}
+
+// WillUnselect calls the underlying WillUnselect.
+func (x *PreferencePane) WillUnselect() {
+	x.inner.WillUnselect()
+}
+
+// DidUnselect calls the underlying DidUnselect.
+func (x *PreferencePane) DidUnselect() {
+	x.inner.DidUnselect()
+}
+
+// UpdateHelpMenuWithArray calls the underlying UpdateHelpMenuWithArray.
+func (x *PreferencePane) UpdateHelpMenuWithArray(inArrayOfMenuItems *foundation.NSArray[objc.ID]) {
+	x.inner.UpdateHelpMenuWithArray(inArrayOfMenuItems)
+}
+
+// Bundle calls the underlying Bundle.
+func (x *PreferencePane) Bundle() *foundation.NSBundle {
+	return x.inner.Bundle()
+}
+
+// MainNibName calls the underlying MainNibName.
+func (x *PreferencePane) MainNibName() string {
+	_r := x.inner.MainNibName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ShouldUnselect calls the underlying ShouldUnselect.
+func (x *PreferencePane) ShouldUnselect() raw.NSPreferencePaneUnselectReply {
+	return x.inner.ShouldUnselect()
+}
+
+// MainView calls the underlying MainView.
+func (x *PreferencePane) MainView() *appkit.NSView {
+	return x.inner.MainView()
+}
+
+// SetMainView calls the underlying SetMainView.
+func (x *PreferencePane) SetMainView(mainView *appkit.NSView) {
+	x.inner.SetMainView(mainView)
+}
+
+// SetInitialKeyView calls the underlying SetInitialKeyView.
+func (x *PreferencePane) SetInitialKeyView(initialKeyView *appkit.NSView) {
+	x.inner.SetInitialKeyView(initialKeyView)
+}
+
+// FirstKeyView calls the underlying FirstKeyView.
+func (x *PreferencePane) FirstKeyView() *appkit.NSView {
+	return x.inner.FirstKeyView()
+}
+
+// SetFirstKeyView calls the underlying SetFirstKeyView.
+func (x *PreferencePane) SetFirstKeyView(firstKeyView *appkit.NSView) {
+	x.inner.SetFirstKeyView(firstKeyView)
+}
+
+// LastKeyView calls the underlying LastKeyView.
+func (x *PreferencePane) LastKeyView() *appkit.NSView {
+	return x.inner.LastKeyView()
+}
+
+// SetLastKeyView calls the underlying SetLastKeyView.
+func (x *PreferencePane) SetLastKeyView(lastKeyView *appkit.NSView) {
+	x.inner.SetLastKeyView(lastKeyView)
+}
+
+// AutoSaveTextFields calls the underlying AutoSaveTextFields.
+func (x *PreferencePane) AutoSaveTextFields() bool {
+	return x.inner.AutoSaveTextFields()
+}
+
+// IsSelected calls the underlying IsSelected.
+func (x *PreferencePane) IsSelected() bool {
+	return x.inner.IsSelected()
+}
+
+// PreferencePaneable is the interface implemented by [PreferencePane], for mocking and DI.
+type PreferencePaneable interface {
+	Unwrap() *raw.NSPreferencePane
+	WithMainView(mainView *appkit.NSView) *PreferencePane
+	WithInitialKeyView(initialKeyView *appkit.NSView) *PreferencePane
+	WithFirstKeyView(firstKeyView *appkit.NSView) *PreferencePane
+	WithLastKeyView(lastKeyView *appkit.NSView) *PreferencePane
+	LoadMainView() *appkit.NSView
+	MainViewDidLoad()
+	AssignMainView()
+	WillSelect()
+	DidSelect()
+	ReplyToShouldUnselect(shouldUnselect bool)
+	WillUnselect()
+	DidUnselect()
+	UpdateHelpMenuWithArray(inArrayOfMenuItems *foundation.NSArray[objc.ID])
+	Bundle() *foundation.NSBundle
+	MainNibName() string
+	ShouldUnselect() raw.NSPreferencePaneUnselectReply
+	MainView() *appkit.NSView
+	SetMainView(mainView *appkit.NSView)
+	SetInitialKeyView(initialKeyView *appkit.NSView)
+	FirstKeyView() *appkit.NSView
+	SetFirstKeyView(firstKeyView *appkit.NSView)
+	LastKeyView() *appkit.NSView
+	SetLastKeyView(lastKeyView *appkit.NSView)
+	AutoSaveTextFields() bool
+	IsSelected() bool
+}
+
+var _ PreferencePaneable = (*PreferencePane)(nil)
 

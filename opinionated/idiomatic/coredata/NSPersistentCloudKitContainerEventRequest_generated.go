@@ -29,5 +29,25 @@ func (x *PersistentCloudKitContainerEventRequest) WithResultType(resultType raw.
 	return x
 }
 
+// ResultType calls the underlying ResultType.
+func (x *PersistentCloudKitContainerEventRequest) ResultType() raw.NSPersistentCloudKitContainerEventResultType {
+	return x.inner.ResultType()
+}
+
+// SetResultType calls the underlying SetResultType.
+func (x *PersistentCloudKitContainerEventRequest) SetResultType(resultType raw.NSPersistentCloudKitContainerEventResultType) {
+	x.inner.SetResultType(resultType)
+}
+
 func (x *PersistentCloudKitContainerEventRequest) asPersistentStoreRequest() *raw.NSPersistentStoreRequest { return &x.inner.NSPersistentStoreRequest }
+
+// PersistentCloudKitContainerEventRequestable is the interface implemented by [PersistentCloudKitContainerEventRequest], for mocking and DI.
+type PersistentCloudKitContainerEventRequestable interface {
+	Unwrap() *raw.NSPersistentCloudKitContainerEventRequest
+	WithResultType(resultType raw.NSPersistentCloudKitContainerEventResultType) *PersistentCloudKitContainerEventRequest
+	ResultType() raw.NSPersistentCloudKitContainerEventResultType
+	SetResultType(resultType raw.NSPersistentCloudKitContainerEventResultType)
+}
+
+var _ PersistentCloudKitContainerEventRequestable = (*PersistentCloudKitContainerEventRequest)(nil)
 

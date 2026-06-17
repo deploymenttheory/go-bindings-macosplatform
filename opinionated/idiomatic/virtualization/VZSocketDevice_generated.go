@@ -25,3 +25,10 @@ func NewSocketDevice() *SocketDevice {
 
 func (x *SocketDevice) asSocketDevice() *raw.VZSocketDevice { return x.inner }
 
+// SocketDeviceable is the interface implemented by [SocketDevice], for mocking and DI.
+type SocketDeviceable interface {
+	Unwrap() *raw.VZSocketDevice
+}
+
+var _ SocketDeviceable = (*SocketDevice)(nil)
+

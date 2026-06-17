@@ -23,3 +23,10 @@ func NewMTRPumpConfigurationAndControlClusterMotorTemperatureHighEvent() *MTRPum
 	return &MTRPumpConfigurationAndControlClusterMotorTemperatureHighEvent{inner: raw.MTRPumpConfigurationAndControlClusterMotorTemperatureHighEventFromID(_id)}
 }
 
+// MTRPumpConfigurationAndControlClusterMotorTemperatureHighEventable is the interface implemented by [MTRPumpConfigurationAndControlClusterMotorTemperatureHighEvent], for mocking and DI.
+type MTRPumpConfigurationAndControlClusterMotorTemperatureHighEventable interface {
+	Unwrap() *raw.MTRPumpConfigurationAndControlClusterMotorTemperatureHighEvent
+}
+
+var _ MTRPumpConfigurationAndControlClusterMotorTemperatureHighEventable = (*MTRPumpConfigurationAndControlClusterMotorTemperatureHighEvent)(nil)
+

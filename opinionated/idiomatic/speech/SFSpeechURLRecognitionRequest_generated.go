@@ -25,5 +25,18 @@ func NewSpeechURLRecognitionRequestWithURL(uRL string) *SpeechURLRecognitionRequ
 	return &SpeechURLRecognitionRequest{inner: raw.SFSpeechURLRecognitionRequestFromID(_id)}
 }
 
+// URL calls the underlying URL.
+func (x *SpeechURLRecognitionRequest) URL() *foundation.NSURL {
+	return x.inner.URL()
+}
+
 func (x *SpeechURLRecognitionRequest) asSpeechRecognitionRequest() *raw.SFSpeechRecognitionRequest { return &x.inner.SFSpeechRecognitionRequest }
+
+// SpeechURLRecognitionRequestable is the interface implemented by [SpeechURLRecognitionRequest], for mocking and DI.
+type SpeechURLRecognitionRequestable interface {
+	Unwrap() *raw.SFSpeechURLRecognitionRequest
+	URL() *foundation.NSURL
+}
+
+var _ SpeechURLRecognitionRequestable = (*SpeechURLRecognitionRequest)(nil)
 

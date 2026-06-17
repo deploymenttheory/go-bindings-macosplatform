@@ -29,5 +29,25 @@ func (x *CaptureControl) WithEnabled(enabled bool) *CaptureControl {
 	return x
 }
 
+// IsEnabled calls the underlying IsEnabled.
+func (x *CaptureControl) IsEnabled() bool {
+	return x.inner.IsEnabled()
+}
+
+// SetEnabled calls the underlying SetEnabled.
+func (x *CaptureControl) SetEnabled(enabled bool) {
+	x.inner.SetEnabled(enabled)
+}
+
 func (x *CaptureControl) asCaptureControl() *raw.AVCaptureControl { return x.inner }
+
+// CaptureControlable is the interface implemented by [CaptureControl], for mocking and DI.
+type CaptureControlable interface {
+	Unwrap() *raw.AVCaptureControl
+	WithEnabled(enabled bool) *CaptureControl
+	IsEnabled() bool
+	SetEnabled(enabled bool)
+}
+
+var _ CaptureControlable = (*CaptureControl)(nil)
 

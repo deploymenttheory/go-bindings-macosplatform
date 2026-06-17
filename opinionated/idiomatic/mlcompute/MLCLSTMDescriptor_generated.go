@@ -23,3 +23,64 @@ func NewLSTMDescriptor() *LSTMDescriptor {
 	return &LSTMDescriptor{inner: raw.MLCLSTMDescriptorFromID(_id)}
 }
 
+// InputSize calls the underlying InputSize.
+func (x *LSTMDescriptor) InputSize() uint {
+	return x.inner.InputSize()
+}
+
+// HiddenSize calls the underlying HiddenSize.
+func (x *LSTMDescriptor) HiddenSize() uint {
+	return x.inner.HiddenSize()
+}
+
+// LayerCount calls the underlying LayerCount.
+func (x *LSTMDescriptor) LayerCount() uint {
+	return x.inner.LayerCount()
+}
+
+// UsesBiases calls the underlying UsesBiases.
+func (x *LSTMDescriptor) UsesBiases() bool {
+	return x.inner.UsesBiases()
+}
+
+// BatchFirst calls the underlying BatchFirst.
+func (x *LSTMDescriptor) BatchFirst() bool {
+	return x.inner.BatchFirst()
+}
+
+// IsBidirectional calls the underlying IsBidirectional.
+func (x *LSTMDescriptor) IsBidirectional() bool {
+	return x.inner.IsBidirectional()
+}
+
+// ReturnsSequences calls the underlying ReturnsSequences.
+func (x *LSTMDescriptor) ReturnsSequences() bool {
+	return x.inner.ReturnsSequences()
+}
+
+// Dropout calls the underlying Dropout.
+func (x *LSTMDescriptor) Dropout() float32 {
+	return x.inner.Dropout()
+}
+
+// ResultMode calls the underlying ResultMode.
+func (x *LSTMDescriptor) ResultMode() raw.MLCLSTMResultMode {
+	return x.inner.ResultMode()
+}
+
+// LSTMDescriptorable is the interface implemented by [LSTMDescriptor], for mocking and DI.
+type LSTMDescriptorable interface {
+	Unwrap() *raw.MLCLSTMDescriptor
+	InputSize() uint
+	HiddenSize() uint
+	LayerCount() uint
+	UsesBiases() bool
+	BatchFirst() bool
+	IsBidirectional() bool
+	ReturnsSequences() bool
+	Dropout() float32
+	ResultMode() raw.MLCLSTMResultMode
+}
+
+var _ LSTMDescriptorable = (*LSTMDescriptor)(nil)
+

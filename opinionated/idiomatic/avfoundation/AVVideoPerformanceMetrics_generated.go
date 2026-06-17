@@ -23,3 +23,40 @@ func NewVideoPerformanceMetrics() *VideoPerformanceMetrics {
 	return &VideoPerformanceMetrics{inner: raw.AVVideoPerformanceMetricsFromID(_id)}
 }
 
+// TotalNumberOfFrames calls the underlying TotalNumberOfFrames.
+func (x *VideoPerformanceMetrics) TotalNumberOfFrames() int {
+	return x.inner.TotalNumberOfFrames()
+}
+
+// NumberOfDroppedFrames calls the underlying NumberOfDroppedFrames.
+func (x *VideoPerformanceMetrics) NumberOfDroppedFrames() int {
+	return x.inner.NumberOfDroppedFrames()
+}
+
+// NumberOfCorruptedFrames calls the underlying NumberOfCorruptedFrames.
+func (x *VideoPerformanceMetrics) NumberOfCorruptedFrames() int {
+	return x.inner.NumberOfCorruptedFrames()
+}
+
+// NumberOfFramesDisplayedUsingOptimizedCompositing calls the underlying NumberOfFramesDisplayedUsingOptimizedCompositing.
+func (x *VideoPerformanceMetrics) NumberOfFramesDisplayedUsingOptimizedCompositing() int {
+	return x.inner.NumberOfFramesDisplayedUsingOptimizedCompositing()
+}
+
+// TotalAccumulatedFrameDelay calls the underlying TotalAccumulatedFrameDelay.
+func (x *VideoPerformanceMetrics) TotalAccumulatedFrameDelay() float64 {
+	return x.inner.TotalAccumulatedFrameDelay()
+}
+
+// VideoPerformanceMetricsable is the interface implemented by [VideoPerformanceMetrics], for mocking and DI.
+type VideoPerformanceMetricsable interface {
+	Unwrap() *raw.AVVideoPerformanceMetrics
+	TotalNumberOfFrames() int
+	NumberOfDroppedFrames() int
+	NumberOfCorruptedFrames() int
+	NumberOfFramesDisplayedUsingOptimizedCompositing() int
+	TotalAccumulatedFrameDelay() float64
+}
+
+var _ VideoPerformanceMetricsable = (*VideoPerformanceMetrics)(nil)
+

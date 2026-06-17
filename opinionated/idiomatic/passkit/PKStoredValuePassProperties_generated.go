@@ -5,7 +5,9 @@
 package passkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,18 +25,42 @@ func NewStoredValuePassProperties() *StoredValuePassProperties {
 	return &StoredValuePassProperties{inner: raw.PKStoredValuePassPropertiesFromID(_id)}
 }
 
+// IsBlacklisted calls the underlying IsBlacklisted.
+func (x *StoredValuePassProperties) IsBlacklisted() bool {
+	return x.inner.IsBlacklisted()
+}
+
+// IsBlocked calls the underlying IsBlocked.
+func (x *StoredValuePassProperties) IsBlocked() bool {
+	return x.inner.IsBlocked()
+}
+
+// ExpirationDate calls the underlying ExpirationDate.
+func (x *StoredValuePassProperties) ExpirationDate() *foundation.NSDate {
+	return x.inner.ExpirationDate()
+}
+
 // Balances returns the collection as a Go slice.
 func (x *StoredValuePassProperties) Balances() []*raw.PKStoredValuePassBalance {
 	arr := x.inner.Balances()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.PKStoredValuePassBalance, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PKStoredValuePassBalance {
+		return raw.PKStoredValuePassBalanceFromID(purego.Retain(_id))
+	})
 }
 
 func (x *StoredValuePassProperties) asStoredValuePassProperties() *raw.PKStoredValuePassProperties { return x.inner }
+
+// StoredValuePassPropertiesable is the interface implemented by [StoredValuePassProperties], for mocking and DI.
+type StoredValuePassPropertiesable interface {
+	Unwrap() *raw.PKStoredValuePassProperties
+	IsBlacklisted() bool
+	IsBlocked() bool
+	ExpirationDate() *foundation.NSDate
+	Balances() []*raw.PKStoredValuePassBalance
+}
+
+var _ StoredValuePassPropertiesable = (*StoredValuePassProperties)(nil)
 

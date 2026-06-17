@@ -7,6 +7,7 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -44,9 +45,106 @@ func (x *DOMEvent) WithCancelBubble(cancelBubble bool) *DOMEvent {
 	return x
 }
 
+// StopPropagation calls the underlying StopPropagation.
+func (x *DOMEvent) StopPropagation() {
+	x.inner.StopPropagation()
+}
+
+// PreventDefault calls the underlying PreventDefault.
+func (x *DOMEvent) PreventDefault() {
+	x.inner.PreventDefault()
+}
+
+// Type calls the underlying Type.
+func (x *DOMEvent) Type() string {
+	_r := x.inner.Type()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Target calls the underlying Target.
+func (x *DOMEvent) Target() raw.DOMEventTarget {
+	return x.inner.Target()
+}
+
+// CurrentTarget calls the underlying CurrentTarget.
+func (x *DOMEvent) CurrentTarget() raw.DOMEventTarget {
+	return x.inner.CurrentTarget()
+}
+
+// EventPhase calls the underlying EventPhase.
+func (x *DOMEvent) EventPhase() uint16 {
+	return x.inner.EventPhase()
+}
+
+// Bubbles calls the underlying Bubbles.
+func (x *DOMEvent) Bubbles() bool {
+	return x.inner.Bubbles()
+}
+
+// Cancelable calls the underlying Cancelable.
+func (x *DOMEvent) Cancelable() bool {
+	return x.inner.Cancelable()
+}
+
+// TimeStamp calls the underlying TimeStamp.
+func (x *DOMEvent) TimeStamp() uint64 {
+	return x.inner.TimeStamp()
+}
+
+// SrcElement calls the underlying SrcElement.
+func (x *DOMEvent) SrcElement() raw.DOMEventTarget {
+	return x.inner.SrcElement()
+}
+
+// ReturnValue calls the underlying ReturnValue.
+func (x *DOMEvent) ReturnValue() bool {
+	return x.inner.ReturnValue()
+}
+
+// SetReturnValue calls the underlying SetReturnValue.
+func (x *DOMEvent) SetReturnValue(returnValue bool) {
+	x.inner.SetReturnValue(returnValue)
+}
+
+// CancelBubble calls the underlying CancelBubble.
+func (x *DOMEvent) CancelBubble() bool {
+	return x.inner.CancelBubble()
+}
+
+// SetCancelBubble calls the underlying SetCancelBubble.
+func (x *DOMEvent) SetCancelBubble(cancelBubble bool) {
+	x.inner.SetCancelBubble(cancelBubble)
+}
+
 func (x *DOMEvent) asDOMEvent() *raw.DOMEvent { return x.inner }
 
 func (x *DOMEvent) asDOMObject() *raw.DOMObject { return &x.inner.DOMObject }
 
 func (x *DOMEvent) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMObject.WebScriptObject }
+
+// DOMEventable is the interface implemented by [DOMEvent], for mocking and DI.
+type DOMEventable interface {
+	Unwrap() *raw.DOMEvent
+	WithReturnValue(returnValue bool) *DOMEvent
+	WithCancelBubble(cancelBubble bool) *DOMEvent
+	StopPropagation()
+	PreventDefault()
+	Type() string
+	Target() raw.DOMEventTarget
+	CurrentTarget() raw.DOMEventTarget
+	EventPhase() uint16
+	Bubbles() bool
+	Cancelable() bool
+	TimeStamp() uint64
+	SrcElement() raw.DOMEventTarget
+	ReturnValue() bool
+	SetReturnValue(returnValue bool)
+	CancelBubble() bool
+	SetCancelBubble(cancelBubble bool)
+}
+
+var _ DOMEventable = (*DOMEvent)(nil)
 

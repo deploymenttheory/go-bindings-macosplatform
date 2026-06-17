@@ -32,11 +32,11 @@ func NewMacOSInstallerWithVirtualMachineRestoreImageURL(virtualMachine *raw.VZVi
 func (x *MacOSInstaller) Install(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.InstallWithCompletionHandler(func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -45,4 +45,28 @@ func (x *MacOSInstaller) Install(ctx context.Context) error {
 		return ctx.Err()
 	}
 }
+
+// VirtualMachine calls the underlying VirtualMachine.
+func (x *MacOSInstaller) VirtualMachine() *VirtualMachine {
+	_r := x.inner.VirtualMachine()
+	if _r == nil {
+		return nil
+	}
+	return &VirtualMachine{inner: _r}
+}
+
+// RestoreImageURL calls the underlying RestoreImageURL.
+func (x *MacOSInstaller) RestoreImageURL() *foundation.NSURL {
+	return x.inner.RestoreImageURL()
+}
+
+// MacOSInstallerable is the interface implemented by [MacOSInstaller], for mocking and DI.
+type MacOSInstallerable interface {
+	Unwrap() *raw.VZMacOSInstaller
+	Install(ctx context.Context) error
+	VirtualMachine() *VirtualMachine
+	RestoreImageURL() *foundation.NSURL
+}
+
+var _ MacOSInstallerable = (*MacOSInstaller)(nil)
 

@@ -66,3 +66,113 @@ func (x *SpatialScalerDescriptor) WithColorProcessingMode(colorProcessingMode ra
 	return x
 }
 
+// NewSpatialScalerWithDevice calls the underlying NewSpatialScalerWithDevice.
+func (x *SpatialScalerDescriptor) NewSpatialScalerWithDevice(device metal.MTLDevice) raw.MTLFXSpatialScaler {
+	return x.inner.NewSpatialScalerWithDevice(device)
+}
+
+// NewSpatialScalerWithDeviceCompiler calls the underlying NewSpatialScalerWithDeviceCompiler.
+func (x *SpatialScalerDescriptor) NewSpatialScalerWithDeviceCompiler(device metal.MTLDevice, compiler metal.MTL4Compiler) raw.MTL4FXSpatialScaler {
+	return x.inner.NewSpatialScalerWithDeviceCompiler(device, compiler)
+}
+
+// ColorTextureFormat calls the underlying ColorTextureFormat.
+func (x *SpatialScalerDescriptor) ColorTextureFormat() metal.MTLPixelFormat {
+	return x.inner.ColorTextureFormat()
+}
+
+// SetColorTextureFormat calls the underlying SetColorTextureFormat.
+func (x *SpatialScalerDescriptor) SetColorTextureFormat(colorTextureFormat metal.MTLPixelFormat) {
+	x.inner.SetColorTextureFormat(colorTextureFormat)
+}
+
+// OutputTextureFormat calls the underlying OutputTextureFormat.
+func (x *SpatialScalerDescriptor) OutputTextureFormat() metal.MTLPixelFormat {
+	return x.inner.OutputTextureFormat()
+}
+
+// SetOutputTextureFormat calls the underlying SetOutputTextureFormat.
+func (x *SpatialScalerDescriptor) SetOutputTextureFormat(outputTextureFormat metal.MTLPixelFormat) {
+	x.inner.SetOutputTextureFormat(outputTextureFormat)
+}
+
+// InputWidth calls the underlying InputWidth.
+func (x *SpatialScalerDescriptor) InputWidth() uint {
+	return x.inner.InputWidth()
+}
+
+// SetInputWidth calls the underlying SetInputWidth.
+func (x *SpatialScalerDescriptor) SetInputWidth(inputWidth uint) {
+	x.inner.SetInputWidth(inputWidth)
+}
+
+// InputHeight calls the underlying InputHeight.
+func (x *SpatialScalerDescriptor) InputHeight() uint {
+	return x.inner.InputHeight()
+}
+
+// SetInputHeight calls the underlying SetInputHeight.
+func (x *SpatialScalerDescriptor) SetInputHeight(inputHeight uint) {
+	x.inner.SetInputHeight(inputHeight)
+}
+
+// OutputWidth calls the underlying OutputWidth.
+func (x *SpatialScalerDescriptor) OutputWidth() uint {
+	return x.inner.OutputWidth()
+}
+
+// SetOutputWidth calls the underlying SetOutputWidth.
+func (x *SpatialScalerDescriptor) SetOutputWidth(outputWidth uint) {
+	x.inner.SetOutputWidth(outputWidth)
+}
+
+// OutputHeight calls the underlying OutputHeight.
+func (x *SpatialScalerDescriptor) OutputHeight() uint {
+	return x.inner.OutputHeight()
+}
+
+// SetOutputHeight calls the underlying SetOutputHeight.
+func (x *SpatialScalerDescriptor) SetOutputHeight(outputHeight uint) {
+	x.inner.SetOutputHeight(outputHeight)
+}
+
+// ColorProcessingMode calls the underlying ColorProcessingMode.
+func (x *SpatialScalerDescriptor) ColorProcessingMode() raw.MTLFXSpatialScalerColorProcessingMode {
+	return x.inner.ColorProcessingMode()
+}
+
+// SetColorProcessingMode calls the underlying SetColorProcessingMode.
+func (x *SpatialScalerDescriptor) SetColorProcessingMode(colorProcessingMode raw.MTLFXSpatialScalerColorProcessingMode) {
+	x.inner.SetColorProcessingMode(colorProcessingMode)
+}
+
+// SpatialScalerDescriptorable is the interface implemented by [SpatialScalerDescriptor], for mocking and DI.
+type SpatialScalerDescriptorable interface {
+	Unwrap() *raw.MTLFXSpatialScalerDescriptor
+	WithColorTextureFormat(colorTextureFormat metal.MTLPixelFormat) *SpatialScalerDescriptor
+	WithOutputTextureFormat(outputTextureFormat metal.MTLPixelFormat) *SpatialScalerDescriptor
+	WithInputWidth(inputWidth uint) *SpatialScalerDescriptor
+	WithInputHeight(inputHeight uint) *SpatialScalerDescriptor
+	WithOutputWidth(outputWidth uint) *SpatialScalerDescriptor
+	WithOutputHeight(outputHeight uint) *SpatialScalerDescriptor
+	WithColorProcessingMode(colorProcessingMode raw.MTLFXSpatialScalerColorProcessingMode) *SpatialScalerDescriptor
+	NewSpatialScalerWithDevice(device metal.MTLDevice) raw.MTLFXSpatialScaler
+	NewSpatialScalerWithDeviceCompiler(device metal.MTLDevice, compiler metal.MTL4Compiler) raw.MTL4FXSpatialScaler
+	ColorTextureFormat() metal.MTLPixelFormat
+	SetColorTextureFormat(colorTextureFormat metal.MTLPixelFormat)
+	OutputTextureFormat() metal.MTLPixelFormat
+	SetOutputTextureFormat(outputTextureFormat metal.MTLPixelFormat)
+	InputWidth() uint
+	SetInputWidth(inputWidth uint)
+	InputHeight() uint
+	SetInputHeight(inputHeight uint)
+	OutputWidth() uint
+	SetOutputWidth(outputWidth uint)
+	OutputHeight() uint
+	SetOutputHeight(outputHeight uint)
+	ColorProcessingMode() raw.MTLFXSpatialScalerColorProcessingMode
+	SetColorProcessingMode(colorProcessingMode raw.MTLFXSpatialScalerColorProcessingMode)
+}
+
+var _ SpatialScalerDescriptorable = (*SpatialScalerDescriptor)(nil)
+

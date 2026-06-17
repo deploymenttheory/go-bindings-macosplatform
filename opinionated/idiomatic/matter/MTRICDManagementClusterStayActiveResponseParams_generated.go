@@ -37,3 +37,23 @@ func (x *MTRICDManagementClusterStayActiveResponseParams) WithPromisedActiveDura
 	return x
 }
 
+// PromisedActiveDuration calls the underlying PromisedActiveDuration.
+func (x *MTRICDManagementClusterStayActiveResponseParams) PromisedActiveDuration() *foundation.NSNumber {
+	return x.inner.PromisedActiveDuration()
+}
+
+// SetPromisedActiveDuration calls the underlying SetPromisedActiveDuration.
+func (x *MTRICDManagementClusterStayActiveResponseParams) SetPromisedActiveDuration(promisedActiveDuration *foundation.NSNumber) {
+	x.inner.SetPromisedActiveDuration(promisedActiveDuration)
+}
+
+// MTRICDManagementClusterStayActiveResponseParamsable is the interface implemented by [MTRICDManagementClusterStayActiveResponseParams], for mocking and DI.
+type MTRICDManagementClusterStayActiveResponseParamsable interface {
+	Unwrap() *raw.MTRICDManagementClusterStayActiveResponseParams
+	WithPromisedActiveDuration(promisedActiveDuration *foundation.NSNumber) *MTRICDManagementClusterStayActiveResponseParams
+	PromisedActiveDuration() *foundation.NSNumber
+	SetPromisedActiveDuration(promisedActiveDuration *foundation.NSNumber)
+}
+
+var _ MTRICDManagementClusterStayActiveResponseParamsable = (*MTRICDManagementClusterStayActiveResponseParams)(nil)
+

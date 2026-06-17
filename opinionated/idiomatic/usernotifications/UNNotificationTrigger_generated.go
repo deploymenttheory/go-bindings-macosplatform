@@ -23,5 +23,18 @@ func NewNotificationTrigger() *NotificationTrigger {
 	return &NotificationTrigger{inner: raw.UNNotificationTriggerFromID(_id)}
 }
 
+// Repeats calls the underlying Repeats.
+func (x *NotificationTrigger) Repeats() bool {
+	return x.inner.Repeats()
+}
+
 func (x *NotificationTrigger) asNotificationTrigger() *raw.UNNotificationTrigger { return x.inner }
+
+// NotificationTriggerable is the interface implemented by [NotificationTrigger], for mocking and DI.
+type NotificationTriggerable interface {
+	Unwrap() *raw.UNNotificationTrigger
+	Repeats() bool
+}
+
+var _ NotificationTriggerable = (*NotificationTrigger)(nil)
 

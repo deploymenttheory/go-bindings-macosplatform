@@ -6,6 +6,7 @@ package networkextension
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,41 @@ func NewNWBonjourServiceEndpoint() *NWBonjourServiceEndpoint {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NWBonjourServiceEndpoint")), objc.RegisterName("new"))
 	return &NWBonjourServiceEndpoint{inner: raw.NWBonjourServiceEndpointFromID(_id)}
 }
+
+// Name calls the underlying Name.
+func (x *NWBonjourServiceEndpoint) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Type calls the underlying Type.
+func (x *NWBonjourServiceEndpoint) Type() string {
+	_r := x.inner.Type()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Domain calls the underlying Domain.
+func (x *NWBonjourServiceEndpoint) Domain() string {
+	_r := x.inner.Domain()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// NWBonjourServiceEndpointable is the interface implemented by [NWBonjourServiceEndpoint], for mocking and DI.
+type NWBonjourServiceEndpointable interface {
+	Unwrap() *raw.NWBonjourServiceEndpoint
+	Name() string
+	Type() string
+	Domain() string
+}
+
+var _ NWBonjourServiceEndpointable = (*NWBonjourServiceEndpoint)(nil)
 

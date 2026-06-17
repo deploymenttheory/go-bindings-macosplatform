@@ -29,3 +29,10 @@ func (x *CNNNeuronAbsoluteNode) asCNNNeuronNode() *mpsneuralnetwork.MPSCNNNeuron
 
 func (x *CNNNeuronAbsoluteNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSCNNNeuronNode.MPSNNFilterNode }
 
+// CNNNeuronAbsoluteNodeable is the interface implemented by [CNNNeuronAbsoluteNode], for mocking and DI.
+type CNNNeuronAbsoluteNodeable interface {
+	Unwrap() *raw.MPSCNNNeuronAbsoluteNode
+}
+
+var _ CNNNeuronAbsoluteNodeable = (*CNNNeuronAbsoluteNode)(nil)
+

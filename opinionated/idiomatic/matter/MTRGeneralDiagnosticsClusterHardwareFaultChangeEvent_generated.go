@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +23,35 @@ func NewMTRGeneralDiagnosticsClusterHardwareFaultChangeEvent() *MTRGeneralDiagno
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent")), objc.RegisterName("new"))
 	return &MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent{inner: raw.MTRGeneralDiagnosticsClusterHardwareFaultChangeEventFromID(_id)}
 }
+
+// Current calls the underlying Current.
+func (x *MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent) Current() *foundation.NSArray[objc.ID] {
+	return x.inner.Current()
+}
+
+// SetCurrent calls the underlying SetCurrent.
+func (x *MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent) SetCurrent(current *foundation.NSArray[objc.ID]) {
+	x.inner.SetCurrent(current)
+}
+
+// Previous calls the underlying Previous.
+func (x *MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent) Previous() *foundation.NSArray[objc.ID] {
+	return x.inner.Previous()
+}
+
+// SetPrevious calls the underlying SetPrevious.
+func (x *MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent) SetPrevious(previous *foundation.NSArray[objc.ID]) {
+	x.inner.SetPrevious(previous)
+}
+
+// MTRGeneralDiagnosticsClusterHardwareFaultChangeEventable is the interface implemented by [MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent], for mocking and DI.
+type MTRGeneralDiagnosticsClusterHardwareFaultChangeEventable interface {
+	Unwrap() *raw.MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent
+	Current() *foundation.NSArray[objc.ID]
+	SetCurrent(current *foundation.NSArray[objc.ID])
+	Previous() *foundation.NSArray[objc.ID]
+	SetPrevious(previous *foundation.NSArray[objc.ID])
+}
+
+var _ MTRGeneralDiagnosticsClusterHardwareFaultChangeEventable = (*MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent)(nil)
 

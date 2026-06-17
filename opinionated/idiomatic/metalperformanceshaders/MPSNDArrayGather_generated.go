@@ -31,6 +31,16 @@ func (x *NDArrayGather) WithAxis(axis uint) *NDArrayGather {
 	return x
 }
 
+// Axis calls the underlying Axis.
+func (x *NDArrayGather) Axis() uint {
+	return x.inner.Axis()
+}
+
+// SetAxis calls the underlying SetAxis.
+func (x *NDArrayGather) SetAxis(axis uint) {
+	x.inner.SetAxis(axis)
+}
+
 func (x *NDArrayGather) asNDArrayBinaryKernel() *mpsndarray.MPSNDArrayBinaryKernel { return &x.inner.MPSNDArrayBinaryKernel }
 
 func (x *NDArrayGather) asNDArrayMultiaryKernel() *mpsndarray.MPSNDArrayMultiaryKernel { return &x.inner.MPSNDArrayBinaryKernel.MPSNDArrayMultiaryKernel }
@@ -38,4 +48,14 @@ func (x *NDArrayGather) asNDArrayMultiaryKernel() *mpsndarray.MPSNDArrayMultiary
 func (x *NDArrayGather) asNDArrayMultiaryBase() *mpsndarray.MPSNDArrayMultiaryBase { return &x.inner.MPSNDArrayBinaryKernel.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase }
 
 func (x *NDArrayGather) asKernel() *mpscore.MPSKernel { return &x.inner.MPSNDArrayBinaryKernel.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel }
+
+// NDArrayGatherable is the interface implemented by [NDArrayGather], for mocking and DI.
+type NDArrayGatherable interface {
+	Unwrap() *raw.MPSNDArrayGather
+	WithAxis(axis uint) *NDArrayGather
+	Axis() uint
+	SetAxis(axis uint)
+}
+
+var _ NDArrayGatherable = (*NDArrayGather)(nil)
 

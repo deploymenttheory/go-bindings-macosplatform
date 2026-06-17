@@ -42,3 +42,49 @@ func (x *MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams) WithServer
 	return x
 }
 
+// ExtendedPanID calls the underlying ExtendedPanID.
+func (x *MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams) ExtendedPanID() *foundation.NSData {
+	return x.inner.ExtendedPanID()
+}
+
+// SetExtendedPanID calls the underlying SetExtendedPanID.
+func (x *MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams) SetExtendedPanID(extendedPanID *foundation.NSData) {
+	x.inner.SetExtendedPanID(extendedPanID)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRThreadNetworkDirectoryClusterGetOperationalDatasetParamsable is the interface implemented by [MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams], for mocking and DI.
+type MTRThreadNetworkDirectoryClusterGetOperationalDatasetParamsable interface {
+	Unwrap() *raw.MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams
+	WithExtendedPanID(extendedPanID *foundation.NSData) *MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams
+	ExtendedPanID() *foundation.NSData
+	SetExtendedPanID(extendedPanID *foundation.NSData)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRThreadNetworkDirectoryClusterGetOperationalDatasetParamsable = (*MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams)(nil)
+

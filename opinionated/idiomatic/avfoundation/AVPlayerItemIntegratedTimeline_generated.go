@@ -6,6 +6,8 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +24,63 @@ func NewPlayerItemIntegratedTimeline() *PlayerItemIntegratedTimeline {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVPlayerItemIntegratedTimeline")), objc.RegisterName("new"))
 	return &PlayerItemIntegratedTimeline{inner: raw.AVPlayerItemIntegratedTimelineFromID(_id)}
 }
+
+// CurrentSnapshot calls the underlying CurrentSnapshot.
+func (x *PlayerItemIntegratedTimeline) CurrentSnapshot() *PlayerItemIntegratedTimelineSnapshot {
+	_r := x.inner.CurrentSnapshot()
+	if _r == nil {
+		return nil
+	}
+	return &PlayerItemIntegratedTimelineSnapshot{inner: _r}
+}
+
+// CurrentTime calls the underlying CurrentTime.
+func (x *PlayerItemIntegratedTimeline) CurrentTime() coremedia.CMTime {
+	return x.inner.CurrentTime()
+}
+
+// CurrentDate calls the underlying CurrentDate.
+func (x *PlayerItemIntegratedTimeline) CurrentDate() *foundation.NSDate {
+	return x.inner.CurrentDate()
+}
+
+// SeekToTimeToleranceBeforeToleranceAfterCompletionHandler calls the underlying SeekToTimeToleranceBeforeToleranceAfterCompletionHandler.
+func (x *PlayerItemIntegratedTimeline) SeekToTimeToleranceBeforeToleranceAfterCompletionHandler(time_ coremedia.CMTime, toleranceBefore coremedia.CMTime, toleranceAfter coremedia.CMTime, completionHandler func(bool)) {
+	x.inner.SeekToTimeToleranceBeforeToleranceAfterCompletionHandler(time_, toleranceBefore, toleranceAfter, completionHandler)
+}
+
+// SeekToDateCompletionHandler calls the underlying SeekToDateCompletionHandler.
+func (x *PlayerItemIntegratedTimeline) SeekToDateCompletionHandler(date *foundation.NSDate, completionHandler func(bool)) {
+	x.inner.SeekToDateCompletionHandler(date, completionHandler)
+}
+
+// AddPeriodicTimeObserverForIntervalQueueUsing calls the underlying AddPeriodicTimeObserverForIntervalQueueUsing.
+func (x *PlayerItemIntegratedTimeline) AddPeriodicTimeObserverForIntervalQueueUsing(interval coremedia.CMTime, queue *foundation.NSObject, block objc.Block) raw.AVPlayerItemIntegratedTimelineObserver {
+	return x.inner.AddPeriodicTimeObserverForIntervalQueueUsing(interval, queue, block)
+}
+
+// AddBoundaryTimeObserverForSegmentOffsetsIntoSegmentQueueUsing calls the underlying AddBoundaryTimeObserverForSegmentOffsetsIntoSegmentQueueUsing.
+func (x *PlayerItemIntegratedTimeline) AddBoundaryTimeObserverForSegmentOffsetsIntoSegmentQueueUsing(segment *raw.AVPlayerItemSegment, offsetsIntoSegment *foundation.NSArray[objc.ID], queue *foundation.NSObject, block func(bool)) raw.AVPlayerItemIntegratedTimelineObserver {
+	return x.inner.AddBoundaryTimeObserverForSegmentOffsetsIntoSegmentQueueUsing(segment, offsetsIntoSegment, queue, block)
+}
+
+// RemoveTimeObserver calls the underlying RemoveTimeObserver.
+func (x *PlayerItemIntegratedTimeline) RemoveTimeObserver(observer raw.AVPlayerItemIntegratedTimelineObserver) {
+	x.inner.RemoveTimeObserver(observer)
+}
+
+// PlayerItemIntegratedTimelineable is the interface implemented by [PlayerItemIntegratedTimeline], for mocking and DI.
+type PlayerItemIntegratedTimelineable interface {
+	Unwrap() *raw.AVPlayerItemIntegratedTimeline
+	CurrentSnapshot() *PlayerItemIntegratedTimelineSnapshot
+	CurrentTime() coremedia.CMTime
+	CurrentDate() *foundation.NSDate
+	SeekToTimeToleranceBeforeToleranceAfterCompletionHandler(time_ coremedia.CMTime, toleranceBefore coremedia.CMTime, toleranceAfter coremedia.CMTime, completionHandler func(bool))
+	SeekToDateCompletionHandler(date *foundation.NSDate, completionHandler func(bool))
+	AddPeriodicTimeObserverForIntervalQueueUsing(interval coremedia.CMTime, queue *foundation.NSObject, block objc.Block) raw.AVPlayerItemIntegratedTimelineObserver
+	AddBoundaryTimeObserverForSegmentOffsetsIntoSegmentQueueUsing(segment *raw.AVPlayerItemSegment, offsetsIntoSegment *foundation.NSArray[objc.ID], queue *foundation.NSObject, block func(bool)) raw.AVPlayerItemIntegratedTimelineObserver
+	RemoveTimeObserver(observer raw.AVPlayerItemIntegratedTimelineObserver)
+}
+
+var _ PlayerItemIntegratedTimelineable = (*PlayerItemIntegratedTimeline)(nil)
 

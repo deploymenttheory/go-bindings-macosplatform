@@ -41,5 +41,51 @@ func (x *GraphFFTDescriptor) WithRoundToOddHermitean(roundToOddHermitean bool) *
 	return x
 }
 
+// Inverse calls the underlying Inverse.
+func (x *GraphFFTDescriptor) Inverse() bool {
+	return x.inner.Inverse()
+}
+
+// SetInverse calls the underlying SetInverse.
+func (x *GraphFFTDescriptor) SetInverse(inverse bool) {
+	x.inner.SetInverse(inverse)
+}
+
+// ScalingMode calls the underlying ScalingMode.
+func (x *GraphFFTDescriptor) ScalingMode() raw.MPSGraphFFTScalingMode {
+	return x.inner.ScalingMode()
+}
+
+// SetScalingMode calls the underlying SetScalingMode.
+func (x *GraphFFTDescriptor) SetScalingMode(scalingMode raw.MPSGraphFFTScalingMode) {
+	x.inner.SetScalingMode(scalingMode)
+}
+
+// RoundToOddHermitean calls the underlying RoundToOddHermitean.
+func (x *GraphFFTDescriptor) RoundToOddHermitean() bool {
+	return x.inner.RoundToOddHermitean()
+}
+
+// SetRoundToOddHermitean calls the underlying SetRoundToOddHermitean.
+func (x *GraphFFTDescriptor) SetRoundToOddHermitean(roundToOddHermitean bool) {
+	x.inner.SetRoundToOddHermitean(roundToOddHermitean)
+}
+
 func (x *GraphFFTDescriptor) asGraphObject() *raw.MPSGraphObject { return &x.inner.MPSGraphObject }
+
+// GraphFFTDescriptorable is the interface implemented by [GraphFFTDescriptor], for mocking and DI.
+type GraphFFTDescriptorable interface {
+	Unwrap() *raw.MPSGraphFFTDescriptor
+	WithInverse(inverse bool) *GraphFFTDescriptor
+	WithScalingMode(scalingMode raw.MPSGraphFFTScalingMode) *GraphFFTDescriptor
+	WithRoundToOddHermitean(roundToOddHermitean bool) *GraphFFTDescriptor
+	Inverse() bool
+	SetInverse(inverse bool)
+	ScalingMode() raw.MPSGraphFFTScalingMode
+	SetScalingMode(scalingMode raw.MPSGraphFFTScalingMode)
+	RoundToOddHermitean() bool
+	SetRoundToOddHermitean(roundToOddHermitean bool)
+}
+
+var _ GraphFFTDescriptorable = (*GraphFFTDescriptor)(nil)
 

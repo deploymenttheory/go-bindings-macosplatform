@@ -6,6 +6,8 @@ package coremediaio
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremediaio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +24,33 @@ func NewExtensionClient() *ExtensionClient {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CMIOExtensionClient")), objc.RegisterName("new"))
 	return &ExtensionClient{inner: raw.CMIOExtensionClientFromID(_id)}
 }
+
+// ClientID calls the underlying ClientID.
+func (x *ExtensionClient) ClientID() *foundation.NSUUID {
+	return x.inner.ClientID()
+}
+
+// SigningID calls the underlying SigningID.
+func (x *ExtensionClient) SigningID() string {
+	_r := x.inner.SigningID()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Pid calls the underlying Pid.
+func (x *ExtensionClient) Pid() int {
+	return x.inner.Pid()
+}
+
+// ExtensionClientable is the interface implemented by [ExtensionClient], for mocking and DI.
+type ExtensionClientable interface {
+	Unwrap() *raw.CMIOExtensionClient
+	ClientID() *foundation.NSUUID
+	SigningID() string
+	Pid() int
+}
+
+var _ ExtensionClientable = (*ExtensionClient)(nil)
 

@@ -5,6 +5,8 @@
 package securityinterface
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/security"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/securityfoundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/securityinterface"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +24,101 @@ func NewAuthorizationView() *AuthorizationView {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SFAuthorizationView")), objc.RegisterName("new"))
 	return &AuthorizationView{inner: raw.SFAuthorizationViewFromID(_id)}
 }
+
+// SetString calls the underlying SetString.
+func (x *AuthorizationView) SetString(authorizationString string) {
+	x.inner.SetString(authorizationString)
+}
+
+// SetAuthorizationRights calls the underlying SetAuthorizationRights.
+func (x *AuthorizationView) SetAuthorizationRights(authorizationRights *security.AuthorizationItemSet) {
+	x.inner.SetAuthorizationRights(authorizationRights)
+}
+
+// AuthorizationRights calls the underlying AuthorizationRights.
+func (x *AuthorizationView) AuthorizationRights() *security.AuthorizationItemSet {
+	return x.inner.AuthorizationRights()
+}
+
+// Authorization calls the underlying Authorization.
+func (x *AuthorizationView) Authorization() *securityfoundation.SFAuthorization {
+	return x.inner.Authorization()
+}
+
+// UpdateStatus calls the underlying UpdateStatus.
+func (x *AuthorizationView) UpdateStatus(inSender objc.ID) bool {
+	return x.inner.UpdateStatus(inSender)
+}
+
+// SetAutoupdate calls the underlying SetAutoupdate.
+func (x *AuthorizationView) SetAutoupdate(autoupdate bool) {
+	x.inner.SetAutoupdate(autoupdate)
+}
+
+// SetAutoupdateInterval calls the underlying SetAutoupdateInterval.
+func (x *AuthorizationView) SetAutoupdateInterval(autoupdate bool, interval float64) {
+	x.inner.SetAutoupdateInterval(autoupdate, interval)
+}
+
+// AuthorizationState calls the underlying AuthorizationState.
+func (x *AuthorizationView) AuthorizationState() raw.SFAuthorizationViewState {
+	return x.inner.AuthorizationState()
+}
+
+// SetEnabled calls the underlying SetEnabled.
+func (x *AuthorizationView) SetEnabled(enabled bool) {
+	x.inner.SetEnabled(enabled)
+}
+
+// IsEnabled calls the underlying IsEnabled.
+func (x *AuthorizationView) IsEnabled() bool {
+	return x.inner.IsEnabled()
+}
+
+// SetFlags calls the underlying SetFlags.
+func (x *AuthorizationView) SetFlags(flags security.AuthorizationFlags) {
+	x.inner.SetFlags(flags)
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *AuthorizationView) SetDelegate(delegate objc.ID) {
+	x.inner.SetDelegate(delegate)
+}
+
+// Delegate calls the underlying Delegate.
+func (x *AuthorizationView) Delegate() objc.ID {
+	return x.inner.Delegate()
+}
+
+// Authorize calls the underlying Authorize.
+func (x *AuthorizationView) Authorize(inSender objc.ID) bool {
+	return x.inner.Authorize(inSender)
+}
+
+// Deauthorize calls the underlying Deauthorize.
+func (x *AuthorizationView) Deauthorize(inSender objc.ID) bool {
+	return x.inner.Deauthorize(inSender)
+}
+
+// AuthorizationViewable is the interface implemented by [AuthorizationView], for mocking and DI.
+type AuthorizationViewable interface {
+	Unwrap() *raw.SFAuthorizationView
+	SetString(authorizationString string)
+	SetAuthorizationRights(authorizationRights *security.AuthorizationItemSet)
+	AuthorizationRights() *security.AuthorizationItemSet
+	Authorization() *securityfoundation.SFAuthorization
+	UpdateStatus(inSender objc.ID) bool
+	SetAutoupdate(autoupdate bool)
+	SetAutoupdateInterval(autoupdate bool, interval float64)
+	AuthorizationState() raw.SFAuthorizationViewState
+	SetEnabled(enabled bool)
+	IsEnabled() bool
+	SetFlags(flags security.AuthorizationFlags)
+	SetDelegate(delegate objc.ID)
+	Delegate() objc.ID
+	Authorize(inSender objc.ID) bool
+	Deauthorize(inSender objc.ID) bool
+}
+
+var _ AuthorizationViewable = (*AuthorizationView)(nil)
 

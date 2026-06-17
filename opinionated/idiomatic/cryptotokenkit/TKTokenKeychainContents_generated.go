@@ -6,6 +6,8 @@ package cryptotokenkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cryptotokenkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,16 +25,54 @@ func NewTokenKeychainContents() *TokenKeychainContents {
 	return &TokenKeychainContents{inner: raw.TKTokenKeychainContentsFromID(_id)}
 }
 
+// FillWithItems calls the underlying FillWithItems.
+func (x *TokenKeychainContents) FillWithItems(items *foundation.NSArray[*raw.TKTokenKeychainItem]) {
+	x.inner.FillWithItems(items)
+}
+
+// KeyForObjectIDError calls the underlying KeyForObjectIDError.
+func (x *TokenKeychainContents) KeyForObjectIDError(objectID objc.ID) (*TokenKeychainKey, error) {
+	_r, _err := x.inner.KeyForObjectIDError(objectID)
+	if _err != nil {
+		return nil, _err
+	}
+	if _r == nil {
+		return nil, nil
+	}
+	return &TokenKeychainKey{inner: _r}, nil
+}
+
+// CertificateForObjectIDError calls the underlying CertificateForObjectIDError.
+func (x *TokenKeychainContents) CertificateForObjectIDError(objectID objc.ID) (*TokenKeychainCertificate, error) {
+	_r, _err := x.inner.CertificateForObjectIDError(objectID)
+	if _err != nil {
+		return nil, _err
+	}
+	if _r == nil {
+		return nil, nil
+	}
+	return &TokenKeychainCertificate{inner: _r}, nil
+}
+
 // Items returns the collection as a Go slice.
 func (x *TokenKeychainContents) Items() []*raw.TKTokenKeychainItem {
 	arr := x.inner.Items()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.TKTokenKeychainItem, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.TKTokenKeychainItem {
+		return raw.TKTokenKeychainItemFromID(purego.Retain(_id))
+	})
 }
+
+// TokenKeychainContentsable is the interface implemented by [TokenKeychainContents], for mocking and DI.
+type TokenKeychainContentsable interface {
+	Unwrap() *raw.TKTokenKeychainContents
+	FillWithItems(items *foundation.NSArray[*raw.TKTokenKeychainItem])
+	KeyForObjectIDError(objectID objc.ID) (*TokenKeychainKey, error)
+	CertificateForObjectIDError(objectID objc.ID) (*TokenKeychainCertificate, error)
+	Items() []*raw.TKTokenKeychainItem
+}
+
+var _ TokenKeychainContentsable = (*TokenKeychainContents)(nil)
 

@@ -5,8 +5,10 @@
 package mapkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // MapSnapshotter wraps [raw.MKMapSnapshotter] with a fluent Go API.
@@ -23,4 +25,35 @@ func NewMapSnapshotterWithOptions(options *raw.MKMapSnapshotOptions) *MapSnapsho
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOptions:"), options.Ptr())
 	return &MapSnapshotter{inner: raw.MKMapSnapshotterFromID(_id)}
 }
+
+// StartWithCompletionHandler calls the underlying StartWithCompletionHandler.
+func (x *MapSnapshotter) StartWithCompletionHandler(completionHandler func(*raw.MKMapSnapshot, unsafe.Pointer)) {
+	x.inner.StartWithCompletionHandler(completionHandler)
+}
+
+// StartWithQueueCompletionHandler calls the underlying StartWithQueueCompletionHandler.
+func (x *MapSnapshotter) StartWithQueueCompletionHandler(queue *foundation.NSObject, completionHandler func(*raw.MKMapSnapshot, unsafe.Pointer)) {
+	x.inner.StartWithQueueCompletionHandler(queue, completionHandler)
+}
+
+// Cancel calls the underlying Cancel.
+func (x *MapSnapshotter) Cancel() {
+	x.inner.Cancel()
+}
+
+// IsLoading calls the underlying IsLoading.
+func (x *MapSnapshotter) IsLoading() bool {
+	return x.inner.IsLoading()
+}
+
+// MapSnapshotterable is the interface implemented by [MapSnapshotter], for mocking and DI.
+type MapSnapshotterable interface {
+	Unwrap() *raw.MKMapSnapshotter
+	StartWithCompletionHandler(completionHandler func(*raw.MKMapSnapshot, unsafe.Pointer))
+	StartWithQueueCompletionHandler(queue *foundation.NSObject, completionHandler func(*raw.MKMapSnapshot, unsafe.Pointer))
+	Cancel()
+	IsLoading() bool
+}
+
+var _ MapSnapshotterable = (*MapSnapshotter)(nil)
 

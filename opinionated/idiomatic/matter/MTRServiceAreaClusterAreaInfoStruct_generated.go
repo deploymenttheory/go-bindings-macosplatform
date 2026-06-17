@@ -35,3 +35,44 @@ func (x *MTRServiceAreaClusterAreaInfoStruct) WithLandmarkInfo(landmarkInfo *raw
 	return x
 }
 
+// LocationInfo calls the underlying LocationInfo.
+func (x *MTRServiceAreaClusterAreaInfoStruct) LocationInfo() *MTRDataTypeLocationDescriptorStruct {
+	_r := x.inner.LocationInfo()
+	if _r == nil {
+		return nil
+	}
+	return &MTRDataTypeLocationDescriptorStruct{inner: _r}
+}
+
+// SetLocationInfo calls the underlying SetLocationInfo.
+func (x *MTRServiceAreaClusterAreaInfoStruct) SetLocationInfo(locationInfo *raw.MTRDataTypeLocationDescriptorStruct) {
+	x.inner.SetLocationInfo(locationInfo)
+}
+
+// LandmarkInfo calls the underlying LandmarkInfo.
+func (x *MTRServiceAreaClusterAreaInfoStruct) LandmarkInfo() *MTRServiceAreaClusterLandmarkInfoStruct {
+	_r := x.inner.LandmarkInfo()
+	if _r == nil {
+		return nil
+	}
+	return &MTRServiceAreaClusterLandmarkInfoStruct{inner: _r}
+}
+
+// SetLandmarkInfo calls the underlying SetLandmarkInfo.
+func (x *MTRServiceAreaClusterAreaInfoStruct) SetLandmarkInfo(landmarkInfo *raw.MTRServiceAreaClusterLandmarkInfoStruct) {
+	x.inner.SetLandmarkInfo(landmarkInfo)
+}
+
+// MTRServiceAreaClusterAreaInfoStructable is the interface implemented by [MTRServiceAreaClusterAreaInfoStruct], for mocking and DI.
+type MTRServiceAreaClusterAreaInfoStructable interface {
+	Unwrap() *raw.MTRServiceAreaClusterAreaInfoStruct
+	WithLocationInfo(locationInfo *raw.MTRDataTypeLocationDescriptorStruct) *MTRServiceAreaClusterAreaInfoStruct
+	WithLandmarkInfo(landmarkInfo *raw.MTRServiceAreaClusterLandmarkInfoStruct) *MTRServiceAreaClusterAreaInfoStruct
+	LocationInfo() *MTRDataTypeLocationDescriptorStruct
+	SetLocationInfo(locationInfo *raw.MTRDataTypeLocationDescriptorStruct)
+	LandmarkInfo() *MTRServiceAreaClusterLandmarkInfoStruct
+	SetLandmarkInfo(landmarkInfo *raw.MTRServiceAreaClusterLandmarkInfoStruct)
+}
+
+var _ MTRServiceAreaClusterAreaInfoStructable = (*MTRServiceAreaClusterAreaInfoStruct)(nil)
+

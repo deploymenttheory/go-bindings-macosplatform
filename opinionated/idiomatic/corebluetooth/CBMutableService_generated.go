@@ -58,7 +58,28 @@ func (x *MutableService) WithCharacteristics(items ...CharacteristicProvider) *M
 	return x
 }
 
+// SetIncludedServices calls the underlying SetIncludedServices.
+func (x *MutableService) SetIncludedServices(includedServices *foundation.NSArray[*raw.CBService]) {
+	x.inner.SetIncludedServices(includedServices)
+}
+
+// SetCharacteristics calls the underlying SetCharacteristics.
+func (x *MutableService) SetCharacteristics(characteristics *foundation.NSArray[*raw.CBCharacteristic]) {
+	x.inner.SetCharacteristics(characteristics)
+}
+
 func (x *MutableService) asService() *raw.CBService { return &x.inner.CBService }
 
 func (x *MutableService) asAttribute() *raw.CBAttribute { return &x.inner.CBService.CBAttribute }
+
+// MutableServiceable is the interface implemented by [MutableService], for mocking and DI.
+type MutableServiceable interface {
+	Unwrap() *raw.CBMutableService
+	WithIncludedServices(items ...ServiceProvider) *MutableService
+	WithCharacteristics(items ...CharacteristicProvider) *MutableService
+	SetIncludedServices(includedServices *foundation.NSArray[*raw.CBService])
+	SetCharacteristics(characteristics *foundation.NSArray[*raw.CBCharacteristic])
+}
+
+var _ MutableServiceable = (*MutableService)(nil)
 

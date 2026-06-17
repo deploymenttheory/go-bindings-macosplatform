@@ -23,3 +23,20 @@ func NewAggregateAssetDownloadTask() *AggregateAssetDownloadTask {
 	return &AggregateAssetDownloadTask{inner: raw.AVAggregateAssetDownloadTaskFromID(_id)}
 }
 
+// URLAsset calls the underlying URLAsset.
+func (x *AggregateAssetDownloadTask) URLAsset() *URLAsset {
+	_r := x.inner.URLAsset()
+	if _r == nil {
+		return nil
+	}
+	return &URLAsset{inner: _r}
+}
+
+// AggregateAssetDownloadTaskable is the interface implemented by [AggregateAssetDownloadTask], for mocking and DI.
+type AggregateAssetDownloadTaskable interface {
+	Unwrap() *raw.AVAggregateAssetDownloadTask
+	URLAsset() *URLAsset
+}
+
+var _ AggregateAssetDownloadTaskable = (*AggregateAssetDownloadTask)(nil)
+

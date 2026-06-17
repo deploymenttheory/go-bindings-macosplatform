@@ -5,6 +5,7 @@
 package metrickit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metrickit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +23,29 @@ func NewAverage() *Average {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MXAverage")), objc.RegisterName("new"))
 	return &Average{inner: raw.MXAverageFromID[objc.ID](_id)}
 }
+
+// AverageMeasurement calls the underlying AverageMeasurement.
+func (x *Average) AverageMeasurement() *foundation.NSMeasurement[objc.ID] {
+	return x.inner.AverageMeasurement()
+}
+
+// SampleCount calls the underlying SampleCount.
+func (x *Average) SampleCount() int {
+	return x.inner.SampleCount()
+}
+
+// StandardDeviation calls the underlying StandardDeviation.
+func (x *Average) StandardDeviation() float64 {
+	return x.inner.StandardDeviation()
+}
+
+// Averageable is the interface implemented by [Average], for mocking and DI.
+type Averageable interface {
+	Unwrap() *raw.MXAverage[objc.ID]
+	AverageMeasurement() *foundation.NSMeasurement[objc.ID]
+	SampleCount() int
+	StandardDeviation() float64
+}
+
+var _ Averageable = (*Average)(nil)
 

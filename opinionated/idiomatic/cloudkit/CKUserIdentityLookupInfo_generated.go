@@ -7,6 +7,7 @@ package cloudkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -38,4 +39,41 @@ func NewUserIdentityLookupInfoWithUserRecordID(userRecordID *raw.CKRecordID) *Us
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUserRecordID:"), userRecordID.Ptr())
 	return &UserIdentityLookupInfo{inner: raw.CKUserIdentityLookupInfoFromID(_id)}
 }
+
+// EmailAddress calls the underlying EmailAddress.
+func (x *UserIdentityLookupInfo) EmailAddress() string {
+	_r := x.inner.EmailAddress()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// PhoneNumber calls the underlying PhoneNumber.
+func (x *UserIdentityLookupInfo) PhoneNumber() string {
+	_r := x.inner.PhoneNumber()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// UserRecordID calls the underlying UserRecordID.
+func (x *UserIdentityLookupInfo) UserRecordID() *RecordID {
+	_r := x.inner.UserRecordID()
+	if _r == nil {
+		return nil
+	}
+	return &RecordID{inner: _r}
+}
+
+// UserIdentityLookupInfoable is the interface implemented by [UserIdentityLookupInfo], for mocking and DI.
+type UserIdentityLookupInfoable interface {
+	Unwrap() *raw.CKUserIdentityLookupInfo
+	EmailAddress() string
+	PhoneNumber() string
+	UserRecordID() *RecordID
+}
+
+var _ UserIdentityLookupInfoable = (*UserIdentityLookupInfo)(nil)
 
