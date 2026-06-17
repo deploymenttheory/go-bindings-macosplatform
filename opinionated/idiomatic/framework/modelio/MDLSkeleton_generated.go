@@ -19,11 +19,11 @@ type Skeleton struct {
 // Unwrap returns the underlying [raw.MDLSkeleton].
 func (x *Skeleton) Unwrap() *raw.MDLSkeleton { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Skeleton) ID() objc.ID { return x.inner.Ptr() }
 
-// SkeletonFromID adopts an existing toll-free-bridged object id as a Skeleton (nil for 0).
+// SkeletonFromID adopts an existing object pointer as a Skeleton (nil for 0).
 func SkeletonFromID(id objc.ID) *Skeleton {
 	if id == 0 {
 		return nil

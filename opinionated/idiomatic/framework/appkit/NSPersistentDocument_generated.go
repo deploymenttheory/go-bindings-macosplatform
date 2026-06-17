@@ -20,11 +20,11 @@ type PersistentDocument struct {
 // Unwrap returns the underlying [raw.NSPersistentDocument].
 func (x *PersistentDocument) Unwrap() *raw.NSPersistentDocument { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PersistentDocument) ID() objc.ID { return x.inner.Ptr() }
 
-// PersistentDocumentFromID adopts an existing toll-free-bridged object id as a PersistentDocument (nil for 0).
+// PersistentDocumentFromID adopts an existing object pointer as a PersistentDocument (nil for 0).
 func PersistentDocumentFromID(id objc.ID) *PersistentDocument {
 	if id == 0 {
 		return nil

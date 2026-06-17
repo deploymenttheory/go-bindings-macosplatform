@@ -18,11 +18,11 @@ type SyncEngineSendChangesScope struct {
 // Unwrap returns the underlying [raw.CKSyncEngineSendChangesScope].
 func (x *SyncEngineSendChangesScope) Unwrap() *raw.CKSyncEngineSendChangesScope { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SyncEngineSendChangesScope) ID() objc.ID { return x.inner.Ptr() }
 
-// SyncEngineSendChangesScopeFromID adopts an existing toll-free-bridged object id as a SyncEngineSendChangesScope (nil for 0).
+// SyncEngineSendChangesScopeFromID adopts an existing object pointer as a SyncEngineSendChangesScope (nil for 0).
 func SyncEngineSendChangesScopeFromID(id objc.ID) *SyncEngineSendChangesScope {
 	if id == 0 {
 		return nil

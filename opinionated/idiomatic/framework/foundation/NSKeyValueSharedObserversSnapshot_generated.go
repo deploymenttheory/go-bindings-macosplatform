@@ -17,11 +17,11 @@ type KeyValueSharedObserversSnapshot struct {
 // Unwrap returns the underlying [raw.NSKeyValueSharedObserversSnapshot].
 func (x *KeyValueSharedObserversSnapshot) Unwrap() *raw.NSKeyValueSharedObserversSnapshot { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *KeyValueSharedObserversSnapshot) ID() objc.ID { return x.inner.Ptr() }
 
-// KeyValueSharedObserversSnapshotFromID adopts an existing toll-free-bridged object id as a KeyValueSharedObserversSnapshot (nil for 0).
+// KeyValueSharedObserversSnapshotFromID adopts an existing object pointer as a KeyValueSharedObserversSnapshot (nil for 0).
 func KeyValueSharedObserversSnapshotFromID(id objc.ID) *KeyValueSharedObserversSnapshot {
 	if id == 0 {
 		return nil

@@ -20,11 +20,11 @@ type Uniform struct {
 // Unwrap returns the underlying [raw.SKUniform].
 func (x *Uniform) Unwrap() *raw.SKUniform { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Uniform) ID() objc.ID { return x.inner.Ptr() }
 
-// UniformFromID adopts an existing toll-free-bridged object id as a Uniform (nil for 0).
+// UniformFromID adopts an existing object pointer as a Uniform (nil for 0).
 func UniformFromID(id objc.ID) *Uniform {
 	if id == 0 {
 		return nil

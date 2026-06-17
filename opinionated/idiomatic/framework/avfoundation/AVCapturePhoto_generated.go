@@ -20,11 +20,11 @@ type CapturePhoto struct {
 // Unwrap returns the underlying [raw.AVCapturePhoto].
 func (x *CapturePhoto) Unwrap() *raw.AVCapturePhoto { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CapturePhoto) ID() objc.ID { return x.inner.Ptr() }
 
-// CapturePhotoFromID adopts an existing toll-free-bridged object id as a CapturePhoto (nil for 0).
+// CapturePhotoFromID adopts an existing object pointer as a CapturePhoto (nil for 0).
 func CapturePhotoFromID(id objc.ID) *CapturePhoto {
 	if id == 0 {
 		return nil

@@ -17,11 +17,11 @@ type DeveloperTool struct {
 // Unwrap returns the underlying [raw.EPDeveloperTool].
 func (x *DeveloperTool) Unwrap() *raw.EPDeveloperTool { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DeveloperTool) ID() objc.ID { return x.inner.Ptr() }
 
-// DeveloperToolFromID adopts an existing toll-free-bridged object id as a DeveloperTool (nil for 0).
+// DeveloperToolFromID adopts an existing object pointer as a DeveloperTool (nil for 0).
 func DeveloperToolFromID(id objc.ID) *DeveloperTool {
 	if id == 0 {
 		return nil

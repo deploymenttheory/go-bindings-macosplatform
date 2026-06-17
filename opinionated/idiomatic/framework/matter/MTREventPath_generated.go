@@ -18,11 +18,11 @@ type MTREventPath struct {
 // Unwrap returns the underlying [raw.MTREventPath].
 func (x *MTREventPath) Unwrap() *raw.MTREventPath { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTREventPath) ID() objc.ID { return x.inner.Ptr() }
 
-// MTREventPathFromID adopts an existing toll-free-bridged object id as a MTREventPath (nil for 0).
+// MTREventPathFromID adopts an existing object pointer as a MTREventPath (nil for 0).
 func MTREventPathFromID(id objc.ID) *MTREventPath {
 	if id == 0 {
 		return nil

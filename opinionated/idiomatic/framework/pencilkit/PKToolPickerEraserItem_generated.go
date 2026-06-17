@@ -17,11 +17,11 @@ type ToolPickerEraserItem struct {
 // Unwrap returns the underlying [raw.PKToolPickerEraserItem].
 func (x *ToolPickerEraserItem) Unwrap() *raw.PKToolPickerEraserItem { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ToolPickerEraserItem) ID() objc.ID { return x.inner.Ptr() }
 
-// ToolPickerEraserItemFromID adopts an existing toll-free-bridged object id as a ToolPickerEraserItem (nil for 0).
+// ToolPickerEraserItemFromID adopts an existing object pointer as a ToolPickerEraserItem (nil for 0).
 func ToolPickerEraserItemFromID(id objc.ID) *ToolPickerEraserItem {
 	if id == 0 {
 		return nil

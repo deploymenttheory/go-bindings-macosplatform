@@ -17,11 +17,11 @@ type AnnotationInk struct {
 // Unwrap returns the underlying [raw.PDFAnnotationInk].
 func (x *AnnotationInk) Unwrap() *raw.PDFAnnotationInk { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AnnotationInk) ID() objc.ID { return x.inner.Ptr() }
 
-// AnnotationInkFromID adopts an existing toll-free-bridged object id as a AnnotationInk (nil for 0).
+// AnnotationInkFromID adopts an existing object pointer as a AnnotationInk (nil for 0).
 func AnnotationInkFromID(id objc.ID) *AnnotationInk {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type Detector struct {
 // Unwrap returns the underlying [raw.CIDetector].
 func (x *Detector) Unwrap() *raw.CIDetector { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Detector) ID() objc.ID { return x.inner.Ptr() }
 
-// DetectorFromID adopts an existing toll-free-bridged object id as a Detector (nil for 0).
+// DetectorFromID adopts an existing object pointer as a Detector (nil for 0).
 func DetectorFromID(id objc.ID) *Detector {
 	if id == 0 {
 		return nil

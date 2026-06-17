@@ -18,11 +18,11 @@ type MTRCommissionerControlClusterCommissionNodeParams struct {
 // Unwrap returns the underlying [raw.MTRCommissionerControlClusterCommissionNodeParams].
 func (x *MTRCommissionerControlClusterCommissionNodeParams) Unwrap() *raw.MTRCommissionerControlClusterCommissionNodeParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRCommissionerControlClusterCommissionNodeParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRCommissionerControlClusterCommissionNodeParamsFromID adopts an existing toll-free-bridged object id as a MTRCommissionerControlClusterCommissionNodeParams (nil for 0).
+// MTRCommissionerControlClusterCommissionNodeParamsFromID adopts an existing object pointer as a MTRCommissionerControlClusterCommissionNodeParams (nil for 0).
 func MTRCommissionerControlClusterCommissionNodeParamsFromID(id objc.ID) *MTRCommissionerControlClusterCommissionNodeParams {
 	if id == 0 {
 		return nil

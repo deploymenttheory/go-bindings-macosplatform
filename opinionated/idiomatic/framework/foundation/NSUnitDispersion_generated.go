@@ -17,11 +17,11 @@ type UnitDispersion struct {
 // Unwrap returns the underlying [raw.NSUnitDispersion].
 func (x *UnitDispersion) Unwrap() *raw.NSUnitDispersion { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *UnitDispersion) ID() objc.ID { return x.inner.Ptr() }
 
-// UnitDispersionFromID adopts an existing toll-free-bridged object id as a UnitDispersion (nil for 0).
+// UnitDispersionFromID adopts an existing object pointer as a UnitDispersion (nil for 0).
 func UnitDispersionFromID(id objc.ID) *UnitDispersion {
 	if id == 0 {
 		return nil

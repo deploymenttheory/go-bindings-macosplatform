@@ -20,11 +20,11 @@ type AssetPackManifest struct {
 // Unwrap returns the underlying [raw.BAAssetPackManifest].
 func (x *AssetPackManifest) Unwrap() *raw.BAAssetPackManifest { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AssetPackManifest) ID() objc.ID { return x.inner.Ptr() }
 
-// AssetPackManifestFromID adopts an existing toll-free-bridged object id as a AssetPackManifest (nil for 0).
+// AssetPackManifestFromID adopts an existing object pointer as a AssetPackManifest (nil for 0).
 func AssetPackManifestFromID(id objc.ID) *AssetPackManifest {
 	if id == 0 {
 		return nil

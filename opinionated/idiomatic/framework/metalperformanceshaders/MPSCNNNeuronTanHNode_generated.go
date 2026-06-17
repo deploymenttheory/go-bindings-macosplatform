@@ -18,11 +18,11 @@ type CNNNeuronTanHNode struct {
 // Unwrap returns the underlying [raw.MPSCNNNeuronTanHNode].
 func (x *CNNNeuronTanHNode) Unwrap() *raw.MPSCNNNeuronTanHNode { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CNNNeuronTanHNode) ID() objc.ID { return x.inner.Ptr() }
 
-// CNNNeuronTanHNodeFromID adopts an existing toll-free-bridged object id as a CNNNeuronTanHNode (nil for 0).
+// CNNNeuronTanHNodeFromID adopts an existing object pointer as a CNNNeuronTanHNode (nil for 0).
 func CNNNeuronTanHNodeFromID(id objc.ID) *CNNNeuronTanHNode {
 	if id == 0 {
 		return nil

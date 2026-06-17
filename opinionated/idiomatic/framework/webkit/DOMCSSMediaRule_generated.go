@@ -18,11 +18,11 @@ type DOMCSSMediaRule struct {
 // Unwrap returns the underlying [raw.DOMCSSMediaRule].
 func (x *DOMCSSMediaRule) Unwrap() *raw.DOMCSSMediaRule { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DOMCSSMediaRule) ID() objc.ID { return x.inner.Ptr() }
 
-// DOMCSSMediaRuleFromID adopts an existing toll-free-bridged object id as a DOMCSSMediaRule (nil for 0).
+// DOMCSSMediaRuleFromID adopts an existing object pointer as a DOMCSSMediaRule (nil for 0).
 func DOMCSSMediaRuleFromID(id objc.ID) *DOMCSSMediaRule {
 	if id == 0 {
 		return nil

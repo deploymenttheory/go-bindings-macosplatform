@@ -23,11 +23,11 @@ type MatrixBatchNormalizationGradient struct {
 // Unwrap returns the underlying [raw.MPSMatrixBatchNormalizationGradient].
 func (x *MatrixBatchNormalizationGradient) Unwrap() *raw.MPSMatrixBatchNormalizationGradient { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MatrixBatchNormalizationGradient) ID() objc.ID { return x.inner.Ptr() }
 
-// MatrixBatchNormalizationGradientFromID adopts an existing toll-free-bridged object id as a MatrixBatchNormalizationGradient (nil for 0).
+// MatrixBatchNormalizationGradientFromID adopts an existing object pointer as a MatrixBatchNormalizationGradient (nil for 0).
 func MatrixBatchNormalizationGradientFromID(id objc.ID) *MatrixBatchNormalizationGradient {
 	if id == 0 {
 		return nil

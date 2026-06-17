@@ -18,11 +18,11 @@ type CNNFullyConnectedGradientNode struct {
 // Unwrap returns the underlying [raw.MPSCNNFullyConnectedGradientNode].
 func (x *CNNFullyConnectedGradientNode) Unwrap() *raw.MPSCNNFullyConnectedGradientNode { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CNNFullyConnectedGradientNode) ID() objc.ID { return x.inner.Ptr() }
 
-// CNNFullyConnectedGradientNodeFromID adopts an existing toll-free-bridged object id as a CNNFullyConnectedGradientNode (nil for 0).
+// CNNFullyConnectedGradientNodeFromID adopts an existing object pointer as a CNNFullyConnectedGradientNode (nil for 0).
 func CNNFullyConnectedGradientNodeFromID(id objc.ID) *CNNFullyConnectedGradientNode {
 	if id == 0 {
 		return nil

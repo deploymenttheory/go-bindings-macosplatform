@@ -19,11 +19,11 @@ type MTREnergyEVSEModeClusterModeOptionStruct struct {
 // Unwrap returns the underlying [raw.MTREnergyEVSEModeClusterModeOptionStruct].
 func (x *MTREnergyEVSEModeClusterModeOptionStruct) Unwrap() *raw.MTREnergyEVSEModeClusterModeOptionStruct { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTREnergyEVSEModeClusterModeOptionStruct) ID() objc.ID { return x.inner.Ptr() }
 
-// MTREnergyEVSEModeClusterModeOptionStructFromID adopts an existing toll-free-bridged object id as a MTREnergyEVSEModeClusterModeOptionStruct (nil for 0).
+// MTREnergyEVSEModeClusterModeOptionStructFromID adopts an existing object pointer as a MTREnergyEVSEModeClusterModeOptionStruct (nil for 0).
 func MTREnergyEVSEModeClusterModeOptionStructFromID(id objc.ID) *MTREnergyEVSEModeClusterModeOptionStruct {
 	if id == 0 {
 		return nil

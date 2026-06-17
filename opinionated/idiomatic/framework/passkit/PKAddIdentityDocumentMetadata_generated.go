@@ -18,11 +18,11 @@ type AddIdentityDocumentMetadata struct {
 // Unwrap returns the underlying [raw.PKAddIdentityDocumentMetadata].
 func (x *AddIdentityDocumentMetadata) Unwrap() *raw.PKAddIdentityDocumentMetadata { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AddIdentityDocumentMetadata) ID() objc.ID { return x.inner.Ptr() }
 
-// AddIdentityDocumentMetadataFromID adopts an existing toll-free-bridged object id as a AddIdentityDocumentMetadata (nil for 0).
+// AddIdentityDocumentMetadataFromID adopts an existing object pointer as a AddIdentityDocumentMetadata (nil for 0).
 func AddIdentityDocumentMetadataFromID(id objc.ID) *AddIdentityDocumentMetadata {
 	if id == 0 {
 		return nil

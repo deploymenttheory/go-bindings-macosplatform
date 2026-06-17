@@ -21,11 +21,11 @@ type MTRClusterContentAppObserver struct {
 // Unwrap returns the underlying [raw.MTRClusterContentAppObserver].
 func (x *MTRClusterContentAppObserver) Unwrap() *raw.MTRClusterContentAppObserver { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRClusterContentAppObserver) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRClusterContentAppObserverFromID adopts an existing toll-free-bridged object id as a MTRClusterContentAppObserver (nil for 0).
+// MTRClusterContentAppObserverFromID adopts an existing object pointer as a MTRClusterContentAppObserver (nil for 0).
 func MTRClusterContentAppObserverFromID(id objc.ID) *MTRClusterContentAppObserver {
 	if id == 0 {
 		return nil

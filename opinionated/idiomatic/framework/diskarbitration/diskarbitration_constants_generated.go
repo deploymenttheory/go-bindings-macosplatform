@@ -10,141 +10,141 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// KDADiskDescriptionVolumeKindKey returns the CoreFoundation constant kDADiskDescriptionVolumeKindKey as a toll-free-bridged objc.ID.
+// KDADiskDescriptionVolumeKindKey returns the value of the CoreFoundation reference constant kDADiskDescriptionVolumeKindKey as an objc.ID.
 func KDADiskDescriptionVolumeKindKey() objc.ID { return purego.CFConstant(raw.KDADiskDescriptionVolumeKindKey()) }
 
-// KDADiskDescriptionVolumeMountableKey returns the CoreFoundation constant kDADiskDescriptionVolumeMountableKey as a toll-free-bridged objc.ID.
+// KDADiskDescriptionVolumeMountableKey returns the value of the CoreFoundation reference constant kDADiskDescriptionVolumeMountableKey as an objc.ID.
 func KDADiskDescriptionVolumeMountableKey() objc.ID { return purego.CFConstant(raw.KDADiskDescriptionVolumeMountableKey()) }
 
-// KDADiskDescriptionVolumeNameKey returns the CoreFoundation constant kDADiskDescriptionVolumeNameKey as a toll-free-bridged objc.ID.
+// KDADiskDescriptionVolumeNameKey returns the value of the CoreFoundation reference constant kDADiskDescriptionVolumeNameKey as an objc.ID.
 func KDADiskDescriptionVolumeNameKey() objc.ID { return purego.CFConstant(raw.KDADiskDescriptionVolumeNameKey()) }
 
-// KDADiskDescriptionVolumeNetworkKey returns the CoreFoundation constant kDADiskDescriptionVolumeNetworkKey as a toll-free-bridged objc.ID.
+// KDADiskDescriptionVolumeNetworkKey returns the value of the CoreFoundation reference constant kDADiskDescriptionVolumeNetworkKey as an objc.ID.
 func KDADiskDescriptionVolumeNetworkKey() objc.ID { return purego.CFConstant(raw.KDADiskDescriptionVolumeNetworkKey()) }
 
-// KDADiskDescriptionVolumePathKey returns the CoreFoundation constant kDADiskDescriptionVolumePathKey as a toll-free-bridged objc.ID.
+// KDADiskDescriptionVolumePathKey returns the value of the CoreFoundation reference constant kDADiskDescriptionVolumePathKey as an objc.ID.
 func KDADiskDescriptionVolumePathKey() objc.ID { return purego.CFConstant(raw.KDADiskDescriptionVolumePathKey()) }
 
-// KDADiskDescriptionVolumeTypeKey returns the CoreFoundation constant kDADiskDescriptionVolumeTypeKey as a toll-free-bridged objc.ID.
+// KDADiskDescriptionVolumeTypeKey returns the value of the CoreFoundation reference constant kDADiskDescriptionVolumeTypeKey as an objc.ID.
 func KDADiskDescriptionVolumeTypeKey() objc.ID { return purego.CFConstant(raw.KDADiskDescriptionVolumeTypeKey()) }
 
-// KDADiskDescriptionVolumeUUIDKey returns the CoreFoundation constant kDADiskDescriptionVolumeUUIDKey as a toll-free-bridged objc.ID.
+// KDADiskDescriptionVolumeUUIDKey returns the value of the CoreFoundation reference constant kDADiskDescriptionVolumeUUIDKey as an objc.ID.
 func KDADiskDescriptionVolumeUUIDKey() objc.ID { return purego.CFConstant(raw.KDADiskDescriptionVolumeUUIDKey()) }
 
-// KDADiskDescriptionMediaBlockSizeKey returns the CoreFoundation constant kDADiskDescriptionMediaBlockSizeKey as a toll-free-bridged objc.ID.
+// KDADiskDescriptionMediaBlockSizeKey returns the value of the CoreFoundation reference constant kDADiskDescriptionMediaBlockSizeKey as an objc.ID.
 func KDADiskDescriptionMediaBlockSizeKey() objc.ID { return purego.CFConstant(raw.KDADiskDescriptionMediaBlockSizeKey()) }
 
-// KDADiskDescriptionMediaBSDMajorKey returns the CoreFoundation constant kDADiskDescriptionMediaBSDMajorKey as a toll-free-bridged objc.ID.
+// KDADiskDescriptionMediaBSDMajorKey returns the value of the CoreFoundation reference constant kDADiskDescriptionMediaBSDMajorKey as an objc.ID.
 func KDADiskDescriptionMediaBSDMajorKey() objc.ID { return purego.CFConstant(raw.KDADiskDescriptionMediaBSDMajorKey()) }
 
-// KDADiskDescriptionMediaBSDMinorKey returns the CoreFoundation constant kDADiskDescriptionMediaBSDMinorKey as a toll-free-bridged objc.ID.
+// KDADiskDescriptionMediaBSDMinorKey returns the value of the CoreFoundation reference constant kDADiskDescriptionMediaBSDMinorKey as an objc.ID.
 func KDADiskDescriptionMediaBSDMinorKey() objc.ID { return purego.CFConstant(raw.KDADiskDescriptionMediaBSDMinorKey()) }
 
-// KDADiskDescriptionMediaBSDNameKey returns the CoreFoundation constant kDADiskDescriptionMediaBSDNameKey as a toll-free-bridged objc.ID.
+// KDADiskDescriptionMediaBSDNameKey returns the value of the CoreFoundation reference constant kDADiskDescriptionMediaBSDNameKey as an objc.ID.
 func KDADiskDescriptionMediaBSDNameKey() objc.ID { return purego.CFConstant(raw.KDADiskDescriptionMediaBSDNameKey()) }
 
-// KDADiskDescriptionMediaBSDUnitKey returns the CoreFoundation constant kDADiskDescriptionMediaBSDUnitKey as a toll-free-bridged objc.ID.
+// KDADiskDescriptionMediaBSDUnitKey returns the value of the CoreFoundation reference constant kDADiskDescriptionMediaBSDUnitKey as an objc.ID.
 func KDADiskDescriptionMediaBSDUnitKey() objc.ID { return purego.CFConstant(raw.KDADiskDescriptionMediaBSDUnitKey()) }
 
-// KDADiskDescriptionMediaContentKey returns the CoreFoundation constant kDADiskDescriptionMediaContentKey as a toll-free-bridged objc.ID.
+// KDADiskDescriptionMediaContentKey returns the value of the CoreFoundation reference constant kDADiskDescriptionMediaContentKey as an objc.ID.
 func KDADiskDescriptionMediaContentKey() objc.ID { return purego.CFConstant(raw.KDADiskDescriptionMediaContentKey()) }
 
-// KDADiskDescriptionMediaEjectableKey returns the CoreFoundation constant kDADiskDescriptionMediaEjectableKey as a toll-free-bridged objc.ID.
+// KDADiskDescriptionMediaEjectableKey returns the value of the CoreFoundation reference constant kDADiskDescriptionMediaEjectableKey as an objc.ID.
 func KDADiskDescriptionMediaEjectableKey() objc.ID { return purego.CFConstant(raw.KDADiskDescriptionMediaEjectableKey()) }
 
-// KDADiskDescriptionMediaIconKey returns the CoreFoundation constant kDADiskDescriptionMediaIconKey as a toll-free-bridged objc.ID.
+// KDADiskDescriptionMediaIconKey returns the value of the CoreFoundation reference constant kDADiskDescriptionMediaIconKey as an objc.ID.
 func KDADiskDescriptionMediaIconKey() objc.ID { return purego.CFConstant(raw.KDADiskDescriptionMediaIconKey()) }
 
-// KDADiskDescriptionMediaKindKey returns the CoreFoundation constant kDADiskDescriptionMediaKindKey as a toll-free-bridged objc.ID.
+// KDADiskDescriptionMediaKindKey returns the value of the CoreFoundation reference constant kDADiskDescriptionMediaKindKey as an objc.ID.
 func KDADiskDescriptionMediaKindKey() objc.ID { return purego.CFConstant(raw.KDADiskDescriptionMediaKindKey()) }
 
-// KDADiskDescriptionMediaLeafKey returns the CoreFoundation constant kDADiskDescriptionMediaLeafKey as a toll-free-bridged objc.ID.
+// KDADiskDescriptionMediaLeafKey returns the value of the CoreFoundation reference constant kDADiskDescriptionMediaLeafKey as an objc.ID.
 func KDADiskDescriptionMediaLeafKey() objc.ID { return purego.CFConstant(raw.KDADiskDescriptionMediaLeafKey()) }
 
-// KDADiskDescriptionMediaNameKey returns the CoreFoundation constant kDADiskDescriptionMediaNameKey as a toll-free-bridged objc.ID.
+// KDADiskDescriptionMediaNameKey returns the value of the CoreFoundation reference constant kDADiskDescriptionMediaNameKey as an objc.ID.
 func KDADiskDescriptionMediaNameKey() objc.ID { return purego.CFConstant(raw.KDADiskDescriptionMediaNameKey()) }
 
-// KDADiskDescriptionMediaPathKey returns the CoreFoundation constant kDADiskDescriptionMediaPathKey as a toll-free-bridged objc.ID.
+// KDADiskDescriptionMediaPathKey returns the value of the CoreFoundation reference constant kDADiskDescriptionMediaPathKey as an objc.ID.
 func KDADiskDescriptionMediaPathKey() objc.ID { return purego.CFConstant(raw.KDADiskDescriptionMediaPathKey()) }
 
-// KDADiskDescriptionMediaRemovableKey returns the CoreFoundation constant kDADiskDescriptionMediaRemovableKey as a toll-free-bridged objc.ID.
+// KDADiskDescriptionMediaRemovableKey returns the value of the CoreFoundation reference constant kDADiskDescriptionMediaRemovableKey as an objc.ID.
 func KDADiskDescriptionMediaRemovableKey() objc.ID { return purego.CFConstant(raw.KDADiskDescriptionMediaRemovableKey()) }
 
-// KDADiskDescriptionMediaSizeKey returns the CoreFoundation constant kDADiskDescriptionMediaSizeKey as a toll-free-bridged objc.ID.
+// KDADiskDescriptionMediaSizeKey returns the value of the CoreFoundation reference constant kDADiskDescriptionMediaSizeKey as an objc.ID.
 func KDADiskDescriptionMediaSizeKey() objc.ID { return purego.CFConstant(raw.KDADiskDescriptionMediaSizeKey()) }
 
-// KDADiskDescriptionMediaTypeKey returns the CoreFoundation constant kDADiskDescriptionMediaTypeKey as a toll-free-bridged objc.ID.
+// KDADiskDescriptionMediaTypeKey returns the value of the CoreFoundation reference constant kDADiskDescriptionMediaTypeKey as an objc.ID.
 func KDADiskDescriptionMediaTypeKey() objc.ID { return purego.CFConstant(raw.KDADiskDescriptionMediaTypeKey()) }
 
-// KDADiskDescriptionMediaUUIDKey returns the CoreFoundation constant kDADiskDescriptionMediaUUIDKey as a toll-free-bridged objc.ID.
+// KDADiskDescriptionMediaUUIDKey returns the value of the CoreFoundation reference constant kDADiskDescriptionMediaUUIDKey as an objc.ID.
 func KDADiskDescriptionMediaUUIDKey() objc.ID { return purego.CFConstant(raw.KDADiskDescriptionMediaUUIDKey()) }
 
-// KDADiskDescriptionMediaWholeKey returns the CoreFoundation constant kDADiskDescriptionMediaWholeKey as a toll-free-bridged objc.ID.
+// KDADiskDescriptionMediaWholeKey returns the value of the CoreFoundation reference constant kDADiskDescriptionMediaWholeKey as an objc.ID.
 func KDADiskDescriptionMediaWholeKey() objc.ID { return purego.CFConstant(raw.KDADiskDescriptionMediaWholeKey()) }
 
-// KDADiskDescriptionMediaWritableKey returns the CoreFoundation constant kDADiskDescriptionMediaWritableKey as a toll-free-bridged objc.ID.
+// KDADiskDescriptionMediaWritableKey returns the value of the CoreFoundation reference constant kDADiskDescriptionMediaWritableKey as an objc.ID.
 func KDADiskDescriptionMediaWritableKey() objc.ID { return purego.CFConstant(raw.KDADiskDescriptionMediaWritableKey()) }
 
-// KDADiskDescriptionMediaEncryptedKey returns the CoreFoundation constant kDADiskDescriptionMediaEncryptedKey as a toll-free-bridged objc.ID.
+// KDADiskDescriptionMediaEncryptedKey returns the value of the CoreFoundation reference constant kDADiskDescriptionMediaEncryptedKey as an objc.ID.
 func KDADiskDescriptionMediaEncryptedKey() objc.ID { return purego.CFConstant(raw.KDADiskDescriptionMediaEncryptedKey()) }
 
-// KDADiskDescriptionMediaEncryptionDetailKey returns the CoreFoundation constant kDADiskDescriptionMediaEncryptionDetailKey as a toll-free-bridged objc.ID.
+// KDADiskDescriptionMediaEncryptionDetailKey returns the value of the CoreFoundation reference constant kDADiskDescriptionMediaEncryptionDetailKey as an objc.ID.
 func KDADiskDescriptionMediaEncryptionDetailKey() objc.ID { return purego.CFConstant(raw.KDADiskDescriptionMediaEncryptionDetailKey()) }
 
-// KDADiskDescriptionDeviceGUIDKey returns the CoreFoundation constant kDADiskDescriptionDeviceGUIDKey as a toll-free-bridged objc.ID.
+// KDADiskDescriptionDeviceGUIDKey returns the value of the CoreFoundation reference constant kDADiskDescriptionDeviceGUIDKey as an objc.ID.
 func KDADiskDescriptionDeviceGUIDKey() objc.ID { return purego.CFConstant(raw.KDADiskDescriptionDeviceGUIDKey()) }
 
-// KDADiskDescriptionDeviceInternalKey returns the CoreFoundation constant kDADiskDescriptionDeviceInternalKey as a toll-free-bridged objc.ID.
+// KDADiskDescriptionDeviceInternalKey returns the value of the CoreFoundation reference constant kDADiskDescriptionDeviceInternalKey as an objc.ID.
 func KDADiskDescriptionDeviceInternalKey() objc.ID { return purego.CFConstant(raw.KDADiskDescriptionDeviceInternalKey()) }
 
-// KDADiskDescriptionDeviceModelKey returns the CoreFoundation constant kDADiskDescriptionDeviceModelKey as a toll-free-bridged objc.ID.
+// KDADiskDescriptionDeviceModelKey returns the value of the CoreFoundation reference constant kDADiskDescriptionDeviceModelKey as an objc.ID.
 func KDADiskDescriptionDeviceModelKey() objc.ID { return purego.CFConstant(raw.KDADiskDescriptionDeviceModelKey()) }
 
-// KDADiskDescriptionDevicePathKey returns the CoreFoundation constant kDADiskDescriptionDevicePathKey as a toll-free-bridged objc.ID.
+// KDADiskDescriptionDevicePathKey returns the value of the CoreFoundation reference constant kDADiskDescriptionDevicePathKey as an objc.ID.
 func KDADiskDescriptionDevicePathKey() objc.ID { return purego.CFConstant(raw.KDADiskDescriptionDevicePathKey()) }
 
-// KDADiskDescriptionDeviceProtocolKey returns the CoreFoundation constant kDADiskDescriptionDeviceProtocolKey as a toll-free-bridged objc.ID.
+// KDADiskDescriptionDeviceProtocolKey returns the value of the CoreFoundation reference constant kDADiskDescriptionDeviceProtocolKey as an objc.ID.
 func KDADiskDescriptionDeviceProtocolKey() objc.ID { return purego.CFConstant(raw.KDADiskDescriptionDeviceProtocolKey()) }
 
-// KDADiskDescriptionDeviceRevisionKey returns the CoreFoundation constant kDADiskDescriptionDeviceRevisionKey as a toll-free-bridged objc.ID.
+// KDADiskDescriptionDeviceRevisionKey returns the value of the CoreFoundation reference constant kDADiskDescriptionDeviceRevisionKey as an objc.ID.
 func KDADiskDescriptionDeviceRevisionKey() objc.ID { return purego.CFConstant(raw.KDADiskDescriptionDeviceRevisionKey()) }
 
-// KDADiskDescriptionDeviceUnitKey returns the CoreFoundation constant kDADiskDescriptionDeviceUnitKey as a toll-free-bridged objc.ID.
+// KDADiskDescriptionDeviceUnitKey returns the value of the CoreFoundation reference constant kDADiskDescriptionDeviceUnitKey as an objc.ID.
 func KDADiskDescriptionDeviceUnitKey() objc.ID { return purego.CFConstant(raw.KDADiskDescriptionDeviceUnitKey()) }
 
-// KDADiskDescriptionDeviceVendorKey returns the CoreFoundation constant kDADiskDescriptionDeviceVendorKey as a toll-free-bridged objc.ID.
+// KDADiskDescriptionDeviceVendorKey returns the value of the CoreFoundation reference constant kDADiskDescriptionDeviceVendorKey as an objc.ID.
 func KDADiskDescriptionDeviceVendorKey() objc.ID { return purego.CFConstant(raw.KDADiskDescriptionDeviceVendorKey()) }
 
-// KDADiskDescriptionDeviceTDMLockedKey returns the CoreFoundation constant kDADiskDescriptionDeviceTDMLockedKey as a toll-free-bridged objc.ID.
+// KDADiskDescriptionDeviceTDMLockedKey returns the value of the CoreFoundation reference constant kDADiskDescriptionDeviceTDMLockedKey as an objc.ID.
 func KDADiskDescriptionDeviceTDMLockedKey() objc.ID { return purego.CFConstant(raw.KDADiskDescriptionDeviceTDMLockedKey()) }
 
-// KDADiskDescriptionBusNameKey returns the CoreFoundation constant kDADiskDescriptionBusNameKey as a toll-free-bridged objc.ID.
+// KDADiskDescriptionBusNameKey returns the value of the CoreFoundation reference constant kDADiskDescriptionBusNameKey as an objc.ID.
 func KDADiskDescriptionBusNameKey() objc.ID { return purego.CFConstant(raw.KDADiskDescriptionBusNameKey()) }
 
-// KDADiskDescriptionBusPathKey returns the CoreFoundation constant kDADiskDescriptionBusPathKey as a toll-free-bridged objc.ID.
+// KDADiskDescriptionBusPathKey returns the value of the CoreFoundation reference constant kDADiskDescriptionBusPathKey as an objc.ID.
 func KDADiskDescriptionBusPathKey() objc.ID { return purego.CFConstant(raw.KDADiskDescriptionBusPathKey()) }
 
-// KDADiskDescriptionFSKitPrefix returns the CoreFoundation constant kDADiskDescriptionFSKitPrefix as a toll-free-bridged objc.ID.
+// KDADiskDescriptionFSKitPrefix returns the value of the CoreFoundation reference constant kDADiskDescriptionFSKitPrefix as an objc.ID.
 func KDADiskDescriptionFSKitPrefix() objc.ID { return purego.CFConstant(raw.KDADiskDescriptionFSKitPrefix()) }
 
-// KDADiskDescriptionRepairRunningKey returns the CoreFoundation constant kDADiskDescriptionRepairRunningKey as a toll-free-bridged objc.ID.
+// KDADiskDescriptionRepairRunningKey returns the value of the CoreFoundation reference constant kDADiskDescriptionRepairRunningKey as an objc.ID.
 func KDADiskDescriptionRepairRunningKey() objc.ID { return purego.CFConstant(raw.KDADiskDescriptionRepairRunningKey()) }
 
-// KDADiskDescriptionMatchMediaUnformatted returns the CoreFoundation constant kDADiskDescriptionMatchMediaUnformatted as a toll-free-bridged objc.ID.
+// KDADiskDescriptionMatchMediaUnformatted returns the value of the CoreFoundation reference constant kDADiskDescriptionMatchMediaUnformatted as an objc.ID.
 func KDADiskDescriptionMatchMediaUnformatted() objc.ID { return purego.CFConstant(raw.KDADiskDescriptionMatchMediaUnformatted()) }
 
-// KDADiskDescriptionMatchMediaWhole returns the CoreFoundation constant kDADiskDescriptionMatchMediaWhole as a toll-free-bridged objc.ID.
+// KDADiskDescriptionMatchMediaWhole returns the value of the CoreFoundation reference constant kDADiskDescriptionMatchMediaWhole as an objc.ID.
 func KDADiskDescriptionMatchMediaWhole() objc.ID { return purego.CFConstant(raw.KDADiskDescriptionMatchMediaWhole()) }
 
-// KDADiskDescriptionMatchVolumeMountable returns the CoreFoundation constant kDADiskDescriptionMatchVolumeMountable as a toll-free-bridged objc.ID.
+// KDADiskDescriptionMatchVolumeMountable returns the value of the CoreFoundation reference constant kDADiskDescriptionMatchVolumeMountable as an objc.ID.
 func KDADiskDescriptionMatchVolumeMountable() objc.ID { return purego.CFConstant(raw.KDADiskDescriptionMatchVolumeMountable()) }
 
-// KDADiskDescriptionMatchVolumeUnrecognized returns the CoreFoundation constant kDADiskDescriptionMatchVolumeUnrecognized as a toll-free-bridged objc.ID.
+// KDADiskDescriptionMatchVolumeUnrecognized returns the value of the CoreFoundation reference constant kDADiskDescriptionMatchVolumeUnrecognized as an objc.ID.
 func KDADiskDescriptionMatchVolumeUnrecognized() objc.ID { return purego.CFConstant(raw.KDADiskDescriptionMatchVolumeUnrecognized()) }
 
-// KDADiskDescriptionWatchVolumeName returns the CoreFoundation constant kDADiskDescriptionWatchVolumeName as a toll-free-bridged objc.ID.
+// KDADiskDescriptionWatchVolumeName returns the value of the CoreFoundation reference constant kDADiskDescriptionWatchVolumeName as an objc.ID.
 func KDADiskDescriptionWatchVolumeName() objc.ID { return purego.CFConstant(raw.KDADiskDescriptionWatchVolumeName()) }
 
-// KDADiskDescriptionWatchVolumePath returns the CoreFoundation constant kDADiskDescriptionWatchVolumePath as a toll-free-bridged objc.ID.
+// KDADiskDescriptionWatchVolumePath returns the value of the CoreFoundation reference constant kDADiskDescriptionWatchVolumePath as an objc.ID.
 func KDADiskDescriptionWatchVolumePath() objc.ID { return purego.CFConstant(raw.KDADiskDescriptionWatchVolumePath()) }
 

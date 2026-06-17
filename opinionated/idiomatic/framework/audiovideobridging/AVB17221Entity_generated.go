@@ -20,11 +20,11 @@ type AVB17221Entity struct {
 // Unwrap returns the underlying [raw.AVB17221Entity].
 func (x *AVB17221Entity) Unwrap() *raw.AVB17221Entity { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AVB17221Entity) ID() objc.ID { return x.inner.Ptr() }
 
-// AVB17221EntityFromID adopts an existing toll-free-bridged object id as a AVB17221Entity (nil for 0).
+// AVB17221EntityFromID adopts an existing object pointer as a AVB17221Entity (nil for 0).
 func AVB17221EntityFromID(id objc.ID) *AVB17221Entity {
 	if id == 0 {
 		return nil

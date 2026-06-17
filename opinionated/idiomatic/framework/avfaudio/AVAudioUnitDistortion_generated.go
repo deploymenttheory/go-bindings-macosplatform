@@ -17,11 +17,11 @@ type AudioUnitDistortion struct {
 // Unwrap returns the underlying [raw.AVAudioUnitDistortion].
 func (x *AudioUnitDistortion) Unwrap() *raw.AVAudioUnitDistortion { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AudioUnitDistortion) ID() objc.ID { return x.inner.Ptr() }
 
-// AudioUnitDistortionFromID adopts an existing toll-free-bridged object id as a AudioUnitDistortion (nil for 0).
+// AudioUnitDistortionFromID adopts an existing object pointer as a AudioUnitDistortion (nil for 0).
 func AudioUnitDistortionFromID(id objc.ID) *AudioUnitDistortion {
 	if id == 0 {
 		return nil

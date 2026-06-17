@@ -17,11 +17,11 @@ type VirtioNetworkDeviceConfiguration struct {
 // Unwrap returns the underlying [raw.VZVirtioNetworkDeviceConfiguration].
 func (x *VirtioNetworkDeviceConfiguration) Unwrap() *raw.VZVirtioNetworkDeviceConfiguration { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *VirtioNetworkDeviceConfiguration) ID() objc.ID { return x.inner.Ptr() }
 
-// VirtioNetworkDeviceConfigurationFromID adopts an existing toll-free-bridged object id as a VirtioNetworkDeviceConfiguration (nil for 0).
+// VirtioNetworkDeviceConfigurationFromID adopts an existing object pointer as a VirtioNetworkDeviceConfiguration (nil for 0).
 func VirtioNetworkDeviceConfigurationFromID(id objc.ID) *VirtioNetworkDeviceConfiguration {
 	if id == 0 {
 		return nil

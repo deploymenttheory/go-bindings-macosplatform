@@ -18,11 +18,11 @@ type SystemExtensionRequest struct {
 // Unwrap returns the underlying [raw.OSSystemExtensionRequest].
 func (x *SystemExtensionRequest) Unwrap() *raw.OSSystemExtensionRequest { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SystemExtensionRequest) ID() objc.ID { return x.inner.Ptr() }
 
-// SystemExtensionRequestFromID adopts an existing toll-free-bridged object id as a SystemExtensionRequest (nil for 0).
+// SystemExtensionRequestFromID adopts an existing object pointer as a SystemExtensionRequest (nil for 0).
 func SystemExtensionRequestFromID(id objc.ID) *SystemExtensionRequest {
 	if id == 0 {
 		return nil

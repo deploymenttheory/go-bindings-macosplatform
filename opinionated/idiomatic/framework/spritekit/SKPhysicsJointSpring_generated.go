@@ -17,11 +17,11 @@ type PhysicsJointSpring struct {
 // Unwrap returns the underlying [raw.SKPhysicsJointSpring].
 func (x *PhysicsJointSpring) Unwrap() *raw.SKPhysicsJointSpring { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PhysicsJointSpring) ID() objc.ID { return x.inner.Ptr() }
 
-// PhysicsJointSpringFromID adopts an existing toll-free-bridged object id as a PhysicsJointSpring (nil for 0).
+// PhysicsJointSpringFromID adopts an existing object pointer as a PhysicsJointSpring (nil for 0).
 func PhysicsJointSpringFromID(id objc.ID) *PhysicsJointSpring {
 	if id == 0 {
 		return nil

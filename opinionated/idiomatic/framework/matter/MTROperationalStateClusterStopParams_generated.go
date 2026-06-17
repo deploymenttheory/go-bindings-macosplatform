@@ -18,11 +18,11 @@ type MTROperationalStateClusterStopParams struct {
 // Unwrap returns the underlying [raw.MTROperationalStateClusterStopParams].
 func (x *MTROperationalStateClusterStopParams) Unwrap() *raw.MTROperationalStateClusterStopParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTROperationalStateClusterStopParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTROperationalStateClusterStopParamsFromID adopts an existing toll-free-bridged object id as a MTROperationalStateClusterStopParams (nil for 0).
+// MTROperationalStateClusterStopParamsFromID adopts an existing object pointer as a MTROperationalStateClusterStopParams (nil for 0).
 func MTROperationalStateClusterStopParamsFromID(id objc.ID) *MTROperationalStateClusterStopParams {
 	if id == 0 {
 		return nil

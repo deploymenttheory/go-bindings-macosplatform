@@ -20,11 +20,11 @@ type CNNNeuronSoftSign struct {
 // Unwrap returns the underlying [raw.MPSCNNNeuronSoftSign].
 func (x *CNNNeuronSoftSign) Unwrap() *raw.MPSCNNNeuronSoftSign { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CNNNeuronSoftSign) ID() objc.ID { return x.inner.Ptr() }
 
-// CNNNeuronSoftSignFromID adopts an existing toll-free-bridged object id as a CNNNeuronSoftSign (nil for 0).
+// CNNNeuronSoftSignFromID adopts an existing object pointer as a CNNNeuronSoftSign (nil for 0).
 func CNNNeuronSoftSignFromID(id objc.ID) *CNNNeuronSoftSign {
 	if id == 0 {
 		return nil

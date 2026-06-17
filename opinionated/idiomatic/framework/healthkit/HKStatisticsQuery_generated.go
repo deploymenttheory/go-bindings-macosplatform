@@ -19,11 +19,11 @@ type StatisticsQuery struct {
 // Unwrap returns the underlying [raw.HKStatisticsQuery].
 func (x *StatisticsQuery) Unwrap() *raw.HKStatisticsQuery { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *StatisticsQuery) ID() objc.ID { return x.inner.Ptr() }
 
-// StatisticsQueryFromID adopts an existing toll-free-bridged object id as a StatisticsQuery (nil for 0).
+// StatisticsQueryFromID adopts an existing object pointer as a StatisticsQuery (nil for 0).
 func StatisticsQueryFromID(id objc.ID) *StatisticsQuery {
 	if id == 0 {
 		return nil

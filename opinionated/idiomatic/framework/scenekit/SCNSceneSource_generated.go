@@ -19,11 +19,11 @@ type SceneSource struct {
 // Unwrap returns the underlying [raw.SCNSceneSource].
 func (x *SceneSource) Unwrap() *raw.SCNSceneSource { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SceneSource) ID() objc.ID { return x.inner.Ptr() }
 
-// SceneSourceFromID adopts an existing toll-free-bridged object id as a SceneSource (nil for 0).
+// SceneSourceFromID adopts an existing object pointer as a SceneSource (nil for 0).
 func SceneSourceFromID(id objc.ID) *SceneSource {
 	if id == 0 {
 		return nil

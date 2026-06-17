@@ -18,11 +18,11 @@ type WKHTTPCookieStore struct {
 // Unwrap returns the underlying [raw.WKHTTPCookieStore].
 func (x *WKHTTPCookieStore) Unwrap() *raw.WKHTTPCookieStore { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *WKHTTPCookieStore) ID() objc.ID { return x.inner.Ptr() }
 
-// WKHTTPCookieStoreFromID adopts an existing toll-free-bridged object id as a WKHTTPCookieStore (nil for 0).
+// WKHTTPCookieStoreFromID adopts an existing object pointer as a WKHTTPCookieStore (nil for 0).
 func WKHTTPCookieStoreFromID(id objc.ID) *WKHTTPCookieStore {
 	if id == 0 {
 		return nil

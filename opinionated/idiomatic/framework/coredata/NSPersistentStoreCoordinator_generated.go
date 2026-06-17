@@ -21,11 +21,11 @@ type PersistentStoreCoordinator struct {
 // Unwrap returns the underlying [raw.NSPersistentStoreCoordinator].
 func (x *PersistentStoreCoordinator) Unwrap() *raw.NSPersistentStoreCoordinator { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PersistentStoreCoordinator) ID() objc.ID { return x.inner.Ptr() }
 
-// PersistentStoreCoordinatorFromID adopts an existing toll-free-bridged object id as a PersistentStoreCoordinator (nil for 0).
+// PersistentStoreCoordinatorFromID adopts an existing object pointer as a PersistentStoreCoordinator (nil for 0).
 func PersistentStoreCoordinatorFromID(id objc.ID) *PersistentStoreCoordinator {
 	if id == 0 {
 		return nil

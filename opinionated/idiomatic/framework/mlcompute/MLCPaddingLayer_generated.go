@@ -17,11 +17,11 @@ type PaddingLayer struct {
 // Unwrap returns the underlying [raw.MLCPaddingLayer].
 func (x *PaddingLayer) Unwrap() *raw.MLCPaddingLayer { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PaddingLayer) ID() objc.ID { return x.inner.Ptr() }
 
-// PaddingLayerFromID adopts an existing toll-free-bridged object id as a PaddingLayer (nil for 0).
+// PaddingLayerFromID adopts an existing object pointer as a PaddingLayer (nil for 0).
 func PaddingLayerFromID(id objc.ID) *PaddingLayer {
 	if id == 0 {
 		return nil

@@ -17,11 +17,11 @@ type NNStateNode struct {
 // Unwrap returns the underlying [raw.MPSNNStateNode].
 func (x *NNStateNode) Unwrap() *raw.MPSNNStateNode { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NNStateNode) ID() objc.ID { return x.inner.Ptr() }
 
-// NNStateNodeFromID adopts an existing toll-free-bridged object id as a NNStateNode (nil for 0).
+// NNStateNodeFromID adopts an existing object pointer as a NNStateNode (nil for 0).
 func NNStateNodeFromID(id objc.ID) *NNStateNode {
 	if id == 0 {
 		return nil

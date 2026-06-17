@@ -19,11 +19,11 @@ type WindowController struct {
 // Unwrap returns the underlying [raw.NSWindowController].
 func (x *WindowController) Unwrap() *raw.NSWindowController { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *WindowController) ID() objc.ID { return x.inner.Ptr() }
 
-// WindowControllerFromID adopts an existing toll-free-bridged object id as a WindowController (nil for 0).
+// WindowControllerFromID adopts an existing object pointer as a WindowController (nil for 0).
 func WindowControllerFromID(id objc.ID) *WindowController {
 	if id == 0 {
 		return nil

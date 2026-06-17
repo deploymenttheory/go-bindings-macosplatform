@@ -17,11 +17,11 @@ type MTL4TileRenderPipelineDescriptor struct {
 // Unwrap returns the underlying [raw.MTL4TileRenderPipelineDescriptor].
 func (x *MTL4TileRenderPipelineDescriptor) Unwrap() *raw.MTL4TileRenderPipelineDescriptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTL4TileRenderPipelineDescriptor) ID() objc.ID { return x.inner.Ptr() }
 
-// MTL4TileRenderPipelineDescriptorFromID adopts an existing toll-free-bridged object id as a MTL4TileRenderPipelineDescriptor (nil for 0).
+// MTL4TileRenderPipelineDescriptorFromID adopts an existing object pointer as a MTL4TileRenderPipelineDescriptor (nil for 0).
 func MTL4TileRenderPipelineDescriptorFromID(id objc.ID) *MTL4TileRenderPipelineDescriptor {
 	if id == 0 {
 		return nil

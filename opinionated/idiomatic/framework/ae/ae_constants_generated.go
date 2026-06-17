@@ -10,15 +10,15 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// KAERemoteProcessURLKey returns the CoreFoundation constant kAERemoteProcessURLKey as a toll-free-bridged objc.ID.
+// KAERemoteProcessURLKey returns the value of the CoreFoundation reference constant kAERemoteProcessURLKey as an objc.ID.
 func KAERemoteProcessURLKey() objc.ID { return purego.CFConstant(raw.KAERemoteProcessURLKey()) }
 
-// KAERemoteProcessNameKey returns the CoreFoundation constant kAERemoteProcessNameKey as a toll-free-bridged objc.ID.
+// KAERemoteProcessNameKey returns the value of the CoreFoundation reference constant kAERemoteProcessNameKey as an objc.ID.
 func KAERemoteProcessNameKey() objc.ID { return purego.CFConstant(raw.KAERemoteProcessNameKey()) }
 
-// KAERemoteProcessUserIDKey returns the CoreFoundation constant kAERemoteProcessUserIDKey as a toll-free-bridged objc.ID.
+// KAERemoteProcessUserIDKey returns the value of the CoreFoundation reference constant kAERemoteProcessUserIDKey as an objc.ID.
 func KAERemoteProcessUserIDKey() objc.ID { return purego.CFConstant(raw.KAERemoteProcessUserIDKey()) }
 
-// KAERemoteProcessProcessIDKey returns the CoreFoundation constant kAERemoteProcessProcessIDKey as a toll-free-bridged objc.ID.
+// KAERemoteProcessProcessIDKey returns the value of the CoreFoundation reference constant kAERemoteProcessProcessIDKey as an objc.ID.
 func KAERemoteProcessProcessIDKey() objc.ID { return purego.CFConstant(raw.KAERemoteProcessProcessIDKey()) }
 

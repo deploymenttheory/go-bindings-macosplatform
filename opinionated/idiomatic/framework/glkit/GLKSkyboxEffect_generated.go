@@ -20,11 +20,11 @@ type SkyboxEffect struct {
 // Unwrap returns the underlying [raw.GLKSkyboxEffect].
 func (x *SkyboxEffect) Unwrap() *raw.GLKSkyboxEffect { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SkyboxEffect) ID() objc.ID { return x.inner.Ptr() }
 
-// SkyboxEffectFromID adopts an existing toll-free-bridged object id as a SkyboxEffect (nil for 0).
+// SkyboxEffectFromID adopts an existing object pointer as a SkyboxEffect (nil for 0).
 func SkyboxEffectFromID(id objc.ID) *SkyboxEffect {
 	if id == 0 {
 		return nil

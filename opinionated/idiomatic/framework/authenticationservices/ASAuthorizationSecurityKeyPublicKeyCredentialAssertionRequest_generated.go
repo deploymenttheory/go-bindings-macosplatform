@@ -20,11 +20,11 @@ type AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest struct {
 // Unwrap returns the underlying [raw.ASAuthorizationSecurityKeyPublicKeyCredentialAssertionRequest].
 func (x *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest) Unwrap() *raw.ASAuthorizationSecurityKeyPublicKeyCredentialAssertionRequest { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest) ID() objc.ID { return x.inner.Ptr() }
 
-// AuthorizationSecurityKeyPublicKeyCredentialAssertionRequestFromID adopts an existing toll-free-bridged object id as a AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest (nil for 0).
+// AuthorizationSecurityKeyPublicKeyCredentialAssertionRequestFromID adopts an existing object pointer as a AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest (nil for 0).
 func AuthorizationSecurityKeyPublicKeyCredentialAssertionRequestFromID(id objc.ID) *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest {
 	if id == 0 {
 		return nil

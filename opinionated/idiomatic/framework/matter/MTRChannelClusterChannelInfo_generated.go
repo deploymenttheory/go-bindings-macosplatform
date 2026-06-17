@@ -17,11 +17,11 @@ type MTRChannelClusterChannelInfo struct {
 // Unwrap returns the underlying [raw.MTRChannelClusterChannelInfo].
 func (x *MTRChannelClusterChannelInfo) Unwrap() *raw.MTRChannelClusterChannelInfo { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRChannelClusterChannelInfo) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRChannelClusterChannelInfoFromID adopts an existing toll-free-bridged object id as a MTRChannelClusterChannelInfo (nil for 0).
+// MTRChannelClusterChannelInfoFromID adopts an existing object pointer as a MTRChannelClusterChannelInfo (nil for 0).
 func MTRChannelClusterChannelInfoFromID(id objc.ID) *MTRChannelClusterChannelInfo {
 	if id == 0 {
 		return nil

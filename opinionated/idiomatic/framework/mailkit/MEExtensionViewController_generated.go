@@ -17,11 +17,11 @@ type ExtensionViewController struct {
 // Unwrap returns the underlying [raw.MEExtensionViewController].
 func (x *ExtensionViewController) Unwrap() *raw.MEExtensionViewController { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ExtensionViewController) ID() objc.ID { return x.inner.Ptr() }
 
-// ExtensionViewControllerFromID adopts an existing toll-free-bridged object id as a ExtensionViewController (nil for 0).
+// ExtensionViewControllerFromID adopts an existing object pointer as a ExtensionViewController (nil for 0).
 func ExtensionViewControllerFromID(id objc.ID) *ExtensionViewController {
 	if id == 0 {
 		return nil

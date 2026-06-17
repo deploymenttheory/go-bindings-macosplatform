@@ -19,11 +19,11 @@ type ColorSwatchTexture struct {
 // Unwrap returns the underlying [raw.MDLColorSwatchTexture].
 func (x *ColorSwatchTexture) Unwrap() *raw.MDLColorSwatchTexture { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ColorSwatchTexture) ID() objc.ID { return x.inner.Ptr() }
 
-// ColorSwatchTextureFromID adopts an existing toll-free-bridged object id as a ColorSwatchTexture (nil for 0).
+// ColorSwatchTextureFromID adopts an existing object pointer as a ColorSwatchTexture (nil for 0).
 func ColorSwatchTextureFromID(id objc.ID) *ColorSwatchTexture {
 	if id == 0 {
 		return nil

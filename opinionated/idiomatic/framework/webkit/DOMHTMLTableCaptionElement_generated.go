@@ -19,11 +19,11 @@ type DOMHTMLTableCaptionElement struct {
 // Unwrap returns the underlying [raw.DOMHTMLTableCaptionElement].
 func (x *DOMHTMLTableCaptionElement) Unwrap() *raw.DOMHTMLTableCaptionElement { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DOMHTMLTableCaptionElement) ID() objc.ID { return x.inner.Ptr() }
 
-// DOMHTMLTableCaptionElementFromID adopts an existing toll-free-bridged object id as a DOMHTMLTableCaptionElement (nil for 0).
+// DOMHTMLTableCaptionElementFromID adopts an existing object pointer as a DOMHTMLTableCaptionElement (nil for 0).
 func DOMHTMLTableCaptionElementFromID(id objc.ID) *DOMHTMLTableCaptionElement {
 	if id == 0 {
 		return nil

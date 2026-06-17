@@ -18,11 +18,11 @@ type MTRCommissioneeInfo struct {
 // Unwrap returns the underlying [raw.MTRCommissioneeInfo].
 func (x *MTRCommissioneeInfo) Unwrap() *raw.MTRCommissioneeInfo { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRCommissioneeInfo) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRCommissioneeInfoFromID adopts an existing toll-free-bridged object id as a MTRCommissioneeInfo (nil for 0).
+// MTRCommissioneeInfoFromID adopts an existing object pointer as a MTRCommissioneeInfo (nil for 0).
 func MTRCommissioneeInfoFromID(id objc.ID) *MTRCommissioneeInfo {
 	if id == 0 {
 		return nil

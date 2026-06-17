@@ -17,11 +17,11 @@ type AudioEnvironmentReverbParameters struct {
 // Unwrap returns the underlying [raw.AVAudioEnvironmentReverbParameters].
 func (x *AudioEnvironmentReverbParameters) Unwrap() *raw.AVAudioEnvironmentReverbParameters { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AudioEnvironmentReverbParameters) ID() objc.ID { return x.inner.Ptr() }
 
-// AudioEnvironmentReverbParametersFromID adopts an existing toll-free-bridged object id as a AudioEnvironmentReverbParameters (nil for 0).
+// AudioEnvironmentReverbParametersFromID adopts an existing object pointer as a AudioEnvironmentReverbParameters (nil for 0).
 func AudioEnvironmentReverbParametersFromID(id objc.ID) *AudioEnvironmentReverbParameters {
 	if id == 0 {
 		return nil

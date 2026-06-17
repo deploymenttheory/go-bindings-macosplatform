@@ -19,11 +19,11 @@ type MTRUserLabelClusterLabelStruct struct {
 // Unwrap returns the underlying [raw.MTRUserLabelClusterLabelStruct].
 func (x *MTRUserLabelClusterLabelStruct) Unwrap() *raw.MTRUserLabelClusterLabelStruct { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRUserLabelClusterLabelStruct) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRUserLabelClusterLabelStructFromID adopts an existing toll-free-bridged object id as a MTRUserLabelClusterLabelStruct (nil for 0).
+// MTRUserLabelClusterLabelStructFromID adopts an existing object pointer as a MTRUserLabelClusterLabelStruct (nil for 0).
 func MTRUserLabelClusterLabelStructFromID(id objc.ID) *MTRUserLabelClusterLabelStruct {
 	if id == 0 {
 		return nil

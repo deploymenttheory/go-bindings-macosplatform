@@ -20,11 +20,11 @@ type BurnProgressPanel struct {
 // Unwrap returns the underlying [raw.DRBurnProgressPanel].
 func (x *BurnProgressPanel) Unwrap() *raw.DRBurnProgressPanel { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *BurnProgressPanel) ID() objc.ID { return x.inner.Ptr() }
 
-// BurnProgressPanelFromID adopts an existing toll-free-bridged object id as a BurnProgressPanel (nil for 0).
+// BurnProgressPanelFromID adopts an existing object pointer as a BurnProgressPanel (nil for 0).
 func BurnProgressPanelFromID(id objc.ID) *BurnProgressPanel {
 	if id == 0 {
 		return nil

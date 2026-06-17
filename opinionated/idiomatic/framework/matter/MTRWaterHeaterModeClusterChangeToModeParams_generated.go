@@ -18,11 +18,11 @@ type MTRWaterHeaterModeClusterChangeToModeParams struct {
 // Unwrap returns the underlying [raw.MTRWaterHeaterModeClusterChangeToModeParams].
 func (x *MTRWaterHeaterModeClusterChangeToModeParams) Unwrap() *raw.MTRWaterHeaterModeClusterChangeToModeParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRWaterHeaterModeClusterChangeToModeParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRWaterHeaterModeClusterChangeToModeParamsFromID adopts an existing toll-free-bridged object id as a MTRWaterHeaterModeClusterChangeToModeParams (nil for 0).
+// MTRWaterHeaterModeClusterChangeToModeParamsFromID adopts an existing object pointer as a MTRWaterHeaterModeClusterChangeToModeParams (nil for 0).
 func MTRWaterHeaterModeClusterChangeToModeParamsFromID(id objc.ID) *MTRWaterHeaterModeClusterChangeToModeParams {
 	if id == 0 {
 		return nil

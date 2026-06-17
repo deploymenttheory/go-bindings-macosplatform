@@ -19,11 +19,11 @@ type NDArrayMatrixMultiplication struct {
 // Unwrap returns the underlying [raw.MPSNDArrayMatrixMultiplication].
 func (x *NDArrayMatrixMultiplication) Unwrap() *raw.MPSNDArrayMatrixMultiplication { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NDArrayMatrixMultiplication) ID() objc.ID { return x.inner.Ptr() }
 
-// NDArrayMatrixMultiplicationFromID adopts an existing toll-free-bridged object id as a NDArrayMatrixMultiplication (nil for 0).
+// NDArrayMatrixMultiplicationFromID adopts an existing object pointer as a NDArrayMatrixMultiplication (nil for 0).
 func NDArrayMatrixMultiplicationFromID(id objc.ID) *NDArrayMatrixMultiplication {
 	if id == 0 {
 		return nil

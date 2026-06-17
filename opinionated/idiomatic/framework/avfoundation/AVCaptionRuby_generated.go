@@ -19,11 +19,11 @@ type CaptionRuby struct {
 // Unwrap returns the underlying [raw.AVCaptionRuby].
 func (x *CaptionRuby) Unwrap() *raw.AVCaptionRuby { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CaptionRuby) ID() objc.ID { return x.inner.Ptr() }
 
-// CaptionRubyFromID adopts an existing toll-free-bridged object id as a CaptionRuby (nil for 0).
+// CaptionRubyFromID adopts an existing object pointer as a CaptionRuby (nil for 0).
 func CaptionRubyFromID(id objc.ID) *CaptionRuby {
 	if id == 0 {
 		return nil

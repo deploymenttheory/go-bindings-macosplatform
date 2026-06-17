@@ -17,11 +17,11 @@ type Number struct {
 // Unwrap returns the underlying [raw.NSNumber].
 func (x *Number) Unwrap() *raw.NSNumber { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Number) ID() objc.ID { return x.inner.Ptr() }
 
-// NumberFromID adopts an existing toll-free-bridged object id as a Number (nil for 0).
+// NumberFromID adopts an existing object pointer as a Number (nil for 0).
 func NumberFromID(id objc.ID) *Number {
 	if id == 0 {
 		return nil

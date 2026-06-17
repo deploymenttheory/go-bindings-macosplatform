@@ -20,11 +20,11 @@ type DetectHumanBodyPose3DRequest struct {
 // Unwrap returns the underlying [raw.VNDetectHumanBodyPose3DRequest].
 func (x *DetectHumanBodyPose3DRequest) Unwrap() *raw.VNDetectHumanBodyPose3DRequest { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DetectHumanBodyPose3DRequest) ID() objc.ID { return x.inner.Ptr() }
 
-// DetectHumanBodyPose3DRequestFromID adopts an existing toll-free-bridged object id as a DetectHumanBodyPose3DRequest (nil for 0).
+// DetectHumanBodyPose3DRequestFromID adopts an existing object pointer as a DetectHumanBodyPose3DRequest (nil for 0).
 func DetectHumanBodyPose3DRequestFromID(id objc.ID) *DetectHumanBodyPose3DRequest {
 	if id == 0 {
 		return nil

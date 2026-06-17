@@ -20,11 +20,11 @@ type Script struct {
 // Unwrap returns the underlying [raw.OSAScript].
 func (x *Script) Unwrap() *raw.OSAScript { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Script) ID() objc.ID { return x.inner.Ptr() }
 
-// ScriptFromID adopts an existing toll-free-bridged object id as a Script (nil for 0).
+// ScriptFromID adopts an existing object pointer as a Script (nil for 0).
 func ScriptFromID(id objc.ID) *Script {
 	if id == 0 {
 		return nil

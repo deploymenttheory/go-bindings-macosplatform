@@ -19,11 +19,11 @@ type DOMCSSRule struct {
 // Unwrap returns the underlying [raw.DOMCSSRule].
 func (x *DOMCSSRule) Unwrap() *raw.DOMCSSRule { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DOMCSSRule) ID() objc.ID { return x.inner.Ptr() }
 
-// DOMCSSRuleFromID adopts an existing toll-free-bridged object id as a DOMCSSRule (nil for 0).
+// DOMCSSRuleFromID adopts an existing object pointer as a DOMCSSRule (nil for 0).
 func DOMCSSRuleFromID(id objc.ID) *DOMCSSRule {
 	if id == 0 {
 		return nil

@@ -17,11 +17,11 @@ type LogicalTest struct {
 // Unwrap returns the underlying [raw.NSLogicalTest].
 func (x *LogicalTest) Unwrap() *raw.NSLogicalTest { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *LogicalTest) ID() objc.ID { return x.inner.Ptr() }
 
-// LogicalTestFromID adopts an existing toll-free-bridged object id as a LogicalTest (nil for 0).
+// LogicalTestFromID adopts an existing object pointer as a LogicalTest (nil for 0).
 func LogicalTestFromID(id objc.ID) *LogicalTest {
 	if id == 0 {
 		return nil

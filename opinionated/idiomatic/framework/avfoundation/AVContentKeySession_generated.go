@@ -21,11 +21,11 @@ type ContentKeySession struct {
 // Unwrap returns the underlying [raw.AVContentKeySession].
 func (x *ContentKeySession) Unwrap() *raw.AVContentKeySession { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ContentKeySession) ID() objc.ID { return x.inner.Ptr() }
 
-// ContentKeySessionFromID adopts an existing toll-free-bridged object id as a ContentKeySession (nil for 0).
+// ContentKeySessionFromID adopts an existing object pointer as a ContentKeySession (nil for 0).
 func ContentKeySessionFromID(id objc.ID) *ContentKeySession {
 	if id == 0 {
 		return nil

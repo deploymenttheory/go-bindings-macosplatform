@@ -19,11 +19,11 @@ type ImageStatisticsMeanAndVariance struct {
 // Unwrap returns the underlying [raw.MPSImageStatisticsMeanAndVariance].
 func (x *ImageStatisticsMeanAndVariance) Unwrap() *raw.MPSImageStatisticsMeanAndVariance { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ImageStatisticsMeanAndVariance) ID() objc.ID { return x.inner.Ptr() }
 
-// ImageStatisticsMeanAndVarianceFromID adopts an existing toll-free-bridged object id as a ImageStatisticsMeanAndVariance (nil for 0).
+// ImageStatisticsMeanAndVarianceFromID adopts an existing object pointer as a ImageStatisticsMeanAndVariance (nil for 0).
 func ImageStatisticsMeanAndVarianceFromID(id objc.ID) *ImageStatisticsMeanAndVariance {
 	if id == 0 {
 		return nil

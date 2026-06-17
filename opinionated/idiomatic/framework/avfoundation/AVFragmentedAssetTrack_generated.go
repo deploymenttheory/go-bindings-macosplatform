@@ -17,11 +17,11 @@ type FragmentedAssetTrack struct {
 // Unwrap returns the underlying [raw.AVFragmentedAssetTrack].
 func (x *FragmentedAssetTrack) Unwrap() *raw.AVFragmentedAssetTrack { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *FragmentedAssetTrack) ID() objc.ID { return x.inner.Ptr() }
 
-// FragmentedAssetTrackFromID adopts an existing toll-free-bridged object id as a FragmentedAssetTrack (nil for 0).
+// FragmentedAssetTrackFromID adopts an existing object pointer as a FragmentedAssetTrack (nil for 0).
 func FragmentedAssetTrackFromID(id objc.ID) *FragmentedAssetTrack {
 	if id == 0 {
 		return nil

@@ -17,11 +17,11 @@ type TokenAuthOperation struct {
 // Unwrap returns the underlying [raw.TKTokenAuthOperation].
 func (x *TokenAuthOperation) Unwrap() *raw.TKTokenAuthOperation { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *TokenAuthOperation) ID() objc.ID { return x.inner.Ptr() }
 
-// TokenAuthOperationFromID adopts an existing toll-free-bridged object id as a TokenAuthOperation (nil for 0).
+// TokenAuthOperationFromID adopts an existing object pointer as a TokenAuthOperation (nil for 0).
 func TokenAuthOperationFromID(id objc.ID) *TokenAuthOperation {
 	if id == 0 {
 		return nil

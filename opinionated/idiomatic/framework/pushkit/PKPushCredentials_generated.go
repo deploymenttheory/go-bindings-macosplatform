@@ -19,11 +19,11 @@ type PushCredentials struct {
 // Unwrap returns the underlying [raw.PKPushCredentials].
 func (x *PushCredentials) Unwrap() *raw.PKPushCredentials { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PushCredentials) ID() objc.ID { return x.inner.Ptr() }
 
-// PushCredentialsFromID adopts an existing toll-free-bridged object id as a PushCredentials (nil for 0).
+// PushCredentialsFromID adopts an existing object pointer as a PushCredentials (nil for 0).
 func PushCredentialsFromID(id objc.ID) *PushCredentials {
 	if id == 0 {
 		return nil

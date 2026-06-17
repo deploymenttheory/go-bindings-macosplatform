@@ -21,11 +21,11 @@ type MutableCompositionTrack struct {
 // Unwrap returns the underlying [raw.AVMutableCompositionTrack].
 func (x *MutableCompositionTrack) Unwrap() *raw.AVMutableCompositionTrack { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MutableCompositionTrack) ID() objc.ID { return x.inner.Ptr() }
 
-// MutableCompositionTrackFromID adopts an existing toll-free-bridged object id as a MutableCompositionTrack (nil for 0).
+// MutableCompositionTrackFromID adopts an existing object pointer as a MutableCompositionTrack (nil for 0).
 func MutableCompositionTrackFromID(id objc.ID) *MutableCompositionTrack {
 	if id == 0 {
 		return nil

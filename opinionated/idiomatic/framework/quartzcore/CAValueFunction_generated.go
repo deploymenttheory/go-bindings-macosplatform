@@ -18,11 +18,11 @@ type ValueFunction struct {
 // Unwrap returns the underlying [raw.CAValueFunction].
 func (x *ValueFunction) Unwrap() *raw.CAValueFunction { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ValueFunction) ID() objc.ID { return x.inner.Ptr() }
 
-// ValueFunctionFromID adopts an existing toll-free-bridged object id as a ValueFunction (nil for 0).
+// ValueFunctionFromID adopts an existing object pointer as a ValueFunction (nil for 0).
 func ValueFunctionFromID(id objc.ID) *ValueFunction {
 	if id == 0 {
 		return nil

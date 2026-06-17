@@ -18,11 +18,11 @@ type FeatureDescription struct {
 // Unwrap returns the underlying [raw.MLFeatureDescription].
 func (x *FeatureDescription) Unwrap() *raw.MLFeatureDescription { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *FeatureDescription) ID() objc.ID { return x.inner.Ptr() }
 
-// FeatureDescriptionFromID adopts an existing toll-free-bridged object id as a FeatureDescription (nil for 0).
+// FeatureDescriptionFromID adopts an existing object pointer as a FeatureDescription (nil for 0).
 func FeatureDescriptionFromID(id objc.ID) *FeatureDescription {
 	if id == 0 {
 		return nil

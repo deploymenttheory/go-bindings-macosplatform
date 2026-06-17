@@ -17,11 +17,11 @@ type Type struct {
 // Unwrap returns the underlying [raw.MTLType].
 func (x *Type) Unwrap() *raw.MTLType { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Type) ID() objc.ID { return x.inner.Ptr() }
 
-// TypeFromID adopts an existing toll-free-bridged object id as a Type (nil for 0).
+// TypeFromID adopts an existing object pointer as a Type (nil for 0).
 func TypeFromID(id objc.ID) *Type {
 	if id == 0 {
 		return nil

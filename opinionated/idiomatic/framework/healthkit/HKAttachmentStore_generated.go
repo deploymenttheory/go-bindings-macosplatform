@@ -22,11 +22,11 @@ type AttachmentStore struct {
 // Unwrap returns the underlying [raw.HKAttachmentStore].
 func (x *AttachmentStore) Unwrap() *raw.HKAttachmentStore { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AttachmentStore) ID() objc.ID { return x.inner.Ptr() }
 
-// AttachmentStoreFromID adopts an existing toll-free-bridged object id as a AttachmentStore (nil for 0).
+// AttachmentStoreFromID adopts an existing object pointer as a AttachmentStore (nil for 0).
 func AttachmentStoreFromID(id objc.ID) *AttachmentStore {
 	if id == 0 {
 		return nil

@@ -20,11 +20,11 @@ type ColorPickerTouchBarItem struct {
 // Unwrap returns the underlying [raw.NSColorPickerTouchBarItem].
 func (x *ColorPickerTouchBarItem) Unwrap() *raw.NSColorPickerTouchBarItem { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ColorPickerTouchBarItem) ID() objc.ID { return x.inner.Ptr() }
 
-// ColorPickerTouchBarItemFromID adopts an existing toll-free-bridged object id as a ColorPickerTouchBarItem (nil for 0).
+// ColorPickerTouchBarItemFromID adopts an existing object pointer as a ColorPickerTouchBarItem (nil for 0).
 func ColorPickerTouchBarItemFromID(id objc.ID) *ColorPickerTouchBarItem {
 	if id == 0 {
 		return nil

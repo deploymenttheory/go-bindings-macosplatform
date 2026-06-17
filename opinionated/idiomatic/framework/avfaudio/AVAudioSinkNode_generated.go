@@ -18,11 +18,11 @@ type AudioSinkNode struct {
 // Unwrap returns the underlying [raw.AVAudioSinkNode].
 func (x *AudioSinkNode) Unwrap() *raw.AVAudioSinkNode { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AudioSinkNode) ID() objc.ID { return x.inner.Ptr() }
 
-// AudioSinkNodeFromID adopts an existing toll-free-bridged object id as a AudioSinkNode (nil for 0).
+// AudioSinkNodeFromID adopts an existing object pointer as a AudioSinkNode (nil for 0).
 func AudioSinkNodeFromID(id objc.ID) *AudioSinkNode {
 	if id == 0 {
 		return nil

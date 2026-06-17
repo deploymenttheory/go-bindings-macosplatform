@@ -18,11 +18,11 @@ type ShareMetadata struct {
 // Unwrap returns the underlying [raw.CKShareMetadata].
 func (x *ShareMetadata) Unwrap() *raw.CKShareMetadata { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ShareMetadata) ID() objc.ID { return x.inner.Ptr() }
 
-// ShareMetadataFromID adopts an existing toll-free-bridged object id as a ShareMetadata (nil for 0).
+// ShareMetadataFromID adopts an existing object pointer as a ShareMetadata (nil for 0).
 func ShareMetadataFromID(id objc.ID) *ShareMetadata {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type DeletedObject struct {
 // Unwrap returns the underlying [raw.HKDeletedObject].
 func (x *DeletedObject) Unwrap() *raw.HKDeletedObject { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DeletedObject) ID() objc.ID { return x.inner.Ptr() }
 
-// DeletedObjectFromID adopts an existing toll-free-bridged object id as a DeletedObject (nil for 0).
+// DeletedObjectFromID adopts an existing object pointer as a DeletedObject (nil for 0).
 func DeletedObjectFromID(id objc.ID) *DeletedObject {
 	if id == 0 {
 		return nil

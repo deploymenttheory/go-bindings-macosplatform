@@ -18,11 +18,11 @@ type MTREnergyEVSEClusterEnableChargingParams struct {
 // Unwrap returns the underlying [raw.MTREnergyEVSEClusterEnableChargingParams].
 func (x *MTREnergyEVSEClusterEnableChargingParams) Unwrap() *raw.MTREnergyEVSEClusterEnableChargingParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTREnergyEVSEClusterEnableChargingParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTREnergyEVSEClusterEnableChargingParamsFromID adopts an existing toll-free-bridged object id as a MTREnergyEVSEClusterEnableChargingParams (nil for 0).
+// MTREnergyEVSEClusterEnableChargingParamsFromID adopts an existing object pointer as a MTREnergyEVSEClusterEnableChargingParams (nil for 0).
 func MTREnergyEVSEClusterEnableChargingParamsFromID(id objc.ID) *MTREnergyEVSEClusterEnableChargingParams {
 	if id == 0 {
 		return nil

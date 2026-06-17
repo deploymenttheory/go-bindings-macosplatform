@@ -20,11 +20,11 @@ type MTRNetworkCommissioningClusterScanNetworksResponseParams struct {
 // Unwrap returns the underlying [raw.MTRNetworkCommissioningClusterScanNetworksResponseParams].
 func (x *MTRNetworkCommissioningClusterScanNetworksResponseParams) Unwrap() *raw.MTRNetworkCommissioningClusterScanNetworksResponseParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRNetworkCommissioningClusterScanNetworksResponseParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRNetworkCommissioningClusterScanNetworksResponseParamsFromID adopts an existing toll-free-bridged object id as a MTRNetworkCommissioningClusterScanNetworksResponseParams (nil for 0).
+// MTRNetworkCommissioningClusterScanNetworksResponseParamsFromID adopts an existing object pointer as a MTRNetworkCommissioningClusterScanNetworksResponseParams (nil for 0).
 func MTRNetworkCommissioningClusterScanNetworksResponseParamsFromID(id objc.ID) *MTRNetworkCommissioningClusterScanNetworksResponseParams {
 	if id == 0 {
 		return nil

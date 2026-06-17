@@ -17,11 +17,11 @@ type SpheresNoiseSource struct {
 // Unwrap returns the underlying [raw.GKSpheresNoiseSource].
 func (x *SpheresNoiseSource) Unwrap() *raw.GKSpheresNoiseSource { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SpheresNoiseSource) ID() objc.ID { return x.inner.Ptr() }
 
-// SpheresNoiseSourceFromID adopts an existing toll-free-bridged object id as a SpheresNoiseSource (nil for 0).
+// SpheresNoiseSourceFromID adopts an existing object pointer as a SpheresNoiseSource (nil for 0).
 func SpheresNoiseSourceFromID(id objc.ID) *SpheresNoiseSource {
 	if id == 0 {
 		return nil

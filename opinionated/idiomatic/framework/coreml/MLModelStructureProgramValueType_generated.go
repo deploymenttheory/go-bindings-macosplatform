@@ -17,11 +17,11 @@ type ModelStructureProgramValueType struct {
 // Unwrap returns the underlying [raw.MLModelStructureProgramValueType].
 func (x *ModelStructureProgramValueType) Unwrap() *raw.MLModelStructureProgramValueType { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ModelStructureProgramValueType) ID() objc.ID { return x.inner.Ptr() }
 
-// ModelStructureProgramValueTypeFromID adopts an existing toll-free-bridged object id as a ModelStructureProgramValueType (nil for 0).
+// ModelStructureProgramValueTypeFromID adopts an existing object pointer as a ModelStructureProgramValueType (nil for 0).
 func ModelStructureProgramValueTypeFromID(id objc.ID) *ModelStructureProgramValueType {
 	if id == 0 {
 		return nil

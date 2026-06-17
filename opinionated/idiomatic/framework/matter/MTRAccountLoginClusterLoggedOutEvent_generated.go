@@ -18,11 +18,11 @@ type MTRAccountLoginClusterLoggedOutEvent struct {
 // Unwrap returns the underlying [raw.MTRAccountLoginClusterLoggedOutEvent].
 func (x *MTRAccountLoginClusterLoggedOutEvent) Unwrap() *raw.MTRAccountLoginClusterLoggedOutEvent { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRAccountLoginClusterLoggedOutEvent) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRAccountLoginClusterLoggedOutEventFromID adopts an existing toll-free-bridged object id as a MTRAccountLoginClusterLoggedOutEvent (nil for 0).
+// MTRAccountLoginClusterLoggedOutEventFromID adopts an existing object pointer as a MTRAccountLoginClusterLoggedOutEvent (nil for 0).
 func MTRAccountLoginClusterLoggedOutEventFromID(id objc.ID) *MTRAccountLoginClusterLoggedOutEvent {
 	if id == 0 {
 		return nil

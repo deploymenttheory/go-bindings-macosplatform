@@ -18,11 +18,11 @@ type MTRHEPAFilterMonitoringClusterResetConditionParams struct {
 // Unwrap returns the underlying [raw.MTRHEPAFilterMonitoringClusterResetConditionParams].
 func (x *MTRHEPAFilterMonitoringClusterResetConditionParams) Unwrap() *raw.MTRHEPAFilterMonitoringClusterResetConditionParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRHEPAFilterMonitoringClusterResetConditionParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRHEPAFilterMonitoringClusterResetConditionParamsFromID adopts an existing toll-free-bridged object id as a MTRHEPAFilterMonitoringClusterResetConditionParams (nil for 0).
+// MTRHEPAFilterMonitoringClusterResetConditionParamsFromID adopts an existing object pointer as a MTRHEPAFilterMonitoringClusterResetConditionParams (nil for 0).
 func MTRHEPAFilterMonitoringClusterResetConditionParamsFromID(id objc.ID) *MTRHEPAFilterMonitoringClusterResetConditionParams {
 	if id == 0 {
 		return nil

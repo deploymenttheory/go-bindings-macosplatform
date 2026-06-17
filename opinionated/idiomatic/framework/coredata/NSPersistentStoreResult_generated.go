@@ -17,11 +17,11 @@ type PersistentStoreResult struct {
 // Unwrap returns the underlying [raw.NSPersistentStoreResult].
 func (x *PersistentStoreResult) Unwrap() *raw.NSPersistentStoreResult { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PersistentStoreResult) ID() objc.ID { return x.inner.Ptr() }
 
-// PersistentStoreResultFromID adopts an existing toll-free-bridged object id as a PersistentStoreResult (nil for 0).
+// PersistentStoreResultFromID adopts an existing object pointer as a PersistentStoreResult (nil for 0).
 func PersistentStoreResultFromID(id objc.ID) *PersistentStoreResult {
 	if id == 0 {
 		return nil

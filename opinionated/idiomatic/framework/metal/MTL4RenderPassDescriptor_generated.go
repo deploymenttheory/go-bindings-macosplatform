@@ -17,11 +17,11 @@ type MTL4RenderPassDescriptor struct {
 // Unwrap returns the underlying [raw.MTL4RenderPassDescriptor].
 func (x *MTL4RenderPassDescriptor) Unwrap() *raw.MTL4RenderPassDescriptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTL4RenderPassDescriptor) ID() objc.ID { return x.inner.Ptr() }
 
-// MTL4RenderPassDescriptorFromID adopts an existing toll-free-bridged object id as a MTL4RenderPassDescriptor (nil for 0).
+// MTL4RenderPassDescriptorFromID adopts an existing object pointer as a MTL4RenderPassDescriptor (nil for 0).
 func MTL4RenderPassDescriptorFromID(id objc.ID) *MTL4RenderPassDescriptor {
 	if id == 0 {
 		return nil

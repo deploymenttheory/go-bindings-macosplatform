@@ -18,11 +18,11 @@ type GraphRandomOpDescriptor struct {
 // Unwrap returns the underlying [raw.MPSGraphRandomOpDescriptor].
 func (x *GraphRandomOpDescriptor) Unwrap() *raw.MPSGraphRandomOpDescriptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *GraphRandomOpDescriptor) ID() objc.ID { return x.inner.Ptr() }
 
-// GraphRandomOpDescriptorFromID adopts an existing toll-free-bridged object id as a GraphRandomOpDescriptor (nil for 0).
+// GraphRandomOpDescriptorFromID adopts an existing object pointer as a GraphRandomOpDescriptor (nil for 0).
 func GraphRandomOpDescriptorFromID(id objc.ID) *GraphRandomOpDescriptor {
 	if id == 0 {
 		return nil

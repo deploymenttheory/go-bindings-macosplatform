@@ -20,11 +20,11 @@ type ButtonCell struct {
 // Unwrap returns the underlying [raw.NSButtonCell].
 func (x *ButtonCell) Unwrap() *raw.NSButtonCell { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ButtonCell) ID() objc.ID { return x.inner.Ptr() }
 
-// ButtonCellFromID adopts an existing toll-free-bridged object id as a ButtonCell (nil for 0).
+// ButtonCellFromID adopts an existing object pointer as a ButtonCell (nil for 0).
 func ButtonCellFromID(id objc.ID) *ButtonCell {
 	if id == 0 {
 		return nil

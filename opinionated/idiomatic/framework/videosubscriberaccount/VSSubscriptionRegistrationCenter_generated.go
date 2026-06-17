@@ -17,11 +17,11 @@ type VSSubscriptionRegistrationCenter struct {
 // Unwrap returns the underlying [raw.VSSubscriptionRegistrationCenter].
 func (x *VSSubscriptionRegistrationCenter) Unwrap() *raw.VSSubscriptionRegistrationCenter { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *VSSubscriptionRegistrationCenter) ID() objc.ID { return x.inner.Ptr() }
 
-// VSSubscriptionRegistrationCenterFromID adopts an existing toll-free-bridged object id as a VSSubscriptionRegistrationCenter (nil for 0).
+// VSSubscriptionRegistrationCenterFromID adopts an existing object pointer as a VSSubscriptionRegistrationCenter (nil for 0).
 func VSSubscriptionRegistrationCenterFromID(id objc.ID) *VSSubscriptionRegistrationCenter {
 	if id == 0 {
 		return nil

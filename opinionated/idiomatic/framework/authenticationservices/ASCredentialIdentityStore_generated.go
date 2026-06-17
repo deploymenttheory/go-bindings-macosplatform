@@ -20,11 +20,11 @@ type CredentialIdentityStore struct {
 // Unwrap returns the underlying [raw.ASCredentialIdentityStore].
 func (x *CredentialIdentityStore) Unwrap() *raw.ASCredentialIdentityStore { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CredentialIdentityStore) ID() objc.ID { return x.inner.Ptr() }
 
-// CredentialIdentityStoreFromID adopts an existing toll-free-bridged object id as a CredentialIdentityStore (nil for 0).
+// CredentialIdentityStoreFromID adopts an existing object pointer as a CredentialIdentityStore (nil for 0).
 func CredentialIdentityStoreFromID(id objc.ID) *CredentialIdentityStore {
 	if id == 0 {
 		return nil

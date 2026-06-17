@@ -17,11 +17,11 @@ type ScrubberImageItemView struct {
 // Unwrap returns the underlying [raw.NSScrubberImageItemView].
 func (x *ScrubberImageItemView) Unwrap() *raw.NSScrubberImageItemView { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ScrubberImageItemView) ID() objc.ID { return x.inner.Ptr() }
 
-// ScrubberImageItemViewFromID adopts an existing toll-free-bridged object id as a ScrubberImageItemView (nil for 0).
+// ScrubberImageItemViewFromID adopts an existing object pointer as a ScrubberImageItemView (nil for 0).
 func ScrubberImageItemViewFromID(id objc.ID) *ScrubberImageItemView {
 	if id == 0 {
 		return nil

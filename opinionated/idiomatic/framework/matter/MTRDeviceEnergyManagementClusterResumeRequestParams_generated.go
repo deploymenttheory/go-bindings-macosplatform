@@ -18,11 +18,11 @@ type MTRDeviceEnergyManagementClusterResumeRequestParams struct {
 // Unwrap returns the underlying [raw.MTRDeviceEnergyManagementClusterResumeRequestParams].
 func (x *MTRDeviceEnergyManagementClusterResumeRequestParams) Unwrap() *raw.MTRDeviceEnergyManagementClusterResumeRequestParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRDeviceEnergyManagementClusterResumeRequestParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRDeviceEnergyManagementClusterResumeRequestParamsFromID adopts an existing toll-free-bridged object id as a MTRDeviceEnergyManagementClusterResumeRequestParams (nil for 0).
+// MTRDeviceEnergyManagementClusterResumeRequestParamsFromID adopts an existing object pointer as a MTRDeviceEnergyManagementClusterResumeRequestParams (nil for 0).
 func MTRDeviceEnergyManagementClusterResumeRequestParamsFromID(id objc.ID) *MTRDeviceEnergyManagementClusterResumeRequestParams {
 	if id == 0 {
 		return nil

@@ -20,11 +20,11 @@ type VSAppleSubscription struct {
 // Unwrap returns the underlying [raw.VSAppleSubscription].
 func (x *VSAppleSubscription) Unwrap() *raw.VSAppleSubscription { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *VSAppleSubscription) ID() objc.ID { return x.inner.Ptr() }
 
-// VSAppleSubscriptionFromID adopts an existing toll-free-bridged object id as a VSAppleSubscription (nil for 0).
+// VSAppleSubscriptionFromID adopts an existing object pointer as a VSAppleSubscription (nil for 0).
 func VSAppleSubscriptionFromID(id objc.ID) *VSAppleSubscription {
 	if id == 0 {
 		return nil

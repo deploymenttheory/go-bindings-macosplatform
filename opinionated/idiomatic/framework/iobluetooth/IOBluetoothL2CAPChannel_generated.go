@@ -19,11 +19,11 @@ type IOBluetoothL2CAPChannel struct {
 // Unwrap returns the underlying [raw.IOBluetoothL2CAPChannel].
 func (x *IOBluetoothL2CAPChannel) Unwrap() *raw.IOBluetoothL2CAPChannel { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *IOBluetoothL2CAPChannel) ID() objc.ID { return x.inner.Ptr() }
 
-// IOBluetoothL2CAPChannelFromID adopts an existing toll-free-bridged object id as a IOBluetoothL2CAPChannel (nil for 0).
+// IOBluetoothL2CAPChannelFromID adopts an existing object pointer as a IOBluetoothL2CAPChannel (nil for 0).
 func IOBluetoothL2CAPChannelFromID(id objc.ID) *IOBluetoothL2CAPChannel {
 	if id == 0 {
 		return nil

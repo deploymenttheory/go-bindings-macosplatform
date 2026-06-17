@@ -19,11 +19,11 @@ type ChannelMixerDefinition struct {
 // Unwrap returns the underlying [raw.PHASEChannelMixerDefinition].
 func (x *ChannelMixerDefinition) Unwrap() *raw.PHASEChannelMixerDefinition { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ChannelMixerDefinition) ID() objc.ID { return x.inner.Ptr() }
 
-// ChannelMixerDefinitionFromID adopts an existing toll-free-bridged object id as a ChannelMixerDefinition (nil for 0).
+// ChannelMixerDefinitionFromID adopts an existing object pointer as a ChannelMixerDefinition (nil for 0).
 func ChannelMixerDefinitionFromID(id objc.ID) *ChannelMixerDefinition {
 	if id == 0 {
 		return nil

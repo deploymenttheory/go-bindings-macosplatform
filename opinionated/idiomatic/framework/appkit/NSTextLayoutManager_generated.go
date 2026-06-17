@@ -21,11 +21,11 @@ type TextLayoutManager struct {
 // Unwrap returns the underlying [raw.NSTextLayoutManager].
 func (x *TextLayoutManager) Unwrap() *raw.NSTextLayoutManager { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *TextLayoutManager) ID() objc.ID { return x.inner.Ptr() }
 
-// TextLayoutManagerFromID adopts an existing toll-free-bridged object id as a TextLayoutManager (nil for 0).
+// TextLayoutManagerFromID adopts an existing object pointer as a TextLayoutManager (nil for 0).
 func TextLayoutManagerFromID(id objc.ID) *TextLayoutManager {
 	if id == 0 {
 		return nil

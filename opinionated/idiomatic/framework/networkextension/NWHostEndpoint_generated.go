@@ -18,11 +18,11 @@ type NWHostEndpoint struct {
 // Unwrap returns the underlying [raw.NWHostEndpoint].
 func (x *NWHostEndpoint) Unwrap() *raw.NWHostEndpoint { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NWHostEndpoint) ID() objc.ID { return x.inner.Ptr() }
 
-// NWHostEndpointFromID adopts an existing toll-free-bridged object id as a NWHostEndpoint (nil for 0).
+// NWHostEndpointFromID adopts an existing object pointer as a NWHostEndpoint (nil for 0).
 func NWHostEndpointFromID(id objc.ID) *NWHostEndpoint {
 	if id == 0 {
 		return nil

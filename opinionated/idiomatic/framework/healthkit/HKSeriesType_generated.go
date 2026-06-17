@@ -17,11 +17,11 @@ type SeriesType struct {
 // Unwrap returns the underlying [raw.HKSeriesType].
 func (x *SeriesType) Unwrap() *raw.HKSeriesType { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SeriesType) ID() objc.ID { return x.inner.Ptr() }
 
-// SeriesTypeFromID adopts an existing toll-free-bridged object id as a SeriesType (nil for 0).
+// SeriesTypeFromID adopts an existing object pointer as a SeriesType (nil for 0).
 func SeriesTypeFromID(id objc.ID) *SeriesType {
 	if id == 0 {
 		return nil

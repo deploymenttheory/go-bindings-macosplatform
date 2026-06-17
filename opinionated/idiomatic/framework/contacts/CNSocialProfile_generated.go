@@ -19,11 +19,11 @@ type SocialProfile struct {
 // Unwrap returns the underlying [raw.CNSocialProfile].
 func (x *SocialProfile) Unwrap() *raw.CNSocialProfile { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SocialProfile) ID() objc.ID { return x.inner.Ptr() }
 
-// SocialProfileFromID adopts an existing toll-free-bridged object id as a SocialProfile (nil for 0).
+// SocialProfileFromID adopts an existing object pointer as a SocialProfile (nil for 0).
 func SocialProfileFromID(id objc.ID) *SocialProfile {
 	if id == 0 {
 		return nil

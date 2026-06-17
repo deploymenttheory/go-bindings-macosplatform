@@ -17,11 +17,11 @@ type PasskeyAssertionCredentialExtensionInput struct {
 // Unwrap returns the underlying [raw.ASPasskeyAssertionCredentialExtensionInput].
 func (x *PasskeyAssertionCredentialExtensionInput) Unwrap() *raw.ASPasskeyAssertionCredentialExtensionInput { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PasskeyAssertionCredentialExtensionInput) ID() objc.ID { return x.inner.Ptr() }
 
-// PasskeyAssertionCredentialExtensionInputFromID adopts an existing toll-free-bridged object id as a PasskeyAssertionCredentialExtensionInput (nil for 0).
+// PasskeyAssertionCredentialExtensionInputFromID adopts an existing object pointer as a PasskeyAssertionCredentialExtensionInput (nil for 0).
 func PasskeyAssertionCredentialExtensionInputFromID(id objc.ID) *PasskeyAssertionCredentialExtensionInput {
 	if id == 0 {
 		return nil

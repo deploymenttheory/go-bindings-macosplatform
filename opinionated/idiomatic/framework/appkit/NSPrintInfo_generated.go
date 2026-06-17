@@ -21,11 +21,11 @@ type PrintInfo struct {
 // Unwrap returns the underlying [raw.NSPrintInfo].
 func (x *PrintInfo) Unwrap() *raw.NSPrintInfo { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PrintInfo) ID() objc.ID { return x.inner.Ptr() }
 
-// PrintInfoFromID adopts an existing toll-free-bridged object id as a PrintInfo (nil for 0).
+// PrintInfoFromID adopts an existing object pointer as a PrintInfo (nil for 0).
 func PrintInfoFromID(id objc.ID) *PrintInfo {
 	if id == 0 {
 		return nil

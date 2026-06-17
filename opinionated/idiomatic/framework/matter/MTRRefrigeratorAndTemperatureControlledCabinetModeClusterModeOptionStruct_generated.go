@@ -19,11 +19,11 @@ type MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct s
 // Unwrap returns the underlying [raw.MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct].
 func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct) Unwrap() *raw.MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStructFromID adopts an existing toll-free-bridged object id as a MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct (nil for 0).
+// MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStructFromID adopts an existing object pointer as a MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct (nil for 0).
 func MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStructFromID(id objc.ID) *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct {
 	if id == 0 {
 		return nil

@@ -17,11 +17,11 @@ type MTL4CommitOptions struct {
 // Unwrap returns the underlying [raw.MTL4CommitOptions].
 func (x *MTL4CommitOptions) Unwrap() *raw.MTL4CommitOptions { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTL4CommitOptions) ID() objc.ID { return x.inner.Ptr() }
 
-// MTL4CommitOptionsFromID adopts an existing toll-free-bridged object id as a MTL4CommitOptions (nil for 0).
+// MTL4CommitOptionsFromID adopts an existing object pointer as a MTL4CommitOptions (nil for 0).
 func MTL4CommitOptionsFromID(id objc.ID) *MTL4CommitOptions {
 	if id == 0 {
 		return nil

@@ -17,11 +17,11 @@ type SendMessageAttachment struct {
 // Unwrap returns the underlying [raw.INSendMessageAttachment].
 func (x *SendMessageAttachment) Unwrap() *raw.INSendMessageAttachment { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SendMessageAttachment) ID() objc.ID { return x.inner.Ptr() }
 
-// SendMessageAttachmentFromID adopts an existing toll-free-bridged object id as a SendMessageAttachment (nil for 0).
+// SendMessageAttachmentFromID adopts an existing object pointer as a SendMessageAttachment (nil for 0).
 func SendMessageAttachmentFromID(id objc.ID) *SendMessageAttachment {
 	if id == 0 {
 		return nil

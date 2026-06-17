@@ -20,11 +20,11 @@ type MTRServiceAreaClusterSkipAreaResponseParams struct {
 // Unwrap returns the underlying [raw.MTRServiceAreaClusterSkipAreaResponseParams].
 func (x *MTRServiceAreaClusterSkipAreaResponseParams) Unwrap() *raw.MTRServiceAreaClusterSkipAreaResponseParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRServiceAreaClusterSkipAreaResponseParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRServiceAreaClusterSkipAreaResponseParamsFromID adopts an existing toll-free-bridged object id as a MTRServiceAreaClusterSkipAreaResponseParams (nil for 0).
+// MTRServiceAreaClusterSkipAreaResponseParamsFromID adopts an existing object pointer as a MTRServiceAreaClusterSkipAreaResponseParams (nil for 0).
 func MTRServiceAreaClusterSkipAreaResponseParamsFromID(id objc.ID) *MTRServiceAreaClusterSkipAreaResponseParams {
 	if id == 0 {
 		return nil

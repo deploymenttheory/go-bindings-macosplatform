@@ -17,11 +17,11 @@ type KeyboardInput struct {
 // Unwrap returns the underlying [raw.GCKeyboardInput].
 func (x *KeyboardInput) Unwrap() *raw.GCKeyboardInput { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *KeyboardInput) ID() objc.ID { return x.inner.Ptr() }
 
-// KeyboardInputFromID adopts an existing toll-free-bridged object id as a KeyboardInput (nil for 0).
+// KeyboardInputFromID adopts an existing object pointer as a KeyboardInput (nil for 0).
 func KeyboardInputFromID(id objc.ID) *KeyboardInput {
 	if id == 0 {
 		return nil

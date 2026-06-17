@@ -18,11 +18,11 @@ type TransformTranslateOp struct {
 // Unwrap returns the underlying [raw.MDLTransformTranslateOp].
 func (x *TransformTranslateOp) Unwrap() *raw.MDLTransformTranslateOp { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *TransformTranslateOp) ID() objc.ID { return x.inner.Ptr() }
 
-// TransformTranslateOpFromID adopts an existing toll-free-bridged object id as a TransformTranslateOp (nil for 0).
+// TransformTranslateOpFromID adopts an existing object pointer as a TransformTranslateOp (nil for 0).
 func TransformTranslateOpFromID(id objc.ID) *TransformTranslateOp {
 	if id == 0 {
 		return nil

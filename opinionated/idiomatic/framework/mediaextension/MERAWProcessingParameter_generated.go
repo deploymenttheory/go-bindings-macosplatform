@@ -18,11 +18,11 @@ type RAWProcessingParameter struct {
 // Unwrap returns the underlying [raw.MERAWProcessingParameter].
 func (x *RAWProcessingParameter) Unwrap() *raw.MERAWProcessingParameter { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *RAWProcessingParameter) ID() objc.ID { return x.inner.Ptr() }
 
-// RAWProcessingParameterFromID adopts an existing toll-free-bridged object id as a RAWProcessingParameter (nil for 0).
+// RAWProcessingParameterFromID adopts an existing object pointer as a RAWProcessingParameter (nil for 0).
 func RAWProcessingParameterFromID(id objc.ID) *RAWProcessingParameter {
 	if id == 0 {
 		return nil

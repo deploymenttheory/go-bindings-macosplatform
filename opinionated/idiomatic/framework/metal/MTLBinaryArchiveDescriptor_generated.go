@@ -18,11 +18,11 @@ type BinaryArchiveDescriptor struct {
 // Unwrap returns the underlying [raw.MTLBinaryArchiveDescriptor].
 func (x *BinaryArchiveDescriptor) Unwrap() *raw.MTLBinaryArchiveDescriptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *BinaryArchiveDescriptor) ID() objc.ID { return x.inner.Ptr() }
 
-// BinaryArchiveDescriptorFromID adopts an existing toll-free-bridged object id as a BinaryArchiveDescriptor (nil for 0).
+// BinaryArchiveDescriptorFromID adopts an existing object pointer as a BinaryArchiveDescriptor (nil for 0).
 func BinaryArchiveDescriptorFromID(id objc.ID) *BinaryArchiveDescriptor {
 	if id == 0 {
 		return nil

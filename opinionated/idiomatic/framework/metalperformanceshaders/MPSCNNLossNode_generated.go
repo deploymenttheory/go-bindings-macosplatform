@@ -18,11 +18,11 @@ type CNNLossNode struct {
 // Unwrap returns the underlying [raw.MPSCNNLossNode].
 func (x *CNNLossNode) Unwrap() *raw.MPSCNNLossNode { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CNNLossNode) ID() objc.ID { return x.inner.Ptr() }
 
-// CNNLossNodeFromID adopts an existing toll-free-bridged object id as a CNNLossNode (nil for 0).
+// CNNLossNodeFromID adopts an existing object pointer as a CNNLossNode (nil for 0).
 func CNNLossNodeFromID(id objc.ID) *CNNLossNode {
 	if id == 0 {
 		return nil

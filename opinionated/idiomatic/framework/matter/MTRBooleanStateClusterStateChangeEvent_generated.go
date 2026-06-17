@@ -18,11 +18,11 @@ type MTRBooleanStateClusterStateChangeEvent struct {
 // Unwrap returns the underlying [raw.MTRBooleanStateClusterStateChangeEvent].
 func (x *MTRBooleanStateClusterStateChangeEvent) Unwrap() *raw.MTRBooleanStateClusterStateChangeEvent { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRBooleanStateClusterStateChangeEvent) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRBooleanStateClusterStateChangeEventFromID adopts an existing toll-free-bridged object id as a MTRBooleanStateClusterStateChangeEvent (nil for 0).
+// MTRBooleanStateClusterStateChangeEventFromID adopts an existing object pointer as a MTRBooleanStateClusterStateChangeEvent (nil for 0).
 func MTRBooleanStateClusterStateChangeEventFromID(id objc.ID) *MTRBooleanStateClusterStateChangeEvent {
 	if id == 0 {
 		return nil

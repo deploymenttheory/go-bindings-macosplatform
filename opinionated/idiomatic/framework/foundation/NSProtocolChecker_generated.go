@@ -18,11 +18,11 @@ type ProtocolChecker struct {
 // Unwrap returns the underlying [raw.NSProtocolChecker].
 func (x *ProtocolChecker) Unwrap() *raw.NSProtocolChecker { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ProtocolChecker) ID() objc.ID { return x.inner.Ptr() }
 
-// ProtocolCheckerFromID adopts an existing toll-free-bridged object id as a ProtocolChecker (nil for 0).
+// ProtocolCheckerFromID adopts an existing object pointer as a ProtocolChecker (nil for 0).
 func ProtocolCheckerFromID(id objc.ID) *ProtocolChecker {
 	if id == 0 {
 		return nil

@@ -17,11 +17,11 @@ type SafariExtensionViewController struct {
 // Unwrap returns the underlying [raw.SFSafariExtensionViewController].
 func (x *SafariExtensionViewController) Unwrap() *raw.SFSafariExtensionViewController { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SafariExtensionViewController) ID() objc.ID { return x.inner.Ptr() }
 
-// SafariExtensionViewControllerFromID adopts an existing toll-free-bridged object id as a SafariExtensionViewController (nil for 0).
+// SafariExtensionViewControllerFromID adopts an existing object pointer as a SafariExtensionViewController (nil for 0).
 func SafariExtensionViewControllerFromID(id objc.ID) *SafariExtensionViewController {
 	if id == 0 {
 		return nil

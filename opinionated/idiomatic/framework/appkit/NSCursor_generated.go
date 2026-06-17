@@ -19,11 +19,11 @@ type Cursor struct {
 // Unwrap returns the underlying [raw.NSCursor].
 func (x *Cursor) Unwrap() *raw.NSCursor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Cursor) ID() objc.ID { return x.inner.Ptr() }
 
-// CursorFromID adopts an existing toll-free-bridged object id as a Cursor (nil for 0).
+// CursorFromID adopts an existing object pointer as a Cursor (nil for 0).
 func CursorFromID(id objc.ID) *Cursor {
 	if id == 0 {
 		return nil

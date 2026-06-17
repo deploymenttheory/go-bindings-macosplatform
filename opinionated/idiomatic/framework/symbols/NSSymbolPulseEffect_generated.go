@@ -17,11 +17,11 @@ type SymbolPulseEffect struct {
 // Unwrap returns the underlying [raw.NSSymbolPulseEffect].
 func (x *SymbolPulseEffect) Unwrap() *raw.NSSymbolPulseEffect { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SymbolPulseEffect) ID() objc.ID { return x.inner.Ptr() }
 
-// SymbolPulseEffectFromID adopts an existing toll-free-bridged object id as a SymbolPulseEffect (nil for 0).
+// SymbolPulseEffectFromID adopts an existing object pointer as a SymbolPulseEffect (nil for 0).
 func SymbolPulseEffectFromID(id objc.ID) *SymbolPulseEffect {
 	if id == 0 {
 		return nil

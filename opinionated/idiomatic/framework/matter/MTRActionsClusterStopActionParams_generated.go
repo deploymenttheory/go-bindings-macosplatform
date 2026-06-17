@@ -18,11 +18,11 @@ type MTRActionsClusterStopActionParams struct {
 // Unwrap returns the underlying [raw.MTRActionsClusterStopActionParams].
 func (x *MTRActionsClusterStopActionParams) Unwrap() *raw.MTRActionsClusterStopActionParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRActionsClusterStopActionParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRActionsClusterStopActionParamsFromID adopts an existing toll-free-bridged object id as a MTRActionsClusterStopActionParams (nil for 0).
+// MTRActionsClusterStopActionParamsFromID adopts an existing object pointer as a MTRActionsClusterStopActionParams (nil for 0).
 func MTRActionsClusterStopActionParamsFromID(id objc.ID) *MTRActionsClusterStopActionParams {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type AddShareablePassConfiguration struct {
 // Unwrap returns the underlying [raw.PKAddShareablePassConfiguration].
 func (x *AddShareablePassConfiguration) Unwrap() *raw.PKAddShareablePassConfiguration { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AddShareablePassConfiguration) ID() objc.ID { return x.inner.Ptr() }
 
-// AddShareablePassConfigurationFromID adopts an existing toll-free-bridged object id as a AddShareablePassConfiguration (nil for 0).
+// AddShareablePassConfigurationFromID adopts an existing object pointer as a AddShareablePassConfiguration (nil for 0).
 func AddShareablePassConfigurationFromID(id objc.ID) *AddShareablePassConfiguration {
 	if id == 0 {
 		return nil

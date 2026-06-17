@@ -18,11 +18,11 @@ type MTRDeviceEnergyManagementClusterSlotStruct struct {
 // Unwrap returns the underlying [raw.MTRDeviceEnergyManagementClusterSlotStruct].
 func (x *MTRDeviceEnergyManagementClusterSlotStruct) Unwrap() *raw.MTRDeviceEnergyManagementClusterSlotStruct { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRDeviceEnergyManagementClusterSlotStruct) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRDeviceEnergyManagementClusterSlotStructFromID adopts an existing toll-free-bridged object id as a MTRDeviceEnergyManagementClusterSlotStruct (nil for 0).
+// MTRDeviceEnergyManagementClusterSlotStructFromID adopts an existing object pointer as a MTRDeviceEnergyManagementClusterSlotStruct (nil for 0).
 func MTRDeviceEnergyManagementClusterSlotStructFromID(id objc.ID) *MTRDeviceEnergyManagementClusterSlotStruct {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type NNSubtractionGradientNode struct {
 // Unwrap returns the underlying [raw.MPSNNSubtractionGradientNode].
 func (x *NNSubtractionGradientNode) Unwrap() *raw.MPSNNSubtractionGradientNode { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NNSubtractionGradientNode) ID() objc.ID { return x.inner.Ptr() }
 
-// NNSubtractionGradientNodeFromID adopts an existing toll-free-bridged object id as a NNSubtractionGradientNode (nil for 0).
+// NNSubtractionGradientNodeFromID adopts an existing object pointer as a NNSubtractionGradientNode (nil for 0).
 func NNSubtractionGradientNodeFromID(id objc.ID) *NNSubtractionGradientNode {
 	if id == 0 {
 		return nil

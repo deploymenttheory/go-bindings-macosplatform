@@ -19,11 +19,11 @@ type AnnotationStamp struct {
 // Unwrap returns the underlying [raw.PDFAnnotationStamp].
 func (x *AnnotationStamp) Unwrap() *raw.PDFAnnotationStamp { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AnnotationStamp) ID() objc.ID { return x.inner.Ptr() }
 
-// AnnotationStampFromID adopts an existing toll-free-bridged object id as a AnnotationStamp (nil for 0).
+// AnnotationStampFromID adopts an existing object pointer as a AnnotationStamp (nil for 0).
 func AnnotationStampFromID(id objc.ID) *AnnotationStamp {
 	if id == 0 {
 		return nil

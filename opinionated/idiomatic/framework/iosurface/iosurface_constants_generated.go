@@ -10,102 +10,102 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// KIOSurfaceAllocSize returns the CoreFoundation constant kIOSurfaceAllocSize as a toll-free-bridged objc.ID.
+// KIOSurfaceAllocSize returns the value of the CoreFoundation reference constant kIOSurfaceAllocSize as an objc.ID.
 func KIOSurfaceAllocSize() objc.ID { return purego.CFConstant(raw.KIOSurfaceAllocSize()) }
 
-// KIOSurfaceWidth returns the CoreFoundation constant kIOSurfaceWidth as a toll-free-bridged objc.ID.
+// KIOSurfaceWidth returns the value of the CoreFoundation reference constant kIOSurfaceWidth as an objc.ID.
 func KIOSurfaceWidth() objc.ID { return purego.CFConstant(raw.KIOSurfaceWidth()) }
 
-// KIOSurfaceHeight returns the CoreFoundation constant kIOSurfaceHeight as a toll-free-bridged objc.ID.
+// KIOSurfaceHeight returns the value of the CoreFoundation reference constant kIOSurfaceHeight as an objc.ID.
 func KIOSurfaceHeight() objc.ID { return purego.CFConstant(raw.KIOSurfaceHeight()) }
 
-// KIOSurfaceBytesPerRow returns the CoreFoundation constant kIOSurfaceBytesPerRow as a toll-free-bridged objc.ID.
+// KIOSurfaceBytesPerRow returns the value of the CoreFoundation reference constant kIOSurfaceBytesPerRow as an objc.ID.
 func KIOSurfaceBytesPerRow() objc.ID { return purego.CFConstant(raw.KIOSurfaceBytesPerRow()) }
 
-// KIOSurfaceBytesPerElement returns the CoreFoundation constant kIOSurfaceBytesPerElement as a toll-free-bridged objc.ID.
+// KIOSurfaceBytesPerElement returns the value of the CoreFoundation reference constant kIOSurfaceBytesPerElement as an objc.ID.
 func KIOSurfaceBytesPerElement() objc.ID { return purego.CFConstant(raw.KIOSurfaceBytesPerElement()) }
 
-// KIOSurfaceElementWidth returns the CoreFoundation constant kIOSurfaceElementWidth as a toll-free-bridged objc.ID.
+// KIOSurfaceElementWidth returns the value of the CoreFoundation reference constant kIOSurfaceElementWidth as an objc.ID.
 func KIOSurfaceElementWidth() objc.ID { return purego.CFConstant(raw.KIOSurfaceElementWidth()) }
 
-// KIOSurfaceElementHeight returns the CoreFoundation constant kIOSurfaceElementHeight as a toll-free-bridged objc.ID.
+// KIOSurfaceElementHeight returns the value of the CoreFoundation reference constant kIOSurfaceElementHeight as an objc.ID.
 func KIOSurfaceElementHeight() objc.ID { return purego.CFConstant(raw.KIOSurfaceElementHeight()) }
 
-// KIOSurfaceOffset returns the CoreFoundation constant kIOSurfaceOffset as a toll-free-bridged objc.ID.
+// KIOSurfaceOffset returns the value of the CoreFoundation reference constant kIOSurfaceOffset as an objc.ID.
 func KIOSurfaceOffset() objc.ID { return purego.CFConstant(raw.KIOSurfaceOffset()) }
 
-// KIOSurfacePlaneInfo returns the CoreFoundation constant kIOSurfacePlaneInfo as a toll-free-bridged objc.ID.
+// KIOSurfacePlaneInfo returns the value of the CoreFoundation reference constant kIOSurfacePlaneInfo as an objc.ID.
 func KIOSurfacePlaneInfo() objc.ID { return purego.CFConstant(raw.KIOSurfacePlaneInfo()) }
 
-// KIOSurfacePlaneWidth returns the CoreFoundation constant kIOSurfacePlaneWidth as a toll-free-bridged objc.ID.
+// KIOSurfacePlaneWidth returns the value of the CoreFoundation reference constant kIOSurfacePlaneWidth as an objc.ID.
 func KIOSurfacePlaneWidth() objc.ID { return purego.CFConstant(raw.KIOSurfacePlaneWidth()) }
 
-// KIOSurfacePlaneHeight returns the CoreFoundation constant kIOSurfacePlaneHeight as a toll-free-bridged objc.ID.
+// KIOSurfacePlaneHeight returns the value of the CoreFoundation reference constant kIOSurfacePlaneHeight as an objc.ID.
 func KIOSurfacePlaneHeight() objc.ID { return purego.CFConstant(raw.KIOSurfacePlaneHeight()) }
 
-// KIOSurfacePlaneBytesPerRow returns the CoreFoundation constant kIOSurfacePlaneBytesPerRow as a toll-free-bridged objc.ID.
+// KIOSurfacePlaneBytesPerRow returns the value of the CoreFoundation reference constant kIOSurfacePlaneBytesPerRow as an objc.ID.
 func KIOSurfacePlaneBytesPerRow() objc.ID { return purego.CFConstant(raw.KIOSurfacePlaneBytesPerRow()) }
 
-// KIOSurfacePlaneOffset returns the CoreFoundation constant kIOSurfacePlaneOffset as a toll-free-bridged objc.ID.
+// KIOSurfacePlaneOffset returns the value of the CoreFoundation reference constant kIOSurfacePlaneOffset as an objc.ID.
 func KIOSurfacePlaneOffset() objc.ID { return purego.CFConstant(raw.KIOSurfacePlaneOffset()) }
 
-// KIOSurfacePlaneSize returns the CoreFoundation constant kIOSurfacePlaneSize as a toll-free-bridged objc.ID.
+// KIOSurfacePlaneSize returns the value of the CoreFoundation reference constant kIOSurfacePlaneSize as an objc.ID.
 func KIOSurfacePlaneSize() objc.ID { return purego.CFConstant(raw.KIOSurfacePlaneSize()) }
 
-// KIOSurfacePlaneBase returns the CoreFoundation constant kIOSurfacePlaneBase as a toll-free-bridged objc.ID.
+// KIOSurfacePlaneBase returns the value of the CoreFoundation reference constant kIOSurfacePlaneBase as an objc.ID.
 func KIOSurfacePlaneBase() objc.ID { return purego.CFConstant(raw.KIOSurfacePlaneBase()) }
 
-// KIOSurfacePlaneBitsPerElement returns the CoreFoundation constant kIOSurfacePlaneBitsPerElement as a toll-free-bridged objc.ID.
+// KIOSurfacePlaneBitsPerElement returns the value of the CoreFoundation reference constant kIOSurfacePlaneBitsPerElement as an objc.ID.
 func KIOSurfacePlaneBitsPerElement() objc.ID { return purego.CFConstant(raw.KIOSurfacePlaneBitsPerElement()) }
 
-// KIOSurfacePlaneBytesPerElement returns the CoreFoundation constant kIOSurfacePlaneBytesPerElement as a toll-free-bridged objc.ID.
+// KIOSurfacePlaneBytesPerElement returns the value of the CoreFoundation reference constant kIOSurfacePlaneBytesPerElement as an objc.ID.
 func KIOSurfacePlaneBytesPerElement() objc.ID { return purego.CFConstant(raw.KIOSurfacePlaneBytesPerElement()) }
 
-// KIOSurfacePlaneElementWidth returns the CoreFoundation constant kIOSurfacePlaneElementWidth as a toll-free-bridged objc.ID.
+// KIOSurfacePlaneElementWidth returns the value of the CoreFoundation reference constant kIOSurfacePlaneElementWidth as an objc.ID.
 func KIOSurfacePlaneElementWidth() objc.ID { return purego.CFConstant(raw.KIOSurfacePlaneElementWidth()) }
 
-// KIOSurfacePlaneElementHeight returns the CoreFoundation constant kIOSurfacePlaneElementHeight as a toll-free-bridged objc.ID.
+// KIOSurfacePlaneElementHeight returns the value of the CoreFoundation reference constant kIOSurfacePlaneElementHeight as an objc.ID.
 func KIOSurfacePlaneElementHeight() objc.ID { return purego.CFConstant(raw.KIOSurfacePlaneElementHeight()) }
 
-// KIOSurfaceCacheMode returns the CoreFoundation constant kIOSurfaceCacheMode as a toll-free-bridged objc.ID.
+// KIOSurfaceCacheMode returns the value of the CoreFoundation reference constant kIOSurfaceCacheMode as an objc.ID.
 func KIOSurfaceCacheMode() objc.ID { return purego.CFConstant(raw.KIOSurfaceCacheMode()) }
 
-// KIOSurfaceIsGlobal returns the CoreFoundation constant kIOSurfaceIsGlobal as a toll-free-bridged objc.ID.
+// KIOSurfaceIsGlobal returns the value of the CoreFoundation reference constant kIOSurfaceIsGlobal as an objc.ID.
 func KIOSurfaceIsGlobal() objc.ID { return purego.CFConstant(raw.KIOSurfaceIsGlobal()) }
 
-// KIOSurfacePixelFormat returns the CoreFoundation constant kIOSurfacePixelFormat as a toll-free-bridged objc.ID.
+// KIOSurfacePixelFormat returns the value of the CoreFoundation reference constant kIOSurfacePixelFormat as an objc.ID.
 func KIOSurfacePixelFormat() objc.ID { return purego.CFConstant(raw.KIOSurfacePixelFormat()) }
 
-// KIOSurfacePixelSizeCastingAllowed returns the CoreFoundation constant kIOSurfacePixelSizeCastingAllowed as a toll-free-bridged objc.ID.
+// KIOSurfacePixelSizeCastingAllowed returns the value of the CoreFoundation reference constant kIOSurfacePixelSizeCastingAllowed as an objc.ID.
 func KIOSurfacePixelSizeCastingAllowed() objc.ID { return purego.CFConstant(raw.KIOSurfacePixelSizeCastingAllowed()) }
 
-// KIOSurfacePlaneComponentBitDepths returns the CoreFoundation constant kIOSurfacePlaneComponentBitDepths as a toll-free-bridged objc.ID.
+// KIOSurfacePlaneComponentBitDepths returns the value of the CoreFoundation reference constant kIOSurfacePlaneComponentBitDepths as an objc.ID.
 func KIOSurfacePlaneComponentBitDepths() objc.ID { return purego.CFConstant(raw.KIOSurfacePlaneComponentBitDepths()) }
 
-// KIOSurfacePlaneComponentBitOffsets returns the CoreFoundation constant kIOSurfacePlaneComponentBitOffsets as a toll-free-bridged objc.ID.
+// KIOSurfacePlaneComponentBitOffsets returns the value of the CoreFoundation reference constant kIOSurfacePlaneComponentBitOffsets as an objc.ID.
 func KIOSurfacePlaneComponentBitOffsets() objc.ID { return purego.CFConstant(raw.KIOSurfacePlaneComponentBitOffsets()) }
 
-// KIOSurfaceName returns the CoreFoundation constant kIOSurfaceName as a toll-free-bridged objc.ID.
+// KIOSurfaceName returns the value of the CoreFoundation reference constant kIOSurfaceName as an objc.ID.
 func KIOSurfaceName() objc.ID { return purego.CFConstant(raw.KIOSurfaceName()) }
 
-// KIOSurfacePlaneComponentNames returns the CoreFoundation constant kIOSurfacePlaneComponentNames as a toll-free-bridged objc.ID.
+// KIOSurfacePlaneComponentNames returns the value of the CoreFoundation reference constant kIOSurfacePlaneComponentNames as an objc.ID.
 func KIOSurfacePlaneComponentNames() objc.ID { return purego.CFConstant(raw.KIOSurfacePlaneComponentNames()) }
 
-// KIOSurfacePlaneComponentTypes returns the CoreFoundation constant kIOSurfacePlaneComponentTypes as a toll-free-bridged objc.ID.
+// KIOSurfacePlaneComponentTypes returns the value of the CoreFoundation reference constant kIOSurfacePlaneComponentTypes as an objc.ID.
 func KIOSurfacePlaneComponentTypes() objc.ID { return purego.CFConstant(raw.KIOSurfacePlaneComponentTypes()) }
 
-// KIOSurfacePlaneComponentRanges returns the CoreFoundation constant kIOSurfacePlaneComponentRanges as a toll-free-bridged objc.ID.
+// KIOSurfacePlaneComponentRanges returns the value of the CoreFoundation reference constant kIOSurfacePlaneComponentRanges as an objc.ID.
 func KIOSurfacePlaneComponentRanges() objc.ID { return purego.CFConstant(raw.KIOSurfacePlaneComponentRanges()) }
 
-// KIOSurfaceSubsampling returns the CoreFoundation constant kIOSurfaceSubsampling as a toll-free-bridged objc.ID.
+// KIOSurfaceSubsampling returns the value of the CoreFoundation reference constant kIOSurfaceSubsampling as an objc.ID.
 func KIOSurfaceSubsampling() objc.ID { return purego.CFConstant(raw.KIOSurfaceSubsampling()) }
 
-// KIOSurfaceColorSpace returns the CoreFoundation constant kIOSurfaceColorSpace as a toll-free-bridged objc.ID.
+// KIOSurfaceColorSpace returns the value of the CoreFoundation reference constant kIOSurfaceColorSpace as an objc.ID.
 func KIOSurfaceColorSpace() objc.ID { return purego.CFConstant(raw.KIOSurfaceColorSpace()) }
 
-// KIOSurfaceICCProfile returns the CoreFoundation constant kIOSurfaceICCProfile as a toll-free-bridged objc.ID.
+// KIOSurfaceICCProfile returns the value of the CoreFoundation reference constant kIOSurfaceICCProfile as an objc.ID.
 func KIOSurfaceICCProfile() objc.ID { return purego.CFConstant(raw.KIOSurfaceICCProfile()) }
 
-// KIOSurfaceContentHeadroom returns the CoreFoundation constant kIOSurfaceContentHeadroom as a toll-free-bridged objc.ID.
+// KIOSurfaceContentHeadroom returns the value of the CoreFoundation reference constant kIOSurfaceContentHeadroom as an objc.ID.
 func KIOSurfaceContentHeadroom() objc.ID { return purego.CFConstant(raw.KIOSurfaceContentHeadroom()) }
 

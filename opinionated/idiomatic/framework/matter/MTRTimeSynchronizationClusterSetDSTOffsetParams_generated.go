@@ -18,11 +18,11 @@ type MTRTimeSynchronizationClusterSetDSTOffsetParams struct {
 // Unwrap returns the underlying [raw.MTRTimeSynchronizationClusterSetDSTOffsetParams].
 func (x *MTRTimeSynchronizationClusterSetDSTOffsetParams) Unwrap() *raw.MTRTimeSynchronizationClusterSetDSTOffsetParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRTimeSynchronizationClusterSetDSTOffsetParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRTimeSynchronizationClusterSetDSTOffsetParamsFromID adopts an existing toll-free-bridged object id as a MTRTimeSynchronizationClusterSetDSTOffsetParams (nil for 0).
+// MTRTimeSynchronizationClusterSetDSTOffsetParamsFromID adopts an existing object pointer as a MTRTimeSynchronizationClusterSetDSTOffsetParams (nil for 0).
 func MTRTimeSynchronizationClusterSetDSTOffsetParamsFromID(id objc.ID) *MTRTimeSynchronizationClusterSetDSTOffsetParams {
 	if id == 0 {
 		return nil

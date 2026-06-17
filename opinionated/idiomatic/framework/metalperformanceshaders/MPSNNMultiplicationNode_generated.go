@@ -18,11 +18,11 @@ type NNMultiplicationNode struct {
 // Unwrap returns the underlying [raw.MPSNNMultiplicationNode].
 func (x *NNMultiplicationNode) Unwrap() *raw.MPSNNMultiplicationNode { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NNMultiplicationNode) ID() objc.ID { return x.inner.Ptr() }
 
-// NNMultiplicationNodeFromID adopts an existing toll-free-bridged object id as a NNMultiplicationNode (nil for 0).
+// NNMultiplicationNodeFromID adopts an existing object pointer as a NNMultiplicationNode (nil for 0).
 func NNMultiplicationNodeFromID(id objc.ID) *NNMultiplicationNode {
 	if id == 0 {
 		return nil

@@ -19,11 +19,11 @@ type MetricPlayerItemVariantSwitchStartEvent struct {
 // Unwrap returns the underlying [raw.AVMetricPlayerItemVariantSwitchStartEvent].
 func (x *MetricPlayerItemVariantSwitchStartEvent) Unwrap() *raw.AVMetricPlayerItemVariantSwitchStartEvent { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MetricPlayerItemVariantSwitchStartEvent) ID() objc.ID { return x.inner.Ptr() }
 
-// MetricPlayerItemVariantSwitchStartEventFromID adopts an existing toll-free-bridged object id as a MetricPlayerItemVariantSwitchStartEvent (nil for 0).
+// MetricPlayerItemVariantSwitchStartEventFromID adopts an existing object pointer as a MetricPlayerItemVariantSwitchStartEvent (nil for 0).
 func MetricPlayerItemVariantSwitchStartEventFromID(id objc.ID) *MetricPlayerItemVariantSwitchStartEvent {
 	if id == 0 {
 		return nil

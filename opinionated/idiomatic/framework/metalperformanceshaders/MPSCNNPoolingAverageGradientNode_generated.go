@@ -18,11 +18,11 @@ type CNNPoolingAverageGradientNode struct {
 // Unwrap returns the underlying [raw.MPSCNNPoolingAverageGradientNode].
 func (x *CNNPoolingAverageGradientNode) Unwrap() *raw.MPSCNNPoolingAverageGradientNode { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CNNPoolingAverageGradientNode) ID() objc.ID { return x.inner.Ptr() }
 
-// CNNPoolingAverageGradientNodeFromID adopts an existing toll-free-bridged object id as a CNNPoolingAverageGradientNode (nil for 0).
+// CNNPoolingAverageGradientNodeFromID adopts an existing object pointer as a CNNPoolingAverageGradientNode (nil for 0).
 func CNNPoolingAverageGradientNodeFromID(id objc.ID) *CNNPoolingAverageGradientNode {
 	if id == 0 {
 		return nil

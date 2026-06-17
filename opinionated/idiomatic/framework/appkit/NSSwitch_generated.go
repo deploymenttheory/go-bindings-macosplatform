@@ -17,11 +17,11 @@ type Switch struct {
 // Unwrap returns the underlying [raw.NSSwitch].
 func (x *Switch) Unwrap() *raw.NSSwitch { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Switch) ID() objc.ID { return x.inner.Ptr() }
 
-// SwitchFromID adopts an existing toll-free-bridged object id as a Switch (nil for 0).
+// SwitchFromID adopts an existing object pointer as a Switch (nil for 0).
 func SwitchFromID(id objc.ID) *Switch {
 	if id == 0 {
 		return nil

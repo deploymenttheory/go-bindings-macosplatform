@@ -18,11 +18,11 @@ type MotionActivity struct {
 // Unwrap returns the underlying [raw.CMMotionActivity].
 func (x *MotionActivity) Unwrap() *raw.CMMotionActivity { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MotionActivity) ID() objc.ID { return x.inner.Ptr() }
 
-// MotionActivityFromID adopts an existing toll-free-bridged object id as a MotionActivity (nil for 0).
+// MotionActivityFromID adopts an existing object pointer as a MotionActivity (nil for 0).
 func MotionActivityFromID(id objc.ID) *MotionActivity {
 	if id == 0 {
 		return nil

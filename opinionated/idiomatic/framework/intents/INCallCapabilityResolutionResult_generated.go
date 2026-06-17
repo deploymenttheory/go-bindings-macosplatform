@@ -17,11 +17,11 @@ type CallCapabilityResolutionResult struct {
 // Unwrap returns the underlying [raw.INCallCapabilityResolutionResult].
 func (x *CallCapabilityResolutionResult) Unwrap() *raw.INCallCapabilityResolutionResult { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CallCapabilityResolutionResult) ID() objc.ID { return x.inner.Ptr() }
 
-// CallCapabilityResolutionResultFromID adopts an existing toll-free-bridged object id as a CallCapabilityResolutionResult (nil for 0).
+// CallCapabilityResolutionResultFromID adopts an existing object pointer as a CallCapabilityResolutionResult (nil for 0).
 func CallCapabilityResolutionResultFromID(id objc.ID) *CallCapabilityResolutionResult {
 	if id == 0 {
 		return nil

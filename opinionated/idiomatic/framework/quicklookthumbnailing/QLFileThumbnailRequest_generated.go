@@ -19,11 +19,11 @@ type FileThumbnailRequest struct {
 // Unwrap returns the underlying [raw.QLFileThumbnailRequest].
 func (x *FileThumbnailRequest) Unwrap() *raw.QLFileThumbnailRequest { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *FileThumbnailRequest) ID() objc.ID { return x.inner.Ptr() }
 
-// FileThumbnailRequestFromID adopts an existing toll-free-bridged object id as a FileThumbnailRequest (nil for 0).
+// FileThumbnailRequestFromID adopts an existing object pointer as a FileThumbnailRequest (nil for 0).
 func FileThumbnailRequestFromID(id objc.ID) *FileThumbnailRequest {
 	if id == 0 {
 		return nil

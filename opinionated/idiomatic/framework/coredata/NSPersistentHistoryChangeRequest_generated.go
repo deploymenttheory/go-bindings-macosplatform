@@ -17,11 +17,11 @@ type PersistentHistoryChangeRequest struct {
 // Unwrap returns the underlying [raw.NSPersistentHistoryChangeRequest].
 func (x *PersistentHistoryChangeRequest) Unwrap() *raw.NSPersistentHistoryChangeRequest { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PersistentHistoryChangeRequest) ID() objc.ID { return x.inner.Ptr() }
 
-// PersistentHistoryChangeRequestFromID adopts an existing toll-free-bridged object id as a PersistentHistoryChangeRequest (nil for 0).
+// PersistentHistoryChangeRequestFromID adopts an existing object pointer as a PersistentHistoryChangeRequest (nil for 0).
 func PersistentHistoryChangeRequestFromID(id objc.ID) *PersistentHistoryChangeRequest {
 	if id == 0 {
 		return nil

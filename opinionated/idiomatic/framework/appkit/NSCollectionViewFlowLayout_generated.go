@@ -19,11 +19,11 @@ type CollectionViewFlowLayout struct {
 // Unwrap returns the underlying [raw.NSCollectionViewFlowLayout].
 func (x *CollectionViewFlowLayout) Unwrap() *raw.NSCollectionViewFlowLayout { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CollectionViewFlowLayout) ID() objc.ID { return x.inner.Ptr() }
 
-// CollectionViewFlowLayoutFromID adopts an existing toll-free-bridged object id as a CollectionViewFlowLayout (nil for 0).
+// CollectionViewFlowLayoutFromID adopts an existing object pointer as a CollectionViewFlowLayout (nil for 0).
 func CollectionViewFlowLayoutFromID(id objc.ID) *CollectionViewFlowLayout {
 	if id == 0 {
 		return nil

@@ -17,11 +17,11 @@ type MTRWaterHeaterManagementClusterBoostStartedEvent struct {
 // Unwrap returns the underlying [raw.MTRWaterHeaterManagementClusterBoostStartedEvent].
 func (x *MTRWaterHeaterManagementClusterBoostStartedEvent) Unwrap() *raw.MTRWaterHeaterManagementClusterBoostStartedEvent { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRWaterHeaterManagementClusterBoostStartedEvent) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRWaterHeaterManagementClusterBoostStartedEventFromID adopts an existing toll-free-bridged object id as a MTRWaterHeaterManagementClusterBoostStartedEvent (nil for 0).
+// MTRWaterHeaterManagementClusterBoostStartedEventFromID adopts an existing object pointer as a MTRWaterHeaterManagementClusterBoostStartedEvent (nil for 0).
 func MTRWaterHeaterManagementClusterBoostStartedEventFromID(id objc.ID) *MTRWaterHeaterManagementClusterBoostStartedEvent {
 	if id == 0 {
 		return nil

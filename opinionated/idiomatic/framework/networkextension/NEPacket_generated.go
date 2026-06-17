@@ -18,11 +18,11 @@ type NEPacket struct {
 // Unwrap returns the underlying [raw.NEPacket].
 func (x *NEPacket) Unwrap() *raw.NEPacket { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NEPacket) ID() objc.ID { return x.inner.Ptr() }
 
-// NEPacketFromID adopts an existing toll-free-bridged object id as a NEPacket (nil for 0).
+// NEPacketFromID adopts an existing object pointer as a NEPacket (nil for 0).
 func NEPacketFromID(id objc.ID) *NEPacket {
 	if id == 0 {
 		return nil

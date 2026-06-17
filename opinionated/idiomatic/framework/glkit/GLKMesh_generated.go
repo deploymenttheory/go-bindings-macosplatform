@@ -20,11 +20,11 @@ type Mesh struct {
 // Unwrap returns the underlying [raw.GLKMesh].
 func (x *Mesh) Unwrap() *raw.GLKMesh { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Mesh) ID() objc.ID { return x.inner.Ptr() }
 
-// MeshFromID adopts an existing toll-free-bridged object id as a Mesh (nil for 0).
+// MeshFromID adopts an existing object pointer as a Mesh (nil for 0).
 func MeshFromID(id objc.ID) *Mesh {
 	if id == 0 {
 		return nil

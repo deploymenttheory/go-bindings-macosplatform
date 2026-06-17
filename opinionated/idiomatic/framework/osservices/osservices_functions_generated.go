@@ -32,8 +32,9 @@ func CSIdentityQueryExecute(query unsafe.Pointer, flags uint) error {
 }
 
 // _cfErrOrMsg converts a CFErrorRef to a structured Go error (domain, code,
-// description, failure reason). CFError is toll-free bridged with NSError so
-// no CGo is required. Falls back to a plain message if no error was populated.
+// description, failure reason). A CFErrorRef is an NSError, so it is read
+// through the NSError path with no CGo. Falls back to a plain message if no
+// error was populated.
 func _cfErrOrMsg(ptr unsafe.Pointer, fn string) error {
 	if ptr != nil {
 		return objcerrors.CFErrorToError(ptr)

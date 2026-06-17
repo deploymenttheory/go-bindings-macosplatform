@@ -19,11 +19,11 @@ type DOMHTMLLabelElement struct {
 // Unwrap returns the underlying [raw.DOMHTMLLabelElement].
 func (x *DOMHTMLLabelElement) Unwrap() *raw.DOMHTMLLabelElement { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DOMHTMLLabelElement) ID() objc.ID { return x.inner.Ptr() }
 
-// DOMHTMLLabelElementFromID adopts an existing toll-free-bridged object id as a DOMHTMLLabelElement (nil for 0).
+// DOMHTMLLabelElementFromID adopts an existing object pointer as a DOMHTMLLabelElement (nil for 0).
 func DOMHTMLLabelElementFromID(id objc.ID) *DOMHTMLLabelElement {
 	if id == 0 {
 		return nil

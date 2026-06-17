@@ -11,7 +11,7 @@ import (
 	"unsafe"
 )
 
-// MIDIBluetoothDriverActivateAllConnections wraps [raw.MIDIBluetoothDriverActivateAllConnections], bridging CFTypeRef arguments and the OSStatus result.
+// MIDIBluetoothDriverActivateAllConnections wraps [raw.MIDIBluetoothDriverActivateAllConnections], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MIDIBluetoothDriverActivateAllConnections() error {
 	if _err := purego.NewOSStatus(raw.MIDIBluetoothDriverActivateAllConnections()).Err(); _err != nil {
 		return _err
@@ -19,7 +19,7 @@ func MIDIBluetoothDriverActivateAllConnections() error {
 	return nil
 }
 
-// MIDIBluetoothDriverDisconnect wraps [raw.MIDIBluetoothDriverDisconnect], bridging CFTypeRef arguments and the OSStatus result.
+// MIDIBluetoothDriverDisconnect wraps [raw.MIDIBluetoothDriverDisconnect], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MIDIBluetoothDriverDisconnect(uuid objc.ID) error {
 	if _err := purego.NewOSStatus(raw.MIDIBluetoothDriverDisconnect(purego.CFRef(uuid))).Err(); _err != nil {
 		return _err
@@ -27,7 +27,7 @@ func MIDIBluetoothDriverDisconnect(uuid objc.ID) error {
 	return nil
 }
 
-// MIDIClientDispose wraps [raw.MIDIClientDispose], bridging CFTypeRef arguments and the OSStatus result.
+// MIDIClientDispose wraps [raw.MIDIClientDispose], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MIDIClientDispose(client uint) error {
 	if _err := purego.NewOSStatus(raw.MIDIClientDispose(client)).Err(); _err != nil {
 		return _err
@@ -35,7 +35,7 @@ func MIDIClientDispose(client uint) error {
 	return nil
 }
 
-// MIDIDeviceAddEntity wraps [raw.MIDIDeviceAddEntity], bridging CFTypeRef arguments and the OSStatus result.
+// MIDIDeviceAddEntity wraps [raw.MIDIDeviceAddEntity], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MIDIDeviceAddEntity(device uint, name objc.ID, embedded uint8, numSourceEndpoints uint, numDestinationEndpoints uint, newEntity *uint) error {
 	if _err := purego.NewOSStatus(raw.MIDIDeviceAddEntity(device, purego.CFRef(name), embedded, numSourceEndpoints, numDestinationEndpoints, newEntity)).Err(); _err != nil {
 		return _err
@@ -43,7 +43,7 @@ func MIDIDeviceAddEntity(device uint, name objc.ID, embedded uint8, numSourceEnd
 	return nil
 }
 
-// MIDIDeviceCreate wraps [raw.MIDIDeviceCreate], bridging CFTypeRef arguments and the OSStatus result.
+// MIDIDeviceCreate wraps [raw.MIDIDeviceCreate], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MIDIDeviceCreate(owner *raw.MIDIDriverInterface, name objc.ID, manufacturer objc.ID, model objc.ID, outDevice *uint) error {
 	if _err := purego.NewOSStatus(raw.MIDIDeviceCreate(owner, purego.CFRef(name), purego.CFRef(manufacturer), purego.CFRef(model), outDevice)).Err(); _err != nil {
 		return _err
@@ -51,7 +51,7 @@ func MIDIDeviceCreate(owner *raw.MIDIDriverInterface, name objc.ID, manufacturer
 	return nil
 }
 
-// MIDIDeviceDispose wraps [raw.MIDIDeviceDispose], bridging CFTypeRef arguments and the OSStatus result.
+// MIDIDeviceDispose wraps [raw.MIDIDeviceDispose], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MIDIDeviceDispose(device uint) error {
 	if _err := purego.NewOSStatus(raw.MIDIDeviceDispose(device)).Err(); _err != nil {
 		return _err
@@ -59,7 +59,7 @@ func MIDIDeviceDispose(device uint) error {
 	return nil
 }
 
-// MIDIDeviceListAddDevice wraps [raw.MIDIDeviceListAddDevice], bridging CFTypeRef arguments and the OSStatus result.
+// MIDIDeviceListAddDevice wraps [raw.MIDIDeviceListAddDevice], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MIDIDeviceListAddDevice(devList uint, dev uint) error {
 	if _err := purego.NewOSStatus(raw.MIDIDeviceListAddDevice(devList, dev)).Err(); _err != nil {
 		return _err
@@ -67,7 +67,7 @@ func MIDIDeviceListAddDevice(devList uint, dev uint) error {
 	return nil
 }
 
-// MIDIDeviceListDispose wraps [raw.MIDIDeviceListDispose], bridging CFTypeRef arguments and the OSStatus result.
+// MIDIDeviceListDispose wraps [raw.MIDIDeviceListDispose], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MIDIDeviceListDispose(devList uint) error {
 	if _err := purego.NewOSStatus(raw.MIDIDeviceListDispose(devList)).Err(); _err != nil {
 		return _err
@@ -75,7 +75,7 @@ func MIDIDeviceListDispose(devList uint) error {
 	return nil
 }
 
-// MIDIDeviceNewEntity wraps [raw.MIDIDeviceNewEntity], bridging CFTypeRef arguments and the OSStatus result.
+// MIDIDeviceNewEntity wraps [raw.MIDIDeviceNewEntity], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MIDIDeviceNewEntity(device uint, name objc.ID, protocol raw.MIDIProtocolID, embedded uint8, numSourceEndpoints uint, numDestinationEndpoints uint, newEntity *uint) error {
 	if _err := purego.NewOSStatus(raw.MIDIDeviceNewEntity(device, purego.CFRef(name), protocol, embedded, numSourceEndpoints, numDestinationEndpoints, newEntity)).Err(); _err != nil {
 		return _err
@@ -83,7 +83,7 @@ func MIDIDeviceNewEntity(device uint, name objc.ID, protocol raw.MIDIProtocolID,
 	return nil
 }
 
-// MIDIDeviceRemoveEntity wraps [raw.MIDIDeviceRemoveEntity], bridging CFTypeRef arguments and the OSStatus result.
+// MIDIDeviceRemoveEntity wraps [raw.MIDIDeviceRemoveEntity], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MIDIDeviceRemoveEntity(device uint, entity uint) error {
 	if _err := purego.NewOSStatus(raw.MIDIDeviceRemoveEntity(device, entity)).Err(); _err != nil {
 		return _err
@@ -91,7 +91,7 @@ func MIDIDeviceRemoveEntity(device uint, entity uint) error {
 	return nil
 }
 
-// MIDIDriverEnableMonitoring wraps [raw.MIDIDriverEnableMonitoring], bridging CFTypeRef arguments and the OSStatus result.
+// MIDIDriverEnableMonitoring wraps [raw.MIDIDriverEnableMonitoring], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MIDIDriverEnableMonitoring(driver *raw.MIDIDriverInterface, enabled uint8) error {
 	if _err := purego.NewOSStatus(raw.MIDIDriverEnableMonitoring(driver, enabled)).Err(); _err != nil {
 		return _err
@@ -99,7 +99,7 @@ func MIDIDriverEnableMonitoring(driver *raw.MIDIDriverInterface, enabled uint8) 
 	return nil
 }
 
-// MIDIEndpointDispose wraps [raw.MIDIEndpointDispose], bridging CFTypeRef arguments and the OSStatus result.
+// MIDIEndpointDispose wraps [raw.MIDIEndpointDispose], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MIDIEndpointDispose(endpt uint) error {
 	if _err := purego.NewOSStatus(raw.MIDIEndpointDispose(endpt)).Err(); _err != nil {
 		return _err
@@ -107,7 +107,7 @@ func MIDIEndpointDispose(endpt uint) error {
 	return nil
 }
 
-// MIDIEndpointGetEntity wraps [raw.MIDIEndpointGetEntity], bridging CFTypeRef arguments and the OSStatus result.
+// MIDIEndpointGetEntity wraps [raw.MIDIEndpointGetEntity], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MIDIEndpointGetEntity(inEndpoint uint, outEntity *uint) error {
 	if _err := purego.NewOSStatus(raw.MIDIEndpointGetEntity(inEndpoint, outEntity)).Err(); _err != nil {
 		return _err
@@ -115,7 +115,7 @@ func MIDIEndpointGetEntity(inEndpoint uint, outEntity *uint) error {
 	return nil
 }
 
-// MIDIEntityAddOrRemoveEndpoints wraps [raw.MIDIEntityAddOrRemoveEndpoints], bridging CFTypeRef arguments and the OSStatus result.
+// MIDIEntityAddOrRemoveEndpoints wraps [raw.MIDIEntityAddOrRemoveEndpoints], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MIDIEntityAddOrRemoveEndpoints(entity uint, numSourceEndpoints uint, numDestinationEndpoints uint) error {
 	if _err := purego.NewOSStatus(raw.MIDIEntityAddOrRemoveEndpoints(entity, numSourceEndpoints, numDestinationEndpoints)).Err(); _err != nil {
 		return _err
@@ -123,7 +123,7 @@ func MIDIEntityAddOrRemoveEndpoints(entity uint, numSourceEndpoints uint, numDes
 	return nil
 }
 
-// MIDIEntityGetDevice wraps [raw.MIDIEntityGetDevice], bridging CFTypeRef arguments and the OSStatus result.
+// MIDIEntityGetDevice wraps [raw.MIDIEntityGetDevice], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MIDIEntityGetDevice(inEntity uint, outDevice *uint) error {
 	if _err := purego.NewOSStatus(raw.MIDIEntityGetDevice(inEntity, outDevice)).Err(); _err != nil {
 		return _err
@@ -131,7 +131,7 @@ func MIDIEntityGetDevice(inEntity uint, outDevice *uint) error {
 	return nil
 }
 
-// MIDIEventPacketSysexBytesForGroup wraps [raw.MIDIEventPacketSysexBytesForGroup], bridging CFTypeRef arguments and the OSStatus result.
+// MIDIEventPacketSysexBytesForGroup wraps [raw.MIDIEventPacketSysexBytesForGroup], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MIDIEventPacketSysexBytesForGroup(pkt *raw.MIDIEventPacket, groupIndex uint8) (objc.ID, error) {
 	var _out0 uintptr
 	if _err := purego.NewOSStatus(raw.MIDIEventPacketSysexBytesForGroup(pkt, groupIndex, unsafe.Pointer(&_out0))).Err(); _err != nil {
@@ -140,7 +140,7 @@ func MIDIEventPacketSysexBytesForGroup(pkt *raw.MIDIEventPacket, groupIndex uint
 	return objc.ID(_out0), nil
 }
 
-// MIDIExternalDeviceCreate wraps [raw.MIDIExternalDeviceCreate], bridging CFTypeRef arguments and the OSStatus result.
+// MIDIExternalDeviceCreate wraps [raw.MIDIExternalDeviceCreate], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MIDIExternalDeviceCreate(name objc.ID, manufacturer objc.ID, model objc.ID, outDevice *uint) error {
 	if _err := purego.NewOSStatus(raw.MIDIExternalDeviceCreate(purego.CFRef(name), purego.CFRef(manufacturer), purego.CFRef(model), outDevice)).Err(); _err != nil {
 		return _err
@@ -148,7 +148,7 @@ func MIDIExternalDeviceCreate(name objc.ID, manufacturer objc.ID, model objc.ID,
 	return nil
 }
 
-// MIDIFlushOutput wraps [raw.MIDIFlushOutput], bridging CFTypeRef arguments and the OSStatus result.
+// MIDIFlushOutput wraps [raw.MIDIFlushOutput], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MIDIFlushOutput(dest uint) error {
 	if _err := purego.NewOSStatus(raw.MIDIFlushOutput(dest)).Err(); _err != nil {
 		return _err
@@ -156,7 +156,7 @@ func MIDIFlushOutput(dest uint) error {
 	return nil
 }
 
-// MIDIGetSerialPortDrivers wraps [raw.MIDIGetSerialPortDrivers], bridging CFTypeRef arguments and the OSStatus result.
+// MIDIGetSerialPortDrivers wraps [raw.MIDIGetSerialPortDrivers], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MIDIGetSerialPortDrivers() (objc.ID, error) {
 	var _out0 uintptr
 	if _err := purego.NewOSStatus(raw.MIDIGetSerialPortDrivers(unsafe.Pointer(&_out0))).Err(); _err != nil {
@@ -165,7 +165,7 @@ func MIDIGetSerialPortDrivers() (objc.ID, error) {
 	return objc.ID(_out0), nil
 }
 
-// MIDIGetSerialPortOwner wraps [raw.MIDIGetSerialPortOwner], bridging CFTypeRef arguments and the OSStatus result.
+// MIDIGetSerialPortOwner wraps [raw.MIDIGetSerialPortOwner], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MIDIGetSerialPortOwner(portName objc.ID) (objc.ID, error) {
 	var _out0 uintptr
 	if _err := purego.NewOSStatus(raw.MIDIGetSerialPortOwner(purego.CFRef(portName), unsafe.Pointer(&_out0))).Err(); _err != nil {
@@ -174,7 +174,7 @@ func MIDIGetSerialPortOwner(portName objc.ID) (objc.ID, error) {
 	return objc.ID(_out0), nil
 }
 
-// MIDIObjectFindByUniqueID wraps [raw.MIDIObjectFindByUniqueID], bridging CFTypeRef arguments and the OSStatus result.
+// MIDIObjectFindByUniqueID wraps [raw.MIDIObjectFindByUniqueID], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MIDIObjectFindByUniqueID(inUniqueID int, outObject *uint, outObjectType *raw.MIDIObjectType) error {
 	if _err := purego.NewOSStatus(raw.MIDIObjectFindByUniqueID(inUniqueID, outObject, outObjectType)).Err(); _err != nil {
 		return _err
@@ -182,7 +182,7 @@ func MIDIObjectFindByUniqueID(inUniqueID int, outObject *uint, outObjectType *ra
 	return nil
 }
 
-// MIDIObjectGetDataProperty wraps [raw.MIDIObjectGetDataProperty], bridging CFTypeRef arguments and the OSStatus result.
+// MIDIObjectGetDataProperty wraps [raw.MIDIObjectGetDataProperty], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MIDIObjectGetDataProperty(obj uint, propertyID objc.ID) (objc.ID, error) {
 	var _out0 uintptr
 	if _err := purego.NewOSStatus(raw.MIDIObjectGetDataProperty(obj, purego.CFRef(propertyID), unsafe.Pointer(&_out0))).Err(); _err != nil {
@@ -191,7 +191,7 @@ func MIDIObjectGetDataProperty(obj uint, propertyID objc.ID) (objc.ID, error) {
 	return objc.ID(_out0), nil
 }
 
-// MIDIObjectGetDictionaryProperty wraps [raw.MIDIObjectGetDictionaryProperty], bridging CFTypeRef arguments and the OSStatus result.
+// MIDIObjectGetDictionaryProperty wraps [raw.MIDIObjectGetDictionaryProperty], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MIDIObjectGetDictionaryProperty(obj uint, propertyID objc.ID) (objc.ID, error) {
 	var _out0 uintptr
 	if _err := purego.NewOSStatus(raw.MIDIObjectGetDictionaryProperty(obj, purego.CFRef(propertyID), unsafe.Pointer(&_out0))).Err(); _err != nil {
@@ -200,7 +200,7 @@ func MIDIObjectGetDictionaryProperty(obj uint, propertyID objc.ID) (objc.ID, err
 	return objc.ID(_out0), nil
 }
 
-// MIDIObjectGetIntegerProperty wraps [raw.MIDIObjectGetIntegerProperty], bridging CFTypeRef arguments and the OSStatus result.
+// MIDIObjectGetIntegerProperty wraps [raw.MIDIObjectGetIntegerProperty], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MIDIObjectGetIntegerProperty(obj uint, propertyID objc.ID, outValue *int) error {
 	if _err := purego.NewOSStatus(raw.MIDIObjectGetIntegerProperty(obj, purego.CFRef(propertyID), outValue)).Err(); _err != nil {
 		return _err
@@ -208,7 +208,7 @@ func MIDIObjectGetIntegerProperty(obj uint, propertyID objc.ID, outValue *int) e
 	return nil
 }
 
-// MIDIObjectGetProperties wraps [raw.MIDIObjectGetProperties], bridging CFTypeRef arguments and the OSStatus result.
+// MIDIObjectGetProperties wraps [raw.MIDIObjectGetProperties], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MIDIObjectGetProperties(obj uint, deep uint8) (objc.ID, error) {
 	var _out0 uintptr
 	if _err := purego.NewOSStatus(raw.MIDIObjectGetProperties(obj, unsafe.Pointer(&_out0), deep)).Err(); _err != nil {
@@ -217,7 +217,7 @@ func MIDIObjectGetProperties(obj uint, deep uint8) (objc.ID, error) {
 	return objc.ID(_out0), nil
 }
 
-// MIDIObjectGetStringProperty wraps [raw.MIDIObjectGetStringProperty], bridging CFTypeRef arguments and the OSStatus result.
+// MIDIObjectGetStringProperty wraps [raw.MIDIObjectGetStringProperty], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MIDIObjectGetStringProperty(obj uint, propertyID objc.ID) (objc.ID, error) {
 	var _out0 uintptr
 	if _err := purego.NewOSStatus(raw.MIDIObjectGetStringProperty(obj, purego.CFRef(propertyID), unsafe.Pointer(&_out0))).Err(); _err != nil {
@@ -226,7 +226,7 @@ func MIDIObjectGetStringProperty(obj uint, propertyID objc.ID) (objc.ID, error) 
 	return objc.ID(_out0), nil
 }
 
-// MIDIObjectRemoveProperty wraps [raw.MIDIObjectRemoveProperty], bridging CFTypeRef arguments and the OSStatus result.
+// MIDIObjectRemoveProperty wraps [raw.MIDIObjectRemoveProperty], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MIDIObjectRemoveProperty(obj uint, propertyID objc.ID) error {
 	if _err := purego.NewOSStatus(raw.MIDIObjectRemoveProperty(obj, purego.CFRef(propertyID))).Err(); _err != nil {
 		return _err
@@ -234,7 +234,7 @@ func MIDIObjectRemoveProperty(obj uint, propertyID objc.ID) error {
 	return nil
 }
 
-// MIDIObjectSetDataProperty wraps [raw.MIDIObjectSetDataProperty], bridging CFTypeRef arguments and the OSStatus result.
+// MIDIObjectSetDataProperty wraps [raw.MIDIObjectSetDataProperty], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MIDIObjectSetDataProperty(obj uint, propertyID objc.ID, data objc.ID) error {
 	if _err := purego.NewOSStatus(raw.MIDIObjectSetDataProperty(obj, purego.CFRef(propertyID), purego.CFRef(data))).Err(); _err != nil {
 		return _err
@@ -242,7 +242,7 @@ func MIDIObjectSetDataProperty(obj uint, propertyID objc.ID, data objc.ID) error
 	return nil
 }
 
-// MIDIObjectSetDictionaryProperty wraps [raw.MIDIObjectSetDictionaryProperty], bridging CFTypeRef arguments and the OSStatus result.
+// MIDIObjectSetDictionaryProperty wraps [raw.MIDIObjectSetDictionaryProperty], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MIDIObjectSetDictionaryProperty(obj uint, propertyID objc.ID, dict objc.ID) error {
 	if _err := purego.NewOSStatus(raw.MIDIObjectSetDictionaryProperty(obj, purego.CFRef(propertyID), purego.CFRef(dict))).Err(); _err != nil {
 		return _err
@@ -250,7 +250,7 @@ func MIDIObjectSetDictionaryProperty(obj uint, propertyID objc.ID, dict objc.ID)
 	return nil
 }
 
-// MIDIObjectSetIntegerProperty wraps [raw.MIDIObjectSetIntegerProperty], bridging CFTypeRef arguments and the OSStatus result.
+// MIDIObjectSetIntegerProperty wraps [raw.MIDIObjectSetIntegerProperty], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MIDIObjectSetIntegerProperty(obj uint, propertyID objc.ID, value int) error {
 	if _err := purego.NewOSStatus(raw.MIDIObjectSetIntegerProperty(obj, purego.CFRef(propertyID), value)).Err(); _err != nil {
 		return _err
@@ -258,7 +258,7 @@ func MIDIObjectSetIntegerProperty(obj uint, propertyID objc.ID, value int) error
 	return nil
 }
 
-// MIDIObjectSetStringProperty wraps [raw.MIDIObjectSetStringProperty], bridging CFTypeRef arguments and the OSStatus result.
+// MIDIObjectSetStringProperty wraps [raw.MIDIObjectSetStringProperty], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MIDIObjectSetStringProperty(obj uint, propertyID objc.ID, str objc.ID) error {
 	if _err := purego.NewOSStatus(raw.MIDIObjectSetStringProperty(obj, purego.CFRef(propertyID), purego.CFRef(str))).Err(); _err != nil {
 		return _err
@@ -266,7 +266,7 @@ func MIDIObjectSetStringProperty(obj uint, propertyID objc.ID, str objc.ID) erro
 	return nil
 }
 
-// MIDIOutputPortCreate wraps [raw.MIDIOutputPortCreate], bridging CFTypeRef arguments and the OSStatus result.
+// MIDIOutputPortCreate wraps [raw.MIDIOutputPortCreate], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MIDIOutputPortCreate(client uint, portName objc.ID, outPort *uint) error {
 	if _err := purego.NewOSStatus(raw.MIDIOutputPortCreate(client, purego.CFRef(portName), outPort)).Err(); _err != nil {
 		return _err
@@ -274,7 +274,7 @@ func MIDIOutputPortCreate(client uint, portName objc.ID, outPort *uint) error {
 	return nil
 }
 
-// MIDIPortDisconnectSource wraps [raw.MIDIPortDisconnectSource], bridging CFTypeRef arguments and the OSStatus result.
+// MIDIPortDisconnectSource wraps [raw.MIDIPortDisconnectSource], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MIDIPortDisconnectSource(port uint, source uint) error {
 	if _err := purego.NewOSStatus(raw.MIDIPortDisconnectSource(port, source)).Err(); _err != nil {
 		return _err
@@ -282,7 +282,7 @@ func MIDIPortDisconnectSource(port uint, source uint) error {
 	return nil
 }
 
-// MIDIPortDispose wraps [raw.MIDIPortDispose], bridging CFTypeRef arguments and the OSStatus result.
+// MIDIPortDispose wraps [raw.MIDIPortDispose], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MIDIPortDispose(port uint) error {
 	if _err := purego.NewOSStatus(raw.MIDIPortDispose(port)).Err(); _err != nil {
 		return _err
@@ -290,7 +290,7 @@ func MIDIPortDispose(port uint) error {
 	return nil
 }
 
-// MIDIReceived wraps [raw.MIDIReceived], bridging CFTypeRef arguments and the OSStatus result.
+// MIDIReceived wraps [raw.MIDIReceived], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MIDIReceived(src uint, pktlist *raw.MIDIPacketList) error {
 	if _err := purego.NewOSStatus(raw.MIDIReceived(src, pktlist)).Err(); _err != nil {
 		return _err
@@ -298,7 +298,7 @@ func MIDIReceived(src uint, pktlist *raw.MIDIPacketList) error {
 	return nil
 }
 
-// MIDIReceivedEventList wraps [raw.MIDIReceivedEventList], bridging CFTypeRef arguments and the OSStatus result.
+// MIDIReceivedEventList wraps [raw.MIDIReceivedEventList], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MIDIReceivedEventList(src uint, evtlist *raw.MIDIEventList) error {
 	if _err := purego.NewOSStatus(raw.MIDIReceivedEventList(src, evtlist)).Err(); _err != nil {
 		return _err
@@ -306,7 +306,7 @@ func MIDIReceivedEventList(src uint, evtlist *raw.MIDIEventList) error {
 	return nil
 }
 
-// MIDIRestart wraps [raw.MIDIRestart], bridging CFTypeRef arguments and the OSStatus result.
+// MIDIRestart wraps [raw.MIDIRestart], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MIDIRestart() error {
 	if _err := purego.NewOSStatus(raw.MIDIRestart()).Err(); _err != nil {
 		return _err
@@ -314,7 +314,7 @@ func MIDIRestart() error {
 	return nil
 }
 
-// MIDISend wraps [raw.MIDISend], bridging CFTypeRef arguments and the OSStatus result.
+// MIDISend wraps [raw.MIDISend], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MIDISend(port uint, dest uint, pktlist *raw.MIDIPacketList) error {
 	if _err := purego.NewOSStatus(raw.MIDISend(port, dest, pktlist)).Err(); _err != nil {
 		return _err
@@ -322,7 +322,7 @@ func MIDISend(port uint, dest uint, pktlist *raw.MIDIPacketList) error {
 	return nil
 }
 
-// MIDISendEventList wraps [raw.MIDISendEventList], bridging CFTypeRef arguments and the OSStatus result.
+// MIDISendEventList wraps [raw.MIDISendEventList], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MIDISendEventList(port uint, dest uint, evtlist *raw.MIDIEventList) error {
 	if _err := purego.NewOSStatus(raw.MIDISendEventList(port, dest, evtlist)).Err(); _err != nil {
 		return _err
@@ -330,7 +330,7 @@ func MIDISendEventList(port uint, dest uint, evtlist *raw.MIDIEventList) error {
 	return nil
 }
 
-// MIDISendSysex wraps [raw.MIDISendSysex], bridging CFTypeRef arguments and the OSStatus result.
+// MIDISendSysex wraps [raw.MIDISendSysex], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MIDISendSysex(request *raw.MIDISysexSendRequest) error {
 	if _err := purego.NewOSStatus(raw.MIDISendSysex(request)).Err(); _err != nil {
 		return _err
@@ -338,7 +338,7 @@ func MIDISendSysex(request *raw.MIDISysexSendRequest) error {
 	return nil
 }
 
-// MIDISendUMPSysex wraps [raw.MIDISendUMPSysex], bridging CFTypeRef arguments and the OSStatus result.
+// MIDISendUMPSysex wraps [raw.MIDISendUMPSysex], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MIDISendUMPSysex(umpRequest *raw.MIDISysexSendRequestUMP) error {
 	if _err := purego.NewOSStatus(raw.MIDISendUMPSysex(umpRequest)).Err(); _err != nil {
 		return _err
@@ -346,7 +346,7 @@ func MIDISendUMPSysex(umpRequest *raw.MIDISysexSendRequestUMP) error {
 	return nil
 }
 
-// MIDISendUMPSysex8 wraps [raw.MIDISendUMPSysex8], bridging CFTypeRef arguments and the OSStatus result.
+// MIDISendUMPSysex8 wraps [raw.MIDISendUMPSysex8], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MIDISendUMPSysex8(umpRequest *raw.MIDISysexSendRequestUMP) error {
 	if _err := purego.NewOSStatus(raw.MIDISendUMPSysex8(umpRequest)).Err(); _err != nil {
 		return _err
@@ -354,7 +354,7 @@ func MIDISendUMPSysex8(umpRequest *raw.MIDISysexSendRequestUMP) error {
 	return nil
 }
 
-// MIDISetSerialPortOwner wraps [raw.MIDISetSerialPortOwner], bridging CFTypeRef arguments and the OSStatus result.
+// MIDISetSerialPortOwner wraps [raw.MIDISetSerialPortOwner], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MIDISetSerialPortOwner(portName objc.ID, driverName objc.ID) error {
 	if _err := purego.NewOSStatus(raw.MIDISetSerialPortOwner(purego.CFRef(portName), purego.CFRef(driverName))).Err(); _err != nil {
 		return _err
@@ -362,7 +362,7 @@ func MIDISetSerialPortOwner(portName objc.ID, driverName objc.ID) error {
 	return nil
 }
 
-// MIDISetupAddDevice wraps [raw.MIDISetupAddDevice], bridging CFTypeRef arguments and the OSStatus result.
+// MIDISetupAddDevice wraps [raw.MIDISetupAddDevice], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MIDISetupAddDevice(device uint) error {
 	if _err := purego.NewOSStatus(raw.MIDISetupAddDevice(device)).Err(); _err != nil {
 		return _err
@@ -370,7 +370,7 @@ func MIDISetupAddDevice(device uint) error {
 	return nil
 }
 
-// MIDISetupAddExternalDevice wraps [raw.MIDISetupAddExternalDevice], bridging CFTypeRef arguments and the OSStatus result.
+// MIDISetupAddExternalDevice wraps [raw.MIDISetupAddExternalDevice], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MIDISetupAddExternalDevice(device uint) error {
 	if _err := purego.NewOSStatus(raw.MIDISetupAddExternalDevice(device)).Err(); _err != nil {
 		return _err
@@ -378,7 +378,7 @@ func MIDISetupAddExternalDevice(device uint) error {
 	return nil
 }
 
-// MIDISetupCreate wraps [raw.MIDISetupCreate], bridging CFTypeRef arguments and the OSStatus result.
+// MIDISetupCreate wraps [raw.MIDISetupCreate], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MIDISetupCreate(outSetup *uint) error {
 	if _err := purego.NewOSStatus(raw.MIDISetupCreate(outSetup)).Err(); _err != nil {
 		return _err
@@ -386,7 +386,7 @@ func MIDISetupCreate(outSetup *uint) error {
 	return nil
 }
 
-// MIDISetupDispose wraps [raw.MIDISetupDispose], bridging CFTypeRef arguments and the OSStatus result.
+// MIDISetupDispose wraps [raw.MIDISetupDispose], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MIDISetupDispose(setup uint) error {
 	if _err := purego.NewOSStatus(raw.MIDISetupDispose(setup)).Err(); _err != nil {
 		return _err
@@ -394,7 +394,7 @@ func MIDISetupDispose(setup uint) error {
 	return nil
 }
 
-// MIDISetupFromData wraps [raw.MIDISetupFromData], bridging CFTypeRef arguments and the OSStatus result.
+// MIDISetupFromData wraps [raw.MIDISetupFromData], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MIDISetupFromData(data objc.ID, outSetup *uint) error {
 	if _err := purego.NewOSStatus(raw.MIDISetupFromData(purego.CFRef(data), outSetup)).Err(); _err != nil {
 		return _err
@@ -402,7 +402,7 @@ func MIDISetupFromData(data objc.ID, outSetup *uint) error {
 	return nil
 }
 
-// MIDISetupGetCurrent wraps [raw.MIDISetupGetCurrent], bridging CFTypeRef arguments and the OSStatus result.
+// MIDISetupGetCurrent wraps [raw.MIDISetupGetCurrent], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MIDISetupGetCurrent(outSetup *uint) error {
 	if _err := purego.NewOSStatus(raw.MIDISetupGetCurrent(outSetup)).Err(); _err != nil {
 		return _err
@@ -410,7 +410,7 @@ func MIDISetupGetCurrent(outSetup *uint) error {
 	return nil
 }
 
-// MIDISetupInstall wraps [raw.MIDISetupInstall], bridging CFTypeRef arguments and the OSStatus result.
+// MIDISetupInstall wraps [raw.MIDISetupInstall], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MIDISetupInstall(setup uint) error {
 	if _err := purego.NewOSStatus(raw.MIDISetupInstall(setup)).Err(); _err != nil {
 		return _err
@@ -418,7 +418,7 @@ func MIDISetupInstall(setup uint) error {
 	return nil
 }
 
-// MIDISetupRemoveDevice wraps [raw.MIDISetupRemoveDevice], bridging CFTypeRef arguments and the OSStatus result.
+// MIDISetupRemoveDevice wraps [raw.MIDISetupRemoveDevice], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MIDISetupRemoveDevice(device uint) error {
 	if _err := purego.NewOSStatus(raw.MIDISetupRemoveDevice(device)).Err(); _err != nil {
 		return _err
@@ -426,7 +426,7 @@ func MIDISetupRemoveDevice(device uint) error {
 	return nil
 }
 
-// MIDISetupRemoveExternalDevice wraps [raw.MIDISetupRemoveExternalDevice], bridging CFTypeRef arguments and the OSStatus result.
+// MIDISetupRemoveExternalDevice wraps [raw.MIDISetupRemoveExternalDevice], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MIDISetupRemoveExternalDevice(device uint) error {
 	if _err := purego.NewOSStatus(raw.MIDISetupRemoveExternalDevice(device)).Err(); _err != nil {
 		return _err
@@ -434,7 +434,7 @@ func MIDISetupRemoveExternalDevice(device uint) error {
 	return nil
 }
 
-// MIDISetupToData wraps [raw.MIDISetupToData], bridging CFTypeRef arguments and the OSStatus result.
+// MIDISetupToData wraps [raw.MIDISetupToData], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MIDISetupToData(setup uint) (objc.ID, error) {
 	var _out0 uintptr
 	if _err := purego.NewOSStatus(raw.MIDISetupToData(setup, unsafe.Pointer(&_out0))).Err(); _err != nil {
@@ -443,7 +443,7 @@ func MIDISetupToData(setup uint) (objc.ID, error) {
 	return objc.ID(_out0), nil
 }
 
-// MIDISourceCreate wraps [raw.MIDISourceCreate], bridging CFTypeRef arguments and the OSStatus result.
+// MIDISourceCreate wraps [raw.MIDISourceCreate], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MIDISourceCreate(client uint, name objc.ID, outSrc *uint) error {
 	if _err := purego.NewOSStatus(raw.MIDISourceCreate(client, purego.CFRef(name), outSrc)).Err(); _err != nil {
 		return _err
@@ -451,7 +451,7 @@ func MIDISourceCreate(client uint, name objc.ID, outSrc *uint) error {
 	return nil
 }
 
-// MIDISourceCreateWithProtocol wraps [raw.MIDISourceCreateWithProtocol], bridging CFTypeRef arguments and the OSStatus result.
+// MIDISourceCreateWithProtocol wraps [raw.MIDISourceCreateWithProtocol], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MIDISourceCreateWithProtocol(client uint, name objc.ID, protocol raw.MIDIProtocolID, outSrc *uint) error {
 	if _err := purego.NewOSStatus(raw.MIDISourceCreateWithProtocol(client, purego.CFRef(name), protocol, outSrc)).Err(); _err != nil {
 		return _err
@@ -459,7 +459,7 @@ func MIDISourceCreateWithProtocol(client uint, name objc.ID, protocol raw.MIDIPr
 	return nil
 }
 
-// MIDIThruConnectionCreate wraps [raw.MIDIThruConnectionCreate], bridging CFTypeRef arguments and the OSStatus result.
+// MIDIThruConnectionCreate wraps [raw.MIDIThruConnectionCreate], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MIDIThruConnectionCreate(inPersistentOwnerID objc.ID, inConnectionParams objc.ID, outConnection *uint) error {
 	if _err := purego.NewOSStatus(raw.MIDIThruConnectionCreate(purego.CFRef(inPersistentOwnerID), purego.CFRef(inConnectionParams), outConnection)).Err(); _err != nil {
 		return _err
@@ -467,7 +467,7 @@ func MIDIThruConnectionCreate(inPersistentOwnerID objc.ID, inConnectionParams ob
 	return nil
 }
 
-// MIDIThruConnectionDispose wraps [raw.MIDIThruConnectionDispose], bridging CFTypeRef arguments and the OSStatus result.
+// MIDIThruConnectionDispose wraps [raw.MIDIThruConnectionDispose], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MIDIThruConnectionDispose(connection uint) error {
 	if _err := purego.NewOSStatus(raw.MIDIThruConnectionDispose(connection)).Err(); _err != nil {
 		return _err
@@ -475,7 +475,7 @@ func MIDIThruConnectionDispose(connection uint) error {
 	return nil
 }
 
-// MIDIThruConnectionFind wraps [raw.MIDIThruConnectionFind], bridging CFTypeRef arguments and the OSStatus result.
+// MIDIThruConnectionFind wraps [raw.MIDIThruConnectionFind], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MIDIThruConnectionFind(inPersistentOwnerID objc.ID) (objc.ID, error) {
 	var _out0 uintptr
 	if _err := purego.NewOSStatus(raw.MIDIThruConnectionFind(purego.CFRef(inPersistentOwnerID), unsafe.Pointer(&_out0))).Err(); _err != nil {
@@ -484,7 +484,7 @@ func MIDIThruConnectionFind(inPersistentOwnerID objc.ID) (objc.ID, error) {
 	return objc.ID(_out0), nil
 }
 
-// MIDIThruConnectionGetParams wraps [raw.MIDIThruConnectionGetParams], bridging CFTypeRef arguments and the OSStatus result.
+// MIDIThruConnectionGetParams wraps [raw.MIDIThruConnectionGetParams], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MIDIThruConnectionGetParams(connection uint) (objc.ID, error) {
 	var _out0 uintptr
 	if _err := purego.NewOSStatus(raw.MIDIThruConnectionGetParams(connection, unsafe.Pointer(&_out0))).Err(); _err != nil {
@@ -493,7 +493,7 @@ func MIDIThruConnectionGetParams(connection uint) (objc.ID, error) {
 	return objc.ID(_out0), nil
 }
 
-// MIDIThruConnectionSetParams wraps [raw.MIDIThruConnectionSetParams], bridging CFTypeRef arguments and the OSStatus result.
+// MIDIThruConnectionSetParams wraps [raw.MIDIThruConnectionSetParams], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MIDIThruConnectionSetParams(connection uint, inConnectionParams objc.ID) error {
 	if _err := purego.NewOSStatus(raw.MIDIThruConnectionSetParams(connection, purego.CFRef(inConnectionParams))).Err(); _err != nil {
 		return _err

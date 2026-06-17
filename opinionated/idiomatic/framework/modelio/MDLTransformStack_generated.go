@@ -20,11 +20,11 @@ type TransformStack struct {
 // Unwrap returns the underlying [raw.MDLTransformStack].
 func (x *TransformStack) Unwrap() *raw.MDLTransformStack { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *TransformStack) ID() objc.ID { return x.inner.Ptr() }
 
-// TransformStackFromID adopts an existing toll-free-bridged object id as a TransformStack (nil for 0).
+// TransformStackFromID adopts an existing object pointer as a TransformStack (nil for 0).
 func TransformStackFromID(id objc.ID) *TransformStack {
 	if id == 0 {
 		return nil

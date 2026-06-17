@@ -17,11 +17,11 @@ type TextureSampler struct {
 // Unwrap returns the underlying [raw.MDLTextureSampler].
 func (x *TextureSampler) Unwrap() *raw.MDLTextureSampler { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *TextureSampler) ID() objc.ID { return x.inner.Ptr() }
 
-// TextureSamplerFromID adopts an existing toll-free-bridged object id as a TextureSampler (nil for 0).
+// TextureSamplerFromID adopts an existing object pointer as a TextureSampler (nil for 0).
 func TextureSamplerFromID(id objc.ID) *TextureSampler {
 	if id == 0 {
 		return nil

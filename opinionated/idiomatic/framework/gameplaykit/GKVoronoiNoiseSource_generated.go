@@ -17,11 +17,11 @@ type VoronoiNoiseSource struct {
 // Unwrap returns the underlying [raw.GKVoronoiNoiseSource].
 func (x *VoronoiNoiseSource) Unwrap() *raw.GKVoronoiNoiseSource { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *VoronoiNoiseSource) ID() objc.ID { return x.inner.Ptr() }
 
-// VoronoiNoiseSourceFromID adopts an existing toll-free-bridged object id as a VoronoiNoiseSource (nil for 0).
+// VoronoiNoiseSourceFromID adopts an existing object pointer as a VoronoiNoiseSource (nil for 0).
 func VoronoiNoiseSourceFromID(id objc.ID) *VoronoiNoiseSource {
 	if id == 0 {
 		return nil

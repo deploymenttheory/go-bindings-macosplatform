@@ -19,11 +19,11 @@ type PickerResult struct {
 // Unwrap returns the underlying [raw.PHPickerResult].
 func (x *PickerResult) Unwrap() *raw.PHPickerResult { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PickerResult) ID() objc.ID { return x.inner.Ptr() }
 
-// PickerResultFromID adopts an existing toll-free-bridged object id as a PickerResult (nil for 0).
+// PickerResultFromID adopts an existing object pointer as a PickerResult (nil for 0).
 func PickerResultFromID(id objc.ID) *PickerResult {
 	if id == 0 {
 		return nil

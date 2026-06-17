@@ -18,11 +18,11 @@ type URLSessionUploadTask struct {
 // Unwrap returns the underlying [raw.NSURLSessionUploadTask].
 func (x *URLSessionUploadTask) Unwrap() *raw.NSURLSessionUploadTask { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *URLSessionUploadTask) ID() objc.ID { return x.inner.Ptr() }
 
-// URLSessionUploadTaskFromID adopts an existing toll-free-bridged object id as a URLSessionUploadTask (nil for 0).
+// URLSessionUploadTaskFromID adopts an existing object pointer as a URLSessionUploadTask (nil for 0).
 func URLSessionUploadTaskFromID(id objc.ID) *URLSessionUploadTask {
 	if id == 0 {
 		return nil

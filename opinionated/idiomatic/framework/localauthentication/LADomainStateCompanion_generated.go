@@ -18,11 +18,11 @@ type DomainStateCompanion struct {
 // Unwrap returns the underlying [raw.LADomainStateCompanion].
 func (x *DomainStateCompanion) Unwrap() *raw.LADomainStateCompanion { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DomainStateCompanion) ID() objc.ID { return x.inner.Ptr() }
 
-// DomainStateCompanionFromID adopts an existing toll-free-bridged object id as a DomainStateCompanion (nil for 0).
+// DomainStateCompanionFromID adopts an existing object pointer as a DomainStateCompanion (nil for 0).
 func DomainStateCompanionFromID(id objc.ID) *DomainStateCompanion {
 	if id == 0 {
 		return nil

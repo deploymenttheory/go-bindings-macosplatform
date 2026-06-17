@@ -22,11 +22,11 @@ type ContactPicker struct {
 // Unwrap returns the underlying [raw.CNContactPicker].
 func (x *ContactPicker) Unwrap() *raw.CNContactPicker { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ContactPicker) ID() objc.ID { return x.inner.Ptr() }
 
-// ContactPickerFromID adopts an existing toll-free-bridged object id as a ContactPicker (nil for 0).
+// ContactPickerFromID adopts an existing object pointer as a ContactPicker (nil for 0).
 func ContactPickerFromID(id objc.ID) *ContactPicker {
 	if id == 0 {
 		return nil

@@ -20,11 +20,11 @@ type NDArrayAffineInt4Dequantize struct {
 // Unwrap returns the underlying [raw.MPSNDArrayAffineInt4Dequantize].
 func (x *NDArrayAffineInt4Dequantize) Unwrap() *raw.MPSNDArrayAffineInt4Dequantize { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NDArrayAffineInt4Dequantize) ID() objc.ID { return x.inner.Ptr() }
 
-// NDArrayAffineInt4DequantizeFromID adopts an existing toll-free-bridged object id as a NDArrayAffineInt4Dequantize (nil for 0).
+// NDArrayAffineInt4DequantizeFromID adopts an existing object pointer as a NDArrayAffineInt4Dequantize (nil for 0).
 func NDArrayAffineInt4DequantizeFromID(id objc.ID) *NDArrayAffineInt4Dequantize {
 	if id == 0 {
 		return nil

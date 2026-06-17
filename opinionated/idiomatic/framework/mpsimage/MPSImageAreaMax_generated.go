@@ -19,11 +19,11 @@ type ImageAreaMax struct {
 // Unwrap returns the underlying [raw.MPSImageAreaMax].
 func (x *ImageAreaMax) Unwrap() *raw.MPSImageAreaMax { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ImageAreaMax) ID() objc.ID { return x.inner.Ptr() }
 
-// ImageAreaMaxFromID adopts an existing toll-free-bridged object id as a ImageAreaMax (nil for 0).
+// ImageAreaMaxFromID adopts an existing object pointer as a ImageAreaMax (nil for 0).
 func ImageAreaMaxFromID(id objc.ID) *ImageAreaMax {
 	if id == 0 {
 		return nil

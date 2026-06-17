@@ -17,11 +17,11 @@ type PersistentChange struct {
 // Unwrap returns the underlying [raw.PHPersistentChange].
 func (x *PersistentChange) Unwrap() *raw.PHPersistentChange { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PersistentChange) ID() objc.ID { return x.inner.Ptr() }
 
-// PersistentChangeFromID adopts an existing toll-free-bridged object id as a PersistentChange (nil for 0).
+// PersistentChangeFromID adopts an existing object pointer as a PersistentChange (nil for 0).
 func PersistentChangeFromID(id objc.ID) *PersistentChange {
 	if id == 0 {
 		return nil

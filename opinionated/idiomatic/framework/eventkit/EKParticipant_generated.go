@@ -20,11 +20,11 @@ type Participant struct {
 // Unwrap returns the underlying [raw.EKParticipant].
 func (x *Participant) Unwrap() *raw.EKParticipant { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Participant) ID() objc.ID { return x.inner.Ptr() }
 
-// ParticipantFromID adopts an existing toll-free-bridged object id as a Participant (nil for 0).
+// ParticipantFromID adopts an existing object pointer as a Participant (nil for 0).
 func ParticipantFromID(id objc.ID) *Participant {
 	if id == 0 {
 		return nil

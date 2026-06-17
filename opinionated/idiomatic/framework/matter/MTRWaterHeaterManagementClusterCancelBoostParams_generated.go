@@ -18,11 +18,11 @@ type MTRWaterHeaterManagementClusterCancelBoostParams struct {
 // Unwrap returns the underlying [raw.MTRWaterHeaterManagementClusterCancelBoostParams].
 func (x *MTRWaterHeaterManagementClusterCancelBoostParams) Unwrap() *raw.MTRWaterHeaterManagementClusterCancelBoostParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRWaterHeaterManagementClusterCancelBoostParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRWaterHeaterManagementClusterCancelBoostParamsFromID adopts an existing toll-free-bridged object id as a MTRWaterHeaterManagementClusterCancelBoostParams (nil for 0).
+// MTRWaterHeaterManagementClusterCancelBoostParamsFromID adopts an existing object pointer as a MTRWaterHeaterManagementClusterCancelBoostParams (nil for 0).
 func MTRWaterHeaterManagementClusterCancelBoostParamsFromID(id objc.ID) *MTRWaterHeaterManagementClusterCancelBoostParams {
 	if id == 0 {
 		return nil

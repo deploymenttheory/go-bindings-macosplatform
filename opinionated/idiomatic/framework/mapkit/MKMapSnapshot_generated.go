@@ -20,11 +20,11 @@ type MapSnapshot struct {
 // Unwrap returns the underlying [raw.MKMapSnapshot].
 func (x *MapSnapshot) Unwrap() *raw.MKMapSnapshot { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MapSnapshot) ID() objc.ID { return x.inner.Ptr() }
 
-// MapSnapshotFromID adopts an existing toll-free-bridged object id as a MapSnapshot (nil for 0).
+// MapSnapshotFromID adopts an existing object pointer as a MapSnapshot (nil for 0).
 func MapSnapshotFromID(id objc.ID) *MapSnapshot {
 	if id == 0 {
 		return nil

@@ -22,11 +22,11 @@ type CaptionRenderer struct {
 // Unwrap returns the underlying [raw.AVCaptionRenderer].
 func (x *CaptionRenderer) Unwrap() *raw.AVCaptionRenderer { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CaptionRenderer) ID() objc.ID { return x.inner.Ptr() }
 
-// CaptionRendererFromID adopts an existing toll-free-bridged object id as a CaptionRenderer (nil for 0).
+// CaptionRendererFromID adopts an existing object pointer as a CaptionRenderer (nil for 0).
 func CaptionRendererFromID(id objc.ID) *CaptionRenderer {
 	if id == 0 {
 		return nil

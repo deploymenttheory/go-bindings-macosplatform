@@ -18,11 +18,11 @@ type WorkoutRouteQuery struct {
 // Unwrap returns the underlying [raw.HKWorkoutRouteQuery].
 func (x *WorkoutRouteQuery) Unwrap() *raw.HKWorkoutRouteQuery { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *WorkoutRouteQuery) ID() objc.ID { return x.inner.Ptr() }
 
-// WorkoutRouteQueryFromID adopts an existing toll-free-bridged object id as a WorkoutRouteQuery (nil for 0).
+// WorkoutRouteQueryFromID adopts an existing object pointer as a WorkoutRouteQuery (nil for 0).
 func WorkoutRouteQueryFromID(id objc.ID) *WorkoutRouteQuery {
 	if id == 0 {
 		return nil

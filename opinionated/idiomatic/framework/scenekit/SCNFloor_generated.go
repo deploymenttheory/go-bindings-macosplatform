@@ -17,11 +17,11 @@ type Floor struct {
 // Unwrap returns the underlying [raw.SCNFloor].
 func (x *Floor) Unwrap() *raw.SCNFloor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Floor) ID() objc.ID { return x.inner.Ptr() }
 
-// FloorFromID adopts an existing toll-free-bridged object id as a Floor (nil for 0).
+// FloorFromID adopts an existing object pointer as a Floor (nil for 0).
 func FloorFromID(id objc.ID) *Floor {
 	if id == 0 {
 		return nil

@@ -19,11 +19,11 @@ type DOMHTMLInputElement struct {
 // Unwrap returns the underlying [raw.DOMHTMLInputElement].
 func (x *DOMHTMLInputElement) Unwrap() *raw.DOMHTMLInputElement { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DOMHTMLInputElement) ID() objc.ID { return x.inner.Ptr() }
 
-// DOMHTMLInputElementFromID adopts an existing toll-free-bridged object id as a DOMHTMLInputElement (nil for 0).
+// DOMHTMLInputElementFromID adopts an existing object pointer as a DOMHTMLInputElement (nil for 0).
 func DOMHTMLInputElementFromID(id objc.ID) *DOMHTMLInputElement {
 	if id == 0 {
 		return nil

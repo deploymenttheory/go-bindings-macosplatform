@@ -18,11 +18,11 @@ type MatchLink struct {
 // Unwrap returns the underlying [raw.DDMatchLink].
 func (x *MatchLink) Unwrap() *raw.DDMatchLink { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MatchLink) ID() objc.ID { return x.inner.Ptr() }
 
-// MatchLinkFromID adopts an existing toll-free-bridged object id as a MatchLink (nil for 0).
+// MatchLinkFromID adopts an existing object pointer as a MatchLink (nil for 0).
 func MatchLinkFromID(id objc.ID) *MatchLink {
 	if id == 0 {
 		return nil

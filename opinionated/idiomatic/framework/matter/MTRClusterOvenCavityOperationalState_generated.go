@@ -21,11 +21,11 @@ type MTRClusterOvenCavityOperationalState struct {
 // Unwrap returns the underlying [raw.MTRClusterOvenCavityOperationalState].
 func (x *MTRClusterOvenCavityOperationalState) Unwrap() *raw.MTRClusterOvenCavityOperationalState { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRClusterOvenCavityOperationalState) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRClusterOvenCavityOperationalStateFromID adopts an existing toll-free-bridged object id as a MTRClusterOvenCavityOperationalState (nil for 0).
+// MTRClusterOvenCavityOperationalStateFromID adopts an existing object pointer as a MTRClusterOvenCavityOperationalState (nil for 0).
 func MTRClusterOvenCavityOperationalStateFromID(id objc.ID) *MTRClusterOvenCavityOperationalState {
 	if id == 0 {
 		return nil

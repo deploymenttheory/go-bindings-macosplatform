@@ -19,11 +19,11 @@ type PHQ9Assessment struct {
 // Unwrap returns the underlying [raw.HKPHQ9Assessment].
 func (x *PHQ9Assessment) Unwrap() *raw.HKPHQ9Assessment { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PHQ9Assessment) ID() objc.ID { return x.inner.Ptr() }
 
-// PHQ9AssessmentFromID adopts an existing toll-free-bridged object id as a PHQ9Assessment (nil for 0).
+// PHQ9AssessmentFromID adopts an existing object pointer as a PHQ9Assessment (nil for 0).
 func PHQ9AssessmentFromID(id objc.ID) *PHQ9Assessment {
 	if id == 0 {
 		return nil

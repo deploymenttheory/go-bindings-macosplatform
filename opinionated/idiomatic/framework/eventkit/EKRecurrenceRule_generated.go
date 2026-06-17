@@ -19,11 +19,11 @@ type RecurrenceRule struct {
 // Unwrap returns the underlying [raw.EKRecurrenceRule].
 func (x *RecurrenceRule) Unwrap() *raw.EKRecurrenceRule { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *RecurrenceRule) ID() objc.ID { return x.inner.Ptr() }
 
-// RecurrenceRuleFromID adopts an existing toll-free-bridged object id as a RecurrenceRule (nil for 0).
+// RecurrenceRuleFromID adopts an existing object pointer as a RecurrenceRule (nil for 0).
 func RecurrenceRuleFromID(id objc.ID) *RecurrenceRule {
 	if id == 0 {
 		return nil

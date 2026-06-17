@@ -21,11 +21,11 @@ type Selection struct {
 // Unwrap returns the underlying [raw.PDFSelection].
 func (x *Selection) Unwrap() *raw.PDFSelection { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Selection) ID() objc.ID { return x.inner.Ptr() }
 
-// SelectionFromID adopts an existing toll-free-bridged object id as a Selection (nil for 0).
+// SelectionFromID adopts an existing object pointer as a Selection (nil for 0).
 func SelectionFromID(id objc.ID) *Selection {
 	if id == 0 {
 		return nil

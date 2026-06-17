@@ -17,11 +17,11 @@ type ReplicatorConstraint struct {
 // Unwrap returns the underlying [raw.SCNReplicatorConstraint].
 func (x *ReplicatorConstraint) Unwrap() *raw.SCNReplicatorConstraint { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ReplicatorConstraint) ID() objc.ID { return x.inner.Ptr() }
 
-// ReplicatorConstraintFromID adopts an existing toll-free-bridged object id as a ReplicatorConstraint (nil for 0).
+// ReplicatorConstraintFromID adopts an existing object pointer as a ReplicatorConstraint (nil for 0).
 func ReplicatorConstraintFromID(id objc.ID) *ReplicatorConstraint {
 	if id == 0 {
 		return nil

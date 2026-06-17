@@ -17,11 +17,11 @@ type CommandQueueDescriptor struct {
 // Unwrap returns the underlying [raw.MTLCommandQueueDescriptor].
 func (x *CommandQueueDescriptor) Unwrap() *raw.MTLCommandQueueDescriptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CommandQueueDescriptor) ID() objc.ID { return x.inner.Ptr() }
 
-// CommandQueueDescriptorFromID adopts an existing toll-free-bridged object id as a CommandQueueDescriptor (nil for 0).
+// CommandQueueDescriptorFromID adopts an existing object pointer as a CommandQueueDescriptor (nil for 0).
 func CommandQueueDescriptorFromID(id objc.ID) *CommandQueueDescriptor {
 	if id == 0 {
 		return nil

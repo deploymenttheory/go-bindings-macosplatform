@@ -21,11 +21,11 @@ type MTRClusterDeviceEnergyManagementMode struct {
 // Unwrap returns the underlying [raw.MTRClusterDeviceEnergyManagementMode].
 func (x *MTRClusterDeviceEnergyManagementMode) Unwrap() *raw.MTRClusterDeviceEnergyManagementMode { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRClusterDeviceEnergyManagementMode) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRClusterDeviceEnergyManagementModeFromID adopts an existing toll-free-bridged object id as a MTRClusterDeviceEnergyManagementMode (nil for 0).
+// MTRClusterDeviceEnergyManagementModeFromID adopts an existing object pointer as a MTRClusterDeviceEnergyManagementMode (nil for 0).
 func MTRClusterDeviceEnergyManagementModeFromID(id objc.ID) *MTRClusterDeviceEnergyManagementMode {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type TermOfAddress struct {
 // Unwrap returns the underlying [raw.NSTermOfAddress].
 func (x *TermOfAddress) Unwrap() *raw.NSTermOfAddress { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *TermOfAddress) ID() objc.ID { return x.inner.Ptr() }
 
-// TermOfAddressFromID adopts an existing toll-free-bridged object id as a TermOfAddress (nil for 0).
+// TermOfAddressFromID adopts an existing object pointer as a TermOfAddress (nil for 0).
 func TermOfAddressFromID(id objc.ID) *TermOfAddress {
 	if id == 0 {
 		return nil

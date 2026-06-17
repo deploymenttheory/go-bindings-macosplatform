@@ -18,11 +18,11 @@ type MatchEmailAddress struct {
 // Unwrap returns the underlying [raw.DDMatchEmailAddress].
 func (x *MatchEmailAddress) Unwrap() *raw.DDMatchEmailAddress { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MatchEmailAddress) ID() objc.ID { return x.inner.Ptr() }
 
-// MatchEmailAddressFromID adopts an existing toll-free-bridged object id as a MatchEmailAddress (nil for 0).
+// MatchEmailAddressFromID adopts an existing object pointer as a MatchEmailAddress (nil for 0).
 func MatchEmailAddressFromID(id objc.ID) *MatchEmailAddress {
 	if id == 0 {
 		return nil

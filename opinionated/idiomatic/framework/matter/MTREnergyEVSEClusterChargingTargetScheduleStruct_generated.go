@@ -18,11 +18,11 @@ type MTREnergyEVSEClusterChargingTargetScheduleStruct struct {
 // Unwrap returns the underlying [raw.MTREnergyEVSEClusterChargingTargetScheduleStruct].
 func (x *MTREnergyEVSEClusterChargingTargetScheduleStruct) Unwrap() *raw.MTREnergyEVSEClusterChargingTargetScheduleStruct { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTREnergyEVSEClusterChargingTargetScheduleStruct) ID() objc.ID { return x.inner.Ptr() }
 
-// MTREnergyEVSEClusterChargingTargetScheduleStructFromID adopts an existing toll-free-bridged object id as a MTREnergyEVSEClusterChargingTargetScheduleStruct (nil for 0).
+// MTREnergyEVSEClusterChargingTargetScheduleStructFromID adopts an existing object pointer as a MTREnergyEVSEClusterChargingTargetScheduleStruct (nil for 0).
 func MTREnergyEVSEClusterChargingTargetScheduleStructFromID(id objc.ID) *MTREnergyEVSEClusterChargingTargetScheduleStruct {
 	if id == 0 {
 		return nil

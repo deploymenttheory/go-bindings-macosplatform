@@ -18,11 +18,11 @@ type StringDrawingContext struct {
 // Unwrap returns the underlying [raw.NSStringDrawingContext].
 func (x *StringDrawingContext) Unwrap() *raw.NSStringDrawingContext { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *StringDrawingContext) ID() objc.ID { return x.inner.Ptr() }
 
-// StringDrawingContextFromID adopts an existing toll-free-bridged object id as a StringDrawingContext (nil for 0).
+// StringDrawingContextFromID adopts an existing object pointer as a StringDrawingContext (nil for 0).
 func StringDrawingContextFromID(id objc.ID) *StringDrawingContext {
 	if id == 0 {
 		return nil

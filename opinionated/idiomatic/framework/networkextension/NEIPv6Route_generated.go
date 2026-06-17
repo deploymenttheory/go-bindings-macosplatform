@@ -19,11 +19,11 @@ type NEIPv6Route struct {
 // Unwrap returns the underlying [raw.NEIPv6Route].
 func (x *NEIPv6Route) Unwrap() *raw.NEIPv6Route { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NEIPv6Route) ID() objc.ID { return x.inner.Ptr() }
 
-// NEIPv6RouteFromID adopts an existing toll-free-bridged object id as a NEIPv6Route (nil for 0).
+// NEIPv6RouteFromID adopts an existing object pointer as a NEIPv6Route (nil for 0).
 func NEIPv6RouteFromID(id objc.ID) *NEIPv6Route {
 	if id == 0 {
 		return nil

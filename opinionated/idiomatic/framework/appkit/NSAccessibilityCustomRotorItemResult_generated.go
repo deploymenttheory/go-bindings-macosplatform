@@ -19,11 +19,11 @@ type AccessibilityCustomRotorItemResult struct {
 // Unwrap returns the underlying [raw.NSAccessibilityCustomRotorItemResult].
 func (x *AccessibilityCustomRotorItemResult) Unwrap() *raw.NSAccessibilityCustomRotorItemResult { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AccessibilityCustomRotorItemResult) ID() objc.ID { return x.inner.Ptr() }
 
-// AccessibilityCustomRotorItemResultFromID adopts an existing toll-free-bridged object id as a AccessibilityCustomRotorItemResult (nil for 0).
+// AccessibilityCustomRotorItemResultFromID adopts an existing object pointer as a AccessibilityCustomRotorItemResult (nil for 0).
 func AccessibilityCustomRotorItemResultFromID(id objc.ID) *AccessibilityCustomRotorItemResult {
 	if id == 0 {
 		return nil

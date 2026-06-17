@@ -20,11 +20,11 @@ type VideoNode struct {
 // Unwrap returns the underlying [raw.SKVideoNode].
 func (x *VideoNode) Unwrap() *raw.SKVideoNode { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *VideoNode) ID() objc.ID { return x.inner.Ptr() }
 
-// VideoNodeFromID adopts an existing toll-free-bridged object id as a VideoNode (nil for 0).
+// VideoNodeFromID adopts an existing object pointer as a VideoNode (nil for 0).
 func VideoNodeFromID(id objc.ID) *VideoNode {
 	if id == 0 {
 		return nil

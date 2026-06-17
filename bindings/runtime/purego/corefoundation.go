@@ -9,21 +9,21 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// This file provides the CoreFoundation toll-free-bridging surface the idiomatic
-// layer needs to use C APIs (Security keychain, etc.) without dropping to raw
-// FFI: passing objects as CFTypeRef, dereferencing CF constant symbols, and
-// normalising OSStatus return codes. CoreFoundation and Foundation objects are
-// toll-free bridged, so a CFTypeRef and an objc.ID are the same pointer.
+// This file converts between the two ways the same pointer is spelled when an
+// idiomatic wrapper calls a CoreFoundation/C API: a CFTypeRef (an opaque C
+// pointer) and an Objective-C object pointer (objc.ID) hold the identical
+// address at runtime, and several CoreFoundation types are the same objects as
+// their Foundation classes (CFString/NSString, CFDictionary/NSDictionary,
+// CFData/NSData, …). The helpers here reinterpret an address between those two
+// representations and normalise OSStatus result codes; no copying occurs.
 
-// CFRef passes an ObjC/CoreFoundation object id to a C function expecting a
-// CFTypeRef-style argument (an opaque pointer). It is the inverse of receiving a
-// CFTypeRef back as an objc.ID.
+// CFRef reinterprets an objc.ID as the CFTypeRef pointer a C function parameter
+// expects (the same address, typed as an opaque C pointer).
 func CFRef(id objc.ID) unsafe.Pointer { return ptrFromAddr(uintptr(id)) }
 
-// CFConstant dereferences a CoreFoundation constant's symbol address — as
-// returned by the generated extern accessors for `const CF<Type>Ref` globals
-// such as kSecClass — to the CFTypeRef value it points at, typed as an objc.ID.
-// Returns 0 for a nil address.
+// CFConstant dereferences a `const CF<Type>Ref` global's symbol address — as
+// returned by the generated extern accessors for constants such as kSecClass —
+// to the pointer it holds, returned as an objc.ID. Returns 0 for a nil address.
 func CFConstant(symbolAddr uintptr) objc.ID {
 	if symbolAddr == 0 {
 		return 0
@@ -31,11 +31,21 @@ func CFConstant(symbolAddr uintptr) objc.ID {
 	return *(*objc.ID)(ptrFromAddr(symbolAddr))
 }
 
+// CFString reads a CFStringRef's UTF-8 bytes into a Go string by sending it the
+// NSString -UTF8String message (a CFStringRef is an NSString). Returns "" for a
+// nil reference.
+func CFString(cfStringRef unsafe.Pointer) string {
+	if cfStringRef == nil {
+		return ""
+	}
+	return GoString(objc.ID(uintptr(cfStringRef)))
+}
+
 // OSStatus is a Carbon/CoreServices result code (SInt32, e.g. errSecSuccess=0,
-// errSecItemNotFound=-25300). C functions returning OSStatus are bridged as a Go
-// int and the value arrives zero-extended, so a negative code appears as a large
-// positive number (-25300 → 4294941996). Construct via [NewOSStatus] to restore
-// the signed value before comparing.
+// errSecItemNotFound=-25300). A C function returning OSStatus is called through
+// purego as a Go int, and the 32-bit value arrives zero-extended, so a negative
+// code appears as a large positive number (-25300 → 4294941996). Construct via
+// [NewOSStatus] to restore the signed value before comparing.
 type OSStatus int32
 
 // NewOSStatus normalises a raw bridged OSStatus return (a zero-extended Go int)

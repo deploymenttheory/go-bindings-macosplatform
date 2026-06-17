@@ -17,11 +17,11 @@ type MIDIChannelPressureEvent struct {
 // Unwrap returns the underlying [raw.AVMIDIChannelPressureEvent].
 func (x *MIDIChannelPressureEvent) Unwrap() *raw.AVMIDIChannelPressureEvent { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MIDIChannelPressureEvent) ID() objc.ID { return x.inner.Ptr() }
 
-// MIDIChannelPressureEventFromID adopts an existing toll-free-bridged object id as a MIDIChannelPressureEvent (nil for 0).
+// MIDIChannelPressureEventFromID adopts an existing object pointer as a MIDIChannelPressureEvent (nil for 0).
 func MIDIChannelPressureEventFromID(id objc.ID) *MIDIChannelPressureEvent {
 	if id == 0 {
 		return nil

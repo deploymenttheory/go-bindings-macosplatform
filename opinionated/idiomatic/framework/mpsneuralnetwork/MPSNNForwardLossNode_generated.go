@@ -18,11 +18,11 @@ type NNForwardLossNode struct {
 // Unwrap returns the underlying [raw.MPSNNForwardLossNode].
 func (x *NNForwardLossNode) Unwrap() *raw.MPSNNForwardLossNode { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NNForwardLossNode) ID() objc.ID { return x.inner.Ptr() }
 
-// NNForwardLossNodeFromID adopts an existing toll-free-bridged object id as a NNForwardLossNode (nil for 0).
+// NNForwardLossNodeFromID adopts an existing object pointer as a NNForwardLossNode (nil for 0).
 func NNForwardLossNodeFromID(id objc.ID) *NNForwardLossNode {
 	if id == 0 {
 		return nil

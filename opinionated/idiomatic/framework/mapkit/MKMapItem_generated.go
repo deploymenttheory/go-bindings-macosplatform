@@ -20,11 +20,11 @@ type MapItem struct {
 // Unwrap returns the underlying [raw.MKMapItem].
 func (x *MapItem) Unwrap() *raw.MKMapItem { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MapItem) ID() objc.ID { return x.inner.Ptr() }
 
-// MapItemFromID adopts an existing toll-free-bridged object id as a MapItem (nil for 0).
+// MapItemFromID adopts an existing object pointer as a MapItem (nil for 0).
 func MapItemFromID(id objc.ID) *MapItem {
 	if id == 0 {
 		return nil

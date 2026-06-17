@@ -17,11 +17,11 @@ type MixerDefinition struct {
 // Unwrap returns the underlying [raw.PHASEMixerDefinition].
 func (x *MixerDefinition) Unwrap() *raw.PHASEMixerDefinition { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MixerDefinition) ID() objc.ID { return x.inner.Ptr() }
 
-// MixerDefinitionFromID adopts an existing toll-free-bridged object id as a MixerDefinition (nil for 0).
+// MixerDefinitionFromID adopts an existing object pointer as a MixerDefinition (nil for 0).
 func MixerDefinitionFromID(id objc.ID) *MixerDefinition {
 	if id == 0 {
 		return nil

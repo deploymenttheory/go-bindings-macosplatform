@@ -19,11 +19,11 @@ type CaptionGrouper struct {
 // Unwrap returns the underlying [raw.AVCaptionGrouper].
 func (x *CaptionGrouper) Unwrap() *raw.AVCaptionGrouper { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CaptionGrouper) ID() objc.ID { return x.inner.Ptr() }
 
-// CaptionGrouperFromID adopts an existing toll-free-bridged object id as a CaptionGrouper (nil for 0).
+// CaptionGrouperFromID adopts an existing object pointer as a CaptionGrouper (nil for 0).
 func CaptionGrouperFromID(id objc.ID) *CaptionGrouper {
 	if id == 0 {
 		return nil

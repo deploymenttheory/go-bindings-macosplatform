@@ -21,11 +21,11 @@ type NEVPNManager struct {
 // Unwrap returns the underlying [raw.NEVPNManager].
 func (x *NEVPNManager) Unwrap() *raw.NEVPNManager { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NEVPNManager) ID() objc.ID { return x.inner.Ptr() }
 
-// NEVPNManagerFromID adopts an existing toll-free-bridged object id as a NEVPNManager (nil for 0).
+// NEVPNManagerFromID adopts an existing object pointer as a NEVPNManager (nil for 0).
 func NEVPNManagerFromID(id objc.ID) *NEVPNManager {
 	if id == 0 {
 		return nil

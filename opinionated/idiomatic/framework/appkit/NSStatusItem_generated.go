@@ -20,11 +20,11 @@ type StatusItem struct {
 // Unwrap returns the underlying [raw.NSStatusItem].
 func (x *StatusItem) Unwrap() *raw.NSStatusItem { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *StatusItem) ID() objc.ID { return x.inner.Ptr() }
 
-// StatusItemFromID adopts an existing toll-free-bridged object id as a StatusItem (nil for 0).
+// StatusItemFromID adopts an existing object pointer as a StatusItem (nil for 0).
 func StatusItemFromID(id objc.ID) *StatusItem {
 	if id == 0 {
 		return nil

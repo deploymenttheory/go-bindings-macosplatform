@@ -17,11 +17,11 @@ type DictionaryConstraint struct {
 // Unwrap returns the underlying [raw.MLDictionaryConstraint].
 func (x *DictionaryConstraint) Unwrap() *raw.MLDictionaryConstraint { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DictionaryConstraint) ID() objc.ID { return x.inner.Ptr() }
 
-// DictionaryConstraintFromID adopts an existing toll-free-bridged object id as a DictionaryConstraint (nil for 0).
+// DictionaryConstraintFromID adopts an existing object pointer as a DictionaryConstraint (nil for 0).
 func DictionaryConstraintFromID(id objc.ID) *DictionaryConstraint {
 	if id == 0 {
 		return nil

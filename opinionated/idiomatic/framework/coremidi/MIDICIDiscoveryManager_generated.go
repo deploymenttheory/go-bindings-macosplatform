@@ -18,11 +18,11 @@ type CIDiscoveryManager struct {
 // Unwrap returns the underlying [raw.MIDICIDiscoveryManager].
 func (x *CIDiscoveryManager) Unwrap() *raw.MIDICIDiscoveryManager { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CIDiscoveryManager) ID() objc.ID { return x.inner.Ptr() }
 
-// CIDiscoveryManagerFromID adopts an existing toll-free-bridged object id as a CIDiscoveryManager (nil for 0).
+// CIDiscoveryManagerFromID adopts an existing object pointer as a CIDiscoveryManager (nil for 0).
 func CIDiscoveryManagerFromID(id objc.ID) *CIDiscoveryManager {
 	if id == 0 {
 		return nil

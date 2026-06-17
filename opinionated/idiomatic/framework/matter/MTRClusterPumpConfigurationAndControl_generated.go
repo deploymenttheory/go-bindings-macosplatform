@@ -18,11 +18,11 @@ type MTRClusterPumpConfigurationAndControl struct {
 // Unwrap returns the underlying [raw.MTRClusterPumpConfigurationAndControl].
 func (x *MTRClusterPumpConfigurationAndControl) Unwrap() *raw.MTRClusterPumpConfigurationAndControl { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRClusterPumpConfigurationAndControl) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRClusterPumpConfigurationAndControlFromID adopts an existing toll-free-bridged object id as a MTRClusterPumpConfigurationAndControl (nil for 0).
+// MTRClusterPumpConfigurationAndControlFromID adopts an existing object pointer as a MTRClusterPumpConfigurationAndControl (nil for 0).
 func MTRClusterPumpConfigurationAndControlFromID(id objc.ID) *MTRClusterPumpConfigurationAndControl {
 	if id == 0 {
 		return nil

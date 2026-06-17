@@ -19,11 +19,11 @@ type MetricPlayerItemLikelyToKeepUpEvent struct {
 // Unwrap returns the underlying [raw.AVMetricPlayerItemLikelyToKeepUpEvent].
 func (x *MetricPlayerItemLikelyToKeepUpEvent) Unwrap() *raw.AVMetricPlayerItemLikelyToKeepUpEvent { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MetricPlayerItemLikelyToKeepUpEvent) ID() objc.ID { return x.inner.Ptr() }
 
-// MetricPlayerItemLikelyToKeepUpEventFromID adopts an existing toll-free-bridged object id as a MetricPlayerItemLikelyToKeepUpEvent (nil for 0).
+// MetricPlayerItemLikelyToKeepUpEventFromID adopts an existing object pointer as a MetricPlayerItemLikelyToKeepUpEvent (nil for 0).
 func MetricPlayerItemLikelyToKeepUpEventFromID(id objc.ID) *MetricPlayerItemLikelyToKeepUpEvent {
 	if id == 0 {
 		return nil

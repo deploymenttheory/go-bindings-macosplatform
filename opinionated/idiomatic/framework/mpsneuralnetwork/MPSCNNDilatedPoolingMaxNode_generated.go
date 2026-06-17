@@ -17,11 +17,11 @@ type CNNDilatedPoolingMaxNode struct {
 // Unwrap returns the underlying [raw.MPSCNNDilatedPoolingMaxNode].
 func (x *CNNDilatedPoolingMaxNode) Unwrap() *raw.MPSCNNDilatedPoolingMaxNode { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CNNDilatedPoolingMaxNode) ID() objc.ID { return x.inner.Ptr() }
 
-// CNNDilatedPoolingMaxNodeFromID adopts an existing toll-free-bridged object id as a CNNDilatedPoolingMaxNode (nil for 0).
+// CNNDilatedPoolingMaxNodeFromID adopts an existing object pointer as a CNNDilatedPoolingMaxNode (nil for 0).
 func CNNDilatedPoolingMaxNodeFromID(id objc.ID) *CNNDilatedPoolingMaxNode {
 	if id == 0 {
 		return nil

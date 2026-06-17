@@ -18,11 +18,11 @@ type AuthorizationPublicKeyCredentialLargeBlobAssertionOutput struct {
 // Unwrap returns the underlying [raw.ASAuthorizationPublicKeyCredentialLargeBlobAssertionOutput].
 func (x *AuthorizationPublicKeyCredentialLargeBlobAssertionOutput) Unwrap() *raw.ASAuthorizationPublicKeyCredentialLargeBlobAssertionOutput { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AuthorizationPublicKeyCredentialLargeBlobAssertionOutput) ID() objc.ID { return x.inner.Ptr() }
 
-// AuthorizationPublicKeyCredentialLargeBlobAssertionOutputFromID adopts an existing toll-free-bridged object id as a AuthorizationPublicKeyCredentialLargeBlobAssertionOutput (nil for 0).
+// AuthorizationPublicKeyCredentialLargeBlobAssertionOutputFromID adopts an existing object pointer as a AuthorizationPublicKeyCredentialLargeBlobAssertionOutput (nil for 0).
 func AuthorizationPublicKeyCredentialLargeBlobAssertionOutputFromID(id objc.ID) *AuthorizationPublicKeyCredentialLargeBlobAssertionOutput {
 	if id == 0 {
 		return nil

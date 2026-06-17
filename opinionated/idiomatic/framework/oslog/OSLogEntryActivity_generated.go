@@ -17,11 +17,11 @@ type LogEntryActivity struct {
 // Unwrap returns the underlying [raw.OSLogEntryActivity].
 func (x *LogEntryActivity) Unwrap() *raw.OSLogEntryActivity { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *LogEntryActivity) ID() objc.ID { return x.inner.Ptr() }
 
-// LogEntryActivityFromID adopts an existing toll-free-bridged object id as a LogEntryActivity (nil for 0).
+// LogEntryActivityFromID adopts an existing object pointer as a LogEntryActivity (nil for 0).
 func LogEntryActivityFromID(id objc.ID) *LogEntryActivity {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type ModelStructureNeuralNetworkLayer struct {
 // Unwrap returns the underlying [raw.MLModelStructureNeuralNetworkLayer].
 func (x *ModelStructureNeuralNetworkLayer) Unwrap() *raw.MLModelStructureNeuralNetworkLayer { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ModelStructureNeuralNetworkLayer) ID() objc.ID { return x.inner.Ptr() }
 
-// ModelStructureNeuralNetworkLayerFromID adopts an existing toll-free-bridged object id as a ModelStructureNeuralNetworkLayer (nil for 0).
+// ModelStructureNeuralNetworkLayerFromID adopts an existing object pointer as a ModelStructureNeuralNetworkLayer (nil for 0).
 func ModelStructureNeuralNetworkLayerFromID(id objc.ID) *ModelStructureNeuralNetworkLayer {
 	if id == 0 {
 		return nil

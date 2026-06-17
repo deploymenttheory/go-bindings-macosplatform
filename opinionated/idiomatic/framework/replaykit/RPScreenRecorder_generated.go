@@ -22,11 +22,11 @@ type ScreenRecorder struct {
 // Unwrap returns the underlying [raw.RPScreenRecorder].
 func (x *ScreenRecorder) Unwrap() *raw.RPScreenRecorder { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ScreenRecorder) ID() objc.ID { return x.inner.Ptr() }
 
-// ScreenRecorderFromID adopts an existing toll-free-bridged object id as a ScreenRecorder (nil for 0).
+// ScreenRecorderFromID adopts an existing object pointer as a ScreenRecorder (nil for 0).
 func ScreenRecorderFromID(id objc.ID) *ScreenRecorder {
 	if id == 0 {
 		return nil

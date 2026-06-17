@@ -17,11 +17,11 @@ type SymbolAppearEffect struct {
 // Unwrap returns the underlying [raw.NSSymbolAppearEffect].
 func (x *SymbolAppearEffect) Unwrap() *raw.NSSymbolAppearEffect { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SymbolAppearEffect) ID() objc.ID { return x.inner.Ptr() }
 
-// SymbolAppearEffectFromID adopts an existing toll-free-bridged object id as a SymbolAppearEffect (nil for 0).
+// SymbolAppearEffectFromID adopts an existing object pointer as a SymbolAppearEffect (nil for 0).
 func SymbolAppearEffectFromID(id objc.ID) *SymbolAppearEffect {
 	if id == 0 {
 		return nil

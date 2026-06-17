@@ -21,11 +21,11 @@ type NNPadGradient struct {
 // Unwrap returns the underlying [raw.MPSNNPadGradient].
 func (x *NNPadGradient) Unwrap() *raw.MPSNNPadGradient { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NNPadGradient) ID() objc.ID { return x.inner.Ptr() }
 
-// NNPadGradientFromID adopts an existing toll-free-bridged object id as a NNPadGradient (nil for 0).
+// NNPadGradientFromID adopts an existing object pointer as a NNPadGradient (nil for 0).
 func NNPadGradientFromID(id objc.ID) *NNPadGradient {
 	if id == 0 {
 		return nil

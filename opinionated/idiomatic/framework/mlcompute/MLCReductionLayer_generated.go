@@ -19,11 +19,11 @@ type ReductionLayer struct {
 // Unwrap returns the underlying [raw.MLCReductionLayer].
 func (x *ReductionLayer) Unwrap() *raw.MLCReductionLayer { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ReductionLayer) ID() objc.ID { return x.inner.Ptr() }
 
-// ReductionLayerFromID adopts an existing toll-free-bridged object id as a ReductionLayer (nil for 0).
+// ReductionLayerFromID adopts an existing object pointer as a ReductionLayer (nil for 0).
 func ReductionLayerFromID(id objc.ID) *ReductionLayer {
 	if id == 0 {
 		return nil

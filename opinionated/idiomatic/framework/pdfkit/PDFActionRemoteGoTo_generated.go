@@ -19,11 +19,11 @@ type ActionRemoteGoTo struct {
 // Unwrap returns the underlying [raw.PDFActionRemoteGoTo].
 func (x *ActionRemoteGoTo) Unwrap() *raw.PDFActionRemoteGoTo { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ActionRemoteGoTo) ID() objc.ID { return x.inner.Ptr() }
 
-// ActionRemoteGoToFromID adopts an existing toll-free-bridged object id as a ActionRemoteGoTo (nil for 0).
+// ActionRemoteGoToFromID adopts an existing object pointer as a ActionRemoteGoTo (nil for 0).
 func ActionRemoteGoToFromID(id objc.ID) *ActionRemoteGoTo {
 	if id == 0 {
 		return nil

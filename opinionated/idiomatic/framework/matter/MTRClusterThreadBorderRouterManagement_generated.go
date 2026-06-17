@@ -21,11 +21,11 @@ type MTRClusterThreadBorderRouterManagement struct {
 // Unwrap returns the underlying [raw.MTRClusterThreadBorderRouterManagement].
 func (x *MTRClusterThreadBorderRouterManagement) Unwrap() *raw.MTRClusterThreadBorderRouterManagement { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRClusterThreadBorderRouterManagement) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRClusterThreadBorderRouterManagementFromID adopts an existing toll-free-bridged object id as a MTRClusterThreadBorderRouterManagement (nil for 0).
+// MTRClusterThreadBorderRouterManagementFromID adopts an existing object pointer as a MTRClusterThreadBorderRouterManagement (nil for 0).
 func MTRClusterThreadBorderRouterManagementFromID(id objc.ID) *MTRClusterThreadBorderRouterManagement {
 	if id == 0 {
 		return nil

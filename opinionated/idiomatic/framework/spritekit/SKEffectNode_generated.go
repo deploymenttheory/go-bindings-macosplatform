@@ -18,11 +18,11 @@ type EffectNode struct {
 // Unwrap returns the underlying [raw.SKEffectNode].
 func (x *EffectNode) Unwrap() *raw.SKEffectNode { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *EffectNode) ID() objc.ID { return x.inner.Ptr() }
 
-// EffectNodeFromID adopts an existing toll-free-bridged object id as a EffectNode (nil for 0).
+// EffectNodeFromID adopts an existing object pointer as a EffectNode (nil for 0).
 func EffectNodeFromID(id objc.ID) *EffectNode {
 	if id == 0 {
 		return nil

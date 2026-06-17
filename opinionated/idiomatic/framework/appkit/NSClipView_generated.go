@@ -19,11 +19,11 @@ type ClipView struct {
 // Unwrap returns the underlying [raw.NSClipView].
 func (x *ClipView) Unwrap() *raw.NSClipView { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ClipView) ID() objc.ID { return x.inner.Ptr() }
 
-// ClipViewFromID adopts an existing toll-free-bridged object id as a ClipView (nil for 0).
+// ClipViewFromID adopts an existing object pointer as a ClipView (nil for 0).
 func ClipViewFromID(id objc.ID) *ClipView {
 	if id == 0 {
 		return nil

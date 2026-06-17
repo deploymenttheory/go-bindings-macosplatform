@@ -19,11 +19,11 @@ type MTRClusterEthernetNetworkDiagnostics struct {
 // Unwrap returns the underlying [raw.MTRClusterEthernetNetworkDiagnostics].
 func (x *MTRClusterEthernetNetworkDiagnostics) Unwrap() *raw.MTRClusterEthernetNetworkDiagnostics { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRClusterEthernetNetworkDiagnostics) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRClusterEthernetNetworkDiagnosticsFromID adopts an existing toll-free-bridged object id as a MTRClusterEthernetNetworkDiagnostics (nil for 0).
+// MTRClusterEthernetNetworkDiagnosticsFromID adopts an existing object pointer as a MTRClusterEthernetNetworkDiagnostics (nil for 0).
 func MTRClusterEthernetNetworkDiagnosticsFromID(id objc.ID) *MTRClusterEthernetNetworkDiagnostics {
 	if id == 0 {
 		return nil

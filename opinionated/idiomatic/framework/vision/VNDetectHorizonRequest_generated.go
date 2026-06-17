@@ -17,11 +17,11 @@ type DetectHorizonRequest struct {
 // Unwrap returns the underlying [raw.VNDetectHorizonRequest].
 func (x *DetectHorizonRequest) Unwrap() *raw.VNDetectHorizonRequest { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DetectHorizonRequest) ID() objc.ID { return x.inner.Ptr() }
 
-// DetectHorizonRequestFromID adopts an existing toll-free-bridged object id as a DetectHorizonRequest (nil for 0).
+// DetectHorizonRequestFromID adopts an existing object pointer as a DetectHorizonRequest (nil for 0).
 func DetectHorizonRequestFromID(id objc.ID) *DetectHorizonRequest {
 	if id == 0 {
 		return nil

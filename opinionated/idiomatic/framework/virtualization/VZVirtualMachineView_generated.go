@@ -17,11 +17,11 @@ type VirtualMachineView struct {
 // Unwrap returns the underlying [raw.VZVirtualMachineView].
 func (x *VirtualMachineView) Unwrap() *raw.VZVirtualMachineView { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *VirtualMachineView) ID() objc.ID { return x.inner.Ptr() }
 
-// VirtualMachineViewFromID adopts an existing toll-free-bridged object id as a VirtualMachineView (nil for 0).
+// VirtualMachineViewFromID adopts an existing object pointer as a VirtualMachineView (nil for 0).
 func VirtualMachineViewFromID(id objc.ID) *VirtualMachineView {
 	if id == 0 {
 		return nil

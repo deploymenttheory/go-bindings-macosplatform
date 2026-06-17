@@ -21,11 +21,11 @@ type GeocodingRequest struct {
 // Unwrap returns the underlying [raw.MKGeocodingRequest].
 func (x *GeocodingRequest) Unwrap() *raw.MKGeocodingRequest { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *GeocodingRequest) ID() objc.ID { return x.inner.Ptr() }
 
-// GeocodingRequestFromID adopts an existing toll-free-bridged object id as a GeocodingRequest (nil for 0).
+// GeocodingRequestFromID adopts an existing object pointer as a GeocodingRequest (nil for 0).
 func GeocodingRequestFromID(id objc.ID) *GeocodingRequest {
 	if id == 0 {
 		return nil

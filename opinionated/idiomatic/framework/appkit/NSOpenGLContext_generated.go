@@ -18,11 +18,11 @@ type OpenGLContext struct {
 // Unwrap returns the underlying [raw.NSOpenGLContext].
 func (x *OpenGLContext) Unwrap() *raw.NSOpenGLContext { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *OpenGLContext) ID() objc.ID { return x.inner.Ptr() }
 
-// OpenGLContextFromID adopts an existing toll-free-bridged object id as a OpenGLContext (nil for 0).
+// OpenGLContextFromID adopts an existing object pointer as a OpenGLContext (nil for 0).
 func OpenGLContextFromID(id objc.ID) *OpenGLContext {
 	if id == 0 {
 		return nil

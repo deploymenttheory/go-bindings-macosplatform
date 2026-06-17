@@ -18,11 +18,11 @@ type DatePickerCell struct {
 // Unwrap returns the underlying [raw.NSDatePickerCell].
 func (x *DatePickerCell) Unwrap() *raw.NSDatePickerCell { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DatePickerCell) ID() objc.ID { return x.inner.Ptr() }
 
-// DatePickerCellFromID adopts an existing toll-free-bridged object id as a DatePickerCell (nil for 0).
+// DatePickerCellFromID adopts an existing object pointer as a DatePickerCell (nil for 0).
 func DatePickerCellFromID(id objc.ID) *DatePickerCell {
 	if id == 0 {
 		return nil

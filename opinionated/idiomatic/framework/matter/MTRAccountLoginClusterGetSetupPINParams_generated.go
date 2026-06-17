@@ -19,11 +19,11 @@ type MTRAccountLoginClusterGetSetupPINParams struct {
 // Unwrap returns the underlying [raw.MTRAccountLoginClusterGetSetupPINParams].
 func (x *MTRAccountLoginClusterGetSetupPINParams) Unwrap() *raw.MTRAccountLoginClusterGetSetupPINParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRAccountLoginClusterGetSetupPINParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRAccountLoginClusterGetSetupPINParamsFromID adopts an existing toll-free-bridged object id as a MTRAccountLoginClusterGetSetupPINParams (nil for 0).
+// MTRAccountLoginClusterGetSetupPINParamsFromID adopts an existing object pointer as a MTRAccountLoginClusterGetSetupPINParams (nil for 0).
 func MTRAccountLoginClusterGetSetupPINParamsFromID(id objc.ID) *MTRAccountLoginClusterGetSetupPINParams {
 	if id == 0 {
 		return nil

@@ -19,11 +19,11 @@ type Peripheral struct {
 // Unwrap returns the underlying [raw.CBPeripheral].
 func (x *Peripheral) Unwrap() *raw.CBPeripheral { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Peripheral) ID() objc.ID { return x.inner.Ptr() }
 
-// PeripheralFromID adopts an existing toll-free-bridged object id as a Peripheral (nil for 0).
+// PeripheralFromID adopts an existing object pointer as a Peripheral (nil for 0).
 func PeripheralFromID(id objc.ID) *Peripheral {
 	if id == 0 {
 		return nil

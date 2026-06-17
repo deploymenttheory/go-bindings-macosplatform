@@ -17,11 +17,11 @@ type SyncEngineWillFetchChangesEvent struct {
 // Unwrap returns the underlying [raw.CKSyncEngineWillFetchChangesEvent].
 func (x *SyncEngineWillFetchChangesEvent) Unwrap() *raw.CKSyncEngineWillFetchChangesEvent { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SyncEngineWillFetchChangesEvent) ID() objc.ID { return x.inner.Ptr() }
 
-// SyncEngineWillFetchChangesEventFromID adopts an existing toll-free-bridged object id as a SyncEngineWillFetchChangesEvent (nil for 0).
+// SyncEngineWillFetchChangesEventFromID adopts an existing object pointer as a SyncEngineWillFetchChangesEvent (nil for 0).
 func SyncEngineWillFetchChangesEventFromID(id objc.ID) *SyncEngineWillFetchChangesEvent {
 	if id == 0 {
 		return nil

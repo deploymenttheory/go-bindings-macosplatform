@@ -20,11 +20,11 @@ type MTRGroupsClusterRemoveGroupResponseParams struct {
 // Unwrap returns the underlying [raw.MTRGroupsClusterRemoveGroupResponseParams].
 func (x *MTRGroupsClusterRemoveGroupResponseParams) Unwrap() *raw.MTRGroupsClusterRemoveGroupResponseParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRGroupsClusterRemoveGroupResponseParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRGroupsClusterRemoveGroupResponseParamsFromID adopts an existing toll-free-bridged object id as a MTRGroupsClusterRemoveGroupResponseParams (nil for 0).
+// MTRGroupsClusterRemoveGroupResponseParamsFromID adopts an existing object pointer as a MTRGroupsClusterRemoveGroupResponseParams (nil for 0).
 func MTRGroupsClusterRemoveGroupResponseParamsFromID(id objc.ID) *MTRGroupsClusterRemoveGroupResponseParams {
 	if id == 0 {
 		return nil

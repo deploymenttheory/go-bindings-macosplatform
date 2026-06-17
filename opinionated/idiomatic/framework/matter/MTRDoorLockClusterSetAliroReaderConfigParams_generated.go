@@ -18,11 +18,11 @@ type MTRDoorLockClusterSetAliroReaderConfigParams struct {
 // Unwrap returns the underlying [raw.MTRDoorLockClusterSetAliroReaderConfigParams].
 func (x *MTRDoorLockClusterSetAliroReaderConfigParams) Unwrap() *raw.MTRDoorLockClusterSetAliroReaderConfigParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRDoorLockClusterSetAliroReaderConfigParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRDoorLockClusterSetAliroReaderConfigParamsFromID adopts an existing toll-free-bridged object id as a MTRDoorLockClusterSetAliroReaderConfigParams (nil for 0).
+// MTRDoorLockClusterSetAliroReaderConfigParamsFromID adopts an existing object pointer as a MTRDoorLockClusterSetAliroReaderConfigParams (nil for 0).
 func MTRDoorLockClusterSetAliroReaderConfigParamsFromID(id objc.ID) *MTRDoorLockClusterSetAliroReaderConfigParams {
 	if id == 0 {
 		return nil

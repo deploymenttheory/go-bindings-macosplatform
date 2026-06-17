@@ -19,11 +19,11 @@ type ReshapeLayer struct {
 // Unwrap returns the underlying [raw.MLCReshapeLayer].
 func (x *ReshapeLayer) Unwrap() *raw.MLCReshapeLayer { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ReshapeLayer) ID() objc.ID { return x.inner.Ptr() }
 
-// ReshapeLayerFromID adopts an existing toll-free-bridged object id as a ReshapeLayer (nil for 0).
+// ReshapeLayerFromID adopts an existing object pointer as a ReshapeLayer (nil for 0).
 func ReshapeLayerFromID(id objc.ID) *ReshapeLayer {
 	if id == 0 {
 		return nil

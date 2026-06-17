@@ -17,11 +17,11 @@ type AuthorizationPublicKeyCredentialLargeBlobRegistrationInput struct {
 // Unwrap returns the underlying [raw.ASAuthorizationPublicKeyCredentialLargeBlobRegistrationInput].
 func (x *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput) Unwrap() *raw.ASAuthorizationPublicKeyCredentialLargeBlobRegistrationInput { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput) ID() objc.ID { return x.inner.Ptr() }
 
-// AuthorizationPublicKeyCredentialLargeBlobRegistrationInputFromID adopts an existing toll-free-bridged object id as a AuthorizationPublicKeyCredentialLargeBlobRegistrationInput (nil for 0).
+// AuthorizationPublicKeyCredentialLargeBlobRegistrationInputFromID adopts an existing object pointer as a AuthorizationPublicKeyCredentialLargeBlobRegistrationInput (nil for 0).
 func AuthorizationPublicKeyCredentialLargeBlobRegistrationInputFromID(id objc.ID) *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput {
 	if id == 0 {
 		return nil

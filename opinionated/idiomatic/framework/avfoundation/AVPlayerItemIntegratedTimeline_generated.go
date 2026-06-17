@@ -19,11 +19,11 @@ type PlayerItemIntegratedTimeline struct {
 // Unwrap returns the underlying [raw.AVPlayerItemIntegratedTimeline].
 func (x *PlayerItemIntegratedTimeline) Unwrap() *raw.AVPlayerItemIntegratedTimeline { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PlayerItemIntegratedTimeline) ID() objc.ID { return x.inner.Ptr() }
 
-// PlayerItemIntegratedTimelineFromID adopts an existing toll-free-bridged object id as a PlayerItemIntegratedTimeline (nil for 0).
+// PlayerItemIntegratedTimelineFromID adopts an existing object pointer as a PlayerItemIntegratedTimeline (nil for 0).
 func PlayerItemIntegratedTimelineFromID(id objc.ID) *PlayerItemIntegratedTimeline {
 	if id == 0 {
 		return nil

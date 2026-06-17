@@ -17,11 +17,11 @@ type NNReductionFeatureChannelsMeanNode struct {
 // Unwrap returns the underlying [raw.MPSNNReductionFeatureChannelsMeanNode].
 func (x *NNReductionFeatureChannelsMeanNode) Unwrap() *raw.MPSNNReductionFeatureChannelsMeanNode { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NNReductionFeatureChannelsMeanNode) ID() objc.ID { return x.inner.Ptr() }
 
-// NNReductionFeatureChannelsMeanNodeFromID adopts an existing toll-free-bridged object id as a NNReductionFeatureChannelsMeanNode (nil for 0).
+// NNReductionFeatureChannelsMeanNodeFromID adopts an existing object pointer as a NNReductionFeatureChannelsMeanNode (nil for 0).
 func NNReductionFeatureChannelsMeanNodeFromID(id objc.ID) *NNReductionFeatureChannelsMeanNode {
 	if id == 0 {
 		return nil

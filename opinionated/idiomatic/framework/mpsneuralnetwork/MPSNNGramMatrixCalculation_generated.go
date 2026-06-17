@@ -19,11 +19,11 @@ type NNGramMatrixCalculation struct {
 // Unwrap returns the underlying [raw.MPSNNGramMatrixCalculation].
 func (x *NNGramMatrixCalculation) Unwrap() *raw.MPSNNGramMatrixCalculation { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NNGramMatrixCalculation) ID() objc.ID { return x.inner.Ptr() }
 
-// NNGramMatrixCalculationFromID adopts an existing toll-free-bridged object id as a NNGramMatrixCalculation (nil for 0).
+// NNGramMatrixCalculationFromID adopts an existing object pointer as a NNGramMatrixCalculation (nil for 0).
 func NNGramMatrixCalculationFromID(id objc.ID) *NNGramMatrixCalculation {
 	if id == 0 {
 		return nil

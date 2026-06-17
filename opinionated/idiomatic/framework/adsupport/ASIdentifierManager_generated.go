@@ -18,11 +18,11 @@ type IdentifierManager struct {
 // Unwrap returns the underlying [raw.ASIdentifierManager].
 func (x *IdentifierManager) Unwrap() *raw.ASIdentifierManager { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *IdentifierManager) ID() objc.ID { return x.inner.Ptr() }
 
-// IdentifierManagerFromID adopts an existing toll-free-bridged object id as a IdentifierManager (nil for 0).
+// IdentifierManagerFromID adopts an existing object pointer as a IdentifierManager (nil for 0).
 func IdentifierManagerFromID(id objc.ID) *IdentifierManager {
 	if id == 0 {
 		return nil

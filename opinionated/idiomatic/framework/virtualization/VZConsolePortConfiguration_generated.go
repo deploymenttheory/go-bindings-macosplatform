@@ -17,11 +17,11 @@ type ConsolePortConfiguration struct {
 // Unwrap returns the underlying [raw.VZConsolePortConfiguration].
 func (x *ConsolePortConfiguration) Unwrap() *raw.VZConsolePortConfiguration { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ConsolePortConfiguration) ID() objc.ID { return x.inner.Ptr() }
 
-// ConsolePortConfigurationFromID adopts an existing toll-free-bridged object id as a ConsolePortConfiguration (nil for 0).
+// ConsolePortConfigurationFromID adopts an existing object pointer as a ConsolePortConfiguration (nil for 0).
 func ConsolePortConfigurationFromID(id objc.ID) *ConsolePortConfiguration {
 	if id == 0 {
 		return nil

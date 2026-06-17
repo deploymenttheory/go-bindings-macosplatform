@@ -17,11 +17,11 @@ type CollectionLayoutDimension struct {
 // Unwrap returns the underlying [raw.NSCollectionLayoutDimension].
 func (x *CollectionLayoutDimension) Unwrap() *raw.NSCollectionLayoutDimension { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CollectionLayoutDimension) ID() objc.ID { return x.inner.Ptr() }
 
-// CollectionLayoutDimensionFromID adopts an existing toll-free-bridged object id as a CollectionLayoutDimension (nil for 0).
+// CollectionLayoutDimensionFromID adopts an existing object pointer as a CollectionLayoutDimension (nil for 0).
 func CollectionLayoutDimensionFromID(id objc.ID) *CollectionLayoutDimension {
 	if id == 0 {
 		return nil

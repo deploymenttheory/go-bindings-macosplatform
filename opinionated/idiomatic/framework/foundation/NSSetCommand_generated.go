@@ -17,11 +17,11 @@ type SetCommand struct {
 // Unwrap returns the underlying [raw.NSSetCommand].
 func (x *SetCommand) Unwrap() *raw.NSSetCommand { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SetCommand) ID() objc.ID { return x.inner.Ptr() }
 
-// SetCommandFromID adopts an existing toll-free-bridged object id as a SetCommand (nil for 0).
+// SetCommandFromID adopts an existing object pointer as a SetCommand (nil for 0).
 func SetCommandFromID(id objc.ID) *SetCommand {
 	if id == 0 {
 		return nil

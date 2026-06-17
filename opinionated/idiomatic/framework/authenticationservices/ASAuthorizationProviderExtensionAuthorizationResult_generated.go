@@ -18,11 +18,11 @@ type AuthorizationProviderExtensionAuthorizationResult struct {
 // Unwrap returns the underlying [raw.ASAuthorizationProviderExtensionAuthorizationResult].
 func (x *AuthorizationProviderExtensionAuthorizationResult) Unwrap() *raw.ASAuthorizationProviderExtensionAuthorizationResult { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AuthorizationProviderExtensionAuthorizationResult) ID() objc.ID { return x.inner.Ptr() }
 
-// AuthorizationProviderExtensionAuthorizationResultFromID adopts an existing toll-free-bridged object id as a AuthorizationProviderExtensionAuthorizationResult (nil for 0).
+// AuthorizationProviderExtensionAuthorizationResultFromID adopts an existing object pointer as a AuthorizationProviderExtensionAuthorizationResult (nil for 0).
 func AuthorizationProviderExtensionAuthorizationResultFromID(id objc.ID) *AuthorizationProviderExtensionAuthorizationResult {
 	if id == 0 {
 		return nil

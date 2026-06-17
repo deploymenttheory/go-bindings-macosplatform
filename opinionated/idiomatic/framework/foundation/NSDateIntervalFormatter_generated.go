@@ -18,11 +18,11 @@ type DateIntervalFormatter struct {
 // Unwrap returns the underlying [raw.NSDateIntervalFormatter].
 func (x *DateIntervalFormatter) Unwrap() *raw.NSDateIntervalFormatter { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DateIntervalFormatter) ID() objc.ID { return x.inner.Ptr() }
 
-// DateIntervalFormatterFromID adopts an existing toll-free-bridged object id as a DateIntervalFormatter (nil for 0).
+// DateIntervalFormatterFromID adopts an existing object pointer as a DateIntervalFormatter (nil for 0).
 func DateIntervalFormatterFromID(id objc.ID) *DateIntervalFormatter {
 	if id == 0 {
 		return nil

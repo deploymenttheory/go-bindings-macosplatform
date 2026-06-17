@@ -20,11 +20,11 @@ type CalCalendar struct {
 // Unwrap returns the underlying [raw.CalCalendar].
 func (x *CalCalendar) Unwrap() *raw.CalCalendar { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CalCalendar) ID() objc.ID { return x.inner.Ptr() }
 
-// CalCalendarFromID adopts an existing toll-free-bridged object id as a CalCalendar (nil for 0).
+// CalCalendarFromID adopts an existing object pointer as a CalCalendar (nil for 0).
 func CalCalendarFromID(id objc.ID) *CalCalendar {
 	if id == 0 {
 		return nil

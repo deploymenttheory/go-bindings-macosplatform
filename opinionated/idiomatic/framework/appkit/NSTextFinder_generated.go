@@ -19,11 +19,11 @@ type TextFinder struct {
 // Unwrap returns the underlying [raw.NSTextFinder].
 func (x *TextFinder) Unwrap() *raw.NSTextFinder { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *TextFinder) ID() objc.ID { return x.inner.Ptr() }
 
-// TextFinderFromID adopts an existing toll-free-bridged object id as a TextFinder (nil for 0).
+// TextFinderFromID adopts an existing object pointer as a TextFinder (nil for 0).
 func TextFinderFromID(id objc.ID) *TextFinder {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type GraphNode2D struct {
 // Unwrap returns the underlying [raw.GKGraphNode2D].
 func (x *GraphNode2D) Unwrap() *raw.GKGraphNode2D { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *GraphNode2D) ID() objc.ID { return x.inner.Ptr() }
 
-// GraphNode2DFromID adopts an existing toll-free-bridged object id as a GraphNode2D (nil for 0).
+// GraphNode2DFromID adopts an existing object pointer as a GraphNode2D (nil for 0).
 func GraphNode2DFromID(id objc.ID) *GraphNode2D {
 	if id == 0 {
 		return nil

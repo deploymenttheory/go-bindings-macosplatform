@@ -17,11 +17,11 @@ type UnitElectricResistance struct {
 // Unwrap returns the underlying [raw.NSUnitElectricResistance].
 func (x *UnitElectricResistance) Unwrap() *raw.NSUnitElectricResistance { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *UnitElectricResistance) ID() objc.ID { return x.inner.Ptr() }
 
-// UnitElectricResistanceFromID adopts an existing toll-free-bridged object id as a UnitElectricResistance (nil for 0).
+// UnitElectricResistanceFromID adopts an existing object pointer as a UnitElectricResistance (nil for 0).
 func UnitElectricResistanceFromID(id objc.ID) *UnitElectricResistance {
 	if id == 0 {
 		return nil

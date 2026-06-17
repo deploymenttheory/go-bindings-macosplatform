@@ -18,11 +18,11 @@ type SortDescriptor struct {
 // Unwrap returns the underlying [raw.NSSortDescriptor].
 func (x *SortDescriptor) Unwrap() *raw.NSSortDescriptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SortDescriptor) ID() objc.ID { return x.inner.Ptr() }
 
-// SortDescriptorFromID adopts an existing toll-free-bridged object id as a SortDescriptor (nil for 0).
+// SortDescriptorFromID adopts an existing object pointer as a SortDescriptor (nil for 0).
 func SortDescriptorFromID(id objc.ID) *SortDescriptor {
 	if id == 0 {
 		return nil

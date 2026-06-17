@@ -19,11 +19,11 @@ type CardioidDirectivityModelParameters struct {
 // Unwrap returns the underlying [raw.PHASECardioidDirectivityModelParameters].
 func (x *CardioidDirectivityModelParameters) Unwrap() *raw.PHASECardioidDirectivityModelParameters { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CardioidDirectivityModelParameters) ID() objc.ID { return x.inner.Ptr() }
 
-// CardioidDirectivityModelParametersFromID adopts an existing toll-free-bridged object id as a CardioidDirectivityModelParameters (nil for 0).
+// CardioidDirectivityModelParametersFromID adopts an existing object pointer as a CardioidDirectivityModelParameters (nil for 0).
 func CardioidDirectivityModelParametersFromID(id objc.ID) *CardioidDirectivityModelParameters {
 	if id == 0 {
 		return nil

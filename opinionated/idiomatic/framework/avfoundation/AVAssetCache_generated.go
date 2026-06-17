@@ -18,11 +18,11 @@ type AssetCache struct {
 // Unwrap returns the underlying [raw.AVAssetCache].
 func (x *AssetCache) Unwrap() *raw.AVAssetCache { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AssetCache) ID() objc.ID { return x.inner.Ptr() }
 
-// AssetCacheFromID adopts an existing toll-free-bridged object id as a AssetCache (nil for 0).
+// AssetCacheFromID adopts an existing object pointer as a AssetCache (nil for 0).
 func AssetCacheFromID(id objc.ID) *AssetCache {
 	if id == 0 {
 		return nil

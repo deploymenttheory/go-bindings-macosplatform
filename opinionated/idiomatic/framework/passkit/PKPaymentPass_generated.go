@@ -17,11 +17,11 @@ type PaymentPass struct {
 // Unwrap returns the underlying [raw.PKPaymentPass].
 func (x *PaymentPass) Unwrap() *raw.PKPaymentPass { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PaymentPass) ID() objc.ID { return x.inner.Ptr() }
 
-// PaymentPassFromID adopts an existing toll-free-bridged object id as a PaymentPass (nil for 0).
+// PaymentPassFromID adopts an existing object pointer as a PaymentPass (nil for 0).
 func PaymentPassFromID(id objc.ID) *PaymentPass {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type MTRDishwasherAlarmClusterResetParams struct {
 // Unwrap returns the underlying [raw.MTRDishwasherAlarmClusterResetParams].
 func (x *MTRDishwasherAlarmClusterResetParams) Unwrap() *raw.MTRDishwasherAlarmClusterResetParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRDishwasherAlarmClusterResetParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRDishwasherAlarmClusterResetParamsFromID adopts an existing toll-free-bridged object id as a MTRDishwasherAlarmClusterResetParams (nil for 0).
+// MTRDishwasherAlarmClusterResetParamsFromID adopts an existing object pointer as a MTRDishwasherAlarmClusterResetParams (nil for 0).
 func MTRDishwasherAlarmClusterResetParamsFromID(id objc.ID) *MTRDishwasherAlarmClusterResetParams {
 	if id == 0 {
 		return nil

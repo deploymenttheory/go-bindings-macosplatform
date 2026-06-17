@@ -18,11 +18,11 @@ type Date struct {
 // Unwrap returns the underlying [raw.NSDate].
 func (x *Date) Unwrap() *raw.NSDate { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Date) ID() objc.ID { return x.inner.Ptr() }
 
-// DateFromID adopts an existing toll-free-bridged object id as a Date (nil for 0).
+// DateFromID adopts an existing object pointer as a Date (nil for 0).
 func DateFromID(id objc.ID) *Date {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type MTRXPCDeviceControllerParameters struct {
 // Unwrap returns the underlying [raw.MTRXPCDeviceControllerParameters].
 func (x *MTRXPCDeviceControllerParameters) Unwrap() *raw.MTRXPCDeviceControllerParameters { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRXPCDeviceControllerParameters) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRXPCDeviceControllerParametersFromID adopts an existing toll-free-bridged object id as a MTRXPCDeviceControllerParameters (nil for 0).
+// MTRXPCDeviceControllerParametersFromID adopts an existing object pointer as a MTRXPCDeviceControllerParameters (nil for 0).
 func MTRXPCDeviceControllerParametersFromID(id objc.ID) *MTRXPCDeviceControllerParameters {
 	if id == 0 {
 		return nil

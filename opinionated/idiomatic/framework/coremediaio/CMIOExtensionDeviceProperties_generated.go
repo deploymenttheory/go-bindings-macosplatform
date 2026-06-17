@@ -19,11 +19,11 @@ type ExtensionDeviceProperties struct {
 // Unwrap returns the underlying [raw.CMIOExtensionDeviceProperties].
 func (x *ExtensionDeviceProperties) Unwrap() *raw.CMIOExtensionDeviceProperties { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ExtensionDeviceProperties) ID() objc.ID { return x.inner.Ptr() }
 
-// ExtensionDevicePropertiesFromID adopts an existing toll-free-bridged object id as a ExtensionDeviceProperties (nil for 0).
+// ExtensionDevicePropertiesFromID adopts an existing object pointer as a ExtensionDeviceProperties (nil for 0).
 func ExtensionDevicePropertiesFromID(id objc.ID) *ExtensionDeviceProperties {
 	if id == 0 {
 		return nil

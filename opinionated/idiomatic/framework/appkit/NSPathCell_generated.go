@@ -21,11 +21,11 @@ type PathCell struct {
 // Unwrap returns the underlying [raw.NSPathCell].
 func (x *PathCell) Unwrap() *raw.NSPathCell { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PathCell) ID() objc.ID { return x.inner.Ptr() }
 
-// PathCellFromID adopts an existing toll-free-bridged object id as a PathCell (nil for 0).
+// PathCellFromID adopts an existing object pointer as a PathCell (nil for 0).
 func PathCellFromID(id objc.ID) *PathCell {
 	if id == 0 {
 		return nil

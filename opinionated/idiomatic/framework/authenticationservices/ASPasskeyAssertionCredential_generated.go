@@ -19,11 +19,11 @@ type PasskeyAssertionCredential struct {
 // Unwrap returns the underlying [raw.ASPasskeyAssertionCredential].
 func (x *PasskeyAssertionCredential) Unwrap() *raw.ASPasskeyAssertionCredential { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PasskeyAssertionCredential) ID() objc.ID { return x.inner.Ptr() }
 
-// PasskeyAssertionCredentialFromID adopts an existing toll-free-bridged object id as a PasskeyAssertionCredential (nil for 0).
+// PasskeyAssertionCredentialFromID adopts an existing object pointer as a PasskeyAssertionCredential (nil for 0).
 func PasskeyAssertionCredentialFromID(id objc.ID) *PasskeyAssertionCredential {
 	if id == 0 {
 		return nil

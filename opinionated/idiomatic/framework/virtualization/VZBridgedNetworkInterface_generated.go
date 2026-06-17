@@ -18,11 +18,11 @@ type BridgedNetworkInterface struct {
 // Unwrap returns the underlying [raw.VZBridgedNetworkInterface].
 func (x *BridgedNetworkInterface) Unwrap() *raw.VZBridgedNetworkInterface { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *BridgedNetworkInterface) ID() objc.ID { return x.inner.Ptr() }
 
-// BridgedNetworkInterfaceFromID adopts an existing toll-free-bridged object id as a BridgedNetworkInterface (nil for 0).
+// BridgedNetworkInterfaceFromID adopts an existing object pointer as a BridgedNetworkInterface (nil for 0).
 func BridgedNetworkInterfaceFromID(id objc.ID) *BridgedNetworkInterface {
 	if id == 0 {
 		return nil

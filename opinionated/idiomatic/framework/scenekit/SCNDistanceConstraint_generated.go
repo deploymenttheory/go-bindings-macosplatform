@@ -17,11 +17,11 @@ type DistanceConstraint struct {
 // Unwrap returns the underlying [raw.SCNDistanceConstraint].
 func (x *DistanceConstraint) Unwrap() *raw.SCNDistanceConstraint { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DistanceConstraint) ID() objc.ID { return x.inner.Ptr() }
 
-// DistanceConstraintFromID adopts an existing toll-free-bridged object id as a DistanceConstraint (nil for 0).
+// DistanceConstraintFromID adopts an existing object pointer as a DistanceConstraint (nil for 0).
 func DistanceConstraintFromID(id objc.ID) *DistanceConstraint {
 	if id == 0 {
 		return nil

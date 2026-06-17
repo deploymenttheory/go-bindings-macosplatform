@@ -20,11 +20,11 @@ type CNNUpsamplingBilinearGradient struct {
 // Unwrap returns the underlying [raw.MPSCNNUpsamplingBilinearGradient].
 func (x *CNNUpsamplingBilinearGradient) Unwrap() *raw.MPSCNNUpsamplingBilinearGradient { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CNNUpsamplingBilinearGradient) ID() objc.ID { return x.inner.Ptr() }
 
-// CNNUpsamplingBilinearGradientFromID adopts an existing toll-free-bridged object id as a CNNUpsamplingBilinearGradient (nil for 0).
+// CNNUpsamplingBilinearGradientFromID adopts an existing object pointer as a CNNUpsamplingBilinearGradient (nil for 0).
 func CNNUpsamplingBilinearGradientFromID(id objc.ID) *CNNUpsamplingBilinearGradient {
 	if id == 0 {
 		return nil

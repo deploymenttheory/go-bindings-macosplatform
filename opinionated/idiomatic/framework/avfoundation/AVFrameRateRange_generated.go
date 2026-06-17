@@ -18,11 +18,11 @@ type FrameRateRange struct {
 // Unwrap returns the underlying [raw.AVFrameRateRange].
 func (x *FrameRateRange) Unwrap() *raw.AVFrameRateRange { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *FrameRateRange) ID() objc.ID { return x.inner.Ptr() }
 
-// FrameRateRangeFromID adopts an existing toll-free-bridged object id as a FrameRateRange (nil for 0).
+// FrameRateRangeFromID adopts an existing object pointer as a FrameRateRange (nil for 0).
 func FrameRateRangeFromID(id objc.ID) *FrameRateRange {
 	if id == 0 {
 		return nil

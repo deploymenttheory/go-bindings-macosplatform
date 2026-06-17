@@ -18,11 +18,11 @@ type RNNRecurrentMatrixState struct {
 // Unwrap returns the underlying [raw.MPSRNNRecurrentMatrixState].
 func (x *RNNRecurrentMatrixState) Unwrap() *raw.MPSRNNRecurrentMatrixState { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *RNNRecurrentMatrixState) ID() objc.ID { return x.inner.Ptr() }
 
-// RNNRecurrentMatrixStateFromID adopts an existing toll-free-bridged object id as a RNNRecurrentMatrixState (nil for 0).
+// RNNRecurrentMatrixStateFromID adopts an existing object pointer as a RNNRecurrentMatrixState (nil for 0).
 func RNNRecurrentMatrixStateFromID(id objc.ID) *RNNRecurrentMatrixState {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type ProductsRequest struct {
 // Unwrap returns the underlying [raw.SKProductsRequest].
 func (x *ProductsRequest) Unwrap() *raw.SKProductsRequest { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ProductsRequest) ID() objc.ID { return x.inner.Ptr() }
 
-// ProductsRequestFromID adopts an existing toll-free-bridged object id as a ProductsRequest (nil for 0).
+// ProductsRequestFromID adopts an existing object pointer as a ProductsRequest (nil for 0).
 func ProductsRequestFromID(id objc.ID) *ProductsRequest {
 	if id == 0 {
 		return nil

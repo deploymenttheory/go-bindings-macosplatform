@@ -17,11 +17,11 @@ type VertexBufferLayoutDescriptor struct {
 // Unwrap returns the underlying [raw.MTLVertexBufferLayoutDescriptor].
 func (x *VertexBufferLayoutDescriptor) Unwrap() *raw.MTLVertexBufferLayoutDescriptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *VertexBufferLayoutDescriptor) ID() objc.ID { return x.inner.Ptr() }
 
-// VertexBufferLayoutDescriptorFromID adopts an existing toll-free-bridged object id as a VertexBufferLayoutDescriptor (nil for 0).
+// VertexBufferLayoutDescriptorFromID adopts an existing object pointer as a VertexBufferLayoutDescriptor (nil for 0).
 func VertexBufferLayoutDescriptorFromID(id objc.ID) *VertexBufferLayoutDescriptor {
 	if id == 0 {
 		return nil

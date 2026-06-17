@@ -19,11 +19,11 @@ type AssetDownloadStorageManagementPolicy struct {
 // Unwrap returns the underlying [raw.AVAssetDownloadStorageManagementPolicy].
 func (x *AssetDownloadStorageManagementPolicy) Unwrap() *raw.AVAssetDownloadStorageManagementPolicy { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AssetDownloadStorageManagementPolicy) ID() objc.ID { return x.inner.Ptr() }
 
-// AssetDownloadStorageManagementPolicyFromID adopts an existing toll-free-bridged object id as a AssetDownloadStorageManagementPolicy (nil for 0).
+// AssetDownloadStorageManagementPolicyFromID adopts an existing object pointer as a AssetDownloadStorageManagementPolicy (nil for 0).
 func AssetDownloadStorageManagementPolicyFromID(id objc.ID) *AssetDownloadStorageManagementPolicy {
 	if id == 0 {
 		return nil

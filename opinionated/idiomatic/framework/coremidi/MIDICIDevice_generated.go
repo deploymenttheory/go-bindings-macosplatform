@@ -18,11 +18,11 @@ type CIDevice struct {
 // Unwrap returns the underlying [raw.MIDICIDevice].
 func (x *CIDevice) Unwrap() *raw.MIDICIDevice { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CIDevice) ID() objc.ID { return x.inner.Ptr() }
 
-// CIDeviceFromID adopts an existing toll-free-bridged object id as a CIDevice (nil for 0).
+// CIDeviceFromID adopts an existing object pointer as a CIDevice (nil for 0).
 func CIDeviceFromID(id objc.ID) *CIDevice {
 	if id == 0 {
 		return nil

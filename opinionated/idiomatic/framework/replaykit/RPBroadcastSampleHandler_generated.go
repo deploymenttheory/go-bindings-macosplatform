@@ -19,11 +19,11 @@ type BroadcastSampleHandler struct {
 // Unwrap returns the underlying [raw.RPBroadcastSampleHandler].
 func (x *BroadcastSampleHandler) Unwrap() *raw.RPBroadcastSampleHandler { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *BroadcastSampleHandler) ID() objc.ID { return x.inner.Ptr() }
 
-// BroadcastSampleHandlerFromID adopts an existing toll-free-bridged object id as a BroadcastSampleHandler (nil for 0).
+// BroadcastSampleHandlerFromID adopts an existing object pointer as a BroadcastSampleHandler (nil for 0).
 func BroadcastSampleHandlerFromID(id objc.ID) *BroadcastSampleHandler {
 	if id == 0 {
 		return nil

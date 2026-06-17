@@ -19,11 +19,11 @@ type DOMCSSStyleRule struct {
 // Unwrap returns the underlying [raw.DOMCSSStyleRule].
 func (x *DOMCSSStyleRule) Unwrap() *raw.DOMCSSStyleRule { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DOMCSSStyleRule) ID() objc.ID { return x.inner.Ptr() }
 
-// DOMCSSStyleRuleFromID adopts an existing toll-free-bridged object id as a DOMCSSStyleRule (nil for 0).
+// DOMCSSStyleRuleFromID adopts an existing object pointer as a DOMCSSStyleRule (nil for 0).
 func DOMCSSStyleRuleFromID(id objc.ID) *DOMCSSStyleRule {
 	if id == 0 {
 		return nil

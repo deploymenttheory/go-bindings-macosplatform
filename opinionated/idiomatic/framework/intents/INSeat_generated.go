@@ -19,11 +19,11 @@ type Seat struct {
 // Unwrap returns the underlying [raw.INSeat].
 func (x *Seat) Unwrap() *raw.INSeat { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Seat) ID() objc.ID { return x.inner.Ptr() }
 
-// SeatFromID adopts an existing toll-free-bridged object id as a Seat (nil for 0).
+// SeatFromID adopts an existing object pointer as a Seat (nil for 0).
 func SeatFromID(id objc.ID) *Seat {
 	if id == 0 {
 		return nil

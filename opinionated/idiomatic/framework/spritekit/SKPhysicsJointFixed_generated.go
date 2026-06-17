@@ -17,11 +17,11 @@ type PhysicsJointFixed struct {
 // Unwrap returns the underlying [raw.SKPhysicsJointFixed].
 func (x *PhysicsJointFixed) Unwrap() *raw.SKPhysicsJointFixed { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PhysicsJointFixed) ID() objc.ID { return x.inner.Ptr() }
 
-// PhysicsJointFixedFromID adopts an existing toll-free-bridged object id as a PhysicsJointFixed (nil for 0).
+// PhysicsJointFixedFromID adopts an existing object pointer as a PhysicsJointFixed (nil for 0).
 func PhysicsJointFixedFromID(id objc.ID) *PhysicsJointFixed {
 	if id == 0 {
 		return nil

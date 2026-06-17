@@ -17,11 +17,11 @@ type GraphFFTDescriptor struct {
 // Unwrap returns the underlying [raw.MPSGraphFFTDescriptor].
 func (x *GraphFFTDescriptor) Unwrap() *raw.MPSGraphFFTDescriptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *GraphFFTDescriptor) ID() objc.ID { return x.inner.Ptr() }
 
-// GraphFFTDescriptorFromID adopts an existing toll-free-bridged object id as a GraphFFTDescriptor (nil for 0).
+// GraphFFTDescriptorFromID adopts an existing object pointer as a GraphFFTDescriptor (nil for 0).
 func GraphFFTDescriptorFromID(id objc.ID) *GraphFFTDescriptor {
 	if id == 0 {
 		return nil

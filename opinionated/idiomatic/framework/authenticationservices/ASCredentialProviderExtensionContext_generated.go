@@ -17,11 +17,11 @@ type CredentialProviderExtensionContext struct {
 // Unwrap returns the underlying [raw.ASCredentialProviderExtensionContext].
 func (x *CredentialProviderExtensionContext) Unwrap() *raw.ASCredentialProviderExtensionContext { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CredentialProviderExtensionContext) ID() objc.ID { return x.inner.Ptr() }
 
-// CredentialProviderExtensionContextFromID adopts an existing toll-free-bridged object id as a CredentialProviderExtensionContext (nil for 0).
+// CredentialProviderExtensionContextFromID adopts an existing object pointer as a CredentialProviderExtensionContext (nil for 0).
 func CredentialProviderExtensionContextFromID(id objc.ID) *CredentialProviderExtensionContext {
 	if id == 0 {
 		return nil

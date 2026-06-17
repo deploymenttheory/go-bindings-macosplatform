@@ -17,11 +17,11 @@ type AudioUnitVarispeed struct {
 // Unwrap returns the underlying [raw.AVAudioUnitVarispeed].
 func (x *AudioUnitVarispeed) Unwrap() *raw.AVAudioUnitVarispeed { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AudioUnitVarispeed) ID() objc.ID { return x.inner.Ptr() }
 
-// AudioUnitVarispeedFromID adopts an existing toll-free-bridged object id as a AudioUnitVarispeed (nil for 0).
+// AudioUnitVarispeedFromID adopts an existing object pointer as a AudioUnitVarispeed (nil for 0).
 func AudioUnitVarispeedFromID(id objc.ID) *AudioUnitVarispeed {
 	if id == 0 {
 		return nil

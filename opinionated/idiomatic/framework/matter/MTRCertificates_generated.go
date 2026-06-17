@@ -17,11 +17,11 @@ type MTRCertificates struct {
 // Unwrap returns the underlying [raw.MTRCertificates].
 func (x *MTRCertificates) Unwrap() *raw.MTRCertificates { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRCertificates) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRCertificatesFromID adopts an existing toll-free-bridged object id as a MTRCertificates (nil for 0).
+// MTRCertificatesFromID adopts an existing object pointer as a MTRCertificates (nil for 0).
 func MTRCertificatesFromID(id objc.ID) *MTRCertificates {
 	if id == 0 {
 		return nil

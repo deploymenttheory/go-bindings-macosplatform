@@ -18,11 +18,11 @@ type ComputePlanDeviceUsage struct {
 // Unwrap returns the underlying [raw.MLComputePlanDeviceUsage].
 func (x *ComputePlanDeviceUsage) Unwrap() *raw.MLComputePlanDeviceUsage { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ComputePlanDeviceUsage) ID() objc.ID { return x.inner.Ptr() }
 
-// ComputePlanDeviceUsageFromID adopts an existing toll-free-bridged object id as a ComputePlanDeviceUsage (nil for 0).
+// ComputePlanDeviceUsageFromID adopts an existing object pointer as a ComputePlanDeviceUsage (nil for 0).
 func ComputePlanDeviceUsageFromID(id objc.ID) *ComputePlanDeviceUsage {
 	if id == 0 {
 		return nil

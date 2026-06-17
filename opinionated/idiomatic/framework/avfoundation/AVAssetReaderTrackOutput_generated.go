@@ -19,11 +19,11 @@ type AssetReaderTrackOutput struct {
 // Unwrap returns the underlying [raw.AVAssetReaderTrackOutput].
 func (x *AssetReaderTrackOutput) Unwrap() *raw.AVAssetReaderTrackOutput { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AssetReaderTrackOutput) ID() objc.ID { return x.inner.Ptr() }
 
-// AssetReaderTrackOutputFromID adopts an existing toll-free-bridged object id as a AssetReaderTrackOutput (nil for 0).
+// AssetReaderTrackOutputFromID adopts an existing object pointer as a AssetReaderTrackOutput (nil for 0).
 func AssetReaderTrackOutputFromID(id objc.ID) *AssetReaderTrackOutput {
 	if id == 0 {
 		return nil

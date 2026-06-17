@@ -18,11 +18,11 @@ type AppExtensionInfo struct {
 // Unwrap returns the underlying [raw.BAAppExtensionInfo].
 func (x *AppExtensionInfo) Unwrap() *raw.BAAppExtensionInfo { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AppExtensionInfo) ID() objc.ID { return x.inner.Ptr() }
 
-// AppExtensionInfoFromID adopts an existing toll-free-bridged object id as a AppExtensionInfo (nil for 0).
+// AppExtensionInfoFromID adopts an existing object pointer as a AppExtensionInfo (nil for 0).
 func AppExtensionInfoFromID(id objc.ID) *AppExtensionInfo {
 	if id == 0 {
 		return nil

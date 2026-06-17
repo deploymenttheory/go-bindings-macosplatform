@@ -17,11 +17,11 @@ type ManagedValue struct {
 // Unwrap returns the underlying [raw.JSManagedValue].
 func (x *ManagedValue) Unwrap() *raw.JSManagedValue { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ManagedValue) ID() objc.ID { return x.inner.Ptr() }
 
-// ManagedValueFromID adopts an existing toll-free-bridged object id as a ManagedValue (nil for 0).
+// ManagedValueFromID adopts an existing object pointer as a ManagedValue (nil for 0).
 func ManagedValueFromID(id objc.ID) *ManagedValue {
 	if id == 0 {
 		return nil

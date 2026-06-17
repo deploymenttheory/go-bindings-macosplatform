@@ -17,11 +17,11 @@ type CNNNeuronGradientNode struct {
 // Unwrap returns the underlying [raw.MPSCNNNeuronGradientNode].
 func (x *CNNNeuronGradientNode) Unwrap() *raw.MPSCNNNeuronGradientNode { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CNNNeuronGradientNode) ID() objc.ID { return x.inner.Ptr() }
 
-// CNNNeuronGradientNodeFromID adopts an existing toll-free-bridged object id as a CNNNeuronGradientNode (nil for 0).
+// CNNNeuronGradientNodeFromID adopts an existing object pointer as a CNNNeuronGradientNode (nil for 0).
 func CNNNeuronGradientNodeFromID(id objc.ID) *CNNNeuronGradientNode {
 	if id == 0 {
 		return nil

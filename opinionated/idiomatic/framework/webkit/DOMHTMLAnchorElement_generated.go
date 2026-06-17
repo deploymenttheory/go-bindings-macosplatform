@@ -19,11 +19,11 @@ type DOMHTMLAnchorElement struct {
 // Unwrap returns the underlying [raw.DOMHTMLAnchorElement].
 func (x *DOMHTMLAnchorElement) Unwrap() *raw.DOMHTMLAnchorElement { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DOMHTMLAnchorElement) ID() objc.ID { return x.inner.Ptr() }
 
-// DOMHTMLAnchorElementFromID adopts an existing toll-free-bridged object id as a DOMHTMLAnchorElement (nil for 0).
+// DOMHTMLAnchorElementFromID adopts an existing object pointer as a DOMHTMLAnchorElement (nil for 0).
 func DOMHTMLAnchorElementFromID(id objc.ID) *DOMHTMLAnchorElement {
 	if id == 0 {
 		return nil

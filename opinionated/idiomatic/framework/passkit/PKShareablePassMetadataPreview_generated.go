@@ -19,11 +19,11 @@ type ShareablePassMetadataPreview struct {
 // Unwrap returns the underlying [raw.PKShareablePassMetadataPreview].
 func (x *ShareablePassMetadataPreview) Unwrap() *raw.PKShareablePassMetadataPreview { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ShareablePassMetadataPreview) ID() objc.ID { return x.inner.Ptr() }
 
-// ShareablePassMetadataPreviewFromID adopts an existing toll-free-bridged object id as a ShareablePassMetadataPreview (nil for 0).
+// ShareablePassMetadataPreviewFromID adopts an existing object pointer as a ShareablePassMetadataPreview (nil for 0).
 func ShareablePassMetadataPreviewFromID(id objc.ID) *ShareablePassMetadataPreview {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type FileProviderKnownFolderLocation struct {
 // Unwrap returns the underlying [raw.NSFileProviderKnownFolderLocation].
 func (x *FileProviderKnownFolderLocation) Unwrap() *raw.NSFileProviderKnownFolderLocation { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *FileProviderKnownFolderLocation) ID() objc.ID { return x.inner.Ptr() }
 
-// FileProviderKnownFolderLocationFromID adopts an existing toll-free-bridged object id as a FileProviderKnownFolderLocation (nil for 0).
+// FileProviderKnownFolderLocationFromID adopts an existing object pointer as a FileProviderKnownFolderLocation (nil for 0).
 func FileProviderKnownFolderLocationFromID(id objc.ID) *FileProviderKnownFolderLocation {
 	if id == 0 {
 		return nil

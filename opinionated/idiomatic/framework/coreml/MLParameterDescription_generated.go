@@ -17,11 +17,11 @@ type ParameterDescription struct {
 // Unwrap returns the underlying [raw.MLParameterDescription].
 func (x *ParameterDescription) Unwrap() *raw.MLParameterDescription { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ParameterDescription) ID() objc.ID { return x.inner.Ptr() }
 
-// ParameterDescriptionFromID adopts an existing toll-free-bridged object id as a ParameterDescription (nil for 0).
+// ParameterDescriptionFromID adopts an existing object pointer as a ParameterDescription (nil for 0).
 func ParameterDescriptionFromID(id objc.ID) *ParameterDescription {
 	if id == 0 {
 		return nil

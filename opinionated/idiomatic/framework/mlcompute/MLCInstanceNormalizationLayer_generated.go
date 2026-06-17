@@ -17,11 +17,11 @@ type InstanceNormalizationLayer struct {
 // Unwrap returns the underlying [raw.MLCInstanceNormalizationLayer].
 func (x *InstanceNormalizationLayer) Unwrap() *raw.MLCInstanceNormalizationLayer { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *InstanceNormalizationLayer) ID() objc.ID { return x.inner.Ptr() }
 
-// InstanceNormalizationLayerFromID adopts an existing toll-free-bridged object id as a InstanceNormalizationLayer (nil for 0).
+// InstanceNormalizationLayerFromID adopts an existing object pointer as a InstanceNormalizationLayer (nil for 0).
 func InstanceNormalizationLayerFromID(id objc.ID) *InstanceNormalizationLayer {
 	if id == 0 {
 		return nil

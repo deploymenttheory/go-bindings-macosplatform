@@ -19,11 +19,11 @@ type FeedbackCommand struct {
 // Unwrap returns the underlying [raw.MPFeedbackCommand].
 func (x *FeedbackCommand) Unwrap() *raw.MPFeedbackCommand { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *FeedbackCommand) ID() objc.ID { return x.inner.Ptr() }
 
-// FeedbackCommandFromID adopts an existing toll-free-bridged object id as a FeedbackCommand (nil for 0).
+// FeedbackCommandFromID adopts an existing object pointer as a FeedbackCommand (nil for 0).
 func FeedbackCommandFromID(id objc.ID) *FeedbackCommand {
 	if id == 0 {
 		return nil

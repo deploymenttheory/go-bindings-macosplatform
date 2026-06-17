@@ -19,11 +19,11 @@ type MTRRVCCleanModeClusterModeOptionStruct struct {
 // Unwrap returns the underlying [raw.MTRRVCCleanModeClusterModeOptionStruct].
 func (x *MTRRVCCleanModeClusterModeOptionStruct) Unwrap() *raw.MTRRVCCleanModeClusterModeOptionStruct { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRRVCCleanModeClusterModeOptionStruct) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRRVCCleanModeClusterModeOptionStructFromID adopts an existing toll-free-bridged object id as a MTRRVCCleanModeClusterModeOptionStruct (nil for 0).
+// MTRRVCCleanModeClusterModeOptionStructFromID adopts an existing object pointer as a MTRRVCCleanModeClusterModeOptionStruct (nil for 0).
 func MTRRVCCleanModeClusterModeOptionStructFromID(id objc.ID) *MTRRVCCleanModeClusterModeOptionStruct {
 	if id == 0 {
 		return nil

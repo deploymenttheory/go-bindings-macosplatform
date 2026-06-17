@@ -19,11 +19,11 @@ type CNNLogSoftMax struct {
 // Unwrap returns the underlying [raw.MPSCNNLogSoftMax].
 func (x *CNNLogSoftMax) Unwrap() *raw.MPSCNNLogSoftMax { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CNNLogSoftMax) ID() objc.ID { return x.inner.Ptr() }
 
-// CNNLogSoftMaxFromID adopts an existing toll-free-bridged object id as a CNNLogSoftMax (nil for 0).
+// CNNLogSoftMaxFromID adopts an existing object pointer as a CNNLogSoftMax (nil for 0).
 func CNNLogSoftMaxFromID(id objc.ID) *CNNLogSoftMax {
 	if id == 0 {
 		return nil

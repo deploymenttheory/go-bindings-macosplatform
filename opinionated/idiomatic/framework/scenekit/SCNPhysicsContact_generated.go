@@ -17,11 +17,11 @@ type PhysicsContact struct {
 // Unwrap returns the underlying [raw.SCNPhysicsContact].
 func (x *PhysicsContact) Unwrap() *raw.SCNPhysicsContact { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PhysicsContact) ID() objc.ID { return x.inner.Ptr() }
 
-// PhysicsContactFromID adopts an existing toll-free-bridged object id as a PhysicsContact (nil for 0).
+// PhysicsContactFromID adopts an existing object pointer as a PhysicsContact (nil for 0).
 func PhysicsContactFromID(id objc.ID) *PhysicsContact {
 	if id == 0 {
 		return nil

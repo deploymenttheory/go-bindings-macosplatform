@@ -17,11 +17,11 @@ type IntersectionFunctionTableDescriptor struct {
 // Unwrap returns the underlying [raw.MTLIntersectionFunctionTableDescriptor].
 func (x *IntersectionFunctionTableDescriptor) Unwrap() *raw.MTLIntersectionFunctionTableDescriptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *IntersectionFunctionTableDescriptor) ID() objc.ID { return x.inner.Ptr() }
 
-// IntersectionFunctionTableDescriptorFromID adopts an existing toll-free-bridged object id as a IntersectionFunctionTableDescriptor (nil for 0).
+// IntersectionFunctionTableDescriptorFromID adopts an existing object pointer as a IntersectionFunctionTableDescriptor (nil for 0).
 func IntersectionFunctionTableDescriptorFromID(id objc.ID) *IntersectionFunctionTableDescriptor {
 	if id == 0 {
 		return nil

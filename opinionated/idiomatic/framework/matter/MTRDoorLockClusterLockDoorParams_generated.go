@@ -18,11 +18,11 @@ type MTRDoorLockClusterLockDoorParams struct {
 // Unwrap returns the underlying [raw.MTRDoorLockClusterLockDoorParams].
 func (x *MTRDoorLockClusterLockDoorParams) Unwrap() *raw.MTRDoorLockClusterLockDoorParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRDoorLockClusterLockDoorParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRDoorLockClusterLockDoorParamsFromID adopts an existing toll-free-bridged object id as a MTRDoorLockClusterLockDoorParams (nil for 0).
+// MTRDoorLockClusterLockDoorParamsFromID adopts an existing object pointer as a MTRDoorLockClusterLockDoorParams (nil for 0).
 func MTRDoorLockClusterLockDoorParamsFromID(id objc.ID) *MTRDoorLockClusterLockDoorParams {
 	if id == 0 {
 		return nil

@@ -17,11 +17,11 @@ type LayoutXAxisAnchor struct {
 // Unwrap returns the underlying [raw.NSLayoutXAxisAnchor].
 func (x *LayoutXAxisAnchor) Unwrap() *raw.NSLayoutXAxisAnchor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *LayoutXAxisAnchor) ID() objc.ID { return x.inner.Ptr() }
 
-// LayoutXAxisAnchorFromID adopts an existing toll-free-bridged object id as a LayoutXAxisAnchor (nil for 0).
+// LayoutXAxisAnchorFromID adopts an existing object pointer as a LayoutXAxisAnchor (nil for 0).
 func LayoutXAxisAnchorFromID(id objc.ID) *LayoutXAxisAnchor {
 	if id == 0 {
 		return nil

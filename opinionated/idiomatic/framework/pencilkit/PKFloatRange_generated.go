@@ -17,11 +17,11 @@ type FloatRange struct {
 // Unwrap returns the underlying [raw.PKFloatRange].
 func (x *FloatRange) Unwrap() *raw.PKFloatRange { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *FloatRange) ID() objc.ID { return x.inner.Ptr() }
 
-// FloatRangeFromID adopts an existing toll-free-bridged object id as a FloatRange (nil for 0).
+// FloatRangeFromID adopts an existing object pointer as a FloatRange (nil for 0).
 func FloatRangeFromID(id objc.ID) *FloatRange {
 	if id == 0 {
 		return nil

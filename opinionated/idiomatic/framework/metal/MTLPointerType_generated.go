@@ -17,11 +17,11 @@ type PointerType struct {
 // Unwrap returns the underlying [raw.MTLPointerType].
 func (x *PointerType) Unwrap() *raw.MTLPointerType { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PointerType) ID() objc.ID { return x.inner.Ptr() }
 
-// PointerTypeFromID adopts an existing toll-free-bridged object id as a PointerType (nil for 0).
+// PointerTypeFromID adopts an existing object pointer as a PointerType (nil for 0).
 func PointerTypeFromID(id objc.ID) *PointerType {
 	if id == 0 {
 		return nil

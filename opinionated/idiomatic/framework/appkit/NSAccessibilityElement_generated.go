@@ -18,11 +18,11 @@ type AccessibilityElement struct {
 // Unwrap returns the underlying [raw.NSAccessibilityElement].
 func (x *AccessibilityElement) Unwrap() *raw.NSAccessibilityElement { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AccessibilityElement) ID() objc.ID { return x.inner.Ptr() }
 
-// AccessibilityElementFromID adopts an existing toll-free-bridged object id as a AccessibilityElement (nil for 0).
+// AccessibilityElementFromID adopts an existing object pointer as a AccessibilityElement (nil for 0).
 func AccessibilityElementFromID(id objc.ID) *AccessibilityElement {
 	if id == 0 {
 		return nil

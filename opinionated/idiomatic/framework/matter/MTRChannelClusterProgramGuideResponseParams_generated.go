@@ -20,11 +20,11 @@ type MTRChannelClusterProgramGuideResponseParams struct {
 // Unwrap returns the underlying [raw.MTRChannelClusterProgramGuideResponseParams].
 func (x *MTRChannelClusterProgramGuideResponseParams) Unwrap() *raw.MTRChannelClusterProgramGuideResponseParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRChannelClusterProgramGuideResponseParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRChannelClusterProgramGuideResponseParamsFromID adopts an existing toll-free-bridged object id as a MTRChannelClusterProgramGuideResponseParams (nil for 0).
+// MTRChannelClusterProgramGuideResponseParamsFromID adopts an existing object pointer as a MTRChannelClusterProgramGuideResponseParams (nil for 0).
 func MTRChannelClusterProgramGuideResponseParamsFromID(id objc.ID) *MTRChannelClusterProgramGuideResponseParams {
 	if id == 0 {
 		return nil

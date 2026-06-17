@@ -18,11 +18,11 @@ type TimeIntervalNotificationTrigger struct {
 // Unwrap returns the underlying [raw.UNTimeIntervalNotificationTrigger].
 func (x *TimeIntervalNotificationTrigger) Unwrap() *raw.UNTimeIntervalNotificationTrigger { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *TimeIntervalNotificationTrigger) ID() objc.ID { return x.inner.Ptr() }
 
-// TimeIntervalNotificationTriggerFromID adopts an existing toll-free-bridged object id as a TimeIntervalNotificationTrigger (nil for 0).
+// TimeIntervalNotificationTriggerFromID adopts an existing object pointer as a TimeIntervalNotificationTrigger (nil for 0).
 func TimeIntervalNotificationTriggerFromID(id objc.ID) *TimeIntervalNotificationTrigger {
 	if id == 0 {
 		return nil

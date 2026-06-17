@@ -18,11 +18,11 @@ type AUPannerView struct {
 // Unwrap returns the underlying [raw.AUPannerView].
 func (x *AUPannerView) Unwrap() *raw.AUPannerView { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AUPannerView) ID() objc.ID { return x.inner.Ptr() }
 
-// AUPannerViewFromID adopts an existing toll-free-bridged object id as a AUPannerView (nil for 0).
+// AUPannerViewFromID adopts an existing object pointer as a AUPannerView (nil for 0).
 func AUPannerViewFromID(id objc.ID) *AUPannerView {
 	if id == 0 {
 		return nil

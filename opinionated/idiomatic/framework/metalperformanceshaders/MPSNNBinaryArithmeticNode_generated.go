@@ -19,11 +19,11 @@ type NNBinaryArithmeticNode struct {
 // Unwrap returns the underlying [raw.MPSNNBinaryArithmeticNode].
 func (x *NNBinaryArithmeticNode) Unwrap() *raw.MPSNNBinaryArithmeticNode { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NNBinaryArithmeticNode) ID() objc.ID { return x.inner.Ptr() }
 
-// NNBinaryArithmeticNodeFromID adopts an existing toll-free-bridged object id as a NNBinaryArithmeticNode (nil for 0).
+// NNBinaryArithmeticNodeFromID adopts an existing object pointer as a NNBinaryArithmeticNode (nil for 0).
 func NNBinaryArithmeticNodeFromID(id objc.ID) *NNBinaryArithmeticNode {
 	if id == 0 {
 		return nil

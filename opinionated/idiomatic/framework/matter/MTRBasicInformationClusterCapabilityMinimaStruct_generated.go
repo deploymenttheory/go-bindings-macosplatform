@@ -18,11 +18,11 @@ type MTRBasicInformationClusterCapabilityMinimaStruct struct {
 // Unwrap returns the underlying [raw.MTRBasicInformationClusterCapabilityMinimaStruct].
 func (x *MTRBasicInformationClusterCapabilityMinimaStruct) Unwrap() *raw.MTRBasicInformationClusterCapabilityMinimaStruct { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRBasicInformationClusterCapabilityMinimaStruct) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRBasicInformationClusterCapabilityMinimaStructFromID adopts an existing toll-free-bridged object id as a MTRBasicInformationClusterCapabilityMinimaStruct (nil for 0).
+// MTRBasicInformationClusterCapabilityMinimaStructFromID adopts an existing object pointer as a MTRBasicInformationClusterCapabilityMinimaStruct (nil for 0).
 func MTRBasicInformationClusterCapabilityMinimaStructFromID(id objc.ID) *MTRBasicInformationClusterCapabilityMinimaStruct {
 	if id == 0 {
 		return nil

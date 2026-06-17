@@ -18,11 +18,11 @@ type CNNBatchNormalizationGradientNode struct {
 // Unwrap returns the underlying [raw.MPSCNNBatchNormalizationGradientNode].
 func (x *CNNBatchNormalizationGradientNode) Unwrap() *raw.MPSCNNBatchNormalizationGradientNode { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CNNBatchNormalizationGradientNode) ID() objc.ID { return x.inner.Ptr() }
 
-// CNNBatchNormalizationGradientNodeFromID adopts an existing toll-free-bridged object id as a CNNBatchNormalizationGradientNode (nil for 0).
+// CNNBatchNormalizationGradientNodeFromID adopts an existing object pointer as a CNNBatchNormalizationGradientNode (nil for 0).
 func CNNBatchNormalizationGradientNodeFromID(id objc.ID) *CNNBatchNormalizationGradientNode {
 	if id == 0 {
 		return nil

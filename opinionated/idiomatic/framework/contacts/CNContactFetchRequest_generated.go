@@ -18,11 +18,11 @@ type ContactFetchRequest struct {
 // Unwrap returns the underlying [raw.CNContactFetchRequest].
 func (x *ContactFetchRequest) Unwrap() *raw.CNContactFetchRequest { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ContactFetchRequest) ID() objc.ID { return x.inner.Ptr() }
 
-// ContactFetchRequestFromID adopts an existing toll-free-bridged object id as a ContactFetchRequest (nil for 0).
+// ContactFetchRequestFromID adopts an existing object pointer as a ContactFetchRequest (nil for 0).
 func ContactFetchRequestFromID(id objc.ID) *ContactFetchRequest {
 	if id == 0 {
 		return nil

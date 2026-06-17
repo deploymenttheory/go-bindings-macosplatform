@@ -21,11 +21,11 @@ type TargetedImageRequest struct {
 // Unwrap returns the underlying [raw.VNTargetedImageRequest].
 func (x *TargetedImageRequest) Unwrap() *raw.VNTargetedImageRequest { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *TargetedImageRequest) ID() objc.ID { return x.inner.Ptr() }
 
-// TargetedImageRequestFromID adopts an existing toll-free-bridged object id as a TargetedImageRequest (nil for 0).
+// TargetedImageRequestFromID adopts an existing object pointer as a TargetedImageRequest (nil for 0).
 func TargetedImageRequestFromID(id objc.ID) *TargetedImageRequest {
 	if id == 0 {
 		return nil

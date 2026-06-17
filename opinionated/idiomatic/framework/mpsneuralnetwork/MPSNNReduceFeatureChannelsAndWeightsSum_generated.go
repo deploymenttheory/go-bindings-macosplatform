@@ -19,11 +19,11 @@ type NNReduceFeatureChannelsAndWeightsSum struct {
 // Unwrap returns the underlying [raw.MPSNNReduceFeatureChannelsAndWeightsSum].
 func (x *NNReduceFeatureChannelsAndWeightsSum) Unwrap() *raw.MPSNNReduceFeatureChannelsAndWeightsSum { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NNReduceFeatureChannelsAndWeightsSum) ID() objc.ID { return x.inner.Ptr() }
 
-// NNReduceFeatureChannelsAndWeightsSumFromID adopts an existing toll-free-bridged object id as a NNReduceFeatureChannelsAndWeightsSum (nil for 0).
+// NNReduceFeatureChannelsAndWeightsSumFromID adopts an existing object pointer as a NNReduceFeatureChannelsAndWeightsSum (nil for 0).
 func NNReduceFeatureChannelsAndWeightsSumFromID(id objc.ID) *NNReduceFeatureChannelsAndWeightsSum {
 	if id == 0 {
 		return nil

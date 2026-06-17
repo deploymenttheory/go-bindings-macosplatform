@@ -18,11 +18,11 @@ type ProjectJournalEntryElement struct {
 // Unwrap returns the underlying [raw.PHProjectJournalEntryElement].
 func (x *ProjectJournalEntryElement) Unwrap() *raw.PHProjectJournalEntryElement { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ProjectJournalEntryElement) ID() objc.ID { return x.inner.Ptr() }
 
-// ProjectJournalEntryElementFromID adopts an existing toll-free-bridged object id as a ProjectJournalEntryElement (nil for 0).
+// ProjectJournalEntryElementFromID adopts an existing object pointer as a ProjectJournalEntryElement (nil for 0).
 func ProjectJournalEntryElementFromID(id objc.ID) *ProjectJournalEntryElement {
 	if id == 0 {
 		return nil

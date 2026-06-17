@@ -17,11 +17,11 @@ type GaussianDistribution struct {
 // Unwrap returns the underlying [raw.GKGaussianDistribution].
 func (x *GaussianDistribution) Unwrap() *raw.GKGaussianDistribution { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *GaussianDistribution) ID() objc.ID { return x.inner.Ptr() }
 
-// GaussianDistributionFromID adopts an existing toll-free-bridged object id as a GaussianDistribution (nil for 0).
+// GaussianDistributionFromID adopts an existing object pointer as a GaussianDistribution (nil for 0).
 func GaussianDistributionFromID(id objc.ID) *GaussianDistribution {
 	if id == 0 {
 		return nil

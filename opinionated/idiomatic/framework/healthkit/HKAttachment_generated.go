@@ -20,11 +20,11 @@ type Attachment struct {
 // Unwrap returns the underlying [raw.HKAttachment].
 func (x *Attachment) Unwrap() *raw.HKAttachment { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Attachment) ID() objc.ID { return x.inner.Ptr() }
 
-// AttachmentFromID adopts an existing toll-free-bridged object id as a Attachment (nil for 0).
+// AttachmentFromID adopts an existing object pointer as a Attachment (nil for 0).
 func AttachmentFromID(id objc.ID) *Attachment {
 	if id == 0 {
 		return nil

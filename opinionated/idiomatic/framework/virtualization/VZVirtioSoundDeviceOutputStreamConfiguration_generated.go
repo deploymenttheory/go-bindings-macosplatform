@@ -17,11 +17,11 @@ type VirtioSoundDeviceOutputStreamConfiguration struct {
 // Unwrap returns the underlying [raw.VZVirtioSoundDeviceOutputStreamConfiguration].
 func (x *VirtioSoundDeviceOutputStreamConfiguration) Unwrap() *raw.VZVirtioSoundDeviceOutputStreamConfiguration { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *VirtioSoundDeviceOutputStreamConfiguration) ID() objc.ID { return x.inner.Ptr() }
 
-// VirtioSoundDeviceOutputStreamConfigurationFromID adopts an existing toll-free-bridged object id as a VirtioSoundDeviceOutputStreamConfiguration (nil for 0).
+// VirtioSoundDeviceOutputStreamConfigurationFromID adopts an existing object pointer as a VirtioSoundDeviceOutputStreamConfiguration (nil for 0).
 func VirtioSoundDeviceOutputStreamConfigurationFromID(id objc.ID) *VirtioSoundDeviceOutputStreamConfiguration {
 	if id == 0 {
 		return nil

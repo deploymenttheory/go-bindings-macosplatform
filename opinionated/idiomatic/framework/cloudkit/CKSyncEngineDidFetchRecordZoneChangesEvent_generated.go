@@ -18,11 +18,11 @@ type SyncEngineDidFetchRecordZoneChangesEvent struct {
 // Unwrap returns the underlying [raw.CKSyncEngineDidFetchRecordZoneChangesEvent].
 func (x *SyncEngineDidFetchRecordZoneChangesEvent) Unwrap() *raw.CKSyncEngineDidFetchRecordZoneChangesEvent { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SyncEngineDidFetchRecordZoneChangesEvent) ID() objc.ID { return x.inner.Ptr() }
 
-// SyncEngineDidFetchRecordZoneChangesEventFromID adopts an existing toll-free-bridged object id as a SyncEngineDidFetchRecordZoneChangesEvent (nil for 0).
+// SyncEngineDidFetchRecordZoneChangesEventFromID adopts an existing object pointer as a SyncEngineDidFetchRecordZoneChangesEvent (nil for 0).
 func SyncEngineDidFetchRecordZoneChangesEventFromID(id objc.ID) *SyncEngineDidFetchRecordZoneChangesEvent {
 	if id == 0 {
 		return nil

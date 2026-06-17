@@ -19,11 +19,11 @@ type MediaItemArtwork struct {
 // Unwrap returns the underlying [raw.MPMediaItemArtwork].
 func (x *MediaItemArtwork) Unwrap() *raw.MPMediaItemArtwork { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MediaItemArtwork) ID() objc.ID { return x.inner.Ptr() }
 
-// MediaItemArtworkFromID adopts an existing toll-free-bridged object id as a MediaItemArtwork (nil for 0).
+// MediaItemArtworkFromID adopts an existing object pointer as a MediaItemArtwork (nil for 0).
 func MediaItemArtworkFromID(id objc.ID) *MediaItemArtwork {
 	if id == 0 {
 		return nil

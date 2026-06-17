@@ -20,11 +20,11 @@ type ExtensionStreamCustomClockConfiguration struct {
 // Unwrap returns the underlying [raw.CMIOExtensionStreamCustomClockConfiguration].
 func (x *ExtensionStreamCustomClockConfiguration) Unwrap() *raw.CMIOExtensionStreamCustomClockConfiguration { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ExtensionStreamCustomClockConfiguration) ID() objc.ID { return x.inner.Ptr() }
 
-// ExtensionStreamCustomClockConfigurationFromID adopts an existing toll-free-bridged object id as a ExtensionStreamCustomClockConfiguration (nil for 0).
+// ExtensionStreamCustomClockConfigurationFromID adopts an existing object pointer as a ExtensionStreamCustomClockConfiguration (nil for 0).
 func ExtensionStreamCustomClockConfigurationFromID(id objc.ID) *ExtensionStreamCustomClockConfiguration {
 	if id == 0 {
 		return nil

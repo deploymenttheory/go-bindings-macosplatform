@@ -23,11 +23,11 @@ type MatrixNeuronGradient struct {
 // Unwrap returns the underlying [raw.MPSMatrixNeuronGradient].
 func (x *MatrixNeuronGradient) Unwrap() *raw.MPSMatrixNeuronGradient { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MatrixNeuronGradient) ID() objc.ID { return x.inner.Ptr() }
 
-// MatrixNeuronGradientFromID adopts an existing toll-free-bridged object id as a MatrixNeuronGradient (nil for 0).
+// MatrixNeuronGradientFromID adopts an existing object pointer as a MatrixNeuronGradient (nil for 0).
 func MatrixNeuronGradientFromID(id objc.ID) *MatrixNeuronGradient {
 	if id == 0 {
 		return nil

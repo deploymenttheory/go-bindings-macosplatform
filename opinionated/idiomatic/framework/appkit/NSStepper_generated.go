@@ -17,11 +17,11 @@ type Stepper struct {
 // Unwrap returns the underlying [raw.NSStepper].
 func (x *Stepper) Unwrap() *raw.NSStepper { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Stepper) ID() objc.ID { return x.inner.Ptr() }
 
-// StepperFromID adopts an existing toll-free-bridged object id as a Stepper (nil for 0).
+// StepperFromID adopts an existing object pointer as a Stepper (nil for 0).
 func StepperFromID(id objc.ID) *Stepper {
 	if id == 0 {
 		return nil

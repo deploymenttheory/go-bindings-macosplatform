@@ -19,11 +19,11 @@ type DraggingItem struct {
 // Unwrap returns the underlying [raw.NSDraggingItem].
 func (x *DraggingItem) Unwrap() *raw.NSDraggingItem { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DraggingItem) ID() objc.ID { return x.inner.Ptr() }
 
-// DraggingItemFromID adopts an existing toll-free-bridged object id as a DraggingItem (nil for 0).
+// DraggingItemFromID adopts an existing object pointer as a DraggingItem (nil for 0).
 func DraggingItemFromID(id objc.ID) *DraggingItem {
 	if id == 0 {
 		return nil

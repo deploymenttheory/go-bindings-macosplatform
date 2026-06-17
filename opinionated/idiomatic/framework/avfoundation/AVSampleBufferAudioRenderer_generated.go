@@ -21,11 +21,11 @@ type SampleBufferAudioRenderer struct {
 // Unwrap returns the underlying [raw.AVSampleBufferAudioRenderer].
 func (x *SampleBufferAudioRenderer) Unwrap() *raw.AVSampleBufferAudioRenderer { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SampleBufferAudioRenderer) ID() objc.ID { return x.inner.Ptr() }
 
-// SampleBufferAudioRendererFromID adopts an existing toll-free-bridged object id as a SampleBufferAudioRenderer (nil for 0).
+// SampleBufferAudioRendererFromID adopts an existing object pointer as a SampleBufferAudioRenderer (nil for 0).
 func SampleBufferAudioRendererFromID(id objc.ID) *SampleBufferAudioRenderer {
 	if id == 0 {
 		return nil

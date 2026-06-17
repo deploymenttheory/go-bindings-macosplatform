@@ -18,11 +18,11 @@ type PlayerItemMetadataOutput struct {
 // Unwrap returns the underlying [raw.AVPlayerItemMetadataOutput].
 func (x *PlayerItemMetadataOutput) Unwrap() *raw.AVPlayerItemMetadataOutput { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PlayerItemMetadataOutput) ID() objc.ID { return x.inner.Ptr() }
 
-// PlayerItemMetadataOutputFromID adopts an existing toll-free-bridged object id as a PlayerItemMetadataOutput (nil for 0).
+// PlayerItemMetadataOutputFromID adopts an existing object pointer as a PlayerItemMetadataOutput (nil for 0).
 func PlayerItemMetadataOutputFromID(id objc.ID) *PlayerItemMetadataOutput {
 	if id == 0 {
 		return nil

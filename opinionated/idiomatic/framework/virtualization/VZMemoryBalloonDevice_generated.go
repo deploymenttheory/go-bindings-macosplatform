@@ -17,11 +17,11 @@ type MemoryBalloonDevice struct {
 // Unwrap returns the underlying [raw.VZMemoryBalloonDevice].
 func (x *MemoryBalloonDevice) Unwrap() *raw.VZMemoryBalloonDevice { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MemoryBalloonDevice) ID() objc.ID { return x.inner.Ptr() }
 
-// MemoryBalloonDeviceFromID adopts an existing toll-free-bridged object id as a MemoryBalloonDevice (nil for 0).
+// MemoryBalloonDeviceFromID adopts an existing object pointer as a MemoryBalloonDevice (nil for 0).
 func MemoryBalloonDeviceFromID(id objc.ID) *MemoryBalloonDevice {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type CNNUpsamplingNearestGradientNode struct {
 // Unwrap returns the underlying [raw.MPSCNNUpsamplingNearestGradientNode].
 func (x *CNNUpsamplingNearestGradientNode) Unwrap() *raw.MPSCNNUpsamplingNearestGradientNode { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CNNUpsamplingNearestGradientNode) ID() objc.ID { return x.inner.Ptr() }
 
-// CNNUpsamplingNearestGradientNodeFromID adopts an existing toll-free-bridged object id as a CNNUpsamplingNearestGradientNode (nil for 0).
+// CNNUpsamplingNearestGradientNodeFromID adopts an existing object pointer as a CNNUpsamplingNearestGradientNode (nil for 0).
 func CNNUpsamplingNearestGradientNodeFromID(id objc.ID) *CNNUpsamplingNearestGradientNode {
 	if id == 0 {
 		return nil

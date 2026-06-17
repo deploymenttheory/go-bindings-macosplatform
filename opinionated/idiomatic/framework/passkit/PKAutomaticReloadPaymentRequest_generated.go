@@ -19,11 +19,11 @@ type AutomaticReloadPaymentRequest struct {
 // Unwrap returns the underlying [raw.PKAutomaticReloadPaymentRequest].
 func (x *AutomaticReloadPaymentRequest) Unwrap() *raw.PKAutomaticReloadPaymentRequest { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AutomaticReloadPaymentRequest) ID() objc.ID { return x.inner.Ptr() }
 
-// AutomaticReloadPaymentRequestFromID adopts an existing toll-free-bridged object id as a AutomaticReloadPaymentRequest (nil for 0).
+// AutomaticReloadPaymentRequestFromID adopts an existing object pointer as a AutomaticReloadPaymentRequest (nil for 0).
 func AutomaticReloadPaymentRequestFromID(id objc.ID) *AutomaticReloadPaymentRequest {
 	if id == 0 {
 		return nil

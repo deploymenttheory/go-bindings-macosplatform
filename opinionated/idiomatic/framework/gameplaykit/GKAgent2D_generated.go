@@ -18,11 +18,11 @@ type Agent2D struct {
 // Unwrap returns the underlying [raw.GKAgent2D].
 func (x *Agent2D) Unwrap() *raw.GKAgent2D { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Agent2D) ID() objc.ID { return x.inner.Ptr() }
 
-// Agent2DFromID adopts an existing toll-free-bridged object id as a Agent2D (nil for 0).
+// Agent2DFromID adopts an existing object pointer as a Agent2D (nil for 0).
 func Agent2DFromID(id objc.ID) *Agent2D {
 	if id == 0 {
 		return nil

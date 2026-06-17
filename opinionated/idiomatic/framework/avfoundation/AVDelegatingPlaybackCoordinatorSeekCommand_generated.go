@@ -19,11 +19,11 @@ type DelegatingPlaybackCoordinatorSeekCommand struct {
 // Unwrap returns the underlying [raw.AVDelegatingPlaybackCoordinatorSeekCommand].
 func (x *DelegatingPlaybackCoordinatorSeekCommand) Unwrap() *raw.AVDelegatingPlaybackCoordinatorSeekCommand { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DelegatingPlaybackCoordinatorSeekCommand) ID() objc.ID { return x.inner.Ptr() }
 
-// DelegatingPlaybackCoordinatorSeekCommandFromID adopts an existing toll-free-bridged object id as a DelegatingPlaybackCoordinatorSeekCommand (nil for 0).
+// DelegatingPlaybackCoordinatorSeekCommandFromID adopts an existing object pointer as a DelegatingPlaybackCoordinatorSeekCommand (nil for 0).
 func DelegatingPlaybackCoordinatorSeekCommandFromID(id objc.ID) *DelegatingPlaybackCoordinatorSeekCommand {
 	if id == 0 {
 		return nil

@@ -17,11 +17,11 @@ type NotificationSound struct {
 // Unwrap returns the underlying [raw.UNNotificationSound].
 func (x *NotificationSound) Unwrap() *raw.UNNotificationSound { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NotificationSound) ID() objc.ID { return x.inner.Ptr() }
 
-// NotificationSoundFromID adopts an existing toll-free-bridged object id as a NotificationSound (nil for 0).
+// NotificationSoundFromID adopts an existing object pointer as a NotificationSound (nil for 0).
 func NotificationSoundFromID(id objc.ID) *NotificationSound {
 	if id == 0 {
 		return nil

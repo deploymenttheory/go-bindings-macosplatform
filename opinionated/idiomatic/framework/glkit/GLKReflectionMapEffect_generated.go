@@ -18,11 +18,11 @@ type ReflectionMapEffect struct {
 // Unwrap returns the underlying [raw.GLKReflectionMapEffect].
 func (x *ReflectionMapEffect) Unwrap() *raw.GLKReflectionMapEffect { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ReflectionMapEffect) ID() objc.ID { return x.inner.Ptr() }
 
-// ReflectionMapEffectFromID adopts an existing toll-free-bridged object id as a ReflectionMapEffect (nil for 0).
+// ReflectionMapEffectFromID adopts an existing object pointer as a ReflectionMapEffect (nil for 0).
 func ReflectionMapEffectFromID(id objc.ID) *ReflectionMapEffect {
 	if id == 0 {
 		return nil

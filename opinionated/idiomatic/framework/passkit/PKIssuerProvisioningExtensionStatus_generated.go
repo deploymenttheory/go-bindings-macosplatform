@@ -17,11 +17,11 @@ type IssuerProvisioningExtensionStatus struct {
 // Unwrap returns the underlying [raw.PKIssuerProvisioningExtensionStatus].
 func (x *IssuerProvisioningExtensionStatus) Unwrap() *raw.PKIssuerProvisioningExtensionStatus { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *IssuerProvisioningExtensionStatus) ID() objc.ID { return x.inner.Ptr() }
 
-// IssuerProvisioningExtensionStatusFromID adopts an existing toll-free-bridged object id as a IssuerProvisioningExtensionStatus (nil for 0).
+// IssuerProvisioningExtensionStatusFromID adopts an existing object pointer as a IssuerProvisioningExtensionStatus (nil for 0).
 func IssuerProvisioningExtensionStatusFromID(id objc.ID) *IssuerProvisioningExtensionStatus {
 	if id == 0 {
 		return nil

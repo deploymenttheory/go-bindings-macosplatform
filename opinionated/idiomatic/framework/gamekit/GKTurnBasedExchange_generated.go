@@ -21,11 +21,11 @@ type TurnBasedExchange struct {
 // Unwrap returns the underlying [raw.GKTurnBasedExchange].
 func (x *TurnBasedExchange) Unwrap() *raw.GKTurnBasedExchange { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *TurnBasedExchange) ID() objc.ID { return x.inner.Ptr() }
 
-// TurnBasedExchangeFromID adopts an existing toll-free-bridged object id as a TurnBasedExchange (nil for 0).
+// TurnBasedExchangeFromID adopts an existing object pointer as a TurnBasedExchange (nil for 0).
 func TurnBasedExchangeFromID(id objc.ID) *TurnBasedExchange {
 	if id == 0 {
 		return nil

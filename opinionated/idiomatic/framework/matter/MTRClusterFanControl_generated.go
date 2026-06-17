@@ -19,11 +19,11 @@ type MTRClusterFanControl struct {
 // Unwrap returns the underlying [raw.MTRClusterFanControl].
 func (x *MTRClusterFanControl) Unwrap() *raw.MTRClusterFanControl { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRClusterFanControl) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRClusterFanControlFromID adopts an existing toll-free-bridged object id as a MTRClusterFanControl (nil for 0).
+// MTRClusterFanControlFromID adopts an existing object pointer as a MTRClusterFanControl (nil for 0).
 func MTRClusterFanControlFromID(id objc.ID) *MTRClusterFanControl {
 	if id == 0 {
 		return nil

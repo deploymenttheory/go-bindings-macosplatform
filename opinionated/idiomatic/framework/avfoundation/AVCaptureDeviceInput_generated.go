@@ -20,11 +20,11 @@ type CaptureDeviceInput struct {
 // Unwrap returns the underlying [raw.AVCaptureDeviceInput].
 func (x *CaptureDeviceInput) Unwrap() *raw.AVCaptureDeviceInput { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CaptureDeviceInput) ID() objc.ID { return x.inner.Ptr() }
 
-// CaptureDeviceInputFromID adopts an existing toll-free-bridged object id as a CaptureDeviceInput (nil for 0).
+// CaptureDeviceInputFromID adopts an existing object pointer as a CaptureDeviceInput (nil for 0).
 func CaptureDeviceInputFromID(id objc.ID) *CaptureDeviceInput {
 	if id == 0 {
 		return nil

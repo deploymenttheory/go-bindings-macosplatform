@@ -17,11 +17,11 @@ type ServerChangeToken struct {
 // Unwrap returns the underlying [raw.CKServerChangeToken].
 func (x *ServerChangeToken) Unwrap() *raw.CKServerChangeToken { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ServerChangeToken) ID() objc.ID { return x.inner.Ptr() }
 
-// ServerChangeTokenFromID adopts an existing toll-free-bridged object id as a ServerChangeToken (nil for 0).
+// ServerChangeTokenFromID adopts an existing object pointer as a ServerChangeToken (nil for 0).
 func ServerChangeTokenFromID(id objc.ID) *ServerChangeToken {
 	if id == 0 {
 		return nil

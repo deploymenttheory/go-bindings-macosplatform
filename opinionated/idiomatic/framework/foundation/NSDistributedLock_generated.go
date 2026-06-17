@@ -18,11 +18,11 @@ type DistributedLock struct {
 // Unwrap returns the underlying [raw.NSDistributedLock].
 func (x *DistributedLock) Unwrap() *raw.NSDistributedLock { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DistributedLock) ID() objc.ID { return x.inner.Ptr() }
 
-// DistributedLockFromID adopts an existing toll-free-bridged object id as a DistributedLock (nil for 0).
+// DistributedLockFromID adopts an existing object pointer as a DistributedLock (nil for 0).
 func DistributedLockFromID(id objc.ID) *DistributedLock {
 	if id == 0 {
 		return nil

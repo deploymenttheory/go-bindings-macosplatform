@@ -20,11 +20,11 @@ type AudioFormat struct {
 // Unwrap returns the underlying [raw.AVAudioFormat].
 func (x *AudioFormat) Unwrap() *raw.AVAudioFormat { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AudioFormat) ID() objc.ID { return x.inner.Ptr() }
 
-// AudioFormatFromID adopts an existing toll-free-bridged object id as a AudioFormat (nil for 0).
+// AudioFormatFromID adopts an existing object pointer as a AudioFormat (nil for 0).
 func AudioFormatFromID(id objc.ID) *AudioFormat {
 	if id == 0 {
 		return nil

@@ -17,11 +17,11 @@ type TitlebarAccessoryViewController struct {
 // Unwrap returns the underlying [raw.NSTitlebarAccessoryViewController].
 func (x *TitlebarAccessoryViewController) Unwrap() *raw.NSTitlebarAccessoryViewController { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *TitlebarAccessoryViewController) ID() objc.ID { return x.inner.Ptr() }
 
-// TitlebarAccessoryViewControllerFromID adopts an existing toll-free-bridged object id as a TitlebarAccessoryViewController (nil for 0).
+// TitlebarAccessoryViewControllerFromID adopts an existing object pointer as a TitlebarAccessoryViewController (nil for 0).
 func TitlebarAccessoryViewControllerFromID(id objc.ID) *TitlebarAccessoryViewController {
 	if id == 0 {
 		return nil

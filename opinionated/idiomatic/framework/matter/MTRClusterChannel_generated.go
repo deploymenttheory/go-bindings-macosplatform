@@ -21,11 +21,11 @@ type MTRClusterChannel struct {
 // Unwrap returns the underlying [raw.MTRClusterChannel].
 func (x *MTRClusterChannel) Unwrap() *raw.MTRClusterChannel { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRClusterChannel) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRClusterChannelFromID adopts an existing toll-free-bridged object id as a MTRClusterChannel (nil for 0).
+// MTRClusterChannelFromID adopts an existing object pointer as a MTRClusterChannel (nil for 0).
 func MTRClusterChannelFromID(id objc.ID) *MTRClusterChannel {
 	if id == 0 {
 		return nil

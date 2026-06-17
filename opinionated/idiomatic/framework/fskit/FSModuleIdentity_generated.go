@@ -19,11 +19,11 @@ type ModuleIdentity struct {
 // Unwrap returns the underlying [raw.FSModuleIdentity].
 func (x *ModuleIdentity) Unwrap() *raw.FSModuleIdentity { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ModuleIdentity) ID() objc.ID { return x.inner.Ptr() }
 
-// ModuleIdentityFromID adopts an existing toll-free-bridged object id as a ModuleIdentity (nil for 0).
+// ModuleIdentityFromID adopts an existing object pointer as a ModuleIdentity (nil for 0).
 func ModuleIdentityFromID(id objc.ID) *ModuleIdentity {
 	if id == 0 {
 		return nil

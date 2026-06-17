@@ -19,11 +19,11 @@ type State struct {
 // Unwrap returns the underlying [raw.MLState].
 func (x *State) Unwrap() *raw.MLState { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *State) ID() objc.ID { return x.inner.Ptr() }
 
-// StateFromID adopts an existing toll-free-bridged object id as a State (nil for 0).
+// StateFromID adopts an existing object pointer as a State (nil for 0).
 func StateFromID(id objc.ID) *State {
 	if id == 0 {
 		return nil

@@ -22,11 +22,11 @@ type TextureLoader struct {
 // Unwrap returns the underlying [raw.MTKTextureLoader].
 func (x *TextureLoader) Unwrap() *raw.MTKTextureLoader { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *TextureLoader) ID() objc.ID { return x.inner.Ptr() }
 
-// TextureLoaderFromID adopts an existing toll-free-bridged object id as a TextureLoader (nil for 0).
+// TextureLoaderFromID adopts an existing object pointer as a TextureLoader (nil for 0).
 func TextureLoaderFromID(id objc.ID) *TextureLoader {
 	if id == 0 {
 		return nil

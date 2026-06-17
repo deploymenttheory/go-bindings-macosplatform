@@ -19,11 +19,11 @@ type MTRActionsClusterEndpointListStruct struct {
 // Unwrap returns the underlying [raw.MTRActionsClusterEndpointListStruct].
 func (x *MTRActionsClusterEndpointListStruct) Unwrap() *raw.MTRActionsClusterEndpointListStruct { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRActionsClusterEndpointListStruct) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRActionsClusterEndpointListStructFromID adopts an existing toll-free-bridged object id as a MTRActionsClusterEndpointListStruct (nil for 0).
+// MTRActionsClusterEndpointListStructFromID adopts an existing object pointer as a MTRActionsClusterEndpointListStruct (nil for 0).
 func MTRActionsClusterEndpointListStructFromID(id objc.ID) *MTRActionsClusterEndpointListStruct {
 	if id == 0 {
 		return nil

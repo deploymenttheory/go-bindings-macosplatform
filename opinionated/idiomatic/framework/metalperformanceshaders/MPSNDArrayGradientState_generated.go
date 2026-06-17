@@ -18,11 +18,11 @@ type NDArrayGradientState struct {
 // Unwrap returns the underlying [raw.MPSNDArrayGradientState].
 func (x *NDArrayGradientState) Unwrap() *raw.MPSNDArrayGradientState { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NDArrayGradientState) ID() objc.ID { return x.inner.Ptr() }
 
-// NDArrayGradientStateFromID adopts an existing toll-free-bridged object id as a NDArrayGradientState (nil for 0).
+// NDArrayGradientStateFromID adopts an existing object pointer as a NDArrayGradientState (nil for 0).
 func NDArrayGradientStateFromID(id objc.ID) *NDArrayGradientState {
 	if id == 0 {
 		return nil

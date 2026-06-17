@@ -18,11 +18,11 @@ type BackgroundActivityScheduler struct {
 // Unwrap returns the underlying [raw.NSBackgroundActivityScheduler].
 func (x *BackgroundActivityScheduler) Unwrap() *raw.NSBackgroundActivityScheduler { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *BackgroundActivityScheduler) ID() objc.ID { return x.inner.Ptr() }
 
-// BackgroundActivitySchedulerFromID adopts an existing toll-free-bridged object id as a BackgroundActivityScheduler (nil for 0).
+// BackgroundActivitySchedulerFromID adopts an existing object pointer as a BackgroundActivityScheduler (nil for 0).
 func BackgroundActivitySchedulerFromID(id objc.ID) *BackgroundActivityScheduler {
 	if id == 0 {
 		return nil

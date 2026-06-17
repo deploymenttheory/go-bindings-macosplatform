@@ -21,11 +21,11 @@ type MTRBaseClusterNetworkCommissioning struct {
 // Unwrap returns the underlying [raw.MTRBaseClusterNetworkCommissioning].
 func (x *MTRBaseClusterNetworkCommissioning) Unwrap() *raw.MTRBaseClusterNetworkCommissioning { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRBaseClusterNetworkCommissioning) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRBaseClusterNetworkCommissioningFromID adopts an existing toll-free-bridged object id as a MTRBaseClusterNetworkCommissioning (nil for 0).
+// MTRBaseClusterNetworkCommissioningFromID adopts an existing object pointer as a MTRBaseClusterNetworkCommissioning (nil for 0).
 func MTRBaseClusterNetworkCommissioningFromID(id objc.ID) *MTRBaseClusterNetworkCommissioning {
 	if id == 0 {
 		return nil

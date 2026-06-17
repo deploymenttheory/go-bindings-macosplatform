@@ -17,11 +17,11 @@ type MIDIPolyPressureEvent struct {
 // Unwrap returns the underlying [raw.AVMIDIPolyPressureEvent].
 func (x *MIDIPolyPressureEvent) Unwrap() *raw.AVMIDIPolyPressureEvent { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MIDIPolyPressureEvent) ID() objc.ID { return x.inner.Ptr() }
 
-// MIDIPolyPressureEventFromID adopts an existing toll-free-bridged object id as a MIDIPolyPressureEvent (nil for 0).
+// MIDIPolyPressureEventFromID adopts an existing object pointer as a MIDIPolyPressureEvent (nil for 0).
 func MIDIPolyPressureEventFromID(id objc.ID) *MIDIPolyPressureEvent {
 	if id == 0 {
 		return nil

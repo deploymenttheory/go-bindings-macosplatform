@@ -20,11 +20,11 @@ type AmbientMixerDefinition struct {
 // Unwrap returns the underlying [raw.PHASEAmbientMixerDefinition].
 func (x *AmbientMixerDefinition) Unwrap() *raw.PHASEAmbientMixerDefinition { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AmbientMixerDefinition) ID() objc.ID { return x.inner.Ptr() }
 
-// AmbientMixerDefinitionFromID adopts an existing toll-free-bridged object id as a AmbientMixerDefinition (nil for 0).
+// AmbientMixerDefinitionFromID adopts an existing object pointer as a AmbientMixerDefinition (nil for 0).
 func AmbientMixerDefinitionFromID(id objc.ID) *AmbientMixerDefinition {
 	if id == 0 {
 		return nil

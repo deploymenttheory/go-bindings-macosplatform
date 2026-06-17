@@ -17,11 +17,11 @@ type ScreenTimeConfiguration struct {
 // Unwrap returns the underlying [raw.STScreenTimeConfiguration].
 func (x *ScreenTimeConfiguration) Unwrap() *raw.STScreenTimeConfiguration { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ScreenTimeConfiguration) ID() objc.ID { return x.inner.Ptr() }
 
-// ScreenTimeConfigurationFromID adopts an existing toll-free-bridged object id as a ScreenTimeConfiguration (nil for 0).
+// ScreenTimeConfigurationFromID adopts an existing object pointer as a ScreenTimeConfiguration (nil for 0).
 func ScreenTimeConfigurationFromID(id objc.ID) *ScreenTimeConfiguration {
 	if id == 0 {
 		return nil

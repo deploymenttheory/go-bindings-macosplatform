@@ -17,11 +17,11 @@ type StringResolutionResult struct {
 // Unwrap returns the underlying [raw.INStringResolutionResult].
 func (x *StringResolutionResult) Unwrap() *raw.INStringResolutionResult { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *StringResolutionResult) ID() objc.ID { return x.inner.Ptr() }
 
-// StringResolutionResultFromID adopts an existing toll-free-bridged object id as a StringResolutionResult (nil for 0).
+// StringResolutionResultFromID adopts an existing object pointer as a StringResolutionResult (nil for 0).
 func StringResolutionResultFromID(id objc.ID) *StringResolutionResult {
 	if id == 0 {
 		return nil

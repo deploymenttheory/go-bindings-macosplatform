@@ -20,11 +20,11 @@ type Envelope struct {
 // Unwrap returns the underlying [raw.PHASEEnvelope].
 func (x *Envelope) Unwrap() *raw.PHASEEnvelope { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Envelope) ID() objc.ID { return x.inner.Ptr() }
 
-// EnvelopeFromID adopts an existing toll-free-bridged object id as a Envelope (nil for 0).
+// EnvelopeFromID adopts an existing object pointer as a Envelope (nil for 0).
 func EnvelopeFromID(id objc.ID) *Envelope {
 	if id == 0 {
 		return nil

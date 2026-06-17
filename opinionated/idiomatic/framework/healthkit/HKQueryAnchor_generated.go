@@ -17,11 +17,11 @@ type QueryAnchor struct {
 // Unwrap returns the underlying [raw.HKQueryAnchor].
 func (x *QueryAnchor) Unwrap() *raw.HKQueryAnchor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *QueryAnchor) ID() objc.ID { return x.inner.Ptr() }
 
-// QueryAnchorFromID adopts an existing toll-free-bridged object id as a QueryAnchor (nil for 0).
+// QueryAnchorFromID adopts an existing object pointer as a QueryAnchor (nil for 0).
 func QueryAnchorFromID(id objc.ID) *QueryAnchor {
 	if id == 0 {
 		return nil

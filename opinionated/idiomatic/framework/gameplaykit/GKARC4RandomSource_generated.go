@@ -18,11 +18,11 @@ type ARC4RandomSource struct {
 // Unwrap returns the underlying [raw.GKARC4RandomSource].
 func (x *ARC4RandomSource) Unwrap() *raw.GKARC4RandomSource { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ARC4RandomSource) ID() objc.ID { return x.inner.Ptr() }
 
-// ARC4RandomSourceFromID adopts an existing toll-free-bridged object id as a ARC4RandomSource (nil for 0).
+// ARC4RandomSourceFromID adopts an existing object pointer as a ARC4RandomSource (nil for 0).
 func ARC4RandomSourceFromID(id objc.ID) *ARC4RandomSource {
 	if id == 0 {
 		return nil

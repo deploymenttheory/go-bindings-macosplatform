@@ -17,11 +17,11 @@ type LogPosition struct {
 // Unwrap returns the underlying [raw.OSLogPosition].
 func (x *LogPosition) Unwrap() *raw.OSLogPosition { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *LogPosition) ID() objc.ID { return x.inner.Ptr() }
 
-// LogPositionFromID adopts an existing toll-free-bridged object id as a LogPosition (nil for 0).
+// LogPositionFromID adopts an existing object pointer as a LogPosition (nil for 0).
 func LogPositionFromID(id objc.ID) *LogPosition {
 	if id == 0 {
 		return nil

@@ -19,11 +19,11 @@ type TextSuggestion struct {
 // Unwrap returns the underlying [raw.BETextSuggestion].
 func (x *TextSuggestion) Unwrap() *raw.BETextSuggestion { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *TextSuggestion) ID() objc.ID { return x.inner.Ptr() }
 
-// TextSuggestionFromID adopts an existing toll-free-bridged object id as a TextSuggestion (nil for 0).
+// TextSuggestionFromID adopts an existing object pointer as a TextSuggestion (nil for 0).
 func TextSuggestionFromID(id objc.ID) *TextSuggestion {
 	if id == 0 {
 		return nil

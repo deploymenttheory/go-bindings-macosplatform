@@ -19,11 +19,11 @@ type MTRGroupsClusterAddGroupParams struct {
 // Unwrap returns the underlying [raw.MTRGroupsClusterAddGroupParams].
 func (x *MTRGroupsClusterAddGroupParams) Unwrap() *raw.MTRGroupsClusterAddGroupParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRGroupsClusterAddGroupParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRGroupsClusterAddGroupParamsFromID adopts an existing toll-free-bridged object id as a MTRGroupsClusterAddGroupParams (nil for 0).
+// MTRGroupsClusterAddGroupParamsFromID adopts an existing object pointer as a MTRGroupsClusterAddGroupParams (nil for 0).
 func MTRGroupsClusterAddGroupParamsFromID(id objc.ID) *MTRGroupsClusterAddGroupParams {
 	if id == 0 {
 		return nil

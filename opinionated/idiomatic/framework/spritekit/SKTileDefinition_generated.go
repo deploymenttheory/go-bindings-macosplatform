@@ -21,11 +21,11 @@ type TileDefinition struct {
 // Unwrap returns the underlying [raw.SKTileDefinition].
 func (x *TileDefinition) Unwrap() *raw.SKTileDefinition { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *TileDefinition) ID() objc.ID { return x.inner.Ptr() }
 
-// TileDefinitionFromID adopts an existing toll-free-bridged object id as a TileDefinition (nil for 0).
+// TileDefinitionFromID adopts an existing object pointer as a TileDefinition (nil for 0).
 func TileDefinitionFromID(id objc.ID) *TileDefinition {
 	if id == 0 {
 		return nil

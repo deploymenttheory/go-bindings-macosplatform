@@ -17,11 +17,11 @@ type ParameterEvent struct {
 // Unwrap returns the underlying [raw.AVParameterEvent].
 func (x *ParameterEvent) Unwrap() *raw.AVParameterEvent { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ParameterEvent) ID() objc.ID { return x.inner.Ptr() }
 
-// ParameterEventFromID adopts an existing toll-free-bridged object id as a ParameterEvent (nil for 0).
+// ParameterEventFromID adopts an existing object pointer as a ParameterEvent (nil for 0).
 func ParameterEventFromID(id objc.ID) *ParameterEvent {
 	if id == 0 {
 		return nil

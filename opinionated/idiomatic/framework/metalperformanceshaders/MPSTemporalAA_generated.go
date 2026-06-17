@@ -21,11 +21,11 @@ type TemporalAA struct {
 // Unwrap returns the underlying [raw.MPSTemporalAA].
 func (x *TemporalAA) Unwrap() *raw.MPSTemporalAA { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *TemporalAA) ID() objc.ID { return x.inner.Ptr() }
 
-// TemporalAAFromID adopts an existing toll-free-bridged object id as a TemporalAA (nil for 0).
+// TemporalAAFromID adopts an existing object pointer as a TemporalAA (nil for 0).
 func TemporalAAFromID(id objc.ID) *TemporalAA {
 	if id == 0 {
 		return nil

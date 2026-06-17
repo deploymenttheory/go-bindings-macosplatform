@@ -18,11 +18,11 @@ type MTRMessagesClusterMessagePresentedEvent struct {
 // Unwrap returns the underlying [raw.MTRMessagesClusterMessagePresentedEvent].
 func (x *MTRMessagesClusterMessagePresentedEvent) Unwrap() *raw.MTRMessagesClusterMessagePresentedEvent { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRMessagesClusterMessagePresentedEvent) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRMessagesClusterMessagePresentedEventFromID adopts an existing toll-free-bridged object id as a MTRMessagesClusterMessagePresentedEvent (nil for 0).
+// MTRMessagesClusterMessagePresentedEventFromID adopts an existing object pointer as a MTRMessagesClusterMessagePresentedEvent (nil for 0).
 func MTRMessagesClusterMessagePresentedEventFromID(id objc.ID) *MTRMessagesClusterMessagePresentedEvent {
 	if id == 0 {
 		return nil

@@ -10,39 +10,39 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// KODErrorDomainFramework returns the CoreFoundation constant kODErrorDomainFramework as a toll-free-bridged objc.ID.
+// KODErrorDomainFramework returns the value of the CoreFoundation reference constant kODErrorDomainFramework as an objc.ID.
 func KODErrorDomainFramework() objc.ID { return purego.CFConstant(raw.KODErrorDomainFramework()) }
 
-// KODSessionProxyAddress returns the CoreFoundation constant kODSessionProxyAddress as a toll-free-bridged objc.ID.
+// KODSessionProxyAddress returns the value of the CoreFoundation reference constant kODSessionProxyAddress as an objc.ID.
 func KODSessionProxyAddress() objc.ID { return purego.CFConstant(raw.KODSessionProxyAddress()) }
 
-// KODSessionProxyPort returns the CoreFoundation constant kODSessionProxyPort as a toll-free-bridged objc.ID.
+// KODSessionProxyPort returns the value of the CoreFoundation reference constant kODSessionProxyPort as an objc.ID.
 func KODSessionProxyPort() objc.ID { return purego.CFConstant(raw.KODSessionProxyPort()) }
 
-// KODSessionProxyUsername returns the CoreFoundation constant kODSessionProxyUsername as a toll-free-bridged objc.ID.
+// KODSessionProxyUsername returns the value of the CoreFoundation reference constant kODSessionProxyUsername as an objc.ID.
 func KODSessionProxyUsername() objc.ID { return purego.CFConstant(raw.KODSessionProxyUsername()) }
 
-// KODSessionProxyPassword returns the CoreFoundation constant kODSessionProxyPassword as a toll-free-bridged objc.ID.
+// KODSessionProxyPassword returns the value of the CoreFoundation reference constant kODSessionProxyPassword as an objc.ID.
 func KODSessionProxyPassword() objc.ID { return purego.CFConstant(raw.KODSessionProxyPassword()) }
 
-// KODModuleConfigOptionQueryTimeout returns the CoreFoundation constant kODModuleConfigOptionQueryTimeout as a toll-free-bridged objc.ID.
+// KODModuleConfigOptionQueryTimeout returns the value of the CoreFoundation reference constant kODModuleConfigOptionQueryTimeout as an objc.ID.
 func KODModuleConfigOptionQueryTimeout() objc.ID { return purego.CFConstant(raw.KODModuleConfigOptionQueryTimeout()) }
 
-// KODModuleConfigOptionConnectionSetupTimeout returns the CoreFoundation constant kODModuleConfigOptionConnectionSetupTimeout as a toll-free-bridged objc.ID.
+// KODModuleConfigOptionConnectionSetupTimeout returns the value of the CoreFoundation reference constant kODModuleConfigOptionConnectionSetupTimeout as an objc.ID.
 func KODModuleConfigOptionConnectionSetupTimeout() objc.ID { return purego.CFConstant(raw.KODModuleConfigOptionConnectionSetupTimeout()) }
 
-// KODModuleConfigOptionConnectionIdleDisconnect returns the CoreFoundation constant kODModuleConfigOptionConnectionIdleDisconnect as a toll-free-bridged objc.ID.
+// KODModuleConfigOptionConnectionIdleDisconnect returns the value of the CoreFoundation reference constant kODModuleConfigOptionConnectionIdleDisconnect as an objc.ID.
 func KODModuleConfigOptionConnectionIdleDisconnect() objc.ID { return purego.CFConstant(raw.KODModuleConfigOptionConnectionIdleDisconnect()) }
 
-// KODModuleConfigOptionPacketSigning returns the CoreFoundation constant kODModuleConfigOptionPacketSigning as a toll-free-bridged objc.ID.
+// KODModuleConfigOptionPacketSigning returns the value of the CoreFoundation reference constant kODModuleConfigOptionPacketSigning as an objc.ID.
 func KODModuleConfigOptionPacketSigning() objc.ID { return purego.CFConstant(raw.KODModuleConfigOptionPacketSigning()) }
 
-// KODModuleConfigOptionPacketEncryption returns the CoreFoundation constant kODModuleConfigOptionPacketEncryption as a toll-free-bridged objc.ID.
+// KODModuleConfigOptionPacketEncryption returns the value of the CoreFoundation reference constant kODModuleConfigOptionPacketEncryption as an objc.ID.
 func KODModuleConfigOptionPacketEncryption() objc.ID { return purego.CFConstant(raw.KODModuleConfigOptionPacketEncryption()) }
 
-// KODModuleConfigOptionManInTheMiddle returns the CoreFoundation constant kODModuleConfigOptionManInTheMiddle as a toll-free-bridged objc.ID.
+// KODModuleConfigOptionManInTheMiddle returns the value of the CoreFoundation reference constant kODModuleConfigOptionManInTheMiddle as an objc.ID.
 func KODModuleConfigOptionManInTheMiddle() objc.ID { return purego.CFConstant(raw.KODModuleConfigOptionManInTheMiddle()) }
 
-// KODNodeOptionsQuerySkippedSubnode returns the CoreFoundation constant kODNodeOptionsQuerySkippedSubnode as a toll-free-bridged objc.ID.
+// KODNodeOptionsQuerySkippedSubnode returns the value of the CoreFoundation reference constant kODNodeOptionsQuerySkippedSubnode as an objc.ID.
 func KODNodeOptionsQuerySkippedSubnode() objc.ID { return purego.CFConstant(raw.KODNodeOptionsQuerySkippedSubnode()) }
 

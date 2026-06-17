@@ -20,11 +20,11 @@ type AssetCollection struct {
 // Unwrap returns the underlying [raw.PHAssetCollection].
 func (x *AssetCollection) Unwrap() *raw.PHAssetCollection { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AssetCollection) ID() objc.ID { return x.inner.Ptr() }
 
-// AssetCollectionFromID adopts an existing toll-free-bridged object id as a AssetCollection (nil for 0).
+// AssetCollectionFromID adopts an existing object pointer as a AssetCollection (nil for 0).
 func AssetCollectionFromID(id objc.ID) *AssetCollection {
 	if id == 0 {
 		return nil

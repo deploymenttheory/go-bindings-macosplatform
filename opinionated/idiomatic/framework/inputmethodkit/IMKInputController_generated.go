@@ -19,11 +19,11 @@ type InputController struct {
 // Unwrap returns the underlying [raw.IMKInputController].
 func (x *InputController) Unwrap() *raw.IMKInputController { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *InputController) ID() objc.ID { return x.inner.Ptr() }
 
-// InputControllerFromID adopts an existing toll-free-bridged object id as a InputController (nil for 0).
+// InputControllerFromID adopts an existing object pointer as a InputController (nil for 0).
 func InputControllerFromID(id objc.ID) *InputController {
 	if id == 0 {
 		return nil

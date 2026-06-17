@@ -17,11 +17,11 @@ type ColorPanel struct {
 // Unwrap returns the underlying [raw.NSColorPanel].
 func (x *ColorPanel) Unwrap() *raw.NSColorPanel { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ColorPanel) ID() objc.ID { return x.inner.Ptr() }
 
-// ColorPanelFromID adopts an existing toll-free-bridged object id as a ColorPanel (nil for 0).
+// ColorPanelFromID adopts an existing object pointer as a ColorPanel (nil for 0).
 func ColorPanelFromID(id objc.ID) *ColorPanel {
 	if id == 0 {
 		return nil

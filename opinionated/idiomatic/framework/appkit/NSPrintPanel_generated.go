@@ -20,11 +20,11 @@ type PrintPanel struct {
 // Unwrap returns the underlying [raw.NSPrintPanel].
 func (x *PrintPanel) Unwrap() *raw.NSPrintPanel { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PrintPanel) ID() objc.ID { return x.inner.Ptr() }
 
-// PrintPanelFromID adopts an existing toll-free-bridged object id as a PrintPanel (nil for 0).
+// PrintPanelFromID adopts an existing object pointer as a PrintPanel (nil for 0).
 func PrintPanelFromID(id objc.ID) *PrintPanel {
 	if id == 0 {
 		return nil

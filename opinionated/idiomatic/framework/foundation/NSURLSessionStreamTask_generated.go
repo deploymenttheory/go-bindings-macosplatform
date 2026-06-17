@@ -20,11 +20,11 @@ type URLSessionStreamTask struct {
 // Unwrap returns the underlying [raw.NSURLSessionStreamTask].
 func (x *URLSessionStreamTask) Unwrap() *raw.NSURLSessionStreamTask { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *URLSessionStreamTask) ID() objc.ID { return x.inner.Ptr() }
 
-// URLSessionStreamTaskFromID adopts an existing toll-free-bridged object id as a URLSessionStreamTask (nil for 0).
+// URLSessionStreamTaskFromID adopts an existing object pointer as a URLSessionStreamTask (nil for 0).
 func URLSessionStreamTaskFromID(id objc.ID) *URLSessionStreamTask {
 	if id == 0 {
 		return nil

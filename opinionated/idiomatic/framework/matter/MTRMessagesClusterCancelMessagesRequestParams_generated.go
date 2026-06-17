@@ -18,11 +18,11 @@ type MTRMessagesClusterCancelMessagesRequestParams struct {
 // Unwrap returns the underlying [raw.MTRMessagesClusterCancelMessagesRequestParams].
 func (x *MTRMessagesClusterCancelMessagesRequestParams) Unwrap() *raw.MTRMessagesClusterCancelMessagesRequestParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRMessagesClusterCancelMessagesRequestParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRMessagesClusterCancelMessagesRequestParamsFromID adopts an existing toll-free-bridged object id as a MTRMessagesClusterCancelMessagesRequestParams (nil for 0).
+// MTRMessagesClusterCancelMessagesRequestParamsFromID adopts an existing object pointer as a MTRMessagesClusterCancelMessagesRequestParams (nil for 0).
 func MTRMessagesClusterCancelMessagesRequestParamsFromID(id objc.ID) *MTRMessagesClusterCancelMessagesRequestParams {
 	if id == 0 {
 		return nil

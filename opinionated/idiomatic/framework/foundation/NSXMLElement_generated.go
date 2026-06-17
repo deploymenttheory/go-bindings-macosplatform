@@ -20,11 +20,11 @@ type XMLElement struct {
 // Unwrap returns the underlying [raw.NSXMLElement].
 func (x *XMLElement) Unwrap() *raw.NSXMLElement { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *XMLElement) ID() objc.ID { return x.inner.Ptr() }
 
-// XMLElementFromID adopts an existing toll-free-bridged object id as a XMLElement (nil for 0).
+// XMLElementFromID adopts an existing object pointer as a XMLElement (nil for 0).
 func XMLElementFromID(id objc.ID) *XMLElement {
 	if id == 0 {
 		return nil

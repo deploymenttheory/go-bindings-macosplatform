@@ -21,11 +21,11 @@ type SplitViewController struct {
 // Unwrap returns the underlying [raw.NSSplitViewController].
 func (x *SplitViewController) Unwrap() *raw.NSSplitViewController { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SplitViewController) ID() objc.ID { return x.inner.Ptr() }
 
-// SplitViewControllerFromID adopts an existing toll-free-bridged object id as a SplitViewController (nil for 0).
+// SplitViewControllerFromID adopts an existing object pointer as a SplitViewController (nil for 0).
 func SplitViewControllerFromID(id objc.ID) *SplitViewController {
 	if id == 0 {
 		return nil

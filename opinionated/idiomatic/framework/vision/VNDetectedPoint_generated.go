@@ -17,11 +17,11 @@ type DetectedPoint struct {
 // Unwrap returns the underlying [raw.VNDetectedPoint].
 func (x *DetectedPoint) Unwrap() *raw.VNDetectedPoint { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DetectedPoint) ID() objc.ID { return x.inner.Ptr() }
 
-// DetectedPointFromID adopts an existing toll-free-bridged object id as a DetectedPoint (nil for 0).
+// DetectedPointFromID adopts an existing object pointer as a DetectedPoint (nil for 0).
 func DetectedPointFromID(id objc.ID) *DetectedPoint {
 	if id == 0 {
 		return nil

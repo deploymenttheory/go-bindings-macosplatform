@@ -19,11 +19,11 @@ type Statistics struct {
 // Unwrap returns the underlying [raw.HKStatistics].
 func (x *Statistics) Unwrap() *raw.HKStatistics { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Statistics) ID() objc.ID { return x.inner.Ptr() }
 
-// StatisticsFromID adopts an existing toll-free-bridged object id as a Statistics (nil for 0).
+// StatisticsFromID adopts an existing object pointer as a Statistics (nil for 0).
 func StatisticsFromID(id objc.ID) *Statistics {
 	if id == 0 {
 		return nil

@@ -19,11 +19,11 @@ type NEFilterProviderConfiguration struct {
 // Unwrap returns the underlying [raw.NEFilterProviderConfiguration].
 func (x *NEFilterProviderConfiguration) Unwrap() *raw.NEFilterProviderConfiguration { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NEFilterProviderConfiguration) ID() objc.ID { return x.inner.Ptr() }
 
-// NEFilterProviderConfigurationFromID adopts an existing toll-free-bridged object id as a NEFilterProviderConfiguration (nil for 0).
+// NEFilterProviderConfigurationFromID adopts an existing object pointer as a NEFilterProviderConfiguration (nil for 0).
 func NEFilterProviderConfigurationFromID(id objc.ID) *NEFilterProviderConfiguration {
 	if id == 0 {
 		return nil

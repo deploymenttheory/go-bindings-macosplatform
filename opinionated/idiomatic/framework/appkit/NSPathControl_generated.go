@@ -20,11 +20,11 @@ type PathControl struct {
 // Unwrap returns the underlying [raw.NSPathControl].
 func (x *PathControl) Unwrap() *raw.NSPathControl { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PathControl) ID() objc.ID { return x.inner.Ptr() }
 
-// PathControlFromID adopts an existing toll-free-bridged object id as a PathControl (nil for 0).
+// PathControlFromID adopts an existing object pointer as a PathControl (nil for 0).
 func PathControlFromID(id objc.ID) *PathControl {
 	if id == 0 {
 		return nil

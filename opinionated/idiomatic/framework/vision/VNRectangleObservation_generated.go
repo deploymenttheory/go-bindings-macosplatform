@@ -18,11 +18,11 @@ type RectangleObservation struct {
 // Unwrap returns the underlying [raw.VNRectangleObservation].
 func (x *RectangleObservation) Unwrap() *raw.VNRectangleObservation { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *RectangleObservation) ID() objc.ID { return x.inner.Ptr() }
 
-// RectangleObservationFromID adopts an existing toll-free-bridged object id as a RectangleObservation (nil for 0).
+// RectangleObservationFromID adopts an existing object pointer as a RectangleObservation (nil for 0).
 func RectangleObservationFromID(id objc.ID) *RectangleObservation {
 	if id == 0 {
 		return nil

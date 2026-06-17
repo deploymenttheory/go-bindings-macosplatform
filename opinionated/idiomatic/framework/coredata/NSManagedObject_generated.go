@@ -18,11 +18,11 @@ type ManagedObject struct {
 // Unwrap returns the underlying [raw.NSManagedObject].
 func (x *ManagedObject) Unwrap() *raw.NSManagedObject { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ManagedObject) ID() objc.ID { return x.inner.Ptr() }
 
-// ManagedObjectFromID adopts an existing toll-free-bridged object id as a ManagedObject (nil for 0).
+// ManagedObjectFromID adopts an existing object pointer as a ManagedObject (nil for 0).
 func ManagedObjectFromID(id objc.ID) *ManagedObject {
 	if id == 0 {
 		return nil

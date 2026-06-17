@@ -17,11 +17,11 @@ type AssetResourceRequestOptions struct {
 // Unwrap returns the underlying [raw.PHAssetResourceRequestOptions].
 func (x *AssetResourceRequestOptions) Unwrap() *raw.PHAssetResourceRequestOptions { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AssetResourceRequestOptions) ID() objc.ID { return x.inner.Ptr() }
 
-// AssetResourceRequestOptionsFromID adopts an existing toll-free-bridged object id as a AssetResourceRequestOptions (nil for 0).
+// AssetResourceRequestOptionsFromID adopts an existing object pointer as a AssetResourceRequestOptions (nil for 0).
 func AssetResourceRequestOptionsFromID(id objc.ID) *AssetResourceRequestOptions {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type FileHandle struct {
 // Unwrap returns the underlying [raw.NSFileHandle].
 func (x *FileHandle) Unwrap() *raw.NSFileHandle { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *FileHandle) ID() objc.ID { return x.inner.Ptr() }
 
-// FileHandleFromID adopts an existing toll-free-bridged object id as a FileHandle (nil for 0).
+// FileHandleFromID adopts an existing object pointer as a FileHandle (nil for 0).
 func FileHandleFromID(id objc.ID) *FileHandle {
 	if id == 0 {
 		return nil

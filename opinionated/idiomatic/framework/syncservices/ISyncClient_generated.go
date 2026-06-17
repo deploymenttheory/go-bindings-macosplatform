@@ -19,11 +19,11 @@ type ISyncClient struct {
 // Unwrap returns the underlying [raw.ISyncClient].
 func (x *ISyncClient) Unwrap() *raw.ISyncClient { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ISyncClient) ID() objc.ID { return x.inner.Ptr() }
 
-// ISyncClientFromID adopts an existing toll-free-bridged object id as a ISyncClient (nil for 0).
+// ISyncClientFromID adopts an existing object pointer as a ISyncClient (nil for 0).
 func ISyncClientFromID(id objc.ID) *ISyncClient {
 	if id == 0 {
 		return nil

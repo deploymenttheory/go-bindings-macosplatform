@@ -17,11 +17,11 @@ type DOMCDATASection struct {
 // Unwrap returns the underlying [raw.DOMCDATASection].
 func (x *DOMCDATASection) Unwrap() *raw.DOMCDATASection { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DOMCDATASection) ID() objc.ID { return x.inner.Ptr() }
 
-// DOMCDATASectionFromID adopts an existing toll-free-bridged object id as a DOMCDATASection (nil for 0).
+// DOMCDATASectionFromID adopts an existing object pointer as a DOMCDATASection (nil for 0).
 func DOMCDATASectionFromID(id objc.ID) *DOMCDATASection {
 	if id == 0 {
 		return nil

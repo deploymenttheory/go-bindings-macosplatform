@@ -18,11 +18,11 @@ type AssetCreationRequest struct {
 // Unwrap returns the underlying [raw.PHAssetCreationRequest].
 func (x *AssetCreationRequest) Unwrap() *raw.PHAssetCreationRequest { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AssetCreationRequest) ID() objc.ID { return x.inner.Ptr() }
 
-// AssetCreationRequestFromID adopts an existing toll-free-bridged object id as a AssetCreationRequest (nil for 0).
+// AssetCreationRequestFromID adopts an existing object pointer as a AssetCreationRequest (nil for 0).
 func AssetCreationRequestFromID(id objc.ID) *AssetCreationRequest {
 	if id == 0 {
 		return nil

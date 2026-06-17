@@ -11,7 +11,7 @@ import (
 	"unsafe"
 )
 
-// CSBackupSetItemExcluded wraps [raw.CSBackupSetItemExcluded], bridging CFTypeRef arguments and the OSStatus result.
+// CSBackupSetItemExcluded wraps [raw.CSBackupSetItemExcluded], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func CSBackupSetItemExcluded(item objc.ID, exclude uint8, excludeByPath uint8) error {
 	if _err := purego.NewOSStatus(raw.CSBackupSetItemExcluded(purego.CFRef(item), exclude, excludeByPath)).Err(); _err != nil {
 		return _err
@@ -19,7 +19,7 @@ func CSBackupSetItemExcluded(item objc.ID, exclude uint8, excludeByPath uint8) e
 	return nil
 }
 
-// CountUnicodeMappings wraps [raw.CountUnicodeMappings], bridging CFTypeRef arguments and the OSStatus result.
+// CountUnicodeMappings wraps [raw.CountUnicodeMappings], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func CountUnicodeMappings(iFilter uint, iFindMapping *raw.UnicodeMapping, oActualCount *uint) error {
 	if _err := purego.NewOSStatus(raw.CountUnicodeMappings(iFilter, iFindMapping, oActualCount)).Err(); _err != nil {
 		return _err
@@ -27,7 +27,7 @@ func CountUnicodeMappings(iFilter uint, iFindMapping *raw.UnicodeMapping, oActua
 	return nil
 }
 
-// DisposeDebugComponent wraps [raw.DisposeDebugComponent], bridging CFTypeRef arguments and the OSStatus result.
+// DisposeDebugComponent wraps [raw.DisposeDebugComponent], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DisposeDebugComponent(componentSignature uint) error {
 	if _err := purego.NewOSStatus(raw.DisposeDebugComponent(componentSignature)).Err(); _err != nil {
 		return _err
@@ -35,7 +35,7 @@ func DisposeDebugComponent(componentSignature uint) error {
 	return nil
 }
 
-// FNNotify wraps [raw.FNNotify], bridging CFTypeRef arguments and the OSStatus result.
+// FNNotify wraps [raw.FNNotify], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func FNNotify(ref *raw.FSRef, message uint, flags uint) error {
 	if _err := purego.NewOSStatus(raw.FNNotify(ref, message, flags)).Err(); _err != nil {
 		return _err
@@ -43,7 +43,7 @@ func FNNotify(ref *raw.FSRef, message uint, flags uint) error {
 	return nil
 }
 
-// FNNotifyAll wraps [raw.FNNotifyAll], bridging CFTypeRef arguments and the OSStatus result.
+// FNNotifyAll wraps [raw.FNNotifyAll], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func FNNotifyAll(message uint, flags uint) error {
 	if _err := purego.NewOSStatus(raw.FNNotifyAll(message, flags)).Err(); _err != nil {
 		return _err
@@ -51,7 +51,7 @@ func FNNotifyAll(message uint, flags uint) error {
 	return nil
 }
 
-// FNNotifyByPath wraps [raw.FNNotifyByPath], bridging CFTypeRef arguments and the OSStatus result.
+// FNNotifyByPath wraps [raw.FNNotifyByPath], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func FNNotifyByPath(path *uint8, message uint, flags uint) error {
 	if _err := purego.NewOSStatus(raw.FNNotifyByPath(path, message, flags)).Err(); _err != nil {
 		return _err
@@ -59,7 +59,7 @@ func FNNotifyByPath(path *uint8, message uint, flags uint) error {
 	return nil
 }
 
-// FSCopyDiskIDForVolume wraps [raw.FSCopyDiskIDForVolume], bridging CFTypeRef arguments and the OSStatus result.
+// FSCopyDiskIDForVolume wraps [raw.FSCopyDiskIDForVolume], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func FSCopyDiskIDForVolume(vRefNum int16) (objc.ID, error) {
 	var _out0 uintptr
 	if _err := purego.NewOSStatus(raw.FSCopyDiskIDForVolume(vRefNum, unsafe.Pointer(&_out0))).Err(); _err != nil {
@@ -68,7 +68,7 @@ func FSCopyDiskIDForVolume(vRefNum int16) (objc.ID, error) {
 	return objc.ID(_out0), nil
 }
 
-// FSCopyObjectSync wraps [raw.FSCopyObjectSync], bridging CFTypeRef arguments and the OSStatus result.
+// FSCopyObjectSync wraps [raw.FSCopyObjectSync], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func FSCopyObjectSync(source *raw.FSRef, destDir *raw.FSRef, destName objc.ID, target *raw.FSRef, options uint) error {
 	if _err := purego.NewOSStatus(raw.FSCopyObjectSync(source, destDir, purego.CFRef(destName), target, options)).Err(); _err != nil {
 		return _err
@@ -76,7 +76,7 @@ func FSCopyObjectSync(source *raw.FSRef, destDir *raw.FSRef, destName objc.ID, t
 	return nil
 }
 
-// FSCopyURLForVolume wraps [raw.FSCopyURLForVolume], bridging CFTypeRef arguments and the OSStatus result.
+// FSCopyURLForVolume wraps [raw.FSCopyURLForVolume], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func FSCopyURLForVolume(vRefNum int16) (objc.ID, error) {
 	var _out0 uintptr
 	if _err := purego.NewOSStatus(raw.FSCopyURLForVolume(vRefNum, unsafe.Pointer(&_out0))).Err(); _err != nil {
@@ -85,7 +85,7 @@ func FSCopyURLForVolume(vRefNum int16) (objc.ID, error) {
 	return objc.ID(_out0), nil
 }
 
-// FSCreateFileAndOpenForkUnicode wraps [raw.FSCreateFileAndOpenForkUnicode], bridging CFTypeRef arguments and the OSStatus result.
+// FSCreateFileAndOpenForkUnicode wraps [raw.FSCreateFileAndOpenForkUnicode], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func FSCreateFileAndOpenForkUnicode(parentRef *raw.FSRef, nameLength uint, name *uint16, whichInfo uint, catalogInfo *raw.FSCatalogInfo, forkNameLength uint, forkName *uint16, permissions int8, forkRefNum *int, newRef *raw.FSRef) error {
 	if _err := purego.NewOSStatus(raw.FSCreateFileAndOpenForkUnicode(parentRef, nameLength, name, whichInfo, catalogInfo, forkNameLength, forkName, permissions, forkRefNum, newRef)).Err(); _err != nil {
 		return _err
@@ -93,7 +93,7 @@ func FSCreateFileAndOpenForkUnicode(parentRef *raw.FSRef, nameLength uint, name 
 	return nil
 }
 
-// FSEjectVolumeSync wraps [raw.FSEjectVolumeSync], bridging CFTypeRef arguments and the OSStatus result.
+// FSEjectVolumeSync wraps [raw.FSEjectVolumeSync], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func FSEjectVolumeSync(vRefNum int16, flags uint, dissenter *int) error {
 	if _err := purego.NewOSStatus(raw.FSEjectVolumeSync(vRefNum, flags, dissenter)).Err(); _err != nil {
 		return _err
@@ -101,7 +101,7 @@ func FSEjectVolumeSync(vRefNum int16, flags uint, dissenter *int) error {
 	return nil
 }
 
-// FSFlushVolume wraps [raw.FSFlushVolume], bridging CFTypeRef arguments and the OSStatus result.
+// FSFlushVolume wraps [raw.FSFlushVolume], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func FSFlushVolume(vRefNum int16) error {
 	if _err := purego.NewOSStatus(raw.FSFlushVolume(vRefNum)).Err(); _err != nil {
 		return _err
@@ -109,7 +109,7 @@ func FSFlushVolume(vRefNum int16) error {
 	return nil
 }
 
-// FSGetTemporaryDirectoryForReplaceObject wraps [raw.FSGetTemporaryDirectoryForReplaceObject], bridging CFTypeRef arguments and the OSStatus result.
+// FSGetTemporaryDirectoryForReplaceObject wraps [raw.FSGetTemporaryDirectoryForReplaceObject], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func FSGetTemporaryDirectoryForReplaceObject(originalObject *raw.FSRef, temporaryDirectory *raw.FSRef, flags uint) error {
 	if _err := purego.NewOSStatus(raw.FSGetTemporaryDirectoryForReplaceObject(originalObject, temporaryDirectory, flags)).Err(); _err != nil {
 		return _err
@@ -117,7 +117,7 @@ func FSGetTemporaryDirectoryForReplaceObject(originalObject *raw.FSRef, temporar
 	return nil
 }
 
-// FSGetVolumeForDiskID wraps [raw.FSGetVolumeForDiskID], bridging CFTypeRef arguments and the OSStatus result.
+// FSGetVolumeForDiskID wraps [raw.FSGetVolumeForDiskID], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func FSGetVolumeForDiskID(diskID objc.ID, vRefNum *int16) error {
 	if _err := purego.NewOSStatus(raw.FSGetVolumeForDiskID(purego.CFRef(diskID), vRefNum)).Err(); _err != nil {
 		return _err
@@ -125,7 +125,7 @@ func FSGetVolumeForDiskID(diskID objc.ID, vRefNum *int16) error {
 	return nil
 }
 
-// FSGetVolumeMountInfo wraps [raw.FSGetVolumeMountInfo], bridging CFTypeRef arguments and the OSStatus result.
+// FSGetVolumeMountInfo wraps [raw.FSGetVolumeMountInfo], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func FSGetVolumeMountInfo(volume int16, buffer *uint8, bufferSize uint, actualSize *uint) error {
 	if _err := purego.NewOSStatus(raw.FSGetVolumeMountInfo(volume, buffer, bufferSize, actualSize)).Err(); _err != nil {
 		return _err
@@ -133,7 +133,7 @@ func FSGetVolumeMountInfo(volume int16, buffer *uint8, bufferSize uint, actualSi
 	return nil
 }
 
-// FSGetVolumeMountInfoSize wraps [raw.FSGetVolumeMountInfoSize], bridging CFTypeRef arguments and the OSStatus result.
+// FSGetVolumeMountInfoSize wraps [raw.FSGetVolumeMountInfoSize], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func FSGetVolumeMountInfoSize(volume int16, size *uint) error {
 	if _err := purego.NewOSStatus(raw.FSGetVolumeMountInfoSize(volume, size)).Err(); _err != nil {
 		return _err
@@ -141,7 +141,7 @@ func FSGetVolumeMountInfoSize(volume int16, size *uint) error {
 	return nil
 }
 
-// FSGetVolumeParms wraps [raw.FSGetVolumeParms], bridging CFTypeRef arguments and the OSStatus result.
+// FSGetVolumeParms wraps [raw.FSGetVolumeParms], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func FSGetVolumeParms(volume int16, buffer *raw.GetVolParmsInfoBuffer, bufferSize uint) error {
 	if _err := purego.NewOSStatus(raw.FSGetVolumeParms(volume, buffer, bufferSize)).Err(); _err != nil {
 		return _err
@@ -149,7 +149,7 @@ func FSGetVolumeParms(volume int16, buffer *raw.GetVolParmsInfoBuffer, bufferSiz
 	return nil
 }
 
-// FSLockRange wraps [raw.FSLockRange], bridging CFTypeRef arguments and the OSStatus result.
+// FSLockRange wraps [raw.FSLockRange], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func FSLockRange(forkRefNum int, positionMode uint16, positionOffset int64, requestCount uint64, rangeStart *uint64) error {
 	if _err := purego.NewOSStatus(raw.FSLockRange(forkRefNum, positionMode, positionOffset, requestCount, rangeStart)).Err(); _err != nil {
 		return _err
@@ -157,7 +157,7 @@ func FSLockRange(forkRefNum int, positionMode uint16, positionOffset int64, requ
 	return nil
 }
 
-// FSMountLocalVolumeSync wraps [raw.FSMountLocalVolumeSync], bridging CFTypeRef arguments and the OSStatus result.
+// FSMountLocalVolumeSync wraps [raw.FSMountLocalVolumeSync], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func FSMountLocalVolumeSync(diskID objc.ID, mountDir objc.ID, mountedVolumeRefNum *int16, flags uint) error {
 	if _err := purego.NewOSStatus(raw.FSMountLocalVolumeSync(purego.CFRef(diskID), purego.CFRef(mountDir), mountedVolumeRefNum, flags)).Err(); _err != nil {
 		return _err
@@ -165,7 +165,7 @@ func FSMountLocalVolumeSync(diskID objc.ID, mountDir objc.ID, mountedVolumeRefNu
 	return nil
 }
 
-// FSMountServerVolumeSync wraps [raw.FSMountServerVolumeSync], bridging CFTypeRef arguments and the OSStatus result.
+// FSMountServerVolumeSync wraps [raw.FSMountServerVolumeSync], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func FSMountServerVolumeSync(url objc.ID, mountDir objc.ID, user objc.ID, password objc.ID, mountedVolumeRefNum *int16, flags uint) error {
 	if _err := purego.NewOSStatus(raw.FSMountServerVolumeSync(purego.CFRef(url), purego.CFRef(mountDir), purego.CFRef(user), purego.CFRef(password), mountedVolumeRefNum, flags)).Err(); _err != nil {
 		return _err
@@ -173,7 +173,7 @@ func FSMountServerVolumeSync(url objc.ID, mountDir objc.ID, user objc.ID, passwo
 	return nil
 }
 
-// FSMoveObjectSync wraps [raw.FSMoveObjectSync], bridging CFTypeRef arguments and the OSStatus result.
+// FSMoveObjectSync wraps [raw.FSMoveObjectSync], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func FSMoveObjectSync(source *raw.FSRef, destDir *raw.FSRef, destName objc.ID, target *raw.FSRef, options uint) error {
 	if _err := purego.NewOSStatus(raw.FSMoveObjectSync(source, destDir, purego.CFRef(destName), target, options)).Err(); _err != nil {
 		return _err
@@ -181,7 +181,7 @@ func FSMoveObjectSync(source *raw.FSRef, destDir *raw.FSRef, destName objc.ID, t
 	return nil
 }
 
-// FSMoveObjectToTrashSync wraps [raw.FSMoveObjectToTrashSync], bridging CFTypeRef arguments and the OSStatus result.
+// FSMoveObjectToTrashSync wraps [raw.FSMoveObjectToTrashSync], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func FSMoveObjectToTrashSync(source *raw.FSRef, target *raw.FSRef, options uint) error {
 	if _err := purego.NewOSStatus(raw.FSMoveObjectToTrashSync(source, target, options)).Err(); _err != nil {
 		return _err
@@ -189,7 +189,7 @@ func FSMoveObjectToTrashSync(source *raw.FSRef, target *raw.FSRef, options uint)
 	return nil
 }
 
-// FSNewAliasFromPath wraps [raw.FSNewAliasFromPath], bridging CFTypeRef arguments and the OSStatus result.
+// FSNewAliasFromPath wraps [raw.FSNewAliasFromPath], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func FSNewAliasFromPath(fromFilePath string, targetPath string, flags uint, inAlias ***raw.AliasRecord, isDirectory *uint8) error {
 	if _err := purego.NewOSStatus(raw.FSNewAliasFromPath(fromFilePath, targetPath, flags, inAlias, isDirectory)).Err(); _err != nil {
 		return _err
@@ -197,7 +197,7 @@ func FSNewAliasFromPath(fromFilePath string, targetPath string, flags uint, inAl
 	return nil
 }
 
-// FSPathCopyObjectSync wraps [raw.FSPathCopyObjectSync], bridging CFTypeRef arguments and the OSStatus result.
+// FSPathCopyObjectSync wraps [raw.FSPathCopyObjectSync], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func FSPathCopyObjectSync(sourcePath string, destDirPath string, destName objc.ID, targetPath string, options uint) error {
 	if _err := purego.NewOSStatus(raw.FSPathCopyObjectSync(sourcePath, destDirPath, purego.CFRef(destName), targetPath, options)).Err(); _err != nil {
 		return _err
@@ -205,7 +205,7 @@ func FSPathCopyObjectSync(sourcePath string, destDirPath string, destName objc.I
 	return nil
 }
 
-// FSPathGetTemporaryDirectoryForReplaceObject wraps [raw.FSPathGetTemporaryDirectoryForReplaceObject], bridging CFTypeRef arguments and the OSStatus result.
+// FSPathGetTemporaryDirectoryForReplaceObject wraps [raw.FSPathGetTemporaryDirectoryForReplaceObject], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func FSPathGetTemporaryDirectoryForReplaceObject(originalObjectPath string, temporaryDirectoryPath string, maxPathSize uint, flags uint) error {
 	if _err := purego.NewOSStatus(raw.FSPathGetTemporaryDirectoryForReplaceObject(originalObjectPath, temporaryDirectoryPath, maxPathSize, flags)).Err(); _err != nil {
 		return _err
@@ -213,7 +213,7 @@ func FSPathGetTemporaryDirectoryForReplaceObject(originalObjectPath string, temp
 	return nil
 }
 
-// FSPathMakeRef wraps [raw.FSPathMakeRef], bridging CFTypeRef arguments and the OSStatus result.
+// FSPathMakeRef wraps [raw.FSPathMakeRef], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func FSPathMakeRef(path *uint8, ref *raw.FSRef, isDirectory *uint8) error {
 	if _err := purego.NewOSStatus(raw.FSPathMakeRef(path, ref, isDirectory)).Err(); _err != nil {
 		return _err
@@ -221,7 +221,7 @@ func FSPathMakeRef(path *uint8, ref *raw.FSRef, isDirectory *uint8) error {
 	return nil
 }
 
-// FSPathMakeRefWithOptions wraps [raw.FSPathMakeRefWithOptions], bridging CFTypeRef arguments and the OSStatus result.
+// FSPathMakeRefWithOptions wraps [raw.FSPathMakeRefWithOptions], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func FSPathMakeRefWithOptions(path *uint8, options uint, ref *raw.FSRef, isDirectory *uint8) error {
 	if _err := purego.NewOSStatus(raw.FSPathMakeRefWithOptions(path, options, ref, isDirectory)).Err(); _err != nil {
 		return _err
@@ -229,7 +229,7 @@ func FSPathMakeRefWithOptions(path *uint8, options uint, ref *raw.FSRef, isDirec
 	return nil
 }
 
-// FSPathMoveObjectSync wraps [raw.FSPathMoveObjectSync], bridging CFTypeRef arguments and the OSStatus result.
+// FSPathMoveObjectSync wraps [raw.FSPathMoveObjectSync], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func FSPathMoveObjectSync(sourcePath string, destDirPath string, destName objc.ID, targetPath string, options uint) error {
 	if _err := purego.NewOSStatus(raw.FSPathMoveObjectSync(sourcePath, destDirPath, purego.CFRef(destName), targetPath, options)).Err(); _err != nil {
 		return _err
@@ -237,7 +237,7 @@ func FSPathMoveObjectSync(sourcePath string, destDirPath string, destName objc.I
 	return nil
 }
 
-// FSPathMoveObjectToTrashSync wraps [raw.FSPathMoveObjectToTrashSync], bridging CFTypeRef arguments and the OSStatus result.
+// FSPathMoveObjectToTrashSync wraps [raw.FSPathMoveObjectToTrashSync], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func FSPathMoveObjectToTrashSync(sourcePath string, targetPath string, options uint) error {
 	if _err := purego.NewOSStatus(raw.FSPathMoveObjectToTrashSync(sourcePath, targetPath, options)).Err(); _err != nil {
 		return _err
@@ -245,7 +245,7 @@ func FSPathMoveObjectToTrashSync(sourcePath string, targetPath string, options u
 	return nil
 }
 
-// FSPathReplaceObject wraps [raw.FSPathReplaceObject], bridging CFTypeRef arguments and the OSStatus result.
+// FSPathReplaceObject wraps [raw.FSPathReplaceObject], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func FSPathReplaceObject(originalObjectPath string, replacementObjectPath string, newName objc.ID, temporaryName objc.ID, temporaryDirectoryPath string, flags uint) error {
 	if _err := purego.NewOSStatus(raw.FSPathReplaceObject(originalObjectPath, replacementObjectPath, purego.CFRef(newName), purego.CFRef(temporaryName), temporaryDirectoryPath, flags)).Err(); _err != nil {
 		return _err
@@ -253,7 +253,7 @@ func FSPathReplaceObject(originalObjectPath string, replacementObjectPath string
 	return nil
 }
 
-// FSRefMakePath wraps [raw.FSRefMakePath], bridging CFTypeRef arguments and the OSStatus result.
+// FSRefMakePath wraps [raw.FSRefMakePath], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func FSRefMakePath(ref *raw.FSRef, path *uint8, pathBufferSize uint) error {
 	if _err := purego.NewOSStatus(raw.FSRefMakePath(ref, path, pathBufferSize)).Err(); _err != nil {
 		return _err
@@ -261,7 +261,7 @@ func FSRefMakePath(ref *raw.FSRef, path *uint8, pathBufferSize uint) error {
 	return nil
 }
 
-// FSReplaceObject wraps [raw.FSReplaceObject], bridging CFTypeRef arguments and the OSStatus result.
+// FSReplaceObject wraps [raw.FSReplaceObject], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func FSReplaceObject(originalObject *raw.FSRef, replacementObject *raw.FSRef, newName objc.ID, temporaryName objc.ID, temporaryDirectory *raw.FSRef, flags uint, resultObject *raw.FSRef) error {
 	if _err := purego.NewOSStatus(raw.FSReplaceObject(originalObject, replacementObject, purego.CFRef(newName), purego.CFRef(temporaryName), temporaryDirectory, flags, resultObject)).Err(); _err != nil {
 		return _err
@@ -269,7 +269,7 @@ func FSReplaceObject(originalObject *raw.FSRef, replacementObject *raw.FSRef, ne
 	return nil
 }
 
-// FSResolveNodeID wraps [raw.FSResolveNodeID], bridging CFTypeRef arguments and the OSStatus result.
+// FSResolveNodeID wraps [raw.FSResolveNodeID], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func FSResolveNodeID(volume int16, nodeID uint, newRef *raw.FSRef) error {
 	if _err := purego.NewOSStatus(raw.FSResolveNodeID(volume, nodeID, newRef)).Err(); _err != nil {
 		return _err
@@ -277,7 +277,7 @@ func FSResolveNodeID(volume int16, nodeID uint, newRef *raw.FSRef) error {
 	return nil
 }
 
-// FSUnlockRange wraps [raw.FSUnlockRange], bridging CFTypeRef arguments and the OSStatus result.
+// FSUnlockRange wraps [raw.FSUnlockRange], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func FSUnlockRange(forkRefNum int, positionMode uint16, positionOffset int64, requestCount uint64, rangeStart *uint64) error {
 	if _err := purego.NewOSStatus(raw.FSUnlockRange(forkRefNum, positionMode, positionOffset, requestCount, rangeStart)).Err(); _err != nil {
 		return _err
@@ -285,7 +285,7 @@ func FSUnlockRange(forkRefNum int, positionMode uint16, positionOffset int64, re
 	return nil
 }
 
-// FSUnmountVolumeSync wraps [raw.FSUnmountVolumeSync], bridging CFTypeRef arguments and the OSStatus result.
+// FSUnmountVolumeSync wraps [raw.FSUnmountVolumeSync], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func FSUnmountVolumeSync(vRefNum int16, flags uint, dissenter *int) error {
 	if _err := purego.NewOSStatus(raw.FSUnmountVolumeSync(vRefNum, flags, dissenter)).Err(); _err != nil {
 		return _err
@@ -293,7 +293,7 @@ func FSUnmountVolumeSync(vRefNum int16, flags uint, dissenter *int) error {
 	return nil
 }
 
-// FSVolumeMount wraps [raw.FSVolumeMount], bridging CFTypeRef arguments and the OSStatus result.
+// FSVolumeMount wraps [raw.FSVolumeMount], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func FSVolumeMount(buffer *uint8, mountedVolume *int16) error {
 	if _err := purego.NewOSStatus(raw.FSVolumeMount(buffer, mountedVolume)).Err(); _err != nil {
 		return _err
@@ -301,7 +301,7 @@ func FSVolumeMount(buffer *uint8, mountedVolume *int16) error {
 	return nil
 }
 
-// GetDebugComponentInfo wraps [raw.GetDebugComponentInfo], bridging CFTypeRef arguments and the OSStatus result.
+// GetDebugComponentInfo wraps [raw.GetDebugComponentInfo], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func GetDebugComponentInfo(itemIndex uint, componentSignature *uint, componentName *uint8) error {
 	if _err := purego.NewOSStatus(raw.GetDebugComponentInfo(itemIndex, componentSignature, componentName)).Err(); _err != nil {
 		return _err
@@ -309,7 +309,7 @@ func GetDebugComponentInfo(itemIndex uint, componentSignature *uint, componentNa
 	return nil
 }
 
-// GetDebugOptionInfo wraps [raw.GetDebugOptionInfo], bridging CFTypeRef arguments and the OSStatus result.
+// GetDebugOptionInfo wraps [raw.GetDebugOptionInfo], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func GetDebugOptionInfo(itemIndex uint, componentSignature uint, optionSelectorNum *int, optionName *uint8, optionSetting *uint8) error {
 	if _err := purego.NewOSStatus(raw.GetDebugOptionInfo(itemIndex, componentSignature, optionSelectorNum, optionName, optionSetting)).Err(); _err != nil {
 		return _err
@@ -317,7 +317,7 @@ func GetDebugOptionInfo(itemIndex uint, componentSignature uint, optionSelectorN
 	return nil
 }
 
-// GetScriptInfoFromTextEncoding wraps [raw.GetScriptInfoFromTextEncoding], bridging CFTypeRef arguments and the OSStatus result.
+// GetScriptInfoFromTextEncoding wraps [raw.GetScriptInfoFromTextEncoding], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func GetScriptInfoFromTextEncoding(iEncoding uint, oTextScriptID *int16, oTextLanguageID *int16) error {
 	if _err := purego.NewOSStatus(raw.GetScriptInfoFromTextEncoding(iEncoding, oTextScriptID, oTextLanguageID)).Err(); _err != nil {
 		return _err
@@ -325,7 +325,7 @@ func GetScriptInfoFromTextEncoding(iEncoding uint, oTextScriptID *int16, oTextLa
 	return nil
 }
 
-// GetTextEncodingFromScriptInfo wraps [raw.GetTextEncodingFromScriptInfo], bridging CFTypeRef arguments and the OSStatus result.
+// GetTextEncodingFromScriptInfo wraps [raw.GetTextEncodingFromScriptInfo], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func GetTextEncodingFromScriptInfo(iTextScriptID int16, iTextLanguageID int16, iTextRegionID int16, oEncoding *uint) error {
 	if _err := purego.NewOSStatus(raw.GetTextEncodingFromScriptInfo(iTextScriptID, iTextLanguageID, iTextRegionID, oEncoding)).Err(); _err != nil {
 		return _err
@@ -333,7 +333,7 @@ func GetTextEncodingFromScriptInfo(iTextScriptID int16, iTextLanguageID int16, i
 	return nil
 }
 
-// GetTextEncodingName wraps [raw.GetTextEncodingName], bridging CFTypeRef arguments and the OSStatus result.
+// GetTextEncodingName wraps [raw.GetTextEncodingName], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func GetTextEncodingName(iEncoding uint, iNamePartSelector uint, iPreferredRegion int16, iPreferredEncoding uint, iOutputBufLen uint, oNameLength *uint, oActualRegion *int16, oActualEncoding *uint, oEncodingName *uint8) error {
 	if _err := purego.NewOSStatus(raw.GetTextEncodingName(iEncoding, iNamePartSelector, iPreferredRegion, iPreferredEncoding, iOutputBufLen, oNameLength, oActualRegion, oActualEncoding, oEncodingName)).Err(); _err != nil {
 		return _err
@@ -341,7 +341,7 @@ func GetTextEncodingName(iEncoding uint, iNamePartSelector uint, iPreferredRegio
 	return nil
 }
 
-// LocaleOperationCountLocales wraps [raw.LocaleOperationCountLocales], bridging CFTypeRef arguments and the OSStatus result.
+// LocaleOperationCountLocales wraps [raw.LocaleOperationCountLocales], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func LocaleOperationCountLocales(opClass uint, localeCount *uint) error {
 	if _err := purego.NewOSStatus(raw.LocaleOperationCountLocales(opClass, localeCount)).Err(); _err != nil {
 		return _err
@@ -349,7 +349,7 @@ func LocaleOperationCountLocales(opClass uint, localeCount *uint) error {
 	return nil
 }
 
-// LocaleOperationCountNames wraps [raw.LocaleOperationCountNames], bridging CFTypeRef arguments and the OSStatus result.
+// LocaleOperationCountNames wraps [raw.LocaleOperationCountNames], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func LocaleOperationCountNames(opClass uint, nameCount *uint) error {
 	if _err := purego.NewOSStatus(raw.LocaleOperationCountNames(opClass, nameCount)).Err(); _err != nil {
 		return _err
@@ -357,7 +357,7 @@ func LocaleOperationCountNames(opClass uint, nameCount *uint) error {
 	return nil
 }
 
-// LocaleOperationGetLocales wraps [raw.LocaleOperationGetLocales], bridging CFTypeRef arguments and the OSStatus result.
+// LocaleOperationGetLocales wraps [raw.LocaleOperationGetLocales], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func LocaleOperationGetLocales(opClass uint, maxLocaleCount uint, actualLocaleCount *uint, localeVariantList *raw.LocaleAndVariant) error {
 	if _err := purego.NewOSStatus(raw.LocaleOperationGetLocales(opClass, maxLocaleCount, actualLocaleCount, localeVariantList)).Err(); _err != nil {
 		return _err
@@ -365,7 +365,7 @@ func LocaleOperationGetLocales(opClass uint, maxLocaleCount uint, actualLocaleCo
 	return nil
 }
 
-// LocaleStringToLangAndRegionCodes wraps [raw.LocaleStringToLangAndRegionCodes], bridging CFTypeRef arguments and the OSStatus result.
+// LocaleStringToLangAndRegionCodes wraps [raw.LocaleStringToLangAndRegionCodes], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func LocaleStringToLangAndRegionCodes(localeString string, lang *int16, region *int16) error {
 	if _err := purego.NewOSStatus(raw.LocaleStringToLangAndRegionCodes(localeString, lang, region)).Err(); _err != nil {
 		return _err
@@ -373,7 +373,7 @@ func LocaleStringToLangAndRegionCodes(localeString string, lang *int16, region *
 	return nil
 }
 
-// MPAllocateTaskStorageIndex wraps [raw.MPAllocateTaskStorageIndex], bridging CFTypeRef arguments and the OSStatus result.
+// MPAllocateTaskStorageIndex wraps [raw.MPAllocateTaskStorageIndex], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MPAllocateTaskStorageIndex(taskIndex *uint) error {
 	if _err := purego.NewOSStatus(raw.MPAllocateTaskStorageIndex(taskIndex)).Err(); _err != nil {
 		return _err
@@ -381,7 +381,7 @@ func MPAllocateTaskStorageIndex(taskIndex *uint) error {
 	return nil
 }
 
-// MPDeallocateTaskStorageIndex wraps [raw.MPDeallocateTaskStorageIndex], bridging CFTypeRef arguments and the OSStatus result.
+// MPDeallocateTaskStorageIndex wraps [raw.MPDeallocateTaskStorageIndex], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MPDeallocateTaskStorageIndex(taskIndex uint) error {
 	if _err := purego.NewOSStatus(raw.MPDeallocateTaskStorageIndex(taskIndex)).Err(); _err != nil {
 		return _err
@@ -389,7 +389,7 @@ func MPDeallocateTaskStorageIndex(taskIndex uint) error {
 	return nil
 }
 
-// NearestMacTextEncodings wraps [raw.NearestMacTextEncodings], bridging CFTypeRef arguments and the OSStatus result.
+// NearestMacTextEncodings wraps [raw.NearestMacTextEncodings], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func NearestMacTextEncodings(generalEncoding uint, bestMacEncoding *uint, alternateMacEncoding *uint) error {
 	if _err := purego.NewOSStatus(raw.NearestMacTextEncodings(generalEncoding, bestMacEncoding, alternateMacEncoding)).Err(); _err != nil {
 		return _err
@@ -397,7 +397,7 @@ func NearestMacTextEncodings(generalEncoding uint, bestMacEncoding *uint, altern
 	return nil
 }
 
-// NewDebugOption wraps [raw.NewDebugOption], bridging CFTypeRef arguments and the OSStatus result.
+// NewDebugOption wraps [raw.NewDebugOption], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func NewDebugOption(componentSignature uint, optionSelectorNum int, optionName *uint8) error {
 	if _err := purego.NewOSStatus(raw.NewDebugOption(componentSignature, optionSelectorNum, optionName)).Err(); _err != nil {
 		return _err
@@ -405,7 +405,7 @@ func NewDebugOption(componentSignature uint, optionSelectorNum int, optionName *
 	return nil
 }
 
-// PBCreateFileAndOpenForkUnicodeSync wraps [raw.PBCreateFileAndOpenForkUnicodeSync], bridging CFTypeRef arguments and the OSStatus result.
+// PBCreateFileAndOpenForkUnicodeSync wraps [raw.PBCreateFileAndOpenForkUnicodeSync], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func PBCreateFileAndOpenForkUnicodeSync(paramBlock *raw.FSRefForkIOParam) error {
 	if _err := purego.NewOSStatus(raw.PBCreateFileAndOpenForkUnicodeSync(paramBlock)).Err(); _err != nil {
 		return _err
@@ -413,7 +413,7 @@ func PBCreateFileAndOpenForkUnicodeSync(paramBlock *raw.FSRefForkIOParam) error 
 	return nil
 }
 
-// PBFSCopyFileAsync wraps [raw.PBFSCopyFileAsync], bridging CFTypeRef arguments and the OSStatus result.
+// PBFSCopyFileAsync wraps [raw.PBFSCopyFileAsync], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func PBFSCopyFileAsync(paramBlock *raw.FSRefParam) error {
 	if _err := purego.NewOSStatus(raw.PBFSCopyFileAsync(paramBlock)).Err(); _err != nil {
 		return _err
@@ -421,7 +421,7 @@ func PBFSCopyFileAsync(paramBlock *raw.FSRefParam) error {
 	return nil
 }
 
-// PBFSCopyFileSync wraps [raw.PBFSCopyFileSync], bridging CFTypeRef arguments and the OSStatus result.
+// PBFSCopyFileSync wraps [raw.PBFSCopyFileSync], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func PBFSCopyFileSync(paramBlock *raw.FSRefParam) error {
 	if _err := purego.NewOSStatus(raw.PBFSCopyFileSync(paramBlock)).Err(); _err != nil {
 		return _err
@@ -429,7 +429,7 @@ func PBFSCopyFileSync(paramBlock *raw.FSRefParam) error {
 	return nil
 }
 
-// PBFSResolveNodeIDAsync wraps [raw.PBFSResolveNodeIDAsync], bridging CFTypeRef arguments and the OSStatus result.
+// PBFSResolveNodeIDAsync wraps [raw.PBFSResolveNodeIDAsync], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func PBFSResolveNodeIDAsync(paramBlock *raw.FSRefParam) error {
 	if _err := purego.NewOSStatus(raw.PBFSResolveNodeIDAsync(paramBlock)).Err(); _err != nil {
 		return _err
@@ -437,7 +437,7 @@ func PBFSResolveNodeIDAsync(paramBlock *raw.FSRefParam) error {
 	return nil
 }
 
-// PBFSResolveNodeIDSync wraps [raw.PBFSResolveNodeIDSync], bridging CFTypeRef arguments and the OSStatus result.
+// PBFSResolveNodeIDSync wraps [raw.PBFSResolveNodeIDSync], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func PBFSResolveNodeIDSync(paramBlock *raw.FSRefParam) error {
 	if _err := purego.NewOSStatus(raw.PBFSResolveNodeIDSync(paramBlock)).Err(); _err != nil {
 		return _err
@@ -445,7 +445,7 @@ func PBFSResolveNodeIDSync(paramBlock *raw.FSRefParam) error {
 	return nil
 }
 
-// PBFlushVolumeAsync wraps [raw.PBFlushVolumeAsync], bridging CFTypeRef arguments and the OSStatus result.
+// PBFlushVolumeAsync wraps [raw.PBFlushVolumeAsync], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func PBFlushVolumeAsync(paramBlock *raw.FSRefParam) error {
 	if _err := purego.NewOSStatus(raw.PBFlushVolumeAsync(paramBlock)).Err(); _err != nil {
 		return _err
@@ -453,7 +453,7 @@ func PBFlushVolumeAsync(paramBlock *raw.FSRefParam) error {
 	return nil
 }
 
-// PBFlushVolumeSync wraps [raw.PBFlushVolumeSync], bridging CFTypeRef arguments and the OSStatus result.
+// PBFlushVolumeSync wraps [raw.PBFlushVolumeSync], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func PBFlushVolumeSync(paramBlock *raw.FSRefParam) error {
 	if _err := purego.NewOSStatus(raw.PBFlushVolumeSync(paramBlock)).Err(); _err != nil {
 		return _err
@@ -461,7 +461,7 @@ func PBFlushVolumeSync(paramBlock *raw.FSRefParam) error {
 	return nil
 }
 
-// PBXLockRangeAsync wraps [raw.PBXLockRangeAsync], bridging CFTypeRef arguments and the OSStatus result.
+// PBXLockRangeAsync wraps [raw.PBXLockRangeAsync], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func PBXLockRangeAsync(paramBlock *raw.FSRangeLockParam) error {
 	if _err := purego.NewOSStatus(raw.PBXLockRangeAsync(paramBlock)).Err(); _err != nil {
 		return _err
@@ -469,7 +469,7 @@ func PBXLockRangeAsync(paramBlock *raw.FSRangeLockParam) error {
 	return nil
 }
 
-// PBXLockRangeSync wraps [raw.PBXLockRangeSync], bridging CFTypeRef arguments and the OSStatus result.
+// PBXLockRangeSync wraps [raw.PBXLockRangeSync], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func PBXLockRangeSync(paramBlock *raw.FSRangeLockParam) error {
 	if _err := purego.NewOSStatus(raw.PBXLockRangeSync(paramBlock)).Err(); _err != nil {
 		return _err
@@ -477,7 +477,7 @@ func PBXLockRangeSync(paramBlock *raw.FSRangeLockParam) error {
 	return nil
 }
 
-// PBXUnlockRangeAsync wraps [raw.PBXUnlockRangeAsync], bridging CFTypeRef arguments and the OSStatus result.
+// PBXUnlockRangeAsync wraps [raw.PBXUnlockRangeAsync], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func PBXUnlockRangeAsync(paramBlock *raw.FSRangeLockParam) error {
 	if _err := purego.NewOSStatus(raw.PBXUnlockRangeAsync(paramBlock)).Err(); _err != nil {
 		return _err
@@ -485,7 +485,7 @@ func PBXUnlockRangeAsync(paramBlock *raw.FSRangeLockParam) error {
 	return nil
 }
 
-// PBXUnlockRangeSync wraps [raw.PBXUnlockRangeSync], bridging CFTypeRef arguments and the OSStatus result.
+// PBXUnlockRangeSync wraps [raw.PBXUnlockRangeSync], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func PBXUnlockRangeSync(paramBlock *raw.FSRangeLockParam) error {
 	if _err := purego.NewOSStatus(raw.PBXUnlockRangeSync(paramBlock)).Err(); _err != nil {
 		return _err
@@ -493,7 +493,7 @@ func PBXUnlockRangeSync(paramBlock *raw.FSRangeLockParam) error {
 	return nil
 }
 
-// QueryUnicodeMappings wraps [raw.QueryUnicodeMappings], bridging CFTypeRef arguments and the OSStatus result.
+// QueryUnicodeMappings wraps [raw.QueryUnicodeMappings], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func QueryUnicodeMappings(iFilter uint, iFindMapping *raw.UnicodeMapping, iMaxCount uint, oActualCount *uint, oReturnedMappings *raw.UnicodeMapping) error {
 	if _err := purego.NewOSStatus(raw.QueryUnicodeMappings(iFilter, iFindMapping, iMaxCount, oActualCount, oReturnedMappings)).Err(); _err != nil {
 		return _err
@@ -501,7 +501,7 @@ func QueryUnicodeMappings(iFilter uint, iFindMapping *raw.UnicodeMapping, iMaxCo
 	return nil
 }
 
-// RevertTextEncodingToScriptInfo wraps [raw.RevertTextEncodingToScriptInfo], bridging CFTypeRef arguments and the OSStatus result.
+// RevertTextEncodingToScriptInfo wraps [raw.RevertTextEncodingToScriptInfo], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func RevertTextEncodingToScriptInfo(iEncoding uint, oTextScriptID *int16, oTextLanguageID *int16, oTextFontname *uint8) error {
 	if _err := purego.NewOSStatus(raw.RevertTextEncodingToScriptInfo(iEncoding, oTextScriptID, oTextLanguageID, oTextFontname)).Err(); _err != nil {
 		return _err
@@ -509,7 +509,7 @@ func RevertTextEncodingToScriptInfo(iEncoding uint, oTextScriptID *int16, oTextL
 	return nil
 }
 
-// SetDebugOptionValue wraps [raw.SetDebugOptionValue], bridging CFTypeRef arguments and the OSStatus result.
+// SetDebugOptionValue wraps [raw.SetDebugOptionValue], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func SetDebugOptionValue(componentSignature uint, optionSelectorNum int, newOptionSetting uint8) error {
 	if _err := purego.NewOSStatus(raw.SetDebugOptionValue(componentSignature, optionSelectorNum, newOptionSetting)).Err(); _err != nil {
 		return _err
@@ -517,7 +517,7 @@ func SetDebugOptionValue(componentSignature uint, optionSelectorNum int, newOpti
 	return nil
 }
 
-// TECCopyTextEncodingInternetNameAndMIB wraps [raw.TECCopyTextEncodingInternetNameAndMIB], bridging CFTypeRef arguments and the OSStatus result.
+// TECCopyTextEncodingInternetNameAndMIB wraps [raw.TECCopyTextEncodingInternetNameAndMIB], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func TECCopyTextEncodingInternetNameAndMIB(textEncoding uint, usage uint, mibEnumPtr *int) (objc.ID, error) {
 	var _out0 uintptr
 	if _err := purego.NewOSStatus(raw.TECCopyTextEncodingInternetNameAndMIB(textEncoding, usage, unsafe.Pointer(&_out0), mibEnumPtr)).Err(); _err != nil {
@@ -526,7 +526,7 @@ func TECCopyTextEncodingInternetNameAndMIB(textEncoding uint, usage uint, mibEnu
 	return objc.ID(_out0), nil
 }
 
-// TECCountAvailableSniffers wraps [raw.TECCountAvailableSniffers], bridging CFTypeRef arguments and the OSStatus result.
+// TECCountAvailableSniffers wraps [raw.TECCountAvailableSniffers], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func TECCountAvailableSniffers(numberOfEncodings *uint) error {
 	if _err := purego.NewOSStatus(raw.TECCountAvailableSniffers(numberOfEncodings)).Err(); _err != nil {
 		return _err
@@ -534,7 +534,7 @@ func TECCountAvailableSniffers(numberOfEncodings *uint) error {
 	return nil
 }
 
-// TECCountAvailableTextEncodings wraps [raw.TECCountAvailableTextEncodings], bridging CFTypeRef arguments and the OSStatus result.
+// TECCountAvailableTextEncodings wraps [raw.TECCountAvailableTextEncodings], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func TECCountAvailableTextEncodings(numberEncodings *uint) error {
 	if _err := purego.NewOSStatus(raw.TECCountAvailableTextEncodings(numberEncodings)).Err(); _err != nil {
 		return _err
@@ -542,7 +542,7 @@ func TECCountAvailableTextEncodings(numberEncodings *uint) error {
 	return nil
 }
 
-// TECCountDestinationTextEncodings wraps [raw.TECCountDestinationTextEncodings], bridging CFTypeRef arguments and the OSStatus result.
+// TECCountDestinationTextEncodings wraps [raw.TECCountDestinationTextEncodings], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func TECCountDestinationTextEncodings(inputEncoding uint, numberOfEncodings *uint) error {
 	if _err := purego.NewOSStatus(raw.TECCountDestinationTextEncodings(inputEncoding, numberOfEncodings)).Err(); _err != nil {
 		return _err
@@ -550,7 +550,7 @@ func TECCountDestinationTextEncodings(inputEncoding uint, numberOfEncodings *uin
 	return nil
 }
 
-// TECCountDirectTextEncodingConversions wraps [raw.TECCountDirectTextEncodingConversions], bridging CFTypeRef arguments and the OSStatus result.
+// TECCountDirectTextEncodingConversions wraps [raw.TECCountDirectTextEncodingConversions], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func TECCountDirectTextEncodingConversions(numberOfEncodings *uint) error {
 	if _err := purego.NewOSStatus(raw.TECCountDirectTextEncodingConversions(numberOfEncodings)).Err(); _err != nil {
 		return _err
@@ -558,7 +558,7 @@ func TECCountDirectTextEncodingConversions(numberOfEncodings *uint) error {
 	return nil
 }
 
-// TECCountMailTextEncodings wraps [raw.TECCountMailTextEncodings], bridging CFTypeRef arguments and the OSStatus result.
+// TECCountMailTextEncodings wraps [raw.TECCountMailTextEncodings], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func TECCountMailTextEncodings(locale int16, numberEncodings *uint) error {
 	if _err := purego.NewOSStatus(raw.TECCountMailTextEncodings(locale, numberEncodings)).Err(); _err != nil {
 		return _err
@@ -566,7 +566,7 @@ func TECCountMailTextEncodings(locale int16, numberEncodings *uint) error {
 	return nil
 }
 
-// TECCountSubTextEncodings wraps [raw.TECCountSubTextEncodings], bridging CFTypeRef arguments and the OSStatus result.
+// TECCountSubTextEncodings wraps [raw.TECCountSubTextEncodings], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func TECCountSubTextEncodings(inputEncoding uint, numberOfEncodings *uint) error {
 	if _err := purego.NewOSStatus(raw.TECCountSubTextEncodings(inputEncoding, numberOfEncodings)).Err(); _err != nil {
 		return _err
@@ -574,7 +574,7 @@ func TECCountSubTextEncodings(inputEncoding uint, numberOfEncodings *uint) error
 	return nil
 }
 
-// TECCountWebTextEncodings wraps [raw.TECCountWebTextEncodings], bridging CFTypeRef arguments and the OSStatus result.
+// TECCountWebTextEncodings wraps [raw.TECCountWebTextEncodings], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func TECCountWebTextEncodings(locale int16, numberEncodings *uint) error {
 	if _err := purego.NewOSStatus(raw.TECCountWebTextEncodings(locale, numberEncodings)).Err(); _err != nil {
 		return _err
@@ -582,7 +582,7 @@ func TECCountWebTextEncodings(locale int16, numberEncodings *uint) error {
 	return nil
 }
 
-// TECGetAvailableSniffers wraps [raw.TECGetAvailableSniffers], bridging CFTypeRef arguments and the OSStatus result.
+// TECGetAvailableSniffers wraps [raw.TECGetAvailableSniffers], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func TECGetAvailableSniffers(availableSniffers *uint, maxAvailableSniffers uint, actualAvailableSniffers *uint) error {
 	if _err := purego.NewOSStatus(raw.TECGetAvailableSniffers(availableSniffers, maxAvailableSniffers, actualAvailableSniffers)).Err(); _err != nil {
 		return _err
@@ -590,7 +590,7 @@ func TECGetAvailableSniffers(availableSniffers *uint, maxAvailableSniffers uint,
 	return nil
 }
 
-// TECGetAvailableTextEncodings wraps [raw.TECGetAvailableTextEncodings], bridging CFTypeRef arguments and the OSStatus result.
+// TECGetAvailableTextEncodings wraps [raw.TECGetAvailableTextEncodings], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func TECGetAvailableTextEncodings(availableEncodings *uint, maxAvailableEncodings uint, actualAvailableEncodings *uint) error {
 	if _err := purego.NewOSStatus(raw.TECGetAvailableTextEncodings(availableEncodings, maxAvailableEncodings, actualAvailableEncodings)).Err(); _err != nil {
 		return _err
@@ -598,7 +598,7 @@ func TECGetAvailableTextEncodings(availableEncodings *uint, maxAvailableEncoding
 	return nil
 }
 
-// TECGetDestinationTextEncodings wraps [raw.TECGetDestinationTextEncodings], bridging CFTypeRef arguments and the OSStatus result.
+// TECGetDestinationTextEncodings wraps [raw.TECGetDestinationTextEncodings], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func TECGetDestinationTextEncodings(inputEncoding uint, destinationEncodings *uint, maxDestinationEncodings uint, actualDestinationEncodings *uint) error {
 	if _err := purego.NewOSStatus(raw.TECGetDestinationTextEncodings(inputEncoding, destinationEncodings, maxDestinationEncodings, actualDestinationEncodings)).Err(); _err != nil {
 		return _err
@@ -606,7 +606,7 @@ func TECGetDestinationTextEncodings(inputEncoding uint, destinationEncodings *ui
 	return nil
 }
 
-// TECGetDirectTextEncodingConversions wraps [raw.TECGetDirectTextEncodingConversions], bridging CFTypeRef arguments and the OSStatus result.
+// TECGetDirectTextEncodingConversions wraps [raw.TECGetDirectTextEncodingConversions], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func TECGetDirectTextEncodingConversions(availableConversions *raw.TECConversionInfo, maxAvailableConversions uint, actualAvailableConversions *uint) error {
 	if _err := purego.NewOSStatus(raw.TECGetDirectTextEncodingConversions(availableConversions, maxAvailableConversions, actualAvailableConversions)).Err(); _err != nil {
 		return _err
@@ -614,7 +614,7 @@ func TECGetDirectTextEncodingConversions(availableConversions *raw.TECConversion
 	return nil
 }
 
-// TECGetInfo wraps [raw.TECGetInfo], bridging CFTypeRef arguments and the OSStatus result.
+// TECGetInfo wraps [raw.TECGetInfo], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func TECGetInfo(tecInfo ***raw.TECInfo) error {
 	if _err := purego.NewOSStatus(raw.TECGetInfo(tecInfo)).Err(); _err != nil {
 		return _err
@@ -622,7 +622,7 @@ func TECGetInfo(tecInfo ***raw.TECInfo) error {
 	return nil
 }
 
-// TECGetMailTextEncodings wraps [raw.TECGetMailTextEncodings], bridging CFTypeRef arguments and the OSStatus result.
+// TECGetMailTextEncodings wraps [raw.TECGetMailTextEncodings], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func TECGetMailTextEncodings(locale int16, availableEncodings *uint, maxAvailableEncodings uint, actualAvailableEncodings *uint) error {
 	if _err := purego.NewOSStatus(raw.TECGetMailTextEncodings(locale, availableEncodings, maxAvailableEncodings, actualAvailableEncodings)).Err(); _err != nil {
 		return _err
@@ -630,7 +630,7 @@ func TECGetMailTextEncodings(locale int16, availableEncodings *uint, maxAvailabl
 	return nil
 }
 
-// TECGetSubTextEncodings wraps [raw.TECGetSubTextEncodings], bridging CFTypeRef arguments and the OSStatus result.
+// TECGetSubTextEncodings wraps [raw.TECGetSubTextEncodings], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func TECGetSubTextEncodings(inputEncoding uint, subEncodings *uint, maxSubEncodings uint, actualSubEncodings *uint) error {
 	if _err := purego.NewOSStatus(raw.TECGetSubTextEncodings(inputEncoding, subEncodings, maxSubEncodings, actualSubEncodings)).Err(); _err != nil {
 		return _err
@@ -638,7 +638,7 @@ func TECGetSubTextEncodings(inputEncoding uint, subEncodings *uint, maxSubEncodi
 	return nil
 }
 
-// TECGetTextEncodingFromInternetName wraps [raw.TECGetTextEncodingFromInternetName], bridging CFTypeRef arguments and the OSStatus result.
+// TECGetTextEncodingFromInternetName wraps [raw.TECGetTextEncodingFromInternetName], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func TECGetTextEncodingFromInternetName(textEncoding *uint, encodingName *uint8) error {
 	if _err := purego.NewOSStatus(raw.TECGetTextEncodingFromInternetName(textEncoding, encodingName)).Err(); _err != nil {
 		return _err
@@ -646,7 +646,7 @@ func TECGetTextEncodingFromInternetName(textEncoding *uint, encodingName *uint8)
 	return nil
 }
 
-// TECGetTextEncodingFromInternetNameOrMIB wraps [raw.TECGetTextEncodingFromInternetNameOrMIB], bridging CFTypeRef arguments and the OSStatus result.
+// TECGetTextEncodingFromInternetNameOrMIB wraps [raw.TECGetTextEncodingFromInternetNameOrMIB], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func TECGetTextEncodingFromInternetNameOrMIB(textEncodingPtr *uint, usage uint, encodingName objc.ID, mibEnum int) error {
 	if _err := purego.NewOSStatus(raw.TECGetTextEncodingFromInternetNameOrMIB(textEncodingPtr, usage, purego.CFRef(encodingName), mibEnum)).Err(); _err != nil {
 		return _err
@@ -654,7 +654,7 @@ func TECGetTextEncodingFromInternetNameOrMIB(textEncodingPtr *uint, usage uint, 
 	return nil
 }
 
-// TECGetTextEncodingInternetName wraps [raw.TECGetTextEncodingInternetName], bridging CFTypeRef arguments and the OSStatus result.
+// TECGetTextEncodingInternetName wraps [raw.TECGetTextEncodingInternetName], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func TECGetTextEncodingInternetName(textEncoding uint, encodingName *uint8) error {
 	if _err := purego.NewOSStatus(raw.TECGetTextEncodingInternetName(textEncoding, encodingName)).Err(); _err != nil {
 		return _err
@@ -662,7 +662,7 @@ func TECGetTextEncodingInternetName(textEncoding uint, encodingName *uint8) erro
 	return nil
 }
 
-// TECGetWebTextEncodings wraps [raw.TECGetWebTextEncodings], bridging CFTypeRef arguments and the OSStatus result.
+// TECGetWebTextEncodings wraps [raw.TECGetWebTextEncodings], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func TECGetWebTextEncodings(locale int16, availableEncodings *uint, maxAvailableEncodings uint, actualAvailableEncodings *uint) error {
 	if _err := purego.NewOSStatus(raw.TECGetWebTextEncodings(locale, availableEncodings, maxAvailableEncodings, actualAvailableEncodings)).Err(); _err != nil {
 		return _err
@@ -670,7 +670,7 @@ func TECGetWebTextEncodings(locale int16, availableEncodings *uint, maxAvailable
 	return nil
 }
 
-// UCCompareCollationKeys wraps [raw.UCCompareCollationKeys], bridging CFTypeRef arguments and the OSStatus result.
+// UCCompareCollationKeys wraps [raw.UCCompareCollationKeys], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func UCCompareCollationKeys(key1Ptr *uint, key1Length uint, key2Ptr *uint, key2Length uint, equivalent *uint8, order *int) error {
 	if _err := purego.NewOSStatus(raw.UCCompareCollationKeys(key1Ptr, key1Length, key2Ptr, key2Length, equivalent, order)).Err(); _err != nil {
 		return _err
@@ -678,7 +678,7 @@ func UCCompareCollationKeys(key1Ptr *uint, key1Length uint, key2Ptr *uint, key2L
 	return nil
 }
 
-// UCCompareTextDefault wraps [raw.UCCompareTextDefault], bridging CFTypeRef arguments and the OSStatus result.
+// UCCompareTextDefault wraps [raw.UCCompareTextDefault], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func UCCompareTextDefault(options uint, text1Ptr *uint16, text1Length uint, text2Ptr *uint16, text2Length uint, equivalent *uint8, order *int) error {
 	if _err := purego.NewOSStatus(raw.UCCompareTextDefault(options, text1Ptr, text1Length, text2Ptr, text2Length, equivalent, order)).Err(); _err != nil {
 		return _err
@@ -686,7 +686,7 @@ func UCCompareTextDefault(options uint, text1Ptr *uint16, text1Length uint, text
 	return nil
 }
 
-// UCCompareTextNoLocale wraps [raw.UCCompareTextNoLocale], bridging CFTypeRef arguments and the OSStatus result.
+// UCCompareTextNoLocale wraps [raw.UCCompareTextNoLocale], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func UCCompareTextNoLocale(options uint, text1Ptr *uint16, text1Length uint, text2Ptr *uint16, text2Length uint, equivalent *uint8, order *int) error {
 	if _err := purego.NewOSStatus(raw.UCCompareTextNoLocale(options, text1Ptr, text1Length, text2Ptr, text2Length, equivalent, order)).Err(); _err != nil {
 		return _err
@@ -694,7 +694,7 @@ func UCCompareTextNoLocale(options uint, text1Ptr *uint16, text1Length uint, tex
 	return nil
 }
 
-// UCConvertCFAbsoluteTimeToLongDateTime wraps [raw.UCConvertCFAbsoluteTimeToLongDateTime], bridging CFTypeRef arguments and the OSStatus result.
+// UCConvertCFAbsoluteTimeToLongDateTime wraps [raw.UCConvertCFAbsoluteTimeToLongDateTime], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func UCConvertCFAbsoluteTimeToLongDateTime(iCFTime float64, oLongDate *int64) error {
 	if _err := purego.NewOSStatus(raw.UCConvertCFAbsoluteTimeToLongDateTime(iCFTime, oLongDate)).Err(); _err != nil {
 		return _err
@@ -702,7 +702,7 @@ func UCConvertCFAbsoluteTimeToLongDateTime(iCFTime float64, oLongDate *int64) er
 	return nil
 }
 
-// UCConvertCFAbsoluteTimeToSeconds wraps [raw.UCConvertCFAbsoluteTimeToSeconds], bridging CFTypeRef arguments and the OSStatus result.
+// UCConvertCFAbsoluteTimeToSeconds wraps [raw.UCConvertCFAbsoluteTimeToSeconds], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func UCConvertCFAbsoluteTimeToSeconds(iCFTime float64, oSeconds *uint) error {
 	if _err := purego.NewOSStatus(raw.UCConvertCFAbsoluteTimeToSeconds(iCFTime, oSeconds)).Err(); _err != nil {
 		return _err
@@ -710,7 +710,7 @@ func UCConvertCFAbsoluteTimeToSeconds(iCFTime float64, oSeconds *uint) error {
 	return nil
 }
 
-// UCConvertCFAbsoluteTimeToUTCDateTime wraps [raw.UCConvertCFAbsoluteTimeToUTCDateTime], bridging CFTypeRef arguments and the OSStatus result.
+// UCConvertCFAbsoluteTimeToUTCDateTime wraps [raw.UCConvertCFAbsoluteTimeToUTCDateTime], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func UCConvertCFAbsoluteTimeToUTCDateTime(iCFTime float64, oUTCDate *raw.UTCDateTime) error {
 	if _err := purego.NewOSStatus(raw.UCConvertCFAbsoluteTimeToUTCDateTime(iCFTime, oUTCDate)).Err(); _err != nil {
 		return _err
@@ -718,7 +718,7 @@ func UCConvertCFAbsoluteTimeToUTCDateTime(iCFTime float64, oUTCDate *raw.UTCDate
 	return nil
 }
 
-// UCConvertLongDateTimeToCFAbsoluteTime wraps [raw.UCConvertLongDateTimeToCFAbsoluteTime], bridging CFTypeRef arguments and the OSStatus result.
+// UCConvertLongDateTimeToCFAbsoluteTime wraps [raw.UCConvertLongDateTimeToCFAbsoluteTime], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func UCConvertLongDateTimeToCFAbsoluteTime(iLongTime int64, oCFTime *float64) error {
 	if _err := purego.NewOSStatus(raw.UCConvertLongDateTimeToCFAbsoluteTime(iLongTime, oCFTime)).Err(); _err != nil {
 		return _err
@@ -726,7 +726,7 @@ func UCConvertLongDateTimeToCFAbsoluteTime(iLongTime int64, oCFTime *float64) er
 	return nil
 }
 
-// UCConvertSecondsToCFAbsoluteTime wraps [raw.UCConvertSecondsToCFAbsoluteTime], bridging CFTypeRef arguments and the OSStatus result.
+// UCConvertSecondsToCFAbsoluteTime wraps [raw.UCConvertSecondsToCFAbsoluteTime], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func UCConvertSecondsToCFAbsoluteTime(iSeconds uint, oCFTime *float64) error {
 	if _err := purego.NewOSStatus(raw.UCConvertSecondsToCFAbsoluteTime(iSeconds, oCFTime)).Err(); _err != nil {
 		return _err
@@ -734,7 +734,7 @@ func UCConvertSecondsToCFAbsoluteTime(iSeconds uint, oCFTime *float64) error {
 	return nil
 }
 
-// UCConvertUTCDateTimeToCFAbsoluteTime wraps [raw.UCConvertUTCDateTimeToCFAbsoluteTime], bridging CFTypeRef arguments and the OSStatus result.
+// UCConvertUTCDateTimeToCFAbsoluteTime wraps [raw.UCConvertUTCDateTimeToCFAbsoluteTime], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func UCConvertUTCDateTimeToCFAbsoluteTime(iUTCDate *raw.UTCDateTime, oCFTime *float64) error {
 	if _err := purego.NewOSStatus(raw.UCConvertUTCDateTimeToCFAbsoluteTime(iUTCDate, oCFTime)).Err(); _err != nil {
 		return _err
@@ -742,7 +742,7 @@ func UCConvertUTCDateTimeToCFAbsoluteTime(iUTCDate *raw.UTCDateTime, oCFTime *fl
 	return nil
 }
 
-// UCGetCharProperty wraps [raw.UCGetCharProperty], bridging CFTypeRef arguments and the OSStatus result.
+// UCGetCharProperty wraps [raw.UCGetCharProperty], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func UCGetCharProperty(charPtr *uint16, textLength uint, propType int, propValue *uint) error {
 	if _err := purego.NewOSStatus(raw.UCGetCharProperty(charPtr, textLength, propType, propValue)).Err(); _err != nil {
 		return _err
@@ -750,7 +750,7 @@ func UCGetCharProperty(charPtr *uint16, textLength uint, propType int, propValue
 	return nil
 }
 
-// UCKeyTranslate wraps [raw.UCKeyTranslate], bridging CFTypeRef arguments and the OSStatus result.
+// UCKeyTranslate wraps [raw.UCKeyTranslate], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func UCKeyTranslate(keyLayoutPtr *raw.UCKeyboardLayout, virtualKeyCode uint16, keyAction uint16, modifierKeyState uint, keyboardType uint, keyTranslateOptions uint, deadKeyState *uint, maxStringLength uint, actualStringLength *uint, unicodeString *uint16) error {
 	if _err := purego.NewOSStatus(raw.UCKeyTranslate(keyLayoutPtr, virtualKeyCode, keyAction, modifierKeyState, keyboardType, keyTranslateOptions, deadKeyState, maxStringLength, actualStringLength, unicodeString)).Err(); _err != nil {
 		return _err
@@ -758,7 +758,7 @@ func UCKeyTranslate(keyLayoutPtr *raw.UCKeyboardLayout, virtualKeyCode uint16, k
 	return nil
 }
 
-// UpgradeScriptInfoToTextEncoding wraps [raw.UpgradeScriptInfoToTextEncoding], bridging CFTypeRef arguments and the OSStatus result.
+// UpgradeScriptInfoToTextEncoding wraps [raw.UpgradeScriptInfoToTextEncoding], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func UpgradeScriptInfoToTextEncoding(iTextScriptID int16, iTextLanguageID int16, iRegionID int16, iTextFontname *uint8, oEncoding *uint) error {
 	if _err := purego.NewOSStatus(raw.UpgradeScriptInfoToTextEncoding(iTextScriptID, iTextLanguageID, iRegionID, iTextFontname, oEncoding)).Err(); _err != nil {
 		return _err

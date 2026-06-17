@@ -18,11 +18,11 @@ type FriendRequestComposeViewController struct {
 // Unwrap returns the underlying [raw.GKFriendRequestComposeViewController].
 func (x *FriendRequestComposeViewController) Unwrap() *raw.GKFriendRequestComposeViewController { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *FriendRequestComposeViewController) ID() objc.ID { return x.inner.Ptr() }
 
-// FriendRequestComposeViewControllerFromID adopts an existing toll-free-bridged object id as a FriendRequestComposeViewController (nil for 0).
+// FriendRequestComposeViewControllerFromID adopts an existing object pointer as a FriendRequestComposeViewController (nil for 0).
 func FriendRequestComposeViewControllerFromID(id objc.ID) *FriendRequestComposeViewController {
 	if id == 0 {
 		return nil

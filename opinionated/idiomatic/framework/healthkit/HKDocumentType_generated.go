@@ -17,11 +17,11 @@ type DocumentType struct {
 // Unwrap returns the underlying [raw.HKDocumentType].
 func (x *DocumentType) Unwrap() *raw.HKDocumentType { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DocumentType) ID() objc.ID { return x.inner.Ptr() }
 
-// DocumentTypeFromID adopts an existing toll-free-bridged object id as a DocumentType (nil for 0).
+// DocumentTypeFromID adopts an existing object pointer as a DocumentType (nil for 0).
 func DocumentTypeFromID(id objc.ID) *DocumentType {
 	if id == 0 {
 		return nil

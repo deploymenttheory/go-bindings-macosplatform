@@ -17,11 +17,11 @@ type MTRAccessControlClusterAccessControlEntry struct {
 // Unwrap returns the underlying [raw.MTRAccessControlClusterAccessControlEntry].
 func (x *MTRAccessControlClusterAccessControlEntry) Unwrap() *raw.MTRAccessControlClusterAccessControlEntry { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRAccessControlClusterAccessControlEntry) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRAccessControlClusterAccessControlEntryFromID adopts an existing toll-free-bridged object id as a MTRAccessControlClusterAccessControlEntry (nil for 0).
+// MTRAccessControlClusterAccessControlEntryFromID adopts an existing object pointer as a MTRAccessControlClusterAccessControlEntry (nil for 0).
 func MTRAccessControlClusterAccessControlEntryFromID(id objc.ID) *MTRAccessControlClusterAccessControlEntry {
 	if id == 0 {
 		return nil

@@ -20,11 +20,11 @@ type ArrayMultiaryBase struct {
 // Unwrap returns the underlying [raw.MPSNDArrayMultiaryBase].
 func (x *ArrayMultiaryBase) Unwrap() *raw.MPSNDArrayMultiaryBase { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ArrayMultiaryBase) ID() objc.ID { return x.inner.Ptr() }
 
-// ArrayMultiaryBaseFromID adopts an existing toll-free-bridged object id as a ArrayMultiaryBase (nil for 0).
+// ArrayMultiaryBaseFromID adopts an existing object pointer as a ArrayMultiaryBase (nil for 0).
 func ArrayMultiaryBaseFromID(id objc.ID) *ArrayMultiaryBase {
 	if id == 0 {
 		return nil

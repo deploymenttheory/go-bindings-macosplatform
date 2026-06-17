@@ -18,11 +18,11 @@ type WKNavigationResponse struct {
 // Unwrap returns the underlying [raw.WKNavigationResponse].
 func (x *WKNavigationResponse) Unwrap() *raw.WKNavigationResponse { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *WKNavigationResponse) ID() objc.ID { return x.inner.Ptr() }
 
-// WKNavigationResponseFromID adopts an existing toll-free-bridged object id as a WKNavigationResponse (nil for 0).
+// WKNavigationResponseFromID adopts an existing object pointer as a WKNavigationResponse (nil for 0).
 func WKNavigationResponseFromID(id objc.ID) *WKNavigationResponse {
 	if id == 0 {
 		return nil

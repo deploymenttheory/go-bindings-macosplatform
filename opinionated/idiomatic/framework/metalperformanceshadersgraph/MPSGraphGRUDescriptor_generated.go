@@ -17,11 +17,11 @@ type GraphGRUDescriptor struct {
 // Unwrap returns the underlying [raw.MPSGraphGRUDescriptor].
 func (x *GraphGRUDescriptor) Unwrap() *raw.MPSGraphGRUDescriptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *GraphGRUDescriptor) ID() objc.ID { return x.inner.Ptr() }
 
-// GraphGRUDescriptorFromID adopts an existing toll-free-bridged object id as a GraphGRUDescriptor (nil for 0).
+// GraphGRUDescriptorFromID adopts an existing object pointer as a GraphGRUDescriptor (nil for 0).
 func GraphGRUDescriptorFromID(id objc.ID) *GraphGRUDescriptor {
 	if id == 0 {
 		return nil

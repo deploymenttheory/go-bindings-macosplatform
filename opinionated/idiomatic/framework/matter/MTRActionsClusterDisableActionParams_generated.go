@@ -18,11 +18,11 @@ type MTRActionsClusterDisableActionParams struct {
 // Unwrap returns the underlying [raw.MTRActionsClusterDisableActionParams].
 func (x *MTRActionsClusterDisableActionParams) Unwrap() *raw.MTRActionsClusterDisableActionParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRActionsClusterDisableActionParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRActionsClusterDisableActionParamsFromID adopts an existing toll-free-bridged object id as a MTRActionsClusterDisableActionParams (nil for 0).
+// MTRActionsClusterDisableActionParamsFromID adopts an existing object pointer as a MTRActionsClusterDisableActionParams (nil for 0).
 func MTRActionsClusterDisableActionParamsFromID(id objc.ID) *MTRActionsClusterDisableActionParams {
 	if id == 0 {
 		return nil

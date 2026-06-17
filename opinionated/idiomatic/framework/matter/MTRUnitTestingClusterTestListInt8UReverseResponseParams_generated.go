@@ -20,11 +20,11 @@ type MTRUnitTestingClusterTestListInt8UReverseResponseParams struct {
 // Unwrap returns the underlying [raw.MTRUnitTestingClusterTestListInt8UReverseResponseParams].
 func (x *MTRUnitTestingClusterTestListInt8UReverseResponseParams) Unwrap() *raw.MTRUnitTestingClusterTestListInt8UReverseResponseParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRUnitTestingClusterTestListInt8UReverseResponseParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRUnitTestingClusterTestListInt8UReverseResponseParamsFromID adopts an existing toll-free-bridged object id as a MTRUnitTestingClusterTestListInt8UReverseResponseParams (nil for 0).
+// MTRUnitTestingClusterTestListInt8UReverseResponseParamsFromID adopts an existing object pointer as a MTRUnitTestingClusterTestListInt8UReverseResponseParams (nil for 0).
 func MTRUnitTestingClusterTestListInt8UReverseResponseParamsFromID(id objc.ID) *MTRUnitTestingClusterTestListInt8UReverseResponseParams {
 	if id == 0 {
 		return nil

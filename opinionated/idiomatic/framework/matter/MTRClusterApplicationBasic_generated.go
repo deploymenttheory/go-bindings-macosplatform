@@ -18,11 +18,11 @@ type MTRClusterApplicationBasic struct {
 // Unwrap returns the underlying [raw.MTRClusterApplicationBasic].
 func (x *MTRClusterApplicationBasic) Unwrap() *raw.MTRClusterApplicationBasic { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRClusterApplicationBasic) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRClusterApplicationBasicFromID adopts an existing toll-free-bridged object id as a MTRClusterApplicationBasic (nil for 0).
+// MTRClusterApplicationBasicFromID adopts an existing object pointer as a MTRClusterApplicationBasic (nil for 0).
 func MTRClusterApplicationBasicFromID(id objc.ID) *MTRClusterApplicationBasic {
 	if id == 0 {
 		return nil

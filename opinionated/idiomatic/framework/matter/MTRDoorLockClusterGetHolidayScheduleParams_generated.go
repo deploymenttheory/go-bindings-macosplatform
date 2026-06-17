@@ -18,11 +18,11 @@ type MTRDoorLockClusterGetHolidayScheduleParams struct {
 // Unwrap returns the underlying [raw.MTRDoorLockClusterGetHolidayScheduleParams].
 func (x *MTRDoorLockClusterGetHolidayScheduleParams) Unwrap() *raw.MTRDoorLockClusterGetHolidayScheduleParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRDoorLockClusterGetHolidayScheduleParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRDoorLockClusterGetHolidayScheduleParamsFromID adopts an existing toll-free-bridged object id as a MTRDoorLockClusterGetHolidayScheduleParams (nil for 0).
+// MTRDoorLockClusterGetHolidayScheduleParamsFromID adopts an existing object pointer as a MTRDoorLockClusterGetHolidayScheduleParams (nil for 0).
 func MTRDoorLockClusterGetHolidayScheduleParamsFromID(id objc.ID) *MTRDoorLockClusterGetHolidayScheduleParams {
 	if id == 0 {
 		return nil

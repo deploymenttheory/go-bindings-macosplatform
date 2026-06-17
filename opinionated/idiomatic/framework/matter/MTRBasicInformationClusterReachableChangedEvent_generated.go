@@ -18,11 +18,11 @@ type MTRBasicInformationClusterReachableChangedEvent struct {
 // Unwrap returns the underlying [raw.MTRBasicInformationClusterReachableChangedEvent].
 func (x *MTRBasicInformationClusterReachableChangedEvent) Unwrap() *raw.MTRBasicInformationClusterReachableChangedEvent { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRBasicInformationClusterReachableChangedEvent) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRBasicInformationClusterReachableChangedEventFromID adopts an existing toll-free-bridged object id as a MTRBasicInformationClusterReachableChangedEvent (nil for 0).
+// MTRBasicInformationClusterReachableChangedEventFromID adopts an existing object pointer as a MTRBasicInformationClusterReachableChangedEvent (nil for 0).
 func MTRBasicInformationClusterReachableChangedEventFromID(id objc.ID) *MTRBasicInformationClusterReachableChangedEvent {
 	if id == 0 {
 		return nil

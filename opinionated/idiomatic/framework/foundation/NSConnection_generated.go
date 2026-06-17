@@ -19,11 +19,11 @@ type Connection struct {
 // Unwrap returns the underlying [raw.NSConnection].
 func (x *Connection) Unwrap() *raw.NSConnection { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Connection) ID() objc.ID { return x.inner.Ptr() }
 
-// ConnectionFromID adopts an existing toll-free-bridged object id as a Connection (nil for 0).
+// ConnectionFromID adopts an existing object pointer as a Connection (nil for 0).
 func ConnectionFromID(id objc.ID) *Connection {
 	if id == 0 {
 		return nil

@@ -21,11 +21,11 @@ type Matrix struct {
 // Unwrap returns the underlying [raw.NSMatrix].
 func (x *Matrix) Unwrap() *raw.NSMatrix { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Matrix) ID() objc.ID { return x.inner.Ptr() }
 
-// MatrixFromID adopts an existing toll-free-bridged object id as a Matrix (nil for 0).
+// MatrixFromID adopts an existing object pointer as a Matrix (nil for 0).
 func MatrixFromID(id objc.ID) *Matrix {
 	if id == 0 {
 		return nil

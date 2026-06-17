@@ -20,11 +20,11 @@ type CollectionViewCompositionalLayoutConfiguration struct {
 // Unwrap returns the underlying [raw.NSCollectionViewCompositionalLayoutConfiguration].
 func (x *CollectionViewCompositionalLayoutConfiguration) Unwrap() *raw.NSCollectionViewCompositionalLayoutConfiguration { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CollectionViewCompositionalLayoutConfiguration) ID() objc.ID { return x.inner.Ptr() }
 
-// CollectionViewCompositionalLayoutConfigurationFromID adopts an existing toll-free-bridged object id as a CollectionViewCompositionalLayoutConfiguration (nil for 0).
+// CollectionViewCompositionalLayoutConfigurationFromID adopts an existing object pointer as a CollectionViewCompositionalLayoutConfiguration (nil for 0).
 func CollectionViewCompositionalLayoutConfigurationFromID(id objc.ID) *CollectionViewCompositionalLayoutConfiguration {
 	if id == 0 {
 		return nil

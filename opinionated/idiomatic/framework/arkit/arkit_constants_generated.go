@@ -10,6 +10,6 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Ar_error_domain returns the CoreFoundation constant ar_error_domain as a toll-free-bridged objc.ID.
+// Ar_error_domain returns the value of the CoreFoundation reference constant ar_error_domain as an objc.ID.
 func Ar_error_domain() objc.ID { return purego.CFConstant(raw.Ar_error_domain()) }
 

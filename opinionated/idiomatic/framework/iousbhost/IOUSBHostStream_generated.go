@@ -19,11 +19,11 @@ type HostStream struct {
 // Unwrap returns the underlying [raw.IOUSBHostStream].
 func (x *HostStream) Unwrap() *raw.IOUSBHostStream { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *HostStream) ID() objc.ID { return x.inner.Ptr() }
 
-// HostStreamFromID adopts an existing toll-free-bridged object id as a HostStream (nil for 0).
+// HostStreamFromID adopts an existing object pointer as a HostStream (nil for 0).
 func HostStreamFromID(id objc.ID) *HostStream {
 	if id == 0 {
 		return nil

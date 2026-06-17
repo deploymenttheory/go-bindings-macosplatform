@@ -20,11 +20,11 @@ type Skinner struct {
 // Unwrap returns the underlying [raw.SCNSkinner].
 func (x *Skinner) Unwrap() *raw.SCNSkinner { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Skinner) ID() objc.ID { return x.inner.Ptr() }
 
-// SkinnerFromID adopts an existing toll-free-bridged object id as a Skinner (nil for 0).
+// SkinnerFromID adopts an existing object pointer as a Skinner (nil for 0).
 func SkinnerFromID(id objc.ID) *Skinner {
 	if id == 0 {
 		return nil

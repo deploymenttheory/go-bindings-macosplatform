@@ -21,11 +21,11 @@ type MTRClusterRVCRunMode struct {
 // Unwrap returns the underlying [raw.MTRClusterRVCRunMode].
 func (x *MTRClusterRVCRunMode) Unwrap() *raw.MTRClusterRVCRunMode { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRClusterRVCRunMode) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRClusterRVCRunModeFromID adopts an existing toll-free-bridged object id as a MTRClusterRVCRunMode (nil for 0).
+// MTRClusterRVCRunModeFromID adopts an existing object pointer as a MTRClusterRVCRunMode (nil for 0).
 func MTRClusterRVCRunModeFromID(id objc.ID) *MTRClusterRVCRunMode {
 	if id == 0 {
 		return nil

@@ -17,11 +17,11 @@ type GenerateForegroundInstanceMaskRequest struct {
 // Unwrap returns the underlying [raw.VNGenerateForegroundInstanceMaskRequest].
 func (x *GenerateForegroundInstanceMaskRequest) Unwrap() *raw.VNGenerateForegroundInstanceMaskRequest { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *GenerateForegroundInstanceMaskRequest) ID() objc.ID { return x.inner.Ptr() }
 
-// GenerateForegroundInstanceMaskRequestFromID adopts an existing toll-free-bridged object id as a GenerateForegroundInstanceMaskRequest (nil for 0).
+// GenerateForegroundInstanceMaskRequestFromID adopts an existing object pointer as a GenerateForegroundInstanceMaskRequest (nil for 0).
 func GenerateForegroundInstanceMaskRequestFromID(id objc.ID) *GenerateForegroundInstanceMaskRequest {
 	if id == 0 {
 		return nil

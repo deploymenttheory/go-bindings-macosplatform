@@ -21,11 +21,11 @@ type GameSession struct {
 // Unwrap returns the underlying [raw.GKGameSession].
 func (x *GameSession) Unwrap() *raw.GKGameSession { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *GameSession) ID() objc.ID { return x.inner.Ptr() }
 
-// GameSessionFromID adopts an existing toll-free-bridged object id as a GameSession (nil for 0).
+// GameSessionFromID adopts an existing object pointer as a GameSession (nil for 0).
 func GameSessionFromID(id objc.ID) *GameSession {
 	if id == 0 {
 		return nil

@@ -17,11 +17,11 @@ type MessageAction struct {
 // Unwrap returns the underlying [raw.MEMessageAction].
 func (x *MessageAction) Unwrap() *raw.MEMessageAction { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MessageAction) ID() objc.ID { return x.inner.Ptr() }
 
-// MessageActionFromID adopts an existing toll-free-bridged object id as a MessageAction (nil for 0).
+// MessageActionFromID adopts an existing object pointer as a MessageAction (nil for 0).
 func MessageActionFromID(id objc.ID) *MessageAction {
 	if id == 0 {
 		return nil

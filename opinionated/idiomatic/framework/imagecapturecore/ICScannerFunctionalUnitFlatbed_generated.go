@@ -19,11 +19,11 @@ type ScannerFunctionalUnitFlatbed struct {
 // Unwrap returns the underlying [raw.ICScannerFunctionalUnitFlatbed].
 func (x *ScannerFunctionalUnitFlatbed) Unwrap() *raw.ICScannerFunctionalUnitFlatbed { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ScannerFunctionalUnitFlatbed) ID() objc.ID { return x.inner.Ptr() }
 
-// ScannerFunctionalUnitFlatbedFromID adopts an existing toll-free-bridged object id as a ScannerFunctionalUnitFlatbed (nil for 0).
+// ScannerFunctionalUnitFlatbedFromID adopts an existing object pointer as a ScannerFunctionalUnitFlatbed (nil for 0).
 func ScannerFunctionalUnitFlatbedFromID(id objc.ID) *ScannerFunctionalUnitFlatbed {
 	if id == 0 {
 		return nil

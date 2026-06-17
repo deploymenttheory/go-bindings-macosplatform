@@ -17,11 +17,11 @@ type Resource struct {
 // Unwrap returns the underlying [raw.FSResource].
 func (x *Resource) Unwrap() *raw.FSResource { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Resource) ID() objc.ID { return x.inner.Ptr() }
 
-// ResourceFromID adopts an existing toll-free-bridged object id as a Resource (nil for 0).
+// ResourceFromID adopts an existing object pointer as a Resource (nil for 0).
 func ResourceFromID(id objc.ID) *Resource {
 	if id == 0 {
 		return nil

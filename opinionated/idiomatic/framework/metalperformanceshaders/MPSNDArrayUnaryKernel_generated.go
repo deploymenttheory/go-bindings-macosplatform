@@ -20,11 +20,11 @@ type NDArrayUnaryKernel struct {
 // Unwrap returns the underlying [raw.MPSNDArrayUnaryKernel].
 func (x *NDArrayUnaryKernel) Unwrap() *raw.MPSNDArrayUnaryKernel { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NDArrayUnaryKernel) ID() objc.ID { return x.inner.Ptr() }
 
-// NDArrayUnaryKernelFromID adopts an existing toll-free-bridged object id as a NDArrayUnaryKernel (nil for 0).
+// NDArrayUnaryKernelFromID adopts an existing object pointer as a NDArrayUnaryKernel (nil for 0).
 func NDArrayUnaryKernelFromID(id objc.ID) *NDArrayUnaryKernel {
 	if id == 0 {
 		return nil

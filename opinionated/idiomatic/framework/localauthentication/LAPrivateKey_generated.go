@@ -21,11 +21,11 @@ type PrivateKey struct {
 // Unwrap returns the underlying [raw.LAPrivateKey].
 func (x *PrivateKey) Unwrap() *raw.LAPrivateKey { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PrivateKey) ID() objc.ID { return x.inner.Ptr() }
 
-// PrivateKeyFromID adopts an existing toll-free-bridged object id as a PrivateKey (nil for 0).
+// PrivateKeyFromID adopts an existing object pointer as a PrivateKey (nil for 0).
 func PrivateKeyFromID(id objc.ID) *PrivateKey {
 	if id == 0 {
 		return nil

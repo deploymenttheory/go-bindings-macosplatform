@@ -17,11 +17,11 @@ type VertexAttributeDescriptor struct {
 // Unwrap returns the underlying [raw.MTLVertexAttributeDescriptor].
 func (x *VertexAttributeDescriptor) Unwrap() *raw.MTLVertexAttributeDescriptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *VertexAttributeDescriptor) ID() objc.ID { return x.inner.Ptr() }
 
-// VertexAttributeDescriptorFromID adopts an existing toll-free-bridged object id as a VertexAttributeDescriptor (nil for 0).
+// VertexAttributeDescriptorFromID adopts an existing object pointer as a VertexAttributeDescriptor (nil for 0).
 func VertexAttributeDescriptorFromID(id objc.ID) *VertexAttributeDescriptor {
 	if id == 0 {
 		return nil

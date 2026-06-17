@@ -10,436 +10,436 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// KICADevicesArrayKey returns the CoreFoundation constant kICADevicesArrayKey as a toll-free-bridged objc.ID.
+// KICADevicesArrayKey returns the value of the CoreFoundation reference constant kICADevicesArrayKey as an objc.ID.
 func KICADevicesArrayKey() objc.ID { return purego.CFConstant(raw.KICADevicesArrayKey()) }
 
-// KICAObjectKey returns the CoreFoundation constant kICAObjectKey as a toll-free-bridged objc.ID.
+// KICAObjectKey returns the value of the CoreFoundation reference constant kICAObjectKey as an objc.ID.
 func KICAObjectKey() objc.ID { return purego.CFConstant(raw.KICAObjectKey()) }
 
-// KICAObjectNameKey returns the CoreFoundation constant kICAObjectNameKey as a toll-free-bridged objc.ID.
+// KICAObjectNameKey returns the value of the CoreFoundation reference constant kICAObjectNameKey as an objc.ID.
 func KICAObjectNameKey() objc.ID { return purego.CFConstant(raw.KICAObjectNameKey()) }
 
-// KICAUSBVendorIDKey returns the CoreFoundation constant kICAUSBVendorIDKey as a toll-free-bridged objc.ID.
+// KICAUSBVendorIDKey returns the value of the CoreFoundation reference constant kICAUSBVendorIDKey as an objc.ID.
 func KICAUSBVendorIDKey() objc.ID { return purego.CFConstant(raw.KICAUSBVendorIDKey()) }
 
-// KICAUSBProductIDKey returns the CoreFoundation constant kICAUSBProductIDKey as a toll-free-bridged objc.ID.
+// KICAUSBProductIDKey returns the value of the CoreFoundation reference constant kICAUSBProductIDKey as an objc.ID.
 func KICAUSBProductIDKey() objc.ID { return purego.CFConstant(raw.KICAUSBProductIDKey()) }
 
-// KICADeviceTypeKey returns the CoreFoundation constant kICADeviceTypeKey as a toll-free-bridged objc.ID.
+// KICADeviceTypeKey returns the value of the CoreFoundation reference constant kICADeviceTypeKey as an objc.ID.
 func KICADeviceTypeKey() objc.ID { return purego.CFConstant(raw.KICADeviceTypeKey()) }
 
-// KICAExecutableArchitectureKey returns the CoreFoundation constant kICAExecutableArchitectureKey as a toll-free-bridged objc.ID.
+// KICAExecutableArchitectureKey returns the value of the CoreFoundation reference constant kICAExecutableArchitectureKey as an objc.ID.
 func KICAExecutableArchitectureKey() objc.ID { return purego.CFConstant(raw.KICAExecutableArchitectureKey()) }
 
-// KICARemoteDeviceKey returns the CoreFoundation constant kICARemoteDeviceKey as a toll-free-bridged objc.ID.
+// KICARemoteDeviceKey returns the value of the CoreFoundation reference constant kICARemoteDeviceKey as an objc.ID.
 func KICARemoteDeviceKey() objc.ID { return purego.CFConstant(raw.KICARemoteDeviceKey()) }
 
-// KICADeviceSharedKey returns the CoreFoundation constant kICADeviceSharedKey as a toll-free-bridged objc.ID.
+// KICADeviceSharedKey returns the value of the CoreFoundation reference constant kICADeviceSharedKey as an objc.ID.
 func KICADeviceSharedKey() objc.ID { return purego.CFConstant(raw.KICADeviceSharedKey()) }
 
-// KICADeviceWebSharedKey returns the CoreFoundation constant kICADeviceWebSharedKey as a toll-free-bridged objc.ID.
+// KICADeviceWebSharedKey returns the value of the CoreFoundation reference constant kICADeviceWebSharedKey as an objc.ID.
 func KICADeviceWebSharedKey() objc.ID { return purego.CFConstant(raw.KICADeviceWebSharedKey()) }
 
-// KICADeviceUsedKey returns the CoreFoundation constant kICADeviceUsedKey as a toll-free-bridged objc.ID.
+// KICADeviceUsedKey returns the value of the CoreFoundation reference constant kICADeviceUsedKey as an objc.ID.
 func KICADeviceUsedKey() objc.ID { return purego.CFConstant(raw.KICADeviceUsedKey()) }
 
-// KICABonjourServiceTypeKey returns the CoreFoundation constant kICABonjourServiceTypeKey as a toll-free-bridged objc.ID.
+// KICABonjourServiceTypeKey returns the value of the CoreFoundation reference constant kICABonjourServiceTypeKey as an objc.ID.
 func KICABonjourServiceTypeKey() objc.ID { return purego.CFConstant(raw.KICABonjourServiceTypeKey()) }
 
-// KICABonjourServiceNameKey returns the CoreFoundation constant kICABonjourServiceNameKey as a toll-free-bridged objc.ID.
+// KICABonjourServiceNameKey returns the value of the CoreFoundation reference constant kICABonjourServiceNameKey as an objc.ID.
 func KICABonjourServiceNameKey() objc.ID { return purego.CFConstant(raw.KICABonjourServiceNameKey()) }
 
-// KICABonjourTXTRecordKey returns the CoreFoundation constant kICABonjourTXTRecordKey as a toll-free-bridged objc.ID.
+// KICABonjourTXTRecordKey returns the value of the CoreFoundation reference constant kICABonjourTXTRecordKey as an objc.ID.
 func KICABonjourTXTRecordKey() objc.ID { return purego.CFConstant(raw.KICABonjourTXTRecordKey()) }
 
-// KICADeviceCapabilitiesKey returns the CoreFoundation constant kICADeviceCapabilitiesKey as a toll-free-bridged objc.ID.
+// KICADeviceCapabilitiesKey returns the value of the CoreFoundation reference constant kICADeviceCapabilitiesKey as an objc.ID.
 func KICADeviceCapabilitiesKey() objc.ID { return purego.CFConstant(raw.KICADeviceCapabilitiesKey()) }
 
-// KICALockStatusKey returns the CoreFoundation constant kICALockStatusKey as a toll-free-bridged objc.ID.
+// KICALockStatusKey returns the value of the CoreFoundation reference constant kICALockStatusKey as an objc.ID.
 func KICALockStatusKey() objc.ID { return purego.CFConstant(raw.KICALockStatusKey()) }
 
-// KICADataPropertyKey returns the CoreFoundation constant kICADataPropertyKey as a toll-free-bridged objc.ID.
+// KICADataPropertyKey returns the value of the CoreFoundation reference constant kICADataPropertyKey as an objc.ID.
 func KICADataPropertyKey() objc.ID { return purego.CFConstant(raw.KICADataPropertyKey()) }
 
-// KICADataTypeKey returns the CoreFoundation constant kICADataTypeKey as a toll-free-bridged objc.ID.
+// KICADataTypeKey returns the value of the CoreFoundation reference constant kICADataTypeKey as an objc.ID.
 func KICADataTypeKey() objc.ID { return purego.CFConstant(raw.KICADataTypeKey()) }
 
-// KICADataSizeKey returns the CoreFoundation constant kICADataSizeKey as a toll-free-bridged objc.ID.
+// KICADataSizeKey returns the value of the CoreFoundation reference constant kICADataSizeKey as an objc.ID.
 func KICADataSizeKey() objc.ID { return purego.CFConstant(raw.KICADataSizeKey()) }
 
-// KICAThumbnailPropertyKey returns the CoreFoundation constant kICAThumbnailPropertyKey as a toll-free-bridged objc.ID.
+// KICAThumbnailPropertyKey returns the value of the CoreFoundation reference constant kICAThumbnailPropertyKey as an objc.ID.
 func KICAThumbnailPropertyKey() objc.ID { return purego.CFConstant(raw.KICAThumbnailPropertyKey()) }
 
-// KICAThumbnailSizeKey returns the CoreFoundation constant kICAThumbnailSizeKey as a toll-free-bridged objc.ID.
+// KICAThumbnailSizeKey returns the value of the CoreFoundation reference constant kICAThumbnailSizeKey as an objc.ID.
 func KICAThumbnailSizeKey() objc.ID { return purego.CFConstant(raw.KICAThumbnailSizeKey()) }
 
-// KICARawKey returns the CoreFoundation constant kICARawKey as a toll-free-bridged objc.ID.
+// KICARawKey returns the value of the CoreFoundation reference constant kICARawKey as an objc.ID.
 func KICARawKey() objc.ID { return purego.CFConstant(raw.KICARawKey()) }
 
-// KICAMediaHeightKey returns the CoreFoundation constant kICAMediaHeightKey as a toll-free-bridged objc.ID.
+// KICAMediaHeightKey returns the value of the CoreFoundation reference constant kICAMediaHeightKey as an objc.ID.
 func KICAMediaHeightKey() objc.ID { return purego.CFConstant(raw.KICAMediaHeightKey()) }
 
-// KICAMediaWidthKey returns the CoreFoundation constant kICAMediaWidthKey as a toll-free-bridged objc.ID.
+// KICAMediaWidthKey returns the value of the CoreFoundation reference constant kICAMediaWidthKey as an objc.ID.
 func KICAMediaWidthKey() objc.ID { return purego.CFConstant(raw.KICAMediaWidthKey()) }
 
-// KICACreationDateStringKey returns the CoreFoundation constant kICACreationDateStringKey as a toll-free-bridged objc.ID.
+// KICACreationDateStringKey returns the value of the CoreFoundation reference constant kICACreationDateStringKey as an objc.ID.
 func KICACreationDateStringKey() objc.ID { return purego.CFConstant(raw.KICACreationDateStringKey()) }
 
-// KICAModificationDateStringKey returns the CoreFoundation constant kICAModificationDateStringKey as a toll-free-bridged objc.ID.
+// KICAModificationDateStringKey returns the value of the CoreFoundation reference constant kICAModificationDateStringKey as an objc.ID.
 func KICAModificationDateStringKey() objc.ID { return purego.CFConstant(raw.KICAModificationDateStringKey()) }
 
-// KMetaDataDictionaryKey returns the CoreFoundation constant kMetaDataDictionaryKey as a toll-free-bridged objc.ID.
+// KMetaDataDictionaryKey returns the value of the CoreFoundation reference constant kMetaDataDictionaryKey as an objc.ID.
 func KMetaDataDictionaryKey() objc.ID { return purego.CFConstant(raw.KMetaDataDictionaryKey()) }
 
-// KICAMediaDurationInSecondsKey returns the CoreFoundation constant kICAMediaDurationInSecondsKey as a toll-free-bridged objc.ID.
+// KICAMediaDurationInSecondsKey returns the value of the CoreFoundation reference constant kICAMediaDurationInSecondsKey as an objc.ID.
 func KICAMediaDurationInSecondsKey() objc.ID { return purego.CFConstant(raw.KICAMediaDurationInSecondsKey()) }
 
-// KICADeviceTypeCamera returns the CoreFoundation constant kICADeviceTypeCamera as a toll-free-bridged objc.ID.
+// KICADeviceTypeCamera returns the value of the CoreFoundation reference constant kICADeviceTypeCamera as an objc.ID.
 func KICADeviceTypeCamera() objc.ID { return purego.CFConstant(raw.KICADeviceTypeCamera()) }
 
-// KICADeviceTypeScanner returns the CoreFoundation constant kICADeviceTypeScanner as a toll-free-bridged objc.ID.
+// KICADeviceTypeScanner returns the value of the CoreFoundation reference constant kICADeviceTypeScanner as an objc.ID.
 func KICADeviceTypeScanner() objc.ID { return purego.CFConstant(raw.KICADeviceTypeScanner()) }
 
-// KICAUSBTransportType returns the CoreFoundation constant kICAUSBTransportType as a toll-free-bridged objc.ID.
+// KICAUSBTransportType returns the value of the CoreFoundation reference constant kICAUSBTransportType as an objc.ID.
 func KICAUSBTransportType() objc.ID { return purego.CFConstant(raw.KICAUSBTransportType()) }
 
-// KICAFireWireTransportType returns the CoreFoundation constant kICAFireWireTransportType as a toll-free-bridged objc.ID.
+// KICAFireWireTransportType returns the value of the CoreFoundation reference constant kICAFireWireTransportType as an objc.ID.
 func KICAFireWireTransportType() objc.ID { return purego.CFConstant(raw.KICAFireWireTransportType()) }
 
-// KICABluetoothTransportType returns the CoreFoundation constant kICABluetoothTransportType as a toll-free-bridged objc.ID.
+// KICABluetoothTransportType returns the value of the CoreFoundation reference constant kICABluetoothTransportType as an objc.ID.
 func KICABluetoothTransportType() objc.ID { return purego.CFConstant(raw.KICABluetoothTransportType()) }
 
-// KICATCPIPTransportType returns the CoreFoundation constant kICATCPIPTransportType as a toll-free-bridged objc.ID.
+// KICATCPIPTransportType returns the value of the CoreFoundation reference constant kICATCPIPTransportType as an objc.ID.
 func KICATCPIPTransportType() objc.ID { return purego.CFConstant(raw.KICATCPIPTransportType()) }
 
-// KICASCSITransportType returns the CoreFoundation constant kICASCSITransportType as a toll-free-bridged objc.ID.
+// KICASCSITransportType returns the value of the CoreFoundation reference constant kICASCSITransportType as an objc.ID.
 func KICASCSITransportType() objc.ID { return purego.CFConstant(raw.KICASCSITransportType()) }
 
-// KICATWAINTransportType returns the CoreFoundation constant kICATWAINTransportType as a toll-free-bridged objc.ID.
+// KICATWAINTransportType returns the value of the CoreFoundation reference constant kICATWAINTransportType as an objc.ID.
 func KICATWAINTransportType() objc.ID { return purego.CFConstant(raw.KICATWAINTransportType()) }
 
-// KICADeviceBrowserDeviceRefKey returns the CoreFoundation constant kICADeviceBrowserDeviceRefKey as a toll-free-bridged objc.ID.
+// KICADeviceBrowserDeviceRefKey returns the value of the CoreFoundation reference constant kICADeviceBrowserDeviceRefKey as an objc.ID.
 func KICADeviceBrowserDeviceRefKey() objc.ID { return purego.CFConstant(raw.KICADeviceBrowserDeviceRefKey()) }
 
-// KICADeviceModulePathKey returns the CoreFoundation constant kICADeviceModulePathKey as a toll-free-bridged objc.ID.
+// KICADeviceModulePathKey returns the value of the CoreFoundation reference constant kICADeviceModulePathKey as an objc.ID.
 func KICADeviceModulePathKey() objc.ID { return purego.CFConstant(raw.KICADeviceModulePathKey()) }
 
-// KICADeviceIconPathKey returns the CoreFoundation constant kICADeviceIconPathKey as a toll-free-bridged objc.ID.
+// KICADeviceIconPathKey returns the value of the CoreFoundation reference constant kICADeviceIconPathKey as an objc.ID.
 func KICADeviceIconPathKey() objc.ID { return purego.CFConstant(raw.KICADeviceIconPathKey()) }
 
-// KICATransportTypeKey returns the CoreFoundation constant kICATransportTypeKey as a toll-free-bridged objc.ID.
+// KICATransportTypeKey returns the value of the CoreFoundation reference constant kICATransportTypeKey as an objc.ID.
 func KICATransportTypeKey() objc.ID { return purego.CFConstant(raw.KICATransportTypeKey()) }
 
-// KICABluetoothAddressKey returns the CoreFoundation constant kICABluetoothAddressKey as a toll-free-bridged objc.ID.
+// KICABluetoothAddressKey returns the value of the CoreFoundation reference constant kICABluetoothAddressKey as an objc.ID.
 func KICABluetoothAddressKey() objc.ID { return purego.CFConstant(raw.KICABluetoothAddressKey()) }
 
-// KICAUSBLocationIDKey returns the CoreFoundation constant kICAUSBLocationIDKey as a toll-free-bridged objc.ID.
+// KICAUSBLocationIDKey returns the value of the CoreFoundation reference constant kICAUSBLocationIDKey as an objc.ID.
 func KICAUSBLocationIDKey() objc.ID { return purego.CFConstant(raw.KICAUSBLocationIDKey()) }
 
-// KICAFireWireGUIDKey returns the CoreFoundation constant kICAFireWireGUIDKey as a toll-free-bridged objc.ID.
+// KICAFireWireGUIDKey returns the value of the CoreFoundation reference constant kICAFireWireGUIDKey as an objc.ID.
 func KICAFireWireGUIDKey() objc.ID { return purego.CFConstant(raw.KICAFireWireGUIDKey()) }
 
-// KICAIOServicePathKey returns the CoreFoundation constant kICAIOServicePathKey as a toll-free-bridged objc.ID.
+// KICAIOServicePathKey returns the value of the CoreFoundation reference constant kICAIOServicePathKey as an objc.ID.
 func KICAIOServicePathKey() objc.ID { return purego.CFConstant(raw.KICAIOServicePathKey()) }
 
-// KICAIPAddressKey returns the CoreFoundation constant kICAIPAddressKey as a toll-free-bridged objc.ID.
+// KICAIPAddressKey returns the value of the CoreFoundation reference constant kICAIPAddressKey as an objc.ID.
 func KICAIPAddressKey() objc.ID { return purego.CFConstant(raw.KICAIPAddressKey()) }
 
-// KICAIPPortKey returns the CoreFoundation constant kICAIPPortKey as a toll-free-bridged objc.ID.
+// KICAIPPortKey returns the value of the CoreFoundation reference constant kICAIPPortKey as an objc.ID.
 func KICAIPPortKey() objc.ID { return purego.CFConstant(raw.KICAIPPortKey()) }
 
-// KICAIPNameKey returns the CoreFoundation constant kICAIPNameKey as a toll-free-bridged objc.ID.
+// KICAIPNameKey returns the value of the CoreFoundation reference constant kICAIPNameKey as an objc.ID.
 func KICAIPNameKey() objc.ID { return purego.CFConstant(raw.KICAIPNameKey()) }
 
-// KICAIPGUIDKey returns the CoreFoundation constant kICAIPGUIDKey as a toll-free-bridged objc.ID.
+// KICAIPGUIDKey returns the value of the CoreFoundation reference constant kICAIPGUIDKey as an objc.ID.
 func KICAIPGUIDKey() objc.ID { return purego.CFConstant(raw.KICAIPGUIDKey()) }
 
-// KICATWAINDSPathKey returns the CoreFoundation constant kICATWAINDSPathKey as a toll-free-bridged objc.ID.
+// KICATWAINDSPathKey returns the value of the CoreFoundation reference constant kICATWAINDSPathKey as an objc.ID.
 func KICATWAINDSPathKey() objc.ID { return purego.CFConstant(raw.KICATWAINDSPathKey()) }
 
 // @const kICAUserAssignedDeviceNameKey @abstract This key may be present in the property dictionary of a device if the device has a user-assigned name. @discussion Value is of type CFStringRef.
-// KICAUserAssignedDeviceNameKey returns the CoreFoundation constant kICAUserAssignedDeviceNameKey as a toll-free-bridged objc.ID.
+// KICAUserAssignedDeviceNameKey returns the value of the CoreFoundation reference constant kICAUserAssignedDeviceNameKey as an objc.ID.
 func KICAUserAssignedDeviceNameKey() objc.ID { return purego.CFConstant(raw.KICAUserAssignedDeviceNameKey()) }
 
-// KICANotificationTypeObjectAdded returns the CoreFoundation constant kICANotificationTypeObjectAdded as a toll-free-bridged objc.ID.
+// KICANotificationTypeObjectAdded returns the value of the CoreFoundation reference constant kICANotificationTypeObjectAdded as an objc.ID.
 func KICANotificationTypeObjectAdded() objc.ID { return purego.CFConstant(raw.KICANotificationTypeObjectAdded()) }
 
-// KICANotificationTypeObjectRemoved returns the CoreFoundation constant kICANotificationTypeObjectRemoved as a toll-free-bridged objc.ID.
+// KICANotificationTypeObjectRemoved returns the value of the CoreFoundation reference constant kICANotificationTypeObjectRemoved as an objc.ID.
 func KICANotificationTypeObjectRemoved() objc.ID { return purego.CFConstant(raw.KICANotificationTypeObjectRemoved()) }
 
-// KICANotificationTypeObjectInfoChanged returns the CoreFoundation constant kICANotificationTypeObjectInfoChanged as a toll-free-bridged objc.ID.
+// KICANotificationTypeObjectInfoChanged returns the value of the CoreFoundation reference constant kICANotificationTypeObjectInfoChanged as an objc.ID.
 func KICANotificationTypeObjectInfoChanged() objc.ID { return purego.CFConstant(raw.KICANotificationTypeObjectInfoChanged()) }
 
-// KICANotificationTypeStoreAdded returns the CoreFoundation constant kICANotificationTypeStoreAdded as a toll-free-bridged objc.ID.
+// KICANotificationTypeStoreAdded returns the value of the CoreFoundation reference constant kICANotificationTypeStoreAdded as an objc.ID.
 func KICANotificationTypeStoreAdded() objc.ID { return purego.CFConstant(raw.KICANotificationTypeStoreAdded()) }
 
-// KICANotificationTypeStoreRemoved returns the CoreFoundation constant kICANotificationTypeStoreRemoved as a toll-free-bridged objc.ID.
+// KICANotificationTypeStoreRemoved returns the value of the CoreFoundation reference constant kICANotificationTypeStoreRemoved as an objc.ID.
 func KICANotificationTypeStoreRemoved() objc.ID { return purego.CFConstant(raw.KICANotificationTypeStoreRemoved()) }
 
-// KICANotificationTypeStoreFull returns the CoreFoundation constant kICANotificationTypeStoreFull as a toll-free-bridged objc.ID.
+// KICANotificationTypeStoreFull returns the value of the CoreFoundation reference constant kICANotificationTypeStoreFull as an objc.ID.
 func KICANotificationTypeStoreFull() objc.ID { return purego.CFConstant(raw.KICANotificationTypeStoreFull()) }
 
-// KICANotificationTypeStoreInfoChanged returns the CoreFoundation constant kICANotificationTypeStoreInfoChanged as a toll-free-bridged objc.ID.
+// KICANotificationTypeStoreInfoChanged returns the value of the CoreFoundation reference constant kICANotificationTypeStoreInfoChanged as an objc.ID.
 func KICANotificationTypeStoreInfoChanged() objc.ID { return purego.CFConstant(raw.KICANotificationTypeStoreInfoChanged()) }
 
-// KICANotificationTypeDeviceAdded returns the CoreFoundation constant kICANotificationTypeDeviceAdded as a toll-free-bridged objc.ID.
+// KICANotificationTypeDeviceAdded returns the value of the CoreFoundation reference constant kICANotificationTypeDeviceAdded as an objc.ID.
 func KICANotificationTypeDeviceAdded() objc.ID { return purego.CFConstant(raw.KICANotificationTypeDeviceAdded()) }
 
-// KICANotificationTypeDeviceRemoved returns the CoreFoundation constant kICANotificationTypeDeviceRemoved as a toll-free-bridged objc.ID.
+// KICANotificationTypeDeviceRemoved returns the value of the CoreFoundation reference constant kICANotificationTypeDeviceRemoved as an objc.ID.
 func KICANotificationTypeDeviceRemoved() objc.ID { return purego.CFConstant(raw.KICANotificationTypeDeviceRemoved()) }
 
-// KICANotificationTypeDeviceInfoChanged returns the CoreFoundation constant kICANotificationTypeDeviceInfoChanged as a toll-free-bridged objc.ID.
+// KICANotificationTypeDeviceInfoChanged returns the value of the CoreFoundation reference constant kICANotificationTypeDeviceInfoChanged as an objc.ID.
 func KICANotificationTypeDeviceInfoChanged() objc.ID { return purego.CFConstant(raw.KICANotificationTypeDeviceInfoChanged()) }
 
-// KICANotificationTypeDevicePropertyChanged returns the CoreFoundation constant kICANotificationTypeDevicePropertyChanged as a toll-free-bridged objc.ID.
+// KICANotificationTypeDevicePropertyChanged returns the value of the CoreFoundation reference constant kICANotificationTypeDevicePropertyChanged as an objc.ID.
 func KICANotificationTypeDevicePropertyChanged() objc.ID { return purego.CFConstant(raw.KICANotificationTypeDevicePropertyChanged()) }
 
-// KICANotificationTypeDeviceWasReset returns the CoreFoundation constant kICANotificationTypeDeviceWasReset as a toll-free-bridged objc.ID.
+// KICANotificationTypeDeviceWasReset returns the value of the CoreFoundation reference constant kICANotificationTypeDeviceWasReset as an objc.ID.
 func KICANotificationTypeDeviceWasReset() objc.ID { return purego.CFConstant(raw.KICANotificationTypeDeviceWasReset()) }
 
-// KICANotificationTypeDeviceStatusInfo returns the CoreFoundation constant kICANotificationTypeDeviceStatusInfo as a toll-free-bridged objc.ID.
+// KICANotificationTypeDeviceStatusInfo returns the value of the CoreFoundation reference constant kICANotificationTypeDeviceStatusInfo as an objc.ID.
 func KICANotificationTypeDeviceStatusInfo() objc.ID { return purego.CFConstant(raw.KICANotificationTypeDeviceStatusInfo()) }
 
-// KICANotificationTypeDeviceStatusError returns the CoreFoundation constant kICANotificationTypeDeviceStatusError as a toll-free-bridged objc.ID.
+// KICANotificationTypeDeviceStatusError returns the value of the CoreFoundation reference constant kICANotificationTypeDeviceStatusError as an objc.ID.
 func KICANotificationTypeDeviceStatusError() objc.ID { return purego.CFConstant(raw.KICANotificationTypeDeviceStatusError()) }
 
-// KICANotificationTypeCaptureComplete returns the CoreFoundation constant kICANotificationTypeCaptureComplete as a toll-free-bridged objc.ID.
+// KICANotificationTypeCaptureComplete returns the value of the CoreFoundation reference constant kICANotificationTypeCaptureComplete as an objc.ID.
 func KICANotificationTypeCaptureComplete() objc.ID { return purego.CFConstant(raw.KICANotificationTypeCaptureComplete()) }
 
-// KICANotificationTypeRequestObjectTransfer returns the CoreFoundation constant kICANotificationTypeRequestObjectTransfer as a toll-free-bridged objc.ID.
+// KICANotificationTypeRequestObjectTransfer returns the value of the CoreFoundation reference constant kICANotificationTypeRequestObjectTransfer as an objc.ID.
 func KICANotificationTypeRequestObjectTransfer() objc.ID { return purego.CFConstant(raw.KICANotificationTypeRequestObjectTransfer()) }
 
-// KICANotificationTypeTransactionCanceled returns the CoreFoundation constant kICANotificationTypeTransactionCanceled as a toll-free-bridged objc.ID.
+// KICANotificationTypeTransactionCanceled returns the value of the CoreFoundation reference constant kICANotificationTypeTransactionCanceled as an objc.ID.
 func KICANotificationTypeTransactionCanceled() objc.ID { return purego.CFConstant(raw.KICANotificationTypeTransactionCanceled()) }
 
-// KICANotificationTypeUnreportedStatus returns the CoreFoundation constant kICANotificationTypeUnreportedStatus as a toll-free-bridged objc.ID.
+// KICANotificationTypeUnreportedStatus returns the value of the CoreFoundation reference constant kICANotificationTypeUnreportedStatus as an objc.ID.
 func KICANotificationTypeUnreportedStatus() objc.ID { return purego.CFConstant(raw.KICANotificationTypeUnreportedStatus()) }
 
-// KICANotificationTypeProprietary returns the CoreFoundation constant kICANotificationTypeProprietary as a toll-free-bridged objc.ID.
+// KICANotificationTypeProprietary returns the value of the CoreFoundation reference constant kICANotificationTypeProprietary as an objc.ID.
 func KICANotificationTypeProprietary() objc.ID { return purego.CFConstant(raw.KICANotificationTypeProprietary()) }
 
-// KICANotificationTypeDeviceConnectionProgress returns the CoreFoundation constant kICANotificationTypeDeviceConnectionProgress as a toll-free-bridged objc.ID.
+// KICANotificationTypeDeviceConnectionProgress returns the value of the CoreFoundation reference constant kICANotificationTypeDeviceConnectionProgress as an objc.ID.
 func KICANotificationTypeDeviceConnectionProgress() objc.ID { return purego.CFConstant(raw.KICANotificationTypeDeviceConnectionProgress()) }
 
-// KICANotificationTypeDownloadProgressStatus returns the CoreFoundation constant kICANotificationTypeDownloadProgressStatus as a toll-free-bridged objc.ID.
+// KICANotificationTypeDownloadProgressStatus returns the value of the CoreFoundation reference constant kICANotificationTypeDownloadProgressStatus as an objc.ID.
 func KICANotificationTypeDownloadProgressStatus() objc.ID { return purego.CFConstant(raw.KICANotificationTypeDownloadProgressStatus()) }
 
-// KICANotificationTypeScanProgressStatus returns the CoreFoundation constant kICANotificationTypeScanProgressStatus as a toll-free-bridged objc.ID.
+// KICANotificationTypeScanProgressStatus returns the value of the CoreFoundation reference constant kICANotificationTypeScanProgressStatus as an objc.ID.
 func KICANotificationTypeScanProgressStatus() objc.ID { return purego.CFConstant(raw.KICANotificationTypeScanProgressStatus()) }
 
-// KICANotificationTypeScannerSessionClosed returns the CoreFoundation constant kICANotificationTypeScannerSessionClosed as a toll-free-bridged objc.ID.
+// KICANotificationTypeScannerSessionClosed returns the value of the CoreFoundation reference constant kICANotificationTypeScannerSessionClosed as an objc.ID.
 func KICANotificationTypeScannerSessionClosed() objc.ID { return purego.CFConstant(raw.KICANotificationTypeScannerSessionClosed()) }
 
-// KICANotificationTypeScannerScanDone returns the CoreFoundation constant kICANotificationTypeScannerScanDone as a toll-free-bridged objc.ID.
+// KICANotificationTypeScannerScanDone returns the value of the CoreFoundation reference constant kICANotificationTypeScannerScanDone as an objc.ID.
 func KICANotificationTypeScannerScanDone() objc.ID { return purego.CFConstant(raw.KICANotificationTypeScannerScanDone()) }
 
-// KICANotificationTypeScannerPageDone returns the CoreFoundation constant kICANotificationTypeScannerPageDone as a toll-free-bridged objc.ID.
+// KICANotificationTypeScannerPageDone returns the value of the CoreFoundation reference constant kICANotificationTypeScannerPageDone as an objc.ID.
 func KICANotificationTypeScannerPageDone() objc.ID { return purego.CFConstant(raw.KICANotificationTypeScannerPageDone()) }
 
-// KICANotificationTypeScannerButtonPressed returns the CoreFoundation constant kICANotificationTypeScannerButtonPressed as a toll-free-bridged objc.ID.
+// KICANotificationTypeScannerButtonPressed returns the value of the CoreFoundation reference constant kICANotificationTypeScannerButtonPressed as an objc.ID.
 func KICANotificationTypeScannerButtonPressed() objc.ID { return purego.CFConstant(raw.KICANotificationTypeScannerButtonPressed()) }
 
-// KICANotificationTypeScannerOverviewOverlayAvailable returns the CoreFoundation constant kICANotificationTypeScannerOverviewOverlayAvailable as a toll-free-bridged objc.ID.
+// KICANotificationTypeScannerOverviewOverlayAvailable returns the value of the CoreFoundation reference constant kICANotificationTypeScannerOverviewOverlayAvailable as an objc.ID.
 func KICANotificationTypeScannerOverviewOverlayAvailable() objc.ID { return purego.CFConstant(raw.KICANotificationTypeScannerOverviewOverlayAvailable()) }
 
-// KICAErrorKey returns the CoreFoundation constant kICAErrorKey as a toll-free-bridged objc.ID.
+// KICAErrorKey returns the value of the CoreFoundation reference constant kICAErrorKey as an objc.ID.
 func KICAErrorKey() objc.ID { return purego.CFConstant(raw.KICAErrorKey()) }
 
-// KICARefconKey returns the CoreFoundation constant kICARefconKey as a toll-free-bridged objc.ID.
+// KICARefconKey returns the value of the CoreFoundation reference constant kICARefconKey as an objc.ID.
 func KICARefconKey() objc.ID { return purego.CFConstant(raw.KICARefconKey()) }
 
-// KICANotificationICAObjectKey returns the CoreFoundation constant kICANotificationICAObjectKey as a toll-free-bridged objc.ID.
+// KICANotificationICAObjectKey returns the value of the CoreFoundation reference constant kICANotificationICAObjectKey as an objc.ID.
 func KICANotificationICAObjectKey() objc.ID { return purego.CFConstant(raw.KICANotificationICAObjectKey()) }
 
-// KICANotificationDeviceICAObjectKey returns the CoreFoundation constant kICANotificationDeviceICAObjectKey as a toll-free-bridged objc.ID.
+// KICANotificationDeviceICAObjectKey returns the value of the CoreFoundation reference constant kICANotificationDeviceICAObjectKey as an objc.ID.
 func KICANotificationDeviceICAObjectKey() objc.ID { return purego.CFConstant(raw.KICANotificationDeviceICAObjectKey()) }
 
-// KICANotificationDeviceListICAObjectKey returns the CoreFoundation constant kICANotificationDeviceListICAObjectKey as a toll-free-bridged objc.ID.
+// KICANotificationDeviceListICAObjectKey returns the value of the CoreFoundation reference constant kICANotificationDeviceListICAObjectKey as an objc.ID.
 func KICANotificationDeviceListICAObjectKey() objc.ID { return purego.CFConstant(raw.KICANotificationDeviceListICAObjectKey()) }
 
-// KICANotificationClassKey returns the CoreFoundation constant kICANotificationClassKey as a toll-free-bridged objc.ID.
+// KICANotificationClassKey returns the value of the CoreFoundation reference constant kICANotificationClassKey as an objc.ID.
 func KICANotificationClassKey() objc.ID { return purego.CFConstant(raw.KICANotificationClassKey()) }
 
-// KICANotificationTypeKey returns the CoreFoundation constant kICANotificationTypeKey as a toll-free-bridged objc.ID.
+// KICANotificationTypeKey returns the value of the CoreFoundation reference constant kICANotificationTypeKey as an objc.ID.
 func KICANotificationTypeKey() objc.ID { return purego.CFConstant(raw.KICANotificationTypeKey()) }
 
-// KICANotificationRawEventKey returns the CoreFoundation constant kICANotificationRawEventKey as a toll-free-bridged objc.ID.
+// KICANotificationRawEventKey returns the value of the CoreFoundation reference constant kICANotificationRawEventKey as an objc.ID.
 func KICANotificationRawEventKey() objc.ID { return purego.CFConstant(raw.KICANotificationRawEventKey()) }
 
-// KICANotificationDataKey returns the CoreFoundation constant kICANotificationDataKey as a toll-free-bridged objc.ID.
+// KICANotificationDataKey returns the value of the CoreFoundation reference constant kICANotificationDataKey as an objc.ID.
 func KICANotificationDataKey() objc.ID { return purego.CFConstant(raw.KICANotificationDataKey()) }
 
-// KICANotificationDataSizeKey returns the CoreFoundation constant kICANotificationDataSizeKey as a toll-free-bridged objc.ID.
+// KICANotificationDataSizeKey returns the value of the CoreFoundation reference constant kICANotificationDataSizeKey as an objc.ID.
 func KICANotificationDataSizeKey() objc.ID { return purego.CFConstant(raw.KICANotificationDataSizeKey()) }
 
-// KICANotificationDataCookieKey returns the CoreFoundation constant kICANotificationDataCookieKey as a toll-free-bridged objc.ID.
+// KICANotificationDataCookieKey returns the value of the CoreFoundation reference constant kICANotificationDataCookieKey as an objc.ID.
 func KICANotificationDataCookieKey() objc.ID { return purego.CFConstant(raw.KICANotificationDataCookieKey()) }
 
-// KICANotificationImageKey returns the CoreFoundation constant kICANotificationImageKey as a toll-free-bridged objc.ID.
+// KICANotificationImageKey returns the value of the CoreFoundation reference constant kICANotificationImageKey as an objc.ID.
 func KICANotificationImageKey() objc.ID { return purego.CFConstant(raw.KICANotificationImageKey()) }
 
-// KICANotificationImageWidthKey returns the CoreFoundation constant kICANotificationImageWidthKey as a toll-free-bridged objc.ID.
+// KICANotificationImageWidthKey returns the value of the CoreFoundation reference constant kICANotificationImageWidthKey as an objc.ID.
 func KICANotificationImageWidthKey() objc.ID { return purego.CFConstant(raw.KICANotificationImageWidthKey()) }
 
-// KICANotificationImageHeightKey returns the CoreFoundation constant kICANotificationImageHeightKey as a toll-free-bridged objc.ID.
+// KICANotificationImageHeightKey returns the value of the CoreFoundation reference constant kICANotificationImageHeightKey as an objc.ID.
 func KICANotificationImageHeightKey() objc.ID { return purego.CFConstant(raw.KICANotificationImageHeightKey()) }
 
-// KICANotificationImageBytesPerRowKey returns the CoreFoundation constant kICANotificationImageBytesPerRowKey as a toll-free-bridged objc.ID.
+// KICANotificationImageBytesPerRowKey returns the value of the CoreFoundation reference constant kICANotificationImageBytesPerRowKey as an objc.ID.
 func KICANotificationImageBytesPerRowKey() objc.ID { return purego.CFConstant(raw.KICANotificationImageBytesPerRowKey()) }
 
-// KICANotificationImageStartRowKey returns the CoreFoundation constant kICANotificationImageStartRowKey as a toll-free-bridged objc.ID.
+// KICANotificationImageStartRowKey returns the value of the CoreFoundation reference constant kICANotificationImageStartRowKey as an objc.ID.
 func KICANotificationImageStartRowKey() objc.ID { return purego.CFConstant(raw.KICANotificationImageStartRowKey()) }
 
-// KICANotificationImageNumberOfRowsKey returns the CoreFoundation constant kICANotificationImageNumberOfRowsKey as a toll-free-bridged objc.ID.
+// KICANotificationImageNumberOfRowsKey returns the value of the CoreFoundation reference constant kICANotificationImageNumberOfRowsKey as an objc.ID.
 func KICANotificationImageNumberOfRowsKey() objc.ID { return purego.CFConstant(raw.KICANotificationImageNumberOfRowsKey()) }
 
-// KICANotificationImageDataKey returns the CoreFoundation constant kICANotificationImageDataKey as a toll-free-bridged objc.ID.
+// KICANotificationImageDataKey returns the value of the CoreFoundation reference constant kICANotificationImageDataKey as an objc.ID.
 func KICANotificationImageDataKey() objc.ID { return purego.CFConstant(raw.KICANotificationImageDataKey()) }
 
-// KICANotificationImageDataSizeKey returns the CoreFoundation constant kICANotificationImageDataSizeKey as a toll-free-bridged objc.ID.
+// KICANotificationImageDataSizeKey returns the value of the CoreFoundation reference constant kICANotificationImageDataSizeKey as an objc.ID.
 func KICANotificationImageDataSizeKey() objc.ID { return purego.CFConstant(raw.KICANotificationImageDataSizeKey()) }
 
-// KICANotificationDataIsBigEndianKey returns the CoreFoundation constant kICANotificationDataIsBigEndianKey as a toll-free-bridged objc.ID.
+// KICANotificationDataIsBigEndianKey returns the value of the CoreFoundation reference constant kICANotificationDataIsBigEndianKey as an objc.ID.
 func KICANotificationDataIsBigEndianKey() objc.ID { return purego.CFConstant(raw.KICANotificationDataIsBigEndianKey()) }
 
-// KICANotificationScannerDocumentNameKey returns the CoreFoundation constant kICANotificationScannerDocumentNameKey as a toll-free-bridged objc.ID.
+// KICANotificationScannerDocumentNameKey returns the value of the CoreFoundation reference constant kICANotificationScannerDocumentNameKey as an objc.ID.
 func KICANotificationScannerDocumentNameKey() objc.ID { return purego.CFConstant(raw.KICANotificationScannerDocumentNameKey()) }
 
-// KICANotificationScannerButtonTypeKey returns the CoreFoundation constant kICANotificationScannerButtonTypeKey as a toll-free-bridged objc.ID.
+// KICANotificationScannerButtonTypeKey returns the value of the CoreFoundation reference constant kICANotificationScannerButtonTypeKey as an objc.ID.
 func KICANotificationScannerButtonTypeKey() objc.ID { return purego.CFConstant(raw.KICANotificationScannerButtonTypeKey()) }
 
-// KICANotificationNumerOfImagesRemainingKey returns the CoreFoundation constant kICANotificationNumerOfImagesRemainingKey as a toll-free-bridged objc.ID.
+// KICANotificationNumerOfImagesRemainingKey returns the value of the CoreFoundation reference constant kICANotificationNumerOfImagesRemainingKey as an objc.ID.
 func KICANotificationNumerOfImagesRemainingKey() objc.ID { return purego.CFConstant(raw.KICANotificationNumerOfImagesRemainingKey()) }
 
-// KICANotificationPercentDownloadedKey returns the CoreFoundation constant kICANotificationPercentDownloadedKey as a toll-free-bridged objc.ID.
+// KICANotificationPercentDownloadedKey returns the value of the CoreFoundation reference constant kICANotificationPercentDownloadedKey as an objc.ID.
 func KICANotificationPercentDownloadedKey() objc.ID { return purego.CFConstant(raw.KICANotificationPercentDownloadedKey()) }
 
-// KICANotificationSubTypeKey returns the CoreFoundation constant kICANotificationSubTypeKey as a toll-free-bridged objc.ID.
+// KICANotificationSubTypeKey returns the value of the CoreFoundation reference constant kICANotificationSubTypeKey as an objc.ID.
 func KICANotificationSubTypeKey() objc.ID { return purego.CFConstant(raw.KICANotificationSubTypeKey()) }
 
-// KICANotificationSubTypeWarmUpStarted returns the CoreFoundation constant kICANotificationSubTypeWarmUpStarted as a toll-free-bridged objc.ID.
+// KICANotificationSubTypeWarmUpStarted returns the value of the CoreFoundation reference constant kICANotificationSubTypeWarmUpStarted as an objc.ID.
 func KICANotificationSubTypeWarmUpStarted() objc.ID { return purego.CFConstant(raw.KICANotificationSubTypeWarmUpStarted()) }
 
-// KICANotificationSubTypeWarmUpDone returns the CoreFoundation constant kICANotificationSubTypeWarmUpDone as a toll-free-bridged objc.ID.
+// KICANotificationSubTypeWarmUpDone returns the value of the CoreFoundation reference constant kICANotificationSubTypeWarmUpDone as an objc.ID.
 func KICANotificationSubTypeWarmUpDone() objc.ID { return purego.CFConstant(raw.KICANotificationSubTypeWarmUpDone()) }
 
-// KICANotificationVendorErrorCodeKey returns the CoreFoundation constant kICANotificationVendorErrorCodeKey as a toll-free-bridged objc.ID.
+// KICANotificationVendorErrorCodeKey returns the value of the CoreFoundation reference constant kICANotificationVendorErrorCodeKey as an objc.ID.
 func KICANotificationVendorErrorCodeKey() objc.ID { return purego.CFConstant(raw.KICANotificationVendorErrorCodeKey()) }
 
-// KICANotificationSubTypePerformOverviewScan returns the CoreFoundation constant kICANotificationSubTypePerformOverviewScan as a toll-free-bridged objc.ID.
+// KICANotificationSubTypePerformOverviewScan returns the value of the CoreFoundation reference constant kICANotificationSubTypePerformOverviewScan as an objc.ID.
 func KICANotificationSubTypePerformOverviewScan() objc.ID { return purego.CFConstant(raw.KICANotificationSubTypePerformOverviewScan()) }
 
-// KICANotificationSubTypeDocumentLoaded returns the CoreFoundation constant kICANotificationSubTypeDocumentLoaded as a toll-free-bridged objc.ID.
+// KICANotificationSubTypeDocumentLoaded returns the value of the CoreFoundation reference constant kICANotificationSubTypeDocumentLoaded as an objc.ID.
 func KICANotificationSubTypeDocumentLoaded() objc.ID { return purego.CFConstant(raw.KICANotificationSubTypeDocumentLoaded()) }
 
-// KICANotificationSubTypeDocumentNotLoaded returns the CoreFoundation constant kICANotificationSubTypeDocumentNotLoaded as a toll-free-bridged objc.ID.
+// KICANotificationSubTypeDocumentNotLoaded returns the value of the CoreFoundation reference constant kICANotificationSubTypeDocumentNotLoaded as an objc.ID.
 func KICANotificationSubTypeDocumentNotLoaded() objc.ID { return purego.CFConstant(raw.KICANotificationSubTypeDocumentNotLoaded()) }
 
-// KICANotificationClassPTPStandard returns the CoreFoundation constant kICANotificationClassPTPStandard as a toll-free-bridged objc.ID.
+// KICANotificationClassPTPStandard returns the value of the CoreFoundation reference constant kICANotificationClassPTPStandard as an objc.ID.
 func KICANotificationClassPTPStandard() objc.ID { return purego.CFConstant(raw.KICANotificationClassPTPStandard()) }
 
-// KICANotificationClassPTPVendor returns the CoreFoundation constant kICANotificationClassPTPVendor as a toll-free-bridged objc.ID.
+// KICANotificationClassPTPVendor returns the value of the CoreFoundation reference constant kICANotificationClassPTPVendor as an objc.ID.
 func KICANotificationClassPTPVendor() objc.ID { return purego.CFConstant(raw.KICANotificationClassPTPVendor()) }
 
-// KICANotificationClassProprietary returns the CoreFoundation constant kICANotificationClassProprietary as a toll-free-bridged objc.ID.
+// KICANotificationClassProprietary returns the value of the CoreFoundation reference constant kICANotificationClassProprietary as an objc.ID.
 func KICANotificationClassProprietary() objc.ID { return purego.CFConstant(raw.KICANotificationClassProprietary()) }
 
-// KICADevicePropUndefined returns the CoreFoundation constant kICADevicePropUndefined as a toll-free-bridged objc.ID.
+// KICADevicePropUndefined returns the value of the CoreFoundation reference constant kICADevicePropUndefined as an objc.ID.
 func KICADevicePropUndefined() objc.ID { return purego.CFConstant(raw.KICADevicePropUndefined()) }
 
-// KICADevicePropBatteryLevel returns the CoreFoundation constant kICADevicePropBatteryLevel as a toll-free-bridged objc.ID.
+// KICADevicePropBatteryLevel returns the value of the CoreFoundation reference constant kICADevicePropBatteryLevel as an objc.ID.
 func KICADevicePropBatteryLevel() objc.ID { return purego.CFConstant(raw.KICADevicePropBatteryLevel()) }
 
-// KICADevicePropFunctionalMode returns the CoreFoundation constant kICADevicePropFunctionalMode as a toll-free-bridged objc.ID.
+// KICADevicePropFunctionalMode returns the value of the CoreFoundation reference constant kICADevicePropFunctionalMode as an objc.ID.
 func KICADevicePropFunctionalMode() objc.ID { return purego.CFConstant(raw.KICADevicePropFunctionalMode()) }
 
-// KICADevicePropImageSize returns the CoreFoundation constant kICADevicePropImageSize as a toll-free-bridged objc.ID.
+// KICADevicePropImageSize returns the value of the CoreFoundation reference constant kICADevicePropImageSize as an objc.ID.
 func KICADevicePropImageSize() objc.ID { return purego.CFConstant(raw.KICADevicePropImageSize()) }
 
-// KICADevicePropCompressionSetting returns the CoreFoundation constant kICADevicePropCompressionSetting as a toll-free-bridged objc.ID.
+// KICADevicePropCompressionSetting returns the value of the CoreFoundation reference constant kICADevicePropCompressionSetting as an objc.ID.
 func KICADevicePropCompressionSetting() objc.ID { return purego.CFConstant(raw.KICADevicePropCompressionSetting()) }
 
-// KICADevicePropWhiteBalance returns the CoreFoundation constant kICADevicePropWhiteBalance as a toll-free-bridged objc.ID.
+// KICADevicePropWhiteBalance returns the value of the CoreFoundation reference constant kICADevicePropWhiteBalance as an objc.ID.
 func KICADevicePropWhiteBalance() objc.ID { return purego.CFConstant(raw.KICADevicePropWhiteBalance()) }
 
-// KICADevicePropRGBGain returns the CoreFoundation constant kICADevicePropRGBGain as a toll-free-bridged objc.ID.
+// KICADevicePropRGBGain returns the value of the CoreFoundation reference constant kICADevicePropRGBGain as an objc.ID.
 func KICADevicePropRGBGain() objc.ID { return purego.CFConstant(raw.KICADevicePropRGBGain()) }
 
-// KICADevicePropFNumber returns the CoreFoundation constant kICADevicePropFNumber as a toll-free-bridged objc.ID.
+// KICADevicePropFNumber returns the value of the CoreFoundation reference constant kICADevicePropFNumber as an objc.ID.
 func KICADevicePropFNumber() objc.ID { return purego.CFConstant(raw.KICADevicePropFNumber()) }
 
-// KICADevicePropFocalLength returns the CoreFoundation constant kICADevicePropFocalLength as a toll-free-bridged objc.ID.
+// KICADevicePropFocalLength returns the value of the CoreFoundation reference constant kICADevicePropFocalLength as an objc.ID.
 func KICADevicePropFocalLength() objc.ID { return purego.CFConstant(raw.KICADevicePropFocalLength()) }
 
-// KICADevicePropFocusDistance returns the CoreFoundation constant kICADevicePropFocusDistance as a toll-free-bridged objc.ID.
+// KICADevicePropFocusDistance returns the value of the CoreFoundation reference constant kICADevicePropFocusDistance as an objc.ID.
 func KICADevicePropFocusDistance() objc.ID { return purego.CFConstant(raw.KICADevicePropFocusDistance()) }
 
-// KICADevicePropFocusMode returns the CoreFoundation constant kICADevicePropFocusMode as a toll-free-bridged objc.ID.
+// KICADevicePropFocusMode returns the value of the CoreFoundation reference constant kICADevicePropFocusMode as an objc.ID.
 func KICADevicePropFocusMode() objc.ID { return purego.CFConstant(raw.KICADevicePropFocusMode()) }
 
-// KICADevicePropExposureMeteringMode returns the CoreFoundation constant kICADevicePropExposureMeteringMode as a toll-free-bridged objc.ID.
+// KICADevicePropExposureMeteringMode returns the value of the CoreFoundation reference constant kICADevicePropExposureMeteringMode as an objc.ID.
 func KICADevicePropExposureMeteringMode() objc.ID { return purego.CFConstant(raw.KICADevicePropExposureMeteringMode()) }
 
-// KICADevicePropFlashMode returns the CoreFoundation constant kICADevicePropFlashMode as a toll-free-bridged objc.ID.
+// KICADevicePropFlashMode returns the value of the CoreFoundation reference constant kICADevicePropFlashMode as an objc.ID.
 func KICADevicePropFlashMode() objc.ID { return purego.CFConstant(raw.KICADevicePropFlashMode()) }
 
-// KICADevicePropExposureTime returns the CoreFoundation constant kICADevicePropExposureTime as a toll-free-bridged objc.ID.
+// KICADevicePropExposureTime returns the value of the CoreFoundation reference constant kICADevicePropExposureTime as an objc.ID.
 func KICADevicePropExposureTime() objc.ID { return purego.CFConstant(raw.KICADevicePropExposureTime()) }
 
-// KICADevicePropExposureProgramMode returns the CoreFoundation constant kICADevicePropExposureProgramMode as a toll-free-bridged objc.ID.
+// KICADevicePropExposureProgramMode returns the value of the CoreFoundation reference constant kICADevicePropExposureProgramMode as an objc.ID.
 func KICADevicePropExposureProgramMode() objc.ID { return purego.CFConstant(raw.KICADevicePropExposureProgramMode()) }
 
-// KICADevicePropExposureIndex returns the CoreFoundation constant kICADevicePropExposureIndex as a toll-free-bridged objc.ID.
+// KICADevicePropExposureIndex returns the value of the CoreFoundation reference constant kICADevicePropExposureIndex as an objc.ID.
 func KICADevicePropExposureIndex() objc.ID { return purego.CFConstant(raw.KICADevicePropExposureIndex()) }
 
-// KICADevicePropExposureBiasCompensation returns the CoreFoundation constant kICADevicePropExposureBiasCompensation as a toll-free-bridged objc.ID.
+// KICADevicePropExposureBiasCompensation returns the value of the CoreFoundation reference constant kICADevicePropExposureBiasCompensation as an objc.ID.
 func KICADevicePropExposureBiasCompensation() objc.ID { return purego.CFConstant(raw.KICADevicePropExposureBiasCompensation()) }
 
-// KICADevicePropDateTime returns the CoreFoundation constant kICADevicePropDateTime as a toll-free-bridged objc.ID.
+// KICADevicePropDateTime returns the value of the CoreFoundation reference constant kICADevicePropDateTime as an objc.ID.
 func KICADevicePropDateTime() objc.ID { return purego.CFConstant(raw.KICADevicePropDateTime()) }
 
-// KICADevicePropCaptureDelay returns the CoreFoundation constant kICADevicePropCaptureDelay as a toll-free-bridged objc.ID.
+// KICADevicePropCaptureDelay returns the value of the CoreFoundation reference constant kICADevicePropCaptureDelay as an objc.ID.
 func KICADevicePropCaptureDelay() objc.ID { return purego.CFConstant(raw.KICADevicePropCaptureDelay()) }
 
-// KICADevicePropStillCaptureMode returns the CoreFoundation constant kICADevicePropStillCaptureMode as a toll-free-bridged objc.ID.
+// KICADevicePropStillCaptureMode returns the value of the CoreFoundation reference constant kICADevicePropStillCaptureMode as an objc.ID.
 func KICADevicePropStillCaptureMode() objc.ID { return purego.CFConstant(raw.KICADevicePropStillCaptureMode()) }
 
-// KICADevicePropContrast returns the CoreFoundation constant kICADevicePropContrast as a toll-free-bridged objc.ID.
+// KICADevicePropContrast returns the value of the CoreFoundation reference constant kICADevicePropContrast as an objc.ID.
 func KICADevicePropContrast() objc.ID { return purego.CFConstant(raw.KICADevicePropContrast()) }
 
-// KICADevicePropSharpness returns the CoreFoundation constant kICADevicePropSharpness as a toll-free-bridged objc.ID.
+// KICADevicePropSharpness returns the value of the CoreFoundation reference constant kICADevicePropSharpness as an objc.ID.
 func KICADevicePropSharpness() objc.ID { return purego.CFConstant(raw.KICADevicePropSharpness()) }
 
-// KICADevicePropDigitalZoom returns the CoreFoundation constant kICADevicePropDigitalZoom as a toll-free-bridged objc.ID.
+// KICADevicePropDigitalZoom returns the value of the CoreFoundation reference constant kICADevicePropDigitalZoom as an objc.ID.
 func KICADevicePropDigitalZoom() objc.ID { return purego.CFConstant(raw.KICADevicePropDigitalZoom()) }
 
-// KICADevicePropEffectMode returns the CoreFoundation constant kICADevicePropEffectMode as a toll-free-bridged objc.ID.
+// KICADevicePropEffectMode returns the value of the CoreFoundation reference constant kICADevicePropEffectMode as an objc.ID.
 func KICADevicePropEffectMode() objc.ID { return purego.CFConstant(raw.KICADevicePropEffectMode()) }
 
-// KICADevicePropBurstNumber returns the CoreFoundation constant kICADevicePropBurstNumber as a toll-free-bridged objc.ID.
+// KICADevicePropBurstNumber returns the value of the CoreFoundation reference constant kICADevicePropBurstNumber as an objc.ID.
 func KICADevicePropBurstNumber() objc.ID { return purego.CFConstant(raw.KICADevicePropBurstNumber()) }
 
-// KICADevicePropBurstInterval returns the CoreFoundation constant kICADevicePropBurstInterval as a toll-free-bridged objc.ID.
+// KICADevicePropBurstInterval returns the value of the CoreFoundation reference constant kICADevicePropBurstInterval as an objc.ID.
 func KICADevicePropBurstInterval() objc.ID { return purego.CFConstant(raw.KICADevicePropBurstInterval()) }
 
-// KICADevicePropTimelapseNumber returns the CoreFoundation constant kICADevicePropTimelapseNumber as a toll-free-bridged objc.ID.
+// KICADevicePropTimelapseNumber returns the value of the CoreFoundation reference constant kICADevicePropTimelapseNumber as an objc.ID.
 func KICADevicePropTimelapseNumber() objc.ID { return purego.CFConstant(raw.KICADevicePropTimelapseNumber()) }
 
-// KICADevicePropTimelapseInterval returns the CoreFoundation constant kICADevicePropTimelapseInterval as a toll-free-bridged objc.ID.
+// KICADevicePropTimelapseInterval returns the value of the CoreFoundation reference constant kICADevicePropTimelapseInterval as an objc.ID.
 func KICADevicePropTimelapseInterval() objc.ID { return purego.CFConstant(raw.KICADevicePropTimelapseInterval()) }
 
-// KICADevicePropFocusMeteringMode returns the CoreFoundation constant kICADevicePropFocusMeteringMode as a toll-free-bridged objc.ID.
+// KICADevicePropFocusMeteringMode returns the value of the CoreFoundation reference constant kICADevicePropFocusMeteringMode as an objc.ID.
 func KICADevicePropFocusMeteringMode() objc.ID { return purego.CFConstant(raw.KICADevicePropFocusMeteringMode()) }
 
-// KICADevicePropUploadURL returns the CoreFoundation constant kICADevicePropUploadURL as a toll-free-bridged objc.ID.
+// KICADevicePropUploadURL returns the value of the CoreFoundation reference constant kICADevicePropUploadURL as an objc.ID.
 func KICADevicePropUploadURL() objc.ID { return purego.CFConstant(raw.KICADevicePropUploadURL()) }
 
-// KICADevicePropArtist returns the CoreFoundation constant kICADevicePropArtist as a toll-free-bridged objc.ID.
+// KICADevicePropArtist returns the value of the CoreFoundation reference constant kICADevicePropArtist as an objc.ID.
 func KICADevicePropArtist() objc.ID { return purego.CFConstant(raw.KICADevicePropArtist()) }
 
-// KICADevicePropCopyrightInfo returns the CoreFoundation constant kICADevicePropCopyrightInfo as a toll-free-bridged objc.ID.
+// KICADevicePropCopyrightInfo returns the value of the CoreFoundation reference constant kICADevicePropCopyrightInfo as an objc.ID.
 func KICADevicePropCopyrightInfo() objc.ID { return purego.CFConstant(raw.KICADevicePropCopyrightInfo()) }
 
-// KICUTTypeRaw returns the CoreFoundation constant kICUTTypeRaw as a toll-free-bridged objc.ID.
+// KICUTTypeRaw returns the value of the CoreFoundation reference constant kICUTTypeRaw as an objc.ID.
 func KICUTTypeRaw() objc.ID { return purego.CFConstant(raw.KICUTTypeRaw()) }
 

@@ -18,11 +18,11 @@ type ScrubberProportionalLayout struct {
 // Unwrap returns the underlying [raw.NSScrubberProportionalLayout].
 func (x *ScrubberProportionalLayout) Unwrap() *raw.NSScrubberProportionalLayout { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ScrubberProportionalLayout) ID() objc.ID { return x.inner.Ptr() }
 
-// ScrubberProportionalLayoutFromID adopts an existing toll-free-bridged object id as a ScrubberProportionalLayout (nil for 0).
+// ScrubberProportionalLayoutFromID adopts an existing object pointer as a ScrubberProportionalLayout (nil for 0).
 func ScrubberProportionalLayoutFromID(id objc.ID) *ScrubberProportionalLayout {
 	if id == 0 {
 		return nil

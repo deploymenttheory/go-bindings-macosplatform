@@ -17,11 +17,11 @@ type AnnotationLink struct {
 // Unwrap returns the underlying [raw.PDFAnnotationLink].
 func (x *AnnotationLink) Unwrap() *raw.PDFAnnotationLink { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AnnotationLink) ID() objc.ID { return x.inner.Ptr() }
 
-// AnnotationLinkFromID adopts an existing toll-free-bridged object id as a AnnotationLink (nil for 0).
+// AnnotationLinkFromID adopts an existing object pointer as a AnnotationLink (nil for 0).
 func AnnotationLinkFromID(id objc.ID) *AnnotationLink {
 	if id == 0 {
 		return nil

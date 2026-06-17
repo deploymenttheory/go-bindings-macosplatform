@@ -17,11 +17,11 @@ type AssetResourceRenewalRequest struct {
 // Unwrap returns the underlying [raw.AVAssetResourceRenewalRequest].
 func (x *AssetResourceRenewalRequest) Unwrap() *raw.AVAssetResourceRenewalRequest { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AssetResourceRenewalRequest) ID() objc.ID { return x.inner.Ptr() }
 
-// AssetResourceRenewalRequestFromID adopts an existing toll-free-bridged object id as a AssetResourceRenewalRequest (nil for 0).
+// AssetResourceRenewalRequestFromID adopts an existing object pointer as a AssetResourceRenewalRequest (nil for 0).
 func AssetResourceRenewalRequestFromID(id objc.ID) *AssetResourceRenewalRequest {
 	if id == 0 {
 		return nil

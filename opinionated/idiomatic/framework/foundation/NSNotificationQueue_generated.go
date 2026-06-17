@@ -17,11 +17,11 @@ type NotificationQueue struct {
 // Unwrap returns the underlying [raw.NSNotificationQueue].
 func (x *NotificationQueue) Unwrap() *raw.NSNotificationQueue { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NotificationQueue) ID() objc.ID { return x.inner.Ptr() }
 
-// NotificationQueueFromID adopts an existing toll-free-bridged object id as a NotificationQueue (nil for 0).
+// NotificationQueueFromID adopts an existing object pointer as a NotificationQueue (nil for 0).
 func NotificationQueueFromID(id objc.ID) *NotificationQueue {
 	if id == 0 {
 		return nil

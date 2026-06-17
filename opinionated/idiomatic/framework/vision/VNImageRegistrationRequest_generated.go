@@ -17,11 +17,11 @@ type ImageRegistrationRequest struct {
 // Unwrap returns the underlying [raw.VNImageRegistrationRequest].
 func (x *ImageRegistrationRequest) Unwrap() *raw.VNImageRegistrationRequest { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ImageRegistrationRequest) ID() objc.ID { return x.inner.Ptr() }
 
-// ImageRegistrationRequestFromID adopts an existing toll-free-bridged object id as a ImageRegistrationRequest (nil for 0).
+// ImageRegistrationRequestFromID adopts an existing object pointer as a ImageRegistrationRequest (nil for 0).
 func ImageRegistrationRequestFromID(id objc.ID) *ImageRegistrationRequest {
 	if id == 0 {
 		return nil

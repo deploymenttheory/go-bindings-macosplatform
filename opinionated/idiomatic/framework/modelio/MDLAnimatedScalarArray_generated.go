@@ -17,11 +17,11 @@ type AnimatedScalarArray struct {
 // Unwrap returns the underlying [raw.MDLAnimatedScalarArray].
 func (x *AnimatedScalarArray) Unwrap() *raw.MDLAnimatedScalarArray { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AnimatedScalarArray) ID() objc.ID { return x.inner.Ptr() }
 
-// AnimatedScalarArrayFromID adopts an existing toll-free-bridged object id as a AnimatedScalarArray (nil for 0).
+// AnimatedScalarArrayFromID adopts an existing object pointer as a AnimatedScalarArray (nil for 0).
 func AnimatedScalarArrayFromID(id objc.ID) *AnimatedScalarArray {
 	if id == 0 {
 		return nil

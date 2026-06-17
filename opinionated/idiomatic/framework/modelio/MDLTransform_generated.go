@@ -18,11 +18,11 @@ type Transform struct {
 // Unwrap returns the underlying [raw.MDLTransform].
 func (x *Transform) Unwrap() *raw.MDLTransform { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Transform) ID() objc.ID { return x.inner.Ptr() }
 
-// TransformFromID adopts an existing toll-free-bridged object id as a Transform (nil for 0).
+// TransformFromID adopts an existing object pointer as a Transform (nil for 0).
 func TransformFromID(id objc.ID) *Transform {
 	if id == 0 {
 		return nil

@@ -19,11 +19,11 @@ type DeferredPaymentRequest struct {
 // Unwrap returns the underlying [raw.PKDeferredPaymentRequest].
 func (x *DeferredPaymentRequest) Unwrap() *raw.PKDeferredPaymentRequest { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DeferredPaymentRequest) ID() objc.ID { return x.inner.Ptr() }
 
-// DeferredPaymentRequestFromID adopts an existing toll-free-bridged object id as a DeferredPaymentRequest (nil for 0).
+// DeferredPaymentRequestFromID adopts an existing object pointer as a DeferredPaymentRequest (nil for 0).
 func DeferredPaymentRequestFromID(id objc.ID) *DeferredPaymentRequest {
 	if id == 0 {
 		return nil

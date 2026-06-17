@@ -18,11 +18,11 @@ type SignpostIntervalData struct {
 // Unwrap returns the underlying [raw.MXSignpostIntervalData].
 func (x *SignpostIntervalData) Unwrap() *raw.MXSignpostIntervalData { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SignpostIntervalData) ID() objc.ID { return x.inner.Ptr() }
 
-// SignpostIntervalDataFromID adopts an existing toll-free-bridged object id as a SignpostIntervalData (nil for 0).
+// SignpostIntervalDataFromID adopts an existing object pointer as a SignpostIntervalData (nil for 0).
 func SignpostIntervalDataFromID(id objc.ID) *SignpostIntervalData {
 	if id == 0 {
 		return nil

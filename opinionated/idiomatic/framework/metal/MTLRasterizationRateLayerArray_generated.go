@@ -17,11 +17,11 @@ type RasterizationRateLayerArray struct {
 // Unwrap returns the underlying [raw.MTLRasterizationRateLayerArray].
 func (x *RasterizationRateLayerArray) Unwrap() *raw.MTLRasterizationRateLayerArray { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *RasterizationRateLayerArray) ID() objc.ID { return x.inner.Ptr() }
 
-// RasterizationRateLayerArrayFromID adopts an existing toll-free-bridged object id as a RasterizationRateLayerArray (nil for 0).
+// RasterizationRateLayerArrayFromID adopts an existing object pointer as a RasterizationRateLayerArray (nil for 0).
 func RasterizationRateLayerArrayFromID(id objc.ID) *RasterizationRateLayerArray {
 	if id == 0 {
 		return nil

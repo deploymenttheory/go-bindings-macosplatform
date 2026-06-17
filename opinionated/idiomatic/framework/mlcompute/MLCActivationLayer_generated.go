@@ -17,11 +17,11 @@ type ActivationLayer struct {
 // Unwrap returns the underlying [raw.MLCActivationLayer].
 func (x *ActivationLayer) Unwrap() *raw.MLCActivationLayer { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ActivationLayer) ID() objc.ID { return x.inner.Ptr() }
 
-// ActivationLayerFromID adopts an existing toll-free-bridged object id as a ActivationLayer (nil for 0).
+// ActivationLayerFromID adopts an existing object pointer as a ActivationLayer (nil for 0).
 func ActivationLayerFromID(id objc.ID) *ActivationLayer {
 	if id == 0 {
 		return nil

@@ -17,11 +17,11 @@ type MTRPumpConfigurationAndControlClusterSensorFailureEvent struct {
 // Unwrap returns the underlying [raw.MTRPumpConfigurationAndControlClusterSensorFailureEvent].
 func (x *MTRPumpConfigurationAndControlClusterSensorFailureEvent) Unwrap() *raw.MTRPumpConfigurationAndControlClusterSensorFailureEvent { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRPumpConfigurationAndControlClusterSensorFailureEvent) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRPumpConfigurationAndControlClusterSensorFailureEventFromID adopts an existing toll-free-bridged object id as a MTRPumpConfigurationAndControlClusterSensorFailureEvent (nil for 0).
+// MTRPumpConfigurationAndControlClusterSensorFailureEventFromID adopts an existing object pointer as a MTRPumpConfigurationAndControlClusterSensorFailureEvent (nil for 0).
 func MTRPumpConfigurationAndControlClusterSensorFailureEventFromID(id objc.ID) *MTRPumpConfigurationAndControlClusterSensorFailureEvent {
 	if id == 0 {
 		return nil

@@ -19,11 +19,11 @@ type ExtensionItem struct {
 // Unwrap returns the underlying [raw.NSExtensionItem].
 func (x *ExtensionItem) Unwrap() *raw.NSExtensionItem { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ExtensionItem) ID() objc.ID { return x.inner.Ptr() }
 
-// ExtensionItemFromID adopts an existing toll-free-bridged object id as a ExtensionItem (nil for 0).
+// ExtensionItemFromID adopts an existing object pointer as a ExtensionItem (nil for 0).
 func ExtensionItemFromID(id objc.ID) *ExtensionItem {
 	if id == 0 {
 		return nil

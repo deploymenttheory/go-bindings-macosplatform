@@ -22,11 +22,11 @@ type Leaderboard struct {
 // Unwrap returns the underlying [raw.GKLeaderboard].
 func (x *Leaderboard) Unwrap() *raw.GKLeaderboard { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Leaderboard) ID() objc.ID { return x.inner.Ptr() }
 
-// LeaderboardFromID adopts an existing toll-free-bridged object id as a Leaderboard (nil for 0).
+// LeaderboardFromID adopts an existing object pointer as a Leaderboard (nil for 0).
 func LeaderboardFromID(id objc.ID) *Leaderboard {
 	if id == 0 {
 		return nil

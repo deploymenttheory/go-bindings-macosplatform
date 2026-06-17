@@ -17,11 +17,11 @@ type MTRSmokeCOAlarmClusterSelfTestCompleteEvent struct {
 // Unwrap returns the underlying [raw.MTRSmokeCOAlarmClusterSelfTestCompleteEvent].
 func (x *MTRSmokeCOAlarmClusterSelfTestCompleteEvent) Unwrap() *raw.MTRSmokeCOAlarmClusterSelfTestCompleteEvent { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRSmokeCOAlarmClusterSelfTestCompleteEvent) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRSmokeCOAlarmClusterSelfTestCompleteEventFromID adopts an existing toll-free-bridged object id as a MTRSmokeCOAlarmClusterSelfTestCompleteEvent (nil for 0).
+// MTRSmokeCOAlarmClusterSelfTestCompleteEventFromID adopts an existing object pointer as a MTRSmokeCOAlarmClusterSelfTestCompleteEvent (nil for 0).
 func MTRSmokeCOAlarmClusterSelfTestCompleteEventFromID(id objc.ID) *MTRSmokeCOAlarmClusterSelfTestCompleteEvent {
 	if id == 0 {
 		return nil

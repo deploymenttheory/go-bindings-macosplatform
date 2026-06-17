@@ -20,11 +20,11 @@ type MTRDeviceController struct {
 // Unwrap returns the underlying [raw.MTRDeviceController].
 func (x *MTRDeviceController) Unwrap() *raw.MTRDeviceController { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRDeviceController) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRDeviceControllerFromID adopts an existing toll-free-bridged object id as a MTRDeviceController (nil for 0).
+// MTRDeviceControllerFromID adopts an existing object pointer as a MTRDeviceController (nil for 0).
 func MTRDeviceControllerFromID(id objc.ID) *MTRDeviceController {
 	if id == 0 {
 		return nil

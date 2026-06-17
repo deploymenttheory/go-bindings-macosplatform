@@ -17,11 +17,11 @@ type BloodTypeObject struct {
 // Unwrap returns the underlying [raw.HKBloodTypeObject].
 func (x *BloodTypeObject) Unwrap() *raw.HKBloodTypeObject { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *BloodTypeObject) ID() objc.ID { return x.inner.Ptr() }
 
-// BloodTypeObjectFromID adopts an existing toll-free-bridged object id as a BloodTypeObject (nil for 0).
+// BloodTypeObjectFromID adopts an existing object pointer as a BloodTypeObject (nil for 0).
 func BloodTypeObjectFromID(id objc.ID) *BloodTypeObject {
 	if id == 0 {
 		return nil

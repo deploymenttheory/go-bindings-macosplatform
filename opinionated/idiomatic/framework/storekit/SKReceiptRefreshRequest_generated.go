@@ -18,11 +18,11 @@ type ReceiptRefreshRequest struct {
 // Unwrap returns the underlying [raw.SKReceiptRefreshRequest].
 func (x *ReceiptRefreshRequest) Unwrap() *raw.SKReceiptRefreshRequest { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ReceiptRefreshRequest) ID() objc.ID { return x.inner.Ptr() }
 
-// ReceiptRefreshRequestFromID adopts an existing toll-free-bridged object id as a ReceiptRefreshRequest (nil for 0).
+// ReceiptRefreshRequestFromID adopts an existing object pointer as a ReceiptRefreshRequest (nil for 0).
 func ReceiptRefreshRequestFromID(id objc.ID) *ReceiptRefreshRequest {
 	if id == 0 {
 		return nil

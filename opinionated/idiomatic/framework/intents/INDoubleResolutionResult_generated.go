@@ -17,11 +17,11 @@ type DoubleResolutionResult struct {
 // Unwrap returns the underlying [raw.INDoubleResolutionResult].
 func (x *DoubleResolutionResult) Unwrap() *raw.INDoubleResolutionResult { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DoubleResolutionResult) ID() objc.ID { return x.inner.Ptr() }
 
-// DoubleResolutionResultFromID adopts an existing toll-free-bridged object id as a DoubleResolutionResult (nil for 0).
+// DoubleResolutionResultFromID adopts an existing object pointer as a DoubleResolutionResult (nil for 0).
 func DoubleResolutionResultFromID(id objc.ID) *DoubleResolutionResult {
 	if id == 0 {
 		return nil

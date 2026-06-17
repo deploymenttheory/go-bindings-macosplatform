@@ -18,11 +18,11 @@ type MethodSignature struct {
 // Unwrap returns the underlying [raw.NSMethodSignature].
 func (x *MethodSignature) Unwrap() *raw.NSMethodSignature { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MethodSignature) ID() objc.ID { return x.inner.Ptr() }
 
-// MethodSignatureFromID adopts an existing toll-free-bridged object id as a MethodSignature (nil for 0).
+// MethodSignatureFromID adopts an existing object pointer as a MethodSignature (nil for 0).
 func MethodSignatureFromID(id objc.ID) *MethodSignature {
 	if id == 0 {
 		return nil

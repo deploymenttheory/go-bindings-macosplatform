@@ -19,11 +19,11 @@ type SpeechUtterance struct {
 // Unwrap returns the underlying [raw.AVSpeechUtterance].
 func (x *SpeechUtterance) Unwrap() *raw.AVSpeechUtterance { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SpeechUtterance) ID() objc.ID { return x.inner.Ptr() }
 
-// SpeechUtteranceFromID adopts an existing toll-free-bridged object id as a SpeechUtterance (nil for 0).
+// SpeechUtteranceFromID adopts an existing object pointer as a SpeechUtterance (nil for 0).
 func SpeechUtteranceFromID(id objc.ID) *SpeechUtterance {
 	if id == 0 {
 		return nil

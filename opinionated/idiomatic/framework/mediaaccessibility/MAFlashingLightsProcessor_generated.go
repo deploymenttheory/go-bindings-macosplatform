@@ -19,11 +19,11 @@ type FlashingLightsProcessor struct {
 // Unwrap returns the underlying [raw.MAFlashingLightsProcessor].
 func (x *FlashingLightsProcessor) Unwrap() *raw.MAFlashingLightsProcessor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *FlashingLightsProcessor) ID() objc.ID { return x.inner.Ptr() }
 
-// FlashingLightsProcessorFromID adopts an existing toll-free-bridged object id as a FlashingLightsProcessor (nil for 0).
+// FlashingLightsProcessorFromID adopts an existing object pointer as a FlashingLightsProcessor (nil for 0).
 func FlashingLightsProcessorFromID(id objc.ID) *FlashingLightsProcessor {
 	if id == 0 {
 		return nil

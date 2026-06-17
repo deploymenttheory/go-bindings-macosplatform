@@ -19,11 +19,11 @@ type CaptureIndexPicker struct {
 // Unwrap returns the underlying [raw.AVCaptureIndexPicker].
 func (x *CaptureIndexPicker) Unwrap() *raw.AVCaptureIndexPicker { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CaptureIndexPicker) ID() objc.ID { return x.inner.Ptr() }
 
-// CaptureIndexPickerFromID adopts an existing toll-free-bridged object id as a CaptureIndexPicker (nil for 0).
+// CaptureIndexPickerFromID adopts an existing object pointer as a CaptureIndexPicker (nil for 0).
 func CaptureIndexPickerFromID(id objc.ID) *CaptureIndexPicker {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type WebAuthenticationSessionCallback struct {
 // Unwrap returns the underlying [raw.ASWebAuthenticationSessionCallback].
 func (x *WebAuthenticationSessionCallback) Unwrap() *raw.ASWebAuthenticationSessionCallback { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *WebAuthenticationSessionCallback) ID() objc.ID { return x.inner.Ptr() }
 
-// WebAuthenticationSessionCallbackFromID adopts an existing toll-free-bridged object id as a WebAuthenticationSessionCallback (nil for 0).
+// WebAuthenticationSessionCallbackFromID adopts an existing object pointer as a WebAuthenticationSessionCallback (nil for 0).
 func WebAuthenticationSessionCallbackFromID(id objc.ID) *WebAuthenticationSessionCallback {
 	if id == 0 {
 		return nil

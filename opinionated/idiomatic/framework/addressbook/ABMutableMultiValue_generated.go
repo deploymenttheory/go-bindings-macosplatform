@@ -19,11 +19,11 @@ type MutableMultiValue struct {
 // Unwrap returns the underlying [raw.ABMutableMultiValue].
 func (x *MutableMultiValue) Unwrap() *raw.ABMutableMultiValue { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MutableMultiValue) ID() objc.ID { return x.inner.Ptr() }
 
-// MutableMultiValueFromID adopts an existing toll-free-bridged object id as a MutableMultiValue (nil for 0).
+// MutableMultiValueFromID adopts an existing object pointer as a MutableMultiValue (nil for 0).
 func MutableMultiValueFromID(id objc.ID) *MutableMultiValue {
 	if id == 0 {
 		return nil

@@ -19,11 +19,11 @@ type PasskeyCredentialRequest struct {
 // Unwrap returns the underlying [raw.ASPasskeyCredentialRequest].
 func (x *PasskeyCredentialRequest) Unwrap() *raw.ASPasskeyCredentialRequest { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PasskeyCredentialRequest) ID() objc.ID { return x.inner.Ptr() }
 
-// PasskeyCredentialRequestFromID adopts an existing toll-free-bridged object id as a PasskeyCredentialRequest (nil for 0).
+// PasskeyCredentialRequestFromID adopts an existing object pointer as a PasskeyCredentialRequest (nil for 0).
 func PasskeyCredentialRequestFromID(id objc.ID) *PasskeyCredentialRequest {
 	if id == 0 {
 		return nil

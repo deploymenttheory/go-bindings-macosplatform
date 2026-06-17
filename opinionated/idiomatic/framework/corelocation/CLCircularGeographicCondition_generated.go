@@ -18,11 +18,11 @@ type CircularGeographicCondition struct {
 // Unwrap returns the underlying [raw.CLCircularGeographicCondition].
 func (x *CircularGeographicCondition) Unwrap() *raw.CLCircularGeographicCondition { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CircularGeographicCondition) ID() objc.ID { return x.inner.Ptr() }
 
-// CircularGeographicConditionFromID adopts an existing toll-free-bridged object id as a CircularGeographicCondition (nil for 0).
+// CircularGeographicConditionFromID adopts an existing object pointer as a CircularGeographicCondition (nil for 0).
 func CircularGeographicConditionFromID(id objc.ID) *CircularGeographicCondition {
 	if id == 0 {
 		return nil

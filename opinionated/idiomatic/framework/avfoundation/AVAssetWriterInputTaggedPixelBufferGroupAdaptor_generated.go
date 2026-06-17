@@ -20,11 +20,11 @@ type AssetWriterInputTaggedPixelBufferGroupAdaptor struct {
 // Unwrap returns the underlying [raw.AVAssetWriterInputTaggedPixelBufferGroupAdaptor].
 func (x *AssetWriterInputTaggedPixelBufferGroupAdaptor) Unwrap() *raw.AVAssetWriterInputTaggedPixelBufferGroupAdaptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AssetWriterInputTaggedPixelBufferGroupAdaptor) ID() objc.ID { return x.inner.Ptr() }
 
-// AssetWriterInputTaggedPixelBufferGroupAdaptorFromID adopts an existing toll-free-bridged object id as a AssetWriterInputTaggedPixelBufferGroupAdaptor (nil for 0).
+// AssetWriterInputTaggedPixelBufferGroupAdaptorFromID adopts an existing object pointer as a AssetWriterInputTaggedPixelBufferGroupAdaptor (nil for 0).
 func AssetWriterInputTaggedPixelBufferGroupAdaptorFromID(id objc.ID) *AssetWriterInputTaggedPixelBufferGroupAdaptor {
 	if id == 0 {
 		return nil

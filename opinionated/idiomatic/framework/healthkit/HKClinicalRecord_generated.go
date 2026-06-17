@@ -18,11 +18,11 @@ type ClinicalRecord struct {
 // Unwrap returns the underlying [raw.HKClinicalRecord].
 func (x *ClinicalRecord) Unwrap() *raw.HKClinicalRecord { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ClinicalRecord) ID() objc.ID { return x.inner.Ptr() }
 
-// ClinicalRecordFromID adopts an existing toll-free-bridged object id as a ClinicalRecord (nil for 0).
+// ClinicalRecordFromID adopts an existing object pointer as a ClinicalRecord (nil for 0).
 func ClinicalRecordFromID(id objc.ID) *ClinicalRecord {
 	if id == 0 {
 		return nil

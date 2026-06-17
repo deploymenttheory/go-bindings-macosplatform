@@ -21,11 +21,11 @@ type ModelAsset struct {
 // Unwrap returns the underlying [raw.MLModelAsset].
 func (x *ModelAsset) Unwrap() *raw.MLModelAsset { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ModelAsset) ID() objc.ID { return x.inner.Ptr() }
 
-// ModelAssetFromID adopts an existing toll-free-bridged object id as a ModelAsset (nil for 0).
+// ModelAssetFromID adopts an existing object pointer as a ModelAsset (nil for 0).
 func ModelAssetFromID(id objc.ID) *ModelAsset {
 	if id == 0 {
 		return nil

@@ -19,11 +19,11 @@ type ColorKernel struct {
 // Unwrap returns the underlying [raw.CIColorKernel].
 func (x *ColorKernel) Unwrap() *raw.CIColorKernel { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ColorKernel) ID() objc.ID { return x.inner.Ptr() }
 
-// ColorKernelFromID adopts an existing toll-free-bridged object id as a ColorKernel (nil for 0).
+// ColorKernelFromID adopts an existing object pointer as a ColorKernel (nil for 0).
 func ColorKernelFromID(id objc.ID) *ColorKernel {
 	if id == 0 {
 		return nil

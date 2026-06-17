@@ -18,11 +18,11 @@ type PredictionOptions struct {
 // Unwrap returns the underlying [raw.MLPredictionOptions].
 func (x *PredictionOptions) Unwrap() *raw.MLPredictionOptions { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PredictionOptions) ID() objc.ID { return x.inner.Ptr() }
 
-// PredictionOptionsFromID adopts an existing toll-free-bridged object id as a PredictionOptions (nil for 0).
+// PredictionOptionsFromID adopts an existing object pointer as a PredictionOptions (nil for 0).
 func PredictionOptionsFromID(id objc.ID) *PredictionOptions {
 	if id == 0 {
 		return nil

@@ -20,11 +20,11 @@ type IPAddress struct {
 // Unwrap returns the underlying [raw.AVBIPAddress].
 func (x *IPAddress) Unwrap() *raw.AVBIPAddress { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *IPAddress) ID() objc.ID { return x.inner.Ptr() }
 
-// IPAddressFromID adopts an existing toll-free-bridged object id as a IPAddress (nil for 0).
+// IPAddressFromID adopts an existing object pointer as a IPAddress (nil for 0).
 func IPAddressFromID(id objc.ID) *IPAddress {
 	if id == 0 {
 		return nil

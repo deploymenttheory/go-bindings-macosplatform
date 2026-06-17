@@ -18,11 +18,11 @@ type MeshBufferAllocator struct {
 // Unwrap returns the underlying [raw.MTKMeshBufferAllocator].
 func (x *MeshBufferAllocator) Unwrap() *raw.MTKMeshBufferAllocator { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MeshBufferAllocator) ID() objc.ID { return x.inner.Ptr() }
 
-// MeshBufferAllocatorFromID adopts an existing toll-free-bridged object id as a MeshBufferAllocator (nil for 0).
+// MeshBufferAllocatorFromID adopts an existing object pointer as a MeshBufferAllocator (nil for 0).
 func MeshBufferAllocatorFromID(id objc.ID) *MeshBufferAllocator {
 	if id == 0 {
 		return nil

@@ -19,11 +19,11 @@ type ThumbnailReply struct {
 // Unwrap returns the underlying [raw.QLThumbnailReply].
 func (x *ThumbnailReply) Unwrap() *raw.QLThumbnailReply { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ThumbnailReply) ID() objc.ID { return x.inner.Ptr() }
 
-// ThumbnailReplyFromID adopts an existing toll-free-bridged object id as a ThumbnailReply (nil for 0).
+// ThumbnailReplyFromID adopts an existing object pointer as a ThumbnailReply (nil for 0).
 func ThumbnailReplyFromID(id objc.ID) *ThumbnailReply {
 	if id == 0 {
 		return nil

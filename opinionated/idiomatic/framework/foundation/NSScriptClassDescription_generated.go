@@ -18,11 +18,11 @@ type ScriptClassDescription struct {
 // Unwrap returns the underlying [raw.NSScriptClassDescription].
 func (x *ScriptClassDescription) Unwrap() *raw.NSScriptClassDescription { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ScriptClassDescription) ID() objc.ID { return x.inner.Ptr() }
 
-// ScriptClassDescriptionFromID adopts an existing toll-free-bridged object id as a ScriptClassDescription (nil for 0).
+// ScriptClassDescriptionFromID adopts an existing object pointer as a ScriptClassDescription (nil for 0).
 func ScriptClassDescriptionFromID(id objc.ID) *ScriptClassDescription {
 	if id == 0 {
 		return nil

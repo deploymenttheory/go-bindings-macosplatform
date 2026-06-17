@@ -18,11 +18,11 @@ type Highlight struct {
 // Unwrap returns the underlying [raw.SWHighlight].
 func (x *Highlight) Unwrap() *raw.SWHighlight { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Highlight) ID() objc.ID { return x.inner.Ptr() }
 
-// HighlightFromID adopts an existing toll-free-bridged object id as a Highlight (nil for 0).
+// HighlightFromID adopts an existing object pointer as a Highlight (nil for 0).
 func HighlightFromID(id objc.ID) *Highlight {
 	if id == 0 {
 		return nil

@@ -19,11 +19,11 @@ type LegibleMediaOptionsMenuController struct {
 // Unwrap returns the underlying [raw.AVLegibleMediaOptionsMenuController].
 func (x *LegibleMediaOptionsMenuController) Unwrap() *raw.AVLegibleMediaOptionsMenuController { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *LegibleMediaOptionsMenuController) ID() objc.ID { return x.inner.Ptr() }
 
-// LegibleMediaOptionsMenuControllerFromID adopts an existing toll-free-bridged object id as a LegibleMediaOptionsMenuController (nil for 0).
+// LegibleMediaOptionsMenuControllerFromID adopts an existing object pointer as a LegibleMediaOptionsMenuController (nil for 0).
 func LegibleMediaOptionsMenuControllerFromID(id objc.ID) *LegibleMediaOptionsMenuController {
 	if id == 0 {
 		return nil

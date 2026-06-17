@@ -17,11 +17,11 @@ type WebAuthenticationSessionWebBrowserSessionManager struct {
 // Unwrap returns the underlying [raw.ASWebAuthenticationSessionWebBrowserSessionManager].
 func (x *WebAuthenticationSessionWebBrowserSessionManager) Unwrap() *raw.ASWebAuthenticationSessionWebBrowserSessionManager { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *WebAuthenticationSessionWebBrowserSessionManager) ID() objc.ID { return x.inner.Ptr() }
 
-// WebAuthenticationSessionWebBrowserSessionManagerFromID adopts an existing toll-free-bridged object id as a WebAuthenticationSessionWebBrowserSessionManager (nil for 0).
+// WebAuthenticationSessionWebBrowserSessionManagerFromID adopts an existing object pointer as a WebAuthenticationSessionWebBrowserSessionManager (nil for 0).
 func WebAuthenticationSessionWebBrowserSessionManagerFromID(id objc.ID) *WebAuthenticationSessionWebBrowserSessionManager {
 	if id == 0 {
 		return nil

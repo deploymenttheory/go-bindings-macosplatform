@@ -17,11 +17,11 @@ type LayoutYAxisAnchor struct {
 // Unwrap returns the underlying [raw.NSLayoutYAxisAnchor].
 func (x *LayoutYAxisAnchor) Unwrap() *raw.NSLayoutYAxisAnchor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *LayoutYAxisAnchor) ID() objc.ID { return x.inner.Ptr() }
 
-// LayoutYAxisAnchorFromID adopts an existing toll-free-bridged object id as a LayoutYAxisAnchor (nil for 0).
+// LayoutYAxisAnchorFromID adopts an existing object pointer as a LayoutYAxisAnchor (nil for 0).
 func LayoutYAxisAnchorFromID(id objc.ID) *LayoutYAxisAnchor {
 	if id == 0 {
 		return nil

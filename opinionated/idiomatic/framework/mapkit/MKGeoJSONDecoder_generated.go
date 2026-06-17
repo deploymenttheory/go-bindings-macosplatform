@@ -18,11 +18,11 @@ type GeoJSONDecoder struct {
 // Unwrap returns the underlying [raw.MKGeoJSONDecoder].
 func (x *GeoJSONDecoder) Unwrap() *raw.MKGeoJSONDecoder { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *GeoJSONDecoder) ID() objc.ID { return x.inner.Ptr() }
 
-// GeoJSONDecoderFromID adopts an existing toll-free-bridged object id as a GeoJSONDecoder (nil for 0).
+// GeoJSONDecoderFromID adopts an existing object pointer as a GeoJSONDecoder (nil for 0).
 func GeoJSONDecoderFromID(id objc.ID) *GeoJSONDecoder {
 	if id == 0 {
 		return nil

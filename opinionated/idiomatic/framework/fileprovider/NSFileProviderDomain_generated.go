@@ -19,11 +19,11 @@ type FileProviderDomain struct {
 // Unwrap returns the underlying [raw.NSFileProviderDomain].
 func (x *FileProviderDomain) Unwrap() *raw.NSFileProviderDomain { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *FileProviderDomain) ID() objc.ID { return x.inner.Ptr() }
 
-// FileProviderDomainFromID adopts an existing toll-free-bridged object id as a FileProviderDomain (nil for 0).
+// FileProviderDomainFromID adopts an existing object pointer as a FileProviderDomain (nil for 0).
 func FileProviderDomainFromID(id objc.ID) *FileProviderDomain {
 	if id == 0 {
 		return nil

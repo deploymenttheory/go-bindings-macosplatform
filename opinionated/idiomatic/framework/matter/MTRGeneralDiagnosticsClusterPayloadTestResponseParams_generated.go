@@ -20,11 +20,11 @@ type MTRGeneralDiagnosticsClusterPayloadTestResponseParams struct {
 // Unwrap returns the underlying [raw.MTRGeneralDiagnosticsClusterPayloadTestResponseParams].
 func (x *MTRGeneralDiagnosticsClusterPayloadTestResponseParams) Unwrap() *raw.MTRGeneralDiagnosticsClusterPayloadTestResponseParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRGeneralDiagnosticsClusterPayloadTestResponseParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRGeneralDiagnosticsClusterPayloadTestResponseParamsFromID adopts an existing toll-free-bridged object id as a MTRGeneralDiagnosticsClusterPayloadTestResponseParams (nil for 0).
+// MTRGeneralDiagnosticsClusterPayloadTestResponseParamsFromID adopts an existing object pointer as a MTRGeneralDiagnosticsClusterPayloadTestResponseParams (nil for 0).
 func MTRGeneralDiagnosticsClusterPayloadTestResponseParamsFromID(id objc.ID) *MTRGeneralDiagnosticsClusterPayloadTestResponseParams {
 	if id == 0 {
 		return nil

@@ -17,11 +17,11 @@ type LocationUpdater struct {
 // Unwrap returns the underlying [raw.CLLocationUpdater].
 func (x *LocationUpdater) Unwrap() *raw.CLLocationUpdater { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *LocationUpdater) ID() objc.ID { return x.inner.Ptr() }
 
-// LocationUpdaterFromID adopts an existing toll-free-bridged object id as a LocationUpdater (nil for 0).
+// LocationUpdaterFromID adopts an existing object pointer as a LocationUpdater (nil for 0).
 func LocationUpdaterFromID(id objc.ID) *LocationUpdater {
 	if id == 0 {
 		return nil

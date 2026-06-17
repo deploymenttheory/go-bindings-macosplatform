@@ -17,11 +17,11 @@ type FileResolutionResult struct {
 // Unwrap returns the underlying [raw.INFileResolutionResult].
 func (x *FileResolutionResult) Unwrap() *raw.INFileResolutionResult { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *FileResolutionResult) ID() objc.ID { return x.inner.Ptr() }
 
-// FileResolutionResultFromID adopts an existing toll-free-bridged object id as a FileResolutionResult (nil for 0).
+// FileResolutionResultFromID adopts an existing object pointer as a FileResolutionResult (nil for 0).
 func FileResolutionResultFromID(id objc.ID) *FileResolutionResult {
 	if id == 0 {
 		return nil

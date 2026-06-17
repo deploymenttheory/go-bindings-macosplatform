@@ -18,11 +18,11 @@ type Archiver struct {
 // Unwrap returns the underlying [raw.NSArchiver].
 func (x *Archiver) Unwrap() *raw.NSArchiver { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Archiver) ID() objc.ID { return x.inner.Ptr() }
 
-// ArchiverFromID adopts an existing toll-free-bridged object id as a Archiver (nil for 0).
+// ArchiverFromID adopts an existing object pointer as a Archiver (nil for 0).
 func ArchiverFromID(id objc.ID) *Archiver {
 	if id == 0 {
 		return nil

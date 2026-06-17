@@ -18,11 +18,11 @@ type AppResponsivenessMetric struct {
 // Unwrap returns the underlying [raw.MXAppResponsivenessMetric].
 func (x *AppResponsivenessMetric) Unwrap() *raw.MXAppResponsivenessMetric { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AppResponsivenessMetric) ID() objc.ID { return x.inner.Ptr() }
 
-// AppResponsivenessMetricFromID adopts an existing toll-free-bridged object id as a AppResponsivenessMetric (nil for 0).
+// AppResponsivenessMetricFromID adopts an existing object pointer as a AppResponsivenessMetric (nil for 0).
 func AppResponsivenessMetricFromID(id objc.ID) *AppResponsivenessMetric {
 	if id == 0 {
 		return nil

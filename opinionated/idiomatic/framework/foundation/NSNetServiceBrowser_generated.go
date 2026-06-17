@@ -18,11 +18,11 @@ type NetServiceBrowser struct {
 // Unwrap returns the underlying [raw.NSNetServiceBrowser].
 func (x *NetServiceBrowser) Unwrap() *raw.NSNetServiceBrowser { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NetServiceBrowser) ID() objc.ID { return x.inner.Ptr() }
 
-// NetServiceBrowserFromID adopts an existing toll-free-bridged object id as a NetServiceBrowser (nil for 0).
+// NetServiceBrowserFromID adopts an existing object pointer as a NetServiceBrowser (nil for 0).
 func NetServiceBrowserFromID(id objc.ID) *NetServiceBrowser {
 	if id == 0 {
 		return nil

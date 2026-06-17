@@ -18,11 +18,11 @@ type LibMediaEntity struct {
 // Unwrap returns the underlying [raw.ITLibMediaEntity].
 func (x *LibMediaEntity) Unwrap() *raw.ITLibMediaEntity { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *LibMediaEntity) ID() objc.ID { return x.inner.Ptr() }
 
-// LibMediaEntityFromID adopts an existing toll-free-bridged object id as a LibMediaEntity (nil for 0).
+// LibMediaEntityFromID adopts an existing object pointer as a LibMediaEntity (nil for 0).
 func LibMediaEntityFromID(id objc.ID) *LibMediaEntity {
 	if id == 0 {
 		return nil

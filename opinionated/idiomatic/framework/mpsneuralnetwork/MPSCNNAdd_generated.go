@@ -18,11 +18,11 @@ type CNNAdd struct {
 // Unwrap returns the underlying [raw.MPSCNNAdd].
 func (x *CNNAdd) Unwrap() *raw.MPSCNNAdd { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CNNAdd) ID() objc.ID { return x.inner.Ptr() }
 
-// CNNAddFromID adopts an existing toll-free-bridged object id as a CNNAdd (nil for 0).
+// CNNAddFromID adopts an existing object pointer as a CNNAdd (nil for 0).
 func CNNAddFromID(id objc.ID) *CNNAdd {
 	if id == 0 {
 		return nil

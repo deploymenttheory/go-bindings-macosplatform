@@ -20,11 +20,11 @@ type MatchedPlayers struct {
 // Unwrap returns the underlying [raw.GKMatchedPlayers].
 func (x *MatchedPlayers) Unwrap() *raw.GKMatchedPlayers { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MatchedPlayers) ID() objc.ID { return x.inner.Ptr() }
 
-// MatchedPlayersFromID adopts an existing toll-free-bridged object id as a MatchedPlayers (nil for 0).
+// MatchedPlayersFromID adopts an existing object pointer as a MatchedPlayers (nil for 0).
 func MatchedPlayersFromID(id objc.ID) *MatchedPlayers {
 	if id == 0 {
 		return nil

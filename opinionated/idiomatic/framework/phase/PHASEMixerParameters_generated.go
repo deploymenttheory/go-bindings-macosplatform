@@ -18,11 +18,11 @@ type MixerParameters struct {
 // Unwrap returns the underlying [raw.PHASEMixerParameters].
 func (x *MixerParameters) Unwrap() *raw.PHASEMixerParameters { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MixerParameters) ID() objc.ID { return x.inner.Ptr() }
 
-// MixerParametersFromID adopts an existing toll-free-bridged object id as a MixerParameters (nil for 0).
+// MixerParametersFromID adopts an existing object pointer as a MixerParameters (nil for 0).
 func MixerParametersFromID(id objc.ID) *MixerParameters {
 	if id == 0 {
 		return nil

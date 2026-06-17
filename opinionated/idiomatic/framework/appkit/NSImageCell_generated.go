@@ -17,11 +17,11 @@ type ImageCell struct {
 // Unwrap returns the underlying [raw.NSImageCell].
 func (x *ImageCell) Unwrap() *raw.NSImageCell { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ImageCell) ID() objc.ID { return x.inner.Ptr() }
 
-// ImageCellFromID adopts an existing toll-free-bridged object id as a ImageCell (nil for 0).
+// ImageCellFromID adopts an existing object pointer as a ImageCell (nil for 0).
 func ImageCellFromID(id objc.ID) *ImageCell {
 	if id == 0 {
 		return nil

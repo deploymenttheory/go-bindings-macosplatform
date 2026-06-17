@@ -20,11 +20,11 @@ type DataSeriesDescriptor struct {
 // Unwrap returns the underlying [raw.AXDataSeriesDescriptor].
 func (x *DataSeriesDescriptor) Unwrap() *raw.AXDataSeriesDescriptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DataSeriesDescriptor) ID() objc.ID { return x.inner.Ptr() }
 
-// DataSeriesDescriptorFromID adopts an existing toll-free-bridged object id as a DataSeriesDescriptor (nil for 0).
+// DataSeriesDescriptorFromID adopts an existing object pointer as a DataSeriesDescriptor (nil for 0).
 func DataSeriesDescriptorFromID(id objc.ID) *DataSeriesDescriptor {
 	if id == 0 {
 		return nil

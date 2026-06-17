@@ -20,11 +20,11 @@ type MTRGeneralCommissioningClusterArmFailSafeResponseParams struct {
 // Unwrap returns the underlying [raw.MTRGeneralCommissioningClusterArmFailSafeResponseParams].
 func (x *MTRGeneralCommissioningClusterArmFailSafeResponseParams) Unwrap() *raw.MTRGeneralCommissioningClusterArmFailSafeResponseParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRGeneralCommissioningClusterArmFailSafeResponseParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRGeneralCommissioningClusterArmFailSafeResponseParamsFromID adopts an existing toll-free-bridged object id as a MTRGeneralCommissioningClusterArmFailSafeResponseParams (nil for 0).
+// MTRGeneralCommissioningClusterArmFailSafeResponseParamsFromID adopts an existing object pointer as a MTRGeneralCommissioningClusterArmFailSafeResponseParams (nil for 0).
 func MTRGeneralCommissioningClusterArmFailSafeResponseParamsFromID(id objc.ID) *MTRGeneralCommissioningClusterArmFailSafeResponseParams {
 	if id == 0 {
 		return nil

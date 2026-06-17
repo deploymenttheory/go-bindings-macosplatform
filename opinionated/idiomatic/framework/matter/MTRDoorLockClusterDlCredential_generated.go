@@ -17,11 +17,11 @@ type MTRDoorLockClusterDlCredential struct {
 // Unwrap returns the underlying [raw.MTRDoorLockClusterDlCredential].
 func (x *MTRDoorLockClusterDlCredential) Unwrap() *raw.MTRDoorLockClusterDlCredential { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRDoorLockClusterDlCredential) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRDoorLockClusterDlCredentialFromID adopts an existing toll-free-bridged object id as a MTRDoorLockClusterDlCredential (nil for 0).
+// MTRDoorLockClusterDlCredentialFromID adopts an existing object pointer as a MTRDoorLockClusterDlCredential (nil for 0).
 func MTRDoorLockClusterDlCredentialFromID(id objc.ID) *MTRDoorLockClusterDlCredential {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type ContainerStatus struct {
 // Unwrap returns the underlying [raw.FSContainerStatus].
 func (x *ContainerStatus) Unwrap() *raw.FSContainerStatus { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ContainerStatus) ID() objc.ID { return x.inner.Ptr() }
 
-// ContainerStatusFromID adopts an existing toll-free-bridged object id as a ContainerStatus (nil for 0).
+// ContainerStatusFromID adopts an existing object pointer as a ContainerStatus (nil for 0).
 func ContainerStatusFromID(id objc.ID) *ContainerStatus {
 	if id == 0 {
 		return nil

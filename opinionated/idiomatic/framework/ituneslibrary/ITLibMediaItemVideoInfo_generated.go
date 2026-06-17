@@ -18,11 +18,11 @@ type LibMediaItemVideoInfo struct {
 // Unwrap returns the underlying [raw.ITLibMediaItemVideoInfo].
 func (x *LibMediaItemVideoInfo) Unwrap() *raw.ITLibMediaItemVideoInfo { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *LibMediaItemVideoInfo) ID() objc.ID { return x.inner.Ptr() }
 
-// LibMediaItemVideoInfoFromID adopts an existing toll-free-bridged object id as a LibMediaItemVideoInfo (nil for 0).
+// LibMediaItemVideoInfoFromID adopts an existing object pointer as a LibMediaItemVideoInfo (nil for 0).
 func LibMediaItemVideoInfoFromID(id objc.ID) *LibMediaItemVideoInfo {
 	if id == 0 {
 		return nil

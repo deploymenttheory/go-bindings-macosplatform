@@ -19,11 +19,11 @@ type GraphCompilationDescriptor struct {
 // Unwrap returns the underlying [raw.MPSGraphCompilationDescriptor].
 func (x *GraphCompilationDescriptor) Unwrap() *raw.MPSGraphCompilationDescriptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *GraphCompilationDescriptor) ID() objc.ID { return x.inner.Ptr() }
 
-// GraphCompilationDescriptorFromID adopts an existing toll-free-bridged object id as a GraphCompilationDescriptor (nil for 0).
+// GraphCompilationDescriptorFromID adopts an existing object pointer as a GraphCompilationDescriptor (nil for 0).
 func GraphCompilationDescriptorFromID(id objc.ID) *GraphCompilationDescriptor {
 	if id == 0 {
 		return nil

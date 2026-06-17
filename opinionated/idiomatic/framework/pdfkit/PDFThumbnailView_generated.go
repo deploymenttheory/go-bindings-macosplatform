@@ -20,11 +20,11 @@ type ThumbnailView struct {
 // Unwrap returns the underlying [raw.PDFThumbnailView].
 func (x *ThumbnailView) Unwrap() *raw.PDFThumbnailView { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ThumbnailView) ID() objc.ID { return x.inner.Ptr() }
 
-// ThumbnailViewFromID adopts an existing toll-free-bridged object id as a ThumbnailView (nil for 0).
+// ThumbnailViewFromID adopts an existing object pointer as a ThumbnailView (nil for 0).
 func ThumbnailViewFromID(id objc.ID) *ThumbnailView {
 	if id == 0 {
 		return nil

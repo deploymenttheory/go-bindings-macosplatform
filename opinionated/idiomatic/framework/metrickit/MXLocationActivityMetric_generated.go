@@ -18,11 +18,11 @@ type LocationActivityMetric struct {
 // Unwrap returns the underlying [raw.MXLocationActivityMetric].
 func (x *LocationActivityMetric) Unwrap() *raw.MXLocationActivityMetric { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *LocationActivityMetric) ID() objc.ID { return x.inner.Ptr() }
 
-// LocationActivityMetricFromID adopts an existing toll-free-bridged object id as a LocationActivityMetric (nil for 0).
+// LocationActivityMetricFromID adopts an existing object pointer as a LocationActivityMetric (nil for 0).
 func LocationActivityMetricFromID(id objc.ID) *LocationActivityMetric {
 	if id == 0 {
 		return nil

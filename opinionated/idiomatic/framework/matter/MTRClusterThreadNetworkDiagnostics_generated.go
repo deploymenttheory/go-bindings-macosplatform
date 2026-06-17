@@ -19,11 +19,11 @@ type MTRClusterThreadNetworkDiagnostics struct {
 // Unwrap returns the underlying [raw.MTRClusterThreadNetworkDiagnostics].
 func (x *MTRClusterThreadNetworkDiagnostics) Unwrap() *raw.MTRClusterThreadNetworkDiagnostics { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRClusterThreadNetworkDiagnostics) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRClusterThreadNetworkDiagnosticsFromID adopts an existing toll-free-bridged object id as a MTRClusterThreadNetworkDiagnostics (nil for 0).
+// MTRClusterThreadNetworkDiagnosticsFromID adopts an existing object pointer as a MTRClusterThreadNetworkDiagnostics (nil for 0).
 func MTRClusterThreadNetworkDiagnosticsFromID(id objc.ID) *MTRClusterThreadNetworkDiagnostics {
 	if id == 0 {
 		return nil

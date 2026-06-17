@@ -17,11 +17,11 @@ type ObjectPlaceholder struct {
 // Unwrap returns the underlying [raw.PHObjectPlaceholder].
 func (x *ObjectPlaceholder) Unwrap() *raw.PHObjectPlaceholder { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ObjectPlaceholder) ID() objc.ID { return x.inner.Ptr() }
 
-// ObjectPlaceholderFromID adopts an existing toll-free-bridged object id as a ObjectPlaceholder (nil for 0).
+// ObjectPlaceholderFromID adopts an existing object pointer as a ObjectPlaceholder (nil for 0).
 func ObjectPlaceholderFromID(id objc.ID) *ObjectPlaceholder {
 	if id == 0 {
 		return nil

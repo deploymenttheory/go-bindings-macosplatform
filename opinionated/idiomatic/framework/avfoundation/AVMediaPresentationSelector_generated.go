@@ -19,11 +19,11 @@ type MediaPresentationSelector struct {
 // Unwrap returns the underlying [raw.AVMediaPresentationSelector].
 func (x *MediaPresentationSelector) Unwrap() *raw.AVMediaPresentationSelector { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MediaPresentationSelector) ID() objc.ID { return x.inner.Ptr() }
 
-// MediaPresentationSelectorFromID adopts an existing toll-free-bridged object id as a MediaPresentationSelector (nil for 0).
+// MediaPresentationSelectorFromID adopts an existing object pointer as a MediaPresentationSelector (nil for 0).
 func MediaPresentationSelectorFromID(id objc.ID) *MediaPresentationSelector {
 	if id == 0 {
 		return nil

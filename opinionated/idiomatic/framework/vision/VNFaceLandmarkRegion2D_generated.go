@@ -21,11 +21,11 @@ type FaceLandmarkRegion2D struct {
 // Unwrap returns the underlying [raw.VNFaceLandmarkRegion2D].
 func (x *FaceLandmarkRegion2D) Unwrap() *raw.VNFaceLandmarkRegion2D { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *FaceLandmarkRegion2D) ID() objc.ID { return x.inner.Ptr() }
 
-// FaceLandmarkRegion2DFromID adopts an existing toll-free-bridged object id as a FaceLandmarkRegion2D (nil for 0).
+// FaceLandmarkRegion2DFromID adopts an existing object pointer as a FaceLandmarkRegion2D (nil for 0).
 func FaceLandmarkRegion2DFromID(id objc.ID) *FaceLandmarkRegion2D {
 	if id == 0 {
 		return nil

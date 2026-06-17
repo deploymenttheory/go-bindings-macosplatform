@@ -19,11 +19,11 @@ type AdaptiveImageGlyph struct {
 // Unwrap returns the underlying [raw.NSAdaptiveImageGlyph].
 func (x *AdaptiveImageGlyph) Unwrap() *raw.NSAdaptiveImageGlyph { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AdaptiveImageGlyph) ID() objc.ID { return x.inner.Ptr() }
 
-// AdaptiveImageGlyphFromID adopts an existing toll-free-bridged object id as a AdaptiveImageGlyph (nil for 0).
+// AdaptiveImageGlyphFromID adopts an existing object pointer as a AdaptiveImageGlyph (nil for 0).
 func AdaptiveImageGlyphFromID(id objc.ID) *AdaptiveImageGlyph {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type Nib struct {
 // Unwrap returns the underlying [raw.NSNib].
 func (x *Nib) Unwrap() *raw.NSNib { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Nib) ID() objc.ID { return x.inner.Ptr() }
 
-// NibFromID adopts an existing toll-free-bridged object id as a Nib (nil for 0).
+// NibFromID adopts an existing object pointer as a Nib (nil for 0).
 func NibFromID(id objc.ID) *Nib {
 	if id == 0 {
 		return nil

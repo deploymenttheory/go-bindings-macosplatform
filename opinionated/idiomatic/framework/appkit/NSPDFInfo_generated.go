@@ -21,11 +21,11 @@ type PDFInfo struct {
 // Unwrap returns the underlying [raw.NSPDFInfo].
 func (x *PDFInfo) Unwrap() *raw.NSPDFInfo { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PDFInfo) ID() objc.ID { return x.inner.Ptr() }
 
-// PDFInfoFromID adopts an existing toll-free-bridged object id as a PDFInfo (nil for 0).
+// PDFInfoFromID adopts an existing object pointer as a PDFInfo (nil for 0).
 func PDFInfoFromID(id objc.ID) *PDFInfo {
 	if id == 0 {
 		return nil

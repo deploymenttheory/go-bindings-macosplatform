@@ -21,11 +21,11 @@ type Layer struct {
 // Unwrap returns the underlying [raw.CALayer].
 func (x *Layer) Unwrap() *raw.CALayer { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Layer) ID() objc.ID { return x.inner.Ptr() }
 
-// LayerFromID adopts an existing toll-free-bridged object id as a Layer (nil for 0).
+// LayerFromID adopts an existing object pointer as a Layer (nil for 0).
 func LayerFromID(id objc.ID) *Layer {
 	if id == 0 {
 		return nil

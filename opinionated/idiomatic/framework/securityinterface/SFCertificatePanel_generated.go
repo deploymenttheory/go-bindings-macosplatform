@@ -21,11 +21,11 @@ type CertificatePanel struct {
 // Unwrap returns the underlying [raw.SFCertificatePanel].
 func (x *CertificatePanel) Unwrap() *raw.SFCertificatePanel { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CertificatePanel) ID() objc.ID { return x.inner.Ptr() }
 
-// CertificatePanelFromID adopts an existing toll-free-bridged object id as a CertificatePanel (nil for 0).
+// CertificatePanelFromID adopts an existing object pointer as a CertificatePanel (nil for 0).
 func CertificatePanelFromID(id objc.ID) *CertificatePanel {
 	if id == 0 {
 		return nil

@@ -20,11 +20,11 @@ type ScrollLayer struct {
 // Unwrap returns the underlying [raw.CAScrollLayer].
 func (x *ScrollLayer) Unwrap() *raw.CAScrollLayer { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ScrollLayer) ID() objc.ID { return x.inner.Ptr() }
 
-// ScrollLayerFromID adopts an existing toll-free-bridged object id as a ScrollLayer (nil for 0).
+// ScrollLayerFromID adopts an existing object pointer as a ScrollLayer (nil for 0).
 func ScrollLayerFromID(id objc.ID) *ScrollLayer {
 	if id == 0 {
 		return nil

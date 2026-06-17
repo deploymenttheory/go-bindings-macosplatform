@@ -20,11 +20,11 @@ type NNCropAndResizeBilinear struct {
 // Unwrap returns the underlying [raw.MPSNNCropAndResizeBilinear].
 func (x *NNCropAndResizeBilinear) Unwrap() *raw.MPSNNCropAndResizeBilinear { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NNCropAndResizeBilinear) ID() objc.ID { return x.inner.Ptr() }
 
-// NNCropAndResizeBilinearFromID adopts an existing toll-free-bridged object id as a NNCropAndResizeBilinear (nil for 0).
+// NNCropAndResizeBilinearFromID adopts an existing object pointer as a NNCropAndResizeBilinear (nil for 0).
 func NNCropAndResizeBilinearFromID(id objc.ID) *NNCropAndResizeBilinear {
 	if id == 0 {
 		return nil

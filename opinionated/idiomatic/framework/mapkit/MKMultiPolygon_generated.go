@@ -19,11 +19,11 @@ type MultiPolygon struct {
 // Unwrap returns the underlying [raw.MKMultiPolygon].
 func (x *MultiPolygon) Unwrap() *raw.MKMultiPolygon { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MultiPolygon) ID() objc.ID { return x.inner.Ptr() }
 
-// MultiPolygonFromID adopts an existing toll-free-bridged object id as a MultiPolygon (nil for 0).
+// MultiPolygonFromID adopts an existing object pointer as a MultiPolygon (nil for 0).
 func MultiPolygonFromID(id objc.ID) *MultiPolygon {
 	if id == 0 {
 		return nil

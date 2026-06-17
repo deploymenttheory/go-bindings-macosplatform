@@ -19,11 +19,11 @@ type HapticEventParameter struct {
 // Unwrap returns the underlying [raw.CHHapticEventParameter].
 func (x *HapticEventParameter) Unwrap() *raw.CHHapticEventParameter { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *HapticEventParameter) ID() objc.ID { return x.inner.Ptr() }
 
-// HapticEventParameterFromID adopts an existing toll-free-bridged object id as a HapticEventParameter (nil for 0).
+// HapticEventParameterFromID adopts an existing object pointer as a HapticEventParameter (nil for 0).
 func HapticEventParameterFromID(id objc.ID) *HapticEventParameter {
 	if id == 0 {
 		return nil

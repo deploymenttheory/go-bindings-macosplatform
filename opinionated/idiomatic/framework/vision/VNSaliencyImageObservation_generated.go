@@ -18,11 +18,11 @@ type SaliencyImageObservation struct {
 // Unwrap returns the underlying [raw.VNSaliencyImageObservation].
 func (x *SaliencyImageObservation) Unwrap() *raw.VNSaliencyImageObservation { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SaliencyImageObservation) ID() objc.ID { return x.inner.Ptr() }
 
-// SaliencyImageObservationFromID adopts an existing toll-free-bridged object id as a SaliencyImageObservation (nil for 0).
+// SaliencyImageObservationFromID adopts an existing object pointer as a SaliencyImageObservation (nil for 0).
 func SaliencyImageObservationFromID(id objc.ID) *SaliencyImageObservation {
 	if id == 0 {
 		return nil

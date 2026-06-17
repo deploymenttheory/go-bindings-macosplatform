@@ -17,11 +17,11 @@ type RacingWheel struct {
 // Unwrap returns the underlying [raw.GCRacingWheel].
 func (x *RacingWheel) Unwrap() *raw.GCRacingWheel { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *RacingWheel) ID() objc.ID { return x.inner.Ptr() }
 
-// RacingWheelFromID adopts an existing toll-free-bridged object id as a RacingWheel (nil for 0).
+// RacingWheelFromID adopts an existing object pointer as a RacingWheel (nil for 0).
 func RacingWheelFromID(id objc.ID) *RacingWheel {
 	if id == 0 {
 		return nil

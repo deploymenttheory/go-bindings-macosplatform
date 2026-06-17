@@ -18,11 +18,11 @@ type TextViewportLayoutController struct {
 // Unwrap returns the underlying [raw.NSTextViewportLayoutController].
 func (x *TextViewportLayoutController) Unwrap() *raw.NSTextViewportLayoutController { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *TextViewportLayoutController) ID() objc.ID { return x.inner.Ptr() }
 
-// TextViewportLayoutControllerFromID adopts an existing toll-free-bridged object id as a TextViewportLayoutController (nil for 0).
+// TextViewportLayoutControllerFromID adopts an existing object pointer as a TextViewportLayoutController (nil for 0).
 func TextViewportLayoutControllerFromID(id objc.ID) *TextViewportLayoutController {
 	if id == 0 {
 		return nil

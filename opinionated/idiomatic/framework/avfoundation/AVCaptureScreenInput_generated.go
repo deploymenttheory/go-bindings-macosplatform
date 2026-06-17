@@ -19,11 +19,11 @@ type CaptureScreenInput struct {
 // Unwrap returns the underlying [raw.AVCaptureScreenInput].
 func (x *CaptureScreenInput) Unwrap() *raw.AVCaptureScreenInput { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CaptureScreenInput) ID() objc.ID { return x.inner.Ptr() }
 
-// CaptureScreenInputFromID adopts an existing toll-free-bridged object id as a CaptureScreenInput (nil for 0).
+// CaptureScreenInputFromID adopts an existing object pointer as a CaptureScreenInput (nil for 0).
 func CaptureScreenInputFromID(id objc.ID) *CaptureScreenInput {
 	if id == 0 {
 		return nil

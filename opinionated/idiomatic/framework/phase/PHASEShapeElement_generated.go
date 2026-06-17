@@ -17,11 +17,11 @@ type ShapeElement struct {
 // Unwrap returns the underlying [raw.PHASEShapeElement].
 func (x *ShapeElement) Unwrap() *raw.PHASEShapeElement { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ShapeElement) ID() objc.ID { return x.inner.Ptr() }
 
-// ShapeElementFromID adopts an existing toll-free-bridged object id as a ShapeElement (nil for 0).
+// ShapeElementFromID adopts an existing object pointer as a ShapeElement (nil for 0).
 func ShapeElementFromID(id objc.ID) *ShapeElement {
 	if id == 0 {
 		return nil

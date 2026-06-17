@@ -17,11 +17,11 @@ type ItemGetAttributesRequest struct {
 // Unwrap returns the underlying [raw.FSItemGetAttributesRequest].
 func (x *ItemGetAttributesRequest) Unwrap() *raw.FSItemGetAttributesRequest { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ItemGetAttributesRequest) ID() objc.ID { return x.inner.Ptr() }
 
-// ItemGetAttributesRequestFromID adopts an existing toll-free-bridged object id as a ItemGetAttributesRequest (nil for 0).
+// ItemGetAttributesRequestFromID adopts an existing object pointer as a ItemGetAttributesRequest (nil for 0).
 func ItemGetAttributesRequestFromID(id objc.ID) *ItemGetAttributesRequest {
 	if id == 0 {
 		return nil

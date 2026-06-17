@@ -18,11 +18,11 @@ type NNLabelsNode struct {
 // Unwrap returns the underlying [raw.MPSNNLabelsNode].
 func (x *NNLabelsNode) Unwrap() *raw.MPSNNLabelsNode { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NNLabelsNode) ID() objc.ID { return x.inner.Ptr() }
 
-// NNLabelsNodeFromID adopts an existing toll-free-bridged object id as a NNLabelsNode (nil for 0).
+// NNLabelsNodeFromID adopts an existing object pointer as a NNLabelsNode (nil for 0).
 func NNLabelsNodeFromID(id objc.ID) *NNLabelsNode {
 	if id == 0 {
 		return nil

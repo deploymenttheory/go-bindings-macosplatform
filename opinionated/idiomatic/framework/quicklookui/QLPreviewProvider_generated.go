@@ -17,11 +17,11 @@ type PreviewProvider struct {
 // Unwrap returns the underlying [raw.QLPreviewProvider].
 func (x *PreviewProvider) Unwrap() *raw.QLPreviewProvider { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PreviewProvider) ID() objc.ID { return x.inner.Ptr() }
 
-// PreviewProviderFromID adopts an existing toll-free-bridged object id as a PreviewProvider (nil for 0).
+// PreviewProviderFromID adopts an existing object pointer as a PreviewProvider (nil for 0).
 func PreviewProviderFromID(id objc.ID) *PreviewProvider {
 	if id == 0 {
 		return nil

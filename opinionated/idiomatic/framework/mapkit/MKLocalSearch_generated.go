@@ -18,11 +18,11 @@ type LocalSearch struct {
 // Unwrap returns the underlying [raw.MKLocalSearch].
 func (x *LocalSearch) Unwrap() *raw.MKLocalSearch { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *LocalSearch) ID() objc.ID { return x.inner.Ptr() }
 
-// LocalSearchFromID adopts an existing toll-free-bridged object id as a LocalSearch (nil for 0).
+// LocalSearchFromID adopts an existing object pointer as a LocalSearch (nil for 0).
 func LocalSearchFromID(id objc.ID) *LocalSearch {
 	if id == 0 {
 		return nil

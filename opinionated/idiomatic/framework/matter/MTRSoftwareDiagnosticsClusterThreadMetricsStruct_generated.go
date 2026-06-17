@@ -19,11 +19,11 @@ type MTRSoftwareDiagnosticsClusterThreadMetricsStruct struct {
 // Unwrap returns the underlying [raw.MTRSoftwareDiagnosticsClusterThreadMetricsStruct].
 func (x *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) Unwrap() *raw.MTRSoftwareDiagnosticsClusterThreadMetricsStruct { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRSoftwareDiagnosticsClusterThreadMetricsStructFromID adopts an existing toll-free-bridged object id as a MTRSoftwareDiagnosticsClusterThreadMetricsStruct (nil for 0).
+// MTRSoftwareDiagnosticsClusterThreadMetricsStructFromID adopts an existing object pointer as a MTRSoftwareDiagnosticsClusterThreadMetricsStruct (nil for 0).
 func MTRSoftwareDiagnosticsClusterThreadMetricsStructFromID(id objc.ID) *MTRSoftwareDiagnosticsClusterThreadMetricsStruct {
 	if id == 0 {
 		return nil

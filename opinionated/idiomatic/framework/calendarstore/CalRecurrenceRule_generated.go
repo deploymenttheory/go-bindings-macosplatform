@@ -18,11 +18,11 @@ type CalRecurrenceRule struct {
 // Unwrap returns the underlying [raw.CalRecurrenceRule].
 func (x *CalRecurrenceRule) Unwrap() *raw.CalRecurrenceRule { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CalRecurrenceRule) ID() objc.ID { return x.inner.Ptr() }
 
-// CalRecurrenceRuleFromID adopts an existing toll-free-bridged object id as a CalRecurrenceRule (nil for 0).
+// CalRecurrenceRuleFromID adopts an existing object pointer as a CalRecurrenceRule (nil for 0).
 func CalRecurrenceRuleFromID(id objc.ID) *CalRecurrenceRule {
 	if id == 0 {
 		return nil

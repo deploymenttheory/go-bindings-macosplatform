@@ -19,11 +19,11 @@ type ImageManager struct {
 // Unwrap returns the underlying [raw.PHImageManager].
 func (x *ImageManager) Unwrap() *raw.PHImageManager { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ImageManager) ID() objc.ID { return x.inner.Ptr() }
 
-// ImageManagerFromID adopts an existing toll-free-bridged object id as a ImageManager (nil for 0).
+// ImageManagerFromID adopts an existing object pointer as a ImageManager (nil for 0).
 func ImageManagerFromID(id objc.ID) *ImageManager {
 	if id == 0 {
 		return nil

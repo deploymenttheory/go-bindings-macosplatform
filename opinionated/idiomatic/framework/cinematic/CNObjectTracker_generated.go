@@ -21,11 +21,11 @@ type ObjectTracker struct {
 // Unwrap returns the underlying [raw.CNObjectTracker].
 func (x *ObjectTracker) Unwrap() *raw.CNObjectTracker { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ObjectTracker) ID() objc.ID { return x.inner.Ptr() }
 
-// ObjectTrackerFromID adopts an existing toll-free-bridged object id as a ObjectTracker (nil for 0).
+// ObjectTrackerFromID adopts an existing object pointer as a ObjectTracker (nil for 0).
 func ObjectTrackerFromID(id objc.ID) *ObjectTracker {
 	if id == 0 {
 		return nil

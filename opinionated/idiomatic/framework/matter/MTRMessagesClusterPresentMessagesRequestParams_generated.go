@@ -19,11 +19,11 @@ type MTRMessagesClusterPresentMessagesRequestParams struct {
 // Unwrap returns the underlying [raw.MTRMessagesClusterPresentMessagesRequestParams].
 func (x *MTRMessagesClusterPresentMessagesRequestParams) Unwrap() *raw.MTRMessagesClusterPresentMessagesRequestParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRMessagesClusterPresentMessagesRequestParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRMessagesClusterPresentMessagesRequestParamsFromID adopts an existing toll-free-bridged object id as a MTRMessagesClusterPresentMessagesRequestParams (nil for 0).
+// MTRMessagesClusterPresentMessagesRequestParamsFromID adopts an existing object pointer as a MTRMessagesClusterPresentMessagesRequestParams (nil for 0).
 func MTRMessagesClusterPresentMessagesRequestParamsFromID(id objc.ID) *MTRMessagesClusterPresentMessagesRequestParams {
 	if id == 0 {
 		return nil

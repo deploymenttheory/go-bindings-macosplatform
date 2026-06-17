@@ -21,11 +21,11 @@ type CNNLocalContrastNormalizationGradient struct {
 // Unwrap returns the underlying [raw.MPSCNNLocalContrastNormalizationGradient].
 func (x *CNNLocalContrastNormalizationGradient) Unwrap() *raw.MPSCNNLocalContrastNormalizationGradient { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CNNLocalContrastNormalizationGradient) ID() objc.ID { return x.inner.Ptr() }
 
-// CNNLocalContrastNormalizationGradientFromID adopts an existing toll-free-bridged object id as a CNNLocalContrastNormalizationGradient (nil for 0).
+// CNNLocalContrastNormalizationGradientFromID adopts an existing object pointer as a CNNLocalContrastNormalizationGradient (nil for 0).
 func CNNLocalContrastNormalizationGradientFromID(id objc.ID) *CNNLocalContrastNormalizationGradient {
 	if id == 0 {
 		return nil

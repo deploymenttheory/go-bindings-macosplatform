@@ -17,11 +17,11 @@ type ExceptionHandler struct {
 // Unwrap returns the underlying [raw.NSExceptionHandler].
 func (x *ExceptionHandler) Unwrap() *raw.NSExceptionHandler { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ExceptionHandler) ID() objc.ID { return x.inner.Ptr() }
 
-// ExceptionHandlerFromID adopts an existing toll-free-bridged object id as a ExceptionHandler (nil for 0).
+// ExceptionHandlerFromID adopts an existing object pointer as a ExceptionHandler (nil for 0).
 func ExceptionHandlerFromID(id objc.ID) *ExceptionHandler {
 	if id == 0 {
 		return nil

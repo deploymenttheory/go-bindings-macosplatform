@@ -17,11 +17,11 @@ type PersistentHistoryToken struct {
 // Unwrap returns the underlying [raw.NSPersistentHistoryToken].
 func (x *PersistentHistoryToken) Unwrap() *raw.NSPersistentHistoryToken { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PersistentHistoryToken) ID() objc.ID { return x.inner.Ptr() }
 
-// PersistentHistoryTokenFromID adopts an existing toll-free-bridged object id as a PersistentHistoryToken (nil for 0).
+// PersistentHistoryTokenFromID adopts an existing object pointer as a PersistentHistoryToken (nil for 0).
 func PersistentHistoryTokenFromID(id objc.ID) *PersistentHistoryToken {
 	if id == 0 {
 		return nil

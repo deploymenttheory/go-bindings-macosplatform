@@ -19,11 +19,11 @@ type WarpKernel struct {
 // Unwrap returns the underlying [raw.CIWarpKernel].
 func (x *WarpKernel) Unwrap() *raw.CIWarpKernel { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *WarpKernel) ID() objc.ID { return x.inner.Ptr() }
 
-// WarpKernelFromID adopts an existing toll-free-bridged object id as a WarpKernel (nil for 0).
+// WarpKernelFromID adopts an existing object pointer as a WarpKernel (nil for 0).
 func WarpKernelFromID(id objc.ID) *WarpKernel {
 	if id == 0 {
 		return nil

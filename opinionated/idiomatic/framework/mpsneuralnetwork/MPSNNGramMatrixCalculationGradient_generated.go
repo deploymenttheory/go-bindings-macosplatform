@@ -19,11 +19,11 @@ type NNGramMatrixCalculationGradient struct {
 // Unwrap returns the underlying [raw.MPSNNGramMatrixCalculationGradient].
 func (x *NNGramMatrixCalculationGradient) Unwrap() *raw.MPSNNGramMatrixCalculationGradient { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NNGramMatrixCalculationGradient) ID() objc.ID { return x.inner.Ptr() }
 
-// NNGramMatrixCalculationGradientFromID adopts an existing toll-free-bridged object id as a NNGramMatrixCalculationGradient (nil for 0).
+// NNGramMatrixCalculationGradientFromID adopts an existing object pointer as a NNGramMatrixCalculationGradient (nil for 0).
 func NNGramMatrixCalculationGradientFromID(id objc.ID) *NNGramMatrixCalculationGradient {
 	if id == 0 {
 		return nil

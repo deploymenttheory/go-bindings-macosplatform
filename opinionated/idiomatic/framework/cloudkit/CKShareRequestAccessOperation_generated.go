@@ -21,11 +21,11 @@ type ShareRequestAccessOperation struct {
 // Unwrap returns the underlying [raw.CKShareRequestAccessOperation].
 func (x *ShareRequestAccessOperation) Unwrap() *raw.CKShareRequestAccessOperation { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ShareRequestAccessOperation) ID() objc.ID { return x.inner.Ptr() }
 
-// ShareRequestAccessOperationFromID adopts an existing toll-free-bridged object id as a ShareRequestAccessOperation (nil for 0).
+// ShareRequestAccessOperationFromID adopts an existing object pointer as a ShareRequestAccessOperation (nil for 0).
 func ShareRequestAccessOperationFromID(id objc.ID) *ShareRequestAccessOperation {
 	if id == 0 {
 		return nil

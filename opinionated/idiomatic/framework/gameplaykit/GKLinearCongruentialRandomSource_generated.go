@@ -17,11 +17,11 @@ type LinearCongruentialRandomSource struct {
 // Unwrap returns the underlying [raw.GKLinearCongruentialRandomSource].
 func (x *LinearCongruentialRandomSource) Unwrap() *raw.GKLinearCongruentialRandomSource { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *LinearCongruentialRandomSource) ID() objc.ID { return x.inner.Ptr() }
 
-// LinearCongruentialRandomSourceFromID adopts an existing toll-free-bridged object id as a LinearCongruentialRandomSource (nil for 0).
+// LinearCongruentialRandomSourceFromID adopts an existing object pointer as a LinearCongruentialRandomSource (nil for 0).
 func LinearCongruentialRandomSourceFromID(id objc.ID) *LinearCongruentialRandomSource {
 	if id == 0 {
 		return nil

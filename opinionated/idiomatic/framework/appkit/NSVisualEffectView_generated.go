@@ -17,11 +17,11 @@ type VisualEffectView struct {
 // Unwrap returns the underlying [raw.NSVisualEffectView].
 func (x *VisualEffectView) Unwrap() *raw.NSVisualEffectView { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *VisualEffectView) ID() objc.ID { return x.inner.Ptr() }
 
-// VisualEffectViewFromID adopts an existing toll-free-bridged object id as a VisualEffectView (nil for 0).
+// VisualEffectViewFromID adopts an existing object pointer as a VisualEffectView (nil for 0).
 func VisualEffectViewFromID(id objc.ID) *VisualEffectView {
 	if id == 0 {
 		return nil

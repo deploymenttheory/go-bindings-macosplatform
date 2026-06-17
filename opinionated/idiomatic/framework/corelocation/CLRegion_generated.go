@@ -20,11 +20,11 @@ type Region struct {
 // Unwrap returns the underlying [raw.CLRegion].
 func (x *Region) Unwrap() *raw.CLRegion { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Region) ID() objc.ID { return x.inner.Ptr() }
 
-// RegionFromID adopts an existing toll-free-bridged object id as a Region (nil for 0).
+// RegionFromID adopts an existing object pointer as a Region (nil for 0).
 func RegionFromID(id objc.ID) *Region {
 	if id == 0 {
 		return nil

@@ -19,11 +19,11 @@ type PersonHandle struct {
 // Unwrap returns the underlying [raw.INPersonHandle].
 func (x *PersonHandle) Unwrap() *raw.INPersonHandle { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PersonHandle) ID() objc.ID { return x.inner.Ptr() }
 
-// PersonHandleFromID adopts an existing toll-free-bridged object id as a PersonHandle (nil for 0).
+// PersonHandleFromID adopts an existing object pointer as a PersonHandle (nil for 0).
 func PersonHandleFromID(id objc.ID) *PersonHandle {
 	if id == 0 {
 		return nil

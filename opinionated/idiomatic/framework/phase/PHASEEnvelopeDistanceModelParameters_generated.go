@@ -17,11 +17,11 @@ type EnvelopeDistanceModelParameters struct {
 // Unwrap returns the underlying [raw.PHASEEnvelopeDistanceModelParameters].
 func (x *EnvelopeDistanceModelParameters) Unwrap() *raw.PHASEEnvelopeDistanceModelParameters { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *EnvelopeDistanceModelParameters) ID() objc.ID { return x.inner.Ptr() }
 
-// EnvelopeDistanceModelParametersFromID adopts an existing toll-free-bridged object id as a EnvelopeDistanceModelParameters (nil for 0).
+// EnvelopeDistanceModelParametersFromID adopts an existing object pointer as a EnvelopeDistanceModelParameters (nil for 0).
 func EnvelopeDistanceModelParametersFromID(id objc.ID) *EnvelopeDistanceModelParameters {
 	if id == 0 {
 		return nil

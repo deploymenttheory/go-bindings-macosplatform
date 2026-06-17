@@ -18,11 +18,11 @@ type SoundEventNodeDefinition struct {
 // Unwrap returns the underlying [raw.PHASESoundEventNodeDefinition].
 func (x *SoundEventNodeDefinition) Unwrap() *raw.PHASESoundEventNodeDefinition { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SoundEventNodeDefinition) ID() objc.ID { return x.inner.Ptr() }
 
-// SoundEventNodeDefinitionFromID adopts an existing toll-free-bridged object id as a SoundEventNodeDefinition (nil for 0).
+// SoundEventNodeDefinitionFromID adopts an existing object pointer as a SoundEventNodeDefinition (nil for 0).
 func SoundEventNodeDefinitionFromID(id objc.ID) *SoundEventNodeDefinition {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type ExtensionPropertyAttributes struct {
 // Unwrap returns the underlying [raw.CMIOExtensionPropertyAttributes].
 func (x *ExtensionPropertyAttributes) Unwrap() *raw.CMIOExtensionPropertyAttributes[objc.ID] { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ExtensionPropertyAttributes) ID() objc.ID { return x.inner.Ptr() }
 
-// ExtensionPropertyAttributesFromID adopts an existing toll-free-bridged object id as a ExtensionPropertyAttributes (nil for 0).
+// ExtensionPropertyAttributesFromID adopts an existing object pointer as a ExtensionPropertyAttributes (nil for 0).
 func ExtensionPropertyAttributesFromID(id objc.ID) *ExtensionPropertyAttributes {
 	if id == 0 {
 		return nil

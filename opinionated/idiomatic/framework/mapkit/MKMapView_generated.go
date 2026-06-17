@@ -21,11 +21,11 @@ type MapView struct {
 // Unwrap returns the underlying [raw.MKMapView].
 func (x *MapView) Unwrap() *raw.MKMapView { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MapView) ID() objc.ID { return x.inner.Ptr() }
 
-// MapViewFromID adopts an existing toll-free-bridged object id as a MapView (nil for 0).
+// MapViewFromID adopts an existing object pointer as a MapView (nil for 0).
 func MapViewFromID(id objc.ID) *MapView {
 	if id == 0 {
 		return nil

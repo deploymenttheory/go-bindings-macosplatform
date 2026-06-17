@@ -17,11 +17,11 @@ type VideoPerformanceMetrics struct {
 // Unwrap returns the underlying [raw.AVVideoPerformanceMetrics].
 func (x *VideoPerformanceMetrics) Unwrap() *raw.AVVideoPerformanceMetrics { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *VideoPerformanceMetrics) ID() objc.ID { return x.inner.Ptr() }
 
-// VideoPerformanceMetricsFromID adopts an existing toll-free-bridged object id as a VideoPerformanceMetrics (nil for 0).
+// VideoPerformanceMetricsFromID adopts an existing object pointer as a VideoPerformanceMetrics (nil for 0).
 func VideoPerformanceMetricsFromID(id objc.ID) *VideoPerformanceMetrics {
 	if id == 0 {
 		return nil

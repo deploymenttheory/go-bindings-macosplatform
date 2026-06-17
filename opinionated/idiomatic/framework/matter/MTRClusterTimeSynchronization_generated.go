@@ -21,11 +21,11 @@ type MTRClusterTimeSynchronization struct {
 // Unwrap returns the underlying [raw.MTRClusterTimeSynchronization].
 func (x *MTRClusterTimeSynchronization) Unwrap() *raw.MTRClusterTimeSynchronization { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRClusterTimeSynchronization) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRClusterTimeSynchronizationFromID adopts an existing toll-free-bridged object id as a MTRClusterTimeSynchronization (nil for 0).
+// MTRClusterTimeSynchronizationFromID adopts an existing object pointer as a MTRClusterTimeSynchronization (nil for 0).
 func MTRClusterTimeSynchronizationFromID(id objc.ID) *MTRClusterTimeSynchronization {
 	if id == 0 {
 		return nil

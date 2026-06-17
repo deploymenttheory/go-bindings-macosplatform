@@ -21,11 +21,11 @@ type CNNPoolingGradient struct {
 // Unwrap returns the underlying [raw.MPSCNNPoolingGradient].
 func (x *CNNPoolingGradient) Unwrap() *raw.MPSCNNPoolingGradient { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CNNPoolingGradient) ID() objc.ID { return x.inner.Ptr() }
 
-// CNNPoolingGradientFromID adopts an existing toll-free-bridged object id as a CNNPoolingGradient (nil for 0).
+// CNNPoolingGradientFromID adopts an existing object pointer as a CNNPoolingGradient (nil for 0).
 func CNNPoolingGradientFromID(id objc.ID) *CNNPoolingGradient {
 	if id == 0 {
 		return nil

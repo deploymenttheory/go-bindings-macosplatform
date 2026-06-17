@@ -18,11 +18,11 @@ type AudioUnitV2Bridge struct {
 // Unwrap returns the underlying [raw.AUAudioUnitV2Bridge].
 func (x *AudioUnitV2Bridge) Unwrap() *raw.AUAudioUnitV2Bridge { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AudioUnitV2Bridge) ID() objc.ID { return x.inner.Ptr() }
 
-// AudioUnitV2BridgeFromID adopts an existing toll-free-bridged object id as a AudioUnitV2Bridge (nil for 0).
+// AudioUnitV2BridgeFromID adopts an existing object pointer as a AudioUnitV2Bridge (nil for 0).
 func AudioUnitV2BridgeFromID(id objc.ID) *AudioUnitV2Bridge {
 	if id == 0 {
 		return nil

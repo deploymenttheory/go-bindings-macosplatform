@@ -20,11 +20,11 @@ type CNNNeuronPower struct {
 // Unwrap returns the underlying [raw.MPSCNNNeuronPower].
 func (x *CNNNeuronPower) Unwrap() *raw.MPSCNNNeuronPower { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CNNNeuronPower) ID() objc.ID { return x.inner.Ptr() }
 
-// CNNNeuronPowerFromID adopts an existing toll-free-bridged object id as a CNNNeuronPower (nil for 0).
+// CNNNeuronPowerFromID adopts an existing object pointer as a CNNNeuronPower (nil for 0).
 func CNNNeuronPowerFromID(id objc.ID) *CNNNeuronPower {
 	if id == 0 {
 		return nil

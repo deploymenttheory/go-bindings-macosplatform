@@ -20,11 +20,11 @@ type ActionResetForm struct {
 // Unwrap returns the underlying [raw.PDFActionResetForm].
 func (x *ActionResetForm) Unwrap() *raw.PDFActionResetForm { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ActionResetForm) ID() objc.ID { return x.inner.Ptr() }
 
-// ActionResetFormFromID adopts an existing toll-free-bridged object id as a ActionResetForm (nil for 0).
+// ActionResetFormFromID adopts an existing object pointer as a ActionResetForm (nil for 0).
 func ActionResetFormFromID(id objc.ID) *ActionResetForm {
 	if id == 0 {
 		return nil

@@ -20,11 +20,11 @@ type RenderingSession struct {
 // Unwrap returns the underlying [raw.CNRenderingSession].
 func (x *RenderingSession) Unwrap() *raw.CNRenderingSession { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *RenderingSession) ID() objc.ID { return x.inner.Ptr() }
 
-// RenderingSessionFromID adopts an existing toll-free-bridged object id as a RenderingSession (nil for 0).
+// RenderingSessionFromID adopts an existing object pointer as a RenderingSession (nil for 0).
 func RenderingSessionFromID(id objc.ID) *RenderingSession {
 	if id == 0 {
 		return nil

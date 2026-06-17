@@ -17,11 +17,11 @@ type CellularConditionMetric struct {
 // Unwrap returns the underlying [raw.MXCellularConditionMetric].
 func (x *CellularConditionMetric) Unwrap() *raw.MXCellularConditionMetric { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CellularConditionMetric) ID() objc.ID { return x.inner.Ptr() }
 
-// CellularConditionMetricFromID adopts an existing toll-free-bridged object id as a CellularConditionMetric (nil for 0).
+// CellularConditionMetricFromID adopts an existing object pointer as a CellularConditionMetric (nil for 0).
 func CellularConditionMetricFromID(id objc.ID) *CellularConditionMetric {
 	if id == 0 {
 		return nil

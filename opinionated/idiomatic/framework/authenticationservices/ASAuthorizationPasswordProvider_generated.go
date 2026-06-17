@@ -17,11 +17,11 @@ type AuthorizationPasswordProvider struct {
 // Unwrap returns the underlying [raw.ASAuthorizationPasswordProvider].
 func (x *AuthorizationPasswordProvider) Unwrap() *raw.ASAuthorizationPasswordProvider { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AuthorizationPasswordProvider) ID() objc.ID { return x.inner.Ptr() }
 
-// AuthorizationPasswordProviderFromID adopts an existing toll-free-bridged object id as a AuthorizationPasswordProvider (nil for 0).
+// AuthorizationPasswordProviderFromID adopts an existing object pointer as a AuthorizationPasswordProvider (nil for 0).
 func AuthorizationPasswordProviderFromID(id objc.ID) *AuthorizationPasswordProvider {
 	if id == 0 {
 		return nil

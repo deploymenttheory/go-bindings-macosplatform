@@ -20,11 +20,11 @@ type Appearance struct {
 // Unwrap returns the underlying [raw.NSAppearance].
 func (x *Appearance) Unwrap() *raw.NSAppearance { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Appearance) ID() objc.ID { return x.inner.Ptr() }
 
-// AppearanceFromID adopts an existing toll-free-bridged object id as a Appearance (nil for 0).
+// AppearanceFromID adopts an existing object pointer as a Appearance (nil for 0).
 func AppearanceFromID(id objc.ID) *Appearance {
 	if id == 0 {
 		return nil

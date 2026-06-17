@@ -18,11 +18,11 @@ type MTRActionsClusterPauseActionParams struct {
 // Unwrap returns the underlying [raw.MTRActionsClusterPauseActionParams].
 func (x *MTRActionsClusterPauseActionParams) Unwrap() *raw.MTRActionsClusterPauseActionParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRActionsClusterPauseActionParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRActionsClusterPauseActionParamsFromID adopts an existing toll-free-bridged object id as a MTRActionsClusterPauseActionParams (nil for 0).
+// MTRActionsClusterPauseActionParamsFromID adopts an existing object pointer as a MTRActionsClusterPauseActionParams (nil for 0).
 func MTRActionsClusterPauseActionParamsFromID(id objc.ID) *MTRActionsClusterPauseActionParams {
 	if id == 0 {
 		return nil

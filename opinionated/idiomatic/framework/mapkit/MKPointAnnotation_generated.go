@@ -19,11 +19,11 @@ type PointAnnotation struct {
 // Unwrap returns the underlying [raw.MKPointAnnotation].
 func (x *PointAnnotation) Unwrap() *raw.MKPointAnnotation { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PointAnnotation) ID() objc.ID { return x.inner.Ptr() }
 
-// PointAnnotationFromID adopts an existing toll-free-bridged object id as a PointAnnotation (nil for 0).
+// PointAnnotationFromID adopts an existing object pointer as a PointAnnotation (nil for 0).
 func PointAnnotationFromID(id objc.ID) *PointAnnotation {
 	if id == 0 {
 		return nil

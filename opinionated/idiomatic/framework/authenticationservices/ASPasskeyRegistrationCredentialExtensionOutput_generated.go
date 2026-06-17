@@ -17,11 +17,11 @@ type PasskeyRegistrationCredentialExtensionOutput struct {
 // Unwrap returns the underlying [raw.ASPasskeyRegistrationCredentialExtensionOutput].
 func (x *PasskeyRegistrationCredentialExtensionOutput) Unwrap() *raw.ASPasskeyRegistrationCredentialExtensionOutput { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PasskeyRegistrationCredentialExtensionOutput) ID() objc.ID { return x.inner.Ptr() }
 
-// PasskeyRegistrationCredentialExtensionOutputFromID adopts an existing toll-free-bridged object id as a PasskeyRegistrationCredentialExtensionOutput (nil for 0).
+// PasskeyRegistrationCredentialExtensionOutputFromID adopts an existing object pointer as a PasskeyRegistrationCredentialExtensionOutput (nil for 0).
 func PasskeyRegistrationCredentialExtensionOutputFromID(id objc.ID) *PasskeyRegistrationCredentialExtensionOutput {
 	if id == 0 {
 		return nil

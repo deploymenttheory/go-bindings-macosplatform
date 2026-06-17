@@ -21,11 +21,11 @@ type ProductStorePromotionController struct {
 // Unwrap returns the underlying [raw.SKProductStorePromotionController].
 func (x *ProductStorePromotionController) Unwrap() *raw.SKProductStorePromotionController { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ProductStorePromotionController) ID() objc.ID { return x.inner.Ptr() }
 
-// ProductStorePromotionControllerFromID adopts an existing toll-free-bridged object id as a ProductStorePromotionController (nil for 0).
+// ProductStorePromotionControllerFromID adopts an existing object pointer as a ProductStorePromotionController (nil for 0).
 func ProductStorePromotionControllerFromID(id objc.ID) *ProductStorePromotionController {
 	if id == 0 {
 		return nil

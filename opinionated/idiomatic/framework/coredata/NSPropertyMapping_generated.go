@@ -19,11 +19,11 @@ type PropertyMapping struct {
 // Unwrap returns the underlying [raw.NSPropertyMapping].
 func (x *PropertyMapping) Unwrap() *raw.NSPropertyMapping { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PropertyMapping) ID() objc.ID { return x.inner.Ptr() }
 
-// PropertyMappingFromID adopts an existing toll-free-bridged object id as a PropertyMapping (nil for 0).
+// PropertyMappingFromID adopts an existing object pointer as a PropertyMapping (nil for 0).
 func PropertyMappingFromID(id objc.ID) *PropertyMapping {
 	if id == 0 {
 		return nil

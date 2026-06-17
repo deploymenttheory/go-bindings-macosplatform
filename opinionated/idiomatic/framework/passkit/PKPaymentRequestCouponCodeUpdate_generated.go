@@ -18,11 +18,11 @@ type PaymentRequestCouponCodeUpdate struct {
 // Unwrap returns the underlying [raw.PKPaymentRequestCouponCodeUpdate].
 func (x *PaymentRequestCouponCodeUpdate) Unwrap() *raw.PKPaymentRequestCouponCodeUpdate { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PaymentRequestCouponCodeUpdate) ID() objc.ID { return x.inner.Ptr() }
 
-// PaymentRequestCouponCodeUpdateFromID adopts an existing toll-free-bridged object id as a PaymentRequestCouponCodeUpdate (nil for 0).
+// PaymentRequestCouponCodeUpdateFromID adopts an existing object pointer as a PaymentRequestCouponCodeUpdate (nil for 0).
 func PaymentRequestCouponCodeUpdateFromID(id objc.ID) *PaymentRequestCouponCodeUpdate {
 	if id == 0 {
 		return nil

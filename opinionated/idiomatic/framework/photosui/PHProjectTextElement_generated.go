@@ -19,11 +19,11 @@ type ProjectTextElement struct {
 // Unwrap returns the underlying [raw.PHProjectTextElement].
 func (x *ProjectTextElement) Unwrap() *raw.PHProjectTextElement { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ProjectTextElement) ID() objc.ID { return x.inner.Ptr() }
 
-// ProjectTextElementFromID adopts an existing toll-free-bridged object id as a ProjectTextElement (nil for 0).
+// ProjectTextElementFromID adopts an existing object pointer as a ProjectTextElement (nil for 0).
 func ProjectTextElementFromID(id objc.ID) *ProjectTextElement {
 	if id == 0 {
 		return nil

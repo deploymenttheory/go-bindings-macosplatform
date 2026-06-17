@@ -17,11 +17,11 @@ type AudioPlayerNode struct {
 // Unwrap returns the underlying [raw.AVAudioPlayerNode].
 func (x *AudioPlayerNode) Unwrap() *raw.AVAudioPlayerNode { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AudioPlayerNode) ID() objc.ID { return x.inner.Ptr() }
 
-// AudioPlayerNodeFromID adopts an existing toll-free-bridged object id as a AudioPlayerNode (nil for 0).
+// AudioPlayerNodeFromID adopts an existing object pointer as a AudioPlayerNode (nil for 0).
 func AudioPlayerNodeFromID(id objc.ID) *AudioPlayerNode {
 	if id == 0 {
 		return nil

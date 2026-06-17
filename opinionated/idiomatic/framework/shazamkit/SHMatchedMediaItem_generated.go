@@ -17,11 +17,11 @@ type MatchedMediaItem struct {
 // Unwrap returns the underlying [raw.SHMatchedMediaItem].
 func (x *MatchedMediaItem) Unwrap() *raw.SHMatchedMediaItem { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MatchedMediaItem) ID() objc.ID { return x.inner.Ptr() }
 
-// MatchedMediaItemFromID adopts an existing toll-free-bridged object id as a MatchedMediaItem (nil for 0).
+// MatchedMediaItemFromID adopts an existing object pointer as a MatchedMediaItem (nil for 0).
 func MatchedMediaItemFromID(id objc.ID) *MatchedMediaItem {
 	if id == 0 {
 		return nil

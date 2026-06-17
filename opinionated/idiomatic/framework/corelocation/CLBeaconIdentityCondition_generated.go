@@ -18,11 +18,11 @@ type BeaconIdentityCondition struct {
 // Unwrap returns the underlying [raw.CLBeaconIdentityCondition].
 func (x *BeaconIdentityCondition) Unwrap() *raw.CLBeaconIdentityCondition { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *BeaconIdentityCondition) ID() objc.ID { return x.inner.Ptr() }
 
-// BeaconIdentityConditionFromID adopts an existing toll-free-bridged object id as a BeaconIdentityCondition (nil for 0).
+// BeaconIdentityConditionFromID adopts an existing object pointer as a BeaconIdentityCondition (nil for 0).
 func BeaconIdentityConditionFromID(id objc.ID) *BeaconIdentityCondition {
 	if id == 0 {
 		return nil

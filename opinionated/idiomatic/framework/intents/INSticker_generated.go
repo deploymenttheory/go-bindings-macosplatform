@@ -19,11 +19,11 @@ type Sticker struct {
 // Unwrap returns the underlying [raw.INSticker].
 func (x *Sticker) Unwrap() *raw.INSticker { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Sticker) ID() objc.ID { return x.inner.Ptr() }
 
-// StickerFromID adopts an existing toll-free-bridged object id as a Sticker (nil for 0).
+// StickerFromID adopts an existing object pointer as a Sticker (nil for 0).
 func StickerFromID(id objc.ID) *Sticker {
 	if id == 0 {
 		return nil

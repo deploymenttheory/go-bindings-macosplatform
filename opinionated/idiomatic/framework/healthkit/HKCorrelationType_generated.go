@@ -17,11 +17,11 @@ type CorrelationType struct {
 // Unwrap returns the underlying [raw.HKCorrelationType].
 func (x *CorrelationType) Unwrap() *raw.HKCorrelationType { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CorrelationType) ID() objc.ID { return x.inner.Ptr() }
 
-// CorrelationTypeFromID adopts an existing toll-free-bridged object id as a CorrelationType (nil for 0).
+// CorrelationTypeFromID adopts an existing object pointer as a CorrelationType (nil for 0).
 func CorrelationTypeFromID(id objc.ID) *CorrelationType {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type ComponentSystem struct {
 // Unwrap returns the underlying [raw.GKComponentSystem].
 func (x *ComponentSystem) Unwrap() *raw.GKComponentSystem[objc.ID] { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ComponentSystem) ID() objc.ID { return x.inner.Ptr() }
 
-// ComponentSystemFromID adopts an existing toll-free-bridged object id as a ComponentSystem (nil for 0).
+// ComponentSystemFromID adopts an existing object pointer as a ComponentSystem (nil for 0).
 func ComponentSystemFromID(id objc.ID) *ComponentSystem {
 	if id == 0 {
 		return nil

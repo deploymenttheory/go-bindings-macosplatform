@@ -19,11 +19,11 @@ type StagedMigrationManager struct {
 // Unwrap returns the underlying [raw.NSStagedMigrationManager].
 func (x *StagedMigrationManager) Unwrap() *raw.NSStagedMigrationManager { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *StagedMigrationManager) ID() objc.ID { return x.inner.Ptr() }
 
-// StagedMigrationManagerFromID adopts an existing toll-free-bridged object id as a StagedMigrationManager (nil for 0).
+// StagedMigrationManagerFromID adopts an existing object pointer as a StagedMigrationManager (nil for 0).
 func StagedMigrationManagerFromID(id objc.ID) *StagedMigrationManager {
 	if id == 0 {
 		return nil

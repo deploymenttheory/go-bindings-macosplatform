@@ -18,11 +18,11 @@ type DecodedMessage struct {
 // Unwrap returns the underlying [raw.MEDecodedMessage].
 func (x *DecodedMessage) Unwrap() *raw.MEDecodedMessage { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DecodedMessage) ID() objc.ID { return x.inner.Ptr() }
 
-// DecodedMessageFromID adopts an existing toll-free-bridged object id as a DecodedMessage (nil for 0).
+// DecodedMessageFromID adopts an existing object pointer as a DecodedMessage (nil for 0).
 func DecodedMessageFromID(id objc.ID) *DecodedMessage {
 	if id == 0 {
 		return nil

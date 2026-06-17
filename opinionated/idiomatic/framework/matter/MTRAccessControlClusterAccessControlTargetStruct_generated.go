@@ -18,11 +18,11 @@ type MTRAccessControlClusterAccessControlTargetStruct struct {
 // Unwrap returns the underlying [raw.MTRAccessControlClusterAccessControlTargetStruct].
 func (x *MTRAccessControlClusterAccessControlTargetStruct) Unwrap() *raw.MTRAccessControlClusterAccessControlTargetStruct { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRAccessControlClusterAccessControlTargetStruct) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRAccessControlClusterAccessControlTargetStructFromID adopts an existing toll-free-bridged object id as a MTRAccessControlClusterAccessControlTargetStruct (nil for 0).
+// MTRAccessControlClusterAccessControlTargetStructFromID adopts an existing object pointer as a MTRAccessControlClusterAccessControlTargetStruct (nil for 0).
 func MTRAccessControlClusterAccessControlTargetStructFromID(id objc.ID) *MTRAccessControlClusterAccessControlTargetStruct {
 	if id == 0 {
 		return nil

@@ -17,11 +17,11 @@ type RenderPassAttachmentDescriptor struct {
 // Unwrap returns the underlying [raw.MTLRenderPassAttachmentDescriptor].
 func (x *RenderPassAttachmentDescriptor) Unwrap() *raw.MTLRenderPassAttachmentDescriptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *RenderPassAttachmentDescriptor) ID() objc.ID { return x.inner.Ptr() }
 
-// RenderPassAttachmentDescriptorFromID adopts an existing toll-free-bridged object id as a RenderPassAttachmentDescriptor (nil for 0).
+// RenderPassAttachmentDescriptorFromID adopts an existing object pointer as a RenderPassAttachmentDescriptor (nil for 0).
 func RenderPassAttachmentDescriptorFromID(id objc.ID) *RenderPassAttachmentDescriptor {
 	if id == 0 {
 		return nil

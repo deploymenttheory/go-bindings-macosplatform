@@ -18,11 +18,11 @@ type File struct {
 // Unwrap returns the underlying [raw.DRFile].
 func (x *File) Unwrap() *raw.DRFile { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *File) ID() objc.ID { return x.inner.Ptr() }
 
-// FileFromID adopts an existing toll-free-bridged object id as a File (nil for 0).
+// FileFromID adopts an existing object pointer as a File (nil for 0).
 func FileFromID(id objc.ID) *File {
 	if id == 0 {
 		return nil

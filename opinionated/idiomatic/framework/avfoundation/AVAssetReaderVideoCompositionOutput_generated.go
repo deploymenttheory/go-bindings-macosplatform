@@ -19,11 +19,11 @@ type AssetReaderVideoCompositionOutput struct {
 // Unwrap returns the underlying [raw.AVAssetReaderVideoCompositionOutput].
 func (x *AssetReaderVideoCompositionOutput) Unwrap() *raw.AVAssetReaderVideoCompositionOutput { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AssetReaderVideoCompositionOutput) ID() objc.ID { return x.inner.Ptr() }
 
-// AssetReaderVideoCompositionOutputFromID adopts an existing toll-free-bridged object id as a AssetReaderVideoCompositionOutput (nil for 0).
+// AssetReaderVideoCompositionOutputFromID adopts an existing object pointer as a AssetReaderVideoCompositionOutput (nil for 0).
 func AssetReaderVideoCompositionOutputFromID(id objc.ID) *AssetReaderVideoCompositionOutput {
 	if id == 0 {
 		return nil

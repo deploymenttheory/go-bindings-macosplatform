@@ -19,11 +19,11 @@ type DOMText struct {
 // Unwrap returns the underlying [raw.DOMText].
 func (x *DOMText) Unwrap() *raw.DOMText { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DOMText) ID() objc.ID { return x.inner.Ptr() }
 
-// DOMTextFromID adopts an existing toll-free-bridged object id as a DOMText (nil for 0).
+// DOMTextFromID adopts an existing object pointer as a DOMText (nil for 0).
 func DOMTextFromID(id objc.ID) *DOMText {
 	if id == 0 {
 		return nil

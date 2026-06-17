@@ -20,11 +20,11 @@ type QuartzFilter struct {
 // Unwrap returns the underlying [raw.QuartzFilter].
 func (x *QuartzFilter) Unwrap() *raw.QuartzFilter { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *QuartzFilter) ID() objc.ID { return x.inner.Ptr() }
 
-// QuartzFilterFromID adopts an existing toll-free-bridged object id as a QuartzFilter (nil for 0).
+// QuartzFilterFromID adopts an existing object pointer as a QuartzFilter (nil for 0).
 func QuartzFilterFromID(id objc.ID) *QuartzFilter {
 	if id == 0 {
 		return nil

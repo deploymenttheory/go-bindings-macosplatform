@@ -18,11 +18,11 @@ type IOBluetoothOBEXSession struct {
 // Unwrap returns the underlying [raw.IOBluetoothOBEXSession].
 func (x *IOBluetoothOBEXSession) Unwrap() *raw.IOBluetoothOBEXSession { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *IOBluetoothOBEXSession) ID() objc.ID { return x.inner.Ptr() }
 
-// IOBluetoothOBEXSessionFromID adopts an existing toll-free-bridged object id as a IOBluetoothOBEXSession (nil for 0).
+// IOBluetoothOBEXSessionFromID adopts an existing object pointer as a IOBluetoothOBEXSession (nil for 0).
 func IOBluetoothOBEXSessionFromID(id objc.ID) *IOBluetoothOBEXSession {
 	if id == 0 {
 		return nil

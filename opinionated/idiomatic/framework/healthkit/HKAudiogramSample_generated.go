@@ -18,11 +18,11 @@ type AudiogramSample struct {
 // Unwrap returns the underlying [raw.HKAudiogramSample].
 func (x *AudiogramSample) Unwrap() *raw.HKAudiogramSample { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AudiogramSample) ID() objc.ID { return x.inner.Ptr() }
 
-// AudiogramSampleFromID adopts an existing toll-free-bridged object id as a AudiogramSample (nil for 0).
+// AudiogramSampleFromID adopts an existing object pointer as a AudiogramSample (nil for 0).
 func AudiogramSampleFromID(id objc.ID) *AudiogramSample {
 	if id == 0 {
 		return nil

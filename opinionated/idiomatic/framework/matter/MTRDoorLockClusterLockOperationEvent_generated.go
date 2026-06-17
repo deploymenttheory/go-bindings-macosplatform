@@ -18,11 +18,11 @@ type MTRDoorLockClusterLockOperationEvent struct {
 // Unwrap returns the underlying [raw.MTRDoorLockClusterLockOperationEvent].
 func (x *MTRDoorLockClusterLockOperationEvent) Unwrap() *raw.MTRDoorLockClusterLockOperationEvent { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRDoorLockClusterLockOperationEvent) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRDoorLockClusterLockOperationEventFromID adopts an existing toll-free-bridged object id as a MTRDoorLockClusterLockOperationEvent (nil for 0).
+// MTRDoorLockClusterLockOperationEventFromID adopts an existing object pointer as a MTRDoorLockClusterLockOperationEvent (nil for 0).
 func MTRDoorLockClusterLockOperationEventFromID(id objc.ID) *MTRDoorLockClusterLockOperationEvent {
 	if id == 0 {
 		return nil

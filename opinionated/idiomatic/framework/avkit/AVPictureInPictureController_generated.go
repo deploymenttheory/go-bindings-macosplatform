@@ -18,11 +18,11 @@ type PictureInPictureController struct {
 // Unwrap returns the underlying [raw.AVPictureInPictureController].
 func (x *PictureInPictureController) Unwrap() *raw.AVPictureInPictureController { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PictureInPictureController) ID() objc.ID { return x.inner.Ptr() }
 
-// PictureInPictureControllerFromID adopts an existing toll-free-bridged object id as a PictureInPictureController (nil for 0).
+// PictureInPictureControllerFromID adopts an existing object pointer as a PictureInPictureController (nil for 0).
 func PictureInPictureControllerFromID(id objc.ID) *PictureInPictureController {
 	if id == 0 {
 		return nil

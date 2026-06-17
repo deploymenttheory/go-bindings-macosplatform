@@ -19,11 +19,11 @@ type CachingImageManager struct {
 // Unwrap returns the underlying [raw.PHCachingImageManager].
 func (x *CachingImageManager) Unwrap() *raw.PHCachingImageManager { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CachingImageManager) ID() objc.ID { return x.inner.Ptr() }
 
-// CachingImageManagerFromID adopts an existing toll-free-bridged object id as a CachingImageManager (nil for 0).
+// CachingImageManagerFromID adopts an existing object pointer as a CachingImageManager (nil for 0).
 func CachingImageManagerFromID(id objc.ID) *CachingImageManager {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type MTRDeviceEnergyManagementClusterPauseRequestParams struct {
 // Unwrap returns the underlying [raw.MTRDeviceEnergyManagementClusterPauseRequestParams].
 func (x *MTRDeviceEnergyManagementClusterPauseRequestParams) Unwrap() *raw.MTRDeviceEnergyManagementClusterPauseRequestParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRDeviceEnergyManagementClusterPauseRequestParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRDeviceEnergyManagementClusterPauseRequestParamsFromID adopts an existing toll-free-bridged object id as a MTRDeviceEnergyManagementClusterPauseRequestParams (nil for 0).
+// MTRDeviceEnergyManagementClusterPauseRequestParamsFromID adopts an existing object pointer as a MTRDeviceEnergyManagementClusterPauseRequestParams (nil for 0).
 func MTRDeviceEnergyManagementClusterPauseRequestParamsFromID(id objc.ID) *MTRDeviceEnergyManagementClusterPauseRequestParams {
 	if id == 0 {
 		return nil

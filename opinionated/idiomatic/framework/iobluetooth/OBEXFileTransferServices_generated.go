@@ -19,11 +19,11 @@ type OBEXFileTransferServices struct {
 // Unwrap returns the underlying [raw.OBEXFileTransferServices].
 func (x *OBEXFileTransferServices) Unwrap() *raw.OBEXFileTransferServices { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *OBEXFileTransferServices) ID() objc.ID { return x.inner.Ptr() }
 
-// OBEXFileTransferServicesFromID adopts an existing toll-free-bridged object id as a OBEXFileTransferServices (nil for 0).
+// OBEXFileTransferServicesFromID adopts an existing object pointer as a OBEXFileTransferServices (nil for 0).
 func OBEXFileTransferServicesFromID(id objc.ID) *OBEXFileTransferServices {
 	if id == 0 {
 		return nil

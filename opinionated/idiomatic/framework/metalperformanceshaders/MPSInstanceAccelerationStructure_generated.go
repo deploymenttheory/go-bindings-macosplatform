@@ -23,11 +23,11 @@ type InstanceAccelerationStructure struct {
 // Unwrap returns the underlying [raw.MPSInstanceAccelerationStructure].
 func (x *InstanceAccelerationStructure) Unwrap() *raw.MPSInstanceAccelerationStructure { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *InstanceAccelerationStructure) ID() objc.ID { return x.inner.Ptr() }
 
-// InstanceAccelerationStructureFromID adopts an existing toll-free-bridged object id as a InstanceAccelerationStructure (nil for 0).
+// InstanceAccelerationStructureFromID adopts an existing object pointer as a InstanceAccelerationStructure (nil for 0).
 func InstanceAccelerationStructureFromID(id objc.ID) *InstanceAccelerationStructure {
 	if id == 0 {
 		return nil

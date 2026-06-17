@@ -10,102 +10,102 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// KCSIdentityErrorDomain returns the CoreFoundation constant kCSIdentityErrorDomain as a toll-free-bridged objc.ID.
+// KCSIdentityErrorDomain returns the value of the CoreFoundation reference constant kCSIdentityErrorDomain as an objc.ID.
 func KCSIdentityErrorDomain() objc.ID { return purego.CFConstant(raw.KCSIdentityErrorDomain()) }
 
-// KCSIdentityGeneratePosixName returns the CoreFoundation constant kCSIdentityGeneratePosixName as a toll-free-bridged objc.ID.
+// KCSIdentityGeneratePosixName returns the value of the CoreFoundation reference constant kCSIdentityGeneratePosixName as an objc.ID.
 func KCSIdentityGeneratePosixName() objc.ID { return purego.CFConstant(raw.KCSIdentityGeneratePosixName()) }
 
-// KWSXMLRPCProtocol returns the CoreFoundation constant kWSXMLRPCProtocol as a toll-free-bridged objc.ID.
+// KWSXMLRPCProtocol returns the value of the CoreFoundation reference constant kWSXMLRPCProtocol as an objc.ID.
 func KWSXMLRPCProtocol() objc.ID { return purego.CFConstant(raw.KWSXMLRPCProtocol()) }
 
-// KWSSOAP1999Protocol returns the CoreFoundation constant kWSSOAP1999Protocol as a toll-free-bridged objc.ID.
+// KWSSOAP1999Protocol returns the value of the CoreFoundation reference constant kWSSOAP1999Protocol as an objc.ID.
 func KWSSOAP1999Protocol() objc.ID { return purego.CFConstant(raw.KWSSOAP1999Protocol()) }
 
-// KWSSOAP2001Protocol returns the CoreFoundation constant kWSSOAP2001Protocol as a toll-free-bridged objc.ID.
+// KWSSOAP2001Protocol returns the value of the CoreFoundation reference constant kWSSOAP2001Protocol as an objc.ID.
 func KWSSOAP2001Protocol() objc.ID { return purego.CFConstant(raw.KWSSOAP2001Protocol()) }
 
-// KWSMethodInvocationResult returns the CoreFoundation constant kWSMethodInvocationResult as a toll-free-bridged objc.ID.
+// KWSMethodInvocationResult returns the value of the CoreFoundation reference constant kWSMethodInvocationResult as an objc.ID.
 func KWSMethodInvocationResult() objc.ID { return purego.CFConstant(raw.KWSMethodInvocationResult()) }
 
-// KWSFaultString returns the CoreFoundation constant kWSFaultString as a toll-free-bridged objc.ID.
+// KWSFaultString returns the value of the CoreFoundation reference constant kWSFaultString as an objc.ID.
 func KWSFaultString() objc.ID { return purego.CFConstant(raw.KWSFaultString()) }
 
-// KWSFaultCode returns the CoreFoundation constant kWSFaultCode as a toll-free-bridged objc.ID.
+// KWSFaultCode returns the value of the CoreFoundation reference constant kWSFaultCode as an objc.ID.
 func KWSFaultCode() objc.ID { return purego.CFConstant(raw.KWSFaultCode()) }
 
-// KWSFaultExtra returns the CoreFoundation constant kWSFaultExtra as a toll-free-bridged objc.ID.
+// KWSFaultExtra returns the value of the CoreFoundation reference constant kWSFaultExtra as an objc.ID.
 func KWSFaultExtra() objc.ID { return purego.CFConstant(raw.KWSFaultExtra()) }
 
-// KWSNetworkStreamFaultString returns the CoreFoundation constant kWSNetworkStreamFaultString as a toll-free-bridged objc.ID.
+// KWSNetworkStreamFaultString returns the value of the CoreFoundation reference constant kWSNetworkStreamFaultString as an objc.ID.
 func KWSNetworkStreamFaultString() objc.ID { return purego.CFConstant(raw.KWSNetworkStreamFaultString()) }
 
-// KWSStreamErrorMessage returns the CoreFoundation constant kWSStreamErrorMessage as a toll-free-bridged objc.ID.
+// KWSStreamErrorMessage returns the value of the CoreFoundation reference constant kWSStreamErrorMessage as an objc.ID.
 func KWSStreamErrorMessage() objc.ID { return purego.CFConstant(raw.KWSStreamErrorMessage()) }
 
-// KWSStreamErrorDomain returns the CoreFoundation constant kWSStreamErrorDomain as a toll-free-bridged objc.ID.
+// KWSStreamErrorDomain returns the value of the CoreFoundation reference constant kWSStreamErrorDomain as an objc.ID.
 func KWSStreamErrorDomain() objc.ID { return purego.CFConstant(raw.KWSStreamErrorDomain()) }
 
-// KWSStreamErrorError returns the CoreFoundation constant kWSStreamErrorError as a toll-free-bridged objc.ID.
+// KWSStreamErrorError returns the value of the CoreFoundation reference constant kWSStreamErrorError as an objc.ID.
 func KWSStreamErrorError() objc.ID { return purego.CFConstant(raw.KWSStreamErrorError()) }
 
-// KWSHTTPMessage returns the CoreFoundation constant kWSHTTPMessage as a toll-free-bridged objc.ID.
+// KWSHTTPMessage returns the value of the CoreFoundation reference constant kWSHTTPMessage as an objc.ID.
 func KWSHTTPMessage() objc.ID { return purego.CFConstant(raw.KWSHTTPMessage()) }
 
-// KWSHTTPResponseMessage returns the CoreFoundation constant kWSHTTPResponseMessage as a toll-free-bridged objc.ID.
+// KWSHTTPResponseMessage returns the value of the CoreFoundation reference constant kWSHTTPResponseMessage as an objc.ID.
 func KWSHTTPResponseMessage() objc.ID { return purego.CFConstant(raw.KWSHTTPResponseMessage()) }
 
-// KWSHTTPExtraHeaders returns the CoreFoundation constant kWSHTTPExtraHeaders as a toll-free-bridged objc.ID.
+// KWSHTTPExtraHeaders returns the value of the CoreFoundation reference constant kWSHTTPExtraHeaders as an objc.ID.
 func KWSHTTPExtraHeaders() objc.ID { return purego.CFConstant(raw.KWSHTTPExtraHeaders()) }
 
-// KWSHTTPVersion returns the CoreFoundation constant kWSHTTPVersion as a toll-free-bridged objc.ID.
+// KWSHTTPVersion returns the value of the CoreFoundation reference constant kWSHTTPVersion as an objc.ID.
 func KWSHTTPVersion() objc.ID { return purego.CFConstant(raw.KWSHTTPVersion()) }
 
-// KWSHTTPProxy returns the CoreFoundation constant kWSHTTPProxy as a toll-free-bridged objc.ID.
+// KWSHTTPProxy returns the value of the CoreFoundation reference constant kWSHTTPProxy as an objc.ID.
 func KWSHTTPProxy() objc.ID { return purego.CFConstant(raw.KWSHTTPProxy()) }
 
-// KWSHTTPFollowsRedirects returns the CoreFoundation constant kWSHTTPFollowsRedirects as a toll-free-bridged objc.ID.
+// KWSHTTPFollowsRedirects returns the value of the CoreFoundation reference constant kWSHTTPFollowsRedirects as an objc.ID.
 func KWSHTTPFollowsRedirects() objc.ID { return purego.CFConstant(raw.KWSHTTPFollowsRedirects()) }
 
-// KWSDebugOutgoingHeaders returns the CoreFoundation constant kWSDebugOutgoingHeaders as a toll-free-bridged objc.ID.
+// KWSDebugOutgoingHeaders returns the value of the CoreFoundation reference constant kWSDebugOutgoingHeaders as an objc.ID.
 func KWSDebugOutgoingHeaders() objc.ID { return purego.CFConstant(raw.KWSDebugOutgoingHeaders()) }
 
-// KWSDebugOutgoingBody returns the CoreFoundation constant kWSDebugOutgoingBody as a toll-free-bridged objc.ID.
+// KWSDebugOutgoingBody returns the value of the CoreFoundation reference constant kWSDebugOutgoingBody as an objc.ID.
 func KWSDebugOutgoingBody() objc.ID { return purego.CFConstant(raw.KWSDebugOutgoingBody()) }
 
-// KWSDebugIncomingHeaders returns the CoreFoundation constant kWSDebugIncomingHeaders as a toll-free-bridged objc.ID.
+// KWSDebugIncomingHeaders returns the value of the CoreFoundation reference constant kWSDebugIncomingHeaders as an objc.ID.
 func KWSDebugIncomingHeaders() objc.ID { return purego.CFConstant(raw.KWSDebugIncomingHeaders()) }
 
-// KWSDebugIncomingBody returns the CoreFoundation constant kWSDebugIncomingBody as a toll-free-bridged objc.ID.
+// KWSDebugIncomingBody returns the value of the CoreFoundation reference constant kWSDebugIncomingBody as an objc.ID.
 func KWSDebugIncomingBody() objc.ID { return purego.CFConstant(raw.KWSDebugIncomingBody()) }
 
-// KWSSOAPBodyEncodingStyle returns the CoreFoundation constant kWSSOAPBodyEncodingStyle as a toll-free-bridged objc.ID.
+// KWSSOAPBodyEncodingStyle returns the value of the CoreFoundation reference constant kWSSOAPBodyEncodingStyle as an objc.ID.
 func KWSSOAPBodyEncodingStyle() objc.ID { return purego.CFConstant(raw.KWSSOAPBodyEncodingStyle()) }
 
-// KWSSOAPMethodNamespaceURI returns the CoreFoundation constant kWSSOAPMethodNamespaceURI as a toll-free-bridged objc.ID.
+// KWSSOAPMethodNamespaceURI returns the value of the CoreFoundation reference constant kWSSOAPMethodNamespaceURI as an objc.ID.
 func KWSSOAPMethodNamespaceURI() objc.ID { return purego.CFConstant(raw.KWSSOAPMethodNamespaceURI()) }
 
-// KWSSOAPStyleDoc returns the CoreFoundation constant kWSSOAPStyleDoc as a toll-free-bridged objc.ID.
+// KWSSOAPStyleDoc returns the value of the CoreFoundation reference constant kWSSOAPStyleDoc as an objc.ID.
 func KWSSOAPStyleDoc() objc.ID { return purego.CFConstant(raw.KWSSOAPStyleDoc()) }
 
-// KWSSOAPStyleRPC returns the CoreFoundation constant kWSSOAPStyleRPC as a toll-free-bridged objc.ID.
+// KWSSOAPStyleRPC returns the value of the CoreFoundation reference constant kWSSOAPStyleRPC as an objc.ID.
 func KWSSOAPStyleRPC() objc.ID { return purego.CFConstant(raw.KWSSOAPStyleRPC()) }
 
-// KWSSOAPMessageHeaders returns the CoreFoundation constant kWSSOAPMessageHeaders as a toll-free-bridged objc.ID.
+// KWSSOAPMessageHeaders returns the value of the CoreFoundation reference constant kWSSOAPMessageHeaders as an objc.ID.
 func KWSSOAPMessageHeaders() objc.ID { return purego.CFConstant(raw.KWSSOAPMessageHeaders()) }
 
-// KWSRecordParameterOrder returns the CoreFoundation constant kWSRecordParameterOrder as a toll-free-bridged objc.ID.
+// KWSRecordParameterOrder returns the value of the CoreFoundation reference constant kWSRecordParameterOrder as an objc.ID.
 func KWSRecordParameterOrder() objc.ID { return purego.CFConstant(raw.KWSRecordParameterOrder()) }
 
-// KWSRecordNamespaceURI returns the CoreFoundation constant kWSRecordNamespaceURI as a toll-free-bridged objc.ID.
+// KWSRecordNamespaceURI returns the value of the CoreFoundation reference constant kWSRecordNamespaceURI as an objc.ID.
 func KWSRecordNamespaceURI() objc.ID { return purego.CFConstant(raw.KWSRecordNamespaceURI()) }
 
-// KWSRecordType returns the CoreFoundation constant kWSRecordType as a toll-free-bridged objc.ID.
+// KWSRecordType returns the value of the CoreFoundation reference constant kWSRecordType as an objc.ID.
 func KWSRecordType() objc.ID { return purego.CFConstant(raw.KWSRecordType()) }
 
-// KWSMethodInvocationResultParameterName returns the CoreFoundation constant kWSMethodInvocationResultParameterName as a toll-free-bridged objc.ID.
+// KWSMethodInvocationResultParameterName returns the value of the CoreFoundation reference constant kWSMethodInvocationResultParameterName as an objc.ID.
 func KWSMethodInvocationResultParameterName() objc.ID { return purego.CFConstant(raw.KWSMethodInvocationResultParameterName()) }
 
-// KWSMethodInvocationTimeoutValue returns the CoreFoundation constant kWSMethodInvocationTimeoutValue as a toll-free-bridged objc.ID.
+// KWSMethodInvocationTimeoutValue returns the value of the CoreFoundation reference constant kWSMethodInvocationTimeoutValue as an objc.ID.
 func KWSMethodInvocationTimeoutValue() objc.ID { return purego.CFConstant(raw.KWSMethodInvocationTimeoutValue()) }
 

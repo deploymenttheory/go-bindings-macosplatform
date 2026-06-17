@@ -17,11 +17,11 @@ type CircleRenderer struct {
 // Unwrap returns the underlying [raw.MKCircleRenderer].
 func (x *CircleRenderer) Unwrap() *raw.MKCircleRenderer { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CircleRenderer) ID() objc.ID { return x.inner.Ptr() }
 
-// CircleRendererFromID adopts an existing toll-free-bridged object id as a CircleRenderer (nil for 0).
+// CircleRendererFromID adopts an existing object pointer as a CircleRenderer (nil for 0).
 func CircleRendererFromID(id objc.ID) *CircleRenderer {
 	if id == 0 {
 		return nil

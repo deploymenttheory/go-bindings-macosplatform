@@ -20,11 +20,11 @@ type CaptureAudioFileOutput struct {
 // Unwrap returns the underlying [raw.AVCaptureAudioFileOutput].
 func (x *CaptureAudioFileOutput) Unwrap() *raw.AVCaptureAudioFileOutput { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CaptureAudioFileOutput) ID() objc.ID { return x.inner.Ptr() }
 
-// CaptureAudioFileOutputFromID adopts an existing toll-free-bridged object id as a CaptureAudioFileOutput (nil for 0).
+// CaptureAudioFileOutputFromID adopts an existing object pointer as a CaptureAudioFileOutput (nil for 0).
 func CaptureAudioFileOutputFromID(id objc.ID) *CaptureAudioFileOutput {
 	if id == 0 {
 		return nil

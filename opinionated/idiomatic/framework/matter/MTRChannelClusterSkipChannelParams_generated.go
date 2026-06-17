@@ -18,11 +18,11 @@ type MTRChannelClusterSkipChannelParams struct {
 // Unwrap returns the underlying [raw.MTRChannelClusterSkipChannelParams].
 func (x *MTRChannelClusterSkipChannelParams) Unwrap() *raw.MTRChannelClusterSkipChannelParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRChannelClusterSkipChannelParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRChannelClusterSkipChannelParamsFromID adopts an existing toll-free-bridged object id as a MTRChannelClusterSkipChannelParams (nil for 0).
+// MTRChannelClusterSkipChannelParamsFromID adopts an existing object pointer as a MTRChannelClusterSkipChannelParams (nil for 0).
 func MTRChannelClusterSkipChannelParamsFromID(id objc.ID) *MTRChannelClusterSkipChannelParams {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type OpenGLPixelBuffer struct {
 // Unwrap returns the underlying [raw.NSOpenGLPixelBuffer].
 func (x *OpenGLPixelBuffer) Unwrap() *raw.NSOpenGLPixelBuffer { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *OpenGLPixelBuffer) ID() objc.ID { return x.inner.Ptr() }
 
-// OpenGLPixelBufferFromID adopts an existing toll-free-bridged object id as a OpenGLPixelBuffer (nil for 0).
+// OpenGLPixelBufferFromID adopts an existing object pointer as a OpenGLPixelBuffer (nil for 0).
 func OpenGLPixelBufferFromID(id objc.ID) *OpenGLPixelBuffer {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type MTRApplicationLauncherClusterLaunchAppParams struct {
 // Unwrap returns the underlying [raw.MTRApplicationLauncherClusterLaunchAppParams].
 func (x *MTRApplicationLauncherClusterLaunchAppParams) Unwrap() *raw.MTRApplicationLauncherClusterLaunchAppParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRApplicationLauncherClusterLaunchAppParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRApplicationLauncherClusterLaunchAppParamsFromID adopts an existing toll-free-bridged object id as a MTRApplicationLauncherClusterLaunchAppParams (nil for 0).
+// MTRApplicationLauncherClusterLaunchAppParamsFromID adopts an existing object pointer as a MTRApplicationLauncherClusterLaunchAppParams (nil for 0).
 func MTRApplicationLauncherClusterLaunchAppParamsFromID(id objc.ID) *MTRApplicationLauncherClusterLaunchAppParams {
 	if id == 0 {
 		return nil

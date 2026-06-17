@@ -18,11 +18,11 @@ type MTREnergyEVSEClusterRFIDEvent struct {
 // Unwrap returns the underlying [raw.MTREnergyEVSEClusterRFIDEvent].
 func (x *MTREnergyEVSEClusterRFIDEvent) Unwrap() *raw.MTREnergyEVSEClusterRFIDEvent { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTREnergyEVSEClusterRFIDEvent) ID() objc.ID { return x.inner.Ptr() }
 
-// MTREnergyEVSEClusterRFIDEventFromID adopts an existing toll-free-bridged object id as a MTREnergyEVSEClusterRFIDEvent (nil for 0).
+// MTREnergyEVSEClusterRFIDEventFromID adopts an existing object pointer as a MTREnergyEVSEClusterRFIDEvent (nil for 0).
 func MTREnergyEVSEClusterRFIDEventFromID(id objc.ID) *MTREnergyEVSEClusterRFIDEvent {
 	if id == 0 {
 		return nil

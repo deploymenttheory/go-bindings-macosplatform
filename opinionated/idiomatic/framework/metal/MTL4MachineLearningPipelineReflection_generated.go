@@ -18,11 +18,11 @@ type MTL4MachineLearningPipelineReflection struct {
 // Unwrap returns the underlying [raw.MTL4MachineLearningPipelineReflection].
 func (x *MTL4MachineLearningPipelineReflection) Unwrap() *raw.MTL4MachineLearningPipelineReflection { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTL4MachineLearningPipelineReflection) ID() objc.ID { return x.inner.Ptr() }
 
-// MTL4MachineLearningPipelineReflectionFromID adopts an existing toll-free-bridged object id as a MTL4MachineLearningPipelineReflection (nil for 0).
+// MTL4MachineLearningPipelineReflectionFromID adopts an existing object pointer as a MTL4MachineLearningPipelineReflection (nil for 0).
 func MTL4MachineLearningPipelineReflectionFromID(id objc.ID) *MTL4MachineLearningPipelineReflection {
 	if id == 0 {
 		return nil

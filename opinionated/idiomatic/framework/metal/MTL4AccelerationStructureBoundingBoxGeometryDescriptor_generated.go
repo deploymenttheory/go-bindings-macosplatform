@@ -17,11 +17,11 @@ type MTL4AccelerationStructureBoundingBoxGeometryDescriptor struct {
 // Unwrap returns the underlying [raw.MTL4AccelerationStructureBoundingBoxGeometryDescriptor].
 func (x *MTL4AccelerationStructureBoundingBoxGeometryDescriptor) Unwrap() *raw.MTL4AccelerationStructureBoundingBoxGeometryDescriptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTL4AccelerationStructureBoundingBoxGeometryDescriptor) ID() objc.ID { return x.inner.Ptr() }
 
-// MTL4AccelerationStructureBoundingBoxGeometryDescriptorFromID adopts an existing toll-free-bridged object id as a MTL4AccelerationStructureBoundingBoxGeometryDescriptor (nil for 0).
+// MTL4AccelerationStructureBoundingBoxGeometryDescriptorFromID adopts an existing object pointer as a MTL4AccelerationStructureBoundingBoxGeometryDescriptor (nil for 0).
 func MTL4AccelerationStructureBoundingBoxGeometryDescriptorFromID(id objc.ID) *MTL4AccelerationStructureBoundingBoxGeometryDescriptor {
 	if id == 0 {
 		return nil

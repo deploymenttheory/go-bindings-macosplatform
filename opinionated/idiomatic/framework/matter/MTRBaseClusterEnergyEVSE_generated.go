@@ -21,11 +21,11 @@ type MTRBaseClusterEnergyEVSE struct {
 // Unwrap returns the underlying [raw.MTRBaseClusterEnergyEVSE].
 func (x *MTRBaseClusterEnergyEVSE) Unwrap() *raw.MTRBaseClusterEnergyEVSE { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRBaseClusterEnergyEVSE) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRBaseClusterEnergyEVSEFromID adopts an existing toll-free-bridged object id as a MTRBaseClusterEnergyEVSE (nil for 0).
+// MTRBaseClusterEnergyEVSEFromID adopts an existing object pointer as a MTRBaseClusterEnergyEVSE (nil for 0).
 func MTRBaseClusterEnergyEVSEFromID(id objc.ID) *MTRBaseClusterEnergyEVSE {
 	if id == 0 {
 		return nil

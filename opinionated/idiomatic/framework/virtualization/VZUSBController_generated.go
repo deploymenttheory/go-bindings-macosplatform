@@ -21,11 +21,11 @@ type USBController struct {
 // Unwrap returns the underlying [raw.VZUSBController].
 func (x *USBController) Unwrap() *raw.VZUSBController { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *USBController) ID() objc.ID { return x.inner.Ptr() }
 
-// USBControllerFromID adopts an existing toll-free-bridged object id as a USBController (nil for 0).
+// USBControllerFromID adopts an existing object pointer as a USBController (nil for 0).
 func USBControllerFromID(id objc.ID) *USBController {
 	if id == 0 {
 		return nil

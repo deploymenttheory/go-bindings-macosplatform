@@ -18,11 +18,11 @@ type AttributedStringMarkdownSourcePosition struct {
 // Unwrap returns the underlying [raw.NSAttributedStringMarkdownSourcePosition].
 func (x *AttributedStringMarkdownSourcePosition) Unwrap() *raw.NSAttributedStringMarkdownSourcePosition { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AttributedStringMarkdownSourcePosition) ID() objc.ID { return x.inner.Ptr() }
 
-// AttributedStringMarkdownSourcePositionFromID adopts an existing toll-free-bridged object id as a AttributedStringMarkdownSourcePosition (nil for 0).
+// AttributedStringMarkdownSourcePositionFromID adopts an existing object pointer as a AttributedStringMarkdownSourcePosition (nil for 0).
 func AttributedStringMarkdownSourcePositionFromID(id objc.ID) *AttributedStringMarkdownSourcePosition {
 	if id == 0 {
 		return nil

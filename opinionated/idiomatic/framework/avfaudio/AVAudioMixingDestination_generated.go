@@ -17,11 +17,11 @@ type AudioMixingDestination struct {
 // Unwrap returns the underlying [raw.AVAudioMixingDestination].
 func (x *AudioMixingDestination) Unwrap() *raw.AVAudioMixingDestination { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AudioMixingDestination) ID() objc.ID { return x.inner.Ptr() }
 
-// AudioMixingDestinationFromID adopts an existing toll-free-bridged object id as a AudioMixingDestination (nil for 0).
+// AudioMixingDestinationFromID adopts an existing object pointer as a AudioMixingDestination (nil for 0).
 func AudioMixingDestinationFromID(id objc.ID) *AudioMixingDestination {
 	if id == 0 {
 		return nil

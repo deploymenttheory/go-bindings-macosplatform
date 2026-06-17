@@ -19,11 +19,11 @@ type ParameterNode struct {
 // Unwrap returns the underlying [raw.AUParameterNode].
 func (x *ParameterNode) Unwrap() *raw.AUParameterNode { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ParameterNode) ID() objc.ID { return x.inner.Ptr() }
 
-// ParameterNodeFromID adopts an existing toll-free-bridged object id as a ParameterNode (nil for 0).
+// ParameterNodeFromID adopts an existing object pointer as a ParameterNode (nil for 0).
 func ParameterNodeFromID(id objc.ID) *ParameterNode {
 	if id == 0 {
 		return nil

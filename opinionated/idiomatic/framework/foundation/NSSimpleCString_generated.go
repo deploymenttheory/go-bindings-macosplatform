@@ -17,11 +17,11 @@ type SimpleCString struct {
 // Unwrap returns the underlying [raw.NSSimpleCString].
 func (x *SimpleCString) Unwrap() *raw.NSSimpleCString { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SimpleCString) ID() objc.ID { return x.inner.Ptr() }
 
-// SimpleCStringFromID adopts an existing toll-free-bridged object id as a SimpleCString (nil for 0).
+// SimpleCStringFromID adopts an existing object pointer as a SimpleCString (nil for 0).
 func SimpleCStringFromID(id objc.ID) *SimpleCString {
 	if id == 0 {
 		return nil

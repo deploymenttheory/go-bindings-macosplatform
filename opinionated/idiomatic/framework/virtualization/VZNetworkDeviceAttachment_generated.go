@@ -17,11 +17,11 @@ type NetworkDeviceAttachment struct {
 // Unwrap returns the underlying [raw.VZNetworkDeviceAttachment].
 func (x *NetworkDeviceAttachment) Unwrap() *raw.VZNetworkDeviceAttachment { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NetworkDeviceAttachment) ID() objc.ID { return x.inner.Ptr() }
 
-// NetworkDeviceAttachmentFromID adopts an existing toll-free-bridged object id as a NetworkDeviceAttachment (nil for 0).
+// NetworkDeviceAttachmentFromID adopts an existing object pointer as a NetworkDeviceAttachment (nil for 0).
 func NetworkDeviceAttachmentFromID(id objc.ID) *NetworkDeviceAttachment {
 	if id == 0 {
 		return nil

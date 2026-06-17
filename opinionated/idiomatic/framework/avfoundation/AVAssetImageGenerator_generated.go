@@ -22,11 +22,11 @@ type AssetImageGenerator struct {
 // Unwrap returns the underlying [raw.AVAssetImageGenerator].
 func (x *AssetImageGenerator) Unwrap() *raw.AVAssetImageGenerator { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AssetImageGenerator) ID() objc.ID { return x.inner.Ptr() }
 
-// AssetImageGeneratorFromID adopts an existing toll-free-bridged object id as a AssetImageGenerator (nil for 0).
+// AssetImageGeneratorFromID adopts an existing object pointer as a AssetImageGenerator (nil for 0).
 func AssetImageGeneratorFromID(id objc.ID) *AssetImageGenerator {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type MTRDeviceEnergyManagementClusterCancelPowerAdjustRequestParams struct {
 // Unwrap returns the underlying [raw.MTRDeviceEnergyManagementClusterCancelPowerAdjustRequestParams].
 func (x *MTRDeviceEnergyManagementClusterCancelPowerAdjustRequestParams) Unwrap() *raw.MTRDeviceEnergyManagementClusterCancelPowerAdjustRequestParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRDeviceEnergyManagementClusterCancelPowerAdjustRequestParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRDeviceEnergyManagementClusterCancelPowerAdjustRequestParamsFromID adopts an existing toll-free-bridged object id as a MTRDeviceEnergyManagementClusterCancelPowerAdjustRequestParams (nil for 0).
+// MTRDeviceEnergyManagementClusterCancelPowerAdjustRequestParamsFromID adopts an existing object pointer as a MTRDeviceEnergyManagementClusterCancelPowerAdjustRequestParams (nil for 0).
 func MTRDeviceEnergyManagementClusterCancelPowerAdjustRequestParamsFromID(id objc.ID) *MTRDeviceEnergyManagementClusterCancelPowerAdjustRequestParams {
 	if id == 0 {
 		return nil

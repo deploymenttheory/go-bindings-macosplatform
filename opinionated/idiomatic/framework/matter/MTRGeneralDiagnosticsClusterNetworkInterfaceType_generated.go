@@ -17,11 +17,11 @@ type MTRGeneralDiagnosticsClusterNetworkInterfaceType struct {
 // Unwrap returns the underlying [raw.MTRGeneralDiagnosticsClusterNetworkInterfaceType].
 func (x *MTRGeneralDiagnosticsClusterNetworkInterfaceType) Unwrap() *raw.MTRGeneralDiagnosticsClusterNetworkInterfaceType { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRGeneralDiagnosticsClusterNetworkInterfaceType) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRGeneralDiagnosticsClusterNetworkInterfaceTypeFromID adopts an existing toll-free-bridged object id as a MTRGeneralDiagnosticsClusterNetworkInterfaceType (nil for 0).
+// MTRGeneralDiagnosticsClusterNetworkInterfaceTypeFromID adopts an existing object pointer as a MTRGeneralDiagnosticsClusterNetworkInterfaceType (nil for 0).
 func MTRGeneralDiagnosticsClusterNetworkInterfaceTypeFromID(id objc.ID) *MTRGeneralDiagnosticsClusterNetworkInterfaceType {
 	if id == 0 {
 		return nil

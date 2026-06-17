@@ -18,11 +18,11 @@ type TransformRotateZOp struct {
 // Unwrap returns the underlying [raw.MDLTransformRotateZOp].
 func (x *TransformRotateZOp) Unwrap() *raw.MDLTransformRotateZOp { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *TransformRotateZOp) ID() objc.ID { return x.inner.Ptr() }
 
-// TransformRotateZOpFromID adopts an existing toll-free-bridged object id as a TransformRotateZOp (nil for 0).
+// TransformRotateZOpFromID adopts an existing object pointer as a TransformRotateZOp (nil for 0).
 func TransformRotateZOpFromID(id objc.ID) *TransformRotateZOp {
 	if id == 0 {
 		return nil

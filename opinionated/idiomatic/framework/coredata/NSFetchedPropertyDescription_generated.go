@@ -17,11 +17,11 @@ type FetchedPropertyDescription struct {
 // Unwrap returns the underlying [raw.NSFetchedPropertyDescription].
 func (x *FetchedPropertyDescription) Unwrap() *raw.NSFetchedPropertyDescription { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *FetchedPropertyDescription) ID() objc.ID { return x.inner.Ptr() }
 
-// FetchedPropertyDescriptionFromID adopts an existing toll-free-bridged object id as a FetchedPropertyDescription (nil for 0).
+// FetchedPropertyDescriptionFromID adopts an existing object pointer as a FetchedPropertyDescription (nil for 0).
 func FetchedPropertyDescriptionFromID(id objc.ID) *FetchedPropertyDescription {
 	if id == 0 {
 		return nil

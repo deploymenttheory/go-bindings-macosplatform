@@ -21,11 +21,11 @@ type AsynchronousVideoCompositionRequest struct {
 // Unwrap returns the underlying [raw.AVAsynchronousVideoCompositionRequest].
 func (x *AsynchronousVideoCompositionRequest) Unwrap() *raw.AVAsynchronousVideoCompositionRequest { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AsynchronousVideoCompositionRequest) ID() objc.ID { return x.inner.Ptr() }
 
-// AsynchronousVideoCompositionRequestFromID adopts an existing toll-free-bridged object id as a AsynchronousVideoCompositionRequest (nil for 0).
+// AsynchronousVideoCompositionRequestFromID adopts an existing object pointer as a AsynchronousVideoCompositionRequest (nil for 0).
 func AsynchronousVideoCompositionRequestFromID(id objc.ID) *AsynchronousVideoCompositionRequest {
 	if id == 0 {
 		return nil

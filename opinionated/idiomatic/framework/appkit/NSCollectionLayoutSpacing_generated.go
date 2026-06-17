@@ -17,11 +17,11 @@ type CollectionLayoutSpacing struct {
 // Unwrap returns the underlying [raw.NSCollectionLayoutSpacing].
 func (x *CollectionLayoutSpacing) Unwrap() *raw.NSCollectionLayoutSpacing { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CollectionLayoutSpacing) ID() objc.ID { return x.inner.Ptr() }
 
-// CollectionLayoutSpacingFromID adopts an existing toll-free-bridged object id as a CollectionLayoutSpacing (nil for 0).
+// CollectionLayoutSpacingFromID adopts an existing object pointer as a CollectionLayoutSpacing (nil for 0).
 func CollectionLayoutSpacingFromID(id objc.ID) *CollectionLayoutSpacing {
 	if id == 0 {
 		return nil

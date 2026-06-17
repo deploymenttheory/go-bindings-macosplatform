@@ -18,11 +18,11 @@ type PhysicsVehicle struct {
 // Unwrap returns the underlying [raw.SCNPhysicsVehicle].
 func (x *PhysicsVehicle) Unwrap() *raw.SCNPhysicsVehicle { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PhysicsVehicle) ID() objc.ID { return x.inner.Ptr() }
 
-// PhysicsVehicleFromID adopts an existing toll-free-bridged object id as a PhysicsVehicle (nil for 0).
+// PhysicsVehicleFromID adopts an existing object pointer as a PhysicsVehicle (nil for 0).
 func PhysicsVehicleFromID(id objc.ID) *PhysicsVehicle {
 	if id == 0 {
 		return nil

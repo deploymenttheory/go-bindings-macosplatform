@@ -18,11 +18,11 @@ type ReplicatorLayer struct {
 // Unwrap returns the underlying [raw.CAReplicatorLayer].
 func (x *ReplicatorLayer) Unwrap() *raw.CAReplicatorLayer { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ReplicatorLayer) ID() objc.ID { return x.inner.Ptr() }
 
-// ReplicatorLayerFromID adopts an existing toll-free-bridged object id as a ReplicatorLayer (nil for 0).
+// ReplicatorLayerFromID adopts an existing object pointer as a ReplicatorLayer (nil for 0).
 func ReplicatorLayerFromID(id objc.ID) *ReplicatorLayer {
 	if id == 0 {
 		return nil

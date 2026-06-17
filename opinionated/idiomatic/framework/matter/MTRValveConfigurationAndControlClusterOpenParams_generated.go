@@ -18,11 +18,11 @@ type MTRValveConfigurationAndControlClusterOpenParams struct {
 // Unwrap returns the underlying [raw.MTRValveConfigurationAndControlClusterOpenParams].
 func (x *MTRValveConfigurationAndControlClusterOpenParams) Unwrap() *raw.MTRValveConfigurationAndControlClusterOpenParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRValveConfigurationAndControlClusterOpenParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRValveConfigurationAndControlClusterOpenParamsFromID adopts an existing toll-free-bridged object id as a MTRValveConfigurationAndControlClusterOpenParams (nil for 0).
+// MTRValveConfigurationAndControlClusterOpenParamsFromID adopts an existing object pointer as a MTRValveConfigurationAndControlClusterOpenParams (nil for 0).
 func MTRValveConfigurationAndControlClusterOpenParamsFromID(id objc.ID) *MTRValveConfigurationAndControlClusterOpenParams {
 	if id == 0 {
 		return nil

@@ -19,11 +19,11 @@ type CNNNormalizationGammaAndBetaState struct {
 // Unwrap returns the underlying [raw.MPSCNNNormalizationGammaAndBetaState].
 func (x *CNNNormalizationGammaAndBetaState) Unwrap() *raw.MPSCNNNormalizationGammaAndBetaState { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CNNNormalizationGammaAndBetaState) ID() objc.ID { return x.inner.Ptr() }
 
-// CNNNormalizationGammaAndBetaStateFromID adopts an existing toll-free-bridged object id as a CNNNormalizationGammaAndBetaState (nil for 0).
+// CNNNormalizationGammaAndBetaStateFromID adopts an existing object pointer as a CNNNormalizationGammaAndBetaState (nil for 0).
 func CNNNormalizationGammaAndBetaStateFromID(id objc.ID) *CNNNormalizationGammaAndBetaState {
 	if id == 0 {
 		return nil

@@ -20,11 +20,11 @@ type TreeController struct {
 // Unwrap returns the underlying [raw.NSTreeController].
 func (x *TreeController) Unwrap() *raw.NSTreeController { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *TreeController) ID() objc.ID { return x.inner.Ptr() }
 
-// TreeControllerFromID adopts an existing toll-free-bridged object id as a TreeController (nil for 0).
+// TreeControllerFromID adopts an existing object pointer as a TreeController (nil for 0).
 func TreeControllerFromID(id objc.ID) *TreeController {
 	if id == 0 {
 		return nil

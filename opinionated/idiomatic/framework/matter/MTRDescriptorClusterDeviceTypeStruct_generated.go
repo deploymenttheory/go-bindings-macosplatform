@@ -18,11 +18,11 @@ type MTRDescriptorClusterDeviceTypeStruct struct {
 // Unwrap returns the underlying [raw.MTRDescriptorClusterDeviceTypeStruct].
 func (x *MTRDescriptorClusterDeviceTypeStruct) Unwrap() *raw.MTRDescriptorClusterDeviceTypeStruct { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRDescriptorClusterDeviceTypeStruct) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRDescriptorClusterDeviceTypeStructFromID adopts an existing toll-free-bridged object id as a MTRDescriptorClusterDeviceTypeStruct (nil for 0).
+// MTRDescriptorClusterDeviceTypeStructFromID adopts an existing object pointer as a MTRDescriptorClusterDeviceTypeStruct (nil for 0).
 func MTRDescriptorClusterDeviceTypeStructFromID(id objc.ID) *MTRDescriptorClusterDeviceTypeStruct {
 	if id == 0 {
 		return nil

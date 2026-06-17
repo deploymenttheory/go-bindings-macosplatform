@@ -17,11 +17,11 @@ type ScoreChallenge struct {
 // Unwrap returns the underlying [raw.GKScoreChallenge].
 func (x *ScoreChallenge) Unwrap() *raw.GKScoreChallenge { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ScoreChallenge) ID() objc.ID { return x.inner.Ptr() }
 
-// ScoreChallengeFromID adopts an existing toll-free-bridged object id as a ScoreChallenge (nil for 0).
+// ScoreChallengeFromID adopts an existing object pointer as a ScoreChallenge (nil for 0).
 func ScoreChallengeFromID(id objc.ID) *ScoreChallenge {
 	if id == 0 {
 		return nil

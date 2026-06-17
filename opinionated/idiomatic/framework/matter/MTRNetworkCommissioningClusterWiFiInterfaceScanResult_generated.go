@@ -17,11 +17,11 @@ type MTRNetworkCommissioningClusterWiFiInterfaceScanResult struct {
 // Unwrap returns the underlying [raw.MTRNetworkCommissioningClusterWiFiInterfaceScanResult].
 func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResult) Unwrap() *raw.MTRNetworkCommissioningClusterWiFiInterfaceScanResult { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResult) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRNetworkCommissioningClusterWiFiInterfaceScanResultFromID adopts an existing toll-free-bridged object id as a MTRNetworkCommissioningClusterWiFiInterfaceScanResult (nil for 0).
+// MTRNetworkCommissioningClusterWiFiInterfaceScanResultFromID adopts an existing object pointer as a MTRNetworkCommissioningClusterWiFiInterfaceScanResult (nil for 0).
 func MTRNetworkCommissioningClusterWiFiInterfaceScanResultFromID(id objc.ID) *MTRNetworkCommissioningClusterWiFiInterfaceScanResult {
 	if id == 0 {
 		return nil

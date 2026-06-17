@@ -21,11 +21,11 @@ type FileProviderManager struct {
 // Unwrap returns the underlying [raw.NSFileProviderManager].
 func (x *FileProviderManager) Unwrap() *raw.NSFileProviderManager { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *FileProviderManager) ID() objc.ID { return x.inner.Ptr() }
 
-// FileProviderManagerFromID adopts an existing toll-free-bridged object id as a FileProviderManager (nil for 0).
+// FileProviderManagerFromID adopts an existing object pointer as a FileProviderManager (nil for 0).
 func FileProviderManagerFromID(id objc.ID) *FileProviderManager {
 	if id == 0 {
 		return nil

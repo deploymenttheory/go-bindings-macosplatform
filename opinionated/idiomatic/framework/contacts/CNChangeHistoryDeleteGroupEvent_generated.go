@@ -18,11 +18,11 @@ type ChangeHistoryDeleteGroupEvent struct {
 // Unwrap returns the underlying [raw.CNChangeHistoryDeleteGroupEvent].
 func (x *ChangeHistoryDeleteGroupEvent) Unwrap() *raw.CNChangeHistoryDeleteGroupEvent { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ChangeHistoryDeleteGroupEvent) ID() objc.ID { return x.inner.Ptr() }
 
-// ChangeHistoryDeleteGroupEventFromID adopts an existing toll-free-bridged object id as a ChangeHistoryDeleteGroupEvent (nil for 0).
+// ChangeHistoryDeleteGroupEventFromID adopts an existing object pointer as a ChangeHistoryDeleteGroupEvent (nil for 0).
 func ChangeHistoryDeleteGroupEventFromID(id objc.ID) *ChangeHistoryDeleteGroupEvent {
 	if id == 0 {
 		return nil

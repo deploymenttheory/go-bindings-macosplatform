@@ -18,11 +18,11 @@ type LocalPointsOfInterestRequest struct {
 // Unwrap returns the underlying [raw.MKLocalPointsOfInterestRequest].
 func (x *LocalPointsOfInterestRequest) Unwrap() *raw.MKLocalPointsOfInterestRequest { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *LocalPointsOfInterestRequest) ID() objc.ID { return x.inner.Ptr() }
 
-// LocalPointsOfInterestRequestFromID adopts an existing toll-free-bridged object id as a LocalPointsOfInterestRequest (nil for 0).
+// LocalPointsOfInterestRequestFromID adopts an existing object pointer as a LocalPointsOfInterestRequest (nil for 0).
 func LocalPointsOfInterestRequestFromID(id objc.ID) *LocalPointsOfInterestRequest {
 	if id == 0 {
 		return nil

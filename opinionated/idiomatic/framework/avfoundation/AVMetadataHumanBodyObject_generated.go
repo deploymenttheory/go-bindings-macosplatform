@@ -17,11 +17,11 @@ type MetadataHumanBodyObject struct {
 // Unwrap returns the underlying [raw.AVMetadataHumanBodyObject].
 func (x *MetadataHumanBodyObject) Unwrap() *raw.AVMetadataHumanBodyObject { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MetadataHumanBodyObject) ID() objc.ID { return x.inner.Ptr() }
 
-// MetadataHumanBodyObjectFromID adopts an existing toll-free-bridged object id as a MetadataHumanBodyObject (nil for 0).
+// MetadataHumanBodyObjectFromID adopts an existing object pointer as a MetadataHumanBodyObject (nil for 0).
 func MetadataHumanBodyObjectFromID(id objc.ID) *MetadataHumanBodyObject {
 	if id == 0 {
 		return nil

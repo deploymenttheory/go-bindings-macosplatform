@@ -18,11 +18,11 @@ type DetectedObjectObservation struct {
 // Unwrap returns the underlying [raw.VNDetectedObjectObservation].
 func (x *DetectedObjectObservation) Unwrap() *raw.VNDetectedObjectObservation { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DetectedObjectObservation) ID() objc.ID { return x.inner.Ptr() }
 
-// DetectedObjectObservationFromID adopts an existing toll-free-bridged object id as a DetectedObjectObservation (nil for 0).
+// DetectedObjectObservationFromID adopts an existing object pointer as a DetectedObjectObservation (nil for 0).
 func DetectedObjectObservationFromID(id objc.ID) *DetectedObjectObservation {
 	if id == 0 {
 		return nil

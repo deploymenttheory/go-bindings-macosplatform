@@ -18,11 +18,11 @@ type SyncEngineFetchedRecordDeletion struct {
 // Unwrap returns the underlying [raw.CKSyncEngineFetchedRecordDeletion].
 func (x *SyncEngineFetchedRecordDeletion) Unwrap() *raw.CKSyncEngineFetchedRecordDeletion { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SyncEngineFetchedRecordDeletion) ID() objc.ID { return x.inner.Ptr() }
 
-// SyncEngineFetchedRecordDeletionFromID adopts an existing toll-free-bridged object id as a SyncEngineFetchedRecordDeletion (nil for 0).
+// SyncEngineFetchedRecordDeletionFromID adopts an existing object pointer as a SyncEngineFetchedRecordDeletion (nil for 0).
 func SyncEngineFetchedRecordDeletionFromID(id objc.ID) *SyncEngineFetchedRecordDeletion {
 	if id == 0 {
 		return nil

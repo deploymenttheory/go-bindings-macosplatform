@@ -21,11 +21,11 @@ type ContentKeyRequest struct {
 // Unwrap returns the underlying [raw.AVContentKeyRequest].
 func (x *ContentKeyRequest) Unwrap() *raw.AVContentKeyRequest { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ContentKeyRequest) ID() objc.ID { return x.inner.Ptr() }
 
-// ContentKeyRequestFromID adopts an existing toll-free-bridged object id as a ContentKeyRequest (nil for 0).
+// ContentKeyRequestFromID adopts an existing object pointer as a ContentKeyRequest (nil for 0).
 func ContentKeyRequestFromID(id objc.ID) *ContentKeyRequest {
 	if id == 0 {
 		return nil

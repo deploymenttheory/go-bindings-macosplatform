@@ -18,11 +18,11 @@ type PresentationIntent struct {
 // Unwrap returns the underlying [raw.NSPresentationIntent].
 func (x *PresentationIntent) Unwrap() *raw.NSPresentationIntent { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PresentationIntent) ID() objc.ID { return x.inner.Ptr() }
 
-// PresentationIntentFromID adopts an existing toll-free-bridged object id as a PresentationIntent (nil for 0).
+// PresentationIntentFromID adopts an existing object pointer as a PresentationIntent (nil for 0).
 func PresentationIntentFromID(id objc.ID) *PresentationIntent {
 	if id == 0 {
 		return nil

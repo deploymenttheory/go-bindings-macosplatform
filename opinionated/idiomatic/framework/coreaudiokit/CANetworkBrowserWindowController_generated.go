@@ -17,11 +17,11 @@ type CANetworkBrowserWindowController struct {
 // Unwrap returns the underlying [raw.CANetworkBrowserWindowController].
 func (x *CANetworkBrowserWindowController) Unwrap() *raw.CANetworkBrowserWindowController { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CANetworkBrowserWindowController) ID() objc.ID { return x.inner.Ptr() }
 
-// CANetworkBrowserWindowControllerFromID adopts an existing toll-free-bridged object id as a CANetworkBrowserWindowController (nil for 0).
+// CANetworkBrowserWindowControllerFromID adopts an existing object pointer as a CANetworkBrowserWindowController (nil for 0).
 func CANetworkBrowserWindowControllerFromID(id objc.ID) *CANetworkBrowserWindowController {
 	if id == 0 {
 		return nil

@@ -20,11 +20,11 @@ type CollaborationOptionsGroup struct {
 // Unwrap returns the underlying [raw.SWCollaborationOptionsGroup].
 func (x *CollaborationOptionsGroup) Unwrap() *raw.SWCollaborationOptionsGroup { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CollaborationOptionsGroup) ID() objc.ID { return x.inner.Ptr() }
 
-// CollaborationOptionsGroupFromID adopts an existing toll-free-bridged object id as a CollaborationOptionsGroup (nil for 0).
+// CollaborationOptionsGroupFromID adopts an existing object pointer as a CollaborationOptionsGroup (nil for 0).
 func CollaborationOptionsGroupFromID(id objc.ID) *CollaborationOptionsGroup {
 	if id == 0 {
 		return nil

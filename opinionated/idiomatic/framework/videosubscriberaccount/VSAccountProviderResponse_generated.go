@@ -18,11 +18,11 @@ type VSAccountProviderResponse struct {
 // Unwrap returns the underlying [raw.VSAccountProviderResponse].
 func (x *VSAccountProviderResponse) Unwrap() *raw.VSAccountProviderResponse { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *VSAccountProviderResponse) ID() objc.ID { return x.inner.Ptr() }
 
-// VSAccountProviderResponseFromID adopts an existing toll-free-bridged object id as a VSAccountProviderResponse (nil for 0).
+// VSAccountProviderResponseFromID adopts an existing object pointer as a VSAccountProviderResponse (nil for 0).
 func VSAccountProviderResponseFromID(id objc.ID) *VSAccountProviderResponse {
 	if id == 0 {
 		return nil

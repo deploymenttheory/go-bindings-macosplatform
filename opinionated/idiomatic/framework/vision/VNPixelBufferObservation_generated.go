@@ -19,11 +19,11 @@ type PixelBufferObservation struct {
 // Unwrap returns the underlying [raw.VNPixelBufferObservation].
 func (x *PixelBufferObservation) Unwrap() *raw.VNPixelBufferObservation { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PixelBufferObservation) ID() objc.ID { return x.inner.Ptr() }
 
-// PixelBufferObservationFromID adopts an existing toll-free-bridged object id as a PixelBufferObservation (nil for 0).
+// PixelBufferObservationFromID adopts an existing object pointer as a PixelBufferObservation (nil for 0).
 func PixelBufferObservationFromID(id objc.ID) *PixelBufferObservation {
 	if id == 0 {
 		return nil

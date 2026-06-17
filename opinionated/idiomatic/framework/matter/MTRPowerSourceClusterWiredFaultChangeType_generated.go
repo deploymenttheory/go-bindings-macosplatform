@@ -18,11 +18,11 @@ type MTRPowerSourceClusterWiredFaultChangeType struct {
 // Unwrap returns the underlying [raw.MTRPowerSourceClusterWiredFaultChangeType].
 func (x *MTRPowerSourceClusterWiredFaultChangeType) Unwrap() *raw.MTRPowerSourceClusterWiredFaultChangeType { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRPowerSourceClusterWiredFaultChangeType) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRPowerSourceClusterWiredFaultChangeTypeFromID adopts an existing toll-free-bridged object id as a MTRPowerSourceClusterWiredFaultChangeType (nil for 0).
+// MTRPowerSourceClusterWiredFaultChangeTypeFromID adopts an existing object pointer as a MTRPowerSourceClusterWiredFaultChangeType (nil for 0).
 func MTRPowerSourceClusterWiredFaultChangeTypeFromID(id objc.ID) *MTRPowerSourceClusterWiredFaultChangeType {
 	if id == 0 {
 		return nil

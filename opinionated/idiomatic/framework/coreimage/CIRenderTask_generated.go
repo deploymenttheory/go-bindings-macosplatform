@@ -17,11 +17,11 @@ type RenderTask struct {
 // Unwrap returns the underlying [raw.CIRenderTask].
 func (x *RenderTask) Unwrap() *raw.CIRenderTask { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *RenderTask) ID() objc.ID { return x.inner.Ptr() }
 
-// RenderTaskFromID adopts an existing toll-free-bridged object id as a RenderTask (nil for 0).
+// RenderTaskFromID adopts an existing object pointer as a RenderTask (nil for 0).
 func RenderTaskFromID(id objc.ID) *RenderTask {
 	if id == 0 {
 		return nil

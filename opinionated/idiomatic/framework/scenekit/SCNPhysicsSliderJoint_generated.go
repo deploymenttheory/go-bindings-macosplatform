@@ -17,11 +17,11 @@ type PhysicsSliderJoint struct {
 // Unwrap returns the underlying [raw.SCNPhysicsSliderJoint].
 func (x *PhysicsSliderJoint) Unwrap() *raw.SCNPhysicsSliderJoint { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PhysicsSliderJoint) ID() objc.ID { return x.inner.Ptr() }
 
-// PhysicsSliderJointFromID adopts an existing toll-free-bridged object id as a PhysicsSliderJoint (nil for 0).
+// PhysicsSliderJointFromID adopts an existing object pointer as a PhysicsSliderJoint (nil for 0).
 func PhysicsSliderJointFromID(id objc.ID) *PhysicsSliderJoint {
 	if id == 0 {
 		return nil

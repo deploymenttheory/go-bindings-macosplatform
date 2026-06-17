@@ -19,11 +19,11 @@ type DetectHumanHandPoseRequest struct {
 // Unwrap returns the underlying [raw.VNDetectHumanHandPoseRequest].
 func (x *DetectHumanHandPoseRequest) Unwrap() *raw.VNDetectHumanHandPoseRequest { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DetectHumanHandPoseRequest) ID() objc.ID { return x.inner.Ptr() }
 
-// DetectHumanHandPoseRequestFromID adopts an existing toll-free-bridged object id as a DetectHumanHandPoseRequest (nil for 0).
+// DetectHumanHandPoseRequestFromID adopts an existing object pointer as a DetectHumanHandPoseRequest (nil for 0).
 func DetectHumanHandPoseRequestFromID(id objc.ID) *DetectHumanHandPoseRequest {
 	if id == 0 {
 		return nil

@@ -21,11 +21,11 @@ type NNOptimizerStochasticGradientDescent struct {
 // Unwrap returns the underlying [raw.MPSNNOptimizerStochasticGradientDescent].
 func (x *NNOptimizerStochasticGradientDescent) Unwrap() *raw.MPSNNOptimizerStochasticGradientDescent { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NNOptimizerStochasticGradientDescent) ID() objc.ID { return x.inner.Ptr() }
 
-// NNOptimizerStochasticGradientDescentFromID adopts an existing toll-free-bridged object id as a NNOptimizerStochasticGradientDescent (nil for 0).
+// NNOptimizerStochasticGradientDescentFromID adopts an existing object pointer as a NNOptimizerStochasticGradientDescent (nil for 0).
 func NNOptimizerStochasticGradientDescentFromID(id objc.ID) *NNOptimizerStochasticGradientDescent {
 	if id == 0 {
 		return nil

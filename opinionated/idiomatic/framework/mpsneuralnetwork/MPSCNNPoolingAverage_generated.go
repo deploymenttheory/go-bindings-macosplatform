@@ -19,11 +19,11 @@ type CNNPoolingAverage struct {
 // Unwrap returns the underlying [raw.MPSCNNPoolingAverage].
 func (x *CNNPoolingAverage) Unwrap() *raw.MPSCNNPoolingAverage { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CNNPoolingAverage) ID() objc.ID { return x.inner.Ptr() }
 
-// CNNPoolingAverageFromID adopts an existing toll-free-bridged object id as a CNNPoolingAverage (nil for 0).
+// CNNPoolingAverageFromID adopts an existing object pointer as a CNNPoolingAverage (nil for 0).
 func CNNPoolingAverageFromID(id objc.ID) *CNNPoolingAverage {
 	if id == 0 {
 		return nil

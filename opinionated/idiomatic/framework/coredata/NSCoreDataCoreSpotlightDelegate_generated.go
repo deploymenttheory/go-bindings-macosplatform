@@ -21,11 +21,11 @@ type CoreDataCoreSpotlightDelegate struct {
 // Unwrap returns the underlying [raw.NSCoreDataCoreSpotlightDelegate].
 func (x *CoreDataCoreSpotlightDelegate) Unwrap() *raw.NSCoreDataCoreSpotlightDelegate { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CoreDataCoreSpotlightDelegate) ID() objc.ID { return x.inner.Ptr() }
 
-// CoreDataCoreSpotlightDelegateFromID adopts an existing toll-free-bridged object id as a CoreDataCoreSpotlightDelegate (nil for 0).
+// CoreDataCoreSpotlightDelegateFromID adopts an existing object pointer as a CoreDataCoreSpotlightDelegate (nil for 0).
 func CoreDataCoreSpotlightDelegateFromID(id objc.ID) *CoreDataCoreSpotlightDelegate {
 	if id == 0 {
 		return nil

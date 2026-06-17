@@ -17,11 +17,11 @@ type EmbeddingLayer struct {
 // Unwrap returns the underlying [raw.MLCEmbeddingLayer].
 func (x *EmbeddingLayer) Unwrap() *raw.MLCEmbeddingLayer { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *EmbeddingLayer) ID() objc.ID { return x.inner.Ptr() }
 
-// EmbeddingLayerFromID adopts an existing toll-free-bridged object id as a EmbeddingLayer (nil for 0).
+// EmbeddingLayerFromID adopts an existing object pointer as a EmbeddingLayer (nil for 0).
 func EmbeddingLayerFromID(id objc.ID) *EmbeddingLayer {
 	if id == 0 {
 		return nil

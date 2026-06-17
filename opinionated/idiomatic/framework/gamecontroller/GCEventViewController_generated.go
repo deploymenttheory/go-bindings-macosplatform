@@ -17,11 +17,11 @@ type EventViewController struct {
 // Unwrap returns the underlying [raw.GCEventViewController].
 func (x *EventViewController) Unwrap() *raw.GCEventViewController { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *EventViewController) ID() objc.ID { return x.inner.Ptr() }
 
-// EventViewControllerFromID adopts an existing toll-free-bridged object id as a EventViewController (nil for 0).
+// EventViewControllerFromID adopts an existing object pointer as a EventViewController (nil for 0).
 func EventViewControllerFromID(id objc.ID) *EventViewController {
 	if id == 0 {
 		return nil

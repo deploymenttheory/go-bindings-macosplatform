@@ -18,11 +18,11 @@ type DiskWriteExceptionDiagnostic struct {
 // Unwrap returns the underlying [raw.MXDiskWriteExceptionDiagnostic].
 func (x *DiskWriteExceptionDiagnostic) Unwrap() *raw.MXDiskWriteExceptionDiagnostic { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DiskWriteExceptionDiagnostic) ID() objc.ID { return x.inner.Ptr() }
 
-// DiskWriteExceptionDiagnosticFromID adopts an existing toll-free-bridged object id as a DiskWriteExceptionDiagnostic (nil for 0).
+// DiskWriteExceptionDiagnosticFromID adopts an existing object pointer as a DiskWriteExceptionDiagnostic (nil for 0).
 func DiskWriteExceptionDiagnosticFromID(id objc.ID) *DiskWriteExceptionDiagnostic {
 	if id == 0 {
 		return nil

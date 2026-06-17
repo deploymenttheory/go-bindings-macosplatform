@@ -18,11 +18,11 @@ type SpeechRecognitionTask struct {
 // Unwrap returns the underlying [raw.SFSpeechRecognitionTask].
 func (x *SpeechRecognitionTask) Unwrap() *raw.SFSpeechRecognitionTask { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SpeechRecognitionTask) ID() objc.ID { return x.inner.Ptr() }
 
-// SpeechRecognitionTaskFromID adopts an existing toll-free-bridged object id as a SpeechRecognitionTask (nil for 0).
+// SpeechRecognitionTaskFromID adopts an existing object pointer as a SpeechRecognitionTask (nil for 0).
 func SpeechRecognitionTaskFromID(id objc.ID) *SpeechRecognitionTask {
 	if id == 0 {
 		return nil

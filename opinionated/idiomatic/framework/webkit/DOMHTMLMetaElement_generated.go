@@ -19,11 +19,11 @@ type DOMHTMLMetaElement struct {
 // Unwrap returns the underlying [raw.DOMHTMLMetaElement].
 func (x *DOMHTMLMetaElement) Unwrap() *raw.DOMHTMLMetaElement { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DOMHTMLMetaElement) ID() objc.ID { return x.inner.Ptr() }
 
-// DOMHTMLMetaElementFromID adopts an existing toll-free-bridged object id as a DOMHTMLMetaElement (nil for 0).
+// DOMHTMLMetaElementFromID adopts an existing object pointer as a DOMHTMLMetaElement (nil for 0).
 func DOMHTMLMetaElementFromID(id objc.ID) *DOMHTMLMetaElement {
 	if id == 0 {
 		return nil

@@ -19,11 +19,11 @@ type MessageLinkMetadata struct {
 // Unwrap returns the underlying [raw.INMessageLinkMetadata].
 func (x *MessageLinkMetadata) Unwrap() *raw.INMessageLinkMetadata { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MessageLinkMetadata) ID() objc.ID { return x.inner.Ptr() }
 
-// MessageLinkMetadataFromID adopts an existing toll-free-bridged object id as a MessageLinkMetadata (nil for 0).
+// MessageLinkMetadataFromID adopts an existing object pointer as a MessageLinkMetadata (nil for 0).
 func MessageLinkMetadataFromID(id objc.ID) *MessageLinkMetadata {
 	if id == 0 {
 		return nil

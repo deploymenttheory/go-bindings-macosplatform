@@ -19,11 +19,11 @@ type Heading struct {
 // Unwrap returns the underlying [raw.CLHeading].
 func (x *Heading) Unwrap() *raw.CLHeading { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Heading) ID() objc.ID { return x.inner.Ptr() }
 
-// HeadingFromID adopts an existing toll-free-bridged object id as a Heading (nil for 0).
+// HeadingFromID adopts an existing object pointer as a Heading (nil for 0).
 func HeadingFromID(id objc.ID) *Heading {
 	if id == 0 {
 		return nil

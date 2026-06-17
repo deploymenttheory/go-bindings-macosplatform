@@ -17,11 +17,11 @@ type MTRChannelClusterChannelPagingStruct struct {
 // Unwrap returns the underlying [raw.MTRChannelClusterChannelPagingStruct].
 func (x *MTRChannelClusterChannelPagingStruct) Unwrap() *raw.MTRChannelClusterChannelPagingStruct { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRChannelClusterChannelPagingStruct) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRChannelClusterChannelPagingStructFromID adopts an existing toll-free-bridged object id as a MTRChannelClusterChannelPagingStruct (nil for 0).
+// MTRChannelClusterChannelPagingStructFromID adopts an existing object pointer as a MTRChannelClusterChannelPagingStruct (nil for 0).
 func MTRChannelClusterChannelPagingStructFromID(id objc.ID) *MTRChannelClusterChannelPagingStruct {
 	if id == 0 {
 		return nil

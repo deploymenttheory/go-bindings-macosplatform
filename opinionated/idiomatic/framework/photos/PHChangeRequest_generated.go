@@ -17,11 +17,11 @@ type ChangeRequest struct {
 // Unwrap returns the underlying [raw.PHChangeRequest].
 func (x *ChangeRequest) Unwrap() *raw.PHChangeRequest { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ChangeRequest) ID() objc.ID { return x.inner.Ptr() }
 
-// ChangeRequestFromID adopts an existing toll-free-bridged object id as a ChangeRequest (nil for 0).
+// ChangeRequestFromID adopts an existing object pointer as a ChangeRequest (nil for 0).
 func ChangeRequestFromID(id objc.ID) *ChangeRequest {
 	if id == 0 {
 		return nil

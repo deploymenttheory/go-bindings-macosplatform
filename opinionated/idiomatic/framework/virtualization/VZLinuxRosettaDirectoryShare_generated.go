@@ -17,11 +17,11 @@ type LinuxRosettaDirectoryShare struct {
 // Unwrap returns the underlying [raw.VZLinuxRosettaDirectoryShare].
 func (x *LinuxRosettaDirectoryShare) Unwrap() *raw.VZLinuxRosettaDirectoryShare { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *LinuxRosettaDirectoryShare) ID() objc.ID { return x.inner.Ptr() }
 
-// LinuxRosettaDirectoryShareFromID adopts an existing toll-free-bridged object id as a LinuxRosettaDirectoryShare (nil for 0).
+// LinuxRosettaDirectoryShareFromID adopts an existing object pointer as a LinuxRosettaDirectoryShare (nil for 0).
 func LinuxRosettaDirectoryShareFromID(id objc.ID) *LinuxRosettaDirectoryShare {
 	if id == 0 {
 		return nil

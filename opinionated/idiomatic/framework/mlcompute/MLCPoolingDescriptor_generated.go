@@ -17,11 +17,11 @@ type PoolingDescriptor struct {
 // Unwrap returns the underlying [raw.MLCPoolingDescriptor].
 func (x *PoolingDescriptor) Unwrap() *raw.MLCPoolingDescriptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PoolingDescriptor) ID() objc.ID { return x.inner.Ptr() }
 
-// PoolingDescriptorFromID adopts an existing toll-free-bridged object id as a PoolingDescriptor (nil for 0).
+// PoolingDescriptorFromID adopts an existing object pointer as a PoolingDescriptor (nil for 0).
 func PoolingDescriptorFromID(id objc.ID) *PoolingDescriptor {
 	if id == 0 {
 		return nil

@@ -19,11 +19,11 @@ type MTROperationalStateClusterErrorStateStruct struct {
 // Unwrap returns the underlying [raw.MTROperationalStateClusterErrorStateStruct].
 func (x *MTROperationalStateClusterErrorStateStruct) Unwrap() *raw.MTROperationalStateClusterErrorStateStruct { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTROperationalStateClusterErrorStateStruct) ID() objc.ID { return x.inner.Ptr() }
 
-// MTROperationalStateClusterErrorStateStructFromID adopts an existing toll-free-bridged object id as a MTROperationalStateClusterErrorStateStruct (nil for 0).
+// MTROperationalStateClusterErrorStateStructFromID adopts an existing object pointer as a MTROperationalStateClusterErrorStateStruct (nil for 0).
 func MTROperationalStateClusterErrorStateStructFromID(id objc.ID) *MTROperationalStateClusterErrorStateStruct {
 	if id == 0 {
 		return nil

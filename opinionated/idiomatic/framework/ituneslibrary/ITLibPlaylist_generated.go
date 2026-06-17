@@ -19,11 +19,11 @@ type LibPlaylist struct {
 // Unwrap returns the underlying [raw.ITLibPlaylist].
 func (x *LibPlaylist) Unwrap() *raw.ITLibPlaylist { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *LibPlaylist) ID() objc.ID { return x.inner.Ptr() }
 
-// LibPlaylistFromID adopts an existing toll-free-bridged object id as a LibPlaylist (nil for 0).
+// LibPlaylistFromID adopts an existing object pointer as a LibPlaylist (nil for 0).
 func LibPlaylistFromID(id objc.ID) *LibPlaylist {
 	if id == 0 {
 		return nil

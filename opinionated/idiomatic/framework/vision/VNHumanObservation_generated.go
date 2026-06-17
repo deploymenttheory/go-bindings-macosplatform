@@ -17,11 +17,11 @@ type HumanObservation struct {
 // Unwrap returns the underlying [raw.VNHumanObservation].
 func (x *HumanObservation) Unwrap() *raw.VNHumanObservation { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *HumanObservation) ID() objc.ID { return x.inner.Ptr() }
 
-// HumanObservationFromID adopts an existing toll-free-bridged object id as a HumanObservation (nil for 0).
+// HumanObservationFromID adopts an existing object pointer as a HumanObservation (nil for 0).
 func HumanObservationFromID(id objc.ID) *HumanObservation {
 	if id == 0 {
 		return nil

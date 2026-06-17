@@ -20,11 +20,11 @@ type AVB17221AECPAddressAccessMessage struct {
 // Unwrap returns the underlying [raw.AVB17221AECPAddressAccessMessage].
 func (x *AVB17221AECPAddressAccessMessage) Unwrap() *raw.AVB17221AECPAddressAccessMessage { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AVB17221AECPAddressAccessMessage) ID() objc.ID { return x.inner.Ptr() }
 
-// AVB17221AECPAddressAccessMessageFromID adopts an existing toll-free-bridged object id as a AVB17221AECPAddressAccessMessage (nil for 0).
+// AVB17221AECPAddressAccessMessageFromID adopts an existing object pointer as a AVB17221AECPAddressAccessMessage (nil for 0).
 func AVB17221AECPAddressAccessMessageFromID(id objc.ID) *AVB17221AECPAddressAccessMessage {
 	if id == 0 {
 		return nil

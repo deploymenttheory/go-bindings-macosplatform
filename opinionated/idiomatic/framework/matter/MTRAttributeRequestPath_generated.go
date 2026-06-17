@@ -18,11 +18,11 @@ type MTRAttributeRequestPath struct {
 // Unwrap returns the underlying [raw.MTRAttributeRequestPath].
 func (x *MTRAttributeRequestPath) Unwrap() *raw.MTRAttributeRequestPath { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRAttributeRequestPath) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRAttributeRequestPathFromID adopts an existing toll-free-bridged object id as a MTRAttributeRequestPath (nil for 0).
+// MTRAttributeRequestPathFromID adopts an existing object pointer as a MTRAttributeRequestPath (nil for 0).
 func MTRAttributeRequestPathFromID(id objc.ID) *MTRAttributeRequestPath {
 	if id == 0 {
 		return nil

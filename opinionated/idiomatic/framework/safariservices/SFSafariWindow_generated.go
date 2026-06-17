@@ -19,11 +19,11 @@ type SafariWindow struct {
 // Unwrap returns the underlying [raw.SFSafariWindow].
 func (x *SafariWindow) Unwrap() *raw.SFSafariWindow { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SafariWindow) ID() objc.ID { return x.inner.Ptr() }
 
-// SafariWindowFromID adopts an existing toll-free-bridged object id as a SafariWindow (nil for 0).
+// SafariWindowFromID adopts an existing object pointer as a SafariWindow (nil for 0).
 func SafariWindowFromID(id objc.ID) *SafariWindow {
 	if id == 0 {
 		return nil

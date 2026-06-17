@@ -17,11 +17,11 @@ type UnitConverterLinear struct {
 // Unwrap returns the underlying [raw.NSUnitConverterLinear].
 func (x *UnitConverterLinear) Unwrap() *raw.NSUnitConverterLinear { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *UnitConverterLinear) ID() objc.ID { return x.inner.Ptr() }
 
-// UnitConverterLinearFromID adopts an existing toll-free-bridged object id as a UnitConverterLinear (nil for 0).
+// UnitConverterLinearFromID adopts an existing object pointer as a UnitConverterLinear (nil for 0).
 func UnitConverterLinearFromID(id objc.ID) *UnitConverterLinear {
 	if id == 0 {
 		return nil

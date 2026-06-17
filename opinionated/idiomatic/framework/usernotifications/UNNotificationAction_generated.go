@@ -18,11 +18,11 @@ type NotificationAction struct {
 // Unwrap returns the underlying [raw.UNNotificationAction].
 func (x *NotificationAction) Unwrap() *raw.UNNotificationAction { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NotificationAction) ID() objc.ID { return x.inner.Ptr() }
 
-// NotificationActionFromID adopts an existing toll-free-bridged object id as a NotificationAction (nil for 0).
+// NotificationActionFromID adopts an existing object pointer as a NotificationAction (nil for 0).
 func NotificationActionFromID(id objc.ID) *NotificationAction {
 	if id == 0 {
 		return nil

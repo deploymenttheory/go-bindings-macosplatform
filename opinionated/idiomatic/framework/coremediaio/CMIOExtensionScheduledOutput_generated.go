@@ -17,11 +17,11 @@ type ExtensionScheduledOutput struct {
 // Unwrap returns the underlying [raw.CMIOExtensionScheduledOutput].
 func (x *ExtensionScheduledOutput) Unwrap() *raw.CMIOExtensionScheduledOutput { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ExtensionScheduledOutput) ID() objc.ID { return x.inner.Ptr() }
 
-// ExtensionScheduledOutputFromID adopts an existing toll-free-bridged object id as a ExtensionScheduledOutput (nil for 0).
+// ExtensionScheduledOutputFromID adopts an existing object pointer as a ExtensionScheduledOutput (nil for 0).
 func ExtensionScheduledOutputFromID(id objc.ID) *ExtensionScheduledOutput {
 	if id == 0 {
 		return nil

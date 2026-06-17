@@ -20,11 +20,11 @@ type MatchRequest struct {
 // Unwrap returns the underlying [raw.GKMatchRequest].
 func (x *MatchRequest) Unwrap() *raw.GKMatchRequest { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MatchRequest) ID() objc.ID { return x.inner.Ptr() }
 
-// MatchRequestFromID adopts an existing toll-free-bridged object id as a MatchRequest (nil for 0).
+// MatchRequestFromID adopts an existing object pointer as a MatchRequest (nil for 0).
 func MatchRequestFromID(id objc.ID) *MatchRequest {
 	if id == 0 {
 		return nil

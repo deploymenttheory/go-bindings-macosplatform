@@ -19,11 +19,11 @@ type MTRSoftwareDiagnosticsClusterSoftwareFaultEvent struct {
 // Unwrap returns the underlying [raw.MTRSoftwareDiagnosticsClusterSoftwareFaultEvent].
 func (x *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) Unwrap() *raw.MTRSoftwareDiagnosticsClusterSoftwareFaultEvent { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRSoftwareDiagnosticsClusterSoftwareFaultEventFromID adopts an existing toll-free-bridged object id as a MTRSoftwareDiagnosticsClusterSoftwareFaultEvent (nil for 0).
+// MTRSoftwareDiagnosticsClusterSoftwareFaultEventFromID adopts an existing object pointer as a MTRSoftwareDiagnosticsClusterSoftwareFaultEvent (nil for 0).
 func MTRSoftwareDiagnosticsClusterSoftwareFaultEventFromID(id objc.ID) *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent {
 	if id == 0 {
 		return nil

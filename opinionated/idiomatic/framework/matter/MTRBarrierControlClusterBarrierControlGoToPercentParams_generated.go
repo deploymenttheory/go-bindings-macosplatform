@@ -18,11 +18,11 @@ type MTRBarrierControlClusterBarrierControlGoToPercentParams struct {
 // Unwrap returns the underlying [raw.MTRBarrierControlClusterBarrierControlGoToPercentParams].
 func (x *MTRBarrierControlClusterBarrierControlGoToPercentParams) Unwrap() *raw.MTRBarrierControlClusterBarrierControlGoToPercentParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRBarrierControlClusterBarrierControlGoToPercentParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRBarrierControlClusterBarrierControlGoToPercentParamsFromID adopts an existing toll-free-bridged object id as a MTRBarrierControlClusterBarrierControlGoToPercentParams (nil for 0).
+// MTRBarrierControlClusterBarrierControlGoToPercentParamsFromID adopts an existing object pointer as a MTRBarrierControlClusterBarrierControlGoToPercentParams (nil for 0).
 func MTRBarrierControlClusterBarrierControlGoToPercentParamsFromID(id objc.ID) *MTRBarrierControlClusterBarrierControlGoToPercentParams {
 	if id == 0 {
 		return nil

@@ -20,11 +20,11 @@ type MTREnergyEVSEModeClusterChangeToModeResponseParams struct {
 // Unwrap returns the underlying [raw.MTREnergyEVSEModeClusterChangeToModeResponseParams].
 func (x *MTREnergyEVSEModeClusterChangeToModeResponseParams) Unwrap() *raw.MTREnergyEVSEModeClusterChangeToModeResponseParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTREnergyEVSEModeClusterChangeToModeResponseParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTREnergyEVSEModeClusterChangeToModeResponseParamsFromID adopts an existing toll-free-bridged object id as a MTREnergyEVSEModeClusterChangeToModeResponseParams (nil for 0).
+// MTREnergyEVSEModeClusterChangeToModeResponseParamsFromID adopts an existing object pointer as a MTREnergyEVSEModeClusterChangeToModeResponseParams (nil for 0).
 func MTREnergyEVSEModeClusterChangeToModeResponseParamsFromID(id objc.ID) *MTREnergyEVSEModeClusterChangeToModeResponseParams {
 	if id == 0 {
 		return nil

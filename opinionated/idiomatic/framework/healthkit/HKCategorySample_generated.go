@@ -17,11 +17,11 @@ type CategorySample struct {
 // Unwrap returns the underlying [raw.HKCategorySample].
 func (x *CategorySample) Unwrap() *raw.HKCategorySample { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CategorySample) ID() objc.ID { return x.inner.Ptr() }
 
-// CategorySampleFromID adopts an existing toll-free-bridged object id as a CategorySample (nil for 0).
+// CategorySampleFromID adopts an existing object pointer as a CategorySample (nil for 0).
 func CategorySampleFromID(id objc.ID) *CategorySample {
 	if id == 0 {
 		return nil

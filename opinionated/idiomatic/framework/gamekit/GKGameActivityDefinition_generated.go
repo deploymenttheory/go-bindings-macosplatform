@@ -21,11 +21,11 @@ type GameActivityDefinition struct {
 // Unwrap returns the underlying [raw.GKGameActivityDefinition].
 func (x *GameActivityDefinition) Unwrap() *raw.GKGameActivityDefinition { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *GameActivityDefinition) ID() objc.ID { return x.inner.Ptr() }
 
-// GameActivityDefinitionFromID adopts an existing toll-free-bridged object id as a GameActivityDefinition (nil for 0).
+// GameActivityDefinitionFromID adopts an existing object pointer as a GameActivityDefinition (nil for 0).
 func GameActivityDefinitionFromID(id objc.ID) *GameActivityDefinition {
 	if id == 0 {
 		return nil

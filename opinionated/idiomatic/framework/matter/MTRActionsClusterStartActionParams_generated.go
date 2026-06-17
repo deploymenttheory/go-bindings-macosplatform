@@ -18,11 +18,11 @@ type MTRActionsClusterStartActionParams struct {
 // Unwrap returns the underlying [raw.MTRActionsClusterStartActionParams].
 func (x *MTRActionsClusterStartActionParams) Unwrap() *raw.MTRActionsClusterStartActionParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRActionsClusterStartActionParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRActionsClusterStartActionParamsFromID adopts an existing toll-free-bridged object id as a MTRActionsClusterStartActionParams (nil for 0).
+// MTRActionsClusterStartActionParamsFromID adopts an existing object pointer as a MTRActionsClusterStartActionParams (nil for 0).
 func MTRActionsClusterStartActionParamsFromID(id objc.ID) *MTRActionsClusterStartActionParams {
 	if id == 0 {
 		return nil

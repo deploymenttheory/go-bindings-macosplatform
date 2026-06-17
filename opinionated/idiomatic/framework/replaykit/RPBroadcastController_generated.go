@@ -21,11 +21,11 @@ type BroadcastController struct {
 // Unwrap returns the underlying [raw.RPBroadcastController].
 func (x *BroadcastController) Unwrap() *raw.RPBroadcastController { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *BroadcastController) ID() objc.ID { return x.inner.Ptr() }
 
-// BroadcastControllerFromID adopts an existing toll-free-bridged object id as a BroadcastController (nil for 0).
+// BroadcastControllerFromID adopts an existing object pointer as a BroadcastController (nil for 0).
 func BroadcastControllerFromID(id objc.ID) *BroadcastController {
 	if id == 0 {
 		return nil

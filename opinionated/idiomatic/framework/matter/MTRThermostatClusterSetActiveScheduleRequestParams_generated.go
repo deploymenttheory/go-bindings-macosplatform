@@ -18,11 +18,11 @@ type MTRThermostatClusterSetActiveScheduleRequestParams struct {
 // Unwrap returns the underlying [raw.MTRThermostatClusterSetActiveScheduleRequestParams].
 func (x *MTRThermostatClusterSetActiveScheduleRequestParams) Unwrap() *raw.MTRThermostatClusterSetActiveScheduleRequestParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRThermostatClusterSetActiveScheduleRequestParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRThermostatClusterSetActiveScheduleRequestParamsFromID adopts an existing toll-free-bridged object id as a MTRThermostatClusterSetActiveScheduleRequestParams (nil for 0).
+// MTRThermostatClusterSetActiveScheduleRequestParamsFromID adopts an existing object pointer as a MTRThermostatClusterSetActiveScheduleRequestParams (nil for 0).
 func MTRThermostatClusterSetActiveScheduleRequestParamsFromID(id objc.ID) *MTRThermostatClusterSetActiveScheduleRequestParams {
 	if id == 0 {
 		return nil

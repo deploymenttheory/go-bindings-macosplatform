@@ -17,11 +17,11 @@ type AdamOptimizer struct {
 // Unwrap returns the underlying [raw.MLCAdamOptimizer].
 func (x *AdamOptimizer) Unwrap() *raw.MLCAdamOptimizer { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AdamOptimizer) ID() objc.ID { return x.inner.Ptr() }
 
-// AdamOptimizerFromID adopts an existing toll-free-bridged object id as a AdamOptimizer (nil for 0).
+// AdamOptimizerFromID adopts an existing object pointer as a AdamOptimizer (nil for 0).
 func AdamOptimizerFromID(id objc.ID) *AdamOptimizer {
 	if id == 0 {
 		return nil

@@ -19,11 +19,11 @@ type IssuerProvisioningExtensionPaymentPassEntry struct {
 // Unwrap returns the underlying [raw.PKIssuerProvisioningExtensionPaymentPassEntry].
 func (x *IssuerProvisioningExtensionPaymentPassEntry) Unwrap() *raw.PKIssuerProvisioningExtensionPaymentPassEntry { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *IssuerProvisioningExtensionPaymentPassEntry) ID() objc.ID { return x.inner.Ptr() }
 
-// IssuerProvisioningExtensionPaymentPassEntryFromID adopts an existing toll-free-bridged object id as a IssuerProvisioningExtensionPaymentPassEntry (nil for 0).
+// IssuerProvisioningExtensionPaymentPassEntryFromID adopts an existing object pointer as a IssuerProvisioningExtensionPaymentPassEntry (nil for 0).
 func IssuerProvisioningExtensionPaymentPassEntryFromID(id objc.ID) *IssuerProvisioningExtensionPaymentPassEntry {
 	if id == 0 {
 		return nil

@@ -21,11 +21,11 @@ type MTRBaseClusterIdentify struct {
 // Unwrap returns the underlying [raw.MTRBaseClusterIdentify].
 func (x *MTRBaseClusterIdentify) Unwrap() *raw.MTRBaseClusterIdentify { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRBaseClusterIdentify) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRBaseClusterIdentifyFromID adopts an existing toll-free-bridged object id as a MTRBaseClusterIdentify (nil for 0).
+// MTRBaseClusterIdentifyFromID adopts an existing object pointer as a MTRBaseClusterIdentify (nil for 0).
 func MTRBaseClusterIdentifyFromID(id objc.ID) *MTRBaseClusterIdentify {
 	if id == 0 {
 		return nil

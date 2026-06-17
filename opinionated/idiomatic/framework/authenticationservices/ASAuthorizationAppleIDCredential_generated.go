@@ -19,11 +19,11 @@ type AuthorizationAppleIDCredential struct {
 // Unwrap returns the underlying [raw.ASAuthorizationAppleIDCredential].
 func (x *AuthorizationAppleIDCredential) Unwrap() *raw.ASAuthorizationAppleIDCredential { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AuthorizationAppleIDCredential) ID() objc.ID { return x.inner.Ptr() }
 
-// AuthorizationAppleIDCredentialFromID adopts an existing toll-free-bridged object id as a AuthorizationAppleIDCredential (nil for 0).
+// AuthorizationAppleIDCredentialFromID adopts an existing object pointer as a AuthorizationAppleIDCredential (nil for 0).
 func AuthorizationAppleIDCredentialFromID(id objc.ID) *AuthorizationAppleIDCredential {
 	if id == 0 {
 		return nil

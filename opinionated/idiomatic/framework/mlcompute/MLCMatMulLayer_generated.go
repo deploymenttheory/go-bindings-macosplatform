@@ -17,11 +17,11 @@ type MatMulLayer struct {
 // Unwrap returns the underlying [raw.MLCMatMulLayer].
 func (x *MatMulLayer) Unwrap() *raw.MLCMatMulLayer { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MatMulLayer) ID() objc.ID { return x.inner.Ptr() }
 
-// MatMulLayerFromID adopts an existing toll-free-bridged object id as a MatMulLayer (nil for 0).
+// MatMulLayerFromID adopts an existing object pointer as a MatMulLayer (nil for 0).
 func MatMulLayerFromID(id objc.ID) *MatMulLayer {
 	if id == 0 {
 		return nil

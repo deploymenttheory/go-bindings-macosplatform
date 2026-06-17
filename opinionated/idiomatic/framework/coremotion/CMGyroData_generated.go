@@ -17,11 +17,11 @@ type GyroData struct {
 // Unwrap returns the underlying [raw.CMGyroData].
 func (x *GyroData) Unwrap() *raw.CMGyroData { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *GyroData) ID() objc.ID { return x.inner.Ptr() }
 
-// GyroDataFromID adopts an existing toll-free-bridged object id as a GyroData (nil for 0).
+// GyroDataFromID adopts an existing object pointer as a GyroData (nil for 0).
 func GyroDataFromID(id objc.ID) *GyroData {
 	if id == 0 {
 		return nil

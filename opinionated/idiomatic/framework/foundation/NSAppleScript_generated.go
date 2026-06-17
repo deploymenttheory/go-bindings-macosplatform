@@ -18,11 +18,11 @@ type AppleScript struct {
 // Unwrap returns the underlying [raw.NSAppleScript].
 func (x *AppleScript) Unwrap() *raw.NSAppleScript { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AppleScript) ID() objc.ID { return x.inner.Ptr() }
 
-// AppleScriptFromID adopts an existing toll-free-bridged object id as a AppleScript (nil for 0).
+// AppleScriptFromID adopts an existing object pointer as a AppleScript (nil for 0).
 func AppleScriptFromID(id objc.ID) *AppleScript {
 	if id == 0 {
 		return nil

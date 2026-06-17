@@ -17,11 +17,11 @@ type GlassEffectView struct {
 // Unwrap returns the underlying [raw.NSGlassEffectView].
 func (x *GlassEffectView) Unwrap() *raw.NSGlassEffectView { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *GlassEffectView) ID() objc.ID { return x.inner.Ptr() }
 
-// GlassEffectViewFromID adopts an existing toll-free-bridged object id as a GlassEffectView (nil for 0).
+// GlassEffectViewFromID adopts an existing object pointer as a GlassEffectView (nil for 0).
 func GlassEffectViewFromID(id objc.ID) *GlassEffectView {
 	if id == 0 {
 		return nil

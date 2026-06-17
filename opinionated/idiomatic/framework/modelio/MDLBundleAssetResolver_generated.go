@@ -19,11 +19,11 @@ type BundleAssetResolver struct {
 // Unwrap returns the underlying [raw.MDLBundleAssetResolver].
 func (x *BundleAssetResolver) Unwrap() *raw.MDLBundleAssetResolver { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *BundleAssetResolver) ID() objc.ID { return x.inner.Ptr() }
 
-// BundleAssetResolverFromID adopts an existing toll-free-bridged object id as a BundleAssetResolver (nil for 0).
+// BundleAssetResolverFromID adopts an existing object pointer as a BundleAssetResolver (nil for 0).
 func BundleAssetResolverFromID(id objc.ID) *BundleAssetResolver {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type MTRClusterOccupancySensing struct {
 // Unwrap returns the underlying [raw.MTRClusterOccupancySensing].
 func (x *MTRClusterOccupancySensing) Unwrap() *raw.MTRClusterOccupancySensing { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRClusterOccupancySensing) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRClusterOccupancySensingFromID adopts an existing toll-free-bridged object id as a MTRClusterOccupancySensing (nil for 0).
+// MTRClusterOccupancySensingFromID adopts an existing object pointer as a MTRClusterOccupancySensing (nil for 0).
 func MTRClusterOccupancySensingFromID(id objc.ID) *MTRClusterOccupancySensing {
 	if id == 0 {
 		return nil

@@ -20,11 +20,11 @@ type NETransparentProxyNetworkSettings struct {
 // Unwrap returns the underlying [raw.NETransparentProxyNetworkSettings].
 func (x *NETransparentProxyNetworkSettings) Unwrap() *raw.NETransparentProxyNetworkSettings { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NETransparentProxyNetworkSettings) ID() objc.ID { return x.inner.Ptr() }
 
-// NETransparentProxyNetworkSettingsFromID adopts an existing toll-free-bridged object id as a NETransparentProxyNetworkSettings (nil for 0).
+// NETransparentProxyNetworkSettingsFromID adopts an existing object pointer as a NETransparentProxyNetworkSettings (nil for 0).
 func NETransparentProxyNetworkSettingsFromID(id objc.ID) *NETransparentProxyNetworkSettings {
 	if id == 0 {
 		return nil

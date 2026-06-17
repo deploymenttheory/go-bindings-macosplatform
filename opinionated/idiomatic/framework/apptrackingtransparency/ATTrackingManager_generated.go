@@ -17,11 +17,11 @@ type TrackingManager struct {
 // Unwrap returns the underlying [raw.ATTrackingManager].
 func (x *TrackingManager) Unwrap() *raw.ATTrackingManager { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *TrackingManager) ID() objc.ID { return x.inner.Ptr() }
 
-// TrackingManagerFromID adopts an existing toll-free-bridged object id as a TrackingManager (nil for 0).
+// TrackingManagerFromID adopts an existing object pointer as a TrackingManager (nil for 0).
 func TrackingManagerFromID(id objc.ID) *TrackingManager {
 	if id == 0 {
 		return nil

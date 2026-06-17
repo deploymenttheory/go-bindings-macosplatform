@@ -19,11 +19,11 @@ type AssetResourceLoadingRequest struct {
 // Unwrap returns the underlying [raw.AVAssetResourceLoadingRequest].
 func (x *AssetResourceLoadingRequest) Unwrap() *raw.AVAssetResourceLoadingRequest { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AssetResourceLoadingRequest) ID() objc.ID { return x.inner.Ptr() }
 
-// AssetResourceLoadingRequestFromID adopts an existing toll-free-bridged object id as a AssetResourceLoadingRequest (nil for 0).
+// AssetResourceLoadingRequestFromID adopts an existing object pointer as a AssetResourceLoadingRequest (nil for 0).
 func AssetResourceLoadingRequestFromID(id objc.ID) *AssetResourceLoadingRequest {
 	if id == 0 {
 		return nil

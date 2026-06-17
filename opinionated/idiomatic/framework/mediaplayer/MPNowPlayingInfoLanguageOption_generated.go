@@ -19,11 +19,11 @@ type NowPlayingInfoLanguageOption struct {
 // Unwrap returns the underlying [raw.MPNowPlayingInfoLanguageOption].
 func (x *NowPlayingInfoLanguageOption) Unwrap() *raw.MPNowPlayingInfoLanguageOption { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NowPlayingInfoLanguageOption) ID() objc.ID { return x.inner.Ptr() }
 
-// NowPlayingInfoLanguageOptionFromID adopts an existing toll-free-bridged object id as a NowPlayingInfoLanguageOption (nil for 0).
+// NowPlayingInfoLanguageOptionFromID adopts an existing object pointer as a NowPlayingInfoLanguageOption (nil for 0).
 func NowPlayingInfoLanguageOptionFromID(id objc.ID) *NowPlayingInfoLanguageOption {
 	if id == 0 {
 		return nil

@@ -19,11 +19,11 @@ type AudioNode struct {
 // Unwrap returns the underlying [raw.SKAudioNode].
 func (x *AudioNode) Unwrap() *raw.SKAudioNode { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AudioNode) ID() objc.ID { return x.inner.Ptr() }
 
-// AudioNodeFromID adopts an existing toll-free-bridged object id as a AudioNode (nil for 0).
+// AudioNodeFromID adopts an existing object pointer as a AudioNode (nil for 0).
 func AudioNodeFromID(id objc.ID) *AudioNode {
 	if id == 0 {
 		return nil

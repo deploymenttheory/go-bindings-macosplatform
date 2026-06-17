@@ -17,11 +17,11 @@ type PickerFilter struct {
 // Unwrap returns the underlying [raw.PHPickerFilter].
 func (x *PickerFilter) Unwrap() *raw.PHPickerFilter { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PickerFilter) ID() objc.ID { return x.inner.Ptr() }
 
-// PickerFilterFromID adopts an existing toll-free-bridged object id as a PickerFilter (nil for 0).
+// PickerFilterFromID adopts an existing object pointer as a PickerFilter (nil for 0).
 func PickerFilterFromID(id objc.ID) *PickerFilter {
 	if id == 0 {
 		return nil

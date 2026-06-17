@@ -17,11 +17,11 @@ type ConvolutionDescriptor struct {
 // Unwrap returns the underlying [raw.MLCConvolutionDescriptor].
 func (x *ConvolutionDescriptor) Unwrap() *raw.MLCConvolutionDescriptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ConvolutionDescriptor) ID() objc.ID { return x.inner.Ptr() }
 
-// ConvolutionDescriptorFromID adopts an existing toll-free-bridged object id as a ConvolutionDescriptor (nil for 0).
+// ConvolutionDescriptorFromID adopts an existing object pointer as a ConvolutionDescriptor (nil for 0).
 func ConvolutionDescriptorFromID(id objc.ID) *ConvolutionDescriptor {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type MTRNetworkCommissioningClusterRemoveNetworkParams struct {
 // Unwrap returns the underlying [raw.MTRNetworkCommissioningClusterRemoveNetworkParams].
 func (x *MTRNetworkCommissioningClusterRemoveNetworkParams) Unwrap() *raw.MTRNetworkCommissioningClusterRemoveNetworkParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRNetworkCommissioningClusterRemoveNetworkParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRNetworkCommissioningClusterRemoveNetworkParamsFromID adopts an existing toll-free-bridged object id as a MTRNetworkCommissioningClusterRemoveNetworkParams (nil for 0).
+// MTRNetworkCommissioningClusterRemoveNetworkParamsFromID adopts an existing object pointer as a MTRNetworkCommissioningClusterRemoveNetworkParams (nil for 0).
 func MTRNetworkCommissioningClusterRemoveNetworkParamsFromID(id objc.ID) *MTRNetworkCommissioningClusterRemoveNetworkParams {
 	if id == 0 {
 		return nil

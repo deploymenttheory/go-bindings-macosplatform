@@ -21,11 +21,11 @@ type Placemark struct {
 // Unwrap returns the underlying [raw.MKPlacemark].
 func (x *Placemark) Unwrap() *raw.MKPlacemark { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Placemark) ID() objc.ID { return x.inner.Ptr() }
 
-// PlacemarkFromID adopts an existing toll-free-bridged object id as a Placemark (nil for 0).
+// PlacemarkFromID adopts an existing object pointer as a Placemark (nil for 0).
 func PlacemarkFromID(id objc.ID) *Placemark {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type NNBilinearScaleNode struct {
 // Unwrap returns the underlying [raw.MPSNNBilinearScaleNode].
 func (x *NNBilinearScaleNode) Unwrap() *raw.MPSNNBilinearScaleNode { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NNBilinearScaleNode) ID() objc.ID { return x.inner.Ptr() }
 
-// NNBilinearScaleNodeFromID adopts an existing toll-free-bridged object id as a NNBilinearScaleNode (nil for 0).
+// NNBilinearScaleNodeFromID adopts an existing object pointer as a NNBilinearScaleNode (nil for 0).
 func NNBilinearScaleNodeFromID(id objc.ID) *NNBilinearScaleNode {
 	if id == 0 {
 		return nil

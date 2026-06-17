@@ -18,11 +18,11 @@ type MTRThreadNetworkDiagnosticsClusterNeighborTableStruct struct {
 // Unwrap returns the underlying [raw.MTRThreadNetworkDiagnosticsClusterNeighborTableStruct].
 func (x *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct) Unwrap() *raw.MTRThreadNetworkDiagnosticsClusterNeighborTableStruct { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRThreadNetworkDiagnosticsClusterNeighborTableStructFromID adopts an existing toll-free-bridged object id as a MTRThreadNetworkDiagnosticsClusterNeighborTableStruct (nil for 0).
+// MTRThreadNetworkDiagnosticsClusterNeighborTableStructFromID adopts an existing object pointer as a MTRThreadNetworkDiagnosticsClusterNeighborTableStruct (nil for 0).
 func MTRThreadNetworkDiagnosticsClusterNeighborTableStructFromID(id objc.ID) *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct {
 	if id == 0 {
 		return nil

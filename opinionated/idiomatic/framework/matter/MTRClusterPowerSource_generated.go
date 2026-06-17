@@ -18,11 +18,11 @@ type MTRClusterPowerSource struct {
 // Unwrap returns the underlying [raw.MTRClusterPowerSource].
 func (x *MTRClusterPowerSource) Unwrap() *raw.MTRClusterPowerSource { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRClusterPowerSource) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRClusterPowerSourceFromID adopts an existing toll-free-bridged object id as a MTRClusterPowerSource (nil for 0).
+// MTRClusterPowerSourceFromID adopts an existing object pointer as a MTRClusterPowerSource (nil for 0).
 func MTRClusterPowerSourceFromID(id objc.ID) *MTRClusterPowerSource {
 	if id == 0 {
 		return nil

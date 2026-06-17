@@ -17,11 +17,11 @@ type GlobalMetaParameterAsset struct {
 // Unwrap returns the underlying [raw.PHASEGlobalMetaParameterAsset].
 func (x *GlobalMetaParameterAsset) Unwrap() *raw.PHASEGlobalMetaParameterAsset { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *GlobalMetaParameterAsset) ID() objc.ID { return x.inner.Ptr() }
 
-// GlobalMetaParameterAssetFromID adopts an existing toll-free-bridged object id as a GlobalMetaParameterAsset (nil for 0).
+// GlobalMetaParameterAssetFromID adopts an existing object pointer as a GlobalMetaParameterAsset (nil for 0).
 func GlobalMetaParameterAssetFromID(id objc.ID) *GlobalMetaParameterAsset {
 	if id == 0 {
 		return nil

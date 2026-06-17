@@ -17,11 +17,11 @@ type ScreenSaverDefaults struct {
 // Unwrap returns the underlying [raw.ScreenSaverDefaults].
 func (x *ScreenSaverDefaults) Unwrap() *raw.ScreenSaverDefaults { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ScreenSaverDefaults) ID() objc.ID { return x.inner.Ptr() }
 
-// ScreenSaverDefaultsFromID adopts an existing toll-free-bridged object id as a ScreenSaverDefaults (nil for 0).
+// ScreenSaverDefaultsFromID adopts an existing object pointer as a ScreenSaverDefaults (nil for 0).
 func ScreenSaverDefaultsFromID(id objc.ID) *ScreenSaverDefaults {
 	if id == 0 {
 		return nil

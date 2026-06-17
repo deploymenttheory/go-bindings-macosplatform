@@ -17,11 +17,11 @@ type DualSenseAdaptiveTrigger struct {
 // Unwrap returns the underlying [raw.GCDualSenseAdaptiveTrigger].
 func (x *DualSenseAdaptiveTrigger) Unwrap() *raw.GCDualSenseAdaptiveTrigger { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DualSenseAdaptiveTrigger) ID() objc.ID { return x.inner.Ptr() }
 
-// DualSenseAdaptiveTriggerFromID adopts an existing toll-free-bridged object id as a DualSenseAdaptiveTrigger (nil for 0).
+// DualSenseAdaptiveTriggerFromID adopts an existing object pointer as a DualSenseAdaptiveTrigger (nil for 0).
 func DualSenseAdaptiveTriggerFromID(id objc.ID) *DualSenseAdaptiveTrigger {
 	if id == 0 {
 		return nil

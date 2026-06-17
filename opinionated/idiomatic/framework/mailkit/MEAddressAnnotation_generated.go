@@ -17,11 +17,11 @@ type AddressAnnotation struct {
 // Unwrap returns the underlying [raw.MEAddressAnnotation].
 func (x *AddressAnnotation) Unwrap() *raw.MEAddressAnnotation { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AddressAnnotation) ID() objc.ID { return x.inner.Ptr() }
 
-// AddressAnnotationFromID adopts an existing toll-free-bridged object id as a AddressAnnotation (nil for 0).
+// AddressAnnotationFromID adopts an existing object pointer as a AddressAnnotation (nil for 0).
 func AddressAnnotationFromID(id objc.ID) *AddressAnnotation {
 	if id == 0 {
 		return nil

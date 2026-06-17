@@ -18,11 +18,11 @@ type BinaryItem struct {
 // Unwrap returns the underlying [raw.CLSBinaryItem].
 func (x *BinaryItem) Unwrap() *raw.CLSBinaryItem { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *BinaryItem) ID() objc.ID { return x.inner.Ptr() }
 
-// BinaryItemFromID adopts an existing toll-free-bridged object id as a BinaryItem (nil for 0).
+// BinaryItemFromID adopts an existing object pointer as a BinaryItem (nil for 0).
 func BinaryItemFromID(id objc.ID) *BinaryItem {
 	if id == 0 {
 		return nil

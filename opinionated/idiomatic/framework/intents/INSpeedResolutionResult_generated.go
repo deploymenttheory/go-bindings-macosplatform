@@ -17,11 +17,11 @@ type SpeedResolutionResult struct {
 // Unwrap returns the underlying [raw.INSpeedResolutionResult].
 func (x *SpeedResolutionResult) Unwrap() *raw.INSpeedResolutionResult { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SpeedResolutionResult) ID() objc.ID { return x.inner.Ptr() }
 
-// SpeedResolutionResultFromID adopts an existing toll-free-bridged object id as a SpeedResolutionResult (nil for 0).
+// SpeedResolutionResultFromID adopts an existing object pointer as a SpeedResolutionResult (nil for 0).
 func SpeedResolutionResultFromID(id objc.ID) *SpeedResolutionResult {
 	if id == 0 {
 		return nil

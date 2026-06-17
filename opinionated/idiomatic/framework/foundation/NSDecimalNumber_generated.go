@@ -18,11 +18,11 @@ type DecimalNumber struct {
 // Unwrap returns the underlying [raw.NSDecimalNumber].
 func (x *DecimalNumber) Unwrap() *raw.NSDecimalNumber { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DecimalNumber) ID() objc.ID { return x.inner.Ptr() }
 
-// DecimalNumberFromID adopts an existing toll-free-bridged object id as a DecimalNumber (nil for 0).
+// DecimalNumberFromID adopts an existing object pointer as a DecimalNumber (nil for 0).
 func DecimalNumberFromID(id objc.ID) *DecimalNumber {
 	if id == 0 {
 		return nil

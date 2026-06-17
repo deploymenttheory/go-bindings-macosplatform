@@ -17,11 +17,11 @@ type SafariExtension struct {
 // Unwrap returns the underlying [raw.SFSafariExtension].
 func (x *SafariExtension) Unwrap() *raw.SFSafariExtension { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SafariExtension) ID() objc.ID { return x.inner.Ptr() }
 
-// SafariExtensionFromID adopts an existing toll-free-bridged object id as a SafariExtension (nil for 0).
+// SafariExtensionFromID adopts an existing object pointer as a SafariExtension (nil for 0).
 func SafariExtensionFromID(id objc.ID) *SafariExtension {
 	if id == 0 {
 		return nil

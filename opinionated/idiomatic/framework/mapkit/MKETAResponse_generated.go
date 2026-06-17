@@ -19,11 +19,11 @@ type ETAResponse struct {
 // Unwrap returns the underlying [raw.MKETAResponse].
 func (x *ETAResponse) Unwrap() *raw.MKETAResponse { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ETAResponse) ID() objc.ID { return x.inner.Ptr() }
 
-// ETAResponseFromID adopts an existing toll-free-bridged object id as a ETAResponse (nil for 0).
+// ETAResponseFromID adopts an existing object pointer as a ETAResponse (nil for 0).
 func ETAResponseFromID(id objc.ID) *ETAResponse {
 	if id == 0 {
 		return nil

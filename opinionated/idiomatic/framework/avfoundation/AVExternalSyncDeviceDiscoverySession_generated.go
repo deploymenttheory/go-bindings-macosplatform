@@ -18,11 +18,11 @@ type ExternalSyncDeviceDiscoverySession struct {
 // Unwrap returns the underlying [raw.AVExternalSyncDeviceDiscoverySession].
 func (x *ExternalSyncDeviceDiscoverySession) Unwrap() *raw.AVExternalSyncDeviceDiscoverySession { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ExternalSyncDeviceDiscoverySession) ID() objc.ID { return x.inner.Ptr() }
 
-// ExternalSyncDeviceDiscoverySessionFromID adopts an existing toll-free-bridged object id as a ExternalSyncDeviceDiscoverySession (nil for 0).
+// ExternalSyncDeviceDiscoverySessionFromID adopts an existing object pointer as a ExternalSyncDeviceDiscoverySession (nil for 0).
 func ExternalSyncDeviceDiscoverySessionFromID(id objc.ID) *ExternalSyncDeviceDiscoverySession {
 	if id == 0 {
 		return nil

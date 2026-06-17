@@ -19,11 +19,11 @@ type AddSecureElementPassConfiguration struct {
 // Unwrap returns the underlying [raw.PKAddSecureElementPassConfiguration].
 func (x *AddSecureElementPassConfiguration) Unwrap() *raw.PKAddSecureElementPassConfiguration { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AddSecureElementPassConfiguration) ID() objc.ID { return x.inner.Ptr() }
 
-// AddSecureElementPassConfigurationFromID adopts an existing toll-free-bridged object id as a AddSecureElementPassConfiguration (nil for 0).
+// AddSecureElementPassConfigurationFromID adopts an existing object pointer as a AddSecureElementPassConfiguration (nil for 0).
 func AddSecureElementPassConfigurationFromID(id objc.ID) *AddSecureElementPassConfiguration {
 	if id == 0 {
 		return nil

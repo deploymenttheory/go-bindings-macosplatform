@@ -20,11 +20,11 @@ type ChallengeDefinition struct {
 // Unwrap returns the underlying [raw.GKChallengeDefinition].
 func (x *ChallengeDefinition) Unwrap() *raw.GKChallengeDefinition { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ChallengeDefinition) ID() objc.ID { return x.inner.Ptr() }
 
-// ChallengeDefinitionFromID adopts an existing toll-free-bridged object id as a ChallengeDefinition (nil for 0).
+// ChallengeDefinitionFromID adopts an existing object pointer as a ChallengeDefinition (nil for 0).
 func ChallengeDefinitionFromID(id objc.ID) *ChallengeDefinition {
 	if id == 0 {
 		return nil

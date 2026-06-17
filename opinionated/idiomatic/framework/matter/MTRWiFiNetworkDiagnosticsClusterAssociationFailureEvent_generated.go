@@ -18,11 +18,11 @@ type MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent struct {
 // Unwrap returns the underlying [raw.MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent].
 func (x *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) Unwrap() *raw.MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRWiFiNetworkDiagnosticsClusterAssociationFailureEventFromID adopts an existing toll-free-bridged object id as a MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent (nil for 0).
+// MTRWiFiNetworkDiagnosticsClusterAssociationFailureEventFromID adopts an existing object pointer as a MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent (nil for 0).
 func MTRWiFiNetworkDiagnosticsClusterAssociationFailureEventFromID(id objc.ID) *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent {
 	if id == 0 {
 		return nil

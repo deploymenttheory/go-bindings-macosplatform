@@ -19,11 +19,11 @@ type MSFFormatter struct {
 // Unwrap returns the underlying [raw.DRMSFFormatter].
 func (x *MSFFormatter) Unwrap() *raw.DRMSFFormatter { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MSFFormatter) ID() objc.ID { return x.inner.Ptr() }
 
-// MSFFormatterFromID adopts an existing toll-free-bridged object id as a MSFFormatter (nil for 0).
+// MSFFormatterFromID adopts an existing object pointer as a MSFFormatter (nil for 0).
 func MSFFormatterFromID(id objc.ID) *MSFFormatter {
 	if id == 0 {
 		return nil

@@ -19,11 +19,11 @@ type ComputePipelineDescriptor struct {
 // Unwrap returns the underlying [raw.MTLComputePipelineDescriptor].
 func (x *ComputePipelineDescriptor) Unwrap() *raw.MTLComputePipelineDescriptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ComputePipelineDescriptor) ID() objc.ID { return x.inner.Ptr() }
 
-// ComputePipelineDescriptorFromID adopts an existing toll-free-bridged object id as a ComputePipelineDescriptor (nil for 0).
+// ComputePipelineDescriptorFromID adopts an existing object pointer as a ComputePipelineDescriptor (nil for 0).
 func ComputePipelineDescriptorFromID(id objc.ID) *ComputePipelineDescriptor {
 	if id == 0 {
 		return nil

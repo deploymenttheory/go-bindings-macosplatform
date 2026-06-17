@@ -17,11 +17,11 @@ type DirectorySharingDevice struct {
 // Unwrap returns the underlying [raw.VZDirectorySharingDevice].
 func (x *DirectorySharingDevice) Unwrap() *raw.VZDirectorySharingDevice { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DirectorySharingDevice) ID() objc.ID { return x.inner.Ptr() }
 
-// DirectorySharingDeviceFromID adopts an existing toll-free-bridged object id as a DirectorySharingDevice (nil for 0).
+// DirectorySharingDeviceFromID adopts an existing object pointer as a DirectorySharingDevice (nil for 0).
 func DirectorySharingDeviceFromID(id objc.ID) *DirectorySharingDevice {
 	if id == 0 {
 		return nil

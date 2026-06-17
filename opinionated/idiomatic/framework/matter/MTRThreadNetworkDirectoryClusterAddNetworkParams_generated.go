@@ -18,11 +18,11 @@ type MTRThreadNetworkDirectoryClusterAddNetworkParams struct {
 // Unwrap returns the underlying [raw.MTRThreadNetworkDirectoryClusterAddNetworkParams].
 func (x *MTRThreadNetworkDirectoryClusterAddNetworkParams) Unwrap() *raw.MTRThreadNetworkDirectoryClusterAddNetworkParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRThreadNetworkDirectoryClusterAddNetworkParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRThreadNetworkDirectoryClusterAddNetworkParamsFromID adopts an existing toll-free-bridged object id as a MTRThreadNetworkDirectoryClusterAddNetworkParams (nil for 0).
+// MTRThreadNetworkDirectoryClusterAddNetworkParamsFromID adopts an existing object pointer as a MTRThreadNetworkDirectoryClusterAddNetworkParams (nil for 0).
 func MTRThreadNetworkDirectoryClusterAddNetworkParamsFromID(id objc.ID) *MTRThreadNetworkDirectoryClusterAddNetworkParams {
 	if id == 0 {
 		return nil

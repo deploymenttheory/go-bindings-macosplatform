@@ -17,11 +17,11 @@ type MTRTestClusterClusterTimedInvokeRequestParams struct {
 // Unwrap returns the underlying [raw.MTRTestClusterClusterTimedInvokeRequestParams].
 func (x *MTRTestClusterClusterTimedInvokeRequestParams) Unwrap() *raw.MTRTestClusterClusterTimedInvokeRequestParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRTestClusterClusterTimedInvokeRequestParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRTestClusterClusterTimedInvokeRequestParamsFromID adopts an existing toll-free-bridged object id as a MTRTestClusterClusterTimedInvokeRequestParams (nil for 0).
+// MTRTestClusterClusterTimedInvokeRequestParamsFromID adopts an existing object pointer as a MTRTestClusterClusterTimedInvokeRequestParams (nil for 0).
 func MTRTestClusterClusterTimedInvokeRequestParamsFromID(id objc.ID) *MTRTestClusterClusterTimedInvokeRequestParams {
 	if id == 0 {
 		return nil

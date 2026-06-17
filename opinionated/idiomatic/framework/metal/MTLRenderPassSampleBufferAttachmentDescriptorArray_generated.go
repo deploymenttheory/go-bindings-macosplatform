@@ -17,11 +17,11 @@ type RenderPassSampleBufferAttachmentDescriptorArray struct {
 // Unwrap returns the underlying [raw.MTLRenderPassSampleBufferAttachmentDescriptorArray].
 func (x *RenderPassSampleBufferAttachmentDescriptorArray) Unwrap() *raw.MTLRenderPassSampleBufferAttachmentDescriptorArray { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *RenderPassSampleBufferAttachmentDescriptorArray) ID() objc.ID { return x.inner.Ptr() }
 
-// RenderPassSampleBufferAttachmentDescriptorArrayFromID adopts an existing toll-free-bridged object id as a RenderPassSampleBufferAttachmentDescriptorArray (nil for 0).
+// RenderPassSampleBufferAttachmentDescriptorArrayFromID adopts an existing object pointer as a RenderPassSampleBufferAttachmentDescriptorArray (nil for 0).
 func RenderPassSampleBufferAttachmentDescriptorArrayFromID(id objc.ID) *RenderPassSampleBufferAttachmentDescriptorArray {
 	if id == 0 {
 		return nil

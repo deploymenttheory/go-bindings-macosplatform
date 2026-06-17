@@ -20,11 +20,11 @@ type DOMNode struct {
 // Unwrap returns the underlying [raw.DOMNode].
 func (x *DOMNode) Unwrap() *raw.DOMNode { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DOMNode) ID() objc.ID { return x.inner.Ptr() }
 
-// DOMNodeFromID adopts an existing toll-free-bridged object id as a DOMNode (nil for 0).
+// DOMNodeFromID adopts an existing object pointer as a DOMNode (nil for 0).
 func DOMNodeFromID(id objc.ID) *DOMNode {
 	if id == 0 {
 		return nil

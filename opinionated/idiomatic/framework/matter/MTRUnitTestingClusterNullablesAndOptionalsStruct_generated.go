@@ -19,11 +19,11 @@ type MTRUnitTestingClusterNullablesAndOptionalsStruct struct {
 // Unwrap returns the underlying [raw.MTRUnitTestingClusterNullablesAndOptionalsStruct].
 func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) Unwrap() *raw.MTRUnitTestingClusterNullablesAndOptionalsStruct { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRUnitTestingClusterNullablesAndOptionalsStructFromID adopts an existing toll-free-bridged object id as a MTRUnitTestingClusterNullablesAndOptionalsStruct (nil for 0).
+// MTRUnitTestingClusterNullablesAndOptionalsStructFromID adopts an existing object pointer as a MTRUnitTestingClusterNullablesAndOptionalsStruct (nil for 0).
 func MTRUnitTestingClusterNullablesAndOptionalsStructFromID(id objc.ID) *MTRUnitTestingClusterNullablesAndOptionalsStruct {
 	if id == 0 {
 		return nil

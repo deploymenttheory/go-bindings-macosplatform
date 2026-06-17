@@ -17,11 +17,11 @@ type NEFilterPacketContext struct {
 // Unwrap returns the underlying [raw.NEFilterPacketContext].
 func (x *NEFilterPacketContext) Unwrap() *raw.NEFilterPacketContext { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NEFilterPacketContext) ID() objc.ID { return x.inner.Ptr() }
 
-// NEFilterPacketContextFromID adopts an existing toll-free-bridged object id as a NEFilterPacketContext (nil for 0).
+// NEFilterPacketContextFromID adopts an existing object pointer as a NEFilterPacketContext (nil for 0).
 func NEFilterPacketContextFromID(id objc.ID) *NEFilterPacketContext {
 	if id == 0 {
 		return nil

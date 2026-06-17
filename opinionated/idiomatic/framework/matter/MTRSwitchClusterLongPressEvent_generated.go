@@ -18,11 +18,11 @@ type MTRSwitchClusterLongPressEvent struct {
 // Unwrap returns the underlying [raw.MTRSwitchClusterLongPressEvent].
 func (x *MTRSwitchClusterLongPressEvent) Unwrap() *raw.MTRSwitchClusterLongPressEvent { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRSwitchClusterLongPressEvent) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRSwitchClusterLongPressEventFromID adopts an existing toll-free-bridged object id as a MTRSwitchClusterLongPressEvent (nil for 0).
+// MTRSwitchClusterLongPressEventFromID adopts an existing object pointer as a MTRSwitchClusterLongPressEvent (nil for 0).
 func MTRSwitchClusterLongPressEventFromID(id objc.ID) *MTRSwitchClusterLongPressEvent {
 	if id == 0 {
 		return nil

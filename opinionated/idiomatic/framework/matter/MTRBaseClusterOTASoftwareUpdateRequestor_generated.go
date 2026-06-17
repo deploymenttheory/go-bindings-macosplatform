@@ -21,11 +21,11 @@ type MTRBaseClusterOtaSoftwareUpdateRequestor struct {
 // Unwrap returns the underlying [raw.MTRBaseClusterOtaSoftwareUpdateRequestor].
 func (x *MTRBaseClusterOtaSoftwareUpdateRequestor) Unwrap() *raw.MTRBaseClusterOtaSoftwareUpdateRequestor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRBaseClusterOtaSoftwareUpdateRequestor) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRBaseClusterOtaSoftwareUpdateRequestorFromID adopts an existing toll-free-bridged object id as a MTRBaseClusterOtaSoftwareUpdateRequestor (nil for 0).
+// MTRBaseClusterOtaSoftwareUpdateRequestorFromID adopts an existing object pointer as a MTRBaseClusterOtaSoftwareUpdateRequestor (nil for 0).
 func MTRBaseClusterOtaSoftwareUpdateRequestorFromID(id objc.ID) *MTRBaseClusterOtaSoftwareUpdateRequestor {
 	if id == 0 {
 		return nil

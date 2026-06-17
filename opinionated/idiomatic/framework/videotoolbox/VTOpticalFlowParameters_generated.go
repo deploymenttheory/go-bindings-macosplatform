@@ -17,11 +17,11 @@ type OpticalFlowParameters struct {
 // Unwrap returns the underlying [raw.VTOpticalFlowParameters].
 func (x *OpticalFlowParameters) Unwrap() *raw.VTOpticalFlowParameters { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *OpticalFlowParameters) ID() objc.ID { return x.inner.Ptr() }
 
-// OpticalFlowParametersFromID adopts an existing toll-free-bridged object id as a OpticalFlowParameters (nil for 0).
+// OpticalFlowParametersFromID adopts an existing object pointer as a OpticalFlowParameters (nil for 0).
 func OpticalFlowParametersFromID(id objc.ID) *OpticalFlowParameters {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type MTROperationalCredentialsClusterAddNOCParams struct {
 // Unwrap returns the underlying [raw.MTROperationalCredentialsClusterAddNOCParams].
 func (x *MTROperationalCredentialsClusterAddNOCParams) Unwrap() *raw.MTROperationalCredentialsClusterAddNOCParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTROperationalCredentialsClusterAddNOCParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTROperationalCredentialsClusterAddNOCParamsFromID adopts an existing toll-free-bridged object id as a MTROperationalCredentialsClusterAddNOCParams (nil for 0).
+// MTROperationalCredentialsClusterAddNOCParamsFromID adopts an existing object pointer as a MTROperationalCredentialsClusterAddNOCParams (nil for 0).
 func MTROperationalCredentialsClusterAddNOCParamsFromID(id objc.ID) *MTROperationalCredentialsClusterAddNOCParams {
 	if id == 0 {
 		return nil

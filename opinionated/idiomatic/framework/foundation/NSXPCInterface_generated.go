@@ -18,11 +18,11 @@ type XPCInterface struct {
 // Unwrap returns the underlying [raw.NSXPCInterface].
 func (x *XPCInterface) Unwrap() *raw.NSXPCInterface { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *XPCInterface) ID() objc.ID { return x.inner.Ptr() }
 
-// XPCInterfaceFromID adopts an existing toll-free-bridged object id as a XPCInterface (nil for 0).
+// XPCInterfaceFromID adopts an existing object pointer as a XPCInterface (nil for 0).
 func XPCInterfaceFromID(id objc.ID) *XPCInterface {
 	if id == 0 {
 		return nil

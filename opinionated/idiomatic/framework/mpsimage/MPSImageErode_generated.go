@@ -17,11 +17,11 @@ type ImageErode struct {
 // Unwrap returns the underlying [raw.MPSImageErode].
 func (x *ImageErode) Unwrap() *raw.MPSImageErode { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ImageErode) ID() objc.ID { return x.inner.Ptr() }
 
-// ImageErodeFromID adopts an existing toll-free-bridged object id as a ImageErode (nil for 0).
+// ImageErodeFromID adopts an existing object pointer as a ImageErode (nil for 0).
 func ImageErodeFromID(id objc.ID) *ImageErode {
 	if id == 0 {
 		return nil

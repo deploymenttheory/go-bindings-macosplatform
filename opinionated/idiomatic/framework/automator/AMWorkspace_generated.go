@@ -18,11 +18,11 @@ type Workspace struct {
 // Unwrap returns the underlying [raw.AMWorkspace].
 func (x *Workspace) Unwrap() *raw.AMWorkspace { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Workspace) ID() objc.ID { return x.inner.Ptr() }
 
-// WorkspaceFromID adopts an existing toll-free-bridged object id as a Workspace (nil for 0).
+// WorkspaceFromID adopts an existing object pointer as a Workspace (nil for 0).
 func WorkspaceFromID(id objc.ID) *Workspace {
 	if id == 0 {
 		return nil

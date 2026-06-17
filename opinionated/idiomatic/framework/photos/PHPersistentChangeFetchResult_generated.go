@@ -17,11 +17,11 @@ type PersistentChangeFetchResult struct {
 // Unwrap returns the underlying [raw.PHPersistentChangeFetchResult].
 func (x *PersistentChangeFetchResult) Unwrap() *raw.PHPersistentChangeFetchResult { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PersistentChangeFetchResult) ID() objc.ID { return x.inner.Ptr() }
 
-// PersistentChangeFetchResultFromID adopts an existing toll-free-bridged object id as a PersistentChangeFetchResult (nil for 0).
+// PersistentChangeFetchResultFromID adopts an existing object pointer as a PersistentChangeFetchResult (nil for 0).
 func PersistentChangeFetchResultFromID(id objc.ID) *PersistentChangeFetchResult {
 	if id == 0 {
 		return nil

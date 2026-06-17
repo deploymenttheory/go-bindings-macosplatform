@@ -19,11 +19,11 @@ type MTRClusterValveConfigurationAndControl struct {
 // Unwrap returns the underlying [raw.MTRClusterValveConfigurationAndControl].
 func (x *MTRClusterValveConfigurationAndControl) Unwrap() *raw.MTRClusterValveConfigurationAndControl { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRClusterValveConfigurationAndControl) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRClusterValveConfigurationAndControlFromID adopts an existing toll-free-bridged object id as a MTRClusterValveConfigurationAndControl (nil for 0).
+// MTRClusterValveConfigurationAndControlFromID adopts an existing object pointer as a MTRClusterValveConfigurationAndControl (nil for 0).
 func MTRClusterValveConfigurationAndControlFromID(id objc.ID) *MTRClusterValveConfigurationAndControl {
 	if id == 0 {
 		return nil

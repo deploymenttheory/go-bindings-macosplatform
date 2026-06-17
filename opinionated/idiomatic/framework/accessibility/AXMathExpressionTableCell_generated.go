@@ -19,11 +19,11 @@ type MathExpressionTableCell struct {
 // Unwrap returns the underlying [raw.AXMathExpressionTableCell].
 func (x *MathExpressionTableCell) Unwrap() *raw.AXMathExpressionTableCell { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MathExpressionTableCell) ID() objc.ID { return x.inner.Ptr() }
 
-// MathExpressionTableCellFromID adopts an existing toll-free-bridged object id as a MathExpressionTableCell (nil for 0).
+// MathExpressionTableCellFromID adopts an existing object pointer as a MathExpressionTableCell (nil for 0).
 func MathExpressionTableCellFromID(id objc.ID) *MathExpressionTableCell {
 	if id == 0 {
 		return nil

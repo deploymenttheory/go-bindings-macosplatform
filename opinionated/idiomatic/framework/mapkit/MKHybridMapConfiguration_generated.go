@@ -17,11 +17,11 @@ type HybridMapConfiguration struct {
 // Unwrap returns the underlying [raw.MKHybridMapConfiguration].
 func (x *HybridMapConfiguration) Unwrap() *raw.MKHybridMapConfiguration { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *HybridMapConfiguration) ID() objc.ID { return x.inner.Ptr() }
 
-// HybridMapConfigurationFromID adopts an existing toll-free-bridged object id as a HybridMapConfiguration (nil for 0).
+// HybridMapConfigurationFromID adopts an existing object pointer as a HybridMapConfiguration (nil for 0).
 func HybridMapConfigurationFromID(id objc.ID) *HybridMapConfiguration {
 	if id == 0 {
 		return nil

@@ -19,11 +19,11 @@ type LocationSortDescriptor struct {
 // Unwrap returns the underlying [raw.CKLocationSortDescriptor].
 func (x *LocationSortDescriptor) Unwrap() *raw.CKLocationSortDescriptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *LocationSortDescriptor) ID() objc.ID { return x.inner.Ptr() }
 
-// LocationSortDescriptorFromID adopts an existing toll-free-bridged object id as a LocationSortDescriptor (nil for 0).
+// LocationSortDescriptorFromID adopts an existing object pointer as a LocationSortDescriptor (nil for 0).
 func LocationSortDescriptorFromID(id objc.ID) *LocationSortDescriptor {
 	if id == 0 {
 		return nil

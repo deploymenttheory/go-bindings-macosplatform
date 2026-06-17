@@ -19,11 +19,11 @@ type MTRAccessControlClusterFabricRestrictionReviewUpdateEvent struct {
 // Unwrap returns the underlying [raw.MTRAccessControlClusterFabricRestrictionReviewUpdateEvent].
 func (x *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent) Unwrap() *raw.MTRAccessControlClusterFabricRestrictionReviewUpdateEvent { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRAccessControlClusterFabricRestrictionReviewUpdateEventFromID adopts an existing toll-free-bridged object id as a MTRAccessControlClusterFabricRestrictionReviewUpdateEvent (nil for 0).
+// MTRAccessControlClusterFabricRestrictionReviewUpdateEventFromID adopts an existing object pointer as a MTRAccessControlClusterFabricRestrictionReviewUpdateEvent (nil for 0).
 func MTRAccessControlClusterFabricRestrictionReviewUpdateEventFromID(id objc.ID) *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent {
 	if id == 0 {
 		return nil

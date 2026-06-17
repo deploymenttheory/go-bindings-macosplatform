@@ -19,11 +19,11 @@ type CrashDetectionEvent struct {
 // Unwrap returns the underlying [raw.SACrashDetectionEvent].
 func (x *CrashDetectionEvent) Unwrap() *raw.SACrashDetectionEvent { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CrashDetectionEvent) ID() objc.ID { return x.inner.Ptr() }
 
-// CrashDetectionEventFromID adopts an existing toll-free-bridged object id as a CrashDetectionEvent (nil for 0).
+// CrashDetectionEventFromID adopts an existing object pointer as a CrashDetectionEvent (nil for 0).
 func CrashDetectionEventFromID(id objc.ID) *CrashDetectionEvent {
 	if id == 0 {
 		return nil

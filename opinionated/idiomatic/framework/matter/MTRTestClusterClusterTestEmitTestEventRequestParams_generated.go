@@ -17,11 +17,11 @@ type MTRTestClusterClusterTestEmitTestEventRequestParams struct {
 // Unwrap returns the underlying [raw.MTRTestClusterClusterTestEmitTestEventRequestParams].
 func (x *MTRTestClusterClusterTestEmitTestEventRequestParams) Unwrap() *raw.MTRTestClusterClusterTestEmitTestEventRequestParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRTestClusterClusterTestEmitTestEventRequestParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRTestClusterClusterTestEmitTestEventRequestParamsFromID adopts an existing toll-free-bridged object id as a MTRTestClusterClusterTestEmitTestEventRequestParams (nil for 0).
+// MTRTestClusterClusterTestEmitTestEventRequestParamsFromID adopts an existing object pointer as a MTRTestClusterClusterTestEmitTestEventRequestParams (nil for 0).
 func MTRTestClusterClusterTestEmitTestEventRequestParamsFromID(id objc.ID) *MTRTestClusterClusterTestEmitTestEventRequestParams {
 	if id == 0 {
 		return nil

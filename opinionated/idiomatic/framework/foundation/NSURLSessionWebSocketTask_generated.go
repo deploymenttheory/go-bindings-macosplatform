@@ -20,11 +20,11 @@ type URLSessionWebSocketTask struct {
 // Unwrap returns the underlying [raw.NSURLSessionWebSocketTask].
 func (x *URLSessionWebSocketTask) Unwrap() *raw.NSURLSessionWebSocketTask { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *URLSessionWebSocketTask) ID() objc.ID { return x.inner.Ptr() }
 
-// URLSessionWebSocketTaskFromID adopts an existing toll-free-bridged object id as a URLSessionWebSocketTask (nil for 0).
+// URLSessionWebSocketTaskFromID adopts an existing object pointer as a URLSessionWebSocketTask (nil for 0).
 func URLSessionWebSocketTaskFromID(id objc.ID) *URLSessionWebSocketTask {
 	if id == 0 {
 		return nil

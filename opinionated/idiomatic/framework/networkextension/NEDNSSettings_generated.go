@@ -20,11 +20,11 @@ type NEDNSSettings struct {
 // Unwrap returns the underlying [raw.NEDNSSettings].
 func (x *NEDNSSettings) Unwrap() *raw.NEDNSSettings { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NEDNSSettings) ID() objc.ID { return x.inner.Ptr() }
 
-// NEDNSSettingsFromID adopts an existing toll-free-bridged object id as a NEDNSSettings (nil for 0).
+// NEDNSSettingsFromID adopts an existing object pointer as a NEDNSSettings (nil for 0).
 func NEDNSSettingsFromID(id objc.ID) *NEDNSSettings {
 	if id == 0 {
 		return nil

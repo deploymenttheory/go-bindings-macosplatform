@@ -20,11 +20,11 @@ type RenderDestination struct {
 // Unwrap returns the underlying [raw.CIRenderDestination].
 func (x *RenderDestination) Unwrap() *raw.CIRenderDestination { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *RenderDestination) ID() objc.ID { return x.inner.Ptr() }
 
-// RenderDestinationFromID adopts an existing toll-free-bridged object id as a RenderDestination (nil for 0).
+// RenderDestinationFromID adopts an existing object pointer as a RenderDestination (nil for 0).
 func RenderDestinationFromID(id objc.ID) *RenderDestination {
 	if id == 0 {
 		return nil

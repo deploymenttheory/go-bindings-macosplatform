@@ -17,11 +17,11 @@ type AssetReaderSampleReferenceOutput struct {
 // Unwrap returns the underlying [raw.AVAssetReaderSampleReferenceOutput].
 func (x *AssetReaderSampleReferenceOutput) Unwrap() *raw.AVAssetReaderSampleReferenceOutput { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AssetReaderSampleReferenceOutput) ID() objc.ID { return x.inner.Ptr() }
 
-// AssetReaderSampleReferenceOutputFromID adopts an existing toll-free-bridged object id as a AssetReaderSampleReferenceOutput (nil for 0).
+// AssetReaderSampleReferenceOutputFromID adopts an existing object pointer as a AssetReaderSampleReferenceOutput (nil for 0).
 func AssetReaderSampleReferenceOutputFromID(id objc.ID) *AssetReaderSampleReferenceOutput {
 	if id == 0 {
 		return nil

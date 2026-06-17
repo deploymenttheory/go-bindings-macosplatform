@@ -17,11 +17,11 @@ type MTRTestClusterClusterNestedStruct struct {
 // Unwrap returns the underlying [raw.MTRTestClusterClusterNestedStruct].
 func (x *MTRTestClusterClusterNestedStruct) Unwrap() *raw.MTRTestClusterClusterNestedStruct { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRTestClusterClusterNestedStruct) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRTestClusterClusterNestedStructFromID adopts an existing toll-free-bridged object id as a MTRTestClusterClusterNestedStruct (nil for 0).
+// MTRTestClusterClusterNestedStructFromID adopts an existing object pointer as a MTRTestClusterClusterNestedStruct (nil for 0).
 func MTRTestClusterClusterNestedStructFromID(id objc.ID) *MTRTestClusterClusterNestedStruct {
 	if id == 0 {
 		return nil

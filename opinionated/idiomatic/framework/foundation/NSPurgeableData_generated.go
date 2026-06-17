@@ -17,11 +17,11 @@ type PurgeableData struct {
 // Unwrap returns the underlying [raw.NSPurgeableData].
 func (x *PurgeableData) Unwrap() *raw.NSPurgeableData { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PurgeableData) ID() objc.ID { return x.inner.Ptr() }
 
-// PurgeableDataFromID adopts an existing toll-free-bridged object id as a PurgeableData (nil for 0).
+// PurgeableDataFromID adopts an existing object pointer as a PurgeableData (nil for 0).
 func PurgeableDataFromID(id objc.ID) *PurgeableData {
 	if id == 0 {
 		return nil

@@ -20,11 +20,11 @@ type CNNNeuronLogarithm struct {
 // Unwrap returns the underlying [raw.MPSCNNNeuronLogarithm].
 func (x *CNNNeuronLogarithm) Unwrap() *raw.MPSCNNNeuronLogarithm { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CNNNeuronLogarithm) ID() objc.ID { return x.inner.Ptr() }
 
-// CNNNeuronLogarithmFromID adopts an existing toll-free-bridged object id as a CNNNeuronLogarithm (nil for 0).
+// CNNNeuronLogarithmFromID adopts an existing object pointer as a CNNNeuronLogarithm (nil for 0).
 func CNNNeuronLogarithmFromID(id objc.ID) *CNNNeuronLogarithm {
 	if id == 0 {
 		return nil

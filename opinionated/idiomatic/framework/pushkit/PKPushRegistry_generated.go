@@ -18,11 +18,11 @@ type PushRegistry struct {
 // Unwrap returns the underlying [raw.PKPushRegistry].
 func (x *PushRegistry) Unwrap() *raw.PKPushRegistry { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PushRegistry) ID() objc.ID { return x.inner.Ptr() }
 
-// PushRegistryFromID adopts an existing toll-free-bridged object id as a PushRegistry (nil for 0).
+// PushRegistryFromID adopts an existing object pointer as a PushRegistry (nil for 0).
 func PushRegistryFromID(id objc.ID) *PushRegistry {
 	if id == 0 {
 		return nil

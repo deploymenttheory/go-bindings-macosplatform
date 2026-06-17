@@ -20,11 +20,11 @@ type TextLayer struct {
 // Unwrap returns the underlying [raw.CATextLayer].
 func (x *TextLayer) Unwrap() *raw.CATextLayer { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *TextLayer) ID() objc.ID { return x.inner.Ptr() }
 
-// TextLayerFromID adopts an existing toll-free-bridged object id as a TextLayer (nil for 0).
+// TextLayerFromID adopts an existing object pointer as a TextLayer (nil for 0).
 func TextLayerFromID(id objc.ID) *TextLayer {
 	if id == 0 {
 		return nil

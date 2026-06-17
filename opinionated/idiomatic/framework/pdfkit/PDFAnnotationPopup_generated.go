@@ -17,11 +17,11 @@ type AnnotationPopup struct {
 // Unwrap returns the underlying [raw.PDFAnnotationPopup].
 func (x *AnnotationPopup) Unwrap() *raw.PDFAnnotationPopup { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AnnotationPopup) ID() objc.ID { return x.inner.Ptr() }
 
-// AnnotationPopupFromID adopts an existing toll-free-bridged object id as a AnnotationPopup (nil for 0).
+// AnnotationPopupFromID adopts an existing object pointer as a AnnotationPopup (nil for 0).
 func AnnotationPopupFromID(id objc.ID) *AnnotationPopup {
 	if id == 0 {
 		return nil

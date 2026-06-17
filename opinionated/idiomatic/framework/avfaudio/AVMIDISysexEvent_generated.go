@@ -18,11 +18,11 @@ type MIDISysexEvent struct {
 // Unwrap returns the underlying [raw.AVMIDISysexEvent].
 func (x *MIDISysexEvent) Unwrap() *raw.AVMIDISysexEvent { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MIDISysexEvent) ID() objc.ID { return x.inner.Ptr() }
 
-// MIDISysexEventFromID adopts an existing toll-free-bridged object id as a MIDISysexEvent (nil for 0).
+// MIDISysexEventFromID adopts an existing object pointer as a MIDISysexEvent (nil for 0).
 func MIDISysexEventFromID(id objc.ID) *MIDISysexEvent {
 	if id == 0 {
 		return nil

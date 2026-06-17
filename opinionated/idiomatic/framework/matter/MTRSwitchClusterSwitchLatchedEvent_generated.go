@@ -18,11 +18,11 @@ type MTRSwitchClusterSwitchLatchedEvent struct {
 // Unwrap returns the underlying [raw.MTRSwitchClusterSwitchLatchedEvent].
 func (x *MTRSwitchClusterSwitchLatchedEvent) Unwrap() *raw.MTRSwitchClusterSwitchLatchedEvent { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRSwitchClusterSwitchLatchedEvent) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRSwitchClusterSwitchLatchedEventFromID adopts an existing toll-free-bridged object id as a MTRSwitchClusterSwitchLatchedEvent (nil for 0).
+// MTRSwitchClusterSwitchLatchedEventFromID adopts an existing object pointer as a MTRSwitchClusterSwitchLatchedEvent (nil for 0).
 func MTRSwitchClusterSwitchLatchedEventFromID(id objc.ID) *MTRSwitchClusterSwitchLatchedEvent {
 	if id == 0 {
 		return nil

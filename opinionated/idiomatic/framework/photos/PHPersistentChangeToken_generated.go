@@ -17,11 +17,11 @@ type PersistentChangeToken struct {
 // Unwrap returns the underlying [raw.PHPersistentChangeToken].
 func (x *PersistentChangeToken) Unwrap() *raw.PHPersistentChangeToken { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PersistentChangeToken) ID() objc.ID { return x.inner.Ptr() }
 
-// PersistentChangeTokenFromID adopts an existing toll-free-bridged object id as a PersistentChangeToken (nil for 0).
+// PersistentChangeTokenFromID adopts an existing object pointer as a PersistentChangeToken (nil for 0).
 func PersistentChangeTokenFromID(id objc.ID) *PersistentChangeToken {
 	if id == 0 {
 		return nil

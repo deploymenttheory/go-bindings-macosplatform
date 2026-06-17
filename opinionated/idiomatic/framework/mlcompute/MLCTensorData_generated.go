@@ -18,11 +18,11 @@ type TensorData struct {
 // Unwrap returns the underlying [raw.MLCTensorData].
 func (x *TensorData) Unwrap() *raw.MLCTensorData { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *TensorData) ID() objc.ID { return x.inner.Ptr() }
 
-// TensorDataFromID adopts an existing toll-free-bridged object id as a TensorData (nil for 0).
+// TensorDataFromID adopts an existing object pointer as a TensorData (nil for 0).
 func TensorDataFromID(id objc.ID) *TensorData {
 	if id == 0 {
 		return nil

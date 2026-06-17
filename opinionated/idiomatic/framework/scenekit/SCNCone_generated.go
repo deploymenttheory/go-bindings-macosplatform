@@ -17,11 +17,11 @@ type Cone struct {
 // Unwrap returns the underlying [raw.SCNCone].
 func (x *Cone) Unwrap() *raw.SCNCone { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Cone) ID() objc.ID { return x.inner.Ptr() }
 
-// ConeFromID adopts an existing toll-free-bridged object id as a Cone (nil for 0).
+// ConeFromID adopts an existing object pointer as a Cone (nil for 0).
 func ConeFromID(id objc.ID) *Cone {
 	if id == 0 {
 		return nil

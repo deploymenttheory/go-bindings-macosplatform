@@ -20,11 +20,11 @@ type CaptureSlider struct {
 // Unwrap returns the underlying [raw.AVCaptureSlider].
 func (x *CaptureSlider) Unwrap() *raw.AVCaptureSlider { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CaptureSlider) ID() objc.ID { return x.inner.Ptr() }
 
-// CaptureSliderFromID adopts an existing toll-free-bridged object id as a CaptureSlider (nil for 0).
+// CaptureSliderFromID adopts an existing object pointer as a CaptureSlider (nil for 0).
 func CaptureSliderFromID(id objc.ID) *CaptureSlider {
 	if id == 0 {
 		return nil

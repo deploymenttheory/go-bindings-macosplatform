@@ -19,11 +19,11 @@ type LodgingReservation struct {
 // Unwrap returns the underlying [raw.INLodgingReservation].
 func (x *LodgingReservation) Unwrap() *raw.INLodgingReservation { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *LodgingReservation) ID() objc.ID { return x.inner.Ptr() }
 
-// LodgingReservationFromID adopts an existing toll-free-bridged object id as a LodgingReservation (nil for 0).
+// LodgingReservationFromID adopts an existing object pointer as a LodgingReservation (nil for 0).
 func LodgingReservationFromID(id objc.ID) *LodgingReservation {
 	if id == 0 {
 		return nil

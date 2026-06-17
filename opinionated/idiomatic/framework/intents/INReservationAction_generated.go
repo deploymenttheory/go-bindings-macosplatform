@@ -18,11 +18,11 @@ type ReservationAction struct {
 // Unwrap returns the underlying [raw.INReservationAction].
 func (x *ReservationAction) Unwrap() *raw.INReservationAction { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ReservationAction) ID() objc.ID { return x.inner.Ptr() }
 
-// ReservationActionFromID adopts an existing toll-free-bridged object id as a ReservationAction (nil for 0).
+// ReservationActionFromID adopts an existing object pointer as a ReservationAction (nil for 0).
 func ReservationActionFromID(id objc.ID) *ReservationAction {
 	if id == 0 {
 		return nil

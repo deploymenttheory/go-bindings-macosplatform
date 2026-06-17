@@ -19,11 +19,11 @@ type DecodedMessageBanner struct {
 // Unwrap returns the underlying [raw.MEDecodedMessageBanner].
 func (x *DecodedMessageBanner) Unwrap() *raw.MEDecodedMessageBanner { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DecodedMessageBanner) ID() objc.ID { return x.inner.Ptr() }
 
-// DecodedMessageBannerFromID adopts an existing toll-free-bridged object id as a DecodedMessageBanner (nil for 0).
+// DecodedMessageBannerFromID adopts an existing object pointer as a DecodedMessageBanner (nil for 0).
 func DecodedMessageBannerFromID(id objc.ID) *DecodedMessageBanner {
 	if id == 0 {
 		return nil

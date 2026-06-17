@@ -17,11 +17,11 @@ type Sphere struct {
 // Unwrap returns the underlying [raw.SCNSphere].
 func (x *Sphere) Unwrap() *raw.SCNSphere { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Sphere) ID() objc.ID { return x.inner.Ptr() }
 
-// SphereFromID adopts an existing toll-free-bridged object id as a Sphere (nil for 0).
+// SphereFromID adopts an existing object pointer as a Sphere (nil for 0).
 func SphereFromID(id objc.ID) *Sphere {
 	if id == 0 {
 		return nil

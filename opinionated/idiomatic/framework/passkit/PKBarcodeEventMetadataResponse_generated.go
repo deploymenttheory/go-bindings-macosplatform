@@ -18,11 +18,11 @@ type BarcodeEventMetadataResponse struct {
 // Unwrap returns the underlying [raw.PKBarcodeEventMetadataResponse].
 func (x *BarcodeEventMetadataResponse) Unwrap() *raw.PKBarcodeEventMetadataResponse { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *BarcodeEventMetadataResponse) ID() objc.ID { return x.inner.Ptr() }
 
-// BarcodeEventMetadataResponseFromID adopts an existing toll-free-bridged object id as a BarcodeEventMetadataResponse (nil for 0).
+// BarcodeEventMetadataResponseFromID adopts an existing object pointer as a BarcodeEventMetadataResponse (nil for 0).
 func BarcodeEventMetadataResponseFromID(id objc.ID) *BarcodeEventMetadataResponse {
 	if id == 0 {
 		return nil

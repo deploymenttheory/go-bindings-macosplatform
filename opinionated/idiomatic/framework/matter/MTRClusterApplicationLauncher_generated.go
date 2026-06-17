@@ -21,11 +21,11 @@ type MTRClusterApplicationLauncher struct {
 // Unwrap returns the underlying [raw.MTRClusterApplicationLauncher].
 func (x *MTRClusterApplicationLauncher) Unwrap() *raw.MTRClusterApplicationLauncher { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRClusterApplicationLauncher) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRClusterApplicationLauncherFromID adopts an existing toll-free-bridged object id as a MTRClusterApplicationLauncher (nil for 0).
+// MTRClusterApplicationLauncherFromID adopts an existing object pointer as a MTRClusterApplicationLauncher (nil for 0).
 func MTRClusterApplicationLauncherFromID(id objc.ID) *MTRClusterApplicationLauncher {
 	if id == 0 {
 		return nil

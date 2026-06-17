@@ -18,11 +18,11 @@ type TextureViewDescriptor struct {
 // Unwrap returns the underlying [raw.MTLTextureViewDescriptor].
 func (x *TextureViewDescriptor) Unwrap() *raw.MTLTextureViewDescriptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *TextureViewDescriptor) ID() objc.ID { return x.inner.Ptr() }
 
-// TextureViewDescriptorFromID adopts an existing toll-free-bridged object id as a TextureViewDescriptor (nil for 0).
+// TextureViewDescriptorFromID adopts an existing object pointer as a TextureViewDescriptor (nil for 0).
 func TextureViewDescriptorFromID(id objc.ID) *TextureViewDescriptor {
 	if id == 0 {
 		return nil

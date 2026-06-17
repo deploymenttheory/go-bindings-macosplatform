@@ -17,11 +17,11 @@ type MTRTestClusterClusterTestSpecificResponseParams struct {
 // Unwrap returns the underlying [raw.MTRTestClusterClusterTestSpecificResponseParams].
 func (x *MTRTestClusterClusterTestSpecificResponseParams) Unwrap() *raw.MTRTestClusterClusterTestSpecificResponseParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRTestClusterClusterTestSpecificResponseParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRTestClusterClusterTestSpecificResponseParamsFromID adopts an existing toll-free-bridged object id as a MTRTestClusterClusterTestSpecificResponseParams (nil for 0).
+// MTRTestClusterClusterTestSpecificResponseParamsFromID adopts an existing object pointer as a MTRTestClusterClusterTestSpecificResponseParams (nil for 0).
 func MTRTestClusterClusterTestSpecificResponseParamsFromID(id objc.ID) *MTRTestClusterClusterTestSpecificResponseParams {
 	if id == 0 {
 		return nil

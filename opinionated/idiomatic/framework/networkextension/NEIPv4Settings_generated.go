@@ -20,11 +20,11 @@ type NEIPv4Settings struct {
 // Unwrap returns the underlying [raw.NEIPv4Settings].
 func (x *NEIPv4Settings) Unwrap() *raw.NEIPv4Settings { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NEIPv4Settings) ID() objc.ID { return x.inner.Ptr() }
 
-// NEIPv4SettingsFromID adopts an existing toll-free-bridged object id as a NEIPv4Settings (nil for 0).
+// NEIPv4SettingsFromID adopts an existing object pointer as a NEIPv4Settings (nil for 0).
 func NEIPv4SettingsFromID(id objc.ID) *NEIPv4Settings {
 	if id == 0 {
 		return nil

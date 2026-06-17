@@ -18,11 +18,11 @@ type LivePhoto struct {
 // Unwrap returns the underlying [raw.PHLivePhoto].
 func (x *LivePhoto) Unwrap() *raw.PHLivePhoto { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *LivePhoto) ID() objc.ID { return x.inner.Ptr() }
 
-// LivePhotoFromID adopts an existing toll-free-bridged object id as a LivePhoto (nil for 0).
+// LivePhotoFromID adopts an existing object pointer as a LivePhoto (nil for 0).
 func LivePhotoFromID(id objc.ID) *LivePhoto {
 	if id == 0 {
 		return nil

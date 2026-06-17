@@ -20,11 +20,11 @@ type PolygonBuffer struct {
 // Unwrap returns the underlying [raw.MPSPolygonBuffer].
 func (x *PolygonBuffer) Unwrap() *raw.MPSPolygonBuffer { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PolygonBuffer) ID() objc.ID { return x.inner.Ptr() }
 
-// PolygonBufferFromID adopts an existing toll-free-bridged object id as a PolygonBuffer (nil for 0).
+// PolygonBufferFromID adopts an existing object pointer as a PolygonBuffer (nil for 0).
 func PolygonBufferFromID(id objc.ID) *PolygonBuffer {
 	if id == 0 {
 		return nil

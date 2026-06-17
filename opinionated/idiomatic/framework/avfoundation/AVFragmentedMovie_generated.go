@@ -17,11 +17,11 @@ type FragmentedMovie struct {
 // Unwrap returns the underlying [raw.AVFragmentedMovie].
 func (x *FragmentedMovie) Unwrap() *raw.AVFragmentedMovie { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *FragmentedMovie) ID() objc.ID { return x.inner.Ptr() }
 
-// FragmentedMovieFromID adopts an existing toll-free-bridged object id as a FragmentedMovie (nil for 0).
+// FragmentedMovieFromID adopts an existing object pointer as a FragmentedMovie (nil for 0).
 func FragmentedMovieFromID(id objc.ID) *FragmentedMovie {
 	if id == 0 {
 		return nil

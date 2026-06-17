@@ -20,11 +20,11 @@ type CollectionViewLayoutAttributes struct {
 // Unwrap returns the underlying [raw.NSCollectionViewLayoutAttributes].
 func (x *CollectionViewLayoutAttributes) Unwrap() *raw.NSCollectionViewLayoutAttributes { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CollectionViewLayoutAttributes) ID() objc.ID { return x.inner.Ptr() }
 
-// CollectionViewLayoutAttributesFromID adopts an existing toll-free-bridged object id as a CollectionViewLayoutAttributes (nil for 0).
+// CollectionViewLayoutAttributesFromID adopts an existing object pointer as a CollectionViewLayoutAttributes (nil for 0).
 func CollectionViewLayoutAttributesFromID(id objc.ID) *CollectionViewLayoutAttributes {
 	if id == 0 {
 		return nil

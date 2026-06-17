@@ -19,11 +19,11 @@ type ScannerDevice struct {
 // Unwrap returns the underlying [raw.ICScannerDevice].
 func (x *ScannerDevice) Unwrap() *raw.ICScannerDevice { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ScannerDevice) ID() objc.ID { return x.inner.Ptr() }
 
-// ScannerDeviceFromID adopts an existing toll-free-bridged object id as a ScannerDevice (nil for 0).
+// ScannerDeviceFromID adopts an existing object pointer as a ScannerDevice (nil for 0).
 func ScannerDeviceFromID(id objc.ID) *ScannerDevice {
 	if id == 0 {
 		return nil

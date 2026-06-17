@@ -18,11 +18,11 @@ type GraphicsDisplay struct {
 // Unwrap returns the underlying [raw.VZGraphicsDisplay].
 func (x *GraphicsDisplay) Unwrap() *raw.VZGraphicsDisplay { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *GraphicsDisplay) ID() objc.ID { return x.inner.Ptr() }
 
-// GraphicsDisplayFromID adopts an existing toll-free-bridged object id as a GraphicsDisplay (nil for 0).
+// GraphicsDisplayFromID adopts an existing object pointer as a GraphicsDisplay (nil for 0).
 func GraphicsDisplayFromID(id objc.ID) *GraphicsDisplay {
 	if id == 0 {
 		return nil

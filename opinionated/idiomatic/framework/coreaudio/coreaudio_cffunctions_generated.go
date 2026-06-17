@@ -11,7 +11,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// AudioDeviceGetCurrentTime wraps [raw.AudioDeviceGetCurrentTime], bridging CFTypeRef arguments and the OSStatus result.
+// AudioDeviceGetCurrentTime wraps [raw.AudioDeviceGetCurrentTime], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func AudioDeviceGetCurrentTime(inDevice uint, outTime *coreaudiotypes.AudioTimeStamp) error {
 	if _err := purego.NewOSStatus(raw.AudioDeviceGetCurrentTime(inDevice, outTime)).Err(); _err != nil {
 		return _err
@@ -19,7 +19,7 @@ func AudioDeviceGetCurrentTime(inDevice uint, outTime *coreaudiotypes.AudioTimeS
 	return nil
 }
 
-// AudioDeviceGetNearestStartTime wraps [raw.AudioDeviceGetNearestStartTime], bridging CFTypeRef arguments and the OSStatus result.
+// AudioDeviceGetNearestStartTime wraps [raw.AudioDeviceGetNearestStartTime], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func AudioDeviceGetNearestStartTime(inDevice uint, ioRequestedStartTime *coreaudiotypes.AudioTimeStamp, inFlags uint) error {
 	if _err := purego.NewOSStatus(raw.AudioDeviceGetNearestStartTime(inDevice, ioRequestedStartTime, inFlags)).Err(); _err != nil {
 		return _err
@@ -27,7 +27,7 @@ func AudioDeviceGetNearestStartTime(inDevice uint, ioRequestedStartTime *coreaud
 	return nil
 }
 
-// AudioDeviceGetPropertyInfo wraps [raw.AudioDeviceGetPropertyInfo], bridging CFTypeRef arguments and the OSStatus result.
+// AudioDeviceGetPropertyInfo wraps [raw.AudioDeviceGetPropertyInfo], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func AudioDeviceGetPropertyInfo(inDevice uint, inChannel uint, isInput uint8, inPropertyID uint, outSize *uint, outWritable *uint8) error {
 	if _err := purego.NewOSStatus(raw.AudioDeviceGetPropertyInfo(inDevice, inChannel, isInput, inPropertyID, outSize, outWritable)).Err(); _err != nil {
 		return _err
@@ -35,7 +35,7 @@ func AudioDeviceGetPropertyInfo(inDevice uint, inChannel uint, isInput uint8, in
 	return nil
 }
 
-// AudioDeviceRead wraps [raw.AudioDeviceRead], bridging CFTypeRef arguments and the OSStatus result.
+// AudioDeviceRead wraps [raw.AudioDeviceRead], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func AudioDeviceRead(inDevice uint, inStartTime *coreaudiotypes.AudioTimeStamp, outData *coreaudiotypes.AudioBufferList) error {
 	if _err := purego.NewOSStatus(raw.AudioDeviceRead(inDevice, inStartTime, outData)).Err(); _err != nil {
 		return _err
@@ -43,7 +43,7 @@ func AudioDeviceRead(inDevice uint, inStartTime *coreaudiotypes.AudioTimeStamp, 
 	return nil
 }
 
-// AudioDeviceTranslateTime wraps [raw.AudioDeviceTranslateTime], bridging CFTypeRef arguments and the OSStatus result.
+// AudioDeviceTranslateTime wraps [raw.AudioDeviceTranslateTime], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func AudioDeviceTranslateTime(inDevice uint, inTime *coreaudiotypes.AudioTimeStamp, outTime *coreaudiotypes.AudioTimeStamp) error {
 	if _err := purego.NewOSStatus(raw.AudioDeviceTranslateTime(inDevice, inTime, outTime)).Err(); _err != nil {
 		return _err
@@ -51,7 +51,7 @@ func AudioDeviceTranslateTime(inDevice uint, inTime *coreaudiotypes.AudioTimeSta
 	return nil
 }
 
-// AudioHardwareAddRunLoopSource wraps [raw.AudioHardwareAddRunLoopSource], bridging CFTypeRef arguments and the OSStatus result.
+// AudioHardwareAddRunLoopSource wraps [raw.AudioHardwareAddRunLoopSource], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func AudioHardwareAddRunLoopSource(inRunLoopSource objc.ID) error {
 	if _err := purego.NewOSStatus(raw.AudioHardwareAddRunLoopSource(purego.CFRef(inRunLoopSource))).Err(); _err != nil {
 		return _err
@@ -59,7 +59,7 @@ func AudioHardwareAddRunLoopSource(inRunLoopSource objc.ID) error {
 	return nil
 }
 
-// AudioHardwareCreateAggregateDevice wraps [raw.AudioHardwareCreateAggregateDevice], bridging CFTypeRef arguments and the OSStatus result.
+// AudioHardwareCreateAggregateDevice wraps [raw.AudioHardwareCreateAggregateDevice], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func AudioHardwareCreateAggregateDevice(inDescription objc.ID, outDeviceID *uint) error {
 	if _err := purego.NewOSStatus(raw.AudioHardwareCreateAggregateDevice(purego.CFRef(inDescription), outDeviceID)).Err(); _err != nil {
 		return _err
@@ -67,7 +67,7 @@ func AudioHardwareCreateAggregateDevice(inDescription objc.ID, outDeviceID *uint
 	return nil
 }
 
-// AudioHardwareDestroyAggregateDevice wraps [raw.AudioHardwareDestroyAggregateDevice], bridging CFTypeRef arguments and the OSStatus result.
+// AudioHardwareDestroyAggregateDevice wraps [raw.AudioHardwareDestroyAggregateDevice], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func AudioHardwareDestroyAggregateDevice(inDeviceID uint) error {
 	if _err := purego.NewOSStatus(raw.AudioHardwareDestroyAggregateDevice(inDeviceID)).Err(); _err != nil {
 		return _err
@@ -75,7 +75,7 @@ func AudioHardwareDestroyAggregateDevice(inDeviceID uint) error {
 	return nil
 }
 
-// AudioHardwareGetPropertyInfo wraps [raw.AudioHardwareGetPropertyInfo], bridging CFTypeRef arguments and the OSStatus result.
+// AudioHardwareGetPropertyInfo wraps [raw.AudioHardwareGetPropertyInfo], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func AudioHardwareGetPropertyInfo(inPropertyID uint, outSize *uint, outWritable *uint8) error {
 	if _err := purego.NewOSStatus(raw.AudioHardwareGetPropertyInfo(inPropertyID, outSize, outWritable)).Err(); _err != nil {
 		return _err
@@ -83,7 +83,7 @@ func AudioHardwareGetPropertyInfo(inPropertyID uint, outSize *uint, outWritable 
 	return nil
 }
 
-// AudioHardwareRemoveRunLoopSource wraps [raw.AudioHardwareRemoveRunLoopSource], bridging CFTypeRef arguments and the OSStatus result.
+// AudioHardwareRemoveRunLoopSource wraps [raw.AudioHardwareRemoveRunLoopSource], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func AudioHardwareRemoveRunLoopSource(inRunLoopSource objc.ID) error {
 	if _err := purego.NewOSStatus(raw.AudioHardwareRemoveRunLoopSource(purego.CFRef(inRunLoopSource))).Err(); _err != nil {
 		return _err
@@ -91,7 +91,7 @@ func AudioHardwareRemoveRunLoopSource(inRunLoopSource objc.ID) error {
 	return nil
 }
 
-// AudioHardwareUnload wraps [raw.AudioHardwareUnload], bridging CFTypeRef arguments and the OSStatus result.
+// AudioHardwareUnload wraps [raw.AudioHardwareUnload], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func AudioHardwareUnload() error {
 	if _err := purego.NewOSStatus(raw.AudioHardwareUnload()).Err(); _err != nil {
 		return _err
@@ -99,7 +99,7 @@ func AudioHardwareUnload() error {
 	return nil
 }
 
-// AudioObjectIsPropertySettable wraps [raw.AudioObjectIsPropertySettable], bridging CFTypeRef arguments and the OSStatus result.
+// AudioObjectIsPropertySettable wraps [raw.AudioObjectIsPropertySettable], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func AudioObjectIsPropertySettable(inObjectID uint, inAddress *raw.AudioObjectPropertyAddress, outIsSettable *uint8) error {
 	if _err := purego.NewOSStatus(raw.AudioObjectIsPropertySettable(inObjectID, inAddress, outIsSettable)).Err(); _err != nil {
 		return _err
@@ -107,7 +107,7 @@ func AudioObjectIsPropertySettable(inObjectID uint, inAddress *raw.AudioObjectPr
 	return nil
 }
 
-// AudioStreamGetPropertyInfo wraps [raw.AudioStreamGetPropertyInfo], bridging CFTypeRef arguments and the OSStatus result.
+// AudioStreamGetPropertyInfo wraps [raw.AudioStreamGetPropertyInfo], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func AudioStreamGetPropertyInfo(inStream uint, inChannel uint, inPropertyID uint, outSize *uint, outWritable *uint8) error {
 	if _err := purego.NewOSStatus(raw.AudioStreamGetPropertyInfo(inStream, inChannel, inPropertyID, outSize, outWritable)).Err(); _err != nil {
 		return _err

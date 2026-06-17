@@ -18,11 +18,11 @@ type MTRTimeSynchronizationClusterSetTrustedTimeSourceParams struct {
 // Unwrap returns the underlying [raw.MTRTimeSynchronizationClusterSetTrustedTimeSourceParams].
 func (x *MTRTimeSynchronizationClusterSetTrustedTimeSourceParams) Unwrap() *raw.MTRTimeSynchronizationClusterSetTrustedTimeSourceParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRTimeSynchronizationClusterSetTrustedTimeSourceParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRTimeSynchronizationClusterSetTrustedTimeSourceParamsFromID adopts an existing toll-free-bridged object id as a MTRTimeSynchronizationClusterSetTrustedTimeSourceParams (nil for 0).
+// MTRTimeSynchronizationClusterSetTrustedTimeSourceParamsFromID adopts an existing object pointer as a MTRTimeSynchronizationClusterSetTrustedTimeSourceParams (nil for 0).
 func MTRTimeSynchronizationClusterSetTrustedTimeSourceParamsFromID(id objc.ID) *MTRTimeSynchronizationClusterSetTrustedTimeSourceParams {
 	if id == 0 {
 		return nil

@@ -17,11 +17,11 @@ type CategoryType struct {
 // Unwrap returns the underlying [raw.HKCategoryType].
 func (x *CategoryType) Unwrap() *raw.HKCategoryType { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CategoryType) ID() objc.ID { return x.inner.Ptr() }
 
-// CategoryTypeFromID adopts an existing toll-free-bridged object id as a CategoryType (nil for 0).
+// CategoryTypeFromID adopts an existing object pointer as a CategoryType (nil for 0).
 func CategoryTypeFromID(id objc.ID) *CategoryType {
 	if id == 0 {
 		return nil

@@ -17,11 +17,11 @@ type DeviceLight struct {
 // Unwrap returns the underlying [raw.GCDeviceLight].
 func (x *DeviceLight) Unwrap() *raw.GCDeviceLight { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DeviceLight) ID() objc.ID { return x.inner.Ptr() }
 
-// DeviceLightFromID adopts an existing toll-free-bridged object id as a DeviceLight (nil for 0).
+// DeviceLightFromID adopts an existing object pointer as a DeviceLight (nil for 0).
 func DeviceLightFromID(id objc.ID) *DeviceLight {
 	if id == 0 {
 		return nil

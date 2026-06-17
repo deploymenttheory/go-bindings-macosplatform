@@ -18,11 +18,11 @@ type PointOfInterestFilter struct {
 // Unwrap returns the underlying [raw.MKPointOfInterestFilter].
 func (x *PointOfInterestFilter) Unwrap() *raw.MKPointOfInterestFilter { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PointOfInterestFilter) ID() objc.ID { return x.inner.Ptr() }
 
-// PointOfInterestFilterFromID adopts an existing toll-free-bridged object id as a PointOfInterestFilter (nil for 0).
+// PointOfInterestFilterFromID adopts an existing object pointer as a PointOfInterestFilter (nil for 0).
 func PointOfInterestFilterFromID(id objc.ID) *PointOfInterestFilter {
 	if id == 0 {
 		return nil

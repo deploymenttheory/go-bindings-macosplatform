@@ -20,11 +20,11 @@ type ImageReduceColumnMean struct {
 // Unwrap returns the underlying [raw.MPSImageReduceColumnMean].
 func (x *ImageReduceColumnMean) Unwrap() *raw.MPSImageReduceColumnMean { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ImageReduceColumnMean) ID() objc.ID { return x.inner.Ptr() }
 
-// ImageReduceColumnMeanFromID adopts an existing toll-free-bridged object id as a ImageReduceColumnMean (nil for 0).
+// ImageReduceColumnMeanFromID adopts an existing object pointer as a ImageReduceColumnMean (nil for 0).
 func ImageReduceColumnMeanFromID(id objc.ID) *ImageReduceColumnMean {
 	if id == 0 {
 		return nil

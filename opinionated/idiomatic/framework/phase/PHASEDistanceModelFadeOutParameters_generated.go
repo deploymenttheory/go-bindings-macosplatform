@@ -17,11 +17,11 @@ type DistanceModelFadeOutParameters struct {
 // Unwrap returns the underlying [raw.PHASEDistanceModelFadeOutParameters].
 func (x *DistanceModelFadeOutParameters) Unwrap() *raw.PHASEDistanceModelFadeOutParameters { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DistanceModelFadeOutParameters) ID() objc.ID { return x.inner.Ptr() }
 
-// DistanceModelFadeOutParametersFromID adopts an existing toll-free-bridged object id as a DistanceModelFadeOutParameters (nil for 0).
+// DistanceModelFadeOutParametersFromID adopts an existing object pointer as a DistanceModelFadeOutParameters (nil for 0).
 func DistanceModelFadeOutParametersFromID(id objc.ID) *DistanceModelFadeOutParameters {
 	if id == 0 {
 		return nil

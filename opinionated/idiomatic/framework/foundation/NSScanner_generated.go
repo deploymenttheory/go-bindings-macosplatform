@@ -18,11 +18,11 @@ type Scanner struct {
 // Unwrap returns the underlying [raw.NSScanner].
 func (x *Scanner) Unwrap() *raw.NSScanner { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Scanner) ID() objc.ID { return x.inner.Ptr() }
 
-// ScannerFromID adopts an existing toll-free-bridged object id as a Scanner (nil for 0).
+// ScannerFromID adopts an existing object pointer as a Scanner (nil for 0).
 func ScannerFromID(id objc.ID) *Scanner {
 	if id == 0 {
 		return nil

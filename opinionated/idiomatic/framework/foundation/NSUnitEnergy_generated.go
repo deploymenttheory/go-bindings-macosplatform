@@ -17,11 +17,11 @@ type UnitEnergy struct {
 // Unwrap returns the underlying [raw.NSUnitEnergy].
 func (x *UnitEnergy) Unwrap() *raw.NSUnitEnergy { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *UnitEnergy) ID() objc.ID { return x.inner.Ptr() }
 
-// UnitEnergyFromID adopts an existing toll-free-bridged object id as a UnitEnergy (nil for 0).
+// UnitEnergyFromID adopts an existing object pointer as a UnitEnergy (nil for 0).
 func UnitEnergyFromID(id objc.ID) *UnitEnergy {
 	if id == 0 {
 		return nil

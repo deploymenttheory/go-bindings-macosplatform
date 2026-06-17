@@ -17,11 +17,11 @@ type MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams struct {
 // Unwrap returns the underlying [raw.MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams].
 func (x *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams) Unwrap() *raw.MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParamsFromID adopts an existing toll-free-bridged object id as a MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams (nil for 0).
+// MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParamsFromID adopts an existing object pointer as a MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams (nil for 0).
 func MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParamsFromID(id objc.ID) *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams {
 	if id == 0 {
 		return nil

@@ -17,11 +17,11 @@ type MetricPlayerItemRateChangeEvent struct {
 // Unwrap returns the underlying [raw.AVMetricPlayerItemRateChangeEvent].
 func (x *MetricPlayerItemRateChangeEvent) Unwrap() *raw.AVMetricPlayerItemRateChangeEvent { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MetricPlayerItemRateChangeEvent) ID() objc.ID { return x.inner.Ptr() }
 
-// MetricPlayerItemRateChangeEventFromID adopts an existing toll-free-bridged object id as a MetricPlayerItemRateChangeEvent (nil for 0).
+// MetricPlayerItemRateChangeEventFromID adopts an existing object pointer as a MetricPlayerItemRateChangeEvent (nil for 0).
 func MetricPlayerItemRateChangeEventFromID(id objc.ID) *MetricPlayerItemRateChangeEvent {
 	if id == 0 {
 		return nil

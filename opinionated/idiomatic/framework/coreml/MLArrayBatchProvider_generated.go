@@ -20,11 +20,11 @@ type ArrayBatchProvider struct {
 // Unwrap returns the underlying [raw.MLArrayBatchProvider].
 func (x *ArrayBatchProvider) Unwrap() *raw.MLArrayBatchProvider { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ArrayBatchProvider) ID() objc.ID { return x.inner.Ptr() }
 
-// ArrayBatchProviderFromID adopts an existing toll-free-bridged object id as a ArrayBatchProvider (nil for 0).
+// ArrayBatchProviderFromID adopts an existing object pointer as a ArrayBatchProvider (nil for 0).
 func ArrayBatchProviderFromID(id objc.ID) *ArrayBatchProvider {
 	if id == 0 {
 		return nil

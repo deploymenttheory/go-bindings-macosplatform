@@ -19,11 +19,11 @@ type Airport struct {
 // Unwrap returns the underlying [raw.INAirport].
 func (x *Airport) Unwrap() *raw.INAirport { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Airport) ID() objc.ID { return x.inner.Ptr() }
 
-// AirportFromID adopts an existing toll-free-bridged object id as a Airport (nil for 0).
+// AirportFromID adopts an existing object pointer as a Airport (nil for 0).
 func AirportFromID(id objc.ID) *Airport {
 	if id == 0 {
 		return nil

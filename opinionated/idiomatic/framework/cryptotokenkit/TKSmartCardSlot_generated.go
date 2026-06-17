@@ -18,11 +18,11 @@ type SmartCardSlot struct {
 // Unwrap returns the underlying [raw.TKSmartCardSlot].
 func (x *SmartCardSlot) Unwrap() *raw.TKSmartCardSlot { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SmartCardSlot) ID() objc.ID { return x.inner.Ptr() }
 
-// SmartCardSlotFromID adopts an existing toll-free-bridged object id as a SmartCardSlot (nil for 0).
+// SmartCardSlotFromID adopts an existing object pointer as a SmartCardSlot (nil for 0).
 func SmartCardSlotFromID(id objc.ID) *SmartCardSlot {
 	if id == 0 {
 		return nil

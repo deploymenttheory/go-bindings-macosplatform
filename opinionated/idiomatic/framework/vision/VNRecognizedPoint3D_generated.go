@@ -18,11 +18,11 @@ type RecognizedPoint3D struct {
 // Unwrap returns the underlying [raw.VNRecognizedPoint3D].
 func (x *RecognizedPoint3D) Unwrap() *raw.VNRecognizedPoint3D { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *RecognizedPoint3D) ID() objc.ID { return x.inner.Ptr() }
 
-// RecognizedPoint3DFromID adopts an existing toll-free-bridged object id as a RecognizedPoint3D (nil for 0).
+// RecognizedPoint3DFromID adopts an existing object pointer as a RecognizedPoint3D (nil for 0).
 func RecognizedPoint3DFromID(id objc.ID) *RecognizedPoint3D {
 	if id == 0 {
 		return nil

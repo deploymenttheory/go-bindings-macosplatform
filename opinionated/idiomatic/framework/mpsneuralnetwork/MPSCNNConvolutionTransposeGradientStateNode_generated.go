@@ -17,11 +17,11 @@ type CNNConvolutionTransposeGradientStateNode struct {
 // Unwrap returns the underlying [raw.MPSCNNConvolutionTransposeGradientStateNode].
 func (x *CNNConvolutionTransposeGradientStateNode) Unwrap() *raw.MPSCNNConvolutionTransposeGradientStateNode { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CNNConvolutionTransposeGradientStateNode) ID() objc.ID { return x.inner.Ptr() }
 
-// CNNConvolutionTransposeGradientStateNodeFromID adopts an existing toll-free-bridged object id as a CNNConvolutionTransposeGradientStateNode (nil for 0).
+// CNNConvolutionTransposeGradientStateNodeFromID adopts an existing object pointer as a CNNConvolutionTransposeGradientStateNode (nil for 0).
 func CNNConvolutionTransposeGradientStateNodeFromID(id objc.ID) *CNNConvolutionTransposeGradientStateNode {
 	if id == 0 {
 		return nil

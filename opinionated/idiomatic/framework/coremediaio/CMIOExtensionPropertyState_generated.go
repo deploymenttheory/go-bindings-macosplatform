@@ -17,11 +17,11 @@ type ExtensionPropertyState struct {
 // Unwrap returns the underlying [raw.CMIOExtensionPropertyState].
 func (x *ExtensionPropertyState) Unwrap() *raw.CMIOExtensionPropertyState[objc.ID] { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ExtensionPropertyState) ID() objc.ID { return x.inner.Ptr() }
 
-// ExtensionPropertyStateFromID adopts an existing toll-free-bridged object id as a ExtensionPropertyState (nil for 0).
+// ExtensionPropertyStateFromID adopts an existing object pointer as a ExtensionPropertyState (nil for 0).
 func ExtensionPropertyStateFromID(id objc.ID) *ExtensionPropertyState {
 	if id == 0 {
 		return nil

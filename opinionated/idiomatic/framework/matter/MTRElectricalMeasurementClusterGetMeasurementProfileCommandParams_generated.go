@@ -18,11 +18,11 @@ type MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams struct {
 // Unwrap returns the underlying [raw.MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams].
 func (x *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) Unwrap() *raw.MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRElectricalMeasurementClusterGetMeasurementProfileCommandParamsFromID adopts an existing toll-free-bridged object id as a MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams (nil for 0).
+// MTRElectricalMeasurementClusterGetMeasurementProfileCommandParamsFromID adopts an existing object pointer as a MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams (nil for 0).
 func MTRElectricalMeasurementClusterGetMeasurementProfileCommandParamsFromID(id objc.ID) *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams {
 	if id == 0 {
 		return nil

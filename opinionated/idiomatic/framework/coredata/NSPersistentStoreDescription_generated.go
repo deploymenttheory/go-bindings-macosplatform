@@ -19,11 +19,11 @@ type PersistentStoreDescription struct {
 // Unwrap returns the underlying [raw.NSPersistentStoreDescription].
 func (x *PersistentStoreDescription) Unwrap() *raw.NSPersistentStoreDescription { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PersistentStoreDescription) ID() objc.ID { return x.inner.Ptr() }
 
-// PersistentStoreDescriptionFromID adopts an existing toll-free-bridged object id as a PersistentStoreDescription (nil for 0).
+// PersistentStoreDescriptionFromID adopts an existing object pointer as a PersistentStoreDescription (nil for 0).
 func PersistentStoreDescriptionFromID(id objc.ID) *PersistentStoreDescription {
 	if id == 0 {
 		return nil

@@ -19,11 +19,11 @@ type DatabaseSubscription struct {
 // Unwrap returns the underlying [raw.CKDatabaseSubscription].
 func (x *DatabaseSubscription) Unwrap() *raw.CKDatabaseSubscription { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DatabaseSubscription) ID() objc.ID { return x.inner.Ptr() }
 
-// DatabaseSubscriptionFromID adopts an existing toll-free-bridged object id as a DatabaseSubscription (nil for 0).
+// DatabaseSubscriptionFromID adopts an existing object pointer as a DatabaseSubscription (nil for 0).
 func DatabaseSubscriptionFromID(id objc.ID) *DatabaseSubscription {
 	if id == 0 {
 		return nil

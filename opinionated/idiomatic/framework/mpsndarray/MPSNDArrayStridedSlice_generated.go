@@ -17,11 +17,11 @@ type ArrayStridedSlice struct {
 // Unwrap returns the underlying [raw.MPSNDArrayStridedSlice].
 func (x *ArrayStridedSlice) Unwrap() *raw.MPSNDArrayStridedSlice { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ArrayStridedSlice) ID() objc.ID { return x.inner.Ptr() }
 
-// ArrayStridedSliceFromID adopts an existing toll-free-bridged object id as a ArrayStridedSlice (nil for 0).
+// ArrayStridedSliceFromID adopts an existing object pointer as a ArrayStridedSlice (nil for 0).
 func ArrayStridedSliceFromID(id objc.ID) *ArrayStridedSlice {
 	if id == 0 {
 		return nil

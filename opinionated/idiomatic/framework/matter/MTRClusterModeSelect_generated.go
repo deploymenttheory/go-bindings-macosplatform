@@ -19,11 +19,11 @@ type MTRClusterModeSelect struct {
 // Unwrap returns the underlying [raw.MTRClusterModeSelect].
 func (x *MTRClusterModeSelect) Unwrap() *raw.MTRClusterModeSelect { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRClusterModeSelect) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRClusterModeSelectFromID adopts an existing toll-free-bridged object id as a MTRClusterModeSelect (nil for 0).
+// MTRClusterModeSelectFromID adopts an existing object pointer as a MTRClusterModeSelect (nil for 0).
 func MTRClusterModeSelectFromID(id objc.ID) *MTRClusterModeSelect {
 	if id == 0 {
 		return nil

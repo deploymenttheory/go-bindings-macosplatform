@@ -19,11 +19,11 @@ type CompileOptions struct {
 // Unwrap returns the underlying [raw.MTLCompileOptions].
 func (x *CompileOptions) Unwrap() *raw.MTLCompileOptions { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CompileOptions) ID() objc.ID { return x.inner.Ptr() }
 
-// CompileOptionsFromID adopts an existing toll-free-bridged object id as a CompileOptions (nil for 0).
+// CompileOptionsFromID adopts an existing object pointer as a CompileOptions (nil for 0).
 func CompileOptionsFromID(id objc.ID) *CompileOptions {
 	if id == 0 {
 		return nil

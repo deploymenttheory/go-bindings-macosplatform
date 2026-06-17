@@ -19,11 +19,11 @@ type SafariToolbarItem struct {
 // Unwrap returns the underlying [raw.SFSafariToolbarItem].
 func (x *SafariToolbarItem) Unwrap() *raw.SFSafariToolbarItem { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SafariToolbarItem) ID() objc.ID { return x.inner.Ptr() }
 
-// SafariToolbarItemFromID adopts an existing toll-free-bridged object id as a SafariToolbarItem (nil for 0).
+// SafariToolbarItemFromID adopts an existing object pointer as a SafariToolbarItem (nil for 0).
 func SafariToolbarItemFromID(id objc.ID) *SafariToolbarItem {
 	if id == 0 {
 		return nil

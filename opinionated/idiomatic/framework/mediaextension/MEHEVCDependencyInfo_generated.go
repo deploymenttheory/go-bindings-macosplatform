@@ -18,11 +18,11 @@ type HEVCDependencyInfo struct {
 // Unwrap returns the underlying [raw.MEHEVCDependencyInfo].
 func (x *HEVCDependencyInfo) Unwrap() *raw.MEHEVCDependencyInfo { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *HEVCDependencyInfo) ID() objc.ID { return x.inner.Ptr() }
 
-// HEVCDependencyInfoFromID adopts an existing toll-free-bridged object id as a HEVCDependencyInfo (nil for 0).
+// HEVCDependencyInfoFromID adopts an existing object pointer as a HEVCDependencyInfo (nil for 0).
 func HEVCDependencyInfoFromID(id objc.ID) *HEVCDependencyInfo {
 	if id == 0 {
 		return nil

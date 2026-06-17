@@ -20,11 +20,11 @@ type SaveOptions struct {
 // Unwrap returns the underlying [raw.IKSaveOptions].
 func (x *SaveOptions) Unwrap() *raw.IKSaveOptions { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SaveOptions) ID() objc.ID { return x.inner.Ptr() }
 
-// SaveOptionsFromID adopts an existing toll-free-bridged object id as a SaveOptions (nil for 0).
+// SaveOptionsFromID adopts an existing object pointer as a SaveOptions (nil for 0).
 func SaveOptionsFromID(id objc.ID) *SaveOptions {
 	if id == 0 {
 		return nil

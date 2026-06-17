@@ -18,11 +18,11 @@ type Reminder struct {
 // Unwrap returns the underlying [raw.EKReminder].
 func (x *Reminder) Unwrap() *raw.EKReminder { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Reminder) ID() objc.ID { return x.inner.Ptr() }
 
-// ReminderFromID adopts an existing toll-free-bridged object id as a Reminder (nil for 0).
+// ReminderFromID adopts an existing object pointer as a Reminder (nil for 0).
 func ReminderFromID(id objc.ID) *Reminder {
 	if id == 0 {
 		return nil

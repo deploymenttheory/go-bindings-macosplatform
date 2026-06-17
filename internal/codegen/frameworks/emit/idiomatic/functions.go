@@ -408,11 +408,12 @@ func cfParamKind(objcType string) int {
 }
 
 // emitCFFunctionWrappers writes <pkgname>_cffunctions_generated.go: idiomatic
-// wrappers for OSStatus-returning C functions whose dictionary/CFTypeRef
-// arguments are toll-free bridged. CFDictionaryRef / CF…Ref inputs become objc.ID
-// (passed via purego.CFRef), CFTypeRef * out-parameters become objc.ID returns,
-// and the OSStatus result becomes a Go error (purego.OSStatus.Err, which carries
-// the code so callers can tell e.g. errSecItemNotFound from a real failure):
+// wrappers for OSStatus-returning C functions that take or return CoreFoundation
+// references. A CFTypeRef and an objc.ID are the same pointer, so CFDictionaryRef
+// / CF…Ref inputs become objc.ID (passed through purego.CFRef), CFTypeRef * out-
+// parameters become objc.ID returns, and the OSStatus result becomes a Go error
+// (purego.OSStatus.Err, which carries the code so callers can tell e.g.
+// errSecItemNotFound from a real failure):
 //
 //	func SecItemCopyMatching(query objc.ID) (objc.ID, error)
 //	func SecItemDelete(query objc.ID) error
@@ -491,7 +492,7 @@ func emitCFFunctionWrappers(
 			retSig = "(" + strings.Join(append(append([]string{}, outTypes...), "error"), ", ") + ")"
 		}
 
-		fmt.Fprintf(&body, "// %s wraps [%s.%s], bridging CFTypeRef arguments and the OSStatus result.\n", goName, rawPkgAlias, goName)
+		fmt.Fprintf(&body, "// %s wraps [%s.%s], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.\n", goName, rawPkgAlias, goName)
 		fmt.Fprintf(&body, "func %s(%s) %s {\n", goName, strings.Join(sigParams, ", "), retSig)
 		for _, pl := range preLines {
 			fmt.Fprintln(&body, pl)

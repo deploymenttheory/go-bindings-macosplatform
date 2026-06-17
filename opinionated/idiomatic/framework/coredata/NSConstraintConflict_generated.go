@@ -19,11 +19,11 @@ type ConstraintConflict struct {
 // Unwrap returns the underlying [raw.NSConstraintConflict].
 func (x *ConstraintConflict) Unwrap() *raw.NSConstraintConflict { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ConstraintConflict) ID() objc.ID { return x.inner.Ptr() }
 
-// ConstraintConflictFromID adopts an existing toll-free-bridged object id as a ConstraintConflict (nil for 0).
+// ConstraintConflictFromID adopts an existing object pointer as a ConstraintConflict (nil for 0).
 func ConstraintConflictFromID(id objc.ID) *ConstraintConflict {
 	if id == 0 {
 		return nil

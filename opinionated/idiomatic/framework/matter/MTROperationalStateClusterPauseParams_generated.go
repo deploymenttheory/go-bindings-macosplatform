@@ -18,11 +18,11 @@ type MTROperationalStateClusterPauseParams struct {
 // Unwrap returns the underlying [raw.MTROperationalStateClusterPauseParams].
 func (x *MTROperationalStateClusterPauseParams) Unwrap() *raw.MTROperationalStateClusterPauseParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTROperationalStateClusterPauseParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTROperationalStateClusterPauseParamsFromID adopts an existing toll-free-bridged object id as a MTROperationalStateClusterPauseParams (nil for 0).
+// MTROperationalStateClusterPauseParamsFromID adopts an existing object pointer as a MTROperationalStateClusterPauseParams (nil for 0).
 func MTROperationalStateClusterPauseParamsFromID(id objc.ID) *MTROperationalStateClusterPauseParams {
 	if id == 0 {
 		return nil

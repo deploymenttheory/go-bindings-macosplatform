@@ -18,11 +18,11 @@ type CameraNode struct {
 // Unwrap returns the underlying [raw.SKCameraNode].
 func (x *CameraNode) Unwrap() *raw.SKCameraNode { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CameraNode) ID() objc.ID { return x.inner.Ptr() }
 
-// CameraNodeFromID adopts an existing toll-free-bridged object id as a CameraNode (nil for 0).
+// CameraNodeFromID adopts an existing object pointer as a CameraNode (nil for 0).
 func CameraNodeFromID(id objc.ID) *CameraNode {
 	if id == 0 {
 		return nil

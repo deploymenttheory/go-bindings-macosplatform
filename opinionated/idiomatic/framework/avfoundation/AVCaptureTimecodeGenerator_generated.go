@@ -20,11 +20,11 @@ type CaptureTimecodeGenerator struct {
 // Unwrap returns the underlying [raw.AVCaptureTimecodeGenerator].
 func (x *CaptureTimecodeGenerator) Unwrap() *raw.AVCaptureTimecodeGenerator { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CaptureTimecodeGenerator) ID() objc.ID { return x.inner.Ptr() }
 
-// CaptureTimecodeGeneratorFromID adopts an existing toll-free-bridged object id as a CaptureTimecodeGenerator (nil for 0).
+// CaptureTimecodeGeneratorFromID adopts an existing object pointer as a CaptureTimecodeGenerator (nil for 0).
 func CaptureTimecodeGeneratorFromID(id objc.ID) *CaptureTimecodeGenerator {
 	if id == 0 {
 		return nil

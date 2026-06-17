@@ -19,11 +19,11 @@ type HapticDynamicParameter struct {
 // Unwrap returns the underlying [raw.CHHapticDynamicParameter].
 func (x *HapticDynamicParameter) Unwrap() *raw.CHHapticDynamicParameter { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *HapticDynamicParameter) ID() objc.ID { return x.inner.Ptr() }
 
-// HapticDynamicParameterFromID adopts an existing toll-free-bridged object id as a HapticDynamicParameter (nil for 0).
+// HapticDynamicParameterFromID adopts an existing object pointer as a HapticDynamicParameter (nil for 0).
 func HapticDynamicParameterFromID(id objc.ID) *HapticDynamicParameter {
 	if id == 0 {
 		return nil

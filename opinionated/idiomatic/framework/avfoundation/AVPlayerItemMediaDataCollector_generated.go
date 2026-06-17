@@ -17,11 +17,11 @@ type PlayerItemMediaDataCollector struct {
 // Unwrap returns the underlying [raw.AVPlayerItemMediaDataCollector].
 func (x *PlayerItemMediaDataCollector) Unwrap() *raw.AVPlayerItemMediaDataCollector { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PlayerItemMediaDataCollector) ID() objc.ID { return x.inner.Ptr() }
 
-// PlayerItemMediaDataCollectorFromID adopts an existing toll-free-bridged object id as a PlayerItemMediaDataCollector (nil for 0).
+// PlayerItemMediaDataCollectorFromID adopts an existing object pointer as a PlayerItemMediaDataCollector (nil for 0).
 func PlayerItemMediaDataCollectorFromID(id objc.ID) *PlayerItemMediaDataCollector {
 	if id == 0 {
 		return nil

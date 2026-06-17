@@ -20,11 +20,11 @@ type AssetReaderOutput struct {
 // Unwrap returns the underlying [raw.AVAssetReaderOutput].
 func (x *AssetReaderOutput) Unwrap() *raw.AVAssetReaderOutput { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AssetReaderOutput) ID() objc.ID { return x.inner.Ptr() }
 
-// AssetReaderOutputFromID adopts an existing toll-free-bridged object id as a AssetReaderOutput (nil for 0).
+// AssetReaderOutputFromID adopts an existing object pointer as a AssetReaderOutput (nil for 0).
 func AssetReaderOutputFromID(id objc.ID) *AssetReaderOutput {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type ConditionLock struct {
 // Unwrap returns the underlying [raw.NSConditionLock].
 func (x *ConditionLock) Unwrap() *raw.NSConditionLock { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ConditionLock) ID() objc.ID { return x.inner.Ptr() }
 
-// ConditionLockFromID adopts an existing toll-free-bridged object id as a ConditionLock (nil for 0).
+// ConditionLockFromID adopts an existing object pointer as a ConditionLock (nil for 0).
 func ConditionLockFromID(id objc.ID) *ConditionLock {
 	if id == 0 {
 		return nil

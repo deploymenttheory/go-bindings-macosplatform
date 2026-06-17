@@ -22,11 +22,11 @@ type NDArray struct {
 // Unwrap returns the underlying [raw.MPSNDArray].
 func (x *NDArray) Unwrap() *raw.MPSNDArray { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NDArray) ID() objc.ID { return x.inner.Ptr() }
 
-// NDArrayFromID adopts an existing toll-free-bridged object id as a NDArray (nil for 0).
+// NDArrayFromID adopts an existing object pointer as a NDArray (nil for 0).
 func NDArrayFromID(id objc.ID) *NDArray {
 	if id == 0 {
 		return nil

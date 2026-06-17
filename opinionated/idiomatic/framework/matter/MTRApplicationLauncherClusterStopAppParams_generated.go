@@ -18,11 +18,11 @@ type MTRApplicationLauncherClusterStopAppParams struct {
 // Unwrap returns the underlying [raw.MTRApplicationLauncherClusterStopAppParams].
 func (x *MTRApplicationLauncherClusterStopAppParams) Unwrap() *raw.MTRApplicationLauncherClusterStopAppParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRApplicationLauncherClusterStopAppParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRApplicationLauncherClusterStopAppParamsFromID adopts an existing toll-free-bridged object id as a MTRApplicationLauncherClusterStopAppParams (nil for 0).
+// MTRApplicationLauncherClusterStopAppParamsFromID adopts an existing object pointer as a MTRApplicationLauncherClusterStopAppParams (nil for 0).
 func MTRApplicationLauncherClusterStopAppParamsFromID(id objc.ID) *MTRApplicationLauncherClusterStopAppParams {
 	if id == 0 {
 		return nil

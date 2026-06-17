@@ -17,11 +17,11 @@ type MotionBlurParameters struct {
 // Unwrap returns the underlying [raw.VTMotionBlurParameters].
 func (x *MotionBlurParameters) Unwrap() *raw.VTMotionBlurParameters { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MotionBlurParameters) ID() objc.ID { return x.inner.Ptr() }
 
-// MotionBlurParametersFromID adopts an existing toll-free-bridged object id as a MotionBlurParameters (nil for 0).
+// MotionBlurParametersFromID adopts an existing object pointer as a MotionBlurParameters (nil for 0).
 func MotionBlurParametersFromID(id objc.ID) *MotionBlurParameters {
 	if id == 0 {
 		return nil

@@ -17,11 +17,11 @@ type ProductSubscriptionPeriod struct {
 // Unwrap returns the underlying [raw.SKProductSubscriptionPeriod].
 func (x *ProductSubscriptionPeriod) Unwrap() *raw.SKProductSubscriptionPeriod { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ProductSubscriptionPeriod) ID() objc.ID { return x.inner.Ptr() }
 
-// ProductSubscriptionPeriodFromID adopts an existing toll-free-bridged object id as a ProductSubscriptionPeriod (nil for 0).
+// ProductSubscriptionPeriodFromID adopts an existing object pointer as a ProductSubscriptionPeriod (nil for 0).
 func ProductSubscriptionPeriodFromID(id objc.ID) *ProductSubscriptionPeriod {
 	if id == 0 {
 		return nil

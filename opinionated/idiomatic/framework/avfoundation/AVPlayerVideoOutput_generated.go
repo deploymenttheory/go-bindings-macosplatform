@@ -19,11 +19,11 @@ type PlayerVideoOutput struct {
 // Unwrap returns the underlying [raw.AVPlayerVideoOutput].
 func (x *PlayerVideoOutput) Unwrap() *raw.AVPlayerVideoOutput { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PlayerVideoOutput) ID() objc.ID { return x.inner.Ptr() }
 
-// PlayerVideoOutputFromID adopts an existing toll-free-bridged object id as a PlayerVideoOutput (nil for 0).
+// PlayerVideoOutputFromID adopts an existing object pointer as a PlayerVideoOutput (nil for 0).
 func PlayerVideoOutputFromID(id objc.ID) *PlayerVideoOutput {
 	if id == 0 {
 		return nil

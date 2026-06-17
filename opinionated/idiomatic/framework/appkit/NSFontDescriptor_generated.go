@@ -19,11 +19,11 @@ type FontDescriptor struct {
 // Unwrap returns the underlying [raw.NSFontDescriptor].
 func (x *FontDescriptor) Unwrap() *raw.NSFontDescriptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *FontDescriptor) ID() objc.ID { return x.inner.Ptr() }
 
-// FontDescriptorFromID adopts an existing toll-free-bridged object id as a FontDescriptor (nil for 0).
+// FontDescriptorFromID adopts an existing object pointer as a FontDescriptor (nil for 0).
 func FontDescriptorFromID(id objc.ID) *FontDescriptor {
 	if id == 0 {
 		return nil

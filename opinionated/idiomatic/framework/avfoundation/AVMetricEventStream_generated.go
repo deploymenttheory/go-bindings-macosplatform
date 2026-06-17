@@ -18,11 +18,11 @@ type MetricEventStream struct {
 // Unwrap returns the underlying [raw.AVMetricEventStream].
 func (x *MetricEventStream) Unwrap() *raw.AVMetricEventStream { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MetricEventStream) ID() objc.ID { return x.inner.Ptr() }
 
-// MetricEventStreamFromID adopts an existing toll-free-bridged object id as a MetricEventStream (nil for 0).
+// MetricEventStreamFromID adopts an existing object pointer as a MetricEventStream (nil for 0).
 func MetricEventStreamFromID(id objc.ID) *MetricEventStream {
 	if id == 0 {
 		return nil

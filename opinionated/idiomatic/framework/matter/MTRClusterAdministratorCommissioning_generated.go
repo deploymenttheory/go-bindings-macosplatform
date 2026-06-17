@@ -19,11 +19,11 @@ type MTRClusterAdministratorCommissioning struct {
 // Unwrap returns the underlying [raw.MTRClusterAdministratorCommissioning].
 func (x *MTRClusterAdministratorCommissioning) Unwrap() *raw.MTRClusterAdministratorCommissioning { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRClusterAdministratorCommissioning) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRClusterAdministratorCommissioningFromID adopts an existing toll-free-bridged object id as a MTRClusterAdministratorCommissioning (nil for 0).
+// MTRClusterAdministratorCommissioningFromID adopts an existing object pointer as a MTRClusterAdministratorCommissioning (nil for 0).
 func MTRClusterAdministratorCommissioningFromID(id objc.ID) *MTRClusterAdministratorCommissioning {
 	if id == 0 {
 		return nil

@@ -19,11 +19,11 @@ type Network struct {
 // Unwrap returns the underlying [raw.CWNetwork].
 func (x *Network) Unwrap() *raw.CWNetwork { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Network) ID() objc.ID { return x.inner.Ptr() }
 
-// NetworkFromID adopts an existing toll-free-bridged object id as a Network (nil for 0).
+// NetworkFromID adopts an existing object pointer as a Network (nil for 0).
 func NetworkFromID(id objc.ID) *Network {
 	if id == 0 {
 		return nil

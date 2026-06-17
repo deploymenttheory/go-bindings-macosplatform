@@ -19,11 +19,11 @@ type DOMCSSValue struct {
 // Unwrap returns the underlying [raw.DOMCSSValue].
 func (x *DOMCSSValue) Unwrap() *raw.DOMCSSValue { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DOMCSSValue) ID() objc.ID { return x.inner.Ptr() }
 
-// DOMCSSValueFromID adopts an existing toll-free-bridged object id as a DOMCSSValue (nil for 0).
+// DOMCSSValueFromID adopts an existing object pointer as a DOMCSSValue (nil for 0).
 func DOMCSSValueFromID(id objc.ID) *DOMCSSValue {
 	if id == 0 {
 		return nil

@@ -19,11 +19,11 @@ type PlugInViewController struct {
 // Unwrap returns the underlying [raw.QCPlugInViewController].
 func (x *PlugInViewController) Unwrap() *raw.QCPlugInViewController { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PlugInViewController) ID() objc.ID { return x.inner.Ptr() }
 
-// PlugInViewControllerFromID adopts an existing toll-free-bridged object id as a PlugInViewController (nil for 0).
+// PlugInViewControllerFromID adopts an existing object pointer as a PlugInViewController (nil for 0).
 func PlugInViewControllerFromID(id objc.ID) *PlugInViewController {
 	if id == 0 {
 		return nil

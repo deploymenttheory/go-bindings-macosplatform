@@ -17,11 +17,11 @@ type MatMulDescriptor struct {
 // Unwrap returns the underlying [raw.MLCMatMulDescriptor].
 func (x *MatMulDescriptor) Unwrap() *raw.MLCMatMulDescriptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MatMulDescriptor) ID() objc.ID { return x.inner.Ptr() }
 
-// MatMulDescriptorFromID adopts an existing toll-free-bridged object id as a MatMulDescriptor (nil for 0).
+// MatMulDescriptorFromID adopts an existing object pointer as a MatMulDescriptor (nil for 0).
 func MatMulDescriptorFromID(id objc.ID) *MatMulDescriptor {
 	if id == 0 {
 		return nil

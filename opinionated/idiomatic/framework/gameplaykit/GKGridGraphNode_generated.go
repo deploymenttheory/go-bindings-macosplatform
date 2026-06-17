@@ -18,11 +18,11 @@ type GridGraphNode struct {
 // Unwrap returns the underlying [raw.GKGridGraphNode].
 func (x *GridGraphNode) Unwrap() *raw.GKGridGraphNode { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *GridGraphNode) ID() objc.ID { return x.inner.Ptr() }
 
-// GridGraphNodeFromID adopts an existing toll-free-bridged object id as a GridGraphNode (nil for 0).
+// GridGraphNodeFromID adopts an existing object pointer as a GridGraphNode (nil for 0).
 func GridGraphNodeFromID(id objc.ID) *GridGraphNode {
 	if id == 0 {
 		return nil

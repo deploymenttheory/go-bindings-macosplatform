@@ -17,11 +17,11 @@ type MTRTestClusterClusterTestFabricScoped struct {
 // Unwrap returns the underlying [raw.MTRTestClusterClusterTestFabricScoped].
 func (x *MTRTestClusterClusterTestFabricScoped) Unwrap() *raw.MTRTestClusterClusterTestFabricScoped { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRTestClusterClusterTestFabricScoped) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRTestClusterClusterTestFabricScopedFromID adopts an existing toll-free-bridged object id as a MTRTestClusterClusterTestFabricScoped (nil for 0).
+// MTRTestClusterClusterTestFabricScopedFromID adopts an existing object pointer as a MTRTestClusterClusterTestFabricScoped (nil for 0).
 func MTRTestClusterClusterTestFabricScopedFromID(id objc.ID) *MTRTestClusterClusterTestFabricScoped {
 	if id == 0 {
 		return nil

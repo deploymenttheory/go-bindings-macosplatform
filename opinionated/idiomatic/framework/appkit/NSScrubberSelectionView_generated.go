@@ -17,11 +17,11 @@ type ScrubberSelectionView struct {
 // Unwrap returns the underlying [raw.NSScrubberSelectionView].
 func (x *ScrubberSelectionView) Unwrap() *raw.NSScrubberSelectionView { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ScrubberSelectionView) ID() objc.ID { return x.inner.Ptr() }
 
-// ScrubberSelectionViewFromID adopts an existing toll-free-bridged object id as a ScrubberSelectionView (nil for 0).
+// ScrubberSelectionViewFromID adopts an existing object pointer as a ScrubberSelectionView (nil for 0).
 func ScrubberSelectionViewFromID(id objc.ID) *ScrubberSelectionView {
 	if id == 0 {
 		return nil

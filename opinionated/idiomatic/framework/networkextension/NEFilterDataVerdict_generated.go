@@ -17,11 +17,11 @@ type NEFilterDataVerdict struct {
 // Unwrap returns the underlying [raw.NEFilterDataVerdict].
 func (x *NEFilterDataVerdict) Unwrap() *raw.NEFilterDataVerdict { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NEFilterDataVerdict) ID() objc.ID { return x.inner.Ptr() }
 
-// NEFilterDataVerdictFromID adopts an existing toll-free-bridged object id as a NEFilterDataVerdict (nil for 0).
+// NEFilterDataVerdictFromID adopts an existing object pointer as a NEFilterDataVerdict (nil for 0).
 func NEFilterDataVerdictFromID(id objc.ID) *NEFilterDataVerdict {
 	if id == 0 {
 		return nil

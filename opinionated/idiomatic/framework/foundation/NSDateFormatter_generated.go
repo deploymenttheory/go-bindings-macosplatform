@@ -20,11 +20,11 @@ type DateFormatter struct {
 // Unwrap returns the underlying [raw.NSDateFormatter].
 func (x *DateFormatter) Unwrap() *raw.NSDateFormatter { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DateFormatter) ID() objc.ID { return x.inner.Ptr() }
 
-// DateFormatterFromID adopts an existing toll-free-bridged object id as a DateFormatter (nil for 0).
+// DateFormatterFromID adopts an existing object pointer as a DateFormatter (nil for 0).
 func DateFormatterFromID(id objc.ID) *DateFormatter {
 	if id == 0 {
 		return nil

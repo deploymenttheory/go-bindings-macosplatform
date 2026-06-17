@@ -21,11 +21,11 @@ type SoundEvent struct {
 // Unwrap returns the underlying [raw.PHASESoundEvent].
 func (x *SoundEvent) Unwrap() *raw.PHASESoundEvent { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SoundEvent) ID() objc.ID { return x.inner.Ptr() }
 
-// SoundEventFromID adopts an existing toll-free-bridged object id as a SoundEvent (nil for 0).
+// SoundEventFromID adopts an existing object pointer as a SoundEvent (nil for 0).
 func SoundEventFromID(id objc.ID) *SoundEvent {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type MTRWindowCoveringClusterGoToTiltValueParams struct {
 // Unwrap returns the underlying [raw.MTRWindowCoveringClusterGoToTiltValueParams].
 func (x *MTRWindowCoveringClusterGoToTiltValueParams) Unwrap() *raw.MTRWindowCoveringClusterGoToTiltValueParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRWindowCoveringClusterGoToTiltValueParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRWindowCoveringClusterGoToTiltValueParamsFromID adopts an existing toll-free-bridged object id as a MTRWindowCoveringClusterGoToTiltValueParams (nil for 0).
+// MTRWindowCoveringClusterGoToTiltValueParamsFromID adopts an existing object pointer as a MTRWindowCoveringClusterGoToTiltValueParams (nil for 0).
 func MTRWindowCoveringClusterGoToTiltValueParamsFromID(id objc.ID) *MTRWindowCoveringClusterGoToTiltValueParams {
 	if id == 0 {
 		return nil

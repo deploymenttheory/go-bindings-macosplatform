@@ -20,11 +20,11 @@ type CollaborationHighlight struct {
 // Unwrap returns the underlying [raw.SWCollaborationHighlight].
 func (x *CollaborationHighlight) Unwrap() *raw.SWCollaborationHighlight { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CollaborationHighlight) ID() objc.ID { return x.inner.Ptr() }
 
-// CollaborationHighlightFromID adopts an existing toll-free-bridged object id as a CollaborationHighlight (nil for 0).
+// CollaborationHighlightFromID adopts an existing object pointer as a CollaborationHighlight (nil for 0).
 func CollaborationHighlightFromID(id objc.ID) *CollaborationHighlight {
 	if id == 0 {
 		return nil

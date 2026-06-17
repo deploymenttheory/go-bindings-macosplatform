@@ -17,11 +17,11 @@ type RemoteLayerClient struct {
 // Unwrap returns the underlying [raw.CARemoteLayerClient].
 func (x *RemoteLayerClient) Unwrap() *raw.CARemoteLayerClient { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *RemoteLayerClient) ID() objc.ID { return x.inner.Ptr() }
 
-// RemoteLayerClientFromID adopts an existing toll-free-bridged object id as a RemoteLayerClient (nil for 0).
+// RemoteLayerClientFromID adopts an existing object pointer as a RemoteLayerClient (nil for 0).
 func RemoteLayerClientFromID(id objc.ID) *RemoteLayerClient {
 	if id == 0 {
 		return nil

@@ -17,11 +17,11 @@ type MTROtaSoftwareUpdateProviderClusterQueryImageParams struct {
 // Unwrap returns the underlying [raw.MTROtaSoftwareUpdateProviderClusterQueryImageParams].
 func (x *MTROtaSoftwareUpdateProviderClusterQueryImageParams) Unwrap() *raw.MTROtaSoftwareUpdateProviderClusterQueryImageParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTROtaSoftwareUpdateProviderClusterQueryImageParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTROtaSoftwareUpdateProviderClusterQueryImageParamsFromID adopts an existing toll-free-bridged object id as a MTROtaSoftwareUpdateProviderClusterQueryImageParams (nil for 0).
+// MTROtaSoftwareUpdateProviderClusterQueryImageParamsFromID adopts an existing object pointer as a MTROtaSoftwareUpdateProviderClusterQueryImageParams (nil for 0).
 func MTROtaSoftwareUpdateProviderClusterQueryImageParamsFromID(id objc.ID) *MTROtaSoftwareUpdateProviderClusterQueryImageParams {
 	if id == 0 {
 		return nil

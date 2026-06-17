@@ -17,11 +17,11 @@ type AddressFilter struct {
 // Unwrap returns the underlying [raw.MKAddressFilter].
 func (x *AddressFilter) Unwrap() *raw.MKAddressFilter { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AddressFilter) ID() objc.ID { return x.inner.Ptr() }
 
-// AddressFilterFromID adopts an existing toll-free-bridged object id as a AddressFilter (nil for 0).
+// AddressFilterFromID adopts an existing object pointer as a AddressFilter (nil for 0).
 func AddressFilterFromID(id objc.ID) *AddressFilter {
 	if id == 0 {
 		return nil

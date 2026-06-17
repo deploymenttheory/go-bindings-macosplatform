@@ -17,11 +17,11 @@ type Polyline struct {
 // Unwrap returns the underlying [raw.MKPolyline].
 func (x *Polyline) Unwrap() *raw.MKPolyline { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Polyline) ID() objc.ID { return x.inner.Ptr() }
 
-// PolylineFromID adopts an existing toll-free-bridged object id as a Polyline (nil for 0).
+// PolylineFromID adopts an existing object pointer as a Polyline (nil for 0).
 func PolylineFromID(id objc.ID) *Polyline {
 	if id == 0 {
 		return nil

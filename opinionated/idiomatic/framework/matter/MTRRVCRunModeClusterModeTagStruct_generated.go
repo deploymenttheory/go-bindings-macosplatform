@@ -18,11 +18,11 @@ type MTRRVCRunModeClusterModeTagStruct struct {
 // Unwrap returns the underlying [raw.MTRRVCRunModeClusterModeTagStruct].
 func (x *MTRRVCRunModeClusterModeTagStruct) Unwrap() *raw.MTRRVCRunModeClusterModeTagStruct { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRRVCRunModeClusterModeTagStruct) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRRVCRunModeClusterModeTagStructFromID adopts an existing toll-free-bridged object id as a MTRRVCRunModeClusterModeTagStruct (nil for 0).
+// MTRRVCRunModeClusterModeTagStructFromID adopts an existing object pointer as a MTRRVCRunModeClusterModeTagStruct (nil for 0).
 func MTRRVCRunModeClusterModeTagStructFromID(id objc.ID) *MTRRVCRunModeClusterModeTagStruct {
 	if id == 0 {
 		return nil

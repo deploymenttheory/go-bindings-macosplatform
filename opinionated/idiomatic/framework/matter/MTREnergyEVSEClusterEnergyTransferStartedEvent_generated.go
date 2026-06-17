@@ -18,11 +18,11 @@ type MTREnergyEVSEClusterEnergyTransferStartedEvent struct {
 // Unwrap returns the underlying [raw.MTREnergyEVSEClusterEnergyTransferStartedEvent].
 func (x *MTREnergyEVSEClusterEnergyTransferStartedEvent) Unwrap() *raw.MTREnergyEVSEClusterEnergyTransferStartedEvent { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTREnergyEVSEClusterEnergyTransferStartedEvent) ID() objc.ID { return x.inner.Ptr() }
 
-// MTREnergyEVSEClusterEnergyTransferStartedEventFromID adopts an existing toll-free-bridged object id as a MTREnergyEVSEClusterEnergyTransferStartedEvent (nil for 0).
+// MTREnergyEVSEClusterEnergyTransferStartedEventFromID adopts an existing object pointer as a MTREnergyEVSEClusterEnergyTransferStartedEvent (nil for 0).
 func MTREnergyEVSEClusterEnergyTransferStartedEventFromID(id objc.ID) *MTREnergyEVSEClusterEnergyTransferStartedEvent {
 	if id == 0 {
 		return nil

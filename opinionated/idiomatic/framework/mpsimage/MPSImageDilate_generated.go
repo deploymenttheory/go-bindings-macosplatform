@@ -19,11 +19,11 @@ type ImageDilate struct {
 // Unwrap returns the underlying [raw.MPSImageDilate].
 func (x *ImageDilate) Unwrap() *raw.MPSImageDilate { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ImageDilate) ID() objc.ID { return x.inner.Ptr() }
 
-// ImageDilateFromID adopts an existing toll-free-bridged object id as a ImageDilate (nil for 0).
+// ImageDilateFromID adopts an existing object pointer as a ImageDilate (nil for 0).
 func ImageDilateFromID(id objc.ID) *ImageDilate {
 	if id == 0 {
 		return nil

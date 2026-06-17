@@ -17,11 +17,11 @@ type HomographicImageRegistrationRequest struct {
 // Unwrap returns the underlying [raw.VNHomographicImageRegistrationRequest].
 func (x *HomographicImageRegistrationRequest) Unwrap() *raw.VNHomographicImageRegistrationRequest { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *HomographicImageRegistrationRequest) ID() objc.ID { return x.inner.Ptr() }
 
-// HomographicImageRegistrationRequestFromID adopts an existing toll-free-bridged object id as a HomographicImageRegistrationRequest (nil for 0).
+// HomographicImageRegistrationRequestFromID adopts an existing object pointer as a HomographicImageRegistrationRequest (nil for 0).
 func HomographicImageRegistrationRequestFromID(id objc.ID) *HomographicImageRegistrationRequest {
 	if id == 0 {
 		return nil

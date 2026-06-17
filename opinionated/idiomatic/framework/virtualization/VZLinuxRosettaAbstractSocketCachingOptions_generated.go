@@ -20,11 +20,11 @@ type LinuxRosettaAbstractSocketCachingOptions struct {
 // Unwrap returns the underlying [raw.VZLinuxRosettaAbstractSocketCachingOptions].
 func (x *LinuxRosettaAbstractSocketCachingOptions) Unwrap() *raw.VZLinuxRosettaAbstractSocketCachingOptions { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *LinuxRosettaAbstractSocketCachingOptions) ID() objc.ID { return x.inner.Ptr() }
 
-// LinuxRosettaAbstractSocketCachingOptionsFromID adopts an existing toll-free-bridged object id as a LinuxRosettaAbstractSocketCachingOptions (nil for 0).
+// LinuxRosettaAbstractSocketCachingOptionsFromID adopts an existing object pointer as a LinuxRosettaAbstractSocketCachingOptions (nil for 0).
 func LinuxRosettaAbstractSocketCachingOptionsFromID(id objc.ID) *LinuxRosettaAbstractSocketCachingOptions {
 	if id == 0 {
 		return nil

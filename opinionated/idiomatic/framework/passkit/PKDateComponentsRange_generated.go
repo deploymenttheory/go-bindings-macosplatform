@@ -18,11 +18,11 @@ type DateComponentsRange struct {
 // Unwrap returns the underlying [raw.PKDateComponentsRange].
 func (x *DateComponentsRange) Unwrap() *raw.PKDateComponentsRange { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DateComponentsRange) ID() objc.ID { return x.inner.Ptr() }
 
-// DateComponentsRangeFromID adopts an existing toll-free-bridged object id as a DateComponentsRange (nil for 0).
+// DateComponentsRangeFromID adopts an existing object pointer as a DateComponentsRange (nil for 0).
 func DateComponentsRangeFromID(id objc.ID) *DateComponentsRange {
 	if id == 0 {
 		return nil

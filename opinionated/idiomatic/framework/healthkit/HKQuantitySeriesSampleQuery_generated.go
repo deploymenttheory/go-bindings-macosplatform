@@ -19,11 +19,11 @@ type QuantitySeriesSampleQuery struct {
 // Unwrap returns the underlying [raw.HKQuantitySeriesSampleQuery].
 func (x *QuantitySeriesSampleQuery) Unwrap() *raw.HKQuantitySeriesSampleQuery { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *QuantitySeriesSampleQuery) ID() objc.ID { return x.inner.Ptr() }
 
-// QuantitySeriesSampleQueryFromID adopts an existing toll-free-bridged object id as a QuantitySeriesSampleQuery (nil for 0).
+// QuantitySeriesSampleQueryFromID adopts an existing object pointer as a QuantitySeriesSampleQuery (nil for 0).
 func QuantitySeriesSampleQueryFromID(id objc.ID) *QuantitySeriesSampleQuery {
 	if id == 0 {
 		return nil

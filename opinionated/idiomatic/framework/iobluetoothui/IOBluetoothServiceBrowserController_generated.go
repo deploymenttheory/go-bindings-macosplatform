@@ -22,11 +22,11 @@ type BluetoothServiceBrowserController struct {
 // Unwrap returns the underlying [raw.IOBluetoothServiceBrowserController].
 func (x *BluetoothServiceBrowserController) Unwrap() *raw.IOBluetoothServiceBrowserController { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *BluetoothServiceBrowserController) ID() objc.ID { return x.inner.Ptr() }
 
-// BluetoothServiceBrowserControllerFromID adopts an existing toll-free-bridged object id as a BluetoothServiceBrowserController (nil for 0).
+// BluetoothServiceBrowserControllerFromID adopts an existing object pointer as a BluetoothServiceBrowserController (nil for 0).
 func BluetoothServiceBrowserControllerFromID(id objc.ID) *BluetoothServiceBrowserController {
 	if id == 0 {
 		return nil

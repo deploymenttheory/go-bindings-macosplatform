@@ -17,11 +17,11 @@ type VirtioGraphicsScanoutConfiguration struct {
 // Unwrap returns the underlying [raw.VZVirtioGraphicsScanoutConfiguration].
 func (x *VirtioGraphicsScanoutConfiguration) Unwrap() *raw.VZVirtioGraphicsScanoutConfiguration { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *VirtioGraphicsScanoutConfiguration) ID() objc.ID { return x.inner.Ptr() }
 
-// VirtioGraphicsScanoutConfigurationFromID adopts an existing toll-free-bridged object id as a VirtioGraphicsScanoutConfiguration (nil for 0).
+// VirtioGraphicsScanoutConfigurationFromID adopts an existing object pointer as a VirtioGraphicsScanoutConfiguration (nil for 0).
 func VirtioGraphicsScanoutConfigurationFromID(id objc.ID) *VirtioGraphicsScanoutConfiguration {
 	if id == 0 {
 		return nil

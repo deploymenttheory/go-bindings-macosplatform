@@ -18,11 +18,11 @@ type AssetDownloadStorageManager struct {
 // Unwrap returns the underlying [raw.AVAssetDownloadStorageManager].
 func (x *AssetDownloadStorageManager) Unwrap() *raw.AVAssetDownloadStorageManager { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AssetDownloadStorageManager) ID() objc.ID { return x.inner.Ptr() }
 
-// AssetDownloadStorageManagerFromID adopts an existing toll-free-bridged object id as a AssetDownloadStorageManager (nil for 0).
+// AssetDownloadStorageManagerFromID adopts an existing object pointer as a AssetDownloadStorageManager (nil for 0).
 func AssetDownloadStorageManagerFromID(id objc.ID) *AssetDownloadStorageManager {
 	if id == 0 {
 		return nil

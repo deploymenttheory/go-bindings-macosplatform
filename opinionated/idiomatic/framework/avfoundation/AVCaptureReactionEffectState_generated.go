@@ -19,11 +19,11 @@ type CaptureReactionEffectState struct {
 // Unwrap returns the underlying [raw.AVCaptureReactionEffectState].
 func (x *CaptureReactionEffectState) Unwrap() *raw.AVCaptureReactionEffectState { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CaptureReactionEffectState) ID() objc.ID { return x.inner.Ptr() }
 
-// CaptureReactionEffectStateFromID adopts an existing toll-free-bridged object id as a CaptureReactionEffectState (nil for 0).
+// CaptureReactionEffectStateFromID adopts an existing object pointer as a CaptureReactionEffectState (nil for 0).
 func CaptureReactionEffectStateFromID(id objc.ID) *CaptureReactionEffectState {
 	if id == 0 {
 		return nil

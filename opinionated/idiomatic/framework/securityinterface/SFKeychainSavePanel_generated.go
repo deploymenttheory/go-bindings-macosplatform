@@ -19,11 +19,11 @@ type KeychainSavePanel struct {
 // Unwrap returns the underlying [raw.SFKeychainSavePanel].
 func (x *KeychainSavePanel) Unwrap() *raw.SFKeychainSavePanel { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *KeychainSavePanel) ID() objc.ID { return x.inner.Ptr() }
 
-// KeychainSavePanelFromID adopts an existing toll-free-bridged object id as a KeychainSavePanel (nil for 0).
+// KeychainSavePanelFromID adopts an existing object pointer as a KeychainSavePanel (nil for 0).
 func KeychainSavePanelFromID(id objc.ID) *KeychainSavePanel {
 	if id == 0 {
 		return nil

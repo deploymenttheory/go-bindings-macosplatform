@@ -19,11 +19,11 @@ type LocalSearchCompletion struct {
 // Unwrap returns the underlying [raw.MKLocalSearchCompletion].
 func (x *LocalSearchCompletion) Unwrap() *raw.MKLocalSearchCompletion { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *LocalSearchCompletion) ID() objc.ID { return x.inner.Ptr() }
 
-// LocalSearchCompletionFromID adopts an existing toll-free-bridged object id as a LocalSearchCompletion (nil for 0).
+// LocalSearchCompletionFromID adopts an existing object pointer as a LocalSearchCompletion (nil for 0).
 func LocalSearchCompletionFromID(id objc.ID) *LocalSearchCompletion {
 	if id == 0 {
 		return nil

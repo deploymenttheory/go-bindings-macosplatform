@@ -17,11 +17,11 @@ type Goal struct {
 // Unwrap returns the underlying [raw.GKGoal].
 func (x *Goal) Unwrap() *raw.GKGoal { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Goal) ID() objc.ID { return x.inner.Ptr() }
 
-// GoalFromID adopts an existing toll-free-bridged object id as a Goal (nil for 0).
+// GoalFromID adopts an existing object pointer as a Goal (nil for 0).
 func GoalFromID(id objc.ID) *Goal {
 	if id == 0 {
 		return nil

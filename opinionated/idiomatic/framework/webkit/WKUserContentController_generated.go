@@ -19,11 +19,11 @@ type WKUserContentController struct {
 // Unwrap returns the underlying [raw.WKUserContentController].
 func (x *WKUserContentController) Unwrap() *raw.WKUserContentController { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *WKUserContentController) ID() objc.ID { return x.inner.Ptr() }
 
-// WKUserContentControllerFromID adopts an existing toll-free-bridged object id as a WKUserContentController (nil for 0).
+// WKUserContentControllerFromID adopts an existing object pointer as a WKUserContentController (nil for 0).
 func WKUserContentControllerFromID(id objc.ID) *WKUserContentController {
 	if id == 0 {
 		return nil

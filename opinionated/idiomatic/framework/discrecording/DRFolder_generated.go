@@ -18,11 +18,11 @@ type Folder struct {
 // Unwrap returns the underlying [raw.DRFolder].
 func (x *Folder) Unwrap() *raw.DRFolder { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Folder) ID() objc.ID { return x.inner.Ptr() }
 
-// FolderFromID adopts an existing toll-free-bridged object id as a Folder (nil for 0).
+// FolderFromID adopts an existing object pointer as a Folder (nil for 0).
 func FolderFromID(id objc.ID) *Folder {
 	if id == 0 {
 		return nil

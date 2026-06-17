@@ -18,11 +18,11 @@ type StepperTouchBarItem struct {
 // Unwrap returns the underlying [raw.NSStepperTouchBarItem].
 func (x *StepperTouchBarItem) Unwrap() *raw.NSStepperTouchBarItem { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *StepperTouchBarItem) ID() objc.ID { return x.inner.Ptr() }
 
-// StepperTouchBarItemFromID adopts an existing toll-free-bridged object id as a StepperTouchBarItem (nil for 0).
+// StepperTouchBarItemFromID adopts an existing object pointer as a StepperTouchBarItem (nil for 0).
 func StepperTouchBarItemFromID(id objc.ID) *StepperTouchBarItem {
 	if id == 0 {
 		return nil

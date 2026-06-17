@@ -19,11 +19,11 @@ type ProjectExtensionContext struct {
 // Unwrap returns the underlying [raw.PHProjectExtensionContext].
 func (x *ProjectExtensionContext) Unwrap() *raw.PHProjectExtensionContext { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ProjectExtensionContext) ID() objc.ID { return x.inner.Ptr() }
 
-// ProjectExtensionContextFromID adopts an existing toll-free-bridged object id as a ProjectExtensionContext (nil for 0).
+// ProjectExtensionContextFromID adopts an existing object pointer as a ProjectExtensionContext (nil for 0).
 func ProjectExtensionContextFromID(id objc.ID) *ProjectExtensionContext {
 	if id == 0 {
 		return nil

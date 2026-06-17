@@ -455,23 +455,23 @@ func emitClassFile(
 	fmt.Fprintf(&body, "// Unwrap returns the underlying [%s.%s].\n", rawPkgAlias, className)
 	fmt.Fprintf(&body, "func (x *%s) Unwrap() *%s { return x.inner }\n\n", goTypeName, rawType)
 
-	// ID exposes the underlying object as a toll-free-bridged objc.ID, so the
-	// wrapper can be handed to CoreFoundation/C APIs (e.g. the Security keychain
-	// functions) without dropping to the raw bindings. Skipped when a generated
-	// method already claims the name.
+	// ID exposes the underlying Objective-C object pointer so the wrapper can be
+	// passed to C APIs that take an object or CFTypeRef pointer (e.g. the Security
+	// keychain functions) without importing the raw bindings. Skipped when a
+	// generated method already claims the name.
 	if !methodNameClaimed("ID", withMethods, methods, handMethods) {
-		fmt.Fprintf(&body, "// ID returns the underlying object as a toll-free-bridged objc.ID,\n")
-		fmt.Fprintf(&body, "// for passing to CoreFoundation and other C APIs.\n")
+		fmt.Fprintf(&body, "// ID returns the underlying Objective-C object pointer (objc.ID), for\n")
+		fmt.Fprintf(&body, "// passing to C APIs that take an object or CFTypeRef pointer.\n")
 		fmt.Fprintf(&body, "func (x *%s) ID() objc.ID { return x.inner.Ptr() }\n\n", goTypeName)
 	}
 
-	// <Type>FromID adopts an existing toll-free-bridged object id (e.g. a
-	// CFTypeRef returned by a C API) as a wrapper. It mirrors the raw FromID
-	// (which installs a releasing finalizer but does not retain), so it is
-	// correct for +1-owned results such as CF_RETURNS_RETAINED returns.
+	// <Type>FromID adopts an existing Objective-C object pointer (e.g. an objc.ID
+	// reinterpreted from a CFTypeRef a C API returned) as a wrapper. It mirrors
+	// the raw FromID — which installs a releasing finalizer but does not retain —
+	// so it is correct for +1-owned results such as CF_RETURNS_RETAINED returns.
 	if !handFuncs[goTypeName+"FromID"] {
 		genericArgs := genericInstantiation(len(cls.GenericParams))
-		fmt.Fprintf(&body, "// %sFromID adopts an existing toll-free-bridged object id as a %s (nil for 0).\n", goTypeName, goTypeName)
+		fmt.Fprintf(&body, "// %sFromID adopts an existing object pointer as a %s (nil for 0).\n", goTypeName, goTypeName)
 		fmt.Fprintf(&body, "func %sFromID(id objc.ID) *%s {\n", goTypeName, goTypeName)
 		fmt.Fprintf(&body, "\tif id == 0 {\n\t\treturn nil\n\t}\n")
 		fmt.Fprintf(&body, "\treturn &%s{inner: %s.%sFromID%s(id)}\n", goTypeName, rawPkgAlias, className, genericArgs)
@@ -818,19 +818,19 @@ func methodNameClaimed(name string, withMethods []withEntry, methods []methodEnt
 	return false
 }
 
-// emitDictionaryAugment adds a toll-free-bridging builder to the generated
-// NSMutableDictionary wrapper. The generated setObject:forKey: takes the key as
-// the NSCopying interface, which a CoreFoundation constant (an objc.ID, e.g.
-// security.KSecClass()) cannot satisfy, so building a CF query dictionary
-// otherwise still needs raw message sends. Set takes objc.ID key and value
-// directly. (Reading a CFDictionaryRef result back is covered by the generic
+// emitDictionaryAugment adds an object-pointer builder to the generated
+// NSMutableDictionary wrapper. The generated setObject:forKey: types the key as
+// the NSCopying interface, which a bare objc.ID (e.g. the CFStringRef constant
+// security.KSecClass()) does not satisfy, so building such a dictionary
+// otherwise still needs a manual message send. Set takes objc.ID key and value
+// directly. (Reading a dictionary result back is covered by the generic
 // <Type>FromID constructor plus ObjectForKey.)
 func emitDictionaryAugment(w io.Writer, className, goTypeName, _, _ string) {
 	if className != "NSMutableDictionary" {
 		return
 	}
-	fmt.Fprintf(w, "// Set inserts value for key — both toll-free-bridged ids, e.g. CoreFoundation\n")
-	fmt.Fprintf(w, "// constants such as security.KSecClass() — and returns the receiver for chaining.\n")
+	fmt.Fprintf(w, "// Set inserts value for key (both object pointers, e.g. the CFStringRef\n")
+	fmt.Fprintf(w, "// constant security.KSecClass()) and returns the receiver for chaining.\n")
 	fmt.Fprintf(w, "func (x *%s) Set(key, value objc.ID) *%s {\n", goTypeName, goTypeName)
 	fmt.Fprintf(w, "\tobjc.Send[objc.ID](x.inner.Ptr(), objc.RegisterName(\"setObject:forKey:\"), value, key)\n")
 	fmt.Fprintf(w, "\treturn x\n}\n\n")
@@ -2502,7 +2502,7 @@ func isCFErrorOutParam(objcType string) bool {
 // in fw whose last parameter is a CFErrorRef * out-parameter. Each wrapper:
 //   - Omits the error out-parameter from its Go signature
 //   - Passes unsafe.Pointer(&_cfErr) internally to the raw function
-//   - Returns error on failure, converting the CFErrorRef via toll-free bridge
+//   - Returns error on failure, reading the CFErrorRef as an NSError
 //
 // bool-returning functions become func(...) error.
 // Pointer-returning functions become func(...) (unsafe.Pointer, error).
@@ -2664,11 +2664,15 @@ func emitFunctionWrappers(
 	)
 	fmt.Fprint(
 		&buf,
-		"// description, failure reason). CFError is toll-free bridged with NSError so\n",
+		"// description, failure reason). A CFErrorRef is an NSError, so it is read\n",
 	)
 	fmt.Fprint(
 		&buf,
-		"// no CGo is required. Falls back to a plain message if no error was populated.\n",
+		"// through the NSError path with no CGo. Falls back to a plain message if no\n",
+	)
+	fmt.Fprint(
+		&buf,
+		"// error was populated.\n",
 	)
 	fmt.Fprint(&buf, "func _cfErrOrMsg(ptr unsafe.Pointer, fn string) error {\n")
 	fmt.Fprint(&buf, "\tif ptr != nil {\n")

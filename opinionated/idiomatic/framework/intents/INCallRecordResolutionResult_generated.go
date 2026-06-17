@@ -17,11 +17,11 @@ type CallRecordResolutionResult struct {
 // Unwrap returns the underlying [raw.INCallRecordResolutionResult].
 func (x *CallRecordResolutionResult) Unwrap() *raw.INCallRecordResolutionResult { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CallRecordResolutionResult) ID() objc.ID { return x.inner.Ptr() }
 
-// CallRecordResolutionResultFromID adopts an existing toll-free-bridged object id as a CallRecordResolutionResult (nil for 0).
+// CallRecordResolutionResultFromID adopts an existing object pointer as a CallRecordResolutionResult (nil for 0).
 func CallRecordResolutionResultFromID(id objc.ID) *CallRecordResolutionResult {
 	if id == 0 {
 		return nil

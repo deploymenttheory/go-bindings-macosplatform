@@ -18,11 +18,11 @@ type IOBluetoothDeviceInquiry struct {
 // Unwrap returns the underlying [raw.IOBluetoothDeviceInquiry].
 func (x *IOBluetoothDeviceInquiry) Unwrap() *raw.IOBluetoothDeviceInquiry { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *IOBluetoothDeviceInquiry) ID() objc.ID { return x.inner.Ptr() }
 
-// IOBluetoothDeviceInquiryFromID adopts an existing toll-free-bridged object id as a IOBluetoothDeviceInquiry (nil for 0).
+// IOBluetoothDeviceInquiryFromID adopts an existing object pointer as a IOBluetoothDeviceInquiry (nil for 0).
 func IOBluetoothDeviceInquiryFromID(id objc.ID) *IOBluetoothDeviceInquiry {
 	if id == 0 {
 		return nil

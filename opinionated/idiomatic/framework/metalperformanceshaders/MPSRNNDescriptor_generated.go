@@ -18,11 +18,11 @@ type RNNDescriptor struct {
 // Unwrap returns the underlying [raw.MPSRNNDescriptor].
 func (x *RNNDescriptor) Unwrap() *raw.MPSRNNDescriptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *RNNDescriptor) ID() objc.ID { return x.inner.Ptr() }
 
-// RNNDescriptorFromID adopts an existing toll-free-bridged object id as a RNNDescriptor (nil for 0).
+// RNNDescriptorFromID adopts an existing object pointer as a RNNDescriptor (nil for 0).
 func RNNDescriptorFromID(id objc.ID) *RNNDescriptor {
 	if id == 0 {
 		return nil

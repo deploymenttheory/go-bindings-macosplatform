@@ -17,11 +17,11 @@ type QuadrilateralAccelerationStructure struct {
 // Unwrap returns the underlying [raw.MPSQuadrilateralAccelerationStructure].
 func (x *QuadrilateralAccelerationStructure) Unwrap() *raw.MPSQuadrilateralAccelerationStructure { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *QuadrilateralAccelerationStructure) ID() objc.ID { return x.inner.Ptr() }
 
-// QuadrilateralAccelerationStructureFromID adopts an existing toll-free-bridged object id as a QuadrilateralAccelerationStructure (nil for 0).
+// QuadrilateralAccelerationStructureFromID adopts an existing object pointer as a QuadrilateralAccelerationStructure (nil for 0).
 func QuadrilateralAccelerationStructureFromID(id objc.ID) *QuadrilateralAccelerationStructure {
 	if id == 0 {
 		return nil

@@ -19,11 +19,11 @@ type SVGFDenoiser struct {
 // Unwrap returns the underlying [raw.MPSSVGFDenoiser].
 func (x *SVGFDenoiser) Unwrap() *raw.MPSSVGFDenoiser { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SVGFDenoiser) ID() objc.ID { return x.inner.Ptr() }
 
-// SVGFDenoiserFromID adopts an existing toll-free-bridged object id as a SVGFDenoiser (nil for 0).
+// SVGFDenoiserFromID adopts an existing object pointer as a SVGFDenoiser (nil for 0).
 func SVGFDenoiserFromID(id objc.ID) *SVGFDenoiser {
 	if id == 0 {
 		return nil

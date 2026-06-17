@@ -21,11 +21,11 @@ type GraphPooling4DOpDescriptor struct {
 // Unwrap returns the underlying [raw.MPSGraphPooling4DOpDescriptor].
 func (x *GraphPooling4DOpDescriptor) Unwrap() *raw.MPSGraphPooling4DOpDescriptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *GraphPooling4DOpDescriptor) ID() objc.ID { return x.inner.Ptr() }
 
-// GraphPooling4DOpDescriptorFromID adopts an existing toll-free-bridged object id as a GraphPooling4DOpDescriptor (nil for 0).
+// GraphPooling4DOpDescriptorFromID adopts an existing object pointer as a GraphPooling4DOpDescriptor (nil for 0).
 func GraphPooling4DOpDescriptorFromID(id objc.ID) *GraphPooling4DOpDescriptor {
 	if id == 0 {
 		return nil

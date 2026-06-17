@@ -19,11 +19,11 @@ type StatFSResult struct {
 // Unwrap returns the underlying [raw.FSStatFSResult].
 func (x *StatFSResult) Unwrap() *raw.FSStatFSResult { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *StatFSResult) ID() objc.ID { return x.inner.Ptr() }
 
-// StatFSResultFromID adopts an existing toll-free-bridged object id as a StatFSResult (nil for 0).
+// StatFSResultFromID adopts an existing object pointer as a StatFSResult (nil for 0).
 func StatFSResultFromID(id objc.ID) *StatFSResult {
 	if id == 0 {
 		return nil

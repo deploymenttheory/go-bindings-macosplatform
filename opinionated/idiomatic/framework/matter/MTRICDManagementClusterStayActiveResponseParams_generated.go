@@ -20,11 +20,11 @@ type MTRICDManagementClusterStayActiveResponseParams struct {
 // Unwrap returns the underlying [raw.MTRICDManagementClusterStayActiveResponseParams].
 func (x *MTRICDManagementClusterStayActiveResponseParams) Unwrap() *raw.MTRICDManagementClusterStayActiveResponseParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRICDManagementClusterStayActiveResponseParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRICDManagementClusterStayActiveResponseParamsFromID adopts an existing toll-free-bridged object id as a MTRICDManagementClusterStayActiveResponseParams (nil for 0).
+// MTRICDManagementClusterStayActiveResponseParamsFromID adopts an existing object pointer as a MTRICDManagementClusterStayActiveResponseParams (nil for 0).
 func MTRICDManagementClusterStayActiveResponseParamsFromID(id objc.ID) *MTRICDManagementClusterStayActiveResponseParams {
 	if id == 0 {
 		return nil

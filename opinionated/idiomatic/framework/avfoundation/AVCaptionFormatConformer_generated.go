@@ -18,11 +18,11 @@ type CaptionFormatConformer struct {
 // Unwrap returns the underlying [raw.AVCaptionFormatConformer].
 func (x *CaptionFormatConformer) Unwrap() *raw.AVCaptionFormatConformer { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CaptionFormatConformer) ID() objc.ID { return x.inner.Ptr() }
 
-// CaptionFormatConformerFromID adopts an existing toll-free-bridged object id as a CaptionFormatConformer (nil for 0).
+// CaptionFormatConformerFromID adopts an existing object pointer as a CaptionFormatConformer (nil for 0).
 func CaptionFormatConformerFromID(id objc.ID) *CaptionFormatConformer {
 	if id == 0 {
 		return nil

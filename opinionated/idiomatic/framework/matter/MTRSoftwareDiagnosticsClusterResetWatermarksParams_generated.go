@@ -18,11 +18,11 @@ type MTRSoftwareDiagnosticsClusterResetWatermarksParams struct {
 // Unwrap returns the underlying [raw.MTRSoftwareDiagnosticsClusterResetWatermarksParams].
 func (x *MTRSoftwareDiagnosticsClusterResetWatermarksParams) Unwrap() *raw.MTRSoftwareDiagnosticsClusterResetWatermarksParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRSoftwareDiagnosticsClusterResetWatermarksParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRSoftwareDiagnosticsClusterResetWatermarksParamsFromID adopts an existing toll-free-bridged object id as a MTRSoftwareDiagnosticsClusterResetWatermarksParams (nil for 0).
+// MTRSoftwareDiagnosticsClusterResetWatermarksParamsFromID adopts an existing object pointer as a MTRSoftwareDiagnosticsClusterResetWatermarksParams (nil for 0).
 func MTRSoftwareDiagnosticsClusterResetWatermarksParamsFromID(id objc.ID) *MTRSoftwareDiagnosticsClusterResetWatermarksParams {
 	if id == 0 {
 		return nil

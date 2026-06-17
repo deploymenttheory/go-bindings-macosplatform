@@ -18,11 +18,11 @@ type BoundsPrediction struct {
 // Unwrap returns the underlying [raw.CNBoundsPrediction].
 func (x *BoundsPrediction) Unwrap() *raw.CNBoundsPrediction { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *BoundsPrediction) ID() objc.ID { return x.inner.Ptr() }
 
-// BoundsPredictionFromID adopts an existing toll-free-bridged object id as a BoundsPrediction (nil for 0).
+// BoundsPredictionFromID adopts an existing object pointer as a BoundsPrediction (nil for 0).
 func BoundsPredictionFromID(id objc.ID) *BoundsPrediction {
 	if id == 0 {
 		return nil

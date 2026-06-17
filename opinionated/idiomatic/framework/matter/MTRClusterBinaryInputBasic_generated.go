@@ -18,11 +18,11 @@ type MTRClusterBinaryInputBasic struct {
 // Unwrap returns the underlying [raw.MTRClusterBinaryInputBasic].
 func (x *MTRClusterBinaryInputBasic) Unwrap() *raw.MTRClusterBinaryInputBasic { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRClusterBinaryInputBasic) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRClusterBinaryInputBasicFromID adopts an existing toll-free-bridged object id as a MTRClusterBinaryInputBasic (nil for 0).
+// MTRClusterBinaryInputBasicFromID adopts an existing object pointer as a MTRClusterBinaryInputBasic (nil for 0).
 func MTRClusterBinaryInputBasicFromID(id objc.ID) *MTRClusterBinaryInputBasic {
 	if id == 0 {
 		return nil

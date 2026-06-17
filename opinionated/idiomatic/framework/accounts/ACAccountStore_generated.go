@@ -19,11 +19,11 @@ type AccountStore struct {
 // Unwrap returns the underlying [raw.ACAccountStore].
 func (x *AccountStore) Unwrap() *raw.ACAccountStore { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AccountStore) ID() objc.ID { return x.inner.Ptr() }
 
-// AccountStoreFromID adopts an existing toll-free-bridged object id as a AccountStore (nil for 0).
+// AccountStoreFromID adopts an existing object pointer as a AccountStore (nil for 0).
 func AccountStoreFromID(id objc.ID) *AccountStore {
 	if id == 0 {
 		return nil

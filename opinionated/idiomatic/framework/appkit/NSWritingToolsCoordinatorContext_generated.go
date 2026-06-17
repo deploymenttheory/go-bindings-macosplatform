@@ -18,11 +18,11 @@ type WritingToolsCoordinatorContext struct {
 // Unwrap returns the underlying [raw.NSWritingToolsCoordinatorContext].
 func (x *WritingToolsCoordinatorContext) Unwrap() *raw.NSWritingToolsCoordinatorContext { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *WritingToolsCoordinatorContext) ID() objc.ID { return x.inner.Ptr() }
 
-// WritingToolsCoordinatorContextFromID adopts an existing toll-free-bridged object id as a WritingToolsCoordinatorContext (nil for 0).
+// WritingToolsCoordinatorContextFromID adopts an existing object pointer as a WritingToolsCoordinatorContext (nil for 0).
 func WritingToolsCoordinatorContextFromID(id objc.ID) *WritingToolsCoordinatorContext {
 	if id == 0 {
 		return nil

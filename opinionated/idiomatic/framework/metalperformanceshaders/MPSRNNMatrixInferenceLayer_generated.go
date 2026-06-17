@@ -22,11 +22,11 @@ type RNNMatrixInferenceLayer struct {
 // Unwrap returns the underlying [raw.MPSRNNMatrixInferenceLayer].
 func (x *RNNMatrixInferenceLayer) Unwrap() *raw.MPSRNNMatrixInferenceLayer { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *RNNMatrixInferenceLayer) ID() objc.ID { return x.inner.Ptr() }
 
-// RNNMatrixInferenceLayerFromID adopts an existing toll-free-bridged object id as a RNNMatrixInferenceLayer (nil for 0).
+// RNNMatrixInferenceLayerFromID adopts an existing object pointer as a RNNMatrixInferenceLayer (nil for 0).
 func RNNMatrixInferenceLayerFromID(id objc.ID) *RNNMatrixInferenceLayer {
 	if id == 0 {
 		return nil

@@ -21,11 +21,11 @@ type MTRClusterICDManagement struct {
 // Unwrap returns the underlying [raw.MTRClusterICDManagement].
 func (x *MTRClusterICDManagement) Unwrap() *raw.MTRClusterICDManagement { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRClusterICDManagement) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRClusterICDManagementFromID adopts an existing toll-free-bridged object id as a MTRClusterICDManagement (nil for 0).
+// MTRClusterICDManagementFromID adopts an existing object pointer as a MTRClusterICDManagement (nil for 0).
 func MTRClusterICDManagementFromID(id objc.ID) *MTRClusterICDManagement {
 	if id == 0 {
 		return nil

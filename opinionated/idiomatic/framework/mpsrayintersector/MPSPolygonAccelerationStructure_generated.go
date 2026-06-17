@@ -22,11 +22,11 @@ type PolygonAccelerationStructure struct {
 // Unwrap returns the underlying [raw.MPSPolygonAccelerationStructure].
 func (x *PolygonAccelerationStructure) Unwrap() *raw.MPSPolygonAccelerationStructure { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PolygonAccelerationStructure) ID() objc.ID { return x.inner.Ptr() }
 
-// PolygonAccelerationStructureFromID adopts an existing toll-free-bridged object id as a PolygonAccelerationStructure (nil for 0).
+// PolygonAccelerationStructureFromID adopts an existing object pointer as a PolygonAccelerationStructure (nil for 0).
 func PolygonAccelerationStructureFromID(id objc.ID) *PolygonAccelerationStructure {
 	if id == 0 {
 		return nil

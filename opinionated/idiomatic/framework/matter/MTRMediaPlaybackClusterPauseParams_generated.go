@@ -18,11 +18,11 @@ type MTRMediaPlaybackClusterPauseParams struct {
 // Unwrap returns the underlying [raw.MTRMediaPlaybackClusterPauseParams].
 func (x *MTRMediaPlaybackClusterPauseParams) Unwrap() *raw.MTRMediaPlaybackClusterPauseParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRMediaPlaybackClusterPauseParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRMediaPlaybackClusterPauseParamsFromID adopts an existing toll-free-bridged object id as a MTRMediaPlaybackClusterPauseParams (nil for 0).
+// MTRMediaPlaybackClusterPauseParamsFromID adopts an existing object pointer as a MTRMediaPlaybackClusterPauseParams (nil for 0).
 func MTRMediaPlaybackClusterPauseParamsFromID(id objc.ID) *MTRMediaPlaybackClusterPauseParams {
 	if id == 0 {
 		return nil

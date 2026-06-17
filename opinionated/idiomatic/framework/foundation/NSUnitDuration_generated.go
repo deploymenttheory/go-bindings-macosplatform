@@ -17,11 +17,11 @@ type UnitDuration struct {
 // Unwrap returns the underlying [raw.NSUnitDuration].
 func (x *UnitDuration) Unwrap() *raw.NSUnitDuration { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *UnitDuration) ID() objc.ID { return x.inner.Ptr() }
 
-// UnitDurationFromID adopts an existing toll-free-bridged object id as a UnitDuration (nil for 0).
+// UnitDurationFromID adopts an existing object pointer as a UnitDuration (nil for 0).
 func UnitDurationFromID(id objc.ID) *UnitDuration {
 	if id == 0 {
 		return nil

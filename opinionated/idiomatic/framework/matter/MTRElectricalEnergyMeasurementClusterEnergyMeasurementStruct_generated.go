@@ -18,11 +18,11 @@ type MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct struct {
 // Unwrap returns the underlying [raw.MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct].
 func (x *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) Unwrap() *raw.MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRElectricalEnergyMeasurementClusterEnergyMeasurementStructFromID adopts an existing toll-free-bridged object id as a MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct (nil for 0).
+// MTRElectricalEnergyMeasurementClusterEnergyMeasurementStructFromID adopts an existing object pointer as a MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct (nil for 0).
 func MTRElectricalEnergyMeasurementClusterEnergyMeasurementStructFromID(id objc.ID) *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct {
 	if id == 0 {
 		return nil

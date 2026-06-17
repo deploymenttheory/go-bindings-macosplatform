@@ -21,11 +21,11 @@ type ImageThresholdTruncate struct {
 // Unwrap returns the underlying [raw.MPSImageThresholdTruncate].
 func (x *ImageThresholdTruncate) Unwrap() *raw.MPSImageThresholdTruncate { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ImageThresholdTruncate) ID() objc.ID { return x.inner.Ptr() }
 
-// ImageThresholdTruncateFromID adopts an existing toll-free-bridged object id as a ImageThresholdTruncate (nil for 0).
+// ImageThresholdTruncateFromID adopts an existing object pointer as a ImageThresholdTruncate (nil for 0).
 func ImageThresholdTruncateFromID(id objc.ID) *ImageThresholdTruncate {
 	if id == 0 {
 		return nil

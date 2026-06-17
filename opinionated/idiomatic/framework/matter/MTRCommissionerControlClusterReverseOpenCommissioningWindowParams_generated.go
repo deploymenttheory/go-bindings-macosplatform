@@ -20,11 +20,11 @@ type MTRCommissionerControlClusterReverseOpenCommissioningWindowParams struct {
 // Unwrap returns the underlying [raw.MTRCommissionerControlClusterReverseOpenCommissioningWindowParams].
 func (x *MTRCommissionerControlClusterReverseOpenCommissioningWindowParams) Unwrap() *raw.MTRCommissionerControlClusterReverseOpenCommissioningWindowParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRCommissionerControlClusterReverseOpenCommissioningWindowParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRCommissionerControlClusterReverseOpenCommissioningWindowParamsFromID adopts an existing toll-free-bridged object id as a MTRCommissionerControlClusterReverseOpenCommissioningWindowParams (nil for 0).
+// MTRCommissionerControlClusterReverseOpenCommissioningWindowParamsFromID adopts an existing object pointer as a MTRCommissionerControlClusterReverseOpenCommissioningWindowParams (nil for 0).
 func MTRCommissionerControlClusterReverseOpenCommissioningWindowParamsFromID(id objc.ID) *MTRCommissionerControlClusterReverseOpenCommissioningWindowParams {
 	if id == 0 {
 		return nil

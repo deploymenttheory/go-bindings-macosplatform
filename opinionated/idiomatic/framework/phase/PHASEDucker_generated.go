@@ -19,11 +19,11 @@ type Ducker struct {
 // Unwrap returns the underlying [raw.PHASEDucker].
 func (x *Ducker) Unwrap() *raw.PHASEDucker { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Ducker) ID() objc.ID { return x.inner.Ptr() }
 
-// DuckerFromID adopts an existing toll-free-bridged object id as a Ducker (nil for 0).
+// DuckerFromID adopts an existing object pointer as a Ducker (nil for 0).
 func DuckerFromID(id objc.ID) *Ducker {
 	if id == 0 {
 		return nil

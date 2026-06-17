@@ -17,11 +17,11 @@ type AssessmentSession struct {
 // Unwrap returns the underlying [raw.AEAssessmentSession].
 func (x *AssessmentSession) Unwrap() *raw.AEAssessmentSession { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AssessmentSession) ID() objc.ID { return x.inner.Ptr() }
 
-// AssessmentSessionFromID adopts an existing toll-free-bridged object id as a AssessmentSession (nil for 0).
+// AssessmentSessionFromID adopts an existing object pointer as a AssessmentSession (nil for 0).
 func AssessmentSessionFromID(id objc.ID) *AssessmentSession {
 	if id == 0 {
 		return nil

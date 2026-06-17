@@ -19,11 +19,11 @@ type Tagger struct {
 // Unwrap returns the underlying [raw.NLTagger].
 func (x *Tagger) Unwrap() *raw.NLTagger { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Tagger) ID() objc.ID { return x.inner.Ptr() }
 
-// TaggerFromID adopts an existing toll-free-bridged object id as a Tagger (nil for 0).
+// TaggerFromID adopts an existing object pointer as a Tagger (nil for 0).
 func TaggerFromID(id objc.ID) *Tagger {
 	if id == 0 {
 		return nil

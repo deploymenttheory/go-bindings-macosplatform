@@ -17,11 +17,11 @@ type RelativeDateTimeFormatter struct {
 // Unwrap returns the underlying [raw.NSRelativeDateTimeFormatter].
 func (x *RelativeDateTimeFormatter) Unwrap() *raw.NSRelativeDateTimeFormatter { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *RelativeDateTimeFormatter) ID() objc.ID { return x.inner.Ptr() }
 
-// RelativeDateTimeFormatterFromID adopts an existing toll-free-bridged object id as a RelativeDateTimeFormatter (nil for 0).
+// RelativeDateTimeFormatterFromID adopts an existing object pointer as a RelativeDateTimeFormatter (nil for 0).
 func RelativeDateTimeFormatterFromID(id objc.ID) *RelativeDateTimeFormatter {
 	if id == 0 {
 		return nil

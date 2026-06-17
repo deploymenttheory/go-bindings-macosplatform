@@ -18,11 +18,11 @@ type MultiheadAttentionLayer struct {
 // Unwrap returns the underlying [raw.MLCMultiheadAttentionLayer].
 func (x *MultiheadAttentionLayer) Unwrap() *raw.MLCMultiheadAttentionLayer { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MultiheadAttentionLayer) ID() objc.ID { return x.inner.Ptr() }
 
-// MultiheadAttentionLayerFromID adopts an existing toll-free-bridged object id as a MultiheadAttentionLayer (nil for 0).
+// MultiheadAttentionLayerFromID adopts an existing object pointer as a MultiheadAttentionLayer (nil for 0).
 func MultiheadAttentionLayerFromID(id objc.ID) *MultiheadAttentionLayer {
 	if id == 0 {
 		return nil

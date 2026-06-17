@@ -18,11 +18,11 @@ type WKFrameInfo struct {
 // Unwrap returns the underlying [raw.WKFrameInfo].
 func (x *WKFrameInfo) Unwrap() *raw.WKFrameInfo { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *WKFrameInfo) ID() objc.ID { return x.inner.Ptr() }
 
-// WKFrameInfoFromID adopts an existing toll-free-bridged object id as a WKFrameInfo (nil for 0).
+// WKFrameInfoFromID adopts an existing object pointer as a WKFrameInfo (nil for 0).
 func WKFrameInfoFromID(id objc.ID) *WKFrameInfo {
 	if id == 0 {
 		return nil

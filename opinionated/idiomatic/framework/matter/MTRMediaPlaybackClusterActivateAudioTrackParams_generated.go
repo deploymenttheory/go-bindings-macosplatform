@@ -19,11 +19,11 @@ type MTRMediaPlaybackClusterActivateAudioTrackParams struct {
 // Unwrap returns the underlying [raw.MTRMediaPlaybackClusterActivateAudioTrackParams].
 func (x *MTRMediaPlaybackClusterActivateAudioTrackParams) Unwrap() *raw.MTRMediaPlaybackClusterActivateAudioTrackParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRMediaPlaybackClusterActivateAudioTrackParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRMediaPlaybackClusterActivateAudioTrackParamsFromID adopts an existing toll-free-bridged object id as a MTRMediaPlaybackClusterActivateAudioTrackParams (nil for 0).
+// MTRMediaPlaybackClusterActivateAudioTrackParamsFromID adopts an existing object pointer as a MTRMediaPlaybackClusterActivateAudioTrackParams (nil for 0).
 func MTRMediaPlaybackClusterActivateAudioTrackParamsFromID(id objc.ID) *MTRMediaPlaybackClusterActivateAudioTrackParams {
 	if id == 0 {
 		return nil

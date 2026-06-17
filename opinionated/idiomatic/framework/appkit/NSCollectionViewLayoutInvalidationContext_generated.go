@@ -19,11 +19,11 @@ type CollectionViewLayoutInvalidationContext struct {
 // Unwrap returns the underlying [raw.NSCollectionViewLayoutInvalidationContext].
 func (x *CollectionViewLayoutInvalidationContext) Unwrap() *raw.NSCollectionViewLayoutInvalidationContext { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CollectionViewLayoutInvalidationContext) ID() objc.ID { return x.inner.Ptr() }
 
-// CollectionViewLayoutInvalidationContextFromID adopts an existing toll-free-bridged object id as a CollectionViewLayoutInvalidationContext (nil for 0).
+// CollectionViewLayoutInvalidationContextFromID adopts an existing object pointer as a CollectionViewLayoutInvalidationContext (nil for 0).
 func CollectionViewLayoutInvalidationContextFromID(id objc.ID) *CollectionViewLayoutInvalidationContext {
 	if id == 0 {
 		return nil

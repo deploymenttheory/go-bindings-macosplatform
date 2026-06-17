@@ -19,11 +19,11 @@ type CNNCrossChannelNormalization struct {
 // Unwrap returns the underlying [raw.MPSCNNCrossChannelNormalization].
 func (x *CNNCrossChannelNormalization) Unwrap() *raw.MPSCNNCrossChannelNormalization { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CNNCrossChannelNormalization) ID() objc.ID { return x.inner.Ptr() }
 
-// CNNCrossChannelNormalizationFromID adopts an existing toll-free-bridged object id as a CNNCrossChannelNormalization (nil for 0).
+// CNNCrossChannelNormalizationFromID adopts an existing object pointer as a CNNCrossChannelNormalization (nil for 0).
 func CNNCrossChannelNormalizationFromID(id objc.ID) *CNNCrossChannelNormalization {
 	if id == 0 {
 		return nil

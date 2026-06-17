@@ -18,11 +18,11 @@ type FetchRequestExpression struct {
 // Unwrap returns the underlying [raw.NSFetchRequestExpression].
 func (x *FetchRequestExpression) Unwrap() *raw.NSFetchRequestExpression { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *FetchRequestExpression) ID() objc.ID { return x.inner.Ptr() }
 
-// FetchRequestExpressionFromID adopts an existing toll-free-bridged object id as a FetchRequestExpression (nil for 0).
+// FetchRequestExpressionFromID adopts an existing object pointer as a FetchRequestExpression (nil for 0).
 func FetchRequestExpressionFromID(id objc.ID) *FetchRequestExpression {
 	if id == 0 {
 		return nil

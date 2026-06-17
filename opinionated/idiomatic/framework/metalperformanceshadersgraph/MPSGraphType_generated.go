@@ -17,11 +17,11 @@ type GraphType struct {
 // Unwrap returns the underlying [raw.MPSGraphType].
 func (x *GraphType) Unwrap() *raw.MPSGraphType { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *GraphType) ID() objc.ID { return x.inner.Ptr() }
 
-// GraphTypeFromID adopts an existing toll-free-bridged object id as a GraphType (nil for 0).
+// GraphTypeFromID adopts an existing object pointer as a GraphType (nil for 0).
 func GraphTypeFromID(id objc.ID) *GraphType {
 	if id == 0 {
 		return nil

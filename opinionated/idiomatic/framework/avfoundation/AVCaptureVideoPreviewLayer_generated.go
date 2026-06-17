@@ -20,11 +20,11 @@ type CaptureVideoPreviewLayer struct {
 // Unwrap returns the underlying [raw.AVCaptureVideoPreviewLayer].
 func (x *CaptureVideoPreviewLayer) Unwrap() *raw.AVCaptureVideoPreviewLayer { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CaptureVideoPreviewLayer) ID() objc.ID { return x.inner.Ptr() }
 
-// CaptureVideoPreviewLayerFromID adopts an existing toll-free-bridged object id as a CaptureVideoPreviewLayer (nil for 0).
+// CaptureVideoPreviewLayerFromID adopts an existing object pointer as a CaptureVideoPreviewLayer (nil for 0).
 func CaptureVideoPreviewLayerFromID(id objc.ID) *CaptureVideoPreviewLayer {
 	if id == 0 {
 		return nil

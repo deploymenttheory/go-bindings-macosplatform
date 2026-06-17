@@ -17,11 +17,11 @@ type ValueTransformer struct {
 // Unwrap returns the underlying [raw.NSValueTransformer].
 func (x *ValueTransformer) Unwrap() *raw.NSValueTransformer { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ValueTransformer) ID() objc.ID { return x.inner.Ptr() }
 
-// ValueTransformerFromID adopts an existing toll-free-bridged object id as a ValueTransformer (nil for 0).
+// ValueTransformerFromID adopts an existing object pointer as a ValueTransformer (nil for 0).
 func ValueTransformerFromID(id objc.ID) *ValueTransformer {
 	if id == 0 {
 		return nil

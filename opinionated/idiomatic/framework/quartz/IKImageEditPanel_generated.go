@@ -18,11 +18,11 @@ type IKImageEditPanel struct {
 // Unwrap returns the underlying [raw.IKImageEditPanel].
 func (x *IKImageEditPanel) Unwrap() *raw.IKImageEditPanel { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *IKImageEditPanel) ID() objc.ID { return x.inner.Ptr() }
 
-// IKImageEditPanelFromID adopts an existing toll-free-bridged object id as a IKImageEditPanel (nil for 0).
+// IKImageEditPanelFromID adopts an existing object pointer as a IKImageEditPanel (nil for 0).
 func IKImageEditPanelFromID(id objc.ID) *IKImageEditPanel {
 	if id == 0 {
 		return nil

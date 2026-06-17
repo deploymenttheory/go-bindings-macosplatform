@@ -21,11 +21,11 @@ type SearchQuery struct {
 // Unwrap returns the underlying [raw.CSSearchQuery].
 func (x *SearchQuery) Unwrap() *raw.CSSearchQuery { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SearchQuery) ID() objc.ID { return x.inner.Ptr() }
 
-// SearchQueryFromID adopts an existing toll-free-bridged object id as a SearchQuery (nil for 0).
+// SearchQueryFromID adopts an existing object pointer as a SearchQuery (nil for 0).
 func SearchQueryFromID(id objc.ID) *SearchQuery {
 	if id == 0 {
 		return nil

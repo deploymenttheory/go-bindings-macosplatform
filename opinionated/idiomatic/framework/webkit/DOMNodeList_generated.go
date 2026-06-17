@@ -17,11 +17,11 @@ type DOMNodeList struct {
 // Unwrap returns the underlying [raw.DOMNodeList].
 func (x *DOMNodeList) Unwrap() *raw.DOMNodeList { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DOMNodeList) ID() objc.ID { return x.inner.Ptr() }
 
-// DOMNodeListFromID adopts an existing toll-free-bridged object id as a DOMNodeList (nil for 0).
+// DOMNodeListFromID adopts an existing object pointer as a DOMNodeList (nil for 0).
 func DOMNodeListFromID(id objc.ID) *DOMNodeList {
 	if id == 0 {
 		return nil

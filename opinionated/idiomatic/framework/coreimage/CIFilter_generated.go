@@ -19,11 +19,11 @@ type Filter struct {
 // Unwrap returns the underlying [raw.CIFilter].
 func (x *Filter) Unwrap() *raw.CIFilter { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Filter) ID() objc.ID { return x.inner.Ptr() }
 
-// FilterFromID adopts an existing toll-free-bridged object id as a Filter (nil for 0).
+// FilterFromID adopts an existing object pointer as a Filter (nil for 0).
 func FilterFromID(id objc.ID) *Filter {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type IOBluetoothSDPUUID struct {
 // Unwrap returns the underlying [raw.IOBluetoothSDPUUID].
 func (x *IOBluetoothSDPUUID) Unwrap() *raw.IOBluetoothSDPUUID { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *IOBluetoothSDPUUID) ID() objc.ID { return x.inner.Ptr() }
 
-// IOBluetoothSDPUUIDFromID adopts an existing toll-free-bridged object id as a IOBluetoothSDPUUID (nil for 0).
+// IOBluetoothSDPUUIDFromID adopts an existing object pointer as a IOBluetoothSDPUUID (nil for 0).
 func IOBluetoothSDPUUIDFromID(id objc.ID) *IOBluetoothSDPUUID {
 	if id == 0 {
 		return nil

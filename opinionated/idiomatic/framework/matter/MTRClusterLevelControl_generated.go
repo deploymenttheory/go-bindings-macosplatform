@@ -19,11 +19,11 @@ type MTRClusterLevelControl struct {
 // Unwrap returns the underlying [raw.MTRClusterLevelControl].
 func (x *MTRClusterLevelControl) Unwrap() *raw.MTRClusterLevelControl { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRClusterLevelControl) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRClusterLevelControlFromID adopts an existing toll-free-bridged object id as a MTRClusterLevelControl (nil for 0).
+// MTRClusterLevelControlFromID adopts an existing object pointer as a MTRClusterLevelControl (nil for 0).
 func MTRClusterLevelControlFromID(id objc.ID) *MTRClusterLevelControl {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type MTRAsyncCallbackQueueWorkItem struct {
 // Unwrap returns the underlying [raw.MTRAsyncCallbackQueueWorkItem].
 func (x *MTRAsyncCallbackQueueWorkItem) Unwrap() *raw.MTRAsyncCallbackQueueWorkItem { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRAsyncCallbackQueueWorkItem) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRAsyncCallbackQueueWorkItemFromID adopts an existing toll-free-bridged object id as a MTRAsyncCallbackQueueWorkItem (nil for 0).
+// MTRAsyncCallbackQueueWorkItemFromID adopts an existing object pointer as a MTRAsyncCallbackQueueWorkItem (nil for 0).
 func MTRAsyncCallbackQueueWorkItemFromID(id objc.ID) *MTRAsyncCallbackQueueWorkItem {
 	if id == 0 {
 		return nil

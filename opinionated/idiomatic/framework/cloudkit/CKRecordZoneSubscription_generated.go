@@ -19,11 +19,11 @@ type RecordZoneSubscription struct {
 // Unwrap returns the underlying [raw.CKRecordZoneSubscription].
 func (x *RecordZoneSubscription) Unwrap() *raw.CKRecordZoneSubscription { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *RecordZoneSubscription) ID() objc.ID { return x.inner.Ptr() }
 
-// RecordZoneSubscriptionFromID adopts an existing toll-free-bridged object id as a RecordZoneSubscription (nil for 0).
+// RecordZoneSubscriptionFromID adopts an existing object pointer as a RecordZoneSubscription (nil for 0).
 func RecordZoneSubscriptionFromID(id objc.ID) *RecordZoneSubscription {
 	if id == 0 {
 		return nil

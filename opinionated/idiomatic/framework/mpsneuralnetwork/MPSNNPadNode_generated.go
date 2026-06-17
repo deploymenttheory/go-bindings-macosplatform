@@ -18,11 +18,11 @@ type NNPadNode struct {
 // Unwrap returns the underlying [raw.MPSNNPadNode].
 func (x *NNPadNode) Unwrap() *raw.MPSNNPadNode { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NNPadNode) ID() objc.ID { return x.inner.Ptr() }
 
-// NNPadNodeFromID adopts an existing toll-free-bridged object id as a NNPadNode (nil for 0).
+// NNPadNodeFromID adopts an existing object pointer as a NNPadNode (nil for 0).
 func NNPadNodeFromID(id objc.ID) *NNPadNode {
 	if id == 0 {
 		return nil

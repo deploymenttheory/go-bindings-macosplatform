@@ -17,11 +17,11 @@ type UnitElectricPotentialDifference struct {
 // Unwrap returns the underlying [raw.NSUnitElectricPotentialDifference].
 func (x *UnitElectricPotentialDifference) Unwrap() *raw.NSUnitElectricPotentialDifference { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *UnitElectricPotentialDifference) ID() objc.ID { return x.inner.Ptr() }
 
-// UnitElectricPotentialDifferenceFromID adopts an existing toll-free-bridged object id as a UnitElectricPotentialDifference (nil for 0).
+// UnitElectricPotentialDifferenceFromID adopts an existing object pointer as a UnitElectricPotentialDifference (nil for 0).
 func UnitElectricPotentialDifferenceFromID(id objc.ID) *UnitElectricPotentialDifference {
 	if id == 0 {
 		return nil

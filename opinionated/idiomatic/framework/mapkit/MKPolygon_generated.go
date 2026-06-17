@@ -18,11 +18,11 @@ type Polygon struct {
 // Unwrap returns the underlying [raw.MKPolygon].
 func (x *Polygon) Unwrap() *raw.MKPolygon { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Polygon) ID() objc.ID { return x.inner.Ptr() }
 
-// PolygonFromID adopts an existing toll-free-bridged object id as a Polygon (nil for 0).
+// PolygonFromID adopts an existing object pointer as a Polygon (nil for 0).
 func PolygonFromID(id objc.ID) *Polygon {
 	if id == 0 {
 		return nil

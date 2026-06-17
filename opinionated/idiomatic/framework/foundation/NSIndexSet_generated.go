@@ -17,11 +17,11 @@ type IndexSet struct {
 // Unwrap returns the underlying [raw.NSIndexSet].
 func (x *IndexSet) Unwrap() *raw.NSIndexSet { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *IndexSet) ID() objc.ID { return x.inner.Ptr() }
 
-// IndexSetFromID adopts an existing toll-free-bridged object id as a IndexSet (nil for 0).
+// IndexSetFromID adopts an existing object pointer as a IndexSet (nil for 0).
 func IndexSetFromID(id objc.ID) *IndexSet {
 	if id == 0 {
 		return nil

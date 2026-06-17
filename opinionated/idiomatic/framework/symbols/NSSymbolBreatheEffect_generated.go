@@ -17,11 +17,11 @@ type SymbolBreatheEffect struct {
 // Unwrap returns the underlying [raw.NSSymbolBreatheEffect].
 func (x *SymbolBreatheEffect) Unwrap() *raw.NSSymbolBreatheEffect { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SymbolBreatheEffect) ID() objc.ID { return x.inner.Ptr() }
 
-// SymbolBreatheEffectFromID adopts an existing toll-free-bridged object id as a SymbolBreatheEffect (nil for 0).
+// SymbolBreatheEffectFromID adopts an existing object pointer as a SymbolBreatheEffect (nil for 0).
 func SymbolBreatheEffectFromID(id objc.ID) *SymbolBreatheEffect {
 	if id == 0 {
 		return nil

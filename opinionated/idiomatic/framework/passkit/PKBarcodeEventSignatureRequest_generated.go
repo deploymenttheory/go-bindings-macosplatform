@@ -19,11 +19,11 @@ type BarcodeEventSignatureRequest struct {
 // Unwrap returns the underlying [raw.PKBarcodeEventSignatureRequest].
 func (x *BarcodeEventSignatureRequest) Unwrap() *raw.PKBarcodeEventSignatureRequest { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *BarcodeEventSignatureRequest) ID() objc.ID { return x.inner.Ptr() }
 
-// BarcodeEventSignatureRequestFromID adopts an existing toll-free-bridged object id as a BarcodeEventSignatureRequest (nil for 0).
+// BarcodeEventSignatureRequestFromID adopts an existing object pointer as a BarcodeEventSignatureRequest (nil for 0).
 func BarcodeEventSignatureRequestFromID(id objc.ID) *BarcodeEventSignatureRequest {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type AVB17221AECPAddressAccessTLV struct {
 // Unwrap returns the underlying [raw.AVB17221AECPAddressAccessTLV].
 func (x *AVB17221AECPAddressAccessTLV) Unwrap() *raw.AVB17221AECPAddressAccessTLV { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AVB17221AECPAddressAccessTLV) ID() objc.ID { return x.inner.Ptr() }
 
-// AVB17221AECPAddressAccessTLVFromID adopts an existing toll-free-bridged object id as a AVB17221AECPAddressAccessTLV (nil for 0).
+// AVB17221AECPAddressAccessTLVFromID adopts an existing object pointer as a AVB17221AECPAddressAccessTLV (nil for 0).
 func AVB17221AECPAddressAccessTLVFromID(id objc.ID) *AVB17221AECPAddressAccessTLV {
 	if id == 0 {
 		return nil

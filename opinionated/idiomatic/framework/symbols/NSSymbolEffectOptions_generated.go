@@ -17,11 +17,11 @@ type SymbolEffectOptions struct {
 // Unwrap returns the underlying [raw.NSSymbolEffectOptions].
 func (x *SymbolEffectOptions) Unwrap() *raw.NSSymbolEffectOptions { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SymbolEffectOptions) ID() objc.ID { return x.inner.Ptr() }
 
-// SymbolEffectOptionsFromID adopts an existing toll-free-bridged object id as a SymbolEffectOptions (nil for 0).
+// SymbolEffectOptionsFromID adopts an existing object pointer as a SymbolEffectOptions (nil for 0).
 func SymbolEffectOptionsFromID(id objc.ID) *SymbolEffectOptions {
 	if id == 0 {
 		return nil

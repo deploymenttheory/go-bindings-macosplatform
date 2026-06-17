@@ -18,11 +18,11 @@ type VisionPrescription struct {
 // Unwrap returns the underlying [raw.HKVisionPrescription].
 func (x *VisionPrescription) Unwrap() *raw.HKVisionPrescription { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *VisionPrescription) ID() objc.ID { return x.inner.Ptr() }
 
-// VisionPrescriptionFromID adopts an existing toll-free-bridged object id as a VisionPrescription (nil for 0).
+// VisionPrescriptionFromID adopts an existing object pointer as a VisionPrescription (nil for 0).
 func VisionPrescriptionFromID(id objc.ID) *VisionPrescription {
 	if id == 0 {
 		return nil

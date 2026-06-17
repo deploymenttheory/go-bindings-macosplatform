@@ -17,11 +17,11 @@ type BootLoader struct {
 // Unwrap returns the underlying [raw.VZBootLoader].
 func (x *BootLoader) Unwrap() *raw.VZBootLoader { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *BootLoader) ID() objc.ID { return x.inner.Ptr() }
 
-// BootLoaderFromID adopts an existing toll-free-bridged object id as a BootLoader (nil for 0).
+// BootLoaderFromID adopts an existing object pointer as a BootLoader (nil for 0).
 func BootLoaderFromID(id objc.ID) *BootLoader {
 	if id == 0 {
 		return nil

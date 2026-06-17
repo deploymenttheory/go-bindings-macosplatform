@@ -21,11 +21,11 @@ type MTRBaseClusterTemperatureControl struct {
 // Unwrap returns the underlying [raw.MTRBaseClusterTemperatureControl].
 func (x *MTRBaseClusterTemperatureControl) Unwrap() *raw.MTRBaseClusterTemperatureControl { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRBaseClusterTemperatureControl) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRBaseClusterTemperatureControlFromID adopts an existing toll-free-bridged object id as a MTRBaseClusterTemperatureControl (nil for 0).
+// MTRBaseClusterTemperatureControlFromID adopts an existing object pointer as a MTRBaseClusterTemperatureControl (nil for 0).
 func MTRBaseClusterTemperatureControlFromID(id objc.ID) *MTRBaseClusterTemperatureControl {
 	if id == 0 {
 		return nil

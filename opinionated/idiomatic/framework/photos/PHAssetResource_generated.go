@@ -19,11 +19,11 @@ type AssetResource struct {
 // Unwrap returns the underlying [raw.PHAssetResource].
 func (x *AssetResource) Unwrap() *raw.PHAssetResource { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AssetResource) ID() objc.ID { return x.inner.Ptr() }
 
-// AssetResourceFromID adopts an existing toll-free-bridged object id as a AssetResource (nil for 0).
+// AssetResourceFromID adopts an existing object pointer as a AssetResource (nil for 0).
 func AssetResourceFromID(id objc.ID) *AssetResource {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type ATTRequest struct {
 // Unwrap returns the underlying [raw.CBATTRequest].
 func (x *ATTRequest) Unwrap() *raw.CBATTRequest { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ATTRequest) ID() objc.ID { return x.inner.Ptr() }
 
-// ATTRequestFromID adopts an existing toll-free-bridged object id as a ATTRequest (nil for 0).
+// ATTRequestFromID adopts an existing object pointer as a ATTRequest (nil for 0).
 func ATTRequestFromID(id objc.ID) *ATTRequest {
 	if id == 0 {
 		return nil

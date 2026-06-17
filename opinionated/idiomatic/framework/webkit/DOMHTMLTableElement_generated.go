@@ -19,11 +19,11 @@ type DOMHTMLTableElement struct {
 // Unwrap returns the underlying [raw.DOMHTMLTableElement].
 func (x *DOMHTMLTableElement) Unwrap() *raw.DOMHTMLTableElement { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DOMHTMLTableElement) ID() objc.ID { return x.inner.Ptr() }
 
-// DOMHTMLTableElementFromID adopts an existing toll-free-bridged object id as a DOMHTMLTableElement (nil for 0).
+// DOMHTMLTableElementFromID adopts an existing object pointer as a DOMHTMLTableElement (nil for 0).
 func DOMHTMLTableElementFromID(id objc.ID) *DOMHTMLTableElement {
 	if id == 0 {
 		return nil

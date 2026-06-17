@@ -19,11 +19,11 @@ type OperationGroup struct {
 // Unwrap returns the underlying [raw.CKOperationGroup].
 func (x *OperationGroup) Unwrap() *raw.CKOperationGroup { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *OperationGroup) ID() objc.ID { return x.inner.Ptr() }
 
-// OperationGroupFromID adopts an existing toll-free-bridged object id as a OperationGroup (nil for 0).
+// OperationGroupFromID adopts an existing object pointer as a OperationGroup (nil for 0).
 func OperationGroupFromID(id objc.ID) *OperationGroup {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type CPUExceptionDiagnostic struct {
 // Unwrap returns the underlying [raw.MXCPUExceptionDiagnostic].
 func (x *CPUExceptionDiagnostic) Unwrap() *raw.MXCPUExceptionDiagnostic { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CPUExceptionDiagnostic) ID() objc.ID { return x.inner.Ptr() }
 
-// CPUExceptionDiagnosticFromID adopts an existing toll-free-bridged object id as a CPUExceptionDiagnostic (nil for 0).
+// CPUExceptionDiagnosticFromID adopts an existing object pointer as a CPUExceptionDiagnostic (nil for 0).
 func CPUExceptionDiagnosticFromID(id objc.ID) *CPUExceptionDiagnostic {
 	if id == 0 {
 		return nil

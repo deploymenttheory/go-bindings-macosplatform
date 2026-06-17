@@ -17,11 +17,11 @@ type DirectivityModelParameters struct {
 // Unwrap returns the underlying [raw.PHASEDirectivityModelParameters].
 func (x *DirectivityModelParameters) Unwrap() *raw.PHASEDirectivityModelParameters { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DirectivityModelParameters) ID() objc.ID { return x.inner.Ptr() }
 
-// DirectivityModelParametersFromID adopts an existing toll-free-bridged object id as a DirectivityModelParameters (nil for 0).
+// DirectivityModelParametersFromID adopts an existing object pointer as a DirectivityModelParameters (nil for 0).
 func DirectivityModelParametersFromID(id objc.ID) *DirectivityModelParameters {
 	if id == 0 {
 		return nil

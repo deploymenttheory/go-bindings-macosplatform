@@ -17,11 +17,11 @@ type AudioApplication struct {
 // Unwrap returns the underlying [raw.AVAudioApplication].
 func (x *AudioApplication) Unwrap() *raw.AVAudioApplication { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AudioApplication) ID() objc.ID { return x.inner.Ptr() }
 
-// AudioApplicationFromID adopts an existing toll-free-bridged object id as a AudioApplication (nil for 0).
+// AudioApplicationFromID adopts an existing object pointer as a AudioApplication (nil for 0).
 func AudioApplicationFromID(id objc.ID) *AudioApplication {
 	if id == 0 {
 		return nil

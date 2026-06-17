@@ -17,11 +17,11 @@ type FormatReaderInstantiationOptions struct {
 // Unwrap returns the underlying [raw.MEFormatReaderInstantiationOptions].
 func (x *FormatReaderInstantiationOptions) Unwrap() *raw.MEFormatReaderInstantiationOptions { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *FormatReaderInstantiationOptions) ID() objc.ID { return x.inner.Ptr() }
 
-// FormatReaderInstantiationOptionsFromID adopts an existing toll-free-bridged object id as a FormatReaderInstantiationOptions (nil for 0).
+// FormatReaderInstantiationOptionsFromID adopts an existing object pointer as a FormatReaderInstantiationOptions (nil for 0).
 func FormatReaderInstantiationOptionsFromID(id objc.ID) *FormatReaderInstantiationOptions {
 	if id == 0 {
 		return nil

@@ -17,11 +17,11 @@ type LivePhotoRequestOptions struct {
 // Unwrap returns the underlying [raw.PHLivePhotoRequestOptions].
 func (x *LivePhotoRequestOptions) Unwrap() *raw.PHLivePhotoRequestOptions { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *LivePhotoRequestOptions) ID() objc.ID { return x.inner.Ptr() }
 
-// LivePhotoRequestOptionsFromID adopts an existing toll-free-bridged object id as a LivePhotoRequestOptions (nil for 0).
+// LivePhotoRequestOptionsFromID adopts an existing object pointer as a LivePhotoRequestOptions (nil for 0).
 func LivePhotoRequestOptionsFromID(id objc.ID) *LivePhotoRequestOptions {
 	if id == 0 {
 		return nil

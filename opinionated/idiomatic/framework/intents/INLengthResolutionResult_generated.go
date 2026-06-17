@@ -17,11 +17,11 @@ type LengthResolutionResult struct {
 // Unwrap returns the underlying [raw.INLengthResolutionResult].
 func (x *LengthResolutionResult) Unwrap() *raw.INLengthResolutionResult { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *LengthResolutionResult) ID() objc.ID { return x.inner.Ptr() }
 
-// LengthResolutionResultFromID adopts an existing toll-free-bridged object id as a LengthResolutionResult (nil for 0).
+// LengthResolutionResultFromID adopts an existing object pointer as a LengthResolutionResult (nil for 0).
 func LengthResolutionResultFromID(id objc.ID) *LengthResolutionResult {
 	if id == 0 {
 		return nil

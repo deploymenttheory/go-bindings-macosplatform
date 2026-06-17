@@ -19,11 +19,11 @@ type LowLatencySuperResolutionScalerConfiguration struct {
 // Unwrap returns the underlying [raw.VTLowLatencySuperResolutionScalerConfiguration].
 func (x *LowLatencySuperResolutionScalerConfiguration) Unwrap() *raw.VTLowLatencySuperResolutionScalerConfiguration { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *LowLatencySuperResolutionScalerConfiguration) ID() objc.ID { return x.inner.Ptr() }
 
-// LowLatencySuperResolutionScalerConfigurationFromID adopts an existing toll-free-bridged object id as a LowLatencySuperResolutionScalerConfiguration (nil for 0).
+// LowLatencySuperResolutionScalerConfigurationFromID adopts an existing object pointer as a LowLatencySuperResolutionScalerConfiguration (nil for 0).
 func LowLatencySuperResolutionScalerConfigurationFromID(id objc.ID) *LowLatencySuperResolutionScalerConfiguration {
 	if id == 0 {
 		return nil

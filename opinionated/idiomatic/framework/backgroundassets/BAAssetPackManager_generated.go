@@ -21,11 +21,11 @@ type AssetPackManager struct {
 // Unwrap returns the underlying [raw.BAAssetPackManager].
 func (x *AssetPackManager) Unwrap() *raw.BAAssetPackManager { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AssetPackManager) ID() objc.ID { return x.inner.Ptr() }
 
-// AssetPackManagerFromID adopts an existing toll-free-bridged object id as a AssetPackManager (nil for 0).
+// AssetPackManagerFromID adopts an existing object pointer as a AssetPackManager (nil for 0).
 func AssetPackManagerFromID(id objc.ID) *AssetPackManager {
 	if id == 0 {
 		return nil

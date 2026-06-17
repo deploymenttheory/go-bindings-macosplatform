@@ -17,11 +17,11 @@ type ResourceStatePassSampleBufferAttachmentDescriptorArray struct {
 // Unwrap returns the underlying [raw.MTLResourceStatePassSampleBufferAttachmentDescriptorArray].
 func (x *ResourceStatePassSampleBufferAttachmentDescriptorArray) Unwrap() *raw.MTLResourceStatePassSampleBufferAttachmentDescriptorArray { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ResourceStatePassSampleBufferAttachmentDescriptorArray) ID() objc.ID { return x.inner.Ptr() }
 
-// ResourceStatePassSampleBufferAttachmentDescriptorArrayFromID adopts an existing toll-free-bridged object id as a ResourceStatePassSampleBufferAttachmentDescriptorArray (nil for 0).
+// ResourceStatePassSampleBufferAttachmentDescriptorArrayFromID adopts an existing object pointer as a ResourceStatePassSampleBufferAttachmentDescriptorArray (nil for 0).
 func ResourceStatePassSampleBufferAttachmentDescriptorArrayFromID(id objc.ID) *ResourceStatePassSampleBufferAttachmentDescriptorArray {
 	if id == 0 {
 		return nil

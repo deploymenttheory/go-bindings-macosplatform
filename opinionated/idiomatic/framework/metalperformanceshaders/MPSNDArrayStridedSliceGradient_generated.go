@@ -19,11 +19,11 @@ type NDArrayStridedSliceGradient struct {
 // Unwrap returns the underlying [raw.MPSNDArrayStridedSliceGradient].
 func (x *NDArrayStridedSliceGradient) Unwrap() *raw.MPSNDArrayStridedSliceGradient { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NDArrayStridedSliceGradient) ID() objc.ID { return x.inner.Ptr() }
 
-// NDArrayStridedSliceGradientFromID adopts an existing toll-free-bridged object id as a NDArrayStridedSliceGradient (nil for 0).
+// NDArrayStridedSliceGradientFromID adopts an existing object pointer as a NDArrayStridedSliceGradient (nil for 0).
 func NDArrayStridedSliceGradientFromID(id objc.ID) *NDArrayStridedSliceGradient {
 	if id == 0 {
 		return nil

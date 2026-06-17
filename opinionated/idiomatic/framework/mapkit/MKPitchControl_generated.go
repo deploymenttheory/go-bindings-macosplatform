@@ -17,11 +17,11 @@ type PitchControl struct {
 // Unwrap returns the underlying [raw.MKPitchControl].
 func (x *PitchControl) Unwrap() *raw.MKPitchControl { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PitchControl) ID() objc.ID { return x.inner.Ptr() }
 
-// PitchControlFromID adopts an existing toll-free-bridged object id as a PitchControl (nil for 0).
+// PitchControlFromID adopts an existing object pointer as a PitchControl (nil for 0).
 func PitchControlFromID(id objc.ID) *PitchControl {
 	if id == 0 {
 		return nil

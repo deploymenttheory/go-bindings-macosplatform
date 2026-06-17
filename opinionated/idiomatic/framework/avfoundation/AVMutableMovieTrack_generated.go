@@ -21,11 +21,11 @@ type MutableMovieTrack struct {
 // Unwrap returns the underlying [raw.AVMutableMovieTrack].
 func (x *MutableMovieTrack) Unwrap() *raw.AVMutableMovieTrack { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MutableMovieTrack) ID() objc.ID { return x.inner.Ptr() }
 
-// MutableMovieTrackFromID adopts an existing toll-free-bridged object id as a MutableMovieTrack (nil for 0).
+// MutableMovieTrackFromID adopts an existing object pointer as a MutableMovieTrack (nil for 0).
 func MutableMovieTrackFromID(id objc.ID) *MutableMovieTrack {
 	if id == 0 {
 		return nil

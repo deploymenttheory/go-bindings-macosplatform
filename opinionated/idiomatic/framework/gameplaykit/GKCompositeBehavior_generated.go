@@ -17,11 +17,11 @@ type CompositeBehavior struct {
 // Unwrap returns the underlying [raw.GKCompositeBehavior].
 func (x *CompositeBehavior) Unwrap() *raw.GKCompositeBehavior { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CompositeBehavior) ID() objc.ID { return x.inner.Ptr() }
 
-// CompositeBehaviorFromID adopts an existing toll-free-bridged object id as a CompositeBehavior (nil for 0).
+// CompositeBehaviorFromID adopts an existing object pointer as a CompositeBehavior (nil for 0).
 func CompositeBehaviorFromID(id objc.ID) *CompositeBehavior {
 	if id == 0 {
 		return nil

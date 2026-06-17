@@ -19,11 +19,11 @@ type CallGroup struct {
 // Unwrap returns the underlying [raw.INCallGroup].
 func (x *CallGroup) Unwrap() *raw.INCallGroup { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CallGroup) ID() objc.ID { return x.inner.Ptr() }
 
-// CallGroupFromID adopts an existing toll-free-bridged object id as a CallGroup (nil for 0).
+// CallGroupFromID adopts an existing object pointer as a CallGroup (nil for 0).
 func CallGroupFromID(id objc.ID) *CallGroup {
 	if id == 0 {
 		return nil

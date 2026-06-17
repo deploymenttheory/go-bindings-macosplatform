@@ -19,11 +19,11 @@ type NENetworkRule struct {
 // Unwrap returns the underlying [raw.NENetworkRule].
 func (x *NENetworkRule) Unwrap() *raw.NENetworkRule { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NENetworkRule) ID() objc.ID { return x.inner.Ptr() }
 
-// NENetworkRuleFromID adopts an existing toll-free-bridged object id as a NENetworkRule (nil for 0).
+// NENetworkRuleFromID adopts an existing object pointer as a NENetworkRule (nil for 0).
 func NENetworkRuleFromID(id objc.ID) *NENetworkRule {
 	if id == 0 {
 		return nil

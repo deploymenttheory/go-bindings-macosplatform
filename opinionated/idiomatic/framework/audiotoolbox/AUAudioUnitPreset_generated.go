@@ -19,11 +19,11 @@ type AudioUnitPreset struct {
 // Unwrap returns the underlying [raw.AUAudioUnitPreset].
 func (x *AudioUnitPreset) Unwrap() *raw.AUAudioUnitPreset { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AudioUnitPreset) ID() objc.ID { return x.inner.Ptr() }
 
-// AudioUnitPresetFromID adopts an existing toll-free-bridged object id as a AudioUnitPreset (nil for 0).
+// AudioUnitPresetFromID adopts an existing object pointer as a AudioUnitPreset (nil for 0).
 func AudioUnitPresetFromID(id objc.ID) *AudioUnitPreset {
 	if id == 0 {
 		return nil

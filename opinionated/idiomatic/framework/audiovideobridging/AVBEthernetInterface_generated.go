@@ -17,11 +17,11 @@ type EthernetInterface struct {
 // Unwrap returns the underlying [raw.AVBEthernetInterface].
 func (x *EthernetInterface) Unwrap() *raw.AVBEthernetInterface { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *EthernetInterface) ID() objc.ID { return x.inner.Ptr() }
 
-// EthernetInterfaceFromID adopts an existing toll-free-bridged object id as a EthernetInterface (nil for 0).
+// EthernetInterfaceFromID adopts an existing object pointer as a EthernetInterface (nil for 0).
 func EthernetInterfaceFromID(id objc.ID) *EthernetInterface {
 	if id == 0 {
 		return nil

@@ -20,11 +20,11 @@ type AssetVariantVideoAttributes struct {
 // Unwrap returns the underlying [raw.AVAssetVariantVideoAttributes].
 func (x *AssetVariantVideoAttributes) Unwrap() *raw.AVAssetVariantVideoAttributes { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AssetVariantVideoAttributes) ID() objc.ID { return x.inner.Ptr() }
 
-// AssetVariantVideoAttributesFromID adopts an existing toll-free-bridged object id as a AssetVariantVideoAttributes (nil for 0).
+// AssetVariantVideoAttributesFromID adopts an existing object pointer as a AssetVariantVideoAttributes (nil for 0).
 func AssetVariantVideoAttributesFromID(id objc.ID) *AssetVariantVideoAttributes {
 	if id == 0 {
 		return nil

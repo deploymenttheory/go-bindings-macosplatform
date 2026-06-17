@@ -19,11 +19,11 @@ type MTRTargetNavigatorClusterTargetInfoStruct struct {
 // Unwrap returns the underlying [raw.MTRTargetNavigatorClusterTargetInfoStruct].
 func (x *MTRTargetNavigatorClusterTargetInfoStruct) Unwrap() *raw.MTRTargetNavigatorClusterTargetInfoStruct { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRTargetNavigatorClusterTargetInfoStruct) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRTargetNavigatorClusterTargetInfoStructFromID adopts an existing toll-free-bridged object id as a MTRTargetNavigatorClusterTargetInfoStruct (nil for 0).
+// MTRTargetNavigatorClusterTargetInfoStructFromID adopts an existing object pointer as a MTRTargetNavigatorClusterTargetInfoStruct (nil for 0).
 func MTRTargetNavigatorClusterTargetInfoStructFromID(id objc.ID) *MTRTargetNavigatorClusterTargetInfoStruct {
 	if id == 0 {
 		return nil

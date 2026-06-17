@@ -17,11 +17,11 @@ type VolumeResolutionResult struct {
 // Unwrap returns the underlying [raw.INVolumeResolutionResult].
 func (x *VolumeResolutionResult) Unwrap() *raw.INVolumeResolutionResult { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *VolumeResolutionResult) ID() objc.ID { return x.inner.Ptr() }
 
-// VolumeResolutionResultFromID adopts an existing toll-free-bridged object id as a VolumeResolutionResult (nil for 0).
+// VolumeResolutionResultFromID adopts an existing object pointer as a VolumeResolutionResult (nil for 0).
 func VolumeResolutionResultFromID(id objc.ID) *VolumeResolutionResult {
 	if id == 0 {
 		return nil

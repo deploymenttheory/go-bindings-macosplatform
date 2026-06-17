@@ -18,11 +18,11 @@ type MTRWindowCoveringClusterStopMotionParams struct {
 // Unwrap returns the underlying [raw.MTRWindowCoveringClusterStopMotionParams].
 func (x *MTRWindowCoveringClusterStopMotionParams) Unwrap() *raw.MTRWindowCoveringClusterStopMotionParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRWindowCoveringClusterStopMotionParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRWindowCoveringClusterStopMotionParamsFromID adopts an existing toll-free-bridged object id as a MTRWindowCoveringClusterStopMotionParams (nil for 0).
+// MTRWindowCoveringClusterStopMotionParamsFromID adopts an existing object pointer as a MTRWindowCoveringClusterStopMotionParams (nil for 0).
 func MTRWindowCoveringClusterStopMotionParamsFromID(id objc.ID) *MTRWindowCoveringClusterStopMotionParams {
 	if id == 0 {
 		return nil

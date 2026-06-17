@@ -19,11 +19,11 @@ type PlayerItemRenderedLegibleOutput struct {
 // Unwrap returns the underlying [raw.AVPlayerItemRenderedLegibleOutput].
 func (x *PlayerItemRenderedLegibleOutput) Unwrap() *raw.AVPlayerItemRenderedLegibleOutput { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PlayerItemRenderedLegibleOutput) ID() objc.ID { return x.inner.Ptr() }
 
-// PlayerItemRenderedLegibleOutputFromID adopts an existing toll-free-bridged object id as a PlayerItemRenderedLegibleOutput (nil for 0).
+// PlayerItemRenderedLegibleOutputFromID adopts an existing object pointer as a PlayerItemRenderedLegibleOutput (nil for 0).
 func PlayerItemRenderedLegibleOutputFromID(id objc.ID) *PlayerItemRenderedLegibleOutput {
 	if id == 0 {
 		return nil

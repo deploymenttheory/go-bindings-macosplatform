@@ -18,11 +18,11 @@ type MTRDoorLockClusterGetWeekDayScheduleParams struct {
 // Unwrap returns the underlying [raw.MTRDoorLockClusterGetWeekDayScheduleParams].
 func (x *MTRDoorLockClusterGetWeekDayScheduleParams) Unwrap() *raw.MTRDoorLockClusterGetWeekDayScheduleParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRDoorLockClusterGetWeekDayScheduleParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRDoorLockClusterGetWeekDayScheduleParamsFromID adopts an existing toll-free-bridged object id as a MTRDoorLockClusterGetWeekDayScheduleParams (nil for 0).
+// MTRDoorLockClusterGetWeekDayScheduleParamsFromID adopts an existing object pointer as a MTRDoorLockClusterGetWeekDayScheduleParams (nil for 0).
 func MTRDoorLockClusterGetWeekDayScheduleParamsFromID(id objc.ID) *MTRDoorLockClusterGetWeekDayScheduleParams {
 	if id == 0 {
 		return nil

@@ -17,11 +17,11 @@ type BillowNoiseSource struct {
 // Unwrap returns the underlying [raw.GKBillowNoiseSource].
 func (x *BillowNoiseSource) Unwrap() *raw.GKBillowNoiseSource { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *BillowNoiseSource) ID() objc.ID { return x.inner.Ptr() }
 
-// BillowNoiseSourceFromID adopts an existing toll-free-bridged object id as a BillowNoiseSource (nil for 0).
+// BillowNoiseSourceFromID adopts an existing object pointer as a BillowNoiseSource (nil for 0).
 func BillowNoiseSourceFromID(id objc.ID) *BillowNoiseSource {
 	if id == 0 {
 		return nil

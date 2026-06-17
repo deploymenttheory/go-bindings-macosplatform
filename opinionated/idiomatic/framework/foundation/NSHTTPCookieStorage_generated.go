@@ -20,11 +20,11 @@ type HTTPCookieStorage struct {
 // Unwrap returns the underlying [raw.NSHTTPCookieStorage].
 func (x *HTTPCookieStorage) Unwrap() *raw.NSHTTPCookieStorage { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *HTTPCookieStorage) ID() objc.ID { return x.inner.Ptr() }
 
-// HTTPCookieStorageFromID adopts an existing toll-free-bridged object id as a HTTPCookieStorage (nil for 0).
+// HTTPCookieStorageFromID adopts an existing object pointer as a HTTPCookieStorage (nil for 0).
 func HTTPCookieStorageFromID(id objc.ID) *HTTPCookieStorage {
 	if id == 0 {
 		return nil

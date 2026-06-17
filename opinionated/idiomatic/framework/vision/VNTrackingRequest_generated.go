@@ -17,11 +17,11 @@ type TrackingRequest struct {
 // Unwrap returns the underlying [raw.VNTrackingRequest].
 func (x *TrackingRequest) Unwrap() *raw.VNTrackingRequest { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *TrackingRequest) ID() objc.ID { return x.inner.Ptr() }
 
-// TrackingRequestFromID adopts an existing toll-free-bridged object id as a TrackingRequest (nil for 0).
+// TrackingRequestFromID adopts an existing object pointer as a TrackingRequest (nil for 0).
 func TrackingRequestFromID(id objc.ID) *TrackingRequest {
 	if id == 0 {
 		return nil

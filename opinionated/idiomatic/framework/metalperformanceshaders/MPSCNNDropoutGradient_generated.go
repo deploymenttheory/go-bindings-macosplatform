@@ -21,11 +21,11 @@ type CNNDropoutGradient struct {
 // Unwrap returns the underlying [raw.MPSCNNDropoutGradient].
 func (x *CNNDropoutGradient) Unwrap() *raw.MPSCNNDropoutGradient { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CNNDropoutGradient) ID() objc.ID { return x.inner.Ptr() }
 
-// CNNDropoutGradientFromID adopts an existing toll-free-bridged object id as a CNNDropoutGradient (nil for 0).
+// CNNDropoutGradientFromID adopts an existing object pointer as a CNNDropoutGradient (nil for 0).
 func CNNDropoutGradientFromID(id objc.ID) *CNNDropoutGradient {
 	if id == 0 {
 		return nil

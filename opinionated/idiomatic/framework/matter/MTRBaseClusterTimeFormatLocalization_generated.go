@@ -21,11 +21,11 @@ type MTRBaseClusterTimeFormatLocalization struct {
 // Unwrap returns the underlying [raw.MTRBaseClusterTimeFormatLocalization].
 func (x *MTRBaseClusterTimeFormatLocalization) Unwrap() *raw.MTRBaseClusterTimeFormatLocalization { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRBaseClusterTimeFormatLocalization) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRBaseClusterTimeFormatLocalizationFromID adopts an existing toll-free-bridged object id as a MTRBaseClusterTimeFormatLocalization (nil for 0).
+// MTRBaseClusterTimeFormatLocalizationFromID adopts an existing object pointer as a MTRBaseClusterTimeFormatLocalization (nil for 0).
 func MTRBaseClusterTimeFormatLocalizationFromID(id objc.ID) *MTRBaseClusterTimeFormatLocalization {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type IKDeviceBrowserView struct {
 // Unwrap returns the underlying [raw.IKDeviceBrowserView].
 func (x *IKDeviceBrowserView) Unwrap() *raw.IKDeviceBrowserView { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *IKDeviceBrowserView) ID() objc.ID { return x.inner.Ptr() }
 
-// IKDeviceBrowserViewFromID adopts an existing toll-free-bridged object id as a IKDeviceBrowserView (nil for 0).
+// IKDeviceBrowserViewFromID adopts an existing object pointer as a IKDeviceBrowserView (nil for 0).
 func IKDeviceBrowserViewFromID(id objc.ID) *IKDeviceBrowserView {
 	if id == 0 {
 		return nil

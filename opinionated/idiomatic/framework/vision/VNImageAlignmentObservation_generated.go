@@ -17,11 +17,11 @@ type ImageAlignmentObservation struct {
 // Unwrap returns the underlying [raw.VNImageAlignmentObservation].
 func (x *ImageAlignmentObservation) Unwrap() *raw.VNImageAlignmentObservation { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ImageAlignmentObservation) ID() objc.ID { return x.inner.Ptr() }
 
-// ImageAlignmentObservationFromID adopts an existing toll-free-bridged object id as a ImageAlignmentObservation (nil for 0).
+// ImageAlignmentObservationFromID adopts an existing object pointer as a ImageAlignmentObservation (nil for 0).
 func ImageAlignmentObservationFromID(id objc.ID) *ImageAlignmentObservation {
 	if id == 0 {
 		return nil

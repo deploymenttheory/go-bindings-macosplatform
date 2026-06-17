@@ -19,11 +19,11 @@ type RunLoop struct {
 // Unwrap returns the underlying [raw.NSRunLoop].
 func (x *RunLoop) Unwrap() *raw.NSRunLoop { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *RunLoop) ID() objc.ID { return x.inner.Ptr() }
 
-// RunLoopFromID adopts an existing toll-free-bridged object id as a RunLoop (nil for 0).
+// RunLoopFromID adopts an existing object pointer as a RunLoop (nil for 0).
 func RunLoopFromID(id objc.ID) *RunLoop {
 	if id == 0 {
 		return nil

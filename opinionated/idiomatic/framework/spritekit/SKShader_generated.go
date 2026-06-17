@@ -20,11 +20,11 @@ type Shader struct {
 // Unwrap returns the underlying [raw.SKShader].
 func (x *Shader) Unwrap() *raw.SKShader { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Shader) ID() objc.ID { return x.inner.Ptr() }
 
-// ShaderFromID adopts an existing toll-free-bridged object id as a Shader (nil for 0).
+// ShaderFromID adopts an existing object pointer as a Shader (nil for 0).
 func ShaderFromID(id objc.ID) *Shader {
 	if id == 0 {
 		return nil

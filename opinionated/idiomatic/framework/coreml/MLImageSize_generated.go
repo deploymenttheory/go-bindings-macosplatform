@@ -17,11 +17,11 @@ type ImageSize struct {
 // Unwrap returns the underlying [raw.MLImageSize].
 func (x *ImageSize) Unwrap() *raw.MLImageSize { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ImageSize) ID() objc.ID { return x.inner.Ptr() }
 
-// ImageSizeFromID adopts an existing toll-free-bridged object id as a ImageSize (nil for 0).
+// ImageSizeFromID adopts an existing object pointer as a ImageSize (nil for 0).
 func ImageSizeFromID(id objc.ID) *ImageSize {
 	if id == 0 {
 		return nil

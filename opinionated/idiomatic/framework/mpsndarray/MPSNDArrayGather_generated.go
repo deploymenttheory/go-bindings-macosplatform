@@ -17,11 +17,11 @@ type ArrayGather struct {
 // Unwrap returns the underlying [raw.MPSNDArrayGather].
 func (x *ArrayGather) Unwrap() *raw.MPSNDArrayGather { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ArrayGather) ID() objc.ID { return x.inner.Ptr() }
 
-// ArrayGatherFromID adopts an existing toll-free-bridged object id as a ArrayGather (nil for 0).
+// ArrayGatherFromID adopts an existing object pointer as a ArrayGather (nil for 0).
 func ArrayGatherFromID(id objc.ID) *ArrayGather {
 	if id == 0 {
 		return nil

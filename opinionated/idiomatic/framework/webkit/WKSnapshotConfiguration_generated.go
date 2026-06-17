@@ -19,11 +19,11 @@ type WKSnapshotConfiguration struct {
 // Unwrap returns the underlying [raw.WKSnapshotConfiguration].
 func (x *WKSnapshotConfiguration) Unwrap() *raw.WKSnapshotConfiguration { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *WKSnapshotConfiguration) ID() objc.ID { return x.inner.Ptr() }
 
-// WKSnapshotConfigurationFromID adopts an existing toll-free-bridged object id as a WKSnapshotConfiguration (nil for 0).
+// WKSnapshotConfigurationFromID adopts an existing object pointer as a WKSnapshotConfiguration (nil for 0).
 func WKSnapshotConfigurationFromID(id objc.ID) *WKSnapshotConfiguration {
 	if id == 0 {
 		return nil

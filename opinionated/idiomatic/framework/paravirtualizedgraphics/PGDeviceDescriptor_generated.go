@@ -19,11 +19,11 @@ type PGDeviceDescriptor struct {
 // Unwrap returns the underlying [raw.PGDeviceDescriptor].
 func (x *PGDeviceDescriptor) Unwrap() *raw.PGDeviceDescriptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PGDeviceDescriptor) ID() objc.ID { return x.inner.Ptr() }
 
-// PGDeviceDescriptorFromID adopts an existing toll-free-bridged object id as a PGDeviceDescriptor (nil for 0).
+// PGDeviceDescriptorFromID adopts an existing object pointer as a PGDeviceDescriptor (nil for 0).
 func PGDeviceDescriptorFromID(id objc.ID) *PGDeviceDescriptor {
 	if id == 0 {
 		return nil

@@ -19,11 +19,11 @@ type ModuleEntry struct {
 // Unwrap returns the underlying [raw.ODModuleEntry].
 func (x *ModuleEntry) Unwrap() *raw.ODModuleEntry { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ModuleEntry) ID() objc.ID { return x.inner.Ptr() }
 
-// ModuleEntryFromID adopts an existing toll-free-bridged object id as a ModuleEntry (nil for 0).
+// ModuleEntryFromID adopts an existing object pointer as a ModuleEntry (nil for 0).
 func ModuleEntryFromID(id objc.ID) *ModuleEntry {
 	if id == 0 {
 		return nil

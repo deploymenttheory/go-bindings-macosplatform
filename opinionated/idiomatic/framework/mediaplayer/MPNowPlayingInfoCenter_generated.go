@@ -18,11 +18,11 @@ type NowPlayingInfoCenter struct {
 // Unwrap returns the underlying [raw.MPNowPlayingInfoCenter].
 func (x *NowPlayingInfoCenter) Unwrap() *raw.MPNowPlayingInfoCenter { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NowPlayingInfoCenter) ID() objc.ID { return x.inner.Ptr() }
 
-// NowPlayingInfoCenterFromID adopts an existing toll-free-bridged object id as a NowPlayingInfoCenter (nil for 0).
+// NowPlayingInfoCenterFromID adopts an existing object pointer as a NowPlayingInfoCenter (nil for 0).
 func NowPlayingInfoCenterFromID(id objc.ID) *NowPlayingInfoCenter {
 	if id == 0 {
 		return nil

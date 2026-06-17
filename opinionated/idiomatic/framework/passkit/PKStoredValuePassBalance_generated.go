@@ -19,11 +19,11 @@ type StoredValuePassBalance struct {
 // Unwrap returns the underlying [raw.PKStoredValuePassBalance].
 func (x *StoredValuePassBalance) Unwrap() *raw.PKStoredValuePassBalance { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *StoredValuePassBalance) ID() objc.ID { return x.inner.Ptr() }
 
-// StoredValuePassBalanceFromID adopts an existing toll-free-bridged object id as a StoredValuePassBalance (nil for 0).
+// StoredValuePassBalanceFromID adopts an existing object pointer as a StoredValuePassBalance (nil for 0).
 func StoredValuePassBalanceFromID(id objc.ID) *StoredValuePassBalance {
 	if id == 0 {
 		return nil

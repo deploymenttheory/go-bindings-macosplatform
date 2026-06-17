@@ -17,11 +17,11 @@ type NotificationTrigger struct {
 // Unwrap returns the underlying [raw.UNNotificationTrigger].
 func (x *NotificationTrigger) Unwrap() *raw.UNNotificationTrigger { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NotificationTrigger) ID() objc.ID { return x.inner.Ptr() }
 
-// NotificationTriggerFromID adopts an existing toll-free-bridged object id as a NotificationTrigger (nil for 0).
+// NotificationTriggerFromID adopts an existing object pointer as a NotificationTrigger (nil for 0).
 func NotificationTriggerFromID(id objc.ID) *NotificationTrigger {
 	if id == 0 {
 		return nil

@@ -17,11 +17,11 @@ type UserLocationView struct {
 // Unwrap returns the underlying [raw.MKUserLocationView].
 func (x *UserLocationView) Unwrap() *raw.MKUserLocationView { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *UserLocationView) ID() objc.ID { return x.inner.Ptr() }
 
-// UserLocationViewFromID adopts an existing toll-free-bridged object id as a UserLocationView (nil for 0).
+// UserLocationViewFromID adopts an existing object pointer as a UserLocationView (nil for 0).
 func UserLocationViewFromID(id objc.ID) *UserLocationView {
 	if id == 0 {
 		return nil

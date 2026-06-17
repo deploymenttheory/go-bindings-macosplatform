@@ -22,11 +22,11 @@ type Annotation struct {
 // Unwrap returns the underlying [raw.PDFAnnotation].
 func (x *Annotation) Unwrap() *raw.PDFAnnotation { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Annotation) ID() objc.ID { return x.inner.Ptr() }
 
-// AnnotationFromID adopts an existing toll-free-bridged object id as a Annotation (nil for 0).
+// AnnotationFromID adopts an existing object pointer as a Annotation (nil for 0).
 func AnnotationFromID(id objc.ID) *Annotation {
 	if id == 0 {
 		return nil

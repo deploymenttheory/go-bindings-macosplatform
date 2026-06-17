@@ -21,11 +21,11 @@ type AssetResourceManager struct {
 // Unwrap returns the underlying [raw.PHAssetResourceManager].
 func (x *AssetResourceManager) Unwrap() *raw.PHAssetResourceManager { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AssetResourceManager) ID() objc.ID { return x.inner.Ptr() }
 
-// AssetResourceManagerFromID adopts an existing toll-free-bridged object id as a AssetResourceManager (nil for 0).
+// AssetResourceManagerFromID adopts an existing object pointer as a AssetResourceManager (nil for 0).
 func AssetResourceManagerFromID(id objc.ID) *AssetResourceManager {
 	if id == 0 {
 		return nil

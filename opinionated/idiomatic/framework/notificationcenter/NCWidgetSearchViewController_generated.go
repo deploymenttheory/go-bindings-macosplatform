@@ -19,11 +19,11 @@ type WidgetSearchViewController struct {
 // Unwrap returns the underlying [raw.NCWidgetSearchViewController].
 func (x *WidgetSearchViewController) Unwrap() *raw.NCWidgetSearchViewController { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *WidgetSearchViewController) ID() objc.ID { return x.inner.Ptr() }
 
-// WidgetSearchViewControllerFromID adopts an existing toll-free-bridged object id as a WidgetSearchViewController (nil for 0).
+// WidgetSearchViewControllerFromID adopts an existing object pointer as a WidgetSearchViewController (nil for 0).
 func WidgetSearchViewControllerFromID(id objc.ID) *WidgetSearchViewController {
 	if id == 0 {
 		return nil

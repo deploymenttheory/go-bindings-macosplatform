@@ -18,11 +18,11 @@ type AssetTrackSegment struct {
 // Unwrap returns the underlying [raw.AVAssetTrackSegment].
 func (x *AssetTrackSegment) Unwrap() *raw.AVAssetTrackSegment { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AssetTrackSegment) ID() objc.ID { return x.inner.Ptr() }
 
-// AssetTrackSegmentFromID adopts an existing toll-free-bridged object id as a AssetTrackSegment (nil for 0).
+// AssetTrackSegmentFromID adopts an existing object pointer as a AssetTrackSegment (nil for 0).
 func AssetTrackSegmentFromID(id objc.ID) *AssetTrackSegment {
 	if id == 0 {
 		return nil

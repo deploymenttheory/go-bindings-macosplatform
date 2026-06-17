@@ -17,11 +17,11 @@ type ActivitySummaryType struct {
 // Unwrap returns the underlying [raw.HKActivitySummaryType].
 func (x *ActivitySummaryType) Unwrap() *raw.HKActivitySummaryType { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ActivitySummaryType) ID() objc.ID { return x.inner.Ptr() }
 
-// ActivitySummaryTypeFromID adopts an existing toll-free-bridged object id as a ActivitySummaryType (nil for 0).
+// ActivitySummaryTypeFromID adopts an existing object pointer as a ActivitySummaryType (nil for 0).
 func ActivitySummaryTypeFromID(id objc.ID) *ActivitySummaryType {
 	if id == 0 {
 		return nil

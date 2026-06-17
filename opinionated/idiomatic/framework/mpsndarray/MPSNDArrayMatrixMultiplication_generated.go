@@ -17,11 +17,11 @@ type ArrayMatrixMultiplication struct {
 // Unwrap returns the underlying [raw.MPSNDArrayMatrixMultiplication].
 func (x *ArrayMatrixMultiplication) Unwrap() *raw.MPSNDArrayMatrixMultiplication { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ArrayMatrixMultiplication) ID() objc.ID { return x.inner.Ptr() }
 
-// ArrayMatrixMultiplicationFromID adopts an existing toll-free-bridged object id as a ArrayMatrixMultiplication (nil for 0).
+// ArrayMatrixMultiplicationFromID adopts an existing object pointer as a ArrayMatrixMultiplication (nil for 0).
 func ArrayMatrixMultiplicationFromID(id objc.ID) *ArrayMatrixMultiplication {
 	if id == 0 {
 		return nil

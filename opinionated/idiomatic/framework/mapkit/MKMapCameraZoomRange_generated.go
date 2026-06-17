@@ -18,11 +18,11 @@ type MapCameraZoomRange struct {
 // Unwrap returns the underlying [raw.MKMapCameraZoomRange].
 func (x *MapCameraZoomRange) Unwrap() *raw.MKMapCameraZoomRange { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MapCameraZoomRange) ID() objc.ID { return x.inner.Ptr() }
 
-// MapCameraZoomRangeFromID adopts an existing toll-free-bridged object id as a MapCameraZoomRange (nil for 0).
+// MapCameraZoomRangeFromID adopts an existing object pointer as a MapCameraZoomRange (nil for 0).
 func MapCameraZoomRangeFromID(id objc.ID) *MapCameraZoomRange {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type MTRProductIdentity struct {
 // Unwrap returns the underlying [raw.MTRProductIdentity].
 func (x *MTRProductIdentity) Unwrap() *raw.MTRProductIdentity { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRProductIdentity) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRProductIdentityFromID adopts an existing toll-free-bridged object id as a MTRProductIdentity (nil for 0).
+// MTRProductIdentityFromID adopts an existing object pointer as a MTRProductIdentity (nil for 0).
 func MTRProductIdentityFromID(id objc.ID) *MTRProductIdentity {
 	if id == 0 {
 		return nil

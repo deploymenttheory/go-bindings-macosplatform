@@ -20,11 +20,11 @@ type Workflow struct {
 // Unwrap returns the underlying [raw.AMWorkflow].
 func (x *Workflow) Unwrap() *raw.AMWorkflow { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Workflow) ID() objc.ID { return x.inner.Ptr() }
 
-// WorkflowFromID adopts an existing toll-free-bridged object id as a Workflow (nil for 0).
+// WorkflowFromID adopts an existing object pointer as a Workflow (nil for 0).
 func WorkflowFromID(id objc.ID) *Workflow {
 	if id == 0 {
 		return nil

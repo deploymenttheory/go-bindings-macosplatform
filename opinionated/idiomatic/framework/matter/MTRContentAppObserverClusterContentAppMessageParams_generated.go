@@ -19,11 +19,11 @@ type MTRContentAppObserverClusterContentAppMessageParams struct {
 // Unwrap returns the underlying [raw.MTRContentAppObserverClusterContentAppMessageParams].
 func (x *MTRContentAppObserverClusterContentAppMessageParams) Unwrap() *raw.MTRContentAppObserverClusterContentAppMessageParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRContentAppObserverClusterContentAppMessageParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRContentAppObserverClusterContentAppMessageParamsFromID adopts an existing toll-free-bridged object id as a MTRContentAppObserverClusterContentAppMessageParams (nil for 0).
+// MTRContentAppObserverClusterContentAppMessageParamsFromID adopts an existing object pointer as a MTRContentAppObserverClusterContentAppMessageParams (nil for 0).
 func MTRContentAppObserverClusterContentAppMessageParamsFromID(id objc.ID) *MTRContentAppObserverClusterContentAppMessageParams {
 	if id == 0 {
 		return nil

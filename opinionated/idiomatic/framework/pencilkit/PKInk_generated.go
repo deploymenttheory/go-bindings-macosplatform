@@ -20,11 +20,11 @@ type Ink struct {
 // Unwrap returns the underlying [raw.PKInk].
 func (x *Ink) Unwrap() *raw.PKInk { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Ink) ID() objc.ID { return x.inner.Ptr() }
 
-// InkFromID adopts an existing toll-free-bridged object id as a Ink (nil for 0).
+// InkFromID adopts an existing object pointer as a Ink (nil for 0).
 func InkFromID(id objc.ID) *Ink {
 	if id == 0 {
 		return nil

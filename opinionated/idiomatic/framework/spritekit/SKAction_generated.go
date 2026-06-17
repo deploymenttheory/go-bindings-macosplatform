@@ -17,11 +17,11 @@ type Action struct {
 // Unwrap returns the underlying [raw.SKAction].
 func (x *Action) Unwrap() *raw.SKAction { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Action) ID() objc.ID { return x.inner.Ptr() }
 
-// ActionFromID adopts an existing toll-free-bridged object id as a Action (nil for 0).
+// ActionFromID adopts an existing object pointer as a Action (nil for 0).
 func ActionFromID(id objc.ID) *Action {
 	if id == 0 {
 		return nil

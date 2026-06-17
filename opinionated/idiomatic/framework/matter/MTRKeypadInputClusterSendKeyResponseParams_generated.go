@@ -20,11 +20,11 @@ type MTRKeypadInputClusterSendKeyResponseParams struct {
 // Unwrap returns the underlying [raw.MTRKeypadInputClusterSendKeyResponseParams].
 func (x *MTRKeypadInputClusterSendKeyResponseParams) Unwrap() *raw.MTRKeypadInputClusterSendKeyResponseParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRKeypadInputClusterSendKeyResponseParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRKeypadInputClusterSendKeyResponseParamsFromID adopts an existing toll-free-bridged object id as a MTRKeypadInputClusterSendKeyResponseParams (nil for 0).
+// MTRKeypadInputClusterSendKeyResponseParamsFromID adopts an existing object pointer as a MTRKeypadInputClusterSendKeyResponseParams (nil for 0).
 func MTRKeypadInputClusterSendKeyResponseParamsFromID(id objc.ID) *MTRKeypadInputClusterSendKeyResponseParams {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type NNReshapeNode struct {
 // Unwrap returns the underlying [raw.MPSNNReshapeNode].
 func (x *NNReshapeNode) Unwrap() *raw.MPSNNReshapeNode { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NNReshapeNode) ID() objc.ID { return x.inner.Ptr() }
 
-// NNReshapeNodeFromID adopts an existing toll-free-bridged object id as a NNReshapeNode (nil for 0).
+// NNReshapeNodeFromID adopts an existing object pointer as a NNReshapeNode (nil for 0).
 func NNReshapeNodeFromID(id objc.ID) *NNReshapeNode {
 	if id == 0 {
 		return nil

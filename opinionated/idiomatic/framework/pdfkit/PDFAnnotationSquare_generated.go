@@ -17,11 +17,11 @@ type AnnotationSquare struct {
 // Unwrap returns the underlying [raw.PDFAnnotationSquare].
 func (x *AnnotationSquare) Unwrap() *raw.PDFAnnotationSquare { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AnnotationSquare) ID() objc.ID { return x.inner.Ptr() }
 
-// AnnotationSquareFromID adopts an existing toll-free-bridged object id as a AnnotationSquare (nil for 0).
+// AnnotationSquareFromID adopts an existing object pointer as a AnnotationSquare (nil for 0).
 func AnnotationSquareFromID(id objc.ID) *AnnotationSquare {
 	if id == 0 {
 		return nil

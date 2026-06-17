@@ -19,11 +19,11 @@ type VSAccountMetadata struct {
 // Unwrap returns the underlying [raw.VSAccountMetadata].
 func (x *VSAccountMetadata) Unwrap() *raw.VSAccountMetadata { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *VSAccountMetadata) ID() objc.ID { return x.inner.Ptr() }
 
-// VSAccountMetadataFromID adopts an existing toll-free-bridged object id as a VSAccountMetadata (nil for 0).
+// VSAccountMetadataFromID adopts an existing object pointer as a VSAccountMetadata (nil for 0).
 func VSAccountMetadataFromID(id objc.ID) *VSAccountMetadata {
 	if id == 0 {
 		return nil

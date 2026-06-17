@@ -19,11 +19,11 @@ type ScatteringFunction struct {
 // Unwrap returns the underlying [raw.MDLScatteringFunction].
 func (x *ScatteringFunction) Unwrap() *raw.MDLScatteringFunction { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ScatteringFunction) ID() objc.ID { return x.inner.Ptr() }
 
-// ScatteringFunctionFromID adopts an existing toll-free-bridged object id as a ScatteringFunction (nil for 0).
+// ScatteringFunctionFromID adopts an existing object pointer as a ScatteringFunction (nil for 0).
 func ScatteringFunctionFromID(id objc.ID) *ScatteringFunction {
 	if id == 0 {
 		return nil

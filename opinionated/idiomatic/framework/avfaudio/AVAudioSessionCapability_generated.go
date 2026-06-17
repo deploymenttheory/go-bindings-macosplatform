@@ -17,11 +17,11 @@ type AudioSessionCapability struct {
 // Unwrap returns the underlying [raw.AVAudioSessionCapability].
 func (x *AudioSessionCapability) Unwrap() *raw.AVAudioSessionCapability { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AudioSessionCapability) ID() objc.ID { return x.inner.Ptr() }
 
-// AudioSessionCapabilityFromID adopts an existing toll-free-bridged object id as a AudioSessionCapability (nil for 0).
+// AudioSessionCapabilityFromID adopts an existing object pointer as a AudioSessionCapability (nil for 0).
 func AudioSessionCapabilityFromID(id objc.ID) *AudioSessionCapability {
 	if id == 0 {
 		return nil

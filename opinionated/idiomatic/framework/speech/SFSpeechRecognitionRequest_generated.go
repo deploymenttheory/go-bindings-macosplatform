@@ -20,11 +20,11 @@ type SpeechRecognitionRequest struct {
 // Unwrap returns the underlying [raw.SFSpeechRecognitionRequest].
 func (x *SpeechRecognitionRequest) Unwrap() *raw.SFSpeechRecognitionRequest { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SpeechRecognitionRequest) ID() objc.ID { return x.inner.Ptr() }
 
-// SpeechRecognitionRequestFromID adopts an existing toll-free-bridged object id as a SpeechRecognitionRequest (nil for 0).
+// SpeechRecognitionRequestFromID adopts an existing object pointer as a SpeechRecognitionRequest (nil for 0).
 func SpeechRecognitionRequestFromID(id objc.ID) *SpeechRecognitionRequest {
 	if id == 0 {
 		return nil

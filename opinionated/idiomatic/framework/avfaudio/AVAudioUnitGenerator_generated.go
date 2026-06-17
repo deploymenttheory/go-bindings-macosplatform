@@ -17,11 +17,11 @@ type AudioUnitGenerator struct {
 // Unwrap returns the underlying [raw.AVAudioUnitGenerator].
 func (x *AudioUnitGenerator) Unwrap() *raw.AVAudioUnitGenerator { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AudioUnitGenerator) ID() objc.ID { return x.inner.Ptr() }
 
-// AudioUnitGeneratorFromID adopts an existing toll-free-bridged object id as a AudioUnitGenerator (nil for 0).
+// AudioUnitGeneratorFromID adopts an existing object pointer as a AudioUnitGenerator (nil for 0).
 func AudioUnitGeneratorFromID(id objc.ID) *AudioUnitGenerator {
 	if id == 0 {
 		return nil

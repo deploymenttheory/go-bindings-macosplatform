@@ -18,11 +18,11 @@ type AddressRepresentations struct {
 // Unwrap returns the underlying [raw.MKAddressRepresentations].
 func (x *AddressRepresentations) Unwrap() *raw.MKAddressRepresentations { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AddressRepresentations) ID() objc.ID { return x.inner.Ptr() }
 
-// AddressRepresentationsFromID adopts an existing toll-free-bridged object id as a AddressRepresentations (nil for 0).
+// AddressRepresentationsFromID adopts an existing object pointer as a AddressRepresentations (nil for 0).
 func AddressRepresentationsFromID(id objc.ID) *AddressRepresentations {
 	if id == 0 {
 		return nil

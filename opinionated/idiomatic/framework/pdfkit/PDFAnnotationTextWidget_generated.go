@@ -19,11 +19,11 @@ type AnnotationTextWidget struct {
 // Unwrap returns the underlying [raw.PDFAnnotationTextWidget].
 func (x *AnnotationTextWidget) Unwrap() *raw.PDFAnnotationTextWidget { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AnnotationTextWidget) ID() objc.ID { return x.inner.Ptr() }
 
-// AnnotationTextWidgetFromID adopts an existing toll-free-bridged object id as a AnnotationTextWidget (nil for 0).
+// AnnotationTextWidgetFromID adopts an existing object pointer as a AnnotationTextWidget (nil for 0).
 func AnnotationTextWidgetFromID(id objc.ID) *AnnotationTextWidget {
 	if id == 0 {
 		return nil

@@ -22,11 +22,11 @@ type PickerConfiguration struct {
 // Unwrap returns the underlying [raw.PHPickerConfiguration].
 func (x *PickerConfiguration) Unwrap() *raw.PHPickerConfiguration { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PickerConfiguration) ID() objc.ID { return x.inner.Ptr() }
 
-// PickerConfigurationFromID adopts an existing toll-free-bridged object id as a PickerConfiguration (nil for 0).
+// PickerConfigurationFromID adopts an existing object pointer as a PickerConfiguration (nil for 0).
 func PickerConfigurationFromID(id objc.ID) *PickerConfiguration {
 	if id == 0 {
 		return nil

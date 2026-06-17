@@ -19,11 +19,11 @@ type LightweightMigrationStage struct {
 // Unwrap returns the underlying [raw.NSLightweightMigrationStage].
 func (x *LightweightMigrationStage) Unwrap() *raw.NSLightweightMigrationStage { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *LightweightMigrationStage) ID() objc.ID { return x.inner.Ptr() }
 
-// LightweightMigrationStageFromID adopts an existing toll-free-bridged object id as a LightweightMigrationStage (nil for 0).
+// LightweightMigrationStageFromID adopts an existing object pointer as a LightweightMigrationStage (nil for 0).
 func LightweightMigrationStageFromID(id objc.ID) *LightweightMigrationStage {
 	if id == 0 {
 		return nil

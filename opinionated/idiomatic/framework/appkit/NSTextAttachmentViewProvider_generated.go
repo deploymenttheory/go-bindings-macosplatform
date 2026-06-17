@@ -19,11 +19,11 @@ type TextAttachmentViewProvider struct {
 // Unwrap returns the underlying [raw.NSTextAttachmentViewProvider].
 func (x *TextAttachmentViewProvider) Unwrap() *raw.NSTextAttachmentViewProvider { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *TextAttachmentViewProvider) ID() objc.ID { return x.inner.Ptr() }
 
-// TextAttachmentViewProviderFromID adopts an existing toll-free-bridged object id as a TextAttachmentViewProvider (nil for 0).
+// TextAttachmentViewProviderFromID adopts an existing object pointer as a TextAttachmentViewProvider (nil for 0).
 func TextAttachmentViewProviderFromID(id objc.ID) *TextAttachmentViewProvider {
 	if id == 0 {
 		return nil

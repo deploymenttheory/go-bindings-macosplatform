@@ -18,11 +18,11 @@ type SharedDirectory struct {
 // Unwrap returns the underlying [raw.VZSharedDirectory].
 func (x *SharedDirectory) Unwrap() *raw.VZSharedDirectory { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SharedDirectory) ID() objc.ID { return x.inner.Ptr() }
 
-// SharedDirectoryFromID adopts an existing toll-free-bridged object id as a SharedDirectory (nil for 0).
+// SharedDirectoryFromID adopts an existing object pointer as a SharedDirectory (nil for 0).
 func SharedDirectoryFromID(id objc.ID) *SharedDirectory {
 	if id == 0 {
 		return nil

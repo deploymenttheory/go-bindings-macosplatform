@@ -18,11 +18,11 @@ type SmartCardToken struct {
 // Unwrap returns the underlying [raw.TKSmartCardToken].
 func (x *SmartCardToken) Unwrap() *raw.TKSmartCardToken { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SmartCardToken) ID() objc.ID { return x.inner.Ptr() }
 
-// SmartCardTokenFromID adopts an existing toll-free-bridged object id as a SmartCardToken (nil for 0).
+// SmartCardTokenFromID adopts an existing object pointer as a SmartCardToken (nil for 0).
 func SmartCardTokenFromID(id objc.ID) *SmartCardToken {
 	if id == 0 {
 		return nil

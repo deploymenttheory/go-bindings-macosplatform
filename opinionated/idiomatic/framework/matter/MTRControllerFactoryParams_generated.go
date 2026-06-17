@@ -20,11 +20,11 @@ type MTRControllerFactoryParams struct {
 // Unwrap returns the underlying [raw.MTRControllerFactoryParams].
 func (x *MTRControllerFactoryParams) Unwrap() *raw.MTRControllerFactoryParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRControllerFactoryParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRControllerFactoryParamsFromID adopts an existing toll-free-bridged object id as a MTRControllerFactoryParams (nil for 0).
+// MTRControllerFactoryParamsFromID adopts an existing object pointer as a MTRControllerFactoryParams (nil for 0).
 func MTRControllerFactoryParamsFromID(id objc.ID) *MTRControllerFactoryParams {
 	if id == 0 {
 		return nil

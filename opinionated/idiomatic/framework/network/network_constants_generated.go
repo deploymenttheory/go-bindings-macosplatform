@@ -10,15 +10,15 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// KNWErrorDomainPOSIX returns the CoreFoundation constant kNWErrorDomainPOSIX as a toll-free-bridged objc.ID.
+// KNWErrorDomainPOSIX returns the value of the CoreFoundation reference constant kNWErrorDomainPOSIX as an objc.ID.
 func KNWErrorDomainPOSIX() objc.ID { return purego.CFConstant(raw.KNWErrorDomainPOSIX()) }
 
-// KNWErrorDomainDNS returns the CoreFoundation constant kNWErrorDomainDNS as a toll-free-bridged objc.ID.
+// KNWErrorDomainDNS returns the value of the CoreFoundation reference constant kNWErrorDomainDNS as an objc.ID.
 func KNWErrorDomainDNS() objc.ID { return purego.CFConstant(raw.KNWErrorDomainDNS()) }
 
-// KNWErrorDomainTLS returns the CoreFoundation constant kNWErrorDomainTLS as a toll-free-bridged objc.ID.
+// KNWErrorDomainTLS returns the value of the CoreFoundation reference constant kNWErrorDomainTLS as an objc.ID.
 func KNWErrorDomainTLS() objc.ID { return purego.CFConstant(raw.KNWErrorDomainTLS()) }
 
-// KNWErrorDomainWiFiAware returns the CoreFoundation constant kNWErrorDomainWiFiAware as a toll-free-bridged objc.ID.
+// KNWErrorDomainWiFiAware returns the value of the CoreFoundation reference constant kNWErrorDomainWiFiAware as an objc.ID.
 func KNWErrorDomainWiFiAware() objc.ID { return purego.CFConstant(raw.KNWErrorDomainWiFiAware()) }
 

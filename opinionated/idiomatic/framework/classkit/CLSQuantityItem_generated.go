@@ -18,11 +18,11 @@ type QuantityItem struct {
 // Unwrap returns the underlying [raw.CLSQuantityItem].
 func (x *QuantityItem) Unwrap() *raw.CLSQuantityItem { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *QuantityItem) ID() objc.ID { return x.inner.Ptr() }
 
-// QuantityItemFromID adopts an existing toll-free-bridged object id as a QuantityItem (nil for 0).
+// QuantityItemFromID adopts an existing object pointer as a QuantityItem (nil for 0).
 func QuantityItemFromID(id objc.ID) *QuantityItem {
 	if id == 0 {
 		return nil

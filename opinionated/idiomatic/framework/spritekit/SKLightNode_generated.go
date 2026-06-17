@@ -18,11 +18,11 @@ type LightNode struct {
 // Unwrap returns the underlying [raw.SKLightNode].
 func (x *LightNode) Unwrap() *raw.SKLightNode { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *LightNode) ID() objc.ID { return x.inner.Ptr() }
 
-// LightNodeFromID adopts an existing toll-free-bridged object id as a LightNode (nil for 0).
+// LightNodeFromID adopts an existing object pointer as a LightNode (nil for 0).
 func LightNodeFromID(id objc.ID) *LightNode {
 	if id == 0 {
 		return nil

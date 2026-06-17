@@ -19,11 +19,11 @@ type DOMHTMLFontElement struct {
 // Unwrap returns the underlying [raw.DOMHTMLFontElement].
 func (x *DOMHTMLFontElement) Unwrap() *raw.DOMHTMLFontElement { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DOMHTMLFontElement) ID() objc.ID { return x.inner.Ptr() }
 
-// DOMHTMLFontElementFromID adopts an existing toll-free-bridged object id as a DOMHTMLFontElement (nil for 0).
+// DOMHTMLFontElementFromID adopts an existing object pointer as a DOMHTMLFontElement (nil for 0).
 func DOMHTMLFontElementFromID(id objc.ID) *DOMHTMLFontElement {
 	if id == 0 {
 		return nil

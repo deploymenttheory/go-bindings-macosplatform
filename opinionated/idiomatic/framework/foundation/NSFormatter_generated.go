@@ -18,11 +18,11 @@ type Formatter struct {
 // Unwrap returns the underlying [raw.NSFormatter].
 func (x *Formatter) Unwrap() *raw.NSFormatter { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Formatter) ID() objc.ID { return x.inner.Ptr() }
 
-// FormatterFromID adopts an existing toll-free-bridged object id as a Formatter (nil for 0).
+// FormatterFromID adopts an existing object pointer as a Formatter (nil for 0).
 func FormatterFromID(id objc.ID) *Formatter {
 	if id == 0 {
 		return nil

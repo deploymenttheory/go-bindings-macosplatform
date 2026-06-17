@@ -18,11 +18,11 @@ type AssetSegmentReportSampleInformation struct {
 // Unwrap returns the underlying [raw.AVAssetSegmentReportSampleInformation].
 func (x *AssetSegmentReportSampleInformation) Unwrap() *raw.AVAssetSegmentReportSampleInformation { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AssetSegmentReportSampleInformation) ID() objc.ID { return x.inner.Ptr() }
 
-// AssetSegmentReportSampleInformationFromID adopts an existing toll-free-bridged object id as a AssetSegmentReportSampleInformation (nil for 0).
+// AssetSegmentReportSampleInformationFromID adopts an existing object pointer as a AssetSegmentReportSampleInformation (nil for 0).
 func AssetSegmentReportSampleInformationFromID(id objc.ID) *AssetSegmentReportSampleInformation {
 	if id == 0 {
 		return nil

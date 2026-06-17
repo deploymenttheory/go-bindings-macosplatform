@@ -19,11 +19,11 @@ type TaskOptions struct {
 // Unwrap returns the underlying [raw.FSTaskOptions].
 func (x *TaskOptions) Unwrap() *raw.FSTaskOptions { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *TaskOptions) ID() objc.ID { return x.inner.Ptr() }
 
-// TaskOptionsFromID adopts an existing toll-free-bridged object id as a TaskOptions (nil for 0).
+// TaskOptionsFromID adopts an existing object pointer as a TaskOptions (nil for 0).
 func TaskOptionsFromID(id objc.ID) *TaskOptions {
 	if id == 0 {
 		return nil

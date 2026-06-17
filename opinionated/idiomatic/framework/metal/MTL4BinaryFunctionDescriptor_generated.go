@@ -19,11 +19,11 @@ type MTL4BinaryFunctionDescriptor struct {
 // Unwrap returns the underlying [raw.MTL4BinaryFunctionDescriptor].
 func (x *MTL4BinaryFunctionDescriptor) Unwrap() *raw.MTL4BinaryFunctionDescriptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTL4BinaryFunctionDescriptor) ID() objc.ID { return x.inner.Ptr() }
 
-// MTL4BinaryFunctionDescriptorFromID adopts an existing toll-free-bridged object id as a MTL4BinaryFunctionDescriptor (nil for 0).
+// MTL4BinaryFunctionDescriptorFromID adopts an existing object pointer as a MTL4BinaryFunctionDescriptor (nil for 0).
 func MTL4BinaryFunctionDescriptorFromID(id objc.ID) *MTL4BinaryFunctionDescriptor {
 	if id == 0 {
 		return nil

@@ -17,11 +17,11 @@ type VolumeIdentifier struct {
 // Unwrap returns the underlying [raw.FSVolumeIdentifier].
 func (x *VolumeIdentifier) Unwrap() *raw.FSVolumeIdentifier { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *VolumeIdentifier) ID() objc.ID { return x.inner.Ptr() }
 
-// VolumeIdentifierFromID adopts an existing toll-free-bridged object id as a VolumeIdentifier (nil for 0).
+// VolumeIdentifierFromID adopts an existing object pointer as a VolumeIdentifier (nil for 0).
 func VolumeIdentifierFromID(id objc.ID) *VolumeIdentifier {
 	if id == 0 {
 		return nil

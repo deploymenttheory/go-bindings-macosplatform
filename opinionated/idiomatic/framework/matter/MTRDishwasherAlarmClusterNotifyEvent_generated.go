@@ -18,11 +18,11 @@ type MTRDishwasherAlarmClusterNotifyEvent struct {
 // Unwrap returns the underlying [raw.MTRDishwasherAlarmClusterNotifyEvent].
 func (x *MTRDishwasherAlarmClusterNotifyEvent) Unwrap() *raw.MTRDishwasherAlarmClusterNotifyEvent { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRDishwasherAlarmClusterNotifyEvent) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRDishwasherAlarmClusterNotifyEventFromID adopts an existing toll-free-bridged object id as a MTRDishwasherAlarmClusterNotifyEvent (nil for 0).
+// MTRDishwasherAlarmClusterNotifyEventFromID adopts an existing object pointer as a MTRDishwasherAlarmClusterNotifyEvent (nil for 0).
 func MTRDishwasherAlarmClusterNotifyEventFromID(id objc.ID) *MTRDishwasherAlarmClusterNotifyEvent {
 	if id == 0 {
 		return nil

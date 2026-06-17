@@ -19,11 +19,11 @@ type FetchedResultsController struct {
 // Unwrap returns the underlying [raw.NSFetchedResultsController].
 func (x *FetchedResultsController) Unwrap() *raw.NSFetchedResultsController[objc.ID] { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *FetchedResultsController) ID() objc.ID { return x.inner.Ptr() }
 
-// FetchedResultsControllerFromID adopts an existing toll-free-bridged object id as a FetchedResultsController (nil for 0).
+// FetchedResultsControllerFromID adopts an existing object pointer as a FetchedResultsController (nil for 0).
 func FetchedResultsControllerFromID(id objc.ID) *FetchedResultsController {
 	if id == 0 {
 		return nil

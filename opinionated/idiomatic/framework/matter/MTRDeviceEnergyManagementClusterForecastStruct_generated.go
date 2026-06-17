@@ -18,11 +18,11 @@ type MTRDeviceEnergyManagementClusterForecastStruct struct {
 // Unwrap returns the underlying [raw.MTRDeviceEnergyManagementClusterForecastStruct].
 func (x *MTRDeviceEnergyManagementClusterForecastStruct) Unwrap() *raw.MTRDeviceEnergyManagementClusterForecastStruct { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRDeviceEnergyManagementClusterForecastStruct) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRDeviceEnergyManagementClusterForecastStructFromID adopts an existing toll-free-bridged object id as a MTRDeviceEnergyManagementClusterForecastStruct (nil for 0).
+// MTRDeviceEnergyManagementClusterForecastStructFromID adopts an existing object pointer as a MTRDeviceEnergyManagementClusterForecastStruct (nil for 0).
 func MTRDeviceEnergyManagementClusterForecastStructFromID(id objc.ID) *MTRDeviceEnergyManagementClusterForecastStruct {
 	if id == 0 {
 		return nil

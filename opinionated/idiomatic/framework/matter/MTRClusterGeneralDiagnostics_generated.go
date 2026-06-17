@@ -21,11 +21,11 @@ type MTRClusterGeneralDiagnostics struct {
 // Unwrap returns the underlying [raw.MTRClusterGeneralDiagnostics].
 func (x *MTRClusterGeneralDiagnostics) Unwrap() *raw.MTRClusterGeneralDiagnostics { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRClusterGeneralDiagnostics) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRClusterGeneralDiagnosticsFromID adopts an existing toll-free-bridged object id as a MTRClusterGeneralDiagnostics (nil for 0).
+// MTRClusterGeneralDiagnosticsFromID adopts an existing object pointer as a MTRClusterGeneralDiagnostics (nil for 0).
 func MTRClusterGeneralDiagnosticsFromID(id objc.ID) *MTRClusterGeneralDiagnostics {
 	if id == 0 {
 		return nil

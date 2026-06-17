@@ -19,11 +19,11 @@ type QuerySubscription struct {
 // Unwrap returns the underlying [raw.CKQuerySubscription].
 func (x *QuerySubscription) Unwrap() *raw.CKQuerySubscription { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *QuerySubscription) ID() objc.ID { return x.inner.Ptr() }
 
-// QuerySubscriptionFromID adopts an existing toll-free-bridged object id as a QuerySubscription (nil for 0).
+// QuerySubscriptionFromID adopts an existing object pointer as a QuerySubscription (nil for 0).
 func QuerySubscriptionFromID(id objc.ID) *QuerySubscription {
 	if id == 0 {
 		return nil

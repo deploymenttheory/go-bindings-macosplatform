@@ -18,11 +18,11 @@ type FocusStatus struct {
 // Unwrap returns the underlying [raw.INFocusStatus].
 func (x *FocusStatus) Unwrap() *raw.INFocusStatus { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *FocusStatus) ID() objc.ID { return x.inner.Ptr() }
 
-// FocusStatusFromID adopts an existing toll-free-bridged object id as a FocusStatus (nil for 0).
+// FocusStatusFromID adopts an existing object pointer as a FocusStatus (nil for 0).
 func FocusStatusFromID(id objc.ID) *FocusStatus {
 	if id == 0 {
 		return nil

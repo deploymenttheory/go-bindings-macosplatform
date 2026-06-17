@@ -17,11 +17,11 @@ type DetectHumanRectanglesRequest struct {
 // Unwrap returns the underlying [raw.VNDetectHumanRectanglesRequest].
 func (x *DetectHumanRectanglesRequest) Unwrap() *raw.VNDetectHumanRectanglesRequest { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DetectHumanRectanglesRequest) ID() objc.ID { return x.inner.Ptr() }
 
-// DetectHumanRectanglesRequestFromID adopts an existing toll-free-bridged object id as a DetectHumanRectanglesRequest (nil for 0).
+// DetectHumanRectanglesRequestFromID adopts an existing object pointer as a DetectHumanRectanglesRequest (nil for 0).
 func DetectHumanRectanglesRequestFromID(id objc.ID) *DetectHumanRectanglesRequest {
 	if id == 0 {
 		return nil

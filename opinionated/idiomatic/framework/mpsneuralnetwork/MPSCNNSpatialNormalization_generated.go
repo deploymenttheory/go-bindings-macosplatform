@@ -19,11 +19,11 @@ type CNNSpatialNormalization struct {
 // Unwrap returns the underlying [raw.MPSCNNSpatialNormalization].
 func (x *CNNSpatialNormalization) Unwrap() *raw.MPSCNNSpatialNormalization { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CNNSpatialNormalization) ID() objc.ID { return x.inner.Ptr() }
 
-// CNNSpatialNormalizationFromID adopts an existing toll-free-bridged object id as a CNNSpatialNormalization (nil for 0).
+// CNNSpatialNormalizationFromID adopts an existing object pointer as a CNNSpatialNormalization (nil for 0).
 func CNNSpatialNormalizationFromID(id objc.ID) *CNNSpatialNormalization {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type BrailleTranslator struct {
 // Unwrap returns the underlying [raw.AXBrailleTranslator].
 func (x *BrailleTranslator) Unwrap() *raw.AXBrailleTranslator { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *BrailleTranslator) ID() objc.ID { return x.inner.Ptr() }
 
-// BrailleTranslatorFromID adopts an existing toll-free-bridged object id as a BrailleTranslator (nil for 0).
+// BrailleTranslatorFromID adopts an existing object pointer as a BrailleTranslator (nil for 0).
 func BrailleTranslatorFromID(id objc.ID) *BrailleTranslator {
 	if id == 0 {
 		return nil

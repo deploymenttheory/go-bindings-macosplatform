@@ -17,11 +17,11 @@ type ImageAestheticsScoresObservation struct {
 // Unwrap returns the underlying [raw.VNImageAestheticsScoresObservation].
 func (x *ImageAestheticsScoresObservation) Unwrap() *raw.VNImageAestheticsScoresObservation { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ImageAestheticsScoresObservation) ID() objc.ID { return x.inner.Ptr() }
 
-// ImageAestheticsScoresObservationFromID adopts an existing toll-free-bridged object id as a ImageAestheticsScoresObservation (nil for 0).
+// ImageAestheticsScoresObservationFromID adopts an existing object pointer as a ImageAestheticsScoresObservation (nil for 0).
 func ImageAestheticsScoresObservationFromID(id objc.ID) *ImageAestheticsScoresObservation {
 	if id == 0 {
 		return nil

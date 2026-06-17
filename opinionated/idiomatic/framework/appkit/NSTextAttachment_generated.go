@@ -20,11 +20,11 @@ type TextAttachment struct {
 // Unwrap returns the underlying [raw.NSTextAttachment].
 func (x *TextAttachment) Unwrap() *raw.NSTextAttachment { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *TextAttachment) ID() objc.ID { return x.inner.Ptr() }
 
-// TextAttachmentFromID adopts an existing toll-free-bridged object id as a TextAttachment (nil for 0).
+// TextAttachmentFromID adopts an existing object pointer as a TextAttachment (nil for 0).
 func TextAttachmentFromID(id objc.ID) *TextAttachment {
 	if id == 0 {
 		return nil

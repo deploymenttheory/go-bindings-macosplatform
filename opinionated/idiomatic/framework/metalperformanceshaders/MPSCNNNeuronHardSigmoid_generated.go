@@ -20,11 +20,11 @@ type CNNNeuronHardSigmoid struct {
 // Unwrap returns the underlying [raw.MPSCNNNeuronHardSigmoid].
 func (x *CNNNeuronHardSigmoid) Unwrap() *raw.MPSCNNNeuronHardSigmoid { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CNNNeuronHardSigmoid) ID() objc.ID { return x.inner.Ptr() }
 
-// CNNNeuronHardSigmoidFromID adopts an existing toll-free-bridged object id as a CNNNeuronHardSigmoid (nil for 0).
+// CNNNeuronHardSigmoidFromID adopts an existing object pointer as a CNNNeuronHardSigmoid (nil for 0).
 func CNNNeuronHardSigmoidFromID(id objc.ID) *CNNNeuronHardSigmoid {
 	if id == 0 {
 		return nil

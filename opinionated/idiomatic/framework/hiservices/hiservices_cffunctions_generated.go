@@ -12,7 +12,7 @@ import (
 	"unsafe"
 )
 
-// TranslationCreateWithSourceArray wraps [raw.TranslationCreateWithSourceArray], bridging CFTypeRef arguments and the OSStatus result.
+// TranslationCreateWithSourceArray wraps [raw.TranslationCreateWithSourceArray], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func TranslationCreateWithSourceArray(inSourceTypes objc.ID, inTranslationFlags uint) (objc.ID, objc.ID, error) {
 	var _out0 uintptr
 	var _out1 uintptr
@@ -22,7 +22,7 @@ func TranslationCreateWithSourceArray(inSourceTypes objc.ID, inTranslationFlags 
 	return objc.ID(_out0), objc.ID(_out1), nil
 }
 
-// UAZoomChangeFocus wraps [raw.UAZoomChangeFocus], bridging CFTypeRef arguments and the OSStatus result.
+// UAZoomChangeFocus wraps [raw.UAZoomChangeFocus], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func UAZoomChangeFocus(inRect *corefoundation.CGRect, inHighlightRect *corefoundation.CGRect, inType uint) error {
 	if _err := purego.NewOSStatus(raw.UAZoomChangeFocus(inRect, inHighlightRect, inType)).Err(); _err != nil {
 		return _err

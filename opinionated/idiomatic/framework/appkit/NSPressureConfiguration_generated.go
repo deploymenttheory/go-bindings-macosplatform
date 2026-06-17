@@ -17,11 +17,11 @@ type PressureConfiguration struct {
 // Unwrap returns the underlying [raw.NSPressureConfiguration].
 func (x *PressureConfiguration) Unwrap() *raw.NSPressureConfiguration { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PressureConfiguration) ID() objc.ID { return x.inner.Ptr() }
 
-// PressureConfigurationFromID adopts an existing toll-free-bridged object id as a PressureConfiguration (nil for 0).
+// PressureConfigurationFromID adopts an existing object pointer as a PressureConfiguration (nil for 0).
 func PressureConfigurationFromID(id objc.ID) *PressureConfiguration {
 	if id == 0 {
 		return nil

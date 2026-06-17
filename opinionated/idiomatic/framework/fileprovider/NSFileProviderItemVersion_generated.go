@@ -18,11 +18,11 @@ type FileProviderItemVersion struct {
 // Unwrap returns the underlying [raw.NSFileProviderItemVersion].
 func (x *FileProviderItemVersion) Unwrap() *raw.NSFileProviderItemVersion { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *FileProviderItemVersion) ID() objc.ID { return x.inner.Ptr() }
 
-// FileProviderItemVersionFromID adopts an existing toll-free-bridged object id as a FileProviderItemVersion (nil for 0).
+// FileProviderItemVersionFromID adopts an existing object pointer as a FileProviderItemVersion (nil for 0).
 func FileProviderItemVersionFromID(id objc.ID) *FileProviderItemVersion {
 	if id == 0 {
 		return nil

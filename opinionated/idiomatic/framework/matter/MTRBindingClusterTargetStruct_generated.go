@@ -18,11 +18,11 @@ type MTRBindingClusterTargetStruct struct {
 // Unwrap returns the underlying [raw.MTRBindingClusterTargetStruct].
 func (x *MTRBindingClusterTargetStruct) Unwrap() *raw.MTRBindingClusterTargetStruct { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRBindingClusterTargetStruct) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRBindingClusterTargetStructFromID adopts an existing toll-free-bridged object id as a MTRBindingClusterTargetStruct (nil for 0).
+// MTRBindingClusterTargetStructFromID adopts an existing object pointer as a MTRBindingClusterTargetStruct (nil for 0).
 func MTRBindingClusterTargetStructFromID(id objc.ID) *MTRBindingClusterTargetStruct {
 	if id == 0 {
 		return nil

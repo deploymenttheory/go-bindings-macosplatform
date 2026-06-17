@@ -17,11 +17,11 @@ type AsynchronousFetchRequest struct {
 // Unwrap returns the underlying [raw.NSAsynchronousFetchRequest].
 func (x *AsynchronousFetchRequest) Unwrap() *raw.NSAsynchronousFetchRequest[objc.ID] { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AsynchronousFetchRequest) ID() objc.ID { return x.inner.Ptr() }
 
-// AsynchronousFetchRequestFromID adopts an existing toll-free-bridged object id as a AsynchronousFetchRequest (nil for 0).
+// AsynchronousFetchRequestFromID adopts an existing object pointer as a AsynchronousFetchRequest (nil for 0).
 func AsynchronousFetchRequestFromID(id objc.ID) *AsynchronousFetchRequest {
 	if id == 0 {
 		return nil

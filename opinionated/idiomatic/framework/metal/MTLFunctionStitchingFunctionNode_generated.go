@@ -20,11 +20,11 @@ type FunctionStitchingFunctionNode struct {
 // Unwrap returns the underlying [raw.MTLFunctionStitchingFunctionNode].
 func (x *FunctionStitchingFunctionNode) Unwrap() *raw.MTLFunctionStitchingFunctionNode { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *FunctionStitchingFunctionNode) ID() objc.ID { return x.inner.Ptr() }
 
-// FunctionStitchingFunctionNodeFromID adopts an existing toll-free-bridged object id as a FunctionStitchingFunctionNode (nil for 0).
+// FunctionStitchingFunctionNodeFromID adopts an existing object pointer as a FunctionStitchingFunctionNode (nil for 0).
 func FunctionStitchingFunctionNodeFromID(id objc.ID) *FunctionStitchingFunctionNode {
 	if id == 0 {
 		return nil

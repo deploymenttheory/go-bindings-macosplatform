@@ -20,11 +20,11 @@ type CNNConvolutionWeightsAndBiasesState struct {
 // Unwrap returns the underlying [raw.MPSCNNConvolutionWeightsAndBiasesState].
 func (x *CNNConvolutionWeightsAndBiasesState) Unwrap() *raw.MPSCNNConvolutionWeightsAndBiasesState { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CNNConvolutionWeightsAndBiasesState) ID() objc.ID { return x.inner.Ptr() }
 
-// CNNConvolutionWeightsAndBiasesStateFromID adopts an existing toll-free-bridged object id as a CNNConvolutionWeightsAndBiasesState (nil for 0).
+// CNNConvolutionWeightsAndBiasesStateFromID adopts an existing object pointer as a CNNConvolutionWeightsAndBiasesState (nil for 0).
 func CNNConvolutionWeightsAndBiasesStateFromID(id objc.ID) *CNNConvolutionWeightsAndBiasesState {
 	if id == 0 {
 		return nil

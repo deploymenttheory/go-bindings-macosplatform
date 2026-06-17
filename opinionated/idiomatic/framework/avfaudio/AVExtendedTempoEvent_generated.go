@@ -17,11 +17,11 @@ type ExtendedTempoEvent struct {
 // Unwrap returns the underlying [raw.AVExtendedTempoEvent].
 func (x *ExtendedTempoEvent) Unwrap() *raw.AVExtendedTempoEvent { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ExtendedTempoEvent) ID() objc.ID { return x.inner.Ptr() }
 
-// ExtendedTempoEventFromID adopts an existing toll-free-bridged object id as a ExtendedTempoEvent (nil for 0).
+// ExtendedTempoEventFromID adopts an existing object pointer as a ExtendedTempoEvent (nil for 0).
 func ExtendedTempoEventFromID(id objc.ID) *ExtendedTempoEvent {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type AnimatedQuaternionArray struct {
 // Unwrap returns the underlying [raw.MDLAnimatedQuaternionArray].
 func (x *AnimatedQuaternionArray) Unwrap() *raw.MDLAnimatedQuaternionArray { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AnimatedQuaternionArray) ID() objc.ID { return x.inner.Ptr() }
 
-// AnimatedQuaternionArrayFromID adopts an existing toll-free-bridged object id as a AnimatedQuaternionArray (nil for 0).
+// AnimatedQuaternionArrayFromID adopts an existing object pointer as a AnimatedQuaternionArray (nil for 0).
 func AnimatedQuaternionArrayFromID(id objc.ID) *AnimatedQuaternionArray {
 	if id == 0 {
 		return nil

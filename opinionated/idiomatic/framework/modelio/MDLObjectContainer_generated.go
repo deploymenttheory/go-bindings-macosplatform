@@ -17,11 +17,11 @@ type ObjectContainer struct {
 // Unwrap returns the underlying [raw.MDLObjectContainer].
 func (x *ObjectContainer) Unwrap() *raw.MDLObjectContainer { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ObjectContainer) ID() objc.ID { return x.inner.Ptr() }
 
-// ObjectContainerFromID adopts an existing toll-free-bridged object id as a ObjectContainer (nil for 0).
+// ObjectContainerFromID adopts an existing object pointer as a ObjectContainer (nil for 0).
 func ObjectContainerFromID(id objc.ID) *ObjectContainer {
 	if id == 0 {
 		return nil

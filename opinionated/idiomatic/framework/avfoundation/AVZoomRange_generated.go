@@ -17,11 +17,11 @@ type ZoomRange struct {
 // Unwrap returns the underlying [raw.AVZoomRange].
 func (x *ZoomRange) Unwrap() *raw.AVZoomRange { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ZoomRange) ID() objc.ID { return x.inner.Ptr() }
 
-// ZoomRangeFromID adopts an existing toll-free-bridged object id as a ZoomRange (nil for 0).
+// ZoomRangeFromID adopts an existing object pointer as a ZoomRange (nil for 0).
 func ZoomRangeFromID(id objc.ID) *ZoomRange {
 	if id == 0 {
 		return nil

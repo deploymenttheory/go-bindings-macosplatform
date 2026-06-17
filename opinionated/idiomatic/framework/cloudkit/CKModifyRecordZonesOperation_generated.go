@@ -21,11 +21,11 @@ type ModifyRecordZonesOperation struct {
 // Unwrap returns the underlying [raw.CKModifyRecordZonesOperation].
 func (x *ModifyRecordZonesOperation) Unwrap() *raw.CKModifyRecordZonesOperation { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ModifyRecordZonesOperation) ID() objc.ID { return x.inner.Ptr() }
 
-// ModifyRecordZonesOperationFromID adopts an existing toll-free-bridged object id as a ModifyRecordZonesOperation (nil for 0).
+// ModifyRecordZonesOperationFromID adopts an existing object pointer as a ModifyRecordZonesOperation (nil for 0).
 func ModifyRecordZonesOperationFromID(id objc.ID) *ModifyRecordZonesOperation {
 	if id == 0 {
 		return nil

@@ -17,11 +17,11 @@ type ActivationDescriptor struct {
 // Unwrap returns the underlying [raw.MLCActivationDescriptor].
 func (x *ActivationDescriptor) Unwrap() *raw.MLCActivationDescriptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ActivationDescriptor) ID() objc.ID { return x.inner.Ptr() }
 
-// ActivationDescriptorFromID adopts an existing toll-free-bridged object id as a ActivationDescriptor (nil for 0).
+// ActivationDescriptorFromID adopts an existing object pointer as a ActivationDescriptor (nil for 0).
 func ActivationDescriptorFromID(id objc.ID) *ActivationDescriptor {
 	if id == 0 {
 		return nil

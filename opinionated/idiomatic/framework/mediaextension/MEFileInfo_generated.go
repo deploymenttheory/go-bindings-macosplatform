@@ -20,11 +20,11 @@ type FileInfo struct {
 // Unwrap returns the underlying [raw.MEFileInfo].
 func (x *FileInfo) Unwrap() *raw.MEFileInfo { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *FileInfo) ID() objc.ID { return x.inner.Ptr() }
 
-// FileInfoFromID adopts an existing toll-free-bridged object id as a FileInfo (nil for 0).
+// FileInfoFromID adopts an existing object pointer as a FileInfo (nil for 0).
 func FileInfoFromID(id objc.ID) *FileInfo {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type MTRMediaInputClusterSelectInputParams struct {
 // Unwrap returns the underlying [raw.MTRMediaInputClusterSelectInputParams].
 func (x *MTRMediaInputClusterSelectInputParams) Unwrap() *raw.MTRMediaInputClusterSelectInputParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRMediaInputClusterSelectInputParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRMediaInputClusterSelectInputParamsFromID adopts an existing toll-free-bridged object id as a MTRMediaInputClusterSelectInputParams (nil for 0).
+// MTRMediaInputClusterSelectInputParamsFromID adopts an existing object pointer as a MTRMediaInputClusterSelectInputParams (nil for 0).
 func MTRMediaInputClusterSelectInputParamsFromID(id objc.ID) *MTRMediaInputClusterSelectInputParams {
 	if id == 0 {
 		return nil

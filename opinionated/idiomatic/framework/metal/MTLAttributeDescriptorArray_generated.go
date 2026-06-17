@@ -17,11 +17,11 @@ type AttributeDescriptorArray struct {
 // Unwrap returns the underlying [raw.MTLAttributeDescriptorArray].
 func (x *AttributeDescriptorArray) Unwrap() *raw.MTLAttributeDescriptorArray { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AttributeDescriptorArray) ID() objc.ID { return x.inner.Ptr() }
 
-// AttributeDescriptorArrayFromID adopts an existing toll-free-bridged object id as a AttributeDescriptorArray (nil for 0).
+// AttributeDescriptorArrayFromID adopts an existing object pointer as a AttributeDescriptorArray (nil for 0).
 func AttributeDescriptorArrayFromID(id objc.ID) *AttributeDescriptorArray {
 	if id == 0 {
 		return nil

@@ -19,11 +19,11 @@ type MutableDateRangeMetadataGroup struct {
 // Unwrap returns the underlying [raw.AVMutableDateRangeMetadataGroup].
 func (x *MutableDateRangeMetadataGroup) Unwrap() *raw.AVMutableDateRangeMetadataGroup { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MutableDateRangeMetadataGroup) ID() objc.ID { return x.inner.Ptr() }
 
-// MutableDateRangeMetadataGroupFromID adopts an existing toll-free-bridged object id as a MutableDateRangeMetadataGroup (nil for 0).
+// MutableDateRangeMetadataGroupFromID adopts an existing object pointer as a MutableDateRangeMetadataGroup (nil for 0).
 func MutableDateRangeMetadataGroupFromID(id objc.ID) *MutableDateRangeMetadataGroup {
 	if id == 0 {
 		return nil

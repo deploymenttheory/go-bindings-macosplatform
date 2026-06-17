@@ -17,11 +17,11 @@ type SubmeshTopology struct {
 // Unwrap returns the underlying [raw.MDLSubmeshTopology].
 func (x *SubmeshTopology) Unwrap() *raw.MDLSubmeshTopology { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SubmeshTopology) ID() objc.ID { return x.inner.Ptr() }
 
-// SubmeshTopologyFromID adopts an existing toll-free-bridged object id as a SubmeshTopology (nil for 0).
+// SubmeshTopologyFromID adopts an existing object pointer as a SubmeshTopology (nil for 0).
 func SubmeshTopologyFromID(id objc.ID) *SubmeshTopology {
 	if id == 0 {
 		return nil

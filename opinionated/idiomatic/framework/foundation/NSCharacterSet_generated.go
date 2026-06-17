@@ -17,11 +17,11 @@ type CharacterSet struct {
 // Unwrap returns the underlying [raw.NSCharacterSet].
 func (x *CharacterSet) Unwrap() *raw.NSCharacterSet { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CharacterSet) ID() objc.ID { return x.inner.Ptr() }
 
-// CharacterSetFromID adopts an existing toll-free-bridged object id as a CharacterSet (nil for 0).
+// CharacterSetFromID adopts an existing object pointer as a CharacterSet (nil for 0).
 func CharacterSetFromID(id objc.ID) *CharacterSet {
 	if id == 0 {
 		return nil

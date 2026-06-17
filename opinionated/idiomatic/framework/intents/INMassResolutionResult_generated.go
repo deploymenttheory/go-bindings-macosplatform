@@ -17,11 +17,11 @@ type MassResolutionResult struct {
 // Unwrap returns the underlying [raw.INMassResolutionResult].
 func (x *MassResolutionResult) Unwrap() *raw.INMassResolutionResult { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MassResolutionResult) ID() objc.ID { return x.inner.Ptr() }
 
-// MassResolutionResultFromID adopts an existing toll-free-bridged object id as a MassResolutionResult (nil for 0).
+// MassResolutionResultFromID adopts an existing object pointer as a MassResolutionResult (nil for 0).
 func MassResolutionResultFromID(id objc.ID) *MassResolutionResult {
 	if id == 0 {
 		return nil

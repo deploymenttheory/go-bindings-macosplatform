@@ -18,11 +18,11 @@ type MTRWaterHeaterModeClusterModeTagStruct struct {
 // Unwrap returns the underlying [raw.MTRWaterHeaterModeClusterModeTagStruct].
 func (x *MTRWaterHeaterModeClusterModeTagStruct) Unwrap() *raw.MTRWaterHeaterModeClusterModeTagStruct { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRWaterHeaterModeClusterModeTagStruct) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRWaterHeaterModeClusterModeTagStructFromID adopts an existing toll-free-bridged object id as a MTRWaterHeaterModeClusterModeTagStruct (nil for 0).
+// MTRWaterHeaterModeClusterModeTagStructFromID adopts an existing object pointer as a MTRWaterHeaterModeClusterModeTagStruct (nil for 0).
 func MTRWaterHeaterModeClusterModeTagStructFromID(id objc.ID) *MTRWaterHeaterModeClusterModeTagStruct {
 	if id == 0 {
 		return nil

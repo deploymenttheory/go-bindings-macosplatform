@@ -18,11 +18,11 @@ type CNNNeuronExponential struct {
 // Unwrap returns the underlying [raw.MPSCNNNeuronExponential].
 func (x *CNNNeuronExponential) Unwrap() *raw.MPSCNNNeuronExponential { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CNNNeuronExponential) ID() objc.ID { return x.inner.Ptr() }
 
-// CNNNeuronExponentialFromID adopts an existing toll-free-bridged object id as a CNNNeuronExponential (nil for 0).
+// CNNNeuronExponentialFromID adopts an existing object pointer as a CNNNeuronExponential (nil for 0).
 func CNNNeuronExponentialFromID(id objc.ID) *CNNNeuronExponential {
 	if id == 0 {
 		return nil

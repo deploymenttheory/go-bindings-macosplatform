@@ -17,11 +17,11 @@ type NotificationSettings struct {
 // Unwrap returns the underlying [raw.UNNotificationSettings].
 func (x *NotificationSettings) Unwrap() *raw.UNNotificationSettings { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NotificationSettings) ID() objc.ID { return x.inner.Ptr() }
 
-// NotificationSettingsFromID adopts an existing toll-free-bridged object id as a NotificationSettings (nil for 0).
+// NotificationSettingsFromID adopts an existing object pointer as a NotificationSettings (nil for 0).
 func NotificationSettingsFromID(id objc.ID) *NotificationSettings {
 	if id == 0 {
 		return nil

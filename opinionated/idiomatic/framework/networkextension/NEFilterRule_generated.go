@@ -17,11 +17,11 @@ type NEFilterRule struct {
 // Unwrap returns the underlying [raw.NEFilterRule].
 func (x *NEFilterRule) Unwrap() *raw.NEFilterRule { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NEFilterRule) ID() objc.ID { return x.inner.Ptr() }
 
-// NEFilterRuleFromID adopts an existing toll-free-bridged object id as a NEFilterRule (nil for 0).
+// NEFilterRuleFromID adopts an existing object pointer as a NEFilterRule (nil for 0).
 func NEFilterRuleFromID(id objc.ID) *NEFilterRule {
 	if id == 0 {
 		return nil

@@ -19,11 +19,11 @@ type MTRMediaPlaybackClusterActivateTextTrackParams struct {
 // Unwrap returns the underlying [raw.MTRMediaPlaybackClusterActivateTextTrackParams].
 func (x *MTRMediaPlaybackClusterActivateTextTrackParams) Unwrap() *raw.MTRMediaPlaybackClusterActivateTextTrackParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRMediaPlaybackClusterActivateTextTrackParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRMediaPlaybackClusterActivateTextTrackParamsFromID adopts an existing toll-free-bridged object id as a MTRMediaPlaybackClusterActivateTextTrackParams (nil for 0).
+// MTRMediaPlaybackClusterActivateTextTrackParamsFromID adopts an existing object pointer as a MTRMediaPlaybackClusterActivateTextTrackParams (nil for 0).
 func MTRMediaPlaybackClusterActivateTextTrackParamsFromID(id objc.ID) *MTRMediaPlaybackClusterActivateTextTrackParams {
 	if id == 0 {
 		return nil

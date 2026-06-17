@@ -19,11 +19,11 @@ type TokenKeychainCertificate struct {
 // Unwrap returns the underlying [raw.TKTokenKeychainCertificate].
 func (x *TokenKeychainCertificate) Unwrap() *raw.TKTokenKeychainCertificate { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *TokenKeychainCertificate) ID() objc.ID { return x.inner.Ptr() }
 
-// TokenKeychainCertificateFromID adopts an existing toll-free-bridged object id as a TokenKeychainCertificate (nil for 0).
+// TokenKeychainCertificateFromID adopts an existing object pointer as a TokenKeychainCertificate (nil for 0).
 func TokenKeychainCertificateFromID(id objc.ID) *TokenKeychainCertificate {
 	if id == 0 {
 		return nil

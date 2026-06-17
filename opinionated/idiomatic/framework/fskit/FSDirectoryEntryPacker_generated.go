@@ -17,11 +17,11 @@ type DirectoryEntryPacker struct {
 // Unwrap returns the underlying [raw.FSDirectoryEntryPacker].
 func (x *DirectoryEntryPacker) Unwrap() *raw.FSDirectoryEntryPacker { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DirectoryEntryPacker) ID() objc.ID { return x.inner.Ptr() }
 
-// DirectoryEntryPackerFromID adopts an existing toll-free-bridged object id as a DirectoryEntryPacker (nil for 0).
+// DirectoryEntryPackerFromID adopts an existing object pointer as a DirectoryEntryPacker (nil for 0).
 func DirectoryEntryPackerFromID(id objc.ID) *DirectoryEntryPacker {
 	if id == 0 {
 		return nil

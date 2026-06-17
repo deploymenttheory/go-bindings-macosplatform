@@ -17,11 +17,11 @@ type NEAppProxyProviderManager struct {
 // Unwrap returns the underlying [raw.NEAppProxyProviderManager].
 func (x *NEAppProxyProviderManager) Unwrap() *raw.NEAppProxyProviderManager { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NEAppProxyProviderManager) ID() objc.ID { return x.inner.Ptr() }
 
-// NEAppProxyProviderManagerFromID adopts an existing toll-free-bridged object id as a NEAppProxyProviderManager (nil for 0).
+// NEAppProxyProviderManagerFromID adopts an existing object pointer as a NEAppProxyProviderManager (nil for 0).
 func NEAppProxyProviderManagerFromID(id objc.ID) *NEAppProxyProviderManager {
 	if id == 0 {
 		return nil

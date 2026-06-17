@@ -18,11 +18,11 @@ type EffectPropertyLight struct {
 // Unwrap returns the underlying [raw.GLKEffectPropertyLight].
 func (x *EffectPropertyLight) Unwrap() *raw.GLKEffectPropertyLight { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *EffectPropertyLight) ID() objc.ID { return x.inner.Ptr() }
 
-// EffectPropertyLightFromID adopts an existing toll-free-bridged object id as a EffectPropertyLight (nil for 0).
+// EffectPropertyLightFromID adopts an existing object pointer as a EffectPropertyLight (nil for 0).
 func EffectPropertyLightFromID(id objc.ID) *EffectPropertyLight {
 	if id == 0 {
 		return nil

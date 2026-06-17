@@ -17,11 +17,11 @@ type QCPatchController struct {
 // Unwrap returns the underlying [raw.QCPatchController].
 func (x *QCPatchController) Unwrap() *raw.QCPatchController { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *QCPatchController) ID() objc.ID { return x.inner.Ptr() }
 
-// QCPatchControllerFromID adopts an existing toll-free-bridged object id as a QCPatchController (nil for 0).
+// QCPatchControllerFromID adopts an existing object pointer as a QCPatchController (nil for 0).
 func QCPatchControllerFromID(id objc.ID) *QCPatchController {
 	if id == 0 {
 		return nil

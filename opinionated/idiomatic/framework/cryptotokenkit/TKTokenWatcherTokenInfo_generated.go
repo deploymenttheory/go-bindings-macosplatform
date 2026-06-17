@@ -18,11 +18,11 @@ type TokenWatcherTokenInfo struct {
 // Unwrap returns the underlying [raw.TKTokenWatcherTokenInfo].
 func (x *TokenWatcherTokenInfo) Unwrap() *raw.TKTokenWatcherTokenInfo { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *TokenWatcherTokenInfo) ID() objc.ID { return x.inner.Ptr() }
 
-// TokenWatcherTokenInfoFromID adopts an existing toll-free-bridged object id as a TokenWatcherTokenInfo (nil for 0).
+// TokenWatcherTokenInfoFromID adopts an existing object pointer as a TokenWatcherTokenInfo (nil for 0).
 func TokenWatcherTokenInfoFromID(id objc.ID) *TokenWatcherTokenInfo {
 	if id == 0 {
 		return nil

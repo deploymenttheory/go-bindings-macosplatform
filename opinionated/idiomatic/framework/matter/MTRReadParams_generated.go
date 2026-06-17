@@ -18,11 +18,11 @@ type MTRReadParams struct {
 // Unwrap returns the underlying [raw.MTRReadParams].
 func (x *MTRReadParams) Unwrap() *raw.MTRReadParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRReadParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRReadParamsFromID adopts an existing toll-free-bridged object id as a MTRReadParams (nil for 0).
+// MTRReadParamsFromID adopts an existing object pointer as a MTRReadParams (nil for 0).
 func MTRReadParamsFromID(id objc.ID) *MTRReadParams {
 	if id == 0 {
 		return nil

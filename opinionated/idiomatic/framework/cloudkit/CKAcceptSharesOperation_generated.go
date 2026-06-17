@@ -21,11 +21,11 @@ type AcceptSharesOperation struct {
 // Unwrap returns the underlying [raw.CKAcceptSharesOperation].
 func (x *AcceptSharesOperation) Unwrap() *raw.CKAcceptSharesOperation { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AcceptSharesOperation) ID() objc.ID { return x.inner.Ptr() }
 
-// AcceptSharesOperationFromID adopts an existing toll-free-bridged object id as a AcceptSharesOperation (nil for 0).
+// AcceptSharesOperationFromID adopts an existing object pointer as a AcceptSharesOperation (nil for 0).
 func AcceptSharesOperationFromID(id objc.ID) *AcceptSharesOperation {
 	if id == 0 {
 		return nil

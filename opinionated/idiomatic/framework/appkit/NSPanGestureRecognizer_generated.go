@@ -18,11 +18,11 @@ type PanGestureRecognizer struct {
 // Unwrap returns the underlying [raw.NSPanGestureRecognizer].
 func (x *PanGestureRecognizer) Unwrap() *raw.NSPanGestureRecognizer { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PanGestureRecognizer) ID() objc.ID { return x.inner.Ptr() }
 
-// PanGestureRecognizerFromID adopts an existing toll-free-bridged object id as a PanGestureRecognizer (nil for 0).
+// PanGestureRecognizerFromID adopts an existing object pointer as a PanGestureRecognizer (nil for 0).
 func PanGestureRecognizerFromID(id objc.ID) *PanGestureRecognizer {
 	if id == 0 {
 		return nil

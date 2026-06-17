@@ -18,11 +18,11 @@ type NNArithmeticGradientStateNode struct {
 // Unwrap returns the underlying [raw.MPSNNArithmeticGradientStateNode].
 func (x *NNArithmeticGradientStateNode) Unwrap() *raw.MPSNNArithmeticGradientStateNode { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NNArithmeticGradientStateNode) ID() objc.ID { return x.inner.Ptr() }
 
-// NNArithmeticGradientStateNodeFromID adopts an existing toll-free-bridged object id as a NNArithmeticGradientStateNode (nil for 0).
+// NNArithmeticGradientStateNodeFromID adopts an existing object pointer as a NNArithmeticGradientStateNode (nil for 0).
 func NNArithmeticGradientStateNodeFromID(id objc.ID) *NNArithmeticGradientStateNode {
 	if id == 0 {
 		return nil

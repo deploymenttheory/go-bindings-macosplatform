@@ -17,11 +17,11 @@ type MTRControllerFactory struct {
 // Unwrap returns the underlying [raw.MTRControllerFactory].
 func (x *MTRControllerFactory) Unwrap() *raw.MTRControllerFactory { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRControllerFactory) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRControllerFactoryFromID adopts an existing toll-free-bridged object id as a MTRControllerFactory (nil for 0).
+// MTRControllerFactoryFromID adopts an existing object pointer as a MTRControllerFactory (nil for 0).
 func MTRControllerFactoryFromID(id objc.ID) *MTRControllerFactory {
 	if id == 0 {
 		return nil

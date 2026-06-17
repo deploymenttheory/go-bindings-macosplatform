@@ -17,11 +17,11 @@ type MTRTestClusterClusterTestEnumsRequestParams struct {
 // Unwrap returns the underlying [raw.MTRTestClusterClusterTestEnumsRequestParams].
 func (x *MTRTestClusterClusterTestEnumsRequestParams) Unwrap() *raw.MTRTestClusterClusterTestEnumsRequestParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRTestClusterClusterTestEnumsRequestParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRTestClusterClusterTestEnumsRequestParamsFromID adopts an existing toll-free-bridged object id as a MTRTestClusterClusterTestEnumsRequestParams (nil for 0).
+// MTRTestClusterClusterTestEnumsRequestParamsFromID adopts an existing object pointer as a MTRTestClusterClusterTestEnumsRequestParams (nil for 0).
 func MTRTestClusterClusterTestEnumsRequestParamsFromID(id objc.ID) *MTRTestClusterClusterTestEnumsRequestParams {
 	if id == 0 {
 		return nil

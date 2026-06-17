@@ -20,11 +20,11 @@ type Library struct {
 // Unwrap returns the underlying [raw.ITLibrary].
 func (x *Library) Unwrap() *raw.ITLibrary { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Library) ID() objc.ID { return x.inner.Ptr() }
 
-// LibraryFromID adopts an existing toll-free-bridged object id as a Library (nil for 0).
+// LibraryFromID adopts an existing object pointer as a Library (nil for 0).
 func LibraryFromID(id objc.ID) *Library {
 	if id == 0 {
 		return nil

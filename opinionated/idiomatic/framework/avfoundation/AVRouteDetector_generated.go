@@ -17,11 +17,11 @@ type RouteDetector struct {
 // Unwrap returns the underlying [raw.AVRouteDetector].
 func (x *RouteDetector) Unwrap() *raw.AVRouteDetector { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *RouteDetector) ID() objc.ID { return x.inner.Ptr() }
 
-// RouteDetectorFromID adopts an existing toll-free-bridged object id as a RouteDetector (nil for 0).
+// RouteDetectorFromID adopts an existing object pointer as a RouteDetector (nil for 0).
 func RouteDetectorFromID(id objc.ID) *RouteDetector {
 	if id == 0 {
 		return nil

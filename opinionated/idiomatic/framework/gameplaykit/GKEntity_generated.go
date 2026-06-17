@@ -18,11 +18,11 @@ type Entity struct {
 // Unwrap returns the underlying [raw.GKEntity].
 func (x *Entity) Unwrap() *raw.GKEntity { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Entity) ID() objc.ID { return x.inner.Ptr() }
 
-// EntityFromID adopts an existing toll-free-bridged object id as a Entity (nil for 0).
+// EntityFromID adopts an existing object pointer as a Entity (nil for 0).
 func EntityFromID(id objc.ID) *Entity {
 	if id == 0 {
 		return nil

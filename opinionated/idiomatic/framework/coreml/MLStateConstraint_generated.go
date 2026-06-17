@@ -19,11 +19,11 @@ type StateConstraint struct {
 // Unwrap returns the underlying [raw.MLStateConstraint].
 func (x *StateConstraint) Unwrap() *raw.MLStateConstraint { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *StateConstraint) ID() objc.ID { return x.inner.Ptr() }
 
-// StateConstraintFromID adopts an existing toll-free-bridged object id as a StateConstraint (nil for 0).
+// StateConstraintFromID adopts an existing object pointer as a StateConstraint (nil for 0).
 func StateConstraintFromID(id objc.ID) *StateConstraint {
 	if id == 0 {
 		return nil

@@ -17,11 +17,11 @@ type NNBinaryGradientStateNode struct {
 // Unwrap returns the underlying [raw.MPSNNBinaryGradientStateNode].
 func (x *NNBinaryGradientStateNode) Unwrap() *raw.MPSNNBinaryGradientStateNode { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NNBinaryGradientStateNode) ID() objc.ID { return x.inner.Ptr() }
 
-// NNBinaryGradientStateNodeFromID adopts an existing toll-free-bridged object id as a NNBinaryGradientStateNode (nil for 0).
+// NNBinaryGradientStateNodeFromID adopts an existing object pointer as a NNBinaryGradientStateNode (nil for 0).
 func NNBinaryGradientStateNodeFromID(id objc.ID) *NNBinaryGradientStateNode {
 	if id == 0 {
 		return nil

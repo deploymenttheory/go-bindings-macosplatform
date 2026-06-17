@@ -17,11 +17,11 @@ type AchievementChallenge struct {
 // Unwrap returns the underlying [raw.GKAchievementChallenge].
 func (x *AchievementChallenge) Unwrap() *raw.GKAchievementChallenge { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AchievementChallenge) ID() objc.ID { return x.inner.Ptr() }
 
-// AchievementChallengeFromID adopts an existing toll-free-bridged object id as a AchievementChallenge (nil for 0).
+// AchievementChallengeFromID adopts an existing object pointer as a AchievementChallenge (nil for 0).
 func AchievementChallengeFromID(id objc.ID) *AchievementChallenge {
 	if id == 0 {
 		return nil

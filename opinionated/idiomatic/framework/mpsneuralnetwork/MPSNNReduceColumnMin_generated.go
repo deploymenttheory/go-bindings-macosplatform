@@ -19,11 +19,11 @@ type NNReduceColumnMin struct {
 // Unwrap returns the underlying [raw.MPSNNReduceColumnMin].
 func (x *NNReduceColumnMin) Unwrap() *raw.MPSNNReduceColumnMin { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NNReduceColumnMin) ID() objc.ID { return x.inner.Ptr() }
 
-// NNReduceColumnMinFromID adopts an existing toll-free-bridged object id as a NNReduceColumnMin (nil for 0).
+// NNReduceColumnMinFromID adopts an existing object pointer as a NNReduceColumnMin (nil for 0).
 func NNReduceColumnMinFromID(id objc.ID) *NNReduceColumnMin {
 	if id == 0 {
 		return nil

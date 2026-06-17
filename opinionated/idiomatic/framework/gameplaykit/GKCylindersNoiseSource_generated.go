@@ -17,11 +17,11 @@ type CylindersNoiseSource struct {
 // Unwrap returns the underlying [raw.GKCylindersNoiseSource].
 func (x *CylindersNoiseSource) Unwrap() *raw.GKCylindersNoiseSource { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CylindersNoiseSource) ID() objc.ID { return x.inner.Ptr() }
 
-// CylindersNoiseSourceFromID adopts an existing toll-free-bridged object id as a CylindersNoiseSource (nil for 0).
+// CylindersNoiseSourceFromID adopts an existing object pointer as a CylindersNoiseSource (nil for 0).
 func CylindersNoiseSourceFromID(id objc.ID) *CylindersNoiseSource {
 	if id == 0 {
 		return nil

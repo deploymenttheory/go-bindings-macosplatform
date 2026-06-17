@@ -18,11 +18,11 @@ type AddVoiceShortcutViewController struct {
 // Unwrap returns the underlying [raw.INUIAddVoiceShortcutViewController].
 func (x *AddVoiceShortcutViewController) Unwrap() *raw.INUIAddVoiceShortcutViewController { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AddVoiceShortcutViewController) ID() objc.ID { return x.inner.Ptr() }
 
-// AddVoiceShortcutViewControllerFromID adopts an existing toll-free-bridged object id as a AddVoiceShortcutViewController (nil for 0).
+// AddVoiceShortcutViewControllerFromID adopts an existing object pointer as a AddVoiceShortcutViewController (nil for 0).
 func AddVoiceShortcutViewControllerFromID(id objc.ID) *AddVoiceShortcutViewController {
 	if id == 0 {
 		return nil

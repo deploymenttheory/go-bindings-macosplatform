@@ -17,11 +17,11 @@ type Central struct {
 // Unwrap returns the underlying [raw.CBCentral].
 func (x *Central) Unwrap() *raw.CBCentral { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Central) ID() objc.ID { return x.inner.Ptr() }
 
-// CentralFromID adopts an existing toll-free-bridged object id as a Central (nil for 0).
+// CentralFromID adopts an existing object pointer as a Central (nil for 0).
 func CentralFromID(id objc.ID) *Central {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type MTROnOffClusterOnParams struct {
 // Unwrap returns the underlying [raw.MTROnOffClusterOnParams].
 func (x *MTROnOffClusterOnParams) Unwrap() *raw.MTROnOffClusterOnParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTROnOffClusterOnParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTROnOffClusterOnParamsFromID adopts an existing toll-free-bridged object id as a MTROnOffClusterOnParams (nil for 0).
+// MTROnOffClusterOnParamsFromID adopts an existing object pointer as a MTROnOffClusterOnParams (nil for 0).
 func MTROnOffClusterOnParamsFromID(id objc.ID) *MTROnOffClusterOnParams {
 	if id == 0 {
 		return nil

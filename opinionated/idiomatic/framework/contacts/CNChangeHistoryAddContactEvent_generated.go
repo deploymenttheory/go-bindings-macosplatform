@@ -18,11 +18,11 @@ type ChangeHistoryAddContactEvent struct {
 // Unwrap returns the underlying [raw.CNChangeHistoryAddContactEvent].
 func (x *ChangeHistoryAddContactEvent) Unwrap() *raw.CNChangeHistoryAddContactEvent { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ChangeHistoryAddContactEvent) ID() objc.ID { return x.inner.Ptr() }
 
-// ChangeHistoryAddContactEventFromID adopts an existing toll-free-bridged object id as a ChangeHistoryAddContactEvent (nil for 0).
+// ChangeHistoryAddContactEventFromID adopts an existing object pointer as a ChangeHistoryAddContactEvent (nil for 0).
 func ChangeHistoryAddContactEventFromID(id objc.ID) *ChangeHistoryAddContactEvent {
 	if id == 0 {
 		return nil

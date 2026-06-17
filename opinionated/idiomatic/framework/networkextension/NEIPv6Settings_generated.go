@@ -20,11 +20,11 @@ type NEIPv6Settings struct {
 // Unwrap returns the underlying [raw.NEIPv6Settings].
 func (x *NEIPv6Settings) Unwrap() *raw.NEIPv6Settings { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NEIPv6Settings) ID() objc.ID { return x.inner.Ptr() }
 
-// NEIPv6SettingsFromID adopts an existing toll-free-bridged object id as a NEIPv6Settings (nil for 0).
+// NEIPv6SettingsFromID adopts an existing object pointer as a NEIPv6Settings (nil for 0).
 func NEIPv6SettingsFromID(id objc.ID) *NEIPv6Settings {
 	if id == 0 {
 		return nil

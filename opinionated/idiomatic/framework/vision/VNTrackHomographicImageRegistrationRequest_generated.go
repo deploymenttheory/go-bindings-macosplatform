@@ -18,11 +18,11 @@ type TrackHomographicImageRegistrationRequest struct {
 // Unwrap returns the underlying [raw.VNTrackHomographicImageRegistrationRequest].
 func (x *TrackHomographicImageRegistrationRequest) Unwrap() *raw.VNTrackHomographicImageRegistrationRequest { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *TrackHomographicImageRegistrationRequest) ID() objc.ID { return x.inner.Ptr() }
 
-// TrackHomographicImageRegistrationRequestFromID adopts an existing toll-free-bridged object id as a TrackHomographicImageRegistrationRequest (nil for 0).
+// TrackHomographicImageRegistrationRequestFromID adopts an existing object pointer as a TrackHomographicImageRegistrationRequest (nil for 0).
 func TrackHomographicImageRegistrationRequestFromID(id objc.ID) *TrackHomographicImageRegistrationRequest {
 	if id == 0 {
 		return nil

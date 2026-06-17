@@ -18,11 +18,11 @@ type UpdateContext struct {
 // Unwrap returns the underlying [raw.MLUpdateContext].
 func (x *UpdateContext) Unwrap() *raw.MLUpdateContext { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *UpdateContext) ID() objc.ID { return x.inner.Ptr() }
 
-// UpdateContextFromID adopts an existing toll-free-bridged object id as a UpdateContext (nil for 0).
+// UpdateContextFromID adopts an existing object pointer as a UpdateContext (nil for 0).
 func UpdateContextFromID(id objc.ID) *UpdateContext {
 	if id == 0 {
 		return nil

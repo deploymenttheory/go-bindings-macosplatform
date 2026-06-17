@@ -19,11 +19,11 @@ type MSF struct {
 // Unwrap returns the underlying [raw.DRMSF].
 func (x *MSF) Unwrap() *raw.DRMSF { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MSF) ID() objc.ID { return x.inner.Ptr() }
 
-// MSFFromID adopts an existing toll-free-bridged object id as a MSF (nil for 0).
+// MSFFromID adopts an existing object pointer as a MSF (nil for 0).
 func MSFFromID(id objc.ID) *MSF {
 	if id == 0 {
 		return nil

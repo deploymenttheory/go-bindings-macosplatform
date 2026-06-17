@@ -17,11 +17,11 @@ type OctreeNode struct {
 // Unwrap returns the underlying [raw.GKOctreeNode].
 func (x *OctreeNode) Unwrap() *raw.GKOctreeNode { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *OctreeNode) ID() objc.ID { return x.inner.Ptr() }
 
-// OctreeNodeFromID adopts an existing toll-free-bridged object id as a OctreeNode (nil for 0).
+// OctreeNodeFromID adopts an existing object pointer as a OctreeNode (nil for 0).
 func OctreeNodeFromID(id objc.ID) *OctreeNode {
 	if id == 0 {
 		return nil

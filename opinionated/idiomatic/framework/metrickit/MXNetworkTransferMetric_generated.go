@@ -18,11 +18,11 @@ type NetworkTransferMetric struct {
 // Unwrap returns the underlying [raw.MXNetworkTransferMetric].
 func (x *NetworkTransferMetric) Unwrap() *raw.MXNetworkTransferMetric { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NetworkTransferMetric) ID() objc.ID { return x.inner.Ptr() }
 
-// NetworkTransferMetricFromID adopts an existing toll-free-bridged object id as a NetworkTransferMetric (nil for 0).
+// NetworkTransferMetricFromID adopts an existing object pointer as a NetworkTransferMetric (nil for 0).
 func NetworkTransferMetricFromID(id objc.ID) *NetworkTransferMetric {
 	if id == 0 {
 		return nil

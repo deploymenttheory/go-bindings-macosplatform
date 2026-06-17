@@ -18,11 +18,11 @@ type XPCListener struct {
 // Unwrap returns the underlying [raw.NSXPCListener].
 func (x *XPCListener) Unwrap() *raw.NSXPCListener { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *XPCListener) ID() objc.ID { return x.inner.Ptr() }
 
-// XPCListenerFromID adopts an existing toll-free-bridged object id as a XPCListener (nil for 0).
+// XPCListenerFromID adopts an existing object pointer as a XPCListener (nil for 0).
 func XPCListenerFromID(id objc.ID) *XPCListener {
 	if id == 0 {
 		return nil

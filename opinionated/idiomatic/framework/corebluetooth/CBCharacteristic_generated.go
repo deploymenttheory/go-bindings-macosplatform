@@ -19,11 +19,11 @@ type Characteristic struct {
 // Unwrap returns the underlying [raw.CBCharacteristic].
 func (x *Characteristic) Unwrap() *raw.CBCharacteristic { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Characteristic) ID() objc.ID { return x.inner.Ptr() }
 
-// CharacteristicFromID adopts an existing toll-free-bridged object id as a Characteristic (nil for 0).
+// CharacteristicFromID adopts an existing object pointer as a Characteristic (nil for 0).
 func CharacteristicFromID(id objc.ID) *Characteristic {
 	if id == 0 {
 		return nil

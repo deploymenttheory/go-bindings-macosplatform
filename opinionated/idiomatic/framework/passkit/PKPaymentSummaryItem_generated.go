@@ -19,11 +19,11 @@ type PaymentSummaryItem struct {
 // Unwrap returns the underlying [raw.PKPaymentSummaryItem].
 func (x *PaymentSummaryItem) Unwrap() *raw.PKPaymentSummaryItem { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PaymentSummaryItem) ID() objc.ID { return x.inner.Ptr() }
 
-// PaymentSummaryItemFromID adopts an existing toll-free-bridged object id as a PaymentSummaryItem (nil for 0).
+// PaymentSummaryItemFromID adopts an existing object pointer as a PaymentSummaryItem (nil for 0).
 func PaymentSummaryItemFromID(id objc.ID) *PaymentSummaryItem {
 	if id == 0 {
 		return nil

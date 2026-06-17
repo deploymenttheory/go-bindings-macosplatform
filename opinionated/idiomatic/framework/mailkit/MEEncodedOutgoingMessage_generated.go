@@ -18,11 +18,11 @@ type EncodedOutgoingMessage struct {
 // Unwrap returns the underlying [raw.MEEncodedOutgoingMessage].
 func (x *EncodedOutgoingMessage) Unwrap() *raw.MEEncodedOutgoingMessage { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *EncodedOutgoingMessage) ID() objc.ID { return x.inner.Ptr() }
 
-// EncodedOutgoingMessageFromID adopts an existing toll-free-bridged object id as a EncodedOutgoingMessage (nil for 0).
+// EncodedOutgoingMessageFromID adopts an existing object pointer as a EncodedOutgoingMessage (nil for 0).
 func EncodedOutgoingMessageFromID(id objc.ID) *EncodedOutgoingMessage {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type WhoseSpecifier struct {
 // Unwrap returns the underlying [raw.NSWhoseSpecifier].
 func (x *WhoseSpecifier) Unwrap() *raw.NSWhoseSpecifier { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *WhoseSpecifier) ID() objc.ID { return x.inner.Ptr() }
 
-// WhoseSpecifierFromID adopts an existing toll-free-bridged object id as a WhoseSpecifier (nil for 0).
+// WhoseSpecifierFromID adopts an existing object pointer as a WhoseSpecifier (nil for 0).
 func WhoseSpecifierFromID(id objc.ID) *WhoseSpecifier {
 	if id == 0 {
 		return nil

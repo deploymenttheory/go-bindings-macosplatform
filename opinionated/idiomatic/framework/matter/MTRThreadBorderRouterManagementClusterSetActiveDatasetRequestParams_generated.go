@@ -18,11 +18,11 @@ type MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams struct 
 // Unwrap returns the underlying [raw.MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams].
 func (x *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams) Unwrap() *raw.MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParamsFromID adopts an existing toll-free-bridged object id as a MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams (nil for 0).
+// MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParamsFromID adopts an existing object pointer as a MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams (nil for 0).
 func MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParamsFromID(id objc.ID) *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams {
 	if id == 0 {
 		return nil

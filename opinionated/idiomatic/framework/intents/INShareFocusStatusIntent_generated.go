@@ -17,11 +17,11 @@ type ShareFocusStatusIntent struct {
 // Unwrap returns the underlying [raw.INShareFocusStatusIntent].
 func (x *ShareFocusStatusIntent) Unwrap() *raw.INShareFocusStatusIntent { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ShareFocusStatusIntent) ID() objc.ID { return x.inner.Ptr() }
 
-// ShareFocusStatusIntentFromID adopts an existing toll-free-bridged object id as a ShareFocusStatusIntent (nil for 0).
+// ShareFocusStatusIntentFromID adopts an existing object pointer as a ShareFocusStatusIntent (nil for 0).
 func ShareFocusStatusIntentFromID(id objc.ID) *ShareFocusStatusIntent {
 	if id == 0 {
 		return nil

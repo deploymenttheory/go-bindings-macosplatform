@@ -20,11 +20,11 @@ type FetchRecordZonesOperation struct {
 // Unwrap returns the underlying [raw.CKFetchRecordZonesOperation].
 func (x *FetchRecordZonesOperation) Unwrap() *raw.CKFetchRecordZonesOperation { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *FetchRecordZonesOperation) ID() objc.ID { return x.inner.Ptr() }
 
-// FetchRecordZonesOperationFromID adopts an existing toll-free-bridged object id as a FetchRecordZonesOperation (nil for 0).
+// FetchRecordZonesOperationFromID adopts an existing object pointer as a FetchRecordZonesOperation (nil for 0).
 func FetchRecordZonesOperationFromID(id objc.ID) *FetchRecordZonesOperation {
 	if id == 0 {
 		return nil

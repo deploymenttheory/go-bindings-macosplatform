@@ -19,11 +19,11 @@ type HostCIControllerStateMachine struct {
 // Unwrap returns the underlying [raw.IOUSBHostCIControllerStateMachine].
 func (x *HostCIControllerStateMachine) Unwrap() *raw.IOUSBHostCIControllerStateMachine { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *HostCIControllerStateMachine) ID() objc.ID { return x.inner.Ptr() }
 
-// HostCIControllerStateMachineFromID adopts an existing toll-free-bridged object id as a HostCIControllerStateMachine (nil for 0).
+// HostCIControllerStateMachineFromID adopts an existing object pointer as a HostCIControllerStateMachine (nil for 0).
 func HostCIControllerStateMachineFromID(id objc.ID) *HostCIControllerStateMachine {
 	if id == 0 {
 		return nil

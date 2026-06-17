@@ -18,11 +18,11 @@ type Slideshow struct {
 // Unwrap returns the underlying [raw.IKSlideshow].
 func (x *Slideshow) Unwrap() *raw.IKSlideshow { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Slideshow) ID() objc.ID { return x.inner.Ptr() }
 
-// SlideshowFromID adopts an existing toll-free-bridged object id as a Slideshow (nil for 0).
+// SlideshowFromID adopts an existing object pointer as a Slideshow (nil for 0).
 func SlideshowFromID(id objc.ID) *Slideshow {
 	if id == 0 {
 		return nil

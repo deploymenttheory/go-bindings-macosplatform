@@ -18,11 +18,11 @@ type PhysicalInputElementCollection struct {
 // Unwrap returns the underlying [raw.GCPhysicalInputElementCollection].
 func (x *PhysicalInputElementCollection) Unwrap() *raw.GCPhysicalInputElementCollection[objc.ID, objc.ID] { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PhysicalInputElementCollection) ID() objc.ID { return x.inner.Ptr() }
 
-// PhysicalInputElementCollectionFromID adopts an existing toll-free-bridged object id as a PhysicalInputElementCollection (nil for 0).
+// PhysicalInputElementCollectionFromID adopts an existing object pointer as a PhysicalInputElementCollection (nil for 0).
 func PhysicalInputElementCollectionFromID(id objc.ID) *PhysicalInputElementCollection {
 	if id == 0 {
 		return nil

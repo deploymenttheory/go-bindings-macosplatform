@@ -17,11 +17,11 @@ type GatherLayer struct {
 // Unwrap returns the underlying [raw.MLCGatherLayer].
 func (x *GatherLayer) Unwrap() *raw.MLCGatherLayer { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *GatherLayer) ID() objc.ID { return x.inner.Ptr() }
 
-// GatherLayerFromID adopts an existing toll-free-bridged object id as a GatherLayer (nil for 0).
+// GatherLayerFromID adopts an existing object pointer as a GatherLayer (nil for 0).
 func GatherLayerFromID(id objc.ID) *GatherLayer {
 	if id == 0 {
 		return nil

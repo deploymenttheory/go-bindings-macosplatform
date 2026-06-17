@@ -21,11 +21,11 @@ type MTRBaseClusterAirQuality struct {
 // Unwrap returns the underlying [raw.MTRBaseClusterAirQuality].
 func (x *MTRBaseClusterAirQuality) Unwrap() *raw.MTRBaseClusterAirQuality { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRBaseClusterAirQuality) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRBaseClusterAirQualityFromID adopts an existing toll-free-bridged object id as a MTRBaseClusterAirQuality (nil for 0).
+// MTRBaseClusterAirQualityFromID adopts an existing object pointer as a MTRBaseClusterAirQuality (nil for 0).
 func MTRBaseClusterAirQualityFromID(id objc.ID) *MTRBaseClusterAirQuality {
 	if id == 0 {
 		return nil

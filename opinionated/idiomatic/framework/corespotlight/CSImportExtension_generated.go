@@ -18,11 +18,11 @@ type ImportExtension struct {
 // Unwrap returns the underlying [raw.CSImportExtension].
 func (x *ImportExtension) Unwrap() *raw.CSImportExtension { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ImportExtension) ID() objc.ID { return x.inner.Ptr() }
 
-// ImportExtensionFromID adopts an existing toll-free-bridged object id as a ImportExtension (nil for 0).
+// ImportExtensionFromID adopts an existing object pointer as a ImportExtension (nil for 0).
 func ImportExtensionFromID(id objc.ID) *ImportExtension {
 	if id == 0 {
 		return nil

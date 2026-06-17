@@ -18,11 +18,11 @@ type MTRPowerSourceClusterBatFaultChangeEvent struct {
 // Unwrap returns the underlying [raw.MTRPowerSourceClusterBatFaultChangeEvent].
 func (x *MTRPowerSourceClusterBatFaultChangeEvent) Unwrap() *raw.MTRPowerSourceClusterBatFaultChangeEvent { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRPowerSourceClusterBatFaultChangeEvent) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRPowerSourceClusterBatFaultChangeEventFromID adopts an existing toll-free-bridged object id as a MTRPowerSourceClusterBatFaultChangeEvent (nil for 0).
+// MTRPowerSourceClusterBatFaultChangeEventFromID adopts an existing object pointer as a MTRPowerSourceClusterBatFaultChangeEvent (nil for 0).
 func MTRPowerSourceClusterBatFaultChangeEventFromID(id objc.ID) *MTRPowerSourceClusterBatFaultChangeEvent {
 	if id == 0 {
 		return nil

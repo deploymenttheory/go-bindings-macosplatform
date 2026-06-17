@@ -17,11 +17,11 @@ type MTRMediaPlaybackClusterPlaybackPosition struct {
 // Unwrap returns the underlying [raw.MTRMediaPlaybackClusterPlaybackPosition].
 func (x *MTRMediaPlaybackClusterPlaybackPosition) Unwrap() *raw.MTRMediaPlaybackClusterPlaybackPosition { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRMediaPlaybackClusterPlaybackPosition) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRMediaPlaybackClusterPlaybackPositionFromID adopts an existing toll-free-bridged object id as a MTRMediaPlaybackClusterPlaybackPosition (nil for 0).
+// MTRMediaPlaybackClusterPlaybackPositionFromID adopts an existing object pointer as a MTRMediaPlaybackClusterPlaybackPosition (nil for 0).
 func MTRMediaPlaybackClusterPlaybackPositionFromID(id objc.ID) *MTRMediaPlaybackClusterPlaybackPosition {
 	if id == 0 {
 		return nil

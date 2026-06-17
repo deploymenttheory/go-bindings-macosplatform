@@ -18,11 +18,11 @@ type WKWebExtensionControllerConfiguration struct {
 // Unwrap returns the underlying [raw.WKWebExtensionControllerConfiguration].
 func (x *WKWebExtensionControllerConfiguration) Unwrap() *raw.WKWebExtensionControllerConfiguration { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *WKWebExtensionControllerConfiguration) ID() objc.ID { return x.inner.Ptr() }
 
-// WKWebExtensionControllerConfigurationFromID adopts an existing toll-free-bridged object id as a WKWebExtensionControllerConfiguration (nil for 0).
+// WKWebExtensionControllerConfigurationFromID adopts an existing object pointer as a WKWebExtensionControllerConfiguration (nil for 0).
 func WKWebExtensionControllerConfigurationFromID(id objc.ID) *WKWebExtensionControllerConfiguration {
 	if id == 0 {
 		return nil

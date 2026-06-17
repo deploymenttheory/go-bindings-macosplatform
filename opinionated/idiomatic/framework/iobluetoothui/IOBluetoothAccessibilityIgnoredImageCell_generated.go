@@ -17,11 +17,11 @@ type BluetoothAccessibilityIgnoredImageCell struct {
 // Unwrap returns the underlying [raw.IOBluetoothAccessibilityIgnoredImageCell].
 func (x *BluetoothAccessibilityIgnoredImageCell) Unwrap() *raw.IOBluetoothAccessibilityIgnoredImageCell { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *BluetoothAccessibilityIgnoredImageCell) ID() objc.ID { return x.inner.Ptr() }
 
-// BluetoothAccessibilityIgnoredImageCellFromID adopts an existing toll-free-bridged object id as a BluetoothAccessibilityIgnoredImageCell (nil for 0).
+// BluetoothAccessibilityIgnoredImageCellFromID adopts an existing object pointer as a BluetoothAccessibilityIgnoredImageCell (nil for 0).
 func BluetoothAccessibilityIgnoredImageCellFromID(id objc.ID) *BluetoothAccessibilityIgnoredImageCell {
 	if id == 0 {
 		return nil

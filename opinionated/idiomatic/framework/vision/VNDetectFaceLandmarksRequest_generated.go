@@ -17,11 +17,11 @@ type DetectFaceLandmarksRequest struct {
 // Unwrap returns the underlying [raw.VNDetectFaceLandmarksRequest].
 func (x *DetectFaceLandmarksRequest) Unwrap() *raw.VNDetectFaceLandmarksRequest { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DetectFaceLandmarksRequest) ID() objc.ID { return x.inner.Ptr() }
 
-// DetectFaceLandmarksRequestFromID adopts an existing toll-free-bridged object id as a DetectFaceLandmarksRequest (nil for 0).
+// DetectFaceLandmarksRequestFromID adopts an existing object pointer as a DetectFaceLandmarksRequest (nil for 0).
 func DetectFaceLandmarksRequestFromID(id objc.ID) *DetectFaceLandmarksRequest {
 	if id == 0 {
 		return nil

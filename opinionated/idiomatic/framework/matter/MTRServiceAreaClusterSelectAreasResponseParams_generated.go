@@ -20,11 +20,11 @@ type MTRServiceAreaClusterSelectAreasResponseParams struct {
 // Unwrap returns the underlying [raw.MTRServiceAreaClusterSelectAreasResponseParams].
 func (x *MTRServiceAreaClusterSelectAreasResponseParams) Unwrap() *raw.MTRServiceAreaClusterSelectAreasResponseParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRServiceAreaClusterSelectAreasResponseParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRServiceAreaClusterSelectAreasResponseParamsFromID adopts an existing toll-free-bridged object id as a MTRServiceAreaClusterSelectAreasResponseParams (nil for 0).
+// MTRServiceAreaClusterSelectAreasResponseParamsFromID adopts an existing object pointer as a MTRServiceAreaClusterSelectAreasResponseParams (nil for 0).
 func MTRServiceAreaClusterSelectAreasResponseParamsFromID(id objc.ID) *MTRServiceAreaClusterSelectAreasResponseParams {
 	if id == 0 {
 		return nil

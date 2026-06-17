@@ -18,11 +18,11 @@ type BrowserCell struct {
 // Unwrap returns the underlying [raw.NSBrowserCell].
 func (x *BrowserCell) Unwrap() *raw.NSBrowserCell { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *BrowserCell) ID() objc.ID { return x.inner.Ptr() }
 
-// BrowserCellFromID adopts an existing toll-free-bridged object id as a BrowserCell (nil for 0).
+// BrowserCellFromID adopts an existing object pointer as a BrowserCell (nil for 0).
 func BrowserCellFromID(id objc.ID) *BrowserCell {
 	if id == 0 {
 		return nil

@@ -19,11 +19,11 @@ type StoreProductViewController struct {
 // Unwrap returns the underlying [raw.SKStoreProductViewController].
 func (x *StoreProductViewController) Unwrap() *raw.SKStoreProductViewController { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *StoreProductViewController) ID() objc.ID { return x.inner.Ptr() }
 
-// StoreProductViewControllerFromID adopts an existing toll-free-bridged object id as a StoreProductViewController (nil for 0).
+// StoreProductViewControllerFromID adopts an existing object pointer as a StoreProductViewController (nil for 0).
 func StoreProductViewControllerFromID(id objc.ID) *StoreProductViewController {
 	if id == 0 {
 		return nil

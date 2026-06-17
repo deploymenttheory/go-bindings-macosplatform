@@ -19,11 +19,11 @@ type WebDataSource struct {
 // Unwrap returns the underlying [raw.WebDataSource].
 func (x *WebDataSource) Unwrap() *raw.WebDataSource { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *WebDataSource) ID() objc.ID { return x.inner.Ptr() }
 
-// WebDataSourceFromID adopts an existing toll-free-bridged object id as a WebDataSource (nil for 0).
+// WebDataSourceFromID adopts an existing object pointer as a WebDataSource (nil for 0).
 func WebDataSourceFromID(id objc.ID) *WebDataSource {
 	if id == 0 {
 		return nil

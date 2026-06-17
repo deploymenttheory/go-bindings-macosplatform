@@ -19,11 +19,11 @@ type CoordinatedPlaybackParticipant struct {
 // Unwrap returns the underlying [raw.AVCoordinatedPlaybackParticipant].
 func (x *CoordinatedPlaybackParticipant) Unwrap() *raw.AVCoordinatedPlaybackParticipant { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CoordinatedPlaybackParticipant) ID() objc.ID { return x.inner.Ptr() }
 
-// CoordinatedPlaybackParticipantFromID adopts an existing toll-free-bridged object id as a CoordinatedPlaybackParticipant (nil for 0).
+// CoordinatedPlaybackParticipantFromID adopts an existing object pointer as a CoordinatedPlaybackParticipant (nil for 0).
 func CoordinatedPlaybackParticipantFromID(id objc.ID) *CoordinatedPlaybackParticipant {
 	if id == 0 {
 		return nil

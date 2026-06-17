@@ -17,11 +17,11 @@ type DOMProgressEvent struct {
 // Unwrap returns the underlying [raw.DOMProgressEvent].
 func (x *DOMProgressEvent) Unwrap() *raw.DOMProgressEvent { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DOMProgressEvent) ID() objc.ID { return x.inner.Ptr() }
 
-// DOMProgressEventFromID adopts an existing toll-free-bridged object id as a DOMProgressEvent (nil for 0).
+// DOMProgressEventFromID adopts an existing object pointer as a DOMProgressEvent (nil for 0).
 func DOMProgressEventFromID(id objc.ID) *DOMProgressEvent {
 	if id == 0 {
 		return nil

@@ -10,2254 +10,2254 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// KCGImageMetadataNamespaceExif returns the CoreFoundation constant kCGImageMetadataNamespaceExif as a toll-free-bridged objc.ID.
+// KCGImageMetadataNamespaceExif returns the value of the CoreFoundation reference constant kCGImageMetadataNamespaceExif as an objc.ID.
 func KCGImageMetadataNamespaceExif() objc.ID { return purego.CFConstant(raw.KCGImageMetadataNamespaceExif()) }
 
-// KCGImageMetadataNamespaceExifAux returns the CoreFoundation constant kCGImageMetadataNamespaceExifAux as a toll-free-bridged objc.ID.
+// KCGImageMetadataNamespaceExifAux returns the value of the CoreFoundation reference constant kCGImageMetadataNamespaceExifAux as an objc.ID.
 func KCGImageMetadataNamespaceExifAux() objc.ID { return purego.CFConstant(raw.KCGImageMetadataNamespaceExifAux()) }
 
-// KCGImageMetadataNamespaceExifEX returns the CoreFoundation constant kCGImageMetadataNamespaceExifEX as a toll-free-bridged objc.ID.
+// KCGImageMetadataNamespaceExifEX returns the value of the CoreFoundation reference constant kCGImageMetadataNamespaceExifEX as an objc.ID.
 func KCGImageMetadataNamespaceExifEX() objc.ID { return purego.CFConstant(raw.KCGImageMetadataNamespaceExifEX()) }
 
-// KCGImageMetadataNamespaceDublinCore returns the CoreFoundation constant kCGImageMetadataNamespaceDublinCore as a toll-free-bridged objc.ID.
+// KCGImageMetadataNamespaceDublinCore returns the value of the CoreFoundation reference constant kCGImageMetadataNamespaceDublinCore as an objc.ID.
 func KCGImageMetadataNamespaceDublinCore() objc.ID { return purego.CFConstant(raw.KCGImageMetadataNamespaceDublinCore()) }
 
-// KCGImageMetadataNamespaceIPTCCore returns the CoreFoundation constant kCGImageMetadataNamespaceIPTCCore as a toll-free-bridged objc.ID.
+// KCGImageMetadataNamespaceIPTCCore returns the value of the CoreFoundation reference constant kCGImageMetadataNamespaceIPTCCore as an objc.ID.
 func KCGImageMetadataNamespaceIPTCCore() objc.ID { return purego.CFConstant(raw.KCGImageMetadataNamespaceIPTCCore()) }
 
-// KCGImageMetadataNamespaceIPTCExtension returns the CoreFoundation constant kCGImageMetadataNamespaceIPTCExtension as a toll-free-bridged objc.ID.
+// KCGImageMetadataNamespaceIPTCExtension returns the value of the CoreFoundation reference constant kCGImageMetadataNamespaceIPTCExtension as an objc.ID.
 func KCGImageMetadataNamespaceIPTCExtension() objc.ID { return purego.CFConstant(raw.KCGImageMetadataNamespaceIPTCExtension()) }
 
-// KCGImageMetadataNamespacePhotoshop returns the CoreFoundation constant kCGImageMetadataNamespacePhotoshop as a toll-free-bridged objc.ID.
+// KCGImageMetadataNamespacePhotoshop returns the value of the CoreFoundation reference constant kCGImageMetadataNamespacePhotoshop as an objc.ID.
 func KCGImageMetadataNamespacePhotoshop() objc.ID { return purego.CFConstant(raw.KCGImageMetadataNamespacePhotoshop()) }
 
-// KCGImageMetadataNamespaceTIFF returns the CoreFoundation constant kCGImageMetadataNamespaceTIFF as a toll-free-bridged objc.ID.
+// KCGImageMetadataNamespaceTIFF returns the value of the CoreFoundation reference constant kCGImageMetadataNamespaceTIFF as an objc.ID.
 func KCGImageMetadataNamespaceTIFF() objc.ID { return purego.CFConstant(raw.KCGImageMetadataNamespaceTIFF()) }
 
-// KCGImageMetadataNamespaceXMPBasic returns the CoreFoundation constant kCGImageMetadataNamespaceXMPBasic as a toll-free-bridged objc.ID.
+// KCGImageMetadataNamespaceXMPBasic returns the value of the CoreFoundation reference constant kCGImageMetadataNamespaceXMPBasic as an objc.ID.
 func KCGImageMetadataNamespaceXMPBasic() objc.ID { return purego.CFConstant(raw.KCGImageMetadataNamespaceXMPBasic()) }
 
-// KCGImageMetadataNamespaceXMPRights returns the CoreFoundation constant kCGImageMetadataNamespaceXMPRights as a toll-free-bridged objc.ID.
+// KCGImageMetadataNamespaceXMPRights returns the value of the CoreFoundation reference constant kCGImageMetadataNamespaceXMPRights as an objc.ID.
 func KCGImageMetadataNamespaceXMPRights() objc.ID { return purego.CFConstant(raw.KCGImageMetadataNamespaceXMPRights()) }
 
-// KCGImageMetadataPrefixExif returns the CoreFoundation constant kCGImageMetadataPrefixExif as a toll-free-bridged objc.ID.
+// KCGImageMetadataPrefixExif returns the value of the CoreFoundation reference constant kCGImageMetadataPrefixExif as an objc.ID.
 func KCGImageMetadataPrefixExif() objc.ID { return purego.CFConstant(raw.KCGImageMetadataPrefixExif()) }
 
-// KCGImageMetadataPrefixExifAux returns the CoreFoundation constant kCGImageMetadataPrefixExifAux as a toll-free-bridged objc.ID.
+// KCGImageMetadataPrefixExifAux returns the value of the CoreFoundation reference constant kCGImageMetadataPrefixExifAux as an objc.ID.
 func KCGImageMetadataPrefixExifAux() objc.ID { return purego.CFConstant(raw.KCGImageMetadataPrefixExifAux()) }
 
-// KCGImageMetadataPrefixExifEX returns the CoreFoundation constant kCGImageMetadataPrefixExifEX as a toll-free-bridged objc.ID.
+// KCGImageMetadataPrefixExifEX returns the value of the CoreFoundation reference constant kCGImageMetadataPrefixExifEX as an objc.ID.
 func KCGImageMetadataPrefixExifEX() objc.ID { return purego.CFConstant(raw.KCGImageMetadataPrefixExifEX()) }
 
-// KCGImageMetadataPrefixDublinCore returns the CoreFoundation constant kCGImageMetadataPrefixDublinCore as a toll-free-bridged objc.ID.
+// KCGImageMetadataPrefixDublinCore returns the value of the CoreFoundation reference constant kCGImageMetadataPrefixDublinCore as an objc.ID.
 func KCGImageMetadataPrefixDublinCore() objc.ID { return purego.CFConstant(raw.KCGImageMetadataPrefixDublinCore()) }
 
-// KCGImageMetadataPrefixIPTCCore returns the CoreFoundation constant kCGImageMetadataPrefixIPTCCore as a toll-free-bridged objc.ID.
+// KCGImageMetadataPrefixIPTCCore returns the value of the CoreFoundation reference constant kCGImageMetadataPrefixIPTCCore as an objc.ID.
 func KCGImageMetadataPrefixIPTCCore() objc.ID { return purego.CFConstant(raw.KCGImageMetadataPrefixIPTCCore()) }
 
-// KCGImageMetadataPrefixIPTCExtension returns the CoreFoundation constant kCGImageMetadataPrefixIPTCExtension as a toll-free-bridged objc.ID.
+// KCGImageMetadataPrefixIPTCExtension returns the value of the CoreFoundation reference constant kCGImageMetadataPrefixIPTCExtension as an objc.ID.
 func KCGImageMetadataPrefixIPTCExtension() objc.ID { return purego.CFConstant(raw.KCGImageMetadataPrefixIPTCExtension()) }
 
-// KCGImageMetadataPrefixPhotoshop returns the CoreFoundation constant kCGImageMetadataPrefixPhotoshop as a toll-free-bridged objc.ID.
+// KCGImageMetadataPrefixPhotoshop returns the value of the CoreFoundation reference constant kCGImageMetadataPrefixPhotoshop as an objc.ID.
 func KCGImageMetadataPrefixPhotoshop() objc.ID { return purego.CFConstant(raw.KCGImageMetadataPrefixPhotoshop()) }
 
-// KCGImageMetadataPrefixTIFF returns the CoreFoundation constant kCGImageMetadataPrefixTIFF as a toll-free-bridged objc.ID.
+// KCGImageMetadataPrefixTIFF returns the value of the CoreFoundation reference constant kCGImageMetadataPrefixTIFF as an objc.ID.
 func KCGImageMetadataPrefixTIFF() objc.ID { return purego.CFConstant(raw.KCGImageMetadataPrefixTIFF()) }
 
-// KCGImageMetadataPrefixXMPBasic returns the CoreFoundation constant kCGImageMetadataPrefixXMPBasic as a toll-free-bridged objc.ID.
+// KCGImageMetadataPrefixXMPBasic returns the value of the CoreFoundation reference constant kCGImageMetadataPrefixXMPBasic as an objc.ID.
 func KCGImageMetadataPrefixXMPBasic() objc.ID { return purego.CFConstant(raw.KCGImageMetadataPrefixXMPBasic()) }
 
-// KCGImageMetadataPrefixXMPRights returns the CoreFoundation constant kCGImageMetadataPrefixXMPRights as a toll-free-bridged objc.ID.
+// KCGImageMetadataPrefixXMPRights returns the value of the CoreFoundation reference constant kCGImageMetadataPrefixXMPRights as an objc.ID.
 func KCGImageMetadataPrefixXMPRights() objc.ID { return purego.CFConstant(raw.KCGImageMetadataPrefixXMPRights()) }
 
-// KCGImageMetadataEnumerateRecursively returns the CoreFoundation constant kCGImageMetadataEnumerateRecursively as a toll-free-bridged objc.ID.
+// KCGImageMetadataEnumerateRecursively returns the value of the CoreFoundation reference constant kCGImageMetadataEnumerateRecursively as an objc.ID.
 func KCGImageMetadataEnumerateRecursively() objc.ID { return purego.CFConstant(raw.KCGImageMetadataEnumerateRecursively()) }
 
 // @constant kCFErrorDomainCGImageMetadata @discussion Error domain for all errors originating in ImageIO for CGImageMetadata APIs. Error codes may be interpreted using the list below.
-// KCFErrorDomainCGImageMetadata returns the CoreFoundation constant kCFErrorDomainCGImageMetadata as a toll-free-bridged objc.ID.
+// KCFErrorDomainCGImageMetadata returns the value of the CoreFoundation reference constant kCFErrorDomainCGImageMetadata as an objc.ID.
 func KCFErrorDomainCGImageMetadata() objc.ID { return purego.CFConstant(raw.KCFErrorDomainCGImageMetadata()) }
 
-// KCGImageSourceTypeIdentifierHint returns the CoreFoundation constant kCGImageSourceTypeIdentifierHint as a toll-free-bridged objc.ID.
+// KCGImageSourceTypeIdentifierHint returns the value of the CoreFoundation reference constant kCGImageSourceTypeIdentifierHint as an objc.ID.
 func KCGImageSourceTypeIdentifierHint() objc.ID { return purego.CFConstant(raw.KCGImageSourceTypeIdentifierHint()) }
 
-// KCGImageSourceShouldCache returns the CoreFoundation constant kCGImageSourceShouldCache as a toll-free-bridged objc.ID.
+// KCGImageSourceShouldCache returns the value of the CoreFoundation reference constant kCGImageSourceShouldCache as an objc.ID.
 func KCGImageSourceShouldCache() objc.ID { return purego.CFConstant(raw.KCGImageSourceShouldCache()) }
 
-// KCGImageSourceShouldCacheImmediately returns the CoreFoundation constant kCGImageSourceShouldCacheImmediately as a toll-free-bridged objc.ID.
+// KCGImageSourceShouldCacheImmediately returns the value of the CoreFoundation reference constant kCGImageSourceShouldCacheImmediately as an objc.ID.
 func KCGImageSourceShouldCacheImmediately() objc.ID { return purego.CFConstant(raw.KCGImageSourceShouldCacheImmediately()) }
 
-// KCGImageSourceShouldAllowFloat returns the CoreFoundation constant kCGImageSourceShouldAllowFloat as a toll-free-bridged objc.ID.
+// KCGImageSourceShouldAllowFloat returns the value of the CoreFoundation reference constant kCGImageSourceShouldAllowFloat as an objc.ID.
 func KCGImageSourceShouldAllowFloat() objc.ID { return purego.CFConstant(raw.KCGImageSourceShouldAllowFloat()) }
 
-// KCGImageSourceCreateThumbnailFromImageIfAbsent returns the CoreFoundation constant kCGImageSourceCreateThumbnailFromImageIfAbsent as a toll-free-bridged objc.ID.
+// KCGImageSourceCreateThumbnailFromImageIfAbsent returns the value of the CoreFoundation reference constant kCGImageSourceCreateThumbnailFromImageIfAbsent as an objc.ID.
 func KCGImageSourceCreateThumbnailFromImageIfAbsent() objc.ID { return purego.CFConstant(raw.KCGImageSourceCreateThumbnailFromImageIfAbsent()) }
 
-// KCGImageSourceCreateThumbnailFromImageAlways returns the CoreFoundation constant kCGImageSourceCreateThumbnailFromImageAlways as a toll-free-bridged objc.ID.
+// KCGImageSourceCreateThumbnailFromImageAlways returns the value of the CoreFoundation reference constant kCGImageSourceCreateThumbnailFromImageAlways as an objc.ID.
 func KCGImageSourceCreateThumbnailFromImageAlways() objc.ID { return purego.CFConstant(raw.KCGImageSourceCreateThumbnailFromImageAlways()) }
 
-// KCGImageSourceThumbnailMaxPixelSize returns the CoreFoundation constant kCGImageSourceThumbnailMaxPixelSize as a toll-free-bridged objc.ID.
+// KCGImageSourceThumbnailMaxPixelSize returns the value of the CoreFoundation reference constant kCGImageSourceThumbnailMaxPixelSize as an objc.ID.
 func KCGImageSourceThumbnailMaxPixelSize() objc.ID { return purego.CFConstant(raw.KCGImageSourceThumbnailMaxPixelSize()) }
 
-// KCGImageSourceCreateThumbnailWithTransform returns the CoreFoundation constant kCGImageSourceCreateThumbnailWithTransform as a toll-free-bridged objc.ID.
+// KCGImageSourceCreateThumbnailWithTransform returns the value of the CoreFoundation reference constant kCGImageSourceCreateThumbnailWithTransform as an objc.ID.
 func KCGImageSourceCreateThumbnailWithTransform() objc.ID { return purego.CFConstant(raw.KCGImageSourceCreateThumbnailWithTransform()) }
 
-// KCGImageSourceSubsampleFactor returns the CoreFoundation constant kCGImageSourceSubsampleFactor as a toll-free-bridged objc.ID.
+// KCGImageSourceSubsampleFactor returns the value of the CoreFoundation reference constant kCGImageSourceSubsampleFactor as an objc.ID.
 func KCGImageSourceSubsampleFactor() objc.ID { return purego.CFConstant(raw.KCGImageSourceSubsampleFactor()) }
 
-// KCGImageSourceDecodeRequest returns the CoreFoundation constant kCGImageSourceDecodeRequest as a toll-free-bridged objc.ID.
+// KCGImageSourceDecodeRequest returns the value of the CoreFoundation reference constant kCGImageSourceDecodeRequest as an objc.ID.
 func KCGImageSourceDecodeRequest() objc.ID { return purego.CFConstant(raw.KCGImageSourceDecodeRequest()) }
 
-// KCGImageSourceDecodeToHDR returns the CoreFoundation constant kCGImageSourceDecodeToHDR as a toll-free-bridged objc.ID.
+// KCGImageSourceDecodeToHDR returns the value of the CoreFoundation reference constant kCGImageSourceDecodeToHDR as an objc.ID.
 func KCGImageSourceDecodeToHDR() objc.ID { return purego.CFConstant(raw.KCGImageSourceDecodeToHDR()) }
 
-// KCGImageSourceDecodeToSDR returns the CoreFoundation constant kCGImageSourceDecodeToSDR as a toll-free-bridged objc.ID.
+// KCGImageSourceDecodeToSDR returns the value of the CoreFoundation reference constant kCGImageSourceDecodeToSDR as an objc.ID.
 func KCGImageSourceDecodeToSDR() objc.ID { return purego.CFConstant(raw.KCGImageSourceDecodeToSDR()) }
 
-// KCGImageSourceGenerateImageSpecificLumaScaling returns the CoreFoundation constant kCGImageSourceGenerateImageSpecificLumaScaling as a toll-free-bridged objc.ID.
+// KCGImageSourceGenerateImageSpecificLumaScaling returns the value of the CoreFoundation reference constant kCGImageSourceGenerateImageSpecificLumaScaling as an objc.ID.
 func KCGImageSourceGenerateImageSpecificLumaScaling() objc.ID { return purego.CFConstant(raw.KCGImageSourceGenerateImageSpecificLumaScaling()) }
 
-// KCGImageSourceDecodeRequestOptions returns the CoreFoundation constant kCGImageSourceDecodeRequestOptions as a toll-free-bridged objc.ID.
+// KCGImageSourceDecodeRequestOptions returns the value of the CoreFoundation reference constant kCGImageSourceDecodeRequestOptions as an objc.ID.
 func KCGImageSourceDecodeRequestOptions() objc.ID { return purego.CFConstant(raw.KCGImageSourceDecodeRequestOptions()) }
 
-// KCGComputeHDRStats returns the CoreFoundation constant kCGComputeHDRStats as a toll-free-bridged objc.ID.
+// KCGComputeHDRStats returns the value of the CoreFoundation reference constant kCGComputeHDRStats as an objc.ID.
 func KCGComputeHDRStats() objc.ID { return purego.CFConstant(raw.KCGComputeHDRStats()) }
 
-// KCGImageDestinationLossyCompressionQuality returns the CoreFoundation constant kCGImageDestinationLossyCompressionQuality as a toll-free-bridged objc.ID.
+// KCGImageDestinationLossyCompressionQuality returns the value of the CoreFoundation reference constant kCGImageDestinationLossyCompressionQuality as an objc.ID.
 func KCGImageDestinationLossyCompressionQuality() objc.ID { return purego.CFConstant(raw.KCGImageDestinationLossyCompressionQuality()) }
 
-// KCGImageDestinationBackgroundColor returns the CoreFoundation constant kCGImageDestinationBackgroundColor as a toll-free-bridged objc.ID.
+// KCGImageDestinationBackgroundColor returns the value of the CoreFoundation reference constant kCGImageDestinationBackgroundColor as an objc.ID.
 func KCGImageDestinationBackgroundColor() objc.ID { return purego.CFConstant(raw.KCGImageDestinationBackgroundColor()) }
 
-// KCGImageDestinationImageMaxPixelSize returns the CoreFoundation constant kCGImageDestinationImageMaxPixelSize as a toll-free-bridged objc.ID.
+// KCGImageDestinationImageMaxPixelSize returns the value of the CoreFoundation reference constant kCGImageDestinationImageMaxPixelSize as an objc.ID.
 func KCGImageDestinationImageMaxPixelSize() objc.ID { return purego.CFConstant(raw.KCGImageDestinationImageMaxPixelSize()) }
 
-// KCGImageDestinationEmbedThumbnail returns the CoreFoundation constant kCGImageDestinationEmbedThumbnail as a toll-free-bridged objc.ID.
+// KCGImageDestinationEmbedThumbnail returns the value of the CoreFoundation reference constant kCGImageDestinationEmbedThumbnail as an objc.ID.
 func KCGImageDestinationEmbedThumbnail() objc.ID { return purego.CFConstant(raw.KCGImageDestinationEmbedThumbnail()) }
 
-// KCGImageDestinationOptimizeColorForSharing returns the CoreFoundation constant kCGImageDestinationOptimizeColorForSharing as a toll-free-bridged objc.ID.
+// KCGImageDestinationOptimizeColorForSharing returns the value of the CoreFoundation reference constant kCGImageDestinationOptimizeColorForSharing as an objc.ID.
 func KCGImageDestinationOptimizeColorForSharing() objc.ID { return purego.CFConstant(raw.KCGImageDestinationOptimizeColorForSharing()) }
 
-// KCGImageDestinationPreserveGainMap returns the CoreFoundation constant kCGImageDestinationPreserveGainMap as a toll-free-bridged objc.ID.
+// KCGImageDestinationPreserveGainMap returns the value of the CoreFoundation reference constant kCGImageDestinationPreserveGainMap as an objc.ID.
 func KCGImageDestinationPreserveGainMap() objc.ID { return purego.CFConstant(raw.KCGImageDestinationPreserveGainMap()) }
 
-// KCGImageDestinationMetadata returns the CoreFoundation constant kCGImageDestinationMetadata as a toll-free-bridged objc.ID.
+// KCGImageDestinationMetadata returns the value of the CoreFoundation reference constant kCGImageDestinationMetadata as an objc.ID.
 func KCGImageDestinationMetadata() objc.ID { return purego.CFConstant(raw.KCGImageDestinationMetadata()) }
 
-// KCGImageDestinationMergeMetadata returns the CoreFoundation constant kCGImageDestinationMergeMetadata as a toll-free-bridged objc.ID.
+// KCGImageDestinationMergeMetadata returns the value of the CoreFoundation reference constant kCGImageDestinationMergeMetadata as an objc.ID.
 func KCGImageDestinationMergeMetadata() objc.ID { return purego.CFConstant(raw.KCGImageDestinationMergeMetadata()) }
 
-// KCGImageMetadataShouldExcludeXMP returns the CoreFoundation constant kCGImageMetadataShouldExcludeXMP as a toll-free-bridged objc.ID.
+// KCGImageMetadataShouldExcludeXMP returns the value of the CoreFoundation reference constant kCGImageMetadataShouldExcludeXMP as an objc.ID.
 func KCGImageMetadataShouldExcludeXMP() objc.ID { return purego.CFConstant(raw.KCGImageMetadataShouldExcludeXMP()) }
 
-// KCGImageMetadataShouldExcludeGPS returns the CoreFoundation constant kCGImageMetadataShouldExcludeGPS as a toll-free-bridged objc.ID.
+// KCGImageMetadataShouldExcludeGPS returns the value of the CoreFoundation reference constant kCGImageMetadataShouldExcludeGPS as an objc.ID.
 func KCGImageMetadataShouldExcludeGPS() objc.ID { return purego.CFConstant(raw.KCGImageMetadataShouldExcludeGPS()) }
 
-// KCGImageDestinationDateTime returns the CoreFoundation constant kCGImageDestinationDateTime as a toll-free-bridged objc.ID.
+// KCGImageDestinationDateTime returns the value of the CoreFoundation reference constant kCGImageDestinationDateTime as an objc.ID.
 func KCGImageDestinationDateTime() objc.ID { return purego.CFConstant(raw.KCGImageDestinationDateTime()) }
 
-// KCGImageDestinationOrientation returns the CoreFoundation constant kCGImageDestinationOrientation as a toll-free-bridged objc.ID.
+// KCGImageDestinationOrientation returns the value of the CoreFoundation reference constant kCGImageDestinationOrientation as an objc.ID.
 func KCGImageDestinationOrientation() objc.ID { return purego.CFConstant(raw.KCGImageDestinationOrientation()) }
 
-// KCGImagePropertyEncoder returns the CoreFoundation constant kCGImagePropertyEncoder as a toll-free-bridged objc.ID.
+// KCGImagePropertyEncoder returns the value of the CoreFoundation reference constant kCGImagePropertyEncoder as an objc.ID.
 func KCGImagePropertyEncoder() objc.ID { return purego.CFConstant(raw.KCGImagePropertyEncoder()) }
 
-// KCGImagePropertyASTCEncoder returns the CoreFoundation constant kCGImagePropertyASTCEncoder as a toll-free-bridged objc.ID.
+// KCGImagePropertyASTCEncoder returns the value of the CoreFoundation reference constant kCGImagePropertyASTCEncoder as an objc.ID.
 func KCGImagePropertyASTCEncoder() objc.ID { return purego.CFConstant(raw.KCGImagePropertyASTCEncoder()) }
 
-// KCGImagePropertyPVREncoder returns the CoreFoundation constant kCGImagePropertyPVREncoder as a toll-free-bridged objc.ID.
+// KCGImagePropertyPVREncoder returns the value of the CoreFoundation reference constant kCGImagePropertyPVREncoder as an objc.ID.
 func KCGImagePropertyPVREncoder() objc.ID { return purego.CFConstant(raw.KCGImagePropertyPVREncoder()) }
 
-// KCGImagePropertyBCEncoder returns the CoreFoundation constant kCGImagePropertyBCEncoder as a toll-free-bridged objc.ID.
+// KCGImagePropertyBCEncoder returns the value of the CoreFoundation reference constant kCGImagePropertyBCEncoder as an objc.ID.
 func KCGImagePropertyBCEncoder() objc.ID { return purego.CFConstant(raw.KCGImagePropertyBCEncoder()) }
 
-// KCGImagePropertyBCFormat returns the CoreFoundation constant kCGImagePropertyBCFormat as a toll-free-bridged objc.ID.
+// KCGImagePropertyBCFormat returns the value of the CoreFoundation reference constant kCGImagePropertyBCFormat as an objc.ID.
 func KCGImagePropertyBCFormat() objc.ID { return purego.CFConstant(raw.KCGImagePropertyBCFormat()) }
 
-// KCGImagePropertyASTCBlockSize returns the CoreFoundation constant kCGImagePropertyASTCBlockSize as a toll-free-bridged objc.ID.
+// KCGImagePropertyASTCBlockSize returns the value of the CoreFoundation reference constant kCGImagePropertyASTCBlockSize as an objc.ID.
 func KCGImagePropertyASTCBlockSize() objc.ID { return purego.CFConstant(raw.KCGImagePropertyASTCBlockSize()) }
 
-// KCGImagePropertyASTCBlockSize4x4 returns the CoreFoundation constant kCGImagePropertyASTCBlockSize4x4 as a toll-free-bridged objc.ID.
+// KCGImagePropertyASTCBlockSize4x4 returns the value of the CoreFoundation reference constant kCGImagePropertyASTCBlockSize4x4 as an objc.ID.
 func KCGImagePropertyASTCBlockSize4x4() objc.ID { return purego.CFConstant(raw.KCGImagePropertyASTCBlockSize4x4()) }
 
-// KCGImagePropertyASTCBlockSize8x8 returns the CoreFoundation constant kCGImagePropertyASTCBlockSize8x8 as a toll-free-bridged objc.ID.
+// KCGImagePropertyASTCBlockSize8x8 returns the value of the CoreFoundation reference constant kCGImagePropertyASTCBlockSize8x8 as an objc.ID.
 func KCGImagePropertyASTCBlockSize8x8() objc.ID { return purego.CFConstant(raw.KCGImagePropertyASTCBlockSize8x8()) }
 
-// KCGImageDestinationEncodeRequest returns the CoreFoundation constant kCGImageDestinationEncodeRequest as a toll-free-bridged objc.ID.
+// KCGImageDestinationEncodeRequest returns the value of the CoreFoundation reference constant kCGImageDestinationEncodeRequest as an objc.ID.
 func KCGImageDestinationEncodeRequest() objc.ID { return purego.CFConstant(raw.KCGImageDestinationEncodeRequest()) }
 
-// KCGImageDestinationEncodeToSDR returns the CoreFoundation constant kCGImageDestinationEncodeToSDR as a toll-free-bridged objc.ID.
+// KCGImageDestinationEncodeToSDR returns the value of the CoreFoundation reference constant kCGImageDestinationEncodeToSDR as an objc.ID.
 func KCGImageDestinationEncodeToSDR() objc.ID { return purego.CFConstant(raw.KCGImageDestinationEncodeToSDR()) }
 
-// KCGImageDestinationEncodeToISOHDR returns the CoreFoundation constant kCGImageDestinationEncodeToISOHDR as a toll-free-bridged objc.ID.
+// KCGImageDestinationEncodeToISOHDR returns the value of the CoreFoundation reference constant kCGImageDestinationEncodeToISOHDR as an objc.ID.
 func KCGImageDestinationEncodeToISOHDR() objc.ID { return purego.CFConstant(raw.KCGImageDestinationEncodeToISOHDR()) }
 
-// KCGImageDestinationEncodeToISOGainmap returns the CoreFoundation constant kCGImageDestinationEncodeToISOGainmap as a toll-free-bridged objc.ID.
+// KCGImageDestinationEncodeToISOGainmap returns the value of the CoreFoundation reference constant kCGImageDestinationEncodeToISOGainmap as an objc.ID.
 func KCGImageDestinationEncodeToISOGainmap() objc.ID { return purego.CFConstant(raw.KCGImageDestinationEncodeToISOGainmap()) }
 
-// KCGImageDestinationEncodeRequestOptions returns the CoreFoundation constant kCGImageDestinationEncodeRequestOptions as a toll-free-bridged objc.ID.
+// KCGImageDestinationEncodeRequestOptions returns the value of the CoreFoundation reference constant kCGImageDestinationEncodeRequestOptions as an objc.ID.
 func KCGImageDestinationEncodeRequestOptions() objc.ID { return purego.CFConstant(raw.KCGImageDestinationEncodeRequestOptions()) }
 
-// KCGImageDestinationEncodeBaseIsSDR returns the CoreFoundation constant kCGImageDestinationEncodeBaseIsSDR as a toll-free-bridged objc.ID.
+// KCGImageDestinationEncodeBaseIsSDR returns the value of the CoreFoundation reference constant kCGImageDestinationEncodeBaseIsSDR as an objc.ID.
 func KCGImageDestinationEncodeBaseIsSDR() objc.ID { return purego.CFConstant(raw.KCGImageDestinationEncodeBaseIsSDR()) }
 
-// KCGImageDestinationEncodeTonemapMode returns the CoreFoundation constant kCGImageDestinationEncodeTonemapMode as a toll-free-bridged objc.ID.
+// KCGImageDestinationEncodeTonemapMode returns the value of the CoreFoundation reference constant kCGImageDestinationEncodeTonemapMode as an objc.ID.
 func KCGImageDestinationEncodeTonemapMode() objc.ID { return purego.CFConstant(raw.KCGImageDestinationEncodeTonemapMode()) }
 
-// KCGImageDestinationEncodeIsBaseImage returns the CoreFoundation constant kCGImageDestinationEncodeIsBaseImage as a toll-free-bridged objc.ID.
+// KCGImageDestinationEncodeIsBaseImage returns the value of the CoreFoundation reference constant kCGImageDestinationEncodeIsBaseImage as an objc.ID.
 func KCGImageDestinationEncodeIsBaseImage() objc.ID { return purego.CFConstant(raw.KCGImageDestinationEncodeIsBaseImage()) }
 
-// KCGImageDestinationEncodeBaseColorSpace returns the CoreFoundation constant kCGImageDestinationEncodeBaseColorSpace as a toll-free-bridged objc.ID.
+// KCGImageDestinationEncodeBaseColorSpace returns the value of the CoreFoundation reference constant kCGImageDestinationEncodeBaseColorSpace as an objc.ID.
 func KCGImageDestinationEncodeBaseColorSpace() objc.ID { return purego.CFConstant(raw.KCGImageDestinationEncodeBaseColorSpace()) }
 
-// KCGImageDestinationEncodeBasePixelFormatRequest returns the CoreFoundation constant kCGImageDestinationEncodeBasePixelFormatRequest as a toll-free-bridged objc.ID.
+// KCGImageDestinationEncodeBasePixelFormatRequest returns the value of the CoreFoundation reference constant kCGImageDestinationEncodeBasePixelFormatRequest as an objc.ID.
 func KCGImageDestinationEncodeBasePixelFormatRequest() objc.ID { return purego.CFConstant(raw.KCGImageDestinationEncodeBasePixelFormatRequest()) }
 
-// KCGImageDestinationEncodeGenerateGainMapWithBaseImage returns the CoreFoundation constant kCGImageDestinationEncodeGenerateGainMapWithBaseImage as a toll-free-bridged objc.ID.
+// KCGImageDestinationEncodeGenerateGainMapWithBaseImage returns the value of the CoreFoundation reference constant kCGImageDestinationEncodeGenerateGainMapWithBaseImage as an objc.ID.
 func KCGImageDestinationEncodeGenerateGainMapWithBaseImage() objc.ID { return purego.CFConstant(raw.KCGImageDestinationEncodeGenerateGainMapWithBaseImage()) }
 
-// KCGImageDestinationEncodeGainMapPixelFormatRequest returns the CoreFoundation constant kCGImageDestinationEncodeGainMapPixelFormatRequest as a toll-free-bridged objc.ID.
+// KCGImageDestinationEncodeGainMapPixelFormatRequest returns the value of the CoreFoundation reference constant kCGImageDestinationEncodeGainMapPixelFormatRequest as an objc.ID.
 func KCGImageDestinationEncodeGainMapPixelFormatRequest() objc.ID { return purego.CFConstant(raw.KCGImageDestinationEncodeGainMapPixelFormatRequest()) }
 
-// KCGImageDestinationEncodeGainMapSubsampleFactor returns the CoreFoundation constant kCGImageDestinationEncodeGainMapSubsampleFactor as a toll-free-bridged objc.ID.
+// KCGImageDestinationEncodeGainMapSubsampleFactor returns the value of the CoreFoundation reference constant kCGImageDestinationEncodeGainMapSubsampleFactor as an objc.ID.
 func KCGImageDestinationEncodeGainMapSubsampleFactor() objc.ID { return purego.CFConstant(raw.KCGImageDestinationEncodeGainMapSubsampleFactor()) }
 
-// KCGImageDestinationEncodeAlternateColorSpace returns the CoreFoundation constant kCGImageDestinationEncodeAlternateColorSpace as a toll-free-bridged objc.ID.
+// KCGImageDestinationEncodeAlternateColorSpace returns the value of the CoreFoundation reference constant kCGImageDestinationEncodeAlternateColorSpace as an objc.ID.
 func KCGImageDestinationEncodeAlternateColorSpace() objc.ID { return purego.CFConstant(raw.KCGImageDestinationEncodeAlternateColorSpace()) }
 
-// KCGImagePropertyTIFFDictionary returns the CoreFoundation constant kCGImagePropertyTIFFDictionary as a toll-free-bridged objc.ID.
+// KCGImagePropertyTIFFDictionary returns the value of the CoreFoundation reference constant kCGImagePropertyTIFFDictionary as an objc.ID.
 func KCGImagePropertyTIFFDictionary() objc.ID { return purego.CFConstant(raw.KCGImagePropertyTIFFDictionary()) }
 
-// KCGImagePropertyGIFDictionary returns the CoreFoundation constant kCGImagePropertyGIFDictionary as a toll-free-bridged objc.ID.
+// KCGImagePropertyGIFDictionary returns the value of the CoreFoundation reference constant kCGImagePropertyGIFDictionary as an objc.ID.
 func KCGImagePropertyGIFDictionary() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGIFDictionary()) }
 
-// KCGImagePropertyJFIFDictionary returns the CoreFoundation constant kCGImagePropertyJFIFDictionary as a toll-free-bridged objc.ID.
+// KCGImagePropertyJFIFDictionary returns the value of the CoreFoundation reference constant kCGImagePropertyJFIFDictionary as an objc.ID.
 func KCGImagePropertyJFIFDictionary() objc.ID { return purego.CFConstant(raw.KCGImagePropertyJFIFDictionary()) }
 
-// KCGImagePropertyHEIFDictionary returns the CoreFoundation constant kCGImagePropertyHEIFDictionary as a toll-free-bridged objc.ID.
+// KCGImagePropertyHEIFDictionary returns the value of the CoreFoundation reference constant kCGImagePropertyHEIFDictionary as an objc.ID.
 func KCGImagePropertyHEIFDictionary() objc.ID { return purego.CFConstant(raw.KCGImagePropertyHEIFDictionary()) }
 
-// KCGImagePropertyHEICSDictionary returns the CoreFoundation constant kCGImagePropertyHEICSDictionary as a toll-free-bridged objc.ID.
+// KCGImagePropertyHEICSDictionary returns the value of the CoreFoundation reference constant kCGImagePropertyHEICSDictionary as an objc.ID.
 func KCGImagePropertyHEICSDictionary() objc.ID { return purego.CFConstant(raw.KCGImagePropertyHEICSDictionary()) }
 
-// KCGImagePropertyExifDictionary returns the CoreFoundation constant kCGImagePropertyExifDictionary as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifDictionary returns the value of the CoreFoundation reference constant kCGImagePropertyExifDictionary as an objc.ID.
 func KCGImagePropertyExifDictionary() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifDictionary()) }
 
-// KCGImagePropertyPNGDictionary returns the CoreFoundation constant kCGImagePropertyPNGDictionary as a toll-free-bridged objc.ID.
+// KCGImagePropertyPNGDictionary returns the value of the CoreFoundation reference constant kCGImagePropertyPNGDictionary as an objc.ID.
 func KCGImagePropertyPNGDictionary() objc.ID { return purego.CFConstant(raw.KCGImagePropertyPNGDictionary()) }
 
-// KCGImagePropertyIPTCDictionary returns the CoreFoundation constant kCGImagePropertyIPTCDictionary as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCDictionary returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCDictionary as an objc.ID.
 func KCGImagePropertyIPTCDictionary() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCDictionary()) }
 
-// KCGImagePropertyGPSDictionary returns the CoreFoundation constant kCGImagePropertyGPSDictionary as a toll-free-bridged objc.ID.
+// KCGImagePropertyGPSDictionary returns the value of the CoreFoundation reference constant kCGImagePropertyGPSDictionary as an objc.ID.
 func KCGImagePropertyGPSDictionary() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGPSDictionary()) }
 
-// KCGImagePropertyRawDictionary returns the CoreFoundation constant kCGImagePropertyRawDictionary as a toll-free-bridged objc.ID.
+// KCGImagePropertyRawDictionary returns the value of the CoreFoundation reference constant kCGImagePropertyRawDictionary as an objc.ID.
 func KCGImagePropertyRawDictionary() objc.ID { return purego.CFConstant(raw.KCGImagePropertyRawDictionary()) }
 
-// KCGImagePropertyCIFFDictionary returns the CoreFoundation constant kCGImagePropertyCIFFDictionary as a toll-free-bridged objc.ID.
+// KCGImagePropertyCIFFDictionary returns the value of the CoreFoundation reference constant kCGImagePropertyCIFFDictionary as an objc.ID.
 func KCGImagePropertyCIFFDictionary() objc.ID { return purego.CFConstant(raw.KCGImagePropertyCIFFDictionary()) }
 
-// KCGImagePropertyMakerCanonDictionary returns the CoreFoundation constant kCGImagePropertyMakerCanonDictionary as a toll-free-bridged objc.ID.
+// KCGImagePropertyMakerCanonDictionary returns the value of the CoreFoundation reference constant kCGImagePropertyMakerCanonDictionary as an objc.ID.
 func KCGImagePropertyMakerCanonDictionary() objc.ID { return purego.CFConstant(raw.KCGImagePropertyMakerCanonDictionary()) }
 
-// KCGImagePropertyMakerNikonDictionary returns the CoreFoundation constant kCGImagePropertyMakerNikonDictionary as a toll-free-bridged objc.ID.
+// KCGImagePropertyMakerNikonDictionary returns the value of the CoreFoundation reference constant kCGImagePropertyMakerNikonDictionary as an objc.ID.
 func KCGImagePropertyMakerNikonDictionary() objc.ID { return purego.CFConstant(raw.KCGImagePropertyMakerNikonDictionary()) }
 
-// KCGImagePropertyMakerMinoltaDictionary returns the CoreFoundation constant kCGImagePropertyMakerMinoltaDictionary as a toll-free-bridged objc.ID.
+// KCGImagePropertyMakerMinoltaDictionary returns the value of the CoreFoundation reference constant kCGImagePropertyMakerMinoltaDictionary as an objc.ID.
 func KCGImagePropertyMakerMinoltaDictionary() objc.ID { return purego.CFConstant(raw.KCGImagePropertyMakerMinoltaDictionary()) }
 
-// KCGImagePropertyMakerFujiDictionary returns the CoreFoundation constant kCGImagePropertyMakerFujiDictionary as a toll-free-bridged objc.ID.
+// KCGImagePropertyMakerFujiDictionary returns the value of the CoreFoundation reference constant kCGImagePropertyMakerFujiDictionary as an objc.ID.
 func KCGImagePropertyMakerFujiDictionary() objc.ID { return purego.CFConstant(raw.KCGImagePropertyMakerFujiDictionary()) }
 
-// KCGImagePropertyMakerOlympusDictionary returns the CoreFoundation constant kCGImagePropertyMakerOlympusDictionary as a toll-free-bridged objc.ID.
+// KCGImagePropertyMakerOlympusDictionary returns the value of the CoreFoundation reference constant kCGImagePropertyMakerOlympusDictionary as an objc.ID.
 func KCGImagePropertyMakerOlympusDictionary() objc.ID { return purego.CFConstant(raw.KCGImagePropertyMakerOlympusDictionary()) }
 
-// KCGImagePropertyMakerPentaxDictionary returns the CoreFoundation constant kCGImagePropertyMakerPentaxDictionary as a toll-free-bridged objc.ID.
+// KCGImagePropertyMakerPentaxDictionary returns the value of the CoreFoundation reference constant kCGImagePropertyMakerPentaxDictionary as an objc.ID.
 func KCGImagePropertyMakerPentaxDictionary() objc.ID { return purego.CFConstant(raw.KCGImagePropertyMakerPentaxDictionary()) }
 
-// KCGImageProperty8BIMDictionary returns the CoreFoundation constant kCGImageProperty8BIMDictionary as a toll-free-bridged objc.ID.
+// KCGImageProperty8BIMDictionary returns the value of the CoreFoundation reference constant kCGImageProperty8BIMDictionary as an objc.ID.
 func KCGImageProperty8BIMDictionary() objc.ID { return purego.CFConstant(raw.KCGImageProperty8BIMDictionary()) }
 
-// KCGImagePropertyDNGDictionary returns the CoreFoundation constant kCGImagePropertyDNGDictionary as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGDictionary returns the value of the CoreFoundation reference constant kCGImagePropertyDNGDictionary as an objc.ID.
 func KCGImagePropertyDNGDictionary() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGDictionary()) }
 
-// KCGImagePropertyExifAuxDictionary returns the CoreFoundation constant kCGImagePropertyExifAuxDictionary as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifAuxDictionary returns the value of the CoreFoundation reference constant kCGImagePropertyExifAuxDictionary as an objc.ID.
 func KCGImagePropertyExifAuxDictionary() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifAuxDictionary()) }
 
-// KCGImagePropertyOpenEXRDictionary returns the CoreFoundation constant kCGImagePropertyOpenEXRDictionary as a toll-free-bridged objc.ID.
+// KCGImagePropertyOpenEXRDictionary returns the value of the CoreFoundation reference constant kCGImagePropertyOpenEXRDictionary as an objc.ID.
 func KCGImagePropertyOpenEXRDictionary() objc.ID { return purego.CFConstant(raw.KCGImagePropertyOpenEXRDictionary()) }
 
-// KCGImagePropertyMakerAppleDictionary returns the CoreFoundation constant kCGImagePropertyMakerAppleDictionary as a toll-free-bridged objc.ID.
+// KCGImagePropertyMakerAppleDictionary returns the value of the CoreFoundation reference constant kCGImagePropertyMakerAppleDictionary as an objc.ID.
 func KCGImagePropertyMakerAppleDictionary() objc.ID { return purego.CFConstant(raw.KCGImagePropertyMakerAppleDictionary()) }
 
-// KCGImagePropertyFileContentsDictionary returns the CoreFoundation constant kCGImagePropertyFileContentsDictionary as a toll-free-bridged objc.ID.
+// KCGImagePropertyFileContentsDictionary returns the value of the CoreFoundation reference constant kCGImagePropertyFileContentsDictionary as an objc.ID.
 func KCGImagePropertyFileContentsDictionary() objc.ID { return purego.CFConstant(raw.KCGImagePropertyFileContentsDictionary()) }
 
-// KCGImagePropertyWebPDictionary returns the CoreFoundation constant kCGImagePropertyWebPDictionary as a toll-free-bridged objc.ID.
+// KCGImagePropertyWebPDictionary returns the value of the CoreFoundation reference constant kCGImagePropertyWebPDictionary as an objc.ID.
 func KCGImagePropertyWebPDictionary() objc.ID { return purego.CFConstant(raw.KCGImagePropertyWebPDictionary()) }
 
-// KCGImagePropertyAVISDictionary returns the CoreFoundation constant kCGImagePropertyAVISDictionary as a toll-free-bridged objc.ID.
+// KCGImagePropertyAVISDictionary returns the value of the CoreFoundation reference constant kCGImagePropertyAVISDictionary as an objc.ID.
 func KCGImagePropertyAVISDictionary() objc.ID { return purego.CFConstant(raw.KCGImagePropertyAVISDictionary()) }
 
-// KCGImagePropertyTGADictionary returns the CoreFoundation constant kCGImagePropertyTGADictionary as a toll-free-bridged objc.ID.
+// KCGImagePropertyTGADictionary returns the value of the CoreFoundation reference constant kCGImagePropertyTGADictionary as an objc.ID.
 func KCGImagePropertyTGADictionary() objc.ID { return purego.CFConstant(raw.KCGImagePropertyTGADictionary()) }
 
-// KCGImagePropertyFileSize returns the CoreFoundation constant kCGImagePropertyFileSize as a toll-free-bridged objc.ID.
+// KCGImagePropertyFileSize returns the value of the CoreFoundation reference constant kCGImagePropertyFileSize as an objc.ID.
 func KCGImagePropertyFileSize() objc.ID { return purego.CFConstant(raw.KCGImagePropertyFileSize()) }
 
-// KCGImagePropertyPixelHeight returns the CoreFoundation constant kCGImagePropertyPixelHeight as a toll-free-bridged objc.ID.
+// KCGImagePropertyPixelHeight returns the value of the CoreFoundation reference constant kCGImagePropertyPixelHeight as an objc.ID.
 func KCGImagePropertyPixelHeight() objc.ID { return purego.CFConstant(raw.KCGImagePropertyPixelHeight()) }
 
-// KCGImagePropertyPixelWidth returns the CoreFoundation constant kCGImagePropertyPixelWidth as a toll-free-bridged objc.ID.
+// KCGImagePropertyPixelWidth returns the value of the CoreFoundation reference constant kCGImagePropertyPixelWidth as an objc.ID.
 func KCGImagePropertyPixelWidth() objc.ID { return purego.CFConstant(raw.KCGImagePropertyPixelWidth()) }
 
-// KCGImagePropertyDPIHeight returns the CoreFoundation constant kCGImagePropertyDPIHeight as a toll-free-bridged objc.ID.
+// KCGImagePropertyDPIHeight returns the value of the CoreFoundation reference constant kCGImagePropertyDPIHeight as an objc.ID.
 func KCGImagePropertyDPIHeight() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDPIHeight()) }
 
-// KCGImagePropertyDPIWidth returns the CoreFoundation constant kCGImagePropertyDPIWidth as a toll-free-bridged objc.ID.
+// KCGImagePropertyDPIWidth returns the value of the CoreFoundation reference constant kCGImagePropertyDPIWidth as an objc.ID.
 func KCGImagePropertyDPIWidth() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDPIWidth()) }
 
-// KCGImagePropertyDepth returns the CoreFoundation constant kCGImagePropertyDepth as a toll-free-bridged objc.ID.
+// KCGImagePropertyDepth returns the value of the CoreFoundation reference constant kCGImagePropertyDepth as an objc.ID.
 func KCGImagePropertyDepth() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDepth()) }
 
-// KCGImagePropertyOrientation returns the CoreFoundation constant kCGImagePropertyOrientation as a toll-free-bridged objc.ID.
+// KCGImagePropertyOrientation returns the value of the CoreFoundation reference constant kCGImagePropertyOrientation as an objc.ID.
 func KCGImagePropertyOrientation() objc.ID { return purego.CFConstant(raw.KCGImagePropertyOrientation()) }
 
-// KCGImagePropertyIsFloat returns the CoreFoundation constant kCGImagePropertyIsFloat as a toll-free-bridged objc.ID.
+// KCGImagePropertyIsFloat returns the value of the CoreFoundation reference constant kCGImagePropertyIsFloat as an objc.ID.
 func KCGImagePropertyIsFloat() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIsFloat()) }
 
-// KCGImagePropertyIsIndexed returns the CoreFoundation constant kCGImagePropertyIsIndexed as a toll-free-bridged objc.ID.
+// KCGImagePropertyIsIndexed returns the value of the CoreFoundation reference constant kCGImagePropertyIsIndexed as an objc.ID.
 func KCGImagePropertyIsIndexed() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIsIndexed()) }
 
-// KCGImagePropertyHasAlpha returns the CoreFoundation constant kCGImagePropertyHasAlpha as a toll-free-bridged objc.ID.
+// KCGImagePropertyHasAlpha returns the value of the CoreFoundation reference constant kCGImagePropertyHasAlpha as an objc.ID.
 func KCGImagePropertyHasAlpha() objc.ID { return purego.CFConstant(raw.KCGImagePropertyHasAlpha()) }
 
-// KCGImagePropertyColorModel returns the CoreFoundation constant kCGImagePropertyColorModel as a toll-free-bridged objc.ID.
+// KCGImagePropertyColorModel returns the value of the CoreFoundation reference constant kCGImagePropertyColorModel as an objc.ID.
 func KCGImagePropertyColorModel() objc.ID { return purego.CFConstant(raw.KCGImagePropertyColorModel()) }
 
-// KCGImagePropertyProfileName returns the CoreFoundation constant kCGImagePropertyProfileName as a toll-free-bridged objc.ID.
+// KCGImagePropertyProfileName returns the value of the CoreFoundation reference constant kCGImagePropertyProfileName as an objc.ID.
 func KCGImagePropertyProfileName() objc.ID { return purego.CFConstant(raw.KCGImagePropertyProfileName()) }
 
-// KCGImagePropertyPrimaryImage returns the CoreFoundation constant kCGImagePropertyPrimaryImage as a toll-free-bridged objc.ID.
+// KCGImagePropertyPrimaryImage returns the value of the CoreFoundation reference constant kCGImagePropertyPrimaryImage as an objc.ID.
 func KCGImagePropertyPrimaryImage() objc.ID { return purego.CFConstant(raw.KCGImagePropertyPrimaryImage()) }
 
-// KCGImagePropertyColorModelRGB returns the CoreFoundation constant kCGImagePropertyColorModelRGB as a toll-free-bridged objc.ID.
+// KCGImagePropertyColorModelRGB returns the value of the CoreFoundation reference constant kCGImagePropertyColorModelRGB as an objc.ID.
 func KCGImagePropertyColorModelRGB() objc.ID { return purego.CFConstant(raw.KCGImagePropertyColorModelRGB()) }
 
-// KCGImagePropertyColorModelGray returns the CoreFoundation constant kCGImagePropertyColorModelGray as a toll-free-bridged objc.ID.
+// KCGImagePropertyColorModelGray returns the value of the CoreFoundation reference constant kCGImagePropertyColorModelGray as an objc.ID.
 func KCGImagePropertyColorModelGray() objc.ID { return purego.CFConstant(raw.KCGImagePropertyColorModelGray()) }
 
-// KCGImagePropertyColorModelCMYK returns the CoreFoundation constant kCGImagePropertyColorModelCMYK as a toll-free-bridged objc.ID.
+// KCGImagePropertyColorModelCMYK returns the value of the CoreFoundation reference constant kCGImagePropertyColorModelCMYK as an objc.ID.
 func KCGImagePropertyColorModelCMYK() objc.ID { return purego.CFConstant(raw.KCGImagePropertyColorModelCMYK()) }
 
-// KCGImagePropertyColorModelLab returns the CoreFoundation constant kCGImagePropertyColorModelLab as a toll-free-bridged objc.ID.
+// KCGImagePropertyColorModelLab returns the value of the CoreFoundation reference constant kCGImagePropertyColorModelLab as an objc.ID.
 func KCGImagePropertyColorModelLab() objc.ID { return purego.CFConstant(raw.KCGImagePropertyColorModelLab()) }
 
-// KCGImagePropertyTIFFCompression returns the CoreFoundation constant kCGImagePropertyTIFFCompression as a toll-free-bridged objc.ID.
+// KCGImagePropertyTIFFCompression returns the value of the CoreFoundation reference constant kCGImagePropertyTIFFCompression as an objc.ID.
 func KCGImagePropertyTIFFCompression() objc.ID { return purego.CFConstant(raw.KCGImagePropertyTIFFCompression()) }
 
-// KCGImagePropertyTIFFPhotometricInterpretation returns the CoreFoundation constant kCGImagePropertyTIFFPhotometricInterpretation as a toll-free-bridged objc.ID.
+// KCGImagePropertyTIFFPhotometricInterpretation returns the value of the CoreFoundation reference constant kCGImagePropertyTIFFPhotometricInterpretation as an objc.ID.
 func KCGImagePropertyTIFFPhotometricInterpretation() objc.ID { return purego.CFConstant(raw.KCGImagePropertyTIFFPhotometricInterpretation()) }
 
-// KCGImagePropertyTIFFDocumentName returns the CoreFoundation constant kCGImagePropertyTIFFDocumentName as a toll-free-bridged objc.ID.
+// KCGImagePropertyTIFFDocumentName returns the value of the CoreFoundation reference constant kCGImagePropertyTIFFDocumentName as an objc.ID.
 func KCGImagePropertyTIFFDocumentName() objc.ID { return purego.CFConstant(raw.KCGImagePropertyTIFFDocumentName()) }
 
-// KCGImagePropertyTIFFImageDescription returns the CoreFoundation constant kCGImagePropertyTIFFImageDescription as a toll-free-bridged objc.ID.
+// KCGImagePropertyTIFFImageDescription returns the value of the CoreFoundation reference constant kCGImagePropertyTIFFImageDescription as an objc.ID.
 func KCGImagePropertyTIFFImageDescription() objc.ID { return purego.CFConstant(raw.KCGImagePropertyTIFFImageDescription()) }
 
-// KCGImagePropertyTIFFMake returns the CoreFoundation constant kCGImagePropertyTIFFMake as a toll-free-bridged objc.ID.
+// KCGImagePropertyTIFFMake returns the value of the CoreFoundation reference constant kCGImagePropertyTIFFMake as an objc.ID.
 func KCGImagePropertyTIFFMake() objc.ID { return purego.CFConstant(raw.KCGImagePropertyTIFFMake()) }
 
-// KCGImagePropertyTIFFModel returns the CoreFoundation constant kCGImagePropertyTIFFModel as a toll-free-bridged objc.ID.
+// KCGImagePropertyTIFFModel returns the value of the CoreFoundation reference constant kCGImagePropertyTIFFModel as an objc.ID.
 func KCGImagePropertyTIFFModel() objc.ID { return purego.CFConstant(raw.KCGImagePropertyTIFFModel()) }
 
-// KCGImagePropertyTIFFOrientation returns the CoreFoundation constant kCGImagePropertyTIFFOrientation as a toll-free-bridged objc.ID.
+// KCGImagePropertyTIFFOrientation returns the value of the CoreFoundation reference constant kCGImagePropertyTIFFOrientation as an objc.ID.
 func KCGImagePropertyTIFFOrientation() objc.ID { return purego.CFConstant(raw.KCGImagePropertyTIFFOrientation()) }
 
-// KCGImagePropertyTIFFXResolution returns the CoreFoundation constant kCGImagePropertyTIFFXResolution as a toll-free-bridged objc.ID.
+// KCGImagePropertyTIFFXResolution returns the value of the CoreFoundation reference constant kCGImagePropertyTIFFXResolution as an objc.ID.
 func KCGImagePropertyTIFFXResolution() objc.ID { return purego.CFConstant(raw.KCGImagePropertyTIFFXResolution()) }
 
-// KCGImagePropertyTIFFYResolution returns the CoreFoundation constant kCGImagePropertyTIFFYResolution as a toll-free-bridged objc.ID.
+// KCGImagePropertyTIFFYResolution returns the value of the CoreFoundation reference constant kCGImagePropertyTIFFYResolution as an objc.ID.
 func KCGImagePropertyTIFFYResolution() objc.ID { return purego.CFConstant(raw.KCGImagePropertyTIFFYResolution()) }
 
-// KCGImagePropertyTIFFXPosition returns the CoreFoundation constant kCGImagePropertyTIFFXPosition as a toll-free-bridged objc.ID.
+// KCGImagePropertyTIFFXPosition returns the value of the CoreFoundation reference constant kCGImagePropertyTIFFXPosition as an objc.ID.
 func KCGImagePropertyTIFFXPosition() objc.ID { return purego.CFConstant(raw.KCGImagePropertyTIFFXPosition()) }
 
-// KCGImagePropertyTIFFYPosition returns the CoreFoundation constant kCGImagePropertyTIFFYPosition as a toll-free-bridged objc.ID.
+// KCGImagePropertyTIFFYPosition returns the value of the CoreFoundation reference constant kCGImagePropertyTIFFYPosition as an objc.ID.
 func KCGImagePropertyTIFFYPosition() objc.ID { return purego.CFConstant(raw.KCGImagePropertyTIFFYPosition()) }
 
-// KCGImagePropertyTIFFResolutionUnit returns the CoreFoundation constant kCGImagePropertyTIFFResolutionUnit as a toll-free-bridged objc.ID.
+// KCGImagePropertyTIFFResolutionUnit returns the value of the CoreFoundation reference constant kCGImagePropertyTIFFResolutionUnit as an objc.ID.
 func KCGImagePropertyTIFFResolutionUnit() objc.ID { return purego.CFConstant(raw.KCGImagePropertyTIFFResolutionUnit()) }
 
-// KCGImagePropertyTIFFSoftware returns the CoreFoundation constant kCGImagePropertyTIFFSoftware as a toll-free-bridged objc.ID.
+// KCGImagePropertyTIFFSoftware returns the value of the CoreFoundation reference constant kCGImagePropertyTIFFSoftware as an objc.ID.
 func KCGImagePropertyTIFFSoftware() objc.ID { return purego.CFConstant(raw.KCGImagePropertyTIFFSoftware()) }
 
-// KCGImagePropertyTIFFTransferFunction returns the CoreFoundation constant kCGImagePropertyTIFFTransferFunction as a toll-free-bridged objc.ID.
+// KCGImagePropertyTIFFTransferFunction returns the value of the CoreFoundation reference constant kCGImagePropertyTIFFTransferFunction as an objc.ID.
 func KCGImagePropertyTIFFTransferFunction() objc.ID { return purego.CFConstant(raw.KCGImagePropertyTIFFTransferFunction()) }
 
-// KCGImagePropertyTIFFDateTime returns the CoreFoundation constant kCGImagePropertyTIFFDateTime as a toll-free-bridged objc.ID.
+// KCGImagePropertyTIFFDateTime returns the value of the CoreFoundation reference constant kCGImagePropertyTIFFDateTime as an objc.ID.
 func KCGImagePropertyTIFFDateTime() objc.ID { return purego.CFConstant(raw.KCGImagePropertyTIFFDateTime()) }
 
-// KCGImagePropertyTIFFArtist returns the CoreFoundation constant kCGImagePropertyTIFFArtist as a toll-free-bridged objc.ID.
+// KCGImagePropertyTIFFArtist returns the value of the CoreFoundation reference constant kCGImagePropertyTIFFArtist as an objc.ID.
 func KCGImagePropertyTIFFArtist() objc.ID { return purego.CFConstant(raw.KCGImagePropertyTIFFArtist()) }
 
-// KCGImagePropertyTIFFHostComputer returns the CoreFoundation constant kCGImagePropertyTIFFHostComputer as a toll-free-bridged objc.ID.
+// KCGImagePropertyTIFFHostComputer returns the value of the CoreFoundation reference constant kCGImagePropertyTIFFHostComputer as an objc.ID.
 func KCGImagePropertyTIFFHostComputer() objc.ID { return purego.CFConstant(raw.KCGImagePropertyTIFFHostComputer()) }
 
-// KCGImagePropertyTIFFCopyright returns the CoreFoundation constant kCGImagePropertyTIFFCopyright as a toll-free-bridged objc.ID.
+// KCGImagePropertyTIFFCopyright returns the value of the CoreFoundation reference constant kCGImagePropertyTIFFCopyright as an objc.ID.
 func KCGImagePropertyTIFFCopyright() objc.ID { return purego.CFConstant(raw.KCGImagePropertyTIFFCopyright()) }
 
-// KCGImagePropertyTIFFWhitePoint returns the CoreFoundation constant kCGImagePropertyTIFFWhitePoint as a toll-free-bridged objc.ID.
+// KCGImagePropertyTIFFWhitePoint returns the value of the CoreFoundation reference constant kCGImagePropertyTIFFWhitePoint as an objc.ID.
 func KCGImagePropertyTIFFWhitePoint() objc.ID { return purego.CFConstant(raw.KCGImagePropertyTIFFWhitePoint()) }
 
-// KCGImagePropertyTIFFPrimaryChromaticities returns the CoreFoundation constant kCGImagePropertyTIFFPrimaryChromaticities as a toll-free-bridged objc.ID.
+// KCGImagePropertyTIFFPrimaryChromaticities returns the value of the CoreFoundation reference constant kCGImagePropertyTIFFPrimaryChromaticities as an objc.ID.
 func KCGImagePropertyTIFFPrimaryChromaticities() objc.ID { return purego.CFConstant(raw.KCGImagePropertyTIFFPrimaryChromaticities()) }
 
-// KCGImagePropertyTIFFTileWidth returns the CoreFoundation constant kCGImagePropertyTIFFTileWidth as a toll-free-bridged objc.ID.
+// KCGImagePropertyTIFFTileWidth returns the value of the CoreFoundation reference constant kCGImagePropertyTIFFTileWidth as an objc.ID.
 func KCGImagePropertyTIFFTileWidth() objc.ID { return purego.CFConstant(raw.KCGImagePropertyTIFFTileWidth()) }
 
-// KCGImagePropertyTIFFTileLength returns the CoreFoundation constant kCGImagePropertyTIFFTileLength as a toll-free-bridged objc.ID.
+// KCGImagePropertyTIFFTileLength returns the value of the CoreFoundation reference constant kCGImagePropertyTIFFTileLength as an objc.ID.
 func KCGImagePropertyTIFFTileLength() objc.ID { return purego.CFConstant(raw.KCGImagePropertyTIFFTileLength()) }
 
-// KCGImagePropertyJFIFVersion returns the CoreFoundation constant kCGImagePropertyJFIFVersion as a toll-free-bridged objc.ID.
+// KCGImagePropertyJFIFVersion returns the value of the CoreFoundation reference constant kCGImagePropertyJFIFVersion as an objc.ID.
 func KCGImagePropertyJFIFVersion() objc.ID { return purego.CFConstant(raw.KCGImagePropertyJFIFVersion()) }
 
-// KCGImagePropertyJFIFXDensity returns the CoreFoundation constant kCGImagePropertyJFIFXDensity as a toll-free-bridged objc.ID.
+// KCGImagePropertyJFIFXDensity returns the value of the CoreFoundation reference constant kCGImagePropertyJFIFXDensity as an objc.ID.
 func KCGImagePropertyJFIFXDensity() objc.ID { return purego.CFConstant(raw.KCGImagePropertyJFIFXDensity()) }
 
-// KCGImagePropertyJFIFYDensity returns the CoreFoundation constant kCGImagePropertyJFIFYDensity as a toll-free-bridged objc.ID.
+// KCGImagePropertyJFIFYDensity returns the value of the CoreFoundation reference constant kCGImagePropertyJFIFYDensity as an objc.ID.
 func KCGImagePropertyJFIFYDensity() objc.ID { return purego.CFConstant(raw.KCGImagePropertyJFIFYDensity()) }
 
-// KCGImagePropertyJFIFDensityUnit returns the CoreFoundation constant kCGImagePropertyJFIFDensityUnit as a toll-free-bridged objc.ID.
+// KCGImagePropertyJFIFDensityUnit returns the value of the CoreFoundation reference constant kCGImagePropertyJFIFDensityUnit as an objc.ID.
 func KCGImagePropertyJFIFDensityUnit() objc.ID { return purego.CFConstant(raw.KCGImagePropertyJFIFDensityUnit()) }
 
-// KCGImagePropertyJFIFIsProgressive returns the CoreFoundation constant kCGImagePropertyJFIFIsProgressive as a toll-free-bridged objc.ID.
+// KCGImagePropertyJFIFIsProgressive returns the value of the CoreFoundation reference constant kCGImagePropertyJFIFIsProgressive as an objc.ID.
 func KCGImagePropertyJFIFIsProgressive() objc.ID { return purego.CFConstant(raw.KCGImagePropertyJFIFIsProgressive()) }
 
-// KCGImagePropertyHEICSLoopCount returns the CoreFoundation constant kCGImagePropertyHEICSLoopCount as a toll-free-bridged objc.ID.
+// KCGImagePropertyHEICSLoopCount returns the value of the CoreFoundation reference constant kCGImagePropertyHEICSLoopCount as an objc.ID.
 func KCGImagePropertyHEICSLoopCount() objc.ID { return purego.CFConstant(raw.KCGImagePropertyHEICSLoopCount()) }
 
-// KCGImagePropertyHEICSDelayTime returns the CoreFoundation constant kCGImagePropertyHEICSDelayTime as a toll-free-bridged objc.ID.
+// KCGImagePropertyHEICSDelayTime returns the value of the CoreFoundation reference constant kCGImagePropertyHEICSDelayTime as an objc.ID.
 func KCGImagePropertyHEICSDelayTime() objc.ID { return purego.CFConstant(raw.KCGImagePropertyHEICSDelayTime()) }
 
-// KCGImagePropertyHEICSUnclampedDelayTime returns the CoreFoundation constant kCGImagePropertyHEICSUnclampedDelayTime as a toll-free-bridged objc.ID.
+// KCGImagePropertyHEICSUnclampedDelayTime returns the value of the CoreFoundation reference constant kCGImagePropertyHEICSUnclampedDelayTime as an objc.ID.
 func KCGImagePropertyHEICSUnclampedDelayTime() objc.ID { return purego.CFConstant(raw.KCGImagePropertyHEICSUnclampedDelayTime()) }
 
-// KCGImagePropertyHEICSCanvasPixelWidth returns the CoreFoundation constant kCGImagePropertyHEICSCanvasPixelWidth as a toll-free-bridged objc.ID.
+// KCGImagePropertyHEICSCanvasPixelWidth returns the value of the CoreFoundation reference constant kCGImagePropertyHEICSCanvasPixelWidth as an objc.ID.
 func KCGImagePropertyHEICSCanvasPixelWidth() objc.ID { return purego.CFConstant(raw.KCGImagePropertyHEICSCanvasPixelWidth()) }
 
-// KCGImagePropertyHEICSCanvasPixelHeight returns the CoreFoundation constant kCGImagePropertyHEICSCanvasPixelHeight as a toll-free-bridged objc.ID.
+// KCGImagePropertyHEICSCanvasPixelHeight returns the value of the CoreFoundation reference constant kCGImagePropertyHEICSCanvasPixelHeight as an objc.ID.
 func KCGImagePropertyHEICSCanvasPixelHeight() objc.ID { return purego.CFConstant(raw.KCGImagePropertyHEICSCanvasPixelHeight()) }
 
-// KCGImagePropertyHEICSFrameInfoArray returns the CoreFoundation constant kCGImagePropertyHEICSFrameInfoArray as a toll-free-bridged objc.ID.
+// KCGImagePropertyHEICSFrameInfoArray returns the value of the CoreFoundation reference constant kCGImagePropertyHEICSFrameInfoArray as an objc.ID.
 func KCGImagePropertyHEICSFrameInfoArray() objc.ID { return purego.CFConstant(raw.KCGImagePropertyHEICSFrameInfoArray()) }
 
-// KCGImagePropertyExifExposureTime returns the CoreFoundation constant kCGImagePropertyExifExposureTime as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifExposureTime returns the value of the CoreFoundation reference constant kCGImagePropertyExifExposureTime as an objc.ID.
 func KCGImagePropertyExifExposureTime() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifExposureTime()) }
 
-// KCGImagePropertyExifFNumber returns the CoreFoundation constant kCGImagePropertyExifFNumber as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifFNumber returns the value of the CoreFoundation reference constant kCGImagePropertyExifFNumber as an objc.ID.
 func KCGImagePropertyExifFNumber() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifFNumber()) }
 
-// KCGImagePropertyExifExposureProgram returns the CoreFoundation constant kCGImagePropertyExifExposureProgram as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifExposureProgram returns the value of the CoreFoundation reference constant kCGImagePropertyExifExposureProgram as an objc.ID.
 func KCGImagePropertyExifExposureProgram() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifExposureProgram()) }
 
-// KCGImagePropertyExifSpectralSensitivity returns the CoreFoundation constant kCGImagePropertyExifSpectralSensitivity as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifSpectralSensitivity returns the value of the CoreFoundation reference constant kCGImagePropertyExifSpectralSensitivity as an objc.ID.
 func KCGImagePropertyExifSpectralSensitivity() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifSpectralSensitivity()) }
 
-// KCGImagePropertyExifISOSpeedRatings returns the CoreFoundation constant kCGImagePropertyExifISOSpeedRatings as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifISOSpeedRatings returns the value of the CoreFoundation reference constant kCGImagePropertyExifISOSpeedRatings as an objc.ID.
 func KCGImagePropertyExifISOSpeedRatings() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifISOSpeedRatings()) }
 
-// KCGImagePropertyExifOECF returns the CoreFoundation constant kCGImagePropertyExifOECF as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifOECF returns the value of the CoreFoundation reference constant kCGImagePropertyExifOECF as an objc.ID.
 func KCGImagePropertyExifOECF() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifOECF()) }
 
-// KCGImagePropertyExifSensitivityType returns the CoreFoundation constant kCGImagePropertyExifSensitivityType as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifSensitivityType returns the value of the CoreFoundation reference constant kCGImagePropertyExifSensitivityType as an objc.ID.
 func KCGImagePropertyExifSensitivityType() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifSensitivityType()) }
 
-// KCGImagePropertyExifStandardOutputSensitivity returns the CoreFoundation constant kCGImagePropertyExifStandardOutputSensitivity as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifStandardOutputSensitivity returns the value of the CoreFoundation reference constant kCGImagePropertyExifStandardOutputSensitivity as an objc.ID.
 func KCGImagePropertyExifStandardOutputSensitivity() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifStandardOutputSensitivity()) }
 
-// KCGImagePropertyExifRecommendedExposureIndex returns the CoreFoundation constant kCGImagePropertyExifRecommendedExposureIndex as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifRecommendedExposureIndex returns the value of the CoreFoundation reference constant kCGImagePropertyExifRecommendedExposureIndex as an objc.ID.
 func KCGImagePropertyExifRecommendedExposureIndex() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifRecommendedExposureIndex()) }
 
-// KCGImagePropertyExifISOSpeed returns the CoreFoundation constant kCGImagePropertyExifISOSpeed as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifISOSpeed returns the value of the CoreFoundation reference constant kCGImagePropertyExifISOSpeed as an objc.ID.
 func KCGImagePropertyExifISOSpeed() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifISOSpeed()) }
 
-// KCGImagePropertyExifISOSpeedLatitudeyyy returns the CoreFoundation constant kCGImagePropertyExifISOSpeedLatitudeyyy as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifISOSpeedLatitudeyyy returns the value of the CoreFoundation reference constant kCGImagePropertyExifISOSpeedLatitudeyyy as an objc.ID.
 func KCGImagePropertyExifISOSpeedLatitudeyyy() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifISOSpeedLatitudeyyy()) }
 
-// KCGImagePropertyExifISOSpeedLatitudezzz returns the CoreFoundation constant kCGImagePropertyExifISOSpeedLatitudezzz as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifISOSpeedLatitudezzz returns the value of the CoreFoundation reference constant kCGImagePropertyExifISOSpeedLatitudezzz as an objc.ID.
 func KCGImagePropertyExifISOSpeedLatitudezzz() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifISOSpeedLatitudezzz()) }
 
-// KCGImagePropertyExifVersion returns the CoreFoundation constant kCGImagePropertyExifVersion as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifVersion returns the value of the CoreFoundation reference constant kCGImagePropertyExifVersion as an objc.ID.
 func KCGImagePropertyExifVersion() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifVersion()) }
 
-// KCGImagePropertyExifDateTimeOriginal returns the CoreFoundation constant kCGImagePropertyExifDateTimeOriginal as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifDateTimeOriginal returns the value of the CoreFoundation reference constant kCGImagePropertyExifDateTimeOriginal as an objc.ID.
 func KCGImagePropertyExifDateTimeOriginal() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifDateTimeOriginal()) }
 
-// KCGImagePropertyExifDateTimeDigitized returns the CoreFoundation constant kCGImagePropertyExifDateTimeDigitized as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifDateTimeDigitized returns the value of the CoreFoundation reference constant kCGImagePropertyExifDateTimeDigitized as an objc.ID.
 func KCGImagePropertyExifDateTimeDigitized() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifDateTimeDigitized()) }
 
-// KCGImagePropertyExifOffsetTime returns the CoreFoundation constant kCGImagePropertyExifOffsetTime as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifOffsetTime returns the value of the CoreFoundation reference constant kCGImagePropertyExifOffsetTime as an objc.ID.
 func KCGImagePropertyExifOffsetTime() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifOffsetTime()) }
 
-// KCGImagePropertyExifOffsetTimeOriginal returns the CoreFoundation constant kCGImagePropertyExifOffsetTimeOriginal as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifOffsetTimeOriginal returns the value of the CoreFoundation reference constant kCGImagePropertyExifOffsetTimeOriginal as an objc.ID.
 func KCGImagePropertyExifOffsetTimeOriginal() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifOffsetTimeOriginal()) }
 
-// KCGImagePropertyExifOffsetTimeDigitized returns the CoreFoundation constant kCGImagePropertyExifOffsetTimeDigitized as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifOffsetTimeDigitized returns the value of the CoreFoundation reference constant kCGImagePropertyExifOffsetTimeDigitized as an objc.ID.
 func KCGImagePropertyExifOffsetTimeDigitized() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifOffsetTimeDigitized()) }
 
-// KCGImagePropertyExifComponentsConfiguration returns the CoreFoundation constant kCGImagePropertyExifComponentsConfiguration as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifComponentsConfiguration returns the value of the CoreFoundation reference constant kCGImagePropertyExifComponentsConfiguration as an objc.ID.
 func KCGImagePropertyExifComponentsConfiguration() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifComponentsConfiguration()) }
 
-// KCGImagePropertyExifCompressedBitsPerPixel returns the CoreFoundation constant kCGImagePropertyExifCompressedBitsPerPixel as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifCompressedBitsPerPixel returns the value of the CoreFoundation reference constant kCGImagePropertyExifCompressedBitsPerPixel as an objc.ID.
 func KCGImagePropertyExifCompressedBitsPerPixel() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifCompressedBitsPerPixel()) }
 
-// KCGImagePropertyExifShutterSpeedValue returns the CoreFoundation constant kCGImagePropertyExifShutterSpeedValue as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifShutterSpeedValue returns the value of the CoreFoundation reference constant kCGImagePropertyExifShutterSpeedValue as an objc.ID.
 func KCGImagePropertyExifShutterSpeedValue() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifShutterSpeedValue()) }
 
-// KCGImagePropertyExifApertureValue returns the CoreFoundation constant kCGImagePropertyExifApertureValue as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifApertureValue returns the value of the CoreFoundation reference constant kCGImagePropertyExifApertureValue as an objc.ID.
 func KCGImagePropertyExifApertureValue() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifApertureValue()) }
 
-// KCGImagePropertyExifBrightnessValue returns the CoreFoundation constant kCGImagePropertyExifBrightnessValue as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifBrightnessValue returns the value of the CoreFoundation reference constant kCGImagePropertyExifBrightnessValue as an objc.ID.
 func KCGImagePropertyExifBrightnessValue() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifBrightnessValue()) }
 
-// KCGImagePropertyExifExposureBiasValue returns the CoreFoundation constant kCGImagePropertyExifExposureBiasValue as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifExposureBiasValue returns the value of the CoreFoundation reference constant kCGImagePropertyExifExposureBiasValue as an objc.ID.
 func KCGImagePropertyExifExposureBiasValue() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifExposureBiasValue()) }
 
-// KCGImagePropertyExifMaxApertureValue returns the CoreFoundation constant kCGImagePropertyExifMaxApertureValue as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifMaxApertureValue returns the value of the CoreFoundation reference constant kCGImagePropertyExifMaxApertureValue as an objc.ID.
 func KCGImagePropertyExifMaxApertureValue() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifMaxApertureValue()) }
 
-// KCGImagePropertyExifSubjectDistance returns the CoreFoundation constant kCGImagePropertyExifSubjectDistance as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifSubjectDistance returns the value of the CoreFoundation reference constant kCGImagePropertyExifSubjectDistance as an objc.ID.
 func KCGImagePropertyExifSubjectDistance() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifSubjectDistance()) }
 
-// KCGImagePropertyExifMeteringMode returns the CoreFoundation constant kCGImagePropertyExifMeteringMode as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifMeteringMode returns the value of the CoreFoundation reference constant kCGImagePropertyExifMeteringMode as an objc.ID.
 func KCGImagePropertyExifMeteringMode() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifMeteringMode()) }
 
-// KCGImagePropertyExifLightSource returns the CoreFoundation constant kCGImagePropertyExifLightSource as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifLightSource returns the value of the CoreFoundation reference constant kCGImagePropertyExifLightSource as an objc.ID.
 func KCGImagePropertyExifLightSource() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifLightSource()) }
 
-// KCGImagePropertyExifFlash returns the CoreFoundation constant kCGImagePropertyExifFlash as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifFlash returns the value of the CoreFoundation reference constant kCGImagePropertyExifFlash as an objc.ID.
 func KCGImagePropertyExifFlash() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifFlash()) }
 
-// KCGImagePropertyExifFocalLength returns the CoreFoundation constant kCGImagePropertyExifFocalLength as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifFocalLength returns the value of the CoreFoundation reference constant kCGImagePropertyExifFocalLength as an objc.ID.
 func KCGImagePropertyExifFocalLength() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifFocalLength()) }
 
-// KCGImagePropertyExifSubjectArea returns the CoreFoundation constant kCGImagePropertyExifSubjectArea as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifSubjectArea returns the value of the CoreFoundation reference constant kCGImagePropertyExifSubjectArea as an objc.ID.
 func KCGImagePropertyExifSubjectArea() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifSubjectArea()) }
 
-// KCGImagePropertyExifMakerNote returns the CoreFoundation constant kCGImagePropertyExifMakerNote as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifMakerNote returns the value of the CoreFoundation reference constant kCGImagePropertyExifMakerNote as an objc.ID.
 func KCGImagePropertyExifMakerNote() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifMakerNote()) }
 
-// KCGImagePropertyExifUserComment returns the CoreFoundation constant kCGImagePropertyExifUserComment as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifUserComment returns the value of the CoreFoundation reference constant kCGImagePropertyExifUserComment as an objc.ID.
 func KCGImagePropertyExifUserComment() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifUserComment()) }
 
-// KCGImagePropertyExifSubsecTime returns the CoreFoundation constant kCGImagePropertyExifSubsecTime as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifSubsecTime returns the value of the CoreFoundation reference constant kCGImagePropertyExifSubsecTime as an objc.ID.
 func KCGImagePropertyExifSubsecTime() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifSubsecTime()) }
 
-// KCGImagePropertyExifSubsecTimeOriginal returns the CoreFoundation constant kCGImagePropertyExifSubsecTimeOriginal as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifSubsecTimeOriginal returns the value of the CoreFoundation reference constant kCGImagePropertyExifSubsecTimeOriginal as an objc.ID.
 func KCGImagePropertyExifSubsecTimeOriginal() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifSubsecTimeOriginal()) }
 
-// KCGImagePropertyExifSubsecTimeDigitized returns the CoreFoundation constant kCGImagePropertyExifSubsecTimeDigitized as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifSubsecTimeDigitized returns the value of the CoreFoundation reference constant kCGImagePropertyExifSubsecTimeDigitized as an objc.ID.
 func KCGImagePropertyExifSubsecTimeDigitized() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifSubsecTimeDigitized()) }
 
-// KCGImagePropertyExifFlashPixVersion returns the CoreFoundation constant kCGImagePropertyExifFlashPixVersion as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifFlashPixVersion returns the value of the CoreFoundation reference constant kCGImagePropertyExifFlashPixVersion as an objc.ID.
 func KCGImagePropertyExifFlashPixVersion() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifFlashPixVersion()) }
 
-// KCGImagePropertyExifColorSpace returns the CoreFoundation constant kCGImagePropertyExifColorSpace as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifColorSpace returns the value of the CoreFoundation reference constant kCGImagePropertyExifColorSpace as an objc.ID.
 func KCGImagePropertyExifColorSpace() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifColorSpace()) }
 
-// KCGImagePropertyExifPixelXDimension returns the CoreFoundation constant kCGImagePropertyExifPixelXDimension as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifPixelXDimension returns the value of the CoreFoundation reference constant kCGImagePropertyExifPixelXDimension as an objc.ID.
 func KCGImagePropertyExifPixelXDimension() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifPixelXDimension()) }
 
-// KCGImagePropertyExifPixelYDimension returns the CoreFoundation constant kCGImagePropertyExifPixelYDimension as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifPixelYDimension returns the value of the CoreFoundation reference constant kCGImagePropertyExifPixelYDimension as an objc.ID.
 func KCGImagePropertyExifPixelYDimension() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifPixelYDimension()) }
 
-// KCGImagePropertyExifRelatedSoundFile returns the CoreFoundation constant kCGImagePropertyExifRelatedSoundFile as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifRelatedSoundFile returns the value of the CoreFoundation reference constant kCGImagePropertyExifRelatedSoundFile as an objc.ID.
 func KCGImagePropertyExifRelatedSoundFile() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifRelatedSoundFile()) }
 
-// KCGImagePropertyExifFlashEnergy returns the CoreFoundation constant kCGImagePropertyExifFlashEnergy as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifFlashEnergy returns the value of the CoreFoundation reference constant kCGImagePropertyExifFlashEnergy as an objc.ID.
 func KCGImagePropertyExifFlashEnergy() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifFlashEnergy()) }
 
-// KCGImagePropertyExifSpatialFrequencyResponse returns the CoreFoundation constant kCGImagePropertyExifSpatialFrequencyResponse as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifSpatialFrequencyResponse returns the value of the CoreFoundation reference constant kCGImagePropertyExifSpatialFrequencyResponse as an objc.ID.
 func KCGImagePropertyExifSpatialFrequencyResponse() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifSpatialFrequencyResponse()) }
 
-// KCGImagePropertyExifFocalPlaneXResolution returns the CoreFoundation constant kCGImagePropertyExifFocalPlaneXResolution as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifFocalPlaneXResolution returns the value of the CoreFoundation reference constant kCGImagePropertyExifFocalPlaneXResolution as an objc.ID.
 func KCGImagePropertyExifFocalPlaneXResolution() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifFocalPlaneXResolution()) }
 
-// KCGImagePropertyExifFocalPlaneYResolution returns the CoreFoundation constant kCGImagePropertyExifFocalPlaneYResolution as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifFocalPlaneYResolution returns the value of the CoreFoundation reference constant kCGImagePropertyExifFocalPlaneYResolution as an objc.ID.
 func KCGImagePropertyExifFocalPlaneYResolution() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifFocalPlaneYResolution()) }
 
-// KCGImagePropertyExifFocalPlaneResolutionUnit returns the CoreFoundation constant kCGImagePropertyExifFocalPlaneResolutionUnit as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifFocalPlaneResolutionUnit returns the value of the CoreFoundation reference constant kCGImagePropertyExifFocalPlaneResolutionUnit as an objc.ID.
 func KCGImagePropertyExifFocalPlaneResolutionUnit() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifFocalPlaneResolutionUnit()) }
 
-// KCGImagePropertyExifSubjectLocation returns the CoreFoundation constant kCGImagePropertyExifSubjectLocation as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifSubjectLocation returns the value of the CoreFoundation reference constant kCGImagePropertyExifSubjectLocation as an objc.ID.
 func KCGImagePropertyExifSubjectLocation() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifSubjectLocation()) }
 
-// KCGImagePropertyExifExposureIndex returns the CoreFoundation constant kCGImagePropertyExifExposureIndex as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifExposureIndex returns the value of the CoreFoundation reference constant kCGImagePropertyExifExposureIndex as an objc.ID.
 func KCGImagePropertyExifExposureIndex() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifExposureIndex()) }
 
-// KCGImagePropertyExifSensingMethod returns the CoreFoundation constant kCGImagePropertyExifSensingMethod as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifSensingMethod returns the value of the CoreFoundation reference constant kCGImagePropertyExifSensingMethod as an objc.ID.
 func KCGImagePropertyExifSensingMethod() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifSensingMethod()) }
 
-// KCGImagePropertyExifFileSource returns the CoreFoundation constant kCGImagePropertyExifFileSource as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifFileSource returns the value of the CoreFoundation reference constant kCGImagePropertyExifFileSource as an objc.ID.
 func KCGImagePropertyExifFileSource() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifFileSource()) }
 
-// KCGImagePropertyExifSceneType returns the CoreFoundation constant kCGImagePropertyExifSceneType as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifSceneType returns the value of the CoreFoundation reference constant kCGImagePropertyExifSceneType as an objc.ID.
 func KCGImagePropertyExifSceneType() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifSceneType()) }
 
-// KCGImagePropertyExifCFAPattern returns the CoreFoundation constant kCGImagePropertyExifCFAPattern as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifCFAPattern returns the value of the CoreFoundation reference constant kCGImagePropertyExifCFAPattern as an objc.ID.
 func KCGImagePropertyExifCFAPattern() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifCFAPattern()) }
 
-// KCGImagePropertyExifCustomRendered returns the CoreFoundation constant kCGImagePropertyExifCustomRendered as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifCustomRendered returns the value of the CoreFoundation reference constant kCGImagePropertyExifCustomRendered as an objc.ID.
 func KCGImagePropertyExifCustomRendered() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifCustomRendered()) }
 
-// KCGImagePropertyExifExposureMode returns the CoreFoundation constant kCGImagePropertyExifExposureMode as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifExposureMode returns the value of the CoreFoundation reference constant kCGImagePropertyExifExposureMode as an objc.ID.
 func KCGImagePropertyExifExposureMode() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifExposureMode()) }
 
-// KCGImagePropertyExifWhiteBalance returns the CoreFoundation constant kCGImagePropertyExifWhiteBalance as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifWhiteBalance returns the value of the CoreFoundation reference constant kCGImagePropertyExifWhiteBalance as an objc.ID.
 func KCGImagePropertyExifWhiteBalance() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifWhiteBalance()) }
 
-// KCGImagePropertyExifDigitalZoomRatio returns the CoreFoundation constant kCGImagePropertyExifDigitalZoomRatio as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifDigitalZoomRatio returns the value of the CoreFoundation reference constant kCGImagePropertyExifDigitalZoomRatio as an objc.ID.
 func KCGImagePropertyExifDigitalZoomRatio() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifDigitalZoomRatio()) }
 
-// KCGImagePropertyExifFocalLenIn35mmFilm returns the CoreFoundation constant kCGImagePropertyExifFocalLenIn35mmFilm as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifFocalLenIn35mmFilm returns the value of the CoreFoundation reference constant kCGImagePropertyExifFocalLenIn35mmFilm as an objc.ID.
 func KCGImagePropertyExifFocalLenIn35mmFilm() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifFocalLenIn35mmFilm()) }
 
-// KCGImagePropertyExifSceneCaptureType returns the CoreFoundation constant kCGImagePropertyExifSceneCaptureType as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifSceneCaptureType returns the value of the CoreFoundation reference constant kCGImagePropertyExifSceneCaptureType as an objc.ID.
 func KCGImagePropertyExifSceneCaptureType() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifSceneCaptureType()) }
 
-// KCGImagePropertyExifGainControl returns the CoreFoundation constant kCGImagePropertyExifGainControl as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifGainControl returns the value of the CoreFoundation reference constant kCGImagePropertyExifGainControl as an objc.ID.
 func KCGImagePropertyExifGainControl() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifGainControl()) }
 
-// KCGImagePropertyExifContrast returns the CoreFoundation constant kCGImagePropertyExifContrast as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifContrast returns the value of the CoreFoundation reference constant kCGImagePropertyExifContrast as an objc.ID.
 func KCGImagePropertyExifContrast() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifContrast()) }
 
-// KCGImagePropertyExifSaturation returns the CoreFoundation constant kCGImagePropertyExifSaturation as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifSaturation returns the value of the CoreFoundation reference constant kCGImagePropertyExifSaturation as an objc.ID.
 func KCGImagePropertyExifSaturation() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifSaturation()) }
 
-// KCGImagePropertyExifSharpness returns the CoreFoundation constant kCGImagePropertyExifSharpness as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifSharpness returns the value of the CoreFoundation reference constant kCGImagePropertyExifSharpness as an objc.ID.
 func KCGImagePropertyExifSharpness() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifSharpness()) }
 
-// KCGImagePropertyExifDeviceSettingDescription returns the CoreFoundation constant kCGImagePropertyExifDeviceSettingDescription as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifDeviceSettingDescription returns the value of the CoreFoundation reference constant kCGImagePropertyExifDeviceSettingDescription as an objc.ID.
 func KCGImagePropertyExifDeviceSettingDescription() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifDeviceSettingDescription()) }
 
-// KCGImagePropertyExifSubjectDistRange returns the CoreFoundation constant kCGImagePropertyExifSubjectDistRange as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifSubjectDistRange returns the value of the CoreFoundation reference constant kCGImagePropertyExifSubjectDistRange as an objc.ID.
 func KCGImagePropertyExifSubjectDistRange() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifSubjectDistRange()) }
 
-// KCGImagePropertyExifImageUniqueID returns the CoreFoundation constant kCGImagePropertyExifImageUniqueID as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifImageUniqueID returns the value of the CoreFoundation reference constant kCGImagePropertyExifImageUniqueID as an objc.ID.
 func KCGImagePropertyExifImageUniqueID() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifImageUniqueID()) }
 
-// KCGImagePropertyExifCameraOwnerName returns the CoreFoundation constant kCGImagePropertyExifCameraOwnerName as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifCameraOwnerName returns the value of the CoreFoundation reference constant kCGImagePropertyExifCameraOwnerName as an objc.ID.
 func KCGImagePropertyExifCameraOwnerName() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifCameraOwnerName()) }
 
-// KCGImagePropertyExifBodySerialNumber returns the CoreFoundation constant kCGImagePropertyExifBodySerialNumber as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifBodySerialNumber returns the value of the CoreFoundation reference constant kCGImagePropertyExifBodySerialNumber as an objc.ID.
 func KCGImagePropertyExifBodySerialNumber() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifBodySerialNumber()) }
 
-// KCGImagePropertyExifLensSpecification returns the CoreFoundation constant kCGImagePropertyExifLensSpecification as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifLensSpecification returns the value of the CoreFoundation reference constant kCGImagePropertyExifLensSpecification as an objc.ID.
 func KCGImagePropertyExifLensSpecification() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifLensSpecification()) }
 
-// KCGImagePropertyExifLensMake returns the CoreFoundation constant kCGImagePropertyExifLensMake as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifLensMake returns the value of the CoreFoundation reference constant kCGImagePropertyExifLensMake as an objc.ID.
 func KCGImagePropertyExifLensMake() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifLensMake()) }
 
-// KCGImagePropertyExifLensModel returns the CoreFoundation constant kCGImagePropertyExifLensModel as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifLensModel returns the value of the CoreFoundation reference constant kCGImagePropertyExifLensModel as an objc.ID.
 func KCGImagePropertyExifLensModel() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifLensModel()) }
 
-// KCGImagePropertyExifLensSerialNumber returns the CoreFoundation constant kCGImagePropertyExifLensSerialNumber as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifLensSerialNumber returns the value of the CoreFoundation reference constant kCGImagePropertyExifLensSerialNumber as an objc.ID.
 func KCGImagePropertyExifLensSerialNumber() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifLensSerialNumber()) }
 
-// KCGImagePropertyExifGamma returns the CoreFoundation constant kCGImagePropertyExifGamma as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifGamma returns the value of the CoreFoundation reference constant kCGImagePropertyExifGamma as an objc.ID.
 func KCGImagePropertyExifGamma() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifGamma()) }
 
-// KCGImagePropertyExifCompositeImage returns the CoreFoundation constant kCGImagePropertyExifCompositeImage as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifCompositeImage returns the value of the CoreFoundation reference constant kCGImagePropertyExifCompositeImage as an objc.ID.
 func KCGImagePropertyExifCompositeImage() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifCompositeImage()) }
 
-// KCGImagePropertyExifSourceImageNumberOfCompositeImage returns the CoreFoundation constant kCGImagePropertyExifSourceImageNumberOfCompositeImage as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifSourceImageNumberOfCompositeImage returns the value of the CoreFoundation reference constant kCGImagePropertyExifSourceImageNumberOfCompositeImage as an objc.ID.
 func KCGImagePropertyExifSourceImageNumberOfCompositeImage() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifSourceImageNumberOfCompositeImage()) }
 
-// KCGImagePropertyExifSourceExposureTimesOfCompositeImage returns the CoreFoundation constant kCGImagePropertyExifSourceExposureTimesOfCompositeImage as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifSourceExposureTimesOfCompositeImage returns the value of the CoreFoundation reference constant kCGImagePropertyExifSourceExposureTimesOfCompositeImage as an objc.ID.
 func KCGImagePropertyExifSourceExposureTimesOfCompositeImage() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifSourceExposureTimesOfCompositeImage()) }
 
-// KCGImagePropertyExifSubsecTimeOrginal returns the CoreFoundation constant kCGImagePropertyExifSubsecTimeOrginal as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifSubsecTimeOrginal returns the value of the CoreFoundation reference constant kCGImagePropertyExifSubsecTimeOrginal as an objc.ID.
 func KCGImagePropertyExifSubsecTimeOrginal() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifSubsecTimeOrginal()) }
 
-// KCGImagePropertyExifAuxLensInfo returns the CoreFoundation constant kCGImagePropertyExifAuxLensInfo as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifAuxLensInfo returns the value of the CoreFoundation reference constant kCGImagePropertyExifAuxLensInfo as an objc.ID.
 func KCGImagePropertyExifAuxLensInfo() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifAuxLensInfo()) }
 
-// KCGImagePropertyExifAuxLensModel returns the CoreFoundation constant kCGImagePropertyExifAuxLensModel as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifAuxLensModel returns the value of the CoreFoundation reference constant kCGImagePropertyExifAuxLensModel as an objc.ID.
 func KCGImagePropertyExifAuxLensModel() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifAuxLensModel()) }
 
-// KCGImagePropertyExifAuxSerialNumber returns the CoreFoundation constant kCGImagePropertyExifAuxSerialNumber as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifAuxSerialNumber returns the value of the CoreFoundation reference constant kCGImagePropertyExifAuxSerialNumber as an objc.ID.
 func KCGImagePropertyExifAuxSerialNumber() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifAuxSerialNumber()) }
 
-// KCGImagePropertyExifAuxLensID returns the CoreFoundation constant kCGImagePropertyExifAuxLensID as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifAuxLensID returns the value of the CoreFoundation reference constant kCGImagePropertyExifAuxLensID as an objc.ID.
 func KCGImagePropertyExifAuxLensID() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifAuxLensID()) }
 
-// KCGImagePropertyExifAuxLensSerialNumber returns the CoreFoundation constant kCGImagePropertyExifAuxLensSerialNumber as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifAuxLensSerialNumber returns the value of the CoreFoundation reference constant kCGImagePropertyExifAuxLensSerialNumber as an objc.ID.
 func KCGImagePropertyExifAuxLensSerialNumber() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifAuxLensSerialNumber()) }
 
-// KCGImagePropertyExifAuxImageNumber returns the CoreFoundation constant kCGImagePropertyExifAuxImageNumber as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifAuxImageNumber returns the value of the CoreFoundation reference constant kCGImagePropertyExifAuxImageNumber as an objc.ID.
 func KCGImagePropertyExifAuxImageNumber() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifAuxImageNumber()) }
 
-// KCGImagePropertyExifAuxFlashCompensation returns the CoreFoundation constant kCGImagePropertyExifAuxFlashCompensation as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifAuxFlashCompensation returns the value of the CoreFoundation reference constant kCGImagePropertyExifAuxFlashCompensation as an objc.ID.
 func KCGImagePropertyExifAuxFlashCompensation() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifAuxFlashCompensation()) }
 
-// KCGImagePropertyExifAuxOwnerName returns the CoreFoundation constant kCGImagePropertyExifAuxOwnerName as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifAuxOwnerName returns the value of the CoreFoundation reference constant kCGImagePropertyExifAuxOwnerName as an objc.ID.
 func KCGImagePropertyExifAuxOwnerName() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifAuxOwnerName()) }
 
-// KCGImagePropertyExifAuxFirmware returns the CoreFoundation constant kCGImagePropertyExifAuxFirmware as a toll-free-bridged objc.ID.
+// KCGImagePropertyExifAuxFirmware returns the value of the CoreFoundation reference constant kCGImagePropertyExifAuxFirmware as an objc.ID.
 func KCGImagePropertyExifAuxFirmware() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifAuxFirmware()) }
 
-// KCGImagePropertyGIFLoopCount returns the CoreFoundation constant kCGImagePropertyGIFLoopCount as a toll-free-bridged objc.ID.
+// KCGImagePropertyGIFLoopCount returns the value of the CoreFoundation reference constant kCGImagePropertyGIFLoopCount as an objc.ID.
 func KCGImagePropertyGIFLoopCount() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGIFLoopCount()) }
 
-// KCGImagePropertyGIFDelayTime returns the CoreFoundation constant kCGImagePropertyGIFDelayTime as a toll-free-bridged objc.ID.
+// KCGImagePropertyGIFDelayTime returns the value of the CoreFoundation reference constant kCGImagePropertyGIFDelayTime as an objc.ID.
 func KCGImagePropertyGIFDelayTime() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGIFDelayTime()) }
 
-// KCGImagePropertyGIFImageColorMap returns the CoreFoundation constant kCGImagePropertyGIFImageColorMap as a toll-free-bridged objc.ID.
+// KCGImagePropertyGIFImageColorMap returns the value of the CoreFoundation reference constant kCGImagePropertyGIFImageColorMap as an objc.ID.
 func KCGImagePropertyGIFImageColorMap() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGIFImageColorMap()) }
 
-// KCGImagePropertyGIFHasGlobalColorMap returns the CoreFoundation constant kCGImagePropertyGIFHasGlobalColorMap as a toll-free-bridged objc.ID.
+// KCGImagePropertyGIFHasGlobalColorMap returns the value of the CoreFoundation reference constant kCGImagePropertyGIFHasGlobalColorMap as an objc.ID.
 func KCGImagePropertyGIFHasGlobalColorMap() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGIFHasGlobalColorMap()) }
 
-// KCGImagePropertyGIFUnclampedDelayTime returns the CoreFoundation constant kCGImagePropertyGIFUnclampedDelayTime as a toll-free-bridged objc.ID.
+// KCGImagePropertyGIFUnclampedDelayTime returns the value of the CoreFoundation reference constant kCGImagePropertyGIFUnclampedDelayTime as an objc.ID.
 func KCGImagePropertyGIFUnclampedDelayTime() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGIFUnclampedDelayTime()) }
 
-// KCGImagePropertyGIFCanvasPixelWidth returns the CoreFoundation constant kCGImagePropertyGIFCanvasPixelWidth as a toll-free-bridged objc.ID.
+// KCGImagePropertyGIFCanvasPixelWidth returns the value of the CoreFoundation reference constant kCGImagePropertyGIFCanvasPixelWidth as an objc.ID.
 func KCGImagePropertyGIFCanvasPixelWidth() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGIFCanvasPixelWidth()) }
 
-// KCGImagePropertyGIFCanvasPixelHeight returns the CoreFoundation constant kCGImagePropertyGIFCanvasPixelHeight as a toll-free-bridged objc.ID.
+// KCGImagePropertyGIFCanvasPixelHeight returns the value of the CoreFoundation reference constant kCGImagePropertyGIFCanvasPixelHeight as an objc.ID.
 func KCGImagePropertyGIFCanvasPixelHeight() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGIFCanvasPixelHeight()) }
 
-// KCGImagePropertyGIFFrameInfoArray returns the CoreFoundation constant kCGImagePropertyGIFFrameInfoArray as a toll-free-bridged objc.ID.
+// KCGImagePropertyGIFFrameInfoArray returns the value of the CoreFoundation reference constant kCGImagePropertyGIFFrameInfoArray as an objc.ID.
 func KCGImagePropertyGIFFrameInfoArray() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGIFFrameInfoArray()) }
 
-// KCGImagePropertyPNGAuthor returns the CoreFoundation constant kCGImagePropertyPNGAuthor as a toll-free-bridged objc.ID.
+// KCGImagePropertyPNGAuthor returns the value of the CoreFoundation reference constant kCGImagePropertyPNGAuthor as an objc.ID.
 func KCGImagePropertyPNGAuthor() objc.ID { return purego.CFConstant(raw.KCGImagePropertyPNGAuthor()) }
 
-// KCGImagePropertyPNGChromaticities returns the CoreFoundation constant kCGImagePropertyPNGChromaticities as a toll-free-bridged objc.ID.
+// KCGImagePropertyPNGChromaticities returns the value of the CoreFoundation reference constant kCGImagePropertyPNGChromaticities as an objc.ID.
 func KCGImagePropertyPNGChromaticities() objc.ID { return purego.CFConstant(raw.KCGImagePropertyPNGChromaticities()) }
 
-// KCGImagePropertyPNGComment returns the CoreFoundation constant kCGImagePropertyPNGComment as a toll-free-bridged objc.ID.
+// KCGImagePropertyPNGComment returns the value of the CoreFoundation reference constant kCGImagePropertyPNGComment as an objc.ID.
 func KCGImagePropertyPNGComment() objc.ID { return purego.CFConstant(raw.KCGImagePropertyPNGComment()) }
 
-// KCGImagePropertyPNGCopyright returns the CoreFoundation constant kCGImagePropertyPNGCopyright as a toll-free-bridged objc.ID.
+// KCGImagePropertyPNGCopyright returns the value of the CoreFoundation reference constant kCGImagePropertyPNGCopyright as an objc.ID.
 func KCGImagePropertyPNGCopyright() objc.ID { return purego.CFConstant(raw.KCGImagePropertyPNGCopyright()) }
 
-// KCGImagePropertyPNGCreationTime returns the CoreFoundation constant kCGImagePropertyPNGCreationTime as a toll-free-bridged objc.ID.
+// KCGImagePropertyPNGCreationTime returns the value of the CoreFoundation reference constant kCGImagePropertyPNGCreationTime as an objc.ID.
 func KCGImagePropertyPNGCreationTime() objc.ID { return purego.CFConstant(raw.KCGImagePropertyPNGCreationTime()) }
 
-// KCGImagePropertyPNGDescription returns the CoreFoundation constant kCGImagePropertyPNGDescription as a toll-free-bridged objc.ID.
+// KCGImagePropertyPNGDescription returns the value of the CoreFoundation reference constant kCGImagePropertyPNGDescription as an objc.ID.
 func KCGImagePropertyPNGDescription() objc.ID { return purego.CFConstant(raw.KCGImagePropertyPNGDescription()) }
 
-// KCGImagePropertyPNGDisclaimer returns the CoreFoundation constant kCGImagePropertyPNGDisclaimer as a toll-free-bridged objc.ID.
+// KCGImagePropertyPNGDisclaimer returns the value of the CoreFoundation reference constant kCGImagePropertyPNGDisclaimer as an objc.ID.
 func KCGImagePropertyPNGDisclaimer() objc.ID { return purego.CFConstant(raw.KCGImagePropertyPNGDisclaimer()) }
 
-// KCGImagePropertyPNGGamma returns the CoreFoundation constant kCGImagePropertyPNGGamma as a toll-free-bridged objc.ID.
+// KCGImagePropertyPNGGamma returns the value of the CoreFoundation reference constant kCGImagePropertyPNGGamma as an objc.ID.
 func KCGImagePropertyPNGGamma() objc.ID { return purego.CFConstant(raw.KCGImagePropertyPNGGamma()) }
 
-// KCGImagePropertyPNGInterlaceType returns the CoreFoundation constant kCGImagePropertyPNGInterlaceType as a toll-free-bridged objc.ID.
+// KCGImagePropertyPNGInterlaceType returns the value of the CoreFoundation reference constant kCGImagePropertyPNGInterlaceType as an objc.ID.
 func KCGImagePropertyPNGInterlaceType() objc.ID { return purego.CFConstant(raw.KCGImagePropertyPNGInterlaceType()) }
 
-// KCGImagePropertyPNGModificationTime returns the CoreFoundation constant kCGImagePropertyPNGModificationTime as a toll-free-bridged objc.ID.
+// KCGImagePropertyPNGModificationTime returns the value of the CoreFoundation reference constant kCGImagePropertyPNGModificationTime as an objc.ID.
 func KCGImagePropertyPNGModificationTime() objc.ID { return purego.CFConstant(raw.KCGImagePropertyPNGModificationTime()) }
 
-// KCGImagePropertyPNGSoftware returns the CoreFoundation constant kCGImagePropertyPNGSoftware as a toll-free-bridged objc.ID.
+// KCGImagePropertyPNGSoftware returns the value of the CoreFoundation reference constant kCGImagePropertyPNGSoftware as an objc.ID.
 func KCGImagePropertyPNGSoftware() objc.ID { return purego.CFConstant(raw.KCGImagePropertyPNGSoftware()) }
 
-// KCGImagePropertyPNGSource returns the CoreFoundation constant kCGImagePropertyPNGSource as a toll-free-bridged objc.ID.
+// KCGImagePropertyPNGSource returns the value of the CoreFoundation reference constant kCGImagePropertyPNGSource as an objc.ID.
 func KCGImagePropertyPNGSource() objc.ID { return purego.CFConstant(raw.KCGImagePropertyPNGSource()) }
 
-// KCGImagePropertyPNGsRGBIntent returns the CoreFoundation constant kCGImagePropertyPNGsRGBIntent as a toll-free-bridged objc.ID.
+// KCGImagePropertyPNGsRGBIntent returns the value of the CoreFoundation reference constant kCGImagePropertyPNGsRGBIntent as an objc.ID.
 func KCGImagePropertyPNGsRGBIntent() objc.ID { return purego.CFConstant(raw.KCGImagePropertyPNGsRGBIntent()) }
 
-// KCGImagePropertyPNGTitle returns the CoreFoundation constant kCGImagePropertyPNGTitle as a toll-free-bridged objc.ID.
+// KCGImagePropertyPNGTitle returns the value of the CoreFoundation reference constant kCGImagePropertyPNGTitle as an objc.ID.
 func KCGImagePropertyPNGTitle() objc.ID { return purego.CFConstant(raw.KCGImagePropertyPNGTitle()) }
 
-// KCGImagePropertyPNGWarning returns the CoreFoundation constant kCGImagePropertyPNGWarning as a toll-free-bridged objc.ID.
+// KCGImagePropertyPNGWarning returns the value of the CoreFoundation reference constant kCGImagePropertyPNGWarning as an objc.ID.
 func KCGImagePropertyPNGWarning() objc.ID { return purego.CFConstant(raw.KCGImagePropertyPNGWarning()) }
 
-// KCGImagePropertyPNGXPixelsPerMeter returns the CoreFoundation constant kCGImagePropertyPNGXPixelsPerMeter as a toll-free-bridged objc.ID.
+// KCGImagePropertyPNGXPixelsPerMeter returns the value of the CoreFoundation reference constant kCGImagePropertyPNGXPixelsPerMeter as an objc.ID.
 func KCGImagePropertyPNGXPixelsPerMeter() objc.ID { return purego.CFConstant(raw.KCGImagePropertyPNGXPixelsPerMeter()) }
 
-// KCGImagePropertyPNGYPixelsPerMeter returns the CoreFoundation constant kCGImagePropertyPNGYPixelsPerMeter as a toll-free-bridged objc.ID.
+// KCGImagePropertyPNGYPixelsPerMeter returns the value of the CoreFoundation reference constant kCGImagePropertyPNGYPixelsPerMeter as an objc.ID.
 func KCGImagePropertyPNGYPixelsPerMeter() objc.ID { return purego.CFConstant(raw.KCGImagePropertyPNGYPixelsPerMeter()) }
 
-// KCGImagePropertyPNGPixelsAspectRatio returns the CoreFoundation constant kCGImagePropertyPNGPixelsAspectRatio as a toll-free-bridged objc.ID.
+// KCGImagePropertyPNGPixelsAspectRatio returns the value of the CoreFoundation reference constant kCGImagePropertyPNGPixelsAspectRatio as an objc.ID.
 func KCGImagePropertyPNGPixelsAspectRatio() objc.ID { return purego.CFConstant(raw.KCGImagePropertyPNGPixelsAspectRatio()) }
 
-// KCGImagePropertyAPNGLoopCount returns the CoreFoundation constant kCGImagePropertyAPNGLoopCount as a toll-free-bridged objc.ID.
+// KCGImagePropertyAPNGLoopCount returns the value of the CoreFoundation reference constant kCGImagePropertyAPNGLoopCount as an objc.ID.
 func KCGImagePropertyAPNGLoopCount() objc.ID { return purego.CFConstant(raw.KCGImagePropertyAPNGLoopCount()) }
 
-// KCGImagePropertyAPNGDelayTime returns the CoreFoundation constant kCGImagePropertyAPNGDelayTime as a toll-free-bridged objc.ID.
+// KCGImagePropertyAPNGDelayTime returns the value of the CoreFoundation reference constant kCGImagePropertyAPNGDelayTime as an objc.ID.
 func KCGImagePropertyAPNGDelayTime() objc.ID { return purego.CFConstant(raw.KCGImagePropertyAPNGDelayTime()) }
 
-// KCGImagePropertyAPNGUnclampedDelayTime returns the CoreFoundation constant kCGImagePropertyAPNGUnclampedDelayTime as a toll-free-bridged objc.ID.
+// KCGImagePropertyAPNGUnclampedDelayTime returns the value of the CoreFoundation reference constant kCGImagePropertyAPNGUnclampedDelayTime as an objc.ID.
 func KCGImagePropertyAPNGUnclampedDelayTime() objc.ID { return purego.CFConstant(raw.KCGImagePropertyAPNGUnclampedDelayTime()) }
 
-// KCGImagePropertyAPNGFrameInfoArray returns the CoreFoundation constant kCGImagePropertyAPNGFrameInfoArray as a toll-free-bridged objc.ID.
+// KCGImagePropertyAPNGFrameInfoArray returns the value of the CoreFoundation reference constant kCGImagePropertyAPNGFrameInfoArray as an objc.ID.
 func KCGImagePropertyAPNGFrameInfoArray() objc.ID { return purego.CFConstant(raw.KCGImagePropertyAPNGFrameInfoArray()) }
 
-// KCGImagePropertyAPNGCanvasPixelWidth returns the CoreFoundation constant kCGImagePropertyAPNGCanvasPixelWidth as a toll-free-bridged objc.ID.
+// KCGImagePropertyAPNGCanvasPixelWidth returns the value of the CoreFoundation reference constant kCGImagePropertyAPNGCanvasPixelWidth as an objc.ID.
 func KCGImagePropertyAPNGCanvasPixelWidth() objc.ID { return purego.CFConstant(raw.KCGImagePropertyAPNGCanvasPixelWidth()) }
 
-// KCGImagePropertyAPNGCanvasPixelHeight returns the CoreFoundation constant kCGImagePropertyAPNGCanvasPixelHeight as a toll-free-bridged objc.ID.
+// KCGImagePropertyAPNGCanvasPixelHeight returns the value of the CoreFoundation reference constant kCGImagePropertyAPNGCanvasPixelHeight as an objc.ID.
 func KCGImagePropertyAPNGCanvasPixelHeight() objc.ID { return purego.CFConstant(raw.KCGImagePropertyAPNGCanvasPixelHeight()) }
 
-// KCGImagePropertyWebPLoopCount returns the CoreFoundation constant kCGImagePropertyWebPLoopCount as a toll-free-bridged objc.ID.
+// KCGImagePropertyWebPLoopCount returns the value of the CoreFoundation reference constant kCGImagePropertyWebPLoopCount as an objc.ID.
 func KCGImagePropertyWebPLoopCount() objc.ID { return purego.CFConstant(raw.KCGImagePropertyWebPLoopCount()) }
 
-// KCGImagePropertyWebPDelayTime returns the CoreFoundation constant kCGImagePropertyWebPDelayTime as a toll-free-bridged objc.ID.
+// KCGImagePropertyWebPDelayTime returns the value of the CoreFoundation reference constant kCGImagePropertyWebPDelayTime as an objc.ID.
 func KCGImagePropertyWebPDelayTime() objc.ID { return purego.CFConstant(raw.KCGImagePropertyWebPDelayTime()) }
 
-// KCGImagePropertyWebPUnclampedDelayTime returns the CoreFoundation constant kCGImagePropertyWebPUnclampedDelayTime as a toll-free-bridged objc.ID.
+// KCGImagePropertyWebPUnclampedDelayTime returns the value of the CoreFoundation reference constant kCGImagePropertyWebPUnclampedDelayTime as an objc.ID.
 func KCGImagePropertyWebPUnclampedDelayTime() objc.ID { return purego.CFConstant(raw.KCGImagePropertyWebPUnclampedDelayTime()) }
 
-// KCGImagePropertyWebPFrameInfoArray returns the CoreFoundation constant kCGImagePropertyWebPFrameInfoArray as a toll-free-bridged objc.ID.
+// KCGImagePropertyWebPFrameInfoArray returns the value of the CoreFoundation reference constant kCGImagePropertyWebPFrameInfoArray as an objc.ID.
 func KCGImagePropertyWebPFrameInfoArray() objc.ID { return purego.CFConstant(raw.KCGImagePropertyWebPFrameInfoArray()) }
 
-// KCGImagePropertyWebPCanvasPixelWidth returns the CoreFoundation constant kCGImagePropertyWebPCanvasPixelWidth as a toll-free-bridged objc.ID.
+// KCGImagePropertyWebPCanvasPixelWidth returns the value of the CoreFoundation reference constant kCGImagePropertyWebPCanvasPixelWidth as an objc.ID.
 func KCGImagePropertyWebPCanvasPixelWidth() objc.ID { return purego.CFConstant(raw.KCGImagePropertyWebPCanvasPixelWidth()) }
 
-// KCGImagePropertyWebPCanvasPixelHeight returns the CoreFoundation constant kCGImagePropertyWebPCanvasPixelHeight as a toll-free-bridged objc.ID.
+// KCGImagePropertyWebPCanvasPixelHeight returns the value of the CoreFoundation reference constant kCGImagePropertyWebPCanvasPixelHeight as an objc.ID.
 func KCGImagePropertyWebPCanvasPixelHeight() objc.ID { return purego.CFConstant(raw.KCGImagePropertyWebPCanvasPixelHeight()) }
 
-// KCGImagePropertyGPSVersion returns the CoreFoundation constant kCGImagePropertyGPSVersion as a toll-free-bridged objc.ID.
+// KCGImagePropertyGPSVersion returns the value of the CoreFoundation reference constant kCGImagePropertyGPSVersion as an objc.ID.
 func KCGImagePropertyGPSVersion() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGPSVersion()) }
 
-// KCGImagePropertyGPSLatitudeRef returns the CoreFoundation constant kCGImagePropertyGPSLatitudeRef as a toll-free-bridged objc.ID.
+// KCGImagePropertyGPSLatitudeRef returns the value of the CoreFoundation reference constant kCGImagePropertyGPSLatitudeRef as an objc.ID.
 func KCGImagePropertyGPSLatitudeRef() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGPSLatitudeRef()) }
 
-// KCGImagePropertyGPSLatitude returns the CoreFoundation constant kCGImagePropertyGPSLatitude as a toll-free-bridged objc.ID.
+// KCGImagePropertyGPSLatitude returns the value of the CoreFoundation reference constant kCGImagePropertyGPSLatitude as an objc.ID.
 func KCGImagePropertyGPSLatitude() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGPSLatitude()) }
 
-// KCGImagePropertyGPSLongitudeRef returns the CoreFoundation constant kCGImagePropertyGPSLongitudeRef as a toll-free-bridged objc.ID.
+// KCGImagePropertyGPSLongitudeRef returns the value of the CoreFoundation reference constant kCGImagePropertyGPSLongitudeRef as an objc.ID.
 func KCGImagePropertyGPSLongitudeRef() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGPSLongitudeRef()) }
 
-// KCGImagePropertyGPSLongitude returns the CoreFoundation constant kCGImagePropertyGPSLongitude as a toll-free-bridged objc.ID.
+// KCGImagePropertyGPSLongitude returns the value of the CoreFoundation reference constant kCGImagePropertyGPSLongitude as an objc.ID.
 func KCGImagePropertyGPSLongitude() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGPSLongitude()) }
 
-// KCGImagePropertyGPSAltitudeRef returns the CoreFoundation constant kCGImagePropertyGPSAltitudeRef as a toll-free-bridged objc.ID.
+// KCGImagePropertyGPSAltitudeRef returns the value of the CoreFoundation reference constant kCGImagePropertyGPSAltitudeRef as an objc.ID.
 func KCGImagePropertyGPSAltitudeRef() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGPSAltitudeRef()) }
 
-// KCGImagePropertyGPSAltitude returns the CoreFoundation constant kCGImagePropertyGPSAltitude as a toll-free-bridged objc.ID.
+// KCGImagePropertyGPSAltitude returns the value of the CoreFoundation reference constant kCGImagePropertyGPSAltitude as an objc.ID.
 func KCGImagePropertyGPSAltitude() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGPSAltitude()) }
 
-// KCGImagePropertyGPSTimeStamp returns the CoreFoundation constant kCGImagePropertyGPSTimeStamp as a toll-free-bridged objc.ID.
+// KCGImagePropertyGPSTimeStamp returns the value of the CoreFoundation reference constant kCGImagePropertyGPSTimeStamp as an objc.ID.
 func KCGImagePropertyGPSTimeStamp() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGPSTimeStamp()) }
 
-// KCGImagePropertyGPSSatellites returns the CoreFoundation constant kCGImagePropertyGPSSatellites as a toll-free-bridged objc.ID.
+// KCGImagePropertyGPSSatellites returns the value of the CoreFoundation reference constant kCGImagePropertyGPSSatellites as an objc.ID.
 func KCGImagePropertyGPSSatellites() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGPSSatellites()) }
 
-// KCGImagePropertyGPSStatus returns the CoreFoundation constant kCGImagePropertyGPSStatus as a toll-free-bridged objc.ID.
+// KCGImagePropertyGPSStatus returns the value of the CoreFoundation reference constant kCGImagePropertyGPSStatus as an objc.ID.
 func KCGImagePropertyGPSStatus() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGPSStatus()) }
 
-// KCGImagePropertyGPSMeasureMode returns the CoreFoundation constant kCGImagePropertyGPSMeasureMode as a toll-free-bridged objc.ID.
+// KCGImagePropertyGPSMeasureMode returns the value of the CoreFoundation reference constant kCGImagePropertyGPSMeasureMode as an objc.ID.
 func KCGImagePropertyGPSMeasureMode() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGPSMeasureMode()) }
 
-// KCGImagePropertyGPSDOP returns the CoreFoundation constant kCGImagePropertyGPSDOP as a toll-free-bridged objc.ID.
+// KCGImagePropertyGPSDOP returns the value of the CoreFoundation reference constant kCGImagePropertyGPSDOP as an objc.ID.
 func KCGImagePropertyGPSDOP() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGPSDOP()) }
 
-// KCGImagePropertyGPSSpeedRef returns the CoreFoundation constant kCGImagePropertyGPSSpeedRef as a toll-free-bridged objc.ID.
+// KCGImagePropertyGPSSpeedRef returns the value of the CoreFoundation reference constant kCGImagePropertyGPSSpeedRef as an objc.ID.
 func KCGImagePropertyGPSSpeedRef() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGPSSpeedRef()) }
 
-// KCGImagePropertyGPSSpeed returns the CoreFoundation constant kCGImagePropertyGPSSpeed as a toll-free-bridged objc.ID.
+// KCGImagePropertyGPSSpeed returns the value of the CoreFoundation reference constant kCGImagePropertyGPSSpeed as an objc.ID.
 func KCGImagePropertyGPSSpeed() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGPSSpeed()) }
 
-// KCGImagePropertyGPSTrackRef returns the CoreFoundation constant kCGImagePropertyGPSTrackRef as a toll-free-bridged objc.ID.
+// KCGImagePropertyGPSTrackRef returns the value of the CoreFoundation reference constant kCGImagePropertyGPSTrackRef as an objc.ID.
 func KCGImagePropertyGPSTrackRef() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGPSTrackRef()) }
 
-// KCGImagePropertyGPSTrack returns the CoreFoundation constant kCGImagePropertyGPSTrack as a toll-free-bridged objc.ID.
+// KCGImagePropertyGPSTrack returns the value of the CoreFoundation reference constant kCGImagePropertyGPSTrack as an objc.ID.
 func KCGImagePropertyGPSTrack() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGPSTrack()) }
 
-// KCGImagePropertyGPSImgDirectionRef returns the CoreFoundation constant kCGImagePropertyGPSImgDirectionRef as a toll-free-bridged objc.ID.
+// KCGImagePropertyGPSImgDirectionRef returns the value of the CoreFoundation reference constant kCGImagePropertyGPSImgDirectionRef as an objc.ID.
 func KCGImagePropertyGPSImgDirectionRef() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGPSImgDirectionRef()) }
 
-// KCGImagePropertyGPSImgDirection returns the CoreFoundation constant kCGImagePropertyGPSImgDirection as a toll-free-bridged objc.ID.
+// KCGImagePropertyGPSImgDirection returns the value of the CoreFoundation reference constant kCGImagePropertyGPSImgDirection as an objc.ID.
 func KCGImagePropertyGPSImgDirection() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGPSImgDirection()) }
 
-// KCGImagePropertyGPSMapDatum returns the CoreFoundation constant kCGImagePropertyGPSMapDatum as a toll-free-bridged objc.ID.
+// KCGImagePropertyGPSMapDatum returns the value of the CoreFoundation reference constant kCGImagePropertyGPSMapDatum as an objc.ID.
 func KCGImagePropertyGPSMapDatum() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGPSMapDatum()) }
 
-// KCGImagePropertyGPSDestLatitudeRef returns the CoreFoundation constant kCGImagePropertyGPSDestLatitudeRef as a toll-free-bridged objc.ID.
+// KCGImagePropertyGPSDestLatitudeRef returns the value of the CoreFoundation reference constant kCGImagePropertyGPSDestLatitudeRef as an objc.ID.
 func KCGImagePropertyGPSDestLatitudeRef() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGPSDestLatitudeRef()) }
 
-// KCGImagePropertyGPSDestLatitude returns the CoreFoundation constant kCGImagePropertyGPSDestLatitude as a toll-free-bridged objc.ID.
+// KCGImagePropertyGPSDestLatitude returns the value of the CoreFoundation reference constant kCGImagePropertyGPSDestLatitude as an objc.ID.
 func KCGImagePropertyGPSDestLatitude() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGPSDestLatitude()) }
 
-// KCGImagePropertyGPSDestLongitudeRef returns the CoreFoundation constant kCGImagePropertyGPSDestLongitudeRef as a toll-free-bridged objc.ID.
+// KCGImagePropertyGPSDestLongitudeRef returns the value of the CoreFoundation reference constant kCGImagePropertyGPSDestLongitudeRef as an objc.ID.
 func KCGImagePropertyGPSDestLongitudeRef() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGPSDestLongitudeRef()) }
 
-// KCGImagePropertyGPSDestLongitude returns the CoreFoundation constant kCGImagePropertyGPSDestLongitude as a toll-free-bridged objc.ID.
+// KCGImagePropertyGPSDestLongitude returns the value of the CoreFoundation reference constant kCGImagePropertyGPSDestLongitude as an objc.ID.
 func KCGImagePropertyGPSDestLongitude() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGPSDestLongitude()) }
 
-// KCGImagePropertyGPSDestBearingRef returns the CoreFoundation constant kCGImagePropertyGPSDestBearingRef as a toll-free-bridged objc.ID.
+// KCGImagePropertyGPSDestBearingRef returns the value of the CoreFoundation reference constant kCGImagePropertyGPSDestBearingRef as an objc.ID.
 func KCGImagePropertyGPSDestBearingRef() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGPSDestBearingRef()) }
 
-// KCGImagePropertyGPSDestBearing returns the CoreFoundation constant kCGImagePropertyGPSDestBearing as a toll-free-bridged objc.ID.
+// KCGImagePropertyGPSDestBearing returns the value of the CoreFoundation reference constant kCGImagePropertyGPSDestBearing as an objc.ID.
 func KCGImagePropertyGPSDestBearing() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGPSDestBearing()) }
 
-// KCGImagePropertyGPSDestDistanceRef returns the CoreFoundation constant kCGImagePropertyGPSDestDistanceRef as a toll-free-bridged objc.ID.
+// KCGImagePropertyGPSDestDistanceRef returns the value of the CoreFoundation reference constant kCGImagePropertyGPSDestDistanceRef as an objc.ID.
 func KCGImagePropertyGPSDestDistanceRef() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGPSDestDistanceRef()) }
 
-// KCGImagePropertyGPSDestDistance returns the CoreFoundation constant kCGImagePropertyGPSDestDistance as a toll-free-bridged objc.ID.
+// KCGImagePropertyGPSDestDistance returns the value of the CoreFoundation reference constant kCGImagePropertyGPSDestDistance as an objc.ID.
 func KCGImagePropertyGPSDestDistance() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGPSDestDistance()) }
 
-// KCGImagePropertyGPSProcessingMethod returns the CoreFoundation constant kCGImagePropertyGPSProcessingMethod as a toll-free-bridged objc.ID.
+// KCGImagePropertyGPSProcessingMethod returns the value of the CoreFoundation reference constant kCGImagePropertyGPSProcessingMethod as an objc.ID.
 func KCGImagePropertyGPSProcessingMethod() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGPSProcessingMethod()) }
 
-// KCGImagePropertyGPSAreaInformation returns the CoreFoundation constant kCGImagePropertyGPSAreaInformation as a toll-free-bridged objc.ID.
+// KCGImagePropertyGPSAreaInformation returns the value of the CoreFoundation reference constant kCGImagePropertyGPSAreaInformation as an objc.ID.
 func KCGImagePropertyGPSAreaInformation() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGPSAreaInformation()) }
 
-// KCGImagePropertyGPSDateStamp returns the CoreFoundation constant kCGImagePropertyGPSDateStamp as a toll-free-bridged objc.ID.
+// KCGImagePropertyGPSDateStamp returns the value of the CoreFoundation reference constant kCGImagePropertyGPSDateStamp as an objc.ID.
 func KCGImagePropertyGPSDateStamp() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGPSDateStamp()) }
 
-// KCGImagePropertyGPSDifferental returns the CoreFoundation constant kCGImagePropertyGPSDifferental as a toll-free-bridged objc.ID.
+// KCGImagePropertyGPSDifferental returns the value of the CoreFoundation reference constant kCGImagePropertyGPSDifferental as an objc.ID.
 func KCGImagePropertyGPSDifferental() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGPSDifferental()) }
 
-// KCGImagePropertyGPSHPositioningError returns the CoreFoundation constant kCGImagePropertyGPSHPositioningError as a toll-free-bridged objc.ID.
+// KCGImagePropertyGPSHPositioningError returns the value of the CoreFoundation reference constant kCGImagePropertyGPSHPositioningError as an objc.ID.
 func KCGImagePropertyGPSHPositioningError() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGPSHPositioningError()) }
 
-// KCGImagePropertyIPTCObjectTypeReference returns the CoreFoundation constant kCGImagePropertyIPTCObjectTypeReference as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCObjectTypeReference returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCObjectTypeReference as an objc.ID.
 func KCGImagePropertyIPTCObjectTypeReference() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCObjectTypeReference()) }
 
-// KCGImagePropertyIPTCObjectAttributeReference returns the CoreFoundation constant kCGImagePropertyIPTCObjectAttributeReference as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCObjectAttributeReference returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCObjectAttributeReference as an objc.ID.
 func KCGImagePropertyIPTCObjectAttributeReference() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCObjectAttributeReference()) }
 
-// KCGImagePropertyIPTCObjectName returns the CoreFoundation constant kCGImagePropertyIPTCObjectName as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCObjectName returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCObjectName as an objc.ID.
 func KCGImagePropertyIPTCObjectName() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCObjectName()) }
 
-// KCGImagePropertyIPTCEditStatus returns the CoreFoundation constant kCGImagePropertyIPTCEditStatus as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCEditStatus returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCEditStatus as an objc.ID.
 func KCGImagePropertyIPTCEditStatus() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCEditStatus()) }
 
-// KCGImagePropertyIPTCEditorialUpdate returns the CoreFoundation constant kCGImagePropertyIPTCEditorialUpdate as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCEditorialUpdate returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCEditorialUpdate as an objc.ID.
 func KCGImagePropertyIPTCEditorialUpdate() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCEditorialUpdate()) }
 
-// KCGImagePropertyIPTCUrgency returns the CoreFoundation constant kCGImagePropertyIPTCUrgency as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCUrgency returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCUrgency as an objc.ID.
 func KCGImagePropertyIPTCUrgency() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCUrgency()) }
 
-// KCGImagePropertyIPTCSubjectReference returns the CoreFoundation constant kCGImagePropertyIPTCSubjectReference as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCSubjectReference returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCSubjectReference as an objc.ID.
 func KCGImagePropertyIPTCSubjectReference() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCSubjectReference()) }
 
-// KCGImagePropertyIPTCCategory returns the CoreFoundation constant kCGImagePropertyIPTCCategory as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCCategory returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCCategory as an objc.ID.
 func KCGImagePropertyIPTCCategory() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCCategory()) }
 
-// KCGImagePropertyIPTCSupplementalCategory returns the CoreFoundation constant kCGImagePropertyIPTCSupplementalCategory as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCSupplementalCategory returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCSupplementalCategory as an objc.ID.
 func KCGImagePropertyIPTCSupplementalCategory() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCSupplementalCategory()) }
 
-// KCGImagePropertyIPTCFixtureIdentifier returns the CoreFoundation constant kCGImagePropertyIPTCFixtureIdentifier as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCFixtureIdentifier returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCFixtureIdentifier as an objc.ID.
 func KCGImagePropertyIPTCFixtureIdentifier() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCFixtureIdentifier()) }
 
-// KCGImagePropertyIPTCKeywords returns the CoreFoundation constant kCGImagePropertyIPTCKeywords as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCKeywords returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCKeywords as an objc.ID.
 func KCGImagePropertyIPTCKeywords() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCKeywords()) }
 
-// KCGImagePropertyIPTCContentLocationCode returns the CoreFoundation constant kCGImagePropertyIPTCContentLocationCode as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCContentLocationCode returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCContentLocationCode as an objc.ID.
 func KCGImagePropertyIPTCContentLocationCode() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCContentLocationCode()) }
 
-// KCGImagePropertyIPTCContentLocationName returns the CoreFoundation constant kCGImagePropertyIPTCContentLocationName as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCContentLocationName returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCContentLocationName as an objc.ID.
 func KCGImagePropertyIPTCContentLocationName() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCContentLocationName()) }
 
-// KCGImagePropertyIPTCReleaseDate returns the CoreFoundation constant kCGImagePropertyIPTCReleaseDate as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCReleaseDate returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCReleaseDate as an objc.ID.
 func KCGImagePropertyIPTCReleaseDate() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCReleaseDate()) }
 
-// KCGImagePropertyIPTCReleaseTime returns the CoreFoundation constant kCGImagePropertyIPTCReleaseTime as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCReleaseTime returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCReleaseTime as an objc.ID.
 func KCGImagePropertyIPTCReleaseTime() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCReleaseTime()) }
 
-// KCGImagePropertyIPTCExpirationDate returns the CoreFoundation constant kCGImagePropertyIPTCExpirationDate as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExpirationDate returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExpirationDate as an objc.ID.
 func KCGImagePropertyIPTCExpirationDate() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExpirationDate()) }
 
-// KCGImagePropertyIPTCExpirationTime returns the CoreFoundation constant kCGImagePropertyIPTCExpirationTime as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExpirationTime returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExpirationTime as an objc.ID.
 func KCGImagePropertyIPTCExpirationTime() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExpirationTime()) }
 
-// KCGImagePropertyIPTCSpecialInstructions returns the CoreFoundation constant kCGImagePropertyIPTCSpecialInstructions as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCSpecialInstructions returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCSpecialInstructions as an objc.ID.
 func KCGImagePropertyIPTCSpecialInstructions() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCSpecialInstructions()) }
 
-// KCGImagePropertyIPTCActionAdvised returns the CoreFoundation constant kCGImagePropertyIPTCActionAdvised as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCActionAdvised returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCActionAdvised as an objc.ID.
 func KCGImagePropertyIPTCActionAdvised() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCActionAdvised()) }
 
-// KCGImagePropertyIPTCReferenceService returns the CoreFoundation constant kCGImagePropertyIPTCReferenceService as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCReferenceService returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCReferenceService as an objc.ID.
 func KCGImagePropertyIPTCReferenceService() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCReferenceService()) }
 
-// KCGImagePropertyIPTCReferenceDate returns the CoreFoundation constant kCGImagePropertyIPTCReferenceDate as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCReferenceDate returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCReferenceDate as an objc.ID.
 func KCGImagePropertyIPTCReferenceDate() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCReferenceDate()) }
 
-// KCGImagePropertyIPTCReferenceNumber returns the CoreFoundation constant kCGImagePropertyIPTCReferenceNumber as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCReferenceNumber returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCReferenceNumber as an objc.ID.
 func KCGImagePropertyIPTCReferenceNumber() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCReferenceNumber()) }
 
-// KCGImagePropertyIPTCDateCreated returns the CoreFoundation constant kCGImagePropertyIPTCDateCreated as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCDateCreated returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCDateCreated as an objc.ID.
 func KCGImagePropertyIPTCDateCreated() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCDateCreated()) }
 
-// KCGImagePropertyIPTCTimeCreated returns the CoreFoundation constant kCGImagePropertyIPTCTimeCreated as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCTimeCreated returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCTimeCreated as an objc.ID.
 func KCGImagePropertyIPTCTimeCreated() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCTimeCreated()) }
 
-// KCGImagePropertyIPTCDigitalCreationDate returns the CoreFoundation constant kCGImagePropertyIPTCDigitalCreationDate as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCDigitalCreationDate returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCDigitalCreationDate as an objc.ID.
 func KCGImagePropertyIPTCDigitalCreationDate() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCDigitalCreationDate()) }
 
-// KCGImagePropertyIPTCDigitalCreationTime returns the CoreFoundation constant kCGImagePropertyIPTCDigitalCreationTime as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCDigitalCreationTime returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCDigitalCreationTime as an objc.ID.
 func KCGImagePropertyIPTCDigitalCreationTime() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCDigitalCreationTime()) }
 
-// KCGImagePropertyIPTCOriginatingProgram returns the CoreFoundation constant kCGImagePropertyIPTCOriginatingProgram as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCOriginatingProgram returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCOriginatingProgram as an objc.ID.
 func KCGImagePropertyIPTCOriginatingProgram() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCOriginatingProgram()) }
 
-// KCGImagePropertyIPTCProgramVersion returns the CoreFoundation constant kCGImagePropertyIPTCProgramVersion as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCProgramVersion returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCProgramVersion as an objc.ID.
 func KCGImagePropertyIPTCProgramVersion() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCProgramVersion()) }
 
-// KCGImagePropertyIPTCObjectCycle returns the CoreFoundation constant kCGImagePropertyIPTCObjectCycle as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCObjectCycle returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCObjectCycle as an objc.ID.
 func KCGImagePropertyIPTCObjectCycle() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCObjectCycle()) }
 
-// KCGImagePropertyIPTCByline returns the CoreFoundation constant kCGImagePropertyIPTCByline as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCByline returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCByline as an objc.ID.
 func KCGImagePropertyIPTCByline() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCByline()) }
 
-// KCGImagePropertyIPTCBylineTitle returns the CoreFoundation constant kCGImagePropertyIPTCBylineTitle as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCBylineTitle returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCBylineTitle as an objc.ID.
 func KCGImagePropertyIPTCBylineTitle() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCBylineTitle()) }
 
-// KCGImagePropertyIPTCCity returns the CoreFoundation constant kCGImagePropertyIPTCCity as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCCity returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCCity as an objc.ID.
 func KCGImagePropertyIPTCCity() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCCity()) }
 
-// KCGImagePropertyIPTCSubLocation returns the CoreFoundation constant kCGImagePropertyIPTCSubLocation as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCSubLocation returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCSubLocation as an objc.ID.
 func KCGImagePropertyIPTCSubLocation() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCSubLocation()) }
 
-// KCGImagePropertyIPTCProvinceState returns the CoreFoundation constant kCGImagePropertyIPTCProvinceState as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCProvinceState returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCProvinceState as an objc.ID.
 func KCGImagePropertyIPTCProvinceState() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCProvinceState()) }
 
-// KCGImagePropertyIPTCCountryPrimaryLocationCode returns the CoreFoundation constant kCGImagePropertyIPTCCountryPrimaryLocationCode as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCCountryPrimaryLocationCode returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCCountryPrimaryLocationCode as an objc.ID.
 func KCGImagePropertyIPTCCountryPrimaryLocationCode() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCCountryPrimaryLocationCode()) }
 
-// KCGImagePropertyIPTCCountryPrimaryLocationName returns the CoreFoundation constant kCGImagePropertyIPTCCountryPrimaryLocationName as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCCountryPrimaryLocationName returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCCountryPrimaryLocationName as an objc.ID.
 func KCGImagePropertyIPTCCountryPrimaryLocationName() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCCountryPrimaryLocationName()) }
 
-// KCGImagePropertyIPTCOriginalTransmissionReference returns the CoreFoundation constant kCGImagePropertyIPTCOriginalTransmissionReference as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCOriginalTransmissionReference returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCOriginalTransmissionReference as an objc.ID.
 func KCGImagePropertyIPTCOriginalTransmissionReference() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCOriginalTransmissionReference()) }
 
-// KCGImagePropertyIPTCHeadline returns the CoreFoundation constant kCGImagePropertyIPTCHeadline as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCHeadline returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCHeadline as an objc.ID.
 func KCGImagePropertyIPTCHeadline() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCHeadline()) }
 
-// KCGImagePropertyIPTCCredit returns the CoreFoundation constant kCGImagePropertyIPTCCredit as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCCredit returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCCredit as an objc.ID.
 func KCGImagePropertyIPTCCredit() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCCredit()) }
 
-// KCGImagePropertyIPTCSource returns the CoreFoundation constant kCGImagePropertyIPTCSource as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCSource returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCSource as an objc.ID.
 func KCGImagePropertyIPTCSource() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCSource()) }
 
-// KCGImagePropertyIPTCCopyrightNotice returns the CoreFoundation constant kCGImagePropertyIPTCCopyrightNotice as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCCopyrightNotice returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCCopyrightNotice as an objc.ID.
 func KCGImagePropertyIPTCCopyrightNotice() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCCopyrightNotice()) }
 
-// KCGImagePropertyIPTCContact returns the CoreFoundation constant kCGImagePropertyIPTCContact as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCContact returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCContact as an objc.ID.
 func KCGImagePropertyIPTCContact() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCContact()) }
 
-// KCGImagePropertyIPTCCaptionAbstract returns the CoreFoundation constant kCGImagePropertyIPTCCaptionAbstract as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCCaptionAbstract returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCCaptionAbstract as an objc.ID.
 func KCGImagePropertyIPTCCaptionAbstract() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCCaptionAbstract()) }
 
-// KCGImagePropertyIPTCWriterEditor returns the CoreFoundation constant kCGImagePropertyIPTCWriterEditor as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCWriterEditor returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCWriterEditor as an objc.ID.
 func KCGImagePropertyIPTCWriterEditor() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCWriterEditor()) }
 
-// KCGImagePropertyIPTCImageType returns the CoreFoundation constant kCGImagePropertyIPTCImageType as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCImageType returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCImageType as an objc.ID.
 func KCGImagePropertyIPTCImageType() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCImageType()) }
 
-// KCGImagePropertyIPTCImageOrientation returns the CoreFoundation constant kCGImagePropertyIPTCImageOrientation as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCImageOrientation returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCImageOrientation as an objc.ID.
 func KCGImagePropertyIPTCImageOrientation() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCImageOrientation()) }
 
-// KCGImagePropertyIPTCLanguageIdentifier returns the CoreFoundation constant kCGImagePropertyIPTCLanguageIdentifier as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCLanguageIdentifier returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCLanguageIdentifier as an objc.ID.
 func KCGImagePropertyIPTCLanguageIdentifier() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCLanguageIdentifier()) }
 
-// KCGImagePropertyIPTCStarRating returns the CoreFoundation constant kCGImagePropertyIPTCStarRating as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCStarRating returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCStarRating as an objc.ID.
 func KCGImagePropertyIPTCStarRating() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCStarRating()) }
 
-// KCGImagePropertyIPTCCreatorContactInfo returns the CoreFoundation constant kCGImagePropertyIPTCCreatorContactInfo as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCCreatorContactInfo returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCCreatorContactInfo as an objc.ID.
 func KCGImagePropertyIPTCCreatorContactInfo() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCCreatorContactInfo()) }
 
-// KCGImagePropertyIPTCRightsUsageTerms returns the CoreFoundation constant kCGImagePropertyIPTCRightsUsageTerms as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCRightsUsageTerms returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCRightsUsageTerms as an objc.ID.
 func KCGImagePropertyIPTCRightsUsageTerms() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCRightsUsageTerms()) }
 
-// KCGImagePropertyIPTCScene returns the CoreFoundation constant kCGImagePropertyIPTCScene as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCScene returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCScene as an objc.ID.
 func KCGImagePropertyIPTCScene() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCScene()) }
 
-// KCGImagePropertyIPTCExtAboutCvTerm returns the CoreFoundation constant kCGImagePropertyIPTCExtAboutCvTerm as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtAboutCvTerm returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtAboutCvTerm as an objc.ID.
 func KCGImagePropertyIPTCExtAboutCvTerm() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtAboutCvTerm()) }
 
-// KCGImagePropertyIPTCExtAboutCvTermCvId returns the CoreFoundation constant kCGImagePropertyIPTCExtAboutCvTermCvId as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtAboutCvTermCvId returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtAboutCvTermCvId as an objc.ID.
 func KCGImagePropertyIPTCExtAboutCvTermCvId() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtAboutCvTermCvId()) }
 
-// KCGImagePropertyIPTCExtAboutCvTermId returns the CoreFoundation constant kCGImagePropertyIPTCExtAboutCvTermId as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtAboutCvTermId returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtAboutCvTermId as an objc.ID.
 func KCGImagePropertyIPTCExtAboutCvTermId() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtAboutCvTermId()) }
 
-// KCGImagePropertyIPTCExtAboutCvTermName returns the CoreFoundation constant kCGImagePropertyIPTCExtAboutCvTermName as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtAboutCvTermName returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtAboutCvTermName as an objc.ID.
 func KCGImagePropertyIPTCExtAboutCvTermName() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtAboutCvTermName()) }
 
-// KCGImagePropertyIPTCExtAboutCvTermRefinedAbout returns the CoreFoundation constant kCGImagePropertyIPTCExtAboutCvTermRefinedAbout as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtAboutCvTermRefinedAbout returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtAboutCvTermRefinedAbout as an objc.ID.
 func KCGImagePropertyIPTCExtAboutCvTermRefinedAbout() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtAboutCvTermRefinedAbout()) }
 
-// KCGImagePropertyIPTCExtAddlModelInfo returns the CoreFoundation constant kCGImagePropertyIPTCExtAddlModelInfo as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtAddlModelInfo returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtAddlModelInfo as an objc.ID.
 func KCGImagePropertyIPTCExtAddlModelInfo() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtAddlModelInfo()) }
 
-// KCGImagePropertyIPTCExtArtworkOrObject returns the CoreFoundation constant kCGImagePropertyIPTCExtArtworkOrObject as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtArtworkOrObject returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtArtworkOrObject as an objc.ID.
 func KCGImagePropertyIPTCExtArtworkOrObject() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtArtworkOrObject()) }
 
-// KCGImagePropertyIPTCExtArtworkCircaDateCreated returns the CoreFoundation constant kCGImagePropertyIPTCExtArtworkCircaDateCreated as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtArtworkCircaDateCreated returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtArtworkCircaDateCreated as an objc.ID.
 func KCGImagePropertyIPTCExtArtworkCircaDateCreated() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtArtworkCircaDateCreated()) }
 
-// KCGImagePropertyIPTCExtArtworkContentDescription returns the CoreFoundation constant kCGImagePropertyIPTCExtArtworkContentDescription as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtArtworkContentDescription returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtArtworkContentDescription as an objc.ID.
 func KCGImagePropertyIPTCExtArtworkContentDescription() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtArtworkContentDescription()) }
 
-// KCGImagePropertyIPTCExtArtworkContributionDescription returns the CoreFoundation constant kCGImagePropertyIPTCExtArtworkContributionDescription as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtArtworkContributionDescription returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtArtworkContributionDescription as an objc.ID.
 func KCGImagePropertyIPTCExtArtworkContributionDescription() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtArtworkContributionDescription()) }
 
-// KCGImagePropertyIPTCExtArtworkCopyrightNotice returns the CoreFoundation constant kCGImagePropertyIPTCExtArtworkCopyrightNotice as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtArtworkCopyrightNotice returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtArtworkCopyrightNotice as an objc.ID.
 func KCGImagePropertyIPTCExtArtworkCopyrightNotice() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtArtworkCopyrightNotice()) }
 
-// KCGImagePropertyIPTCExtArtworkCreator returns the CoreFoundation constant kCGImagePropertyIPTCExtArtworkCreator as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtArtworkCreator returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtArtworkCreator as an objc.ID.
 func KCGImagePropertyIPTCExtArtworkCreator() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtArtworkCreator()) }
 
-// KCGImagePropertyIPTCExtArtworkCreatorID returns the CoreFoundation constant kCGImagePropertyIPTCExtArtworkCreatorID as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtArtworkCreatorID returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtArtworkCreatorID as an objc.ID.
 func KCGImagePropertyIPTCExtArtworkCreatorID() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtArtworkCreatorID()) }
 
-// KCGImagePropertyIPTCExtArtworkCopyrightOwnerID returns the CoreFoundation constant kCGImagePropertyIPTCExtArtworkCopyrightOwnerID as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtArtworkCopyrightOwnerID returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtArtworkCopyrightOwnerID as an objc.ID.
 func KCGImagePropertyIPTCExtArtworkCopyrightOwnerID() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtArtworkCopyrightOwnerID()) }
 
-// KCGImagePropertyIPTCExtArtworkCopyrightOwnerName returns the CoreFoundation constant kCGImagePropertyIPTCExtArtworkCopyrightOwnerName as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtArtworkCopyrightOwnerName returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtArtworkCopyrightOwnerName as an objc.ID.
 func KCGImagePropertyIPTCExtArtworkCopyrightOwnerName() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtArtworkCopyrightOwnerName()) }
 
-// KCGImagePropertyIPTCExtArtworkLicensorID returns the CoreFoundation constant kCGImagePropertyIPTCExtArtworkLicensorID as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtArtworkLicensorID returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtArtworkLicensorID as an objc.ID.
 func KCGImagePropertyIPTCExtArtworkLicensorID() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtArtworkLicensorID()) }
 
-// KCGImagePropertyIPTCExtArtworkLicensorName returns the CoreFoundation constant kCGImagePropertyIPTCExtArtworkLicensorName as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtArtworkLicensorName returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtArtworkLicensorName as an objc.ID.
 func KCGImagePropertyIPTCExtArtworkLicensorName() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtArtworkLicensorName()) }
 
-// KCGImagePropertyIPTCExtArtworkDateCreated returns the CoreFoundation constant kCGImagePropertyIPTCExtArtworkDateCreated as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtArtworkDateCreated returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtArtworkDateCreated as an objc.ID.
 func KCGImagePropertyIPTCExtArtworkDateCreated() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtArtworkDateCreated()) }
 
-// KCGImagePropertyIPTCExtArtworkPhysicalDescription returns the CoreFoundation constant kCGImagePropertyIPTCExtArtworkPhysicalDescription as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtArtworkPhysicalDescription returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtArtworkPhysicalDescription as an objc.ID.
 func KCGImagePropertyIPTCExtArtworkPhysicalDescription() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtArtworkPhysicalDescription()) }
 
-// KCGImagePropertyIPTCExtArtworkSource returns the CoreFoundation constant kCGImagePropertyIPTCExtArtworkSource as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtArtworkSource returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtArtworkSource as an objc.ID.
 func KCGImagePropertyIPTCExtArtworkSource() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtArtworkSource()) }
 
-// KCGImagePropertyIPTCExtArtworkSourceInventoryNo returns the CoreFoundation constant kCGImagePropertyIPTCExtArtworkSourceInventoryNo as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtArtworkSourceInventoryNo returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtArtworkSourceInventoryNo as an objc.ID.
 func KCGImagePropertyIPTCExtArtworkSourceInventoryNo() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtArtworkSourceInventoryNo()) }
 
-// KCGImagePropertyIPTCExtArtworkSourceInvURL returns the CoreFoundation constant kCGImagePropertyIPTCExtArtworkSourceInvURL as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtArtworkSourceInvURL returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtArtworkSourceInvURL as an objc.ID.
 func KCGImagePropertyIPTCExtArtworkSourceInvURL() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtArtworkSourceInvURL()) }
 
-// KCGImagePropertyIPTCExtArtworkStylePeriod returns the CoreFoundation constant kCGImagePropertyIPTCExtArtworkStylePeriod as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtArtworkStylePeriod returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtArtworkStylePeriod as an objc.ID.
 func KCGImagePropertyIPTCExtArtworkStylePeriod() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtArtworkStylePeriod()) }
 
-// KCGImagePropertyIPTCExtArtworkTitle returns the CoreFoundation constant kCGImagePropertyIPTCExtArtworkTitle as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtArtworkTitle returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtArtworkTitle as an objc.ID.
 func KCGImagePropertyIPTCExtArtworkTitle() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtArtworkTitle()) }
 
-// KCGImagePropertyIPTCExtAudioBitrate returns the CoreFoundation constant kCGImagePropertyIPTCExtAudioBitrate as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtAudioBitrate returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtAudioBitrate as an objc.ID.
 func KCGImagePropertyIPTCExtAudioBitrate() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtAudioBitrate()) }
 
-// KCGImagePropertyIPTCExtAudioBitrateMode returns the CoreFoundation constant kCGImagePropertyIPTCExtAudioBitrateMode as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtAudioBitrateMode returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtAudioBitrateMode as an objc.ID.
 func KCGImagePropertyIPTCExtAudioBitrateMode() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtAudioBitrateMode()) }
 
-// KCGImagePropertyIPTCExtAudioChannelCount returns the CoreFoundation constant kCGImagePropertyIPTCExtAudioChannelCount as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtAudioChannelCount returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtAudioChannelCount as an objc.ID.
 func KCGImagePropertyIPTCExtAudioChannelCount() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtAudioChannelCount()) }
 
-// KCGImagePropertyIPTCExtCircaDateCreated returns the CoreFoundation constant kCGImagePropertyIPTCExtCircaDateCreated as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtCircaDateCreated returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtCircaDateCreated as an objc.ID.
 func KCGImagePropertyIPTCExtCircaDateCreated() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtCircaDateCreated()) }
 
-// KCGImagePropertyIPTCExtContainerFormat returns the CoreFoundation constant kCGImagePropertyIPTCExtContainerFormat as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtContainerFormat returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtContainerFormat as an objc.ID.
 func KCGImagePropertyIPTCExtContainerFormat() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtContainerFormat()) }
 
-// KCGImagePropertyIPTCExtContainerFormatIdentifier returns the CoreFoundation constant kCGImagePropertyIPTCExtContainerFormatIdentifier as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtContainerFormatIdentifier returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtContainerFormatIdentifier as an objc.ID.
 func KCGImagePropertyIPTCExtContainerFormatIdentifier() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtContainerFormatIdentifier()) }
 
-// KCGImagePropertyIPTCExtContainerFormatName returns the CoreFoundation constant kCGImagePropertyIPTCExtContainerFormatName as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtContainerFormatName returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtContainerFormatName as an objc.ID.
 func KCGImagePropertyIPTCExtContainerFormatName() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtContainerFormatName()) }
 
-// KCGImagePropertyIPTCExtContributor returns the CoreFoundation constant kCGImagePropertyIPTCExtContributor as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtContributor returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtContributor as an objc.ID.
 func KCGImagePropertyIPTCExtContributor() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtContributor()) }
 
-// KCGImagePropertyIPTCExtContributorIdentifier returns the CoreFoundation constant kCGImagePropertyIPTCExtContributorIdentifier as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtContributorIdentifier returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtContributorIdentifier as an objc.ID.
 func KCGImagePropertyIPTCExtContributorIdentifier() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtContributorIdentifier()) }
 
-// KCGImagePropertyIPTCExtContributorName returns the CoreFoundation constant kCGImagePropertyIPTCExtContributorName as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtContributorName returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtContributorName as an objc.ID.
 func KCGImagePropertyIPTCExtContributorName() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtContributorName()) }
 
-// KCGImagePropertyIPTCExtContributorRole returns the CoreFoundation constant kCGImagePropertyIPTCExtContributorRole as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtContributorRole returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtContributorRole as an objc.ID.
 func KCGImagePropertyIPTCExtContributorRole() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtContributorRole()) }
 
-// KCGImagePropertyIPTCExtCopyrightYear returns the CoreFoundation constant kCGImagePropertyIPTCExtCopyrightYear as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtCopyrightYear returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtCopyrightYear as an objc.ID.
 func KCGImagePropertyIPTCExtCopyrightYear() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtCopyrightYear()) }
 
-// KCGImagePropertyIPTCExtCreator returns the CoreFoundation constant kCGImagePropertyIPTCExtCreator as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtCreator returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtCreator as an objc.ID.
 func KCGImagePropertyIPTCExtCreator() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtCreator()) }
 
-// KCGImagePropertyIPTCExtCreatorIdentifier returns the CoreFoundation constant kCGImagePropertyIPTCExtCreatorIdentifier as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtCreatorIdentifier returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtCreatorIdentifier as an objc.ID.
 func KCGImagePropertyIPTCExtCreatorIdentifier() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtCreatorIdentifier()) }
 
-// KCGImagePropertyIPTCExtCreatorName returns the CoreFoundation constant kCGImagePropertyIPTCExtCreatorName as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtCreatorName returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtCreatorName as an objc.ID.
 func KCGImagePropertyIPTCExtCreatorName() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtCreatorName()) }
 
-// KCGImagePropertyIPTCExtCreatorRole returns the CoreFoundation constant kCGImagePropertyIPTCExtCreatorRole as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtCreatorRole returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtCreatorRole as an objc.ID.
 func KCGImagePropertyIPTCExtCreatorRole() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtCreatorRole()) }
 
-// KCGImagePropertyIPTCExtControlledVocabularyTerm returns the CoreFoundation constant kCGImagePropertyIPTCExtControlledVocabularyTerm as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtControlledVocabularyTerm returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtControlledVocabularyTerm as an objc.ID.
 func KCGImagePropertyIPTCExtControlledVocabularyTerm() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtControlledVocabularyTerm()) }
 
-// KCGImagePropertyIPTCExtDataOnScreen returns the CoreFoundation constant kCGImagePropertyIPTCExtDataOnScreen as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtDataOnScreen returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtDataOnScreen as an objc.ID.
 func KCGImagePropertyIPTCExtDataOnScreen() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtDataOnScreen()) }
 
-// KCGImagePropertyIPTCExtDataOnScreenRegion returns the CoreFoundation constant kCGImagePropertyIPTCExtDataOnScreenRegion as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtDataOnScreenRegion returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtDataOnScreenRegion as an objc.ID.
 func KCGImagePropertyIPTCExtDataOnScreenRegion() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtDataOnScreenRegion()) }
 
-// KCGImagePropertyIPTCExtDataOnScreenRegionD returns the CoreFoundation constant kCGImagePropertyIPTCExtDataOnScreenRegionD as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtDataOnScreenRegionD returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtDataOnScreenRegionD as an objc.ID.
 func KCGImagePropertyIPTCExtDataOnScreenRegionD() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtDataOnScreenRegionD()) }
 
-// KCGImagePropertyIPTCExtDataOnScreenRegionH returns the CoreFoundation constant kCGImagePropertyIPTCExtDataOnScreenRegionH as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtDataOnScreenRegionH returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtDataOnScreenRegionH as an objc.ID.
 func KCGImagePropertyIPTCExtDataOnScreenRegionH() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtDataOnScreenRegionH()) }
 
-// KCGImagePropertyIPTCExtDataOnScreenRegionText returns the CoreFoundation constant kCGImagePropertyIPTCExtDataOnScreenRegionText as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtDataOnScreenRegionText returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtDataOnScreenRegionText as an objc.ID.
 func KCGImagePropertyIPTCExtDataOnScreenRegionText() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtDataOnScreenRegionText()) }
 
-// KCGImagePropertyIPTCExtDataOnScreenRegionUnit returns the CoreFoundation constant kCGImagePropertyIPTCExtDataOnScreenRegionUnit as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtDataOnScreenRegionUnit returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtDataOnScreenRegionUnit as an objc.ID.
 func KCGImagePropertyIPTCExtDataOnScreenRegionUnit() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtDataOnScreenRegionUnit()) }
 
-// KCGImagePropertyIPTCExtDataOnScreenRegionW returns the CoreFoundation constant kCGImagePropertyIPTCExtDataOnScreenRegionW as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtDataOnScreenRegionW returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtDataOnScreenRegionW as an objc.ID.
 func KCGImagePropertyIPTCExtDataOnScreenRegionW() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtDataOnScreenRegionW()) }
 
-// KCGImagePropertyIPTCExtDataOnScreenRegionX returns the CoreFoundation constant kCGImagePropertyIPTCExtDataOnScreenRegionX as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtDataOnScreenRegionX returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtDataOnScreenRegionX as an objc.ID.
 func KCGImagePropertyIPTCExtDataOnScreenRegionX() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtDataOnScreenRegionX()) }
 
-// KCGImagePropertyIPTCExtDataOnScreenRegionY returns the CoreFoundation constant kCGImagePropertyIPTCExtDataOnScreenRegionY as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtDataOnScreenRegionY returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtDataOnScreenRegionY as an objc.ID.
 func KCGImagePropertyIPTCExtDataOnScreenRegionY() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtDataOnScreenRegionY()) }
 
-// KCGImagePropertyIPTCExtDigitalImageGUID returns the CoreFoundation constant kCGImagePropertyIPTCExtDigitalImageGUID as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtDigitalImageGUID returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtDigitalImageGUID as an objc.ID.
 func KCGImagePropertyIPTCExtDigitalImageGUID() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtDigitalImageGUID()) }
 
-// KCGImagePropertyIPTCExtDigitalSourceFileType returns the CoreFoundation constant kCGImagePropertyIPTCExtDigitalSourceFileType as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtDigitalSourceFileType returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtDigitalSourceFileType as an objc.ID.
 func KCGImagePropertyIPTCExtDigitalSourceFileType() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtDigitalSourceFileType()) }
 
-// KCGImagePropertyIPTCExtDigitalSourceType returns the CoreFoundation constant kCGImagePropertyIPTCExtDigitalSourceType as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtDigitalSourceType returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtDigitalSourceType as an objc.ID.
 func KCGImagePropertyIPTCExtDigitalSourceType() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtDigitalSourceType()) }
 
-// KCGImagePropertyIPTCExtDopesheet returns the CoreFoundation constant kCGImagePropertyIPTCExtDopesheet as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtDopesheet returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtDopesheet as an objc.ID.
 func KCGImagePropertyIPTCExtDopesheet() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtDopesheet()) }
 
-// KCGImagePropertyIPTCExtDopesheetLink returns the CoreFoundation constant kCGImagePropertyIPTCExtDopesheetLink as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtDopesheetLink returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtDopesheetLink as an objc.ID.
 func KCGImagePropertyIPTCExtDopesheetLink() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtDopesheetLink()) }
 
-// KCGImagePropertyIPTCExtDopesheetLinkLink returns the CoreFoundation constant kCGImagePropertyIPTCExtDopesheetLinkLink as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtDopesheetLinkLink returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtDopesheetLinkLink as an objc.ID.
 func KCGImagePropertyIPTCExtDopesheetLinkLink() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtDopesheetLinkLink()) }
 
-// KCGImagePropertyIPTCExtDopesheetLinkLinkQualifier returns the CoreFoundation constant kCGImagePropertyIPTCExtDopesheetLinkLinkQualifier as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtDopesheetLinkLinkQualifier returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtDopesheetLinkLinkQualifier as an objc.ID.
 func KCGImagePropertyIPTCExtDopesheetLinkLinkQualifier() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtDopesheetLinkLinkQualifier()) }
 
-// KCGImagePropertyIPTCExtEmbdEncRightsExpr returns the CoreFoundation constant kCGImagePropertyIPTCExtEmbdEncRightsExpr as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtEmbdEncRightsExpr returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtEmbdEncRightsExpr as an objc.ID.
 func KCGImagePropertyIPTCExtEmbdEncRightsExpr() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtEmbdEncRightsExpr()) }
 
-// KCGImagePropertyIPTCExtEmbeddedEncodedRightsExpr returns the CoreFoundation constant kCGImagePropertyIPTCExtEmbeddedEncodedRightsExpr as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtEmbeddedEncodedRightsExpr returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtEmbeddedEncodedRightsExpr as an objc.ID.
 func KCGImagePropertyIPTCExtEmbeddedEncodedRightsExpr() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtEmbeddedEncodedRightsExpr()) }
 
-// KCGImagePropertyIPTCExtEmbeddedEncodedRightsExprType returns the CoreFoundation constant kCGImagePropertyIPTCExtEmbeddedEncodedRightsExprType as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtEmbeddedEncodedRightsExprType returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtEmbeddedEncodedRightsExprType as an objc.ID.
 func KCGImagePropertyIPTCExtEmbeddedEncodedRightsExprType() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtEmbeddedEncodedRightsExprType()) }
 
-// KCGImagePropertyIPTCExtEmbeddedEncodedRightsExprLangID returns the CoreFoundation constant kCGImagePropertyIPTCExtEmbeddedEncodedRightsExprLangID as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtEmbeddedEncodedRightsExprLangID returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtEmbeddedEncodedRightsExprLangID as an objc.ID.
 func KCGImagePropertyIPTCExtEmbeddedEncodedRightsExprLangID() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtEmbeddedEncodedRightsExprLangID()) }
 
-// KCGImagePropertyIPTCExtEpisode returns the CoreFoundation constant kCGImagePropertyIPTCExtEpisode as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtEpisode returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtEpisode as an objc.ID.
 func KCGImagePropertyIPTCExtEpisode() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtEpisode()) }
 
-// KCGImagePropertyIPTCExtEpisodeIdentifier returns the CoreFoundation constant kCGImagePropertyIPTCExtEpisodeIdentifier as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtEpisodeIdentifier returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtEpisodeIdentifier as an objc.ID.
 func KCGImagePropertyIPTCExtEpisodeIdentifier() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtEpisodeIdentifier()) }
 
-// KCGImagePropertyIPTCExtEpisodeName returns the CoreFoundation constant kCGImagePropertyIPTCExtEpisodeName as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtEpisodeName returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtEpisodeName as an objc.ID.
 func KCGImagePropertyIPTCExtEpisodeName() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtEpisodeName()) }
 
-// KCGImagePropertyIPTCExtEpisodeNumber returns the CoreFoundation constant kCGImagePropertyIPTCExtEpisodeNumber as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtEpisodeNumber returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtEpisodeNumber as an objc.ID.
 func KCGImagePropertyIPTCExtEpisodeNumber() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtEpisodeNumber()) }
 
-// KCGImagePropertyIPTCExtEvent returns the CoreFoundation constant kCGImagePropertyIPTCExtEvent as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtEvent returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtEvent as an objc.ID.
 func KCGImagePropertyIPTCExtEvent() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtEvent()) }
 
-// KCGImagePropertyIPTCExtShownEvent returns the CoreFoundation constant kCGImagePropertyIPTCExtShownEvent as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtShownEvent returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtShownEvent as an objc.ID.
 func KCGImagePropertyIPTCExtShownEvent() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtShownEvent()) }
 
-// KCGImagePropertyIPTCExtShownEventIdentifier returns the CoreFoundation constant kCGImagePropertyIPTCExtShownEventIdentifier as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtShownEventIdentifier returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtShownEventIdentifier as an objc.ID.
 func KCGImagePropertyIPTCExtShownEventIdentifier() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtShownEventIdentifier()) }
 
-// KCGImagePropertyIPTCExtShownEventName returns the CoreFoundation constant kCGImagePropertyIPTCExtShownEventName as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtShownEventName returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtShownEventName as an objc.ID.
 func KCGImagePropertyIPTCExtShownEventName() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtShownEventName()) }
 
-// KCGImagePropertyIPTCExtExternalMetadataLink returns the CoreFoundation constant kCGImagePropertyIPTCExtExternalMetadataLink as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtExternalMetadataLink returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtExternalMetadataLink as an objc.ID.
 func KCGImagePropertyIPTCExtExternalMetadataLink() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtExternalMetadataLink()) }
 
-// KCGImagePropertyIPTCExtFeedIdentifier returns the CoreFoundation constant kCGImagePropertyIPTCExtFeedIdentifier as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtFeedIdentifier returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtFeedIdentifier as an objc.ID.
 func KCGImagePropertyIPTCExtFeedIdentifier() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtFeedIdentifier()) }
 
-// KCGImagePropertyIPTCExtGenre returns the CoreFoundation constant kCGImagePropertyIPTCExtGenre as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtGenre returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtGenre as an objc.ID.
 func KCGImagePropertyIPTCExtGenre() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtGenre()) }
 
-// KCGImagePropertyIPTCExtGenreCvId returns the CoreFoundation constant kCGImagePropertyIPTCExtGenreCvId as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtGenreCvId returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtGenreCvId as an objc.ID.
 func KCGImagePropertyIPTCExtGenreCvId() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtGenreCvId()) }
 
-// KCGImagePropertyIPTCExtGenreCvTermId returns the CoreFoundation constant kCGImagePropertyIPTCExtGenreCvTermId as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtGenreCvTermId returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtGenreCvTermId as an objc.ID.
 func KCGImagePropertyIPTCExtGenreCvTermId() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtGenreCvTermId()) }
 
-// KCGImagePropertyIPTCExtGenreCvTermName returns the CoreFoundation constant kCGImagePropertyIPTCExtGenreCvTermName as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtGenreCvTermName returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtGenreCvTermName as an objc.ID.
 func KCGImagePropertyIPTCExtGenreCvTermName() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtGenreCvTermName()) }
 
-// KCGImagePropertyIPTCExtGenreCvTermRefinedAbout returns the CoreFoundation constant kCGImagePropertyIPTCExtGenreCvTermRefinedAbout as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtGenreCvTermRefinedAbout returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtGenreCvTermRefinedAbout as an objc.ID.
 func KCGImagePropertyIPTCExtGenreCvTermRefinedAbout() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtGenreCvTermRefinedAbout()) }
 
-// KCGImagePropertyIPTCExtHeadline returns the CoreFoundation constant kCGImagePropertyIPTCExtHeadline as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtHeadline returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtHeadline as an objc.ID.
 func KCGImagePropertyIPTCExtHeadline() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtHeadline()) }
 
-// KCGImagePropertyIPTCExtIPTCLastEdited returns the CoreFoundation constant kCGImagePropertyIPTCExtIPTCLastEdited as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtIPTCLastEdited returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtIPTCLastEdited as an objc.ID.
 func KCGImagePropertyIPTCExtIPTCLastEdited() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtIPTCLastEdited()) }
 
-// KCGImagePropertyIPTCExtLinkedEncRightsExpr returns the CoreFoundation constant kCGImagePropertyIPTCExtLinkedEncRightsExpr as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtLinkedEncRightsExpr returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtLinkedEncRightsExpr as an objc.ID.
 func KCGImagePropertyIPTCExtLinkedEncRightsExpr() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtLinkedEncRightsExpr()) }
 
-// KCGImagePropertyIPTCExtLinkedEncodedRightsExpr returns the CoreFoundation constant kCGImagePropertyIPTCExtLinkedEncodedRightsExpr as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtLinkedEncodedRightsExpr returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtLinkedEncodedRightsExpr as an objc.ID.
 func KCGImagePropertyIPTCExtLinkedEncodedRightsExpr() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtLinkedEncodedRightsExpr()) }
 
-// KCGImagePropertyIPTCExtLinkedEncodedRightsExprType returns the CoreFoundation constant kCGImagePropertyIPTCExtLinkedEncodedRightsExprType as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtLinkedEncodedRightsExprType returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtLinkedEncodedRightsExprType as an objc.ID.
 func KCGImagePropertyIPTCExtLinkedEncodedRightsExprType() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtLinkedEncodedRightsExprType()) }
 
-// KCGImagePropertyIPTCExtLinkedEncodedRightsExprLangID returns the CoreFoundation constant kCGImagePropertyIPTCExtLinkedEncodedRightsExprLangID as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtLinkedEncodedRightsExprLangID returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtLinkedEncodedRightsExprLangID as an objc.ID.
 func KCGImagePropertyIPTCExtLinkedEncodedRightsExprLangID() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtLinkedEncodedRightsExprLangID()) }
 
-// KCGImagePropertyIPTCExtLocationCreated returns the CoreFoundation constant kCGImagePropertyIPTCExtLocationCreated as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtLocationCreated returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtLocationCreated as an objc.ID.
 func KCGImagePropertyIPTCExtLocationCreated() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtLocationCreated()) }
 
-// KCGImagePropertyIPTCExtLocationCity returns the CoreFoundation constant kCGImagePropertyIPTCExtLocationCity as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtLocationCity returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtLocationCity as an objc.ID.
 func KCGImagePropertyIPTCExtLocationCity() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtLocationCity()) }
 
-// KCGImagePropertyIPTCExtLocationCountryCode returns the CoreFoundation constant kCGImagePropertyIPTCExtLocationCountryCode as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtLocationCountryCode returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtLocationCountryCode as an objc.ID.
 func KCGImagePropertyIPTCExtLocationCountryCode() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtLocationCountryCode()) }
 
-// KCGImagePropertyIPTCExtLocationCountryName returns the CoreFoundation constant kCGImagePropertyIPTCExtLocationCountryName as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtLocationCountryName returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtLocationCountryName as an objc.ID.
 func KCGImagePropertyIPTCExtLocationCountryName() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtLocationCountryName()) }
 
-// KCGImagePropertyIPTCExtLocationGPSAltitude returns the CoreFoundation constant kCGImagePropertyIPTCExtLocationGPSAltitude as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtLocationGPSAltitude returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtLocationGPSAltitude as an objc.ID.
 func KCGImagePropertyIPTCExtLocationGPSAltitude() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtLocationGPSAltitude()) }
 
-// KCGImagePropertyIPTCExtLocationGPSLatitude returns the CoreFoundation constant kCGImagePropertyIPTCExtLocationGPSLatitude as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtLocationGPSLatitude returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtLocationGPSLatitude as an objc.ID.
 func KCGImagePropertyIPTCExtLocationGPSLatitude() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtLocationGPSLatitude()) }
 
-// KCGImagePropertyIPTCExtLocationGPSLongitude returns the CoreFoundation constant kCGImagePropertyIPTCExtLocationGPSLongitude as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtLocationGPSLongitude returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtLocationGPSLongitude as an objc.ID.
 func KCGImagePropertyIPTCExtLocationGPSLongitude() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtLocationGPSLongitude()) }
 
-// KCGImagePropertyIPTCExtLocationIdentifier returns the CoreFoundation constant kCGImagePropertyIPTCExtLocationIdentifier as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtLocationIdentifier returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtLocationIdentifier as an objc.ID.
 func KCGImagePropertyIPTCExtLocationIdentifier() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtLocationIdentifier()) }
 
-// KCGImagePropertyIPTCExtLocationLocationId returns the CoreFoundation constant kCGImagePropertyIPTCExtLocationLocationId as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtLocationLocationId returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtLocationLocationId as an objc.ID.
 func KCGImagePropertyIPTCExtLocationLocationId() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtLocationLocationId()) }
 
-// KCGImagePropertyIPTCExtLocationLocationName returns the CoreFoundation constant kCGImagePropertyIPTCExtLocationLocationName as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtLocationLocationName returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtLocationLocationName as an objc.ID.
 func KCGImagePropertyIPTCExtLocationLocationName() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtLocationLocationName()) }
 
-// KCGImagePropertyIPTCExtLocationProvinceState returns the CoreFoundation constant kCGImagePropertyIPTCExtLocationProvinceState as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtLocationProvinceState returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtLocationProvinceState as an objc.ID.
 func KCGImagePropertyIPTCExtLocationProvinceState() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtLocationProvinceState()) }
 
-// KCGImagePropertyIPTCExtLocationSublocation returns the CoreFoundation constant kCGImagePropertyIPTCExtLocationSublocation as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtLocationSublocation returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtLocationSublocation as an objc.ID.
 func KCGImagePropertyIPTCExtLocationSublocation() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtLocationSublocation()) }
 
-// KCGImagePropertyIPTCExtLocationWorldRegion returns the CoreFoundation constant kCGImagePropertyIPTCExtLocationWorldRegion as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtLocationWorldRegion returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtLocationWorldRegion as an objc.ID.
 func KCGImagePropertyIPTCExtLocationWorldRegion() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtLocationWorldRegion()) }
 
-// KCGImagePropertyIPTCExtLocationShown returns the CoreFoundation constant kCGImagePropertyIPTCExtLocationShown as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtLocationShown returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtLocationShown as an objc.ID.
 func KCGImagePropertyIPTCExtLocationShown() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtLocationShown()) }
 
-// KCGImagePropertyIPTCExtMaxAvailHeight returns the CoreFoundation constant kCGImagePropertyIPTCExtMaxAvailHeight as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtMaxAvailHeight returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtMaxAvailHeight as an objc.ID.
 func KCGImagePropertyIPTCExtMaxAvailHeight() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtMaxAvailHeight()) }
 
-// KCGImagePropertyIPTCExtMaxAvailWidth returns the CoreFoundation constant kCGImagePropertyIPTCExtMaxAvailWidth as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtMaxAvailWidth returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtMaxAvailWidth as an objc.ID.
 func KCGImagePropertyIPTCExtMaxAvailWidth() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtMaxAvailWidth()) }
 
-// KCGImagePropertyIPTCExtModelAge returns the CoreFoundation constant kCGImagePropertyIPTCExtModelAge as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtModelAge returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtModelAge as an objc.ID.
 func KCGImagePropertyIPTCExtModelAge() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtModelAge()) }
 
-// KCGImagePropertyIPTCExtOrganisationInImageCode returns the CoreFoundation constant kCGImagePropertyIPTCExtOrganisationInImageCode as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtOrganisationInImageCode returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtOrganisationInImageCode as an objc.ID.
 func KCGImagePropertyIPTCExtOrganisationInImageCode() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtOrganisationInImageCode()) }
 
-// KCGImagePropertyIPTCExtOrganisationInImageName returns the CoreFoundation constant kCGImagePropertyIPTCExtOrganisationInImageName as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtOrganisationInImageName returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtOrganisationInImageName as an objc.ID.
 func KCGImagePropertyIPTCExtOrganisationInImageName() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtOrganisationInImageName()) }
 
-// KCGImagePropertyIPTCExtPersonHeard returns the CoreFoundation constant kCGImagePropertyIPTCExtPersonHeard as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtPersonHeard returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtPersonHeard as an objc.ID.
 func KCGImagePropertyIPTCExtPersonHeard() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtPersonHeard()) }
 
-// KCGImagePropertyIPTCExtPersonHeardIdentifier returns the CoreFoundation constant kCGImagePropertyIPTCExtPersonHeardIdentifier as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtPersonHeardIdentifier returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtPersonHeardIdentifier as an objc.ID.
 func KCGImagePropertyIPTCExtPersonHeardIdentifier() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtPersonHeardIdentifier()) }
 
-// KCGImagePropertyIPTCExtPersonHeardName returns the CoreFoundation constant kCGImagePropertyIPTCExtPersonHeardName as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtPersonHeardName returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtPersonHeardName as an objc.ID.
 func KCGImagePropertyIPTCExtPersonHeardName() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtPersonHeardName()) }
 
-// KCGImagePropertyIPTCExtPersonInImage returns the CoreFoundation constant kCGImagePropertyIPTCExtPersonInImage as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtPersonInImage returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtPersonInImage as an objc.ID.
 func KCGImagePropertyIPTCExtPersonInImage() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtPersonInImage()) }
 
-// KCGImagePropertyIPTCExtPersonInImageWDetails returns the CoreFoundation constant kCGImagePropertyIPTCExtPersonInImageWDetails as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtPersonInImageWDetails returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtPersonInImageWDetails as an objc.ID.
 func KCGImagePropertyIPTCExtPersonInImageWDetails() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtPersonInImageWDetails()) }
 
-// KCGImagePropertyIPTCExtPersonInImageCharacteristic returns the CoreFoundation constant kCGImagePropertyIPTCExtPersonInImageCharacteristic as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtPersonInImageCharacteristic returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtPersonInImageCharacteristic as an objc.ID.
 func KCGImagePropertyIPTCExtPersonInImageCharacteristic() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtPersonInImageCharacteristic()) }
 
-// KCGImagePropertyIPTCExtPersonInImageCvTermCvId returns the CoreFoundation constant kCGImagePropertyIPTCExtPersonInImageCvTermCvId as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtPersonInImageCvTermCvId returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtPersonInImageCvTermCvId as an objc.ID.
 func KCGImagePropertyIPTCExtPersonInImageCvTermCvId() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtPersonInImageCvTermCvId()) }
 
-// KCGImagePropertyIPTCExtPersonInImageCvTermId returns the CoreFoundation constant kCGImagePropertyIPTCExtPersonInImageCvTermId as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtPersonInImageCvTermId returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtPersonInImageCvTermId as an objc.ID.
 func KCGImagePropertyIPTCExtPersonInImageCvTermId() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtPersonInImageCvTermId()) }
 
-// KCGImagePropertyIPTCExtPersonInImageCvTermName returns the CoreFoundation constant kCGImagePropertyIPTCExtPersonInImageCvTermName as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtPersonInImageCvTermName returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtPersonInImageCvTermName as an objc.ID.
 func KCGImagePropertyIPTCExtPersonInImageCvTermName() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtPersonInImageCvTermName()) }
 
-// KCGImagePropertyIPTCExtPersonInImageCvTermRefinedAbout returns the CoreFoundation constant kCGImagePropertyIPTCExtPersonInImageCvTermRefinedAbout as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtPersonInImageCvTermRefinedAbout returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtPersonInImageCvTermRefinedAbout as an objc.ID.
 func KCGImagePropertyIPTCExtPersonInImageCvTermRefinedAbout() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtPersonInImageCvTermRefinedAbout()) }
 
-// KCGImagePropertyIPTCExtPersonInImageDescription returns the CoreFoundation constant kCGImagePropertyIPTCExtPersonInImageDescription as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtPersonInImageDescription returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtPersonInImageDescription as an objc.ID.
 func KCGImagePropertyIPTCExtPersonInImageDescription() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtPersonInImageDescription()) }
 
-// KCGImagePropertyIPTCExtPersonInImageId returns the CoreFoundation constant kCGImagePropertyIPTCExtPersonInImageId as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtPersonInImageId returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtPersonInImageId as an objc.ID.
 func KCGImagePropertyIPTCExtPersonInImageId() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtPersonInImageId()) }
 
-// KCGImagePropertyIPTCExtPersonInImageName returns the CoreFoundation constant kCGImagePropertyIPTCExtPersonInImageName as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtPersonInImageName returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtPersonInImageName as an objc.ID.
 func KCGImagePropertyIPTCExtPersonInImageName() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtPersonInImageName()) }
 
-// KCGImagePropertyIPTCExtProductInImage returns the CoreFoundation constant kCGImagePropertyIPTCExtProductInImage as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtProductInImage returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtProductInImage as an objc.ID.
 func KCGImagePropertyIPTCExtProductInImage() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtProductInImage()) }
 
-// KCGImagePropertyIPTCExtProductInImageDescription returns the CoreFoundation constant kCGImagePropertyIPTCExtProductInImageDescription as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtProductInImageDescription returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtProductInImageDescription as an objc.ID.
 func KCGImagePropertyIPTCExtProductInImageDescription() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtProductInImageDescription()) }
 
-// KCGImagePropertyIPTCExtProductInImageGTIN returns the CoreFoundation constant kCGImagePropertyIPTCExtProductInImageGTIN as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtProductInImageGTIN returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtProductInImageGTIN as an objc.ID.
 func KCGImagePropertyIPTCExtProductInImageGTIN() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtProductInImageGTIN()) }
 
-// KCGImagePropertyIPTCExtProductInImageName returns the CoreFoundation constant kCGImagePropertyIPTCExtProductInImageName as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtProductInImageName returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtProductInImageName as an objc.ID.
 func KCGImagePropertyIPTCExtProductInImageName() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtProductInImageName()) }
 
-// KCGImagePropertyIPTCExtPublicationEvent returns the CoreFoundation constant kCGImagePropertyIPTCExtPublicationEvent as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtPublicationEvent returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtPublicationEvent as an objc.ID.
 func KCGImagePropertyIPTCExtPublicationEvent() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtPublicationEvent()) }
 
-// KCGImagePropertyIPTCExtPublicationEventDate returns the CoreFoundation constant kCGImagePropertyIPTCExtPublicationEventDate as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtPublicationEventDate returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtPublicationEventDate as an objc.ID.
 func KCGImagePropertyIPTCExtPublicationEventDate() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtPublicationEventDate()) }
 
-// KCGImagePropertyIPTCExtPublicationEventIdentifier returns the CoreFoundation constant kCGImagePropertyIPTCExtPublicationEventIdentifier as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtPublicationEventIdentifier returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtPublicationEventIdentifier as an objc.ID.
 func KCGImagePropertyIPTCExtPublicationEventIdentifier() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtPublicationEventIdentifier()) }
 
-// KCGImagePropertyIPTCExtPublicationEventName returns the CoreFoundation constant kCGImagePropertyIPTCExtPublicationEventName as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtPublicationEventName returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtPublicationEventName as an objc.ID.
 func KCGImagePropertyIPTCExtPublicationEventName() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtPublicationEventName()) }
 
-// KCGImagePropertyIPTCExtRating returns the CoreFoundation constant kCGImagePropertyIPTCExtRating as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtRating returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtRating as an objc.ID.
 func KCGImagePropertyIPTCExtRating() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtRating()) }
 
-// KCGImagePropertyIPTCExtRatingRatingRegion returns the CoreFoundation constant kCGImagePropertyIPTCExtRatingRatingRegion as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtRatingRatingRegion returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtRatingRatingRegion as an objc.ID.
 func KCGImagePropertyIPTCExtRatingRatingRegion() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtRatingRatingRegion()) }
 
-// KCGImagePropertyIPTCExtRatingRegionCity returns the CoreFoundation constant kCGImagePropertyIPTCExtRatingRegionCity as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtRatingRegionCity returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtRatingRegionCity as an objc.ID.
 func KCGImagePropertyIPTCExtRatingRegionCity() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtRatingRegionCity()) }
 
-// KCGImagePropertyIPTCExtRatingRegionCountryCode returns the CoreFoundation constant kCGImagePropertyIPTCExtRatingRegionCountryCode as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtRatingRegionCountryCode returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtRatingRegionCountryCode as an objc.ID.
 func KCGImagePropertyIPTCExtRatingRegionCountryCode() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtRatingRegionCountryCode()) }
 
-// KCGImagePropertyIPTCExtRatingRegionCountryName returns the CoreFoundation constant kCGImagePropertyIPTCExtRatingRegionCountryName as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtRatingRegionCountryName returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtRatingRegionCountryName as an objc.ID.
 func KCGImagePropertyIPTCExtRatingRegionCountryName() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtRatingRegionCountryName()) }
 
-// KCGImagePropertyIPTCExtRatingRegionGPSAltitude returns the CoreFoundation constant kCGImagePropertyIPTCExtRatingRegionGPSAltitude as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtRatingRegionGPSAltitude returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtRatingRegionGPSAltitude as an objc.ID.
 func KCGImagePropertyIPTCExtRatingRegionGPSAltitude() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtRatingRegionGPSAltitude()) }
 
-// KCGImagePropertyIPTCExtRatingRegionGPSLatitude returns the CoreFoundation constant kCGImagePropertyIPTCExtRatingRegionGPSLatitude as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtRatingRegionGPSLatitude returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtRatingRegionGPSLatitude as an objc.ID.
 func KCGImagePropertyIPTCExtRatingRegionGPSLatitude() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtRatingRegionGPSLatitude()) }
 
-// KCGImagePropertyIPTCExtRatingRegionGPSLongitude returns the CoreFoundation constant kCGImagePropertyIPTCExtRatingRegionGPSLongitude as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtRatingRegionGPSLongitude returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtRatingRegionGPSLongitude as an objc.ID.
 func KCGImagePropertyIPTCExtRatingRegionGPSLongitude() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtRatingRegionGPSLongitude()) }
 
-// KCGImagePropertyIPTCExtRatingRegionIdentifier returns the CoreFoundation constant kCGImagePropertyIPTCExtRatingRegionIdentifier as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtRatingRegionIdentifier returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtRatingRegionIdentifier as an objc.ID.
 func KCGImagePropertyIPTCExtRatingRegionIdentifier() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtRatingRegionIdentifier()) }
 
-// KCGImagePropertyIPTCExtRatingRegionLocationId returns the CoreFoundation constant kCGImagePropertyIPTCExtRatingRegionLocationId as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtRatingRegionLocationId returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtRatingRegionLocationId as an objc.ID.
 func KCGImagePropertyIPTCExtRatingRegionLocationId() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtRatingRegionLocationId()) }
 
-// KCGImagePropertyIPTCExtRatingRegionLocationName returns the CoreFoundation constant kCGImagePropertyIPTCExtRatingRegionLocationName as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtRatingRegionLocationName returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtRatingRegionLocationName as an objc.ID.
 func KCGImagePropertyIPTCExtRatingRegionLocationName() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtRatingRegionLocationName()) }
 
-// KCGImagePropertyIPTCExtRatingRegionProvinceState returns the CoreFoundation constant kCGImagePropertyIPTCExtRatingRegionProvinceState as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtRatingRegionProvinceState returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtRatingRegionProvinceState as an objc.ID.
 func KCGImagePropertyIPTCExtRatingRegionProvinceState() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtRatingRegionProvinceState()) }
 
-// KCGImagePropertyIPTCExtRatingRegionSublocation returns the CoreFoundation constant kCGImagePropertyIPTCExtRatingRegionSublocation as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtRatingRegionSublocation returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtRatingRegionSublocation as an objc.ID.
 func KCGImagePropertyIPTCExtRatingRegionSublocation() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtRatingRegionSublocation()) }
 
-// KCGImagePropertyIPTCExtRatingRegionWorldRegion returns the CoreFoundation constant kCGImagePropertyIPTCExtRatingRegionWorldRegion as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtRatingRegionWorldRegion returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtRatingRegionWorldRegion as an objc.ID.
 func KCGImagePropertyIPTCExtRatingRegionWorldRegion() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtRatingRegionWorldRegion()) }
 
-// KCGImagePropertyIPTCExtRatingScaleMaxValue returns the CoreFoundation constant kCGImagePropertyIPTCExtRatingScaleMaxValue as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtRatingScaleMaxValue returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtRatingScaleMaxValue as an objc.ID.
 func KCGImagePropertyIPTCExtRatingScaleMaxValue() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtRatingScaleMaxValue()) }
 
-// KCGImagePropertyIPTCExtRatingScaleMinValue returns the CoreFoundation constant kCGImagePropertyIPTCExtRatingScaleMinValue as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtRatingScaleMinValue returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtRatingScaleMinValue as an objc.ID.
 func KCGImagePropertyIPTCExtRatingScaleMinValue() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtRatingScaleMinValue()) }
 
-// KCGImagePropertyIPTCExtRatingSourceLink returns the CoreFoundation constant kCGImagePropertyIPTCExtRatingSourceLink as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtRatingSourceLink returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtRatingSourceLink as an objc.ID.
 func KCGImagePropertyIPTCExtRatingSourceLink() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtRatingSourceLink()) }
 
-// KCGImagePropertyIPTCExtRatingValue returns the CoreFoundation constant kCGImagePropertyIPTCExtRatingValue as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtRatingValue returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtRatingValue as an objc.ID.
 func KCGImagePropertyIPTCExtRatingValue() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtRatingValue()) }
 
-// KCGImagePropertyIPTCExtRatingValueLogoLink returns the CoreFoundation constant kCGImagePropertyIPTCExtRatingValueLogoLink as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtRatingValueLogoLink returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtRatingValueLogoLink as an objc.ID.
 func KCGImagePropertyIPTCExtRatingValueLogoLink() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtRatingValueLogoLink()) }
 
-// KCGImagePropertyIPTCExtRegistryID returns the CoreFoundation constant kCGImagePropertyIPTCExtRegistryID as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtRegistryID returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtRegistryID as an objc.ID.
 func KCGImagePropertyIPTCExtRegistryID() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtRegistryID()) }
 
-// KCGImagePropertyIPTCExtRegistryEntryRole returns the CoreFoundation constant kCGImagePropertyIPTCExtRegistryEntryRole as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtRegistryEntryRole returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtRegistryEntryRole as an objc.ID.
 func KCGImagePropertyIPTCExtRegistryEntryRole() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtRegistryEntryRole()) }
 
-// KCGImagePropertyIPTCExtRegistryItemID returns the CoreFoundation constant kCGImagePropertyIPTCExtRegistryItemID as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtRegistryItemID returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtRegistryItemID as an objc.ID.
 func KCGImagePropertyIPTCExtRegistryItemID() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtRegistryItemID()) }
 
-// KCGImagePropertyIPTCExtRegistryOrganisationID returns the CoreFoundation constant kCGImagePropertyIPTCExtRegistryOrganisationID as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtRegistryOrganisationID returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtRegistryOrganisationID as an objc.ID.
 func KCGImagePropertyIPTCExtRegistryOrganisationID() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtRegistryOrganisationID()) }
 
-// KCGImagePropertyIPTCExtReleaseReady returns the CoreFoundation constant kCGImagePropertyIPTCExtReleaseReady as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtReleaseReady returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtReleaseReady as an objc.ID.
 func KCGImagePropertyIPTCExtReleaseReady() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtReleaseReady()) }
 
-// KCGImagePropertyIPTCExtSeason returns the CoreFoundation constant kCGImagePropertyIPTCExtSeason as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtSeason returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtSeason as an objc.ID.
 func KCGImagePropertyIPTCExtSeason() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtSeason()) }
 
-// KCGImagePropertyIPTCExtSeasonIdentifier returns the CoreFoundation constant kCGImagePropertyIPTCExtSeasonIdentifier as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtSeasonIdentifier returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtSeasonIdentifier as an objc.ID.
 func KCGImagePropertyIPTCExtSeasonIdentifier() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtSeasonIdentifier()) }
 
-// KCGImagePropertyIPTCExtSeasonName returns the CoreFoundation constant kCGImagePropertyIPTCExtSeasonName as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtSeasonName returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtSeasonName as an objc.ID.
 func KCGImagePropertyIPTCExtSeasonName() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtSeasonName()) }
 
-// KCGImagePropertyIPTCExtSeasonNumber returns the CoreFoundation constant kCGImagePropertyIPTCExtSeasonNumber as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtSeasonNumber returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtSeasonNumber as an objc.ID.
 func KCGImagePropertyIPTCExtSeasonNumber() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtSeasonNumber()) }
 
-// KCGImagePropertyIPTCExtSeries returns the CoreFoundation constant kCGImagePropertyIPTCExtSeries as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtSeries returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtSeries as an objc.ID.
 func KCGImagePropertyIPTCExtSeries() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtSeries()) }
 
-// KCGImagePropertyIPTCExtSeriesIdentifier returns the CoreFoundation constant kCGImagePropertyIPTCExtSeriesIdentifier as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtSeriesIdentifier returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtSeriesIdentifier as an objc.ID.
 func KCGImagePropertyIPTCExtSeriesIdentifier() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtSeriesIdentifier()) }
 
-// KCGImagePropertyIPTCExtSeriesName returns the CoreFoundation constant kCGImagePropertyIPTCExtSeriesName as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtSeriesName returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtSeriesName as an objc.ID.
 func KCGImagePropertyIPTCExtSeriesName() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtSeriesName()) }
 
-// KCGImagePropertyIPTCExtStorylineIdentifier returns the CoreFoundation constant kCGImagePropertyIPTCExtStorylineIdentifier as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtStorylineIdentifier returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtStorylineIdentifier as an objc.ID.
 func KCGImagePropertyIPTCExtStorylineIdentifier() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtStorylineIdentifier()) }
 
-// KCGImagePropertyIPTCExtStreamReady returns the CoreFoundation constant kCGImagePropertyIPTCExtStreamReady as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtStreamReady returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtStreamReady as an objc.ID.
 func KCGImagePropertyIPTCExtStreamReady() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtStreamReady()) }
 
-// KCGImagePropertyIPTCExtStylePeriod returns the CoreFoundation constant kCGImagePropertyIPTCExtStylePeriod as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtStylePeriod returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtStylePeriod as an objc.ID.
 func KCGImagePropertyIPTCExtStylePeriod() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtStylePeriod()) }
 
-// KCGImagePropertyIPTCExtSupplyChainSource returns the CoreFoundation constant kCGImagePropertyIPTCExtSupplyChainSource as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtSupplyChainSource returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtSupplyChainSource as an objc.ID.
 func KCGImagePropertyIPTCExtSupplyChainSource() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtSupplyChainSource()) }
 
-// KCGImagePropertyIPTCExtSupplyChainSourceIdentifier returns the CoreFoundation constant kCGImagePropertyIPTCExtSupplyChainSourceIdentifier as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtSupplyChainSourceIdentifier returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtSupplyChainSourceIdentifier as an objc.ID.
 func KCGImagePropertyIPTCExtSupplyChainSourceIdentifier() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtSupplyChainSourceIdentifier()) }
 
-// KCGImagePropertyIPTCExtSupplyChainSourceName returns the CoreFoundation constant kCGImagePropertyIPTCExtSupplyChainSourceName as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtSupplyChainSourceName returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtSupplyChainSourceName as an objc.ID.
 func KCGImagePropertyIPTCExtSupplyChainSourceName() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtSupplyChainSourceName()) }
 
-// KCGImagePropertyIPTCExtTemporalCoverage returns the CoreFoundation constant kCGImagePropertyIPTCExtTemporalCoverage as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtTemporalCoverage returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtTemporalCoverage as an objc.ID.
 func KCGImagePropertyIPTCExtTemporalCoverage() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtTemporalCoverage()) }
 
-// KCGImagePropertyIPTCExtTemporalCoverageFrom returns the CoreFoundation constant kCGImagePropertyIPTCExtTemporalCoverageFrom as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtTemporalCoverageFrom returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtTemporalCoverageFrom as an objc.ID.
 func KCGImagePropertyIPTCExtTemporalCoverageFrom() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtTemporalCoverageFrom()) }
 
-// KCGImagePropertyIPTCExtTemporalCoverageTo returns the CoreFoundation constant kCGImagePropertyIPTCExtTemporalCoverageTo as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtTemporalCoverageTo returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtTemporalCoverageTo as an objc.ID.
 func KCGImagePropertyIPTCExtTemporalCoverageTo() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtTemporalCoverageTo()) }
 
-// KCGImagePropertyIPTCExtTranscript returns the CoreFoundation constant kCGImagePropertyIPTCExtTranscript as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtTranscript returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtTranscript as an objc.ID.
 func KCGImagePropertyIPTCExtTranscript() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtTranscript()) }
 
-// KCGImagePropertyIPTCExtTranscriptLink returns the CoreFoundation constant kCGImagePropertyIPTCExtTranscriptLink as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtTranscriptLink returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtTranscriptLink as an objc.ID.
 func KCGImagePropertyIPTCExtTranscriptLink() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtTranscriptLink()) }
 
-// KCGImagePropertyIPTCExtTranscriptLinkLink returns the CoreFoundation constant kCGImagePropertyIPTCExtTranscriptLinkLink as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtTranscriptLinkLink returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtTranscriptLinkLink as an objc.ID.
 func KCGImagePropertyIPTCExtTranscriptLinkLink() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtTranscriptLinkLink()) }
 
-// KCGImagePropertyIPTCExtTranscriptLinkLinkQualifier returns the CoreFoundation constant kCGImagePropertyIPTCExtTranscriptLinkLinkQualifier as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtTranscriptLinkLinkQualifier returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtTranscriptLinkLinkQualifier as an objc.ID.
 func KCGImagePropertyIPTCExtTranscriptLinkLinkQualifier() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtTranscriptLinkLinkQualifier()) }
 
-// KCGImagePropertyIPTCExtVideoBitrate returns the CoreFoundation constant kCGImagePropertyIPTCExtVideoBitrate as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtVideoBitrate returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtVideoBitrate as an objc.ID.
 func KCGImagePropertyIPTCExtVideoBitrate() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtVideoBitrate()) }
 
-// KCGImagePropertyIPTCExtVideoBitrateMode returns the CoreFoundation constant kCGImagePropertyIPTCExtVideoBitrateMode as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtVideoBitrateMode returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtVideoBitrateMode as an objc.ID.
 func KCGImagePropertyIPTCExtVideoBitrateMode() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtVideoBitrateMode()) }
 
-// KCGImagePropertyIPTCExtVideoDisplayAspectRatio returns the CoreFoundation constant kCGImagePropertyIPTCExtVideoDisplayAspectRatio as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtVideoDisplayAspectRatio returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtVideoDisplayAspectRatio as an objc.ID.
 func KCGImagePropertyIPTCExtVideoDisplayAspectRatio() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtVideoDisplayAspectRatio()) }
 
-// KCGImagePropertyIPTCExtVideoEncodingProfile returns the CoreFoundation constant kCGImagePropertyIPTCExtVideoEncodingProfile as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtVideoEncodingProfile returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtVideoEncodingProfile as an objc.ID.
 func KCGImagePropertyIPTCExtVideoEncodingProfile() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtVideoEncodingProfile()) }
 
-// KCGImagePropertyIPTCExtVideoShotType returns the CoreFoundation constant kCGImagePropertyIPTCExtVideoShotType as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtVideoShotType returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtVideoShotType as an objc.ID.
 func KCGImagePropertyIPTCExtVideoShotType() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtVideoShotType()) }
 
-// KCGImagePropertyIPTCExtVideoShotTypeIdentifier returns the CoreFoundation constant kCGImagePropertyIPTCExtVideoShotTypeIdentifier as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtVideoShotTypeIdentifier returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtVideoShotTypeIdentifier as an objc.ID.
 func KCGImagePropertyIPTCExtVideoShotTypeIdentifier() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtVideoShotTypeIdentifier()) }
 
-// KCGImagePropertyIPTCExtVideoShotTypeName returns the CoreFoundation constant kCGImagePropertyIPTCExtVideoShotTypeName as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtVideoShotTypeName returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtVideoShotTypeName as an objc.ID.
 func KCGImagePropertyIPTCExtVideoShotTypeName() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtVideoShotTypeName()) }
 
-// KCGImagePropertyIPTCExtVideoStreamsCount returns the CoreFoundation constant kCGImagePropertyIPTCExtVideoStreamsCount as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtVideoStreamsCount returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtVideoStreamsCount as an objc.ID.
 func KCGImagePropertyIPTCExtVideoStreamsCount() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtVideoStreamsCount()) }
 
-// KCGImagePropertyIPTCExtVisualColor returns the CoreFoundation constant kCGImagePropertyIPTCExtVisualColor as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtVisualColor returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtVisualColor as an objc.ID.
 func KCGImagePropertyIPTCExtVisualColor() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtVisualColor()) }
 
-// KCGImagePropertyIPTCExtWorkflowTag returns the CoreFoundation constant kCGImagePropertyIPTCExtWorkflowTag as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtWorkflowTag returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtWorkflowTag as an objc.ID.
 func KCGImagePropertyIPTCExtWorkflowTag() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtWorkflowTag()) }
 
-// KCGImagePropertyIPTCExtWorkflowTagCvId returns the CoreFoundation constant kCGImagePropertyIPTCExtWorkflowTagCvId as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtWorkflowTagCvId returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtWorkflowTagCvId as an objc.ID.
 func KCGImagePropertyIPTCExtWorkflowTagCvId() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtWorkflowTagCvId()) }
 
-// KCGImagePropertyIPTCExtWorkflowTagCvTermId returns the CoreFoundation constant kCGImagePropertyIPTCExtWorkflowTagCvTermId as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtWorkflowTagCvTermId returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtWorkflowTagCvTermId as an objc.ID.
 func KCGImagePropertyIPTCExtWorkflowTagCvTermId() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtWorkflowTagCvTermId()) }
 
-// KCGImagePropertyIPTCExtWorkflowTagCvTermName returns the CoreFoundation constant kCGImagePropertyIPTCExtWorkflowTagCvTermName as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtWorkflowTagCvTermName returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtWorkflowTagCvTermName as an objc.ID.
 func KCGImagePropertyIPTCExtWorkflowTagCvTermName() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtWorkflowTagCvTermName()) }
 
-// KCGImagePropertyIPTCExtWorkflowTagCvTermRefinedAbout returns the CoreFoundation constant kCGImagePropertyIPTCExtWorkflowTagCvTermRefinedAbout as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCExtWorkflowTagCvTermRefinedAbout returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtWorkflowTagCvTermRefinedAbout as an objc.ID.
 func KCGImagePropertyIPTCExtWorkflowTagCvTermRefinedAbout() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCExtWorkflowTagCvTermRefinedAbout()) }
 
-// KCGImagePropertyIPTCContactInfoCity returns the CoreFoundation constant kCGImagePropertyIPTCContactInfoCity as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCContactInfoCity returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCContactInfoCity as an objc.ID.
 func KCGImagePropertyIPTCContactInfoCity() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCContactInfoCity()) }
 
-// KCGImagePropertyIPTCContactInfoCountry returns the CoreFoundation constant kCGImagePropertyIPTCContactInfoCountry as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCContactInfoCountry returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCContactInfoCountry as an objc.ID.
 func KCGImagePropertyIPTCContactInfoCountry() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCContactInfoCountry()) }
 
-// KCGImagePropertyIPTCContactInfoAddress returns the CoreFoundation constant kCGImagePropertyIPTCContactInfoAddress as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCContactInfoAddress returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCContactInfoAddress as an objc.ID.
 func KCGImagePropertyIPTCContactInfoAddress() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCContactInfoAddress()) }
 
-// KCGImagePropertyIPTCContactInfoPostalCode returns the CoreFoundation constant kCGImagePropertyIPTCContactInfoPostalCode as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCContactInfoPostalCode returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCContactInfoPostalCode as an objc.ID.
 func KCGImagePropertyIPTCContactInfoPostalCode() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCContactInfoPostalCode()) }
 
-// KCGImagePropertyIPTCContactInfoStateProvince returns the CoreFoundation constant kCGImagePropertyIPTCContactInfoStateProvince as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCContactInfoStateProvince returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCContactInfoStateProvince as an objc.ID.
 func KCGImagePropertyIPTCContactInfoStateProvince() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCContactInfoStateProvince()) }
 
-// KCGImagePropertyIPTCContactInfoEmails returns the CoreFoundation constant kCGImagePropertyIPTCContactInfoEmails as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCContactInfoEmails returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCContactInfoEmails as an objc.ID.
 func KCGImagePropertyIPTCContactInfoEmails() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCContactInfoEmails()) }
 
-// KCGImagePropertyIPTCContactInfoPhones returns the CoreFoundation constant kCGImagePropertyIPTCContactInfoPhones as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCContactInfoPhones returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCContactInfoPhones as an objc.ID.
 func KCGImagePropertyIPTCContactInfoPhones() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCContactInfoPhones()) }
 
-// KCGImagePropertyIPTCContactInfoWebURLs returns the CoreFoundation constant kCGImagePropertyIPTCContactInfoWebURLs as a toll-free-bridged objc.ID.
+// KCGImagePropertyIPTCContactInfoWebURLs returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCContactInfoWebURLs as an objc.ID.
 func KCGImagePropertyIPTCContactInfoWebURLs() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCContactInfoWebURLs()) }
 
-// KCGImageProperty8BIMLayerNames returns the CoreFoundation constant kCGImageProperty8BIMLayerNames as a toll-free-bridged objc.ID.
+// KCGImageProperty8BIMLayerNames returns the value of the CoreFoundation reference constant kCGImageProperty8BIMLayerNames as an objc.ID.
 func KCGImageProperty8BIMLayerNames() objc.ID { return purego.CFConstant(raw.KCGImageProperty8BIMLayerNames()) }
 
-// KCGImageProperty8BIMVersion returns the CoreFoundation constant kCGImageProperty8BIMVersion as a toll-free-bridged objc.ID.
+// KCGImageProperty8BIMVersion returns the value of the CoreFoundation reference constant kCGImageProperty8BIMVersion as an objc.ID.
 func KCGImageProperty8BIMVersion() objc.ID { return purego.CFConstant(raw.KCGImageProperty8BIMVersion()) }
 
-// KCGImagePropertyDNGVersion returns the CoreFoundation constant kCGImagePropertyDNGVersion as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGVersion returns the value of the CoreFoundation reference constant kCGImagePropertyDNGVersion as an objc.ID.
 func KCGImagePropertyDNGVersion() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGVersion()) }
 
-// KCGImagePropertyDNGBackwardVersion returns the CoreFoundation constant kCGImagePropertyDNGBackwardVersion as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGBackwardVersion returns the value of the CoreFoundation reference constant kCGImagePropertyDNGBackwardVersion as an objc.ID.
 func KCGImagePropertyDNGBackwardVersion() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGBackwardVersion()) }
 
-// KCGImagePropertyDNGUniqueCameraModel returns the CoreFoundation constant kCGImagePropertyDNGUniqueCameraModel as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGUniqueCameraModel returns the value of the CoreFoundation reference constant kCGImagePropertyDNGUniqueCameraModel as an objc.ID.
 func KCGImagePropertyDNGUniqueCameraModel() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGUniqueCameraModel()) }
 
-// KCGImagePropertyDNGLocalizedCameraModel returns the CoreFoundation constant kCGImagePropertyDNGLocalizedCameraModel as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGLocalizedCameraModel returns the value of the CoreFoundation reference constant kCGImagePropertyDNGLocalizedCameraModel as an objc.ID.
 func KCGImagePropertyDNGLocalizedCameraModel() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGLocalizedCameraModel()) }
 
-// KCGImagePropertyDNGCameraSerialNumber returns the CoreFoundation constant kCGImagePropertyDNGCameraSerialNumber as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGCameraSerialNumber returns the value of the CoreFoundation reference constant kCGImagePropertyDNGCameraSerialNumber as an objc.ID.
 func KCGImagePropertyDNGCameraSerialNumber() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGCameraSerialNumber()) }
 
-// KCGImagePropertyDNGLensInfo returns the CoreFoundation constant kCGImagePropertyDNGLensInfo as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGLensInfo returns the value of the CoreFoundation reference constant kCGImagePropertyDNGLensInfo as an objc.ID.
 func KCGImagePropertyDNGLensInfo() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGLensInfo()) }
 
-// KCGImagePropertyDNGBlackLevel returns the CoreFoundation constant kCGImagePropertyDNGBlackLevel as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGBlackLevel returns the value of the CoreFoundation reference constant kCGImagePropertyDNGBlackLevel as an objc.ID.
 func KCGImagePropertyDNGBlackLevel() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGBlackLevel()) }
 
-// KCGImagePropertyDNGWhiteLevel returns the CoreFoundation constant kCGImagePropertyDNGWhiteLevel as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGWhiteLevel returns the value of the CoreFoundation reference constant kCGImagePropertyDNGWhiteLevel as an objc.ID.
 func KCGImagePropertyDNGWhiteLevel() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGWhiteLevel()) }
 
-// KCGImagePropertyDNGCalibrationIlluminant1 returns the CoreFoundation constant kCGImagePropertyDNGCalibrationIlluminant1 as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGCalibrationIlluminant1 returns the value of the CoreFoundation reference constant kCGImagePropertyDNGCalibrationIlluminant1 as an objc.ID.
 func KCGImagePropertyDNGCalibrationIlluminant1() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGCalibrationIlluminant1()) }
 
-// KCGImagePropertyDNGCalibrationIlluminant2 returns the CoreFoundation constant kCGImagePropertyDNGCalibrationIlluminant2 as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGCalibrationIlluminant2 returns the value of the CoreFoundation reference constant kCGImagePropertyDNGCalibrationIlluminant2 as an objc.ID.
 func KCGImagePropertyDNGCalibrationIlluminant2() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGCalibrationIlluminant2()) }
 
-// KCGImagePropertyDNGColorMatrix1 returns the CoreFoundation constant kCGImagePropertyDNGColorMatrix1 as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGColorMatrix1 returns the value of the CoreFoundation reference constant kCGImagePropertyDNGColorMatrix1 as an objc.ID.
 func KCGImagePropertyDNGColorMatrix1() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGColorMatrix1()) }
 
-// KCGImagePropertyDNGColorMatrix2 returns the CoreFoundation constant kCGImagePropertyDNGColorMatrix2 as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGColorMatrix2 returns the value of the CoreFoundation reference constant kCGImagePropertyDNGColorMatrix2 as an objc.ID.
 func KCGImagePropertyDNGColorMatrix2() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGColorMatrix2()) }
 
-// KCGImagePropertyDNGCameraCalibration1 returns the CoreFoundation constant kCGImagePropertyDNGCameraCalibration1 as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGCameraCalibration1 returns the value of the CoreFoundation reference constant kCGImagePropertyDNGCameraCalibration1 as an objc.ID.
 func KCGImagePropertyDNGCameraCalibration1() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGCameraCalibration1()) }
 
-// KCGImagePropertyDNGCameraCalibration2 returns the CoreFoundation constant kCGImagePropertyDNGCameraCalibration2 as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGCameraCalibration2 returns the value of the CoreFoundation reference constant kCGImagePropertyDNGCameraCalibration2 as an objc.ID.
 func KCGImagePropertyDNGCameraCalibration2() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGCameraCalibration2()) }
 
-// KCGImagePropertyDNGAsShotNeutral returns the CoreFoundation constant kCGImagePropertyDNGAsShotNeutral as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGAsShotNeutral returns the value of the CoreFoundation reference constant kCGImagePropertyDNGAsShotNeutral as an objc.ID.
 func KCGImagePropertyDNGAsShotNeutral() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGAsShotNeutral()) }
 
-// KCGImagePropertyDNGAsShotWhiteXY returns the CoreFoundation constant kCGImagePropertyDNGAsShotWhiteXY as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGAsShotWhiteXY returns the value of the CoreFoundation reference constant kCGImagePropertyDNGAsShotWhiteXY as an objc.ID.
 func KCGImagePropertyDNGAsShotWhiteXY() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGAsShotWhiteXY()) }
 
-// KCGImagePropertyDNGBaselineExposure returns the CoreFoundation constant kCGImagePropertyDNGBaselineExposure as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGBaselineExposure returns the value of the CoreFoundation reference constant kCGImagePropertyDNGBaselineExposure as an objc.ID.
 func KCGImagePropertyDNGBaselineExposure() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGBaselineExposure()) }
 
-// KCGImagePropertyDNGBaselineNoise returns the CoreFoundation constant kCGImagePropertyDNGBaselineNoise as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGBaselineNoise returns the value of the CoreFoundation reference constant kCGImagePropertyDNGBaselineNoise as an objc.ID.
 func KCGImagePropertyDNGBaselineNoise() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGBaselineNoise()) }
 
-// KCGImagePropertyDNGBaselineSharpness returns the CoreFoundation constant kCGImagePropertyDNGBaselineSharpness as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGBaselineSharpness returns the value of the CoreFoundation reference constant kCGImagePropertyDNGBaselineSharpness as an objc.ID.
 func KCGImagePropertyDNGBaselineSharpness() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGBaselineSharpness()) }
 
-// KCGImagePropertyDNGPrivateData returns the CoreFoundation constant kCGImagePropertyDNGPrivateData as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGPrivateData returns the value of the CoreFoundation reference constant kCGImagePropertyDNGPrivateData as an objc.ID.
 func KCGImagePropertyDNGPrivateData() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGPrivateData()) }
 
-// KCGImagePropertyDNGCameraCalibrationSignature returns the CoreFoundation constant kCGImagePropertyDNGCameraCalibrationSignature as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGCameraCalibrationSignature returns the value of the CoreFoundation reference constant kCGImagePropertyDNGCameraCalibrationSignature as an objc.ID.
 func KCGImagePropertyDNGCameraCalibrationSignature() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGCameraCalibrationSignature()) }
 
-// KCGImagePropertyDNGProfileCalibrationSignature returns the CoreFoundation constant kCGImagePropertyDNGProfileCalibrationSignature as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGProfileCalibrationSignature returns the value of the CoreFoundation reference constant kCGImagePropertyDNGProfileCalibrationSignature as an objc.ID.
 func KCGImagePropertyDNGProfileCalibrationSignature() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGProfileCalibrationSignature()) }
 
-// KCGImagePropertyDNGNoiseProfile returns the CoreFoundation constant kCGImagePropertyDNGNoiseProfile as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGNoiseProfile returns the value of the CoreFoundation reference constant kCGImagePropertyDNGNoiseProfile as an objc.ID.
 func KCGImagePropertyDNGNoiseProfile() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGNoiseProfile()) }
 
-// KCGImagePropertyDNGWarpRectilinear returns the CoreFoundation constant kCGImagePropertyDNGWarpRectilinear as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGWarpRectilinear returns the value of the CoreFoundation reference constant kCGImagePropertyDNGWarpRectilinear as an objc.ID.
 func KCGImagePropertyDNGWarpRectilinear() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGWarpRectilinear()) }
 
-// KCGImagePropertyDNGWarpFisheye returns the CoreFoundation constant kCGImagePropertyDNGWarpFisheye as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGWarpFisheye returns the value of the CoreFoundation reference constant kCGImagePropertyDNGWarpFisheye as an objc.ID.
 func KCGImagePropertyDNGWarpFisheye() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGWarpFisheye()) }
 
-// KCGImagePropertyDNGFixVignetteRadial returns the CoreFoundation constant kCGImagePropertyDNGFixVignetteRadial as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGFixVignetteRadial returns the value of the CoreFoundation reference constant kCGImagePropertyDNGFixVignetteRadial as an objc.ID.
 func KCGImagePropertyDNGFixVignetteRadial() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGFixVignetteRadial()) }
 
-// KCGImagePropertyDNGActiveArea returns the CoreFoundation constant kCGImagePropertyDNGActiveArea as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGActiveArea returns the value of the CoreFoundation reference constant kCGImagePropertyDNGActiveArea as an objc.ID.
 func KCGImagePropertyDNGActiveArea() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGActiveArea()) }
 
-// KCGImagePropertyDNGAnalogBalance returns the CoreFoundation constant kCGImagePropertyDNGAnalogBalance as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGAnalogBalance returns the value of the CoreFoundation reference constant kCGImagePropertyDNGAnalogBalance as an objc.ID.
 func KCGImagePropertyDNGAnalogBalance() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGAnalogBalance()) }
 
-// KCGImagePropertyDNGAntiAliasStrength returns the CoreFoundation constant kCGImagePropertyDNGAntiAliasStrength as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGAntiAliasStrength returns the value of the CoreFoundation reference constant kCGImagePropertyDNGAntiAliasStrength as an objc.ID.
 func KCGImagePropertyDNGAntiAliasStrength() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGAntiAliasStrength()) }
 
-// KCGImagePropertyDNGAsShotICCProfile returns the CoreFoundation constant kCGImagePropertyDNGAsShotICCProfile as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGAsShotICCProfile returns the value of the CoreFoundation reference constant kCGImagePropertyDNGAsShotICCProfile as an objc.ID.
 func KCGImagePropertyDNGAsShotICCProfile() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGAsShotICCProfile()) }
 
-// KCGImagePropertyDNGAsShotPreProfileMatrix returns the CoreFoundation constant kCGImagePropertyDNGAsShotPreProfileMatrix as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGAsShotPreProfileMatrix returns the value of the CoreFoundation reference constant kCGImagePropertyDNGAsShotPreProfileMatrix as an objc.ID.
 func KCGImagePropertyDNGAsShotPreProfileMatrix() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGAsShotPreProfileMatrix()) }
 
-// KCGImagePropertyDNGAsShotProfileName returns the CoreFoundation constant kCGImagePropertyDNGAsShotProfileName as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGAsShotProfileName returns the value of the CoreFoundation reference constant kCGImagePropertyDNGAsShotProfileName as an objc.ID.
 func KCGImagePropertyDNGAsShotProfileName() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGAsShotProfileName()) }
 
-// KCGImagePropertyDNGBaselineExposureOffset returns the CoreFoundation constant kCGImagePropertyDNGBaselineExposureOffset as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGBaselineExposureOffset returns the value of the CoreFoundation reference constant kCGImagePropertyDNGBaselineExposureOffset as an objc.ID.
 func KCGImagePropertyDNGBaselineExposureOffset() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGBaselineExposureOffset()) }
 
-// KCGImagePropertyDNGBayerGreenSplit returns the CoreFoundation constant kCGImagePropertyDNGBayerGreenSplit as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGBayerGreenSplit returns the value of the CoreFoundation reference constant kCGImagePropertyDNGBayerGreenSplit as an objc.ID.
 func KCGImagePropertyDNGBayerGreenSplit() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGBayerGreenSplit()) }
 
-// KCGImagePropertyDNGBestQualityScale returns the CoreFoundation constant kCGImagePropertyDNGBestQualityScale as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGBestQualityScale returns the value of the CoreFoundation reference constant kCGImagePropertyDNGBestQualityScale as an objc.ID.
 func KCGImagePropertyDNGBestQualityScale() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGBestQualityScale()) }
 
-// KCGImagePropertyDNGBlackLevelDeltaH returns the CoreFoundation constant kCGImagePropertyDNGBlackLevelDeltaH as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGBlackLevelDeltaH returns the value of the CoreFoundation reference constant kCGImagePropertyDNGBlackLevelDeltaH as an objc.ID.
 func KCGImagePropertyDNGBlackLevelDeltaH() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGBlackLevelDeltaH()) }
 
-// KCGImagePropertyDNGBlackLevelDeltaV returns the CoreFoundation constant kCGImagePropertyDNGBlackLevelDeltaV as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGBlackLevelDeltaV returns the value of the CoreFoundation reference constant kCGImagePropertyDNGBlackLevelDeltaV as an objc.ID.
 func KCGImagePropertyDNGBlackLevelDeltaV() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGBlackLevelDeltaV()) }
 
-// KCGImagePropertyDNGBlackLevelRepeatDim returns the CoreFoundation constant kCGImagePropertyDNGBlackLevelRepeatDim as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGBlackLevelRepeatDim returns the value of the CoreFoundation reference constant kCGImagePropertyDNGBlackLevelRepeatDim as an objc.ID.
 func KCGImagePropertyDNGBlackLevelRepeatDim() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGBlackLevelRepeatDim()) }
 
-// KCGImagePropertyDNGCFALayout returns the CoreFoundation constant kCGImagePropertyDNGCFALayout as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGCFALayout returns the value of the CoreFoundation reference constant kCGImagePropertyDNGCFALayout as an objc.ID.
 func KCGImagePropertyDNGCFALayout() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGCFALayout()) }
 
-// KCGImagePropertyDNGCFAPlaneColor returns the CoreFoundation constant kCGImagePropertyDNGCFAPlaneColor as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGCFAPlaneColor returns the value of the CoreFoundation reference constant kCGImagePropertyDNGCFAPlaneColor as an objc.ID.
 func KCGImagePropertyDNGCFAPlaneColor() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGCFAPlaneColor()) }
 
-// KCGImagePropertyDNGChromaBlurRadius returns the CoreFoundation constant kCGImagePropertyDNGChromaBlurRadius as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGChromaBlurRadius returns the value of the CoreFoundation reference constant kCGImagePropertyDNGChromaBlurRadius as an objc.ID.
 func KCGImagePropertyDNGChromaBlurRadius() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGChromaBlurRadius()) }
 
-// KCGImagePropertyDNGColorimetricReference returns the CoreFoundation constant kCGImagePropertyDNGColorimetricReference as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGColorimetricReference returns the value of the CoreFoundation reference constant kCGImagePropertyDNGColorimetricReference as an objc.ID.
 func KCGImagePropertyDNGColorimetricReference() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGColorimetricReference()) }
 
-// KCGImagePropertyDNGCurrentICCProfile returns the CoreFoundation constant kCGImagePropertyDNGCurrentICCProfile as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGCurrentICCProfile returns the value of the CoreFoundation reference constant kCGImagePropertyDNGCurrentICCProfile as an objc.ID.
 func KCGImagePropertyDNGCurrentICCProfile() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGCurrentICCProfile()) }
 
-// KCGImagePropertyDNGCurrentPreProfileMatrix returns the CoreFoundation constant kCGImagePropertyDNGCurrentPreProfileMatrix as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGCurrentPreProfileMatrix returns the value of the CoreFoundation reference constant kCGImagePropertyDNGCurrentPreProfileMatrix as an objc.ID.
 func KCGImagePropertyDNGCurrentPreProfileMatrix() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGCurrentPreProfileMatrix()) }
 
-// KCGImagePropertyDNGDefaultBlackRender returns the CoreFoundation constant kCGImagePropertyDNGDefaultBlackRender as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGDefaultBlackRender returns the value of the CoreFoundation reference constant kCGImagePropertyDNGDefaultBlackRender as an objc.ID.
 func KCGImagePropertyDNGDefaultBlackRender() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGDefaultBlackRender()) }
 
-// KCGImagePropertyDNGDefaultCropOrigin returns the CoreFoundation constant kCGImagePropertyDNGDefaultCropOrigin as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGDefaultCropOrigin returns the value of the CoreFoundation reference constant kCGImagePropertyDNGDefaultCropOrigin as an objc.ID.
 func KCGImagePropertyDNGDefaultCropOrigin() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGDefaultCropOrigin()) }
 
-// KCGImagePropertyDNGDefaultCropSize returns the CoreFoundation constant kCGImagePropertyDNGDefaultCropSize as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGDefaultCropSize returns the value of the CoreFoundation reference constant kCGImagePropertyDNGDefaultCropSize as an objc.ID.
 func KCGImagePropertyDNGDefaultCropSize() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGDefaultCropSize()) }
 
-// KCGImagePropertyDNGDefaultScale returns the CoreFoundation constant kCGImagePropertyDNGDefaultScale as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGDefaultScale returns the value of the CoreFoundation reference constant kCGImagePropertyDNGDefaultScale as an objc.ID.
 func KCGImagePropertyDNGDefaultScale() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGDefaultScale()) }
 
-// KCGImagePropertyDNGDefaultUserCrop returns the CoreFoundation constant kCGImagePropertyDNGDefaultUserCrop as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGDefaultUserCrop returns the value of the CoreFoundation reference constant kCGImagePropertyDNGDefaultUserCrop as an objc.ID.
 func KCGImagePropertyDNGDefaultUserCrop() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGDefaultUserCrop()) }
 
-// KCGImagePropertyDNGExtraCameraProfiles returns the CoreFoundation constant kCGImagePropertyDNGExtraCameraProfiles as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGExtraCameraProfiles returns the value of the CoreFoundation reference constant kCGImagePropertyDNGExtraCameraProfiles as an objc.ID.
 func KCGImagePropertyDNGExtraCameraProfiles() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGExtraCameraProfiles()) }
 
-// KCGImagePropertyDNGForwardMatrix1 returns the CoreFoundation constant kCGImagePropertyDNGForwardMatrix1 as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGForwardMatrix1 returns the value of the CoreFoundation reference constant kCGImagePropertyDNGForwardMatrix1 as an objc.ID.
 func KCGImagePropertyDNGForwardMatrix1() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGForwardMatrix1()) }
 
-// KCGImagePropertyDNGForwardMatrix2 returns the CoreFoundation constant kCGImagePropertyDNGForwardMatrix2 as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGForwardMatrix2 returns the value of the CoreFoundation reference constant kCGImagePropertyDNGForwardMatrix2 as an objc.ID.
 func KCGImagePropertyDNGForwardMatrix2() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGForwardMatrix2()) }
 
-// KCGImagePropertyDNGLinearizationTable returns the CoreFoundation constant kCGImagePropertyDNGLinearizationTable as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGLinearizationTable returns the value of the CoreFoundation reference constant kCGImagePropertyDNGLinearizationTable as an objc.ID.
 func KCGImagePropertyDNGLinearizationTable() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGLinearizationTable()) }
 
-// KCGImagePropertyDNGLinearResponseLimit returns the CoreFoundation constant kCGImagePropertyDNGLinearResponseLimit as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGLinearResponseLimit returns the value of the CoreFoundation reference constant kCGImagePropertyDNGLinearResponseLimit as an objc.ID.
 func KCGImagePropertyDNGLinearResponseLimit() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGLinearResponseLimit()) }
 
-// KCGImagePropertyDNGMakerNoteSafety returns the CoreFoundation constant kCGImagePropertyDNGMakerNoteSafety as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGMakerNoteSafety returns the value of the CoreFoundation reference constant kCGImagePropertyDNGMakerNoteSafety as an objc.ID.
 func KCGImagePropertyDNGMakerNoteSafety() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGMakerNoteSafety()) }
 
-// KCGImagePropertyDNGMaskedAreas returns the CoreFoundation constant kCGImagePropertyDNGMaskedAreas as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGMaskedAreas returns the value of the CoreFoundation reference constant kCGImagePropertyDNGMaskedAreas as an objc.ID.
 func KCGImagePropertyDNGMaskedAreas() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGMaskedAreas()) }
 
-// KCGImagePropertyDNGNewRawImageDigest returns the CoreFoundation constant kCGImagePropertyDNGNewRawImageDigest as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGNewRawImageDigest returns the value of the CoreFoundation reference constant kCGImagePropertyDNGNewRawImageDigest as an objc.ID.
 func KCGImagePropertyDNGNewRawImageDigest() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGNewRawImageDigest()) }
 
-// KCGImagePropertyDNGNoiseReductionApplied returns the CoreFoundation constant kCGImagePropertyDNGNoiseReductionApplied as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGNoiseReductionApplied returns the value of the CoreFoundation reference constant kCGImagePropertyDNGNoiseReductionApplied as an objc.ID.
 func KCGImagePropertyDNGNoiseReductionApplied() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGNoiseReductionApplied()) }
 
-// KCGImagePropertyDNGOpcodeList1 returns the CoreFoundation constant kCGImagePropertyDNGOpcodeList1 as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGOpcodeList1 returns the value of the CoreFoundation reference constant kCGImagePropertyDNGOpcodeList1 as an objc.ID.
 func KCGImagePropertyDNGOpcodeList1() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGOpcodeList1()) }
 
-// KCGImagePropertyDNGOpcodeList2 returns the CoreFoundation constant kCGImagePropertyDNGOpcodeList2 as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGOpcodeList2 returns the value of the CoreFoundation reference constant kCGImagePropertyDNGOpcodeList2 as an objc.ID.
 func KCGImagePropertyDNGOpcodeList2() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGOpcodeList2()) }
 
-// KCGImagePropertyDNGOpcodeList3 returns the CoreFoundation constant kCGImagePropertyDNGOpcodeList3 as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGOpcodeList3 returns the value of the CoreFoundation reference constant kCGImagePropertyDNGOpcodeList3 as an objc.ID.
 func KCGImagePropertyDNGOpcodeList3() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGOpcodeList3()) }
 
-// KCGImagePropertyDNGOriginalBestQualityFinalSize returns the CoreFoundation constant kCGImagePropertyDNGOriginalBestQualityFinalSize as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGOriginalBestQualityFinalSize returns the value of the CoreFoundation reference constant kCGImagePropertyDNGOriginalBestQualityFinalSize as an objc.ID.
 func KCGImagePropertyDNGOriginalBestQualityFinalSize() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGOriginalBestQualityFinalSize()) }
 
-// KCGImagePropertyDNGOriginalDefaultCropSize returns the CoreFoundation constant kCGImagePropertyDNGOriginalDefaultCropSize as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGOriginalDefaultCropSize returns the value of the CoreFoundation reference constant kCGImagePropertyDNGOriginalDefaultCropSize as an objc.ID.
 func KCGImagePropertyDNGOriginalDefaultCropSize() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGOriginalDefaultCropSize()) }
 
-// KCGImagePropertyDNGOriginalDefaultFinalSize returns the CoreFoundation constant kCGImagePropertyDNGOriginalDefaultFinalSize as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGOriginalDefaultFinalSize returns the value of the CoreFoundation reference constant kCGImagePropertyDNGOriginalDefaultFinalSize as an objc.ID.
 func KCGImagePropertyDNGOriginalDefaultFinalSize() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGOriginalDefaultFinalSize()) }
 
-// KCGImagePropertyDNGOriginalRawFileData returns the CoreFoundation constant kCGImagePropertyDNGOriginalRawFileData as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGOriginalRawFileData returns the value of the CoreFoundation reference constant kCGImagePropertyDNGOriginalRawFileData as an objc.ID.
 func KCGImagePropertyDNGOriginalRawFileData() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGOriginalRawFileData()) }
 
-// KCGImagePropertyDNGOriginalRawFileDigest returns the CoreFoundation constant kCGImagePropertyDNGOriginalRawFileDigest as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGOriginalRawFileDigest returns the value of the CoreFoundation reference constant kCGImagePropertyDNGOriginalRawFileDigest as an objc.ID.
 func KCGImagePropertyDNGOriginalRawFileDigest() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGOriginalRawFileDigest()) }
 
-// KCGImagePropertyDNGOriginalRawFileName returns the CoreFoundation constant kCGImagePropertyDNGOriginalRawFileName as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGOriginalRawFileName returns the value of the CoreFoundation reference constant kCGImagePropertyDNGOriginalRawFileName as an objc.ID.
 func KCGImagePropertyDNGOriginalRawFileName() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGOriginalRawFileName()) }
 
-// KCGImagePropertyDNGPreviewApplicationName returns the CoreFoundation constant kCGImagePropertyDNGPreviewApplicationName as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGPreviewApplicationName returns the value of the CoreFoundation reference constant kCGImagePropertyDNGPreviewApplicationName as an objc.ID.
 func KCGImagePropertyDNGPreviewApplicationName() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGPreviewApplicationName()) }
 
-// KCGImagePropertyDNGPreviewApplicationVersion returns the CoreFoundation constant kCGImagePropertyDNGPreviewApplicationVersion as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGPreviewApplicationVersion returns the value of the CoreFoundation reference constant kCGImagePropertyDNGPreviewApplicationVersion as an objc.ID.
 func KCGImagePropertyDNGPreviewApplicationVersion() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGPreviewApplicationVersion()) }
 
-// KCGImagePropertyDNGPreviewColorSpace returns the CoreFoundation constant kCGImagePropertyDNGPreviewColorSpace as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGPreviewColorSpace returns the value of the CoreFoundation reference constant kCGImagePropertyDNGPreviewColorSpace as an objc.ID.
 func KCGImagePropertyDNGPreviewColorSpace() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGPreviewColorSpace()) }
 
-// KCGImagePropertyDNGPreviewDateTime returns the CoreFoundation constant kCGImagePropertyDNGPreviewDateTime as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGPreviewDateTime returns the value of the CoreFoundation reference constant kCGImagePropertyDNGPreviewDateTime as an objc.ID.
 func KCGImagePropertyDNGPreviewDateTime() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGPreviewDateTime()) }
 
-// KCGImagePropertyDNGPreviewSettingsDigest returns the CoreFoundation constant kCGImagePropertyDNGPreviewSettingsDigest as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGPreviewSettingsDigest returns the value of the CoreFoundation reference constant kCGImagePropertyDNGPreviewSettingsDigest as an objc.ID.
 func KCGImagePropertyDNGPreviewSettingsDigest() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGPreviewSettingsDigest()) }
 
-// KCGImagePropertyDNGPreviewSettingsName returns the CoreFoundation constant kCGImagePropertyDNGPreviewSettingsName as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGPreviewSettingsName returns the value of the CoreFoundation reference constant kCGImagePropertyDNGPreviewSettingsName as an objc.ID.
 func KCGImagePropertyDNGPreviewSettingsName() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGPreviewSettingsName()) }
 
-// KCGImagePropertyDNGProfileCopyright returns the CoreFoundation constant kCGImagePropertyDNGProfileCopyright as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGProfileCopyright returns the value of the CoreFoundation reference constant kCGImagePropertyDNGProfileCopyright as an objc.ID.
 func KCGImagePropertyDNGProfileCopyright() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGProfileCopyright()) }
 
-// KCGImagePropertyDNGProfileEmbedPolicy returns the CoreFoundation constant kCGImagePropertyDNGProfileEmbedPolicy as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGProfileEmbedPolicy returns the value of the CoreFoundation reference constant kCGImagePropertyDNGProfileEmbedPolicy as an objc.ID.
 func KCGImagePropertyDNGProfileEmbedPolicy() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGProfileEmbedPolicy()) }
 
-// KCGImagePropertyDNGProfileHueSatMapData1 returns the CoreFoundation constant kCGImagePropertyDNGProfileHueSatMapData1 as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGProfileHueSatMapData1 returns the value of the CoreFoundation reference constant kCGImagePropertyDNGProfileHueSatMapData1 as an objc.ID.
 func KCGImagePropertyDNGProfileHueSatMapData1() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGProfileHueSatMapData1()) }
 
-// KCGImagePropertyDNGProfileHueSatMapData2 returns the CoreFoundation constant kCGImagePropertyDNGProfileHueSatMapData2 as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGProfileHueSatMapData2 returns the value of the CoreFoundation reference constant kCGImagePropertyDNGProfileHueSatMapData2 as an objc.ID.
 func KCGImagePropertyDNGProfileHueSatMapData2() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGProfileHueSatMapData2()) }
 
-// KCGImagePropertyDNGProfileHueSatMapDims returns the CoreFoundation constant kCGImagePropertyDNGProfileHueSatMapDims as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGProfileHueSatMapDims returns the value of the CoreFoundation reference constant kCGImagePropertyDNGProfileHueSatMapDims as an objc.ID.
 func KCGImagePropertyDNGProfileHueSatMapDims() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGProfileHueSatMapDims()) }
 
-// KCGImagePropertyDNGProfileHueSatMapEncoding returns the CoreFoundation constant kCGImagePropertyDNGProfileHueSatMapEncoding as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGProfileHueSatMapEncoding returns the value of the CoreFoundation reference constant kCGImagePropertyDNGProfileHueSatMapEncoding as an objc.ID.
 func KCGImagePropertyDNGProfileHueSatMapEncoding() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGProfileHueSatMapEncoding()) }
 
-// KCGImagePropertyDNGProfileLookTableData returns the CoreFoundation constant kCGImagePropertyDNGProfileLookTableData as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGProfileLookTableData returns the value of the CoreFoundation reference constant kCGImagePropertyDNGProfileLookTableData as an objc.ID.
 func KCGImagePropertyDNGProfileLookTableData() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGProfileLookTableData()) }
 
-// KCGImagePropertyDNGProfileLookTableDims returns the CoreFoundation constant kCGImagePropertyDNGProfileLookTableDims as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGProfileLookTableDims returns the value of the CoreFoundation reference constant kCGImagePropertyDNGProfileLookTableDims as an objc.ID.
 func KCGImagePropertyDNGProfileLookTableDims() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGProfileLookTableDims()) }
 
-// KCGImagePropertyDNGProfileLookTableEncoding returns the CoreFoundation constant kCGImagePropertyDNGProfileLookTableEncoding as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGProfileLookTableEncoding returns the value of the CoreFoundation reference constant kCGImagePropertyDNGProfileLookTableEncoding as an objc.ID.
 func KCGImagePropertyDNGProfileLookTableEncoding() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGProfileLookTableEncoding()) }
 
-// KCGImagePropertyDNGProfileName returns the CoreFoundation constant kCGImagePropertyDNGProfileName as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGProfileName returns the value of the CoreFoundation reference constant kCGImagePropertyDNGProfileName as an objc.ID.
 func KCGImagePropertyDNGProfileName() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGProfileName()) }
 
-// KCGImagePropertyDNGProfileToneCurve returns the CoreFoundation constant kCGImagePropertyDNGProfileToneCurve as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGProfileToneCurve returns the value of the CoreFoundation reference constant kCGImagePropertyDNGProfileToneCurve as an objc.ID.
 func KCGImagePropertyDNGProfileToneCurve() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGProfileToneCurve()) }
 
-// KCGImagePropertyDNGRawDataUniqueID returns the CoreFoundation constant kCGImagePropertyDNGRawDataUniqueID as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGRawDataUniqueID returns the value of the CoreFoundation reference constant kCGImagePropertyDNGRawDataUniqueID as an objc.ID.
 func KCGImagePropertyDNGRawDataUniqueID() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGRawDataUniqueID()) }
 
-// KCGImagePropertyDNGRawImageDigest returns the CoreFoundation constant kCGImagePropertyDNGRawImageDigest as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGRawImageDigest returns the value of the CoreFoundation reference constant kCGImagePropertyDNGRawImageDigest as an objc.ID.
 func KCGImagePropertyDNGRawImageDigest() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGRawImageDigest()) }
 
-// KCGImagePropertyDNGRawToPreviewGain returns the CoreFoundation constant kCGImagePropertyDNGRawToPreviewGain as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGRawToPreviewGain returns the value of the CoreFoundation reference constant kCGImagePropertyDNGRawToPreviewGain as an objc.ID.
 func KCGImagePropertyDNGRawToPreviewGain() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGRawToPreviewGain()) }
 
-// KCGImagePropertyDNGReductionMatrix1 returns the CoreFoundation constant kCGImagePropertyDNGReductionMatrix1 as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGReductionMatrix1 returns the value of the CoreFoundation reference constant kCGImagePropertyDNGReductionMatrix1 as an objc.ID.
 func KCGImagePropertyDNGReductionMatrix1() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGReductionMatrix1()) }
 
-// KCGImagePropertyDNGReductionMatrix2 returns the CoreFoundation constant kCGImagePropertyDNGReductionMatrix2 as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGReductionMatrix2 returns the value of the CoreFoundation reference constant kCGImagePropertyDNGReductionMatrix2 as an objc.ID.
 func KCGImagePropertyDNGReductionMatrix2() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGReductionMatrix2()) }
 
-// KCGImagePropertyDNGRowInterleaveFactor returns the CoreFoundation constant kCGImagePropertyDNGRowInterleaveFactor as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGRowInterleaveFactor returns the value of the CoreFoundation reference constant kCGImagePropertyDNGRowInterleaveFactor as an objc.ID.
 func KCGImagePropertyDNGRowInterleaveFactor() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGRowInterleaveFactor()) }
 
-// KCGImagePropertyDNGShadowScale returns the CoreFoundation constant kCGImagePropertyDNGShadowScale as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGShadowScale returns the value of the CoreFoundation reference constant kCGImagePropertyDNGShadowScale as an objc.ID.
 func KCGImagePropertyDNGShadowScale() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGShadowScale()) }
 
-// KCGImagePropertyDNGSubTileBlockSize returns the CoreFoundation constant kCGImagePropertyDNGSubTileBlockSize as a toll-free-bridged objc.ID.
+// KCGImagePropertyDNGSubTileBlockSize returns the value of the CoreFoundation reference constant kCGImagePropertyDNGSubTileBlockSize as an objc.ID.
 func KCGImagePropertyDNGSubTileBlockSize() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGSubTileBlockSize()) }
 
-// KCGImagePropertyCIFFDescription returns the CoreFoundation constant kCGImagePropertyCIFFDescription as a toll-free-bridged objc.ID.
+// KCGImagePropertyCIFFDescription returns the value of the CoreFoundation reference constant kCGImagePropertyCIFFDescription as an objc.ID.
 func KCGImagePropertyCIFFDescription() objc.ID { return purego.CFConstant(raw.KCGImagePropertyCIFFDescription()) }
 
-// KCGImagePropertyCIFFFirmware returns the CoreFoundation constant kCGImagePropertyCIFFFirmware as a toll-free-bridged objc.ID.
+// KCGImagePropertyCIFFFirmware returns the value of the CoreFoundation reference constant kCGImagePropertyCIFFFirmware as an objc.ID.
 func KCGImagePropertyCIFFFirmware() objc.ID { return purego.CFConstant(raw.KCGImagePropertyCIFFFirmware()) }
 
-// KCGImagePropertyCIFFOwnerName returns the CoreFoundation constant kCGImagePropertyCIFFOwnerName as a toll-free-bridged objc.ID.
+// KCGImagePropertyCIFFOwnerName returns the value of the CoreFoundation reference constant kCGImagePropertyCIFFOwnerName as an objc.ID.
 func KCGImagePropertyCIFFOwnerName() objc.ID { return purego.CFConstant(raw.KCGImagePropertyCIFFOwnerName()) }
 
-// KCGImagePropertyCIFFImageName returns the CoreFoundation constant kCGImagePropertyCIFFImageName as a toll-free-bridged objc.ID.
+// KCGImagePropertyCIFFImageName returns the value of the CoreFoundation reference constant kCGImagePropertyCIFFImageName as an objc.ID.
 func KCGImagePropertyCIFFImageName() objc.ID { return purego.CFConstant(raw.KCGImagePropertyCIFFImageName()) }
 
-// KCGImagePropertyCIFFImageFileName returns the CoreFoundation constant kCGImagePropertyCIFFImageFileName as a toll-free-bridged objc.ID.
+// KCGImagePropertyCIFFImageFileName returns the value of the CoreFoundation reference constant kCGImagePropertyCIFFImageFileName as an objc.ID.
 func KCGImagePropertyCIFFImageFileName() objc.ID { return purego.CFConstant(raw.KCGImagePropertyCIFFImageFileName()) }
 
-// KCGImagePropertyCIFFReleaseMethod returns the CoreFoundation constant kCGImagePropertyCIFFReleaseMethod as a toll-free-bridged objc.ID.
+// KCGImagePropertyCIFFReleaseMethod returns the value of the CoreFoundation reference constant kCGImagePropertyCIFFReleaseMethod as an objc.ID.
 func KCGImagePropertyCIFFReleaseMethod() objc.ID { return purego.CFConstant(raw.KCGImagePropertyCIFFReleaseMethod()) }
 
-// KCGImagePropertyCIFFReleaseTiming returns the CoreFoundation constant kCGImagePropertyCIFFReleaseTiming as a toll-free-bridged objc.ID.
+// KCGImagePropertyCIFFReleaseTiming returns the value of the CoreFoundation reference constant kCGImagePropertyCIFFReleaseTiming as an objc.ID.
 func KCGImagePropertyCIFFReleaseTiming() objc.ID { return purego.CFConstant(raw.KCGImagePropertyCIFFReleaseTiming()) }
 
-// KCGImagePropertyCIFFRecordID returns the CoreFoundation constant kCGImagePropertyCIFFRecordID as a toll-free-bridged objc.ID.
+// KCGImagePropertyCIFFRecordID returns the value of the CoreFoundation reference constant kCGImagePropertyCIFFRecordID as an objc.ID.
 func KCGImagePropertyCIFFRecordID() objc.ID { return purego.CFConstant(raw.KCGImagePropertyCIFFRecordID()) }
 
-// KCGImagePropertyCIFFSelfTimingTime returns the CoreFoundation constant kCGImagePropertyCIFFSelfTimingTime as a toll-free-bridged objc.ID.
+// KCGImagePropertyCIFFSelfTimingTime returns the value of the CoreFoundation reference constant kCGImagePropertyCIFFSelfTimingTime as an objc.ID.
 func KCGImagePropertyCIFFSelfTimingTime() objc.ID { return purego.CFConstant(raw.KCGImagePropertyCIFFSelfTimingTime()) }
 
-// KCGImagePropertyCIFFCameraSerialNumber returns the CoreFoundation constant kCGImagePropertyCIFFCameraSerialNumber as a toll-free-bridged objc.ID.
+// KCGImagePropertyCIFFCameraSerialNumber returns the value of the CoreFoundation reference constant kCGImagePropertyCIFFCameraSerialNumber as an objc.ID.
 func KCGImagePropertyCIFFCameraSerialNumber() objc.ID { return purego.CFConstant(raw.KCGImagePropertyCIFFCameraSerialNumber()) }
 
-// KCGImagePropertyCIFFImageSerialNumber returns the CoreFoundation constant kCGImagePropertyCIFFImageSerialNumber as a toll-free-bridged objc.ID.
+// KCGImagePropertyCIFFImageSerialNumber returns the value of the CoreFoundation reference constant kCGImagePropertyCIFFImageSerialNumber as an objc.ID.
 func KCGImagePropertyCIFFImageSerialNumber() objc.ID { return purego.CFConstant(raw.KCGImagePropertyCIFFImageSerialNumber()) }
 
-// KCGImagePropertyCIFFContinuousDrive returns the CoreFoundation constant kCGImagePropertyCIFFContinuousDrive as a toll-free-bridged objc.ID.
+// KCGImagePropertyCIFFContinuousDrive returns the value of the CoreFoundation reference constant kCGImagePropertyCIFFContinuousDrive as an objc.ID.
 func KCGImagePropertyCIFFContinuousDrive() objc.ID { return purego.CFConstant(raw.KCGImagePropertyCIFFContinuousDrive()) }
 
-// KCGImagePropertyCIFFFocusMode returns the CoreFoundation constant kCGImagePropertyCIFFFocusMode as a toll-free-bridged objc.ID.
+// KCGImagePropertyCIFFFocusMode returns the value of the CoreFoundation reference constant kCGImagePropertyCIFFFocusMode as an objc.ID.
 func KCGImagePropertyCIFFFocusMode() objc.ID { return purego.CFConstant(raw.KCGImagePropertyCIFFFocusMode()) }
 
-// KCGImagePropertyCIFFMeteringMode returns the CoreFoundation constant kCGImagePropertyCIFFMeteringMode as a toll-free-bridged objc.ID.
+// KCGImagePropertyCIFFMeteringMode returns the value of the CoreFoundation reference constant kCGImagePropertyCIFFMeteringMode as an objc.ID.
 func KCGImagePropertyCIFFMeteringMode() objc.ID { return purego.CFConstant(raw.KCGImagePropertyCIFFMeteringMode()) }
 
-// KCGImagePropertyCIFFShootingMode returns the CoreFoundation constant kCGImagePropertyCIFFShootingMode as a toll-free-bridged objc.ID.
+// KCGImagePropertyCIFFShootingMode returns the value of the CoreFoundation reference constant kCGImagePropertyCIFFShootingMode as an objc.ID.
 func KCGImagePropertyCIFFShootingMode() objc.ID { return purego.CFConstant(raw.KCGImagePropertyCIFFShootingMode()) }
 
-// KCGImagePropertyCIFFLensModel returns the CoreFoundation constant kCGImagePropertyCIFFLensModel as a toll-free-bridged objc.ID.
+// KCGImagePropertyCIFFLensModel returns the value of the CoreFoundation reference constant kCGImagePropertyCIFFLensModel as an objc.ID.
 func KCGImagePropertyCIFFLensModel() objc.ID { return purego.CFConstant(raw.KCGImagePropertyCIFFLensModel()) }
 
-// KCGImagePropertyCIFFLensMaxMM returns the CoreFoundation constant kCGImagePropertyCIFFLensMaxMM as a toll-free-bridged objc.ID.
+// KCGImagePropertyCIFFLensMaxMM returns the value of the CoreFoundation reference constant kCGImagePropertyCIFFLensMaxMM as an objc.ID.
 func KCGImagePropertyCIFFLensMaxMM() objc.ID { return purego.CFConstant(raw.KCGImagePropertyCIFFLensMaxMM()) }
 
-// KCGImagePropertyCIFFLensMinMM returns the CoreFoundation constant kCGImagePropertyCIFFLensMinMM as a toll-free-bridged objc.ID.
+// KCGImagePropertyCIFFLensMinMM returns the value of the CoreFoundation reference constant kCGImagePropertyCIFFLensMinMM as an objc.ID.
 func KCGImagePropertyCIFFLensMinMM() objc.ID { return purego.CFConstant(raw.KCGImagePropertyCIFFLensMinMM()) }
 
-// KCGImagePropertyCIFFWhiteBalanceIndex returns the CoreFoundation constant kCGImagePropertyCIFFWhiteBalanceIndex as a toll-free-bridged objc.ID.
+// KCGImagePropertyCIFFWhiteBalanceIndex returns the value of the CoreFoundation reference constant kCGImagePropertyCIFFWhiteBalanceIndex as an objc.ID.
 func KCGImagePropertyCIFFWhiteBalanceIndex() objc.ID { return purego.CFConstant(raw.KCGImagePropertyCIFFWhiteBalanceIndex()) }
 
-// KCGImagePropertyCIFFFlashExposureComp returns the CoreFoundation constant kCGImagePropertyCIFFFlashExposureComp as a toll-free-bridged objc.ID.
+// KCGImagePropertyCIFFFlashExposureComp returns the value of the CoreFoundation reference constant kCGImagePropertyCIFFFlashExposureComp as an objc.ID.
 func KCGImagePropertyCIFFFlashExposureComp() objc.ID { return purego.CFConstant(raw.KCGImagePropertyCIFFFlashExposureComp()) }
 
-// KCGImagePropertyCIFFMeasuredEV returns the CoreFoundation constant kCGImagePropertyCIFFMeasuredEV as a toll-free-bridged objc.ID.
+// KCGImagePropertyCIFFMeasuredEV returns the value of the CoreFoundation reference constant kCGImagePropertyCIFFMeasuredEV as an objc.ID.
 func KCGImagePropertyCIFFMeasuredEV() objc.ID { return purego.CFConstant(raw.KCGImagePropertyCIFFMeasuredEV()) }
 
-// KCGImagePropertyMakerNikonISOSetting returns the CoreFoundation constant kCGImagePropertyMakerNikonISOSetting as a toll-free-bridged objc.ID.
+// KCGImagePropertyMakerNikonISOSetting returns the value of the CoreFoundation reference constant kCGImagePropertyMakerNikonISOSetting as an objc.ID.
 func KCGImagePropertyMakerNikonISOSetting() objc.ID { return purego.CFConstant(raw.KCGImagePropertyMakerNikonISOSetting()) }
 
-// KCGImagePropertyMakerNikonColorMode returns the CoreFoundation constant kCGImagePropertyMakerNikonColorMode as a toll-free-bridged objc.ID.
+// KCGImagePropertyMakerNikonColorMode returns the value of the CoreFoundation reference constant kCGImagePropertyMakerNikonColorMode as an objc.ID.
 func KCGImagePropertyMakerNikonColorMode() objc.ID { return purego.CFConstant(raw.KCGImagePropertyMakerNikonColorMode()) }
 
-// KCGImagePropertyMakerNikonQuality returns the CoreFoundation constant kCGImagePropertyMakerNikonQuality as a toll-free-bridged objc.ID.
+// KCGImagePropertyMakerNikonQuality returns the value of the CoreFoundation reference constant kCGImagePropertyMakerNikonQuality as an objc.ID.
 func KCGImagePropertyMakerNikonQuality() objc.ID { return purego.CFConstant(raw.KCGImagePropertyMakerNikonQuality()) }
 
-// KCGImagePropertyMakerNikonWhiteBalanceMode returns the CoreFoundation constant kCGImagePropertyMakerNikonWhiteBalanceMode as a toll-free-bridged objc.ID.
+// KCGImagePropertyMakerNikonWhiteBalanceMode returns the value of the CoreFoundation reference constant kCGImagePropertyMakerNikonWhiteBalanceMode as an objc.ID.
 func KCGImagePropertyMakerNikonWhiteBalanceMode() objc.ID { return purego.CFConstant(raw.KCGImagePropertyMakerNikonWhiteBalanceMode()) }
 
-// KCGImagePropertyMakerNikonSharpenMode returns the CoreFoundation constant kCGImagePropertyMakerNikonSharpenMode as a toll-free-bridged objc.ID.
+// KCGImagePropertyMakerNikonSharpenMode returns the value of the CoreFoundation reference constant kCGImagePropertyMakerNikonSharpenMode as an objc.ID.
 func KCGImagePropertyMakerNikonSharpenMode() objc.ID { return purego.CFConstant(raw.KCGImagePropertyMakerNikonSharpenMode()) }
 
-// KCGImagePropertyMakerNikonFocusMode returns the CoreFoundation constant kCGImagePropertyMakerNikonFocusMode as a toll-free-bridged objc.ID.
+// KCGImagePropertyMakerNikonFocusMode returns the value of the CoreFoundation reference constant kCGImagePropertyMakerNikonFocusMode as an objc.ID.
 func KCGImagePropertyMakerNikonFocusMode() objc.ID { return purego.CFConstant(raw.KCGImagePropertyMakerNikonFocusMode()) }
 
-// KCGImagePropertyMakerNikonFlashSetting returns the CoreFoundation constant kCGImagePropertyMakerNikonFlashSetting as a toll-free-bridged objc.ID.
+// KCGImagePropertyMakerNikonFlashSetting returns the value of the CoreFoundation reference constant kCGImagePropertyMakerNikonFlashSetting as an objc.ID.
 func KCGImagePropertyMakerNikonFlashSetting() objc.ID { return purego.CFConstant(raw.KCGImagePropertyMakerNikonFlashSetting()) }
 
-// KCGImagePropertyMakerNikonISOSelection returns the CoreFoundation constant kCGImagePropertyMakerNikonISOSelection as a toll-free-bridged objc.ID.
+// KCGImagePropertyMakerNikonISOSelection returns the value of the CoreFoundation reference constant kCGImagePropertyMakerNikonISOSelection as an objc.ID.
 func KCGImagePropertyMakerNikonISOSelection() objc.ID { return purego.CFConstant(raw.KCGImagePropertyMakerNikonISOSelection()) }
 
-// KCGImagePropertyMakerNikonFlashExposureComp returns the CoreFoundation constant kCGImagePropertyMakerNikonFlashExposureComp as a toll-free-bridged objc.ID.
+// KCGImagePropertyMakerNikonFlashExposureComp returns the value of the CoreFoundation reference constant kCGImagePropertyMakerNikonFlashExposureComp as an objc.ID.
 func KCGImagePropertyMakerNikonFlashExposureComp() objc.ID { return purego.CFConstant(raw.KCGImagePropertyMakerNikonFlashExposureComp()) }
 
-// KCGImagePropertyMakerNikonImageAdjustment returns the CoreFoundation constant kCGImagePropertyMakerNikonImageAdjustment as a toll-free-bridged objc.ID.
+// KCGImagePropertyMakerNikonImageAdjustment returns the value of the CoreFoundation reference constant kCGImagePropertyMakerNikonImageAdjustment as an objc.ID.
 func KCGImagePropertyMakerNikonImageAdjustment() objc.ID { return purego.CFConstant(raw.KCGImagePropertyMakerNikonImageAdjustment()) }
 
-// KCGImagePropertyMakerNikonLensAdapter returns the CoreFoundation constant kCGImagePropertyMakerNikonLensAdapter as a toll-free-bridged objc.ID.
+// KCGImagePropertyMakerNikonLensAdapter returns the value of the CoreFoundation reference constant kCGImagePropertyMakerNikonLensAdapter as an objc.ID.
 func KCGImagePropertyMakerNikonLensAdapter() objc.ID { return purego.CFConstant(raw.KCGImagePropertyMakerNikonLensAdapter()) }
 
-// KCGImagePropertyMakerNikonLensType returns the CoreFoundation constant kCGImagePropertyMakerNikonLensType as a toll-free-bridged objc.ID.
+// KCGImagePropertyMakerNikonLensType returns the value of the CoreFoundation reference constant kCGImagePropertyMakerNikonLensType as an objc.ID.
 func KCGImagePropertyMakerNikonLensType() objc.ID { return purego.CFConstant(raw.KCGImagePropertyMakerNikonLensType()) }
 
-// KCGImagePropertyMakerNikonLensInfo returns the CoreFoundation constant kCGImagePropertyMakerNikonLensInfo as a toll-free-bridged objc.ID.
+// KCGImagePropertyMakerNikonLensInfo returns the value of the CoreFoundation reference constant kCGImagePropertyMakerNikonLensInfo as an objc.ID.
 func KCGImagePropertyMakerNikonLensInfo() objc.ID { return purego.CFConstant(raw.KCGImagePropertyMakerNikonLensInfo()) }
 
-// KCGImagePropertyMakerNikonFocusDistance returns the CoreFoundation constant kCGImagePropertyMakerNikonFocusDistance as a toll-free-bridged objc.ID.
+// KCGImagePropertyMakerNikonFocusDistance returns the value of the CoreFoundation reference constant kCGImagePropertyMakerNikonFocusDistance as an objc.ID.
 func KCGImagePropertyMakerNikonFocusDistance() objc.ID { return purego.CFConstant(raw.KCGImagePropertyMakerNikonFocusDistance()) }
 
-// KCGImagePropertyMakerNikonDigitalZoom returns the CoreFoundation constant kCGImagePropertyMakerNikonDigitalZoom as a toll-free-bridged objc.ID.
+// KCGImagePropertyMakerNikonDigitalZoom returns the value of the CoreFoundation reference constant kCGImagePropertyMakerNikonDigitalZoom as an objc.ID.
 func KCGImagePropertyMakerNikonDigitalZoom() objc.ID { return purego.CFConstant(raw.KCGImagePropertyMakerNikonDigitalZoom()) }
 
-// KCGImagePropertyMakerNikonShootingMode returns the CoreFoundation constant kCGImagePropertyMakerNikonShootingMode as a toll-free-bridged objc.ID.
+// KCGImagePropertyMakerNikonShootingMode returns the value of the CoreFoundation reference constant kCGImagePropertyMakerNikonShootingMode as an objc.ID.
 func KCGImagePropertyMakerNikonShootingMode() objc.ID { return purego.CFConstant(raw.KCGImagePropertyMakerNikonShootingMode()) }
 
-// KCGImagePropertyMakerNikonCameraSerialNumber returns the CoreFoundation constant kCGImagePropertyMakerNikonCameraSerialNumber as a toll-free-bridged objc.ID.
+// KCGImagePropertyMakerNikonCameraSerialNumber returns the value of the CoreFoundation reference constant kCGImagePropertyMakerNikonCameraSerialNumber as an objc.ID.
 func KCGImagePropertyMakerNikonCameraSerialNumber() objc.ID { return purego.CFConstant(raw.KCGImagePropertyMakerNikonCameraSerialNumber()) }
 
-// KCGImagePropertyMakerNikonShutterCount returns the CoreFoundation constant kCGImagePropertyMakerNikonShutterCount as a toll-free-bridged objc.ID.
+// KCGImagePropertyMakerNikonShutterCount returns the value of the CoreFoundation reference constant kCGImagePropertyMakerNikonShutterCount as an objc.ID.
 func KCGImagePropertyMakerNikonShutterCount() objc.ID { return purego.CFConstant(raw.KCGImagePropertyMakerNikonShutterCount()) }
 
-// KCGImagePropertyMakerCanonOwnerName returns the CoreFoundation constant kCGImagePropertyMakerCanonOwnerName as a toll-free-bridged objc.ID.
+// KCGImagePropertyMakerCanonOwnerName returns the value of the CoreFoundation reference constant kCGImagePropertyMakerCanonOwnerName as an objc.ID.
 func KCGImagePropertyMakerCanonOwnerName() objc.ID { return purego.CFConstant(raw.KCGImagePropertyMakerCanonOwnerName()) }
 
-// KCGImagePropertyMakerCanonCameraSerialNumber returns the CoreFoundation constant kCGImagePropertyMakerCanonCameraSerialNumber as a toll-free-bridged objc.ID.
+// KCGImagePropertyMakerCanonCameraSerialNumber returns the value of the CoreFoundation reference constant kCGImagePropertyMakerCanonCameraSerialNumber as an objc.ID.
 func KCGImagePropertyMakerCanonCameraSerialNumber() objc.ID { return purego.CFConstant(raw.KCGImagePropertyMakerCanonCameraSerialNumber()) }
 
-// KCGImagePropertyMakerCanonImageSerialNumber returns the CoreFoundation constant kCGImagePropertyMakerCanonImageSerialNumber as a toll-free-bridged objc.ID.
+// KCGImagePropertyMakerCanonImageSerialNumber returns the value of the CoreFoundation reference constant kCGImagePropertyMakerCanonImageSerialNumber as an objc.ID.
 func KCGImagePropertyMakerCanonImageSerialNumber() objc.ID { return purego.CFConstant(raw.KCGImagePropertyMakerCanonImageSerialNumber()) }
 
-// KCGImagePropertyMakerCanonFlashExposureComp returns the CoreFoundation constant kCGImagePropertyMakerCanonFlashExposureComp as a toll-free-bridged objc.ID.
+// KCGImagePropertyMakerCanonFlashExposureComp returns the value of the CoreFoundation reference constant kCGImagePropertyMakerCanonFlashExposureComp as an objc.ID.
 func KCGImagePropertyMakerCanonFlashExposureComp() objc.ID { return purego.CFConstant(raw.KCGImagePropertyMakerCanonFlashExposureComp()) }
 
-// KCGImagePropertyMakerCanonContinuousDrive returns the CoreFoundation constant kCGImagePropertyMakerCanonContinuousDrive as a toll-free-bridged objc.ID.
+// KCGImagePropertyMakerCanonContinuousDrive returns the value of the CoreFoundation reference constant kCGImagePropertyMakerCanonContinuousDrive as an objc.ID.
 func KCGImagePropertyMakerCanonContinuousDrive() objc.ID { return purego.CFConstant(raw.KCGImagePropertyMakerCanonContinuousDrive()) }
 
-// KCGImagePropertyMakerCanonLensModel returns the CoreFoundation constant kCGImagePropertyMakerCanonLensModel as a toll-free-bridged objc.ID.
+// KCGImagePropertyMakerCanonLensModel returns the value of the CoreFoundation reference constant kCGImagePropertyMakerCanonLensModel as an objc.ID.
 func KCGImagePropertyMakerCanonLensModel() objc.ID { return purego.CFConstant(raw.KCGImagePropertyMakerCanonLensModel()) }
 
-// KCGImagePropertyMakerCanonFirmware returns the CoreFoundation constant kCGImagePropertyMakerCanonFirmware as a toll-free-bridged objc.ID.
+// KCGImagePropertyMakerCanonFirmware returns the value of the CoreFoundation reference constant kCGImagePropertyMakerCanonFirmware as an objc.ID.
 func KCGImagePropertyMakerCanonFirmware() objc.ID { return purego.CFConstant(raw.KCGImagePropertyMakerCanonFirmware()) }
 
-// KCGImagePropertyMakerCanonAspectRatioInfo returns the CoreFoundation constant kCGImagePropertyMakerCanonAspectRatioInfo as a toll-free-bridged objc.ID.
+// KCGImagePropertyMakerCanonAspectRatioInfo returns the value of the CoreFoundation reference constant kCGImagePropertyMakerCanonAspectRatioInfo as an objc.ID.
 func KCGImagePropertyMakerCanonAspectRatioInfo() objc.ID { return purego.CFConstant(raw.KCGImagePropertyMakerCanonAspectRatioInfo()) }
 
-// KCGImagePropertyOpenEXRCompression returns the CoreFoundation constant kCGImagePropertyOpenEXRCompression as a toll-free-bridged objc.ID.
+// KCGImagePropertyOpenEXRCompression returns the value of the CoreFoundation reference constant kCGImagePropertyOpenEXRCompression as an objc.ID.
 func KCGImagePropertyOpenEXRCompression() objc.ID { return purego.CFConstant(raw.KCGImagePropertyOpenEXRCompression()) }
 
-// KCGImagePropertyOpenEXRAspectRatio returns the CoreFoundation constant kCGImagePropertyOpenEXRAspectRatio as a toll-free-bridged objc.ID.
+// KCGImagePropertyOpenEXRAspectRatio returns the value of the CoreFoundation reference constant kCGImagePropertyOpenEXRAspectRatio as an objc.ID.
 func KCGImagePropertyOpenEXRAspectRatio() objc.ID { return purego.CFConstant(raw.KCGImagePropertyOpenEXRAspectRatio()) }
 
-// KCGImagePropertyTGACompression returns the CoreFoundation constant kCGImagePropertyTGACompression as a toll-free-bridged objc.ID.
+// KCGImagePropertyTGACompression returns the value of the CoreFoundation reference constant kCGImagePropertyTGACompression as an objc.ID.
 func KCGImagePropertyTGACompression() objc.ID { return purego.CFConstant(raw.KCGImagePropertyTGACompression()) }
 
-// KCGImagePropertyPNGCompressionFilter returns the CoreFoundation constant kCGImagePropertyPNGCompressionFilter as a toll-free-bridged objc.ID.
+// KCGImagePropertyPNGCompressionFilter returns the value of the CoreFoundation reference constant kCGImagePropertyPNGCompressionFilter as an objc.ID.
 func KCGImagePropertyPNGCompressionFilter() objc.ID { return purego.CFConstant(raw.KCGImagePropertyPNGCompressionFilter()) }
 
-// KCGImagePropertyPNGTransparency returns the CoreFoundation constant kCGImagePropertyPNGTransparency as a toll-free-bridged objc.ID.
+// KCGImagePropertyPNGTransparency returns the value of the CoreFoundation reference constant kCGImagePropertyPNGTransparency as an objc.ID.
 func KCGImagePropertyPNGTransparency() objc.ID { return purego.CFConstant(raw.KCGImagePropertyPNGTransparency()) }
 
-// KCGImageAuxiliaryDataTypeDepth returns the CoreFoundation constant kCGImageAuxiliaryDataTypeDepth as a toll-free-bridged objc.ID.
+// KCGImageAuxiliaryDataTypeDepth returns the value of the CoreFoundation reference constant kCGImageAuxiliaryDataTypeDepth as an objc.ID.
 func KCGImageAuxiliaryDataTypeDepth() objc.ID { return purego.CFConstant(raw.KCGImageAuxiliaryDataTypeDepth()) }
 
-// KCGImageAuxiliaryDataTypeDisparity returns the CoreFoundation constant kCGImageAuxiliaryDataTypeDisparity as a toll-free-bridged objc.ID.
+// KCGImageAuxiliaryDataTypeDisparity returns the value of the CoreFoundation reference constant kCGImageAuxiliaryDataTypeDisparity as an objc.ID.
 func KCGImageAuxiliaryDataTypeDisparity() objc.ID { return purego.CFConstant(raw.KCGImageAuxiliaryDataTypeDisparity()) }
 
-// KCGImageAuxiliaryDataTypePortraitEffectsMatte returns the CoreFoundation constant kCGImageAuxiliaryDataTypePortraitEffectsMatte as a toll-free-bridged objc.ID.
+// KCGImageAuxiliaryDataTypePortraitEffectsMatte returns the value of the CoreFoundation reference constant kCGImageAuxiliaryDataTypePortraitEffectsMatte as an objc.ID.
 func KCGImageAuxiliaryDataTypePortraitEffectsMatte() objc.ID { return purego.CFConstant(raw.KCGImageAuxiliaryDataTypePortraitEffectsMatte()) }
 
-// KCGImageAuxiliaryDataTypeSemanticSegmentationSkinMatte returns the CoreFoundation constant kCGImageAuxiliaryDataTypeSemanticSegmentationSkinMatte as a toll-free-bridged objc.ID.
+// KCGImageAuxiliaryDataTypeSemanticSegmentationSkinMatte returns the value of the CoreFoundation reference constant kCGImageAuxiliaryDataTypeSemanticSegmentationSkinMatte as an objc.ID.
 func KCGImageAuxiliaryDataTypeSemanticSegmentationSkinMatte() objc.ID { return purego.CFConstant(raw.KCGImageAuxiliaryDataTypeSemanticSegmentationSkinMatte()) }
 
-// KCGImageAuxiliaryDataTypeSemanticSegmentationHairMatte returns the CoreFoundation constant kCGImageAuxiliaryDataTypeSemanticSegmentationHairMatte as a toll-free-bridged objc.ID.
+// KCGImageAuxiliaryDataTypeSemanticSegmentationHairMatte returns the value of the CoreFoundation reference constant kCGImageAuxiliaryDataTypeSemanticSegmentationHairMatte as an objc.ID.
 func KCGImageAuxiliaryDataTypeSemanticSegmentationHairMatte() objc.ID { return purego.CFConstant(raw.KCGImageAuxiliaryDataTypeSemanticSegmentationHairMatte()) }
 
-// KCGImageAuxiliaryDataTypeSemanticSegmentationTeethMatte returns the CoreFoundation constant kCGImageAuxiliaryDataTypeSemanticSegmentationTeethMatte as a toll-free-bridged objc.ID.
+// KCGImageAuxiliaryDataTypeSemanticSegmentationTeethMatte returns the value of the CoreFoundation reference constant kCGImageAuxiliaryDataTypeSemanticSegmentationTeethMatte as an objc.ID.
 func KCGImageAuxiliaryDataTypeSemanticSegmentationTeethMatte() objc.ID { return purego.CFConstant(raw.KCGImageAuxiliaryDataTypeSemanticSegmentationTeethMatte()) }
 
-// KCGImageAuxiliaryDataTypeSemanticSegmentationGlassesMatte returns the CoreFoundation constant kCGImageAuxiliaryDataTypeSemanticSegmentationGlassesMatte as a toll-free-bridged objc.ID.
+// KCGImageAuxiliaryDataTypeSemanticSegmentationGlassesMatte returns the value of the CoreFoundation reference constant kCGImageAuxiliaryDataTypeSemanticSegmentationGlassesMatte as an objc.ID.
 func KCGImageAuxiliaryDataTypeSemanticSegmentationGlassesMatte() objc.ID { return purego.CFConstant(raw.KCGImageAuxiliaryDataTypeSemanticSegmentationGlassesMatte()) }
 
-// KCGImageAuxiliaryDataTypeSemanticSegmentationSkyMatte returns the CoreFoundation constant kCGImageAuxiliaryDataTypeSemanticSegmentationSkyMatte as a toll-free-bridged objc.ID.
+// KCGImageAuxiliaryDataTypeSemanticSegmentationSkyMatte returns the value of the CoreFoundation reference constant kCGImageAuxiliaryDataTypeSemanticSegmentationSkyMatte as an objc.ID.
 func KCGImageAuxiliaryDataTypeSemanticSegmentationSkyMatte() objc.ID { return purego.CFConstant(raw.KCGImageAuxiliaryDataTypeSemanticSegmentationSkyMatte()) }
 
-// KCGImageAuxiliaryDataTypeHDRGainMap returns the CoreFoundation constant kCGImageAuxiliaryDataTypeHDRGainMap as a toll-free-bridged objc.ID.
+// KCGImageAuxiliaryDataTypeHDRGainMap returns the value of the CoreFoundation reference constant kCGImageAuxiliaryDataTypeHDRGainMap as an objc.ID.
 func KCGImageAuxiliaryDataTypeHDRGainMap() objc.ID { return purego.CFConstant(raw.KCGImageAuxiliaryDataTypeHDRGainMap()) }
 
-// KCGImageAuxiliaryDataTypeISOGainMap returns the CoreFoundation constant kCGImageAuxiliaryDataTypeISOGainMap as a toll-free-bridged objc.ID.
+// KCGImageAuxiliaryDataTypeISOGainMap returns the value of the CoreFoundation reference constant kCGImageAuxiliaryDataTypeISOGainMap as an objc.ID.
 func KCGImageAuxiliaryDataTypeISOGainMap() objc.ID { return purego.CFConstant(raw.KCGImageAuxiliaryDataTypeISOGainMap()) }
 
-// KCGImageAuxiliaryDataInfoData returns the CoreFoundation constant kCGImageAuxiliaryDataInfoData as a toll-free-bridged objc.ID.
+// KCGImageAuxiliaryDataInfoData returns the value of the CoreFoundation reference constant kCGImageAuxiliaryDataInfoData as an objc.ID.
 func KCGImageAuxiliaryDataInfoData() objc.ID { return purego.CFConstant(raw.KCGImageAuxiliaryDataInfoData()) }
 
-// KCGImageAuxiliaryDataInfoDataDescription returns the CoreFoundation constant kCGImageAuxiliaryDataInfoDataDescription as a toll-free-bridged objc.ID.
+// KCGImageAuxiliaryDataInfoDataDescription returns the value of the CoreFoundation reference constant kCGImageAuxiliaryDataInfoDataDescription as an objc.ID.
 func KCGImageAuxiliaryDataInfoDataDescription() objc.ID { return purego.CFConstant(raw.KCGImageAuxiliaryDataInfoDataDescription()) }
 
-// KCGImageAuxiliaryDataInfoMetadata returns the CoreFoundation constant kCGImageAuxiliaryDataInfoMetadata as a toll-free-bridged objc.ID.
+// KCGImageAuxiliaryDataInfoMetadata returns the value of the CoreFoundation reference constant kCGImageAuxiliaryDataInfoMetadata as an objc.ID.
 func KCGImageAuxiliaryDataInfoMetadata() objc.ID { return purego.CFConstant(raw.KCGImageAuxiliaryDataInfoMetadata()) }
 
-// KCGImageAuxiliaryDataInfoColorSpace returns the CoreFoundation constant kCGImageAuxiliaryDataInfoColorSpace as a toll-free-bridged objc.ID.
+// KCGImageAuxiliaryDataInfoColorSpace returns the value of the CoreFoundation reference constant kCGImageAuxiliaryDataInfoColorSpace as an objc.ID.
 func KCGImageAuxiliaryDataInfoColorSpace() objc.ID { return purego.CFConstant(raw.KCGImageAuxiliaryDataInfoColorSpace()) }
 
-// KCGImagePropertyImageCount returns the CoreFoundation constant kCGImagePropertyImageCount as a toll-free-bridged objc.ID.
+// KCGImagePropertyImageCount returns the value of the CoreFoundation reference constant kCGImagePropertyImageCount as an objc.ID.
 func KCGImagePropertyImageCount() objc.ID { return purego.CFConstant(raw.KCGImagePropertyImageCount()) }
 
-// KCGImagePropertyWidth returns the CoreFoundation constant kCGImagePropertyWidth as a toll-free-bridged objc.ID.
+// KCGImagePropertyWidth returns the value of the CoreFoundation reference constant kCGImagePropertyWidth as an objc.ID.
 func KCGImagePropertyWidth() objc.ID { return purego.CFConstant(raw.KCGImagePropertyWidth()) }
 
-// KCGImagePropertyHeight returns the CoreFoundation constant kCGImagePropertyHeight as a toll-free-bridged objc.ID.
+// KCGImagePropertyHeight returns the value of the CoreFoundation reference constant kCGImagePropertyHeight as an objc.ID.
 func KCGImagePropertyHeight() objc.ID { return purego.CFConstant(raw.KCGImagePropertyHeight()) }
 
-// KCGImagePropertyBytesPerRow returns the CoreFoundation constant kCGImagePropertyBytesPerRow as a toll-free-bridged objc.ID.
+// KCGImagePropertyBytesPerRow returns the value of the CoreFoundation reference constant kCGImagePropertyBytesPerRow as an objc.ID.
 func KCGImagePropertyBytesPerRow() objc.ID { return purego.CFConstant(raw.KCGImagePropertyBytesPerRow()) }
 
-// KCGImagePropertyNamedColorSpace returns the CoreFoundation constant kCGImagePropertyNamedColorSpace as a toll-free-bridged objc.ID.
+// KCGImagePropertyNamedColorSpace returns the value of the CoreFoundation reference constant kCGImagePropertyNamedColorSpace as an objc.ID.
 func KCGImagePropertyNamedColorSpace() objc.ID { return purego.CFConstant(raw.KCGImagePropertyNamedColorSpace()) }
 
-// KCGImagePropertyPixelFormat returns the CoreFoundation constant kCGImagePropertyPixelFormat as a toll-free-bridged objc.ID.
+// KCGImagePropertyPixelFormat returns the value of the CoreFoundation reference constant kCGImagePropertyPixelFormat as an objc.ID.
 func KCGImagePropertyPixelFormat() objc.ID { return purego.CFConstant(raw.KCGImagePropertyPixelFormat()) }
 
-// KCGImagePropertyImages returns the CoreFoundation constant kCGImagePropertyImages as a toll-free-bridged objc.ID.
+// KCGImagePropertyImages returns the value of the CoreFoundation reference constant kCGImagePropertyImages as an objc.ID.
 func KCGImagePropertyImages() objc.ID { return purego.CFConstant(raw.KCGImagePropertyImages()) }
 
-// KCGImagePropertyThumbnailImages returns the CoreFoundation constant kCGImagePropertyThumbnailImages as a toll-free-bridged objc.ID.
+// KCGImagePropertyThumbnailImages returns the value of the CoreFoundation reference constant kCGImagePropertyThumbnailImages as an objc.ID.
 func KCGImagePropertyThumbnailImages() objc.ID { return purego.CFConstant(raw.KCGImagePropertyThumbnailImages()) }
 
-// KCGImagePropertyAuxiliaryData returns the CoreFoundation constant kCGImagePropertyAuxiliaryData as a toll-free-bridged objc.ID.
+// KCGImagePropertyAuxiliaryData returns the value of the CoreFoundation reference constant kCGImagePropertyAuxiliaryData as an objc.ID.
 func KCGImagePropertyAuxiliaryData() objc.ID { return purego.CFConstant(raw.KCGImagePropertyAuxiliaryData()) }
 
-// KCGImagePropertyAuxiliaryDataType returns the CoreFoundation constant kCGImagePropertyAuxiliaryDataType as a toll-free-bridged objc.ID.
+// KCGImagePropertyAuxiliaryDataType returns the value of the CoreFoundation reference constant kCGImagePropertyAuxiliaryDataType as an objc.ID.
 func KCGImagePropertyAuxiliaryDataType() objc.ID { return purego.CFConstant(raw.KCGImagePropertyAuxiliaryDataType()) }
 
-// KCGImagePropertyImageIndex returns the CoreFoundation constant kCGImagePropertyImageIndex as a toll-free-bridged objc.ID.
+// KCGImagePropertyImageIndex returns the value of the CoreFoundation reference constant kCGImagePropertyImageIndex as an objc.ID.
 func KCGImagePropertyImageIndex() objc.ID { return purego.CFConstant(raw.KCGImagePropertyImageIndex()) }
 
-// KCGImagePropertyGroups returns the CoreFoundation constant kCGImagePropertyGroups as a toll-free-bridged objc.ID.
+// KCGImagePropertyGroups returns the value of the CoreFoundation reference constant kCGImagePropertyGroups as an objc.ID.
 func KCGImagePropertyGroups() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGroups()) }
 
-// KCGImagePropertyGroupIndex returns the CoreFoundation constant kCGImagePropertyGroupIndex as a toll-free-bridged objc.ID.
+// KCGImagePropertyGroupIndex returns the value of the CoreFoundation reference constant kCGImagePropertyGroupIndex as an objc.ID.
 func KCGImagePropertyGroupIndex() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGroupIndex()) }
 
-// KCGImagePropertyGroupType returns the CoreFoundation constant kCGImagePropertyGroupType as a toll-free-bridged objc.ID.
+// KCGImagePropertyGroupType returns the value of the CoreFoundation reference constant kCGImagePropertyGroupType as an objc.ID.
 func KCGImagePropertyGroupType() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGroupType()) }
 
-// KCGImagePropertyGroupTypeStereoPair returns the CoreFoundation constant kCGImagePropertyGroupTypeStereoPair as a toll-free-bridged objc.ID.
+// KCGImagePropertyGroupTypeStereoPair returns the value of the CoreFoundation reference constant kCGImagePropertyGroupTypeStereoPair as an objc.ID.
 func KCGImagePropertyGroupTypeStereoPair() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGroupTypeStereoPair()) }
 
-// KCGImagePropertyGroupTypeAlternate returns the CoreFoundation constant kCGImagePropertyGroupTypeAlternate as a toll-free-bridged objc.ID.
+// KCGImagePropertyGroupTypeAlternate returns the value of the CoreFoundation reference constant kCGImagePropertyGroupTypeAlternate as an objc.ID.
 func KCGImagePropertyGroupTypeAlternate() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGroupTypeAlternate()) }
 
-// KCGImagePropertyGroupImagesAlternate returns the CoreFoundation constant kCGImagePropertyGroupImagesAlternate as a toll-free-bridged objc.ID.
+// KCGImagePropertyGroupImagesAlternate returns the value of the CoreFoundation reference constant kCGImagePropertyGroupImagesAlternate as an objc.ID.
 func KCGImagePropertyGroupImagesAlternate() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGroupImagesAlternate()) }
 
-// KCGImagePropertyGroupImageIndexLeft returns the CoreFoundation constant kCGImagePropertyGroupImageIndexLeft as a toll-free-bridged objc.ID.
+// KCGImagePropertyGroupImageIndexLeft returns the value of the CoreFoundation reference constant kCGImagePropertyGroupImageIndexLeft as an objc.ID.
 func KCGImagePropertyGroupImageIndexLeft() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGroupImageIndexLeft()) }
 
-// KCGImagePropertyGroupImageIndexRight returns the CoreFoundation constant kCGImagePropertyGroupImageIndexRight as a toll-free-bridged objc.ID.
+// KCGImagePropertyGroupImageIndexRight returns the value of the CoreFoundation reference constant kCGImagePropertyGroupImageIndexRight as an objc.ID.
 func KCGImagePropertyGroupImageIndexRight() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGroupImageIndexRight()) }
 
-// KCGImagePropertyGroupImageIndexMonoscopic returns the CoreFoundation constant kCGImagePropertyGroupImageIndexMonoscopic as a toll-free-bridged objc.ID.
+// KCGImagePropertyGroupImageIndexMonoscopic returns the value of the CoreFoundation reference constant kCGImagePropertyGroupImageIndexMonoscopic as an objc.ID.
 func KCGImagePropertyGroupImageIndexMonoscopic() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGroupImageIndexMonoscopic()) }
 
-// KCGImagePropertyGroupImageIsLeftImage returns the CoreFoundation constant kCGImagePropertyGroupImageIsLeftImage as a toll-free-bridged objc.ID.
+// KCGImagePropertyGroupImageIsLeftImage returns the value of the CoreFoundation reference constant kCGImagePropertyGroupImageIsLeftImage as an objc.ID.
 func KCGImagePropertyGroupImageIsLeftImage() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGroupImageIsLeftImage()) }
 
-// KCGImagePropertyGroupImageIsRightImage returns the CoreFoundation constant kCGImagePropertyGroupImageIsRightImage as a toll-free-bridged objc.ID.
+// KCGImagePropertyGroupImageIsRightImage returns the value of the CoreFoundation reference constant kCGImagePropertyGroupImageIsRightImage as an objc.ID.
 func KCGImagePropertyGroupImageIsRightImage() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGroupImageIsRightImage()) }
 
-// KCGImagePropertyGroupImageIsMonoscopicImage returns the CoreFoundation constant kCGImagePropertyGroupImageIsMonoscopicImage as a toll-free-bridged objc.ID.
+// KCGImagePropertyGroupImageIsMonoscopicImage returns the value of the CoreFoundation reference constant kCGImagePropertyGroupImageIsMonoscopicImage as an objc.ID.
 func KCGImagePropertyGroupImageIsMonoscopicImage() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGroupImageIsMonoscopicImage()) }
 
-// KCGImagePropertyGroupImageIsAlternateImage returns the CoreFoundation constant kCGImagePropertyGroupImageIsAlternateImage as a toll-free-bridged objc.ID.
+// KCGImagePropertyGroupImageIsAlternateImage returns the value of the CoreFoundation reference constant kCGImagePropertyGroupImageIsAlternateImage as an objc.ID.
 func KCGImagePropertyGroupImageIsAlternateImage() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGroupImageIsAlternateImage()) }
 
-// KCGImagePropertyGroupImageBaseline returns the CoreFoundation constant kCGImagePropertyGroupImageBaseline as a toll-free-bridged objc.ID.
+// KCGImagePropertyGroupImageBaseline returns the value of the CoreFoundation reference constant kCGImagePropertyGroupImageBaseline as an objc.ID.
 func KCGImagePropertyGroupImageBaseline() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGroupImageBaseline()) }
 
-// KCGImagePropertyGroupImageDisparityAdjustment returns the CoreFoundation constant kCGImagePropertyGroupImageDisparityAdjustment as a toll-free-bridged objc.ID.
+// KCGImagePropertyGroupImageDisparityAdjustment returns the value of the CoreFoundation reference constant kCGImagePropertyGroupImageDisparityAdjustment as an objc.ID.
 func KCGImagePropertyGroupImageDisparityAdjustment() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGroupImageDisparityAdjustment()) }
 
-// KCGImagePropertyGroupImageStereoAggressors returns the CoreFoundation constant kCGImagePropertyGroupImageStereoAggressors as a toll-free-bridged objc.ID.
+// KCGImagePropertyGroupImageStereoAggressors returns the value of the CoreFoundation reference constant kCGImagePropertyGroupImageStereoAggressors as an objc.ID.
 func KCGImagePropertyGroupImageStereoAggressors() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGroupImageStereoAggressors()) }
 
-// KIIOStereoAggressors_Type returns the CoreFoundation constant kIIOStereoAggressors_Type as a toll-free-bridged objc.ID.
+// KIIOStereoAggressors_Type returns the value of the CoreFoundation reference constant kIIOStereoAggressors_Type as an objc.ID.
 func KIIOStereoAggressors_Type() objc.ID { return purego.CFConstant(raw.KIIOStereoAggressors_Type()) }
 
-// KIIOStereoAggressors_SubTypeURI returns the CoreFoundation constant kIIOStereoAggressors_SubTypeURI as a toll-free-bridged objc.ID.
+// KIIOStereoAggressors_SubTypeURI returns the value of the CoreFoundation reference constant kIIOStereoAggressors_SubTypeURI as an objc.ID.
 func KIIOStereoAggressors_SubTypeURI() objc.ID { return purego.CFConstant(raw.KIIOStereoAggressors_SubTypeURI()) }
 
-// KIIOStereoAggressors_Severity returns the CoreFoundation constant kIIOStereoAggressors_Severity as a toll-free-bridged objc.ID.
+// KIIOStereoAggressors_Severity returns the value of the CoreFoundation reference constant kIIOStereoAggressors_Severity as an objc.ID.
 func KIIOStereoAggressors_Severity() objc.ID { return purego.CFConstant(raw.KIIOStereoAggressors_Severity()) }
 
-// KCGImagePropertyGroupMonoscopicImageLocation returns the CoreFoundation constant kCGImagePropertyGroupMonoscopicImageLocation as a toll-free-bridged objc.ID.
+// KCGImagePropertyGroupMonoscopicImageLocation returns the value of the CoreFoundation reference constant kCGImagePropertyGroupMonoscopicImageLocation as an objc.ID.
 func KCGImagePropertyGroupMonoscopicImageLocation() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGroupMonoscopicImageLocation()) }
 
-// KIIOMonoscopicImageLocation_Unspecified returns the CoreFoundation constant kIIOMonoscopicImageLocation_Unspecified as a toll-free-bridged objc.ID.
+// KIIOMonoscopicImageLocation_Unspecified returns the value of the CoreFoundation reference constant kIIOMonoscopicImageLocation_Unspecified as an objc.ID.
 func KIIOMonoscopicImageLocation_Unspecified() objc.ID { return purego.CFConstant(raw.KIIOMonoscopicImageLocation_Unspecified()) }
 
-// KIIOMonoscopicImageLocation_Left returns the CoreFoundation constant kIIOMonoscopicImageLocation_Left as a toll-free-bridged objc.ID.
+// KIIOMonoscopicImageLocation_Left returns the value of the CoreFoundation reference constant kIIOMonoscopicImageLocation_Left as an objc.ID.
 func KIIOMonoscopicImageLocation_Left() objc.ID { return purego.CFConstant(raw.KIIOMonoscopicImageLocation_Left()) }
 
-// KIIOMonoscopicImageLocation_Right returns the CoreFoundation constant kIIOMonoscopicImageLocation_Right as a toll-free-bridged objc.ID.
+// KIIOMonoscopicImageLocation_Right returns the value of the CoreFoundation reference constant kIIOMonoscopicImageLocation_Right as an objc.ID.
 func KIIOMonoscopicImageLocation_Right() objc.ID { return purego.CFConstant(raw.KIIOMonoscopicImageLocation_Right()) }
 
-// KIIOMonoscopicImageLocation_Center returns the CoreFoundation constant kIIOMonoscopicImageLocation_Center as a toll-free-bridged objc.ID.
+// KIIOMonoscopicImageLocation_Center returns the value of the CoreFoundation reference constant kIIOMonoscopicImageLocation_Center as an objc.ID.
 func KIIOMonoscopicImageLocation_Center() objc.ID { return purego.CFConstant(raw.KIIOMonoscopicImageLocation_Center()) }
 
-// KIIOMetadata_CameraExtrinsicsKey returns the CoreFoundation constant kIIOMetadata_CameraExtrinsicsKey as a toll-free-bridged objc.ID.
+// KIIOMetadata_CameraExtrinsicsKey returns the value of the CoreFoundation reference constant kIIOMetadata_CameraExtrinsicsKey as an objc.ID.
 func KIIOMetadata_CameraExtrinsicsKey() objc.ID { return purego.CFConstant(raw.KIIOMetadata_CameraExtrinsicsKey()) }
 
-// KIIOCameraExtrinsics_CoordinateSystemID returns the CoreFoundation constant kIIOCameraExtrinsics_CoordinateSystemID as a toll-free-bridged objc.ID.
+// KIIOCameraExtrinsics_CoordinateSystemID returns the value of the CoreFoundation reference constant kIIOCameraExtrinsics_CoordinateSystemID as an objc.ID.
 func KIIOCameraExtrinsics_CoordinateSystemID() objc.ID { return purego.CFConstant(raw.KIIOCameraExtrinsics_CoordinateSystemID()) }
 
-// KIIOCameraExtrinsics_Position returns the CoreFoundation constant kIIOCameraExtrinsics_Position as a toll-free-bridged objc.ID.
+// KIIOCameraExtrinsics_Position returns the value of the CoreFoundation reference constant kIIOCameraExtrinsics_Position as an objc.ID.
 func KIIOCameraExtrinsics_Position() objc.ID { return purego.CFConstant(raw.KIIOCameraExtrinsics_Position()) }
 
-// KIIOCameraExtrinsics_Rotation returns the CoreFoundation constant kIIOCameraExtrinsics_Rotation as a toll-free-bridged objc.ID.
+// KIIOCameraExtrinsics_Rotation returns the value of the CoreFoundation reference constant kIIOCameraExtrinsics_Rotation as an objc.ID.
 func KIIOCameraExtrinsics_Rotation() objc.ID { return purego.CFConstant(raw.KIIOCameraExtrinsics_Rotation()) }
 
-// KIIOMetadata_CameraModelKey returns the CoreFoundation constant kIIOMetadata_CameraModelKey as a toll-free-bridged objc.ID.
+// KIIOMetadata_CameraModelKey returns the value of the CoreFoundation reference constant kIIOMetadata_CameraModelKey as an objc.ID.
 func KIIOMetadata_CameraModelKey() objc.ID { return purego.CFConstant(raw.KIIOMetadata_CameraModelKey()) }
 
-// KIIOCameraModel_ModelType returns the CoreFoundation constant kIIOCameraModel_ModelType as a toll-free-bridged objc.ID.
+// KIIOCameraModel_ModelType returns the value of the CoreFoundation reference constant kIIOCameraModel_ModelType as an objc.ID.
 func KIIOCameraModel_ModelType() objc.ID { return purego.CFConstant(raw.KIIOCameraModel_ModelType()) }
 
-// KIIOCameraModelType_SimplifiedPinhole returns the CoreFoundation constant kIIOCameraModelType_SimplifiedPinhole as a toll-free-bridged objc.ID.
+// KIIOCameraModelType_SimplifiedPinhole returns the value of the CoreFoundation reference constant kIIOCameraModelType_SimplifiedPinhole as an objc.ID.
 func KIIOCameraModelType_SimplifiedPinhole() objc.ID { return purego.CFConstant(raw.KIIOCameraModelType_SimplifiedPinhole()) }
 
-// KIIOCameraModelType_GenericPinhole returns the CoreFoundation constant kIIOCameraModelType_GenericPinhole as a toll-free-bridged objc.ID.
+// KIIOCameraModelType_GenericPinhole returns the value of the CoreFoundation reference constant kIIOCameraModelType_GenericPinhole as an objc.ID.
 func KIIOCameraModelType_GenericPinhole() objc.ID { return purego.CFConstant(raw.KIIOCameraModelType_GenericPinhole()) }
 
-// KIIOCameraModel_Intrinsics returns the CoreFoundation constant kIIOCameraModel_Intrinsics as a toll-free-bridged objc.ID.
+// KIIOCameraModel_Intrinsics returns the value of the CoreFoundation reference constant kIIOCameraModel_Intrinsics as an objc.ID.
 func KIIOCameraModel_Intrinsics() objc.ID { return purego.CFConstant(raw.KIIOCameraModel_Intrinsics()) }
 
-// KCGImageProviderPreferredTileWidth returns the CoreFoundation constant kCGImageProviderPreferredTileWidth as a toll-free-bridged objc.ID.
+// KCGImageProviderPreferredTileWidth returns the value of the CoreFoundation reference constant kCGImageProviderPreferredTileWidth as an objc.ID.
 func KCGImageProviderPreferredTileWidth() objc.ID { return purego.CFConstant(raw.KCGImageProviderPreferredTileWidth()) }
 
-// KCGImageProviderPreferredTileHeight returns the CoreFoundation constant kCGImageProviderPreferredTileHeight as a toll-free-bridged objc.ID.
+// KCGImageProviderPreferredTileHeight returns the value of the CoreFoundation reference constant kCGImageProviderPreferredTileHeight as an objc.ID.
 func KCGImageProviderPreferredTileHeight() objc.ID { return purego.CFConstant(raw.KCGImageProviderPreferredTileHeight()) }
 
-// KCGImageAnimationStartIndex returns the CoreFoundation constant kCGImageAnimationStartIndex as a toll-free-bridged objc.ID.
+// KCGImageAnimationStartIndex returns the value of the CoreFoundation reference constant kCGImageAnimationStartIndex as an objc.ID.
 func KCGImageAnimationStartIndex() objc.ID { return purego.CFConstant(raw.KCGImageAnimationStartIndex()) }
 
-// KCGImageAnimationDelayTime returns the CoreFoundation constant kCGImageAnimationDelayTime as a toll-free-bridged objc.ID.
+// KCGImageAnimationDelayTime returns the value of the CoreFoundation reference constant kCGImageAnimationDelayTime as an objc.ID.
 func KCGImageAnimationDelayTime() objc.ID { return purego.CFConstant(raw.KCGImageAnimationDelayTime()) }
 
-// KCGImageAnimationLoopCount returns the CoreFoundation constant kCGImageAnimationLoopCount as a toll-free-bridged objc.ID.
+// KCGImageAnimationLoopCount returns the value of the CoreFoundation reference constant kCGImageAnimationLoopCount as an objc.ID.
 func KCGImageAnimationLoopCount() objc.ID { return purego.CFConstant(raw.KCGImageAnimationLoopCount()) }
 

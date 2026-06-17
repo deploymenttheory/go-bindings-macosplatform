@@ -20,11 +20,11 @@ type Alert struct {
 // Unwrap returns the underlying [raw.NSAlert].
 func (x *Alert) Unwrap() *raw.NSAlert { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Alert) ID() objc.ID { return x.inner.Ptr() }
 
-// AlertFromID adopts an existing toll-free-bridged object id as a Alert (nil for 0).
+// AlertFromID adopts an existing object pointer as a Alert (nil for 0).
 func AlertFromID(id objc.ID) *Alert {
 	if id == 0 {
 		return nil

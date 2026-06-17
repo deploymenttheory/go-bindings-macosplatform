@@ -19,11 +19,11 @@ type SpeechSynthesizer struct {
 // Unwrap returns the underlying [raw.NSSpeechSynthesizer].
 func (x *SpeechSynthesizer) Unwrap() *raw.NSSpeechSynthesizer { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SpeechSynthesizer) ID() objc.ID { return x.inner.Ptr() }
 
-// SpeechSynthesizerFromID adopts an existing toll-free-bridged object id as a SpeechSynthesizer (nil for 0).
+// SpeechSynthesizerFromID adopts an existing object pointer as a SpeechSynthesizer (nil for 0).
 func SpeechSynthesizerFromID(id objc.ID) *SpeechSynthesizer {
 	if id == 0 {
 		return nil

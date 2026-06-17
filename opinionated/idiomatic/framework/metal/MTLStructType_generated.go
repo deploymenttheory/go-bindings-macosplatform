@@ -19,11 +19,11 @@ type StructType struct {
 // Unwrap returns the underlying [raw.MTLStructType].
 func (x *StructType) Unwrap() *raw.MTLStructType { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *StructType) ID() objc.ID { return x.inner.Ptr() }
 
-// StructTypeFromID adopts an existing toll-free-bridged object id as a StructType (nil for 0).
+// StructTypeFromID adopts an existing object pointer as a StructType (nil for 0).
 func StructTypeFromID(id objc.ID) *StructType {
 	if id == 0 {
 		return nil

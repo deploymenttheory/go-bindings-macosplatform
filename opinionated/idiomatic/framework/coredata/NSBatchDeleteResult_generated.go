@@ -17,11 +17,11 @@ type BatchDeleteResult struct {
 // Unwrap returns the underlying [raw.NSBatchDeleteResult].
 func (x *BatchDeleteResult) Unwrap() *raw.NSBatchDeleteResult { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *BatchDeleteResult) ID() objc.ID { return x.inner.Ptr() }
 
-// BatchDeleteResultFromID adopts an existing toll-free-bridged object id as a BatchDeleteResult (nil for 0).
+// BatchDeleteResultFromID adopts an existing object pointer as a BatchDeleteResult (nil for 0).
 func BatchDeleteResultFromID(id objc.ID) *BatchDeleteResult {
 	if id == 0 {
 		return nil

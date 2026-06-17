@@ -19,11 +19,11 @@ type UnsendMessagesIntent struct {
 // Unwrap returns the underlying [raw.INUnsendMessagesIntent].
 func (x *UnsendMessagesIntent) Unwrap() *raw.INUnsendMessagesIntent { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *UnsendMessagesIntent) ID() objc.ID { return x.inner.Ptr() }
 
-// UnsendMessagesIntentFromID adopts an existing toll-free-bridged object id as a UnsendMessagesIntent (nil for 0).
+// UnsendMessagesIntentFromID adopts an existing object pointer as a UnsendMessagesIntent (nil for 0).
 func UnsendMessagesIntentFromID(id objc.ID) *UnsendMessagesIntent {
 	if id == 0 {
 		return nil

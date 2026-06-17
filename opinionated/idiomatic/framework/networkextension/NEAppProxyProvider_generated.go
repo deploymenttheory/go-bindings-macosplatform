@@ -21,11 +21,11 @@ type NEAppProxyProvider struct {
 // Unwrap returns the underlying [raw.NEAppProxyProvider].
 func (x *NEAppProxyProvider) Unwrap() *raw.NEAppProxyProvider { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NEAppProxyProvider) ID() objc.ID { return x.inner.Ptr() }
 
-// NEAppProxyProviderFromID adopts an existing toll-free-bridged object id as a NEAppProxyProvider (nil for 0).
+// NEAppProxyProviderFromID adopts an existing object pointer as a NEAppProxyProvider (nil for 0).
 func NEAppProxyProviderFromID(id objc.ID) *NEAppProxyProvider {
 	if id == 0 {
 		return nil

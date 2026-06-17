@@ -21,11 +21,11 @@ type SampleBufferVideoRenderer struct {
 // Unwrap returns the underlying [raw.AVSampleBufferVideoRenderer].
 func (x *SampleBufferVideoRenderer) Unwrap() *raw.AVSampleBufferVideoRenderer { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SampleBufferVideoRenderer) ID() objc.ID { return x.inner.Ptr() }
 
-// SampleBufferVideoRendererFromID adopts an existing toll-free-bridged object id as a SampleBufferVideoRenderer (nil for 0).
+// SampleBufferVideoRendererFromID adopts an existing object pointer as a SampleBufferVideoRenderer (nil for 0).
 func SampleBufferVideoRendererFromID(id objc.ID) *SampleBufferVideoRenderer {
 	if id == 0 {
 		return nil

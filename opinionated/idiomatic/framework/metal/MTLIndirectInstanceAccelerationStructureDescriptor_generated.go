@@ -17,11 +17,11 @@ type IndirectInstanceAccelerationStructureDescriptor struct {
 // Unwrap returns the underlying [raw.MTLIndirectInstanceAccelerationStructureDescriptor].
 func (x *IndirectInstanceAccelerationStructureDescriptor) Unwrap() *raw.MTLIndirectInstanceAccelerationStructureDescriptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *IndirectInstanceAccelerationStructureDescriptor) ID() objc.ID { return x.inner.Ptr() }
 
-// IndirectInstanceAccelerationStructureDescriptorFromID adopts an existing toll-free-bridged object id as a IndirectInstanceAccelerationStructureDescriptor (nil for 0).
+// IndirectInstanceAccelerationStructureDescriptorFromID adopts an existing object pointer as a IndirectInstanceAccelerationStructureDescriptor (nil for 0).
 func IndirectInstanceAccelerationStructureDescriptorFromID(id objc.ID) *IndirectInstanceAccelerationStructureDescriptor {
 	if id == 0 {
 		return nil

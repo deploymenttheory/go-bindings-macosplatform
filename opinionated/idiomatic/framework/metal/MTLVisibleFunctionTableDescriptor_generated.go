@@ -17,11 +17,11 @@ type VisibleFunctionTableDescriptor struct {
 // Unwrap returns the underlying [raw.MTLVisibleFunctionTableDescriptor].
 func (x *VisibleFunctionTableDescriptor) Unwrap() *raw.MTLVisibleFunctionTableDescriptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *VisibleFunctionTableDescriptor) ID() objc.ID { return x.inner.Ptr() }
 
-// VisibleFunctionTableDescriptorFromID adopts an existing toll-free-bridged object id as a VisibleFunctionTableDescriptor (nil for 0).
+// VisibleFunctionTableDescriptorFromID adopts an existing object pointer as a VisibleFunctionTableDescriptor (nil for 0).
 func VisibleFunctionTableDescriptorFromID(id objc.ID) *VisibleFunctionTableDescriptor {
 	if id == 0 {
 		return nil

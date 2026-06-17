@@ -21,11 +21,11 @@ type ChartDescriptor struct {
 // Unwrap returns the underlying [raw.AXChartDescriptor].
 func (x *ChartDescriptor) Unwrap() *raw.AXChartDescriptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ChartDescriptor) ID() objc.ID { return x.inner.Ptr() }
 
-// ChartDescriptorFromID adopts an existing toll-free-bridged object id as a ChartDescriptor (nil for 0).
+// ChartDescriptorFromID adopts an existing object pointer as a ChartDescriptor (nil for 0).
 func ChartDescriptorFromID(id objc.ID) *ChartDescriptor {
 	if id == 0 {
 		return nil

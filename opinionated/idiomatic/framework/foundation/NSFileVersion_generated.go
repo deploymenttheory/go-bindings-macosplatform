@@ -18,11 +18,11 @@ type FileVersion struct {
 // Unwrap returns the underlying [raw.NSFileVersion].
 func (x *FileVersion) Unwrap() *raw.NSFileVersion { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *FileVersion) ID() objc.ID { return x.inner.Ptr() }
 
-// FileVersionFromID adopts an existing toll-free-bridged object id as a FileVersion (nil for 0).
+// FileVersionFromID adopts an existing object pointer as a FileVersion (nil for 0).
 func FileVersionFromID(id objc.ID) *FileVersion {
 	if id == 0 {
 		return nil

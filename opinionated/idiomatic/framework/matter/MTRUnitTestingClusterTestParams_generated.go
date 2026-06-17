@@ -18,11 +18,11 @@ type MTRUnitTestingClusterTestParams struct {
 // Unwrap returns the underlying [raw.MTRUnitTestingClusterTestParams].
 func (x *MTRUnitTestingClusterTestParams) Unwrap() *raw.MTRUnitTestingClusterTestParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRUnitTestingClusterTestParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRUnitTestingClusterTestParamsFromID adopts an existing toll-free-bridged object id as a MTRUnitTestingClusterTestParams (nil for 0).
+// MTRUnitTestingClusterTestParamsFromID adopts an existing object pointer as a MTRUnitTestingClusterTestParams (nil for 0).
 func MTRUnitTestingClusterTestParamsFromID(id objc.ID) *MTRUnitTestingClusterTestParams {
 	if id == 0 {
 		return nil

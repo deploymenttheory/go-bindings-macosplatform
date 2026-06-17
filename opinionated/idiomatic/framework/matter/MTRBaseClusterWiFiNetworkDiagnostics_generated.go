@@ -21,11 +21,11 @@ type MTRBaseClusterWiFiNetworkDiagnostics struct {
 // Unwrap returns the underlying [raw.MTRBaseClusterWiFiNetworkDiagnostics].
 func (x *MTRBaseClusterWiFiNetworkDiagnostics) Unwrap() *raw.MTRBaseClusterWiFiNetworkDiagnostics { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRBaseClusterWiFiNetworkDiagnostics) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRBaseClusterWiFiNetworkDiagnosticsFromID adopts an existing toll-free-bridged object id as a MTRBaseClusterWiFiNetworkDiagnostics (nil for 0).
+// MTRBaseClusterWiFiNetworkDiagnosticsFromID adopts an existing object pointer as a MTRBaseClusterWiFiNetworkDiagnostics (nil for 0).
 func MTRBaseClusterWiFiNetworkDiagnosticsFromID(id objc.ID) *MTRBaseClusterWiFiNetworkDiagnostics {
 	if id == 0 {
 		return nil

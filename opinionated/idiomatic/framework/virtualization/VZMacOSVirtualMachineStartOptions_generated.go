@@ -17,11 +17,11 @@ type MacOSVirtualMachineStartOptions struct {
 // Unwrap returns the underlying [raw.VZMacOSVirtualMachineStartOptions].
 func (x *MacOSVirtualMachineStartOptions) Unwrap() *raw.VZMacOSVirtualMachineStartOptions { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MacOSVirtualMachineStartOptions) ID() objc.ID { return x.inner.Ptr() }
 
-// MacOSVirtualMachineStartOptionsFromID adopts an existing toll-free-bridged object id as a MacOSVirtualMachineStartOptions (nil for 0).
+// MacOSVirtualMachineStartOptionsFromID adopts an existing object pointer as a MacOSVirtualMachineStartOptions (nil for 0).
 func MacOSVirtualMachineStartOptionsFromID(id objc.ID) *MacOSVirtualMachineStartOptions {
 	if id == 0 {
 		return nil

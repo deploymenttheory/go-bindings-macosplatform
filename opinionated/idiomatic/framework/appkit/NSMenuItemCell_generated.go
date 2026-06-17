@@ -19,11 +19,11 @@ type MenuItemCell struct {
 // Unwrap returns the underlying [raw.NSMenuItemCell].
 func (x *MenuItemCell) Unwrap() *raw.NSMenuItemCell { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MenuItemCell) ID() objc.ID { return x.inner.Ptr() }
 
-// MenuItemCellFromID adopts an existing toll-free-bridged object id as a MenuItemCell (nil for 0).
+// MenuItemCellFromID adopts an existing object pointer as a MenuItemCell (nil for 0).
 func MenuItemCellFromID(id objc.ID) *MenuItemCell {
 	if id == 0 {
 		return nil

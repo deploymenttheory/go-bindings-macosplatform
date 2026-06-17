@@ -17,11 +17,11 @@ type AssetWriterInputCaptionAdaptor struct {
 // Unwrap returns the underlying [raw.AVAssetWriterInputCaptionAdaptor].
 func (x *AssetWriterInputCaptionAdaptor) Unwrap() *raw.AVAssetWriterInputCaptionAdaptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AssetWriterInputCaptionAdaptor) ID() objc.ID { return x.inner.Ptr() }
 
-// AssetWriterInputCaptionAdaptorFromID adopts an existing toll-free-bridged object id as a AssetWriterInputCaptionAdaptor (nil for 0).
+// AssetWriterInputCaptionAdaptorFromID adopts an existing object pointer as a AssetWriterInputCaptionAdaptor (nil for 0).
 func AssetWriterInputCaptionAdaptorFromID(id objc.ID) *AssetWriterInputCaptionAdaptor {
 	if id == 0 {
 		return nil

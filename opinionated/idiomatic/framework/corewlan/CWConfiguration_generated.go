@@ -18,11 +18,11 @@ type Configuration struct {
 // Unwrap returns the underlying [raw.CWConfiguration].
 func (x *Configuration) Unwrap() *raw.CWConfiguration { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Configuration) ID() objc.ID { return x.inner.Ptr() }
 
-// ConfigurationFromID adopts an existing toll-free-bridged object id as a Configuration (nil for 0).
+// ConfigurationFromID adopts an existing object pointer as a Configuration (nil for 0).
 func ConfigurationFromID(id objc.ID) *Configuration {
 	if id == 0 {
 		return nil

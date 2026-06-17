@@ -17,11 +17,11 @@ type _cp_layer_renderer struct {
 // Unwrap returns the underlying [raw.CP_OBJECT_cp_layer_renderer].
 func (x *_cp_layer_renderer) Unwrap() *raw.CP_OBJECT_cp_layer_renderer { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *_cp_layer_renderer) ID() objc.ID { return x.inner.Ptr() }
 
-// _cp_layer_rendererFromID adopts an existing toll-free-bridged object id as a _cp_layer_renderer (nil for 0).
+// _cp_layer_rendererFromID adopts an existing object pointer as a _cp_layer_renderer (nil for 0).
 func _cp_layer_rendererFromID(id objc.ID) *_cp_layer_renderer {
 	if id == 0 {
 		return nil

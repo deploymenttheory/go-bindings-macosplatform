@@ -17,11 +17,11 @@ type SearchElement struct {
 // Unwrap returns the underlying [raw.ABSearchElement].
 func (x *SearchElement) Unwrap() *raw.ABSearchElement { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SearchElement) ID() objc.ID { return x.inner.Ptr() }
 
-// SearchElementFromID adopts an existing toll-free-bridged object id as a SearchElement (nil for 0).
+// SearchElementFromID adopts an existing object pointer as a SearchElement (nil for 0).
 func SearchElementFromID(id objc.ID) *SearchElement {
 	if id == 0 {
 		return nil

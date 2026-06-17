@@ -18,11 +18,11 @@ type MetricContentKeyRequestEvent struct {
 // Unwrap returns the underlying [raw.AVMetricContentKeyRequestEvent].
 func (x *MetricContentKeyRequestEvent) Unwrap() *raw.AVMetricContentKeyRequestEvent { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MetricContentKeyRequestEvent) ID() objc.ID { return x.inner.Ptr() }
 
-// MetricContentKeyRequestEventFromID adopts an existing toll-free-bridged object id as a MetricContentKeyRequestEvent (nil for 0).
+// MetricContentKeyRequestEventFromID adopts an existing object pointer as a MetricContentKeyRequestEvent (nil for 0).
 func MetricContentKeyRequestEventFromID(id objc.ID) *MetricContentKeyRequestEvent {
 	if id == 0 {
 		return nil

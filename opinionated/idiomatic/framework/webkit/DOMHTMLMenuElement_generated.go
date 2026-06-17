@@ -17,11 +17,11 @@ type DOMHTMLMenuElement struct {
 // Unwrap returns the underlying [raw.DOMHTMLMenuElement].
 func (x *DOMHTMLMenuElement) Unwrap() *raw.DOMHTMLMenuElement { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DOMHTMLMenuElement) ID() objc.ID { return x.inner.Ptr() }
 
-// DOMHTMLMenuElementFromID adopts an existing toll-free-bridged object id as a DOMHTMLMenuElement (nil for 0).
+// DOMHTMLMenuElementFromID adopts an existing object pointer as a DOMHTMLMenuElement (nil for 0).
 func DOMHTMLMenuElementFromID(id objc.ID) *DOMHTMLMenuElement {
 	if id == 0 {
 		return nil

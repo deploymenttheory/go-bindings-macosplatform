@@ -18,11 +18,11 @@ type URLRequest struct {
 // Unwrap returns the underlying [raw.NSURLRequest].
 func (x *URLRequest) Unwrap() *raw.NSURLRequest { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *URLRequest) ID() objc.ID { return x.inner.Ptr() }
 
-// URLRequestFromID adopts an existing toll-free-bridged object id as a URLRequest (nil for 0).
+// URLRequestFromID adopts an existing object pointer as a URLRequest (nil for 0).
 func URLRequestFromID(id objc.ID) *URLRequest {
 	if id == 0 {
 		return nil

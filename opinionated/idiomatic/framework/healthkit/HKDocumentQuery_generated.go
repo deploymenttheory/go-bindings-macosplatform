@@ -20,11 +20,11 @@ type DocumentQuery struct {
 // Unwrap returns the underlying [raw.HKDocumentQuery].
 func (x *DocumentQuery) Unwrap() *raw.HKDocumentQuery { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DocumentQuery) ID() objc.ID { return x.inner.Ptr() }
 
-// DocumentQueryFromID adopts an existing toll-free-bridged object id as a DocumentQuery (nil for 0).
+// DocumentQueryFromID adopts an existing object pointer as a DocumentQuery (nil for 0).
 func DocumentQueryFromID(id objc.ID) *DocumentQuery {
 	if id == 0 {
 		return nil

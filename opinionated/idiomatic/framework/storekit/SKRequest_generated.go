@@ -17,11 +17,11 @@ type Request struct {
 // Unwrap returns the underlying [raw.SKRequest].
 func (x *Request) Unwrap() *raw.SKRequest { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Request) ID() objc.ID { return x.inner.Ptr() }
 
-// RequestFromID adopts an existing toll-free-bridged object id as a Request (nil for 0).
+// RequestFromID adopts an existing object pointer as a Request (nil for 0).
 func RequestFromID(id objc.ID) *Request {
 	if id == 0 {
 		return nil

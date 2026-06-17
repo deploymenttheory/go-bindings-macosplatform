@@ -18,11 +18,11 @@ type Point3D struct {
 // Unwrap returns the underlying [raw.VNPoint3D].
 func (x *Point3D) Unwrap() *raw.VNPoint3D { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Point3D) ID() objc.ID { return x.inner.Ptr() }
 
-// Point3DFromID adopts an existing toll-free-bridged object id as a Point3D (nil for 0).
+// Point3DFromID adopts an existing object pointer as a Point3D (nil for 0).
 func Point3DFromID(id objc.ID) *Point3D {
 	if id == 0 {
 		return nil

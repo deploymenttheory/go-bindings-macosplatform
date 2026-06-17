@@ -20,11 +20,11 @@ type CompositeAttributeDescription struct {
 // Unwrap returns the underlying [raw.NSCompositeAttributeDescription].
 func (x *CompositeAttributeDescription) Unwrap() *raw.NSCompositeAttributeDescription { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CompositeAttributeDescription) ID() objc.ID { return x.inner.Ptr() }
 
-// CompositeAttributeDescriptionFromID adopts an existing toll-free-bridged object id as a CompositeAttributeDescription (nil for 0).
+// CompositeAttributeDescriptionFromID adopts an existing object pointer as a CompositeAttributeDescription (nil for 0).
 func CompositeAttributeDescriptionFromID(id objc.ID) *CompositeAttributeDescription {
 	if id == 0 {
 		return nil

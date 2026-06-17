@@ -19,11 +19,11 @@ type NEIPv4Route struct {
 // Unwrap returns the underlying [raw.NEIPv4Route].
 func (x *NEIPv4Route) Unwrap() *raw.NEIPv4Route { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NEIPv4Route) ID() objc.ID { return x.inner.Ptr() }
 
-// NEIPv4RouteFromID adopts an existing toll-free-bridged object id as a NEIPv4Route (nil for 0).
+// NEIPv4RouteFromID adopts an existing object pointer as a NEIPv4Route (nil for 0).
 func NEIPv4RouteFromID(id objc.ID) *NEIPv4Route {
 	if id == 0 {
 		return nil

@@ -21,11 +21,11 @@ type MTRBaseClusterDoorLock struct {
 // Unwrap returns the underlying [raw.MTRBaseClusterDoorLock].
 func (x *MTRBaseClusterDoorLock) Unwrap() *raw.MTRBaseClusterDoorLock { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRBaseClusterDoorLock) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRBaseClusterDoorLockFromID adopts an existing toll-free-bridged object id as a MTRBaseClusterDoorLock (nil for 0).
+// MTRBaseClusterDoorLockFromID adopts an existing object pointer as a MTRBaseClusterDoorLock (nil for 0).
 func MTRBaseClusterDoorLockFromID(id objc.ID) *MTRBaseClusterDoorLock {
 	if id == 0 {
 		return nil

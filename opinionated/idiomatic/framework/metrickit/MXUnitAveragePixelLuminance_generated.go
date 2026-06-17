@@ -17,11 +17,11 @@ type UnitAveragePixelLuminance struct {
 // Unwrap returns the underlying [raw.MXUnitAveragePixelLuminance].
 func (x *UnitAveragePixelLuminance) Unwrap() *raw.MXUnitAveragePixelLuminance { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *UnitAveragePixelLuminance) ID() objc.ID { return x.inner.Ptr() }
 
-// UnitAveragePixelLuminanceFromID adopts an existing toll-free-bridged object id as a UnitAveragePixelLuminance (nil for 0).
+// UnitAveragePixelLuminanceFromID adopts an existing object pointer as a UnitAveragePixelLuminance (nil for 0).
 func UnitAveragePixelLuminanceFromID(id objc.ID) *UnitAveragePixelLuminance {
 	if id == 0 {
 		return nil

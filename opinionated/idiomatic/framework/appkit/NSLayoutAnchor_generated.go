@@ -18,11 +18,11 @@ type LayoutAnchor struct {
 // Unwrap returns the underlying [raw.NSLayoutAnchor].
 func (x *LayoutAnchor) Unwrap() *raw.NSLayoutAnchor[objc.ID] { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *LayoutAnchor) ID() objc.ID { return x.inner.Ptr() }
 
-// LayoutAnchorFromID adopts an existing toll-free-bridged object id as a LayoutAnchor (nil for 0).
+// LayoutAnchorFromID adopts an existing object pointer as a LayoutAnchor (nil for 0).
 func LayoutAnchorFromID(id objc.ID) *LayoutAnchor {
 	if id == 0 {
 		return nil

@@ -17,11 +17,11 @@ type Volume struct {
 // Unwrap returns the underlying [raw.FSVolume].
 func (x *Volume) Unwrap() *raw.FSVolume { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Volume) ID() objc.ID { return x.inner.Ptr() }
 
-// VolumeFromID adopts an existing toll-free-bridged object id as a Volume (nil for 0).
+// VolumeFromID adopts an existing object pointer as a Volume (nil for 0).
 func VolumeFromID(id objc.ID) *Volume {
 	if id == 0 {
 		return nil

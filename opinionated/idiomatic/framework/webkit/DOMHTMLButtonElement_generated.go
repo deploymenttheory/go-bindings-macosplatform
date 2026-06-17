@@ -19,11 +19,11 @@ type DOMHTMLButtonElement struct {
 // Unwrap returns the underlying [raw.DOMHTMLButtonElement].
 func (x *DOMHTMLButtonElement) Unwrap() *raw.DOMHTMLButtonElement { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DOMHTMLButtonElement) ID() objc.ID { return x.inner.Ptr() }
 
-// DOMHTMLButtonElementFromID adopts an existing toll-free-bridged object id as a DOMHTMLButtonElement (nil for 0).
+// DOMHTMLButtonElementFromID adopts an existing object pointer as a DOMHTMLButtonElement (nil for 0).
 func DOMHTMLButtonElementFromID(id objc.ID) *DOMHTMLButtonElement {
 	if id == 0 {
 		return nil

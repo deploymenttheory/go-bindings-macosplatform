@@ -17,11 +17,11 @@ type AssetReaderOutputMetadataAdaptor struct {
 // Unwrap returns the underlying [raw.AVAssetReaderOutputMetadataAdaptor].
 func (x *AssetReaderOutputMetadataAdaptor) Unwrap() *raw.AVAssetReaderOutputMetadataAdaptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AssetReaderOutputMetadataAdaptor) ID() objc.ID { return x.inner.Ptr() }
 
-// AssetReaderOutputMetadataAdaptorFromID adopts an existing toll-free-bridged object id as a AssetReaderOutputMetadataAdaptor (nil for 0).
+// AssetReaderOutputMetadataAdaptorFromID adopts an existing object pointer as a AssetReaderOutputMetadataAdaptor (nil for 0).
 func AssetReaderOutputMetadataAdaptorFromID(id objc.ID) *AssetReaderOutputMetadataAdaptor {
 	if id == 0 {
 		return nil

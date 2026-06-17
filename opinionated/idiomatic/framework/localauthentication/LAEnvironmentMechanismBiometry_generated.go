@@ -18,11 +18,11 @@ type EnvironmentMechanismBiometry struct {
 // Unwrap returns the underlying [raw.LAEnvironmentMechanismBiometry].
 func (x *EnvironmentMechanismBiometry) Unwrap() *raw.LAEnvironmentMechanismBiometry { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *EnvironmentMechanismBiometry) ID() objc.ID { return x.inner.Ptr() }
 
-// EnvironmentMechanismBiometryFromID adopts an existing toll-free-bridged object id as a EnvironmentMechanismBiometry (nil for 0).
+// EnvironmentMechanismBiometryFromID adopts an existing object pointer as a EnvironmentMechanismBiometry (nil for 0).
 func EnvironmentMechanismBiometryFromID(id objc.ID) *EnvironmentMechanismBiometry {
 	if id == 0 {
 		return nil

@@ -19,11 +19,11 @@ type MTRCommissionableBrowserResult struct {
 // Unwrap returns the underlying [raw.MTRCommissionableBrowserResult].
 func (x *MTRCommissionableBrowserResult) Unwrap() *raw.MTRCommissionableBrowserResult { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRCommissionableBrowserResult) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRCommissionableBrowserResultFromID adopts an existing toll-free-bridged object id as a MTRCommissionableBrowserResult (nil for 0).
+// MTRCommissionableBrowserResultFromID adopts an existing object pointer as a MTRCommissionableBrowserResult (nil for 0).
 func MTRCommissionableBrowserResultFromID(id objc.ID) *MTRCommissionableBrowserResult {
 	if id == 0 {
 		return nil

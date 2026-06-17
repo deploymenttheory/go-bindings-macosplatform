@@ -17,11 +17,11 @@ type MIDIControlChangeEvent struct {
 // Unwrap returns the underlying [raw.AVMIDIControlChangeEvent].
 func (x *MIDIControlChangeEvent) Unwrap() *raw.AVMIDIControlChangeEvent { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MIDIControlChangeEvent) ID() objc.ID { return x.inner.Ptr() }
 
-// MIDIControlChangeEventFromID adopts an existing toll-free-bridged object id as a MIDIControlChangeEvent (nil for 0).
+// MIDIControlChangeEventFromID adopts an existing object pointer as a MIDIControlChangeEvent (nil for 0).
 func MIDIControlChangeEventFromID(id objc.ID) *MIDIControlChangeEvent {
 	if id == 0 {
 		return nil

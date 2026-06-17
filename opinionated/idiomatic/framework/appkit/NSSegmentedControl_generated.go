@@ -20,11 +20,11 @@ type SegmentedControl struct {
 // Unwrap returns the underlying [raw.NSSegmentedControl].
 func (x *SegmentedControl) Unwrap() *raw.NSSegmentedControl { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SegmentedControl) ID() objc.ID { return x.inner.Ptr() }
 
-// SegmentedControlFromID adopts an existing toll-free-bridged object id as a SegmentedControl (nil for 0).
+// SegmentedControlFromID adopts an existing object pointer as a SegmentedControl (nil for 0).
 func SegmentedControlFromID(id objc.ID) *SegmentedControl {
 	if id == 0 {
 		return nil

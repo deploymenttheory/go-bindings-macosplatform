@@ -17,11 +17,11 @@ type MTRTestClusterClusterTestAddArgumentsParams struct {
 // Unwrap returns the underlying [raw.MTRTestClusterClusterTestAddArgumentsParams].
 func (x *MTRTestClusterClusterTestAddArgumentsParams) Unwrap() *raw.MTRTestClusterClusterTestAddArgumentsParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRTestClusterClusterTestAddArgumentsParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRTestClusterClusterTestAddArgumentsParamsFromID adopts an existing toll-free-bridged object id as a MTRTestClusterClusterTestAddArgumentsParams (nil for 0).
+// MTRTestClusterClusterTestAddArgumentsParamsFromID adopts an existing object pointer as a MTRTestClusterClusterTestAddArgumentsParams (nil for 0).
 func MTRTestClusterClusterTestAddArgumentsParamsFromID(id objc.ID) *MTRTestClusterClusterTestAddArgumentsParams {
 	if id == 0 {
 		return nil

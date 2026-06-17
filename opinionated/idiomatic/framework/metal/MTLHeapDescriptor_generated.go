@@ -17,11 +17,11 @@ type HeapDescriptor struct {
 // Unwrap returns the underlying [raw.MTLHeapDescriptor].
 func (x *HeapDescriptor) Unwrap() *raw.MTLHeapDescriptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *HeapDescriptor) ID() objc.ID { return x.inner.Ptr() }
 
-// HeapDescriptorFromID adopts an existing toll-free-bridged object id as a HeapDescriptor (nil for 0).
+// HeapDescriptorFromID adopts an existing object pointer as a HeapDescriptor (nil for 0).
 func HeapDescriptorFromID(id objc.ID) *HeapDescriptor {
 	if id == 0 {
 		return nil

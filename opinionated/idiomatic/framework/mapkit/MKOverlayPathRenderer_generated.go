@@ -22,11 +22,11 @@ type OverlayPathRenderer struct {
 // Unwrap returns the underlying [raw.MKOverlayPathRenderer].
 func (x *OverlayPathRenderer) Unwrap() *raw.MKOverlayPathRenderer { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *OverlayPathRenderer) ID() objc.ID { return x.inner.Ptr() }
 
-// OverlayPathRendererFromID adopts an existing toll-free-bridged object id as a OverlayPathRenderer (nil for 0).
+// OverlayPathRendererFromID adopts an existing object pointer as a OverlayPathRenderer (nil for 0).
 func OverlayPathRendererFromID(id objc.ID) *OverlayPathRenderer {
 	if id == 0 {
 		return nil

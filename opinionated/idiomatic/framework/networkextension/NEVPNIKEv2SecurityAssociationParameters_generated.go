@@ -20,11 +20,11 @@ type NEVPNIKEv2SecurityAssociationParameters struct {
 // Unwrap returns the underlying [raw.NEVPNIKEv2SecurityAssociationParameters].
 func (x *NEVPNIKEv2SecurityAssociationParameters) Unwrap() *raw.NEVPNIKEv2SecurityAssociationParameters { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NEVPNIKEv2SecurityAssociationParameters) ID() objc.ID { return x.inner.Ptr() }
 
-// NEVPNIKEv2SecurityAssociationParametersFromID adopts an existing toll-free-bridged object id as a NEVPNIKEv2SecurityAssociationParameters (nil for 0).
+// NEVPNIKEv2SecurityAssociationParametersFromID adopts an existing object pointer as a NEVPNIKEv2SecurityAssociationParameters (nil for 0).
 func NEVPNIKEv2SecurityAssociationParametersFromID(id objc.ID) *NEVPNIKEv2SecurityAssociationParameters {
 	if id == 0 {
 		return nil

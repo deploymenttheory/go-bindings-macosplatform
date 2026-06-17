@@ -18,11 +18,11 @@ type MTRClusterOnOffSwitchConfiguration struct {
 // Unwrap returns the underlying [raw.MTRClusterOnOffSwitchConfiguration].
 func (x *MTRClusterOnOffSwitchConfiguration) Unwrap() *raw.MTRClusterOnOffSwitchConfiguration { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRClusterOnOffSwitchConfiguration) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRClusterOnOffSwitchConfigurationFromID adopts an existing toll-free-bridged object id as a MTRClusterOnOffSwitchConfiguration (nil for 0).
+// MTRClusterOnOffSwitchConfigurationFromID adopts an existing object pointer as a MTRClusterOnOffSwitchConfiguration (nil for 0).
 func MTRClusterOnOffSwitchConfigurationFromID(id objc.ID) *MTRClusterOnOffSwitchConfiguration {
 	if id == 0 {
 		return nil

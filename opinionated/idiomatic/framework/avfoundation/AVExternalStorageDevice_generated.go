@@ -19,11 +19,11 @@ type ExternalStorageDevice struct {
 // Unwrap returns the underlying [raw.AVExternalStorageDevice].
 func (x *ExternalStorageDevice) Unwrap() *raw.AVExternalStorageDevice { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ExternalStorageDevice) ID() objc.ID { return x.inner.Ptr() }
 
-// ExternalStorageDeviceFromID adopts an existing toll-free-bridged object id as a ExternalStorageDevice (nil for 0).
+// ExternalStorageDeviceFromID adopts an existing object pointer as a ExternalStorageDevice (nil for 0).
 func ExternalStorageDeviceFromID(id objc.ID) *ExternalStorageDevice {
 	if id == 0 {
 		return nil

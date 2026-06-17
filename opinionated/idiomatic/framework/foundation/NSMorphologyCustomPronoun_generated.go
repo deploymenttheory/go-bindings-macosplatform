@@ -18,11 +18,11 @@ type MorphologyCustomPronoun struct {
 // Unwrap returns the underlying [raw.NSMorphologyCustomPronoun].
 func (x *MorphologyCustomPronoun) Unwrap() *raw.NSMorphologyCustomPronoun { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MorphologyCustomPronoun) ID() objc.ID { return x.inner.Ptr() }
 
-// MorphologyCustomPronounFromID adopts an existing toll-free-bridged object id as a MorphologyCustomPronoun (nil for 0).
+// MorphologyCustomPronounFromID adopts an existing object pointer as a MorphologyCustomPronoun (nil for 0).
 func MorphologyCustomPronounFromID(id objc.ID) *MorphologyCustomPronoun {
 	if id == 0 {
 		return nil

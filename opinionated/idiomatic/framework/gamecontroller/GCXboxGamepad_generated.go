@@ -17,11 +17,11 @@ type XboxGamepad struct {
 // Unwrap returns the underlying [raw.GCXboxGamepad].
 func (x *XboxGamepad) Unwrap() *raw.GCXboxGamepad { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *XboxGamepad) ID() objc.ID { return x.inner.Ptr() }
 
-// XboxGamepadFromID adopts an existing toll-free-bridged object id as a XboxGamepad (nil for 0).
+// XboxGamepadFromID adopts an existing object pointer as a XboxGamepad (nil for 0).
 func XboxGamepadFromID(id objc.ID) *XboxGamepad {
 	if id == 0 {
 		return nil

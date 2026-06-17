@@ -19,11 +19,11 @@ type GridView struct {
 // Unwrap returns the underlying [raw.NSGridView].
 func (x *GridView) Unwrap() *raw.NSGridView { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *GridView) ID() objc.ID { return x.inner.Ptr() }
 
-// GridViewFromID adopts an existing toll-free-bridged object id as a GridView (nil for 0).
+// GridViewFromID adopts an existing object pointer as a GridView (nil for 0).
 func GridViewFromID(id objc.ID) *GridView {
 	if id == 0 {
 		return nil

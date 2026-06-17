@@ -18,11 +18,11 @@ type NNReductionColumnSumNode struct {
 // Unwrap returns the underlying [raw.MPSNNReductionColumnSumNode].
 func (x *NNReductionColumnSumNode) Unwrap() *raw.MPSNNReductionColumnSumNode { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NNReductionColumnSumNode) ID() objc.ID { return x.inner.Ptr() }
 
-// NNReductionColumnSumNodeFromID adopts an existing toll-free-bridged object id as a NNReductionColumnSumNode (nil for 0).
+// NNReductionColumnSumNodeFromID adopts an existing object pointer as a NNReductionColumnSumNode (nil for 0).
 func NNReductionColumnSumNodeFromID(id objc.ID) *NNReductionColumnSumNode {
 	if id == 0 {
 		return nil

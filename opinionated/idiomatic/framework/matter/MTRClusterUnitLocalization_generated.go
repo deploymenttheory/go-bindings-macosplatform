@@ -18,11 +18,11 @@ type MTRClusterUnitLocalization struct {
 // Unwrap returns the underlying [raw.MTRClusterUnitLocalization].
 func (x *MTRClusterUnitLocalization) Unwrap() *raw.MTRClusterUnitLocalization { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRClusterUnitLocalization) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRClusterUnitLocalizationFromID adopts an existing toll-free-bridged object id as a MTRClusterUnitLocalization (nil for 0).
+// MTRClusterUnitLocalizationFromID adopts an existing object pointer as a MTRClusterUnitLocalization (nil for 0).
 func MTRClusterUnitLocalizationFromID(id objc.ID) *MTRClusterUnitLocalization {
 	if id == 0 {
 		return nil

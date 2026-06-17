@@ -18,11 +18,11 @@ type MacMachineIdentifier struct {
 // Unwrap returns the underlying [raw.VZMacMachineIdentifier].
 func (x *MacMachineIdentifier) Unwrap() *raw.VZMacMachineIdentifier { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MacMachineIdentifier) ID() objc.ID { return x.inner.Ptr() }
 
-// MacMachineIdentifierFromID adopts an existing toll-free-bridged object id as a MacMachineIdentifier (nil for 0).
+// MacMachineIdentifierFromID adopts an existing object pointer as a MacMachineIdentifier (nil for 0).
 func MacMachineIdentifierFromID(id objc.ID) *MacMachineIdentifier {
 	if id == 0 {
 		return nil

@@ -19,11 +19,11 @@ type VoiceShortcut struct {
 // Unwrap returns the underlying [raw.INVoiceShortcut].
 func (x *VoiceShortcut) Unwrap() *raw.INVoiceShortcut { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *VoiceShortcut) ID() objc.ID { return x.inner.Ptr() }
 
-// VoiceShortcutFromID adopts an existing toll-free-bridged object id as a VoiceShortcut (nil for 0).
+// VoiceShortcutFromID adopts an existing object pointer as a VoiceShortcut (nil for 0).
 func VoiceShortcutFromID(id objc.ID) *VoiceShortcut {
 	if id == 0 {
 		return nil

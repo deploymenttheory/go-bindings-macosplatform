@@ -18,11 +18,11 @@ type PersonIdentity struct {
 // Unwrap returns the underlying [raw.SWPersonIdentity].
 func (x *PersonIdentity) Unwrap() *raw.SWPersonIdentity { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PersonIdentity) ID() objc.ID { return x.inner.Ptr() }
 
-// PersonIdentityFromID adopts an existing toll-free-bridged object id as a PersonIdentity (nil for 0).
+// PersonIdentityFromID adopts an existing object pointer as a PersonIdentity (nil for 0).
 func PersonIdentityFromID(id objc.ID) *PersonIdentity {
 	if id == 0 {
 		return nil

@@ -19,11 +19,11 @@ type TensorDescriptor struct {
 // Unwrap returns the underlying [raw.MLCTensorDescriptor].
 func (x *TensorDescriptor) Unwrap() *raw.MLCTensorDescriptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *TensorDescriptor) ID() objc.ID { return x.inner.Ptr() }
 
-// TensorDescriptorFromID adopts an existing toll-free-bridged object id as a TensorDescriptor (nil for 0).
+// TensorDescriptorFromID adopts an existing object pointer as a TensorDescriptor (nil for 0).
 func TensorDescriptorFromID(id objc.ID) *TensorDescriptor {
 	if id == 0 {
 		return nil

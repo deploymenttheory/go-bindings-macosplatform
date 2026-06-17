@@ -17,11 +17,11 @@ type DOMHTMLDirectoryElement struct {
 // Unwrap returns the underlying [raw.DOMHTMLDirectoryElement].
 func (x *DOMHTMLDirectoryElement) Unwrap() *raw.DOMHTMLDirectoryElement { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DOMHTMLDirectoryElement) ID() objc.ID { return x.inner.Ptr() }
 
-// DOMHTMLDirectoryElementFromID adopts an existing toll-free-bridged object id as a DOMHTMLDirectoryElement (nil for 0).
+// DOMHTMLDirectoryElementFromID adopts an existing object pointer as a DOMHTMLDirectoryElement (nil for 0).
 func DOMHTMLDirectoryElementFromID(id objc.ID) *DOMHTMLDirectoryElement {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type Transcription struct {
 // Unwrap returns the underlying [raw.SFTranscription].
 func (x *Transcription) Unwrap() *raw.SFTranscription { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Transcription) ID() objc.ID { return x.inner.Ptr() }
 
-// TranscriptionFromID adopts an existing toll-free-bridged object id as a Transcription (nil for 0).
+// TranscriptionFromID adopts an existing object pointer as a Transcription (nil for 0).
 func TranscriptionFromID(id objc.ID) *Transcription {
 	if id == 0 {
 		return nil

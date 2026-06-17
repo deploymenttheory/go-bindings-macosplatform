@@ -19,11 +19,11 @@ type CaptureAudioPreviewOutput struct {
 // Unwrap returns the underlying [raw.AVCaptureAudioPreviewOutput].
 func (x *CaptureAudioPreviewOutput) Unwrap() *raw.AVCaptureAudioPreviewOutput { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CaptureAudioPreviewOutput) ID() objc.ID { return x.inner.Ptr() }
 
-// CaptureAudioPreviewOutputFromID adopts an existing toll-free-bridged object id as a CaptureAudioPreviewOutput (nil for 0).
+// CaptureAudioPreviewOutputFromID adopts an existing object pointer as a CaptureAudioPreviewOutput (nil for 0).
 func CaptureAudioPreviewOutputFromID(id objc.ID) *CaptureAudioPreviewOutput {
 	if id == 0 {
 		return nil

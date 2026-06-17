@@ -19,11 +19,11 @@ type AnimationContext struct {
 // Unwrap returns the underlying [raw.NSAnimationContext].
 func (x *AnimationContext) Unwrap() *raw.NSAnimationContext { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AnimationContext) ID() objc.ID { return x.inner.Ptr() }
 
-// AnimationContextFromID adopts an existing toll-free-bridged object id as a AnimationContext (nil for 0).
+// AnimationContextFromID adopts an existing object pointer as a AnimationContext (nil for 0).
 func AnimationContextFromID(id objc.ID) *AnimationContext {
 	if id == 0 {
 		return nil

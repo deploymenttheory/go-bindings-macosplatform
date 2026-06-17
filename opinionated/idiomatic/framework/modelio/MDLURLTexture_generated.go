@@ -18,11 +18,11 @@ type URLTexture struct {
 // Unwrap returns the underlying [raw.MDLURLTexture].
 func (x *URLTexture) Unwrap() *raw.MDLURLTexture { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *URLTexture) ID() objc.ID { return x.inner.Ptr() }
 
-// URLTextureFromID adopts an existing toll-free-bridged object id as a URLTexture (nil for 0).
+// URLTextureFromID adopts an existing object pointer as a URLTexture (nil for 0).
 func URLTextureFromID(id objc.ID) *URLTexture {
 	if id == 0 {
 		return nil

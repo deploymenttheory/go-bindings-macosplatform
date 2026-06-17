@@ -20,11 +20,11 @@ type WKWebExtensionMatchPattern struct {
 // Unwrap returns the underlying [raw.WKWebExtensionMatchPattern].
 func (x *WKWebExtensionMatchPattern) Unwrap() *raw.WKWebExtensionMatchPattern { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *WKWebExtensionMatchPattern) ID() objc.ID { return x.inner.Ptr() }
 
-// WKWebExtensionMatchPatternFromID adopts an existing toll-free-bridged object id as a WKWebExtensionMatchPattern (nil for 0).
+// WKWebExtensionMatchPatternFromID adopts an existing object pointer as a WKWebExtensionMatchPattern (nil for 0).
 func WKWebExtensionMatchPatternFromID(id objc.ID) *WKWebExtensionMatchPattern {
 	if id == 0 {
 		return nil

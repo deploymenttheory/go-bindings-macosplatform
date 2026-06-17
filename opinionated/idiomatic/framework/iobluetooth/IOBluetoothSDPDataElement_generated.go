@@ -20,11 +20,11 @@ type IOBluetoothSDPDataElement struct {
 // Unwrap returns the underlying [raw.IOBluetoothSDPDataElement].
 func (x *IOBluetoothSDPDataElement) Unwrap() *raw.IOBluetoothSDPDataElement { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *IOBluetoothSDPDataElement) ID() objc.ID { return x.inner.Ptr() }
 
-// IOBluetoothSDPDataElementFromID adopts an existing toll-free-bridged object id as a IOBluetoothSDPDataElement (nil for 0).
+// IOBluetoothSDPDataElementFromID adopts an existing object pointer as a IOBluetoothSDPDataElement (nil for 0).
 func IOBluetoothSDPDataElementFromID(id objc.ID) *IOBluetoothSDPDataElement {
 	if id == 0 {
 		return nil

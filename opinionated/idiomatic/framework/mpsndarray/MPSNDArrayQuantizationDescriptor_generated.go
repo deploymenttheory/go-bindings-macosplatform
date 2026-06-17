@@ -18,11 +18,11 @@ type ArrayQuantizationDescriptor struct {
 // Unwrap returns the underlying [raw.MPSNDArrayQuantizationDescriptor].
 func (x *ArrayQuantizationDescriptor) Unwrap() *raw.MPSNDArrayQuantizationDescriptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ArrayQuantizationDescriptor) ID() objc.ID { return x.inner.Ptr() }
 
-// ArrayQuantizationDescriptorFromID adopts an existing toll-free-bridged object id as a ArrayQuantizationDescriptor (nil for 0).
+// ArrayQuantizationDescriptorFromID adopts an existing object pointer as a ArrayQuantizationDescriptor (nil for 0).
 func ArrayQuantizationDescriptorFromID(id objc.ID) *ArrayQuantizationDescriptor {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type Morphology struct {
 // Unwrap returns the underlying [raw.NSMorphology].
 func (x *Morphology) Unwrap() *raw.NSMorphology { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Morphology) ID() objc.ID { return x.inner.Ptr() }
 
-// MorphologyFromID adopts an existing toll-free-bridged object id as a Morphology (nil for 0).
+// MorphologyFromID adopts an existing object pointer as a Morphology (nil for 0).
 func MorphologyFromID(id objc.ID) *Morphology {
 	if id == 0 {
 		return nil

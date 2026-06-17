@@ -18,11 +18,11 @@ type CandidateListTouchBarItem struct {
 // Unwrap returns the underlying [raw.NSCandidateListTouchBarItem].
 func (x *CandidateListTouchBarItem) Unwrap() *raw.NSCandidateListTouchBarItem[objc.ID] { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CandidateListTouchBarItem) ID() objc.ID { return x.inner.Ptr() }
 
-// CandidateListTouchBarItemFromID adopts an existing toll-free-bridged object id as a CandidateListTouchBarItem (nil for 0).
+// CandidateListTouchBarItemFromID adopts an existing object pointer as a CandidateListTouchBarItem (nil for 0).
 func CandidateListTouchBarItemFromID(id objc.ID) *CandidateListTouchBarItem {
 	if id == 0 {
 		return nil

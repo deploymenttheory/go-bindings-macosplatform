@@ -18,11 +18,11 @@ type MTRPowerSourceClusterBatChargeFaultChangeType struct {
 // Unwrap returns the underlying [raw.MTRPowerSourceClusterBatChargeFaultChangeType].
 func (x *MTRPowerSourceClusterBatChargeFaultChangeType) Unwrap() *raw.MTRPowerSourceClusterBatChargeFaultChangeType { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRPowerSourceClusterBatChargeFaultChangeType) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRPowerSourceClusterBatChargeFaultChangeTypeFromID adopts an existing toll-free-bridged object id as a MTRPowerSourceClusterBatChargeFaultChangeType (nil for 0).
+// MTRPowerSourceClusterBatChargeFaultChangeTypeFromID adopts an existing object pointer as a MTRPowerSourceClusterBatChargeFaultChangeType (nil for 0).
 func MTRPowerSourceClusterBatChargeFaultChangeTypeFromID(id objc.ID) *MTRPowerSourceClusterBatChargeFaultChangeType {
 	if id == 0 {
 		return nil

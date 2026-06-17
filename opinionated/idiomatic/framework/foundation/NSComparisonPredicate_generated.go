@@ -17,11 +17,11 @@ type ComparisonPredicate struct {
 // Unwrap returns the underlying [raw.NSComparisonPredicate].
 func (x *ComparisonPredicate) Unwrap() *raw.NSComparisonPredicate { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ComparisonPredicate) ID() objc.ID { return x.inner.Ptr() }
 
-// ComparisonPredicateFromID adopts an existing toll-free-bridged object id as a ComparisonPredicate (nil for 0).
+// ComparisonPredicateFromID adopts an existing object pointer as a ComparisonPredicate (nil for 0).
 func ComparisonPredicateFromID(id objc.ID) *ComparisonPredicate {
 	if id == 0 {
 		return nil

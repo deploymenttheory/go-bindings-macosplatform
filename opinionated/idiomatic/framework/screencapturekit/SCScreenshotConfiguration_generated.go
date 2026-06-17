@@ -20,11 +20,11 @@ type ScreenshotConfiguration struct {
 // Unwrap returns the underlying [raw.SCScreenshotConfiguration].
 func (x *ScreenshotConfiguration) Unwrap() *raw.SCScreenshotConfiguration { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ScreenshotConfiguration) ID() objc.ID { return x.inner.Ptr() }
 
-// ScreenshotConfigurationFromID adopts an existing toll-free-bridged object id as a ScreenshotConfiguration (nil for 0).
+// ScreenshotConfigurationFromID adopts an existing object pointer as a ScreenshotConfiguration (nil for 0).
 func ScreenshotConfigurationFromID(id objc.ID) *ScreenshotConfiguration {
 	if id == 0 {
 		return nil

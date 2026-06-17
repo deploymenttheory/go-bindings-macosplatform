@@ -17,11 +17,11 @@ type SearchToolbarItem struct {
 // Unwrap returns the underlying [raw.NSSearchToolbarItem].
 func (x *SearchToolbarItem) Unwrap() *raw.NSSearchToolbarItem { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SearchToolbarItem) ID() objc.ID { return x.inner.Ptr() }
 
-// SearchToolbarItemFromID adopts an existing toll-free-bridged object id as a SearchToolbarItem (nil for 0).
+// SearchToolbarItemFromID adopts an existing object pointer as a SearchToolbarItem (nil for 0).
 func SearchToolbarItemFromID(id objc.ID) *SearchToolbarItem {
 	if id == 0 {
 		return nil

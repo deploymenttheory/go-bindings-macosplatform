@@ -19,11 +19,11 @@ type RenderPipelineDescriptor struct {
 // Unwrap returns the underlying [raw.MTLRenderPipelineDescriptor].
 func (x *RenderPipelineDescriptor) Unwrap() *raw.MTLRenderPipelineDescriptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *RenderPipelineDescriptor) ID() objc.ID { return x.inner.Ptr() }
 
-// RenderPipelineDescriptorFromID adopts an existing toll-free-bridged object id as a RenderPipelineDescriptor (nil for 0).
+// RenderPipelineDescriptorFromID adopts an existing object pointer as a RenderPipelineDescriptor (nil for 0).
 func RenderPipelineDescriptorFromID(id objc.ID) *RenderPipelineDescriptor {
 	if id == 0 {
 		return nil

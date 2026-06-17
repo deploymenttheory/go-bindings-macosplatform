@@ -17,11 +17,11 @@ type MeasurementFormatter struct {
 // Unwrap returns the underlying [raw.NSMeasurementFormatter].
 func (x *MeasurementFormatter) Unwrap() *raw.NSMeasurementFormatter { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MeasurementFormatter) ID() objc.ID { return x.inner.Ptr() }
 
-// MeasurementFormatterFromID adopts an existing toll-free-bridged object id as a MeasurementFormatter (nil for 0).
+// MeasurementFormatterFromID adopts an existing object pointer as a MeasurementFormatter (nil for 0).
 func MeasurementFormatterFromID(id objc.ID) *MeasurementFormatter {
 	if id == 0 {
 		return nil

@@ -19,11 +19,11 @@ type MatrixSolveLU struct {
 // Unwrap returns the underlying [raw.MPSMatrixSolveLU].
 func (x *MatrixSolveLU) Unwrap() *raw.MPSMatrixSolveLU { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MatrixSolveLU) ID() objc.ID { return x.inner.Ptr() }
 
-// MatrixSolveLUFromID adopts an existing toll-free-bridged object id as a MatrixSolveLU (nil for 0).
+// MatrixSolveLUFromID adopts an existing object pointer as a MatrixSolveLU (nil for 0).
 func MatrixSolveLUFromID(id objc.ID) *MatrixSolveLU {
 	if id == 0 {
 		return nil

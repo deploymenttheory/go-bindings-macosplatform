@@ -18,11 +18,11 @@ type MTRWindowCoveringClusterDownOrCloseParams struct {
 // Unwrap returns the underlying [raw.MTRWindowCoveringClusterDownOrCloseParams].
 func (x *MTRWindowCoveringClusterDownOrCloseParams) Unwrap() *raw.MTRWindowCoveringClusterDownOrCloseParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRWindowCoveringClusterDownOrCloseParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRWindowCoveringClusterDownOrCloseParamsFromID adopts an existing toll-free-bridged object id as a MTRWindowCoveringClusterDownOrCloseParams (nil for 0).
+// MTRWindowCoveringClusterDownOrCloseParamsFromID adopts an existing object pointer as a MTRWindowCoveringClusterDownOrCloseParams (nil for 0).
 func MTRWindowCoveringClusterDownOrCloseParamsFromID(id objc.ID) *MTRWindowCoveringClusterDownOrCloseParams {
 	if id == 0 {
 		return nil

@@ -17,11 +17,11 @@ type UnitArea struct {
 // Unwrap returns the underlying [raw.NSUnitArea].
 func (x *UnitArea) Unwrap() *raw.NSUnitArea { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *UnitArea) ID() objc.ID { return x.inner.Ptr() }
 
-// UnitAreaFromID adopts an existing toll-free-bridged object id as a UnitArea (nil for 0).
+// UnitAreaFromID adopts an existing object pointer as a UnitArea (nil for 0).
 func UnitAreaFromID(id objc.ID) *UnitArea {
 	if id == 0 {
 		return nil

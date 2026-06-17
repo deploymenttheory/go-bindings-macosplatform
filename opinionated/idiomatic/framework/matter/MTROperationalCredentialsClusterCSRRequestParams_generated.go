@@ -18,11 +18,11 @@ type MTROperationalCredentialsClusterCSRRequestParams struct {
 // Unwrap returns the underlying [raw.MTROperationalCredentialsClusterCSRRequestParams].
 func (x *MTROperationalCredentialsClusterCSRRequestParams) Unwrap() *raw.MTROperationalCredentialsClusterCSRRequestParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTROperationalCredentialsClusterCSRRequestParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTROperationalCredentialsClusterCSRRequestParamsFromID adopts an existing toll-free-bridged object id as a MTROperationalCredentialsClusterCSRRequestParams (nil for 0).
+// MTROperationalCredentialsClusterCSRRequestParamsFromID adopts an existing object pointer as a MTROperationalCredentialsClusterCSRRequestParams (nil for 0).
 func MTROperationalCredentialsClusterCSRRequestParamsFromID(id objc.ID) *MTROperationalCredentialsClusterCSRRequestParams {
 	if id == 0 {
 		return nil

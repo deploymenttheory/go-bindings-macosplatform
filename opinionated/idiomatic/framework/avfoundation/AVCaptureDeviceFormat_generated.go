@@ -20,11 +20,11 @@ type CaptureDeviceFormat struct {
 // Unwrap returns the underlying [raw.AVCaptureDeviceFormat].
 func (x *CaptureDeviceFormat) Unwrap() *raw.AVCaptureDeviceFormat { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CaptureDeviceFormat) ID() objc.ID { return x.inner.Ptr() }
 
-// CaptureDeviceFormatFromID adopts an existing toll-free-bridged object id as a CaptureDeviceFormat (nil for 0).
+// CaptureDeviceFormatFromID adopts an existing object pointer as a CaptureDeviceFormat (nil for 0).
 func CaptureDeviceFormatFromID(id objc.ID) *CaptureDeviceFormat {
 	if id == 0 {
 		return nil

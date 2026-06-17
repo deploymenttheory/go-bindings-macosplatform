@@ -17,11 +17,11 @@ type ElectrocardiogramVoltageMeasurement struct {
 // Unwrap returns the underlying [raw.HKElectrocardiogramVoltageMeasurement].
 func (x *ElectrocardiogramVoltageMeasurement) Unwrap() *raw.HKElectrocardiogramVoltageMeasurement { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ElectrocardiogramVoltageMeasurement) ID() objc.ID { return x.inner.Ptr() }
 
-// ElectrocardiogramVoltageMeasurementFromID adopts an existing toll-free-bridged object id as a ElectrocardiogramVoltageMeasurement (nil for 0).
+// ElectrocardiogramVoltageMeasurementFromID adopts an existing object pointer as a ElectrocardiogramVoltageMeasurement (nil for 0).
 func ElectrocardiogramVoltageMeasurementFromID(id objc.ID) *ElectrocardiogramVoltageMeasurement {
 	if id == 0 {
 		return nil

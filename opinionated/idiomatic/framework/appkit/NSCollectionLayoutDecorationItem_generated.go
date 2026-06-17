@@ -18,11 +18,11 @@ type CollectionLayoutDecorationItem struct {
 // Unwrap returns the underlying [raw.NSCollectionLayoutDecorationItem].
 func (x *CollectionLayoutDecorationItem) Unwrap() *raw.NSCollectionLayoutDecorationItem { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CollectionLayoutDecorationItem) ID() objc.ID { return x.inner.Ptr() }
 
-// CollectionLayoutDecorationItemFromID adopts an existing toll-free-bridged object id as a CollectionLayoutDecorationItem (nil for 0).
+// CollectionLayoutDecorationItemFromID adopts an existing object pointer as a CollectionLayoutDecorationItem (nil for 0).
 func CollectionLayoutDecorationItemFromID(id objc.ID) *CollectionLayoutDecorationItem {
 	if id == 0 {
 		return nil

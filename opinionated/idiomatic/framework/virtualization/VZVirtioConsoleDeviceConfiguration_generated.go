@@ -17,11 +17,11 @@ type VirtioConsoleDeviceConfiguration struct {
 // Unwrap returns the underlying [raw.VZVirtioConsoleDeviceConfiguration].
 func (x *VirtioConsoleDeviceConfiguration) Unwrap() *raw.VZVirtioConsoleDeviceConfiguration { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *VirtioConsoleDeviceConfiguration) ID() objc.ID { return x.inner.Ptr() }
 
-// VirtioConsoleDeviceConfigurationFromID adopts an existing toll-free-bridged object id as a VirtioConsoleDeviceConfiguration (nil for 0).
+// VirtioConsoleDeviceConfigurationFromID adopts an existing object pointer as a VirtioConsoleDeviceConfiguration (nil for 0).
 func VirtioConsoleDeviceConfigurationFromID(id objc.ID) *VirtioConsoleDeviceConfiguration {
 	if id == 0 {
 		return nil

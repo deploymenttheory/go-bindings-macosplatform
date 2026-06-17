@@ -17,11 +17,11 @@ type SerialPortAttachment struct {
 // Unwrap returns the underlying [raw.VZSerialPortAttachment].
 func (x *SerialPortAttachment) Unwrap() *raw.VZSerialPortAttachment { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SerialPortAttachment) ID() objc.ID { return x.inner.Ptr() }
 
-// SerialPortAttachmentFromID adopts an existing toll-free-bridged object id as a SerialPortAttachment (nil for 0).
+// SerialPortAttachmentFromID adopts an existing object pointer as a SerialPortAttachment (nil for 0).
 func SerialPortAttachmentFromID(id objc.ID) *SerialPortAttachment {
 	if id == 0 {
 		return nil

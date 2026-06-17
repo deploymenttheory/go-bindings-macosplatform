@@ -17,11 +17,11 @@ type GraphConvolution2DOpDescriptor struct {
 // Unwrap returns the underlying [raw.MPSGraphConvolution2DOpDescriptor].
 func (x *GraphConvolution2DOpDescriptor) Unwrap() *raw.MPSGraphConvolution2DOpDescriptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *GraphConvolution2DOpDescriptor) ID() objc.ID { return x.inner.Ptr() }
 
-// GraphConvolution2DOpDescriptorFromID adopts an existing toll-free-bridged object id as a GraphConvolution2DOpDescriptor (nil for 0).
+// GraphConvolution2DOpDescriptorFromID adopts an existing object pointer as a GraphConvolution2DOpDescriptor (nil for 0).
 func GraphConvolution2DOpDescriptorFromID(id objc.ID) *GraphConvolution2DOpDescriptor {
 	if id == 0 {
 		return nil

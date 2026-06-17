@@ -19,11 +19,11 @@ type ImageBilinearScale struct {
 // Unwrap returns the underlying [raw.MPSImageBilinearScale].
 func (x *ImageBilinearScale) Unwrap() *raw.MPSImageBilinearScale { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ImageBilinearScale) ID() objc.ID { return x.inner.Ptr() }
 
-// ImageBilinearScaleFromID adopts an existing toll-free-bridged object id as a ImageBilinearScale (nil for 0).
+// ImageBilinearScaleFromID adopts an existing object pointer as a ImageBilinearScale (nil for 0).
 func ImageBilinearScaleFromID(id objc.ID) *ImageBilinearScale {
 	if id == 0 {
 		return nil

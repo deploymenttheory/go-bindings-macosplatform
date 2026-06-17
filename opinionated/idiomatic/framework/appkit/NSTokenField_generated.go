@@ -18,11 +18,11 @@ type TokenField struct {
 // Unwrap returns the underlying [raw.NSTokenField].
 func (x *TokenField) Unwrap() *raw.NSTokenField { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *TokenField) ID() objc.ID { return x.inner.Ptr() }
 
-// TokenFieldFromID adopts an existing toll-free-bridged object id as a TokenField (nil for 0).
+// TokenFieldFromID adopts an existing object pointer as a TokenField (nil for 0).
 func TokenFieldFromID(id objc.ID) *TokenField {
 	if id == 0 {
 		return nil

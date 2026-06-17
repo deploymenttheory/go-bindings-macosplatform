@@ -18,11 +18,11 @@ type MTL4CompilerTaskOptions struct {
 // Unwrap returns the underlying [raw.MTL4CompilerTaskOptions].
 func (x *MTL4CompilerTaskOptions) Unwrap() *raw.MTL4CompilerTaskOptions { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTL4CompilerTaskOptions) ID() objc.ID { return x.inner.Ptr() }
 
-// MTL4CompilerTaskOptionsFromID adopts an existing toll-free-bridged object id as a MTL4CompilerTaskOptions (nil for 0).
+// MTL4CompilerTaskOptionsFromID adopts an existing object pointer as a MTL4CompilerTaskOptions (nil for 0).
 func MTL4CompilerTaskOptionsFromID(id objc.ID) *MTL4CompilerTaskOptions {
 	if id == 0 {
 		return nil

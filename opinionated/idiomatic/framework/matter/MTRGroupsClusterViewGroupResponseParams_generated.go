@@ -20,11 +20,11 @@ type MTRGroupsClusterViewGroupResponseParams struct {
 // Unwrap returns the underlying [raw.MTRGroupsClusterViewGroupResponseParams].
 func (x *MTRGroupsClusterViewGroupResponseParams) Unwrap() *raw.MTRGroupsClusterViewGroupResponseParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRGroupsClusterViewGroupResponseParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRGroupsClusterViewGroupResponseParamsFromID adopts an existing toll-free-bridged object id as a MTRGroupsClusterViewGroupResponseParams (nil for 0).
+// MTRGroupsClusterViewGroupResponseParamsFromID adopts an existing object pointer as a MTRGroupsClusterViewGroupResponseParams (nil for 0).
 func MTRGroupsClusterViewGroupResponseParamsFromID(id objc.ID) *MTRGroupsClusterViewGroupResponseParams {
 	if id == 0 {
 		return nil

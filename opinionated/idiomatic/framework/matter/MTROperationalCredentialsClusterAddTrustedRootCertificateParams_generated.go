@@ -18,11 +18,11 @@ type MTROperationalCredentialsClusterAddTrustedRootCertificateParams struct {
 // Unwrap returns the underlying [raw.MTROperationalCredentialsClusterAddTrustedRootCertificateParams].
 func (x *MTROperationalCredentialsClusterAddTrustedRootCertificateParams) Unwrap() *raw.MTROperationalCredentialsClusterAddTrustedRootCertificateParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTROperationalCredentialsClusterAddTrustedRootCertificateParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTROperationalCredentialsClusterAddTrustedRootCertificateParamsFromID adopts an existing toll-free-bridged object id as a MTROperationalCredentialsClusterAddTrustedRootCertificateParams (nil for 0).
+// MTROperationalCredentialsClusterAddTrustedRootCertificateParamsFromID adopts an existing object pointer as a MTROperationalCredentialsClusterAddTrustedRootCertificateParams (nil for 0).
 func MTROperationalCredentialsClusterAddTrustedRootCertificateParamsFromID(id objc.ID) *MTROperationalCredentialsClusterAddTrustedRootCertificateParams {
 	if id == 0 {
 		return nil

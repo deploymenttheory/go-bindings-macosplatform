@@ -21,11 +21,11 @@ type TrackInfo struct {
 // Unwrap returns the underlying [raw.METrackInfo].
 func (x *TrackInfo) Unwrap() *raw.METrackInfo { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *TrackInfo) ID() objc.ID { return x.inner.Ptr() }
 
-// TrackInfoFromID adopts an existing toll-free-bridged object id as a TrackInfo (nil for 0).
+// TrackInfoFromID adopts an existing object pointer as a TrackInfo (nil for 0).
 func TrackInfoFromID(id objc.ID) *TrackInfo {
 	if id == 0 {
 		return nil

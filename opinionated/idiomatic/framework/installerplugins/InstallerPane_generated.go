@@ -19,11 +19,11 @@ type InstallerPane struct {
 // Unwrap returns the underlying [raw.InstallerPane].
 func (x *InstallerPane) Unwrap() *raw.InstallerPane { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *InstallerPane) ID() objc.ID { return x.inner.Ptr() }
 
-// InstallerPaneFromID adopts an existing toll-free-bridged object id as a InstallerPane (nil for 0).
+// InstallerPaneFromID adopts an existing object pointer as a InstallerPane (nil for 0).
 func InstallerPaneFromID(id objc.ID) *InstallerPane {
 	if id == 0 {
 		return nil

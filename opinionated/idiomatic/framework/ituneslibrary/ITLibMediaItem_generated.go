@@ -20,11 +20,11 @@ type LibMediaItem struct {
 // Unwrap returns the underlying [raw.ITLibMediaItem].
 func (x *LibMediaItem) Unwrap() *raw.ITLibMediaItem { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *LibMediaItem) ID() objc.ID { return x.inner.Ptr() }
 
-// LibMediaItemFromID adopts an existing toll-free-bridged object id as a LibMediaItem (nil for 0).
+// LibMediaItemFromID adopts an existing object pointer as a LibMediaItem (nil for 0).
 func LibMediaItemFromID(id objc.ID) *LibMediaItem {
 	if id == 0 {
 		return nil

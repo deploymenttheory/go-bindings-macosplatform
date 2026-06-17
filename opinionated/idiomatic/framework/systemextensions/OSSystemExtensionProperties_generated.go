@@ -19,11 +19,11 @@ type SystemExtensionProperties struct {
 // Unwrap returns the underlying [raw.OSSystemExtensionProperties].
 func (x *SystemExtensionProperties) Unwrap() *raw.OSSystemExtensionProperties { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SystemExtensionProperties) ID() objc.ID { return x.inner.Ptr() }
 
-// SystemExtensionPropertiesFromID adopts an existing toll-free-bridged object id as a SystemExtensionProperties (nil for 0).
+// SystemExtensionPropertiesFromID adopts an existing object pointer as a SystemExtensionProperties (nil for 0).
 func SystemExtensionPropertiesFromID(id objc.ID) *SystemExtensionProperties {
 	if id == 0 {
 		return nil

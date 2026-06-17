@@ -18,11 +18,11 @@ type ImageReduceColumnMin struct {
 // Unwrap returns the underlying [raw.MPSImageReduceColumnMin].
 func (x *ImageReduceColumnMin) Unwrap() *raw.MPSImageReduceColumnMin { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ImageReduceColumnMin) ID() objc.ID { return x.inner.Ptr() }
 
-// ImageReduceColumnMinFromID adopts an existing toll-free-bridged object id as a ImageReduceColumnMin (nil for 0).
+// ImageReduceColumnMinFromID adopts an existing object pointer as a ImageReduceColumnMin (nil for 0).
 func ImageReduceColumnMinFromID(id objc.ID) *ImageReduceColumnMin {
 	if id == 0 {
 		return nil

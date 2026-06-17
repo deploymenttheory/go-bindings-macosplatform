@@ -17,11 +17,11 @@ type ISyncFilter struct {
 // Unwrap returns the underlying [raw.ISyncFilter].
 func (x *ISyncFilter) Unwrap() *raw.ISyncFilter { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ISyncFilter) ID() objc.ID { return x.inner.Ptr() }
 
-// ISyncFilterFromID adopts an existing toll-free-bridged object id as a ISyncFilter (nil for 0).
+// ISyncFilterFromID adopts an existing object pointer as a ISyncFilter (nil for 0).
 func ISyncFilterFromID(id objc.ID) *ISyncFilter {
 	if id == 0 {
 		return nil

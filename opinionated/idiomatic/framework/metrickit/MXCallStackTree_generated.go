@@ -18,11 +18,11 @@ type CallStackTree struct {
 // Unwrap returns the underlying [raw.MXCallStackTree].
 func (x *CallStackTree) Unwrap() *raw.MXCallStackTree { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CallStackTree) ID() objc.ID { return x.inner.Ptr() }
 
-// CallStackTreeFromID adopts an existing toll-free-bridged object id as a CallStackTree (nil for 0).
+// CallStackTreeFromID adopts an existing object pointer as a CallStackTree (nil for 0).
 func CallStackTreeFromID(id objc.ID) *CallStackTree {
 	if id == 0 {
 		return nil

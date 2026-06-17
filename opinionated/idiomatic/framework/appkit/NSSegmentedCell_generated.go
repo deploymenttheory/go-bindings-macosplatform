@@ -20,11 +20,11 @@ type SegmentedCell struct {
 // Unwrap returns the underlying [raw.NSSegmentedCell].
 func (x *SegmentedCell) Unwrap() *raw.NSSegmentedCell { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SegmentedCell) ID() objc.ID { return x.inner.Ptr() }
 
-// SegmentedCellFromID adopts an existing toll-free-bridged object id as a SegmentedCell (nil for 0).
+// SegmentedCellFromID adopts an existing object pointer as a SegmentedCell (nil for 0).
 func SegmentedCellFromID(id objc.ID) *SegmentedCell {
 	if id == 0 {
 		return nil

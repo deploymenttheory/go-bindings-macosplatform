@@ -17,11 +17,11 @@ type UnitSignalBars struct {
 // Unwrap returns the underlying [raw.MXUnitSignalBars].
 func (x *UnitSignalBars) Unwrap() *raw.MXUnitSignalBars { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *UnitSignalBars) ID() objc.ID { return x.inner.Ptr() }
 
-// UnitSignalBarsFromID adopts an existing toll-free-bridged object id as a UnitSignalBars (nil for 0).
+// UnitSignalBarsFromID adopts an existing object pointer as a UnitSignalBars (nil for 0).
 func UnitSignalBarsFromID(id objc.ID) *UnitSignalBars {
 	if id == 0 {
 		return nil

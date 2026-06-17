@@ -18,11 +18,11 @@ type AUPresetEvent struct {
 // Unwrap returns the underlying [raw.AVAUPresetEvent].
 func (x *AUPresetEvent) Unwrap() *raw.AVAUPresetEvent { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AUPresetEvent) ID() objc.ID { return x.inner.Ptr() }
 
-// AUPresetEventFromID adopts an existing toll-free-bridged object id as a AUPresetEvent (nil for 0).
+// AUPresetEventFromID adopts an existing object pointer as a AUPresetEvent (nil for 0).
 func AUPresetEventFromID(id objc.ID) *AUPresetEvent {
 	if id == 0 {
 		return nil

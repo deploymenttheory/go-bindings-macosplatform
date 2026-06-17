@@ -18,11 +18,11 @@ type RandomSource struct {
 // Unwrap returns the underlying [raw.GKRandomSource].
 func (x *RandomSource) Unwrap() *raw.GKRandomSource { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *RandomSource) ID() objc.ID { return x.inner.Ptr() }
 
-// RandomSourceFromID adopts an existing toll-free-bridged object id as a RandomSource (nil for 0).
+// RandomSourceFromID adopts an existing object pointer as a RandomSource (nil for 0).
 func RandomSourceFromID(id objc.ID) *RandomSource {
 	if id == 0 {
 		return nil

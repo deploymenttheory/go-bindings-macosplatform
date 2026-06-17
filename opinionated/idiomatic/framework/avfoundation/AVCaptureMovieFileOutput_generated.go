@@ -21,11 +21,11 @@ type CaptureMovieFileOutput struct {
 // Unwrap returns the underlying [raw.AVCaptureMovieFileOutput].
 func (x *CaptureMovieFileOutput) Unwrap() *raw.AVCaptureMovieFileOutput { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CaptureMovieFileOutput) ID() objc.ID { return x.inner.Ptr() }
 
-// CaptureMovieFileOutputFromID adopts an existing toll-free-bridged object id as a CaptureMovieFileOutput (nil for 0).
+// CaptureMovieFileOutputFromID adopts an existing object pointer as a CaptureMovieFileOutput (nil for 0).
 func CaptureMovieFileOutputFromID(id objc.ID) *CaptureMovieFileOutput {
 	if id == 0 {
 		return nil

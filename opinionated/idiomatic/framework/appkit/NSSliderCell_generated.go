@@ -18,11 +18,11 @@ type SliderCell struct {
 // Unwrap returns the underlying [raw.NSSliderCell].
 func (x *SliderCell) Unwrap() *raw.NSSliderCell { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SliderCell) ID() objc.ID { return x.inner.Ptr() }
 
-// SliderCellFromID adopts an existing toll-free-bridged object id as a SliderCell (nil for 0).
+// SliderCellFromID adopts an existing object pointer as a SliderCell (nil for 0).
 func SliderCellFromID(id objc.ID) *SliderCell {
 	if id == 0 {
 		return nil

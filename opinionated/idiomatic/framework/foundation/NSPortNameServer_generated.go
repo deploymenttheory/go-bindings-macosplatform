@@ -18,11 +18,11 @@ type PortNameServer struct {
 // Unwrap returns the underlying [raw.NSPortNameServer].
 func (x *PortNameServer) Unwrap() *raw.NSPortNameServer { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PortNameServer) ID() objc.ID { return x.inner.Ptr() }
 
-// PortNameServerFromID adopts an existing toll-free-bridged object id as a PortNameServer (nil for 0).
+// PortNameServerFromID adopts an existing object pointer as a PortNameServer (nil for 0).
 func PortNameServerFromID(id objc.ID) *PortNameServer {
 	if id == 0 {
 		return nil

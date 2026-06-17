@@ -20,11 +20,11 @@ type Shape struct {
 // Unwrap returns the underlying [raw.PHASEShape].
 func (x *Shape) Unwrap() *raw.PHASEShape { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Shape) ID() objc.ID { return x.inner.Ptr() }
 
-// ShapeFromID adopts an existing toll-free-bridged object id as a Shape (nil for 0).
+// ShapeFromID adopts an existing object pointer as a Shape (nil for 0).
 func ShapeFromID(id objc.ID) *Shape {
 	if id == 0 {
 		return nil

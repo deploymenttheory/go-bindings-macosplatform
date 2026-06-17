@@ -17,11 +17,11 @@ type Listener struct {
 // Unwrap returns the underlying [raw.PHASEListener].
 func (x *Listener) Unwrap() *raw.PHASEListener { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Listener) ID() objc.ID { return x.inner.Ptr() }
 
-// ListenerFromID adopts an existing toll-free-bridged object id as a Listener (nil for 0).
+// ListenerFromID adopts an existing object pointer as a Listener (nil for 0).
 func ListenerFromID(id objc.ID) *Listener {
 	if id == 0 {
 		return nil

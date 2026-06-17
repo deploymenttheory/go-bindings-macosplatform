@@ -18,11 +18,11 @@ type TurnBasedEventHandler struct {
 // Unwrap returns the underlying [raw.GKTurnBasedEventHandler].
 func (x *TurnBasedEventHandler) Unwrap() *raw.GKTurnBasedEventHandler { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *TurnBasedEventHandler) ID() objc.ID { return x.inner.Ptr() }
 
-// TurnBasedEventHandlerFromID adopts an existing toll-free-bridged object id as a TurnBasedEventHandler (nil for 0).
+// TurnBasedEventHandlerFromID adopts an existing object pointer as a TurnBasedEventHandler (nil for 0).
 func TurnBasedEventHandlerFromID(id objc.ID) *TurnBasedEventHandler {
 	if id == 0 {
 		return nil

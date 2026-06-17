@@ -20,11 +20,11 @@ type PredicateEditor struct {
 // Unwrap returns the underlying [raw.NSPredicateEditor].
 func (x *PredicateEditor) Unwrap() *raw.NSPredicateEditor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PredicateEditor) ID() objc.ID { return x.inner.Ptr() }
 
-// PredicateEditorFromID adopts an existing toll-free-bridged object id as a PredicateEditor (nil for 0).
+// PredicateEditorFromID adopts an existing object pointer as a PredicateEditor (nil for 0).
 func PredicateEditorFromID(id objc.ID) *PredicateEditor {
 	if id == 0 {
 		return nil

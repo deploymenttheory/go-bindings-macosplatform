@@ -20,11 +20,11 @@ type NumericDataAxisDescriptor struct {
 // Unwrap returns the underlying [raw.AXNumericDataAxisDescriptor].
 func (x *NumericDataAxisDescriptor) Unwrap() *raw.AXNumericDataAxisDescriptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NumericDataAxisDescriptor) ID() objc.ID { return x.inner.Ptr() }
 
-// NumericDataAxisDescriptorFromID adopts an existing toll-free-bridged object id as a NumericDataAxisDescriptor (nil for 0).
+// NumericDataAxisDescriptorFromID adopts an existing object pointer as a NumericDataAxisDescriptor (nil for 0).
 func NumericDataAxisDescriptorFromID(id objc.ID) *NumericDataAxisDescriptor {
 	if id == 0 {
 		return nil

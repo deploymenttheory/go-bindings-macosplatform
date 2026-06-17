@@ -19,11 +19,11 @@ type MTRContentLauncherClusterLaunchContentParams struct {
 // Unwrap returns the underlying [raw.MTRContentLauncherClusterLaunchContentParams].
 func (x *MTRContentLauncherClusterLaunchContentParams) Unwrap() *raw.MTRContentLauncherClusterLaunchContentParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRContentLauncherClusterLaunchContentParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRContentLauncherClusterLaunchContentParamsFromID adopts an existing toll-free-bridged object id as a MTRContentLauncherClusterLaunchContentParams (nil for 0).
+// MTRContentLauncherClusterLaunchContentParamsFromID adopts an existing object pointer as a MTRContentLauncherClusterLaunchContentParams (nil for 0).
 func MTRContentLauncherClusterLaunchContentParamsFromID(id objc.ID) *MTRContentLauncherClusterLaunchContentParams {
 	if id == 0 {
 		return nil

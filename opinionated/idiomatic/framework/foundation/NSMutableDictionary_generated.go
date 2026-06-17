@@ -18,11 +18,11 @@ type MutableDictionary struct {
 // Unwrap returns the underlying [raw.NSMutableDictionary].
 func (x *MutableDictionary) Unwrap() *raw.NSMutableDictionary[objc.ID, objc.ID] { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MutableDictionary) ID() objc.ID { return x.inner.Ptr() }
 
-// MutableDictionaryFromID adopts an existing toll-free-bridged object id as a MutableDictionary (nil for 0).
+// MutableDictionaryFromID adopts an existing object pointer as a MutableDictionary (nil for 0).
 func MutableDictionaryFromID(id objc.ID) *MutableDictionary {
 	if id == 0 {
 		return nil
@@ -103,8 +103,8 @@ func (x *MutableDictionary) asDictionary() *raw.NSDictionary[objc.ID, objc.ID] {
 
 func (x *MutableDictionary) asObject() *raw.NSObject { return &x.inner.NSDictionary.NSObject }
 
-// Set inserts value for key — both toll-free-bridged ids, e.g. CoreFoundation
-// constants such as security.KSecClass() — and returns the receiver for chaining.
+// Set inserts value for key (both object pointers, e.g. the CFStringRef
+// constant security.KSecClass()) and returns the receiver for chaining.
 func (x *MutableDictionary) Set(key, value objc.ID) *MutableDictionary {
 	objc.Send[objc.ID](x.inner.Ptr(), objc.RegisterName("setObject:forKey:"), value, key)
 	return x

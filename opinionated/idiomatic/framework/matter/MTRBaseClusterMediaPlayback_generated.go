@@ -21,11 +21,11 @@ type MTRBaseClusterMediaPlayback struct {
 // Unwrap returns the underlying [raw.MTRBaseClusterMediaPlayback].
 func (x *MTRBaseClusterMediaPlayback) Unwrap() *raw.MTRBaseClusterMediaPlayback { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRBaseClusterMediaPlayback) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRBaseClusterMediaPlaybackFromID adopts an existing toll-free-bridged object id as a MTRBaseClusterMediaPlayback (nil for 0).
+// MTRBaseClusterMediaPlaybackFromID adopts an existing object pointer as a MTRBaseClusterMediaPlayback (nil for 0).
 func MTRBaseClusterMediaPlaybackFromID(id objc.ID) *MTRBaseClusterMediaPlayback {
 	if id == 0 {
 		return nil

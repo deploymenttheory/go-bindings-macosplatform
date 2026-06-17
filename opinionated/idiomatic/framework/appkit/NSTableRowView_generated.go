@@ -18,11 +18,11 @@ type TableRowView struct {
 // Unwrap returns the underlying [raw.NSTableRowView].
 func (x *TableRowView) Unwrap() *raw.NSTableRowView { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *TableRowView) ID() objc.ID { return x.inner.Ptr() }
 
-// TableRowViewFromID adopts an existing toll-free-bridged object id as a TableRowView (nil for 0).
+// TableRowViewFromID adopts an existing object pointer as a TableRowView (nil for 0).
 func TableRowViewFromID(id objc.ID) *TableRowView {
 	if id == 0 {
 		return nil

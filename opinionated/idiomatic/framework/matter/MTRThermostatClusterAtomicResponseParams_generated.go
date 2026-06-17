@@ -20,11 +20,11 @@ type MTRThermostatClusterAtomicResponseParams struct {
 // Unwrap returns the underlying [raw.MTRThermostatClusterAtomicResponseParams].
 func (x *MTRThermostatClusterAtomicResponseParams) Unwrap() *raw.MTRThermostatClusterAtomicResponseParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRThermostatClusterAtomicResponseParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRThermostatClusterAtomicResponseParamsFromID adopts an existing toll-free-bridged object id as a MTRThermostatClusterAtomicResponseParams (nil for 0).
+// MTRThermostatClusterAtomicResponseParamsFromID adopts an existing object pointer as a MTRThermostatClusterAtomicResponseParams (nil for 0).
 func MTRThermostatClusterAtomicResponseParamsFromID(id objc.ID) *MTRThermostatClusterAtomicResponseParams {
 	if id == 0 {
 		return nil

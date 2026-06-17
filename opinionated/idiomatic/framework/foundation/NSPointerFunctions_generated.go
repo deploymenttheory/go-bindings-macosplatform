@@ -18,11 +18,11 @@ type PointerFunctions struct {
 // Unwrap returns the underlying [raw.NSPointerFunctions].
 func (x *PointerFunctions) Unwrap() *raw.NSPointerFunctions { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PointerFunctions) ID() objc.ID { return x.inner.Ptr() }
 
-// PointerFunctionsFromID adopts an existing toll-free-bridged object id as a PointerFunctions (nil for 0).
+// PointerFunctionsFromID adopts an existing object pointer as a PointerFunctions (nil for 0).
 func PointerFunctionsFromID(id objc.ID) *PointerFunctions {
 	if id == 0 {
 		return nil

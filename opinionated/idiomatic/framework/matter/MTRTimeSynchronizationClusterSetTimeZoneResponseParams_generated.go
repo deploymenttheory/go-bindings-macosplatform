@@ -20,11 +20,11 @@ type MTRTimeSynchronizationClusterSetTimeZoneResponseParams struct {
 // Unwrap returns the underlying [raw.MTRTimeSynchronizationClusterSetTimeZoneResponseParams].
 func (x *MTRTimeSynchronizationClusterSetTimeZoneResponseParams) Unwrap() *raw.MTRTimeSynchronizationClusterSetTimeZoneResponseParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRTimeSynchronizationClusterSetTimeZoneResponseParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRTimeSynchronizationClusterSetTimeZoneResponseParamsFromID adopts an existing toll-free-bridged object id as a MTRTimeSynchronizationClusterSetTimeZoneResponseParams (nil for 0).
+// MTRTimeSynchronizationClusterSetTimeZoneResponseParamsFromID adopts an existing object pointer as a MTRTimeSynchronizationClusterSetTimeZoneResponseParams (nil for 0).
 func MTRTimeSynchronizationClusterSetTimeZoneResponseParamsFromID(id objc.ID) *MTRTimeSynchronizationClusterSetTimeZoneResponseParams {
 	if id == 0 {
 		return nil

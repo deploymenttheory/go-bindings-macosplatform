@@ -18,11 +18,11 @@ type Project struct {
 // Unwrap returns the underlying [raw.PHProject].
 func (x *Project) Unwrap() *raw.PHProject { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Project) ID() objc.ID { return x.inner.Ptr() }
 
-// ProjectFromID adopts an existing toll-free-bridged object id as a Project (nil for 0).
+// ProjectFromID adopts an existing object pointer as a Project (nil for 0).
 func ProjectFromID(id objc.ID) *Project {
 	if id == 0 {
 		return nil

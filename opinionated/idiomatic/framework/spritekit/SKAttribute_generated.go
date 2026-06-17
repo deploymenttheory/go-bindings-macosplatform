@@ -19,11 +19,11 @@ type Attribute struct {
 // Unwrap returns the underlying [raw.SKAttribute].
 func (x *Attribute) Unwrap() *raw.SKAttribute { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Attribute) ID() objc.ID { return x.inner.Ptr() }
 
-// AttributeFromID adopts an existing toll-free-bridged object id as a Attribute (nil for 0).
+// AttributeFromID adopts an existing object pointer as a Attribute (nil for 0).
 func AttributeFromID(id objc.ID) *Attribute {
 	if id == 0 {
 		return nil

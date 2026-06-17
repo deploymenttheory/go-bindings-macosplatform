@@ -19,11 +19,11 @@ type TurnBasedParticipant struct {
 // Unwrap returns the underlying [raw.GKTurnBasedParticipant].
 func (x *TurnBasedParticipant) Unwrap() *raw.GKTurnBasedParticipant { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *TurnBasedParticipant) ID() objc.ID { return x.inner.Ptr() }
 
-// TurnBasedParticipantFromID adopts an existing toll-free-bridged object id as a TurnBasedParticipant (nil for 0).
+// TurnBasedParticipantFromID adopts an existing object pointer as a TurnBasedParticipant (nil for 0).
 func TurnBasedParticipantFromID(id objc.ID) *TurnBasedParticipant {
 	if id == 0 {
 		return nil

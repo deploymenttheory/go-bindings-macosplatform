@@ -19,11 +19,11 @@ type FileName struct {
 // Unwrap returns the underlying [raw.FSFileName].
 func (x *FileName) Unwrap() *raw.FSFileName { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *FileName) ID() objc.ID { return x.inner.Ptr() }
 
-// FileNameFromID adopts an existing toll-free-bridged object id as a FileName (nil for 0).
+// FileNameFromID adopts an existing object pointer as a FileName (nil for 0).
 func FileNameFromID(id objc.ID) *FileName {
 	if id == 0 {
 		return nil

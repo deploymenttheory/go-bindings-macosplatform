@@ -14,7 +14,7 @@ import (
 	"unsafe"
 )
 
-// AudioCodecAppendInputBufferList wraps [raw.AudioCodecAppendInputBufferList], bridging CFTypeRef arguments and the OSStatus result.
+// AudioCodecAppendInputBufferList wraps [raw.AudioCodecAppendInputBufferList], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func AudioCodecAppendInputBufferList(inCodec *carboncore.ComponentInstanceRecord, inBufferList *coreaudiotypes.AudioBufferList, ioNumberPackets *uint, inPacketDescription *coreaudiotypes.AudioStreamPacketDescription, outBytesConsumed *uint) error {
 	if _err := purego.NewOSStatus(raw.AudioCodecAppendInputBufferList(inCodec, inBufferList, ioNumberPackets, inPacketDescription, outBytesConsumed)).Err(); _err != nil {
 		return _err
@@ -22,7 +22,7 @@ func AudioCodecAppendInputBufferList(inCodec *carboncore.ComponentInstanceRecord
 	return nil
 }
 
-// AudioCodecGetPropertyInfo wraps [raw.AudioCodecGetPropertyInfo], bridging CFTypeRef arguments and the OSStatus result.
+// AudioCodecGetPropertyInfo wraps [raw.AudioCodecGetPropertyInfo], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func AudioCodecGetPropertyInfo(inCodec *carboncore.ComponentInstanceRecord, inPropertyID uint, outSize *uint, outWritable *uint8) error {
 	if _err := purego.NewOSStatus(raw.AudioCodecGetPropertyInfo(inCodec, inPropertyID, outSize, outWritable)).Err(); _err != nil {
 		return _err
@@ -30,7 +30,7 @@ func AudioCodecGetPropertyInfo(inCodec *carboncore.ComponentInstanceRecord, inPr
 	return nil
 }
 
-// AudioCodecProduceOutputBufferList wraps [raw.AudioCodecProduceOutputBufferList], bridging CFTypeRef arguments and the OSStatus result.
+// AudioCodecProduceOutputBufferList wraps [raw.AudioCodecProduceOutputBufferList], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func AudioCodecProduceOutputBufferList(inCodec *carboncore.ComponentInstanceRecord, ioBufferList *coreaudiotypes.AudioBufferList, ioNumberPackets *uint, outPacketDescription *coreaudiotypes.AudioStreamPacketDescription, outStatus *uint) error {
 	if _err := purego.NewOSStatus(raw.AudioCodecProduceOutputBufferList(inCodec, ioBufferList, ioNumberPackets, outPacketDescription, outStatus)).Err(); _err != nil {
 		return _err
@@ -38,7 +38,7 @@ func AudioCodecProduceOutputBufferList(inCodec *carboncore.ComponentInstanceReco
 	return nil
 }
 
-// AudioCodecReset wraps [raw.AudioCodecReset], bridging CFTypeRef arguments and the OSStatus result.
+// AudioCodecReset wraps [raw.AudioCodecReset], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func AudioCodecReset(inCodec *carboncore.ComponentInstanceRecord) error {
 	if _err := purego.NewOSStatus(raw.AudioCodecReset(inCodec)).Err(); _err != nil {
 		return _err
@@ -46,7 +46,7 @@ func AudioCodecReset(inCodec *carboncore.ComponentInstanceRecord) error {
 	return nil
 }
 
-// AudioCodecUninitialize wraps [raw.AudioCodecUninitialize], bridging CFTypeRef arguments and the OSStatus result.
+// AudioCodecUninitialize wraps [raw.AudioCodecUninitialize], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func AudioCodecUninitialize(inCodec *carboncore.ComponentInstanceRecord) error {
 	if _err := purego.NewOSStatus(raw.AudioCodecUninitialize(inCodec)).Err(); _err != nil {
 		return _err
@@ -54,7 +54,7 @@ func AudioCodecUninitialize(inCodec *carboncore.ComponentInstanceRecord) error {
 	return nil
 }
 
-// AudioComponentInstanceDispose wraps [raw.AudioComponentInstanceDispose], bridging CFTypeRef arguments and the OSStatus result.
+// AudioComponentInstanceDispose wraps [raw.AudioComponentInstanceDispose], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func AudioComponentInstanceDispose(inInstance *carboncore.ComponentInstanceRecord) error {
 	if _err := purego.NewOSStatus(raw.AudioComponentInstanceDispose(inInstance)).Err(); _err != nil {
 		return _err
@@ -62,7 +62,7 @@ func AudioComponentInstanceDispose(inInstance *carboncore.ComponentInstanceRecor
 	return nil
 }
 
-// AudioFileComponentCloseFile wraps [raw.AudioFileComponentCloseFile], bridging CFTypeRef arguments and the OSStatus result.
+// AudioFileComponentCloseFile wraps [raw.AudioFileComponentCloseFile], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func AudioFileComponentCloseFile(inComponent *carboncore.ComponentInstanceRecord) error {
 	if _err := purego.NewOSStatus(raw.AudioFileComponentCloseFile(inComponent)).Err(); _err != nil {
 		return _err
@@ -70,7 +70,7 @@ func AudioFileComponentCloseFile(inComponent *carboncore.ComponentInstanceRecord
 	return nil
 }
 
-// AudioFileComponentCountUserData wraps [raw.AudioFileComponentCountUserData], bridging CFTypeRef arguments and the OSStatus result.
+// AudioFileComponentCountUserData wraps [raw.AudioFileComponentCountUserData], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func AudioFileComponentCountUserData(inComponent *carboncore.ComponentInstanceRecord, inUserDataID uint, outNumberItems *uint) error {
 	if _err := purego.NewOSStatus(raw.AudioFileComponentCountUserData(inComponent, inUserDataID, outNumberItems)).Err(); _err != nil {
 		return _err
@@ -78,7 +78,7 @@ func AudioFileComponentCountUserData(inComponent *carboncore.ComponentInstanceRe
 	return nil
 }
 
-// AudioFileComponentCreate wraps [raw.AudioFileComponentCreate], bridging CFTypeRef arguments and the OSStatus result.
+// AudioFileComponentCreate wraps [raw.AudioFileComponentCreate], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func AudioFileComponentCreate(inComponent *carboncore.ComponentInstanceRecord, inParentRef *carboncore.FSRef, inFileName objc.ID, inFormat *coreaudiotypes.AudioStreamBasicDescription, inFlags uint, outNewFileRef *carboncore.FSRef) error {
 	if _err := purego.NewOSStatus(raw.AudioFileComponentCreate(inComponent, inParentRef, purego.CFRef(inFileName), inFormat, inFlags, outNewFileRef)).Err(); _err != nil {
 		return _err
@@ -86,7 +86,7 @@ func AudioFileComponentCreate(inComponent *carboncore.ComponentInstanceRecord, i
 	return nil
 }
 
-// AudioFileComponentCreateURL wraps [raw.AudioFileComponentCreateURL], bridging CFTypeRef arguments and the OSStatus result.
+// AudioFileComponentCreateURL wraps [raw.AudioFileComponentCreateURL], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func AudioFileComponentCreateURL(inComponent *carboncore.ComponentInstanceRecord, inFileRef objc.ID, inFormat *coreaudiotypes.AudioStreamBasicDescription, inFlags uint) error {
 	if _err := purego.NewOSStatus(raw.AudioFileComponentCreateURL(inComponent, purego.CFRef(inFileRef), inFormat, inFlags)).Err(); _err != nil {
 		return _err
@@ -94,7 +94,7 @@ func AudioFileComponentCreateURL(inComponent *carboncore.ComponentInstanceRecord
 	return nil
 }
 
-// AudioFileComponentExtensionIsThisFormat wraps [raw.AudioFileComponentExtensionIsThisFormat], bridging CFTypeRef arguments and the OSStatus result.
+// AudioFileComponentExtensionIsThisFormat wraps [raw.AudioFileComponentExtensionIsThisFormat], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func AudioFileComponentExtensionIsThisFormat(inComponent *carboncore.ComponentInstanceRecord, inExtension objc.ID, outResult *uint) error {
 	if _err := purego.NewOSStatus(raw.AudioFileComponentExtensionIsThisFormat(inComponent, purego.CFRef(inExtension), outResult)).Err(); _err != nil {
 		return _err
@@ -102,7 +102,7 @@ func AudioFileComponentExtensionIsThisFormat(inComponent *carboncore.ComponentIn
 	return nil
 }
 
-// AudioFileComponentFileIsThisFormat wraps [raw.AudioFileComponentFileIsThisFormat], bridging CFTypeRef arguments and the OSStatus result.
+// AudioFileComponentFileIsThisFormat wraps [raw.AudioFileComponentFileIsThisFormat], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func AudioFileComponentFileIsThisFormat(inComponent *carboncore.ComponentInstanceRecord, inFileRefNum int16, outResult *uint) error {
 	if _err := purego.NewOSStatus(raw.AudioFileComponentFileIsThisFormat(inComponent, inFileRefNum, outResult)).Err(); _err != nil {
 		return _err
@@ -110,7 +110,7 @@ func AudioFileComponentFileIsThisFormat(inComponent *carboncore.ComponentInstanc
 	return nil
 }
 
-// AudioFileComponentGetPropertyInfo wraps [raw.AudioFileComponentGetPropertyInfo], bridging CFTypeRef arguments and the OSStatus result.
+// AudioFileComponentGetPropertyInfo wraps [raw.AudioFileComponentGetPropertyInfo], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func AudioFileComponentGetPropertyInfo(inComponent *carboncore.ComponentInstanceRecord, inPropertyID uint, outPropertySize *uint, outWritable *uint) error {
 	if _err := purego.NewOSStatus(raw.AudioFileComponentGetPropertyInfo(inComponent, inPropertyID, outPropertySize, outWritable)).Err(); _err != nil {
 		return _err
@@ -118,7 +118,7 @@ func AudioFileComponentGetPropertyInfo(inComponent *carboncore.ComponentInstance
 	return nil
 }
 
-// AudioFileComponentGetUserDataSize wraps [raw.AudioFileComponentGetUserDataSize], bridging CFTypeRef arguments and the OSStatus result.
+// AudioFileComponentGetUserDataSize wraps [raw.AudioFileComponentGetUserDataSize], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func AudioFileComponentGetUserDataSize(inComponent *carboncore.ComponentInstanceRecord, inUserDataID uint, inIndex uint, outUserDataSize *uint) error {
 	if _err := purego.NewOSStatus(raw.AudioFileComponentGetUserDataSize(inComponent, inUserDataID, inIndex, outUserDataSize)).Err(); _err != nil {
 		return _err
@@ -126,7 +126,7 @@ func AudioFileComponentGetUserDataSize(inComponent *carboncore.ComponentInstance
 	return nil
 }
 
-// AudioFileComponentGetUserDataSize64 wraps [raw.AudioFileComponentGetUserDataSize64], bridging CFTypeRef arguments and the OSStatus result.
+// AudioFileComponentGetUserDataSize64 wraps [raw.AudioFileComponentGetUserDataSize64], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func AudioFileComponentGetUserDataSize64(inComponent *carboncore.ComponentInstanceRecord, inUserDataID uint, inIndex uint, outUserDataSize *uint64) error {
 	if _err := purego.NewOSStatus(raw.AudioFileComponentGetUserDataSize64(inComponent, inUserDataID, inIndex, outUserDataSize)).Err(); _err != nil {
 		return _err
@@ -134,7 +134,7 @@ func AudioFileComponentGetUserDataSize64(inComponent *carboncore.ComponentInstan
 	return nil
 }
 
-// AudioFileComponentInitialize wraps [raw.AudioFileComponentInitialize], bridging CFTypeRef arguments and the OSStatus result.
+// AudioFileComponentInitialize wraps [raw.AudioFileComponentInitialize], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func AudioFileComponentInitialize(inComponent *carboncore.ComponentInstanceRecord, inFileRef *carboncore.FSRef, inFormat *coreaudiotypes.AudioStreamBasicDescription, inFlags uint) error {
 	if _err := purego.NewOSStatus(raw.AudioFileComponentInitialize(inComponent, inFileRef, inFormat, inFlags)).Err(); _err != nil {
 		return _err
@@ -142,7 +142,7 @@ func AudioFileComponentInitialize(inComponent *carboncore.ComponentInstanceRecor
 	return nil
 }
 
-// AudioFileComponentOpenFile wraps [raw.AudioFileComponentOpenFile], bridging CFTypeRef arguments and the OSStatus result.
+// AudioFileComponentOpenFile wraps [raw.AudioFileComponentOpenFile], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func AudioFileComponentOpenFile(inComponent *carboncore.ComponentInstanceRecord, inFileRef *carboncore.FSRef, inPermissions int8, inRefNum int16) error {
 	if _err := purego.NewOSStatus(raw.AudioFileComponentOpenFile(inComponent, inFileRef, inPermissions, inRefNum)).Err(); _err != nil {
 		return _err
@@ -150,7 +150,7 @@ func AudioFileComponentOpenFile(inComponent *carboncore.ComponentInstanceRecord,
 	return nil
 }
 
-// AudioFileComponentOpenURL wraps [raw.AudioFileComponentOpenURL], bridging CFTypeRef arguments and the OSStatus result.
+// AudioFileComponentOpenURL wraps [raw.AudioFileComponentOpenURL], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func AudioFileComponentOpenURL(inComponent *carboncore.ComponentInstanceRecord, inFileRef objc.ID, inPermissions int8, inFileDescriptor int) error {
 	if _err := purego.NewOSStatus(raw.AudioFileComponentOpenURL(inComponent, purego.CFRef(inFileRef), inPermissions, inFileDescriptor)).Err(); _err != nil {
 		return _err
@@ -158,7 +158,7 @@ func AudioFileComponentOpenURL(inComponent *carboncore.ComponentInstanceRecord, 
 	return nil
 }
 
-// AudioFileComponentOptimize wraps [raw.AudioFileComponentOptimize], bridging CFTypeRef arguments and the OSStatus result.
+// AudioFileComponentOptimize wraps [raw.AudioFileComponentOptimize], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func AudioFileComponentOptimize(inComponent *carboncore.ComponentInstanceRecord) error {
 	if _err := purego.NewOSStatus(raw.AudioFileComponentOptimize(inComponent)).Err(); _err != nil {
 		return _err
@@ -166,7 +166,7 @@ func AudioFileComponentOptimize(inComponent *carboncore.ComponentInstanceRecord)
 	return nil
 }
 
-// AudioFileComponentRemoveUserData wraps [raw.AudioFileComponentRemoveUserData], bridging CFTypeRef arguments and the OSStatus result.
+// AudioFileComponentRemoveUserData wraps [raw.AudioFileComponentRemoveUserData], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func AudioFileComponentRemoveUserData(inComponent *carboncore.ComponentInstanceRecord, inUserDataID uint, inIndex uint) error {
 	if _err := purego.NewOSStatus(raw.AudioFileComponentRemoveUserData(inComponent, inUserDataID, inIndex)).Err(); _err != nil {
 		return _err
@@ -174,7 +174,7 @@ func AudioFileComponentRemoveUserData(inComponent *carboncore.ComponentInstanceR
 	return nil
 }
 
-// AudioHardwareServiceIsPropertySettable wraps [raw.AudioHardwareServiceIsPropertySettable], bridging CFTypeRef arguments and the OSStatus result.
+// AudioHardwareServiceIsPropertySettable wraps [raw.AudioHardwareServiceIsPropertySettable], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func AudioHardwareServiceIsPropertySettable(inObjectID uint, inAddress *coreaudio.AudioObjectPropertyAddress, outIsSettable *uint8) error {
 	if _err := purego.NewOSStatus(raw.AudioHardwareServiceIsPropertySettable(inObjectID, inAddress, outIsSettable)).Err(); _err != nil {
 		return _err
@@ -182,7 +182,7 @@ func AudioHardwareServiceIsPropertySettable(inObjectID uint, inAddress *coreaudi
 	return nil
 }
 
-// AudioOutputUnitStart wraps [raw.AudioOutputUnitStart], bridging CFTypeRef arguments and the OSStatus result.
+// AudioOutputUnitStart wraps [raw.AudioOutputUnitStart], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func AudioOutputUnitStart(ci *carboncore.ComponentInstanceRecord) error {
 	if _err := purego.NewOSStatus(raw.AudioOutputUnitStart(ci)).Err(); _err != nil {
 		return _err
@@ -190,7 +190,7 @@ func AudioOutputUnitStart(ci *carboncore.ComponentInstanceRecord) error {
 	return nil
 }
 
-// AudioOutputUnitStop wraps [raw.AudioOutputUnitStop], bridging CFTypeRef arguments and the OSStatus result.
+// AudioOutputUnitStop wraps [raw.AudioOutputUnitStop], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func AudioOutputUnitStop(ci *carboncore.ComponentInstanceRecord) error {
 	if _err := purego.NewOSStatus(raw.AudioOutputUnitStop(ci)).Err(); _err != nil {
 		return _err
@@ -198,7 +198,7 @@ func AudioOutputUnitStop(ci *carboncore.ComponentInstanceRecord) error {
 	return nil
 }
 
-// AudioServicesCreateSystemSoundID wraps [raw.AudioServicesCreateSystemSoundID], bridging CFTypeRef arguments and the OSStatus result.
+// AudioServicesCreateSystemSoundID wraps [raw.AudioServicesCreateSystemSoundID], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func AudioServicesCreateSystemSoundID(inFileURL objc.ID, outSystemSoundID *uint) error {
 	if _err := purego.NewOSStatus(raw.AudioServicesCreateSystemSoundID(purego.CFRef(inFileURL), outSystemSoundID)).Err(); _err != nil {
 		return _err
@@ -206,7 +206,7 @@ func AudioServicesCreateSystemSoundID(inFileURL objc.ID, outSystemSoundID *uint)
 	return nil
 }
 
-// AudioServicesDisposeSystemSoundID wraps [raw.AudioServicesDisposeSystemSoundID], bridging CFTypeRef arguments and the OSStatus result.
+// AudioServicesDisposeSystemSoundID wraps [raw.AudioServicesDisposeSystemSoundID], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func AudioServicesDisposeSystemSoundID(inSystemSoundID uint) error {
 	if _err := purego.NewOSStatus(raw.AudioServicesDisposeSystemSoundID(inSystemSoundID)).Err(); _err != nil {
 		return _err
@@ -214,7 +214,7 @@ func AudioServicesDisposeSystemSoundID(inSystemSoundID uint) error {
 	return nil
 }
 
-// AudioUnitExtensionSetComponentList wraps [raw.AudioUnitExtensionSetComponentList], bridging CFTypeRef arguments and the OSStatus result.
+// AudioUnitExtensionSetComponentList wraps [raw.AudioUnitExtensionSetComponentList], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func AudioUnitExtensionSetComponentList(extensionIdentifier objc.ID, audioComponentInfo objc.ID) error {
 	if _err := purego.NewOSStatus(raw.AudioUnitExtensionSetComponentList(purego.CFRef(extensionIdentifier), purego.CFRef(audioComponentInfo))).Err(); _err != nil {
 		return _err
@@ -222,7 +222,7 @@ func AudioUnitExtensionSetComponentList(extensionIdentifier objc.ID, audioCompon
 	return nil
 }
 
-// AudioUnitGetParameter wraps [raw.AudioUnitGetParameter], bridging CFTypeRef arguments and the OSStatus result.
+// AudioUnitGetParameter wraps [raw.AudioUnitGetParameter], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func AudioUnitGetParameter(inUnit *carboncore.ComponentInstanceRecord, inID uint, inScope uint, inElement uint, outValue *float32) error {
 	if _err := purego.NewOSStatus(raw.AudioUnitGetParameter(inUnit, inID, inScope, inElement, outValue)).Err(); _err != nil {
 		return _err
@@ -230,7 +230,7 @@ func AudioUnitGetParameter(inUnit *carboncore.ComponentInstanceRecord, inID uint
 	return nil
 }
 
-// AudioUnitGetPropertyInfo wraps [raw.AudioUnitGetPropertyInfo], bridging CFTypeRef arguments and the OSStatus result.
+// AudioUnitGetPropertyInfo wraps [raw.AudioUnitGetPropertyInfo], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func AudioUnitGetPropertyInfo(inUnit *carboncore.ComponentInstanceRecord, inID uint, inScope uint, inElement uint, outDataSize *uint, outWritable *uint8) error {
 	if _err := purego.NewOSStatus(raw.AudioUnitGetPropertyInfo(inUnit, inID, inScope, inElement, outDataSize, outWritable)).Err(); _err != nil {
 		return _err
@@ -238,7 +238,7 @@ func AudioUnitGetPropertyInfo(inUnit *carboncore.ComponentInstanceRecord, inID u
 	return nil
 }
 
-// AudioUnitInitialize wraps [raw.AudioUnitInitialize], bridging CFTypeRef arguments and the OSStatus result.
+// AudioUnitInitialize wraps [raw.AudioUnitInitialize], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func AudioUnitInitialize(inUnit *carboncore.ComponentInstanceRecord) error {
 	if _err := purego.NewOSStatus(raw.AudioUnitInitialize(inUnit)).Err(); _err != nil {
 		return _err
@@ -246,7 +246,7 @@ func AudioUnitInitialize(inUnit *carboncore.ComponentInstanceRecord) error {
 	return nil
 }
 
-// AudioUnitProcess wraps [raw.AudioUnitProcess], bridging CFTypeRef arguments and the OSStatus result.
+// AudioUnitProcess wraps [raw.AudioUnitProcess], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func AudioUnitProcess(inUnit *carboncore.ComponentInstanceRecord, ioActionFlags *raw.AudioUnitRenderActionFlags, inTimeStamp *coreaudiotypes.AudioTimeStamp, inNumberFrames uint, ioData *coreaudiotypes.AudioBufferList) error {
 	if _err := purego.NewOSStatus(raw.AudioUnitProcess(inUnit, ioActionFlags, inTimeStamp, inNumberFrames, ioData)).Err(); _err != nil {
 		return _err
@@ -254,7 +254,7 @@ func AudioUnitProcess(inUnit *carboncore.ComponentInstanceRecord, ioActionFlags 
 	return nil
 }
 
-// AudioUnitProcessMultiple wraps [raw.AudioUnitProcessMultiple], bridging CFTypeRef arguments and the OSStatus result.
+// AudioUnitProcessMultiple wraps [raw.AudioUnitProcessMultiple], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func AudioUnitProcessMultiple(inUnit *carboncore.ComponentInstanceRecord, ioActionFlags *raw.AudioUnitRenderActionFlags, inTimeStamp *coreaudiotypes.AudioTimeStamp, inNumberFrames uint, inNumberInputBufferLists uint, inInputBufferLists *coreaudiotypes.AudioBufferList, inNumberOutputBufferLists uint, ioOutputBufferLists *coreaudiotypes.AudioBufferList) error {
 	if _err := purego.NewOSStatus(raw.AudioUnitProcessMultiple(inUnit, ioActionFlags, inTimeStamp, inNumberFrames, inNumberInputBufferLists, inInputBufferLists, inNumberOutputBufferLists, ioOutputBufferLists)).Err(); _err != nil {
 		return _err
@@ -262,7 +262,7 @@ func AudioUnitProcessMultiple(inUnit *carboncore.ComponentInstanceRecord, ioActi
 	return nil
 }
 
-// AudioUnitRender wraps [raw.AudioUnitRender], bridging CFTypeRef arguments and the OSStatus result.
+// AudioUnitRender wraps [raw.AudioUnitRender], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func AudioUnitRender(inUnit *carboncore.ComponentInstanceRecord, ioActionFlags *raw.AudioUnitRenderActionFlags, inTimeStamp *coreaudiotypes.AudioTimeStamp, inOutputBusNumber uint, inNumberFrames uint, ioData *coreaudiotypes.AudioBufferList) error {
 	if _err := purego.NewOSStatus(raw.AudioUnitRender(inUnit, ioActionFlags, inTimeStamp, inOutputBusNumber, inNumberFrames, ioData)).Err(); _err != nil {
 		return _err
@@ -270,7 +270,7 @@ func AudioUnitRender(inUnit *carboncore.ComponentInstanceRecord, ioActionFlags *
 	return nil
 }
 
-// AudioUnitReset wraps [raw.AudioUnitReset], bridging CFTypeRef arguments and the OSStatus result.
+// AudioUnitReset wraps [raw.AudioUnitReset], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func AudioUnitReset(inUnit *carboncore.ComponentInstanceRecord, inScope uint, inElement uint) error {
 	if _err := purego.NewOSStatus(raw.AudioUnitReset(inUnit, inScope, inElement)).Err(); _err != nil {
 		return _err
@@ -278,7 +278,7 @@ func AudioUnitReset(inUnit *carboncore.ComponentInstanceRecord, inScope uint, in
 	return nil
 }
 
-// AudioUnitScheduleParameters wraps [raw.AudioUnitScheduleParameters], bridging CFTypeRef arguments and the OSStatus result.
+// AudioUnitScheduleParameters wraps [raw.AudioUnitScheduleParameters], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func AudioUnitScheduleParameters(inUnit *carboncore.ComponentInstanceRecord, inParameterEvent *raw.AudioUnitParameterEvent, inNumParamEvents uint) error {
 	if _err := purego.NewOSStatus(raw.AudioUnitScheduleParameters(inUnit, inParameterEvent, inNumParamEvents)).Err(); _err != nil {
 		return _err
@@ -286,7 +286,7 @@ func AudioUnitScheduleParameters(inUnit *carboncore.ComponentInstanceRecord, inP
 	return nil
 }
 
-// AudioUnitSetParameter wraps [raw.AudioUnitSetParameter], bridging CFTypeRef arguments and the OSStatus result.
+// AudioUnitSetParameter wraps [raw.AudioUnitSetParameter], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func AudioUnitSetParameter(inUnit *carboncore.ComponentInstanceRecord, inID uint, inScope uint, inElement uint, inValue float32, inBufferOffsetInFrames uint) error {
 	if _err := purego.NewOSStatus(raw.AudioUnitSetParameter(inUnit, inID, inScope, inElement, inValue, inBufferOffsetInFrames)).Err(); _err != nil {
 		return _err
@@ -294,7 +294,7 @@ func AudioUnitSetParameter(inUnit *carboncore.ComponentInstanceRecord, inID uint
 	return nil
 }
 
-// AudioUnitUninitialize wraps [raw.AudioUnitUninitialize], bridging CFTypeRef arguments and the OSStatus result.
+// AudioUnitUninitialize wraps [raw.AudioUnitUninitialize], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func AudioUnitUninitialize(inUnit *carboncore.ComponentInstanceRecord) error {
 	if _err := purego.NewOSStatus(raw.AudioUnitUninitialize(inUnit)).Err(); _err != nil {
 		return _err
@@ -302,7 +302,7 @@ func AudioUnitUninitialize(inUnit *carboncore.ComponentInstanceRecord) error {
 	return nil
 }
 
-// CopyInstrumentInfoFromSoundBank wraps [raw.CopyInstrumentInfoFromSoundBank], bridging CFTypeRef arguments and the OSStatus result.
+// CopyInstrumentInfoFromSoundBank wraps [raw.CopyInstrumentInfoFromSoundBank], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func CopyInstrumentInfoFromSoundBank(inURL objc.ID) (objc.ID, error) {
 	var _out0 uintptr
 	if _err := purego.NewOSStatus(raw.CopyInstrumentInfoFromSoundBank(purego.CFRef(inURL), unsafe.Pointer(&_out0))).Err(); _err != nil {
@@ -311,7 +311,7 @@ func CopyInstrumentInfoFromSoundBank(inURL objc.ID) (objc.ID, error) {
 	return objc.ID(_out0), nil
 }
 
-// CopyNameFromSoundBank wraps [raw.CopyNameFromSoundBank], bridging CFTypeRef arguments and the OSStatus result.
+// CopyNameFromSoundBank wraps [raw.CopyNameFromSoundBank], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func CopyNameFromSoundBank(inURL objc.ID) (objc.ID, error) {
 	var _out0 uintptr
 	if _err := purego.NewOSStatus(raw.CopyNameFromSoundBank(purego.CFRef(inURL), unsafe.Pointer(&_out0))).Err(); _err != nil {
@@ -320,7 +320,7 @@ func CopyNameFromSoundBank(inURL objc.ID) (objc.ID, error) {
 	return objc.ID(_out0), nil
 }
 
-// GetNameFromSoundBank wraps [raw.GetNameFromSoundBank], bridging CFTypeRef arguments and the OSStatus result.
+// GetNameFromSoundBank wraps [raw.GetNameFromSoundBank], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func GetNameFromSoundBank(inSoundBankRef *carboncore.FSRef) (objc.ID, error) {
 	var _out0 uintptr
 	if _err := purego.NewOSStatus(raw.GetNameFromSoundBank(inSoundBankRef, unsafe.Pointer(&_out0))).Err(); _err != nil {
@@ -329,7 +329,7 @@ func GetNameFromSoundBank(inSoundBankRef *carboncore.FSRef) (objc.ID, error) {
 	return objc.ID(_out0), nil
 }
 
-// MusicDeviceMIDIEvent wraps [raw.MusicDeviceMIDIEvent], bridging CFTypeRef arguments and the OSStatus result.
+// MusicDeviceMIDIEvent wraps [raw.MusicDeviceMIDIEvent], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MusicDeviceMIDIEvent(inUnit *carboncore.ComponentInstanceRecord, inStatus uint, inData1 uint, inData2 uint, inOffsetSampleFrame uint) error {
 	if _err := purego.NewOSStatus(raw.MusicDeviceMIDIEvent(inUnit, inStatus, inData1, inData2, inOffsetSampleFrame)).Err(); _err != nil {
 		return _err
@@ -337,7 +337,7 @@ func MusicDeviceMIDIEvent(inUnit *carboncore.ComponentInstanceRecord, inStatus u
 	return nil
 }
 
-// MusicDeviceMIDIEventList wraps [raw.MusicDeviceMIDIEventList], bridging CFTypeRef arguments and the OSStatus result.
+// MusicDeviceMIDIEventList wraps [raw.MusicDeviceMIDIEventList], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MusicDeviceMIDIEventList(inUnit *carboncore.ComponentInstanceRecord, inOffsetSampleFrame uint, evtList objc.ID) error {
 	if _err := purego.NewOSStatus(raw.MusicDeviceMIDIEventList(inUnit, inOffsetSampleFrame, evtList)).Err(); _err != nil {
 		return _err
@@ -345,7 +345,7 @@ func MusicDeviceMIDIEventList(inUnit *carboncore.ComponentInstanceRecord, inOffs
 	return nil
 }
 
-// MusicDevicePrepareInstrument wraps [raw.MusicDevicePrepareInstrument], bridging CFTypeRef arguments and the OSStatus result.
+// MusicDevicePrepareInstrument wraps [raw.MusicDevicePrepareInstrument], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MusicDevicePrepareInstrument(inUnit *carboncore.ComponentInstanceRecord, inInstrument uint) error {
 	if _err := purego.NewOSStatus(raw.MusicDevicePrepareInstrument(inUnit, inInstrument)).Err(); _err != nil {
 		return _err
@@ -353,7 +353,7 @@ func MusicDevicePrepareInstrument(inUnit *carboncore.ComponentInstanceRecord, in
 	return nil
 }
 
-// MusicDeviceReleaseInstrument wraps [raw.MusicDeviceReleaseInstrument], bridging CFTypeRef arguments and the OSStatus result.
+// MusicDeviceReleaseInstrument wraps [raw.MusicDeviceReleaseInstrument], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MusicDeviceReleaseInstrument(inUnit *carboncore.ComponentInstanceRecord, inInstrument uint) error {
 	if _err := purego.NewOSStatus(raw.MusicDeviceReleaseInstrument(inUnit, inInstrument)).Err(); _err != nil {
 		return _err
@@ -361,7 +361,7 @@ func MusicDeviceReleaseInstrument(inUnit *carboncore.ComponentInstanceRecord, in
 	return nil
 }
 
-// MusicDeviceStartNote wraps [raw.MusicDeviceStartNote], bridging CFTypeRef arguments and the OSStatus result.
+// MusicDeviceStartNote wraps [raw.MusicDeviceStartNote], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MusicDeviceStartNote(inUnit *carboncore.ComponentInstanceRecord, inInstrument uint, inGroupID uint, outNoteInstanceID *uint, inOffsetSampleFrame uint, inParams *raw.MusicDeviceNoteParams) error {
 	if _err := purego.NewOSStatus(raw.MusicDeviceStartNote(inUnit, inInstrument, inGroupID, outNoteInstanceID, inOffsetSampleFrame, inParams)).Err(); _err != nil {
 		return _err
@@ -369,7 +369,7 @@ func MusicDeviceStartNote(inUnit *carboncore.ComponentInstanceRecord, inInstrume
 	return nil
 }
 
-// MusicDeviceStopNote wraps [raw.MusicDeviceStopNote], bridging CFTypeRef arguments and the OSStatus result.
+// MusicDeviceStopNote wraps [raw.MusicDeviceStopNote], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MusicDeviceStopNote(inUnit *carboncore.ComponentInstanceRecord, inGroupID uint, inNoteInstanceID uint, inOffsetSampleFrame uint) error {
 	if _err := purego.NewOSStatus(raw.MusicDeviceStopNote(inUnit, inGroupID, inNoteInstanceID, inOffsetSampleFrame)).Err(); _err != nil {
 		return _err
@@ -377,7 +377,7 @@ func MusicDeviceStopNote(inUnit *carboncore.ComponentInstanceRecord, inGroupID u
 	return nil
 }
 
-// MusicDeviceSysEx wraps [raw.MusicDeviceSysEx], bridging CFTypeRef arguments and the OSStatus result.
+// MusicDeviceSysEx wraps [raw.MusicDeviceSysEx], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func MusicDeviceSysEx(inUnit *carboncore.ComponentInstanceRecord, inData *uint8, inLength uint) error {
 	if _err := purego.NewOSStatus(raw.MusicDeviceSysEx(inUnit, inData, inLength)).Err(); _err != nil {
 		return _err

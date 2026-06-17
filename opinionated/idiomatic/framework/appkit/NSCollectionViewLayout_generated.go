@@ -19,11 +19,11 @@ type CollectionViewLayout struct {
 // Unwrap returns the underlying [raw.NSCollectionViewLayout].
 func (x *CollectionViewLayout) Unwrap() *raw.NSCollectionViewLayout { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CollectionViewLayout) ID() objc.ID { return x.inner.Ptr() }
 
-// CollectionViewLayoutFromID adopts an existing toll-free-bridged object id as a CollectionViewLayout (nil for 0).
+// CollectionViewLayoutFromID adopts an existing object pointer as a CollectionViewLayout (nil for 0).
 func CollectionViewLayoutFromID(id objc.ID) *CollectionViewLayout {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type IOBluetoothHandsFree struct {
 // Unwrap returns the underlying [raw.IOBluetoothHandsFree].
 func (x *IOBluetoothHandsFree) Unwrap() *raw.IOBluetoothHandsFree { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *IOBluetoothHandsFree) ID() objc.ID { return x.inner.Ptr() }
 
-// IOBluetoothHandsFreeFromID adopts an existing toll-free-bridged object id as a IOBluetoothHandsFree (nil for 0).
+// IOBluetoothHandsFreeFromID adopts an existing object pointer as a IOBluetoothHandsFree (nil for 0).
 func IOBluetoothHandsFreeFromID(id objc.ID) *IOBluetoothHandsFree {
 	if id == 0 {
 		return nil

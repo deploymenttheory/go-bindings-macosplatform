@@ -19,11 +19,11 @@ type MediaSelectionOption struct {
 // Unwrap returns the underlying [raw.AVMediaSelectionOption].
 func (x *MediaSelectionOption) Unwrap() *raw.AVMediaSelectionOption { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MediaSelectionOption) ID() objc.ID { return x.inner.Ptr() }
 
-// MediaSelectionOptionFromID adopts an existing toll-free-bridged object id as a MediaSelectionOption (nil for 0).
+// MediaSelectionOptionFromID adopts an existing object pointer as a MediaSelectionOption (nil for 0).
 func MediaSelectionOptionFromID(id objc.ID) *MediaSelectionOption {
 	if id == 0 {
 		return nil

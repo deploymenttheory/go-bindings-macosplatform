@@ -18,11 +18,11 @@ type ColorSampler struct {
 // Unwrap returns the underlying [raw.NSColorSampler].
 func (x *ColorSampler) Unwrap() *raw.NSColorSampler { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ColorSampler) ID() objc.ID { return x.inner.Ptr() }
 
-// ColorSamplerFromID adopts an existing toll-free-bridged object id as a ColorSampler (nil for 0).
+// ColorSamplerFromID adopts an existing object pointer as a ColorSampler (nil for 0).
 func ColorSamplerFromID(id objc.ID) *ColorSampler {
 	if id == 0 {
 		return nil

@@ -21,11 +21,11 @@ type MTRBaseClusterPM10ConcentrationMeasurement struct {
 // Unwrap returns the underlying [raw.MTRBaseClusterPM10ConcentrationMeasurement].
 func (x *MTRBaseClusterPM10ConcentrationMeasurement) Unwrap() *raw.MTRBaseClusterPM10ConcentrationMeasurement { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRBaseClusterPM10ConcentrationMeasurement) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRBaseClusterPM10ConcentrationMeasurementFromID adopts an existing toll-free-bridged object id as a MTRBaseClusterPM10ConcentrationMeasurement (nil for 0).
+// MTRBaseClusterPM10ConcentrationMeasurementFromID adopts an existing object pointer as a MTRBaseClusterPM10ConcentrationMeasurement (nil for 0).
 func MTRBaseClusterPM10ConcentrationMeasurementFromID(id objc.ID) *MTRBaseClusterPM10ConcentrationMeasurement {
 	if id == 0 {
 		return nil

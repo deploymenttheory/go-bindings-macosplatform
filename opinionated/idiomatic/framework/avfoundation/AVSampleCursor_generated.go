@@ -20,11 +20,11 @@ type SampleCursor struct {
 // Unwrap returns the underlying [raw.AVSampleCursor].
 func (x *SampleCursor) Unwrap() *raw.AVSampleCursor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SampleCursor) ID() objc.ID { return x.inner.Ptr() }
 
-// SampleCursorFromID adopts an existing toll-free-bridged object id as a SampleCursor (nil for 0).
+// SampleCursorFromID adopts an existing object pointer as a SampleCursor (nil for 0).
 func SampleCursorFromID(id objc.ID) *SampleCursor {
 	if id == 0 {
 		return nil

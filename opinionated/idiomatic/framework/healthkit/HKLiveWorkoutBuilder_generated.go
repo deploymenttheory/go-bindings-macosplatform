@@ -17,11 +17,11 @@ type LiveWorkoutBuilder struct {
 // Unwrap returns the underlying [raw.HKLiveWorkoutBuilder].
 func (x *LiveWorkoutBuilder) Unwrap() *raw.HKLiveWorkoutBuilder { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *LiveWorkoutBuilder) ID() objc.ID { return x.inner.Ptr() }
 
-// LiveWorkoutBuilderFromID adopts an existing toll-free-bridged object id as a LiveWorkoutBuilder (nil for 0).
+// LiveWorkoutBuilderFromID adopts an existing object pointer as a LiveWorkoutBuilder (nil for 0).
 func LiveWorkoutBuilderFromID(id objc.ID) *LiveWorkoutBuilder {
 	if id == 0 {
 		return nil

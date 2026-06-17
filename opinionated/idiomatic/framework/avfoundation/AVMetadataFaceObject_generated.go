@@ -17,11 +17,11 @@ type MetadataFaceObject struct {
 // Unwrap returns the underlying [raw.AVMetadataFaceObject].
 func (x *MetadataFaceObject) Unwrap() *raw.AVMetadataFaceObject { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MetadataFaceObject) ID() objc.ID { return x.inner.Ptr() }
 
-// MetadataFaceObjectFromID adopts an existing toll-free-bridged object id as a MetadataFaceObject (nil for 0).
+// MetadataFaceObjectFromID adopts an existing object pointer as a MetadataFaceObject (nil for 0).
 func MetadataFaceObjectFromID(id objc.ID) *MetadataFaceObject {
 	if id == 0 {
 		return nil

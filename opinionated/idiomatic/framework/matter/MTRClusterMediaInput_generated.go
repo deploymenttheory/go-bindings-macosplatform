@@ -19,11 +19,11 @@ type MTRClusterMediaInput struct {
 // Unwrap returns the underlying [raw.MTRClusterMediaInput].
 func (x *MTRClusterMediaInput) Unwrap() *raw.MTRClusterMediaInput { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRClusterMediaInput) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRClusterMediaInputFromID adopts an existing toll-free-bridged object id as a MTRClusterMediaInput (nil for 0).
+// MTRClusterMediaInputFromID adopts an existing object pointer as a MTRClusterMediaInput (nil for 0).
 func MTRClusterMediaInputFromID(id objc.ID) *MTRClusterMediaInput {
 	if id == 0 {
 		return nil

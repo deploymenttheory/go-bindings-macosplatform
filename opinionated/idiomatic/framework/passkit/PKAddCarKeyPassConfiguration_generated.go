@@ -19,11 +19,11 @@ type AddCarKeyPassConfiguration struct {
 // Unwrap returns the underlying [raw.PKAddCarKeyPassConfiguration].
 func (x *AddCarKeyPassConfiguration) Unwrap() *raw.PKAddCarKeyPassConfiguration { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AddCarKeyPassConfiguration) ID() objc.ID { return x.inner.Ptr() }
 
-// AddCarKeyPassConfigurationFromID adopts an existing toll-free-bridged object id as a AddCarKeyPassConfiguration (nil for 0).
+// AddCarKeyPassConfigurationFromID adopts an existing object pointer as a AddCarKeyPassConfiguration (nil for 0).
 func AddCarKeyPassConfigurationFromID(id objc.ID) *AddCarKeyPassConfiguration {
 	if id == 0 {
 		return nil

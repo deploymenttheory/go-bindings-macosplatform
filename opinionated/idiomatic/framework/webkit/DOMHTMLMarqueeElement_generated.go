@@ -17,11 +17,11 @@ type DOMHTMLMarqueeElement struct {
 // Unwrap returns the underlying [raw.DOMHTMLMarqueeElement].
 func (x *DOMHTMLMarqueeElement) Unwrap() *raw.DOMHTMLMarqueeElement { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DOMHTMLMarqueeElement) ID() objc.ID { return x.inner.Ptr() }
 
-// DOMHTMLMarqueeElementFromID adopts an existing toll-free-bridged object id as a DOMHTMLMarqueeElement (nil for 0).
+// DOMHTMLMarqueeElementFromID adopts an existing object pointer as a DOMHTMLMarqueeElement (nil for 0).
 func DOMHTMLMarqueeElementFromID(id objc.ID) *DOMHTMLMarqueeElement {
 	if id == 0 {
 		return nil

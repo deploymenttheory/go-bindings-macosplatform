@@ -18,11 +18,11 @@ type OperationConfiguration struct {
 // Unwrap returns the underlying [raw.CKOperationConfiguration].
 func (x *OperationConfiguration) Unwrap() *raw.CKOperationConfiguration { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *OperationConfiguration) ID() objc.ID { return x.inner.Ptr() }
 
-// OperationConfigurationFromID adopts an existing toll-free-bridged object id as a OperationConfiguration (nil for 0).
+// OperationConfigurationFromID adopts an existing object pointer as a OperationConfiguration (nil for 0).
 func OperationConfigurationFromID(id objc.ID) *OperationConfiguration {
 	if id == 0 {
 		return nil

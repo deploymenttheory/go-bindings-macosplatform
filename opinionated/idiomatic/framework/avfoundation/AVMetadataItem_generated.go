@@ -21,11 +21,11 @@ type MetadataItem struct {
 // Unwrap returns the underlying [raw.AVMetadataItem].
 func (x *MetadataItem) Unwrap() *raw.AVMetadataItem { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MetadataItem) ID() objc.ID { return x.inner.Ptr() }
 
-// MetadataItemFromID adopts an existing toll-free-bridged object id as a MetadataItem (nil for 0).
+// MetadataItemFromID adopts an existing object pointer as a MetadataItem (nil for 0).
 func MetadataItemFromID(id objc.ID) *MetadataItem {
 	if id == 0 {
 		return nil

@@ -17,11 +17,11 @@ type DualShockGamepad struct {
 // Unwrap returns the underlying [raw.GCDualShockGamepad].
 func (x *DualShockGamepad) Unwrap() *raw.GCDualShockGamepad { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DualShockGamepad) ID() objc.ID { return x.inner.Ptr() }
 
-// DualShockGamepadFromID adopts an existing toll-free-bridged object id as a DualShockGamepad (nil for 0).
+// DualShockGamepadFromID adopts an existing object pointer as a DualShockGamepad (nil for 0).
 func DualShockGamepadFromID(id objc.ID) *DualShockGamepad {
 	if id == 0 {
 		return nil

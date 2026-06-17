@@ -20,11 +20,11 @@ type ContactStore struct {
 // Unwrap returns the underlying [raw.CNContactStore].
 func (x *ContactStore) Unwrap() *raw.CNContactStore { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ContactStore) ID() objc.ID { return x.inner.Ptr() }
 
-// ContactStoreFromID adopts an existing toll-free-bridged object id as a ContactStore (nil for 0).
+// ContactStoreFromID adopts an existing object pointer as a ContactStore (nil for 0).
 func ContactStoreFromID(id objc.ID) *ContactStore {
 	if id == 0 {
 		return nil

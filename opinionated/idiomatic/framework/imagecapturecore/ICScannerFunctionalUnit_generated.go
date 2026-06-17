@@ -21,11 +21,11 @@ type ScannerFunctionalUnit struct {
 // Unwrap returns the underlying [raw.ICScannerFunctionalUnit].
 func (x *ScannerFunctionalUnit) Unwrap() *raw.ICScannerFunctionalUnit { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ScannerFunctionalUnit) ID() objc.ID { return x.inner.Ptr() }
 
-// ScannerFunctionalUnitFromID adopts an existing toll-free-bridged object id as a ScannerFunctionalUnit (nil for 0).
+// ScannerFunctionalUnitFromID adopts an existing object pointer as a ScannerFunctionalUnit (nil for 0).
 func ScannerFunctionalUnitFromID(id objc.ID) *ScannerFunctionalUnit {
 	if id == 0 {
 		return nil

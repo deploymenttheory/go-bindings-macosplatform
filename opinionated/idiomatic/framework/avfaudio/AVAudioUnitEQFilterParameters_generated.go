@@ -17,11 +17,11 @@ type AudioUnitEQFilterParameters struct {
 // Unwrap returns the underlying [raw.AVAudioUnitEQFilterParameters].
 func (x *AudioUnitEQFilterParameters) Unwrap() *raw.AVAudioUnitEQFilterParameters { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AudioUnitEQFilterParameters) ID() objc.ID { return x.inner.Ptr() }
 
-// AudioUnitEQFilterParametersFromID adopts an existing toll-free-bridged object id as a AudioUnitEQFilterParameters (nil for 0).
+// AudioUnitEQFilterParametersFromID adopts an existing object pointer as a AudioUnitEQFilterParameters (nil for 0).
 func AudioUnitEQFilterParametersFromID(id objc.ID) *AudioUnitEQFilterParameters {
 	if id == 0 {
 		return nil

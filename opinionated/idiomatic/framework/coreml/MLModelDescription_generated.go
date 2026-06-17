@@ -19,11 +19,11 @@ type ModelDescription struct {
 // Unwrap returns the underlying [raw.MLModelDescription].
 func (x *ModelDescription) Unwrap() *raw.MLModelDescription { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ModelDescription) ID() objc.ID { return x.inner.Ptr() }
 
-// ModelDescriptionFromID adopts an existing toll-free-bridged object id as a ModelDescription (nil for 0).
+// ModelDescriptionFromID adopts an existing object pointer as a ModelDescription (nil for 0).
 func ModelDescriptionFromID(id objc.ID) *ModelDescription {
 	if id == 0 {
 		return nil

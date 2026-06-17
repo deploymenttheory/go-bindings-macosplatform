@@ -19,11 +19,11 @@ type StartCallIntent struct {
 // Unwrap returns the underlying [raw.INStartCallIntent].
 func (x *StartCallIntent) Unwrap() *raw.INStartCallIntent { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *StartCallIntent) ID() objc.ID { return x.inner.Ptr() }
 
-// StartCallIntentFromID adopts an existing toll-free-bridged object id as a StartCallIntent (nil for 0).
+// StartCallIntentFromID adopts an existing object pointer as a StartCallIntent (nil for 0).
 func StartCallIntentFromID(id objc.ID) *StartCallIntent {
 	if id == 0 {
 		return nil

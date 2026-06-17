@@ -18,11 +18,11 @@ type MTROvenCavityOperationalStateClusterStartParams struct {
 // Unwrap returns the underlying [raw.MTROvenCavityOperationalStateClusterStartParams].
 func (x *MTROvenCavityOperationalStateClusterStartParams) Unwrap() *raw.MTROvenCavityOperationalStateClusterStartParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTROvenCavityOperationalStateClusterStartParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTROvenCavityOperationalStateClusterStartParamsFromID adopts an existing toll-free-bridged object id as a MTROvenCavityOperationalStateClusterStartParams (nil for 0).
+// MTROvenCavityOperationalStateClusterStartParamsFromID adopts an existing object pointer as a MTROvenCavityOperationalStateClusterStartParams (nil for 0).
 func MTROvenCavityOperationalStateClusterStartParamsFromID(id objc.ID) *MTROvenCavityOperationalStateClusterStartParams {
 	if id == 0 {
 		return nil

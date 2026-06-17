@@ -19,11 +19,11 @@ type PaymentTokenContext struct {
 // Unwrap returns the underlying [raw.PKPaymentTokenContext].
 func (x *PaymentTokenContext) Unwrap() *raw.PKPaymentTokenContext { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PaymentTokenContext) ID() objc.ID { return x.inner.Ptr() }
 
-// PaymentTokenContextFromID adopts an existing toll-free-bridged object id as a PaymentTokenContext (nil for 0).
+// PaymentTokenContextFromID adopts an existing object pointer as a PaymentTokenContext (nil for 0).
 func PaymentTokenContextFromID(id objc.ID) *PaymentTokenContext {
 	if id == 0 {
 		return nil

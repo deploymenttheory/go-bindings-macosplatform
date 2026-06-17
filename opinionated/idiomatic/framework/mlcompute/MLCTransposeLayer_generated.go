@@ -19,11 +19,11 @@ type TransposeLayer struct {
 // Unwrap returns the underlying [raw.MLCTransposeLayer].
 func (x *TransposeLayer) Unwrap() *raw.MLCTransposeLayer { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *TransposeLayer) ID() objc.ID { return x.inner.Ptr() }
 
-// TransposeLayerFromID adopts an existing toll-free-bridged object id as a TransposeLayer (nil for 0).
+// TransposeLayerFromID adopts an existing object pointer as a TransposeLayer (nil for 0).
 func TransposeLayerFromID(id objc.ID) *TransposeLayer {
 	if id == 0 {
 		return nil

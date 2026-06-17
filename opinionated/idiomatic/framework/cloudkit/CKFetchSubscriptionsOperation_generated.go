@@ -20,11 +20,11 @@ type FetchSubscriptionsOperation struct {
 // Unwrap returns the underlying [raw.CKFetchSubscriptionsOperation].
 func (x *FetchSubscriptionsOperation) Unwrap() *raw.CKFetchSubscriptionsOperation { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *FetchSubscriptionsOperation) ID() objc.ID { return x.inner.Ptr() }
 
-// FetchSubscriptionsOperationFromID adopts an existing toll-free-bridged object id as a FetchSubscriptionsOperation (nil for 0).
+// FetchSubscriptionsOperationFromID adopts an existing object pointer as a FetchSubscriptionsOperation (nil for 0).
 func FetchSubscriptionsOperationFromID(id objc.ID) *FetchSubscriptionsOperation {
 	if id == 0 {
 		return nil

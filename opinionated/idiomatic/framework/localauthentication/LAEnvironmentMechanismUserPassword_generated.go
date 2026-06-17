@@ -17,11 +17,11 @@ type EnvironmentMechanismUserPassword struct {
 // Unwrap returns the underlying [raw.LAEnvironmentMechanismUserPassword].
 func (x *EnvironmentMechanismUserPassword) Unwrap() *raw.LAEnvironmentMechanismUserPassword { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *EnvironmentMechanismUserPassword) ID() objc.ID { return x.inner.Ptr() }
 
-// EnvironmentMechanismUserPasswordFromID adopts an existing toll-free-bridged object id as a EnvironmentMechanismUserPassword (nil for 0).
+// EnvironmentMechanismUserPasswordFromID adopts an existing object pointer as a EnvironmentMechanismUserPassword (nil for 0).
 func EnvironmentMechanismUserPasswordFromID(id objc.ID) *EnvironmentMechanismUserPassword {
 	if id == 0 {
 		return nil

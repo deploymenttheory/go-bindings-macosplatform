@@ -20,11 +20,11 @@ type XPCConnection struct {
 // Unwrap returns the underlying [raw.NSXPCConnection].
 func (x *XPCConnection) Unwrap() *raw.NSXPCConnection { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *XPCConnection) ID() objc.ID { return x.inner.Ptr() }
 
-// XPCConnectionFromID adopts an existing toll-free-bridged object id as a XPCConnection (nil for 0).
+// XPCConnectionFromID adopts an existing object pointer as a XPCConnection (nil for 0).
 func XPCConnectionFromID(id objc.ID) *XPCConnection {
 	if id == 0 {
 		return nil

@@ -17,11 +17,11 @@ type Range struct {
 // Unwrap returns the underlying [raw.SHRange].
 func (x *Range) Unwrap() *raw.SHRange { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Range) ID() objc.ID { return x.inner.Ptr() }
 
-// RangeFromID adopts an existing toll-free-bridged object id as a Range (nil for 0).
+// RangeFromID adopts an existing object pointer as a Range (nil for 0).
 func RangeFromID(id objc.ID) *Range {
 	if id == 0 {
 		return nil

@@ -17,11 +17,11 @@ type BackgroundExtensionView struct {
 // Unwrap returns the underlying [raw.NSBackgroundExtensionView].
 func (x *BackgroundExtensionView) Unwrap() *raw.NSBackgroundExtensionView { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *BackgroundExtensionView) ID() objc.ID { return x.inner.Ptr() }
 
-// BackgroundExtensionViewFromID adopts an existing toll-free-bridged object id as a BackgroundExtensionView (nil for 0).
+// BackgroundExtensionViewFromID adopts an existing object pointer as a BackgroundExtensionView (nil for 0).
 func BackgroundExtensionViewFromID(id objc.ID) *BackgroundExtensionView {
 	if id == 0 {
 		return nil

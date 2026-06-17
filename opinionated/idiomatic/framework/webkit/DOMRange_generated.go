@@ -19,11 +19,11 @@ type DOMRange struct {
 // Unwrap returns the underlying [raw.DOMRange].
 func (x *DOMRange) Unwrap() *raw.DOMRange { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DOMRange) ID() objc.ID { return x.inner.Ptr() }
 
-// DOMRangeFromID adopts an existing toll-free-bridged object id as a DOMRange (nil for 0).
+// DOMRangeFromID adopts an existing object pointer as a DOMRange (nil for 0).
 func DOMRangeFromID(id objc.ID) *DOMRange {
 	if id == 0 {
 		return nil

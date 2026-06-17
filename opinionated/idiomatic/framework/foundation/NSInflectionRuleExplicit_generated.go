@@ -17,11 +17,11 @@ type InflectionRuleExplicit struct {
 // Unwrap returns the underlying [raw.NSInflectionRuleExplicit].
 func (x *InflectionRuleExplicit) Unwrap() *raw.NSInflectionRuleExplicit { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *InflectionRuleExplicit) ID() objc.ID { return x.inner.Ptr() }
 
-// InflectionRuleExplicitFromID adopts an existing toll-free-bridged object id as a InflectionRuleExplicit (nil for 0).
+// InflectionRuleExplicitFromID adopts an existing object pointer as a InflectionRuleExplicit (nil for 0).
 func InflectionRuleExplicitFromID(id objc.ID) *InflectionRuleExplicit {
 	if id == 0 {
 		return nil

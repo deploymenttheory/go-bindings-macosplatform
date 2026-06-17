@@ -19,11 +19,11 @@ type ManagedObjectModelReference struct {
 // Unwrap returns the underlying [raw.NSManagedObjectModelReference].
 func (x *ManagedObjectModelReference) Unwrap() *raw.NSManagedObjectModelReference { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ManagedObjectModelReference) ID() objc.ID { return x.inner.Ptr() }
 
-// ManagedObjectModelReferenceFromID adopts an existing toll-free-bridged object id as a ManagedObjectModelReference (nil for 0).
+// ManagedObjectModelReferenceFromID adopts an existing object pointer as a ManagedObjectModelReference (nil for 0).
 func ManagedObjectModelReferenceFromID(id objc.ID) *ManagedObjectModelReference {
 	if id == 0 {
 		return nil

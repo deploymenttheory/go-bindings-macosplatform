@@ -21,11 +21,11 @@ type OutputSettingsAssistant struct {
 // Unwrap returns the underlying [raw.AVOutputSettingsAssistant].
 func (x *OutputSettingsAssistant) Unwrap() *raw.AVOutputSettingsAssistant { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *OutputSettingsAssistant) ID() objc.ID { return x.inner.Ptr() }
 
-// OutputSettingsAssistantFromID adopts an existing toll-free-bridged object id as a OutputSettingsAssistant (nil for 0).
+// OutputSettingsAssistantFromID adopts an existing object pointer as a OutputSettingsAssistant (nil for 0).
 func OutputSettingsAssistantFromID(id objc.ID) *OutputSettingsAssistant {
 	if id == 0 {
 		return nil

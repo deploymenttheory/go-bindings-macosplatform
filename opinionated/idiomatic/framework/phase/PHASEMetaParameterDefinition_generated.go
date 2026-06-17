@@ -17,11 +17,11 @@ type MetaParameterDefinition struct {
 // Unwrap returns the underlying [raw.PHASEMetaParameterDefinition].
 func (x *MetaParameterDefinition) Unwrap() *raw.PHASEMetaParameterDefinition { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MetaParameterDefinition) ID() objc.ID { return x.inner.Ptr() }
 
-// MetaParameterDefinitionFromID adopts an existing toll-free-bridged object id as a MetaParameterDefinition (nil for 0).
+// MetaParameterDefinitionFromID adopts an existing object pointer as a MetaParameterDefinition (nil for 0).
 func MetaParameterDefinitionFromID(id objc.ID) *MetaParameterDefinition {
 	if id == 0 {
 		return nil

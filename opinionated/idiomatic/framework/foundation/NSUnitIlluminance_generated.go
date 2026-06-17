@@ -17,11 +17,11 @@ type UnitIlluminance struct {
 // Unwrap returns the underlying [raw.NSUnitIlluminance].
 func (x *UnitIlluminance) Unwrap() *raw.NSUnitIlluminance { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *UnitIlluminance) ID() objc.ID { return x.inner.Ptr() }
 
-// UnitIlluminanceFromID adopts an existing toll-free-bridged object id as a UnitIlluminance (nil for 0).
+// UnitIlluminanceFromID adopts an existing object pointer as a UnitIlluminance (nil for 0).
 func UnitIlluminanceFromID(id objc.ID) *UnitIlluminance {
 	if id == 0 {
 		return nil

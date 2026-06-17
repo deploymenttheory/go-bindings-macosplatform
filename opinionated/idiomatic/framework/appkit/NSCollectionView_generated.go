@@ -21,11 +21,11 @@ type CollectionView struct {
 // Unwrap returns the underlying [raw.NSCollectionView].
 func (x *CollectionView) Unwrap() *raw.NSCollectionView { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CollectionView) ID() objc.ID { return x.inner.Ptr() }
 
-// CollectionViewFromID adopts an existing toll-free-bridged object id as a CollectionView (nil for 0).
+// CollectionViewFromID adopts an existing object pointer as a CollectionView (nil for 0).
 func CollectionViewFromID(id objc.ID) *CollectionView {
 	if id == 0 {
 		return nil

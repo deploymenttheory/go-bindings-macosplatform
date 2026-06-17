@@ -21,11 +21,11 @@ type NNReduceRowMean struct {
 // Unwrap returns the underlying [raw.MPSNNReduceRowMean].
 func (x *NNReduceRowMean) Unwrap() *raw.MPSNNReduceRowMean { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NNReduceRowMean) ID() objc.ID { return x.inner.Ptr() }
 
-// NNReduceRowMeanFromID adopts an existing toll-free-bridged object id as a NNReduceRowMean (nil for 0).
+// NNReduceRowMeanFromID adopts an existing object pointer as a NNReduceRowMean (nil for 0).
 func NNReduceRowMeanFromID(id objc.ID) *NNReduceRowMean {
 	if id == 0 {
 		return nil

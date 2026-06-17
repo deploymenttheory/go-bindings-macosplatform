@@ -19,11 +19,11 @@ type TextCheckingController struct {
 // Unwrap returns the underlying [raw.NSTextCheckingController].
 func (x *TextCheckingController) Unwrap() *raw.NSTextCheckingController { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *TextCheckingController) ID() objc.ID { return x.inner.Ptr() }
 
-// TextCheckingControllerFromID adopts an existing toll-free-bridged object id as a TextCheckingController (nil for 0).
+// TextCheckingControllerFromID adopts an existing object pointer as a TextCheckingController (nil for 0).
 func TextCheckingControllerFromID(id objc.ID) *TextCheckingController {
 	if id == 0 {
 		return nil

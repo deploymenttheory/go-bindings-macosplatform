@@ -19,11 +19,11 @@ type PhysicsBody struct {
 // Unwrap returns the underlying [raw.SKPhysicsBody].
 func (x *PhysicsBody) Unwrap() *raw.SKPhysicsBody { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PhysicsBody) ID() objc.ID { return x.inner.Ptr() }
 
-// PhysicsBodyFromID adopts an existing toll-free-bridged object id as a PhysicsBody (nil for 0).
+// PhysicsBodyFromID adopts an existing object pointer as a PhysicsBody (nil for 0).
 func PhysicsBodyFromID(id objc.ID) *PhysicsBody {
 	if id == 0 {
 		return nil

@@ -19,11 +19,11 @@ type MTRClusterMessages struct {
 // Unwrap returns the underlying [raw.MTRClusterMessages].
 func (x *MTRClusterMessages) Unwrap() *raw.MTRClusterMessages { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRClusterMessages) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRClusterMessagesFromID adopts an existing toll-free-bridged object id as a MTRClusterMessages (nil for 0).
+// MTRClusterMessagesFromID adopts an existing object pointer as a MTRClusterMessages (nil for 0).
 func MTRClusterMessagesFromID(id objc.ID) *MTRClusterMessages {
 	if id == 0 {
 		return nil

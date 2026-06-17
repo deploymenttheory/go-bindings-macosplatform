@@ -17,11 +17,11 @@ type RMSPropOptimizer struct {
 // Unwrap returns the underlying [raw.MLCRMSPropOptimizer].
 func (x *RMSPropOptimizer) Unwrap() *raw.MLCRMSPropOptimizer { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *RMSPropOptimizer) ID() objc.ID { return x.inner.Ptr() }
 
-// RMSPropOptimizerFromID adopts an existing toll-free-bridged object id as a RMSPropOptimizer (nil for 0).
+// RMSPropOptimizerFromID adopts an existing object pointer as a RMSPropOptimizer (nil for 0).
 func RMSPropOptimizerFromID(id objc.ID) *RMSPropOptimizer {
 	if id == 0 {
 		return nil

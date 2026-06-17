@@ -18,11 +18,11 @@ type CIDiscoveredNode struct {
 // Unwrap returns the underlying [raw.MIDICIDiscoveredNode].
 func (x *CIDiscoveredNode) Unwrap() *raw.MIDICIDiscoveredNode { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CIDiscoveredNode) ID() objc.ID { return x.inner.Ptr() }
 
-// CIDiscoveredNodeFromID adopts an existing toll-free-bridged object id as a CIDiscoveredNode (nil for 0).
+// CIDiscoveredNodeFromID adopts an existing object pointer as a CIDiscoveredNode (nil for 0).
 func CIDiscoveredNodeFromID(id objc.ID) *CIDiscoveredNode {
 	if id == 0 {
 		return nil

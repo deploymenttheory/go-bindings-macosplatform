@@ -18,11 +18,11 @@ type HistogramBucket struct {
 // Unwrap returns the underlying [raw.MXHistogramBucket].
 func (x *HistogramBucket) Unwrap() *raw.MXHistogramBucket[objc.ID] { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *HistogramBucket) ID() objc.ID { return x.inner.Ptr() }
 
-// HistogramBucketFromID adopts an existing toll-free-bridged object id as a HistogramBucket (nil for 0).
+// HistogramBucketFromID adopts an existing object pointer as a HistogramBucket (nil for 0).
 func HistogramBucketFromID(id objc.ID) *HistogramBucket {
 	if id == 0 {
 		return nil

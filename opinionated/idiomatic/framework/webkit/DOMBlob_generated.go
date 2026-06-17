@@ -17,11 +17,11 @@ type DOMBlob struct {
 // Unwrap returns the underlying [raw.DOMBlob].
 func (x *DOMBlob) Unwrap() *raw.DOMBlob { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DOMBlob) ID() objc.ID { return x.inner.Ptr() }
 
-// DOMBlobFromID adopts an existing toll-free-bridged object id as a DOMBlob (nil for 0).
+// DOMBlobFromID adopts an existing object pointer as a DOMBlob (nil for 0).
 func DOMBlobFromID(id objc.ID) *DOMBlob {
 	if id == 0 {
 		return nil

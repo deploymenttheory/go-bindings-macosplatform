@@ -21,11 +21,11 @@ type BluetoothPasskeyDisplay struct {
 // Unwrap returns the underlying [raw.IOBluetoothPasskeyDisplay].
 func (x *BluetoothPasskeyDisplay) Unwrap() *raw.IOBluetoothPasskeyDisplay { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *BluetoothPasskeyDisplay) ID() objc.ID { return x.inner.Ptr() }
 
-// BluetoothPasskeyDisplayFromID adopts an existing toll-free-bridged object id as a BluetoothPasskeyDisplay (nil for 0).
+// BluetoothPasskeyDisplayFromID adopts an existing object pointer as a BluetoothPasskeyDisplay (nil for 0).
 func BluetoothPasskeyDisplayFromID(id objc.ID) *BluetoothPasskeyDisplay {
 	if id == 0 {
 		return nil

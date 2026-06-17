@@ -21,11 +21,11 @@ type TextView struct {
 // Unwrap returns the underlying [raw.NSTextView].
 func (x *TextView) Unwrap() *raw.NSTextView { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *TextView) ID() objc.ID { return x.inner.Ptr() }
 
-// TextViewFromID adopts an existing toll-free-bridged object id as a TextView (nil for 0).
+// TextViewFromID adopts an existing object pointer as a TextView (nil for 0).
 func TextViewFromID(id objc.ID) *TextView {
 	if id == 0 {
 		return nil

@@ -17,11 +17,11 @@ type NNReductionFeatureChannelsArgumentMaxNode struct {
 // Unwrap returns the underlying [raw.MPSNNReductionFeatureChannelsArgumentMaxNode].
 func (x *NNReductionFeatureChannelsArgumentMaxNode) Unwrap() *raw.MPSNNReductionFeatureChannelsArgumentMaxNode { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NNReductionFeatureChannelsArgumentMaxNode) ID() objc.ID { return x.inner.Ptr() }
 
-// NNReductionFeatureChannelsArgumentMaxNodeFromID adopts an existing toll-free-bridged object id as a NNReductionFeatureChannelsArgumentMaxNode (nil for 0).
+// NNReductionFeatureChannelsArgumentMaxNodeFromID adopts an existing object pointer as a NNReductionFeatureChannelsArgumentMaxNode (nil for 0).
 func NNReductionFeatureChannelsArgumentMaxNodeFromID(id objc.ID) *NNReductionFeatureChannelsArgumentMaxNode {
 	if id == 0 {
 		return nil

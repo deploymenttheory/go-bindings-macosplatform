@@ -17,11 +17,11 @@ type ShuffledDistribution struct {
 // Unwrap returns the underlying [raw.GKShuffledDistribution].
 func (x *ShuffledDistribution) Unwrap() *raw.GKShuffledDistribution { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ShuffledDistribution) ID() objc.ID { return x.inner.Ptr() }
 
-// ShuffledDistributionFromID adopts an existing toll-free-bridged object id as a ShuffledDistribution (nil for 0).
+// ShuffledDistributionFromID adopts an existing object pointer as a ShuffledDistribution (nil for 0).
 func ShuffledDistributionFromID(id objc.ID) *ShuffledDistribution {
 	if id == 0 {
 		return nil

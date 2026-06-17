@@ -19,11 +19,11 @@ type CNNDropoutNode struct {
 // Unwrap returns the underlying [raw.MPSCNNDropoutNode].
 func (x *CNNDropoutNode) Unwrap() *raw.MPSCNNDropoutNode { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CNNDropoutNode) ID() objc.ID { return x.inner.Ptr() }
 
-// CNNDropoutNodeFromID adopts an existing toll-free-bridged object id as a CNNDropoutNode (nil for 0).
+// CNNDropoutNodeFromID adopts an existing object pointer as a CNNDropoutNode (nil for 0).
 func CNNDropoutNodeFromID(id objc.ID) *CNNDropoutNode {
 	if id == 0 {
 		return nil

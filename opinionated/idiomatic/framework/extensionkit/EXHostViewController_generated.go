@@ -19,11 +19,11 @@ type HostViewController struct {
 // Unwrap returns the underlying [raw.EXHostViewController].
 func (x *HostViewController) Unwrap() *raw.EXHostViewController { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *HostViewController) ID() objc.ID { return x.inner.Ptr() }
 
-// HostViewControllerFromID adopts an existing toll-free-bridged object id as a HostViewController (nil for 0).
+// HostViewControllerFromID adopts an existing object pointer as a HostViewController (nil for 0).
 func HostViewControllerFromID(id objc.ID) *HostViewController {
 	if id == 0 {
 		return nil

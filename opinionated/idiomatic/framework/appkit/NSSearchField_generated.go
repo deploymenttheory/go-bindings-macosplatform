@@ -21,11 +21,11 @@ type SearchField struct {
 // Unwrap returns the underlying [raw.NSSearchField].
 func (x *SearchField) Unwrap() *raw.NSSearchField { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SearchField) ID() objc.ID { return x.inner.Ptr() }
 
-// SearchFieldFromID adopts an existing toll-free-bridged object id as a SearchField (nil for 0).
+// SearchFieldFromID adopts an existing object pointer as a SearchField (nil for 0).
 func SearchFieldFromID(id objc.ID) *SearchField {
 	if id == 0 {
 		return nil

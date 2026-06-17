@@ -17,11 +17,11 @@ type MapItemDetailSelectionAccessoryPresentationStyle struct {
 // Unwrap returns the underlying [raw.MKMapItemDetailSelectionAccessoryPresentationStyle].
 func (x *MapItemDetailSelectionAccessoryPresentationStyle) Unwrap() *raw.MKMapItemDetailSelectionAccessoryPresentationStyle { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MapItemDetailSelectionAccessoryPresentationStyle) ID() objc.ID { return x.inner.Ptr() }
 
-// MapItemDetailSelectionAccessoryPresentationStyleFromID adopts an existing toll-free-bridged object id as a MapItemDetailSelectionAccessoryPresentationStyle (nil for 0).
+// MapItemDetailSelectionAccessoryPresentationStyleFromID adopts an existing object pointer as a MapItemDetailSelectionAccessoryPresentationStyle (nil for 0).
 func MapItemDetailSelectionAccessoryPresentationStyleFromID(id objc.ID) *MapItemDetailSelectionAccessoryPresentationStyle {
 	if id == 0 {
 		return nil

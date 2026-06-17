@@ -18,11 +18,11 @@ type MTRIdentifyClusterIdentifyParams struct {
 // Unwrap returns the underlying [raw.MTRIdentifyClusterIdentifyParams].
 func (x *MTRIdentifyClusterIdentifyParams) Unwrap() *raw.MTRIdentifyClusterIdentifyParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRIdentifyClusterIdentifyParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRIdentifyClusterIdentifyParamsFromID adopts an existing toll-free-bridged object id as a MTRIdentifyClusterIdentifyParams (nil for 0).
+// MTRIdentifyClusterIdentifyParamsFromID adopts an existing object pointer as a MTRIdentifyClusterIdentifyParams (nil for 0).
 func MTRIdentifyClusterIdentifyParamsFromID(id objc.ID) *MTRIdentifyClusterIdentifyParams {
 	if id == 0 {
 		return nil

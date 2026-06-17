@@ -18,11 +18,11 @@ type EffectPropertyMaterial struct {
 // Unwrap returns the underlying [raw.GLKEffectPropertyMaterial].
 func (x *EffectPropertyMaterial) Unwrap() *raw.GLKEffectPropertyMaterial { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *EffectPropertyMaterial) ID() objc.ID { return x.inner.Ptr() }
 
-// EffectPropertyMaterialFromID adopts an existing toll-free-bridged object id as a EffectPropertyMaterial (nil for 0).
+// EffectPropertyMaterialFromID adopts an existing object pointer as a EffectPropertyMaterial (nil for 0).
 func EffectPropertyMaterialFromID(id objc.ID) *EffectPropertyMaterial {
 	if id == 0 {
 		return nil

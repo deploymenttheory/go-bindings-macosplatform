@@ -17,11 +17,11 @@ type CNNDepthWiseConvolutionDescriptor struct {
 // Unwrap returns the underlying [raw.MPSCNNDepthWiseConvolutionDescriptor].
 func (x *CNNDepthWiseConvolutionDescriptor) Unwrap() *raw.MPSCNNDepthWiseConvolutionDescriptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CNNDepthWiseConvolutionDescriptor) ID() objc.ID { return x.inner.Ptr() }
 
-// CNNDepthWiseConvolutionDescriptorFromID adopts an existing toll-free-bridged object id as a CNNDepthWiseConvolutionDescriptor (nil for 0).
+// CNNDepthWiseConvolutionDescriptorFromID adopts an existing object pointer as a CNNDepthWiseConvolutionDescriptor (nil for 0).
 func CNNDepthWiseConvolutionDescriptorFromID(id objc.ID) *CNNDepthWiseConvolutionDescriptor {
 	if id == 0 {
 		return nil

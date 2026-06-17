@@ -18,11 +18,11 @@ type SCNNodeComponent struct {
 // Unwrap returns the underlying [raw.GKSCNNodeComponent].
 func (x *SCNNodeComponent) Unwrap() *raw.GKSCNNodeComponent { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SCNNodeComponent) ID() objc.ID { return x.inner.Ptr() }
 
-// SCNNodeComponentFromID adopts an existing toll-free-bridged object id as a SCNNodeComponent (nil for 0).
+// SCNNodeComponentFromID adopts an existing object pointer as a SCNNodeComponent (nil for 0).
 func SCNNodeComponentFromID(id objc.ID) *SCNNodeComponent {
 	if id == 0 {
 		return nil

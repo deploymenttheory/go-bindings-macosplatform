@@ -20,11 +20,11 @@ type BatchInsertRequest struct {
 // Unwrap returns the underlying [raw.NSBatchInsertRequest].
 func (x *BatchInsertRequest) Unwrap() *raw.NSBatchInsertRequest { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *BatchInsertRequest) ID() objc.ID { return x.inner.Ptr() }
 
-// BatchInsertRequestFromID adopts an existing toll-free-bridged object id as a BatchInsertRequest (nil for 0).
+// BatchInsertRequestFromID adopts an existing object pointer as a BatchInsertRequest (nil for 0).
 func BatchInsertRequestFromID(id objc.ID) *BatchInsertRequest {
 	if id == 0 {
 		return nil

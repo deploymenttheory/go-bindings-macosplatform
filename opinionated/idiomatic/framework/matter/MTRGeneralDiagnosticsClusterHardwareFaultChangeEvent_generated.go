@@ -18,11 +18,11 @@ type MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent struct {
 // Unwrap returns the underlying [raw.MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent].
 func (x *MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent) Unwrap() *raw.MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRGeneralDiagnosticsClusterHardwareFaultChangeEventFromID adopts an existing toll-free-bridged object id as a MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent (nil for 0).
+// MTRGeneralDiagnosticsClusterHardwareFaultChangeEventFromID adopts an existing object pointer as a MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent (nil for 0).
 func MTRGeneralDiagnosticsClusterHardwareFaultChangeEventFromID(id objc.ID) *MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent {
 	if id == 0 {
 		return nil

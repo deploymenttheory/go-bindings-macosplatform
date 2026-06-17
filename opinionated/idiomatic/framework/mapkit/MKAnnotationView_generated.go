@@ -21,11 +21,11 @@ type AnnotationView struct {
 // Unwrap returns the underlying [raw.MKAnnotationView].
 func (x *AnnotationView) Unwrap() *raw.MKAnnotationView { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AnnotationView) ID() objc.ID { return x.inner.Ptr() }
 
-// AnnotationViewFromID adopts an existing toll-free-bridged object id as a AnnotationView (nil for 0).
+// AnnotationViewFromID adopts an existing object pointer as a AnnotationView (nil for 0).
 func AnnotationViewFromID(id objc.ID) *AnnotationView {
 	if id == 0 {
 		return nil

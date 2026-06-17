@@ -20,11 +20,11 @@ type PrimitiveAccelerationStructureDescriptor struct {
 // Unwrap returns the underlying [raw.MTLPrimitiveAccelerationStructureDescriptor].
 func (x *PrimitiveAccelerationStructureDescriptor) Unwrap() *raw.MTLPrimitiveAccelerationStructureDescriptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PrimitiveAccelerationStructureDescriptor) ID() objc.ID { return x.inner.Ptr() }
 
-// PrimitiveAccelerationStructureDescriptorFromID adopts an existing toll-free-bridged object id as a PrimitiveAccelerationStructureDescriptor (nil for 0).
+// PrimitiveAccelerationStructureDescriptorFromID adopts an existing object pointer as a PrimitiveAccelerationStructureDescriptor (nil for 0).
 func PrimitiveAccelerationStructureDescriptorFromID(id objc.ID) *PrimitiveAccelerationStructureDescriptor {
 	if id == 0 {
 		return nil

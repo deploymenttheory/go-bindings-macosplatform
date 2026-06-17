@@ -19,11 +19,11 @@ type TextCheckingResult struct {
 // Unwrap returns the underlying [raw.NSTextCheckingResult].
 func (x *TextCheckingResult) Unwrap() *raw.NSTextCheckingResult { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *TextCheckingResult) ID() objc.ID { return x.inner.Ptr() }
 
-// TextCheckingResultFromID adopts an existing toll-free-bridged object id as a TextCheckingResult (nil for 0).
+// TextCheckingResultFromID adopts an existing object pointer as a TextCheckingResult (nil for 0).
 func TextCheckingResultFromID(id objc.ID) *TextCheckingResult {
 	if id == 0 {
 		return nil

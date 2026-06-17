@@ -18,11 +18,11 @@ type PolygonObstacle struct {
 // Unwrap returns the underlying [raw.GKPolygonObstacle].
 func (x *PolygonObstacle) Unwrap() *raw.GKPolygonObstacle { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PolygonObstacle) ID() objc.ID { return x.inner.Ptr() }
 
-// PolygonObstacleFromID adopts an existing toll-free-bridged object id as a PolygonObstacle (nil for 0).
+// PolygonObstacleFromID adopts an existing object pointer as a PolygonObstacle (nil for 0).
 func PolygonObstacleFromID(id objc.ID) *PolygonObstacle {
 	if id == 0 {
 		return nil

@@ -20,11 +20,11 @@ type GeneratePersonSegmentationRequest struct {
 // Unwrap returns the underlying [raw.VNGeneratePersonSegmentationRequest].
 func (x *GeneratePersonSegmentationRequest) Unwrap() *raw.VNGeneratePersonSegmentationRequest { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *GeneratePersonSegmentationRequest) ID() objc.ID { return x.inner.Ptr() }
 
-// GeneratePersonSegmentationRequestFromID adopts an existing toll-free-bridged object id as a GeneratePersonSegmentationRequest (nil for 0).
+// GeneratePersonSegmentationRequestFromID adopts an existing object pointer as a GeneratePersonSegmentationRequest (nil for 0).
 func GeneratePersonSegmentationRequestFromID(id objc.ID) *GeneratePersonSegmentationRequest {
 	if id == 0 {
 		return nil

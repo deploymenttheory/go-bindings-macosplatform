@@ -20,11 +20,11 @@ type MTRAttributeReport struct {
 // Unwrap returns the underlying [raw.MTRAttributeReport].
 func (x *MTRAttributeReport) Unwrap() *raw.MTRAttributeReport { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRAttributeReport) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRAttributeReportFromID adopts an existing toll-free-bridged object id as a MTRAttributeReport (nil for 0).
+// MTRAttributeReportFromID adopts an existing object pointer as a MTRAttributeReport (nil for 0).
 func MTRAttributeReportFromID(id objc.ID) *MTRAttributeReport {
 	if id == 0 {
 		return nil

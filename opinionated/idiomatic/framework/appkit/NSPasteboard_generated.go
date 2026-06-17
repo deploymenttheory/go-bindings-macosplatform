@@ -19,11 +19,11 @@ type Pasteboard struct {
 // Unwrap returns the underlying [raw.NSPasteboard].
 func (x *Pasteboard) Unwrap() *raw.NSPasteboard { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Pasteboard) ID() objc.ID { return x.inner.Ptr() }
 
-// PasteboardFromID adopts an existing toll-free-bridged object id as a Pasteboard (nil for 0).
+// PasteboardFromID adopts an existing object pointer as a Pasteboard (nil for 0).
 func PasteboardFromID(id objc.ID) *Pasteboard {
 	if id == 0 {
 		return nil

@@ -19,11 +19,11 @@ type ImageSobel struct {
 // Unwrap returns the underlying [raw.MPSImageSobel].
 func (x *ImageSobel) Unwrap() *raw.MPSImageSobel { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ImageSobel) ID() objc.ID { return x.inner.Ptr() }
 
-// ImageSobelFromID adopts an existing toll-free-bridged object id as a ImageSobel (nil for 0).
+// ImageSobelFromID adopts an existing object pointer as a ImageSobel (nil for 0).
 func ImageSobelFromID(id objc.ID) *ImageSobel {
 	if id == 0 {
 		return nil

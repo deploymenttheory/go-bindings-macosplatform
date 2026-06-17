@@ -17,11 +17,11 @@ type DecodeFrameOptions struct {
 // Unwrap returns the underlying [raw.MEDecodeFrameOptions].
 func (x *DecodeFrameOptions) Unwrap() *raw.MEDecodeFrameOptions { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DecodeFrameOptions) ID() objc.ID { return x.inner.Ptr() }
 
-// DecodeFrameOptionsFromID adopts an existing toll-free-bridged object id as a DecodeFrameOptions (nil for 0).
+// DecodeFrameOptionsFromID adopts an existing object pointer as a DecodeFrameOptions (nil for 0).
 func DecodeFrameOptionsFromID(id objc.ID) *DecodeFrameOptions {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct struct {
 // Unwrap returns the underlying [raw.MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct].
 func (x *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct) Unwrap() *raw.MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStructFromID adopts an existing toll-free-bridged object id as a MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct (nil for 0).
+// MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStructFromID adopts an existing object pointer as a MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct (nil for 0).
 func MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStructFromID(id objc.ID) *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct {
 	if id == 0 {
 		return nil

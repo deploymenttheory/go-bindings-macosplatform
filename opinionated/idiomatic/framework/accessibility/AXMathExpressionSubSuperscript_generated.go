@@ -19,11 +19,11 @@ type MathExpressionSubSuperscript struct {
 // Unwrap returns the underlying [raw.AXMathExpressionSubSuperscript].
 func (x *MathExpressionSubSuperscript) Unwrap() *raw.AXMathExpressionSubSuperscript { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MathExpressionSubSuperscript) ID() objc.ID { return x.inner.Ptr() }
 
-// MathExpressionSubSuperscriptFromID adopts an existing toll-free-bridged object id as a MathExpressionSubSuperscript (nil for 0).
+// MathExpressionSubSuperscriptFromID adopts an existing object pointer as a MathExpressionSubSuperscript (nil for 0).
 func MathExpressionSubSuperscriptFromID(id objc.ID) *MathExpressionSubSuperscript {
 	if id == 0 {
 		return nil

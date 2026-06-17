@@ -17,11 +17,11 @@ type MetadataDogHeadObject struct {
 // Unwrap returns the underlying [raw.AVMetadataDogHeadObject].
 func (x *MetadataDogHeadObject) Unwrap() *raw.AVMetadataDogHeadObject { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MetadataDogHeadObject) ID() objc.ID { return x.inner.Ptr() }
 
-// MetadataDogHeadObjectFromID adopts an existing toll-free-bridged object id as a MetadataDogHeadObject (nil for 0).
+// MetadataDogHeadObjectFromID adopts an existing object pointer as a MetadataDogHeadObject (nil for 0).
 func MetadataDogHeadObjectFromID(id objc.ID) *MetadataDogHeadObject {
 	if id == 0 {
 		return nil

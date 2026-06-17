@@ -18,11 +18,11 @@ type TemporaryVector struct {
 // Unwrap returns the underlying [raw.MPSTemporaryVector].
 func (x *TemporaryVector) Unwrap() *raw.MPSTemporaryVector { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *TemporaryVector) ID() objc.ID { return x.inner.Ptr() }
 
-// TemporaryVectorFromID adopts an existing toll-free-bridged object id as a TemporaryVector (nil for 0).
+// TemporaryVectorFromID adopts an existing object pointer as a TemporaryVector (nil for 0).
 func TemporaryVectorFromID(id objc.ID) *TemporaryVector {
 	if id == 0 {
 		return nil

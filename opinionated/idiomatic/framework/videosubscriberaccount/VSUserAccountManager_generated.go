@@ -21,11 +21,11 @@ type VSUserAccountManager struct {
 // Unwrap returns the underlying [raw.VSUserAccountManager].
 func (x *VSUserAccountManager) Unwrap() *raw.VSUserAccountManager { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *VSUserAccountManager) ID() objc.ID { return x.inner.Ptr() }
 
-// VSUserAccountManagerFromID adopts an existing toll-free-bridged object id as a VSUserAccountManager (nil for 0).
+// VSUserAccountManagerFromID adopts an existing object pointer as a VSUserAccountManager (nil for 0).
 func VSUserAccountManagerFromID(id objc.ID) *VSUserAccountManager {
 	if id == 0 {
 		return nil

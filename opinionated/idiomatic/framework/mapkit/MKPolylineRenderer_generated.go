@@ -17,11 +17,11 @@ type PolylineRenderer struct {
 // Unwrap returns the underlying [raw.MKPolylineRenderer].
 func (x *PolylineRenderer) Unwrap() *raw.MKPolylineRenderer { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PolylineRenderer) ID() objc.ID { return x.inner.Ptr() }
 
-// PolylineRendererFromID adopts an existing toll-free-bridged object id as a PolylineRenderer (nil for 0).
+// PolylineRendererFromID adopts an existing object pointer as a PolylineRenderer (nil for 0).
 func PolylineRendererFromID(id objc.ID) *PolylineRenderer {
 	if id == 0 {
 		return nil

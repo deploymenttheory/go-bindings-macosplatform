@@ -17,11 +17,11 @@ type LossLayer struct {
 // Unwrap returns the underlying [raw.MLCLossLayer].
 func (x *LossLayer) Unwrap() *raw.MLCLossLayer { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *LossLayer) ID() objc.ID { return x.inner.Ptr() }
 
-// LossLayerFromID adopts an existing toll-free-bridged object id as a LossLayer (nil for 0).
+// LossLayerFromID adopts an existing object pointer as a LossLayer (nil for 0).
 func LossLayerFromID(id objc.ID) *LossLayer {
 	if id == 0 {
 		return nil

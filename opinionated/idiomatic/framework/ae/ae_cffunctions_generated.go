@@ -7,9 +7,10 @@ package ae
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/ae"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/ebitengine/purego/objc"
 )
 
-// AECompareDesc wraps [raw.AECompareDesc], bridging CFTypeRef arguments and the OSStatus result.
+// AECompareDesc wraps [raw.AECompareDesc], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func AECompareDesc(desc1 *raw.AEDesc, desc2 *raw.AEDesc, resultP *uint8) error {
 	if _err := purego.NewOSStatus(raw.AECompareDesc(desc1, desc2, resultP)).Err(); _err != nil {
 		return _err
@@ -17,7 +18,7 @@ func AECompareDesc(desc1 *raw.AEDesc, desc2 *raw.AEDesc, resultP *uint8) error {
 	return nil
 }
 
-// AEDeterminePermissionToAutomateTarget wraps [raw.AEDeterminePermissionToAutomateTarget], bridging CFTypeRef arguments and the OSStatus result.
+// AEDeterminePermissionToAutomateTarget wraps [raw.AEDeterminePermissionToAutomateTarget], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func AEDeterminePermissionToAutomateTarget(target *raw.AEDesc, theAEEventClass uint, theAEEventID uint, askUserIfNeeded uint8) error {
 	if _err := purego.NewOSStatus(raw.AEDeterminePermissionToAutomateTarget(target, theAEEventClass, theAEEventID, askUserIfNeeded)).Err(); _err != nil {
 		return _err
@@ -25,7 +26,7 @@ func AEDeterminePermissionToAutomateTarget(target *raw.AEDesc, theAEEventClass u
 	return nil
 }
 
-// AEFlattenDesc wraps [raw.AEFlattenDesc], bridging CFTypeRef arguments and the OSStatus result.
+// AEFlattenDesc wraps [raw.AEFlattenDesc], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func AEFlattenDesc(theAEDesc *raw.AEDesc, buffer string, bufferSize int, actualSize *int) error {
 	if _err := purego.NewOSStatus(raw.AEFlattenDesc(theAEDesc, buffer, bufferSize, actualSize)).Err(); _err != nil {
 		return _err
@@ -33,7 +34,7 @@ func AEFlattenDesc(theAEDesc *raw.AEDesc, buffer string, bufferSize int, actualS
 	return nil
 }
 
-// AEPrintDescToHandle wraps [raw.AEPrintDescToHandle], bridging CFTypeRef arguments and the OSStatus result.
+// AEPrintDescToHandle wraps [raw.AEPrintDescToHandle], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func AEPrintDescToHandle(desc *raw.AEDesc, result **string) error {
 	if _err := purego.NewOSStatus(raw.AEPrintDescToHandle(desc, result)).Err(); _err != nil {
 		return _err
@@ -41,7 +42,7 @@ func AEPrintDescToHandle(desc *raw.AEDesc, result **string) error {
 	return nil
 }
 
-// AESendMessage wraps [raw.AESendMessage], bridging CFTypeRef arguments and the OSStatus result.
+// AESendMessage wraps [raw.AESendMessage], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func AESendMessage(event *raw.AEDesc, reply *raw.AEDesc, sendMode int, timeOutInTicks int) error {
 	if _err := purego.NewOSStatus(raw.AESendMessage(event, reply, sendMode, timeOutInTicks)).Err(); _err != nil {
 		return _err
@@ -49,7 +50,7 @@ func AESendMessage(event *raw.AEDesc, reply *raw.AEDesc, sendMode int, timeOutIn
 	return nil
 }
 
-// VAEBuildDesc wraps [raw.VAEBuildDesc], bridging CFTypeRef arguments and the OSStatus result.
+// VAEBuildDesc wraps [raw.VAEBuildDesc], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func VAEBuildDesc(dst *raw.AEDesc, error_ *raw.AEBuildError, src string, args string) error {
 	if _err := purego.NewOSStatus(raw.VAEBuildDesc(dst, error_, src, args)).Err(); _err != nil {
 		return _err
@@ -57,7 +58,7 @@ func VAEBuildDesc(dst *raw.AEDesc, error_ *raw.AEBuildError, src string, args st
 	return nil
 }
 
-// VAEBuildParameters wraps [raw.VAEBuildParameters], bridging CFTypeRef arguments and the OSStatus result.
+// VAEBuildParameters wraps [raw.VAEBuildParameters], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func VAEBuildParameters(event *raw.AEDesc, error_ *raw.AEBuildError, format string, args string) error {
 	if _err := purego.NewOSStatus(raw.VAEBuildParameters(event, error_, format, args)).Err(); _err != nil {
 		return _err

@@ -18,11 +18,11 @@ type EditMessageIntentResponse struct {
 // Unwrap returns the underlying [raw.INEditMessageIntentResponse].
 func (x *EditMessageIntentResponse) Unwrap() *raw.INEditMessageIntentResponse { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *EditMessageIntentResponse) ID() objc.ID { return x.inner.Ptr() }
 
-// EditMessageIntentResponseFromID adopts an existing toll-free-bridged object id as a EditMessageIntentResponse (nil for 0).
+// EditMessageIntentResponseFromID adopts an existing object pointer as a EditMessageIntentResponse (nil for 0).
 func EditMessageIntentResponseFromID(id objc.ID) *EditMessageIntentResponse {
 	if id == 0 {
 		return nil

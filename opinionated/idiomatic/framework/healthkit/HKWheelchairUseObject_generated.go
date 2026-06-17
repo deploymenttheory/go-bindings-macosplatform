@@ -17,11 +17,11 @@ type WheelchairUseObject struct {
 // Unwrap returns the underlying [raw.HKWheelchairUseObject].
 func (x *WheelchairUseObject) Unwrap() *raw.HKWheelchairUseObject { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *WheelchairUseObject) ID() objc.ID { return x.inner.Ptr() }
 
-// WheelchairUseObjectFromID adopts an existing toll-free-bridged object id as a WheelchairUseObject (nil for 0).
+// WheelchairUseObjectFromID adopts an existing object pointer as a WheelchairUseObject (nil for 0).
 func WheelchairUseObjectFromID(id objc.ID) *WheelchairUseObject {
 	if id == 0 {
 		return nil

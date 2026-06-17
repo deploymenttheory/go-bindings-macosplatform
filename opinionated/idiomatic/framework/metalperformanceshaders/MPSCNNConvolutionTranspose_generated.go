@@ -22,11 +22,11 @@ type CNNConvolutionTranspose struct {
 // Unwrap returns the underlying [raw.MPSCNNConvolutionTranspose].
 func (x *CNNConvolutionTranspose) Unwrap() *raw.MPSCNNConvolutionTranspose { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CNNConvolutionTranspose) ID() objc.ID { return x.inner.Ptr() }
 
-// CNNConvolutionTransposeFromID adopts an existing toll-free-bridged object id as a CNNConvolutionTranspose (nil for 0).
+// CNNConvolutionTransposeFromID adopts an existing object pointer as a CNNConvolutionTranspose (nil for 0).
 func CNNConvolutionTransposeFromID(id objc.ID) *CNNConvolutionTranspose {
 	if id == 0 {
 		return nil

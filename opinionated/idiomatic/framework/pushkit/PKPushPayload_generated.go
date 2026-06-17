@@ -19,11 +19,11 @@ type PushPayload struct {
 // Unwrap returns the underlying [raw.PKPushPayload].
 func (x *PushPayload) Unwrap() *raw.PKPushPayload { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PushPayload) ID() objc.ID { return x.inner.Ptr() }
 
-// PushPayloadFromID adopts an existing toll-free-bridged object id as a PushPayload (nil for 0).
+// PushPayloadFromID adopts an existing object pointer as a PushPayload (nil for 0).
 func PushPayloadFromID(id objc.ID) *PushPayload {
 	if id == 0 {
 		return nil

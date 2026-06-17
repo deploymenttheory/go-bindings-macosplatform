@@ -21,11 +21,11 @@ type MTRBaseClusterThermostatUserInterfaceConfiguration struct {
 // Unwrap returns the underlying [raw.MTRBaseClusterThermostatUserInterfaceConfiguration].
 func (x *MTRBaseClusterThermostatUserInterfaceConfiguration) Unwrap() *raw.MTRBaseClusterThermostatUserInterfaceConfiguration { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRBaseClusterThermostatUserInterfaceConfiguration) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRBaseClusterThermostatUserInterfaceConfigurationFromID adopts an existing toll-free-bridged object id as a MTRBaseClusterThermostatUserInterfaceConfiguration (nil for 0).
+// MTRBaseClusterThermostatUserInterfaceConfigurationFromID adopts an existing object pointer as a MTRBaseClusterThermostatUserInterfaceConfiguration (nil for 0).
 func MTRBaseClusterThermostatUserInterfaceConfigurationFromID(id objc.ID) *MTRBaseClusterThermostatUserInterfaceConfiguration {
 	if id == 0 {
 		return nil

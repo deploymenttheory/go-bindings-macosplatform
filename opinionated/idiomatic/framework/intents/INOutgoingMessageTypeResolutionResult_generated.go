@@ -17,11 +17,11 @@ type OutgoingMessageTypeResolutionResult struct {
 // Unwrap returns the underlying [raw.INOutgoingMessageTypeResolutionResult].
 func (x *OutgoingMessageTypeResolutionResult) Unwrap() *raw.INOutgoingMessageTypeResolutionResult { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *OutgoingMessageTypeResolutionResult) ID() objc.ID { return x.inner.Ptr() }
 
-// OutgoingMessageTypeResolutionResultFromID adopts an existing toll-free-bridged object id as a OutgoingMessageTypeResolutionResult (nil for 0).
+// OutgoingMessageTypeResolutionResultFromID adopts an existing object pointer as a OutgoingMessageTypeResolutionResult (nil for 0).
 func OutgoingMessageTypeResolutionResultFromID(id objc.ID) *OutgoingMessageTypeResolutionResult {
 	if id == 0 {
 		return nil

@@ -21,11 +21,11 @@ type NNReduceFeatureChannelsArgumentMin struct {
 // Unwrap returns the underlying [raw.MPSNNReduceFeatureChannelsArgumentMin].
 func (x *NNReduceFeatureChannelsArgumentMin) Unwrap() *raw.MPSNNReduceFeatureChannelsArgumentMin { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NNReduceFeatureChannelsArgumentMin) ID() objc.ID { return x.inner.Ptr() }
 
-// NNReduceFeatureChannelsArgumentMinFromID adopts an existing toll-free-bridged object id as a NNReduceFeatureChannelsArgumentMin (nil for 0).
+// NNReduceFeatureChannelsArgumentMinFromID adopts an existing object pointer as a NNReduceFeatureChannelsArgumentMin (nil for 0).
 func NNReduceFeatureChannelsArgumentMinFromID(id objc.ID) *NNReduceFeatureChannelsArgumentMin {
 	if id == 0 {
 		return nil

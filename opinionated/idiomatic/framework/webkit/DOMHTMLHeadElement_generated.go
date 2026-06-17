@@ -19,11 +19,11 @@ type DOMHTMLHeadElement struct {
 // Unwrap returns the underlying [raw.DOMHTMLHeadElement].
 func (x *DOMHTMLHeadElement) Unwrap() *raw.DOMHTMLHeadElement { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DOMHTMLHeadElement) ID() objc.ID { return x.inner.Ptr() }
 
-// DOMHTMLHeadElementFromID adopts an existing toll-free-bridged object id as a DOMHTMLHeadElement (nil for 0).
+// DOMHTMLHeadElementFromID adopts an existing object pointer as a DOMHTMLHeadElement (nil for 0).
 func DOMHTMLHeadElementFromID(id objc.ID) *DOMHTMLHeadElement {
 	if id == 0 {
 		return nil

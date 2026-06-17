@@ -17,11 +17,11 @@ type StatusBar struct {
 // Unwrap returns the underlying [raw.NSStatusBar].
 func (x *StatusBar) Unwrap() *raw.NSStatusBar { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *StatusBar) ID() objc.ID { return x.inner.Ptr() }
 
-// StatusBarFromID adopts an existing toll-free-bridged object id as a StatusBar (nil for 0).
+// StatusBarFromID adopts an existing object pointer as a StatusBar (nil for 0).
 func StatusBarFromID(id objc.ID) *StatusBar {
 	if id == 0 {
 		return nil

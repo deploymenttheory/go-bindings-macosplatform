@@ -17,11 +17,11 @@ type CalNthWeekDay struct {
 // Unwrap returns the underlying [raw.CalNthWeekDay].
 func (x *CalNthWeekDay) Unwrap() *raw.CalNthWeekDay { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CalNthWeekDay) ID() objc.ID { return x.inner.Ptr() }
 
-// CalNthWeekDayFromID adopts an existing toll-free-bridged object id as a CalNthWeekDay (nil for 0).
+// CalNthWeekDayFromID adopts an existing object pointer as a CalNthWeekDay (nil for 0).
 func CalNthWeekDayFromID(id objc.ID) *CalNthWeekDay {
 	if id == 0 {
 		return nil

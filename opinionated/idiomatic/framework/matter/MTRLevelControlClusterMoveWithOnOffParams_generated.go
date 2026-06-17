@@ -18,11 +18,11 @@ type MTRLevelControlClusterMoveWithOnOffParams struct {
 // Unwrap returns the underlying [raw.MTRLevelControlClusterMoveWithOnOffParams].
 func (x *MTRLevelControlClusterMoveWithOnOffParams) Unwrap() *raw.MTRLevelControlClusterMoveWithOnOffParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRLevelControlClusterMoveWithOnOffParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRLevelControlClusterMoveWithOnOffParamsFromID adopts an existing toll-free-bridged object id as a MTRLevelControlClusterMoveWithOnOffParams (nil for 0).
+// MTRLevelControlClusterMoveWithOnOffParamsFromID adopts an existing object pointer as a MTRLevelControlClusterMoveWithOnOffParams (nil for 0).
 func MTRLevelControlClusterMoveWithOnOffParamsFromID(id objc.ID) *MTRLevelControlClusterMoveWithOnOffParams {
 	if id == 0 {
 		return nil

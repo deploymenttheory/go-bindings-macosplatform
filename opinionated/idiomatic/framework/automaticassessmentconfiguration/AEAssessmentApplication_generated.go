@@ -19,11 +19,11 @@ type AssessmentApplication struct {
 // Unwrap returns the underlying [raw.AEAssessmentApplication].
 func (x *AssessmentApplication) Unwrap() *raw.AEAssessmentApplication { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AssessmentApplication) ID() objc.ID { return x.inner.Ptr() }
 
-// AssessmentApplicationFromID adopts an existing toll-free-bridged object id as a AssessmentApplication (nil for 0).
+// AssessmentApplicationFromID adopts an existing object pointer as a AssessmentApplication (nil for 0).
 func AssessmentApplicationFromID(id objc.ID) *AssessmentApplication {
 	if id == 0 {
 		return nil

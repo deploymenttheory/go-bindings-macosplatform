@@ -18,11 +18,11 @@ type DOMMouseEvent struct {
 // Unwrap returns the underlying [raw.DOMMouseEvent].
 func (x *DOMMouseEvent) Unwrap() *raw.DOMMouseEvent { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DOMMouseEvent) ID() objc.ID { return x.inner.Ptr() }
 
-// DOMMouseEventFromID adopts an existing toll-free-bridged object id as a DOMMouseEvent (nil for 0).
+// DOMMouseEventFromID adopts an existing object pointer as a DOMMouseEvent (nil for 0).
 func DOMMouseEventFromID(id objc.ID) *DOMMouseEvent {
 	if id == 0 {
 		return nil

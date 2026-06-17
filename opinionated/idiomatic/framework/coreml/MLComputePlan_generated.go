@@ -17,11 +17,11 @@ type ComputePlan struct {
 // Unwrap returns the underlying [raw.MLComputePlan].
 func (x *ComputePlan) Unwrap() *raw.MLComputePlan { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ComputePlan) ID() objc.ID { return x.inner.Ptr() }
 
-// ComputePlanFromID adopts an existing toll-free-bridged object id as a ComputePlan (nil for 0).
+// ComputePlanFromID adopts an existing object pointer as a ComputePlan (nil for 0).
 func ComputePlanFromID(id objc.ID) *ComputePlan {
 	if id == 0 {
 		return nil

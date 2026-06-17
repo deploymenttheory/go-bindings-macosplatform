@@ -17,11 +17,11 @@ type MapTable struct {
 // Unwrap returns the underlying [raw.NSMapTable].
 func (x *MapTable) Unwrap() *raw.NSMapTable[objc.ID, objc.ID] { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MapTable) ID() objc.ID { return x.inner.Ptr() }
 
-// MapTableFromID adopts an existing toll-free-bridged object id as a MapTable (nil for 0).
+// MapTableFromID adopts an existing object pointer as a MapTable (nil for 0).
 func MapTableFromID(id objc.ID) *MapTable {
 	if id == 0 {
 		return nil

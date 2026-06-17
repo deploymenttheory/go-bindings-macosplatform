@@ -17,11 +17,11 @@ type ControllerButtonInput struct {
 // Unwrap returns the underlying [raw.GCControllerButtonInput].
 func (x *ControllerButtonInput) Unwrap() *raw.GCControllerButtonInput { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ControllerButtonInput) ID() objc.ID { return x.inner.Ptr() }
 
-// ControllerButtonInputFromID adopts an existing toll-free-bridged object id as a ControllerButtonInput (nil for 0).
+// ControllerButtonInputFromID adopts an existing object pointer as a ControllerButtonInput (nil for 0).
 func ControllerButtonInputFromID(id objc.ID) *ControllerButtonInput {
 	if id == 0 {
 		return nil

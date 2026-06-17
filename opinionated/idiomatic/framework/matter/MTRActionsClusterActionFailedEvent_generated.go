@@ -18,11 +18,11 @@ type MTRActionsClusterActionFailedEvent struct {
 // Unwrap returns the underlying [raw.MTRActionsClusterActionFailedEvent].
 func (x *MTRActionsClusterActionFailedEvent) Unwrap() *raw.MTRActionsClusterActionFailedEvent { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRActionsClusterActionFailedEvent) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRActionsClusterActionFailedEventFromID adopts an existing toll-free-bridged object id as a MTRActionsClusterActionFailedEvent (nil for 0).
+// MTRActionsClusterActionFailedEventFromID adopts an existing object pointer as a MTRActionsClusterActionFailedEvent (nil for 0).
 func MTRActionsClusterActionFailedEventFromID(id objc.ID) *MTRActionsClusterActionFailedEvent {
 	if id == 0 {
 		return nil

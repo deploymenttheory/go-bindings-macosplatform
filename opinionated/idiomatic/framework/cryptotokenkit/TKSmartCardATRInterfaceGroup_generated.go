@@ -18,11 +18,11 @@ type SmartCardATRInterfaceGroup struct {
 // Unwrap returns the underlying [raw.TKSmartCardATRInterfaceGroup].
 func (x *SmartCardATRInterfaceGroup) Unwrap() *raw.TKSmartCardATRInterfaceGroup { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SmartCardATRInterfaceGroup) ID() objc.ID { return x.inner.Ptr() }
 
-// SmartCardATRInterfaceGroupFromID adopts an existing toll-free-bridged object id as a SmartCardATRInterfaceGroup (nil for 0).
+// SmartCardATRInterfaceGroupFromID adopts an existing object pointer as a SmartCardATRInterfaceGroup (nil for 0).
 func SmartCardATRInterfaceGroupFromID(id objc.ID) *SmartCardATRInterfaceGroup {
 	if id == 0 {
 		return nil

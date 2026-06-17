@@ -17,11 +17,11 @@ type ImageLaplacian struct {
 // Unwrap returns the underlying [raw.MPSImageLaplacian].
 func (x *ImageLaplacian) Unwrap() *raw.MPSImageLaplacian { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ImageLaplacian) ID() objc.ID { return x.inner.Ptr() }
 
-// ImageLaplacianFromID adopts an existing toll-free-bridged object id as a ImageLaplacian (nil for 0).
+// ImageLaplacianFromID adopts an existing object pointer as a ImageLaplacian (nil for 0).
 func ImageLaplacianFromID(id objc.ID) *ImageLaplacian {
 	if id == 0 {
 		return nil

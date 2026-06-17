@@ -19,11 +19,11 @@ type FSObject struct {
 // Unwrap returns the underlying [raw.DRFSObject].
 func (x *FSObject) Unwrap() *raw.DRFSObject { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *FSObject) ID() objc.ID { return x.inner.Ptr() }
 
-// FSObjectFromID adopts an existing toll-free-bridged object id as a FSObject (nil for 0).
+// FSObjectFromID adopts an existing object pointer as a FSObject (nil for 0).
 func FSObjectFromID(id objc.ID) *FSObject {
 	if id == 0 {
 		return nil

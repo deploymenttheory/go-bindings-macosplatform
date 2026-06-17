@@ -18,11 +18,11 @@ type MTRDoorLockClusterClearYearDayScheduleParams struct {
 // Unwrap returns the underlying [raw.MTRDoorLockClusterClearYearDayScheduleParams].
 func (x *MTRDoorLockClusterClearYearDayScheduleParams) Unwrap() *raw.MTRDoorLockClusterClearYearDayScheduleParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRDoorLockClusterClearYearDayScheduleParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRDoorLockClusterClearYearDayScheduleParamsFromID adopts an existing toll-free-bridged object id as a MTRDoorLockClusterClearYearDayScheduleParams (nil for 0).
+// MTRDoorLockClusterClearYearDayScheduleParamsFromID adopts an existing object pointer as a MTRDoorLockClusterClearYearDayScheduleParams (nil for 0).
 func MTRDoorLockClusterClearYearDayScheduleParamsFromID(id objc.ID) *MTRDoorLockClusterClearYearDayScheduleParams {
 	if id == 0 {
 		return nil

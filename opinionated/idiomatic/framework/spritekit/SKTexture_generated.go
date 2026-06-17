@@ -21,11 +21,11 @@ type Texture struct {
 // Unwrap returns the underlying [raw.SKTexture].
 func (x *Texture) Unwrap() *raw.SKTexture { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Texture) ID() objc.ID { return x.inner.Ptr() }
 
-// TextureFromID adopts an existing toll-free-bridged object id as a Texture (nil for 0).
+// TextureFromID adopts an existing object pointer as a Texture (nil for 0).
 func TextureFromID(id objc.ID) *Texture {
 	if id == 0 {
 		return nil

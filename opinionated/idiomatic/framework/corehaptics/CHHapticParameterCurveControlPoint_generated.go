@@ -17,11 +17,11 @@ type HapticParameterCurveControlPoint struct {
 // Unwrap returns the underlying [raw.CHHapticParameterCurveControlPoint].
 func (x *HapticParameterCurveControlPoint) Unwrap() *raw.CHHapticParameterCurveControlPoint { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *HapticParameterCurveControlPoint) ID() objc.ID { return x.inner.Ptr() }
 
-// HapticParameterCurveControlPointFromID adopts an existing toll-free-bridged object id as a HapticParameterCurveControlPoint (nil for 0).
+// HapticParameterCurveControlPointFromID adopts an existing object pointer as a HapticParameterCurveControlPoint (nil for 0).
 func HapticParameterCurveControlPointFromID(id objc.ID) *HapticParameterCurveControlPoint {
 	if id == 0 {
 		return nil

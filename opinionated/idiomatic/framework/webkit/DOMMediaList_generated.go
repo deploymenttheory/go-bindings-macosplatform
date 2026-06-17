@@ -19,11 +19,11 @@ type DOMMediaList struct {
 // Unwrap returns the underlying [raw.DOMMediaList].
 func (x *DOMMediaList) Unwrap() *raw.DOMMediaList { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DOMMediaList) ID() objc.ID { return x.inner.Ptr() }
 
-// DOMMediaListFromID adopts an existing toll-free-bridged object id as a DOMMediaList (nil for 0).
+// DOMMediaListFromID adopts an existing object pointer as a DOMMediaList (nil for 0).
 func DOMMediaListFromID(id objc.ID) *DOMMediaList {
 	if id == 0 {
 		return nil

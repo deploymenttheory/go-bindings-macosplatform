@@ -19,11 +19,11 @@ type ScannerFunctionalUnitNegativeTransparency struct {
 // Unwrap returns the underlying [raw.ICScannerFunctionalUnitNegativeTransparency].
 func (x *ScannerFunctionalUnitNegativeTransparency) Unwrap() *raw.ICScannerFunctionalUnitNegativeTransparency { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ScannerFunctionalUnitNegativeTransparency) ID() objc.ID { return x.inner.Ptr() }
 
-// ScannerFunctionalUnitNegativeTransparencyFromID adopts an existing toll-free-bridged object id as a ScannerFunctionalUnitNegativeTransparency (nil for 0).
+// ScannerFunctionalUnitNegativeTransparencyFromID adopts an existing object pointer as a ScannerFunctionalUnitNegativeTransparency (nil for 0).
 func ScannerFunctionalUnitNegativeTransparencyFromID(id objc.ID) *ScannerFunctionalUnitNegativeTransparency {
 	if id == 0 {
 		return nil

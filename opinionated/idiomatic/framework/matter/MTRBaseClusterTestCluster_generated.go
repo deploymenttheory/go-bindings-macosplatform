@@ -21,11 +21,11 @@ type MTRBaseClusterTestCluster struct {
 // Unwrap returns the underlying [raw.MTRBaseClusterTestCluster].
 func (x *MTRBaseClusterTestCluster) Unwrap() *raw.MTRBaseClusterTestCluster { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRBaseClusterTestCluster) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRBaseClusterTestClusterFromID adopts an existing toll-free-bridged object id as a MTRBaseClusterTestCluster (nil for 0).
+// MTRBaseClusterTestClusterFromID adopts an existing object pointer as a MTRBaseClusterTestCluster (nil for 0).
 func MTRBaseClusterTestClusterFromID(id objc.ID) *MTRBaseClusterTestCluster {
 	if id == 0 {
 		return nil

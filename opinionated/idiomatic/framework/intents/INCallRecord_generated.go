@@ -19,11 +19,11 @@ type CallRecord struct {
 // Unwrap returns the underlying [raw.INCallRecord].
 func (x *CallRecord) Unwrap() *raw.INCallRecord { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CallRecord) ID() objc.ID { return x.inner.Ptr() }
 
-// CallRecordFromID adopts an existing toll-free-bridged object id as a CallRecord (nil for 0).
+// CallRecordFromID adopts an existing object pointer as a CallRecord (nil for 0).
 func CallRecordFromID(id objc.ID) *CallRecord {
 	if id == 0 {
 		return nil

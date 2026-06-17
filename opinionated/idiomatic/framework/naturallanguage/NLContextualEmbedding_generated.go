@@ -20,11 +20,11 @@ type ContextualEmbedding struct {
 // Unwrap returns the underlying [raw.NLContextualEmbedding].
 func (x *ContextualEmbedding) Unwrap() *raw.NLContextualEmbedding { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ContextualEmbedding) ID() objc.ID { return x.inner.Ptr() }
 
-// ContextualEmbeddingFromID adopts an existing toll-free-bridged object id as a ContextualEmbedding (nil for 0).
+// ContextualEmbeddingFromID adopts an existing object pointer as a ContextualEmbedding (nil for 0).
 func ContextualEmbeddingFromID(id objc.ID) *ContextualEmbedding {
 	if id == 0 {
 		return nil

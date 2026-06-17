@@ -18,11 +18,11 @@ type MutableCharacterSet struct {
 // Unwrap returns the underlying [raw.NSMutableCharacterSet].
 func (x *MutableCharacterSet) Unwrap() *raw.NSMutableCharacterSet { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MutableCharacterSet) ID() objc.ID { return x.inner.Ptr() }
 
-// MutableCharacterSetFromID adopts an existing toll-free-bridged object id as a MutableCharacterSet (nil for 0).
+// MutableCharacterSetFromID adopts an existing object pointer as a MutableCharacterSet (nil for 0).
 func MutableCharacterSetFromID(id objc.ID) *MutableCharacterSet {
 	if id == 0 {
 		return nil

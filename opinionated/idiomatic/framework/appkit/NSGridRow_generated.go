@@ -18,11 +18,11 @@ type GridRow struct {
 // Unwrap returns the underlying [raw.NSGridRow].
 func (x *GridRow) Unwrap() *raw.NSGridRow { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *GridRow) ID() objc.ID { return x.inner.Ptr() }
 
-// GridRowFromID adopts an existing toll-free-bridged object id as a GridRow (nil for 0).
+// GridRowFromID adopts an existing object pointer as a GridRow (nil for 0).
 func GridRowFromID(id objc.ID) *GridRow {
 	if id == 0 {
 		return nil

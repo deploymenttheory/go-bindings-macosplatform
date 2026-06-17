@@ -19,11 +19,11 @@ type MigrationStage struct {
 // Unwrap returns the underlying [raw.NSMigrationStage].
 func (x *MigrationStage) Unwrap() *raw.NSMigrationStage { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MigrationStage) ID() objc.ID { return x.inner.Ptr() }
 
-// MigrationStageFromID adopts an existing toll-free-bridged object id as a MigrationStage (nil for 0).
+// MigrationStageFromID adopts an existing object pointer as a MigrationStage (nil for 0).
 func MigrationStageFromID(id objc.ID) *MigrationStage {
 	if id == 0 {
 		return nil

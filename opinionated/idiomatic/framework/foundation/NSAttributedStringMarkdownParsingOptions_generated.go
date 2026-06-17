@@ -18,11 +18,11 @@ type AttributedStringMarkdownParsingOptions struct {
 // Unwrap returns the underlying [raw.NSAttributedStringMarkdownParsingOptions].
 func (x *AttributedStringMarkdownParsingOptions) Unwrap() *raw.NSAttributedStringMarkdownParsingOptions { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AttributedStringMarkdownParsingOptions) ID() objc.ID { return x.inner.Ptr() }
 
-// AttributedStringMarkdownParsingOptionsFromID adopts an existing toll-free-bridged object id as a AttributedStringMarkdownParsingOptions (nil for 0).
+// AttributedStringMarkdownParsingOptionsFromID adopts an existing object pointer as a AttributedStringMarkdownParsingOptions (nil for 0).
 func AttributedStringMarkdownParsingOptionsFromID(id objc.ID) *AttributedStringMarkdownParsingOptions {
 	if id == 0 {
 		return nil

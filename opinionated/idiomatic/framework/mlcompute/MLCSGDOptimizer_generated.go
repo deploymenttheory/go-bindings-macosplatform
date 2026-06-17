@@ -17,11 +17,11 @@ type SGDOptimizer struct {
 // Unwrap returns the underlying [raw.MLCSGDOptimizer].
 func (x *SGDOptimizer) Unwrap() *raw.MLCSGDOptimizer { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SGDOptimizer) ID() objc.ID { return x.inner.Ptr() }
 
-// SGDOptimizerFromID adopts an existing toll-free-bridged object id as a SGDOptimizer (nil for 0).
+// SGDOptimizerFromID adopts an existing object pointer as a SGDOptimizer (nil for 0).
 func SGDOptimizerFromID(id objc.ID) *SGDOptimizer {
 	if id == 0 {
 		return nil

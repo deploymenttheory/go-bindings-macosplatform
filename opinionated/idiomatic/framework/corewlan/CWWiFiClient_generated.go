@@ -19,11 +19,11 @@ type WiFiClient struct {
 // Unwrap returns the underlying [raw.CWWiFiClient].
 func (x *WiFiClient) Unwrap() *raw.CWWiFiClient { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *WiFiClient) ID() objc.ID { return x.inner.Ptr() }
 
-// WiFiClientFromID adopts an existing toll-free-bridged object id as a WiFiClient (nil for 0).
+// WiFiClientFromID adopts an existing object pointer as a WiFiClient (nil for 0).
 func WiFiClientFromID(id objc.ID) *WiFiClient {
 	if id == 0 {
 		return nil

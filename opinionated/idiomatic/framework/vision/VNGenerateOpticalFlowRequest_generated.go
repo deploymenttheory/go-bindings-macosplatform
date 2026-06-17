@@ -17,11 +17,11 @@ type GenerateOpticalFlowRequest struct {
 // Unwrap returns the underlying [raw.VNGenerateOpticalFlowRequest].
 func (x *GenerateOpticalFlowRequest) Unwrap() *raw.VNGenerateOpticalFlowRequest { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *GenerateOpticalFlowRequest) ID() objc.ID { return x.inner.Ptr() }
 
-// GenerateOpticalFlowRequestFromID adopts an existing toll-free-bridged object id as a GenerateOpticalFlowRequest (nil for 0).
+// GenerateOpticalFlowRequestFromID adopts an existing object pointer as a GenerateOpticalFlowRequest (nil for 0).
 func GenerateOpticalFlowRequestFromID(id objc.ID) *GenerateOpticalFlowRequest {
 	if id == 0 {
 		return nil

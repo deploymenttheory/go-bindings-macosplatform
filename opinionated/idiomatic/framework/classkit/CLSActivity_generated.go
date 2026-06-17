@@ -18,11 +18,11 @@ type Activity struct {
 // Unwrap returns the underlying [raw.CLSActivity].
 func (x *Activity) Unwrap() *raw.CLSActivity { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Activity) ID() objc.ID { return x.inner.Ptr() }
 
-// ActivityFromID adopts an existing toll-free-bridged object id as a Activity (nil for 0).
+// ActivityFromID adopts an existing object pointer as a Activity (nil for 0).
 func ActivityFromID(id objc.ID) *Activity {
 	if id == 0 {
 		return nil

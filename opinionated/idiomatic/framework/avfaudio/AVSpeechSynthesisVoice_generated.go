@@ -19,11 +19,11 @@ type SpeechSynthesisVoice struct {
 // Unwrap returns the underlying [raw.AVSpeechSynthesisVoice].
 func (x *SpeechSynthesisVoice) Unwrap() *raw.AVSpeechSynthesisVoice { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SpeechSynthesisVoice) ID() objc.ID { return x.inner.Ptr() }
 
-// SpeechSynthesisVoiceFromID adopts an existing toll-free-bridged object id as a SpeechSynthesisVoice (nil for 0).
+// SpeechSynthesisVoiceFromID adopts an existing object pointer as a SpeechSynthesisVoice (nil for 0).
 func SpeechSynthesisVoiceFromID(id objc.ID) *SpeechSynthesisVoice {
 	if id == 0 {
 		return nil

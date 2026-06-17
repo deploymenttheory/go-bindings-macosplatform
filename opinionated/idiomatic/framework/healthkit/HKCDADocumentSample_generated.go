@@ -17,11 +17,11 @@ type CDADocumentSample struct {
 // Unwrap returns the underlying [raw.HKCDADocumentSample].
 func (x *CDADocumentSample) Unwrap() *raw.HKCDADocumentSample { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CDADocumentSample) ID() objc.ID { return x.inner.Ptr() }
 
-// CDADocumentSampleFromID adopts an existing toll-free-bridged object id as a CDADocumentSample (nil for 0).
+// CDADocumentSampleFromID adopts an existing object pointer as a CDADocumentSample (nil for 0).
 func CDADocumentSampleFromID(id objc.ID) *CDADocumentSample {
 	if id == 0 {
 		return nil

@@ -20,11 +20,11 @@ type EntityDescription struct {
 // Unwrap returns the underlying [raw.NSEntityDescription].
 func (x *EntityDescription) Unwrap() *raw.NSEntityDescription { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *EntityDescription) ID() objc.ID { return x.inner.Ptr() }
 
-// EntityDescriptionFromID adopts an existing toll-free-bridged object id as a EntityDescription (nil for 0).
+// EntityDescriptionFromID adopts an existing object pointer as a EntityDescription (nil for 0).
 func EntityDescriptionFromID(id objc.ID) *EntityDescription {
 	if id == 0 {
 		return nil

@@ -20,11 +20,11 @@ type MTRRVCRunModeClusterChangeToModeResponseParams struct {
 // Unwrap returns the underlying [raw.MTRRVCRunModeClusterChangeToModeResponseParams].
 func (x *MTRRVCRunModeClusterChangeToModeResponseParams) Unwrap() *raw.MTRRVCRunModeClusterChangeToModeResponseParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRRVCRunModeClusterChangeToModeResponseParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRRVCRunModeClusterChangeToModeResponseParamsFromID adopts an existing toll-free-bridged object id as a MTRRVCRunModeClusterChangeToModeResponseParams (nil for 0).
+// MTRRVCRunModeClusterChangeToModeResponseParamsFromID adopts an existing object pointer as a MTRRVCRunModeClusterChangeToModeResponseParams (nil for 0).
 func MTRRVCRunModeClusterChangeToModeResponseParamsFromID(id objc.ID) *MTRRVCRunModeClusterChangeToModeResponseParams {
 	if id == 0 {
 		return nil

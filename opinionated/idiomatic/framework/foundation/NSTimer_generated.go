@@ -17,11 +17,11 @@ type Timer struct {
 // Unwrap returns the underlying [raw.NSTimer].
 func (x *Timer) Unwrap() *raw.NSTimer { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Timer) ID() objc.ID { return x.inner.Ptr() }
 
-// TimerFromID adopts an existing toll-free-bridged object id as a Timer (nil for 0).
+// TimerFromID adopts an existing object pointer as a Timer (nil for 0).
 func TimerFromID(id objc.ID) *Timer {
 	if id == 0 {
 		return nil

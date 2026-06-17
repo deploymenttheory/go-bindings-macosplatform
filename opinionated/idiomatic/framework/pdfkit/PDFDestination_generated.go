@@ -19,11 +19,11 @@ type Destination struct {
 // Unwrap returns the underlying [raw.PDFDestination].
 func (x *Destination) Unwrap() *raw.PDFDestination { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Destination) ID() objc.ID { return x.inner.Ptr() }
 
-// DestinationFromID adopts an existing toll-free-bridged object id as a Destination (nil for 0).
+// DestinationFromID adopts an existing object pointer as a Destination (nil for 0).
 func DestinationFromID(id objc.ID) *Destination {
 	if id == 0 {
 		return nil

@@ -20,11 +20,11 @@ type NEFilterProvider struct {
 // Unwrap returns the underlying [raw.NEFilterProvider].
 func (x *NEFilterProvider) Unwrap() *raw.NEFilterProvider { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NEFilterProvider) ID() objc.ID { return x.inner.Ptr() }
 
-// NEFilterProviderFromID adopts an existing toll-free-bridged object id as a NEFilterProvider (nil for 0).
+// NEFilterProviderFromID adopts an existing object pointer as a NEFilterProvider (nil for 0).
 func NEFilterProviderFromID(id objc.ID) *NEFilterProvider {
 	if id == 0 {
 		return nil

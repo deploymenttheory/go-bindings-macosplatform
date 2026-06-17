@@ -19,11 +19,11 @@ type MTRApplicationLauncherClusterApplicationStruct struct {
 // Unwrap returns the underlying [raw.MTRApplicationLauncherClusterApplicationStruct].
 func (x *MTRApplicationLauncherClusterApplicationStruct) Unwrap() *raw.MTRApplicationLauncherClusterApplicationStruct { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRApplicationLauncherClusterApplicationStruct) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRApplicationLauncherClusterApplicationStructFromID adopts an existing toll-free-bridged object id as a MTRApplicationLauncherClusterApplicationStruct (nil for 0).
+// MTRApplicationLauncherClusterApplicationStructFromID adopts an existing object pointer as a MTRApplicationLauncherClusterApplicationStruct (nil for 0).
 func MTRApplicationLauncherClusterApplicationStructFromID(id objc.ID) *MTRApplicationLauncherClusterApplicationStruct {
 	if id == 0 {
 		return nil

@@ -17,11 +17,11 @@ type SystemExtensionManager struct {
 // Unwrap returns the underlying [raw.OSSystemExtensionManager].
 func (x *SystemExtensionManager) Unwrap() *raw.OSSystemExtensionManager { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SystemExtensionManager) ID() objc.ID { return x.inner.Ptr() }
 
-// SystemExtensionManagerFromID adopts an existing toll-free-bridged object id as a SystemExtensionManager (nil for 0).
+// SystemExtensionManagerFromID adopts an existing object pointer as a SystemExtensionManager (nil for 0).
 func SystemExtensionManagerFromID(id objc.ID) *SystemExtensionManager {
 	if id == 0 {
 		return nil

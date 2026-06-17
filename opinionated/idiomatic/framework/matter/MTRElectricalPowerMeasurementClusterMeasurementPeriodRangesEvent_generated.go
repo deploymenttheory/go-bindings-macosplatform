@@ -18,11 +18,11 @@ type MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent struct {
 // Unwrap returns the underlying [raw.MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent].
 func (x *MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent) Unwrap() *raw.MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEventFromID adopts an existing toll-free-bridged object id as a MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent (nil for 0).
+// MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEventFromID adopts an existing object pointer as a MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent (nil for 0).
 func MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEventFromID(id objc.ID) *MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent {
 	if id == 0 {
 		return nil

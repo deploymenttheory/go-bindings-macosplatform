@@ -18,11 +18,11 @@ type SampleBufferRequest struct {
 // Unwrap returns the underlying [raw.AVSampleBufferRequest].
 func (x *SampleBufferRequest) Unwrap() *raw.AVSampleBufferRequest { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SampleBufferRequest) ID() objc.ID { return x.inner.Ptr() }
 
-// SampleBufferRequestFromID adopts an existing toll-free-bridged object id as a SampleBufferRequest (nil for 0).
+// SampleBufferRequestFromID adopts an existing object pointer as a SampleBufferRequest (nil for 0).
 func SampleBufferRequestFromID(id objc.ID) *SampleBufferRequest {
 	if id == 0 {
 		return nil

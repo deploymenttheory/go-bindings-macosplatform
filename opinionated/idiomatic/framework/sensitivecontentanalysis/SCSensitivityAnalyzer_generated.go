@@ -21,11 +21,11 @@ type SensitivityAnalyzer struct {
 // Unwrap returns the underlying [raw.SCSensitivityAnalyzer].
 func (x *SensitivityAnalyzer) Unwrap() *raw.SCSensitivityAnalyzer { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SensitivityAnalyzer) ID() objc.ID { return x.inner.Ptr() }
 
-// SensitivityAnalyzerFromID adopts an existing toll-free-bridged object id as a SensitivityAnalyzer (nil for 0).
+// SensitivityAnalyzerFromID adopts an existing object pointer as a SensitivityAnalyzer (nil for 0).
 func SensitivityAnalyzerFromID(id objc.ID) *SensitivityAnalyzer {
 	if id == 0 {
 		return nil

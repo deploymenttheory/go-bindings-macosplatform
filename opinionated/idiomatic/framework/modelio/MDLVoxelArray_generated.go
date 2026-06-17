@@ -19,11 +19,11 @@ type VoxelArray struct {
 // Unwrap returns the underlying [raw.MDLVoxelArray].
 func (x *VoxelArray) Unwrap() *raw.MDLVoxelArray { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *VoxelArray) ID() objc.ID { return x.inner.Ptr() }
 
-// VoxelArrayFromID adopts an existing toll-free-bridged object id as a VoxelArray (nil for 0).
+// VoxelArrayFromID adopts an existing object pointer as a VoxelArray (nil for 0).
 func VoxelArrayFromID(id objc.ID) *VoxelArray {
 	if id == 0 {
 		return nil

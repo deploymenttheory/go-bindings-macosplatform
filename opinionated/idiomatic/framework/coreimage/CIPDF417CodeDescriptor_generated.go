@@ -18,11 +18,11 @@ type PDF417CodeDescriptor struct {
 // Unwrap returns the underlying [raw.CIPDF417CodeDescriptor].
 func (x *PDF417CodeDescriptor) Unwrap() *raw.CIPDF417CodeDescriptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PDF417CodeDescriptor) ID() objc.ID { return x.inner.Ptr() }
 
-// PDF417CodeDescriptorFromID adopts an existing toll-free-bridged object id as a PDF417CodeDescriptor (nil for 0).
+// PDF417CodeDescriptorFromID adopts an existing object pointer as a PDF417CodeDescriptor (nil for 0).
 func PDF417CodeDescriptorFromID(id objc.ID) *PDF417CodeDescriptor {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type CompositionParameterView struct {
 // Unwrap returns the underlying [raw.QCCompositionParameterView].
 func (x *CompositionParameterView) Unwrap() *raw.QCCompositionParameterView { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CompositionParameterView) ID() objc.ID { return x.inner.Ptr() }
 
-// CompositionParameterViewFromID adopts an existing toll-free-bridged object id as a CompositionParameterView (nil for 0).
+// CompositionParameterViewFromID adopts an existing object pointer as a CompositionParameterView (nil for 0).
 func CompositionParameterViewFromID(id objc.ID) *CompositionParameterView {
 	if id == 0 {
 		return nil

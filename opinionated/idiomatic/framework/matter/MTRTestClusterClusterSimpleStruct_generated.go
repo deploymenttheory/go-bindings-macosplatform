@@ -17,11 +17,11 @@ type MTRTestClusterClusterSimpleStruct struct {
 // Unwrap returns the underlying [raw.MTRTestClusterClusterSimpleStruct].
 func (x *MTRTestClusterClusterSimpleStruct) Unwrap() *raw.MTRTestClusterClusterSimpleStruct { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRTestClusterClusterSimpleStruct) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRTestClusterClusterSimpleStructFromID adopts an existing toll-free-bridged object id as a MTRTestClusterClusterSimpleStruct (nil for 0).
+// MTRTestClusterClusterSimpleStructFromID adopts an existing object pointer as a MTRTestClusterClusterSimpleStruct (nil for 0).
 func MTRTestClusterClusterSimpleStructFromID(id objc.ID) *MTRTestClusterClusterSimpleStruct {
 	if id == 0 {
 		return nil

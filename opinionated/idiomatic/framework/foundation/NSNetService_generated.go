@@ -19,11 +19,11 @@ type NetService struct {
 // Unwrap returns the underlying [raw.NSNetService].
 func (x *NetService) Unwrap() *raw.NSNetService { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NetService) ID() objc.ID { return x.inner.Ptr() }
 
-// NetServiceFromID adopts an existing toll-free-bridged object id as a NetService (nil for 0).
+// NetServiceFromID adopts an existing object pointer as a NetService (nil for 0).
 func NetServiceFromID(id objc.ID) *NetService {
 	if id == 0 {
 		return nil

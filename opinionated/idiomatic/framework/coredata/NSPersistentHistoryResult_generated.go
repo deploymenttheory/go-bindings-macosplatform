@@ -17,11 +17,11 @@ type PersistentHistoryResult struct {
 // Unwrap returns the underlying [raw.NSPersistentHistoryResult].
 func (x *PersistentHistoryResult) Unwrap() *raw.NSPersistentHistoryResult { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PersistentHistoryResult) ID() objc.ID { return x.inner.Ptr() }
 
-// PersistentHistoryResultFromID adopts an existing toll-free-bridged object id as a PersistentHistoryResult (nil for 0).
+// PersistentHistoryResultFromID adopts an existing object pointer as a PersistentHistoryResult (nil for 0).
 func PersistentHistoryResultFromID(id objc.ID) *PersistentHistoryResult {
 	if id == 0 {
 		return nil

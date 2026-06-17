@@ -17,11 +17,11 @@ type CreateCommand struct {
 // Unwrap returns the underlying [raw.NSCreateCommand].
 func (x *CreateCommand) Unwrap() *raw.NSCreateCommand { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CreateCommand) ID() objc.ID { return x.inner.Ptr() }
 
-// CreateCommandFromID adopts an existing toll-free-bridged object id as a CreateCommand (nil for 0).
+// CreateCommandFromID adopts an existing object pointer as a CreateCommand (nil for 0).
 func CreateCommandFromID(id objc.ID) *CreateCommand {
 	if id == 0 {
 		return nil

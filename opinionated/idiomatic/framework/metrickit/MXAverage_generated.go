@@ -18,11 +18,11 @@ type Average struct {
 // Unwrap returns the underlying [raw.MXAverage].
 func (x *Average) Unwrap() *raw.MXAverage[objc.ID] { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Average) ID() objc.ID { return x.inner.Ptr() }
 
-// AverageFromID adopts an existing toll-free-bridged object id as a Average (nil for 0).
+// AverageFromID adopts an existing object pointer as a Average (nil for 0).
 func AverageFromID(id objc.ID) *Average {
 	if id == 0 {
 		return nil

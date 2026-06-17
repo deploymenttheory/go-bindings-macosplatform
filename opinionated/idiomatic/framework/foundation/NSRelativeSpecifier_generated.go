@@ -18,11 +18,11 @@ type RelativeSpecifier struct {
 // Unwrap returns the underlying [raw.NSRelativeSpecifier].
 func (x *RelativeSpecifier) Unwrap() *raw.NSRelativeSpecifier { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *RelativeSpecifier) ID() objc.ID { return x.inner.Ptr() }
 
-// RelativeSpecifierFromID adopts an existing toll-free-bridged object id as a RelativeSpecifier (nil for 0).
+// RelativeSpecifierFromID adopts an existing object pointer as a RelativeSpecifier (nil for 0).
 func RelativeSpecifierFromID(id objc.ID) *RelativeSpecifier {
 	if id == 0 {
 		return nil

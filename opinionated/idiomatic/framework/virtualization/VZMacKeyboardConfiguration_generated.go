@@ -17,11 +17,11 @@ type MacKeyboardConfiguration struct {
 // Unwrap returns the underlying [raw.VZMacKeyboardConfiguration].
 func (x *MacKeyboardConfiguration) Unwrap() *raw.VZMacKeyboardConfiguration { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MacKeyboardConfiguration) ID() objc.ID { return x.inner.Ptr() }
 
-// MacKeyboardConfigurationFromID adopts an existing toll-free-bridged object id as a MacKeyboardConfiguration (nil for 0).
+// MacKeyboardConfigurationFromID adopts an existing object pointer as a MacKeyboardConfiguration (nil for 0).
 func MacKeyboardConfigurationFromID(id objc.ID) *MacKeyboardConfiguration {
 	if id == 0 {
 		return nil

@@ -20,11 +20,11 @@ type Light struct {
 // Unwrap returns the underlying [raw.MDLLight].
 func (x *Light) Unwrap() *raw.MDLLight { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Light) ID() objc.ID { return x.inner.Ptr() }
 
-// LightFromID adopts an existing toll-free-bridged object id as a Light (nil for 0).
+// LightFromID adopts an existing object pointer as a Light (nil for 0).
 func LightFromID(id objc.ID) *Light {
 	if id == 0 {
 		return nil

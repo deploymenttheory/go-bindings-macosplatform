@@ -19,11 +19,11 @@ type DOMHTMLStyleElement struct {
 // Unwrap returns the underlying [raw.DOMHTMLStyleElement].
 func (x *DOMHTMLStyleElement) Unwrap() *raw.DOMHTMLStyleElement { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DOMHTMLStyleElement) ID() objc.ID { return x.inner.Ptr() }
 
-// DOMHTMLStyleElementFromID adopts an existing toll-free-bridged object id as a DOMHTMLStyleElement (nil for 0).
+// DOMHTMLStyleElementFromID adopts an existing object pointer as a DOMHTMLStyleElement (nil for 0).
 func DOMHTMLStyleElementFromID(id objc.ID) *DOMHTMLStyleElement {
 	if id == 0 {
 		return nil

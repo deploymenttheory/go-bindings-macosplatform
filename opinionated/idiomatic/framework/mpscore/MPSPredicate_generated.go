@@ -18,11 +18,11 @@ type Predicate struct {
 // Unwrap returns the underlying [raw.MPSPredicate].
 func (x *Predicate) Unwrap() *raw.MPSPredicate { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Predicate) ID() objc.ID { return x.inner.Ptr() }
 
-// PredicateFromID adopts an existing toll-free-bridged object id as a Predicate (nil for 0).
+// PredicateFromID adopts an existing object pointer as a Predicate (nil for 0).
 func PredicateFromID(id objc.ID) *Predicate {
 	if id == 0 {
 		return nil

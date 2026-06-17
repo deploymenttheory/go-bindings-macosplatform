@@ -20,11 +20,11 @@ type BezierPath struct {
 // Unwrap returns the underlying [raw.NSBezierPath].
 func (x *BezierPath) Unwrap() *raw.NSBezierPath { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *BezierPath) ID() objc.ID { return x.inner.Ptr() }
 
-// BezierPathFromID adopts an existing toll-free-bridged object id as a BezierPath (nil for 0).
+// BezierPathFromID adopts an existing object pointer as a BezierPath (nil for 0).
 func BezierPathFromID(id objc.ID) *BezierPath {
 	if id == 0 {
 		return nil

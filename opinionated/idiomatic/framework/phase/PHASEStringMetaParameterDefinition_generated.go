@@ -18,11 +18,11 @@ type StringMetaParameterDefinition struct {
 // Unwrap returns the underlying [raw.PHASEStringMetaParameterDefinition].
 func (x *StringMetaParameterDefinition) Unwrap() *raw.PHASEStringMetaParameterDefinition { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *StringMetaParameterDefinition) ID() objc.ID { return x.inner.Ptr() }
 
-// StringMetaParameterDefinitionFromID adopts an existing toll-free-bridged object id as a StringMetaParameterDefinition (nil for 0).
+// StringMetaParameterDefinitionFromID adopts an existing object pointer as a StringMetaParameterDefinition (nil for 0).
 func StringMetaParameterDefinitionFromID(id objc.ID) *StringMetaParameterDefinition {
 	if id == 0 {
 		return nil

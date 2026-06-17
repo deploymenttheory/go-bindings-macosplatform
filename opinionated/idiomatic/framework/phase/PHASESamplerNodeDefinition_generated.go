@@ -19,11 +19,11 @@ type SamplerNodeDefinition struct {
 // Unwrap returns the underlying [raw.PHASESamplerNodeDefinition].
 func (x *SamplerNodeDefinition) Unwrap() *raw.PHASESamplerNodeDefinition { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SamplerNodeDefinition) ID() objc.ID { return x.inner.Ptr() }
 
-// SamplerNodeDefinitionFromID adopts an existing toll-free-bridged object id as a SamplerNodeDefinition (nil for 0).
+// SamplerNodeDefinitionFromID adopts an existing object pointer as a SamplerNodeDefinition (nil for 0).
 func SamplerNodeDefinitionFromID(id objc.ID) *SamplerNodeDefinition {
 	if id == 0 {
 		return nil

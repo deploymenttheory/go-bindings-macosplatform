@@ -19,11 +19,11 @@ type OpenGLPixelFormat struct {
 // Unwrap returns the underlying [raw.NSOpenGLPixelFormat].
 func (x *OpenGLPixelFormat) Unwrap() *raw.NSOpenGLPixelFormat { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *OpenGLPixelFormat) ID() objc.ID { return x.inner.Ptr() }
 
-// OpenGLPixelFormatFromID adopts an existing toll-free-bridged object id as a OpenGLPixelFormat (nil for 0).
+// OpenGLPixelFormatFromID adopts an existing object pointer as a OpenGLPixelFormat (nil for 0).
 func OpenGLPixelFormatFromID(id objc.ID) *OpenGLPixelFormat {
 	if id == 0 {
 		return nil

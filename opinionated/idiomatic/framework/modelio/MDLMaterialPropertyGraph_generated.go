@@ -19,11 +19,11 @@ type MaterialPropertyGraph struct {
 // Unwrap returns the underlying [raw.MDLMaterialPropertyGraph].
 func (x *MaterialPropertyGraph) Unwrap() *raw.MDLMaterialPropertyGraph { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MaterialPropertyGraph) ID() objc.ID { return x.inner.Ptr() }
 
-// MaterialPropertyGraphFromID adopts an existing toll-free-bridged object id as a MaterialPropertyGraph (nil for 0).
+// MaterialPropertyGraphFromID adopts an existing object pointer as a MaterialPropertyGraph (nil for 0).
 func MaterialPropertyGraphFromID(id objc.ID) *MaterialPropertyGraph {
 	if id == 0 {
 		return nil

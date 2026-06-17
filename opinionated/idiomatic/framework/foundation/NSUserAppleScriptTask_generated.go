@@ -18,11 +18,11 @@ type UserAppleScriptTask struct {
 // Unwrap returns the underlying [raw.NSUserAppleScriptTask].
 func (x *UserAppleScriptTask) Unwrap() *raw.NSUserAppleScriptTask { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *UserAppleScriptTask) ID() objc.ID { return x.inner.Ptr() }
 
-// UserAppleScriptTaskFromID adopts an existing toll-free-bridged object id as a UserAppleScriptTask (nil for 0).
+// UserAppleScriptTaskFromID adopts an existing object pointer as a UserAppleScriptTask (nil for 0).
 func UserAppleScriptTaskFromID(id objc.ID) *UserAppleScriptTask {
 	if id == 0 {
 		return nil

@@ -19,11 +19,11 @@ type SyncEngineConfiguration struct {
 // Unwrap returns the underlying [raw.CKSyncEngineConfiguration].
 func (x *SyncEngineConfiguration) Unwrap() *raw.CKSyncEngineConfiguration { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SyncEngineConfiguration) ID() objc.ID { return x.inner.Ptr() }
 
-// SyncEngineConfigurationFromID adopts an existing toll-free-bridged object id as a SyncEngineConfiguration (nil for 0).
+// SyncEngineConfigurationFromID adopts an existing object pointer as a SyncEngineConfiguration (nil for 0).
 func SyncEngineConfigurationFromID(id objc.ID) *SyncEngineConfiguration {
 	if id == 0 {
 		return nil

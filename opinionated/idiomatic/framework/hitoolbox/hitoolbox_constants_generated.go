@@ -10,237 +10,237 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// KHIObjectInitParamUserName returns the CoreFoundation constant kHIObjectInitParamUserName as a toll-free-bridged objc.ID.
+// KHIObjectInitParamUserName returns the value of the CoreFoundation reference constant kHIObjectInitParamUserName as an objc.ID.
 func KHIObjectInitParamUserName() objc.ID { return purego.CFConstant(raw.KHIObjectInitParamUserName()) }
 
-// KHIObjectInitParamDescription returns the CoreFoundation constant kHIObjectInitParamDescription as a toll-free-bridged objc.ID.
+// KHIObjectInitParamDescription returns the value of the CoreFoundation reference constant kHIObjectInitParamDescription as an objc.ID.
 func KHIObjectInitParamDescription() objc.ID { return purego.CFConstant(raw.KHIObjectInitParamDescription()) }
 
-// KHIObjectInitParamEventName returns the CoreFoundation constant kHIObjectInitParamEventName as a toll-free-bridged objc.ID.
+// KHIObjectInitParamEventName returns the value of the CoreFoundation reference constant kHIObjectInitParamEventName as an objc.ID.
 func KHIObjectInitParamEventName() objc.ID { return purego.CFConstant(raw.KHIObjectInitParamEventName()) }
 
-// KHIObjectInitParamEventType returns the CoreFoundation constant kHIObjectInitParamEventType as a toll-free-bridged objc.ID.
+// KHIObjectInitParamEventType returns the value of the CoreFoundation reference constant kHIObjectInitParamEventType as an objc.ID.
 func KHIObjectInitParamEventType() objc.ID { return purego.CFConstant(raw.KHIObjectInitParamEventType()) }
 
-// KHIObjectCustomDataParameterNamesKey returns the CoreFoundation constant kHIObjectCustomDataParameterNamesKey as a toll-free-bridged objc.ID.
+// KHIObjectCustomDataParameterNamesKey returns the value of the CoreFoundation reference constant kHIObjectCustomDataParameterNamesKey as an objc.ID.
 func KHIObjectCustomDataParameterNamesKey() objc.ID { return purego.CFConstant(raw.KHIObjectCustomDataParameterNamesKey()) }
 
-// KHIObjectCustomDataParameterTypesKey returns the CoreFoundation constant kHIObjectCustomDataParameterTypesKey as a toll-free-bridged objc.ID.
+// KHIObjectCustomDataParameterTypesKey returns the value of the CoreFoundation reference constant kHIObjectCustomDataParameterTypesKey as an objc.ID.
 func KHIObjectCustomDataParameterTypesKey() objc.ID { return purego.CFConstant(raw.KHIObjectCustomDataParameterTypesKey()) }
 
-// KHIObjectCustomDataParameterValuesKey returns the CoreFoundation constant kHIObjectCustomDataParameterValuesKey as a toll-free-bridged objc.ID.
+// KHIObjectCustomDataParameterValuesKey returns the value of the CoreFoundation reference constant kHIObjectCustomDataParameterValuesKey as an objc.ID.
 func KHIObjectCustomDataParameterValuesKey() objc.ID { return purego.CFConstant(raw.KHIObjectCustomDataParameterValuesKey()) }
 
-// KHIObjectCustomDataClassIDKey returns the CoreFoundation constant kHIObjectCustomDataClassIDKey as a toll-free-bridged objc.ID.
+// KHIObjectCustomDataClassIDKey returns the value of the CoreFoundation reference constant kHIObjectCustomDataClassIDKey as an objc.ID.
 func KHIObjectCustomDataClassIDKey() objc.ID { return purego.CFConstant(raw.KHIObjectCustomDataClassIDKey()) }
 
-// KHIObjectCustomDataSuperClassIDKey returns the CoreFoundation constant kHIObjectCustomDataSuperClassIDKey as a toll-free-bridged objc.ID.
+// KHIObjectCustomDataSuperClassIDKey returns the value of the CoreFoundation reference constant kHIObjectCustomDataSuperClassIDKey as an objc.ID.
 func KHIObjectCustomDataSuperClassIDKey() objc.ID { return purego.CFConstant(raw.KHIObjectCustomDataSuperClassIDKey()) }
 
-// KHIObjectCustomDataCDEFProcIDKey returns the CoreFoundation constant kHIObjectCustomDataCDEFProcIDKey as a toll-free-bridged objc.ID.
+// KHIObjectCustomDataCDEFProcIDKey returns the value of the CoreFoundation reference constant kHIObjectCustomDataCDEFProcIDKey as an objc.ID.
 func KHIObjectCustomDataCDEFProcIDKey() objc.ID { return purego.CFConstant(raw.KHIObjectCustomDataCDEFProcIDKey()) }
 
-// KHIObjectCustomDataDelegateGroupParametersKey returns the CoreFoundation constant kHIObjectCustomDataDelegateGroupParametersKey as a toll-free-bridged objc.ID.
+// KHIObjectCustomDataDelegateGroupParametersKey returns the value of the CoreFoundation reference constant kHIObjectCustomDataDelegateGroupParametersKey as an objc.ID.
 func KHIObjectCustomDataDelegateGroupParametersKey() objc.ID { return purego.CFConstant(raw.KHIObjectCustomDataDelegateGroupParametersKey()) }
 
-// KHIDelegateBeforeKey returns the CoreFoundation constant kHIDelegateBeforeKey as a toll-free-bridged objc.ID.
+// KHIDelegateBeforeKey returns the value of the CoreFoundation reference constant kHIDelegateBeforeKey as an objc.ID.
 func KHIDelegateBeforeKey() objc.ID { return purego.CFConstant(raw.KHIDelegateBeforeKey()) }
 
-// KHIDelegateAfterKey returns the CoreFoundation constant kHIDelegateAfterKey as a toll-free-bridged objc.ID.
+// KHIDelegateAfterKey returns the value of the CoreFoundation reference constant kHIDelegateAfterKey as an objc.ID.
 func KHIDelegateAfterKey() objc.ID { return purego.CFConstant(raw.KHIDelegateAfterKey()) }
 
-// KTXNActionTyping returns the CoreFoundation constant kTXNActionTyping as a toll-free-bridged objc.ID.
+// KTXNActionTyping returns the value of the CoreFoundation reference constant kTXNActionTyping as an objc.ID.
 func KTXNActionTyping() objc.ID { return purego.CFConstant(raw.KTXNActionTyping()) }
 
-// KTXNActionCut returns the CoreFoundation constant kTXNActionCut as a toll-free-bridged objc.ID.
+// KTXNActionCut returns the value of the CoreFoundation reference constant kTXNActionCut as an objc.ID.
 func KTXNActionCut() objc.ID { return purego.CFConstant(raw.KTXNActionCut()) }
 
-// KTXNActionPaste returns the CoreFoundation constant kTXNActionPaste as a toll-free-bridged objc.ID.
+// KTXNActionPaste returns the value of the CoreFoundation reference constant kTXNActionPaste as an objc.ID.
 func KTXNActionPaste() objc.ID { return purego.CFConstant(raw.KTXNActionPaste()) }
 
-// KTXNActionClear returns the CoreFoundation constant kTXNActionClear as a toll-free-bridged objc.ID.
+// KTXNActionClear returns the value of the CoreFoundation reference constant kTXNActionClear as an objc.ID.
 func KTXNActionClear() objc.ID { return purego.CFConstant(raw.KTXNActionClear()) }
 
-// KTXNActionChangeFont returns the CoreFoundation constant kTXNActionChangeFont as a toll-free-bridged objc.ID.
+// KTXNActionChangeFont returns the value of the CoreFoundation reference constant kTXNActionChangeFont as an objc.ID.
 func KTXNActionChangeFont() objc.ID { return purego.CFConstant(raw.KTXNActionChangeFont()) }
 
-// KTXNActionChangeColor returns the CoreFoundation constant kTXNActionChangeColor as a toll-free-bridged objc.ID.
+// KTXNActionChangeColor returns the value of the CoreFoundation reference constant kTXNActionChangeColor as an objc.ID.
 func KTXNActionChangeColor() objc.ID { return purego.CFConstant(raw.KTXNActionChangeColor()) }
 
-// KTXNActionChangeSize returns the CoreFoundation constant kTXNActionChangeSize as a toll-free-bridged objc.ID.
+// KTXNActionChangeSize returns the value of the CoreFoundation reference constant kTXNActionChangeSize as an objc.ID.
 func KTXNActionChangeSize() objc.ID { return purego.CFConstant(raw.KTXNActionChangeSize()) }
 
-// KTXNActionChangeStyle returns the CoreFoundation constant kTXNActionChangeStyle as a toll-free-bridged objc.ID.
+// KTXNActionChangeStyle returns the value of the CoreFoundation reference constant kTXNActionChangeStyle as an objc.ID.
 func KTXNActionChangeStyle() objc.ID { return purego.CFConstant(raw.KTXNActionChangeStyle()) }
 
-// KTXNActionAlignLeft returns the CoreFoundation constant kTXNActionAlignLeft as a toll-free-bridged objc.ID.
+// KTXNActionAlignLeft returns the value of the CoreFoundation reference constant kTXNActionAlignLeft as an objc.ID.
 func KTXNActionAlignLeft() objc.ID { return purego.CFConstant(raw.KTXNActionAlignLeft()) }
 
-// KTXNActionAlignCenter returns the CoreFoundation constant kTXNActionAlignCenter as a toll-free-bridged objc.ID.
+// KTXNActionAlignCenter returns the value of the CoreFoundation reference constant kTXNActionAlignCenter as an objc.ID.
 func KTXNActionAlignCenter() objc.ID { return purego.CFConstant(raw.KTXNActionAlignCenter()) }
 
-// KTXNActionAlignRight returns the CoreFoundation constant kTXNActionAlignRight as a toll-free-bridged objc.ID.
+// KTXNActionAlignRight returns the value of the CoreFoundation reference constant kTXNActionAlignRight as an objc.ID.
 func KTXNActionAlignRight() objc.ID { return purego.CFConstant(raw.KTXNActionAlignRight()) }
 
-// KTXNActionDrop returns the CoreFoundation constant kTXNActionDrop as a toll-free-bridged objc.ID.
+// KTXNActionDrop returns the value of the CoreFoundation reference constant kTXNActionDrop as an objc.ID.
 func KTXNActionDrop() objc.ID { return purego.CFConstant(raw.KTXNActionDrop()) }
 
-// KTXNActionMove returns the CoreFoundation constant kTXNActionMove as a toll-free-bridged objc.ID.
+// KTXNActionMove returns the value of the CoreFoundation reference constant kTXNActionMove as an objc.ID.
 func KTXNActionMove() objc.ID { return purego.CFConstant(raw.KTXNActionMove()) }
 
-// KTXNActionChangeFontFeature returns the CoreFoundation constant kTXNActionChangeFontFeature as a toll-free-bridged objc.ID.
+// KTXNActionChangeFontFeature returns the value of the CoreFoundation reference constant kTXNActionChangeFontFeature as an objc.ID.
 func KTXNActionChangeFontFeature() objc.ID { return purego.CFConstant(raw.KTXNActionChangeFontFeature()) }
 
-// KTXNActionChangeFontVariation returns the CoreFoundation constant kTXNActionChangeFontVariation as a toll-free-bridged objc.ID.
+// KTXNActionChangeFontVariation returns the value of the CoreFoundation reference constant kTXNActionChangeFontVariation as an objc.ID.
 func KTXNActionChangeFontVariation() objc.ID { return purego.CFConstant(raw.KTXNActionChangeFontVariation()) }
 
-// KTXNActionChangeGlyphVariation returns the CoreFoundation constant kTXNActionChangeGlyphVariation as a toll-free-bridged objc.ID.
+// KTXNActionChangeGlyphVariation returns the value of the CoreFoundation reference constant kTXNActionChangeGlyphVariation as an objc.ID.
 func KTXNActionChangeGlyphVariation() objc.ID { return purego.CFConstant(raw.KTXNActionChangeGlyphVariation()) }
 
-// KTXNActionChangeTextPosition returns the CoreFoundation constant kTXNActionChangeTextPosition as a toll-free-bridged objc.ID.
+// KTXNActionChangeTextPosition returns the value of the CoreFoundation reference constant kTXNActionChangeTextPosition as an objc.ID.
 func KTXNActionChangeTextPosition() objc.ID { return purego.CFConstant(raw.KTXNActionChangeTextPosition()) }
 
-// KTXNActionUndoLast returns the CoreFoundation constant kTXNActionUndoLast as a toll-free-bridged objc.ID.
+// KTXNActionUndoLast returns the value of the CoreFoundation reference constant kTXNActionUndoLast as an objc.ID.
 func KTXNActionUndoLast() objc.ID { return purego.CFConstant(raw.KTXNActionUndoLast()) }
 
-// KTXNActionCountOfTextChanges returns the CoreFoundation constant kTXNActionCountOfTextChanges as a toll-free-bridged objc.ID.
+// KTXNActionCountOfTextChanges returns the value of the CoreFoundation reference constant kTXNActionCountOfTextChanges as an objc.ID.
 func KTXNActionCountOfTextChanges() objc.ID { return purego.CFConstant(raw.KTXNActionCountOfTextChanges()) }
 
-// KTXNActionCountOfStyleChanges returns the CoreFoundation constant kTXNActionCountOfStyleChanges as a toll-free-bridged objc.ID.
+// KTXNActionCountOfStyleChanges returns the value of the CoreFoundation reference constant kTXNActionCountOfStyleChanges as an objc.ID.
 func KTXNActionCountOfStyleChanges() objc.ID { return purego.CFConstant(raw.KTXNActionCountOfStyleChanges()) }
 
-// KTXNActionCountOfAllChanges returns the CoreFoundation constant kTXNActionCountOfAllChanges as a toll-free-bridged objc.ID.
+// KTXNActionCountOfAllChanges returns the value of the CoreFoundation reference constant kTXNActionCountOfAllChanges as an objc.ID.
 func KTXNActionCountOfAllChanges() objc.ID { return purego.CFConstant(raw.KTXNActionCountOfAllChanges()) }
 
-// KTXNDocumentAttributeTitleKey returns the CoreFoundation constant kTXNDocumentAttributeTitleKey as a toll-free-bridged objc.ID.
+// KTXNDocumentAttributeTitleKey returns the value of the CoreFoundation reference constant kTXNDocumentAttributeTitleKey as an objc.ID.
 func KTXNDocumentAttributeTitleKey() objc.ID { return purego.CFConstant(raw.KTXNDocumentAttributeTitleKey()) }
 
-// KTXNDocumentAttributeCompanyNameKey returns the CoreFoundation constant kTXNDocumentAttributeCompanyNameKey as a toll-free-bridged objc.ID.
+// KTXNDocumentAttributeCompanyNameKey returns the value of the CoreFoundation reference constant kTXNDocumentAttributeCompanyNameKey as an objc.ID.
 func KTXNDocumentAttributeCompanyNameKey() objc.ID { return purego.CFConstant(raw.KTXNDocumentAttributeCompanyNameKey()) }
 
-// KTXNDocumentAttributeSubjectKey returns the CoreFoundation constant kTXNDocumentAttributeSubjectKey as a toll-free-bridged objc.ID.
+// KTXNDocumentAttributeSubjectKey returns the value of the CoreFoundation reference constant kTXNDocumentAttributeSubjectKey as an objc.ID.
 func KTXNDocumentAttributeSubjectKey() objc.ID { return purego.CFConstant(raw.KTXNDocumentAttributeSubjectKey()) }
 
-// KTXNDocumentAttributeAuthorKey returns the CoreFoundation constant kTXNDocumentAttributeAuthorKey as a toll-free-bridged objc.ID.
+// KTXNDocumentAttributeAuthorKey returns the value of the CoreFoundation reference constant kTXNDocumentAttributeAuthorKey as an objc.ID.
 func KTXNDocumentAttributeAuthorKey() objc.ID { return purego.CFConstant(raw.KTXNDocumentAttributeAuthorKey()) }
 
-// KTXNDocumentAttributeKeywordsKey returns the CoreFoundation constant kTXNDocumentAttributeKeywordsKey as a toll-free-bridged objc.ID.
+// KTXNDocumentAttributeKeywordsKey returns the value of the CoreFoundation reference constant kTXNDocumentAttributeKeywordsKey as an objc.ID.
 func KTXNDocumentAttributeKeywordsKey() objc.ID { return purego.CFConstant(raw.KTXNDocumentAttributeKeywordsKey()) }
 
-// KTXNDocumentAttributeCommentKey returns the CoreFoundation constant kTXNDocumentAttributeCommentKey as a toll-free-bridged objc.ID.
+// KTXNDocumentAttributeCommentKey returns the value of the CoreFoundation reference constant kTXNDocumentAttributeCommentKey as an objc.ID.
 func KTXNDocumentAttributeCommentKey() objc.ID { return purego.CFConstant(raw.KTXNDocumentAttributeCommentKey()) }
 
-// KTXNDocumentAttributeEditorKey returns the CoreFoundation constant kTXNDocumentAttributeEditorKey as a toll-free-bridged objc.ID.
+// KTXNDocumentAttributeEditorKey returns the value of the CoreFoundation reference constant kTXNDocumentAttributeEditorKey as an objc.ID.
 func KTXNDocumentAttributeEditorKey() objc.ID { return purego.CFConstant(raw.KTXNDocumentAttributeEditorKey()) }
 
-// KTXNDocumentAttributeCreationTimeKey returns the CoreFoundation constant kTXNDocumentAttributeCreationTimeKey as a toll-free-bridged objc.ID.
+// KTXNDocumentAttributeCreationTimeKey returns the value of the CoreFoundation reference constant kTXNDocumentAttributeCreationTimeKey as an objc.ID.
 func KTXNDocumentAttributeCreationTimeKey() objc.ID { return purego.CFConstant(raw.KTXNDocumentAttributeCreationTimeKey()) }
 
-// KTXNDocumentAttributeModificationTimeKey returns the CoreFoundation constant kTXNDocumentAttributeModificationTimeKey as a toll-free-bridged objc.ID.
+// KTXNDocumentAttributeModificationTimeKey returns the value of the CoreFoundation reference constant kTXNDocumentAttributeModificationTimeKey as an objc.ID.
 func KTXNDocumentAttributeModificationTimeKey() objc.ID { return purego.CFConstant(raw.KTXNDocumentAttributeModificationTimeKey()) }
 
-// KTXNDocumentAttributeCopyrightKey returns the CoreFoundation constant kTXNDocumentAttributeCopyrightKey as a toll-free-bridged objc.ID.
+// KTXNDocumentAttributeCopyrightKey returns the value of the CoreFoundation reference constant kTXNDocumentAttributeCopyrightKey as an objc.ID.
 func KTXNDocumentAttributeCopyrightKey() objc.ID { return purego.CFConstant(raw.KTXNDocumentAttributeCopyrightKey()) }
 
-// KTXNDataOptionDocumentTypeKey returns the CoreFoundation constant kTXNDataOptionDocumentTypeKey as a toll-free-bridged objc.ID.
+// KTXNDataOptionDocumentTypeKey returns the value of the CoreFoundation reference constant kTXNDataOptionDocumentTypeKey as an objc.ID.
 func KTXNDataOptionDocumentTypeKey() objc.ID { return purego.CFConstant(raw.KTXNDataOptionDocumentTypeKey()) }
 
-// KTXNDataOptionCharacterEncodingKey returns the CoreFoundation constant kTXNDataOptionCharacterEncodingKey as a toll-free-bridged objc.ID.
+// KTXNDataOptionCharacterEncodingKey returns the value of the CoreFoundation reference constant kTXNDataOptionCharacterEncodingKey as an objc.ID.
 func KTXNDataOptionCharacterEncodingKey() objc.ID { return purego.CFConstant(raw.KTXNDataOptionCharacterEncodingKey()) }
 
-// KTXNPlainTextDocumentType returns the CoreFoundation constant kTXNPlainTextDocumentType as a toll-free-bridged objc.ID.
+// KTXNPlainTextDocumentType returns the value of the CoreFoundation reference constant kTXNPlainTextDocumentType as an objc.ID.
 func KTXNPlainTextDocumentType() objc.ID { return purego.CFConstant(raw.KTXNPlainTextDocumentType()) }
 
-// KTXNMLTEDocumentType returns the CoreFoundation constant kTXNMLTEDocumentType as a toll-free-bridged objc.ID.
+// KTXNMLTEDocumentType returns the value of the CoreFoundation reference constant kTXNMLTEDocumentType as an objc.ID.
 func KTXNMLTEDocumentType() objc.ID { return purego.CFConstant(raw.KTXNMLTEDocumentType()) }
 
-// KTXNRTFDocumentType returns the CoreFoundation constant kTXNRTFDocumentType as a toll-free-bridged objc.ID.
+// KTXNRTFDocumentType returns the value of the CoreFoundation reference constant kTXNRTFDocumentType as an objc.ID.
 func KTXNRTFDocumentType() objc.ID { return purego.CFConstant(raw.KTXNRTFDocumentType()) }
 
-// KTXNQuickTimeDocumentType returns the CoreFoundation constant kTXNQuickTimeDocumentType as a toll-free-bridged objc.ID.
+// KTXNQuickTimeDocumentType returns the value of the CoreFoundation reference constant kTXNQuickTimeDocumentType as an objc.ID.
 func KTXNQuickTimeDocumentType() objc.ID { return purego.CFConstant(raw.KTXNQuickTimeDocumentType()) }
 
-// KHITextViewClassID returns the CoreFoundation constant kHITextViewClassID as a toll-free-bridged objc.ID.
+// KHITextViewClassID returns the value of the CoreFoundation reference constant kHITextViewClassID as an objc.ID.
 func KHITextViewClassID() objc.ID { return purego.CFConstant(raw.KHITextViewClassID()) }
 
-// KTISPropertyInputSourceCategory returns the CoreFoundation constant kTISPropertyInputSourceCategory as a toll-free-bridged objc.ID.
+// KTISPropertyInputSourceCategory returns the value of the CoreFoundation reference constant kTISPropertyInputSourceCategory as an objc.ID.
 func KTISPropertyInputSourceCategory() objc.ID { return purego.CFConstant(raw.KTISPropertyInputSourceCategory()) }
 
-// KTISPropertyInputSourceType returns the CoreFoundation constant kTISPropertyInputSourceType as a toll-free-bridged objc.ID.
+// KTISPropertyInputSourceType returns the value of the CoreFoundation reference constant kTISPropertyInputSourceType as an objc.ID.
 func KTISPropertyInputSourceType() objc.ID { return purego.CFConstant(raw.KTISPropertyInputSourceType()) }
 
-// KTISPropertyInputSourceIsASCIICapable returns the CoreFoundation constant kTISPropertyInputSourceIsASCIICapable as a toll-free-bridged objc.ID.
+// KTISPropertyInputSourceIsASCIICapable returns the value of the CoreFoundation reference constant kTISPropertyInputSourceIsASCIICapable as an objc.ID.
 func KTISPropertyInputSourceIsASCIICapable() objc.ID { return purego.CFConstant(raw.KTISPropertyInputSourceIsASCIICapable()) }
 
-// KTISPropertyInputSourceIsEnableCapable returns the CoreFoundation constant kTISPropertyInputSourceIsEnableCapable as a toll-free-bridged objc.ID.
+// KTISPropertyInputSourceIsEnableCapable returns the value of the CoreFoundation reference constant kTISPropertyInputSourceIsEnableCapable as an objc.ID.
 func KTISPropertyInputSourceIsEnableCapable() objc.ID { return purego.CFConstant(raw.KTISPropertyInputSourceIsEnableCapable()) }
 
-// KTISPropertyInputSourceIsSelectCapable returns the CoreFoundation constant kTISPropertyInputSourceIsSelectCapable as a toll-free-bridged objc.ID.
+// KTISPropertyInputSourceIsSelectCapable returns the value of the CoreFoundation reference constant kTISPropertyInputSourceIsSelectCapable as an objc.ID.
 func KTISPropertyInputSourceIsSelectCapable() objc.ID { return purego.CFConstant(raw.KTISPropertyInputSourceIsSelectCapable()) }
 
-// KTISPropertyInputSourceIsEnabled returns the CoreFoundation constant kTISPropertyInputSourceIsEnabled as a toll-free-bridged objc.ID.
+// KTISPropertyInputSourceIsEnabled returns the value of the CoreFoundation reference constant kTISPropertyInputSourceIsEnabled as an objc.ID.
 func KTISPropertyInputSourceIsEnabled() objc.ID { return purego.CFConstant(raw.KTISPropertyInputSourceIsEnabled()) }
 
-// KTISPropertyInputSourceIsSelected returns the CoreFoundation constant kTISPropertyInputSourceIsSelected as a toll-free-bridged objc.ID.
+// KTISPropertyInputSourceIsSelected returns the value of the CoreFoundation reference constant kTISPropertyInputSourceIsSelected as an objc.ID.
 func KTISPropertyInputSourceIsSelected() objc.ID { return purego.CFConstant(raw.KTISPropertyInputSourceIsSelected()) }
 
-// KTISPropertyInputSourceID returns the CoreFoundation constant kTISPropertyInputSourceID as a toll-free-bridged objc.ID.
+// KTISPropertyInputSourceID returns the value of the CoreFoundation reference constant kTISPropertyInputSourceID as an objc.ID.
 func KTISPropertyInputSourceID() objc.ID { return purego.CFConstant(raw.KTISPropertyInputSourceID()) }
 
-// KTISPropertyBundleID returns the CoreFoundation constant kTISPropertyBundleID as a toll-free-bridged objc.ID.
+// KTISPropertyBundleID returns the value of the CoreFoundation reference constant kTISPropertyBundleID as an objc.ID.
 func KTISPropertyBundleID() objc.ID { return purego.CFConstant(raw.KTISPropertyBundleID()) }
 
-// KTISPropertyInputModeID returns the CoreFoundation constant kTISPropertyInputModeID as a toll-free-bridged objc.ID.
+// KTISPropertyInputModeID returns the value of the CoreFoundation reference constant kTISPropertyInputModeID as an objc.ID.
 func KTISPropertyInputModeID() objc.ID { return purego.CFConstant(raw.KTISPropertyInputModeID()) }
 
-// KTISPropertyLocalizedName returns the CoreFoundation constant kTISPropertyLocalizedName as a toll-free-bridged objc.ID.
+// KTISPropertyLocalizedName returns the value of the CoreFoundation reference constant kTISPropertyLocalizedName as an objc.ID.
 func KTISPropertyLocalizedName() objc.ID { return purego.CFConstant(raw.KTISPropertyLocalizedName()) }
 
-// KTISPropertyInputSourceLanguages returns the CoreFoundation constant kTISPropertyInputSourceLanguages as a toll-free-bridged objc.ID.
+// KTISPropertyInputSourceLanguages returns the value of the CoreFoundation reference constant kTISPropertyInputSourceLanguages as an objc.ID.
 func KTISPropertyInputSourceLanguages() objc.ID { return purego.CFConstant(raw.KTISPropertyInputSourceLanguages()) }
 
-// KTISPropertyUnicodeKeyLayoutData returns the CoreFoundation constant kTISPropertyUnicodeKeyLayoutData as a toll-free-bridged objc.ID.
+// KTISPropertyUnicodeKeyLayoutData returns the value of the CoreFoundation reference constant kTISPropertyUnicodeKeyLayoutData as an objc.ID.
 func KTISPropertyUnicodeKeyLayoutData() objc.ID { return purego.CFConstant(raw.KTISPropertyUnicodeKeyLayoutData()) }
 
-// KTISPropertyIconRef returns the CoreFoundation constant kTISPropertyIconRef as a toll-free-bridged objc.ID.
+// KTISPropertyIconRef returns the value of the CoreFoundation reference constant kTISPropertyIconRef as an objc.ID.
 func KTISPropertyIconRef() objc.ID { return purego.CFConstant(raw.KTISPropertyIconRef()) }
 
-// KTISPropertyIconImageURL returns the CoreFoundation constant kTISPropertyIconImageURL as a toll-free-bridged objc.ID.
+// KTISPropertyIconImageURL returns the value of the CoreFoundation reference constant kTISPropertyIconImageURL as an objc.ID.
 func KTISPropertyIconImageURL() objc.ID { return purego.CFConstant(raw.KTISPropertyIconImageURL()) }
 
-// KTISCategoryKeyboardInputSource returns the CoreFoundation constant kTISCategoryKeyboardInputSource as a toll-free-bridged objc.ID.
+// KTISCategoryKeyboardInputSource returns the value of the CoreFoundation reference constant kTISCategoryKeyboardInputSource as an objc.ID.
 func KTISCategoryKeyboardInputSource() objc.ID { return purego.CFConstant(raw.KTISCategoryKeyboardInputSource()) }
 
-// KTISCategoryPaletteInputSource returns the CoreFoundation constant kTISCategoryPaletteInputSource as a toll-free-bridged objc.ID.
+// KTISCategoryPaletteInputSource returns the value of the CoreFoundation reference constant kTISCategoryPaletteInputSource as an objc.ID.
 func KTISCategoryPaletteInputSource() objc.ID { return purego.CFConstant(raw.KTISCategoryPaletteInputSource()) }
 
-// KTISCategoryInkInputSource returns the CoreFoundation constant kTISCategoryInkInputSource as a toll-free-bridged objc.ID.
+// KTISCategoryInkInputSource returns the value of the CoreFoundation reference constant kTISCategoryInkInputSource as an objc.ID.
 func KTISCategoryInkInputSource() objc.ID { return purego.CFConstant(raw.KTISCategoryInkInputSource()) }
 
-// KTISTypeKeyboardLayout returns the CoreFoundation constant kTISTypeKeyboardLayout as a toll-free-bridged objc.ID.
+// KTISTypeKeyboardLayout returns the value of the CoreFoundation reference constant kTISTypeKeyboardLayout as an objc.ID.
 func KTISTypeKeyboardLayout() objc.ID { return purego.CFConstant(raw.KTISTypeKeyboardLayout()) }
 
-// KTISTypeKeyboardInputMethodWithoutModes returns the CoreFoundation constant kTISTypeKeyboardInputMethodWithoutModes as a toll-free-bridged objc.ID.
+// KTISTypeKeyboardInputMethodWithoutModes returns the value of the CoreFoundation reference constant kTISTypeKeyboardInputMethodWithoutModes as an objc.ID.
 func KTISTypeKeyboardInputMethodWithoutModes() objc.ID { return purego.CFConstant(raw.KTISTypeKeyboardInputMethodWithoutModes()) }
 
-// KTISTypeKeyboardInputMethodModeEnabled returns the CoreFoundation constant kTISTypeKeyboardInputMethodModeEnabled as a toll-free-bridged objc.ID.
+// KTISTypeKeyboardInputMethodModeEnabled returns the value of the CoreFoundation reference constant kTISTypeKeyboardInputMethodModeEnabled as an objc.ID.
 func KTISTypeKeyboardInputMethodModeEnabled() objc.ID { return purego.CFConstant(raw.KTISTypeKeyboardInputMethodModeEnabled()) }
 
-// KTISTypeKeyboardInputMode returns the CoreFoundation constant kTISTypeKeyboardInputMode as a toll-free-bridged objc.ID.
+// KTISTypeKeyboardInputMode returns the value of the CoreFoundation reference constant kTISTypeKeyboardInputMode as an objc.ID.
 func KTISTypeKeyboardInputMode() objc.ID { return purego.CFConstant(raw.KTISTypeKeyboardInputMode()) }
 
-// KTISTypeCharacterPalette returns the CoreFoundation constant kTISTypeCharacterPalette as a toll-free-bridged objc.ID.
+// KTISTypeCharacterPalette returns the value of the CoreFoundation reference constant kTISTypeCharacterPalette as an objc.ID.
 func KTISTypeCharacterPalette() objc.ID { return purego.CFConstant(raw.KTISTypeCharacterPalette()) }
 
-// KTISTypeKeyboardViewer returns the CoreFoundation constant kTISTypeKeyboardViewer as a toll-free-bridged objc.ID.
+// KTISTypeKeyboardViewer returns the value of the CoreFoundation reference constant kTISTypeKeyboardViewer as an objc.ID.
 func KTISTypeKeyboardViewer() objc.ID { return purego.CFConstant(raw.KTISTypeKeyboardViewer()) }
 
-// KTISTypeInk returns the CoreFoundation constant kTISTypeInk as a toll-free-bridged objc.ID.
+// KTISTypeInk returns the value of the CoreFoundation reference constant kTISTypeInk as an objc.ID.
 func KTISTypeInk() objc.ID { return purego.CFConstant(raw.KTISTypeInk()) }
 
-// KTISNotifySelectedKeyboardInputSourceChanged returns the CoreFoundation constant kTISNotifySelectedKeyboardInputSourceChanged as a toll-free-bridged objc.ID.
+// KTISNotifySelectedKeyboardInputSourceChanged returns the value of the CoreFoundation reference constant kTISNotifySelectedKeyboardInputSourceChanged as an objc.ID.
 func KTISNotifySelectedKeyboardInputSourceChanged() objc.ID { return purego.CFConstant(raw.KTISNotifySelectedKeyboardInputSourceChanged()) }
 
-// KTISNotifyEnabledKeyboardInputSourcesChanged returns the CoreFoundation constant kTISNotifyEnabledKeyboardInputSourcesChanged as a toll-free-bridged objc.ID.
+// KTISNotifyEnabledKeyboardInputSourcesChanged returns the value of the CoreFoundation reference constant kTISNotifyEnabledKeyboardInputSourcesChanged as an objc.ID.
 func KTISNotifyEnabledKeyboardInputSourcesChanged() objc.ID { return purego.CFConstant(raw.KTISNotifyEnabledKeyboardInputSourcesChanged()) }
 

@@ -21,11 +21,11 @@ type MTRBaseClusterAccountLogin struct {
 // Unwrap returns the underlying [raw.MTRBaseClusterAccountLogin].
 func (x *MTRBaseClusterAccountLogin) Unwrap() *raw.MTRBaseClusterAccountLogin { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRBaseClusterAccountLogin) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRBaseClusterAccountLoginFromID adopts an existing toll-free-bridged object id as a MTRBaseClusterAccountLogin (nil for 0).
+// MTRBaseClusterAccountLoginFromID adopts an existing object pointer as a MTRBaseClusterAccountLogin (nil for 0).
 func MTRBaseClusterAccountLoginFromID(id objc.ID) *MTRBaseClusterAccountLogin {
 	if id == 0 {
 		return nil

@@ -19,11 +19,11 @@ type PreviewPanel struct {
 // Unwrap returns the underlying [raw.QLPreviewPanel].
 func (x *PreviewPanel) Unwrap() *raw.QLPreviewPanel { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PreviewPanel) ID() objc.ID { return x.inner.Ptr() }
 
-// PreviewPanelFromID adopts an existing toll-free-bridged object id as a PreviewPanel (nil for 0).
+// PreviewPanelFromID adopts an existing object pointer as a PreviewPanel (nil for 0).
 func PreviewPanelFromID(id objc.ID) *PreviewPanel {
 	if id == 0 {
 		return nil

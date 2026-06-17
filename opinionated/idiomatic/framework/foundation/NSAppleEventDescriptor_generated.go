@@ -19,11 +19,11 @@ type AppleEventDescriptor struct {
 // Unwrap returns the underlying [raw.NSAppleEventDescriptor].
 func (x *AppleEventDescriptor) Unwrap() *raw.NSAppleEventDescriptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AppleEventDescriptor) ID() objc.ID { return x.inner.Ptr() }
 
-// AppleEventDescriptorFromID adopts an existing toll-free-bridged object id as a AppleEventDescriptor (nil for 0).
+// AppleEventDescriptorFromID adopts an existing object pointer as a AppleEventDescriptor (nil for 0).
 func AppleEventDescriptorFromID(id objc.ID) *AppleEventDescriptor {
 	if id == 0 {
 		return nil

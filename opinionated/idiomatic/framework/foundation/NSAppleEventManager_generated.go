@@ -19,11 +19,11 @@ type AppleEventManager struct {
 // Unwrap returns the underlying [raw.NSAppleEventManager].
 func (x *AppleEventManager) Unwrap() *raw.NSAppleEventManager { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AppleEventManager) ID() objc.ID { return x.inner.Ptr() }
 
-// AppleEventManagerFromID adopts an existing toll-free-bridged object id as a AppleEventManager (nil for 0).
+// AppleEventManagerFromID adopts an existing object pointer as a AppleEventManager (nil for 0).
 func AppleEventManagerFromID(id objc.ID) *AppleEventManager {
 	if id == 0 {
 		return nil

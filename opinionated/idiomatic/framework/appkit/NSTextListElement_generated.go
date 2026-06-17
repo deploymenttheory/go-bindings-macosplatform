@@ -18,11 +18,11 @@ type TextListElement struct {
 // Unwrap returns the underlying [raw.NSTextListElement].
 func (x *TextListElement) Unwrap() *raw.NSTextListElement { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *TextListElement) ID() objc.ID { return x.inner.Ptr() }
 
-// TextListElementFromID adopts an existing toll-free-bridged object id as a TextListElement (nil for 0).
+// TextListElementFromID adopts an existing object pointer as a TextListElement (nil for 0).
 func TextListElementFromID(id objc.ID) *TextListElement {
 	if id == 0 {
 		return nil

@@ -17,11 +17,11 @@ type CNNDilatedPoolingMaxGradientNode struct {
 // Unwrap returns the underlying [raw.MPSCNNDilatedPoolingMaxGradientNode].
 func (x *CNNDilatedPoolingMaxGradientNode) Unwrap() *raw.MPSCNNDilatedPoolingMaxGradientNode { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CNNDilatedPoolingMaxGradientNode) ID() objc.ID { return x.inner.Ptr() }
 
-// CNNDilatedPoolingMaxGradientNodeFromID adopts an existing toll-free-bridged object id as a CNNDilatedPoolingMaxGradientNode (nil for 0).
+// CNNDilatedPoolingMaxGradientNodeFromID adopts an existing object pointer as a CNNDilatedPoolingMaxGradientNode (nil for 0).
 func CNNDilatedPoolingMaxGradientNodeFromID(id objc.ID) *CNNDilatedPoolingMaxGradientNode {
 	if id == 0 {
 		return nil

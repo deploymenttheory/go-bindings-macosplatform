@@ -19,11 +19,11 @@ type InstanceMaskObservation struct {
 // Unwrap returns the underlying [raw.VNInstanceMaskObservation].
 func (x *InstanceMaskObservation) Unwrap() *raw.VNInstanceMaskObservation { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *InstanceMaskObservation) ID() objc.ID { return x.inner.Ptr() }
 
-// InstanceMaskObservationFromID adopts an existing toll-free-bridged object id as a InstanceMaskObservation (nil for 0).
+// InstanceMaskObservationFromID adopts an existing object pointer as a InstanceMaskObservation (nil for 0).
 func InstanceMaskObservationFromID(id objc.ID) *InstanceMaskObservation {
 	if id == 0 {
 		return nil

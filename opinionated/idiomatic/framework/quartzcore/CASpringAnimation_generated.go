@@ -17,11 +17,11 @@ type SpringAnimation struct {
 // Unwrap returns the underlying [raw.CASpringAnimation].
 func (x *SpringAnimation) Unwrap() *raw.CASpringAnimation { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SpringAnimation) ID() objc.ID { return x.inner.Ptr() }
 
-// SpringAnimationFromID adopts an existing toll-free-bridged object id as a SpringAnimation (nil for 0).
+// SpringAnimationFromID adopts an existing object pointer as a SpringAnimation (nil for 0).
 func SpringAnimationFromID(id objc.ID) *SpringAnimation {
 	if id == 0 {
 		return nil

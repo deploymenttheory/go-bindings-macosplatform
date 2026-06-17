@@ -18,11 +18,11 @@ type CalRecurrenceEnd struct {
 // Unwrap returns the underlying [raw.CalRecurrenceEnd].
 func (x *CalRecurrenceEnd) Unwrap() *raw.CalRecurrenceEnd { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CalRecurrenceEnd) ID() objc.ID { return x.inner.Ptr() }
 
-// CalRecurrenceEndFromID adopts an existing toll-free-bridged object id as a CalRecurrenceEnd (nil for 0).
+// CalRecurrenceEndFromID adopts an existing object pointer as a CalRecurrenceEnd (nil for 0).
 func CalRecurrenceEndFromID(id objc.ID) *CalRecurrenceEnd {
 	if id == 0 {
 		return nil

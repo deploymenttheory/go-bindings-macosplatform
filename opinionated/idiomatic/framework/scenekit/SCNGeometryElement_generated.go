@@ -18,11 +18,11 @@ type GeometryElement struct {
 // Unwrap returns the underlying [raw.SCNGeometryElement].
 func (x *GeometryElement) Unwrap() *raw.SCNGeometryElement { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *GeometryElement) ID() objc.ID { return x.inner.Ptr() }
 
-// GeometryElementFromID adopts an existing toll-free-bridged object id as a GeometryElement (nil for 0).
+// GeometryElementFromID adopts an existing object pointer as a GeometryElement (nil for 0).
 func GeometryElementFromID(id objc.ID) *GeometryElement {
 	if id == 0 {
 		return nil

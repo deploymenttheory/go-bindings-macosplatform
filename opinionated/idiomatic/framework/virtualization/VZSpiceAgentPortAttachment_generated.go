@@ -17,11 +17,11 @@ type SpiceAgentPortAttachment struct {
 // Unwrap returns the underlying [raw.VZSpiceAgentPortAttachment].
 func (x *SpiceAgentPortAttachment) Unwrap() *raw.VZSpiceAgentPortAttachment { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SpiceAgentPortAttachment) ID() objc.ID { return x.inner.Ptr() }
 
-// SpiceAgentPortAttachmentFromID adopts an existing toll-free-bridged object id as a SpiceAgentPortAttachment (nil for 0).
+// SpiceAgentPortAttachmentFromID adopts an existing object pointer as a SpiceAgentPortAttachment (nil for 0).
 func SpiceAgentPortAttachmentFromID(id objc.ID) *SpiceAgentPortAttachment {
 	if id == 0 {
 		return nil

@@ -20,11 +20,11 @@ type Geocoder struct {
 // Unwrap returns the underlying [raw.CLGeocoder].
 func (x *Geocoder) Unwrap() *raw.CLGeocoder { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Geocoder) ID() objc.ID { return x.inner.Ptr() }
 
-// GeocoderFromID adopts an existing toll-free-bridged object id as a Geocoder (nil for 0).
+// GeocoderFromID adopts an existing object pointer as a Geocoder (nil for 0).
 func GeocoderFromID(id objc.ID) *Geocoder {
 	if id == 0 {
 		return nil

@@ -17,11 +17,11 @@ type VisionPrism struct {
 // Unwrap returns the underlying [raw.HKVisionPrism].
 func (x *VisionPrism) Unwrap() *raw.HKVisionPrism { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *VisionPrism) ID() objc.ID { return x.inner.Ptr() }
 
-// VisionPrismFromID adopts an existing toll-free-bridged object id as a VisionPrism (nil for 0).
+// VisionPrismFromID adopts an existing object pointer as a VisionPrism (nil for 0).
 func VisionPrismFromID(id objc.ID) *VisionPrism {
 	if id == 0 {
 		return nil

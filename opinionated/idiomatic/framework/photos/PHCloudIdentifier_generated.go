@@ -19,11 +19,11 @@ type CloudIdentifier struct {
 // Unwrap returns the underlying [raw.PHCloudIdentifier].
 func (x *CloudIdentifier) Unwrap() *raw.PHCloudIdentifier { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CloudIdentifier) ID() objc.ID { return x.inner.Ptr() }
 
-// CloudIdentifierFromID adopts an existing toll-free-bridged object id as a CloudIdentifier (nil for 0).
+// CloudIdentifierFromID adopts an existing object pointer as a CloudIdentifier (nil for 0).
 func CloudIdentifierFromID(id objc.ID) *CloudIdentifier {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type MTRClusterBinding struct {
 // Unwrap returns the underlying [raw.MTRClusterBinding].
 func (x *MTRClusterBinding) Unwrap() *raw.MTRClusterBinding { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRClusterBinding) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRClusterBindingFromID adopts an existing toll-free-bridged object id as a MTRClusterBinding (nil for 0).
+// MTRClusterBindingFromID adopts an existing object pointer as a MTRClusterBinding (nil for 0).
 func MTRClusterBindingFromID(id objc.ID) *MTRClusterBinding {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type IncrementalStore struct {
 // Unwrap returns the underlying [raw.NSIncrementalStore].
 func (x *IncrementalStore) Unwrap() *raw.NSIncrementalStore { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *IncrementalStore) ID() objc.ID { return x.inner.Ptr() }
 
-// IncrementalStoreFromID adopts an existing toll-free-bridged object id as a IncrementalStore (nil for 0).
+// IncrementalStoreFromID adopts an existing object pointer as a IncrementalStore (nil for 0).
 func IncrementalStoreFromID(id objc.ID) *IncrementalStore {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type KeyframeSequence struct {
 // Unwrap returns the underlying [raw.SKKeyframeSequence].
 func (x *KeyframeSequence) Unwrap() *raw.SKKeyframeSequence { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *KeyframeSequence) ID() objc.ID { return x.inner.Ptr() }
 
-// KeyframeSequenceFromID adopts an existing toll-free-bridged object id as a KeyframeSequence (nil for 0).
+// KeyframeSequenceFromID adopts an existing object pointer as a KeyframeSequence (nil for 0).
 func KeyframeSequenceFromID(id objc.ID) *KeyframeSequence {
 	if id == 0 {
 		return nil

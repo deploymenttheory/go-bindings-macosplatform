@@ -18,11 +18,11 @@ type CNNNeuronPReLU struct {
 // Unwrap returns the underlying [raw.MPSCNNNeuronPReLU].
 func (x *CNNNeuronPReLU) Unwrap() *raw.MPSCNNNeuronPReLU { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CNNNeuronPReLU) ID() objc.ID { return x.inner.Ptr() }
 
-// CNNNeuronPReLUFromID adopts an existing toll-free-bridged object id as a CNNNeuronPReLU (nil for 0).
+// CNNNeuronPReLUFromID adopts an existing object pointer as a CNNNeuronPReLU (nil for 0).
 func CNNNeuronPReLUFromID(id objc.ID) *CNNNeuronPReLU {
 	if id == 0 {
 		return nil

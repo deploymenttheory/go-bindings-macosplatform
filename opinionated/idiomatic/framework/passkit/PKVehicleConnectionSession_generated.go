@@ -18,11 +18,11 @@ type VehicleConnectionSession struct {
 // Unwrap returns the underlying [raw.PKVehicleConnectionSession].
 func (x *VehicleConnectionSession) Unwrap() *raw.PKVehicleConnectionSession { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *VehicleConnectionSession) ID() objc.ID { return x.inner.Ptr() }
 
-// VehicleConnectionSessionFromID adopts an existing toll-free-bridged object id as a VehicleConnectionSession (nil for 0).
+// VehicleConnectionSessionFromID adopts an existing object pointer as a VehicleConnectionSession (nil for 0).
 func VehicleConnectionSessionFromID(id objc.ID) *VehicleConnectionSession {
 	if id == 0 {
 		return nil

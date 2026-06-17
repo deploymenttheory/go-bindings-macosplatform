@@ -17,11 +17,11 @@ type NETransparentProxyProvider struct {
 // Unwrap returns the underlying [raw.NETransparentProxyProvider].
 func (x *NETransparentProxyProvider) Unwrap() *raw.NETransparentProxyProvider { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NETransparentProxyProvider) ID() objc.ID { return x.inner.Ptr() }
 
-// NETransparentProxyProviderFromID adopts an existing toll-free-bridged object id as a NETransparentProxyProvider (nil for 0).
+// NETransparentProxyProviderFromID adopts an existing object pointer as a NETransparentProxyProvider (nil for 0).
 func NETransparentProxyProviderFromID(id objc.ID) *NETransparentProxyProvider {
 	if id == 0 {
 		return nil

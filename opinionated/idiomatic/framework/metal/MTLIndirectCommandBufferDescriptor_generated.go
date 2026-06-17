@@ -17,11 +17,11 @@ type IndirectCommandBufferDescriptor struct {
 // Unwrap returns the underlying [raw.MTLIndirectCommandBufferDescriptor].
 func (x *IndirectCommandBufferDescriptor) Unwrap() *raw.MTLIndirectCommandBufferDescriptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *IndirectCommandBufferDescriptor) ID() objc.ID { return x.inner.Ptr() }
 
-// IndirectCommandBufferDescriptorFromID adopts an existing toll-free-bridged object id as a IndirectCommandBufferDescriptor (nil for 0).
+// IndirectCommandBufferDescriptorFromID adopts an existing object pointer as a IndirectCommandBufferDescriptor (nil for 0).
 func IndirectCommandBufferDescriptorFromID(id objc.ID) *IndirectCommandBufferDescriptor {
 	if id == 0 {
 		return nil

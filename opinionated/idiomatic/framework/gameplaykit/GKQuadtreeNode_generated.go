@@ -17,11 +17,11 @@ type QuadtreeNode struct {
 // Unwrap returns the underlying [raw.GKQuadtreeNode].
 func (x *QuadtreeNode) Unwrap() *raw.GKQuadtreeNode { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *QuadtreeNode) ID() objc.ID { return x.inner.Ptr() }
 
-// QuadtreeNodeFromID adopts an existing toll-free-bridged object id as a QuadtreeNode (nil for 0).
+// QuadtreeNodeFromID adopts an existing object pointer as a QuadtreeNode (nil for 0).
 func QuadtreeNodeFromID(id objc.ID) *QuadtreeNode {
 	if id == 0 {
 		return nil

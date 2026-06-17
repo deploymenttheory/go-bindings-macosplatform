@@ -18,11 +18,11 @@ type MTRGeneralCommissioningClusterBasicCommissioningInfo struct {
 // Unwrap returns the underlying [raw.MTRGeneralCommissioningClusterBasicCommissioningInfo].
 func (x *MTRGeneralCommissioningClusterBasicCommissioningInfo) Unwrap() *raw.MTRGeneralCommissioningClusterBasicCommissioningInfo { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRGeneralCommissioningClusterBasicCommissioningInfo) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRGeneralCommissioningClusterBasicCommissioningInfoFromID adopts an existing toll-free-bridged object id as a MTRGeneralCommissioningClusterBasicCommissioningInfo (nil for 0).
+// MTRGeneralCommissioningClusterBasicCommissioningInfoFromID adopts an existing object pointer as a MTRGeneralCommissioningClusterBasicCommissioningInfo (nil for 0).
 func MTRGeneralCommissioningClusterBasicCommissioningInfoFromID(id objc.ID) *MTRGeneralCommissioningClusterBasicCommissioningInfo {
 	if id == 0 {
 		return nil

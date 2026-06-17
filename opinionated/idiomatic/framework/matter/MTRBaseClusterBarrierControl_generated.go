@@ -21,11 +21,11 @@ type MTRBaseClusterBarrierControl struct {
 // Unwrap returns the underlying [raw.MTRBaseClusterBarrierControl].
 func (x *MTRBaseClusterBarrierControl) Unwrap() *raw.MTRBaseClusterBarrierControl { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRBaseClusterBarrierControl) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRBaseClusterBarrierControlFromID adopts an existing toll-free-bridged object id as a MTRBaseClusterBarrierControl (nil for 0).
+// MTRBaseClusterBarrierControlFromID adopts an existing object pointer as a MTRBaseClusterBarrierControl (nil for 0).
 func MTRBaseClusterBarrierControlFromID(id objc.ID) *MTRBaseClusterBarrierControl {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type SyncEngineFailedRecordSave struct {
 // Unwrap returns the underlying [raw.CKSyncEngineFailedRecordSave].
 func (x *SyncEngineFailedRecordSave) Unwrap() *raw.CKSyncEngineFailedRecordSave { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SyncEngineFailedRecordSave) ID() objc.ID { return x.inner.Ptr() }
 
-// SyncEngineFailedRecordSaveFromID adopts an existing toll-free-bridged object id as a SyncEngineFailedRecordSave (nil for 0).
+// SyncEngineFailedRecordSaveFromID adopts an existing object pointer as a SyncEngineFailedRecordSave (nil for 0).
 func SyncEngineFailedRecordSaveFromID(id objc.ID) *SyncEngineFailedRecordSave {
 	if id == 0 {
 		return nil

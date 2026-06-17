@@ -18,11 +18,11 @@ type ScannerFeature struct {
 // Unwrap returns the underlying [raw.ICScannerFeature].
 func (x *ScannerFeature) Unwrap() *raw.ICScannerFeature { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ScannerFeature) ID() objc.ID { return x.inner.Ptr() }
 
-// ScannerFeatureFromID adopts an existing toll-free-bridged object id as a ScannerFeature (nil for 0).
+// ScannerFeatureFromID adopts an existing object pointer as a ScannerFeature (nil for 0).
 func ScannerFeatureFromID(id objc.ID) *ScannerFeature {
 	if id == 0 {
 		return nil

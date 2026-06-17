@@ -18,11 +18,11 @@ type MTRGroupKeyManagementClusterGroupKeySetStruct struct {
 // Unwrap returns the underlying [raw.MTRGroupKeyManagementClusterGroupKeySetStruct].
 func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) Unwrap() *raw.MTRGroupKeyManagementClusterGroupKeySetStruct { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRGroupKeyManagementClusterGroupKeySetStruct) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRGroupKeyManagementClusterGroupKeySetStructFromID adopts an existing toll-free-bridged object id as a MTRGroupKeyManagementClusterGroupKeySetStruct (nil for 0).
+// MTRGroupKeyManagementClusterGroupKeySetStructFromID adopts an existing object pointer as a MTRGroupKeyManagementClusterGroupKeySetStruct (nil for 0).
 func MTRGroupKeyManagementClusterGroupKeySetStructFromID(id objc.ID) *MTRGroupKeyManagementClusterGroupKeySetStruct {
 	if id == 0 {
 		return nil

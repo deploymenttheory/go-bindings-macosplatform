@@ -21,11 +21,11 @@ type QuantitySeriesSampleBuilder struct {
 // Unwrap returns the underlying [raw.HKQuantitySeriesSampleBuilder].
 func (x *QuantitySeriesSampleBuilder) Unwrap() *raw.HKQuantitySeriesSampleBuilder { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *QuantitySeriesSampleBuilder) ID() objc.ID { return x.inner.Ptr() }
 
-// QuantitySeriesSampleBuilderFromID adopts an existing toll-free-bridged object id as a QuantitySeriesSampleBuilder (nil for 0).
+// QuantitySeriesSampleBuilderFromID adopts an existing object pointer as a QuantitySeriesSampleBuilder (nil for 0).
 func QuantitySeriesSampleBuilderFromID(id objc.ID) *QuantitySeriesSampleBuilder {
 	if id == 0 {
 		return nil

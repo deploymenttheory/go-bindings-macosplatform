@@ -19,11 +19,11 @@ type HostInterface struct {
 // Unwrap returns the underlying [raw.IOUSBHostInterface].
 func (x *HostInterface) Unwrap() *raw.IOUSBHostInterface { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *HostInterface) ID() objc.ID { return x.inner.Ptr() }
 
-// HostInterfaceFromID adopts an existing toll-free-bridged object id as a HostInterface (nil for 0).
+// HostInterfaceFromID adopts an existing object pointer as a HostInterface (nil for 0).
 func HostInterfaceFromID(id objc.ID) *HostInterface {
 	if id == 0 {
 		return nil

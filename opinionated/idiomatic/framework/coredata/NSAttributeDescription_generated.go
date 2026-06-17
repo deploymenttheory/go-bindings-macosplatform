@@ -19,11 +19,11 @@ type AttributeDescription struct {
 // Unwrap returns the underlying [raw.NSAttributeDescription].
 func (x *AttributeDescription) Unwrap() *raw.NSAttributeDescription { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AttributeDescription) ID() objc.ID { return x.inner.Ptr() }
 
-// AttributeDescriptionFromID adopts an existing toll-free-bridged object id as a AttributeDescription (nil for 0).
+// AttributeDescriptionFromID adopts an existing object pointer as a AttributeDescription (nil for 0).
 func AttributeDescriptionFromID(id objc.ID) *AttributeDescription {
 	if id == 0 {
 		return nil

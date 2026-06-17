@@ -17,11 +17,11 @@ type WKProcessPool struct {
 // Unwrap returns the underlying [raw.WKProcessPool].
 func (x *WKProcessPool) Unwrap() *raw.WKProcessPool { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *WKProcessPool) ID() objc.ID { return x.inner.Ptr() }
 
-// WKProcessPoolFromID adopts an existing toll-free-bridged object id as a WKProcessPool (nil for 0).
+// WKProcessPoolFromID adopts an existing object pointer as a WKProcessPool (nil for 0).
 func WKProcessPoolFromID(id objc.ID) *WKProcessPool {
 	if id == 0 {
 		return nil

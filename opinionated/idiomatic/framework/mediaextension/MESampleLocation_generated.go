@@ -18,11 +18,11 @@ type SampleLocation struct {
 // Unwrap returns the underlying [raw.MESampleLocation].
 func (x *SampleLocation) Unwrap() *raw.MESampleLocation { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SampleLocation) ID() objc.ID { return x.inner.Ptr() }
 
-// SampleLocationFromID adopts an existing toll-free-bridged object id as a SampleLocation (nil for 0).
+// SampleLocationFromID adopts an existing object pointer as a SampleLocation (nil for 0).
 func SampleLocationFromID(id objc.ID) *SampleLocation {
 	if id == 0 {
 		return nil

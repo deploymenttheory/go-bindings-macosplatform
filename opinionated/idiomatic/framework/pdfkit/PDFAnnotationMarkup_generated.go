@@ -17,11 +17,11 @@ type AnnotationMarkup struct {
 // Unwrap returns the underlying [raw.PDFAnnotationMarkup].
 func (x *AnnotationMarkup) Unwrap() *raw.PDFAnnotationMarkup { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AnnotationMarkup) ID() objc.ID { return x.inner.Ptr() }
 
-// AnnotationMarkupFromID adopts an existing toll-free-bridged object id as a AnnotationMarkup (nil for 0).
+// AnnotationMarkupFromID adopts an existing object pointer as a AnnotationMarkup (nil for 0).
 func AnnotationMarkupFromID(id objc.ID) *AnnotationMarkup {
 	if id == 0 {
 		return nil

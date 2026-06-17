@@ -20,11 +20,11 @@ type SplitView struct {
 // Unwrap returns the underlying [raw.NSSplitView].
 func (x *SplitView) Unwrap() *raw.NSSplitView { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SplitView) ID() objc.ID { return x.inner.Ptr() }
 
-// SplitViewFromID adopts an existing toll-free-bridged object id as a SplitView (nil for 0).
+// SplitViewFromID adopts an existing object pointer as a SplitView (nil for 0).
 func SplitViewFromID(id objc.ID) *SplitView {
 	if id == 0 {
 		return nil

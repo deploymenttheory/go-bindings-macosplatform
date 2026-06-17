@@ -18,11 +18,11 @@ type NEFilterFlow struct {
 // Unwrap returns the underlying [raw.NEFilterFlow].
 func (x *NEFilterFlow) Unwrap() *raw.NEFilterFlow { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NEFilterFlow) ID() objc.ID { return x.inner.Ptr() }
 
-// NEFilterFlowFromID adopts an existing toll-free-bridged object id as a NEFilterFlow (nil for 0).
+// NEFilterFlowFromID adopts an existing object pointer as a NEFilterFlow (nil for 0).
 func NEFilterFlowFromID(id objc.ID) *NEFilterFlow {
 	if id == 0 {
 		return nil

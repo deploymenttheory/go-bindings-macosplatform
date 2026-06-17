@@ -19,11 +19,11 @@ type InferenceGraph struct {
 // Unwrap returns the underlying [raw.MLCInferenceGraph].
 func (x *InferenceGraph) Unwrap() *raw.MLCInferenceGraph { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *InferenceGraph) ID() objc.ID { return x.inner.Ptr() }
 
-// InferenceGraphFromID adopts an existing toll-free-bridged object id as a InferenceGraph (nil for 0).
+// InferenceGraphFromID adopts an existing object pointer as a InferenceGraph (nil for 0).
 func InferenceGraphFromID(id objc.ID) *InferenceGraph {
 	if id == 0 {
 		return nil

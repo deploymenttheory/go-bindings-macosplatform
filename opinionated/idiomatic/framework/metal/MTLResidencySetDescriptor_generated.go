@@ -19,11 +19,11 @@ type ResidencySetDescriptor struct {
 // Unwrap returns the underlying [raw.MTLResidencySetDescriptor].
 func (x *ResidencySetDescriptor) Unwrap() *raw.MTLResidencySetDescriptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ResidencySetDescriptor) ID() objc.ID { return x.inner.Ptr() }
 
-// ResidencySetDescriptorFromID adopts an existing toll-free-bridged object id as a ResidencySetDescriptor (nil for 0).
+// ResidencySetDescriptorFromID adopts an existing object pointer as a ResidencySetDescriptor (nil for 0).
 func ResidencySetDescriptorFromID(id objc.ID) *ResidencySetDescriptor {
 	if id == 0 {
 		return nil

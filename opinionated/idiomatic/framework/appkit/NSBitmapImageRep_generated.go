@@ -21,11 +21,11 @@ type BitmapImageRep struct {
 // Unwrap returns the underlying [raw.NSBitmapImageRep].
 func (x *BitmapImageRep) Unwrap() *raw.NSBitmapImageRep { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *BitmapImageRep) ID() objc.ID { return x.inner.Ptr() }
 
-// BitmapImageRepFromID adopts an existing toll-free-bridged object id as a BitmapImageRep (nil for 0).
+// BitmapImageRepFromID adopts an existing object pointer as a BitmapImageRep (nil for 0).
 func BitmapImageRepFromID(id objc.ID) *BitmapImageRep {
 	if id == 0 {
 		return nil

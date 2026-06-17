@@ -19,11 +19,11 @@ type PlaybackSpeed struct {
 // Unwrap returns the underlying [raw.AVPlaybackSpeed].
 func (x *PlaybackSpeed) Unwrap() *raw.AVPlaybackSpeed { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PlaybackSpeed) ID() objc.ID { return x.inner.Ptr() }
 
-// PlaybackSpeedFromID adopts an existing toll-free-bridged object id as a PlaybackSpeed (nil for 0).
+// PlaybackSpeedFromID adopts an existing object pointer as a PlaybackSpeed (nil for 0).
 func PlaybackSpeedFromID(id objc.ID) *PlaybackSpeed {
 	if id == 0 {
 		return nil

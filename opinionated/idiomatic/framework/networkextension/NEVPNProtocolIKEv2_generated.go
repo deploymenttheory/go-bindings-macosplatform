@@ -19,11 +19,11 @@ type NEVPNProtocolIKEv2 struct {
 // Unwrap returns the underlying [raw.NEVPNProtocolIKEv2].
 func (x *NEVPNProtocolIKEv2) Unwrap() *raw.NEVPNProtocolIKEv2 { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NEVPNProtocolIKEv2) ID() objc.ID { return x.inner.Ptr() }
 
-// NEVPNProtocolIKEv2FromID adopts an existing toll-free-bridged object id as a NEVPNProtocolIKEv2 (nil for 0).
+// NEVPNProtocolIKEv2FromID adopts an existing object pointer as a NEVPNProtocolIKEv2 (nil for 0).
 func NEVPNProtocolIKEv2FromID(id objc.ID) *NEVPNProtocolIKEv2 {
 	if id == 0 {
 		return nil

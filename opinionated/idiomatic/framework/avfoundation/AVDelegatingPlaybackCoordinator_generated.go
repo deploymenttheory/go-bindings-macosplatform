@@ -21,11 +21,11 @@ type DelegatingPlaybackCoordinator struct {
 // Unwrap returns the underlying [raw.AVDelegatingPlaybackCoordinator].
 func (x *DelegatingPlaybackCoordinator) Unwrap() *raw.AVDelegatingPlaybackCoordinator { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DelegatingPlaybackCoordinator) ID() objc.ID { return x.inner.Ptr() }
 
-// DelegatingPlaybackCoordinatorFromID adopts an existing toll-free-bridged object id as a DelegatingPlaybackCoordinator (nil for 0).
+// DelegatingPlaybackCoordinatorFromID adopts an existing object pointer as a DelegatingPlaybackCoordinator (nil for 0).
 func DelegatingPlaybackCoordinatorFromID(id objc.ID) *DelegatingPlaybackCoordinator {
 	if id == 0 {
 		return nil

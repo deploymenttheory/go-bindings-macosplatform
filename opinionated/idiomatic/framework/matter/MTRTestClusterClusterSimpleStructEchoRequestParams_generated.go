@@ -17,11 +17,11 @@ type MTRTestClusterClusterSimpleStructEchoRequestParams struct {
 // Unwrap returns the underlying [raw.MTRTestClusterClusterSimpleStructEchoRequestParams].
 func (x *MTRTestClusterClusterSimpleStructEchoRequestParams) Unwrap() *raw.MTRTestClusterClusterSimpleStructEchoRequestParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRTestClusterClusterSimpleStructEchoRequestParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRTestClusterClusterSimpleStructEchoRequestParamsFromID adopts an existing toll-free-bridged object id as a MTRTestClusterClusterSimpleStructEchoRequestParams (nil for 0).
+// MTRTestClusterClusterSimpleStructEchoRequestParamsFromID adopts an existing object pointer as a MTRTestClusterClusterSimpleStructEchoRequestParams (nil for 0).
 func MTRTestClusterClusterSimpleStructEchoRequestParamsFromID(id objc.ID) *MTRTestClusterClusterSimpleStructEchoRequestParams {
 	if id == 0 {
 		return nil

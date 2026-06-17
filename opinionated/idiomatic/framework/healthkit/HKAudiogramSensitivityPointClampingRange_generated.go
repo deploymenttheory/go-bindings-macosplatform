@@ -17,11 +17,11 @@ type AudiogramSensitivityPointClampingRange struct {
 // Unwrap returns the underlying [raw.HKAudiogramSensitivityPointClampingRange].
 func (x *AudiogramSensitivityPointClampingRange) Unwrap() *raw.HKAudiogramSensitivityPointClampingRange { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AudiogramSensitivityPointClampingRange) ID() objc.ID { return x.inner.Ptr() }
 
-// AudiogramSensitivityPointClampingRangeFromID adopts an existing toll-free-bridged object id as a AudiogramSensitivityPointClampingRange (nil for 0).
+// AudiogramSensitivityPointClampingRangeFromID adopts an existing object pointer as a AudiogramSensitivityPointClampingRange (nil for 0).
 func AudiogramSensitivityPointClampingRangeFromID(id objc.ID) *AudiogramSensitivityPointClampingRange {
 	if id == 0 {
 		return nil

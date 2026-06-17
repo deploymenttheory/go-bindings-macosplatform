@@ -21,11 +21,11 @@ type NEDNSSettingsManager struct {
 // Unwrap returns the underlying [raw.NEDNSSettingsManager].
 func (x *NEDNSSettingsManager) Unwrap() *raw.NEDNSSettingsManager { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NEDNSSettingsManager) ID() objc.ID { return x.inner.Ptr() }
 
-// NEDNSSettingsManagerFromID adopts an existing toll-free-bridged object id as a NEDNSSettingsManager (nil for 0).
+// NEDNSSettingsManagerFromID adopts an existing object pointer as a NEDNSSettingsManager (nil for 0).
 func NEDNSSettingsManagerFromID(id objc.ID) *NEDNSSettingsManager {
 	if id == 0 {
 		return nil

@@ -19,11 +19,11 @@ type LabeledValue struct {
 // Unwrap returns the underlying [raw.PKLabeledValue].
 func (x *LabeledValue) Unwrap() *raw.PKLabeledValue { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *LabeledValue) ID() objc.ID { return x.inner.Ptr() }
 
-// LabeledValueFromID adopts an existing toll-free-bridged object id as a LabeledValue (nil for 0).
+// LabeledValueFromID adopts an existing object pointer as a LabeledValue (nil for 0).
 func LabeledValueFromID(id objc.ID) *LabeledValue {
 	if id == 0 {
 		return nil

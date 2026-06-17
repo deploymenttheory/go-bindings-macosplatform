@@ -22,11 +22,11 @@ type ViewController struct {
 // Unwrap returns the underlying [raw.NSViewController].
 func (x *ViewController) Unwrap() *raw.NSViewController { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ViewController) ID() objc.ID { return x.inner.Ptr() }
 
-// ViewControllerFromID adopts an existing toll-free-bridged object id as a ViewController (nil for 0).
+// ViewControllerFromID adopts an existing object pointer as a ViewController (nil for 0).
 func ViewControllerFromID(id objc.ID) *ViewController {
 	if id == 0 {
 		return nil

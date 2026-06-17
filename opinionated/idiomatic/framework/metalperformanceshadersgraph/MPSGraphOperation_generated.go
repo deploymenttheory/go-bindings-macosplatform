@@ -18,11 +18,11 @@ type GraphOperation struct {
 // Unwrap returns the underlying [raw.MPSGraphOperation].
 func (x *GraphOperation) Unwrap() *raw.MPSGraphOperation { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *GraphOperation) ID() objc.ID { return x.inner.Ptr() }
 
-// GraphOperationFromID adopts an existing toll-free-bridged object id as a GraphOperation (nil for 0).
+// GraphOperationFromID adopts an existing object pointer as a GraphOperation (nil for 0).
 func GraphOperationFromID(id objc.ID) *GraphOperation {
 	if id == 0 {
 		return nil

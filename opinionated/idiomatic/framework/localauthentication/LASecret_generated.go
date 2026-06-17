@@ -21,11 +21,11 @@ type Secret struct {
 // Unwrap returns the underlying [raw.LASecret].
 func (x *Secret) Unwrap() *raw.LASecret { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Secret) ID() objc.ID { return x.inner.Ptr() }
 
-// SecretFromID adopts an existing toll-free-bridged object id as a Secret (nil for 0).
+// SecretFromID adopts an existing object pointer as a Secret (nil for 0).
 func SecretFromID(id objc.ID) *Secret {
 	if id == 0 {
 		return nil

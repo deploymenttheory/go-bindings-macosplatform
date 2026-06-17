@@ -21,11 +21,11 @@ type AudioUnitComponent struct {
 // Unwrap returns the underlying [raw.AVAudioUnitComponent].
 func (x *AudioUnitComponent) Unwrap() *raw.AVAudioUnitComponent { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AudioUnitComponent) ID() objc.ID { return x.inner.Ptr() }
 
-// AudioUnitComponentFromID adopts an existing toll-free-bridged object id as a AudioUnitComponent (nil for 0).
+// AudioUnitComponentFromID adopts an existing object pointer as a AudioUnitComponent (nil for 0).
 func AudioUnitComponentFromID(id objc.ID) *AudioUnitComponent {
 	if id == 0 {
 		return nil

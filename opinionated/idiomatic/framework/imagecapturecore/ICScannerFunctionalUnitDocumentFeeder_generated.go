@@ -19,11 +19,11 @@ type ScannerFunctionalUnitDocumentFeeder struct {
 // Unwrap returns the underlying [raw.ICScannerFunctionalUnitDocumentFeeder].
 func (x *ScannerFunctionalUnitDocumentFeeder) Unwrap() *raw.ICScannerFunctionalUnitDocumentFeeder { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ScannerFunctionalUnitDocumentFeeder) ID() objc.ID { return x.inner.Ptr() }
 
-// ScannerFunctionalUnitDocumentFeederFromID adopts an existing toll-free-bridged object id as a ScannerFunctionalUnitDocumentFeeder (nil for 0).
+// ScannerFunctionalUnitDocumentFeederFromID adopts an existing object pointer as a ScannerFunctionalUnitDocumentFeeder (nil for 0).
 func ScannerFunctionalUnitDocumentFeederFromID(id objc.ID) *ScannerFunctionalUnitDocumentFeeder {
 	if id == 0 {
 		return nil

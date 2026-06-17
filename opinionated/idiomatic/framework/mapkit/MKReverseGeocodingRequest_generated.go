@@ -21,11 +21,11 @@ type ReverseGeocodingRequest struct {
 // Unwrap returns the underlying [raw.MKReverseGeocodingRequest].
 func (x *ReverseGeocodingRequest) Unwrap() *raw.MKReverseGeocodingRequest { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ReverseGeocodingRequest) ID() objc.ID { return x.inner.Ptr() }
 
-// ReverseGeocodingRequestFromID adopts an existing toll-free-bridged object id as a ReverseGeocodingRequest (nil for 0).
+// ReverseGeocodingRequestFromID adopts an existing object pointer as a ReverseGeocodingRequest (nil for 0).
 func ReverseGeocodingRequestFromID(id objc.ID) *ReverseGeocodingRequest {
 	if id == 0 {
 		return nil

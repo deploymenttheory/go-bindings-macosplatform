@@ -17,11 +17,11 @@ type ImageLaplacianPyramidAdd struct {
 // Unwrap returns the underlying [raw.MPSImageLaplacianPyramidAdd].
 func (x *ImageLaplacianPyramidAdd) Unwrap() *raw.MPSImageLaplacianPyramidAdd { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ImageLaplacianPyramidAdd) ID() objc.ID { return x.inner.Ptr() }
 
-// ImageLaplacianPyramidAddFromID adopts an existing toll-free-bridged object id as a ImageLaplacianPyramidAdd (nil for 0).
+// ImageLaplacianPyramidAddFromID adopts an existing object pointer as a ImageLaplacianPyramidAdd (nil for 0).
 func ImageLaplacianPyramidAddFromID(id objc.ID) *ImageLaplacianPyramidAdd {
 	if id == 0 {
 		return nil

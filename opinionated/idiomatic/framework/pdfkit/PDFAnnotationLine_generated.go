@@ -17,11 +17,11 @@ type AnnotationLine struct {
 // Unwrap returns the underlying [raw.PDFAnnotationLine].
 func (x *AnnotationLine) Unwrap() *raw.PDFAnnotationLine { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AnnotationLine) ID() objc.ID { return x.inner.Ptr() }
 
-// AnnotationLineFromID adopts an existing toll-free-bridged object id as a AnnotationLine (nil for 0).
+// AnnotationLineFromID adopts an existing object pointer as a AnnotationLine (nil for 0).
 func AnnotationLineFromID(id objc.ID) *AnnotationLine {
 	if id == 0 {
 		return nil

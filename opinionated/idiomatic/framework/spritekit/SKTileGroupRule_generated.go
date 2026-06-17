@@ -20,11 +20,11 @@ type TileGroupRule struct {
 // Unwrap returns the underlying [raw.SKTileGroupRule].
 func (x *TileGroupRule) Unwrap() *raw.SKTileGroupRule { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *TileGroupRule) ID() objc.ID { return x.inner.Ptr() }
 
-// TileGroupRuleFromID adopts an existing toll-free-bridged object id as a TileGroupRule (nil for 0).
+// TileGroupRuleFromID adopts an existing object pointer as a TileGroupRule (nil for 0).
 func TileGroupRuleFromID(id objc.ID) *TileGroupRule {
 	if id == 0 {
 		return nil

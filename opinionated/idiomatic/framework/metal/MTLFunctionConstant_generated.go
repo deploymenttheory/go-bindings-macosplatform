@@ -18,11 +18,11 @@ type FunctionConstant struct {
 // Unwrap returns the underlying [raw.MTLFunctionConstant].
 func (x *FunctionConstant) Unwrap() *raw.MTLFunctionConstant { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *FunctionConstant) ID() objc.ID { return x.inner.Ptr() }
 
-// FunctionConstantFromID adopts an existing toll-free-bridged object id as a FunctionConstant (nil for 0).
+// FunctionConstantFromID adopts an existing object pointer as a FunctionConstant (nil for 0).
 func FunctionConstantFromID(id objc.ID) *FunctionConstant {
 	if id == 0 {
 		return nil

@@ -10,696 +10,696 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// KCFNull returns the CoreFoundation constant kCFNull as a toll-free-bridged objc.ID.
+// KCFNull returns the value of the CoreFoundation reference constant kCFNull as an objc.ID.
 func KCFNull() objc.ID { return purego.CFConstant(raw.KCFNull()) }
 
-// KCFAllocatorDefault returns the CoreFoundation constant kCFAllocatorDefault as a toll-free-bridged objc.ID.
+// KCFAllocatorDefault returns the value of the CoreFoundation reference constant kCFAllocatorDefault as an objc.ID.
 func KCFAllocatorDefault() objc.ID { return purego.CFConstant(raw.KCFAllocatorDefault()) }
 
-// KCFAllocatorSystemDefault returns the CoreFoundation constant kCFAllocatorSystemDefault as a toll-free-bridged objc.ID.
+// KCFAllocatorSystemDefault returns the value of the CoreFoundation reference constant kCFAllocatorSystemDefault as an objc.ID.
 func KCFAllocatorSystemDefault() objc.ID { return purego.CFConstant(raw.KCFAllocatorSystemDefault()) }
 
-// KCFAllocatorMalloc returns the CoreFoundation constant kCFAllocatorMalloc as a toll-free-bridged objc.ID.
+// KCFAllocatorMalloc returns the value of the CoreFoundation reference constant kCFAllocatorMalloc as an objc.ID.
 func KCFAllocatorMalloc() objc.ID { return purego.CFConstant(raw.KCFAllocatorMalloc()) }
 
-// KCFAllocatorMallocZone returns the CoreFoundation constant kCFAllocatorMallocZone as a toll-free-bridged objc.ID.
+// KCFAllocatorMallocZone returns the value of the CoreFoundation reference constant kCFAllocatorMallocZone as an objc.ID.
 func KCFAllocatorMallocZone() objc.ID { return purego.CFConstant(raw.KCFAllocatorMallocZone()) }
 
-// KCFAllocatorNull returns the CoreFoundation constant kCFAllocatorNull as a toll-free-bridged objc.ID.
+// KCFAllocatorNull returns the value of the CoreFoundation reference constant kCFAllocatorNull as an objc.ID.
 func KCFAllocatorNull() objc.ID { return purego.CFConstant(raw.KCFAllocatorNull()) }
 
-// KCFAllocatorUseContext returns the CoreFoundation constant kCFAllocatorUseContext as a toll-free-bridged objc.ID.
+// KCFAllocatorUseContext returns the value of the CoreFoundation reference constant kCFAllocatorUseContext as an objc.ID.
 func KCFAllocatorUseContext() objc.ID { return purego.CFConstant(raw.KCFAllocatorUseContext()) }
 
-// KCFErrorLocalizedDescriptionKey returns the CoreFoundation constant kCFErrorLocalizedDescriptionKey as a toll-free-bridged objc.ID.
+// KCFErrorLocalizedDescriptionKey returns the value of the CoreFoundation reference constant kCFErrorLocalizedDescriptionKey as an objc.ID.
 func KCFErrorLocalizedDescriptionKey() objc.ID { return purego.CFConstant(raw.KCFErrorLocalizedDescriptionKey()) }
 
-// KCFErrorLocalizedFailureKey returns the CoreFoundation constant kCFErrorLocalizedFailureKey as a toll-free-bridged objc.ID.
+// KCFErrorLocalizedFailureKey returns the value of the CoreFoundation reference constant kCFErrorLocalizedFailureKey as an objc.ID.
 func KCFErrorLocalizedFailureKey() objc.ID { return purego.CFConstant(raw.KCFErrorLocalizedFailureKey()) }
 
-// KCFErrorLocalizedFailureReasonKey returns the CoreFoundation constant kCFErrorLocalizedFailureReasonKey as a toll-free-bridged objc.ID.
+// KCFErrorLocalizedFailureReasonKey returns the value of the CoreFoundation reference constant kCFErrorLocalizedFailureReasonKey as an objc.ID.
 func KCFErrorLocalizedFailureReasonKey() objc.ID { return purego.CFConstant(raw.KCFErrorLocalizedFailureReasonKey()) }
 
-// KCFErrorLocalizedRecoverySuggestionKey returns the CoreFoundation constant kCFErrorLocalizedRecoverySuggestionKey as a toll-free-bridged objc.ID.
+// KCFErrorLocalizedRecoverySuggestionKey returns the value of the CoreFoundation reference constant kCFErrorLocalizedRecoverySuggestionKey as an objc.ID.
 func KCFErrorLocalizedRecoverySuggestionKey() objc.ID { return purego.CFConstant(raw.KCFErrorLocalizedRecoverySuggestionKey()) }
 
-// KCFErrorDescriptionKey returns the CoreFoundation constant kCFErrorDescriptionKey as a toll-free-bridged objc.ID.
+// KCFErrorDescriptionKey returns the value of the CoreFoundation reference constant kCFErrorDescriptionKey as an objc.ID.
 func KCFErrorDescriptionKey() objc.ID { return purego.CFConstant(raw.KCFErrorDescriptionKey()) }
 
-// KCFErrorUnderlyingErrorKey returns the CoreFoundation constant kCFErrorUnderlyingErrorKey as a toll-free-bridged objc.ID.
+// KCFErrorUnderlyingErrorKey returns the value of the CoreFoundation reference constant kCFErrorUnderlyingErrorKey as an objc.ID.
 func KCFErrorUnderlyingErrorKey() objc.ID { return purego.CFConstant(raw.KCFErrorUnderlyingErrorKey()) }
 
-// KCFErrorURLKey returns the CoreFoundation constant kCFErrorURLKey as a toll-free-bridged objc.ID.
+// KCFErrorURLKey returns the value of the CoreFoundation reference constant kCFErrorURLKey as an objc.ID.
 func KCFErrorURLKey() objc.ID { return purego.CFConstant(raw.KCFErrorURLKey()) }
 
-// KCFErrorFilePathKey returns the CoreFoundation constant kCFErrorFilePathKey as a toll-free-bridged objc.ID.
+// KCFErrorFilePathKey returns the value of the CoreFoundation reference constant kCFErrorFilePathKey as an objc.ID.
 func KCFErrorFilePathKey() objc.ID { return purego.CFConstant(raw.KCFErrorFilePathKey()) }
 
-// KCFStringTransformStripCombiningMarks returns the CoreFoundation constant kCFStringTransformStripCombiningMarks as a toll-free-bridged objc.ID.
+// KCFStringTransformStripCombiningMarks returns the value of the CoreFoundation reference constant kCFStringTransformStripCombiningMarks as an objc.ID.
 func KCFStringTransformStripCombiningMarks() objc.ID { return purego.CFConstant(raw.KCFStringTransformStripCombiningMarks()) }
 
-// KCFStringTransformToLatin returns the CoreFoundation constant kCFStringTransformToLatin as a toll-free-bridged objc.ID.
+// KCFStringTransformToLatin returns the value of the CoreFoundation reference constant kCFStringTransformToLatin as an objc.ID.
 func KCFStringTransformToLatin() objc.ID { return purego.CFConstant(raw.KCFStringTransformToLatin()) }
 
-// KCFStringTransformFullwidthHalfwidth returns the CoreFoundation constant kCFStringTransformFullwidthHalfwidth as a toll-free-bridged objc.ID.
+// KCFStringTransformFullwidthHalfwidth returns the value of the CoreFoundation reference constant kCFStringTransformFullwidthHalfwidth as an objc.ID.
 func KCFStringTransformFullwidthHalfwidth() objc.ID { return purego.CFConstant(raw.KCFStringTransformFullwidthHalfwidth()) }
 
-// KCFStringTransformLatinKatakana returns the CoreFoundation constant kCFStringTransformLatinKatakana as a toll-free-bridged objc.ID.
+// KCFStringTransformLatinKatakana returns the value of the CoreFoundation reference constant kCFStringTransformLatinKatakana as an objc.ID.
 func KCFStringTransformLatinKatakana() objc.ID { return purego.CFConstant(raw.KCFStringTransformLatinKatakana()) }
 
-// KCFStringTransformLatinHiragana returns the CoreFoundation constant kCFStringTransformLatinHiragana as a toll-free-bridged objc.ID.
+// KCFStringTransformLatinHiragana returns the value of the CoreFoundation reference constant kCFStringTransformLatinHiragana as an objc.ID.
 func KCFStringTransformLatinHiragana() objc.ID { return purego.CFConstant(raw.KCFStringTransformLatinHiragana()) }
 
-// KCFStringTransformHiraganaKatakana returns the CoreFoundation constant kCFStringTransformHiraganaKatakana as a toll-free-bridged objc.ID.
+// KCFStringTransformHiraganaKatakana returns the value of the CoreFoundation reference constant kCFStringTransformHiraganaKatakana as an objc.ID.
 func KCFStringTransformHiraganaKatakana() objc.ID { return purego.CFConstant(raw.KCFStringTransformHiraganaKatakana()) }
 
-// KCFStringTransformMandarinLatin returns the CoreFoundation constant kCFStringTransformMandarinLatin as a toll-free-bridged objc.ID.
+// KCFStringTransformMandarinLatin returns the value of the CoreFoundation reference constant kCFStringTransformMandarinLatin as an objc.ID.
 func KCFStringTransformMandarinLatin() objc.ID { return purego.CFConstant(raw.KCFStringTransformMandarinLatin()) }
 
-// KCFStringTransformLatinHangul returns the CoreFoundation constant kCFStringTransformLatinHangul as a toll-free-bridged objc.ID.
+// KCFStringTransformLatinHangul returns the value of the CoreFoundation reference constant kCFStringTransformLatinHangul as an objc.ID.
 func KCFStringTransformLatinHangul() objc.ID { return purego.CFConstant(raw.KCFStringTransformLatinHangul()) }
 
-// KCFStringTransformLatinArabic returns the CoreFoundation constant kCFStringTransformLatinArabic as a toll-free-bridged objc.ID.
+// KCFStringTransformLatinArabic returns the value of the CoreFoundation reference constant kCFStringTransformLatinArabic as an objc.ID.
 func KCFStringTransformLatinArabic() objc.ID { return purego.CFConstant(raw.KCFStringTransformLatinArabic()) }
 
-// KCFStringTransformLatinHebrew returns the CoreFoundation constant kCFStringTransformLatinHebrew as a toll-free-bridged objc.ID.
+// KCFStringTransformLatinHebrew returns the value of the CoreFoundation reference constant kCFStringTransformLatinHebrew as an objc.ID.
 func KCFStringTransformLatinHebrew() objc.ID { return purego.CFConstant(raw.KCFStringTransformLatinHebrew()) }
 
-// KCFStringTransformLatinThai returns the CoreFoundation constant kCFStringTransformLatinThai as a toll-free-bridged objc.ID.
+// KCFStringTransformLatinThai returns the value of the CoreFoundation reference constant kCFStringTransformLatinThai as an objc.ID.
 func KCFStringTransformLatinThai() objc.ID { return purego.CFConstant(raw.KCFStringTransformLatinThai()) }
 
-// KCFStringTransformLatinCyrillic returns the CoreFoundation constant kCFStringTransformLatinCyrillic as a toll-free-bridged objc.ID.
+// KCFStringTransformLatinCyrillic returns the value of the CoreFoundation reference constant kCFStringTransformLatinCyrillic as an objc.ID.
 func KCFStringTransformLatinCyrillic() objc.ID { return purego.CFConstant(raw.KCFStringTransformLatinCyrillic()) }
 
-// KCFStringTransformLatinGreek returns the CoreFoundation constant kCFStringTransformLatinGreek as a toll-free-bridged objc.ID.
+// KCFStringTransformLatinGreek returns the value of the CoreFoundation reference constant kCFStringTransformLatinGreek as an objc.ID.
 func KCFStringTransformLatinGreek() objc.ID { return purego.CFConstant(raw.KCFStringTransformLatinGreek()) }
 
-// KCFStringTransformToXMLHex returns the CoreFoundation constant kCFStringTransformToXMLHex as a toll-free-bridged objc.ID.
+// KCFStringTransformToXMLHex returns the value of the CoreFoundation reference constant kCFStringTransformToXMLHex as an objc.ID.
 func KCFStringTransformToXMLHex() objc.ID { return purego.CFConstant(raw.KCFStringTransformToXMLHex()) }
 
-// KCFStringTransformToUnicodeName returns the CoreFoundation constant kCFStringTransformToUnicodeName as a toll-free-bridged objc.ID.
+// KCFStringTransformToUnicodeName returns the value of the CoreFoundation reference constant kCFStringTransformToUnicodeName as an objc.ID.
 func KCFStringTransformToUnicodeName() objc.ID { return purego.CFConstant(raw.KCFStringTransformToUnicodeName()) }
 
-// KCFStringTransformStripDiacritics returns the CoreFoundation constant kCFStringTransformStripDiacritics as a toll-free-bridged objc.ID.
+// KCFStringTransformStripDiacritics returns the value of the CoreFoundation reference constant kCFStringTransformStripDiacritics as an objc.ID.
 func KCFStringTransformStripDiacritics() objc.ID { return purego.CFConstant(raw.KCFStringTransformStripDiacritics()) }
 
-// KCFBooleanTrue returns the CoreFoundation constant kCFBooleanTrue as a toll-free-bridged objc.ID.
+// KCFBooleanTrue returns the value of the CoreFoundation reference constant kCFBooleanTrue as an objc.ID.
 func KCFBooleanTrue() objc.ID { return purego.CFConstant(raw.KCFBooleanTrue()) }
 
-// KCFBooleanFalse returns the CoreFoundation constant kCFBooleanFalse as a toll-free-bridged objc.ID.
+// KCFBooleanFalse returns the value of the CoreFoundation reference constant kCFBooleanFalse as an objc.ID.
 func KCFBooleanFalse() objc.ID { return purego.CFConstant(raw.KCFBooleanFalse()) }
 
-// KCFNumberPositiveInfinity returns the CoreFoundation constant kCFNumberPositiveInfinity as a toll-free-bridged objc.ID.
+// KCFNumberPositiveInfinity returns the value of the CoreFoundation reference constant kCFNumberPositiveInfinity as an objc.ID.
 func KCFNumberPositiveInfinity() objc.ID { return purego.CFConstant(raw.KCFNumberPositiveInfinity()) }
 
-// KCFNumberNegativeInfinity returns the CoreFoundation constant kCFNumberNegativeInfinity as a toll-free-bridged objc.ID.
+// KCFNumberNegativeInfinity returns the value of the CoreFoundation reference constant kCFNumberNegativeInfinity as an objc.ID.
 func KCFNumberNegativeInfinity() objc.ID { return purego.CFConstant(raw.KCFNumberNegativeInfinity()) }
 
-// KCFNumberNaN returns the CoreFoundation constant kCFNumberNaN as a toll-free-bridged objc.ID.
+// KCFNumberNaN returns the value of the CoreFoundation reference constant kCFNumberNaN as an objc.ID.
 func KCFNumberNaN() objc.ID { return purego.CFConstant(raw.KCFNumberNaN()) }
 
-// KCFPreferencesAnyApplication returns the CoreFoundation constant kCFPreferencesAnyApplication as a toll-free-bridged objc.ID.
+// KCFPreferencesAnyApplication returns the value of the CoreFoundation reference constant kCFPreferencesAnyApplication as an objc.ID.
 func KCFPreferencesAnyApplication() objc.ID { return purego.CFConstant(raw.KCFPreferencesAnyApplication()) }
 
-// KCFPreferencesCurrentApplication returns the CoreFoundation constant kCFPreferencesCurrentApplication as a toll-free-bridged objc.ID.
+// KCFPreferencesCurrentApplication returns the value of the CoreFoundation reference constant kCFPreferencesCurrentApplication as an objc.ID.
 func KCFPreferencesCurrentApplication() objc.ID { return purego.CFConstant(raw.KCFPreferencesCurrentApplication()) }
 
-// KCFPreferencesAnyHost returns the CoreFoundation constant kCFPreferencesAnyHost as a toll-free-bridged objc.ID.
+// KCFPreferencesAnyHost returns the value of the CoreFoundation reference constant kCFPreferencesAnyHost as an objc.ID.
 func KCFPreferencesAnyHost() objc.ID { return purego.CFConstant(raw.KCFPreferencesAnyHost()) }
 
-// KCFPreferencesCurrentHost returns the CoreFoundation constant kCFPreferencesCurrentHost as a toll-free-bridged objc.ID.
+// KCFPreferencesCurrentHost returns the value of the CoreFoundation reference constant kCFPreferencesCurrentHost as an objc.ID.
 func KCFPreferencesCurrentHost() objc.ID { return purego.CFConstant(raw.KCFPreferencesCurrentHost()) }
 
-// KCFPreferencesAnyUser returns the CoreFoundation constant kCFPreferencesAnyUser as a toll-free-bridged objc.ID.
+// KCFPreferencesAnyUser returns the value of the CoreFoundation reference constant kCFPreferencesAnyUser as an objc.ID.
 func KCFPreferencesAnyUser() objc.ID { return purego.CFConstant(raw.KCFPreferencesAnyUser()) }
 
-// KCFPreferencesCurrentUser returns the CoreFoundation constant kCFPreferencesCurrentUser as a toll-free-bridged objc.ID.
+// KCFPreferencesCurrentUser returns the value of the CoreFoundation reference constant kCFPreferencesCurrentUser as an objc.ID.
 func KCFPreferencesCurrentUser() objc.ID { return purego.CFConstant(raw.KCFPreferencesCurrentUser()) }
 
-// KCFURLKeysOfUnsetValuesKey returns the CoreFoundation constant kCFURLKeysOfUnsetValuesKey as a toll-free-bridged objc.ID.
+// KCFURLKeysOfUnsetValuesKey returns the value of the CoreFoundation reference constant kCFURLKeysOfUnsetValuesKey as an objc.ID.
 func KCFURLKeysOfUnsetValuesKey() objc.ID { return purego.CFConstant(raw.KCFURLKeysOfUnsetValuesKey()) }
 
-// KCFURLNameKey returns the CoreFoundation constant kCFURLNameKey as a toll-free-bridged objc.ID.
+// KCFURLNameKey returns the value of the CoreFoundation reference constant kCFURLNameKey as an objc.ID.
 func KCFURLNameKey() objc.ID { return purego.CFConstant(raw.KCFURLNameKey()) }
 
-// KCFURLLocalizedNameKey returns the CoreFoundation constant kCFURLLocalizedNameKey as a toll-free-bridged objc.ID.
+// KCFURLLocalizedNameKey returns the value of the CoreFoundation reference constant kCFURLLocalizedNameKey as an objc.ID.
 func KCFURLLocalizedNameKey() objc.ID { return purego.CFConstant(raw.KCFURLLocalizedNameKey()) }
 
-// KCFURLIsRegularFileKey returns the CoreFoundation constant kCFURLIsRegularFileKey as a toll-free-bridged objc.ID.
+// KCFURLIsRegularFileKey returns the value of the CoreFoundation reference constant kCFURLIsRegularFileKey as an objc.ID.
 func KCFURLIsRegularFileKey() objc.ID { return purego.CFConstant(raw.KCFURLIsRegularFileKey()) }
 
-// KCFURLIsDirectoryKey returns the CoreFoundation constant kCFURLIsDirectoryKey as a toll-free-bridged objc.ID.
+// KCFURLIsDirectoryKey returns the value of the CoreFoundation reference constant kCFURLIsDirectoryKey as an objc.ID.
 func KCFURLIsDirectoryKey() objc.ID { return purego.CFConstant(raw.KCFURLIsDirectoryKey()) }
 
-// KCFURLIsSymbolicLinkKey returns the CoreFoundation constant kCFURLIsSymbolicLinkKey as a toll-free-bridged objc.ID.
+// KCFURLIsSymbolicLinkKey returns the value of the CoreFoundation reference constant kCFURLIsSymbolicLinkKey as an objc.ID.
 func KCFURLIsSymbolicLinkKey() objc.ID { return purego.CFConstant(raw.KCFURLIsSymbolicLinkKey()) }
 
-// KCFURLIsVolumeKey returns the CoreFoundation constant kCFURLIsVolumeKey as a toll-free-bridged objc.ID.
+// KCFURLIsVolumeKey returns the value of the CoreFoundation reference constant kCFURLIsVolumeKey as an objc.ID.
 func KCFURLIsVolumeKey() objc.ID { return purego.CFConstant(raw.KCFURLIsVolumeKey()) }
 
-// KCFURLIsPackageKey returns the CoreFoundation constant kCFURLIsPackageKey as a toll-free-bridged objc.ID.
+// KCFURLIsPackageKey returns the value of the CoreFoundation reference constant kCFURLIsPackageKey as an objc.ID.
 func KCFURLIsPackageKey() objc.ID { return purego.CFConstant(raw.KCFURLIsPackageKey()) }
 
-// KCFURLIsApplicationKey returns the CoreFoundation constant kCFURLIsApplicationKey as a toll-free-bridged objc.ID.
+// KCFURLIsApplicationKey returns the value of the CoreFoundation reference constant kCFURLIsApplicationKey as an objc.ID.
 func KCFURLIsApplicationKey() objc.ID { return purego.CFConstant(raw.KCFURLIsApplicationKey()) }
 
-// KCFURLApplicationIsScriptableKey returns the CoreFoundation constant kCFURLApplicationIsScriptableKey as a toll-free-bridged objc.ID.
+// KCFURLApplicationIsScriptableKey returns the value of the CoreFoundation reference constant kCFURLApplicationIsScriptableKey as an objc.ID.
 func KCFURLApplicationIsScriptableKey() objc.ID { return purego.CFConstant(raw.KCFURLApplicationIsScriptableKey()) }
 
-// KCFURLIsSystemImmutableKey returns the CoreFoundation constant kCFURLIsSystemImmutableKey as a toll-free-bridged objc.ID.
+// KCFURLIsSystemImmutableKey returns the value of the CoreFoundation reference constant kCFURLIsSystemImmutableKey as an objc.ID.
 func KCFURLIsSystemImmutableKey() objc.ID { return purego.CFConstant(raw.KCFURLIsSystemImmutableKey()) }
 
-// KCFURLIsUserImmutableKey returns the CoreFoundation constant kCFURLIsUserImmutableKey as a toll-free-bridged objc.ID.
+// KCFURLIsUserImmutableKey returns the value of the CoreFoundation reference constant kCFURLIsUserImmutableKey as an objc.ID.
 func KCFURLIsUserImmutableKey() objc.ID { return purego.CFConstant(raw.KCFURLIsUserImmutableKey()) }
 
-// KCFURLIsHiddenKey returns the CoreFoundation constant kCFURLIsHiddenKey as a toll-free-bridged objc.ID.
+// KCFURLIsHiddenKey returns the value of the CoreFoundation reference constant kCFURLIsHiddenKey as an objc.ID.
 func KCFURLIsHiddenKey() objc.ID { return purego.CFConstant(raw.KCFURLIsHiddenKey()) }
 
-// KCFURLHasHiddenExtensionKey returns the CoreFoundation constant kCFURLHasHiddenExtensionKey as a toll-free-bridged objc.ID.
+// KCFURLHasHiddenExtensionKey returns the value of the CoreFoundation reference constant kCFURLHasHiddenExtensionKey as an objc.ID.
 func KCFURLHasHiddenExtensionKey() objc.ID { return purego.CFConstant(raw.KCFURLHasHiddenExtensionKey()) }
 
-// KCFURLCreationDateKey returns the CoreFoundation constant kCFURLCreationDateKey as a toll-free-bridged objc.ID.
+// KCFURLCreationDateKey returns the value of the CoreFoundation reference constant kCFURLCreationDateKey as an objc.ID.
 func KCFURLCreationDateKey() objc.ID { return purego.CFConstant(raw.KCFURLCreationDateKey()) }
 
-// KCFURLContentAccessDateKey returns the CoreFoundation constant kCFURLContentAccessDateKey as a toll-free-bridged objc.ID.
+// KCFURLContentAccessDateKey returns the value of the CoreFoundation reference constant kCFURLContentAccessDateKey as an objc.ID.
 func KCFURLContentAccessDateKey() objc.ID { return purego.CFConstant(raw.KCFURLContentAccessDateKey()) }
 
-// KCFURLContentModificationDateKey returns the CoreFoundation constant kCFURLContentModificationDateKey as a toll-free-bridged objc.ID.
+// KCFURLContentModificationDateKey returns the value of the CoreFoundation reference constant kCFURLContentModificationDateKey as an objc.ID.
 func KCFURLContentModificationDateKey() objc.ID { return purego.CFConstant(raw.KCFURLContentModificationDateKey()) }
 
-// KCFURLAttributeModificationDateKey returns the CoreFoundation constant kCFURLAttributeModificationDateKey as a toll-free-bridged objc.ID.
+// KCFURLAttributeModificationDateKey returns the value of the CoreFoundation reference constant kCFURLAttributeModificationDateKey as an objc.ID.
 func KCFURLAttributeModificationDateKey() objc.ID { return purego.CFConstant(raw.KCFURLAttributeModificationDateKey()) }
 
-// KCFURLFileIdentifierKey returns the CoreFoundation constant kCFURLFileIdentifierKey as a toll-free-bridged objc.ID.
+// KCFURLFileIdentifierKey returns the value of the CoreFoundation reference constant kCFURLFileIdentifierKey as an objc.ID.
 func KCFURLFileIdentifierKey() objc.ID { return purego.CFConstant(raw.KCFURLFileIdentifierKey()) }
 
-// KCFURLFileContentIdentifierKey returns the CoreFoundation constant kCFURLFileContentIdentifierKey as a toll-free-bridged objc.ID.
+// KCFURLFileContentIdentifierKey returns the value of the CoreFoundation reference constant kCFURLFileContentIdentifierKey as an objc.ID.
 func KCFURLFileContentIdentifierKey() objc.ID { return purego.CFConstant(raw.KCFURLFileContentIdentifierKey()) }
 
-// KCFURLMayShareFileContentKey returns the CoreFoundation constant kCFURLMayShareFileContentKey as a toll-free-bridged objc.ID.
+// KCFURLMayShareFileContentKey returns the value of the CoreFoundation reference constant kCFURLMayShareFileContentKey as an objc.ID.
 func KCFURLMayShareFileContentKey() objc.ID { return purego.CFConstant(raw.KCFURLMayShareFileContentKey()) }
 
-// KCFURLMayHaveExtendedAttributesKey returns the CoreFoundation constant kCFURLMayHaveExtendedAttributesKey as a toll-free-bridged objc.ID.
+// KCFURLMayHaveExtendedAttributesKey returns the value of the CoreFoundation reference constant kCFURLMayHaveExtendedAttributesKey as an objc.ID.
 func KCFURLMayHaveExtendedAttributesKey() objc.ID { return purego.CFConstant(raw.KCFURLMayHaveExtendedAttributesKey()) }
 
-// KCFURLIsPurgeableKey returns the CoreFoundation constant kCFURLIsPurgeableKey as a toll-free-bridged objc.ID.
+// KCFURLIsPurgeableKey returns the value of the CoreFoundation reference constant kCFURLIsPurgeableKey as an objc.ID.
 func KCFURLIsPurgeableKey() objc.ID { return purego.CFConstant(raw.KCFURLIsPurgeableKey()) }
 
-// KCFURLIsSparseKey returns the CoreFoundation constant kCFURLIsSparseKey as a toll-free-bridged objc.ID.
+// KCFURLIsSparseKey returns the value of the CoreFoundation reference constant kCFURLIsSparseKey as an objc.ID.
 func KCFURLIsSparseKey() objc.ID { return purego.CFConstant(raw.KCFURLIsSparseKey()) }
 
-// KCFURLLinkCountKey returns the CoreFoundation constant kCFURLLinkCountKey as a toll-free-bridged objc.ID.
+// KCFURLLinkCountKey returns the value of the CoreFoundation reference constant kCFURLLinkCountKey as an objc.ID.
 func KCFURLLinkCountKey() objc.ID { return purego.CFConstant(raw.KCFURLLinkCountKey()) }
 
-// KCFURLParentDirectoryURLKey returns the CoreFoundation constant kCFURLParentDirectoryURLKey as a toll-free-bridged objc.ID.
+// KCFURLParentDirectoryURLKey returns the value of the CoreFoundation reference constant kCFURLParentDirectoryURLKey as an objc.ID.
 func KCFURLParentDirectoryURLKey() objc.ID { return purego.CFConstant(raw.KCFURLParentDirectoryURLKey()) }
 
-// KCFURLVolumeURLKey returns the CoreFoundation constant kCFURLVolumeURLKey as a toll-free-bridged objc.ID.
+// KCFURLVolumeURLKey returns the value of the CoreFoundation reference constant kCFURLVolumeURLKey as an objc.ID.
 func KCFURLVolumeURLKey() objc.ID { return purego.CFConstant(raw.KCFURLVolumeURLKey()) }
 
-// KCFURLTypeIdentifierKey returns the CoreFoundation constant kCFURLTypeIdentifierKey as a toll-free-bridged objc.ID.
+// KCFURLTypeIdentifierKey returns the value of the CoreFoundation reference constant kCFURLTypeIdentifierKey as an objc.ID.
 func KCFURLTypeIdentifierKey() objc.ID { return purego.CFConstant(raw.KCFURLTypeIdentifierKey()) }
 
-// KCFURLLocalizedTypeDescriptionKey returns the CoreFoundation constant kCFURLLocalizedTypeDescriptionKey as a toll-free-bridged objc.ID.
+// KCFURLLocalizedTypeDescriptionKey returns the value of the CoreFoundation reference constant kCFURLLocalizedTypeDescriptionKey as an objc.ID.
 func KCFURLLocalizedTypeDescriptionKey() objc.ID { return purego.CFConstant(raw.KCFURLLocalizedTypeDescriptionKey()) }
 
-// KCFURLLabelNumberKey returns the CoreFoundation constant kCFURLLabelNumberKey as a toll-free-bridged objc.ID.
+// KCFURLLabelNumberKey returns the value of the CoreFoundation reference constant kCFURLLabelNumberKey as an objc.ID.
 func KCFURLLabelNumberKey() objc.ID { return purego.CFConstant(raw.KCFURLLabelNumberKey()) }
 
-// KCFURLLabelColorKey returns the CoreFoundation constant kCFURLLabelColorKey as a toll-free-bridged objc.ID.
+// KCFURLLabelColorKey returns the value of the CoreFoundation reference constant kCFURLLabelColorKey as an objc.ID.
 func KCFURLLabelColorKey() objc.ID { return purego.CFConstant(raw.KCFURLLabelColorKey()) }
 
-// KCFURLLocalizedLabelKey returns the CoreFoundation constant kCFURLLocalizedLabelKey as a toll-free-bridged objc.ID.
+// KCFURLLocalizedLabelKey returns the value of the CoreFoundation reference constant kCFURLLocalizedLabelKey as an objc.ID.
 func KCFURLLocalizedLabelKey() objc.ID { return purego.CFConstant(raw.KCFURLLocalizedLabelKey()) }
 
-// KCFURLEffectiveIconKey returns the CoreFoundation constant kCFURLEffectiveIconKey as a toll-free-bridged objc.ID.
+// KCFURLEffectiveIconKey returns the value of the CoreFoundation reference constant kCFURLEffectiveIconKey as an objc.ID.
 func KCFURLEffectiveIconKey() objc.ID { return purego.CFConstant(raw.KCFURLEffectiveIconKey()) }
 
-// KCFURLCustomIconKey returns the CoreFoundation constant kCFURLCustomIconKey as a toll-free-bridged objc.ID.
+// KCFURLCustomIconKey returns the value of the CoreFoundation reference constant kCFURLCustomIconKey as an objc.ID.
 func KCFURLCustomIconKey() objc.ID { return purego.CFConstant(raw.KCFURLCustomIconKey()) }
 
-// KCFURLFileResourceIdentifierKey returns the CoreFoundation constant kCFURLFileResourceIdentifierKey as a toll-free-bridged objc.ID.
+// KCFURLFileResourceIdentifierKey returns the value of the CoreFoundation reference constant kCFURLFileResourceIdentifierKey as an objc.ID.
 func KCFURLFileResourceIdentifierKey() objc.ID { return purego.CFConstant(raw.KCFURLFileResourceIdentifierKey()) }
 
-// KCFURLVolumeIdentifierKey returns the CoreFoundation constant kCFURLVolumeIdentifierKey as a toll-free-bridged objc.ID.
+// KCFURLVolumeIdentifierKey returns the value of the CoreFoundation reference constant kCFURLVolumeIdentifierKey as an objc.ID.
 func KCFURLVolumeIdentifierKey() objc.ID { return purego.CFConstant(raw.KCFURLVolumeIdentifierKey()) }
 
-// KCFURLPreferredIOBlockSizeKey returns the CoreFoundation constant kCFURLPreferredIOBlockSizeKey as a toll-free-bridged objc.ID.
+// KCFURLPreferredIOBlockSizeKey returns the value of the CoreFoundation reference constant kCFURLPreferredIOBlockSizeKey as an objc.ID.
 func KCFURLPreferredIOBlockSizeKey() objc.ID { return purego.CFConstant(raw.KCFURLPreferredIOBlockSizeKey()) }
 
-// KCFURLIsReadableKey returns the CoreFoundation constant kCFURLIsReadableKey as a toll-free-bridged objc.ID.
+// KCFURLIsReadableKey returns the value of the CoreFoundation reference constant kCFURLIsReadableKey as an objc.ID.
 func KCFURLIsReadableKey() objc.ID { return purego.CFConstant(raw.KCFURLIsReadableKey()) }
 
-// KCFURLIsWritableKey returns the CoreFoundation constant kCFURLIsWritableKey as a toll-free-bridged objc.ID.
+// KCFURLIsWritableKey returns the value of the CoreFoundation reference constant kCFURLIsWritableKey as an objc.ID.
 func KCFURLIsWritableKey() objc.ID { return purego.CFConstant(raw.KCFURLIsWritableKey()) }
 
-// KCFURLIsExecutableKey returns the CoreFoundation constant kCFURLIsExecutableKey as a toll-free-bridged objc.ID.
+// KCFURLIsExecutableKey returns the value of the CoreFoundation reference constant kCFURLIsExecutableKey as an objc.ID.
 func KCFURLIsExecutableKey() objc.ID { return purego.CFConstant(raw.KCFURLIsExecutableKey()) }
 
-// KCFURLFileSecurityKey returns the CoreFoundation constant kCFURLFileSecurityKey as a toll-free-bridged objc.ID.
+// KCFURLFileSecurityKey returns the value of the CoreFoundation reference constant kCFURLFileSecurityKey as an objc.ID.
 func KCFURLFileSecurityKey() objc.ID { return purego.CFConstant(raw.KCFURLFileSecurityKey()) }
 
-// KCFURLIsExcludedFromBackupKey returns the CoreFoundation constant kCFURLIsExcludedFromBackupKey as a toll-free-bridged objc.ID.
+// KCFURLIsExcludedFromBackupKey returns the value of the CoreFoundation reference constant kCFURLIsExcludedFromBackupKey as an objc.ID.
 func KCFURLIsExcludedFromBackupKey() objc.ID { return purego.CFConstant(raw.KCFURLIsExcludedFromBackupKey()) }
 
-// KCFURLTagNamesKey returns the CoreFoundation constant kCFURLTagNamesKey as a toll-free-bridged objc.ID.
+// KCFURLTagNamesKey returns the value of the CoreFoundation reference constant kCFURLTagNamesKey as an objc.ID.
 func KCFURLTagNamesKey() objc.ID { return purego.CFConstant(raw.KCFURLTagNamesKey()) }
 
-// KCFURLPathKey returns the CoreFoundation constant kCFURLPathKey as a toll-free-bridged objc.ID.
+// KCFURLPathKey returns the value of the CoreFoundation reference constant kCFURLPathKey as an objc.ID.
 func KCFURLPathKey() objc.ID { return purego.CFConstant(raw.KCFURLPathKey()) }
 
-// KCFURLCanonicalPathKey returns the CoreFoundation constant kCFURLCanonicalPathKey as a toll-free-bridged objc.ID.
+// KCFURLCanonicalPathKey returns the value of the CoreFoundation reference constant kCFURLCanonicalPathKey as an objc.ID.
 func KCFURLCanonicalPathKey() objc.ID { return purego.CFConstant(raw.KCFURLCanonicalPathKey()) }
 
-// KCFURLIsMountTriggerKey returns the CoreFoundation constant kCFURLIsMountTriggerKey as a toll-free-bridged objc.ID.
+// KCFURLIsMountTriggerKey returns the value of the CoreFoundation reference constant kCFURLIsMountTriggerKey as an objc.ID.
 func KCFURLIsMountTriggerKey() objc.ID { return purego.CFConstant(raw.KCFURLIsMountTriggerKey()) }
 
-// KCFURLGenerationIdentifierKey returns the CoreFoundation constant kCFURLGenerationIdentifierKey as a toll-free-bridged objc.ID.
+// KCFURLGenerationIdentifierKey returns the value of the CoreFoundation reference constant kCFURLGenerationIdentifierKey as an objc.ID.
 func KCFURLGenerationIdentifierKey() objc.ID { return purego.CFConstant(raw.KCFURLGenerationIdentifierKey()) }
 
-// KCFURLDocumentIdentifierKey returns the CoreFoundation constant kCFURLDocumentIdentifierKey as a toll-free-bridged objc.ID.
+// KCFURLDocumentIdentifierKey returns the value of the CoreFoundation reference constant kCFURLDocumentIdentifierKey as an objc.ID.
 func KCFURLDocumentIdentifierKey() objc.ID { return purego.CFConstant(raw.KCFURLDocumentIdentifierKey()) }
 
-// KCFURLAddedToDirectoryDateKey returns the CoreFoundation constant kCFURLAddedToDirectoryDateKey as a toll-free-bridged objc.ID.
+// KCFURLAddedToDirectoryDateKey returns the value of the CoreFoundation reference constant kCFURLAddedToDirectoryDateKey as an objc.ID.
 func KCFURLAddedToDirectoryDateKey() objc.ID { return purego.CFConstant(raw.KCFURLAddedToDirectoryDateKey()) }
 
-// KCFURLQuarantinePropertiesKey returns the CoreFoundation constant kCFURLQuarantinePropertiesKey as a toll-free-bridged objc.ID.
+// KCFURLQuarantinePropertiesKey returns the value of the CoreFoundation reference constant kCFURLQuarantinePropertiesKey as an objc.ID.
 func KCFURLQuarantinePropertiesKey() objc.ID { return purego.CFConstant(raw.KCFURLQuarantinePropertiesKey()) }
 
-// KCFURLFileResourceTypeKey returns the CoreFoundation constant kCFURLFileResourceTypeKey as a toll-free-bridged objc.ID.
+// KCFURLFileResourceTypeKey returns the value of the CoreFoundation reference constant kCFURLFileResourceTypeKey as an objc.ID.
 func KCFURLFileResourceTypeKey() objc.ID { return purego.CFConstant(raw.KCFURLFileResourceTypeKey()) }
 
-// KCFURLFileResourceTypeNamedPipe returns the CoreFoundation constant kCFURLFileResourceTypeNamedPipe as a toll-free-bridged objc.ID.
+// KCFURLFileResourceTypeNamedPipe returns the value of the CoreFoundation reference constant kCFURLFileResourceTypeNamedPipe as an objc.ID.
 func KCFURLFileResourceTypeNamedPipe() objc.ID { return purego.CFConstant(raw.KCFURLFileResourceTypeNamedPipe()) }
 
-// KCFURLFileResourceTypeCharacterSpecial returns the CoreFoundation constant kCFURLFileResourceTypeCharacterSpecial as a toll-free-bridged objc.ID.
+// KCFURLFileResourceTypeCharacterSpecial returns the value of the CoreFoundation reference constant kCFURLFileResourceTypeCharacterSpecial as an objc.ID.
 func KCFURLFileResourceTypeCharacterSpecial() objc.ID { return purego.CFConstant(raw.KCFURLFileResourceTypeCharacterSpecial()) }
 
-// KCFURLFileResourceTypeDirectory returns the CoreFoundation constant kCFURLFileResourceTypeDirectory as a toll-free-bridged objc.ID.
+// KCFURLFileResourceTypeDirectory returns the value of the CoreFoundation reference constant kCFURLFileResourceTypeDirectory as an objc.ID.
 func KCFURLFileResourceTypeDirectory() objc.ID { return purego.CFConstant(raw.KCFURLFileResourceTypeDirectory()) }
 
-// KCFURLFileResourceTypeBlockSpecial returns the CoreFoundation constant kCFURLFileResourceTypeBlockSpecial as a toll-free-bridged objc.ID.
+// KCFURLFileResourceTypeBlockSpecial returns the value of the CoreFoundation reference constant kCFURLFileResourceTypeBlockSpecial as an objc.ID.
 func KCFURLFileResourceTypeBlockSpecial() objc.ID { return purego.CFConstant(raw.KCFURLFileResourceTypeBlockSpecial()) }
 
-// KCFURLFileResourceTypeRegular returns the CoreFoundation constant kCFURLFileResourceTypeRegular as a toll-free-bridged objc.ID.
+// KCFURLFileResourceTypeRegular returns the value of the CoreFoundation reference constant kCFURLFileResourceTypeRegular as an objc.ID.
 func KCFURLFileResourceTypeRegular() objc.ID { return purego.CFConstant(raw.KCFURLFileResourceTypeRegular()) }
 
-// KCFURLFileResourceTypeSymbolicLink returns the CoreFoundation constant kCFURLFileResourceTypeSymbolicLink as a toll-free-bridged objc.ID.
+// KCFURLFileResourceTypeSymbolicLink returns the value of the CoreFoundation reference constant kCFURLFileResourceTypeSymbolicLink as an objc.ID.
 func KCFURLFileResourceTypeSymbolicLink() objc.ID { return purego.CFConstant(raw.KCFURLFileResourceTypeSymbolicLink()) }
 
-// KCFURLFileResourceTypeSocket returns the CoreFoundation constant kCFURLFileResourceTypeSocket as a toll-free-bridged objc.ID.
+// KCFURLFileResourceTypeSocket returns the value of the CoreFoundation reference constant kCFURLFileResourceTypeSocket as an objc.ID.
 func KCFURLFileResourceTypeSocket() objc.ID { return purego.CFConstant(raw.KCFURLFileResourceTypeSocket()) }
 
-// KCFURLFileResourceTypeUnknown returns the CoreFoundation constant kCFURLFileResourceTypeUnknown as a toll-free-bridged objc.ID.
+// KCFURLFileResourceTypeUnknown returns the value of the CoreFoundation reference constant kCFURLFileResourceTypeUnknown as an objc.ID.
 func KCFURLFileResourceTypeUnknown() objc.ID { return purego.CFConstant(raw.KCFURLFileResourceTypeUnknown()) }
 
-// KCFURLFileSizeKey returns the CoreFoundation constant kCFURLFileSizeKey as a toll-free-bridged objc.ID.
+// KCFURLFileSizeKey returns the value of the CoreFoundation reference constant kCFURLFileSizeKey as an objc.ID.
 func KCFURLFileSizeKey() objc.ID { return purego.CFConstant(raw.KCFURLFileSizeKey()) }
 
-// KCFURLFileAllocatedSizeKey returns the CoreFoundation constant kCFURLFileAllocatedSizeKey as a toll-free-bridged objc.ID.
+// KCFURLFileAllocatedSizeKey returns the value of the CoreFoundation reference constant kCFURLFileAllocatedSizeKey as an objc.ID.
 func KCFURLFileAllocatedSizeKey() objc.ID { return purego.CFConstant(raw.KCFURLFileAllocatedSizeKey()) }
 
-// KCFURLTotalFileSizeKey returns the CoreFoundation constant kCFURLTotalFileSizeKey as a toll-free-bridged objc.ID.
+// KCFURLTotalFileSizeKey returns the value of the CoreFoundation reference constant kCFURLTotalFileSizeKey as an objc.ID.
 func KCFURLTotalFileSizeKey() objc.ID { return purego.CFConstant(raw.KCFURLTotalFileSizeKey()) }
 
-// KCFURLTotalFileAllocatedSizeKey returns the CoreFoundation constant kCFURLTotalFileAllocatedSizeKey as a toll-free-bridged objc.ID.
+// KCFURLTotalFileAllocatedSizeKey returns the value of the CoreFoundation reference constant kCFURLTotalFileAllocatedSizeKey as an objc.ID.
 func KCFURLTotalFileAllocatedSizeKey() objc.ID { return purego.CFConstant(raw.KCFURLTotalFileAllocatedSizeKey()) }
 
-// KCFURLIsAliasFileKey returns the CoreFoundation constant kCFURLIsAliasFileKey as a toll-free-bridged objc.ID.
+// KCFURLIsAliasFileKey returns the value of the CoreFoundation reference constant kCFURLIsAliasFileKey as an objc.ID.
 func KCFURLIsAliasFileKey() objc.ID { return purego.CFConstant(raw.KCFURLIsAliasFileKey()) }
 
-// KCFURLDirectoryEntryCountKey returns the CoreFoundation constant kCFURLDirectoryEntryCountKey as a toll-free-bridged objc.ID.
+// KCFURLDirectoryEntryCountKey returns the value of the CoreFoundation reference constant kCFURLDirectoryEntryCountKey as an objc.ID.
 func KCFURLDirectoryEntryCountKey() objc.ID { return purego.CFConstant(raw.KCFURLDirectoryEntryCountKey()) }
 
-// KCFURLVolumeLocalizedFormatDescriptionKey returns the CoreFoundation constant kCFURLVolumeLocalizedFormatDescriptionKey as a toll-free-bridged objc.ID.
+// KCFURLVolumeLocalizedFormatDescriptionKey returns the value of the CoreFoundation reference constant kCFURLVolumeLocalizedFormatDescriptionKey as an objc.ID.
 func KCFURLVolumeLocalizedFormatDescriptionKey() objc.ID { return purego.CFConstant(raw.KCFURLVolumeLocalizedFormatDescriptionKey()) }
 
-// KCFURLVolumeTotalCapacityKey returns the CoreFoundation constant kCFURLVolumeTotalCapacityKey as a toll-free-bridged objc.ID.
+// KCFURLVolumeTotalCapacityKey returns the value of the CoreFoundation reference constant kCFURLVolumeTotalCapacityKey as an objc.ID.
 func KCFURLVolumeTotalCapacityKey() objc.ID { return purego.CFConstant(raw.KCFURLVolumeTotalCapacityKey()) }
 
-// KCFURLVolumeAvailableCapacityKey returns the CoreFoundation constant kCFURLVolumeAvailableCapacityKey as a toll-free-bridged objc.ID.
+// KCFURLVolumeAvailableCapacityKey returns the value of the CoreFoundation reference constant kCFURLVolumeAvailableCapacityKey as an objc.ID.
 func KCFURLVolumeAvailableCapacityKey() objc.ID { return purego.CFConstant(raw.KCFURLVolumeAvailableCapacityKey()) }
 
-// KCFURLVolumeAvailableCapacityForImportantUsageKey returns the CoreFoundation constant kCFURLVolumeAvailableCapacityForImportantUsageKey as a toll-free-bridged objc.ID.
+// KCFURLVolumeAvailableCapacityForImportantUsageKey returns the value of the CoreFoundation reference constant kCFURLVolumeAvailableCapacityForImportantUsageKey as an objc.ID.
 func KCFURLVolumeAvailableCapacityForImportantUsageKey() objc.ID { return purego.CFConstant(raw.KCFURLVolumeAvailableCapacityForImportantUsageKey()) }
 
-// KCFURLVolumeAvailableCapacityForOpportunisticUsageKey returns the CoreFoundation constant kCFURLVolumeAvailableCapacityForOpportunisticUsageKey as a toll-free-bridged objc.ID.
+// KCFURLVolumeAvailableCapacityForOpportunisticUsageKey returns the value of the CoreFoundation reference constant kCFURLVolumeAvailableCapacityForOpportunisticUsageKey as an objc.ID.
 func KCFURLVolumeAvailableCapacityForOpportunisticUsageKey() objc.ID { return purego.CFConstant(raw.KCFURLVolumeAvailableCapacityForOpportunisticUsageKey()) }
 
-// KCFURLVolumeResourceCountKey returns the CoreFoundation constant kCFURLVolumeResourceCountKey as a toll-free-bridged objc.ID.
+// KCFURLVolumeResourceCountKey returns the value of the CoreFoundation reference constant kCFURLVolumeResourceCountKey as an objc.ID.
 func KCFURLVolumeResourceCountKey() objc.ID { return purego.CFConstant(raw.KCFURLVolumeResourceCountKey()) }
 
-// KCFURLVolumeSupportsPersistentIDsKey returns the CoreFoundation constant kCFURLVolumeSupportsPersistentIDsKey as a toll-free-bridged objc.ID.
+// KCFURLVolumeSupportsPersistentIDsKey returns the value of the CoreFoundation reference constant kCFURLVolumeSupportsPersistentIDsKey as an objc.ID.
 func KCFURLVolumeSupportsPersistentIDsKey() objc.ID { return purego.CFConstant(raw.KCFURLVolumeSupportsPersistentIDsKey()) }
 
-// KCFURLVolumeSupportsSymbolicLinksKey returns the CoreFoundation constant kCFURLVolumeSupportsSymbolicLinksKey as a toll-free-bridged objc.ID.
+// KCFURLVolumeSupportsSymbolicLinksKey returns the value of the CoreFoundation reference constant kCFURLVolumeSupportsSymbolicLinksKey as an objc.ID.
 func KCFURLVolumeSupportsSymbolicLinksKey() objc.ID { return purego.CFConstant(raw.KCFURLVolumeSupportsSymbolicLinksKey()) }
 
-// KCFURLVolumeSupportsHardLinksKey returns the CoreFoundation constant kCFURLVolumeSupportsHardLinksKey as a toll-free-bridged objc.ID.
+// KCFURLVolumeSupportsHardLinksKey returns the value of the CoreFoundation reference constant kCFURLVolumeSupportsHardLinksKey as an objc.ID.
 func KCFURLVolumeSupportsHardLinksKey() objc.ID { return purego.CFConstant(raw.KCFURLVolumeSupportsHardLinksKey()) }
 
-// KCFURLVolumeSupportsJournalingKey returns the CoreFoundation constant kCFURLVolumeSupportsJournalingKey as a toll-free-bridged objc.ID.
+// KCFURLVolumeSupportsJournalingKey returns the value of the CoreFoundation reference constant kCFURLVolumeSupportsJournalingKey as an objc.ID.
 func KCFURLVolumeSupportsJournalingKey() objc.ID { return purego.CFConstant(raw.KCFURLVolumeSupportsJournalingKey()) }
 
-// KCFURLVolumeIsJournalingKey returns the CoreFoundation constant kCFURLVolumeIsJournalingKey as a toll-free-bridged objc.ID.
+// KCFURLVolumeIsJournalingKey returns the value of the CoreFoundation reference constant kCFURLVolumeIsJournalingKey as an objc.ID.
 func KCFURLVolumeIsJournalingKey() objc.ID { return purego.CFConstant(raw.KCFURLVolumeIsJournalingKey()) }
 
-// KCFURLVolumeSupportsSparseFilesKey returns the CoreFoundation constant kCFURLVolumeSupportsSparseFilesKey as a toll-free-bridged objc.ID.
+// KCFURLVolumeSupportsSparseFilesKey returns the value of the CoreFoundation reference constant kCFURLVolumeSupportsSparseFilesKey as an objc.ID.
 func KCFURLVolumeSupportsSparseFilesKey() objc.ID { return purego.CFConstant(raw.KCFURLVolumeSupportsSparseFilesKey()) }
 
-// KCFURLVolumeSupportsZeroRunsKey returns the CoreFoundation constant kCFURLVolumeSupportsZeroRunsKey as a toll-free-bridged objc.ID.
+// KCFURLVolumeSupportsZeroRunsKey returns the value of the CoreFoundation reference constant kCFURLVolumeSupportsZeroRunsKey as an objc.ID.
 func KCFURLVolumeSupportsZeroRunsKey() objc.ID { return purego.CFConstant(raw.KCFURLVolumeSupportsZeroRunsKey()) }
 
-// KCFURLVolumeSupportsCaseSensitiveNamesKey returns the CoreFoundation constant kCFURLVolumeSupportsCaseSensitiveNamesKey as a toll-free-bridged objc.ID.
+// KCFURLVolumeSupportsCaseSensitiveNamesKey returns the value of the CoreFoundation reference constant kCFURLVolumeSupportsCaseSensitiveNamesKey as an objc.ID.
 func KCFURLVolumeSupportsCaseSensitiveNamesKey() objc.ID { return purego.CFConstant(raw.KCFURLVolumeSupportsCaseSensitiveNamesKey()) }
 
-// KCFURLVolumeSupportsCasePreservedNamesKey returns the CoreFoundation constant kCFURLVolumeSupportsCasePreservedNamesKey as a toll-free-bridged objc.ID.
+// KCFURLVolumeSupportsCasePreservedNamesKey returns the value of the CoreFoundation reference constant kCFURLVolumeSupportsCasePreservedNamesKey as an objc.ID.
 func KCFURLVolumeSupportsCasePreservedNamesKey() objc.ID { return purego.CFConstant(raw.KCFURLVolumeSupportsCasePreservedNamesKey()) }
 
-// KCFURLVolumeSupportsRootDirectoryDatesKey returns the CoreFoundation constant kCFURLVolumeSupportsRootDirectoryDatesKey as a toll-free-bridged objc.ID.
+// KCFURLVolumeSupportsRootDirectoryDatesKey returns the value of the CoreFoundation reference constant kCFURLVolumeSupportsRootDirectoryDatesKey as an objc.ID.
 func KCFURLVolumeSupportsRootDirectoryDatesKey() objc.ID { return purego.CFConstant(raw.KCFURLVolumeSupportsRootDirectoryDatesKey()) }
 
-// KCFURLVolumeSupportsVolumeSizesKey returns the CoreFoundation constant kCFURLVolumeSupportsVolumeSizesKey as a toll-free-bridged objc.ID.
+// KCFURLVolumeSupportsVolumeSizesKey returns the value of the CoreFoundation reference constant kCFURLVolumeSupportsVolumeSizesKey as an objc.ID.
 func KCFURLVolumeSupportsVolumeSizesKey() objc.ID { return purego.CFConstant(raw.KCFURLVolumeSupportsVolumeSizesKey()) }
 
-// KCFURLVolumeSupportsRenamingKey returns the CoreFoundation constant kCFURLVolumeSupportsRenamingKey as a toll-free-bridged objc.ID.
+// KCFURLVolumeSupportsRenamingKey returns the value of the CoreFoundation reference constant kCFURLVolumeSupportsRenamingKey as an objc.ID.
 func KCFURLVolumeSupportsRenamingKey() objc.ID { return purego.CFConstant(raw.KCFURLVolumeSupportsRenamingKey()) }
 
-// KCFURLVolumeSupportsAdvisoryFileLockingKey returns the CoreFoundation constant kCFURLVolumeSupportsAdvisoryFileLockingKey as a toll-free-bridged objc.ID.
+// KCFURLVolumeSupportsAdvisoryFileLockingKey returns the value of the CoreFoundation reference constant kCFURLVolumeSupportsAdvisoryFileLockingKey as an objc.ID.
 func KCFURLVolumeSupportsAdvisoryFileLockingKey() objc.ID { return purego.CFConstant(raw.KCFURLVolumeSupportsAdvisoryFileLockingKey()) }
 
-// KCFURLVolumeSupportsExtendedSecurityKey returns the CoreFoundation constant kCFURLVolumeSupportsExtendedSecurityKey as a toll-free-bridged objc.ID.
+// KCFURLVolumeSupportsExtendedSecurityKey returns the value of the CoreFoundation reference constant kCFURLVolumeSupportsExtendedSecurityKey as an objc.ID.
 func KCFURLVolumeSupportsExtendedSecurityKey() objc.ID { return purego.CFConstant(raw.KCFURLVolumeSupportsExtendedSecurityKey()) }
 
-// KCFURLVolumeIsBrowsableKey returns the CoreFoundation constant kCFURLVolumeIsBrowsableKey as a toll-free-bridged objc.ID.
+// KCFURLVolumeIsBrowsableKey returns the value of the CoreFoundation reference constant kCFURLVolumeIsBrowsableKey as an objc.ID.
 func KCFURLVolumeIsBrowsableKey() objc.ID { return purego.CFConstant(raw.KCFURLVolumeIsBrowsableKey()) }
 
-// KCFURLVolumeMaximumFileSizeKey returns the CoreFoundation constant kCFURLVolumeMaximumFileSizeKey as a toll-free-bridged objc.ID.
+// KCFURLVolumeMaximumFileSizeKey returns the value of the CoreFoundation reference constant kCFURLVolumeMaximumFileSizeKey as an objc.ID.
 func KCFURLVolumeMaximumFileSizeKey() objc.ID { return purego.CFConstant(raw.KCFURLVolumeMaximumFileSizeKey()) }
 
-// KCFURLVolumeIsEjectableKey returns the CoreFoundation constant kCFURLVolumeIsEjectableKey as a toll-free-bridged objc.ID.
+// KCFURLVolumeIsEjectableKey returns the value of the CoreFoundation reference constant kCFURLVolumeIsEjectableKey as an objc.ID.
 func KCFURLVolumeIsEjectableKey() objc.ID { return purego.CFConstant(raw.KCFURLVolumeIsEjectableKey()) }
 
-// KCFURLVolumeIsRemovableKey returns the CoreFoundation constant kCFURLVolumeIsRemovableKey as a toll-free-bridged objc.ID.
+// KCFURLVolumeIsRemovableKey returns the value of the CoreFoundation reference constant kCFURLVolumeIsRemovableKey as an objc.ID.
 func KCFURLVolumeIsRemovableKey() objc.ID { return purego.CFConstant(raw.KCFURLVolumeIsRemovableKey()) }
 
-// KCFURLVolumeIsInternalKey returns the CoreFoundation constant kCFURLVolumeIsInternalKey as a toll-free-bridged objc.ID.
+// KCFURLVolumeIsInternalKey returns the value of the CoreFoundation reference constant kCFURLVolumeIsInternalKey as an objc.ID.
 func KCFURLVolumeIsInternalKey() objc.ID { return purego.CFConstant(raw.KCFURLVolumeIsInternalKey()) }
 
-// KCFURLVolumeIsAutomountedKey returns the CoreFoundation constant kCFURLVolumeIsAutomountedKey as a toll-free-bridged objc.ID.
+// KCFURLVolumeIsAutomountedKey returns the value of the CoreFoundation reference constant kCFURLVolumeIsAutomountedKey as an objc.ID.
 func KCFURLVolumeIsAutomountedKey() objc.ID { return purego.CFConstant(raw.KCFURLVolumeIsAutomountedKey()) }
 
-// KCFURLVolumeIsLocalKey returns the CoreFoundation constant kCFURLVolumeIsLocalKey as a toll-free-bridged objc.ID.
+// KCFURLVolumeIsLocalKey returns the value of the CoreFoundation reference constant kCFURLVolumeIsLocalKey as an objc.ID.
 func KCFURLVolumeIsLocalKey() objc.ID { return purego.CFConstant(raw.KCFURLVolumeIsLocalKey()) }
 
-// KCFURLVolumeIsReadOnlyKey returns the CoreFoundation constant kCFURLVolumeIsReadOnlyKey as a toll-free-bridged objc.ID.
+// KCFURLVolumeIsReadOnlyKey returns the value of the CoreFoundation reference constant kCFURLVolumeIsReadOnlyKey as an objc.ID.
 func KCFURLVolumeIsReadOnlyKey() objc.ID { return purego.CFConstant(raw.KCFURLVolumeIsReadOnlyKey()) }
 
-// KCFURLVolumeCreationDateKey returns the CoreFoundation constant kCFURLVolumeCreationDateKey as a toll-free-bridged objc.ID.
+// KCFURLVolumeCreationDateKey returns the value of the CoreFoundation reference constant kCFURLVolumeCreationDateKey as an objc.ID.
 func KCFURLVolumeCreationDateKey() objc.ID { return purego.CFConstant(raw.KCFURLVolumeCreationDateKey()) }
 
-// KCFURLVolumeURLForRemountingKey returns the CoreFoundation constant kCFURLVolumeURLForRemountingKey as a toll-free-bridged objc.ID.
+// KCFURLVolumeURLForRemountingKey returns the value of the CoreFoundation reference constant kCFURLVolumeURLForRemountingKey as an objc.ID.
 func KCFURLVolumeURLForRemountingKey() objc.ID { return purego.CFConstant(raw.KCFURLVolumeURLForRemountingKey()) }
 
-// KCFURLVolumeUUIDStringKey returns the CoreFoundation constant kCFURLVolumeUUIDStringKey as a toll-free-bridged objc.ID.
+// KCFURLVolumeUUIDStringKey returns the value of the CoreFoundation reference constant kCFURLVolumeUUIDStringKey as an objc.ID.
 func KCFURLVolumeUUIDStringKey() objc.ID { return purego.CFConstant(raw.KCFURLVolumeUUIDStringKey()) }
 
-// KCFURLVolumeNameKey returns the CoreFoundation constant kCFURLVolumeNameKey as a toll-free-bridged objc.ID.
+// KCFURLVolumeNameKey returns the value of the CoreFoundation reference constant kCFURLVolumeNameKey as an objc.ID.
 func KCFURLVolumeNameKey() objc.ID { return purego.CFConstant(raw.KCFURLVolumeNameKey()) }
 
-// KCFURLVolumeLocalizedNameKey returns the CoreFoundation constant kCFURLVolumeLocalizedNameKey as a toll-free-bridged objc.ID.
+// KCFURLVolumeLocalizedNameKey returns the value of the CoreFoundation reference constant kCFURLVolumeLocalizedNameKey as an objc.ID.
 func KCFURLVolumeLocalizedNameKey() objc.ID { return purego.CFConstant(raw.KCFURLVolumeLocalizedNameKey()) }
 
-// KCFURLVolumeIsEncryptedKey returns the CoreFoundation constant kCFURLVolumeIsEncryptedKey as a toll-free-bridged objc.ID.
+// KCFURLVolumeIsEncryptedKey returns the value of the CoreFoundation reference constant kCFURLVolumeIsEncryptedKey as an objc.ID.
 func KCFURLVolumeIsEncryptedKey() objc.ID { return purego.CFConstant(raw.KCFURLVolumeIsEncryptedKey()) }
 
-// KCFURLVolumeIsRootFileSystemKey returns the CoreFoundation constant kCFURLVolumeIsRootFileSystemKey as a toll-free-bridged objc.ID.
+// KCFURLVolumeIsRootFileSystemKey returns the value of the CoreFoundation reference constant kCFURLVolumeIsRootFileSystemKey as an objc.ID.
 func KCFURLVolumeIsRootFileSystemKey() objc.ID { return purego.CFConstant(raw.KCFURLVolumeIsRootFileSystemKey()) }
 
-// KCFURLVolumeSupportsCompressionKey returns the CoreFoundation constant kCFURLVolumeSupportsCompressionKey as a toll-free-bridged objc.ID.
+// KCFURLVolumeSupportsCompressionKey returns the value of the CoreFoundation reference constant kCFURLVolumeSupportsCompressionKey as an objc.ID.
 func KCFURLVolumeSupportsCompressionKey() objc.ID { return purego.CFConstant(raw.KCFURLVolumeSupportsCompressionKey()) }
 
-// KCFURLVolumeSupportsFileCloningKey returns the CoreFoundation constant kCFURLVolumeSupportsFileCloningKey as a toll-free-bridged objc.ID.
+// KCFURLVolumeSupportsFileCloningKey returns the value of the CoreFoundation reference constant kCFURLVolumeSupportsFileCloningKey as an objc.ID.
 func KCFURLVolumeSupportsFileCloningKey() objc.ID { return purego.CFConstant(raw.KCFURLVolumeSupportsFileCloningKey()) }
 
-// KCFURLVolumeSupportsSwapRenamingKey returns the CoreFoundation constant kCFURLVolumeSupportsSwapRenamingKey as a toll-free-bridged objc.ID.
+// KCFURLVolumeSupportsSwapRenamingKey returns the value of the CoreFoundation reference constant kCFURLVolumeSupportsSwapRenamingKey as an objc.ID.
 func KCFURLVolumeSupportsSwapRenamingKey() objc.ID { return purego.CFConstant(raw.KCFURLVolumeSupportsSwapRenamingKey()) }
 
-// KCFURLVolumeSupportsExclusiveRenamingKey returns the CoreFoundation constant kCFURLVolumeSupportsExclusiveRenamingKey as a toll-free-bridged objc.ID.
+// KCFURLVolumeSupportsExclusiveRenamingKey returns the value of the CoreFoundation reference constant kCFURLVolumeSupportsExclusiveRenamingKey as an objc.ID.
 func KCFURLVolumeSupportsExclusiveRenamingKey() objc.ID { return purego.CFConstant(raw.KCFURLVolumeSupportsExclusiveRenamingKey()) }
 
-// KCFURLVolumeSupportsImmutableFilesKey returns the CoreFoundation constant kCFURLVolumeSupportsImmutableFilesKey as a toll-free-bridged objc.ID.
+// KCFURLVolumeSupportsImmutableFilesKey returns the value of the CoreFoundation reference constant kCFURLVolumeSupportsImmutableFilesKey as an objc.ID.
 func KCFURLVolumeSupportsImmutableFilesKey() objc.ID { return purego.CFConstant(raw.KCFURLVolumeSupportsImmutableFilesKey()) }
 
-// KCFURLVolumeSupportsAccessPermissionsKey returns the CoreFoundation constant kCFURLVolumeSupportsAccessPermissionsKey as a toll-free-bridged objc.ID.
+// KCFURLVolumeSupportsAccessPermissionsKey returns the value of the CoreFoundation reference constant kCFURLVolumeSupportsAccessPermissionsKey as an objc.ID.
 func KCFURLVolumeSupportsAccessPermissionsKey() objc.ID { return purego.CFConstant(raw.KCFURLVolumeSupportsAccessPermissionsKey()) }
 
-// KCFURLVolumeSupportsFileProtectionKey returns the CoreFoundation constant kCFURLVolumeSupportsFileProtectionKey as a toll-free-bridged objc.ID.
+// KCFURLVolumeSupportsFileProtectionKey returns the value of the CoreFoundation reference constant kCFURLVolumeSupportsFileProtectionKey as an objc.ID.
 func KCFURLVolumeSupportsFileProtectionKey() objc.ID { return purego.CFConstant(raw.KCFURLVolumeSupportsFileProtectionKey()) }
 
-// KCFURLVolumeTypeNameKey returns the CoreFoundation constant kCFURLVolumeTypeNameKey as a toll-free-bridged objc.ID.
+// KCFURLVolumeTypeNameKey returns the value of the CoreFoundation reference constant kCFURLVolumeTypeNameKey as an objc.ID.
 func KCFURLVolumeTypeNameKey() objc.ID { return purego.CFConstant(raw.KCFURLVolumeTypeNameKey()) }
 
-// KCFURLVolumeSubtypeKey returns the CoreFoundation constant kCFURLVolumeSubtypeKey as a toll-free-bridged objc.ID.
+// KCFURLVolumeSubtypeKey returns the value of the CoreFoundation reference constant kCFURLVolumeSubtypeKey as an objc.ID.
 func KCFURLVolumeSubtypeKey() objc.ID { return purego.CFConstant(raw.KCFURLVolumeSubtypeKey()) }
 
-// KCFURLVolumeMountFromLocationKey returns the CoreFoundation constant kCFURLVolumeMountFromLocationKey as a toll-free-bridged objc.ID.
+// KCFURLVolumeMountFromLocationKey returns the value of the CoreFoundation reference constant kCFURLVolumeMountFromLocationKey as an objc.ID.
 func KCFURLVolumeMountFromLocationKey() objc.ID { return purego.CFConstant(raw.KCFURLVolumeMountFromLocationKey()) }
 
-// KCFURLIsUbiquitousItemKey returns the CoreFoundation constant kCFURLIsUbiquitousItemKey as a toll-free-bridged objc.ID.
+// KCFURLIsUbiquitousItemKey returns the value of the CoreFoundation reference constant kCFURLIsUbiquitousItemKey as an objc.ID.
 func KCFURLIsUbiquitousItemKey() objc.ID { return purego.CFConstant(raw.KCFURLIsUbiquitousItemKey()) }
 
-// KCFURLUbiquitousItemHasUnresolvedConflictsKey returns the CoreFoundation constant kCFURLUbiquitousItemHasUnresolvedConflictsKey as a toll-free-bridged objc.ID.
+// KCFURLUbiquitousItemHasUnresolvedConflictsKey returns the value of the CoreFoundation reference constant kCFURLUbiquitousItemHasUnresolvedConflictsKey as an objc.ID.
 func KCFURLUbiquitousItemHasUnresolvedConflictsKey() objc.ID { return purego.CFConstant(raw.KCFURLUbiquitousItemHasUnresolvedConflictsKey()) }
 
-// KCFURLUbiquitousItemIsDownloadedKey returns the CoreFoundation constant kCFURLUbiquitousItemIsDownloadedKey as a toll-free-bridged objc.ID.
+// KCFURLUbiquitousItemIsDownloadedKey returns the value of the CoreFoundation reference constant kCFURLUbiquitousItemIsDownloadedKey as an objc.ID.
 func KCFURLUbiquitousItemIsDownloadedKey() objc.ID { return purego.CFConstant(raw.KCFURLUbiquitousItemIsDownloadedKey()) }
 
-// KCFURLUbiquitousItemIsDownloadingKey returns the CoreFoundation constant kCFURLUbiquitousItemIsDownloadingKey as a toll-free-bridged objc.ID.
+// KCFURLUbiquitousItemIsDownloadingKey returns the value of the CoreFoundation reference constant kCFURLUbiquitousItemIsDownloadingKey as an objc.ID.
 func KCFURLUbiquitousItemIsDownloadingKey() objc.ID { return purego.CFConstant(raw.KCFURLUbiquitousItemIsDownloadingKey()) }
 
-// KCFURLUbiquitousItemIsUploadedKey returns the CoreFoundation constant kCFURLUbiquitousItemIsUploadedKey as a toll-free-bridged objc.ID.
+// KCFURLUbiquitousItemIsUploadedKey returns the value of the CoreFoundation reference constant kCFURLUbiquitousItemIsUploadedKey as an objc.ID.
 func KCFURLUbiquitousItemIsUploadedKey() objc.ID { return purego.CFConstant(raw.KCFURLUbiquitousItemIsUploadedKey()) }
 
-// KCFURLUbiquitousItemIsUploadingKey returns the CoreFoundation constant kCFURLUbiquitousItemIsUploadingKey as a toll-free-bridged objc.ID.
+// KCFURLUbiquitousItemIsUploadingKey returns the value of the CoreFoundation reference constant kCFURLUbiquitousItemIsUploadingKey as an objc.ID.
 func KCFURLUbiquitousItemIsUploadingKey() objc.ID { return purego.CFConstant(raw.KCFURLUbiquitousItemIsUploadingKey()) }
 
-// KCFURLUbiquitousItemPercentDownloadedKey returns the CoreFoundation constant kCFURLUbiquitousItemPercentDownloadedKey as a toll-free-bridged objc.ID.
+// KCFURLUbiquitousItemPercentDownloadedKey returns the value of the CoreFoundation reference constant kCFURLUbiquitousItemPercentDownloadedKey as an objc.ID.
 func KCFURLUbiquitousItemPercentDownloadedKey() objc.ID { return purego.CFConstant(raw.KCFURLUbiquitousItemPercentDownloadedKey()) }
 
-// KCFURLUbiquitousItemPercentUploadedKey returns the CoreFoundation constant kCFURLUbiquitousItemPercentUploadedKey as a toll-free-bridged objc.ID.
+// KCFURLUbiquitousItemPercentUploadedKey returns the value of the CoreFoundation reference constant kCFURLUbiquitousItemPercentUploadedKey as an objc.ID.
 func KCFURLUbiquitousItemPercentUploadedKey() objc.ID { return purego.CFConstant(raw.KCFURLUbiquitousItemPercentUploadedKey()) }
 
-// KCFURLUbiquitousItemDownloadingStatusKey returns the CoreFoundation constant kCFURLUbiquitousItemDownloadingStatusKey as a toll-free-bridged objc.ID.
+// KCFURLUbiquitousItemDownloadingStatusKey returns the value of the CoreFoundation reference constant kCFURLUbiquitousItemDownloadingStatusKey as an objc.ID.
 func KCFURLUbiquitousItemDownloadingStatusKey() objc.ID { return purego.CFConstant(raw.KCFURLUbiquitousItemDownloadingStatusKey()) }
 
-// KCFURLUbiquitousItemDownloadingErrorKey returns the CoreFoundation constant kCFURLUbiquitousItemDownloadingErrorKey as a toll-free-bridged objc.ID.
+// KCFURLUbiquitousItemDownloadingErrorKey returns the value of the CoreFoundation reference constant kCFURLUbiquitousItemDownloadingErrorKey as an objc.ID.
 func KCFURLUbiquitousItemDownloadingErrorKey() objc.ID { return purego.CFConstant(raw.KCFURLUbiquitousItemDownloadingErrorKey()) }
 
-// KCFURLUbiquitousItemUploadingErrorKey returns the CoreFoundation constant kCFURLUbiquitousItemUploadingErrorKey as a toll-free-bridged objc.ID.
+// KCFURLUbiquitousItemUploadingErrorKey returns the value of the CoreFoundation reference constant kCFURLUbiquitousItemUploadingErrorKey as an objc.ID.
 func KCFURLUbiquitousItemUploadingErrorKey() objc.ID { return purego.CFConstant(raw.KCFURLUbiquitousItemUploadingErrorKey()) }
 
-// KCFURLUbiquitousItemIsExcludedFromSyncKey returns the CoreFoundation constant kCFURLUbiquitousItemIsExcludedFromSyncKey as a toll-free-bridged objc.ID.
+// KCFURLUbiquitousItemIsExcludedFromSyncKey returns the value of the CoreFoundation reference constant kCFURLUbiquitousItemIsExcludedFromSyncKey as an objc.ID.
 func KCFURLUbiquitousItemIsExcludedFromSyncKey() objc.ID { return purego.CFConstant(raw.KCFURLUbiquitousItemIsExcludedFromSyncKey()) }
 
-// KCFURLUbiquitousItemDownloadingStatusNotDownloaded returns the CoreFoundation constant kCFURLUbiquitousItemDownloadingStatusNotDownloaded as a toll-free-bridged objc.ID.
+// KCFURLUbiquitousItemDownloadingStatusNotDownloaded returns the value of the CoreFoundation reference constant kCFURLUbiquitousItemDownloadingStatusNotDownloaded as an objc.ID.
 func KCFURLUbiquitousItemDownloadingStatusNotDownloaded() objc.ID { return purego.CFConstant(raw.KCFURLUbiquitousItemDownloadingStatusNotDownloaded()) }
 
-// KCFURLUbiquitousItemDownloadingStatusDownloaded returns the CoreFoundation constant kCFURLUbiquitousItemDownloadingStatusDownloaded as a toll-free-bridged objc.ID.
+// KCFURLUbiquitousItemDownloadingStatusDownloaded returns the value of the CoreFoundation reference constant kCFURLUbiquitousItemDownloadingStatusDownloaded as an objc.ID.
 func KCFURLUbiquitousItemDownloadingStatusDownloaded() objc.ID { return purego.CFConstant(raw.KCFURLUbiquitousItemDownloadingStatusDownloaded()) }
 
-// KCFURLUbiquitousItemDownloadingStatusCurrent returns the CoreFoundation constant kCFURLUbiquitousItemDownloadingStatusCurrent as a toll-free-bridged objc.ID.
+// KCFURLUbiquitousItemDownloadingStatusCurrent returns the value of the CoreFoundation reference constant kCFURLUbiquitousItemDownloadingStatusCurrent as an objc.ID.
 func KCFURLUbiquitousItemDownloadingStatusCurrent() objc.ID { return purego.CFConstant(raw.KCFURLUbiquitousItemDownloadingStatusCurrent()) }
 
-// KCFURLUbiquitousItemSupportedSyncControlsKey returns the CoreFoundation constant kCFURLUbiquitousItemSupportedSyncControlsKey as a toll-free-bridged objc.ID.
+// KCFURLUbiquitousItemSupportedSyncControlsKey returns the value of the CoreFoundation reference constant kCFURLUbiquitousItemSupportedSyncControlsKey as an objc.ID.
 func KCFURLUbiquitousItemSupportedSyncControlsKey() objc.ID { return purego.CFConstant(raw.KCFURLUbiquitousItemSupportedSyncControlsKey()) }
 
-// KCFURLUbiquitousItemIsSyncPausedKey returns the CoreFoundation constant kCFURLUbiquitousItemIsSyncPausedKey as a toll-free-bridged objc.ID.
+// KCFURLUbiquitousItemIsSyncPausedKey returns the value of the CoreFoundation reference constant kCFURLUbiquitousItemIsSyncPausedKey as an objc.ID.
 func KCFURLUbiquitousItemIsSyncPausedKey() objc.ID { return purego.CFConstant(raw.KCFURLUbiquitousItemIsSyncPausedKey()) }
 
-// KCFSocketCommandKey returns the CoreFoundation constant kCFSocketCommandKey as a toll-free-bridged objc.ID.
+// KCFSocketCommandKey returns the value of the CoreFoundation reference constant kCFSocketCommandKey as an objc.ID.
 func KCFSocketCommandKey() objc.ID { return purego.CFConstant(raw.KCFSocketCommandKey()) }
 
-// KCFSocketNameKey returns the CoreFoundation constant kCFSocketNameKey as a toll-free-bridged objc.ID.
+// KCFSocketNameKey returns the value of the CoreFoundation reference constant kCFSocketNameKey as an objc.ID.
 func KCFSocketNameKey() objc.ID { return purego.CFConstant(raw.KCFSocketNameKey()) }
 
-// KCFSocketValueKey returns the CoreFoundation constant kCFSocketValueKey as a toll-free-bridged objc.ID.
+// KCFSocketValueKey returns the value of the CoreFoundation reference constant kCFSocketValueKey as an objc.ID.
 func KCFSocketValueKey() objc.ID { return purego.CFConstant(raw.KCFSocketValueKey()) }
 
-// KCFSocketResultKey returns the CoreFoundation constant kCFSocketResultKey as a toll-free-bridged objc.ID.
+// KCFSocketResultKey returns the value of the CoreFoundation reference constant kCFSocketResultKey as an objc.ID.
 func KCFSocketResultKey() objc.ID { return purego.CFConstant(raw.KCFSocketResultKey()) }
 
-// KCFSocketErrorKey returns the CoreFoundation constant kCFSocketErrorKey as a toll-free-bridged objc.ID.
+// KCFSocketErrorKey returns the value of the CoreFoundation reference constant kCFSocketErrorKey as an objc.ID.
 func KCFSocketErrorKey() objc.ID { return purego.CFConstant(raw.KCFSocketErrorKey()) }
 
-// KCFSocketRegisterCommand returns the CoreFoundation constant kCFSocketRegisterCommand as a toll-free-bridged objc.ID.
+// KCFSocketRegisterCommand returns the value of the CoreFoundation reference constant kCFSocketRegisterCommand as an objc.ID.
 func KCFSocketRegisterCommand() objc.ID { return purego.CFConstant(raw.KCFSocketRegisterCommand()) }
 
-// KCFSocketRetrieveCommand returns the CoreFoundation constant kCFSocketRetrieveCommand as a toll-free-bridged objc.ID.
+// KCFSocketRetrieveCommand returns the value of the CoreFoundation reference constant kCFSocketRetrieveCommand as an objc.ID.
 func KCFSocketRetrieveCommand() objc.ID { return purego.CFConstant(raw.KCFSocketRetrieveCommand()) }
 
-// KCFStreamPropertySOCKSProxy returns the CoreFoundation constant kCFStreamPropertySOCKSProxy as a toll-free-bridged objc.ID.
+// KCFStreamPropertySOCKSProxy returns the value of the CoreFoundation reference constant kCFStreamPropertySOCKSProxy as an objc.ID.
 func KCFStreamPropertySOCKSProxy() objc.ID { return purego.CFConstant(raw.KCFStreamPropertySOCKSProxy()) }
 
-// KCFStreamPropertySOCKSProxyHost returns the CoreFoundation constant kCFStreamPropertySOCKSProxyHost as a toll-free-bridged objc.ID.
+// KCFStreamPropertySOCKSProxyHost returns the value of the CoreFoundation reference constant kCFStreamPropertySOCKSProxyHost as an objc.ID.
 func KCFStreamPropertySOCKSProxyHost() objc.ID { return purego.CFConstant(raw.KCFStreamPropertySOCKSProxyHost()) }
 
-// KCFStreamPropertySOCKSProxyPort returns the CoreFoundation constant kCFStreamPropertySOCKSProxyPort as a toll-free-bridged objc.ID.
+// KCFStreamPropertySOCKSProxyPort returns the value of the CoreFoundation reference constant kCFStreamPropertySOCKSProxyPort as an objc.ID.
 func KCFStreamPropertySOCKSProxyPort() objc.ID { return purego.CFConstant(raw.KCFStreamPropertySOCKSProxyPort()) }
 
-// KCFStreamPropertySOCKSVersion returns the CoreFoundation constant kCFStreamPropertySOCKSVersion as a toll-free-bridged objc.ID.
+// KCFStreamPropertySOCKSVersion returns the value of the CoreFoundation reference constant kCFStreamPropertySOCKSVersion as an objc.ID.
 func KCFStreamPropertySOCKSVersion() objc.ID { return purego.CFConstant(raw.KCFStreamPropertySOCKSVersion()) }
 
-// KCFStreamSocketSOCKSVersion4 returns the CoreFoundation constant kCFStreamSocketSOCKSVersion4 as a toll-free-bridged objc.ID.
+// KCFStreamSocketSOCKSVersion4 returns the value of the CoreFoundation reference constant kCFStreamSocketSOCKSVersion4 as an objc.ID.
 func KCFStreamSocketSOCKSVersion4() objc.ID { return purego.CFConstant(raw.KCFStreamSocketSOCKSVersion4()) }
 
-// KCFStreamSocketSOCKSVersion5 returns the CoreFoundation constant kCFStreamSocketSOCKSVersion5 as a toll-free-bridged objc.ID.
+// KCFStreamSocketSOCKSVersion5 returns the value of the CoreFoundation reference constant kCFStreamSocketSOCKSVersion5 as an objc.ID.
 func KCFStreamSocketSOCKSVersion5() objc.ID { return purego.CFConstant(raw.KCFStreamSocketSOCKSVersion5()) }
 
-// KCFStreamPropertySOCKSUser returns the CoreFoundation constant kCFStreamPropertySOCKSUser as a toll-free-bridged objc.ID.
+// KCFStreamPropertySOCKSUser returns the value of the CoreFoundation reference constant kCFStreamPropertySOCKSUser as an objc.ID.
 func KCFStreamPropertySOCKSUser() objc.ID { return purego.CFConstant(raw.KCFStreamPropertySOCKSUser()) }
 
-// KCFStreamPropertySOCKSPassword returns the CoreFoundation constant kCFStreamPropertySOCKSPassword as a toll-free-bridged objc.ID.
+// KCFStreamPropertySOCKSPassword returns the value of the CoreFoundation reference constant kCFStreamPropertySOCKSPassword as an objc.ID.
 func KCFStreamPropertySOCKSPassword() objc.ID { return purego.CFConstant(raw.KCFStreamPropertySOCKSPassword()) }
 
-// KCFStreamPropertySocketSecurityLevel returns the CoreFoundation constant kCFStreamPropertySocketSecurityLevel as a toll-free-bridged objc.ID.
+// KCFStreamPropertySocketSecurityLevel returns the value of the CoreFoundation reference constant kCFStreamPropertySocketSecurityLevel as an objc.ID.
 func KCFStreamPropertySocketSecurityLevel() objc.ID { return purego.CFConstant(raw.KCFStreamPropertySocketSecurityLevel()) }
 
-// KCFStreamSocketSecurityLevelNone returns the CoreFoundation constant kCFStreamSocketSecurityLevelNone as a toll-free-bridged objc.ID.
+// KCFStreamSocketSecurityLevelNone returns the value of the CoreFoundation reference constant kCFStreamSocketSecurityLevelNone as an objc.ID.
 func KCFStreamSocketSecurityLevelNone() objc.ID { return purego.CFConstant(raw.KCFStreamSocketSecurityLevelNone()) }
 
-// KCFStreamSocketSecurityLevelSSLv2 returns the CoreFoundation constant kCFStreamSocketSecurityLevelSSLv2 as a toll-free-bridged objc.ID.
+// KCFStreamSocketSecurityLevelSSLv2 returns the value of the CoreFoundation reference constant kCFStreamSocketSecurityLevelSSLv2 as an objc.ID.
 func KCFStreamSocketSecurityLevelSSLv2() objc.ID { return purego.CFConstant(raw.KCFStreamSocketSecurityLevelSSLv2()) }
 
-// KCFStreamSocketSecurityLevelSSLv3 returns the CoreFoundation constant kCFStreamSocketSecurityLevelSSLv3 as a toll-free-bridged objc.ID.
+// KCFStreamSocketSecurityLevelSSLv3 returns the value of the CoreFoundation reference constant kCFStreamSocketSecurityLevelSSLv3 as an objc.ID.
 func KCFStreamSocketSecurityLevelSSLv3() objc.ID { return purego.CFConstant(raw.KCFStreamSocketSecurityLevelSSLv3()) }
 
-// KCFStreamSocketSecurityLevelTLSv1 returns the CoreFoundation constant kCFStreamSocketSecurityLevelTLSv1 as a toll-free-bridged objc.ID.
+// KCFStreamSocketSecurityLevelTLSv1 returns the value of the CoreFoundation reference constant kCFStreamSocketSecurityLevelTLSv1 as an objc.ID.
 func KCFStreamSocketSecurityLevelTLSv1() objc.ID { return purego.CFConstant(raw.KCFStreamSocketSecurityLevelTLSv1()) }
 
-// KCFStreamSocketSecurityLevelNegotiatedSSL returns the CoreFoundation constant kCFStreamSocketSecurityLevelNegotiatedSSL as a toll-free-bridged objc.ID.
+// KCFStreamSocketSecurityLevelNegotiatedSSL returns the value of the CoreFoundation reference constant kCFStreamSocketSecurityLevelNegotiatedSSL as an objc.ID.
 func KCFStreamSocketSecurityLevelNegotiatedSSL() objc.ID { return purego.CFConstant(raw.KCFStreamSocketSecurityLevelNegotiatedSSL()) }
 
-// KCFStreamPropertyShouldCloseNativeSocket returns the CoreFoundation constant kCFStreamPropertyShouldCloseNativeSocket as a toll-free-bridged objc.ID.
+// KCFStreamPropertyShouldCloseNativeSocket returns the value of the CoreFoundation reference constant kCFStreamPropertyShouldCloseNativeSocket as an objc.ID.
 func KCFStreamPropertyShouldCloseNativeSocket() objc.ID { return purego.CFConstant(raw.KCFStreamPropertyShouldCloseNativeSocket()) }
 
-// KCFURLFileExists returns the CoreFoundation constant kCFURLFileExists as a toll-free-bridged objc.ID.
+// KCFURLFileExists returns the value of the CoreFoundation reference constant kCFURLFileExists as an objc.ID.
 func KCFURLFileExists() objc.ID { return purego.CFConstant(raw.KCFURLFileExists()) }
 
-// KCFURLFileDirectoryContents returns the CoreFoundation constant kCFURLFileDirectoryContents as a toll-free-bridged objc.ID.
+// KCFURLFileDirectoryContents returns the value of the CoreFoundation reference constant kCFURLFileDirectoryContents as an objc.ID.
 func KCFURLFileDirectoryContents() objc.ID { return purego.CFConstant(raw.KCFURLFileDirectoryContents()) }
 
-// KCFURLFileLength returns the CoreFoundation constant kCFURLFileLength as a toll-free-bridged objc.ID.
+// KCFURLFileLength returns the value of the CoreFoundation reference constant kCFURLFileLength as an objc.ID.
 func KCFURLFileLength() objc.ID { return purego.CFConstant(raw.KCFURLFileLength()) }
 
-// KCFURLFileLastModificationTime returns the CoreFoundation constant kCFURLFileLastModificationTime as a toll-free-bridged objc.ID.
+// KCFURLFileLastModificationTime returns the value of the CoreFoundation reference constant kCFURLFileLastModificationTime as an objc.ID.
 func KCFURLFileLastModificationTime() objc.ID { return purego.CFConstant(raw.KCFURLFileLastModificationTime()) }
 
-// KCFURLFilePOSIXMode returns the CoreFoundation constant kCFURLFilePOSIXMode as a toll-free-bridged objc.ID.
+// KCFURLFilePOSIXMode returns the value of the CoreFoundation reference constant kCFURLFilePOSIXMode as an objc.ID.
 func KCFURLFilePOSIXMode() objc.ID { return purego.CFConstant(raw.KCFURLFilePOSIXMode()) }
 
-// KCFURLFileOwnerID returns the CoreFoundation constant kCFURLFileOwnerID as a toll-free-bridged objc.ID.
+// KCFURLFileOwnerID returns the value of the CoreFoundation reference constant kCFURLFileOwnerID as an objc.ID.
 func KCFURLFileOwnerID() objc.ID { return purego.CFConstant(raw.KCFURLFileOwnerID()) }
 
-// KCFURLHTTPStatusCode returns the CoreFoundation constant kCFURLHTTPStatusCode as a toll-free-bridged objc.ID.
+// KCFURLHTTPStatusCode returns the value of the CoreFoundation reference constant kCFURLHTTPStatusCode as an objc.ID.
 func KCFURLHTTPStatusCode() objc.ID { return purego.CFConstant(raw.KCFURLHTTPStatusCode()) }
 
-// KCFURLHTTPStatusLine returns the CoreFoundation constant kCFURLHTTPStatusLine as a toll-free-bridged objc.ID.
+// KCFURLHTTPStatusLine returns the value of the CoreFoundation reference constant kCFURLHTTPStatusLine as an objc.ID.
 func KCFURLHTTPStatusLine() objc.ID { return purego.CFConstant(raw.KCFURLHTTPStatusLine()) }
 
-// KCFBundleInfoDictionaryVersionKey returns the CoreFoundation constant kCFBundleInfoDictionaryVersionKey as a toll-free-bridged objc.ID.
+// KCFBundleInfoDictionaryVersionKey returns the value of the CoreFoundation reference constant kCFBundleInfoDictionaryVersionKey as an objc.ID.
 func KCFBundleInfoDictionaryVersionKey() objc.ID { return purego.CFConstant(raw.KCFBundleInfoDictionaryVersionKey()) }
 
-// KCFBundleExecutableKey returns the CoreFoundation constant kCFBundleExecutableKey as a toll-free-bridged objc.ID.
+// KCFBundleExecutableKey returns the value of the CoreFoundation reference constant kCFBundleExecutableKey as an objc.ID.
 func KCFBundleExecutableKey() objc.ID { return purego.CFConstant(raw.KCFBundleExecutableKey()) }
 
-// KCFBundleIdentifierKey returns the CoreFoundation constant kCFBundleIdentifierKey as a toll-free-bridged objc.ID.
+// KCFBundleIdentifierKey returns the value of the CoreFoundation reference constant kCFBundleIdentifierKey as an objc.ID.
 func KCFBundleIdentifierKey() objc.ID { return purego.CFConstant(raw.KCFBundleIdentifierKey()) }
 
-// KCFBundleVersionKey returns the CoreFoundation constant kCFBundleVersionKey as a toll-free-bridged objc.ID.
+// KCFBundleVersionKey returns the value of the CoreFoundation reference constant kCFBundleVersionKey as an objc.ID.
 func KCFBundleVersionKey() objc.ID { return purego.CFConstant(raw.KCFBundleVersionKey()) }
 
-// KCFBundleDevelopmentRegionKey returns the CoreFoundation constant kCFBundleDevelopmentRegionKey as a toll-free-bridged objc.ID.
+// KCFBundleDevelopmentRegionKey returns the value of the CoreFoundation reference constant kCFBundleDevelopmentRegionKey as an objc.ID.
 func KCFBundleDevelopmentRegionKey() objc.ID { return purego.CFConstant(raw.KCFBundleDevelopmentRegionKey()) }
 
-// KCFBundleNameKey returns the CoreFoundation constant kCFBundleNameKey as a toll-free-bridged objc.ID.
+// KCFBundleNameKey returns the value of the CoreFoundation reference constant kCFBundleNameKey as an objc.ID.
 func KCFBundleNameKey() objc.ID { return purego.CFConstant(raw.KCFBundleNameKey()) }
 
-// KCFBundleLocalizationsKey returns the CoreFoundation constant kCFBundleLocalizationsKey as a toll-free-bridged objc.ID.
+// KCFBundleLocalizationsKey returns the value of the CoreFoundation reference constant kCFBundleLocalizationsKey as an objc.ID.
 func KCFBundleLocalizationsKey() objc.ID { return purego.CFConstant(raw.KCFBundleLocalizationsKey()) }
 
-// KCFPlugInDynamicRegistrationKey returns the CoreFoundation constant kCFPlugInDynamicRegistrationKey as a toll-free-bridged objc.ID.
+// KCFPlugInDynamicRegistrationKey returns the value of the CoreFoundation reference constant kCFPlugInDynamicRegistrationKey as an objc.ID.
 func KCFPlugInDynamicRegistrationKey() objc.ID { return purego.CFConstant(raw.KCFPlugInDynamicRegistrationKey()) }
 
-// KCFPlugInDynamicRegisterFunctionKey returns the CoreFoundation constant kCFPlugInDynamicRegisterFunctionKey as a toll-free-bridged objc.ID.
+// KCFPlugInDynamicRegisterFunctionKey returns the value of the CoreFoundation reference constant kCFPlugInDynamicRegisterFunctionKey as an objc.ID.
 func KCFPlugInDynamicRegisterFunctionKey() objc.ID { return purego.CFConstant(raw.KCFPlugInDynamicRegisterFunctionKey()) }
 
-// KCFPlugInUnloadFunctionKey returns the CoreFoundation constant kCFPlugInUnloadFunctionKey as a toll-free-bridged objc.ID.
+// KCFPlugInUnloadFunctionKey returns the value of the CoreFoundation reference constant kCFPlugInUnloadFunctionKey as an objc.ID.
 func KCFPlugInUnloadFunctionKey() objc.ID { return purego.CFConstant(raw.KCFPlugInUnloadFunctionKey()) }
 
-// KCFPlugInFactoriesKey returns the CoreFoundation constant kCFPlugInFactoriesKey as a toll-free-bridged objc.ID.
+// KCFPlugInFactoriesKey returns the value of the CoreFoundation reference constant kCFPlugInFactoriesKey as an objc.ID.
 func KCFPlugInFactoriesKey() objc.ID { return purego.CFConstant(raw.KCFPlugInFactoriesKey()) }
 
-// KCFPlugInTypesKey returns the CoreFoundation constant kCFPlugInTypesKey as a toll-free-bridged objc.ID.
+// KCFPlugInTypesKey returns the value of the CoreFoundation reference constant kCFPlugInTypesKey as an objc.ID.
 func KCFPlugInTypesKey() objc.ID { return purego.CFConstant(raw.KCFPlugInTypesKey()) }
 
-// KCFUserNotificationIconURLKey returns the CoreFoundation constant kCFUserNotificationIconURLKey as a toll-free-bridged objc.ID.
+// KCFUserNotificationIconURLKey returns the value of the CoreFoundation reference constant kCFUserNotificationIconURLKey as an objc.ID.
 func KCFUserNotificationIconURLKey() objc.ID { return purego.CFConstant(raw.KCFUserNotificationIconURLKey()) }
 
-// KCFUserNotificationSoundURLKey returns the CoreFoundation constant kCFUserNotificationSoundURLKey as a toll-free-bridged objc.ID.
+// KCFUserNotificationSoundURLKey returns the value of the CoreFoundation reference constant kCFUserNotificationSoundURLKey as an objc.ID.
 func KCFUserNotificationSoundURLKey() objc.ID { return purego.CFConstant(raw.KCFUserNotificationSoundURLKey()) }
 
-// KCFUserNotificationLocalizationURLKey returns the CoreFoundation constant kCFUserNotificationLocalizationURLKey as a toll-free-bridged objc.ID.
+// KCFUserNotificationLocalizationURLKey returns the value of the CoreFoundation reference constant kCFUserNotificationLocalizationURLKey as an objc.ID.
 func KCFUserNotificationLocalizationURLKey() objc.ID { return purego.CFConstant(raw.KCFUserNotificationLocalizationURLKey()) }
 
-// KCFUserNotificationAlertHeaderKey returns the CoreFoundation constant kCFUserNotificationAlertHeaderKey as a toll-free-bridged objc.ID.
+// KCFUserNotificationAlertHeaderKey returns the value of the CoreFoundation reference constant kCFUserNotificationAlertHeaderKey as an objc.ID.
 func KCFUserNotificationAlertHeaderKey() objc.ID { return purego.CFConstant(raw.KCFUserNotificationAlertHeaderKey()) }
 
-// KCFUserNotificationAlertMessageKey returns the CoreFoundation constant kCFUserNotificationAlertMessageKey as a toll-free-bridged objc.ID.
+// KCFUserNotificationAlertMessageKey returns the value of the CoreFoundation reference constant kCFUserNotificationAlertMessageKey as an objc.ID.
 func KCFUserNotificationAlertMessageKey() objc.ID { return purego.CFConstant(raw.KCFUserNotificationAlertMessageKey()) }
 
-// KCFUserNotificationDefaultButtonTitleKey returns the CoreFoundation constant kCFUserNotificationDefaultButtonTitleKey as a toll-free-bridged objc.ID.
+// KCFUserNotificationDefaultButtonTitleKey returns the value of the CoreFoundation reference constant kCFUserNotificationDefaultButtonTitleKey as an objc.ID.
 func KCFUserNotificationDefaultButtonTitleKey() objc.ID { return purego.CFConstant(raw.KCFUserNotificationDefaultButtonTitleKey()) }
 
-// KCFUserNotificationAlternateButtonTitleKey returns the CoreFoundation constant kCFUserNotificationAlternateButtonTitleKey as a toll-free-bridged objc.ID.
+// KCFUserNotificationAlternateButtonTitleKey returns the value of the CoreFoundation reference constant kCFUserNotificationAlternateButtonTitleKey as an objc.ID.
 func KCFUserNotificationAlternateButtonTitleKey() objc.ID { return purego.CFConstant(raw.KCFUserNotificationAlternateButtonTitleKey()) }
 
-// KCFUserNotificationOtherButtonTitleKey returns the CoreFoundation constant kCFUserNotificationOtherButtonTitleKey as a toll-free-bridged objc.ID.
+// KCFUserNotificationOtherButtonTitleKey returns the value of the CoreFoundation reference constant kCFUserNotificationOtherButtonTitleKey as an objc.ID.
 func KCFUserNotificationOtherButtonTitleKey() objc.ID { return purego.CFConstant(raw.KCFUserNotificationOtherButtonTitleKey()) }
 
-// KCFUserNotificationProgressIndicatorValueKey returns the CoreFoundation constant kCFUserNotificationProgressIndicatorValueKey as a toll-free-bridged objc.ID.
+// KCFUserNotificationProgressIndicatorValueKey returns the value of the CoreFoundation reference constant kCFUserNotificationProgressIndicatorValueKey as an objc.ID.
 func KCFUserNotificationProgressIndicatorValueKey() objc.ID { return purego.CFConstant(raw.KCFUserNotificationProgressIndicatorValueKey()) }
 
-// KCFUserNotificationPopUpTitlesKey returns the CoreFoundation constant kCFUserNotificationPopUpTitlesKey as a toll-free-bridged objc.ID.
+// KCFUserNotificationPopUpTitlesKey returns the value of the CoreFoundation reference constant kCFUserNotificationPopUpTitlesKey as an objc.ID.
 func KCFUserNotificationPopUpTitlesKey() objc.ID { return purego.CFConstant(raw.KCFUserNotificationPopUpTitlesKey()) }
 
-// KCFUserNotificationTextFieldTitlesKey returns the CoreFoundation constant kCFUserNotificationTextFieldTitlesKey as a toll-free-bridged objc.ID.
+// KCFUserNotificationTextFieldTitlesKey returns the value of the CoreFoundation reference constant kCFUserNotificationTextFieldTitlesKey as an objc.ID.
 func KCFUserNotificationTextFieldTitlesKey() objc.ID { return purego.CFConstant(raw.KCFUserNotificationTextFieldTitlesKey()) }
 
-// KCFUserNotificationCheckBoxTitlesKey returns the CoreFoundation constant kCFUserNotificationCheckBoxTitlesKey as a toll-free-bridged objc.ID.
+// KCFUserNotificationCheckBoxTitlesKey returns the value of the CoreFoundation reference constant kCFUserNotificationCheckBoxTitlesKey as an objc.ID.
 func KCFUserNotificationCheckBoxTitlesKey() objc.ID { return purego.CFConstant(raw.KCFUserNotificationCheckBoxTitlesKey()) }
 
-// KCFUserNotificationTextFieldValuesKey returns the CoreFoundation constant kCFUserNotificationTextFieldValuesKey as a toll-free-bridged objc.ID.
+// KCFUserNotificationTextFieldValuesKey returns the value of the CoreFoundation reference constant kCFUserNotificationTextFieldValuesKey as an objc.ID.
 func KCFUserNotificationTextFieldValuesKey() objc.ID { return purego.CFConstant(raw.KCFUserNotificationTextFieldValuesKey()) }
 
-// KCFUserNotificationPopUpSelectionKey returns the CoreFoundation constant kCFUserNotificationPopUpSelectionKey as a toll-free-bridged objc.ID.
+// KCFUserNotificationPopUpSelectionKey returns the value of the CoreFoundation reference constant kCFUserNotificationPopUpSelectionKey as an objc.ID.
 func KCFUserNotificationPopUpSelectionKey() objc.ID { return purego.CFConstant(raw.KCFUserNotificationPopUpSelectionKey()) }
 
-// KCFUserNotificationAlertTopMostKey returns the CoreFoundation constant kCFUserNotificationAlertTopMostKey as a toll-free-bridged objc.ID.
+// KCFUserNotificationAlertTopMostKey returns the value of the CoreFoundation reference constant kCFUserNotificationAlertTopMostKey as an objc.ID.
 func KCFUserNotificationAlertTopMostKey() objc.ID { return purego.CFConstant(raw.KCFUserNotificationAlertTopMostKey()) }
 
-// KCFUserNotificationKeyboardTypesKey returns the CoreFoundation constant kCFUserNotificationKeyboardTypesKey as a toll-free-bridged objc.ID.
+// KCFUserNotificationKeyboardTypesKey returns the value of the CoreFoundation reference constant kCFUserNotificationKeyboardTypesKey as an objc.ID.
 func KCFUserNotificationKeyboardTypesKey() objc.ID { return purego.CFConstant(raw.KCFUserNotificationKeyboardTypesKey()) }
 
-// KCFXMLTreeErrorDescription returns the CoreFoundation constant kCFXMLTreeErrorDescription as a toll-free-bridged objc.ID.
+// KCFXMLTreeErrorDescription returns the value of the CoreFoundation reference constant kCFXMLTreeErrorDescription as an objc.ID.
 func KCFXMLTreeErrorDescription() objc.ID { return purego.CFConstant(raw.KCFXMLTreeErrorDescription()) }
 
-// KCFXMLTreeErrorLineNumber returns the CoreFoundation constant kCFXMLTreeErrorLineNumber as a toll-free-bridged objc.ID.
+// KCFXMLTreeErrorLineNumber returns the value of the CoreFoundation reference constant kCFXMLTreeErrorLineNumber as an objc.ID.
 func KCFXMLTreeErrorLineNumber() objc.ID { return purego.CFConstant(raw.KCFXMLTreeErrorLineNumber()) }
 
-// KCFXMLTreeErrorLocation returns the CoreFoundation constant kCFXMLTreeErrorLocation as a toll-free-bridged objc.ID.
+// KCFXMLTreeErrorLocation returns the value of the CoreFoundation reference constant kCFXMLTreeErrorLocation as an objc.ID.
 func KCFXMLTreeErrorLocation() objc.ID { return purego.CFConstant(raw.KCFXMLTreeErrorLocation()) }
 
-// KCFXMLTreeErrorStatusCode returns the CoreFoundation constant kCFXMLTreeErrorStatusCode as a toll-free-bridged objc.ID.
+// KCFXMLTreeErrorStatusCode returns the value of the CoreFoundation reference constant kCFXMLTreeErrorStatusCode as an objc.ID.
 func KCFXMLTreeErrorStatusCode() objc.ID { return purego.CFConstant(raw.KCFXMLTreeErrorStatusCode()) }
 

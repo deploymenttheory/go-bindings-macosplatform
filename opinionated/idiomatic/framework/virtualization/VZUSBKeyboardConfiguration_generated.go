@@ -17,11 +17,11 @@ type USBKeyboardConfiguration struct {
 // Unwrap returns the underlying [raw.VZUSBKeyboardConfiguration].
 func (x *USBKeyboardConfiguration) Unwrap() *raw.VZUSBKeyboardConfiguration { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *USBKeyboardConfiguration) ID() objc.ID { return x.inner.Ptr() }
 
-// USBKeyboardConfigurationFromID adopts an existing toll-free-bridged object id as a USBKeyboardConfiguration (nil for 0).
+// USBKeyboardConfigurationFromID adopts an existing object pointer as a USBKeyboardConfiguration (nil for 0).
 func USBKeyboardConfigurationFromID(id objc.ID) *USBKeyboardConfiguration {
 	if id == 0 {
 		return nil

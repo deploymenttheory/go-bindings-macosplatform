@@ -19,11 +19,11 @@ type SafariTab struct {
 // Unwrap returns the underlying [raw.SFSafariTab].
 func (x *SafariTab) Unwrap() *raw.SFSafariTab { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SafariTab) ID() objc.ID { return x.inner.Ptr() }
 
-// SafariTabFromID adopts an existing toll-free-bridged object id as a SafariTab (nil for 0).
+// SafariTabFromID adopts an existing object pointer as a SafariTab (nil for 0).
 func SafariTabFromID(id objc.ID) *SafariTab {
 	if id == 0 {
 		return nil

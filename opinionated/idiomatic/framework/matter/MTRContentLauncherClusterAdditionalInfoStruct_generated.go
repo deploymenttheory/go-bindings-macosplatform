@@ -19,11 +19,11 @@ type MTRContentLauncherClusterAdditionalInfoStruct struct {
 // Unwrap returns the underlying [raw.MTRContentLauncherClusterAdditionalInfoStruct].
 func (x *MTRContentLauncherClusterAdditionalInfoStruct) Unwrap() *raw.MTRContentLauncherClusterAdditionalInfoStruct { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRContentLauncherClusterAdditionalInfoStruct) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRContentLauncherClusterAdditionalInfoStructFromID adopts an existing toll-free-bridged object id as a MTRContentLauncherClusterAdditionalInfoStruct (nil for 0).
+// MTRContentLauncherClusterAdditionalInfoStructFromID adopts an existing object pointer as a MTRContentLauncherClusterAdditionalInfoStruct (nil for 0).
 func MTRContentLauncherClusterAdditionalInfoStructFromID(id objc.ID) *MTRContentLauncherClusterAdditionalInfoStruct {
 	if id == 0 {
 		return nil

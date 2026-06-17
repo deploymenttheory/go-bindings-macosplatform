@@ -17,11 +17,11 @@ type SliderConstraint struct {
 // Unwrap returns the underlying [raw.SCNSliderConstraint].
 func (x *SliderConstraint) Unwrap() *raw.SCNSliderConstraint { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SliderConstraint) ID() objc.ID { return x.inner.Ptr() }
 
-// SliderConstraintFromID adopts an existing toll-free-bridged object id as a SliderConstraint (nil for 0).
+// SliderConstraintFromID adopts an existing object pointer as a SliderConstraint (nil for 0).
 func SliderConstraintFromID(id objc.ID) *SliderConstraint {
 	if id == 0 {
 		return nil

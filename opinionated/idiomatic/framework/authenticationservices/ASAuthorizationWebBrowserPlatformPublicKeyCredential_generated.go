@@ -19,11 +19,11 @@ type AuthorizationWebBrowserPlatformPublicKeyCredential struct {
 // Unwrap returns the underlying [raw.ASAuthorizationWebBrowserPlatformPublicKeyCredential].
 func (x *AuthorizationWebBrowserPlatformPublicKeyCredential) Unwrap() *raw.ASAuthorizationWebBrowserPlatformPublicKeyCredential { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AuthorizationWebBrowserPlatformPublicKeyCredential) ID() objc.ID { return x.inner.Ptr() }
 
-// AuthorizationWebBrowserPlatformPublicKeyCredentialFromID adopts an existing toll-free-bridged object id as a AuthorizationWebBrowserPlatformPublicKeyCredential (nil for 0).
+// AuthorizationWebBrowserPlatformPublicKeyCredentialFromID adopts an existing object pointer as a AuthorizationWebBrowserPlatformPublicKeyCredential (nil for 0).
 func AuthorizationWebBrowserPlatformPublicKeyCredentialFromID(id objc.ID) *AuthorizationWebBrowserPlatformPublicKeyCredential {
 	if id == 0 {
 		return nil

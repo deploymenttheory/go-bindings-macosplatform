@@ -21,11 +21,11 @@ type MTRBaseClusterKeypadInput struct {
 // Unwrap returns the underlying [raw.MTRBaseClusterKeypadInput].
 func (x *MTRBaseClusterKeypadInput) Unwrap() *raw.MTRBaseClusterKeypadInput { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRBaseClusterKeypadInput) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRBaseClusterKeypadInputFromID adopts an existing toll-free-bridged object id as a MTRBaseClusterKeypadInput (nil for 0).
+// MTRBaseClusterKeypadInputFromID adopts an existing object pointer as a MTRBaseClusterKeypadInput (nil for 0).
 func MTRBaseClusterKeypadInputFromID(id objc.ID) *MTRBaseClusterKeypadInput {
 	if id == 0 {
 		return nil

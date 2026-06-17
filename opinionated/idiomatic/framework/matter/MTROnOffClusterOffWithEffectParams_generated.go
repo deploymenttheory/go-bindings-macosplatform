@@ -18,11 +18,11 @@ type MTROnOffClusterOffWithEffectParams struct {
 // Unwrap returns the underlying [raw.MTROnOffClusterOffWithEffectParams].
 func (x *MTROnOffClusterOffWithEffectParams) Unwrap() *raw.MTROnOffClusterOffWithEffectParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTROnOffClusterOffWithEffectParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTROnOffClusterOffWithEffectParamsFromID adopts an existing toll-free-bridged object id as a MTROnOffClusterOffWithEffectParams (nil for 0).
+// MTROnOffClusterOffWithEffectParamsFromID adopts an existing object pointer as a MTROnOffClusterOffWithEffectParams (nil for 0).
 func MTROnOffClusterOffWithEffectParamsFromID(id objc.ID) *MTROnOffClusterOffWithEffectParams {
 	if id == 0 {
 		return nil

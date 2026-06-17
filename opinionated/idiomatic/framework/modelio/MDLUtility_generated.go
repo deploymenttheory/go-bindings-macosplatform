@@ -17,11 +17,11 @@ type Utility struct {
 // Unwrap returns the underlying [raw.MDLUtility].
 func (x *Utility) Unwrap() *raw.MDLUtility { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Utility) ID() objc.ID { return x.inner.Ptr() }
 
-// UtilityFromID adopts an existing toll-free-bridged object id as a Utility (nil for 0).
+// UtilityFromID adopts an existing object pointer as a Utility (nil for 0).
 func UtilityFromID(id objc.ID) *Utility {
 	if id == 0 {
 		return nil

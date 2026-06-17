@@ -17,11 +17,11 @@ type HostAudioOutputStreamSink struct {
 // Unwrap returns the underlying [raw.VZHostAudioOutputStreamSink].
 func (x *HostAudioOutputStreamSink) Unwrap() *raw.VZHostAudioOutputStreamSink { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *HostAudioOutputStreamSink) ID() objc.ID { return x.inner.Ptr() }
 
-// HostAudioOutputStreamSinkFromID adopts an existing toll-free-bridged object id as a HostAudioOutputStreamSink (nil for 0).
+// HostAudioOutputStreamSinkFromID adopts an existing object pointer as a HostAudioOutputStreamSink (nil for 0).
 func HostAudioOutputStreamSinkFromID(id objc.ID) *HostAudioOutputStreamSink {
 	if id == 0 {
 		return nil

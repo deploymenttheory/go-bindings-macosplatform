@@ -19,11 +19,11 @@ type MatrixSolveTriangular struct {
 // Unwrap returns the underlying [raw.MPSMatrixSolveTriangular].
 func (x *MatrixSolveTriangular) Unwrap() *raw.MPSMatrixSolveTriangular { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MatrixSolveTriangular) ID() objc.ID { return x.inner.Ptr() }
 
-// MatrixSolveTriangularFromID adopts an existing toll-free-bridged object id as a MatrixSolveTriangular (nil for 0).
+// MatrixSolveTriangularFromID adopts an existing object pointer as a MatrixSolveTriangular (nil for 0).
 func MatrixSolveTriangularFromID(id objc.ID) *MatrixSolveTriangular {
 	if id == 0 {
 		return nil

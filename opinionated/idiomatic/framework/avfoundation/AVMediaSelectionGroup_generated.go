@@ -18,11 +18,11 @@ type MediaSelectionGroup struct {
 // Unwrap returns the underlying [raw.AVMediaSelectionGroup].
 func (x *MediaSelectionGroup) Unwrap() *raw.AVMediaSelectionGroup { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MediaSelectionGroup) ID() objc.ID { return x.inner.Ptr() }
 
-// MediaSelectionGroupFromID adopts an existing toll-free-bridged object id as a MediaSelectionGroup (nil for 0).
+// MediaSelectionGroupFromID adopts an existing object pointer as a MediaSelectionGroup (nil for 0).
 func MediaSelectionGroupFromID(id objc.ID) *MediaSelectionGroup {
 	if id == 0 {
 		return nil

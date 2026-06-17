@@ -20,11 +20,11 @@ type DataPoint struct {
 // Unwrap returns the underlying [raw.AXDataPoint].
 func (x *DataPoint) Unwrap() *raw.AXDataPoint { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DataPoint) ID() objc.ID { return x.inner.Ptr() }
 
-// DataPointFromID adopts an existing toll-free-bridged object id as a DataPoint (nil for 0).
+// DataPointFromID adopts an existing object pointer as a DataPoint (nil for 0).
 func DataPointFromID(id objc.ID) *DataPoint {
 	if id == 0 {
 		return nil

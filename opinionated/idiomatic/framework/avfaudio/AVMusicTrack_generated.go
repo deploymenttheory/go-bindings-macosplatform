@@ -17,11 +17,11 @@ type MusicTrack struct {
 // Unwrap returns the underlying [raw.AVMusicTrack].
 func (x *MusicTrack) Unwrap() *raw.AVMusicTrack { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MusicTrack) ID() objc.ID { return x.inner.Ptr() }
 
-// MusicTrackFromID adopts an existing toll-free-bridged object id as a MusicTrack (nil for 0).
+// MusicTrackFromID adopts an existing object pointer as a MusicTrack (nil for 0).
 func MusicTrackFromID(id objc.ID) *MusicTrack {
 	if id == 0 {
 		return nil

@@ -17,11 +17,11 @@ type AudioUnitTimeEffect struct {
 // Unwrap returns the underlying [raw.AVAudioUnitTimeEffect].
 func (x *AudioUnitTimeEffect) Unwrap() *raw.AVAudioUnitTimeEffect { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AudioUnitTimeEffect) ID() objc.ID { return x.inner.Ptr() }
 
-// AudioUnitTimeEffectFromID adopts an existing toll-free-bridged object id as a AudioUnitTimeEffect (nil for 0).
+// AudioUnitTimeEffectFromID adopts an existing object pointer as a AudioUnitTimeEffect (nil for 0).
 func AudioUnitTimeEffectFromID(id objc.ID) *AudioUnitTimeEffect {
 	if id == 0 {
 		return nil

@@ -20,11 +20,11 @@ type AssetDownloadContentConfiguration struct {
 // Unwrap returns the underlying [raw.AVAssetDownloadContentConfiguration].
 func (x *AssetDownloadContentConfiguration) Unwrap() *raw.AVAssetDownloadContentConfiguration { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AssetDownloadContentConfiguration) ID() objc.ID { return x.inner.Ptr() }
 
-// AssetDownloadContentConfigurationFromID adopts an existing toll-free-bridged object id as a AssetDownloadContentConfiguration (nil for 0).
+// AssetDownloadContentConfigurationFromID adopts an existing object pointer as a AssetDownloadContentConfiguration (nil for 0).
 func AssetDownloadContentConfigurationFromID(id objc.ID) *AssetDownloadContentConfiguration {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type ItemAttributes struct {
 // Unwrap returns the underlying [raw.FSItemAttributes].
 func (x *ItemAttributes) Unwrap() *raw.FSItemAttributes { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ItemAttributes) ID() objc.ID { return x.inner.Ptr() }
 
-// ItemAttributesFromID adopts an existing toll-free-bridged object id as a ItemAttributes (nil for 0).
+// ItemAttributesFromID adopts an existing object pointer as a ItemAttributes (nil for 0).
 func ItemAttributesFromID(id objc.ID) *ItemAttributes {
 	if id == 0 {
 		return nil

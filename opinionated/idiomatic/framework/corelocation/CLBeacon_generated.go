@@ -19,11 +19,11 @@ type Beacon struct {
 // Unwrap returns the underlying [raw.CLBeacon].
 func (x *Beacon) Unwrap() *raw.CLBeacon { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Beacon) ID() objc.ID { return x.inner.Ptr() }
 
-// BeaconFromID adopts an existing toll-free-bridged object id as a Beacon (nil for 0).
+// BeaconFromID adopts an existing object pointer as a Beacon (nil for 0).
 func BeaconFromID(id objc.ID) *Beacon {
 	if id == 0 {
 		return nil

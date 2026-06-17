@@ -17,11 +17,11 @@ type OrderedCollectionDifference struct {
 // Unwrap returns the underlying [raw.NSOrderedCollectionDifference].
 func (x *OrderedCollectionDifference) Unwrap() *raw.NSOrderedCollectionDifference[objc.ID] { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *OrderedCollectionDifference) ID() objc.ID { return x.inner.Ptr() }
 
-// OrderedCollectionDifferenceFromID adopts an existing toll-free-bridged object id as a OrderedCollectionDifference (nil for 0).
+// OrderedCollectionDifferenceFromID adopts an existing object pointer as a OrderedCollectionDifference (nil for 0).
 func OrderedCollectionDifferenceFromID(id objc.ID) *OrderedCollectionDifference {
 	if id == 0 {
 		return nil

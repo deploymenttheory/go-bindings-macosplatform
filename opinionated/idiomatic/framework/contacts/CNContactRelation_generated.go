@@ -19,11 +19,11 @@ type ContactRelation struct {
 // Unwrap returns the underlying [raw.CNContactRelation].
 func (x *ContactRelation) Unwrap() *raw.CNContactRelation { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ContactRelation) ID() objc.ID { return x.inner.Ptr() }
 
-// ContactRelationFromID adopts an existing toll-free-bridged object id as a ContactRelation (nil for 0).
+// ContactRelationFromID adopts an existing object pointer as a ContactRelation (nil for 0).
 func ContactRelationFromID(id objc.ID) *ContactRelation {
 	if id == 0 {
 		return nil

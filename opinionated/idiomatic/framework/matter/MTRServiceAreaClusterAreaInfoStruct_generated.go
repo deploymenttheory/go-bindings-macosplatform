@@ -17,11 +17,11 @@ type MTRServiceAreaClusterAreaInfoStruct struct {
 // Unwrap returns the underlying [raw.MTRServiceAreaClusterAreaInfoStruct].
 func (x *MTRServiceAreaClusterAreaInfoStruct) Unwrap() *raw.MTRServiceAreaClusterAreaInfoStruct { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRServiceAreaClusterAreaInfoStruct) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRServiceAreaClusterAreaInfoStructFromID adopts an existing toll-free-bridged object id as a MTRServiceAreaClusterAreaInfoStruct (nil for 0).
+// MTRServiceAreaClusterAreaInfoStructFromID adopts an existing object pointer as a MTRServiceAreaClusterAreaInfoStruct (nil for 0).
 func MTRServiceAreaClusterAreaInfoStructFromID(id objc.ID) *MTRServiceAreaClusterAreaInfoStruct {
 	if id == 0 {
 		return nil

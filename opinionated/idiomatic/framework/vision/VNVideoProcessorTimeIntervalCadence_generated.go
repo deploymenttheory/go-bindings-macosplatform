@@ -17,11 +17,11 @@ type VideoProcessorTimeIntervalCadence struct {
 // Unwrap returns the underlying [raw.VNVideoProcessorTimeIntervalCadence].
 func (x *VideoProcessorTimeIntervalCadence) Unwrap() *raw.VNVideoProcessorTimeIntervalCadence { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *VideoProcessorTimeIntervalCadence) ID() objc.ID { return x.inner.Ptr() }
 
-// VideoProcessorTimeIntervalCadenceFromID adopts an existing toll-free-bridged object id as a VideoProcessorTimeIntervalCadence (nil for 0).
+// VideoProcessorTimeIntervalCadenceFromID adopts an existing object pointer as a VideoProcessorTimeIntervalCadence (nil for 0).
 func VideoProcessorTimeIntervalCadenceFromID(id objc.ID) *VideoProcessorTimeIntervalCadence {
 	if id == 0 {
 		return nil

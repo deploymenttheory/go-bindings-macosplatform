@@ -17,11 +17,11 @@ type TrackingSeparatorToolbarItem struct {
 // Unwrap returns the underlying [raw.NSTrackingSeparatorToolbarItem].
 func (x *TrackingSeparatorToolbarItem) Unwrap() *raw.NSTrackingSeparatorToolbarItem { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *TrackingSeparatorToolbarItem) ID() objc.ID { return x.inner.Ptr() }
 
-// TrackingSeparatorToolbarItemFromID adopts an existing toll-free-bridged object id as a TrackingSeparatorToolbarItem (nil for 0).
+// TrackingSeparatorToolbarItemFromID adopts an existing object pointer as a TrackingSeparatorToolbarItem (nil for 0).
 func TrackingSeparatorToolbarItemFromID(id objc.ID) *TrackingSeparatorToolbarItem {
 	if id == 0 {
 		return nil

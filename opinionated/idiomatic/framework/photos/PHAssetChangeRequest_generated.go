@@ -19,11 +19,11 @@ type AssetChangeRequest struct {
 // Unwrap returns the underlying [raw.PHAssetChangeRequest].
 func (x *AssetChangeRequest) Unwrap() *raw.PHAssetChangeRequest { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AssetChangeRequest) ID() objc.ID { return x.inner.Ptr() }
 
-// AssetChangeRequestFromID adopts an existing toll-free-bridged object id as a AssetChangeRequest (nil for 0).
+// AssetChangeRequestFromID adopts an existing object pointer as a AssetChangeRequest (nil for 0).
 func AssetChangeRequestFromID(id objc.ID) *AssetChangeRequest {
 	if id == 0 {
 		return nil

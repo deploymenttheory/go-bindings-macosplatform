@@ -20,11 +20,11 @@ type CoreMLModel struct {
 // Unwrap returns the underlying [raw.VNCoreMLModel].
 func (x *CoreMLModel) Unwrap() *raw.VNCoreMLModel { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CoreMLModel) ID() objc.ID { return x.inner.Ptr() }
 
-// CoreMLModelFromID adopts an existing toll-free-bridged object id as a CoreMLModel (nil for 0).
+// CoreMLModelFromID adopts an existing object pointer as a CoreMLModel (nil for 0).
 func CoreMLModelFromID(id objc.ID) *CoreMLModel {
 	if id == 0 {
 		return nil

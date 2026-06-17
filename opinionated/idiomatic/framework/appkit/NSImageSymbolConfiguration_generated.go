@@ -17,11 +17,11 @@ type ImageSymbolConfiguration struct {
 // Unwrap returns the underlying [raw.NSImageSymbolConfiguration].
 func (x *ImageSymbolConfiguration) Unwrap() *raw.NSImageSymbolConfiguration { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ImageSymbolConfiguration) ID() objc.ID { return x.inner.Ptr() }
 
-// ImageSymbolConfigurationFromID adopts an existing toll-free-bridged object id as a ImageSymbolConfiguration (nil for 0).
+// ImageSymbolConfigurationFromID adopts an existing object pointer as a ImageSymbolConfiguration (nil for 0).
 func ImageSymbolConfigurationFromID(id objc.ID) *ImageSymbolConfiguration {
 	if id == 0 {
 		return nil

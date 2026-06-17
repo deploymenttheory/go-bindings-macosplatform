@@ -21,11 +21,11 @@ type Font struct {
 // Unwrap returns the underlying [raw.NSFont].
 func (x *Font) Unwrap() *raw.NSFont { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Font) ID() objc.ID { return x.inner.Ptr() }
 
-// FontFromID adopts an existing toll-free-bridged object id as a Font (nil for 0).
+// FontFromID adopts an existing object pointer as a Font (nil for 0).
 func FontFromID(id objc.ID) *Font {
 	if id == 0 {
 		return nil

@@ -19,11 +19,11 @@ type FilePromiseProvider struct {
 // Unwrap returns the underlying [raw.NSFilePromiseProvider].
 func (x *FilePromiseProvider) Unwrap() *raw.NSFilePromiseProvider { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *FilePromiseProvider) ID() objc.ID { return x.inner.Ptr() }
 
-// FilePromiseProviderFromID adopts an existing toll-free-bridged object id as a FilePromiseProvider (nil for 0).
+// FilePromiseProviderFromID adopts an existing object pointer as a FilePromiseProvider (nil for 0).
 func FilePromiseProviderFromID(id objc.ID) *FilePromiseProvider {
 	if id == 0 {
 		return nil

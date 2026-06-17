@@ -18,11 +18,11 @@ type DOMDocumentType struct {
 // Unwrap returns the underlying [raw.DOMDocumentType].
 func (x *DOMDocumentType) Unwrap() *raw.DOMDocumentType { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DOMDocumentType) ID() objc.ID { return x.inner.Ptr() }
 
-// DOMDocumentTypeFromID adopts an existing toll-free-bridged object id as a DOMDocumentType (nil for 0).
+// DOMDocumentTypeFromID adopts an existing object pointer as a DOMDocumentType (nil for 0).
 func DOMDocumentTypeFromID(id objc.ID) *DOMDocumentType {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type MTRDoorLockClusterUnlockWithTimeoutParams struct {
 // Unwrap returns the underlying [raw.MTRDoorLockClusterUnlockWithTimeoutParams].
 func (x *MTRDoorLockClusterUnlockWithTimeoutParams) Unwrap() *raw.MTRDoorLockClusterUnlockWithTimeoutParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRDoorLockClusterUnlockWithTimeoutParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRDoorLockClusterUnlockWithTimeoutParamsFromID adopts an existing toll-free-bridged object id as a MTRDoorLockClusterUnlockWithTimeoutParams (nil for 0).
+// MTRDoorLockClusterUnlockWithTimeoutParamsFromID adopts an existing object pointer as a MTRDoorLockClusterUnlockWithTimeoutParams (nil for 0).
 func MTRDoorLockClusterUnlockWithTimeoutParamsFromID(id objc.ID) *MTRDoorLockClusterUnlockWithTimeoutParams {
 	if id == 0 {
 		return nil

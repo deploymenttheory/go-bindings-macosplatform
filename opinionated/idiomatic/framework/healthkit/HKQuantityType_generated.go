@@ -17,11 +17,11 @@ type QuantityType struct {
 // Unwrap returns the underlying [raw.HKQuantityType].
 func (x *QuantityType) Unwrap() *raw.HKQuantityType { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *QuantityType) ID() objc.ID { return x.inner.Ptr() }
 
-// QuantityTypeFromID adopts an existing toll-free-bridged object id as a QuantityType (nil for 0).
+// QuantityTypeFromID adopts an existing object pointer as a QuantityType (nil for 0).
 func QuantityTypeFromID(id objc.ID) *QuantityType {
 	if id == 0 {
 		return nil

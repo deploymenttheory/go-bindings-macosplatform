@@ -18,11 +18,11 @@ type AutomaticReloadPaymentSummaryItem struct {
 // Unwrap returns the underlying [raw.PKAutomaticReloadPaymentSummaryItem].
 func (x *AutomaticReloadPaymentSummaryItem) Unwrap() *raw.PKAutomaticReloadPaymentSummaryItem { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AutomaticReloadPaymentSummaryItem) ID() objc.ID { return x.inner.Ptr() }
 
-// AutomaticReloadPaymentSummaryItemFromID adopts an existing toll-free-bridged object id as a AutomaticReloadPaymentSummaryItem (nil for 0).
+// AutomaticReloadPaymentSummaryItemFromID adopts an existing object pointer as a AutomaticReloadPaymentSummaryItem (nil for 0).
 func AutomaticReloadPaymentSummaryItemFromID(id objc.ID) *AutomaticReloadPaymentSummaryItem {
 	if id == 0 {
 		return nil

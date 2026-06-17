@@ -17,11 +17,11 @@ type RenderPipelineColorAttachmentDescriptor struct {
 // Unwrap returns the underlying [raw.MTLRenderPipelineColorAttachmentDescriptor].
 func (x *RenderPipelineColorAttachmentDescriptor) Unwrap() *raw.MTLRenderPipelineColorAttachmentDescriptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *RenderPipelineColorAttachmentDescriptor) ID() objc.ID { return x.inner.Ptr() }
 
-// RenderPipelineColorAttachmentDescriptorFromID adopts an existing toll-free-bridged object id as a RenderPipelineColorAttachmentDescriptor (nil for 0).
+// RenderPipelineColorAttachmentDescriptorFromID adopts an existing object pointer as a RenderPipelineColorAttachmentDescriptor (nil for 0).
 func RenderPipelineColorAttachmentDescriptorFromID(id objc.ID) *RenderPipelineColorAttachmentDescriptor {
 	if id == 0 {
 		return nil

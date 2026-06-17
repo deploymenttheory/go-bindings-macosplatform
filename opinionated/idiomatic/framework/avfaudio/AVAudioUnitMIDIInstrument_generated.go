@@ -19,11 +19,11 @@ type AudioUnitMIDIInstrument struct {
 // Unwrap returns the underlying [raw.AVAudioUnitMIDIInstrument].
 func (x *AudioUnitMIDIInstrument) Unwrap() *raw.AVAudioUnitMIDIInstrument { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AudioUnitMIDIInstrument) ID() objc.ID { return x.inner.Ptr() }
 
-// AudioUnitMIDIInstrumentFromID adopts an existing toll-free-bridged object id as a AudioUnitMIDIInstrument (nil for 0).
+// AudioUnitMIDIInstrumentFromID adopts an existing object pointer as a AudioUnitMIDIInstrument (nil for 0).
 func AudioUnitMIDIInstrumentFromID(id objc.ID) *AudioUnitMIDIInstrument {
 	if id == 0 {
 		return nil

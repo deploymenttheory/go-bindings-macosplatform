@@ -17,11 +17,11 @@ type ConeDirectivityModelSubbandParameters struct {
 // Unwrap returns the underlying [raw.PHASEConeDirectivityModelSubbandParameters].
 func (x *ConeDirectivityModelSubbandParameters) Unwrap() *raw.PHASEConeDirectivityModelSubbandParameters { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ConeDirectivityModelSubbandParameters) ID() objc.ID { return x.inner.Ptr() }
 
-// ConeDirectivityModelSubbandParametersFromID adopts an existing toll-free-bridged object id as a ConeDirectivityModelSubbandParameters (nil for 0).
+// ConeDirectivityModelSubbandParametersFromID adopts an existing object pointer as a ConeDirectivityModelSubbandParameters (nil for 0).
 func ConeDirectivityModelSubbandParametersFromID(id objc.ID) *ConeDirectivityModelSubbandParameters {
 	if id == 0 {
 		return nil

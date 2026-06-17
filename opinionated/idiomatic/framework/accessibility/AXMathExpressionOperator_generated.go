@@ -19,11 +19,11 @@ type MathExpressionOperator struct {
 // Unwrap returns the underlying [raw.AXMathExpressionOperator].
 func (x *MathExpressionOperator) Unwrap() *raw.AXMathExpressionOperator { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MathExpressionOperator) ID() objc.ID { return x.inner.Ptr() }
 
-// MathExpressionOperatorFromID adopts an existing toll-free-bridged object id as a MathExpressionOperator (nil for 0).
+// MathExpressionOperatorFromID adopts an existing object pointer as a MathExpressionOperator (nil for 0).
 func MathExpressionOperatorFromID(id objc.ID) *MathExpressionOperator {
 	if id == 0 {
 		return nil

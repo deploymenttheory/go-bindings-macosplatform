@@ -21,11 +21,11 @@ type MTRClusterWaterHeaterMode struct {
 // Unwrap returns the underlying [raw.MTRClusterWaterHeaterMode].
 func (x *MTRClusterWaterHeaterMode) Unwrap() *raw.MTRClusterWaterHeaterMode { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRClusterWaterHeaterMode) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRClusterWaterHeaterModeFromID adopts an existing toll-free-bridged object id as a MTRClusterWaterHeaterMode (nil for 0).
+// MTRClusterWaterHeaterModeFromID adopts an existing object pointer as a MTRClusterWaterHeaterMode (nil for 0).
 func MTRClusterWaterHeaterModeFromID(id objc.ID) *MTRClusterWaterHeaterMode {
 	if id == 0 {
 		return nil

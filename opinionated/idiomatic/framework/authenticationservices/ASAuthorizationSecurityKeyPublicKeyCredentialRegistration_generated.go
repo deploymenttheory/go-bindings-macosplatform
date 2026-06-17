@@ -19,11 +19,11 @@ type AuthorizationSecurityKeyPublicKeyCredentialRegistration struct {
 // Unwrap returns the underlying [raw.ASAuthorizationSecurityKeyPublicKeyCredentialRegistration].
 func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistration) Unwrap() *raw.ASAuthorizationSecurityKeyPublicKeyCredentialRegistration { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistration) ID() objc.ID { return x.inner.Ptr() }
 
-// AuthorizationSecurityKeyPublicKeyCredentialRegistrationFromID adopts an existing toll-free-bridged object id as a AuthorizationSecurityKeyPublicKeyCredentialRegistration (nil for 0).
+// AuthorizationSecurityKeyPublicKeyCredentialRegistrationFromID adopts an existing object pointer as a AuthorizationSecurityKeyPublicKeyCredentialRegistration (nil for 0).
 func AuthorizationSecurityKeyPublicKeyCredentialRegistrationFromID(id objc.ID) *AuthorizationSecurityKeyPublicKeyCredentialRegistration {
 	if id == 0 {
 		return nil

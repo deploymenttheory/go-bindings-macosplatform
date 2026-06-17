@@ -17,11 +17,11 @@ type MTRTestClusterClusterTestListInt8UArgumentRequestParams struct {
 // Unwrap returns the underlying [raw.MTRTestClusterClusterTestListInt8UArgumentRequestParams].
 func (x *MTRTestClusterClusterTestListInt8UArgumentRequestParams) Unwrap() *raw.MTRTestClusterClusterTestListInt8UArgumentRequestParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRTestClusterClusterTestListInt8UArgumentRequestParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRTestClusterClusterTestListInt8UArgumentRequestParamsFromID adopts an existing toll-free-bridged object id as a MTRTestClusterClusterTestListInt8UArgumentRequestParams (nil for 0).
+// MTRTestClusterClusterTestListInt8UArgumentRequestParamsFromID adopts an existing object pointer as a MTRTestClusterClusterTestListInt8UArgumentRequestParams (nil for 0).
 func MTRTestClusterClusterTestListInt8UArgumentRequestParamsFromID(id objc.ID) *MTRTestClusterClusterTestListInt8UArgumentRequestParams {
 	if id == 0 {
 		return nil

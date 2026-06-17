@@ -17,11 +17,11 @@ type Optimizer struct {
 // Unwrap returns the underlying [raw.MLCOptimizer].
 func (x *Optimizer) Unwrap() *raw.MLCOptimizer { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Optimizer) ID() objc.ID { return x.inner.Ptr() }
 
-// OptimizerFromID adopts an existing toll-free-bridged object id as a Optimizer (nil for 0).
+// OptimizerFromID adopts an existing object pointer as a Optimizer (nil for 0).
 func OptimizerFromID(id objc.ID) *Optimizer {
 	if id == 0 {
 		return nil

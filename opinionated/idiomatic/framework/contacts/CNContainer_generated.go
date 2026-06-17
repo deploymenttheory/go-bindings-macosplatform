@@ -18,11 +18,11 @@ type Container struct {
 // Unwrap returns the underlying [raw.CNContainer].
 func (x *Container) Unwrap() *raw.CNContainer { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Container) ID() objc.ID { return x.inner.Ptr() }
 
-// ContainerFromID adopts an existing toll-free-bridged object id as a Container (nil for 0).
+// ContainerFromID adopts an existing object pointer as a Container (nil for 0).
 func ContainerFromID(id objc.ID) *Container {
 	if id == 0 {
 		return nil

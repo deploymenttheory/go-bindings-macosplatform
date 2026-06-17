@@ -17,11 +17,11 @@ type VirtioConsoleDeviceSerialPortConfiguration struct {
 // Unwrap returns the underlying [raw.VZVirtioConsoleDeviceSerialPortConfiguration].
 func (x *VirtioConsoleDeviceSerialPortConfiguration) Unwrap() *raw.VZVirtioConsoleDeviceSerialPortConfiguration { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *VirtioConsoleDeviceSerialPortConfiguration) ID() objc.ID { return x.inner.Ptr() }
 
-// VirtioConsoleDeviceSerialPortConfigurationFromID adopts an existing toll-free-bridged object id as a VirtioConsoleDeviceSerialPortConfiguration (nil for 0).
+// VirtioConsoleDeviceSerialPortConfigurationFromID adopts an existing object pointer as a VirtioConsoleDeviceSerialPortConfiguration (nil for 0).
 func VirtioConsoleDeviceSerialPortConfigurationFromID(id objc.ID) *VirtioConsoleDeviceSerialPortConfiguration {
 	if id == 0 {
 		return nil

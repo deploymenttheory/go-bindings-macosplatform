@@ -20,11 +20,11 @@ type MarkerAnnotationView struct {
 // Unwrap returns the underlying [raw.MKMarkerAnnotationView].
 func (x *MarkerAnnotationView) Unwrap() *raw.MKMarkerAnnotationView { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MarkerAnnotationView) ID() objc.ID { return x.inner.Ptr() }
 
-// MarkerAnnotationViewFromID adopts an existing toll-free-bridged object id as a MarkerAnnotationView (nil for 0).
+// MarkerAnnotationViewFromID adopts an existing object pointer as a MarkerAnnotationView (nil for 0).
 func MarkerAnnotationViewFromID(id objc.ID) *MarkerAnnotationView {
 	if id == 0 {
 		return nil

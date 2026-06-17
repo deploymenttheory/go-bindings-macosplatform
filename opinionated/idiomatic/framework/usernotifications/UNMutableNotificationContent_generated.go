@@ -19,11 +19,11 @@ type MutableNotificationContent struct {
 // Unwrap returns the underlying [raw.UNMutableNotificationContent].
 func (x *MutableNotificationContent) Unwrap() *raw.UNMutableNotificationContent { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MutableNotificationContent) ID() objc.ID { return x.inner.Ptr() }
 
-// MutableNotificationContentFromID adopts an existing toll-free-bridged object id as a MutableNotificationContent (nil for 0).
+// MutableNotificationContentFromID adopts an existing object pointer as a MutableNotificationContent (nil for 0).
 func MutableNotificationContentFromID(id objc.ID) *MutableNotificationContent {
 	if id == 0 {
 		return nil

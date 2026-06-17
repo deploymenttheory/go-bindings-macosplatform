@@ -19,11 +19,11 @@ type MTRGeneralCommissioningClusterSetRegulatoryConfigParams struct {
 // Unwrap returns the underlying [raw.MTRGeneralCommissioningClusterSetRegulatoryConfigParams].
 func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) Unwrap() *raw.MTRGeneralCommissioningClusterSetRegulatoryConfigParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRGeneralCommissioningClusterSetRegulatoryConfigParamsFromID adopts an existing toll-free-bridged object id as a MTRGeneralCommissioningClusterSetRegulatoryConfigParams (nil for 0).
+// MTRGeneralCommissioningClusterSetRegulatoryConfigParamsFromID adopts an existing object pointer as a MTRGeneralCommissioningClusterSetRegulatoryConfigParams (nil for 0).
 func MTRGeneralCommissioningClusterSetRegulatoryConfigParamsFromID(id objc.ID) *MTRGeneralCommissioningClusterSetRegulatoryConfigParams {
 	if id == 0 {
 		return nil

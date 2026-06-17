@@ -19,11 +19,11 @@ type AssetDownloadTask struct {
 // Unwrap returns the underlying [raw.AVAssetDownloadTask].
 func (x *AssetDownloadTask) Unwrap() *raw.AVAssetDownloadTask { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AssetDownloadTask) ID() objc.ID { return x.inner.Ptr() }
 
-// AssetDownloadTaskFromID adopts an existing toll-free-bridged object id as a AssetDownloadTask (nil for 0).
+// AssetDownloadTaskFromID adopts an existing object pointer as a AssetDownloadTask (nil for 0).
 func AssetDownloadTaskFromID(id objc.ID) *AssetDownloadTask {
 	if id == 0 {
 		return nil

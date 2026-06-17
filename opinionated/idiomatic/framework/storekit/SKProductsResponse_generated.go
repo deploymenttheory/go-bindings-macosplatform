@@ -18,11 +18,11 @@ type ProductsResponse struct {
 // Unwrap returns the underlying [raw.SKProductsResponse].
 func (x *ProductsResponse) Unwrap() *raw.SKProductsResponse { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ProductsResponse) ID() objc.ID { return x.inner.Ptr() }
 
-// ProductsResponseFromID adopts an existing toll-free-bridged object id as a ProductsResponse (nil for 0).
+// ProductsResponseFromID adopts an existing object pointer as a ProductsResponse (nil for 0).
 func ProductsResponseFromID(id objc.ID) *ProductsResponse {
 	if id == 0 {
 		return nil

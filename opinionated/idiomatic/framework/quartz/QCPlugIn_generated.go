@@ -18,11 +18,11 @@ type QCPlugIn struct {
 // Unwrap returns the underlying [raw.QCPlugIn].
 func (x *QCPlugIn) Unwrap() *raw.QCPlugIn { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *QCPlugIn) ID() objc.ID { return x.inner.Ptr() }
 
-// QCPlugInFromID adopts an existing toll-free-bridged object id as a QCPlugIn (nil for 0).
+// QCPlugInFromID adopts an existing object pointer as a QCPlugIn (nil for 0).
 func QCPlugInFromID(id objc.ID) *QCPlugIn {
 	if id == 0 {
 		return nil

@@ -20,11 +20,11 @@ type Object struct {
 // Unwrap returns the underlying [raw.INObject].
 func (x *Object) Unwrap() *raw.INObject { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Object) ID() objc.ID { return x.inner.Ptr() }
 
-// ObjectFromID adopts an existing toll-free-bridged object id as a Object (nil for 0).
+// ObjectFromID adopts an existing object pointer as a Object (nil for 0).
 func ObjectFromID(id objc.ID) *Object {
 	if id == 0 {
 		return nil

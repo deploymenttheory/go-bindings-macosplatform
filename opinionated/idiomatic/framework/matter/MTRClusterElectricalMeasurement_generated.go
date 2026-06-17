@@ -19,11 +19,11 @@ type MTRClusterElectricalMeasurement struct {
 // Unwrap returns the underlying [raw.MTRClusterElectricalMeasurement].
 func (x *MTRClusterElectricalMeasurement) Unwrap() *raw.MTRClusterElectricalMeasurement { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRClusterElectricalMeasurement) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRClusterElectricalMeasurementFromID adopts an existing toll-free-bridged object id as a MTRClusterElectricalMeasurement (nil for 0).
+// MTRClusterElectricalMeasurementFromID adopts an existing object pointer as a MTRClusterElectricalMeasurement (nil for 0).
 func MTRClusterElectricalMeasurementFromID(id objc.ID) *MTRClusterElectricalMeasurement {
 	if id == 0 {
 		return nil

@@ -20,11 +20,11 @@ type Submesh struct {
 // Unwrap returns the underlying [raw.MTKSubmesh].
 func (x *Submesh) Unwrap() *raw.MTKSubmesh { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Submesh) ID() objc.ID { return x.inner.Ptr() }
 
-// SubmeshFromID adopts an existing toll-free-bridged object id as a Submesh (nil for 0).
+// SubmeshFromID adopts an existing object pointer as a Submesh (nil for 0).
 func SubmeshFromID(id objc.ID) *Submesh {
 	if id == 0 {
 		return nil

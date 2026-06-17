@@ -20,11 +20,11 @@ type Printer struct {
 // Unwrap returns the underlying [raw.NSPrinter].
 func (x *Printer) Unwrap() *raw.NSPrinter { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Printer) ID() objc.ID { return x.inner.Ptr() }
 
-// PrinterFromID adopts an existing toll-free-bridged object id as a Printer (nil for 0).
+// PrinterFromID adopts an existing object pointer as a Printer (nil for 0).
 func PrinterFromID(id objc.ID) *Printer {
 	if id == 0 {
 		return nil

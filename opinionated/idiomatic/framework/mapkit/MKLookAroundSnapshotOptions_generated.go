@@ -18,11 +18,11 @@ type LookAroundSnapshotOptions struct {
 // Unwrap returns the underlying [raw.MKLookAroundSnapshotOptions].
 func (x *LookAroundSnapshotOptions) Unwrap() *raw.MKLookAroundSnapshotOptions { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *LookAroundSnapshotOptions) ID() objc.ID { return x.inner.Ptr() }
 
-// LookAroundSnapshotOptionsFromID adopts an existing toll-free-bridged object id as a LookAroundSnapshotOptions (nil for 0).
+// LookAroundSnapshotOptionsFromID adopts an existing object pointer as a LookAroundSnapshotOptions (nil for 0).
 func LookAroundSnapshotOptionsFromID(id objc.ID) *LookAroundSnapshotOptions {
 	if id == 0 {
 		return nil

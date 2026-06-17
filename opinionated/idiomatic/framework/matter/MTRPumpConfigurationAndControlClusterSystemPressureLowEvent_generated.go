@@ -17,11 +17,11 @@ type MTRPumpConfigurationAndControlClusterSystemPressureLowEvent struct {
 // Unwrap returns the underlying [raw.MTRPumpConfigurationAndControlClusterSystemPressureLowEvent].
 func (x *MTRPumpConfigurationAndControlClusterSystemPressureLowEvent) Unwrap() *raw.MTRPumpConfigurationAndControlClusterSystemPressureLowEvent { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRPumpConfigurationAndControlClusterSystemPressureLowEvent) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRPumpConfigurationAndControlClusterSystemPressureLowEventFromID adopts an existing toll-free-bridged object id as a MTRPumpConfigurationAndControlClusterSystemPressureLowEvent (nil for 0).
+// MTRPumpConfigurationAndControlClusterSystemPressureLowEventFromID adopts an existing object pointer as a MTRPumpConfigurationAndControlClusterSystemPressureLowEvent (nil for 0).
 func MTRPumpConfigurationAndControlClusterSystemPressureLowEventFromID(id objc.ID) *MTRPumpConfigurationAndControlClusterSystemPressureLowEvent {
 	if id == 0 {
 		return nil

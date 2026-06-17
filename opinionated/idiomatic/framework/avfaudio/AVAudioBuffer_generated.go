@@ -18,11 +18,11 @@ type AudioBuffer struct {
 // Unwrap returns the underlying [raw.AVAudioBuffer].
 func (x *AudioBuffer) Unwrap() *raw.AVAudioBuffer { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AudioBuffer) ID() objc.ID { return x.inner.Ptr() }
 
-// AudioBufferFromID adopts an existing toll-free-bridged object id as a AudioBuffer (nil for 0).
+// AudioBufferFromID adopts an existing object pointer as a AudioBuffer (nil for 0).
 func AudioBufferFromID(id objc.ID) *AudioBuffer {
 	if id == 0 {
 		return nil

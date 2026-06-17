@@ -19,11 +19,11 @@ type LinkMetadata struct {
 // Unwrap returns the underlying [raw.LPLinkMetadata].
 func (x *LinkMetadata) Unwrap() *raw.LPLinkMetadata { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *LinkMetadata) ID() objc.ID { return x.inner.Ptr() }
 
-// LinkMetadataFromID adopts an existing toll-free-bridged object id as a LinkMetadata (nil for 0).
+// LinkMetadataFromID adopts an existing object pointer as a LinkMetadata (nil for 0).
 func LinkMetadataFromID(id objc.ID) *LinkMetadata {
 	if id == 0 {
 		return nil

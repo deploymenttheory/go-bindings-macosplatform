@@ -19,11 +19,11 @@ type CNNPooling struct {
 // Unwrap returns the underlying [raw.MPSCNNPooling].
 func (x *CNNPooling) Unwrap() *raw.MPSCNNPooling { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CNNPooling) ID() objc.ID { return x.inner.Ptr() }
 
-// CNNPoolingFromID adopts an existing toll-free-bridged object id as a CNNPooling (nil for 0).
+// CNNPoolingFromID adopts an existing object pointer as a CNNPooling (nil for 0).
 func CNNPoolingFromID(id objc.ID) *CNNPooling {
 	if id == 0 {
 		return nil

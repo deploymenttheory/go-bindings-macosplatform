@@ -18,11 +18,11 @@ type IntentResponse struct {
 // Unwrap returns the underlying [raw.INIntentResponse].
 func (x *IntentResponse) Unwrap() *raw.INIntentResponse { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *IntentResponse) ID() objc.ID { return x.inner.Ptr() }
 
-// IntentResponseFromID adopts an existing toll-free-bridged object id as a IntentResponse (nil for 0).
+// IntentResponseFromID adopts an existing object pointer as a IntentResponse (nil for 0).
 func IntentResponseFromID(id objc.ID) *IntentResponse {
 	if id == 0 {
 		return nil

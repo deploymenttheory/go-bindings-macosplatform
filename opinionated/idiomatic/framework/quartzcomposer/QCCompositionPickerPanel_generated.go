@@ -18,11 +18,11 @@ type CompositionPickerPanel struct {
 // Unwrap returns the underlying [raw.QCCompositionPickerPanel].
 func (x *CompositionPickerPanel) Unwrap() *raw.QCCompositionPickerPanel { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CompositionPickerPanel) ID() objc.ID { return x.inner.Ptr() }
 
-// CompositionPickerPanelFromID adopts an existing toll-free-bridged object id as a CompositionPickerPanel (nil for 0).
+// CompositionPickerPanelFromID adopts an existing object pointer as a CompositionPickerPanel (nil for 0).
 func CompositionPickerPanelFromID(id objc.ID) *CompositionPickerPanel {
 	if id == 0 {
 		return nil

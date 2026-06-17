@@ -18,11 +18,11 @@ type MTRCommandWithRequiredResponse struct {
 // Unwrap returns the underlying [raw.MTRCommandWithRequiredResponse].
 func (x *MTRCommandWithRequiredResponse) Unwrap() *raw.MTRCommandWithRequiredResponse { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRCommandWithRequiredResponse) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRCommandWithRequiredResponseFromID adopts an existing toll-free-bridged object id as a MTRCommandWithRequiredResponse (nil for 0).
+// MTRCommandWithRequiredResponseFromID adopts an existing object pointer as a MTRCommandWithRequiredResponse (nil for 0).
 func MTRCommandWithRequiredResponseFromID(id objc.ID) *MTRCommandWithRequiredResponse {
 	if id == 0 {
 		return nil

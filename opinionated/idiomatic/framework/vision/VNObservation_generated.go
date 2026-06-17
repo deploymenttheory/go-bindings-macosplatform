@@ -19,11 +19,11 @@ type Observation struct {
 // Unwrap returns the underlying [raw.VNObservation].
 func (x *Observation) Unwrap() *raw.VNObservation { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Observation) ID() objc.ID { return x.inner.Ptr() }
 
-// ObservationFromID adopts an existing toll-free-bridged object id as a Observation (nil for 0).
+// ObservationFromID adopts an existing object pointer as a Observation (nil for 0).
 func ObservationFromID(id objc.ID) *Observation {
 	if id == 0 {
 		return nil

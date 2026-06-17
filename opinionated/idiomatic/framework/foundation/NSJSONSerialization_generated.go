@@ -17,11 +17,11 @@ type JSONSerialization struct {
 // Unwrap returns the underlying [raw.NSJSONSerialization].
 func (x *JSONSerialization) Unwrap() *raw.NSJSONSerialization { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *JSONSerialization) ID() objc.ID { return x.inner.Ptr() }
 
-// JSONSerializationFromID adopts an existing toll-free-bridged object id as a JSONSerialization (nil for 0).
+// JSONSerializationFromID adopts an existing object pointer as a JSONSerialization (nil for 0).
 func JSONSerializationFromID(id objc.ID) *JSONSerialization {
 	if id == 0 {
 		return nil

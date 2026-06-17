@@ -17,11 +17,11 @@ type ScriptExecutionContext struct {
 // Unwrap returns the underlying [raw.NSScriptExecutionContext].
 func (x *ScriptExecutionContext) Unwrap() *raw.NSScriptExecutionContext { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ScriptExecutionContext) ID() objc.ID { return x.inner.Ptr() }
 
-// ScriptExecutionContextFromID adopts an existing toll-free-bridged object id as a ScriptExecutionContext (nil for 0).
+// ScriptExecutionContextFromID adopts an existing object pointer as a ScriptExecutionContext (nil for 0).
 func ScriptExecutionContextFromID(id objc.ID) *ScriptExecutionContext {
 	if id == 0 {
 		return nil

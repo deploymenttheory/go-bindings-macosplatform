@@ -18,11 +18,11 @@ type NWBonjourServiceEndpoint struct {
 // Unwrap returns the underlying [raw.NWBonjourServiceEndpoint].
 func (x *NWBonjourServiceEndpoint) Unwrap() *raw.NWBonjourServiceEndpoint { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NWBonjourServiceEndpoint) ID() objc.ID { return x.inner.Ptr() }
 
-// NWBonjourServiceEndpointFromID adopts an existing toll-free-bridged object id as a NWBonjourServiceEndpoint (nil for 0).
+// NWBonjourServiceEndpointFromID adopts an existing object pointer as a NWBonjourServiceEndpoint (nil for 0).
 func NWBonjourServiceEndpointFromID(id objc.ID) *NWBonjourServiceEndpoint {
 	if id == 0 {
 		return nil

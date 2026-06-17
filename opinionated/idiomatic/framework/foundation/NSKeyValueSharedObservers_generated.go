@@ -19,11 +19,11 @@ type KeyValueSharedObservers struct {
 // Unwrap returns the underlying [raw.NSKeyValueSharedObservers].
 func (x *KeyValueSharedObservers) Unwrap() *raw.NSKeyValueSharedObservers { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *KeyValueSharedObservers) ID() objc.ID { return x.inner.Ptr() }
 
-// KeyValueSharedObserversFromID adopts an existing toll-free-bridged object id as a KeyValueSharedObservers (nil for 0).
+// KeyValueSharedObserversFromID adopts an existing object pointer as a KeyValueSharedObservers (nil for 0).
 func KeyValueSharedObserversFromID(id objc.ID) *KeyValueSharedObservers {
 	if id == 0 {
 		return nil

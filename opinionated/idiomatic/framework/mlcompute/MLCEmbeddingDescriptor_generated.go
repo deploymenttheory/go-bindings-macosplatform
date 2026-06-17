@@ -18,11 +18,11 @@ type EmbeddingDescriptor struct {
 // Unwrap returns the underlying [raw.MLCEmbeddingDescriptor].
 func (x *EmbeddingDescriptor) Unwrap() *raw.MLCEmbeddingDescriptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *EmbeddingDescriptor) ID() objc.ID { return x.inner.Ptr() }
 
-// EmbeddingDescriptorFromID adopts an existing toll-free-bridged object id as a EmbeddingDescriptor (nil for 0).
+// EmbeddingDescriptorFromID adopts an existing object pointer as a EmbeddingDescriptor (nil for 0).
 func EmbeddingDescriptorFromID(id objc.ID) *EmbeddingDescriptor {
 	if id == 0 {
 		return nil

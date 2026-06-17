@@ -19,11 +19,11 @@ type MTRMetrics struct {
 // Unwrap returns the underlying [raw.MTRMetrics].
 func (x *MTRMetrics) Unwrap() *raw.MTRMetrics { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRMetrics) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRMetricsFromID adopts an existing toll-free-bridged object id as a MTRMetrics (nil for 0).
+// MTRMetricsFromID adopts an existing object pointer as a MTRMetrics (nil for 0).
 func MTRMetricsFromID(id objc.ID) *MTRMetrics {
 	if id == 0 {
 		return nil

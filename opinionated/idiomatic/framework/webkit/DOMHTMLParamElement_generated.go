@@ -19,11 +19,11 @@ type DOMHTMLParamElement struct {
 // Unwrap returns the underlying [raw.DOMHTMLParamElement].
 func (x *DOMHTMLParamElement) Unwrap() *raw.DOMHTMLParamElement { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DOMHTMLParamElement) ID() objc.ID { return x.inner.Ptr() }
 
-// DOMHTMLParamElementFromID adopts an existing toll-free-bridged object id as a DOMHTMLParamElement (nil for 0).
+// DOMHTMLParamElementFromID adopts an existing object pointer as a DOMHTMLParamElement (nil for 0).
 func DOMHTMLParamElementFromID(id objc.ID) *DOMHTMLParamElement {
 	if id == 0 {
 		return nil

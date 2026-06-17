@@ -19,11 +19,11 @@ type EmailAddress struct {
 // Unwrap returns the underlying [raw.MEEmailAddress].
 func (x *EmailAddress) Unwrap() *raw.MEEmailAddress { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *EmailAddress) ID() objc.ID { return x.inner.Ptr() }
 
-// EmailAddressFromID adopts an existing toll-free-bridged object id as a EmailAddress (nil for 0).
+// EmailAddressFromID adopts an existing object pointer as a EmailAddress (nil for 0).
 func EmailAddressFromID(id objc.ID) *EmailAddress {
 	if id == 0 {
 		return nil

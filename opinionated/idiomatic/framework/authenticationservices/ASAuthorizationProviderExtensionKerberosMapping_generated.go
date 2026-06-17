@@ -19,11 +19,11 @@ type AuthorizationProviderExtensionKerberosMapping struct {
 // Unwrap returns the underlying [raw.ASAuthorizationProviderExtensionKerberosMapping].
 func (x *AuthorizationProviderExtensionKerberosMapping) Unwrap() *raw.ASAuthorizationProviderExtensionKerberosMapping { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AuthorizationProviderExtensionKerberosMapping) ID() objc.ID { return x.inner.Ptr() }
 
-// AuthorizationProviderExtensionKerberosMappingFromID adopts an existing toll-free-bridged object id as a AuthorizationProviderExtensionKerberosMapping (nil for 0).
+// AuthorizationProviderExtensionKerberosMappingFromID adopts an existing object pointer as a AuthorizationProviderExtensionKerberosMapping (nil for 0).
 func AuthorizationProviderExtensionKerberosMappingFromID(id objc.ID) *AuthorizationProviderExtensionKerberosMapping {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct struct {
 // Unwrap returns the underlying [raw.MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct].
 func (x *MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct) Unwrap() *raw.MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRBridgedDeviceBasicInformationClusterProductAppearanceStructFromID adopts an existing toll-free-bridged object id as a MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct (nil for 0).
+// MTRBridgedDeviceBasicInformationClusterProductAppearanceStructFromID adopts an existing object pointer as a MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct (nil for 0).
 func MTRBridgedDeviceBasicInformationClusterProductAppearanceStructFromID(id objc.ID) *MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct {
 	if id == 0 {
 		return nil

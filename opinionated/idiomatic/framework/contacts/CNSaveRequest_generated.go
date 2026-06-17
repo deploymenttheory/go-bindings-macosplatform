@@ -19,11 +19,11 @@ type SaveRequest struct {
 // Unwrap returns the underlying [raw.CNSaveRequest].
 func (x *SaveRequest) Unwrap() *raw.CNSaveRequest { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SaveRequest) ID() objc.ID { return x.inner.Ptr() }
 
-// SaveRequestFromID adopts an existing toll-free-bridged object id as a SaveRequest (nil for 0).
+// SaveRequestFromID adopts an existing object pointer as a SaveRequest (nil for 0).
 func SaveRequestFromID(id objc.ID) *SaveRequest {
 	if id == 0 {
 		return nil

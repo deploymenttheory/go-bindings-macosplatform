@@ -18,11 +18,11 @@ type MTRClusterLaundryDryerControls struct {
 // Unwrap returns the underlying [raw.MTRClusterLaundryDryerControls].
 func (x *MTRClusterLaundryDryerControls) Unwrap() *raw.MTRClusterLaundryDryerControls { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRClusterLaundryDryerControls) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRClusterLaundryDryerControlsFromID adopts an existing toll-free-bridged object id as a MTRClusterLaundryDryerControls (nil for 0).
+// MTRClusterLaundryDryerControlsFromID adopts an existing object pointer as a MTRClusterLaundryDryerControls (nil for 0).
 func MTRClusterLaundryDryerControlsFromID(id objc.ID) *MTRClusterLaundryDryerControls {
 	if id == 0 {
 		return nil

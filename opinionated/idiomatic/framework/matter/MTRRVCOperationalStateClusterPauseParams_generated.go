@@ -18,11 +18,11 @@ type MTRRVCOperationalStateClusterPauseParams struct {
 // Unwrap returns the underlying [raw.MTRRVCOperationalStateClusterPauseParams].
 func (x *MTRRVCOperationalStateClusterPauseParams) Unwrap() *raw.MTRRVCOperationalStateClusterPauseParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRRVCOperationalStateClusterPauseParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRRVCOperationalStateClusterPauseParamsFromID adopts an existing toll-free-bridged object id as a MTRRVCOperationalStateClusterPauseParams (nil for 0).
+// MTRRVCOperationalStateClusterPauseParamsFromID adopts an existing object pointer as a MTRRVCOperationalStateClusterPauseParams (nil for 0).
 func MTRRVCOperationalStateClusterPauseParamsFromID(id objc.ID) *MTRRVCOperationalStateClusterPauseParams {
 	if id == 0 {
 		return nil

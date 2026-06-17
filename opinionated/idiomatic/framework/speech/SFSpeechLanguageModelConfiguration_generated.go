@@ -18,11 +18,11 @@ type SpeechLanguageModelConfiguration struct {
 // Unwrap returns the underlying [raw.SFSpeechLanguageModelConfiguration].
 func (x *SpeechLanguageModelConfiguration) Unwrap() *raw.SFSpeechLanguageModelConfiguration { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SpeechLanguageModelConfiguration) ID() objc.ID { return x.inner.Ptr() }
 
-// SpeechLanguageModelConfigurationFromID adopts an existing toll-free-bridged object id as a SpeechLanguageModelConfiguration (nil for 0).
+// SpeechLanguageModelConfigurationFromID adopts an existing object pointer as a SpeechLanguageModelConfiguration (nil for 0).
 func SpeechLanguageModelConfigurationFromID(id objc.ID) *SpeechLanguageModelConfiguration {
 	if id == 0 {
 		return nil

@@ -17,11 +17,11 @@ type SmartCardTokenDriver struct {
 // Unwrap returns the underlying [raw.TKSmartCardTokenDriver].
 func (x *SmartCardTokenDriver) Unwrap() *raw.TKSmartCardTokenDriver { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SmartCardTokenDriver) ID() objc.ID { return x.inner.Ptr() }
 
-// SmartCardTokenDriverFromID adopts an existing toll-free-bridged object id as a SmartCardTokenDriver (nil for 0).
+// SmartCardTokenDriverFromID adopts an existing object pointer as a SmartCardTokenDriver (nil for 0).
 func SmartCardTokenDriverFromID(id objc.ID) *SmartCardTokenDriver {
 	if id == 0 {
 		return nil

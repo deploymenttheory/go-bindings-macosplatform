@@ -19,11 +19,11 @@ type GraphShapedType struct {
 // Unwrap returns the underlying [raw.MPSGraphShapedType].
 func (x *GraphShapedType) Unwrap() *raw.MPSGraphShapedType { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *GraphShapedType) ID() objc.ID { return x.inner.Ptr() }
 
-// GraphShapedTypeFromID adopts an existing toll-free-bridged object id as a GraphShapedType (nil for 0).
+// GraphShapedTypeFromID adopts an existing object pointer as a GraphShapedType (nil for 0).
 func GraphShapedTypeFromID(id objc.ID) *GraphShapedType {
 	if id == 0 {
 		return nil

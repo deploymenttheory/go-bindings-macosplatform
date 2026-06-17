@@ -21,11 +21,11 @@ type MTRBaseClusterColorControl struct {
 // Unwrap returns the underlying [raw.MTRBaseClusterColorControl].
 func (x *MTRBaseClusterColorControl) Unwrap() *raw.MTRBaseClusterColorControl { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRBaseClusterColorControl) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRBaseClusterColorControlFromID adopts an existing toll-free-bridged object id as a MTRBaseClusterColorControl (nil for 0).
+// MTRBaseClusterColorControlFromID adopts an existing object pointer as a MTRBaseClusterColorControl (nil for 0).
 func MTRBaseClusterColorControlFromID(id objc.ID) *MTRBaseClusterColorControl {
 	if id == 0 {
 		return nil

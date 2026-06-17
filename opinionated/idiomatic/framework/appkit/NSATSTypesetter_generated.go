@@ -19,11 +19,11 @@ type ATSTypesetter struct {
 // Unwrap returns the underlying [raw.NSATSTypesetter].
 func (x *ATSTypesetter) Unwrap() *raw.NSATSTypesetter { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ATSTypesetter) ID() objc.ID { return x.inner.Ptr() }
 
-// ATSTypesetterFromID adopts an existing toll-free-bridged object id as a ATSTypesetter (nil for 0).
+// ATSTypesetterFromID adopts an existing object pointer as a ATSTypesetter (nil for 0).
 func ATSTypesetterFromID(id objc.ID) *ATSTypesetter {
 	if id == 0 {
 		return nil

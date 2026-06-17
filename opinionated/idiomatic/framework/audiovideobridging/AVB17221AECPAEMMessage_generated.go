@@ -18,11 +18,11 @@ type AVB17221AECPAEMMessage struct {
 // Unwrap returns the underlying [raw.AVB17221AECPAEMMessage].
 func (x *AVB17221AECPAEMMessage) Unwrap() *raw.AVB17221AECPAEMMessage { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AVB17221AECPAEMMessage) ID() objc.ID { return x.inner.Ptr() }
 
-// AVB17221AECPAEMMessageFromID adopts an existing toll-free-bridged object id as a AVB17221AECPAEMMessage (nil for 0).
+// AVB17221AECPAEMMessageFromID adopts an existing object pointer as a AVB17221AECPAEMMessage (nil for 0).
 func AVB17221AECPAEMMessageFromID(id objc.ID) *AVB17221AECPAEMMessage {
 	if id == 0 {
 		return nil

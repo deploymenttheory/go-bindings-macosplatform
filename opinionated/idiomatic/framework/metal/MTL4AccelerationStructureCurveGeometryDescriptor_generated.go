@@ -17,11 +17,11 @@ type MTL4AccelerationStructureCurveGeometryDescriptor struct {
 // Unwrap returns the underlying [raw.MTL4AccelerationStructureCurveGeometryDescriptor].
 func (x *MTL4AccelerationStructureCurveGeometryDescriptor) Unwrap() *raw.MTL4AccelerationStructureCurveGeometryDescriptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTL4AccelerationStructureCurveGeometryDescriptor) ID() objc.ID { return x.inner.Ptr() }
 
-// MTL4AccelerationStructureCurveGeometryDescriptorFromID adopts an existing toll-free-bridged object id as a MTL4AccelerationStructureCurveGeometryDescriptor (nil for 0).
+// MTL4AccelerationStructureCurveGeometryDescriptorFromID adopts an existing object pointer as a MTL4AccelerationStructureCurveGeometryDescriptor (nil for 0).
 func MTL4AccelerationStructureCurveGeometryDescriptorFromID(id objc.ID) *MTL4AccelerationStructureCurveGeometryDescriptor {
 	if id == 0 {
 		return nil

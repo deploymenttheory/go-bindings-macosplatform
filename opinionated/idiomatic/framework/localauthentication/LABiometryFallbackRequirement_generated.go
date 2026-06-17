@@ -17,11 +17,11 @@ type BiometryFallbackRequirement struct {
 // Unwrap returns the underlying [raw.LABiometryFallbackRequirement].
 func (x *BiometryFallbackRequirement) Unwrap() *raw.LABiometryFallbackRequirement { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *BiometryFallbackRequirement) ID() objc.ID { return x.inner.Ptr() }
 
-// BiometryFallbackRequirementFromID adopts an existing toll-free-bridged object id as a BiometryFallbackRequirement (nil for 0).
+// BiometryFallbackRequirementFromID adopts an existing object pointer as a BiometryFallbackRequirement (nil for 0).
 func BiometryFallbackRequirementFromID(id objc.ID) *BiometryFallbackRequirement {
 	if id == 0 {
 		return nil

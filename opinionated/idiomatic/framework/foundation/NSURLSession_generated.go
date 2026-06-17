@@ -20,11 +20,11 @@ type URLSession struct {
 // Unwrap returns the underlying [raw.NSURLSession].
 func (x *URLSession) Unwrap() *raw.NSURLSession { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *URLSession) ID() objc.ID { return x.inner.Ptr() }
 
-// URLSessionFromID adopts an existing toll-free-bridged object id as a URLSession (nil for 0).
+// URLSessionFromID adopts an existing object pointer as a URLSession (nil for 0).
 func URLSessionFromID(id objc.ID) *URLSession {
 	if id == 0 {
 		return nil

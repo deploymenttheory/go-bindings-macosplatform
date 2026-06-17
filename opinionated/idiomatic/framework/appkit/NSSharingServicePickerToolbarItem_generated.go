@@ -17,11 +17,11 @@ type SharingServicePickerToolbarItem struct {
 // Unwrap returns the underlying [raw.NSSharingServicePickerToolbarItem].
 func (x *SharingServicePickerToolbarItem) Unwrap() *raw.NSSharingServicePickerToolbarItem { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SharingServicePickerToolbarItem) ID() objc.ID { return x.inner.Ptr() }
 
-// SharingServicePickerToolbarItemFromID adopts an existing toll-free-bridged object id as a SharingServicePickerToolbarItem (nil for 0).
+// SharingServicePickerToolbarItemFromID adopts an existing object pointer as a SharingServicePickerToolbarItem (nil for 0).
 func SharingServicePickerToolbarItemFromID(id objc.ID) *SharingServicePickerToolbarItem {
 	if id == 0 {
 		return nil

@@ -17,11 +17,11 @@ type AddIdentityDocumentConfiguration struct {
 // Unwrap returns the underlying [raw.PKAddIdentityDocumentConfiguration].
 func (x *AddIdentityDocumentConfiguration) Unwrap() *raw.PKAddIdentityDocumentConfiguration { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AddIdentityDocumentConfiguration) ID() objc.ID { return x.inner.Ptr() }
 
-// AddIdentityDocumentConfigurationFromID adopts an existing toll-free-bridged object id as a AddIdentityDocumentConfiguration (nil for 0).
+// AddIdentityDocumentConfigurationFromID adopts an existing object pointer as a AddIdentityDocumentConfiguration (nil for 0).
 func AddIdentityDocumentConfigurationFromID(id objc.ID) *AddIdentityDocumentConfiguration {
 	if id == 0 {
 		return nil

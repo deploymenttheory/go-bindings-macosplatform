@@ -20,11 +20,11 @@ type TabViewController struct {
 // Unwrap returns the underlying [raw.NSTabViewController].
 func (x *TabViewController) Unwrap() *raw.NSTabViewController { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *TabViewController) ID() objc.ID { return x.inner.Ptr() }
 
-// TabViewControllerFromID adopts an existing toll-free-bridged object id as a TabViewController (nil for 0).
+// TabViewControllerFromID adopts an existing object pointer as a TabViewController (nil for 0).
 func TabViewControllerFromID(id objc.ID) *TabViewController {
 	if id == 0 {
 		return nil

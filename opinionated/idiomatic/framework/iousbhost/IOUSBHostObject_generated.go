@@ -20,11 +20,11 @@ type HostObject struct {
 // Unwrap returns the underlying [raw.IOUSBHostObject].
 func (x *HostObject) Unwrap() *raw.IOUSBHostObject { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *HostObject) ID() objc.ID { return x.inner.Ptr() }
 
-// HostObjectFromID adopts an existing toll-free-bridged object id as a HostObject (nil for 0).
+// HostObjectFromID adopts an existing object pointer as a HostObject (nil for 0).
 func HostObjectFromID(id objc.ID) *HostObject {
 	if id == 0 {
 		return nil

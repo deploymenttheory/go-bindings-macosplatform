@@ -19,11 +19,11 @@ type SamplerDescriptor struct {
 // Unwrap returns the underlying [raw.MTLSamplerDescriptor].
 func (x *SamplerDescriptor) Unwrap() *raw.MTLSamplerDescriptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SamplerDescriptor) ID() objc.ID { return x.inner.Ptr() }
 
-// SamplerDescriptorFromID adopts an existing toll-free-bridged object id as a SamplerDescriptor (nil for 0).
+// SamplerDescriptorFromID adopts an existing object pointer as a SamplerDescriptor (nil for 0).
 func SamplerDescriptorFromID(id objc.ID) *SamplerDescriptor {
 	if id == 0 {
 		return nil

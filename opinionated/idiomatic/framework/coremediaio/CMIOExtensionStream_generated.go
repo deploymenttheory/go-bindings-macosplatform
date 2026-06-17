@@ -20,11 +20,11 @@ type ExtensionStream struct {
 // Unwrap returns the underlying [raw.CMIOExtensionStream].
 func (x *ExtensionStream) Unwrap() *raw.CMIOExtensionStream { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ExtensionStream) ID() objc.ID { return x.inner.Ptr() }
 
-// ExtensionStreamFromID adopts an existing toll-free-bridged object id as a ExtensionStream (nil for 0).
+// ExtensionStreamFromID adopts an existing object pointer as a ExtensionStream (nil for 0).
 func ExtensionStreamFromID(id objc.ID) *ExtensionStream {
 	if id == 0 {
 		return nil

@@ -17,11 +17,11 @@ type CallDestinationTypeResolutionResult struct {
 // Unwrap returns the underlying [raw.INCallDestinationTypeResolutionResult].
 func (x *CallDestinationTypeResolutionResult) Unwrap() *raw.INCallDestinationTypeResolutionResult { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CallDestinationTypeResolutionResult) ID() objc.ID { return x.inner.Ptr() }
 
-// CallDestinationTypeResolutionResultFromID adopts an existing toll-free-bridged object id as a CallDestinationTypeResolutionResult (nil for 0).
+// CallDestinationTypeResolutionResultFromID adopts an existing object pointer as a CallDestinationTypeResolutionResult (nil for 0).
 func CallDestinationTypeResolutionResultFromID(id objc.ID) *CallDestinationTypeResolutionResult {
 	if id == 0 {
 		return nil

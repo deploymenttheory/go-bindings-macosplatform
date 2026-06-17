@@ -18,11 +18,11 @@ type QCComposition struct {
 // Unwrap returns the underlying [raw.QCComposition].
 func (x *QCComposition) Unwrap() *raw.QCComposition { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *QCComposition) ID() objc.ID { return x.inner.Ptr() }
 
-// QCCompositionFromID adopts an existing toll-free-bridged object id as a QCComposition (nil for 0).
+// QCCompositionFromID adopts an existing object pointer as a QCComposition (nil for 0).
 func QCCompositionFromID(id objc.ID) *QCComposition {
 	if id == 0 {
 		return nil

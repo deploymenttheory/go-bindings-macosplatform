@@ -17,11 +17,11 @@ type LookAtConstraint struct {
 // Unwrap returns the underlying [raw.SCNLookAtConstraint].
 func (x *LookAtConstraint) Unwrap() *raw.SCNLookAtConstraint { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *LookAtConstraint) ID() objc.ID { return x.inner.Ptr() }
 
-// LookAtConstraintFromID adopts an existing toll-free-bridged object id as a LookAtConstraint (nil for 0).
+// LookAtConstraintFromID adopts an existing object pointer as a LookAtConstraint (nil for 0).
 func LookAtConstraintFromID(id objc.ID) *LookAtConstraint {
 	if id == 0 {
 		return nil

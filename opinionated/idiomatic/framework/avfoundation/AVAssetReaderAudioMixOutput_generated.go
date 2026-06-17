@@ -19,11 +19,11 @@ type AssetReaderAudioMixOutput struct {
 // Unwrap returns the underlying [raw.AVAssetReaderAudioMixOutput].
 func (x *AssetReaderAudioMixOutput) Unwrap() *raw.AVAssetReaderAudioMixOutput { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AssetReaderAudioMixOutput) ID() objc.ID { return x.inner.Ptr() }
 
-// AssetReaderAudioMixOutputFromID adopts an existing toll-free-bridged object id as a AssetReaderAudioMixOutput (nil for 0).
+// AssetReaderAudioMixOutputFromID adopts an existing object pointer as a AssetReaderAudioMixOutput (nil for 0).
 func AssetReaderAudioMixOutputFromID(id objc.ID) *AssetReaderAudioMixOutput {
 	if id == 0 {
 		return nil

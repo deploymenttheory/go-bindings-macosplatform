@@ -17,11 +17,11 @@ type TextureFilter struct {
 // Unwrap returns the underlying [raw.MDLTextureFilter].
 func (x *TextureFilter) Unwrap() *raw.MDLTextureFilter { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *TextureFilter) ID() objc.ID { return x.inner.Ptr() }
 
-// TextureFilterFromID adopts an existing toll-free-bridged object id as a TextureFilter (nil for 0).
+// TextureFilterFromID adopts an existing object pointer as a TextureFilter (nil for 0).
 func TextureFilterFromID(id objc.ID) *TextureFilter {
 	if id == 0 {
 		return nil

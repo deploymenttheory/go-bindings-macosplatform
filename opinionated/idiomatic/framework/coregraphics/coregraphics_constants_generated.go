@@ -10,330 +10,330 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// KCGColorSpaceGenericGray returns the CoreFoundation constant kCGColorSpaceGenericGray as a toll-free-bridged objc.ID.
+// KCGColorSpaceGenericGray returns the value of the CoreFoundation reference constant kCGColorSpaceGenericGray as an objc.ID.
 func KCGColorSpaceGenericGray() objc.ID { return purego.CFConstant(raw.KCGColorSpaceGenericGray()) }
 
-// KCGColorSpaceGenericRGB returns the CoreFoundation constant kCGColorSpaceGenericRGB as a toll-free-bridged objc.ID.
+// KCGColorSpaceGenericRGB returns the value of the CoreFoundation reference constant kCGColorSpaceGenericRGB as an objc.ID.
 func KCGColorSpaceGenericRGB() objc.ID { return purego.CFConstant(raw.KCGColorSpaceGenericRGB()) }
 
-// KCGColorSpaceGenericCMYK returns the CoreFoundation constant kCGColorSpaceGenericCMYK as a toll-free-bridged objc.ID.
+// KCGColorSpaceGenericCMYK returns the value of the CoreFoundation reference constant kCGColorSpaceGenericCMYK as an objc.ID.
 func KCGColorSpaceGenericCMYK() objc.ID { return purego.CFConstant(raw.KCGColorSpaceGenericCMYK()) }
 
-// KCGColorSpaceDisplayP3 returns the CoreFoundation constant kCGColorSpaceDisplayP3 as a toll-free-bridged objc.ID.
+// KCGColorSpaceDisplayP3 returns the value of the CoreFoundation reference constant kCGColorSpaceDisplayP3 as an objc.ID.
 func KCGColorSpaceDisplayP3() objc.ID { return purego.CFConstant(raw.KCGColorSpaceDisplayP3()) }
 
-// KCGColorSpaceGenericRGBLinear returns the CoreFoundation constant kCGColorSpaceGenericRGBLinear as a toll-free-bridged objc.ID.
+// KCGColorSpaceGenericRGBLinear returns the value of the CoreFoundation reference constant kCGColorSpaceGenericRGBLinear as an objc.ID.
 func KCGColorSpaceGenericRGBLinear() objc.ID { return purego.CFConstant(raw.KCGColorSpaceGenericRGBLinear()) }
 
-// KCGColorSpaceAdobeRGB1998 returns the CoreFoundation constant kCGColorSpaceAdobeRGB1998 as a toll-free-bridged objc.ID.
+// KCGColorSpaceAdobeRGB1998 returns the value of the CoreFoundation reference constant kCGColorSpaceAdobeRGB1998 as an objc.ID.
 func KCGColorSpaceAdobeRGB1998() objc.ID { return purego.CFConstant(raw.KCGColorSpaceAdobeRGB1998()) }
 
-// KCGColorSpaceSRGB returns the CoreFoundation constant kCGColorSpaceSRGB as a toll-free-bridged objc.ID.
+// KCGColorSpaceSRGB returns the value of the CoreFoundation reference constant kCGColorSpaceSRGB as an objc.ID.
 func KCGColorSpaceSRGB() objc.ID { return purego.CFConstant(raw.KCGColorSpaceSRGB()) }
 
-// KCGColorSpaceGenericGrayGamma2_2 returns the CoreFoundation constant kCGColorSpaceGenericGrayGamma2_2 as a toll-free-bridged objc.ID.
+// KCGColorSpaceGenericGrayGamma2_2 returns the value of the CoreFoundation reference constant kCGColorSpaceGenericGrayGamma2_2 as an objc.ID.
 func KCGColorSpaceGenericGrayGamma2_2() objc.ID { return purego.CFConstant(raw.KCGColorSpaceGenericGrayGamma2_2()) }
 
-// KCGColorSpaceGenericXYZ returns the CoreFoundation constant kCGColorSpaceGenericXYZ as a toll-free-bridged objc.ID.
+// KCGColorSpaceGenericXYZ returns the value of the CoreFoundation reference constant kCGColorSpaceGenericXYZ as an objc.ID.
 func KCGColorSpaceGenericXYZ() objc.ID { return purego.CFConstant(raw.KCGColorSpaceGenericXYZ()) }
 
-// KCGColorSpaceGenericLab returns the CoreFoundation constant kCGColorSpaceGenericLab as a toll-free-bridged objc.ID.
+// KCGColorSpaceGenericLab returns the value of the CoreFoundation reference constant kCGColorSpaceGenericLab as an objc.ID.
 func KCGColorSpaceGenericLab() objc.ID { return purego.CFConstant(raw.KCGColorSpaceGenericLab()) }
 
-// KCGColorSpaceACESCGLinear returns the CoreFoundation constant kCGColorSpaceACESCGLinear as a toll-free-bridged objc.ID.
+// KCGColorSpaceACESCGLinear returns the value of the CoreFoundation reference constant kCGColorSpaceACESCGLinear as an objc.ID.
 func KCGColorSpaceACESCGLinear() objc.ID { return purego.CFConstant(raw.KCGColorSpaceACESCGLinear()) }
 
-// KCGColorSpaceITUR_709 returns the CoreFoundation constant kCGColorSpaceITUR_709 as a toll-free-bridged objc.ID.
+// KCGColorSpaceITUR_709 returns the value of the CoreFoundation reference constant kCGColorSpaceITUR_709 as an objc.ID.
 func KCGColorSpaceITUR_709() objc.ID { return purego.CFConstant(raw.KCGColorSpaceITUR_709()) }
 
-// KCGColorSpaceITUR_709_PQ returns the CoreFoundation constant kCGColorSpaceITUR_709_PQ as a toll-free-bridged objc.ID.
+// KCGColorSpaceITUR_709_PQ returns the value of the CoreFoundation reference constant kCGColorSpaceITUR_709_PQ as an objc.ID.
 func KCGColorSpaceITUR_709_PQ() objc.ID { return purego.CFConstant(raw.KCGColorSpaceITUR_709_PQ()) }
 
-// KCGColorSpaceITUR_709_HLG returns the CoreFoundation constant kCGColorSpaceITUR_709_HLG as a toll-free-bridged objc.ID.
+// KCGColorSpaceITUR_709_HLG returns the value of the CoreFoundation reference constant kCGColorSpaceITUR_709_HLG as an objc.ID.
 func KCGColorSpaceITUR_709_HLG() objc.ID { return purego.CFConstant(raw.KCGColorSpaceITUR_709_HLG()) }
 
-// KCGColorSpaceITUR_2020 returns the CoreFoundation constant kCGColorSpaceITUR_2020 as a toll-free-bridged objc.ID.
+// KCGColorSpaceITUR_2020 returns the value of the CoreFoundation reference constant kCGColorSpaceITUR_2020 as an objc.ID.
 func KCGColorSpaceITUR_2020() objc.ID { return purego.CFConstant(raw.KCGColorSpaceITUR_2020()) }
 
-// KCGColorSpaceITUR_2020_sRGBGamma returns the CoreFoundation constant kCGColorSpaceITUR_2020_sRGBGamma as a toll-free-bridged objc.ID.
+// KCGColorSpaceITUR_2020_sRGBGamma returns the value of the CoreFoundation reference constant kCGColorSpaceITUR_2020_sRGBGamma as an objc.ID.
 func KCGColorSpaceITUR_2020_sRGBGamma() objc.ID { return purego.CFConstant(raw.KCGColorSpaceITUR_2020_sRGBGamma()) }
 
-// KCGColorSpaceROMMRGB returns the CoreFoundation constant kCGColorSpaceROMMRGB as a toll-free-bridged objc.ID.
+// KCGColorSpaceROMMRGB returns the value of the CoreFoundation reference constant kCGColorSpaceROMMRGB as an objc.ID.
 func KCGColorSpaceROMMRGB() objc.ID { return purego.CFConstant(raw.KCGColorSpaceROMMRGB()) }
 
-// KCGColorSpaceDCIP3 returns the CoreFoundation constant kCGColorSpaceDCIP3 as a toll-free-bridged objc.ID.
+// KCGColorSpaceDCIP3 returns the value of the CoreFoundation reference constant kCGColorSpaceDCIP3 as an objc.ID.
 func KCGColorSpaceDCIP3() objc.ID { return purego.CFConstant(raw.KCGColorSpaceDCIP3()) }
 
-// KCGColorSpaceLinearITUR_2020 returns the CoreFoundation constant kCGColorSpaceLinearITUR_2020 as a toll-free-bridged objc.ID.
+// KCGColorSpaceLinearITUR_2020 returns the value of the CoreFoundation reference constant kCGColorSpaceLinearITUR_2020 as an objc.ID.
 func KCGColorSpaceLinearITUR_2020() objc.ID { return purego.CFConstant(raw.KCGColorSpaceLinearITUR_2020()) }
 
-// KCGColorSpaceExtendedITUR_2020 returns the CoreFoundation constant kCGColorSpaceExtendedITUR_2020 as a toll-free-bridged objc.ID.
+// KCGColorSpaceExtendedITUR_2020 returns the value of the CoreFoundation reference constant kCGColorSpaceExtendedITUR_2020 as an objc.ID.
 func KCGColorSpaceExtendedITUR_2020() objc.ID { return purego.CFConstant(raw.KCGColorSpaceExtendedITUR_2020()) }
 
-// KCGColorSpaceExtendedLinearITUR_2020 returns the CoreFoundation constant kCGColorSpaceExtendedLinearITUR_2020 as a toll-free-bridged objc.ID.
+// KCGColorSpaceExtendedLinearITUR_2020 returns the value of the CoreFoundation reference constant kCGColorSpaceExtendedLinearITUR_2020 as an objc.ID.
 func KCGColorSpaceExtendedLinearITUR_2020() objc.ID { return purego.CFConstant(raw.KCGColorSpaceExtendedLinearITUR_2020()) }
 
-// KCGColorSpaceLinearDisplayP3 returns the CoreFoundation constant kCGColorSpaceLinearDisplayP3 as a toll-free-bridged objc.ID.
+// KCGColorSpaceLinearDisplayP3 returns the value of the CoreFoundation reference constant kCGColorSpaceLinearDisplayP3 as an objc.ID.
 func KCGColorSpaceLinearDisplayP3() objc.ID { return purego.CFConstant(raw.KCGColorSpaceLinearDisplayP3()) }
 
-// KCGColorSpaceExtendedDisplayP3 returns the CoreFoundation constant kCGColorSpaceExtendedDisplayP3 as a toll-free-bridged objc.ID.
+// KCGColorSpaceExtendedDisplayP3 returns the value of the CoreFoundation reference constant kCGColorSpaceExtendedDisplayP3 as an objc.ID.
 func KCGColorSpaceExtendedDisplayP3() objc.ID { return purego.CFConstant(raw.KCGColorSpaceExtendedDisplayP3()) }
 
-// KCGColorSpaceExtendedLinearDisplayP3 returns the CoreFoundation constant kCGColorSpaceExtendedLinearDisplayP3 as a toll-free-bridged objc.ID.
+// KCGColorSpaceExtendedLinearDisplayP3 returns the value of the CoreFoundation reference constant kCGColorSpaceExtendedLinearDisplayP3 as an objc.ID.
 func KCGColorSpaceExtendedLinearDisplayP3() objc.ID { return purego.CFConstant(raw.KCGColorSpaceExtendedLinearDisplayP3()) }
 
-// KCGColorSpaceITUR_2100_PQ returns the CoreFoundation constant kCGColorSpaceITUR_2100_PQ as a toll-free-bridged objc.ID.
+// KCGColorSpaceITUR_2100_PQ returns the value of the CoreFoundation reference constant kCGColorSpaceITUR_2100_PQ as an objc.ID.
 func KCGColorSpaceITUR_2100_PQ() objc.ID { return purego.CFConstant(raw.KCGColorSpaceITUR_2100_PQ()) }
 
-// KCGColorSpaceITUR_2100_HLG returns the CoreFoundation constant kCGColorSpaceITUR_2100_HLG as a toll-free-bridged objc.ID.
+// KCGColorSpaceITUR_2100_HLG returns the value of the CoreFoundation reference constant kCGColorSpaceITUR_2100_HLG as an objc.ID.
 func KCGColorSpaceITUR_2100_HLG() objc.ID { return purego.CFConstant(raw.KCGColorSpaceITUR_2100_HLG()) }
 
-// KCGColorSpaceDisplayP3_PQ returns the CoreFoundation constant kCGColorSpaceDisplayP3_PQ as a toll-free-bridged objc.ID.
+// KCGColorSpaceDisplayP3_PQ returns the value of the CoreFoundation reference constant kCGColorSpaceDisplayP3_PQ as an objc.ID.
 func KCGColorSpaceDisplayP3_PQ() objc.ID { return purego.CFConstant(raw.KCGColorSpaceDisplayP3_PQ()) }
 
-// KCGColorSpaceDisplayP3_HLG returns the CoreFoundation constant kCGColorSpaceDisplayP3_HLG as a toll-free-bridged objc.ID.
+// KCGColorSpaceDisplayP3_HLG returns the value of the CoreFoundation reference constant kCGColorSpaceDisplayP3_HLG as an objc.ID.
 func KCGColorSpaceDisplayP3_HLG() objc.ID { return purego.CFConstant(raw.KCGColorSpaceDisplayP3_HLG()) }
 
-// KCGColorSpaceITUR_2020_PQ returns the CoreFoundation constant kCGColorSpaceITUR_2020_PQ as a toll-free-bridged objc.ID.
+// KCGColorSpaceITUR_2020_PQ returns the value of the CoreFoundation reference constant kCGColorSpaceITUR_2020_PQ as an objc.ID.
 func KCGColorSpaceITUR_2020_PQ() objc.ID { return purego.CFConstant(raw.KCGColorSpaceITUR_2020_PQ()) }
 
-// KCGColorSpaceITUR_2020_HLG returns the CoreFoundation constant kCGColorSpaceITUR_2020_HLG as a toll-free-bridged objc.ID.
+// KCGColorSpaceITUR_2020_HLG returns the value of the CoreFoundation reference constant kCGColorSpaceITUR_2020_HLG as an objc.ID.
 func KCGColorSpaceITUR_2020_HLG() objc.ID { return purego.CFConstant(raw.KCGColorSpaceITUR_2020_HLG()) }
 
-// KCGColorSpaceDisplayP3_PQ_EOTF returns the CoreFoundation constant kCGColorSpaceDisplayP3_PQ_EOTF as a toll-free-bridged objc.ID.
+// KCGColorSpaceDisplayP3_PQ_EOTF returns the value of the CoreFoundation reference constant kCGColorSpaceDisplayP3_PQ_EOTF as an objc.ID.
 func KCGColorSpaceDisplayP3_PQ_EOTF() objc.ID { return purego.CFConstant(raw.KCGColorSpaceDisplayP3_PQ_EOTF()) }
 
-// KCGColorSpaceITUR_2020_PQ_EOTF returns the CoreFoundation constant kCGColorSpaceITUR_2020_PQ_EOTF as a toll-free-bridged objc.ID.
+// KCGColorSpaceITUR_2020_PQ_EOTF returns the value of the CoreFoundation reference constant kCGColorSpaceITUR_2020_PQ_EOTF as an objc.ID.
 func KCGColorSpaceITUR_2020_PQ_EOTF() objc.ID { return purego.CFConstant(raw.KCGColorSpaceITUR_2020_PQ_EOTF()) }
 
-// KCGColorSpaceExtendedSRGB returns the CoreFoundation constant kCGColorSpaceExtendedSRGB as a toll-free-bridged objc.ID.
+// KCGColorSpaceExtendedSRGB returns the value of the CoreFoundation reference constant kCGColorSpaceExtendedSRGB as an objc.ID.
 func KCGColorSpaceExtendedSRGB() objc.ID { return purego.CFConstant(raw.KCGColorSpaceExtendedSRGB()) }
 
-// KCGColorSpaceLinearSRGB returns the CoreFoundation constant kCGColorSpaceLinearSRGB as a toll-free-bridged objc.ID.
+// KCGColorSpaceLinearSRGB returns the value of the CoreFoundation reference constant kCGColorSpaceLinearSRGB as an objc.ID.
 func KCGColorSpaceLinearSRGB() objc.ID { return purego.CFConstant(raw.KCGColorSpaceLinearSRGB()) }
 
-// KCGColorSpaceExtendedLinearSRGB returns the CoreFoundation constant kCGColorSpaceExtendedLinearSRGB as a toll-free-bridged objc.ID.
+// KCGColorSpaceExtendedLinearSRGB returns the value of the CoreFoundation reference constant kCGColorSpaceExtendedLinearSRGB as an objc.ID.
 func KCGColorSpaceExtendedLinearSRGB() objc.ID { return purego.CFConstant(raw.KCGColorSpaceExtendedLinearSRGB()) }
 
-// KCGColorSpaceExtendedGray returns the CoreFoundation constant kCGColorSpaceExtendedGray as a toll-free-bridged objc.ID.
+// KCGColorSpaceExtendedGray returns the value of the CoreFoundation reference constant kCGColorSpaceExtendedGray as an objc.ID.
 func KCGColorSpaceExtendedGray() objc.ID { return purego.CFConstant(raw.KCGColorSpaceExtendedGray()) }
 
-// KCGColorSpaceLinearGray returns the CoreFoundation constant kCGColorSpaceLinearGray as a toll-free-bridged objc.ID.
+// KCGColorSpaceLinearGray returns the value of the CoreFoundation reference constant kCGColorSpaceLinearGray as an objc.ID.
 func KCGColorSpaceLinearGray() objc.ID { return purego.CFConstant(raw.KCGColorSpaceLinearGray()) }
 
-// KCGColorSpaceExtendedLinearGray returns the CoreFoundation constant kCGColorSpaceExtendedLinearGray as a toll-free-bridged objc.ID.
+// KCGColorSpaceExtendedLinearGray returns the value of the CoreFoundation reference constant kCGColorSpaceExtendedLinearGray as an objc.ID.
 func KCGColorSpaceExtendedLinearGray() objc.ID { return purego.CFConstant(raw.KCGColorSpaceExtendedLinearGray()) }
 
-// KCGColorSpaceCoreMedia709 returns the CoreFoundation constant kCGColorSpaceCoreMedia709 as a toll-free-bridged objc.ID.
+// KCGColorSpaceCoreMedia709 returns the value of the CoreFoundation reference constant kCGColorSpaceCoreMedia709 as an objc.ID.
 func KCGColorSpaceCoreMedia709() objc.ID { return purego.CFConstant(raw.KCGColorSpaceCoreMedia709()) }
 
-// KCGColorSpaceExtendedRange returns the CoreFoundation constant kCGColorSpaceExtendedRange as a toll-free-bridged objc.ID.
+// KCGColorSpaceExtendedRange returns the value of the CoreFoundation reference constant kCGColorSpaceExtendedRange as an objc.ID.
 func KCGColorSpaceExtendedRange() objc.ID { return purego.CFConstant(raw.KCGColorSpaceExtendedRange()) }
 
-// KCGColorWhite returns the CoreFoundation constant kCGColorWhite as a toll-free-bridged objc.ID.
+// KCGColorWhite returns the value of the CoreFoundation reference constant kCGColorWhite as an objc.ID.
 func KCGColorWhite() objc.ID { return purego.CFConstant(raw.KCGColorWhite()) }
 
-// KCGColorBlack returns the CoreFoundation constant kCGColorBlack as a toll-free-bridged objc.ID.
+// KCGColorBlack returns the value of the CoreFoundation reference constant kCGColorBlack as an objc.ID.
 func KCGColorBlack() objc.ID { return purego.CFConstant(raw.KCGColorBlack()) }
 
-// KCGColorClear returns the CoreFoundation constant kCGColorClear as a toll-free-bridged objc.ID.
+// KCGColorClear returns the value of the CoreFoundation reference constant kCGColorClear as an objc.ID.
 func KCGColorClear() objc.ID { return purego.CFConstant(raw.KCGColorClear()) }
 
-// KCGFontVariationAxisName returns the CoreFoundation constant kCGFontVariationAxisName as a toll-free-bridged objc.ID.
+// KCGFontVariationAxisName returns the value of the CoreFoundation reference constant kCGFontVariationAxisName as an objc.ID.
 func KCGFontVariationAxisName() objc.ID { return purego.CFConstant(raw.KCGFontVariationAxisName()) }
 
-// KCGFontVariationAxisMinValue returns the CoreFoundation constant kCGFontVariationAxisMinValue as a toll-free-bridged objc.ID.
+// KCGFontVariationAxisMinValue returns the value of the CoreFoundation reference constant kCGFontVariationAxisMinValue as an objc.ID.
 func KCGFontVariationAxisMinValue() objc.ID { return purego.CFConstant(raw.KCGFontVariationAxisMinValue()) }
 
-// KCGFontVariationAxisMaxValue returns the CoreFoundation constant kCGFontVariationAxisMaxValue as a toll-free-bridged objc.ID.
+// KCGFontVariationAxisMaxValue returns the value of the CoreFoundation reference constant kCGFontVariationAxisMaxValue as an objc.ID.
 func KCGFontVariationAxisMaxValue() objc.ID { return purego.CFConstant(raw.KCGFontVariationAxisMaxValue()) }
 
-// KCGFontVariationAxisDefaultValue returns the CoreFoundation constant kCGFontVariationAxisDefaultValue as a toll-free-bridged objc.ID.
+// KCGFontVariationAxisDefaultValue returns the value of the CoreFoundation reference constant kCGFontVariationAxisDefaultValue as an objc.ID.
 func KCGFontVariationAxisDefaultValue() objc.ID { return purego.CFConstant(raw.KCGFontVariationAxisDefaultValue()) }
 
-// KCGPDFOutlineTitle returns the CoreFoundation constant kCGPDFOutlineTitle as a toll-free-bridged objc.ID.
+// KCGPDFOutlineTitle returns the value of the CoreFoundation reference constant kCGPDFOutlineTitle as an objc.ID.
 func KCGPDFOutlineTitle() objc.ID { return purego.CFConstant(raw.KCGPDFOutlineTitle()) }
 
-// KCGPDFOutlineChildren returns the CoreFoundation constant kCGPDFOutlineChildren as a toll-free-bridged objc.ID.
+// KCGPDFOutlineChildren returns the value of the CoreFoundation reference constant kCGPDFOutlineChildren as an objc.ID.
 func KCGPDFOutlineChildren() objc.ID { return purego.CFConstant(raw.KCGPDFOutlineChildren()) }
 
-// KCGPDFOutlineDestination returns the CoreFoundation constant kCGPDFOutlineDestination as a toll-free-bridged objc.ID.
+// KCGPDFOutlineDestination returns the value of the CoreFoundation reference constant kCGPDFOutlineDestination as an objc.ID.
 func KCGPDFOutlineDestination() objc.ID { return purego.CFConstant(raw.KCGPDFOutlineDestination()) }
 
-// KCGPDFOutlineDestinationRect returns the CoreFoundation constant kCGPDFOutlineDestinationRect as a toll-free-bridged objc.ID.
+// KCGPDFOutlineDestinationRect returns the value of the CoreFoundation reference constant kCGPDFOutlineDestinationRect as an objc.ID.
 func KCGPDFOutlineDestinationRect() objc.ID { return purego.CFConstant(raw.KCGPDFOutlineDestinationRect()) }
 
-// KCGEXRToneMappingGammaDefog returns the CoreFoundation constant kCGEXRToneMappingGammaDefog as a toll-free-bridged objc.ID.
+// KCGEXRToneMappingGammaDefog returns the value of the CoreFoundation reference constant kCGEXRToneMappingGammaDefog as an objc.ID.
 func KCGEXRToneMappingGammaDefog() objc.ID { return purego.CFConstant(raw.KCGEXRToneMappingGammaDefog()) }
 
-// KCGEXRToneMappingGammaExposure returns the CoreFoundation constant kCGEXRToneMappingGammaExposure as a toll-free-bridged objc.ID.
+// KCGEXRToneMappingGammaExposure returns the value of the CoreFoundation reference constant kCGEXRToneMappingGammaExposure as an objc.ID.
 func KCGEXRToneMappingGammaExposure() objc.ID { return purego.CFConstant(raw.KCGEXRToneMappingGammaExposure()) }
 
-// KCGEXRToneMappingGammaKneeLow returns the CoreFoundation constant kCGEXRToneMappingGammaKneeLow as a toll-free-bridged objc.ID.
+// KCGEXRToneMappingGammaKneeLow returns the value of the CoreFoundation reference constant kCGEXRToneMappingGammaKneeLow as an objc.ID.
 func KCGEXRToneMappingGammaKneeLow() objc.ID { return purego.CFConstant(raw.KCGEXRToneMappingGammaKneeLow()) }
 
-// KCGEXRToneMappingGammaKneeHigh returns the CoreFoundation constant kCGEXRToneMappingGammaKneeHigh as a toll-free-bridged objc.ID.
+// KCGEXRToneMappingGammaKneeHigh returns the value of the CoreFoundation reference constant kCGEXRToneMappingGammaKneeHigh as an objc.ID.
 func KCGEXRToneMappingGammaKneeHigh() objc.ID { return purego.CFConstant(raw.KCGEXRToneMappingGammaKneeHigh()) }
 
-// KCGUse100nitsHLGOOTF returns the CoreFoundation constant kCGUse100nitsHLGOOTF as a toll-free-bridged objc.ID.
+// KCGUse100nitsHLGOOTF returns the value of the CoreFoundation reference constant kCGUse100nitsHLGOOTF as an objc.ID.
 func KCGUse100nitsHLGOOTF() objc.ID { return purego.CFConstant(raw.KCGUse100nitsHLGOOTF()) }
 
-// KCGUseBT1886ForCoreVideoGamma returns the CoreFoundation constant kCGUseBT1886ForCoreVideoGamma as a toll-free-bridged objc.ID.
+// KCGUseBT1886ForCoreVideoGamma returns the value of the CoreFoundation reference constant kCGUseBT1886ForCoreVideoGamma as an objc.ID.
 func KCGUseBT1886ForCoreVideoGamma() objc.ID { return purego.CFConstant(raw.KCGUseBT1886ForCoreVideoGamma()) }
 
-// KCGSkipBoostToHDR returns the CoreFoundation constant kCGSkipBoostToHDR as a toll-free-bridged objc.ID.
+// KCGSkipBoostToHDR returns the value of the CoreFoundation reference constant kCGSkipBoostToHDR as an objc.ID.
 func KCGSkipBoostToHDR() objc.ID { return purego.CFConstant(raw.KCGSkipBoostToHDR()) }
 
-// KCGUseLegacyHDREcosystem returns the CoreFoundation constant kCGUseLegacyHDREcosystem as a toll-free-bridged objc.ID.
+// KCGUseLegacyHDREcosystem returns the value of the CoreFoundation reference constant kCGUseLegacyHDREcosystem as an objc.ID.
 func KCGUseLegacyHDREcosystem() objc.ID { return purego.CFConstant(raw.KCGUseLegacyHDREcosystem()) }
 
-// KCGPreferredDynamicRange returns the CoreFoundation constant kCGPreferredDynamicRange as a toll-free-bridged objc.ID.
+// KCGPreferredDynamicRange returns the value of the CoreFoundation reference constant kCGPreferredDynamicRange as an objc.ID.
 func KCGPreferredDynamicRange() objc.ID { return purego.CFConstant(raw.KCGPreferredDynamicRange()) }
 
-// KCGDynamicRangeHigh returns the CoreFoundation constant kCGDynamicRangeHigh as a toll-free-bridged objc.ID.
+// KCGDynamicRangeHigh returns the value of the CoreFoundation reference constant kCGDynamicRangeHigh as an objc.ID.
 func KCGDynamicRangeHigh() objc.ID { return purego.CFConstant(raw.KCGDynamicRangeHigh()) }
 
-// KCGDynamicRangeConstrained returns the CoreFoundation constant kCGDynamicRangeConstrained as a toll-free-bridged objc.ID.
+// KCGDynamicRangeConstrained returns the value of the CoreFoundation reference constant kCGDynamicRangeConstrained as an objc.ID.
 func KCGDynamicRangeConstrained() objc.ID { return purego.CFConstant(raw.KCGDynamicRangeConstrained()) }
 
-// KCGDynamicRangeStandard returns the CoreFoundation constant kCGDynamicRangeStandard as a toll-free-bridged objc.ID.
+// KCGDynamicRangeStandard returns the value of the CoreFoundation reference constant kCGDynamicRangeStandard as an objc.ID.
 func KCGDynamicRangeStandard() objc.ID { return purego.CFConstant(raw.KCGDynamicRangeStandard()) }
 
-// KCGContentAverageLightLevel returns the CoreFoundation constant kCGContentAverageLightLevel as a toll-free-bridged objc.ID.
+// KCGContentAverageLightLevel returns the value of the CoreFoundation reference constant kCGContentAverageLightLevel as an objc.ID.
 func KCGContentAverageLightLevel() objc.ID { return purego.CFConstant(raw.KCGContentAverageLightLevel()) }
 
-// KCGContentAverageLightLevelNits returns the CoreFoundation constant kCGContentAverageLightLevelNits as a toll-free-bridged objc.ID.
+// KCGContentAverageLightLevelNits returns the value of the CoreFoundation reference constant kCGContentAverageLightLevelNits as an objc.ID.
 func KCGContentAverageLightLevelNits() objc.ID { return purego.CFConstant(raw.KCGContentAverageLightLevelNits()) }
 
-// KCGAdaptiveMaximumBitDepth returns the CoreFoundation constant kCGAdaptiveMaximumBitDepth as a toll-free-bridged objc.ID.
+// KCGAdaptiveMaximumBitDepth returns the value of the CoreFoundation reference constant kCGAdaptiveMaximumBitDepth as an objc.ID.
 func KCGAdaptiveMaximumBitDepth() objc.ID { return purego.CFConstant(raw.KCGAdaptiveMaximumBitDepth()) }
 
-// KCGColorConversionBlackPointCompensation returns the CoreFoundation constant kCGColorConversionBlackPointCompensation as a toll-free-bridged objc.ID.
+// KCGColorConversionBlackPointCompensation returns the value of the CoreFoundation reference constant kCGColorConversionBlackPointCompensation as an objc.ID.
 func KCGColorConversionBlackPointCompensation() objc.ID { return purego.CFConstant(raw.KCGColorConversionBlackPointCompensation()) }
 
-// KCGColorConversionTRCSize returns the CoreFoundation constant kCGColorConversionTRCSize as a toll-free-bridged objc.ID.
+// KCGColorConversionTRCSize returns the value of the CoreFoundation reference constant kCGColorConversionTRCSize as an objc.ID.
 func KCGColorConversionTRCSize() objc.ID { return purego.CFConstant(raw.KCGColorConversionTRCSize()) }
 
-// KCGPDFContextMediaBox returns the CoreFoundation constant kCGPDFContextMediaBox as a toll-free-bridged objc.ID.
+// KCGPDFContextMediaBox returns the value of the CoreFoundation reference constant kCGPDFContextMediaBox as an objc.ID.
 func KCGPDFContextMediaBox() objc.ID { return purego.CFConstant(raw.KCGPDFContextMediaBox()) }
 
-// KCGPDFContextCropBox returns the CoreFoundation constant kCGPDFContextCropBox as a toll-free-bridged objc.ID.
+// KCGPDFContextCropBox returns the value of the CoreFoundation reference constant kCGPDFContextCropBox as an objc.ID.
 func KCGPDFContextCropBox() objc.ID { return purego.CFConstant(raw.KCGPDFContextCropBox()) }
 
-// KCGPDFContextBleedBox returns the CoreFoundation constant kCGPDFContextBleedBox as a toll-free-bridged objc.ID.
+// KCGPDFContextBleedBox returns the value of the CoreFoundation reference constant kCGPDFContextBleedBox as an objc.ID.
 func KCGPDFContextBleedBox() objc.ID { return purego.CFConstant(raw.KCGPDFContextBleedBox()) }
 
-// KCGPDFContextTrimBox returns the CoreFoundation constant kCGPDFContextTrimBox as a toll-free-bridged objc.ID.
+// KCGPDFContextTrimBox returns the value of the CoreFoundation reference constant kCGPDFContextTrimBox as an objc.ID.
 func KCGPDFContextTrimBox() objc.ID { return purego.CFConstant(raw.KCGPDFContextTrimBox()) }
 
-// KCGPDFContextArtBox returns the CoreFoundation constant kCGPDFContextArtBox as a toll-free-bridged objc.ID.
+// KCGPDFContextArtBox returns the value of the CoreFoundation reference constant kCGPDFContextArtBox as an objc.ID.
 func KCGPDFContextArtBox() objc.ID { return purego.CFConstant(raw.KCGPDFContextArtBox()) }
 
-// KCGPDFContextTitle returns the CoreFoundation constant kCGPDFContextTitle as a toll-free-bridged objc.ID.
+// KCGPDFContextTitle returns the value of the CoreFoundation reference constant kCGPDFContextTitle as an objc.ID.
 func KCGPDFContextTitle() objc.ID { return purego.CFConstant(raw.KCGPDFContextTitle()) }
 
-// KCGPDFContextAuthor returns the CoreFoundation constant kCGPDFContextAuthor as a toll-free-bridged objc.ID.
+// KCGPDFContextAuthor returns the value of the CoreFoundation reference constant kCGPDFContextAuthor as an objc.ID.
 func KCGPDFContextAuthor() objc.ID { return purego.CFConstant(raw.KCGPDFContextAuthor()) }
 
-// KCGPDFContextSubject returns the CoreFoundation constant kCGPDFContextSubject as a toll-free-bridged objc.ID.
+// KCGPDFContextSubject returns the value of the CoreFoundation reference constant kCGPDFContextSubject as an objc.ID.
 func KCGPDFContextSubject() objc.ID { return purego.CFConstant(raw.KCGPDFContextSubject()) }
 
-// KCGPDFContextKeywords returns the CoreFoundation constant kCGPDFContextKeywords as a toll-free-bridged objc.ID.
+// KCGPDFContextKeywords returns the value of the CoreFoundation reference constant kCGPDFContextKeywords as an objc.ID.
 func KCGPDFContextKeywords() objc.ID { return purego.CFConstant(raw.KCGPDFContextKeywords()) }
 
-// KCGPDFContextCreator returns the CoreFoundation constant kCGPDFContextCreator as a toll-free-bridged objc.ID.
+// KCGPDFContextCreator returns the value of the CoreFoundation reference constant kCGPDFContextCreator as an objc.ID.
 func KCGPDFContextCreator() objc.ID { return purego.CFConstant(raw.KCGPDFContextCreator()) }
 
-// KCGPDFContextOwnerPassword returns the CoreFoundation constant kCGPDFContextOwnerPassword as a toll-free-bridged objc.ID.
+// KCGPDFContextOwnerPassword returns the value of the CoreFoundation reference constant kCGPDFContextOwnerPassword as an objc.ID.
 func KCGPDFContextOwnerPassword() objc.ID { return purego.CFConstant(raw.KCGPDFContextOwnerPassword()) }
 
-// KCGPDFContextUserPassword returns the CoreFoundation constant kCGPDFContextUserPassword as a toll-free-bridged objc.ID.
+// KCGPDFContextUserPassword returns the value of the CoreFoundation reference constant kCGPDFContextUserPassword as an objc.ID.
 func KCGPDFContextUserPassword() objc.ID { return purego.CFConstant(raw.KCGPDFContextUserPassword()) }
 
-// KCGPDFContextEncryptionKeyLength returns the CoreFoundation constant kCGPDFContextEncryptionKeyLength as a toll-free-bridged objc.ID.
+// KCGPDFContextEncryptionKeyLength returns the value of the CoreFoundation reference constant kCGPDFContextEncryptionKeyLength as an objc.ID.
 func KCGPDFContextEncryptionKeyLength() objc.ID { return purego.CFConstant(raw.KCGPDFContextEncryptionKeyLength()) }
 
-// KCGPDFContextAllowsPrinting returns the CoreFoundation constant kCGPDFContextAllowsPrinting as a toll-free-bridged objc.ID.
+// KCGPDFContextAllowsPrinting returns the value of the CoreFoundation reference constant kCGPDFContextAllowsPrinting as an objc.ID.
 func KCGPDFContextAllowsPrinting() objc.ID { return purego.CFConstant(raw.KCGPDFContextAllowsPrinting()) }
 
-// KCGPDFContextAllowsCopying returns the CoreFoundation constant kCGPDFContextAllowsCopying as a toll-free-bridged objc.ID.
+// KCGPDFContextAllowsCopying returns the value of the CoreFoundation reference constant kCGPDFContextAllowsCopying as an objc.ID.
 func KCGPDFContextAllowsCopying() objc.ID { return purego.CFConstant(raw.KCGPDFContextAllowsCopying()) }
 
-// KCGPDFContextOutputIntent returns the CoreFoundation constant kCGPDFContextOutputIntent as a toll-free-bridged objc.ID.
+// KCGPDFContextOutputIntent returns the value of the CoreFoundation reference constant kCGPDFContextOutputIntent as an objc.ID.
 func KCGPDFContextOutputIntent() objc.ID { return purego.CFConstant(raw.KCGPDFContextOutputIntent()) }
 
-// KCGPDFXOutputIntentSubtype returns the CoreFoundation constant kCGPDFXOutputIntentSubtype as a toll-free-bridged objc.ID.
+// KCGPDFXOutputIntentSubtype returns the value of the CoreFoundation reference constant kCGPDFXOutputIntentSubtype as an objc.ID.
 func KCGPDFXOutputIntentSubtype() objc.ID { return purego.CFConstant(raw.KCGPDFXOutputIntentSubtype()) }
 
-// KCGPDFXOutputConditionIdentifier returns the CoreFoundation constant kCGPDFXOutputConditionIdentifier as a toll-free-bridged objc.ID.
+// KCGPDFXOutputConditionIdentifier returns the value of the CoreFoundation reference constant kCGPDFXOutputConditionIdentifier as an objc.ID.
 func KCGPDFXOutputConditionIdentifier() objc.ID { return purego.CFConstant(raw.KCGPDFXOutputConditionIdentifier()) }
 
-// KCGPDFXOutputCondition returns the CoreFoundation constant kCGPDFXOutputCondition as a toll-free-bridged objc.ID.
+// KCGPDFXOutputCondition returns the value of the CoreFoundation reference constant kCGPDFXOutputCondition as an objc.ID.
 func KCGPDFXOutputCondition() objc.ID { return purego.CFConstant(raw.KCGPDFXOutputCondition()) }
 
-// KCGPDFXRegistryName returns the CoreFoundation constant kCGPDFXRegistryName as a toll-free-bridged objc.ID.
+// KCGPDFXRegistryName returns the value of the CoreFoundation reference constant kCGPDFXRegistryName as an objc.ID.
 func KCGPDFXRegistryName() objc.ID { return purego.CFConstant(raw.KCGPDFXRegistryName()) }
 
-// KCGPDFXInfo returns the CoreFoundation constant kCGPDFXInfo as a toll-free-bridged objc.ID.
+// KCGPDFXInfo returns the value of the CoreFoundation reference constant kCGPDFXInfo as an objc.ID.
 func KCGPDFXInfo() objc.ID { return purego.CFConstant(raw.KCGPDFXInfo()) }
 
-// KCGPDFXDestinationOutputProfile returns the CoreFoundation constant kCGPDFXDestinationOutputProfile as a toll-free-bridged objc.ID.
+// KCGPDFXDestinationOutputProfile returns the value of the CoreFoundation reference constant kCGPDFXDestinationOutputProfile as an objc.ID.
 func KCGPDFXDestinationOutputProfile() objc.ID { return purego.CFConstant(raw.KCGPDFXDestinationOutputProfile()) }
 
-// KCGPDFContextOutputIntents returns the CoreFoundation constant kCGPDFContextOutputIntents as a toll-free-bridged objc.ID.
+// KCGPDFContextOutputIntents returns the value of the CoreFoundation reference constant kCGPDFContextOutputIntents as an objc.ID.
 func KCGPDFContextOutputIntents() objc.ID { return purego.CFConstant(raw.KCGPDFContextOutputIntents()) }
 
-// KCGPDFContextAccessPermissions returns the CoreFoundation constant kCGPDFContextAccessPermissions as a toll-free-bridged objc.ID.
+// KCGPDFContextAccessPermissions returns the value of the CoreFoundation reference constant kCGPDFContextAccessPermissions as an objc.ID.
 func KCGPDFContextAccessPermissions() objc.ID { return purego.CFConstant(raw.KCGPDFContextAccessPermissions()) }
 
-// KCGPDFContextCreateLinearizedPDF returns the CoreFoundation constant kCGPDFContextCreateLinearizedPDF as a toll-free-bridged objc.ID.
+// KCGPDFContextCreateLinearizedPDF returns the value of the CoreFoundation reference constant kCGPDFContextCreateLinearizedPDF as an objc.ID.
 func KCGPDFContextCreateLinearizedPDF() objc.ID { return purego.CFConstant(raw.KCGPDFContextCreateLinearizedPDF()) }
 
-// KCGPDFContextCreatePDFA returns the CoreFoundation constant kCGPDFContextCreatePDFA as a toll-free-bridged objc.ID.
+// KCGPDFContextCreatePDFA returns the value of the CoreFoundation reference constant kCGPDFContextCreatePDFA as an objc.ID.
 func KCGPDFContextCreatePDFA() objc.ID { return purego.CFConstant(raw.KCGPDFContextCreatePDFA()) }
 
-// KCGWindowNumber returns the CoreFoundation constant kCGWindowNumber as a toll-free-bridged objc.ID.
+// KCGWindowNumber returns the value of the CoreFoundation reference constant kCGWindowNumber as an objc.ID.
 func KCGWindowNumber() objc.ID { return purego.CFConstant(raw.KCGWindowNumber()) }
 
-// KCGWindowStoreType returns the CoreFoundation constant kCGWindowStoreType as a toll-free-bridged objc.ID.
+// KCGWindowStoreType returns the value of the CoreFoundation reference constant kCGWindowStoreType as an objc.ID.
 func KCGWindowStoreType() objc.ID { return purego.CFConstant(raw.KCGWindowStoreType()) }
 
-// KCGWindowLayer returns the CoreFoundation constant kCGWindowLayer as a toll-free-bridged objc.ID.
+// KCGWindowLayer returns the value of the CoreFoundation reference constant kCGWindowLayer as an objc.ID.
 func KCGWindowLayer() objc.ID { return purego.CFConstant(raw.KCGWindowLayer()) }
 
-// KCGWindowBounds returns the CoreFoundation constant kCGWindowBounds as a toll-free-bridged objc.ID.
+// KCGWindowBounds returns the value of the CoreFoundation reference constant kCGWindowBounds as an objc.ID.
 func KCGWindowBounds() objc.ID { return purego.CFConstant(raw.KCGWindowBounds()) }
 
-// KCGWindowSharingState returns the CoreFoundation constant kCGWindowSharingState as a toll-free-bridged objc.ID.
+// KCGWindowSharingState returns the value of the CoreFoundation reference constant kCGWindowSharingState as an objc.ID.
 func KCGWindowSharingState() objc.ID { return purego.CFConstant(raw.KCGWindowSharingState()) }
 
-// KCGWindowAlpha returns the CoreFoundation constant kCGWindowAlpha as a toll-free-bridged objc.ID.
+// KCGWindowAlpha returns the value of the CoreFoundation reference constant kCGWindowAlpha as an objc.ID.
 func KCGWindowAlpha() objc.ID { return purego.CFConstant(raw.KCGWindowAlpha()) }
 
-// KCGWindowOwnerPID returns the CoreFoundation constant kCGWindowOwnerPID as a toll-free-bridged objc.ID.
+// KCGWindowOwnerPID returns the value of the CoreFoundation reference constant kCGWindowOwnerPID as an objc.ID.
 func KCGWindowOwnerPID() objc.ID { return purego.CFConstant(raw.KCGWindowOwnerPID()) }
 
-// KCGWindowMemoryUsage returns the CoreFoundation constant kCGWindowMemoryUsage as a toll-free-bridged objc.ID.
+// KCGWindowMemoryUsage returns the value of the CoreFoundation reference constant kCGWindowMemoryUsage as an objc.ID.
 func KCGWindowMemoryUsage() objc.ID { return purego.CFConstant(raw.KCGWindowMemoryUsage()) }
 
-// KCGWindowWorkspace returns the CoreFoundation constant kCGWindowWorkspace as a toll-free-bridged objc.ID.
+// KCGWindowWorkspace returns the value of the CoreFoundation reference constant kCGWindowWorkspace as an objc.ID.
 func KCGWindowWorkspace() objc.ID { return purego.CFConstant(raw.KCGWindowWorkspace()) }
 
-// KCGWindowOwnerName returns the CoreFoundation constant kCGWindowOwnerName as a toll-free-bridged objc.ID.
+// KCGWindowOwnerName returns the value of the CoreFoundation reference constant kCGWindowOwnerName as an objc.ID.
 func KCGWindowOwnerName() objc.ID { return purego.CFConstant(raw.KCGWindowOwnerName()) }
 
-// KCGWindowName returns the CoreFoundation constant kCGWindowName as a toll-free-bridged objc.ID.
+// KCGWindowName returns the value of the CoreFoundation reference constant kCGWindowName as an objc.ID.
 func KCGWindowName() objc.ID { return purego.CFConstant(raw.KCGWindowName()) }
 
-// KCGWindowIsOnscreen returns the CoreFoundation constant kCGWindowIsOnscreen as a toll-free-bridged objc.ID.
+// KCGWindowIsOnscreen returns the value of the CoreFoundation reference constant kCGWindowIsOnscreen as an objc.ID.
 func KCGWindowIsOnscreen() objc.ID { return purego.CFConstant(raw.KCGWindowIsOnscreen()) }
 
-// KCGWindowBackingLocationVideoMemory returns the CoreFoundation constant kCGWindowBackingLocationVideoMemory as a toll-free-bridged objc.ID.
+// KCGWindowBackingLocationVideoMemory returns the value of the CoreFoundation reference constant kCGWindowBackingLocationVideoMemory as an objc.ID.
 func KCGWindowBackingLocationVideoMemory() objc.ID { return purego.CFConstant(raw.KCGWindowBackingLocationVideoMemory()) }
 
-// KCGDisplayShowDuplicateLowResolutionModes returns the CoreFoundation constant kCGDisplayShowDuplicateLowResolutionModes as a toll-free-bridged objc.ID.
+// KCGDisplayShowDuplicateLowResolutionModes returns the value of the CoreFoundation reference constant kCGDisplayShowDuplicateLowResolutionModes as an objc.ID.
 func KCGDisplayShowDuplicateLowResolutionModes() objc.ID { return purego.CFConstant(raw.KCGDisplayShowDuplicateLowResolutionModes()) }
 
-// KCGDisplayStreamYCbCrMatrix_SMPTE_240M_1995 returns the CoreFoundation constant kCGDisplayStreamYCbCrMatrix_SMPTE_240M_1995 as a toll-free-bridged objc.ID.
+// KCGDisplayStreamYCbCrMatrix_SMPTE_240M_1995 returns the value of the CoreFoundation reference constant kCGDisplayStreamYCbCrMatrix_SMPTE_240M_1995 as an objc.ID.
 func KCGDisplayStreamYCbCrMatrix_SMPTE_240M_1995() objc.ID { return purego.CFConstant(raw.KCGDisplayStreamYCbCrMatrix_SMPTE_240M_1995()) }
 

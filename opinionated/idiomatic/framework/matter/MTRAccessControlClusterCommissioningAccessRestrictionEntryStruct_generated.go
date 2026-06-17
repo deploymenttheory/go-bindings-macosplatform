@@ -18,11 +18,11 @@ type MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct struct {
 // Unwrap returns the underlying [raw.MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct].
 func (x *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) Unwrap() *raw.MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRAccessControlClusterCommissioningAccessRestrictionEntryStructFromID adopts an existing toll-free-bridged object id as a MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct (nil for 0).
+// MTRAccessControlClusterCommissioningAccessRestrictionEntryStructFromID adopts an existing object pointer as a MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct (nil for 0).
 func MTRAccessControlClusterCommissioningAccessRestrictionEntryStructFromID(id objc.ID) *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type NotificationCenter struct {
 // Unwrap returns the underlying [raw.DRNotificationCenter].
 func (x *NotificationCenter) Unwrap() *raw.DRNotificationCenter { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NotificationCenter) ID() objc.ID { return x.inner.Ptr() }
 
-// NotificationCenterFromID adopts an existing toll-free-bridged object id as a NotificationCenter (nil for 0).
+// NotificationCenterFromID adopts an existing object pointer as a NotificationCenter (nil for 0).
 func NotificationCenterFromID(id objc.ID) *NotificationCenter {
 	if id == 0 {
 		return nil

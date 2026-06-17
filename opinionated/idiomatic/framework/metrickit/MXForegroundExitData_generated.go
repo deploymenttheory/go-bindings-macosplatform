@@ -17,11 +17,11 @@ type ForegroundExitData struct {
 // Unwrap returns the underlying [raw.MXForegroundExitData].
 func (x *ForegroundExitData) Unwrap() *raw.MXForegroundExitData { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ForegroundExitData) ID() objc.ID { return x.inner.Ptr() }
 
-// ForegroundExitDataFromID adopts an existing toll-free-bridged object id as a ForegroundExitData (nil for 0).
+// ForegroundExitDataFromID adopts an existing object pointer as a ForegroundExitData (nil for 0).
 func ForegroundExitDataFromID(id objc.ID) *ForegroundExitData {
 	if id == 0 {
 		return nil

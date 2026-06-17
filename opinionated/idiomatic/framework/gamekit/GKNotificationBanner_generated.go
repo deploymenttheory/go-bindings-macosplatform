@@ -17,11 +17,11 @@ type NotificationBanner struct {
 // Unwrap returns the underlying [raw.GKNotificationBanner].
 func (x *NotificationBanner) Unwrap() *raw.GKNotificationBanner { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NotificationBanner) ID() objc.ID { return x.inner.Ptr() }
 
-// NotificationBannerFromID adopts an existing toll-free-bridged object id as a NotificationBanner (nil for 0).
+// NotificationBannerFromID adopts an existing object pointer as a NotificationBanner (nil for 0).
 func NotificationBannerFromID(id objc.ID) *NotificationBanner {
 	if id == 0 {
 		return nil

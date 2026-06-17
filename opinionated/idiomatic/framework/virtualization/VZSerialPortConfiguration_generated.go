@@ -17,11 +17,11 @@ type SerialPortConfiguration struct {
 // Unwrap returns the underlying [raw.VZSerialPortConfiguration].
 func (x *SerialPortConfiguration) Unwrap() *raw.VZSerialPortConfiguration { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SerialPortConfiguration) ID() objc.ID { return x.inner.Ptr() }
 
-// SerialPortConfigurationFromID adopts an existing toll-free-bridged object id as a SerialPortConfiguration (nil for 0).
+// SerialPortConfigurationFromID adopts an existing object pointer as a SerialPortConfiguration (nil for 0).
 func SerialPortConfigurationFromID(id objc.ID) *SerialPortConfiguration {
 	if id == 0 {
 		return nil

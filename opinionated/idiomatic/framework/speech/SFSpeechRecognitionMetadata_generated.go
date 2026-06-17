@@ -17,11 +17,11 @@ type SpeechRecognitionMetadata struct {
 // Unwrap returns the underlying [raw.SFSpeechRecognitionMetadata].
 func (x *SpeechRecognitionMetadata) Unwrap() *raw.SFSpeechRecognitionMetadata { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SpeechRecognitionMetadata) ID() objc.ID { return x.inner.Ptr() }
 
-// SpeechRecognitionMetadataFromID adopts an existing toll-free-bridged object id as a SpeechRecognitionMetadata (nil for 0).
+// SpeechRecognitionMetadataFromID adopts an existing object pointer as a SpeechRecognitionMetadata (nil for 0).
 func SpeechRecognitionMetadataFromID(id objc.ID) *SpeechRecognitionMetadata {
 	if id == 0 {
 		return nil

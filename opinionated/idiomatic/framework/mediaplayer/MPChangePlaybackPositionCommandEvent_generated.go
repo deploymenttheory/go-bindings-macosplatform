@@ -17,11 +17,11 @@ type ChangePlaybackPositionCommandEvent struct {
 // Unwrap returns the underlying [raw.MPChangePlaybackPositionCommandEvent].
 func (x *ChangePlaybackPositionCommandEvent) Unwrap() *raw.MPChangePlaybackPositionCommandEvent { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ChangePlaybackPositionCommandEvent) ID() objc.ID { return x.inner.Ptr() }
 
-// ChangePlaybackPositionCommandEventFromID adopts an existing toll-free-bridged object id as a ChangePlaybackPositionCommandEvent (nil for 0).
+// ChangePlaybackPositionCommandEventFromID adopts an existing object pointer as a ChangePlaybackPositionCommandEvent (nil for 0).
 func ChangePlaybackPositionCommandEventFromID(id objc.ID) *ChangePlaybackPositionCommandEvent {
 	if id == 0 {
 		return nil

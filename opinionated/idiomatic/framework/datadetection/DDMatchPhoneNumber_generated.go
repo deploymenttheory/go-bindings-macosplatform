@@ -18,11 +18,11 @@ type MatchPhoneNumber struct {
 // Unwrap returns the underlying [raw.DDMatchPhoneNumber].
 func (x *MatchPhoneNumber) Unwrap() *raw.DDMatchPhoneNumber { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MatchPhoneNumber) ID() objc.ID { return x.inner.Ptr() }
 
-// MatchPhoneNumberFromID adopts an existing toll-free-bridged object id as a MatchPhoneNumber (nil for 0).
+// MatchPhoneNumberFromID adopts an existing object pointer as a MatchPhoneNumber (nil for 0).
 func MatchPhoneNumberFromID(id objc.ID) *MatchPhoneNumber {
 	if id == 0 {
 		return nil

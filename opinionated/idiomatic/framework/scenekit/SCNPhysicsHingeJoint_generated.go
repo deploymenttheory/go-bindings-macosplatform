@@ -17,11 +17,11 @@ type PhysicsHingeJoint struct {
 // Unwrap returns the underlying [raw.SCNPhysicsHingeJoint].
 func (x *PhysicsHingeJoint) Unwrap() *raw.SCNPhysicsHingeJoint { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PhysicsHingeJoint) ID() objc.ID { return x.inner.Ptr() }
 
-// PhysicsHingeJointFromID adopts an existing toll-free-bridged object id as a PhysicsHingeJoint (nil for 0).
+// PhysicsHingeJointFromID adopts an existing object pointer as a PhysicsHingeJoint (nil for 0).
 func PhysicsHingeJointFromID(id objc.ID) *PhysicsHingeJoint {
 	if id == 0 {
 		return nil

@@ -17,11 +17,11 @@ type TokenSession struct {
 // Unwrap returns the underlying [raw.TKTokenSession].
 func (x *TokenSession) Unwrap() *raw.TKTokenSession { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *TokenSession) ID() objc.ID { return x.inner.Ptr() }
 
-// TokenSessionFromID adopts an existing toll-free-bridged object id as a TokenSession (nil for 0).
+// TokenSessionFromID adopts an existing object pointer as a TokenSession (nil for 0).
 func TokenSessionFromID(id objc.ID) *TokenSession {
 	if id == 0 {
 		return nil

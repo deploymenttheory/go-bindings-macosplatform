@@ -18,11 +18,11 @@ type CalTask struct {
 // Unwrap returns the underlying [raw.CalTask].
 func (x *CalTask) Unwrap() *raw.CalTask { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CalTask) ID() objc.ID { return x.inner.Ptr() }
 
-// CalTaskFromID adopts an existing toll-free-bridged object id as a CalTask (nil for 0).
+// CalTaskFromID adopts an existing object pointer as a CalTask (nil for 0).
 func CalTaskFromID(id objc.ID) *CalTask {
 	if id == 0 {
 		return nil

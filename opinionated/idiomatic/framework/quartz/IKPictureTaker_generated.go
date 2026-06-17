@@ -19,11 +19,11 @@ type IKPictureTaker struct {
 // Unwrap returns the underlying [raw.IKPictureTaker].
 func (x *IKPictureTaker) Unwrap() *raw.IKPictureTaker { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *IKPictureTaker) ID() objc.ID { return x.inner.Ptr() }
 
-// IKPictureTakerFromID adopts an existing toll-free-bridged object id as a IKPictureTaker (nil for 0).
+// IKPictureTakerFromID adopts an existing object pointer as a IKPictureTaker (nil for 0).
 func IKPictureTakerFromID(id objc.ID) *IKPictureTaker {
 	if id == 0 {
 		return nil

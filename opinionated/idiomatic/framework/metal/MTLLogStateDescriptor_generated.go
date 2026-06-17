@@ -17,11 +17,11 @@ type LogStateDescriptor struct {
 // Unwrap returns the underlying [raw.MTLLogStateDescriptor].
 func (x *LogStateDescriptor) Unwrap() *raw.MTLLogStateDescriptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *LogStateDescriptor) ID() objc.ID { return x.inner.Ptr() }
 
-// LogStateDescriptorFromID adopts an existing toll-free-bridged object id as a LogStateDescriptor (nil for 0).
+// LogStateDescriptorFromID adopts an existing object pointer as a LogStateDescriptor (nil for 0).
 func LogStateDescriptorFromID(id objc.ID) *LogStateDescriptor {
 	if id == 0 {
 		return nil

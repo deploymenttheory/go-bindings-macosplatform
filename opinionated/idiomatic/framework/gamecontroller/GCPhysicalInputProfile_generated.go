@@ -19,11 +19,11 @@ type PhysicalInputProfile struct {
 // Unwrap returns the underlying [raw.GCPhysicalInputProfile].
 func (x *PhysicalInputProfile) Unwrap() *raw.GCPhysicalInputProfile { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PhysicalInputProfile) ID() objc.ID { return x.inner.Ptr() }
 
-// PhysicalInputProfileFromID adopts an existing toll-free-bridged object id as a PhysicalInputProfile (nil for 0).
+// PhysicalInputProfileFromID adopts an existing object pointer as a PhysicalInputProfile (nil for 0).
 func PhysicalInputProfileFromID(id objc.ID) *PhysicalInputProfile {
 	if id == 0 {
 		return nil

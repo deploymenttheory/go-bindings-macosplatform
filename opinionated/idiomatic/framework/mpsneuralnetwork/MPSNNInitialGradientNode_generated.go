@@ -17,11 +17,11 @@ type NNInitialGradientNode struct {
 // Unwrap returns the underlying [raw.MPSNNInitialGradientNode].
 func (x *NNInitialGradientNode) Unwrap() *raw.MPSNNInitialGradientNode { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NNInitialGradientNode) ID() objc.ID { return x.inner.Ptr() }
 
-// NNInitialGradientNodeFromID adopts an existing toll-free-bridged object id as a NNInitialGradientNode (nil for 0).
+// NNInitialGradientNodeFromID adopts an existing object pointer as a NNInitialGradientNode (nil for 0).
 func NNInitialGradientNodeFromID(id objc.ID) *NNInitialGradientNode {
 	if id == 0 {
 		return nil

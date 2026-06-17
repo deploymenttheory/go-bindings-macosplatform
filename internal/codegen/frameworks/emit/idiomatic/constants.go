@@ -17,9 +17,9 @@ import (
 // per CoreFoundation-reference extern (const CF<Type>Ref globals such as
 // kSecClass). The raw layer emits these as `func KSecClass() uintptr` returning
 // the symbol *address*; using them means dereferencing the address to the
-// CFTypeRef value by hand. The idiomatic accessor returns the dereferenced value
-// typed as an objc.ID (CoreFoundation is toll-free bridged), so callers can pass
-// it straight into a dictionary or a C function via the runtime CF helpers:
+// reference value by hand. The idiomatic accessor returns the dereferenced value
+// typed as an objc.ID (the reference and an objc.ID are the same pointer), so
+// callers can pass it straight into a dictionary or a C function:
 //
 //	func KSecClass() objc.ID { return purego.CFConstant(raw.KSecClass()) }
 //
@@ -69,7 +69,7 @@ func emitConstants(
 		}
 		fmt.Fprintf(
 			&body,
-			"// %s returns the CoreFoundation constant %s as a toll-free-bridged objc.ID.\n",
+			"// %s returns the value of the CoreFoundation reference constant %s as an objc.ID.\n",
 			goName, ext.Name,
 		)
 		fmt.Fprintf(
@@ -104,9 +104,8 @@ func emitConstants(
 }
 
 // isCFRefExtern reports whether an extern's ObjC type is a CoreFoundation
-// reference value (const CF<Type>Ref) — the toll-free-bridged constants that can
-// be dereferenced to an objc.ID. Pointer-to-ref out-parameters (containing '*')
-// are excluded.
+// reference value (const CF<Type>Ref) whose dereferenced value can be used as an
+// objc.ID. Pointer-to-ref out-parameters (containing '*') are excluded.
 func isCFRefExtern(objcType string) bool {
 	if strings.Contains(objcType, "*") {
 		return false

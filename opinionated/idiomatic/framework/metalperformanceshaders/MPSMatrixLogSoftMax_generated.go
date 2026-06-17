@@ -19,11 +19,11 @@ type MatrixLogSoftMax struct {
 // Unwrap returns the underlying [raw.MPSMatrixLogSoftMax].
 func (x *MatrixLogSoftMax) Unwrap() *raw.MPSMatrixLogSoftMax { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MatrixLogSoftMax) ID() objc.ID { return x.inner.Ptr() }
 
-// MatrixLogSoftMaxFromID adopts an existing toll-free-bridged object id as a MatrixLogSoftMax (nil for 0).
+// MatrixLogSoftMaxFromID adopts an existing object pointer as a MatrixLogSoftMax (nil for 0).
 func MatrixLogSoftMaxFromID(id objc.ID) *MatrixLogSoftMax {
 	if id == 0 {
 		return nil

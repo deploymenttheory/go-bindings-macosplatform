@@ -17,11 +17,11 @@ type PhysicsField struct {
 // Unwrap returns the underlying [raw.SCNPhysicsField].
 func (x *PhysicsField) Unwrap() *raw.SCNPhysicsField { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PhysicsField) ID() objc.ID { return x.inner.Ptr() }
 
-// PhysicsFieldFromID adopts an existing toll-free-bridged object id as a PhysicsField (nil for 0).
+// PhysicsFieldFromID adopts an existing object pointer as a PhysicsField (nil for 0).
 func PhysicsFieldFromID(id objc.ID) *PhysicsField {
 	if id == 0 {
 		return nil

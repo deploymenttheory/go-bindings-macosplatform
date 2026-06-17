@@ -18,11 +18,11 @@ type SaveChangesRequest struct {
 // Unwrap returns the underlying [raw.NSSaveChangesRequest].
 func (x *SaveChangesRequest) Unwrap() *raw.NSSaveChangesRequest { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SaveChangesRequest) ID() objc.ID { return x.inner.Ptr() }
 
-// SaveChangesRequestFromID adopts an existing toll-free-bridged object id as a SaveChangesRequest (nil for 0).
+// SaveChangesRequestFromID adopts an existing object pointer as a SaveChangesRequest (nil for 0).
 func SaveChangesRequestFromID(id objc.ID) *SaveChangesRequest {
 	if id == 0 {
 		return nil

@@ -17,11 +17,11 @@ type TensorExtents struct {
 // Unwrap returns the underlying [raw.MTLTensorExtents].
 func (x *TensorExtents) Unwrap() *raw.MTLTensorExtents { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *TensorExtents) ID() objc.ID { return x.inner.Ptr() }
 
-// TensorExtentsFromID adopts an existing toll-free-bridged object id as a TensorExtents (nil for 0).
+// TensorExtentsFromID adopts an existing object pointer as a TensorExtents (nil for 0).
 func TensorExtentsFromID(id objc.ID) *TensorExtents {
 	if id == 0 {
 		return nil

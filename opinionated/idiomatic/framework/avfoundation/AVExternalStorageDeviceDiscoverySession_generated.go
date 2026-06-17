@@ -18,11 +18,11 @@ type ExternalStorageDeviceDiscoverySession struct {
 // Unwrap returns the underlying [raw.AVExternalStorageDeviceDiscoverySession].
 func (x *ExternalStorageDeviceDiscoverySession) Unwrap() *raw.AVExternalStorageDeviceDiscoverySession { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ExternalStorageDeviceDiscoverySession) ID() objc.ID { return x.inner.Ptr() }
 
-// ExternalStorageDeviceDiscoverySessionFromID adopts an existing toll-free-bridged object id as a ExternalStorageDeviceDiscoverySession (nil for 0).
+// ExternalStorageDeviceDiscoverySessionFromID adopts an existing object pointer as a ExternalStorageDeviceDiscoverySession (nil for 0).
 func ExternalStorageDeviceDiscoverySessionFromID(id objc.ID) *ExternalStorageDeviceDiscoverySession {
 	if id == 0 {
 		return nil

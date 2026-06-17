@@ -20,11 +20,11 @@ type Toolbar struct {
 // Unwrap returns the underlying [raw.NSToolbar].
 func (x *Toolbar) Unwrap() *raw.NSToolbar { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Toolbar) ID() objc.ID { return x.inner.Ptr() }
 
-// ToolbarFromID adopts an existing toll-free-bridged object id as a Toolbar (nil for 0).
+// ToolbarFromID adopts an existing object pointer as a Toolbar (nil for 0).
 func ToolbarFromID(id objc.ID) *Toolbar {
 	if id == 0 {
 		return nil

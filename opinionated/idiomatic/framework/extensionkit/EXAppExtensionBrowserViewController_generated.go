@@ -17,11 +17,11 @@ type AppExtensionBrowserViewController struct {
 // Unwrap returns the underlying [raw.EXAppExtensionBrowserViewController].
 func (x *AppExtensionBrowserViewController) Unwrap() *raw.EXAppExtensionBrowserViewController { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AppExtensionBrowserViewController) ID() objc.ID { return x.inner.Ptr() }
 
-// AppExtensionBrowserViewControllerFromID adopts an existing toll-free-bridged object id as a AppExtensionBrowserViewController (nil for 0).
+// AppExtensionBrowserViewControllerFromID adopts an existing object pointer as a AppExtensionBrowserViewController (nil for 0).
 func AppExtensionBrowserViewControllerFromID(id objc.ID) *AppExtensionBrowserViewController {
 	if id == 0 {
 		return nil

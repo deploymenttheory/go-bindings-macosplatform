@@ -18,11 +18,11 @@ type MTRColorControlClusterMoveColorParams struct {
 // Unwrap returns the underlying [raw.MTRColorControlClusterMoveColorParams].
 func (x *MTRColorControlClusterMoveColorParams) Unwrap() *raw.MTRColorControlClusterMoveColorParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRColorControlClusterMoveColorParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRColorControlClusterMoveColorParamsFromID adopts an existing toll-free-bridged object id as a MTRColorControlClusterMoveColorParams (nil for 0).
+// MTRColorControlClusterMoveColorParamsFromID adopts an existing object pointer as a MTRColorControlClusterMoveColorParams (nil for 0).
 func MTRColorControlClusterMoveColorParamsFromID(id objc.ID) *MTRColorControlClusterMoveColorParams {
 	if id == 0 {
 		return nil

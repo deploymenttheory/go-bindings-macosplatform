@@ -18,11 +18,11 @@ type MTREnergyEVSEClusterClearTargetsParams struct {
 // Unwrap returns the underlying [raw.MTREnergyEVSEClusterClearTargetsParams].
 func (x *MTREnergyEVSEClusterClearTargetsParams) Unwrap() *raw.MTREnergyEVSEClusterClearTargetsParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTREnergyEVSEClusterClearTargetsParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTREnergyEVSEClusterClearTargetsParamsFromID adopts an existing toll-free-bridged object id as a MTREnergyEVSEClusterClearTargetsParams (nil for 0).
+// MTREnergyEVSEClusterClearTargetsParamsFromID adopts an existing object pointer as a MTREnergyEVSEClusterClearTargetsParams (nil for 0).
 func MTREnergyEVSEClusterClearTargetsParamsFromID(id objc.ID) *MTREnergyEVSEClusterClearTargetsParams {
 	if id == 0 {
 		return nil

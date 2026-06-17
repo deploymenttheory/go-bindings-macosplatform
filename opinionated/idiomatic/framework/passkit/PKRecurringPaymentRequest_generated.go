@@ -19,11 +19,11 @@ type RecurringPaymentRequest struct {
 // Unwrap returns the underlying [raw.PKRecurringPaymentRequest].
 func (x *RecurringPaymentRequest) Unwrap() *raw.PKRecurringPaymentRequest { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *RecurringPaymentRequest) ID() objc.ID { return x.inner.Ptr() }
 
-// RecurringPaymentRequestFromID adopts an existing toll-free-bridged object id as a RecurringPaymentRequest (nil for 0).
+// RecurringPaymentRequestFromID adopts an existing object pointer as a RecurringPaymentRequest (nil for 0).
 func RecurringPaymentRequestFromID(id objc.ID) *RecurringPaymentRequest {
 	if id == 0 {
 		return nil

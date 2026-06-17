@@ -17,11 +17,11 @@ type BufferLayoutDescriptorArray struct {
 // Unwrap returns the underlying [raw.MTLBufferLayoutDescriptorArray].
 func (x *BufferLayoutDescriptorArray) Unwrap() *raw.MTLBufferLayoutDescriptorArray { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *BufferLayoutDescriptorArray) ID() objc.ID { return x.inner.Ptr() }
 
-// BufferLayoutDescriptorArrayFromID adopts an existing toll-free-bridged object id as a BufferLayoutDescriptorArray (nil for 0).
+// BufferLayoutDescriptorArrayFromID adopts an existing object pointer as a BufferLayoutDescriptorArray (nil for 0).
 func BufferLayoutDescriptorArrayFromID(id objc.ID) *BufferLayoutDescriptorArray {
 	if id == 0 {
 		return nil

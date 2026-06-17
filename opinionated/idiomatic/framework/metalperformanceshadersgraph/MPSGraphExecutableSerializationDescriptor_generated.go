@@ -19,11 +19,11 @@ type GraphExecutableSerializationDescriptor struct {
 // Unwrap returns the underlying [raw.MPSGraphExecutableSerializationDescriptor].
 func (x *GraphExecutableSerializationDescriptor) Unwrap() *raw.MPSGraphExecutableSerializationDescriptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *GraphExecutableSerializationDescriptor) ID() objc.ID { return x.inner.Ptr() }
 
-// GraphExecutableSerializationDescriptorFromID adopts an existing toll-free-bridged object id as a GraphExecutableSerializationDescriptor (nil for 0).
+// GraphExecutableSerializationDescriptorFromID adopts an existing object pointer as a GraphExecutableSerializationDescriptor (nil for 0).
 func GraphExecutableSerializationDescriptorFromID(id objc.ID) *GraphExecutableSerializationDescriptor {
 	if id == 0 {
 		return nil

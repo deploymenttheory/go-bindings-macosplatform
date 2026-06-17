@@ -21,11 +21,11 @@ type MTRBaseClusterCommissionerControl struct {
 // Unwrap returns the underlying [raw.MTRBaseClusterCommissionerControl].
 func (x *MTRBaseClusterCommissionerControl) Unwrap() *raw.MTRBaseClusterCommissionerControl { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRBaseClusterCommissionerControl) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRBaseClusterCommissionerControlFromID adopts an existing toll-free-bridged object id as a MTRBaseClusterCommissionerControl (nil for 0).
+// MTRBaseClusterCommissionerControlFromID adopts an existing object pointer as a MTRBaseClusterCommissionerControl (nil for 0).
 func MTRBaseClusterCommissionerControlFromID(id objc.ID) *MTRBaseClusterCommissionerControl {
 	if id == 0 {
 		return nil

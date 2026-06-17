@@ -19,11 +19,11 @@ type Share struct {
 // Unwrap returns the underlying [raw.CKShare].
 func (x *Share) Unwrap() *raw.CKShare { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Share) ID() objc.ID { return x.inner.Ptr() }
 
-// ShareFromID adopts an existing toll-free-bridged object id as a Share (nil for 0).
+// ShareFromID adopts an existing object pointer as a Share (nil for 0).
 func ShareFromID(id objc.ID) *Share {
 	if id == 0 {
 		return nil

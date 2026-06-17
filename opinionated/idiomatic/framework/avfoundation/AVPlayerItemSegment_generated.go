@@ -20,11 +20,11 @@ type PlayerItemSegment struct {
 // Unwrap returns the underlying [raw.AVPlayerItemSegment].
 func (x *PlayerItemSegment) Unwrap() *raw.AVPlayerItemSegment { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PlayerItemSegment) ID() objc.ID { return x.inner.Ptr() }
 
-// PlayerItemSegmentFromID adopts an existing toll-free-bridged object id as a PlayerItemSegment (nil for 0).
+// PlayerItemSegmentFromID adopts an existing object pointer as a PlayerItemSegment (nil for 0).
 func PlayerItemSegmentFromID(id objc.ID) *PlayerItemSegment {
 	if id == 0 {
 		return nil

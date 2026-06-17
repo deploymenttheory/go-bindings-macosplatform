@@ -19,11 +19,11 @@ type DOMHTMLHRElement struct {
 // Unwrap returns the underlying [raw.DOMHTMLHRElement].
 func (x *DOMHTMLHRElement) Unwrap() *raw.DOMHTMLHRElement { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DOMHTMLHRElement) ID() objc.ID { return x.inner.Ptr() }
 
-// DOMHTMLHRElementFromID adopts an existing toll-free-bridged object id as a DOMHTMLHRElement (nil for 0).
+// DOMHTMLHRElementFromID adopts an existing object pointer as a DOMHTMLHRElement (nil for 0).
 func DOMHTMLHRElementFromID(id objc.ID) *DOMHTMLHRElement {
 	if id == 0 {
 		return nil

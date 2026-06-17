@@ -18,11 +18,11 @@ type AssetReaderOutputCaptionAdaptor struct {
 // Unwrap returns the underlying [raw.AVAssetReaderOutputCaptionAdaptor].
 func (x *AssetReaderOutputCaptionAdaptor) Unwrap() *raw.AVAssetReaderOutputCaptionAdaptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AssetReaderOutputCaptionAdaptor) ID() objc.ID { return x.inner.Ptr() }
 
-// AssetReaderOutputCaptionAdaptorFromID adopts an existing toll-free-bridged object id as a AssetReaderOutputCaptionAdaptor (nil for 0).
+// AssetReaderOutputCaptionAdaptorFromID adopts an existing object pointer as a AssetReaderOutputCaptionAdaptor (nil for 0).
 func AssetReaderOutputCaptionAdaptorFromID(id objc.ID) *AssetReaderOutputCaptionAdaptor {
 	if id == 0 {
 		return nil

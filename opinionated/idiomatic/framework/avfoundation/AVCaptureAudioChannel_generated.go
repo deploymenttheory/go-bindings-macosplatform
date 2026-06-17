@@ -17,11 +17,11 @@ type CaptureAudioChannel struct {
 // Unwrap returns the underlying [raw.AVCaptureAudioChannel].
 func (x *CaptureAudioChannel) Unwrap() *raw.AVCaptureAudioChannel { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CaptureAudioChannel) ID() objc.ID { return x.inner.Ptr() }
 
-// CaptureAudioChannelFromID adopts an existing toll-free-bridged object id as a CaptureAudioChannel (nil for 0).
+// CaptureAudioChannelFromID adopts an existing object pointer as a CaptureAudioChannel (nil for 0).
 func CaptureAudioChannelFromID(id objc.ID) *CaptureAudioChannel {
 	if id == 0 {
 		return nil

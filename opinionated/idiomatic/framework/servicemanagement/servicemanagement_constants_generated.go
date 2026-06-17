@@ -10,18 +10,18 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// KSMErrorDomainIPC returns the CoreFoundation constant kSMErrorDomainIPC as a toll-free-bridged objc.ID.
+// KSMErrorDomainIPC returns the value of the CoreFoundation reference constant kSMErrorDomainIPC as an objc.ID.
 func KSMErrorDomainIPC() objc.ID { return purego.CFConstant(raw.KSMErrorDomainIPC()) }
 
-// KSMErrorDomainFramework returns the CoreFoundation constant kSMErrorDomainFramework as a toll-free-bridged objc.ID.
+// KSMErrorDomainFramework returns the value of the CoreFoundation reference constant kSMErrorDomainFramework as an objc.ID.
 func KSMErrorDomainFramework() objc.ID { return purego.CFConstant(raw.KSMErrorDomainFramework()) }
 
-// KSMErrorDomainLaunchd returns the CoreFoundation constant kSMErrorDomainLaunchd as a toll-free-bridged objc.ID.
+// KSMErrorDomainLaunchd returns the value of the CoreFoundation reference constant kSMErrorDomainLaunchd as an objc.ID.
 func KSMErrorDomainLaunchd() objc.ID { return purego.CFConstant(raw.KSMErrorDomainLaunchd()) }
 
-// KSMDomainSystemLaunchd returns the CoreFoundation constant kSMDomainSystemLaunchd as a toll-free-bridged objc.ID.
+// KSMDomainSystemLaunchd returns the value of the CoreFoundation reference constant kSMDomainSystemLaunchd as an objc.ID.
 func KSMDomainSystemLaunchd() objc.ID { return purego.CFConstant(raw.KSMDomainSystemLaunchd()) }
 
-// KSMDomainUserLaunchd returns the CoreFoundation constant kSMDomainUserLaunchd as a toll-free-bridged objc.ID.
+// KSMDomainUserLaunchd returns the value of the CoreFoundation reference constant kSMDomainUserLaunchd as an objc.ID.
 func KSMDomainUserLaunchd() objc.ID { return purego.CFConstant(raw.KSMDomainUserLaunchd()) }
 

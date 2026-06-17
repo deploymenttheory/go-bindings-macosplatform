@@ -17,11 +17,11 @@ type MTRPumpConfigurationAndControlClusterPumpBlockedEvent struct {
 // Unwrap returns the underlying [raw.MTRPumpConfigurationAndControlClusterPumpBlockedEvent].
 func (x *MTRPumpConfigurationAndControlClusterPumpBlockedEvent) Unwrap() *raw.MTRPumpConfigurationAndControlClusterPumpBlockedEvent { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRPumpConfigurationAndControlClusterPumpBlockedEvent) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRPumpConfigurationAndControlClusterPumpBlockedEventFromID adopts an existing toll-free-bridged object id as a MTRPumpConfigurationAndControlClusterPumpBlockedEvent (nil for 0).
+// MTRPumpConfigurationAndControlClusterPumpBlockedEventFromID adopts an existing object pointer as a MTRPumpConfigurationAndControlClusterPumpBlockedEvent (nil for 0).
 func MTRPumpConfigurationAndControlClusterPumpBlockedEventFromID(id objc.ID) *MTRPumpConfigurationAndControlClusterPumpBlockedEvent {
 	if id == 0 {
 		return nil

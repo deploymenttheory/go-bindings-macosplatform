@@ -20,11 +20,11 @@ type Noise struct {
 // Unwrap returns the underlying [raw.GKNoise].
 func (x *Noise) Unwrap() *raw.GKNoise { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Noise) ID() objc.ID { return x.inner.Ptr() }
 
-// NoiseFromID adopts an existing toll-free-bridged object id as a Noise (nil for 0).
+// NoiseFromID adopts an existing object pointer as a Noise (nil for 0).
 func NoiseFromID(id objc.ID) *Noise {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type CNNConvolutionNode struct {
 // Unwrap returns the underlying [raw.MPSCNNConvolutionNode].
 func (x *CNNConvolutionNode) Unwrap() *raw.MPSCNNConvolutionNode { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CNNConvolutionNode) ID() objc.ID { return x.inner.Ptr() }
 
-// CNNConvolutionNodeFromID adopts an existing toll-free-bridged object id as a CNNConvolutionNode (nil for 0).
+// CNNConvolutionNodeFromID adopts an existing object pointer as a CNNConvolutionNode (nil for 0).
 func CNNConvolutionNodeFromID(id objc.ID) *CNNConvolutionNode {
 	if id == 0 {
 		return nil

@@ -19,11 +19,11 @@ type ComboButton struct {
 // Unwrap returns the underlying [raw.NSComboButton].
 func (x *ComboButton) Unwrap() *raw.NSComboButton { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ComboButton) ID() objc.ID { return x.inner.Ptr() }
 
-// ComboButtonFromID adopts an existing toll-free-bridged object id as a ComboButton (nil for 0).
+// ComboButtonFromID adopts an existing object pointer as a ComboButton (nil for 0).
 func ComboButtonFromID(id objc.ID) *ComboButton {
 	if id == 0 {
 		return nil

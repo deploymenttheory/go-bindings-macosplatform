@@ -19,11 +19,11 @@ type PasswordCredentialIdentity struct {
 // Unwrap returns the underlying [raw.ASPasswordCredentialIdentity].
 func (x *PasswordCredentialIdentity) Unwrap() *raw.ASPasswordCredentialIdentity { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PasswordCredentialIdentity) ID() objc.ID { return x.inner.Ptr() }
 
-// PasswordCredentialIdentityFromID adopts an existing toll-free-bridged object id as a PasswordCredentialIdentity (nil for 0).
+// PasswordCredentialIdentityFromID adopts an existing object pointer as a PasswordCredentialIdentity (nil for 0).
 func PasswordCredentialIdentityFromID(id objc.ID) *PasswordCredentialIdentity {
 	if id == 0 {
 		return nil

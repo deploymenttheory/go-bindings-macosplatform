@@ -20,11 +20,11 @@ type Gazetteer struct {
 // Unwrap returns the underlying [raw.NLGazetteer].
 func (x *Gazetteer) Unwrap() *raw.NLGazetteer { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Gazetteer) ID() objc.ID { return x.inner.Ptr() }
 
-// GazetteerFromID adopts an existing toll-free-bridged object id as a Gazetteer (nil for 0).
+// GazetteerFromID adopts an existing object pointer as a Gazetteer (nil for 0).
 func GazetteerFromID(id objc.ID) *Gazetteer {
 	if id == 0 {
 		return nil

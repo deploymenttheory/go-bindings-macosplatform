@@ -20,11 +20,11 @@ type LibAlbum struct {
 // Unwrap returns the underlying [raw.ITLibAlbum].
 func (x *LibAlbum) Unwrap() *raw.ITLibAlbum { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *LibAlbum) ID() objc.ID { return x.inner.Ptr() }
 
-// LibAlbumFromID adopts an existing toll-free-bridged object id as a LibAlbum (nil for 0).
+// LibAlbumFromID adopts an existing object pointer as a LibAlbum (nil for 0).
 func LibAlbumFromID(id objc.ID) *LibAlbum {
 	if id == 0 {
 		return nil

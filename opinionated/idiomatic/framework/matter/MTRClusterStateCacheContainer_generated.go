@@ -18,11 +18,11 @@ type MTRClusterStateCacheContainer struct {
 // Unwrap returns the underlying [raw.MTRClusterStateCacheContainer].
 func (x *MTRClusterStateCacheContainer) Unwrap() *raw.MTRClusterStateCacheContainer { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRClusterStateCacheContainer) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRClusterStateCacheContainerFromID adopts an existing toll-free-bridged object id as a MTRClusterStateCacheContainer (nil for 0).
+// MTRClusterStateCacheContainerFromID adopts an existing object pointer as a MTRClusterStateCacheContainer (nil for 0).
 func MTRClusterStateCacheContainerFromID(id objc.ID) *MTRClusterStateCacheContainer {
 	if id == 0 {
 		return nil

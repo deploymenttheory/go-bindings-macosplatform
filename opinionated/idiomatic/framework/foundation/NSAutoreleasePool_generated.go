@@ -17,11 +17,11 @@ type AutoreleasePool struct {
 // Unwrap returns the underlying [raw.NSAutoreleasePool].
 func (x *AutoreleasePool) Unwrap() *raw.NSAutoreleasePool { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AutoreleasePool) ID() objc.ID { return x.inner.Ptr() }
 
-// AutoreleasePoolFromID adopts an existing toll-free-bridged object id as a AutoreleasePool (nil for 0).
+// AutoreleasePoolFromID adopts an existing object pointer as a AutoreleasePool (nil for 0).
 func AutoreleasePoolFromID(id objc.ID) *AutoreleasePool {
 	if id == 0 {
 		return nil

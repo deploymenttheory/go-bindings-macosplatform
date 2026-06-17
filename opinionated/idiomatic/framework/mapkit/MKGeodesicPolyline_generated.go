@@ -17,11 +17,11 @@ type GeodesicPolyline struct {
 // Unwrap returns the underlying [raw.MKGeodesicPolyline].
 func (x *GeodesicPolyline) Unwrap() *raw.MKGeodesicPolyline { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *GeodesicPolyline) ID() objc.ID { return x.inner.Ptr() }
 
-// GeodesicPolylineFromID adopts an existing toll-free-bridged object id as a GeodesicPolyline (nil for 0).
+// GeodesicPolylineFromID adopts an existing object pointer as a GeodesicPolyline (nil for 0).
 func GeodesicPolylineFromID(id objc.ID) *GeodesicPolyline {
 	if id == 0 {
 		return nil

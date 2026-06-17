@@ -17,11 +17,11 @@ type Reference struct {
 // Unwrap returns the underlying [raw.CKReference].
 func (x *Reference) Unwrap() *raw.CKReference { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Reference) ID() objc.ID { return x.inner.Ptr() }
 
-// ReferenceFromID adopts an existing toll-free-bridged object id as a Reference (nil for 0).
+// ReferenceFromID adopts an existing object pointer as a Reference (nil for 0).
 func ReferenceFromID(id objc.ID) *Reference {
 	if id == 0 {
 		return nil

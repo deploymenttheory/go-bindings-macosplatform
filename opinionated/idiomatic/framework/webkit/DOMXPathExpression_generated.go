@@ -17,11 +17,11 @@ type DOMXPathExpression struct {
 // Unwrap returns the underlying [raw.DOMXPathExpression].
 func (x *DOMXPathExpression) Unwrap() *raw.DOMXPathExpression { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DOMXPathExpression) ID() objc.ID { return x.inner.Ptr() }
 
-// DOMXPathExpressionFromID adopts an existing toll-free-bridged object id as a DOMXPathExpression (nil for 0).
+// DOMXPathExpressionFromID adopts an existing object pointer as a DOMXPathExpression (nil for 0).
 func DOMXPathExpressionFromID(id objc.ID) *DOMXPathExpression {
 	if id == 0 {
 		return nil

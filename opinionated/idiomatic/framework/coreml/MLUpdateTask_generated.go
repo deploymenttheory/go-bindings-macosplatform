@@ -18,11 +18,11 @@ type UpdateTask struct {
 // Unwrap returns the underlying [raw.MLUpdateTask].
 func (x *UpdateTask) Unwrap() *raw.MLUpdateTask { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *UpdateTask) ID() objc.ID { return x.inner.Ptr() }
 
-// UpdateTaskFromID adopts an existing toll-free-bridged object id as a UpdateTask (nil for 0).
+// UpdateTaskFromID adopts an existing object pointer as a UpdateTask (nil for 0).
 func UpdateTaskFromID(id objc.ID) *UpdateTask {
 	if id == 0 {
 		return nil

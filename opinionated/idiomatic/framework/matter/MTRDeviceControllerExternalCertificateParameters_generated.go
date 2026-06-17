@@ -18,11 +18,11 @@ type MTRDeviceControllerExternalCertificateParameters struct {
 // Unwrap returns the underlying [raw.MTRDeviceControllerExternalCertificateParameters].
 func (x *MTRDeviceControllerExternalCertificateParameters) Unwrap() *raw.MTRDeviceControllerExternalCertificateParameters { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRDeviceControllerExternalCertificateParameters) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRDeviceControllerExternalCertificateParametersFromID adopts an existing toll-free-bridged object id as a MTRDeviceControllerExternalCertificateParameters (nil for 0).
+// MTRDeviceControllerExternalCertificateParametersFromID adopts an existing object pointer as a MTRDeviceControllerExternalCertificateParameters (nil for 0).
 func MTRDeviceControllerExternalCertificateParametersFromID(id objc.ID) *MTRDeviceControllerExternalCertificateParameters {
 	if id == 0 {
 		return nil

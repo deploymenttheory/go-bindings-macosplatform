@@ -17,11 +17,11 @@ type ControllerLiveInput struct {
 // Unwrap returns the underlying [raw.GCControllerLiveInput].
 func (x *ControllerLiveInput) Unwrap() *raw.GCControllerLiveInput { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ControllerLiveInput) ID() objc.ID { return x.inner.Ptr() }
 
-// ControllerLiveInputFromID adopts an existing toll-free-bridged object id as a ControllerLiveInput (nil for 0).
+// ControllerLiveInputFromID adopts an existing object pointer as a ControllerLiveInput (nil for 0).
 func ControllerLiveInputFromID(id objc.ID) *ControllerLiveInput {
 	if id == 0 {
 		return nil

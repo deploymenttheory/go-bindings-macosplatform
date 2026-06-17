@@ -18,11 +18,11 @@ type MTRThermostatClusterSetpointRaiseLowerParams struct {
 // Unwrap returns the underlying [raw.MTRThermostatClusterSetpointRaiseLowerParams].
 func (x *MTRThermostatClusterSetpointRaiseLowerParams) Unwrap() *raw.MTRThermostatClusterSetpointRaiseLowerParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRThermostatClusterSetpointRaiseLowerParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRThermostatClusterSetpointRaiseLowerParamsFromID adopts an existing toll-free-bridged object id as a MTRThermostatClusterSetpointRaiseLowerParams (nil for 0).
+// MTRThermostatClusterSetpointRaiseLowerParamsFromID adopts an existing object pointer as a MTRThermostatClusterSetpointRaiseLowerParams (nil for 0).
 func MTRThermostatClusterSetpointRaiseLowerParamsFromID(id objc.ID) *MTRThermostatClusterSetpointRaiseLowerParams {
 	if id == 0 {
 		return nil

@@ -17,11 +17,11 @@ type CloneCommand struct {
 // Unwrap returns the underlying [raw.NSCloneCommand].
 func (x *CloneCommand) Unwrap() *raw.NSCloneCommand { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CloneCommand) ID() objc.ID { return x.inner.Ptr() }
 
-// CloneCommandFromID adopts an existing toll-free-bridged object id as a CloneCommand (nil for 0).
+// CloneCommandFromID adopts an existing object pointer as a CloneCommand (nil for 0).
 func CloneCommandFromID(id objc.ID) *CloneCommand {
 	if id == 0 {
 		return nil

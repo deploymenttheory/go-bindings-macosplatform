@@ -21,11 +21,11 @@ type MTRBaseClusterOvenMode struct {
 // Unwrap returns the underlying [raw.MTRBaseClusterOvenMode].
 func (x *MTRBaseClusterOvenMode) Unwrap() *raw.MTRBaseClusterOvenMode { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRBaseClusterOvenMode) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRBaseClusterOvenModeFromID adopts an existing toll-free-bridged object id as a MTRBaseClusterOvenMode (nil for 0).
+// MTRBaseClusterOvenModeFromID adopts an existing object pointer as a MTRBaseClusterOvenMode (nil for 0).
 func MTRBaseClusterOvenModeFromID(id objc.ID) *MTRBaseClusterOvenMode {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type AssessmentConfiguration struct {
 // Unwrap returns the underlying [raw.AEAssessmentConfiguration].
 func (x *AssessmentConfiguration) Unwrap() *raw.AEAssessmentConfiguration { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AssessmentConfiguration) ID() objc.ID { return x.inner.Ptr() }
 
-// AssessmentConfigurationFromID adopts an existing toll-free-bridged object id as a AssessmentConfiguration (nil for 0).
+// AssessmentConfigurationFromID adopts an existing object pointer as a AssessmentConfiguration (nil for 0).
 func AssessmentConfigurationFromID(id objc.ID) *AssessmentConfiguration {
 	if id == 0 {
 		return nil

@@ -17,11 +17,11 @@ type Descriptor struct {
 // Unwrap returns the underlying [raw.CBDescriptor].
 func (x *Descriptor) Unwrap() *raw.CBDescriptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Descriptor) ID() objc.ID { return x.inner.Ptr() }
 
-// DescriptorFromID adopts an existing toll-free-bridged object id as a Descriptor (nil for 0).
+// DescriptorFromID adopts an existing object pointer as a Descriptor (nil for 0).
 func DescriptorFromID(id objc.ID) *Descriptor {
 	if id == 0 {
 		return nil

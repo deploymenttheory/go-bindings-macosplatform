@@ -18,11 +18,11 @@ type AudioIONode struct {
 // Unwrap returns the underlying [raw.AVAudioIONode].
 func (x *AudioIONode) Unwrap() *raw.AVAudioIONode { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AudioIONode) ID() objc.ID { return x.inner.Ptr() }
 
-// AudioIONodeFromID adopts an existing toll-free-bridged object id as a AudioIONode (nil for 0).
+// AudioIONodeFromID adopts an existing object pointer as a AudioIONode (nil for 0).
 func AudioIONodeFromID(id objc.ID) *AudioIONode {
 	if id == 0 {
 		return nil

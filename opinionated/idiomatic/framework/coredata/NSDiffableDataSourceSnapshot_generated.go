@@ -17,11 +17,11 @@ type DiffableDataSourceSnapshot struct {
 // Unwrap returns the underlying [raw.NSDiffableDataSourceSnapshot].
 func (x *DiffableDataSourceSnapshot) Unwrap() *raw.NSDiffableDataSourceSnapshot[objc.ID, objc.ID] { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DiffableDataSourceSnapshot) ID() objc.ID { return x.inner.Ptr() }
 
-// DiffableDataSourceSnapshotFromID adopts an existing toll-free-bridged object id as a DiffableDataSourceSnapshot (nil for 0).
+// DiffableDataSourceSnapshotFromID adopts an existing object pointer as a DiffableDataSourceSnapshot (nil for 0).
 func DiffableDataSourceSnapshotFromID(id objc.ID) *DiffableDataSourceSnapshot {
 	if id == 0 {
 		return nil

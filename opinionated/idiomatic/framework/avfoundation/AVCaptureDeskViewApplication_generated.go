@@ -20,11 +20,11 @@ type CaptureDeskViewApplication struct {
 // Unwrap returns the underlying [raw.AVCaptureDeskViewApplication].
 func (x *CaptureDeskViewApplication) Unwrap() *raw.AVCaptureDeskViewApplication { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CaptureDeskViewApplication) ID() objc.ID { return x.inner.Ptr() }
 
-// CaptureDeskViewApplicationFromID adopts an existing toll-free-bridged object id as a CaptureDeskViewApplication (nil for 0).
+// CaptureDeskViewApplicationFromID adopts an existing object pointer as a CaptureDeskViewApplication (nil for 0).
 func CaptureDeskViewApplicationFromID(id objc.ID) *CaptureDeskViewApplication {
 	if id == 0 {
 		return nil

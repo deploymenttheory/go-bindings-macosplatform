@@ -11,7 +11,7 @@ import (
 	"unsafe"
 )
 
-// PMCopyAvailablePPDs wraps [raw.PMCopyAvailablePPDs], bridging CFTypeRef arguments and the OSStatus result.
+// PMCopyAvailablePPDs wraps [raw.PMCopyAvailablePPDs], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func PMCopyAvailablePPDs(domain uint16) (objc.ID, error) {
 	var _out0 uintptr
 	if _err := purego.NewOSStatus(raw.PMCopyAvailablePPDs(domain, unsafe.Pointer(&_out0))).Err(); _err != nil {
@@ -20,7 +20,7 @@ func PMCopyAvailablePPDs(domain uint16) (objc.ID, error) {
 	return objc.ID(_out0), nil
 }
 
-// PMCopyLocalizedPPD wraps [raw.PMCopyLocalizedPPD], bridging CFTypeRef arguments and the OSStatus result.
+// PMCopyLocalizedPPD wraps [raw.PMCopyLocalizedPPD], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func PMCopyLocalizedPPD(ppd objc.ID) (objc.ID, error) {
 	var _out0 uintptr
 	if _err := purego.NewOSStatus(raw.PMCopyLocalizedPPD(purego.CFRef(ppd), unsafe.Pointer(&_out0))).Err(); _err != nil {
@@ -29,7 +29,7 @@ func PMCopyLocalizedPPD(ppd objc.ID) (objc.ID, error) {
 	return objc.ID(_out0), nil
 }
 
-// PMCopyPPDData wraps [raw.PMCopyPPDData], bridging CFTypeRef arguments and the OSStatus result.
+// PMCopyPPDData wraps [raw.PMCopyPPDData], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func PMCopyPPDData(ppd objc.ID) (objc.ID, error) {
 	var _out0 uintptr
 	if _err := purego.NewOSStatus(raw.PMCopyPPDData(purego.CFRef(ppd), unsafe.Pointer(&_out0))).Err(); _err != nil {
@@ -38,7 +38,7 @@ func PMCopyPPDData(ppd objc.ID) (objc.ID, error) {
 	return objc.ID(_out0), nil
 }
 
-// PMWorkflowCopyItems wraps [raw.PMWorkflowCopyItems], bridging CFTypeRef arguments and the OSStatus result.
+// PMWorkflowCopyItems wraps [raw.PMWorkflowCopyItems], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func PMWorkflowCopyItems() (objc.ID, error) {
 	var _out0 uintptr
 	if _err := purego.NewOSStatus(raw.PMWorkflowCopyItems(unsafe.Pointer(&_out0))).Err(); _err != nil {
@@ -47,7 +47,7 @@ func PMWorkflowCopyItems() (objc.ID, error) {
 	return objc.ID(_out0), nil
 }
 
-// PMWorkflowSubmitPDFWithOptions wraps [raw.PMWorkflowSubmitPDFWithOptions], bridging CFTypeRef arguments and the OSStatus result.
+// PMWorkflowSubmitPDFWithOptions wraps [raw.PMWorkflowSubmitPDFWithOptions], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func PMWorkflowSubmitPDFWithOptions(workflowItem objc.ID, title objc.ID, options string, pdfFile objc.ID) error {
 	if _err := purego.NewOSStatus(raw.PMWorkflowSubmitPDFWithOptions(purego.CFRef(workflowItem), purego.CFRef(title), options, purego.CFRef(pdfFile))).Err(); _err != nil {
 		return _err

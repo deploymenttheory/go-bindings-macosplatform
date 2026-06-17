@@ -19,11 +19,11 @@ type MutableParagraphStyle struct {
 // Unwrap returns the underlying [raw.NSMutableParagraphStyle].
 func (x *MutableParagraphStyle) Unwrap() *raw.NSMutableParagraphStyle { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MutableParagraphStyle) ID() objc.ID { return x.inner.Ptr() }
 
-// MutableParagraphStyleFromID adopts an existing toll-free-bridged object id as a MutableParagraphStyle (nil for 0).
+// MutableParagraphStyleFromID adopts an existing object pointer as a MutableParagraphStyle (nil for 0).
 func MutableParagraphStyleFromID(id objc.ID) *MutableParagraphStyle {
 	if id == 0 {
 		return nil

@@ -19,11 +19,11 @@ type AcousticFeature struct {
 // Unwrap returns the underlying [raw.SFAcousticFeature].
 func (x *AcousticFeature) Unwrap() *raw.SFAcousticFeature { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AcousticFeature) ID() objc.ID { return x.inner.Ptr() }
 
-// AcousticFeatureFromID adopts an existing toll-free-bridged object id as a AcousticFeature (nil for 0).
+// AcousticFeatureFromID adopts an existing object pointer as a AcousticFeature (nil for 0).
 func AcousticFeatureFromID(id objc.ID) *AcousticFeature {
 	if id == 0 {
 		return nil

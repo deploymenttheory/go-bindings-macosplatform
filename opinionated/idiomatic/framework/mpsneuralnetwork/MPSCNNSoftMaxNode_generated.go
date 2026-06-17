@@ -17,11 +17,11 @@ type CNNSoftMaxNode struct {
 // Unwrap returns the underlying [raw.MPSCNNSoftMaxNode].
 func (x *CNNSoftMaxNode) Unwrap() *raw.MPSCNNSoftMaxNode { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CNNSoftMaxNode) ID() objc.ID { return x.inner.Ptr() }
 
-// CNNSoftMaxNodeFromID adopts an existing toll-free-bridged object id as a CNNSoftMaxNode (nil for 0).
+// CNNSoftMaxNodeFromID adopts an existing object pointer as a CNNSoftMaxNode (nil for 0).
 func CNNSoftMaxNodeFromID(id objc.ID) *CNNSoftMaxNode {
 	if id == 0 {
 		return nil

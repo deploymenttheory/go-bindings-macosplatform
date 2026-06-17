@@ -22,11 +22,11 @@ type RNNMatrixTrainingLayer struct {
 // Unwrap returns the underlying [raw.MPSRNNMatrixTrainingLayer].
 func (x *RNNMatrixTrainingLayer) Unwrap() *raw.MPSRNNMatrixTrainingLayer { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *RNNMatrixTrainingLayer) ID() objc.ID { return x.inner.Ptr() }
 
-// RNNMatrixTrainingLayerFromID adopts an existing toll-free-bridged object id as a RNNMatrixTrainingLayer (nil for 0).
+// RNNMatrixTrainingLayerFromID adopts an existing object pointer as a RNNMatrixTrainingLayer (nil for 0).
 func RNNMatrixTrainingLayerFromID(id objc.ID) *RNNMatrixTrainingLayer {
 	if id == 0 {
 		return nil

@@ -19,11 +19,11 @@ type Feature struct {
 // Unwrap returns the underlying [raw.CIFeature].
 func (x *Feature) Unwrap() *raw.CIFeature { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Feature) ID() objc.ID { return x.inner.Ptr() }
 
-// FeatureFromID adopts an existing toll-free-bridged object id as a Feature (nil for 0).
+// FeatureFromID adopts an existing object pointer as a Feature (nil for 0).
 func FeatureFromID(id objc.ID) *Feature {
 	if id == 0 {
 		return nil

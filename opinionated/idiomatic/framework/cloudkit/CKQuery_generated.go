@@ -20,11 +20,11 @@ type Query struct {
 // Unwrap returns the underlying [raw.CKQuery].
 func (x *Query) Unwrap() *raw.CKQuery { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Query) ID() objc.ID { return x.inner.Ptr() }
 
-// QueryFromID adopts an existing toll-free-bridged object id as a Query (nil for 0).
+// QueryFromID adopts an existing object pointer as a Query (nil for 0).
 func QueryFromID(id objc.ID) *Query {
 	if id == 0 {
 		return nil

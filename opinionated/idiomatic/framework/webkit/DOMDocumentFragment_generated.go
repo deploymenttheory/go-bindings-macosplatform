@@ -17,11 +17,11 @@ type DOMDocumentFragment struct {
 // Unwrap returns the underlying [raw.DOMDocumentFragment].
 func (x *DOMDocumentFragment) Unwrap() *raw.DOMDocumentFragment { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DOMDocumentFragment) ID() objc.ID { return x.inner.Ptr() }
 
-// DOMDocumentFragmentFromID adopts an existing toll-free-bridged object id as a DOMDocumentFragment (nil for 0).
+// DOMDocumentFragmentFromID adopts an existing object pointer as a DOMDocumentFragment (nil for 0).
 func DOMDocumentFragmentFromID(id objc.ID) *DOMDocumentFragment {
 	if id == 0 {
 		return nil

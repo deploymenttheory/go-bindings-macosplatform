@@ -17,11 +17,11 @@ type UnitConcentrationMass struct {
 // Unwrap returns the underlying [raw.NSUnitConcentrationMass].
 func (x *UnitConcentrationMass) Unwrap() *raw.NSUnitConcentrationMass { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *UnitConcentrationMass) ID() objc.ID { return x.inner.Ptr() }
 
-// UnitConcentrationMassFromID adopts an existing toll-free-bridged object id as a UnitConcentrationMass (nil for 0).
+// UnitConcentrationMassFromID adopts an existing object pointer as a UnitConcentrationMass (nil for 0).
 func UnitConcentrationMassFromID(id objc.ID) *UnitConcentrationMass {
 	if id == 0 {
 		return nil

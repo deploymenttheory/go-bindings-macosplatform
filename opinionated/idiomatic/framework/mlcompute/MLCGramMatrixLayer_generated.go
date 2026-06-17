@@ -17,11 +17,11 @@ type GramMatrixLayer struct {
 // Unwrap returns the underlying [raw.MLCGramMatrixLayer].
 func (x *GramMatrixLayer) Unwrap() *raw.MLCGramMatrixLayer { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *GramMatrixLayer) ID() objc.ID { return x.inner.Ptr() }
 
-// GramMatrixLayerFromID adopts an existing toll-free-bridged object id as a GramMatrixLayer (nil for 0).
+// GramMatrixLayerFromID adopts an existing object pointer as a GramMatrixLayer (nil for 0).
 func GramMatrixLayerFromID(id objc.ID) *GramMatrixLayer {
 	if id == 0 {
 		return nil

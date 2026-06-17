@@ -17,11 +17,11 @@ type MTRBasicInformationClusterShutDownEvent struct {
 // Unwrap returns the underlying [raw.MTRBasicInformationClusterShutDownEvent].
 func (x *MTRBasicInformationClusterShutDownEvent) Unwrap() *raw.MTRBasicInformationClusterShutDownEvent { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRBasicInformationClusterShutDownEvent) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRBasicInformationClusterShutDownEventFromID adopts an existing toll-free-bridged object id as a MTRBasicInformationClusterShutDownEvent (nil for 0).
+// MTRBasicInformationClusterShutDownEventFromID adopts an existing object pointer as a MTRBasicInformationClusterShutDownEvent (nil for 0).
 func MTRBasicInformationClusterShutDownEventFromID(id objc.ID) *MTRBasicInformationClusterShutDownEvent {
 	if id == 0 {
 		return nil

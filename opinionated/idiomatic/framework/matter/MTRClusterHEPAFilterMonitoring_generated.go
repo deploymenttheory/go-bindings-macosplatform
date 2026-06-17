@@ -19,11 +19,11 @@ type MTRClusterHEPAFilterMonitoring struct {
 // Unwrap returns the underlying [raw.MTRClusterHEPAFilterMonitoring].
 func (x *MTRClusterHEPAFilterMonitoring) Unwrap() *raw.MTRClusterHEPAFilterMonitoring { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRClusterHEPAFilterMonitoring) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRClusterHEPAFilterMonitoringFromID adopts an existing toll-free-bridged object id as a MTRClusterHEPAFilterMonitoring (nil for 0).
+// MTRClusterHEPAFilterMonitoringFromID adopts an existing object pointer as a MTRClusterHEPAFilterMonitoring (nil for 0).
 func MTRClusterHEPAFilterMonitoringFromID(id objc.ID) *MTRClusterHEPAFilterMonitoring {
 	if id == 0 {
 		return nil

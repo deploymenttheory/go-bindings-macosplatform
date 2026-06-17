@@ -18,11 +18,11 @@ type NNReductionSpatialMeanGradientNode struct {
 // Unwrap returns the underlying [raw.MPSNNReductionSpatialMeanGradientNode].
 func (x *NNReductionSpatialMeanGradientNode) Unwrap() *raw.MPSNNReductionSpatialMeanGradientNode { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NNReductionSpatialMeanGradientNode) ID() objc.ID { return x.inner.Ptr() }
 
-// NNReductionSpatialMeanGradientNodeFromID adopts an existing toll-free-bridged object id as a NNReductionSpatialMeanGradientNode (nil for 0).
+// NNReductionSpatialMeanGradientNodeFromID adopts an existing object pointer as a NNReductionSpatialMeanGradientNode (nil for 0).
 func NNReductionSpatialMeanGradientNodeFromID(id objc.ID) *NNReductionSpatialMeanGradientNode {
 	if id == 0 {
 		return nil

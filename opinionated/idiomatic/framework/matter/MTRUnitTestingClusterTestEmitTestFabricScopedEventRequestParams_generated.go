@@ -18,11 +18,11 @@ type MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams struct {
 // Unwrap returns the underlying [raw.MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams].
 func (x *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams) Unwrap() *raw.MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParamsFromID adopts an existing toll-free-bridged object id as a MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams (nil for 0).
+// MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParamsFromID adopts an existing object pointer as a MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams (nil for 0).
 func MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParamsFromID(id objc.ID) *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams {
 	if id == 0 {
 		return nil

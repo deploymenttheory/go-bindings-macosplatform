@@ -19,11 +19,11 @@ type ArrayUnaryGradientKernel struct {
 // Unwrap returns the underlying [raw.MPSNDArrayUnaryGradientKernel].
 func (x *ArrayUnaryGradientKernel) Unwrap() *raw.MPSNDArrayUnaryGradientKernel { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ArrayUnaryGradientKernel) ID() objc.ID { return x.inner.Ptr() }
 
-// ArrayUnaryGradientKernelFromID adopts an existing toll-free-bridged object id as a ArrayUnaryGradientKernel (nil for 0).
+// ArrayUnaryGradientKernelFromID adopts an existing object pointer as a ArrayUnaryGradientKernel (nil for 0).
 func ArrayUnaryGradientKernelFromID(id objc.ID) *ArrayUnaryGradientKernel {
 	if id == 0 {
 		return nil

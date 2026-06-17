@@ -17,11 +17,11 @@ type AudioConnectionPoint struct {
 // Unwrap returns the underlying [raw.AVAudioConnectionPoint].
 func (x *AudioConnectionPoint) Unwrap() *raw.AVAudioConnectionPoint { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AudioConnectionPoint) ID() objc.ID { return x.inner.Ptr() }
 
-// AudioConnectionPointFromID adopts an existing toll-free-bridged object id as a AudioConnectionPoint (nil for 0).
+// AudioConnectionPointFromID adopts an existing object pointer as a AudioConnectionPoint (nil for 0).
 func AudioConnectionPointFromID(id objc.ID) *AudioConnectionPoint {
 	if id == 0 {
 		return nil

@@ -20,11 +20,11 @@ type TouchBar struct {
 // Unwrap returns the underlying [raw.NSTouchBar].
 func (x *TouchBar) Unwrap() *raw.NSTouchBar { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *TouchBar) ID() objc.ID { return x.inner.Ptr() }
 
-// TouchBarFromID adopts an existing toll-free-bridged object id as a TouchBar (nil for 0).
+// TouchBarFromID adopts an existing object pointer as a TouchBar (nil for 0).
 func TouchBarFromID(id objc.ID) *TouchBar {
 	if id == 0 {
 		return nil

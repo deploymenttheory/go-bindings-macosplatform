@@ -18,11 +18,11 @@ type FileHandleNetworkDeviceAttachment struct {
 // Unwrap returns the underlying [raw.VZFileHandleNetworkDeviceAttachment].
 func (x *FileHandleNetworkDeviceAttachment) Unwrap() *raw.VZFileHandleNetworkDeviceAttachment { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *FileHandleNetworkDeviceAttachment) ID() objc.ID { return x.inner.Ptr() }
 
-// FileHandleNetworkDeviceAttachmentFromID adopts an existing toll-free-bridged object id as a FileHandleNetworkDeviceAttachment (nil for 0).
+// FileHandleNetworkDeviceAttachmentFromID adopts an existing object pointer as a FileHandleNetworkDeviceAttachment (nil for 0).
 func FileHandleNetworkDeviceAttachmentFromID(id objc.ID) *FileHandleNetworkDeviceAttachment {
 	if id == 0 {
 		return nil

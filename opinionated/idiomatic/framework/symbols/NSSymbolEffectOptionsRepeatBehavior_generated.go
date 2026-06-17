@@ -17,11 +17,11 @@ type SymbolEffectOptionsRepeatBehavior struct {
 // Unwrap returns the underlying [raw.NSSymbolEffectOptionsRepeatBehavior].
 func (x *SymbolEffectOptionsRepeatBehavior) Unwrap() *raw.NSSymbolEffectOptionsRepeatBehavior { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SymbolEffectOptionsRepeatBehavior) ID() objc.ID { return x.inner.Ptr() }
 
-// SymbolEffectOptionsRepeatBehaviorFromID adopts an existing toll-free-bridged object id as a SymbolEffectOptionsRepeatBehavior (nil for 0).
+// SymbolEffectOptionsRepeatBehaviorFromID adopts an existing object pointer as a SymbolEffectOptionsRepeatBehavior (nil for 0).
 func SymbolEffectOptionsRepeatBehaviorFromID(id objc.ID) *SymbolEffectOptionsRepeatBehavior {
 	if id == 0 {
 		return nil

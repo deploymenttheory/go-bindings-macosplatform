@@ -20,11 +20,11 @@ type AppearanceCharacteristics struct {
 // Unwrap returns the underlying [raw.PDFAppearanceCharacteristics].
 func (x *AppearanceCharacteristics) Unwrap() *raw.PDFAppearanceCharacteristics { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AppearanceCharacteristics) ID() objc.ID { return x.inner.Ptr() }
 
-// AppearanceCharacteristicsFromID adopts an existing toll-free-bridged object id as a AppearanceCharacteristics (nil for 0).
+// AppearanceCharacteristicsFromID adopts an existing object pointer as a AppearanceCharacteristics (nil for 0).
 func AppearanceCharacteristicsFromID(id objc.ID) *AppearanceCharacteristics {
 	if id == 0 {
 		return nil

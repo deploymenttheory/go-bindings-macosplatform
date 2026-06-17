@@ -17,11 +17,11 @@ type MTRDeviceStorageBehaviorConfiguration struct {
 // Unwrap returns the underlying [raw.MTRDeviceStorageBehaviorConfiguration].
 func (x *MTRDeviceStorageBehaviorConfiguration) Unwrap() *raw.MTRDeviceStorageBehaviorConfiguration { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRDeviceStorageBehaviorConfiguration) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRDeviceStorageBehaviorConfigurationFromID adopts an existing toll-free-bridged object id as a MTRDeviceStorageBehaviorConfiguration (nil for 0).
+// MTRDeviceStorageBehaviorConfigurationFromID adopts an existing object pointer as a MTRDeviceStorageBehaviorConfiguration (nil for 0).
 func MTRDeviceStorageBehaviorConfigurationFromID(id objc.ID) *MTRDeviceStorageBehaviorConfiguration {
 	if id == 0 {
 		return nil

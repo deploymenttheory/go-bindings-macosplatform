@@ -19,11 +19,11 @@ type MTRThreadOperationalDataset struct {
 // Unwrap returns the underlying [raw.MTRThreadOperationalDataset].
 func (x *MTRThreadOperationalDataset) Unwrap() *raw.MTRThreadOperationalDataset { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRThreadOperationalDataset) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRThreadOperationalDatasetFromID adopts an existing toll-free-bridged object id as a MTRThreadOperationalDataset (nil for 0).
+// MTRThreadOperationalDatasetFromID adopts an existing object pointer as a MTRThreadOperationalDataset (nil for 0).
 func MTRThreadOperationalDatasetFromID(id objc.ID) *MTRThreadOperationalDataset {
 	if id == 0 {
 		return nil

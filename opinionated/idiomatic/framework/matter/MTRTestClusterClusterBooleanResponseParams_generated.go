@@ -17,11 +17,11 @@ type MTRTestClusterClusterBooleanResponseParams struct {
 // Unwrap returns the underlying [raw.MTRTestClusterClusterBooleanResponseParams].
 func (x *MTRTestClusterClusterBooleanResponseParams) Unwrap() *raw.MTRTestClusterClusterBooleanResponseParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRTestClusterClusterBooleanResponseParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRTestClusterClusterBooleanResponseParamsFromID adopts an existing toll-free-bridged object id as a MTRTestClusterClusterBooleanResponseParams (nil for 0).
+// MTRTestClusterClusterBooleanResponseParamsFromID adopts an existing object pointer as a MTRTestClusterClusterBooleanResponseParams (nil for 0).
 func MTRTestClusterClusterBooleanResponseParamsFromID(id objc.ID) *MTRTestClusterClusterBooleanResponseParams {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type MTRClusterPath struct {
 // Unwrap returns the underlying [raw.MTRClusterPath].
 func (x *MTRClusterPath) Unwrap() *raw.MTRClusterPath { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRClusterPath) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRClusterPathFromID adopts an existing toll-free-bridged object id as a MTRClusterPath (nil for 0).
+// MTRClusterPathFromID adopts an existing object pointer as a MTRClusterPath (nil for 0).
 func MTRClusterPathFromID(id objc.ID) *MTRClusterPath {
 	if id == 0 {
 		return nil

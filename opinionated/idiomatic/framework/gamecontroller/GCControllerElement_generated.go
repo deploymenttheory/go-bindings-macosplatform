@@ -19,11 +19,11 @@ type ControllerElement struct {
 // Unwrap returns the underlying [raw.GCControllerElement].
 func (x *ControllerElement) Unwrap() *raw.GCControllerElement { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ControllerElement) ID() objc.ID { return x.inner.Ptr() }
 
-// ControllerElementFromID adopts an existing toll-free-bridged object id as a ControllerElement (nil for 0).
+// ControllerElementFromID adopts an existing object pointer as a ControllerElement (nil for 0).
 func ControllerElementFromID(id objc.ID) *ControllerElement {
 	if id == 0 {
 		return nil

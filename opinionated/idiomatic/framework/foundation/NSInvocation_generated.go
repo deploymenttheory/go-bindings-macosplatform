@@ -18,11 +18,11 @@ type Invocation struct {
 // Unwrap returns the underlying [raw.NSInvocation].
 func (x *Invocation) Unwrap() *raw.NSInvocation { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Invocation) ID() objc.ID { return x.inner.Ptr() }
 
-// InvocationFromID adopts an existing toll-free-bridged object id as a Invocation (nil for 0).
+// InvocationFromID adopts an existing object pointer as a Invocation (nil for 0).
 func InvocationFromID(id objc.ID) *Invocation {
 	if id == 0 {
 		return nil

@@ -20,11 +20,11 @@ type RayIntersector struct {
 // Unwrap returns the underlying [raw.MPSRayIntersector].
 func (x *RayIntersector) Unwrap() *raw.MPSRayIntersector { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *RayIntersector) ID() objc.ID { return x.inner.Ptr() }
 
-// RayIntersectorFromID adopts an existing toll-free-bridged object id as a RayIntersector (nil for 0).
+// RayIntersectorFromID adopts an existing object pointer as a RayIntersector (nil for 0).
 func RayIntersectorFromID(id objc.ID) *RayIntersector {
 	if id == 0 {
 		return nil

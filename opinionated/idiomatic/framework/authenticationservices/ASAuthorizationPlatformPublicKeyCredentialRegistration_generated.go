@@ -17,11 +17,11 @@ type AuthorizationPlatformPublicKeyCredentialRegistration struct {
 // Unwrap returns the underlying [raw.ASAuthorizationPlatformPublicKeyCredentialRegistration].
 func (x *AuthorizationPlatformPublicKeyCredentialRegistration) Unwrap() *raw.ASAuthorizationPlatformPublicKeyCredentialRegistration { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AuthorizationPlatformPublicKeyCredentialRegistration) ID() objc.ID { return x.inner.Ptr() }
 
-// AuthorizationPlatformPublicKeyCredentialRegistrationFromID adopts an existing toll-free-bridged object id as a AuthorizationPlatformPublicKeyCredentialRegistration (nil for 0).
+// AuthorizationPlatformPublicKeyCredentialRegistrationFromID adopts an existing object pointer as a AuthorizationPlatformPublicKeyCredentialRegistration (nil for 0).
 func AuthorizationPlatformPublicKeyCredentialRegistrationFromID(id objc.ID) *AuthorizationPlatformPublicKeyCredentialRegistration {
 	if id == 0 {
 		return nil

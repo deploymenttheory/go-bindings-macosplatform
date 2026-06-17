@@ -17,11 +17,11 @@ type MTRTestClusterClusterTestNullableOptionalResponseParams struct {
 // Unwrap returns the underlying [raw.MTRTestClusterClusterTestNullableOptionalResponseParams].
 func (x *MTRTestClusterClusterTestNullableOptionalResponseParams) Unwrap() *raw.MTRTestClusterClusterTestNullableOptionalResponseParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRTestClusterClusterTestNullableOptionalResponseParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRTestClusterClusterTestNullableOptionalResponseParamsFromID adopts an existing toll-free-bridged object id as a MTRTestClusterClusterTestNullableOptionalResponseParams (nil for 0).
+// MTRTestClusterClusterTestNullableOptionalResponseParamsFromID adopts an existing object pointer as a MTRTestClusterClusterTestNullableOptionalResponseParams (nil for 0).
 func MTRTestClusterClusterTestNullableOptionalResponseParamsFromID(id objc.ID) *MTRTestClusterClusterTestNullableOptionalResponseParams {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type Lock struct {
 // Unwrap returns the underlying [raw.NSLock].
 func (x *Lock) Unwrap() *raw.NSLock { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Lock) ID() objc.ID { return x.inner.Ptr() }
 
-// LockFromID adopts an existing toll-free-bridged object id as a Lock (nil for 0).
+// LockFromID adopts an existing object pointer as a Lock (nil for 0).
 func LockFromID(id objc.ID) *Lock {
 	if id == 0 {
 		return nil

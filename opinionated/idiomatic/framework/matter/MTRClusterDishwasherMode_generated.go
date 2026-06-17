@@ -21,11 +21,11 @@ type MTRClusterDishwasherMode struct {
 // Unwrap returns the underlying [raw.MTRClusterDishwasherMode].
 func (x *MTRClusterDishwasherMode) Unwrap() *raw.MTRClusterDishwasherMode { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRClusterDishwasherMode) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRClusterDishwasherModeFromID adopts an existing toll-free-bridged object id as a MTRClusterDishwasherMode (nil for 0).
+// MTRClusterDishwasherModeFromID adopts an existing object pointer as a MTRClusterDishwasherMode (nil for 0).
 func MTRClusterDishwasherModeFromID(id objc.ID) *MTRClusterDishwasherMode {
 	if id == 0 {
 		return nil

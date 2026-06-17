@@ -19,11 +19,11 @@ type MathExpressionMultiscript struct {
 // Unwrap returns the underlying [raw.AXMathExpressionMultiscript].
 func (x *MathExpressionMultiscript) Unwrap() *raw.AXMathExpressionMultiscript { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MathExpressionMultiscript) ID() objc.ID { return x.inner.Ptr() }
 
-// MathExpressionMultiscriptFromID adopts an existing toll-free-bridged object id as a MathExpressionMultiscript (nil for 0).
+// MathExpressionMultiscriptFromID adopts an existing object pointer as a MathExpressionMultiscript (nil for 0).
 func MathExpressionMultiscriptFromID(id objc.ID) *MathExpressionMultiscript {
 	if id == 0 {
 		return nil

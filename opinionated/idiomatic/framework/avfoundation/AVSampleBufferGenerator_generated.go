@@ -18,11 +18,11 @@ type SampleBufferGenerator struct {
 // Unwrap returns the underlying [raw.AVSampleBufferGenerator].
 func (x *SampleBufferGenerator) Unwrap() *raw.AVSampleBufferGenerator { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SampleBufferGenerator) ID() objc.ID { return x.inner.Ptr() }
 
-// SampleBufferGeneratorFromID adopts an existing toll-free-bridged object id as a SampleBufferGenerator (nil for 0).
+// SampleBufferGeneratorFromID adopts an existing object pointer as a SampleBufferGenerator (nil for 0).
 func SampleBufferGeneratorFromID(id objc.ID) *SampleBufferGenerator {
 	if id == 0 {
 		return nil

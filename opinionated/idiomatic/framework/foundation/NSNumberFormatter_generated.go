@@ -18,11 +18,11 @@ type NumberFormatter struct {
 // Unwrap returns the underlying [raw.NSNumberFormatter].
 func (x *NumberFormatter) Unwrap() *raw.NSNumberFormatter { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NumberFormatter) ID() objc.ID { return x.inner.Ptr() }
 
-// NumberFormatterFromID adopts an existing toll-free-bridged object id as a NumberFormatter (nil for 0).
+// NumberFormatterFromID adopts an existing object pointer as a NumberFormatter (nil for 0).
 func NumberFormatterFromID(id objc.ID) *NumberFormatter {
 	if id == 0 {
 		return nil

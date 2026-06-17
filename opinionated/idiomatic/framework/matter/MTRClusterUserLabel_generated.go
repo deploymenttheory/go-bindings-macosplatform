@@ -18,11 +18,11 @@ type MTRClusterUserLabel struct {
 // Unwrap returns the underlying [raw.MTRClusterUserLabel].
 func (x *MTRClusterUserLabel) Unwrap() *raw.MTRClusterUserLabel { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRClusterUserLabel) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRClusterUserLabelFromID adopts an existing toll-free-bridged object id as a MTRClusterUserLabel (nil for 0).
+// MTRClusterUserLabelFromID adopts an existing object pointer as a MTRClusterUserLabel (nil for 0).
 func MTRClusterUserLabelFromID(id objc.ID) *MTRClusterUserLabel {
 	if id == 0 {
 		return nil

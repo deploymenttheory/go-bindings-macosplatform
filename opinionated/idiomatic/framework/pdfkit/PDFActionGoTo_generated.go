@@ -17,11 +17,11 @@ type ActionGoTo struct {
 // Unwrap returns the underlying [raw.PDFActionGoTo].
 func (x *ActionGoTo) Unwrap() *raw.PDFActionGoTo { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ActionGoTo) ID() objc.ID { return x.inner.Ptr() }
 
-// ActionGoToFromID adopts an existing toll-free-bridged object id as a ActionGoTo (nil for 0).
+// ActionGoToFromID adopts an existing object pointer as a ActionGoTo (nil for 0).
 func ActionGoToFromID(id objc.ID) *ActionGoTo {
 	if id == 0 {
 		return nil

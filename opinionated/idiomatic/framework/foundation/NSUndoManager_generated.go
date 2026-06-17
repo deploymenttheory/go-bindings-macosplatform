@@ -20,11 +20,11 @@ type UndoManager struct {
 // Unwrap returns the underlying [raw.NSUndoManager].
 func (x *UndoManager) Unwrap() *raw.NSUndoManager { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *UndoManager) ID() objc.ID { return x.inner.Ptr() }
 
-// UndoManagerFromID adopts an existing toll-free-bridged object id as a UndoManager (nil for 0).
+// UndoManagerFromID adopts an existing object pointer as a UndoManager (nil for 0).
 func UndoManagerFromID(id objc.ID) *UndoManager {
 	if id == 0 {
 		return nil

@@ -20,11 +20,11 @@ type CNNArithmetic struct {
 // Unwrap returns the underlying [raw.MPSCNNArithmetic].
 func (x *CNNArithmetic) Unwrap() *raw.MPSCNNArithmetic { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CNNArithmetic) ID() objc.ID { return x.inner.Ptr() }
 
-// CNNArithmeticFromID adopts an existing toll-free-bridged object id as a CNNArithmetic (nil for 0).
+// CNNArithmeticFromID adopts an existing object pointer as a CNNArithmetic (nil for 0).
 func CNNArithmeticFromID(id objc.ID) *CNNArithmetic {
 	if id == 0 {
 		return nil

@@ -20,11 +20,11 @@ type PaymentTransaction struct {
 // Unwrap returns the underlying [raw.SKPaymentTransaction].
 func (x *PaymentTransaction) Unwrap() *raw.SKPaymentTransaction { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PaymentTransaction) ID() objc.ID { return x.inner.Ptr() }
 
-// PaymentTransactionFromID adopts an existing toll-free-bridged object id as a PaymentTransaction (nil for 0).
+// PaymentTransactionFromID adopts an existing object pointer as a PaymentTransaction (nil for 0).
 func PaymentTransactionFromID(id objc.ID) *PaymentTransaction {
 	if id == 0 {
 		return nil

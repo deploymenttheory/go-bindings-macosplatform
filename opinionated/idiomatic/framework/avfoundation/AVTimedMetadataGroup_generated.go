@@ -20,11 +20,11 @@ type TimedMetadataGroup struct {
 // Unwrap returns the underlying [raw.AVTimedMetadataGroup].
 func (x *TimedMetadataGroup) Unwrap() *raw.AVTimedMetadataGroup { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *TimedMetadataGroup) ID() objc.ID { return x.inner.Ptr() }
 
-// TimedMetadataGroupFromID adopts an existing toll-free-bridged object id as a TimedMetadataGroup (nil for 0).
+// TimedMetadataGroupFromID adopts an existing object pointer as a TimedMetadataGroup (nil for 0).
 func TimedMetadataGroupFromID(id objc.ID) *TimedMetadataGroup {
 	if id == 0 {
 		return nil

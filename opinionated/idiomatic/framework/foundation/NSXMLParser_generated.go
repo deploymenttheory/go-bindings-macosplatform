@@ -19,11 +19,11 @@ type XMLParser struct {
 // Unwrap returns the underlying [raw.NSXMLParser].
 func (x *XMLParser) Unwrap() *raw.NSXMLParser { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *XMLParser) ID() objc.ID { return x.inner.Ptr() }
 
-// XMLParserFromID adopts an existing toll-free-bridged object id as a XMLParser (nil for 0).
+// XMLParserFromID adopts an existing object pointer as a XMLParser (nil for 0).
 func XMLParserFromID(id objc.ID) *XMLParser {
 	if id == 0 {
 		return nil

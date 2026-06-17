@@ -20,11 +20,11 @@ type FilterUIView struct {
 // Unwrap returns the underlying [raw.IKFilterUIView].
 func (x *FilterUIView) Unwrap() *raw.IKFilterUIView { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *FilterUIView) ID() objc.ID { return x.inner.Ptr() }
 
-// FilterUIViewFromID adopts an existing toll-free-bridged object id as a FilterUIView (nil for 0).
+// FilterUIViewFromID adopts an existing object pointer as a FilterUIView (nil for 0).
 func FilterUIViewFromID(id objc.ID) *FilterUIView {
 	if id == 0 {
 		return nil

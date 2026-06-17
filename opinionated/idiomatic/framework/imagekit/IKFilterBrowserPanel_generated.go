@@ -21,11 +21,11 @@ type FilterBrowserPanel struct {
 // Unwrap returns the underlying [raw.IKFilterBrowserPanel].
 func (x *FilterBrowserPanel) Unwrap() *raw.IKFilterBrowserPanel { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *FilterBrowserPanel) ID() objc.ID { return x.inner.Ptr() }
 
-// FilterBrowserPanelFromID adopts an existing toll-free-bridged object id as a FilterBrowserPanel (nil for 0).
+// FilterBrowserPanelFromID adopts an existing object pointer as a FilterBrowserPanel (nil for 0).
 func FilterBrowserPanelFromID(id objc.ID) *FilterBrowserPanel {
 	if id == 0 {
 		return nil

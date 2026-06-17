@@ -18,11 +18,11 @@ type FilePreviewRequest struct {
 // Unwrap returns the underlying [raw.QLFilePreviewRequest].
 func (x *FilePreviewRequest) Unwrap() *raw.QLFilePreviewRequest { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *FilePreviewRequest) ID() objc.ID { return x.inner.Ptr() }
 
-// FilePreviewRequestFromID adopts an existing toll-free-bridged object id as a FilePreviewRequest (nil for 0).
+// FilePreviewRequestFromID adopts an existing object pointer as a FilePreviewRequest (nil for 0).
 func FilePreviewRequestFromID(id objc.ID) *FilePreviewRequest {
 	if id == 0 {
 		return nil

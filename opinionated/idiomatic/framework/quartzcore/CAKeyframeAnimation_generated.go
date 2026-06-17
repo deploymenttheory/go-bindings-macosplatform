@@ -20,11 +20,11 @@ type KeyframeAnimation struct {
 // Unwrap returns the underlying [raw.CAKeyframeAnimation].
 func (x *KeyframeAnimation) Unwrap() *raw.CAKeyframeAnimation { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *KeyframeAnimation) ID() objc.ID { return x.inner.Ptr() }
 
-// KeyframeAnimationFromID adopts an existing toll-free-bridged object id as a KeyframeAnimation (nil for 0).
+// KeyframeAnimationFromID adopts an existing object pointer as a KeyframeAnimation (nil for 0).
 func KeyframeAnimationFromID(id objc.ID) *KeyframeAnimation {
 	if id == 0 {
 		return nil

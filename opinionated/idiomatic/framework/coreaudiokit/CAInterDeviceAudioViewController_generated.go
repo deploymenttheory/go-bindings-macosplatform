@@ -17,11 +17,11 @@ type CAInterDeviceAudioViewController struct {
 // Unwrap returns the underlying [raw.CAInterDeviceAudioViewController].
 func (x *CAInterDeviceAudioViewController) Unwrap() *raw.CAInterDeviceAudioViewController { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CAInterDeviceAudioViewController) ID() objc.ID { return x.inner.Ptr() }
 
-// CAInterDeviceAudioViewControllerFromID adopts an existing toll-free-bridged object id as a CAInterDeviceAudioViewController (nil for 0).
+// CAInterDeviceAudioViewControllerFromID adopts an existing object pointer as a CAInterDeviceAudioViewController (nil for 0).
 func CAInterDeviceAudioViewControllerFromID(id objc.ID) *CAInterDeviceAudioViewController {
 	if id == 0 {
 		return nil

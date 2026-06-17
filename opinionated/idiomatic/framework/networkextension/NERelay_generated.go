@@ -20,11 +20,11 @@ type NERelay struct {
 // Unwrap returns the underlying [raw.NERelay].
 func (x *NERelay) Unwrap() *raw.NERelay { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NERelay) ID() objc.ID { return x.inner.Ptr() }
 
-// NERelayFromID adopts an existing toll-free-bridged object id as a NERelay (nil for 0).
+// NERelayFromID adopts an existing object pointer as a NERelay (nil for 0).
 func NERelayFromID(id objc.ID) *NERelay {
 	if id == 0 {
 		return nil

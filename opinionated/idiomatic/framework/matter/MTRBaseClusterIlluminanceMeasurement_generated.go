@@ -21,11 +21,11 @@ type MTRBaseClusterIlluminanceMeasurement struct {
 // Unwrap returns the underlying [raw.MTRBaseClusterIlluminanceMeasurement].
 func (x *MTRBaseClusterIlluminanceMeasurement) Unwrap() *raw.MTRBaseClusterIlluminanceMeasurement { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRBaseClusterIlluminanceMeasurement) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRBaseClusterIlluminanceMeasurementFromID adopts an existing toll-free-bridged object id as a MTRBaseClusterIlluminanceMeasurement (nil for 0).
+// MTRBaseClusterIlluminanceMeasurementFromID adopts an existing object pointer as a MTRBaseClusterIlluminanceMeasurement (nil for 0).
 func MTRBaseClusterIlluminanceMeasurementFromID(id objc.ID) *MTRBaseClusterIlluminanceMeasurement {
 	if id == 0 {
 		return nil

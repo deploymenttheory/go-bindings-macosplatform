@@ -19,11 +19,11 @@ type OdometerData struct {
 // Unwrap returns the underlying [raw.CMOdometerData].
 func (x *OdometerData) Unwrap() *raw.CMOdometerData { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *OdometerData) ID() objc.ID { return x.inner.Ptr() }
 
-// OdometerDataFromID adopts an existing toll-free-bridged object id as a OdometerData (nil for 0).
+// OdometerDataFromID adopts an existing object pointer as a OdometerData (nil for 0).
 func OdometerDataFromID(id objc.ID) *OdometerData {
 	if id == 0 {
 		return nil

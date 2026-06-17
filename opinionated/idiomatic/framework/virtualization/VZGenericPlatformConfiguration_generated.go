@@ -17,11 +17,11 @@ type GenericPlatformConfiguration struct {
 // Unwrap returns the underlying [raw.VZGenericPlatformConfiguration].
 func (x *GenericPlatformConfiguration) Unwrap() *raw.VZGenericPlatformConfiguration { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *GenericPlatformConfiguration) ID() objc.ID { return x.inner.Ptr() }
 
-// GenericPlatformConfigurationFromID adopts an existing toll-free-bridged object id as a GenericPlatformConfiguration (nil for 0).
+// GenericPlatformConfigurationFromID adopts an existing object pointer as a GenericPlatformConfiguration (nil for 0).
 func GenericPlatformConfigurationFromID(id objc.ID) *GenericPlatformConfiguration {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type PhysicallyPlausibleLight struct {
 // Unwrap returns the underlying [raw.MDLPhysicallyPlausibleLight].
 func (x *PhysicallyPlausibleLight) Unwrap() *raw.MDLPhysicallyPlausibleLight { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PhysicallyPlausibleLight) ID() objc.ID { return x.inner.Ptr() }
 
-// PhysicallyPlausibleLightFromID adopts an existing toll-free-bridged object id as a PhysicallyPlausibleLight (nil for 0).
+// PhysicallyPlausibleLightFromID adopts an existing object pointer as a PhysicallyPlausibleLight (nil for 0).
 func PhysicallyPlausibleLightFromID(id objc.ID) *PhysicallyPlausibleLight {
 	if id == 0 {
 		return nil

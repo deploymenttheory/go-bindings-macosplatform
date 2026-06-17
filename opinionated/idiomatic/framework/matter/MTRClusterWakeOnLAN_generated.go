@@ -18,11 +18,11 @@ type MTRClusterWakeOnLan struct {
 // Unwrap returns the underlying [raw.MTRClusterWakeOnLan].
 func (x *MTRClusterWakeOnLan) Unwrap() *raw.MTRClusterWakeOnLan { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRClusterWakeOnLan) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRClusterWakeOnLanFromID adopts an existing toll-free-bridged object id as a MTRClusterWakeOnLan (nil for 0).
+// MTRClusterWakeOnLanFromID adopts an existing object pointer as a MTRClusterWakeOnLan (nil for 0).
 func MTRClusterWakeOnLanFromID(id objc.ID) *MTRClusterWakeOnLan {
 	if id == 0 {
 		return nil

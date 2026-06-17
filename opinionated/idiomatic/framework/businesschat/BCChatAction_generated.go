@@ -17,11 +17,11 @@ type ChatAction struct {
 // Unwrap returns the underlying [raw.BCChatAction].
 func (x *ChatAction) Unwrap() *raw.BCChatAction { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ChatAction) ID() objc.ID { return x.inner.Ptr() }
 
-// ChatActionFromID adopts an existing toll-free-bridged object id as a ChatAction (nil for 0).
+// ChatActionFromID adopts an existing object pointer as a ChatAction (nil for 0).
 func ChatActionFromID(id objc.ID) *ChatAction {
 	if id == 0 {
 		return nil

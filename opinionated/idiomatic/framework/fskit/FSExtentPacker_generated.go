@@ -17,11 +17,11 @@ type ExtentPacker struct {
 // Unwrap returns the underlying [raw.FSExtentPacker].
 func (x *ExtentPacker) Unwrap() *raw.FSExtentPacker { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ExtentPacker) ID() objc.ID { return x.inner.Ptr() }
 
-// ExtentPackerFromID adopts an existing toll-free-bridged object id as a ExtentPacker (nil for 0).
+// ExtentPackerFromID adopts an existing object pointer as a ExtentPacker (nil for 0).
 func ExtentPackerFromID(id objc.ID) *ExtentPacker {
 	if id == 0 {
 		return nil

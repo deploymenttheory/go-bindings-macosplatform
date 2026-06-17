@@ -18,11 +18,11 @@ type AnimatedVector2 struct {
 // Unwrap returns the underlying [raw.MDLAnimatedVector2].
 func (x *AnimatedVector2) Unwrap() *raw.MDLAnimatedVector2 { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AnimatedVector2) ID() objc.ID { return x.inner.Ptr() }
 
-// AnimatedVector2FromID adopts an existing toll-free-bridged object id as a AnimatedVector2 (nil for 0).
+// AnimatedVector2FromID adopts an existing object pointer as a AnimatedVector2 (nil for 0).
 func AnimatedVector2FromID(id objc.ID) *AnimatedVector2 {
 	if id == 0 {
 		return nil

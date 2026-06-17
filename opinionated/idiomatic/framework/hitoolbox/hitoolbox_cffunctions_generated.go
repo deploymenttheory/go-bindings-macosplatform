@@ -12,7 +12,7 @@ import (
 	"unsafe"
 )
 
-// CopySymbolicHotKeys wraps [raw.CopySymbolicHotKeys], bridging CFTypeRef arguments and the OSStatus result.
+// CopySymbolicHotKeys wraps [raw.CopySymbolicHotKeys], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func CopySymbolicHotKeys() (objc.ID, error) {
 	var _out0 uintptr
 	if _err := purego.NewOSStatus(raw.CopySymbolicHotKeys(unsafe.Pointer(&_out0))).Err(); _err != nil {
@@ -21,7 +21,7 @@ func CopySymbolicHotKeys() (objc.ID, error) {
 	return objc.ID(_out0), nil
 }
 
-// CopyThemeIdentifier wraps [raw.CopyThemeIdentifier], bridging CFTypeRef arguments and the OSStatus result.
+// CopyThemeIdentifier wraps [raw.CopyThemeIdentifier], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func CopyThemeIdentifier() (objc.ID, error) {
 	var _out0 uintptr
 	if _err := purego.NewOSStatus(raw.CopyThemeIdentifier(unsafe.Pointer(&_out0))).Err(); _err != nil {
@@ -30,7 +30,7 @@ func CopyThemeIdentifier() (objc.ID, error) {
 	return objc.ID(_out0), nil
 }
 
-// DisableSecureEventInput wraps [raw.DisableSecureEventInput], bridging CFTypeRef arguments and the OSStatus result.
+// DisableSecureEventInput wraps [raw.DisableSecureEventInput], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DisableSecureEventInput() error {
 	if _err := purego.NewOSStatus(raw.DisableSecureEventInput()).Err(); _err != nil {
 		return _err
@@ -38,7 +38,7 @@ func DisableSecureEventInput() error {
 	return nil
 }
 
-// EnableSecureEventInput wraps [raw.EnableSecureEventInput], bridging CFTypeRef arguments and the OSStatus result.
+// EnableSecureEventInput wraps [raw.EnableSecureEventInput], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func EnableSecureEventInput() error {
 	if _err := purego.NewOSStatus(raw.EnableSecureEventInput()).Err(); _err != nil {
 		return _err
@@ -46,7 +46,7 @@ func EnableSecureEventInput() error {
 	return nil
 }
 
-// GetThemeMenuItemExtra wraps [raw.GetThemeMenuItemExtra], bridging CFTypeRef arguments and the OSStatus result.
+// GetThemeMenuItemExtra wraps [raw.GetThemeMenuItemExtra], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func GetThemeMenuItemExtra(inItemType uint16, outHeight *int16, outWidth *int16) error {
 	if _err := purego.NewOSStatus(raw.GetThemeMenuItemExtra(inItemType, outHeight, outWidth)).Err(); _err != nil {
 		return _err
@@ -54,7 +54,7 @@ func GetThemeMenuItemExtra(inItemType uint16, outHeight *int16, outWidth *int16)
 	return nil
 }
 
-// GetThemeMenuSeparatorHeight wraps [raw.GetThemeMenuSeparatorHeight], bridging CFTypeRef arguments and the OSStatus result.
+// GetThemeMenuSeparatorHeight wraps [raw.GetThemeMenuSeparatorHeight], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func GetThemeMenuSeparatorHeight(outHeight *int16) error {
 	if _err := purego.NewOSStatus(raw.GetThemeMenuSeparatorHeight(outHeight)).Err(); _err != nil {
 		return _err
@@ -62,7 +62,7 @@ func GetThemeMenuSeparatorHeight(outHeight *int16) error {
 	return nil
 }
 
-// GetThemeMenuTitleExtra wraps [raw.GetThemeMenuTitleExtra], bridging CFTypeRef arguments and the OSStatus result.
+// GetThemeMenuTitleExtra wraps [raw.GetThemeMenuTitleExtra], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func GetThemeMenuTitleExtra(outWidth *int16, inIsSquished uint8) error {
 	if _err := purego.NewOSStatus(raw.GetThemeMenuTitleExtra(outWidth, inIsSquished)).Err(); _err != nil {
 		return _err
@@ -70,7 +70,7 @@ func GetThemeMenuTitleExtra(outWidth *int16, inIsSquished uint8) error {
 	return nil
 }
 
-// GetThemeMetric wraps [raw.GetThemeMetric], bridging CFTypeRef arguments and the OSStatus result.
+// GetThemeMetric wraps [raw.GetThemeMetric], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func GetThemeMetric(inMetric uint, outMetric *int) error {
 	if _err := purego.NewOSStatus(raw.GetThemeMetric(inMetric, outMetric)).Err(); _err != nil {
 		return _err
@@ -78,7 +78,7 @@ func GetThemeMetric(inMetric uint, outMetric *int) error {
 	return nil
 }
 
-// HIMouseTrackingGetParameters wraps [raw.HIMouseTrackingGetParameters], bridging CFTypeRef arguments and the OSStatus result.
+// HIMouseTrackingGetParameters wraps [raw.HIMouseTrackingGetParameters], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func HIMouseTrackingGetParameters(inSelector uint, outTime *float64, outDistance *corefoundation.CGSize) error {
 	if _err := purego.NewOSStatus(raw.HIMouseTrackingGetParameters(inSelector, outTime, outDistance)).Err(); _err != nil {
 		return _err
@@ -86,7 +86,7 @@ func HIMouseTrackingGetParameters(inSelector uint, outTime *float64, outDistance
 	return nil
 }
 
-// HISearchWindowShow wraps [raw.HISearchWindowShow], bridging CFTypeRef arguments and the OSStatus result.
+// HISearchWindowShow wraps [raw.HISearchWindowShow], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func HISearchWindowShow(inSearchString objc.ID, inFlags uint) error {
 	if _err := purego.NewOSStatus(raw.HISearchWindowShow(purego.CFRef(inSearchString), inFlags)).Err(); _err != nil {
 		return _err
@@ -94,7 +94,7 @@ func HISearchWindowShow(inSearchString objc.ID, inFlags uint) error {
 	return nil
 }
 
-// HIThemeGetButtonBackgroundBounds wraps [raw.HIThemeGetButtonBackgroundBounds], bridging CFTypeRef arguments and the OSStatus result.
+// HIThemeGetButtonBackgroundBounds wraps [raw.HIThemeGetButtonBackgroundBounds], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func HIThemeGetButtonBackgroundBounds(inBounds *corefoundation.CGRect, inDrawInfo *raw.HIThemeButtonDrawInfo, outBounds *corefoundation.CGRect) error {
 	if _err := purego.NewOSStatus(raw.HIThemeGetButtonBackgroundBounds(inBounds, inDrawInfo, outBounds)).Err(); _err != nil {
 		return _err
@@ -102,7 +102,7 @@ func HIThemeGetButtonBackgroundBounds(inBounds *corefoundation.CGRect, inDrawInf
 	return nil
 }
 
-// HIThemeGetButtonContentBounds wraps [raw.HIThemeGetButtonContentBounds], bridging CFTypeRef arguments and the OSStatus result.
+// HIThemeGetButtonContentBounds wraps [raw.HIThemeGetButtonContentBounds], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func HIThemeGetButtonContentBounds(inBounds *corefoundation.CGRect, inDrawInfo *raw.HIThemeButtonDrawInfo, outBounds *corefoundation.CGRect) error {
 	if _err := purego.NewOSStatus(raw.HIThemeGetButtonContentBounds(inBounds, inDrawInfo, outBounds)).Err(); _err != nil {
 		return _err
@@ -110,7 +110,7 @@ func HIThemeGetButtonContentBounds(inBounds *corefoundation.CGRect, inDrawInfo *
 	return nil
 }
 
-// HIThemeGetGrowBoxBounds wraps [raw.HIThemeGetGrowBoxBounds], bridging CFTypeRef arguments and the OSStatus result.
+// HIThemeGetGrowBoxBounds wraps [raw.HIThemeGetGrowBoxBounds], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func HIThemeGetGrowBoxBounds(inOrigin *corefoundation.CGPoint, inDrawInfo *raw.HIThemeGrowBoxDrawInfo, outBounds *corefoundation.CGRect) error {
 	if _err := purego.NewOSStatus(raw.HIThemeGetGrowBoxBounds(inOrigin, inDrawInfo, outBounds)).Err(); _err != nil {
 		return _err
@@ -118,7 +118,7 @@ func HIThemeGetGrowBoxBounds(inOrigin *corefoundation.CGPoint, inDrawInfo *raw.H
 	return nil
 }
 
-// HIThemeGetScrollBarTrackRect wraps [raw.HIThemeGetScrollBarTrackRect], bridging CFTypeRef arguments and the OSStatus result.
+// HIThemeGetScrollBarTrackRect wraps [raw.HIThemeGetScrollBarTrackRect], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func HIThemeGetScrollBarTrackRect(inBounds *corefoundation.CGRect, inTrackInfo *raw.HIScrollBarTrackInfo, inIsHoriz uint8, outTrackBounds *corefoundation.CGRect) error {
 	if _err := purego.NewOSStatus(raw.HIThemeGetScrollBarTrackRect(inBounds, inTrackInfo, inIsHoriz, outTrackBounds)).Err(); _err != nil {
 		return _err
@@ -126,7 +126,7 @@ func HIThemeGetScrollBarTrackRect(inBounds *corefoundation.CGRect, inTrackInfo *
 	return nil
 }
 
-// HIThemeGetTextColorForThemeBrush wraps [raw.HIThemeGetTextColorForThemeBrush], bridging CFTypeRef arguments and the OSStatus result.
+// HIThemeGetTextColorForThemeBrush wraps [raw.HIThemeGetTextColorForThemeBrush], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func HIThemeGetTextColorForThemeBrush(inBrush int16, inWindowIsActive uint8, outColor *int16) error {
 	if _err := purego.NewOSStatus(raw.HIThemeGetTextColorForThemeBrush(inBrush, inWindowIsActive, outColor)).Err(); _err != nil {
 		return _err
@@ -134,7 +134,7 @@ func HIThemeGetTextColorForThemeBrush(inBrush int16, inWindowIsActive uint8, out
 	return nil
 }
 
-// HIThemeGetTextDimensions wraps [raw.HIThemeGetTextDimensions], bridging CFTypeRef arguments and the OSStatus result.
+// HIThemeGetTextDimensions wraps [raw.HIThemeGetTextDimensions], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func HIThemeGetTextDimensions(inString objc.ID, inWidth float64, inTextInfo *raw.HIThemeTextInfo, outWidth *float64, outHeight *float64, outBaseline *float64) error {
 	if _err := purego.NewOSStatus(raw.HIThemeGetTextDimensions(purego.CFRef(inString), inWidth, inTextInfo, outWidth, outHeight, outBaseline)).Err(); _err != nil {
 		return _err
@@ -142,7 +142,7 @@ func HIThemeGetTextDimensions(inString objc.ID, inWidth float64, inTextInfo *raw
 	return nil
 }
 
-// HIThemeGetTrackBounds wraps [raw.HIThemeGetTrackBounds], bridging CFTypeRef arguments and the OSStatus result.
+// HIThemeGetTrackBounds wraps [raw.HIThemeGetTrackBounds], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func HIThemeGetTrackBounds(inDrawInfo *raw.HIThemeTrackDrawInfo, outBounds *corefoundation.CGRect) error {
 	if _err := purego.NewOSStatus(raw.HIThemeGetTrackBounds(inDrawInfo, outBounds)).Err(); _err != nil {
 		return _err
@@ -150,7 +150,7 @@ func HIThemeGetTrackBounds(inDrawInfo *raw.HIThemeTrackDrawInfo, outBounds *core
 	return nil
 }
 
-// HIThemeGetTrackDragRect wraps [raw.HIThemeGetTrackDragRect], bridging CFTypeRef arguments and the OSStatus result.
+// HIThemeGetTrackDragRect wraps [raw.HIThemeGetTrackDragRect], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func HIThemeGetTrackDragRect(inDrawInfo *raw.HIThemeTrackDrawInfo, outDragRect *corefoundation.CGRect) error {
 	if _err := purego.NewOSStatus(raw.HIThemeGetTrackDragRect(inDrawInfo, outDragRect)).Err(); _err != nil {
 		return _err
@@ -158,7 +158,7 @@ func HIThemeGetTrackDragRect(inDrawInfo *raw.HIThemeTrackDrawInfo, outDragRect *
 	return nil
 }
 
-// HIThemeGetTrackLiveValue wraps [raw.HIThemeGetTrackLiveValue], bridging CFTypeRef arguments and the OSStatus result.
+// HIThemeGetTrackLiveValue wraps [raw.HIThemeGetTrackLiveValue], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func HIThemeGetTrackLiveValue(inDrawInfo *raw.HIThemeTrackDrawInfo, inRelativePosition float64, outValue *int) error {
 	if _err := purego.NewOSStatus(raw.HIThemeGetTrackLiveValue(inDrawInfo, inRelativePosition, outValue)).Err(); _err != nil {
 		return _err
@@ -166,7 +166,7 @@ func HIThemeGetTrackLiveValue(inDrawInfo *raw.HIThemeTrackDrawInfo, inRelativePo
 	return nil
 }
 
-// HIThemeGetTrackPartBounds wraps [raw.HIThemeGetTrackPartBounds], bridging CFTypeRef arguments and the OSStatus result.
+// HIThemeGetTrackPartBounds wraps [raw.HIThemeGetTrackPartBounds], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func HIThemeGetTrackPartBounds(inDrawInfo *raw.HIThemeTrackDrawInfo, inPartCode int16, outPartBounds *corefoundation.CGRect) error {
 	if _err := purego.NewOSStatus(raw.HIThemeGetTrackPartBounds(inDrawInfo, inPartCode, outPartBounds)).Err(); _err != nil {
 		return _err
@@ -174,7 +174,7 @@ func HIThemeGetTrackPartBounds(inDrawInfo *raw.HIThemeTrackDrawInfo, inPartCode 
 	return nil
 }
 
-// HIThemeGetTrackParts wraps [raw.HIThemeGetTrackParts], bridging CFTypeRef arguments and the OSStatus result.
+// HIThemeGetTrackParts wraps [raw.HIThemeGetTrackParts], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func HIThemeGetTrackParts(inDrawInfo *raw.HIThemeTrackDrawInfo, outNumberOfParts *uint, inMaxParts uint, ioPartsBuffer *int16) error {
 	if _err := purego.NewOSStatus(raw.HIThemeGetTrackParts(inDrawInfo, outNumberOfParts, inMaxParts, ioPartsBuffer)).Err(); _err != nil {
 		return _err
@@ -182,7 +182,7 @@ func HIThemeGetTrackParts(inDrawInfo *raw.HIThemeTrackDrawInfo, outNumberOfParts
 	return nil
 }
 
-// HIThemeGetTrackThumbPositionFromBounds wraps [raw.HIThemeGetTrackThumbPositionFromBounds], bridging CFTypeRef arguments and the OSStatus result.
+// HIThemeGetTrackThumbPositionFromBounds wraps [raw.HIThemeGetTrackThumbPositionFromBounds], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func HIThemeGetTrackThumbPositionFromBounds(inDrawInfo *raw.HIThemeTrackDrawInfo, inThumbBounds *corefoundation.CGRect, outRelativePosition *float64) error {
 	if _err := purego.NewOSStatus(raw.HIThemeGetTrackThumbPositionFromBounds(inDrawInfo, inThumbBounds, outRelativePosition)).Err(); _err != nil {
 		return _err
@@ -190,7 +190,7 @@ func HIThemeGetTrackThumbPositionFromBounds(inDrawInfo *raw.HIThemeTrackDrawInfo
 	return nil
 }
 
-// HIThemeGetTrackThumbPositionFromOffset wraps [raw.HIThemeGetTrackThumbPositionFromOffset], bridging CFTypeRef arguments and the OSStatus result.
+// HIThemeGetTrackThumbPositionFromOffset wraps [raw.HIThemeGetTrackThumbPositionFromOffset], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func HIThemeGetTrackThumbPositionFromOffset(inDrawInfo *raw.HIThemeTrackDrawInfo, inThumbOffset *corefoundation.CGPoint, outRelativePosition *float64) error {
 	if _err := purego.NewOSStatus(raw.HIThemeGetTrackThumbPositionFromOffset(inDrawInfo, inThumbOffset, outRelativePosition)).Err(); _err != nil {
 		return _err
@@ -198,7 +198,7 @@ func HIThemeGetTrackThumbPositionFromOffset(inDrawInfo *raw.HIThemeTrackDrawInfo
 	return nil
 }
 
-// ProcessHICommand wraps [raw.ProcessHICommand], bridging CFTypeRef arguments and the OSStatus result.
+// ProcessHICommand wraps [raw.ProcessHICommand], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func ProcessHICommand(inCommand *raw.HICommand) error {
 	if _err := purego.NewOSStatus(raw.ProcessHICommand(inCommand)).Err(); _err != nil {
 		return _err
@@ -206,7 +206,7 @@ func ProcessHICommand(inCommand *raw.HICommand) error {
 	return nil
 }
 
-// RunCurrentEventLoop wraps [raw.RunCurrentEventLoop], bridging CFTypeRef arguments and the OSStatus result.
+// RunCurrentEventLoop wraps [raw.RunCurrentEventLoop], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func RunCurrentEventLoop(inTimeout float64) error {
 	if _err := purego.NewOSStatus(raw.RunCurrentEventLoop(inTimeout)).Err(); _err != nil {
 		return _err
@@ -214,7 +214,7 @@ func RunCurrentEventLoop(inTimeout float64) error {
 	return nil
 }
 
-// SetSystemUIMode wraps [raw.SetSystemUIMode], bridging CFTypeRef arguments and the OSStatus result.
+// SetSystemUIMode wraps [raw.SetSystemUIMode], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func SetSystemUIMode(inMode uint, inOptions uint) error {
 	if _err := purego.NewOSStatus(raw.SetSystemUIMode(inMode, inOptions)).Err(); _err != nil {
 		return _err
@@ -222,7 +222,7 @@ func SetSystemUIMode(inMode uint, inOptions uint) error {
 	return nil
 }
 
-// TISRegisterInputSource wraps [raw.TISRegisterInputSource], bridging CFTypeRef arguments and the OSStatus result.
+// TISRegisterInputSource wraps [raw.TISRegisterInputSource], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func TISRegisterInputSource(location objc.ID) error {
 	if _err := purego.NewOSStatus(raw.TISRegisterInputSource(purego.CFRef(location))).Err(); _err != nil {
 		return _err

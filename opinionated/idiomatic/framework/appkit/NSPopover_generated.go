@@ -19,11 +19,11 @@ type Popover struct {
 // Unwrap returns the underlying [raw.NSPopover].
 func (x *Popover) Unwrap() *raw.NSPopover { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Popover) ID() objc.ID { return x.inner.Ptr() }
 
-// PopoverFromID adopts an existing toll-free-bridged object id as a Popover (nil for 0).
+// PopoverFromID adopts an existing object pointer as a Popover (nil for 0).
 func PopoverFromID(id objc.ID) *Popover {
 	if id == 0 {
 		return nil

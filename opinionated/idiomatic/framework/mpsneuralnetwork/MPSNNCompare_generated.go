@@ -18,11 +18,11 @@ type NNCompare struct {
 // Unwrap returns the underlying [raw.MPSNNCompare].
 func (x *NNCompare) Unwrap() *raw.MPSNNCompare { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NNCompare) ID() objc.ID { return x.inner.Ptr() }
 
-// NNCompareFromID adopts an existing toll-free-bridged object id as a NNCompare (nil for 0).
+// NNCompareFromID adopts an existing object pointer as a NNCompare (nil for 0).
 func NNCompareFromID(id objc.ID) *NNCompare {
 	if id == 0 {
 		return nil

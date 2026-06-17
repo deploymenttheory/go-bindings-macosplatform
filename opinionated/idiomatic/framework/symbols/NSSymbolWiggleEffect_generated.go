@@ -17,11 +17,11 @@ type SymbolWiggleEffect struct {
 // Unwrap returns the underlying [raw.NSSymbolWiggleEffect].
 func (x *SymbolWiggleEffect) Unwrap() *raw.NSSymbolWiggleEffect { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SymbolWiggleEffect) ID() objc.ID { return x.inner.Ptr() }
 
-// SymbolWiggleEffectFromID adopts an existing toll-free-bridged object id as a SymbolWiggleEffect (nil for 0).
+// SymbolWiggleEffectFromID adopts an existing object pointer as a SymbolWiggleEffect (nil for 0).
 func SymbolWiggleEffectFromID(id objc.ID) *SymbolWiggleEffect {
 	if id == 0 {
 		return nil

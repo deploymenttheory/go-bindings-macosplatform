@@ -18,11 +18,11 @@ type Argument struct {
 // Unwrap returns the underlying [raw.MTLArgument].
 func (x *Argument) Unwrap() *raw.MTLArgument { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Argument) ID() objc.ID { return x.inner.Ptr() }
 
-// ArgumentFromID adopts an existing toll-free-bridged object id as a Argument (nil for 0).
+// ArgumentFromID adopts an existing object pointer as a Argument (nil for 0).
 func ArgumentFromID(id objc.ID) *Argument {
 	if id == 0 {
 		return nil

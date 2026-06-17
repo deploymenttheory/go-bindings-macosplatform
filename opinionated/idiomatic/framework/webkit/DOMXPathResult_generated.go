@@ -18,11 +18,11 @@ type DOMXPathResult struct {
 // Unwrap returns the underlying [raw.DOMXPathResult].
 func (x *DOMXPathResult) Unwrap() *raw.DOMXPathResult { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DOMXPathResult) ID() objc.ID { return x.inner.Ptr() }
 
-// DOMXPathResultFromID adopts an existing toll-free-bridged object id as a DOMXPathResult (nil for 0).
+// DOMXPathResultFromID adopts an existing object pointer as a DOMXPathResult (nil for 0).
 func DOMXPathResultFromID(id objc.ID) *DOMXPathResult {
 	if id == 0 {
 		return nil

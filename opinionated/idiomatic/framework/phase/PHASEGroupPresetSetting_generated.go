@@ -17,11 +17,11 @@ type GroupPresetSetting struct {
 // Unwrap returns the underlying [raw.PHASEGroupPresetSetting].
 func (x *GroupPresetSetting) Unwrap() *raw.PHASEGroupPresetSetting { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *GroupPresetSetting) ID() objc.ID { return x.inner.Ptr() }
 
-// GroupPresetSettingFromID adopts an existing toll-free-bridged object id as a GroupPresetSetting (nil for 0).
+// GroupPresetSettingFromID adopts an existing object pointer as a GroupPresetSetting (nil for 0).
 func GroupPresetSettingFromID(id objc.ID) *GroupPresetSetting {
 	if id == 0 {
 		return nil

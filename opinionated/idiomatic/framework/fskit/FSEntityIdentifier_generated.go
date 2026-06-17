@@ -18,11 +18,11 @@ type EntityIdentifier struct {
 // Unwrap returns the underlying [raw.FSEntityIdentifier].
 func (x *EntityIdentifier) Unwrap() *raw.FSEntityIdentifier { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *EntityIdentifier) ID() objc.ID { return x.inner.Ptr() }
 
-// EntityIdentifierFromID adopts an existing toll-free-bridged object id as a EntityIdentifier (nil for 0).
+// EntityIdentifierFromID adopts an existing object pointer as a EntityIdentifier (nil for 0).
 func EntityIdentifierFromID(id objc.ID) *EntityIdentifier {
 	if id == 0 {
 		return nil

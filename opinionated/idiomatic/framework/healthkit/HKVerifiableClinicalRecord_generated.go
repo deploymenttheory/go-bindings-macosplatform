@@ -20,11 +20,11 @@ type VerifiableClinicalRecord struct {
 // Unwrap returns the underlying [raw.HKVerifiableClinicalRecord].
 func (x *VerifiableClinicalRecord) Unwrap() *raw.HKVerifiableClinicalRecord { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *VerifiableClinicalRecord) ID() objc.ID { return x.inner.Ptr() }
 
-// VerifiableClinicalRecordFromID adopts an existing toll-free-bridged object id as a VerifiableClinicalRecord (nil for 0).
+// VerifiableClinicalRecordFromID adopts an existing object pointer as a VerifiableClinicalRecord (nil for 0).
 func VerifiableClinicalRecordFromID(id objc.ID) *VerifiableClinicalRecord {
 	if id == 0 {
 		return nil

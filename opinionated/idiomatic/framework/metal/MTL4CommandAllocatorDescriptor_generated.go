@@ -19,11 +19,11 @@ type MTL4CommandAllocatorDescriptor struct {
 // Unwrap returns the underlying [raw.MTL4CommandAllocatorDescriptor].
 func (x *MTL4CommandAllocatorDescriptor) Unwrap() *raw.MTL4CommandAllocatorDescriptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTL4CommandAllocatorDescriptor) ID() objc.ID { return x.inner.Ptr() }
 
-// MTL4CommandAllocatorDescriptorFromID adopts an existing toll-free-bridged object id as a MTL4CommandAllocatorDescriptor (nil for 0).
+// MTL4CommandAllocatorDescriptorFromID adopts an existing object pointer as a MTL4CommandAllocatorDescriptor (nil for 0).
 func MTL4CommandAllocatorDescriptorFromID(id objc.ID) *MTL4CommandAllocatorDescriptor {
 	if id == 0 {
 		return nil

@@ -20,11 +20,11 @@ type LabelNode struct {
 // Unwrap returns the underlying [raw.SKLabelNode].
 func (x *LabelNode) Unwrap() *raw.SKLabelNode { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *LabelNode) ID() objc.ID { return x.inner.Ptr() }
 
-// LabelNodeFromID adopts an existing toll-free-bridged object id as a LabelNode (nil for 0).
+// LabelNodeFromID adopts an existing object pointer as a LabelNode (nil for 0).
 func LabelNodeFromID(id objc.ID) *LabelNode {
 	if id == 0 {
 		return nil

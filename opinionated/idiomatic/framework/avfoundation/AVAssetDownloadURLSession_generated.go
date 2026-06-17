@@ -18,11 +18,11 @@ type AssetDownloadURLSession struct {
 // Unwrap returns the underlying [raw.AVAssetDownloadURLSession].
 func (x *AssetDownloadURLSession) Unwrap() *raw.AVAssetDownloadURLSession { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AssetDownloadURLSession) ID() objc.ID { return x.inner.Ptr() }
 
-// AssetDownloadURLSessionFromID adopts an existing toll-free-bridged object id as a AssetDownloadURLSession (nil for 0).
+// AssetDownloadURLSessionFromID adopts an existing object pointer as a AssetDownloadURLSession (nil for 0).
 func AssetDownloadURLSessionFromID(id objc.ID) *AssetDownloadURLSession {
 	if id == 0 {
 		return nil

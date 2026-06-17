@@ -18,11 +18,11 @@ type DirectionsResponse struct {
 // Unwrap returns the underlying [raw.MKDirectionsResponse].
 func (x *DirectionsResponse) Unwrap() *raw.MKDirectionsResponse { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DirectionsResponse) ID() objc.ID { return x.inner.Ptr() }
 
-// DirectionsResponseFromID adopts an existing toll-free-bridged object id as a DirectionsResponse (nil for 0).
+// DirectionsResponseFromID adopts an existing object pointer as a DirectionsResponse (nil for 0).
 func DirectionsResponseFromID(id objc.ID) *DirectionsResponse {
 	if id == 0 {
 		return nil

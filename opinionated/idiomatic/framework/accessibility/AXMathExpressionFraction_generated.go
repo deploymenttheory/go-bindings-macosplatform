@@ -17,11 +17,11 @@ type MathExpressionFraction struct {
 // Unwrap returns the underlying [raw.AXMathExpressionFraction].
 func (x *MathExpressionFraction) Unwrap() *raw.AXMathExpressionFraction { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MathExpressionFraction) ID() objc.ID { return x.inner.Ptr() }
 
-// MathExpressionFractionFromID adopts an existing toll-free-bridged object id as a MathExpressionFraction (nil for 0).
+// MathExpressionFractionFromID adopts an existing object pointer as a MathExpressionFraction (nil for 0).
 func MathExpressionFractionFromID(id objc.ID) *MathExpressionFraction {
 	if id == 0 {
 		return nil

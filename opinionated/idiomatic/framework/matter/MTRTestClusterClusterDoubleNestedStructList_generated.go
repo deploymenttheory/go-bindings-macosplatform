@@ -17,11 +17,11 @@ type MTRTestClusterClusterDoubleNestedStructList struct {
 // Unwrap returns the underlying [raw.MTRTestClusterClusterDoubleNestedStructList].
 func (x *MTRTestClusterClusterDoubleNestedStructList) Unwrap() *raw.MTRTestClusterClusterDoubleNestedStructList { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRTestClusterClusterDoubleNestedStructList) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRTestClusterClusterDoubleNestedStructListFromID adopts an existing toll-free-bridged object id as a MTRTestClusterClusterDoubleNestedStructList (nil for 0).
+// MTRTestClusterClusterDoubleNestedStructListFromID adopts an existing object pointer as a MTRTestClusterClusterDoubleNestedStructList (nil for 0).
 func MTRTestClusterClusterDoubleNestedStructListFromID(id objc.ID) *MTRTestClusterClusterDoubleNestedStructList {
 	if id == 0 {
 		return nil

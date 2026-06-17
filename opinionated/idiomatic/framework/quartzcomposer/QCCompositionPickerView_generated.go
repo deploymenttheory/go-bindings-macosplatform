@@ -21,11 +21,11 @@ type CompositionPickerView struct {
 // Unwrap returns the underlying [raw.QCCompositionPickerView].
 func (x *CompositionPickerView) Unwrap() *raw.QCCompositionPickerView { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CompositionPickerView) ID() objc.ID { return x.inner.Ptr() }
 
-// CompositionPickerViewFromID adopts an existing toll-free-bridged object id as a CompositionPickerView (nil for 0).
+// CompositionPickerViewFromID adopts an existing object pointer as a CompositionPickerView (nil for 0).
 func CompositionPickerViewFromID(id objc.ID) *CompositionPickerView {
 	if id == 0 {
 		return nil

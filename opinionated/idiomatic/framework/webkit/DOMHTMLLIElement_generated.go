@@ -19,11 +19,11 @@ type DOMHTMLLIElement struct {
 // Unwrap returns the underlying [raw.DOMHTMLLIElement].
 func (x *DOMHTMLLIElement) Unwrap() *raw.DOMHTMLLIElement { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DOMHTMLLIElement) ID() objc.ID { return x.inner.Ptr() }
 
-// DOMHTMLLIElementFromID adopts an existing toll-free-bridged object id as a DOMHTMLLIElement (nil for 0).
+// DOMHTMLLIElementFromID adopts an existing object pointer as a DOMHTMLLIElement (nil for 0).
 func DOMHTMLLIElementFromID(id objc.ID) *DOMHTMLLIElement {
 	if id == 0 {
 		return nil

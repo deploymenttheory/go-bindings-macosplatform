@@ -20,11 +20,11 @@ type FetchIndexDescription struct {
 // Unwrap returns the underlying [raw.NSFetchIndexDescription].
 func (x *FetchIndexDescription) Unwrap() *raw.NSFetchIndexDescription { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *FetchIndexDescription) ID() objc.ID { return x.inner.Ptr() }
 
-// FetchIndexDescriptionFromID adopts an existing toll-free-bridged object id as a FetchIndexDescription (nil for 0).
+// FetchIndexDescriptionFromID adopts an existing object pointer as a FetchIndexDescription (nil for 0).
 func FetchIndexDescriptionFromID(id objc.ID) *FetchIndexDescription {
 	if id == 0 {
 		return nil

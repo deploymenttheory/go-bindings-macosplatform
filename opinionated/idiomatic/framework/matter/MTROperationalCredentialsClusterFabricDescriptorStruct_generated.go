@@ -19,11 +19,11 @@ type MTROperationalCredentialsClusterFabricDescriptorStruct struct {
 // Unwrap returns the underlying [raw.MTROperationalCredentialsClusterFabricDescriptorStruct].
 func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) Unwrap() *raw.MTROperationalCredentialsClusterFabricDescriptorStruct { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) ID() objc.ID { return x.inner.Ptr() }
 
-// MTROperationalCredentialsClusterFabricDescriptorStructFromID adopts an existing toll-free-bridged object id as a MTROperationalCredentialsClusterFabricDescriptorStruct (nil for 0).
+// MTROperationalCredentialsClusterFabricDescriptorStructFromID adopts an existing object pointer as a MTROperationalCredentialsClusterFabricDescriptorStruct (nil for 0).
 func MTROperationalCredentialsClusterFabricDescriptorStructFromID(id objc.ID) *MTROperationalCredentialsClusterFabricDescriptorStruct {
 	if id == 0 {
 		return nil

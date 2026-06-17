@@ -17,11 +17,11 @@ type ListFormatter struct {
 // Unwrap returns the underlying [raw.NSListFormatter].
 func (x *ListFormatter) Unwrap() *raw.NSListFormatter { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ListFormatter) ID() objc.ID { return x.inner.Ptr() }
 
-// ListFormatterFromID adopts an existing toll-free-bridged object id as a ListFormatter (nil for 0).
+// ListFormatterFromID adopts an existing object pointer as a ListFormatter (nil for 0).
 func ListFormatterFromID(id objc.ID) *ListFormatter {
 	if id == 0 {
 		return nil

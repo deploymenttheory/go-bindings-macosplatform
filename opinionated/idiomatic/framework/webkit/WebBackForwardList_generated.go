@@ -18,11 +18,11 @@ type WebBackForwardList struct {
 // Unwrap returns the underlying [raw.WebBackForwardList].
 func (x *WebBackForwardList) Unwrap() *raw.WebBackForwardList { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *WebBackForwardList) ID() objc.ID { return x.inner.Ptr() }
 
-// WebBackForwardListFromID adopts an existing toll-free-bridged object id as a WebBackForwardList (nil for 0).
+// WebBackForwardListFromID adopts an existing object pointer as a WebBackForwardList (nil for 0).
 func WebBackForwardListFromID(id objc.ID) *WebBackForwardList {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type MutablePostalAddress struct {
 // Unwrap returns the underlying [raw.CNMutablePostalAddress].
 func (x *MutablePostalAddress) Unwrap() *raw.CNMutablePostalAddress { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MutablePostalAddress) ID() objc.ID { return x.inner.Ptr() }
 
-// MutablePostalAddressFromID adopts an existing toll-free-bridged object id as a MutablePostalAddress (nil for 0).
+// MutablePostalAddressFromID adopts an existing object pointer as a MutablePostalAddress (nil for 0).
 func MutablePostalAddressFromID(id objc.ID) *MutablePostalAddress {
 	if id == 0 {
 		return nil

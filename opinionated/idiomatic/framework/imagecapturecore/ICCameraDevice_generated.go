@@ -21,11 +21,11 @@ type CameraDevice struct {
 // Unwrap returns the underlying [raw.ICCameraDevice].
 func (x *CameraDevice) Unwrap() *raw.ICCameraDevice { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CameraDevice) ID() objc.ID { return x.inner.Ptr() }
 
-// CameraDeviceFromID adopts an existing toll-free-bridged object id as a CameraDevice (nil for 0).
+// CameraDeviceFromID adopts an existing object pointer as a CameraDevice (nil for 0).
 func CameraDeviceFromID(id objc.ID) *CameraDevice {
 	if id == 0 {
 		return nil

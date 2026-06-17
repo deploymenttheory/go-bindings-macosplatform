@@ -17,11 +17,11 @@ type UnitElectricCurrent struct {
 // Unwrap returns the underlying [raw.NSUnitElectricCurrent].
 func (x *UnitElectricCurrent) Unwrap() *raw.NSUnitElectricCurrent { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *UnitElectricCurrent) ID() objc.ID { return x.inner.Ptr() }
 
-// UnitElectricCurrentFromID adopts an existing toll-free-bridged object id as a UnitElectricCurrent (nil for 0).
+// UnitElectricCurrentFromID adopts an existing object pointer as a UnitElectricCurrent (nil for 0).
 func UnitElectricCurrentFromID(id objc.ID) *UnitElectricCurrent {
 	if id == 0 {
 		return nil

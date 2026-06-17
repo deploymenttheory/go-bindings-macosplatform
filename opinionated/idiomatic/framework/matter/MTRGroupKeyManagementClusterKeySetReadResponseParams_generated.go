@@ -20,11 +20,11 @@ type MTRGroupKeyManagementClusterKeySetReadResponseParams struct {
 // Unwrap returns the underlying [raw.MTRGroupKeyManagementClusterKeySetReadResponseParams].
 func (x *MTRGroupKeyManagementClusterKeySetReadResponseParams) Unwrap() *raw.MTRGroupKeyManagementClusterKeySetReadResponseParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRGroupKeyManagementClusterKeySetReadResponseParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRGroupKeyManagementClusterKeySetReadResponseParamsFromID adopts an existing toll-free-bridged object id as a MTRGroupKeyManagementClusterKeySetReadResponseParams (nil for 0).
+// MTRGroupKeyManagementClusterKeySetReadResponseParamsFromID adopts an existing object pointer as a MTRGroupKeyManagementClusterKeySetReadResponseParams (nil for 0).
 func MTRGroupKeyManagementClusterKeySetReadResponseParamsFromID(id objc.ID) *MTRGroupKeyManagementClusterKeySetReadResponseParams {
 	if id == 0 {
 		return nil

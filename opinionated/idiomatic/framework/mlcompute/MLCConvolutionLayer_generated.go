@@ -17,11 +17,11 @@ type ConvolutionLayer struct {
 // Unwrap returns the underlying [raw.MLCConvolutionLayer].
 func (x *ConvolutionLayer) Unwrap() *raw.MLCConvolutionLayer { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ConvolutionLayer) ID() objc.ID { return x.inner.Ptr() }
 
-// ConvolutionLayerFromID adopts an existing toll-free-bridged object id as a ConvolutionLayer (nil for 0).
+// ConvolutionLayerFromID adopts an existing object pointer as a ConvolutionLayer (nil for 0).
 func ConvolutionLayerFromID(id objc.ID) *ConvolutionLayer {
 	if id == 0 {
 		return nil

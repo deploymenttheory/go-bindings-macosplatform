@@ -17,11 +17,11 @@ type GlyphGenerator struct {
 // Unwrap returns the underlying [raw.NSGlyphGenerator].
 func (x *GlyphGenerator) Unwrap() *raw.NSGlyphGenerator { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *GlyphGenerator) ID() objc.ID { return x.inner.Ptr() }
 
-// GlyphGeneratorFromID adopts an existing toll-free-bridged object id as a GlyphGenerator (nil for 0).
+// GlyphGeneratorFromID adopts an existing object pointer as a GlyphGenerator (nil for 0).
 func GlyphGeneratorFromID(id objc.ID) *GlyphGenerator {
 	if id == 0 {
 		return nil

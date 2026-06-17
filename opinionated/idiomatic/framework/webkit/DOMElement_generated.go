@@ -20,11 +20,11 @@ type DOMElement struct {
 // Unwrap returns the underlying [raw.DOMElement].
 func (x *DOMElement) Unwrap() *raw.DOMElement { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DOMElement) ID() objc.ID { return x.inner.Ptr() }
 
-// DOMElementFromID adopts an existing toll-free-bridged object id as a DOMElement (nil for 0).
+// DOMElementFromID adopts an existing object pointer as a DOMElement (nil for 0).
 func DOMElementFromID(id objc.ID) *DOMElement {
 	if id == 0 {
 		return nil

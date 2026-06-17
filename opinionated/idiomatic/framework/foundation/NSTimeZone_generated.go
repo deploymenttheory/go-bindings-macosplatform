@@ -18,11 +18,11 @@ type TimeZone struct {
 // Unwrap returns the underlying [raw.NSTimeZone].
 func (x *TimeZone) Unwrap() *raw.NSTimeZone { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *TimeZone) ID() objc.ID { return x.inner.Ptr() }
 
-// TimeZoneFromID adopts an existing toll-free-bridged object id as a TimeZone (nil for 0).
+// TimeZoneFromID adopts an existing object pointer as a TimeZone (nil for 0).
 func TimeZoneFromID(id objc.ID) *TimeZone {
 	if id == 0 {
 		return nil

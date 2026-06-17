@@ -17,11 +17,11 @@ type MetadataRange struct {
 // Unwrap returns the underlying [raw.FSMetadataRange].
 func (x *MetadataRange) Unwrap() *raw.FSMetadataRange { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MetadataRange) ID() objc.ID { return x.inner.Ptr() }
 
-// MetadataRangeFromID adopts an existing toll-free-bridged object id as a MetadataRange (nil for 0).
+// MetadataRangeFromID adopts an existing object pointer as a MetadataRange (nil for 0).
 func MetadataRangeFromID(id objc.ID) *MetadataRange {
 	if id == 0 {
 		return nil

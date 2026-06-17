@@ -18,11 +18,11 @@ type MTRRVCCleanModeClusterChangeToModeParams struct {
 // Unwrap returns the underlying [raw.MTRRVCCleanModeClusterChangeToModeParams].
 func (x *MTRRVCCleanModeClusterChangeToModeParams) Unwrap() *raw.MTRRVCCleanModeClusterChangeToModeParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRRVCCleanModeClusterChangeToModeParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRRVCCleanModeClusterChangeToModeParamsFromID adopts an existing toll-free-bridged object id as a MTRRVCCleanModeClusterChangeToModeParams (nil for 0).
+// MTRRVCCleanModeClusterChangeToModeParamsFromID adopts an existing object pointer as a MTRRVCCleanModeClusterChangeToModeParams (nil for 0).
 func MTRRVCCleanModeClusterChangeToModeParamsFromID(id objc.ID) *MTRRVCCleanModeClusterChangeToModeParams {
 	if id == 0 {
 		return nil

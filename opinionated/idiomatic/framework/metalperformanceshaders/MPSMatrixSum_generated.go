@@ -21,11 +21,11 @@ type MatrixSum struct {
 // Unwrap returns the underlying [raw.MPSMatrixSum].
 func (x *MatrixSum) Unwrap() *raw.MPSMatrixSum { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MatrixSum) ID() objc.ID { return x.inner.Ptr() }
 
-// MatrixSumFromID adopts an existing toll-free-bridged object id as a MatrixSum (nil for 0).
+// MatrixSumFromID adopts an existing object pointer as a MatrixSum (nil for 0).
 func MatrixSumFromID(id objc.ID) *MatrixSum {
 	if id == 0 {
 		return nil

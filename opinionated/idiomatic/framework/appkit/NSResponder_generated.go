@@ -19,11 +19,11 @@ type Responder struct {
 // Unwrap returns the underlying [raw.NSResponder].
 func (x *Responder) Unwrap() *raw.NSResponder { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Responder) ID() objc.ID { return x.inner.Ptr() }
 
-// ResponderFromID adopts an existing toll-free-bridged object id as a Responder (nil for 0).
+// ResponderFromID adopts an existing object pointer as a Responder (nil for 0).
 func ResponderFromID(id objc.ID) *Responder {
 	if id == 0 {
 		return nil

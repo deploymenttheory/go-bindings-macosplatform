@@ -19,11 +19,11 @@ type LocalizedString struct {
 // Unwrap returns the underlying [raw.CSLocalizedString].
 func (x *LocalizedString) Unwrap() *raw.CSLocalizedString { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *LocalizedString) ID() objc.ID { return x.inner.Ptr() }
 
-// LocalizedStringFromID adopts an existing toll-free-bridged object id as a LocalizedString (nil for 0).
+// LocalizedStringFromID adopts an existing object pointer as a LocalizedString (nil for 0).
 func LocalizedStringFromID(id objc.ID) *LocalizedString {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type PlaybackCoordinationMedium struct {
 // Unwrap returns the underlying [raw.AVPlaybackCoordinationMedium].
 func (x *PlaybackCoordinationMedium) Unwrap() *raw.AVPlaybackCoordinationMedium { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PlaybackCoordinationMedium) ID() objc.ID { return x.inner.Ptr() }
 
-// PlaybackCoordinationMediumFromID adopts an existing toll-free-bridged object id as a PlaybackCoordinationMedium (nil for 0).
+// PlaybackCoordinationMediumFromID adopts an existing object pointer as a PlaybackCoordinationMedium (nil for 0).
 func PlaybackCoordinationMediumFromID(id objc.ID) *PlaybackCoordinationMedium {
 	if id == 0 {
 		return nil

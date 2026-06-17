@@ -17,11 +17,11 @@ type AnimationPlayer struct {
 // Unwrap returns the underlying [raw.SCNAnimationPlayer].
 func (x *AnimationPlayer) Unwrap() *raw.SCNAnimationPlayer { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AnimationPlayer) ID() objc.ID { return x.inner.Ptr() }
 
-// AnimationPlayerFromID adopts an existing toll-free-bridged object id as a AnimationPlayer (nil for 0).
+// AnimationPlayerFromID adopts an existing object pointer as a AnimationPlayer (nil for 0).
 func AnimationPlayerFromID(id objc.ID) *AnimationPlayer {
 	if id == 0 {
 		return nil

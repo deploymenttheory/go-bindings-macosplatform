@@ -18,11 +18,11 @@ type Histogram struct {
 // Unwrap returns the underlying [raw.MXHistogram].
 func (x *Histogram) Unwrap() *raw.MXHistogram[objc.ID] { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Histogram) ID() objc.ID { return x.inner.Ptr() }
 
-// HistogramFromID adopts an existing toll-free-bridged object id as a Histogram (nil for 0).
+// HistogramFromID adopts an existing object pointer as a Histogram (nil for 0).
 func HistogramFromID(id objc.ID) *Histogram {
 	if id == 0 {
 		return nil

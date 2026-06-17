@@ -20,11 +20,11 @@ type WebHistory struct {
 // Unwrap returns the underlying [raw.STWebHistory].
 func (x *WebHistory) Unwrap() *raw.STWebHistory { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *WebHistory) ID() objc.ID { return x.inner.Ptr() }
 
-// WebHistoryFromID adopts an existing toll-free-bridged object id as a WebHistory (nil for 0).
+// WebHistoryFromID adopts an existing object pointer as a WebHistory (nil for 0).
 func WebHistoryFromID(id objc.ID) *WebHistory {
 	if id == 0 {
 		return nil

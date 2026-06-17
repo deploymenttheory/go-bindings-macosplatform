@@ -17,11 +17,11 @@ type SymbolRotateEffect struct {
 // Unwrap returns the underlying [raw.NSSymbolRotateEffect].
 func (x *SymbolRotateEffect) Unwrap() *raw.NSSymbolRotateEffect { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SymbolRotateEffect) ID() objc.ID { return x.inner.Ptr() }
 
-// SymbolRotateEffectFromID adopts an existing toll-free-bridged object id as a SymbolRotateEffect (nil for 0).
+// SymbolRotateEffectFromID adopts an existing object pointer as a SymbolRotateEffect (nil for 0).
 func SymbolRotateEffectFromID(id objc.ID) *SymbolRotateEffect {
 	if id == 0 {
 		return nil

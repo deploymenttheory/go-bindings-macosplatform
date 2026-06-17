@@ -18,11 +18,11 @@ type MutableConfiguration struct {
 // Unwrap returns the underlying [raw.CWMutableConfiguration].
 func (x *MutableConfiguration) Unwrap() *raw.CWMutableConfiguration { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MutableConfiguration) ID() objc.ID { return x.inner.Ptr() }
 
-// MutableConfigurationFromID adopts an existing toll-free-bridged object id as a MutableConfiguration (nil for 0).
+// MutableConfigurationFromID adopts an existing object pointer as a MutableConfiguration (nil for 0).
 func MutableConfigurationFromID(id objc.ID) *MutableConfiguration {
 	if id == 0 {
 		return nil

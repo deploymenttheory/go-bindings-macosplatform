@@ -20,11 +20,11 @@ type MetricEvent struct {
 // Unwrap returns the underlying [raw.AVMetricEvent].
 func (x *MetricEvent) Unwrap() *raw.AVMetricEvent { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MetricEvent) ID() objc.ID { return x.inner.Ptr() }
 
-// MetricEventFromID adopts an existing toll-free-bridged object id as a MetricEvent (nil for 0).
+// MetricEventFromID adopts an existing object pointer as a MetricEvent (nil for 0).
 func MetricEventFromID(id objc.ID) *MetricEvent {
 	if id == 0 {
 		return nil

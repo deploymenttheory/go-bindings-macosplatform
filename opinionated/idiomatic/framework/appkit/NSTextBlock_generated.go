@@ -19,11 +19,11 @@ type TextBlock struct {
 // Unwrap returns the underlying [raw.NSTextBlock].
 func (x *TextBlock) Unwrap() *raw.NSTextBlock { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *TextBlock) ID() objc.ID { return x.inner.Ptr() }
 
-// TextBlockFromID adopts an existing toll-free-bridged object id as a TextBlock (nil for 0).
+// TextBlockFromID adopts an existing object pointer as a TextBlock (nil for 0).
 func TextBlockFromID(id objc.ID) *TextBlock {
 	if id == 0 {
 		return nil

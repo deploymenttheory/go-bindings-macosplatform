@@ -20,11 +20,11 @@ type ColorSpace struct {
 // Unwrap returns the underlying [raw.NSColorSpace].
 func (x *ColorSpace) Unwrap() *raw.NSColorSpace { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ColorSpace) ID() objc.ID { return x.inner.Ptr() }
 
-// ColorSpaceFromID adopts an existing toll-free-bridged object id as a ColorSpace (nil for 0).
+// ColorSpaceFromID adopts an existing object pointer as a ColorSpace (nil for 0).
 func ColorSpaceFromID(id objc.ID) *ColorSpace {
 	if id == 0 {
 		return nil

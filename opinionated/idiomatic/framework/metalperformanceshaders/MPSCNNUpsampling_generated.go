@@ -19,11 +19,11 @@ type CNNUpsampling struct {
 // Unwrap returns the underlying [raw.MPSCNNUpsampling].
 func (x *CNNUpsampling) Unwrap() *raw.MPSCNNUpsampling { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CNNUpsampling) ID() objc.ID { return x.inner.Ptr() }
 
-// CNNUpsamplingFromID adopts an existing toll-free-bridged object id as a CNNUpsampling (nil for 0).
+// CNNUpsamplingFromID adopts an existing object pointer as a CNNUpsampling (nil for 0).
 func CNNUpsamplingFromID(id objc.ID) *CNNUpsampling {
 	if id == 0 {
 		return nil

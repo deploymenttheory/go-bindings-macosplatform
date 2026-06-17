@@ -19,11 +19,11 @@ type RoutePickerView struct {
 // Unwrap returns the underlying [raw.AVRoutePickerView].
 func (x *RoutePickerView) Unwrap() *raw.AVRoutePickerView { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *RoutePickerView) ID() objc.ID { return x.inner.Ptr() }
 
-// RoutePickerViewFromID adopts an existing toll-free-bridged object id as a RoutePickerView (nil for 0).
+// RoutePickerViewFromID adopts an existing object pointer as a RoutePickerView (nil for 0).
 func RoutePickerViewFromID(id objc.ID) *RoutePickerView {
 	if id == 0 {
 		return nil

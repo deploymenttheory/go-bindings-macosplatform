@@ -18,11 +18,11 @@ type NNAdditionGradientNode struct {
 // Unwrap returns the underlying [raw.MPSNNAdditionGradientNode].
 func (x *NNAdditionGradientNode) Unwrap() *raw.MPSNNAdditionGradientNode { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NNAdditionGradientNode) ID() objc.ID { return x.inner.Ptr() }
 
-// NNAdditionGradientNodeFromID adopts an existing toll-free-bridged object id as a NNAdditionGradientNode (nil for 0).
+// NNAdditionGradientNodeFromID adopts an existing object pointer as a NNAdditionGradientNode (nil for 0).
 func NNAdditionGradientNodeFromID(id objc.ID) *NNAdditionGradientNode {
 	if id == 0 {
 		return nil

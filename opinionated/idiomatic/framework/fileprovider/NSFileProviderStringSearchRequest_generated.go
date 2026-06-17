@@ -18,11 +18,11 @@ type FileProviderStringSearchRequest struct {
 // Unwrap returns the underlying [raw.NSFileProviderStringSearchRequest].
 func (x *FileProviderStringSearchRequest) Unwrap() *raw.NSFileProviderStringSearchRequest { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *FileProviderStringSearchRequest) ID() objc.ID { return x.inner.Ptr() }
 
-// FileProviderStringSearchRequestFromID adopts an existing toll-free-bridged object id as a FileProviderStringSearchRequest (nil for 0).
+// FileProviderStringSearchRequestFromID adopts an existing object pointer as a FileProviderStringSearchRequest (nil for 0).
 func FileProviderStringSearchRequestFromID(id objc.ID) *FileProviderStringSearchRequest {
 	if id == 0 {
 		return nil

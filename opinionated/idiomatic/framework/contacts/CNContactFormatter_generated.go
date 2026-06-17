@@ -19,11 +19,11 @@ type ContactFormatter struct {
 // Unwrap returns the underlying [raw.CNContactFormatter].
 func (x *ContactFormatter) Unwrap() *raw.CNContactFormatter { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ContactFormatter) ID() objc.ID { return x.inner.Ptr() }
 
-// ContactFormatterFromID adopts an existing toll-free-bridged object id as a ContactFormatter (nil for 0).
+// ContactFormatterFromID adopts an existing object pointer as a ContactFormatter (nil for 0).
 func ContactFormatterFromID(id objc.ID) *ContactFormatter {
 	if id == 0 {
 		return nil

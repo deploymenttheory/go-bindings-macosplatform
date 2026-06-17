@@ -19,11 +19,11 @@ type LinguisticTagger struct {
 // Unwrap returns the underlying [raw.NSLinguisticTagger].
 func (x *LinguisticTagger) Unwrap() *raw.NSLinguisticTagger { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *LinguisticTagger) ID() objc.ID { return x.inner.Ptr() }
 
-// LinguisticTaggerFromID adopts an existing toll-free-bridged object id as a LinguisticTagger (nil for 0).
+// LinguisticTaggerFromID adopts an existing object pointer as a LinguisticTagger (nil for 0).
 func LinguisticTaggerFromID(id objc.ID) *LinguisticTagger {
 	if id == 0 {
 		return nil

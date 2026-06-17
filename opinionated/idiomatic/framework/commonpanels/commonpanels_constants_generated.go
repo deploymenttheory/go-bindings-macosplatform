@@ -10,54 +10,54 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// KFontPanelATSUFontIDKey returns the CoreFoundation constant kFontPanelATSUFontIDKey as a toll-free-bridged objc.ID.
+// KFontPanelATSUFontIDKey returns the value of the CoreFoundation reference constant kFontPanelATSUFontIDKey as an objc.ID.
 func KFontPanelATSUFontIDKey() objc.ID { return purego.CFConstant(raw.KFontPanelATSUFontIDKey()) }
 
-// KFontPanelVariationAxesKey returns the CoreFoundation constant kFontPanelVariationAxesKey as a toll-free-bridged objc.ID.
+// KFontPanelVariationAxesKey returns the value of the CoreFoundation reference constant kFontPanelVariationAxesKey as an objc.ID.
 func KFontPanelVariationAxesKey() objc.ID { return purego.CFConstant(raw.KFontPanelVariationAxesKey()) }
 
-// KFontPanelVariationValuesKey returns the CoreFoundation constant kFontPanelVariationValuesKey as a toll-free-bridged objc.ID.
+// KFontPanelVariationValuesKey returns the value of the CoreFoundation reference constant kFontPanelVariationValuesKey as an objc.ID.
 func KFontPanelVariationValuesKey() objc.ID { return purego.CFConstant(raw.KFontPanelVariationValuesKey()) }
 
-// KFontPanelFeatureTypesKey returns the CoreFoundation constant kFontPanelFeatureTypesKey as a toll-free-bridged objc.ID.
+// KFontPanelFeatureTypesKey returns the value of the CoreFoundation reference constant kFontPanelFeatureTypesKey as an objc.ID.
 func KFontPanelFeatureTypesKey() objc.ID { return purego.CFConstant(raw.KFontPanelFeatureTypesKey()) }
 
-// KFontPanelFeatureSelectorsKey returns the CoreFoundation constant kFontPanelFeatureSelectorsKey as a toll-free-bridged objc.ID.
+// KFontPanelFeatureSelectorsKey returns the value of the CoreFoundation reference constant kFontPanelFeatureSelectorsKey as an objc.ID.
 func KFontPanelFeatureSelectorsKey() objc.ID { return purego.CFConstant(raw.KFontPanelFeatureSelectorsKey()) }
 
-// KFontPanelAttributesKey returns the CoreFoundation constant kFontPanelAttributesKey as a toll-free-bridged objc.ID.
+// KFontPanelAttributesKey returns the value of the CoreFoundation reference constant kFontPanelAttributesKey as an objc.ID.
 func KFontPanelAttributesKey() objc.ID { return purego.CFConstant(raw.KFontPanelAttributesKey()) }
 
-// KFontPanelAttributeTagsKey returns the CoreFoundation constant kFontPanelAttributeTagsKey as a toll-free-bridged objc.ID.
+// KFontPanelAttributeTagsKey returns the value of the CoreFoundation reference constant kFontPanelAttributeTagsKey as an objc.ID.
 func KFontPanelAttributeTagsKey() objc.ID { return purego.CFConstant(raw.KFontPanelAttributeTagsKey()) }
 
-// KFontPanelAttributeSizesKey returns the CoreFoundation constant kFontPanelAttributeSizesKey as a toll-free-bridged objc.ID.
+// KFontPanelAttributeSizesKey returns the value of the CoreFoundation reference constant kFontPanelAttributeSizesKey as an objc.ID.
 func KFontPanelAttributeSizesKey() objc.ID { return purego.CFConstant(raw.KFontPanelAttributeSizesKey()) }
 
-// KFontPanelAttributeValuesKey returns the CoreFoundation constant kFontPanelAttributeValuesKey as a toll-free-bridged objc.ID.
+// KFontPanelAttributeValuesKey returns the value of the CoreFoundation reference constant kFontPanelAttributeValuesKey as an objc.ID.
 func KFontPanelAttributeValuesKey() objc.ID { return purego.CFConstant(raw.KFontPanelAttributeValuesKey()) }
 
-// KFontPanelMouseTrackingState returns the CoreFoundation constant kFontPanelMouseTrackingState as a toll-free-bridged objc.ID.
+// KFontPanelMouseTrackingState returns the value of the CoreFoundation reference constant kFontPanelMouseTrackingState as an objc.ID.
 func KFontPanelMouseTrackingState() objc.ID { return purego.CFConstant(raw.KFontPanelMouseTrackingState()) }
 
-// KFontPanelBackgroundColorAttributeName returns the CoreFoundation constant kFontPanelBackgroundColorAttributeName as a toll-free-bridged objc.ID.
+// KFontPanelBackgroundColorAttributeName returns the value of the CoreFoundation reference constant kFontPanelBackgroundColorAttributeName as an objc.ID.
 func KFontPanelBackgroundColorAttributeName() objc.ID { return purego.CFConstant(raw.KFontPanelBackgroundColorAttributeName()) }
 
-// KFCFontFamilyAttribute returns the CoreFoundation constant kFCFontFamilyAttribute as a toll-free-bridged objc.ID.
+// KFCFontFamilyAttribute returns the value of the CoreFoundation reference constant kFCFontFamilyAttribute as an objc.ID.
 func KFCFontFamilyAttribute() objc.ID { return purego.CFConstant(raw.KFCFontFamilyAttribute()) }
 
-// KFCFontNameAttribute returns the CoreFoundation constant kFCFontNameAttribute as a toll-free-bridged objc.ID.
+// KFCFontNameAttribute returns the value of the CoreFoundation reference constant kFCFontNameAttribute as an objc.ID.
 func KFCFontNameAttribute() objc.ID { return purego.CFConstant(raw.KFCFontNameAttribute()) }
 
-// KFCFontFaceAttribute returns the CoreFoundation constant kFCFontFaceAttribute as a toll-free-bridged objc.ID.
+// KFCFontFaceAttribute returns the value of the CoreFoundation reference constant kFCFontFaceAttribute as an objc.ID.
 func KFCFontFaceAttribute() objc.ID { return purego.CFConstant(raw.KFCFontFaceAttribute()) }
 
-// KFCFontSizeAttribute returns the CoreFoundation constant kFCFontSizeAttribute as a toll-free-bridged objc.ID.
+// KFCFontSizeAttribute returns the value of the CoreFoundation reference constant kFCFontSizeAttribute as an objc.ID.
 func KFCFontSizeAttribute() objc.ID { return purego.CFConstant(raw.KFCFontSizeAttribute()) }
 
-// KFCFontVisibleNameAttribute returns the CoreFoundation constant kFCFontVisibleNameAttribute as a toll-free-bridged objc.ID.
+// KFCFontVisibleNameAttribute returns the value of the CoreFoundation reference constant kFCFontVisibleNameAttribute as an objc.ID.
 func KFCFontVisibleNameAttribute() objc.ID { return purego.CFConstant(raw.KFCFontVisibleNameAttribute()) }
 
-// KFCFontCGColorAttribute returns the CoreFoundation constant kFCFontCGColorAttribute as a toll-free-bridged objc.ID.
+// KFCFontCGColorAttribute returns the value of the CoreFoundation reference constant kFCFontCGColorAttribute as an objc.ID.
 func KFCFontCGColorAttribute() objc.ID { return purego.CFConstant(raw.KFCFontCGColorAttribute()) }
 

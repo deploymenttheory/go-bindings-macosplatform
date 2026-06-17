@@ -17,11 +17,11 @@ type Color struct {
 // Unwrap returns the underlying [raw.GCColor].
 func (x *Color) Unwrap() *raw.GCColor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Color) ID() objc.ID { return x.inner.Ptr() }
 
-// ColorFromID adopts an existing toll-free-bridged object id as a Color (nil for 0).
+// ColorFromID adopts an existing object pointer as a Color (nil for 0).
 func ColorFromID(id objc.ID) *Color {
 	if id == 0 {
 		return nil

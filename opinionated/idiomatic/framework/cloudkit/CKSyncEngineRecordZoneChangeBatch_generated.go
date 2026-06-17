@@ -19,11 +19,11 @@ type SyncEngineRecordZoneChangeBatch struct {
 // Unwrap returns the underlying [raw.CKSyncEngineRecordZoneChangeBatch].
 func (x *SyncEngineRecordZoneChangeBatch) Unwrap() *raw.CKSyncEngineRecordZoneChangeBatch { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SyncEngineRecordZoneChangeBatch) ID() objc.ID { return x.inner.Ptr() }
 
-// SyncEngineRecordZoneChangeBatchFromID adopts an existing toll-free-bridged object id as a SyncEngineRecordZoneChangeBatch (nil for 0).
+// SyncEngineRecordZoneChangeBatchFromID adopts an existing object pointer as a SyncEngineRecordZoneChangeBatch (nil for 0).
 func SyncEngineRecordZoneChangeBatchFromID(id objc.ID) *SyncEngineRecordZoneChangeBatch {
 	if id == 0 {
 		return nil

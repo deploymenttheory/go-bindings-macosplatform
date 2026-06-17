@@ -17,11 +17,11 @@ type DatabaseNotification struct {
 // Unwrap returns the underlying [raw.CKDatabaseNotification].
 func (x *DatabaseNotification) Unwrap() *raw.CKDatabaseNotification { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DatabaseNotification) ID() objc.ID { return x.inner.Ptr() }
 
-// DatabaseNotificationFromID adopts an existing toll-free-bridged object id as a DatabaseNotification (nil for 0).
+// DatabaseNotificationFromID adopts an existing object pointer as a DatabaseNotification (nil for 0).
 func DatabaseNotificationFromID(id objc.ID) *DatabaseNotification {
 	if id == 0 {
 		return nil

@@ -17,11 +17,11 @@ type AuthorizationAppleIDButton struct {
 // Unwrap returns the underlying [raw.ASAuthorizationAppleIDButton].
 func (x *AuthorizationAppleIDButton) Unwrap() *raw.ASAuthorizationAppleIDButton { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AuthorizationAppleIDButton) ID() objc.ID { return x.inner.Ptr() }
 
-// AuthorizationAppleIDButtonFromID adopts an existing toll-free-bridged object id as a AuthorizationAppleIDButton (nil for 0).
+// AuthorizationAppleIDButtonFromID adopts an existing object pointer as a AuthorizationAppleIDButton (nil for 0).
 func AuthorizationAppleIDButtonFromID(id objc.ID) *AuthorizationAppleIDButton {
 	if id == 0 {
 		return nil

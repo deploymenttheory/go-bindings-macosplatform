@@ -19,11 +19,11 @@ type MatchmakerViewController struct {
 // Unwrap returns the underlying [raw.GKMatchmakerViewController].
 func (x *MatchmakerViewController) Unwrap() *raw.GKMatchmakerViewController { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MatchmakerViewController) ID() objc.ID { return x.inner.Ptr() }
 
-// MatchmakerViewControllerFromID adopts an existing toll-free-bridged object id as a MatchmakerViewController (nil for 0).
+// MatchmakerViewControllerFromID adopts an existing object pointer as a MatchmakerViewController (nil for 0).
 func MatchmakerViewControllerFromID(id objc.ID) *MatchmakerViewController {
 	if id == 0 {
 		return nil

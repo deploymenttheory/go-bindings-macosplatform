@@ -17,11 +17,11 @@ type NEEthernetTunnelProvider struct {
 // Unwrap returns the underlying [raw.NEEthernetTunnelProvider].
 func (x *NEEthernetTunnelProvider) Unwrap() *raw.NEEthernetTunnelProvider { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NEEthernetTunnelProvider) ID() objc.ID { return x.inner.Ptr() }
 
-// NEEthernetTunnelProviderFromID adopts an existing toll-free-bridged object id as a NEEthernetTunnelProvider (nil for 0).
+// NEEthernetTunnelProviderFromID adopts an existing object pointer as a NEEthernetTunnelProvider (nil for 0).
 func NEEthernetTunnelProviderFromID(id objc.ID) *NEEthernetTunnelProvider {
 	if id == 0 {
 		return nil

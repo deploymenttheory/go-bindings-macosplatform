@@ -21,11 +21,11 @@ type MatrixCopyToImage struct {
 // Unwrap returns the underlying [raw.MPSMatrixCopyToImage].
 func (x *MatrixCopyToImage) Unwrap() *raw.MPSMatrixCopyToImage { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MatrixCopyToImage) ID() objc.ID { return x.inner.Ptr() }
 
-// MatrixCopyToImageFromID adopts an existing toll-free-bridged object id as a MatrixCopyToImage (nil for 0).
+// MatrixCopyToImageFromID adopts an existing object pointer as a MatrixCopyToImage (nil for 0).
 func MatrixCopyToImageFromID(id objc.ID) *MatrixCopyToImage {
 	if id == 0 {
 		return nil

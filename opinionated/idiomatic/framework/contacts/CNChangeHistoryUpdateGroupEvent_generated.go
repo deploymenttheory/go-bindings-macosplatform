@@ -17,11 +17,11 @@ type ChangeHistoryUpdateGroupEvent struct {
 // Unwrap returns the underlying [raw.CNChangeHistoryUpdateGroupEvent].
 func (x *ChangeHistoryUpdateGroupEvent) Unwrap() *raw.CNChangeHistoryUpdateGroupEvent { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ChangeHistoryUpdateGroupEvent) ID() objc.ID { return x.inner.Ptr() }
 
-// ChangeHistoryUpdateGroupEventFromID adopts an existing toll-free-bridged object id as a ChangeHistoryUpdateGroupEvent (nil for 0).
+// ChangeHistoryUpdateGroupEventFromID adopts an existing object pointer as a ChangeHistoryUpdateGroupEvent (nil for 0).
 func ChangeHistoryUpdateGroupEventFromID(id objc.ID) *ChangeHistoryUpdateGroupEvent {
 	if id == 0 {
 		return nil

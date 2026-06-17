@@ -20,11 +20,11 @@ type NNOptimizerRMSProp struct {
 // Unwrap returns the underlying [raw.MPSNNOptimizerRMSProp].
 func (x *NNOptimizerRMSProp) Unwrap() *raw.MPSNNOptimizerRMSProp { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NNOptimizerRMSProp) ID() objc.ID { return x.inner.Ptr() }
 
-// NNOptimizerRMSPropFromID adopts an existing toll-free-bridged object id as a NNOptimizerRMSProp (nil for 0).
+// NNOptimizerRMSPropFromID adopts an existing object pointer as a NNOptimizerRMSProp (nil for 0).
 func NNOptimizerRMSPropFromID(id objc.ID) *NNOptimizerRMSProp {
 	if id == 0 {
 		return nil

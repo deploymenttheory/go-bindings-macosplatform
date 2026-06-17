@@ -10,30 +10,30 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// KSKMinTermLength returns the CoreFoundation constant kSKMinTermLength as a toll-free-bridged objc.ID.
+// KSKMinTermLength returns the value of the CoreFoundation reference constant kSKMinTermLength as an objc.ID.
 func KSKMinTermLength() objc.ID { return purego.CFConstant(raw.KSKMinTermLength()) }
 
-// KSKSubstitutions returns the CoreFoundation constant kSKSubstitutions as a toll-free-bridged objc.ID.
+// KSKSubstitutions returns the value of the CoreFoundation reference constant kSKSubstitutions as an objc.ID.
 func KSKSubstitutions() objc.ID { return purego.CFConstant(raw.KSKSubstitutions()) }
 
-// KSKStopWords returns the CoreFoundation constant kSKStopWords as a toll-free-bridged objc.ID.
+// KSKStopWords returns the value of the CoreFoundation reference constant kSKStopWords as an objc.ID.
 func KSKStopWords() objc.ID { return purego.CFConstant(raw.KSKStopWords()) }
 
-// KSKProximityIndexing returns the CoreFoundation constant kSKProximityIndexing as a toll-free-bridged objc.ID.
+// KSKProximityIndexing returns the value of the CoreFoundation reference constant kSKProximityIndexing as an objc.ID.
 func KSKProximityIndexing() objc.ID { return purego.CFConstant(raw.KSKProximityIndexing()) }
 
-// KSKMaximumTerms returns the CoreFoundation constant kSKMaximumTerms as a toll-free-bridged objc.ID.
+// KSKMaximumTerms returns the value of the CoreFoundation reference constant kSKMaximumTerms as an objc.ID.
 func KSKMaximumTerms() objc.ID { return purego.CFConstant(raw.KSKMaximumTerms()) }
 
-// KSKTermChars returns the CoreFoundation constant kSKTermChars as a toll-free-bridged objc.ID.
+// KSKTermChars returns the value of the CoreFoundation reference constant kSKTermChars as an objc.ID.
 func KSKTermChars() objc.ID { return purego.CFConstant(raw.KSKTermChars()) }
 
-// KSKStartTermChars returns the CoreFoundation constant kSKStartTermChars as a toll-free-bridged objc.ID.
+// KSKStartTermChars returns the value of the CoreFoundation reference constant kSKStartTermChars as an objc.ID.
 func KSKStartTermChars() objc.ID { return purego.CFConstant(raw.KSKStartTermChars()) }
 
-// KSKEndTermChars returns the CoreFoundation constant kSKEndTermChars as a toll-free-bridged objc.ID.
+// KSKEndTermChars returns the value of the CoreFoundation reference constant kSKEndTermChars as an objc.ID.
 func KSKEndTermChars() objc.ID { return purego.CFConstant(raw.KSKEndTermChars()) }
 
-// KSKLanguageTypes returns the CoreFoundation constant kSKLanguageTypes as a toll-free-bridged objc.ID.
+// KSKLanguageTypes returns the value of the CoreFoundation reference constant kSKLanguageTypes as an objc.ID.
 func KSKLanguageTypes() objc.ID { return purego.CFConstant(raw.KSKLanguageTypes()) }
 

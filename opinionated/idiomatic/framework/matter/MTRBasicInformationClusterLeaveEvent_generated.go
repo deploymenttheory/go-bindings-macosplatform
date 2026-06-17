@@ -18,11 +18,11 @@ type MTRBasicInformationClusterLeaveEvent struct {
 // Unwrap returns the underlying [raw.MTRBasicInformationClusterLeaveEvent].
 func (x *MTRBasicInformationClusterLeaveEvent) Unwrap() *raw.MTRBasicInformationClusterLeaveEvent { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRBasicInformationClusterLeaveEvent) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRBasicInformationClusterLeaveEventFromID adopts an existing toll-free-bridged object id as a MTRBasicInformationClusterLeaveEvent (nil for 0).
+// MTRBasicInformationClusterLeaveEventFromID adopts an existing object pointer as a MTRBasicInformationClusterLeaveEvent (nil for 0).
 func MTRBasicInformationClusterLeaveEventFromID(id objc.ID) *MTRBasicInformationClusterLeaveEvent {
 	if id == 0 {
 		return nil

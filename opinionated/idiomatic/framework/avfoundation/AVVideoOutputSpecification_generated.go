@@ -19,11 +19,11 @@ type VideoOutputSpecification struct {
 // Unwrap returns the underlying [raw.AVVideoOutputSpecification].
 func (x *VideoOutputSpecification) Unwrap() *raw.AVVideoOutputSpecification { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *VideoOutputSpecification) ID() objc.ID { return x.inner.Ptr() }
 
-// VideoOutputSpecificationFromID adopts an existing toll-free-bridged object id as a VideoOutputSpecification (nil for 0).
+// VideoOutputSpecificationFromID adopts an existing object pointer as a VideoOutputSpecification (nil for 0).
 func VideoOutputSpecificationFromID(id objc.ID) *VideoOutputSpecification {
 	if id == 0 {
 		return nil

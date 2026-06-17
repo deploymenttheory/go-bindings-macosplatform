@@ -17,11 +17,11 @@ type OptimizationHints struct {
 // Unwrap returns the underlying [raw.MLOptimizationHints].
 func (x *OptimizationHints) Unwrap() *raw.MLOptimizationHints { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *OptimizationHints) ID() objc.ID { return x.inner.Ptr() }
 
-// OptimizationHintsFromID adopts an existing toll-free-bridged object id as a OptimizationHints (nil for 0).
+// OptimizationHintsFromID adopts an existing object pointer as a OptimizationHints (nil for 0).
 func OptimizationHintsFromID(id objc.ID) *OptimizationHints {
 	if id == 0 {
 		return nil

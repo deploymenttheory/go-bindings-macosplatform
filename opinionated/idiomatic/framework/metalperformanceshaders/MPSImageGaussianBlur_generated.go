@@ -21,11 +21,11 @@ type ImageGaussianBlur struct {
 // Unwrap returns the underlying [raw.MPSImageGaussianBlur].
 func (x *ImageGaussianBlur) Unwrap() *raw.MPSImageGaussianBlur { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ImageGaussianBlur) ID() objc.ID { return x.inner.Ptr() }
 
-// ImageGaussianBlurFromID adopts an existing toll-free-bridged object id as a ImageGaussianBlur (nil for 0).
+// ImageGaussianBlurFromID adopts an existing object pointer as a ImageGaussianBlur (nil for 0).
 func ImageGaussianBlurFromID(id objc.ID) *ImageGaussianBlur {
 	if id == 0 {
 		return nil

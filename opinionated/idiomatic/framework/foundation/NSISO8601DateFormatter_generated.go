@@ -18,11 +18,11 @@ type ISO8601DateFormatter struct {
 // Unwrap returns the underlying [raw.NSISO8601DateFormatter].
 func (x *ISO8601DateFormatter) Unwrap() *raw.NSISO8601DateFormatter { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ISO8601DateFormatter) ID() objc.ID { return x.inner.Ptr() }
 
-// ISO8601DateFormatterFromID adopts an existing toll-free-bridged object id as a ISO8601DateFormatter (nil for 0).
+// ISO8601DateFormatterFromID adopts an existing object pointer as a ISO8601DateFormatter (nil for 0).
 func ISO8601DateFormatterFromID(id objc.ID) *ISO8601DateFormatter {
 	if id == 0 {
 		return nil

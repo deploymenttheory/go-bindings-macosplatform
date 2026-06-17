@@ -21,11 +21,11 @@ type RAWFilter struct {
 // Unwrap returns the underlying [raw.CIRAWFilter].
 func (x *RAWFilter) Unwrap() *raw.CIRAWFilter { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *RAWFilter) ID() objc.ID { return x.inner.Ptr() }
 
-// RAWFilterFromID adopts an existing toll-free-bridged object id as a RAWFilter (nil for 0).
+// RAWFilterFromID adopts an existing object pointer as a RAWFilter (nil for 0).
 func RAWFilterFromID(id objc.ID) *RAWFilter {
 	if id == 0 {
 		return nil

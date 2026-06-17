@@ -18,11 +18,11 @@ type CNNFullyConnectedNode struct {
 // Unwrap returns the underlying [raw.MPSCNNFullyConnectedNode].
 func (x *CNNFullyConnectedNode) Unwrap() *raw.MPSCNNFullyConnectedNode { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CNNFullyConnectedNode) ID() objc.ID { return x.inner.Ptr() }
 
-// CNNFullyConnectedNodeFromID adopts an existing toll-free-bridged object id as a CNNFullyConnectedNode (nil for 0).
+// CNNFullyConnectedNodeFromID adopts an existing object pointer as a CNNFullyConnectedNode (nil for 0).
 func CNNFullyConnectedNodeFromID(id objc.ID) *CNNFullyConnectedNode {
 	if id == 0 {
 		return nil

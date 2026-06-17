@@ -20,11 +20,11 @@ type Control struct {
 // Unwrap returns the underlying [raw.NSControl].
 func (x *Control) Unwrap() *raw.NSControl { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Control) ID() objc.ID { return x.inner.Ptr() }
 
-// ControlFromID adopts an existing toll-free-bridged object id as a Control (nil for 0).
+// ControlFromID adopts an existing object pointer as a Control (nil for 0).
 func ControlFromID(id objc.ID) *Control {
 	if id == 0 {
 		return nil

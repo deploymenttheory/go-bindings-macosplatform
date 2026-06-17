@@ -18,11 +18,11 @@ type TLVRecord struct {
 // Unwrap returns the underlying [raw.TKTLVRecord].
 func (x *TLVRecord) Unwrap() *raw.TKTLVRecord { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *TLVRecord) ID() objc.ID { return x.inner.Ptr() }
 
-// TLVRecordFromID adopts an existing toll-free-bridged object id as a TLVRecord (nil for 0).
+// TLVRecordFromID adopts an existing object pointer as a TLVRecord (nil for 0).
 func TLVRecordFromID(id objc.ID) *TLVRecord {
 	if id == 0 {
 		return nil

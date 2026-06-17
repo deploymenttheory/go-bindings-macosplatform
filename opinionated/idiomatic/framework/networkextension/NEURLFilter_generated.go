@@ -17,11 +17,11 @@ type NEURLFilter struct {
 // Unwrap returns the underlying [raw.NEURLFilter].
 func (x *NEURLFilter) Unwrap() *raw.NEURLFilter { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NEURLFilter) ID() objc.ID { return x.inner.Ptr() }
 
-// NEURLFilterFromID adopts an existing toll-free-bridged object id as a NEURLFilter (nil for 0).
+// NEURLFilterFromID adopts an existing object pointer as a NEURLFilter (nil for 0).
 func NEURLFilterFromID(id objc.ID) *NEURLFilter {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type ImageArithmetic struct {
 // Unwrap returns the underlying [raw.MPSImageArithmetic].
 func (x *ImageArithmetic) Unwrap() *raw.MPSImageArithmetic { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ImageArithmetic) ID() objc.ID { return x.inner.Ptr() }
 
-// ImageArithmeticFromID adopts an existing toll-free-bridged object id as a ImageArithmetic (nil for 0).
+// ImageArithmeticFromID adopts an existing object pointer as a ImageArithmetic (nil for 0).
 func ImageArithmeticFromID(id objc.ID) *ImageArithmetic {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type RandomNodeDefinition struct {
 // Unwrap returns the underlying [raw.PHASERandomNodeDefinition].
 func (x *RandomNodeDefinition) Unwrap() *raw.PHASERandomNodeDefinition { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *RandomNodeDefinition) ID() objc.ID { return x.inner.Ptr() }
 
-// RandomNodeDefinitionFromID adopts an existing toll-free-bridged object id as a RandomNodeDefinition (nil for 0).
+// RandomNodeDefinitionFromID adopts an existing object pointer as a RandomNodeDefinition (nil for 0).
 func RandomNodeDefinitionFromID(id objc.ID) *RandomNodeDefinition {
 	if id == 0 {
 		return nil

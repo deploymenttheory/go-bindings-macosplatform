@@ -19,11 +19,11 @@ type PDFImageRep struct {
 // Unwrap returns the underlying [raw.NSPDFImageRep].
 func (x *PDFImageRep) Unwrap() *raw.NSPDFImageRep { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PDFImageRep) ID() objc.ID { return x.inner.Ptr() }
 
-// PDFImageRepFromID adopts an existing toll-free-bridged object id as a PDFImageRep (nil for 0).
+// PDFImageRepFromID adopts an existing object pointer as a PDFImageRep (nil for 0).
 func PDFImageRepFromID(id objc.ID) *PDFImageRep {
 	if id == 0 {
 		return nil

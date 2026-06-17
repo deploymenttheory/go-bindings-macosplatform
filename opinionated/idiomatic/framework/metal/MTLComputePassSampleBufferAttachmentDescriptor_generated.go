@@ -17,11 +17,11 @@ type ComputePassSampleBufferAttachmentDescriptor struct {
 // Unwrap returns the underlying [raw.MTLComputePassSampleBufferAttachmentDescriptor].
 func (x *ComputePassSampleBufferAttachmentDescriptor) Unwrap() *raw.MTLComputePassSampleBufferAttachmentDescriptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ComputePassSampleBufferAttachmentDescriptor) ID() objc.ID { return x.inner.Ptr() }
 
-// ComputePassSampleBufferAttachmentDescriptorFromID adopts an existing toll-free-bridged object id as a ComputePassSampleBufferAttachmentDescriptor (nil for 0).
+// ComputePassSampleBufferAttachmentDescriptorFromID adopts an existing object pointer as a ComputePassSampleBufferAttachmentDescriptor (nil for 0).
 func ComputePassSampleBufferAttachmentDescriptorFromID(id objc.ID) *ComputePassSampleBufferAttachmentDescriptor {
 	if id == 0 {
 		return nil

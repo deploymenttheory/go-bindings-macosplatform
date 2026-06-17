@@ -18,11 +18,11 @@ type MutableFileDataBuffer struct {
 // Unwrap returns the underlying [raw.FSMutableFileDataBuffer].
 func (x *MutableFileDataBuffer) Unwrap() *raw.FSMutableFileDataBuffer { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MutableFileDataBuffer) ID() objc.ID { return x.inner.Ptr() }
 
-// MutableFileDataBufferFromID adopts an existing toll-free-bridged object id as a MutableFileDataBuffer (nil for 0).
+// MutableFileDataBufferFromID adopts an existing object pointer as a MutableFileDataBuffer (nil for 0).
 func MutableFileDataBufferFromID(id objc.ID) *MutableFileDataBuffer {
 	if id == 0 {
 		return nil

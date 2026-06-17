@@ -19,11 +19,11 @@ type StateOfMind struct {
 // Unwrap returns the underlying [raw.HKStateOfMind].
 func (x *StateOfMind) Unwrap() *raw.HKStateOfMind { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *StateOfMind) ID() objc.ID { return x.inner.Ptr() }
 
-// StateOfMindFromID adopts an existing toll-free-bridged object id as a StateOfMind (nil for 0).
+// StateOfMindFromID adopts an existing object pointer as a StateOfMind (nil for 0).
 func StateOfMindFromID(id objc.ID) *StateOfMind {
 	if id == 0 {
 		return nil

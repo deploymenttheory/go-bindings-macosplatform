@@ -22,11 +22,11 @@ type MatrixFullyConnectedGradient struct {
 // Unwrap returns the underlying [raw.MPSMatrixFullyConnectedGradient].
 func (x *MatrixFullyConnectedGradient) Unwrap() *raw.MPSMatrixFullyConnectedGradient { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MatrixFullyConnectedGradient) ID() objc.ID { return x.inner.Ptr() }
 
-// MatrixFullyConnectedGradientFromID adopts an existing toll-free-bridged object id as a MatrixFullyConnectedGradient (nil for 0).
+// MatrixFullyConnectedGradientFromID adopts an existing object pointer as a MatrixFullyConnectedGradient (nil for 0).
 func MatrixFullyConnectedGradientFromID(id objc.ID) *MatrixFullyConnectedGradient {
 	if id == 0 {
 		return nil

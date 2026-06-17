@@ -18,11 +18,11 @@ type ObjectType struct {
 // Unwrap returns the underlying [raw.HKObjectType].
 func (x *ObjectType) Unwrap() *raw.HKObjectType { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ObjectType) ID() objc.ID { return x.inner.Ptr() }
 
-// ObjectTypeFromID adopts an existing toll-free-bridged object id as a ObjectType (nil for 0).
+// ObjectTypeFromID adopts an existing object pointer as a ObjectType (nil for 0).
 func ObjectTypeFromID(id objc.ID) *ObjectType {
 	if id == 0 {
 		return nil

@@ -19,11 +19,11 @@ type Address struct {
 // Unwrap returns the underlying [raw.MKAddress].
 func (x *Address) Unwrap() *raw.MKAddress { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Address) ID() objc.ID { return x.inner.Ptr() }
 
-// AddressFromID adopts an existing toll-free-bridged object id as a Address (nil for 0).
+// AddressFromID adopts an existing object pointer as a Address (nil for 0).
 func AddressFromID(id objc.ID) *Address {
 	if id == 0 {
 		return nil

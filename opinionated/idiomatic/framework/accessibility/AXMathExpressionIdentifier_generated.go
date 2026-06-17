@@ -19,11 +19,11 @@ type MathExpressionIdentifier struct {
 // Unwrap returns the underlying [raw.AXMathExpressionIdentifier].
 func (x *MathExpressionIdentifier) Unwrap() *raw.AXMathExpressionIdentifier { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MathExpressionIdentifier) ID() objc.ID { return x.inner.Ptr() }
 
-// MathExpressionIdentifierFromID adopts an existing toll-free-bridged object id as a MathExpressionIdentifier (nil for 0).
+// MathExpressionIdentifierFromID adopts an existing object pointer as a MathExpressionIdentifier (nil for 0).
 func MathExpressionIdentifierFromID(id objc.ID) *MathExpressionIdentifier {
 	if id == 0 {
 		return nil

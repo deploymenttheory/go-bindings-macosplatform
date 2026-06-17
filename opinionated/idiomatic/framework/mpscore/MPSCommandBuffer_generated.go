@@ -18,11 +18,11 @@ type CommandBuffer struct {
 // Unwrap returns the underlying [raw.MPSCommandBuffer].
 func (x *CommandBuffer) Unwrap() *raw.MPSCommandBuffer { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CommandBuffer) ID() objc.ID { return x.inner.Ptr() }
 
-// CommandBufferFromID adopts an existing toll-free-bridged object id as a CommandBuffer (nil for 0).
+// CommandBufferFromID adopts an existing object pointer as a CommandBuffer (nil for 0).
 func CommandBufferFromID(id objc.ID) *CommandBuffer {
 	if id == 0 {
 		return nil

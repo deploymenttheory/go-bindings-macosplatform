@@ -19,11 +19,11 @@ type ComboBox struct {
 // Unwrap returns the underlying [raw.NSComboBox].
 func (x *ComboBox) Unwrap() *raw.NSComboBox { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ComboBox) ID() objc.ID { return x.inner.Ptr() }
 
-// ComboBoxFromID adopts an existing toll-free-bridged object id as a ComboBox (nil for 0).
+// ComboBoxFromID adopts an existing object pointer as a ComboBox (nil for 0).
 func ComboBoxFromID(id objc.ID) *ComboBox {
 	if id == 0 {
 		return nil

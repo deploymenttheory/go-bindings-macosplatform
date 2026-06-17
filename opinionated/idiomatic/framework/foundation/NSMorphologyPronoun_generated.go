@@ -18,11 +18,11 @@ type MorphologyPronoun struct {
 // Unwrap returns the underlying [raw.NSMorphologyPronoun].
 func (x *MorphologyPronoun) Unwrap() *raw.NSMorphologyPronoun { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MorphologyPronoun) ID() objc.ID { return x.inner.Ptr() }
 
-// MorphologyPronounFromID adopts an existing toll-free-bridged object id as a MorphologyPronoun (nil for 0).
+// MorphologyPronounFromID adopts an existing object pointer as a MorphologyPronoun (nil for 0).
 func MorphologyPronounFromID(id objc.ID) *MorphologyPronoun {
 	if id == 0 {
 		return nil

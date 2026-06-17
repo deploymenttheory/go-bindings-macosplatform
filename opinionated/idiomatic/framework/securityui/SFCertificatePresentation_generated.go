@@ -22,11 +22,11 @@ type CertificatePresentation struct {
 // Unwrap returns the underlying [raw.SFCertificatePresentation].
 func (x *CertificatePresentation) Unwrap() *raw.SFCertificatePresentation { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CertificatePresentation) ID() objc.ID { return x.inner.Ptr() }
 
-// CertificatePresentationFromID adopts an existing toll-free-bridged object id as a CertificatePresentation (nil for 0).
+// CertificatePresentationFromID adopts an existing object pointer as a CertificatePresentation (nil for 0).
 func CertificatePresentationFromID(id objc.ID) *CertificatePresentation {
 	if id == 0 {
 		return nil

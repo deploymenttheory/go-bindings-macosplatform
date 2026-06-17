@@ -17,11 +17,11 @@ type URLSessionTaskTransactionMetrics struct {
 // Unwrap returns the underlying [raw.NSURLSessionTaskTransactionMetrics].
 func (x *URLSessionTaskTransactionMetrics) Unwrap() *raw.NSURLSessionTaskTransactionMetrics { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *URLSessionTaskTransactionMetrics) ID() objc.ID { return x.inner.Ptr() }
 
-// URLSessionTaskTransactionMetricsFromID adopts an existing toll-free-bridged object id as a URLSessionTaskTransactionMetrics (nil for 0).
+// URLSessionTaskTransactionMetricsFromID adopts an existing object pointer as a URLSessionTaskTransactionMetrics (nil for 0).
 func URLSessionTaskTransactionMetricsFromID(id objc.ID) *URLSessionTaskTransactionMetrics {
 	if id == 0 {
 		return nil

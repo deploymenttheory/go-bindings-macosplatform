@@ -17,11 +17,11 @@ type ConsoleDeviceConfiguration struct {
 // Unwrap returns the underlying [raw.VZConsoleDeviceConfiguration].
 func (x *ConsoleDeviceConfiguration) Unwrap() *raw.VZConsoleDeviceConfiguration { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ConsoleDeviceConfiguration) ID() objc.ID { return x.inner.Ptr() }
 
-// ConsoleDeviceConfigurationFromID adopts an existing toll-free-bridged object id as a ConsoleDeviceConfiguration (nil for 0).
+// ConsoleDeviceConfigurationFromID adopts an existing object pointer as a ConsoleDeviceConfiguration (nil for 0).
 func ConsoleDeviceConfigurationFromID(id objc.ID) *ConsoleDeviceConfiguration {
 	if id == 0 {
 		return nil

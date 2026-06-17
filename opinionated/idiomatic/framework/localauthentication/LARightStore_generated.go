@@ -21,11 +21,11 @@ type RightStore struct {
 // Unwrap returns the underlying [raw.LARightStore].
 func (x *RightStore) Unwrap() *raw.LARightStore { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *RightStore) ID() objc.ID { return x.inner.Ptr() }
 
-// RightStoreFromID adopts an existing toll-free-bridged object id as a RightStore (nil for 0).
+// RightStoreFromID adopts an existing object pointer as a RightStore (nil for 0).
 func RightStoreFromID(id objc.ID) *RightStore {
 	if id == 0 {
 		return nil

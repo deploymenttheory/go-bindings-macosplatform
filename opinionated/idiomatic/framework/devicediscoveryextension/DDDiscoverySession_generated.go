@@ -17,11 +17,11 @@ type DDDiscoverySession struct {
 // Unwrap returns the underlying [raw.DDDiscoverySession].
 func (x *DDDiscoverySession) Unwrap() *raw.DDDiscoverySession { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DDDiscoverySession) ID() objc.ID { return x.inner.Ptr() }
 
-// DDDiscoverySessionFromID adopts an existing toll-free-bridged object id as a DDDiscoverySession (nil for 0).
+// DDDiscoverySessionFromID adopts an existing object pointer as a DDDiscoverySession (nil for 0).
 func DDDiscoverySessionFromID(id objc.ID) *DDDiscoverySession {
 	if id == 0 {
 		return nil

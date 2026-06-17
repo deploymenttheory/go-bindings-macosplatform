@@ -20,11 +20,11 @@ type ExternalSyncDevice struct {
 // Unwrap returns the underlying [raw.AVExternalSyncDevice].
 func (x *ExternalSyncDevice) Unwrap() *raw.AVExternalSyncDevice { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ExternalSyncDevice) ID() objc.ID { return x.inner.Ptr() }
 
-// ExternalSyncDeviceFromID adopts an existing toll-free-bridged object id as a ExternalSyncDevice (nil for 0).
+// ExternalSyncDeviceFromID adopts an existing object pointer as a ExternalSyncDevice (nil for 0).
 func ExternalSyncDeviceFromID(id objc.ID) *ExternalSyncDevice {
 	if id == 0 {
 		return nil

@@ -19,11 +19,11 @@ type MTRMicrowaveOvenModeClusterModeOptionStruct struct {
 // Unwrap returns the underlying [raw.MTRMicrowaveOvenModeClusterModeOptionStruct].
 func (x *MTRMicrowaveOvenModeClusterModeOptionStruct) Unwrap() *raw.MTRMicrowaveOvenModeClusterModeOptionStruct { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRMicrowaveOvenModeClusterModeOptionStruct) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRMicrowaveOvenModeClusterModeOptionStructFromID adopts an existing toll-free-bridged object id as a MTRMicrowaveOvenModeClusterModeOptionStruct (nil for 0).
+// MTRMicrowaveOvenModeClusterModeOptionStructFromID adopts an existing object pointer as a MTRMicrowaveOvenModeClusterModeOptionStruct (nil for 0).
 func MTRMicrowaveOvenModeClusterModeOptionStructFromID(id objc.ID) *MTRMicrowaveOvenModeClusterModeOptionStruct {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type PaymentMerchantSession struct {
 // Unwrap returns the underlying [raw.PKPaymentMerchantSession].
 func (x *PaymentMerchantSession) Unwrap() *raw.PKPaymentMerchantSession { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PaymentMerchantSession) ID() objc.ID { return x.inner.Ptr() }
 
-// PaymentMerchantSessionFromID adopts an existing toll-free-bridged object id as a PaymentMerchantSession (nil for 0).
+// PaymentMerchantSessionFromID adopts an existing object pointer as a PaymentMerchantSession (nil for 0).
 func PaymentMerchantSessionFromID(id objc.ID) *PaymentMerchantSession {
 	if id == 0 {
 		return nil

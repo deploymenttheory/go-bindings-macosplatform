@@ -17,11 +17,11 @@ type NeuralEngineComputeDevice struct {
 // Unwrap returns the underlying [raw.MLNeuralEngineComputeDevice].
 func (x *NeuralEngineComputeDevice) Unwrap() *raw.MLNeuralEngineComputeDevice { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NeuralEngineComputeDevice) ID() objc.ID { return x.inner.Ptr() }
 
-// NeuralEngineComputeDeviceFromID adopts an existing toll-free-bridged object id as a NeuralEngineComputeDevice (nil for 0).
+// NeuralEngineComputeDeviceFromID adopts an existing object pointer as a NeuralEngineComputeDevice (nil for 0).
 func NeuralEngineComputeDeviceFromID(id objc.ID) *NeuralEngineComputeDevice {
 	if id == 0 {
 		return nil

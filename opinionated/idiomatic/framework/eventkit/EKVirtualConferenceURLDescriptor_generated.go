@@ -19,11 +19,11 @@ type VirtualConferenceURLDescriptor struct {
 // Unwrap returns the underlying [raw.EKVirtualConferenceURLDescriptor].
 func (x *VirtualConferenceURLDescriptor) Unwrap() *raw.EKVirtualConferenceURLDescriptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *VirtualConferenceURLDescriptor) ID() objc.ID { return x.inner.Ptr() }
 
-// VirtualConferenceURLDescriptorFromID adopts an existing toll-free-bridged object id as a VirtualConferenceURLDescriptor (nil for 0).
+// VirtualConferenceURLDescriptorFromID adopts an existing object pointer as a VirtualConferenceURLDescriptor (nil for 0).
 func VirtualConferenceURLDescriptorFromID(id objc.ID) *VirtualConferenceURLDescriptor {
 	if id == 0 {
 		return nil

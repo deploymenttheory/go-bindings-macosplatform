@@ -18,11 +18,11 @@ type MTRUnitTestingClusterTestListStructOctet struct {
 // Unwrap returns the underlying [raw.MTRUnitTestingClusterTestListStructOctet].
 func (x *MTRUnitTestingClusterTestListStructOctet) Unwrap() *raw.MTRUnitTestingClusterTestListStructOctet { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRUnitTestingClusterTestListStructOctet) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRUnitTestingClusterTestListStructOctetFromID adopts an existing toll-free-bridged object id as a MTRUnitTestingClusterTestListStructOctet (nil for 0).
+// MTRUnitTestingClusterTestListStructOctetFromID adopts an existing object pointer as a MTRUnitTestingClusterTestListStructOctet (nil for 0).
 func MTRUnitTestingClusterTestListStructOctetFromID(id objc.ID) *MTRUnitTestingClusterTestListStructOctet {
 	if id == 0 {
 		return nil

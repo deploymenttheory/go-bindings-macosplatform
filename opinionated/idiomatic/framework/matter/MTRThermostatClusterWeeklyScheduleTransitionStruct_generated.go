@@ -18,11 +18,11 @@ type MTRThermostatClusterWeeklyScheduleTransitionStruct struct {
 // Unwrap returns the underlying [raw.MTRThermostatClusterWeeklyScheduleTransitionStruct].
 func (x *MTRThermostatClusterWeeklyScheduleTransitionStruct) Unwrap() *raw.MTRThermostatClusterWeeklyScheduleTransitionStruct { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRThermostatClusterWeeklyScheduleTransitionStruct) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRThermostatClusterWeeklyScheduleTransitionStructFromID adopts an existing toll-free-bridged object id as a MTRThermostatClusterWeeklyScheduleTransitionStruct (nil for 0).
+// MTRThermostatClusterWeeklyScheduleTransitionStructFromID adopts an existing object pointer as a MTRThermostatClusterWeeklyScheduleTransitionStruct (nil for 0).
 func MTRThermostatClusterWeeklyScheduleTransitionStructFromID(id objc.ID) *MTRThermostatClusterWeeklyScheduleTransitionStruct {
 	if id == 0 {
 		return nil

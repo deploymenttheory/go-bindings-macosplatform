@@ -18,11 +18,11 @@ type CNNInstanceNormalizationNode struct {
 // Unwrap returns the underlying [raw.MPSCNNInstanceNormalizationNode].
 func (x *CNNInstanceNormalizationNode) Unwrap() *raw.MPSCNNInstanceNormalizationNode { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CNNInstanceNormalizationNode) ID() objc.ID { return x.inner.Ptr() }
 
-// CNNInstanceNormalizationNodeFromID adopts an existing toll-free-bridged object id as a CNNInstanceNormalizationNode (nil for 0).
+// CNNInstanceNormalizationNodeFromID adopts an existing object pointer as a CNNInstanceNormalizationNode (nil for 0).
 func CNNInstanceNormalizationNodeFromID(id objc.ID) *CNNInstanceNormalizationNode {
 	if id == 0 {
 		return nil

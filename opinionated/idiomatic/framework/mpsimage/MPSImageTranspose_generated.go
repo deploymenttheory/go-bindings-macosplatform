@@ -17,11 +17,11 @@ type ImageTranspose struct {
 // Unwrap returns the underlying [raw.MPSImageTranspose].
 func (x *ImageTranspose) Unwrap() *raw.MPSImageTranspose { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ImageTranspose) ID() objc.ID { return x.inner.Ptr() }
 
-// ImageTransposeFromID adopts an existing toll-free-bridged object id as a ImageTranspose (nil for 0).
+// ImageTransposeFromID adopts an existing object pointer as a ImageTranspose (nil for 0).
 func ImageTransposeFromID(id objc.ID) *ImageTranspose {
 	if id == 0 {
 		return nil

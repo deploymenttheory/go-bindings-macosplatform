@@ -17,11 +17,11 @@ type StandardMapConfiguration struct {
 // Unwrap returns the underlying [raw.MKStandardMapConfiguration].
 func (x *StandardMapConfiguration) Unwrap() *raw.MKStandardMapConfiguration { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *StandardMapConfiguration) ID() objc.ID { return x.inner.Ptr() }
 
-// StandardMapConfigurationFromID adopts an existing toll-free-bridged object id as a StandardMapConfiguration (nil for 0).
+// StandardMapConfigurationFromID adopts an existing object pointer as a StandardMapConfiguration (nil for 0).
 func StandardMapConfigurationFromID(id objc.ID) *StandardMapConfiguration {
 	if id == 0 {
 		return nil

@@ -17,11 +17,11 @@ type RemoteCommand struct {
 // Unwrap returns the underlying [raw.MPRemoteCommand].
 func (x *RemoteCommand) Unwrap() *raw.MPRemoteCommand { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *RemoteCommand) ID() objc.ID { return x.inner.Ptr() }
 
-// RemoteCommandFromID adopts an existing toll-free-bridged object id as a RemoteCommand (nil for 0).
+// RemoteCommandFromID adopts an existing object pointer as a RemoteCommand (nil for 0).
 func RemoteCommandFromID(id objc.ID) *RemoteCommand {
 	if id == 0 {
 		return nil

@@ -19,11 +19,11 @@ type PlayerItemErrorLog struct {
 // Unwrap returns the underlying [raw.AVPlayerItemErrorLog].
 func (x *PlayerItemErrorLog) Unwrap() *raw.AVPlayerItemErrorLog { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PlayerItemErrorLog) ID() objc.ID { return x.inner.Ptr() }
 
-// PlayerItemErrorLogFromID adopts an existing toll-free-bridged object id as a PlayerItemErrorLog (nil for 0).
+// PlayerItemErrorLogFromID adopts an existing object pointer as a PlayerItemErrorLog (nil for 0).
 func PlayerItemErrorLogFromID(id objc.ID) *PlayerItemErrorLog {
 	if id == 0 {
 		return nil

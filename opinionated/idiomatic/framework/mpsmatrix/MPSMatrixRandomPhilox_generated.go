@@ -20,11 +20,11 @@ type MatrixRandomPhilox struct {
 // Unwrap returns the underlying [raw.MPSMatrixRandomPhilox].
 func (x *MatrixRandomPhilox) Unwrap() *raw.MPSMatrixRandomPhilox { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MatrixRandomPhilox) ID() objc.ID { return x.inner.Ptr() }
 
-// MatrixRandomPhiloxFromID adopts an existing toll-free-bridged object id as a MatrixRandomPhilox (nil for 0).
+// MatrixRandomPhiloxFromID adopts an existing object pointer as a MatrixRandomPhilox (nil for 0).
 func MatrixRandomPhiloxFromID(id objc.ID) *MatrixRandomPhilox {
 	if id == 0 {
 		return nil

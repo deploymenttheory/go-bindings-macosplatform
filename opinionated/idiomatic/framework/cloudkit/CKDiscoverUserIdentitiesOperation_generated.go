@@ -21,11 +21,11 @@ type DiscoverUserIdentitiesOperation struct {
 // Unwrap returns the underlying [raw.CKDiscoverUserIdentitiesOperation].
 func (x *DiscoverUserIdentitiesOperation) Unwrap() *raw.CKDiscoverUserIdentitiesOperation { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DiscoverUserIdentitiesOperation) ID() objc.ID { return x.inner.Ptr() }
 
-// DiscoverUserIdentitiesOperationFromID adopts an existing toll-free-bridged object id as a DiscoverUserIdentitiesOperation (nil for 0).
+// DiscoverUserIdentitiesOperationFromID adopts an existing object pointer as a DiscoverUserIdentitiesOperation (nil for 0).
 func DiscoverUserIdentitiesOperationFromID(id objc.ID) *DiscoverUserIdentitiesOperation {
 	if id == 0 {
 		return nil

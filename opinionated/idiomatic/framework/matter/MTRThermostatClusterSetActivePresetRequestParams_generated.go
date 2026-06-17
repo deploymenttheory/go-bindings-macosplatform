@@ -18,11 +18,11 @@ type MTRThermostatClusterSetActivePresetRequestParams struct {
 // Unwrap returns the underlying [raw.MTRThermostatClusterSetActivePresetRequestParams].
 func (x *MTRThermostatClusterSetActivePresetRequestParams) Unwrap() *raw.MTRThermostatClusterSetActivePresetRequestParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRThermostatClusterSetActivePresetRequestParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRThermostatClusterSetActivePresetRequestParamsFromID adopts an existing toll-free-bridged object id as a MTRThermostatClusterSetActivePresetRequestParams (nil for 0).
+// MTRThermostatClusterSetActivePresetRequestParamsFromID adopts an existing object pointer as a MTRThermostatClusterSetActivePresetRequestParams (nil for 0).
 func MTRThermostatClusterSetActivePresetRequestParamsFromID(id objc.ID) *MTRThermostatClusterSetActivePresetRequestParams {
 	if id == 0 {
 		return nil

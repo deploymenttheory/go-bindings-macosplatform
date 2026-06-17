@@ -17,11 +17,11 @@ type ScreenshotManager struct {
 // Unwrap returns the underlying [raw.SCScreenshotManager].
 func (x *ScreenshotManager) Unwrap() *raw.SCScreenshotManager { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ScreenshotManager) ID() objc.ID { return x.inner.Ptr() }
 
-// ScreenshotManagerFromID adopts an existing toll-free-bridged object id as a ScreenshotManager (nil for 0).
+// ScreenshotManagerFromID adopts an existing object pointer as a ScreenshotManager (nil for 0).
 func ScreenshotManagerFromID(id objc.ID) *ScreenshotManager {
 	if id == 0 {
 		return nil

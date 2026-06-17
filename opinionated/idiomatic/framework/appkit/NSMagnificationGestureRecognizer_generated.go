@@ -17,11 +17,11 @@ type MagnificationGestureRecognizer struct {
 // Unwrap returns the underlying [raw.NSMagnificationGestureRecognizer].
 func (x *MagnificationGestureRecognizer) Unwrap() *raw.NSMagnificationGestureRecognizer { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MagnificationGestureRecognizer) ID() objc.ID { return x.inner.Ptr() }
 
-// MagnificationGestureRecognizerFromID adopts an existing toll-free-bridged object id as a MagnificationGestureRecognizer (nil for 0).
+// MagnificationGestureRecognizerFromID adopts an existing object pointer as a MagnificationGestureRecognizer (nil for 0).
 func MagnificationGestureRecognizerFromID(id objc.ID) *MagnificationGestureRecognizer {
 	if id == 0 {
 		return nil

@@ -17,11 +17,11 @@ type SyncEngineDidSendChangesEvent struct {
 // Unwrap returns the underlying [raw.CKSyncEngineDidSendChangesEvent].
 func (x *SyncEngineDidSendChangesEvent) Unwrap() *raw.CKSyncEngineDidSendChangesEvent { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SyncEngineDidSendChangesEvent) ID() objc.ID { return x.inner.Ptr() }
 
-// SyncEngineDidSendChangesEventFromID adopts an existing toll-free-bridged object id as a SyncEngineDidSendChangesEvent (nil for 0).
+// SyncEngineDidSendChangesEventFromID adopts an existing object pointer as a SyncEngineDidSendChangesEvent (nil for 0).
 func SyncEngineDidSendChangesEventFromID(id objc.ID) *SyncEngineDidSendChangesEvent {
 	if id == 0 {
 		return nil

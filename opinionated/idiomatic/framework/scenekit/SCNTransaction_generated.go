@@ -17,11 +17,11 @@ type Transaction struct {
 // Unwrap returns the underlying [raw.SCNTransaction].
 func (x *Transaction) Unwrap() *raw.SCNTransaction { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Transaction) ID() objc.ID { return x.inner.Ptr() }
 
-// TransactionFromID adopts an existing toll-free-bridged object id as a Transaction (nil for 0).
+// TransactionFromID adopts an existing object pointer as a Transaction (nil for 0).
 func TransactionFromID(id objc.ID) *Transaction {
 	if id == 0 {
 		return nil

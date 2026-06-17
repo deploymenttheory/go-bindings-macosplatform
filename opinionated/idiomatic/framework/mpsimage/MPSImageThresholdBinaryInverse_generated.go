@@ -19,11 +19,11 @@ type ImageThresholdBinaryInverse struct {
 // Unwrap returns the underlying [raw.MPSImageThresholdBinaryInverse].
 func (x *ImageThresholdBinaryInverse) Unwrap() *raw.MPSImageThresholdBinaryInverse { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ImageThresholdBinaryInverse) ID() objc.ID { return x.inner.Ptr() }
 
-// ImageThresholdBinaryInverseFromID adopts an existing toll-free-bridged object id as a ImageThresholdBinaryInverse (nil for 0).
+// ImageThresholdBinaryInverseFromID adopts an existing object pointer as a ImageThresholdBinaryInverse (nil for 0).
 func ImageThresholdBinaryInverseFromID(id objc.ID) *ImageThresholdBinaryInverse {
 	if id == 0 {
 		return nil

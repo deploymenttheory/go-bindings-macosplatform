@@ -21,11 +21,11 @@ type GraphExecutable struct {
 // Unwrap returns the underlying [raw.MPSGraphExecutable].
 func (x *GraphExecutable) Unwrap() *raw.MPSGraphExecutable { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *GraphExecutable) ID() objc.ID { return x.inner.Ptr() }
 
-// GraphExecutableFromID adopts an existing toll-free-bridged object id as a GraphExecutable (nil for 0).
+// GraphExecutableFromID adopts an existing object pointer as a GraphExecutable (nil for 0).
 func GraphExecutableFromID(id objc.ID) *GraphExecutable {
 	if id == 0 {
 		return nil

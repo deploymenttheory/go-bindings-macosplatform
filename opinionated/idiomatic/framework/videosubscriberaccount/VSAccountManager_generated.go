@@ -17,11 +17,11 @@ type VSAccountManager struct {
 // Unwrap returns the underlying [raw.VSAccountManager].
 func (x *VSAccountManager) Unwrap() *raw.VSAccountManager { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *VSAccountManager) ID() objc.ID { return x.inner.Ptr() }
 
-// VSAccountManagerFromID adopts an existing toll-free-bridged object id as a VSAccountManager (nil for 0).
+// VSAccountManagerFromID adopts an existing object pointer as a VSAccountManager (nil for 0).
 func VSAccountManagerFromID(id objc.ID) *VSAccountManager {
 	if id == 0 {
 		return nil

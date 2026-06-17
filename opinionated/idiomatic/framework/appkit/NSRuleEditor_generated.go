@@ -19,11 +19,11 @@ type RuleEditor struct {
 // Unwrap returns the underlying [raw.NSRuleEditor].
 func (x *RuleEditor) Unwrap() *raw.NSRuleEditor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *RuleEditor) ID() objc.ID { return x.inner.Ptr() }
 
-// RuleEditorFromID adopts an existing toll-free-bridged object id as a RuleEditor (nil for 0).
+// RuleEditorFromID adopts an existing object pointer as a RuleEditor (nil for 0).
 func RuleEditorFromID(id objc.ID) *RuleEditor {
 	if id == 0 {
 		return nil

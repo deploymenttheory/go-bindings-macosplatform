@@ -19,11 +19,11 @@ type MTRAudioOutputClusterOutputInfoStruct struct {
 // Unwrap returns the underlying [raw.MTRAudioOutputClusterOutputInfoStruct].
 func (x *MTRAudioOutputClusterOutputInfoStruct) Unwrap() *raw.MTRAudioOutputClusterOutputInfoStruct { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRAudioOutputClusterOutputInfoStruct) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRAudioOutputClusterOutputInfoStructFromID adopts an existing toll-free-bridged object id as a MTRAudioOutputClusterOutputInfoStruct (nil for 0).
+// MTRAudioOutputClusterOutputInfoStructFromID adopts an existing object pointer as a MTRAudioOutputClusterOutputInfoStruct (nil for 0).
 func MTRAudioOutputClusterOutputInfoStructFromID(id objc.ID) *MTRAudioOutputClusterOutputInfoStruct {
 	if id == 0 {
 		return nil

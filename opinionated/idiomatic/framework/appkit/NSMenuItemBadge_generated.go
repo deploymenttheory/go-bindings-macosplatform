@@ -19,11 +19,11 @@ type MenuItemBadge struct {
 // Unwrap returns the underlying [raw.NSMenuItemBadge].
 func (x *MenuItemBadge) Unwrap() *raw.NSMenuItemBadge { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MenuItemBadge) ID() objc.ID { return x.inner.Ptr() }
 
-// MenuItemBadgeFromID adopts an existing toll-free-bridged object id as a MenuItemBadge (nil for 0).
+// MenuItemBadgeFromID adopts an existing object pointer as a MenuItemBadge (nil for 0).
 func MenuItemBadgeFromID(id objc.ID) *MenuItemBadge {
 	if id == 0 {
 		return nil

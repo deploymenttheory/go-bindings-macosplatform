@@ -18,11 +18,11 @@ type CoreMLRequest struct {
 // Unwrap returns the underlying [raw.VNCoreMLRequest].
 func (x *CoreMLRequest) Unwrap() *raw.VNCoreMLRequest { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CoreMLRequest) ID() objc.ID { return x.inner.Ptr() }
 
-// CoreMLRequestFromID adopts an existing toll-free-bridged object id as a CoreMLRequest (nil for 0).
+// CoreMLRequestFromID adopts an existing object pointer as a CoreMLRequest (nil for 0).
 func CoreMLRequestFromID(id objc.ID) *CoreMLRequest {
 	if id == 0 {
 		return nil

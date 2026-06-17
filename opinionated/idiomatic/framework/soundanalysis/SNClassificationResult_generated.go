@@ -20,11 +20,11 @@ type ClassificationResult struct {
 // Unwrap returns the underlying [raw.SNClassificationResult].
 func (x *ClassificationResult) Unwrap() *raw.SNClassificationResult { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ClassificationResult) ID() objc.ID { return x.inner.Ptr() }
 
-// ClassificationResultFromID adopts an existing toll-free-bridged object id as a ClassificationResult (nil for 0).
+// ClassificationResultFromID adopts an existing object pointer as a ClassificationResult (nil for 0).
 func ClassificationResultFromID(id objc.ID) *ClassificationResult {
 	if id == 0 {
 		return nil

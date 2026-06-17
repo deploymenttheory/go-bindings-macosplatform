@@ -21,11 +21,11 @@ type MTRBaseClusterOperationalCredentials struct {
 // Unwrap returns the underlying [raw.MTRBaseClusterOperationalCredentials].
 func (x *MTRBaseClusterOperationalCredentials) Unwrap() *raw.MTRBaseClusterOperationalCredentials { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRBaseClusterOperationalCredentials) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRBaseClusterOperationalCredentialsFromID adopts an existing toll-free-bridged object id as a MTRBaseClusterOperationalCredentials (nil for 0).
+// MTRBaseClusterOperationalCredentialsFromID adopts an existing object pointer as a MTRBaseClusterOperationalCredentials (nil for 0).
 func MTRBaseClusterOperationalCredentialsFromID(id objc.ID) *MTRBaseClusterOperationalCredentials {
 	if id == 0 {
 		return nil

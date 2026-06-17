@@ -17,11 +17,11 @@ type MTROperationalStateClusterOperationalErrorEvent struct {
 // Unwrap returns the underlying [raw.MTROperationalStateClusterOperationalErrorEvent].
 func (x *MTROperationalStateClusterOperationalErrorEvent) Unwrap() *raw.MTROperationalStateClusterOperationalErrorEvent { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTROperationalStateClusterOperationalErrorEvent) ID() objc.ID { return x.inner.Ptr() }
 
-// MTROperationalStateClusterOperationalErrorEventFromID adopts an existing toll-free-bridged object id as a MTROperationalStateClusterOperationalErrorEvent (nil for 0).
+// MTROperationalStateClusterOperationalErrorEventFromID adopts an existing object pointer as a MTROperationalStateClusterOperationalErrorEvent (nil for 0).
 func MTROperationalStateClusterOperationalErrorEventFromID(id objc.ID) *MTROperationalStateClusterOperationalErrorEvent {
 	if id == 0 {
 		return nil

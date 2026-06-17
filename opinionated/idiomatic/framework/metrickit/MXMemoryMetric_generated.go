@@ -18,11 +18,11 @@ type MemoryMetric struct {
 // Unwrap returns the underlying [raw.MXMemoryMetric].
 func (x *MemoryMetric) Unwrap() *raw.MXMemoryMetric { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MemoryMetric) ID() objc.ID { return x.inner.Ptr() }
 
-// MemoryMetricFromID adopts an existing toll-free-bridged object id as a MemoryMetric (nil for 0).
+// MemoryMetricFromID adopts an existing object pointer as a MemoryMetric (nil for 0).
 func MemoryMetricFromID(id objc.ID) *MemoryMetric {
 	if id == 0 {
 		return nil

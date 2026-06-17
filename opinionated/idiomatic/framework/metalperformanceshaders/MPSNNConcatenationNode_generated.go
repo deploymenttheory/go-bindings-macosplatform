@@ -19,11 +19,11 @@ type NNConcatenationNode struct {
 // Unwrap returns the underlying [raw.MPSNNConcatenationNode].
 func (x *NNConcatenationNode) Unwrap() *raw.MPSNNConcatenationNode { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NNConcatenationNode) ID() objc.ID { return x.inner.Ptr() }
 
-// NNConcatenationNodeFromID adopts an existing toll-free-bridged object id as a NNConcatenationNode (nil for 0).
+// NNConcatenationNodeFromID adopts an existing object pointer as a NNConcatenationNode (nil for 0).
 func NNConcatenationNodeFromID(id objc.ID) *NNConcatenationNode {
 	if id == 0 {
 		return nil

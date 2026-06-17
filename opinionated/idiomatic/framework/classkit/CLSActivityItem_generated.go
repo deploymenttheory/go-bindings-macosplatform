@@ -19,11 +19,11 @@ type ActivityItem struct {
 // Unwrap returns the underlying [raw.CLSActivityItem].
 func (x *ActivityItem) Unwrap() *raw.CLSActivityItem { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ActivityItem) ID() objc.ID { return x.inner.Ptr() }
 
-// ActivityItemFromID adopts an existing toll-free-bridged object id as a ActivityItem (nil for 0).
+// ActivityItemFromID adopts an existing object pointer as a ActivityItem (nil for 0).
 func ActivityItemFromID(id objc.ID) *ActivityItem {
 	if id == 0 {
 		return nil

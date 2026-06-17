@@ -17,11 +17,11 @@ type MTRRVCOperationalStateClusterOperationalErrorEvent struct {
 // Unwrap returns the underlying [raw.MTRRVCOperationalStateClusterOperationalErrorEvent].
 func (x *MTRRVCOperationalStateClusterOperationalErrorEvent) Unwrap() *raw.MTRRVCOperationalStateClusterOperationalErrorEvent { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRRVCOperationalStateClusterOperationalErrorEvent) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRRVCOperationalStateClusterOperationalErrorEventFromID adopts an existing toll-free-bridged object id as a MTRRVCOperationalStateClusterOperationalErrorEvent (nil for 0).
+// MTRRVCOperationalStateClusterOperationalErrorEventFromID adopts an existing object pointer as a MTRRVCOperationalStateClusterOperationalErrorEvent (nil for 0).
 func MTRRVCOperationalStateClusterOperationalErrorEventFromID(id objc.ID) *MTRRVCOperationalStateClusterOperationalErrorEvent {
 	if id == 0 {
 		return nil

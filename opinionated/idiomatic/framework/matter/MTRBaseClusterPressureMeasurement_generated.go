@@ -21,11 +21,11 @@ type MTRBaseClusterPressureMeasurement struct {
 // Unwrap returns the underlying [raw.MTRBaseClusterPressureMeasurement].
 func (x *MTRBaseClusterPressureMeasurement) Unwrap() *raw.MTRBaseClusterPressureMeasurement { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRBaseClusterPressureMeasurement) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRBaseClusterPressureMeasurementFromID adopts an existing toll-free-bridged object id as a MTRBaseClusterPressureMeasurement (nil for 0).
+// MTRBaseClusterPressureMeasurementFromID adopts an existing object pointer as a MTRBaseClusterPressureMeasurement (nil for 0).
 func MTRBaseClusterPressureMeasurementFromID(id objc.ID) *MTRBaseClusterPressureMeasurement {
 	if id == 0 {
 		return nil

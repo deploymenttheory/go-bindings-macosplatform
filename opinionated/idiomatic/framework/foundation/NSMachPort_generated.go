@@ -17,11 +17,11 @@ type MachPort struct {
 // Unwrap returns the underlying [raw.NSMachPort].
 func (x *MachPort) Unwrap() *raw.NSMachPort { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MachPort) ID() objc.ID { return x.inner.Ptr() }
 
-// MachPortFromID adopts an existing toll-free-bridged object id as a MachPort (nil for 0).
+// MachPortFromID adopts an existing object pointer as a MachPort (nil for 0).
 func MachPortFromID(id objc.ID) *MachPort {
 	if id == 0 {
 		return nil

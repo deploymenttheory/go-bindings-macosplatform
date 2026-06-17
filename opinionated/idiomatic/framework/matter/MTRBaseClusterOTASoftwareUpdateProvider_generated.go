@@ -21,11 +21,11 @@ type MTRBaseClusterOtaSoftwareUpdateProvider struct {
 // Unwrap returns the underlying [raw.MTRBaseClusterOtaSoftwareUpdateProvider].
 func (x *MTRBaseClusterOtaSoftwareUpdateProvider) Unwrap() *raw.MTRBaseClusterOtaSoftwareUpdateProvider { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRBaseClusterOtaSoftwareUpdateProvider) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRBaseClusterOtaSoftwareUpdateProviderFromID adopts an existing toll-free-bridged object id as a MTRBaseClusterOtaSoftwareUpdateProvider (nil for 0).
+// MTRBaseClusterOtaSoftwareUpdateProviderFromID adopts an existing object pointer as a MTRBaseClusterOtaSoftwareUpdateProvider (nil for 0).
 func MTRBaseClusterOtaSoftwareUpdateProviderFromID(id objc.ID) *MTRBaseClusterOtaSoftwareUpdateProvider {
 	if id == 0 {
 		return nil

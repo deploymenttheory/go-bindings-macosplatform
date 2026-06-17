@@ -17,11 +17,11 @@ type MTRTimeSynchronizationClusterDstOffsetType struct {
 // Unwrap returns the underlying [raw.MTRTimeSynchronizationClusterDstOffsetType].
 func (x *MTRTimeSynchronizationClusterDstOffsetType) Unwrap() *raw.MTRTimeSynchronizationClusterDstOffsetType { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRTimeSynchronizationClusterDstOffsetType) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRTimeSynchronizationClusterDstOffsetTypeFromID adopts an existing toll-free-bridged object id as a MTRTimeSynchronizationClusterDstOffsetType (nil for 0).
+// MTRTimeSynchronizationClusterDstOffsetTypeFromID adopts an existing object pointer as a MTRTimeSynchronizationClusterDstOffsetType (nil for 0).
 func MTRTimeSynchronizationClusterDstOffsetTypeFromID(id objc.ID) *MTRTimeSynchronizationClusterDstOffsetType {
 	if id == 0 {
 		return nil

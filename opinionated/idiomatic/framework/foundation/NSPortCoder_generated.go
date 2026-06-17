@@ -17,11 +17,11 @@ type PortCoder struct {
 // Unwrap returns the underlying [raw.NSPortCoder].
 func (x *PortCoder) Unwrap() *raw.NSPortCoder { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PortCoder) ID() objc.ID { return x.inner.Ptr() }
 
-// PortCoderFromID adopts an existing toll-free-bridged object id as a PortCoder (nil for 0).
+// PortCoderFromID adopts an existing object pointer as a PortCoder (nil for 0).
 func PortCoderFromID(id objc.ID) *PortCoder {
 	if id == 0 {
 		return nil

@@ -20,11 +20,11 @@ type OpenPanel struct {
 // Unwrap returns the underlying [raw.NSOpenPanel].
 func (x *OpenPanel) Unwrap() *raw.NSOpenPanel { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *OpenPanel) ID() objc.ID { return x.inner.Ptr() }
 
-// OpenPanelFromID adopts an existing toll-free-bridged object id as a OpenPanel (nil for 0).
+// OpenPanelFromID adopts an existing object pointer as a OpenPanel (nil for 0).
 func OpenPanelFromID(id objc.ID) *OpenPanel {
 	if id == 0 {
 		return nil

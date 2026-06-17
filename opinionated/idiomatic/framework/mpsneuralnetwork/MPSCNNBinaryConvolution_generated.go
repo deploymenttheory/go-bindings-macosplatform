@@ -19,11 +19,11 @@ type CNNBinaryConvolution struct {
 // Unwrap returns the underlying [raw.MPSCNNBinaryConvolution].
 func (x *CNNBinaryConvolution) Unwrap() *raw.MPSCNNBinaryConvolution { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CNNBinaryConvolution) ID() objc.ID { return x.inner.Ptr() }
 
-// CNNBinaryConvolutionFromID adopts an existing toll-free-bridged object id as a CNNBinaryConvolution (nil for 0).
+// CNNBinaryConvolutionFromID adopts an existing object pointer as a CNNBinaryConvolution (nil for 0).
 func CNNBinaryConvolutionFromID(id objc.ID) *CNNBinaryConvolution {
 	if id == 0 {
 		return nil

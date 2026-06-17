@@ -18,11 +18,11 @@ type MTRRVCOperationalStateClusterResumeParams struct {
 // Unwrap returns the underlying [raw.MTRRVCOperationalStateClusterResumeParams].
 func (x *MTRRVCOperationalStateClusterResumeParams) Unwrap() *raw.MTRRVCOperationalStateClusterResumeParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRRVCOperationalStateClusterResumeParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRRVCOperationalStateClusterResumeParamsFromID adopts an existing toll-free-bridged object id as a MTRRVCOperationalStateClusterResumeParams (nil for 0).
+// MTRRVCOperationalStateClusterResumeParamsFromID adopts an existing object pointer as a MTRRVCOperationalStateClusterResumeParams (nil for 0).
 func MTRRVCOperationalStateClusterResumeParamsFromID(id objc.ID) *MTRRVCOperationalStateClusterResumeParams {
 	if id == 0 {
 		return nil

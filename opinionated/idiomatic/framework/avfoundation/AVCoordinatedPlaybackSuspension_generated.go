@@ -20,11 +20,11 @@ type CoordinatedPlaybackSuspension struct {
 // Unwrap returns the underlying [raw.AVCoordinatedPlaybackSuspension].
 func (x *CoordinatedPlaybackSuspension) Unwrap() *raw.AVCoordinatedPlaybackSuspension { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CoordinatedPlaybackSuspension) ID() objc.ID { return x.inner.Ptr() }
 
-// CoordinatedPlaybackSuspensionFromID adopts an existing toll-free-bridged object id as a CoordinatedPlaybackSuspension (nil for 0).
+// CoordinatedPlaybackSuspensionFromID adopts an existing object pointer as a CoordinatedPlaybackSuspension (nil for 0).
 func CoordinatedPlaybackSuspensionFromID(id objc.ID) *CoordinatedPlaybackSuspension {
 	if id == 0 {
 		return nil

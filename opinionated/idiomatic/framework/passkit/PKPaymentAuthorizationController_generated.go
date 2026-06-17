@@ -18,11 +18,11 @@ type PaymentAuthorizationController struct {
 // Unwrap returns the underlying [raw.PKPaymentAuthorizationController].
 func (x *PaymentAuthorizationController) Unwrap() *raw.PKPaymentAuthorizationController { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PaymentAuthorizationController) ID() objc.ID { return x.inner.Ptr() }
 
-// PaymentAuthorizationControllerFromID adopts an existing toll-free-bridged object id as a PaymentAuthorizationController (nil for 0).
+// PaymentAuthorizationControllerFromID adopts an existing object pointer as a PaymentAuthorizationController (nil for 0).
 func PaymentAuthorizationControllerFromID(id objc.ID) *PaymentAuthorizationController {
 	if id == 0 {
 		return nil

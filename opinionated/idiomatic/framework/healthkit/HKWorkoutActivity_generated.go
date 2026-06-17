@@ -19,11 +19,11 @@ type WorkoutActivity struct {
 // Unwrap returns the underlying [raw.HKWorkoutActivity].
 func (x *WorkoutActivity) Unwrap() *raw.HKWorkoutActivity { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *WorkoutActivity) ID() objc.ID { return x.inner.Ptr() }
 
-// WorkoutActivityFromID adopts an existing toll-free-bridged object id as a WorkoutActivity (nil for 0).
+// WorkoutActivityFromID adopts an existing object pointer as a WorkoutActivity (nil for 0).
 func WorkoutActivityFromID(id objc.ID) *WorkoutActivity {
 	if id == 0 {
 		return nil

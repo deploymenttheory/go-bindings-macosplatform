@@ -17,11 +17,11 @@ type DetectDocumentSegmentationRequest struct {
 // Unwrap returns the underlying [raw.VNDetectDocumentSegmentationRequest].
 func (x *DetectDocumentSegmentationRequest) Unwrap() *raw.VNDetectDocumentSegmentationRequest { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DetectDocumentSegmentationRequest) ID() objc.ID { return x.inner.Ptr() }
 
-// DetectDocumentSegmentationRequestFromID adopts an existing toll-free-bridged object id as a DetectDocumentSegmentationRequest (nil for 0).
+// DetectDocumentSegmentationRequestFromID adopts an existing object pointer as a DetectDocumentSegmentationRequest (nil for 0).
 func DetectDocumentSegmentationRequestFromID(id objc.ID) *DetectDocumentSegmentationRequest {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type RecognizedObjectObservation struct {
 // Unwrap returns the underlying [raw.VNRecognizedObjectObservation].
 func (x *RecognizedObjectObservation) Unwrap() *raw.VNRecognizedObjectObservation { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *RecognizedObjectObservation) ID() objc.ID { return x.inner.Ptr() }
 
-// RecognizedObjectObservationFromID adopts an existing toll-free-bridged object id as a RecognizedObjectObservation (nil for 0).
+// RecognizedObjectObservationFromID adopts an existing object pointer as a RecognizedObjectObservation (nil for 0).
 func RecognizedObjectObservationFromID(id objc.ID) *RecognizedObjectObservation {
 	if id == 0 {
 		return nil

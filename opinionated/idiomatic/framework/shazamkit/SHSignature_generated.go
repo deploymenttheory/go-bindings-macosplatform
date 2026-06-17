@@ -20,11 +20,11 @@ type Signature struct {
 // Unwrap returns the underlying [raw.SHSignature].
 func (x *Signature) Unwrap() *raw.SHSignature { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Signature) ID() objc.ID { return x.inner.Ptr() }
 
-// SignatureFromID adopts an existing toll-free-bridged object id as a Signature (nil for 0).
+// SignatureFromID adopts an existing object pointer as a Signature (nil for 0).
 func SignatureFromID(id objc.ID) *Signature {
 	if id == 0 {
 		return nil

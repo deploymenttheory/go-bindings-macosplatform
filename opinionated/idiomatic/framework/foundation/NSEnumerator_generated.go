@@ -17,11 +17,11 @@ type Enumerator struct {
 // Unwrap returns the underlying [raw.NSEnumerator].
 func (x *Enumerator) Unwrap() *raw.NSEnumerator[objc.ID] { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Enumerator) ID() objc.ID { return x.inner.Ptr() }
 
-// EnumeratorFromID adopts an existing toll-free-bridged object id as a Enumerator (nil for 0).
+// EnumeratorFromID adopts an existing object pointer as a Enumerator (nil for 0).
 func EnumeratorFromID(id objc.ID) *Enumerator {
 	if id == 0 {
 		return nil

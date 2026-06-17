@@ -21,11 +21,11 @@ type NDArrayBinaryPrimaryGradientKernel struct {
 // Unwrap returns the underlying [raw.MPSNDArrayBinaryPrimaryGradientKernel].
 func (x *NDArrayBinaryPrimaryGradientKernel) Unwrap() *raw.MPSNDArrayBinaryPrimaryGradientKernel { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NDArrayBinaryPrimaryGradientKernel) ID() objc.ID { return x.inner.Ptr() }
 
-// NDArrayBinaryPrimaryGradientKernelFromID adopts an existing toll-free-bridged object id as a NDArrayBinaryPrimaryGradientKernel (nil for 0).
+// NDArrayBinaryPrimaryGradientKernelFromID adopts an existing object pointer as a NDArrayBinaryPrimaryGradientKernel (nil for 0).
 func NDArrayBinaryPrimaryGradientKernelFromID(id objc.ID) *NDArrayBinaryPrimaryGradientKernel {
 	if id == 0 {
 		return nil

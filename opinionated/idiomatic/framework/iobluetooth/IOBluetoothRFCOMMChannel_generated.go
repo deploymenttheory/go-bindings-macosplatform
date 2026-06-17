@@ -18,11 +18,11 @@ type IOBluetoothRFCOMMChannel struct {
 // Unwrap returns the underlying [raw.IOBluetoothRFCOMMChannel].
 func (x *IOBluetoothRFCOMMChannel) Unwrap() *raw.IOBluetoothRFCOMMChannel { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *IOBluetoothRFCOMMChannel) ID() objc.ID { return x.inner.Ptr() }
 
-// IOBluetoothRFCOMMChannelFromID adopts an existing toll-free-bridged object id as a IOBluetoothRFCOMMChannel (nil for 0).
+// IOBluetoothRFCOMMChannelFromID adopts an existing object pointer as a IOBluetoothRFCOMMChannel (nil for 0).
 func IOBluetoothRFCOMMChannelFromID(id objc.ID) *IOBluetoothRFCOMMChannel {
 	if id == 0 {
 		return nil

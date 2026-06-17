@@ -17,11 +17,11 @@ type ChangePlaybackPositionCommand struct {
 // Unwrap returns the underlying [raw.MPChangePlaybackPositionCommand].
 func (x *ChangePlaybackPositionCommand) Unwrap() *raw.MPChangePlaybackPositionCommand { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ChangePlaybackPositionCommand) ID() objc.ID { return x.inner.Ptr() }
 
-// ChangePlaybackPositionCommandFromID adopts an existing toll-free-bridged object id as a ChangePlaybackPositionCommand (nil for 0).
+// ChangePlaybackPositionCommandFromID adopts an existing object pointer as a ChangePlaybackPositionCommand (nil for 0).
 func ChangePlaybackPositionCommandFromID(id objc.ID) *ChangePlaybackPositionCommand {
 	if id == 0 {
 		return nil

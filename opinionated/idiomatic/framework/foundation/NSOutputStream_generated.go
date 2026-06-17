@@ -18,11 +18,11 @@ type OutputStream struct {
 // Unwrap returns the underlying [raw.NSOutputStream].
 func (x *OutputStream) Unwrap() *raw.NSOutputStream { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *OutputStream) ID() objc.ID { return x.inner.Ptr() }
 
-// OutputStreamFromID adopts an existing toll-free-bridged object id as a OutputStream (nil for 0).
+// OutputStreamFromID adopts an existing object pointer as a OutputStream (nil for 0).
 func OutputStreamFromID(id objc.ID) *OutputStream {
 	if id == 0 {
 		return nil

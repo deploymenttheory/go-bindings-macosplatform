@@ -18,11 +18,11 @@ type MTRModeSelectClusterSemanticTagStruct struct {
 // Unwrap returns the underlying [raw.MTRModeSelectClusterSemanticTagStruct].
 func (x *MTRModeSelectClusterSemanticTagStruct) Unwrap() *raw.MTRModeSelectClusterSemanticTagStruct { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRModeSelectClusterSemanticTagStruct) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRModeSelectClusterSemanticTagStructFromID adopts an existing toll-free-bridged object id as a MTRModeSelectClusterSemanticTagStruct (nil for 0).
+// MTRModeSelectClusterSemanticTagStructFromID adopts an existing object pointer as a MTRModeSelectClusterSemanticTagStruct (nil for 0).
 func MTRModeSelectClusterSemanticTagStructFromID(id objc.ID) *MTRModeSelectClusterSemanticTagStruct {
 	if id == 0 {
 		return nil

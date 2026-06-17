@@ -18,11 +18,11 @@ type MTRGroupKeyManagementClusterKeySetWriteParams struct {
 // Unwrap returns the underlying [raw.MTRGroupKeyManagementClusterKeySetWriteParams].
 func (x *MTRGroupKeyManagementClusterKeySetWriteParams) Unwrap() *raw.MTRGroupKeyManagementClusterKeySetWriteParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRGroupKeyManagementClusterKeySetWriteParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRGroupKeyManagementClusterKeySetWriteParamsFromID adopts an existing toll-free-bridged object id as a MTRGroupKeyManagementClusterKeySetWriteParams (nil for 0).
+// MTRGroupKeyManagementClusterKeySetWriteParamsFromID adopts an existing object pointer as a MTRGroupKeyManagementClusterKeySetWriteParams (nil for 0).
 func MTRGroupKeyManagementClusterKeySetWriteParamsFromID(id objc.ID) *MTRGroupKeyManagementClusterKeySetWriteParams {
 	if id == 0 {
 		return nil

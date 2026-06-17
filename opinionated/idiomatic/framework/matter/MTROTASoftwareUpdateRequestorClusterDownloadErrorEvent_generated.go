@@ -17,11 +17,11 @@ type MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent struct {
 // Unwrap returns the underlying [raw.MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent].
 func (x *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent) Unwrap() *raw.MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent) ID() objc.ID { return x.inner.Ptr() }
 
-// MTROtaSoftwareUpdateRequestorClusterDownloadErrorEventFromID adopts an existing toll-free-bridged object id as a MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent (nil for 0).
+// MTROtaSoftwareUpdateRequestorClusterDownloadErrorEventFromID adopts an existing object pointer as a MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent (nil for 0).
 func MTROtaSoftwareUpdateRequestorClusterDownloadErrorEventFromID(id objc.ID) *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent {
 	if id == 0 {
 		return nil

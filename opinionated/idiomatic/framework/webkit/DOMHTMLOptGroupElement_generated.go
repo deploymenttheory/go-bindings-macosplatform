@@ -19,11 +19,11 @@ type DOMHTMLOptGroupElement struct {
 // Unwrap returns the underlying [raw.DOMHTMLOptGroupElement].
 func (x *DOMHTMLOptGroupElement) Unwrap() *raw.DOMHTMLOptGroupElement { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DOMHTMLOptGroupElement) ID() objc.ID { return x.inner.Ptr() }
 
-// DOMHTMLOptGroupElementFromID adopts an existing toll-free-bridged object id as a DOMHTMLOptGroupElement (nil for 0).
+// DOMHTMLOptGroupElementFromID adopts an existing object pointer as a DOMHTMLOptGroupElement (nil for 0).
 func DOMHTMLOptGroupElementFromID(id objc.ID) *DOMHTMLOptGroupElement {
 	if id == 0 {
 		return nil

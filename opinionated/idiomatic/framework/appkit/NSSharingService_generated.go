@@ -20,11 +20,11 @@ type SharingService struct {
 // Unwrap returns the underlying [raw.NSSharingService].
 func (x *SharingService) Unwrap() *raw.NSSharingService { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SharingService) ID() objc.ID { return x.inner.Ptr() }
 
-// SharingServiceFromID adopts an existing toll-free-bridged object id as a SharingService (nil for 0).
+// SharingServiceFromID adopts an existing object pointer as a SharingService (nil for 0).
 func SharingServiceFromID(id objc.ID) *SharingService {
 	if id == 0 {
 		return nil

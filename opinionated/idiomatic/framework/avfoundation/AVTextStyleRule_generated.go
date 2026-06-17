@@ -19,11 +19,11 @@ type TextStyleRule struct {
 // Unwrap returns the underlying [raw.AVTextStyleRule].
 func (x *TextStyleRule) Unwrap() *raw.AVTextStyleRule { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *TextStyleRule) ID() objc.ID { return x.inner.Ptr() }
 
-// TextStyleRuleFromID adopts an existing toll-free-bridged object id as a TextStyleRule (nil for 0).
+// TextStyleRuleFromID adopts an existing object pointer as a TextStyleRule (nil for 0).
 func TextStyleRuleFromID(id objc.ID) *TextStyleRule {
 	if id == 0 {
 		return nil

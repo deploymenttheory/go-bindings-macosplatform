@@ -18,11 +18,11 @@ type VirtioFileSystemDevice struct {
 // Unwrap returns the underlying [raw.VZVirtioFileSystemDevice].
 func (x *VirtioFileSystemDevice) Unwrap() *raw.VZVirtioFileSystemDevice { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *VirtioFileSystemDevice) ID() objc.ID { return x.inner.Ptr() }
 
-// VirtioFileSystemDeviceFromID adopts an existing toll-free-bridged object id as a VirtioFileSystemDevice (nil for 0).
+// VirtioFileSystemDeviceFromID adopts an existing object pointer as a VirtioFileSystemDevice (nil for 0).
 func VirtioFileSystemDeviceFromID(id objc.ID) *VirtioFileSystemDevice {
 	if id == 0 {
 		return nil

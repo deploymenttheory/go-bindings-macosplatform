@@ -17,11 +17,11 @@ type Port struct {
 // Unwrap returns the underlying [raw.NSPort].
 func (x *Port) Unwrap() *raw.NSPort { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Port) ID() objc.ID { return x.inner.Ptr() }
 
-// PortFromID adopts an existing toll-free-bridged object id as a Port (nil for 0).
+// PortFromID adopts an existing object pointer as a Port (nil for 0).
 func PortFromID(id objc.ID) *Port {
 	if id == 0 {
 		return nil

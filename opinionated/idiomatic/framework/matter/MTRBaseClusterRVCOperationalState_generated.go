@@ -21,11 +21,11 @@ type MTRBaseClusterRVCOperationalState struct {
 // Unwrap returns the underlying [raw.MTRBaseClusterRVCOperationalState].
 func (x *MTRBaseClusterRVCOperationalState) Unwrap() *raw.MTRBaseClusterRVCOperationalState { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRBaseClusterRVCOperationalState) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRBaseClusterRVCOperationalStateFromID adopts an existing toll-free-bridged object id as a MTRBaseClusterRVCOperationalState (nil for 0).
+// MTRBaseClusterRVCOperationalStateFromID adopts an existing object pointer as a MTRBaseClusterRVCOperationalState (nil for 0).
 func MTRBaseClusterRVCOperationalStateFromID(id objc.ID) *MTRBaseClusterRVCOperationalState {
 	if id == 0 {
 		return nil

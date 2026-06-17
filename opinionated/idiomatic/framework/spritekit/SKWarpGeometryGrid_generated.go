@@ -19,11 +19,11 @@ type WarpGeometryGrid struct {
 // Unwrap returns the underlying [raw.SKWarpGeometryGrid].
 func (x *WarpGeometryGrid) Unwrap() *raw.SKWarpGeometryGrid { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *WarpGeometryGrid) ID() objc.ID { return x.inner.Ptr() }
 
-// WarpGeometryGridFromID adopts an existing toll-free-bridged object id as a WarpGeometryGrid (nil for 0).
+// WarpGeometryGridFromID adopts an existing object pointer as a WarpGeometryGrid (nil for 0).
 func WarpGeometryGridFromID(id objc.ID) *WarpGeometryGrid {
 	if id == 0 {
 		return nil

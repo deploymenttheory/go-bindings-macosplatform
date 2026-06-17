@@ -20,11 +20,11 @@ type MTRICDManagementClusterRegisterClientResponseParams struct {
 // Unwrap returns the underlying [raw.MTRICDManagementClusterRegisterClientResponseParams].
 func (x *MTRICDManagementClusterRegisterClientResponseParams) Unwrap() *raw.MTRICDManagementClusterRegisterClientResponseParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRICDManagementClusterRegisterClientResponseParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRICDManagementClusterRegisterClientResponseParamsFromID adopts an existing toll-free-bridged object id as a MTRICDManagementClusterRegisterClientResponseParams (nil for 0).
+// MTRICDManagementClusterRegisterClientResponseParamsFromID adopts an existing object pointer as a MTRICDManagementClusterRegisterClientResponseParams (nil for 0).
 func MTRICDManagementClusterRegisterClientResponseParamsFromID(id objc.ID) *MTRICDManagementClusterRegisterClientResponseParams {
 	if id == 0 {
 		return nil

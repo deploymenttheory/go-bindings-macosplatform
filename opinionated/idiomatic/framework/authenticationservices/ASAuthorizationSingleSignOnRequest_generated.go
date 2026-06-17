@@ -20,11 +20,11 @@ type AuthorizationSingleSignOnRequest struct {
 // Unwrap returns the underlying [raw.ASAuthorizationSingleSignOnRequest].
 func (x *AuthorizationSingleSignOnRequest) Unwrap() *raw.ASAuthorizationSingleSignOnRequest { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AuthorizationSingleSignOnRequest) ID() objc.ID { return x.inner.Ptr() }
 
-// AuthorizationSingleSignOnRequestFromID adopts an existing toll-free-bridged object id as a AuthorizationSingleSignOnRequest (nil for 0).
+// AuthorizationSingleSignOnRequestFromID adopts an existing object pointer as a AuthorizationSingleSignOnRequest (nil for 0).
 func AuthorizationSingleSignOnRequestFromID(id objc.ID) *AuthorizationSingleSignOnRequest {
 	if id == 0 {
 		return nil

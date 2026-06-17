@@ -18,11 +18,11 @@ type SpeakableString struct {
 // Unwrap returns the underlying [raw.INSpeakableString].
 func (x *SpeakableString) Unwrap() *raw.INSpeakableString { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SpeakableString) ID() objc.ID { return x.inner.Ptr() }
 
-// SpeakableStringFromID adopts an existing toll-free-bridged object id as a SpeakableString (nil for 0).
+// SpeakableStringFromID adopts an existing object pointer as a SpeakableString (nil for 0).
 func SpeakableStringFromID(id objc.ID) *SpeakableString {
 	if id == 0 {
 		return nil

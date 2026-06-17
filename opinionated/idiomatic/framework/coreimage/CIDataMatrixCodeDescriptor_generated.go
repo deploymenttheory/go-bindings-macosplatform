@@ -18,11 +18,11 @@ type DataMatrixCodeDescriptor struct {
 // Unwrap returns the underlying [raw.CIDataMatrixCodeDescriptor].
 func (x *DataMatrixCodeDescriptor) Unwrap() *raw.CIDataMatrixCodeDescriptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DataMatrixCodeDescriptor) ID() objc.ID { return x.inner.Ptr() }
 
-// DataMatrixCodeDescriptorFromID adopts an existing toll-free-bridged object id as a DataMatrixCodeDescriptor (nil for 0).
+// DataMatrixCodeDescriptorFromID adopts an existing object pointer as a DataMatrixCodeDescriptor (nil for 0).
 func DataMatrixCodeDescriptorFromID(id objc.ID) *DataMatrixCodeDescriptor {
 	if id == 0 {
 		return nil

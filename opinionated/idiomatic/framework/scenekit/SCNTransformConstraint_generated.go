@@ -17,11 +17,11 @@ type TransformConstraint struct {
 // Unwrap returns the underlying [raw.SCNTransformConstraint].
 func (x *TransformConstraint) Unwrap() *raw.SCNTransformConstraint { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *TransformConstraint) ID() objc.ID { return x.inner.Ptr() }
 
-// TransformConstraintFromID adopts an existing toll-free-bridged object id as a TransformConstraint (nil for 0).
+// TransformConstraintFromID adopts an existing object pointer as a TransformConstraint (nil for 0).
 func TransformConstraintFromID(id objc.ID) *TransformConstraint {
 	if id == 0 {
 		return nil

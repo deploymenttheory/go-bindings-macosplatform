@@ -18,11 +18,11 @@ type CalendarNotificationTrigger struct {
 // Unwrap returns the underlying [raw.UNCalendarNotificationTrigger].
 func (x *CalendarNotificationTrigger) Unwrap() *raw.UNCalendarNotificationTrigger { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CalendarNotificationTrigger) ID() objc.ID { return x.inner.Ptr() }
 
-// CalendarNotificationTriggerFromID adopts an existing toll-free-bridged object id as a CalendarNotificationTrigger (nil for 0).
+// CalendarNotificationTriggerFromID adopts an existing object pointer as a CalendarNotificationTrigger (nil for 0).
 func CalendarNotificationTriggerFromID(id objc.ID) *CalendarNotificationTrigger {
 	if id == 0 {
 		return nil

@@ -19,11 +19,11 @@ type StatefulRequest struct {
 // Unwrap returns the underlying [raw.VNStatefulRequest].
 func (x *StatefulRequest) Unwrap() *raw.VNStatefulRequest { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *StatefulRequest) ID() objc.ID { return x.inner.Ptr() }
 
-// StatefulRequestFromID adopts an existing toll-free-bridged object id as a StatefulRequest (nil for 0).
+// StatefulRequestFromID adopts an existing object pointer as a StatefulRequest (nil for 0).
 func StatefulRequestFromID(id objc.ID) *StatefulRequest {
 	if id == 0 {
 		return nil

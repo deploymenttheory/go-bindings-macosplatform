@@ -18,11 +18,11 @@ type ShareableContentInfo struct {
 // Unwrap returns the underlying [raw.SCShareableContentInfo].
 func (x *ShareableContentInfo) Unwrap() *raw.SCShareableContentInfo { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ShareableContentInfo) ID() objc.ID { return x.inner.Ptr() }
 
-// ShareableContentInfoFromID adopts an existing toll-free-bridged object id as a ShareableContentInfo (nil for 0).
+// ShareableContentInfoFromID adopts an existing object pointer as a ShareableContentInfo (nil for 0).
 func ShareableContentInfoFromID(id objc.ID) *ShareableContentInfo {
 	if id == 0 {
 		return nil

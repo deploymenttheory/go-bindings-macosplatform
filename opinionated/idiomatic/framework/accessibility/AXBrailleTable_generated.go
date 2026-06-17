@@ -19,11 +19,11 @@ type BrailleTable struct {
 // Unwrap returns the underlying [raw.AXBrailleTable].
 func (x *BrailleTable) Unwrap() *raw.AXBrailleTable { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *BrailleTable) ID() objc.ID { return x.inner.Ptr() }
 
-// BrailleTableFromID adopts an existing toll-free-bridged object id as a BrailleTable (nil for 0).
+// BrailleTableFromID adopts an existing object pointer as a BrailleTable (nil for 0).
 func BrailleTableFromID(id objc.ID) *BrailleTable {
 	if id == 0 {
 		return nil

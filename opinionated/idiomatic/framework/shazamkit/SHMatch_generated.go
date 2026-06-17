@@ -18,11 +18,11 @@ type Match struct {
 // Unwrap returns the underlying [raw.SHMatch].
 func (x *Match) Unwrap() *raw.SHMatch { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Match) ID() objc.ID { return x.inner.Ptr() }
 
-// MatchFromID adopts an existing toll-free-bridged object id as a Match (nil for 0).
+// MatchFromID adopts an existing object pointer as a Match (nil for 0).
 func MatchFromID(id objc.ID) *Match {
 	if id == 0 {
 		return nil

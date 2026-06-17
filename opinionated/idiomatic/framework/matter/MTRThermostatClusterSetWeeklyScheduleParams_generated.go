@@ -18,11 +18,11 @@ type MTRThermostatClusterSetWeeklyScheduleParams struct {
 // Unwrap returns the underlying [raw.MTRThermostatClusterSetWeeklyScheduleParams].
 func (x *MTRThermostatClusterSetWeeklyScheduleParams) Unwrap() *raw.MTRThermostatClusterSetWeeklyScheduleParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRThermostatClusterSetWeeklyScheduleParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRThermostatClusterSetWeeklyScheduleParamsFromID adopts an existing toll-free-bridged object id as a MTRThermostatClusterSetWeeklyScheduleParams (nil for 0).
+// MTRThermostatClusterSetWeeklyScheduleParamsFromID adopts an existing object pointer as a MTRThermostatClusterSetWeeklyScheduleParams (nil for 0).
 func MTRThermostatClusterSetWeeklyScheduleParamsFromID(id objc.ID) *MTRThermostatClusterSetWeeklyScheduleParams {
 	if id == 0 {
 		return nil

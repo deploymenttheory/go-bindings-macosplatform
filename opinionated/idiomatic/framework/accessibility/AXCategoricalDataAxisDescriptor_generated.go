@@ -20,11 +20,11 @@ type CategoricalDataAxisDescriptor struct {
 // Unwrap returns the underlying [raw.AXCategoricalDataAxisDescriptor].
 func (x *CategoricalDataAxisDescriptor) Unwrap() *raw.AXCategoricalDataAxisDescriptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CategoricalDataAxisDescriptor) ID() objc.ID { return x.inner.Ptr() }
 
-// CategoricalDataAxisDescriptorFromID adopts an existing toll-free-bridged object id as a CategoricalDataAxisDescriptor (nil for 0).
+// CategoricalDataAxisDescriptorFromID adopts an existing object pointer as a CategoricalDataAxisDescriptor (nil for 0).
 func CategoricalDataAxisDescriptorFromID(id objc.ID) *CategoricalDataAxisDescriptor {
 	if id == 0 {
 		return nil

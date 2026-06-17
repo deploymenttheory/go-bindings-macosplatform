@@ -20,11 +20,11 @@ type LanguageRecognizer struct {
 // Unwrap returns the underlying [raw.NLLanguageRecognizer].
 func (x *LanguageRecognizer) Unwrap() *raw.NLLanguageRecognizer { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *LanguageRecognizer) ID() objc.ID { return x.inner.Ptr() }
 
-// LanguageRecognizerFromID adopts an existing toll-free-bridged object id as a LanguageRecognizer (nil for 0).
+// LanguageRecognizerFromID adopts an existing object pointer as a LanguageRecognizer (nil for 0).
 func LanguageRecognizerFromID(id objc.ID) *LanguageRecognizer {
 	if id == 0 {
 		return nil

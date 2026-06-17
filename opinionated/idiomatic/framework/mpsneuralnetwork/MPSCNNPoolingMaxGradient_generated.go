@@ -19,11 +19,11 @@ type CNNPoolingMaxGradient struct {
 // Unwrap returns the underlying [raw.MPSCNNPoolingMaxGradient].
 func (x *CNNPoolingMaxGradient) Unwrap() *raw.MPSCNNPoolingMaxGradient { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CNNPoolingMaxGradient) ID() objc.ID { return x.inner.Ptr() }
 
-// CNNPoolingMaxGradientFromID adopts an existing toll-free-bridged object id as a CNNPoolingMaxGradient (nil for 0).
+// CNNPoolingMaxGradientFromID adopts an existing object pointer as a CNNPoolingMaxGradient (nil for 0).
 func CNNPoolingMaxGradientFromID(id objc.ID) *CNNPoolingMaxGradient {
 	if id == 0 {
 		return nil

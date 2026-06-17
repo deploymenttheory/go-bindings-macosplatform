@@ -17,11 +17,11 @@ type WKFindConfiguration struct {
 // Unwrap returns the underlying [raw.WKFindConfiguration].
 func (x *WKFindConfiguration) Unwrap() *raw.WKFindConfiguration { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *WKFindConfiguration) ID() objc.ID { return x.inner.Ptr() }
 
-// WKFindConfigurationFromID adopts an existing toll-free-bridged object id as a WKFindConfiguration (nil for 0).
+// WKFindConfigurationFromID adopts an existing object pointer as a WKFindConfiguration (nil for 0).
 func WKFindConfigurationFromID(id objc.ID) *WKFindConfiguration {
 	if id == 0 {
 		return nil

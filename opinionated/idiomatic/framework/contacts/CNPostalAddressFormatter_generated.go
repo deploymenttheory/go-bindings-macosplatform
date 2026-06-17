@@ -19,11 +19,11 @@ type PostalAddressFormatter struct {
 // Unwrap returns the underlying [raw.CNPostalAddressFormatter].
 func (x *PostalAddressFormatter) Unwrap() *raw.CNPostalAddressFormatter { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PostalAddressFormatter) ID() objc.ID { return x.inner.Ptr() }
 
-// PostalAddressFormatterFromID adopts an existing toll-free-bridged object id as a PostalAddressFormatter (nil for 0).
+// PostalAddressFormatterFromID adopts an existing object pointer as a PostalAddressFormatter (nil for 0).
 func PostalAddressFormatterFromID(id objc.ID) *PostalAddressFormatter {
 	if id == 0 {
 		return nil

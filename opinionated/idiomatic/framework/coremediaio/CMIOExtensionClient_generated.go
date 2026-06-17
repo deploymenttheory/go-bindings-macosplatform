@@ -19,11 +19,11 @@ type ExtensionClient struct {
 // Unwrap returns the underlying [raw.CMIOExtensionClient].
 func (x *ExtensionClient) Unwrap() *raw.CMIOExtensionClient { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ExtensionClient) ID() objc.ID { return x.inner.Ptr() }
 
-// ExtensionClientFromID adopts an existing toll-free-bridged object id as a ExtensionClient (nil for 0).
+// ExtensionClientFromID adopts an existing object pointer as a ExtensionClient (nil for 0).
 func ExtensionClientFromID(id objc.ID) *ExtensionClient {
 	if id == 0 {
 		return nil

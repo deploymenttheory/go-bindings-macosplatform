@@ -10,111 +10,111 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// KOBEXHeaderIDKeyName returns the CoreFoundation constant kOBEXHeaderIDKeyName as a toll-free-bridged objc.ID.
+// KOBEXHeaderIDKeyName returns the value of the CoreFoundation reference constant kOBEXHeaderIDKeyName as an objc.ID.
 func KOBEXHeaderIDKeyName() objc.ID { return purego.CFConstant(raw.KOBEXHeaderIDKeyName()) }
 
-// KOBEXHeaderIDKeyType returns the CoreFoundation constant kOBEXHeaderIDKeyType as a toll-free-bridged objc.ID.
+// KOBEXHeaderIDKeyType returns the value of the CoreFoundation reference constant kOBEXHeaderIDKeyType as an objc.ID.
 func KOBEXHeaderIDKeyType() objc.ID { return purego.CFConstant(raw.KOBEXHeaderIDKeyType()) }
 
-// KOBEXHeaderIDKeyDescription returns the CoreFoundation constant kOBEXHeaderIDKeyDescription as a toll-free-bridged objc.ID.
+// KOBEXHeaderIDKeyDescription returns the value of the CoreFoundation reference constant kOBEXHeaderIDKeyDescription as an objc.ID.
 func KOBEXHeaderIDKeyDescription() objc.ID { return purego.CFConstant(raw.KOBEXHeaderIDKeyDescription()) }
 
-// KOBEXHeaderIDKeyTimeISO returns the CoreFoundation constant kOBEXHeaderIDKeyTimeISO as a toll-free-bridged objc.ID.
+// KOBEXHeaderIDKeyTimeISO returns the value of the CoreFoundation reference constant kOBEXHeaderIDKeyTimeISO as an objc.ID.
 func KOBEXHeaderIDKeyTimeISO() objc.ID { return purego.CFConstant(raw.KOBEXHeaderIDKeyTimeISO()) }
 
-// KOBEXHeaderIDKeyTime4Byte returns the CoreFoundation constant kOBEXHeaderIDKeyTime4Byte as a toll-free-bridged objc.ID.
+// KOBEXHeaderIDKeyTime4Byte returns the value of the CoreFoundation reference constant kOBEXHeaderIDKeyTime4Byte as an objc.ID.
 func KOBEXHeaderIDKeyTime4Byte() objc.ID { return purego.CFConstant(raw.KOBEXHeaderIDKeyTime4Byte()) }
 
-// KOBEXHeaderIDKeyTarget returns the CoreFoundation constant kOBEXHeaderIDKeyTarget as a toll-free-bridged objc.ID.
+// KOBEXHeaderIDKeyTarget returns the value of the CoreFoundation reference constant kOBEXHeaderIDKeyTarget as an objc.ID.
 func KOBEXHeaderIDKeyTarget() objc.ID { return purego.CFConstant(raw.KOBEXHeaderIDKeyTarget()) }
 
-// KOBEXHeaderIDKeyHTTP returns the CoreFoundation constant kOBEXHeaderIDKeyHTTP as a toll-free-bridged objc.ID.
+// KOBEXHeaderIDKeyHTTP returns the value of the CoreFoundation reference constant kOBEXHeaderIDKeyHTTP as an objc.ID.
 func KOBEXHeaderIDKeyHTTP() objc.ID { return purego.CFConstant(raw.KOBEXHeaderIDKeyHTTP()) }
 
-// KOBEXHeaderIDKeyBody returns the CoreFoundation constant kOBEXHeaderIDKeyBody as a toll-free-bridged objc.ID.
+// KOBEXHeaderIDKeyBody returns the value of the CoreFoundation reference constant kOBEXHeaderIDKeyBody as an objc.ID.
 func KOBEXHeaderIDKeyBody() objc.ID { return purego.CFConstant(raw.KOBEXHeaderIDKeyBody()) }
 
-// KOBEXHeaderIDKeyEndOfBody returns the CoreFoundation constant kOBEXHeaderIDKeyEndOfBody as a toll-free-bridged objc.ID.
+// KOBEXHeaderIDKeyEndOfBody returns the value of the CoreFoundation reference constant kOBEXHeaderIDKeyEndOfBody as an objc.ID.
 func KOBEXHeaderIDKeyEndOfBody() objc.ID { return purego.CFConstant(raw.KOBEXHeaderIDKeyEndOfBody()) }
 
-// KOBEXHeaderIDKeyWho returns the CoreFoundation constant kOBEXHeaderIDKeyWho as a toll-free-bridged objc.ID.
+// KOBEXHeaderIDKeyWho returns the value of the CoreFoundation reference constant kOBEXHeaderIDKeyWho as an objc.ID.
 func KOBEXHeaderIDKeyWho() objc.ID { return purego.CFConstant(raw.KOBEXHeaderIDKeyWho()) }
 
-// KOBEXHeaderIDKeyAppParameters returns the CoreFoundation constant kOBEXHeaderIDKeyAppParameters as a toll-free-bridged objc.ID.
+// KOBEXHeaderIDKeyAppParameters returns the value of the CoreFoundation reference constant kOBEXHeaderIDKeyAppParameters as an objc.ID.
 func KOBEXHeaderIDKeyAppParameters() objc.ID { return purego.CFConstant(raw.KOBEXHeaderIDKeyAppParameters()) }
 
-// KOBEXHeaderIDKeyAuthorizationChallenge returns the CoreFoundation constant kOBEXHeaderIDKeyAuthorizationChallenge as a toll-free-bridged objc.ID.
+// KOBEXHeaderIDKeyAuthorizationChallenge returns the value of the CoreFoundation reference constant kOBEXHeaderIDKeyAuthorizationChallenge as an objc.ID.
 func KOBEXHeaderIDKeyAuthorizationChallenge() objc.ID { return purego.CFConstant(raw.KOBEXHeaderIDKeyAuthorizationChallenge()) }
 
-// KOBEXHeaderIDKeyAuthorizationResponse returns the CoreFoundation constant kOBEXHeaderIDKeyAuthorizationResponse as a toll-free-bridged objc.ID.
+// KOBEXHeaderIDKeyAuthorizationResponse returns the value of the CoreFoundation reference constant kOBEXHeaderIDKeyAuthorizationResponse as an objc.ID.
 func KOBEXHeaderIDKeyAuthorizationResponse() objc.ID { return purego.CFConstant(raw.KOBEXHeaderIDKeyAuthorizationResponse()) }
 
-// KOBEXHeaderIDKeyObjectClass returns the CoreFoundation constant kOBEXHeaderIDKeyObjectClass as a toll-free-bridged objc.ID.
+// KOBEXHeaderIDKeyObjectClass returns the value of the CoreFoundation reference constant kOBEXHeaderIDKeyObjectClass as an objc.ID.
 func KOBEXHeaderIDKeyObjectClass() objc.ID { return purego.CFConstant(raw.KOBEXHeaderIDKeyObjectClass()) }
 
-// KOBEXHeaderIDKeyCount returns the CoreFoundation constant kOBEXHeaderIDKeyCount as a toll-free-bridged objc.ID.
+// KOBEXHeaderIDKeyCount returns the value of the CoreFoundation reference constant kOBEXHeaderIDKeyCount as an objc.ID.
 func KOBEXHeaderIDKeyCount() objc.ID { return purego.CFConstant(raw.KOBEXHeaderIDKeyCount()) }
 
-// KOBEXHeaderIDKeyLength returns the CoreFoundation constant kOBEXHeaderIDKeyLength as a toll-free-bridged objc.ID.
+// KOBEXHeaderIDKeyLength returns the value of the CoreFoundation reference constant kOBEXHeaderIDKeyLength as an objc.ID.
 func KOBEXHeaderIDKeyLength() objc.ID { return purego.CFConstant(raw.KOBEXHeaderIDKeyLength()) }
 
-// KOBEXHeaderIDKeyConnectionID returns the CoreFoundation constant kOBEXHeaderIDKeyConnectionID as a toll-free-bridged objc.ID.
+// KOBEXHeaderIDKeyConnectionID returns the value of the CoreFoundation reference constant kOBEXHeaderIDKeyConnectionID as an objc.ID.
 func KOBEXHeaderIDKeyConnectionID() objc.ID { return purego.CFConstant(raw.KOBEXHeaderIDKeyConnectionID()) }
 
-// KOBEXHeaderIDKeyByteSequence returns the CoreFoundation constant kOBEXHeaderIDKeyByteSequence as a toll-free-bridged objc.ID.
+// KOBEXHeaderIDKeyByteSequence returns the value of the CoreFoundation reference constant kOBEXHeaderIDKeyByteSequence as an objc.ID.
 func KOBEXHeaderIDKeyByteSequence() objc.ID { return purego.CFConstant(raw.KOBEXHeaderIDKeyByteSequence()) }
 
-// KOBEXHeaderIDKeyUnknownUnicodeText returns the CoreFoundation constant kOBEXHeaderIDKeyUnknownUnicodeText as a toll-free-bridged objc.ID.
+// KOBEXHeaderIDKeyUnknownUnicodeText returns the value of the CoreFoundation reference constant kOBEXHeaderIDKeyUnknownUnicodeText as an objc.ID.
 func KOBEXHeaderIDKeyUnknownUnicodeText() objc.ID { return purego.CFConstant(raw.KOBEXHeaderIDKeyUnknownUnicodeText()) }
 
-// KOBEXHeaderIDKeyUnknownByteSequence returns the CoreFoundation constant kOBEXHeaderIDKeyUnknownByteSequence as a toll-free-bridged objc.ID.
+// KOBEXHeaderIDKeyUnknownByteSequence returns the value of the CoreFoundation reference constant kOBEXHeaderIDKeyUnknownByteSequence as an objc.ID.
 func KOBEXHeaderIDKeyUnknownByteSequence() objc.ID { return purego.CFConstant(raw.KOBEXHeaderIDKeyUnknownByteSequence()) }
 
-// KOBEXHeaderIDKeyUnknown1ByteQuantity returns the CoreFoundation constant kOBEXHeaderIDKeyUnknown1ByteQuantity as a toll-free-bridged objc.ID.
+// KOBEXHeaderIDKeyUnknown1ByteQuantity returns the value of the CoreFoundation reference constant kOBEXHeaderIDKeyUnknown1ByteQuantity as an objc.ID.
 func KOBEXHeaderIDKeyUnknown1ByteQuantity() objc.ID { return purego.CFConstant(raw.KOBEXHeaderIDKeyUnknown1ByteQuantity()) }
 
-// KOBEXHeaderIDKeyUnknown4ByteQuantity returns the CoreFoundation constant kOBEXHeaderIDKeyUnknown4ByteQuantity as a toll-free-bridged objc.ID.
+// KOBEXHeaderIDKeyUnknown4ByteQuantity returns the value of the CoreFoundation reference constant kOBEXHeaderIDKeyUnknown4ByteQuantity as an objc.ID.
 func KOBEXHeaderIDKeyUnknown4ByteQuantity() objc.ID { return purego.CFConstant(raw.KOBEXHeaderIDKeyUnknown4ByteQuantity()) }
 
-// KOBEXHeaderIDKeyUserDefined returns the CoreFoundation constant kOBEXHeaderIDKeyUserDefined as a toll-free-bridged objc.ID.
+// KOBEXHeaderIDKeyUserDefined returns the value of the CoreFoundation reference constant kOBEXHeaderIDKeyUserDefined as an objc.ID.
 func KOBEXHeaderIDKeyUserDefined() objc.ID { return purego.CFConstant(raw.KOBEXHeaderIDKeyUserDefined()) }
 
 // @const			kFTSProgressBytesTransferredKey @abstract		NSNumber integer value. This key is used with the NSDictionary returned from the fileTransferServicesPutProgress: and fileTransferServicesGetProgress: delegate methods
-// KFTSProgressBytesTransferredKey returns the CoreFoundation constant kFTSProgressBytesTransferredKey as a toll-free-bridged objc.ID.
+// KFTSProgressBytesTransferredKey returns the value of the CoreFoundation reference constant kFTSProgressBytesTransferredKey as an objc.ID.
 func KFTSProgressBytesTransferredKey() objc.ID { return purego.CFConstant(raw.KFTSProgressBytesTransferredKey()) }
 
 // @const			kFTSProgressBytesTotalKey @abstract		NSNumber integer value. This key is used with the NSDictionary returned from the fileTransferServicesPutProgress: and fileTransferServicesGetProgress: delegate methods
-// KFTSProgressBytesTotalKey returns the CoreFoundation constant kFTSProgressBytesTotalKey as a toll-free-bridged objc.ID.
+// KFTSProgressBytesTotalKey returns the value of the CoreFoundation reference constant kFTSProgressBytesTotalKey as an objc.ID.
 func KFTSProgressBytesTotalKey() objc.ID { return purego.CFConstant(raw.KFTSProgressBytesTotalKey()) }
 
 // @const			kFTSProgressPercentageKey @abstract		NSNumber float value. This key is used with the NSDictionary returned from the fileTransferServicesPutProgress: and fileTransferServicesGetProgress: delegate methods
-// KFTSProgressPercentageKey returns the CoreFoundation constant kFTSProgressPercentageKey as a toll-free-bridged objc.ID.
+// KFTSProgressPercentageKey returns the value of the CoreFoundation reference constant kFTSProgressPercentageKey as an objc.ID.
 func KFTSProgressPercentageKey() objc.ID { return purego.CFConstant(raw.KFTSProgressPercentageKey()) }
 
-// KFTSProgressPrecentageKey returns the CoreFoundation constant kFTSProgressPrecentageKey as a toll-free-bridged objc.ID.
+// KFTSProgressPrecentageKey returns the value of the CoreFoundation reference constant kFTSProgressPrecentageKey as an objc.ID.
 func KFTSProgressPrecentageKey() objc.ID { return purego.CFConstant(raw.KFTSProgressPrecentageKey()) }
 
 // @const			kFTSProgressEstimatedTimeKey @abstract		NSNumber double value. This key is used with the NSDictionary returned from the fileTransferServicesPutProgress: and fileTransferServicesGetProgress: delegate methods
-// KFTSProgressEstimatedTimeKey returns the CoreFoundation constant kFTSProgressEstimatedTimeKey as a toll-free-bridged objc.ID.
+// KFTSProgressEstimatedTimeKey returns the value of the CoreFoundation reference constant kFTSProgressEstimatedTimeKey as an objc.ID.
 func KFTSProgressEstimatedTimeKey() objc.ID { return purego.CFConstant(raw.KFTSProgressEstimatedTimeKey()) }
 
 // @const			kFTSProgressTimeElapsedKey @abstract		NSNumber int value. This key is used with the NSDictionary returned from the fileTransferServicesPutProgress: and fileTransferServicesGetProgress: delegate methods
-// KFTSProgressTimeElapsedKey returns the CoreFoundation constant kFTSProgressTimeElapsedKey as a toll-free-bridged objc.ID.
+// KFTSProgressTimeElapsedKey returns the value of the CoreFoundation reference constant kFTSProgressTimeElapsedKey as an objc.ID.
 func KFTSProgressTimeElapsedKey() objc.ID { return purego.CFConstant(raw.KFTSProgressTimeElapsedKey()) }
 
 // @const			kFTSProgressTransferRateKey @abstract		NSNumber float value. This key is used with the NSDictionary returned from the fileTransferServicesPutProgress: and fileTransferServicesGetProgress: delegate methods
-// KFTSProgressTransferRateKey returns the CoreFoundation constant kFTSProgressTransferRateKey as a toll-free-bridged objc.ID.
+// KFTSProgressTransferRateKey returns the value of the CoreFoundation reference constant kFTSProgressTransferRateKey as an objc.ID.
 func KFTSProgressTransferRateKey() objc.ID { return purego.CFConstant(raw.KFTSProgressTransferRateKey()) }
 
 // @const			kFTSListingNameKey @abstract		NSString value.  This key is used with the array of NSDictionary's returned through the delegate method fileTransferServicesGetListingComplete: after calling getFolderListing.
-// KFTSListingNameKey returns the CoreFoundation constant kFTSListingNameKey as a toll-free-bridged objc.ID.
+// KFTSListingNameKey returns the value of the CoreFoundation reference constant kFTSListingNameKey as an objc.ID.
 func KFTSListingNameKey() objc.ID { return purego.CFConstant(raw.KFTSListingNameKey()) }
 
 // @const			kFTSListingTypeKey @abstract		FTSFileType value.  This key is used with the array of NSDictionary's returned through the delegate method fileTransferServicesGetListingComplete: after calling getFolderListing.
-// KFTSListingTypeKey returns the CoreFoundation constant kFTSListingTypeKey as a toll-free-bridged objc.ID.
+// KFTSListingTypeKey returns the value of the CoreFoundation reference constant kFTSListingTypeKey as an objc.ID.
 func KFTSListingTypeKey() objc.ID { return purego.CFConstant(raw.KFTSListingTypeKey()) }
 
 // @const			kFTSListingSizeKey @abstract		Int value.  This key is used with the array of NSDictionary's returned through the delegate method fileTransferServicesGetListingComplete: after calling getFolderListing.
-// KFTSListingSizeKey returns the CoreFoundation constant kFTSListingSizeKey as a toll-free-bridged objc.ID.
+// KFTSListingSizeKey returns the value of the CoreFoundation reference constant kFTSListingSizeKey as an objc.ID.
 func KFTSListingSizeKey() objc.ID { return purego.CFConstant(raw.KFTSListingSizeKey()) }
 

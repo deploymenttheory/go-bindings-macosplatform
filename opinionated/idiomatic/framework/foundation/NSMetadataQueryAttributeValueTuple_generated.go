@@ -17,11 +17,11 @@ type MetadataQueryAttributeValueTuple struct {
 // Unwrap returns the underlying [raw.NSMetadataQueryAttributeValueTuple].
 func (x *MetadataQueryAttributeValueTuple) Unwrap() *raw.NSMetadataQueryAttributeValueTuple { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MetadataQueryAttributeValueTuple) ID() objc.ID { return x.inner.Ptr() }
 
-// MetadataQueryAttributeValueTupleFromID adopts an existing toll-free-bridged object id as a MetadataQueryAttributeValueTuple (nil for 0).
+// MetadataQueryAttributeValueTupleFromID adopts an existing object pointer as a MetadataQueryAttributeValueTuple (nil for 0).
 func MetadataQueryAttributeValueTupleFromID(id objc.ID) *MetadataQueryAttributeValueTuple {
 	if id == 0 {
 		return nil

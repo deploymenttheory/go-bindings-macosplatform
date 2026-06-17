@@ -19,11 +19,11 @@ type MTL4PipelineDescriptor struct {
 // Unwrap returns the underlying [raw.MTL4PipelineDescriptor].
 func (x *MTL4PipelineDescriptor) Unwrap() *raw.MTL4PipelineDescriptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTL4PipelineDescriptor) ID() objc.ID { return x.inner.Ptr() }
 
-// MTL4PipelineDescriptorFromID adopts an existing toll-free-bridged object id as a MTL4PipelineDescriptor (nil for 0).
+// MTL4PipelineDescriptorFromID adopts an existing object pointer as a MTL4PipelineDescriptor (nil for 0).
 func MTL4PipelineDescriptorFromID(id objc.ID) *MTL4PipelineDescriptor {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type MTRICDManagementClusterUnregisterClientParams struct {
 // Unwrap returns the underlying [raw.MTRICDManagementClusterUnregisterClientParams].
 func (x *MTRICDManagementClusterUnregisterClientParams) Unwrap() *raw.MTRICDManagementClusterUnregisterClientParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRICDManagementClusterUnregisterClientParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRICDManagementClusterUnregisterClientParamsFromID adopts an existing toll-free-bridged object id as a MTRICDManagementClusterUnregisterClientParams (nil for 0).
+// MTRICDManagementClusterUnregisterClientParamsFromID adopts an existing object pointer as a MTRICDManagementClusterUnregisterClientParams (nil for 0).
 func MTRICDManagementClusterUnregisterClientParamsFromID(id objc.ID) *MTRICDManagementClusterUnregisterClientParams {
 	if id == 0 {
 		return nil

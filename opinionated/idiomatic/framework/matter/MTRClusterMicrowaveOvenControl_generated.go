@@ -19,11 +19,11 @@ type MTRClusterMicrowaveOvenControl struct {
 // Unwrap returns the underlying [raw.MTRClusterMicrowaveOvenControl].
 func (x *MTRClusterMicrowaveOvenControl) Unwrap() *raw.MTRClusterMicrowaveOvenControl { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRClusterMicrowaveOvenControl) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRClusterMicrowaveOvenControlFromID adopts an existing toll-free-bridged object id as a MTRClusterMicrowaveOvenControl (nil for 0).
+// MTRClusterMicrowaveOvenControlFromID adopts an existing object pointer as a MTRClusterMicrowaveOvenControl (nil for 0).
 func MTRClusterMicrowaveOvenControlFromID(id objc.ID) *MTRClusterMicrowaveOvenControl {
 	if id == 0 {
 		return nil

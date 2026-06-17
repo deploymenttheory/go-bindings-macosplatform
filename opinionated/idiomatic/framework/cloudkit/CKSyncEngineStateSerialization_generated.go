@@ -17,11 +17,11 @@ type SyncEngineStateSerialization struct {
 // Unwrap returns the underlying [raw.CKSyncEngineStateSerialization].
 func (x *SyncEngineStateSerialization) Unwrap() *raw.CKSyncEngineStateSerialization { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SyncEngineStateSerialization) ID() objc.ID { return x.inner.Ptr() }
 
-// SyncEngineStateSerializationFromID adopts an existing toll-free-bridged object id as a SyncEngineStateSerialization (nil for 0).
+// SyncEngineStateSerializationFromID adopts an existing object pointer as a SyncEngineStateSerialization (nil for 0).
 func SyncEngineStateSerializationFromID(id objc.ID) *SyncEngineStateSerialization {
 	if id == 0 {
 		return nil

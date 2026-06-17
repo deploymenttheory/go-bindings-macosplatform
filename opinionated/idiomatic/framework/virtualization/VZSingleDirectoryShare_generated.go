@@ -17,11 +17,11 @@ type SingleDirectoryShare struct {
 // Unwrap returns the underlying [raw.VZSingleDirectoryShare].
 func (x *SingleDirectoryShare) Unwrap() *raw.VZSingleDirectoryShare { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SingleDirectoryShare) ID() objc.ID { return x.inner.Ptr() }
 
-// SingleDirectoryShareFromID adopts an existing toll-free-bridged object id as a SingleDirectoryShare (nil for 0).
+// SingleDirectoryShareFromID adopts an existing object pointer as a SingleDirectoryShare (nil for 0).
 func SingleDirectoryShareFromID(id objc.ID) *SingleDirectoryShare {
 	if id == 0 {
 		return nil

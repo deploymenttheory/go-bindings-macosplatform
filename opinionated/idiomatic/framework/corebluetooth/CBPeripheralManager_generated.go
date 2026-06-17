@@ -18,11 +18,11 @@ type PeripheralManager struct {
 // Unwrap returns the underlying [raw.CBPeripheralManager].
 func (x *PeripheralManager) Unwrap() *raw.CBPeripheralManager { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PeripheralManager) ID() objc.ID { return x.inner.Ptr() }
 
-// PeripheralManagerFromID adopts an existing toll-free-bridged object id as a PeripheralManager (nil for 0).
+// PeripheralManagerFromID adopts an existing object pointer as a PeripheralManager (nil for 0).
 func PeripheralManagerFromID(id objc.ID) *PeripheralManager {
 	if id == 0 {
 		return nil

@@ -19,11 +19,11 @@ type FetchDatabaseChangesOperation struct {
 // Unwrap returns the underlying [raw.CKFetchDatabaseChangesOperation].
 func (x *FetchDatabaseChangesOperation) Unwrap() *raw.CKFetchDatabaseChangesOperation { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *FetchDatabaseChangesOperation) ID() objc.ID { return x.inner.Ptr() }
 
-// FetchDatabaseChangesOperationFromID adopts an existing toll-free-bridged object id as a FetchDatabaseChangesOperation (nil for 0).
+// FetchDatabaseChangesOperationFromID adopts an existing object pointer as a FetchDatabaseChangesOperation (nil for 0).
 func FetchDatabaseChangesOperationFromID(id objc.ID) *FetchDatabaseChangesOperation {
 	if id == 0 {
 		return nil

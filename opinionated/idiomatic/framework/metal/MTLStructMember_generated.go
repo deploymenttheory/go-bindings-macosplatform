@@ -18,11 +18,11 @@ type StructMember struct {
 // Unwrap returns the underlying [raw.MTLStructMember].
 func (x *StructMember) Unwrap() *raw.MTLStructMember { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *StructMember) ID() objc.ID { return x.inner.Ptr() }
 
-// StructMemberFromID adopts an existing toll-free-bridged object id as a StructMember (nil for 0).
+// StructMemberFromID adopts an existing object pointer as a StructMember (nil for 0).
 func StructMemberFromID(id objc.ID) *StructMember {
 	if id == 0 {
 		return nil

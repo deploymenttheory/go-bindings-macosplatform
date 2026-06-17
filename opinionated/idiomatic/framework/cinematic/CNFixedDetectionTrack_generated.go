@@ -17,11 +17,11 @@ type FixedDetectionTrack struct {
 // Unwrap returns the underlying [raw.CNFixedDetectionTrack].
 func (x *FixedDetectionTrack) Unwrap() *raw.CNFixedDetectionTrack { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *FixedDetectionTrack) ID() objc.ID { return x.inner.Ptr() }
 
-// FixedDetectionTrackFromID adopts an existing toll-free-bridged object id as a FixedDetectionTrack (nil for 0).
+// FixedDetectionTrackFromID adopts an existing object pointer as a FixedDetectionTrack (nil for 0).
 func FixedDetectionTrackFromID(id objc.ID) *FixedDetectionTrack {
 	if id == 0 {
 		return nil

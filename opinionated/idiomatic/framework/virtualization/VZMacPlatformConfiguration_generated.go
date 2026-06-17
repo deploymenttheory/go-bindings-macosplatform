@@ -17,11 +17,11 @@ type MacPlatformConfiguration struct {
 // Unwrap returns the underlying [raw.VZMacPlatformConfiguration].
 func (x *MacPlatformConfiguration) Unwrap() *raw.VZMacPlatformConfiguration { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MacPlatformConfiguration) ID() objc.ID { return x.inner.Ptr() }
 
-// MacPlatformConfigurationFromID adopts an existing toll-free-bridged object id as a MacPlatformConfiguration (nil for 0).
+// MacPlatformConfigurationFromID adopts an existing object pointer as a MacPlatformConfiguration (nil for 0).
 func MacPlatformConfigurationFromID(id objc.ID) *MacPlatformConfiguration {
 	if id == 0 {
 		return nil

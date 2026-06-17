@@ -17,11 +17,11 @@ type Proxy struct {
 // Unwrap returns the underlying [raw.NSProxy].
 func (x *Proxy) Unwrap() *raw.NSProxy { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Proxy) ID() objc.ID { return x.inner.Ptr() }
 
-// ProxyFromID adopts an existing toll-free-bridged object id as a Proxy (nil for 0).
+// ProxyFromID adopts an existing object pointer as a Proxy (nil for 0).
 func ProxyFromID(id objc.ID) *Proxy {
 	if id == 0 {
 		return nil

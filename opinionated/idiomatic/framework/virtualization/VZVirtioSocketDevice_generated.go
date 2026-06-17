@@ -20,11 +20,11 @@ type VirtioSocketDevice struct {
 // Unwrap returns the underlying [raw.VZVirtioSocketDevice].
 func (x *VirtioSocketDevice) Unwrap() *raw.VZVirtioSocketDevice { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *VirtioSocketDevice) ID() objc.ID { return x.inner.Ptr() }
 
-// VirtioSocketDeviceFromID adopts an existing toll-free-bridged object id as a VirtioSocketDevice (nil for 0).
+// VirtioSocketDeviceFromID adopts an existing object pointer as a VirtioSocketDevice (nil for 0).
 func VirtioSocketDeviceFromID(id objc.ID) *VirtioSocketDevice {
 	if id == 0 {
 		return nil

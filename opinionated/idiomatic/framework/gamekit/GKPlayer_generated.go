@@ -21,11 +21,11 @@ type Player struct {
 // Unwrap returns the underlying [raw.GKPlayer].
 func (x *Player) Unwrap() *raw.GKPlayer { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Player) ID() objc.ID { return x.inner.Ptr() }
 
-// PlayerFromID adopts an existing toll-free-bridged object id as a Player (nil for 0).
+// PlayerFromID adopts an existing object pointer as a Player (nil for 0).
 func PlayerFromID(id objc.ID) *Player {
 	if id == 0 {
 		return nil

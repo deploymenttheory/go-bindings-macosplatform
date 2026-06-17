@@ -18,11 +18,11 @@ type MTRAttributeValueWaiter struct {
 // Unwrap returns the underlying [raw.MTRAttributeValueWaiter].
 func (x *MTRAttributeValueWaiter) Unwrap() *raw.MTRAttributeValueWaiter { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRAttributeValueWaiter) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRAttributeValueWaiterFromID adopts an existing toll-free-bridged object id as a MTRAttributeValueWaiter (nil for 0).
+// MTRAttributeValueWaiterFromID adopts an existing object pointer as a MTRAttributeValueWaiter (nil for 0).
 func MTRAttributeValueWaiterFromID(id objc.ID) *MTRAttributeValueWaiter {
 	if id == 0 {
 		return nil

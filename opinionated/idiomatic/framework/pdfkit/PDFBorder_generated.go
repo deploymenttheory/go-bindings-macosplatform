@@ -19,11 +19,11 @@ type Border struct {
 // Unwrap returns the underlying [raw.PDFBorder].
 func (x *Border) Unwrap() *raw.PDFBorder { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Border) ID() objc.ID { return x.inner.Ptr() }
 
-// BorderFromID adopts an existing toll-free-bridged object id as a Border (nil for 0).
+// BorderFromID adopts an existing object pointer as a Border (nil for 0).
 func BorderFromID(id objc.ID) *Border {
 	if id == 0 {
 		return nil

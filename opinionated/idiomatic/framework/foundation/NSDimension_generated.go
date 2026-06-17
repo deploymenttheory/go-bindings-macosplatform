@@ -18,11 +18,11 @@ type Dimension struct {
 // Unwrap returns the underlying [raw.NSDimension].
 func (x *Dimension) Unwrap() *raw.NSDimension { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Dimension) ID() objc.ID { return x.inner.Ptr() }
 
-// DimensionFromID adopts an existing toll-free-bridged object id as a Dimension (nil for 0).
+// DimensionFromID adopts an existing object pointer as a Dimension (nil for 0).
 func DimensionFromID(id objc.ID) *Dimension {
 	if id == 0 {
 		return nil

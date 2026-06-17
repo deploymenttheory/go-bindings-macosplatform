@@ -20,11 +20,11 @@ type DisbursementRequest struct {
 // Unwrap returns the underlying [raw.PKDisbursementRequest].
 func (x *DisbursementRequest) Unwrap() *raw.PKDisbursementRequest { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DisbursementRequest) ID() objc.ID { return x.inner.Ptr() }
 
-// DisbursementRequestFromID adopts an existing toll-free-bridged object id as a DisbursementRequest (nil for 0).
+// DisbursementRequestFromID adopts an existing object pointer as a DisbursementRequest (nil for 0).
 func DisbursementRequestFromID(id objc.ID) *DisbursementRequest {
 	if id == 0 {
 		return nil

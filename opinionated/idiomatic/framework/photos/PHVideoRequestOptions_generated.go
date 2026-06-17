@@ -17,11 +17,11 @@ type VideoRequestOptions struct {
 // Unwrap returns the underlying [raw.PHVideoRequestOptions].
 func (x *VideoRequestOptions) Unwrap() *raw.PHVideoRequestOptions { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *VideoRequestOptions) ID() objc.ID { return x.inner.Ptr() }
 
-// VideoRequestOptionsFromID adopts an existing toll-free-bridged object id as a VideoRequestOptions (nil for 0).
+// VideoRequestOptionsFromID adopts an existing object pointer as a VideoRequestOptions (nil for 0).
 func VideoRequestOptionsFromID(id objc.ID) *VideoRequestOptions {
 	if id == 0 {
 		return nil

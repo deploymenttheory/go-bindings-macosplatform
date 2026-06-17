@@ -19,11 +19,11 @@ type NNSlice struct {
 // Unwrap returns the underlying [raw.MPSNNSlice].
 func (x *NNSlice) Unwrap() *raw.MPSNNSlice { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NNSlice) ID() objc.ID { return x.inner.Ptr() }
 
-// NNSliceFromID adopts an existing toll-free-bridged object id as a NNSlice (nil for 0).
+// NNSliceFromID adopts an existing object pointer as a NNSlice (nil for 0).
 func NNSliceFromID(id objc.ID) *NNSlice {
 	if id == 0 {
 		return nil

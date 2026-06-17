@@ -13,7 +13,7 @@ import (
 	"unsafe"
 )
 
-// DVDClearLastPlayBookmark wraps [raw.DVDClearLastPlayBookmark], bridging CFTypeRef arguments and the OSStatus result.
+// DVDClearLastPlayBookmark wraps [raw.DVDClearLastPlayBookmark], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDClearLastPlayBookmark() error {
 	if _err := purego.NewOSStatus(raw.DVDClearLastPlayBookmark()).Err(); _err != nil {
 		return _err
@@ -21,7 +21,7 @@ func DVDClearLastPlayBookmark() error {
 	return nil
 }
 
-// DVDCloseMediaFile wraps [raw.DVDCloseMediaFile], bridging CFTypeRef arguments and the OSStatus result.
+// DVDCloseMediaFile wraps [raw.DVDCloseMediaFile], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDCloseMediaFile() error {
 	if _err := purego.NewOSStatus(raw.DVDCloseMediaFile()).Err(); _err != nil {
 		return _err
@@ -29,7 +29,7 @@ func DVDCloseMediaFile() error {
 	return nil
 }
 
-// DVDCloseMediaVolume wraps [raw.DVDCloseMediaVolume], bridging CFTypeRef arguments and the OSStatus result.
+// DVDCloseMediaVolume wraps [raw.DVDCloseMediaVolume], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDCloseMediaVolume() error {
 	if _err := purego.NewOSStatus(raw.DVDCloseMediaVolume()).Err(); _err != nil {
 		return _err
@@ -37,7 +37,7 @@ func DVDCloseMediaVolume() error {
 	return nil
 }
 
-// DVDDisplaySubPicture wraps [raw.DVDDisplaySubPicture], bridging CFTypeRef arguments and the OSStatus result.
+// DVDDisplaySubPicture wraps [raw.DVDDisplaySubPicture], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDDisplaySubPicture(inDisplay uint8) error {
 	if _err := purego.NewOSStatus(raw.DVDDisplaySubPicture(inDisplay)).Err(); _err != nil {
 		return _err
@@ -45,7 +45,7 @@ func DVDDisplaySubPicture(inDisplay uint8) error {
 	return nil
 }
 
-// DVDDispose wraps [raw.DVDDispose], bridging CFTypeRef arguments and the OSStatus result.
+// DVDDispose wraps [raw.DVDDispose], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDDispose() error {
 	if _err := purego.NewOSStatus(raw.DVDDispose()).Err(); _err != nil {
 		return _err
@@ -53,7 +53,7 @@ func DVDDispose() error {
 	return nil
 }
 
-// DVDDoButtonActivate wraps [raw.DVDDoButtonActivate], bridging CFTypeRef arguments and the OSStatus result.
+// DVDDoButtonActivate wraps [raw.DVDDoButtonActivate], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDDoButtonActivate(inIndex int) error {
 	if _err := purego.NewOSStatus(raw.DVDDoButtonActivate(inIndex)).Err(); _err != nil {
 		return _err
@@ -61,7 +61,7 @@ func DVDDoButtonActivate(inIndex int) error {
 	return nil
 }
 
-// DVDDoMenuCGClick wraps [raw.DVDDoMenuCGClick], bridging CFTypeRef arguments and the OSStatus result.
+// DVDDoMenuCGClick wraps [raw.DVDDoMenuCGClick], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDDoMenuCGClick(inPt *corefoundation.CGPoint, outIndex *int) error {
 	if _err := purego.NewOSStatus(raw.DVDDoMenuCGClick(inPt, outIndex)).Err(); _err != nil {
 		return _err
@@ -69,7 +69,7 @@ func DVDDoMenuCGClick(inPt *corefoundation.CGPoint, outIndex *int) error {
 	return nil
 }
 
-// DVDDoMenuCGMouseOver wraps [raw.DVDDoMenuCGMouseOver], bridging CFTypeRef arguments and the OSStatus result.
+// DVDDoMenuCGMouseOver wraps [raw.DVDDoMenuCGMouseOver], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDDoMenuCGMouseOver(inPt *corefoundation.CGPoint, outIndex *int) error {
 	if _err := purego.NewOSStatus(raw.DVDDoMenuCGMouseOver(inPt, outIndex)).Err(); _err != nil {
 		return _err
@@ -77,7 +77,7 @@ func DVDDoMenuCGMouseOver(inPt *corefoundation.CGPoint, outIndex *int) error {
 	return nil
 }
 
-// DVDDoUserNavigation wraps [raw.DVDDoUserNavigation], bridging CFTypeRef arguments and the OSStatus result.
+// DVDDoUserNavigation wraps [raw.DVDDoUserNavigation], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDDoUserNavigation(inNavigation raw.DVDUserNavigation) error {
 	if _err := purego.NewOSStatus(raw.DVDDoUserNavigation(inNavigation)).Err(); _err != nil {
 		return _err
@@ -85,7 +85,7 @@ func DVDDoUserNavigation(inNavigation raw.DVDUserNavigation) error {
 	return nil
 }
 
-// DVDEnableWebAccess wraps [raw.DVDEnableWebAccess], bridging CFTypeRef arguments and the OSStatus result.
+// DVDEnableWebAccess wraps [raw.DVDEnableWebAccess], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDEnableWebAccess(inEnable uint8) error {
 	if _err := purego.NewOSStatus(raw.DVDEnableWebAccess(inEnable)).Err(); _err != nil {
 		return _err
@@ -93,7 +93,7 @@ func DVDEnableWebAccess(inEnable uint8) error {
 	return nil
 }
 
-// DVDGetAngle wraps [raw.DVDGetAngle], bridging CFTypeRef arguments and the OSStatus result.
+// DVDGetAngle wraps [raw.DVDGetAngle], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDGetAngle(outAngleNum *uint16) error {
 	if _err := purego.NewOSStatus(raw.DVDGetAngle(outAngleNum)).Err(); _err != nil {
 		return _err
@@ -101,7 +101,7 @@ func DVDGetAngle(outAngleNum *uint16) error {
 	return nil
 }
 
-// DVDGetAspectRatio wraps [raw.DVDGetAspectRatio], bridging CFTypeRef arguments and the OSStatus result.
+// DVDGetAspectRatio wraps [raw.DVDGetAspectRatio], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDGetAspectRatio(outRatio *raw.DVDAspectRatio) error {
 	if _err := purego.NewOSStatus(raw.DVDGetAspectRatio(outRatio)).Err(); _err != nil {
 		return _err
@@ -109,7 +109,7 @@ func DVDGetAspectRatio(outRatio *raw.DVDAspectRatio) error {
 	return nil
 }
 
-// DVDGetAudioLanguageCode wraps [raw.DVDGetAudioLanguageCode], bridging CFTypeRef arguments and the OSStatus result.
+// DVDGetAudioLanguageCode wraps [raw.DVDGetAudioLanguageCode], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDGetAudioLanguageCode(outCode *uint, outExtension *uint) error {
 	if _err := purego.NewOSStatus(raw.DVDGetAudioLanguageCode(outCode, outExtension)).Err(); _err != nil {
 		return _err
@@ -117,7 +117,7 @@ func DVDGetAudioLanguageCode(outCode *uint, outExtension *uint) error {
 	return nil
 }
 
-// DVDGetAudioLanguageCodeByStream wraps [raw.DVDGetAudioLanguageCodeByStream], bridging CFTypeRef arguments and the OSStatus result.
+// DVDGetAudioLanguageCodeByStream wraps [raw.DVDGetAudioLanguageCodeByStream], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDGetAudioLanguageCodeByStream(inStreamNum uint16, outCode *uint, outExtension *uint) error {
 	if _err := purego.NewOSStatus(raw.DVDGetAudioLanguageCodeByStream(inStreamNum, outCode, outExtension)).Err(); _err != nil {
 		return _err
@@ -125,7 +125,7 @@ func DVDGetAudioLanguageCodeByStream(inStreamNum uint16, outCode *uint, outExten
 	return nil
 }
 
-// DVDGetAudioOutputMode wraps [raw.DVDGetAudioOutputMode], bridging CFTypeRef arguments and the OSStatus result.
+// DVDGetAudioOutputMode wraps [raw.DVDGetAudioOutputMode], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDGetAudioOutputMode(outMode *int) error {
 	if _err := purego.NewOSStatus(raw.DVDGetAudioOutputMode(outMode)).Err(); _err != nil {
 		return _err
@@ -133,7 +133,7 @@ func DVDGetAudioOutputMode(outMode *int) error {
 	return nil
 }
 
-// DVDGetAudioOutputModeCapabilities wraps [raw.DVDGetAudioOutputModeCapabilities], bridging CFTypeRef arguments and the OSStatus result.
+// DVDGetAudioOutputModeCapabilities wraps [raw.DVDGetAudioOutputModeCapabilities], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDGetAudioOutputModeCapabilities(outModes *int) error {
 	if _err := purego.NewOSStatus(raw.DVDGetAudioOutputModeCapabilities(outModes)).Err(); _err != nil {
 		return _err
@@ -141,7 +141,7 @@ func DVDGetAudioOutputModeCapabilities(outModes *int) error {
 	return nil
 }
 
-// DVDGetAudioStream wraps [raw.DVDGetAudioStream], bridging CFTypeRef arguments and the OSStatus result.
+// DVDGetAudioStream wraps [raw.DVDGetAudioStream], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDGetAudioStream(outStreamNum *uint16) error {
 	if _err := purego.NewOSStatus(raw.DVDGetAudioStream(outStreamNum)).Err(); _err != nil {
 		return _err
@@ -149,7 +149,7 @@ func DVDGetAudioStream(outStreamNum *uint16) error {
 	return nil
 }
 
-// DVDGetAudioStreamFormat wraps [raw.DVDGetAudioStreamFormat], bridging CFTypeRef arguments and the OSStatus result.
+// DVDGetAudioStreamFormat wraps [raw.DVDGetAudioStreamFormat], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDGetAudioStreamFormat(outFormat *raw.DVDAudioFormat, outBitsPerSample *uint, outSamplesPerSecond *uint, outChannels *uint) error {
 	if _err := purego.NewOSStatus(raw.DVDGetAudioStreamFormat(outFormat, outBitsPerSample, outSamplesPerSecond, outChannels)).Err(); _err != nil {
 		return _err
@@ -157,7 +157,7 @@ func DVDGetAudioStreamFormat(outFormat *raw.DVDAudioFormat, outBitsPerSample *ui
 	return nil
 }
 
-// DVDGetAudioStreamFormatByStream wraps [raw.DVDGetAudioStreamFormatByStream], bridging CFTypeRef arguments and the OSStatus result.
+// DVDGetAudioStreamFormatByStream wraps [raw.DVDGetAudioStreamFormatByStream], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDGetAudioStreamFormatByStream(inStreamNum uint, outFormat *raw.DVDAudioFormat, outBitsPerSample *uint, outSamplesPerSecond *uint, outChannels *uint) error {
 	if _err := purego.NewOSStatus(raw.DVDGetAudioStreamFormatByStream(inStreamNum, outFormat, outBitsPerSample, outSamplesPerSecond, outChannels)).Err(); _err != nil {
 		return _err
@@ -165,7 +165,7 @@ func DVDGetAudioStreamFormatByStream(inStreamNum uint, outFormat *raw.DVDAudioFo
 	return nil
 }
 
-// DVDGetAudioVolume wraps [raw.DVDGetAudioVolume], bridging CFTypeRef arguments and the OSStatus result.
+// DVDGetAudioVolume wraps [raw.DVDGetAudioVolume], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDGetAudioVolume(outVolume *uint16) error {
 	if _err := purego.NewOSStatus(raw.DVDGetAudioVolume(outVolume)).Err(); _err != nil {
 		return _err
@@ -173,7 +173,7 @@ func DVDGetAudioVolume(outVolume *uint16) error {
 	return nil
 }
 
-// DVDGetAudioVolumeInfo wraps [raw.DVDGetAudioVolumeInfo], bridging CFTypeRef arguments and the OSStatus result.
+// DVDGetAudioVolumeInfo wraps [raw.DVDGetAudioVolumeInfo], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDGetAudioVolumeInfo(outMinVolume *uint16, outCurVolume *uint16, outMaxVolume *uint16) error {
 	if _err := purego.NewOSStatus(raw.DVDGetAudioVolumeInfo(outMinVolume, outCurVolume, outMaxVolume)).Err(); _err != nil {
 		return _err
@@ -181,7 +181,7 @@ func DVDGetAudioVolumeInfo(outMinVolume *uint16, outCurVolume *uint16, outMaxVol
 	return nil
 }
 
-// DVDGetButtonPosition wraps [raw.DVDGetButtonPosition], bridging CFTypeRef arguments and the OSStatus result.
+// DVDGetButtonPosition wraps [raw.DVDGetButtonPosition], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDGetButtonPosition(index uint, outRect *corefoundation.CGRect, autoAction *uint) error {
 	if _err := purego.NewOSStatus(raw.DVDGetButtonPosition(index, outRect, autoAction)).Err(); _err != nil {
 		return _err
@@ -189,7 +189,7 @@ func DVDGetButtonPosition(index uint, outRect *corefoundation.CGRect, autoAction
 	return nil
 }
 
-// DVDGetButtoninfo wraps [raw.DVDGetButtoninfo], bridging CFTypeRef arguments and the OSStatus result.
+// DVDGetButtoninfo wraps [raw.DVDGetButtoninfo], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDGetButtoninfo(numberOfButtons *uint, selectedButton *uint, forcedActivateButton *uint, userButtonOffset *uint, numberOfUserButtons *uint) error {
 	if _err := purego.NewOSStatus(raw.DVDGetButtoninfo(numberOfButtons, selectedButton, forcedActivateButton, userButtonOffset, numberOfUserButtons)).Err(); _err != nil {
 		return _err
@@ -197,7 +197,7 @@ func DVDGetButtoninfo(numberOfButtons *uint, selectedButton *uint, forcedActivat
 	return nil
 }
 
-// DVDGetChapter wraps [raw.DVDGetChapter], bridging CFTypeRef arguments and the OSStatus result.
+// DVDGetChapter wraps [raw.DVDGetChapter], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDGetChapter(outChapterNum *uint16) error {
 	if _err := purego.NewOSStatus(raw.DVDGetChapter(outChapterNum)).Err(); _err != nil {
 		return _err
@@ -205,7 +205,7 @@ func DVDGetChapter(outChapterNum *uint16) error {
 	return nil
 }
 
-// DVDGetDiscRegionCode wraps [raw.DVDGetDiscRegionCode], bridging CFTypeRef arguments and the OSStatus result.
+// DVDGetDiscRegionCode wraps [raw.DVDGetDiscRegionCode], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDGetDiscRegionCode(outCode *uint) error {
 	if _err := purego.NewOSStatus(raw.DVDGetDiscRegionCode(outCode)).Err(); _err != nil {
 		return _err
@@ -213,7 +213,7 @@ func DVDGetDiscRegionCode(outCode *uint) error {
 	return nil
 }
 
-// DVDGetDriveRegionCode wraps [raw.DVDGetDriveRegionCode], bridging CFTypeRef arguments and the OSStatus result.
+// DVDGetDriveRegionCode wraps [raw.DVDGetDriveRegionCode], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDGetDriveRegionCode(outCode *uint, outNumberChangesLeft *int16) error {
 	if _err := purego.NewOSStatus(raw.DVDGetDriveRegionCode(outCode, outNumberChangesLeft)).Err(); _err != nil {
 		return _err
@@ -221,7 +221,7 @@ func DVDGetDriveRegionCode(outCode *uint, outNumberChangesLeft *int16) error {
 	return nil
 }
 
-// DVDGetFormatStandard wraps [raw.DVDGetFormatStandard], bridging CFTypeRef arguments and the OSStatus result.
+// DVDGetFormatStandard wraps [raw.DVDGetFormatStandard], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDGetFormatStandard(outFormat *raw.DVDFormat) error {
 	if _err := purego.NewOSStatus(raw.DVDGetFormatStandard(outFormat)).Err(); _err != nil {
 		return _err
@@ -229,7 +229,7 @@ func DVDGetFormatStandard(outFormat *raw.DVDFormat) error {
 	return nil
 }
 
-// DVDGetGPRMValue wraps [raw.DVDGetGPRMValue], bridging CFTypeRef arguments and the OSStatus result.
+// DVDGetGPRMValue wraps [raw.DVDGetGPRMValue], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDGetGPRMValue(index uint, value *uint) error {
 	if _err := purego.NewOSStatus(raw.DVDGetGPRMValue(index, value)).Err(); _err != nil {
 		return _err
@@ -237,7 +237,7 @@ func DVDGetGPRMValue(index uint, value *uint) error {
 	return nil
 }
 
-// DVDGetMediaUniqueID wraps [raw.DVDGetMediaUniqueID], bridging CFTypeRef arguments and the OSStatus result.
+// DVDGetMediaUniqueID wraps [raw.DVDGetMediaUniqueID], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDGetMediaUniqueID(outDiscID *uint8) error {
 	if _err := purego.NewOSStatus(raw.DVDGetMediaUniqueID(outDiscID)).Err(); _err != nil {
 		return _err
@@ -245,7 +245,7 @@ func DVDGetMediaUniqueID(outDiscID *uint8) error {
 	return nil
 }
 
-// DVDGetMediaVolumeCFName wraps [raw.DVDGetMediaVolumeCFName], bridging CFTypeRef arguments and the OSStatus result.
+// DVDGetMediaVolumeCFName wraps [raw.DVDGetMediaVolumeCFName], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDGetMediaVolumeCFName() (objc.ID, error) {
 	var _out0 uintptr
 	if _err := purego.NewOSStatus(raw.DVDGetMediaVolumeCFName(unsafe.Pointer(&_out0))).Err(); _err != nil {
@@ -254,7 +254,7 @@ func DVDGetMediaVolumeCFName() (objc.ID, error) {
 	return objc.ID(_out0), nil
 }
 
-// DVDGetMediaVolumeName wraps [raw.DVDGetMediaVolumeName], bridging CFTypeRef arguments and the OSStatus result.
+// DVDGetMediaVolumeName wraps [raw.DVDGetMediaVolumeName], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDGetMediaVolumeName(outDiscVolumeName string) error {
 	if _err := purego.NewOSStatus(raw.DVDGetMediaVolumeName(outDiscVolumeName)).Err(); _err != nil {
 		return _err
@@ -262,7 +262,7 @@ func DVDGetMediaVolumeName(outDiscVolumeName string) error {
 	return nil
 }
 
-// DVDGetMenuLanguageCode wraps [raw.DVDGetMenuLanguageCode], bridging CFTypeRef arguments and the OSStatus result.
+// DVDGetMenuLanguageCode wraps [raw.DVDGetMenuLanguageCode], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDGetMenuLanguageCode(outCode *uint) error {
 	if _err := purego.NewOSStatus(raw.DVDGetMenuLanguageCode(outCode)).Err(); _err != nil {
 		return _err
@@ -270,7 +270,7 @@ func DVDGetMenuLanguageCode(outCode *uint) error {
 	return nil
 }
 
-// DVDGetNativeVideoSize wraps [raw.DVDGetNativeVideoSize], bridging CFTypeRef arguments and the OSStatus result.
+// DVDGetNativeVideoSize wraps [raw.DVDGetNativeVideoSize], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDGetNativeVideoSize(outWidth *uint16, outHeight *uint16) error {
 	if _err := purego.NewOSStatus(raw.DVDGetNativeVideoSize(outWidth, outHeight)).Err(); _err != nil {
 		return _err
@@ -278,7 +278,7 @@ func DVDGetNativeVideoSize(outWidth *uint16, outHeight *uint16) error {
 	return nil
 }
 
-// DVDGetNumAngles wraps [raw.DVDGetNumAngles], bridging CFTypeRef arguments and the OSStatus result.
+// DVDGetNumAngles wraps [raw.DVDGetNumAngles], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDGetNumAngles(outNumAngles *uint16) error {
 	if _err := purego.NewOSStatus(raw.DVDGetNumAngles(outNumAngles)).Err(); _err != nil {
 		return _err
@@ -286,7 +286,7 @@ func DVDGetNumAngles(outNumAngles *uint16) error {
 	return nil
 }
 
-// DVDGetNumAudioStreams wraps [raw.DVDGetNumAudioStreams], bridging CFTypeRef arguments and the OSStatus result.
+// DVDGetNumAudioStreams wraps [raw.DVDGetNumAudioStreams], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDGetNumAudioStreams(outNumStreams *uint16) error {
 	if _err := purego.NewOSStatus(raw.DVDGetNumAudioStreams(outNumStreams)).Err(); _err != nil {
 		return _err
@@ -294,7 +294,7 @@ func DVDGetNumAudioStreams(outNumStreams *uint16) error {
 	return nil
 }
 
-// DVDGetNumChapters wraps [raw.DVDGetNumChapters], bridging CFTypeRef arguments and the OSStatus result.
+// DVDGetNumChapters wraps [raw.DVDGetNumChapters], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDGetNumChapters(inTitleNum uint16, outNumChapters *uint16) error {
 	if _err := purego.NewOSStatus(raw.DVDGetNumChapters(inTitleNum, outNumChapters)).Err(); _err != nil {
 		return _err
@@ -302,7 +302,7 @@ func DVDGetNumChapters(inTitleNum uint16, outNumChapters *uint16) error {
 	return nil
 }
 
-// DVDGetNumSubPictureStreams wraps [raw.DVDGetNumSubPictureStreams], bridging CFTypeRef arguments and the OSStatus result.
+// DVDGetNumSubPictureStreams wraps [raw.DVDGetNumSubPictureStreams], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDGetNumSubPictureStreams(outNumStreams *uint16) error {
 	if _err := purego.NewOSStatus(raw.DVDGetNumSubPictureStreams(outNumStreams)).Err(); _err != nil {
 		return _err
@@ -310,7 +310,7 @@ func DVDGetNumSubPictureStreams(outNumStreams *uint16) error {
 	return nil
 }
 
-// DVDGetNumTitles wraps [raw.DVDGetNumTitles], bridging CFTypeRef arguments and the OSStatus result.
+// DVDGetNumTitles wraps [raw.DVDGetNumTitles], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDGetNumTitles(outNumTitles *uint16) error {
 	if _err := purego.NewOSStatus(raw.DVDGetNumTitles(outNumTitles)).Err(); _err != nil {
 		return _err
@@ -318,7 +318,7 @@ func DVDGetNumTitles(outNumTitles *uint16) error {
 	return nil
 }
 
-// DVDGetSPDIFDataOutDevice wraps [raw.DVDGetSPDIFDataOutDevice], bridging CFTypeRef arguments and the OSStatus result.
+// DVDGetSPDIFDataOutDevice wraps [raw.DVDGetSPDIFDataOutDevice], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDGetSPDIFDataOutDevice(outIndex *uint) error {
 	if _err := purego.NewOSStatus(raw.DVDGetSPDIFDataOutDevice(outIndex)).Err(); _err != nil {
 		return _err
@@ -326,7 +326,7 @@ func DVDGetSPDIFDataOutDevice(outIndex *uint) error {
 	return nil
 }
 
-// DVDGetSPDIFDataOutDeviceCFName wraps [raw.DVDGetSPDIFDataOutDeviceCFName], bridging CFTypeRef arguments and the OSStatus result.
+// DVDGetSPDIFDataOutDeviceCFName wraps [raw.DVDGetSPDIFDataOutDeviceCFName], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDGetSPDIFDataOutDeviceCFName(inIndex uint) (objc.ID, error) {
 	var _out0 uintptr
 	if _err := purego.NewOSStatus(raw.DVDGetSPDIFDataOutDeviceCFName(inIndex, unsafe.Pointer(&_out0))).Err(); _err != nil {
@@ -335,7 +335,7 @@ func DVDGetSPDIFDataOutDeviceCFName(inIndex uint) (objc.ID, error) {
 	return objc.ID(_out0), nil
 }
 
-// DVDGetSPDIFDataOutDeviceCount wraps [raw.DVDGetSPDIFDataOutDeviceCount], bridging CFTypeRef arguments and the OSStatus result.
+// DVDGetSPDIFDataOutDeviceCount wraps [raw.DVDGetSPDIFDataOutDeviceCount], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDGetSPDIFDataOutDeviceCount(outCount *uint) error {
 	if _err := purego.NewOSStatus(raw.DVDGetSPDIFDataOutDeviceCount(outCount)).Err(); _err != nil {
 		return _err
@@ -343,7 +343,7 @@ func DVDGetSPDIFDataOutDeviceCount(outCount *uint) error {
 	return nil
 }
 
-// DVDGetScanRate wraps [raw.DVDGetScanRate], bridging CFTypeRef arguments and the OSStatus result.
+// DVDGetScanRate wraps [raw.DVDGetScanRate], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDGetScanRate(outRate *raw.DVDScanRate, outDirection *raw.DVDScanDirection) error {
 	if _err := purego.NewOSStatus(raw.DVDGetScanRate(outRate, outDirection)).Err(); _err != nil {
 		return _err
@@ -351,7 +351,7 @@ func DVDGetScanRate(outRate *raw.DVDScanRate, outDirection *raw.DVDScanDirection
 	return nil
 }
 
-// DVDGetState wraps [raw.DVDGetState], bridging CFTypeRef arguments and the OSStatus result.
+// DVDGetState wraps [raw.DVDGetState], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDGetState(outState *raw.DVDState) error {
 	if _err := purego.NewOSStatus(raw.DVDGetState(outState)).Err(); _err != nil {
 		return _err
@@ -359,7 +359,7 @@ func DVDGetState(outState *raw.DVDState) error {
 	return nil
 }
 
-// DVDGetSubPictureLanguageCode wraps [raw.DVDGetSubPictureLanguageCode], bridging CFTypeRef arguments and the OSStatus result.
+// DVDGetSubPictureLanguageCode wraps [raw.DVDGetSubPictureLanguageCode], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDGetSubPictureLanguageCode(outCode *uint, outExtension *uint) error {
 	if _err := purego.NewOSStatus(raw.DVDGetSubPictureLanguageCode(outCode, outExtension)).Err(); _err != nil {
 		return _err
@@ -367,7 +367,7 @@ func DVDGetSubPictureLanguageCode(outCode *uint, outExtension *uint) error {
 	return nil
 }
 
-// DVDGetSubPictureLanguageCodeByStream wraps [raw.DVDGetSubPictureLanguageCodeByStream], bridging CFTypeRef arguments and the OSStatus result.
+// DVDGetSubPictureLanguageCodeByStream wraps [raw.DVDGetSubPictureLanguageCodeByStream], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDGetSubPictureLanguageCodeByStream(inStreamNum uint16, outCode *uint, outExtension *uint) error {
 	if _err := purego.NewOSStatus(raw.DVDGetSubPictureLanguageCodeByStream(inStreamNum, outCode, outExtension)).Err(); _err != nil {
 		return _err
@@ -375,7 +375,7 @@ func DVDGetSubPictureLanguageCodeByStream(inStreamNum uint16, outCode *uint, out
 	return nil
 }
 
-// DVDGetSubPictureStream wraps [raw.DVDGetSubPictureStream], bridging CFTypeRef arguments and the OSStatus result.
+// DVDGetSubPictureStream wraps [raw.DVDGetSubPictureStream], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDGetSubPictureStream(outStreamNum *uint16) error {
 	if _err := purego.NewOSStatus(raw.DVDGetSubPictureStream(outStreamNum)).Err(); _err != nil {
 		return _err
@@ -383,7 +383,7 @@ func DVDGetSubPictureStream(outStreamNum *uint16) error {
 	return nil
 }
 
-// DVDGetTime wraps [raw.DVDGetTime], bridging CFTypeRef arguments and the OSStatus result.
+// DVDGetTime wraps [raw.DVDGetTime], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDGetTime(inTimeCode int16, outTime *uint, outFrames *uint16) error {
 	if _err := purego.NewOSStatus(raw.DVDGetTime(inTimeCode, outTime, outFrames)).Err(); _err != nil {
 		return _err
@@ -391,7 +391,7 @@ func DVDGetTime(inTimeCode int16, outTime *uint, outFrames *uint16) error {
 	return nil
 }
 
-// DVDGetTimeEventRate wraps [raw.DVDGetTimeEventRate], bridging CFTypeRef arguments and the OSStatus result.
+// DVDGetTimeEventRate wraps [raw.DVDGetTimeEventRate], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDGetTimeEventRate(outMilliseconds *uint) error {
 	if _err := purego.NewOSStatus(raw.DVDGetTimeEventRate(outMilliseconds)).Err(); _err != nil {
 		return _err
@@ -399,7 +399,7 @@ func DVDGetTimeEventRate(outMilliseconds *uint) error {
 	return nil
 }
 
-// DVDGetTitle wraps [raw.DVDGetTitle], bridging CFTypeRef arguments and the OSStatus result.
+// DVDGetTitle wraps [raw.DVDGetTitle], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDGetTitle(outTitleNum *uint16) error {
 	if _err := purego.NewOSStatus(raw.DVDGetTitle(outTitleNum)).Err(); _err != nil {
 		return _err
@@ -407,7 +407,7 @@ func DVDGetTitle(outTitleNum *uint16) error {
 	return nil
 }
 
-// DVDGetVideoCGBounds wraps [raw.DVDGetVideoCGBounds], bridging CFTypeRef arguments and the OSStatus result.
+// DVDGetVideoCGBounds wraps [raw.DVDGetVideoCGBounds], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDGetVideoCGBounds(outRect *corefoundation.CGRect) error {
 	if _err := purego.NewOSStatus(raw.DVDGetVideoCGBounds(outRect)).Err(); _err != nil {
 		return _err
@@ -415,7 +415,7 @@ func DVDGetVideoCGBounds(outRect *corefoundation.CGRect) error {
 	return nil
 }
 
-// DVDGetVideoDisplay wraps [raw.DVDGetVideoDisplay], bridging CFTypeRef arguments and the OSStatus result.
+// DVDGetVideoDisplay wraps [raw.DVDGetVideoDisplay], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDGetVideoDisplay(outDisplay *uint32) error {
 	if _err := purego.NewOSStatus(raw.DVDGetVideoDisplay(outDisplay)).Err(); _err != nil {
 		return _err
@@ -423,7 +423,7 @@ func DVDGetVideoDisplay(outDisplay *uint32) error {
 	return nil
 }
 
-// DVDGetVideoWindowID wraps [raw.DVDGetVideoWindowID], bridging CFTypeRef arguments and the OSStatus result.
+// DVDGetVideoWindowID wraps [raw.DVDGetVideoWindowID], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDGetVideoWindowID(outVidWindowID *uint) error {
 	if _err := purego.NewOSStatus(raw.DVDGetVideoWindowID(outVidWindowID)).Err(); _err != nil {
 		return _err
@@ -431,7 +431,7 @@ func DVDGetVideoWindowID(outVidWindowID *uint) error {
 	return nil
 }
 
-// DVDGoBackOneLevel wraps [raw.DVDGoBackOneLevel], bridging CFTypeRef arguments and the OSStatus result.
+// DVDGoBackOneLevel wraps [raw.DVDGoBackOneLevel], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDGoBackOneLevel() error {
 	if _err := purego.NewOSStatus(raw.DVDGoBackOneLevel()).Err(); _err != nil {
 		return _err
@@ -439,7 +439,7 @@ func DVDGoBackOneLevel() error {
 	return nil
 }
 
-// DVDGoToMenu wraps [raw.DVDGoToMenu], bridging CFTypeRef arguments and the OSStatus result.
+// DVDGoToMenu wraps [raw.DVDGoToMenu], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDGoToMenu(inMenu raw.DVDMenu) error {
 	if _err := purego.NewOSStatus(raw.DVDGoToMenu(inMenu)).Err(); _err != nil {
 		return _err
@@ -447,7 +447,7 @@ func DVDGoToMenu(inMenu raw.DVDMenu) error {
 	return nil
 }
 
-// DVDHasMedia wraps [raw.DVDHasMedia], bridging CFTypeRef arguments and the OSStatus result.
+// DVDHasMedia wraps [raw.DVDHasMedia], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDHasMedia(outHasMedia *uint8) error {
 	if _err := purego.NewOSStatus(raw.DVDHasMedia(outHasMedia)).Err(); _err != nil {
 		return _err
@@ -455,7 +455,7 @@ func DVDHasMedia(outHasMedia *uint8) error {
 	return nil
 }
 
-// DVDHasMenu wraps [raw.DVDHasMenu], bridging CFTypeRef arguments and the OSStatus result.
+// DVDHasMenu wraps [raw.DVDHasMenu], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDHasMenu(inMenu raw.DVDMenu, outHasMenu *uint8) error {
 	if _err := purego.NewOSStatus(raw.DVDHasMenu(inMenu, outHasMenu)).Err(); _err != nil {
 		return _err
@@ -463,7 +463,7 @@ func DVDHasMenu(inMenu raw.DVDMenu, outHasMenu *uint8) error {
 	return nil
 }
 
-// DVDHasNextChapter wraps [raw.DVDHasNextChapter], bridging CFTypeRef arguments and the OSStatus result.
+// DVDHasNextChapter wraps [raw.DVDHasNextChapter], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDHasNextChapter(outHasChapter *uint8) error {
 	if _err := purego.NewOSStatus(raw.DVDHasNextChapter(outHasChapter)).Err(); _err != nil {
 		return _err
@@ -471,7 +471,7 @@ func DVDHasNextChapter(outHasChapter *uint8) error {
 	return nil
 }
 
-// DVDHasPreviousChapter wraps [raw.DVDHasPreviousChapter], bridging CFTypeRef arguments and the OSStatus result.
+// DVDHasPreviousChapter wraps [raw.DVDHasPreviousChapter], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDHasPreviousChapter(outHasChapter *uint8) error {
 	if _err := purego.NewOSStatus(raw.DVDHasPreviousChapter(outHasChapter)).Err(); _err != nil {
 		return _err
@@ -479,7 +479,7 @@ func DVDHasPreviousChapter(outHasChapter *uint8) error {
 	return nil
 }
 
-// DVDIdle wraps [raw.DVDIdle], bridging CFTypeRef arguments and the OSStatus result.
+// DVDIdle wraps [raw.DVDIdle], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDIdle() error {
 	if _err := purego.NewOSStatus(raw.DVDIdle()).Err(); _err != nil {
 		return _err
@@ -487,7 +487,7 @@ func DVDIdle() error {
 	return nil
 }
 
-// DVDInitialize wraps [raw.DVDInitialize], bridging CFTypeRef arguments and the OSStatus result.
+// DVDInitialize wraps [raw.DVDInitialize], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDInitialize() error {
 	if _err := purego.NewOSStatus(raw.DVDInitialize()).Err(); _err != nil {
 		return _err
@@ -495,7 +495,7 @@ func DVDInitialize() error {
 	return nil
 }
 
-// DVDIsDisplayingSubPicture wraps [raw.DVDIsDisplayingSubPicture], bridging CFTypeRef arguments and the OSStatus result.
+// DVDIsDisplayingSubPicture wraps [raw.DVDIsDisplayingSubPicture], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDIsDisplayingSubPicture(outDisplayingSubPicture *uint8) error {
 	if _err := purego.NewOSStatus(raw.DVDIsDisplayingSubPicture(outDisplayingSubPicture)).Err(); _err != nil {
 		return _err
@@ -503,7 +503,7 @@ func DVDIsDisplayingSubPicture(outDisplayingSubPicture *uint8) error {
 	return nil
 }
 
-// DVDIsMuted wraps [raw.DVDIsMuted], bridging CFTypeRef arguments and the OSStatus result.
+// DVDIsMuted wraps [raw.DVDIsMuted], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDIsMuted(outIsMuted *uint8) error {
 	if _err := purego.NewOSStatus(raw.DVDIsMuted(outIsMuted)).Err(); _err != nil {
 		return _err
@@ -511,7 +511,7 @@ func DVDIsMuted(outIsMuted *uint8) error {
 	return nil
 }
 
-// DVDIsOnMenu wraps [raw.DVDIsOnMenu], bridging CFTypeRef arguments and the OSStatus result.
+// DVDIsOnMenu wraps [raw.DVDIsOnMenu], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDIsOnMenu(outOnMenu *uint8, outMenu *raw.DVDMenu) error {
 	if _err := purego.NewOSStatus(raw.DVDIsOnMenu(outOnMenu, outMenu)).Err(); _err != nil {
 		return _err
@@ -519,7 +519,7 @@ func DVDIsOnMenu(outOnMenu *uint8, outMenu *raw.DVDMenu) error {
 	return nil
 }
 
-// DVDIsPaused wraps [raw.DVDIsPaused], bridging CFTypeRef arguments and the OSStatus result.
+// DVDIsPaused wraps [raw.DVDIsPaused], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDIsPaused(outIsPaused *uint8) error {
 	if _err := purego.NewOSStatus(raw.DVDIsPaused(outIsPaused)).Err(); _err != nil {
 		return _err
@@ -527,7 +527,7 @@ func DVDIsPaused(outIsPaused *uint8) error {
 	return nil
 }
 
-// DVDIsPlaying wraps [raw.DVDIsPlaying], bridging CFTypeRef arguments and the OSStatus result.
+// DVDIsPlaying wraps [raw.DVDIsPlaying], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDIsPlaying(outIsPlaying *uint8) error {
 	if _err := purego.NewOSStatus(raw.DVDIsPlaying(outIsPlaying)).Err(); _err != nil {
 		return _err
@@ -535,7 +535,7 @@ func DVDIsPlaying(outIsPlaying *uint8) error {
 	return nil
 }
 
-// DVDIsSupportedDisplay wraps [raw.DVDIsSupportedDisplay], bridging CFTypeRef arguments and the OSStatus result.
+// DVDIsSupportedDisplay wraps [raw.DVDIsSupportedDisplay], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDIsSupportedDisplay(inDisplay uint32, outSupported *uint8) error {
 	if _err := purego.NewOSStatus(raw.DVDIsSupportedDisplay(inDisplay, outSupported)).Err(); _err != nil {
 		return _err
@@ -543,7 +543,7 @@ func DVDIsSupportedDisplay(inDisplay uint32, outSupported *uint8) error {
 	return nil
 }
 
-// DVDIsValidMediaRef wraps [raw.DVDIsValidMediaRef], bridging CFTypeRef arguments and the OSStatus result.
+// DVDIsValidMediaRef wraps [raw.DVDIsValidMediaRef], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDIsValidMediaRef(inRef *carboncore.FSRef, outIsValid *uint8) error {
 	if _err := purego.NewOSStatus(raw.DVDIsValidMediaRef(inRef, outIsValid)).Err(); _err != nil {
 		return _err
@@ -551,7 +551,7 @@ func DVDIsValidMediaRef(inRef *carboncore.FSRef, outIsValid *uint8) error {
 	return nil
 }
 
-// DVDIsValidMediaURL wraps [raw.DVDIsValidMediaURL], bridging CFTypeRef arguments and the OSStatus result.
+// DVDIsValidMediaURL wraps [raw.DVDIsValidMediaURL], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDIsValidMediaURL(inRef objc.ID, outIsValid *uint8) error {
 	if _err := purego.NewOSStatus(raw.DVDIsValidMediaURL(purego.CFRef(inRef), outIsValid)).Err(); _err != nil {
 		return _err
@@ -559,7 +559,7 @@ func DVDIsValidMediaURL(inRef objc.ID, outIsValid *uint8) error {
 	return nil
 }
 
-// DVDMute wraps [raw.DVDMute], bridging CFTypeRef arguments and the OSStatus result.
+// DVDMute wraps [raw.DVDMute], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDMute(inMute uint8) error {
 	if _err := purego.NewOSStatus(raw.DVDMute(inMute)).Err(); _err != nil {
 		return _err
@@ -567,7 +567,7 @@ func DVDMute(inMute uint8) error {
 	return nil
 }
 
-// DVDNextChapter wraps [raw.DVDNextChapter], bridging CFTypeRef arguments and the OSStatus result.
+// DVDNextChapter wraps [raw.DVDNextChapter], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDNextChapter() error {
 	if _err := purego.NewOSStatus(raw.DVDNextChapter()).Err(); _err != nil {
 		return _err
@@ -575,7 +575,7 @@ func DVDNextChapter() error {
 	return nil
 }
 
-// DVDOpenMediaFile wraps [raw.DVDOpenMediaFile], bridging CFTypeRef arguments and the OSStatus result.
+// DVDOpenMediaFile wraps [raw.DVDOpenMediaFile], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDOpenMediaFile(inFile *carboncore.FSRef) error {
 	if _err := purego.NewOSStatus(raw.DVDOpenMediaFile(inFile)).Err(); _err != nil {
 		return _err
@@ -583,7 +583,7 @@ func DVDOpenMediaFile(inFile *carboncore.FSRef) error {
 	return nil
 }
 
-// DVDOpenMediaFileWithURL wraps [raw.DVDOpenMediaFileWithURL], bridging CFTypeRef arguments and the OSStatus result.
+// DVDOpenMediaFileWithURL wraps [raw.DVDOpenMediaFileWithURL], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDOpenMediaFileWithURL(inFile objc.ID) error {
 	if _err := purego.NewOSStatus(raw.DVDOpenMediaFileWithURL(purego.CFRef(inFile))).Err(); _err != nil {
 		return _err
@@ -591,7 +591,7 @@ func DVDOpenMediaFileWithURL(inFile objc.ID) error {
 	return nil
 }
 
-// DVDOpenMediaVolume wraps [raw.DVDOpenMediaVolume], bridging CFTypeRef arguments and the OSStatus result.
+// DVDOpenMediaVolume wraps [raw.DVDOpenMediaVolume], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDOpenMediaVolume(inVolume *carboncore.FSRef) error {
 	if _err := purego.NewOSStatus(raw.DVDOpenMediaVolume(inVolume)).Err(); _err != nil {
 		return _err
@@ -599,7 +599,7 @@ func DVDOpenMediaVolume(inVolume *carboncore.FSRef) error {
 	return nil
 }
 
-// DVDOpenMediaVolumeWithURL wraps [raw.DVDOpenMediaVolumeWithURL], bridging CFTypeRef arguments and the OSStatus result.
+// DVDOpenMediaVolumeWithURL wraps [raw.DVDOpenMediaVolumeWithURL], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDOpenMediaVolumeWithURL(inVolume objc.ID) error {
 	if _err := purego.NewOSStatus(raw.DVDOpenMediaVolumeWithURL(purego.CFRef(inVolume))).Err(); _err != nil {
 		return _err
@@ -607,7 +607,7 @@ func DVDOpenMediaVolumeWithURL(inVolume objc.ID) error {
 	return nil
 }
 
-// DVDPause wraps [raw.DVDPause], bridging CFTypeRef arguments and the OSStatus result.
+// DVDPause wraps [raw.DVDPause], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDPause() error {
 	if _err := purego.NewOSStatus(raw.DVDPause()).Err(); _err != nil {
 		return _err
@@ -615,7 +615,7 @@ func DVDPause() error {
 	return nil
 }
 
-// DVDPlay wraps [raw.DVDPlay], bridging CFTypeRef arguments and the OSStatus result.
+// DVDPlay wraps [raw.DVDPlay], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDPlay() error {
 	if _err := purego.NewOSStatus(raw.DVDPlay()).Err(); _err != nil {
 		return _err
@@ -623,7 +623,7 @@ func DVDPlay() error {
 	return nil
 }
 
-// DVDPreviousChapter wraps [raw.DVDPreviousChapter], bridging CFTypeRef arguments and the OSStatus result.
+// DVDPreviousChapter wraps [raw.DVDPreviousChapter], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDPreviousChapter() error {
 	if _err := purego.NewOSStatus(raw.DVDPreviousChapter()).Err(); _err != nil {
 		return _err
@@ -631,7 +631,7 @@ func DVDPreviousChapter() error {
 	return nil
 }
 
-// DVDResume wraps [raw.DVDResume], bridging CFTypeRef arguments and the OSStatus result.
+// DVDResume wraps [raw.DVDResume], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDResume() error {
 	if _err := purego.NewOSStatus(raw.DVDResume()).Err(); _err != nil {
 		return _err
@@ -639,7 +639,7 @@ func DVDResume() error {
 	return nil
 }
 
-// DVDReturnToTitle wraps [raw.DVDReturnToTitle], bridging CFTypeRef arguments and the OSStatus result.
+// DVDReturnToTitle wraps [raw.DVDReturnToTitle], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDReturnToTitle() error {
 	if _err := purego.NewOSStatus(raw.DVDReturnToTitle()).Err(); _err != nil {
 		return _err
@@ -647,7 +647,7 @@ func DVDReturnToTitle() error {
 	return nil
 }
 
-// DVDScan wraps [raw.DVDScan], bridging CFTypeRef arguments and the OSStatus result.
+// DVDScan wraps [raw.DVDScan], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDScan(inRate raw.DVDScanRate, inDirection raw.DVDScanDirection) error {
 	if _err := purego.NewOSStatus(raw.DVDScan(inRate, inDirection)).Err(); _err != nil {
 		return _err
@@ -655,7 +655,7 @@ func DVDScan(inRate raw.DVDScanRate, inDirection raw.DVDScanDirection) error {
 	return nil
 }
 
-// DVDSetAngle wraps [raw.DVDSetAngle], bridging CFTypeRef arguments and the OSStatus result.
+// DVDSetAngle wraps [raw.DVDSetAngle], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDSetAngle(inAngleNum uint16) error {
 	if _err := purego.NewOSStatus(raw.DVDSetAngle(inAngleNum)).Err(); _err != nil {
 		return _err
@@ -663,7 +663,7 @@ func DVDSetAngle(inAngleNum uint16) error {
 	return nil
 }
 
-// DVDSetAspectRatio wraps [raw.DVDSetAspectRatio], bridging CFTypeRef arguments and the OSStatus result.
+// DVDSetAspectRatio wraps [raw.DVDSetAspectRatio], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDSetAspectRatio(inRatio raw.DVDAspectRatio) error {
 	if _err := purego.NewOSStatus(raw.DVDSetAspectRatio(inRatio)).Err(); _err != nil {
 		return _err
@@ -671,7 +671,7 @@ func DVDSetAspectRatio(inRatio raw.DVDAspectRatio) error {
 	return nil
 }
 
-// DVDSetAudioOutputMode wraps [raw.DVDSetAudioOutputMode], bridging CFTypeRef arguments and the OSStatus result.
+// DVDSetAudioOutputMode wraps [raw.DVDSetAudioOutputMode], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDSetAudioOutputMode(inMode int) error {
 	if _err := purego.NewOSStatus(raw.DVDSetAudioOutputMode(inMode)).Err(); _err != nil {
 		return _err
@@ -679,7 +679,7 @@ func DVDSetAudioOutputMode(inMode int) error {
 	return nil
 }
 
-// DVDSetAudioStream wraps [raw.DVDSetAudioStream], bridging CFTypeRef arguments and the OSStatus result.
+// DVDSetAudioStream wraps [raw.DVDSetAudioStream], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDSetAudioStream(inStreamNum uint16) error {
 	if _err := purego.NewOSStatus(raw.DVDSetAudioStream(inStreamNum)).Err(); _err != nil {
 		return _err
@@ -687,7 +687,7 @@ func DVDSetAudioStream(inStreamNum uint16) error {
 	return nil
 }
 
-// DVDSetAudioVolume wraps [raw.DVDSetAudioVolume], bridging CFTypeRef arguments and the OSStatus result.
+// DVDSetAudioVolume wraps [raw.DVDSetAudioVolume], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDSetAudioVolume(inVolume uint16) error {
 	if _err := purego.NewOSStatus(raw.DVDSetAudioVolume(inVolume)).Err(); _err != nil {
 		return _err
@@ -695,7 +695,7 @@ func DVDSetAudioVolume(inVolume uint16) error {
 	return nil
 }
 
-// DVDSetChapter wraps [raw.DVDSetChapter], bridging CFTypeRef arguments and the OSStatus result.
+// DVDSetChapter wraps [raw.DVDSetChapter], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDSetChapter(inChapterNum uint16) error {
 	if _err := purego.NewOSStatus(raw.DVDSetChapter(inChapterNum)).Err(); _err != nil {
 		return _err
@@ -703,7 +703,7 @@ func DVDSetChapter(inChapterNum uint16) error {
 	return nil
 }
 
-// DVDSetDefaultAudioLanguageCode wraps [raw.DVDSetDefaultAudioLanguageCode], bridging CFTypeRef arguments and the OSStatus result.
+// DVDSetDefaultAudioLanguageCode wraps [raw.DVDSetDefaultAudioLanguageCode], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDSetDefaultAudioLanguageCode(inCode uint, inExtension uint) error {
 	if _err := purego.NewOSStatus(raw.DVDSetDefaultAudioLanguageCode(inCode, inExtension)).Err(); _err != nil {
 		return _err
@@ -711,7 +711,7 @@ func DVDSetDefaultAudioLanguageCode(inCode uint, inExtension uint) error {
 	return nil
 }
 
-// DVDSetDefaultMenuLanguageCode wraps [raw.DVDSetDefaultMenuLanguageCode], bridging CFTypeRef arguments and the OSStatus result.
+// DVDSetDefaultMenuLanguageCode wraps [raw.DVDSetDefaultMenuLanguageCode], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDSetDefaultMenuLanguageCode(inCode uint) error {
 	if _err := purego.NewOSStatus(raw.DVDSetDefaultMenuLanguageCode(inCode)).Err(); _err != nil {
 		return _err
@@ -719,7 +719,7 @@ func DVDSetDefaultMenuLanguageCode(inCode uint) error {
 	return nil
 }
 
-// DVDSetDefaultSubPictureLanguageCode wraps [raw.DVDSetDefaultSubPictureLanguageCode], bridging CFTypeRef arguments and the OSStatus result.
+// DVDSetDefaultSubPictureLanguageCode wraps [raw.DVDSetDefaultSubPictureLanguageCode], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDSetDefaultSubPictureLanguageCode(inCode uint, inExtension uint) error {
 	if _err := purego.NewOSStatus(raw.DVDSetDefaultSubPictureLanguageCode(inCode, inExtension)).Err(); _err != nil {
 		return _err
@@ -727,7 +727,7 @@ func DVDSetDefaultSubPictureLanguageCode(inCode uint, inExtension uint) error {
 	return nil
 }
 
-// DVDSetSPDIFDataOutDevice wraps [raw.DVDSetSPDIFDataOutDevice], bridging CFTypeRef arguments and the OSStatus result.
+// DVDSetSPDIFDataOutDevice wraps [raw.DVDSetSPDIFDataOutDevice], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDSetSPDIFDataOutDevice(inIndex uint) error {
 	if _err := purego.NewOSStatus(raw.DVDSetSPDIFDataOutDevice(inIndex)).Err(); _err != nil {
 		return _err
@@ -735,7 +735,7 @@ func DVDSetSPDIFDataOutDevice(inIndex uint) error {
 	return nil
 }
 
-// DVDSetSubPictureStream wraps [raw.DVDSetSubPictureStream], bridging CFTypeRef arguments and the OSStatus result.
+// DVDSetSubPictureStream wraps [raw.DVDSetSubPictureStream], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDSetSubPictureStream(inStreamNum uint16) error {
 	if _err := purego.NewOSStatus(raw.DVDSetSubPictureStream(inStreamNum)).Err(); _err != nil {
 		return _err
@@ -743,7 +743,7 @@ func DVDSetSubPictureStream(inStreamNum uint16) error {
 	return nil
 }
 
-// DVDSetTime wraps [raw.DVDSetTime], bridging CFTypeRef arguments and the OSStatus result.
+// DVDSetTime wraps [raw.DVDSetTime], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDSetTime(inTimeCode int16, inTime uint, inFrames uint16) error {
 	if _err := purego.NewOSStatus(raw.DVDSetTime(inTimeCode, inTime, inFrames)).Err(); _err != nil {
 		return _err
@@ -751,7 +751,7 @@ func DVDSetTime(inTimeCode int16, inTime uint, inFrames uint16) error {
 	return nil
 }
 
-// DVDSetTimeEventRate wraps [raw.DVDSetTimeEventRate], bridging CFTypeRef arguments and the OSStatus result.
+// DVDSetTimeEventRate wraps [raw.DVDSetTimeEventRate], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDSetTimeEventRate(inMilliseconds uint) error {
 	if _err := purego.NewOSStatus(raw.DVDSetTimeEventRate(inMilliseconds)).Err(); _err != nil {
 		return _err
@@ -759,7 +759,7 @@ func DVDSetTimeEventRate(inMilliseconds uint) error {
 	return nil
 }
 
-// DVDSetTitle wraps [raw.DVDSetTitle], bridging CFTypeRef arguments and the OSStatus result.
+// DVDSetTitle wraps [raw.DVDSetTitle], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDSetTitle(inTitleNum uint16) error {
 	if _err := purego.NewOSStatus(raw.DVDSetTitle(inTitleNum)).Err(); _err != nil {
 		return _err
@@ -767,7 +767,7 @@ func DVDSetTitle(inTitleNum uint16) error {
 	return nil
 }
 
-// DVDSetVideoCGBounds wraps [raw.DVDSetVideoCGBounds], bridging CFTypeRef arguments and the OSStatus result.
+// DVDSetVideoCGBounds wraps [raw.DVDSetVideoCGBounds], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDSetVideoCGBounds(inRect *corefoundation.CGRect) error {
 	if _err := purego.NewOSStatus(raw.DVDSetVideoCGBounds(inRect)).Err(); _err != nil {
 		return _err
@@ -775,7 +775,7 @@ func DVDSetVideoCGBounds(inRect *corefoundation.CGRect) error {
 	return nil
 }
 
-// DVDSetVideoDisplay wraps [raw.DVDSetVideoDisplay], bridging CFTypeRef arguments and the OSStatus result.
+// DVDSetVideoDisplay wraps [raw.DVDSetVideoDisplay], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDSetVideoDisplay(inDisplay uint32) error {
 	if _err := purego.NewOSStatus(raw.DVDSetVideoDisplay(inDisplay)).Err(); _err != nil {
 		return _err
@@ -783,7 +783,7 @@ func DVDSetVideoDisplay(inDisplay uint32) error {
 	return nil
 }
 
-// DVDSetVideoWindowID wraps [raw.DVDSetVideoWindowID], bridging CFTypeRef arguments and the OSStatus result.
+// DVDSetVideoWindowID wraps [raw.DVDSetVideoWindowID], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDSetVideoWindowID(inVidWindowID uint) error {
 	if _err := purego.NewOSStatus(raw.DVDSetVideoWindowID(inVidWindowID)).Err(); _err != nil {
 		return _err
@@ -791,7 +791,7 @@ func DVDSetVideoWindowID(inVidWindowID uint) error {
 	return nil
 }
 
-// DVDSleep wraps [raw.DVDSleep], bridging CFTypeRef arguments and the OSStatus result.
+// DVDSleep wraps [raw.DVDSleep], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDSleep() error {
 	if _err := purego.NewOSStatus(raw.DVDSleep()).Err(); _err != nil {
 		return _err
@@ -799,7 +799,7 @@ func DVDSleep() error {
 	return nil
 }
 
-// DVDStepFrame wraps [raw.DVDStepFrame], bridging CFTypeRef arguments and the OSStatus result.
+// DVDStepFrame wraps [raw.DVDStepFrame], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDStepFrame(inDirection raw.DVDScanDirection) error {
 	if _err := purego.NewOSStatus(raw.DVDStepFrame(inDirection)).Err(); _err != nil {
 		return _err
@@ -807,7 +807,7 @@ func DVDStepFrame(inDirection raw.DVDScanDirection) error {
 	return nil
 }
 
-// DVDStop wraps [raw.DVDStop], bridging CFTypeRef arguments and the OSStatus result.
+// DVDStop wraps [raw.DVDStop], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDStop() error {
 	if _err := purego.NewOSStatus(raw.DVDStop()).Err(); _err != nil {
 		return _err
@@ -815,7 +815,7 @@ func DVDStop() error {
 	return nil
 }
 
-// DVDSwitchToDisplay wraps [raw.DVDSwitchToDisplay], bridging CFTypeRef arguments and the OSStatus result.
+// DVDSwitchToDisplay wraps [raw.DVDSwitchToDisplay], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDSwitchToDisplay(newDisplay uint32, outSupported *uint8) error {
 	if _err := purego.NewOSStatus(raw.DVDSwitchToDisplay(newDisplay, outSupported)).Err(); _err != nil {
 		return _err
@@ -823,7 +823,7 @@ func DVDSwitchToDisplay(newDisplay uint32, outSupported *uint8) error {
 	return nil
 }
 
-// DVDUpdateVideo wraps [raw.DVDUpdateVideo], bridging CFTypeRef arguments and the OSStatus result.
+// DVDUpdateVideo wraps [raw.DVDUpdateVideo], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDUpdateVideo() error {
 	if _err := purego.NewOSStatus(raw.DVDUpdateVideo()).Err(); _err != nil {
 		return _err
@@ -831,7 +831,7 @@ func DVDUpdateVideo() error {
 	return nil
 }
 
-// DVDWakeUp wraps [raw.DVDWakeUp], bridging CFTypeRef arguments and the OSStatus result.
+// DVDWakeUp wraps [raw.DVDWakeUp], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func DVDWakeUp() error {
 	if _err := purego.NewOSStatus(raw.DVDWakeUp()).Err(); _err != nil {
 		return _err

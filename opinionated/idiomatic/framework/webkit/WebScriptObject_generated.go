@@ -21,11 +21,11 @@ type WebScriptObject struct {
 // Unwrap returns the underlying [raw.WebScriptObject].
 func (x *WebScriptObject) Unwrap() *raw.WebScriptObject { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *WebScriptObject) ID() objc.ID { return x.inner.Ptr() }
 
-// WebScriptObjectFromID adopts an existing toll-free-bridged object id as a WebScriptObject (nil for 0).
+// WebScriptObjectFromID adopts an existing object pointer as a WebScriptObject (nil for 0).
 func WebScriptObjectFromID(id objc.ID) *WebScriptObject {
 	if id == 0 {
 		return nil

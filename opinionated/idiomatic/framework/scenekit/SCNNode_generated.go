@@ -22,11 +22,11 @@ type Node struct {
 // Unwrap returns the underlying [raw.SCNNode].
 func (x *Node) Unwrap() *raw.SCNNode { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Node) ID() objc.ID { return x.inner.Ptr() }
 
-// NodeFromID adopts an existing toll-free-bridged object id as a Node (nil for 0).
+// NodeFromID adopts an existing object pointer as a Node (nil for 0).
 func NodeFromID(id objc.ID) *Node {
 	if id == 0 {
 		return nil

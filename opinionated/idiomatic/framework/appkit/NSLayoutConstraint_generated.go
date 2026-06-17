@@ -19,11 +19,11 @@ type LayoutConstraint struct {
 // Unwrap returns the underlying [raw.NSLayoutConstraint].
 func (x *LayoutConstraint) Unwrap() *raw.NSLayoutConstraint { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *LayoutConstraint) ID() objc.ID { return x.inner.Ptr() }
 
-// LayoutConstraintFromID adopts an existing toll-free-bridged object id as a LayoutConstraint (nil for 0).
+// LayoutConstraintFromID adopts an existing object pointer as a LayoutConstraint (nil for 0).
 func LayoutConstraintFromID(id objc.ID) *LayoutConstraint {
 	if id == 0 {
 		return nil

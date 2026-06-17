@@ -17,11 +17,11 @@ type EntropyDeviceConfiguration struct {
 // Unwrap returns the underlying [raw.VZEntropyDeviceConfiguration].
 func (x *EntropyDeviceConfiguration) Unwrap() *raw.VZEntropyDeviceConfiguration { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *EntropyDeviceConfiguration) ID() objc.ID { return x.inner.Ptr() }
 
-// EntropyDeviceConfigurationFromID adopts an existing toll-free-bridged object id as a EntropyDeviceConfiguration (nil for 0).
+// EntropyDeviceConfigurationFromID adopts an existing object pointer as a EntropyDeviceConfiguration (nil for 0).
 func EntropyDeviceConfigurationFromID(id objc.ID) *EntropyDeviceConfiguration {
 	if id == 0 {
 		return nil

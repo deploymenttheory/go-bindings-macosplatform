@@ -20,11 +20,11 @@ type MTRRVCOperationalStateClusterOperationalCommandResponseParams struct {
 // Unwrap returns the underlying [raw.MTRRVCOperationalStateClusterOperationalCommandResponseParams].
 func (x *MTRRVCOperationalStateClusterOperationalCommandResponseParams) Unwrap() *raw.MTRRVCOperationalStateClusterOperationalCommandResponseParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRRVCOperationalStateClusterOperationalCommandResponseParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRRVCOperationalStateClusterOperationalCommandResponseParamsFromID adopts an existing toll-free-bridged object id as a MTRRVCOperationalStateClusterOperationalCommandResponseParams (nil for 0).
+// MTRRVCOperationalStateClusterOperationalCommandResponseParamsFromID adopts an existing object pointer as a MTRRVCOperationalStateClusterOperationalCommandResponseParams (nil for 0).
 func MTRRVCOperationalStateClusterOperationalCommandResponseParamsFromID(id objc.ID) *MTRRVCOperationalStateClusterOperationalCommandResponseParams {
 	if id == 0 {
 		return nil

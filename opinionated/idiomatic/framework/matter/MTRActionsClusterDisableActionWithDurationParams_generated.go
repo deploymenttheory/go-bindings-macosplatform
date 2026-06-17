@@ -18,11 +18,11 @@ type MTRActionsClusterDisableActionWithDurationParams struct {
 // Unwrap returns the underlying [raw.MTRActionsClusterDisableActionWithDurationParams].
 func (x *MTRActionsClusterDisableActionWithDurationParams) Unwrap() *raw.MTRActionsClusterDisableActionWithDurationParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRActionsClusterDisableActionWithDurationParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRActionsClusterDisableActionWithDurationParamsFromID adopts an existing toll-free-bridged object id as a MTRActionsClusterDisableActionWithDurationParams (nil for 0).
+// MTRActionsClusterDisableActionWithDurationParamsFromID adopts an existing object pointer as a MTRActionsClusterDisableActionWithDurationParams (nil for 0).
 func MTRActionsClusterDisableActionWithDurationParamsFromID(id objc.ID) *MTRActionsClusterDisableActionWithDurationParams {
 	if id == 0 {
 		return nil

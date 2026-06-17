@@ -17,11 +17,11 @@ type ArrayType struct {
 // Unwrap returns the underlying [raw.MTLArrayType].
 func (x *ArrayType) Unwrap() *raw.MTLArrayType { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ArrayType) ID() objc.ID { return x.inner.Ptr() }
 
-// ArrayTypeFromID adopts an existing toll-free-bridged object id as a ArrayType (nil for 0).
+// ArrayTypeFromID adopts an existing object pointer as a ArrayType (nil for 0).
 func ArrayTypeFromID(id objc.ID) *ArrayType {
 	if id == 0 {
 		return nil

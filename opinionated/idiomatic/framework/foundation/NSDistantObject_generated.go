@@ -18,11 +18,11 @@ type DistantObject struct {
 // Unwrap returns the underlying [raw.NSDistantObject].
 func (x *DistantObject) Unwrap() *raw.NSDistantObject { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DistantObject) ID() objc.ID { return x.inner.Ptr() }
 
-// DistantObjectFromID adopts an existing toll-free-bridged object id as a DistantObject (nil for 0).
+// DistantObjectFromID adopts an existing object pointer as a DistantObject (nil for 0).
 func DistantObjectFromID(id objc.ID) *DistantObject {
 	if id == 0 {
 		return nil

@@ -19,11 +19,11 @@ type DataAsset struct {
 // Unwrap returns the underlying [raw.NSDataAsset].
 func (x *DataAsset) Unwrap() *raw.NSDataAsset { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DataAsset) ID() objc.ID { return x.inner.Ptr() }
 
-// DataAssetFromID adopts an existing toll-free-bridged object id as a DataAsset (nil for 0).
+// DataAssetFromID adopts an existing object pointer as a DataAsset (nil for 0).
 func DataAssetFromID(id objc.ID) *DataAsset {
 	if id == 0 {
 		return nil

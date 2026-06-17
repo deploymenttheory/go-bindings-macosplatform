@@ -18,11 +18,11 @@ type CIDeviceManager struct {
 // Unwrap returns the underlying [raw.MIDICIDeviceManager].
 func (x *CIDeviceManager) Unwrap() *raw.MIDICIDeviceManager { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CIDeviceManager) ID() objc.ID { return x.inner.Ptr() }
 
-// CIDeviceManagerFromID adopts an existing toll-free-bridged object id as a CIDeviceManager (nil for 0).
+// CIDeviceManagerFromID adopts an existing object pointer as a CIDeviceManager (nil for 0).
 func CIDeviceManagerFromID(id objc.ID) *CIDeviceManager {
 	if id == 0 {
 		return nil

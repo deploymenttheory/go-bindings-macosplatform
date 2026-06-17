@@ -17,11 +17,11 @@ type IndexPath struct {
 // Unwrap returns the underlying [raw.NSIndexPath].
 func (x *IndexPath) Unwrap() *raw.NSIndexPath { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *IndexPath) ID() objc.ID { return x.inner.Ptr() }
 
-// IndexPathFromID adopts an existing toll-free-bridged object id as a IndexPath (nil for 0).
+// IndexPathFromID adopts an existing object pointer as a IndexPath (nil for 0).
 func IndexPathFromID(id objc.ID) *IndexPath {
 	if id == 0 {
 		return nil

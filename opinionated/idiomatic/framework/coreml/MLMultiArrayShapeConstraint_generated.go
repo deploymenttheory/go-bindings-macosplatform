@@ -19,11 +19,11 @@ type MultiArrayShapeConstraint struct {
 // Unwrap returns the underlying [raw.MLMultiArrayShapeConstraint].
 func (x *MultiArrayShapeConstraint) Unwrap() *raw.MLMultiArrayShapeConstraint { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MultiArrayShapeConstraint) ID() objc.ID { return x.inner.Ptr() }
 
-// MultiArrayShapeConstraintFromID adopts an existing toll-free-bridged object id as a MultiArrayShapeConstraint (nil for 0).
+// MultiArrayShapeConstraintFromID adopts an existing object pointer as a MultiArrayShapeConstraint (nil for 0).
 func MultiArrayShapeConstraintFromID(id objc.ID) *MultiArrayShapeConstraint {
 	if id == 0 {
 		return nil

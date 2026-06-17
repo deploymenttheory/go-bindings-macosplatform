@@ -17,11 +17,11 @@ type DOMComment struct {
 // Unwrap returns the underlying [raw.DOMComment].
 func (x *DOMComment) Unwrap() *raw.DOMComment { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DOMComment) ID() objc.ID { return x.inner.Ptr() }
 
-// DOMCommentFromID adopts an existing toll-free-bridged object id as a DOMComment (nil for 0).
+// DOMCommentFromID adopts an existing object pointer as a DOMComment (nil for 0).
 func DOMCommentFromID(id objc.ID) *DOMComment {
 	if id == 0 {
 		return nil

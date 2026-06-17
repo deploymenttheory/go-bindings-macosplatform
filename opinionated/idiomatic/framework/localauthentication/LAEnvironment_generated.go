@@ -17,11 +17,11 @@ type Environment struct {
 // Unwrap returns the underlying [raw.LAEnvironment].
 func (x *Environment) Unwrap() *raw.LAEnvironment { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Environment) ID() objc.ID { return x.inner.Ptr() }
 
-// EnvironmentFromID adopts an existing toll-free-bridged object id as a Environment (nil for 0).
+// EnvironmentFromID adopts an existing object pointer as a Environment (nil for 0).
 func EnvironmentFromID(id objc.ID) *Environment {
 	if id == 0 {
 		return nil

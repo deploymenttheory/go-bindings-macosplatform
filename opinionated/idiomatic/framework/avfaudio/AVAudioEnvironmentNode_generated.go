@@ -19,11 +19,11 @@ type AudioEnvironmentNode struct {
 // Unwrap returns the underlying [raw.AVAudioEnvironmentNode].
 func (x *AudioEnvironmentNode) Unwrap() *raw.AVAudioEnvironmentNode { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AudioEnvironmentNode) ID() objc.ID { return x.inner.Ptr() }
 
-// AudioEnvironmentNodeFromID adopts an existing toll-free-bridged object id as a AudioEnvironmentNode (nil for 0).
+// AudioEnvironmentNodeFromID adopts an existing object pointer as a AudioEnvironmentNode (nil for 0).
 func AudioEnvironmentNodeFromID(id objc.ID) *AudioEnvironmentNode {
 	if id == 0 {
 		return nil

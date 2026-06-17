@@ -17,11 +17,11 @@ type LocalizedNumberFormatRule struct {
 // Unwrap returns the underlying [raw.NSLocalizedNumberFormatRule].
 func (x *LocalizedNumberFormatRule) Unwrap() *raw.NSLocalizedNumberFormatRule { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *LocalizedNumberFormatRule) ID() objc.ID { return x.inner.Ptr() }
 
-// LocalizedNumberFormatRuleFromID adopts an existing toll-free-bridged object id as a LocalizedNumberFormatRule (nil for 0).
+// LocalizedNumberFormatRuleFromID adopts an existing object pointer as a LocalizedNumberFormatRule (nil for 0).
 func LocalizedNumberFormatRuleFromID(id objc.ID) *LocalizedNumberFormatRule {
 	if id == 0 {
 		return nil

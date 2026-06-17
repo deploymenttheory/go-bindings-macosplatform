@@ -19,11 +19,11 @@ type ScreenSaverView struct {
 // Unwrap returns the underlying [raw.ScreenSaverView].
 func (x *ScreenSaverView) Unwrap() *raw.ScreenSaverView { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ScreenSaverView) ID() objc.ID { return x.inner.Ptr() }
 
-// ScreenSaverViewFromID adopts an existing toll-free-bridged object id as a ScreenSaverView (nil for 0).
+// ScreenSaverViewFromID adopts an existing object pointer as a ScreenSaverView (nil for 0).
 func ScreenSaverViewFromID(id objc.ID) *ScreenSaverView {
 	if id == 0 {
 		return nil

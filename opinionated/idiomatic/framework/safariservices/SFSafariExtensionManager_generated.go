@@ -17,11 +17,11 @@ type SafariExtensionManager struct {
 // Unwrap returns the underlying [raw.SFSafariExtensionManager].
 func (x *SafariExtensionManager) Unwrap() *raw.SFSafariExtensionManager { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SafariExtensionManager) ID() objc.ID { return x.inner.Ptr() }
 
-// SafariExtensionManagerFromID adopts an existing toll-free-bridged object id as a SafariExtensionManager (nil for 0).
+// SafariExtensionManagerFromID adopts an existing object pointer as a SafariExtensionManager (nil for 0).
 func SafariExtensionManagerFromID(id objc.ID) *SafariExtensionManager {
 	if id == 0 {
 		return nil

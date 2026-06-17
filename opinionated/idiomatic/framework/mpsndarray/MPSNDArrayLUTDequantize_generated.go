@@ -18,11 +18,11 @@ type ArrayLUTDequantize struct {
 // Unwrap returns the underlying [raw.MPSNDArrayLUTDequantize].
 func (x *ArrayLUTDequantize) Unwrap() *raw.MPSNDArrayLUTDequantize { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ArrayLUTDequantize) ID() objc.ID { return x.inner.Ptr() }
 
-// ArrayLUTDequantizeFromID adopts an existing toll-free-bridged object id as a ArrayLUTDequantize (nil for 0).
+// ArrayLUTDequantizeFromID adopts an existing object pointer as a ArrayLUTDequantize (nil for 0).
 func ArrayLUTDequantizeFromID(id objc.ID) *ArrayLUTDequantize {
 	if id == 0 {
 		return nil

@@ -20,11 +20,11 @@ type PortraitEffectsMatte struct {
 // Unwrap returns the underlying [raw.AVPortraitEffectsMatte].
 func (x *PortraitEffectsMatte) Unwrap() *raw.AVPortraitEffectsMatte { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PortraitEffectsMatte) ID() objc.ID { return x.inner.Ptr() }
 
-// PortraitEffectsMatteFromID adopts an existing toll-free-bridged object id as a PortraitEffectsMatte (nil for 0).
+// PortraitEffectsMatteFromID adopts an existing object pointer as a PortraitEffectsMatte (nil for 0).
 func PortraitEffectsMatteFromID(id objc.ID) *PortraitEffectsMatte {
 	if id == 0 {
 		return nil

@@ -19,11 +19,11 @@ type WebContentProcess struct {
 // Unwrap returns the underlying [raw.BEWebContentProcess].
 func (x *WebContentProcess) Unwrap() *raw.BEWebContentProcess { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *WebContentProcess) ID() objc.ID { return x.inner.Ptr() }
 
-// WebContentProcessFromID adopts an existing toll-free-bridged object id as a WebContentProcess (nil for 0).
+// WebContentProcessFromID adopts an existing object pointer as a WebContentProcess (nil for 0).
 func WebContentProcessFromID(id objc.ID) *WebContentProcess {
 	if id == 0 {
 		return nil

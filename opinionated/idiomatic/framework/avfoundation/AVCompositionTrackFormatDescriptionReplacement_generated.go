@@ -18,11 +18,11 @@ type CompositionTrackFormatDescriptionReplacement struct {
 // Unwrap returns the underlying [raw.AVCompositionTrackFormatDescriptionReplacement].
 func (x *CompositionTrackFormatDescriptionReplacement) Unwrap() *raw.AVCompositionTrackFormatDescriptionReplacement { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CompositionTrackFormatDescriptionReplacement) ID() objc.ID { return x.inner.Ptr() }
 
-// CompositionTrackFormatDescriptionReplacementFromID adopts an existing toll-free-bridged object id as a CompositionTrackFormatDescriptionReplacement (nil for 0).
+// CompositionTrackFormatDescriptionReplacementFromID adopts an existing object pointer as a CompositionTrackFormatDescriptionReplacement (nil for 0).
 func CompositionTrackFormatDescriptionReplacementFromID(id objc.ID) *CompositionTrackFormatDescriptionReplacement {
 	if id == 0 {
 		return nil

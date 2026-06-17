@@ -18,11 +18,11 @@ type MTRSmokeCOAlarmClusterSmokeAlarmEvent struct {
 // Unwrap returns the underlying [raw.MTRSmokeCOAlarmClusterSmokeAlarmEvent].
 func (x *MTRSmokeCOAlarmClusterSmokeAlarmEvent) Unwrap() *raw.MTRSmokeCOAlarmClusterSmokeAlarmEvent { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRSmokeCOAlarmClusterSmokeAlarmEvent) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRSmokeCOAlarmClusterSmokeAlarmEventFromID adopts an existing toll-free-bridged object id as a MTRSmokeCOAlarmClusterSmokeAlarmEvent (nil for 0).
+// MTRSmokeCOAlarmClusterSmokeAlarmEventFromID adopts an existing object pointer as a MTRSmokeCOAlarmClusterSmokeAlarmEvent (nil for 0).
 func MTRSmokeCOAlarmClusterSmokeAlarmEventFromID(id objc.ID) *MTRSmokeCOAlarmClusterSmokeAlarmEvent {
 	if id == 0 {
 		return nil

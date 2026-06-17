@@ -19,11 +19,11 @@ type NEVPNProtocolIPSec struct {
 // Unwrap returns the underlying [raw.NEVPNProtocolIPSec].
 func (x *NEVPNProtocolIPSec) Unwrap() *raw.NEVPNProtocolIPSec { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NEVPNProtocolIPSec) ID() objc.ID { return x.inner.Ptr() }
 
-// NEVPNProtocolIPSecFromID adopts an existing toll-free-bridged object id as a NEVPNProtocolIPSec (nil for 0).
+// NEVPNProtocolIPSecFromID adopts an existing object pointer as a NEVPNProtocolIPSec (nil for 0).
 func NEVPNProtocolIPSecFromID(id objc.ID) *NEVPNProtocolIPSec {
 	if id == 0 {
 		return nil

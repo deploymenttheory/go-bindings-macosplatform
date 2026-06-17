@@ -20,11 +20,11 @@ type GestureRecognizer struct {
 // Unwrap returns the underlying [raw.NSGestureRecognizer].
 func (x *GestureRecognizer) Unwrap() *raw.NSGestureRecognizer { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *GestureRecognizer) ID() objc.ID { return x.inner.Ptr() }
 
-// GestureRecognizerFromID adopts an existing toll-free-bridged object id as a GestureRecognizer (nil for 0).
+// GestureRecognizerFromID adopts an existing object pointer as a GestureRecognizer (nil for 0).
 func GestureRecognizerFromID(id objc.ID) *GestureRecognizer {
 	if id == 0 {
 		return nil

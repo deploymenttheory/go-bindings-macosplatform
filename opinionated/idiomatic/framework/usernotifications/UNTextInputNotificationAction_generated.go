@@ -18,11 +18,11 @@ type TextInputNotificationAction struct {
 // Unwrap returns the underlying [raw.UNTextInputNotificationAction].
 func (x *TextInputNotificationAction) Unwrap() *raw.UNTextInputNotificationAction { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *TextInputNotificationAction) ID() objc.ID { return x.inner.Ptr() }
 
-// TextInputNotificationActionFromID adopts an existing toll-free-bridged object id as a TextInputNotificationAction (nil for 0).
+// TextInputNotificationActionFromID adopts an existing object pointer as a TextInputNotificationAction (nil for 0).
 func TextInputNotificationActionFromID(id objc.ID) *TextInputNotificationAction {
 	if id == 0 {
 		return nil

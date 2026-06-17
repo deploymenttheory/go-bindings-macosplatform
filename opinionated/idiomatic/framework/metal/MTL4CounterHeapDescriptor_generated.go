@@ -17,11 +17,11 @@ type MTL4CounterHeapDescriptor struct {
 // Unwrap returns the underlying [raw.MTL4CounterHeapDescriptor].
 func (x *MTL4CounterHeapDescriptor) Unwrap() *raw.MTL4CounterHeapDescriptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTL4CounterHeapDescriptor) ID() objc.ID { return x.inner.Ptr() }
 
-// MTL4CounterHeapDescriptorFromID adopts an existing toll-free-bridged object id as a MTL4CounterHeapDescriptor (nil for 0).
+// MTL4CounterHeapDescriptorFromID adopts an existing object pointer as a MTL4CounterHeapDescriptor (nil for 0).
 func MTL4CounterHeapDescriptorFromID(id objc.ID) *MTL4CounterHeapDescriptor {
 	if id == 0 {
 		return nil

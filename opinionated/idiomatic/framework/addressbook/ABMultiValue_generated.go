@@ -19,11 +19,11 @@ type MultiValue struct {
 // Unwrap returns the underlying [raw.ABMultiValue].
 func (x *MultiValue) Unwrap() *raw.ABMultiValue { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MultiValue) ID() objc.ID { return x.inner.Ptr() }
 
-// MultiValueFromID adopts an existing toll-free-bridged object id as a MultiValue (nil for 0).
+// MultiValueFromID adopts an existing object pointer as a MultiValue (nil for 0).
 func MultiValueFromID(id objc.ID) *MultiValue {
 	if id == 0 {
 		return nil

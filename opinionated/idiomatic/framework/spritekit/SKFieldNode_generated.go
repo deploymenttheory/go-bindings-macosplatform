@@ -18,11 +18,11 @@ type FieldNode struct {
 // Unwrap returns the underlying [raw.SKFieldNode].
 func (x *FieldNode) Unwrap() *raw.SKFieldNode { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *FieldNode) ID() objc.ID { return x.inner.Ptr() }
 
-// FieldNodeFromID adopts an existing toll-free-bridged object id as a FieldNode (nil for 0).
+// FieldNodeFromID adopts an existing object pointer as a FieldNode (nil for 0).
 func FieldNodeFromID(id objc.ID) *FieldNode {
 	if id == 0 {
 		return nil

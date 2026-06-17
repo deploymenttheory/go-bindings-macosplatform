@@ -19,11 +19,11 @@ type AccessibilityCustomAction struct {
 // Unwrap returns the underlying [raw.NSAccessibilityCustomAction].
 func (x *AccessibilityCustomAction) Unwrap() *raw.NSAccessibilityCustomAction { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AccessibilityCustomAction) ID() objc.ID { return x.inner.Ptr() }
 
-// AccessibilityCustomActionFromID adopts an existing toll-free-bridged object id as a AccessibilityCustomAction (nil for 0).
+// AccessibilityCustomActionFromID adopts an existing object pointer as a AccessibilityCustomAction (nil for 0).
 func AccessibilityCustomActionFromID(id objc.ID) *AccessibilityCustomAction {
 	if id == 0 {
 		return nil

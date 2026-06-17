@@ -18,11 +18,11 @@ type MutableAttributedString struct {
 // Unwrap returns the underlying [raw.NSMutableAttributedString].
 func (x *MutableAttributedString) Unwrap() *raw.NSMutableAttributedString { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MutableAttributedString) ID() objc.ID { return x.inner.Ptr() }
 
-// MutableAttributedStringFromID adopts an existing toll-free-bridged object id as a MutableAttributedString (nil for 0).
+// MutableAttributedStringFromID adopts an existing object pointer as a MutableAttributedString (nil for 0).
 func MutableAttributedStringFromID(id objc.ID) *MutableAttributedString {
 	if id == 0 {
 		return nil

@@ -17,11 +17,11 @@ type AudioMixerNode struct {
 // Unwrap returns the underlying [raw.AVAudioMixerNode].
 func (x *AudioMixerNode) Unwrap() *raw.AVAudioMixerNode { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AudioMixerNode) ID() objc.ID { return x.inner.Ptr() }
 
-// AudioMixerNodeFromID adopts an existing toll-free-bridged object id as a AudioMixerNode (nil for 0).
+// AudioMixerNodeFromID adopts an existing object pointer as a AudioMixerNode (nil for 0).
 func AudioMixerNodeFromID(id objc.ID) *AudioMixerNode {
 	if id == 0 {
 		return nil

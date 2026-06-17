@@ -17,11 +17,11 @@ type KeyboardConfiguration struct {
 // Unwrap returns the underlying [raw.VZKeyboardConfiguration].
 func (x *KeyboardConfiguration) Unwrap() *raw.VZKeyboardConfiguration { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *KeyboardConfiguration) ID() objc.ID { return x.inner.Ptr() }
 
-// KeyboardConfigurationFromID adopts an existing toll-free-bridged object id as a KeyboardConfiguration (nil for 0).
+// KeyboardConfigurationFromID adopts an existing object pointer as a KeyboardConfiguration (nil for 0).
 func KeyboardConfigurationFromID(id objc.ID) *KeyboardConfiguration {
 	if id == 0 {
 		return nil

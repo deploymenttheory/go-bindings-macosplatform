@@ -20,11 +20,11 @@ type VerifiableClinicalRecordQuery struct {
 // Unwrap returns the underlying [raw.HKVerifiableClinicalRecordQuery].
 func (x *VerifiableClinicalRecordQuery) Unwrap() *raw.HKVerifiableClinicalRecordQuery { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *VerifiableClinicalRecordQuery) ID() objc.ID { return x.inner.Ptr() }
 
-// VerifiableClinicalRecordQueryFromID adopts an existing toll-free-bridged object id as a VerifiableClinicalRecordQuery (nil for 0).
+// VerifiableClinicalRecordQueryFromID adopts an existing object pointer as a VerifiableClinicalRecordQuery (nil for 0).
 func VerifiableClinicalRecordQueryFromID(id objc.ID) *VerifiableClinicalRecordQuery {
 	if id == 0 {
 		return nil

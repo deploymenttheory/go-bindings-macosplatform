@@ -21,11 +21,11 @@ type MTRBaseClusterThermostat struct {
 // Unwrap returns the underlying [raw.MTRBaseClusterThermostat].
 func (x *MTRBaseClusterThermostat) Unwrap() *raw.MTRBaseClusterThermostat { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRBaseClusterThermostat) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRBaseClusterThermostatFromID adopts an existing toll-free-bridged object id as a MTRBaseClusterThermostat (nil for 0).
+// MTRBaseClusterThermostatFromID adopts an existing object pointer as a MTRBaseClusterThermostat (nil for 0).
 func MTRBaseClusterThermostatFromID(id objc.ID) *MTRBaseClusterThermostat {
 	if id == 0 {
 		return nil

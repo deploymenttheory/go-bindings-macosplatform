@@ -20,11 +20,11 @@ type MTRDoorLockClusterGetCredentialStatusResponseParams struct {
 // Unwrap returns the underlying [raw.MTRDoorLockClusterGetCredentialStatusResponseParams].
 func (x *MTRDoorLockClusterGetCredentialStatusResponseParams) Unwrap() *raw.MTRDoorLockClusterGetCredentialStatusResponseParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRDoorLockClusterGetCredentialStatusResponseParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRDoorLockClusterGetCredentialStatusResponseParamsFromID adopts an existing toll-free-bridged object id as a MTRDoorLockClusterGetCredentialStatusResponseParams (nil for 0).
+// MTRDoorLockClusterGetCredentialStatusResponseParamsFromID adopts an existing object pointer as a MTRDoorLockClusterGetCredentialStatusResponseParams (nil for 0).
 func MTRDoorLockClusterGetCredentialStatusResponseParamsFromID(id objc.ID) *MTRDoorLockClusterGetCredentialStatusResponseParams {
 	if id == 0 {
 		return nil

@@ -19,11 +19,11 @@ type UserIdentity struct {
 // Unwrap returns the underlying [raw.CBUserIdentity].
 func (x *UserIdentity) Unwrap() *raw.CBUserIdentity { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *UserIdentity) ID() objc.ID { return x.inner.Ptr() }
 
-// UserIdentityFromID adopts an existing toll-free-bridged object id as a UserIdentity (nil for 0).
+// UserIdentityFromID adopts an existing object pointer as a UserIdentity (nil for 0).
 func UserIdentityFromID(id objc.ID) *UserIdentity {
 	if id == 0 {
 		return nil

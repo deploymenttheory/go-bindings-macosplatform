@@ -18,11 +18,11 @@ type Matrix4x4Array struct {
 // Unwrap returns the underlying [raw.MDLMatrix4x4Array].
 func (x *Matrix4x4Array) Unwrap() *raw.MDLMatrix4x4Array { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Matrix4x4Array) ID() objc.ID { return x.inner.Ptr() }
 
-// Matrix4x4ArrayFromID adopts an existing toll-free-bridged object id as a Matrix4x4Array (nil for 0).
+// Matrix4x4ArrayFromID adopts an existing object pointer as a Matrix4x4Array (nil for 0).
 func Matrix4x4ArrayFromID(id objc.ID) *Matrix4x4Array {
 	if id == 0 {
 		return nil

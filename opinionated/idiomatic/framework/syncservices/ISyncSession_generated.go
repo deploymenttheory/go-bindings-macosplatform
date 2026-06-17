@@ -18,11 +18,11 @@ type ISyncSession struct {
 // Unwrap returns the underlying [raw.ISyncSession].
 func (x *ISyncSession) Unwrap() *raw.ISyncSession { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ISyncSession) ID() objc.ID { return x.inner.Ptr() }
 
-// ISyncSessionFromID adopts an existing toll-free-bridged object id as a ISyncSession (nil for 0).
+// ISyncSessionFromID adopts an existing object pointer as a ISyncSession (nil for 0).
 func ISyncSessionFromID(id objc.ID) *ISyncSession {
 	if id == 0 {
 		return nil

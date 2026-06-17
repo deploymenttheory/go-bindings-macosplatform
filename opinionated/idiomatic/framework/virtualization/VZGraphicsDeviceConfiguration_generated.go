@@ -17,11 +17,11 @@ type GraphicsDeviceConfiguration struct {
 // Unwrap returns the underlying [raw.VZGraphicsDeviceConfiguration].
 func (x *GraphicsDeviceConfiguration) Unwrap() *raw.VZGraphicsDeviceConfiguration { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *GraphicsDeviceConfiguration) ID() objc.ID { return x.inner.Ptr() }
 
-// GraphicsDeviceConfigurationFromID adopts an existing toll-free-bridged object id as a GraphicsDeviceConfiguration (nil for 0).
+// GraphicsDeviceConfigurationFromID adopts an existing object pointer as a GraphicsDeviceConfiguration (nil for 0).
 func GraphicsDeviceConfigurationFromID(id objc.ID) *GraphicsDeviceConfiguration {
 	if id == 0 {
 		return nil

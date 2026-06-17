@@ -20,11 +20,11 @@ type ImageDivide struct {
 // Unwrap returns the underlying [raw.MPSImageDivide].
 func (x *ImageDivide) Unwrap() *raw.MPSImageDivide { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ImageDivide) ID() objc.ID { return x.inner.Ptr() }
 
-// ImageDivideFromID adopts an existing toll-free-bridged object id as a ImageDivide (nil for 0).
+// ImageDivideFromID adopts an existing object pointer as a ImageDivide (nil for 0).
 func ImageDivideFromID(id objc.ID) *ImageDivide {
 	if id == 0 {
 		return nil

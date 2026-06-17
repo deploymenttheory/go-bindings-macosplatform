@@ -21,11 +21,11 @@ type MTRBaseClusterThreadNetworkDirectory struct {
 // Unwrap returns the underlying [raw.MTRBaseClusterThreadNetworkDirectory].
 func (x *MTRBaseClusterThreadNetworkDirectory) Unwrap() *raw.MTRBaseClusterThreadNetworkDirectory { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRBaseClusterThreadNetworkDirectory) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRBaseClusterThreadNetworkDirectoryFromID adopts an existing toll-free-bridged object id as a MTRBaseClusterThreadNetworkDirectory (nil for 0).
+// MTRBaseClusterThreadNetworkDirectoryFromID adopts an existing object pointer as a MTRBaseClusterThreadNetworkDirectory (nil for 0).
 func MTRBaseClusterThreadNetworkDirectoryFromID(id objc.ID) *MTRBaseClusterThreadNetworkDirectory {
 	if id == 0 {
 		return nil

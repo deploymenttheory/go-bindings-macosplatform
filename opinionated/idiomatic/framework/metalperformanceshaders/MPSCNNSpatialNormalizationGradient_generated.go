@@ -21,11 +21,11 @@ type CNNSpatialNormalizationGradient struct {
 // Unwrap returns the underlying [raw.MPSCNNSpatialNormalizationGradient].
 func (x *CNNSpatialNormalizationGradient) Unwrap() *raw.MPSCNNSpatialNormalizationGradient { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CNNSpatialNormalizationGradient) ID() objc.ID { return x.inner.Ptr() }
 
-// CNNSpatialNormalizationGradientFromID adopts an existing toll-free-bridged object id as a CNNSpatialNormalizationGradient (nil for 0).
+// CNNSpatialNormalizationGradientFromID adopts an existing object pointer as a CNNSpatialNormalizationGradient (nil for 0).
 func CNNSpatialNormalizationGradientFromID(id objc.ID) *CNNSpatialNormalizationGradient {
 	if id == 0 {
 		return nil

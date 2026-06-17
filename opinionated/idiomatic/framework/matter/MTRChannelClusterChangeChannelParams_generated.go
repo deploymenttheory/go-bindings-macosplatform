@@ -19,11 +19,11 @@ type MTRChannelClusterChangeChannelParams struct {
 // Unwrap returns the underlying [raw.MTRChannelClusterChangeChannelParams].
 func (x *MTRChannelClusterChangeChannelParams) Unwrap() *raw.MTRChannelClusterChangeChannelParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRChannelClusterChangeChannelParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRChannelClusterChangeChannelParamsFromID adopts an existing toll-free-bridged object id as a MTRChannelClusterChangeChannelParams (nil for 0).
+// MTRChannelClusterChangeChannelParamsFromID adopts an existing object pointer as a MTRChannelClusterChangeChannelParams (nil for 0).
 func MTRChannelClusterChangeChannelParamsFromID(id objc.ID) *MTRChannelClusterChangeChannelParams {
 	if id == 0 {
 		return nil

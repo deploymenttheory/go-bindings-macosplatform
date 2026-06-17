@@ -17,11 +17,11 @@ type TokenDriver struct {
 // Unwrap returns the underlying [raw.TKTokenDriver].
 func (x *TokenDriver) Unwrap() *raw.TKTokenDriver { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *TokenDriver) ID() objc.ID { return x.inner.Ptr() }
 
-// TokenDriverFromID adopts an existing toll-free-bridged object id as a TokenDriver (nil for 0).
+// TokenDriverFromID adopts an existing object pointer as a TokenDriver (nil for 0).
 func TokenDriverFromID(id objc.ID) *TokenDriver {
 	if id == 0 {
 		return nil

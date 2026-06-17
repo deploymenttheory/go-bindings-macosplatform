@@ -19,11 +19,11 @@ type TemporalNoiseFilterConfiguration struct {
 // Unwrap returns the underlying [raw.VTTemporalNoiseFilterConfiguration].
 func (x *TemporalNoiseFilterConfiguration) Unwrap() *raw.VTTemporalNoiseFilterConfiguration { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *TemporalNoiseFilterConfiguration) ID() objc.ID { return x.inner.Ptr() }
 
-// TemporalNoiseFilterConfigurationFromID adopts an existing toll-free-bridged object id as a TemporalNoiseFilterConfiguration (nil for 0).
+// TemporalNoiseFilterConfigurationFromID adopts an existing object pointer as a TemporalNoiseFilterConfiguration (nil for 0).
 func TemporalNoiseFilterConfigurationFromID(id objc.ID) *TemporalNoiseFilterConfiguration {
 	if id == 0 {
 		return nil

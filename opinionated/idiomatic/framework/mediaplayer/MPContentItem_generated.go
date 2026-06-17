@@ -19,11 +19,11 @@ type ContentItem struct {
 // Unwrap returns the underlying [raw.MPContentItem].
 func (x *ContentItem) Unwrap() *raw.MPContentItem { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ContentItem) ID() objc.ID { return x.inner.Ptr() }
 
-// ContentItemFromID adopts an existing toll-free-bridged object id as a ContentItem (nil for 0).
+// ContentItemFromID adopts an existing object pointer as a ContentItem (nil for 0).
 func ContentItemFromID(id objc.ID) *ContentItem {
 	if id == 0 {
 		return nil

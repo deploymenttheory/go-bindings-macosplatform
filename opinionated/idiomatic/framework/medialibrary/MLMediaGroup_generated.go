@@ -20,11 +20,11 @@ type MediaGroup struct {
 // Unwrap returns the underlying [raw.MLMediaGroup].
 func (x *MediaGroup) Unwrap() *raw.MLMediaGroup { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MediaGroup) ID() objc.ID { return x.inner.Ptr() }
 
-// MediaGroupFromID adopts an existing toll-free-bridged object id as a MediaGroup (nil for 0).
+// MediaGroupFromID adopts an existing object pointer as a MediaGroup (nil for 0).
 func MediaGroupFromID(id objc.ID) *MediaGroup {
 	if id == 0 {
 		return nil

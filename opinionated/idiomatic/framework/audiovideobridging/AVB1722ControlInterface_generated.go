@@ -19,11 +19,11 @@ type AVB1722ControlInterface struct {
 // Unwrap returns the underlying [raw.AVB1722ControlInterface].
 func (x *AVB1722ControlInterface) Unwrap() *raw.AVB1722ControlInterface { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AVB1722ControlInterface) ID() objc.ID { return x.inner.Ptr() }
 
-// AVB1722ControlInterfaceFromID adopts an existing toll-free-bridged object id as a AVB1722ControlInterface (nil for 0).
+// AVB1722ControlInterfaceFromID adopts an existing object pointer as a AVB1722ControlInterface (nil for 0).
 func AVB1722ControlInterfaceFromID(id objc.ID) *AVB1722ControlInterface {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type ElectrocardiogramQuery struct {
 // Unwrap returns the underlying [raw.HKElectrocardiogramQuery].
 func (x *ElectrocardiogramQuery) Unwrap() *raw.HKElectrocardiogramQuery { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ElectrocardiogramQuery) ID() objc.ID { return x.inner.Ptr() }
 
-// ElectrocardiogramQueryFromID adopts an existing toll-free-bridged object id as a ElectrocardiogramQuery (nil for 0).
+// ElectrocardiogramQueryFromID adopts an existing object pointer as a ElectrocardiogramQuery (nil for 0).
 func ElectrocardiogramQueryFromID(id objc.ID) *ElectrocardiogramQuery {
 	if id == 0 {
 		return nil

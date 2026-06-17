@@ -19,11 +19,11 @@ type DOMKeyboardEvent struct {
 // Unwrap returns the underlying [raw.DOMKeyboardEvent].
 func (x *DOMKeyboardEvent) Unwrap() *raw.DOMKeyboardEvent { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DOMKeyboardEvent) ID() objc.ID { return x.inner.Ptr() }
 
-// DOMKeyboardEventFromID adopts an existing toll-free-bridged object id as a DOMKeyboardEvent (nil for 0).
+// DOMKeyboardEventFromID adopts an existing object pointer as a DOMKeyboardEvent (nil for 0).
 func DOMKeyboardEventFromID(id objc.ID) *DOMKeyboardEvent {
 	if id == 0 {
 		return nil

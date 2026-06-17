@@ -18,11 +18,11 @@ type MTRLevelControlClusterMoveToLevelParams struct {
 // Unwrap returns the underlying [raw.MTRLevelControlClusterMoveToLevelParams].
 func (x *MTRLevelControlClusterMoveToLevelParams) Unwrap() *raw.MTRLevelControlClusterMoveToLevelParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRLevelControlClusterMoveToLevelParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRLevelControlClusterMoveToLevelParamsFromID adopts an existing toll-free-bridged object id as a MTRLevelControlClusterMoveToLevelParams (nil for 0).
+// MTRLevelControlClusterMoveToLevelParamsFromID adopts an existing object pointer as a MTRLevelControlClusterMoveToLevelParams (nil for 0).
 func MTRLevelControlClusterMoveToLevelParamsFromID(id objc.ID) *MTRLevelControlClusterMoveToLevelParams {
 	if id == 0 {
 		return nil

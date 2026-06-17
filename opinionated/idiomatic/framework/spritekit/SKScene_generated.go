@@ -20,11 +20,11 @@ type Scene struct {
 // Unwrap returns the underlying [raw.SKScene].
 func (x *Scene) Unwrap() *raw.SKScene { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Scene) ID() objc.ID { return x.inner.Ptr() }
 
-// SceneFromID adopts an existing toll-free-bridged object id as a Scene (nil for 0).
+// SceneFromID adopts an existing object pointer as a Scene (nil for 0).
 func SceneFromID(id objc.ID) *Scene {
 	if id == 0 {
 		return nil

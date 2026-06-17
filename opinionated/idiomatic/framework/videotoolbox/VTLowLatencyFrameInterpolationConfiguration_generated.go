@@ -19,11 +19,11 @@ type LowLatencyFrameInterpolationConfiguration struct {
 // Unwrap returns the underlying [raw.VTLowLatencyFrameInterpolationConfiguration].
 func (x *LowLatencyFrameInterpolationConfiguration) Unwrap() *raw.VTLowLatencyFrameInterpolationConfiguration { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *LowLatencyFrameInterpolationConfiguration) ID() objc.ID { return x.inner.Ptr() }
 
-// LowLatencyFrameInterpolationConfigurationFromID adopts an existing toll-free-bridged object id as a LowLatencyFrameInterpolationConfiguration (nil for 0).
+// LowLatencyFrameInterpolationConfigurationFromID adopts an existing object pointer as a LowLatencyFrameInterpolationConfiguration (nil for 0).
 func LowLatencyFrameInterpolationConfigurationFromID(id objc.ID) *LowLatencyFrameInterpolationConfiguration {
 	if id == 0 {
 		return nil

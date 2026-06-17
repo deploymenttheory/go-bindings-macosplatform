@@ -20,11 +20,11 @@ type OperationQueue struct {
 // Unwrap returns the underlying [raw.NSOperationQueue].
 func (x *OperationQueue) Unwrap() *raw.NSOperationQueue { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *OperationQueue) ID() objc.ID { return x.inner.Ptr() }
 
-// OperationQueueFromID adopts an existing toll-free-bridged object id as a OperationQueue (nil for 0).
+// OperationQueueFromID adopts an existing object pointer as a OperationQueue (nil for 0).
 func OperationQueueFromID(id objc.ID) *OperationQueue {
 	if id == 0 {
 		return nil

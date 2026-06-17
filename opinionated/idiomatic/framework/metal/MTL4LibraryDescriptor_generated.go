@@ -19,11 +19,11 @@ type MTL4LibraryDescriptor struct {
 // Unwrap returns the underlying [raw.MTL4LibraryDescriptor].
 func (x *MTL4LibraryDescriptor) Unwrap() *raw.MTL4LibraryDescriptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTL4LibraryDescriptor) ID() objc.ID { return x.inner.Ptr() }
 
-// MTL4LibraryDescriptorFromID adopts an existing toll-free-bridged object id as a MTL4LibraryDescriptor (nil for 0).
+// MTL4LibraryDescriptorFromID adopts an existing object pointer as a MTL4LibraryDescriptor (nil for 0).
 func MTL4LibraryDescriptorFromID(id objc.ID) *MTL4LibraryDescriptor {
 	if id == 0 {
 		return nil

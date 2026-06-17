@@ -19,11 +19,11 @@ type GeoJSONFeature struct {
 // Unwrap returns the underlying [raw.MKGeoJSONFeature].
 func (x *GeoJSONFeature) Unwrap() *raw.MKGeoJSONFeature { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *GeoJSONFeature) ID() objc.ID { return x.inner.Ptr() }
 
-// GeoJSONFeatureFromID adopts an existing toll-free-bridged object id as a GeoJSONFeature (nil for 0).
+// GeoJSONFeatureFromID adopts an existing object pointer as a GeoJSONFeature (nil for 0).
 func GeoJSONFeatureFromID(id objc.ID) *GeoJSONFeature {
 	if id == 0 {
 		return nil

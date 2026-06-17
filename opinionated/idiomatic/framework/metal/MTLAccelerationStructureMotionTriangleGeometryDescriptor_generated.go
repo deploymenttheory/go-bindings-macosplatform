@@ -20,11 +20,11 @@ type AccelerationStructureMotionTriangleGeometryDescriptor struct {
 // Unwrap returns the underlying [raw.MTLAccelerationStructureMotionTriangleGeometryDescriptor].
 func (x *AccelerationStructureMotionTriangleGeometryDescriptor) Unwrap() *raw.MTLAccelerationStructureMotionTriangleGeometryDescriptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AccelerationStructureMotionTriangleGeometryDescriptor) ID() objc.ID { return x.inner.Ptr() }
 
-// AccelerationStructureMotionTriangleGeometryDescriptorFromID adopts an existing toll-free-bridged object id as a AccelerationStructureMotionTriangleGeometryDescriptor (nil for 0).
+// AccelerationStructureMotionTriangleGeometryDescriptorFromID adopts an existing object pointer as a AccelerationStructureMotionTriangleGeometryDescriptor (nil for 0).
 func AccelerationStructureMotionTriangleGeometryDescriptorFromID(id objc.ID) *AccelerationStructureMotionTriangleGeometryDescriptor {
 	if id == 0 {
 		return nil

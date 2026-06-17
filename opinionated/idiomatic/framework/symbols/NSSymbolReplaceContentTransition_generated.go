@@ -17,11 +17,11 @@ type SymbolReplaceContentTransition struct {
 // Unwrap returns the underlying [raw.NSSymbolReplaceContentTransition].
 func (x *SymbolReplaceContentTransition) Unwrap() *raw.NSSymbolReplaceContentTransition { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SymbolReplaceContentTransition) ID() objc.ID { return x.inner.Ptr() }
 
-// SymbolReplaceContentTransitionFromID adopts an existing toll-free-bridged object id as a SymbolReplaceContentTransition (nil for 0).
+// SymbolReplaceContentTransitionFromID adopts an existing object pointer as a SymbolReplaceContentTransition (nil for 0).
 func SymbolReplaceContentTransitionFromID(id objc.ID) *SymbolReplaceContentTransition {
 	if id == 0 {
 		return nil

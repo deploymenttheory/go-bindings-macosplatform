@@ -18,11 +18,11 @@ type SharedEventListener struct {
 // Unwrap returns the underlying [raw.MTLSharedEventListener].
 func (x *SharedEventListener) Unwrap() *raw.MTLSharedEventListener { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SharedEventListener) ID() objc.ID { return x.inner.Ptr() }
 
-// SharedEventListenerFromID adopts an existing toll-free-bridged object id as a SharedEventListener (nil for 0).
+// SharedEventListenerFromID adopts an existing object pointer as a SharedEventListener (nil for 0).
 func SharedEventListenerFromID(id objc.ID) *SharedEventListener {
 	if id == 0 {
 		return nil

@@ -22,11 +22,11 @@ type ThumbnailGenerator struct {
 // Unwrap returns the underlying [raw.QLThumbnailGenerator].
 func (x *ThumbnailGenerator) Unwrap() *raw.QLThumbnailGenerator { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ThumbnailGenerator) ID() objc.ID { return x.inner.Ptr() }
 
-// ThumbnailGeneratorFromID adopts an existing toll-free-bridged object id as a ThumbnailGenerator (nil for 0).
+// ThumbnailGeneratorFromID adopts an existing object pointer as a ThumbnailGenerator (nil for 0).
 func ThumbnailGeneratorFromID(id objc.ID) *ThumbnailGenerator {
 	if id == 0 {
 		return nil

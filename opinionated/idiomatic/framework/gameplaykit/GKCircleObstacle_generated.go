@@ -18,11 +18,11 @@ type CircleObstacle struct {
 // Unwrap returns the underlying [raw.GKCircleObstacle].
 func (x *CircleObstacle) Unwrap() *raw.GKCircleObstacle { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CircleObstacle) ID() objc.ID { return x.inner.Ptr() }
 
-// CircleObstacleFromID adopts an existing toll-free-bridged object id as a CircleObstacle (nil for 0).
+// CircleObstacleFromID adopts an existing object pointer as a CircleObstacle (nil for 0).
 func CircleObstacleFromID(id objc.ID) *CircleObstacle {
 	if id == 0 {
 		return nil

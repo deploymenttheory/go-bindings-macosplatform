@@ -19,11 +19,11 @@ type MTRChannelClusterCancelRecordProgramParams struct {
 // Unwrap returns the underlying [raw.MTRChannelClusterCancelRecordProgramParams].
 func (x *MTRChannelClusterCancelRecordProgramParams) Unwrap() *raw.MTRChannelClusterCancelRecordProgramParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRChannelClusterCancelRecordProgramParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRChannelClusterCancelRecordProgramParamsFromID adopts an existing toll-free-bridged object id as a MTRChannelClusterCancelRecordProgramParams (nil for 0).
+// MTRChannelClusterCancelRecordProgramParamsFromID adopts an existing object pointer as a MTRChannelClusterCancelRecordProgramParams (nil for 0).
 func MTRChannelClusterCancelRecordProgramParamsFromID(id objc.ID) *MTRChannelClusterCancelRecordProgramParams {
 	if id == 0 {
 		return nil

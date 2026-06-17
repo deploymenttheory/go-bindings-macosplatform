@@ -19,11 +19,11 @@ type WKWebExtensionDataRecord struct {
 // Unwrap returns the underlying [raw.WKWebExtensionDataRecord].
 func (x *WKWebExtensionDataRecord) Unwrap() *raw.WKWebExtensionDataRecord { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *WKWebExtensionDataRecord) ID() objc.ID { return x.inner.Ptr() }
 
-// WKWebExtensionDataRecordFromID adopts an existing toll-free-bridged object id as a WKWebExtensionDataRecord (nil for 0).
+// WKWebExtensionDataRecordFromID adopts an existing object pointer as a WKWebExtensionDataRecord (nil for 0).
 func WKWebExtensionDataRecordFromID(id objc.ID) *WKWebExtensionDataRecord {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type AudioSource struct {
 // Unwrap returns the underlying [raw.SCNAudioSource].
 func (x *AudioSource) Unwrap() *raw.SCNAudioSource { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AudioSource) ID() objc.ID { return x.inner.Ptr() }
 
-// AudioSourceFromID adopts an existing toll-free-bridged object id as a AudioSource (nil for 0).
+// AudioSourceFromID adopts an existing object pointer as a AudioSource (nil for 0).
 func AudioSourceFromID(id objc.ID) *AudioSource {
 	if id == 0 {
 		return nil

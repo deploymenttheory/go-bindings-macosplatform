@@ -19,11 +19,11 @@ type UserIdentityLookupInfo struct {
 // Unwrap returns the underlying [raw.CKUserIdentityLookupInfo].
 func (x *UserIdentityLookupInfo) Unwrap() *raw.CKUserIdentityLookupInfo { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *UserIdentityLookupInfo) ID() objc.ID { return x.inner.Ptr() }
 
-// UserIdentityLookupInfoFromID adopts an existing toll-free-bridged object id as a UserIdentityLookupInfo (nil for 0).
+// UserIdentityLookupInfoFromID adopts an existing object pointer as a UserIdentityLookupInfo (nil for 0).
 func UserIdentityLookupInfoFromID(id objc.ID) *UserIdentityLookupInfo {
 	if id == 0 {
 		return nil

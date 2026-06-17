@@ -17,11 +17,11 @@ type URLConnection struct {
 // Unwrap returns the underlying [raw.NSURLConnection].
 func (x *URLConnection) Unwrap() *raw.NSURLConnection { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *URLConnection) ID() objc.ID { return x.inner.Ptr() }
 
-// URLConnectionFromID adopts an existing toll-free-bridged object id as a URLConnection (nil for 0).
+// URLConnectionFromID adopts an existing object pointer as a URLConnection (nil for 0).
 func URLConnectionFromID(id objc.ID) *URLConnection {
 	if id == 0 {
 		return nil

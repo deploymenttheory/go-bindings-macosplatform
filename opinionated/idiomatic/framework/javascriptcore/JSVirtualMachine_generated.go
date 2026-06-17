@@ -17,11 +17,11 @@ type VirtualMachine struct {
 // Unwrap returns the underlying [raw.JSVirtualMachine].
 func (x *VirtualMachine) Unwrap() *raw.JSVirtualMachine { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *VirtualMachine) ID() objc.ID { return x.inner.Ptr() }
 
-// VirtualMachineFromID adopts an existing toll-free-bridged object id as a VirtualMachine (nil for 0).
+// VirtualMachineFromID adopts an existing object pointer as a VirtualMachine (nil for 0).
 func VirtualMachineFromID(id objc.ID) *VirtualMachine {
 	if id == 0 {
 		return nil

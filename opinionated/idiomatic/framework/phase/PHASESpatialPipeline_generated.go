@@ -18,11 +18,11 @@ type SpatialPipeline struct {
 // Unwrap returns the underlying [raw.PHASESpatialPipeline].
 func (x *SpatialPipeline) Unwrap() *raw.PHASESpatialPipeline { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SpatialPipeline) ID() objc.ID { return x.inner.Ptr() }
 
-// SpatialPipelineFromID adopts an existing toll-free-bridged object id as a SpatialPipeline (nil for 0).
+// SpatialPipelineFromID adopts an existing object pointer as a SpatialPipeline (nil for 0).
 func SpatialPipelineFromID(id objc.ID) *SpatialPipeline {
 	if id == 0 {
 		return nil

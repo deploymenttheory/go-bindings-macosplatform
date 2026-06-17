@@ -18,11 +18,11 @@ type WebAppManifest struct {
 // Unwrap returns the underlying [raw.BEWebAppManifest].
 func (x *WebAppManifest) Unwrap() *raw.BEWebAppManifest { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *WebAppManifest) ID() objc.ID { return x.inner.Ptr() }
 
-// WebAppManifestFromID adopts an existing toll-free-bridged object id as a WebAppManifest (nil for 0).
+// WebAppManifestFromID adopts an existing object pointer as a WebAppManifest (nil for 0).
 func WebAppManifestFromID(id objc.ID) *WebAppManifest {
 	if id == 0 {
 		return nil

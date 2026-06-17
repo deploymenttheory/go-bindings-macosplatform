@@ -19,11 +19,11 @@ type CNNArithmeticGradientState struct {
 // Unwrap returns the underlying [raw.MPSCNNArithmeticGradientState].
 func (x *CNNArithmeticGradientState) Unwrap() *raw.MPSCNNArithmeticGradientState { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CNNArithmeticGradientState) ID() objc.ID { return x.inner.Ptr() }
 
-// CNNArithmeticGradientStateFromID adopts an existing toll-free-bridged object id as a CNNArithmeticGradientState (nil for 0).
+// CNNArithmeticGradientStateFromID adopts an existing object pointer as a CNNArithmeticGradientState (nil for 0).
 func CNNArithmeticGradientStateFromID(id objc.ID) *CNNArithmeticGradientState {
 	if id == 0 {
 		return nil

@@ -17,11 +17,11 @@ type SplitViewItemAccessoryViewController struct {
 // Unwrap returns the underlying [raw.NSSplitViewItemAccessoryViewController].
 func (x *SplitViewItemAccessoryViewController) Unwrap() *raw.NSSplitViewItemAccessoryViewController { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SplitViewItemAccessoryViewController) ID() objc.ID { return x.inner.Ptr() }
 
-// SplitViewItemAccessoryViewControllerFromID adopts an existing toll-free-bridged object id as a SplitViewItemAccessoryViewController (nil for 0).
+// SplitViewItemAccessoryViewControllerFromID adopts an existing object pointer as a SplitViewItemAccessoryViewController (nil for 0).
 func SplitViewItemAccessoryViewControllerFromID(id objc.ID) *SplitViewItemAccessoryViewController {
 	if id == 0 {
 		return nil

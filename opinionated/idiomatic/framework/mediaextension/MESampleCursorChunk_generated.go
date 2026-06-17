@@ -18,11 +18,11 @@ type SampleCursorChunk struct {
 // Unwrap returns the underlying [raw.MESampleCursorChunk].
 func (x *SampleCursorChunk) Unwrap() *raw.MESampleCursorChunk { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SampleCursorChunk) ID() objc.ID { return x.inner.Ptr() }
 
-// SampleCursorChunkFromID adopts an existing toll-free-bridged object id as a SampleCursorChunk (nil for 0).
+// SampleCursorChunkFromID adopts an existing object pointer as a SampleCursorChunk (nil for 0).
 func SampleCursorChunkFromID(id objc.ID) *SampleCursorChunk {
 	if id == 0 {
 		return nil

@@ -20,11 +20,11 @@ type CalendarItem struct {
 // Unwrap returns the underlying [raw.EKCalendarItem].
 func (x *CalendarItem) Unwrap() *raw.EKCalendarItem { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CalendarItem) ID() objc.ID { return x.inner.Ptr() }
 
-// CalendarItemFromID adopts an existing toll-free-bridged object id as a CalendarItem (nil for 0).
+// CalendarItemFromID adopts an existing object pointer as a CalendarItem (nil for 0).
 func CalendarItemFromID(id objc.ID) *CalendarItem {
 	if id == 0 {
 		return nil

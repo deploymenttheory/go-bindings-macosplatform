@@ -17,11 +17,11 @@ type OneTimeCodeCredentialRequest struct {
 // Unwrap returns the underlying [raw.ASOneTimeCodeCredentialRequest].
 func (x *OneTimeCodeCredentialRequest) Unwrap() *raw.ASOneTimeCodeCredentialRequest { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *OneTimeCodeCredentialRequest) ID() objc.ID { return x.inner.Ptr() }
 
-// OneTimeCodeCredentialRequestFromID adopts an existing toll-free-bridged object id as a OneTimeCodeCredentialRequest (nil for 0).
+// OneTimeCodeCredentialRequestFromID adopts an existing object pointer as a OneTimeCodeCredentialRequest (nil for 0).
 func OneTimeCodeCredentialRequestFromID(id objc.ID) *OneTimeCodeCredentialRequest {
 	if id == 0 {
 		return nil

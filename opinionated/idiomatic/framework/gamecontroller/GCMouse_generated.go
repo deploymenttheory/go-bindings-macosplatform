@@ -17,11 +17,11 @@ type Mouse struct {
 // Unwrap returns the underlying [raw.GCMouse].
 func (x *Mouse) Unwrap() *raw.GCMouse { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Mouse) ID() objc.ID { return x.inner.Ptr() }
 
-// MouseFromID adopts an existing toll-free-bridged object id as a Mouse (nil for 0).
+// MouseFromID adopts an existing object pointer as a Mouse (nil for 0).
 func MouseFromID(id objc.ID) *Mouse {
 	if id == 0 {
 		return nil

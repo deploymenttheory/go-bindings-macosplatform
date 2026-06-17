@@ -20,11 +20,11 @@ type ChangeHistoryFetchRequest struct {
 // Unwrap returns the underlying [raw.CNChangeHistoryFetchRequest].
 func (x *ChangeHistoryFetchRequest) Unwrap() *raw.CNChangeHistoryFetchRequest { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ChangeHistoryFetchRequest) ID() objc.ID { return x.inner.Ptr() }
 
-// ChangeHistoryFetchRequestFromID adopts an existing toll-free-bridged object id as a ChangeHistoryFetchRequest (nil for 0).
+// ChangeHistoryFetchRequestFromID adopts an existing object pointer as a ChangeHistoryFetchRequest (nil for 0).
 func ChangeHistoryFetchRequestFromID(id objc.ID) *ChangeHistoryFetchRequest {
 	if id == 0 {
 		return nil

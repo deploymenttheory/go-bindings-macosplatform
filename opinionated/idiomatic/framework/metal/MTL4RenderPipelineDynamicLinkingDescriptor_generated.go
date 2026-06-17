@@ -17,11 +17,11 @@ type MTL4RenderPipelineDynamicLinkingDescriptor struct {
 // Unwrap returns the underlying [raw.MTL4RenderPipelineDynamicLinkingDescriptor].
 func (x *MTL4RenderPipelineDynamicLinkingDescriptor) Unwrap() *raw.MTL4RenderPipelineDynamicLinkingDescriptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTL4RenderPipelineDynamicLinkingDescriptor) ID() objc.ID { return x.inner.Ptr() }
 
-// MTL4RenderPipelineDynamicLinkingDescriptorFromID adopts an existing toll-free-bridged object id as a MTL4RenderPipelineDynamicLinkingDescriptor (nil for 0).
+// MTL4RenderPipelineDynamicLinkingDescriptorFromID adopts an existing object pointer as a MTL4RenderPipelineDynamicLinkingDescriptor (nil for 0).
 func MTL4RenderPipelineDynamicLinkingDescriptorFromID(id objc.ID) *MTL4RenderPipelineDynamicLinkingDescriptor {
 	if id == 0 {
 		return nil

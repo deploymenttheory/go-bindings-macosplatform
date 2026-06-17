@@ -21,11 +21,11 @@ type MutableVideoComposition struct {
 // Unwrap returns the underlying [raw.AVMutableVideoComposition].
 func (x *MutableVideoComposition) Unwrap() *raw.AVMutableVideoComposition { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MutableVideoComposition) ID() objc.ID { return x.inner.Ptr() }
 
-// MutableVideoCompositionFromID adopts an existing toll-free-bridged object id as a MutableVideoComposition (nil for 0).
+// MutableVideoCompositionFromID adopts an existing object pointer as a MutableVideoComposition (nil for 0).
 func MutableVideoCompositionFromID(id objc.ID) *MutableVideoComposition {
 	if id == 0 {
 		return nil

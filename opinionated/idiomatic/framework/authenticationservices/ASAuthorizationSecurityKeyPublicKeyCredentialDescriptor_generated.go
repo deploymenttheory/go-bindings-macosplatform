@@ -20,11 +20,11 @@ type AuthorizationSecurityKeyPublicKeyCredentialDescriptor struct {
 // Unwrap returns the underlying [raw.ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor].
 func (x *AuthorizationSecurityKeyPublicKeyCredentialDescriptor) Unwrap() *raw.ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AuthorizationSecurityKeyPublicKeyCredentialDescriptor) ID() objc.ID { return x.inner.Ptr() }
 
-// AuthorizationSecurityKeyPublicKeyCredentialDescriptorFromID adopts an existing toll-free-bridged object id as a AuthorizationSecurityKeyPublicKeyCredentialDescriptor (nil for 0).
+// AuthorizationSecurityKeyPublicKeyCredentialDescriptorFromID adopts an existing object pointer as a AuthorizationSecurityKeyPublicKeyCredentialDescriptor (nil for 0).
 func AuthorizationSecurityKeyPublicKeyCredentialDescriptorFromID(id objc.ID) *AuthorizationSecurityKeyPublicKeyCredentialDescriptor {
 	if id == 0 {
 		return nil

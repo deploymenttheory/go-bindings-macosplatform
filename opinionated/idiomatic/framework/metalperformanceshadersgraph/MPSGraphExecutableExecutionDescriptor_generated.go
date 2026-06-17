@@ -20,11 +20,11 @@ type GraphExecutableExecutionDescriptor struct {
 // Unwrap returns the underlying [raw.MPSGraphExecutableExecutionDescriptor].
 func (x *GraphExecutableExecutionDescriptor) Unwrap() *raw.MPSGraphExecutableExecutionDescriptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *GraphExecutableExecutionDescriptor) ID() objc.ID { return x.inner.Ptr() }
 
-// GraphExecutableExecutionDescriptorFromID adopts an existing toll-free-bridged object id as a GraphExecutableExecutionDescriptor (nil for 0).
+// GraphExecutableExecutionDescriptorFromID adopts an existing object pointer as a GraphExecutableExecutionDescriptor (nil for 0).
 func GraphExecutableExecutionDescriptorFromID(id objc.ID) *GraphExecutableExecutionDescriptor {
 	if id == 0 {
 		return nil

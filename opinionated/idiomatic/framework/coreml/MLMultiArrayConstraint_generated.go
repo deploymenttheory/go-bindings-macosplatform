@@ -19,11 +19,11 @@ type MultiArrayConstraint struct {
 // Unwrap returns the underlying [raw.MLMultiArrayConstraint].
 func (x *MultiArrayConstraint) Unwrap() *raw.MLMultiArrayConstraint { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MultiArrayConstraint) ID() objc.ID { return x.inner.Ptr() }
 
-// MultiArrayConstraintFromID adopts an existing toll-free-bridged object id as a MultiArrayConstraint (nil for 0).
+// MultiArrayConstraintFromID adopts an existing object pointer as a MultiArrayConstraint (nil for 0).
 func MultiArrayConstraintFromID(id objc.ID) *MultiArrayConstraint {
 	if id == 0 {
 		return nil

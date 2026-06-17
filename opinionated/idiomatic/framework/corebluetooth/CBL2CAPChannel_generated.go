@@ -18,11 +18,11 @@ type L2CAPChannel struct {
 // Unwrap returns the underlying [raw.CBL2CAPChannel].
 func (x *L2CAPChannel) Unwrap() *raw.CBL2CAPChannel { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *L2CAPChannel) ID() objc.ID { return x.inner.Ptr() }
 
-// L2CAPChannelFromID adopts an existing toll-free-bridged object id as a L2CAPChannel (nil for 0).
+// L2CAPChannelFromID adopts an existing object pointer as a L2CAPChannel (nil for 0).
 func L2CAPChannelFromID(id objc.ID) *L2CAPChannel {
 	if id == 0 {
 		return nil

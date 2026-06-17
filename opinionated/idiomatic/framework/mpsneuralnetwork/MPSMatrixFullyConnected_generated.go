@@ -20,11 +20,11 @@ type MatrixFullyConnected struct {
 // Unwrap returns the underlying [raw.MPSMatrixFullyConnected].
 func (x *MatrixFullyConnected) Unwrap() *raw.MPSMatrixFullyConnected { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MatrixFullyConnected) ID() objc.ID { return x.inner.Ptr() }
 
-// MatrixFullyConnectedFromID adopts an existing toll-free-bridged object id as a MatrixFullyConnected (nil for 0).
+// MatrixFullyConnectedFromID adopts an existing object pointer as a MatrixFullyConnected (nil for 0).
 func MatrixFullyConnectedFromID(id objc.ID) *MatrixFullyConnected {
 	if id == 0 {
 		return nil

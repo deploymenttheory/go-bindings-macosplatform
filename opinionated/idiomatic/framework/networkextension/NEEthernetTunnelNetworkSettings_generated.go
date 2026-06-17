@@ -19,11 +19,11 @@ type NEEthernetTunnelNetworkSettings struct {
 // Unwrap returns the underlying [raw.NEEthernetTunnelNetworkSettings].
 func (x *NEEthernetTunnelNetworkSettings) Unwrap() *raw.NEEthernetTunnelNetworkSettings { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NEEthernetTunnelNetworkSettings) ID() objc.ID { return x.inner.Ptr() }
 
-// NEEthernetTunnelNetworkSettingsFromID adopts an existing toll-free-bridged object id as a NEEthernetTunnelNetworkSettings (nil for 0).
+// NEEthernetTunnelNetworkSettingsFromID adopts an existing object pointer as a NEEthernetTunnelNetworkSettings (nil for 0).
 func NEEthernetTunnelNetworkSettingsFromID(id objc.ID) *NEEthernetTunnelNetworkSettings {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type GraphDevice struct {
 // Unwrap returns the underlying [raw.MPSGraphDevice].
 func (x *GraphDevice) Unwrap() *raw.MPSGraphDevice { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *GraphDevice) ID() objc.ID { return x.inner.Ptr() }
 
-// GraphDeviceFromID adopts an existing toll-free-bridged object id as a GraphDevice (nil for 0).
+// GraphDeviceFromID adopts an existing object pointer as a GraphDevice (nil for 0).
 func GraphDeviceFromID(id objc.ID) *GraphDevice {
 	if id == 0 {
 		return nil

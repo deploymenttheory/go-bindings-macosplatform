@@ -17,11 +17,11 @@ type MultiheadAttentionDescriptor struct {
 // Unwrap returns the underlying [raw.MLCMultiheadAttentionDescriptor].
 func (x *MultiheadAttentionDescriptor) Unwrap() *raw.MLCMultiheadAttentionDescriptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MultiheadAttentionDescriptor) ID() objc.ID { return x.inner.Ptr() }
 
-// MultiheadAttentionDescriptorFromID adopts an existing toll-free-bridged object id as a MultiheadAttentionDescriptor (nil for 0).
+// MultiheadAttentionDescriptorFromID adopts an existing object pointer as a MultiheadAttentionDescriptor (nil for 0).
 func MultiheadAttentionDescriptorFromID(id objc.ID) *MultiheadAttentionDescriptor {
 	if id == 0 {
 		return nil

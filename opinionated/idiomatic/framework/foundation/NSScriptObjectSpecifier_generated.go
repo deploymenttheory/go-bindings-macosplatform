@@ -18,11 +18,11 @@ type ScriptObjectSpecifier struct {
 // Unwrap returns the underlying [raw.NSScriptObjectSpecifier].
 func (x *ScriptObjectSpecifier) Unwrap() *raw.NSScriptObjectSpecifier { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ScriptObjectSpecifier) ID() objc.ID { return x.inner.Ptr() }
 
-// ScriptObjectSpecifierFromID adopts an existing toll-free-bridged object id as a ScriptObjectSpecifier (nil for 0).
+// ScriptObjectSpecifierFromID adopts an existing object pointer as a ScriptObjectSpecifier (nil for 0).
 func ScriptObjectSpecifierFromID(id objc.ID) *ScriptObjectSpecifier {
 	if id == 0 {
 		return nil

@@ -20,11 +20,11 @@ type AddPassMetadataPreview struct {
 // Unwrap returns the underlying [raw.PKAddPassMetadataPreview].
 func (x *AddPassMetadataPreview) Unwrap() *raw.PKAddPassMetadataPreview { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AddPassMetadataPreview) ID() objc.ID { return x.inner.Ptr() }
 
-// AddPassMetadataPreviewFromID adopts an existing toll-free-bridged object id as a AddPassMetadataPreview (nil for 0).
+// AddPassMetadataPreviewFromID adopts an existing object pointer as a AddPassMetadataPreview (nil for 0).
 func AddPassMetadataPreviewFromID(id objc.ID) *AddPassMetadataPreview {
 	if id == 0 {
 		return nil

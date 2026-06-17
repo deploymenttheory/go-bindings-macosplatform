@@ -10,655 +10,655 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// KMDItemAttributeChangeDate returns the CoreFoundation constant kMDItemAttributeChangeDate as a toll-free-bridged objc.ID.
+// KMDItemAttributeChangeDate returns the value of the CoreFoundation reference constant kMDItemAttributeChangeDate as an objc.ID.
 func KMDItemAttributeChangeDate() objc.ID { return purego.CFConstant(raw.KMDItemAttributeChangeDate()) }
 
-// KMDItemContentType returns the CoreFoundation constant kMDItemContentType as a toll-free-bridged objc.ID.
+// KMDItemContentType returns the value of the CoreFoundation reference constant kMDItemContentType as an objc.ID.
 func KMDItemContentType() objc.ID { return purego.CFConstant(raw.KMDItemContentType()) }
 
-// KMDItemContentTypeTree returns the CoreFoundation constant kMDItemContentTypeTree as a toll-free-bridged objc.ID.
+// KMDItemContentTypeTree returns the value of the CoreFoundation reference constant kMDItemContentTypeTree as an objc.ID.
 func KMDItemContentTypeTree() objc.ID { return purego.CFConstant(raw.KMDItemContentTypeTree()) }
 
-// KMDItemKeywords returns the CoreFoundation constant kMDItemKeywords as a toll-free-bridged objc.ID.
+// KMDItemKeywords returns the value of the CoreFoundation reference constant kMDItemKeywords as an objc.ID.
 func KMDItemKeywords() objc.ID { return purego.CFConstant(raw.KMDItemKeywords()) }
 
-// KMDItemTitle returns the CoreFoundation constant kMDItemTitle as a toll-free-bridged objc.ID.
+// KMDItemTitle returns the value of the CoreFoundation reference constant kMDItemTitle as an objc.ID.
 func KMDItemTitle() objc.ID { return purego.CFConstant(raw.KMDItemTitle()) }
 
-// KMDItemAuthors returns the CoreFoundation constant kMDItemAuthors as a toll-free-bridged objc.ID.
+// KMDItemAuthors returns the value of the CoreFoundation reference constant kMDItemAuthors as an objc.ID.
 func KMDItemAuthors() objc.ID { return purego.CFConstant(raw.KMDItemAuthors()) }
 
-// KMDItemEditors returns the CoreFoundation constant kMDItemEditors as a toll-free-bridged objc.ID.
+// KMDItemEditors returns the value of the CoreFoundation reference constant kMDItemEditors as an objc.ID.
 func KMDItemEditors() objc.ID { return purego.CFConstant(raw.KMDItemEditors()) }
 
-// KMDItemParticipants returns the CoreFoundation constant kMDItemParticipants as a toll-free-bridged objc.ID.
+// KMDItemParticipants returns the value of the CoreFoundation reference constant kMDItemParticipants as an objc.ID.
 func KMDItemParticipants() objc.ID { return purego.CFConstant(raw.KMDItemParticipants()) }
 
-// KMDItemProjects returns the CoreFoundation constant kMDItemProjects as a toll-free-bridged objc.ID.
+// KMDItemProjects returns the value of the CoreFoundation reference constant kMDItemProjects as an objc.ID.
 func KMDItemProjects() objc.ID { return purego.CFConstant(raw.KMDItemProjects()) }
 
-// KMDItemDownloadedDate returns the CoreFoundation constant kMDItemDownloadedDate as a toll-free-bridged objc.ID.
+// KMDItemDownloadedDate returns the value of the CoreFoundation reference constant kMDItemDownloadedDate as an objc.ID.
 func KMDItemDownloadedDate() objc.ID { return purego.CFConstant(raw.KMDItemDownloadedDate()) }
 
-// KMDItemWhereFroms returns the CoreFoundation constant kMDItemWhereFroms as a toll-free-bridged objc.ID.
+// KMDItemWhereFroms returns the value of the CoreFoundation reference constant kMDItemWhereFroms as an objc.ID.
 func KMDItemWhereFroms() objc.ID { return purego.CFConstant(raw.KMDItemWhereFroms()) }
 
-// KMDItemComment returns the CoreFoundation constant kMDItemComment as a toll-free-bridged objc.ID.
+// KMDItemComment returns the value of the CoreFoundation reference constant kMDItemComment as an objc.ID.
 func KMDItemComment() objc.ID { return purego.CFConstant(raw.KMDItemComment()) }
 
-// KMDItemCopyright returns the CoreFoundation constant kMDItemCopyright as a toll-free-bridged objc.ID.
+// KMDItemCopyright returns the value of the CoreFoundation reference constant kMDItemCopyright as an objc.ID.
 func KMDItemCopyright() objc.ID { return purego.CFConstant(raw.KMDItemCopyright()) }
 
-// KMDItemLastUsedDate returns the CoreFoundation constant kMDItemLastUsedDate as a toll-free-bridged objc.ID.
+// KMDItemLastUsedDate returns the value of the CoreFoundation reference constant kMDItemLastUsedDate as an objc.ID.
 func KMDItemLastUsedDate() objc.ID { return purego.CFConstant(raw.KMDItemLastUsedDate()) }
 
-// KMDItemContentCreationDate returns the CoreFoundation constant kMDItemContentCreationDate as a toll-free-bridged objc.ID.
+// KMDItemContentCreationDate returns the value of the CoreFoundation reference constant kMDItemContentCreationDate as an objc.ID.
 func KMDItemContentCreationDate() objc.ID { return purego.CFConstant(raw.KMDItemContentCreationDate()) }
 
-// KMDItemContentModificationDate returns the CoreFoundation constant kMDItemContentModificationDate as a toll-free-bridged objc.ID.
+// KMDItemContentModificationDate returns the value of the CoreFoundation reference constant kMDItemContentModificationDate as an objc.ID.
 func KMDItemContentModificationDate() objc.ID { return purego.CFConstant(raw.KMDItemContentModificationDate()) }
 
-// KMDItemDateAdded returns the CoreFoundation constant kMDItemDateAdded as a toll-free-bridged objc.ID.
+// KMDItemDateAdded returns the value of the CoreFoundation reference constant kMDItemDateAdded as an objc.ID.
 func KMDItemDateAdded() objc.ID { return purego.CFConstant(raw.KMDItemDateAdded()) }
 
-// KMDItemDurationSeconds returns the CoreFoundation constant kMDItemDurationSeconds as a toll-free-bridged objc.ID.
+// KMDItemDurationSeconds returns the value of the CoreFoundation reference constant kMDItemDurationSeconds as an objc.ID.
 func KMDItemDurationSeconds() objc.ID { return purego.CFConstant(raw.KMDItemDurationSeconds()) }
 
-// KMDItemContactKeywords returns the CoreFoundation constant kMDItemContactKeywords as a toll-free-bridged objc.ID.
+// KMDItemContactKeywords returns the value of the CoreFoundation reference constant kMDItemContactKeywords as an objc.ID.
 func KMDItemContactKeywords() objc.ID { return purego.CFConstant(raw.KMDItemContactKeywords()) }
 
-// KMDItemVersion returns the CoreFoundation constant kMDItemVersion as a toll-free-bridged objc.ID.
+// KMDItemVersion returns the value of the CoreFoundation reference constant kMDItemVersion as an objc.ID.
 func KMDItemVersion() objc.ID { return purego.CFConstant(raw.KMDItemVersion()) }
 
-// KMDItemPixelHeight returns the CoreFoundation constant kMDItemPixelHeight as a toll-free-bridged objc.ID.
+// KMDItemPixelHeight returns the value of the CoreFoundation reference constant kMDItemPixelHeight as an objc.ID.
 func KMDItemPixelHeight() objc.ID { return purego.CFConstant(raw.KMDItemPixelHeight()) }
 
-// KMDItemXMPCredit returns the CoreFoundation constant kMDItemXMPCredit as a toll-free-bridged objc.ID.
+// KMDItemXMPCredit returns the value of the CoreFoundation reference constant kMDItemXMPCredit as an objc.ID.
 func KMDItemXMPCredit() objc.ID { return purego.CFConstant(raw.KMDItemXMPCredit()) }
 
-// KMDItemXMPDigitalSourceType returns the CoreFoundation constant kMDItemXMPDigitalSourceType as a toll-free-bridged objc.ID.
+// KMDItemXMPDigitalSourceType returns the value of the CoreFoundation reference constant kMDItemXMPDigitalSourceType as an objc.ID.
 func KMDItemXMPDigitalSourceType() objc.ID { return purego.CFConstant(raw.KMDItemXMPDigitalSourceType()) }
 
-// KMDItemPixelWidth returns the CoreFoundation constant kMDItemPixelWidth as a toll-free-bridged objc.ID.
+// KMDItemPixelWidth returns the value of the CoreFoundation reference constant kMDItemPixelWidth as an objc.ID.
 func KMDItemPixelWidth() objc.ID { return purego.CFConstant(raw.KMDItemPixelWidth()) }
 
-// KMDItemPixelCount returns the CoreFoundation constant kMDItemPixelCount as a toll-free-bridged objc.ID.
+// KMDItemPixelCount returns the value of the CoreFoundation reference constant kMDItemPixelCount as an objc.ID.
 func KMDItemPixelCount() objc.ID { return purego.CFConstant(raw.KMDItemPixelCount()) }
 
-// KMDItemColorSpace returns the CoreFoundation constant kMDItemColorSpace as a toll-free-bridged objc.ID.
+// KMDItemColorSpace returns the value of the CoreFoundation reference constant kMDItemColorSpace as an objc.ID.
 func KMDItemColorSpace() objc.ID { return purego.CFConstant(raw.KMDItemColorSpace()) }
 
-// KMDItemBitsPerSample returns the CoreFoundation constant kMDItemBitsPerSample as a toll-free-bridged objc.ID.
+// KMDItemBitsPerSample returns the value of the CoreFoundation reference constant kMDItemBitsPerSample as an objc.ID.
 func KMDItemBitsPerSample() objc.ID { return purego.CFConstant(raw.KMDItemBitsPerSample()) }
 
-// KMDItemFlashOnOff returns the CoreFoundation constant kMDItemFlashOnOff as a toll-free-bridged objc.ID.
+// KMDItemFlashOnOff returns the value of the CoreFoundation reference constant kMDItemFlashOnOff as an objc.ID.
 func KMDItemFlashOnOff() objc.ID { return purego.CFConstant(raw.KMDItemFlashOnOff()) }
 
-// KMDItemFocalLength returns the CoreFoundation constant kMDItemFocalLength as a toll-free-bridged objc.ID.
+// KMDItemFocalLength returns the value of the CoreFoundation reference constant kMDItemFocalLength as an objc.ID.
 func KMDItemFocalLength() objc.ID { return purego.CFConstant(raw.KMDItemFocalLength()) }
 
-// KMDItemAcquisitionMake returns the CoreFoundation constant kMDItemAcquisitionMake as a toll-free-bridged objc.ID.
+// KMDItemAcquisitionMake returns the value of the CoreFoundation reference constant kMDItemAcquisitionMake as an objc.ID.
 func KMDItemAcquisitionMake() objc.ID { return purego.CFConstant(raw.KMDItemAcquisitionMake()) }
 
-// KMDItemAcquisitionModel returns the CoreFoundation constant kMDItemAcquisitionModel as a toll-free-bridged objc.ID.
+// KMDItemAcquisitionModel returns the value of the CoreFoundation reference constant kMDItemAcquisitionModel as an objc.ID.
 func KMDItemAcquisitionModel() objc.ID { return purego.CFConstant(raw.KMDItemAcquisitionModel()) }
 
-// KMDItemISOSpeed returns the CoreFoundation constant kMDItemISOSpeed as a toll-free-bridged objc.ID.
+// KMDItemISOSpeed returns the value of the CoreFoundation reference constant kMDItemISOSpeed as an objc.ID.
 func KMDItemISOSpeed() objc.ID { return purego.CFConstant(raw.KMDItemISOSpeed()) }
 
-// KMDItemOrientation returns the CoreFoundation constant kMDItemOrientation as a toll-free-bridged objc.ID.
+// KMDItemOrientation returns the value of the CoreFoundation reference constant kMDItemOrientation as an objc.ID.
 func KMDItemOrientation() objc.ID { return purego.CFConstant(raw.KMDItemOrientation()) }
 
-// KMDItemLayerNames returns the CoreFoundation constant kMDItemLayerNames as a toll-free-bridged objc.ID.
+// KMDItemLayerNames returns the value of the CoreFoundation reference constant kMDItemLayerNames as an objc.ID.
 func KMDItemLayerNames() objc.ID { return purego.CFConstant(raw.KMDItemLayerNames()) }
 
-// KMDItemWhiteBalance returns the CoreFoundation constant kMDItemWhiteBalance as a toll-free-bridged objc.ID.
+// KMDItemWhiteBalance returns the value of the CoreFoundation reference constant kMDItemWhiteBalance as an objc.ID.
 func KMDItemWhiteBalance() objc.ID { return purego.CFConstant(raw.KMDItemWhiteBalance()) }
 
-// KMDItemAperture returns the CoreFoundation constant kMDItemAperture as a toll-free-bridged objc.ID.
+// KMDItemAperture returns the value of the CoreFoundation reference constant kMDItemAperture as an objc.ID.
 func KMDItemAperture() objc.ID { return purego.CFConstant(raw.KMDItemAperture()) }
 
-// KMDItemProfileName returns the CoreFoundation constant kMDItemProfileName as a toll-free-bridged objc.ID.
+// KMDItemProfileName returns the value of the CoreFoundation reference constant kMDItemProfileName as an objc.ID.
 func KMDItemProfileName() objc.ID { return purego.CFConstant(raw.KMDItemProfileName()) }
 
-// KMDItemResolutionWidthDPI returns the CoreFoundation constant kMDItemResolutionWidthDPI as a toll-free-bridged objc.ID.
+// KMDItemResolutionWidthDPI returns the value of the CoreFoundation reference constant kMDItemResolutionWidthDPI as an objc.ID.
 func KMDItemResolutionWidthDPI() objc.ID { return purego.CFConstant(raw.KMDItemResolutionWidthDPI()) }
 
-// KMDItemResolutionHeightDPI returns the CoreFoundation constant kMDItemResolutionHeightDPI as a toll-free-bridged objc.ID.
+// KMDItemResolutionHeightDPI returns the value of the CoreFoundation reference constant kMDItemResolutionHeightDPI as an objc.ID.
 func KMDItemResolutionHeightDPI() objc.ID { return purego.CFConstant(raw.KMDItemResolutionHeightDPI()) }
 
-// KMDItemExposureMode returns the CoreFoundation constant kMDItemExposureMode as a toll-free-bridged objc.ID.
+// KMDItemExposureMode returns the value of the CoreFoundation reference constant kMDItemExposureMode as an objc.ID.
 func KMDItemExposureMode() objc.ID { return purego.CFConstant(raw.KMDItemExposureMode()) }
 
-// KMDItemExposureTimeSeconds returns the CoreFoundation constant kMDItemExposureTimeSeconds as a toll-free-bridged objc.ID.
+// KMDItemExposureTimeSeconds returns the value of the CoreFoundation reference constant kMDItemExposureTimeSeconds as an objc.ID.
 func KMDItemExposureTimeSeconds() objc.ID { return purego.CFConstant(raw.KMDItemExposureTimeSeconds()) }
 
-// KMDItemEXIFVersion returns the CoreFoundation constant kMDItemEXIFVersion as a toll-free-bridged objc.ID.
+// KMDItemEXIFVersion returns the value of the CoreFoundation reference constant kMDItemEXIFVersion as an objc.ID.
 func KMDItemEXIFVersion() objc.ID { return purego.CFConstant(raw.KMDItemEXIFVersion()) }
 
-// KMDItemCameraOwner returns the CoreFoundation constant kMDItemCameraOwner as a toll-free-bridged objc.ID.
+// KMDItemCameraOwner returns the value of the CoreFoundation reference constant kMDItemCameraOwner as an objc.ID.
 func KMDItemCameraOwner() objc.ID { return purego.CFConstant(raw.KMDItemCameraOwner()) }
 
-// KMDItemFocalLength35mm returns the CoreFoundation constant kMDItemFocalLength35mm as a toll-free-bridged objc.ID.
+// KMDItemFocalLength35mm returns the value of the CoreFoundation reference constant kMDItemFocalLength35mm as an objc.ID.
 func KMDItemFocalLength35mm() objc.ID { return purego.CFConstant(raw.KMDItemFocalLength35mm()) }
 
-// KMDItemLensModel returns the CoreFoundation constant kMDItemLensModel as a toll-free-bridged objc.ID.
+// KMDItemLensModel returns the value of the CoreFoundation reference constant kMDItemLensModel as an objc.ID.
 func KMDItemLensModel() objc.ID { return purego.CFConstant(raw.KMDItemLensModel()) }
 
-// KMDItemEXIFGPSVersion returns the CoreFoundation constant kMDItemEXIFGPSVersion as a toll-free-bridged objc.ID.
+// KMDItemEXIFGPSVersion returns the value of the CoreFoundation reference constant kMDItemEXIFGPSVersion as an objc.ID.
 func KMDItemEXIFGPSVersion() objc.ID { return purego.CFConstant(raw.KMDItemEXIFGPSVersion()) }
 
-// KMDItemAltitude returns the CoreFoundation constant kMDItemAltitude as a toll-free-bridged objc.ID.
+// KMDItemAltitude returns the value of the CoreFoundation reference constant kMDItemAltitude as an objc.ID.
 func KMDItemAltitude() objc.ID { return purego.CFConstant(raw.KMDItemAltitude()) }
 
-// KMDItemLatitude returns the CoreFoundation constant kMDItemLatitude as a toll-free-bridged objc.ID.
+// KMDItemLatitude returns the value of the CoreFoundation reference constant kMDItemLatitude as an objc.ID.
 func KMDItemLatitude() objc.ID { return purego.CFConstant(raw.KMDItemLatitude()) }
 
-// KMDItemLongitude returns the CoreFoundation constant kMDItemLongitude as a toll-free-bridged objc.ID.
+// KMDItemLongitude returns the value of the CoreFoundation reference constant kMDItemLongitude as an objc.ID.
 func KMDItemLongitude() objc.ID { return purego.CFConstant(raw.KMDItemLongitude()) }
 
-// KMDItemSpeed returns the CoreFoundation constant kMDItemSpeed as a toll-free-bridged objc.ID.
+// KMDItemSpeed returns the value of the CoreFoundation reference constant kMDItemSpeed as an objc.ID.
 func KMDItemSpeed() objc.ID { return purego.CFConstant(raw.KMDItemSpeed()) }
 
-// KMDItemTimestamp returns the CoreFoundation constant kMDItemTimestamp as a toll-free-bridged objc.ID.
+// KMDItemTimestamp returns the value of the CoreFoundation reference constant kMDItemTimestamp as an objc.ID.
 func KMDItemTimestamp() objc.ID { return purego.CFConstant(raw.KMDItemTimestamp()) }
 
-// KMDItemGPSTrack returns the CoreFoundation constant kMDItemGPSTrack as a toll-free-bridged objc.ID.
+// KMDItemGPSTrack returns the value of the CoreFoundation reference constant kMDItemGPSTrack as an objc.ID.
 func KMDItemGPSTrack() objc.ID { return purego.CFConstant(raw.KMDItemGPSTrack()) }
 
-// KMDItemImageDirection returns the CoreFoundation constant kMDItemImageDirection as a toll-free-bridged objc.ID.
+// KMDItemImageDirection returns the value of the CoreFoundation reference constant kMDItemImageDirection as an objc.ID.
 func KMDItemImageDirection() objc.ID { return purego.CFConstant(raw.KMDItemImageDirection()) }
 
-// KMDItemNamedLocation returns the CoreFoundation constant kMDItemNamedLocation as a toll-free-bridged objc.ID.
+// KMDItemNamedLocation returns the value of the CoreFoundation reference constant kMDItemNamedLocation as an objc.ID.
 func KMDItemNamedLocation() objc.ID { return purego.CFConstant(raw.KMDItemNamedLocation()) }
 
-// KMDItemGPSStatus returns the CoreFoundation constant kMDItemGPSStatus as a toll-free-bridged objc.ID.
+// KMDItemGPSStatus returns the value of the CoreFoundation reference constant kMDItemGPSStatus as an objc.ID.
 func KMDItemGPSStatus() objc.ID { return purego.CFConstant(raw.KMDItemGPSStatus()) }
 
-// KMDItemGPSMeasureMode returns the CoreFoundation constant kMDItemGPSMeasureMode as a toll-free-bridged objc.ID.
+// KMDItemGPSMeasureMode returns the value of the CoreFoundation reference constant kMDItemGPSMeasureMode as an objc.ID.
 func KMDItemGPSMeasureMode() objc.ID { return purego.CFConstant(raw.KMDItemGPSMeasureMode()) }
 
-// KMDItemGPSDOP returns the CoreFoundation constant kMDItemGPSDOP as a toll-free-bridged objc.ID.
+// KMDItemGPSDOP returns the value of the CoreFoundation reference constant kMDItemGPSDOP as an objc.ID.
 func KMDItemGPSDOP() objc.ID { return purego.CFConstant(raw.KMDItemGPSDOP()) }
 
-// KMDItemGPSMapDatum returns the CoreFoundation constant kMDItemGPSMapDatum as a toll-free-bridged objc.ID.
+// KMDItemGPSMapDatum returns the value of the CoreFoundation reference constant kMDItemGPSMapDatum as an objc.ID.
 func KMDItemGPSMapDatum() objc.ID { return purego.CFConstant(raw.KMDItemGPSMapDatum()) }
 
-// KMDItemGPSDestLatitude returns the CoreFoundation constant kMDItemGPSDestLatitude as a toll-free-bridged objc.ID.
+// KMDItemGPSDestLatitude returns the value of the CoreFoundation reference constant kMDItemGPSDestLatitude as an objc.ID.
 func KMDItemGPSDestLatitude() objc.ID { return purego.CFConstant(raw.KMDItemGPSDestLatitude()) }
 
-// KMDItemGPSDestLongitude returns the CoreFoundation constant kMDItemGPSDestLongitude as a toll-free-bridged objc.ID.
+// KMDItemGPSDestLongitude returns the value of the CoreFoundation reference constant kMDItemGPSDestLongitude as an objc.ID.
 func KMDItemGPSDestLongitude() objc.ID { return purego.CFConstant(raw.KMDItemGPSDestLongitude()) }
 
-// KMDItemGPSDestBearing returns the CoreFoundation constant kMDItemGPSDestBearing as a toll-free-bridged objc.ID.
+// KMDItemGPSDestBearing returns the value of the CoreFoundation reference constant kMDItemGPSDestBearing as an objc.ID.
 func KMDItemGPSDestBearing() objc.ID { return purego.CFConstant(raw.KMDItemGPSDestBearing()) }
 
-// KMDItemGPSDestDistance returns the CoreFoundation constant kMDItemGPSDestDistance as a toll-free-bridged objc.ID.
+// KMDItemGPSDestDistance returns the value of the CoreFoundation reference constant kMDItemGPSDestDistance as an objc.ID.
 func KMDItemGPSDestDistance() objc.ID { return purego.CFConstant(raw.KMDItemGPSDestDistance()) }
 
-// KMDItemGPSProcessingMethod returns the CoreFoundation constant kMDItemGPSProcessingMethod as a toll-free-bridged objc.ID.
+// KMDItemGPSProcessingMethod returns the value of the CoreFoundation reference constant kMDItemGPSProcessingMethod as an objc.ID.
 func KMDItemGPSProcessingMethod() objc.ID { return purego.CFConstant(raw.KMDItemGPSProcessingMethod()) }
 
-// KMDItemGPSAreaInformation returns the CoreFoundation constant kMDItemGPSAreaInformation as a toll-free-bridged objc.ID.
+// KMDItemGPSAreaInformation returns the value of the CoreFoundation reference constant kMDItemGPSAreaInformation as an objc.ID.
 func KMDItemGPSAreaInformation() objc.ID { return purego.CFConstant(raw.KMDItemGPSAreaInformation()) }
 
-// KMDItemGPSDateStamp returns the CoreFoundation constant kMDItemGPSDateStamp as a toll-free-bridged objc.ID.
+// KMDItemGPSDateStamp returns the value of the CoreFoundation reference constant kMDItemGPSDateStamp as an objc.ID.
 func KMDItemGPSDateStamp() objc.ID { return purego.CFConstant(raw.KMDItemGPSDateStamp()) }
 
-// KMDItemGPSDifferental returns the CoreFoundation constant kMDItemGPSDifferental as a toll-free-bridged objc.ID.
+// KMDItemGPSDifferental returns the value of the CoreFoundation reference constant kMDItemGPSDifferental as an objc.ID.
 func KMDItemGPSDifferental() objc.ID { return purego.CFConstant(raw.KMDItemGPSDifferental()) }
 
-// KMDItemMediaExtensions returns the CoreFoundation constant kMDItemMediaExtensions as a toll-free-bridged objc.ID.
+// KMDItemMediaExtensions returns the value of the CoreFoundation reference constant kMDItemMediaExtensions as an objc.ID.
 func KMDItemMediaExtensions() objc.ID { return purego.CFConstant(raw.KMDItemMediaExtensions()) }
 
-// KMDItemCodecs returns the CoreFoundation constant kMDItemCodecs as a toll-free-bridged objc.ID.
+// KMDItemCodecs returns the value of the CoreFoundation reference constant kMDItemCodecs as an objc.ID.
 func KMDItemCodecs() objc.ID { return purego.CFConstant(raw.KMDItemCodecs()) }
 
-// KMDItemMediaTypes returns the CoreFoundation constant kMDItemMediaTypes as a toll-free-bridged objc.ID.
+// KMDItemMediaTypes returns the value of the CoreFoundation reference constant kMDItemMediaTypes as an objc.ID.
 func KMDItemMediaTypes() objc.ID { return purego.CFConstant(raw.KMDItemMediaTypes()) }
 
-// KMDItemStreamable returns the CoreFoundation constant kMDItemStreamable as a toll-free-bridged objc.ID.
+// KMDItemStreamable returns the value of the CoreFoundation reference constant kMDItemStreamable as an objc.ID.
 func KMDItemStreamable() objc.ID { return purego.CFConstant(raw.KMDItemStreamable()) }
 
-// KMDItemTotalBitRate returns the CoreFoundation constant kMDItemTotalBitRate as a toll-free-bridged objc.ID.
+// KMDItemTotalBitRate returns the value of the CoreFoundation reference constant kMDItemTotalBitRate as an objc.ID.
 func KMDItemTotalBitRate() objc.ID { return purego.CFConstant(raw.KMDItemTotalBitRate()) }
 
-// KMDItemVideoBitRate returns the CoreFoundation constant kMDItemVideoBitRate as a toll-free-bridged objc.ID.
+// KMDItemVideoBitRate returns the value of the CoreFoundation reference constant kMDItemVideoBitRate as an objc.ID.
 func KMDItemVideoBitRate() objc.ID { return purego.CFConstant(raw.KMDItemVideoBitRate()) }
 
-// KMDItemAudioBitRate returns the CoreFoundation constant kMDItemAudioBitRate as a toll-free-bridged objc.ID.
+// KMDItemAudioBitRate returns the value of the CoreFoundation reference constant kMDItemAudioBitRate as an objc.ID.
 func KMDItemAudioBitRate() objc.ID { return purego.CFConstant(raw.KMDItemAudioBitRate()) }
 
-// KMDItemDeliveryType returns the CoreFoundation constant kMDItemDeliveryType as a toll-free-bridged objc.ID.
+// KMDItemDeliveryType returns the value of the CoreFoundation reference constant kMDItemDeliveryType as an objc.ID.
 func KMDItemDeliveryType() objc.ID { return purego.CFConstant(raw.KMDItemDeliveryType()) }
 
-// KMDItemAlbum returns the CoreFoundation constant kMDItemAlbum as a toll-free-bridged objc.ID.
+// KMDItemAlbum returns the value of the CoreFoundation reference constant kMDItemAlbum as an objc.ID.
 func KMDItemAlbum() objc.ID { return purego.CFConstant(raw.KMDItemAlbum()) }
 
-// KMDItemHasAlphaChannel returns the CoreFoundation constant kMDItemHasAlphaChannel as a toll-free-bridged objc.ID.
+// KMDItemHasAlphaChannel returns the value of the CoreFoundation reference constant kMDItemHasAlphaChannel as an objc.ID.
 func KMDItemHasAlphaChannel() objc.ID { return purego.CFConstant(raw.KMDItemHasAlphaChannel()) }
 
-// KMDItemRedEyeOnOff returns the CoreFoundation constant kMDItemRedEyeOnOff as a toll-free-bridged objc.ID.
+// KMDItemRedEyeOnOff returns the value of the CoreFoundation reference constant kMDItemRedEyeOnOff as an objc.ID.
 func KMDItemRedEyeOnOff() objc.ID { return purego.CFConstant(raw.KMDItemRedEyeOnOff()) }
 
-// KMDItemMeteringMode returns the CoreFoundation constant kMDItemMeteringMode as a toll-free-bridged objc.ID.
+// KMDItemMeteringMode returns the value of the CoreFoundation reference constant kMDItemMeteringMode as an objc.ID.
 func KMDItemMeteringMode() objc.ID { return purego.CFConstant(raw.KMDItemMeteringMode()) }
 
-// KMDItemMaxAperture returns the CoreFoundation constant kMDItemMaxAperture as a toll-free-bridged objc.ID.
+// KMDItemMaxAperture returns the value of the CoreFoundation reference constant kMDItemMaxAperture as an objc.ID.
 func KMDItemMaxAperture() objc.ID { return purego.CFConstant(raw.KMDItemMaxAperture()) }
 
-// KMDItemFNumber returns the CoreFoundation constant kMDItemFNumber as a toll-free-bridged objc.ID.
+// KMDItemFNumber returns the value of the CoreFoundation reference constant kMDItemFNumber as an objc.ID.
 func KMDItemFNumber() objc.ID { return purego.CFConstant(raw.KMDItemFNumber()) }
 
-// KMDItemExposureProgram returns the CoreFoundation constant kMDItemExposureProgram as a toll-free-bridged objc.ID.
+// KMDItemExposureProgram returns the value of the CoreFoundation reference constant kMDItemExposureProgram as an objc.ID.
 func KMDItemExposureProgram() objc.ID { return purego.CFConstant(raw.KMDItemExposureProgram()) }
 
-// KMDItemExposureTimeString returns the CoreFoundation constant kMDItemExposureTimeString as a toll-free-bridged objc.ID.
+// KMDItemExposureTimeString returns the value of the CoreFoundation reference constant kMDItemExposureTimeString as an objc.ID.
 func KMDItemExposureTimeString() objc.ID { return purego.CFConstant(raw.KMDItemExposureTimeString()) }
 
-// KMDItemHeadline returns the CoreFoundation constant kMDItemHeadline as a toll-free-bridged objc.ID.
+// KMDItemHeadline returns the value of the CoreFoundation reference constant kMDItemHeadline as an objc.ID.
 func KMDItemHeadline() objc.ID { return purego.CFConstant(raw.KMDItemHeadline()) }
 
-// KMDItemInstructions returns the CoreFoundation constant kMDItemInstructions as a toll-free-bridged objc.ID.
+// KMDItemInstructions returns the value of the CoreFoundation reference constant kMDItemInstructions as an objc.ID.
 func KMDItemInstructions() objc.ID { return purego.CFConstant(raw.KMDItemInstructions()) }
 
-// KMDItemCity returns the CoreFoundation constant kMDItemCity as a toll-free-bridged objc.ID.
+// KMDItemCity returns the value of the CoreFoundation reference constant kMDItemCity as an objc.ID.
 func KMDItemCity() objc.ID { return purego.CFConstant(raw.KMDItemCity()) }
 
-// KMDItemStateOrProvince returns the CoreFoundation constant kMDItemStateOrProvince as a toll-free-bridged objc.ID.
+// KMDItemStateOrProvince returns the value of the CoreFoundation reference constant kMDItemStateOrProvince as an objc.ID.
 func KMDItemStateOrProvince() objc.ID { return purego.CFConstant(raw.KMDItemStateOrProvince()) }
 
-// KMDItemCountry returns the CoreFoundation constant kMDItemCountry as a toll-free-bridged objc.ID.
+// KMDItemCountry returns the value of the CoreFoundation reference constant kMDItemCountry as an objc.ID.
 func KMDItemCountry() objc.ID { return purego.CFConstant(raw.KMDItemCountry()) }
 
-// KMDItemFSName returns the CoreFoundation constant kMDItemFSName as a toll-free-bridged objc.ID.
+// KMDItemFSName returns the value of the CoreFoundation reference constant kMDItemFSName as an objc.ID.
 func KMDItemFSName() objc.ID { return purego.CFConstant(raw.KMDItemFSName()) }
 
-// KMDItemDisplayName returns the CoreFoundation constant kMDItemDisplayName as a toll-free-bridged objc.ID.
+// KMDItemDisplayName returns the value of the CoreFoundation reference constant kMDItemDisplayName as an objc.ID.
 func KMDItemDisplayName() objc.ID { return purego.CFConstant(raw.KMDItemDisplayName()) }
 
-// KMDItemPath returns the CoreFoundation constant kMDItemPath as a toll-free-bridged objc.ID.
+// KMDItemPath returns the value of the CoreFoundation reference constant kMDItemPath as an objc.ID.
 func KMDItemPath() objc.ID { return purego.CFConstant(raw.KMDItemPath()) }
 
-// KMDItemFSSize returns the CoreFoundation constant kMDItemFSSize as a toll-free-bridged objc.ID.
+// KMDItemFSSize returns the value of the CoreFoundation reference constant kMDItemFSSize as an objc.ID.
 func KMDItemFSSize() objc.ID { return purego.CFConstant(raw.KMDItemFSSize()) }
 
-// KMDItemFSCreationDate returns the CoreFoundation constant kMDItemFSCreationDate as a toll-free-bridged objc.ID.
+// KMDItemFSCreationDate returns the value of the CoreFoundation reference constant kMDItemFSCreationDate as an objc.ID.
 func KMDItemFSCreationDate() objc.ID { return purego.CFConstant(raw.KMDItemFSCreationDate()) }
 
-// KMDItemFSContentChangeDate returns the CoreFoundation constant kMDItemFSContentChangeDate as a toll-free-bridged objc.ID.
+// KMDItemFSContentChangeDate returns the value of the CoreFoundation reference constant kMDItemFSContentChangeDate as an objc.ID.
 func KMDItemFSContentChangeDate() objc.ID { return purego.CFConstant(raw.KMDItemFSContentChangeDate()) }
 
-// KMDItemFSOwnerUserID returns the CoreFoundation constant kMDItemFSOwnerUserID as a toll-free-bridged objc.ID.
+// KMDItemFSOwnerUserID returns the value of the CoreFoundation reference constant kMDItemFSOwnerUserID as an objc.ID.
 func KMDItemFSOwnerUserID() objc.ID { return purego.CFConstant(raw.KMDItemFSOwnerUserID()) }
 
-// KMDItemFSOwnerGroupID returns the CoreFoundation constant kMDItemFSOwnerGroupID as a toll-free-bridged objc.ID.
+// KMDItemFSOwnerGroupID returns the value of the CoreFoundation reference constant kMDItemFSOwnerGroupID as an objc.ID.
 func KMDItemFSOwnerGroupID() objc.ID { return purego.CFConstant(raw.KMDItemFSOwnerGroupID()) }
 
-// KMDItemFSExists returns the CoreFoundation constant kMDItemFSExists as a toll-free-bridged objc.ID.
+// KMDItemFSExists returns the value of the CoreFoundation reference constant kMDItemFSExists as an objc.ID.
 func KMDItemFSExists() objc.ID { return purego.CFConstant(raw.KMDItemFSExists()) }
 
-// KMDItemFSIsReadable returns the CoreFoundation constant kMDItemFSIsReadable as a toll-free-bridged objc.ID.
+// KMDItemFSIsReadable returns the value of the CoreFoundation reference constant kMDItemFSIsReadable as an objc.ID.
 func KMDItemFSIsReadable() objc.ID { return purego.CFConstant(raw.KMDItemFSIsReadable()) }
 
-// KMDItemFSIsWriteable returns the CoreFoundation constant kMDItemFSIsWriteable as a toll-free-bridged objc.ID.
+// KMDItemFSIsWriteable returns the value of the CoreFoundation reference constant kMDItemFSIsWriteable as an objc.ID.
 func KMDItemFSIsWriteable() objc.ID { return purego.CFConstant(raw.KMDItemFSIsWriteable()) }
 
-// KMDItemFSHasCustomIcon returns the CoreFoundation constant kMDItemFSHasCustomIcon as a toll-free-bridged objc.ID.
+// KMDItemFSHasCustomIcon returns the value of the CoreFoundation reference constant kMDItemFSHasCustomIcon as an objc.ID.
 func KMDItemFSHasCustomIcon() objc.ID { return purego.CFConstant(raw.KMDItemFSHasCustomIcon()) }
 
-// KMDItemFSIsExtensionHidden returns the CoreFoundation constant kMDItemFSIsExtensionHidden as a toll-free-bridged objc.ID.
+// KMDItemFSIsExtensionHidden returns the value of the CoreFoundation reference constant kMDItemFSIsExtensionHidden as an objc.ID.
 func KMDItemFSIsExtensionHidden() objc.ID { return purego.CFConstant(raw.KMDItemFSIsExtensionHidden()) }
 
-// KMDItemFSIsStationery returns the CoreFoundation constant kMDItemFSIsStationery as a toll-free-bridged objc.ID.
+// KMDItemFSIsStationery returns the value of the CoreFoundation reference constant kMDItemFSIsStationery as an objc.ID.
 func KMDItemFSIsStationery() objc.ID { return purego.CFConstant(raw.KMDItemFSIsStationery()) }
 
-// KMDItemFSInvisible returns the CoreFoundation constant kMDItemFSInvisible as a toll-free-bridged objc.ID.
+// KMDItemFSInvisible returns the value of the CoreFoundation reference constant kMDItemFSInvisible as an objc.ID.
 func KMDItemFSInvisible() objc.ID { return purego.CFConstant(raw.KMDItemFSInvisible()) }
 
-// KMDItemFSLabel returns the CoreFoundation constant kMDItemFSLabel as a toll-free-bridged objc.ID.
+// KMDItemFSLabel returns the value of the CoreFoundation reference constant kMDItemFSLabel as an objc.ID.
 func KMDItemFSLabel() objc.ID { return purego.CFConstant(raw.KMDItemFSLabel()) }
 
-// KMDItemFSNodeCount returns the CoreFoundation constant kMDItemFSNodeCount as a toll-free-bridged objc.ID.
+// KMDItemFSNodeCount returns the value of the CoreFoundation reference constant kMDItemFSNodeCount as an objc.ID.
 func KMDItemFSNodeCount() objc.ID { return purego.CFConstant(raw.KMDItemFSNodeCount()) }
 
-// KMDItemHTMLContent returns the CoreFoundation constant kMDItemHTMLContent as a toll-free-bridged objc.ID.
+// KMDItemHTMLContent returns the value of the CoreFoundation reference constant kMDItemHTMLContent as an objc.ID.
 func KMDItemHTMLContent() objc.ID { return purego.CFConstant(raw.KMDItemHTMLContent()) }
 
-// KMDItemTextContent returns the CoreFoundation constant kMDItemTextContent as a toll-free-bridged objc.ID.
+// KMDItemTextContent returns the value of the CoreFoundation reference constant kMDItemTextContent as an objc.ID.
 func KMDItemTextContent() objc.ID { return purego.CFConstant(raw.KMDItemTextContent()) }
 
-// KMDItemAudioSampleRate returns the CoreFoundation constant kMDItemAudioSampleRate as a toll-free-bridged objc.ID.
+// KMDItemAudioSampleRate returns the value of the CoreFoundation reference constant kMDItemAudioSampleRate as an objc.ID.
 func KMDItemAudioSampleRate() objc.ID { return purego.CFConstant(raw.KMDItemAudioSampleRate()) }
 
-// KMDItemAudioChannelCount returns the CoreFoundation constant kMDItemAudioChannelCount as a toll-free-bridged objc.ID.
+// KMDItemAudioChannelCount returns the value of the CoreFoundation reference constant kMDItemAudioChannelCount as an objc.ID.
 func KMDItemAudioChannelCount() objc.ID { return purego.CFConstant(raw.KMDItemAudioChannelCount()) }
 
-// KMDItemTempo returns the CoreFoundation constant kMDItemTempo as a toll-free-bridged objc.ID.
+// KMDItemTempo returns the value of the CoreFoundation reference constant kMDItemTempo as an objc.ID.
 func KMDItemTempo() objc.ID { return purego.CFConstant(raw.KMDItemTempo()) }
 
-// KMDItemKeySignature returns the CoreFoundation constant kMDItemKeySignature as a toll-free-bridged objc.ID.
+// KMDItemKeySignature returns the value of the CoreFoundation reference constant kMDItemKeySignature as an objc.ID.
 func KMDItemKeySignature() objc.ID { return purego.CFConstant(raw.KMDItemKeySignature()) }
 
-// KMDItemTimeSignature returns the CoreFoundation constant kMDItemTimeSignature as a toll-free-bridged objc.ID.
+// KMDItemTimeSignature returns the value of the CoreFoundation reference constant kMDItemTimeSignature as an objc.ID.
 func KMDItemTimeSignature() objc.ID { return purego.CFConstant(raw.KMDItemTimeSignature()) }
 
-// KMDItemAudioEncodingApplication returns the CoreFoundation constant kMDItemAudioEncodingApplication as a toll-free-bridged objc.ID.
+// KMDItemAudioEncodingApplication returns the value of the CoreFoundation reference constant kMDItemAudioEncodingApplication as an objc.ID.
 func KMDItemAudioEncodingApplication() objc.ID { return purego.CFConstant(raw.KMDItemAudioEncodingApplication()) }
 
-// KMDItemComposer returns the CoreFoundation constant kMDItemComposer as a toll-free-bridged objc.ID.
+// KMDItemComposer returns the value of the CoreFoundation reference constant kMDItemComposer as an objc.ID.
 func KMDItemComposer() objc.ID { return purego.CFConstant(raw.KMDItemComposer()) }
 
-// KMDItemLyricist returns the CoreFoundation constant kMDItemLyricist as a toll-free-bridged objc.ID.
+// KMDItemLyricist returns the value of the CoreFoundation reference constant kMDItemLyricist as an objc.ID.
 func KMDItemLyricist() objc.ID { return purego.CFConstant(raw.KMDItemLyricist()) }
 
-// KMDItemAudioTrackNumber returns the CoreFoundation constant kMDItemAudioTrackNumber as a toll-free-bridged objc.ID.
+// KMDItemAudioTrackNumber returns the value of the CoreFoundation reference constant kMDItemAudioTrackNumber as an objc.ID.
 func KMDItemAudioTrackNumber() objc.ID { return purego.CFConstant(raw.KMDItemAudioTrackNumber()) }
 
-// KMDItemRecordingDate returns the CoreFoundation constant kMDItemRecordingDate as a toll-free-bridged objc.ID.
+// KMDItemRecordingDate returns the value of the CoreFoundation reference constant kMDItemRecordingDate as an objc.ID.
 func KMDItemRecordingDate() objc.ID { return purego.CFConstant(raw.KMDItemRecordingDate()) }
 
-// KMDItemMusicalGenre returns the CoreFoundation constant kMDItemMusicalGenre as a toll-free-bridged objc.ID.
+// KMDItemMusicalGenre returns the value of the CoreFoundation reference constant kMDItemMusicalGenre as an objc.ID.
 func KMDItemMusicalGenre() objc.ID { return purego.CFConstant(raw.KMDItemMusicalGenre()) }
 
-// KMDItemIsGeneralMIDISequence returns the CoreFoundation constant kMDItemIsGeneralMIDISequence as a toll-free-bridged objc.ID.
+// KMDItemIsGeneralMIDISequence returns the value of the CoreFoundation reference constant kMDItemIsGeneralMIDISequence as an objc.ID.
 func KMDItemIsGeneralMIDISequence() objc.ID { return purego.CFConstant(raw.KMDItemIsGeneralMIDISequence()) }
 
-// KMDItemRecordingYear returns the CoreFoundation constant kMDItemRecordingYear as a toll-free-bridged objc.ID.
+// KMDItemRecordingYear returns the value of the CoreFoundation reference constant kMDItemRecordingYear as an objc.ID.
 func KMDItemRecordingYear() objc.ID { return purego.CFConstant(raw.KMDItemRecordingYear()) }
 
-// KMDItemOrganizations returns the CoreFoundation constant kMDItemOrganizations as a toll-free-bridged objc.ID.
+// KMDItemOrganizations returns the value of the CoreFoundation reference constant kMDItemOrganizations as an objc.ID.
 func KMDItemOrganizations() objc.ID { return purego.CFConstant(raw.KMDItemOrganizations()) }
 
-// KMDItemLanguages returns the CoreFoundation constant kMDItemLanguages as a toll-free-bridged objc.ID.
+// KMDItemLanguages returns the value of the CoreFoundation reference constant kMDItemLanguages as an objc.ID.
 func KMDItemLanguages() objc.ID { return purego.CFConstant(raw.KMDItemLanguages()) }
 
-// KMDItemRights returns the CoreFoundation constant kMDItemRights as a toll-free-bridged objc.ID.
+// KMDItemRights returns the value of the CoreFoundation reference constant kMDItemRights as an objc.ID.
 func KMDItemRights() objc.ID { return purego.CFConstant(raw.KMDItemRights()) }
 
-// KMDItemPublishers returns the CoreFoundation constant kMDItemPublishers as a toll-free-bridged objc.ID.
+// KMDItemPublishers returns the value of the CoreFoundation reference constant kMDItemPublishers as an objc.ID.
 func KMDItemPublishers() objc.ID { return purego.CFConstant(raw.KMDItemPublishers()) }
 
-// KMDItemContributors returns the CoreFoundation constant kMDItemContributors as a toll-free-bridged objc.ID.
+// KMDItemContributors returns the value of the CoreFoundation reference constant kMDItemContributors as an objc.ID.
 func KMDItemContributors() objc.ID { return purego.CFConstant(raw.KMDItemContributors()) }
 
-// KMDItemCoverage returns the CoreFoundation constant kMDItemCoverage as a toll-free-bridged objc.ID.
+// KMDItemCoverage returns the value of the CoreFoundation reference constant kMDItemCoverage as an objc.ID.
 func KMDItemCoverage() objc.ID { return purego.CFConstant(raw.KMDItemCoverage()) }
 
-// KMDItemSubject returns the CoreFoundation constant kMDItemSubject as a toll-free-bridged objc.ID.
+// KMDItemSubject returns the value of the CoreFoundation reference constant kMDItemSubject as an objc.ID.
 func KMDItemSubject() objc.ID { return purego.CFConstant(raw.KMDItemSubject()) }
 
-// KMDItemTheme returns the CoreFoundation constant kMDItemTheme as a toll-free-bridged objc.ID.
+// KMDItemTheme returns the value of the CoreFoundation reference constant kMDItemTheme as an objc.ID.
 func KMDItemTheme() objc.ID { return purego.CFConstant(raw.KMDItemTheme()) }
 
-// KMDItemDescription returns the CoreFoundation constant kMDItemDescription as a toll-free-bridged objc.ID.
+// KMDItemDescription returns the value of the CoreFoundation reference constant kMDItemDescription as an objc.ID.
 func KMDItemDescription() objc.ID { return purego.CFConstant(raw.KMDItemDescription()) }
 
-// KMDItemIdentifier returns the CoreFoundation constant kMDItemIdentifier as a toll-free-bridged objc.ID.
+// KMDItemIdentifier returns the value of the CoreFoundation reference constant kMDItemIdentifier as an objc.ID.
 func KMDItemIdentifier() objc.ID { return purego.CFConstant(raw.KMDItemIdentifier()) }
 
-// KMDItemAudiences returns the CoreFoundation constant kMDItemAudiences as a toll-free-bridged objc.ID.
+// KMDItemAudiences returns the value of the CoreFoundation reference constant kMDItemAudiences as an objc.ID.
 func KMDItemAudiences() objc.ID { return purego.CFConstant(raw.KMDItemAudiences()) }
 
-// KMDItemNumberOfPages returns the CoreFoundation constant kMDItemNumberOfPages as a toll-free-bridged objc.ID.
+// KMDItemNumberOfPages returns the value of the CoreFoundation reference constant kMDItemNumberOfPages as an objc.ID.
 func KMDItemNumberOfPages() objc.ID { return purego.CFConstant(raw.KMDItemNumberOfPages()) }
 
-// KMDItemPageWidth returns the CoreFoundation constant kMDItemPageWidth as a toll-free-bridged objc.ID.
+// KMDItemPageWidth returns the value of the CoreFoundation reference constant kMDItemPageWidth as an objc.ID.
 func KMDItemPageWidth() objc.ID { return purego.CFConstant(raw.KMDItemPageWidth()) }
 
-// KMDItemPageHeight returns the CoreFoundation constant kMDItemPageHeight as a toll-free-bridged objc.ID.
+// KMDItemPageHeight returns the value of the CoreFoundation reference constant kMDItemPageHeight as an objc.ID.
 func KMDItemPageHeight() objc.ID { return purego.CFConstant(raw.KMDItemPageHeight()) }
 
-// KMDItemSecurityMethod returns the CoreFoundation constant kMDItemSecurityMethod as a toll-free-bridged objc.ID.
+// KMDItemSecurityMethod returns the value of the CoreFoundation reference constant kMDItemSecurityMethod as an objc.ID.
 func KMDItemSecurityMethod() objc.ID { return purego.CFConstant(raw.KMDItemSecurityMethod()) }
 
-// KMDItemCreator returns the CoreFoundation constant kMDItemCreator as a toll-free-bridged objc.ID.
+// KMDItemCreator returns the value of the CoreFoundation reference constant kMDItemCreator as an objc.ID.
 func KMDItemCreator() objc.ID { return purego.CFConstant(raw.KMDItemCreator()) }
 
-// KMDItemEncodingApplications returns the CoreFoundation constant kMDItemEncodingApplications as a toll-free-bridged objc.ID.
+// KMDItemEncodingApplications returns the value of the CoreFoundation reference constant kMDItemEncodingApplications as an objc.ID.
 func KMDItemEncodingApplications() objc.ID { return purego.CFConstant(raw.KMDItemEncodingApplications()) }
 
-// KMDItemDueDate returns the CoreFoundation constant kMDItemDueDate as a toll-free-bridged objc.ID.
+// KMDItemDueDate returns the value of the CoreFoundation reference constant kMDItemDueDate as an objc.ID.
 func KMDItemDueDate() objc.ID { return purego.CFConstant(raw.KMDItemDueDate()) }
 
-// KMDItemStarRating returns the CoreFoundation constant kMDItemStarRating as a toll-free-bridged objc.ID.
+// KMDItemStarRating returns the value of the CoreFoundation reference constant kMDItemStarRating as an objc.ID.
 func KMDItemStarRating() objc.ID { return purego.CFConstant(raw.KMDItemStarRating()) }
 
-// KMDItemPhoneNumbers returns the CoreFoundation constant kMDItemPhoneNumbers as a toll-free-bridged objc.ID.
+// KMDItemPhoneNumbers returns the value of the CoreFoundation reference constant kMDItemPhoneNumbers as an objc.ID.
 func KMDItemPhoneNumbers() objc.ID { return purego.CFConstant(raw.KMDItemPhoneNumbers()) }
 
-// KMDItemEmailAddresses returns the CoreFoundation constant kMDItemEmailAddresses as a toll-free-bridged objc.ID.
+// KMDItemEmailAddresses returns the value of the CoreFoundation reference constant kMDItemEmailAddresses as an objc.ID.
 func KMDItemEmailAddresses() objc.ID { return purego.CFConstant(raw.KMDItemEmailAddresses()) }
 
-// KMDItemInstantMessageAddresses returns the CoreFoundation constant kMDItemInstantMessageAddresses as a toll-free-bridged objc.ID.
+// KMDItemInstantMessageAddresses returns the value of the CoreFoundation reference constant kMDItemInstantMessageAddresses as an objc.ID.
 func KMDItemInstantMessageAddresses() objc.ID { return purego.CFConstant(raw.KMDItemInstantMessageAddresses()) }
 
-// KMDItemKind returns the CoreFoundation constant kMDItemKind as a toll-free-bridged objc.ID.
+// KMDItemKind returns the value of the CoreFoundation reference constant kMDItemKind as an objc.ID.
 func KMDItemKind() objc.ID { return purego.CFConstant(raw.KMDItemKind()) }
 
-// KMDItemRecipients returns the CoreFoundation constant kMDItemRecipients as a toll-free-bridged objc.ID.
+// KMDItemRecipients returns the value of the CoreFoundation reference constant kMDItemRecipients as an objc.ID.
 func KMDItemRecipients() objc.ID { return purego.CFConstant(raw.KMDItemRecipients()) }
 
-// KMDItemFinderComment returns the CoreFoundation constant kMDItemFinderComment as a toll-free-bridged objc.ID.
+// KMDItemFinderComment returns the value of the CoreFoundation reference constant kMDItemFinderComment as an objc.ID.
 func KMDItemFinderComment() objc.ID { return purego.CFConstant(raw.KMDItemFinderComment()) }
 
-// KMDItemFonts returns the CoreFoundation constant kMDItemFonts as a toll-free-bridged objc.ID.
+// KMDItemFonts returns the value of the CoreFoundation reference constant kMDItemFonts as an objc.ID.
 func KMDItemFonts() objc.ID { return purego.CFConstant(raw.KMDItemFonts()) }
 
-// KMDItemAppleLoopsRootKey returns the CoreFoundation constant kMDItemAppleLoopsRootKey as a toll-free-bridged objc.ID.
+// KMDItemAppleLoopsRootKey returns the value of the CoreFoundation reference constant kMDItemAppleLoopsRootKey as an objc.ID.
 func KMDItemAppleLoopsRootKey() objc.ID { return purego.CFConstant(raw.KMDItemAppleLoopsRootKey()) }
 
-// KMDItemAppleLoopsKeyFilterType returns the CoreFoundation constant kMDItemAppleLoopsKeyFilterType as a toll-free-bridged objc.ID.
+// KMDItemAppleLoopsKeyFilterType returns the value of the CoreFoundation reference constant kMDItemAppleLoopsKeyFilterType as an objc.ID.
 func KMDItemAppleLoopsKeyFilterType() objc.ID { return purego.CFConstant(raw.KMDItemAppleLoopsKeyFilterType()) }
 
-// KMDItemAppleLoopsLoopMode returns the CoreFoundation constant kMDItemAppleLoopsLoopMode as a toll-free-bridged objc.ID.
+// KMDItemAppleLoopsLoopMode returns the value of the CoreFoundation reference constant kMDItemAppleLoopsLoopMode as an objc.ID.
 func KMDItemAppleLoopsLoopMode() objc.ID { return purego.CFConstant(raw.KMDItemAppleLoopsLoopMode()) }
 
-// KMDItemAppleLoopDescriptors returns the CoreFoundation constant kMDItemAppleLoopDescriptors as a toll-free-bridged objc.ID.
+// KMDItemAppleLoopDescriptors returns the value of the CoreFoundation reference constant kMDItemAppleLoopDescriptors as an objc.ID.
 func KMDItemAppleLoopDescriptors() objc.ID { return purego.CFConstant(raw.KMDItemAppleLoopDescriptors()) }
 
-// KMDItemMusicalInstrumentCategory returns the CoreFoundation constant kMDItemMusicalInstrumentCategory as a toll-free-bridged objc.ID.
+// KMDItemMusicalInstrumentCategory returns the value of the CoreFoundation reference constant kMDItemMusicalInstrumentCategory as an objc.ID.
 func KMDItemMusicalInstrumentCategory() objc.ID { return purego.CFConstant(raw.KMDItemMusicalInstrumentCategory()) }
 
-// KMDItemMusicalInstrumentName returns the CoreFoundation constant kMDItemMusicalInstrumentName as a toll-free-bridged objc.ID.
+// KMDItemMusicalInstrumentName returns the value of the CoreFoundation reference constant kMDItemMusicalInstrumentName as an objc.ID.
 func KMDItemMusicalInstrumentName() objc.ID { return purego.CFConstant(raw.KMDItemMusicalInstrumentName()) }
 
-// KMDItemCFBundleIdentifier returns the CoreFoundation constant kMDItemCFBundleIdentifier as a toll-free-bridged objc.ID.
+// KMDItemCFBundleIdentifier returns the value of the CoreFoundation reference constant kMDItemCFBundleIdentifier as an objc.ID.
 func KMDItemCFBundleIdentifier() objc.ID { return purego.CFConstant(raw.KMDItemCFBundleIdentifier()) }
 
-// KMDItemSupportFileType returns the CoreFoundation constant kMDItemSupportFileType as a toll-free-bridged objc.ID.
+// KMDItemSupportFileType returns the value of the CoreFoundation reference constant kMDItemSupportFileType as an objc.ID.
 func KMDItemSupportFileType() objc.ID { return purego.CFConstant(raw.KMDItemSupportFileType()) }
 
 // @const kMDItemInformation Information about the item @const kMDItemDirector Director of the movie @const kMDItemProducer Producer of the content @const kMDItemGenre Genre of the movie @const kMDItemPerformers Performers in the movie @const kMDItemOriginalFormat Original format of the movie @const kMDItemOriginalSource Original source of the movie @const kMDItemAuthorEmailAddresses This attribute indicates the author of the emails message addresses. (This is always the email address, and not the human readable version) @const kMDItemRecipientEmailAddresses This attribute indicates the recipients email addresses. (This is always the email address,  and not the human readable version). @const kMDItemAuthorAddresses This attribute indicates the author addresses of the document. @const kMDItemRecipientAddresses This attribute indicates the recipient addresses of the document. @const kMDItemURL Url of the item @const kMDItemIsLikelyJunk This attribute indicates if the document is likely to be considered junk. @const kMDItemExecutableArchitectures Array of executables architectures the item contains. @const kMDItemExecutablePlatform Indicates platform required to execute this application. @const kMDItemApplicationCategories Array of categories the item application is a member of.
-// KMDItemInformation returns the CoreFoundation constant kMDItemInformation as a toll-free-bridged objc.ID.
+// KMDItemInformation returns the value of the CoreFoundation reference constant kMDItemInformation as an objc.ID.
 func KMDItemInformation() objc.ID { return purego.CFConstant(raw.KMDItemInformation()) }
 
-// KMDItemDirector returns the CoreFoundation constant kMDItemDirector as a toll-free-bridged objc.ID.
+// KMDItemDirector returns the value of the CoreFoundation reference constant kMDItemDirector as an objc.ID.
 func KMDItemDirector() objc.ID { return purego.CFConstant(raw.KMDItemDirector()) }
 
-// KMDItemProducer returns the CoreFoundation constant kMDItemProducer as a toll-free-bridged objc.ID.
+// KMDItemProducer returns the value of the CoreFoundation reference constant kMDItemProducer as an objc.ID.
 func KMDItemProducer() objc.ID { return purego.CFConstant(raw.KMDItemProducer()) }
 
-// KMDItemGenre returns the CoreFoundation constant kMDItemGenre as a toll-free-bridged objc.ID.
+// KMDItemGenre returns the value of the CoreFoundation reference constant kMDItemGenre as an objc.ID.
 func KMDItemGenre() objc.ID { return purego.CFConstant(raw.KMDItemGenre()) }
 
-// KMDItemPerformers returns the CoreFoundation constant kMDItemPerformers as a toll-free-bridged objc.ID.
+// KMDItemPerformers returns the value of the CoreFoundation reference constant kMDItemPerformers as an objc.ID.
 func KMDItemPerformers() objc.ID { return purego.CFConstant(raw.KMDItemPerformers()) }
 
-// KMDItemOriginalFormat returns the CoreFoundation constant kMDItemOriginalFormat as a toll-free-bridged objc.ID.
+// KMDItemOriginalFormat returns the value of the CoreFoundation reference constant kMDItemOriginalFormat as an objc.ID.
 func KMDItemOriginalFormat() objc.ID { return purego.CFConstant(raw.KMDItemOriginalFormat()) }
 
-// KMDItemOriginalSource returns the CoreFoundation constant kMDItemOriginalSource as a toll-free-bridged objc.ID.
+// KMDItemOriginalSource returns the value of the CoreFoundation reference constant kMDItemOriginalSource as an objc.ID.
 func KMDItemOriginalSource() objc.ID { return purego.CFConstant(raw.KMDItemOriginalSource()) }
 
-// KMDItemAuthorEmailAddresses returns the CoreFoundation constant kMDItemAuthorEmailAddresses as a toll-free-bridged objc.ID.
+// KMDItemAuthorEmailAddresses returns the value of the CoreFoundation reference constant kMDItemAuthorEmailAddresses as an objc.ID.
 func KMDItemAuthorEmailAddresses() objc.ID { return purego.CFConstant(raw.KMDItemAuthorEmailAddresses()) }
 
-// KMDItemRecipientEmailAddresses returns the CoreFoundation constant kMDItemRecipientEmailAddresses as a toll-free-bridged objc.ID.
+// KMDItemRecipientEmailAddresses returns the value of the CoreFoundation reference constant kMDItemRecipientEmailAddresses as an objc.ID.
 func KMDItemRecipientEmailAddresses() objc.ID { return purego.CFConstant(raw.KMDItemRecipientEmailAddresses()) }
 
-// KMDItemAuthorAddresses returns the CoreFoundation constant kMDItemAuthorAddresses as a toll-free-bridged objc.ID.
+// KMDItemAuthorAddresses returns the value of the CoreFoundation reference constant kMDItemAuthorAddresses as an objc.ID.
 func KMDItemAuthorAddresses() objc.ID { return purego.CFConstant(raw.KMDItemAuthorAddresses()) }
 
-// KMDItemRecipientAddresses returns the CoreFoundation constant kMDItemRecipientAddresses as a toll-free-bridged objc.ID.
+// KMDItemRecipientAddresses returns the value of the CoreFoundation reference constant kMDItemRecipientAddresses as an objc.ID.
 func KMDItemRecipientAddresses() objc.ID { return purego.CFConstant(raw.KMDItemRecipientAddresses()) }
 
-// KMDItemURL returns the CoreFoundation constant kMDItemURL as a toll-free-bridged objc.ID.
+// KMDItemURL returns the value of the CoreFoundation reference constant kMDItemURL as an objc.ID.
 func KMDItemURL() objc.ID { return purego.CFConstant(raw.KMDItemURL()) }
 
-// KMDItemLabelIcon returns the CoreFoundation constant kMDItemLabelIcon as a toll-free-bridged objc.ID.
+// KMDItemLabelIcon returns the value of the CoreFoundation reference constant kMDItemLabelIcon as an objc.ID.
 func KMDItemLabelIcon() objc.ID { return purego.CFConstant(raw.KMDItemLabelIcon()) }
 
-// KMDItemLabelID returns the CoreFoundation constant kMDItemLabelID as a toll-free-bridged objc.ID.
+// KMDItemLabelID returns the value of the CoreFoundation reference constant kMDItemLabelID as an objc.ID.
 func KMDItemLabelID() objc.ID { return purego.CFConstant(raw.KMDItemLabelID()) }
 
-// KMDItemLabelKind returns the CoreFoundation constant kMDItemLabelKind as a toll-free-bridged objc.ID.
+// KMDItemLabelKind returns the value of the CoreFoundation reference constant kMDItemLabelKind as an objc.ID.
 func KMDItemLabelKind() objc.ID { return purego.CFConstant(raw.KMDItemLabelKind()) }
 
-// KMDItemLabelUUID returns the CoreFoundation constant kMDItemLabelUUID as a toll-free-bridged objc.ID.
+// KMDItemLabelUUID returns the value of the CoreFoundation reference constant kMDItemLabelUUID as an objc.ID.
 func KMDItemLabelUUID() objc.ID { return purego.CFConstant(raw.KMDItemLabelUUID()) }
 
-// KMDItemIsLikelyJunk returns the CoreFoundation constant kMDItemIsLikelyJunk as a toll-free-bridged objc.ID.
+// KMDItemIsLikelyJunk returns the value of the CoreFoundation reference constant kMDItemIsLikelyJunk as an objc.ID.
 func KMDItemIsLikelyJunk() objc.ID { return purego.CFConstant(raw.KMDItemIsLikelyJunk()) }
 
-// KMDItemExecutableArchitectures returns the CoreFoundation constant kMDItemExecutableArchitectures as a toll-free-bridged objc.ID.
+// KMDItemExecutableArchitectures returns the value of the CoreFoundation reference constant kMDItemExecutableArchitectures as an objc.ID.
 func KMDItemExecutableArchitectures() objc.ID { return purego.CFConstant(raw.KMDItemExecutableArchitectures()) }
 
-// KMDItemExecutablePlatform returns the CoreFoundation constant kMDItemExecutablePlatform as a toll-free-bridged objc.ID.
+// KMDItemExecutablePlatform returns the value of the CoreFoundation reference constant kMDItemExecutablePlatform as an objc.ID.
 func KMDItemExecutablePlatform() objc.ID { return purego.CFConstant(raw.KMDItemExecutablePlatform()) }
 
-// KMDItemApplicationCategories returns the CoreFoundation constant kMDItemApplicationCategories as a toll-free-bridged objc.ID.
+// KMDItemApplicationCategories returns the value of the CoreFoundation reference constant kMDItemApplicationCategories as an objc.ID.
 func KMDItemApplicationCategories() objc.ID { return purego.CFConstant(raw.KMDItemApplicationCategories()) }
 
-// KMDItemIsApplicationManaged returns the CoreFoundation constant kMDItemIsApplicationManaged as a toll-free-bridged objc.ID.
+// KMDItemIsApplicationManaged returns the value of the CoreFoundation reference constant kMDItemIsApplicationManaged as an objc.ID.
 func KMDItemIsApplicationManaged() objc.ID { return purego.CFConstant(raw.KMDItemIsApplicationManaged()) }
 
 // @constant kMDQueryProgressNotification The name of the notification sent to indicate changes to the query's results list during the initial gathering phase of a query's execution. Mostly adds will occur during this phase, but removals and changes can also occur, as in any update. This info dictionary parameter of the notification can carry the kMDQueryUpdateChangedItems and kMDQueryUpdateRemovedItems keys. Note that these keys may be have empty arrays for values, or be missing, if there are no changes of that particular type. For performance reasons, added results are not indicated in progress notifications (to avoid the cost of creating the result objects). These notifications are sent out by a query before the kMDQueryDidFinishNotification.
-// KMDQueryProgressNotification returns the CoreFoundation constant kMDQueryProgressNotification as a toll-free-bridged objc.ID.
+// KMDQueryProgressNotification returns the value of the CoreFoundation reference constant kMDQueryProgressNotification as an objc.ID.
 func KMDQueryProgressNotification() objc.ID { return purego.CFConstant(raw.KMDQueryProgressNotification()) }
 
 // @constant kMDQueryDidFinishNotification The name of the notification sent to indicate that the query has finished with the initial result-gathering phase, and may now proceed into the live-update phase (if that option was chosen when the query was executed). This notification often shortly follows after the last progress notification. It is usually not necessary to update any displayed UI in response to this notification, since it doesn't indicate any change in the result list of a query.
-// KMDQueryDidFinishNotification returns the CoreFoundation constant kMDQueryDidFinishNotification as a toll-free-bridged objc.ID.
+// KMDQueryDidFinishNotification returns the value of the CoreFoundation reference constant kMDQueryDidFinishNotification as an objc.ID.
 func KMDQueryDidFinishNotification() objc.ID { return purego.CFConstant(raw.KMDQueryDidFinishNotification()) }
 
 // @constant kMDQueryDidUpdateNotification The name of the notification sent to indicate changes to the query's results list during the second, live-update, phase of a query's execution. This notification can carry the kMDQueryUpdateAddedItems, kMDQueryUpdateChangedItems, and kMDQueryUpdateRemovedItems keys in the info dictionary parameter of the notification. Note that these keys may be have empty arrays for values, or be missing, if there are no changes of that particular type. These notifications are sent out by a query after the kMDQueryDidUpdateNotification.
-// KMDQueryDidUpdateNotification returns the CoreFoundation constant kMDQueryDidUpdateNotification as a toll-free-bridged objc.ID.
+// KMDQueryDidUpdateNotification returns the value of the CoreFoundation reference constant kMDQueryDidUpdateNotification as an objc.ID.
 func KMDQueryDidUpdateNotification() objc.ID { return purego.CFConstant(raw.KMDQueryDidUpdateNotification()) }
 
 // @constant kMDQueryUpdateAddedItems The name of the key in a query notification's info dictionary which identifies the list of added results. A result is added if the file contents or some metadata attribute of it is changed, and it now matches the query. Result objects are created for the newly added results, to be put in the list.
-// KMDQueryUpdateAddedItems returns the CoreFoundation constant kMDQueryUpdateAddedItems as a toll-free-bridged objc.ID.
+// KMDQueryUpdateAddedItems returns the value of the CoreFoundation reference constant kMDQueryUpdateAddedItems as an objc.ID.
 func KMDQueryUpdateAddedItems() objc.ID { return purego.CFConstant(raw.KMDQueryUpdateAddedItems()) }
 
 // @constant kMDQueryUpdateChangedItems The name of the key in a query notification's info dictionary which identifies the list of changed results. A result is changed if the file contents or some metadata attribute of it is changed, but it still matches the query. The list only contains result objects which have previously been created, and does not indicate results which have been changed for which result objects have not been created. [[This is for performance reasons, to avoid creating result objects just to represent a change of a result which has not been looked at, but this semantic may change.]]
-// KMDQueryUpdateChangedItems returns the CoreFoundation constant kMDQueryUpdateChangedItems as a toll-free-bridged objc.ID.
+// KMDQueryUpdateChangedItems returns the value of the CoreFoundation reference constant kMDQueryUpdateChangedItems as an objc.ID.
 func KMDQueryUpdateChangedItems() objc.ID { return purego.CFConstant(raw.KMDQueryUpdateChangedItems()) }
 
 // @constant kMDQueryUpdateRemovedItems The name of the key in a query notification's info dictionary which identifies the list of removed results. A result can be removed if it no longer matches the query. The list only contains result objects which have previously been created, and does not indicate results which have been removed for which result objects have not been created. [[This is for performance reasons, to avoid creating temporary result objects just to represent the deletion of the result, but this semantic may change.]]
-// KMDQueryUpdateRemovedItems returns the CoreFoundation constant kMDQueryUpdateRemovedItems as a toll-free-bridged objc.ID.
+// KMDQueryUpdateRemovedItems returns the value of the CoreFoundation reference constant kMDQueryUpdateRemovedItems as an objc.ID.
 func KMDQueryUpdateRemovedItems() objc.ID { return purego.CFConstant(raw.KMDQueryUpdateRemovedItems()) }
 
 // @constant kMDQueryResultContentRelevance The name of a query-specific attribute for use in sorting. The relevance of an item is a CFNumberRef with a floating point value. This is the relevance for content searches. The maximum and minimum values for a particular search cannot be determined until all of the results have been returned.  If there are multiple kMDItemTextContent predicates in the query, no relevance is returned. This is an attribute of a result item that is specific to the item in the context of the query. Also, the relevance does not compare the result relative to the other results of a query, but is computed just on the result item itself. Finally, this is only the relevance value for content, not a relevance for the item as a whole. The relevance attribute may not even be computed for an item if the item is found to match the query through evaluation of other attributes of the item than its contents. If the value is not computed, it is treated as an attribute on the item which does not exist (for sorting purposes, for example).
-// KMDQueryResultContentRelevance returns the CoreFoundation constant kMDQueryResultContentRelevance as a toll-free-bridged objc.ID.
+// KMDQueryResultContentRelevance returns the value of the CoreFoundation reference constant kMDQueryResultContentRelevance as an objc.ID.
 func KMDQueryResultContentRelevance() objc.ID { return purego.CFConstant(raw.KMDQueryResultContentRelevance()) }
 
 // @constant kMDQueryScopeHome A constant, which can be passed in the scopeDirectories array, to specify that the search should be restricted to the volume and directory that contains the current user's home directory
-// KMDQueryScopeHome returns the CoreFoundation constant kMDQueryScopeHome as a toll-free-bridged objc.ID.
+// KMDQueryScopeHome returns the value of the CoreFoundation reference constant kMDQueryScopeHome as an objc.ID.
 func KMDQueryScopeHome() objc.ID { return purego.CFConstant(raw.KMDQueryScopeHome()) }
 
 // @constant kMDQueryScopeComputer A constant, which can be passed in the scopeDirectories array, to specify that the search should be restricted to all locally mounted volumes, plus the user's home directory (which may be on a remote volume).
-// KMDQueryScopeComputer returns the CoreFoundation constant kMDQueryScopeComputer as a toll-free-bridged objc.ID.
+// KMDQueryScopeComputer returns the value of the CoreFoundation reference constant kMDQueryScopeComputer as an objc.ID.
 func KMDQueryScopeComputer() objc.ID { return purego.CFConstant(raw.KMDQueryScopeComputer()) }
 
 // @constant kMDQueryScopeNetwork A constant, which can be passed in the scopeDirectories array, to specify that the search should include all user mounted remote volumes.
-// KMDQueryScopeNetwork returns the CoreFoundation constant kMDQueryScopeNetwork as a toll-free-bridged objc.ID.
+// KMDQueryScopeNetwork returns the value of the CoreFoundation reference constant kMDQueryScopeNetwork as an objc.ID.
 func KMDQueryScopeNetwork() objc.ID { return purego.CFConstant(raw.KMDQueryScopeNetwork()) }
 
 // @constant kMDQueryScopeAllIndexed A constant, which can be passed in the scopeDirectories array, to specify that the search should be restricted to indexed, locally mounted volumes and indexed user mounted remote volumes, plus the user's home directory.
-// KMDQueryScopeAllIndexed returns the CoreFoundation constant kMDQueryScopeAllIndexed as a toll-free-bridged objc.ID.
+// KMDQueryScopeAllIndexed returns the value of the CoreFoundation reference constant kMDQueryScopeAllIndexed as an objc.ID.
 func KMDQueryScopeAllIndexed() objc.ID { return purego.CFConstant(raw.KMDQueryScopeAllIndexed()) }
 
 // @constant kMDQueryScopeComputerIndexed A constant, which can be passed in the scopeDirectories array, to specify that the search should be restricted to indexed, locally mounted volumes, plus the user's home directory (which may be on a remote volume).
-// KMDQueryScopeComputerIndexed returns the CoreFoundation constant kMDQueryScopeComputerIndexed as a toll-free-bridged objc.ID.
+// KMDQueryScopeComputerIndexed returns the value of the CoreFoundation reference constant kMDQueryScopeComputerIndexed as an objc.ID.
 func KMDQueryScopeComputerIndexed() objc.ID { return purego.CFConstant(raw.KMDQueryScopeComputerIndexed()) }
 
 // @constant kMDQueryScopeNetworkIndexed A constant, which can be passed in the scopeDirectories array, to specify that the search should include indexed user mounted remote volumes.
-// KMDQueryScopeNetworkIndexed returns the CoreFoundation constant kMDQueryScopeNetworkIndexed as a toll-free-bridged objc.ID.
+// KMDQueryScopeNetworkIndexed returns the value of the CoreFoundation reference constant kMDQueryScopeNetworkIndexed as an objc.ID.
 func KMDQueryScopeNetworkIndexed() objc.ID { return purego.CFConstant(raw.KMDQueryScopeNetworkIndexed()) }
 
 // @constant kMDLabelBundleURL @abstract This is the bundle URL for the label. Type is a CFURL. This attribute is read-only. @constant kMDLabelContentChangeDate @abstract This is the date the the label content last changed. Type is a CFDate. This attribute is read-only, but its value will be altered by setting any of the writable attributes described below. @constant kMDLabelDisplayName @abstract This is the localized name of the label. Type is a CFString. @constant kMDLabelIconData @abstract This is the data that should be used to create an icon image source for the label. Pass this data to the ImageIO framework to create a CGImageSourceRef. To reset a label's icon to its default image, set kMDLabelIconData to kCFNull. Type is a CFData. @constant kMDLabelIconUUID @abstract This is the UUID of the icon image source for the label. Labels that share the same icon image source will have the same icon UUID. Type is a CFUUID. This attribute is read-only, but its value may be altered by setting the kMDLabelIconData attribute described above. @constant kMDLabelIsMutuallyExclusiveSetMember @abstract This attribute is true if the label kind specifies a mutually-exclusive set of labels. Type is a CFBoolean. This attribute is read-only. @constant kMDLabelKind @abstract This is the kind string for the label. The label kind is the name of the bundle the label is defined in. Type is a CFString. This attribute is read-only. @constant kMDLabelSetsFinderColor @abstract This attribute is optional and applicable only to labels with "Public" visibility. If it is present, then when the label is set on a file the file's Finder color will be set to the specified value (0 - 7). If the label is later removed, the file's Finder color will be reverted either to the color specified by the most-recently-set label with this attribute that remains set on the file, or to 0 (none). Type is a CFNumber. This attribute is ignored for unless the label's visibility is "Public". @constant kMDLabelUUID @abstract This is the UUID of the label. Type is a CFUUID. This attribute is read-only. @constant kMDLabelVisibility @abstract This is a constant describing the label's visibility, either "Public" (kMDPublicVisibility) or "Private" (kMDPrivateVisibility). Type is a CFString. This attribute is read-only.
-// KMDLabelBundleURL returns the CoreFoundation constant kMDLabelBundleURL as a toll-free-bridged objc.ID.
+// KMDLabelBundleURL returns the value of the CoreFoundation reference constant kMDLabelBundleURL as an objc.ID.
 func KMDLabelBundleURL() objc.ID { return purego.CFConstant(raw.KMDLabelBundleURL()) }
 
-// KMDLabelContentChangeDate returns the CoreFoundation constant kMDLabelContentChangeDate as a toll-free-bridged objc.ID.
+// KMDLabelContentChangeDate returns the value of the CoreFoundation reference constant kMDLabelContentChangeDate as an objc.ID.
 func KMDLabelContentChangeDate() objc.ID { return purego.CFConstant(raw.KMDLabelContentChangeDate()) }
 
-// KMDLabelDisplayName returns the CoreFoundation constant kMDLabelDisplayName as a toll-free-bridged objc.ID.
+// KMDLabelDisplayName returns the value of the CoreFoundation reference constant kMDLabelDisplayName as an objc.ID.
 func KMDLabelDisplayName() objc.ID { return purego.CFConstant(raw.KMDLabelDisplayName()) }
 
-// KMDLabelIconData returns the CoreFoundation constant kMDLabelIconData as a toll-free-bridged objc.ID.
+// KMDLabelIconData returns the value of the CoreFoundation reference constant kMDLabelIconData as an objc.ID.
 func KMDLabelIconData() objc.ID { return purego.CFConstant(raw.KMDLabelIconData()) }
 
-// KMDLabelIconUUID returns the CoreFoundation constant kMDLabelIconUUID as a toll-free-bridged objc.ID.
+// KMDLabelIconUUID returns the value of the CoreFoundation reference constant kMDLabelIconUUID as an objc.ID.
 func KMDLabelIconUUID() objc.ID { return purego.CFConstant(raw.KMDLabelIconUUID()) }
 
-// KMDLabelIsMutuallyExclusiveSetMember returns the CoreFoundation constant kMDLabelIsMutuallyExclusiveSetMember as a toll-free-bridged objc.ID.
+// KMDLabelIsMutuallyExclusiveSetMember returns the value of the CoreFoundation reference constant kMDLabelIsMutuallyExclusiveSetMember as an objc.ID.
 func KMDLabelIsMutuallyExclusiveSetMember() objc.ID { return purego.CFConstant(raw.KMDLabelIsMutuallyExclusiveSetMember()) }
 
-// KMDLabelKind returns the CoreFoundation constant kMDLabelKind as a toll-free-bridged objc.ID.
+// KMDLabelKind returns the value of the CoreFoundation reference constant kMDLabelKind as an objc.ID.
 func KMDLabelKind() objc.ID { return purego.CFConstant(raw.KMDLabelKind()) }
 
-// KMDLabelSetsFinderColor returns the CoreFoundation constant kMDLabelSetsFinderColor as a toll-free-bridged objc.ID.
+// KMDLabelSetsFinderColor returns the value of the CoreFoundation reference constant kMDLabelSetsFinderColor as an objc.ID.
 func KMDLabelSetsFinderColor() objc.ID { return purego.CFConstant(raw.KMDLabelSetsFinderColor()) }
 
-// KMDLabelUUID returns the CoreFoundation constant kMDLabelUUID as a toll-free-bridged objc.ID.
+// KMDLabelUUID returns the value of the CoreFoundation reference constant kMDLabelUUID as an objc.ID.
 func KMDLabelUUID() objc.ID { return purego.CFConstant(raw.KMDLabelUUID()) }
 
-// KMDLabelVisibility returns the CoreFoundation constant kMDLabelVisibility as a toll-free-bridged objc.ID.
+// KMDLabelVisibility returns the value of the CoreFoundation reference constant kMDLabelVisibility as an objc.ID.
 func KMDLabelVisibility() objc.ID { return purego.CFConstant(raw.KMDLabelVisibility()) }
 
 // @constant kMDLabelKindIsMutuallyExclusiveSetKey @abstract This key is used in the Info.plist file of a label bundle to specify that the label kind constitutes a mutually exclusive set. The value is a CFBoolean. @constant kMDLabelKindVisibilityKey @abstract This key is used in the Info.plist file of a label bundle to specify the visibility of the labels defined by the bundle. The value is a CFString constant, either "Public" (kMDPublicVisibility) or "Private" (kMDPrivateVisibility).
-// KMDLabelKindIsMutuallyExclusiveSetKey returns the CoreFoundation constant kMDLabelKindIsMutuallyExclusiveSetKey as a toll-free-bridged objc.ID.
+// KMDLabelKindIsMutuallyExclusiveSetKey returns the value of the CoreFoundation reference constant kMDLabelKindIsMutuallyExclusiveSetKey as an objc.ID.
 func KMDLabelKindIsMutuallyExclusiveSetKey() objc.ID { return purego.CFConstant(raw.KMDLabelKindIsMutuallyExclusiveSetKey()) }
 
-// KMDLabelKindVisibilityKey returns the CoreFoundation constant kMDLabelKindVisibilityKey as a toll-free-bridged objc.ID.
+// KMDLabelKindVisibilityKey returns the value of the CoreFoundation reference constant kMDLabelKindVisibilityKey as an objc.ID.
 func KMDLabelKindVisibilityKey() objc.ID { return purego.CFConstant(raw.KMDLabelKindVisibilityKey()) }
 
-// KMDPrivateVisibility returns the CoreFoundation constant kMDPrivateVisibility as a toll-free-bridged objc.ID.
+// KMDPrivateVisibility returns the value of the CoreFoundation reference constant kMDPrivateVisibility as an objc.ID.
 func KMDPrivateVisibility() objc.ID { return purego.CFConstant(raw.KMDPrivateVisibility()) }
 
-// KMDPublicVisibility returns the CoreFoundation constant kMDPublicVisibility as a toll-free-bridged objc.ID.
+// KMDPublicVisibility returns the value of the CoreFoundation reference constant kMDPublicVisibility as an objc.ID.
 func KMDPublicVisibility() objc.ID { return purego.CFConstant(raw.KMDPublicVisibility()) }
 
 // @constant kMDLabelAddedNotification @abstract The name of the notification sent when a label has been added. The notification object is the subject MDLabelRef. All label notifications are distributed to processes owned by the same uid that have initialized the Metadata framework label APIs.
-// KMDLabelAddedNotification returns the CoreFoundation constant kMDLabelAddedNotification as a toll-free-bridged objc.ID.
+// KMDLabelAddedNotification returns the value of the CoreFoundation reference constant kMDLabelAddedNotification as an objc.ID.
 func KMDLabelAddedNotification() objc.ID { return purego.CFConstant(raw.KMDLabelAddedNotification()) }
 
 // @constant kMDLabelChangedNotification @abstract The name of the notification sent when a label has been changed. The notification object is the subject MDLabelRef. The label's new attributes can be retrieved using MDLabelCopyAttribute().
-// KMDLabelChangedNotification returns the CoreFoundation constant kMDLabelChangedNotification as a toll-free-bridged objc.ID.
+// KMDLabelChangedNotification returns the value of the CoreFoundation reference constant kMDLabelChangedNotification as an objc.ID.
 func KMDLabelChangedNotification() objc.ID { return purego.CFConstant(raw.KMDLabelChangedNotification()) }
 
 // @constant kMDLabelRemovedNotification @abstract The name of the notification sent when a label has been deleted. The notification object is the subject MDLabelRef. The label's kMDLabelIconUUID, kMDLabelKind, kMDLabelKindBundleURL and kMDLabelUUID attributes can still be retrieved using MDLabelCopyAttribute(), and the label may still be passed to MDLabelCopyAttributeName().
-// KMDLabelRemovedNotification returns the CoreFoundation constant kMDLabelRemovedNotification as a toll-free-bridged objc.ID.
+// KMDLabelRemovedNotification returns the value of the CoreFoundation reference constant kMDLabelRemovedNotification as an objc.ID.
 func KMDLabelRemovedNotification() objc.ID { return purego.CFConstant(raw.KMDLabelRemovedNotification()) }
 
-// KMDAttributeDisplayValues returns the CoreFoundation constant kMDAttributeDisplayValues as a toll-free-bridged objc.ID.
+// KMDAttributeDisplayValues returns the value of the CoreFoundation reference constant kMDAttributeDisplayValues as an objc.ID.
 func KMDAttributeDisplayValues() objc.ID { return purego.CFConstant(raw.KMDAttributeDisplayValues()) }
 
-// KMDAttributeAllValues returns the CoreFoundation constant kMDAttributeAllValues as a toll-free-bridged objc.ID.
+// KMDAttributeAllValues returns the value of the CoreFoundation reference constant kMDAttributeAllValues as an objc.ID.
 func KMDAttributeAllValues() objc.ID { return purego.CFConstant(raw.KMDAttributeAllValues()) }
 
-// KMDAttributeReadOnlyValues returns the CoreFoundation constant kMDAttributeReadOnlyValues as a toll-free-bridged objc.ID.
+// KMDAttributeReadOnlyValues returns the value of the CoreFoundation reference constant kMDAttributeReadOnlyValues as an objc.ID.
 func KMDAttributeReadOnlyValues() objc.ID { return purego.CFConstant(raw.KMDAttributeReadOnlyValues()) }
 
-// KMDExporterAvaliable returns the CoreFoundation constant kMDExporterAvaliable as a toll-free-bridged objc.ID.
+// KMDExporterAvaliable returns the value of the CoreFoundation reference constant kMDExporterAvaliable as an objc.ID.
 func KMDExporterAvaliable() objc.ID { return purego.CFConstant(raw.KMDExporterAvaliable()) }
 
-// KMDAttributeName returns the CoreFoundation constant kMDAttributeName as a toll-free-bridged objc.ID.
+// KMDAttributeName returns the value of the CoreFoundation reference constant kMDAttributeName as an objc.ID.
 func KMDAttributeName() objc.ID { return purego.CFConstant(raw.KMDAttributeName()) }
 
-// KMDAttributeType returns the CoreFoundation constant kMDAttributeType as a toll-free-bridged objc.ID.
+// KMDAttributeType returns the value of the CoreFoundation reference constant kMDAttributeType as an objc.ID.
 func KMDAttributeType() objc.ID { return purego.CFConstant(raw.KMDAttributeType()) }
 
-// KMDAttributeMultiValued returns the CoreFoundation constant kMDAttributeMultiValued as a toll-free-bridged objc.ID.
+// KMDAttributeMultiValued returns the value of the CoreFoundation reference constant kMDAttributeMultiValued as an objc.ID.
 func KMDAttributeMultiValued() objc.ID { return purego.CFConstant(raw.KMDAttributeMultiValued()) }
 

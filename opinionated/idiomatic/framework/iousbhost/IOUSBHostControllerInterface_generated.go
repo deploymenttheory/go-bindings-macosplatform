@@ -20,11 +20,11 @@ type HostControllerInterface struct {
 // Unwrap returns the underlying [raw.IOUSBHostControllerInterface].
 func (x *HostControllerInterface) Unwrap() *raw.IOUSBHostControllerInterface { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *HostControllerInterface) ID() objc.ID { return x.inner.Ptr() }
 
-// HostControllerInterfaceFromID adopts an existing toll-free-bridged object id as a HostControllerInterface (nil for 0).
+// HostControllerInterfaceFromID adopts an existing object pointer as a HostControllerInterface (nil for 0).
 func HostControllerInterfaceFromID(id objc.ID) *HostControllerInterface {
 	if id == 0 {
 		return nil

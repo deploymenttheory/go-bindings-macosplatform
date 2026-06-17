@@ -18,11 +18,11 @@ type MTROperationalStateClusterResumeParams struct {
 // Unwrap returns the underlying [raw.MTROperationalStateClusterResumeParams].
 func (x *MTROperationalStateClusterResumeParams) Unwrap() *raw.MTROperationalStateClusterResumeParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTROperationalStateClusterResumeParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTROperationalStateClusterResumeParamsFromID adopts an existing toll-free-bridged object id as a MTROperationalStateClusterResumeParams (nil for 0).
+// MTROperationalStateClusterResumeParamsFromID adopts an existing object pointer as a MTROperationalStateClusterResumeParams (nil for 0).
 func MTROperationalStateClusterResumeParamsFromID(id objc.ID) *MTROperationalStateClusterResumeParams {
 	if id == 0 {
 		return nil

@@ -17,11 +17,11 @@ type StorageDevice struct {
 // Unwrap returns the underlying [raw.VZStorageDevice].
 func (x *StorageDevice) Unwrap() *raw.VZStorageDevice { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *StorageDevice) ID() objc.ID { return x.inner.Ptr() }
 
-// StorageDeviceFromID adopts an existing toll-free-bridged object id as a StorageDevice (nil for 0).
+// StorageDeviceFromID adopts an existing object pointer as a StorageDevice (nil for 0).
 func StorageDeviceFromID(id objc.ID) *StorageDevice {
 	if id == 0 {
 		return nil

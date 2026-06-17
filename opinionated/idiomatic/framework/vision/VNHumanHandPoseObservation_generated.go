@@ -19,11 +19,11 @@ type HumanHandPoseObservation struct {
 // Unwrap returns the underlying [raw.VNHumanHandPoseObservation].
 func (x *HumanHandPoseObservation) Unwrap() *raw.VNHumanHandPoseObservation { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *HumanHandPoseObservation) ID() objc.ID { return x.inner.Ptr() }
 
-// HumanHandPoseObservationFromID adopts an existing toll-free-bridged object id as a HumanHandPoseObservation (nil for 0).
+// HumanHandPoseObservationFromID adopts an existing object pointer as a HumanHandPoseObservation (nil for 0).
 func HumanHandPoseObservationFromID(id objc.ID) *HumanHandPoseObservation {
 	if id == 0 {
 		return nil

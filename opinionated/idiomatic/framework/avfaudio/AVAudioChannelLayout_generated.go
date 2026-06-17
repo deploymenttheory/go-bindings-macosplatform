@@ -18,11 +18,11 @@ type AudioChannelLayout struct {
 // Unwrap returns the underlying [raw.AVAudioChannelLayout].
 func (x *AudioChannelLayout) Unwrap() *raw.AVAudioChannelLayout { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AudioChannelLayout) ID() objc.ID { return x.inner.Ptr() }
 
-// AudioChannelLayoutFromID adopts an existing toll-free-bridged object id as a AudioChannelLayout (nil for 0).
+// AudioChannelLayoutFromID adopts an existing object pointer as a AudioChannelLayout (nil for 0).
 func AudioChannelLayoutFromID(id objc.ID) *AudioChannelLayout {
 	if id == 0 {
 		return nil

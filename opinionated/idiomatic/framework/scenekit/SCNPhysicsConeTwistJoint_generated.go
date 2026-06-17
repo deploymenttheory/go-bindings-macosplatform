@@ -18,11 +18,11 @@ type PhysicsConeTwistJoint struct {
 // Unwrap returns the underlying [raw.SCNPhysicsConeTwistJoint].
 func (x *PhysicsConeTwistJoint) Unwrap() *raw.SCNPhysicsConeTwistJoint { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *PhysicsConeTwistJoint) ID() objc.ID { return x.inner.Ptr() }
 
-// PhysicsConeTwistJointFromID adopts an existing toll-free-bridged object id as a PhysicsConeTwistJoint (nil for 0).
+// PhysicsConeTwistJointFromID adopts an existing object pointer as a PhysicsConeTwistJoint (nil for 0).
 func PhysicsConeTwistJointFromID(id objc.ID) *PhysicsConeTwistJoint {
 	if id == 0 {
 		return nil

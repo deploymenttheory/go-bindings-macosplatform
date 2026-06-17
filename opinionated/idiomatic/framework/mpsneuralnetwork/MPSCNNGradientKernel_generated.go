@@ -21,11 +21,11 @@ type CNNGradientKernel struct {
 // Unwrap returns the underlying [raw.MPSCNNGradientKernel].
 func (x *CNNGradientKernel) Unwrap() *raw.MPSCNNGradientKernel { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CNNGradientKernel) ID() objc.ID { return x.inner.Ptr() }
 
-// CNNGradientKernelFromID adopts an existing toll-free-bridged object id as a CNNGradientKernel (nil for 0).
+// CNNGradientKernelFromID adopts an existing object pointer as a CNNGradientKernel (nil for 0).
 func CNNGradientKernelFromID(id objc.ID) *CNNGradientKernel {
 	if id == 0 {
 		return nil

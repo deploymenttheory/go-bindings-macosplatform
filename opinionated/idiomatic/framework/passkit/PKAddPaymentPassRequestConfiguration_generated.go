@@ -20,11 +20,11 @@ type AddPaymentPassRequestConfiguration struct {
 // Unwrap returns the underlying [raw.PKAddPaymentPassRequestConfiguration].
 func (x *AddPaymentPassRequestConfiguration) Unwrap() *raw.PKAddPaymentPassRequestConfiguration { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AddPaymentPassRequestConfiguration) ID() objc.ID { return x.inner.Ptr() }
 
-// AddPaymentPassRequestConfigurationFromID adopts an existing toll-free-bridged object id as a AddPaymentPassRequestConfiguration (nil for 0).
+// AddPaymentPassRequestConfigurationFromID adopts an existing object pointer as a AddPaymentPassRequestConfiguration (nil for 0).
 func AddPaymentPassRequestConfigurationFromID(id objc.ID) *AddPaymentPassRequestConfiguration {
 	if id == 0 {
 		return nil

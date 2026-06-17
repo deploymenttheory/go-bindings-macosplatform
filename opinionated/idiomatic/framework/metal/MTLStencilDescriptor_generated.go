@@ -17,11 +17,11 @@ type StencilDescriptor struct {
 // Unwrap returns the underlying [raw.MTLStencilDescriptor].
 func (x *StencilDescriptor) Unwrap() *raw.MTLStencilDescriptor { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *StencilDescriptor) ID() objc.ID { return x.inner.Ptr() }
 
-// StencilDescriptorFromID adopts an existing toll-free-bridged object id as a StencilDescriptor (nil for 0).
+// StencilDescriptorFromID adopts an existing object pointer as a StencilDescriptor (nil for 0).
 func StencilDescriptorFromID(id objc.ID) *StencilDescriptor {
 	if id == 0 {
 		return nil

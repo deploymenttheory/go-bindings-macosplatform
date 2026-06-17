@@ -18,11 +18,11 @@ type AssetResourceLoader struct {
 // Unwrap returns the underlying [raw.AVAssetResourceLoader].
 func (x *AssetResourceLoader) Unwrap() *raw.AVAssetResourceLoader { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AssetResourceLoader) ID() objc.ID { return x.inner.Ptr() }
 
-// AssetResourceLoaderFromID adopts an existing toll-free-bridged object id as a AssetResourceLoader (nil for 0).
+// AssetResourceLoaderFromID adopts an existing object pointer as a AssetResourceLoader (nil for 0).
 func AssetResourceLoaderFromID(id objc.ID) *AssetResourceLoader {
 	if id == 0 {
 		return nil

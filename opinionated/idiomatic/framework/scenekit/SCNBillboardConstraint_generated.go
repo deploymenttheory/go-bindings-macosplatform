@@ -17,11 +17,11 @@ type BillboardConstraint struct {
 // Unwrap returns the underlying [raw.SCNBillboardConstraint].
 func (x *BillboardConstraint) Unwrap() *raw.SCNBillboardConstraint { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *BillboardConstraint) ID() objc.ID { return x.inner.Ptr() }
 
-// BillboardConstraintFromID adopts an existing toll-free-bridged object id as a BillboardConstraint (nil for 0).
+// BillboardConstraintFromID adopts an existing object pointer as a BillboardConstraint (nil for 0).
 func BillboardConstraintFromID(id objc.ID) *BillboardConstraint {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type MTRLowPowerClusterSleepParams struct {
 // Unwrap returns the underlying [raw.MTRLowPowerClusterSleepParams].
 func (x *MTRLowPowerClusterSleepParams) Unwrap() *raw.MTRLowPowerClusterSleepParams { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRLowPowerClusterSleepParams) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRLowPowerClusterSleepParamsFromID adopts an existing toll-free-bridged object id as a MTRLowPowerClusterSleepParams (nil for 0).
+// MTRLowPowerClusterSleepParamsFromID adopts an existing object pointer as a MTRLowPowerClusterSleepParams (nil for 0).
 func MTRLowPowerClusterSleepParamsFromID(id objc.ID) *MTRLowPowerClusterSleepParams {
 	if id == 0 {
 		return nil

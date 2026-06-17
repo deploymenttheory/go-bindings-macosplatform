@@ -17,11 +17,11 @@ type DisbursementSummaryItem struct {
 // Unwrap returns the underlying [raw.PKDisbursementSummaryItem].
 func (x *DisbursementSummaryItem) Unwrap() *raw.PKDisbursementSummaryItem { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DisbursementSummaryItem) ID() objc.ID { return x.inner.Ptr() }
 
-// DisbursementSummaryItemFromID adopts an existing toll-free-bridged object id as a DisbursementSummaryItem (nil for 0).
+// DisbursementSummaryItemFromID adopts an existing object pointer as a DisbursementSummaryItem (nil for 0).
 func DisbursementSummaryItemFromID(id objc.ID) *DisbursementSummaryItem {
 	if id == 0 {
 		return nil

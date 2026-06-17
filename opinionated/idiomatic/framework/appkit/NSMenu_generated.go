@@ -21,11 +21,11 @@ type Menu struct {
 // Unwrap returns the underlying [raw.NSMenu].
 func (x *Menu) Unwrap() *raw.NSMenu { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Menu) ID() objc.ID { return x.inner.Ptr() }
 
-// MenuFromID adopts an existing toll-free-bridged object id as a Menu (nil for 0).
+// MenuFromID adopts an existing object pointer as a Menu (nil for 0).
 func MenuFromID(id objc.ID) *Menu {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type MTRDishwasherModeClusterModeTagStruct struct {
 // Unwrap returns the underlying [raw.MTRDishwasherModeClusterModeTagStruct].
 func (x *MTRDishwasherModeClusterModeTagStruct) Unwrap() *raw.MTRDishwasherModeClusterModeTagStruct { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRDishwasherModeClusterModeTagStruct) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRDishwasherModeClusterModeTagStructFromID adopts an existing toll-free-bridged object id as a MTRDishwasherModeClusterModeTagStruct (nil for 0).
+// MTRDishwasherModeClusterModeTagStructFromID adopts an existing object pointer as a MTRDishwasherModeClusterModeTagStruct (nil for 0).
 func MTRDishwasherModeClusterModeTagStructFromID(id objc.ID) *MTRDishwasherModeClusterModeTagStruct {
 	if id == 0 {
 		return nil

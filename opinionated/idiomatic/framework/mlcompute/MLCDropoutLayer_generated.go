@@ -17,11 +17,11 @@ type DropoutLayer struct {
 // Unwrap returns the underlying [raw.MLCDropoutLayer].
 func (x *DropoutLayer) Unwrap() *raw.MLCDropoutLayer { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DropoutLayer) ID() objc.ID { return x.inner.Ptr() }
 
-// DropoutLayerFromID adopts an existing toll-free-bridged object id as a DropoutLayer (nil for 0).
+// DropoutLayerFromID adopts an existing object pointer as a DropoutLayer (nil for 0).
 func DropoutLayerFromID(id objc.ID) *DropoutLayer {
 	if id == 0 {
 		return nil

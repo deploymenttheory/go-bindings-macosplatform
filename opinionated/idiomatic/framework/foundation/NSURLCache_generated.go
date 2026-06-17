@@ -19,11 +19,11 @@ type URLCache struct {
 // Unwrap returns the underlying [raw.NSURLCache].
 func (x *URLCache) Unwrap() *raw.NSURLCache { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *URLCache) ID() objc.ID { return x.inner.Ptr() }
 
-// URLCacheFromID adopts an existing toll-free-bridged object id as a URLCache (nil for 0).
+// URLCacheFromID adopts an existing object pointer as a URLCache (nil for 0).
 func URLCacheFromID(id objc.ID) *URLCache {
 	if id == 0 {
 		return nil

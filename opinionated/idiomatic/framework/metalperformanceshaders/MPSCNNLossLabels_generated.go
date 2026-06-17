@@ -20,11 +20,11 @@ type CNNLossLabels struct {
 // Unwrap returns the underlying [raw.MPSCNNLossLabels].
 func (x *CNNLossLabels) Unwrap() *raw.MPSCNNLossLabels { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CNNLossLabels) ID() objc.ID { return x.inner.Ptr() }
 
-// CNNLossLabelsFromID adopts an existing toll-free-bridged object id as a CNNLossLabels (nil for 0).
+// CNNLossLabelsFromID adopts an existing object pointer as a CNNLossLabels (nil for 0).
 func CNNLossLabelsFromID(id objc.ID) *CNNLossLabels {
 	if id == 0 {
 		return nil

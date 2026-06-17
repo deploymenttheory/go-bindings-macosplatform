@@ -18,11 +18,11 @@ type CNNPoolingL2NormGradientNode struct {
 // Unwrap returns the underlying [raw.MPSCNNPoolingL2NormGradientNode].
 func (x *CNNPoolingL2NormGradientNode) Unwrap() *raw.MPSCNNPoolingL2NormGradientNode { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CNNPoolingL2NormGradientNode) ID() objc.ID { return x.inner.Ptr() }
 
-// CNNPoolingL2NormGradientNodeFromID adopts an existing toll-free-bridged object id as a CNNPoolingL2NormGradientNode (nil for 0).
+// CNNPoolingL2NormGradientNodeFromID adopts an existing object pointer as a CNNPoolingL2NormGradientNode (nil for 0).
 func CNNPoolingL2NormGradientNodeFromID(id objc.ID) *CNNPoolingL2NormGradientNode {
 	if id == 0 {
 		return nil

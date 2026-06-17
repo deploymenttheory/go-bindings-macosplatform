@@ -19,11 +19,11 @@ type ProductDiscount struct {
 // Unwrap returns the underlying [raw.SKProductDiscount].
 func (x *ProductDiscount) Unwrap() *raw.SKProductDiscount { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ProductDiscount) ID() objc.ID { return x.inner.Ptr() }
 
-// ProductDiscountFromID adopts an existing toll-free-bridged object id as a ProductDiscount (nil for 0).
+// ProductDiscountFromID adopts an existing object pointer as a ProductDiscount (nil for 0).
 func ProductDiscountFromID(id objc.ID) *ProductDiscount {
 	if id == 0 {
 		return nil

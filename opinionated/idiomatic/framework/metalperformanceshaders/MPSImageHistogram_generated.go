@@ -22,11 +22,11 @@ type ImageHistogram struct {
 // Unwrap returns the underlying [raw.MPSImageHistogram].
 func (x *ImageHistogram) Unwrap() *raw.MPSImageHistogram { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *ImageHistogram) ID() objc.ID { return x.inner.Ptr() }
 
-// ImageHistogramFromID adopts an existing toll-free-bridged object id as a ImageHistogram (nil for 0).
+// ImageHistogramFromID adopts an existing object pointer as a ImageHistogram (nil for 0).
 func ImageHistogramFromID(id objc.ID) *ImageHistogram {
 	if id == 0 {
 		return nil

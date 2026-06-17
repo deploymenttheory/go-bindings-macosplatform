@@ -19,11 +19,11 @@ type CNNLogSoftMaxGradient struct {
 // Unwrap returns the underlying [raw.MPSCNNLogSoftMaxGradient].
 func (x *CNNLogSoftMaxGradient) Unwrap() *raw.MPSCNNLogSoftMaxGradient { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CNNLogSoftMaxGradient) ID() objc.ID { return x.inner.Ptr() }
 
-// CNNLogSoftMaxGradientFromID adopts an existing toll-free-bridged object id as a CNNLogSoftMaxGradient (nil for 0).
+// CNNLogSoftMaxGradientFromID adopts an existing object pointer as a CNNLogSoftMaxGradient (nil for 0).
 func CNNLogSoftMaxGradientFromID(id objc.ID) *CNNLogSoftMaxGradient {
 	if id == 0 {
 		return nil

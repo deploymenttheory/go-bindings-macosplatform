@@ -20,11 +20,11 @@ type BaseEffect struct {
 // Unwrap returns the underlying [raw.GLKBaseEffect].
 func (x *BaseEffect) Unwrap() *raw.GLKBaseEffect { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *BaseEffect) ID() objc.ID { return x.inner.Ptr() }
 
-// BaseEffectFromID adopts an existing toll-free-bridged object id as a BaseEffect (nil for 0).
+// BaseEffectFromID adopts an existing object pointer as a BaseEffect (nil for 0).
 func BaseEffectFromID(id objc.ID) *BaseEffect {
 	if id == 0 {
 		return nil

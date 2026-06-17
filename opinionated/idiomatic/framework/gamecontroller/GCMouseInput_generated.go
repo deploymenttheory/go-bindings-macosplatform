@@ -18,11 +18,11 @@ type MouseInput struct {
 // Unwrap returns the underlying [raw.GCMouseInput].
 func (x *MouseInput) Unwrap() *raw.GCMouseInput { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MouseInput) ID() objc.ID { return x.inner.Ptr() }
 
-// MouseInputFromID adopts an existing toll-free-bridged object id as a MouseInput (nil for 0).
+// MouseInputFromID adopts an existing object pointer as a MouseInput (nil for 0).
 func MouseInputFromID(id objc.ID) *MouseInput {
 	if id == 0 {
 		return nil

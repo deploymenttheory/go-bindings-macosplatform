@@ -19,11 +19,11 @@ type MutableVideoCompositionLayerInstruction struct {
 // Unwrap returns the underlying [raw.AVMutableVideoCompositionLayerInstruction].
 func (x *MutableVideoCompositionLayerInstruction) Unwrap() *raw.AVMutableVideoCompositionLayerInstruction { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MutableVideoCompositionLayerInstruction) ID() objc.ID { return x.inner.Ptr() }
 
-// MutableVideoCompositionLayerInstructionFromID adopts an existing toll-free-bridged object id as a MutableVideoCompositionLayerInstruction (nil for 0).
+// MutableVideoCompositionLayerInstructionFromID adopts an existing object pointer as a MutableVideoCompositionLayerInstruction (nil for 0).
 func MutableVideoCompositionLayerInstructionFromID(id objc.ID) *MutableVideoCompositionLayerInstruction {
 	if id == 0 {
 		return nil

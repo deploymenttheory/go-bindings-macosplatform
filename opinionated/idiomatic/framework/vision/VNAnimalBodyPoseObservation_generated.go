@@ -19,11 +19,11 @@ type AnimalBodyPoseObservation struct {
 // Unwrap returns the underlying [raw.VNAnimalBodyPoseObservation].
 func (x *AnimalBodyPoseObservation) Unwrap() *raw.VNAnimalBodyPoseObservation { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AnimalBodyPoseObservation) ID() objc.ID { return x.inner.Ptr() }
 
-// AnimalBodyPoseObservationFromID adopts an existing toll-free-bridged object id as a AnimalBodyPoseObservation (nil for 0).
+// AnimalBodyPoseObservationFromID adopts an existing object pointer as a AnimalBodyPoseObservation (nil for 0).
 func AnimalBodyPoseObservationFromID(id objc.ID) *AnimalBodyPoseObservation {
 	if id == 0 {
 		return nil

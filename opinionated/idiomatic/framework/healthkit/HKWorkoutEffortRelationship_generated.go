@@ -18,11 +18,11 @@ type WorkoutEffortRelationship struct {
 // Unwrap returns the underlying [raw.HKWorkoutEffortRelationship].
 func (x *WorkoutEffortRelationship) Unwrap() *raw.HKWorkoutEffortRelationship { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *WorkoutEffortRelationship) ID() objc.ID { return x.inner.Ptr() }
 
-// WorkoutEffortRelationshipFromID adopts an existing toll-free-bridged object id as a WorkoutEffortRelationship (nil for 0).
+// WorkoutEffortRelationshipFromID adopts an existing object pointer as a WorkoutEffortRelationship (nil for 0).
 func WorkoutEffortRelationshipFromID(id objc.ID) *WorkoutEffortRelationship {
 	if id == 0 {
 		return nil

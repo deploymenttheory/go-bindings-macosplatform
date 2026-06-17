@@ -20,11 +20,11 @@ type HumanBodyPose3DObservation struct {
 // Unwrap returns the underlying [raw.VNHumanBodyPose3DObservation].
 func (x *HumanBodyPose3DObservation) Unwrap() *raw.VNHumanBodyPose3DObservation { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *HumanBodyPose3DObservation) ID() objc.ID { return x.inner.Ptr() }
 
-// HumanBodyPose3DObservationFromID adopts an existing toll-free-bridged object id as a HumanBodyPose3DObservation (nil for 0).
+// HumanBodyPose3DObservationFromID adopts an existing object pointer as a HumanBodyPose3DObservation (nil for 0).
 func HumanBodyPose3DObservationFromID(id objc.ID) *HumanBodyPose3DObservation {
 	if id == 0 {
 		return nil

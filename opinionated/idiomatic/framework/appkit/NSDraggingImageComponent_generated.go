@@ -20,11 +20,11 @@ type DraggingImageComponent struct {
 // Unwrap returns the underlying [raw.NSDraggingImageComponent].
 func (x *DraggingImageComponent) Unwrap() *raw.NSDraggingImageComponent { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *DraggingImageComponent) ID() objc.ID { return x.inner.Ptr() }
 
-// DraggingImageComponentFromID adopts an existing toll-free-bridged object id as a DraggingImageComponent (nil for 0).
+// DraggingImageComponentFromID adopts an existing object pointer as a DraggingImageComponent (nil for 0).
 func DraggingImageComponentFromID(id objc.ID) *DraggingImageComponent {
 	if id == 0 {
 		return nil

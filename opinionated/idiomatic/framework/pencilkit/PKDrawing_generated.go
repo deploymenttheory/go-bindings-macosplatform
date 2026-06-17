@@ -22,11 +22,11 @@ type Drawing struct {
 // Unwrap returns the underlying [raw.PKDrawing].
 func (x *Drawing) Unwrap() *raw.PKDrawing { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *Drawing) ID() objc.ID { return x.inner.Ptr() }
 
-// DrawingFromID adopts an existing toll-free-bridged object id as a Drawing (nil for 0).
+// DrawingFromID adopts an existing object pointer as a Drawing (nil for 0).
 func DrawingFromID(id objc.ID) *Drawing {
 	if id == 0 {
 		return nil

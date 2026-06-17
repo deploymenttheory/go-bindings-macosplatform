@@ -11,7 +11,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// SecDisplayCertificateGroup wraps [raw.SecDisplayCertificateGroup], bridging CFTypeRef arguments and the OSStatus result.
+// SecDisplayCertificateGroup wraps [raw.SecDisplayCertificateGroup], passing objc.ID arguments as CFTypeRef and returning the OSStatus result as an error.
 func SecDisplayCertificateGroup(certificates *security.CssmCertgroup, keychainList objc.ID) error {
 	if _err := purego.NewOSStatus(raw.SecDisplayCertificateGroup(certificates, purego.CFRef(keychainList))).Err(); _err != nil {
 		return _err

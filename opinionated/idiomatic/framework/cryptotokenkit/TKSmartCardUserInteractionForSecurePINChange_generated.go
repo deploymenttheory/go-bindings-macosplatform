@@ -17,11 +17,11 @@ type SmartCardUserInteractionForSecurePINChange struct {
 // Unwrap returns the underlying [raw.TKSmartCardUserInteractionForSecurePINChange].
 func (x *SmartCardUserInteractionForSecurePINChange) Unwrap() *raw.TKSmartCardUserInteractionForSecurePINChange { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SmartCardUserInteractionForSecurePINChange) ID() objc.ID { return x.inner.Ptr() }
 
-// SmartCardUserInteractionForSecurePINChangeFromID adopts an existing toll-free-bridged object id as a SmartCardUserInteractionForSecurePINChange (nil for 0).
+// SmartCardUserInteractionForSecurePINChangeFromID adopts an existing object pointer as a SmartCardUserInteractionForSecurePINChange (nil for 0).
 func SmartCardUserInteractionForSecurePINChangeFromID(id objc.ID) *SmartCardUserInteractionForSecurePINChange {
 	if id == 0 {
 		return nil

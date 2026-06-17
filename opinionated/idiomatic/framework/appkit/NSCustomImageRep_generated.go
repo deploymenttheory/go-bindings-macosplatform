@@ -18,11 +18,11 @@ type CustomImageRep struct {
 // Unwrap returns the underlying [raw.NSCustomImageRep].
 func (x *CustomImageRep) Unwrap() *raw.NSCustomImageRep { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *CustomImageRep) ID() objc.ID { return x.inner.Ptr() }
 
-// CustomImageRepFromID adopts an existing toll-free-bridged object id as a CustomImageRep (nil for 0).
+// CustomImageRepFromID adopts an existing object pointer as a CustomImageRep (nil for 0).
 func CustomImageRepFromID(id objc.ID) *CustomImageRep {
 	if id == 0 {
 		return nil

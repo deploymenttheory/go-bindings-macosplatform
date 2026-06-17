@@ -21,11 +21,11 @@ type NNGridSample struct {
 // Unwrap returns the underlying [raw.MPSNNGridSample].
 func (x *NNGridSample) Unwrap() *raw.MPSNNGridSample { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NNGridSample) ID() objc.ID { return x.inner.Ptr() }
 
-// NNGridSampleFromID adopts an existing toll-free-bridged object id as a NNGridSample (nil for 0).
+// NNGridSampleFromID adopts an existing object pointer as a NNGridSample (nil for 0).
 func NNGridSampleFromID(id objc.ID) *NNGridSample {
 	if id == 0 {
 		return nil

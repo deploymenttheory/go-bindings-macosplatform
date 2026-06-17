@@ -19,11 +19,11 @@ type NNLossGradientNode struct {
 // Unwrap returns the underlying [raw.MPSNNLossGradientNode].
 func (x *NNLossGradientNode) Unwrap() *raw.MPSNNLossGradientNode { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NNLossGradientNode) ID() objc.ID { return x.inner.Ptr() }
 
-// NNLossGradientNodeFromID adopts an existing toll-free-bridged object id as a NNLossGradientNode (nil for 0).
+// NNLossGradientNodeFromID adopts an existing object pointer as a NNLossGradientNode (nil for 0).
 func NNLossGradientNodeFromID(id objc.ID) *NNLossGradientNode {
 	if id == 0 {
 		return nil

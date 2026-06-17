@@ -17,11 +17,11 @@ type MapItemDetailViewController struct {
 // Unwrap returns the underlying [raw.MKMapItemDetailViewController].
 func (x *MapItemDetailViewController) Unwrap() *raw.MKMapItemDetailViewController { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MapItemDetailViewController) ID() objc.ID { return x.inner.Ptr() }
 
-// MapItemDetailViewControllerFromID adopts an existing toll-free-bridged object id as a MapItemDetailViewController (nil for 0).
+// MapItemDetailViewControllerFromID adopts an existing object pointer as a MapItemDetailViewController (nil for 0).
 func MapItemDetailViewControllerFromID(id objc.ID) *MapItemDetailViewController {
 	if id == 0 {
 		return nil

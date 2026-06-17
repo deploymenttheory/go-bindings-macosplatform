@@ -17,11 +17,11 @@ type UnitPressure struct {
 // Unwrap returns the underlying [raw.NSUnitPressure].
 func (x *UnitPressure) Unwrap() *raw.NSUnitPressure { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *UnitPressure) ID() objc.ID { return x.inner.Ptr() }
 
-// UnitPressureFromID adopts an existing toll-free-bridged object id as a UnitPressure (nil for 0).
+// UnitPressureFromID adopts an existing object pointer as a UnitPressure (nil for 0).
 func UnitPressureFromID(id objc.ID) *UnitPressure {
 	if id == 0 {
 		return nil

@@ -18,11 +18,11 @@ type SwitchNodeDefinition struct {
 // Unwrap returns the underlying [raw.PHASESwitchNodeDefinition].
 func (x *SwitchNodeDefinition) Unwrap() *raw.PHASESwitchNodeDefinition { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *SwitchNodeDefinition) ID() objc.ID { return x.inner.Ptr() }
 
-// SwitchNodeDefinitionFromID adopts an existing toll-free-bridged object id as a SwitchNodeDefinition (nil for 0).
+// SwitchNodeDefinitionFromID adopts an existing object pointer as a SwitchNodeDefinition (nil for 0).
 func SwitchNodeDefinitionFromID(id objc.ID) *SwitchNodeDefinition {
 	if id == 0 {
 		return nil

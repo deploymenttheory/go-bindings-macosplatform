@@ -17,11 +17,11 @@ type NNReductionRowMaxNode struct {
 // Unwrap returns the underlying [raw.MPSNNReductionRowMaxNode].
 func (x *NNReductionRowMaxNode) Unwrap() *raw.MPSNNReductionRowMaxNode { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *NNReductionRowMaxNode) ID() objc.ID { return x.inner.Ptr() }
 
-// NNReductionRowMaxNodeFromID adopts an existing toll-free-bridged object id as a NNReductionRowMaxNode (nil for 0).
+// NNReductionRowMaxNodeFromID adopts an existing object pointer as a NNReductionRowMaxNode (nil for 0).
 func NNReductionRowMaxNodeFromID(id objc.ID) *NNReductionRowMaxNode {
 	if id == 0 {
 		return nil

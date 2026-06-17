@@ -17,11 +17,11 @@ type TranslationalImageRegistrationRequest struct {
 // Unwrap returns the underlying [raw.VNTranslationalImageRegistrationRequest].
 func (x *TranslationalImageRegistrationRequest) Unwrap() *raw.VNTranslationalImageRegistrationRequest { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *TranslationalImageRegistrationRequest) ID() objc.ID { return x.inner.Ptr() }
 
-// TranslationalImageRegistrationRequestFromID adopts an existing toll-free-bridged object id as a TranslationalImageRegistrationRequest (nil for 0).
+// TranslationalImageRegistrationRequestFromID adopts an existing object pointer as a TranslationalImageRegistrationRequest (nil for 0).
 func TranslationalImageRegistrationRequestFromID(id objc.ID) *TranslationalImageRegistrationRequest {
 	if id == 0 {
 		return nil

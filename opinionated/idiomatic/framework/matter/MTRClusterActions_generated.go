@@ -19,11 +19,11 @@ type MTRClusterActions struct {
 // Unwrap returns the underlying [raw.MTRClusterActions].
 func (x *MTRClusterActions) Unwrap() *raw.MTRClusterActions { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *MTRClusterActions) ID() objc.ID { return x.inner.Ptr() }
 
-// MTRClusterActionsFromID adopts an existing toll-free-bridged object id as a MTRClusterActions (nil for 0).
+// MTRClusterActionsFromID adopts an existing object pointer as a MTRClusterActions (nil for 0).
 func MTRClusterActionsFromID(id objc.ID) *MTRClusterActions {
 	if id == 0 {
 		return nil

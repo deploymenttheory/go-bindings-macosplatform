@@ -18,11 +18,11 @@ type AreaLight struct {
 // Unwrap returns the underlying [raw.MDLAreaLight].
 func (x *AreaLight) Unwrap() *raw.MDLAreaLight { return x.inner }
 
-// ID returns the underlying object as a toll-free-bridged objc.ID,
-// for passing to CoreFoundation and other C APIs.
+// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
 func (x *AreaLight) ID() objc.ID { return x.inner.Ptr() }
 
-// AreaLightFromID adopts an existing toll-free-bridged object id as a AreaLight (nil for 0).
+// AreaLightFromID adopts an existing object pointer as a AreaLight (nil for 0).
 func AreaLightFromID(id objc.ID) *AreaLight {
 	if id == 0 {
 		return nil
