@@ -115,13 +115,13 @@ func (x *DataSeriesDescriptor) SetIsContinuous(isContinuous bool) {
 }
 
 // DataPoints returns the collection as a Go slice.
-func (x *DataSeriesDescriptor) DataPoints() []*raw.AXDataPoint {
+func (x *DataSeriesDescriptor) DataPoints() []*DataPoint {
 	arr := x.inner.DataPoints()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AXDataPoint {
-		return raw.AXDataPointFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *DataPoint {
+		return &DataPoint{inner: raw.AXDataPointFromID(purego.Retain(_id))}
 	})
 }
 
@@ -143,7 +143,7 @@ type DataSeriesDescriptorable interface {
 	SetAttributedName(attributedName *foundation.NSAttributedString)
 	IsContinuous() bool
 	SetIsContinuous(isContinuous bool)
-	DataPoints() []*raw.AXDataPoint
+	DataPoints() []*DataPoint
 	SetDataPoints(dataPoints *foundation.NSArray[*raw.AXDataPoint])
 }
 

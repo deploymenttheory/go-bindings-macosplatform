@@ -40,8 +40,8 @@ func NewRenderer() *Renderer {
 }
 
 // WithScene sets the scene property and returns the receiver for chaining.
-func (x *Renderer) WithScene(scene *raw.SCNScene) *Renderer {
-	x.inner.SetScene(scene)
+func (x *Renderer) WithScene(scene *Scene) *Renderer {
+	x.inner.SetScene(scene.Unwrap())
 	return x
 }
 
@@ -102,7 +102,7 @@ func (x *Renderer) Render() {
 // Rendererable is the interface implemented by [Renderer], for mocking and DI.
 type Rendererable interface {
 	Unwrap() *raw.SCNRenderer
-	WithScene(scene *raw.SCNScene) *Renderer
+	WithScene(scene *Scene) *Renderer
 	RenderAtTimeViewportCommandBufferPassDescriptor(time_ float64, viewport corefoundation.CGRect, commandBuffer metal.MTLCommandBuffer, renderPassDescriptor *metal.MTLRenderPassDescriptor)
 	RenderAtTime(time_ float64)
 	UpdateAtTime(time_ float64)

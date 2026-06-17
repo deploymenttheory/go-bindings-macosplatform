@@ -68,14 +68,14 @@ func (x *LocalSearchCompleter) WithResultTypes(resultTypes raw.MKLocalSearchComp
 }
 
 // WithPointOfInterestFilter sets the pointOfInterestFilter property and returns the receiver for chaining.
-func (x *LocalSearchCompleter) WithPointOfInterestFilter(pointOfInterestFilter *raw.MKPointOfInterestFilter) *LocalSearchCompleter {
-	x.inner.SetPointOfInterestFilter(pointOfInterestFilter)
+func (x *LocalSearchCompleter) WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *LocalSearchCompleter {
+	x.inner.SetPointOfInterestFilter(pointOfInterestFilter.Unwrap())
 	return x
 }
 
 // WithAddressFilter sets the addressFilter property and returns the receiver for chaining.
-func (x *LocalSearchCompleter) WithAddressFilter(addressFilter *raw.MKAddressFilter) *LocalSearchCompleter {
-	x.inner.SetAddressFilter(addressFilter)
+func (x *LocalSearchCompleter) WithAddressFilter(addressFilter *AddressFilter) *LocalSearchCompleter {
+	x.inner.SetAddressFilter(addressFilter.Unwrap())
 	return x
 }
 
@@ -183,13 +183,13 @@ func (x *LocalSearchCompleter) SetDelegate(delegate raw.MKLocalSearchCompleterDe
 }
 
 // Results returns the collection as a Go slice.
-func (x *LocalSearchCompleter) Results() []*raw.MKLocalSearchCompletion {
+func (x *LocalSearchCompleter) Results() []*LocalSearchCompletion {
 	arr := x.inner.Results()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MKLocalSearchCompletion {
-		return raw.MKLocalSearchCompletionFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *LocalSearchCompletion {
+		return &LocalSearchCompletion{inner: raw.MKLocalSearchCompletionFromID(purego.Retain(_id))}
 	})
 }
 
@@ -206,8 +206,8 @@ type LocalSearchCompleterable interface {
 	WithRegionPriority(regionPriority raw.MKLocalSearchRegionPriority) *LocalSearchCompleter
 	WithFilterType(filterType raw.MKSearchCompletionFilterType) *LocalSearchCompleter
 	WithResultTypes(resultTypes raw.MKLocalSearchCompleterResultType) *LocalSearchCompleter
-	WithPointOfInterestFilter(pointOfInterestFilter *raw.MKPointOfInterestFilter) *LocalSearchCompleter
-	WithAddressFilter(addressFilter *raw.MKAddressFilter) *LocalSearchCompleter
+	WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *LocalSearchCompleter
+	WithAddressFilter(addressFilter *AddressFilter) *LocalSearchCompleter
 	WithDelegate(delegate raw.MKLocalSearchCompleterDelegate) *LocalSearchCompleter
 	Cancel()
 	QueryFragment() string
@@ -226,7 +226,7 @@ type LocalSearchCompleterable interface {
 	SetAddressFilter(addressFilter *raw.MKAddressFilter)
 	Delegate() raw.MKLocalSearchCompleterDelegate
 	SetDelegate(delegate raw.MKLocalSearchCompleterDelegate)
-	Results() []*raw.MKLocalSearchCompletion
+	Results() []*LocalSearchCompletion
 	IsSearching() bool
 }
 

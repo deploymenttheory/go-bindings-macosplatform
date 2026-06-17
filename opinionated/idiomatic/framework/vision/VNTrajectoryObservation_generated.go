@@ -38,24 +38,24 @@ func NewTrajectoryObservation() *TrajectoryObservation {
 }
 
 // DetectedPoints returns the collection as a Go slice.
-func (x *TrajectoryObservation) DetectedPoints() []*raw.VNPoint {
+func (x *TrajectoryObservation) DetectedPoints() []*Point {
 	arr := x.inner.DetectedPoints()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.VNPoint {
-		return raw.VNPointFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Point {
+		return &Point{inner: raw.VNPointFromID(purego.Retain(_id))}
 	})
 }
 
 // ProjectedPoints returns the collection as a Go slice.
-func (x *TrajectoryObservation) ProjectedPoints() []*raw.VNPoint {
+func (x *TrajectoryObservation) ProjectedPoints() []*Point {
 	arr := x.inner.ProjectedPoints()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.VNPoint {
-		return raw.VNPointFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Point {
+		return &Point{inner: raw.VNPointFromID(purego.Retain(_id))}
 	})
 }
 
@@ -74,8 +74,8 @@ func (x *TrajectoryObservation) asObservation() *raw.VNObservation { return &x.i
 // TrajectoryObservationable is the interface implemented by [TrajectoryObservation], for mocking and DI.
 type TrajectoryObservationable interface {
 	Unwrap() *raw.VNTrajectoryObservation
-	DetectedPoints() []*raw.VNPoint
-	ProjectedPoints() []*raw.VNPoint
+	DetectedPoints() []*Point
+	ProjectedPoints() []*Point
 	EquationCoefficients() unsafe.Pointer
 	MovingAverageRadius() float64
 }

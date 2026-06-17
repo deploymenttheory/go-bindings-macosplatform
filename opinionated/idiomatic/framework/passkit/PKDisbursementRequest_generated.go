@@ -112,8 +112,8 @@ func (x *DisbursementRequest) WithRequiredRecipientContactFields(items ...*found
 }
 
 // WithRecipientContact sets the recipientContact property and returns the receiver for chaining.
-func (x *DisbursementRequest) WithRecipientContact(recipientContact *raw.PKContact) *DisbursementRequest {
-	x.inner.SetRecipientContact(recipientContact)
+func (x *DisbursementRequest) WithRecipientContact(recipientContact *Contact) *DisbursementRequest {
+	x.inner.SetRecipientContact(recipientContact.Unwrap())
 	return x
 }
 
@@ -200,13 +200,13 @@ func (x *DisbursementRequest) SetMerchantCapabilities(merchantCapabilities raw.P
 }
 
 // SummaryItems returns the collection as a Go slice.
-func (x *DisbursementRequest) SummaryItems() []*raw.PKPaymentSummaryItem {
+func (x *DisbursementRequest) SummaryItems() []*PaymentSummaryItem {
 	arr := x.inner.SummaryItems()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PKPaymentSummaryItem {
-		return raw.PKPaymentSummaryItemFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PaymentSummaryItem {
+		return &PaymentSummaryItem{inner: raw.PKPaymentSummaryItemFromID(purego.Retain(_id))}
 	})
 }
 
@@ -305,7 +305,7 @@ type DisbursementRequestable interface {
 	WithSummaryItems(items ...PaymentSummaryItemProvider) *DisbursementRequest
 	WithCurrencyCode(currencyCode string) *DisbursementRequest
 	WithRequiredRecipientContactFields(items ...*foundation.NSString) *DisbursementRequest
-	WithRecipientContact(recipientContact *raw.PKContact) *DisbursementRequest
+	WithRecipientContact(recipientContact *Contact) *DisbursementRequest
 	WithSupportedRegions(items ...*foundation.NSString) *DisbursementRequest
 	WithApplicationData(applicationData *foundation.NSData) *DisbursementRequest
 	WithIsDelegatedRequest(isDelegatedRequest bool) *DisbursementRequest
@@ -317,7 +317,7 @@ type DisbursementRequestable interface {
 	SetSupportedNetworks(supportedNetworks *foundation.NSArray[*foundation.NSString])
 	MerchantCapabilities() raw.PKMerchantCapability
 	SetMerchantCapabilities(merchantCapabilities raw.PKMerchantCapability)
-	SummaryItems() []*raw.PKPaymentSummaryItem
+	SummaryItems() []*PaymentSummaryItem
 	SetSummaryItems(summaryItems *foundation.NSArray[*raw.PKPaymentSummaryItem])
 	CurrencyCode() string
 	SetCurrencyCode(currencyCode string)

@@ -63,13 +63,13 @@ func (x *AssetReaderAudioMixOutput) WithSupportsRandomAccess(supportsRandomAcces
 }
 
 // AudioTracks returns the collection as a Go slice.
-func (x *AssetReaderAudioMixOutput) AudioTracks() []*raw.AVAssetTrack {
+func (x *AssetReaderAudioMixOutput) AudioTracks() []*AssetTrack {
 	arr := x.inner.AudioTracks()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVAssetTrack {
-		return raw.AVAssetTrackFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *AssetTrack {
+		return &AssetTrack{inner: raw.AVAssetTrackFromID(purego.Retain(_id))}
 	})
 }
 
@@ -115,7 +115,7 @@ type AssetReaderAudioMixOutputable interface {
 	WithAudioTimePitchAlgorithm(audioTimePitchAlgorithm *foundation.NSString) *AssetReaderAudioMixOutput
 	WithAlwaysCopiesSampleData(alwaysCopiesSampleData bool) *AssetReaderAudioMixOutput
 	WithSupportsRandomAccess(supportsRandomAccess bool) *AssetReaderAudioMixOutput
-	AudioTracks() []*raw.AVAssetTrack
+	AudioTracks() []*AssetTrack
 	AudioSettings() *foundation.NSDictionary[*foundation.NSString, objc.ID]
 	AudioMix() *AudioMix
 	SetAudioMix(audioMix *raw.AVAudioMix)

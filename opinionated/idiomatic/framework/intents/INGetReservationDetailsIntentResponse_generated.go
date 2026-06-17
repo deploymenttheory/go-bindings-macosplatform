@@ -67,13 +67,13 @@ func (x *GetReservationDetailsIntentResponse) Code() raw.INGetReservationDetails
 }
 
 // Reservations returns the collection as a Go slice.
-func (x *GetReservationDetailsIntentResponse) Reservations() []*raw.INReservation {
+func (x *GetReservationDetailsIntentResponse) Reservations() []*Reservation {
 	arr := x.inner.Reservations()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.INReservation {
-		return raw.INReservationFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Reservation {
+		return &Reservation{inner: raw.INReservationFromID(purego.Retain(_id))}
 	})
 }
 
@@ -90,7 +90,7 @@ type GetReservationDetailsIntentResponseable interface {
 	WithReservations(items ...ReservationProvider) *GetReservationDetailsIntentResponse
 	WithUserActivity(userActivity *foundation.NSUserActivity) *GetReservationDetailsIntentResponse
 	Code() raw.INGetReservationDetailsIntentResponseCode
-	Reservations() []*raw.INReservation
+	Reservations() []*Reservation
 	SetReservations(reservations *foundation.NSArray[*raw.INReservation])
 }
 

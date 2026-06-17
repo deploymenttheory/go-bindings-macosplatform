@@ -87,13 +87,13 @@ func (x *CollectionViewCompositionalLayoutConfiguration) SetInterSectionSpacing(
 }
 
 // BoundarySupplementaryItems returns the collection as a Go slice.
-func (x *CollectionViewCompositionalLayoutConfiguration) BoundarySupplementaryItems() []*raw.NSCollectionLayoutBoundarySupplementaryItem {
+func (x *CollectionViewCompositionalLayoutConfiguration) BoundarySupplementaryItems() []*CollectionLayoutBoundarySupplementaryItem {
 	arr := x.inner.BoundarySupplementaryItems()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSCollectionLayoutBoundarySupplementaryItem {
-		return raw.NSCollectionLayoutBoundarySupplementaryItemFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CollectionLayoutBoundarySupplementaryItem {
+		return &CollectionLayoutBoundarySupplementaryItem{inner: raw.NSCollectionLayoutBoundarySupplementaryItemFromID(purego.Retain(_id))}
 	})
 }
 
@@ -112,7 +112,7 @@ type CollectionViewCompositionalLayoutConfigurationable interface {
 	SetScrollDirection(scrollDirection raw.NSCollectionViewScrollDirection)
 	InterSectionSpacing() float64
 	SetInterSectionSpacing(interSectionSpacing float64)
-	BoundarySupplementaryItems() []*raw.NSCollectionLayoutBoundarySupplementaryItem
+	BoundarySupplementaryItems() []*CollectionLayoutBoundarySupplementaryItem
 	SetBoundarySupplementaryItems(boundarySupplementaryItems *foundation.NSArray[*raw.NSCollectionLayoutBoundarySupplementaryItem])
 }
 

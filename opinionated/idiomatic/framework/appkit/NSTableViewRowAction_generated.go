@@ -44,14 +44,14 @@ func (x *TableViewRowAction) WithTitle(title string) *TableViewRowAction {
 }
 
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
-func (x *TableViewRowAction) WithBackgroundColor(backgroundColor *raw.NSColor) *TableViewRowAction {
-	x.inner.SetBackgroundColor(backgroundColor)
+func (x *TableViewRowAction) WithBackgroundColor(backgroundColor *Color) *TableViewRowAction {
+	x.inner.SetBackgroundColor(backgroundColor.Unwrap())
 	return x
 }
 
 // WithImage sets the image property and returns the receiver for chaining.
-func (x *TableViewRowAction) WithImage(image *raw.NSImage) *TableViewRowAction {
-	x.inner.SetImage(image)
+func (x *TableViewRowAction) WithImage(image *Image) *TableViewRowAction {
+	x.inner.SetImage(image.Unwrap())
 	return x
 }
 
@@ -106,8 +106,8 @@ func (x *TableViewRowAction) SetImage(image *raw.NSImage) {
 type TableViewRowActionable interface {
 	Unwrap() *raw.NSTableViewRowAction
 	WithTitle(title string) *TableViewRowAction
-	WithBackgroundColor(backgroundColor *raw.NSColor) *TableViewRowAction
-	WithImage(image *raw.NSImage) *TableViewRowAction
+	WithBackgroundColor(backgroundColor *Color) *TableViewRowAction
+	WithImage(image *Image) *TableViewRowAction
 	Style() raw.NSTableViewRowActionStyle
 	Title() string
 	SetTitle(title string)

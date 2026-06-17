@@ -114,8 +114,8 @@ func (x *Node) WithName(name string) *Node {
 }
 
 // WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
-func (x *Node) WithPhysicsBody(physicsBody *raw.SKPhysicsBody) *Node {
-	x.inner.SetPhysicsBody(physicsBody)
+func (x *Node) WithPhysicsBody(physicsBody *PhysicsBody) *Node {
+	x.inner.SetPhysicsBody(physicsBody.Unwrap())
 	return x
 }
 
@@ -126,8 +126,8 @@ func (x *Node) WithUserData(userData *foundation.NSMutableDictionary[objc.ID, ob
 }
 
 // WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
-func (x *Node) WithReachConstraints(reachConstraints *raw.SKReachConstraints) *Node {
-	x.inner.SetReachConstraints(reachConstraints)
+func (x *Node) WithReachConstraints(reachConstraints *ReachConstraints) *Node {
+	x.inner.SetReachConstraints(reachConstraints.Unwrap())
 	return x
 }
 
@@ -487,13 +487,13 @@ func (x *Node) Parent() *Node {
 }
 
 // Children returns the collection as a Go slice.
-func (x *Node) Children() []*raw.SKNode {
+func (x *Node) Children() []*Node {
 	arr := x.inner.Children()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SKNode {
-		return raw.SKNodeFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Node {
+		return &Node{inner: raw.SKNodeFromID(purego.Retain(_id))}
 	})
 }
 
@@ -559,13 +559,13 @@ func (x *Node) SetReachConstraints(reachConstraints *raw.SKReachConstraints) {
 }
 
 // Constraints returns the collection as a Go slice.
-func (x *Node) Constraints() []*raw.SKConstraint {
+func (x *Node) Constraints() []*Constraint {
 	arr := x.inner.Constraints()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SKConstraint {
-		return raw.SKConstraintFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Constraint {
+		return &Constraint{inner: raw.SKConstraintFromID(purego.Retain(_id))}
 	})
 }
 
@@ -725,9 +725,9 @@ type Nodeable interface {
 	WithHidden(hidden bool) *Node
 	WithUserInteractionEnabled(userInteractionEnabled bool) *Node
 	WithName(name string) *Node
-	WithPhysicsBody(physicsBody *raw.SKPhysicsBody) *Node
+	WithPhysicsBody(physicsBody *PhysicsBody) *Node
 	WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *Node
-	WithReachConstraints(reachConstraints *raw.SKReachConstraints) *Node
+	WithReachConstraints(reachConstraints *ReachConstraints) *Node
 	WithConstraints(items ...*raw.SKConstraint) *Node
 	WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *Node
 	WithAccessibilityElement(accessibilityElement bool) *Node
@@ -789,7 +789,7 @@ type Nodeable interface {
 	IsUserInteractionEnabled() bool
 	SetUserInteractionEnabled(userInteractionEnabled bool)
 	Parent() *Node
-	Children() []*raw.SKNode
+	Children() []*Node
 	Name() string
 	SetName(name string)
 	Scene() *Scene
@@ -799,7 +799,7 @@ type Nodeable interface {
 	SetUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID])
 	ReachConstraints() *ReachConstraints
 	SetReachConstraints(reachConstraints *raw.SKReachConstraints)
-	Constraints() []*raw.SKConstraint
+	Constraints() []*Constraint
 	SetConstraints(constraints *foundation.NSArray[*raw.SKConstraint])
 	AttributeValues() *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]
 	SetAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue])

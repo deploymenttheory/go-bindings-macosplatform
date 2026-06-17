@@ -53,8 +53,8 @@ func (x *GlassEffectView) WithCornerRadius(cornerRadius float64) *GlassEffectVie
 }
 
 // WithTintColor sets the tintColor property and returns the receiver for chaining.
-func (x *GlassEffectView) WithTintColor(tintColor *raw.NSColor) *GlassEffectView {
-	x.inner.SetTintColor(tintColor)
+func (x *GlassEffectView) WithTintColor(tintColor *Color) *GlassEffectView {
+	x.inner.SetTintColor(tintColor.Unwrap())
 	return x
 }
 
@@ -245,8 +245,8 @@ func (x *GlassEffectView) WithContentFilters(items ...*coreimage.CIFilter) *Glas
 }
 
 // WithShadow sets the shadow property and returns the receiver for chaining.
-func (x *GlassEffectView) WithShadow(shadow *raw.NSShadow) *GlassEffectView {
-	x.inner.NSView.SetShadow(shadow)
+func (x *GlassEffectView) WithShadow(shadow *Shadow) *GlassEffectView {
+	x.inner.NSView.SetShadow(shadow.Unwrap())
 	return x
 }
 
@@ -327,8 +327,8 @@ func (x *GlassEffectView) WithPrefersCompactControlSizeMetrics(prefersCompactCon
 }
 
 // WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
-func (x *GlassEffectView) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *GlassEffectView {
-	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+func (x *GlassEffectView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *GlassEffectView {
+	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
 	return x
 }
 
@@ -369,8 +369,8 @@ func (x *GlassEffectView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtend
 }
 
 // WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
-func (x *GlassEffectView) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *GlassEffectView {
-	x.inner.NSView.SetPressureConfiguration(pressureConfiguration)
+func (x *GlassEffectView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *GlassEffectView {
+	x.inner.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
 	return x
 }
 
@@ -381,8 +381,8 @@ func (x *GlassEffectView) WithNextResponder(nextResponder ResponderProvider) *Gl
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *GlassEffectView) WithMenu(menu *raw.NSMenu) *GlassEffectView {
-	x.inner.NSView.NSResponder.SetMenu(menu)
+func (x *GlassEffectView) WithMenu(menu *Menu) *GlassEffectView {
+	x.inner.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -393,8 +393,8 @@ func (x *GlassEffectView) WithUserActivity(userActivity *foundation.NSUserActivi
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *GlassEffectView) WithTouchBar(touchBar *raw.NSTouchBar) *GlassEffectView {
-	x.inner.NSView.NSResponder.SetTouchBar(touchBar)
+func (x *GlassEffectView) WithTouchBar(touchBar *TouchBar) *GlassEffectView {
+	x.inner.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -455,7 +455,7 @@ type GlassEffectViewable interface {
 	Unwrap() *raw.NSGlassEffectView
 	WithContentView(contentView ViewProvider) *GlassEffectView
 	WithCornerRadius(cornerRadius float64) *GlassEffectView
-	WithTintColor(tintColor *raw.NSColor) *GlassEffectView
+	WithTintColor(tintColor *Color) *GlassEffectView
 	WithStyle(style raw.NSGlassEffectViewStyle) *GlassEffectView
 	WithSubviews(items ...ViewProvider) *GlassEffectView
 	WithHidden(hidden bool) *GlassEffectView
@@ -482,7 +482,7 @@ type GlassEffectViewable interface {
 	WithBackgroundFilters(items ...*coreimage.CIFilter) *GlassEffectView
 	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *GlassEffectView
 	WithContentFilters(items ...*coreimage.CIFilter) *GlassEffectView
-	WithShadow(shadow *raw.NSShadow) *GlassEffectView
+	WithShadow(shadow *Shadow) *GlassEffectView
 	WithClipsToBounds(clipsToBounds bool) *GlassEffectView
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *GlassEffectView
 	WithToolTip(toolTip string) *GlassEffectView
@@ -494,18 +494,18 @@ type GlassEffectViewable interface {
 	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *GlassEffectView
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *GlassEffectView
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *GlassEffectView
-	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *GlassEffectView
+	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *GlassEffectView
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *GlassEffectView
 	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *GlassEffectView
 	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *GlassEffectView
 	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *GlassEffectView
 	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *GlassEffectView
 	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *GlassEffectView
-	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *GlassEffectView
+	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *GlassEffectView
 	WithNextResponder(nextResponder ResponderProvider) *GlassEffectView
-	WithMenu(menu *raw.NSMenu) *GlassEffectView
+	WithMenu(menu *Menu) *GlassEffectView
 	WithUserActivity(userActivity *foundation.NSUserActivity) *GlassEffectView
-	WithTouchBar(touchBar *raw.NSTouchBar) *GlassEffectView
+	WithTouchBar(touchBar *TouchBar) *GlassEffectView
 	ContentView() *View
 	SetContentView(contentView *raw.NSView)
 	CornerRadius() float64

@@ -53,8 +53,8 @@ func (x *SecureTextField) WithPlaceholderAttributedString(placeholderAttributedS
 }
 
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
-func (x *SecureTextField) WithBackgroundColor(backgroundColor *raw.NSColor) *SecureTextField {
-	x.inner.NSTextField.SetBackgroundColor(backgroundColor)
+func (x *SecureTextField) WithBackgroundColor(backgroundColor *Color) *SecureTextField {
+	x.inner.NSTextField.SetBackgroundColor(backgroundColor.Unwrap())
 	return x
 }
 
@@ -65,8 +65,8 @@ func (x *SecureTextField) WithDrawsBackground(drawsBackground bool) *SecureTextF
 }
 
 // WithTextColor sets the textColor property and returns the receiver for chaining.
-func (x *SecureTextField) WithTextColor(textColor *raw.NSColor) *SecureTextField {
-	x.inner.NSTextField.SetTextColor(textColor)
+func (x *SecureTextField) WithTextColor(textColor *Color) *SecureTextField {
+	x.inner.NSTextField.SetTextColor(textColor.Unwrap())
 	return x
 }
 
@@ -307,8 +307,8 @@ func (x *SecureTextField) WithDoubleValue(doubleValue float64) *SecureTextField 
 }
 
 // WithFont sets the font property and returns the receiver for chaining.
-func (x *SecureTextField) WithFont(font *raw.NSFont) *SecureTextField {
-	x.inner.NSTextField.NSControl.SetFont(font)
+func (x *SecureTextField) WithFont(font *Font) *SecureTextField {
+	x.inner.NSTextField.NSControl.SetFont(font.Unwrap())
 	return x
 }
 
@@ -529,8 +529,8 @@ func (x *SecureTextField) WithContentFilters(items ...*coreimage.CIFilter) *Secu
 }
 
 // WithShadow sets the shadow property and returns the receiver for chaining.
-func (x *SecureTextField) WithShadow(shadow *raw.NSShadow) *SecureTextField {
-	x.inner.NSTextField.NSControl.NSView.SetShadow(shadow)
+func (x *SecureTextField) WithShadow(shadow *Shadow) *SecureTextField {
+	x.inner.NSTextField.NSControl.NSView.SetShadow(shadow.Unwrap())
 	return x
 }
 
@@ -611,8 +611,8 @@ func (x *SecureTextField) WithPrefersCompactControlSizeMetrics(prefersCompactCon
 }
 
 // WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
-func (x *SecureTextField) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *SecureTextField {
-	x.inner.NSTextField.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+func (x *SecureTextField) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *SecureTextField {
+	x.inner.NSTextField.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
 	return x
 }
 
@@ -653,8 +653,8 @@ func (x *SecureTextField) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtend
 }
 
 // WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
-func (x *SecureTextField) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *SecureTextField {
-	x.inner.NSTextField.NSControl.NSView.SetPressureConfiguration(pressureConfiguration)
+func (x *SecureTextField) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *SecureTextField {
+	x.inner.NSTextField.NSControl.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
 	return x
 }
 
@@ -665,8 +665,8 @@ func (x *SecureTextField) WithNextResponder(nextResponder ResponderProvider) *Se
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *SecureTextField) WithMenu(menu *raw.NSMenu) *SecureTextField {
-	x.inner.NSTextField.NSControl.NSView.NSResponder.SetMenu(menu)
+func (x *SecureTextField) WithMenu(menu *Menu) *SecureTextField {
+	x.inner.NSTextField.NSControl.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -677,8 +677,8 @@ func (x *SecureTextField) WithUserActivity(userActivity *foundation.NSUserActivi
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *SecureTextField) WithTouchBar(touchBar *raw.NSTouchBar) *SecureTextField {
-	x.inner.NSTextField.NSControl.NSView.NSResponder.SetTouchBar(touchBar)
+func (x *SecureTextField) WithTouchBar(touchBar *TouchBar) *SecureTextField {
+	x.inner.NSTextField.NSControl.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -695,9 +695,9 @@ type SecureTextFieldable interface {
 	Unwrap() *raw.NSSecureTextField
 	WithPlaceholderString(placeholderString string) *SecureTextField
 	WithPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString) *SecureTextField
-	WithBackgroundColor(backgroundColor *raw.NSColor) *SecureTextField
+	WithBackgroundColor(backgroundColor *Color) *SecureTextField
 	WithDrawsBackground(drawsBackground bool) *SecureTextField
-	WithTextColor(textColor *raw.NSColor) *SecureTextField
+	WithTextColor(textColor *Color) *SecureTextField
 	WithBordered(bordered bool) *SecureTextField
 	WithBezeled(bezeled bool) *SecureTextField
 	WithEditable(editable bool) *SecureTextField
@@ -734,7 +734,7 @@ type SecureTextFieldable interface {
 	WithIntegerValue(integerValue int) *SecureTextField
 	WithFloatValue(floatValue float32) *SecureTextField
 	WithDoubleValue(doubleValue float64) *SecureTextField
-	WithFont(font *raw.NSFont) *SecureTextField
+	WithFont(font *Font) *SecureTextField
 	WithUsesSingleLineMode(usesSingleLineMode bool) *SecureTextField
 	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *SecureTextField
 	WithAlignment(alignment raw.NSTextAlignment) *SecureTextField
@@ -766,7 +766,7 @@ type SecureTextFieldable interface {
 	WithBackgroundFilters(items ...*coreimage.CIFilter) *SecureTextField
 	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *SecureTextField
 	WithContentFilters(items ...*coreimage.CIFilter) *SecureTextField
-	WithShadow(shadow *raw.NSShadow) *SecureTextField
+	WithShadow(shadow *Shadow) *SecureTextField
 	WithClipsToBounds(clipsToBounds bool) *SecureTextField
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *SecureTextField
 	WithToolTip(toolTip string) *SecureTextField
@@ -778,18 +778,18 @@ type SecureTextFieldable interface {
 	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *SecureTextField
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *SecureTextField
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *SecureTextField
-	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *SecureTextField
+	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *SecureTextField
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *SecureTextField
 	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *SecureTextField
 	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *SecureTextField
 	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *SecureTextField
 	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *SecureTextField
 	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *SecureTextField
-	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *SecureTextField
+	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *SecureTextField
 	WithNextResponder(nextResponder ResponderProvider) *SecureTextField
-	WithMenu(menu *raw.NSMenu) *SecureTextField
+	WithMenu(menu *Menu) *SecureTextField
 	WithUserActivity(userActivity *foundation.NSUserActivity) *SecureTextField
-	WithTouchBar(touchBar *raw.NSTouchBar) *SecureTextField
+	WithTouchBar(touchBar *TouchBar) *SecureTextField
 }
 
 var _ SecureTextFieldable = (*SecureTextField)(nil)

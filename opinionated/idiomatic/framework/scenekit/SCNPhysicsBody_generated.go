@@ -84,8 +84,8 @@ func (x *PhysicsBody) WithRollingFriction(rollingFriction float64) *PhysicsBody 
 }
 
 // WithPhysicsShape sets the physicsShape property and returns the receiver for chaining.
-func (x *PhysicsBody) WithPhysicsShape(physicsShape *raw.SCNPhysicsShape) *PhysicsBody {
-	x.inner.SetPhysicsShape(physicsShape)
+func (x *PhysicsBody) WithPhysicsShape(physicsShape *PhysicsShape) *PhysicsBody {
+	x.inner.SetPhysicsShape(physicsShape.Unwrap())
 	return x
 }
 
@@ -469,7 +469,7 @@ type PhysicsBodyable interface {
 	WithFriction(friction float64) *PhysicsBody
 	WithRestitution(restitution float64) *PhysicsBody
 	WithRollingFriction(rollingFriction float64) *PhysicsBody
-	WithPhysicsShape(physicsShape *raw.SCNPhysicsShape) *PhysicsBody
+	WithPhysicsShape(physicsShape *PhysicsShape) *PhysicsBody
 	WithAllowsResting(allowsResting bool) *PhysicsBody
 	WithVelocity(velocity raw.SCNVector3) *PhysicsBody
 	WithAngularVelocity(angularVelocity raw.SCNVector4) *PhysicsBody

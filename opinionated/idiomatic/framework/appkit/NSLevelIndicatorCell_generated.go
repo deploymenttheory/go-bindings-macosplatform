@@ -189,8 +189,8 @@ func (x *LevelIndicatorCell) WithWraps(wraps bool) *LevelIndicatorCell {
 }
 
 // WithFont sets the font property and returns the receiver for chaining.
-func (x *LevelIndicatorCell) WithFont(font *raw.NSFont) *LevelIndicatorCell {
-	x.inner.NSActionCell.NSCell.SetFont(font)
+func (x *LevelIndicatorCell) WithFont(font *Font) *LevelIndicatorCell {
+	x.inner.NSActionCell.NSCell.SetFont(font.Unwrap())
 	return x
 }
 
@@ -237,8 +237,8 @@ func (x *LevelIndicatorCell) WithIntegerValue(integerValue int) *LevelIndicatorC
 }
 
 // WithImage sets the image property and returns the receiver for chaining.
-func (x *LevelIndicatorCell) WithImage(image *raw.NSImage) *LevelIndicatorCell {
-	x.inner.NSActionCell.NSCell.SetImage(image)
+func (x *LevelIndicatorCell) WithImage(image *Image) *LevelIndicatorCell {
+	x.inner.NSActionCell.NSCell.SetImage(image.Unwrap())
 	return x
 }
 
@@ -255,8 +255,8 @@ func (x *LevelIndicatorCell) WithRepresentedObject(representedObject objc.ID) *L
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *LevelIndicatorCell) WithMenu(menu *raw.NSMenu) *LevelIndicatorCell {
-	x.inner.NSActionCell.NSCell.SetMenu(menu)
+func (x *LevelIndicatorCell) WithMenu(menu *Menu) *LevelIndicatorCell {
+	x.inner.NSActionCell.NSCell.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -478,7 +478,7 @@ type LevelIndicatorCellable interface {
 	WithHighlighted(highlighted bool) *LevelIndicatorCell
 	WithAlignment(alignment raw.NSTextAlignment) *LevelIndicatorCell
 	WithWraps(wraps bool) *LevelIndicatorCell
-	WithFont(font *raw.NSFont) *LevelIndicatorCell
+	WithFont(font *Font) *LevelIndicatorCell
 	WithFormatter(formatter *foundation.NSFormatter) *LevelIndicatorCell
 	WithObjectValue(objectValue objc.ID) *LevelIndicatorCell
 	WithStringValue(stringValue string) *LevelIndicatorCell
@@ -486,10 +486,10 @@ type LevelIndicatorCellable interface {
 	WithFloatValue(floatValue float32) *LevelIndicatorCell
 	WithDoubleValue(doubleValue float64) *LevelIndicatorCell
 	WithIntegerValue(integerValue int) *LevelIndicatorCell
-	WithImage(image *raw.NSImage) *LevelIndicatorCell
+	WithImage(image *Image) *LevelIndicatorCell
 	WithControlSize(controlSize raw.NSControlSize) *LevelIndicatorCell
 	WithRepresentedObject(representedObject objc.ID) *LevelIndicatorCell
-	WithMenu(menu *raw.NSMenu) *LevelIndicatorCell
+	WithMenu(menu *Menu) *LevelIndicatorCell
 	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *LevelIndicatorCell
 	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *LevelIndicatorCell
 	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *LevelIndicatorCell

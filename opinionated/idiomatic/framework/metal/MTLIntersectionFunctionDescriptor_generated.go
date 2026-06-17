@@ -49,8 +49,8 @@ func (x *IntersectionFunctionDescriptor) WithSpecializedName(specializedName str
 }
 
 // WithConstantValues sets the constantValues property and returns the receiver for chaining.
-func (x *IntersectionFunctionDescriptor) WithConstantValues(constantValues *raw.MTLFunctionConstantValues) *IntersectionFunctionDescriptor {
-	x.inner.MTLFunctionDescriptor.SetConstantValues(constantValues)
+func (x *IntersectionFunctionDescriptor) WithConstantValues(constantValues *FunctionConstantValues) *IntersectionFunctionDescriptor {
+	x.inner.MTLFunctionDescriptor.SetConstantValues(constantValues.Unwrap())
 	return x
 }
 
@@ -67,7 +67,7 @@ type IntersectionFunctionDescriptorable interface {
 	Unwrap() *raw.MTLIntersectionFunctionDescriptor
 	WithName(name string) *IntersectionFunctionDescriptor
 	WithSpecializedName(specializedName string) *IntersectionFunctionDescriptor
-	WithConstantValues(constantValues *raw.MTLFunctionConstantValues) *IntersectionFunctionDescriptor
+	WithConstantValues(constantValues *FunctionConstantValues) *IntersectionFunctionDescriptor
 	WithOptions(options raw.MTLFunctionOptions) *IntersectionFunctionDescriptor
 }
 

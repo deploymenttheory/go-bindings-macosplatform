@@ -46,8 +46,8 @@ func (x *TabViewController) WithTabStyle(tabStyle raw.NSTabViewControllerTabStyl
 }
 
 // WithTabView sets the tabView property and returns the receiver for chaining.
-func (x *TabViewController) WithTabView(tabView *raw.NSTabView) *TabViewController {
-	x.inner.SetTabView(tabView)
+func (x *TabViewController) WithTabView(tabView *TabView) *TabViewController {
+	x.inner.SetTabView(tabView.Unwrap())
 	return x
 }
 
@@ -144,8 +144,8 @@ func (x *TabViewController) WithNextResponder(nextResponder ResponderProvider) *
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *TabViewController) WithMenu(menu *raw.NSMenu) *TabViewController {
-	x.inner.NSViewController.NSResponder.SetMenu(menu)
+func (x *TabViewController) WithMenu(menu *Menu) *TabViewController {
+	x.inner.NSViewController.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -156,8 +156,8 @@ func (x *TabViewController) WithUserActivity(userActivity *foundation.NSUserActi
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *TabViewController) WithTouchBar(touchBar *raw.NSTouchBar) *TabViewController {
-	x.inner.NSViewController.NSResponder.SetTouchBar(touchBar)
+func (x *TabViewController) WithTouchBar(touchBar *TouchBar) *TabViewController {
+	x.inner.NSViewController.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -269,13 +269,13 @@ func (x *TabViewController) SetCanPropagateSelectedChildViewControllerTitle(canP
 }
 
 // TabViewItems returns the collection as a Go slice.
-func (x *TabViewController) TabViewItems() []*raw.NSTabViewItem {
+func (x *TabViewController) TabViewItems() []*TabViewItem {
 	arr := x.inner.TabViewItems()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSTabViewItem {
-		return raw.NSTabViewItemFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *TabViewItem {
+		return &TabViewItem{inner: raw.NSTabViewItemFromID(purego.Retain(_id))}
 	})
 }
 
@@ -302,7 +302,7 @@ func (x *TabViewController) asResponder() *raw.NSResponder { return &x.inner.NSV
 type TabViewControllerable interface {
 	Unwrap() *raw.NSTabViewController
 	WithTabStyle(tabStyle raw.NSTabViewControllerTabStyle) *TabViewController
-	WithTabView(tabView *raw.NSTabView) *TabViewController
+	WithTabView(tabView *TabView) *TabViewController
 	WithTransitionOptions(transitionOptions raw.NSViewControllerTransitionOptions) *TabViewController
 	WithCanPropagateSelectedChildViewControllerTitle(canPropagateSelectedChildViewControllerTitle bool) *TabViewController
 	WithTabViewItems(items ...*raw.NSTabViewItem) *TabViewController
@@ -315,9 +315,9 @@ type TabViewControllerable interface {
 	WithSourceItemView(sourceItemView ViewProvider) *TabViewController
 	WithPreferredScreenOrigin(preferredScreenOrigin corefoundation.CGPoint) *TabViewController
 	WithNextResponder(nextResponder ResponderProvider) *TabViewController
-	WithMenu(menu *raw.NSMenu) *TabViewController
+	WithMenu(menu *Menu) *TabViewController
 	WithUserActivity(userActivity *foundation.NSUserActivity) *TabViewController
-	WithTouchBar(touchBar *raw.NSTouchBar) *TabViewController
+	WithTouchBar(touchBar *TouchBar) *TabViewController
 	AddTabViewItem(tabViewItem *raw.NSTabViewItem)
 	InsertTabViewItemAtIndex(tabViewItem *raw.NSTabViewItem, index int)
 	RemoveTabViewItem(tabViewItem *raw.NSTabViewItem)
@@ -337,7 +337,7 @@ type TabViewControllerable interface {
 	SetTransitionOptions(transitionOptions raw.NSViewControllerTransitionOptions)
 	CanPropagateSelectedChildViewControllerTitle() bool
 	SetCanPropagateSelectedChildViewControllerTitle(canPropagateSelectedChildViewControllerTitle bool)
-	TabViewItems() []*raw.NSTabViewItem
+	TabViewItems() []*TabViewItem
 	SetTabViewItems(tabViewItems *foundation.NSArray[*raw.NSTabViewItem])
 	SelectedTabViewItemIndex() int
 	SetSelectedTabViewItemIndex(selectedTabViewItemIndex int)

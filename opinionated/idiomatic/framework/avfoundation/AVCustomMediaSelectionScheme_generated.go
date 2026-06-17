@@ -59,13 +59,13 @@ func (x *CustomMediaSelectionScheme) AvailableLanguages() []string {
 }
 
 // Selectors returns the collection as a Go slice.
-func (x *CustomMediaSelectionScheme) Selectors() []*raw.AVMediaPresentationSelector {
+func (x *CustomMediaSelectionScheme) Selectors() []*MediaPresentationSelector {
 	arr := x.inner.Selectors()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVMediaPresentationSelector {
-		return raw.AVMediaPresentationSelectorFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MediaPresentationSelector {
+		return &MediaPresentationSelector{inner: raw.AVMediaPresentationSelectorFromID(purego.Retain(_id))}
 	})
 }
 
@@ -75,7 +75,7 @@ type CustomMediaSelectionSchemeable interface {
 	MediaPresentationSettingsForSelectorComplementaryToLanguageSettings(selector *raw.AVMediaPresentationSelector, language string, settings *foundation.NSArray[*raw.AVMediaPresentationSetting]) *foundation.NSArray[*raw.AVMediaPresentationSetting]
 	ShouldOfferLanguageSelection() bool
 	AvailableLanguages() []string
-	Selectors() []*raw.AVMediaPresentationSelector
+	Selectors() []*MediaPresentationSelector
 }
 
 var _ CustomMediaSelectionSchemeable = (*CustomMediaSelectionScheme)(nil)

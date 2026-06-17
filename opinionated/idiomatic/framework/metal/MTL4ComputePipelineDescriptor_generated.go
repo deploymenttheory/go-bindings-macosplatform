@@ -67,8 +67,8 @@ func (x *MTL4ComputePipelineDescriptor) WithSupportBinaryLinking(supportBinaryLi
 }
 
 // WithStaticLinkingDescriptor sets the staticLinkingDescriptor property and returns the receiver for chaining.
-func (x *MTL4ComputePipelineDescriptor) WithStaticLinkingDescriptor(staticLinkingDescriptor *raw.MTL4StaticLinkingDescriptor) *MTL4ComputePipelineDescriptor {
-	x.inner.SetStaticLinkingDescriptor(staticLinkingDescriptor)
+func (x *MTL4ComputePipelineDescriptor) WithStaticLinkingDescriptor(staticLinkingDescriptor *MTL4StaticLinkingDescriptor) *MTL4ComputePipelineDescriptor {
+	x.inner.SetStaticLinkingDescriptor(staticLinkingDescriptor.Unwrap())
 	return x
 }
 
@@ -85,8 +85,8 @@ func (x *MTL4ComputePipelineDescriptor) WithLabel(label string) *MTL4ComputePipe
 }
 
 // WithOptions sets the options property and returns the receiver for chaining.
-func (x *MTL4ComputePipelineDescriptor) WithOptions(options *raw.MTL4PipelineOptions) *MTL4ComputePipelineDescriptor {
-	x.inner.MTL4PipelineDescriptor.SetOptions(options)
+func (x *MTL4ComputePipelineDescriptor) WithOptions(options *MTL4PipelineOptions) *MTL4ComputePipelineDescriptor {
+	x.inner.MTL4PipelineDescriptor.SetOptions(options.Unwrap())
 	return x
 }
 
@@ -183,10 +183,10 @@ type MTL4ComputePipelineDescriptorable interface {
 	WithMaxTotalThreadsPerThreadgroup(maxTotalThreadsPerThreadgroup uint) *MTL4ComputePipelineDescriptor
 	WithRequiredThreadsPerThreadgroup(requiredThreadsPerThreadgroup raw.MTLSize) *MTL4ComputePipelineDescriptor
 	WithSupportBinaryLinking(supportBinaryLinking bool) *MTL4ComputePipelineDescriptor
-	WithStaticLinkingDescriptor(staticLinkingDescriptor *raw.MTL4StaticLinkingDescriptor) *MTL4ComputePipelineDescriptor
+	WithStaticLinkingDescriptor(staticLinkingDescriptor *MTL4StaticLinkingDescriptor) *MTL4ComputePipelineDescriptor
 	WithSupportIndirectCommandBuffers(supportIndirectCommandBuffers raw.MTL4IndirectCommandBufferSupportState) *MTL4ComputePipelineDescriptor
 	WithLabel(label string) *MTL4ComputePipelineDescriptor
-	WithOptions(options *raw.MTL4PipelineOptions) *MTL4ComputePipelineDescriptor
+	WithOptions(options *MTL4PipelineOptions) *MTL4ComputePipelineDescriptor
 	Reset()
 	ComputeFunctionDescriptor() *MTL4FunctionDescriptor
 	SetComputeFunctionDescriptor(computeFunctionDescriptor *raw.MTL4FunctionDescriptor)

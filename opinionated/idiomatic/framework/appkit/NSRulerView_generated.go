@@ -50,8 +50,8 @@ func NewRulerViewWithScrollViewOrientation(scrollView *raw.NSScrollView, orienta
 }
 
 // WithScrollView sets the scrollView property and returns the receiver for chaining.
-func (x *RulerView) WithScrollView(scrollView *raw.NSScrollView) *RulerView {
-	x.inner.SetScrollView(scrollView)
+func (x *RulerView) WithScrollView(scrollView *ScrollView) *RulerView {
+	x.inner.SetScrollView(scrollView.Unwrap())
 	return x
 }
 
@@ -300,8 +300,8 @@ func (x *RulerView) WithContentFilters(items ...*coreimage.CIFilter) *RulerView 
 }
 
 // WithShadow sets the shadow property and returns the receiver for chaining.
-func (x *RulerView) WithShadow(shadow *raw.NSShadow) *RulerView {
-	x.inner.NSView.SetShadow(shadow)
+func (x *RulerView) WithShadow(shadow *Shadow) *RulerView {
+	x.inner.NSView.SetShadow(shadow.Unwrap())
 	return x
 }
 
@@ -382,8 +382,8 @@ func (x *RulerView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSi
 }
 
 // WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
-func (x *RulerView) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *RulerView {
-	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+func (x *RulerView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *RulerView {
+	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
 	return x
 }
 
@@ -424,8 +424,8 @@ func (x *RulerView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDyna
 }
 
 // WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
-func (x *RulerView) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *RulerView {
-	x.inner.NSView.SetPressureConfiguration(pressureConfiguration)
+func (x *RulerView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *RulerView {
+	x.inner.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
 	return x
 }
 
@@ -436,8 +436,8 @@ func (x *RulerView) WithNextResponder(nextResponder ResponderProvider) *RulerVie
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *RulerView) WithMenu(menu *raw.NSMenu) *RulerView {
-	x.inner.NSView.NSResponder.SetMenu(menu)
+func (x *RulerView) WithMenu(menu *Menu) *RulerView {
+	x.inner.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -448,8 +448,8 @@ func (x *RulerView) WithUserActivity(userActivity *foundation.NSUserActivity) *R
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *RulerView) WithTouchBar(touchBar *raw.NSTouchBar) *RulerView {
-	x.inner.NSView.NSResponder.SetTouchBar(touchBar)
+func (x *RulerView) WithTouchBar(touchBar *TouchBar) *RulerView {
+	x.inner.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -591,13 +591,13 @@ func (x *RulerView) SetClientView(clientView *raw.NSView) {
 }
 
 // Markers returns the collection as a Go slice.
-func (x *RulerView) Markers() []*raw.NSRulerMarker {
+func (x *RulerView) Markers() []*RulerMarker {
 	arr := x.inner.Markers()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSRulerMarker {
-		return raw.NSRulerMarkerFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *RulerMarker {
+		return &RulerMarker{inner: raw.NSRulerMarkerFromID(purego.Retain(_id))}
 	})
 }
 
@@ -627,7 +627,7 @@ func (x *RulerView) asResponder() *raw.NSResponder { return &x.inner.NSView.NSRe
 // RulerViewable is the interface implemented by [RulerView], for mocking and DI.
 type RulerViewable interface {
 	Unwrap() *raw.NSRulerView
-	WithScrollView(scrollView *raw.NSScrollView) *RulerView
+	WithScrollView(scrollView *ScrollView) *RulerView
 	WithOrientation(orientation raw.NSRulerOrientation) *RulerView
 	WithRuleThickness(ruleThickness float64) *RulerView
 	WithReservedThicknessForMarkers(reservedThicknessForMarkers float64) *RulerView
@@ -662,7 +662,7 @@ type RulerViewable interface {
 	WithBackgroundFilters(items ...*coreimage.CIFilter) *RulerView
 	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *RulerView
 	WithContentFilters(items ...*coreimage.CIFilter) *RulerView
-	WithShadow(shadow *raw.NSShadow) *RulerView
+	WithShadow(shadow *Shadow) *RulerView
 	WithClipsToBounds(clipsToBounds bool) *RulerView
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *RulerView
 	WithToolTip(toolTip string) *RulerView
@@ -674,18 +674,18 @@ type RulerViewable interface {
 	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *RulerView
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *RulerView
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *RulerView
-	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *RulerView
+	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *RulerView
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *RulerView
 	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *RulerView
 	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *RulerView
 	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *RulerView
 	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *RulerView
 	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *RulerView
-	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *RulerView
+	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *RulerView
 	WithNextResponder(nextResponder ResponderProvider) *RulerView
-	WithMenu(menu *raw.NSMenu) *RulerView
+	WithMenu(menu *Menu) *RulerView
 	WithUserActivity(userActivity *foundation.NSUserActivity) *RulerView
-	WithTouchBar(touchBar *raw.NSTouchBar) *RulerView
+	WithTouchBar(touchBar *TouchBar) *RulerView
 	AddMarker(marker *raw.NSRulerMarker)
 	RemoveMarker(marker *raw.NSRulerMarker)
 	TrackMarkerWithMouseEvent(marker *raw.NSRulerMarker, event *raw.NSEvent) bool
@@ -711,7 +711,7 @@ type RulerViewable interface {
 	SetOriginOffset(originOffset float64)
 	ClientView() *View
 	SetClientView(clientView *raw.NSView)
-	Markers() []*raw.NSRulerMarker
+	Markers() []*RulerMarker
 	SetMarkers(markers *foundation.NSArray[*raw.NSRulerMarker])
 	AccessoryView() *View
 	SetAccessoryView(accessoryView *raw.NSView)

@@ -50,13 +50,13 @@ func (x *Envelope) StartPoint() unsafe.Pointer {
 }
 
 // Segments returns the collection as a Go slice.
-func (x *Envelope) Segments() []*raw.PHASEEnvelopeSegment {
+func (x *Envelope) Segments() []*EnvelopeSegment {
 	arr := x.inner.Segments()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PHASEEnvelopeSegment {
-		return raw.PHASEEnvelopeSegmentFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *EnvelopeSegment {
+		return &EnvelopeSegment{inner: raw.PHASEEnvelopeSegmentFromID(purego.Retain(_id))}
 	})
 }
 
@@ -83,7 +83,7 @@ type Envelopeable interface {
 	Unwrap() *raw.PHASEEnvelope
 	EvaluateForValue(x_ float64) float64
 	StartPoint() unsafe.Pointer
-	Segments() []*raw.PHASEEnvelopeSegment
+	Segments() []*EnvelopeSegment
 	Domain() *NumericPair
 	Range() *NumericPair
 }

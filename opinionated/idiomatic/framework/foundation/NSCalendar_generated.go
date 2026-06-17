@@ -38,14 +38,14 @@ func NewCalendarWithCalendarIdentifier(ident *raw.NSString) *Calendar {
 }
 
 // WithLocale sets the locale property and returns the receiver for chaining.
-func (x *Calendar) WithLocale(locale *raw.NSLocale) *Calendar {
-	x.inner.SetLocale(locale)
+func (x *Calendar) WithLocale(locale *Locale) *Calendar {
+	x.inner.SetLocale(locale.Unwrap())
 	return x
 }
 
 // WithTimeZone sets the timeZone property and returns the receiver for chaining.
-func (x *Calendar) WithTimeZone(timeZone *raw.NSTimeZone) *Calendar {
-	x.inner.SetTimeZone(timeZone)
+func (x *Calendar) WithTimeZone(timeZone *TimeZone) *Calendar {
+	x.inner.SetTimeZone(timeZone.Unwrap())
 	return x
 }
 
@@ -580,8 +580,8 @@ func (x *Calendar) asObject() *raw.NSObject { return &x.inner.NSObject }
 // Calendarable is the interface implemented by [Calendar], for mocking and DI.
 type Calendarable interface {
 	Unwrap() *raw.NSCalendar
-	WithLocale(locale *raw.NSLocale) *Calendar
-	WithTimeZone(timeZone *raw.NSTimeZone) *Calendar
+	WithLocale(locale *Locale) *Calendar
+	WithTimeZone(timeZone *TimeZone) *Calendar
 	WithFirstWeekday(firstWeekday uint) *Calendar
 	WithMinimumDaysInFirstWeek(minimumDaysInFirstWeek uint) *Calendar
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Calendar

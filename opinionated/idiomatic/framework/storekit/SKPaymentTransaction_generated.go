@@ -62,13 +62,13 @@ func (x *PaymentTransaction) Payment() *Payment {
 }
 
 // Downloads returns the collection as a Go slice.
-func (x *PaymentTransaction) Downloads() []*raw.SKDownload {
+func (x *PaymentTransaction) Downloads() []*Download {
 	arr := x.inner.Downloads()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SKDownload {
-		return raw.SKDownloadFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Download {
+		return &Download{inner: raw.SKDownloadFromID(purego.Retain(_id))}
 	})
 }
 
@@ -92,7 +92,7 @@ type PaymentTransactionable interface {
 	Error() unsafe.Pointer
 	OriginalTransaction() *PaymentTransaction
 	Payment() *Payment
-	Downloads() []*raw.SKDownload
+	Downloads() []*Download
 	TransactionDate() *foundation.NSDate
 	TransactionIdentifier() string
 }

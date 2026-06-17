@@ -46,14 +46,14 @@ func NewManagedObjectContextWithConcurrencyType(ct raw.NSManagedObjectContextCon
 }
 
 // WithPersistentStoreCoordinator sets the persistentStoreCoordinator property and returns the receiver for chaining.
-func (x *ManagedObjectContext) WithPersistentStoreCoordinator(persistentStoreCoordinator *raw.NSPersistentStoreCoordinator) *ManagedObjectContext {
-	x.inner.SetPersistentStoreCoordinator(persistentStoreCoordinator)
+func (x *ManagedObjectContext) WithPersistentStoreCoordinator(persistentStoreCoordinator *PersistentStoreCoordinator) *ManagedObjectContext {
+	x.inner.SetPersistentStoreCoordinator(persistentStoreCoordinator.Unwrap())
 	return x
 }
 
 // WithParentContext sets the parentContext property and returns the receiver for chaining.
-func (x *ManagedObjectContext) WithParentContext(parentContext *raw.NSManagedObjectContext) *ManagedObjectContext {
-	x.inner.SetParentContext(parentContext)
+func (x *ManagedObjectContext) WithParentContext(parentContext *ManagedObjectContext) *ManagedObjectContext {
+	x.inner.SetParentContext(parentContext.Unwrap())
 	return x
 }
 
@@ -460,8 +460,8 @@ func (x *ManagedObjectContext) SetTransactionAuthor(transactionAuthor string) {
 // ManagedObjectContextable is the interface implemented by [ManagedObjectContext], for mocking and DI.
 type ManagedObjectContextable interface {
 	Unwrap() *raw.NSManagedObjectContext
-	WithPersistentStoreCoordinator(persistentStoreCoordinator *raw.NSPersistentStoreCoordinator) *ManagedObjectContext
-	WithParentContext(parentContext *raw.NSManagedObjectContext) *ManagedObjectContext
+	WithPersistentStoreCoordinator(persistentStoreCoordinator *PersistentStoreCoordinator) *ManagedObjectContext
+	WithParentContext(parentContext *ManagedObjectContext) *ManagedObjectContext
 	WithName(name string) *ManagedObjectContext
 	WithUndoManager(undoManager *foundation.NSUndoManager) *ManagedObjectContext
 	WithPropagatesDeletesAtEndOfEvent(propagatesDeletesAtEndOfEvent bool) *ManagedObjectContext

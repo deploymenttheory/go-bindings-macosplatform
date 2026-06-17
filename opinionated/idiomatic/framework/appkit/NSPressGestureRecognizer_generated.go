@@ -91,8 +91,8 @@ func (x *PressGestureRecognizer) WithEnabled(enabled bool) *PressGestureRecogniz
 }
 
 // WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
-func (x *PressGestureRecognizer) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *PressGestureRecognizer {
-	x.inner.NSGestureRecognizer.SetPressureConfiguration(pressureConfiguration)
+func (x *PressGestureRecognizer) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *PressGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetPressureConfiguration(pressureConfiguration.Unwrap())
 	return x
 }
 
@@ -198,7 +198,7 @@ type PressGestureRecognizerable interface {
 	WithState(state raw.NSGestureRecognizerState) *PressGestureRecognizer
 	WithDelegate(delegate raw.NSGestureRecognizerDelegate) *PressGestureRecognizer
 	WithEnabled(enabled bool) *PressGestureRecognizer
-	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *PressGestureRecognizer
+	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *PressGestureRecognizer
 	WithDelaysPrimaryMouseButtonEvents(delaysPrimaryMouseButtonEvents bool) *PressGestureRecognizer
 	WithDelaysSecondaryMouseButtonEvents(delaysSecondaryMouseButtonEvents bool) *PressGestureRecognizer
 	WithDelaysOtherMouseButtonEvents(delaysOtherMouseButtonEvents bool) *PressGestureRecognizer

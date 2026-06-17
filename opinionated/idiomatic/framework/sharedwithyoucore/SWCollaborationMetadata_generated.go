@@ -58,14 +58,14 @@ func (x *CollaborationMetadata) WithTitle(title string) *CollaborationMetadata {
 }
 
 // WithDefaultShareOptions sets the defaultShareOptions property and returns the receiver for chaining.
-func (x *CollaborationMetadata) WithDefaultShareOptions(defaultShareOptions *raw.SWCollaborationShareOptions) *CollaborationMetadata {
-	x.inner.SetDefaultShareOptions(defaultShareOptions)
+func (x *CollaborationMetadata) WithDefaultShareOptions(defaultShareOptions *CollaborationShareOptions) *CollaborationMetadata {
+	x.inner.SetDefaultShareOptions(defaultShareOptions.Unwrap())
 	return x
 }
 
 // WithUserSelectedShareOptions sets the userSelectedShareOptions property and returns the receiver for chaining.
-func (x *CollaborationMetadata) WithUserSelectedShareOptions(userSelectedShareOptions *raw.SWCollaborationShareOptions) *CollaborationMetadata {
-	x.inner.SetUserSelectedShareOptions(userSelectedShareOptions)
+func (x *CollaborationMetadata) WithUserSelectedShareOptions(userSelectedShareOptions *CollaborationShareOptions) *CollaborationMetadata {
+	x.inner.SetUserSelectedShareOptions(userSelectedShareOptions.Unwrap())
 	return x
 }
 
@@ -155,8 +155,8 @@ func (x *CollaborationMetadata) SetInitiatorNameComponents(initiatorNameComponen
 type CollaborationMetadataable interface {
 	Unwrap() *raw.SWCollaborationMetadata
 	WithTitle(title string) *CollaborationMetadata
-	WithDefaultShareOptions(defaultShareOptions *raw.SWCollaborationShareOptions) *CollaborationMetadata
-	WithUserSelectedShareOptions(userSelectedShareOptions *raw.SWCollaborationShareOptions) *CollaborationMetadata
+	WithDefaultShareOptions(defaultShareOptions *CollaborationShareOptions) *CollaborationMetadata
+	WithUserSelectedShareOptions(userSelectedShareOptions *CollaborationShareOptions) *CollaborationMetadata
 	WithInitiatorHandle(initiatorHandle string) *CollaborationMetadata
 	WithInitiatorNameComponents(initiatorNameComponents *foundation.NSPersonNameComponents) *CollaborationMetadata
 	CollaborationIdentifier() string

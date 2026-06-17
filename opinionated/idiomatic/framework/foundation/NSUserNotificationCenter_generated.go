@@ -101,13 +101,13 @@ func (x *UserNotificationCenter) SetDelegate(delegate raw.NSUserNotificationCent
 }
 
 // ScheduledNotifications returns the collection as a Go slice.
-func (x *UserNotificationCenter) ScheduledNotifications() []*raw.NSUserNotification {
+func (x *UserNotificationCenter) ScheduledNotifications() []*UserNotification {
 	arr := x.inner.ScheduledNotifications()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSUserNotification {
-		return raw.NSUserNotificationFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *UserNotification {
+		return &UserNotification{inner: raw.NSUserNotificationFromID(purego.Retain(_id))}
 	})
 }
 
@@ -117,13 +117,13 @@ func (x *UserNotificationCenter) SetScheduledNotifications(scheduledNotification
 }
 
 // DeliveredNotifications returns the collection as a Go slice.
-func (x *UserNotificationCenter) DeliveredNotifications() []*raw.NSUserNotification {
+func (x *UserNotificationCenter) DeliveredNotifications() []*UserNotification {
 	arr := x.inner.DeliveredNotifications()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSUserNotification {
-		return raw.NSUserNotificationFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *UserNotification {
+		return &UserNotification{inner: raw.NSUserNotificationFromID(purego.Retain(_id))}
 	})
 }
 
@@ -142,9 +142,9 @@ type UserNotificationCenterable interface {
 	RemoveAllDeliveredNotifications()
 	Delegate() raw.NSUserNotificationCenterDelegate
 	SetDelegate(delegate raw.NSUserNotificationCenterDelegate)
-	ScheduledNotifications() []*raw.NSUserNotification
+	ScheduledNotifications() []*UserNotification
 	SetScheduledNotifications(scheduledNotifications *raw.NSArray[*raw.NSUserNotification])
-	DeliveredNotifications() []*raw.NSUserNotification
+	DeliveredNotifications() []*UserNotification
 }
 
 var _ UserNotificationCenterable = (*UserNotificationCenter)(nil)

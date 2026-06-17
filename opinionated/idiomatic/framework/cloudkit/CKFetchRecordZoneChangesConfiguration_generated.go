@@ -39,8 +39,8 @@ func NewFetchRecordZoneChangesConfiguration() *FetchRecordZoneChangesConfigurati
 }
 
 // WithPreviousServerChangeToken sets the previousServerChangeToken property and returns the receiver for chaining.
-func (x *FetchRecordZoneChangesConfiguration) WithPreviousServerChangeToken(previousServerChangeToken *raw.CKServerChangeToken) *FetchRecordZoneChangesConfiguration {
-	x.inner.SetPreviousServerChangeToken(previousServerChangeToken)
+func (x *FetchRecordZoneChangesConfiguration) WithPreviousServerChangeToken(previousServerChangeToken *ServerChangeToken) *FetchRecordZoneChangesConfiguration {
+	x.inner.SetPreviousServerChangeToken(previousServerChangeToken.Unwrap())
 	return x
 }
 
@@ -109,7 +109,7 @@ func (x *FetchRecordZoneChangesConfiguration) SetDesiredKeys(desiredKeys *founda
 // FetchRecordZoneChangesConfigurationable is the interface implemented by [FetchRecordZoneChangesConfiguration], for mocking and DI.
 type FetchRecordZoneChangesConfigurationable interface {
 	Unwrap() *raw.CKFetchRecordZoneChangesConfiguration
-	WithPreviousServerChangeToken(previousServerChangeToken *raw.CKServerChangeToken) *FetchRecordZoneChangesConfiguration
+	WithPreviousServerChangeToken(previousServerChangeToken *ServerChangeToken) *FetchRecordZoneChangesConfiguration
 	WithResultsLimit(resultsLimit uint) *FetchRecordZoneChangesConfiguration
 	WithDesiredKeys(items ...*foundation.NSString) *FetchRecordZoneChangesConfiguration
 	PreviousServerChangeToken() *ServerChangeToken

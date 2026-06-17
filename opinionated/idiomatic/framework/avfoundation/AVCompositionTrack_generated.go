@@ -37,13 +37,13 @@ func NewCompositionTrack() *CompositionTrack {
 }
 
 // FormatDescriptionReplacements returns the collection as a Go slice.
-func (x *CompositionTrack) FormatDescriptionReplacements() []*raw.AVCompositionTrackFormatDescriptionReplacement {
+func (x *CompositionTrack) FormatDescriptionReplacements() []*CompositionTrackFormatDescriptionReplacement {
 	arr := x.inner.FormatDescriptionReplacements()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVCompositionTrackFormatDescriptionReplacement {
-		return raw.AVCompositionTrackFormatDescriptionReplacementFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CompositionTrackFormatDescriptionReplacement {
+		return &CompositionTrackFormatDescriptionReplacement{inner: raw.AVCompositionTrackFormatDescriptionReplacementFromID(purego.Retain(_id))}
 	})
 }
 
@@ -54,7 +54,7 @@ func (x *CompositionTrack) asAssetTrack() *raw.AVAssetTrack { return &x.inner.AV
 // CompositionTrackable is the interface implemented by [CompositionTrack], for mocking and DI.
 type CompositionTrackable interface {
 	Unwrap() *raw.AVCompositionTrack
-	FormatDescriptionReplacements() []*raw.AVCompositionTrackFormatDescriptionReplacement
+	FormatDescriptionReplacements() []*CompositionTrackFormatDescriptionReplacement
 }
 
 var _ CompositionTrackable = (*CompositionTrack)(nil)

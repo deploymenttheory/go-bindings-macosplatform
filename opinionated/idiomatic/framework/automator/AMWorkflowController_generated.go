@@ -36,14 +36,14 @@ func NewWorkflowController() *WorkflowController {
 }
 
 // WithWorkflow sets the workflow property and returns the receiver for chaining.
-func (x *WorkflowController) WithWorkflow(workflow *raw.AMWorkflow) *WorkflowController {
-	x.inner.SetWorkflow(workflow)
+func (x *WorkflowController) WithWorkflow(workflow *Workflow) *WorkflowController {
+	x.inner.SetWorkflow(workflow.Unwrap())
 	return x
 }
 
 // WithWorkflowView sets the workflowView property and returns the receiver for chaining.
-func (x *WorkflowController) WithWorkflowView(workflowView *raw.AMWorkflowView) *WorkflowController {
-	x.inner.SetWorkflowView(workflowView)
+func (x *WorkflowController) WithWorkflowView(workflowView *WorkflowView) *WorkflowController {
+	x.inner.SetWorkflowView(workflowView.Unwrap())
 	return x
 }
 
@@ -134,8 +134,8 @@ func (x *WorkflowController) IsPaused() bool {
 // WorkflowControllerable is the interface implemented by [WorkflowController], for mocking and DI.
 type WorkflowControllerable interface {
 	Unwrap() *raw.AMWorkflowController
-	WithWorkflow(workflow *raw.AMWorkflow) *WorkflowController
-	WithWorkflowView(workflowView *raw.AMWorkflowView) *WorkflowController
+	WithWorkflow(workflow *Workflow) *WorkflowController
+	WithWorkflowView(workflowView *WorkflowView) *WorkflowController
 	WithDelegate(delegate raw.AMWorkflowControllerDelegate) *WorkflowController
 	Run(sender objc.ID)
 	Stop(sender objc.ID)

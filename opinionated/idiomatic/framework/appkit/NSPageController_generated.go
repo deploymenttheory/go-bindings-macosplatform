@@ -115,8 +115,8 @@ func (x *PageController) WithNextResponder(nextResponder ResponderProvider) *Pag
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *PageController) WithMenu(menu *raw.NSMenu) *PageController {
-	x.inner.NSViewController.NSResponder.SetMenu(menu)
+func (x *PageController) WithMenu(menu *Menu) *PageController {
+	x.inner.NSViewController.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -127,8 +127,8 @@ func (x *PageController) WithUserActivity(userActivity *foundation.NSUserActivit
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *PageController) WithTouchBar(touchBar *raw.NSTouchBar) *PageController {
-	x.inner.NSViewController.NSResponder.SetTouchBar(touchBar)
+func (x *PageController) WithTouchBar(touchBar *TouchBar) *PageController {
+	x.inner.NSViewController.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -224,9 +224,9 @@ type PageControllerable interface {
 	WithSourceItemView(sourceItemView ViewProvider) *PageController
 	WithPreferredScreenOrigin(preferredScreenOrigin corefoundation.CGPoint) *PageController
 	WithNextResponder(nextResponder ResponderProvider) *PageController
-	WithMenu(menu *raw.NSMenu) *PageController
+	WithMenu(menu *Menu) *PageController
 	WithUserActivity(userActivity *foundation.NSUserActivity) *PageController
-	WithTouchBar(touchBar *raw.NSTouchBar) *PageController
+	WithTouchBar(touchBar *TouchBar) *PageController
 	NavigateForwardToObject(object objc.ID)
 	CompleteTransition()
 	NavigateBack(sender objc.ID)

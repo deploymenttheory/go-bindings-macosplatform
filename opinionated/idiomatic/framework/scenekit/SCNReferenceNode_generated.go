@@ -66,14 +66,14 @@ func (x *ReferenceNode) WithName(name string) *ReferenceNode {
 }
 
 // WithLight sets the light property and returns the receiver for chaining.
-func (x *ReferenceNode) WithLight(light *raw.SCNLight) *ReferenceNode {
-	x.inner.SCNNode.SetLight(light)
+func (x *ReferenceNode) WithLight(light *Light) *ReferenceNode {
+	x.inner.SCNNode.SetLight(light.Unwrap())
 	return x
 }
 
 // WithCamera sets the camera property and returns the receiver for chaining.
-func (x *ReferenceNode) WithCamera(camera *raw.SCNCamera) *ReferenceNode {
-	x.inner.SCNNode.SetCamera(camera)
+func (x *ReferenceNode) WithCamera(camera *Camera) *ReferenceNode {
+	x.inner.SCNNode.SetCamera(camera.Unwrap())
 	return x
 }
 
@@ -84,14 +84,14 @@ func (x *ReferenceNode) WithGeometry(geometry GeometryProvider) *ReferenceNode {
 }
 
 // WithSkinner sets the skinner property and returns the receiver for chaining.
-func (x *ReferenceNode) WithSkinner(skinner *raw.SCNSkinner) *ReferenceNode {
-	x.inner.SCNNode.SetSkinner(skinner)
+func (x *ReferenceNode) WithSkinner(skinner *Skinner) *ReferenceNode {
+	x.inner.SCNNode.SetSkinner(skinner.Unwrap())
 	return x
 }
 
 // WithMorpher sets the morpher property and returns the receiver for chaining.
-func (x *ReferenceNode) WithMorpher(morpher *raw.SCNMorpher) *ReferenceNode {
-	x.inner.SCNNode.SetMorpher(morpher)
+func (x *ReferenceNode) WithMorpher(morpher *Morpher) *ReferenceNode {
+	x.inner.SCNNode.SetMorpher(morpher.Unwrap())
 	return x
 }
 
@@ -186,14 +186,14 @@ func (x *ReferenceNode) WithMovabilityHint(movabilityHint raw.SCNMovabilityHint)
 }
 
 // WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
-func (x *ReferenceNode) WithPhysicsBody(physicsBody *raw.SCNPhysicsBody) *ReferenceNode {
-	x.inner.SCNNode.SetPhysicsBody(physicsBody)
+func (x *ReferenceNode) WithPhysicsBody(physicsBody *PhysicsBody) *ReferenceNode {
+	x.inner.SCNNode.SetPhysicsBody(physicsBody.Unwrap())
 	return x
 }
 
 // WithPhysicsField sets the physicsField property and returns the receiver for chaining.
-func (x *ReferenceNode) WithPhysicsField(physicsField *raw.SCNPhysicsField) *ReferenceNode {
-	x.inner.SCNNode.SetPhysicsField(physicsField)
+func (x *ReferenceNode) WithPhysicsField(physicsField *PhysicsField) *ReferenceNode {
+	x.inner.SCNNode.SetPhysicsField(physicsField.Unwrap())
 	return x
 }
 
@@ -296,11 +296,11 @@ type ReferenceNodeable interface {
 	WithReferenceURL(referenceURL string) *ReferenceNode
 	WithLoadingPolicy(loadingPolicy raw.SCNReferenceLoadingPolicy) *ReferenceNode
 	WithName(name string) *ReferenceNode
-	WithLight(light *raw.SCNLight) *ReferenceNode
-	WithCamera(camera *raw.SCNCamera) *ReferenceNode
+	WithLight(light *Light) *ReferenceNode
+	WithCamera(camera *Camera) *ReferenceNode
 	WithGeometry(geometry GeometryProvider) *ReferenceNode
-	WithSkinner(skinner *raw.SCNSkinner) *ReferenceNode
-	WithMorpher(morpher *raw.SCNMorpher) *ReferenceNode
+	WithSkinner(skinner *Skinner) *ReferenceNode
+	WithMorpher(morpher *Morpher) *ReferenceNode
 	WithTransform(transform quartzcore.CATransform3D) *ReferenceNode
 	WithWorldTransform(worldTransform quartzcore.CATransform3D) *ReferenceNode
 	WithPosition(position raw.SCNVector3) *ReferenceNode
@@ -316,8 +316,8 @@ type ReferenceNodeable interface {
 	WithRenderingOrder(renderingOrder int) *ReferenceNode
 	WithCastsShadow(castsShadow bool) *ReferenceNode
 	WithMovabilityHint(movabilityHint raw.SCNMovabilityHint) *ReferenceNode
-	WithPhysicsBody(physicsBody *raw.SCNPhysicsBody) *ReferenceNode
-	WithPhysicsField(physicsField *raw.SCNPhysicsField) *ReferenceNode
+	WithPhysicsBody(physicsBody *PhysicsBody) *ReferenceNode
+	WithPhysicsField(physicsField *PhysicsField) *ReferenceNode
 	WithConstraints(items ...ConstraintProvider) *ReferenceNode
 	WithFilters(items ...*coreimage.CIFilter) *ReferenceNode
 	WithPaused(paused bool) *ReferenceNode

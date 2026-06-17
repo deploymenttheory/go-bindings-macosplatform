@@ -70,8 +70,8 @@ func (x *EffectNode) WithBlendMode(blendMode raw.SKBlendMode) *EffectNode {
 }
 
 // WithShader sets the shader property and returns the receiver for chaining.
-func (x *EffectNode) WithShader(shader *raw.SKShader) *EffectNode {
-	x.inner.SetShader(shader)
+func (x *EffectNode) WithShader(shader *Shader) *EffectNode {
+	x.inner.SetShader(shader.Unwrap())
 	return x
 }
 
@@ -142,8 +142,8 @@ func (x *EffectNode) WithName(name string) *EffectNode {
 }
 
 // WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
-func (x *EffectNode) WithPhysicsBody(physicsBody *raw.SKPhysicsBody) *EffectNode {
-	x.inner.SKNode.SetPhysicsBody(physicsBody)
+func (x *EffectNode) WithPhysicsBody(physicsBody *PhysicsBody) *EffectNode {
+	x.inner.SKNode.SetPhysicsBody(physicsBody.Unwrap())
 	return x
 }
 
@@ -154,8 +154,8 @@ func (x *EffectNode) WithUserData(userData *foundation.NSMutableDictionary[objc.
 }
 
 // WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
-func (x *EffectNode) WithReachConstraints(reachConstraints *raw.SKReachConstraints) *EffectNode {
-	x.inner.SKNode.SetReachConstraints(reachConstraints)
+func (x *EffectNode) WithReachConstraints(reachConstraints *ReachConstraints) *EffectNode {
+	x.inner.SKNode.SetReachConstraints(reachConstraints.Unwrap())
 	return x
 }
 
@@ -311,7 +311,7 @@ type EffectNodeable interface {
 	WithShouldEnableEffects(shouldEnableEffects bool) *EffectNode
 	WithShouldRasterize(shouldRasterize bool) *EffectNode
 	WithBlendMode(blendMode raw.SKBlendMode) *EffectNode
-	WithShader(shader *raw.SKShader) *EffectNode
+	WithShader(shader *Shader) *EffectNode
 	WithPosition(position corefoundation.CGPoint) *EffectNode
 	WithZPosition(zPosition float64) *EffectNode
 	WithZRotation(zRotation float64) *EffectNode
@@ -323,9 +323,9 @@ type EffectNodeable interface {
 	WithHidden(hidden bool) *EffectNode
 	WithUserInteractionEnabled(userInteractionEnabled bool) *EffectNode
 	WithName(name string) *EffectNode
-	WithPhysicsBody(physicsBody *raw.SKPhysicsBody) *EffectNode
+	WithPhysicsBody(physicsBody *PhysicsBody) *EffectNode
 	WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *EffectNode
-	WithReachConstraints(reachConstraints *raw.SKReachConstraints) *EffectNode
+	WithReachConstraints(reachConstraints *ReachConstraints) *EffectNode
 	WithConstraints(items ...*raw.SKConstraint) *EffectNode
 	WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *EffectNode
 	WithAccessibilityElement(accessibilityElement bool) *EffectNode

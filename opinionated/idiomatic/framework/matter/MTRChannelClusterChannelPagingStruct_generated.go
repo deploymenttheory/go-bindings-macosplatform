@@ -36,14 +36,14 @@ func NewMTRChannelClusterChannelPagingStruct() *MTRChannelClusterChannelPagingSt
 }
 
 // WithPreviousToken sets the previousToken property and returns the receiver for chaining.
-func (x *MTRChannelClusterChannelPagingStruct) WithPreviousToken(previousToken *raw.MTRChannelClusterPageTokenStruct) *MTRChannelClusterChannelPagingStruct {
-	x.inner.SetPreviousToken(previousToken)
+func (x *MTRChannelClusterChannelPagingStruct) WithPreviousToken(previousToken *MTRChannelClusterPageTokenStruct) *MTRChannelClusterChannelPagingStruct {
+	x.inner.SetPreviousToken(previousToken.Unwrap())
 	return x
 }
 
 // WithNextToken sets the nextToken property and returns the receiver for chaining.
-func (x *MTRChannelClusterChannelPagingStruct) WithNextToken(nextToken *raw.MTRChannelClusterPageTokenStruct) *MTRChannelClusterChannelPagingStruct {
-	x.inner.SetNextToken(nextToken)
+func (x *MTRChannelClusterChannelPagingStruct) WithNextToken(nextToken *MTRChannelClusterPageTokenStruct) *MTRChannelClusterChannelPagingStruct {
+	x.inner.SetNextToken(nextToken.Unwrap())
 	return x
 }
 
@@ -78,8 +78,8 @@ func (x *MTRChannelClusterChannelPagingStruct) SetNextToken(nextToken *raw.MTRCh
 // MTRChannelClusterChannelPagingStructable is the interface implemented by [MTRChannelClusterChannelPagingStruct], for mocking and DI.
 type MTRChannelClusterChannelPagingStructable interface {
 	Unwrap() *raw.MTRChannelClusterChannelPagingStruct
-	WithPreviousToken(previousToken *raw.MTRChannelClusterPageTokenStruct) *MTRChannelClusterChannelPagingStruct
-	WithNextToken(nextToken *raw.MTRChannelClusterPageTokenStruct) *MTRChannelClusterChannelPagingStruct
+	WithPreviousToken(previousToken *MTRChannelClusterPageTokenStruct) *MTRChannelClusterChannelPagingStruct
+	WithNextToken(nextToken *MTRChannelClusterPageTokenStruct) *MTRChannelClusterChannelPagingStruct
 	PreviousToken() *MTRChannelClusterPageTokenStruct
 	SetPreviousToken(previousToken *raw.MTRChannelClusterPageTokenStruct)
 	NextToken() *MTRChannelClusterPageTokenStruct

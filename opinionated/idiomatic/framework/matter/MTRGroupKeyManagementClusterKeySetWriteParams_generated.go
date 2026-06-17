@@ -37,8 +37,8 @@ func NewMTRGroupKeyManagementClusterKeySetWriteParams() *MTRGroupKeyManagementCl
 }
 
 // WithGroupKeySet sets the groupKeySet property and returns the receiver for chaining.
-func (x *MTRGroupKeyManagementClusterKeySetWriteParams) WithGroupKeySet(groupKeySet *raw.MTRGroupKeyManagementClusterGroupKeySetStruct) *MTRGroupKeyManagementClusterKeySetWriteParams {
-	x.inner.SetGroupKeySet(groupKeySet)
+func (x *MTRGroupKeyManagementClusterKeySetWriteParams) WithGroupKeySet(groupKeySet *MTRGroupKeyManagementClusterGroupKeySetStruct) *MTRGroupKeyManagementClusterKeySetWriteParams {
+	x.inner.SetGroupKeySet(groupKeySet.Unwrap())
 	return x
 }
 
@@ -91,7 +91,7 @@ func (x *MTRGroupKeyManagementClusterKeySetWriteParams) SetServerSideProcessingT
 // MTRGroupKeyManagementClusterKeySetWriteParamsable is the interface implemented by [MTRGroupKeyManagementClusterKeySetWriteParams], for mocking and DI.
 type MTRGroupKeyManagementClusterKeySetWriteParamsable interface {
 	Unwrap() *raw.MTRGroupKeyManagementClusterKeySetWriteParams
-	WithGroupKeySet(groupKeySet *raw.MTRGroupKeyManagementClusterGroupKeySetStruct) *MTRGroupKeyManagementClusterKeySetWriteParams
+	WithGroupKeySet(groupKeySet *MTRGroupKeyManagementClusterGroupKeySetStruct) *MTRGroupKeyManagementClusterKeySetWriteParams
 	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRGroupKeyManagementClusterKeySetWriteParams
 	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRGroupKeyManagementClusterKeySetWriteParams
 	GroupKeySet() *MTRGroupKeyManagementClusterGroupKeySetStruct

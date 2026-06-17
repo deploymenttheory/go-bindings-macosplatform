@@ -38,8 +38,8 @@ func NewCommandBufferWithCommandBuffer(commandBuffer metal.MTLCommandBuffer) *Co
 }
 
 // WithPredicate sets the predicate property and returns the receiver for chaining.
-func (x *CommandBuffer) WithPredicate(predicate *raw.MPSPredicate) *CommandBuffer {
-	x.inner.SetPredicate(predicate)
+func (x *CommandBuffer) WithPredicate(predicate *Predicate) *CommandBuffer {
+	x.inner.SetPredicate(predicate.Unwrap())
 	return x
 }
 
@@ -96,7 +96,7 @@ func (x *CommandBuffer) SetHeapProvider(heapProvider raw.MPSHeapProvider) {
 // CommandBufferable is the interface implemented by [CommandBuffer], for mocking and DI.
 type CommandBufferable interface {
 	Unwrap() *raw.MPSCommandBuffer
-	WithPredicate(predicate *raw.MPSPredicate) *CommandBuffer
+	WithPredicate(predicate *Predicate) *CommandBuffer
 	WithHeapProvider(heapProvider raw.MPSHeapProvider) *CommandBuffer
 	CommitAndContinue()
 	PrefetchHeapForWorkloadSize(size uint)

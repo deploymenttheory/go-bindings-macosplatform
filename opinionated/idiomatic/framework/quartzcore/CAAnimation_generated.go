@@ -37,8 +37,8 @@ func NewAnimation() *Animation {
 }
 
 // WithTimingFunction sets the timingFunction property and returns the receiver for chaining.
-func (x *Animation) WithTimingFunction(timingFunction *raw.CAMediaTimingFunction) *Animation {
-	x.inner.SetTimingFunction(timingFunction)
+func (x *Animation) WithTimingFunction(timingFunction *MediaTimingFunction) *Animation {
+	x.inner.SetTimingFunction(timingFunction.Unwrap())
 	return x
 }
 
@@ -114,7 +114,7 @@ func (x *Animation) asAnimation() *raw.CAAnimation { return x.inner }
 // Animationable is the interface implemented by [Animation], for mocking and DI.
 type Animationable interface {
 	Unwrap() *raw.CAAnimation
-	WithTimingFunction(timingFunction *raw.CAMediaTimingFunction) *Animation
+	WithTimingFunction(timingFunction *MediaTimingFunction) *Animation
 	WithDelegate(delegate raw.CAAnimationDelegate) *Animation
 	WithRemovedOnCompletion(removedOnCompletion bool) *Animation
 	WithPreferredFrameRateRange(preferredFrameRateRange raw.CAFrameRateRange) *Animation

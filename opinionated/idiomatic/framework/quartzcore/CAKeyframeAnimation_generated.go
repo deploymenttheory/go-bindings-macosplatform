@@ -149,14 +149,14 @@ func (x *KeyframeAnimation) WithCumulative(cumulative bool) *KeyframeAnimation {
 }
 
 // WithValueFunction sets the valueFunction property and returns the receiver for chaining.
-func (x *KeyframeAnimation) WithValueFunction(valueFunction *raw.CAValueFunction) *KeyframeAnimation {
-	x.inner.CAPropertyAnimation.SetValueFunction(valueFunction)
+func (x *KeyframeAnimation) WithValueFunction(valueFunction *ValueFunction) *KeyframeAnimation {
+	x.inner.CAPropertyAnimation.SetValueFunction(valueFunction.Unwrap())
 	return x
 }
 
 // WithTimingFunction sets the timingFunction property and returns the receiver for chaining.
-func (x *KeyframeAnimation) WithTimingFunction(timingFunction *raw.CAMediaTimingFunction) *KeyframeAnimation {
-	x.inner.CAPropertyAnimation.CAAnimation.SetTimingFunction(timingFunction)
+func (x *KeyframeAnimation) WithTimingFunction(timingFunction *MediaTimingFunction) *KeyframeAnimation {
+	x.inner.CAPropertyAnimation.CAAnimation.SetTimingFunction(timingFunction.Unwrap())
 	return x
 }
 
@@ -215,13 +215,13 @@ func (x *KeyframeAnimation) SetKeyTimes(keyTimes *foundation.NSArray[*foundation
 }
 
 // TimingFunctions returns the collection as a Go slice.
-func (x *KeyframeAnimation) TimingFunctions() []*raw.CAMediaTimingFunction {
+func (x *KeyframeAnimation) TimingFunctions() []*MediaTimingFunction {
 	arr := x.inner.TimingFunctions()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CAMediaTimingFunction {
-		return raw.CAMediaTimingFunctionFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MediaTimingFunction {
+		return &MediaTimingFunction{inner: raw.CAMediaTimingFunctionFromID(purego.Retain(_id))}
 	})
 }
 
@@ -323,8 +323,8 @@ type KeyframeAnimationable interface {
 	WithKeyPath(keyPath string) *KeyframeAnimation
 	WithAdditive(additive bool) *KeyframeAnimation
 	WithCumulative(cumulative bool) *KeyframeAnimation
-	WithValueFunction(valueFunction *raw.CAValueFunction) *KeyframeAnimation
-	WithTimingFunction(timingFunction *raw.CAMediaTimingFunction) *KeyframeAnimation
+	WithValueFunction(valueFunction *ValueFunction) *KeyframeAnimation
+	WithTimingFunction(timingFunction *MediaTimingFunction) *KeyframeAnimation
 	WithDelegate(delegate raw.CAAnimationDelegate) *KeyframeAnimation
 	WithRemovedOnCompletion(removedOnCompletion bool) *KeyframeAnimation
 	WithPreferredFrameRateRange(preferredFrameRateRange raw.CAFrameRateRange) *KeyframeAnimation
@@ -334,7 +334,7 @@ type KeyframeAnimationable interface {
 	SetPath(path unsafe.Pointer)
 	KeyTimes() []*foundation.NSNumber
 	SetKeyTimes(keyTimes *foundation.NSArray[*foundation.NSNumber])
-	TimingFunctions() []*raw.CAMediaTimingFunction
+	TimingFunctions() []*MediaTimingFunction
 	SetTimingFunctions(timingFunctions *foundation.NSArray[*raw.CAMediaTimingFunction])
 	CalculationMode() string
 	SetCalculationMode(calculationMode *foundation.NSString)

@@ -133,8 +133,8 @@ func (x *MaterialProperty) WithURLValue(uRLValue string) *MaterialProperty {
 }
 
 // WithTextureSamplerValue sets the textureSamplerValue property and returns the receiver for chaining.
-func (x *MaterialProperty) WithTextureSamplerValue(textureSamplerValue *raw.MDLTextureSampler) *MaterialProperty {
-	x.inner.SetTextureSamplerValue(textureSamplerValue)
+func (x *MaterialProperty) WithTextureSamplerValue(textureSamplerValue *TextureSampler) *MaterialProperty {
+	x.inner.SetTextureSamplerValue(textureSamplerValue.Unwrap())
 	return x
 }
 
@@ -305,7 +305,7 @@ type MaterialPropertyable interface {
 	WithName(name string) *MaterialProperty
 	WithStringValue(stringValue string) *MaterialProperty
 	WithURLValue(uRLValue string) *MaterialProperty
-	WithTextureSamplerValue(textureSamplerValue *raw.MDLTextureSampler) *MaterialProperty
+	WithTextureSamplerValue(textureSamplerValue *TextureSampler) *MaterialProperty
 	WithFloatValue(floatValue float32) *MaterialProperty
 	WithLuminance(luminance float32) *MaterialProperty
 	SetProperties(property *raw.MDLMaterialProperty)

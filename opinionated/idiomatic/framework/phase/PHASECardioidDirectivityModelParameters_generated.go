@@ -39,13 +39,13 @@ func NewCardioidDirectivityModelParametersWithSubbandParameters(subbandParameter
 }
 
 // SubbandParameters returns the collection as a Go slice.
-func (x *CardioidDirectivityModelParameters) SubbandParameters() []*raw.PHASECardioidDirectivityModelSubbandParameters {
+func (x *CardioidDirectivityModelParameters) SubbandParameters() []*CardioidDirectivityModelSubbandParameters {
 	arr := x.inner.SubbandParameters()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PHASECardioidDirectivityModelSubbandParameters {
-		return raw.PHASECardioidDirectivityModelSubbandParametersFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CardioidDirectivityModelSubbandParameters {
+		return &CardioidDirectivityModelSubbandParameters{inner: raw.PHASECardioidDirectivityModelSubbandParametersFromID(purego.Retain(_id))}
 	})
 }
 
@@ -54,7 +54,7 @@ func (x *CardioidDirectivityModelParameters) asDirectivityModelParameters() *raw
 // CardioidDirectivityModelParametersable is the interface implemented by [CardioidDirectivityModelParameters], for mocking and DI.
 type CardioidDirectivityModelParametersable interface {
 	Unwrap() *raw.PHASECardioidDirectivityModelParameters
-	SubbandParameters() []*raw.PHASECardioidDirectivityModelSubbandParameters
+	SubbandParameters() []*CardioidDirectivityModelSubbandParameters
 }
 
 var _ CardioidDirectivityModelParametersable = (*CardioidDirectivityModelParameters)(nil)

@@ -63,8 +63,8 @@ func (x *TitlebarAccessoryViewController) WithAutomaticallyAdjustsSize(automatic
 }
 
 // WithPreferredScrollEdgeEffectStyle sets the preferredScrollEdgeEffectStyle property and returns the receiver for chaining.
-func (x *TitlebarAccessoryViewController) WithPreferredScrollEdgeEffectStyle(preferredScrollEdgeEffectStyle *raw.NSScrollEdgeEffectStyle) *TitlebarAccessoryViewController {
-	x.inner.SetPreferredScrollEdgeEffectStyle(preferredScrollEdgeEffectStyle)
+func (x *TitlebarAccessoryViewController) WithPreferredScrollEdgeEffectStyle(preferredScrollEdgeEffectStyle *ScrollEdgeEffectStyle) *TitlebarAccessoryViewController {
+	x.inner.SetPreferredScrollEdgeEffectStyle(preferredScrollEdgeEffectStyle.Unwrap())
 	return x
 }
 
@@ -127,8 +127,8 @@ func (x *TitlebarAccessoryViewController) WithNextResponder(nextResponder Respon
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *TitlebarAccessoryViewController) WithMenu(menu *raw.NSMenu) *TitlebarAccessoryViewController {
-	x.inner.NSViewController.NSResponder.SetMenu(menu)
+func (x *TitlebarAccessoryViewController) WithMenu(menu *Menu) *TitlebarAccessoryViewController {
+	x.inner.NSViewController.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -139,8 +139,8 @@ func (x *TitlebarAccessoryViewController) WithUserActivity(userActivity *foundat
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *TitlebarAccessoryViewController) WithTouchBar(touchBar *raw.NSTouchBar) *TitlebarAccessoryViewController {
-	x.inner.NSViewController.NSResponder.SetTouchBar(touchBar)
+func (x *TitlebarAccessoryViewController) WithTouchBar(touchBar *TouchBar) *TitlebarAccessoryViewController {
+	x.inner.NSViewController.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -209,7 +209,7 @@ type TitlebarAccessoryViewControllerable interface {
 	WithFullScreenMinHeight(fullScreenMinHeight float64) *TitlebarAccessoryViewController
 	WithHidden(hidden bool) *TitlebarAccessoryViewController
 	WithAutomaticallyAdjustsSize(automaticallyAdjustsSize bool) *TitlebarAccessoryViewController
-	WithPreferredScrollEdgeEffectStyle(preferredScrollEdgeEffectStyle *raw.NSScrollEdgeEffectStyle) *TitlebarAccessoryViewController
+	WithPreferredScrollEdgeEffectStyle(preferredScrollEdgeEffectStyle *ScrollEdgeEffectStyle) *TitlebarAccessoryViewController
 	WithRepresentedObject(representedObject objc.ID) *TitlebarAccessoryViewController
 	WithTitle(title string) *TitlebarAccessoryViewController
 	WithView(view ViewProvider) *TitlebarAccessoryViewController
@@ -218,9 +218,9 @@ type TitlebarAccessoryViewControllerable interface {
 	WithSourceItemView(sourceItemView ViewProvider) *TitlebarAccessoryViewController
 	WithPreferredScreenOrigin(preferredScreenOrigin corefoundation.CGPoint) *TitlebarAccessoryViewController
 	WithNextResponder(nextResponder ResponderProvider) *TitlebarAccessoryViewController
-	WithMenu(menu *raw.NSMenu) *TitlebarAccessoryViewController
+	WithMenu(menu *Menu) *TitlebarAccessoryViewController
 	WithUserActivity(userActivity *foundation.NSUserActivity) *TitlebarAccessoryViewController
-	WithTouchBar(touchBar *raw.NSTouchBar) *TitlebarAccessoryViewController
+	WithTouchBar(touchBar *TouchBar) *TitlebarAccessoryViewController
 	LayoutAttribute() raw.NSLayoutAttribute
 	SetLayoutAttribute(layoutAttribute raw.NSLayoutAttribute)
 	FullScreenMinHeight() float64

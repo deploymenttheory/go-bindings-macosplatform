@@ -57,13 +57,13 @@ func (x *Characteristic) Value() *foundation.NSData {
 }
 
 // Descriptors returns the collection as a Go slice.
-func (x *Characteristic) Descriptors() []*raw.CBDescriptor {
+func (x *Characteristic) Descriptors() []*Descriptor {
 	arr := x.inner.Descriptors()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CBDescriptor {
-		return raw.CBDescriptorFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Descriptor {
+		return &Descriptor{inner: raw.CBDescriptorFromID(purego.Retain(_id))}
 	})
 }
 
@@ -87,7 +87,7 @@ type Characteristicable interface {
 	Service() *Service
 	Properties() raw.CBCharacteristicProperties
 	Value() *foundation.NSData
-	Descriptors() []*raw.CBDescriptor
+	Descriptors() []*Descriptor
 	IsBroadcasted() bool
 	IsNotifying() bool
 }

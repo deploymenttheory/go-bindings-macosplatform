@@ -227,8 +227,8 @@ func (x *TableHeaderView) WithContentFilters(items ...*coreimage.CIFilter) *Tabl
 }
 
 // WithShadow sets the shadow property and returns the receiver for chaining.
-func (x *TableHeaderView) WithShadow(shadow *raw.NSShadow) *TableHeaderView {
-	x.inner.NSView.SetShadow(shadow)
+func (x *TableHeaderView) WithShadow(shadow *Shadow) *TableHeaderView {
+	x.inner.NSView.SetShadow(shadow.Unwrap())
 	return x
 }
 
@@ -309,8 +309,8 @@ func (x *TableHeaderView) WithPrefersCompactControlSizeMetrics(prefersCompactCon
 }
 
 // WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
-func (x *TableHeaderView) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *TableHeaderView {
-	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+func (x *TableHeaderView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *TableHeaderView {
+	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
 	return x
 }
 
@@ -351,8 +351,8 @@ func (x *TableHeaderView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtend
 }
 
 // WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
-func (x *TableHeaderView) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *TableHeaderView {
-	x.inner.NSView.SetPressureConfiguration(pressureConfiguration)
+func (x *TableHeaderView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *TableHeaderView {
+	x.inner.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
 	return x
 }
 
@@ -363,8 +363,8 @@ func (x *TableHeaderView) WithNextResponder(nextResponder ResponderProvider) *Ta
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *TableHeaderView) WithMenu(menu *raw.NSMenu) *TableHeaderView {
-	x.inner.NSView.NSResponder.SetMenu(menu)
+func (x *TableHeaderView) WithMenu(menu *Menu) *TableHeaderView {
+	x.inner.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -375,8 +375,8 @@ func (x *TableHeaderView) WithUserActivity(userActivity *foundation.NSUserActivi
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *TableHeaderView) WithTouchBar(touchBar *raw.NSTouchBar) *TableHeaderView {
-	x.inner.NSView.NSResponder.SetTouchBar(touchBar)
+func (x *TableHeaderView) WithTouchBar(touchBar *TouchBar) *TableHeaderView {
+	x.inner.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -452,7 +452,7 @@ type TableHeaderViewable interface {
 	WithBackgroundFilters(items ...*coreimage.CIFilter) *TableHeaderView
 	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *TableHeaderView
 	WithContentFilters(items ...*coreimage.CIFilter) *TableHeaderView
-	WithShadow(shadow *raw.NSShadow) *TableHeaderView
+	WithShadow(shadow *Shadow) *TableHeaderView
 	WithClipsToBounds(clipsToBounds bool) *TableHeaderView
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *TableHeaderView
 	WithToolTip(toolTip string) *TableHeaderView
@@ -464,18 +464,18 @@ type TableHeaderViewable interface {
 	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *TableHeaderView
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *TableHeaderView
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *TableHeaderView
-	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *TableHeaderView
+	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *TableHeaderView
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *TableHeaderView
 	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *TableHeaderView
 	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *TableHeaderView
 	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *TableHeaderView
 	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *TableHeaderView
 	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *TableHeaderView
-	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *TableHeaderView
+	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *TableHeaderView
 	WithNextResponder(nextResponder ResponderProvider) *TableHeaderView
-	WithMenu(menu *raw.NSMenu) *TableHeaderView
+	WithMenu(menu *Menu) *TableHeaderView
 	WithUserActivity(userActivity *foundation.NSUserActivity) *TableHeaderView
-	WithTouchBar(touchBar *raw.NSTouchBar) *TableHeaderView
+	WithTouchBar(touchBar *TouchBar) *TableHeaderView
 	HeaderRectOfColumn(column int) corefoundation.CGRect
 	ColumnAtPoint(point corefoundation.CGPoint) int
 	TableView() *TableView

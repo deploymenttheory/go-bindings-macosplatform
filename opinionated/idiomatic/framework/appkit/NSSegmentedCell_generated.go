@@ -165,8 +165,8 @@ func (x *SegmentedCell) WithWraps(wraps bool) *SegmentedCell {
 }
 
 // WithFont sets the font property and returns the receiver for chaining.
-func (x *SegmentedCell) WithFont(font *raw.NSFont) *SegmentedCell {
-	x.inner.NSActionCell.NSCell.SetFont(font)
+func (x *SegmentedCell) WithFont(font *Font) *SegmentedCell {
+	x.inner.NSActionCell.NSCell.SetFont(font.Unwrap())
 	return x
 }
 
@@ -213,8 +213,8 @@ func (x *SegmentedCell) WithIntegerValue(integerValue int) *SegmentedCell {
 }
 
 // WithImage sets the image property and returns the receiver for chaining.
-func (x *SegmentedCell) WithImage(image *raw.NSImage) *SegmentedCell {
-	x.inner.NSActionCell.NSCell.SetImage(image)
+func (x *SegmentedCell) WithImage(image *Image) *SegmentedCell {
+	x.inner.NSActionCell.NSCell.SetImage(image.Unwrap())
 	return x
 }
 
@@ -231,8 +231,8 @@ func (x *SegmentedCell) WithRepresentedObject(representedObject objc.ID) *Segmen
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *SegmentedCell) WithMenu(menu *raw.NSMenu) *SegmentedCell {
-	x.inner.NSActionCell.NSCell.SetMenu(menu)
+func (x *SegmentedCell) WithMenu(menu *Menu) *SegmentedCell {
+	x.inner.NSActionCell.NSCell.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -531,7 +531,7 @@ type SegmentedCellable interface {
 	WithHighlighted(highlighted bool) *SegmentedCell
 	WithAlignment(alignment raw.NSTextAlignment) *SegmentedCell
 	WithWraps(wraps bool) *SegmentedCell
-	WithFont(font *raw.NSFont) *SegmentedCell
+	WithFont(font *Font) *SegmentedCell
 	WithFormatter(formatter *foundation.NSFormatter) *SegmentedCell
 	WithObjectValue(objectValue objc.ID) *SegmentedCell
 	WithStringValue(stringValue string) *SegmentedCell
@@ -539,10 +539,10 @@ type SegmentedCellable interface {
 	WithFloatValue(floatValue float32) *SegmentedCell
 	WithDoubleValue(doubleValue float64) *SegmentedCell
 	WithIntegerValue(integerValue int) *SegmentedCell
-	WithImage(image *raw.NSImage) *SegmentedCell
+	WithImage(image *Image) *SegmentedCell
 	WithControlSize(controlSize raw.NSControlSize) *SegmentedCell
 	WithRepresentedObject(representedObject objc.ID) *SegmentedCell
-	WithMenu(menu *raw.NSMenu) *SegmentedCell
+	WithMenu(menu *Menu) *SegmentedCell
 	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *SegmentedCell
 	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *SegmentedCell
 	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *SegmentedCell

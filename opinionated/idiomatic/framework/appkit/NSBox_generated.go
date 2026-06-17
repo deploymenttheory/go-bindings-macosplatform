@@ -60,8 +60,8 @@ func (x *Box) WithTitle(title string) *Box {
 }
 
 // WithTitleFont sets the titleFont property and returns the receiver for chaining.
-func (x *Box) WithTitleFont(titleFont *raw.NSFont) *Box {
-	x.inner.SetTitleFont(titleFont)
+func (x *Box) WithTitleFont(titleFont *Font) *Box {
+	x.inner.SetTitleFont(titleFont.Unwrap())
 	return x
 }
 
@@ -96,14 +96,14 @@ func (x *Box) WithCornerRadius(cornerRadius float64) *Box {
 }
 
 // WithBorderColor sets the borderColor property and returns the receiver for chaining.
-func (x *Box) WithBorderColor(borderColor *raw.NSColor) *Box {
-	x.inner.SetBorderColor(borderColor)
+func (x *Box) WithBorderColor(borderColor *Color) *Box {
+	x.inner.SetBorderColor(borderColor.Unwrap())
 	return x
 }
 
 // WithFillColor sets the fillColor property and returns the receiver for chaining.
-func (x *Box) WithFillColor(fillColor *raw.NSColor) *Box {
-	x.inner.SetFillColor(fillColor)
+func (x *Box) WithFillColor(fillColor *Color) *Box {
+	x.inner.SetFillColor(fillColor.Unwrap())
 	return x
 }
 
@@ -294,8 +294,8 @@ func (x *Box) WithContentFilters(items ...*coreimage.CIFilter) *Box {
 }
 
 // WithShadow sets the shadow property and returns the receiver for chaining.
-func (x *Box) WithShadow(shadow *raw.NSShadow) *Box {
-	x.inner.NSView.SetShadow(shadow)
+func (x *Box) WithShadow(shadow *Shadow) *Box {
+	x.inner.NSView.SetShadow(shadow.Unwrap())
 	return x
 }
 
@@ -376,8 +376,8 @@ func (x *Box) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetr
 }
 
 // WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
-func (x *Box) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *Box {
-	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+func (x *Box) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Box {
+	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
 	return x
 }
 
@@ -418,8 +418,8 @@ func (x *Box) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRan
 }
 
 // WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
-func (x *Box) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *Box {
-	x.inner.NSView.SetPressureConfiguration(pressureConfiguration)
+func (x *Box) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Box {
+	x.inner.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
 	return x
 }
 
@@ -430,8 +430,8 @@ func (x *Box) WithNextResponder(nextResponder ResponderProvider) *Box {
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *Box) WithMenu(menu *raw.NSMenu) *Box {
-	x.inner.NSView.NSResponder.SetMenu(menu)
+func (x *Box) WithMenu(menu *Menu) *Box {
+	x.inner.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -442,8 +442,8 @@ func (x *Box) WithUserActivity(userActivity *foundation.NSUserActivity) *Box {
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *Box) WithTouchBar(touchBar *raw.NSTouchBar) *Box {
-	x.inner.NSView.NSResponder.SetTouchBar(touchBar)
+func (x *Box) WithTouchBar(touchBar *TouchBar) *Box {
+	x.inner.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -627,14 +627,14 @@ type Boxable interface {
 	WithBoxType(boxType raw.NSBoxType) *Box
 	WithTitlePosition(titlePosition raw.NSTitlePosition) *Box
 	WithTitle(title string) *Box
-	WithTitleFont(titleFont *raw.NSFont) *Box
+	WithTitleFont(titleFont *Font) *Box
 	WithContentViewMargins(contentViewMargins corefoundation.CGSize) *Box
 	WithContentView(contentView ViewProvider) *Box
 	WithTransparent(transparent bool) *Box
 	WithBorderWidth(borderWidth float64) *Box
 	WithCornerRadius(cornerRadius float64) *Box
-	WithBorderColor(borderColor *raw.NSColor) *Box
-	WithFillColor(fillColor *raw.NSColor) *Box
+	WithBorderColor(borderColor *Color) *Box
+	WithFillColor(fillColor *Color) *Box
 	WithBorderType(borderType raw.NSBorderType) *Box
 	WithSubviews(items ...ViewProvider) *Box
 	WithHidden(hidden bool) *Box
@@ -661,7 +661,7 @@ type Boxable interface {
 	WithBackgroundFilters(items ...*coreimage.CIFilter) *Box
 	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *Box
 	WithContentFilters(items ...*coreimage.CIFilter) *Box
-	WithShadow(shadow *raw.NSShadow) *Box
+	WithShadow(shadow *Shadow) *Box
 	WithClipsToBounds(clipsToBounds bool) *Box
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Box
 	WithToolTip(toolTip string) *Box
@@ -673,18 +673,18 @@ type Boxable interface {
 	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *Box
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Box
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Box
-	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *Box
+	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Box
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Box
 	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Box
 	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Box
 	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Box
 	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Box
 	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Box
-	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *Box
+	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Box
 	WithNextResponder(nextResponder ResponderProvider) *Box
-	WithMenu(menu *raw.NSMenu) *Box
+	WithMenu(menu *Menu) *Box
 	WithUserActivity(userActivity *foundation.NSUserActivity) *Box
-	WithTouchBar(touchBar *raw.NSTouchBar) *Box
+	WithTouchBar(touchBar *TouchBar) *Box
 	SizeToFit()
 	SetFrameFromContentFrame(contentFrame corefoundation.CGRect)
 	BoxType() raw.NSBoxType

@@ -99,13 +99,13 @@ func (x *AssetReader) SetTimeRange(timeRange coremedia.CMTimeRange) {
 }
 
 // Outputs returns the collection as a Go slice.
-func (x *AssetReader) Outputs() []*raw.AVAssetReaderOutput {
+func (x *AssetReader) Outputs() []*AssetReaderOutput {
 	arr := x.inner.Outputs()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVAssetReaderOutput {
-		return raw.AVAssetReaderOutputFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *AssetReaderOutput {
+		return &AssetReaderOutput{inner: raw.AVAssetReaderOutputFromID(purego.Retain(_id))}
 	})
 }
 
@@ -122,7 +122,7 @@ type AssetReaderable interface {
 	Error() unsafe.Pointer
 	TimeRange() coremedia.CMTimeRange
 	SetTimeRange(timeRange coremedia.CMTimeRange)
-	Outputs() []*raw.AVAssetReaderOutput
+	Outputs() []*AssetReaderOutput
 }
 
 var _ AssetReaderable = (*AssetReader)(nil)

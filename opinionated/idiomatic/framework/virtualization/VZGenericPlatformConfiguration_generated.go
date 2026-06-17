@@ -36,8 +36,8 @@ func NewGenericPlatformConfiguration() *GenericPlatformConfiguration {
 }
 
 // WithMachineIdentifier sets the machineIdentifier property and returns the receiver for chaining.
-func (x *GenericPlatformConfiguration) WithMachineIdentifier(machineIdentifier *raw.VZGenericMachineIdentifier) *GenericPlatformConfiguration {
-	x.inner.SetMachineIdentifier(machineIdentifier)
+func (x *GenericPlatformConfiguration) WithMachineIdentifier(machineIdentifier *GenericMachineIdentifier) *GenericPlatformConfiguration {
+	x.inner.SetMachineIdentifier(machineIdentifier.Unwrap())
 	return x
 }
 
@@ -76,7 +76,7 @@ func (x *GenericPlatformConfiguration) asPlatformConfiguration() *raw.VZPlatform
 // GenericPlatformConfigurationable is the interface implemented by [GenericPlatformConfiguration], for mocking and DI.
 type GenericPlatformConfigurationable interface {
 	Unwrap() *raw.VZGenericPlatformConfiguration
-	WithMachineIdentifier(machineIdentifier *raw.VZGenericMachineIdentifier) *GenericPlatformConfiguration
+	WithMachineIdentifier(machineIdentifier *GenericMachineIdentifier) *GenericPlatformConfiguration
 	WithNestedVirtualizationEnabled(nestedVirtualizationEnabled bool) *GenericPlatformConfiguration
 	MachineIdentifier() *GenericMachineIdentifier
 	SetMachineIdentifier(machineIdentifier *raw.VZGenericMachineIdentifier)

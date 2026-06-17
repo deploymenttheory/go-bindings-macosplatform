@@ -55,13 +55,13 @@ func (x *VirtioGraphicsDeviceConfiguration) WithScanouts(items ...*raw.VZVirtioG
 }
 
 // Scanouts returns the collection as a Go slice.
-func (x *VirtioGraphicsDeviceConfiguration) Scanouts() []*raw.VZVirtioGraphicsScanoutConfiguration {
+func (x *VirtioGraphicsDeviceConfiguration) Scanouts() []*VirtioGraphicsScanoutConfiguration {
 	arr := x.inner.Scanouts()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.VZVirtioGraphicsScanoutConfiguration {
-		return raw.VZVirtioGraphicsScanoutConfigurationFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *VirtioGraphicsScanoutConfiguration {
+		return &VirtioGraphicsScanoutConfiguration{inner: raw.VZVirtioGraphicsScanoutConfigurationFromID(purego.Retain(_id))}
 	})
 }
 
@@ -76,7 +76,7 @@ func (x *VirtioGraphicsDeviceConfiguration) asGraphicsDeviceConfiguration() *raw
 type VirtioGraphicsDeviceConfigurationable interface {
 	Unwrap() *raw.VZVirtioGraphicsDeviceConfiguration
 	WithScanouts(items ...*raw.VZVirtioGraphicsScanoutConfiguration) *VirtioGraphicsDeviceConfiguration
-	Scanouts() []*raw.VZVirtioGraphicsScanoutConfiguration
+	Scanouts() []*VirtioGraphicsScanoutConfiguration
 	SetScanouts(scanouts *foundation.NSArray[*raw.VZVirtioGraphicsScanoutConfiguration])
 }
 

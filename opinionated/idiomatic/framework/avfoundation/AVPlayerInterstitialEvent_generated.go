@@ -40,8 +40,8 @@ func NewPlayerInterstitialEvent() *PlayerInterstitialEvent {
 }
 
 // WithPrimaryItem sets the primaryItem property and returns the receiver for chaining.
-func (x *PlayerInterstitialEvent) WithPrimaryItem(primaryItem *raw.AVPlayerItem) *PlayerInterstitialEvent {
-	x.inner.SetPrimaryItem(primaryItem)
+func (x *PlayerInterstitialEvent) WithPrimaryItem(primaryItem *PlayerItem) *PlayerInterstitialEvent {
+	x.inner.SetPrimaryItem(primaryItem.Unwrap())
 	return x
 }
 
@@ -192,13 +192,13 @@ func (x *PlayerInterstitialEvent) Date() *foundation.NSDate {
 }
 
 // TemplateItems returns the collection as a Go slice.
-func (x *PlayerInterstitialEvent) TemplateItems() []*raw.AVPlayerItem {
+func (x *PlayerInterstitialEvent) TemplateItems() []*PlayerItem {
 	arr := x.inner.TemplateItems()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVPlayerItem {
-		return raw.AVPlayerItemFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PlayerItem {
+		return &PlayerItem{inner: raw.AVPlayerItemFromID(purego.Retain(_id))}
 	})
 }
 
@@ -392,7 +392,7 @@ func (x *PlayerInterstitialEvent) SetSkipControlLocalizedLabelBundleKey(skipCont
 // PlayerInterstitialEventable is the interface implemented by [PlayerInterstitialEvent], for mocking and DI.
 type PlayerInterstitialEventable interface {
 	Unwrap() *raw.AVPlayerInterstitialEvent
-	WithPrimaryItem(primaryItem *raw.AVPlayerItem) *PlayerInterstitialEvent
+	WithPrimaryItem(primaryItem *PlayerItem) *PlayerInterstitialEvent
 	WithIdentifier(identifier string) *PlayerInterstitialEvent
 	WithTime(time_ coremedia.CMTime) *PlayerInterstitialEvent
 	WithDate(date *foundation.NSDate) *PlayerInterstitialEvent
@@ -415,7 +415,7 @@ type PlayerInterstitialEventable interface {
 	Identifier() string
 	Time() coremedia.CMTime
 	Date() *foundation.NSDate
-	TemplateItems() []*raw.AVPlayerItem
+	TemplateItems() []*PlayerItem
 	Restrictions() raw.AVPlayerInterstitialEventRestrictions
 	ResumptionOffset() coremedia.CMTime
 	PlayoutLimit() coremedia.CMTime

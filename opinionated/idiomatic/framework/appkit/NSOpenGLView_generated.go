@@ -42,14 +42,14 @@ func NewOpenGLViewWithFramePixelFormat(frameRect corefoundation.CGRect, format *
 }
 
 // WithOpenGLContext sets the openGLContext property and returns the receiver for chaining.
-func (x *OpenGLView) WithOpenGLContext(openGLContext *raw.NSOpenGLContext) *OpenGLView {
-	x.inner.SetOpenGLContext(openGLContext)
+func (x *OpenGLView) WithOpenGLContext(openGLContext *OpenGLContext) *OpenGLView {
+	x.inner.SetOpenGLContext(openGLContext.Unwrap())
 	return x
 }
 
 // WithPixelFormat sets the pixelFormat property and returns the receiver for chaining.
-func (x *OpenGLView) WithPixelFormat(pixelFormat *raw.NSOpenGLPixelFormat) *OpenGLView {
-	x.inner.SetPixelFormat(pixelFormat)
+func (x *OpenGLView) WithPixelFormat(pixelFormat *OpenGLPixelFormat) *OpenGLView {
+	x.inner.SetPixelFormat(pixelFormat.Unwrap())
 	return x
 }
 
@@ -234,8 +234,8 @@ func (x *OpenGLView) WithContentFilters(items ...*coreimage.CIFilter) *OpenGLVie
 }
 
 // WithShadow sets the shadow property and returns the receiver for chaining.
-func (x *OpenGLView) WithShadow(shadow *raw.NSShadow) *OpenGLView {
-	x.inner.NSView.SetShadow(shadow)
+func (x *OpenGLView) WithShadow(shadow *Shadow) *OpenGLView {
+	x.inner.NSView.SetShadow(shadow.Unwrap())
 	return x
 }
 
@@ -316,8 +316,8 @@ func (x *OpenGLView) WithPrefersCompactControlSizeMetrics(prefersCompactControlS
 }
 
 // WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
-func (x *OpenGLView) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *OpenGLView {
-	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+func (x *OpenGLView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *OpenGLView {
+	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
 	return x
 }
 
@@ -358,8 +358,8 @@ func (x *OpenGLView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDyn
 }
 
 // WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
-func (x *OpenGLView) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *OpenGLView {
-	x.inner.NSView.SetPressureConfiguration(pressureConfiguration)
+func (x *OpenGLView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *OpenGLView {
+	x.inner.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
 	return x
 }
 
@@ -370,8 +370,8 @@ func (x *OpenGLView) WithNextResponder(nextResponder ResponderProvider) *OpenGLV
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *OpenGLView) WithMenu(menu *raw.NSMenu) *OpenGLView {
-	x.inner.NSView.NSResponder.SetMenu(menu)
+func (x *OpenGLView) WithMenu(menu *Menu) *OpenGLView {
+	x.inner.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -382,8 +382,8 @@ func (x *OpenGLView) WithUserActivity(userActivity *foundation.NSUserActivity) *
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *OpenGLView) WithTouchBar(touchBar *raw.NSTouchBar) *OpenGLView {
-	x.inner.NSView.NSResponder.SetTouchBar(touchBar)
+func (x *OpenGLView) WithTouchBar(touchBar *TouchBar) *OpenGLView {
+	x.inner.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -442,8 +442,8 @@ func (x *OpenGLView) asResponder() *raw.NSResponder { return &x.inner.NSView.NSR
 // OpenGLViewable is the interface implemented by [OpenGLView], for mocking and DI.
 type OpenGLViewable interface {
 	Unwrap() *raw.NSOpenGLView
-	WithOpenGLContext(openGLContext *raw.NSOpenGLContext) *OpenGLView
-	WithPixelFormat(pixelFormat *raw.NSOpenGLPixelFormat) *OpenGLView
+	WithOpenGLContext(openGLContext *OpenGLContext) *OpenGLView
+	WithPixelFormat(pixelFormat *OpenGLPixelFormat) *OpenGLView
 	WithSubviews(items ...ViewProvider) *OpenGLView
 	WithHidden(hidden bool) *OpenGLView
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *OpenGLView
@@ -469,7 +469,7 @@ type OpenGLViewable interface {
 	WithBackgroundFilters(items ...*coreimage.CIFilter) *OpenGLView
 	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *OpenGLView
 	WithContentFilters(items ...*coreimage.CIFilter) *OpenGLView
-	WithShadow(shadow *raw.NSShadow) *OpenGLView
+	WithShadow(shadow *Shadow) *OpenGLView
 	WithClipsToBounds(clipsToBounds bool) *OpenGLView
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *OpenGLView
 	WithToolTip(toolTip string) *OpenGLView
@@ -481,18 +481,18 @@ type OpenGLViewable interface {
 	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *OpenGLView
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *OpenGLView
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *OpenGLView
-	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *OpenGLView
+	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *OpenGLView
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *OpenGLView
 	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *OpenGLView
 	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *OpenGLView
 	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *OpenGLView
 	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *OpenGLView
 	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *OpenGLView
-	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *OpenGLView
+	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *OpenGLView
 	WithNextResponder(nextResponder ResponderProvider) *OpenGLView
-	WithMenu(menu *raw.NSMenu) *OpenGLView
+	WithMenu(menu *Menu) *OpenGLView
 	WithUserActivity(userActivity *foundation.NSUserActivity) *OpenGLView
-	WithTouchBar(touchBar *raw.NSTouchBar) *OpenGLView
+	WithTouchBar(touchBar *TouchBar) *OpenGLView
 	ClearGLContext()
 	Update()
 	Reshape()

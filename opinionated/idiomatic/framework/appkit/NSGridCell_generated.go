@@ -141,13 +141,13 @@ func (x *GridCell) SetRowAlignment(rowAlignment raw.NSGridRowAlignment) {
 }
 
 // CustomPlacementConstraints returns the collection as a Go slice.
-func (x *GridCell) CustomPlacementConstraints() []*raw.NSLayoutConstraint {
+func (x *GridCell) CustomPlacementConstraints() []*LayoutConstraint {
 	arr := x.inner.CustomPlacementConstraints()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSLayoutConstraint {
-		return raw.NSLayoutConstraintFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *LayoutConstraint {
+		return &LayoutConstraint{inner: raw.NSLayoutConstraintFromID(purego.Retain(_id))}
 	})
 }
 
@@ -174,7 +174,7 @@ type GridCellable interface {
 	SetYPlacement(yPlacement raw.NSGridCellPlacement)
 	RowAlignment() raw.NSGridRowAlignment
 	SetRowAlignment(rowAlignment raw.NSGridRowAlignment)
-	CustomPlacementConstraints() []*raw.NSLayoutConstraint
+	CustomPlacementConstraints() []*LayoutConstraint
 	SetCustomPlacementConstraints(customPlacementConstraints *foundation.NSArray[*raw.NSLayoutConstraint])
 }
 

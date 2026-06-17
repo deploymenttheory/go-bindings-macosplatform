@@ -117,8 +117,8 @@ func NewMeshMeshBySubdividingMeshSubmeshIndexSubdivisionLevelsAllocator(mesh *ra
 }
 
 // WithVertexDescriptor sets the vertexDescriptor property and returns the receiver for chaining.
-func (x *Mesh) WithVertexDescriptor(vertexDescriptor *raw.MDLVertexDescriptor) *Mesh {
-	x.inner.SetVertexDescriptor(vertexDescriptor)
+func (x *Mesh) WithVertexDescriptor(vertexDescriptor *VertexDescriptor) *Mesh {
+	x.inner.SetVertexDescriptor(vertexDescriptor.Unwrap())
 	return x
 }
 
@@ -232,13 +232,13 @@ func (x *Mesh) SetVertexBuffers(vertexBuffers *foundation.NSArray[raw.MDLMeshBuf
 }
 
 // Submeshes returns the collection as a Go slice.
-func (x *Mesh) Submeshes() []*raw.MDLSubmesh {
+func (x *Mesh) Submeshes() []*Submesh {
 	arr := x.inner.Submeshes()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MDLSubmesh {
-		return raw.MDLSubmeshFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Submesh {
+		return &Submesh{inner: raw.MDLSubmeshFromID(purego.Retain(_id))}
 	})
 }
 
@@ -363,7 +363,7 @@ func (x *Mesh) asObject() *raw.MDLObject { return &x.inner.MDLObject }
 // Meshable is the interface implemented by [Mesh], for mocking and DI.
 type Meshable interface {
 	Unwrap() *raw.MDLMesh
-	WithVertexDescriptor(vertexDescriptor *raw.MDLVertexDescriptor) *Mesh
+	WithVertexDescriptor(vertexDescriptor *VertexDescriptor) *Mesh
 	WithVertexCount(vertexCount uint) *Mesh
 	WithSubmeshes(items ...*raw.MDLSubmesh) *Mesh
 	WithParent(parent ObjectProvider) *Mesh
@@ -380,7 +380,7 @@ type Meshable interface {
 	SetVertexCount(vertexCount uint)
 	VertexBuffers() *foundation.NSArray[raw.MDLMeshBuffer]
 	SetVertexBuffers(vertexBuffers *foundation.NSArray[raw.MDLMeshBuffer])
-	Submeshes() []*raw.MDLSubmesh
+	Submeshes() []*Submesh
 	SetSubmeshes(submeshes *foundation.NSMutableArray[*raw.MDLSubmesh])
 	Allocator() raw.MDLMeshBufferAllocator
 	AddAttributeWithNameFormat(name string, format raw.MDLVertexFormat)

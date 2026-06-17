@@ -51,8 +51,8 @@ func (x *Outline) WithIsOpen(isOpen bool) *Outline {
 }
 
 // WithDestination sets the destination property and returns the receiver for chaining.
-func (x *Outline) WithDestination(destination *raw.PDFDestination) *Outline {
-	x.inner.SetDestination(destination)
+func (x *Outline) WithDestination(destination *Destination) *Outline {
+	x.inner.SetDestination(destination.Unwrap())
 	return x
 }
 
@@ -152,7 +152,7 @@ type Outlineable interface {
 	Unwrap() *raw.PDFOutline
 	WithLabel(label string) *Outline
 	WithIsOpen(isOpen bool) *Outline
-	WithDestination(destination *raw.PDFDestination) *Outline
+	WithDestination(destination *Destination) *Outline
 	ChildAtIndex(index uint) *Outline
 	InsertChildAtIndex(child *raw.PDFOutline, index uint)
 	RemoveFromParent()

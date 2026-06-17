@@ -36,8 +36,8 @@ func NewDistanceModelParameters() *DistanceModelParameters {
 }
 
 // WithFadeOutParameters sets the fadeOutParameters property and returns the receiver for chaining.
-func (x *DistanceModelParameters) WithFadeOutParameters(fadeOutParameters *raw.PHASEDistanceModelFadeOutParameters) *DistanceModelParameters {
-	x.inner.SetFadeOutParameters(fadeOutParameters)
+func (x *DistanceModelParameters) WithFadeOutParameters(fadeOutParameters *DistanceModelFadeOutParameters) *DistanceModelParameters {
+	x.inner.SetFadeOutParameters(fadeOutParameters.Unwrap())
 	return x
 }
 
@@ -60,7 +60,7 @@ func (x *DistanceModelParameters) asDistanceModelParameters() *raw.PHASEDistance
 // DistanceModelParametersable is the interface implemented by [DistanceModelParameters], for mocking and DI.
 type DistanceModelParametersable interface {
 	Unwrap() *raw.PHASEDistanceModelParameters
-	WithFadeOutParameters(fadeOutParameters *raw.PHASEDistanceModelFadeOutParameters) *DistanceModelParameters
+	WithFadeOutParameters(fadeOutParameters *DistanceModelFadeOutParameters) *DistanceModelParameters
 	FadeOutParameters() *DistanceModelFadeOutParameters
 	SetFadeOutParameters(fadeOutParameters *raw.PHASEDistanceModelFadeOutParameters)
 }

@@ -73,13 +73,13 @@ func (x *WiFiClient) InterfaceWithName(interfaceName string) *Interface {
 }
 
 // Interfaces returns the collection as a Go slice.
-func (x *WiFiClient) Interfaces() []*raw.CWInterface {
+func (x *WiFiClient) Interfaces() []*Interface {
 	arr := x.inner.Interfaces()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CWInterface {
-		return raw.CWInterfaceFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Interface {
+		return &Interface{inner: raw.CWInterfaceFromID(purego.Retain(_id))}
 	})
 }
 
@@ -116,7 +116,7 @@ type WiFiClientable interface {
 	Interface() *Interface
 	InterfaceNames() []string
 	InterfaceWithName(interfaceName string) *Interface
-	Interfaces() []*raw.CWInterface
+	Interfaces() []*Interface
 	StartMonitoringEventWithTypeError(type_ raw.CWEventType) (bool, error)
 	StopMonitoringEventWithTypeError(type_ raw.CWEventType) (bool, error)
 	StopMonitoringAllEventsAndReturnError() error

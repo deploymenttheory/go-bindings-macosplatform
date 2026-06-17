@@ -37,44 +37,44 @@ func NewShareableContent() *ShareableContent {
 }
 
 // Windows returns the collection as a Go slice.
-func (x *ShareableContent) Windows() []*raw.SCWindow {
+func (x *ShareableContent) Windows() []*Window {
 	arr := x.inner.Windows()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SCWindow {
-		return raw.SCWindowFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Window {
+		return &Window{inner: raw.SCWindowFromID(purego.Retain(_id))}
 	})
 }
 
 // Displays returns the collection as a Go slice.
-func (x *ShareableContent) Displays() []*raw.SCDisplay {
+func (x *ShareableContent) Displays() []*Display {
 	arr := x.inner.Displays()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SCDisplay {
-		return raw.SCDisplayFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Display {
+		return &Display{inner: raw.SCDisplayFromID(purego.Retain(_id))}
 	})
 }
 
 // Applications returns the collection as a Go slice.
-func (x *ShareableContent) Applications() []*raw.SCRunningApplication {
+func (x *ShareableContent) Applications() []*RunningApplication {
 	arr := x.inner.Applications()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SCRunningApplication {
-		return raw.SCRunningApplicationFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *RunningApplication {
+		return &RunningApplication{inner: raw.SCRunningApplicationFromID(purego.Retain(_id))}
 	})
 }
 
 // ShareableContentable is the interface implemented by [ShareableContent], for mocking and DI.
 type ShareableContentable interface {
 	Unwrap() *raw.SCShareableContent
-	Windows() []*raw.SCWindow
-	Displays() []*raw.SCDisplay
-	Applications() []*raw.SCRunningApplication
+	Windows() []*Window
+	Displays() []*Display
+	Applications() []*RunningApplication
 }
 
 var _ ShareableContentable = (*ShareableContent)(nil)

@@ -96,13 +96,13 @@ func (x *VideoComposition) OutputBufferDescription() *foundation.NSArray[objc.ID
 }
 
 // SpatialVideoConfigurations returns the collection as a Go slice.
-func (x *VideoComposition) SpatialVideoConfigurations() []*raw.AVSpatialVideoConfiguration {
+func (x *VideoComposition) SpatialVideoConfigurations() []*SpatialVideoConfiguration {
 	arr := x.inner.SpatialVideoConfigurations()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVSpatialVideoConfiguration {
-		return raw.AVSpatialVideoConfigurationFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *SpatialVideoConfiguration {
+		return &SpatialVideoConfiguration{inner: raw.AVSpatialVideoConfigurationFromID(purego.Retain(_id))}
 	})
 }
 
@@ -171,7 +171,7 @@ type VideoCompositionable interface {
 	AnimationTool() *VideoCompositionCoreAnimationTool
 	SourceSampleDataTrackIDs() []*foundation.NSNumber
 	OutputBufferDescription() *foundation.NSArray[objc.ID]
-	SpatialVideoConfigurations() []*raw.AVSpatialVideoConfiguration
+	SpatialVideoConfigurations() []*SpatialVideoConfiguration
 	ColorPrimaries() string
 	ColorYCbCrMatrix() string
 	ColorTransferFunction() string

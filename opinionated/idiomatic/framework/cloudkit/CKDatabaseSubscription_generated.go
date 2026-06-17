@@ -58,8 +58,8 @@ func (x *DatabaseSubscription) WithRecordType(recordType *foundation.NSString) *
 }
 
 // WithNotificationInfo sets the notificationInfo property and returns the receiver for chaining.
-func (x *DatabaseSubscription) WithNotificationInfo(notificationInfo *raw.CKNotificationInfo) *DatabaseSubscription {
-	x.inner.CKSubscription.SetNotificationInfo(notificationInfo)
+func (x *DatabaseSubscription) WithNotificationInfo(notificationInfo *NotificationInfo) *DatabaseSubscription {
+	x.inner.CKSubscription.SetNotificationInfo(notificationInfo.Unwrap())
 	return x
 }
 
@@ -83,7 +83,7 @@ func (x *DatabaseSubscription) asSubscription() *raw.CKSubscription { return &x.
 type DatabaseSubscriptionable interface {
 	Unwrap() *raw.CKDatabaseSubscription
 	WithRecordType(recordType *foundation.NSString) *DatabaseSubscription
-	WithNotificationInfo(notificationInfo *raw.CKNotificationInfo) *DatabaseSubscription
+	WithNotificationInfo(notificationInfo *NotificationInfo) *DatabaseSubscription
 	RecordType() string
 	SetRecordType(recordType *foundation.NSString)
 }

@@ -54,8 +54,8 @@ func (x *Menu) WithTitle(title string) *Menu {
 }
 
 // WithSupermenu sets the supermenu property and returns the receiver for chaining.
-func (x *Menu) WithSupermenu(supermenu *raw.NSMenu) *Menu {
-	x.inner.SetSupermenu(supermenu)
+func (x *Menu) WithSupermenu(supermenu *Menu) *Menu {
+	x.inner.SetSupermenu(supermenu.Unwrap())
 	return x
 }
 
@@ -94,8 +94,8 @@ func (x *Menu) WithMinimumWidth(minimumWidth float64) *Menu {
 }
 
 // WithFont sets the font property and returns the receiver for chaining.
-func (x *Menu) WithFont(font *raw.NSFont) *Menu {
-	x.inner.SetFont(font)
+func (x *Menu) WithFont(font *Font) *Menu {
+	x.inner.SetFont(font.Unwrap())
 	return x
 }
 
@@ -326,13 +326,13 @@ func (x *Menu) SetSupermenu(supermenu *raw.NSMenu) {
 }
 
 // ItemArray returns the collection as a Go slice.
-func (x *Menu) ItemArray() []*raw.NSMenuItem {
+func (x *Menu) ItemArray() []*MenuItem {
 	arr := x.inner.ItemArray()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSMenuItem {
-		return raw.NSMenuItemFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MenuItem {
+		return &MenuItem{inner: raw.NSMenuItemFromID(purego.Retain(_id))}
 	})
 }
 
@@ -470,13 +470,13 @@ func (x *Menu) SetSelectionMode(selectionMode raw.NSMenuSelectionMode) {
 }
 
 // SelectedItems returns the collection as a Go slice.
-func (x *Menu) SelectedItems() []*raw.NSMenuItem {
+func (x *Menu) SelectedItems() []*MenuItem {
 	arr := x.inner.SelectedItems()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSMenuItem {
-		return raw.NSMenuItemFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MenuItem {
+		return &MenuItem{inner: raw.NSMenuItemFromID(purego.Retain(_id))}
 	})
 }
 
@@ -573,12 +573,12 @@ func (x *Menu) IsTornOff() bool {
 type Menuable interface {
 	Unwrap() *raw.NSMenu
 	WithTitle(title string) *Menu
-	WithSupermenu(supermenu *raw.NSMenu) *Menu
+	WithSupermenu(supermenu *Menu) *Menu
 	WithItemArray(items ...*raw.NSMenuItem) *Menu
 	WithAutoenablesItems(autoenablesItems bool) *Menu
 	WithDelegate(delegate raw.NSMenuDelegate) *Menu
 	WithMinimumWidth(minimumWidth float64) *Menu
-	WithFont(font *raw.NSFont) *Menu
+	WithFont(font *Font) *Menu
 	WithAllowsContextMenuPlugIns(allowsContextMenuPlugIns bool) *Menu
 	WithAutomaticallyInsertsWritingToolsItems(automaticallyInsertsWritingToolsItems bool) *Menu
 	WithShowsStateColumn(showsStateColumn bool) *Menu
@@ -615,7 +615,7 @@ type Menuable interface {
 	SetTitle(title string)
 	Supermenu() *Menu
 	SetSupermenu(supermenu *raw.NSMenu)
-	ItemArray() []*raw.NSMenuItem
+	ItemArray() []*MenuItem
 	SetItemArray(itemArray *foundation.NSArray[*raw.NSMenuItem])
 	NumberOfItems() int
 	AutoenablesItems() bool
@@ -641,7 +641,7 @@ type Menuable interface {
 	SetPresentationStyle(presentationStyle raw.NSMenuPresentationStyle)
 	SelectionMode() raw.NSMenuSelectionMode
 	SetSelectionMode(selectionMode raw.NSMenuSelectionMode)
-	SelectedItems() []*raw.NSMenuItem
+	SelectedItems() []*MenuItem
 	SetSelectedItems(selectedItems *foundation.NSArray[*raw.NSMenuItem])
 	SubmenuAction(sender objc.ID)
 	PropertiesToUpdate() raw.NSMenuProperties

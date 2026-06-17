@@ -105,13 +105,13 @@ func (x *ProjectTypeDescription) Image() *appkit.NSImage {
 }
 
 // SubtypeDescriptions returns the collection as a Go slice.
-func (x *ProjectTypeDescription) SubtypeDescriptions() []*raw.PHProjectTypeDescription {
+func (x *ProjectTypeDescription) SubtypeDescriptions() []*ProjectTypeDescription {
 	arr := x.inner.SubtypeDescriptions()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PHProjectTypeDescription {
-		return raw.PHProjectTypeDescriptionFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ProjectTypeDescription {
+		return &ProjectTypeDescription{inner: raw.PHProjectTypeDescriptionFromID(purego.Retain(_id))}
 	})
 }
 
@@ -128,7 +128,7 @@ type ProjectTypeDescriptionable interface {
 	LocalizedDescription() string
 	LocalizedAttributedDescription() *foundation.NSAttributedString
 	Image() *appkit.NSImage
-	SubtypeDescriptions() []*raw.PHProjectTypeDescription
+	SubtypeDescriptions() []*ProjectTypeDescription
 	CanProvideSubtypes() bool
 }
 

@@ -51,8 +51,8 @@ func (x *Popover) WithDelegate(delegate raw.NSPopoverDelegate) *Popover {
 }
 
 // WithAppearance sets the appearance property and returns the receiver for chaining.
-func (x *Popover) WithAppearance(appearance *raw.NSAppearance) *Popover {
-	x.inner.SetAppearance(appearance)
+func (x *Popover) WithAppearance(appearance *Appearance) *Popover {
+	x.inner.SetAppearance(appearance.Unwrap())
 	return x
 }
 
@@ -99,8 +99,8 @@ func (x *Popover) WithNextResponder(nextResponder ResponderProvider) *Popover {
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *Popover) WithMenu(menu *raw.NSMenu) *Popover {
-	x.inner.NSResponder.SetMenu(menu)
+func (x *Popover) WithMenu(menu *Menu) *Popover {
+	x.inner.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -111,8 +111,8 @@ func (x *Popover) WithUserActivity(userActivity *foundation.NSUserActivity) *Pop
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *Popover) WithTouchBar(touchBar *raw.NSTouchBar) *Popover {
-	x.inner.NSResponder.SetTouchBar(touchBar)
+func (x *Popover) WithTouchBar(touchBar *TouchBar) *Popover {
+	x.inner.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -249,7 +249,7 @@ func (x *Popover) asResponder() *raw.NSResponder { return &x.inner.NSResponder }
 type Popoverable interface {
 	Unwrap() *raw.NSPopover
 	WithDelegate(delegate raw.NSPopoverDelegate) *Popover
-	WithAppearance(appearance *raw.NSAppearance) *Popover
+	WithAppearance(appearance *Appearance) *Popover
 	WithBehavior(behavior raw.NSPopoverBehavior) *Popover
 	WithAnimates(animates bool) *Popover
 	WithContentViewController(contentViewController ViewControllerProvider) *Popover
@@ -257,9 +257,9 @@ type Popoverable interface {
 	WithPositioningRect(positioningRect corefoundation.CGRect) *Popover
 	WithHasFullSizeContent(hasFullSizeContent bool) *Popover
 	WithNextResponder(nextResponder ResponderProvider) *Popover
-	WithMenu(menu *raw.NSMenu) *Popover
+	WithMenu(menu *Menu) *Popover
 	WithUserActivity(userActivity *foundation.NSUserActivity) *Popover
-	WithTouchBar(touchBar *raw.NSTouchBar) *Popover
+	WithTouchBar(touchBar *TouchBar) *Popover
 	ShowRelativeToRectOfViewPreferredEdge(positioningRect corefoundation.CGRect, positioningView *raw.NSView, preferredEdge foundation.NSRectEdge)
 	ShowRelativeToToolbarItem(toolbarItem *raw.NSToolbarItem)
 	PerformClose(sender objc.ID)

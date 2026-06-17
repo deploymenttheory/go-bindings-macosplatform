@@ -36,14 +36,14 @@ func NewMTRServiceAreaClusterAreaInfoStruct() *MTRServiceAreaClusterAreaInfoStru
 }
 
 // WithLocationInfo sets the locationInfo property and returns the receiver for chaining.
-func (x *MTRServiceAreaClusterAreaInfoStruct) WithLocationInfo(locationInfo *raw.MTRDataTypeLocationDescriptorStruct) *MTRServiceAreaClusterAreaInfoStruct {
-	x.inner.SetLocationInfo(locationInfo)
+func (x *MTRServiceAreaClusterAreaInfoStruct) WithLocationInfo(locationInfo *MTRDataTypeLocationDescriptorStruct) *MTRServiceAreaClusterAreaInfoStruct {
+	x.inner.SetLocationInfo(locationInfo.Unwrap())
 	return x
 }
 
 // WithLandmarkInfo sets the landmarkInfo property and returns the receiver for chaining.
-func (x *MTRServiceAreaClusterAreaInfoStruct) WithLandmarkInfo(landmarkInfo *raw.MTRServiceAreaClusterLandmarkInfoStruct) *MTRServiceAreaClusterAreaInfoStruct {
-	x.inner.SetLandmarkInfo(landmarkInfo)
+func (x *MTRServiceAreaClusterAreaInfoStruct) WithLandmarkInfo(landmarkInfo *MTRServiceAreaClusterLandmarkInfoStruct) *MTRServiceAreaClusterAreaInfoStruct {
+	x.inner.SetLandmarkInfo(landmarkInfo.Unwrap())
 	return x
 }
 
@@ -78,8 +78,8 @@ func (x *MTRServiceAreaClusterAreaInfoStruct) SetLandmarkInfo(landmarkInfo *raw.
 // MTRServiceAreaClusterAreaInfoStructable is the interface implemented by [MTRServiceAreaClusterAreaInfoStruct], for mocking and DI.
 type MTRServiceAreaClusterAreaInfoStructable interface {
 	Unwrap() *raw.MTRServiceAreaClusterAreaInfoStruct
-	WithLocationInfo(locationInfo *raw.MTRDataTypeLocationDescriptorStruct) *MTRServiceAreaClusterAreaInfoStruct
-	WithLandmarkInfo(landmarkInfo *raw.MTRServiceAreaClusterLandmarkInfoStruct) *MTRServiceAreaClusterAreaInfoStruct
+	WithLocationInfo(locationInfo *MTRDataTypeLocationDescriptorStruct) *MTRServiceAreaClusterAreaInfoStruct
+	WithLandmarkInfo(landmarkInfo *MTRServiceAreaClusterLandmarkInfoStruct) *MTRServiceAreaClusterAreaInfoStruct
 	LocationInfo() *MTRDataTypeLocationDescriptorStruct
 	SetLocationInfo(locationInfo *raw.MTRDataTypeLocationDescriptorStruct)
 	LandmarkInfo() *MTRServiceAreaClusterLandmarkInfoStruct

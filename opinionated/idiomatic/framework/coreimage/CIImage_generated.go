@@ -541,13 +541,13 @@ func (x *Image) MetalTexture() metal.MTLTexture {
 }
 
 // AutoAdjustmentFilters returns the collection as a Go slice.
-func (x *Image) AutoAdjustmentFilters() []*raw.CIFilter {
+func (x *Image) AutoAdjustmentFilters() []*Filter {
 	arr := x.inner.AutoAdjustmentFilters()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CIFilter {
-		return raw.CIFilterFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Filter {
+		return &Filter{inner: raw.CIFilterFromID(purego.Retain(_id))}
 	})
 }
 
@@ -632,7 +632,7 @@ type Imageable interface {
 	PixelBuffer() unsafe.Pointer
 	CGImage() unsafe.Pointer
 	MetalTexture() metal.MTLTexture
-	AutoAdjustmentFilters() []*raw.CIFilter
+	AutoAdjustmentFilters() []*Filter
 	AutoAdjustmentFiltersWithOptions(options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSArray[*raw.CIFilter]
 	ImageByConvertingWorkingSpaceToLab() *Image
 	ImageByConvertingLabToWorkingSpace() *Image

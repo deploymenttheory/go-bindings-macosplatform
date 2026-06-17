@@ -36,8 +36,8 @@ func NewMTRWaterHeaterManagementClusterBoostStartedEvent() *MTRWaterHeaterManage
 }
 
 // WithBoostInfo sets the boostInfo property and returns the receiver for chaining.
-func (x *MTRWaterHeaterManagementClusterBoostStartedEvent) WithBoostInfo(boostInfo *raw.MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) *MTRWaterHeaterManagementClusterBoostStartedEvent {
-	x.inner.SetBoostInfo(boostInfo)
+func (x *MTRWaterHeaterManagementClusterBoostStartedEvent) WithBoostInfo(boostInfo *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) *MTRWaterHeaterManagementClusterBoostStartedEvent {
+	x.inner.SetBoostInfo(boostInfo.Unwrap())
 	return x
 }
 
@@ -58,7 +58,7 @@ func (x *MTRWaterHeaterManagementClusterBoostStartedEvent) SetBoostInfo(boostInf
 // MTRWaterHeaterManagementClusterBoostStartedEventable is the interface implemented by [MTRWaterHeaterManagementClusterBoostStartedEvent], for mocking and DI.
 type MTRWaterHeaterManagementClusterBoostStartedEventable interface {
 	Unwrap() *raw.MTRWaterHeaterManagementClusterBoostStartedEvent
-	WithBoostInfo(boostInfo *raw.MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) *MTRWaterHeaterManagementClusterBoostStartedEvent
+	WithBoostInfo(boostInfo *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) *MTRWaterHeaterManagementClusterBoostStartedEvent
 	BoostInfo() *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct
 	SetBoostInfo(boostInfo *raw.MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct)
 }

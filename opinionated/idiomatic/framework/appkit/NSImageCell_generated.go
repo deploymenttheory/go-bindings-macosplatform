@@ -157,8 +157,8 @@ func (x *ImageCell) WithWraps(wraps bool) *ImageCell {
 }
 
 // WithFont sets the font property and returns the receiver for chaining.
-func (x *ImageCell) WithFont(font *raw.NSFont) *ImageCell {
-	x.inner.NSCell.SetFont(font)
+func (x *ImageCell) WithFont(font *Font) *ImageCell {
+	x.inner.NSCell.SetFont(font.Unwrap())
 	return x
 }
 
@@ -205,8 +205,8 @@ func (x *ImageCell) WithIntegerValue(integerValue int) *ImageCell {
 }
 
 // WithImage sets the image property and returns the receiver for chaining.
-func (x *ImageCell) WithImage(image *raw.NSImage) *ImageCell {
-	x.inner.NSCell.SetImage(image)
+func (x *ImageCell) WithImage(image *Image) *ImageCell {
+	x.inner.NSCell.SetImage(image.Unwrap())
 	return x
 }
 
@@ -223,8 +223,8 @@ func (x *ImageCell) WithRepresentedObject(representedObject objc.ID) *ImageCell 
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *ImageCell) WithMenu(menu *raw.NSMenu) *ImageCell {
-	x.inner.NSCell.SetMenu(menu)
+func (x *ImageCell) WithMenu(menu *Menu) *ImageCell {
+	x.inner.NSCell.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -379,7 +379,7 @@ type ImageCellable interface {
 	WithHighlighted(highlighted bool) *ImageCell
 	WithAlignment(alignment raw.NSTextAlignment) *ImageCell
 	WithWraps(wraps bool) *ImageCell
-	WithFont(font *raw.NSFont) *ImageCell
+	WithFont(font *Font) *ImageCell
 	WithFormatter(formatter *foundation.NSFormatter) *ImageCell
 	WithObjectValue(objectValue objc.ID) *ImageCell
 	WithStringValue(stringValue string) *ImageCell
@@ -387,10 +387,10 @@ type ImageCellable interface {
 	WithFloatValue(floatValue float32) *ImageCell
 	WithDoubleValue(doubleValue float64) *ImageCell
 	WithIntegerValue(integerValue int) *ImageCell
-	WithImage(image *raw.NSImage) *ImageCell
+	WithImage(image *Image) *ImageCell
 	WithControlSize(controlSize raw.NSControlSize) *ImageCell
 	WithRepresentedObject(representedObject objc.ID) *ImageCell
-	WithMenu(menu *raw.NSMenu) *ImageCell
+	WithMenu(menu *Menu) *ImageCell
 	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *ImageCell
 	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *ImageCell
 	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *ImageCell

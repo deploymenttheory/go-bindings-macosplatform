@@ -86,13 +86,13 @@ func (x *FunctionStitchingFunctionNode) SetArguments(arguments *foundation.NSArr
 }
 
 // ControlDependencies returns the collection as a Go slice.
-func (x *FunctionStitchingFunctionNode) ControlDependencies() []*raw.MTLFunctionStitchingFunctionNode {
+func (x *FunctionStitchingFunctionNode) ControlDependencies() []*FunctionStitchingFunctionNode {
 	arr := x.inner.ControlDependencies()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MTLFunctionStitchingFunctionNode {
-		return raw.MTLFunctionStitchingFunctionNodeFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *FunctionStitchingFunctionNode {
+		return &FunctionStitchingFunctionNode{inner: raw.MTLFunctionStitchingFunctionNodeFromID(purego.Retain(_id))}
 	})
 }
 
@@ -110,7 +110,7 @@ type FunctionStitchingFunctionNodeable interface {
 	SetName(name string)
 	Arguments() *foundation.NSArray[raw.MTLFunctionStitchingNode]
 	SetArguments(arguments *foundation.NSArray[raw.MTLFunctionStitchingNode])
-	ControlDependencies() []*raw.MTLFunctionStitchingFunctionNode
+	ControlDependencies() []*FunctionStitchingFunctionNode
 	SetControlDependencies(controlDependencies *foundation.NSArray[*raw.MTLFunctionStitchingFunctionNode])
 }
 

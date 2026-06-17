@@ -129,13 +129,13 @@ func (x *CaptureMovieFileOutput) SetMovieFragmentInterval(movieFragmentInterval 
 }
 
 // Metadata returns the collection as a Go slice.
-func (x *CaptureMovieFileOutput) Metadata() []*raw.AVMetadataItem {
+func (x *CaptureMovieFileOutput) Metadata() []*MetadataItem {
 	arr := x.inner.Metadata()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVMetadataItem {
-		return raw.AVMetadataItemFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MetadataItem {
+		return &MetadataItem{inner: raw.AVMetadataItemFromID(purego.Retain(_id))}
 	})
 }
 
@@ -200,7 +200,7 @@ type CaptureMovieFileOutputable interface {
 	SetPrimaryConstituentDeviceSwitchingBehaviorForRecordingRestrictedSwitchingBehaviorConditions(switchingBehavior raw.AVCapturePrimaryConstituentDeviceSwitchingBehavior, restrictedSwitchingBehaviorConditions raw.AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions)
 	MovieFragmentInterval() coremedia.CMTime
 	SetMovieFragmentInterval(movieFragmentInterval coremedia.CMTime)
-	Metadata() []*raw.AVMetadataItem
+	Metadata() []*MetadataItem
 	SetMetadata(metadata *foundation.NSArray[*raw.AVMetadataItem])
 	IsPrimaryConstituentDeviceSwitchingBehaviorForRecordingEnabled() bool
 	SetPrimaryConstituentDeviceSwitchingBehaviorForRecordingEnabled(primaryConstituentDeviceSwitchingBehaviorForRecordingEnabled bool)

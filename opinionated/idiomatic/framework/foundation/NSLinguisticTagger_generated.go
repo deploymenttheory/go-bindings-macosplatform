@@ -123,13 +123,13 @@ func (x *LinguisticTagger) PossibleTagsAtIndexSchemeTokenRangeSentenceRangeScore
 }
 
 // TagSchemes returns the collection as a Go slice.
-func (x *LinguisticTagger) TagSchemes() []*raw.NSString {
+func (x *LinguisticTagger) TagSchemes() []*String {
 	arr := x.inner.TagSchemes()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSString {
-		return raw.NSStringFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *String {
+		return &String{inner: raw.NSStringFromID(purego.Retain(_id))}
 	})
 }
 
@@ -175,7 +175,7 @@ type LinguisticTaggerable interface {
 	TagAtIndexSchemeTokenRangeSentenceRange(charIndex uint, scheme *raw.NSString, tokenRange *raw.NSRange, sentenceRange *raw.NSRange) *String
 	TagsInRangeSchemeOptionsTokenRanges(range_ raw.NSRange, tagScheme string, opts raw.NSLinguisticTaggerOptions, tokenRanges *raw.NSArray[*raw.NSValue]) *raw.NSArray[*raw.NSString]
 	PossibleTagsAtIndexSchemeTokenRangeSentenceRangeScores(charIndex uint, tagScheme string, tokenRange *raw.NSRange, sentenceRange *raw.NSRange, scores *raw.NSArray[*raw.NSValue]) *raw.NSArray[*raw.NSString]
-	TagSchemes() []*raw.NSString
+	TagSchemes() []*String
 	String() *String
 	SetString(string_ string)
 	DominantLanguage() *String

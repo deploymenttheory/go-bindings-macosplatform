@@ -157,8 +157,8 @@ func (x *AVB17221Entity) WithMacAddresses(items ...*raw.AVBMACAddress) *AVB17221
 }
 
 // WithEntityDiscovery sets the entityDiscovery property and returns the receiver for chaining.
-func (x *AVB17221Entity) WithEntityDiscovery(entityDiscovery *raw.AVB17221EntityDiscovery) *AVB17221Entity {
-	x.inner.SetEntityDiscovery(entityDiscovery)
+func (x *AVB17221Entity) WithEntityDiscovery(entityDiscovery *AVB17221EntityDiscovery) *AVB17221Entity {
+	x.inner.SetEntityDiscovery(entityDiscovery.Unwrap())
 	return x
 }
 
@@ -333,13 +333,13 @@ func (x *AVB17221Entity) SetCurrentConfigurationIndex(currentConfigurationIndex 
 }
 
 // MacAddresses returns the collection as a Go slice.
-func (x *AVB17221Entity) MacAddresses() []*raw.AVBMACAddress {
+func (x *AVB17221Entity) MacAddresses() []*MACAddress {
 	arr := x.inner.MacAddresses()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVBMACAddress {
-		return raw.AVBMACAddressFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MACAddress {
+		return &MACAddress{inner: raw.AVBMACAddressFromID(purego.Retain(_id))}
 	})
 }
 
@@ -383,7 +383,7 @@ type AVB17221Entityable interface {
 	WithAssociationID(associationID uint64) *AVB17221Entity
 	WithCurrentConfigurationIndex(currentConfigurationIndex uint16) *AVB17221Entity
 	WithMacAddresses(items ...*raw.AVBMACAddress) *AVB17221Entity
-	WithEntityDiscovery(entityDiscovery *raw.AVB17221EntityDiscovery) *AVB17221Entity
+	WithEntityDiscovery(entityDiscovery *AVB17221EntityDiscovery) *AVB17221Entity
 	IsLocalEntity() bool
 	SetLocalEntity(localEntity bool)
 	TimeToLive() uint8
@@ -418,7 +418,7 @@ type AVB17221Entityable interface {
 	SetAssociationID(associationID uint64)
 	CurrentConfigurationIndex() uint16
 	SetCurrentConfigurationIndex(currentConfigurationIndex uint16)
-	MacAddresses() []*raw.AVBMACAddress
+	MacAddresses() []*MACAddress
 	SetMacAddresses(macAddresses *foundation.NSArray[*raw.AVBMACAddress])
 	EntityDiscovery() *AVB17221EntityDiscovery
 	SetEntityDiscovery(entityDiscovery *raw.AVB17221EntityDiscovery)

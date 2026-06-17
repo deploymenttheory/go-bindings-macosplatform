@@ -43,8 +43,8 @@ func (x *CollectionLayoutItem) WithContentInsets(contentInsets raw.NSDirectional
 }
 
 // WithEdgeSpacing sets the edgeSpacing property and returns the receiver for chaining.
-func (x *CollectionLayoutItem) WithEdgeSpacing(edgeSpacing *raw.NSCollectionLayoutEdgeSpacing) *CollectionLayoutItem {
-	x.inner.SetEdgeSpacing(edgeSpacing)
+func (x *CollectionLayoutItem) WithEdgeSpacing(edgeSpacing *CollectionLayoutEdgeSpacing) *CollectionLayoutItem {
+	x.inner.SetEdgeSpacing(edgeSpacing.Unwrap())
 	return x
 }
 
@@ -82,13 +82,13 @@ func (x *CollectionLayoutItem) LayoutSize() *CollectionLayoutSize {
 }
 
 // SupplementaryItems returns the collection as a Go slice.
-func (x *CollectionLayoutItem) SupplementaryItems() []*raw.NSCollectionLayoutSupplementaryItem {
+func (x *CollectionLayoutItem) SupplementaryItems() []*CollectionLayoutSupplementaryItem {
 	arr := x.inner.SupplementaryItems()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSCollectionLayoutSupplementaryItem {
-		return raw.NSCollectionLayoutSupplementaryItemFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CollectionLayoutSupplementaryItem {
+		return &CollectionLayoutSupplementaryItem{inner: raw.NSCollectionLayoutSupplementaryItemFromID(purego.Retain(_id))}
 	})
 }
 
@@ -98,13 +98,13 @@ func (x *CollectionLayoutItem) asCollectionLayoutItem() *raw.NSCollectionLayoutI
 type CollectionLayoutItemable interface {
 	Unwrap() *raw.NSCollectionLayoutItem
 	WithContentInsets(contentInsets raw.NSDirectionalEdgeInsets) *CollectionLayoutItem
-	WithEdgeSpacing(edgeSpacing *raw.NSCollectionLayoutEdgeSpacing) *CollectionLayoutItem
+	WithEdgeSpacing(edgeSpacing *CollectionLayoutEdgeSpacing) *CollectionLayoutItem
 	ContentInsets() raw.NSDirectionalEdgeInsets
 	SetContentInsets(contentInsets raw.NSDirectionalEdgeInsets)
 	EdgeSpacing() *CollectionLayoutEdgeSpacing
 	SetEdgeSpacing(edgeSpacing *raw.NSCollectionLayoutEdgeSpacing)
 	LayoutSize() *CollectionLayoutSize
-	SupplementaryItems() []*raw.NSCollectionLayoutSupplementaryItem
+	SupplementaryItems() []*CollectionLayoutSupplementaryItem
 }
 
 var _ CollectionLayoutItemable = (*CollectionLayoutItem)(nil)

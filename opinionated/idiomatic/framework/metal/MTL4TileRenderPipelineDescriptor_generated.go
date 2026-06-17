@@ -67,8 +67,8 @@ func (x *MTL4TileRenderPipelineDescriptor) WithRequiredThreadsPerThreadgroup(req
 }
 
 // WithStaticLinkingDescriptor sets the staticLinkingDescriptor property and returns the receiver for chaining.
-func (x *MTL4TileRenderPipelineDescriptor) WithStaticLinkingDescriptor(staticLinkingDescriptor *raw.MTL4StaticLinkingDescriptor) *MTL4TileRenderPipelineDescriptor {
-	x.inner.SetStaticLinkingDescriptor(staticLinkingDescriptor)
+func (x *MTL4TileRenderPipelineDescriptor) WithStaticLinkingDescriptor(staticLinkingDescriptor *MTL4StaticLinkingDescriptor) *MTL4TileRenderPipelineDescriptor {
+	x.inner.SetStaticLinkingDescriptor(staticLinkingDescriptor.Unwrap())
 	return x
 }
 
@@ -85,8 +85,8 @@ func (x *MTL4TileRenderPipelineDescriptor) WithLabel(label string) *MTL4TileRend
 }
 
 // WithOptions sets the options property and returns the receiver for chaining.
-func (x *MTL4TileRenderPipelineDescriptor) WithOptions(options *raw.MTL4PipelineOptions) *MTL4TileRenderPipelineDescriptor {
-	x.inner.MTL4PipelineDescriptor.SetOptions(options)
+func (x *MTL4TileRenderPipelineDescriptor) WithOptions(options *MTL4PipelineOptions) *MTL4TileRenderPipelineDescriptor {
+	x.inner.MTL4PipelineDescriptor.SetOptions(options.Unwrap())
 	return x
 }
 
@@ -192,10 +192,10 @@ type MTL4TileRenderPipelineDescriptorable interface {
 	WithThreadgroupSizeMatchesTileSize(threadgroupSizeMatchesTileSize bool) *MTL4TileRenderPipelineDescriptor
 	WithMaxTotalThreadsPerThreadgroup(maxTotalThreadsPerThreadgroup uint) *MTL4TileRenderPipelineDescriptor
 	WithRequiredThreadsPerThreadgroup(requiredThreadsPerThreadgroup raw.MTLSize) *MTL4TileRenderPipelineDescriptor
-	WithStaticLinkingDescriptor(staticLinkingDescriptor *raw.MTL4StaticLinkingDescriptor) *MTL4TileRenderPipelineDescriptor
+	WithStaticLinkingDescriptor(staticLinkingDescriptor *MTL4StaticLinkingDescriptor) *MTL4TileRenderPipelineDescriptor
 	WithSupportBinaryLinking(supportBinaryLinking bool) *MTL4TileRenderPipelineDescriptor
 	WithLabel(label string) *MTL4TileRenderPipelineDescriptor
-	WithOptions(options *raw.MTL4PipelineOptions) *MTL4TileRenderPipelineDescriptor
+	WithOptions(options *MTL4PipelineOptions) *MTL4TileRenderPipelineDescriptor
 	Reset()
 	TileFunctionDescriptor() *MTL4FunctionDescriptor
 	SetTileFunctionDescriptor(tileFunctionDescriptor *raw.MTL4FunctionDescriptor)

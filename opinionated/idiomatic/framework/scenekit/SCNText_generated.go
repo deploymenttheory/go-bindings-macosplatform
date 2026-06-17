@@ -129,8 +129,8 @@ func (x *Text) WithMaterials(items ...*raw.SCNMaterial) *Text {
 }
 
 // WithFirstMaterial sets the firstMaterial property and returns the receiver for chaining.
-func (x *Text) WithFirstMaterial(firstMaterial *raw.SCNMaterial) *Text {
-	x.inner.SCNGeometry.SetFirstMaterial(firstMaterial)
+func (x *Text) WithFirstMaterial(firstMaterial *Material) *Text {
+	x.inner.SCNGeometry.SetFirstMaterial(firstMaterial.Unwrap())
 	return x
 }
 
@@ -151,8 +151,8 @@ func (x *Text) WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Text {
 }
 
 // WithTessellator sets the tessellator property and returns the receiver for chaining.
-func (x *Text) WithTessellator(tessellator *raw.SCNGeometryTessellator) *Text {
-	x.inner.SCNGeometry.SetTessellator(tessellator)
+func (x *Text) WithTessellator(tessellator *GeometryTessellator) *Text {
+	x.inner.SCNGeometry.SetTessellator(tessellator.Unwrap())
 	return x
 }
 
@@ -169,14 +169,14 @@ func (x *Text) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Text
 }
 
 // WithEdgeCreasesElement sets the edgeCreasesElement property and returns the receiver for chaining.
-func (x *Text) WithEdgeCreasesElement(edgeCreasesElement *raw.SCNGeometryElement) *Text {
-	x.inner.SCNGeometry.SetEdgeCreasesElement(edgeCreasesElement)
+func (x *Text) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Text {
+	x.inner.SCNGeometry.SetEdgeCreasesElement(edgeCreasesElement.Unwrap())
 	return x
 }
 
 // WithEdgeCreasesSource sets the edgeCreasesSource property and returns the receiver for chaining.
-func (x *Text) WithEdgeCreasesSource(edgeCreasesSource *raw.SCNGeometrySource) *Text {
-	x.inner.SCNGeometry.SetEdgeCreasesSource(edgeCreasesSource)
+func (x *Text) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Text {
+	x.inner.SCNGeometry.SetEdgeCreasesSource(edgeCreasesSource.Unwrap())
 	return x
 }
 
@@ -321,13 +321,13 @@ type Textable interface {
 	WithFlatness(flatness float64) *Text
 	WithName(name string) *Text
 	WithMaterials(items ...*raw.SCNMaterial) *Text
-	WithFirstMaterial(firstMaterial *raw.SCNMaterial) *Text
+	WithFirstMaterial(firstMaterial *Material) *Text
 	WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Text
-	WithTessellator(tessellator *raw.SCNGeometryTessellator) *Text
+	WithTessellator(tessellator *GeometryTessellator) *Text
 	WithSubdivisionLevel(subdivisionLevel uint) *Text
 	WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Text
-	WithEdgeCreasesElement(edgeCreasesElement *raw.SCNGeometryElement) *Text
-	WithEdgeCreasesSource(edgeCreasesSource *raw.SCNGeometrySource) *Text
+	WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Text
+	WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Text
 	ExtrusionDepth() float64
 	SetExtrusionDepth(extrusionDepth float64)
 	String() objc.ID

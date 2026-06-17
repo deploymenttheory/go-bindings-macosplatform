@@ -49,8 +49,8 @@ func (x *MTRChannelClusterGetProgramGuideParams) WithEndTime(endTime *foundation
 }
 
 // WithPageToken sets the pageToken property and returns the receiver for chaining.
-func (x *MTRChannelClusterGetProgramGuideParams) WithPageToken(pageToken *raw.MTRChannelClusterPageTokenStruct) *MTRChannelClusterGetProgramGuideParams {
-	x.inner.SetPageToken(pageToken)
+func (x *MTRChannelClusterGetProgramGuideParams) WithPageToken(pageToken *MTRChannelClusterPageTokenStruct) *MTRChannelClusterGetProgramGuideParams {
+	x.inner.SetPageToken(pageToken.Unwrap())
 	return x
 }
 
@@ -167,7 +167,7 @@ type MTRChannelClusterGetProgramGuideParamsable interface {
 	Unwrap() *raw.MTRChannelClusterGetProgramGuideParams
 	WithStartTime(startTime *foundation.NSNumber) *MTRChannelClusterGetProgramGuideParams
 	WithEndTime(endTime *foundation.NSNumber) *MTRChannelClusterGetProgramGuideParams
-	WithPageToken(pageToken *raw.MTRChannelClusterPageTokenStruct) *MTRChannelClusterGetProgramGuideParams
+	WithPageToken(pageToken *MTRChannelClusterPageTokenStruct) *MTRChannelClusterGetProgramGuideParams
 	WithRecordingFlag(recordingFlag *foundation.NSNumber) *MTRChannelClusterGetProgramGuideParams
 	WithData(data *foundation.NSData) *MTRChannelClusterGetProgramGuideParams
 	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRChannelClusterGetProgramGuideParams

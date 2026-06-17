@@ -169,8 +169,8 @@ func (x *StepperCell) WithWraps(wraps bool) *StepperCell {
 }
 
 // WithFont sets the font property and returns the receiver for chaining.
-func (x *StepperCell) WithFont(font *raw.NSFont) *StepperCell {
-	x.inner.NSActionCell.NSCell.SetFont(font)
+func (x *StepperCell) WithFont(font *Font) *StepperCell {
+	x.inner.NSActionCell.NSCell.SetFont(font.Unwrap())
 	return x
 }
 
@@ -217,8 +217,8 @@ func (x *StepperCell) WithIntegerValue(integerValue int) *StepperCell {
 }
 
 // WithImage sets the image property and returns the receiver for chaining.
-func (x *StepperCell) WithImage(image *raw.NSImage) *StepperCell {
-	x.inner.NSActionCell.NSCell.SetImage(image)
+func (x *StepperCell) WithImage(image *Image) *StepperCell {
+	x.inner.NSActionCell.NSCell.SetImage(image.Unwrap())
 	return x
 }
 
@@ -235,8 +235,8 @@ func (x *StepperCell) WithRepresentedObject(representedObject objc.ID) *StepperC
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *StepperCell) WithMenu(menu *raw.NSMenu) *StepperCell {
-	x.inner.NSActionCell.NSCell.SetMenu(menu)
+func (x *StepperCell) WithMenu(menu *Menu) *StepperCell {
+	x.inner.NSActionCell.NSCell.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -415,7 +415,7 @@ type StepperCellable interface {
 	WithHighlighted(highlighted bool) *StepperCell
 	WithAlignment(alignment raw.NSTextAlignment) *StepperCell
 	WithWraps(wraps bool) *StepperCell
-	WithFont(font *raw.NSFont) *StepperCell
+	WithFont(font *Font) *StepperCell
 	WithFormatter(formatter *foundation.NSFormatter) *StepperCell
 	WithObjectValue(objectValue objc.ID) *StepperCell
 	WithStringValue(stringValue string) *StepperCell
@@ -423,10 +423,10 @@ type StepperCellable interface {
 	WithFloatValue(floatValue float32) *StepperCell
 	WithDoubleValue(doubleValue float64) *StepperCell
 	WithIntegerValue(integerValue int) *StepperCell
-	WithImage(image *raw.NSImage) *StepperCell
+	WithImage(image *Image) *StepperCell
 	WithControlSize(controlSize raw.NSControlSize) *StepperCell
 	WithRepresentedObject(representedObject objc.ID) *StepperCell
-	WithMenu(menu *raw.NSMenu) *StepperCell
+	WithMenu(menu *Menu) *StepperCell
 	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *StepperCell
 	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *StepperCell
 	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *StepperCell

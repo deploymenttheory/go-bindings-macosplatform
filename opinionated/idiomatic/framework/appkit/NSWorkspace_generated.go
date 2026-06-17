@@ -335,13 +335,13 @@ func (x *Workspace) FileLabels() []string {
 }
 
 // FileLabelColors returns the collection as a Go slice.
-func (x *Workspace) FileLabelColors() []*raw.NSColor {
+func (x *Workspace) FileLabelColors() []*Color {
 	arr := x.inner.FileLabelColors()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSColor {
-		return raw.NSColorFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Color {
+		return &Color{inner: raw.NSColorFromID(purego.Retain(_id))}
 	})
 }
 
@@ -658,13 +658,13 @@ func (x *Workspace) IsSwitchControlEnabled() bool {
 }
 
 // RunningApplications returns the collection as a Go slice.
-func (x *Workspace) RunningApplications() []*raw.NSRunningApplication {
+func (x *Workspace) RunningApplications() []*RunningApplication {
 	arr := x.inner.RunningApplications()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSRunningApplication {
-		return raw.NSRunningApplicationFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *RunningApplication {
+		return &RunningApplication{inner: raw.NSRunningApplicationFromID(purego.Retain(_id))}
 	})
 }
 
@@ -703,7 +703,7 @@ type Workspaceable interface {
 	SetDefaultApplicationAtURLToOpenContentType(ctx context.Context, applicationURL string, contentType *uniformtypeidentifiers.UTType) error
 	NotificationCenter() *foundation.NSNotificationCenter
 	FileLabels() []string
-	FileLabelColors() []*raw.NSColor
+	FileLabelColors() []*Color
 	FrontmostApplication() *RunningApplication
 	MenuBarOwningApplication() *RunningApplication
 	SetDesktopImageURLForScreenOptionsError(url string, screen *raw.NSScreen, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error)
@@ -751,7 +751,7 @@ type Workspaceable interface {
 	AccessibilityDisplayShouldInvertColors() bool
 	IsVoiceOverEnabled() bool
 	IsSwitchControlEnabled() bool
-	RunningApplications() []*raw.NSRunningApplication
+	RunningApplications() []*RunningApplication
 }
 
 var _ Workspaceable = (*Workspace)(nil)

@@ -67,13 +67,13 @@ func (x *PlayerLooper) LoopCount() int {
 }
 
 // LoopingPlayerItems returns the collection as a Go slice.
-func (x *PlayerLooper) LoopingPlayerItems() []*raw.AVPlayerItem {
+func (x *PlayerLooper) LoopingPlayerItems() []*PlayerItem {
 	arr := x.inner.LoopingPlayerItems()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVPlayerItem {
-		return raw.AVPlayerItemFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PlayerItem {
+		return &PlayerItem{inner: raw.AVPlayerItemFromID(purego.Retain(_id))}
 	})
 }
 
@@ -84,7 +84,7 @@ type PlayerLooperable interface {
 	Status() raw.AVPlayerLooperStatus
 	Error() unsafe.Pointer
 	LoopCount() int
-	LoopingPlayerItems() []*raw.AVPlayerItem
+	LoopingPlayerItems() []*PlayerItem
 }
 
 var _ PlayerLooperable = (*PlayerLooper)(nil)

@@ -83,8 +83,8 @@ func (x *PopUpButtonCell) WithArrowPosition(arrowPosition raw.NSPopUpArrowPositi
 }
 
 // WithMenuItem sets the menuItem property and returns the receiver for chaining.
-func (x *PopUpButtonCell) WithMenuItem(menuItem *raw.NSMenuItem) *PopUpButtonCell {
-	x.inner.NSMenuItemCell.SetMenuItem(menuItem)
+func (x *PopUpButtonCell) WithMenuItem(menuItem *MenuItem) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.SetMenuItem(menuItem.Unwrap())
 	return x
 }
 
@@ -137,8 +137,8 @@ func (x *PopUpButtonCell) WithAttributedAlternateTitle(attributedAlternateTitle 
 }
 
 // WithAlternateImage sets the alternateImage property and returns the receiver for chaining.
-func (x *PopUpButtonCell) WithAlternateImage(alternateImage *raw.NSImage) *PopUpButtonCell {
-	x.inner.NSMenuItemCell.NSButtonCell.SetAlternateImage(alternateImage)
+func (x *PopUpButtonCell) WithAlternateImage(alternateImage *Image) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.SetAlternateImage(alternateImage.Unwrap())
 	return x
 }
 
@@ -185,14 +185,14 @@ func (x *PopUpButtonCell) WithShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhi
 }
 
 // WithSound sets the sound property and returns the receiver for chaining.
-func (x *PopUpButtonCell) WithSound(sound *raw.NSSound) *PopUpButtonCell {
-	x.inner.NSMenuItemCell.NSButtonCell.SetSound(sound)
+func (x *PopUpButtonCell) WithSound(sound *Sound) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.SetSound(sound.Unwrap())
 	return x
 }
 
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
-func (x *PopUpButtonCell) WithBackgroundColor(backgroundColor *raw.NSColor) *PopUpButtonCell {
-	x.inner.NSMenuItemCell.NSButtonCell.SetBackgroundColor(backgroundColor)
+func (x *PopUpButtonCell) WithBackgroundColor(backgroundColor *Color) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.SetBackgroundColor(backgroundColor.Unwrap())
 	return x
 }
 
@@ -203,8 +203,8 @@ func (x *PopUpButtonCell) WithGradientType(gradientType raw.NSGradientType) *Pop
 }
 
 // WithKeyEquivalentFont sets the keyEquivalentFont property and returns the receiver for chaining.
-func (x *PopUpButtonCell) WithKeyEquivalentFont(keyEquivalentFont *raw.NSFont) *PopUpButtonCell {
-	x.inner.NSMenuItemCell.NSButtonCell.SetKeyEquivalentFont(keyEquivalentFont)
+func (x *PopUpButtonCell) WithKeyEquivalentFont(keyEquivalentFont *Font) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.SetKeyEquivalentFont(keyEquivalentFont.Unwrap())
 	return x
 }
 
@@ -311,8 +311,8 @@ func (x *PopUpButtonCell) WithWraps(wraps bool) *PopUpButtonCell {
 }
 
 // WithFont sets the font property and returns the receiver for chaining.
-func (x *PopUpButtonCell) WithFont(font *raw.NSFont) *PopUpButtonCell {
-	x.inner.NSMenuItemCell.NSButtonCell.NSActionCell.NSCell.SetFont(font)
+func (x *PopUpButtonCell) WithFont(font *Font) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.NSActionCell.NSCell.SetFont(font.Unwrap())
 	return x
 }
 
@@ -359,8 +359,8 @@ func (x *PopUpButtonCell) WithIntegerValue(integerValue int) *PopUpButtonCell {
 }
 
 // WithImage sets the image property and returns the receiver for chaining.
-func (x *PopUpButtonCell) WithImage(image *raw.NSImage) *PopUpButtonCell {
-	x.inner.NSMenuItemCell.NSButtonCell.NSActionCell.NSCell.SetImage(image)
+func (x *PopUpButtonCell) WithImage(image *Image) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.NSActionCell.NSCell.SetImage(image.Unwrap())
 	return x
 }
 
@@ -377,8 +377,8 @@ func (x *PopUpButtonCell) WithRepresentedObject(representedObject objc.ID) *PopU
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *PopUpButtonCell) WithMenu(menu *raw.NSMenu) *PopUpButtonCell {
-	x.inner.NSMenuItemCell.NSButtonCell.NSActionCell.NSCell.SetMenu(menu)
+func (x *PopUpButtonCell) WithMenu(menu *Menu) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.NSActionCell.NSCell.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -651,13 +651,13 @@ func (x *PopUpButtonCell) SetAltersStateOfSelectedItem(altersStateOfSelectedItem
 }
 
 // ItemArray returns the collection as a Go slice.
-func (x *PopUpButtonCell) ItemArray() []*raw.NSMenuItem {
+func (x *PopUpButtonCell) ItemArray() []*MenuItem {
 	arr := x.inner.ItemArray()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSMenuItem {
-		return raw.NSMenuItemFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MenuItem {
+		return &MenuItem{inner: raw.NSMenuItemFromID(purego.Retain(_id))}
 	})
 }
 
@@ -736,7 +736,7 @@ type PopUpButtonCellable interface {
 	WithUsesItemFromMenu(usesItemFromMenu bool) *PopUpButtonCell
 	WithAltersStateOfSelectedItem(altersStateOfSelectedItem bool) *PopUpButtonCell
 	WithArrowPosition(arrowPosition raw.NSPopUpArrowPosition) *PopUpButtonCell
-	WithMenuItem(menuItem *raw.NSMenuItem) *PopUpButtonCell
+	WithMenuItem(menuItem *MenuItem) *PopUpButtonCell
 	WithNeedsSizing(needsSizing bool) *PopUpButtonCell
 	WithNeedsDisplay(needsDisplay bool) *PopUpButtonCell
 	WithBezelStyle(bezelStyle raw.NSBezelStyle) *PopUpButtonCell
@@ -745,7 +745,7 @@ type PopUpButtonCellable interface {
 	WithAttributedTitle(attributedTitle *foundation.NSAttributedString) *PopUpButtonCell
 	WithAlternateTitle(alternateTitle string) *PopUpButtonCell
 	WithAttributedAlternateTitle(attributedAlternateTitle *foundation.NSAttributedString) *PopUpButtonCell
-	WithAlternateImage(alternateImage *raw.NSImage) *PopUpButtonCell
+	WithAlternateImage(alternateImage *Image) *PopUpButtonCell
 	WithImagePosition(imagePosition raw.NSCellImagePosition) *PopUpButtonCell
 	WithImageScaling(imageScaling raw.NSImageScaling) *PopUpButtonCell
 	WithKeyEquivalent(keyEquivalent string) *PopUpButtonCell
@@ -753,10 +753,10 @@ type PopUpButtonCellable interface {
 	WithTransparent(transparent bool) *PopUpButtonCell
 	WithImageDimsWhenDisabled(imageDimsWhenDisabled bool) *PopUpButtonCell
 	WithShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMouseInside bool) *PopUpButtonCell
-	WithSound(sound *raw.NSSound) *PopUpButtonCell
-	WithBackgroundColor(backgroundColor *raw.NSColor) *PopUpButtonCell
+	WithSound(sound *Sound) *PopUpButtonCell
+	WithBackgroundColor(backgroundColor *Color) *PopUpButtonCell
 	WithGradientType(gradientType raw.NSGradientType) *PopUpButtonCell
-	WithKeyEquivalentFont(keyEquivalentFont *raw.NSFont) *PopUpButtonCell
+	WithKeyEquivalentFont(keyEquivalentFont *Font) *PopUpButtonCell
 	WithControlView(controlView ViewProvider) *PopUpButtonCell
 	WithType(type_ raw.NSCellType) *PopUpButtonCell
 	WithState(state int) *PopUpButtonCell
@@ -774,7 +774,7 @@ type PopUpButtonCellable interface {
 	WithHighlighted(highlighted bool) *PopUpButtonCell
 	WithAlignment(alignment raw.NSTextAlignment) *PopUpButtonCell
 	WithWraps(wraps bool) *PopUpButtonCell
-	WithFont(font *raw.NSFont) *PopUpButtonCell
+	WithFont(font *Font) *PopUpButtonCell
 	WithFormatter(formatter *foundation.NSFormatter) *PopUpButtonCell
 	WithObjectValue(objectValue objc.ID) *PopUpButtonCell
 	WithStringValue(stringValue string) *PopUpButtonCell
@@ -782,10 +782,10 @@ type PopUpButtonCellable interface {
 	WithFloatValue(floatValue float32) *PopUpButtonCell
 	WithDoubleValue(doubleValue float64) *PopUpButtonCell
 	WithIntegerValue(integerValue int) *PopUpButtonCell
-	WithImage(image *raw.NSImage) *PopUpButtonCell
+	WithImage(image *Image) *PopUpButtonCell
 	WithControlSize(controlSize raw.NSControlSize) *PopUpButtonCell
 	WithRepresentedObject(representedObject objc.ID) *PopUpButtonCell
-	WithMenu(menu *raw.NSMenu) *PopUpButtonCell
+	WithMenu(menu *Menu) *PopUpButtonCell
 	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *PopUpButtonCell
 	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *PopUpButtonCell
 	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *PopUpButtonCell
@@ -834,7 +834,7 @@ type PopUpButtonCellable interface {
 	SetUsesItemFromMenu(usesItemFromMenu bool)
 	AltersStateOfSelectedItem() bool
 	SetAltersStateOfSelectedItem(altersStateOfSelectedItem bool)
-	ItemArray() []*raw.NSMenuItem
+	ItemArray() []*MenuItem
 	NumberOfItems() int
 	LastItem() *MenuItem
 	SelectedItem() *MenuItem

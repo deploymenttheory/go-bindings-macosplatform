@@ -108,8 +108,8 @@ func (x *Box) WithMaterials(items ...*raw.SCNMaterial) *Box {
 }
 
 // WithFirstMaterial sets the firstMaterial property and returns the receiver for chaining.
-func (x *Box) WithFirstMaterial(firstMaterial *raw.SCNMaterial) *Box {
-	x.inner.SCNGeometry.SetFirstMaterial(firstMaterial)
+func (x *Box) WithFirstMaterial(firstMaterial *Material) *Box {
+	x.inner.SCNGeometry.SetFirstMaterial(firstMaterial.Unwrap())
 	return x
 }
 
@@ -130,8 +130,8 @@ func (x *Box) WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Box {
 }
 
 // WithTessellator sets the tessellator property and returns the receiver for chaining.
-func (x *Box) WithTessellator(tessellator *raw.SCNGeometryTessellator) *Box {
-	x.inner.SCNGeometry.SetTessellator(tessellator)
+func (x *Box) WithTessellator(tessellator *GeometryTessellator) *Box {
+	x.inner.SCNGeometry.SetTessellator(tessellator.Unwrap())
 	return x
 }
 
@@ -148,14 +148,14 @@ func (x *Box) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Box {
 }
 
 // WithEdgeCreasesElement sets the edgeCreasesElement property and returns the receiver for chaining.
-func (x *Box) WithEdgeCreasesElement(edgeCreasesElement *raw.SCNGeometryElement) *Box {
-	x.inner.SCNGeometry.SetEdgeCreasesElement(edgeCreasesElement)
+func (x *Box) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Box {
+	x.inner.SCNGeometry.SetEdgeCreasesElement(edgeCreasesElement.Unwrap())
 	return x
 }
 
 // WithEdgeCreasesSource sets the edgeCreasesSource property and returns the receiver for chaining.
-func (x *Box) WithEdgeCreasesSource(edgeCreasesSource *raw.SCNGeometrySource) *Box {
-	x.inner.SCNGeometry.SetEdgeCreasesSource(edgeCreasesSource)
+func (x *Box) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Box {
+	x.inner.SCNGeometry.SetEdgeCreasesSource(edgeCreasesSource.Unwrap())
 	return x
 }
 
@@ -254,13 +254,13 @@ type Boxable interface {
 	WithChamferSegmentCount(chamferSegmentCount int) *Box
 	WithName(name string) *Box
 	WithMaterials(items ...*raw.SCNMaterial) *Box
-	WithFirstMaterial(firstMaterial *raw.SCNMaterial) *Box
+	WithFirstMaterial(firstMaterial *Material) *Box
 	WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Box
-	WithTessellator(tessellator *raw.SCNGeometryTessellator) *Box
+	WithTessellator(tessellator *GeometryTessellator) *Box
 	WithSubdivisionLevel(subdivisionLevel uint) *Box
 	WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Box
-	WithEdgeCreasesElement(edgeCreasesElement *raw.SCNGeometryElement) *Box
-	WithEdgeCreasesSource(edgeCreasesSource *raw.SCNGeometrySource) *Box
+	WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Box
+	WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Box
 	Width() float64
 	SetWidth(width float64)
 	Height() float64

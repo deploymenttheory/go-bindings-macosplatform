@@ -62,13 +62,13 @@ func (x *Source) SetGain(gain float64) {
 }
 
 // Shapes returns the collection as a Go slice.
-func (x *Source) Shapes() []*raw.PHASEShape {
+func (x *Source) Shapes() []*Shape {
 	arr := x.inner.Shapes()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PHASEShape {
-		return raw.PHASEShapeFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Shape {
+		return &Shape{inner: raw.PHASEShapeFromID(purego.Retain(_id))}
 	})
 }
 
@@ -80,7 +80,7 @@ type Sourceable interface {
 	WithGain(gain float64) *Source
 	Gain() float64
 	SetGain(gain float64)
-	Shapes() []*raw.PHASEShape
+	Shapes() []*Shape
 }
 
 var _ Sourceable = (*Source)(nil)

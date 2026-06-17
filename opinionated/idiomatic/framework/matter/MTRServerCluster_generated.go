@@ -64,24 +64,24 @@ func (x *MTRServerCluster) ClusterRevision() *foundation.NSNumber {
 }
 
 // AccessGrants returns the collection as a Go slice.
-func (x *MTRServerCluster) AccessGrants() []*raw.MTRAccessGrant {
+func (x *MTRServerCluster) AccessGrants() []*MTRAccessGrant {
 	arr := x.inner.AccessGrants()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MTRAccessGrant {
-		return raw.MTRAccessGrantFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MTRAccessGrant {
+		return &MTRAccessGrant{inner: raw.MTRAccessGrantFromID(purego.Retain(_id))}
 	})
 }
 
 // Attributes returns the collection as a Go slice.
-func (x *MTRServerCluster) Attributes() []*raw.MTRServerAttribute {
+func (x *MTRServerCluster) Attributes() []*MTRServerAttribute {
 	arr := x.inner.Attributes()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MTRServerAttribute {
-		return raw.MTRServerAttributeFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MTRServerAttribute {
+		return &MTRServerAttribute{inner: raw.MTRServerAttributeFromID(purego.Retain(_id))}
 	})
 }
 
@@ -93,8 +93,8 @@ type MTRServerClusterable interface {
 	AddAttribute(attribute *raw.MTRServerAttribute) bool
 	ClusterID() *foundation.NSNumber
 	ClusterRevision() *foundation.NSNumber
-	AccessGrants() []*raw.MTRAccessGrant
-	Attributes() []*raw.MTRServerAttribute
+	AccessGrants() []*MTRAccessGrant
+	Attributes() []*MTRServerAttribute
 }
 
 var _ MTRServerClusterable = (*MTRServerCluster)(nil)

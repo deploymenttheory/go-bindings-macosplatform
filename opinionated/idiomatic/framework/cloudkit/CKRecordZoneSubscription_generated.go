@@ -59,8 +59,8 @@ func (x *RecordZoneSubscription) WithRecordType(recordType *foundation.NSString)
 }
 
 // WithNotificationInfo sets the notificationInfo property and returns the receiver for chaining.
-func (x *RecordZoneSubscription) WithNotificationInfo(notificationInfo *raw.CKNotificationInfo) *RecordZoneSubscription {
-	x.inner.CKSubscription.SetNotificationInfo(notificationInfo)
+func (x *RecordZoneSubscription) WithNotificationInfo(notificationInfo *NotificationInfo) *RecordZoneSubscription {
+	x.inner.CKSubscription.SetNotificationInfo(notificationInfo.Unwrap())
 	return x
 }
 
@@ -93,7 +93,7 @@ func (x *RecordZoneSubscription) asSubscription() *raw.CKSubscription { return &
 type RecordZoneSubscriptionable interface {
 	Unwrap() *raw.CKRecordZoneSubscription
 	WithRecordType(recordType *foundation.NSString) *RecordZoneSubscription
-	WithNotificationInfo(notificationInfo *raw.CKNotificationInfo) *RecordZoneSubscription
+	WithNotificationInfo(notificationInfo *NotificationInfo) *RecordZoneSubscription
 	ZoneID() *RecordZoneID
 	RecordType() string
 	SetRecordType(recordType *foundation.NSString)

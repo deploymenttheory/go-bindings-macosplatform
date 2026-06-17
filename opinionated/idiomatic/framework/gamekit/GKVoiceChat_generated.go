@@ -116,13 +116,13 @@ func (x *VoiceChat) SetVolume(volume float32) {
 }
 
 // Players returns the collection as a Go slice.
-func (x *VoiceChat) Players() []*raw.GKPlayer {
+func (x *VoiceChat) Players() []*Player {
 	arr := x.inner.Players()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.GKPlayer {
-		return raw.GKPlayerFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Player {
+		return &Player{inner: raw.GKPlayerFromID(purego.Retain(_id))}
 	})
 }
 
@@ -169,7 +169,7 @@ type VoiceChatable interface {
 	SetActive(active bool)
 	Volume() float32
 	SetVolume(volume float32)
-	Players() []*raw.GKPlayer
+	Players() []*Player
 	PlayerStateUpdateHandler() objc.Block
 	SetPlayerStateUpdateHandler(playerStateUpdateHandler func(*foundation.NSString, raw.GKVoiceChatPlayerState))
 	SetMuteForPlayer(isMuted bool, playerID string)

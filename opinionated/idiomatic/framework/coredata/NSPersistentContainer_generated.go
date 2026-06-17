@@ -158,13 +158,13 @@ func (x *PersistentContainer) PersistentStoreCoordinator() *PersistentStoreCoord
 }
 
 // PersistentStoreDescriptions returns the collection as a Go slice.
-func (x *PersistentContainer) PersistentStoreDescriptions() []*raw.NSPersistentStoreDescription {
+func (x *PersistentContainer) PersistentStoreDescriptions() []*PersistentStoreDescription {
 	arr := x.inner.PersistentStoreDescriptions()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSPersistentStoreDescription {
-		return raw.NSPersistentStoreDescriptionFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PersistentStoreDescription {
+		return &PersistentStoreDescription{inner: raw.NSPersistentStoreDescriptionFromID(purego.Retain(_id))}
 	})
 }
 
@@ -186,7 +186,7 @@ type PersistentContainerable interface {
 	ViewContext() *ManagedObjectContext
 	ManagedObjectModel() *ManagedObjectModel
 	PersistentStoreCoordinator() *PersistentStoreCoordinator
-	PersistentStoreDescriptions() []*raw.NSPersistentStoreDescription
+	PersistentStoreDescriptions() []*PersistentStoreDescription
 	SetPersistentStoreDescriptions(persistentStoreDescriptions *foundation.NSArray[*raw.NSPersistentStoreDescription])
 }
 

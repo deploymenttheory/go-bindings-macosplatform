@@ -168,13 +168,13 @@ func (x *CollectionViewGridLayout) SetMaximumItemSize(maximumItemSize corefounda
 }
 
 // BackgroundColors returns the collection as a Go slice.
-func (x *CollectionViewGridLayout) BackgroundColors() []*raw.NSColor {
+func (x *CollectionViewGridLayout) BackgroundColors() []*Color {
 	arr := x.inner.BackgroundColors()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSColor {
-		return raw.NSColorFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Color {
+		return &Color{inner: raw.NSColorFromID(purego.Retain(_id))}
 	})
 }
 
@@ -210,7 +210,7 @@ type CollectionViewGridLayoutable interface {
 	SetMinimumItemSize(minimumItemSize corefoundation.CGSize)
 	MaximumItemSize() corefoundation.CGSize
 	SetMaximumItemSize(maximumItemSize corefoundation.CGSize)
-	BackgroundColors() []*raw.NSColor
+	BackgroundColors() []*Color
 	SetBackgroundColors(backgroundColors *foundation.NSArray[*raw.NSColor])
 }
 

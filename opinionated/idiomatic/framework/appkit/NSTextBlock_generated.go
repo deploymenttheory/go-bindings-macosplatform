@@ -44,8 +44,8 @@ func (x *TextBlock) WithVerticalAlignment(verticalAlignment raw.NSTextBlockVerti
 }
 
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
-func (x *TextBlock) WithBackgroundColor(backgroundColor *raw.NSColor) *TextBlock {
-	x.inner.SetBackgroundColor(backgroundColor)
+func (x *TextBlock) WithBackgroundColor(backgroundColor *Color) *TextBlock {
+	x.inner.SetBackgroundColor(backgroundColor.Unwrap())
 	return x
 }
 
@@ -163,7 +163,7 @@ func (x *TextBlock) asTextBlock() *raw.NSTextBlock { return x.inner }
 type TextBlockable interface {
 	Unwrap() *raw.NSTextBlock
 	WithVerticalAlignment(verticalAlignment raw.NSTextBlockVerticalAlignment) *TextBlock
-	WithBackgroundColor(backgroundColor *raw.NSColor) *TextBlock
+	WithBackgroundColor(backgroundColor *Color) *TextBlock
 	SetValueTypeForDimension(val float64, type_ raw.NSTextBlockValueType, dimension raw.NSTextBlockDimension)
 	ValueForDimension(dimension raw.NSTextBlockDimension) float64
 	ValueTypeForDimension(dimension raw.NSTextBlockDimension) raw.NSTextBlockValueType

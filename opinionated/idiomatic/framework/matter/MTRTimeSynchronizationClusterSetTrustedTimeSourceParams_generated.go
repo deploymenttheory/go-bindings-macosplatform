@@ -37,8 +37,8 @@ func NewMTRTimeSynchronizationClusterSetTrustedTimeSourceParams() *MTRTimeSynchr
 }
 
 // WithTrustedTimeSource sets the trustedTimeSource property and returns the receiver for chaining.
-func (x *MTRTimeSynchronizationClusterSetTrustedTimeSourceParams) WithTrustedTimeSource(trustedTimeSource *raw.MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct) *MTRTimeSynchronizationClusterSetTrustedTimeSourceParams {
-	x.inner.SetTrustedTimeSource(trustedTimeSource)
+func (x *MTRTimeSynchronizationClusterSetTrustedTimeSourceParams) WithTrustedTimeSource(trustedTimeSource *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct) *MTRTimeSynchronizationClusterSetTrustedTimeSourceParams {
+	x.inner.SetTrustedTimeSource(trustedTimeSource.Unwrap())
 	return x
 }
 
@@ -91,7 +91,7 @@ func (x *MTRTimeSynchronizationClusterSetTrustedTimeSourceParams) SetServerSideP
 // MTRTimeSynchronizationClusterSetTrustedTimeSourceParamsable is the interface implemented by [MTRTimeSynchronizationClusterSetTrustedTimeSourceParams], for mocking and DI.
 type MTRTimeSynchronizationClusterSetTrustedTimeSourceParamsable interface {
 	Unwrap() *raw.MTRTimeSynchronizationClusterSetTrustedTimeSourceParams
-	WithTrustedTimeSource(trustedTimeSource *raw.MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct) *MTRTimeSynchronizationClusterSetTrustedTimeSourceParams
+	WithTrustedTimeSource(trustedTimeSource *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct) *MTRTimeSynchronizationClusterSetTrustedTimeSourceParams
 	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTimeSynchronizationClusterSetTrustedTimeSourceParams
 	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRTimeSynchronizationClusterSetTrustedTimeSourceParams
 	TrustedTimeSource() *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct

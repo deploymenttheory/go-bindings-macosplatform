@@ -46,13 +46,13 @@ func (x *NotificationCategory) Identifier() string {
 }
 
 // Actions returns the collection as a Go slice.
-func (x *NotificationCategory) Actions() []*raw.UNNotificationAction {
+func (x *NotificationCategory) Actions() []*NotificationAction {
 	arr := x.inner.Actions()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.UNNotificationAction {
-		return raw.UNNotificationActionFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *NotificationAction {
+		return &NotificationAction{inner: raw.UNNotificationActionFromID(purego.Retain(_id))}
 	})
 }
 
@@ -94,7 +94,7 @@ func (x *NotificationCategory) CategorySummaryFormat() string {
 type NotificationCategoryable interface {
 	Unwrap() *raw.UNNotificationCategory
 	Identifier() string
-	Actions() []*raw.UNNotificationAction
+	Actions() []*NotificationAction
 	IntentIdentifiers() []string
 	Options() raw.UNNotificationCategoryOptions
 	HiddenPreviewsBodyPlaceholder() string

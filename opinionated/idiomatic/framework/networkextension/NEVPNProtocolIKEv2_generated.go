@@ -122,8 +122,8 @@ func (x *NEVPNProtocolIKEv2) WithMtu(mtu uint) *NEVPNProtocolIKEv2 {
 }
 
 // WithPpkConfiguration sets the ppkConfiguration property and returns the receiver for chaining.
-func (x *NEVPNProtocolIKEv2) WithPpkConfiguration(ppkConfiguration *raw.NEVPNIKEv2PPKConfiguration) *NEVPNProtocolIKEv2 {
-	x.inner.SetPpkConfiguration(ppkConfiguration)
+func (x *NEVPNProtocolIKEv2) WithPpkConfiguration(ppkConfiguration *NEVPNIKEv2PPKConfiguration) *NEVPNProtocolIKEv2 {
+	x.inner.SetPpkConfiguration(ppkConfiguration.Unwrap())
 	return x
 }
 
@@ -200,8 +200,8 @@ func (x *NEVPNProtocolIKEv2) WithDisconnectOnSleep(disconnectOnSleep bool) *NEVP
 }
 
 // WithProxySettings sets the proxySettings property and returns the receiver for chaining.
-func (x *NEVPNProtocolIKEv2) WithProxySettings(proxySettings *raw.NEProxySettings) *NEVPNProtocolIKEv2 {
-	x.inner.NEVPNProtocolIPSec.NEVPNProtocol.SetProxySettings(proxySettings)
+func (x *NEVPNProtocolIKEv2) WithProxySettings(proxySettings *NEProxySettings) *NEVPNProtocolIKEv2 {
+	x.inner.NEVPNProtocolIPSec.NEVPNProtocol.SetProxySettings(proxySettings.Unwrap())
 	return x
 }
 
@@ -442,7 +442,7 @@ type NEVPNProtocolIKEv2able interface {
 	WithMinimumTLSVersion(minimumTLSVersion raw.NEVPNIKEv2TLSVersion) *NEVPNProtocolIKEv2
 	WithMaximumTLSVersion(maximumTLSVersion raw.NEVPNIKEv2TLSVersion) *NEVPNProtocolIKEv2
 	WithMtu(mtu uint) *NEVPNProtocolIKEv2
-	WithPpkConfiguration(ppkConfiguration *raw.NEVPNIKEv2PPKConfiguration) *NEVPNProtocolIKEv2
+	WithPpkConfiguration(ppkConfiguration *NEVPNIKEv2PPKConfiguration) *NEVPNProtocolIKEv2
 	WithAuthenticationMethod(authenticationMethod raw.NEVPNIKEAuthenticationMethod) *NEVPNProtocolIKEv2
 	WithUseExtendedAuthentication(useExtendedAuthentication bool) *NEVPNProtocolIKEv2
 	WithSharedSecretReference(sharedSecretReference *foundation.NSData) *NEVPNProtocolIKEv2
@@ -455,7 +455,7 @@ type NEVPNProtocolIKEv2able interface {
 	WithIdentityData(identityData *foundation.NSData) *NEVPNProtocolIKEv2
 	WithIdentityDataPassword(identityDataPassword string) *NEVPNProtocolIKEv2
 	WithDisconnectOnSleep(disconnectOnSleep bool) *NEVPNProtocolIKEv2
-	WithProxySettings(proxySettings *raw.NEProxySettings) *NEVPNProtocolIKEv2
+	WithProxySettings(proxySettings *NEProxySettings) *NEVPNProtocolIKEv2
 	WithIncludeAllNetworks(includeAllNetworks bool) *NEVPNProtocolIKEv2
 	WithExcludeLocalNetworks(excludeLocalNetworks bool) *NEVPNProtocolIKEv2
 	WithExcludeCellularServices(excludeCellularServices bool) *NEVPNProtocolIKEv2

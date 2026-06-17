@@ -114,13 +114,13 @@ func (x *TextLayoutFragment) RangeInElement() *TextRange {
 }
 
 // TextLineFragments returns the collection as a Go slice.
-func (x *TextLayoutFragment) TextLineFragments() []*raw.NSTextLineFragment {
+func (x *TextLayoutFragment) TextLineFragments() []*TextLineFragment {
 	arr := x.inner.TextLineFragments()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSTextLineFragment {
-		return raw.NSTextLineFragmentFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *TextLineFragment {
+		return &TextLineFragment{inner: raw.NSTextLineFragmentFromID(purego.Retain(_id))}
 	})
 }
 
@@ -170,13 +170,13 @@ func (x *TextLayoutFragment) BottomMargin() float64 {
 }
 
 // TextAttachmentViewProviders returns the collection as a Go slice.
-func (x *TextLayoutFragment) TextAttachmentViewProviders() []*raw.NSTextAttachmentViewProvider {
+func (x *TextLayoutFragment) TextAttachmentViewProviders() []*TextAttachmentViewProvider {
 	arr := x.inner.TextAttachmentViewProviders()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSTextAttachmentViewProvider {
-		return raw.NSTextAttachmentViewProviderFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *TextAttachmentViewProvider {
+		return &TextAttachmentViewProvider{inner: raw.NSTextAttachmentViewProviderFromID(purego.Retain(_id))}
 	})
 }
 
@@ -192,7 +192,7 @@ type TextLayoutFragmentable interface {
 	TextLayoutManager() *TextLayoutManager
 	TextElement() *TextElement
 	RangeInElement() *TextRange
-	TextLineFragments() []*raw.NSTextLineFragment
+	TextLineFragments() []*TextLineFragment
 	LayoutQueue() *foundation.NSOperationQueue
 	SetLayoutQueue(layoutQueue *foundation.NSOperationQueue)
 	State() raw.NSTextLayoutFragmentState
@@ -202,7 +202,7 @@ type TextLayoutFragmentable interface {
 	TrailingPadding() float64
 	TopMargin() float64
 	BottomMargin() float64
-	TextAttachmentViewProviders() []*raw.NSTextAttachmentViewProvider
+	TextAttachmentViewProviders() []*TextAttachmentViewProvider
 }
 
 var _ TextLayoutFragmentable = (*TextLayoutFragment)(nil)

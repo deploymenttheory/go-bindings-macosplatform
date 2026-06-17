@@ -77,19 +77,19 @@ func (x *NETransparentProxyNetworkSettings) WithDNSSettings(dNSSettings NEDNSSet
 }
 
 // WithProxySettings sets the proxySettings property and returns the receiver for chaining.
-func (x *NETransparentProxyNetworkSettings) WithProxySettings(proxySettings *raw.NEProxySettings) *NETransparentProxyNetworkSettings {
-	x.inner.NETunnelNetworkSettings.SetProxySettings(proxySettings)
+func (x *NETransparentProxyNetworkSettings) WithProxySettings(proxySettings *NEProxySettings) *NETransparentProxyNetworkSettings {
+	x.inner.NETunnelNetworkSettings.SetProxySettings(proxySettings.Unwrap())
 	return x
 }
 
 // IncludedNetworkRules returns the collection as a Go slice.
-func (x *NETransparentProxyNetworkSettings) IncludedNetworkRules() []*raw.NENetworkRule {
+func (x *NETransparentProxyNetworkSettings) IncludedNetworkRules() []*NENetworkRule {
 	arr := x.inner.IncludedNetworkRules()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NENetworkRule {
-		return raw.NENetworkRuleFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *NENetworkRule {
+		return &NENetworkRule{inner: raw.NENetworkRuleFromID(purego.Retain(_id))}
 	})
 }
 
@@ -99,13 +99,13 @@ func (x *NETransparentProxyNetworkSettings) SetIncludedNetworkRules(includedNetw
 }
 
 // ExcludedNetworkRules returns the collection as a Go slice.
-func (x *NETransparentProxyNetworkSettings) ExcludedNetworkRules() []*raw.NENetworkRule {
+func (x *NETransparentProxyNetworkSettings) ExcludedNetworkRules() []*NENetworkRule {
 	arr := x.inner.ExcludedNetworkRules()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NENetworkRule {
-		return raw.NENetworkRuleFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *NENetworkRule {
+		return &NENetworkRule{inner: raw.NENetworkRuleFromID(purego.Retain(_id))}
 	})
 }
 
@@ -122,10 +122,10 @@ type NETransparentProxyNetworkSettingsable interface {
 	WithIncludedNetworkRules(items ...*raw.NENetworkRule) *NETransparentProxyNetworkSettings
 	WithExcludedNetworkRules(items ...*raw.NENetworkRule) *NETransparentProxyNetworkSettings
 	WithDNSSettings(dNSSettings NEDNSSettingsProvider) *NETransparentProxyNetworkSettings
-	WithProxySettings(proxySettings *raw.NEProxySettings) *NETransparentProxyNetworkSettings
-	IncludedNetworkRules() []*raw.NENetworkRule
+	WithProxySettings(proxySettings *NEProxySettings) *NETransparentProxyNetworkSettings
+	IncludedNetworkRules() []*NENetworkRule
 	SetIncludedNetworkRules(includedNetworkRules *foundation.NSArray[*raw.NENetworkRule])
-	ExcludedNetworkRules() []*raw.NENetworkRule
+	ExcludedNetworkRules() []*NENetworkRule
 	SetExcludedNetworkRules(excludedNetworkRules *foundation.NSArray[*raw.NENetworkRule])
 }
 

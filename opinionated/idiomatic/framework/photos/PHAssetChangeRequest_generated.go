@@ -56,8 +56,8 @@ func (x *AssetChangeRequest) WithHidden(hidden bool) *AssetChangeRequest {
 }
 
 // WithContentEditingOutput sets the contentEditingOutput property and returns the receiver for chaining.
-func (x *AssetChangeRequest) WithContentEditingOutput(contentEditingOutput *raw.PHContentEditingOutput) *AssetChangeRequest {
-	x.inner.SetContentEditingOutput(contentEditingOutput)
+func (x *AssetChangeRequest) WithContentEditingOutput(contentEditingOutput *ContentEditingOutput) *AssetChangeRequest {
+	x.inner.SetContentEditingOutput(contentEditingOutput.Unwrap())
 	return x
 }
 
@@ -139,7 +139,7 @@ type AssetChangeRequestable interface {
 	WithCreationDate(creationDate *foundation.NSDate) *AssetChangeRequest
 	WithFavorite(favorite bool) *AssetChangeRequest
 	WithHidden(hidden bool) *AssetChangeRequest
-	WithContentEditingOutput(contentEditingOutput *raw.PHContentEditingOutput) *AssetChangeRequest
+	WithContentEditingOutput(contentEditingOutput *ContentEditingOutput) *AssetChangeRequest
 	RevertAssetContentToOriginal()
 	PlaceholderForCreatedAsset() *ObjectPlaceholder
 	CreationDate() *foundation.NSDate

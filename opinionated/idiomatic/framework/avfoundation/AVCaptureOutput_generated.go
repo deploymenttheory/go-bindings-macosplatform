@@ -73,13 +73,13 @@ func (x *CaptureOutput) RectForMetadataOutputRectOfInterest(rectInMetadataOutput
 }
 
 // Connections returns the collection as a Go slice.
-func (x *CaptureOutput) Connections() []*raw.AVCaptureConnection {
+func (x *CaptureOutput) Connections() []*CaptureConnection {
 	arr := x.inner.Connections()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVCaptureConnection {
-		return raw.AVCaptureConnectionFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CaptureConnection {
+		return &CaptureConnection{inner: raw.AVCaptureConnectionFromID(purego.Retain(_id))}
 	})
 }
 
@@ -108,7 +108,7 @@ type CaptureOutputable interface {
 	TransformedMetadataObjectForMetadataObjectConnection(metadataObject *raw.AVMetadataObject, connection *raw.AVCaptureConnection) *MetadataObject
 	MetadataOutputRectOfInterestForRect(rectInOutputCoordinates corefoundation.CGRect) corefoundation.CGRect
 	RectForMetadataOutputRectOfInterest(rectInMetadataOutputCoordinates corefoundation.CGRect) corefoundation.CGRect
-	Connections() []*raw.AVCaptureConnection
+	Connections() []*CaptureConnection
 	IsDeferredStartSupported() bool
 	IsDeferredStartEnabled() bool
 	SetDeferredStartEnabled(deferredStartEnabled bool)

@@ -68,8 +68,8 @@ func (x *SharingServicePickerToolbarItem) WithToolTip(toolTip string) *SharingSe
 }
 
 // WithMenuFormRepresentation sets the menuFormRepresentation property and returns the receiver for chaining.
-func (x *SharingServicePickerToolbarItem) WithMenuFormRepresentation(menuFormRepresentation *raw.NSMenuItem) *SharingServicePickerToolbarItem {
-	x.inner.NSToolbarItem.SetMenuFormRepresentation(menuFormRepresentation)
+func (x *SharingServicePickerToolbarItem) WithMenuFormRepresentation(menuFormRepresentation *MenuItem) *SharingServicePickerToolbarItem {
+	x.inner.NSToolbarItem.SetMenuFormRepresentation(menuFormRepresentation.Unwrap())
 	return x
 }
 
@@ -98,8 +98,8 @@ func (x *SharingServicePickerToolbarItem) WithEnabled(enabled bool) *SharingServ
 }
 
 // WithImage sets the image property and returns the receiver for chaining.
-func (x *SharingServicePickerToolbarItem) WithImage(image *raw.NSImage) *SharingServicePickerToolbarItem {
-	x.inner.NSToolbarItem.SetImage(image)
+func (x *SharingServicePickerToolbarItem) WithImage(image *Image) *SharingServicePickerToolbarItem {
+	x.inner.NSToolbarItem.SetImage(image.Unwrap())
 	return x
 }
 
@@ -116,8 +116,8 @@ func (x *SharingServicePickerToolbarItem) WithBordered(bordered bool) *SharingSe
 }
 
 // WithBackgroundTintColor sets the backgroundTintColor property and returns the receiver for chaining.
-func (x *SharingServicePickerToolbarItem) WithBackgroundTintColor(backgroundTintColor *raw.NSColor) *SharingServicePickerToolbarItem {
-	x.inner.NSToolbarItem.SetBackgroundTintColor(backgroundTintColor)
+func (x *SharingServicePickerToolbarItem) WithBackgroundTintColor(backgroundTintColor *Color) *SharingServicePickerToolbarItem {
+	x.inner.NSToolbarItem.SetBackgroundTintColor(backgroundTintColor.Unwrap())
 	return x
 }
 
@@ -164,8 +164,8 @@ func (x *SharingServicePickerToolbarItem) WithVisibilityPriority(visibilityPrior
 }
 
 // WithBadge sets the badge property and returns the receiver for chaining.
-func (x *SharingServicePickerToolbarItem) WithBadge(badge *raw.NSItemBadge) *SharingServicePickerToolbarItem {
-	x.inner.NSToolbarItem.SetBadge(badge)
+func (x *SharingServicePickerToolbarItem) WithBadge(badge *ItemBadge) *SharingServicePickerToolbarItem {
+	x.inner.NSToolbarItem.SetBadge(badge.Unwrap())
 	return x
 }
 
@@ -195,15 +195,15 @@ type SharingServicePickerToolbarItemable interface {
 	WithPaletteLabel(paletteLabel string) *SharingServicePickerToolbarItem
 	WithPossibleLabels(possibleLabels *foundation.NSSet[*foundation.NSString]) *SharingServicePickerToolbarItem
 	WithToolTip(toolTip string) *SharingServicePickerToolbarItem
-	WithMenuFormRepresentation(menuFormRepresentation *raw.NSMenuItem) *SharingServicePickerToolbarItem
+	WithMenuFormRepresentation(menuFormRepresentation *MenuItem) *SharingServicePickerToolbarItem
 	WithTag(tag int) *SharingServicePickerToolbarItem
 	WithTarget(target objc.ID) *SharingServicePickerToolbarItem
 	WithAction(action objc.SEL) *SharingServicePickerToolbarItem
 	WithEnabled(enabled bool) *SharingServicePickerToolbarItem
-	WithImage(image *raw.NSImage) *SharingServicePickerToolbarItem
+	WithImage(image *Image) *SharingServicePickerToolbarItem
 	WithTitle(title string) *SharingServicePickerToolbarItem
 	WithBordered(bordered bool) *SharingServicePickerToolbarItem
-	WithBackgroundTintColor(backgroundTintColor *raw.NSColor) *SharingServicePickerToolbarItem
+	WithBackgroundTintColor(backgroundTintColor *Color) *SharingServicePickerToolbarItem
 	WithStyle(style raw.NSToolbarItemStyle) *SharingServicePickerToolbarItem
 	WithNavigational(navigational bool) *SharingServicePickerToolbarItem
 	WithView(view ViewProvider) *SharingServicePickerToolbarItem
@@ -211,7 +211,7 @@ type SharingServicePickerToolbarItemable interface {
 	WithMinSize(minSize corefoundation.CGSize) *SharingServicePickerToolbarItem
 	WithMaxSize(maxSize corefoundation.CGSize) *SharingServicePickerToolbarItem
 	WithVisibilityPriority(visibilityPriority int) *SharingServicePickerToolbarItem
-	WithBadge(badge *raw.NSItemBadge) *SharingServicePickerToolbarItem
+	WithBadge(badge *ItemBadge) *SharingServicePickerToolbarItem
 	WithAutovalidates(autovalidates bool) *SharingServicePickerToolbarItem
 	Delegate() raw.NSSharingServicePickerToolbarItemDelegate
 	SetDelegate(delegate raw.NSSharingServicePickerToolbarItemDelegate)

@@ -120,8 +120,8 @@ func (x *ReferenceNode) WithName(name string) *ReferenceNode {
 }
 
 // WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
-func (x *ReferenceNode) WithPhysicsBody(physicsBody *raw.SKPhysicsBody) *ReferenceNode {
-	x.inner.SKNode.SetPhysicsBody(physicsBody)
+func (x *ReferenceNode) WithPhysicsBody(physicsBody *PhysicsBody) *ReferenceNode {
+	x.inner.SKNode.SetPhysicsBody(physicsBody.Unwrap())
 	return x
 }
 
@@ -132,8 +132,8 @@ func (x *ReferenceNode) WithUserData(userData *foundation.NSMutableDictionary[ob
 }
 
 // WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
-func (x *ReferenceNode) WithReachConstraints(reachConstraints *raw.SKReachConstraints) *ReferenceNode {
-	x.inner.SKNode.SetReachConstraints(reachConstraints)
+func (x *ReferenceNode) WithReachConstraints(reachConstraints *ReachConstraints) *ReferenceNode {
+	x.inner.SKNode.SetReachConstraints(reachConstraints.Unwrap())
 	return x
 }
 
@@ -239,9 +239,9 @@ type ReferenceNodeable interface {
 	WithHidden(hidden bool) *ReferenceNode
 	WithUserInteractionEnabled(userInteractionEnabled bool) *ReferenceNode
 	WithName(name string) *ReferenceNode
-	WithPhysicsBody(physicsBody *raw.SKPhysicsBody) *ReferenceNode
+	WithPhysicsBody(physicsBody *PhysicsBody) *ReferenceNode
 	WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *ReferenceNode
-	WithReachConstraints(reachConstraints *raw.SKReachConstraints) *ReferenceNode
+	WithReachConstraints(reachConstraints *ReachConstraints) *ReferenceNode
 	WithConstraints(items ...*raw.SKConstraint) *ReferenceNode
 	WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *ReferenceNode
 	WithAccessibilityElement(accessibilityElement bool) *ReferenceNode

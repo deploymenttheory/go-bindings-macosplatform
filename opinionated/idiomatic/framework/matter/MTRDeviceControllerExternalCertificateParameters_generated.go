@@ -83,8 +83,8 @@ func (x *MTRDeviceControllerExternalCertificateParameters) WithConcurrentSubscri
 }
 
 // WithStorageBehaviorConfiguration sets the storageBehaviorConfiguration property and returns the receiver for chaining.
-func (x *MTRDeviceControllerExternalCertificateParameters) WithStorageBehaviorConfiguration(storageBehaviorConfiguration *raw.MTRDeviceStorageBehaviorConfiguration) *MTRDeviceControllerExternalCertificateParameters {
-	x.inner.MTRDeviceControllerParameters.SetStorageBehaviorConfiguration(storageBehaviorConfiguration)
+func (x *MTRDeviceControllerExternalCertificateParameters) WithStorageBehaviorConfiguration(storageBehaviorConfiguration *MTRDeviceStorageBehaviorConfiguration) *MTRDeviceControllerExternalCertificateParameters {
+	x.inner.MTRDeviceControllerParameters.SetStorageBehaviorConfiguration(storageBehaviorConfiguration.Unwrap())
 	return x
 }
 
@@ -110,7 +110,7 @@ type MTRDeviceControllerExternalCertificateParametersable interface {
 	WithCertificationDeclarationCertificates(items ...*foundation.NSData) *MTRDeviceControllerExternalCertificateParameters
 	WithShouldAdvertiseOperational(shouldAdvertiseOperational bool) *MTRDeviceControllerExternalCertificateParameters
 	WithConcurrentSubscriptionEstablishmentsAllowedOnThread(concurrentSubscriptionEstablishmentsAllowedOnThread uint) *MTRDeviceControllerExternalCertificateParameters
-	WithStorageBehaviorConfiguration(storageBehaviorConfiguration *raw.MTRDeviceStorageBehaviorConfiguration) *MTRDeviceControllerExternalCertificateParameters
+	WithStorageBehaviorConfiguration(storageBehaviorConfiguration *MTRDeviceStorageBehaviorConfiguration) *MTRDeviceControllerExternalCertificateParameters
 	WithStartSuspended(startSuspended bool) *MTRDeviceControllerExternalCertificateParameters
 	RootCertificate() *foundation.NSData
 }

@@ -101,13 +101,13 @@ func (x *ObstacleGraph) ClassForGenericArgumentAtIndex(index uint) objc.Class {
 }
 
 // Obstacles returns the collection as a Go slice.
-func (x *ObstacleGraph) Obstacles() []*raw.GKPolygonObstacle {
+func (x *ObstacleGraph) Obstacles() []*PolygonObstacle {
 	arr := x.inner.Obstacles()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.GKPolygonObstacle {
-		return raw.GKPolygonObstacleFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PolygonObstacle {
+		return &PolygonObstacle{inner: raw.GKPolygonObstacleFromID(purego.Retain(_id))}
 	})
 }
 
@@ -132,7 +132,7 @@ type ObstacleGraphable interface {
 	UnlockConnectionFromNodeToNode(startNode objc.ID, endNode objc.ID)
 	IsConnectionLockedFromNodeToNode(startNode objc.ID, endNode objc.ID) bool
 	ClassForGenericArgumentAtIndex(index uint) objc.Class
-	Obstacles() []*raw.GKPolygonObstacle
+	Obstacles() []*PolygonObstacle
 	BufferRadius() float32
 }
 

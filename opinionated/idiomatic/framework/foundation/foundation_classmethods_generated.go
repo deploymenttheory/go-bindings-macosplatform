@@ -386,24 +386,24 @@ func MainBundle() *Bundle {
 }
 
 // AllBundles returns the collection as a Go slice.
-func AllBundles() []*raw.NSBundle {
+func AllBundles() []*Bundle {
 	arr := raw.NSBundleAllBundles()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSBundle {
-		return raw.NSBundleFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Bundle {
+		return &Bundle{inner: raw.NSBundleFromID(purego.Retain(_id))}
 	})
 }
 
 // AllFrameworks returns the collection as a Go slice.
-func AllFrameworks() []*raw.NSBundle {
+func AllFrameworks() []*Bundle {
 	arr := raw.NSBundleAllFrameworks()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSBundle {
-		return raw.NSBundleFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Bundle {
+		return &Bundle{inner: raw.NSBundleFromID(purego.Retain(_id))}
 	})
 }
 
@@ -780,13 +780,13 @@ func NotPredicateWithSubpredicate(predicate *raw.NSPredicate) *CompoundPredicate
 }
 
 // AllConnections returns the collection as a Go slice.
-func AllConnections() []*raw.NSConnection {
+func AllConnections() []*Connection {
 	arr := raw.NSConnectionAllConnections()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSConnection {
-		return raw.NSConnectionFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Connection {
+		return &Connection{inner: raw.NSConnectionFromID(purego.Retain(_id))}
 	})
 }
 
@@ -4153,13 +4153,13 @@ func CurrentThread() *Thread {
 }
 
 // CallStackReturnAddresses returns the collection as a Go slice.
-func CallStackReturnAddresses() []*raw.NSNumber {
+func CallStackReturnAddresses() []*Number {
 	arr := raw.NSThreadCallStackReturnAddresses()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSNumber {
-		return raw.NSNumberFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Number {
+		return &Number{inner: raw.NSNumberFromID(purego.Retain(_id))}
 	})
 }
 
@@ -6886,13 +6886,13 @@ func ValueTransformerForName(name *raw.NSString) *ValueTransformer {
 }
 
 // ValueTransformerNames returns the collection as a Go slice.
-func ValueTransformerNames() []*raw.NSString {
+func ValueTransformerNames() []*String {
 	arr := raw.NSValueTransformerValueTransformerNames()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSString {
-		return raw.NSStringFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *String {
+		return &String{inner: raw.NSStringFromID(purego.Retain(_id))}
 	})
 }
 

@@ -445,13 +445,13 @@ func ConnectionWithInputPortVideoPreviewLayer(port *raw.AVCaptureInputPort, laye
 }
 
 // Devices returns the collection as a Go slice.
-func Devices() []*raw.AVCaptureDevice {
+func Devices() []*CaptureDevice {
 	arr := raw.AVCaptureDeviceDevices()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVCaptureDevice {
-		return raw.AVCaptureDeviceFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CaptureDevice {
+		return &CaptureDevice{inner: raw.AVCaptureDeviceFromID(purego.Retain(_id))}
 	})
 }
 

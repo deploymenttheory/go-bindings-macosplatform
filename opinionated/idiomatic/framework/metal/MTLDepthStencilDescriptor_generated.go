@@ -50,14 +50,14 @@ func (x *DepthStencilDescriptor) WithDepthWriteEnabled(depthWriteEnabled bool) *
 }
 
 // WithFrontFaceStencil sets the frontFaceStencil property and returns the receiver for chaining.
-func (x *DepthStencilDescriptor) WithFrontFaceStencil(frontFaceStencil *raw.MTLStencilDescriptor) *DepthStencilDescriptor {
-	x.inner.SetFrontFaceStencil(frontFaceStencil)
+func (x *DepthStencilDescriptor) WithFrontFaceStencil(frontFaceStencil *StencilDescriptor) *DepthStencilDescriptor {
+	x.inner.SetFrontFaceStencil(frontFaceStencil.Unwrap())
 	return x
 }
 
 // WithBackFaceStencil sets the backFaceStencil property and returns the receiver for chaining.
-func (x *DepthStencilDescriptor) WithBackFaceStencil(backFaceStencil *raw.MTLStencilDescriptor) *DepthStencilDescriptor {
-	x.inner.SetBackFaceStencil(backFaceStencil)
+func (x *DepthStencilDescriptor) WithBackFaceStencil(backFaceStencil *StencilDescriptor) *DepthStencilDescriptor {
+	x.inner.SetBackFaceStencil(backFaceStencil.Unwrap())
 	return x
 }
 
@@ -134,8 +134,8 @@ type DepthStencilDescriptorable interface {
 	Unwrap() *raw.MTLDepthStencilDescriptor
 	WithDepthCompareFunction(depthCompareFunction raw.MTLCompareFunction) *DepthStencilDescriptor
 	WithDepthWriteEnabled(depthWriteEnabled bool) *DepthStencilDescriptor
-	WithFrontFaceStencil(frontFaceStencil *raw.MTLStencilDescriptor) *DepthStencilDescriptor
-	WithBackFaceStencil(backFaceStencil *raw.MTLStencilDescriptor) *DepthStencilDescriptor
+	WithFrontFaceStencil(frontFaceStencil *StencilDescriptor) *DepthStencilDescriptor
+	WithBackFaceStencil(backFaceStencil *StencilDescriptor) *DepthStencilDescriptor
 	WithLabel(label string) *DepthStencilDescriptor
 	DepthCompareFunction() raw.MTLCompareFunction
 	SetDepthCompareFunction(depthCompareFunction raw.MTLCompareFunction)

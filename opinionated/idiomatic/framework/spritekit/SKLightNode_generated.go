@@ -142,8 +142,8 @@ func (x *LightNode) WithName(name string) *LightNode {
 }
 
 // WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
-func (x *LightNode) WithPhysicsBody(physicsBody *raw.SKPhysicsBody) *LightNode {
-	x.inner.SKNode.SetPhysicsBody(physicsBody)
+func (x *LightNode) WithPhysicsBody(physicsBody *PhysicsBody) *LightNode {
+	x.inner.SKNode.SetPhysicsBody(physicsBody.Unwrap())
 	return x
 }
 
@@ -154,8 +154,8 @@ func (x *LightNode) WithUserData(userData *foundation.NSMutableDictionary[objc.I
 }
 
 // WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
-func (x *LightNode) WithReachConstraints(reachConstraints *raw.SKReachConstraints) *LightNode {
-	x.inner.SKNode.SetReachConstraints(reachConstraints)
+func (x *LightNode) WithReachConstraints(reachConstraints *ReachConstraints) *LightNode {
+	x.inner.SKNode.SetReachConstraints(reachConstraints.Unwrap())
 	return x
 }
 
@@ -317,9 +317,9 @@ type LightNodeable interface {
 	WithHidden(hidden bool) *LightNode
 	WithUserInteractionEnabled(userInteractionEnabled bool) *LightNode
 	WithName(name string) *LightNode
-	WithPhysicsBody(physicsBody *raw.SKPhysicsBody) *LightNode
+	WithPhysicsBody(physicsBody *PhysicsBody) *LightNode
 	WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *LightNode
-	WithReachConstraints(reachConstraints *raw.SKReachConstraints) *LightNode
+	WithReachConstraints(reachConstraints *ReachConstraints) *LightNode
 	WithConstraints(items ...*raw.SKConstraint) *LightNode
 	WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *LightNode
 	WithAccessibilityElement(accessibilityElement bool) *LightNode

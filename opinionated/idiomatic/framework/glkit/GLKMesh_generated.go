@@ -49,13 +49,13 @@ func (x *Mesh) VertexCount() uint {
 }
 
 // VertexBuffers returns the collection as a Go slice.
-func (x *Mesh) VertexBuffers() []*raw.GLKMeshBuffer {
+func (x *Mesh) VertexBuffers() []*MeshBuffer {
 	arr := x.inner.VertexBuffers()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.GLKMeshBuffer {
-		return raw.GLKMeshBufferFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MeshBuffer {
+		return &MeshBuffer{inner: raw.GLKMeshBufferFromID(purego.Retain(_id))}
 	})
 }
 
@@ -65,13 +65,13 @@ func (x *Mesh) VertexDescriptor() *modelio.MDLVertexDescriptor {
 }
 
 // Submeshes returns the collection as a Go slice.
-func (x *Mesh) Submeshes() []*raw.GLKSubmesh {
+func (x *Mesh) Submeshes() []*Submesh {
 	arr := x.inner.Submeshes()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.GLKSubmesh {
-		return raw.GLKSubmeshFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Submesh {
+		return &Submesh{inner: raw.GLKSubmeshFromID(purego.Retain(_id))}
 	})
 }
 
@@ -88,9 +88,9 @@ func (x *Mesh) Name() string {
 type Meshable interface {
 	Unwrap() *raw.GLKMesh
 	VertexCount() uint
-	VertexBuffers() []*raw.GLKMeshBuffer
+	VertexBuffers() []*MeshBuffer
 	VertexDescriptor() *modelio.MDLVertexDescriptor
-	Submeshes() []*raw.GLKSubmesh
+	Submeshes() []*Submesh
 	Name() string
 }
 

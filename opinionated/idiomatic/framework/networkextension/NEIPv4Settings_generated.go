@@ -114,13 +114,13 @@ func (x *NEIPv4Settings) SetRouter(router string) {
 }
 
 // IncludedRoutes returns the collection as a Go slice.
-func (x *NEIPv4Settings) IncludedRoutes() []*raw.NEIPv4Route {
+func (x *NEIPv4Settings) IncludedRoutes() []*NEIPv4Route {
 	arr := x.inner.IncludedRoutes()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NEIPv4Route {
-		return raw.NEIPv4RouteFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *NEIPv4Route {
+		return &NEIPv4Route{inner: raw.NEIPv4RouteFromID(purego.Retain(_id))}
 	})
 }
 
@@ -130,13 +130,13 @@ func (x *NEIPv4Settings) SetIncludedRoutes(includedRoutes *foundation.NSArray[*r
 }
 
 // ExcludedRoutes returns the collection as a Go slice.
-func (x *NEIPv4Settings) ExcludedRoutes() []*raw.NEIPv4Route {
+func (x *NEIPv4Settings) ExcludedRoutes() []*NEIPv4Route {
 	arr := x.inner.ExcludedRoutes()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NEIPv4Route {
-		return raw.NEIPv4RouteFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *NEIPv4Route {
+		return &NEIPv4Route{inner: raw.NEIPv4RouteFromID(purego.Retain(_id))}
 	})
 }
 
@@ -155,9 +155,9 @@ type NEIPv4Settingsable interface {
 	SubnetMasks() []string
 	Router() string
 	SetRouter(router string)
-	IncludedRoutes() []*raw.NEIPv4Route
+	IncludedRoutes() []*NEIPv4Route
 	SetIncludedRoutes(includedRoutes *foundation.NSArray[*raw.NEIPv4Route])
-	ExcludedRoutes() []*raw.NEIPv4Route
+	ExcludedRoutes() []*NEIPv4Route
 	SetExcludedRoutes(excludedRoutes *foundation.NSArray[*raw.NEIPv4Route])
 }
 

@@ -106,13 +106,13 @@ func (x *VertexDescriptor) SetPackedOffsets() {
 }
 
 // Attributes returns the collection as a Go slice.
-func (x *VertexDescriptor) Attributes() []*raw.MDLVertexAttribute {
+func (x *VertexDescriptor) Attributes() []*VertexAttribute {
 	arr := x.inner.Attributes()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MDLVertexAttribute {
-		return raw.MDLVertexAttributeFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *VertexAttribute {
+		return &VertexAttribute{inner: raw.MDLVertexAttributeFromID(purego.Retain(_id))}
 	})
 }
 
@@ -122,13 +122,13 @@ func (x *VertexDescriptor) SetAttributes(attributes *foundation.NSMutableArray[*
 }
 
 // Layouts returns the collection as a Go slice.
-func (x *VertexDescriptor) Layouts() []*raw.MDLVertexBufferLayout {
+func (x *VertexDescriptor) Layouts() []*VertexBufferLayout {
 	arr := x.inner.Layouts()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MDLVertexBufferLayout {
-		return raw.MDLVertexBufferLayoutFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *VertexBufferLayout {
+		return &VertexBufferLayout{inner: raw.MDLVertexBufferLayoutFromID(purego.Retain(_id))}
 	})
 }
 
@@ -148,9 +148,9 @@ type VertexDescriptorable interface {
 	Reset()
 	SetPackedStrides()
 	SetPackedOffsets()
-	Attributes() []*raw.MDLVertexAttribute
+	Attributes() []*VertexAttribute
 	SetAttributes(attributes *foundation.NSMutableArray[*raw.MDLVertexAttribute])
-	Layouts() []*raw.MDLVertexBufferLayout
+	Layouts() []*VertexBufferLayout
 	SetLayouts(layouts *foundation.NSMutableArray[*raw.MDLVertexBufferLayout])
 }
 

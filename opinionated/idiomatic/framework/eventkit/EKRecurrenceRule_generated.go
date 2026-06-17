@@ -46,8 +46,8 @@ func NewRecurrenceRuleRecurrenceWithFrequencyIntervalDaysOfTheWeekDaysOfTheMonth
 }
 
 // WithRecurrenceEnd sets the recurrenceEnd property and returns the receiver for chaining.
-func (x *RecurrenceRule) WithRecurrenceEnd(recurrenceEnd *raw.EKRecurrenceEnd) *RecurrenceRule {
-	x.inner.SetRecurrenceEnd(recurrenceEnd)
+func (x *RecurrenceRule) WithRecurrenceEnd(recurrenceEnd *RecurrenceEnd) *RecurrenceRule {
+	x.inner.SetRecurrenceEnd(recurrenceEnd.Unwrap())
 	return x
 }
 
@@ -90,13 +90,13 @@ func (x *RecurrenceRule) FirstDayOfTheWeek() int {
 }
 
 // DaysOfTheWeek returns the collection as a Go slice.
-func (x *RecurrenceRule) DaysOfTheWeek() []*raw.EKRecurrenceDayOfWeek {
+func (x *RecurrenceRule) DaysOfTheWeek() []*RecurrenceDayOfWeek {
 	arr := x.inner.DaysOfTheWeek()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.EKRecurrenceDayOfWeek {
-		return raw.EKRecurrenceDayOfWeekFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *RecurrenceDayOfWeek {
+		return &RecurrenceDayOfWeek{inner: raw.EKRecurrenceDayOfWeekFromID(purego.Retain(_id))}
 	})
 }
 
@@ -160,14 +160,14 @@ func (x *RecurrenceRule) asObject() *raw.EKObject { return &x.inner.EKObject }
 // RecurrenceRuleable is the interface implemented by [RecurrenceRule], for mocking and DI.
 type RecurrenceRuleable interface {
 	Unwrap() *raw.EKRecurrenceRule
-	WithRecurrenceEnd(recurrenceEnd *raw.EKRecurrenceEnd) *RecurrenceRule
+	WithRecurrenceEnd(recurrenceEnd *RecurrenceEnd) *RecurrenceRule
 	CalendarIdentifier() string
 	RecurrenceEnd() *RecurrenceEnd
 	SetRecurrenceEnd(recurrenceEnd *raw.EKRecurrenceEnd)
 	Frequency() raw.EKRecurrenceFrequency
 	Interval() int
 	FirstDayOfTheWeek() int
-	DaysOfTheWeek() []*raw.EKRecurrenceDayOfWeek
+	DaysOfTheWeek() []*RecurrenceDayOfWeek
 	DaysOfTheMonth() []*foundation.NSNumber
 	DaysOfTheYear() []*foundation.NSNumber
 	WeeksOfTheYear() []*foundation.NSNumber

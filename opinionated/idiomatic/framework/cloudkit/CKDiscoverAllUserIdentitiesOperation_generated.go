@@ -51,14 +51,14 @@ func (x *DiscoverAllUserIdentitiesOperation) WithDiscoverAllUserIdentitiesComple
 }
 
 // WithConfiguration sets the configuration property and returns the receiver for chaining.
-func (x *DiscoverAllUserIdentitiesOperation) WithConfiguration(configuration *raw.CKOperationConfiguration) *DiscoverAllUserIdentitiesOperation {
-	x.inner.CKOperation.SetConfiguration(configuration)
+func (x *DiscoverAllUserIdentitiesOperation) WithConfiguration(configuration *OperationConfiguration) *DiscoverAllUserIdentitiesOperation {
+	x.inner.CKOperation.SetConfiguration(configuration.Unwrap())
 	return x
 }
 
 // WithGroup sets the group property and returns the receiver for chaining.
-func (x *DiscoverAllUserIdentitiesOperation) WithGroup(group *raw.CKOperationGroup) *DiscoverAllUserIdentitiesOperation {
-	x.inner.CKOperation.SetGroup(group)
+func (x *DiscoverAllUserIdentitiesOperation) WithGroup(group *OperationGroup) *DiscoverAllUserIdentitiesOperation {
+	x.inner.CKOperation.SetGroup(group.Unwrap())
 	return x
 }
 
@@ -69,8 +69,8 @@ func (x *DiscoverAllUserIdentitiesOperation) WithLongLivedOperationWasPersistedB
 }
 
 // WithContainer sets the container property and returns the receiver for chaining.
-func (x *DiscoverAllUserIdentitiesOperation) WithContainer(container *raw.CKContainer) *DiscoverAllUserIdentitiesOperation {
-	x.inner.CKOperation.SetContainer(container)
+func (x *DiscoverAllUserIdentitiesOperation) WithContainer(container *Container) *DiscoverAllUserIdentitiesOperation {
+	x.inner.CKOperation.SetContainer(container.Unwrap())
 	return x
 }
 
@@ -156,10 +156,10 @@ type DiscoverAllUserIdentitiesOperationable interface {
 	Unwrap() *raw.CKDiscoverAllUserIdentitiesOperation
 	WithUserIdentityDiscoveredBlock(userIdentityDiscoveredBlock func(*raw.CKUserIdentity)) *DiscoverAllUserIdentitiesOperation
 	WithDiscoverAllUserIdentitiesCompletionBlock(discoverAllUserIdentitiesCompletionBlock func(unsafe.Pointer)) *DiscoverAllUserIdentitiesOperation
-	WithConfiguration(configuration *raw.CKOperationConfiguration) *DiscoverAllUserIdentitiesOperation
-	WithGroup(group *raw.CKOperationGroup) *DiscoverAllUserIdentitiesOperation
+	WithConfiguration(configuration *OperationConfiguration) *DiscoverAllUserIdentitiesOperation
+	WithGroup(group *OperationGroup) *DiscoverAllUserIdentitiesOperation
 	WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *DiscoverAllUserIdentitiesOperation
-	WithContainer(container *raw.CKContainer) *DiscoverAllUserIdentitiesOperation
+	WithContainer(container *Container) *DiscoverAllUserIdentitiesOperation
 	WithAllowsCellularAccess(allowsCellularAccess bool) *DiscoverAllUserIdentitiesOperation
 	WithLongLived(longLived bool) *DiscoverAllUserIdentitiesOperation
 	WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *DiscoverAllUserIdentitiesOperation

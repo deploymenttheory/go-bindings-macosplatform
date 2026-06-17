@@ -73,13 +73,13 @@ func (x *ContoursObservation) TopLevelContourCount() int {
 }
 
 // TopLevelContours returns the collection as a Go slice.
-func (x *ContoursObservation) TopLevelContours() []*raw.VNContour {
+func (x *ContoursObservation) TopLevelContours() []*Contour {
 	arr := x.inner.TopLevelContours()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.VNContour {
-		return raw.VNContourFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Contour {
+		return &Contour{inner: raw.VNContourFromID(purego.Retain(_id))}
 	})
 }
 
@@ -97,7 +97,7 @@ type ContoursObservationable interface {
 	ContourAtIndexPathError(indexPath *foundation.NSIndexPath) (*Contour, error)
 	ContourCount() int
 	TopLevelContourCount() int
-	TopLevelContours() []*raw.VNContour
+	TopLevelContours() []*Contour
 	NormalizedPath() unsafe.Pointer
 }
 

@@ -259,8 +259,8 @@ func (x *GridView) WithContentFilters(items ...*coreimage.CIFilter) *GridView {
 }
 
 // WithShadow sets the shadow property and returns the receiver for chaining.
-func (x *GridView) WithShadow(shadow *raw.NSShadow) *GridView {
-	x.inner.NSView.SetShadow(shadow)
+func (x *GridView) WithShadow(shadow *Shadow) *GridView {
+	x.inner.NSView.SetShadow(shadow.Unwrap())
 	return x
 }
 
@@ -341,8 +341,8 @@ func (x *GridView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSiz
 }
 
 // WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
-func (x *GridView) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *GridView {
-	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+func (x *GridView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *GridView {
+	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
 	return x
 }
 
@@ -383,8 +383,8 @@ func (x *GridView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynam
 }
 
 // WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
-func (x *GridView) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *GridView {
-	x.inner.NSView.SetPressureConfiguration(pressureConfiguration)
+func (x *GridView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *GridView {
+	x.inner.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
 	return x
 }
 
@@ -395,8 +395,8 @@ func (x *GridView) WithNextResponder(nextResponder ResponderProvider) *GridView 
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *GridView) WithMenu(menu *raw.NSMenu) *GridView {
-	x.inner.NSView.NSResponder.SetMenu(menu)
+func (x *GridView) WithMenu(menu *Menu) *GridView {
+	x.inner.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -407,8 +407,8 @@ func (x *GridView) WithUserActivity(userActivity *foundation.NSUserActivity) *Gr
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *GridView) WithTouchBar(touchBar *raw.NSTouchBar) *GridView {
-	x.inner.NSView.NSResponder.SetTouchBar(touchBar)
+func (x *GridView) WithTouchBar(touchBar *TouchBar) *GridView {
+	x.inner.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -616,7 +616,7 @@ type GridViewable interface {
 	WithBackgroundFilters(items ...*coreimage.CIFilter) *GridView
 	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *GridView
 	WithContentFilters(items ...*coreimage.CIFilter) *GridView
-	WithShadow(shadow *raw.NSShadow) *GridView
+	WithShadow(shadow *Shadow) *GridView
 	WithClipsToBounds(clipsToBounds bool) *GridView
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *GridView
 	WithToolTip(toolTip string) *GridView
@@ -628,18 +628,18 @@ type GridViewable interface {
 	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *GridView
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *GridView
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *GridView
-	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *GridView
+	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *GridView
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *GridView
 	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *GridView
 	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *GridView
 	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *GridView
 	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *GridView
 	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *GridView
-	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *GridView
+	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *GridView
 	WithNextResponder(nextResponder ResponderProvider) *GridView
-	WithMenu(menu *raw.NSMenu) *GridView
+	WithMenu(menu *Menu) *GridView
 	WithUserActivity(userActivity *foundation.NSUserActivity) *GridView
-	WithTouchBar(touchBar *raw.NSTouchBar) *GridView
+	WithTouchBar(touchBar *TouchBar) *GridView
 	RowAtIndex(index int) *GridRow
 	IndexOfRow(row *raw.NSGridRow) int
 	ColumnAtIndex(index int) *GridColumn

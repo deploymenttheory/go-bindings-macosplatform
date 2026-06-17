@@ -39,13 +39,13 @@ func NewNEFilterSettingsWithRulesDefaultAction(rules *foundation.NSArray[*raw.NE
 }
 
 // Rules returns the collection as a Go slice.
-func (x *NEFilterSettings) Rules() []*raw.NEFilterRule {
+func (x *NEFilterSettings) Rules() []*NEFilterRule {
 	arr := x.inner.Rules()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NEFilterRule {
-		return raw.NEFilterRuleFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *NEFilterRule {
+		return &NEFilterRule{inner: raw.NEFilterRuleFromID(purego.Retain(_id))}
 	})
 }
 
@@ -57,7 +57,7 @@ func (x *NEFilterSettings) DefaultAction() raw.NEFilterAction {
 // NEFilterSettingsable is the interface implemented by [NEFilterSettings], for mocking and DI.
 type NEFilterSettingsable interface {
 	Unwrap() *raw.NEFilterSettings
-	Rules() []*raw.NEFilterRule
+	Rules() []*NEFilterRule
 	DefaultAction() raw.NEFilterAction
 }
 

@@ -58,13 +58,13 @@ func (x *PlayerItemIntegratedTimelineSnapshot) CurrentSegment() *PlayerItemSegme
 }
 
 // Segments returns the collection as a Go slice.
-func (x *PlayerItemIntegratedTimelineSnapshot) Segments() []*raw.AVPlayerItemSegment {
+func (x *PlayerItemIntegratedTimelineSnapshot) Segments() []*PlayerItemSegment {
 	arr := x.inner.Segments()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVPlayerItemSegment {
-		return raw.AVPlayerItemSegmentFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PlayerItemSegment {
+		return &PlayerItemSegment{inner: raw.AVPlayerItemSegmentFromID(purego.Retain(_id))}
 	})
 }
 
@@ -84,7 +84,7 @@ type PlayerItemIntegratedTimelineSnapshotable interface {
 	MapTimeToSegmentAtSegmentOffset(time_ coremedia.CMTime, timeSegmentOut *raw.AVPlayerItemSegment, segmentOffsetOut *coremedia.CMTime)
 	Duration() coremedia.CMTime
 	CurrentSegment() *PlayerItemSegment
-	Segments() []*raw.AVPlayerItemSegment
+	Segments() []*PlayerItemSegment
 	CurrentTime() coremedia.CMTime
 	CurrentDate() *foundation.NSDate
 }

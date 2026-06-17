@@ -42,8 +42,8 @@ func NewImageView() *ImageView {
 }
 
 // WithImage sets the image property and returns the receiver for chaining.
-func (x *ImageView) WithImage(image *raw.NSImage) *ImageView {
-	x.inner.SetImage(image)
+func (x *ImageView) WithImage(image *Image) *ImageView {
+	x.inner.SetImage(image.Unwrap())
 	return x
 }
 
@@ -72,14 +72,14 @@ func (x *ImageView) WithImageFrameStyle(imageFrameStyle raw.NSImageFrameStyle) *
 }
 
 // WithSymbolConfiguration sets the symbolConfiguration property and returns the receiver for chaining.
-func (x *ImageView) WithSymbolConfiguration(symbolConfiguration *raw.NSImageSymbolConfiguration) *ImageView {
-	x.inner.SetSymbolConfiguration(symbolConfiguration)
+func (x *ImageView) WithSymbolConfiguration(symbolConfiguration *ImageSymbolConfiguration) *ImageView {
+	x.inner.SetSymbolConfiguration(symbolConfiguration.Unwrap())
 	return x
 }
 
 // WithContentTintColor sets the contentTintColor property and returns the receiver for chaining.
-func (x *ImageView) WithContentTintColor(contentTintColor *raw.NSColor) *ImageView {
-	x.inner.SetContentTintColor(contentTintColor)
+func (x *ImageView) WithContentTintColor(contentTintColor *Color) *ImageView {
+	x.inner.SetContentTintColor(contentTintColor.Unwrap())
 	return x
 }
 
@@ -204,8 +204,8 @@ func (x *ImageView) WithDoubleValue(doubleValue float64) *ImageView {
 }
 
 // WithFont sets the font property and returns the receiver for chaining.
-func (x *ImageView) WithFont(font *raw.NSFont) *ImageView {
-	x.inner.NSControl.SetFont(font)
+func (x *ImageView) WithFont(font *Font) *ImageView {
+	x.inner.NSControl.SetFont(font.Unwrap())
 	return x
 }
 
@@ -426,8 +426,8 @@ func (x *ImageView) WithContentFilters(items ...*coreimage.CIFilter) *ImageView 
 }
 
 // WithShadow sets the shadow property and returns the receiver for chaining.
-func (x *ImageView) WithShadow(shadow *raw.NSShadow) *ImageView {
-	x.inner.NSControl.NSView.SetShadow(shadow)
+func (x *ImageView) WithShadow(shadow *Shadow) *ImageView {
+	x.inner.NSControl.NSView.SetShadow(shadow.Unwrap())
 	return x
 }
 
@@ -508,8 +508,8 @@ func (x *ImageView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSi
 }
 
 // WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
-func (x *ImageView) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *ImageView {
-	x.inner.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+func (x *ImageView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ImageView {
+	x.inner.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
 	return x
 }
 
@@ -550,8 +550,8 @@ func (x *ImageView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDyna
 }
 
 // WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
-func (x *ImageView) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *ImageView {
-	x.inner.NSControl.NSView.SetPressureConfiguration(pressureConfiguration)
+func (x *ImageView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ImageView {
+	x.inner.NSControl.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
 	return x
 }
 
@@ -562,8 +562,8 @@ func (x *ImageView) WithNextResponder(nextResponder ResponderProvider) *ImageVie
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *ImageView) WithMenu(menu *raw.NSMenu) *ImageView {
-	x.inner.NSControl.NSView.NSResponder.SetMenu(menu)
+func (x *ImageView) WithMenu(menu *Menu) *ImageView {
+	x.inner.NSControl.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -574,8 +574,8 @@ func (x *ImageView) WithUserActivity(userActivity *foundation.NSUserActivity) *I
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *ImageView) WithTouchBar(touchBar *raw.NSTouchBar) *ImageView {
-	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar)
+func (x *ImageView) WithTouchBar(touchBar *TouchBar) *ImageView {
+	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -760,13 +760,13 @@ func (x *ImageView) asResponder() *raw.NSResponder { return &x.inner.NSControl.N
 // ImageViewable is the interface implemented by [ImageView], for mocking and DI.
 type ImageViewable interface {
 	Unwrap() *raw.NSImageView
-	WithImage(image *raw.NSImage) *ImageView
+	WithImage(image *Image) *ImageView
 	WithEditable(editable bool) *ImageView
 	WithImageAlignment(imageAlignment raw.NSImageAlignment) *ImageView
 	WithImageScaling(imageScaling raw.NSImageScaling) *ImageView
 	WithImageFrameStyle(imageFrameStyle raw.NSImageFrameStyle) *ImageView
-	WithSymbolConfiguration(symbolConfiguration *raw.NSImageSymbolConfiguration) *ImageView
-	WithContentTintColor(contentTintColor *raw.NSColor) *ImageView
+	WithSymbolConfiguration(symbolConfiguration *ImageSymbolConfiguration) *ImageView
+	WithContentTintColor(contentTintColor *Color) *ImageView
 	WithAnimates(animates bool) *ImageView
 	WithAllowsCutCopyPaste(allowsCutCopyPaste bool) *ImageView
 	WithPreferredImageDynamicRange(preferredImageDynamicRange raw.NSImageDynamicRange) *ImageView
@@ -787,7 +787,7 @@ type ImageViewable interface {
 	WithIntegerValue(integerValue int) *ImageView
 	WithFloatValue(floatValue float32) *ImageView
 	WithDoubleValue(doubleValue float64) *ImageView
-	WithFont(font *raw.NSFont) *ImageView
+	WithFont(font *Font) *ImageView
 	WithUsesSingleLineMode(usesSingleLineMode bool) *ImageView
 	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *ImageView
 	WithAlignment(alignment raw.NSTextAlignment) *ImageView
@@ -819,7 +819,7 @@ type ImageViewable interface {
 	WithBackgroundFilters(items ...*coreimage.CIFilter) *ImageView
 	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *ImageView
 	WithContentFilters(items ...*coreimage.CIFilter) *ImageView
-	WithShadow(shadow *raw.NSShadow) *ImageView
+	WithShadow(shadow *Shadow) *ImageView
 	WithClipsToBounds(clipsToBounds bool) *ImageView
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ImageView
 	WithToolTip(toolTip string) *ImageView
@@ -831,18 +831,18 @@ type ImageViewable interface {
 	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *ImageView
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ImageView
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ImageView
-	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *ImageView
+	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ImageView
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *ImageView
 	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *ImageView
 	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *ImageView
 	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *ImageView
 	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *ImageView
 	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *ImageView
-	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *ImageView
+	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ImageView
 	WithNextResponder(nextResponder ResponderProvider) *ImageView
-	WithMenu(menu *raw.NSMenu) *ImageView
+	WithMenu(menu *Menu) *ImageView
 	WithUserActivity(userActivity *foundation.NSUserActivity) *ImageView
-	WithTouchBar(touchBar *raw.NSTouchBar) *ImageView
+	WithTouchBar(touchBar *TouchBar) *ImageView
 	Image() *Image
 	SetImage(image *raw.NSImage)
 	IsEditable() bool

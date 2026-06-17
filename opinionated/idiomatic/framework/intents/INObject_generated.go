@@ -67,8 +67,8 @@ func (x *Object) WithSubtitleString(subtitleString string) *Object {
 }
 
 // WithDisplayImage sets the displayImage property and returns the receiver for chaining.
-func (x *Object) WithDisplayImage(displayImage *raw.INImage) *Object {
-	x.inner.SetDisplayImage(displayImage)
+func (x *Object) WithDisplayImage(displayImage *Image) *Object {
+	x.inner.SetDisplayImage(displayImage.Unwrap())
 	return x
 }
 
@@ -144,13 +144,13 @@ func (x *Object) SetDisplayImage(displayImage *raw.INImage) {
 }
 
 // AlternativeSpeakableMatches returns the collection as a Go slice.
-func (x *Object) AlternativeSpeakableMatches() []*raw.INSpeakableString {
+func (x *Object) AlternativeSpeakableMatches() []*SpeakableString {
 	arr := x.inner.AlternativeSpeakableMatches()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.INSpeakableString {
-		return raw.INSpeakableStringFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *SpeakableString {
+		return &SpeakableString{inner: raw.INSpeakableStringFromID(purego.Retain(_id))}
 	})
 }
 
@@ -163,7 +163,7 @@ func (x *Object) SetAlternativeSpeakableMatches(alternativeSpeakableMatches *fou
 type Objectable interface {
 	Unwrap() *raw.INObject
 	WithSubtitleString(subtitleString string) *Object
-	WithDisplayImage(displayImage *raw.INImage) *Object
+	WithDisplayImage(displayImage *Image) *Object
 	WithAlternativeSpeakableMatches(items ...*raw.INSpeakableString) *Object
 	Identifier() string
 	DisplayString() string
@@ -172,7 +172,7 @@ type Objectable interface {
 	SetSubtitleString(subtitleString string)
 	DisplayImage() *Image
 	SetDisplayImage(displayImage *raw.INImage)
-	AlternativeSpeakableMatches() []*raw.INSpeakableString
+	AlternativeSpeakableMatches() []*SpeakableString
 	SetAlternativeSpeakableMatches(alternativeSpeakableMatches *foundation.NSArray[*raw.INSpeakableString])
 }
 

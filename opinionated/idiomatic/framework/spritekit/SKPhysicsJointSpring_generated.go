@@ -48,14 +48,14 @@ func (x *PhysicsJointSpring) WithFrequency(frequency float64) *PhysicsJointSprin
 }
 
 // WithBodyA sets the bodyA property and returns the receiver for chaining.
-func (x *PhysicsJointSpring) WithBodyA(bodyA *raw.SKPhysicsBody) *PhysicsJointSpring {
-	x.inner.SKPhysicsJoint.SetBodyA(bodyA)
+func (x *PhysicsJointSpring) WithBodyA(bodyA *PhysicsBody) *PhysicsJointSpring {
+	x.inner.SKPhysicsJoint.SetBodyA(bodyA.Unwrap())
 	return x
 }
 
 // WithBodyB sets the bodyB property and returns the receiver for chaining.
-func (x *PhysicsJointSpring) WithBodyB(bodyB *raw.SKPhysicsBody) *PhysicsJointSpring {
-	x.inner.SKPhysicsJoint.SetBodyB(bodyB)
+func (x *PhysicsJointSpring) WithBodyB(bodyB *PhysicsBody) *PhysicsJointSpring {
+	x.inner.SKPhysicsJoint.SetBodyB(bodyB.Unwrap())
 	return x
 }
 
@@ -86,8 +86,8 @@ type PhysicsJointSpringable interface {
 	Unwrap() *raw.SKPhysicsJointSpring
 	WithDamping(damping float64) *PhysicsJointSpring
 	WithFrequency(frequency float64) *PhysicsJointSpring
-	WithBodyA(bodyA *raw.SKPhysicsBody) *PhysicsJointSpring
-	WithBodyB(bodyB *raw.SKPhysicsBody) *PhysicsJointSpring
+	WithBodyA(bodyA *PhysicsBody) *PhysicsJointSpring
+	WithBodyB(bodyB *PhysicsBody) *PhysicsJointSpring
 	Damping() float64
 	SetDamping(damping float64)
 	Frequency() float64

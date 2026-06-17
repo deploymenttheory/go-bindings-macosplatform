@@ -124,8 +124,8 @@ func (x *CollectionView) WithSelectionIndexPaths(selectionIndexPaths *foundation
 }
 
 // WithItemPrototype sets the itemPrototype property and returns the receiver for chaining.
-func (x *CollectionView) WithItemPrototype(itemPrototype *raw.NSCollectionViewItem) *CollectionView {
-	x.inner.SetItemPrototype(itemPrototype)
+func (x *CollectionView) WithItemPrototype(itemPrototype *CollectionViewItem) *CollectionView {
+	x.inner.SetItemPrototype(itemPrototype.Unwrap())
 	return x
 }
 
@@ -334,8 +334,8 @@ func (x *CollectionView) WithContentFilters(items ...*coreimage.CIFilter) *Colle
 }
 
 // WithShadow sets the shadow property and returns the receiver for chaining.
-func (x *CollectionView) WithShadow(shadow *raw.NSShadow) *CollectionView {
-	x.inner.NSView.SetShadow(shadow)
+func (x *CollectionView) WithShadow(shadow *Shadow) *CollectionView {
+	x.inner.NSView.SetShadow(shadow.Unwrap())
 	return x
 }
 
@@ -416,8 +416,8 @@ func (x *CollectionView) WithPrefersCompactControlSizeMetrics(prefersCompactCont
 }
 
 // WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
-func (x *CollectionView) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *CollectionView {
-	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+func (x *CollectionView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *CollectionView {
+	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
 	return x
 }
 
@@ -458,8 +458,8 @@ func (x *CollectionView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtende
 }
 
 // WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
-func (x *CollectionView) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *CollectionView {
-	x.inner.NSView.SetPressureConfiguration(pressureConfiguration)
+func (x *CollectionView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *CollectionView {
+	x.inner.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
 	return x
 }
 
@@ -470,8 +470,8 @@ func (x *CollectionView) WithNextResponder(nextResponder ResponderProvider) *Col
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *CollectionView) WithMenu(menu *raw.NSMenu) *CollectionView {
-	x.inner.NSView.NSResponder.SetMenu(menu)
+func (x *CollectionView) WithMenu(menu *Menu) *CollectionView {
+	x.inner.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -482,8 +482,8 @@ func (x *CollectionView) WithUserActivity(userActivity *foundation.NSUserActivit
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *CollectionView) WithTouchBar(touchBar *raw.NSTouchBar) *CollectionView {
-	x.inner.NSView.NSResponder.SetTouchBar(touchBar)
+func (x *CollectionView) WithTouchBar(touchBar *TouchBar) *CollectionView {
+	x.inner.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -602,13 +602,13 @@ func (x *CollectionView) ItemAtIndexPath(indexPath *foundation.NSIndexPath) *Col
 }
 
 // VisibleItems returns the collection as a Go slice.
-func (x *CollectionView) VisibleItems() []*raw.NSCollectionViewItem {
+func (x *CollectionView) VisibleItems() []*CollectionViewItem {
 	arr := x.inner.VisibleItems()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSCollectionViewItem {
-		return raw.NSCollectionViewItemFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CollectionViewItem {
+		return &CollectionViewItem{inner: raw.NSCollectionViewItemFromID(purego.Retain(_id))}
 	})
 }
 
@@ -803,13 +803,13 @@ func (x *CollectionView) SetCollectionViewLayout(collectionViewLayout *raw.NSCol
 }
 
 // BackgroundColors returns the collection as a Go slice.
-func (x *CollectionView) BackgroundColors() []*raw.NSColor {
+func (x *CollectionView) BackgroundColors() []*Color {
 	arr := x.inner.BackgroundColors()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSColor {
-		return raw.NSColorFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Color {
+		return &Color{inner: raw.NSColorFromID(purego.Retain(_id))}
 	})
 }
 
@@ -960,7 +960,7 @@ type CollectionViewable interface {
 	WithAllowsMultipleSelection(allowsMultipleSelection bool) *CollectionView
 	WithSelectionIndexes(selectionIndexes *foundation.NSIndexSet) *CollectionView
 	WithSelectionIndexPaths(selectionIndexPaths *foundation.NSSet[*foundation.NSIndexPath]) *CollectionView
-	WithItemPrototype(itemPrototype *raw.NSCollectionViewItem) *CollectionView
+	WithItemPrototype(itemPrototype *CollectionViewItem) *CollectionView
 	WithMaxNumberOfRows(maxNumberOfRows uint) *CollectionView
 	WithMaxNumberOfColumns(maxNumberOfColumns uint) *CollectionView
 	WithMinItemSize(minItemSize corefoundation.CGSize) *CollectionView
@@ -990,7 +990,7 @@ type CollectionViewable interface {
 	WithBackgroundFilters(items ...*coreimage.CIFilter) *CollectionView
 	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *CollectionView
 	WithContentFilters(items ...*coreimage.CIFilter) *CollectionView
-	WithShadow(shadow *raw.NSShadow) *CollectionView
+	WithShadow(shadow *Shadow) *CollectionView
 	WithClipsToBounds(clipsToBounds bool) *CollectionView
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *CollectionView
 	WithToolTip(toolTip string) *CollectionView
@@ -1002,18 +1002,18 @@ type CollectionViewable interface {
 	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *CollectionView
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *CollectionView
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *CollectionView
-	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *CollectionView
+	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *CollectionView
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *CollectionView
 	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *CollectionView
 	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *CollectionView
 	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *CollectionView
 	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *CollectionView
 	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *CollectionView
-	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *CollectionView
+	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *CollectionView
 	WithNextResponder(nextResponder ResponderProvider) *CollectionView
-	WithMenu(menu *raw.NSMenu) *CollectionView
+	WithMenu(menu *Menu) *CollectionView
 	WithUserActivity(userActivity *foundation.NSUserActivity) *CollectionView
-	WithTouchBar(touchBar *raw.NSTouchBar) *CollectionView
+	WithTouchBar(touchBar *TouchBar) *CollectionView
 	ReloadData()
 	LayoutAttributesForItemAtIndexPath(indexPath *foundation.NSIndexPath) *CollectionViewLayoutAttributes
 	LayoutAttributesForSupplementaryElementOfKindAtIndexPath(kind *foundation.NSString, indexPath *foundation.NSIndexPath) *CollectionViewLayoutAttributes
@@ -1032,7 +1032,7 @@ type CollectionViewable interface {
 	MakeSupplementaryViewOfKindWithIdentifierForIndexPath(elementKind *foundation.NSString, identifier *foundation.NSString, indexPath *foundation.NSIndexPath) *View
 	ItemAtIndex(index uint) *CollectionViewItem
 	ItemAtIndexPath(indexPath *foundation.NSIndexPath) *CollectionViewItem
-	VisibleItems() []*raw.NSCollectionViewItem
+	VisibleItems() []*CollectionViewItem
 	IndexPathsForVisibleItems() *foundation.NSSet[*foundation.NSIndexPath]
 	IndexPathForItem(item *raw.NSCollectionViewItem) *foundation.NSIndexPath
 	IndexPathForItemAtPoint(point corefoundation.CGPoint) *foundation.NSIndexPath
@@ -1067,7 +1067,7 @@ type CollectionViewable interface {
 	SetBackgroundViewScrollsWithContent(backgroundViewScrollsWithContent bool)
 	CollectionViewLayout() *CollectionViewLayout
 	SetCollectionViewLayout(collectionViewLayout *raw.NSCollectionViewLayout)
-	BackgroundColors() []*raw.NSColor
+	BackgroundColors() []*Color
 	SetBackgroundColors(backgroundColors *foundation.NSArray[*raw.NSColor])
 	NumberOfSections() int
 	IsFirstResponder() bool

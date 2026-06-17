@@ -45,8 +45,8 @@ func (x *DeferredPaymentRequest) WithPaymentDescription(paymentDescription strin
 }
 
 // WithDeferredBilling sets the deferredBilling property and returns the receiver for chaining.
-func (x *DeferredPaymentRequest) WithDeferredBilling(deferredBilling *raw.PKDeferredPaymentSummaryItem) *DeferredPaymentRequest {
-	x.inner.SetDeferredBilling(deferredBilling)
+func (x *DeferredPaymentRequest) WithDeferredBilling(deferredBilling *DeferredPaymentSummaryItem) *DeferredPaymentRequest {
+	x.inner.SetDeferredBilling(deferredBilling.Unwrap())
 	return x
 }
 
@@ -166,7 +166,7 @@ func (x *DeferredPaymentRequest) SetFreeCancellationDateTimeZone(freeCancellatio
 type DeferredPaymentRequestable interface {
 	Unwrap() *raw.PKDeferredPaymentRequest
 	WithPaymentDescription(paymentDescription string) *DeferredPaymentRequest
-	WithDeferredBilling(deferredBilling *raw.PKDeferredPaymentSummaryItem) *DeferredPaymentRequest
+	WithDeferredBilling(deferredBilling *DeferredPaymentSummaryItem) *DeferredPaymentRequest
 	WithBillingAgreement(billingAgreement string) *DeferredPaymentRequest
 	WithManagementURL(managementURL string) *DeferredPaymentRequest
 	WithTokenNotificationURL(tokenNotificationURL string) *DeferredPaymentRequest

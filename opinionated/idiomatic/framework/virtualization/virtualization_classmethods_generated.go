@@ -14,13 +14,13 @@ import (
 )
 
 // NetworkInterfaces returns the collection as a Go slice.
-func NetworkInterfaces() []*raw.VZBridgedNetworkInterface {
+func NetworkInterfaces() []*BridgedNetworkInterface {
 	arr := raw.VZBridgedNetworkInterfaceNetworkInterfaces()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.VZBridgedNetworkInterface {
-		return raw.VZBridgedNetworkInterfaceFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *BridgedNetworkInterface {
+		return &BridgedNetworkInterface{inner: raw.VZBridgedNetworkInterfaceFromID(purego.Retain(_id))}
 	})
 }
 

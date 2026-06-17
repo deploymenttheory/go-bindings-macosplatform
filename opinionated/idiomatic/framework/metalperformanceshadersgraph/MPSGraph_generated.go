@@ -106,13 +106,13 @@ func (x *Graph) SetOptions(options raw.MPSGraphOptions) {
 }
 
 // PlaceholderTensors returns the collection as a Go slice.
-func (x *Graph) PlaceholderTensors() []*raw.MPSGraphTensor {
+func (x *Graph) PlaceholderTensors() []*GraphTensor {
 	arr := x.inner.PlaceholderTensors()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MPSGraphTensor {
-		return raw.MPSGraphTensorFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *GraphTensor {
+		return &GraphTensor{inner: raw.MPSGraphTensorFromID(purego.Retain(_id))}
 	})
 }
 
@@ -3359,7 +3359,7 @@ type Graphable interface {
 	EncodeToCommandBufferFeedsTargetOperationsResultsDictionaryExecutionDescriptor(commandBuffer *mpscore.MPSCommandBuffer, feeds unsafe.Pointer, targetOperations *foundation.NSArray[*raw.MPSGraphOperation], resultsDictionary unsafe.Pointer, executionDescriptor *raw.MPSGraphExecutionDescriptor)
 	Options() raw.MPSGraphOptions
 	SetOptions(options raw.MPSGraphOptions)
-	PlaceholderTensors() []*raw.MPSGraphTensor
+	PlaceholderTensors() []*GraphTensor
 	GradientForPrimaryTensorWithTensorsName(primaryTensor *raw.MPSGraphTensor, tensors *foundation.NSArray[*raw.MPSGraphTensor], name string) *foundation.NSDictionary[*raw.MPSGraphTensor, *raw.MPSGraphTensor]
 	ReLUWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor
 	ReLUGradientWithIncomingGradientSourceTensorName(gradient *raw.MPSGraphTensor, source *raw.MPSGraphTensor, name string) *GraphTensor

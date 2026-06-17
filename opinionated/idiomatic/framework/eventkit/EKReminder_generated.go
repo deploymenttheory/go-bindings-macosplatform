@@ -68,8 +68,8 @@ func (x *Reminder) WithPriority(priority uint) *Reminder {
 }
 
 // WithCalendar sets the calendar property and returns the receiver for chaining.
-func (x *Reminder) WithCalendar(calendar *raw.EKCalendar) *Reminder {
-	x.inner.EKCalendarItem.SetCalendar(calendar)
+func (x *Reminder) WithCalendar(calendar *Calendar) *Reminder {
+	x.inner.EKCalendarItem.SetCalendar(calendar.Unwrap())
 	return x
 }
 
@@ -197,7 +197,7 @@ type Reminderable interface {
 	WithCompleted(completed bool) *Reminder
 	WithCompletionDate(completionDate *foundation.NSDate) *Reminder
 	WithPriority(priority uint) *Reminder
-	WithCalendar(calendar *raw.EKCalendar) *Reminder
+	WithCalendar(calendar *Calendar) *Reminder
 	WithTitle(title string) *Reminder
 	WithLocation(location string) *Reminder
 	WithNotes(notes string) *Reminder

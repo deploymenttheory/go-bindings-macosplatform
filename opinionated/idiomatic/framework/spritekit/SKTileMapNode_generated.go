@@ -73,8 +73,8 @@ func (x *TileMapNode) WithTileSize(tileSize corefoundation.CGSize) *TileMapNode 
 }
 
 // WithTileSet sets the tileSet property and returns the receiver for chaining.
-func (x *TileMapNode) WithTileSet(tileSet *raw.SKTileSet) *TileMapNode {
-	x.inner.SetTileSet(tileSet)
+func (x *TileMapNode) WithTileSet(tileSet *TileSet) *TileMapNode {
+	x.inner.SetTileSet(tileSet.Unwrap())
 	return x
 }
 
@@ -103,8 +103,8 @@ func (x *TileMapNode) WithAnchorPoint(anchorPoint corefoundation.CGPoint) *TileM
 }
 
 // WithShader sets the shader property and returns the receiver for chaining.
-func (x *TileMapNode) WithShader(shader *raw.SKShader) *TileMapNode {
-	x.inner.SetShader(shader)
+func (x *TileMapNode) WithShader(shader *Shader) *TileMapNode {
+	x.inner.SetShader(shader.Unwrap())
 	return x
 }
 
@@ -187,8 +187,8 @@ func (x *TileMapNode) WithName(name string) *TileMapNode {
 }
 
 // WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
-func (x *TileMapNode) WithPhysicsBody(physicsBody *raw.SKPhysicsBody) *TileMapNode {
-	x.inner.SKNode.SetPhysicsBody(physicsBody)
+func (x *TileMapNode) WithPhysicsBody(physicsBody *PhysicsBody) *TileMapNode {
+	x.inner.SKNode.SetPhysicsBody(physicsBody.Unwrap())
 	return x
 }
 
@@ -199,8 +199,8 @@ func (x *TileMapNode) WithUserData(userData *foundation.NSMutableDictionary[objc
 }
 
 // WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
-func (x *TileMapNode) WithReachConstraints(reachConstraints *raw.SKReachConstraints) *TileMapNode {
-	x.inner.SKNode.SetReachConstraints(reachConstraints)
+func (x *TileMapNode) WithReachConstraints(reachConstraints *ReachConstraints) *TileMapNode {
+	x.inner.SKNode.SetReachConstraints(reachConstraints.Unwrap())
 	return x
 }
 
@@ -459,12 +459,12 @@ type TileMapNodeable interface {
 	WithNumberOfColumns(numberOfColumns uint) *TileMapNode
 	WithNumberOfRows(numberOfRows uint) *TileMapNode
 	WithTileSize(tileSize corefoundation.CGSize) *TileMapNode
-	WithTileSet(tileSet *raw.SKTileSet) *TileMapNode
+	WithTileSet(tileSet *TileSet) *TileMapNode
 	WithColorBlendFactor(colorBlendFactor float64) *TileMapNode
 	WithColor(color *appkit.NSColor) *TileMapNode
 	WithBlendMode(blendMode raw.SKBlendMode) *TileMapNode
 	WithAnchorPoint(anchorPoint corefoundation.CGPoint) *TileMapNode
-	WithShader(shader *raw.SKShader) *TileMapNode
+	WithShader(shader *Shader) *TileMapNode
 	WithLightingBitMask(lightingBitMask uint32) *TileMapNode
 	WithEnableAutomapping(enableAutomapping bool) *TileMapNode
 	WithPosition(position corefoundation.CGPoint) *TileMapNode
@@ -478,9 +478,9 @@ type TileMapNodeable interface {
 	WithHidden(hidden bool) *TileMapNode
 	WithUserInteractionEnabled(userInteractionEnabled bool) *TileMapNode
 	WithName(name string) *TileMapNode
-	WithPhysicsBody(physicsBody *raw.SKPhysicsBody) *TileMapNode
+	WithPhysicsBody(physicsBody *PhysicsBody) *TileMapNode
 	WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *TileMapNode
-	WithReachConstraints(reachConstraints *raw.SKReachConstraints) *TileMapNode
+	WithReachConstraints(reachConstraints *ReachConstraints) *TileMapNode
 	WithConstraints(items ...*raw.SKConstraint) *TileMapNode
 	WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *TileMapNode
 	WithAccessibilityElement(accessibilityElement bool) *TileMapNode

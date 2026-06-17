@@ -175,35 +175,35 @@ func (x *CaptureSession) SetSessionPreset(sessionPreset *foundation.NSString) {
 }
 
 // Inputs returns the collection as a Go slice.
-func (x *CaptureSession) Inputs() []*raw.AVCaptureInput {
+func (x *CaptureSession) Inputs() []*CaptureInput {
 	arr := x.inner.Inputs()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVCaptureInput {
-		return raw.AVCaptureInputFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CaptureInput {
+		return &CaptureInput{inner: raw.AVCaptureInputFromID(purego.Retain(_id))}
 	})
 }
 
 // Outputs returns the collection as a Go slice.
-func (x *CaptureSession) Outputs() []*raw.AVCaptureOutput {
+func (x *CaptureSession) Outputs() []*CaptureOutput {
 	arr := x.inner.Outputs()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVCaptureOutput {
-		return raw.AVCaptureOutputFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CaptureOutput {
+		return &CaptureOutput{inner: raw.AVCaptureOutputFromID(purego.Retain(_id))}
 	})
 }
 
 // Connections returns the collection as a Go slice.
-func (x *CaptureSession) Connections() []*raw.AVCaptureConnection {
+func (x *CaptureSession) Connections() []*CaptureConnection {
 	arr := x.inner.Connections()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVCaptureConnection {
-		return raw.AVCaptureConnectionFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CaptureConnection {
+		return &CaptureConnection{inner: raw.AVCaptureConnectionFromID(purego.Retain(_id))}
 	})
 }
 
@@ -228,13 +228,13 @@ func (x *CaptureSession) ControlsDelegateCallbackQueue() *foundation.NSObject {
 }
 
 // Controls returns the collection as a Go slice.
-func (x *CaptureSession) Controls() []*raw.AVCaptureControl {
+func (x *CaptureSession) Controls() []*CaptureControl {
 	arr := x.inner.Controls()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVCaptureControl {
-		return raw.AVCaptureControlFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CaptureControl {
+		return &CaptureControl{inner: raw.AVCaptureControlFromID(purego.Retain(_id))}
 	})
 }
 
@@ -307,14 +307,14 @@ type CaptureSessionable interface {
 	SetDeferredStartDelegateDeferredStartDelegateCallbackQueue(deferredStartDelegate raw.AVCaptureSessionDeferredStartDelegate, deferredStartDelegateCallbackQueue *foundation.NSObject)
 	SessionPreset() string
 	SetSessionPreset(sessionPreset *foundation.NSString)
-	Inputs() []*raw.AVCaptureInput
-	Outputs() []*raw.AVCaptureOutput
-	Connections() []*raw.AVCaptureConnection
+	Inputs() []*CaptureInput
+	Outputs() []*CaptureOutput
+	Connections() []*CaptureConnection
 	SupportsControls() bool
 	MaxControlsCount() int
 	ControlsDelegate() raw.AVCaptureSessionControlsDelegate
 	ControlsDelegateCallbackQueue() *foundation.NSObject
-	Controls() []*raw.AVCaptureControl
+	Controls() []*CaptureControl
 	IsRunning() bool
 	SynchronizationClock() unsafe.Pointer
 	MasterClock() unsafe.Pointer

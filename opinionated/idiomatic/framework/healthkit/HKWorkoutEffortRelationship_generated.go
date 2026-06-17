@@ -55,13 +55,13 @@ func (x *WorkoutEffortRelationship) Activity() *WorkoutActivity {
 }
 
 // Samples returns the collection as a Go slice.
-func (x *WorkoutEffortRelationship) Samples() []*raw.HKSample {
+func (x *WorkoutEffortRelationship) Samples() []*Sample {
 	arr := x.inner.Samples()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.HKSample {
-		return raw.HKSampleFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Sample {
+		return &Sample{inner: raw.HKSampleFromID(purego.Retain(_id))}
 	})
 }
 
@@ -70,7 +70,7 @@ type WorkoutEffortRelationshipable interface {
 	Unwrap() *raw.HKWorkoutEffortRelationship
 	Workout() *Workout
 	Activity() *WorkoutActivity
-	Samples() []*raw.HKSample
+	Samples() []*Sample
 }
 
 var _ WorkoutEffortRelationshipable = (*WorkoutEffortRelationship)(nil)

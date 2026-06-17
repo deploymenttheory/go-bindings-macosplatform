@@ -118,13 +118,13 @@ func (x *PaymentQueue) TransactionObservers() *foundation.NSArray[raw.SKPaymentT
 }
 
 // Transactions returns the collection as a Go slice.
-func (x *PaymentQueue) Transactions() []*raw.SKPaymentTransaction {
+func (x *PaymentQueue) Transactions() []*PaymentTransaction {
 	arr := x.inner.Transactions()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SKPaymentTransaction {
-		return raw.SKPaymentTransactionFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PaymentTransaction {
+		return &PaymentTransaction{inner: raw.SKPaymentTransactionFromID(purego.Retain(_id))}
 	})
 }
 
@@ -146,7 +146,7 @@ type PaymentQueueable interface {
 	SetDelegate(delegate raw.SKPaymentQueueDelegate)
 	Storefront() *Storefront
 	TransactionObservers() *foundation.NSArray[raw.SKPaymentTransactionObserver]
-	Transactions() []*raw.SKPaymentTransaction
+	Transactions() []*PaymentTransaction
 }
 
 var _ PaymentQueueable = (*PaymentQueue)(nil)

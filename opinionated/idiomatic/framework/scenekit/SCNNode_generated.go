@@ -47,14 +47,14 @@ func (x *Node) WithName(name string) *Node {
 }
 
 // WithLight sets the light property and returns the receiver for chaining.
-func (x *Node) WithLight(light *raw.SCNLight) *Node {
-	x.inner.SetLight(light)
+func (x *Node) WithLight(light *Light) *Node {
+	x.inner.SetLight(light.Unwrap())
 	return x
 }
 
 // WithCamera sets the camera property and returns the receiver for chaining.
-func (x *Node) WithCamera(camera *raw.SCNCamera) *Node {
-	x.inner.SetCamera(camera)
+func (x *Node) WithCamera(camera *Camera) *Node {
+	x.inner.SetCamera(camera.Unwrap())
 	return x
 }
 
@@ -65,14 +65,14 @@ func (x *Node) WithGeometry(geometry GeometryProvider) *Node {
 }
 
 // WithSkinner sets the skinner property and returns the receiver for chaining.
-func (x *Node) WithSkinner(skinner *raw.SCNSkinner) *Node {
-	x.inner.SetSkinner(skinner)
+func (x *Node) WithSkinner(skinner *Skinner) *Node {
+	x.inner.SetSkinner(skinner.Unwrap())
 	return x
 }
 
 // WithMorpher sets the morpher property and returns the receiver for chaining.
-func (x *Node) WithMorpher(morpher *raw.SCNMorpher) *Node {
-	x.inner.SetMorpher(morpher)
+func (x *Node) WithMorpher(morpher *Morpher) *Node {
+	x.inner.SetMorpher(morpher.Unwrap())
 	return x
 }
 
@@ -167,14 +167,14 @@ func (x *Node) WithMovabilityHint(movabilityHint raw.SCNMovabilityHint) *Node {
 }
 
 // WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
-func (x *Node) WithPhysicsBody(physicsBody *raw.SCNPhysicsBody) *Node {
-	x.inner.SetPhysicsBody(physicsBody)
+func (x *Node) WithPhysicsBody(physicsBody *PhysicsBody) *Node {
+	x.inner.SetPhysicsBody(physicsBody.Unwrap())
 	return x
 }
 
 // WithPhysicsField sets the physicsField property and returns the receiver for chaining.
-func (x *Node) WithPhysicsField(physicsField *raw.SCNPhysicsField) *Node {
-	x.inner.SetPhysicsField(physicsField)
+func (x *Node) WithPhysicsField(physicsField *PhysicsField) *Node {
+	x.inner.SetPhysicsField(physicsField.Unwrap())
 	return x
 }
 
@@ -575,13 +575,13 @@ func (x *Node) ParentNode() *Node {
 }
 
 // ChildNodes returns the collection as a Go slice.
-func (x *Node) ChildNodes() []*raw.SCNNode {
+func (x *Node) ChildNodes() []*Node {
 	arr := x.inner.ChildNodes()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SCNNode {
-		return raw.SCNNodeFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Node {
+		return &Node{inner: raw.SCNNodeFromID(purego.Retain(_id))}
 	})
 }
 
@@ -614,13 +614,13 @@ func (x *Node) SetPhysicsField(physicsField *raw.SCNPhysicsField) {
 }
 
 // Constraints returns the collection as a Go slice.
-func (x *Node) Constraints() []*raw.SCNConstraint {
+func (x *Node) Constraints() []*Constraint {
 	arr := x.inner.Constraints()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SCNConstraint {
-		return raw.SCNConstraintFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Constraint {
+		return &Constraint{inner: raw.SCNConstraintFromID(purego.Retain(_id))}
 	})
 }
 
@@ -920,13 +920,13 @@ func (x *Node) RemoveParticleSystem(system *raw.SCNParticleSystem) {
 }
 
 // ParticleSystems returns the collection as a Go slice.
-func (x *Node) ParticleSystems() []*raw.SCNParticleSystem {
+func (x *Node) ParticleSystems() []*ParticleSystem {
 	arr := x.inner.ParticleSystems()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SCNParticleSystem {
-		return raw.SCNParticleSystemFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ParticleSystem {
+		return &ParticleSystem{inner: raw.SCNParticleSystemFromID(purego.Retain(_id))}
 	})
 }
 
@@ -946,13 +946,13 @@ func (x *Node) RemoveAudioPlayer(player *raw.SCNAudioPlayer) {
 }
 
 // AudioPlayers returns the collection as a Go slice.
-func (x *Node) AudioPlayers() []*raw.SCNAudioPlayer {
+func (x *Node) AudioPlayers() []*AudioPlayer {
 	arr := x.inner.AudioPlayers()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SCNAudioPlayer {
-		return raw.SCNAudioPlayerFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *AudioPlayer {
+		return &AudioPlayer{inner: raw.SCNAudioPlayerFromID(purego.Retain(_id))}
 	})
 }
 
@@ -962,11 +962,11 @@ func (x *Node) asNode() *raw.SCNNode { return x.inner }
 type Nodeable interface {
 	Unwrap() *raw.SCNNode
 	WithName(name string) *Node
-	WithLight(light *raw.SCNLight) *Node
-	WithCamera(camera *raw.SCNCamera) *Node
+	WithLight(light *Light) *Node
+	WithCamera(camera *Camera) *Node
 	WithGeometry(geometry GeometryProvider) *Node
-	WithSkinner(skinner *raw.SCNSkinner) *Node
-	WithMorpher(morpher *raw.SCNMorpher) *Node
+	WithSkinner(skinner *Skinner) *Node
+	WithMorpher(morpher *Morpher) *Node
 	WithTransform(transform quartzcore.CATransform3D) *Node
 	WithWorldTransform(worldTransform quartzcore.CATransform3D) *Node
 	WithPosition(position raw.SCNVector3) *Node
@@ -982,8 +982,8 @@ type Nodeable interface {
 	WithRenderingOrder(renderingOrder int) *Node
 	WithCastsShadow(castsShadow bool) *Node
 	WithMovabilityHint(movabilityHint raw.SCNMovabilityHint) *Node
-	WithPhysicsBody(physicsBody *raw.SCNPhysicsBody) *Node
-	WithPhysicsField(physicsField *raw.SCNPhysicsField) *Node
+	WithPhysicsBody(physicsBody *PhysicsBody) *Node
+	WithPhysicsField(physicsField *PhysicsField) *Node
 	WithConstraints(items ...ConstraintProvider) *Node
 	WithFilters(items ...*coreimage.CIFilter) *Node
 	WithPaused(paused bool) *Node
@@ -1050,12 +1050,12 @@ type Nodeable interface {
 	MovabilityHint() raw.SCNMovabilityHint
 	SetMovabilityHint(movabilityHint raw.SCNMovabilityHint)
 	ParentNode() *Node
-	ChildNodes() []*raw.SCNNode
+	ChildNodes() []*Node
 	PhysicsBody() *PhysicsBody
 	SetPhysicsBody(physicsBody *raw.SCNPhysicsBody)
 	PhysicsField() *PhysicsField
 	SetPhysicsField(physicsField *raw.SCNPhysicsField)
-	Constraints() []*raw.SCNConstraint
+	Constraints() []*Constraint
 	SetConstraints(constraints *foundation.NSArray[*raw.SCNConstraint])
 	Filters() []*coreimage.CIFilter
 	SetFilters(filters *foundation.NSArray[*coreimage.CIFilter])
@@ -1113,11 +1113,11 @@ type Nodeable interface {
 	AddParticleSystem(system *raw.SCNParticleSystem)
 	RemoveAllParticleSystems()
 	RemoveParticleSystem(system *raw.SCNParticleSystem)
-	ParticleSystems() []*raw.SCNParticleSystem
+	ParticleSystems() []*ParticleSystem
 	AddAudioPlayer(player *raw.SCNAudioPlayer)
 	RemoveAllAudioPlayers()
 	RemoveAudioPlayer(player *raw.SCNAudioPlayer)
-	AudioPlayers() []*raw.SCNAudioPlayer
+	AudioPlayers() []*AudioPlayer
 }
 
 var _ Nodeable = (*Node)(nil)

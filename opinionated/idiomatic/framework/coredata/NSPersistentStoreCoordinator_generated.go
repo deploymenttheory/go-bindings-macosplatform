@@ -249,13 +249,13 @@ func (x *PersistentStoreCoordinator) ManagedObjectModel() *ManagedObjectModel {
 }
 
 // PersistentStores returns the collection as a Go slice.
-func (x *PersistentStoreCoordinator) PersistentStores() []*raw.NSPersistentStore {
+func (x *PersistentStoreCoordinator) PersistentStores() []*PersistentStore {
 	arr := x.inner.PersistentStores()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSPersistentStore {
-		return raw.NSPersistentStoreFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PersistentStore {
+		return &PersistentStore{inner: raw.NSPersistentStoreFromID(purego.Retain(_id))}
 	})
 }
 
@@ -301,7 +301,7 @@ type PersistentStoreCoordinatorable interface {
 	Unlock()
 	TryLock() bool
 	ManagedObjectModel() *ManagedObjectModel
-	PersistentStores() []*raw.NSPersistentStore
+	PersistentStores() []*PersistentStore
 	Name() string
 	SetName(name string)
 }

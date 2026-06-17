@@ -150,13 +150,13 @@ func (x *NEDNSSettingsManager) SetDnsSettings(dnsSettings *raw.NEDNSSettings) {
 }
 
 // OnDemandRules returns the collection as a Go slice.
-func (x *NEDNSSettingsManager) OnDemandRules() []*raw.NEOnDemandRule {
+func (x *NEDNSSettingsManager) OnDemandRules() []*NEOnDemandRule {
 	arr := x.inner.OnDemandRules()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NEOnDemandRule {
-		return raw.NEOnDemandRuleFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *NEOnDemandRule {
+		return &NEOnDemandRule{inner: raw.NEOnDemandRuleFromID(purego.Retain(_id))}
 	})
 }
 
@@ -183,7 +183,7 @@ type NEDNSSettingsManagerable interface {
 	SetLocalizedDescription(localizedDescription string)
 	DnsSettings() *NEDNSSettings
 	SetDnsSettings(dnsSettings *raw.NEDNSSettings)
-	OnDemandRules() []*raw.NEOnDemandRule
+	OnDemandRules() []*NEOnDemandRule
 	SetOnDemandRules(onDemandRules *foundation.NSArray[*raw.NEOnDemandRule])
 	IsEnabled() bool
 }

@@ -398,13 +398,13 @@ func (x *Bundle) DevelopmentLocalization() *String {
 }
 
 // ExecutableArchitectures returns the collection as a Go slice.
-func (x *Bundle) ExecutableArchitectures() []*raw.NSNumber {
+func (x *Bundle) ExecutableArchitectures() []*Number {
 	arr := x.inner.ExecutableArchitectures()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSNumber {
-		return raw.NSNumberFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Number {
+		return &Number{inner: raw.NSNumberFromID(purego.Retain(_id))}
 	})
 }
 
@@ -458,7 +458,7 @@ type Bundleable interface {
 	PreferredLocalizations() []string
 	Localizations() []string
 	DevelopmentLocalization() *String
-	ExecutableArchitectures() []*raw.NSNumber
+	ExecutableArchitectures() []*Number
 }
 
 var _ Bundleable = (*Bundle)(nil)

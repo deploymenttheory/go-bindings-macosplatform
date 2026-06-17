@@ -66,57 +66,57 @@ func (x *Message) FromAddress() *EmailAddress {
 }
 
 // ToAddresses returns the collection as a Go slice.
-func (x *Message) ToAddresses() []*raw.MEEmailAddress {
+func (x *Message) ToAddresses() []*EmailAddress {
 	arr := x.inner.ToAddresses()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MEEmailAddress {
-		return raw.MEEmailAddressFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *EmailAddress {
+		return &EmailAddress{inner: raw.MEEmailAddressFromID(purego.Retain(_id))}
 	})
 }
 
 // CcAddresses returns the collection as a Go slice.
-func (x *Message) CcAddresses() []*raw.MEEmailAddress {
+func (x *Message) CcAddresses() []*EmailAddress {
 	arr := x.inner.CcAddresses()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MEEmailAddress {
-		return raw.MEEmailAddressFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *EmailAddress {
+		return &EmailAddress{inner: raw.MEEmailAddressFromID(purego.Retain(_id))}
 	})
 }
 
 // BccAddresses returns the collection as a Go slice.
-func (x *Message) BccAddresses() []*raw.MEEmailAddress {
+func (x *Message) BccAddresses() []*EmailAddress {
 	arr := x.inner.BccAddresses()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MEEmailAddress {
-		return raw.MEEmailAddressFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *EmailAddress {
+		return &EmailAddress{inner: raw.MEEmailAddressFromID(purego.Retain(_id))}
 	})
 }
 
 // ReplyToAddresses returns the collection as a Go slice.
-func (x *Message) ReplyToAddresses() []*raw.MEEmailAddress {
+func (x *Message) ReplyToAddresses() []*EmailAddress {
 	arr := x.inner.ReplyToAddresses()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MEEmailAddress {
-		return raw.MEEmailAddressFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *EmailAddress {
+		return &EmailAddress{inner: raw.MEEmailAddressFromID(purego.Retain(_id))}
 	})
 }
 
 // AllRecipientAddresses returns the collection as a Go slice.
-func (x *Message) AllRecipientAddresses() []*raw.MEEmailAddress {
+func (x *Message) AllRecipientAddresses() []*EmailAddress {
 	arr := x.inner.AllRecipientAddresses()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MEEmailAddress {
-		return raw.MEEmailAddressFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *EmailAddress {
+		return &EmailAddress{inner: raw.MEEmailAddressFromID(purego.Retain(_id))}
 	})
 }
 
@@ -147,11 +147,11 @@ type Messageable interface {
 	EncryptionState() raw.MEMessageEncryptionState
 	Subject() string
 	FromAddress() *EmailAddress
-	ToAddresses() []*raw.MEEmailAddress
-	CcAddresses() []*raw.MEEmailAddress
-	BccAddresses() []*raw.MEEmailAddress
-	ReplyToAddresses() []*raw.MEEmailAddress
-	AllRecipientAddresses() []*raw.MEEmailAddress
+	ToAddresses() []*EmailAddress
+	CcAddresses() []*EmailAddress
+	BccAddresses() []*EmailAddress
+	ReplyToAddresses() []*EmailAddress
+	AllRecipientAddresses() []*EmailAddress
 	DateSent() *foundation.NSDate
 	DateReceived() *foundation.NSDate
 	Headers() *foundation.NSDictionary[*foundation.NSString, objc.ID]

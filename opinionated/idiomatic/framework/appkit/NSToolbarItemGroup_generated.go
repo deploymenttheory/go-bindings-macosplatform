@@ -98,8 +98,8 @@ func (x *ToolbarItemGroup) WithToolTip(toolTip string) *ToolbarItemGroup {
 }
 
 // WithMenuFormRepresentation sets the menuFormRepresentation property and returns the receiver for chaining.
-func (x *ToolbarItemGroup) WithMenuFormRepresentation(menuFormRepresentation *raw.NSMenuItem) *ToolbarItemGroup {
-	x.inner.NSToolbarItem.SetMenuFormRepresentation(menuFormRepresentation)
+func (x *ToolbarItemGroup) WithMenuFormRepresentation(menuFormRepresentation *MenuItem) *ToolbarItemGroup {
+	x.inner.NSToolbarItem.SetMenuFormRepresentation(menuFormRepresentation.Unwrap())
 	return x
 }
 
@@ -128,8 +128,8 @@ func (x *ToolbarItemGroup) WithEnabled(enabled bool) *ToolbarItemGroup {
 }
 
 // WithImage sets the image property and returns the receiver for chaining.
-func (x *ToolbarItemGroup) WithImage(image *raw.NSImage) *ToolbarItemGroup {
-	x.inner.NSToolbarItem.SetImage(image)
+func (x *ToolbarItemGroup) WithImage(image *Image) *ToolbarItemGroup {
+	x.inner.NSToolbarItem.SetImage(image.Unwrap())
 	return x
 }
 
@@ -146,8 +146,8 @@ func (x *ToolbarItemGroup) WithBordered(bordered bool) *ToolbarItemGroup {
 }
 
 // WithBackgroundTintColor sets the backgroundTintColor property and returns the receiver for chaining.
-func (x *ToolbarItemGroup) WithBackgroundTintColor(backgroundTintColor *raw.NSColor) *ToolbarItemGroup {
-	x.inner.NSToolbarItem.SetBackgroundTintColor(backgroundTintColor)
+func (x *ToolbarItemGroup) WithBackgroundTintColor(backgroundTintColor *Color) *ToolbarItemGroup {
+	x.inner.NSToolbarItem.SetBackgroundTintColor(backgroundTintColor.Unwrap())
 	return x
 }
 
@@ -194,8 +194,8 @@ func (x *ToolbarItemGroup) WithVisibilityPriority(visibilityPriority int) *Toolb
 }
 
 // WithBadge sets the badge property and returns the receiver for chaining.
-func (x *ToolbarItemGroup) WithBadge(badge *raw.NSItemBadge) *ToolbarItemGroup {
-	x.inner.NSToolbarItem.SetBadge(badge)
+func (x *ToolbarItemGroup) WithBadge(badge *ItemBadge) *ToolbarItemGroup {
+	x.inner.NSToolbarItem.SetBadge(badge.Unwrap())
 	return x
 }
 
@@ -216,13 +216,13 @@ func (x *ToolbarItemGroup) IsSelectedAtIndex(index int) bool {
 }
 
 // Subitems returns the collection as a Go slice.
-func (x *ToolbarItemGroup) Subitems() []*raw.NSToolbarItem {
+func (x *ToolbarItemGroup) Subitems() []*ToolbarItem {
 	arr := x.inner.Subitems()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSToolbarItem {
-		return raw.NSToolbarItemFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ToolbarItem {
+		return &ToolbarItem{inner: raw.NSToolbarItemFromID(purego.Retain(_id))}
 	})
 }
 
@@ -274,15 +274,15 @@ type ToolbarItemGroupable interface {
 	WithPaletteLabel(paletteLabel string) *ToolbarItemGroup
 	WithPossibleLabels(possibleLabels *foundation.NSSet[*foundation.NSString]) *ToolbarItemGroup
 	WithToolTip(toolTip string) *ToolbarItemGroup
-	WithMenuFormRepresentation(menuFormRepresentation *raw.NSMenuItem) *ToolbarItemGroup
+	WithMenuFormRepresentation(menuFormRepresentation *MenuItem) *ToolbarItemGroup
 	WithTag(tag int) *ToolbarItemGroup
 	WithTarget(target objc.ID) *ToolbarItemGroup
 	WithAction(action objc.SEL) *ToolbarItemGroup
 	WithEnabled(enabled bool) *ToolbarItemGroup
-	WithImage(image *raw.NSImage) *ToolbarItemGroup
+	WithImage(image *Image) *ToolbarItemGroup
 	WithTitle(title string) *ToolbarItemGroup
 	WithBordered(bordered bool) *ToolbarItemGroup
-	WithBackgroundTintColor(backgroundTintColor *raw.NSColor) *ToolbarItemGroup
+	WithBackgroundTintColor(backgroundTintColor *Color) *ToolbarItemGroup
 	WithStyle(style raw.NSToolbarItemStyle) *ToolbarItemGroup
 	WithNavigational(navigational bool) *ToolbarItemGroup
 	WithView(view ViewProvider) *ToolbarItemGroup
@@ -290,11 +290,11 @@ type ToolbarItemGroupable interface {
 	WithMinSize(minSize corefoundation.CGSize) *ToolbarItemGroup
 	WithMaxSize(maxSize corefoundation.CGSize) *ToolbarItemGroup
 	WithVisibilityPriority(visibilityPriority int) *ToolbarItemGroup
-	WithBadge(badge *raw.NSItemBadge) *ToolbarItemGroup
+	WithBadge(badge *ItemBadge) *ToolbarItemGroup
 	WithAutovalidates(autovalidates bool) *ToolbarItemGroup
 	SetSelectedAtIndex(selected bool, index int)
 	IsSelectedAtIndex(index int) bool
-	Subitems() []*raw.NSToolbarItem
+	Subitems() []*ToolbarItem
 	SetSubitems(subitems *foundation.NSArray[*raw.NSToolbarItem])
 	ControlRepresentation() raw.NSToolbarItemGroupControlRepresentation
 	SetControlRepresentation(controlRepresentation raw.NSToolbarItemGroupControlRepresentation)

@@ -50,8 +50,8 @@ func (x *CalEvent) WithLocation(location string) *CalEvent {
 }
 
 // WithRecurrenceRule sets the recurrenceRule property and returns the receiver for chaining.
-func (x *CalEvent) WithRecurrenceRule(recurrenceRule *raw.CalRecurrenceRule) *CalEvent {
-	x.inner.SetRecurrenceRule(recurrenceRule)
+func (x *CalEvent) WithRecurrenceRule(recurrenceRule *CalRecurrenceRule) *CalEvent {
+	x.inner.SetRecurrenceRule(recurrenceRule.Unwrap())
 	return x
 }
 
@@ -68,8 +68,8 @@ func (x *CalEvent) WithEndDate(endDate *foundation.NSDate) *CalEvent {
 }
 
 // WithCalendar sets the calendar property and returns the receiver for chaining.
-func (x *CalEvent) WithCalendar(calendar *raw.CalCalendar) *CalEvent {
-	x.inner.CalCalendarItem.SetCalendar(calendar)
+func (x *CalEvent) WithCalendar(calendar *CalCalendar) *CalEvent {
+	x.inner.CalCalendarItem.SetCalendar(calendar.Unwrap())
 	return x
 }
 
@@ -171,10 +171,10 @@ type CalEventable interface {
 	Unwrap() *raw.CalEvent
 	WithIsAllDay(isAllDay bool) *CalEvent
 	WithLocation(location string) *CalEvent
-	WithRecurrenceRule(recurrenceRule *raw.CalRecurrenceRule) *CalEvent
+	WithRecurrenceRule(recurrenceRule *CalRecurrenceRule) *CalEvent
 	WithStartDate(startDate *foundation.NSDate) *CalEvent
 	WithEndDate(endDate *foundation.NSDate) *CalEvent
-	WithCalendar(calendar *raw.CalCalendar) *CalEvent
+	WithCalendar(calendar *CalCalendar) *CalEvent
 	WithNotes(notes string) *CalEvent
 	WithUrl(url string) *CalEvent
 	WithTitle(title string) *CalEvent

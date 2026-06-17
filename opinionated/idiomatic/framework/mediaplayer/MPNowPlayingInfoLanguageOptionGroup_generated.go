@@ -39,13 +39,13 @@ func NewNowPlayingInfoLanguageOptionGroupWithLanguageOptionsDefaultLanguageOptio
 }
 
 // LanguageOptions returns the collection as a Go slice.
-func (x *NowPlayingInfoLanguageOptionGroup) LanguageOptions() []*raw.MPNowPlayingInfoLanguageOption {
+func (x *NowPlayingInfoLanguageOptionGroup) LanguageOptions() []*NowPlayingInfoLanguageOption {
 	arr := x.inner.LanguageOptions()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MPNowPlayingInfoLanguageOption {
-		return raw.MPNowPlayingInfoLanguageOptionFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *NowPlayingInfoLanguageOption {
+		return &NowPlayingInfoLanguageOption{inner: raw.MPNowPlayingInfoLanguageOptionFromID(purego.Retain(_id))}
 	})
 }
 
@@ -66,7 +66,7 @@ func (x *NowPlayingInfoLanguageOptionGroup) AllowEmptySelection() bool {
 // NowPlayingInfoLanguageOptionGroupable is the interface implemented by [NowPlayingInfoLanguageOptionGroup], for mocking and DI.
 type NowPlayingInfoLanguageOptionGroupable interface {
 	Unwrap() *raw.MPNowPlayingInfoLanguageOptionGroup
-	LanguageOptions() []*raw.MPNowPlayingInfoLanguageOption
+	LanguageOptions() []*NowPlayingInfoLanguageOption
 	DefaultLanguageOption() *NowPlayingInfoLanguageOption
 	AllowEmptySelection() bool
 }

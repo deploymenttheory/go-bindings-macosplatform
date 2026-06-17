@@ -37,8 +37,8 @@ func NewActionGoToWithDestination(destination *raw.PDFDestination) *ActionGoTo {
 }
 
 // WithDestination sets the destination property and returns the receiver for chaining.
-func (x *ActionGoTo) WithDestination(destination *raw.PDFDestination) *ActionGoTo {
-	x.inner.SetDestination(destination)
+func (x *ActionGoTo) WithDestination(destination *Destination) *ActionGoTo {
+	x.inner.SetDestination(destination.Unwrap())
 	return x
 }
 
@@ -61,7 +61,7 @@ func (x *ActionGoTo) asAction() *raw.PDFAction { return &x.inner.PDFAction }
 // ActionGoToable is the interface implemented by [ActionGoTo], for mocking and DI.
 type ActionGoToable interface {
 	Unwrap() *raw.PDFActionGoTo
-	WithDestination(destination *raw.PDFDestination) *ActionGoTo
+	WithDestination(destination *Destination) *ActionGoTo
 	Destination() *Destination
 	SetDestination(destination *raw.PDFDestination)
 }

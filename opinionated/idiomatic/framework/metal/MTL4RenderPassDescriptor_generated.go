@@ -36,14 +36,14 @@ func NewMTL4RenderPassDescriptor() *MTL4RenderPassDescriptor {
 }
 
 // WithDepthAttachment sets the depthAttachment property and returns the receiver for chaining.
-func (x *MTL4RenderPassDescriptor) WithDepthAttachment(depthAttachment *raw.MTLRenderPassDepthAttachmentDescriptor) *MTL4RenderPassDescriptor {
-	x.inner.SetDepthAttachment(depthAttachment)
+func (x *MTL4RenderPassDescriptor) WithDepthAttachment(depthAttachment *RenderPassDepthAttachmentDescriptor) *MTL4RenderPassDescriptor {
+	x.inner.SetDepthAttachment(depthAttachment.Unwrap())
 	return x
 }
 
 // WithStencilAttachment sets the stencilAttachment property and returns the receiver for chaining.
-func (x *MTL4RenderPassDescriptor) WithStencilAttachment(stencilAttachment *raw.MTLRenderPassStencilAttachmentDescriptor) *MTL4RenderPassDescriptor {
-	x.inner.SetStencilAttachment(stencilAttachment)
+func (x *MTL4RenderPassDescriptor) WithStencilAttachment(stencilAttachment *RenderPassStencilAttachmentDescriptor) *MTL4RenderPassDescriptor {
+	x.inner.SetStencilAttachment(stencilAttachment.Unwrap())
 	return x
 }
 
@@ -289,8 +289,8 @@ func (x *MTL4RenderPassDescriptor) SetSupportColorAttachmentMapping(supportColor
 // MTL4RenderPassDescriptorable is the interface implemented by [MTL4RenderPassDescriptor], for mocking and DI.
 type MTL4RenderPassDescriptorable interface {
 	Unwrap() *raw.MTL4RenderPassDescriptor
-	WithDepthAttachment(depthAttachment *raw.MTLRenderPassDepthAttachmentDescriptor) *MTL4RenderPassDescriptor
-	WithStencilAttachment(stencilAttachment *raw.MTLRenderPassStencilAttachmentDescriptor) *MTL4RenderPassDescriptor
+	WithDepthAttachment(depthAttachment *RenderPassDepthAttachmentDescriptor) *MTL4RenderPassDescriptor
+	WithStencilAttachment(stencilAttachment *RenderPassStencilAttachmentDescriptor) *MTL4RenderPassDescriptor
 	WithRenderTargetArrayLength(renderTargetArrayLength uint) *MTL4RenderPassDescriptor
 	WithImageblockSampleLength(imageblockSampleLength uint) *MTL4RenderPassDescriptor
 	WithThreadgroupMemoryLength(threadgroupMemoryLength uint) *MTL4RenderPassDescriptor

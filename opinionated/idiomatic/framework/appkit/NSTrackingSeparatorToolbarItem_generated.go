@@ -38,8 +38,8 @@ func NewTrackingSeparatorToolbarItem() *TrackingSeparatorToolbarItem {
 }
 
 // WithSplitView sets the splitView property and returns the receiver for chaining.
-func (x *TrackingSeparatorToolbarItem) WithSplitView(splitView *raw.NSSplitView) *TrackingSeparatorToolbarItem {
-	x.inner.SetSplitView(splitView)
+func (x *TrackingSeparatorToolbarItem) WithSplitView(splitView *SplitView) *TrackingSeparatorToolbarItem {
+	x.inner.SetSplitView(splitView.Unwrap())
 	return x
 }
 
@@ -74,8 +74,8 @@ func (x *TrackingSeparatorToolbarItem) WithToolTip(toolTip string) *TrackingSepa
 }
 
 // WithMenuFormRepresentation sets the menuFormRepresentation property and returns the receiver for chaining.
-func (x *TrackingSeparatorToolbarItem) WithMenuFormRepresentation(menuFormRepresentation *raw.NSMenuItem) *TrackingSeparatorToolbarItem {
-	x.inner.NSToolbarItem.SetMenuFormRepresentation(menuFormRepresentation)
+func (x *TrackingSeparatorToolbarItem) WithMenuFormRepresentation(menuFormRepresentation *MenuItem) *TrackingSeparatorToolbarItem {
+	x.inner.NSToolbarItem.SetMenuFormRepresentation(menuFormRepresentation.Unwrap())
 	return x
 }
 
@@ -104,8 +104,8 @@ func (x *TrackingSeparatorToolbarItem) WithEnabled(enabled bool) *TrackingSepara
 }
 
 // WithImage sets the image property and returns the receiver for chaining.
-func (x *TrackingSeparatorToolbarItem) WithImage(image *raw.NSImage) *TrackingSeparatorToolbarItem {
-	x.inner.NSToolbarItem.SetImage(image)
+func (x *TrackingSeparatorToolbarItem) WithImage(image *Image) *TrackingSeparatorToolbarItem {
+	x.inner.NSToolbarItem.SetImage(image.Unwrap())
 	return x
 }
 
@@ -122,8 +122,8 @@ func (x *TrackingSeparatorToolbarItem) WithBordered(bordered bool) *TrackingSepa
 }
 
 // WithBackgroundTintColor sets the backgroundTintColor property and returns the receiver for chaining.
-func (x *TrackingSeparatorToolbarItem) WithBackgroundTintColor(backgroundTintColor *raw.NSColor) *TrackingSeparatorToolbarItem {
-	x.inner.NSToolbarItem.SetBackgroundTintColor(backgroundTintColor)
+func (x *TrackingSeparatorToolbarItem) WithBackgroundTintColor(backgroundTintColor *Color) *TrackingSeparatorToolbarItem {
+	x.inner.NSToolbarItem.SetBackgroundTintColor(backgroundTintColor.Unwrap())
 	return x
 }
 
@@ -170,8 +170,8 @@ func (x *TrackingSeparatorToolbarItem) WithVisibilityPriority(visibilityPriority
 }
 
 // WithBadge sets the badge property and returns the receiver for chaining.
-func (x *TrackingSeparatorToolbarItem) WithBadge(badge *raw.NSItemBadge) *TrackingSeparatorToolbarItem {
-	x.inner.NSToolbarItem.SetBadge(badge)
+func (x *TrackingSeparatorToolbarItem) WithBadge(badge *ItemBadge) *TrackingSeparatorToolbarItem {
+	x.inner.NSToolbarItem.SetBadge(badge.Unwrap())
 	return x
 }
 
@@ -210,21 +210,21 @@ func (x *TrackingSeparatorToolbarItem) asToolbarItem() *raw.NSToolbarItem { retu
 // TrackingSeparatorToolbarItemable is the interface implemented by [TrackingSeparatorToolbarItem], for mocking and DI.
 type TrackingSeparatorToolbarItemable interface {
 	Unwrap() *raw.NSTrackingSeparatorToolbarItem
-	WithSplitView(splitView *raw.NSSplitView) *TrackingSeparatorToolbarItem
+	WithSplitView(splitView *SplitView) *TrackingSeparatorToolbarItem
 	WithDividerIndex(dividerIndex int) *TrackingSeparatorToolbarItem
 	WithLabel(label string) *TrackingSeparatorToolbarItem
 	WithPaletteLabel(paletteLabel string) *TrackingSeparatorToolbarItem
 	WithPossibleLabels(possibleLabels *foundation.NSSet[*foundation.NSString]) *TrackingSeparatorToolbarItem
 	WithToolTip(toolTip string) *TrackingSeparatorToolbarItem
-	WithMenuFormRepresentation(menuFormRepresentation *raw.NSMenuItem) *TrackingSeparatorToolbarItem
+	WithMenuFormRepresentation(menuFormRepresentation *MenuItem) *TrackingSeparatorToolbarItem
 	WithTag(tag int) *TrackingSeparatorToolbarItem
 	WithTarget(target objc.ID) *TrackingSeparatorToolbarItem
 	WithAction(action objc.SEL) *TrackingSeparatorToolbarItem
 	WithEnabled(enabled bool) *TrackingSeparatorToolbarItem
-	WithImage(image *raw.NSImage) *TrackingSeparatorToolbarItem
+	WithImage(image *Image) *TrackingSeparatorToolbarItem
 	WithTitle(title string) *TrackingSeparatorToolbarItem
 	WithBordered(bordered bool) *TrackingSeparatorToolbarItem
-	WithBackgroundTintColor(backgroundTintColor *raw.NSColor) *TrackingSeparatorToolbarItem
+	WithBackgroundTintColor(backgroundTintColor *Color) *TrackingSeparatorToolbarItem
 	WithStyle(style raw.NSToolbarItemStyle) *TrackingSeparatorToolbarItem
 	WithNavigational(navigational bool) *TrackingSeparatorToolbarItem
 	WithView(view ViewProvider) *TrackingSeparatorToolbarItem
@@ -232,7 +232,7 @@ type TrackingSeparatorToolbarItemable interface {
 	WithMinSize(minSize corefoundation.CGSize) *TrackingSeparatorToolbarItem
 	WithMaxSize(maxSize corefoundation.CGSize) *TrackingSeparatorToolbarItem
 	WithVisibilityPriority(visibilityPriority int) *TrackingSeparatorToolbarItem
-	WithBadge(badge *raw.NSItemBadge) *TrackingSeparatorToolbarItem
+	WithBadge(badge *ItemBadge) *TrackingSeparatorToolbarItem
 	WithAutovalidates(autovalidates bool) *TrackingSeparatorToolbarItem
 	SplitView() *SplitView
 	SetSplitView(splitView *raw.NSSplitView)

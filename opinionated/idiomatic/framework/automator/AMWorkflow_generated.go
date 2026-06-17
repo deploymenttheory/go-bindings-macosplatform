@@ -96,13 +96,13 @@ func (x *Workflow) FileURL() *foundation.NSURL {
 }
 
 // Actions returns the collection as a Go slice.
-func (x *Workflow) Actions() []*raw.AMAction {
+func (x *Workflow) Actions() []*Action {
 	arr := x.inner.Actions()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AMAction {
-		return raw.AMActionFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Action {
+		return &Action{inner: raw.AMActionFromID(purego.Retain(_id))}
 	})
 }
 
@@ -133,7 +133,7 @@ type Workflowable interface {
 	InsertActionAtIndex(action *raw.AMAction, index uint)
 	MoveActionAtIndexToIndex(startIndex uint, endIndex uint)
 	FileURL() *foundation.NSURL
-	Actions() []*raw.AMAction
+	Actions() []*Action
 	Input() objc.ID
 	SetInput(input objc.ID)
 	Output() unsafe.Pointer

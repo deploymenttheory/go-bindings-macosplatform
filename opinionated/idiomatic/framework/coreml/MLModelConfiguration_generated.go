@@ -51,8 +51,8 @@ func (x *ModelConfiguration) WithComputeUnits(computeUnits raw.MLComputeUnits) *
 }
 
 // WithOptimizationHints sets the optimizationHints property and returns the receiver for chaining.
-func (x *ModelConfiguration) WithOptimizationHints(optimizationHints *raw.MLOptimizationHints) *ModelConfiguration {
-	x.inner.SetOptimizationHints(optimizationHints)
+func (x *ModelConfiguration) WithOptimizationHints(optimizationHints *OptimizationHints) *ModelConfiguration {
+	x.inner.SetOptimizationHints(optimizationHints.Unwrap())
 	return x
 }
 
@@ -167,7 +167,7 @@ type ModelConfigurationable interface {
 	Unwrap() *raw.MLModelConfiguration
 	WithModelDisplayName(modelDisplayName string) *ModelConfiguration
 	WithComputeUnits(computeUnits raw.MLComputeUnits) *ModelConfiguration
-	WithOptimizationHints(optimizationHints *raw.MLOptimizationHints) *ModelConfiguration
+	WithOptimizationHints(optimizationHints *OptimizationHints) *ModelConfiguration
 	WithAllowLowPrecisionAccumulationOnGPU(allowLowPrecisionAccumulationOnGPU bool) *ModelConfiguration
 	WithPreferredMetalDevice(preferredMetalDevice metal.MTLDevice) *ModelConfiguration
 	WithParameters(parameters *foundation.NSDictionary[*raw.MLParameterKey, objc.ID]) *ModelConfiguration

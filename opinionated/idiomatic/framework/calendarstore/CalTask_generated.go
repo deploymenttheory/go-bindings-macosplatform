@@ -61,8 +61,8 @@ func (x *CalTask) WithCompletedDate(completedDate *foundation.NSDate) *CalTask {
 }
 
 // WithCalendar sets the calendar property and returns the receiver for chaining.
-func (x *CalTask) WithCalendar(calendar *raw.CalCalendar) *CalTask {
-	x.inner.CalCalendarItem.SetCalendar(calendar)
+func (x *CalTask) WithCalendar(calendar *CalCalendar) *CalTask {
+	x.inner.CalCalendarItem.SetCalendar(calendar.Unwrap())
 	return x
 }
 
@@ -133,7 +133,7 @@ type CalTaskable interface {
 	WithPriority(priority uint) *CalTask
 	WithIsCompleted(isCompleted bool) *CalTask
 	WithCompletedDate(completedDate *foundation.NSDate) *CalTask
-	WithCalendar(calendar *raw.CalCalendar) *CalTask
+	WithCalendar(calendar *CalCalendar) *CalTask
 	WithNotes(notes string) *CalTask
 	WithUrl(url string) *CalTask
 	WithTitle(title string) *CalTask

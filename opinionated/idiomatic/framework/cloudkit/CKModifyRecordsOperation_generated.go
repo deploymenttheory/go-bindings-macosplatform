@@ -127,20 +127,20 @@ func (x *ModifyRecordsOperation) WithModifyRecordsCompletionBlock(modifyRecordsC
 }
 
 // WithDatabase sets the database property and returns the receiver for chaining.
-func (x *ModifyRecordsOperation) WithDatabase(database *raw.CKDatabase) *ModifyRecordsOperation {
-	x.inner.CKDatabaseOperation.SetDatabase(database)
+func (x *ModifyRecordsOperation) WithDatabase(database *Database) *ModifyRecordsOperation {
+	x.inner.CKDatabaseOperation.SetDatabase(database.Unwrap())
 	return x
 }
 
 // WithConfiguration sets the configuration property and returns the receiver for chaining.
-func (x *ModifyRecordsOperation) WithConfiguration(configuration *raw.CKOperationConfiguration) *ModifyRecordsOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetConfiguration(configuration)
+func (x *ModifyRecordsOperation) WithConfiguration(configuration *OperationConfiguration) *ModifyRecordsOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetConfiguration(configuration.Unwrap())
 	return x
 }
 
 // WithGroup sets the group property and returns the receiver for chaining.
-func (x *ModifyRecordsOperation) WithGroup(group *raw.CKOperationGroup) *ModifyRecordsOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetGroup(group)
+func (x *ModifyRecordsOperation) WithGroup(group *OperationGroup) *ModifyRecordsOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetGroup(group.Unwrap())
 	return x
 }
 
@@ -151,8 +151,8 @@ func (x *ModifyRecordsOperation) WithLongLivedOperationWasPersistedBlock(longLiv
 }
 
 // WithContainer sets the container property and returns the receiver for chaining.
-func (x *ModifyRecordsOperation) WithContainer(container *raw.CKContainer) *ModifyRecordsOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetContainer(container)
+func (x *ModifyRecordsOperation) WithContainer(container *Container) *ModifyRecordsOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetContainer(container.Unwrap())
 	return x
 }
 
@@ -181,13 +181,13 @@ func (x *ModifyRecordsOperation) WithTimeoutIntervalForResource(timeoutIntervalF
 }
 
 // RecordsToSave returns the collection as a Go slice.
-func (x *ModifyRecordsOperation) RecordsToSave() []*raw.CKRecord {
+func (x *ModifyRecordsOperation) RecordsToSave() []*Record {
 	arr := x.inner.RecordsToSave()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CKRecord {
-		return raw.CKRecordFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Record {
+		return &Record{inner: raw.CKRecordFromID(purego.Retain(_id))}
 	})
 }
 
@@ -197,13 +197,13 @@ func (x *ModifyRecordsOperation) SetRecordsToSave(recordsToSave *foundation.NSAr
 }
 
 // RecordIDsToDelete returns the collection as a Go slice.
-func (x *ModifyRecordsOperation) RecordIDsToDelete() []*raw.CKRecordID {
+func (x *ModifyRecordsOperation) RecordIDsToDelete() []*RecordID {
 	arr := x.inner.RecordIDsToDelete()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CKRecordID {
-		return raw.CKRecordIDFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *RecordID {
+		return &RecordID{inner: raw.CKRecordIDFromID(purego.Retain(_id))}
 	})
 }
 
@@ -351,18 +351,18 @@ type ModifyRecordsOperationable interface {
 	WithPerRecordSaveBlock(perRecordSaveBlock func(*raw.CKRecordID, *raw.CKRecord, unsafe.Pointer)) *ModifyRecordsOperation
 	WithPerRecordDeleteBlock(perRecordDeleteBlock func(*raw.CKRecordID, unsafe.Pointer)) *ModifyRecordsOperation
 	WithModifyRecordsCompletionBlock(modifyRecordsCompletionBlock func(*foundation.NSArray[*raw.CKRecord], *foundation.NSArray[*raw.CKRecordID], unsafe.Pointer)) *ModifyRecordsOperation
-	WithDatabase(database *raw.CKDatabase) *ModifyRecordsOperation
-	WithConfiguration(configuration *raw.CKOperationConfiguration) *ModifyRecordsOperation
-	WithGroup(group *raw.CKOperationGroup) *ModifyRecordsOperation
+	WithDatabase(database *Database) *ModifyRecordsOperation
+	WithConfiguration(configuration *OperationConfiguration) *ModifyRecordsOperation
+	WithGroup(group *OperationGroup) *ModifyRecordsOperation
 	WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *ModifyRecordsOperation
-	WithContainer(container *raw.CKContainer) *ModifyRecordsOperation
+	WithContainer(container *Container) *ModifyRecordsOperation
 	WithAllowsCellularAccess(allowsCellularAccess bool) *ModifyRecordsOperation
 	WithLongLived(longLived bool) *ModifyRecordsOperation
 	WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *ModifyRecordsOperation
 	WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *ModifyRecordsOperation
-	RecordsToSave() []*raw.CKRecord
+	RecordsToSave() []*Record
 	SetRecordsToSave(recordsToSave *foundation.NSArray[*raw.CKRecord])
-	RecordIDsToDelete() []*raw.CKRecordID
+	RecordIDsToDelete() []*RecordID
 	SetRecordIDsToDelete(recordIDsToDelete *foundation.NSArray[*raw.CKRecordID])
 	SavePolicy() raw.CKRecordSavePolicy
 	SetSavePolicy(savePolicy raw.CKRecordSavePolicy)

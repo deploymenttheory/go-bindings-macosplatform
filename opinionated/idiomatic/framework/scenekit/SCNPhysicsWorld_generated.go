@@ -143,13 +143,13 @@ func (x *PhysicsWorld) SetContactDelegate(contactDelegate raw.SCNPhysicsContactD
 }
 
 // AllBehaviors returns the collection as a Go slice.
-func (x *PhysicsWorld) AllBehaviors() []*raw.SCNPhysicsBehavior {
+func (x *PhysicsWorld) AllBehaviors() []*PhysicsBehavior {
 	arr := x.inner.AllBehaviors()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SCNPhysicsBehavior {
-		return raw.SCNPhysicsBehaviorFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PhysicsBehavior {
+		return &PhysicsBehavior{inner: raw.SCNPhysicsBehaviorFromID(purego.Retain(_id))}
 	})
 }
 
@@ -176,7 +176,7 @@ type PhysicsWorldable interface {
 	SetTimeStep(timeStep float64)
 	ContactDelegate() raw.SCNPhysicsContactDelegate
 	SetContactDelegate(contactDelegate raw.SCNPhysicsContactDelegate)
-	AllBehaviors() []*raw.SCNPhysicsBehavior
+	AllBehaviors() []*PhysicsBehavior
 }
 
 var _ PhysicsWorldable = (*PhysicsWorld)(nil)

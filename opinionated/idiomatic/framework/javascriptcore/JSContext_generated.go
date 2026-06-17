@@ -46,8 +46,8 @@ func NewContextWithVirtualMachine(virtualMachine *raw.JSVirtualMachine) *Context
 }
 
 // WithException sets the exception property and returns the receiver for chaining.
-func (x *Context) WithException(exception *raw.JSValue) *Context {
-	x.inner.SetException(exception)
+func (x *Context) WithException(exception *Value) *Context {
+	x.inner.SetException(exception.Unwrap())
 	return x
 }
 
@@ -175,7 +175,7 @@ func (x *Context) JSGlobalContextRef() unsafe.Pointer {
 // Contextable is the interface implemented by [Context], for mocking and DI.
 type Contextable interface {
 	Unwrap() *raw.JSContext
-	WithException(exception *raw.JSValue) *Context
+	WithException(exception *Value) *Context
 	WithExceptionHandler(exceptionHandler func(*raw.JSContext, *raw.JSValue)) *Context
 	WithName(name string) *Context
 	WithInspectable(inspectable bool) *Context

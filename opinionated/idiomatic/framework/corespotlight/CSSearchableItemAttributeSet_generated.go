@@ -2133,13 +2133,13 @@ func (x *SearchableItemAttributeSet) SetTextContent(textContent string) {
 }
 
 // Authors returns the collection as a Go slice.
-func (x *SearchableItemAttributeSet) Authors() []*raw.CSPerson {
+func (x *SearchableItemAttributeSet) Authors() []*Person {
 	arr := x.inner.Authors()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CSPerson {
-		return raw.CSPersonFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Person {
+		return &Person{inner: raw.CSPersonFromID(purego.Retain(_id))}
 	})
 }
 
@@ -2149,13 +2149,13 @@ func (x *SearchableItemAttributeSet) SetAuthors(authors *foundation.NSArray[*raw
 }
 
 // PrimaryRecipients returns the collection as a Go slice.
-func (x *SearchableItemAttributeSet) PrimaryRecipients() []*raw.CSPerson {
+func (x *SearchableItemAttributeSet) PrimaryRecipients() []*Person {
 	arr := x.inner.PrimaryRecipients()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CSPerson {
-		return raw.CSPersonFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Person {
+		return &Person{inner: raw.CSPersonFromID(purego.Retain(_id))}
 	})
 }
 
@@ -2165,13 +2165,13 @@ func (x *SearchableItemAttributeSet) SetPrimaryRecipients(primaryRecipients *fou
 }
 
 // AdditionalRecipients returns the collection as a Go slice.
-func (x *SearchableItemAttributeSet) AdditionalRecipients() []*raw.CSPerson {
+func (x *SearchableItemAttributeSet) AdditionalRecipients() []*Person {
 	arr := x.inner.AdditionalRecipients()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CSPerson {
-		return raw.CSPersonFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Person {
+		return &Person{inner: raw.CSPersonFromID(purego.Retain(_id))}
 	})
 }
 
@@ -2181,13 +2181,13 @@ func (x *SearchableItemAttributeSet) SetAdditionalRecipients(additionalRecipient
 }
 
 // HiddenAdditionalRecipients returns the collection as a Go slice.
-func (x *SearchableItemAttributeSet) HiddenAdditionalRecipients() []*raw.CSPerson {
+func (x *SearchableItemAttributeSet) HiddenAdditionalRecipients() []*Person {
 	arr := x.inner.HiddenAdditionalRecipients()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CSPerson {
-		return raw.CSPersonFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Person {
+		return &Person{inner: raw.CSPersonFromID(purego.Retain(_id))}
 	})
 }
 
@@ -4101,13 +4101,13 @@ type SearchableItemAttributeSetable interface {
 	SetHTMLContentData(hTMLContentData *foundation.NSData)
 	TextContent() string
 	SetTextContent(textContent string)
-	Authors() []*raw.CSPerson
+	Authors() []*Person
 	SetAuthors(authors *foundation.NSArray[*raw.CSPerson])
-	PrimaryRecipients() []*raw.CSPerson
+	PrimaryRecipients() []*Person
 	SetPrimaryRecipients(primaryRecipients *foundation.NSArray[*raw.CSPerson])
-	AdditionalRecipients() []*raw.CSPerson
+	AdditionalRecipients() []*Person
 	SetAdditionalRecipients(additionalRecipients *foundation.NSArray[*raw.CSPerson])
-	HiddenAdditionalRecipients() []*raw.CSPerson
+	HiddenAdditionalRecipients() []*Person
 	SetHiddenAdditionalRecipients(hiddenAdditionalRecipients *foundation.NSArray[*raw.CSPerson])
 	EmailHeaders() *foundation.NSDictionary[*foundation.NSString, objc.ID]
 	SetEmailHeaders(emailHeaders *foundation.NSDictionary[*foundation.NSString, objc.ID])

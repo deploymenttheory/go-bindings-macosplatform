@@ -98,8 +98,8 @@ func (x *MutableMovie) WithModified(modified bool) *MutableMovie {
 }
 
 // WithDefaultMediaDataStorage sets the defaultMediaDataStorage property and returns the receiver for chaining.
-func (x *MutableMovie) WithDefaultMediaDataStorage(defaultMediaDataStorage *raw.AVMediaDataStorage) *MutableMovie {
-	x.inner.SetDefaultMediaDataStorage(defaultMediaDataStorage)
+func (x *MutableMovie) WithDefaultMediaDataStorage(defaultMediaDataStorage *MediaDataStorage) *MutableMovie {
+	x.inner.SetDefaultMediaDataStorage(defaultMediaDataStorage.Unwrap())
 	return x
 }
 
@@ -240,7 +240,7 @@ type MutableMovieable interface {
 	WithPreferredTransform(preferredTransform corefoundation.CGAffineTransform) *MutableMovie
 	WithTimescale(timescale int32) *MutableMovie
 	WithModified(modified bool) *MutableMovie
-	WithDefaultMediaDataStorage(defaultMediaDataStorage *raw.AVMediaDataStorage) *MutableMovie
+	WithDefaultMediaDataStorage(defaultMediaDataStorage *MediaDataStorage) *MutableMovie
 	WithInterleavingPeriod(interleavingPeriod coremedia.CMTime) *MutableMovie
 	WithMetadata(items ...MetadataItemProvider) *MutableMovie
 	SetPreferredRate(preferredRate float32)

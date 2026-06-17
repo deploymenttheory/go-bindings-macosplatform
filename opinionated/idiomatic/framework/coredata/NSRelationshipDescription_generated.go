@@ -37,14 +37,14 @@ func NewRelationshipDescription() *RelationshipDescription {
 }
 
 // WithDestinationEntity sets the destinationEntity property and returns the receiver for chaining.
-func (x *RelationshipDescription) WithDestinationEntity(destinationEntity *raw.NSEntityDescription) *RelationshipDescription {
-	x.inner.SetDestinationEntity(destinationEntity)
+func (x *RelationshipDescription) WithDestinationEntity(destinationEntity *EntityDescription) *RelationshipDescription {
+	x.inner.SetDestinationEntity(destinationEntity.Unwrap())
 	return x
 }
 
 // WithInverseRelationship sets the inverseRelationship property and returns the receiver for chaining.
-func (x *RelationshipDescription) WithInverseRelationship(inverseRelationship *raw.NSRelationshipDescription) *RelationshipDescription {
-	x.inner.SetInverseRelationship(inverseRelationship)
+func (x *RelationshipDescription) WithInverseRelationship(inverseRelationship *RelationshipDescription) *RelationshipDescription {
+	x.inner.SetInverseRelationship(inverseRelationship.Unwrap())
 	return x
 }
 
@@ -204,8 +204,8 @@ func (x *RelationshipDescription) asPropertyDescription() *raw.NSPropertyDescrip
 // RelationshipDescriptionable is the interface implemented by [RelationshipDescription], for mocking and DI.
 type RelationshipDescriptionable interface {
 	Unwrap() *raw.NSRelationshipDescription
-	WithDestinationEntity(destinationEntity *raw.NSEntityDescription) *RelationshipDescription
-	WithInverseRelationship(inverseRelationship *raw.NSRelationshipDescription) *RelationshipDescription
+	WithDestinationEntity(destinationEntity *EntityDescription) *RelationshipDescription
+	WithInverseRelationship(inverseRelationship *RelationshipDescription) *RelationshipDescription
 	WithMaxCount(maxCount uint) *RelationshipDescription
 	WithMinCount(minCount uint) *RelationshipDescription
 	WithDeleteRule(deleteRule raw.NSDeleteRule) *RelationshipDescription

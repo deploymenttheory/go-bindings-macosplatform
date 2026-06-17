@@ -41,8 +41,8 @@ func NewAnnotationButtonWidget() *AnnotationButtonWidget {
 }
 
 // WithPage sets the page property and returns the receiver for chaining.
-func (x *AnnotationButtonWidget) WithPage(page *raw.PDFPage) *AnnotationButtonWidget {
-	x.inner.PDFAnnotation.SetPage(page)
+func (x *AnnotationButtonWidget) WithPage(page *Page) *AnnotationButtonWidget {
+	x.inner.PDFAnnotation.SetPage(page.Unwrap())
 	return x
 }
 
@@ -263,8 +263,8 @@ func (x *AnnotationButtonWidget) WithOpen(open bool) *AnnotationButtonWidget {
 }
 
 // WithDestination sets the destination property and returns the receiver for chaining.
-func (x *AnnotationButtonWidget) WithDestination(destination *raw.PDFDestination) *AnnotationButtonWidget {
-	x.inner.PDFAnnotation.SetDestination(destination)
+func (x *AnnotationButtonWidget) WithDestination(destination *Destination) *AnnotationButtonWidget {
+	x.inner.PDFAnnotation.SetDestination(destination.Unwrap())
 	return x
 }
 
@@ -337,7 +337,7 @@ func (x *AnnotationButtonWidget) asAnnotation() *raw.PDFAnnotation { return &x.i
 // AnnotationButtonWidgetable is the interface implemented by [AnnotationButtonWidget], for mocking and DI.
 type AnnotationButtonWidgetable interface {
 	Unwrap() *raw.PDFAnnotationButtonWidget
-	WithPage(page *raw.PDFPage) *AnnotationButtonWidget
+	WithPage(page *Page) *AnnotationButtonWidget
 	WithType(type_ string) *AnnotationButtonWidget
 	WithBounds(bounds corefoundation.CGRect) *AnnotationButtonWidget
 	WithShouldDisplay(shouldDisplay bool) *AnnotationButtonWidget
@@ -369,7 +369,7 @@ type AnnotationButtonWidgetable interface {
 	WithButtonWidgetState(buttonWidgetState raw.PDFWidgetCellState) *AnnotationButtonWidget
 	WithButtonWidgetStateString(buttonWidgetStateString string) *AnnotationButtonWidget
 	WithOpen(open bool) *AnnotationButtonWidget
-	WithDestination(destination *raw.PDFDestination) *AnnotationButtonWidget
+	WithDestination(destination *Destination) *AnnotationButtonWidget
 	WithURL(uRL string) *AnnotationButtonWidget
 	WithFieldName(fieldName string) *AnnotationButtonWidget
 	WithCaption(caption string) *AnnotationButtonWidget

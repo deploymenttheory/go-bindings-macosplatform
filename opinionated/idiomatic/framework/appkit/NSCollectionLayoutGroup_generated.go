@@ -55,8 +55,8 @@ func (x *CollectionLayoutGroup) WithSupplementaryItems(items ...CollectionLayout
 }
 
 // WithInterItemSpacing sets the interItemSpacing property and returns the receiver for chaining.
-func (x *CollectionLayoutGroup) WithInterItemSpacing(interItemSpacing *raw.NSCollectionLayoutSpacing) *CollectionLayoutGroup {
-	x.inner.SetInterItemSpacing(interItemSpacing)
+func (x *CollectionLayoutGroup) WithInterItemSpacing(interItemSpacing *CollectionLayoutSpacing) *CollectionLayoutGroup {
+	x.inner.SetInterItemSpacing(interItemSpacing.Unwrap())
 	return x
 }
 
@@ -67,8 +67,8 @@ func (x *CollectionLayoutGroup) WithContentInsets(contentInsets raw.NSDirectiona
 }
 
 // WithEdgeSpacing sets the edgeSpacing property and returns the receiver for chaining.
-func (x *CollectionLayoutGroup) WithEdgeSpacing(edgeSpacing *raw.NSCollectionLayoutEdgeSpacing) *CollectionLayoutGroup {
-	x.inner.NSCollectionLayoutItem.SetEdgeSpacing(edgeSpacing)
+func (x *CollectionLayoutGroup) WithEdgeSpacing(edgeSpacing *CollectionLayoutEdgeSpacing) *CollectionLayoutGroup {
+	x.inner.NSCollectionLayoutItem.SetEdgeSpacing(edgeSpacing.Unwrap())
 	return x
 }
 
@@ -101,13 +101,13 @@ func (x *CollectionLayoutGroup) SetInterItemSpacing(interItemSpacing *raw.NSColl
 }
 
 // Subitems returns the collection as a Go slice.
-func (x *CollectionLayoutGroup) Subitems() []*raw.NSCollectionLayoutItem {
+func (x *CollectionLayoutGroup) Subitems() []*CollectionLayoutItem {
 	arr := x.inner.Subitems()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSCollectionLayoutItem {
-		return raw.NSCollectionLayoutItemFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CollectionLayoutItem {
+		return &CollectionLayoutItem{inner: raw.NSCollectionLayoutItemFromID(purego.Retain(_id))}
 	})
 }
 
@@ -117,14 +117,14 @@ func (x *CollectionLayoutGroup) asCollectionLayoutItem() *raw.NSCollectionLayout
 type CollectionLayoutGroupable interface {
 	Unwrap() *raw.NSCollectionLayoutGroup
 	WithSupplementaryItems(items ...CollectionLayoutSupplementaryItemProvider) *CollectionLayoutGroup
-	WithInterItemSpacing(interItemSpacing *raw.NSCollectionLayoutSpacing) *CollectionLayoutGroup
+	WithInterItemSpacing(interItemSpacing *CollectionLayoutSpacing) *CollectionLayoutGroup
 	WithContentInsets(contentInsets raw.NSDirectionalEdgeInsets) *CollectionLayoutGroup
-	WithEdgeSpacing(edgeSpacing *raw.NSCollectionLayoutEdgeSpacing) *CollectionLayoutGroup
+	WithEdgeSpacing(edgeSpacing *CollectionLayoutEdgeSpacing) *CollectionLayoutGroup
 	VisualDescription() string
 	SetSupplementaryItems(supplementaryItems *foundation.NSArray[*raw.NSCollectionLayoutSupplementaryItem])
 	InterItemSpacing() *CollectionLayoutSpacing
 	SetInterItemSpacing(interItemSpacing *raw.NSCollectionLayoutSpacing)
-	Subitems() []*raw.NSCollectionLayoutItem
+	Subitems() []*CollectionLayoutItem
 }
 
 var _ CollectionLayoutGroupable = (*CollectionLayoutGroup)(nil)

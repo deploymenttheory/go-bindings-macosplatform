@@ -44,8 +44,8 @@ func NewMTRChannelClusterProgramGuideResponseParamsWithResponseValueError(respon
 }
 
 // WithPaging sets the paging property and returns the receiver for chaining.
-func (x *MTRChannelClusterProgramGuideResponseParams) WithPaging(paging *raw.MTRChannelClusterChannelPagingStruct) *MTRChannelClusterProgramGuideResponseParams {
-	x.inner.SetPaging(paging)
+func (x *MTRChannelClusterProgramGuideResponseParams) WithPaging(paging *MTRChannelClusterChannelPagingStruct) *MTRChannelClusterProgramGuideResponseParams {
+	x.inner.SetPaging(paging.Unwrap())
 	return x
 }
 
@@ -76,7 +76,7 @@ func (x *MTRChannelClusterProgramGuideResponseParams) SetProgramList(programList
 // MTRChannelClusterProgramGuideResponseParamsable is the interface implemented by [MTRChannelClusterProgramGuideResponseParams], for mocking and DI.
 type MTRChannelClusterProgramGuideResponseParamsable interface {
 	Unwrap() *raw.MTRChannelClusterProgramGuideResponseParams
-	WithPaging(paging *raw.MTRChannelClusterChannelPagingStruct) *MTRChannelClusterProgramGuideResponseParams
+	WithPaging(paging *MTRChannelClusterChannelPagingStruct) *MTRChannelClusterProgramGuideResponseParams
 	Paging() *MTRChannelClusterChannelPagingStruct
 	SetPaging(paging *raw.MTRChannelClusterChannelPagingStruct)
 	ProgramList() *foundation.NSArray[objc.ID]

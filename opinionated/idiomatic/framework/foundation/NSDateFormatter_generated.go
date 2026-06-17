@@ -64,8 +64,8 @@ func (x *DateFormatter) WithTimeStyle(timeStyle raw.NSDateFormatterStyle) *DateF
 }
 
 // WithLocale sets the locale property and returns the receiver for chaining.
-func (x *DateFormatter) WithLocale(locale *raw.NSLocale) *DateFormatter {
-	x.inner.SetLocale(locale)
+func (x *DateFormatter) WithLocale(locale *Locale) *DateFormatter {
+	x.inner.SetLocale(locale.Unwrap())
 	return x
 }
 
@@ -82,14 +82,14 @@ func (x *DateFormatter) WithFormatterBehavior(formatterBehavior raw.NSDateFormat
 }
 
 // WithTimeZone sets the timeZone property and returns the receiver for chaining.
-func (x *DateFormatter) WithTimeZone(timeZone *raw.NSTimeZone) *DateFormatter {
-	x.inner.SetTimeZone(timeZone)
+func (x *DateFormatter) WithTimeZone(timeZone *TimeZone) *DateFormatter {
+	x.inner.SetTimeZone(timeZone.Unwrap())
 	return x
 }
 
 // WithCalendar sets the calendar property and returns the receiver for chaining.
-func (x *DateFormatter) WithCalendar(calendar *raw.NSCalendar) *DateFormatter {
-	x.inner.SetCalendar(calendar)
+func (x *DateFormatter) WithCalendar(calendar *Calendar) *DateFormatter {
+	x.inner.SetCalendar(calendar.Unwrap())
 	return x
 }
 
@@ -957,11 +957,11 @@ type DateFormatterable interface {
 	WithDateFormat(dateFormat string) *DateFormatter
 	WithDateStyle(dateStyle raw.NSDateFormatterStyle) *DateFormatter
 	WithTimeStyle(timeStyle raw.NSDateFormatterStyle) *DateFormatter
-	WithLocale(locale *raw.NSLocale) *DateFormatter
+	WithLocale(locale *Locale) *DateFormatter
 	WithGeneratesCalendarDates(generatesCalendarDates bool) *DateFormatter
 	WithFormatterBehavior(formatterBehavior raw.NSDateFormatterBehavior) *DateFormatter
-	WithTimeZone(timeZone *raw.NSTimeZone) *DateFormatter
-	WithCalendar(calendar *raw.NSCalendar) *DateFormatter
+	WithTimeZone(timeZone *TimeZone) *DateFormatter
+	WithCalendar(calendar *Calendar) *DateFormatter
 	WithLenient(lenient bool) *DateFormatter
 	WithTwoDigitStartDate(twoDigitStartDate DateProvider) *DateFormatter
 	WithDefaultDate(defaultDate DateProvider) *DateFormatter

@@ -37,8 +37,8 @@ func NewSubscription() *Subscription {
 }
 
 // WithNotificationInfo sets the notificationInfo property and returns the receiver for chaining.
-func (x *Subscription) WithNotificationInfo(notificationInfo *raw.CKNotificationInfo) *Subscription {
-	x.inner.SetNotificationInfo(notificationInfo)
+func (x *Subscription) WithNotificationInfo(notificationInfo *NotificationInfo) *Subscription {
+	x.inner.SetNotificationInfo(notificationInfo.Unwrap())
 	return x
 }
 
@@ -75,7 +75,7 @@ func (x *Subscription) asSubscription() *raw.CKSubscription { return x.inner }
 // Subscriptionable is the interface implemented by [Subscription], for mocking and DI.
 type Subscriptionable interface {
 	Unwrap() *raw.CKSubscription
-	WithNotificationInfo(notificationInfo *raw.CKNotificationInfo) *Subscription
+	WithNotificationInfo(notificationInfo *NotificationInfo) *Subscription
 	SubscriptionID() string
 	SubscriptionType() raw.CKSubscriptionType
 	NotificationInfo() *NotificationInfo

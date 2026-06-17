@@ -58,13 +58,13 @@ func (x *ProjectAssetElement) CropRect() corefoundation.CGRect {
 }
 
 // RegionsOfInterest returns the collection as a Go slice.
-func (x *ProjectAssetElement) RegionsOfInterest() []*raw.PHProjectRegionOfInterest {
+func (x *ProjectAssetElement) RegionsOfInterest() []*ProjectRegionOfInterest {
 	arr := x.inner.RegionsOfInterest()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PHProjectRegionOfInterest {
-		return raw.PHProjectRegionOfInterestFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ProjectRegionOfInterest {
+		return &ProjectRegionOfInterest{inner: raw.PHProjectRegionOfInterestFromID(purego.Retain(_id))}
 	})
 }
 
@@ -86,7 +86,7 @@ type ProjectAssetElementable interface {
 	CloudAssetIdentifier() *photos.PHCloudIdentifier
 	Annotation() string
 	CropRect() corefoundation.CGRect
-	RegionsOfInterest() []*raw.PHProjectRegionOfInterest
+	RegionsOfInterest() []*ProjectRegionOfInterest
 	HorizontallyFlipped() bool
 	VerticallyFlipped() bool
 }

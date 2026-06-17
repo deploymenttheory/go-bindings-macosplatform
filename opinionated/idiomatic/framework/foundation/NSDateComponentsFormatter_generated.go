@@ -54,8 +54,8 @@ func (x *DateComponentsFormatter) WithZeroFormattingBehavior(zeroFormattingBehav
 }
 
 // WithCalendar sets the calendar property and returns the receiver for chaining.
-func (x *DateComponentsFormatter) WithCalendar(calendar *raw.NSCalendar) *DateComponentsFormatter {
-	x.inner.SetCalendar(calendar)
+func (x *DateComponentsFormatter) WithCalendar(calendar *Calendar) *DateComponentsFormatter {
+	x.inner.SetCalendar(calendar.Unwrap())
 	return x
 }
 
@@ -262,7 +262,7 @@ type DateComponentsFormatterable interface {
 	WithUnitsStyle(unitsStyle raw.NSDateComponentsFormatterUnitsStyle) *DateComponentsFormatter
 	WithAllowedUnits(allowedUnits raw.NSCalendarUnit) *DateComponentsFormatter
 	WithZeroFormattingBehavior(zeroFormattingBehavior raw.NSDateComponentsFormatterZeroFormattingBehavior) *DateComponentsFormatter
-	WithCalendar(calendar *raw.NSCalendar) *DateComponentsFormatter
+	WithCalendar(calendar *Calendar) *DateComponentsFormatter
 	WithReferenceDate(referenceDate DateProvider) *DateComponentsFormatter
 	WithAllowsFractionalUnits(allowsFractionalUnits bool) *DateComponentsFormatter
 	WithMaximumUnitCount(maximumUnitCount int) *DateComponentsFormatter

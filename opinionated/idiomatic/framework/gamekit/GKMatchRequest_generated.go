@@ -177,13 +177,13 @@ func (x *MatchRequest) SetPlayerAttributes(playerAttributes uint32) {
 }
 
 // Recipients returns the collection as a Go slice.
-func (x *MatchRequest) Recipients() []*raw.GKPlayer {
+func (x *MatchRequest) Recipients() []*Player {
 	arr := x.inner.Recipients()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.GKPlayer {
-		return raw.GKPlayerFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Player {
+		return &Player{inner: raw.GKPlayerFromID(purego.Retain(_id))}
 	})
 }
 
@@ -320,7 +320,7 @@ type MatchRequestable interface {
 	SetPlayerGroup(playerGroup uint)
 	PlayerAttributes() uint32
 	SetPlayerAttributes(playerAttributes uint32)
-	Recipients() []*raw.GKPlayer
+	Recipients() []*Player
 	SetRecipients(recipients *foundation.NSArray[*raw.GKPlayer])
 	InviteMessage() string
 	SetInviteMessage(inviteMessage string)

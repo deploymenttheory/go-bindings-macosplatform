@@ -57,14 +57,14 @@ func (x *PrintOperation) WithShowsProgressPanel(showsProgressPanel bool) *PrintO
 }
 
 // WithPrintPanel sets the printPanel property and returns the receiver for chaining.
-func (x *PrintOperation) WithPrintPanel(printPanel *raw.NSPrintPanel) *PrintOperation {
-	x.inner.SetPrintPanel(printPanel)
+func (x *PrintOperation) WithPrintPanel(printPanel *PrintPanel) *PrintOperation {
+	x.inner.SetPrintPanel(printPanel.Unwrap())
 	return x
 }
 
 // WithPDFPanel sets the pDFPanel property and returns the receiver for chaining.
-func (x *PrintOperation) WithPDFPanel(pDFPanel *raw.NSPDFPanel) *PrintOperation {
-	x.inner.SetPDFPanel(pDFPanel)
+func (x *PrintOperation) WithPDFPanel(pDFPanel *PDFPanel) *PrintOperation {
+	x.inner.SetPDFPanel(pDFPanel.Unwrap())
 	return x
 }
 
@@ -81,8 +81,8 @@ func (x *PrintOperation) WithPageOrder(pageOrder raw.NSPrintingPageOrder) *Print
 }
 
 // WithPrintInfo sets the printInfo property and returns the receiver for chaining.
-func (x *PrintOperation) WithPrintInfo(printInfo *raw.NSPrintInfo) *PrintOperation {
-	x.inner.SetPrintInfo(printInfo)
+func (x *PrintOperation) WithPrintInfo(printInfo *PrintInfo) *PrintOperation {
+	x.inner.SetPrintInfo(printInfo.Unwrap())
 	return x
 }
 
@@ -298,11 +298,11 @@ type PrintOperationable interface {
 	WithJobTitle(jobTitle string) *PrintOperation
 	WithShowsPrintPanel(showsPrintPanel bool) *PrintOperation
 	WithShowsProgressPanel(showsProgressPanel bool) *PrintOperation
-	WithPrintPanel(printPanel *raw.NSPrintPanel) *PrintOperation
-	WithPDFPanel(pDFPanel *raw.NSPDFPanel) *PrintOperation
+	WithPrintPanel(printPanel *PrintPanel) *PrintOperation
+	WithPDFPanel(pDFPanel *PDFPanel) *PrintOperation
 	WithCanSpawnSeparateThread(canSpawnSeparateThread bool) *PrintOperation
 	WithPageOrder(pageOrder raw.NSPrintingPageOrder) *PrintOperation
-	WithPrintInfo(printInfo *raw.NSPrintInfo) *PrintOperation
+	WithPrintInfo(printInfo *PrintInfo) *PrintOperation
 	RunOperationModalForWindowDelegateDidRunSelectorContextInfo(docWindow *raw.NSWindow, delegate objc.ID, didRunSelector objc.SEL, contextInfo unsafe.Pointer)
 	RunOperation() bool
 	CreateContext() *GraphicsContext

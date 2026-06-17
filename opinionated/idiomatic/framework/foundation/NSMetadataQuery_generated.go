@@ -105,8 +105,8 @@ func (x *MetadataQuery) WithNotificationBatchingInterval(notificationBatchingInt
 }
 
 // WithOperationQueue sets the operationQueue property and returns the receiver for chaining.
-func (x *MetadataQuery) WithOperationQueue(operationQueue *raw.NSOperationQueue) *MetadataQuery {
-	x.inner.SetOperationQueue(operationQueue)
+func (x *MetadataQuery) WithOperationQueue(operationQueue *OperationQueue) *MetadataQuery {
+	x.inner.SetOperationQueue(operationQueue.Unwrap())
 	return x
 }
 
@@ -186,13 +186,13 @@ func (x *MetadataQuery) SetPredicate(predicate *raw.NSPredicate) {
 }
 
 // SortDescriptors returns the collection as a Go slice.
-func (x *MetadataQuery) SortDescriptors() []*raw.NSSortDescriptor {
+func (x *MetadataQuery) SortDescriptors() []*SortDescriptor {
 	arr := x.inner.SortDescriptors()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSSortDescriptor {
-		return raw.NSSortDescriptorFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *SortDescriptor {
+		return &SortDescriptor{inner: raw.NSSortDescriptorFromID(purego.Retain(_id))}
 	})
 }
 
@@ -308,13 +308,13 @@ func (x *MetadataQuery) ValueLists() *raw.NSDictionary[*raw.NSString, objc.ID] {
 }
 
 // GroupedResults returns the collection as a Go slice.
-func (x *MetadataQuery) GroupedResults() []*raw.NSMetadataQueryResultGroup {
+func (x *MetadataQuery) GroupedResults() []*MetadataQueryResultGroup {
 	arr := x.inner.GroupedResults()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSMetadataQueryResultGroup {
-		return raw.NSMetadataQueryResultGroupFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MetadataQueryResultGroup {
+		return &MetadataQueryResultGroup{inner: raw.NSMetadataQueryResultGroupFromID(purego.Retain(_id))}
 	})
 }
 
@@ -329,7 +329,7 @@ type MetadataQueryable interface {
 	WithValueListAttributes(items ...StringProvider) *MetadataQuery
 	WithGroupingAttributes(items ...StringProvider) *MetadataQuery
 	WithNotificationBatchingInterval(notificationBatchingInterval float64) *MetadataQuery
-	WithOperationQueue(operationQueue *raw.NSOperationQueue) *MetadataQuery
+	WithOperationQueue(operationQueue *OperationQueue) *MetadataQuery
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MetadataQuery
 	StartQuery() bool
 	StopQuery()
@@ -344,7 +344,7 @@ type MetadataQueryable interface {
 	SetDelegate(delegate raw.NSMetadataQueryDelegate)
 	Predicate() *Predicate
 	SetPredicate(predicate *raw.NSPredicate)
-	SortDescriptors() []*raw.NSSortDescriptor
+	SortDescriptors() []*SortDescriptor
 	SetSortDescriptors(sortDescriptors *raw.NSArray[*raw.NSSortDescriptor])
 	ValueListAttributes() []string
 	SetValueListAttributes(valueListAttributes *raw.NSArray[*raw.NSString])
@@ -364,7 +364,7 @@ type MetadataQueryable interface {
 	ResultCount() uint
 	Results() *raw.NSArray[objc.ID]
 	ValueLists() *raw.NSDictionary[*raw.NSString, objc.ID]
-	GroupedResults() []*raw.NSMetadataQueryResultGroup
+	GroupedResults() []*MetadataQueryResultGroup
 }
 
 var _ MetadataQueryable = (*MetadataQuery)(nil)

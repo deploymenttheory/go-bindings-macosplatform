@@ -96,8 +96,8 @@ func (x *CNNSubPixelConvolutionDescriptor) WithDilationRateY(dilationRateY uint)
 }
 
 // WithFusedNeuronDescriptor sets the fusedNeuronDescriptor property and returns the receiver for chaining.
-func (x *CNNSubPixelConvolutionDescriptor) WithFusedNeuronDescriptor(fusedNeuronDescriptor *raw.MPSNNNeuronDescriptor) *CNNSubPixelConvolutionDescriptor {
-	x.inner.MPSCNNConvolutionDescriptor.SetFusedNeuronDescriptor(fusedNeuronDescriptor)
+func (x *CNNSubPixelConvolutionDescriptor) WithFusedNeuronDescriptor(fusedNeuronDescriptor *NNNeuronDescriptor) *CNNSubPixelConvolutionDescriptor {
+	x.inner.MPSCNNConvolutionDescriptor.SetFusedNeuronDescriptor(fusedNeuronDescriptor.Unwrap())
 	return x
 }
 
@@ -126,7 +126,7 @@ type CNNSubPixelConvolutionDescriptorable interface {
 	WithGroups(groups uint) *CNNSubPixelConvolutionDescriptor
 	WithDilationRateX(dilationRateX uint) *CNNSubPixelConvolutionDescriptor
 	WithDilationRateY(dilationRateY uint) *CNNSubPixelConvolutionDescriptor
-	WithFusedNeuronDescriptor(fusedNeuronDescriptor *raw.MPSNNNeuronDescriptor) *CNNSubPixelConvolutionDescriptor
+	WithFusedNeuronDescriptor(fusedNeuronDescriptor *NNNeuronDescriptor) *CNNSubPixelConvolutionDescriptor
 	SubPixelScaleFactor() uint
 	SetSubPixelScaleFactor(subPixelScaleFactor uint)
 }

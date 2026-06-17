@@ -56,13 +56,13 @@ func (x *MediaPresentationSelector) Identifier() string {
 }
 
 // Settings returns the collection as a Go slice.
-func (x *MediaPresentationSelector) Settings() []*raw.AVMediaPresentationSetting {
+func (x *MediaPresentationSelector) Settings() []*MediaPresentationSetting {
 	arr := x.inner.Settings()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVMediaPresentationSetting {
-		return raw.AVMediaPresentationSettingFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MediaPresentationSetting {
+		return &MediaPresentationSetting{inner: raw.AVMediaPresentationSettingFromID(purego.Retain(_id))}
 	})
 }
 
@@ -71,7 +71,7 @@ type MediaPresentationSelectorable interface {
 	Unwrap() *raw.AVMediaPresentationSelector
 	DisplayNameForLocaleIdentifier(localeIdentifier string) string
 	Identifier() string
-	Settings() []*raw.AVMediaPresentationSetting
+	Settings() []*MediaPresentationSetting
 }
 
 var _ MediaPresentationSelectorable = (*MediaPresentationSelector)(nil)

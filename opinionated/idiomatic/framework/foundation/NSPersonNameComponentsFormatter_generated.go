@@ -49,8 +49,8 @@ func (x *PersonNameComponentsFormatter) WithPhonetic(phonetic bool) *PersonNameC
 }
 
 // WithLocale sets the locale property and returns the receiver for chaining.
-func (x *PersonNameComponentsFormatter) WithLocale(locale *raw.NSLocale) *PersonNameComponentsFormatter {
-	x.inner.SetLocale(locale)
+func (x *PersonNameComponentsFormatter) WithLocale(locale *Locale) *PersonNameComponentsFormatter {
+	x.inner.SetLocale(locale.Unwrap())
 	return x
 }
 
@@ -130,7 +130,7 @@ type PersonNameComponentsFormatterable interface {
 	Unwrap() *raw.NSPersonNameComponentsFormatter
 	WithStyle(style raw.NSPersonNameComponentsFormatterStyle) *PersonNameComponentsFormatter
 	WithPhonetic(phonetic bool) *PersonNameComponentsFormatter
-	WithLocale(locale *raw.NSLocale) *PersonNameComponentsFormatter
+	WithLocale(locale *Locale) *PersonNameComponentsFormatter
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *PersonNameComponentsFormatter
 	StringFromPersonNameComponents(components *raw.NSPersonNameComponents) *String
 	AnnotatedStringFromPersonNameComponents(components *raw.NSPersonNameComponents) *AttributedString

@@ -40,8 +40,8 @@ func NewMutableMovieTrack() *MutableMovieTrack {
 }
 
 // WithMediaDataStorage sets the mediaDataStorage property and returns the receiver for chaining.
-func (x *MutableMovieTrack) WithMediaDataStorage(mediaDataStorage *raw.AVMediaDataStorage) *MutableMovieTrack {
-	x.inner.SetMediaDataStorage(mediaDataStorage)
+func (x *MutableMovieTrack) WithMediaDataStorage(mediaDataStorage *MediaDataStorage) *MutableMovieTrack {
+	x.inner.SetMediaDataStorage(mediaDataStorage.Unwrap())
 	return x
 }
 
@@ -365,7 +365,7 @@ func (x *MutableMovieTrack) asAssetTrack() *raw.AVAssetTrack { return &x.inner.A
 // MutableMovieTrackable is the interface implemented by [MutableMovieTrack], for mocking and DI.
 type MutableMovieTrackable interface {
 	Unwrap() *raw.AVMutableMovieTrack
-	WithMediaDataStorage(mediaDataStorage *raw.AVMediaDataStorage) *MutableMovieTrack
+	WithMediaDataStorage(mediaDataStorage *MediaDataStorage) *MutableMovieTrack
 	WithSampleReferenceBaseURL(sampleReferenceBaseURL string) *MutableMovieTrack
 	WithEnabled(enabled bool) *MutableMovieTrack
 	WithAlternateGroupID(alternateGroupID int) *MutableMovieTrack

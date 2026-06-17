@@ -42,8 +42,8 @@ func (x *GeneratorNodeDefinition) WithRate(rate float64) *GeneratorNodeDefinitio
 }
 
 // WithGroup sets the group property and returns the receiver for chaining.
-func (x *GeneratorNodeDefinition) WithGroup(group *raw.PHASEGroup) *GeneratorNodeDefinition {
-	x.inner.SetGroup(group)
+func (x *GeneratorNodeDefinition) WithGroup(group *Group) *GeneratorNodeDefinition {
+	x.inner.SetGroup(group.Unwrap())
 	return x
 }
 
@@ -145,7 +145,7 @@ func (x *GeneratorNodeDefinition) asDefinition() *raw.PHASEDefinition { return &
 type GeneratorNodeDefinitionable interface {
 	Unwrap() *raw.PHASEGeneratorNodeDefinition
 	WithRate(rate float64) *GeneratorNodeDefinition
-	WithGroup(group *raw.PHASEGroup) *GeneratorNodeDefinition
+	WithGroup(group *Group) *GeneratorNodeDefinition
 	WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *GeneratorNodeDefinition
 	WithRateMetaParameterDefinition(rateMetaParameterDefinition NumberMetaParameterDefinitionProvider) *GeneratorNodeDefinition
 	SetCalibrationModeLevel(calibrationMode raw.PHASECalibrationMode, level float64)

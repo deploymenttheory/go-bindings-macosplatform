@@ -87,8 +87,8 @@ func (x *RelativeSpecifier) WithKey(key string) *RelativeSpecifier {
 }
 
 // WithContainerClassDescription sets the containerClassDescription property and returns the receiver for chaining.
-func (x *RelativeSpecifier) WithContainerClassDescription(containerClassDescription *raw.NSScriptClassDescription) *RelativeSpecifier {
-	x.inner.NSScriptObjectSpecifier.SetContainerClassDescription(containerClassDescription)
+func (x *RelativeSpecifier) WithContainerClassDescription(containerClassDescription *ScriptClassDescription) *RelativeSpecifier {
+	x.inner.NSScriptObjectSpecifier.SetContainerClassDescription(containerClassDescription.Unwrap())
 	return x
 }
 
@@ -142,7 +142,7 @@ type RelativeSpecifierable interface {
 	WithContainerIsObjectBeingTested(containerIsObjectBeingTested bool) *RelativeSpecifier
 	WithContainerIsRangeContainerObject(containerIsRangeContainerObject bool) *RelativeSpecifier
 	WithKey(key string) *RelativeSpecifier
-	WithContainerClassDescription(containerClassDescription *raw.NSScriptClassDescription) *RelativeSpecifier
+	WithContainerClassDescription(containerClassDescription *ScriptClassDescription) *RelativeSpecifier
 	WithEvaluationErrorNumber(evaluationErrorNumber int) *RelativeSpecifier
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *RelativeSpecifier
 	RelativePosition() raw.NSRelativePosition

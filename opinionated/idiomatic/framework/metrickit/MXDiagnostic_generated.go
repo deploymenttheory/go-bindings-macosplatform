@@ -66,13 +66,13 @@ func (x *Diagnostic) ApplicationVersion() string {
 }
 
 // SignpostData returns the collection as a Go slice.
-func (x *Diagnostic) SignpostData() []*raw.MXSignpostRecord {
+func (x *Diagnostic) SignpostData() []*SignpostRecord {
 	arr := x.inner.SignpostData()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MXSignpostRecord {
-		return raw.MXSignpostRecordFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *SignpostRecord {
+		return &SignpostRecord{inner: raw.MXSignpostRecordFromID(purego.Retain(_id))}
 	})
 }
 
@@ -85,7 +85,7 @@ type Diagnosticable interface {
 	DictionaryRepresentation() *foundation.NSDictionary[objc.ID, objc.ID]
 	MetaData() *MetaData
 	ApplicationVersion() string
-	SignpostData() []*raw.MXSignpostRecord
+	SignpostData() []*SignpostRecord
 }
 
 var _ Diagnosticable = (*Diagnostic)(nil)

@@ -44,8 +44,8 @@ func NewMTRGroupKeyManagementClusterKeySetReadResponseParamsWithResponseValueErr
 }
 
 // WithGroupKeySet sets the groupKeySet property and returns the receiver for chaining.
-func (x *MTRGroupKeyManagementClusterKeySetReadResponseParams) WithGroupKeySet(groupKeySet *raw.MTRGroupKeyManagementClusterGroupKeySetStruct) *MTRGroupKeyManagementClusterKeySetReadResponseParams {
-	x.inner.SetGroupKeySet(groupKeySet)
+func (x *MTRGroupKeyManagementClusterKeySetReadResponseParams) WithGroupKeySet(groupKeySet *MTRGroupKeyManagementClusterGroupKeySetStruct) *MTRGroupKeyManagementClusterKeySetReadResponseParams {
+	x.inner.SetGroupKeySet(groupKeySet.Unwrap())
 	return x
 }
 
@@ -82,7 +82,7 @@ func (x *MTRGroupKeyManagementClusterKeySetReadResponseParams) SetTimedInvokeTim
 // MTRGroupKeyManagementClusterKeySetReadResponseParamsable is the interface implemented by [MTRGroupKeyManagementClusterKeySetReadResponseParams], for mocking and DI.
 type MTRGroupKeyManagementClusterKeySetReadResponseParamsable interface {
 	Unwrap() *raw.MTRGroupKeyManagementClusterKeySetReadResponseParams
-	WithGroupKeySet(groupKeySet *raw.MTRGroupKeyManagementClusterGroupKeySetStruct) *MTRGroupKeyManagementClusterKeySetReadResponseParams
+	WithGroupKeySet(groupKeySet *MTRGroupKeyManagementClusterGroupKeySetStruct) *MTRGroupKeyManagementClusterKeySetReadResponseParams
 	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRGroupKeyManagementClusterKeySetReadResponseParams
 	GroupKeySet() *MTRGroupKeyManagementClusterGroupKeySetStruct
 	SetGroupKeySet(groupKeySet *raw.MTRGroupKeyManagementClusterGroupKeySetStruct)

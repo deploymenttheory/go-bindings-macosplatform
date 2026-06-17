@@ -99,8 +99,8 @@ func (x *Drawer) WithNextResponder(nextResponder ResponderProvider) *Drawer {
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *Drawer) WithMenu(menu *raw.NSMenu) *Drawer {
-	x.inner.NSResponder.SetMenu(menu)
+func (x *Drawer) WithMenu(menu *Menu) *Drawer {
+	x.inner.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -111,8 +111,8 @@ func (x *Drawer) WithUserActivity(userActivity *foundation.NSUserActivity) *Draw
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *Drawer) WithTouchBar(touchBar *raw.NSTouchBar) *Drawer {
-	x.inner.NSResponder.SetTouchBar(touchBar)
+func (x *Drawer) WithTouchBar(touchBar *TouchBar) *Drawer {
+	x.inner.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -269,9 +269,9 @@ type Drawerable interface {
 	WithLeadingOffset(leadingOffset float64) *Drawer
 	WithTrailingOffset(trailingOffset float64) *Drawer
 	WithNextResponder(nextResponder ResponderProvider) *Drawer
-	WithMenu(menu *raw.NSMenu) *Drawer
+	WithMenu(menu *Menu) *Drawer
 	WithUserActivity(userActivity *foundation.NSUserActivity) *Drawer
-	WithTouchBar(touchBar *raw.NSTouchBar) *Drawer
+	WithTouchBar(touchBar *TouchBar) *Drawer
 	Open()
 	OpenOnEdge(edge foundation.NSRectEdge)
 	Close()

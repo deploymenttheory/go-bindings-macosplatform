@@ -184,13 +184,13 @@ func (x *NetService) HostName() *String {
 }
 
 // Addresses returns the collection as a Go slice.
-func (x *NetService) Addresses() []*raw.NSData {
+func (x *NetService) Addresses() []*Data {
 	arr := x.inner.Addresses()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSData {
-		return raw.NSDataFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Data {
+		return &Data{inner: raw.NSDataFromID(purego.Retain(_id))}
 	})
 }
 
@@ -227,7 +227,7 @@ type NetServiceable interface {
 	Type() *String
 	Domain() *String
 	HostName() *String
-	Addresses() []*raw.NSData
+	Addresses() []*Data
 	Port() int
 }
 

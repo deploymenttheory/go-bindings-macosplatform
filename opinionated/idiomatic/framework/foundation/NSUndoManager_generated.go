@@ -206,13 +206,13 @@ func (x *UndoManager) SetLevelsOfUndo(levelsOfUndo uint) {
 }
 
 // RunLoopModes returns the collection as a Go slice.
-func (x *UndoManager) RunLoopModes() []*raw.NSString {
+func (x *UndoManager) RunLoopModes() []*String {
 	arr := x.inner.RunLoopModes()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSString {
-		return raw.NSStringFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *String {
+		return &String{inner: raw.NSStringFromID(purego.Retain(_id))}
 	})
 }
 
@@ -331,7 +331,7 @@ type UndoManagerable interface {
 	SetGroupsByEvent(groupsByEvent bool)
 	LevelsOfUndo() uint
 	SetLevelsOfUndo(levelsOfUndo uint)
-	RunLoopModes() []*raw.NSString
+	RunLoopModes() []*String
 	SetRunLoopModes(runLoopModes *raw.NSArray[*raw.NSString])
 	CanUndo() bool
 	CanRedo() bool

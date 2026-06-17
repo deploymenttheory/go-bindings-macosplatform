@@ -38,8 +38,8 @@ func NewRenderer() *Renderer {
 }
 
 // WithScene sets the scene property and returns the receiver for chaining.
-func (x *Renderer) WithScene(scene *raw.SKScene) *Renderer {
-	x.inner.SetScene(scene)
+func (x *Renderer) WithScene(scene *Scene) *Renderer {
+	x.inner.SetScene(scene.Unwrap())
 	return x
 }
 
@@ -187,7 +187,7 @@ func (x *Renderer) SetShowsFields(showsFields bool) {
 // Rendererable is the interface implemented by [Renderer], for mocking and DI.
 type Rendererable interface {
 	Unwrap() *raw.SKRenderer
-	WithScene(scene *raw.SKScene) *Renderer
+	WithScene(scene *Scene) *Renderer
 	WithIgnoresSiblingOrder(ignoresSiblingOrder bool) *Renderer
 	WithShouldCullNonVisibleNodes(shouldCullNonVisibleNodes bool) *Renderer
 	WithShowsDrawCount(showsDrawCount bool) *Renderer

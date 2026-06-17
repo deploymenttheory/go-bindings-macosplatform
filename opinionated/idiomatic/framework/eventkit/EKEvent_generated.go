@@ -57,8 +57,8 @@ func (x *Event) WithEndDate(endDate *foundation.NSDate) *Event {
 }
 
 // WithStructuredLocation sets the structuredLocation property and returns the receiver for chaining.
-func (x *Event) WithStructuredLocation(structuredLocation *raw.EKStructuredLocation) *Event {
-	x.inner.SetStructuredLocation(structuredLocation)
+func (x *Event) WithStructuredLocation(structuredLocation *StructuredLocation) *Event {
+	x.inner.SetStructuredLocation(structuredLocation.Unwrap())
 	return x
 }
 
@@ -69,8 +69,8 @@ func (x *Event) WithAvailability(availability raw.EKEventAvailability) *Event {
 }
 
 // WithCalendar sets the calendar property and returns the receiver for chaining.
-func (x *Event) WithCalendar(calendar *raw.EKCalendar) *Event {
-	x.inner.EKCalendarItem.SetCalendar(calendar)
+func (x *Event) WithCalendar(calendar *Calendar) *Event {
+	x.inner.EKCalendarItem.SetCalendar(calendar.Unwrap())
 	return x
 }
 
@@ -256,9 +256,9 @@ type Eventable interface {
 	WithAllDay(allDay bool) *Event
 	WithStartDate(startDate *foundation.NSDate) *Event
 	WithEndDate(endDate *foundation.NSDate) *Event
-	WithStructuredLocation(structuredLocation *raw.EKStructuredLocation) *Event
+	WithStructuredLocation(structuredLocation *StructuredLocation) *Event
 	WithAvailability(availability raw.EKEventAvailability) *Event
-	WithCalendar(calendar *raw.EKCalendar) *Event
+	WithCalendar(calendar *Calendar) *Event
 	WithTitle(title string) *Event
 	WithLocation(location string) *Event
 	WithNotes(notes string) *Event

@@ -14,13 +14,13 @@ import (
 )
 
 // Controllers returns the collection as a Go slice.
-func Controllers() []*raw.GCController {
+func Controllers() []*Controller {
 	arr := raw.GCControllerControllers()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.GCController {
-		return raw.GCControllerFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Controller {
+		return &Controller{inner: raw.GCControllerFromID(purego.Retain(_id))}
 	})
 }
 
@@ -95,13 +95,13 @@ func CoalescedKeyboard() *Keyboard {
 }
 
 // Mice returns the collection as a Go slice.
-func Mice() []*raw.GCMouse {
+func Mice() []*Mouse {
 	arr := raw.GCMouseMice()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.GCMouse {
-		return raw.GCMouseFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Mouse {
+		return &Mouse{inner: raw.GCMouseFromID(purego.Retain(_id))}
 	})
 }
 

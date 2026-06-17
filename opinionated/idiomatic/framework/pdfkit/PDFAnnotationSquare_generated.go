@@ -40,8 +40,8 @@ func NewAnnotationSquare() *AnnotationSquare {
 }
 
 // WithPage sets the page property and returns the receiver for chaining.
-func (x *AnnotationSquare) WithPage(page *raw.PDFPage) *AnnotationSquare {
-	x.inner.PDFAnnotation.SetPage(page)
+func (x *AnnotationSquare) WithPage(page *Page) *AnnotationSquare {
+	x.inner.PDFAnnotation.SetPage(page.Unwrap())
 	return x
 }
 
@@ -262,8 +262,8 @@ func (x *AnnotationSquare) WithOpen(open bool) *AnnotationSquare {
 }
 
 // WithDestination sets the destination property and returns the receiver for chaining.
-func (x *AnnotationSquare) WithDestination(destination *raw.PDFDestination) *AnnotationSquare {
-	x.inner.PDFAnnotation.SetDestination(destination)
+func (x *AnnotationSquare) WithDestination(destination *Destination) *AnnotationSquare {
+	x.inner.PDFAnnotation.SetDestination(destination.Unwrap())
 	return x
 }
 
@@ -302,7 +302,7 @@ func (x *AnnotationSquare) asAnnotation() *raw.PDFAnnotation { return &x.inner.P
 // AnnotationSquareable is the interface implemented by [AnnotationSquare], for mocking and DI.
 type AnnotationSquareable interface {
 	Unwrap() *raw.PDFAnnotationSquare
-	WithPage(page *raw.PDFPage) *AnnotationSquare
+	WithPage(page *Page) *AnnotationSquare
 	WithType(type_ string) *AnnotationSquare
 	WithBounds(bounds corefoundation.CGRect) *AnnotationSquare
 	WithShouldDisplay(shouldDisplay bool) *AnnotationSquare
@@ -334,7 +334,7 @@ type AnnotationSquareable interface {
 	WithButtonWidgetState(buttonWidgetState raw.PDFWidgetCellState) *AnnotationSquare
 	WithButtonWidgetStateString(buttonWidgetStateString string) *AnnotationSquare
 	WithOpen(open bool) *AnnotationSquare
-	WithDestination(destination *raw.PDFDestination) *AnnotationSquare
+	WithDestination(destination *Destination) *AnnotationSquare
 	WithURL(uRL string) *AnnotationSquare
 	WithFieldName(fieldName string) *AnnotationSquare
 	WithCaption(caption string) *AnnotationSquare

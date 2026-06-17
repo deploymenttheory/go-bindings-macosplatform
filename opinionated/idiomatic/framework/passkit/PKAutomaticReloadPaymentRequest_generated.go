@@ -45,8 +45,8 @@ func (x *AutomaticReloadPaymentRequest) WithPaymentDescription(paymentDescriptio
 }
 
 // WithAutomaticReloadBilling sets the automaticReloadBilling property and returns the receiver for chaining.
-func (x *AutomaticReloadPaymentRequest) WithAutomaticReloadBilling(automaticReloadBilling *raw.PKAutomaticReloadPaymentSummaryItem) *AutomaticReloadPaymentRequest {
-	x.inner.SetAutomaticReloadBilling(automaticReloadBilling)
+func (x *AutomaticReloadPaymentRequest) WithAutomaticReloadBilling(automaticReloadBilling *AutomaticReloadPaymentSummaryItem) *AutomaticReloadPaymentRequest {
+	x.inner.SetAutomaticReloadBilling(automaticReloadBilling.Unwrap())
 	return x
 }
 
@@ -134,7 +134,7 @@ func (x *AutomaticReloadPaymentRequest) SetTokenNotificationURL(tokenNotificatio
 type AutomaticReloadPaymentRequestable interface {
 	Unwrap() *raw.PKAutomaticReloadPaymentRequest
 	WithPaymentDescription(paymentDescription string) *AutomaticReloadPaymentRequest
-	WithAutomaticReloadBilling(automaticReloadBilling *raw.PKAutomaticReloadPaymentSummaryItem) *AutomaticReloadPaymentRequest
+	WithAutomaticReloadBilling(automaticReloadBilling *AutomaticReloadPaymentSummaryItem) *AutomaticReloadPaymentRequest
 	WithBillingAgreement(billingAgreement string) *AutomaticReloadPaymentRequest
 	WithManagementURL(managementURL string) *AutomaticReloadPaymentRequest
 	WithTokenNotificationURL(tokenNotificationURL string) *AutomaticReloadPaymentRequest

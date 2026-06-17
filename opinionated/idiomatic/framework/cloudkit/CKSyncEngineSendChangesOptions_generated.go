@@ -37,14 +37,14 @@ func NewSyncEngineSendChangesOptionsWithScope(scope *raw.CKSyncEngineSendChanges
 }
 
 // WithScope sets the scope property and returns the receiver for chaining.
-func (x *SyncEngineSendChangesOptions) WithScope(scope *raw.CKSyncEngineSendChangesScope) *SyncEngineSendChangesOptions {
-	x.inner.SetScope(scope)
+func (x *SyncEngineSendChangesOptions) WithScope(scope *SyncEngineSendChangesScope) *SyncEngineSendChangesOptions {
+	x.inner.SetScope(scope.Unwrap())
 	return x
 }
 
 // WithOperationGroup sets the operationGroup property and returns the receiver for chaining.
-func (x *SyncEngineSendChangesOptions) WithOperationGroup(operationGroup *raw.CKOperationGroup) *SyncEngineSendChangesOptions {
-	x.inner.SetOperationGroup(operationGroup)
+func (x *SyncEngineSendChangesOptions) WithOperationGroup(operationGroup *OperationGroup) *SyncEngineSendChangesOptions {
+	x.inner.SetOperationGroup(operationGroup.Unwrap())
 	return x
 }
 
@@ -79,8 +79,8 @@ func (x *SyncEngineSendChangesOptions) SetOperationGroup(operationGroup *raw.CKO
 // SyncEngineSendChangesOptionsable is the interface implemented by [SyncEngineSendChangesOptions], for mocking and DI.
 type SyncEngineSendChangesOptionsable interface {
 	Unwrap() *raw.CKSyncEngineSendChangesOptions
-	WithScope(scope *raw.CKSyncEngineSendChangesScope) *SyncEngineSendChangesOptions
-	WithOperationGroup(operationGroup *raw.CKOperationGroup) *SyncEngineSendChangesOptions
+	WithScope(scope *SyncEngineSendChangesScope) *SyncEngineSendChangesOptions
+	WithOperationGroup(operationGroup *OperationGroup) *SyncEngineSendChangesOptions
 	Scope() *SyncEngineSendChangesScope
 	SetScope(scope *raw.CKSyncEngineSendChangesScope)
 	OperationGroup() *OperationGroup

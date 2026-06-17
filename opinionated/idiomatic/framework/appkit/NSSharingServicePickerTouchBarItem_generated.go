@@ -56,8 +56,8 @@ func (x *SharingServicePickerTouchBarItem) WithButtonTitle(buttonTitle string) *
 }
 
 // WithButtonImage sets the buttonImage property and returns the receiver for chaining.
-func (x *SharingServicePickerTouchBarItem) WithButtonImage(buttonImage *raw.NSImage) *SharingServicePickerTouchBarItem {
-	x.inner.SetButtonImage(buttonImage)
+func (x *SharingServicePickerTouchBarItem) WithButtonImage(buttonImage *Image) *SharingServicePickerTouchBarItem {
+	x.inner.SetButtonImage(buttonImage.Unwrap())
 	return x
 }
 
@@ -123,7 +123,7 @@ type SharingServicePickerTouchBarItemable interface {
 	WithDelegate(delegate raw.NSSharingServicePickerTouchBarItemDelegate) *SharingServicePickerTouchBarItem
 	WithEnabled(enabled bool) *SharingServicePickerTouchBarItem
 	WithButtonTitle(buttonTitle string) *SharingServicePickerTouchBarItem
-	WithButtonImage(buttonImage *raw.NSImage) *SharingServicePickerTouchBarItem
+	WithButtonImage(buttonImage *Image) *SharingServicePickerTouchBarItem
 	WithVisibilityPriority(visibilityPriority float32) *SharingServicePickerTouchBarItem
 	Delegate() raw.NSSharingServicePickerTouchBarItemDelegate
 	SetDelegate(delegate raw.NSSharingServicePickerTouchBarItemDelegate)

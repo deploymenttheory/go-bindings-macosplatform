@@ -72,8 +72,8 @@ func (x *Button) WithHasDestructiveAction(hasDestructiveAction bool) *Button {
 }
 
 // WithSound sets the sound property and returns the receiver for chaining.
-func (x *Button) WithSound(sound *raw.NSSound) *Button {
-	x.inner.SetSound(sound)
+func (x *Button) WithSound(sound *Sound) *Button {
+	x.inner.SetSound(sound.Unwrap())
 	return x
 }
 
@@ -114,14 +114,14 @@ func (x *Button) WithShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMouseIn
 }
 
 // WithBezelColor sets the bezelColor property and returns the receiver for chaining.
-func (x *Button) WithBezelColor(bezelColor *raw.NSColor) *Button {
-	x.inner.SetBezelColor(bezelColor)
+func (x *Button) WithBezelColor(bezelColor *Color) *Button {
+	x.inner.SetBezelColor(bezelColor.Unwrap())
 	return x
 }
 
 // WithContentTintColor sets the contentTintColor property and returns the receiver for chaining.
-func (x *Button) WithContentTintColor(contentTintColor *raw.NSColor) *Button {
-	x.inner.SetContentTintColor(contentTintColor)
+func (x *Button) WithContentTintColor(contentTintColor *Color) *Button {
+	x.inner.SetContentTintColor(contentTintColor.Unwrap())
 	return x
 }
 
@@ -132,14 +132,14 @@ func (x *Button) WithTintProminence(tintProminence raw.NSTintProminence) *Button
 }
 
 // WithImage sets the image property and returns the receiver for chaining.
-func (x *Button) WithImage(image *raw.NSImage) *Button {
-	x.inner.SetImage(image)
+func (x *Button) WithImage(image *Image) *Button {
+	x.inner.SetImage(image.Unwrap())
 	return x
 }
 
 // WithAlternateImage sets the alternateImage property and returns the receiver for chaining.
-func (x *Button) WithAlternateImage(alternateImage *raw.NSImage) *Button {
-	x.inner.SetAlternateImage(alternateImage)
+func (x *Button) WithAlternateImage(alternateImage *Image) *Button {
+	x.inner.SetAlternateImage(alternateImage.Unwrap())
 	return x
 }
 
@@ -162,8 +162,8 @@ func (x *Button) WithImageHugsTitle(imageHugsTitle bool) *Button {
 }
 
 // WithSymbolConfiguration sets the symbolConfiguration property and returns the receiver for chaining.
-func (x *Button) WithSymbolConfiguration(symbolConfiguration *raw.NSImageSymbolConfiguration) *Button {
-	x.inner.SetSymbolConfiguration(symbolConfiguration)
+func (x *Button) WithSymbolConfiguration(symbolConfiguration *ImageSymbolConfiguration) *Button {
+	x.inner.SetSymbolConfiguration(symbolConfiguration.Unwrap())
 	return x
 }
 
@@ -300,8 +300,8 @@ func (x *Button) WithDoubleValue(doubleValue float64) *Button {
 }
 
 // WithFont sets the font property and returns the receiver for chaining.
-func (x *Button) WithFont(font *raw.NSFont) *Button {
-	x.inner.NSControl.SetFont(font)
+func (x *Button) WithFont(font *Font) *Button {
+	x.inner.NSControl.SetFont(font.Unwrap())
 	return x
 }
 
@@ -522,8 +522,8 @@ func (x *Button) WithContentFilters(items ...*coreimage.CIFilter) *Button {
 }
 
 // WithShadow sets the shadow property and returns the receiver for chaining.
-func (x *Button) WithShadow(shadow *raw.NSShadow) *Button {
-	x.inner.NSControl.NSView.SetShadow(shadow)
+func (x *Button) WithShadow(shadow *Shadow) *Button {
+	x.inner.NSControl.NSView.SetShadow(shadow.Unwrap())
 	return x
 }
 
@@ -604,8 +604,8 @@ func (x *Button) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeM
 }
 
 // WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
-func (x *Button) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *Button {
-	x.inner.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+func (x *Button) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Button {
+	x.inner.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
 	return x
 }
 
@@ -646,8 +646,8 @@ func (x *Button) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamic
 }
 
 // WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
-func (x *Button) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *Button {
-	x.inner.NSControl.NSView.SetPressureConfiguration(pressureConfiguration)
+func (x *Button) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Button {
+	x.inner.NSControl.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
 	return x
 }
 
@@ -658,8 +658,8 @@ func (x *Button) WithNextResponder(nextResponder ResponderProvider) *Button {
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *Button) WithMenu(menu *raw.NSMenu) *Button {
-	x.inner.NSControl.NSView.NSResponder.SetMenu(menu)
+func (x *Button) WithMenu(menu *Menu) *Button {
+	x.inner.NSControl.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -670,8 +670,8 @@ func (x *Button) WithUserActivity(userActivity *foundation.NSUserActivity) *Butt
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *Button) WithTouchBar(touchBar *raw.NSTouchBar) *Button {
-	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar)
+func (x *Button) WithTouchBar(touchBar *TouchBar) *Button {
+	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -1036,22 +1036,22 @@ type Buttonable interface {
 	WithAlternateTitle(alternateTitle string) *Button
 	WithAttributedAlternateTitle(attributedAlternateTitle *foundation.NSAttributedString) *Button
 	WithHasDestructiveAction(hasDestructiveAction bool) *Button
-	WithSound(sound *raw.NSSound) *Button
+	WithSound(sound *Sound) *Button
 	WithSpringLoaded(springLoaded bool) *Button
 	WithMaxAcceleratorLevel(maxAcceleratorLevel int) *Button
 	WithBezelStyle(bezelStyle raw.NSBezelStyle) *Button
 	WithBordered(bordered bool) *Button
 	WithTransparent(transparent bool) *Button
 	WithShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMouseInside bool) *Button
-	WithBezelColor(bezelColor *raw.NSColor) *Button
-	WithContentTintColor(contentTintColor *raw.NSColor) *Button
+	WithBezelColor(bezelColor *Color) *Button
+	WithContentTintColor(contentTintColor *Color) *Button
 	WithTintProminence(tintProminence raw.NSTintProminence) *Button
-	WithImage(image *raw.NSImage) *Button
-	WithAlternateImage(alternateImage *raw.NSImage) *Button
+	WithImage(image *Image) *Button
+	WithAlternateImage(alternateImage *Image) *Button
 	WithImagePosition(imagePosition raw.NSCellImagePosition) *Button
 	WithImageScaling(imageScaling raw.NSImageScaling) *Button
 	WithImageHugsTitle(imageHugsTitle bool) *Button
-	WithSymbolConfiguration(symbolConfiguration *raw.NSImageSymbolConfiguration) *Button
+	WithSymbolConfiguration(symbolConfiguration *ImageSymbolConfiguration) *Button
 	WithState(state int) *Button
 	WithAllowsMixedState(allowsMixedState bool) *Button
 	WithKeyEquivalent(keyEquivalent string) *Button
@@ -1074,7 +1074,7 @@ type Buttonable interface {
 	WithIntegerValue(integerValue int) *Button
 	WithFloatValue(floatValue float32) *Button
 	WithDoubleValue(doubleValue float64) *Button
-	WithFont(font *raw.NSFont) *Button
+	WithFont(font *Font) *Button
 	WithUsesSingleLineMode(usesSingleLineMode bool) *Button
 	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *Button
 	WithAlignment(alignment raw.NSTextAlignment) *Button
@@ -1106,7 +1106,7 @@ type Buttonable interface {
 	WithBackgroundFilters(items ...*coreimage.CIFilter) *Button
 	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *Button
 	WithContentFilters(items ...*coreimage.CIFilter) *Button
-	WithShadow(shadow *raw.NSShadow) *Button
+	WithShadow(shadow *Shadow) *Button
 	WithClipsToBounds(clipsToBounds bool) *Button
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Button
 	WithToolTip(toolTip string) *Button
@@ -1118,18 +1118,18 @@ type Buttonable interface {
 	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *Button
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Button
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Button
-	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *Button
+	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Button
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Button
 	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Button
 	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Button
 	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Button
 	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Button
 	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Button
-	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *Button
+	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Button
 	WithNextResponder(nextResponder ResponderProvider) *Button
-	WithMenu(menu *raw.NSMenu) *Button
+	WithMenu(menu *Menu) *Button
 	WithUserActivity(userActivity *foundation.NSUserActivity) *Button
-	WithTouchBar(touchBar *raw.NSTouchBar) *Button
+	WithTouchBar(touchBar *TouchBar) *Button
 	SetButtonType(type_ raw.NSButtonType)
 	SetPeriodicDelayInterval(delay float32, interval float32)
 	GetPeriodicDelayInterval(delay *float32, interval *float32)

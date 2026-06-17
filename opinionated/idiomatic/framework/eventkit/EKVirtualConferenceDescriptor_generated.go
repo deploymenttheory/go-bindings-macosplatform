@@ -48,13 +48,13 @@ func (x *VirtualConferenceDescriptor) Title() string {
 }
 
 // URLDescriptors returns the collection as a Go slice.
-func (x *VirtualConferenceDescriptor) URLDescriptors() []*raw.EKVirtualConferenceURLDescriptor {
+func (x *VirtualConferenceDescriptor) URLDescriptors() []*VirtualConferenceURLDescriptor {
 	arr := x.inner.URLDescriptors()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.EKVirtualConferenceURLDescriptor {
-		return raw.EKVirtualConferenceURLDescriptorFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *VirtualConferenceURLDescriptor {
+		return &VirtualConferenceURLDescriptor{inner: raw.EKVirtualConferenceURLDescriptorFromID(purego.Retain(_id))}
 	})
 }
 
@@ -71,7 +71,7 @@ func (x *VirtualConferenceDescriptor) ConferenceDetails() string {
 type VirtualConferenceDescriptorable interface {
 	Unwrap() *raw.EKVirtualConferenceDescriptor
 	Title() string
-	URLDescriptors() []*raw.EKVirtualConferenceURLDescriptor
+	URLDescriptors() []*VirtualConferenceURLDescriptor
 	ConferenceDetails() string
 }
 

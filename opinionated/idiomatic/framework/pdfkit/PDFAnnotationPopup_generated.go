@@ -40,8 +40,8 @@ func NewAnnotationPopup() *AnnotationPopup {
 }
 
 // WithPage sets the page property and returns the receiver for chaining.
-func (x *AnnotationPopup) WithPage(page *raw.PDFPage) *AnnotationPopup {
-	x.inner.PDFAnnotation.SetPage(page)
+func (x *AnnotationPopup) WithPage(page *Page) *AnnotationPopup {
+	x.inner.PDFAnnotation.SetPage(page.Unwrap())
 	return x
 }
 
@@ -262,8 +262,8 @@ func (x *AnnotationPopup) WithOpen(open bool) *AnnotationPopup {
 }
 
 // WithDestination sets the destination property and returns the receiver for chaining.
-func (x *AnnotationPopup) WithDestination(destination *raw.PDFDestination) *AnnotationPopup {
-	x.inner.PDFAnnotation.SetDestination(destination)
+func (x *AnnotationPopup) WithDestination(destination *Destination) *AnnotationPopup {
+	x.inner.PDFAnnotation.SetDestination(destination.Unwrap())
 	return x
 }
 
@@ -307,7 +307,7 @@ func (x *AnnotationPopup) asAnnotation() *raw.PDFAnnotation { return &x.inner.PD
 // AnnotationPopupable is the interface implemented by [AnnotationPopup], for mocking and DI.
 type AnnotationPopupable interface {
 	Unwrap() *raw.PDFAnnotationPopup
-	WithPage(page *raw.PDFPage) *AnnotationPopup
+	WithPage(page *Page) *AnnotationPopup
 	WithType(type_ string) *AnnotationPopup
 	WithBounds(bounds corefoundation.CGRect) *AnnotationPopup
 	WithShouldDisplay(shouldDisplay bool) *AnnotationPopup
@@ -339,7 +339,7 @@ type AnnotationPopupable interface {
 	WithButtonWidgetState(buttonWidgetState raw.PDFWidgetCellState) *AnnotationPopup
 	WithButtonWidgetStateString(buttonWidgetStateString string) *AnnotationPopup
 	WithOpen(open bool) *AnnotationPopup
-	WithDestination(destination *raw.PDFDestination) *AnnotationPopup
+	WithDestination(destination *Destination) *AnnotationPopup
 	WithURL(uRL string) *AnnotationPopup
 	WithFieldName(fieldName string) *AnnotationPopup
 	WithCaption(caption string) *AnnotationPopup

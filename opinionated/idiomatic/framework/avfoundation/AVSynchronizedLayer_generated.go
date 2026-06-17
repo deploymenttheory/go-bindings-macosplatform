@@ -36,8 +36,8 @@ func NewSynchronizedLayer() *SynchronizedLayer {
 }
 
 // WithPlayerItem sets the playerItem property and returns the receiver for chaining.
-func (x *SynchronizedLayer) WithPlayerItem(playerItem *raw.AVPlayerItem) *SynchronizedLayer {
-	x.inner.SetPlayerItem(playerItem)
+func (x *SynchronizedLayer) WithPlayerItem(playerItem *PlayerItem) *SynchronizedLayer {
+	x.inner.SetPlayerItem(playerItem.Unwrap())
 	return x
 }
 
@@ -58,7 +58,7 @@ func (x *SynchronizedLayer) SetPlayerItem(playerItem *raw.AVPlayerItem) {
 // SynchronizedLayerable is the interface implemented by [SynchronizedLayer], for mocking and DI.
 type SynchronizedLayerable interface {
 	Unwrap() *raw.AVSynchronizedLayer
-	WithPlayerItem(playerItem *raw.AVPlayerItem) *SynchronizedLayer
+	WithPlayerItem(playerItem *PlayerItem) *SynchronizedLayer
 	PlayerItem() *PlayerItem
 	SetPlayerItem(playerItem *raw.AVPlayerItem)
 }

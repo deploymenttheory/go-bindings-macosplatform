@@ -36,8 +36,8 @@ func NewZoomControl() *ZoomControl {
 }
 
 // WithMapView sets the mapView property and returns the receiver for chaining.
-func (x *ZoomControl) WithMapView(mapView *raw.MKMapView) *ZoomControl {
-	x.inner.SetMapView(mapView)
+func (x *ZoomControl) WithMapView(mapView *MapView) *ZoomControl {
+	x.inner.SetMapView(mapView.Unwrap())
 	return x
 }
 
@@ -58,7 +58,7 @@ func (x *ZoomControl) SetMapView(mapView *raw.MKMapView) {
 // ZoomControlable is the interface implemented by [ZoomControl], for mocking and DI.
 type ZoomControlable interface {
 	Unwrap() *raw.MKZoomControl
-	WithMapView(mapView *raw.MKMapView) *ZoomControl
+	WithMapView(mapView *MapView) *ZoomControl
 	MapView() *MapView
 	SetMapView(mapView *raw.MKMapView)
 }

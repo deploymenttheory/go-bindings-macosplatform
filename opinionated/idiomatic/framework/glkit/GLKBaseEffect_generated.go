@@ -203,13 +203,13 @@ func (x *BaseEffect) Texture2d1() *EffectPropertyTexture {
 }
 
 // TextureOrder returns the collection as a Go slice.
-func (x *BaseEffect) TextureOrder() []*raw.GLKEffectPropertyTexture {
+func (x *BaseEffect) TextureOrder() []*EffectPropertyTexture {
 	arr := x.inner.TextureOrder()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.GLKEffectPropertyTexture {
-		return raw.GLKEffectPropertyTextureFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *EffectPropertyTexture {
+		return &EffectPropertyTexture{inner: raw.GLKEffectPropertyTextureFromID(purego.Retain(_id))}
 	})
 }
 
@@ -280,7 +280,7 @@ type BaseEffectable interface {
 	Material() *EffectPropertyMaterial
 	Texture2d0() *EffectPropertyTexture
 	Texture2d1() *EffectPropertyTexture
-	TextureOrder() []*raw.GLKEffectPropertyTexture
+	TextureOrder() []*EffectPropertyTexture
 	SetTextureOrder(textureOrder *foundation.NSArray[*raw.GLKEffectPropertyTexture])
 	ConstantColor() unsafe.Pointer
 	SetConstantColor(constantColor unsafe.Pointer)

@@ -54,8 +54,8 @@ func (x *WorkoutConfiguration) WithSwimmingLocationType(swimmingLocationType raw
 }
 
 // WithLapLength sets the lapLength property and returns the receiver for chaining.
-func (x *WorkoutConfiguration) WithLapLength(lapLength *raw.HKQuantity) *WorkoutConfiguration {
-	x.inner.SetLapLength(lapLength)
+func (x *WorkoutConfiguration) WithLapLength(lapLength *Quantity) *WorkoutConfiguration {
+	x.inner.SetLapLength(lapLength.Unwrap())
 	return x
 }
 
@@ -109,7 +109,7 @@ type WorkoutConfigurationable interface {
 	WithActivityType(activityType raw.HKWorkoutActivityType) *WorkoutConfiguration
 	WithLocationType(locationType raw.HKWorkoutSessionLocationType) *WorkoutConfiguration
 	WithSwimmingLocationType(swimmingLocationType raw.HKWorkoutSwimmingLocationType) *WorkoutConfiguration
-	WithLapLength(lapLength *raw.HKQuantity) *WorkoutConfiguration
+	WithLapLength(lapLength *Quantity) *WorkoutConfiguration
 	ActivityType() raw.HKWorkoutActivityType
 	SetActivityType(activityType raw.HKWorkoutActivityType)
 	LocationType() raw.HKWorkoutSessionLocationType

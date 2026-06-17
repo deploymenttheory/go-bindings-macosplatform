@@ -95,13 +95,13 @@ func (x *MouseInput) MiddleButton() *ControllerButtonInput {
 }
 
 // AuxiliaryButtons returns the collection as a Go slice.
-func (x *MouseInput) AuxiliaryButtons() []*raw.GCControllerButtonInput {
+func (x *MouseInput) AuxiliaryButtons() []*ControllerButtonInput {
 	arr := x.inner.AuxiliaryButtons()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.GCControllerButtonInput {
-		return raw.GCControllerButtonInputFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ControllerButtonInput {
+		return &ControllerButtonInput{inner: raw.GCControllerButtonInputFromID(purego.Retain(_id))}
 	})
 }
 
@@ -118,7 +118,7 @@ type MouseInputable interface {
 	LeftButton() *ControllerButtonInput
 	RightButton() *ControllerButtonInput
 	MiddleButton() *ControllerButtonInput
-	AuxiliaryButtons() []*raw.GCControllerButtonInput
+	AuxiliaryButtons() []*ControllerButtonInput
 }
 
 var _ MouseInputable = (*MouseInput)(nil)

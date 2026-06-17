@@ -37,13 +37,13 @@ func NewAudiogramSample() *AudiogramSample {
 }
 
 // SensitivityPoints returns the collection as a Go slice.
-func (x *AudiogramSample) SensitivityPoints() []*raw.HKAudiogramSensitivityPoint {
+func (x *AudiogramSample) SensitivityPoints() []*AudiogramSensitivityPoint {
 	arr := x.inner.SensitivityPoints()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.HKAudiogramSensitivityPoint {
-		return raw.HKAudiogramSensitivityPointFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *AudiogramSensitivityPoint {
+		return &AudiogramSensitivityPoint{inner: raw.HKAudiogramSensitivityPointFromID(purego.Retain(_id))}
 	})
 }
 
@@ -54,7 +54,7 @@ func (x *AudiogramSample) asObject() *raw.HKObject { return &x.inner.HKSample.HK
 // AudiogramSampleable is the interface implemented by [AudiogramSample], for mocking and DI.
 type AudiogramSampleable interface {
 	Unwrap() *raw.HKAudiogramSample
-	SensitivityPoints() []*raw.HKAudiogramSensitivityPoint
+	SensitivityPoints() []*AudiogramSensitivityPoint
 }
 
 var _ AudiogramSampleable = (*AudiogramSample)(nil)

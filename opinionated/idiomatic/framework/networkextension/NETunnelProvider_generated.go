@@ -94,13 +94,13 @@ func (x *NETunnelProvider) ProtocolConfiguration() *NEVPNProtocol {
 }
 
 // AppRules returns the collection as a Go slice.
-func (x *NETunnelProvider) AppRules() []*raw.NEAppRule {
+func (x *NETunnelProvider) AppRules() []*NEAppRule {
 	arr := x.inner.AppRules()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NEAppRule {
-		return raw.NEAppRuleFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *NEAppRule {
+		return &NEAppRule{inner: raw.NEAppRuleFromID(purego.Retain(_id))}
 	})
 }
 
@@ -130,7 +130,7 @@ type NETunnelProviderable interface {
 	HandleAppMessage(ctx context.Context, messageData *foundation.NSData) (*foundation.NSData, error)
 	SetTunnelNetworkSettings(ctx context.Context, tunnelNetworkSettings *raw.NETunnelNetworkSettings) error
 	ProtocolConfiguration() *NEVPNProtocol
-	AppRules() []*raw.NEAppRule
+	AppRules() []*NEAppRule
 	RoutingMethod() raw.NETunnelProviderRoutingMethod
 	Reasserting() bool
 	SetReasserting(reasserting bool)

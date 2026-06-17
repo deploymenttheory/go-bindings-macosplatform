@@ -216,13 +216,13 @@ func (x *GameSession) Owner() *CloudPlayer {
 }
 
 // Players returns the collection as a Go slice.
-func (x *GameSession) Players() []*raw.GKCloudPlayer {
+func (x *GameSession) Players() []*CloudPlayer {
 	arr := x.inner.Players()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.GKCloudPlayer {
-		return raw.GKCloudPlayerFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CloudPlayer {
+		return &CloudPlayer{inner: raw.GKCloudPlayerFromID(purego.Retain(_id))}
 	})
 }
 
@@ -246,13 +246,13 @@ func (x *GameSession) MaxNumberOfConnectedPlayers() int {
 }
 
 // BadgedPlayers returns the collection as a Go slice.
-func (x *GameSession) BadgedPlayers() []*raw.GKCloudPlayer {
+func (x *GameSession) BadgedPlayers() []*CloudPlayer {
 	arr := x.inner.BadgedPlayers()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.GKCloudPlayer {
-		return raw.GKCloudPlayerFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CloudPlayer {
+		return &CloudPlayer{inner: raw.GKCloudPlayerFromID(purego.Retain(_id))}
 	})
 }
 
@@ -270,11 +270,11 @@ type GameSessionable interface {
 	Identifier() string
 	Title() string
 	Owner() *CloudPlayer
-	Players() []*raw.GKCloudPlayer
+	Players() []*CloudPlayer
 	LastModifiedDate() *foundation.NSDate
 	LastModifiedPlayer() *CloudPlayer
 	MaxNumberOfConnectedPlayers() int
-	BadgedPlayers() []*raw.GKCloudPlayer
+	BadgedPlayers() []*CloudPlayer
 }
 
 var _ GameSessionable = (*GameSession)(nil)

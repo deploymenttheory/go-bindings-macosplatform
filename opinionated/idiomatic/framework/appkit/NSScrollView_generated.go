@@ -55,14 +55,14 @@ func (x *ScrollView) WithDocumentView(documentView ViewProvider) *ScrollView {
 }
 
 // WithContentView sets the contentView property and returns the receiver for chaining.
-func (x *ScrollView) WithContentView(contentView *raw.NSClipView) *ScrollView {
-	x.inner.SetContentView(contentView)
+func (x *ScrollView) WithContentView(contentView *ClipView) *ScrollView {
+	x.inner.SetContentView(contentView.Unwrap())
 	return x
 }
 
 // WithDocumentCursor sets the documentCursor property and returns the receiver for chaining.
-func (x *ScrollView) WithDocumentCursor(documentCursor *raw.NSCursor) *ScrollView {
-	x.inner.SetDocumentCursor(documentCursor)
+func (x *ScrollView) WithDocumentCursor(documentCursor *Cursor) *ScrollView {
+	x.inner.SetDocumentCursor(documentCursor.Unwrap())
 	return x
 }
 
@@ -73,8 +73,8 @@ func (x *ScrollView) WithBorderType(borderType raw.NSBorderType) *ScrollView {
 }
 
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
-func (x *ScrollView) WithBackgroundColor(backgroundColor *raw.NSColor) *ScrollView {
-	x.inner.SetBackgroundColor(backgroundColor)
+func (x *ScrollView) WithBackgroundColor(backgroundColor *Color) *ScrollView {
+	x.inner.SetBackgroundColor(backgroundColor.Unwrap())
 	return x
 }
 
@@ -97,14 +97,14 @@ func (x *ScrollView) WithHasHorizontalScroller(hasHorizontalScroller bool) *Scro
 }
 
 // WithVerticalScroller sets the verticalScroller property and returns the receiver for chaining.
-func (x *ScrollView) WithVerticalScroller(verticalScroller *raw.NSScroller) *ScrollView {
-	x.inner.SetVerticalScroller(verticalScroller)
+func (x *ScrollView) WithVerticalScroller(verticalScroller *Scroller) *ScrollView {
+	x.inner.SetVerticalScroller(verticalScroller.Unwrap())
 	return x
 }
 
 // WithHorizontalScroller sets the horizontalScroller property and returns the receiver for chaining.
-func (x *ScrollView) WithHorizontalScroller(horizontalScroller *raw.NSScroller) *ScrollView {
-	x.inner.SetHorizontalScroller(horizontalScroller)
+func (x *ScrollView) WithHorizontalScroller(horizontalScroller *Scroller) *ScrollView {
+	x.inner.SetHorizontalScroller(horizontalScroller.Unwrap())
 	return x
 }
 
@@ -247,14 +247,14 @@ func (x *ScrollView) WithHasVerticalRuler(hasVerticalRuler bool) *ScrollView {
 }
 
 // WithHorizontalRulerView sets the horizontalRulerView property and returns the receiver for chaining.
-func (x *ScrollView) WithHorizontalRulerView(horizontalRulerView *raw.NSRulerView) *ScrollView {
-	x.inner.SetHorizontalRulerView(horizontalRulerView)
+func (x *ScrollView) WithHorizontalRulerView(horizontalRulerView *RulerView) *ScrollView {
+	x.inner.SetHorizontalRulerView(horizontalRulerView.Unwrap())
 	return x
 }
 
 // WithVerticalRulerView sets the verticalRulerView property and returns the receiver for chaining.
-func (x *ScrollView) WithVerticalRulerView(verticalRulerView *raw.NSRulerView) *ScrollView {
-	x.inner.SetVerticalRulerView(verticalRulerView)
+func (x *ScrollView) WithVerticalRulerView(verticalRulerView *RulerView) *ScrollView {
+	x.inner.SetVerticalRulerView(verticalRulerView.Unwrap())
 	return x
 }
 
@@ -445,8 +445,8 @@ func (x *ScrollView) WithContentFilters(items ...*coreimage.CIFilter) *ScrollVie
 }
 
 // WithShadow sets the shadow property and returns the receiver for chaining.
-func (x *ScrollView) WithShadow(shadow *raw.NSShadow) *ScrollView {
-	x.inner.NSView.SetShadow(shadow)
+func (x *ScrollView) WithShadow(shadow *Shadow) *ScrollView {
+	x.inner.NSView.SetShadow(shadow.Unwrap())
 	return x
 }
 
@@ -527,8 +527,8 @@ func (x *ScrollView) WithPrefersCompactControlSizeMetrics(prefersCompactControlS
 }
 
 // WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
-func (x *ScrollView) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *ScrollView {
-	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+func (x *ScrollView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ScrollView {
+	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
 	return x
 }
 
@@ -569,8 +569,8 @@ func (x *ScrollView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDyn
 }
 
 // WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
-func (x *ScrollView) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *ScrollView {
-	x.inner.NSView.SetPressureConfiguration(pressureConfiguration)
+func (x *ScrollView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ScrollView {
+	x.inner.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
 	return x
 }
 
@@ -581,8 +581,8 @@ func (x *ScrollView) WithNextResponder(nextResponder ResponderProvider) *ScrollV
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *ScrollView) WithMenu(menu *raw.NSMenu) *ScrollView {
-	x.inner.NSView.NSResponder.SetMenu(menu)
+func (x *ScrollView) WithMenu(menu *Menu) *ScrollView {
+	x.inner.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -593,8 +593,8 @@ func (x *ScrollView) WithUserActivity(userActivity *foundation.NSUserActivity) *
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *ScrollView) WithTouchBar(touchBar *raw.NSTouchBar) *ScrollView {
-	x.inner.NSView.NSResponder.SetTouchBar(touchBar)
+func (x *ScrollView) WithTouchBar(touchBar *TouchBar) *ScrollView {
+	x.inner.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -1033,15 +1033,15 @@ func (x *ScrollView) asResponder() *raw.NSResponder { return &x.inner.NSView.NSR
 type ScrollViewable interface {
 	Unwrap() *raw.NSScrollView
 	WithDocumentView(documentView ViewProvider) *ScrollView
-	WithContentView(contentView *raw.NSClipView) *ScrollView
-	WithDocumentCursor(documentCursor *raw.NSCursor) *ScrollView
+	WithContentView(contentView *ClipView) *ScrollView
+	WithDocumentCursor(documentCursor *Cursor) *ScrollView
 	WithBorderType(borderType raw.NSBorderType) *ScrollView
-	WithBackgroundColor(backgroundColor *raw.NSColor) *ScrollView
+	WithBackgroundColor(backgroundColor *Color) *ScrollView
 	WithDrawsBackground(drawsBackground bool) *ScrollView
 	WithHasVerticalScroller(hasVerticalScroller bool) *ScrollView
 	WithHasHorizontalScroller(hasHorizontalScroller bool) *ScrollView
-	WithVerticalScroller(verticalScroller *raw.NSScroller) *ScrollView
-	WithHorizontalScroller(horizontalScroller *raw.NSScroller) *ScrollView
+	WithVerticalScroller(verticalScroller *Scroller) *ScrollView
+	WithHorizontalScroller(horizontalScroller *Scroller) *ScrollView
 	WithAutohidesScrollers(autohidesScrollers bool) *ScrollView
 	WithHorizontalLineScroll(horizontalLineScroll float64) *ScrollView
 	WithVerticalLineScroll(verticalLineScroll float64) *ScrollView
@@ -1065,8 +1065,8 @@ type ScrollViewable interface {
 	WithRulersVisible(rulersVisible bool) *ScrollView
 	WithHasHorizontalRuler(hasHorizontalRuler bool) *ScrollView
 	WithHasVerticalRuler(hasVerticalRuler bool) *ScrollView
-	WithHorizontalRulerView(horizontalRulerView *raw.NSRulerView) *ScrollView
-	WithVerticalRulerView(verticalRulerView *raw.NSRulerView) *ScrollView
+	WithHorizontalRulerView(horizontalRulerView *RulerView) *ScrollView
+	WithVerticalRulerView(verticalRulerView *RulerView) *ScrollView
 	WithFindBarPosition(findBarPosition raw.NSScrollViewFindBarPosition) *ScrollView
 	WithSubviews(items ...ViewProvider) *ScrollView
 	WithHidden(hidden bool) *ScrollView
@@ -1093,7 +1093,7 @@ type ScrollViewable interface {
 	WithBackgroundFilters(items ...*coreimage.CIFilter) *ScrollView
 	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *ScrollView
 	WithContentFilters(items ...*coreimage.CIFilter) *ScrollView
-	WithShadow(shadow *raw.NSShadow) *ScrollView
+	WithShadow(shadow *Shadow) *ScrollView
 	WithClipsToBounds(clipsToBounds bool) *ScrollView
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ScrollView
 	WithToolTip(toolTip string) *ScrollView
@@ -1105,18 +1105,18 @@ type ScrollViewable interface {
 	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *ScrollView
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ScrollView
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ScrollView
-	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *ScrollView
+	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ScrollView
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *ScrollView
 	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *ScrollView
 	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *ScrollView
 	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *ScrollView
 	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *ScrollView
 	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *ScrollView
-	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *ScrollView
+	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ScrollView
 	WithNextResponder(nextResponder ResponderProvider) *ScrollView
-	WithMenu(menu *raw.NSMenu) *ScrollView
+	WithMenu(menu *Menu) *ScrollView
 	WithUserActivity(userActivity *foundation.NSUserActivity) *ScrollView
-	WithTouchBar(touchBar *raw.NSTouchBar) *ScrollView
+	WithTouchBar(touchBar *TouchBar) *ScrollView
 	Tile()
 	FlashScrollers()
 	MagnifyToFitRect(rect corefoundation.CGRect)

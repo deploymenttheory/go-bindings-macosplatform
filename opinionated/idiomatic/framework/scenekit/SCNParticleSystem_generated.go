@@ -184,20 +184,20 @@ func (x *ParticleSystem) WithParticleLifeSpanVariation(particleLifeSpanVariation
 }
 
 // WithSystemSpawnedOnDying sets the systemSpawnedOnDying property and returns the receiver for chaining.
-func (x *ParticleSystem) WithSystemSpawnedOnDying(systemSpawnedOnDying *raw.SCNParticleSystem) *ParticleSystem {
-	x.inner.SetSystemSpawnedOnDying(systemSpawnedOnDying)
+func (x *ParticleSystem) WithSystemSpawnedOnDying(systemSpawnedOnDying *ParticleSystem) *ParticleSystem {
+	x.inner.SetSystemSpawnedOnDying(systemSpawnedOnDying.Unwrap())
 	return x
 }
 
 // WithSystemSpawnedOnCollision sets the systemSpawnedOnCollision property and returns the receiver for chaining.
-func (x *ParticleSystem) WithSystemSpawnedOnCollision(systemSpawnedOnCollision *raw.SCNParticleSystem) *ParticleSystem {
-	x.inner.SetSystemSpawnedOnCollision(systemSpawnedOnCollision)
+func (x *ParticleSystem) WithSystemSpawnedOnCollision(systemSpawnedOnCollision *ParticleSystem) *ParticleSystem {
+	x.inner.SetSystemSpawnedOnCollision(systemSpawnedOnCollision.Unwrap())
 	return x
 }
 
 // WithSystemSpawnedOnLiving sets the systemSpawnedOnLiving property and returns the receiver for chaining.
-func (x *ParticleSystem) WithSystemSpawnedOnLiving(systemSpawnedOnLiving *raw.SCNParticleSystem) *ParticleSystem {
-	x.inner.SetSystemSpawnedOnLiving(systemSpawnedOnLiving)
+func (x *ParticleSystem) WithSystemSpawnedOnLiving(systemSpawnedOnLiving *ParticleSystem) *ParticleSystem {
+	x.inner.SetSystemSpawnedOnLiving(systemSpawnedOnLiving.Unwrap())
 	return x
 }
 
@@ -965,13 +965,13 @@ func (x *ParticleSystem) SetParticleDiesOnCollision(particleDiesOnCollision bool
 }
 
 // ColliderNodes returns the collection as a Go slice.
-func (x *ParticleSystem) ColliderNodes() []*raw.SCNNode {
+func (x *ParticleSystem) ColliderNodes() []*Node {
 	arr := x.inner.ColliderNodes()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SCNNode {
-		return raw.SCNNodeFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Node {
+		return &Node{inner: raw.SCNNodeFromID(purego.Retain(_id))}
 	})
 }
 
@@ -1147,9 +1147,9 @@ type ParticleSystemable interface {
 	WithParticleAngularVelocityVariation(particleAngularVelocityVariation float64) *ParticleSystem
 	WithParticleLifeSpan(particleLifeSpan float64) *ParticleSystem
 	WithParticleLifeSpanVariation(particleLifeSpanVariation float64) *ParticleSystem
-	WithSystemSpawnedOnDying(systemSpawnedOnDying *raw.SCNParticleSystem) *ParticleSystem
-	WithSystemSpawnedOnCollision(systemSpawnedOnCollision *raw.SCNParticleSystem) *ParticleSystem
-	WithSystemSpawnedOnLiving(systemSpawnedOnLiving *raw.SCNParticleSystem) *ParticleSystem
+	WithSystemSpawnedOnDying(systemSpawnedOnDying *ParticleSystem) *ParticleSystem
+	WithSystemSpawnedOnCollision(systemSpawnedOnCollision *ParticleSystem) *ParticleSystem
+	WithSystemSpawnedOnLiving(systemSpawnedOnLiving *ParticleSystem) *ParticleSystem
 	WithParticleImage(particleImage objc.ID) *ParticleSystem
 	WithImageSequenceColumnCount(imageSequenceColumnCount uint) *ParticleSystem
 	WithImageSequenceRowCount(imageSequenceRowCount uint) *ParticleSystem
@@ -1290,7 +1290,7 @@ type ParticleSystemable interface {
 	SetAffectedByPhysicsFields(affectedByPhysicsFields bool)
 	ParticleDiesOnCollision() bool
 	SetParticleDiesOnCollision(particleDiesOnCollision bool)
-	ColliderNodes() []*raw.SCNNode
+	ColliderNodes() []*Node
 	SetColliderNodes(colliderNodes *foundation.NSArray[*raw.SCNNode])
 	ParticleMass() float64
 	SetParticleMass(particleMass float64)

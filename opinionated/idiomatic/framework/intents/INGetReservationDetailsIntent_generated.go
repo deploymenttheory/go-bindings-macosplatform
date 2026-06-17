@@ -60,13 +60,13 @@ func (x *GetReservationDetailsIntent) ReservationContainerReference() *Speakable
 }
 
 // ReservationItemReferences returns the collection as a Go slice.
-func (x *GetReservationDetailsIntent) ReservationItemReferences() []*raw.INSpeakableString {
+func (x *GetReservationDetailsIntent) ReservationItemReferences() []*SpeakableString {
 	arr := x.inner.ReservationItemReferences()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.INSpeakableString {
-		return raw.INSpeakableStringFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *SpeakableString {
+		return &SpeakableString{inner: raw.INSpeakableStringFromID(purego.Retain(_id))}
 	})
 }
 
@@ -78,7 +78,7 @@ type GetReservationDetailsIntentable interface {
 	WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *GetReservationDetailsIntent
 	WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *GetReservationDetailsIntent
 	ReservationContainerReference() *SpeakableString
-	ReservationItemReferences() []*raw.INSpeakableString
+	ReservationItemReferences() []*SpeakableString
 }
 
 var _ GetReservationDetailsIntentable = (*GetReservationDetailsIntent)(nil)

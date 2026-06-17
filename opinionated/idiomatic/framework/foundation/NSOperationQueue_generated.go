@@ -190,13 +190,13 @@ func (x *OperationQueue) SetUnderlyingQueue(underlyingQueue *raw.NSObject) {
 }
 
 // Operations returns the collection as a Go slice.
-func (x *OperationQueue) Operations() []*raw.NSOperation {
+func (x *OperationQueue) Operations() []*Operation {
 	arr := x.inner.Operations()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSOperation {
-		return raw.NSOperationFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Operation {
+		return &Operation{inner: raw.NSOperationFromID(purego.Retain(_id))}
 	})
 }
 
@@ -233,7 +233,7 @@ type OperationQueueable interface {
 	SetQualityOfService(qualityOfService raw.NSQualityOfService)
 	UnderlyingQueue() *Object
 	SetUnderlyingQueue(underlyingQueue *raw.NSObject)
-	Operations() []*raw.NSOperation
+	Operations() []*Operation
 	OperationCount() uint
 }
 

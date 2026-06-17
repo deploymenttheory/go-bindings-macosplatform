@@ -90,13 +90,13 @@ func (x *Request) SetUsesCPUOnly(usesCPUOnly bool) {
 }
 
 // Results returns the collection as a Go slice.
-func (x *Request) Results() []*raw.VNObservation {
+func (x *Request) Results() []*Observation {
 	arr := x.inner.Results()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.VNObservation {
-		return raw.VNObservationFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Observation {
+		return &Observation{inner: raw.VNObservationFromID(purego.Retain(_id))}
 	})
 }
 
@@ -143,7 +143,7 @@ type Requestable interface {
 	SetPreferBackgroundProcessing(preferBackgroundProcessing bool)
 	UsesCPUOnly() bool
 	SetUsesCPUOnly(usesCPUOnly bool)
-	Results() []*raw.VNObservation
+	Results() []*Observation
 	CompletionHandler() objc.Block
 	Revision() uint
 	SetRevision(revision uint)

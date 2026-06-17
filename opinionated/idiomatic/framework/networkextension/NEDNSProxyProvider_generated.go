@@ -92,13 +92,13 @@ func (x *NEDNSProxyProvider) HandleNewUDPFlowInitialRemoteEndpoint(flow *raw.NEA
 }
 
 // SystemDNSSettings returns the collection as a Go slice.
-func (x *NEDNSProxyProvider) SystemDNSSettings() []*raw.NEDNSSettings {
+func (x *NEDNSProxyProvider) SystemDNSSettings() []*NEDNSSettings {
 	arr := x.inner.SystemDNSSettings()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NEDNSSettings {
-		return raw.NEDNSSettingsFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *NEDNSSettings {
+		return &NEDNSSettings{inner: raw.NEDNSSettingsFromID(purego.Retain(_id))}
 	})
 }
 
@@ -113,7 +113,7 @@ type NEDNSProxyProviderable interface {
 	HandleNewFlow(flow *raw.NEAppProxyFlow) bool
 	HandleNewUDPFlowInitialRemoteFlowEndpoint(flow *raw.NEAppProxyUDPFlow, remoteEndpoint *foundation.NSObject) bool
 	HandleNewUDPFlowInitialRemoteEndpoint(flow *raw.NEAppProxyUDPFlow, remoteEndpoint unsafe.Pointer) bool
-	SystemDNSSettings() []*raw.NEDNSSettings
+	SystemDNSSettings() []*NEDNSSettings
 }
 
 var _ NEDNSProxyProviderable = (*NEDNSProxyProvider)(nil)

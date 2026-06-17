@@ -41,8 +41,8 @@ func NewAnnotationStamp() *AnnotationStamp {
 }
 
 // WithPage sets the page property and returns the receiver for chaining.
-func (x *AnnotationStamp) WithPage(page *raw.PDFPage) *AnnotationStamp {
-	x.inner.PDFAnnotation.SetPage(page)
+func (x *AnnotationStamp) WithPage(page *Page) *AnnotationStamp {
+	x.inner.PDFAnnotation.SetPage(page.Unwrap())
 	return x
 }
 
@@ -263,8 +263,8 @@ func (x *AnnotationStamp) WithOpen(open bool) *AnnotationStamp {
 }
 
 // WithDestination sets the destination property and returns the receiver for chaining.
-func (x *AnnotationStamp) WithDestination(destination *raw.PDFDestination) *AnnotationStamp {
-	x.inner.PDFAnnotation.SetDestination(destination)
+func (x *AnnotationStamp) WithDestination(destination *Destination) *AnnotationStamp {
+	x.inner.PDFAnnotation.SetDestination(destination.Unwrap())
 	return x
 }
 
@@ -317,7 +317,7 @@ func (x *AnnotationStamp) asAnnotation() *raw.PDFAnnotation { return &x.inner.PD
 // AnnotationStampable is the interface implemented by [AnnotationStamp], for mocking and DI.
 type AnnotationStampable interface {
 	Unwrap() *raw.PDFAnnotationStamp
-	WithPage(page *raw.PDFPage) *AnnotationStamp
+	WithPage(page *Page) *AnnotationStamp
 	WithType(type_ string) *AnnotationStamp
 	WithBounds(bounds corefoundation.CGRect) *AnnotationStamp
 	WithShouldDisplay(shouldDisplay bool) *AnnotationStamp
@@ -349,7 +349,7 @@ type AnnotationStampable interface {
 	WithButtonWidgetState(buttonWidgetState raw.PDFWidgetCellState) *AnnotationStamp
 	WithButtonWidgetStateString(buttonWidgetStateString string) *AnnotationStamp
 	WithOpen(open bool) *AnnotationStamp
-	WithDestination(destination *raw.PDFDestination) *AnnotationStamp
+	WithDestination(destination *Destination) *AnnotationStamp
 	WithURL(uRL string) *AnnotationStamp
 	WithFieldName(fieldName string) *AnnotationStamp
 	WithCaption(caption string) *AnnotationStamp

@@ -40,8 +40,8 @@ func NewCalendar() *Calendar {
 }
 
 // WithSource sets the source property and returns the receiver for chaining.
-func (x *Calendar) WithSource(source *raw.EKSource) *Calendar {
-	x.inner.SetSource(source)
+func (x *Calendar) WithSource(source *Source) *Calendar {
+	x.inner.SetSource(source.Unwrap())
 	return x
 }
 
@@ -149,7 +149,7 @@ func (x *Calendar) asObject() *raw.EKObject { return &x.inner.EKObject }
 // Calendarable is the interface implemented by [Calendar], for mocking and DI.
 type Calendarable interface {
 	Unwrap() *raw.EKCalendar
-	WithSource(source *raw.EKSource) *Calendar
+	WithSource(source *Source) *Calendar
 	WithTitle(title string) *Calendar
 	WithColor(color *appkit.NSColor) *Calendar
 	Source() *Source

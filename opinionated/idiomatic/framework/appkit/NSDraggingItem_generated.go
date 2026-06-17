@@ -81,13 +81,13 @@ func (x *DraggingItem) SetImageComponentsProvider(imageComponentsProvider objc.B
 }
 
 // ImageComponents returns the collection as a Go slice.
-func (x *DraggingItem) ImageComponents() []*raw.NSDraggingImageComponent {
+func (x *DraggingItem) ImageComponents() []*DraggingImageComponent {
 	arr := x.inner.ImageComponents()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSDraggingImageComponent {
-		return raw.NSDraggingImageComponentFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *DraggingImageComponent {
+		return &DraggingImageComponent{inner: raw.NSDraggingImageComponentFromID(purego.Retain(_id))}
 	})
 }
 
@@ -102,7 +102,7 @@ type DraggingItemable interface {
 	SetDraggingFrame(draggingFrame corefoundation.CGRect)
 	ImageComponentsProvider() objc.Block
 	SetImageComponentsProvider(imageComponentsProvider objc.Block)
-	ImageComponents() []*raw.NSDraggingImageComponent
+	ImageComponents() []*DraggingImageComponent
 }
 
 var _ DraggingItemable = (*DraggingItem)(nil)

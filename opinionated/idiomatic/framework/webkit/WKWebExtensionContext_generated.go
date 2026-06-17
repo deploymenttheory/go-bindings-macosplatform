@@ -514,13 +514,13 @@ func (x *WKWebExtensionContext) HasContentModificationRules() bool {
 }
 
 // Commands returns the collection as a Go slice.
-func (x *WKWebExtensionContext) Commands() []*raw.WKWebExtensionCommand {
+func (x *WKWebExtensionContext) Commands() []*WKWebExtensionCommand {
 	arr := x.inner.Commands()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.WKWebExtensionCommand {
-		return raw.WKWebExtensionCommandFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *WKWebExtensionCommand {
+		return &WKWebExtensionCommand{inner: raw.WKWebExtensionCommandFromID(purego.Retain(_id))}
 	})
 }
 
@@ -626,7 +626,7 @@ type WKWebExtensionContextable interface {
 	HasAccessToAllHosts() bool
 	HasInjectedContent() bool
 	HasContentModificationRules() bool
-	Commands() []*raw.WKWebExtensionCommand
+	Commands() []*WKWebExtensionCommand
 	OpenWindows() *foundation.NSArray[raw.WKWebExtensionWindow]
 	FocusedWindow() raw.WKWebExtensionWindow
 	OpenTabs() *foundation.NSSet[raw.WKWebExtensionTab]

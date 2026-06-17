@@ -40,8 +40,8 @@ func NewSplitViewController() *SplitViewController {
 }
 
 // WithSplitView sets the splitView property and returns the receiver for chaining.
-func (x *SplitViewController) WithSplitView(splitView *raw.NSSplitView) *SplitViewController {
-	x.inner.SetSplitView(splitView)
+func (x *SplitViewController) WithSplitView(splitView *SplitView) *SplitViewController {
+	x.inner.SetSplitView(splitView.Unwrap())
 	return x
 }
 
@@ -126,8 +126,8 @@ func (x *SplitViewController) WithNextResponder(nextResponder ResponderProvider)
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *SplitViewController) WithMenu(menu *raw.NSMenu) *SplitViewController {
-	x.inner.NSViewController.NSResponder.SetMenu(menu)
+func (x *SplitViewController) WithMenu(menu *Menu) *SplitViewController {
+	x.inner.NSViewController.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -138,8 +138,8 @@ func (x *SplitViewController) WithUserActivity(userActivity *foundation.NSUserAc
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *SplitViewController) WithTouchBar(touchBar *raw.NSTouchBar) *SplitViewController {
-	x.inner.NSViewController.NSResponder.SetTouchBar(touchBar)
+func (x *SplitViewController) WithTouchBar(touchBar *TouchBar) *SplitViewController {
+	x.inner.NSViewController.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -212,13 +212,13 @@ func (x *SplitViewController) SetSplitView(splitView *raw.NSSplitView) {
 }
 
 // SplitViewItems returns the collection as a Go slice.
-func (x *SplitViewController) SplitViewItems() []*raw.NSSplitViewItem {
+func (x *SplitViewController) SplitViewItems() []*SplitViewItem {
 	arr := x.inner.SplitViewItems()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSSplitViewItem {
-		return raw.NSSplitViewItemFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *SplitViewItem {
+		return &SplitViewItem{inner: raw.NSSplitViewItemFromID(purego.Retain(_id))}
 	})
 }
 
@@ -254,7 +254,7 @@ func (x *SplitViewController) asResponder() *raw.NSResponder { return &x.inner.N
 // SplitViewControllerable is the interface implemented by [SplitViewController], for mocking and DI.
 type SplitViewControllerable interface {
 	Unwrap() *raw.NSSplitViewController
-	WithSplitView(splitView *raw.NSSplitView) *SplitViewController
+	WithSplitView(splitView *SplitView) *SplitViewController
 	WithSplitViewItems(items ...*raw.NSSplitViewItem) *SplitViewController
 	WithMinimumThicknessForInlineSidebars(minimumThicknessForInlineSidebars float64) *SplitViewController
 	WithRepresentedObject(representedObject objc.ID) *SplitViewController
@@ -265,9 +265,9 @@ type SplitViewControllerable interface {
 	WithSourceItemView(sourceItemView ViewProvider) *SplitViewController
 	WithPreferredScreenOrigin(preferredScreenOrigin corefoundation.CGPoint) *SplitViewController
 	WithNextResponder(nextResponder ResponderProvider) *SplitViewController
-	WithMenu(menu *raw.NSMenu) *SplitViewController
+	WithMenu(menu *Menu) *SplitViewController
 	WithUserActivity(userActivity *foundation.NSUserActivity) *SplitViewController
-	WithTouchBar(touchBar *raw.NSTouchBar) *SplitViewController
+	WithTouchBar(touchBar *TouchBar) *SplitViewController
 	AddSplitViewItem(splitViewItem *raw.NSSplitViewItem)
 	InsertSplitViewItemAtIndex(splitViewItem *raw.NSSplitViewItem, index int)
 	RemoveSplitViewItem(splitViewItem *raw.NSSplitViewItem)
@@ -280,7 +280,7 @@ type SplitViewControllerable interface {
 	SplitViewAdditionalEffectiveRectOfDividerAtIndex(splitView *raw.NSSplitView, dividerIndex int) corefoundation.CGRect
 	SplitView() *SplitView
 	SetSplitView(splitView *raw.NSSplitView)
-	SplitViewItems() []*raw.NSSplitViewItem
+	SplitViewItems() []*SplitViewItem
 	SetSplitViewItems(splitViewItems *foundation.NSArray[*raw.NSSplitViewItem])
 	MinimumThicknessForInlineSidebars() float64
 	SetMinimumThicknessForInlineSidebars(minimumThicknessForInlineSidebars float64)

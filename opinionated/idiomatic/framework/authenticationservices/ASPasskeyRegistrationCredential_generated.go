@@ -46,8 +46,8 @@ func NewPasskeyRegistrationCredentialWithRelyingPartyClientDataHashCredentialIDA
 }
 
 // WithExtensionOutput sets the extensionOutput property and returns the receiver for chaining.
-func (x *PasskeyRegistrationCredential) WithExtensionOutput(extensionOutput *raw.ASPasskeyRegistrationCredentialExtensionOutput) *PasskeyRegistrationCredential {
-	x.inner.SetExtensionOutput(extensionOutput)
+func (x *PasskeyRegistrationCredential) WithExtensionOutput(extensionOutput *PasskeyRegistrationCredentialExtensionOutput) *PasskeyRegistrationCredential {
+	x.inner.SetExtensionOutput(extensionOutput.Unwrap())
 	return x
 }
 
@@ -92,7 +92,7 @@ func (x *PasskeyRegistrationCredential) SetExtensionOutput(extensionOutput *raw.
 // PasskeyRegistrationCredentialable is the interface implemented by [PasskeyRegistrationCredential], for mocking and DI.
 type PasskeyRegistrationCredentialable interface {
 	Unwrap() *raw.ASPasskeyRegistrationCredential
-	WithExtensionOutput(extensionOutput *raw.ASPasskeyRegistrationCredentialExtensionOutput) *PasskeyRegistrationCredential
+	WithExtensionOutput(extensionOutput *PasskeyRegistrationCredentialExtensionOutput) *PasskeyRegistrationCredential
 	RelyingParty() string
 	ClientDataHash() *foundation.NSData
 	CredentialID() *foundation.NSData

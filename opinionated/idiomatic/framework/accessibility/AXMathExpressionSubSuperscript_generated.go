@@ -48,24 +48,24 @@ func (x *MathExpressionSubSuperscript) BaseExpression() *MathExpression {
 }
 
 // SubscriptExpressions returns the collection as a Go slice.
-func (x *MathExpressionSubSuperscript) SubscriptExpressions() []*raw.AXMathExpression {
+func (x *MathExpressionSubSuperscript) SubscriptExpressions() []*MathExpression {
 	arr := x.inner.SubscriptExpressions()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AXMathExpression {
-		return raw.AXMathExpressionFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MathExpression {
+		return &MathExpression{inner: raw.AXMathExpressionFromID(purego.Retain(_id))}
 	})
 }
 
 // SuperscriptExpressions returns the collection as a Go slice.
-func (x *MathExpressionSubSuperscript) SuperscriptExpressions() []*raw.AXMathExpression {
+func (x *MathExpressionSubSuperscript) SuperscriptExpressions() []*MathExpression {
 	arr := x.inner.SuperscriptExpressions()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AXMathExpression {
-		return raw.AXMathExpressionFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MathExpression {
+		return &MathExpression{inner: raw.AXMathExpressionFromID(purego.Retain(_id))}
 	})
 }
 
@@ -75,8 +75,8 @@ func (x *MathExpressionSubSuperscript) asMathExpression() *raw.AXMathExpression 
 type MathExpressionSubSuperscriptable interface {
 	Unwrap() *raw.AXMathExpressionSubSuperscript
 	BaseExpression() *MathExpression
-	SubscriptExpressions() []*raw.AXMathExpression
-	SuperscriptExpressions() []*raw.AXMathExpression
+	SubscriptExpressions() []*MathExpression
+	SuperscriptExpressions() []*MathExpression
 }
 
 var _ MathExpressionSubSuperscriptable = (*MathExpressionSubSuperscript)(nil)

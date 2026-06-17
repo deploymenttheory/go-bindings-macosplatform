@@ -65,14 +65,14 @@ func (x *DatePicker) WithDrawsBackground(drawsBackground bool) *DatePicker {
 }
 
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
-func (x *DatePicker) WithBackgroundColor(backgroundColor *raw.NSColor) *DatePicker {
-	x.inner.SetBackgroundColor(backgroundColor)
+func (x *DatePicker) WithBackgroundColor(backgroundColor *Color) *DatePicker {
+	x.inner.SetBackgroundColor(backgroundColor.Unwrap())
 	return x
 }
 
 // WithTextColor sets the textColor property and returns the receiver for chaining.
-func (x *DatePicker) WithTextColor(textColor *raw.NSColor) *DatePicker {
-	x.inner.SetTextColor(textColor)
+func (x *DatePicker) WithTextColor(textColor *Color) *DatePicker {
+	x.inner.SetTextColor(textColor.Unwrap())
 	return x
 }
 
@@ -245,8 +245,8 @@ func (x *DatePicker) WithDoubleValue(doubleValue float64) *DatePicker {
 }
 
 // WithFont sets the font property and returns the receiver for chaining.
-func (x *DatePicker) WithFont(font *raw.NSFont) *DatePicker {
-	x.inner.NSControl.SetFont(font)
+func (x *DatePicker) WithFont(font *Font) *DatePicker {
+	x.inner.NSControl.SetFont(font.Unwrap())
 	return x
 }
 
@@ -467,8 +467,8 @@ func (x *DatePicker) WithContentFilters(items ...*coreimage.CIFilter) *DatePicke
 }
 
 // WithShadow sets the shadow property and returns the receiver for chaining.
-func (x *DatePicker) WithShadow(shadow *raw.NSShadow) *DatePicker {
-	x.inner.NSControl.NSView.SetShadow(shadow)
+func (x *DatePicker) WithShadow(shadow *Shadow) *DatePicker {
+	x.inner.NSControl.NSView.SetShadow(shadow.Unwrap())
 	return x
 }
 
@@ -549,8 +549,8 @@ func (x *DatePicker) WithPrefersCompactControlSizeMetrics(prefersCompactControlS
 }
 
 // WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
-func (x *DatePicker) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *DatePicker {
-	x.inner.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+func (x *DatePicker) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *DatePicker {
+	x.inner.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
 	return x
 }
 
@@ -591,8 +591,8 @@ func (x *DatePicker) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDyn
 }
 
 // WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
-func (x *DatePicker) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *DatePicker {
-	x.inner.NSControl.NSView.SetPressureConfiguration(pressureConfiguration)
+func (x *DatePicker) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *DatePicker {
+	x.inner.NSControl.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
 	return x
 }
 
@@ -603,8 +603,8 @@ func (x *DatePicker) WithNextResponder(nextResponder ResponderProvider) *DatePic
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *DatePicker) WithMenu(menu *raw.NSMenu) *DatePicker {
-	x.inner.NSControl.NSView.NSResponder.SetMenu(menu)
+func (x *DatePicker) WithMenu(menu *Menu) *DatePicker {
+	x.inner.NSControl.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -615,8 +615,8 @@ func (x *DatePicker) WithUserActivity(userActivity *foundation.NSUserActivity) *
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *DatePicker) WithTouchBar(touchBar *raw.NSTouchBar) *DatePicker {
-	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar)
+func (x *DatePicker) WithTouchBar(touchBar *TouchBar) *DatePicker {
+	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -811,8 +811,8 @@ type DatePickerable interface {
 	WithBezeled(bezeled bool) *DatePicker
 	WithBordered(bordered bool) *DatePicker
 	WithDrawsBackground(drawsBackground bool) *DatePicker
-	WithBackgroundColor(backgroundColor *raw.NSColor) *DatePicker
-	WithTextColor(textColor *raw.NSColor) *DatePicker
+	WithBackgroundColor(backgroundColor *Color) *DatePicker
+	WithTextColor(textColor *Color) *DatePicker
 	WithDatePickerMode(datePickerMode raw.NSDatePickerMode) *DatePicker
 	WithDatePickerElements(datePickerElements raw.NSDatePickerElementFlags) *DatePicker
 	WithCalendar(calendar *foundation.NSCalendar) *DatePicker
@@ -841,7 +841,7 @@ type DatePickerable interface {
 	WithIntegerValue(integerValue int) *DatePicker
 	WithFloatValue(floatValue float32) *DatePicker
 	WithDoubleValue(doubleValue float64) *DatePicker
-	WithFont(font *raw.NSFont) *DatePicker
+	WithFont(font *Font) *DatePicker
 	WithUsesSingleLineMode(usesSingleLineMode bool) *DatePicker
 	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *DatePicker
 	WithAlignment(alignment raw.NSTextAlignment) *DatePicker
@@ -873,7 +873,7 @@ type DatePickerable interface {
 	WithBackgroundFilters(items ...*coreimage.CIFilter) *DatePicker
 	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *DatePicker
 	WithContentFilters(items ...*coreimage.CIFilter) *DatePicker
-	WithShadow(shadow *raw.NSShadow) *DatePicker
+	WithShadow(shadow *Shadow) *DatePicker
 	WithClipsToBounds(clipsToBounds bool) *DatePicker
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *DatePicker
 	WithToolTip(toolTip string) *DatePicker
@@ -885,18 +885,18 @@ type DatePickerable interface {
 	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *DatePicker
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *DatePicker
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *DatePicker
-	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *DatePicker
+	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *DatePicker
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *DatePicker
 	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *DatePicker
 	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *DatePicker
 	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *DatePicker
 	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *DatePicker
 	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *DatePicker
-	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *DatePicker
+	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *DatePicker
 	WithNextResponder(nextResponder ResponderProvider) *DatePicker
-	WithMenu(menu *raw.NSMenu) *DatePicker
+	WithMenu(menu *Menu) *DatePicker
 	WithUserActivity(userActivity *foundation.NSUserActivity) *DatePicker
-	WithTouchBar(touchBar *raw.NSTouchBar) *DatePicker
+	WithTouchBar(touchBar *TouchBar) *DatePicker
 	DatePickerStyle() raw.NSDatePickerStyle
 	SetDatePickerStyle(datePickerStyle raw.NSDatePickerStyle)
 	IsBezeled() bool

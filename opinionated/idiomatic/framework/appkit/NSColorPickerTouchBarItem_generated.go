@@ -39,8 +39,8 @@ func NewColorPickerTouchBarItem() *ColorPickerTouchBarItem {
 }
 
 // WithColor sets the color property and returns the receiver for chaining.
-func (x *ColorPickerTouchBarItem) WithColor(color *raw.NSColor) *ColorPickerTouchBarItem {
-	x.inner.SetColor(color)
+func (x *ColorPickerTouchBarItem) WithColor(color *Color) *ColorPickerTouchBarItem {
+	x.inner.SetColor(color.Unwrap())
 	return x
 }
 
@@ -67,8 +67,8 @@ func (x *ColorPickerTouchBarItem) WithAllowedColorSpaces(items ...*raw.NSColorSp
 }
 
 // WithColorList sets the colorList property and returns the receiver for chaining.
-func (x *ColorPickerTouchBarItem) WithColorList(colorList *raw.NSColorList) *ColorPickerTouchBarItem {
-	x.inner.SetColorList(colorList)
+func (x *ColorPickerTouchBarItem) WithColorList(colorList *ColorList) *ColorPickerTouchBarItem {
+	x.inner.SetColorList(colorList.Unwrap())
 	return x
 }
 
@@ -127,13 +127,13 @@ func (x *ColorPickerTouchBarItem) SetShowsAlpha(showsAlpha bool) {
 }
 
 // AllowedColorSpaces returns the collection as a Go slice.
-func (x *ColorPickerTouchBarItem) AllowedColorSpaces() []*raw.NSColorSpace {
+func (x *ColorPickerTouchBarItem) AllowedColorSpaces() []*ColorSpace {
 	arr := x.inner.AllowedColorSpaces()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSColorSpace {
-		return raw.NSColorSpaceFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ColorSpace {
+		return &ColorSpace{inner: raw.NSColorSpaceFromID(purego.Retain(_id))}
 	})
 }
 
@@ -196,10 +196,10 @@ func (x *ColorPickerTouchBarItem) asTouchBarItem() *raw.NSTouchBarItem { return 
 // ColorPickerTouchBarItemable is the interface implemented by [ColorPickerTouchBarItem], for mocking and DI.
 type ColorPickerTouchBarItemable interface {
 	Unwrap() *raw.NSColorPickerTouchBarItem
-	WithColor(color *raw.NSColor) *ColorPickerTouchBarItem
+	WithColor(color *Color) *ColorPickerTouchBarItem
 	WithShowsAlpha(showsAlpha bool) *ColorPickerTouchBarItem
 	WithAllowedColorSpaces(items ...*raw.NSColorSpace) *ColorPickerTouchBarItem
-	WithColorList(colorList *raw.NSColorList) *ColorPickerTouchBarItem
+	WithColorList(colorList *ColorList) *ColorPickerTouchBarItem
 	WithCustomizationLabel(customizationLabel string) *ColorPickerTouchBarItem
 	WithTarget(target objc.ID) *ColorPickerTouchBarItem
 	WithAction(action objc.SEL) *ColorPickerTouchBarItem
@@ -209,7 +209,7 @@ type ColorPickerTouchBarItemable interface {
 	SetColor(color *raw.NSColor)
 	ShowsAlpha() bool
 	SetShowsAlpha(showsAlpha bool)
-	AllowedColorSpaces() []*raw.NSColorSpace
+	AllowedColorSpaces() []*ColorSpace
 	SetAllowedColorSpaces(allowedColorSpaces *foundation.NSArray[*raw.NSColorSpace])
 	ColorList() *ColorList
 	SetColorList(colorList *raw.NSColorList)

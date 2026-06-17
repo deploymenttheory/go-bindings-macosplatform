@@ -12,13 +12,13 @@ import (
 )
 
 // AvailableLanguages returns the collection as a Go slice.
-func AvailableLanguages() []*raw.OSALanguage {
+func AvailableLanguages() []*Language {
 	arr := raw.OSALanguageAvailableLanguages()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.OSALanguage {
-		return raw.OSALanguageFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Language {
+		return &Language{inner: raw.OSALanguageFromID(purego.Retain(_id))}
 	})
 }
 

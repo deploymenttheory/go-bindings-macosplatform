@@ -77,19 +77,19 @@ func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) WithRes
 }
 
 // WithPrf sets the prf property and returns the receiver for chaining.
-func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) WithPrf(prf *raw.ASAuthorizationPublicKeyCredentialPRFRegistrationInput) *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest {
-	x.inner.SetPrf(prf)
+func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) WithPrf(prf *AuthorizationPublicKeyCredentialPRFRegistrationInput) *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest {
+	x.inner.SetPrf(prf.Unwrap())
 	return x
 }
 
 // CredentialParameters returns the collection as a Go slice.
-func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) CredentialParameters() []*raw.ASAuthorizationPublicKeyCredentialParameters {
+func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) CredentialParameters() []*AuthorizationPublicKeyCredentialParameters {
 	arr := x.inner.CredentialParameters()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.ASAuthorizationPublicKeyCredentialParameters {
-		return raw.ASAuthorizationPublicKeyCredentialParametersFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *AuthorizationPublicKeyCredentialParameters {
+		return &AuthorizationPublicKeyCredentialParameters{inner: raw.ASAuthorizationPublicKeyCredentialParametersFromID(purego.Retain(_id))}
 	})
 }
 
@@ -99,13 +99,13 @@ func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) SetCred
 }
 
 // ExcludedCredentials returns the collection as a Go slice.
-func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) ExcludedCredentials() []*raw.ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor {
+func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) ExcludedCredentials() []*AuthorizationSecurityKeyPublicKeyCredentialDescriptor {
 	arr := x.inner.ExcludedCredentials()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor {
-		return raw.ASAuthorizationSecurityKeyPublicKeyCredentialDescriptorFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *AuthorizationSecurityKeyPublicKeyCredentialDescriptor {
+		return &AuthorizationSecurityKeyPublicKeyCredentialDescriptor{inner: raw.ASAuthorizationSecurityKeyPublicKeyCredentialDescriptorFromID(purego.Retain(_id))}
 	})
 }
 
@@ -150,10 +150,10 @@ type AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequestable interfac
 	WithCredentialParameters(items ...*raw.ASAuthorizationPublicKeyCredentialParameters) *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest
 	WithExcludedCredentials(items ...*raw.ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor) *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest
 	WithResidentKeyPreference(residentKeyPreference *foundation.NSString) *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest
-	WithPrf(prf *raw.ASAuthorizationPublicKeyCredentialPRFRegistrationInput) *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest
-	CredentialParameters() []*raw.ASAuthorizationPublicKeyCredentialParameters
+	WithPrf(prf *AuthorizationPublicKeyCredentialPRFRegistrationInput) *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest
+	CredentialParameters() []*AuthorizationPublicKeyCredentialParameters
 	SetCredentialParameters(credentialParameters *foundation.NSArray[*raw.ASAuthorizationPublicKeyCredentialParameters])
-	ExcludedCredentials() []*raw.ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor
+	ExcludedCredentials() []*AuthorizationSecurityKeyPublicKeyCredentialDescriptor
 	SetExcludedCredentials(excludedCredentials *foundation.NSArray[*raw.ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor])
 	ResidentKeyPreference() string
 	SetResidentKeyPreference(residentKeyPreference *foundation.NSString)

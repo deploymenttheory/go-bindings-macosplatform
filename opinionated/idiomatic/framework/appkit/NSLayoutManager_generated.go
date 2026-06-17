@@ -47,8 +47,8 @@ func NewLayoutManagerWithCoder(coder *foundation.NSCoder) *LayoutManager {
 }
 
 // WithTextStorage sets the textStorage property and returns the receiver for chaining.
-func (x *LayoutManager) WithTextStorage(textStorage *raw.NSTextStorage) *LayoutManager {
-	x.inner.SetTextStorage(textStorage)
+func (x *LayoutManager) WithTextStorage(textStorage *TextStorage) *LayoutManager {
+	x.inner.SetTextStorage(textStorage.Unwrap())
 	return x
 }
 
@@ -131,8 +131,8 @@ func (x *LayoutManager) WithHyphenationFactor(hyphenationFactor float32) *Layout
 }
 
 // WithGlyphGenerator sets the glyphGenerator property and returns the receiver for chaining.
-func (x *LayoutManager) WithGlyphGenerator(glyphGenerator *raw.NSGlyphGenerator) *LayoutManager {
-	x.inner.SetGlyphGenerator(glyphGenerator)
+func (x *LayoutManager) WithGlyphGenerator(glyphGenerator *GlyphGenerator) *LayoutManager {
+	x.inner.SetGlyphGenerator(glyphGenerator.Unwrap())
 	return x
 }
 
@@ -589,13 +589,13 @@ func (x *LayoutManager) SetTextStorage(textStorage *raw.NSTextStorage) {
 }
 
 // TextContainers returns the collection as a Go slice.
-func (x *LayoutManager) TextContainers() []*raw.NSTextContainer {
+func (x *LayoutManager) TextContainers() []*TextContainer {
 	arr := x.inner.TextContainers()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSTextContainer {
-		return raw.NSTextContainerFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *TextContainer {
+		return &TextContainer{inner: raw.NSTextContainerFromID(purego.Retain(_id))}
 	})
 }
 
@@ -925,7 +925,7 @@ func (x *LayoutManager) SetGlyphGenerator(glyphGenerator *raw.NSGlyphGenerator) 
 // LayoutManagerable is the interface implemented by [LayoutManager], for mocking and DI.
 type LayoutManagerable interface {
 	Unwrap() *raw.NSLayoutManager
-	WithTextStorage(textStorage *raw.NSTextStorage) *LayoutManager
+	WithTextStorage(textStorage *TextStorage) *LayoutManager
 	WithDelegate(delegate raw.NSLayoutManagerDelegate) *LayoutManager
 	WithShowsInvisibleCharacters(showsInvisibleCharacters bool) *LayoutManager
 	WithShowsControlCharacters(showsControlCharacters bool) *LayoutManager
@@ -939,7 +939,7 @@ type LayoutManagerable interface {
 	WithTypesetterBehavior(typesetterBehavior raw.NSTypesetterBehavior) *LayoutManager
 	WithUsesScreenFonts(usesScreenFonts bool) *LayoutManager
 	WithHyphenationFactor(hyphenationFactor float32) *LayoutManager
-	WithGlyphGenerator(glyphGenerator *raw.NSGlyphGenerator) *LayoutManager
+	WithGlyphGenerator(glyphGenerator *GlyphGenerator) *LayoutManager
 	ReplaceTextStorage(newTextStorage *raw.NSTextStorage)
 	AddTextContainer(container *raw.NSTextContainer)
 	InsertTextContainerAtIndex(container *raw.NSTextContainer, index uint)
@@ -1028,7 +1028,7 @@ type LayoutManagerable interface {
 	DefaultBaselineOffsetForFont(theFont *raw.NSFont) float64
 	TextStorage() *TextStorage
 	SetTextStorage(textStorage *raw.NSTextStorage)
-	TextContainers() []*raw.NSTextContainer
+	TextContainers() []*TextContainer
 	Delegate() raw.NSLayoutManagerDelegate
 	SetDelegate(delegate raw.NSLayoutManagerDelegate)
 	ShowsInvisibleCharacters() bool

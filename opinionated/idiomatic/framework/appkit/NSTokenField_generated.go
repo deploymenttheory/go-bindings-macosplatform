@@ -71,8 +71,8 @@ func (x *TokenField) WithPlaceholderAttributedString(placeholderAttributedString
 }
 
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
-func (x *TokenField) WithBackgroundColor(backgroundColor *raw.NSColor) *TokenField {
-	x.inner.NSTextField.SetBackgroundColor(backgroundColor)
+func (x *TokenField) WithBackgroundColor(backgroundColor *Color) *TokenField {
+	x.inner.NSTextField.SetBackgroundColor(backgroundColor.Unwrap())
 	return x
 }
 
@@ -83,8 +83,8 @@ func (x *TokenField) WithDrawsBackground(drawsBackground bool) *TokenField {
 }
 
 // WithTextColor sets the textColor property and returns the receiver for chaining.
-func (x *TokenField) WithTextColor(textColor *raw.NSColor) *TokenField {
-	x.inner.NSTextField.SetTextColor(textColor)
+func (x *TokenField) WithTextColor(textColor *Color) *TokenField {
+	x.inner.NSTextField.SetTextColor(textColor.Unwrap())
 	return x
 }
 
@@ -325,8 +325,8 @@ func (x *TokenField) WithDoubleValue(doubleValue float64) *TokenField {
 }
 
 // WithFont sets the font property and returns the receiver for chaining.
-func (x *TokenField) WithFont(font *raw.NSFont) *TokenField {
-	x.inner.NSTextField.NSControl.SetFont(font)
+func (x *TokenField) WithFont(font *Font) *TokenField {
+	x.inner.NSTextField.NSControl.SetFont(font.Unwrap())
 	return x
 }
 
@@ -547,8 +547,8 @@ func (x *TokenField) WithContentFilters(items ...*coreimage.CIFilter) *TokenFiel
 }
 
 // WithShadow sets the shadow property and returns the receiver for chaining.
-func (x *TokenField) WithShadow(shadow *raw.NSShadow) *TokenField {
-	x.inner.NSTextField.NSControl.NSView.SetShadow(shadow)
+func (x *TokenField) WithShadow(shadow *Shadow) *TokenField {
+	x.inner.NSTextField.NSControl.NSView.SetShadow(shadow.Unwrap())
 	return x
 }
 
@@ -629,8 +629,8 @@ func (x *TokenField) WithPrefersCompactControlSizeMetrics(prefersCompactControlS
 }
 
 // WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
-func (x *TokenField) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *TokenField {
-	x.inner.NSTextField.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+func (x *TokenField) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *TokenField {
+	x.inner.NSTextField.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
 	return x
 }
 
@@ -671,8 +671,8 @@ func (x *TokenField) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDyn
 }
 
 // WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
-func (x *TokenField) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *TokenField {
-	x.inner.NSTextField.NSControl.NSView.SetPressureConfiguration(pressureConfiguration)
+func (x *TokenField) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *TokenField {
+	x.inner.NSTextField.NSControl.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
 	return x
 }
 
@@ -683,8 +683,8 @@ func (x *TokenField) WithNextResponder(nextResponder ResponderProvider) *TokenFi
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *TokenField) WithMenu(menu *raw.NSMenu) *TokenField {
-	x.inner.NSTextField.NSControl.NSView.NSResponder.SetMenu(menu)
+func (x *TokenField) WithMenu(menu *Menu) *TokenField {
+	x.inner.NSTextField.NSControl.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -695,8 +695,8 @@ func (x *TokenField) WithUserActivity(userActivity *foundation.NSUserActivity) *
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *TokenField) WithTouchBar(touchBar *raw.NSTouchBar) *TokenField {
-	x.inner.NSTextField.NSControl.NSView.NSResponder.SetTouchBar(touchBar)
+func (x *TokenField) WithTouchBar(touchBar *TouchBar) *TokenField {
+	x.inner.NSTextField.NSControl.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -746,9 +746,9 @@ type TokenFieldable interface {
 	WithTokenizingCharacterSet(tokenizingCharacterSet *foundation.NSCharacterSet) *TokenField
 	WithPlaceholderString(placeholderString string) *TokenField
 	WithPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString) *TokenField
-	WithBackgroundColor(backgroundColor *raw.NSColor) *TokenField
+	WithBackgroundColor(backgroundColor *Color) *TokenField
 	WithDrawsBackground(drawsBackground bool) *TokenField
-	WithTextColor(textColor *raw.NSColor) *TokenField
+	WithTextColor(textColor *Color) *TokenField
 	WithBordered(bordered bool) *TokenField
 	WithBezeled(bezeled bool) *TokenField
 	WithEditable(editable bool) *TokenField
@@ -785,7 +785,7 @@ type TokenFieldable interface {
 	WithIntegerValue(integerValue int) *TokenField
 	WithFloatValue(floatValue float32) *TokenField
 	WithDoubleValue(doubleValue float64) *TokenField
-	WithFont(font *raw.NSFont) *TokenField
+	WithFont(font *Font) *TokenField
 	WithUsesSingleLineMode(usesSingleLineMode bool) *TokenField
 	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *TokenField
 	WithAlignment(alignment raw.NSTextAlignment) *TokenField
@@ -817,7 +817,7 @@ type TokenFieldable interface {
 	WithBackgroundFilters(items ...*coreimage.CIFilter) *TokenField
 	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *TokenField
 	WithContentFilters(items ...*coreimage.CIFilter) *TokenField
-	WithShadow(shadow *raw.NSShadow) *TokenField
+	WithShadow(shadow *Shadow) *TokenField
 	WithClipsToBounds(clipsToBounds bool) *TokenField
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *TokenField
 	WithToolTip(toolTip string) *TokenField
@@ -829,18 +829,18 @@ type TokenFieldable interface {
 	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *TokenField
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *TokenField
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *TokenField
-	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *TokenField
+	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *TokenField
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *TokenField
 	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *TokenField
 	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *TokenField
 	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *TokenField
 	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *TokenField
 	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *TokenField
-	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *TokenField
+	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *TokenField
 	WithNextResponder(nextResponder ResponderProvider) *TokenField
-	WithMenu(menu *raw.NSMenu) *TokenField
+	WithMenu(menu *Menu) *TokenField
 	WithUserActivity(userActivity *foundation.NSUserActivity) *TokenField
-	WithTouchBar(touchBar *raw.NSTouchBar) *TokenField
+	WithTouchBar(touchBar *TouchBar) *TokenField
 	TokenStyle() raw.NSTokenStyle
 	SetTokenStyle(tokenStyle raw.NSTokenStyle)
 	CompletionDelay() float64

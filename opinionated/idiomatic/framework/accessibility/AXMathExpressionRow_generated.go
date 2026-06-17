@@ -39,13 +39,13 @@ func NewMathExpressionRowWithExpressions(expressions *foundation.NSArray[*raw.AX
 }
 
 // Expressions returns the collection as a Go slice.
-func (x *MathExpressionRow) Expressions() []*raw.AXMathExpression {
+func (x *MathExpressionRow) Expressions() []*MathExpression {
 	arr := x.inner.Expressions()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AXMathExpression {
-		return raw.AXMathExpressionFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MathExpression {
+		return &MathExpression{inner: raw.AXMathExpressionFromID(purego.Retain(_id))}
 	})
 }
 
@@ -54,7 +54,7 @@ func (x *MathExpressionRow) asMathExpression() *raw.AXMathExpression { return &x
 // MathExpressionRowable is the interface implemented by [MathExpressionRow], for mocking and DI.
 type MathExpressionRowable interface {
 	Unwrap() *raw.AXMathExpressionRow
-	Expressions() []*raw.AXMathExpression
+	Expressions() []*MathExpression
 }
 
 var _ MathExpressionRowable = (*MathExpressionRow)(nil)

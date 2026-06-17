@@ -45,20 +45,20 @@ func (x *Application) WithDelegate(delegate raw.NSApplicationDelegate) *Applicat
 }
 
 // WithMainMenu sets the mainMenu property and returns the receiver for chaining.
-func (x *Application) WithMainMenu(mainMenu *raw.NSMenu) *Application {
-	x.inner.SetMainMenu(mainMenu)
+func (x *Application) WithMainMenu(mainMenu *Menu) *Application {
+	x.inner.SetMainMenu(mainMenu.Unwrap())
 	return x
 }
 
 // WithHelpMenu sets the helpMenu property and returns the receiver for chaining.
-func (x *Application) WithHelpMenu(helpMenu *raw.NSMenu) *Application {
-	x.inner.SetHelpMenu(helpMenu)
+func (x *Application) WithHelpMenu(helpMenu *Menu) *Application {
+	x.inner.SetHelpMenu(helpMenu.Unwrap())
 	return x
 }
 
 // WithApplicationIconImage sets the applicationIconImage property and returns the receiver for chaining.
-func (x *Application) WithApplicationIconImage(applicationIconImage *raw.NSImage) *Application {
-	x.inner.SetApplicationIconImage(applicationIconImage)
+func (x *Application) WithApplicationIconImage(applicationIconImage *Image) *Application {
+	x.inner.SetApplicationIconImage(applicationIconImage.Unwrap())
 	return x
 }
 
@@ -69,20 +69,20 @@ func (x *Application) WithPresentationOptions(presentationOptions raw.NSApplicat
 }
 
 // WithAppearance sets the appearance property and returns the receiver for chaining.
-func (x *Application) WithAppearance(appearance *raw.NSAppearance) *Application {
-	x.inner.SetAppearance(appearance)
+func (x *Application) WithAppearance(appearance *Appearance) *Application {
+	x.inner.SetAppearance(appearance.Unwrap())
 	return x
 }
 
 // WithWindowsMenu sets the windowsMenu property and returns the receiver for chaining.
-func (x *Application) WithWindowsMenu(windowsMenu *raw.NSMenu) *Application {
-	x.inner.SetWindowsMenu(windowsMenu)
+func (x *Application) WithWindowsMenu(windowsMenu *Menu) *Application {
+	x.inner.SetWindowsMenu(windowsMenu.Unwrap())
 	return x
 }
 
 // WithServicesMenu sets the servicesMenu property and returns the receiver for chaining.
-func (x *Application) WithServicesMenu(servicesMenu *raw.NSMenu) *Application {
-	x.inner.SetServicesMenu(servicesMenu)
+func (x *Application) WithServicesMenu(servicesMenu *Menu) *Application {
+	x.inner.SetServicesMenu(servicesMenu.Unwrap())
 	return x
 }
 
@@ -105,8 +105,8 @@ func (x *Application) WithNextResponder(nextResponder ResponderProvider) *Applic
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *Application) WithMenu(menu *raw.NSMenu) *Application {
-	x.inner.NSResponder.SetMenu(menu)
+func (x *Application) WithMenu(menu *Menu) *Application {
+	x.inner.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -117,8 +117,8 @@ func (x *Application) WithUserActivity(userActivity *foundation.NSUserActivity) 
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *Application) WithTouchBar(touchBar *raw.NSTouchBar) *Application {
-	x.inner.NSResponder.SetTouchBar(touchBar)
+func (x *Application) WithTouchBar(touchBar *TouchBar) *Application {
+	x.inner.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -354,13 +354,13 @@ func (x *Application) ModalWindow() *Window {
 }
 
 // Windows returns the collection as a Go slice.
-func (x *Application) Windows() []*raw.NSWindow {
+func (x *Application) Windows() []*Window {
 	arr := x.inner.Windows()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSWindow {
-		return raw.NSWindowFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Window {
+		return &Window{inner: raw.NSWindowFromID(purego.Retain(_id))}
 	})
 }
 
@@ -723,24 +723,24 @@ func (x *Application) RunPageLayout(sender objc.ID) {
 }
 
 // OrderedDocuments returns the collection as a Go slice.
-func (x *Application) OrderedDocuments() []*raw.NSDocument {
+func (x *Application) OrderedDocuments() []*Document {
 	arr := x.inner.OrderedDocuments()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSDocument {
-		return raw.NSDocumentFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Document {
+		return &Document{inner: raw.NSDocumentFromID(purego.Retain(_id))}
 	})
 }
 
 // OrderedWindows returns the collection as a Go slice.
-func (x *Application) OrderedWindows() []*raw.NSWindow {
+func (x *Application) OrderedWindows() []*Window {
 	arr := x.inner.OrderedWindows()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSWindow {
-		return raw.NSWindowFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Window {
+		return &Window{inner: raw.NSWindowFromID(purego.Retain(_id))}
 	})
 }
 
@@ -780,19 +780,19 @@ func (x *Application) asResponder() *raw.NSResponder { return &x.inner.NSRespond
 type Applicationable interface {
 	Unwrap() *raw.NSApplication
 	WithDelegate(delegate raw.NSApplicationDelegate) *Application
-	WithMainMenu(mainMenu *raw.NSMenu) *Application
-	WithHelpMenu(helpMenu *raw.NSMenu) *Application
-	WithApplicationIconImage(applicationIconImage *raw.NSImage) *Application
+	WithMainMenu(mainMenu *Menu) *Application
+	WithHelpMenu(helpMenu *Menu) *Application
+	WithApplicationIconImage(applicationIconImage *Image) *Application
 	WithPresentationOptions(presentationOptions raw.NSApplicationPresentationOptions) *Application
-	WithAppearance(appearance *raw.NSAppearance) *Application
-	WithWindowsMenu(windowsMenu *raw.NSMenu) *Application
-	WithServicesMenu(servicesMenu *raw.NSMenu) *Application
+	WithAppearance(appearance *Appearance) *Application
+	WithWindowsMenu(windowsMenu *Menu) *Application
+	WithServicesMenu(servicesMenu *Menu) *Application
 	WithServicesProvider(servicesProvider objc.ID) *Application
 	WithAutomaticCustomizeTouchBarMenuItemEnabled(automaticCustomizeTouchBarMenuItemEnabled bool) *Application
 	WithNextResponder(nextResponder ResponderProvider) *Application
-	WithMenu(menu *raw.NSMenu) *Application
+	WithMenu(menu *Menu) *Application
 	WithUserActivity(userActivity *foundation.NSUserActivity) *Application
-	WithTouchBar(touchBar *raw.NSTouchBar) *Application
+	WithTouchBar(touchBar *TouchBar) *Application
 	Hide(sender objc.ID)
 	Unhide(sender objc.ID)
 	UnhideWithoutActivation()
@@ -836,7 +836,7 @@ type Applicationable interface {
 	IsRunning() bool
 	ApplicationShouldSuppressHighDynamicRangeContent() bool
 	ModalWindow() *Window
-	Windows() []*raw.NSWindow
+	Windows() []*Window
 	MainMenu() *Menu
 	SetMainMenu(mainMenu *raw.NSMenu)
 	HelpMenu() *Menu
@@ -899,8 +899,8 @@ type Applicationable interface {
 	SetAutomaticCustomizeTouchBarMenuItemEnabled(automaticCustomizeTouchBarMenuItemEnabled bool)
 	OrderFrontColorPanel(sender objc.ID)
 	RunPageLayout(sender objc.ID)
-	OrderedDocuments() []*raw.NSDocument
-	OrderedWindows() []*raw.NSWindow
+	OrderedDocuments() []*Document
+	OrderedWindows() []*Window
 	RegisterUserInterfaceItemSearchHandler(handler raw.NSUserInterfaceItemSearching)
 	UnregisterUserInterfaceItemSearchHandler(handler raw.NSUserInterfaceItemSearching)
 	SearchStringInUserInterfaceItemStringSearchRangeFoundRange(searchString string, stringToSearch string, searchRange foundation.NSRange, foundRange *foundation.NSRange) bool

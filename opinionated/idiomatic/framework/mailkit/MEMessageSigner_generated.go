@@ -39,13 +39,13 @@ func NewMessageSignerWithEmailAddressesSignatureLabelContext(emailAddresses *fou
 }
 
 // EmailAddresses returns the collection as a Go slice.
-func (x *MessageSigner) EmailAddresses() []*raw.MEEmailAddress {
+func (x *MessageSigner) EmailAddresses() []*EmailAddress {
 	arr := x.inner.EmailAddresses()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MEEmailAddress {
-		return raw.MEEmailAddressFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *EmailAddress {
+		return &EmailAddress{inner: raw.MEEmailAddressFromID(purego.Retain(_id))}
 	})
 }
 
@@ -66,7 +66,7 @@ func (x *MessageSigner) Context() *foundation.NSData {
 // MessageSignerable is the interface implemented by [MessageSigner], for mocking and DI.
 type MessageSignerable interface {
 	Unwrap() *raw.MEMessageSigner
-	EmailAddresses() []*raw.MEEmailAddress
+	EmailAddresses() []*EmailAddress
 	Label() string
 	Context() *foundation.NSData
 }

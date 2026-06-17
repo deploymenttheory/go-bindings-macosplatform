@@ -63,8 +63,8 @@ func (x *StandardMapConfiguration) WithEmphasisStyle(emphasisStyle raw.MKStandar
 }
 
 // WithPointOfInterestFilter sets the pointOfInterestFilter property and returns the receiver for chaining.
-func (x *StandardMapConfiguration) WithPointOfInterestFilter(pointOfInterestFilter *raw.MKPointOfInterestFilter) *StandardMapConfiguration {
-	x.inner.SetPointOfInterestFilter(pointOfInterestFilter)
+func (x *StandardMapConfiguration) WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *StandardMapConfiguration {
+	x.inner.SetPointOfInterestFilter(pointOfInterestFilter.Unwrap())
 	return x
 }
 
@@ -120,7 +120,7 @@ func (x *StandardMapConfiguration) asMapConfiguration() *raw.MKMapConfiguration 
 type StandardMapConfigurationable interface {
 	Unwrap() *raw.MKStandardMapConfiguration
 	WithEmphasisStyle(emphasisStyle raw.MKStandardMapEmphasisStyle) *StandardMapConfiguration
-	WithPointOfInterestFilter(pointOfInterestFilter *raw.MKPointOfInterestFilter) *StandardMapConfiguration
+	WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *StandardMapConfiguration
 	WithShowsTraffic(showsTraffic bool) *StandardMapConfiguration
 	WithElevationStyle(elevationStyle raw.MKMapElevationStyle) *StandardMapConfiguration
 	EmphasisStyle() raw.MKStandardMapEmphasisStyle

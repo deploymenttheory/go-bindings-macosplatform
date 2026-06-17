@@ -48,24 +48,24 @@ func (x *MathExpressionMultiscript) BaseExpression() *MathExpression {
 }
 
 // PrescriptExpressions returns the collection as a Go slice.
-func (x *MathExpressionMultiscript) PrescriptExpressions() []*raw.AXMathExpressionSubSuperscript {
+func (x *MathExpressionMultiscript) PrescriptExpressions() []*MathExpressionSubSuperscript {
 	arr := x.inner.PrescriptExpressions()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AXMathExpressionSubSuperscript {
-		return raw.AXMathExpressionSubSuperscriptFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MathExpressionSubSuperscript {
+		return &MathExpressionSubSuperscript{inner: raw.AXMathExpressionSubSuperscriptFromID(purego.Retain(_id))}
 	})
 }
 
 // PostscriptExpressions returns the collection as a Go slice.
-func (x *MathExpressionMultiscript) PostscriptExpressions() []*raw.AXMathExpressionSubSuperscript {
+func (x *MathExpressionMultiscript) PostscriptExpressions() []*MathExpressionSubSuperscript {
 	arr := x.inner.PostscriptExpressions()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AXMathExpressionSubSuperscript {
-		return raw.AXMathExpressionSubSuperscriptFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MathExpressionSubSuperscript {
+		return &MathExpressionSubSuperscript{inner: raw.AXMathExpressionSubSuperscriptFromID(purego.Retain(_id))}
 	})
 }
 
@@ -75,8 +75,8 @@ func (x *MathExpressionMultiscript) asMathExpression() *raw.AXMathExpression { r
 type MathExpressionMultiscriptable interface {
 	Unwrap() *raw.AXMathExpressionMultiscript
 	BaseExpression() *MathExpression
-	PrescriptExpressions() []*raw.AXMathExpressionSubSuperscript
-	PostscriptExpressions() []*raw.AXMathExpressionSubSuperscript
+	PrescriptExpressions() []*MathExpressionSubSuperscript
+	PostscriptExpressions() []*MathExpressionSubSuperscript
 }
 
 var _ MathExpressionMultiscriptable = (*MathExpressionMultiscript)(nil)

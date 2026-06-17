@@ -53,8 +53,8 @@ func (x *TextContentManager) WithDelegate(delegate raw.NSTextContentManagerDeleg
 }
 
 // WithPrimaryTextLayoutManager sets the primaryTextLayoutManager property and returns the receiver for chaining.
-func (x *TextContentManager) WithPrimaryTextLayoutManager(primaryTextLayoutManager *raw.NSTextLayoutManager) *TextContentManager {
-	x.inner.SetPrimaryTextLayoutManager(primaryTextLayoutManager)
+func (x *TextContentManager) WithPrimaryTextLayoutManager(primaryTextLayoutManager *TextLayoutManager) *TextContentManager {
+	x.inner.SetPrimaryTextLayoutManager(primaryTextLayoutManager.Unwrap())
 	return x
 }
 
@@ -133,13 +133,13 @@ func (x *TextContentManager) SetDelegate(delegate raw.NSTextContentManagerDelega
 }
 
 // TextLayoutManagers returns the collection as a Go slice.
-func (x *TextContentManager) TextLayoutManagers() []*raw.NSTextLayoutManager {
+func (x *TextContentManager) TextLayoutManagers() []*TextLayoutManager {
 	arr := x.inner.TextLayoutManagers()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSTextLayoutManager {
-		return raw.NSTextLayoutManagerFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *TextLayoutManager {
+		return &TextLayoutManager{inner: raw.NSTextLayoutManagerFromID(purego.Retain(_id))}
 	})
 }
 
@@ -188,7 +188,7 @@ func (x *TextContentManager) asTextContentManager() *raw.NSTextContentManager { 
 type TextContentManagerable interface {
 	Unwrap() *raw.NSTextContentManager
 	WithDelegate(delegate raw.NSTextContentManagerDelegate) *TextContentManager
-	WithPrimaryTextLayoutManager(primaryTextLayoutManager *raw.NSTextLayoutManager) *TextContentManager
+	WithPrimaryTextLayoutManager(primaryTextLayoutManager *TextLayoutManager) *TextContentManager
 	WithAutomaticallySynchronizesTextLayoutManagers(automaticallySynchronizesTextLayoutManagers bool) *TextContentManager
 	WithAutomaticallySynchronizesToBackingStore(automaticallySynchronizesToBackingStore bool) *TextContentManager
 	AddTextLayoutManager(textLayoutManager *raw.NSTextLayoutManager)
@@ -199,7 +199,7 @@ type TextContentManagerable interface {
 	RecordEditActionInRangeNewTextRange(originalTextRange *raw.NSTextRange, newTextRange *raw.NSTextRange)
 	Delegate() raw.NSTextContentManagerDelegate
 	SetDelegate(delegate raw.NSTextContentManagerDelegate)
-	TextLayoutManagers() []*raw.NSTextLayoutManager
+	TextLayoutManagers() []*TextLayoutManager
 	PrimaryTextLayoutManager() *TextLayoutManager
 	SetPrimaryTextLayoutManager(primaryTextLayoutManager *raw.NSTextLayoutManager)
 	HasEditingTransaction() bool

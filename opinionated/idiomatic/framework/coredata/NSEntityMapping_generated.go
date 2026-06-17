@@ -197,13 +197,13 @@ func (x *EntityMapping) SetDestinationEntityVersionHash(destinationEntityVersion
 }
 
 // AttributeMappings returns the collection as a Go slice.
-func (x *EntityMapping) AttributeMappings() []*raw.NSPropertyMapping {
+func (x *EntityMapping) AttributeMappings() []*PropertyMapping {
 	arr := x.inner.AttributeMappings()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSPropertyMapping {
-		return raw.NSPropertyMappingFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PropertyMapping {
+		return &PropertyMapping{inner: raw.NSPropertyMappingFromID(purego.Retain(_id))}
 	})
 }
 
@@ -213,13 +213,13 @@ func (x *EntityMapping) SetAttributeMappings(attributeMappings *foundation.NSArr
 }
 
 // RelationshipMappings returns the collection as a Go slice.
-func (x *EntityMapping) RelationshipMappings() []*raw.NSPropertyMapping {
+func (x *EntityMapping) RelationshipMappings() []*PropertyMapping {
 	arr := x.inner.RelationshipMappings()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSPropertyMapping {
-		return raw.NSPropertyMappingFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PropertyMapping {
+		return &PropertyMapping{inner: raw.NSPropertyMappingFromID(purego.Retain(_id))}
 	})
 }
 
@@ -288,9 +288,9 @@ type EntityMappingable interface {
 	SetDestinationEntityName(destinationEntityName string)
 	DestinationEntityVersionHash() *foundation.NSData
 	SetDestinationEntityVersionHash(destinationEntityVersionHash *foundation.NSData)
-	AttributeMappings() []*raw.NSPropertyMapping
+	AttributeMappings() []*PropertyMapping
 	SetAttributeMappings(attributeMappings *foundation.NSArray[*raw.NSPropertyMapping])
-	RelationshipMappings() []*raw.NSPropertyMapping
+	RelationshipMappings() []*PropertyMapping
 	SetRelationshipMappings(relationshipMappings *foundation.NSArray[*raw.NSPropertyMapping])
 	SourceExpression() *foundation.NSExpression
 	SetSourceExpression(sourceExpression *foundation.NSExpression)

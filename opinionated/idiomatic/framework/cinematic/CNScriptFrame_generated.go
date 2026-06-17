@@ -57,13 +57,13 @@ func (x *ScriptFrame) FocusDetection() *Detection {
 }
 
 // AllDetections returns the collection as a Go slice.
-func (x *ScriptFrame) AllDetections() []*raw.CNDetection {
+func (x *ScriptFrame) AllDetections() []*Detection {
 	arr := x.inner.AllDetections()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CNDetection {
-		return raw.CNDetectionFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Detection {
+		return &Detection{inner: raw.CNDetectionFromID(purego.Retain(_id))}
 	})
 }
 
@@ -91,7 +91,7 @@ type ScriptFrameable interface {
 	Time() coremedia.CMTime
 	FocusDisparity() float32
 	FocusDetection() *Detection
-	AllDetections() []*raw.CNDetection
+	AllDetections() []*Detection
 	DetectionForID(detectionID int64) *Detection
 	BestDetectionForGroupID(detectionGroupID int64) *Detection
 }

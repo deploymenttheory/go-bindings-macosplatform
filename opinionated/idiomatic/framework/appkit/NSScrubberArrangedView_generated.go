@@ -233,8 +233,8 @@ func (x *ScrubberArrangedView) WithContentFilters(items ...*coreimage.CIFilter) 
 }
 
 // WithShadow sets the shadow property and returns the receiver for chaining.
-func (x *ScrubberArrangedView) WithShadow(shadow *raw.NSShadow) *ScrubberArrangedView {
-	x.inner.NSView.SetShadow(shadow)
+func (x *ScrubberArrangedView) WithShadow(shadow *Shadow) *ScrubberArrangedView {
+	x.inner.NSView.SetShadow(shadow.Unwrap())
 	return x
 }
 
@@ -315,8 +315,8 @@ func (x *ScrubberArrangedView) WithPrefersCompactControlSizeMetrics(prefersCompa
 }
 
 // WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
-func (x *ScrubberArrangedView) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *ScrubberArrangedView {
-	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+func (x *ScrubberArrangedView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ScrubberArrangedView {
+	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
 	return x
 }
 
@@ -357,8 +357,8 @@ func (x *ScrubberArrangedView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsE
 }
 
 // WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
-func (x *ScrubberArrangedView) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *ScrubberArrangedView {
-	x.inner.NSView.SetPressureConfiguration(pressureConfiguration)
+func (x *ScrubberArrangedView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ScrubberArrangedView {
+	x.inner.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
 	return x
 }
 
@@ -369,8 +369,8 @@ func (x *ScrubberArrangedView) WithNextResponder(nextResponder ResponderProvider
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *ScrubberArrangedView) WithMenu(menu *raw.NSMenu) *ScrubberArrangedView {
-	x.inner.NSView.NSResponder.SetMenu(menu)
+func (x *ScrubberArrangedView) WithMenu(menu *Menu) *ScrubberArrangedView {
+	x.inner.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -381,8 +381,8 @@ func (x *ScrubberArrangedView) WithUserActivity(userActivity *foundation.NSUserA
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *ScrubberArrangedView) WithTouchBar(touchBar *raw.NSTouchBar) *ScrubberArrangedView {
-	x.inner.NSView.NSResponder.SetTouchBar(touchBar)
+func (x *ScrubberArrangedView) WithTouchBar(touchBar *TouchBar) *ScrubberArrangedView {
+	x.inner.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -447,7 +447,7 @@ type ScrubberArrangedViewable interface {
 	WithBackgroundFilters(items ...*coreimage.CIFilter) *ScrubberArrangedView
 	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *ScrubberArrangedView
 	WithContentFilters(items ...*coreimage.CIFilter) *ScrubberArrangedView
-	WithShadow(shadow *raw.NSShadow) *ScrubberArrangedView
+	WithShadow(shadow *Shadow) *ScrubberArrangedView
 	WithClipsToBounds(clipsToBounds bool) *ScrubberArrangedView
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ScrubberArrangedView
 	WithToolTip(toolTip string) *ScrubberArrangedView
@@ -459,18 +459,18 @@ type ScrubberArrangedViewable interface {
 	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *ScrubberArrangedView
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ScrubberArrangedView
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ScrubberArrangedView
-	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *ScrubberArrangedView
+	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ScrubberArrangedView
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *ScrubberArrangedView
 	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *ScrubberArrangedView
 	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *ScrubberArrangedView
 	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *ScrubberArrangedView
 	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *ScrubberArrangedView
 	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *ScrubberArrangedView
-	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *ScrubberArrangedView
+	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ScrubberArrangedView
 	WithNextResponder(nextResponder ResponderProvider) *ScrubberArrangedView
-	WithMenu(menu *raw.NSMenu) *ScrubberArrangedView
+	WithMenu(menu *Menu) *ScrubberArrangedView
 	WithUserActivity(userActivity *foundation.NSUserActivity) *ScrubberArrangedView
-	WithTouchBar(touchBar *raw.NSTouchBar) *ScrubberArrangedView
+	WithTouchBar(touchBar *TouchBar) *ScrubberArrangedView
 	ApplyLayoutAttributes(layoutAttributes *raw.NSScrubberLayoutAttributes)
 	IsSelected() bool
 	SetSelected(selected bool)

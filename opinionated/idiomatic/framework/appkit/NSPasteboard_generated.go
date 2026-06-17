@@ -165,13 +165,13 @@ func (x *Pasteboard) AccessBehavior() raw.NSPasteboardAccessBehavior {
 }
 
 // PasteboardItems returns the collection as a Go slice.
-func (x *Pasteboard) PasteboardItems() []*raw.NSPasteboardItem {
+func (x *Pasteboard) PasteboardItems() []*PasteboardItem {
 	arr := x.inner.PasteboardItems()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSPasteboardItem {
-		return raw.NSPasteboardItemFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PasteboardItem {
+		return &PasteboardItem{inner: raw.NSPasteboardItemFromID(purego.Retain(_id))}
 	})
 }
 
@@ -236,7 +236,7 @@ type Pasteboardable interface {
 	Name() string
 	ChangeCount() int
 	AccessBehavior() raw.NSPasteboardAccessBehavior
-	PasteboardItems() []*raw.NSPasteboardItem
+	PasteboardItems() []*PasteboardItem
 	Types() []*foundation.NSString
 	WriteFileContents(filename string) bool
 	ReadFileContentsTypeToFile(type_ *foundation.NSString, filename string) string

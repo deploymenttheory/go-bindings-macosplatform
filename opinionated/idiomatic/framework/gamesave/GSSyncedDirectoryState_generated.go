@@ -49,13 +49,13 @@ func (x *SyncedDirectoryState) Url() *foundation.NSURL {
 }
 
 // ConflictedVersions returns the collection as a Go slice.
-func (x *SyncedDirectoryState) ConflictedVersions() []*raw.GSSyncedDirectoryVersion {
+func (x *SyncedDirectoryState) ConflictedVersions() []*SyncedDirectoryVersion {
 	arr := x.inner.ConflictedVersions()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.GSSyncedDirectoryVersion {
-		return raw.GSSyncedDirectoryVersionFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *SyncedDirectoryVersion {
+		return &SyncedDirectoryVersion{inner: raw.GSSyncedDirectoryVersionFromID(purego.Retain(_id))}
 	})
 }
 
@@ -69,7 +69,7 @@ type SyncedDirectoryStateable interface {
 	Unwrap() *raw.GSSyncedDirectoryState
 	State() raw.GSSyncState
 	Url() *foundation.NSURL
-	ConflictedVersions() []*raw.GSSyncedDirectoryVersion
+	ConflictedVersions() []*SyncedDirectoryVersion
 	Error() unsafe.Pointer
 }
 

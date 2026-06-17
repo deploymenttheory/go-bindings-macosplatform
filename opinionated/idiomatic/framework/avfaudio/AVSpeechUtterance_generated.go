@@ -53,8 +53,8 @@ func NewSpeechUtteranceWithSSMLRepresentation(string_ string) *SpeechUtterance {
 }
 
 // WithVoice sets the voice property and returns the receiver for chaining.
-func (x *SpeechUtterance) WithVoice(voice *raw.AVSpeechSynthesisVoice) *SpeechUtterance {
-	x.inner.SetVoice(voice)
+func (x *SpeechUtterance) WithVoice(voice *SpeechSynthesisVoice) *SpeechUtterance {
+	x.inner.SetVoice(voice.Unwrap())
 	return x
 }
 
@@ -185,7 +185,7 @@ func (x *SpeechUtterance) SetPostUtteranceDelay(postUtteranceDelay float64) {
 // SpeechUtteranceable is the interface implemented by [SpeechUtterance], for mocking and DI.
 type SpeechUtteranceable interface {
 	Unwrap() *raw.AVSpeechUtterance
-	WithVoice(voice *raw.AVSpeechSynthesisVoice) *SpeechUtterance
+	WithVoice(voice *SpeechSynthesisVoice) *SpeechUtterance
 	WithRate(rate float32) *SpeechUtterance
 	WithPitchMultiplier(pitchMultiplier float32) *SpeechUtterance
 	WithVolume(volume float32) *SpeechUtterance

@@ -45,14 +45,14 @@ func (x *RecurringPaymentRequest) WithPaymentDescription(paymentDescription stri
 }
 
 // WithRegularBilling sets the regularBilling property and returns the receiver for chaining.
-func (x *RecurringPaymentRequest) WithRegularBilling(regularBilling *raw.PKRecurringPaymentSummaryItem) *RecurringPaymentRequest {
-	x.inner.SetRegularBilling(regularBilling)
+func (x *RecurringPaymentRequest) WithRegularBilling(regularBilling *RecurringPaymentSummaryItem) *RecurringPaymentRequest {
+	x.inner.SetRegularBilling(regularBilling.Unwrap())
 	return x
 }
 
 // WithTrialBilling sets the trialBilling property and returns the receiver for chaining.
-func (x *RecurringPaymentRequest) WithTrialBilling(trialBilling *raw.PKRecurringPaymentSummaryItem) *RecurringPaymentRequest {
-	x.inner.SetTrialBilling(trialBilling)
+func (x *RecurringPaymentRequest) WithTrialBilling(trialBilling *RecurringPaymentSummaryItem) *RecurringPaymentRequest {
+	x.inner.SetTrialBilling(trialBilling.Unwrap())
 	return x
 }
 
@@ -154,8 +154,8 @@ func (x *RecurringPaymentRequest) SetTokenNotificationURL(tokenNotificationURL s
 type RecurringPaymentRequestable interface {
 	Unwrap() *raw.PKRecurringPaymentRequest
 	WithPaymentDescription(paymentDescription string) *RecurringPaymentRequest
-	WithRegularBilling(regularBilling *raw.PKRecurringPaymentSummaryItem) *RecurringPaymentRequest
-	WithTrialBilling(trialBilling *raw.PKRecurringPaymentSummaryItem) *RecurringPaymentRequest
+	WithRegularBilling(regularBilling *RecurringPaymentSummaryItem) *RecurringPaymentRequest
+	WithTrialBilling(trialBilling *RecurringPaymentSummaryItem) *RecurringPaymentRequest
 	WithBillingAgreement(billingAgreement string) *RecurringPaymentRequest
 	WithManagementURL(managementURL string) *RecurringPaymentRequest
 	WithTokenNotificationURL(tokenNotificationURL string) *RecurringPaymentRequest

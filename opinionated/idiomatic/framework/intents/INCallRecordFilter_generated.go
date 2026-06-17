@@ -39,13 +39,13 @@ func NewCallRecordFilterWithParticipantsCallTypesCallCapability(participants *fo
 }
 
 // Participants returns the collection as a Go slice.
-func (x *CallRecordFilter) Participants() []*raw.INPerson {
+func (x *CallRecordFilter) Participants() []*Person {
 	arr := x.inner.Participants()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.INPerson {
-		return raw.INPersonFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Person {
+		return &Person{inner: raw.INPersonFromID(purego.Retain(_id))}
 	})
 }
 
@@ -62,7 +62,7 @@ func (x *CallRecordFilter) CallCapability() raw.INCallCapability {
 // CallRecordFilterable is the interface implemented by [CallRecordFilter], for mocking and DI.
 type CallRecordFilterable interface {
 	Unwrap() *raw.INCallRecordFilter
-	Participants() []*raw.INPerson
+	Participants() []*Person
 	CallTypes() raw.INCallRecordTypeOptions
 	CallCapability() raw.INCallCapability
 }

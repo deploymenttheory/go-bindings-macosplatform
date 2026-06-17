@@ -222,13 +222,13 @@ func (x *AssetWriter) Error() unsafe.Pointer {
 }
 
 // Metadata returns the collection as a Go slice.
-func (x *AssetWriter) Metadata() []*raw.AVMetadataItem {
+func (x *AssetWriter) Metadata() []*MetadataItem {
 	arr := x.inner.Metadata()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVMetadataItem {
-		return raw.AVMetadataItemFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MetadataItem {
+		return &MetadataItem{inner: raw.AVMetadataItemFromID(purego.Retain(_id))}
 	})
 }
 
@@ -258,13 +258,13 @@ func (x *AssetWriter) SetDirectoryForTemporaryFiles(directoryForTemporaryFiles s
 }
 
 // Inputs returns the collection as a Go slice.
-func (x *AssetWriter) Inputs() []*raw.AVAssetWriterInput {
+func (x *AssetWriter) Inputs() []*AssetWriterInput {
 	arr := x.inner.Inputs()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVAssetWriterInput {
-		return raw.AVAssetWriterInputFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *AssetWriterInput {
+		return &AssetWriterInput{inner: raw.AVAssetWriterInputFromID(purego.Retain(_id))}
 	})
 }
 
@@ -329,13 +329,13 @@ func (x *AssetWriter) AddInputGroup(inputGroup *raw.AVAssetWriterInputGroup) {
 }
 
 // InputGroups returns the collection as a Go slice.
-func (x *AssetWriter) InputGroups() []*raw.AVAssetWriterInputGroup {
+func (x *AssetWriter) InputGroups() []*AssetWriterInputGroup {
 	arr := x.inner.InputGroups()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVAssetWriterInputGroup {
-		return raw.AVAssetWriterInputGroupFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *AssetWriterInputGroup {
+		return &AssetWriterInputGroup{inner: raw.AVAssetWriterInputGroupFromID(purego.Retain(_id))}
 	})
 }
 
@@ -412,13 +412,13 @@ type AssetWriterable interface {
 	AvailableMediaTypes() []*foundation.NSString
 	Status() raw.AVAssetWriterStatus
 	Error() unsafe.Pointer
-	Metadata() []*raw.AVMetadataItem
+	Metadata() []*MetadataItem
 	SetMetadata(metadata *foundation.NSArray[*raw.AVMetadataItem])
 	ShouldOptimizeForNetworkUse() bool
 	SetShouldOptimizeForNetworkUse(shouldOptimizeForNetworkUse bool)
 	DirectoryForTemporaryFiles() *foundation.NSURL
 	SetDirectoryForTemporaryFiles(directoryForTemporaryFiles string)
-	Inputs() []*raw.AVAssetWriterInput
+	Inputs() []*AssetWriterInput
 	MovieFragmentInterval() coremedia.CMTime
 	SetMovieFragmentInterval(movieFragmentInterval coremedia.CMTime)
 	SetInitialMovieFragmentInterval(initialMovieFragmentInterval coremedia.CMTime)
@@ -431,7 +431,7 @@ type AssetWriterable interface {
 	SetMovieTimeScale(movieTimeScale int32)
 	CanAddInputGroup(inputGroup *raw.AVAssetWriterInputGroup) bool
 	AddInputGroup(inputGroup *raw.AVAssetWriterInputGroup)
-	InputGroups() []*raw.AVAssetWriterInputGroup
+	InputGroups() []*AssetWriterInputGroup
 	FlushSegment()
 	PreferredOutputSegmentInterval() coremedia.CMTime
 	SetPreferredOutputSegmentInterval(preferredOutputSegmentInterval coremedia.CMTime)

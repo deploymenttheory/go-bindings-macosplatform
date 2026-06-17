@@ -82,13 +82,13 @@ func (x *WorkoutActivity) Duration() float64 {
 }
 
 // WorkoutEvents returns the collection as a Go slice.
-func (x *WorkoutActivity) WorkoutEvents() []*raw.HKWorkoutEvent {
+func (x *WorkoutActivity) WorkoutEvents() []*WorkoutEvent {
 	arr := x.inner.WorkoutEvents()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.HKWorkoutEvent {
-		return raw.HKWorkoutEventFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *WorkoutEvent {
+		return &WorkoutEvent{inner: raw.HKWorkoutEventFromID(purego.Retain(_id))}
 	})
 }
 
@@ -107,7 +107,7 @@ type WorkoutActivityable interface {
 	EndDate() *foundation.NSDate
 	Metadata() *foundation.NSDictionary[*foundation.NSString, objc.ID]
 	Duration() float64
-	WorkoutEvents() []*raw.HKWorkoutEvent
+	WorkoutEvents() []*WorkoutEvent
 	AllStatistics() *foundation.NSDictionary[*raw.HKQuantityType, *raw.HKStatistics]
 }
 

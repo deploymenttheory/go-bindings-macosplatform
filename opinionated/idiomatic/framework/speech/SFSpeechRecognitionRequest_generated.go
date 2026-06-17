@@ -85,8 +85,8 @@ func (x *SpeechRecognitionRequest) WithAddsPunctuation(addsPunctuation bool) *Sp
 }
 
 // WithCustomizedLanguageModel sets the customizedLanguageModel property and returns the receiver for chaining.
-func (x *SpeechRecognitionRequest) WithCustomizedLanguageModel(customizedLanguageModel *raw.SFSpeechLanguageModelConfiguration) *SpeechRecognitionRequest {
-	x.inner.SetCustomizedLanguageModel(customizedLanguageModel)
+func (x *SpeechRecognitionRequest) WithCustomizedLanguageModel(customizedLanguageModel *SpeechLanguageModelConfiguration) *SpeechRecognitionRequest {
+	x.inner.SetCustomizedLanguageModel(customizedLanguageModel.Unwrap())
 	return x
 }
 
@@ -185,7 +185,7 @@ type SpeechRecognitionRequestable interface {
 	WithInteractionIdentifier(interactionIdentifier string) *SpeechRecognitionRequest
 	WithRequiresOnDeviceRecognition(requiresOnDeviceRecognition bool) *SpeechRecognitionRequest
 	WithAddsPunctuation(addsPunctuation bool) *SpeechRecognitionRequest
-	WithCustomizedLanguageModel(customizedLanguageModel *raw.SFSpeechLanguageModelConfiguration) *SpeechRecognitionRequest
+	WithCustomizedLanguageModel(customizedLanguageModel *SpeechLanguageModelConfiguration) *SpeechRecognitionRequest
 	TaskHint() raw.SFSpeechRecognitionTaskHint
 	SetTaskHint(taskHint raw.SFSpeechRecognitionTaskHint)
 	ShouldReportPartialResults() bool

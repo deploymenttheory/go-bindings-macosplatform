@@ -38,8 +38,8 @@ func NewPopoverTouchBarItem() *PopoverTouchBarItem {
 }
 
 // WithPopoverTouchBar sets the popoverTouchBar property and returns the receiver for chaining.
-func (x *PopoverTouchBarItem) WithPopoverTouchBar(popoverTouchBar *raw.NSTouchBar) *PopoverTouchBarItem {
-	x.inner.SetPopoverTouchBar(popoverTouchBar)
+func (x *PopoverTouchBarItem) WithPopoverTouchBar(popoverTouchBar *TouchBar) *PopoverTouchBarItem {
+	x.inner.SetPopoverTouchBar(popoverTouchBar.Unwrap())
 	return x
 }
 
@@ -56,8 +56,8 @@ func (x *PopoverTouchBarItem) WithCollapsedRepresentation(collapsedRepresentatio
 }
 
 // WithCollapsedRepresentationImage sets the collapsedRepresentationImage property and returns the receiver for chaining.
-func (x *PopoverTouchBarItem) WithCollapsedRepresentationImage(collapsedRepresentationImage *raw.NSImage) *PopoverTouchBarItem {
-	x.inner.SetCollapsedRepresentationImage(collapsedRepresentationImage)
+func (x *PopoverTouchBarItem) WithCollapsedRepresentationImage(collapsedRepresentationImage *Image) *PopoverTouchBarItem {
+	x.inner.SetCollapsedRepresentationImage(collapsedRepresentationImage.Unwrap())
 	return x
 }
 
@@ -68,8 +68,8 @@ func (x *PopoverTouchBarItem) WithCollapsedRepresentationLabel(collapsedRepresen
 }
 
 // WithPressAndHoldTouchBar sets the pressAndHoldTouchBar property and returns the receiver for chaining.
-func (x *PopoverTouchBarItem) WithPressAndHoldTouchBar(pressAndHoldTouchBar *raw.NSTouchBar) *PopoverTouchBarItem {
-	x.inner.SetPressAndHoldTouchBar(pressAndHoldTouchBar)
+func (x *PopoverTouchBarItem) WithPressAndHoldTouchBar(pressAndHoldTouchBar *TouchBar) *PopoverTouchBarItem {
+	x.inner.SetPressAndHoldTouchBar(pressAndHoldTouchBar.Unwrap())
 	return x
 }
 
@@ -194,12 +194,12 @@ func (x *PopoverTouchBarItem) asTouchBarItem() *raw.NSTouchBarItem { return &x.i
 // PopoverTouchBarItemable is the interface implemented by [PopoverTouchBarItem], for mocking and DI.
 type PopoverTouchBarItemable interface {
 	Unwrap() *raw.NSPopoverTouchBarItem
-	WithPopoverTouchBar(popoverTouchBar *raw.NSTouchBar) *PopoverTouchBarItem
+	WithPopoverTouchBar(popoverTouchBar *TouchBar) *PopoverTouchBarItem
 	WithCustomizationLabel(customizationLabel string) *PopoverTouchBarItem
 	WithCollapsedRepresentation(collapsedRepresentation ViewProvider) *PopoverTouchBarItem
-	WithCollapsedRepresentationImage(collapsedRepresentationImage *raw.NSImage) *PopoverTouchBarItem
+	WithCollapsedRepresentationImage(collapsedRepresentationImage *Image) *PopoverTouchBarItem
 	WithCollapsedRepresentationLabel(collapsedRepresentationLabel string) *PopoverTouchBarItem
-	WithPressAndHoldTouchBar(pressAndHoldTouchBar *raw.NSTouchBar) *PopoverTouchBarItem
+	WithPressAndHoldTouchBar(pressAndHoldTouchBar *TouchBar) *PopoverTouchBarItem
 	WithShowsCloseButton(showsCloseButton bool) *PopoverTouchBarItem
 	WithVisibilityPriority(visibilityPriority float32) *PopoverTouchBarItem
 	ShowPopover(sender objc.ID)

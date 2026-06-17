@@ -50,13 +50,13 @@ func (x *NotificationContent) ContentByUpdatingWithProviderError(provider raw.UN
 }
 
 // Attachments returns the collection as a Go slice.
-func (x *NotificationContent) Attachments() []*raw.UNNotificationAttachment {
+func (x *NotificationContent) Attachments() []*NotificationAttachment {
 	arr := x.inner.Attachments()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.UNNotificationAttachment {
-		return raw.UNNotificationAttachmentFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *NotificationAttachment {
+		return &NotificationAttachment{inner: raw.UNNotificationAttachmentFromID(purego.Retain(_id))}
 	})
 }
 
@@ -163,7 +163,7 @@ func (x *NotificationContent) asNotificationContent() *raw.UNNotificationContent
 type NotificationContentable interface {
 	Unwrap() *raw.UNNotificationContent
 	ContentByUpdatingWithProviderError(provider raw.UNNotificationContentProviding) (*NotificationContent, error)
-	Attachments() []*raw.UNNotificationAttachment
+	Attachments() []*NotificationAttachment
 	Badge() *foundation.NSNumber
 	Body() string
 	CategoryIdentifier() string

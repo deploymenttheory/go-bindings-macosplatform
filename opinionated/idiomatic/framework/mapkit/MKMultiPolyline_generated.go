@@ -51,13 +51,13 @@ func (x *MultiPolyline) WithSubtitle(subtitle string) *MultiPolyline {
 }
 
 // Polylines returns the collection as a Go slice.
-func (x *MultiPolyline) Polylines() []*raw.MKPolyline {
+func (x *MultiPolyline) Polylines() []*Polyline {
 	arr := x.inner.Polylines()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MKPolyline {
-		return raw.MKPolylineFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Polyline {
+		return &Polyline{inner: raw.MKPolylineFromID(purego.Retain(_id))}
 	})
 }
 
@@ -68,7 +68,7 @@ type MultiPolylineable interface {
 	Unwrap() *raw.MKMultiPolyline
 	WithTitle(title string) *MultiPolyline
 	WithSubtitle(subtitle string) *MultiPolyline
-	Polylines() []*raw.MKPolyline
+	Polylines() []*Polyline
 }
 
 var _ MultiPolylineable = (*MultiPolyline)(nil)

@@ -62,8 +62,8 @@ func (x *TokenFieldCell) WithDelegate(delegate raw.NSTokenFieldCellDelegate) *To
 }
 
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
-func (x *TokenFieldCell) WithBackgroundColor(backgroundColor *raw.NSColor) *TokenFieldCell {
-	x.inner.NSTextFieldCell.SetBackgroundColor(backgroundColor)
+func (x *TokenFieldCell) WithBackgroundColor(backgroundColor *Color) *TokenFieldCell {
+	x.inner.NSTextFieldCell.SetBackgroundColor(backgroundColor.Unwrap())
 	return x
 }
 
@@ -74,8 +74,8 @@ func (x *TokenFieldCell) WithDrawsBackground(drawsBackground bool) *TokenFieldCe
 }
 
 // WithTextColor sets the textColor property and returns the receiver for chaining.
-func (x *TokenFieldCell) WithTextColor(textColor *raw.NSColor) *TokenFieldCell {
-	x.inner.NSTextFieldCell.SetTextColor(textColor)
+func (x *TokenFieldCell) WithTextColor(textColor *Color) *TokenFieldCell {
+	x.inner.NSTextFieldCell.SetTextColor(textColor.Unwrap())
 	return x
 }
 
@@ -216,8 +216,8 @@ func (x *TokenFieldCell) WithWraps(wraps bool) *TokenFieldCell {
 }
 
 // WithFont sets the font property and returns the receiver for chaining.
-func (x *TokenFieldCell) WithFont(font *raw.NSFont) *TokenFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetFont(font)
+func (x *TokenFieldCell) WithFont(font *Font) *TokenFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetFont(font.Unwrap())
 	return x
 }
 
@@ -264,8 +264,8 @@ func (x *TokenFieldCell) WithIntegerValue(integerValue int) *TokenFieldCell {
 }
 
 // WithImage sets the image property and returns the receiver for chaining.
-func (x *TokenFieldCell) WithImage(image *raw.NSImage) *TokenFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetImage(image)
+func (x *TokenFieldCell) WithImage(image *Image) *TokenFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetImage(image.Unwrap())
 	return x
 }
 
@@ -282,8 +282,8 @@ func (x *TokenFieldCell) WithRepresentedObject(representedObject objc.ID) *Token
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *TokenFieldCell) WithMenu(menu *raw.NSMenu) *TokenFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetMenu(menu)
+func (x *TokenFieldCell) WithMenu(menu *Menu) *TokenFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -436,9 +436,9 @@ type TokenFieldCellable interface {
 	WithCompletionDelay(completionDelay float64) *TokenFieldCell
 	WithTokenizingCharacterSet(tokenizingCharacterSet *foundation.NSCharacterSet) *TokenFieldCell
 	WithDelegate(delegate raw.NSTokenFieldCellDelegate) *TokenFieldCell
-	WithBackgroundColor(backgroundColor *raw.NSColor) *TokenFieldCell
+	WithBackgroundColor(backgroundColor *Color) *TokenFieldCell
 	WithDrawsBackground(drawsBackground bool) *TokenFieldCell
-	WithTextColor(textColor *raw.NSColor) *TokenFieldCell
+	WithTextColor(textColor *Color) *TokenFieldCell
 	WithBezelStyle(bezelStyle raw.NSTextFieldBezelStyle) *TokenFieldCell
 	WithPlaceholderString(placeholderString string) *TokenFieldCell
 	WithPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString) *TokenFieldCell
@@ -460,7 +460,7 @@ type TokenFieldCellable interface {
 	WithHighlighted(highlighted bool) *TokenFieldCell
 	WithAlignment(alignment raw.NSTextAlignment) *TokenFieldCell
 	WithWraps(wraps bool) *TokenFieldCell
-	WithFont(font *raw.NSFont) *TokenFieldCell
+	WithFont(font *Font) *TokenFieldCell
 	WithFormatter(formatter *foundation.NSFormatter) *TokenFieldCell
 	WithObjectValue(objectValue objc.ID) *TokenFieldCell
 	WithStringValue(stringValue string) *TokenFieldCell
@@ -468,10 +468,10 @@ type TokenFieldCellable interface {
 	WithFloatValue(floatValue float32) *TokenFieldCell
 	WithDoubleValue(doubleValue float64) *TokenFieldCell
 	WithIntegerValue(integerValue int) *TokenFieldCell
-	WithImage(image *raw.NSImage) *TokenFieldCell
+	WithImage(image *Image) *TokenFieldCell
 	WithControlSize(controlSize raw.NSControlSize) *TokenFieldCell
 	WithRepresentedObject(representedObject objc.ID) *TokenFieldCell
-	WithMenu(menu *raw.NSMenu) *TokenFieldCell
+	WithMenu(menu *Menu) *TokenFieldCell
 	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *TokenFieldCell
 	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *TokenFieldCell
 	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *TokenFieldCell

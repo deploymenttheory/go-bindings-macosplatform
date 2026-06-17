@@ -37,13 +37,13 @@ func NewMetadataGroup() *MetadataGroup {
 }
 
 // Items returns the collection as a Go slice.
-func (x *MetadataGroup) Items() []*raw.AVMetadataItem {
+func (x *MetadataGroup) Items() []*MetadataItem {
 	arr := x.inner.Items()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVMetadataItem {
-		return raw.AVMetadataItemFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MetadataItem {
+		return &MetadataItem{inner: raw.AVMetadataItemFromID(purego.Retain(_id))}
 	})
 }
 
@@ -70,7 +70,7 @@ func (x *MetadataGroup) asMetadataGroup() *raw.AVMetadataGroup { return x.inner 
 // MetadataGroupable is the interface implemented by [MetadataGroup], for mocking and DI.
 type MetadataGroupable interface {
 	Unwrap() *raw.AVMetadataGroup
-	Items() []*raw.AVMetadataItem
+	Items() []*MetadataItem
 	ClassifyingLabel() string
 	UniqueID() string
 }

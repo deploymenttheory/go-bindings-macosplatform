@@ -43,13 +43,13 @@ func (x *ComputePipelineReflection) Bindings() *foundation.NSArray[raw.MTLBindin
 }
 
 // Arguments returns the collection as a Go slice.
-func (x *ComputePipelineReflection) Arguments() []*raw.MTLArgument {
+func (x *ComputePipelineReflection) Arguments() []*Argument {
 	arr := x.inner.Arguments()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MTLArgument {
-		return raw.MTLArgumentFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Argument {
+		return &Argument{inner: raw.MTLArgumentFromID(purego.Retain(_id))}
 	})
 }
 
@@ -57,7 +57,7 @@ func (x *ComputePipelineReflection) Arguments() []*raw.MTLArgument {
 type ComputePipelineReflectionable interface {
 	Unwrap() *raw.MTLComputePipelineReflection
 	Bindings() *foundation.NSArray[raw.MTLBinding]
-	Arguments() []*raw.MTLArgument
+	Arguments() []*Argument
 }
 
 var _ ComputePipelineReflectionable = (*ComputePipelineReflection)(nil)

@@ -64,24 +64,24 @@ func (x *SyncEngineState) RemovePendingDatabaseChanges(changes *foundation.NSArr
 }
 
 // PendingRecordZoneChanges returns the collection as a Go slice.
-func (x *SyncEngineState) PendingRecordZoneChanges() []*raw.CKSyncEnginePendingRecordZoneChange {
+func (x *SyncEngineState) PendingRecordZoneChanges() []*SyncEnginePendingRecordZoneChange {
 	arr := x.inner.PendingRecordZoneChanges()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CKSyncEnginePendingRecordZoneChange {
-		return raw.CKSyncEnginePendingRecordZoneChangeFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *SyncEnginePendingRecordZoneChange {
+		return &SyncEnginePendingRecordZoneChange{inner: raw.CKSyncEnginePendingRecordZoneChangeFromID(purego.Retain(_id))}
 	})
 }
 
 // PendingDatabaseChanges returns the collection as a Go slice.
-func (x *SyncEngineState) PendingDatabaseChanges() []*raw.CKSyncEnginePendingDatabaseChange {
+func (x *SyncEngineState) PendingDatabaseChanges() []*SyncEnginePendingDatabaseChange {
 	arr := x.inner.PendingDatabaseChanges()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CKSyncEnginePendingDatabaseChange {
-		return raw.CKSyncEnginePendingDatabaseChangeFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *SyncEnginePendingDatabaseChange {
+		return &SyncEnginePendingDatabaseChange{inner: raw.CKSyncEnginePendingDatabaseChangeFromID(purego.Retain(_id))}
 	})
 }
 
@@ -96,13 +96,13 @@ func (x *SyncEngineState) SetHasPendingUntrackedChanges(hasPendingUntrackedChang
 }
 
 // ZoneIDsWithUnfetchedServerChanges returns the collection as a Go slice.
-func (x *SyncEngineState) ZoneIDsWithUnfetchedServerChanges() []*raw.CKRecordZoneID {
+func (x *SyncEngineState) ZoneIDsWithUnfetchedServerChanges() []*RecordZoneID {
 	arr := x.inner.ZoneIDsWithUnfetchedServerChanges()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CKRecordZoneID {
-		return raw.CKRecordZoneIDFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *RecordZoneID {
+		return &RecordZoneID{inner: raw.CKRecordZoneIDFromID(purego.Retain(_id))}
 	})
 }
 
@@ -114,11 +114,11 @@ type SyncEngineStateable interface {
 	RemovePendingRecordZoneChanges(changes *foundation.NSArray[*raw.CKSyncEnginePendingRecordZoneChange])
 	AddPendingDatabaseChanges(changes *foundation.NSArray[*raw.CKSyncEnginePendingDatabaseChange])
 	RemovePendingDatabaseChanges(changes *foundation.NSArray[*raw.CKSyncEnginePendingDatabaseChange])
-	PendingRecordZoneChanges() []*raw.CKSyncEnginePendingRecordZoneChange
-	PendingDatabaseChanges() []*raw.CKSyncEnginePendingDatabaseChange
+	PendingRecordZoneChanges() []*SyncEnginePendingRecordZoneChange
+	PendingDatabaseChanges() []*SyncEnginePendingDatabaseChange
 	HasPendingUntrackedChanges() bool
 	SetHasPendingUntrackedChanges(hasPendingUntrackedChanges bool)
-	ZoneIDsWithUnfetchedServerChanges() []*raw.CKRecordZoneID
+	ZoneIDsWithUnfetchedServerChanges() []*RecordZoneID
 }
 
 var _ SyncEngineStateable = (*SyncEngineState)(nil)

@@ -37,20 +37,20 @@ func NewModelStructureProgramArgument() *ModelStructureProgramArgument {
 }
 
 // Bindings returns the collection as a Go slice.
-func (x *ModelStructureProgramArgument) Bindings() []*raw.MLModelStructureProgramBinding {
+func (x *ModelStructureProgramArgument) Bindings() []*ModelStructureProgramBinding {
 	arr := x.inner.Bindings()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MLModelStructureProgramBinding {
-		return raw.MLModelStructureProgramBindingFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ModelStructureProgramBinding {
+		return &ModelStructureProgramBinding{inner: raw.MLModelStructureProgramBindingFromID(purego.Retain(_id))}
 	})
 }
 
 // ModelStructureProgramArgumentable is the interface implemented by [ModelStructureProgramArgument], for mocking and DI.
 type ModelStructureProgramArgumentable interface {
 	Unwrap() *raw.MLModelStructureProgramArgument
-	Bindings() []*raw.MLModelStructureProgramBinding
+	Bindings() []*ModelStructureProgramBinding
 }
 
 var _ ModelStructureProgramArgumentable = (*ModelStructureProgramArgument)(nil)

@@ -64,13 +64,13 @@ func (x *Scene) RemoveGraph(name string) {
 }
 
 // Entities returns the collection as a Go slice.
-func (x *Scene) Entities() []*raw.GKEntity {
+func (x *Scene) Entities() []*Entity {
 	arr := x.inner.Entities()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.GKEntity {
-		return raw.GKEntityFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Entity {
+		return &Entity{inner: raw.GKEntityFromID(purego.Retain(_id))}
 	})
 }
 
@@ -97,7 +97,7 @@ type Sceneable interface {
 	RemoveEntity(entity *raw.GKEntity)
 	AddGraphName(graph *raw.GKGraph, name string)
 	RemoveGraph(name string)
-	Entities() []*raw.GKEntity
+	Entities() []*Entity
 	RootNode() raw.GKSceneRootNodeType
 	SetRootNode(rootNode raw.GKSceneRootNodeType)
 	Graphs() *foundation.NSDictionary[*foundation.NSString, *raw.GKGraph]

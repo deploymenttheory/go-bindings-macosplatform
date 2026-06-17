@@ -42,8 +42,8 @@ func NewTabView() *TabView {
 }
 
 // WithFont sets the font property and returns the receiver for chaining.
-func (x *TabView) WithFont(font *raw.NSFont) *TabView {
-	x.inner.SetFont(font)
+func (x *TabView) WithFont(font *Font) *TabView {
+	x.inner.SetFont(font.Unwrap())
 	return x
 }
 
@@ -292,8 +292,8 @@ func (x *TabView) WithContentFilters(items ...*coreimage.CIFilter) *TabView {
 }
 
 // WithShadow sets the shadow property and returns the receiver for chaining.
-func (x *TabView) WithShadow(shadow *raw.NSShadow) *TabView {
-	x.inner.NSView.SetShadow(shadow)
+func (x *TabView) WithShadow(shadow *Shadow) *TabView {
+	x.inner.NSView.SetShadow(shadow.Unwrap())
 	return x
 }
 
@@ -374,8 +374,8 @@ func (x *TabView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSize
 }
 
 // WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
-func (x *TabView) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *TabView {
-	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+func (x *TabView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *TabView {
+	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
 	return x
 }
 
@@ -416,8 +416,8 @@ func (x *TabView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynami
 }
 
 // WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
-func (x *TabView) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *TabView {
-	x.inner.NSView.SetPressureConfiguration(pressureConfiguration)
+func (x *TabView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *TabView {
+	x.inner.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
 	return x
 }
 
@@ -428,8 +428,8 @@ func (x *TabView) WithNextResponder(nextResponder ResponderProvider) *TabView {
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *TabView) WithMenu(menu *raw.NSMenu) *TabView {
-	x.inner.NSView.NSResponder.SetMenu(menu)
+func (x *TabView) WithMenu(menu *Menu) *TabView {
+	x.inner.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -440,8 +440,8 @@ func (x *TabView) WithUserActivity(userActivity *foundation.NSUserActivity) *Tab
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *TabView) WithTouchBar(touchBar *raw.NSTouchBar) *TabView {
-	x.inner.NSView.NSResponder.SetTouchBar(touchBar)
+func (x *TabView) WithTouchBar(touchBar *TouchBar) *TabView {
+	x.inner.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -582,13 +582,13 @@ func (x *TabView) SetTabViewBorderType(tabViewBorderType raw.NSTabViewBorderType
 }
 
 // TabViewItems returns the collection as a Go slice.
-func (x *TabView) TabViewItems() []*raw.NSTabViewItem {
+func (x *TabView) TabViewItems() []*TabViewItem {
 	arr := x.inner.TabViewItems()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSTabViewItem {
-		return raw.NSTabViewItemFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *TabViewItem {
+		return &TabViewItem{inner: raw.NSTabViewItemFromID(purego.Retain(_id))}
 	})
 }
 
@@ -669,7 +669,7 @@ func (x *TabView) asResponder() *raw.NSResponder { return &x.inner.NSView.NSResp
 // TabViewable is the interface implemented by [TabView], for mocking and DI.
 type TabViewable interface {
 	Unwrap() *raw.NSTabView
-	WithFont(font *raw.NSFont) *TabView
+	WithFont(font *Font) *TabView
 	WithTabViewType(tabViewType raw.NSTabViewType) *TabView
 	WithTabPosition(tabPosition raw.NSTabPosition) *TabView
 	WithTabViewBorderType(tabViewBorderType raw.NSTabViewBorderType) *TabView
@@ -704,7 +704,7 @@ type TabViewable interface {
 	WithBackgroundFilters(items ...*coreimage.CIFilter) *TabView
 	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *TabView
 	WithContentFilters(items ...*coreimage.CIFilter) *TabView
-	WithShadow(shadow *raw.NSShadow) *TabView
+	WithShadow(shadow *Shadow) *TabView
 	WithClipsToBounds(clipsToBounds bool) *TabView
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *TabView
 	WithToolTip(toolTip string) *TabView
@@ -716,18 +716,18 @@ type TabViewable interface {
 	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *TabView
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *TabView
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *TabView
-	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *TabView
+	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *TabView
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *TabView
 	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *TabView
 	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *TabView
 	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *TabView
 	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *TabView
 	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *TabView
-	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *TabView
+	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *TabView
 	WithNextResponder(nextResponder ResponderProvider) *TabView
-	WithMenu(menu *raw.NSMenu) *TabView
+	WithMenu(menu *Menu) *TabView
 	WithUserActivity(userActivity *foundation.NSUserActivity) *TabView
-	WithTouchBar(touchBar *raw.NSTouchBar) *TabView
+	WithTouchBar(touchBar *TouchBar) *TabView
 	SelectTabViewItem(tabViewItem *raw.NSTabViewItem)
 	SelectTabViewItemAtIndex(index int)
 	SelectTabViewItemWithIdentifier(identifier objc.ID)
@@ -752,7 +752,7 @@ type TabViewable interface {
 	SetTabPosition(tabPosition raw.NSTabPosition)
 	TabViewBorderType() raw.NSTabViewBorderType
 	SetTabViewBorderType(tabViewBorderType raw.NSTabViewBorderType)
-	TabViewItems() []*raw.NSTabViewItem
+	TabViewItems() []*TabViewItem
 	SetTabViewItems(tabViewItems *foundation.NSArray[*raw.NSTabViewItem])
 	AllowsTruncatedLabels() bool
 	SetAllowsTruncatedLabels(allowsTruncatedLabels bool)

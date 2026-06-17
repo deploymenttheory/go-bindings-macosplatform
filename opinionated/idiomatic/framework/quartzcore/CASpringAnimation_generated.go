@@ -110,14 +110,14 @@ func (x *SpringAnimation) WithCumulative(cumulative bool) *SpringAnimation {
 }
 
 // WithValueFunction sets the valueFunction property and returns the receiver for chaining.
-func (x *SpringAnimation) WithValueFunction(valueFunction *raw.CAValueFunction) *SpringAnimation {
-	x.inner.CABasicAnimation.CAPropertyAnimation.SetValueFunction(valueFunction)
+func (x *SpringAnimation) WithValueFunction(valueFunction *ValueFunction) *SpringAnimation {
+	x.inner.CABasicAnimation.CAPropertyAnimation.SetValueFunction(valueFunction.Unwrap())
 	return x
 }
 
 // WithTimingFunction sets the timingFunction property and returns the receiver for chaining.
-func (x *SpringAnimation) WithTimingFunction(timingFunction *raw.CAMediaTimingFunction) *SpringAnimation {
-	x.inner.CABasicAnimation.CAPropertyAnimation.CAAnimation.SetTimingFunction(timingFunction)
+func (x *SpringAnimation) WithTimingFunction(timingFunction *MediaTimingFunction) *SpringAnimation {
+	x.inner.CABasicAnimation.CAPropertyAnimation.CAAnimation.SetTimingFunction(timingFunction.Unwrap())
 	return x
 }
 
@@ -219,8 +219,8 @@ type SpringAnimationable interface {
 	WithKeyPath(keyPath string) *SpringAnimation
 	WithAdditive(additive bool) *SpringAnimation
 	WithCumulative(cumulative bool) *SpringAnimation
-	WithValueFunction(valueFunction *raw.CAValueFunction) *SpringAnimation
-	WithTimingFunction(timingFunction *raw.CAMediaTimingFunction) *SpringAnimation
+	WithValueFunction(valueFunction *ValueFunction) *SpringAnimation
+	WithTimingFunction(timingFunction *MediaTimingFunction) *SpringAnimation
 	WithDelegate(delegate raw.CAAnimationDelegate) *SpringAnimation
 	WithRemovedOnCompletion(removedOnCompletion bool) *SpringAnimation
 	WithPreferredFrameRateRange(preferredFrameRateRange raw.CAFrameRateRange) *SpringAnimation

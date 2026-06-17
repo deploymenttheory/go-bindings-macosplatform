@@ -37,20 +37,20 @@ func NewDateIntervalFormatter() *DateIntervalFormatter {
 }
 
 // WithLocale sets the locale property and returns the receiver for chaining.
-func (x *DateIntervalFormatter) WithLocale(locale *raw.NSLocale) *DateIntervalFormatter {
-	x.inner.SetLocale(locale)
+func (x *DateIntervalFormatter) WithLocale(locale *Locale) *DateIntervalFormatter {
+	x.inner.SetLocale(locale.Unwrap())
 	return x
 }
 
 // WithCalendar sets the calendar property and returns the receiver for chaining.
-func (x *DateIntervalFormatter) WithCalendar(calendar *raw.NSCalendar) *DateIntervalFormatter {
-	x.inner.SetCalendar(calendar)
+func (x *DateIntervalFormatter) WithCalendar(calendar *Calendar) *DateIntervalFormatter {
+	x.inner.SetCalendar(calendar.Unwrap())
 	return x
 }
 
 // WithTimeZone sets the timeZone property and returns the receiver for chaining.
-func (x *DateIntervalFormatter) WithTimeZone(timeZone *raw.NSTimeZone) *DateIntervalFormatter {
-	x.inner.SetTimeZone(timeZone)
+func (x *DateIntervalFormatter) WithTimeZone(timeZone *TimeZone) *DateIntervalFormatter {
+	x.inner.SetTimeZone(timeZone.Unwrap())
 	return x
 }
 
@@ -179,9 +179,9 @@ func (x *DateIntervalFormatter) asObject() *raw.NSObject { return &x.inner.NSFor
 // DateIntervalFormatterable is the interface implemented by [DateIntervalFormatter], for mocking and DI.
 type DateIntervalFormatterable interface {
 	Unwrap() *raw.NSDateIntervalFormatter
-	WithLocale(locale *raw.NSLocale) *DateIntervalFormatter
-	WithCalendar(calendar *raw.NSCalendar) *DateIntervalFormatter
-	WithTimeZone(timeZone *raw.NSTimeZone) *DateIntervalFormatter
+	WithLocale(locale *Locale) *DateIntervalFormatter
+	WithCalendar(calendar *Calendar) *DateIntervalFormatter
+	WithTimeZone(timeZone *TimeZone) *DateIntervalFormatter
 	WithDateTemplate(dateTemplate string) *DateIntervalFormatter
 	WithDateStyle(dateStyle raw.NSDateIntervalFormatterStyle) *DateIntervalFormatter
 	WithTimeStyle(timeStyle raw.NSDateIntervalFormatterStyle) *DateIntervalFormatter

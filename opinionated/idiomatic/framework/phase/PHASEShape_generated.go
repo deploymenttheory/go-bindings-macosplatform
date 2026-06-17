@@ -47,20 +47,20 @@ func NewShapeWithEngineMeshMaterials(engine *raw.PHASEEngine, mesh *modelio.MDLM
 }
 
 // Elements returns the collection as a Go slice.
-func (x *Shape) Elements() []*raw.PHASEShapeElement {
+func (x *Shape) Elements() []*ShapeElement {
 	arr := x.inner.Elements()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PHASEShapeElement {
-		return raw.PHASEShapeElementFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ShapeElement {
+		return &ShapeElement{inner: raw.PHASEShapeElementFromID(purego.Retain(_id))}
 	})
 }
 
 // Shapeable is the interface implemented by [Shape], for mocking and DI.
 type Shapeable interface {
 	Unwrap() *raw.PHASEShape
-	Elements() []*raw.PHASEShapeElement
+	Elements() []*ShapeElement
 }
 
 var _ Shapeable = (*Shape)(nil)

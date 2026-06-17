@@ -230,8 +230,8 @@ func (x *View) WithContentFilters(items ...*coreimage.CIFilter) *View {
 }
 
 // WithShadow sets the shadow property and returns the receiver for chaining.
-func (x *View) WithShadow(shadow *raw.NSShadow) *View {
-	x.inner.SetShadow(shadow)
+func (x *View) WithShadow(shadow *Shadow) *View {
+	x.inner.SetShadow(shadow.Unwrap())
 	return x
 }
 
@@ -312,8 +312,8 @@ func (x *View) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMet
 }
 
 // WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
-func (x *View) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *View {
-	x.inner.SetWritingToolsCoordinator(writingToolsCoordinator)
+func (x *View) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *View {
+	x.inner.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
 	return x
 }
 
@@ -354,8 +354,8 @@ func (x *View) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRa
 }
 
 // WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
-func (x *View) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *View {
-	x.inner.SetPressureConfiguration(pressureConfiguration)
+func (x *View) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *View {
+	x.inner.SetPressureConfiguration(pressureConfiguration.Unwrap())
 	return x
 }
 
@@ -366,8 +366,8 @@ func (x *View) WithNextResponder(nextResponder ResponderProvider) *View {
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *View) WithMenu(menu *raw.NSMenu) *View {
-	x.inner.NSResponder.SetMenu(menu)
+func (x *View) WithMenu(menu *Menu) *View {
+	x.inner.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -378,8 +378,8 @@ func (x *View) WithUserActivity(userActivity *foundation.NSUserActivity) *View {
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *View) WithTouchBar(touchBar *raw.NSTouchBar) *View {
-	x.inner.NSResponder.SetTouchBar(touchBar)
+func (x *View) WithTouchBar(touchBar *TouchBar) *View {
+	x.inner.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -887,13 +887,13 @@ func (x *View) Superview() *View {
 }
 
 // Subviews returns the collection as a Go slice.
-func (x *View) Subviews() []*raw.NSView {
+func (x *View) Subviews() []*View {
 	arr := x.inner.Subviews()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSView {
-		return raw.NSViewFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *View {
+		return &View{inner: raw.NSViewFromID(purego.Retain(_id))}
 	})
 }
 
@@ -1585,13 +1585,13 @@ func (x *View) RemoveGestureRecognizer(gestureRecognizer *raw.NSGestureRecognize
 }
 
 // GestureRecognizers returns the collection as a Go slice.
-func (x *View) GestureRecognizers() []*raw.NSGestureRecognizer {
+func (x *View) GestureRecognizers() []*GestureRecognizer {
 	arr := x.inner.GestureRecognizers()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSGestureRecognizer {
-		return raw.NSGestureRecognizerFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *GestureRecognizer {
+		return &GestureRecognizer{inner: raw.NSGestureRecognizerFromID(purego.Retain(_id))}
 	})
 }
 
@@ -1704,13 +1704,13 @@ func (x *View) RemoveTrackingRect(tag int) {
 }
 
 // TrackingAreas returns the collection as a Go slice.
-func (x *View) TrackingAreas() []*raw.NSTrackingArea {
+func (x *View) TrackingAreas() []*TrackingArea {
 	arr := x.inner.TrackingAreas()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSTrackingArea {
-		return raw.NSTrackingAreaFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *TrackingArea {
+		return &TrackingArea{inner: raw.NSTrackingAreaFromID(purego.Retain(_id))}
 	})
 }
 
@@ -1961,13 +1961,13 @@ func (x *View) LastBaselineAnchor() *LayoutYAxisAnchor {
 }
 
 // Constraints returns the collection as a Go slice.
-func (x *View) Constraints() []*raw.NSLayoutConstraint {
+func (x *View) Constraints() []*LayoutConstraint {
 	arr := x.inner.Constraints()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSLayoutConstraint {
-		return raw.NSLayoutConstraintFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *LayoutConstraint {
+		return &LayoutConstraint{inner: raw.NSLayoutConstraintFromID(purego.Retain(_id))}
 	})
 }
 
@@ -2112,13 +2112,13 @@ func (x *View) RemoveLayoutGuide(guide *raw.NSLayoutGuide) {
 }
 
 // LayoutGuides returns the collection as a Go slice.
-func (x *View) LayoutGuides() []*raw.NSLayoutGuide {
+func (x *View) LayoutGuides() []*LayoutGuide {
 	arr := x.inner.LayoutGuides()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSLayoutGuide {
-		return raw.NSLayoutGuideFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *LayoutGuide {
+		return &LayoutGuide{inner: raw.NSLayoutGuideFromID(purego.Retain(_id))}
 	})
 }
 
@@ -2267,7 +2267,7 @@ type Viewable interface {
 	WithBackgroundFilters(items ...*coreimage.CIFilter) *View
 	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *View
 	WithContentFilters(items ...*coreimage.CIFilter) *View
-	WithShadow(shadow *raw.NSShadow) *View
+	WithShadow(shadow *Shadow) *View
 	WithClipsToBounds(clipsToBounds bool) *View
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *View
 	WithToolTip(toolTip string) *View
@@ -2279,18 +2279,18 @@ type Viewable interface {
 	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *View
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *View
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *View
-	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *View
+	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *View
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *View
 	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *View
 	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *View
 	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *View
 	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *View
 	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *View
-	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *View
+	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *View
 	WithNextResponder(nextResponder ResponderProvider) *View
-	WithMenu(menu *raw.NSMenu) *View
+	WithMenu(menu *Menu) *View
 	WithUserActivity(userActivity *foundation.NSUserActivity) *View
-	WithTouchBar(touchBar *raw.NSTouchBar) *View
+	WithTouchBar(touchBar *TouchBar) *View
 	IsDescendantOf(view *raw.NSView) bool
 	AncestorSharedWithView(view *raw.NSView) *View
 	GetRectsBeingDrawnCount(rects *corefoundation.CGRect, count *int64)
@@ -2386,7 +2386,7 @@ type Viewable interface {
 	ViewDidChangeEffectiveAppearance()
 	Window() *Window
 	Superview() *View
-	Subviews() []*raw.NSView
+	Subviews() []*View
 	SetSubviews(subviews *foundation.NSArray[*raw.NSView])
 	OpaqueAncestor() *View
 	IsHidden() bool
@@ -2512,7 +2512,7 @@ type Viewable interface {
 	IsDrawingFindIndicator() bool
 	AddGestureRecognizer(gestureRecognizer *raw.NSGestureRecognizer)
 	RemoveGestureRecognizer(gestureRecognizer *raw.NSGestureRecognizer)
-	GestureRecognizers() []*raw.NSGestureRecognizer
+	GestureRecognizers() []*GestureRecognizer
 	SetGestureRecognizers(gestureRecognizers *foundation.NSArray[*raw.NSGestureRecognizer])
 	AllowedTouchTypes() raw.NSTouchTypeMask
 	SetAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask)
@@ -2533,7 +2533,7 @@ type Viewable interface {
 	ResetCursorRects()
 	AddTrackingRectOwnerUserDataAssumeInside(rect corefoundation.CGRect, owner objc.ID, data unsafe.Pointer, flag bool) int
 	RemoveTrackingRect(tag int)
-	TrackingAreas() []*raw.NSTrackingArea
+	TrackingAreas() []*TrackingArea
 	DisplayLinkWithTargetSelector(target objc.ID, selector objc.SEL) *quartzcore.CADisplayLink
 	DragImageAtOffsetEventPasteboardSourceSlideBack(image *raw.NSImage, viewLocation corefoundation.CGPoint, initialOffset corefoundation.CGSize, event *raw.NSEvent, pboard *raw.NSPasteboard, sourceObj objc.ID, slideFlag bool)
 	DragFileFromRectSlideBackEvent(filename string, rect corefoundation.CGRect, flag bool, event *raw.NSEvent) bool
@@ -2572,7 +2572,7 @@ type Viewable interface {
 	CenterYAnchor() *LayoutYAxisAnchor
 	FirstBaselineAnchor() *LayoutYAxisAnchor
 	LastBaselineAnchor() *LayoutYAxisAnchor
-	Constraints() []*raw.NSLayoutConstraint
+	Constraints() []*LayoutConstraint
 	UpdateConstraintsForSubtreeIfNeeded()
 	UpdateConstraints()
 	NeedsUpdateConstraints() bool
@@ -2601,7 +2601,7 @@ type Viewable interface {
 	HasAmbiguousLayout() bool
 	AddLayoutGuide(guide *raw.NSLayoutGuide)
 	RemoveLayoutGuide(guide *raw.NSLayoutGuide)
-	LayoutGuides() []*raw.NSLayoutGuide
+	LayoutGuides() []*LayoutGuide
 	LayoutGuideForLayoutRegion(layoutRegion *raw.NSViewLayoutRegion) *LayoutGuide
 	EdgeInsetsForLayoutRegion(layoutRegion *raw.NSViewLayoutRegion) foundation.NSEdgeInsets
 	RectForLayoutRegion(layoutRegion *raw.NSViewLayoutRegion) corefoundation.CGRect

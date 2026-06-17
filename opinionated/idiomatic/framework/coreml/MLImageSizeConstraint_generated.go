@@ -53,13 +53,13 @@ func (x *ImageSizeConstraint) PixelsHighRange() foundation.NSRange {
 }
 
 // EnumeratedImageSizes returns the collection as a Go slice.
-func (x *ImageSizeConstraint) EnumeratedImageSizes() []*raw.MLImageSize {
+func (x *ImageSizeConstraint) EnumeratedImageSizes() []*ImageSize {
 	arr := x.inner.EnumeratedImageSizes()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MLImageSize {
-		return raw.MLImageSizeFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ImageSize {
+		return &ImageSize{inner: raw.MLImageSizeFromID(purego.Retain(_id))}
 	})
 }
 
@@ -69,7 +69,7 @@ type ImageSizeConstraintable interface {
 	Type() raw.MLImageSizeConstraintType
 	PixelsWideRange() foundation.NSRange
 	PixelsHighRange() foundation.NSRange
-	EnumeratedImageSizes() []*raw.MLImageSize
+	EnumeratedImageSizes() []*ImageSize
 }
 
 var _ ImageSizeConstraintable = (*ImageSizeConstraint)(nil)

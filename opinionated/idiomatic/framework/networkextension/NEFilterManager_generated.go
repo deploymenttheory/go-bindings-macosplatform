@@ -46,8 +46,8 @@ func (x *NEFilterManager) WithLocalizedDescription(localizedDescription string) 
 }
 
 // WithProviderConfiguration sets the providerConfiguration property and returns the receiver for chaining.
-func (x *NEFilterManager) WithProviderConfiguration(providerConfiguration *raw.NEFilterProviderConfiguration) *NEFilterManager {
-	x.inner.SetProviderConfiguration(providerConfiguration)
+func (x *NEFilterManager) WithProviderConfiguration(providerConfiguration *NEFilterProviderConfiguration) *NEFilterManager {
+	x.inner.SetProviderConfiguration(providerConfiguration.Unwrap())
 	return x
 }
 
@@ -185,7 +185,7 @@ func (x *NEFilterManager) SetDisableEncryptedDNSSettings(disableEncryptedDNSSett
 type NEFilterManagerable interface {
 	Unwrap() *raw.NEFilterManager
 	WithLocalizedDescription(localizedDescription string) *NEFilterManager
-	WithProviderConfiguration(providerConfiguration *raw.NEFilterProviderConfiguration) *NEFilterManager
+	WithProviderConfiguration(providerConfiguration *NEFilterProviderConfiguration) *NEFilterManager
 	WithEnabled(enabled bool) *NEFilterManager
 	WithGrade(grade raw.NEFilterManagerGrade) *NEFilterManager
 	WithDisableEncryptedDNSSettings(disableEncryptedDNSSettings bool) *NEFilterManager

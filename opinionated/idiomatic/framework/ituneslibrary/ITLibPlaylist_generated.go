@@ -67,13 +67,13 @@ func (x *LibPlaylist) IsAllItemsPlaylist() bool {
 }
 
 // Items returns the collection as a Go slice.
-func (x *LibPlaylist) Items() []*raw.ITLibMediaItem {
+func (x *LibPlaylist) Items() []*LibMediaItem {
 	arr := x.inner.Items()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.ITLibMediaItem {
-		return raw.ITLibMediaItemFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *LibMediaItem {
+		return &LibMediaItem{inner: raw.ITLibMediaItemFromID(purego.Retain(_id))}
 	})
 }
 
@@ -102,7 +102,7 @@ type LibPlaylistable interface {
 	ParentID() *foundation.NSNumber
 	IsVisible() bool
 	IsAllItemsPlaylist() bool
-	Items() []*raw.ITLibMediaItem
+	Items() []*LibMediaItem
 	DistinguishedKind() raw.ITLibDistinguishedPlaylistKind
 	Kind() raw.ITLibPlaylistKind
 	IsMaster() bool

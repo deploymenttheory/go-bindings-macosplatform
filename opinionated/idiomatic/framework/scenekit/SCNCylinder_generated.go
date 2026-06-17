@@ -84,8 +84,8 @@ func (x *Cylinder) WithMaterials(items ...*raw.SCNMaterial) *Cylinder {
 }
 
 // WithFirstMaterial sets the firstMaterial property and returns the receiver for chaining.
-func (x *Cylinder) WithFirstMaterial(firstMaterial *raw.SCNMaterial) *Cylinder {
-	x.inner.SCNGeometry.SetFirstMaterial(firstMaterial)
+func (x *Cylinder) WithFirstMaterial(firstMaterial *Material) *Cylinder {
+	x.inner.SCNGeometry.SetFirstMaterial(firstMaterial.Unwrap())
 	return x
 }
 
@@ -106,8 +106,8 @@ func (x *Cylinder) WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Cylinder 
 }
 
 // WithTessellator sets the tessellator property and returns the receiver for chaining.
-func (x *Cylinder) WithTessellator(tessellator *raw.SCNGeometryTessellator) *Cylinder {
-	x.inner.SCNGeometry.SetTessellator(tessellator)
+func (x *Cylinder) WithTessellator(tessellator *GeometryTessellator) *Cylinder {
+	x.inner.SCNGeometry.SetTessellator(tessellator.Unwrap())
 	return x
 }
 
@@ -124,14 +124,14 @@ func (x *Cylinder) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *
 }
 
 // WithEdgeCreasesElement sets the edgeCreasesElement property and returns the receiver for chaining.
-func (x *Cylinder) WithEdgeCreasesElement(edgeCreasesElement *raw.SCNGeometryElement) *Cylinder {
-	x.inner.SCNGeometry.SetEdgeCreasesElement(edgeCreasesElement)
+func (x *Cylinder) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Cylinder {
+	x.inner.SCNGeometry.SetEdgeCreasesElement(edgeCreasesElement.Unwrap())
 	return x
 }
 
 // WithEdgeCreasesSource sets the edgeCreasesSource property and returns the receiver for chaining.
-func (x *Cylinder) WithEdgeCreasesSource(edgeCreasesSource *raw.SCNGeometrySource) *Cylinder {
-	x.inner.SCNGeometry.SetEdgeCreasesSource(edgeCreasesSource)
+func (x *Cylinder) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Cylinder {
+	x.inner.SCNGeometry.SetEdgeCreasesSource(edgeCreasesSource.Unwrap())
 	return x
 }
 
@@ -186,13 +186,13 @@ type Cylinderable interface {
 	WithHeightSegmentCount(heightSegmentCount int) *Cylinder
 	WithName(name string) *Cylinder
 	WithMaterials(items ...*raw.SCNMaterial) *Cylinder
-	WithFirstMaterial(firstMaterial *raw.SCNMaterial) *Cylinder
+	WithFirstMaterial(firstMaterial *Material) *Cylinder
 	WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Cylinder
-	WithTessellator(tessellator *raw.SCNGeometryTessellator) *Cylinder
+	WithTessellator(tessellator *GeometryTessellator) *Cylinder
 	WithSubdivisionLevel(subdivisionLevel uint) *Cylinder
 	WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Cylinder
-	WithEdgeCreasesElement(edgeCreasesElement *raw.SCNGeometryElement) *Cylinder
-	WithEdgeCreasesSource(edgeCreasesSource *raw.SCNGeometrySource) *Cylinder
+	WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Cylinder
+	WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Cylinder
 	Radius() float64
 	SetRadius(radius float64)
 	Height() float64

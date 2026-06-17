@@ -52,13 +52,13 @@ func (x *GeoJSONFeature) Properties() *foundation.NSData {
 }
 
 // Geometry returns the collection as a Go slice.
-func (x *GeoJSONFeature) Geometry() []*raw.MKShape {
+func (x *GeoJSONFeature) Geometry() []*Shape {
 	arr := x.inner.Geometry()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MKShape {
-		return raw.MKShapeFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Shape {
+		return &Shape{inner: raw.MKShapeFromID(purego.Retain(_id))}
 	})
 }
 
@@ -67,7 +67,7 @@ type GeoJSONFeatureable interface {
 	Unwrap() *raw.MKGeoJSONFeature
 	Identifier() string
 	Properties() *foundation.NSData
-	Geometry() []*raw.MKShape
+	Geometry() []*Shape
 }
 
 var _ GeoJSONFeatureable = (*GeoJSONFeature)(nil)

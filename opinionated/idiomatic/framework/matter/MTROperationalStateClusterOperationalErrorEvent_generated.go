@@ -36,8 +36,8 @@ func NewMTROperationalStateClusterOperationalErrorEvent() *MTROperationalStateCl
 }
 
 // WithErrorState sets the errorState property and returns the receiver for chaining.
-func (x *MTROperationalStateClusterOperationalErrorEvent) WithErrorState(errorState *raw.MTROperationalStateClusterErrorStateStruct) *MTROperationalStateClusterOperationalErrorEvent {
-	x.inner.SetErrorState(errorState)
+func (x *MTROperationalStateClusterOperationalErrorEvent) WithErrorState(errorState *MTROperationalStateClusterErrorStateStruct) *MTROperationalStateClusterOperationalErrorEvent {
+	x.inner.SetErrorState(errorState.Unwrap())
 	return x
 }
 
@@ -58,7 +58,7 @@ func (x *MTROperationalStateClusterOperationalErrorEvent) SetErrorState(errorSta
 // MTROperationalStateClusterOperationalErrorEventable is the interface implemented by [MTROperationalStateClusterOperationalErrorEvent], for mocking and DI.
 type MTROperationalStateClusterOperationalErrorEventable interface {
 	Unwrap() *raw.MTROperationalStateClusterOperationalErrorEvent
-	WithErrorState(errorState *raw.MTROperationalStateClusterErrorStateStruct) *MTROperationalStateClusterOperationalErrorEvent
+	WithErrorState(errorState *MTROperationalStateClusterErrorStateStruct) *MTROperationalStateClusterOperationalErrorEvent
 	ErrorState() *MTROperationalStateClusterErrorStateStruct
 	SetErrorState(errorState *raw.MTROperationalStateClusterErrorStateStruct)
 }

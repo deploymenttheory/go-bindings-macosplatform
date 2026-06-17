@@ -36,8 +36,8 @@ func NewLengthFormatter() *LengthFormatter {
 }
 
 // WithNumberFormatter sets the numberFormatter property and returns the receiver for chaining.
-func (x *LengthFormatter) WithNumberFormatter(numberFormatter *raw.NSNumberFormatter) *LengthFormatter {
-	x.inner.SetNumberFormatter(numberFormatter)
+func (x *LengthFormatter) WithNumberFormatter(numberFormatter *NumberFormatter) *LengthFormatter {
+	x.inner.SetNumberFormatter(numberFormatter.Unwrap())
 	return x
 }
 
@@ -136,7 +136,7 @@ func (x *LengthFormatter) asObject() *raw.NSObject { return &x.inner.NSFormatter
 // LengthFormatterable is the interface implemented by [LengthFormatter], for mocking and DI.
 type LengthFormatterable interface {
 	Unwrap() *raw.NSLengthFormatter
-	WithNumberFormatter(numberFormatter *raw.NSNumberFormatter) *LengthFormatter
+	WithNumberFormatter(numberFormatter *NumberFormatter) *LengthFormatter
 	WithUnitStyle(unitStyle raw.NSFormattingUnitStyle) *LengthFormatter
 	WithForPersonHeightUse(forPersonHeightUse bool) *LengthFormatter
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *LengthFormatter

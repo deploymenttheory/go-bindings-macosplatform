@@ -55,8 +55,8 @@ func (x *AnimationGroup) WithAnimations(items ...AnimationProvider) *AnimationGr
 }
 
 // WithTimingFunction sets the timingFunction property and returns the receiver for chaining.
-func (x *AnimationGroup) WithTimingFunction(timingFunction *raw.CAMediaTimingFunction) *AnimationGroup {
-	x.inner.CAAnimation.SetTimingFunction(timingFunction)
+func (x *AnimationGroup) WithTimingFunction(timingFunction *MediaTimingFunction) *AnimationGroup {
+	x.inner.CAAnimation.SetTimingFunction(timingFunction.Unwrap())
 	return x
 }
 
@@ -79,13 +79,13 @@ func (x *AnimationGroup) WithPreferredFrameRateRange(preferredFrameRateRange raw
 }
 
 // Animations returns the collection as a Go slice.
-func (x *AnimationGroup) Animations() []*raw.CAAnimation {
+func (x *AnimationGroup) Animations() []*Animation {
 	arr := x.inner.Animations()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CAAnimation {
-		return raw.CAAnimationFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Animation {
+		return &Animation{inner: raw.CAAnimationFromID(purego.Retain(_id))}
 	})
 }
 
@@ -100,11 +100,11 @@ func (x *AnimationGroup) asAnimation() *raw.CAAnimation { return &x.inner.CAAnim
 type AnimationGroupable interface {
 	Unwrap() *raw.CAAnimationGroup
 	WithAnimations(items ...AnimationProvider) *AnimationGroup
-	WithTimingFunction(timingFunction *raw.CAMediaTimingFunction) *AnimationGroup
+	WithTimingFunction(timingFunction *MediaTimingFunction) *AnimationGroup
 	WithDelegate(delegate raw.CAAnimationDelegate) *AnimationGroup
 	WithRemovedOnCompletion(removedOnCompletion bool) *AnimationGroup
 	WithPreferredFrameRateRange(preferredFrameRateRange raw.CAFrameRateRange) *AnimationGroup
-	Animations() []*raw.CAAnimation
+	Animations() []*Animation
 	SetAnimations(animations *foundation.NSArray[*raw.CAAnimation])
 }
 

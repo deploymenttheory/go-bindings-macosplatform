@@ -55,13 +55,13 @@ func (x *AddShareablePassConfiguration) PrimaryAction() raw.PKAddShareablePassCo
 }
 
 // CredentialsMetadata returns the collection as a Go slice.
-func (x *AddShareablePassConfiguration) CredentialsMetadata() []*raw.PKShareablePassMetadata {
+func (x *AddShareablePassConfiguration) CredentialsMetadata() []*ShareablePassMetadata {
 	arr := x.inner.CredentialsMetadata()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PKShareablePassMetadata {
-		return raw.PKShareablePassMetadataFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ShareablePassMetadata {
+		return &ShareablePassMetadata{inner: raw.PKShareablePassMetadataFromID(purego.Retain(_id))}
 	})
 }
 
@@ -82,7 +82,7 @@ type AddShareablePassConfigurationable interface {
 	WithIssuerIdentifier(issuerIdentifier string) *AddShareablePassConfiguration
 	WithLocalizedDescription(localizedDescription string) *AddShareablePassConfiguration
 	PrimaryAction() raw.PKAddShareablePassConfigurationPrimaryAction
-	CredentialsMetadata() []*raw.PKShareablePassMetadata
+	CredentialsMetadata() []*ShareablePassMetadata
 	ProvisioningPolicyIdentifier() string
 }
 

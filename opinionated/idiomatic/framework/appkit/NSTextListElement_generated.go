@@ -44,8 +44,8 @@ func (x *TextListElement) WithTextContentManager(textContentManager TextContentM
 }
 
 // WithElementRange sets the elementRange property and returns the receiver for chaining.
-func (x *TextListElement) WithElementRange(elementRange *raw.NSTextRange) *TextListElement {
-	x.inner.NSTextParagraph.NSTextElement.SetElementRange(elementRange)
+func (x *TextListElement) WithElementRange(elementRange *TextRange) *TextListElement {
+	x.inner.NSTextParagraph.NSTextElement.SetElementRange(elementRange.Unwrap())
 	return x
 }
 
@@ -76,7 +76,7 @@ func (x *TextListElement) asTextElement() *raw.NSTextElement { return &x.inner.N
 type TextListElementable interface {
 	Unwrap() *raw.NSTextListElement
 	WithTextContentManager(textContentManager TextContentManagerProvider) *TextListElement
-	WithElementRange(elementRange *raw.NSTextRange) *TextListElement
+	WithElementRange(elementRange *TextRange) *TextListElement
 	TextList() *TextList
 	Contents() *foundation.NSAttributedString
 	MarkerAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID]

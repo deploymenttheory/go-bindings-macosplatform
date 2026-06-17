@@ -198,13 +198,13 @@ func (x *MetricPayload) DiskSpaceUsageMetrics() *DiskSpaceUsageMetric {
 }
 
 // SignpostMetrics returns the collection as a Go slice.
-func (x *MetricPayload) SignpostMetrics() []*raw.MXSignpostMetric {
+func (x *MetricPayload) SignpostMetrics() []*SignpostMetric {
 	arr := x.inner.SignpostMetrics()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MXSignpostMetric {
-		return raw.MXSignpostMetricFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *SignpostMetric {
+		return &SignpostMetric{inner: raw.MXSignpostMetricFromID(purego.Retain(_id))}
 	})
 }
 
@@ -240,7 +240,7 @@ type MetricPayloadable interface {
 	AnimationMetrics() *AnimationMetric
 	ApplicationExitMetrics() *AppExitMetric
 	DiskSpaceUsageMetrics() *DiskSpaceUsageMetric
-	SignpostMetrics() []*raw.MXSignpostMetric
+	SignpostMetrics() []*SignpostMetric
 	MetaData() *MetaData
 }
 

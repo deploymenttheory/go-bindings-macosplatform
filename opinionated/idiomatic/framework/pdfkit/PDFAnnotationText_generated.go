@@ -40,8 +40,8 @@ func NewAnnotationText() *AnnotationText {
 }
 
 // WithPage sets the page property and returns the receiver for chaining.
-func (x *AnnotationText) WithPage(page *raw.PDFPage) *AnnotationText {
-	x.inner.PDFAnnotation.SetPage(page)
+func (x *AnnotationText) WithPage(page *Page) *AnnotationText {
+	x.inner.PDFAnnotation.SetPage(page.Unwrap())
 	return x
 }
 
@@ -262,8 +262,8 @@ func (x *AnnotationText) WithOpen(open bool) *AnnotationText {
 }
 
 // WithDestination sets the destination property and returns the receiver for chaining.
-func (x *AnnotationText) WithDestination(destination *raw.PDFDestination) *AnnotationText {
-	x.inner.PDFAnnotation.SetDestination(destination)
+func (x *AnnotationText) WithDestination(destination *Destination) *AnnotationText {
+	x.inner.PDFAnnotation.SetDestination(destination.Unwrap())
 	return x
 }
 
@@ -302,7 +302,7 @@ func (x *AnnotationText) asAnnotation() *raw.PDFAnnotation { return &x.inner.PDF
 // AnnotationTextable is the interface implemented by [AnnotationText], for mocking and DI.
 type AnnotationTextable interface {
 	Unwrap() *raw.PDFAnnotationText
-	WithPage(page *raw.PDFPage) *AnnotationText
+	WithPage(page *Page) *AnnotationText
 	WithType(type_ string) *AnnotationText
 	WithBounds(bounds corefoundation.CGRect) *AnnotationText
 	WithShouldDisplay(shouldDisplay bool) *AnnotationText
@@ -334,7 +334,7 @@ type AnnotationTextable interface {
 	WithButtonWidgetState(buttonWidgetState raw.PDFWidgetCellState) *AnnotationText
 	WithButtonWidgetStateString(buttonWidgetStateString string) *AnnotationText
 	WithOpen(open bool) *AnnotationText
-	WithDestination(destination *raw.PDFDestination) *AnnotationText
+	WithDestination(destination *Destination) *AnnotationText
 	WithURL(uRL string) *AnnotationText
 	WithFieldName(fieldName string) *AnnotationText
 	WithCaption(caption string) *AnnotationText

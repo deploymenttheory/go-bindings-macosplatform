@@ -182,13 +182,13 @@ func (x *PhysicsBody) ApplyAngularImpulse(impulse float64) {
 }
 
 // AllContactedBodies returns the collection as a Go slice.
-func (x *PhysicsBody) AllContactedBodies() []*raw.SKPhysicsBody {
+func (x *PhysicsBody) AllContactedBodies() []*PhysicsBody {
 	arr := x.inner.AllContactedBodies()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SKPhysicsBody {
-		return raw.SKPhysicsBodyFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PhysicsBody {
+		return &PhysicsBody{inner: raw.SKPhysicsBodyFromID(purego.Retain(_id))}
 	})
 }
 
@@ -368,13 +368,13 @@ func (x *PhysicsBody) SetContactTestBitMask(contactTestBitMask uint32) {
 }
 
 // Joints returns the collection as a Go slice.
-func (x *PhysicsBody) Joints() []*raw.SKPhysicsJoint {
+func (x *PhysicsBody) Joints() []*PhysicsJoint {
 	arr := x.inner.Joints()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SKPhysicsJoint {
-		return raw.SKPhysicsJointFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PhysicsJoint {
+		return &PhysicsJoint{inner: raw.SKPhysicsJointFromID(purego.Retain(_id))}
 	})
 }
 
@@ -435,7 +435,7 @@ type PhysicsBodyable interface {
 	ApplyImpulse(impulse corefoundation.CGVector)
 	ApplyImpulseAtPoint(impulse corefoundation.CGVector, point corefoundation.CGPoint)
 	ApplyAngularImpulse(impulse float64)
-	AllContactedBodies() []*raw.SKPhysicsBody
+	AllContactedBodies() []*PhysicsBody
 	IsDynamic() bool
 	SetDynamic(dynamic bool)
 	UsesPreciseCollisionDetection() bool
@@ -471,7 +471,7 @@ type PhysicsBodyable interface {
 	SetCollisionBitMask(collisionBitMask uint32)
 	ContactTestBitMask() uint32
 	SetContactTestBitMask(contactTestBitMask uint32)
-	Joints() []*raw.SKPhysicsJoint
+	Joints() []*PhysicsJoint
 	Node() *Node
 	Velocity() corefoundation.CGVector
 	SetVelocity(velocity corefoundation.CGVector)

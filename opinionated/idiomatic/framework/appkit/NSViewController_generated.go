@@ -107,8 +107,8 @@ func (x *ViewController) WithNextResponder(nextResponder ResponderProvider) *Vie
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *ViewController) WithMenu(menu *raw.NSMenu) *ViewController {
-	x.inner.NSResponder.SetMenu(menu)
+func (x *ViewController) WithMenu(menu *Menu) *ViewController {
+	x.inner.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -119,8 +119,8 @@ func (x *ViewController) WithUserActivity(userActivity *foundation.NSUserActivit
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *ViewController) WithTouchBar(touchBar *raw.NSTouchBar) *ViewController {
-	x.inner.NSResponder.SetTouchBar(touchBar)
+func (x *ViewController) WithTouchBar(touchBar *TouchBar) *ViewController {
+	x.inner.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -281,13 +281,13 @@ func (x *ViewController) DismissController(sender objc.ID) {
 }
 
 // PresentedViewControllers returns the collection as a Go slice.
-func (x *ViewController) PresentedViewControllers() []*raw.NSViewController {
+func (x *ViewController) PresentedViewControllers() []*ViewController {
 	arr := x.inner.PresentedViewControllers()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSViewController {
-		return raw.NSViewControllerFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ViewController {
+		return &ViewController{inner: raw.NSViewControllerFromID(purego.Retain(_id))}
 	})
 }
 
@@ -374,13 +374,13 @@ func (x *ViewController) ParentViewController() *ViewController {
 }
 
 // ChildViewControllers returns the collection as a Go slice.
-func (x *ViewController) ChildViewControllers() []*raw.NSViewController {
+func (x *ViewController) ChildViewControllers() []*ViewController {
 	arr := x.inner.ChildViewControllers()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSViewController {
-		return raw.NSViewControllerFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ViewController {
+		return &ViewController{inner: raw.NSViewControllerFromID(purego.Retain(_id))}
 	})
 }
 
@@ -452,9 +452,9 @@ type ViewControllerable interface {
 	WithSourceItemView(sourceItemView ViewProvider) *ViewController
 	WithPreferredScreenOrigin(preferredScreenOrigin corefoundation.CGPoint) *ViewController
 	WithNextResponder(nextResponder ResponderProvider) *ViewController
-	WithMenu(menu *raw.NSMenu) *ViewController
+	WithMenu(menu *Menu) *ViewController
 	WithUserActivity(userActivity *foundation.NSUserActivity) *ViewController
-	WithTouchBar(touchBar *raw.NSTouchBar) *ViewController
+	WithTouchBar(touchBar *TouchBar) *ViewController
 	LoadView()
 	LoadViewIfNeeded()
 	CommitEditingWithDelegateDidCommitSelectorContextInfo(delegate objc.ID, didCommitSelector objc.SEL, contextInfo unsafe.Pointer)
@@ -483,7 +483,7 @@ type ViewControllerable interface {
 	PresentViewControllerAnimator(viewController *raw.NSViewController, animator raw.NSViewControllerPresentationAnimator)
 	DismissViewController(viewController *raw.NSViewController)
 	DismissController(sender objc.ID)
-	PresentedViewControllers() []*raw.NSViewController
+	PresentedViewControllers() []*ViewController
 	PresentingViewController() *ViewController
 	PresentViewControllerAsSheet(viewController *raw.NSViewController)
 	PresentViewControllerAsModalWindow(viewController *raw.NSViewController)
@@ -497,7 +497,7 @@ type ViewControllerable interface {
 	PreferredContentSizeDidChangeForViewController(viewController *raw.NSViewController)
 	ViewWillTransitionToSize(newSize corefoundation.CGSize)
 	ParentViewController() *ViewController
-	ChildViewControllers() []*raw.NSViewController
+	ChildViewControllers() []*ViewController
 	SetChildViewControllers(childViewControllers *foundation.NSArray[*raw.NSViewController])
 	Storyboard() *Storyboard
 	ExtensionContext() *foundation.NSExtensionContext

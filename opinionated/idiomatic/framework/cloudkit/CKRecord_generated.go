@@ -53,8 +53,8 @@ func NewRecordWithRecordTypeZoneID(recordType *foundation.NSString, zoneID *raw.
 }
 
 // WithParent sets the parent property and returns the receiver for chaining.
-func (x *Record) WithParent(parent *raw.CKReference) *Record {
-	x.inner.SetParent(parent)
+func (x *Record) WithParent(parent *Reference) *Record {
+	x.inner.SetParent(parent.Unwrap())
 	return x
 }
 
@@ -214,7 +214,7 @@ func (x *Record) asRecord() *raw.CKRecord { return x.inner }
 // Recordable is the interface implemented by [Record], for mocking and DI.
 type Recordable interface {
 	Unwrap() *raw.CKRecord
-	WithParent(parent *raw.CKReference) *Record
+	WithParent(parent *Reference) *Record
 	ObjectForKey(key *foundation.NSString) raw.CKRecordValue
 	SetObjectForKey(object raw.CKRecordValue, key *foundation.NSString)
 	AllKeys() []*foundation.NSString

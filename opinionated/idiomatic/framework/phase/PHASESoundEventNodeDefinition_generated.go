@@ -37,13 +37,13 @@ func NewSoundEventNodeDefinition() *SoundEventNodeDefinition {
 }
 
 // Children returns the collection as a Go slice.
-func (x *SoundEventNodeDefinition) Children() []*raw.PHASESoundEventNodeDefinition {
+func (x *SoundEventNodeDefinition) Children() []*SoundEventNodeDefinition {
 	arr := x.inner.Children()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PHASESoundEventNodeDefinition {
-		return raw.PHASESoundEventNodeDefinitionFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *SoundEventNodeDefinition {
+		return &SoundEventNodeDefinition{inner: raw.PHASESoundEventNodeDefinitionFromID(purego.Retain(_id))}
 	})
 }
 
@@ -54,7 +54,7 @@ func (x *SoundEventNodeDefinition) asDefinition() *raw.PHASEDefinition { return 
 // SoundEventNodeDefinitionable is the interface implemented by [SoundEventNodeDefinition], for mocking and DI.
 type SoundEventNodeDefinitionable interface {
 	Unwrap() *raw.PHASESoundEventNodeDefinition
-	Children() []*raw.PHASESoundEventNodeDefinition
+	Children() []*SoundEventNodeDefinition
 }
 
 var _ SoundEventNodeDefinitionable = (*SoundEventNodeDefinition)(nil)

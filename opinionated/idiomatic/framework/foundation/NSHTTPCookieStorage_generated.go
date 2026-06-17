@@ -81,13 +81,13 @@ func (x *HTTPCookieStorage) SortedCookiesUsingDescriptors(sortOrder *raw.NSArray
 }
 
 // Cookies returns the collection as a Go slice.
-func (x *HTTPCookieStorage) Cookies() []*raw.NSHTTPCookie {
+func (x *HTTPCookieStorage) Cookies() []*HTTPCookie {
 	arr := x.inner.Cookies()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSHTTPCookie {
-		return raw.NSHTTPCookieFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *HTTPCookie {
+		return &HTTPCookie{inner: raw.NSHTTPCookieFromID(purego.Retain(_id))}
 	})
 }
 
@@ -140,7 +140,7 @@ type HTTPCookieStorageable interface {
 	CookiesForURL(uRL string) *raw.NSArray[*raw.NSHTTPCookie]
 	SetCookiesForURLMainDocumentURL(cookies *raw.NSArray[*raw.NSHTTPCookie], uRL string, mainDocumentURL string)
 	SortedCookiesUsingDescriptors(sortOrder *raw.NSArray[*raw.NSSortDescriptor]) *raw.NSArray[*raw.NSHTTPCookie]
-	Cookies() []*raw.NSHTTPCookie
+	Cookies() []*HTTPCookie
 	CookieAcceptPolicy() raw.NSHTTPCookieAcceptPolicy
 	SetCookieAcceptPolicy(cookieAcceptPolicy raw.NSHTTPCookieAcceptPolicy)
 	StoreCookiesForTask(cookies *raw.NSArray[*raw.NSHTTPCookie], task *raw.NSURLSessionTask)

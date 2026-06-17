@@ -104,13 +104,13 @@ func (x *NEAppRule) SetMatchDomains(matchDomains *foundation.NSArray[objc.ID]) {
 }
 
 // MatchTools returns the collection as a Go slice.
-func (x *NEAppRule) MatchTools() []*raw.NEAppRule {
+func (x *NEAppRule) MatchTools() []*NEAppRule {
 	arr := x.inner.MatchTools()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NEAppRule {
-		return raw.NEAppRuleFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *NEAppRule {
+		return &NEAppRule{inner: raw.NEAppRuleFromID(purego.Retain(_id))}
 	})
 }
 
@@ -130,7 +130,7 @@ type NEAppRuleable interface {
 	SetMatchPath(matchPath string)
 	MatchDomains() *foundation.NSArray[objc.ID]
 	SetMatchDomains(matchDomains *foundation.NSArray[objc.ID])
-	MatchTools() []*raw.NEAppRule
+	MatchTools() []*NEAppRule
 	SetMatchTools(matchTools *foundation.NSArray[*raw.NEAppRule])
 }
 

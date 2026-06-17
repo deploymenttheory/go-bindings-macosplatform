@@ -54,14 +54,14 @@ func NewDataPointWithXYAdditionalValuesLabel(xValue *raw.AXDataPointValue, yValu
 }
 
 // WithXValue sets the xValue property and returns the receiver for chaining.
-func (x *DataPoint) WithXValue(xValue *raw.AXDataPointValue) *DataPoint {
-	x.inner.SetXValue(xValue)
+func (x *DataPoint) WithXValue(xValue *DataPointValue) *DataPoint {
+	x.inner.SetXValue(xValue.Unwrap())
 	return x
 }
 
 // WithYValue sets the yValue property and returns the receiver for chaining.
-func (x *DataPoint) WithYValue(yValue *raw.AXDataPointValue) *DataPoint {
-	x.inner.SetYValue(yValue)
+func (x *DataPoint) WithYValue(yValue *DataPointValue) *DataPoint {
+	x.inner.SetYValue(yValue.Unwrap())
 	return x
 }
 
@@ -122,13 +122,13 @@ func (x *DataPoint) SetYValue(yValue *raw.AXDataPointValue) {
 }
 
 // AdditionalValues returns the collection as a Go slice.
-func (x *DataPoint) AdditionalValues() []*raw.AXDataPointValue {
+func (x *DataPoint) AdditionalValues() []*DataPointValue {
 	arr := x.inner.AdditionalValues()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AXDataPointValue {
-		return raw.AXDataPointValueFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *DataPointValue {
+		return &DataPointValue{inner: raw.AXDataPointValueFromID(purego.Retain(_id))}
 	})
 }
 
@@ -164,8 +164,8 @@ func (x *DataPoint) SetAttributedLabel(attributedLabel *foundation.NSAttributedS
 // DataPointable is the interface implemented by [DataPoint], for mocking and DI.
 type DataPointable interface {
 	Unwrap() *raw.AXDataPoint
-	WithXValue(xValue *raw.AXDataPointValue) *DataPoint
-	WithYValue(yValue *raw.AXDataPointValue) *DataPoint
+	WithXValue(xValue *DataPointValue) *DataPoint
+	WithYValue(yValue *DataPointValue) *DataPoint
 	WithAdditionalValues(items ...*raw.AXDataPointValue) *DataPoint
 	WithLabel(label string) *DataPoint
 	WithAttributedLabel(attributedLabel *foundation.NSAttributedString) *DataPoint
@@ -173,7 +173,7 @@ type DataPointable interface {
 	SetXValue(xValue *raw.AXDataPointValue)
 	YValue() *DataPointValue
 	SetYValue(yValue *raw.AXDataPointValue)
-	AdditionalValues() []*raw.AXDataPointValue
+	AdditionalValues() []*DataPointValue
 	SetAdditionalValues(additionalValues *foundation.NSArray[*raw.AXDataPointValue])
 	Label() string
 	SetLabel(label string)

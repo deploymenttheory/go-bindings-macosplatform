@@ -106,13 +106,13 @@ func (x *ExtensionItem) SetAttributedContentText(attributedContentText *raw.NSAt
 }
 
 // Attachments returns the collection as a Go slice.
-func (x *ExtensionItem) Attachments() []*raw.NSItemProvider {
+func (x *ExtensionItem) Attachments() []*ItemProvider {
 	arr := x.inner.Attachments()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSItemProvider {
-		return raw.NSItemProviderFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ItemProvider {
+		return &ItemProvider{inner: raw.NSItemProviderFromID(purego.Retain(_id))}
 	})
 }
 
@@ -145,7 +145,7 @@ type ExtensionItemable interface {
 	SetAttributedTitle(attributedTitle *raw.NSAttributedString)
 	AttributedContentText() *AttributedString
 	SetAttributedContentText(attributedContentText *raw.NSAttributedString)
-	Attachments() []*raw.NSItemProvider
+	Attachments() []*ItemProvider
 	SetAttachments(attachments *raw.NSArray[*raw.NSItemProvider])
 	UserInfo() *raw.NSDictionary[objc.ID, objc.ID]
 	SetUserInfo(userInfo *raw.NSDictionary[objc.ID, objc.ID])

@@ -36,8 +36,8 @@ func NewListFormatter() *ListFormatter {
 }
 
 // WithLocale sets the locale property and returns the receiver for chaining.
-func (x *ListFormatter) WithLocale(locale *raw.NSLocale) *ListFormatter {
-	x.inner.SetLocale(locale)
+func (x *ListFormatter) WithLocale(locale *Locale) *ListFormatter {
+	x.inner.SetLocale(locale.Unwrap())
 	return x
 }
 
@@ -97,7 +97,7 @@ func (x *ListFormatter) asObject() *raw.NSObject { return &x.inner.NSFormatter.N
 // ListFormatterable is the interface implemented by [ListFormatter], for mocking and DI.
 type ListFormatterable interface {
 	Unwrap() *raw.NSListFormatter
-	WithLocale(locale *raw.NSLocale) *ListFormatter
+	WithLocale(locale *Locale) *ListFormatter
 	WithItemFormatter(itemFormatter FormatterProvider) *ListFormatter
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ListFormatter
 	StringFromItems(items *raw.NSArray[objc.ID]) *String

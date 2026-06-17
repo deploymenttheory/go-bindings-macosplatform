@@ -64,8 +64,8 @@ func (x *SearchField) WithRecentsAutosaveName(recentsAutosaveName *foundation.NS
 }
 
 // WithSearchMenuTemplate sets the searchMenuTemplate property and returns the receiver for chaining.
-func (x *SearchField) WithSearchMenuTemplate(searchMenuTemplate *raw.NSMenu) *SearchField {
-	x.inner.SetSearchMenuTemplate(searchMenuTemplate)
+func (x *SearchField) WithSearchMenuTemplate(searchMenuTemplate *Menu) *SearchField {
+	x.inner.SetSearchMenuTemplate(searchMenuTemplate.Unwrap())
 	return x
 }
 
@@ -106,8 +106,8 @@ func (x *SearchField) WithPlaceholderAttributedString(placeholderAttributedStrin
 }
 
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
-func (x *SearchField) WithBackgroundColor(backgroundColor *raw.NSColor) *SearchField {
-	x.inner.NSTextField.SetBackgroundColor(backgroundColor)
+func (x *SearchField) WithBackgroundColor(backgroundColor *Color) *SearchField {
+	x.inner.NSTextField.SetBackgroundColor(backgroundColor.Unwrap())
 	return x
 }
 
@@ -118,8 +118,8 @@ func (x *SearchField) WithDrawsBackground(drawsBackground bool) *SearchField {
 }
 
 // WithTextColor sets the textColor property and returns the receiver for chaining.
-func (x *SearchField) WithTextColor(textColor *raw.NSColor) *SearchField {
-	x.inner.NSTextField.SetTextColor(textColor)
+func (x *SearchField) WithTextColor(textColor *Color) *SearchField {
+	x.inner.NSTextField.SetTextColor(textColor.Unwrap())
 	return x
 }
 
@@ -360,8 +360,8 @@ func (x *SearchField) WithDoubleValue(doubleValue float64) *SearchField {
 }
 
 // WithFont sets the font property and returns the receiver for chaining.
-func (x *SearchField) WithFont(font *raw.NSFont) *SearchField {
-	x.inner.NSTextField.NSControl.SetFont(font)
+func (x *SearchField) WithFont(font *Font) *SearchField {
+	x.inner.NSTextField.NSControl.SetFont(font.Unwrap())
 	return x
 }
 
@@ -582,8 +582,8 @@ func (x *SearchField) WithContentFilters(items ...*coreimage.CIFilter) *SearchFi
 }
 
 // WithShadow sets the shadow property and returns the receiver for chaining.
-func (x *SearchField) WithShadow(shadow *raw.NSShadow) *SearchField {
-	x.inner.NSTextField.NSControl.NSView.SetShadow(shadow)
+func (x *SearchField) WithShadow(shadow *Shadow) *SearchField {
+	x.inner.NSTextField.NSControl.NSView.SetShadow(shadow.Unwrap())
 	return x
 }
 
@@ -664,8 +664,8 @@ func (x *SearchField) WithPrefersCompactControlSizeMetrics(prefersCompactControl
 }
 
 // WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
-func (x *SearchField) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *SearchField {
-	x.inner.NSTextField.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+func (x *SearchField) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *SearchField {
+	x.inner.NSTextField.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
 	return x
 }
 
@@ -706,8 +706,8 @@ func (x *SearchField) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDy
 }
 
 // WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
-func (x *SearchField) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *SearchField {
-	x.inner.NSTextField.NSControl.NSView.SetPressureConfiguration(pressureConfiguration)
+func (x *SearchField) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *SearchField {
+	x.inner.NSTextField.NSControl.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
 	return x
 }
 
@@ -718,8 +718,8 @@ func (x *SearchField) WithNextResponder(nextResponder ResponderProvider) *Search
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *SearchField) WithMenu(menu *raw.NSMenu) *SearchField {
-	x.inner.NSTextField.NSControl.NSView.NSResponder.SetMenu(menu)
+func (x *SearchField) WithMenu(menu *Menu) *SearchField {
+	x.inner.NSTextField.NSControl.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -730,8 +730,8 @@ func (x *SearchField) WithUserActivity(userActivity *foundation.NSUserActivity) 
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *SearchField) WithTouchBar(touchBar *raw.NSTouchBar) *SearchField {
-	x.inner.NSTextField.NSControl.NSView.NSResponder.SetTouchBar(touchBar)
+func (x *SearchField) WithTouchBar(touchBar *TouchBar) *SearchField {
+	x.inner.NSTextField.NSControl.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -862,16 +862,16 @@ type SearchFieldable interface {
 	Unwrap() *raw.NSSearchField
 	WithRecentSearches(items ...*foundation.NSString) *SearchField
 	WithRecentsAutosaveName(recentsAutosaveName *foundation.NSString) *SearchField
-	WithSearchMenuTemplate(searchMenuTemplate *raw.NSMenu) *SearchField
+	WithSearchMenuTemplate(searchMenuTemplate *Menu) *SearchField
 	WithSendsWholeSearchString(sendsWholeSearchString bool) *SearchField
 	WithMaximumRecents(maximumRecents int) *SearchField
 	WithSendsSearchStringImmediately(sendsSearchStringImmediately bool) *SearchField
 	WithCentersPlaceholder(centersPlaceholder bool) *SearchField
 	WithPlaceholderString(placeholderString string) *SearchField
 	WithPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString) *SearchField
-	WithBackgroundColor(backgroundColor *raw.NSColor) *SearchField
+	WithBackgroundColor(backgroundColor *Color) *SearchField
 	WithDrawsBackground(drawsBackground bool) *SearchField
-	WithTextColor(textColor *raw.NSColor) *SearchField
+	WithTextColor(textColor *Color) *SearchField
 	WithBordered(bordered bool) *SearchField
 	WithBezeled(bezeled bool) *SearchField
 	WithEditable(editable bool) *SearchField
@@ -908,7 +908,7 @@ type SearchFieldable interface {
 	WithIntegerValue(integerValue int) *SearchField
 	WithFloatValue(floatValue float32) *SearchField
 	WithDoubleValue(doubleValue float64) *SearchField
-	WithFont(font *raw.NSFont) *SearchField
+	WithFont(font *Font) *SearchField
 	WithUsesSingleLineMode(usesSingleLineMode bool) *SearchField
 	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *SearchField
 	WithAlignment(alignment raw.NSTextAlignment) *SearchField
@@ -940,7 +940,7 @@ type SearchFieldable interface {
 	WithBackgroundFilters(items ...*coreimage.CIFilter) *SearchField
 	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *SearchField
 	WithContentFilters(items ...*coreimage.CIFilter) *SearchField
-	WithShadow(shadow *raw.NSShadow) *SearchField
+	WithShadow(shadow *Shadow) *SearchField
 	WithClipsToBounds(clipsToBounds bool) *SearchField
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *SearchField
 	WithToolTip(toolTip string) *SearchField
@@ -952,18 +952,18 @@ type SearchFieldable interface {
 	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *SearchField
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *SearchField
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *SearchField
-	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *SearchField
+	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *SearchField
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *SearchField
 	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *SearchField
 	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *SearchField
 	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *SearchField
 	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *SearchField
 	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *SearchField
-	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *SearchField
+	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *SearchField
 	WithNextResponder(nextResponder ResponderProvider) *SearchField
-	WithMenu(menu *raw.NSMenu) *SearchField
+	WithMenu(menu *Menu) *SearchField
 	WithUserActivity(userActivity *foundation.NSUserActivity) *SearchField
-	WithTouchBar(touchBar *raw.NSTouchBar) *SearchField
+	WithTouchBar(touchBar *TouchBar) *SearchField
 	SearchTextBounds() corefoundation.CGRect
 	SearchButtonBounds() corefoundation.CGRect
 	CancelButtonBounds() corefoundation.CGRect

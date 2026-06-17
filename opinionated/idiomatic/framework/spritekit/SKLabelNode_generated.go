@@ -186,8 +186,8 @@ func (x *LabelNode) WithName(name string) *LabelNode {
 }
 
 // WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
-func (x *LabelNode) WithPhysicsBody(physicsBody *raw.SKPhysicsBody) *LabelNode {
-	x.inner.SKNode.SetPhysicsBody(physicsBody)
+func (x *LabelNode) WithPhysicsBody(physicsBody *PhysicsBody) *LabelNode {
+	x.inner.SKNode.SetPhysicsBody(physicsBody.Unwrap())
 	return x
 }
 
@@ -198,8 +198,8 @@ func (x *LabelNode) WithUserData(userData *foundation.NSMutableDictionary[objc.I
 }
 
 // WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
-func (x *LabelNode) WithReachConstraints(reachConstraints *raw.SKReachConstraints) *LabelNode {
-	x.inner.SKNode.SetReachConstraints(reachConstraints)
+func (x *LabelNode) WithReachConstraints(reachConstraints *ReachConstraints) *LabelNode {
+	x.inner.SKNode.SetReachConstraints(reachConstraints.Unwrap())
 	return x
 }
 
@@ -446,9 +446,9 @@ type LabelNodeable interface {
 	WithHidden(hidden bool) *LabelNode
 	WithUserInteractionEnabled(userInteractionEnabled bool) *LabelNode
 	WithName(name string) *LabelNode
-	WithPhysicsBody(physicsBody *raw.SKPhysicsBody) *LabelNode
+	WithPhysicsBody(physicsBody *PhysicsBody) *LabelNode
 	WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *LabelNode
-	WithReachConstraints(reachConstraints *raw.SKReachConstraints) *LabelNode
+	WithReachConstraints(reachConstraints *ReachConstraints) *LabelNode
 	WithConstraints(items ...*raw.SKConstraint) *LabelNode
 	WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *LabelNode
 	WithAccessibilityElement(accessibilityElement bool) *LabelNode

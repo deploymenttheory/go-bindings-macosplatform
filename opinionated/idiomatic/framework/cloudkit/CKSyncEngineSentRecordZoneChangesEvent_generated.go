@@ -38,35 +38,35 @@ func NewSyncEngineSentRecordZoneChangesEvent() *SyncEngineSentRecordZoneChangesE
 }
 
 // SavedRecords returns the collection as a Go slice.
-func (x *SyncEngineSentRecordZoneChangesEvent) SavedRecords() []*raw.CKRecord {
+func (x *SyncEngineSentRecordZoneChangesEvent) SavedRecords() []*Record {
 	arr := x.inner.SavedRecords()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CKRecord {
-		return raw.CKRecordFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Record {
+		return &Record{inner: raw.CKRecordFromID(purego.Retain(_id))}
 	})
 }
 
 // FailedRecordSaves returns the collection as a Go slice.
-func (x *SyncEngineSentRecordZoneChangesEvent) FailedRecordSaves() []*raw.CKSyncEngineFailedRecordSave {
+func (x *SyncEngineSentRecordZoneChangesEvent) FailedRecordSaves() []*SyncEngineFailedRecordSave {
 	arr := x.inner.FailedRecordSaves()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CKSyncEngineFailedRecordSave {
-		return raw.CKSyncEngineFailedRecordSaveFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *SyncEngineFailedRecordSave {
+		return &SyncEngineFailedRecordSave{inner: raw.CKSyncEngineFailedRecordSaveFromID(purego.Retain(_id))}
 	})
 }
 
 // DeletedRecordIDs returns the collection as a Go slice.
-func (x *SyncEngineSentRecordZoneChangesEvent) DeletedRecordIDs() []*raw.CKRecordID {
+func (x *SyncEngineSentRecordZoneChangesEvent) DeletedRecordIDs() []*RecordID {
 	arr := x.inner.DeletedRecordIDs()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CKRecordID {
-		return raw.CKRecordIDFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *RecordID {
+		return &RecordID{inner: raw.CKRecordIDFromID(purego.Retain(_id))}
 	})
 }
 
@@ -80,9 +80,9 @@ func (x *SyncEngineSentRecordZoneChangesEvent) asSyncEngineEvent() *raw.CKSyncEn
 // SyncEngineSentRecordZoneChangesEventable is the interface implemented by [SyncEngineSentRecordZoneChangesEvent], for mocking and DI.
 type SyncEngineSentRecordZoneChangesEventable interface {
 	Unwrap() *raw.CKSyncEngineSentRecordZoneChangesEvent
-	SavedRecords() []*raw.CKRecord
-	FailedRecordSaves() []*raw.CKSyncEngineFailedRecordSave
-	DeletedRecordIDs() []*raw.CKRecordID
+	SavedRecords() []*Record
+	FailedRecordSaves() []*SyncEngineFailedRecordSave
+	DeletedRecordIDs() []*RecordID
 	FailedRecordDeletes() *foundation.NSDictionary[*raw.CKRecordID, objc.ID]
 }
 

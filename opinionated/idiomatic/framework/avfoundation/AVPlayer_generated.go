@@ -126,8 +126,8 @@ func (x *Player) WithAudiovisualBackgroundPlaybackPolicy(audiovisualBackgroundPl
 }
 
 // WithVideoOutput sets the videoOutput property and returns the receiver for chaining.
-func (x *Player) WithVideoOutput(videoOutput *raw.AVPlayerVideoOutput) *Player {
-	x.inner.SetVideoOutput(videoOutput)
+func (x *Player) WithVideoOutput(videoOutput *PlayerVideoOutput) *Player {
+	x.inner.SetVideoOutput(videoOutput.Unwrap())
 	return x
 }
 
@@ -515,7 +515,7 @@ type Playerable interface {
 	WithPreferredVideoDecoderGPURegistryID(preferredVideoDecoderGPURegistryID uint64) *Player
 	WithPreventsDisplaySleepDuringVideoPlayback(preventsDisplaySleepDuringVideoPlayback bool) *Player
 	WithAudiovisualBackgroundPlaybackPolicy(audiovisualBackgroundPlaybackPolicy raw.AVPlayerAudiovisualBackgroundPlaybackPolicy) *Player
-	WithVideoOutput(videoOutput *raw.AVPlayerVideoOutput) *Player
+	WithVideoOutput(videoOutput *PlayerVideoOutput) *Player
 	WithNetworkResourcePriority(networkResourcePriority raw.AVPlayerNetworkResourcePriority) *Player
 	WithAllowsCaptureOfClearKeyVideo(allowsCaptureOfClearKeyVideo bool) *Player
 	WithClosedCaptionDisplayEnabled(closedCaptionDisplayEnabled bool) *Player

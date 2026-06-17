@@ -465,13 +465,13 @@ func (x *URLComponents) RangeOfFragment() raw.NSRange {
 }
 
 // QueryItems returns the collection as a Go slice.
-func (x *URLComponents) QueryItems() []*raw.NSURLQueryItem {
+func (x *URLComponents) QueryItems() []*URLQueryItem {
 	arr := x.inner.QueryItems()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSURLQueryItem {
-		return raw.NSURLQueryItemFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *URLQueryItem {
+		return &URLQueryItem{inner: raw.NSURLQueryItemFromID(purego.Retain(_id))}
 	})
 }
 
@@ -481,13 +481,13 @@ func (x *URLComponents) SetQueryItems(queryItems *raw.NSArray[*raw.NSURLQueryIte
 }
 
 // PercentEncodedQueryItems returns the collection as a Go slice.
-func (x *URLComponents) PercentEncodedQueryItems() []*raw.NSURLQueryItem {
+func (x *URLComponents) PercentEncodedQueryItems() []*URLQueryItem {
 	arr := x.inner.PercentEncodedQueryItems()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSURLQueryItem {
-		return raw.NSURLQueryItemFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *URLQueryItem {
+		return &URLQueryItem{inner: raw.NSURLQueryItemFromID(purego.Retain(_id))}
 	})
 }
 
@@ -560,9 +560,9 @@ type URLComponentsable interface {
 	RangeOfPath() raw.NSRange
 	RangeOfQuery() raw.NSRange
 	RangeOfFragment() raw.NSRange
-	QueryItems() []*raw.NSURLQueryItem
+	QueryItems() []*URLQueryItem
 	SetQueryItems(queryItems *raw.NSArray[*raw.NSURLQueryItem])
-	PercentEncodedQueryItems() []*raw.NSURLQueryItem
+	PercentEncodedQueryItems() []*URLQueryItem
 	SetPercentEncodedQueryItems(percentEncodedQueryItems *raw.NSArray[*raw.NSURLQueryItem])
 }
 

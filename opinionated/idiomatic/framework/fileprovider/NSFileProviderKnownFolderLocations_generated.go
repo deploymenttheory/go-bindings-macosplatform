@@ -42,14 +42,14 @@ func (x *FileProviderKnownFolderLocations) WithShouldCreateBinaryCompatibilitySy
 }
 
 // WithDesktopLocation sets the desktopLocation property and returns the receiver for chaining.
-func (x *FileProviderKnownFolderLocations) WithDesktopLocation(desktopLocation *raw.NSFileProviderKnownFolderLocation) *FileProviderKnownFolderLocations {
-	x.inner.SetDesktopLocation(desktopLocation)
+func (x *FileProviderKnownFolderLocations) WithDesktopLocation(desktopLocation *FileProviderKnownFolderLocation) *FileProviderKnownFolderLocations {
+	x.inner.SetDesktopLocation(desktopLocation.Unwrap())
 	return x
 }
 
 // WithDocumentsLocation sets the documentsLocation property and returns the receiver for chaining.
-func (x *FileProviderKnownFolderLocations) WithDocumentsLocation(documentsLocation *raw.NSFileProviderKnownFolderLocation) *FileProviderKnownFolderLocations {
-	x.inner.SetDocumentsLocation(documentsLocation)
+func (x *FileProviderKnownFolderLocations) WithDocumentsLocation(documentsLocation *FileProviderKnownFolderLocation) *FileProviderKnownFolderLocations {
+	x.inner.SetDocumentsLocation(documentsLocation.Unwrap())
 	return x
 }
 
@@ -95,8 +95,8 @@ func (x *FileProviderKnownFolderLocations) SetDocumentsLocation(documentsLocatio
 type FileProviderKnownFolderLocationsable interface {
 	Unwrap() *raw.NSFileProviderKnownFolderLocations
 	WithShouldCreateBinaryCompatibilitySymlink(shouldCreateBinaryCompatibilitySymlink bool) *FileProviderKnownFolderLocations
-	WithDesktopLocation(desktopLocation *raw.NSFileProviderKnownFolderLocation) *FileProviderKnownFolderLocations
-	WithDocumentsLocation(documentsLocation *raw.NSFileProviderKnownFolderLocation) *FileProviderKnownFolderLocations
+	WithDesktopLocation(desktopLocation *FileProviderKnownFolderLocation) *FileProviderKnownFolderLocations
+	WithDocumentsLocation(documentsLocation *FileProviderKnownFolderLocation) *FileProviderKnownFolderLocations
 	ShouldCreateBinaryCompatibilitySymlink() bool
 	SetShouldCreateBinaryCompatibilitySymlink(shouldCreateBinaryCompatibilitySymlink bool)
 	DesktopLocation() *FileProviderKnownFolderLocation

@@ -63,8 +63,8 @@ func (x *NEProxySettings) WithHTTPEnabled(hTTPEnabled bool) *NEProxySettings {
 }
 
 // WithHTTPServer sets the hTTPServer property and returns the receiver for chaining.
-func (x *NEProxySettings) WithHTTPServer(hTTPServer *raw.NEProxyServer) *NEProxySettings {
-	x.inner.SetHTTPServer(hTTPServer)
+func (x *NEProxySettings) WithHTTPServer(hTTPServer *NEProxyServer) *NEProxySettings {
+	x.inner.SetHTTPServer(hTTPServer.Unwrap())
 	return x
 }
 
@@ -75,8 +75,8 @@ func (x *NEProxySettings) WithHTTPSEnabled(hTTPSEnabled bool) *NEProxySettings {
 }
 
 // WithHTTPSServer sets the hTTPSServer property and returns the receiver for chaining.
-func (x *NEProxySettings) WithHTTPSServer(hTTPSServer *raw.NEProxyServer) *NEProxySettings {
-	x.inner.SetHTTPSServer(hTTPSServer)
+func (x *NEProxySettings) WithHTTPSServer(hTTPSServer *NEProxyServer) *NEProxySettings {
+	x.inner.SetHTTPSServer(hTTPSServer.Unwrap())
 	return x
 }
 
@@ -249,9 +249,9 @@ type NEProxySettingsable interface {
 	WithProxyAutoConfigurationURL(proxyAutoConfigurationURL string) *NEProxySettings
 	WithProxyAutoConfigurationJavaScript(proxyAutoConfigurationJavaScript string) *NEProxySettings
 	WithHTTPEnabled(hTTPEnabled bool) *NEProxySettings
-	WithHTTPServer(hTTPServer *raw.NEProxyServer) *NEProxySettings
+	WithHTTPServer(hTTPServer *NEProxyServer) *NEProxySettings
 	WithHTTPSEnabled(hTTPSEnabled bool) *NEProxySettings
-	WithHTTPSServer(hTTPSServer *raw.NEProxyServer) *NEProxySettings
+	WithHTTPSServer(hTTPSServer *NEProxyServer) *NEProxySettings
 	WithExcludeSimpleHostnames(excludeSimpleHostnames bool) *NEProxySettings
 	WithExceptionList(items ...*foundation.NSString) *NEProxySettings
 	WithMatchDomains(items ...*foundation.NSString) *NEProxySettings

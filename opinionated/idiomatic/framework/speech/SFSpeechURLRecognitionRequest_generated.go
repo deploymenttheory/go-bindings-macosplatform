@@ -85,8 +85,8 @@ func (x *SpeechURLRecognitionRequest) WithAddsPunctuation(addsPunctuation bool) 
 }
 
 // WithCustomizedLanguageModel sets the customizedLanguageModel property and returns the receiver for chaining.
-func (x *SpeechURLRecognitionRequest) WithCustomizedLanguageModel(customizedLanguageModel *raw.SFSpeechLanguageModelConfiguration) *SpeechURLRecognitionRequest {
-	x.inner.SFSpeechRecognitionRequest.SetCustomizedLanguageModel(customizedLanguageModel)
+func (x *SpeechURLRecognitionRequest) WithCustomizedLanguageModel(customizedLanguageModel *SpeechLanguageModelConfiguration) *SpeechURLRecognitionRequest {
+	x.inner.SFSpeechRecognitionRequest.SetCustomizedLanguageModel(customizedLanguageModel.Unwrap())
 	return x
 }
 
@@ -106,7 +106,7 @@ type SpeechURLRecognitionRequestable interface {
 	WithInteractionIdentifier(interactionIdentifier string) *SpeechURLRecognitionRequest
 	WithRequiresOnDeviceRecognition(requiresOnDeviceRecognition bool) *SpeechURLRecognitionRequest
 	WithAddsPunctuation(addsPunctuation bool) *SpeechURLRecognitionRequest
-	WithCustomizedLanguageModel(customizedLanguageModel *raw.SFSpeechLanguageModelConfiguration) *SpeechURLRecognitionRequest
+	WithCustomizedLanguageModel(customizedLanguageModel *SpeechLanguageModelConfiguration) *SpeechURLRecognitionRequest
 	URL() *foundation.NSURL
 }
 

@@ -36,8 +36,8 @@ func NewMTROvenCavityOperationalStateClusterOperationalErrorEvent() *MTROvenCavi
 }
 
 // WithErrorState sets the errorState property and returns the receiver for chaining.
-func (x *MTROvenCavityOperationalStateClusterOperationalErrorEvent) WithErrorState(errorState *raw.MTROvenCavityOperationalStateClusterErrorStateStruct) *MTROvenCavityOperationalStateClusterOperationalErrorEvent {
-	x.inner.SetErrorState(errorState)
+func (x *MTROvenCavityOperationalStateClusterOperationalErrorEvent) WithErrorState(errorState *MTROvenCavityOperationalStateClusterErrorStateStruct) *MTROvenCavityOperationalStateClusterOperationalErrorEvent {
+	x.inner.SetErrorState(errorState.Unwrap())
 	return x
 }
 
@@ -58,7 +58,7 @@ func (x *MTROvenCavityOperationalStateClusterOperationalErrorEvent) SetErrorStat
 // MTROvenCavityOperationalStateClusterOperationalErrorEventable is the interface implemented by [MTROvenCavityOperationalStateClusterOperationalErrorEvent], for mocking and DI.
 type MTROvenCavityOperationalStateClusterOperationalErrorEventable interface {
 	Unwrap() *raw.MTROvenCavityOperationalStateClusterOperationalErrorEvent
-	WithErrorState(errorState *raw.MTROvenCavityOperationalStateClusterErrorStateStruct) *MTROvenCavityOperationalStateClusterOperationalErrorEvent
+	WithErrorState(errorState *MTROvenCavityOperationalStateClusterErrorStateStruct) *MTROvenCavityOperationalStateClusterOperationalErrorEvent
 	ErrorState() *MTROvenCavityOperationalStateClusterErrorStateStruct
 	SetErrorState(errorState *raw.MTROvenCavityOperationalStateClusterErrorStateStruct)
 }

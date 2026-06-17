@@ -73,13 +73,13 @@ func (x *Contour) ChildContourCount() int {
 }
 
 // ChildContours returns the collection as a Go slice.
-func (x *Contour) ChildContours() []*raw.VNContour {
+func (x *Contour) ChildContours() []*Contour {
 	arr := x.inner.ChildContours()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.VNContour {
-		return raw.VNContourFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Contour {
+		return &Contour{inner: raw.VNContourFromID(purego.Retain(_id))}
 	})
 }
 
@@ -110,7 +110,7 @@ type Contourable interface {
 	PolygonApproximationWithEpsilonError(epsilon float32) (*Contour, error)
 	IndexPath() *foundation.NSIndexPath
 	ChildContourCount() int
-	ChildContours() []*raw.VNContour
+	ChildContours() []*Contour
 	PointCount() int
 	NormalizedPoints() unsafe.Pointer
 	NormalizedPath() unsafe.Pointer

@@ -36,8 +36,8 @@ func NewLayer() *Layer {
 }
 
 // WithScene sets the scene property and returns the receiver for chaining.
-func (x *Layer) WithScene(scene *raw.SCNScene) *Layer {
-	x.inner.SetScene(scene)
+func (x *Layer) WithScene(scene *Scene) *Layer {
+	x.inner.SetScene(scene.Unwrap())
 	return x
 }
 
@@ -58,7 +58,7 @@ func (x *Layer) SetScene(scene *raw.SCNScene) {
 // Layerable is the interface implemented by [Layer], for mocking and DI.
 type Layerable interface {
 	Unwrap() *raw.SCNLayer
-	WithScene(scene *raw.SCNScene) *Layer
+	WithScene(scene *Scene) *Layer
 	Scene() *Scene
 	SetScene(scene *raw.SCNScene)
 }

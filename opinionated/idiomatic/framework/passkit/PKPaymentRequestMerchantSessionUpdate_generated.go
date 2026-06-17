@@ -43,8 +43,8 @@ func (x *PaymentRequestMerchantSessionUpdate) WithStatus(status raw.PKPaymentAut
 }
 
 // WithSession sets the session property and returns the receiver for chaining.
-func (x *PaymentRequestMerchantSessionUpdate) WithSession(session *raw.PKPaymentMerchantSession) *PaymentRequestMerchantSessionUpdate {
-	x.inner.SetSession(session)
+func (x *PaymentRequestMerchantSessionUpdate) WithSession(session *PaymentMerchantSession) *PaymentRequestMerchantSessionUpdate {
+	x.inner.SetSession(session.Unwrap())
 	return x
 }
 
@@ -76,7 +76,7 @@ func (x *PaymentRequestMerchantSessionUpdate) SetSession(session *raw.PKPaymentM
 type PaymentRequestMerchantSessionUpdateable interface {
 	Unwrap() *raw.PKPaymentRequestMerchantSessionUpdate
 	WithStatus(status raw.PKPaymentAuthorizationStatus) *PaymentRequestMerchantSessionUpdate
-	WithSession(session *raw.PKPaymentMerchantSession) *PaymentRequestMerchantSessionUpdate
+	WithSession(session *PaymentMerchantSession) *PaymentRequestMerchantSessionUpdate
 	Status() raw.PKPaymentAuthorizationStatus
 	SetStatus(status raw.PKPaymentAuthorizationStatus)
 	Session() *PaymentMerchantSession

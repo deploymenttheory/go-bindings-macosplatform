@@ -91,13 +91,13 @@ func (x *IdentityPicker) SetAllowsMultipleSelection(allowsMultipleSelection bool
 }
 
 // Identities returns the collection as a Go slice.
-func (x *IdentityPicker) Identities() []*raw.CBIdentity {
+func (x *IdentityPicker) Identities() []*Identity {
 	arr := x.inner.Identities()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CBIdentity {
-		return raw.CBIdentityFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Identity {
+		return &Identity{inner: raw.CBIdentityFromID(purego.Retain(_id))}
 	})
 }
 
@@ -113,7 +113,7 @@ type IdentityPickerable interface {
 	SetTitle(title string)
 	AllowsMultipleSelection() bool
 	SetAllowsMultipleSelection(allowsMultipleSelection bool)
-	Identities() []*raw.CBIdentity
+	Identities() []*Identity
 }
 
 var _ IdentityPickerable = (*IdentityPicker)(nil)

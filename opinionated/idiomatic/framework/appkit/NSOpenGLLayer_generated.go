@@ -43,14 +43,14 @@ func (x *OpenGLLayer) WithView(view ViewProvider) *OpenGLLayer {
 }
 
 // WithOpenGLPixelFormat sets the openGLPixelFormat property and returns the receiver for chaining.
-func (x *OpenGLLayer) WithOpenGLPixelFormat(openGLPixelFormat *raw.NSOpenGLPixelFormat) *OpenGLLayer {
-	x.inner.SetOpenGLPixelFormat(openGLPixelFormat)
+func (x *OpenGLLayer) WithOpenGLPixelFormat(openGLPixelFormat *OpenGLPixelFormat) *OpenGLLayer {
+	x.inner.SetOpenGLPixelFormat(openGLPixelFormat.Unwrap())
 	return x
 }
 
 // WithOpenGLContext sets the openGLContext property and returns the receiver for chaining.
-func (x *OpenGLLayer) WithOpenGLContext(openGLContext *raw.NSOpenGLContext) *OpenGLLayer {
-	x.inner.SetOpenGLContext(openGLContext)
+func (x *OpenGLLayer) WithOpenGLContext(openGLContext *OpenGLContext) *OpenGLLayer {
+	x.inner.SetOpenGLContext(openGLContext.Unwrap())
 	return x
 }
 
@@ -128,8 +128,8 @@ func (x *OpenGLLayer) SetOpenGLContext(openGLContext *raw.NSOpenGLContext) {
 type OpenGLLayerable interface {
 	Unwrap() *raw.NSOpenGLLayer
 	WithView(view ViewProvider) *OpenGLLayer
-	WithOpenGLPixelFormat(openGLPixelFormat *raw.NSOpenGLPixelFormat) *OpenGLLayer
-	WithOpenGLContext(openGLContext *raw.NSOpenGLContext) *OpenGLLayer
+	WithOpenGLPixelFormat(openGLPixelFormat *OpenGLPixelFormat) *OpenGLLayer
+	WithOpenGLContext(openGLContext *OpenGLContext) *OpenGLLayer
 	OpenGLPixelFormatForDisplayMask(mask uint32) *OpenGLPixelFormat
 	OpenGLContextForPixelFormat(pixelFormat *raw.NSOpenGLPixelFormat) *OpenGLContext
 	CanDrawInOpenGLContextPixelFormatForLayerTimeDisplayTime(context_ *raw.NSOpenGLContext, pixelFormat *raw.NSOpenGLPixelFormat, t float64, ts *corevideo.CVTimeStamp) bool

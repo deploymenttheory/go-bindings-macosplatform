@@ -69,13 +69,13 @@ func (x *TileGroup) WithName(name string) *TileGroup {
 }
 
 // Rules returns the collection as a Go slice.
-func (x *TileGroup) Rules() []*raw.SKTileGroupRule {
+func (x *TileGroup) Rules() []*TileGroupRule {
 	arr := x.inner.Rules()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SKTileGroupRule {
-		return raw.SKTileGroupRuleFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *TileGroupRule {
+		return &TileGroupRule{inner: raw.SKTileGroupRuleFromID(purego.Retain(_id))}
 	})
 }
 
@@ -103,7 +103,7 @@ type TileGroupable interface {
 	Unwrap() *raw.SKTileGroup
 	WithRules(items ...*raw.SKTileGroupRule) *TileGroup
 	WithName(name string) *TileGroup
-	Rules() []*raw.SKTileGroupRule
+	Rules() []*TileGroupRule
 	SetRules(rules *foundation.NSArray[*raw.SKTileGroupRule])
 	Name() string
 	SetName(name string)

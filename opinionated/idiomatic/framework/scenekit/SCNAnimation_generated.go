@@ -51,8 +51,8 @@ func (x *Animation) WithKeyPath(keyPath string) *Animation {
 }
 
 // WithTimingFunction sets the timingFunction property and returns the receiver for chaining.
-func (x *Animation) WithTimingFunction(timingFunction *raw.SCNTimingFunction) *Animation {
-	x.inner.SetTimingFunction(timingFunction)
+func (x *Animation) WithTimingFunction(timingFunction *TimingFunction) *Animation {
+	x.inner.SetTimingFunction(timingFunction.Unwrap())
 	return x
 }
 
@@ -331,13 +331,13 @@ func (x *Animation) SetAnimationDidStop(animationDidStop func(*raw.SCNAnimation,
 }
 
 // AnimationEvents returns the collection as a Go slice.
-func (x *Animation) AnimationEvents() []*raw.SCNAnimationEvent {
+func (x *Animation) AnimationEvents() []*AnimationEvent {
 	arr := x.inner.AnimationEvents()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SCNAnimationEvent {
-		return raw.SCNAnimationEventFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *AnimationEvent {
+		return &AnimationEvent{inner: raw.SCNAnimationEventFromID(purego.Retain(_id))}
 	})
 }
 
@@ -371,7 +371,7 @@ type Animationable interface {
 	Unwrap() *raw.SCNAnimation
 	WithDuration(duration float64) *Animation
 	WithKeyPath(keyPath string) *Animation
-	WithTimingFunction(timingFunction *raw.SCNTimingFunction) *Animation
+	WithTimingFunction(timingFunction *TimingFunction) *Animation
 	WithBlendInDuration(blendInDuration float64) *Animation
 	WithBlendOutDuration(blendOutDuration float64) *Animation
 	WithRemovedOnCompletion(removedOnCompletion bool) *Animation
@@ -420,7 +420,7 @@ type Animationable interface {
 	SetAnimationDidStart(animationDidStart func(*raw.SCNAnimation, objc.ID))
 	AnimationDidStop() objc.Block
 	SetAnimationDidStop(animationDidStop func(*raw.SCNAnimation, objc.ID, bool))
-	AnimationEvents() []*raw.SCNAnimationEvent
+	AnimationEvents() []*AnimationEvent
 	SetAnimationEvents(animationEvents *foundation.NSArray[*raw.SCNAnimationEvent])
 	IsAdditive() bool
 	SetAdditive(additive bool)

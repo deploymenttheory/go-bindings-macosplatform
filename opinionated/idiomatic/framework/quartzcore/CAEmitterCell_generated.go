@@ -601,13 +601,13 @@ func (x *EmitterCell) SetMinificationFilterBias(minificationFilterBias float32) 
 }
 
 // EmitterCells returns the collection as a Go slice.
-func (x *EmitterCell) EmitterCells() []*raw.CAEmitterCell {
+func (x *EmitterCell) EmitterCells() []*EmitterCell {
 	arr := x.inner.EmitterCells()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CAEmitterCell {
-		return raw.CAEmitterCellFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *EmitterCell {
+		return &EmitterCell{inner: raw.CAEmitterCellFromID(purego.Retain(_id))}
 	})
 }
 
@@ -730,7 +730,7 @@ type EmitterCellable interface {
 	SetMagnificationFilter(magnificationFilter string)
 	MinificationFilterBias() float32
 	SetMinificationFilterBias(minificationFilterBias float32)
-	EmitterCells() []*raw.CAEmitterCell
+	EmitterCells() []*EmitterCell
 	SetEmitterCells(emitterCells *foundation.NSArray[*raw.CAEmitterCell])
 	Style() *foundation.NSDictionary[objc.ID, objc.ID]
 	SetStyle(style *foundation.NSDictionary[objc.ID, objc.ID])

@@ -36,20 +36,20 @@ func NewDatabaseOperation() *DatabaseOperation {
 }
 
 // WithDatabase sets the database property and returns the receiver for chaining.
-func (x *DatabaseOperation) WithDatabase(database *raw.CKDatabase) *DatabaseOperation {
-	x.inner.SetDatabase(database)
+func (x *DatabaseOperation) WithDatabase(database *Database) *DatabaseOperation {
+	x.inner.SetDatabase(database.Unwrap())
 	return x
 }
 
 // WithConfiguration sets the configuration property and returns the receiver for chaining.
-func (x *DatabaseOperation) WithConfiguration(configuration *raw.CKOperationConfiguration) *DatabaseOperation {
-	x.inner.CKOperation.SetConfiguration(configuration)
+func (x *DatabaseOperation) WithConfiguration(configuration *OperationConfiguration) *DatabaseOperation {
+	x.inner.CKOperation.SetConfiguration(configuration.Unwrap())
 	return x
 }
 
 // WithGroup sets the group property and returns the receiver for chaining.
-func (x *DatabaseOperation) WithGroup(group *raw.CKOperationGroup) *DatabaseOperation {
-	x.inner.CKOperation.SetGroup(group)
+func (x *DatabaseOperation) WithGroup(group *OperationGroup) *DatabaseOperation {
+	x.inner.CKOperation.SetGroup(group.Unwrap())
 	return x
 }
 
@@ -60,8 +60,8 @@ func (x *DatabaseOperation) WithLongLivedOperationWasPersistedBlock(longLivedOpe
 }
 
 // WithContainer sets the container property and returns the receiver for chaining.
-func (x *DatabaseOperation) WithContainer(container *raw.CKContainer) *DatabaseOperation {
-	x.inner.CKOperation.SetContainer(container)
+func (x *DatabaseOperation) WithContainer(container *Container) *DatabaseOperation {
+	x.inner.CKOperation.SetContainer(container.Unwrap())
 	return x
 }
 
@@ -110,11 +110,11 @@ func (x *DatabaseOperation) asOperation() *raw.CKOperation { return &x.inner.CKO
 // DatabaseOperationable is the interface implemented by [DatabaseOperation], for mocking and DI.
 type DatabaseOperationable interface {
 	Unwrap() *raw.CKDatabaseOperation
-	WithDatabase(database *raw.CKDatabase) *DatabaseOperation
-	WithConfiguration(configuration *raw.CKOperationConfiguration) *DatabaseOperation
-	WithGroup(group *raw.CKOperationGroup) *DatabaseOperation
+	WithDatabase(database *Database) *DatabaseOperation
+	WithConfiguration(configuration *OperationConfiguration) *DatabaseOperation
+	WithGroup(group *OperationGroup) *DatabaseOperation
 	WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *DatabaseOperation
-	WithContainer(container *raw.CKContainer) *DatabaseOperation
+	WithContainer(container *Container) *DatabaseOperation
 	WithAllowsCellularAccess(allowsCellularAccess bool) *DatabaseOperation
 	WithLongLived(longLived bool) *DatabaseOperation
 	WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *DatabaseOperation

@@ -139,8 +139,8 @@ func (x *ActionCell) WithWraps(wraps bool) *ActionCell {
 }
 
 // WithFont sets the font property and returns the receiver for chaining.
-func (x *ActionCell) WithFont(font *raw.NSFont) *ActionCell {
-	x.inner.NSCell.SetFont(font)
+func (x *ActionCell) WithFont(font *Font) *ActionCell {
+	x.inner.NSCell.SetFont(font.Unwrap())
 	return x
 }
 
@@ -187,8 +187,8 @@ func (x *ActionCell) WithIntegerValue(integerValue int) *ActionCell {
 }
 
 // WithImage sets the image property and returns the receiver for chaining.
-func (x *ActionCell) WithImage(image *raw.NSImage) *ActionCell {
-	x.inner.NSCell.SetImage(image)
+func (x *ActionCell) WithImage(image *Image) *ActionCell {
+	x.inner.NSCell.SetImage(image.Unwrap())
 	return x
 }
 
@@ -205,8 +205,8 @@ func (x *ActionCell) WithRepresentedObject(representedObject objc.ID) *ActionCel
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *ActionCell) WithMenu(menu *raw.NSMenu) *ActionCell {
-	x.inner.NSCell.SetMenu(menu)
+func (x *ActionCell) WithMenu(menu *Menu) *ActionCell {
+	x.inner.NSCell.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -330,7 +330,7 @@ type ActionCellable interface {
 	WithHighlighted(highlighted bool) *ActionCell
 	WithAlignment(alignment raw.NSTextAlignment) *ActionCell
 	WithWraps(wraps bool) *ActionCell
-	WithFont(font *raw.NSFont) *ActionCell
+	WithFont(font *Font) *ActionCell
 	WithFormatter(formatter *foundation.NSFormatter) *ActionCell
 	WithObjectValue(objectValue objc.ID) *ActionCell
 	WithStringValue(stringValue string) *ActionCell
@@ -338,10 +338,10 @@ type ActionCellable interface {
 	WithFloatValue(floatValue float32) *ActionCell
 	WithDoubleValue(doubleValue float64) *ActionCell
 	WithIntegerValue(integerValue int) *ActionCell
-	WithImage(image *raw.NSImage) *ActionCell
+	WithImage(image *Image) *ActionCell
 	WithControlSize(controlSize raw.NSControlSize) *ActionCell
 	WithRepresentedObject(representedObject objc.ID) *ActionCell
-	WithMenu(menu *raw.NSMenu) *ActionCell
+	WithMenu(menu *Menu) *ActionCell
 	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *ActionCell
 	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *ActionCell
 	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *ActionCell

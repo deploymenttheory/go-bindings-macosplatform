@@ -46,13 +46,13 @@ func (x *MediaSelectionGroup) MediaSelectionOptionWithPropertyList(plist objc.ID
 }
 
 // Options returns the collection as a Go slice.
-func (x *MediaSelectionGroup) Options() []*raw.AVMediaSelectionOption {
+func (x *MediaSelectionGroup) Options() []*MediaSelectionOption {
 	arr := x.inner.Options()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVMediaSelectionOption {
-		return raw.AVMediaSelectionOptionFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MediaSelectionOption {
+		return &MediaSelectionOption{inner: raw.AVMediaSelectionOptionFromID(purego.Retain(_id))}
 	})
 }
 
@@ -85,7 +85,7 @@ func (x *MediaSelectionGroup) asMediaSelectionGroup() *raw.AVMediaSelectionGroup
 type MediaSelectionGroupable interface {
 	Unwrap() *raw.AVMediaSelectionGroup
 	MediaSelectionOptionWithPropertyList(plist objc.ID) *MediaSelectionOption
-	Options() []*raw.AVMediaSelectionOption
+	Options() []*MediaSelectionOption
 	DefaultOption() *MediaSelectionOption
 	AllowsEmptySelection() bool
 	CustomMediaSelectionScheme() *CustomMediaSelectionScheme

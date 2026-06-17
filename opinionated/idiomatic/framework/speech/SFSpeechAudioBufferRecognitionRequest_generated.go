@@ -85,8 +85,8 @@ func (x *SpeechAudioBufferRecognitionRequest) WithAddsPunctuation(addsPunctuatio
 }
 
 // WithCustomizedLanguageModel sets the customizedLanguageModel property and returns the receiver for chaining.
-func (x *SpeechAudioBufferRecognitionRequest) WithCustomizedLanguageModel(customizedLanguageModel *raw.SFSpeechLanguageModelConfiguration) *SpeechAudioBufferRecognitionRequest {
-	x.inner.SFSpeechRecognitionRequest.SetCustomizedLanguageModel(customizedLanguageModel)
+func (x *SpeechAudioBufferRecognitionRequest) WithCustomizedLanguageModel(customizedLanguageModel *SpeechLanguageModelConfiguration) *SpeechAudioBufferRecognitionRequest {
+	x.inner.SFSpeechRecognitionRequest.SetCustomizedLanguageModel(customizedLanguageModel.Unwrap())
 	return x
 }
 
@@ -121,7 +121,7 @@ type SpeechAudioBufferRecognitionRequestable interface {
 	WithInteractionIdentifier(interactionIdentifier string) *SpeechAudioBufferRecognitionRequest
 	WithRequiresOnDeviceRecognition(requiresOnDeviceRecognition bool) *SpeechAudioBufferRecognitionRequest
 	WithAddsPunctuation(addsPunctuation bool) *SpeechAudioBufferRecognitionRequest
-	WithCustomizedLanguageModel(customizedLanguageModel *raw.SFSpeechLanguageModelConfiguration) *SpeechAudioBufferRecognitionRequest
+	WithCustomizedLanguageModel(customizedLanguageModel *SpeechLanguageModelConfiguration) *SpeechAudioBufferRecognitionRequest
 	AppendAudioPCMBuffer(audioPCMBuffer *avfaudio.AVAudioPCMBuffer)
 	AppendAudioSampleBuffer(sampleBuffer unsafe.Pointer)
 	EndAudio()

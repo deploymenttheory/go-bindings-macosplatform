@@ -270,8 +270,8 @@ func (x *StackView) WithContentFilters(items ...*coreimage.CIFilter) *StackView 
 }
 
 // WithShadow sets the shadow property and returns the receiver for chaining.
-func (x *StackView) WithShadow(shadow *raw.NSShadow) *StackView {
-	x.inner.NSView.SetShadow(shadow)
+func (x *StackView) WithShadow(shadow *Shadow) *StackView {
+	x.inner.NSView.SetShadow(shadow.Unwrap())
 	return x
 }
 
@@ -352,8 +352,8 @@ func (x *StackView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSi
 }
 
 // WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
-func (x *StackView) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *StackView {
-	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+func (x *StackView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *StackView {
+	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
 	return x
 }
 
@@ -394,8 +394,8 @@ func (x *StackView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDyna
 }
 
 // WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
-func (x *StackView) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *StackView {
-	x.inner.NSView.SetPressureConfiguration(pressureConfiguration)
+func (x *StackView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *StackView {
+	x.inner.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
 	return x
 }
 
@@ -406,8 +406,8 @@ func (x *StackView) WithNextResponder(nextResponder ResponderProvider) *StackVie
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *StackView) WithMenu(menu *raw.NSMenu) *StackView {
-	x.inner.NSView.NSResponder.SetMenu(menu)
+func (x *StackView) WithMenu(menu *Menu) *StackView {
+	x.inner.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -418,8 +418,8 @@ func (x *StackView) WithUserActivity(userActivity *foundation.NSUserActivity) *S
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *StackView) WithTouchBar(touchBar *raw.NSTouchBar) *StackView {
-	x.inner.NSView.NSResponder.SetTouchBar(touchBar)
+func (x *StackView) WithTouchBar(touchBar *TouchBar) *StackView {
+	x.inner.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -549,24 +549,24 @@ func (x *StackView) SetDetachesHiddenViews(detachesHiddenViews bool) {
 }
 
 // ArrangedSubviews returns the collection as a Go slice.
-func (x *StackView) ArrangedSubviews() []*raw.NSView {
+func (x *StackView) ArrangedSubviews() []*View {
 	arr := x.inner.ArrangedSubviews()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSView {
-		return raw.NSViewFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *View {
+		return &View{inner: raw.NSViewFromID(purego.Retain(_id))}
 	})
 }
 
 // DetachedViews returns the collection as a Go slice.
-func (x *StackView) DetachedViews() []*raw.NSView {
+func (x *StackView) DetachedViews() []*View {
 	arr := x.inner.DetachedViews()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSView {
-		return raw.NSViewFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *View {
+		return &View{inner: raw.NSViewFromID(purego.Retain(_id))}
 	})
 }
 
@@ -596,13 +596,13 @@ func (x *StackView) SetViewsInGravity(views *foundation.NSArray[*raw.NSView], gr
 }
 
 // Views returns the collection as a Go slice.
-func (x *StackView) Views() []*raw.NSView {
+func (x *StackView) Views() []*View {
 	arr := x.inner.Views()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSView {
-		return raw.NSViewFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *View {
+		return &View{inner: raw.NSViewFromID(purego.Retain(_id))}
 	})
 }
 
@@ -656,7 +656,7 @@ type StackViewable interface {
 	WithBackgroundFilters(items ...*coreimage.CIFilter) *StackView
 	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *StackView
 	WithContentFilters(items ...*coreimage.CIFilter) *StackView
-	WithShadow(shadow *raw.NSShadow) *StackView
+	WithShadow(shadow *Shadow) *StackView
 	WithClipsToBounds(clipsToBounds bool) *StackView
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *StackView
 	WithToolTip(toolTip string) *StackView
@@ -668,18 +668,18 @@ type StackViewable interface {
 	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *StackView
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *StackView
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *StackView
-	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *StackView
+	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *StackView
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *StackView
 	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *StackView
 	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *StackView
 	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *StackView
 	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *StackView
 	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *StackView
-	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *StackView
+	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *StackView
 	WithNextResponder(nextResponder ResponderProvider) *StackView
-	WithMenu(menu *raw.NSMenu) *StackView
+	WithMenu(menu *Menu) *StackView
 	WithUserActivity(userActivity *foundation.NSUserActivity) *StackView
-	WithTouchBar(touchBar *raw.NSTouchBar) *StackView
+	WithTouchBar(touchBar *TouchBar) *StackView
 	SetCustomSpacingAfterView(spacing float64, view *raw.NSView)
 	CustomSpacingAfterView(view *raw.NSView) float64
 	AddArrangedSubview(view *raw.NSView)
@@ -705,14 +705,14 @@ type StackViewable interface {
 	SetSpacing(spacing float64)
 	DetachesHiddenViews() bool
 	SetDetachesHiddenViews(detachesHiddenViews bool)
-	ArrangedSubviews() []*raw.NSView
-	DetachedViews() []*raw.NSView
+	ArrangedSubviews() []*View
+	DetachedViews() []*View
 	AddViewInGravity(view *raw.NSView, gravity raw.NSStackViewGravity)
 	InsertViewAtIndexInGravity(view *raw.NSView, index uint, gravity raw.NSStackViewGravity)
 	RemoveView(view *raw.NSView)
 	ViewsInGravity(gravity raw.NSStackViewGravity) *foundation.NSArray[*raw.NSView]
 	SetViewsInGravity(views *foundation.NSArray[*raw.NSView], gravity raw.NSStackViewGravity)
-	Views() []*raw.NSView
+	Views() []*View
 	HasEqualSpacing() bool
 	SetHasEqualSpacing(hasEqualSpacing bool)
 }

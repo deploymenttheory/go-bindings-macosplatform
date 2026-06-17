@@ -41,8 +41,8 @@ func NewCaptureDevice() *CaptureDevice {
 }
 
 // WithActiveFormat sets the activeFormat property and returns the receiver for chaining.
-func (x *CaptureDevice) WithActiveFormat(activeFormat *raw.AVCaptureDeviceFormat) *CaptureDevice {
-	x.inner.SetActiveFormat(activeFormat)
+func (x *CaptureDevice) WithActiveFormat(activeFormat *CaptureDeviceFormat) *CaptureDevice {
+	x.inner.SetActiveFormat(activeFormat.Unwrap())
 	return x
 }
 
@@ -65,8 +65,8 @@ func (x *CaptureDevice) WithAutoVideoFrameRateEnabled(autoVideoFrameRateEnabled 
 }
 
 // WithActiveInputSource sets the activeInputSource property and returns the receiver for chaining.
-func (x *CaptureDevice) WithActiveInputSource(activeInputSource *raw.AVCaptureDeviceInputSource) *CaptureDevice {
-	x.inner.SetActiveInputSource(activeInputSource)
+func (x *CaptureDevice) WithActiveInputSource(activeInputSource *CaptureDeviceInputSource) *CaptureDevice {
+	x.inner.SetActiveInputSource(activeInputSource.Unwrap())
 	return x
 }
 
@@ -230,24 +230,24 @@ func (x *CaptureDevice) IsSuspended() bool {
 }
 
 // LinkedDevices returns the collection as a Go slice.
-func (x *CaptureDevice) LinkedDevices() []*raw.AVCaptureDevice {
+func (x *CaptureDevice) LinkedDevices() []*CaptureDevice {
 	arr := x.inner.LinkedDevices()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVCaptureDevice {
-		return raw.AVCaptureDeviceFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CaptureDevice {
+		return &CaptureDevice{inner: raw.AVCaptureDeviceFromID(purego.Retain(_id))}
 	})
 }
 
 // Formats returns the collection as a Go slice.
-func (x *CaptureDevice) Formats() []*raw.AVCaptureDeviceFormat {
+func (x *CaptureDevice) Formats() []*CaptureDeviceFormat {
 	arr := x.inner.Formats()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVCaptureDeviceFormat {
-		return raw.AVCaptureDeviceFormatFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CaptureDeviceFormat {
+		return &CaptureDeviceFormat{inner: raw.AVCaptureDeviceFormatFromID(purego.Retain(_id))}
 	})
 }
 
@@ -316,13 +316,13 @@ func (x *CaptureDevice) SetAutoVideoFrameRateEnabled(autoVideoFrameRateEnabled b
 }
 
 // InputSources returns the collection as a Go slice.
-func (x *CaptureDevice) InputSources() []*raw.AVCaptureDeviceInputSource {
+func (x *CaptureDevice) InputSources() []*CaptureDeviceInputSource {
 	arr := x.inner.InputSources()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVCaptureDeviceInputSource {
-		return raw.AVCaptureDeviceInputSourceFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CaptureDeviceInputSource {
+		return &CaptureDeviceInputSource{inner: raw.AVCaptureDeviceInputSourceFromID(purego.Retain(_id))}
 	})
 }
 
@@ -389,24 +389,24 @@ func (x *CaptureDevice) ActivePrimaryConstituentDevice() *CaptureDevice {
 }
 
 // SupportedFallbackPrimaryConstituentDevices returns the collection as a Go slice.
-func (x *CaptureDevice) SupportedFallbackPrimaryConstituentDevices() []*raw.AVCaptureDevice {
+func (x *CaptureDevice) SupportedFallbackPrimaryConstituentDevices() []*CaptureDevice {
 	arr := x.inner.SupportedFallbackPrimaryConstituentDevices()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVCaptureDevice {
-		return raw.AVCaptureDeviceFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CaptureDevice {
+		return &CaptureDevice{inner: raw.AVCaptureDeviceFromID(purego.Retain(_id))}
 	})
 }
 
 // FallbackPrimaryConstituentDevices returns the collection as a Go slice.
-func (x *CaptureDevice) FallbackPrimaryConstituentDevices() []*raw.AVCaptureDevice {
+func (x *CaptureDevice) FallbackPrimaryConstituentDevices() []*CaptureDevice {
 	arr := x.inner.FallbackPrimaryConstituentDevices()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVCaptureDevice {
-		return raw.AVCaptureDeviceFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CaptureDevice {
+		return &CaptureDevice{inner: raw.AVCaptureDeviceFromID(purego.Retain(_id))}
 	})
 }
 
@@ -711,13 +711,13 @@ func (x *CaptureDevice) AvailableReactionTypes() *foundation.NSSet[*foundation.N
 }
 
 // ReactionEffectsInProgress returns the collection as a Go slice.
-func (x *CaptureDevice) ReactionEffectsInProgress() []*raw.AVCaptureReactionEffectState {
+func (x *CaptureDevice) ReactionEffectsInProgress() []*CaptureReactionEffectState {
 	arr := x.inner.ReactionEffectsInProgress()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVCaptureReactionEffectState {
-		return raw.AVCaptureReactionEffectStateFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CaptureReactionEffectState {
+		return &CaptureReactionEffectState{inner: raw.AVCaptureReactionEffectStateFromID(purego.Retain(_id))}
 	})
 }
 
@@ -802,11 +802,11 @@ func (x *CaptureDevice) CameraLensSmudgeDetectionStatus() raw.AVCaptureCameraLen
 // CaptureDeviceable is the interface implemented by [CaptureDevice], for mocking and DI.
 type CaptureDeviceable interface {
 	Unwrap() *raw.AVCaptureDevice
-	WithActiveFormat(activeFormat *raw.AVCaptureDeviceFormat) *CaptureDevice
+	WithActiveFormat(activeFormat *CaptureDeviceFormat) *CaptureDevice
 	WithActiveVideoMinFrameDuration(activeVideoMinFrameDuration coremedia.CMTime) *CaptureDevice
 	WithActiveVideoMaxFrameDuration(activeVideoMaxFrameDuration coremedia.CMTime) *CaptureDevice
 	WithAutoVideoFrameRateEnabled(autoVideoFrameRateEnabled bool) *CaptureDevice
-	WithActiveInputSource(activeInputSource *raw.AVCaptureDeviceInputSource) *CaptureDevice
+	WithActiveInputSource(activeInputSource *CaptureDeviceInputSource) *CaptureDevice
 	WithFallbackPrimaryConstituentDevices(items ...*raw.AVCaptureDevice) *CaptureDevice
 	WithFlashMode(flashMode raw.AVCaptureFlashMode) *CaptureDevice
 	WithTorchMode(torchMode raw.AVCaptureTorchMode) *CaptureDevice
@@ -831,8 +831,8 @@ type CaptureDeviceable interface {
 	IsConnected() bool
 	IsInUseByAnotherApplication() bool
 	IsSuspended() bool
-	LinkedDevices() []*raw.AVCaptureDevice
-	Formats() []*raw.AVCaptureDeviceFormat
+	LinkedDevices() []*CaptureDevice
+	Formats() []*CaptureDeviceFormat
 	ActiveFormat() *CaptureDeviceFormat
 	SetActiveFormat(activeFormat *raw.AVCaptureDeviceFormat)
 	ActiveVideoMinFrameDuration() coremedia.CMTime
@@ -845,7 +845,7 @@ type CaptureDeviceable interface {
 	MinSupportedExternalSyncFrameDuration() coremedia.CMTime
 	IsAutoVideoFrameRateEnabled() bool
 	SetAutoVideoFrameRateEnabled(autoVideoFrameRateEnabled bool)
-	InputSources() []*raw.AVCaptureDeviceInputSource
+	InputSources() []*CaptureDeviceInputSource
 	ActiveInputSource() *CaptureDeviceInputSource
 	SetActiveInputSource(activeInputSource *raw.AVCaptureDeviceInputSource)
 	Position() raw.AVCaptureDevicePosition
@@ -856,8 +856,8 @@ type CaptureDeviceable interface {
 	ActivePrimaryConstituentDeviceSwitchingBehavior() raw.AVCapturePrimaryConstituentDeviceSwitchingBehavior
 	ActivePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions() raw.AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions
 	ActivePrimaryConstituentDevice() *CaptureDevice
-	SupportedFallbackPrimaryConstituentDevices() []*raw.AVCaptureDevice
-	FallbackPrimaryConstituentDevices() []*raw.AVCaptureDevice
+	SupportedFallbackPrimaryConstituentDevices() []*CaptureDevice
+	FallbackPrimaryConstituentDevices() []*CaptureDevice
 	SetFallbackPrimaryConstituentDevices(fallbackPrimaryConstituentDevices *foundation.NSArray[*raw.AVCaptureDevice])
 	IsFlashModeSupported(flashMode raw.AVCaptureFlashMode) bool
 	HasFlash() bool
@@ -918,7 +918,7 @@ type CaptureDeviceable interface {
 	PerformEffectForReaction(reactionType *foundation.NSString)
 	CanPerformReactionEffects() bool
 	AvailableReactionTypes() *foundation.NSSet[*foundation.NSString]
-	ReactionEffectsInProgress() []*raw.AVCaptureReactionEffectState
+	ReactionEffectsInProgress() []*CaptureReactionEffectState
 	IsBackgroundReplacementActive() bool
 	IsContinuityCamera() bool
 	CompanionDeskViewCamera() *CaptureDevice

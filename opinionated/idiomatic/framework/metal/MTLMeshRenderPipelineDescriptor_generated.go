@@ -146,20 +146,20 @@ func (x *MeshRenderPipelineDescriptor) WithSupportIndirectCommandBuffers(support
 }
 
 // WithObjectLinkedFunctions sets the objectLinkedFunctions property and returns the receiver for chaining.
-func (x *MeshRenderPipelineDescriptor) WithObjectLinkedFunctions(objectLinkedFunctions *raw.MTLLinkedFunctions) *MeshRenderPipelineDescriptor {
-	x.inner.SetObjectLinkedFunctions(objectLinkedFunctions)
+func (x *MeshRenderPipelineDescriptor) WithObjectLinkedFunctions(objectLinkedFunctions *LinkedFunctions) *MeshRenderPipelineDescriptor {
+	x.inner.SetObjectLinkedFunctions(objectLinkedFunctions.Unwrap())
 	return x
 }
 
 // WithMeshLinkedFunctions sets the meshLinkedFunctions property and returns the receiver for chaining.
-func (x *MeshRenderPipelineDescriptor) WithMeshLinkedFunctions(meshLinkedFunctions *raw.MTLLinkedFunctions) *MeshRenderPipelineDescriptor {
-	x.inner.SetMeshLinkedFunctions(meshLinkedFunctions)
+func (x *MeshRenderPipelineDescriptor) WithMeshLinkedFunctions(meshLinkedFunctions *LinkedFunctions) *MeshRenderPipelineDescriptor {
+	x.inner.SetMeshLinkedFunctions(meshLinkedFunctions.Unwrap())
 	return x
 }
 
 // WithFragmentLinkedFunctions sets the fragmentLinkedFunctions property and returns the receiver for chaining.
-func (x *MeshRenderPipelineDescriptor) WithFragmentLinkedFunctions(fragmentLinkedFunctions *raw.MTLLinkedFunctions) *MeshRenderPipelineDescriptor {
-	x.inner.SetFragmentLinkedFunctions(fragmentLinkedFunctions)
+func (x *MeshRenderPipelineDescriptor) WithFragmentLinkedFunctions(fragmentLinkedFunctions *LinkedFunctions) *MeshRenderPipelineDescriptor {
+	x.inner.SetFragmentLinkedFunctions(fragmentLinkedFunctions.Unwrap())
 	return x
 }
 
@@ -509,9 +509,9 @@ type MeshRenderPipelineDescriptorable interface {
 	WithDepthAttachmentPixelFormat(depthAttachmentPixelFormat raw.MTLPixelFormat) *MeshRenderPipelineDescriptor
 	WithStencilAttachmentPixelFormat(stencilAttachmentPixelFormat raw.MTLPixelFormat) *MeshRenderPipelineDescriptor
 	WithSupportIndirectCommandBuffers(supportIndirectCommandBuffers bool) *MeshRenderPipelineDescriptor
-	WithObjectLinkedFunctions(objectLinkedFunctions *raw.MTLLinkedFunctions) *MeshRenderPipelineDescriptor
-	WithMeshLinkedFunctions(meshLinkedFunctions *raw.MTLLinkedFunctions) *MeshRenderPipelineDescriptor
-	WithFragmentLinkedFunctions(fragmentLinkedFunctions *raw.MTLLinkedFunctions) *MeshRenderPipelineDescriptor
+	WithObjectLinkedFunctions(objectLinkedFunctions *LinkedFunctions) *MeshRenderPipelineDescriptor
+	WithMeshLinkedFunctions(meshLinkedFunctions *LinkedFunctions) *MeshRenderPipelineDescriptor
+	WithFragmentLinkedFunctions(fragmentLinkedFunctions *LinkedFunctions) *MeshRenderPipelineDescriptor
 	WithShaderValidation(shaderValidation raw.MTLShaderValidation) *MeshRenderPipelineDescriptor
 	WithRequiredThreadsPerObjectThreadgroup(requiredThreadsPerObjectThreadgroup raw.MTLSize) *MeshRenderPipelineDescriptor
 	WithRequiredThreadsPerMeshThreadgroup(requiredThreadsPerMeshThreadgroup raw.MTLSize) *MeshRenderPipelineDescriptor

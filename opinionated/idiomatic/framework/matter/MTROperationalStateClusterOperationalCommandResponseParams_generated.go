@@ -44,8 +44,8 @@ func NewMTROperationalStateClusterOperationalCommandResponseParamsWithResponseVa
 }
 
 // WithCommandResponseState sets the commandResponseState property and returns the receiver for chaining.
-func (x *MTROperationalStateClusterOperationalCommandResponseParams) WithCommandResponseState(commandResponseState *raw.MTROperationalStateClusterErrorStateStruct) *MTROperationalStateClusterOperationalCommandResponseParams {
-	x.inner.SetCommandResponseState(commandResponseState)
+func (x *MTROperationalStateClusterOperationalCommandResponseParams) WithCommandResponseState(commandResponseState *MTROperationalStateClusterErrorStateStruct) *MTROperationalStateClusterOperationalCommandResponseParams {
+	x.inner.SetCommandResponseState(commandResponseState.Unwrap())
 	return x
 }
 
@@ -66,7 +66,7 @@ func (x *MTROperationalStateClusterOperationalCommandResponseParams) SetCommandR
 // MTROperationalStateClusterOperationalCommandResponseParamsable is the interface implemented by [MTROperationalStateClusterOperationalCommandResponseParams], for mocking and DI.
 type MTROperationalStateClusterOperationalCommandResponseParamsable interface {
 	Unwrap() *raw.MTROperationalStateClusterOperationalCommandResponseParams
-	WithCommandResponseState(commandResponseState *raw.MTROperationalStateClusterErrorStateStruct) *MTROperationalStateClusterOperationalCommandResponseParams
+	WithCommandResponseState(commandResponseState *MTROperationalStateClusterErrorStateStruct) *MTROperationalStateClusterOperationalCommandResponseParams
 	CommandResponseState() *MTROperationalStateClusterErrorStateStruct
 	SetCommandResponseState(commandResponseState *raw.MTROperationalStateClusterErrorStateStruct)
 }

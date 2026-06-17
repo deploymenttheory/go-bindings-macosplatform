@@ -66,13 +66,13 @@ func (x *MetricDownloadSummaryEvent) DownloadDuration() float64 {
 }
 
 // Variants returns the collection as a Go slice.
-func (x *MetricDownloadSummaryEvent) Variants() []*raw.AVAssetVariant {
+func (x *MetricDownloadSummaryEvent) Variants() []*AssetVariant {
 	arr := x.inner.Variants()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVAssetVariant {
-		return raw.AVAssetVariantFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *AssetVariant {
+		return &AssetVariant{inner: raw.AVAssetVariantFromID(purego.Retain(_id))}
 	})
 }
 
@@ -86,7 +86,7 @@ type MetricDownloadSummaryEventable interface {
 	MediaResourceRequestCount() int
 	BytesDownloadedCount() int
 	DownloadDuration() float64
-	Variants() []*raw.AVAssetVariant
+	Variants() []*AssetVariant
 }
 
 var _ MetricDownloadSummaryEventable = (*MetricDownloadSummaryEvent)(nil)

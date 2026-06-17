@@ -37,13 +37,13 @@ func NewMatch() *Match {
 }
 
 // MediaItems returns the collection as a Go slice.
-func (x *Match) MediaItems() []*raw.SHMatchedMediaItem {
+func (x *Match) MediaItems() []*MatchedMediaItem {
 	arr := x.inner.MediaItems()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SHMatchedMediaItem {
-		return raw.SHMatchedMediaItemFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MatchedMediaItem {
+		return &MatchedMediaItem{inner: raw.SHMatchedMediaItemFromID(purego.Retain(_id))}
 	})
 }
 
@@ -59,7 +59,7 @@ func (x *Match) QuerySignature() *Signature {
 // Matchable is the interface implemented by [Match], for mocking and DI.
 type Matchable interface {
 	Unwrap() *raw.SHMatch
-	MediaItems() []*raw.SHMatchedMediaItem
+	MediaItems() []*MatchedMediaItem
 	QuerySignature() *Signature
 }
 

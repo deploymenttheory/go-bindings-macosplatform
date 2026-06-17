@@ -45,13 +45,13 @@ func (x *FontAssetRequest) DownloadFontAssetsWithCompletionHandler(completionHan
 }
 
 // DownloadedFontDescriptors returns the collection as a Go slice.
-func (x *FontAssetRequest) DownloadedFontDescriptors() []*raw.NSFontDescriptor {
+func (x *FontAssetRequest) DownloadedFontDescriptors() []*FontDescriptor {
 	arr := x.inner.DownloadedFontDescriptors()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSFontDescriptor {
-		return raw.NSFontDescriptorFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *FontDescriptor {
+		return &FontDescriptor{inner: raw.NSFontDescriptorFromID(purego.Retain(_id))}
 	})
 }
 
@@ -64,7 +64,7 @@ func (x *FontAssetRequest) Progress() *foundation.NSProgress {
 type FontAssetRequestable interface {
 	Unwrap() *raw.NSFontAssetRequest
 	DownloadFontAssetsWithCompletionHandler(completionHandler func(unsafe.Pointer) bool)
-	DownloadedFontDescriptors() []*raw.NSFontDescriptor
+	DownloadedFontDescriptors() []*FontDescriptor
 	Progress() *foundation.NSProgress
 }
 

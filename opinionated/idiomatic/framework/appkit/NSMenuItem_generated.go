@@ -46,14 +46,14 @@ func NewMenuItemWithCoder(coder *foundation.NSCoder) *MenuItem {
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *MenuItem) WithMenu(menu *raw.NSMenu) *MenuItem {
-	x.inner.SetMenu(menu)
+func (x *MenuItem) WithMenu(menu *Menu) *MenuItem {
+	x.inner.SetMenu(menu.Unwrap())
 	return x
 }
 
 // WithSubmenu sets the submenu property and returns the receiver for chaining.
-func (x *MenuItem) WithSubmenu(submenu *raw.NSMenu) *MenuItem {
-	x.inner.SetSubmenu(submenu)
+func (x *MenuItem) WithSubmenu(submenu *Menu) *MenuItem {
+	x.inner.SetSubmenu(submenu.Unwrap())
 	return x
 }
 
@@ -106,8 +106,8 @@ func (x *MenuItem) WithAllowsAutomaticKeyEquivalentMirroring(allowsAutomaticKeyE
 }
 
 // WithImage sets the image property and returns the receiver for chaining.
-func (x *MenuItem) WithImage(image *raw.NSImage) *MenuItem {
-	x.inner.SetImage(image)
+func (x *MenuItem) WithImage(image *Image) *MenuItem {
+	x.inner.SetImage(image.Unwrap())
 	return x
 }
 
@@ -118,20 +118,20 @@ func (x *MenuItem) WithState(state int) *MenuItem {
 }
 
 // WithOnStateImage sets the onStateImage property and returns the receiver for chaining.
-func (x *MenuItem) WithOnStateImage(onStateImage *raw.NSImage) *MenuItem {
-	x.inner.SetOnStateImage(onStateImage)
+func (x *MenuItem) WithOnStateImage(onStateImage *Image) *MenuItem {
+	x.inner.SetOnStateImage(onStateImage.Unwrap())
 	return x
 }
 
 // WithOffStateImage sets the offStateImage property and returns the receiver for chaining.
-func (x *MenuItem) WithOffStateImage(offStateImage *raw.NSImage) *MenuItem {
-	x.inner.SetOffStateImage(offStateImage)
+func (x *MenuItem) WithOffStateImage(offStateImage *Image) *MenuItem {
+	x.inner.SetOffStateImage(offStateImage.Unwrap())
 	return x
 }
 
 // WithMixedStateImage sets the mixedStateImage property and returns the receiver for chaining.
-func (x *MenuItem) WithMixedStateImage(mixedStateImage *raw.NSImage) *MenuItem {
-	x.inner.SetMixedStateImage(mixedStateImage)
+func (x *MenuItem) WithMixedStateImage(mixedStateImage *Image) *MenuItem {
+	x.inner.SetMixedStateImage(mixedStateImage.Unwrap())
 	return x
 }
 
@@ -196,8 +196,8 @@ func (x *MenuItem) WithToolTip(toolTip string) *MenuItem {
 }
 
 // WithBadge sets the badge property and returns the receiver for chaining.
-func (x *MenuItem) WithBadge(badge *raw.NSMenuItemBadge) *MenuItem {
-	x.inner.SetBadge(badge)
+func (x *MenuItem) WithBadge(badge *MenuItemBadge) *MenuItem {
+	x.inner.SetBadge(badge.Unwrap())
 	return x
 }
 
@@ -579,8 +579,8 @@ func (x *MenuItem) SetTitleWithMnemonic(stringWithAmpersand string) {
 // MenuItemable is the interface implemented by [MenuItem], for mocking and DI.
 type MenuItemable interface {
 	Unwrap() *raw.NSMenuItem
-	WithMenu(menu *raw.NSMenu) *MenuItem
-	WithSubmenu(submenu *raw.NSMenu) *MenuItem
+	WithMenu(menu *Menu) *MenuItem
+	WithSubmenu(submenu *Menu) *MenuItem
 	WithTitle(title string) *MenuItem
 	WithAttributedTitle(attributedTitle *foundation.NSAttributedString) *MenuItem
 	WithSubtitle(subtitle string) *MenuItem
@@ -589,11 +589,11 @@ type MenuItemable interface {
 	WithAllowsKeyEquivalentWhenHidden(allowsKeyEquivalentWhenHidden bool) *MenuItem
 	WithAllowsAutomaticKeyEquivalentLocalization(allowsAutomaticKeyEquivalentLocalization bool) *MenuItem
 	WithAllowsAutomaticKeyEquivalentMirroring(allowsAutomaticKeyEquivalentMirroring bool) *MenuItem
-	WithImage(image *raw.NSImage) *MenuItem
+	WithImage(image *Image) *MenuItem
 	WithState(state int) *MenuItem
-	WithOnStateImage(onStateImage *raw.NSImage) *MenuItem
-	WithOffStateImage(offStateImage *raw.NSImage) *MenuItem
-	WithMixedStateImage(mixedStateImage *raw.NSImage) *MenuItem
+	WithOnStateImage(onStateImage *Image) *MenuItem
+	WithOffStateImage(offStateImage *Image) *MenuItem
+	WithMixedStateImage(mixedStateImage *Image) *MenuItem
 	WithEnabled(enabled bool) *MenuItem
 	WithAlternate(alternate bool) *MenuItem
 	WithIndentationLevel(indentationLevel int) *MenuItem
@@ -604,7 +604,7 @@ type MenuItemable interface {
 	WithView(view ViewProvider) *MenuItem
 	WithHidden(hidden bool) *MenuItem
 	WithToolTip(toolTip string) *MenuItem
-	WithBadge(badge *raw.NSMenuItemBadge) *MenuItem
+	WithBadge(badge *MenuItemBadge) *MenuItem
 	Menu() *Menu
 	SetMenu(menu *raw.NSMenu)
 	HasSubmenu() bool

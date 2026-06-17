@@ -48,46 +48,46 @@ func (x *DiagnosticPayload) DictionaryRepresentation() *foundation.NSDictionary[
 }
 
 // CpuExceptionDiagnostics returns the collection as a Go slice.
-func (x *DiagnosticPayload) CpuExceptionDiagnostics() []*raw.MXCPUExceptionDiagnostic {
+func (x *DiagnosticPayload) CpuExceptionDiagnostics() []*CPUExceptionDiagnostic {
 	arr := x.inner.CpuExceptionDiagnostics()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MXCPUExceptionDiagnostic {
-		return raw.MXCPUExceptionDiagnosticFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CPUExceptionDiagnostic {
+		return &CPUExceptionDiagnostic{inner: raw.MXCPUExceptionDiagnosticFromID(purego.Retain(_id))}
 	})
 }
 
 // DiskWriteExceptionDiagnostics returns the collection as a Go slice.
-func (x *DiagnosticPayload) DiskWriteExceptionDiagnostics() []*raw.MXDiskWriteExceptionDiagnostic {
+func (x *DiagnosticPayload) DiskWriteExceptionDiagnostics() []*DiskWriteExceptionDiagnostic {
 	arr := x.inner.DiskWriteExceptionDiagnostics()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MXDiskWriteExceptionDiagnostic {
-		return raw.MXDiskWriteExceptionDiagnosticFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *DiskWriteExceptionDiagnostic {
+		return &DiskWriteExceptionDiagnostic{inner: raw.MXDiskWriteExceptionDiagnosticFromID(purego.Retain(_id))}
 	})
 }
 
 // HangDiagnostics returns the collection as a Go slice.
-func (x *DiagnosticPayload) HangDiagnostics() []*raw.MXHangDiagnostic {
+func (x *DiagnosticPayload) HangDiagnostics() []*HangDiagnostic {
 	arr := x.inner.HangDiagnostics()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MXHangDiagnostic {
-		return raw.MXHangDiagnosticFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *HangDiagnostic {
+		return &HangDiagnostic{inner: raw.MXHangDiagnosticFromID(purego.Retain(_id))}
 	})
 }
 
 // CrashDiagnostics returns the collection as a Go slice.
-func (x *DiagnosticPayload) CrashDiagnostics() []*raw.MXCrashDiagnostic {
+func (x *DiagnosticPayload) CrashDiagnostics() []*CrashDiagnostic {
 	arr := x.inner.CrashDiagnostics()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MXCrashDiagnostic {
-		return raw.MXCrashDiagnosticFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CrashDiagnostic {
+		return &CrashDiagnostic{inner: raw.MXCrashDiagnosticFromID(purego.Retain(_id))}
 	})
 }
 
@@ -106,10 +106,10 @@ type DiagnosticPayloadable interface {
 	Unwrap() *raw.MXDiagnosticPayload
 	JSONRepresentation() *foundation.NSData
 	DictionaryRepresentation() *foundation.NSDictionary[objc.ID, objc.ID]
-	CpuExceptionDiagnostics() []*raw.MXCPUExceptionDiagnostic
-	DiskWriteExceptionDiagnostics() []*raw.MXDiskWriteExceptionDiagnostic
-	HangDiagnostics() []*raw.MXHangDiagnostic
-	CrashDiagnostics() []*raw.MXCrashDiagnostic
+	CpuExceptionDiagnostics() []*CPUExceptionDiagnostic
+	DiskWriteExceptionDiagnostics() []*DiskWriteExceptionDiagnostic
+	HangDiagnostics() []*HangDiagnostic
+	CrashDiagnostics() []*CrashDiagnostic
 	TimeStampBegin() *foundation.NSDate
 	TimeStampEnd() *foundation.NSDate
 }

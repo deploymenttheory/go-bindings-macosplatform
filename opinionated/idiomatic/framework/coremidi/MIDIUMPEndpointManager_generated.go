@@ -37,20 +37,20 @@ func NewUMPEndpointManager() *UMPEndpointManager {
 }
 
 // UMPEndpoints returns the collection as a Go slice.
-func (x *UMPEndpointManager) UMPEndpoints() []*raw.MIDIUMPEndpoint {
+func (x *UMPEndpointManager) UMPEndpoints() []*UMPEndpoint {
 	arr := x.inner.UMPEndpoints()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MIDIUMPEndpoint {
-		return raw.MIDIUMPEndpointFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *UMPEndpoint {
+		return &UMPEndpoint{inner: raw.MIDIUMPEndpointFromID(purego.Retain(_id))}
 	})
 }
 
 // UMPEndpointManagerable is the interface implemented by [UMPEndpointManager], for mocking and DI.
 type UMPEndpointManagerable interface {
 	Unwrap() *raw.MIDIUMPEndpointManager
-	UMPEndpoints() []*raw.MIDIUMPEndpoint
+	UMPEndpoints() []*UMPEndpoint
 }
 
 var _ UMPEndpointManagerable = (*UMPEndpointManager)(nil)

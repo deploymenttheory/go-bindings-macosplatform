@@ -70,20 +70,20 @@ func (x *MapView) WithVisibleMapRect(visibleMapRect raw.MKMapRect) *MapView {
 }
 
 // WithCamera sets the camera property and returns the receiver for chaining.
-func (x *MapView) WithCamera(camera *raw.MKMapCamera) *MapView {
-	x.inner.SetCamera(camera)
+func (x *MapView) WithCamera(camera *MapCamera) *MapView {
+	x.inner.SetCamera(camera.Unwrap())
 	return x
 }
 
 // WithCameraZoomRange sets the cameraZoomRange property and returns the receiver for chaining.
-func (x *MapView) WithCameraZoomRange(cameraZoomRange *raw.MKMapCameraZoomRange) *MapView {
-	x.inner.SetCameraZoomRange(cameraZoomRange)
+func (x *MapView) WithCameraZoomRange(cameraZoomRange *MapCameraZoomRange) *MapView {
+	x.inner.SetCameraZoomRange(cameraZoomRange.Unwrap())
 	return x
 }
 
 // WithCameraBoundary sets the cameraBoundary property and returns the receiver for chaining.
-func (x *MapView) WithCameraBoundary(cameraBoundary *raw.MKMapCameraBoundary) *MapView {
-	x.inner.SetCameraBoundary(cameraBoundary)
+func (x *MapView) WithCameraBoundary(cameraBoundary *MapCameraBoundary) *MapView {
+	x.inner.SetCameraBoundary(cameraBoundary.Unwrap())
 	return x
 }
 
@@ -148,8 +148,8 @@ func (x *MapView) WithShowsScale(showsScale bool) *MapView {
 }
 
 // WithPointOfInterestFilter sets the pointOfInterestFilter property and returns the receiver for chaining.
-func (x *MapView) WithPointOfInterestFilter(pointOfInterestFilter *raw.MKPointOfInterestFilter) *MapView {
-	x.inner.SetPointOfInterestFilter(pointOfInterestFilter)
+func (x *MapView) WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *MapView {
+	x.inner.SetPointOfInterestFilter(pointOfInterestFilter.Unwrap())
 	return x
 }
 
@@ -721,9 +721,9 @@ type MapViewable interface {
 	WithPreferredConfiguration(preferredConfiguration MapConfigurationProvider) *MapView
 	WithRegion(region raw.MKCoordinateRegion) *MapView
 	WithVisibleMapRect(visibleMapRect raw.MKMapRect) *MapView
-	WithCamera(camera *raw.MKMapCamera) *MapView
-	WithCameraZoomRange(cameraZoomRange *raw.MKMapCameraZoomRange) *MapView
-	WithCameraBoundary(cameraBoundary *raw.MKMapCameraBoundary) *MapView
+	WithCamera(camera *MapCamera) *MapView
+	WithCameraZoomRange(cameraZoomRange *MapCameraZoomRange) *MapView
+	WithCameraBoundary(cameraBoundary *MapCameraBoundary) *MapView
 	WithZoomEnabled(zoomEnabled bool) *MapView
 	WithScrollEnabled(scrollEnabled bool) *MapView
 	WithRotateEnabled(rotateEnabled bool) *MapView
@@ -734,7 +734,7 @@ type MapViewable interface {
 	WithShowsZoomControls(showsZoomControls bool) *MapView
 	WithShowsCompass(showsCompass bool) *MapView
 	WithShowsScale(showsScale bool) *MapView
-	WithPointOfInterestFilter(pointOfInterestFilter *raw.MKPointOfInterestFilter) *MapView
+	WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *MapView
 	WithShowsPointsOfInterest(showsPointsOfInterest bool) *MapView
 	WithShowsBuildings(showsBuildings bool) *MapView
 	WithShowsTraffic(showsTraffic bool) *MapView

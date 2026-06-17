@@ -43,8 +43,8 @@ func (x *TextTableBlock) WithVerticalAlignment(verticalAlignment raw.NSTextBlock
 }
 
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
-func (x *TextTableBlock) WithBackgroundColor(backgroundColor *raw.NSColor) *TextTableBlock {
-	x.inner.NSTextBlock.SetBackgroundColor(backgroundColor)
+func (x *TextTableBlock) WithBackgroundColor(backgroundColor *Color) *TextTableBlock {
+	x.inner.NSTextBlock.SetBackgroundColor(backgroundColor.Unwrap())
 	return x
 }
 
@@ -83,7 +83,7 @@ func (x *TextTableBlock) asTextBlock() *raw.NSTextBlock { return &x.inner.NSText
 type TextTableBlockable interface {
 	Unwrap() *raw.NSTextTableBlock
 	WithVerticalAlignment(verticalAlignment raw.NSTextBlockVerticalAlignment) *TextTableBlock
-	WithBackgroundColor(backgroundColor *raw.NSColor) *TextTableBlock
+	WithBackgroundColor(backgroundColor *Color) *TextTableBlock
 	Table() *TextTable
 	StartingRow() int
 	RowSpan() int

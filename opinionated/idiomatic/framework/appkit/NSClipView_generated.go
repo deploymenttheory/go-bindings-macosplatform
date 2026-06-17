@@ -41,8 +41,8 @@ func NewClipView() *ClipView {
 }
 
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
-func (x *ClipView) WithBackgroundColor(backgroundColor *raw.NSColor) *ClipView {
-	x.inner.SetBackgroundColor(backgroundColor)
+func (x *ClipView) WithBackgroundColor(backgroundColor *Color) *ClipView {
+	x.inner.SetBackgroundColor(backgroundColor.Unwrap())
 	return x
 }
 
@@ -59,8 +59,8 @@ func (x *ClipView) WithDocumentView(documentView ViewProvider) *ClipView {
 }
 
 // WithDocumentCursor sets the documentCursor property and returns the receiver for chaining.
-func (x *ClipView) WithDocumentCursor(documentCursor *raw.NSCursor) *ClipView {
-	x.inner.SetDocumentCursor(documentCursor)
+func (x *ClipView) WithDocumentCursor(documentCursor *Cursor) *ClipView {
+	x.inner.SetDocumentCursor(documentCursor.Unwrap())
 	return x
 }
 
@@ -263,8 +263,8 @@ func (x *ClipView) WithContentFilters(items ...*coreimage.CIFilter) *ClipView {
 }
 
 // WithShadow sets the shadow property and returns the receiver for chaining.
-func (x *ClipView) WithShadow(shadow *raw.NSShadow) *ClipView {
-	x.inner.NSView.SetShadow(shadow)
+func (x *ClipView) WithShadow(shadow *Shadow) *ClipView {
+	x.inner.NSView.SetShadow(shadow.Unwrap())
 	return x
 }
 
@@ -345,8 +345,8 @@ func (x *ClipView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSiz
 }
 
 // WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
-func (x *ClipView) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *ClipView {
-	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+func (x *ClipView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ClipView {
+	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
 	return x
 }
 
@@ -387,8 +387,8 @@ func (x *ClipView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynam
 }
 
 // WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
-func (x *ClipView) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *ClipView {
-	x.inner.NSView.SetPressureConfiguration(pressureConfiguration)
+func (x *ClipView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ClipView {
+	x.inner.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
 	return x
 }
 
@@ -399,8 +399,8 @@ func (x *ClipView) WithNextResponder(nextResponder ResponderProvider) *ClipView 
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *ClipView) WithMenu(menu *raw.NSMenu) *ClipView {
-	x.inner.NSView.NSResponder.SetMenu(menu)
+func (x *ClipView) WithMenu(menu *Menu) *ClipView {
+	x.inner.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -411,8 +411,8 @@ func (x *ClipView) WithUserActivity(userActivity *foundation.NSUserActivity) *Cl
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *ClipView) WithTouchBar(touchBar *raw.NSTouchBar) *ClipView {
-	x.inner.NSView.NSResponder.SetTouchBar(touchBar)
+func (x *ClipView) WithTouchBar(touchBar *TouchBar) *ClipView {
+	x.inner.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -540,10 +540,10 @@ func (x *ClipView) asResponder() *raw.NSResponder { return &x.inner.NSView.NSRes
 // ClipViewable is the interface implemented by [ClipView], for mocking and DI.
 type ClipViewable interface {
 	Unwrap() *raw.NSClipView
-	WithBackgroundColor(backgroundColor *raw.NSColor) *ClipView
+	WithBackgroundColor(backgroundColor *Color) *ClipView
 	WithDrawsBackground(drawsBackground bool) *ClipView
 	WithDocumentView(documentView ViewProvider) *ClipView
-	WithDocumentCursor(documentCursor *raw.NSCursor) *ClipView
+	WithDocumentCursor(documentCursor *Cursor) *ClipView
 	WithContentInsets(contentInsets foundation.NSEdgeInsets) *ClipView
 	WithAutomaticallyAdjustsContentInsets(automaticallyAdjustsContentInsets bool) *ClipView
 	WithCopiesOnScroll(copiesOnScroll bool) *ClipView
@@ -572,7 +572,7 @@ type ClipViewable interface {
 	WithBackgroundFilters(items ...*coreimage.CIFilter) *ClipView
 	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *ClipView
 	WithContentFilters(items ...*coreimage.CIFilter) *ClipView
-	WithShadow(shadow *raw.NSShadow) *ClipView
+	WithShadow(shadow *Shadow) *ClipView
 	WithClipsToBounds(clipsToBounds bool) *ClipView
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ClipView
 	WithToolTip(toolTip string) *ClipView
@@ -584,18 +584,18 @@ type ClipViewable interface {
 	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *ClipView
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ClipView
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ClipView
-	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *ClipView
+	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ClipView
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *ClipView
 	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *ClipView
 	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *ClipView
 	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *ClipView
 	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *ClipView
 	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *ClipView
-	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *ClipView
+	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ClipView
 	WithNextResponder(nextResponder ResponderProvider) *ClipView
-	WithMenu(menu *raw.NSMenu) *ClipView
+	WithMenu(menu *Menu) *ClipView
 	WithUserActivity(userActivity *foundation.NSUserActivity) *ClipView
-	WithTouchBar(touchBar *raw.NSTouchBar) *ClipView
+	WithTouchBar(touchBar *TouchBar) *ClipView
 	ViewFrameChanged(notification *foundation.NSNotification)
 	ViewBoundsChanged(notification *foundation.NSNotification)
 	ScrollToPoint(newOrigin corefoundation.CGPoint)

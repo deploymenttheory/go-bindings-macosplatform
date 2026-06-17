@@ -87,8 +87,8 @@ func (x *PersistentStoreDescription) WithShouldInferMappingModelAutomatically(sh
 }
 
 // WithCloudKitContainerOptions sets the cloudKitContainerOptions property and returns the receiver for chaining.
-func (x *PersistentStoreDescription) WithCloudKitContainerOptions(cloudKitContainerOptions *raw.NSPersistentCloudKitContainerOptions) *PersistentStoreDescription {
-	x.inner.SetCloudKitContainerOptions(cloudKitContainerOptions)
+func (x *PersistentStoreDescription) WithCloudKitContainerOptions(cloudKitContainerOptions *PersistentCloudKitContainerOptions) *PersistentStoreDescription {
+	x.inner.SetCloudKitContainerOptions(cloudKitContainerOptions.Unwrap())
 	return x
 }
 
@@ -225,7 +225,7 @@ type PersistentStoreDescriptionable interface {
 	WithShouldAddStoreAsynchronously(shouldAddStoreAsynchronously bool) *PersistentStoreDescription
 	WithShouldMigrateStoreAutomatically(shouldMigrateStoreAutomatically bool) *PersistentStoreDescription
 	WithShouldInferMappingModelAutomatically(shouldInferMappingModelAutomatically bool) *PersistentStoreDescription
-	WithCloudKitContainerOptions(cloudKitContainerOptions *raw.NSPersistentCloudKitContainerOptions) *PersistentStoreDescription
+	WithCloudKitContainerOptions(cloudKitContainerOptions *PersistentCloudKitContainerOptions) *PersistentStoreDescription
 	SetOptionForKey(option *foundation.NSObject, key string)
 	SetValueForPragmaNamed(value *foundation.NSObject, name string)
 	Type() string

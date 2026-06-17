@@ -45,8 +45,8 @@ func (x *Material) WithName(name string) *Material {
 }
 
 // WithBaseMaterial sets the baseMaterial property and returns the receiver for chaining.
-func (x *Material) WithBaseMaterial(baseMaterial *raw.MDLMaterial) *Material {
-	x.inner.SetBaseMaterial(baseMaterial)
+func (x *Material) WithBaseMaterial(baseMaterial *Material) *Material {
+	x.inner.SetBaseMaterial(baseMaterial.Unwrap())
 	return x
 }
 
@@ -178,7 +178,7 @@ func (x *Material) SetMaterialFace(materialFace raw.MDLMaterialFace) {
 type Materialable interface {
 	Unwrap() *raw.MDLMaterial
 	WithName(name string) *Material
-	WithBaseMaterial(baseMaterial *raw.MDLMaterial) *Material
+	WithBaseMaterial(baseMaterial *Material) *Material
 	WithMaterialFace(materialFace raw.MDLMaterialFace) *Material
 	SetProperty(property *raw.MDLMaterialProperty)
 	RemoveProperty(property *raw.MDLMaterialProperty)

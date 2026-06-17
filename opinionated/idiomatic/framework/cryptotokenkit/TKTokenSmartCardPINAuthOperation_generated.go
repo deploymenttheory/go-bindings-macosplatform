@@ -38,8 +38,8 @@ func NewTokenSmartCardPINAuthOperation() *TokenSmartCardPINAuthOperation {
 }
 
 // WithPINFormat sets the pINFormat property and returns the receiver for chaining.
-func (x *TokenSmartCardPINAuthOperation) WithPINFormat(pINFormat *raw.TKSmartCardPINFormat) *TokenSmartCardPINAuthOperation {
-	x.inner.SetPINFormat(pINFormat)
+func (x *TokenSmartCardPINAuthOperation) WithPINFormat(pINFormat *SmartCardPINFormat) *TokenSmartCardPINAuthOperation {
+	x.inner.SetPINFormat(pINFormat.Unwrap())
 	return x
 }
 
@@ -56,8 +56,8 @@ func (x *TokenSmartCardPINAuthOperation) WithPINByteOffset(pINByteOffset int) *T
 }
 
 // WithSmartCard sets the smartCard property and returns the receiver for chaining.
-func (x *TokenSmartCardPINAuthOperation) WithSmartCard(smartCard *raw.TKSmartCard) *TokenSmartCardPINAuthOperation {
-	x.inner.SetSmartCard(smartCard)
+func (x *TokenSmartCardPINAuthOperation) WithSmartCard(smartCard *SmartCard) *TokenSmartCardPINAuthOperation {
+	x.inner.SetSmartCard(smartCard.Unwrap())
 	return x
 }
 
@@ -134,10 +134,10 @@ func (x *TokenSmartCardPINAuthOperation) asTokenAuthOperation() *raw.TKTokenAuth
 // TokenSmartCardPINAuthOperationable is the interface implemented by [TokenSmartCardPINAuthOperation], for mocking and DI.
 type TokenSmartCardPINAuthOperationable interface {
 	Unwrap() *raw.TKTokenSmartCardPINAuthOperation
-	WithPINFormat(pINFormat *raw.TKSmartCardPINFormat) *TokenSmartCardPINAuthOperation
+	WithPINFormat(pINFormat *SmartCardPINFormat) *TokenSmartCardPINAuthOperation
 	WithAPDUTemplate(aPDUTemplate *foundation.NSData) *TokenSmartCardPINAuthOperation
 	WithPINByteOffset(pINByteOffset int) *TokenSmartCardPINAuthOperation
-	WithSmartCard(smartCard *raw.TKSmartCard) *TokenSmartCardPINAuthOperation
+	WithSmartCard(smartCard *SmartCard) *TokenSmartCardPINAuthOperation
 	WithPIN(pIN string) *TokenSmartCardPINAuthOperation
 	PINFormat() *SmartCardPINFormat
 	SetPINFormat(pINFormat *raw.TKSmartCardPINFormat)

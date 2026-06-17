@@ -234,13 +234,13 @@ func (x *PlayerItem) Asset() *Asset {
 }
 
 // Tracks returns the collection as a Go slice.
-func (x *PlayerItem) Tracks() []*raw.AVPlayerItemTrack {
+func (x *PlayerItem) Tracks() []*PlayerItemTrack {
 	arr := x.inner.Tracks()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVPlayerItemTrack {
-		return raw.AVPlayerItemTrackFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PlayerItemTrack {
+		return &PlayerItemTrack{inner: raw.AVPlayerItemTrackFromID(purego.Retain(_id))}
 	})
 }
 
@@ -255,13 +255,13 @@ func (x *PlayerItem) PresentationSize() corefoundation.CGSize {
 }
 
 // TimedMetadata returns the collection as a Go slice.
-func (x *PlayerItem) TimedMetadata() []*raw.AVMetadataItem {
+func (x *PlayerItem) TimedMetadata() []*MetadataItem {
 	arr := x.inner.TimedMetadata()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVMetadataItem {
-		return raw.AVMetadataItemFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MetadataItem {
+		return &MetadataItem{inner: raw.AVMetadataItemFromID(purego.Retain(_id))}
 	})
 }
 
@@ -437,13 +437,13 @@ func (x *PlayerItem) SetSeekingWaitsForVideoCompositionRendering(seekingWaitsFor
 }
 
 // TextStyleRules returns the collection as a Go slice.
-func (x *PlayerItem) TextStyleRules() []*raw.AVTextStyleRule {
+func (x *PlayerItem) TextStyleRules() []*TextStyleRule {
 	arr := x.inner.TextStyleRules()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVTextStyleRule {
-		return raw.AVTextStyleRuleFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *TextStyleRule {
+		return &TextStyleRule{inner: raw.AVTextStyleRuleFromID(purego.Retain(_id))}
 	})
 }
 
@@ -679,13 +679,13 @@ func (x *PlayerItem) EffectiveMediaPresentationSettingsForMediaSelectionGroup(me
 }
 
 // PreferredCustomMediaSelectionSchemes returns the collection as a Go slice.
-func (x *PlayerItem) PreferredCustomMediaSelectionSchemes() []*raw.AVCustomMediaSelectionScheme {
+func (x *PlayerItem) PreferredCustomMediaSelectionSchemes() []*CustomMediaSelectionScheme {
 	arr := x.inner.PreferredCustomMediaSelectionSchemes()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVCustomMediaSelectionScheme {
-		return raw.AVCustomMediaSelectionSchemeFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CustomMediaSelectionScheme {
+		return &CustomMediaSelectionScheme{inner: raw.AVCustomMediaSelectionSchemeFromID(purego.Retain(_id))}
 	})
 }
 
@@ -723,13 +723,13 @@ func (x *PlayerItem) RemoveOutput(output *raw.AVPlayerItemOutput) {
 }
 
 // Outputs returns the collection as a Go slice.
-func (x *PlayerItem) Outputs() []*raw.AVPlayerItemOutput {
+func (x *PlayerItem) Outputs() []*PlayerItemOutput {
 	arr := x.inner.Outputs()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVPlayerItemOutput {
-		return raw.AVPlayerItemOutputFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PlayerItemOutput {
+		return &PlayerItemOutput{inner: raw.AVPlayerItemOutputFromID(purego.Retain(_id))}
 	})
 }
 
@@ -744,13 +744,13 @@ func (x *PlayerItem) RemoveMediaDataCollector(collector *raw.AVPlayerItemMediaDa
 }
 
 // MediaDataCollectors returns the collection as a Go slice.
-func (x *PlayerItem) MediaDataCollectors() []*raw.AVPlayerItemMediaDataCollector {
+func (x *PlayerItem) MediaDataCollectors() []*PlayerItemMediaDataCollector {
 	arr := x.inner.MediaDataCollectors()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVPlayerItemMediaDataCollector {
-		return raw.AVPlayerItemMediaDataCollectorFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PlayerItemMediaDataCollector {
+		return &PlayerItemMediaDataCollector{inner: raw.AVPlayerItemMediaDataCollectorFromID(purego.Retain(_id))}
 	})
 }
 
@@ -883,10 +883,10 @@ type PlayerItemable interface {
 	Status() raw.AVPlayerItemStatus
 	Error() unsafe.Pointer
 	Asset() *Asset
-	Tracks() []*raw.AVPlayerItemTrack
+	Tracks() []*PlayerItemTrack
 	Duration() coremedia.CMTime
 	PresentationSize() corefoundation.CGSize
-	TimedMetadata() []*raw.AVMetadataItem
+	TimedMetadata() []*MetadataItem
 	AutomaticallyLoadedAssetKeys() []string
 	CanPlayFastForward() bool
 	CanPlaySlowForward() bool
@@ -918,7 +918,7 @@ type PlayerItemable interface {
 	CustomVideoCompositor() raw.AVVideoCompositing
 	SeekingWaitsForVideoCompositionRendering() bool
 	SetSeekingWaitsForVideoCompositionRendering(seekingWaitsForVideoCompositionRendering bool)
-	TextStyleRules() []*raw.AVTextStyleRule
+	TextStyleRules() []*TextStyleRule
 	SetTextStyleRules(textStyleRules *foundation.NSArray[*raw.AVTextStyleRule])
 	VideoApertureMode() string
 	SetVideoApertureMode(videoApertureMode *foundation.NSString)
@@ -960,16 +960,16 @@ type PlayerItemable interface {
 	SelectMediaPresentationSettingForMediaSelectionGroup(mediaPresentationSetting *raw.AVMediaPresentationSetting, mediaSelectionGroup *raw.AVMediaSelectionGroup)
 	SelectedMediaPresentationSettingsForMediaSelectionGroup(mediaSelectionGroup *raw.AVMediaSelectionGroup) *foundation.NSDictionary[*raw.AVMediaPresentationSelector, objc.ID]
 	EffectiveMediaPresentationSettingsForMediaSelectionGroup(mediaSelectionGroup *raw.AVMediaSelectionGroup) *foundation.NSDictionary[*raw.AVMediaPresentationSelector, objc.ID]
-	PreferredCustomMediaSelectionSchemes() []*raw.AVCustomMediaSelectionScheme
+	PreferredCustomMediaSelectionSchemes() []*CustomMediaSelectionScheme
 	SetPreferredCustomMediaSelectionSchemes(preferredCustomMediaSelectionSchemes *foundation.NSArray[*raw.AVCustomMediaSelectionScheme])
 	AccessLog() *PlayerItemAccessLog
 	ErrorLog() *PlayerItemErrorLog
 	AddOutput(output *raw.AVPlayerItemOutput)
 	RemoveOutput(output *raw.AVPlayerItemOutput)
-	Outputs() []*raw.AVPlayerItemOutput
+	Outputs() []*PlayerItemOutput
 	AddMediaDataCollector(collector *raw.AVPlayerItemMediaDataCollector)
 	RemoveMediaDataCollector(collector *raw.AVPlayerItemMediaDataCollector)
-	MediaDataCollectors() []*raw.AVPlayerItemMediaDataCollector
+	MediaDataCollectors() []*PlayerItemMediaDataCollector
 	SeekToTime(time_ coremedia.CMTime)
 	SeekToTimeToleranceBeforeToleranceAfter(time_ coremedia.CMTime, toleranceBefore coremedia.CMTime, toleranceAfter coremedia.CMTime)
 	SeekToDate(date *foundation.NSDate) bool

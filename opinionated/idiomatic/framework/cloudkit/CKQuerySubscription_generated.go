@@ -53,14 +53,14 @@ func NewQuerySubscriptionWithCoder(aDecoder *foundation.NSCoder) *QuerySubscript
 }
 
 // WithZoneID sets the zoneID property and returns the receiver for chaining.
-func (x *QuerySubscription) WithZoneID(zoneID *raw.CKRecordZoneID) *QuerySubscription {
-	x.inner.SetZoneID(zoneID)
+func (x *QuerySubscription) WithZoneID(zoneID *RecordZoneID) *QuerySubscription {
+	x.inner.SetZoneID(zoneID.Unwrap())
 	return x
 }
 
 // WithNotificationInfo sets the notificationInfo property and returns the receiver for chaining.
-func (x *QuerySubscription) WithNotificationInfo(notificationInfo *raw.CKNotificationInfo) *QuerySubscription {
-	x.inner.CKSubscription.SetNotificationInfo(notificationInfo)
+func (x *QuerySubscription) WithNotificationInfo(notificationInfo *NotificationInfo) *QuerySubscription {
+	x.inner.CKSubscription.SetNotificationInfo(notificationInfo.Unwrap())
 	return x
 }
 
@@ -102,8 +102,8 @@ func (x *QuerySubscription) asSubscription() *raw.CKSubscription { return &x.inn
 // QuerySubscriptionable is the interface implemented by [QuerySubscription], for mocking and DI.
 type QuerySubscriptionable interface {
 	Unwrap() *raw.CKQuerySubscription
-	WithZoneID(zoneID *raw.CKRecordZoneID) *QuerySubscription
-	WithNotificationInfo(notificationInfo *raw.CKNotificationInfo) *QuerySubscription
+	WithZoneID(zoneID *RecordZoneID) *QuerySubscription
+	WithNotificationInfo(notificationInfo *NotificationInfo) *QuerySubscription
 	RecordType() string
 	Predicate() *foundation.NSPredicate
 	ZoneID() *RecordZoneID

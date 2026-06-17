@@ -46,8 +46,8 @@ func NewPasskeyAssertionCredentialWithUserHandleRelyingPartySignatureClientDataH
 }
 
 // WithExtensionOutput sets the extensionOutput property and returns the receiver for chaining.
-func (x *PasskeyAssertionCredential) WithExtensionOutput(extensionOutput *raw.ASPasskeyAssertionCredentialExtensionOutput) *PasskeyAssertionCredential {
-	x.inner.SetExtensionOutput(extensionOutput)
+func (x *PasskeyAssertionCredential) WithExtensionOutput(extensionOutput *PasskeyAssertionCredentialExtensionOutput) *PasskeyAssertionCredential {
+	x.inner.SetExtensionOutput(extensionOutput.Unwrap())
 	return x
 }
 
@@ -102,7 +102,7 @@ func (x *PasskeyAssertionCredential) SetExtensionOutput(extensionOutput *raw.ASP
 // PasskeyAssertionCredentialable is the interface implemented by [PasskeyAssertionCredential], for mocking and DI.
 type PasskeyAssertionCredentialable interface {
 	Unwrap() *raw.ASPasskeyAssertionCredential
-	WithExtensionOutput(extensionOutput *raw.ASPasskeyAssertionCredentialExtensionOutput) *PasskeyAssertionCredential
+	WithExtensionOutput(extensionOutput *PasskeyAssertionCredentialExtensionOutput) *PasskeyAssertionCredential
 	UserHandle() *foundation.NSData
 	RelyingParty() string
 	Signature() *foundation.NSData

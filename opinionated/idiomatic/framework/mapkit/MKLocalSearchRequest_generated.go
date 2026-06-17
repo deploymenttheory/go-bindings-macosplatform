@@ -83,14 +83,14 @@ func (x *LocalSearchRequest) WithResultTypes(resultTypes raw.MKLocalSearchResult
 }
 
 // WithPointOfInterestFilter sets the pointOfInterestFilter property and returns the receiver for chaining.
-func (x *LocalSearchRequest) WithPointOfInterestFilter(pointOfInterestFilter *raw.MKPointOfInterestFilter) *LocalSearchRequest {
-	x.inner.SetPointOfInterestFilter(pointOfInterestFilter)
+func (x *LocalSearchRequest) WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *LocalSearchRequest {
+	x.inner.SetPointOfInterestFilter(pointOfInterestFilter.Unwrap())
 	return x
 }
 
 // WithAddressFilter sets the addressFilter property and returns the receiver for chaining.
-func (x *LocalSearchRequest) WithAddressFilter(addressFilter *raw.MKAddressFilter) *LocalSearchRequest {
-	x.inner.SetAddressFilter(addressFilter)
+func (x *LocalSearchRequest) WithAddressFilter(addressFilter *AddressFilter) *LocalSearchRequest {
+	x.inner.SetAddressFilter(addressFilter.Unwrap())
 	return x
 }
 
@@ -173,8 +173,8 @@ type LocalSearchRequestable interface {
 	WithRegion(region raw.MKCoordinateRegion) *LocalSearchRequest
 	WithRegionPriority(regionPriority raw.MKLocalSearchRegionPriority) *LocalSearchRequest
 	WithResultTypes(resultTypes raw.MKLocalSearchResultType) *LocalSearchRequest
-	WithPointOfInterestFilter(pointOfInterestFilter *raw.MKPointOfInterestFilter) *LocalSearchRequest
-	WithAddressFilter(addressFilter *raw.MKAddressFilter) *LocalSearchRequest
+	WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *LocalSearchRequest
+	WithAddressFilter(addressFilter *AddressFilter) *LocalSearchRequest
 	NaturalLanguageQuery() string
 	SetNaturalLanguageQuery(naturalLanguageQuery string)
 	Region() raw.MKCoordinateRegion

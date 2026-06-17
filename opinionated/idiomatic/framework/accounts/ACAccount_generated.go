@@ -39,8 +39,8 @@ func NewAccountWithAccountType(type_ *raw.ACAccountType) *Account {
 }
 
 // WithAccountType sets the accountType property and returns the receiver for chaining.
-func (x *Account) WithAccountType(accountType *raw.ACAccountType) *Account {
-	x.inner.SetAccountType(accountType)
+func (x *Account) WithAccountType(accountType *AccountType) *Account {
+	x.inner.SetAccountType(accountType.Unwrap())
 	return x
 }
 
@@ -57,8 +57,8 @@ func (x *Account) WithUsername(username string) *Account {
 }
 
 // WithCredential sets the credential property and returns the receiver for chaining.
-func (x *Account) WithCredential(credential *raw.ACAccountCredential) *Account {
-	x.inner.SetCredential(credential)
+func (x *Account) WithCredential(credential *AccountCredential) *Account {
+	x.inner.SetCredential(credential.Unwrap())
 	return x
 }
 
@@ -130,10 +130,10 @@ func (x *Account) SetCredential(credential *raw.ACAccountCredential) {
 // Accountable is the interface implemented by [Account], for mocking and DI.
 type Accountable interface {
 	Unwrap() *raw.ACAccount
-	WithAccountType(accountType *raw.ACAccountType) *Account
+	WithAccountType(accountType *AccountType) *Account
 	WithAccountDescription(accountDescription string) *Account
 	WithUsername(username string) *Account
-	WithCredential(credential *raw.ACAccountCredential) *Account
+	WithCredential(credential *AccountCredential) *Account
 	Identifier() string
 	AccountType() *AccountType
 	SetAccountType(accountType *raw.ACAccountType)

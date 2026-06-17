@@ -71,13 +71,13 @@ func (x *AssetDownloadContentConfiguration) WithMediaSelections(items ...MediaSe
 }
 
 // VariantQualifiers returns the collection as a Go slice.
-func (x *AssetDownloadContentConfiguration) VariantQualifiers() []*raw.AVAssetVariantQualifier {
+func (x *AssetDownloadContentConfiguration) VariantQualifiers() []*AssetVariantQualifier {
 	arr := x.inner.VariantQualifiers()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVAssetVariantQualifier {
-		return raw.AVAssetVariantQualifierFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *AssetVariantQualifier {
+		return &AssetVariantQualifier{inner: raw.AVAssetVariantQualifierFromID(purego.Retain(_id))}
 	})
 }
 
@@ -87,13 +87,13 @@ func (x *AssetDownloadContentConfiguration) SetVariantQualifiers(variantQualifie
 }
 
 // MediaSelections returns the collection as a Go slice.
-func (x *AssetDownloadContentConfiguration) MediaSelections() []*raw.AVMediaSelection {
+func (x *AssetDownloadContentConfiguration) MediaSelections() []*MediaSelection {
 	arr := x.inner.MediaSelections()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVMediaSelection {
-		return raw.AVMediaSelectionFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MediaSelection {
+		return &MediaSelection{inner: raw.AVMediaSelectionFromID(purego.Retain(_id))}
 	})
 }
 
@@ -107,9 +107,9 @@ type AssetDownloadContentConfigurationable interface {
 	Unwrap() *raw.AVAssetDownloadContentConfiguration
 	WithVariantQualifiers(items ...*raw.AVAssetVariantQualifier) *AssetDownloadContentConfiguration
 	WithMediaSelections(items ...MediaSelectionProvider) *AssetDownloadContentConfiguration
-	VariantQualifiers() []*raw.AVAssetVariantQualifier
+	VariantQualifiers() []*AssetVariantQualifier
 	SetVariantQualifiers(variantQualifiers *foundation.NSArray[*raw.AVAssetVariantQualifier])
-	MediaSelections() []*raw.AVMediaSelection
+	MediaSelections() []*MediaSelection
 	SetMediaSelections(mediaSelections *foundation.NSArray[*raw.AVMediaSelection])
 }
 

@@ -44,8 +44,8 @@ func (x *MTL4PipelineDescriptor) WithLabel(label string) *MTL4PipelineDescriptor
 }
 
 // WithOptions sets the options property and returns the receiver for chaining.
-func (x *MTL4PipelineDescriptor) WithOptions(options *raw.MTL4PipelineOptions) *MTL4PipelineDescriptor {
-	x.inner.SetOptions(options)
+func (x *MTL4PipelineDescriptor) WithOptions(options *MTL4PipelineOptions) *MTL4PipelineDescriptor {
+	x.inner.SetOptions(options.Unwrap())
 	return x
 }
 
@@ -83,7 +83,7 @@ func (x *MTL4PipelineDescriptor) asMTL4PipelineDescriptor() *raw.MTL4PipelineDes
 type MTL4PipelineDescriptorable interface {
 	Unwrap() *raw.MTL4PipelineDescriptor
 	WithLabel(label string) *MTL4PipelineDescriptor
-	WithOptions(options *raw.MTL4PipelineOptions) *MTL4PipelineDescriptor
+	WithOptions(options *MTL4PipelineOptions) *MTL4PipelineDescriptor
 	Label() string
 	SetLabel(label string)
 	Options() *MTL4PipelineOptions

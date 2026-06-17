@@ -37,20 +37,20 @@ func NewCaptureDeviceDiscoverySession() *CaptureDeviceDiscoverySession {
 }
 
 // Devices returns the collection as a Go slice.
-func (x *CaptureDeviceDiscoverySession) Devices() []*raw.AVCaptureDevice {
+func (x *CaptureDeviceDiscoverySession) Devices() []*CaptureDevice {
 	arr := x.inner.Devices()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVCaptureDevice {
-		return raw.AVCaptureDeviceFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CaptureDevice {
+		return &CaptureDevice{inner: raw.AVCaptureDeviceFromID(purego.Retain(_id))}
 	})
 }
 
 // CaptureDeviceDiscoverySessionable is the interface implemented by [CaptureDeviceDiscoverySession], for mocking and DI.
 type CaptureDeviceDiscoverySessionable interface {
 	Unwrap() *raw.AVCaptureDeviceDiscoverySession
-	Devices() []*raw.AVCaptureDevice
+	Devices() []*CaptureDevice
 }
 
 var _ CaptureDeviceDiscoverySessionable = (*CaptureDeviceDiscoverySession)(nil)

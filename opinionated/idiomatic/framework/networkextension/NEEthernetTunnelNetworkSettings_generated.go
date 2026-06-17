@@ -39,14 +39,14 @@ func NewNEEthernetTunnelNetworkSettingsWithTunnelRemoteAddressEthernetAddressMtu
 }
 
 // WithIPv4Settings sets the iPv4Settings property and returns the receiver for chaining.
-func (x *NEEthernetTunnelNetworkSettings) WithIPv4Settings(iPv4Settings *raw.NEIPv4Settings) *NEEthernetTunnelNetworkSettings {
-	x.inner.NEPacketTunnelNetworkSettings.SetIPv4Settings(iPv4Settings)
+func (x *NEEthernetTunnelNetworkSettings) WithIPv4Settings(iPv4Settings *NEIPv4Settings) *NEEthernetTunnelNetworkSettings {
+	x.inner.NEPacketTunnelNetworkSettings.SetIPv4Settings(iPv4Settings.Unwrap())
 	return x
 }
 
 // WithIPv6Settings sets the iPv6Settings property and returns the receiver for chaining.
-func (x *NEEthernetTunnelNetworkSettings) WithIPv6Settings(iPv6Settings *raw.NEIPv6Settings) *NEEthernetTunnelNetworkSettings {
-	x.inner.NEPacketTunnelNetworkSettings.SetIPv6Settings(iPv6Settings)
+func (x *NEEthernetTunnelNetworkSettings) WithIPv6Settings(iPv6Settings *NEIPv6Settings) *NEEthernetTunnelNetworkSettings {
+	x.inner.NEPacketTunnelNetworkSettings.SetIPv6Settings(iPv6Settings.Unwrap())
 	return x
 }
 
@@ -69,8 +69,8 @@ func (x *NEEthernetTunnelNetworkSettings) WithDNSSettings(dNSSettings NEDNSSetti
 }
 
 // WithProxySettings sets the proxySettings property and returns the receiver for chaining.
-func (x *NEEthernetTunnelNetworkSettings) WithProxySettings(proxySettings *raw.NEProxySettings) *NEEthernetTunnelNetworkSettings {
-	x.inner.NEPacketTunnelNetworkSettings.NETunnelNetworkSettings.SetProxySettings(proxySettings)
+func (x *NEEthernetTunnelNetworkSettings) WithProxySettings(proxySettings *NEProxySettings) *NEEthernetTunnelNetworkSettings {
+	x.inner.NEPacketTunnelNetworkSettings.NETunnelNetworkSettings.SetProxySettings(proxySettings.Unwrap())
 	return x
 }
 
@@ -90,12 +90,12 @@ func (x *NEEthernetTunnelNetworkSettings) asNETunnelNetworkSettings() *raw.NETun
 // NEEthernetTunnelNetworkSettingsable is the interface implemented by [NEEthernetTunnelNetworkSettings], for mocking and DI.
 type NEEthernetTunnelNetworkSettingsable interface {
 	Unwrap() *raw.NEEthernetTunnelNetworkSettings
-	WithIPv4Settings(iPv4Settings *raw.NEIPv4Settings) *NEEthernetTunnelNetworkSettings
-	WithIPv6Settings(iPv6Settings *raw.NEIPv6Settings) *NEEthernetTunnelNetworkSettings
+	WithIPv4Settings(iPv4Settings *NEIPv4Settings) *NEEthernetTunnelNetworkSettings
+	WithIPv6Settings(iPv6Settings *NEIPv6Settings) *NEEthernetTunnelNetworkSettings
 	WithTunnelOverheadBytes(tunnelOverheadBytes *foundation.NSNumber) *NEEthernetTunnelNetworkSettings
 	WithMTU(mTU *foundation.NSNumber) *NEEthernetTunnelNetworkSettings
 	WithDNSSettings(dNSSettings NEDNSSettingsProvider) *NEEthernetTunnelNetworkSettings
-	WithProxySettings(proxySettings *raw.NEProxySettings) *NEEthernetTunnelNetworkSettings
+	WithProxySettings(proxySettings *NEProxySettings) *NEEthernetTunnelNetworkSettings
 	EthernetAddress() string
 }
 

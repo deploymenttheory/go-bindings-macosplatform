@@ -78,8 +78,8 @@ func (x *Sphere) WithMaterials(items ...*raw.SCNMaterial) *Sphere {
 }
 
 // WithFirstMaterial sets the firstMaterial property and returns the receiver for chaining.
-func (x *Sphere) WithFirstMaterial(firstMaterial *raw.SCNMaterial) *Sphere {
-	x.inner.SCNGeometry.SetFirstMaterial(firstMaterial)
+func (x *Sphere) WithFirstMaterial(firstMaterial *Material) *Sphere {
+	x.inner.SCNGeometry.SetFirstMaterial(firstMaterial.Unwrap())
 	return x
 }
 
@@ -100,8 +100,8 @@ func (x *Sphere) WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Sphere {
 }
 
 // WithTessellator sets the tessellator property and returns the receiver for chaining.
-func (x *Sphere) WithTessellator(tessellator *raw.SCNGeometryTessellator) *Sphere {
-	x.inner.SCNGeometry.SetTessellator(tessellator)
+func (x *Sphere) WithTessellator(tessellator *GeometryTessellator) *Sphere {
+	x.inner.SCNGeometry.SetTessellator(tessellator.Unwrap())
 	return x
 }
 
@@ -118,14 +118,14 @@ func (x *Sphere) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Sp
 }
 
 // WithEdgeCreasesElement sets the edgeCreasesElement property and returns the receiver for chaining.
-func (x *Sphere) WithEdgeCreasesElement(edgeCreasesElement *raw.SCNGeometryElement) *Sphere {
-	x.inner.SCNGeometry.SetEdgeCreasesElement(edgeCreasesElement)
+func (x *Sphere) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Sphere {
+	x.inner.SCNGeometry.SetEdgeCreasesElement(edgeCreasesElement.Unwrap())
 	return x
 }
 
 // WithEdgeCreasesSource sets the edgeCreasesSource property and returns the receiver for chaining.
-func (x *Sphere) WithEdgeCreasesSource(edgeCreasesSource *raw.SCNGeometrySource) *Sphere {
-	x.inner.SCNGeometry.SetEdgeCreasesSource(edgeCreasesSource)
+func (x *Sphere) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Sphere {
+	x.inner.SCNGeometry.SetEdgeCreasesSource(edgeCreasesSource.Unwrap())
 	return x
 }
 
@@ -169,13 +169,13 @@ type Sphereable interface {
 	WithSegmentCount(segmentCount int) *Sphere
 	WithName(name string) *Sphere
 	WithMaterials(items ...*raw.SCNMaterial) *Sphere
-	WithFirstMaterial(firstMaterial *raw.SCNMaterial) *Sphere
+	WithFirstMaterial(firstMaterial *Material) *Sphere
 	WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Sphere
-	WithTessellator(tessellator *raw.SCNGeometryTessellator) *Sphere
+	WithTessellator(tessellator *GeometryTessellator) *Sphere
 	WithSubdivisionLevel(subdivisionLevel uint) *Sphere
 	WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Sphere
-	WithEdgeCreasesElement(edgeCreasesElement *raw.SCNGeometryElement) *Sphere
-	WithEdgeCreasesSource(edgeCreasesSource *raw.SCNGeometrySource) *Sphere
+	WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Sphere
+	WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Sphere
 	Radius() float64
 	SetRadius(radius float64)
 	IsGeodesic() bool

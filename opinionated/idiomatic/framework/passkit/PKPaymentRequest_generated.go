@@ -131,8 +131,8 @@ func (x *PaymentRequest) WithRequiredBillingAddressFields(requiredBillingAddress
 }
 
 // WithBillingContact sets the billingContact property and returns the receiver for chaining.
-func (x *PaymentRequest) WithBillingContact(billingContact *raw.PKContact) *PaymentRequest {
-	x.inner.SetBillingContact(billingContact)
+func (x *PaymentRequest) WithBillingContact(billingContact *Contact) *PaymentRequest {
+	x.inner.SetBillingContact(billingContact.Unwrap())
 	return x
 }
 
@@ -149,8 +149,8 @@ func (x *PaymentRequest) WithRequiredShippingAddressFields(requiredShippingAddre
 }
 
 // WithShippingContact sets the shippingContact property and returns the receiver for chaining.
-func (x *PaymentRequest) WithShippingContact(shippingContact *raw.PKContact) *PaymentRequest {
-	x.inner.SetShippingContact(shippingContact)
+func (x *PaymentRequest) WithShippingContact(shippingContact *Contact) *PaymentRequest {
+	x.inner.SetShippingContact(shippingContact.Unwrap())
 	return x
 }
 
@@ -211,20 +211,20 @@ func (x *PaymentRequest) WithMultiTokenContexts(items ...*raw.PKPaymentTokenCont
 }
 
 // WithRecurringPaymentRequest sets the recurringPaymentRequest property and returns the receiver for chaining.
-func (x *PaymentRequest) WithRecurringPaymentRequest(recurringPaymentRequest *raw.PKRecurringPaymentRequest) *PaymentRequest {
-	x.inner.SetRecurringPaymentRequest(recurringPaymentRequest)
+func (x *PaymentRequest) WithRecurringPaymentRequest(recurringPaymentRequest *RecurringPaymentRequest) *PaymentRequest {
+	x.inner.SetRecurringPaymentRequest(recurringPaymentRequest.Unwrap())
 	return x
 }
 
 // WithAutomaticReloadPaymentRequest sets the automaticReloadPaymentRequest property and returns the receiver for chaining.
-func (x *PaymentRequest) WithAutomaticReloadPaymentRequest(automaticReloadPaymentRequest *raw.PKAutomaticReloadPaymentRequest) *PaymentRequest {
-	x.inner.SetAutomaticReloadPaymentRequest(automaticReloadPaymentRequest)
+func (x *PaymentRequest) WithAutomaticReloadPaymentRequest(automaticReloadPaymentRequest *AutomaticReloadPaymentRequest) *PaymentRequest {
+	x.inner.SetAutomaticReloadPaymentRequest(automaticReloadPaymentRequest.Unwrap())
 	return x
 }
 
 // WithDeferredPaymentRequest sets the deferredPaymentRequest property and returns the receiver for chaining.
-func (x *PaymentRequest) WithDeferredPaymentRequest(deferredPaymentRequest *raw.PKDeferredPaymentRequest) *PaymentRequest {
-	x.inner.SetDeferredPaymentRequest(deferredPaymentRequest)
+func (x *PaymentRequest) WithDeferredPaymentRequest(deferredPaymentRequest *DeferredPaymentRequest) *PaymentRequest {
+	x.inner.SetDeferredPaymentRequest(deferredPaymentRequest.Unwrap())
 	return x
 }
 
@@ -343,13 +343,13 @@ func (x *PaymentRequest) SetMerchantCategoryCode(merchantCategoryCode int16) {
 }
 
 // PaymentSummaryItems returns the collection as a Go slice.
-func (x *PaymentRequest) PaymentSummaryItems() []*raw.PKPaymentSummaryItem {
+func (x *PaymentRequest) PaymentSummaryItems() []*PaymentSummaryItem {
 	arr := x.inner.PaymentSummaryItems()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PKPaymentSummaryItem {
-		return raw.PKPaymentSummaryItemFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PaymentSummaryItem {
+		return &PaymentSummaryItem{inner: raw.PKPaymentSummaryItemFromID(purego.Retain(_id))}
 	})
 }
 
@@ -441,13 +441,13 @@ func (x *PaymentRequest) SetShippingContact(shippingContact *raw.PKContact) {
 }
 
 // ShippingMethods returns the collection as a Go slice.
-func (x *PaymentRequest) ShippingMethods() []*raw.PKShippingMethod {
+func (x *PaymentRequest) ShippingMethods() []*ShippingMethod {
 	arr := x.inner.ShippingMethods()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PKShippingMethod {
-		return raw.PKShippingMethodFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ShippingMethod {
+		return &ShippingMethod{inner: raw.PKShippingMethodFromID(purego.Retain(_id))}
 	})
 }
 
@@ -497,13 +497,13 @@ func (x *PaymentRequest) SetSupportedCountries(supportedCountries *foundation.NS
 }
 
 // MultiTokenContexts returns the collection as a Go slice.
-func (x *PaymentRequest) MultiTokenContexts() []*raw.PKPaymentTokenContext {
+func (x *PaymentRequest) MultiTokenContexts() []*PaymentTokenContext {
 	arr := x.inner.MultiTokenContexts()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PKPaymentTokenContext {
-		return raw.PKPaymentTokenContextFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PaymentTokenContext {
+		return &PaymentTokenContext{inner: raw.PKPaymentTokenContextFromID(purego.Retain(_id))}
 	})
 }
 
@@ -589,19 +589,19 @@ type PaymentRequestable interface {
 	WithCurrencyCode(currencyCode string) *PaymentRequest
 	WithRequiredBillingContactFields(requiredBillingContactFields *foundation.NSSet[*foundation.NSString]) *PaymentRequest
 	WithRequiredBillingAddressFields(requiredBillingAddressFields raw.PKAddressField) *PaymentRequest
-	WithBillingContact(billingContact *raw.PKContact) *PaymentRequest
+	WithBillingContact(billingContact *Contact) *PaymentRequest
 	WithRequiredShippingContactFields(requiredShippingContactFields *foundation.NSSet[*foundation.NSString]) *PaymentRequest
 	WithRequiredShippingAddressFields(requiredShippingAddressFields raw.PKAddressField) *PaymentRequest
-	WithShippingContact(shippingContact *raw.PKContact) *PaymentRequest
+	WithShippingContact(shippingContact *Contact) *PaymentRequest
 	WithShippingMethods(items ...*raw.PKShippingMethod) *PaymentRequest
 	WithShippingType(shippingType raw.PKShippingType) *PaymentRequest
 	WithShippingContactEditingMode(shippingContactEditingMode raw.PKShippingContactEditingMode) *PaymentRequest
 	WithApplicationData(applicationData *foundation.NSData) *PaymentRequest
 	WithSupportedCountries(supportedCountries *foundation.NSSet[*foundation.NSString]) *PaymentRequest
 	WithMultiTokenContexts(items ...*raw.PKPaymentTokenContext) *PaymentRequest
-	WithRecurringPaymentRequest(recurringPaymentRequest *raw.PKRecurringPaymentRequest) *PaymentRequest
-	WithAutomaticReloadPaymentRequest(automaticReloadPaymentRequest *raw.PKAutomaticReloadPaymentRequest) *PaymentRequest
-	WithDeferredPaymentRequest(deferredPaymentRequest *raw.PKDeferredPaymentRequest) *PaymentRequest
+	WithRecurringPaymentRequest(recurringPaymentRequest *RecurringPaymentRequest) *PaymentRequest
+	WithAutomaticReloadPaymentRequest(automaticReloadPaymentRequest *AutomaticReloadPaymentRequest) *PaymentRequest
+	WithDeferredPaymentRequest(deferredPaymentRequest *DeferredPaymentRequest) *PaymentRequest
 	WithApplePayLaterAvailability(applePayLaterAvailability raw.PKApplePayLaterAvailability) *PaymentRequest
 	WithIsDelegatedRequest(isDelegatedRequest bool) *PaymentRequest
 	MerchantIdentifier() string
@@ -620,7 +620,7 @@ type PaymentRequestable interface {
 	SetCouponCode(couponCode string)
 	MerchantCategoryCode() int16
 	SetMerchantCategoryCode(merchantCategoryCode int16)
-	PaymentSummaryItems() []*raw.PKPaymentSummaryItem
+	PaymentSummaryItems() []*PaymentSummaryItem
 	SetPaymentSummaryItems(paymentSummaryItems *foundation.NSArray[*raw.PKPaymentSummaryItem])
 	CurrencyCode() string
 	SetCurrencyCode(currencyCode string)
@@ -636,7 +636,7 @@ type PaymentRequestable interface {
 	SetRequiredShippingAddressFields(requiredShippingAddressFields raw.PKAddressField)
 	ShippingContact() *Contact
 	SetShippingContact(shippingContact *raw.PKContact)
-	ShippingMethods() []*raw.PKShippingMethod
+	ShippingMethods() []*ShippingMethod
 	SetShippingMethods(shippingMethods *foundation.NSArray[*raw.PKShippingMethod])
 	ShippingType() raw.PKShippingType
 	SetShippingType(shippingType raw.PKShippingType)
@@ -646,7 +646,7 @@ type PaymentRequestable interface {
 	SetApplicationData(applicationData *foundation.NSData)
 	SupportedCountries() *foundation.NSSet[*foundation.NSString]
 	SetSupportedCountries(supportedCountries *foundation.NSSet[*foundation.NSString])
-	MultiTokenContexts() []*raw.PKPaymentTokenContext
+	MultiTokenContexts() []*PaymentTokenContext
 	SetMultiTokenContexts(multiTokenContexts *foundation.NSArray[*raw.PKPaymentTokenContext])
 	RecurringPaymentRequest() *RecurringPaymentRequest
 	SetRecurringPaymentRequest(recurringPaymentRequest *raw.PKRecurringPaymentRequest)

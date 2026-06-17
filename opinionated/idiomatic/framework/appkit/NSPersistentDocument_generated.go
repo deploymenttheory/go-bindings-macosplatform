@@ -75,8 +75,8 @@ func (x *PersistentDocument) WithAutosavedContentsFileURL(autosavedContentsFileU
 }
 
 // WithPrintInfo sets the printInfo property and returns the receiver for chaining.
-func (x *PersistentDocument) WithPrintInfo(printInfo *raw.NSPrintInfo) *PersistentDocument {
-	x.inner.NSDocument.SetPrintInfo(printInfo)
+func (x *PersistentDocument) WithPrintInfo(printInfo *PrintInfo) *PersistentDocument {
+	x.inner.NSDocument.SetPrintInfo(printInfo.Unwrap())
 	return x
 }
 
@@ -155,7 +155,7 @@ type PersistentDocumentable interface {
 	WithFileModificationDate(fileModificationDate *foundation.NSDate) *PersistentDocument
 	WithDraft(draft bool) *PersistentDocument
 	WithAutosavedContentsFileURL(autosavedContentsFileURL string) *PersistentDocument
-	WithPrintInfo(printInfo *raw.NSPrintInfo) *PersistentDocument
+	WithPrintInfo(printInfo *PrintInfo) *PersistentDocument
 	WithUndoManager(undoManager *foundation.NSUndoManager) *PersistentDocument
 	WithHasUndoManager(hasUndoManager bool) *PersistentDocument
 	WithDisplayName(displayName string) *PersistentDocument

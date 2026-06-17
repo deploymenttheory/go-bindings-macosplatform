@@ -41,8 +41,8 @@ func NewOutlineView() *OutlineView {
 }
 
 // WithOutlineTableColumn sets the outlineTableColumn property and returns the receiver for chaining.
-func (x *OutlineView) WithOutlineTableColumn(outlineTableColumn *raw.NSTableColumn) *OutlineView {
-	x.inner.SetOutlineTableColumn(outlineTableColumn)
+func (x *OutlineView) WithOutlineTableColumn(outlineTableColumn *TableColumn) *OutlineView {
+	x.inner.SetOutlineTableColumn(outlineTableColumn.Unwrap())
 	return x
 }
 
@@ -89,8 +89,8 @@ func (x *OutlineView) WithDelegate(delegate raw.NSTableViewDelegate) *OutlineVie
 }
 
 // WithHeaderView sets the headerView property and returns the receiver for chaining.
-func (x *OutlineView) WithHeaderView(headerView *raw.NSTableHeaderView) *OutlineView {
-	x.inner.NSTableView.SetHeaderView(headerView)
+func (x *OutlineView) WithHeaderView(headerView *TableHeaderView) *OutlineView {
+	x.inner.NSTableView.SetHeaderView(headerView.Unwrap())
 	return x
 }
 
@@ -137,14 +137,14 @@ func (x *OutlineView) WithUsesAlternatingRowBackgroundColors(usesAlternatingRowB
 }
 
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
-func (x *OutlineView) WithBackgroundColor(backgroundColor *raw.NSColor) *OutlineView {
-	x.inner.NSTableView.SetBackgroundColor(backgroundColor)
+func (x *OutlineView) WithBackgroundColor(backgroundColor *Color) *OutlineView {
+	x.inner.NSTableView.SetBackgroundColor(backgroundColor.Unwrap())
 	return x
 }
 
 // WithGridColor sets the gridColor property and returns the receiver for chaining.
-func (x *OutlineView) WithGridColor(gridColor *raw.NSColor) *OutlineView {
-	x.inner.NSTableView.SetGridColor(gridColor)
+func (x *OutlineView) WithGridColor(gridColor *Color) *OutlineView {
+	x.inner.NSTableView.SetGridColor(gridColor.Unwrap())
 	return x
 }
 
@@ -183,8 +183,8 @@ func (x *OutlineView) WithSortDescriptors(items ...*foundation.NSSortDescriptor)
 }
 
 // WithHighlightedTableColumn sets the highlightedTableColumn property and returns the receiver for chaining.
-func (x *OutlineView) WithHighlightedTableColumn(highlightedTableColumn *raw.NSTableColumn) *OutlineView {
-	x.inner.NSTableView.SetHighlightedTableColumn(highlightedTableColumn)
+func (x *OutlineView) WithHighlightedTableColumn(highlightedTableColumn *TableColumn) *OutlineView {
+	x.inner.NSTableView.SetHighlightedTableColumn(highlightedTableColumn.Unwrap())
 	return x
 }
 
@@ -375,8 +375,8 @@ func (x *OutlineView) WithDoubleValue(doubleValue float64) *OutlineView {
 }
 
 // WithFont sets the font property and returns the receiver for chaining.
-func (x *OutlineView) WithFont(font *raw.NSFont) *OutlineView {
-	x.inner.NSTableView.NSControl.SetFont(font)
+func (x *OutlineView) WithFont(font *Font) *OutlineView {
+	x.inner.NSTableView.NSControl.SetFont(font.Unwrap())
 	return x
 }
 
@@ -597,8 +597,8 @@ func (x *OutlineView) WithContentFilters(items ...*coreimage.CIFilter) *OutlineV
 }
 
 // WithShadow sets the shadow property and returns the receiver for chaining.
-func (x *OutlineView) WithShadow(shadow *raw.NSShadow) *OutlineView {
-	x.inner.NSTableView.NSControl.NSView.SetShadow(shadow)
+func (x *OutlineView) WithShadow(shadow *Shadow) *OutlineView {
+	x.inner.NSTableView.NSControl.NSView.SetShadow(shadow.Unwrap())
 	return x
 }
 
@@ -679,8 +679,8 @@ func (x *OutlineView) WithPrefersCompactControlSizeMetrics(prefersCompactControl
 }
 
 // WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
-func (x *OutlineView) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *OutlineView {
-	x.inner.NSTableView.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+func (x *OutlineView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *OutlineView {
+	x.inner.NSTableView.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
 	return x
 }
 
@@ -721,8 +721,8 @@ func (x *OutlineView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDy
 }
 
 // WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
-func (x *OutlineView) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *OutlineView {
-	x.inner.NSTableView.NSControl.NSView.SetPressureConfiguration(pressureConfiguration)
+func (x *OutlineView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *OutlineView {
+	x.inner.NSTableView.NSControl.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
 	return x
 }
 
@@ -733,8 +733,8 @@ func (x *OutlineView) WithNextResponder(nextResponder ResponderProvider) *Outlin
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *OutlineView) WithMenu(menu *raw.NSMenu) *OutlineView {
-	x.inner.NSTableView.NSControl.NSView.NSResponder.SetMenu(menu)
+func (x *OutlineView) WithMenu(menu *Menu) *OutlineView {
+	x.inner.NSTableView.NSControl.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -745,8 +745,8 @@ func (x *OutlineView) WithUserActivity(userActivity *foundation.NSUserActivity) 
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *OutlineView) WithTouchBar(touchBar *raw.NSTouchBar) *OutlineView {
-	x.inner.NSTableView.NSControl.NSView.NSResponder.SetTouchBar(touchBar)
+func (x *OutlineView) WithTouchBar(touchBar *TouchBar) *OutlineView {
+	x.inner.NSTableView.NSControl.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -935,7 +935,7 @@ func (x *OutlineView) asResponder() *raw.NSResponder { return &x.inner.NSTableVi
 // OutlineViewable is the interface implemented by [OutlineView], for mocking and DI.
 type OutlineViewable interface {
 	Unwrap() *raw.NSOutlineView
-	WithOutlineTableColumn(outlineTableColumn *raw.NSTableColumn) *OutlineView
+	WithOutlineTableColumn(outlineTableColumn *TableColumn) *OutlineView
 	WithIndentationPerLevel(indentationPerLevel float64) *OutlineView
 	WithIndentationMarkerFollowsCell(indentationMarkerFollowsCell bool) *OutlineView
 	WithAutoresizesOutlineColumn(autoresizesOutlineColumn bool) *OutlineView
@@ -943,7 +943,7 @@ type OutlineViewable interface {
 	WithStronglyReferencesItems(stronglyReferencesItems bool) *OutlineView
 	WithDataSource(dataSource raw.NSTableViewDataSource) *OutlineView
 	WithDelegate(delegate raw.NSTableViewDelegate) *OutlineView
-	WithHeaderView(headerView *raw.NSTableHeaderView) *OutlineView
+	WithHeaderView(headerView *TableHeaderView) *OutlineView
 	WithCornerView(cornerView ViewProvider) *OutlineView
 	WithAllowsColumnReordering(allowsColumnReordering bool) *OutlineView
 	WithAllowsColumnResizing(allowsColumnResizing bool) *OutlineView
@@ -951,13 +951,13 @@ type OutlineViewable interface {
 	WithGridStyleMask(gridStyleMask raw.NSTableViewGridLineStyle) *OutlineView
 	WithIntercellSpacing(intercellSpacing corefoundation.CGSize) *OutlineView
 	WithUsesAlternatingRowBackgroundColors(usesAlternatingRowBackgroundColors bool) *OutlineView
-	WithBackgroundColor(backgroundColor *raw.NSColor) *OutlineView
-	WithGridColor(gridColor *raw.NSColor) *OutlineView
+	WithBackgroundColor(backgroundColor *Color) *OutlineView
+	WithGridColor(gridColor *Color) *OutlineView
 	WithRowSizeStyle(rowSizeStyle raw.NSTableViewRowSizeStyle) *OutlineView
 	WithRowHeight(rowHeight float64) *OutlineView
 	WithDoubleAction(doubleAction objc.SEL) *OutlineView
 	WithSortDescriptors(items ...*foundation.NSSortDescriptor) *OutlineView
-	WithHighlightedTableColumn(highlightedTableColumn *raw.NSTableColumn) *OutlineView
+	WithHighlightedTableColumn(highlightedTableColumn *TableColumn) *OutlineView
 	WithVerticalMotionCanBeginDrag(verticalMotionCanBeginDrag bool) *OutlineView
 	WithAllowsMultipleSelection(allowsMultipleSelection bool) *OutlineView
 	WithAllowsEmptySelection(allowsEmptySelection bool) *OutlineView
@@ -989,7 +989,7 @@ type OutlineViewable interface {
 	WithIntegerValue(integerValue int) *OutlineView
 	WithFloatValue(floatValue float32) *OutlineView
 	WithDoubleValue(doubleValue float64) *OutlineView
-	WithFont(font *raw.NSFont) *OutlineView
+	WithFont(font *Font) *OutlineView
 	WithUsesSingleLineMode(usesSingleLineMode bool) *OutlineView
 	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *OutlineView
 	WithAlignment(alignment raw.NSTextAlignment) *OutlineView
@@ -1021,7 +1021,7 @@ type OutlineViewable interface {
 	WithBackgroundFilters(items ...*coreimage.CIFilter) *OutlineView
 	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *OutlineView
 	WithContentFilters(items ...*coreimage.CIFilter) *OutlineView
-	WithShadow(shadow *raw.NSShadow) *OutlineView
+	WithShadow(shadow *Shadow) *OutlineView
 	WithClipsToBounds(clipsToBounds bool) *OutlineView
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *OutlineView
 	WithToolTip(toolTip string) *OutlineView
@@ -1033,18 +1033,18 @@ type OutlineViewable interface {
 	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *OutlineView
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *OutlineView
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *OutlineView
-	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *OutlineView
+	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *OutlineView
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *OutlineView
 	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *OutlineView
 	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *OutlineView
 	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *OutlineView
 	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *OutlineView
 	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *OutlineView
-	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *OutlineView
+	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *OutlineView
 	WithNextResponder(nextResponder ResponderProvider) *OutlineView
-	WithMenu(menu *raw.NSMenu) *OutlineView
+	WithMenu(menu *Menu) *OutlineView
 	WithUserActivity(userActivity *foundation.NSUserActivity) *OutlineView
-	WithTouchBar(touchBar *raw.NSTouchBar) *OutlineView
+	WithTouchBar(touchBar *TouchBar) *OutlineView
 	IsExpandable(item objc.ID) bool
 	NumberOfChildrenOfItem(item objc.ID) int
 	ChildOfItem(index int, item objc.ID) objc.ID

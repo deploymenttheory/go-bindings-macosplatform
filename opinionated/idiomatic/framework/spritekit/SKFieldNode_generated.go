@@ -39,8 +39,8 @@ func NewFieldNode() *FieldNode {
 }
 
 // WithRegion sets the region property and returns the receiver for chaining.
-func (x *FieldNode) WithRegion(region *raw.SKRegion) *FieldNode {
-	x.inner.SetRegion(region)
+func (x *FieldNode) WithRegion(region *Region) *FieldNode {
+	x.inner.SetRegion(region.Unwrap())
 	return x
 }
 
@@ -165,8 +165,8 @@ func (x *FieldNode) WithName(name string) *FieldNode {
 }
 
 // WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
-func (x *FieldNode) WithPhysicsBody(physicsBody *raw.SKPhysicsBody) *FieldNode {
-	x.inner.SKNode.SetPhysicsBody(physicsBody)
+func (x *FieldNode) WithPhysicsBody(physicsBody *PhysicsBody) *FieldNode {
+	x.inner.SKNode.SetPhysicsBody(physicsBody.Unwrap())
 	return x
 }
 
@@ -177,8 +177,8 @@ func (x *FieldNode) WithUserData(userData *foundation.NSMutableDictionary[objc.I
 }
 
 // WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
-func (x *FieldNode) WithReachConstraints(reachConstraints *raw.SKReachConstraints) *FieldNode {
-	x.inner.SKNode.SetReachConstraints(reachConstraints)
+func (x *FieldNode) WithReachConstraints(reachConstraints *ReachConstraints) *FieldNode {
+	x.inner.SKNode.SetReachConstraints(reachConstraints.Unwrap())
 	return x
 }
 
@@ -381,7 +381,7 @@ func (x *FieldNode) asNode() *raw.SKNode { return &x.inner.SKNode }
 // FieldNodeable is the interface implemented by [FieldNode], for mocking and DI.
 type FieldNodeable interface {
 	Unwrap() *raw.SKFieldNode
-	WithRegion(region *raw.SKRegion) *FieldNode
+	WithRegion(region *Region) *FieldNode
 	WithStrength(strength float32) *FieldNode
 	WithFalloff(falloff float32) *FieldNode
 	WithMinimumRadius(minimumRadius float32) *FieldNode
@@ -402,9 +402,9 @@ type FieldNodeable interface {
 	WithHidden(hidden bool) *FieldNode
 	WithUserInteractionEnabled(userInteractionEnabled bool) *FieldNode
 	WithName(name string) *FieldNode
-	WithPhysicsBody(physicsBody *raw.SKPhysicsBody) *FieldNode
+	WithPhysicsBody(physicsBody *PhysicsBody) *FieldNode
 	WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *FieldNode
-	WithReachConstraints(reachConstraints *raw.SKReachConstraints) *FieldNode
+	WithReachConstraints(reachConstraints *ReachConstraints) *FieldNode
 	WithConstraints(items ...*raw.SKConstraint) *FieldNode
 	WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *FieldNode
 	WithAccessibilityElement(accessibilityElement bool) *FieldNode

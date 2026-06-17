@@ -45,8 +45,8 @@ func NewLinkViewWithMetadata(metadata *raw.LPLinkMetadata) *LinkView {
 }
 
 // WithMetadata sets the metadata property and returns the receiver for chaining.
-func (x *LinkView) WithMetadata(metadata *raw.LPLinkMetadata) *LinkView {
-	x.inner.SetMetadata(metadata)
+func (x *LinkView) WithMetadata(metadata *LinkMetadata) *LinkView {
+	x.inner.SetMetadata(metadata.Unwrap())
 	return x
 }
 
@@ -67,7 +67,7 @@ func (x *LinkView) SetMetadata(metadata *raw.LPLinkMetadata) {
 // LinkViewable is the interface implemented by [LinkView], for mocking and DI.
 type LinkViewable interface {
 	Unwrap() *raw.LPLinkView
-	WithMetadata(metadata *raw.LPLinkMetadata) *LinkView
+	WithMetadata(metadata *LinkMetadata) *LinkView
 	Metadata() *LinkMetadata
 	SetMetadata(metadata *raw.LPLinkMetadata)
 }

@@ -76,8 +76,8 @@ func (x *MetalLayer) WithPresentsWithTransaction(presentsWithTransaction bool) *
 }
 
 // WithEDRMetadata sets the eDRMetadata property and returns the receiver for chaining.
-func (x *MetalLayer) WithEDRMetadata(eDRMetadata *raw.CAEDRMetadata) *MetalLayer {
-	x.inner.SetEDRMetadata(eDRMetadata)
+func (x *MetalLayer) WithEDRMetadata(eDRMetadata *EDRMetadata) *MetalLayer {
+	x.inner.SetEDRMetadata(eDRMetadata.Unwrap())
 	return x
 }
 
@@ -565,7 +565,7 @@ type MetalLayerable interface {
 	WithDrawableSize(drawableSize corefoundation.CGSize) *MetalLayer
 	WithMaximumDrawableCount(maximumDrawableCount uint) *MetalLayer
 	WithPresentsWithTransaction(presentsWithTransaction bool) *MetalLayer
-	WithEDRMetadata(eDRMetadata *raw.CAEDRMetadata) *MetalLayer
+	WithEDRMetadata(eDRMetadata *EDRMetadata) *MetalLayer
 	WithDisplaySyncEnabled(displaySyncEnabled bool) *MetalLayer
 	WithAllowsNextDrawableTimeout(allowsNextDrawableTimeout bool) *MetalLayer
 	WithDeveloperHUDProperties(developerHUDProperties *foundation.NSDictionary[objc.ID, objc.ID]) *MetalLayer

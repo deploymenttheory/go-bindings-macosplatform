@@ -38,8 +38,8 @@ func NewSliderTouchBarItem() *SliderTouchBarItem {
 }
 
 // WithSlider sets the slider property and returns the receiver for chaining.
-func (x *SliderTouchBarItem) WithSlider(slider *raw.NSSlider) *SliderTouchBarItem {
-	x.inner.SetSlider(slider)
+func (x *SliderTouchBarItem) WithSlider(slider *Slider) *SliderTouchBarItem {
+	x.inner.SetSlider(slider.Unwrap())
 	return x
 }
 
@@ -68,14 +68,14 @@ func (x *SliderTouchBarItem) WithLabel(label string) *SliderTouchBarItem {
 }
 
 // WithMinimumValueAccessory sets the minimumValueAccessory property and returns the receiver for chaining.
-func (x *SliderTouchBarItem) WithMinimumValueAccessory(minimumValueAccessory *raw.NSSliderAccessory) *SliderTouchBarItem {
-	x.inner.SetMinimumValueAccessory(minimumValueAccessory)
+func (x *SliderTouchBarItem) WithMinimumValueAccessory(minimumValueAccessory *SliderAccessory) *SliderTouchBarItem {
+	x.inner.SetMinimumValueAccessory(minimumValueAccessory.Unwrap())
 	return x
 }
 
 // WithMaximumValueAccessory sets the maximumValueAccessory property and returns the receiver for chaining.
-func (x *SliderTouchBarItem) WithMaximumValueAccessory(maximumValueAccessory *raw.NSSliderAccessory) *SliderTouchBarItem {
-	x.inner.SetMaximumValueAccessory(maximumValueAccessory)
+func (x *SliderTouchBarItem) WithMaximumValueAccessory(maximumValueAccessory *SliderAccessory) *SliderTouchBarItem {
+	x.inner.SetMaximumValueAccessory(maximumValueAccessory.Unwrap())
 	return x
 }
 
@@ -235,13 +235,13 @@ func (x *SliderTouchBarItem) asTouchBarItem() *raw.NSTouchBarItem { return &x.in
 // SliderTouchBarItemable is the interface implemented by [SliderTouchBarItem], for mocking and DI.
 type SliderTouchBarItemable interface {
 	Unwrap() *raw.NSSliderTouchBarItem
-	WithSlider(slider *raw.NSSlider) *SliderTouchBarItem
+	WithSlider(slider *Slider) *SliderTouchBarItem
 	WithDoubleValue(doubleValue float64) *SliderTouchBarItem
 	WithMinimumSliderWidth(minimumSliderWidth float64) *SliderTouchBarItem
 	WithMaximumSliderWidth(maximumSliderWidth float64) *SliderTouchBarItem
 	WithLabel(label string) *SliderTouchBarItem
-	WithMinimumValueAccessory(minimumValueAccessory *raw.NSSliderAccessory) *SliderTouchBarItem
-	WithMaximumValueAccessory(maximumValueAccessory *raw.NSSliderAccessory) *SliderTouchBarItem
+	WithMinimumValueAccessory(minimumValueAccessory *SliderAccessory) *SliderTouchBarItem
+	WithMaximumValueAccessory(maximumValueAccessory *SliderAccessory) *SliderTouchBarItem
 	WithValueAccessoryWidth(valueAccessoryWidth float64) *SliderTouchBarItem
 	WithTarget(target objc.ID) *SliderTouchBarItem
 	WithAction(action objc.SEL) *SliderTouchBarItem

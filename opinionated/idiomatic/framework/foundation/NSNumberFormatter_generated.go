@@ -55,8 +55,8 @@ func (x *NumberFormatter) WithNumberStyle(numberStyle raw.NSNumberFormatterStyle
 }
 
 // WithLocale sets the locale property and returns the receiver for chaining.
-func (x *NumberFormatter) WithLocale(locale *raw.NSLocale) *NumberFormatter {
-	x.inner.SetLocale(locale)
+func (x *NumberFormatter) WithLocale(locale *Locale) *NumberFormatter {
+	x.inner.SetLocale(locale.Unwrap())
 	return x
 }
 
@@ -427,8 +427,8 @@ func (x *NumberFormatter) WithAttributedStringForNotANumber(attributedStringForN
 }
 
 // WithRoundingBehavior sets the roundingBehavior property and returns the receiver for chaining.
-func (x *NumberFormatter) WithRoundingBehavior(roundingBehavior *raw.NSDecimalNumberHandler) *NumberFormatter {
-	x.inner.SetRoundingBehavior(roundingBehavior)
+func (x *NumberFormatter) WithRoundingBehavior(roundingBehavior *DecimalNumberHandler) *NumberFormatter {
+	x.inner.SetRoundingBehavior(roundingBehavior.Unwrap())
 	return x
 }
 
@@ -1271,7 +1271,7 @@ type NumberFormatterable interface {
 	WithFormattingContext(formattingContext raw.NSFormattingContext) *NumberFormatter
 	WithMinimumGroupingDigits(minimumGroupingDigits int) *NumberFormatter
 	WithNumberStyle(numberStyle raw.NSNumberFormatterStyle) *NumberFormatter
-	WithLocale(locale *raw.NSLocale) *NumberFormatter
+	WithLocale(locale *Locale) *NumberFormatter
 	WithGeneratesDecimalNumbers(generatesDecimalNumbers bool) *NumberFormatter
 	WithFormatterBehavior(formatterBehavior raw.NSNumberFormatterBehavior) *NumberFormatter
 	WithNegativeFormat(negativeFormat string) *NumberFormatter
@@ -1333,7 +1333,7 @@ type NumberFormatterable interface {
 	WithAttributedStringForZero(attributedStringForZero AttributedStringProvider) *NumberFormatter
 	WithAttributedStringForNil(attributedStringForNil AttributedStringProvider) *NumberFormatter
 	WithAttributedStringForNotANumber(attributedStringForNotANumber AttributedStringProvider) *NumberFormatter
-	WithRoundingBehavior(roundingBehavior *raw.NSDecimalNumberHandler) *NumberFormatter
+	WithRoundingBehavior(roundingBehavior *DecimalNumberHandler) *NumberFormatter
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *NumberFormatter
 	GetObjectValueForStringRangeError(obj **raw.ObjcObject, string_ string, rangep *raw.NSRange) (bool, error)
 	StringFromNumber(number *raw.NSNumber) *String

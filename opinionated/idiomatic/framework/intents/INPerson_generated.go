@@ -159,13 +159,13 @@ func (x *Person) IsContactSuggestion() bool {
 }
 
 // Aliases returns the collection as a Go slice.
-func (x *Person) Aliases() []*raw.INPersonHandle {
+func (x *Person) Aliases() []*PersonHandle {
 	arr := x.inner.Aliases()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.INPersonHandle {
-		return raw.INPersonHandleFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PersonHandle {
+		return &PersonHandle{inner: raw.INPersonHandleFromID(purego.Retain(_id))}
 	})
 }
 
@@ -199,7 +199,7 @@ type Personable interface {
 	CustomIdentifier() string
 	Relationship() string
 	IsContactSuggestion() bool
-	Aliases() []*raw.INPersonHandle
+	Aliases() []*PersonHandle
 	SuggestionType() raw.INPersonSuggestionType
 	IsMe() bool
 	Handle() string

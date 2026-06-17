@@ -55,24 +55,24 @@ func (x *EnvironmentState) UserPassword() *EnvironmentMechanismUserPassword {
 }
 
 // Companions returns the collection as a Go slice.
-func (x *EnvironmentState) Companions() []*raw.LAEnvironmentMechanismCompanion {
+func (x *EnvironmentState) Companions() []*EnvironmentMechanismCompanion {
 	arr := x.inner.Companions()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.LAEnvironmentMechanismCompanion {
-		return raw.LAEnvironmentMechanismCompanionFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *EnvironmentMechanismCompanion {
+		return &EnvironmentMechanismCompanion{inner: raw.LAEnvironmentMechanismCompanionFromID(purego.Retain(_id))}
 	})
 }
 
 // AllMechanisms returns the collection as a Go slice.
-func (x *EnvironmentState) AllMechanisms() []*raw.LAEnvironmentMechanism {
+func (x *EnvironmentState) AllMechanisms() []*EnvironmentMechanism {
 	arr := x.inner.AllMechanisms()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.LAEnvironmentMechanism {
-		return raw.LAEnvironmentMechanismFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *EnvironmentMechanism {
+		return &EnvironmentMechanism{inner: raw.LAEnvironmentMechanismFromID(purego.Retain(_id))}
 	})
 }
 
@@ -81,8 +81,8 @@ type EnvironmentStateable interface {
 	Unwrap() *raw.LAEnvironmentState
 	Biometry() *EnvironmentMechanismBiometry
 	UserPassword() *EnvironmentMechanismUserPassword
-	Companions() []*raw.LAEnvironmentMechanismCompanion
-	AllMechanisms() []*raw.LAEnvironmentMechanism
+	Companions() []*EnvironmentMechanismCompanion
+	AllMechanisms() []*EnvironmentMechanism
 }
 
 var _ EnvironmentStateable = (*EnvironmentState)(nil)

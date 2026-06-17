@@ -77,8 +77,8 @@ func (x *GestureRecognizer) WithEnabled(enabled bool) *GestureRecognizer {
 }
 
 // WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
-func (x *GestureRecognizer) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *GestureRecognizer {
-	x.inner.SetPressureConfiguration(pressureConfiguration)
+func (x *GestureRecognizer) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *GestureRecognizer {
+	x.inner.SetPressureConfiguration(pressureConfiguration.Unwrap())
 	return x
 }
 
@@ -437,7 +437,7 @@ type GestureRecognizerable interface {
 	WithState(state raw.NSGestureRecognizerState) *GestureRecognizer
 	WithDelegate(delegate raw.NSGestureRecognizerDelegate) *GestureRecognizer
 	WithEnabled(enabled bool) *GestureRecognizer
-	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *GestureRecognizer
+	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *GestureRecognizer
 	WithDelaysPrimaryMouseButtonEvents(delaysPrimaryMouseButtonEvents bool) *GestureRecognizer
 	WithDelaysSecondaryMouseButtonEvents(delaysSecondaryMouseButtonEvents bool) *GestureRecognizer
 	WithDelaysOtherMouseButtonEvents(delaysOtherMouseButtonEvents bool) *GestureRecognizer

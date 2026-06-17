@@ -319,13 +319,13 @@ func (x *VirtualMachineConfiguration) SetPlatform(platform *raw.VZPlatformConfig
 }
 
 // AudioDevices returns the collection as a Go slice.
-func (x *VirtualMachineConfiguration) AudioDevices() []*raw.VZAudioDeviceConfiguration {
+func (x *VirtualMachineConfiguration) AudioDevices() []*AudioDeviceConfiguration {
 	arr := x.inner.AudioDevices()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.VZAudioDeviceConfiguration {
-		return raw.VZAudioDeviceConfigurationFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *AudioDeviceConfiguration {
+		return &AudioDeviceConfiguration{inner: raw.VZAudioDeviceConfigurationFromID(purego.Retain(_id))}
 	})
 }
 
@@ -335,13 +335,13 @@ func (x *VirtualMachineConfiguration) SetAudioDevices(audioDevices *foundation.N
 }
 
 // ConsoleDevices returns the collection as a Go slice.
-func (x *VirtualMachineConfiguration) ConsoleDevices() []*raw.VZConsoleDeviceConfiguration {
+func (x *VirtualMachineConfiguration) ConsoleDevices() []*ConsoleDeviceConfiguration {
 	arr := x.inner.ConsoleDevices()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.VZConsoleDeviceConfiguration {
-		return raw.VZConsoleDeviceConfigurationFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ConsoleDeviceConfiguration {
+		return &ConsoleDeviceConfiguration{inner: raw.VZConsoleDeviceConfigurationFromID(purego.Retain(_id))}
 	})
 }
 
@@ -351,13 +351,13 @@ func (x *VirtualMachineConfiguration) SetConsoleDevices(consoleDevices *foundati
 }
 
 // DirectorySharingDevices returns the collection as a Go slice.
-func (x *VirtualMachineConfiguration) DirectorySharingDevices() []*raw.VZDirectorySharingDeviceConfiguration {
+func (x *VirtualMachineConfiguration) DirectorySharingDevices() []*DirectorySharingDeviceConfiguration {
 	arr := x.inner.DirectorySharingDevices()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.VZDirectorySharingDeviceConfiguration {
-		return raw.VZDirectorySharingDeviceConfigurationFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *DirectorySharingDeviceConfiguration {
+		return &DirectorySharingDeviceConfiguration{inner: raw.VZDirectorySharingDeviceConfigurationFromID(purego.Retain(_id))}
 	})
 }
 
@@ -367,13 +367,13 @@ func (x *VirtualMachineConfiguration) SetDirectorySharingDevices(directorySharin
 }
 
 // EntropyDevices returns the collection as a Go slice.
-func (x *VirtualMachineConfiguration) EntropyDevices() []*raw.VZEntropyDeviceConfiguration {
+func (x *VirtualMachineConfiguration) EntropyDevices() []*EntropyDeviceConfiguration {
 	arr := x.inner.EntropyDevices()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.VZEntropyDeviceConfiguration {
-		return raw.VZEntropyDeviceConfigurationFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *EntropyDeviceConfiguration {
+		return &EntropyDeviceConfiguration{inner: raw.VZEntropyDeviceConfigurationFromID(purego.Retain(_id))}
 	})
 }
 
@@ -383,13 +383,13 @@ func (x *VirtualMachineConfiguration) SetEntropyDevices(entropyDevices *foundati
 }
 
 // MemoryBalloonDevices returns the collection as a Go slice.
-func (x *VirtualMachineConfiguration) MemoryBalloonDevices() []*raw.VZMemoryBalloonDeviceConfiguration {
+func (x *VirtualMachineConfiguration) MemoryBalloonDevices() []*MemoryBalloonDeviceConfiguration {
 	arr := x.inner.MemoryBalloonDevices()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.VZMemoryBalloonDeviceConfiguration {
-		return raw.VZMemoryBalloonDeviceConfigurationFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MemoryBalloonDeviceConfiguration {
+		return &MemoryBalloonDeviceConfiguration{inner: raw.VZMemoryBalloonDeviceConfigurationFromID(purego.Retain(_id))}
 	})
 }
 
@@ -399,13 +399,13 @@ func (x *VirtualMachineConfiguration) SetMemoryBalloonDevices(memoryBalloonDevic
 }
 
 // NetworkDevices returns the collection as a Go slice.
-func (x *VirtualMachineConfiguration) NetworkDevices() []*raw.VZNetworkDeviceConfiguration {
+func (x *VirtualMachineConfiguration) NetworkDevices() []*NetworkDeviceConfiguration {
 	arr := x.inner.NetworkDevices()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.VZNetworkDeviceConfiguration {
-		return raw.VZNetworkDeviceConfigurationFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *NetworkDeviceConfiguration {
+		return &NetworkDeviceConfiguration{inner: raw.VZNetworkDeviceConfigurationFromID(purego.Retain(_id))}
 	})
 }
 
@@ -415,13 +415,13 @@ func (x *VirtualMachineConfiguration) SetNetworkDevices(networkDevices *foundati
 }
 
 // SerialPorts returns the collection as a Go slice.
-func (x *VirtualMachineConfiguration) SerialPorts() []*raw.VZSerialPortConfiguration {
+func (x *VirtualMachineConfiguration) SerialPorts() []*SerialPortConfiguration {
 	arr := x.inner.SerialPorts()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.VZSerialPortConfiguration {
-		return raw.VZSerialPortConfigurationFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *SerialPortConfiguration {
+		return &SerialPortConfiguration{inner: raw.VZSerialPortConfigurationFromID(purego.Retain(_id))}
 	})
 }
 
@@ -431,13 +431,13 @@ func (x *VirtualMachineConfiguration) SetSerialPorts(serialPorts *foundation.NSA
 }
 
 // SocketDevices returns the collection as a Go slice.
-func (x *VirtualMachineConfiguration) SocketDevices() []*raw.VZSocketDeviceConfiguration {
+func (x *VirtualMachineConfiguration) SocketDevices() []*SocketDeviceConfiguration {
 	arr := x.inner.SocketDevices()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.VZSocketDeviceConfiguration {
-		return raw.VZSocketDeviceConfigurationFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *SocketDeviceConfiguration {
+		return &SocketDeviceConfiguration{inner: raw.VZSocketDeviceConfigurationFromID(purego.Retain(_id))}
 	})
 }
 
@@ -447,13 +447,13 @@ func (x *VirtualMachineConfiguration) SetSocketDevices(socketDevices *foundation
 }
 
 // StorageDevices returns the collection as a Go slice.
-func (x *VirtualMachineConfiguration) StorageDevices() []*raw.VZStorageDeviceConfiguration {
+func (x *VirtualMachineConfiguration) StorageDevices() []*StorageDeviceConfiguration {
 	arr := x.inner.StorageDevices()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.VZStorageDeviceConfiguration {
-		return raw.VZStorageDeviceConfigurationFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *StorageDeviceConfiguration {
+		return &StorageDeviceConfiguration{inner: raw.VZStorageDeviceConfigurationFromID(purego.Retain(_id))}
 	})
 }
 
@@ -463,13 +463,13 @@ func (x *VirtualMachineConfiguration) SetStorageDevices(storageDevices *foundati
 }
 
 // Keyboards returns the collection as a Go slice.
-func (x *VirtualMachineConfiguration) Keyboards() []*raw.VZKeyboardConfiguration {
+func (x *VirtualMachineConfiguration) Keyboards() []*KeyboardConfiguration {
 	arr := x.inner.Keyboards()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.VZKeyboardConfiguration {
-		return raw.VZKeyboardConfigurationFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *KeyboardConfiguration {
+		return &KeyboardConfiguration{inner: raw.VZKeyboardConfigurationFromID(purego.Retain(_id))}
 	})
 }
 
@@ -479,13 +479,13 @@ func (x *VirtualMachineConfiguration) SetKeyboards(keyboards *foundation.NSArray
 }
 
 // PointingDevices returns the collection as a Go slice.
-func (x *VirtualMachineConfiguration) PointingDevices() []*raw.VZPointingDeviceConfiguration {
+func (x *VirtualMachineConfiguration) PointingDevices() []*PointingDeviceConfiguration {
 	arr := x.inner.PointingDevices()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.VZPointingDeviceConfiguration {
-		return raw.VZPointingDeviceConfigurationFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PointingDeviceConfiguration {
+		return &PointingDeviceConfiguration{inner: raw.VZPointingDeviceConfigurationFromID(purego.Retain(_id))}
 	})
 }
 
@@ -495,13 +495,13 @@ func (x *VirtualMachineConfiguration) SetPointingDevices(pointingDevices *founda
 }
 
 // GraphicsDevices returns the collection as a Go slice.
-func (x *VirtualMachineConfiguration) GraphicsDevices() []*raw.VZGraphicsDeviceConfiguration {
+func (x *VirtualMachineConfiguration) GraphicsDevices() []*GraphicsDeviceConfiguration {
 	arr := x.inner.GraphicsDevices()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.VZGraphicsDeviceConfiguration {
-		return raw.VZGraphicsDeviceConfigurationFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *GraphicsDeviceConfiguration {
+		return &GraphicsDeviceConfiguration{inner: raw.VZGraphicsDeviceConfigurationFromID(purego.Retain(_id))}
 	})
 }
 
@@ -511,13 +511,13 @@ func (x *VirtualMachineConfiguration) SetGraphicsDevices(graphicsDevices *founda
 }
 
 // UsbControllers returns the collection as a Go slice.
-func (x *VirtualMachineConfiguration) UsbControllers() []*raw.VZUSBControllerConfiguration {
+func (x *VirtualMachineConfiguration) UsbControllers() []*USBControllerConfiguration {
 	arr := x.inner.UsbControllers()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.VZUSBControllerConfiguration {
-		return raw.VZUSBControllerConfigurationFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *USBControllerConfiguration {
+		return &USBControllerConfiguration{inner: raw.VZUSBControllerConfigurationFromID(purego.Retain(_id))}
 	})
 }
 
@@ -566,31 +566,31 @@ type VirtualMachineConfigurationable interface {
 	SetCPUCount(cPUCount uint)
 	Platform() *PlatformConfiguration
 	SetPlatform(platform *raw.VZPlatformConfiguration)
-	AudioDevices() []*raw.VZAudioDeviceConfiguration
+	AudioDevices() []*AudioDeviceConfiguration
 	SetAudioDevices(audioDevices *foundation.NSArray[*raw.VZAudioDeviceConfiguration])
-	ConsoleDevices() []*raw.VZConsoleDeviceConfiguration
+	ConsoleDevices() []*ConsoleDeviceConfiguration
 	SetConsoleDevices(consoleDevices *foundation.NSArray[*raw.VZConsoleDeviceConfiguration])
-	DirectorySharingDevices() []*raw.VZDirectorySharingDeviceConfiguration
+	DirectorySharingDevices() []*DirectorySharingDeviceConfiguration
 	SetDirectorySharingDevices(directorySharingDevices *foundation.NSArray[*raw.VZDirectorySharingDeviceConfiguration])
-	EntropyDevices() []*raw.VZEntropyDeviceConfiguration
+	EntropyDevices() []*EntropyDeviceConfiguration
 	SetEntropyDevices(entropyDevices *foundation.NSArray[*raw.VZEntropyDeviceConfiguration])
-	MemoryBalloonDevices() []*raw.VZMemoryBalloonDeviceConfiguration
+	MemoryBalloonDevices() []*MemoryBalloonDeviceConfiguration
 	SetMemoryBalloonDevices(memoryBalloonDevices *foundation.NSArray[*raw.VZMemoryBalloonDeviceConfiguration])
-	NetworkDevices() []*raw.VZNetworkDeviceConfiguration
+	NetworkDevices() []*NetworkDeviceConfiguration
 	SetNetworkDevices(networkDevices *foundation.NSArray[*raw.VZNetworkDeviceConfiguration])
-	SerialPorts() []*raw.VZSerialPortConfiguration
+	SerialPorts() []*SerialPortConfiguration
 	SetSerialPorts(serialPorts *foundation.NSArray[*raw.VZSerialPortConfiguration])
-	SocketDevices() []*raw.VZSocketDeviceConfiguration
+	SocketDevices() []*SocketDeviceConfiguration
 	SetSocketDevices(socketDevices *foundation.NSArray[*raw.VZSocketDeviceConfiguration])
-	StorageDevices() []*raw.VZStorageDeviceConfiguration
+	StorageDevices() []*StorageDeviceConfiguration
 	SetStorageDevices(storageDevices *foundation.NSArray[*raw.VZStorageDeviceConfiguration])
-	Keyboards() []*raw.VZKeyboardConfiguration
+	Keyboards() []*KeyboardConfiguration
 	SetKeyboards(keyboards *foundation.NSArray[*raw.VZKeyboardConfiguration])
-	PointingDevices() []*raw.VZPointingDeviceConfiguration
+	PointingDevices() []*PointingDeviceConfiguration
 	SetPointingDevices(pointingDevices *foundation.NSArray[*raw.VZPointingDeviceConfiguration])
-	GraphicsDevices() []*raw.VZGraphicsDeviceConfiguration
+	GraphicsDevices() []*GraphicsDeviceConfiguration
 	SetGraphicsDevices(graphicsDevices *foundation.NSArray[*raw.VZGraphicsDeviceConfiguration])
-	UsbControllers() []*raw.VZUSBControllerConfiguration
+	UsbControllers() []*USBControllerConfiguration
 	SetUsbControllers(usbControllers *foundation.NSArray[*raw.VZUSBControllerConfiguration])
 	Validate() error
 	ValidateSaveRestoreSupport() error

@@ -132,8 +132,8 @@ func (x *PrintInfo) WithJobDisposition(jobDisposition *foundation.NSString) *Pri
 }
 
 // WithPrinter sets the printer property and returns the receiver for chaining.
-func (x *PrintInfo) WithPrinter(printer *raw.NSPrinter) *PrintInfo {
-	x.inner.SetPrinter(printer)
+func (x *PrintInfo) WithPrinter(printer *Printer) *PrintInfo {
+	x.inner.SetPrinter(printer.Unwrap())
 	return x
 }
 
@@ -380,7 +380,7 @@ type PrintInfoable interface {
 	WithHorizontalPagination(horizontalPagination raw.NSPrintingPaginationMode) *PrintInfo
 	WithVerticalPagination(verticalPagination raw.NSPrintingPaginationMode) *PrintInfo
 	WithJobDisposition(jobDisposition *foundation.NSString) *PrintInfo
-	WithPrinter(printer *raw.NSPrinter) *PrintInfo
+	WithPrinter(printer *Printer) *PrintInfo
 	WithSelectionOnly(selectionOnly bool) *PrintInfo
 	Dictionary() *foundation.NSMutableDictionary[*foundation.NSString, objc.ID]
 	SetUpPrintOperationDefaultValues()

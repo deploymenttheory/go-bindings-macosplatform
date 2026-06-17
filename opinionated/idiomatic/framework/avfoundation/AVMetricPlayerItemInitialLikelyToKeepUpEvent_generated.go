@@ -37,35 +37,35 @@ func NewMetricPlayerItemInitialLikelyToKeepUpEvent() *MetricPlayerItemInitialLik
 }
 
 // PlaylistRequestEvents returns the collection as a Go slice.
-func (x *MetricPlayerItemInitialLikelyToKeepUpEvent) PlaylistRequestEvents() []*raw.AVMetricHLSPlaylistRequestEvent {
+func (x *MetricPlayerItemInitialLikelyToKeepUpEvent) PlaylistRequestEvents() []*MetricHLSPlaylistRequestEvent {
 	arr := x.inner.PlaylistRequestEvents()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVMetricHLSPlaylistRequestEvent {
-		return raw.AVMetricHLSPlaylistRequestEventFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MetricHLSPlaylistRequestEvent {
+		return &MetricHLSPlaylistRequestEvent{inner: raw.AVMetricHLSPlaylistRequestEventFromID(purego.Retain(_id))}
 	})
 }
 
 // MediaSegmentRequestEvents returns the collection as a Go slice.
-func (x *MetricPlayerItemInitialLikelyToKeepUpEvent) MediaSegmentRequestEvents() []*raw.AVMetricHLSMediaSegmentRequestEvent {
+func (x *MetricPlayerItemInitialLikelyToKeepUpEvent) MediaSegmentRequestEvents() []*MetricHLSMediaSegmentRequestEvent {
 	arr := x.inner.MediaSegmentRequestEvents()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVMetricHLSMediaSegmentRequestEvent {
-		return raw.AVMetricHLSMediaSegmentRequestEventFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MetricHLSMediaSegmentRequestEvent {
+		return &MetricHLSMediaSegmentRequestEvent{inner: raw.AVMetricHLSMediaSegmentRequestEventFromID(purego.Retain(_id))}
 	})
 }
 
 // ContentKeyRequestEvents returns the collection as a Go slice.
-func (x *MetricPlayerItemInitialLikelyToKeepUpEvent) ContentKeyRequestEvents() []*raw.AVMetricContentKeyRequestEvent {
+func (x *MetricPlayerItemInitialLikelyToKeepUpEvent) ContentKeyRequestEvents() []*MetricContentKeyRequestEvent {
 	arr := x.inner.ContentKeyRequestEvents()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVMetricContentKeyRequestEvent {
-		return raw.AVMetricContentKeyRequestEventFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MetricContentKeyRequestEvent {
+		return &MetricContentKeyRequestEvent{inner: raw.AVMetricContentKeyRequestEventFromID(purego.Retain(_id))}
 	})
 }
 
@@ -76,9 +76,9 @@ func (x *MetricPlayerItemInitialLikelyToKeepUpEvent) asMetricEvent() *raw.AVMetr
 // MetricPlayerItemInitialLikelyToKeepUpEventable is the interface implemented by [MetricPlayerItemInitialLikelyToKeepUpEvent], for mocking and DI.
 type MetricPlayerItemInitialLikelyToKeepUpEventable interface {
 	Unwrap() *raw.AVMetricPlayerItemInitialLikelyToKeepUpEvent
-	PlaylistRequestEvents() []*raw.AVMetricHLSPlaylistRequestEvent
-	MediaSegmentRequestEvents() []*raw.AVMetricHLSMediaSegmentRequestEvent
-	ContentKeyRequestEvents() []*raw.AVMetricContentKeyRequestEvent
+	PlaylistRequestEvents() []*MetricHLSPlaylistRequestEvent
+	MediaSegmentRequestEvents() []*MetricHLSMediaSegmentRequestEvent
+	ContentKeyRequestEvents() []*MetricContentKeyRequestEvent
 }
 
 var _ MetricPlayerItemInitialLikelyToKeepUpEventable = (*MetricPlayerItemInitialLikelyToKeepUpEvent)(nil)

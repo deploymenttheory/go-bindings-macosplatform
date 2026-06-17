@@ -117,13 +117,13 @@ func (x *AudioSequencer) SetUserCallback(userCallback func(*raw.AVMusicTrack, *f
 }
 
 // Tracks returns the collection as a Go slice.
-func (x *AudioSequencer) Tracks() []*raw.AVMusicTrack {
+func (x *AudioSequencer) Tracks() []*MusicTrack {
 	arr := x.inner.Tracks()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVMusicTrack {
-		return raw.AVMusicTrackFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MusicTrack {
+		return &MusicTrack{inner: raw.AVMusicTrackFromID(purego.Retain(_id))}
 	})
 }
 
@@ -218,7 +218,7 @@ type AudioSequencerable interface {
 	CreateAndAppendTrack() *MusicTrack
 	RemoveTrack(track *raw.AVMusicTrack) bool
 	SetUserCallback(userCallback func(*raw.AVMusicTrack, *foundation.NSData, float64))
-	Tracks() []*raw.AVMusicTrack
+	Tracks() []*MusicTrack
 	TempoTrack() *MusicTrack
 	UserInfo() *foundation.NSDictionary[*foundation.NSString, objc.ID]
 	HostTimeForBeatsError(inBeats float64) (uint64, error)

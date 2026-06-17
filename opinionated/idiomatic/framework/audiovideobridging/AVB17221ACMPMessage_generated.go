@@ -85,8 +85,8 @@ func (x *AVB17221ACMPMessage) WithListenerUniqueID(listenerUniqueID uint16) *AVB
 }
 
 // WithDestinationMAC sets the destinationMAC property and returns the receiver for chaining.
-func (x *AVB17221ACMPMessage) WithDestinationMAC(destinationMAC *raw.AVBMACAddress) *AVB17221ACMPMessage {
-	x.inner.SetDestinationMAC(destinationMAC)
+func (x *AVB17221ACMPMessage) WithDestinationMAC(destinationMAC *MACAddress) *AVB17221ACMPMessage {
+	x.inner.SetDestinationMAC(destinationMAC.Unwrap())
 	return x
 }
 
@@ -145,20 +145,20 @@ func (x *AVB17221ACMPMessage) WithDestinationPort(destinationPort uint16) *AVB17
 }
 
 // WithSourceIPAddress sets the sourceIPAddress property and returns the receiver for chaining.
-func (x *AVB17221ACMPMessage) WithSourceIPAddress(sourceIPAddress *raw.AVBIPAddress) *AVB17221ACMPMessage {
-	x.inner.SetSourceIPAddress(sourceIPAddress)
+func (x *AVB17221ACMPMessage) WithSourceIPAddress(sourceIPAddress *IPAddress) *AVB17221ACMPMessage {
+	x.inner.SetSourceIPAddress(sourceIPAddress.Unwrap())
 	return x
 }
 
 // WithDestinationIPAddress sets the destinationIPAddress property and returns the receiver for chaining.
-func (x *AVB17221ACMPMessage) WithDestinationIPAddress(destinationIPAddress *raw.AVBIPAddress) *AVB17221ACMPMessage {
-	x.inner.SetDestinationIPAddress(destinationIPAddress)
+func (x *AVB17221ACMPMessage) WithDestinationIPAddress(destinationIPAddress *IPAddress) *AVB17221ACMPMessage {
+	x.inner.SetDestinationIPAddress(destinationIPAddress.Unwrap())
 	return x
 }
 
 // WithSourceMAC sets the sourceMAC property and returns the receiver for chaining.
-func (x *AVB17221ACMPMessage) WithSourceMAC(sourceMAC *raw.AVBMACAddress) *AVB17221ACMPMessage {
-	x.inner.SetSourceMAC(sourceMAC)
+func (x *AVB17221ACMPMessage) WithSourceMAC(sourceMAC *MACAddress) *AVB17221ACMPMessage {
+	x.inner.SetSourceMAC(sourceMAC.Unwrap())
 	return x
 }
 
@@ -404,7 +404,7 @@ type AVB17221ACMPMessageable interface {
 	WithListenerEntityID(listenerEntityID uint64) *AVB17221ACMPMessage
 	WithTalkerUniqueID(talkerUniqueID uint16) *AVB17221ACMPMessage
 	WithListenerUniqueID(listenerUniqueID uint16) *AVB17221ACMPMessage
-	WithDestinationMAC(destinationMAC *raw.AVBMACAddress) *AVB17221ACMPMessage
+	WithDestinationMAC(destinationMAC *MACAddress) *AVB17221ACMPMessage
 	WithConnectionCount(connectionCount uint16) *AVB17221ACMPMessage
 	WithSequenceID(sequenceID uint16) *AVB17221ACMPMessage
 	WithFlags(flags raw.AVB17221ACMPFlags) *AVB17221ACMPMessage
@@ -414,9 +414,9 @@ type AVB17221ACMPMessageable interface {
 	WithIpFlags(ipFlags raw.AVB17221ACMPIPFlag) *AVB17221ACMPMessage
 	WithSourcePort(sourcePort uint16) *AVB17221ACMPMessage
 	WithDestinationPort(destinationPort uint16) *AVB17221ACMPMessage
-	WithSourceIPAddress(sourceIPAddress *raw.AVBIPAddress) *AVB17221ACMPMessage
-	WithDestinationIPAddress(destinationIPAddress *raw.AVBIPAddress) *AVB17221ACMPMessage
-	WithSourceMAC(sourceMAC *raw.AVBMACAddress) *AVB17221ACMPMessage
+	WithSourceIPAddress(sourceIPAddress *IPAddress) *AVB17221ACMPMessage
+	WithDestinationIPAddress(destinationIPAddress *IPAddress) *AVB17221ACMPMessage
+	WithSourceMAC(sourceMAC *MACAddress) *AVB17221ACMPMessage
 	ErrorForStatusCode() unsafe.Pointer
 	MessageType() raw.AVB17221ACMPMessageType
 	SetMessageType(messageType raw.AVB17221ACMPMessageType)

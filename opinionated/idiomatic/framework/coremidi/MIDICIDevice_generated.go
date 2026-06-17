@@ -86,13 +86,13 @@ func (x *CIDevice) DeviceType() raw.MIDICIDeviceType {
 }
 
 // Profiles returns the collection as a Go slice.
-func (x *CIDevice) Profiles() []*raw.MIDIUMPCIProfile {
+func (x *CIDevice) Profiles() []*UMPCIProfile {
 	arr := x.inner.Profiles()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MIDIUMPCIProfile {
-		return raw.MIDIUMPCIProfileFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *UMPCIProfile {
+		return &UMPCIProfile{inner: raw.MIDIUMPCIProfileFromID(purego.Retain(_id))}
 	})
 }
 
@@ -108,7 +108,7 @@ type CIDeviceable interface {
 	MaxSysExSize() uint
 	MaxPropertyExchangeRequests() uint
 	DeviceType() raw.MIDICIDeviceType
-	Profiles() []*raw.MIDIUMPCIProfile
+	Profiles() []*UMPCIProfile
 }
 
 var _ CIDeviceable = (*CIDevice)(nil)

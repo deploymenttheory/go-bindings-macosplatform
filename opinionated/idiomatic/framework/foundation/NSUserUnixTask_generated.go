@@ -37,20 +37,20 @@ func NewUserUnixTask() *UserUnixTask {
 }
 
 // WithStandardInput sets the standardInput property and returns the receiver for chaining.
-func (x *UserUnixTask) WithStandardInput(standardInput *raw.NSFileHandle) *UserUnixTask {
-	x.inner.SetStandardInput(standardInput)
+func (x *UserUnixTask) WithStandardInput(standardInput *FileHandle) *UserUnixTask {
+	x.inner.SetStandardInput(standardInput.Unwrap())
 	return x
 }
 
 // WithStandardOutput sets the standardOutput property and returns the receiver for chaining.
-func (x *UserUnixTask) WithStandardOutput(standardOutput *raw.NSFileHandle) *UserUnixTask {
-	x.inner.SetStandardOutput(standardOutput)
+func (x *UserUnixTask) WithStandardOutput(standardOutput *FileHandle) *UserUnixTask {
+	x.inner.SetStandardOutput(standardOutput.Unwrap())
 	return x
 }
 
 // WithStandardError sets the standardError property and returns the receiver for chaining.
-func (x *UserUnixTask) WithStandardError(standardError *raw.NSFileHandle) *UserUnixTask {
-	x.inner.SetStandardError(standardError)
+func (x *UserUnixTask) WithStandardError(standardError *FileHandle) *UserUnixTask {
+	x.inner.SetStandardError(standardError.Unwrap())
 	return x
 }
 
@@ -114,9 +114,9 @@ func (x *UserUnixTask) asObject() *raw.NSObject { return &x.inner.NSUserScriptTa
 // UserUnixTaskable is the interface implemented by [UserUnixTask], for mocking and DI.
 type UserUnixTaskable interface {
 	Unwrap() *raw.NSUserUnixTask
-	WithStandardInput(standardInput *raw.NSFileHandle) *UserUnixTask
-	WithStandardOutput(standardOutput *raw.NSFileHandle) *UserUnixTask
-	WithStandardError(standardError *raw.NSFileHandle) *UserUnixTask
+	WithStandardInput(standardInput *FileHandle) *UserUnixTask
+	WithStandardOutput(standardOutput *FileHandle) *UserUnixTask
+	WithStandardError(standardError *FileHandle) *UserUnixTask
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UserUnixTask
 	ExecuteWithArgumentsCompletionHandler(arguments *raw.NSArray[*raw.NSString], handler func(unsafe.Pointer))
 	StandardInput() *FileHandle

@@ -704,13 +704,13 @@ func (x *Layer) Superlayer() *Layer {
 }
 
 // Sublayers returns the collection as a Go slice.
-func (x *Layer) Sublayers() []*raw.CALayer {
+func (x *Layer) Sublayers() []*Layer {
 	arr := x.inner.Sublayers()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CALayer {
-		return raw.CALayerFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Layer {
+		return &Layer{inner: raw.CALayerFromID(purego.Retain(_id))}
 	})
 }
 
@@ -1211,13 +1211,13 @@ func (x *Layer) AddConstraint(c *raw.CAConstraint) {
 }
 
 // Constraints returns the collection as a Go slice.
-func (x *Layer) Constraints() []*raw.CAConstraint {
+func (x *Layer) Constraints() []*Constraint {
 	arr := x.inner.Constraints()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CAConstraint {
-		return raw.CAConstraintFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Constraint {
+		return &Constraint{inner: raw.CAConstraintFromID(purego.Retain(_id))}
 	})
 }
 
@@ -1358,7 +1358,7 @@ type Layerable interface {
 	IsGeometryFlipped() bool
 	SetGeometryFlipped(geometryFlipped bool)
 	Superlayer() *Layer
-	Sublayers() []*raw.CALayer
+	Sublayers() []*Layer
 	SetSublayers(sublayers *foundation.NSArray[*raw.CALayer])
 	SublayerTransform() raw.CATransform3D
 	SetSublayerTransform(sublayerTransform raw.CATransform3D)
@@ -1451,7 +1451,7 @@ type Layerable interface {
 	Style() *foundation.NSDictionary[objc.ID, objc.ID]
 	SetStyle(style *foundation.NSDictionary[objc.ID, objc.ID])
 	AddConstraint(c *raw.CAConstraint)
-	Constraints() []*raw.CAConstraint
+	Constraints() []*Constraint
 	SetConstraints(constraints *foundation.NSArray[*raw.CAConstraint])
 	ScrollPoint(p corefoundation.CGPoint)
 	ScrollRectToVisible(r corefoundation.CGRect)

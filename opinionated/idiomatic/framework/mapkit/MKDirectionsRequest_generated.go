@@ -38,14 +38,14 @@ func NewDirectionsRequestWithContentsOfURL(url string) *DirectionsRequest {
 }
 
 // WithSource sets the source property and returns the receiver for chaining.
-func (x *DirectionsRequest) WithSource(source *raw.MKMapItem) *DirectionsRequest {
-	x.inner.SetSource(source)
+func (x *DirectionsRequest) WithSource(source *MapItem) *DirectionsRequest {
+	x.inner.SetSource(source.Unwrap())
 	return x
 }
 
 // WithDestination sets the destination property and returns the receiver for chaining.
-func (x *DirectionsRequest) WithDestination(destination *raw.MKMapItem) *DirectionsRequest {
-	x.inner.SetDestination(destination)
+func (x *DirectionsRequest) WithDestination(destination *MapItem) *DirectionsRequest {
+	x.inner.SetDestination(destination.Unwrap())
 	return x
 }
 
@@ -176,8 +176,8 @@ func (x *DirectionsRequest) SetHighwayPreference(highwayPreference raw.MKDirecti
 // DirectionsRequestable is the interface implemented by [DirectionsRequest], for mocking and DI.
 type DirectionsRequestable interface {
 	Unwrap() *raw.MKDirectionsRequest
-	WithSource(source *raw.MKMapItem) *DirectionsRequest
-	WithDestination(destination *raw.MKMapItem) *DirectionsRequest
+	WithSource(source *MapItem) *DirectionsRequest
+	WithDestination(destination *MapItem) *DirectionsRequest
 	WithTransportType(transportType raw.MKDirectionsTransportType) *DirectionsRequest
 	WithRequestsAlternateRoutes(requestsAlternateRoutes bool) *DirectionsRequest
 	WithDepartureDate(departureDate *foundation.NSDate) *DirectionsRequest

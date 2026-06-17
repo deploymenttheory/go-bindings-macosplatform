@@ -51,8 +51,8 @@ func (x *SplitViewItemAccessoryViewController) WithAutomaticallyAppliesContentIn
 }
 
 // WithPreferredScrollEdgeEffectStyle sets the preferredScrollEdgeEffectStyle property and returns the receiver for chaining.
-func (x *SplitViewItemAccessoryViewController) WithPreferredScrollEdgeEffectStyle(preferredScrollEdgeEffectStyle *raw.NSScrollEdgeEffectStyle) *SplitViewItemAccessoryViewController {
-	x.inner.SetPreferredScrollEdgeEffectStyle(preferredScrollEdgeEffectStyle)
+func (x *SplitViewItemAccessoryViewController) WithPreferredScrollEdgeEffectStyle(preferredScrollEdgeEffectStyle *ScrollEdgeEffectStyle) *SplitViewItemAccessoryViewController {
+	x.inner.SetPreferredScrollEdgeEffectStyle(preferredScrollEdgeEffectStyle.Unwrap())
 	return x
 }
 
@@ -115,8 +115,8 @@ func (x *SplitViewItemAccessoryViewController) WithNextResponder(nextResponder R
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *SplitViewItemAccessoryViewController) WithMenu(menu *raw.NSMenu) *SplitViewItemAccessoryViewController {
-	x.inner.NSViewController.NSResponder.SetMenu(menu)
+func (x *SplitViewItemAccessoryViewController) WithMenu(menu *Menu) *SplitViewItemAccessoryViewController {
+	x.inner.NSViewController.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -127,8 +127,8 @@ func (x *SplitViewItemAccessoryViewController) WithUserActivity(userActivity *fo
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *SplitViewItemAccessoryViewController) WithTouchBar(touchBar *raw.NSTouchBar) *SplitViewItemAccessoryViewController {
-	x.inner.NSViewController.NSResponder.SetTouchBar(touchBar)
+func (x *SplitViewItemAccessoryViewController) WithTouchBar(touchBar *TouchBar) *SplitViewItemAccessoryViewController {
+	x.inner.NSViewController.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -175,7 +175,7 @@ type SplitViewItemAccessoryViewControllerable interface {
 	Unwrap() *raw.NSSplitViewItemAccessoryViewController
 	WithHidden(hidden bool) *SplitViewItemAccessoryViewController
 	WithAutomaticallyAppliesContentInsets(automaticallyAppliesContentInsets bool) *SplitViewItemAccessoryViewController
-	WithPreferredScrollEdgeEffectStyle(preferredScrollEdgeEffectStyle *raw.NSScrollEdgeEffectStyle) *SplitViewItemAccessoryViewController
+	WithPreferredScrollEdgeEffectStyle(preferredScrollEdgeEffectStyle *ScrollEdgeEffectStyle) *SplitViewItemAccessoryViewController
 	WithRepresentedObject(representedObject objc.ID) *SplitViewItemAccessoryViewController
 	WithTitle(title string) *SplitViewItemAccessoryViewController
 	WithView(view ViewProvider) *SplitViewItemAccessoryViewController
@@ -184,9 +184,9 @@ type SplitViewItemAccessoryViewControllerable interface {
 	WithSourceItemView(sourceItemView ViewProvider) *SplitViewItemAccessoryViewController
 	WithPreferredScreenOrigin(preferredScreenOrigin corefoundation.CGPoint) *SplitViewItemAccessoryViewController
 	WithNextResponder(nextResponder ResponderProvider) *SplitViewItemAccessoryViewController
-	WithMenu(menu *raw.NSMenu) *SplitViewItemAccessoryViewController
+	WithMenu(menu *Menu) *SplitViewItemAccessoryViewController
 	WithUserActivity(userActivity *foundation.NSUserActivity) *SplitViewItemAccessoryViewController
-	WithTouchBar(touchBar *raw.NSTouchBar) *SplitViewItemAccessoryViewController
+	WithTouchBar(touchBar *TouchBar) *SplitViewItemAccessoryViewController
 	IsHidden() bool
 	SetHidden(hidden bool)
 	AutomaticallyAppliesContentInsets() bool

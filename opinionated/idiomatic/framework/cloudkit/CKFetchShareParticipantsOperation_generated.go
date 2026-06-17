@@ -81,14 +81,14 @@ func (x *FetchShareParticipantsOperation) WithFetchShareParticipantsCompletionBl
 }
 
 // WithConfiguration sets the configuration property and returns the receiver for chaining.
-func (x *FetchShareParticipantsOperation) WithConfiguration(configuration *raw.CKOperationConfiguration) *FetchShareParticipantsOperation {
-	x.inner.CKOperation.SetConfiguration(configuration)
+func (x *FetchShareParticipantsOperation) WithConfiguration(configuration *OperationConfiguration) *FetchShareParticipantsOperation {
+	x.inner.CKOperation.SetConfiguration(configuration.Unwrap())
 	return x
 }
 
 // WithGroup sets the group property and returns the receiver for chaining.
-func (x *FetchShareParticipantsOperation) WithGroup(group *raw.CKOperationGroup) *FetchShareParticipantsOperation {
-	x.inner.CKOperation.SetGroup(group)
+func (x *FetchShareParticipantsOperation) WithGroup(group *OperationGroup) *FetchShareParticipantsOperation {
+	x.inner.CKOperation.SetGroup(group.Unwrap())
 	return x
 }
 
@@ -99,8 +99,8 @@ func (x *FetchShareParticipantsOperation) WithLongLivedOperationWasPersistedBloc
 }
 
 // WithContainer sets the container property and returns the receiver for chaining.
-func (x *FetchShareParticipantsOperation) WithContainer(container *raw.CKContainer) *FetchShareParticipantsOperation {
-	x.inner.CKOperation.SetContainer(container)
+func (x *FetchShareParticipantsOperation) WithContainer(container *Container) *FetchShareParticipantsOperation {
+	x.inner.CKOperation.SetContainer(container.Unwrap())
 	return x
 }
 
@@ -129,13 +129,13 @@ func (x *FetchShareParticipantsOperation) WithTimeoutIntervalForResource(timeout
 }
 
 // UserIdentityLookupInfos returns the collection as a Go slice.
-func (x *FetchShareParticipantsOperation) UserIdentityLookupInfos() []*raw.CKUserIdentityLookupInfo {
+func (x *FetchShareParticipantsOperation) UserIdentityLookupInfos() []*UserIdentityLookupInfo {
 	arr := x.inner.UserIdentityLookupInfos()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CKUserIdentityLookupInfo {
-		return raw.CKUserIdentityLookupInfoFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *UserIdentityLookupInfo {
+		return &UserIdentityLookupInfo{inner: raw.CKUserIdentityLookupInfoFromID(purego.Retain(_id))}
 	})
 }
 
@@ -214,15 +214,15 @@ type FetchShareParticipantsOperationable interface {
 	WithShareParticipantFetchedBlock(shareParticipantFetchedBlock func(*raw.CKShareParticipant)) *FetchShareParticipantsOperation
 	WithPerShareParticipantCompletionBlock(perShareParticipantCompletionBlock func(*raw.CKUserIdentityLookupInfo, *raw.CKShareParticipant, unsafe.Pointer)) *FetchShareParticipantsOperation
 	WithFetchShareParticipantsCompletionBlock(fetchShareParticipantsCompletionBlock func(unsafe.Pointer)) *FetchShareParticipantsOperation
-	WithConfiguration(configuration *raw.CKOperationConfiguration) *FetchShareParticipantsOperation
-	WithGroup(group *raw.CKOperationGroup) *FetchShareParticipantsOperation
+	WithConfiguration(configuration *OperationConfiguration) *FetchShareParticipantsOperation
+	WithGroup(group *OperationGroup) *FetchShareParticipantsOperation
 	WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *FetchShareParticipantsOperation
-	WithContainer(container *raw.CKContainer) *FetchShareParticipantsOperation
+	WithContainer(container *Container) *FetchShareParticipantsOperation
 	WithAllowsCellularAccess(allowsCellularAccess bool) *FetchShareParticipantsOperation
 	WithLongLived(longLived bool) *FetchShareParticipantsOperation
 	WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *FetchShareParticipantsOperation
 	WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *FetchShareParticipantsOperation
-	UserIdentityLookupInfos() []*raw.CKUserIdentityLookupInfo
+	UserIdentityLookupInfos() []*UserIdentityLookupInfo
 	SetUserIdentityLookupInfos(userIdentityLookupInfos *foundation.NSArray[*raw.CKUserIdentityLookupInfo])
 	ShareParticipantFetchedBlock() objc.Block
 	SetShareParticipantFetchedBlock(ctx context.Context) (*ShareParticipant, error)

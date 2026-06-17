@@ -39,8 +39,8 @@ func NewGroupTouchBarItem() *GroupTouchBarItem {
 }
 
 // WithGroupTouchBar sets the groupTouchBar property and returns the receiver for chaining.
-func (x *GroupTouchBarItem) WithGroupTouchBar(groupTouchBar *raw.NSTouchBar) *GroupTouchBarItem {
-	x.inner.SetGroupTouchBar(groupTouchBar)
+func (x *GroupTouchBarItem) WithGroupTouchBar(groupTouchBar *TouchBar) *GroupTouchBarItem {
+	x.inner.SetGroupTouchBar(groupTouchBar.Unwrap())
 	return x
 }
 
@@ -149,13 +149,13 @@ func (x *GroupTouchBarItem) EffectiveCompressionOptions() *UserInterfaceCompress
 }
 
 // PrioritizedCompressionOptions returns the collection as a Go slice.
-func (x *GroupTouchBarItem) PrioritizedCompressionOptions() []*raw.NSUserInterfaceCompressionOptions {
+func (x *GroupTouchBarItem) PrioritizedCompressionOptions() []*UserInterfaceCompressionOptions {
 	arr := x.inner.PrioritizedCompressionOptions()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSUserInterfaceCompressionOptions {
-		return raw.NSUserInterfaceCompressionOptionsFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *UserInterfaceCompressionOptions {
+		return &UserInterfaceCompressionOptions{inner: raw.NSUserInterfaceCompressionOptionsFromID(purego.Retain(_id))}
 	})
 }
 
@@ -169,7 +169,7 @@ func (x *GroupTouchBarItem) asTouchBarItem() *raw.NSTouchBarItem { return &x.inn
 // GroupTouchBarItemable is the interface implemented by [GroupTouchBarItem], for mocking and DI.
 type GroupTouchBarItemable interface {
 	Unwrap() *raw.NSGroupTouchBarItem
-	WithGroupTouchBar(groupTouchBar *raw.NSTouchBar) *GroupTouchBarItem
+	WithGroupTouchBar(groupTouchBar *TouchBar) *GroupTouchBarItem
 	WithCustomizationLabel(customizationLabel string) *GroupTouchBarItem
 	WithGroupUserInterfaceLayoutDirection(groupUserInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *GroupTouchBarItem
 	WithPrefersEqualWidths(prefersEqualWidths bool) *GroupTouchBarItem
@@ -186,7 +186,7 @@ type GroupTouchBarItemable interface {
 	PreferredItemWidth() float64
 	SetPreferredItemWidth(preferredItemWidth float64)
 	EffectiveCompressionOptions() *UserInterfaceCompressionOptions
-	PrioritizedCompressionOptions() []*raw.NSUserInterfaceCompressionOptions
+	PrioritizedCompressionOptions() []*UserInterfaceCompressionOptions
 	SetPrioritizedCompressionOptions(prioritizedCompressionOptions *foundation.NSArray[*raw.NSUserInterfaceCompressionOptions])
 }
 

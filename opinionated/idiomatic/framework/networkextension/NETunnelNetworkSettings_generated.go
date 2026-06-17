@@ -45,8 +45,8 @@ func (x *NETunnelNetworkSettings) WithDNSSettings(dNSSettings NEDNSSettingsProvi
 }
 
 // WithProxySettings sets the proxySettings property and returns the receiver for chaining.
-func (x *NETunnelNetworkSettings) WithProxySettings(proxySettings *raw.NEProxySettings) *NETunnelNetworkSettings {
-	x.inner.SetProxySettings(proxySettings)
+func (x *NETunnelNetworkSettings) WithProxySettings(proxySettings *NEProxySettings) *NETunnelNetworkSettings {
+	x.inner.SetProxySettings(proxySettings.Unwrap())
 	return x
 }
 
@@ -93,7 +93,7 @@ func (x *NETunnelNetworkSettings) asNETunnelNetworkSettings() *raw.NETunnelNetwo
 type NETunnelNetworkSettingsable interface {
 	Unwrap() *raw.NETunnelNetworkSettings
 	WithDNSSettings(dNSSettings NEDNSSettingsProvider) *NETunnelNetworkSettings
-	WithProxySettings(proxySettings *raw.NEProxySettings) *NETunnelNetworkSettings
+	WithProxySettings(proxySettings *NEProxySettings) *NETunnelNetworkSettings
 	TunnelRemoteAddress() string
 	DNSSettings() *NEDNSSettings
 	SetDNSSettings(dNSSettings *raw.NEDNSSettings)

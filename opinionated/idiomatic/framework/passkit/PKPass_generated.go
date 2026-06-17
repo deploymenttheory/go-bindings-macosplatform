@@ -136,13 +136,13 @@ func (x *Pass) RelevantDate() *foundation.NSDate {
 }
 
 // RelevantDates returns the collection as a Go slice.
-func (x *Pass) RelevantDates() []*raw.PKPassRelevantDate {
+func (x *Pass) RelevantDates() []*PassRelevantDate {
 	arr := x.inner.RelevantDates()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PKPassRelevantDate {
-		return raw.PKPassRelevantDateFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PassRelevantDate {
+		return &PassRelevantDate{inner: raw.PKPassRelevantDateFromID(purego.Retain(_id))}
 	})
 }
 
@@ -187,7 +187,7 @@ type Passable interface {
 	LocalizedDescription() string
 	OrganizationName() string
 	RelevantDate() *foundation.NSDate
-	RelevantDates() []*raw.PKPassRelevantDate
+	RelevantDates() []*PassRelevantDate
 	UserInfo() *foundation.NSDictionary[objc.ID, objc.ID]
 	PassURL() *foundation.NSURL
 	IsRemotePass() bool

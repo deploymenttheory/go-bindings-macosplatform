@@ -97,14 +97,14 @@ func (x *FetchShareMetadataOperation) WithFetchShareMetadataCompletionBlock(fetc
 }
 
 // WithConfiguration sets the configuration property and returns the receiver for chaining.
-func (x *FetchShareMetadataOperation) WithConfiguration(configuration *raw.CKOperationConfiguration) *FetchShareMetadataOperation {
-	x.inner.CKOperation.SetConfiguration(configuration)
+func (x *FetchShareMetadataOperation) WithConfiguration(configuration *OperationConfiguration) *FetchShareMetadataOperation {
+	x.inner.CKOperation.SetConfiguration(configuration.Unwrap())
 	return x
 }
 
 // WithGroup sets the group property and returns the receiver for chaining.
-func (x *FetchShareMetadataOperation) WithGroup(group *raw.CKOperationGroup) *FetchShareMetadataOperation {
-	x.inner.CKOperation.SetGroup(group)
+func (x *FetchShareMetadataOperation) WithGroup(group *OperationGroup) *FetchShareMetadataOperation {
+	x.inner.CKOperation.SetGroup(group.Unwrap())
 	return x
 }
 
@@ -115,8 +115,8 @@ func (x *FetchShareMetadataOperation) WithLongLivedOperationWasPersistedBlock(lo
 }
 
 // WithContainer sets the container property and returns the receiver for chaining.
-func (x *FetchShareMetadataOperation) WithContainer(container *raw.CKContainer) *FetchShareMetadataOperation {
-	x.inner.CKOperation.SetContainer(container)
+func (x *FetchShareMetadataOperation) WithContainer(container *Container) *FetchShareMetadataOperation {
+	x.inner.CKOperation.SetContainer(container.Unwrap())
 	return x
 }
 
@@ -229,10 +229,10 @@ type FetchShareMetadataOperationable interface {
 	WithRootRecordDesiredKeys(items ...*foundation.NSString) *FetchShareMetadataOperation
 	WithPerShareMetadataBlock(perShareMetadataBlock func(*foundation.NSURL, *raw.CKShareMetadata, unsafe.Pointer)) *FetchShareMetadataOperation
 	WithFetchShareMetadataCompletionBlock(fetchShareMetadataCompletionBlock func(unsafe.Pointer)) *FetchShareMetadataOperation
-	WithConfiguration(configuration *raw.CKOperationConfiguration) *FetchShareMetadataOperation
-	WithGroup(group *raw.CKOperationGroup) *FetchShareMetadataOperation
+	WithConfiguration(configuration *OperationConfiguration) *FetchShareMetadataOperation
+	WithGroup(group *OperationGroup) *FetchShareMetadataOperation
 	WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *FetchShareMetadataOperation
-	WithContainer(container *raw.CKContainer) *FetchShareMetadataOperation
+	WithContainer(container *Container) *FetchShareMetadataOperation
 	WithAllowsCellularAccess(allowsCellularAccess bool) *FetchShareMetadataOperation
 	WithLongLived(longLived bool) *FetchShareMetadataOperation
 	WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *FetchShareMetadataOperation

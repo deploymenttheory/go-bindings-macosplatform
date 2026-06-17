@@ -257,13 +257,13 @@ func (x *Typesetter) LayoutManager() *LayoutManager {
 }
 
 // TextContainers returns the collection as a Go slice.
-func (x *Typesetter) TextContainers() []*raw.NSTextContainer {
+func (x *Typesetter) TextContainers() []*TextContainer {
 	arr := x.inner.TextContainers()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSTextContainer {
-		return raw.NSTextContainerFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *TextContainer {
+		return &TextContainer{inner: raw.NSTextContainerFromID(purego.Retain(_id))}
 	})
 }
 
@@ -430,7 +430,7 @@ type Typesetterable interface {
 	ParagraphSeparatorCharacterRange() foundation.NSRange
 	AttributesForExtraLineFragment() *foundation.NSDictionary[*foundation.NSString, objc.ID]
 	LayoutManager() *LayoutManager
-	TextContainers() []*raw.NSTextContainer
+	TextContainers() []*TextContainer
 	CurrentTextContainer() *TextContainer
 	CurrentParagraphStyle() *ParagraphStyle
 	WillSetLineFragmentRectForGlyphRangeUsedRectBaselineOffset(lineRect *corefoundation.CGRect, glyphRange foundation.NSRange, usedRect *corefoundation.CGRect, baselineOffset *float64)

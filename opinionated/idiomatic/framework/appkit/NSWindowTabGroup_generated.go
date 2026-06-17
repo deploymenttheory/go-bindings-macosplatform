@@ -73,13 +73,13 @@ func (x *WindowTabGroup) Identifier() string {
 }
 
 // Windows returns the collection as a Go slice.
-func (x *WindowTabGroup) Windows() []*raw.NSWindow {
+func (x *WindowTabGroup) Windows() []*Window {
 	arr := x.inner.Windows()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSWindow {
-		return raw.NSWindowFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Window {
+		return &Window{inner: raw.NSWindowFromID(purego.Retain(_id))}
 	})
 }
 
@@ -121,7 +121,7 @@ type WindowTabGroupable interface {
 	InsertWindowAtIndex(window *raw.NSWindow, index int)
 	RemoveWindow(window *raw.NSWindow)
 	Identifier() string
-	Windows() []*raw.NSWindow
+	Windows() []*Window
 	IsOverviewVisible() bool
 	SetOverviewVisible(overviewVisible bool)
 	IsTabBarVisible() bool

@@ -37,13 +37,13 @@ func NewRecognizedObjectObservation() *RecognizedObjectObservation {
 }
 
 // Labels returns the collection as a Go slice.
-func (x *RecognizedObjectObservation) Labels() []*raw.VNClassificationObservation {
+func (x *RecognizedObjectObservation) Labels() []*ClassificationObservation {
 	arr := x.inner.Labels()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.VNClassificationObservation {
-		return raw.VNClassificationObservationFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ClassificationObservation {
+		return &ClassificationObservation{inner: raw.VNClassificationObservationFromID(purego.Retain(_id))}
 	})
 }
 
@@ -54,7 +54,7 @@ func (x *RecognizedObjectObservation) asObservation() *raw.VNObservation { retur
 // RecognizedObjectObservationable is the interface implemented by [RecognizedObjectObservation], for mocking and DI.
 type RecognizedObjectObservationable interface {
 	Unwrap() *raw.VNRecognizedObjectObservation
-	Labels() []*raw.VNClassificationObservation
+	Labels() []*ClassificationObservation
 }
 
 var _ RecognizedObjectObservationable = (*RecognizedObjectObservation)(nil)

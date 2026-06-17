@@ -49,24 +49,24 @@ func (x *ScriptChanges) FNumber() float32 {
 }
 
 // UserDecisions returns the collection as a Go slice.
-func (x *ScriptChanges) UserDecisions() []*raw.CNDecision {
+func (x *ScriptChanges) UserDecisions() []*Decision {
 	arr := x.inner.UserDecisions()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CNDecision {
-		return raw.CNDecisionFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Decision {
+		return &Decision{inner: raw.CNDecisionFromID(purego.Retain(_id))}
 	})
 }
 
 // AddedDetectionTracks returns the collection as a Go slice.
-func (x *ScriptChanges) AddedDetectionTracks() []*raw.CNDetectionTrack {
+func (x *ScriptChanges) AddedDetectionTracks() []*DetectionTrack {
 	arr := x.inner.AddedDetectionTracks()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CNDetectionTrack {
-		return raw.CNDetectionTrackFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *DetectionTrack {
+		return &DetectionTrack{inner: raw.CNDetectionTrackFromID(purego.Retain(_id))}
 	})
 }
 
@@ -75,8 +75,8 @@ type ScriptChangesable interface {
 	Unwrap() *raw.CNScriptChanges
 	DataRepresentation() *foundation.NSData
 	FNumber() float32
-	UserDecisions() []*raw.CNDecision
-	AddedDetectionTracks() []*raw.CNDetectionTrack
+	UserDecisions() []*Decision
+	AddedDetectionTracks() []*DetectionTrack
 }
 
 var _ ScriptChangesable = (*ScriptChanges)(nil)

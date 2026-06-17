@@ -195,24 +195,24 @@ func (x *ScannerFunctionalUnit) SetScaleFactor(scaleFactor uint) {
 }
 
 // Templates returns the collection as a Go slice.
-func (x *ScannerFunctionalUnit) Templates() []*raw.ICScannerFeatureTemplate {
+func (x *ScannerFunctionalUnit) Templates() []*ScannerFeatureTemplate {
 	arr := x.inner.Templates()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.ICScannerFeatureTemplate {
-		return raw.ICScannerFeatureTemplateFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ScannerFeatureTemplate {
+		return &ScannerFeatureTemplate{inner: raw.ICScannerFeatureTemplateFromID(purego.Retain(_id))}
 	})
 }
 
 // VendorFeatures returns the collection as a Go slice.
-func (x *ScannerFunctionalUnit) VendorFeatures() []*raw.ICScannerFeature {
+func (x *ScannerFunctionalUnit) VendorFeatures() []*ScannerFeature {
 	arr := x.inner.VendorFeatures()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.ICScannerFeature {
-		return raw.ICScannerFeatureFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ScannerFeature {
+		return &ScannerFeature{inner: raw.ICScannerFeatureFromID(purego.Retain(_id))}
 	})
 }
 
@@ -345,8 +345,8 @@ type ScannerFunctionalUnitable interface {
 	PreferredScaleFactors() *foundation.NSIndexSet
 	ScaleFactor() uint
 	SetScaleFactor(scaleFactor uint)
-	Templates() []*raw.ICScannerFeatureTemplate
-	VendorFeatures() []*raw.ICScannerFeature
+	Templates() []*ScannerFeatureTemplate
+	VendorFeatures() []*ScannerFeature
 	PhysicalSize() corefoundation.CGSize
 	ScanArea() corefoundation.CGRect
 	SetScanArea(scanArea corefoundation.CGRect)

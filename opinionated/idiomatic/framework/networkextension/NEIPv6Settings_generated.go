@@ -94,13 +94,13 @@ func (x *NEIPv6Settings) NetworkPrefixLengths() []*foundation.NSNumber {
 }
 
 // IncludedRoutes returns the collection as a Go slice.
-func (x *NEIPv6Settings) IncludedRoutes() []*raw.NEIPv6Route {
+func (x *NEIPv6Settings) IncludedRoutes() []*NEIPv6Route {
 	arr := x.inner.IncludedRoutes()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NEIPv6Route {
-		return raw.NEIPv6RouteFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *NEIPv6Route {
+		return &NEIPv6Route{inner: raw.NEIPv6RouteFromID(purego.Retain(_id))}
 	})
 }
 
@@ -110,13 +110,13 @@ func (x *NEIPv6Settings) SetIncludedRoutes(includedRoutes *foundation.NSArray[*r
 }
 
 // ExcludedRoutes returns the collection as a Go slice.
-func (x *NEIPv6Settings) ExcludedRoutes() []*raw.NEIPv6Route {
+func (x *NEIPv6Settings) ExcludedRoutes() []*NEIPv6Route {
 	arr := x.inner.ExcludedRoutes()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NEIPv6Route {
-		return raw.NEIPv6RouteFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *NEIPv6Route {
+		return &NEIPv6Route{inner: raw.NEIPv6RouteFromID(purego.Retain(_id))}
 	})
 }
 
@@ -132,9 +132,9 @@ type NEIPv6Settingsable interface {
 	WithExcludedRoutes(items ...*raw.NEIPv6Route) *NEIPv6Settings
 	Addresses() []string
 	NetworkPrefixLengths() []*foundation.NSNumber
-	IncludedRoutes() []*raw.NEIPv6Route
+	IncludedRoutes() []*NEIPv6Route
 	SetIncludedRoutes(includedRoutes *foundation.NSArray[*raw.NEIPv6Route])
-	ExcludedRoutes() []*raw.NEIPv6Route
+	ExcludedRoutes() []*NEIPv6Route
 	SetExcludedRoutes(excludedRoutes *foundation.NSArray[*raw.NEIPv6Route])
 }
 

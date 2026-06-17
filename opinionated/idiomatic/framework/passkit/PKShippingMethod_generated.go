@@ -50,8 +50,8 @@ func (x *ShippingMethod) WithDetail(detail string) *ShippingMethod {
 }
 
 // WithDateComponentsRange sets the dateComponentsRange property and returns the receiver for chaining.
-func (x *ShippingMethod) WithDateComponentsRange(dateComponentsRange *raw.PKDateComponentsRange) *ShippingMethod {
-	x.inner.SetDateComponentsRange(dateComponentsRange)
+func (x *ShippingMethod) WithDateComponentsRange(dateComponentsRange *DateComponentsRange) *ShippingMethod {
+	x.inner.SetDateComponentsRange(dateComponentsRange.Unwrap())
 	return x
 }
 
@@ -122,7 +122,7 @@ type ShippingMethodable interface {
 	Unwrap() *raw.PKShippingMethod
 	WithIdentifier(identifier string) *ShippingMethod
 	WithDetail(detail string) *ShippingMethod
-	WithDateComponentsRange(dateComponentsRange *raw.PKDateComponentsRange) *ShippingMethod
+	WithDateComponentsRange(dateComponentsRange *DateComponentsRange) *ShippingMethod
 	WithLabel(label string) *ShippingMethod
 	WithAmount(amount *foundation.NSDecimalNumber) *ShippingMethod
 	WithType(type_ raw.PKPaymentSummaryItemType) *ShippingMethod

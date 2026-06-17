@@ -89,13 +89,13 @@ func (x *PasskeyCredentialRequest) SupportedAlgorithms() []*foundation.NSNumber 
 }
 
 // ExcludedCredentials returns the collection as a Go slice.
-func (x *PasskeyCredentialRequest) ExcludedCredentials() []*raw.ASAuthorizationPlatformPublicKeyCredentialDescriptor {
+func (x *PasskeyCredentialRequest) ExcludedCredentials() []*AuthorizationPlatformPublicKeyCredentialDescriptor {
 	arr := x.inner.ExcludedCredentials()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.ASAuthorizationPlatformPublicKeyCredentialDescriptor {
-		return raw.ASAuthorizationPlatformPublicKeyCredentialDescriptorFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *AuthorizationPlatformPublicKeyCredentialDescriptor {
+		return &AuthorizationPlatformPublicKeyCredentialDescriptor{inner: raw.ASAuthorizationPlatformPublicKeyCredentialDescriptorFromID(purego.Retain(_id))}
 	})
 }
 
@@ -125,7 +125,7 @@ type PasskeyCredentialRequestable interface {
 	UserVerificationPreference() string
 	SetUserVerificationPreference(userVerificationPreference *foundation.NSString)
 	SupportedAlgorithms() []*foundation.NSNumber
-	ExcludedCredentials() []*raw.ASAuthorizationPlatformPublicKeyCredentialDescriptor
+	ExcludedCredentials() []*AuthorizationPlatformPublicKeyCredentialDescriptor
 	AssertionExtensionInput() *PasskeyAssertionCredentialExtensionInput
 	RegistrationExtensionInput() *PasskeyRegistrationCredentialExtensionInput
 }

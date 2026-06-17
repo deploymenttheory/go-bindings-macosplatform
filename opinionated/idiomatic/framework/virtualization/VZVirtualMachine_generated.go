@@ -231,79 +231,79 @@ func (x *VirtualMachine) CanRequestStop() bool {
 }
 
 // ConsoleDevices returns the collection as a Go slice.
-func (x *VirtualMachine) ConsoleDevices() []*raw.VZConsoleDevice {
+func (x *VirtualMachine) ConsoleDevices() []*ConsoleDevice {
 	arr := x.inner.ConsoleDevices()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.VZConsoleDevice {
-		return raw.VZConsoleDeviceFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ConsoleDevice {
+		return &ConsoleDevice{inner: raw.VZConsoleDeviceFromID(purego.Retain(_id))}
 	})
 }
 
 // DirectorySharingDevices returns the collection as a Go slice.
-func (x *VirtualMachine) DirectorySharingDevices() []*raw.VZDirectorySharingDevice {
+func (x *VirtualMachine) DirectorySharingDevices() []*DirectorySharingDevice {
 	arr := x.inner.DirectorySharingDevices()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.VZDirectorySharingDevice {
-		return raw.VZDirectorySharingDeviceFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *DirectorySharingDevice {
+		return &DirectorySharingDevice{inner: raw.VZDirectorySharingDeviceFromID(purego.Retain(_id))}
 	})
 }
 
 // GraphicsDevices returns the collection as a Go slice.
-func (x *VirtualMachine) GraphicsDevices() []*raw.VZGraphicsDevice {
+func (x *VirtualMachine) GraphicsDevices() []*GraphicsDevice {
 	arr := x.inner.GraphicsDevices()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.VZGraphicsDevice {
-		return raw.VZGraphicsDeviceFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *GraphicsDevice {
+		return &GraphicsDevice{inner: raw.VZGraphicsDeviceFromID(purego.Retain(_id))}
 	})
 }
 
 // MemoryBalloonDevices returns the collection as a Go slice.
-func (x *VirtualMachine) MemoryBalloonDevices() []*raw.VZMemoryBalloonDevice {
+func (x *VirtualMachine) MemoryBalloonDevices() []*MemoryBalloonDevice {
 	arr := x.inner.MemoryBalloonDevices()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.VZMemoryBalloonDevice {
-		return raw.VZMemoryBalloonDeviceFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MemoryBalloonDevice {
+		return &MemoryBalloonDevice{inner: raw.VZMemoryBalloonDeviceFromID(purego.Retain(_id))}
 	})
 }
 
 // NetworkDevices returns the collection as a Go slice.
-func (x *VirtualMachine) NetworkDevices() []*raw.VZNetworkDevice {
+func (x *VirtualMachine) NetworkDevices() []*NetworkDevice {
 	arr := x.inner.NetworkDevices()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.VZNetworkDevice {
-		return raw.VZNetworkDeviceFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *NetworkDevice {
+		return &NetworkDevice{inner: raw.VZNetworkDeviceFromID(purego.Retain(_id))}
 	})
 }
 
 // SocketDevices returns the collection as a Go slice.
-func (x *VirtualMachine) SocketDevices() []*raw.VZSocketDevice {
+func (x *VirtualMachine) SocketDevices() []*SocketDevice {
 	arr := x.inner.SocketDevices()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.VZSocketDevice {
-		return raw.VZSocketDeviceFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *SocketDevice {
+		return &SocketDevice{inner: raw.VZSocketDeviceFromID(purego.Retain(_id))}
 	})
 }
 
 // UsbControllers returns the collection as a Go slice.
-func (x *VirtualMachine) UsbControllers() []*raw.VZUSBController {
+func (x *VirtualMachine) UsbControllers() []*USBController {
 	arr := x.inner.UsbControllers()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.VZUSBController {
-		return raw.VZUSBControllerFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *USBController {
+		return &USBController{inner: raw.VZUSBControllerFromID(purego.Retain(_id))}
 	})
 }
 
@@ -328,13 +328,13 @@ type VirtualMachineable interface {
 	CanPause() bool
 	CanResume() bool
 	CanRequestStop() bool
-	ConsoleDevices() []*raw.VZConsoleDevice
-	DirectorySharingDevices() []*raw.VZDirectorySharingDevice
-	GraphicsDevices() []*raw.VZGraphicsDevice
-	MemoryBalloonDevices() []*raw.VZMemoryBalloonDevice
-	NetworkDevices() []*raw.VZNetworkDevice
-	SocketDevices() []*raw.VZSocketDevice
-	UsbControllers() []*raw.VZUSBController
+	ConsoleDevices() []*ConsoleDevice
+	DirectorySharingDevices() []*DirectorySharingDevice
+	GraphicsDevices() []*GraphicsDevice
+	MemoryBalloonDevices() []*MemoryBalloonDevice
+	NetworkDevices() []*NetworkDevice
+	SocketDevices() []*SocketDevice
+	UsbControllers() []*USBController
 }
 
 var _ VirtualMachineable = (*VirtualMachine)(nil)

@@ -44,13 +44,13 @@ func (x *MatchedPlayers) Properties() unsafe.Pointer {
 }
 
 // Players returns the collection as a Go slice.
-func (x *MatchedPlayers) Players() []*raw.GKPlayer {
+func (x *MatchedPlayers) Players() []*Player {
 	arr := x.inner.Players()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.GKPlayer {
-		return raw.GKPlayerFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Player {
+		return &Player{inner: raw.GKPlayerFromID(purego.Retain(_id))}
 	})
 }
 
@@ -63,7 +63,7 @@ func (x *MatchedPlayers) PlayerProperties() *foundation.NSDictionary[*raw.GKPlay
 type MatchedPlayersable interface {
 	Unwrap() *raw.GKMatchedPlayers
 	Properties() unsafe.Pointer
-	Players() []*raw.GKPlayer
+	Players() []*Player
 	PlayerProperties() *foundation.NSDictionary[*raw.GKPlayer, objc.ID]
 }
 

@@ -39,13 +39,13 @@ func NewAssetWriterInputGroupWithInputsDefaultInput(inputs *foundation.NSArray[*
 }
 
 // Inputs returns the collection as a Go slice.
-func (x *AssetWriterInputGroup) Inputs() []*raw.AVAssetWriterInput {
+func (x *AssetWriterInputGroup) Inputs() []*AssetWriterInput {
 	arr := x.inner.Inputs()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVAssetWriterInput {
-		return raw.AVAssetWriterInputFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *AssetWriterInput {
+		return &AssetWriterInput{inner: raw.AVAssetWriterInputFromID(purego.Retain(_id))}
 	})
 }
 
@@ -63,7 +63,7 @@ func (x *AssetWriterInputGroup) asMediaSelectionGroup() *raw.AVMediaSelectionGro
 // AssetWriterInputGroupable is the interface implemented by [AssetWriterInputGroup], for mocking and DI.
 type AssetWriterInputGroupable interface {
 	Unwrap() *raw.AVAssetWriterInputGroup
-	Inputs() []*raw.AVAssetWriterInput
+	Inputs() []*AssetWriterInput
 	DefaultInput() *AssetWriterInput
 }
 

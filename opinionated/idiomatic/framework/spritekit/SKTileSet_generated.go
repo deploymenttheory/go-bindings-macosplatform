@@ -76,8 +76,8 @@ func (x *TileSet) WithType(type_ raw.SKTileSetType) *TileSet {
 }
 
 // WithDefaultTileGroup sets the defaultTileGroup property and returns the receiver for chaining.
-func (x *TileSet) WithDefaultTileGroup(defaultTileGroup *raw.SKTileGroup) *TileSet {
-	x.inner.SetDefaultTileGroup(defaultTileGroup)
+func (x *TileSet) WithDefaultTileGroup(defaultTileGroup *TileGroup) *TileSet {
+	x.inner.SetDefaultTileGroup(defaultTileGroup.Unwrap())
 	return x
 }
 
@@ -88,13 +88,13 @@ func (x *TileSet) WithDefaultTileSize(defaultTileSize corefoundation.CGSize) *Ti
 }
 
 // TileGroups returns the collection as a Go slice.
-func (x *TileSet) TileGroups() []*raw.SKTileGroup {
+func (x *TileSet) TileGroups() []*TileGroup {
 	arr := x.inner.TileGroups()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SKTileGroup {
-		return raw.SKTileGroupFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *TileGroup {
+		return &TileGroup{inner: raw.SKTileGroupFromID(purego.Retain(_id))}
 	})
 }
 
@@ -157,9 +157,9 @@ type TileSetable interface {
 	WithTileGroups(items ...*raw.SKTileGroup) *TileSet
 	WithName(name string) *TileSet
 	WithType(type_ raw.SKTileSetType) *TileSet
-	WithDefaultTileGroup(defaultTileGroup *raw.SKTileGroup) *TileSet
+	WithDefaultTileGroup(defaultTileGroup *TileGroup) *TileSet
 	WithDefaultTileSize(defaultTileSize corefoundation.CGSize) *TileSet
-	TileGroups() []*raw.SKTileGroup
+	TileGroups() []*TileGroup
 	SetTileGroups(tileGroups *foundation.NSArray[*raw.SKTileGroup])
 	Name() string
 	SetName(name string)

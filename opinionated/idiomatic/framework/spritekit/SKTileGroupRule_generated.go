@@ -78,13 +78,13 @@ func (x *TileGroupRule) SetAdjacency(adjacency raw.SKTileAdjacencyMask) {
 }
 
 // TileDefinitions returns the collection as a Go slice.
-func (x *TileGroupRule) TileDefinitions() []*raw.SKTileDefinition {
+func (x *TileGroupRule) TileDefinitions() []*TileDefinition {
 	arr := x.inner.TileDefinitions()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SKTileDefinition {
-		return raw.SKTileDefinitionFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *TileDefinition {
+		return &TileDefinition{inner: raw.SKTileDefinitionFromID(purego.Retain(_id))}
 	})
 }
 
@@ -115,7 +115,7 @@ type TileGroupRuleable interface {
 	WithName(name string) *TileGroupRule
 	Adjacency() raw.SKTileAdjacencyMask
 	SetAdjacency(adjacency raw.SKTileAdjacencyMask)
-	TileDefinitions() []*raw.SKTileDefinition
+	TileDefinitions() []*TileDefinition
 	SetTileDefinitions(tileDefinitions *foundation.NSArray[*raw.SKTileDefinition])
 	Name() string
 	SetName(name string)

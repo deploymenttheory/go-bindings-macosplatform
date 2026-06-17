@@ -72,13 +72,13 @@ func (x *SendMessageIntent) WithDonationMetadata(donationMetadata IntentDonation
 }
 
 // Recipients returns the collection as a Go slice.
-func (x *SendMessageIntent) Recipients() []*raw.INPerson {
+func (x *SendMessageIntent) Recipients() []*Person {
 	arr := x.inner.Recipients()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.INPerson {
-		return raw.INPersonFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Person {
+		return &Person{inner: raw.INPersonFromID(purego.Retain(_id))}
 	})
 }
 
@@ -133,13 +133,13 @@ func (x *SendMessageIntent) Sender() *Person {
 }
 
 // Attachments returns the collection as a Go slice.
-func (x *SendMessageIntent) Attachments() []*raw.INSendMessageAttachment {
+func (x *SendMessageIntent) Attachments() []*SendMessageAttachment {
 	arr := x.inner.Attachments()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.INSendMessageAttachment {
-		return raw.INSendMessageAttachmentFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *SendMessageAttachment {
+		return &SendMessageAttachment{inner: raw.INSendMessageAttachmentFromID(purego.Retain(_id))}
 	})
 }
 
@@ -159,14 +159,14 @@ type SendMessageIntentable interface {
 	Unwrap() *raw.INSendMessageIntent
 	WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *SendMessageIntent
 	WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *SendMessageIntent
-	Recipients() []*raw.INPerson
+	Recipients() []*Person
 	OutgoingMessageType() raw.INOutgoingMessageType
 	Content() string
 	SpeakableGroupName() *SpeakableString
 	ConversationIdentifier() string
 	ServiceName() string
 	Sender() *Person
-	Attachments() []*raw.INSendMessageAttachment
+	Attachments() []*SendMessageAttachment
 	GroupName() string
 }
 

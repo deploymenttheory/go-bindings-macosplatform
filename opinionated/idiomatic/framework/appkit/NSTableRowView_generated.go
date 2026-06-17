@@ -101,8 +101,8 @@ func (x *TableRowView) WithIndentationForDropOperation(indentationForDropOperati
 }
 
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
-func (x *TableRowView) WithBackgroundColor(backgroundColor *raw.NSColor) *TableRowView {
-	x.inner.SetBackgroundColor(backgroundColor)
+func (x *TableRowView) WithBackgroundColor(backgroundColor *Color) *TableRowView {
+	x.inner.SetBackgroundColor(backgroundColor.Unwrap())
 	return x
 }
 
@@ -287,8 +287,8 @@ func (x *TableRowView) WithContentFilters(items ...*coreimage.CIFilter) *TableRo
 }
 
 // WithShadow sets the shadow property and returns the receiver for chaining.
-func (x *TableRowView) WithShadow(shadow *raw.NSShadow) *TableRowView {
-	x.inner.NSView.SetShadow(shadow)
+func (x *TableRowView) WithShadow(shadow *Shadow) *TableRowView {
+	x.inner.NSView.SetShadow(shadow.Unwrap())
 	return x
 }
 
@@ -369,8 +369,8 @@ func (x *TableRowView) WithPrefersCompactControlSizeMetrics(prefersCompactContro
 }
 
 // WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
-func (x *TableRowView) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *TableRowView {
-	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+func (x *TableRowView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *TableRowView {
+	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
 	return x
 }
 
@@ -411,8 +411,8 @@ func (x *TableRowView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedD
 }
 
 // WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
-func (x *TableRowView) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *TableRowView {
-	x.inner.NSView.SetPressureConfiguration(pressureConfiguration)
+func (x *TableRowView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *TableRowView {
+	x.inner.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
 	return x
 }
 
@@ -423,8 +423,8 @@ func (x *TableRowView) WithNextResponder(nextResponder ResponderProvider) *Table
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *TableRowView) WithMenu(menu *raw.NSMenu) *TableRowView {
-	x.inner.NSView.NSResponder.SetMenu(menu)
+func (x *TableRowView) WithMenu(menu *Menu) *TableRowView {
+	x.inner.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -435,8 +435,8 @@ func (x *TableRowView) WithUserActivity(userActivity *foundation.NSUserActivity)
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *TableRowView) WithTouchBar(touchBar *raw.NSTouchBar) *TableRowView {
-	x.inner.NSView.NSResponder.SetTouchBar(touchBar)
+func (x *TableRowView) WithTouchBar(touchBar *TouchBar) *TableRowView {
+	x.inner.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -606,7 +606,7 @@ type TableRowViewable interface {
 	WithTargetForDropOperation(targetForDropOperation bool) *TableRowView
 	WithDraggingDestinationFeedbackStyle(draggingDestinationFeedbackStyle raw.NSTableViewDraggingDestinationFeedbackStyle) *TableRowView
 	WithIndentationForDropOperation(indentationForDropOperation float64) *TableRowView
-	WithBackgroundColor(backgroundColor *raw.NSColor) *TableRowView
+	WithBackgroundColor(backgroundColor *Color) *TableRowView
 	WithSubviews(items ...ViewProvider) *TableRowView
 	WithHidden(hidden bool) *TableRowView
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *TableRowView
@@ -632,7 +632,7 @@ type TableRowViewable interface {
 	WithBackgroundFilters(items ...*coreimage.CIFilter) *TableRowView
 	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *TableRowView
 	WithContentFilters(items ...*coreimage.CIFilter) *TableRowView
-	WithShadow(shadow *raw.NSShadow) *TableRowView
+	WithShadow(shadow *Shadow) *TableRowView
 	WithClipsToBounds(clipsToBounds bool) *TableRowView
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *TableRowView
 	WithToolTip(toolTip string) *TableRowView
@@ -644,18 +644,18 @@ type TableRowViewable interface {
 	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *TableRowView
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *TableRowView
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *TableRowView
-	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *TableRowView
+	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *TableRowView
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *TableRowView
 	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *TableRowView
 	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *TableRowView
 	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *TableRowView
 	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *TableRowView
 	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *TableRowView
-	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *TableRowView
+	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *TableRowView
 	WithNextResponder(nextResponder ResponderProvider) *TableRowView
-	WithMenu(menu *raw.NSMenu) *TableRowView
+	WithMenu(menu *Menu) *TableRowView
 	WithUserActivity(userActivity *foundation.NSUserActivity) *TableRowView
-	WithTouchBar(touchBar *raw.NSTouchBar) *TableRowView
+	WithTouchBar(touchBar *TouchBar) *TableRowView
 	DrawBackgroundInRect(dirtyRect corefoundation.CGRect)
 	DrawSelectionInRect(dirtyRect corefoundation.CGRect)
 	DrawSeparatorInRect(dirtyRect corefoundation.CGRect)

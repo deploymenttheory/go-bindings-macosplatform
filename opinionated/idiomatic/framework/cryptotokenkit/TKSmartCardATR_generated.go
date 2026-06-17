@@ -85,13 +85,13 @@ func (x *SmartCardATR) HistoricalBytes() *foundation.NSData {
 }
 
 // HistoricalRecords returns the collection as a Go slice.
-func (x *SmartCardATR) HistoricalRecords() []*raw.TKCompactTLVRecord {
+func (x *SmartCardATR) HistoricalRecords() []*CompactTLVRecord {
 	arr := x.inner.HistoricalRecords()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.TKCompactTLVRecord {
-		return raw.TKCompactTLVRecordFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CompactTLVRecord {
+		return &CompactTLVRecord{inner: raw.TKCompactTLVRecordFromID(purego.Retain(_id))}
 	})
 }
 
@@ -103,7 +103,7 @@ type SmartCardATRable interface {
 	Bytes() *foundation.NSData
 	Protocols() []*foundation.NSNumber
 	HistoricalBytes() *foundation.NSData
-	HistoricalRecords() []*raw.TKCompactTLVRecord
+	HistoricalRecords() []*CompactTLVRecord
 }
 
 var _ SmartCardATRable = (*SmartCardATR)(nil)

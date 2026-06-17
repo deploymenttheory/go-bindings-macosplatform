@@ -37,13 +37,13 @@ func NewModelStructureProgramFunction() *ModelStructureProgramFunction {
 }
 
 // Inputs returns the collection as a Go slice.
-func (x *ModelStructureProgramFunction) Inputs() []*raw.MLModelStructureProgramNamedValueType {
+func (x *ModelStructureProgramFunction) Inputs() []*ModelStructureProgramNamedValueType {
 	arr := x.inner.Inputs()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MLModelStructureProgramNamedValueType {
-		return raw.MLModelStructureProgramNamedValueTypeFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ModelStructureProgramNamedValueType {
+		return &ModelStructureProgramNamedValueType{inner: raw.MLModelStructureProgramNamedValueTypeFromID(purego.Retain(_id))}
 	})
 }
 
@@ -59,7 +59,7 @@ func (x *ModelStructureProgramFunction) Block() *ModelStructureProgramBlock {
 // ModelStructureProgramFunctionable is the interface implemented by [ModelStructureProgramFunction], for mocking and DI.
 type ModelStructureProgramFunctionable interface {
 	Unwrap() *raw.MLModelStructureProgramFunction
-	Inputs() []*raw.MLModelStructureProgramNamedValueType
+	Inputs() []*ModelStructureProgramNamedValueType
 	Block() *ModelStructureProgramBlock
 }
 

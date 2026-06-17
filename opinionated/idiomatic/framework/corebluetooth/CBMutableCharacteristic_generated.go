@@ -84,13 +84,13 @@ func (x *MutableCharacteristic) SetPermissions(permissions raw.CBAttributePermis
 }
 
 // SubscribedCentrals returns the collection as a Go slice.
-func (x *MutableCharacteristic) SubscribedCentrals() []*raw.CBCentral {
+func (x *MutableCharacteristic) SubscribedCentrals() []*Central {
 	arr := x.inner.SubscribedCentrals()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CBCentral {
-		return raw.CBCentralFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Central {
+		return &Central{inner: raw.CBCentralFromID(purego.Retain(_id))}
 	})
 }
 
@@ -122,7 +122,7 @@ type MutableCharacteristicable interface {
 	WithDescriptors(items ...DescriptorProvider) *MutableCharacteristic
 	Permissions() raw.CBAttributePermissions
 	SetPermissions(permissions raw.CBAttributePermissions)
-	SubscribedCentrals() []*raw.CBCentral
+	SubscribedCentrals() []*Central
 	SetProperties(properties raw.CBCharacteristicProperties)
 	SetValue(value *foundation.NSData)
 	SetDescriptors(descriptors *foundation.NSArray[*raw.CBDescriptor])

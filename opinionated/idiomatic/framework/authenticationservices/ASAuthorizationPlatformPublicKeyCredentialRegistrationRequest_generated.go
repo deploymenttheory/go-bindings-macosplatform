@@ -36,14 +36,14 @@ func NewAuthorizationPlatformPublicKeyCredentialRegistrationRequest() *Authoriza
 }
 
 // WithLargeBlob sets the largeBlob property and returns the receiver for chaining.
-func (x *AuthorizationPlatformPublicKeyCredentialRegistrationRequest) WithLargeBlob(largeBlob *raw.ASAuthorizationPublicKeyCredentialLargeBlobRegistrationInput) *AuthorizationPlatformPublicKeyCredentialRegistrationRequest {
-	x.inner.SetLargeBlob(largeBlob)
+func (x *AuthorizationPlatformPublicKeyCredentialRegistrationRequest) WithLargeBlob(largeBlob *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput) *AuthorizationPlatformPublicKeyCredentialRegistrationRequest {
+	x.inner.SetLargeBlob(largeBlob.Unwrap())
 	return x
 }
 
 // WithPrf sets the prf property and returns the receiver for chaining.
-func (x *AuthorizationPlatformPublicKeyCredentialRegistrationRequest) WithPrf(prf *raw.ASAuthorizationPublicKeyCredentialPRFRegistrationInput) *AuthorizationPlatformPublicKeyCredentialRegistrationRequest {
-	x.inner.SetPrf(prf)
+func (x *AuthorizationPlatformPublicKeyCredentialRegistrationRequest) WithPrf(prf *AuthorizationPublicKeyCredentialPRFRegistrationInput) *AuthorizationPlatformPublicKeyCredentialRegistrationRequest {
+	x.inner.SetPrf(prf.Unwrap())
 	return x
 }
 
@@ -96,8 +96,8 @@ func (x *AuthorizationPlatformPublicKeyCredentialRegistrationRequest) asAuthoriz
 // AuthorizationPlatformPublicKeyCredentialRegistrationRequestable is the interface implemented by [AuthorizationPlatformPublicKeyCredentialRegistrationRequest], for mocking and DI.
 type AuthorizationPlatformPublicKeyCredentialRegistrationRequestable interface {
 	Unwrap() *raw.ASAuthorizationPlatformPublicKeyCredentialRegistrationRequest
-	WithLargeBlob(largeBlob *raw.ASAuthorizationPublicKeyCredentialLargeBlobRegistrationInput) *AuthorizationPlatformPublicKeyCredentialRegistrationRequest
-	WithPrf(prf *raw.ASAuthorizationPublicKeyCredentialPRFRegistrationInput) *AuthorizationPlatformPublicKeyCredentialRegistrationRequest
+	WithLargeBlob(largeBlob *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput) *AuthorizationPlatformPublicKeyCredentialRegistrationRequest
+	WithPrf(prf *AuthorizationPublicKeyCredentialPRFRegistrationInput) *AuthorizationPlatformPublicKeyCredentialRegistrationRequest
 	WithRequestStyle(requestStyle raw.ASAuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle) *AuthorizationPlatformPublicKeyCredentialRegistrationRequest
 	LargeBlob() *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput
 	SetLargeBlob(largeBlob *raw.ASAuthorizationPublicKeyCredentialLargeBlobRegistrationInput)

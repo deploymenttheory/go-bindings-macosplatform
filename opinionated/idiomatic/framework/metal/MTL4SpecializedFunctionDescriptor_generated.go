@@ -50,8 +50,8 @@ func (x *MTL4SpecializedFunctionDescriptor) WithSpecializedName(specializedName 
 }
 
 // WithConstantValues sets the constantValues property and returns the receiver for chaining.
-func (x *MTL4SpecializedFunctionDescriptor) WithConstantValues(constantValues *raw.MTLFunctionConstantValues) *MTL4SpecializedFunctionDescriptor {
-	x.inner.SetConstantValues(constantValues)
+func (x *MTL4SpecializedFunctionDescriptor) WithConstantValues(constantValues *FunctionConstantValues) *MTL4SpecializedFunctionDescriptor {
+	x.inner.SetConstantValues(constantValues.Unwrap())
 	return x
 }
 
@@ -104,7 +104,7 @@ type MTL4SpecializedFunctionDescriptorable interface {
 	Unwrap() *raw.MTL4SpecializedFunctionDescriptor
 	WithFunctionDescriptor(functionDescriptor MTL4FunctionDescriptorProvider) *MTL4SpecializedFunctionDescriptor
 	WithSpecializedName(specializedName string) *MTL4SpecializedFunctionDescriptor
-	WithConstantValues(constantValues *raw.MTLFunctionConstantValues) *MTL4SpecializedFunctionDescriptor
+	WithConstantValues(constantValues *FunctionConstantValues) *MTL4SpecializedFunctionDescriptor
 	FunctionDescriptor() *MTL4FunctionDescriptor
 	SetFunctionDescriptor(functionDescriptor *raw.MTL4FunctionDescriptor)
 	SpecializedName() string

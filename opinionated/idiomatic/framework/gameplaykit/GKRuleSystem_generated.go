@@ -103,35 +103,35 @@ func (x *RuleSystem) State() *foundation.NSMutableDictionary[objc.ID, objc.ID] {
 }
 
 // Rules returns the collection as a Go slice.
-func (x *RuleSystem) Rules() []*raw.GKRule {
+func (x *RuleSystem) Rules() []*Rule {
 	arr := x.inner.Rules()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.GKRule {
-		return raw.GKRuleFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Rule {
+		return &Rule{inner: raw.GKRuleFromID(purego.Retain(_id))}
 	})
 }
 
 // Agenda returns the collection as a Go slice.
-func (x *RuleSystem) Agenda() []*raw.GKRule {
+func (x *RuleSystem) Agenda() []*Rule {
 	arr := x.inner.Agenda()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.GKRule {
-		return raw.GKRuleFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Rule {
+		return &Rule{inner: raw.GKRuleFromID(purego.Retain(_id))}
 	})
 }
 
 // Executed returns the collection as a Go slice.
-func (x *RuleSystem) Executed() []*raw.GKRule {
+func (x *RuleSystem) Executed() []*Rule {
 	arr := x.inner.Executed()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.GKRule {
-		return raw.GKRuleFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Rule {
+		return &Rule{inner: raw.GKRuleFromID(purego.Retain(_id))}
 	})
 }
 
@@ -156,9 +156,9 @@ type RuleSystemable interface {
 	RetractFactGrade(fact foundation.NSObjectProtocol, grade float32)
 	Reset()
 	State() *foundation.NSMutableDictionary[objc.ID, objc.ID]
-	Rules() []*raw.GKRule
-	Agenda() []*raw.GKRule
-	Executed() []*raw.GKRule
+	Rules() []*Rule
+	Agenda() []*Rule
+	Executed() []*Rule
 	Facts() *foundation.NSArray[objc.ID]
 }
 

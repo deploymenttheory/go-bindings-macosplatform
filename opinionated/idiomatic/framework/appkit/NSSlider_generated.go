@@ -84,8 +84,8 @@ func (x *Slider) WithVertical(vertical bool) *Slider {
 }
 
 // WithTrackFillColor sets the trackFillColor property and returns the receiver for chaining.
-func (x *Slider) WithTrackFillColor(trackFillColor *raw.NSColor) *Slider {
-	x.inner.SetTrackFillColor(trackFillColor)
+func (x *Slider) WithTrackFillColor(trackFillColor *Color) *Slider {
+	x.inner.SetTrackFillColor(trackFillColor.Unwrap())
 	return x
 }
 
@@ -216,8 +216,8 @@ func (x *Slider) WithDoubleValue(doubleValue float64) *Slider {
 }
 
 // WithFont sets the font property and returns the receiver for chaining.
-func (x *Slider) WithFont(font *raw.NSFont) *Slider {
-	x.inner.NSControl.SetFont(font)
+func (x *Slider) WithFont(font *Font) *Slider {
+	x.inner.NSControl.SetFont(font.Unwrap())
 	return x
 }
 
@@ -438,8 +438,8 @@ func (x *Slider) WithContentFilters(items ...*coreimage.CIFilter) *Slider {
 }
 
 // WithShadow sets the shadow property and returns the receiver for chaining.
-func (x *Slider) WithShadow(shadow *raw.NSShadow) *Slider {
-	x.inner.NSControl.NSView.SetShadow(shadow)
+func (x *Slider) WithShadow(shadow *Shadow) *Slider {
+	x.inner.NSControl.NSView.SetShadow(shadow.Unwrap())
 	return x
 }
 
@@ -520,8 +520,8 @@ func (x *Slider) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeM
 }
 
 // WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
-func (x *Slider) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *Slider {
-	x.inner.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+func (x *Slider) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Slider {
+	x.inner.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
 	return x
 }
 
@@ -562,8 +562,8 @@ func (x *Slider) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamic
 }
 
 // WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
-func (x *Slider) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *Slider {
-	x.inner.NSControl.NSView.SetPressureConfiguration(pressureConfiguration)
+func (x *Slider) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Slider {
+	x.inner.NSControl.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
 	return x
 }
 
@@ -574,8 +574,8 @@ func (x *Slider) WithNextResponder(nextResponder ResponderProvider) *Slider {
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *Slider) WithMenu(menu *raw.NSMenu) *Slider {
-	x.inner.NSControl.NSView.NSResponder.SetMenu(menu)
+func (x *Slider) WithMenu(menu *Menu) *Slider {
+	x.inner.NSControl.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -586,8 +586,8 @@ func (x *Slider) WithUserActivity(userActivity *foundation.NSUserActivity) *Slid
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *Slider) WithTouchBar(touchBar *raw.NSTouchBar) *Slider {
-	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar)
+func (x *Slider) WithTouchBar(touchBar *TouchBar) *Slider {
+	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -817,7 +817,7 @@ type Sliderable interface {
 	WithAltIncrementValue(altIncrementValue float64) *Slider
 	WithKnobThickness(knobThickness float64) *Slider
 	WithVertical(vertical bool) *Slider
-	WithTrackFillColor(trackFillColor *raw.NSColor) *Slider
+	WithTrackFillColor(trackFillColor *Color) *Slider
 	WithTintProminence(tintProminence raw.NSTintProminence) *Slider
 	WithNumberOfTickMarks(numberOfTickMarks int) *Slider
 	WithTickMarkPosition(tickMarkPosition raw.NSTickMarkPosition) *Slider
@@ -839,7 +839,7 @@ type Sliderable interface {
 	WithIntegerValue(integerValue int) *Slider
 	WithFloatValue(floatValue float32) *Slider
 	WithDoubleValue(doubleValue float64) *Slider
-	WithFont(font *raw.NSFont) *Slider
+	WithFont(font *Font) *Slider
 	WithUsesSingleLineMode(usesSingleLineMode bool) *Slider
 	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *Slider
 	WithAlignment(alignment raw.NSTextAlignment) *Slider
@@ -871,7 +871,7 @@ type Sliderable interface {
 	WithBackgroundFilters(items ...*coreimage.CIFilter) *Slider
 	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *Slider
 	WithContentFilters(items ...*coreimage.CIFilter) *Slider
-	WithShadow(shadow *raw.NSShadow) *Slider
+	WithShadow(shadow *Shadow) *Slider
 	WithClipsToBounds(clipsToBounds bool) *Slider
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Slider
 	WithToolTip(toolTip string) *Slider
@@ -883,18 +883,18 @@ type Sliderable interface {
 	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *Slider
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Slider
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Slider
-	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *Slider
+	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Slider
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Slider
 	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Slider
 	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Slider
 	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Slider
 	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Slider
 	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Slider
-	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *Slider
+	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Slider
 	WithNextResponder(nextResponder ResponderProvider) *Slider
-	WithMenu(menu *raw.NSMenu) *Slider
+	WithMenu(menu *Menu) *Slider
 	WithUserActivity(userActivity *foundation.NSUserActivity) *Slider
-	WithTouchBar(touchBar *raw.NSTouchBar) *Slider
+	WithTouchBar(touchBar *TouchBar) *Slider
 	SliderType() raw.NSSliderType
 	SetSliderType(sliderType raw.NSSliderType)
 	MinValue() float64

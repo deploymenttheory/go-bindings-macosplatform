@@ -50,8 +50,8 @@ func (x *Alarm) WithAbsoluteDate(absoluteDate *foundation.NSDate) *Alarm {
 }
 
 // WithStructuredLocation sets the structuredLocation property and returns the receiver for chaining.
-func (x *Alarm) WithStructuredLocation(structuredLocation *raw.EKStructuredLocation) *Alarm {
-	x.inner.SetStructuredLocation(structuredLocation)
+func (x *Alarm) WithStructuredLocation(structuredLocation *StructuredLocation) *Alarm {
+	x.inner.SetStructuredLocation(structuredLocation.Unwrap())
 	return x
 }
 
@@ -173,7 +173,7 @@ type Alarmable interface {
 	Unwrap() *raw.EKAlarm
 	WithRelativeOffset(relativeOffset float64) *Alarm
 	WithAbsoluteDate(absoluteDate *foundation.NSDate) *Alarm
-	WithStructuredLocation(structuredLocation *raw.EKStructuredLocation) *Alarm
+	WithStructuredLocation(structuredLocation *StructuredLocation) *Alarm
 	WithProximity(proximity raw.EKAlarmProximity) *Alarm
 	WithEmailAddress(emailAddress string) *Alarm
 	WithSoundName(soundName string) *Alarm

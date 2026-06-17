@@ -37,26 +37,26 @@ func NewCNNYOLOLossDescriptor() *CNNYOLOLossDescriptor {
 }
 
 // WithXYLossDescriptor sets the xYLossDescriptor property and returns the receiver for chaining.
-func (x *CNNYOLOLossDescriptor) WithXYLossDescriptor(xYLossDescriptor *raw.MPSCNNLossDescriptor) *CNNYOLOLossDescriptor {
-	x.inner.SetXYLossDescriptor(xYLossDescriptor)
+func (x *CNNYOLOLossDescriptor) WithXYLossDescriptor(xYLossDescriptor *CNNLossDescriptor) *CNNYOLOLossDescriptor {
+	x.inner.SetXYLossDescriptor(xYLossDescriptor.Unwrap())
 	return x
 }
 
 // WithWHLossDescriptor sets the wHLossDescriptor property and returns the receiver for chaining.
-func (x *CNNYOLOLossDescriptor) WithWHLossDescriptor(wHLossDescriptor *raw.MPSCNNLossDescriptor) *CNNYOLOLossDescriptor {
-	x.inner.SetWHLossDescriptor(wHLossDescriptor)
+func (x *CNNYOLOLossDescriptor) WithWHLossDescriptor(wHLossDescriptor *CNNLossDescriptor) *CNNYOLOLossDescriptor {
+	x.inner.SetWHLossDescriptor(wHLossDescriptor.Unwrap())
 	return x
 }
 
 // WithConfidenceLossDescriptor sets the confidenceLossDescriptor property and returns the receiver for chaining.
-func (x *CNNYOLOLossDescriptor) WithConfidenceLossDescriptor(confidenceLossDescriptor *raw.MPSCNNLossDescriptor) *CNNYOLOLossDescriptor {
-	x.inner.SetConfidenceLossDescriptor(confidenceLossDescriptor)
+func (x *CNNYOLOLossDescriptor) WithConfidenceLossDescriptor(confidenceLossDescriptor *CNNLossDescriptor) *CNNYOLOLossDescriptor {
+	x.inner.SetConfidenceLossDescriptor(confidenceLossDescriptor.Unwrap())
 	return x
 }
 
 // WithClassesLossDescriptor sets the classesLossDescriptor property and returns the receiver for chaining.
-func (x *CNNYOLOLossDescriptor) WithClassesLossDescriptor(classesLossDescriptor *raw.MPSCNNLossDescriptor) *CNNYOLOLossDescriptor {
-	x.inner.SetClassesLossDescriptor(classesLossDescriptor)
+func (x *CNNYOLOLossDescriptor) WithClassesLossDescriptor(classesLossDescriptor *CNNLossDescriptor) *CNNYOLOLossDescriptor {
+	x.inner.SetClassesLossDescriptor(classesLossDescriptor.Unwrap())
 	return x
 }
 
@@ -311,10 +311,10 @@ func (x *CNNYOLOLossDescriptor) SetAnchorBoxes(anchorBoxes *foundation.NSData) {
 // CNNYOLOLossDescriptorable is the interface implemented by [CNNYOLOLossDescriptor], for mocking and DI.
 type CNNYOLOLossDescriptorable interface {
 	Unwrap() *raw.MPSCNNYOLOLossDescriptor
-	WithXYLossDescriptor(xYLossDescriptor *raw.MPSCNNLossDescriptor) *CNNYOLOLossDescriptor
-	WithWHLossDescriptor(wHLossDescriptor *raw.MPSCNNLossDescriptor) *CNNYOLOLossDescriptor
-	WithConfidenceLossDescriptor(confidenceLossDescriptor *raw.MPSCNNLossDescriptor) *CNNYOLOLossDescriptor
-	WithClassesLossDescriptor(classesLossDescriptor *raw.MPSCNNLossDescriptor) *CNNYOLOLossDescriptor
+	WithXYLossDescriptor(xYLossDescriptor *CNNLossDescriptor) *CNNYOLOLossDescriptor
+	WithWHLossDescriptor(wHLossDescriptor *CNNLossDescriptor) *CNNYOLOLossDescriptor
+	WithConfidenceLossDescriptor(confidenceLossDescriptor *CNNLossDescriptor) *CNNYOLOLossDescriptor
+	WithClassesLossDescriptor(classesLossDescriptor *CNNLossDescriptor) *CNNYOLOLossDescriptor
 	WithReductionType(reductionType raw.MPSCNNReductionType) *CNNYOLOLossDescriptor
 	WithReduceAcrossBatch(reduceAcrossBatch bool) *CNNYOLOLossDescriptor
 	WithRescore(rescore bool) *CNNYOLOLossDescriptor

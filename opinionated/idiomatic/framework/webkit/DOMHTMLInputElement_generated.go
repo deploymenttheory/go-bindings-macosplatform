@@ -74,8 +74,8 @@ func (x *DOMHTMLInputElement) WithDisabled(disabled bool) *DOMHTMLInputElement {
 }
 
 // WithFiles sets the files property and returns the receiver for chaining.
-func (x *DOMHTMLInputElement) WithFiles(files *raw.DOMFileList) *DOMHTMLInputElement {
-	x.inner.SetFiles(files)
+func (x *DOMHTMLInputElement) WithFiles(files *DOMFileList) *DOMHTMLInputElement {
+	x.inner.SetFiles(files.Unwrap())
 	return x
 }
 
@@ -576,7 +576,7 @@ type DOMHTMLInputElementable interface {
 	WithDefaultChecked(defaultChecked bool) *DOMHTMLInputElement
 	WithChecked(checked bool) *DOMHTMLInputElement
 	WithDisabled(disabled bool) *DOMHTMLInputElement
-	WithFiles(files *raw.DOMFileList) *DOMHTMLInputElement
+	WithFiles(files *DOMFileList) *DOMHTMLInputElement
 	WithIndeterminate(indeterminate bool) *DOMHTMLInputElement
 	WithMaxLength(maxLength int) *DOMHTMLInputElement
 	WithMultiple(multiple bool) *DOMHTMLInputElement

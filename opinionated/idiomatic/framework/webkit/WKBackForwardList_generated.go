@@ -73,24 +73,24 @@ func (x *WKBackForwardList) ForwardItem() *WKBackForwardListItem {
 }
 
 // BackList returns the collection as a Go slice.
-func (x *WKBackForwardList) BackList() []*raw.WKBackForwardListItem {
+func (x *WKBackForwardList) BackList() []*WKBackForwardListItem {
 	arr := x.inner.BackList()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.WKBackForwardListItem {
-		return raw.WKBackForwardListItemFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *WKBackForwardListItem {
+		return &WKBackForwardListItem{inner: raw.WKBackForwardListItemFromID(purego.Retain(_id))}
 	})
 }
 
 // ForwardList returns the collection as a Go slice.
-func (x *WKBackForwardList) ForwardList() []*raw.WKBackForwardListItem {
+func (x *WKBackForwardList) ForwardList() []*WKBackForwardListItem {
 	arr := x.inner.ForwardList()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.WKBackForwardListItem {
-		return raw.WKBackForwardListItemFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *WKBackForwardListItem {
+		return &WKBackForwardListItem{inner: raw.WKBackForwardListItemFromID(purego.Retain(_id))}
 	})
 }
 
@@ -101,8 +101,8 @@ type WKBackForwardListable interface {
 	CurrentItem() *WKBackForwardListItem
 	BackItem() *WKBackForwardListItem
 	ForwardItem() *WKBackForwardListItem
-	BackList() []*raw.WKBackForwardListItem
-	ForwardList() []*raw.WKBackForwardListItem
+	BackList() []*WKBackForwardListItem
+	ForwardList() []*WKBackForwardListItem
 }
 
 var _ WKBackForwardListable = (*WKBackForwardList)(nil)

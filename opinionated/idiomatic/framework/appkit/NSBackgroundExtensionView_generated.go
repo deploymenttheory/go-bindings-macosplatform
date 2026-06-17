@@ -233,8 +233,8 @@ func (x *BackgroundExtensionView) WithContentFilters(items ...*coreimage.CIFilte
 }
 
 // WithShadow sets the shadow property and returns the receiver for chaining.
-func (x *BackgroundExtensionView) WithShadow(shadow *raw.NSShadow) *BackgroundExtensionView {
-	x.inner.NSView.SetShadow(shadow)
+func (x *BackgroundExtensionView) WithShadow(shadow *Shadow) *BackgroundExtensionView {
+	x.inner.NSView.SetShadow(shadow.Unwrap())
 	return x
 }
 
@@ -315,8 +315,8 @@ func (x *BackgroundExtensionView) WithPrefersCompactControlSizeMetrics(prefersCo
 }
 
 // WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
-func (x *BackgroundExtensionView) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *BackgroundExtensionView {
-	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+func (x *BackgroundExtensionView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *BackgroundExtensionView {
+	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
 	return x
 }
 
@@ -357,8 +357,8 @@ func (x *BackgroundExtensionView) WithWantsExtendedDynamicRangeOpenGLSurface(wan
 }
 
 // WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
-func (x *BackgroundExtensionView) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *BackgroundExtensionView {
-	x.inner.NSView.SetPressureConfiguration(pressureConfiguration)
+func (x *BackgroundExtensionView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *BackgroundExtensionView {
+	x.inner.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
 	return x
 }
 
@@ -369,8 +369,8 @@ func (x *BackgroundExtensionView) WithNextResponder(nextResponder ResponderProvi
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *BackgroundExtensionView) WithMenu(menu *raw.NSMenu) *BackgroundExtensionView {
-	x.inner.NSView.NSResponder.SetMenu(menu)
+func (x *BackgroundExtensionView) WithMenu(menu *Menu) *BackgroundExtensionView {
+	x.inner.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -381,8 +381,8 @@ func (x *BackgroundExtensionView) WithUserActivity(userActivity *foundation.NSUs
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *BackgroundExtensionView) WithTouchBar(touchBar *raw.NSTouchBar) *BackgroundExtensionView {
-	x.inner.NSView.NSResponder.SetTouchBar(touchBar)
+func (x *BackgroundExtensionView) WithTouchBar(touchBar *TouchBar) *BackgroundExtensionView {
+	x.inner.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -444,7 +444,7 @@ type BackgroundExtensionViewable interface {
 	WithBackgroundFilters(items ...*coreimage.CIFilter) *BackgroundExtensionView
 	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *BackgroundExtensionView
 	WithContentFilters(items ...*coreimage.CIFilter) *BackgroundExtensionView
-	WithShadow(shadow *raw.NSShadow) *BackgroundExtensionView
+	WithShadow(shadow *Shadow) *BackgroundExtensionView
 	WithClipsToBounds(clipsToBounds bool) *BackgroundExtensionView
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *BackgroundExtensionView
 	WithToolTip(toolTip string) *BackgroundExtensionView
@@ -456,18 +456,18 @@ type BackgroundExtensionViewable interface {
 	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *BackgroundExtensionView
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *BackgroundExtensionView
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *BackgroundExtensionView
-	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *BackgroundExtensionView
+	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *BackgroundExtensionView
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *BackgroundExtensionView
 	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *BackgroundExtensionView
 	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *BackgroundExtensionView
 	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *BackgroundExtensionView
 	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *BackgroundExtensionView
 	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *BackgroundExtensionView
-	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *BackgroundExtensionView
+	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *BackgroundExtensionView
 	WithNextResponder(nextResponder ResponderProvider) *BackgroundExtensionView
-	WithMenu(menu *raw.NSMenu) *BackgroundExtensionView
+	WithMenu(menu *Menu) *BackgroundExtensionView
 	WithUserActivity(userActivity *foundation.NSUserActivity) *BackgroundExtensionView
-	WithTouchBar(touchBar *raw.NSTouchBar) *BackgroundExtensionView
+	WithTouchBar(touchBar *TouchBar) *BackgroundExtensionView
 	ContentView() *View
 	SetContentView(contentView *raw.NSView)
 	AutomaticallyPlacesContentView() bool

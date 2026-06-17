@@ -74,20 +74,20 @@ func (x *FetchSubscriptionsOperation) WithFetchSubscriptionCompletionBlock(fetch
 }
 
 // WithDatabase sets the database property and returns the receiver for chaining.
-func (x *FetchSubscriptionsOperation) WithDatabase(database *raw.CKDatabase) *FetchSubscriptionsOperation {
-	x.inner.CKDatabaseOperation.SetDatabase(database)
+func (x *FetchSubscriptionsOperation) WithDatabase(database *Database) *FetchSubscriptionsOperation {
+	x.inner.CKDatabaseOperation.SetDatabase(database.Unwrap())
 	return x
 }
 
 // WithConfiguration sets the configuration property and returns the receiver for chaining.
-func (x *FetchSubscriptionsOperation) WithConfiguration(configuration *raw.CKOperationConfiguration) *FetchSubscriptionsOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetConfiguration(configuration)
+func (x *FetchSubscriptionsOperation) WithConfiguration(configuration *OperationConfiguration) *FetchSubscriptionsOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetConfiguration(configuration.Unwrap())
 	return x
 }
 
 // WithGroup sets the group property and returns the receiver for chaining.
-func (x *FetchSubscriptionsOperation) WithGroup(group *raw.CKOperationGroup) *FetchSubscriptionsOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetGroup(group)
+func (x *FetchSubscriptionsOperation) WithGroup(group *OperationGroup) *FetchSubscriptionsOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetGroup(group.Unwrap())
 	return x
 }
 
@@ -98,8 +98,8 @@ func (x *FetchSubscriptionsOperation) WithLongLivedOperationWasPersistedBlock(lo
 }
 
 // WithContainer sets the container property and returns the receiver for chaining.
-func (x *FetchSubscriptionsOperation) WithContainer(container *raw.CKContainer) *FetchSubscriptionsOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetContainer(container)
+func (x *FetchSubscriptionsOperation) WithContainer(container *Container) *FetchSubscriptionsOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetContainer(container.Unwrap())
 	return x
 }
 
@@ -173,11 +173,11 @@ type FetchSubscriptionsOperationable interface {
 	WithSubscriptionIDs(items ...*foundation.NSString) *FetchSubscriptionsOperation
 	WithPerSubscriptionCompletionBlock(perSubscriptionCompletionBlock func(*foundation.NSString, *raw.CKSubscription, unsafe.Pointer)) *FetchSubscriptionsOperation
 	WithFetchSubscriptionCompletionBlock(fetchSubscriptionCompletionBlock objc.Block) *FetchSubscriptionsOperation
-	WithDatabase(database *raw.CKDatabase) *FetchSubscriptionsOperation
-	WithConfiguration(configuration *raw.CKOperationConfiguration) *FetchSubscriptionsOperation
-	WithGroup(group *raw.CKOperationGroup) *FetchSubscriptionsOperation
+	WithDatabase(database *Database) *FetchSubscriptionsOperation
+	WithConfiguration(configuration *OperationConfiguration) *FetchSubscriptionsOperation
+	WithGroup(group *OperationGroup) *FetchSubscriptionsOperation
 	WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *FetchSubscriptionsOperation
-	WithContainer(container *raw.CKContainer) *FetchSubscriptionsOperation
+	WithContainer(container *Container) *FetchSubscriptionsOperation
 	WithAllowsCellularAccess(allowsCellularAccess bool) *FetchSubscriptionsOperation
 	WithLongLived(longLived bool) *FetchSubscriptionsOperation
 	WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *FetchSubscriptionsOperation

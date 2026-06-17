@@ -59,8 +59,8 @@ func (x *TextAttachment) WithFileType(fileType string) *TextAttachment {
 }
 
 // WithImage sets the image property and returns the receiver for chaining.
-func (x *TextAttachment) WithImage(image *raw.NSImage) *TextAttachment {
-	x.inner.SetImage(image)
+func (x *TextAttachment) WithImage(image *Image) *TextAttachment {
+	x.inner.SetImage(image.Unwrap())
 	return x
 }
 
@@ -192,7 +192,7 @@ type TextAttachmentable interface {
 	Unwrap() *raw.NSTextAttachment
 	WithContents(contents *foundation.NSData) *TextAttachment
 	WithFileType(fileType string) *TextAttachment
-	WithImage(image *raw.NSImage) *TextAttachment
+	WithImage(image *Image) *TextAttachment
 	WithBounds(bounds corefoundation.CGRect) *TextAttachment
 	WithFileWrapper(fileWrapper *foundation.NSFileWrapper) *TextAttachment
 	WithAttachmentCell(attachmentCell raw.NSTextAttachmentCellProtocol) *TextAttachment

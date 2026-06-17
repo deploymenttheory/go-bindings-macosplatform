@@ -102,8 +102,8 @@ func (x *Floor) WithMaterials(items ...*raw.SCNMaterial) *Floor {
 }
 
 // WithFirstMaterial sets the firstMaterial property and returns the receiver for chaining.
-func (x *Floor) WithFirstMaterial(firstMaterial *raw.SCNMaterial) *Floor {
-	x.inner.SCNGeometry.SetFirstMaterial(firstMaterial)
+func (x *Floor) WithFirstMaterial(firstMaterial *Material) *Floor {
+	x.inner.SCNGeometry.SetFirstMaterial(firstMaterial.Unwrap())
 	return x
 }
 
@@ -124,8 +124,8 @@ func (x *Floor) WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Floor {
 }
 
 // WithTessellator sets the tessellator property and returns the receiver for chaining.
-func (x *Floor) WithTessellator(tessellator *raw.SCNGeometryTessellator) *Floor {
-	x.inner.SCNGeometry.SetTessellator(tessellator)
+func (x *Floor) WithTessellator(tessellator *GeometryTessellator) *Floor {
+	x.inner.SCNGeometry.SetTessellator(tessellator.Unwrap())
 	return x
 }
 
@@ -142,14 +142,14 @@ func (x *Floor) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Flo
 }
 
 // WithEdgeCreasesElement sets the edgeCreasesElement property and returns the receiver for chaining.
-func (x *Floor) WithEdgeCreasesElement(edgeCreasesElement *raw.SCNGeometryElement) *Floor {
-	x.inner.SCNGeometry.SetEdgeCreasesElement(edgeCreasesElement)
+func (x *Floor) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Floor {
+	x.inner.SCNGeometry.SetEdgeCreasesElement(edgeCreasesElement.Unwrap())
 	return x
 }
 
 // WithEdgeCreasesSource sets the edgeCreasesSource property and returns the receiver for chaining.
-func (x *Floor) WithEdgeCreasesSource(edgeCreasesSource *raw.SCNGeometrySource) *Floor {
-	x.inner.SCNGeometry.SetEdgeCreasesSource(edgeCreasesSource)
+func (x *Floor) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Floor {
+	x.inner.SCNGeometry.SetEdgeCreasesSource(edgeCreasesSource.Unwrap())
 	return x
 }
 
@@ -237,13 +237,13 @@ type Floorable interface {
 	WithReflectionResolutionScaleFactor(reflectionResolutionScaleFactor float64) *Floor
 	WithName(name string) *Floor
 	WithMaterials(items ...*raw.SCNMaterial) *Floor
-	WithFirstMaterial(firstMaterial *raw.SCNMaterial) *Floor
+	WithFirstMaterial(firstMaterial *Material) *Floor
 	WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Floor
-	WithTessellator(tessellator *raw.SCNGeometryTessellator) *Floor
+	WithTessellator(tessellator *GeometryTessellator) *Floor
 	WithSubdivisionLevel(subdivisionLevel uint) *Floor
 	WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Floor
-	WithEdgeCreasesElement(edgeCreasesElement *raw.SCNGeometryElement) *Floor
-	WithEdgeCreasesSource(edgeCreasesSource *raw.SCNGeometrySource) *Floor
+	WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Floor
+	WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Floor
 	Reflectivity() float64
 	SetReflectivity(reflectivity float64)
 	ReflectionFalloffStart() float64

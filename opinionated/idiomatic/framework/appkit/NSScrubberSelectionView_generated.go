@@ -233,8 +233,8 @@ func (x *ScrubberSelectionView) WithContentFilters(items ...*coreimage.CIFilter)
 }
 
 // WithShadow sets the shadow property and returns the receiver for chaining.
-func (x *ScrubberSelectionView) WithShadow(shadow *raw.NSShadow) *ScrubberSelectionView {
-	x.inner.NSScrubberArrangedView.NSView.SetShadow(shadow)
+func (x *ScrubberSelectionView) WithShadow(shadow *Shadow) *ScrubberSelectionView {
+	x.inner.NSScrubberArrangedView.NSView.SetShadow(shadow.Unwrap())
 	return x
 }
 
@@ -315,8 +315,8 @@ func (x *ScrubberSelectionView) WithPrefersCompactControlSizeMetrics(prefersComp
 }
 
 // WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
-func (x *ScrubberSelectionView) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *ScrubberSelectionView {
-	x.inner.NSScrubberArrangedView.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+func (x *ScrubberSelectionView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ScrubberSelectionView {
+	x.inner.NSScrubberArrangedView.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
 	return x
 }
 
@@ -357,8 +357,8 @@ func (x *ScrubberSelectionView) WithWantsExtendedDynamicRangeOpenGLSurface(wants
 }
 
 // WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
-func (x *ScrubberSelectionView) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *ScrubberSelectionView {
-	x.inner.NSScrubberArrangedView.NSView.SetPressureConfiguration(pressureConfiguration)
+func (x *ScrubberSelectionView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ScrubberSelectionView {
+	x.inner.NSScrubberArrangedView.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
 	return x
 }
 
@@ -369,8 +369,8 @@ func (x *ScrubberSelectionView) WithNextResponder(nextResponder ResponderProvide
 }
 
 // WithMenu sets the menu property and returns the receiver for chaining.
-func (x *ScrubberSelectionView) WithMenu(menu *raw.NSMenu) *ScrubberSelectionView {
-	x.inner.NSScrubberArrangedView.NSView.NSResponder.SetMenu(menu)
+func (x *ScrubberSelectionView) WithMenu(menu *Menu) *ScrubberSelectionView {
+	x.inner.NSScrubberArrangedView.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
@@ -381,8 +381,8 @@ func (x *ScrubberSelectionView) WithUserActivity(userActivity *foundation.NSUser
 }
 
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
-func (x *ScrubberSelectionView) WithTouchBar(touchBar *raw.NSTouchBar) *ScrubberSelectionView {
-	x.inner.NSScrubberArrangedView.NSView.NSResponder.SetTouchBar(touchBar)
+func (x *ScrubberSelectionView) WithTouchBar(touchBar *TouchBar) *ScrubberSelectionView {
+	x.inner.NSScrubberArrangedView.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
@@ -422,7 +422,7 @@ type ScrubberSelectionViewable interface {
 	WithBackgroundFilters(items ...*coreimage.CIFilter) *ScrubberSelectionView
 	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *ScrubberSelectionView
 	WithContentFilters(items ...*coreimage.CIFilter) *ScrubberSelectionView
-	WithShadow(shadow *raw.NSShadow) *ScrubberSelectionView
+	WithShadow(shadow *Shadow) *ScrubberSelectionView
 	WithClipsToBounds(clipsToBounds bool) *ScrubberSelectionView
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ScrubberSelectionView
 	WithToolTip(toolTip string) *ScrubberSelectionView
@@ -434,18 +434,18 @@ type ScrubberSelectionViewable interface {
 	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *ScrubberSelectionView
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ScrubberSelectionView
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ScrubberSelectionView
-	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *ScrubberSelectionView
+	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ScrubberSelectionView
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *ScrubberSelectionView
 	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *ScrubberSelectionView
 	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *ScrubberSelectionView
 	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *ScrubberSelectionView
 	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *ScrubberSelectionView
 	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *ScrubberSelectionView
-	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *ScrubberSelectionView
+	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ScrubberSelectionView
 	WithNextResponder(nextResponder ResponderProvider) *ScrubberSelectionView
-	WithMenu(menu *raw.NSMenu) *ScrubberSelectionView
+	WithMenu(menu *Menu) *ScrubberSelectionView
 	WithUserActivity(userActivity *foundation.NSUserActivity) *ScrubberSelectionView
-	WithTouchBar(touchBar *raw.NSTouchBar) *ScrubberSelectionView
+	WithTouchBar(touchBar *TouchBar) *ScrubberSelectionView
 }
 
 var _ ScrubberSelectionViewable = (*ScrubberSelectionView)(nil)

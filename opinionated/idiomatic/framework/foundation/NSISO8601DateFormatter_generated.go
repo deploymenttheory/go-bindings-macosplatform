@@ -37,8 +37,8 @@ func NewISO8601DateFormatter() *ISO8601DateFormatter {
 }
 
 // WithTimeZone sets the timeZone property and returns the receiver for chaining.
-func (x *ISO8601DateFormatter) WithTimeZone(timeZone *raw.NSTimeZone) *ISO8601DateFormatter {
-	x.inner.SetTimeZone(timeZone)
+func (x *ISO8601DateFormatter) WithTimeZone(timeZone *TimeZone) *ISO8601DateFormatter {
+	x.inner.SetTimeZone(timeZone.Unwrap())
 	return x
 }
 
@@ -103,7 +103,7 @@ func (x *ISO8601DateFormatter) asObject() *raw.NSObject { return &x.inner.NSForm
 // ISO8601DateFormatterable is the interface implemented by [ISO8601DateFormatter], for mocking and DI.
 type ISO8601DateFormatterable interface {
 	Unwrap() *raw.NSISO8601DateFormatter
-	WithTimeZone(timeZone *raw.NSTimeZone) *ISO8601DateFormatter
+	WithTimeZone(timeZone *TimeZone) *ISO8601DateFormatter
 	WithFormatOptions(formatOptions raw.NSISO8601DateFormatOptions) *ISO8601DateFormatter
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ISO8601DateFormatter
 	StringFromDate(date *raw.NSDate) *String

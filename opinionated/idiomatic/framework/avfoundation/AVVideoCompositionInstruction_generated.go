@@ -44,13 +44,13 @@ func (x *VideoCompositionInstruction) BackgroundColor() unsafe.Pointer {
 }
 
 // LayerInstructions returns the collection as a Go slice.
-func (x *VideoCompositionInstruction) LayerInstructions() []*raw.AVVideoCompositionLayerInstruction {
+func (x *VideoCompositionInstruction) LayerInstructions() []*VideoCompositionLayerInstruction {
 	arr := x.inner.LayerInstructions()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVVideoCompositionLayerInstruction {
-		return raw.AVVideoCompositionLayerInstructionFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *VideoCompositionLayerInstruction {
+		return &VideoCompositionLayerInstruction{inner: raw.AVVideoCompositionLayerInstructionFromID(purego.Retain(_id))}
 	})
 }
 
@@ -92,7 +92,7 @@ func (x *VideoCompositionInstruction) asVideoCompositionInstruction() *raw.AVVid
 type VideoCompositionInstructionable interface {
 	Unwrap() *raw.AVVideoCompositionInstruction
 	BackgroundColor() unsafe.Pointer
-	LayerInstructions() []*raw.AVVideoCompositionLayerInstruction
+	LayerInstructions() []*VideoCompositionLayerInstruction
 	EnablePostProcessing() bool
 	RequiredSourceTrackIDs() []*foundation.NSValue
 	PassthroughTrackID() int32

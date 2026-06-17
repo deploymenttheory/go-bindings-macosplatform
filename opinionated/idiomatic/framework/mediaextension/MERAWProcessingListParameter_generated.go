@@ -88,13 +88,13 @@ func (x *RAWProcessingListParameter) HasCameraValue(outCameraValue *int64) bool 
 }
 
 // ListElements returns the collection as a Go slice.
-func (x *RAWProcessingListParameter) ListElements() []*raw.MERAWProcessingListElementParameter {
+func (x *RAWProcessingListParameter) ListElements() []*RAWProcessingListElementParameter {
 	arr := x.inner.ListElements()
 	if arr == nil {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MERAWProcessingListElementParameter {
-		return raw.MERAWProcessingListElementParameterFromID(purego.Retain(_id))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *RAWProcessingListElementParameter {
+		return &RAWProcessingListElementParameter{inner: raw.MERAWProcessingListElementParameterFromID(purego.Retain(_id))}
 	})
 }
 
@@ -117,7 +117,7 @@ type RAWProcessingListParameterable interface {
 	WithEnabled(enabled bool) *RAWProcessingListParameter
 	HasNeutralValue(outNeutralValue *int64) bool
 	HasCameraValue(outCameraValue *int64) bool
-	ListElements() []*raw.MERAWProcessingListElementParameter
+	ListElements() []*RAWProcessingListElementParameter
 	CurrentValue() int
 	SetCurrentValue(currentValue int)
 }

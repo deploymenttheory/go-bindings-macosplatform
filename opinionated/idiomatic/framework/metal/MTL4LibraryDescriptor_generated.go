@@ -44,8 +44,8 @@ func (x *MTL4LibraryDescriptor) WithSource(source string) *MTL4LibraryDescriptor
 }
 
 // WithOptions sets the options property and returns the receiver for chaining.
-func (x *MTL4LibraryDescriptor) WithOptions(options *raw.MTLCompileOptions) *MTL4LibraryDescriptor {
-	x.inner.SetOptions(options)
+func (x *MTL4LibraryDescriptor) WithOptions(options *CompileOptions) *MTL4LibraryDescriptor {
+	x.inner.SetOptions(options.Unwrap())
 	return x
 }
 
@@ -101,7 +101,7 @@ func (x *MTL4LibraryDescriptor) SetName(name string) {
 type MTL4LibraryDescriptorable interface {
 	Unwrap() *raw.MTL4LibraryDescriptor
 	WithSource(source string) *MTL4LibraryDescriptor
-	WithOptions(options *raw.MTLCompileOptions) *MTL4LibraryDescriptor
+	WithOptions(options *CompileOptions) *MTL4LibraryDescriptor
 	WithName(name string) *MTL4LibraryDescriptor
 	Source() string
 	SetSource(source string)
